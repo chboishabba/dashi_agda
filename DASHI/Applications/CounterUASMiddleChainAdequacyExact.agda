@@ -14,11 +14,14 @@ import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 --   association/fusion -> classification/track -> threat assessment.
 --
 -- CounterUASDroneShieldExact remains the owner of observations, fused tracks,
--- classifications, threat assessments, authority and response.  This module
--- adds only the missing query-indexed separation between classification and
--- threat assessment.  No sensing, targeting, mitigation, waveform, frequency,
--- power or defeat procedure is introduced here.
+-- classifications, threat assessments, authority and response. This module
+-- adds only the missing query-indexed separations for association provenance
+-- and classification-to-threat adequacy. No sensing, targeting, mitigation,
+-- waveform, frequency, power or defeat procedure is introduced here.
 ------------------------------------------------------------------------
+
+fusedObservationsCreateSameObjectAssociation : Bool
+fusedObservationsCreateSameObjectAssociation = false
 
 classifiedUASCreatesHostility : Bool
 classifiedUASCreatesHostility = false
@@ -30,8 +33,110 @@ middleChainCreatesMitigationAuthority : Bool
 middleChainCreatesMitigationAuthority = false
 
 ------------------------------------------------------------------------
--- Exact collision:
--- two worlds expose the same classified-UAS surface while differing in the
+-- I. Observation/fusion surface is inadequate for same-object association.
+--
+-- The same visible observation set can be assigned either to one paid
+-- same-object lineage or to an unresolved/cross-object association hypothesis.
+-- Fusion does not manufacture association identity merely by co-locating inputs.
+------------------------------------------------------------------------
+
+data AssociationWorld : Set where
+  sameObjectAssociationWorld : AssociationWorld
+  unresolvedAssociationWorld : AssociationWorld
+
+data ObservationSurface : Set where
+  sameVisibleObservationSet : ObservationSurface
+
+data AssociationLineageSurface : Set where
+  sameObjectLineagePaid : AssociationLineageSurface
+  associationLineageUnresolved : AssociationLineageSurface
+
+data AssociationQuery : Set where
+  observationVisibilityQuery : AssociationQuery
+  associationStatusQuery : AssociationQuery
+
+data AssociationAnswer : Set where
+  observationsVisible : AssociationAnswer
+  associationPaid : AssociationAnswer
+  associationUnresolved : AssociationAnswer
+
+observationSurfaceProjection : AssociationWorld → ObservationSurface
+observationSurfaceProjection world = sameVisibleObservationSet
+
+associationLineageProjection : AssociationWorld → AssociationLineageSurface
+associationLineageProjection sameObjectAssociationWorld = sameObjectLineagePaid
+associationLineageProjection unresolvedAssociationWorld = associationLineageUnresolved
+
+associationAnswer : AssociationQuery → AssociationWorld → AssociationAnswer
+associationAnswer observationVisibilityQuery world = observationsVisible
+associationAnswer associationStatusQuery sameObjectAssociationWorld = associationPaid
+associationAnswer associationStatusQuery unresolvedAssociationWorld = associationUnresolved
+
+associationSemantics :
+  Adequacy.QuerySemantics AssociationWorld AssociationQuery AssociationAnswer
+associationSemantics = Adequacy.querySemantics associationAnswer
+
+observationSurfaceAssociationAdequacyDefect :
+  Adequacy.QueryAdequacyDefect
+    observationSurfaceProjection
+    associationSemantics
+    associationStatusQuery
+observationSurfaceAssociationAdequacyDefect =
+  Adequacy.queryAdequacyDefect
+    sameObjectAssociationWorld
+    unresolvedAssociationWorld
+    refl
+    (λ ())
+
+observationSurfaceCannotDetermineAssociation :
+  Adequacy.AdequateFor
+    observationSurfaceProjection
+    associationSemantics
+    associationStatusQuery →
+  ⊥
+observationSurfaceCannotDetermineAssociation =
+  Adequacy.queryAdequacyDefectBlocksFactorisation
+    observationSurfaceAssociationAdequacyDefect
+
+observationAndAssociationProjection :
+  AssociationWorld → ObservationSurface × AssociationLineageSurface
+observationAndAssociationProjection =
+  Observer.pairObserver observationSurfaceProjection associationLineageProjection
+
+joinedAssociationAnswer :
+  ObservationSurface × AssociationLineageSurface → AssociationAnswer
+joinedAssociationAnswer (sameVisibleObservationSet , sameObjectLineagePaid) = associationPaid
+joinedAssociationAnswer (sameVisibleObservationSet , associationLineageUnresolved) = associationUnresolved
+
+observationAndAssociationDetermineAssociation :
+  Adequacy.AdequateFor
+    observationAndAssociationProjection
+    associationSemantics
+    associationStatusQuery
+observationAndAssociationDetermineAssociation =
+  Adequacy.factorsForQuery
+    joinedAssociationAnswer
+    (λ { sameObjectAssociationWorld → refl
+       ; unresolvedAssociationWorld → refl
+       })
+
+observationAndAssociationStrictlyRefinesObservationSurface :
+  Observer.StrictRefinement
+    observationSurfaceProjection
+    observationAndAssociationProjection
+observationAndAssociationStrictlyRefinesObservationSurface =
+  Observer.strictPairRefinement
+    observationSurfaceProjection
+    associationLineageProjection
+    sameObjectAssociationWorld
+    unresolvedAssociationWorld
+    refl
+    (λ ())
+
+------------------------------------------------------------------------
+-- II. Classification surface is inadequate for threat assessment.
+--
+-- Two worlds expose the same classified-UAS surface while differing in the
 -- operational/threat context relevant to the threat-assessment consumer.
 ------------------------------------------------------------------------
 
@@ -135,6 +240,9 @@ classificationAndContextStrictlyRefinesClassification =
 record CounterUASMiddleChainBoundary : Set where
   constructor counterUASMiddleChainBoundary
   field
+    fusedObservationSetEqualsSameObjectAssociation : Bool
+    fusedObservationSetEqualsSameObjectAssociationIsFalse :
+      fusedObservationSetEqualsSameObjectAssociation ≡ false
     classificationEqualsHostility : Bool
     classificationEqualsHostilityIsFalse : classificationEqualsHostility ≡ false
     fusionConfidenceEqualsHostility : Bool
@@ -146,6 +254,7 @@ record CounterUASMiddleChainBoundary : Set where
 canonicalCounterUASMiddleChainBoundary : CounterUASMiddleChainBoundary
 canonicalCounterUASMiddleChainBoundary =
   counterUASMiddleChainBoundary
+    false refl
     false refl
     false refl
     false refl
