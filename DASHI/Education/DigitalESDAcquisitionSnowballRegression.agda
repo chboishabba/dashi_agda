@@ -31,6 +31,18 @@ oerESDStudentProducerRegression :
   ≡ true
 oerESDStudentProducerRegression = refl
 
+publicPlatformInteroperabilityCharterRegression :
+  Acquisition.DigitalESDAcquisitionAtlas.publicPlatformInteroperabilityCharterPaid
+    Acquisition.canonicalDigitalESDAcquisitionAtlas
+  ≡ true
+publicPlatformInteroperabilityCharterRegression = refl
+
+rightToRepairEducationRegression :
+  Acquisition.DigitalESDAcquisitionAtlas.rightToRepairEducationSourcePaid
+    Acquisition.canonicalDigitalESDAcquisitionAtlas
+  ≡ true
+rightToRepairEducationRegression = refl
+
 participationDoesNotPromoteAuthorityRegression :
   Acquisition.ParticipatoryESDPromotesConstitutiveEpistemicAuthority → ⊥
 participationDoesNotPromoteAuthorityRegression =
@@ -45,6 +57,16 @@ oerSustainabilityDoesNotPayMaterialDurabilityRegression :
   Acquisition.OEROrganisationalSustainabilityPaysMaterialRepairability → ⊥
 oerSustainabilityDoesNotPayMaterialDurabilityRegression =
   Acquisition.oerOrganisationalSustainabilityDoesNotPayMaterialRepairability
+
+charterDoesNotProvePlatformDurabilityRegression :
+  Acquisition.OpenStandardsCharterProvesPlatformDurability → ⊥
+charterDoesNotProvePlatformDurabilityRegression =
+  Acquisition.openStandardsCharterDoesNotProvePlatformDurability
+
+repairEducationDoesNotProveRepairabilityRegression :
+  Acquisition.RightToRepairEducationProvesDeployedHardwareRepairability → ⊥
+repairEducationDoesNotProveRepairabilityRegression =
+  Acquisition.rightToRepairEducationDoesNotProveDeployedHardwareRepairability
 
 participantGovernanceResidualRegression :
   Acquisition.paymentState Acquisition.esdParticipantGovernanceTransfer
