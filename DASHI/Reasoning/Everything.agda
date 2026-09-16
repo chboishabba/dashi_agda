@@ -97,7 +97,9 @@ import DASHI.Reasoning.PlatoSymposiumResidualRevision369BridgeRegression
 import DASHI.Reasoning.PlatoSymposiumMultiplePersistenceChannelsExact
 import DASHI.Reasoning.PlatoSymposiumMultiplePersistenceChannelsRegression
 import DASHI.Reasoning.PlatoSymposiumProofSearchExperimentExact
+import DASHI.Reasoning.PlatoSymposiumProofSearchExperimentRegression
 import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionExact
+import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionRegression
 
 -- Source-bounded metaphor-as-structure / task-relative compression layer.
 import DASHI.Reasoning.StructuralMetaphorSourceRegistryExact
