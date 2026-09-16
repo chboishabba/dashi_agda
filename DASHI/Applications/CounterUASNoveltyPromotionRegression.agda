@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Applications.CounterUASNoveltyPromotionExact as Promotion
 import DASHI.Applications.CounterUASNoveltyPromotionSourceAtlasExact as Sources
+import DASHI.Applications.CounterUASWorldMonitorEvidenceHealthBridgeExact as WorldMonitor
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 
 record CounterUASNoveltyPromotionRegression : Set₁ where
@@ -31,6 +32,15 @@ record CounterUASNoveltyPromotionRegression : Set₁ where
         Promotion.referenceMatchProjection
         Promotion.identitySemantics
         Promotion.semanticIdentityQuery
+    worldMonitorGapCannotPayPromotion :
+      Promotion.worldMonitorGapPaysPromotion ≡ false
+    worldMonitorEvidenceHealthDoesNotCreateAuthority :
+      Promotion.worldMonitorEvidenceHealthCreatesOperationalAuthority ≡ false
+    worldMonitorSignalCountDefectRetained :
+      Adequacy.QueryAdequacyDefect
+        WorldMonitor.signalCountProjection
+        WorldMonitor.evidenceHealthSemantics
+        WorldMonitor.promotionEligibilityQuery
     sourceAtlasNonPromoting :
       Sources.noveltyPromotionSourceAtlasCreatesAuthority ≡ false
 
@@ -41,4 +51,6 @@ canonicalCounterUASNoveltyPromotionRegression =
     refl refl refl refl refl refl
     Promotion.agreementOnlyPromotionAdequacyDefect
     Promotion.referenceMatchOnlyIdentityAdequacyDefect
+    refl refl
+    WorldMonitor.signalCountEvidenceHealthAdequacyDefect
     Sources.noveltyPromotionSourceAtlasCreatesAuthorityIsFalse
