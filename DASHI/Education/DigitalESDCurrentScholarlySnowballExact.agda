@@ -11,10 +11,6 @@ import DASHI.Education.DigitalESDEducationSustainabilityLiteratureMapExact as Pr
 
 ------------------------------------------------------------------------
 -- CURRENT SCHOLARLY SNOWBALL EXTENSION
---
--- Thin acquisition-only extension. These papers add candidate empirical/case-
--- study context to the existing literature map; they do not alter review type,
--- create inclusion, or universalise beyond their study populations/designs.
 ------------------------------------------------------------------------
 
 ardilaDigitalFuturesSource : Attr.AttributedSource
@@ -53,6 +49,18 @@ zagamiAustralianEdtechSource = Attr.mkDOISource
   "Comparative Australian edtech case study using public-document analysis and temporal mapping across Canva for Education, Education Perfect, LearningField and Grok Academy. Supports context-bounded governance, funding, legitimacy and durability dynamics; it does not establish a universal rule for platform success, interoperability or sustainability."
   Attr.publicAttribution
 
+chughSustainabilityParadoxSource : Attr.AttributedSource
+chughSustainabilityParadoxSource = Attr.mkDOISource
+  "Ritesh Chugh"
+  "The sustainability paradox: rethinking digital technologies in education for a sustainable future"
+  "Humanities and Social Sciences Communications 13, 275"
+  "2026"
+  "10.1057/s41599-026-06845-5"
+  "https://doi.org/10.1057/s41599-026-06845-5"
+  Attr.academicArticleSource
+  "Opinion paper framing digital education as a sustainability paradox across environmental and social dimensions, with lifecycle-oriented attention to energy, devices, data infrastructure, equity, procurement and circular-economy strategies. It is a close conceptual antecedent for the reverse-direction sustainability claim and must be cited as such; it does not supply empirical intervention effects or the manuscript's reciprocal ESD-capacity/payment/participant-authority machinery."
+  Attr.publicAttribution
+
 canonicalCurrentScholarlySourceAtlas : Attr.AttributedSourceAtlas
 canonicalCurrentScholarlySourceAtlas = Attr.mkSourceAtlas
   "current digital-ESD scholarly snowball extension"
@@ -60,8 +68,9 @@ canonicalCurrentScholarlySourceAtlas = Attr.mkSourceAtlas
   ( ardilaDigitalFuturesSource
   ∷ gousetiPlatformisationSource
   ∷ zagamiAustralianEdtechSource
+  ∷ chughSustainabilityParadoxSource
   ∷ [] )
-  "Recent scholarly candidates extending the existing digital-ESD literature map with higher-education sustainability co-design, school platformisation experience, and Australian edtech governance/durability cases. Acquisition remains candidate-only pending structured search and screening."
+  "Recent scholarly candidates extending the existing digital-ESD literature map with higher-education sustainability co-design, school platformisation experience, Australian edtech governance/durability cases, and a close sustainability-paradox conceptual antecedent. Acquisition remains candidate-only pending structured search and screening."
 
 ardilaSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt ardilaDigitalFuturesSource
 ardilaSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt ardilaDigitalFuturesSource
@@ -72,12 +81,17 @@ gousetiSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt gousetiPl
 zagamiSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt zagamiAustralianEdtechSource
 zagamiSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt zagamiAustralianEdtechSource
 
+chughSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt chughSustainabilityParadoxSource
+chughSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt chughSustainabilityParadoxSource
+
 priorLiteratureMapRetained : PriorMap.DigitalESDLiteratureMap
 priorLiteratureMapRetained = PriorMap.canonicalDigitalESDLiteratureMap
 
 data SingleCaseCreatesUniversalDigitalESDRule : Set where
 data TwoSchoolPlatformStudyCreatesUniversalPlatformEffect : Set where
 data AustralianEdtechCaseCreatesUniversalDurabilityRule : Set where
+data OpinionPaperCreatesEmpiricalDigitalESDEffect : Set where
+data SustainabilityParadoxExhaustsReciprocalDigitalESDFramework : Set where
 
 singleCaseDoesNotCreateUniversalDigitalESDRule : SingleCaseCreatesUniversalDigitalESDRule → ⊥
 singleCaseDoesNotCreateUniversalDigitalESDRule ()
@@ -88,6 +102,13 @@ twoSchoolPlatformStudyDoesNotCreateUniversalPlatformEffect ()
 australianEdtechCaseDoesNotCreateUniversalDurabilityRule : AustralianEdtechCaseCreatesUniversalDurabilityRule → ⊥
 australianEdtechCaseDoesNotCreateUniversalDurabilityRule ()
 
+opinionPaperDoesNotCreateEmpiricalDigitalESDEffect : OpinionPaperCreatesEmpiricalDigitalESDEffect → ⊥
+opinionPaperDoesNotCreateEmpiricalDigitalESDEffect ()
+
+sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework :
+  SustainabilityParadoxExhaustsReciprocalDigitalESDFramework → ⊥
+sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework ()
+
 record ScholarlyCandidateBoundary : Set where
   constructor scholarly-candidate-boundary
   field
@@ -97,6 +118,8 @@ record ScholarlyCandidateBoundary : Set where
     gousetiSourceRolePaidIsTrue : gousetiSourceRolePaid ≡ true
     zagamiSourceRolePaid : Bool
     zagamiSourceRolePaidIsTrue : zagamiSourceRolePaid ≡ true
+    chughSourceRolePaid : Bool
+    chughSourceRolePaidIsTrue : chughSourceRolePaid ≡ true
     acquisitionCreatesInclusion : Bool
     acquisitionCreatesInclusionIsFalse : acquisitionCreatesInclusion ≡ false
     citationImportsProof : Bool
@@ -108,4 +131,4 @@ open ScholarlyCandidateBoundary public
 
 canonicalScholarlyCandidateBoundary : ScholarlyCandidateBoundary
 canonicalScholarlyCandidateBoundary = scholarly-candidate-boundary
-  true refl true refl true refl false refl false refl false refl
+  true refl true refl true refl true refl false refl false refl false refl
