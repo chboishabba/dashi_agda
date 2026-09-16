@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Education.DigitalESDCurrentScholarlySnowballExact as Scholarly
 import DASHI.Education.DigitalESDReciprocalBraidExact as Braid
 import DASHI.Education.DigitalESDManuscriptMethodologyExact as Method
@@ -25,7 +26,7 @@ import DASHI.Education.DigitalESDManuscriptDependencyPaymentAdapterExact as Paym
 -- novel; that remains contingent on the completed structured search/screening.
 ------------------------------------------------------------------------
 
-closeAntecedent : Scholarly.Attr.AttributedSource
+closeAntecedent : Attr.AttributedSource
 closeAntecedent = Scholarly.chughSustainabilityParadoxSource
 
 reciprocalFrameworkRetained = Braid.canonicalDigitalESDReciprocalBraid
@@ -63,10 +64,6 @@ coordinateReference participantAuthorityContextTransfer =
 coordinateReference dependencyAwareSearchSynthesisLineage =
   "structured search -> eligible corpus -> source/scope extraction -> synthesis with non-skippable dependency lineage"
 
-------------------------------------------------------------------------
--- Conservative novelty firewalls.
-------------------------------------------------------------------------
-
 data CloseAntecedentAutomaticallyMakesDuplicate : Set where
 data FormalDifferenceAutomaticallyCreatesPublicationNovelty : Set where
 data OneAntecedentExhaustsNoveltySearch : Set where
@@ -91,44 +88,31 @@ record ContributionPositionBoundary : Set where
   constructor contribution-position-boundary
   field
     reverseSustainabilityAntecedentPaid : Bool
-    reverseSustainabilityAntecedentPaidIsTrue :
-      reverseSustainabilityAntecedentPaid ≡ true
-
+    reverseSustainabilityAntecedentPaidIsTrue : reverseSustainabilityAntecedentPaid ≡ true
     chughPaysReciprocalESDCapacityIntegration : Bool
-    chughPaysReciprocalESDCapacityIntegrationIsFalse :
-      chughPaysReciprocalESDCapacityIntegration ≡ false
-
+    chughPaysReciprocalESDCapacityIntegrationIsFalse : chughPaysReciprocalESDCapacityIntegration ≡ false
     chughPaysSameObjectPaymentDiscipline : Bool
-    chughPaysSameObjectPaymentDisciplineIsFalse :
-      chughPaysSameObjectPaymentDiscipline ≡ false
-
+    chughPaysSameObjectPaymentDisciplineIsFalse : chughPaysSameObjectPaymentDiscipline ≡ false
     chughPaysParticipantAuthorityBoundary : Bool
-    chughPaysParticipantAuthorityBoundaryIsFalse :
-      chughPaysParticipantAuthorityBoundary ≡ false
-
+    chughPaysParticipantAuthorityBoundaryIsFalse : chughPaysParticipantAuthorityBoundary ≡ false
     chughPaysDependencyAwareSearchSynthesisLineage : Bool
-    chughPaysDependencyAwareSearchSynthesisLineageIsFalse :
-      chughPaysDependencyAwareSearchSynthesisLineage ≡ false
-
+    chughPaysDependencyAwareSearchSynthesisLineageIsFalse : chughPaysDependencyAwareSearchSynthesisLineage ≡ false
     closeAntecedentRetainedAndCited : Bool
-    closeAntecedentRetainedAndCitedIsTrue :
-      closeAntecedentRetainedAndCited ≡ true
-
+    closeAntecedentRetainedAndCitedIsTrue : closeAntecedentRetainedAndCited ≡ true
     globalNoveltyClaimPaid : Bool
     globalNoveltyClaimPaidIsFalse : globalNoveltyClaimPaid ≡ false
 
 open ContributionPositionBoundary public
 
 canonicalContributionPositionBoundary : ContributionPositionBoundary
-canonicalContributionPositionBoundary =
-  contribution-position-boundary
-    true refl
-    false refl
-    false refl
-    false refl
-    false refl
-    true refl
-    false refl
+canonicalContributionPositionBoundary = contribution-position-boundary
+  true refl
+  false refl
+  false refl
+  false refl
+  false refl
+  true refl
+  false refl
 
 contributionPositionReading : String
 contributionPositionReading =
