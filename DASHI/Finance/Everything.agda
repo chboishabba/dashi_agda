@@ -54,6 +54,19 @@ import DASHI.Finance.TrumpFamilyTradeSituatedActionabilityExact
 import DASHI.Finance.TrumpFamilyTradeStrategicIdentificationExact
 import DASHI.Finance.TrumpFamilyTradePNFTradeIntegrationValidation
 
+-- Post-#971 evidence-quality refinement. Same-object transaction promotion now
+-- requires exact consumed coordinates; source multiplicity is separated from
+-- proposition-local upstream independence; evidence health keeps identity,
+-- chronology, genealogy and contradiction status distinct. The Reuters SpaceX
+-- synthesis remains paid while its exact primary OGE transaction row remains
+-- explicit acquisition debt.
+import DASHI.Finance.TrumpFamilyTradeClaimIdentityPromotionExact
+import DASHI.Finance.TrumpFamilyTradeSourceGenealogyExact
+import DASHI.Finance.TrumpFamilyTradeEvidenceHealthExact
+import DASHI.Finance.TrumpSpaceXPrimaryAcquisitionExact
+import DASHI.Finance.TrumpFamilyTradeEvidenceQualityRound6Exact
+import DASHI.Finance.TrumpFamilyTradeEvidenceGenealogyValidation
+
 -- Canonical trading-control semantics. Earlier BAN/action experiments remain
 -- in the branch as historical development artifacts but are deliberately not
 -- imported by this aggregate.
