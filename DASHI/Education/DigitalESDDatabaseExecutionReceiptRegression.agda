@@ -2,7 +2,6 @@ module DASHI.Education.DigitalESDDatabaseExecutionReceiptRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDDatabaseExecutionReceiptExact as Exec
@@ -19,6 +18,14 @@ wosExecutionAttemptedRegression :
   Exec.DatabaseExecutionReceipt.executionAttempted Exec.wosQ1Execution ≡ true
 wosExecutionAttemptedRegression = refl
 
+scopusCurrentQueryNotSubmittedRegression :
+  Exec.DatabaseExecutionReceipt.querySubmitted Exec.scopusQ1Execution ≡ false
+scopusCurrentQueryNotSubmittedRegression = refl
+
+wosCurrentQueryNotSubmittedRegression :
+  Exec.DatabaseExecutionReceipt.querySubmitted Exec.wosQ1Execution ≡ false
+wosCurrentQueryNotSubmittedRegression = refl
+
 scopusBlockedBeforeSubmissionRegression :
   Exec.DatabaseExecutionReceipt.outcome Exec.scopusQ1Execution
   ≡ Exec.accessBlockedBeforeSubmission "HTTP 403 at Scopus Advanced Search entrypoint in this execution environment"
@@ -33,6 +40,12 @@ translatedQueryIdentityRegression :
   Exec.DatabaseExecutionReceipt.translatedQuery Exec.scopusQ1Execution
   ≡ Queries.scopusQ1DigitalEducationESD
 translatedQueryIdentityRegression = refl
+
+futureSubmittedExecutionPermittedRegression :
+  Exec.DatabaseExecutionBoundary.successfulExecutionMayRecordSubmittedQuery
+    Exec.canonicalDatabaseExecutionBoundary
+  ≡ true
+futureSubmittedExecutionPermittedRegression = refl
 
 blockedExecutionCannotCreateObservedResultCountRegression :
   Exec.BlockedExecutionCreatesObservedResultCount → ⊥
