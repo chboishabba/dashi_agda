@@ -26,6 +26,7 @@ grep -q '^import DASHI.Education.DigitalESDPaperTypeRequirementRegression$' "$AG
 grep -q '^import DASHI.Education.DigitalESDConsumerRelativeLifecycleExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDConsumerRelativeLifecycleRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDStructuredSearchExact$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDManuscriptDependencyPaymentAdapterExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDStructuredSearchRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDCanonicalOwnerRegression$' "$AGG"
 grep -q '^crossRoundAttributionOwnerRegression :' "$CANONICAL_REGRESSION"
