@@ -23,3 +23,5 @@ import DASHI.Reasoning.TypedHyperfabricConsumerReductionBridgeExact
 import DASHI.Reasoning.MaleCNSTypedHyperfabricChartProjectionExact
 import DASHI.Reasoning.LocalFibreHyperfabricExact
 import DASHI.Reasoning.FibreRoutingBraidHyperfabricBranchMergeExact
+import DASHI.Reasoning.AuthorityBooleanPolarityRepairExact
+import DASHI.Reasoning.BrainCognitionObservationSpineExact
