@@ -64,7 +64,7 @@ data PTRLineAutomaticallyMeansFilerPersonallyDirected : Set where
 data PTRLineAutomaticallyIdentifiesCoveredPerson : Set where
 data PTRBandAutomaticallyMeansExactNotional : Set where
 data PTRDateAutomaticallyMeansInformationAvailableSameDay : Set where
-\data PTRFilingLagAutomaticallyMeansConcealment : Set where
+data PTRFilingLagAutomaticallyMeansConcealment : Set where
 
 ptrLineDoesNotProvePersonalDirection :
   PTRLineAutomaticallyMeansFilerPersonallyDirected → ⊥
