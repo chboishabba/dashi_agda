@@ -9,6 +9,11 @@ ssp15Regression :
   C.ssp15FifteenLaneSourcePaid C.currentMonster42dFifteenFourteenBoundary ≡ true
 ssp15Regression = refl
 
+phasePreserving27ReductionRegression :
+  C.twentySevenToThreeTimesFiveSymmetryReductionPaid
+    C.currentMonster42dFifteenFourteenBoundary ≡ true
+phasePreserving27ReductionRegression = refl
+
 fivePlusTenRegression :
   C.fivePlusTenCarrierDecompositionPaid C.currentMonster42dFifteenFourteenBoundary ≡ true
 fivePlusTenRegression = refl
