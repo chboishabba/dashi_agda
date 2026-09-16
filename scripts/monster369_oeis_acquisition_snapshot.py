@@ -5,6 +5,10 @@ import json
 
 RETRIEVED = "2026-09-16"
 
+FIVE_MODES = ("mode09", "mode18", "mode27", "mode36", "mode45")
+BALANCED_PHASES = (-1, 0, 1)
+BINARY_ORIENTATIONS = (-1, 1)
+
 
 def _node(
     sequence_id: str,
@@ -189,6 +193,17 @@ RELATIONS: dict[str, dict[str, object]] = {
         "paid": True,
         "same_object_paid": False,
     },
+    "42d-five-mode-phase-carrier": {
+        "sources": ["A058678"],
+        "observed": (
+            "repo-native finite carrier probe: 5 modes * 3 balanced phases = 15; "
+            "the same five modes have 10 binary-oriented states; deleting one "
+            "distinguished neutral lane leaves 14; one outer ternary phase gives 3*14=42"
+        ),
+        "paid": True,
+        "twenty_seven_to_five_mode_selection_paid": False,
+        "monster_42d_same_object_paid": False,
+    },
     "6b-q6-to-c6-spectrum-32772": {
         "sources": ["A007255", "A045485", "A121665"],
         "observed": "normalization-stable q^6 coefficient 32772 equals independent C6 m1=m5=32772",
@@ -204,18 +219,45 @@ RELATIONS: dict[str, dict[str, object]] = {
 }
 
 
+def build_42d_five_mode_phase_probe() -> dict[str, object]:
+    lanes = [(mode, phase) for mode in FIVE_MODES for phase in BALANCED_PHASES]
+    binary_oriented_lanes = [
+        (mode, orientation) for mode in FIVE_MODES for orientation in BINARY_ORIENTATIONS
+    ]
+    distinguished_lane = ("mode09", 0)
+    residual_lanes = [lane for lane in lanes if lane != distinguished_lane]
+
+    return {
+        "mode_count": len(FIVE_MODES),
+        "phase_count": len(BALANCED_PHASES),
+        "lane_count": len(lanes),
+        "binary_oriented_lane_count": len(binary_oriented_lanes),
+        "five_plus_ten": len(FIVE_MODES) + len(binary_oriented_lanes),
+        "distinguished_lane": distinguished_lane,
+        "residual_lane_count": len(residual_lanes),
+        "outer_phase_count": len(BALANCED_PHASES),
+        "outer_phase_times_residual": len(BALANCED_PHASES) * len(residual_lanes),
+        "twenty_seven_to_five_mode_selection_paid": False,
+        "forty_two_carrier_is_monster_class_42d_paid": False,
+    }
+
+
 def build_report() -> dict[str, object]:
     return {
-        "schema": "monster369-oeis-acquisition-snapshot-v3",
+        "schema": "monster369-oeis-acquisition-snapshot-v4",
         "retrieved": RETRIEVED,
         "sequence_count": len(SEQUENCES),
         "sequences": SEQUENCES,
         "relations": RELATIONS,
+        "carrier_probes": {
+            "42d_five_mode_phase": build_42d_five_mode_phase_probe(),
+        },
         "positive_bridge_candidates": {
             "a005052-heisenberg-ladder": True,
             "a025616-parent-lattice": True,
             "6b-q6-to-c6-spectrum-32772": True,
             "17496-42d-to-n3b-restriction": True,
+            "42d-five-mode-phase-carrier": True,
         },
         "authority": {
             "oeis_snapshot_creates_same_object": False,
@@ -229,6 +271,8 @@ def main() -> int:
     def normalize(value: object) -> object:
         if isinstance(value, set):
             return sorted(value)
+        if isinstance(value, tuple):
+            return [normalize(item) for item in value]
         if isinstance(value, dict):
             return {key: normalize(item) for key, item in value.items()}
         if isinstance(value, list):
