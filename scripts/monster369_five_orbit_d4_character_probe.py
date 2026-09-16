@@ -165,7 +165,7 @@ def build_report() -> dict[str, object]:
     removed_dimension = sum(removed[name] * IRREP_DIMENSIONS[name] for name in removed)
 
     return {
-        "schema": "monster369-five-orbit-d4-character-probe-v2",
+        "schema": "monster369-five-orbit-d4-character-probe-v3",
         "orbit_count": len(ORBIT_REPRESENTATIVES),
         "orbits": list(ORBIT_REPRESENTATIVES),
         "conjugacy_classes": [name for name, _ in CONJUGACY_CLASSES],
@@ -181,6 +181,14 @@ def build_report() -> dict[str, object]:
         "one_to_one_orbit_to_irrep_semantic_map_paid": False,
         "quotient_character_decomposition_paid_by_python": True,
         "agda_kernel_character_decomposition_paid": False,
+        "d4_to_n3b_screen": {
+            "n3b_degree_occurrences_paid": {17496: True, 113724: True},
+            "selected3b_normalizer_monster_action_weld_paid": False,
+            "d4_subgroup_embedding_paid": False,
+            "d4_quotient_character_restriction_same_object_paid": False,
+            "d4_quotient_equals_n3b_character": False,
+            "monster_42d_action_paid": False,
+        },
         "monster_42d_action_paid": False,
     }
 
