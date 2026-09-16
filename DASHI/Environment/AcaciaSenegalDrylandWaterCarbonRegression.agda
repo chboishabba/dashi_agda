@@ -4,10 +4,12 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (true; false)
 
 import DASHI.Environment.AcaciaSenegalDrylandWaterCarbonExact as Acacia
+import DASHI.Environment.AcaciaSenegalDrylandTaskFactorisationExact as Task
 
 ------------------------------------------------------------------------
 -- Regression surface: the source-bounded study bridge must preserve the
--- separate carbon, hydraulic-capacity, soil-moisture and water-balance axes.
+-- separate carbon, hydraulic-capacity, soil-moisture and water-balance axes,
+-- and the LES task-sufficiency collisions must remain live.
 ------------------------------------------------------------------------
 
 _sourceDOI-pinned : Acacia.primaryStudyDOI ≡ "10.1016/j.jaridenv.2017.12.004"
@@ -51,3 +53,15 @@ _single-metric-restoration-ranking-blocked = refl
 
 _source-does-not-authorise-deployment : Acacia.studyAutomaticallyAuthorisesDrylandTreePlanting Acacia.canonicalAcaciaBoundary ≡ false
 _source-does-not-authorise-deployment = refl
+
+_carbon-only-collision-is-synthetic : Task.collisionIsDASHISyntheticWitness Task.canonicalTaskFactorisationBridgeBoundary ≡ true
+_carbon-only-collision-is-synthetic = refl
+
+_carbon-only-not-admitted-for-moisture : Task.carbonOnlyProjectionAdmittedForMoistureConsumer Task.canonicalTaskFactorisationBridgeBoundary ≡ false
+_carbon-only-not-admitted-for-moisture = refl
+
+_infiltration-only-not-admitted-for-moisture : Task.infiltrationOnlyProjectionAdmittedForMoistureConsumer Task.canonicalTaskFactorisationBridgeBoundary ≡ false
+_infiltration-only-not-admitted-for-moisture = refl
+
+_ET-retained-in-repair : Task.evapotranspirationRetained Task.canonicalMoistureAdequateProjectionReceipt ≡ true
+_ET-retained-in-repair = refl
