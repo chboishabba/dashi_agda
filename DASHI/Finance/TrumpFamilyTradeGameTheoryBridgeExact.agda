@@ -18,7 +18,7 @@ import DASHI.GameTheory.RepeatedStrategicLearningMemoryBridgeExact as Repeated
 --
 -- The source atlas can parameterise information-state and repeated-history
 -- models, but source evidence does not become a strategy, trade signal or
--- equilibrium witness.  dashiTRADE remains the execution/actionability owner.
+-- equilibrium witness. dashiTRADE remains the execution/actionability owner.
 ------------------------------------------------------------------------
 
 record SourceBackedMarketEvent : Set₁ where
@@ -46,10 +46,10 @@ record MarketTimingEdge : Set₁ where
 open MarketTimingEdge public
 
 ------------------------------------------------------------------------
--- Truth API is especially useful as an information-structure example.  The
+-- Truth API is especially useful as an information-structure example. The
 -- primary issuer source states low-latency access to public posts and a target
--- customer class including HFT/algorithmic firms.  That can support a timing or
--- information-access model.  It does not establish MNPI, insider trading or a
+-- customer class including HFT/algorithmic firms. That can support a timing or
+-- information-access model. It does not establish MNPI, insider trading or a
 -- profitable strategy.
 ------------------------------------------------------------------------
 
@@ -103,8 +103,8 @@ canonicalEvidenceTradeBoundary =
     DashiTrade.canonicalResidualToTradeAuthorityBoundary
 
 ------------------------------------------------------------------------
--- Repeated-game / memory hook.  The actual repeated process remains supplied by
--- the canonical game owner.  This bridge merely records that a source-backed
+-- Repeated-game / memory hook. The actual repeated process remains supplied by
+-- the canonical game owner. This bridge merely records that a source-backed
 -- event may be bound to a history element; it does not infer best response,
 -- motive or equilibrium from the event.
 ------------------------------------------------------------------------
