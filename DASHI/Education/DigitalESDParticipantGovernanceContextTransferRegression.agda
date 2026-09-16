@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Cognition.PNF.LearningAlgebra as Learning
 import DASHI.Education.DigitalESDParticipantGovernanceContextTransferExact as Transfer
 import DASHI.Education.DigitalESDSameObjectAcquisitionSchedulerExact as Scheduler
@@ -77,6 +78,11 @@ contextGeneralisationRemainsNonAutomaticRegression :
   Learning.generalisationIsAutomatic context ≡ false
 contextGeneralisationRemainsNonAutomaticRegression =
   Learning.generalisationIsAutomaticIsFalse
+
+canonicalAttributionSnowballReuseRegression :
+  Snowball.AttributionSnowballBoundary
+canonicalAttributionSnowballReuseRegression =
+  Transfer.canonicalAttributionSnowballBoundaryRetained
 
 transferBoundaryRetainsAttributionRegression :
   Transfer.ParticipantGovernanceContextTransferBoundary.sourceRoleAndSameObjectRetained
