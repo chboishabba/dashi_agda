@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.FeministRechartingSourceBridgeExact as Feminist
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LI
+import DASHI.Core.TernaryRoleCarrierExact as Ternary
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
 import DASHI.Culture.IndigenousKnowledgeStoryTwoEyedSeeingBidiExact as IK
@@ -26,10 +27,6 @@ import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionTwoExact a
 -- from Longino, Dotson, Medina, Tuana, Pohlhaus or Anderson.
 ------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- Canonical reused theorem surfaces.
-------------------------------------------------------------------------
-
 intersectionalCollision :
   INF.NonFactorabilityWitness INF.flatProjection INF.relationalOutcome
 intersectionalCollision = INF.canonicalIntersectionalNonFactorability
@@ -45,12 +42,6 @@ subjectPositionBoundary = Subject.canonicalRepresentationSubjectPositionBoundary
 
 twoEyedBoundary : TwoEyed.KimmererTwoEyedSeeingBoundary
 twoEyedBoundary = TwoEyed.canonicalKimmererTwoEyedSeeingBoundary
-
-------------------------------------------------------------------------
--- Structural crosswalk.  These are DASHI-side repair families, not claims
--- that the external theories are identical or that one historically derives
--- from another.
-------------------------------------------------------------------------
 
 data ExistingRepairFamily : Set where
   erasedRelationFamily : ExistingRepairFamily
@@ -81,10 +72,6 @@ coverageOf ignoranceProductionFamily = genuinelyUnpaidCandidate
 coverageOf hermeneuticalRefusalFamily = genuinelyUnpaidCandidate
 coverageOf criticalUptakeFamily = partiallyRelatedButNotPaid
 
-------------------------------------------------------------------------
--- Why the first three are partially related rather than already paid.
-------------------------------------------------------------------------
-
 evidentialContextExistingAnalogue : ExistingRepairFamily
 evidentialContextExistingAnalogue = erasedRelationFamily
 
@@ -97,12 +84,8 @@ pluralResourcesExistingAnalogue = provenanceHistoryFamily
 criticalUptakeExistingAnalogue : ExistingRepairFamily
 criticalUptakeExistingAnalogue = positiveResidualFamily
 
-------------------------------------------------------------------------
--- Concrete reusable non-collapse receipts.
-------------------------------------------------------------------------
-
 sharedCarrierDoesNotIdentifyRelationalGrammar :
-  (permutation : _) → LI.GrammarPreserving permutation → ⊥
+  (permutation : Ternary.TernaryPermutation) → LI.GrammarPreserving permutation → ⊥
 sharedCarrierDoesNotIdentifyRelationalGrammar = LI.noTernaryRelabellingPreservesGrammar
 
 categoryVisibilityCannotRecoverOriginatingSubject :
@@ -127,10 +110,6 @@ extractedPropositionCannotRecoverObligation :
   INF.FactorsThrough IK.extractedProposition IK.obligation → ⊥
 extractedPropositionCannotRecoverObligation = IK.propositionCannotRecoverObligation
 
-------------------------------------------------------------------------
--- Cross-pollination status.
-------------------------------------------------------------------------
-
 record CrossPollinationBoundary : Set where
   constructor crossPollinationBoundary
   field
@@ -154,22 +133,11 @@ canonicalCrossPollinationBoundary = crossPollinationBoundary
   true true true true true
   false false false false false false false
 
-------------------------------------------------------------------------
--- Source identities remain owned by the acquisition snapshots.
-------------------------------------------------------------------------
-
 priorAcquisitionOneBoundary : Acquisition1.AcquisitionAttributionBoundary
 priorAcquisitionOneBoundary = Acquisition1.canonicalAcquisitionAttributionBoundary
 
 priorAcquisitionTwoBoundary : Acquisition2.AcquisitionTwoAttributionBoundary
 priorAcquisitionTwoBoundary = Acquisition2.canonicalAcquisitionTwoAttributionBoundary
-
-------------------------------------------------------------------------
--- Pareto implication for automatic diagnosis.
---
--- The existing theory stack can generate candidate *types of missing residual*
--- without deciding which source-derived coordinate is actually required.
-------------------------------------------------------------------------
 
 record DiagnosisCrosswalk : Set where
   constructor diagnosisCrosswalk
