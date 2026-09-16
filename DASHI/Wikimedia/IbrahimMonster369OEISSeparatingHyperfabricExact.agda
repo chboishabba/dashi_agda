@@ -11,6 +11,7 @@ import DASHI.Wikimedia.DASHIMathOEIS196883AuditRoadmapExact as Audit
 import DASHI.Wikimedia.IbrahimMonster3BOEIS369UnifiedCrossPollinationExact as Cross
 import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact as Zeta54
 import DASHI.Moonshine.Monster3BBalancedRegularFibreExact as ThreeB
+import DASHI.Wikimedia.IbrahimMonster6BWeightTwoC6FourierOEISExact as C6
 
 ------------------------------------------------------------------------
 -- MONSTER369 / OEIS SEPARATING HYPERFABRIC
@@ -50,6 +51,7 @@ data Monster369Coordinate : Set where
   ogg475971Factor : Monster369Coordinate
   zetaPhaseCoordinate : Monster369Coordinate
   tauModularCoordinate : Monster369Coordinate
+  c6WeightTwoSpectrumCoordinate : Monster369Coordinate
   actualWeylActionCoordinate : Monster369Coordinate
   selected3BRestrictionCoordinate : Monster369Coordinate
   twelvePlusSeventyEightCoordinate : Monster369Coordinate
@@ -69,6 +71,7 @@ data RelationStrength : Set where
   exactArithmetic : RelationStrength
   oeisNavigation : RelationStrength
   typedCarrierMap : RelationStrength
+  representationSpectrumTheorem : RelationStrength
   representationActionTheorem : RelationStrength
   unpaidCoincidence : RelationStrength
 
@@ -87,6 +90,7 @@ coordinateStrength moonshine196884Dimension = representationActionTheorem
 coordinateStrength ogg475971Factor = exactArithmetic
 coordinateStrength zetaPhaseCoordinate = typedCarrierMap
 coordinateStrength tauModularCoordinate = typedCarrierMap
+coordinateStrength c6WeightTwoSpectrumCoordinate = representationSpectrumTheorem
 coordinateStrength actualWeylActionCoordinate = representationActionTheorem
 coordinateStrength selected3BRestrictionCoordinate = representationActionTheorem
 coordinateStrength twelvePlusSeventyEightCoordinate = representationActionTheorem
@@ -104,7 +108,7 @@ coordinateNameAlonePaysMonsterAction : Monster369Coordinate → Bool
 coordinateNameAlonePaysMonsterAction _ = false
 
 ------------------------------------------------------------------------
--- 3. Reuse exact arithmetic/carrier receipts already paid elsewhere.
+-- 3. Reuse exact arithmetic/carrier/spectral receipts already paid elsewhere.
 ------------------------------------------------------------------------
 
 a005052Level2Is90 : Cross.a005052 2 ≡ 90
@@ -137,6 +141,12 @@ moonshineDimensionIs196884 = Cross.threeBConformalDimensionStill196884
 
 largestOggTripleProductIs196883 : 47 * 59 * 71 ≡ 196883
 largestOggTripleProductIs196883 = Audit.largestThreeFactorProduct
+
+c6WeightTwoSpectrum : C6.C6WeightTwoMultiplicitySpectrum
+c6WeightTwoSpectrum = C6.canonicalC6WeightTwoMultiplicitySpectrum
+
+c6WeightTwoSpectrumTuple : String
+c6WeightTwoSpectrumTuple = C6.c6WeightTwoMultiplicityTuple
 
 ------------------------------------------------------------------------
 -- 4. Monster-native consumers and hyperedges.
@@ -274,6 +284,7 @@ record Monster369SeparatingHyperfabricBoundary : Set where
   field
     reusesExistingOEIS369Atlas : Bool
     typedMonsterCoordinatesRetained : Bool
+    c6WeightTwoSpectrumCoordinateRetained : Bool
     monsterNativeConsumerEdgesTyped : Bool
     canonicalTypedSelectionHitsEveryDeclaredConsumer : Bool
     oeisOnlySelectionHitsEveryRepresentationConsumer : Bool
@@ -289,6 +300,6 @@ open Monster369SeparatingHyperfabricBoundary public
 canonicalMonster369SeparatingHyperfabricBoundary : Monster369SeparatingHyperfabricBoundary
 canonicalMonster369SeparatingHyperfabricBoundary =
   monster369-separating-hyperfabric-boundary
-    true true true true
+    true true true true true
     false false false false false false true
-    "Instantiate more literal Monster worlds/consumers against this finite coordinate universe. If a typed selection collides, retain the first semantic coordinate that separates the failed consumer. OEIS may propose candidate coordinates or negative controls, but only typed carrier/action/source receipts can promote them into the Monster proof graph. Hitting all finite edges does not itself prove the consumer theorems. Do not claim a globally minimal hitting set until an exhaustive finite search and kernel-level minimum proof are separately paid."
+    "The source-paid C6 weight-two spectrum is now a typed coordinate, so add the 32772 same-class/cross-role pair to the literal collision portfolio. Treat its equality as positive bridge-search evidence, while using the C6 Fourier spectrum theorem rather than the bare integer for semantic separation. Continue with 54 and 729 literal worlds; do not claim global minimality or action identity from coordinate selection."
