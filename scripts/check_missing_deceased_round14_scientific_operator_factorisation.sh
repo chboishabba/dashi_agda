@@ -12,7 +12,7 @@ required=(
   "$root/DASHI/Culture/MissingDeceasedClassificationEvidenceOperatorExact.agda"
   "$root/DASHI/Culture/MissingDeceasedTwentyScientistScientificOperatorFactorisationExact.agda"
   "$root/DASHI/Culture/MissingDeceasedTwentyScientistScientificOperatorBidiExact.agda"
-  "$root/DASHI/Culture/MissingDeceasedTwentyScientistRound13OperatorFactorisationProgressExact.agda"
+  "$root/DASHI/Culture/MissingDeceasedTwentyScientistRound14OperatorFactorisationProgressExact.agda"
 )
 for f in "${required[@]}"; do test -f "$f"; done
 
@@ -40,16 +40,16 @@ grep -q 'operatorBidiDoesNotPayPersonPossession = false' "$bidi"
 grep -q 'operatorBidiDoesNotPayCustody = false' "$bidi"
 grep -q 'operatorBidiDoesNotPayEventCause = false' "$bidi"
 
-round="$root/DASHI/Culture/MissingDeceasedTwentyScientistRound13OperatorFactorisationProgressExact.agda"
-grep -q 'round13ScientificCohortCount = 20' "$round"
-grep -q 'round13PaidFactorisationCount = 18' "$round"
-grep -q 'round13GatedFactorisationCount = 2' "$round"
-grep -q 'round13EveryScientistTouched = true' "$round"
+round="$root/DASHI/Culture/MissingDeceasedTwentyScientistRound14OperatorFactorisationProgressExact.agda"
+grep -q 'round14ScientificCohortCount = 20' "$round"
+grep -q 'round14PaidFactorisationCount = 18' "$round"
+grep -q 'round14GatedFactorisationCount = 2' "$round"
+grep -q 'round14EveryScientistTouched = true' "$round"
 
 aggregate="$root/DASHI/Culture/MissingDeceasedTwentyScientistRoundRobinEverything.agda"
 grep -q 'ScientificOperatorFamilyExact' "$aggregate"
 grep -q 'MissingDeceasedTwentyScientistScientificOperatorFactorisationExact' "$aggregate"
 grep -q 'MissingDeceasedTwentyScientistScientificOperatorBidiExact' "$aggregate"
-grep -q 'MissingDeceasedTwentyScientistRound13OperatorFactorisationProgressExact' "$aggregate"
+grep -q 'MissingDeceasedTwentyScientistRound14OperatorFactorisationProgressExact' "$aggregate"
 
-echo 'Round-13 scientific operator factorisation static contract: OK'
+echo 'Round-14 scientific operator factorisation static contract: OK'
