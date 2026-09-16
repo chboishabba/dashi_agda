@@ -95,6 +95,7 @@ data QIDAuthorityQuery : Set where
 
 data AuthorityAnswer : Set where
   primaryTextAnswer : AuthorityAnswer
+  secondaryInterpretiveAnswer : AuthorityAnswer
   formalisationOnlyAnswer : AuthorityAnswer
 
 qidProjection : QIDWorld → QIDSurface
@@ -128,6 +129,50 @@ qidDoesNotDetermineSourceAuthority factor = helper first second
     helper refl ()
 
 ------------------------------------------------------------------------
+-- 1b. Same QID does not determine claim/transmission role.
+------------------------------------------------------------------------
+
+data QIDClaimWorld : Set where
+  qidAsDialogueAuthorCoordinate : QIDClaimWorld
+  qidAsReportedTeacherCoordinate : QIDClaimWorld
+
+data ClaimRoleAnswer : Set where
+  dialogueAuthorRole : ClaimRoleAnswer
+  reportedTeacherRole : ClaimRoleAnswer
+
+data ClaimRoleQuery : Set where
+  claimRoleQuestionByQID : ClaimRoleQuery
+
+qidClaimProjection : QIDClaimWorld → QIDSurface
+qidClaimProjection qidAsDialogueAuthorCoordinate = sameConceptQID
+qidClaimProjection qidAsReportedTeacherCoordinate = sameConceptQID
+
+ClaimRoleAnswerFor : ClaimRoleQuery → Set
+ClaimRoleAnswerFor claimRoleQuestionByQID = ClaimRoleAnswer
+
+askClaimRole : (query : ClaimRoleQuery) → QIDClaimWorld → ClaimRoleAnswerFor query
+askClaimRole claimRoleQuestionByQID qidAsDialogueAuthorCoordinate = dialogueAuthorRole
+askClaimRole claimRoleQuestionByQID qidAsReportedTeacherCoordinate = reportedTeacherRole
+
+claimRoleQuestions : Query.InquiryQuestionFamily QIDClaimWorld ClaimRoleQuery
+claimRoleQuestions = Query.inquiryQuestionFamily ClaimRoleAnswerFor askClaimRole
+
+qidDoesNotDetermineClaimRole :
+  Query.FactorsThrough claimRoleQuestions qidClaimProjection claimRoleQuestionByQID → ⊥
+qidDoesNotDetermineClaimRole factor = helper first second
+  where
+    first : dialogueAuthorRole ≡ Query.quotientAnswer factor sameConceptQID
+    first = Query.factorisation factor qidAsDialogueAuthorCoordinate
+
+    second : reportedTeacherRole ≡ Query.quotientAnswer factor sameConceptQID
+    second = Query.factorisation factor qidAsReportedTeacherCoordinate
+
+    helper :
+      dialogueAuthorRole ≡ Query.quotientAnswer factor sameConceptQID →
+      reportedTeacherRole ≡ Query.quotientAnswer factor sameConceptQID → ⊥
+    helper refl ()
+
+------------------------------------------------------------------------
 -- 2. Dewey class does not determine source authority.
 ------------------------------------------------------------------------
 
@@ -147,7 +192,7 @@ DeweyAuthorityAnswerFor sourceAuthorityQuestionByDewey = AuthorityAnswer
 askDeweyAuthority :
   (query : DeweyAuthorityQuery) → DeweyWorld → DeweyAuthorityAnswerFor query
 askDeweyAuthority sourceAuthorityQuestionByDewey philosophyPrimaryCarrier = primaryTextAnswer
-askDeweyAuthority sourceAuthorityQuestionByDewey philosophySecondaryCommentary = formalisationOnlyAnswer
+askDeweyAuthority sourceAuthorityQuestionByDewey philosophySecondaryCommentary = secondaryInterpretiveAnswer
 
 deweyProjection : DeweyWorld → DeweySurface
 deweyProjection philosophyPrimaryCarrier = samePhilosophyClass
@@ -163,12 +208,12 @@ deweyDoesNotDetermineSourceAuthority factor = helper first second
     first : primaryTextAnswer ≡ Query.quotientAnswer factor samePhilosophyClass
     first = Query.factorisation factor philosophyPrimaryCarrier
 
-    second : formalisationOnlyAnswer ≡ Query.quotientAnswer factor samePhilosophyClass
+    second : secondaryInterpretiveAnswer ≡ Query.quotientAnswer factor samePhilosophyClass
     second = Query.factorisation factor philosophySecondaryCommentary
 
     helper :
       primaryTextAnswer ≡ Query.quotientAnswer factor samePhilosophyClass →
-      formalisationOnlyAnswer ≡ Query.quotientAnswer factor samePhilosophyClass → ⊥
+      secondaryInterpretiveAnswer ≡ Query.quotientAnswer factor samePhilosophyClass → ⊥
     helper refl ()
 
 ------------------------------------------------------------------------
@@ -312,6 +357,7 @@ record PlatoSymposiumIndexingBoundary : Set where
     paretoUsedForConsumerRelativeWorkSelection : Bool
 
     qidCreatesSourceAuthority : Bool
+    qidDeterminesClaimRole : Bool
     deweyCreatesSourceAuthority : Bool
     citationCountCreatesIndependence : Bool
     paretoRankCreatesConsumerAdequacy : Bool
@@ -325,7 +371,7 @@ canonicalPlatoSymposiumIndexingBoundary : PlatoSymposiumIndexingBoundary
 canonicalPlatoSymposiumIndexingBoundary =
   plato-symposium-indexing-boundary
     true true true true true
-    false false false false false false false
+    false false false false false false false false
 
 qidStillNotProof : Traversal.QidIdentityCreatesProof → ⊥
 qidStillNotProof = Traversal.qidIdentityIsNotProof
@@ -343,4 +389,4 @@ citationStillNotAuthority = Snowball.citationDoesNotCreateAuthority
 
 indexingSummary : String
 indexingSummary =
-  "Plato/JMD/DASHI source roles snowball with provenance; Dewey and QID route traversal, citation count does not establish independence, and Pareto position selects residual-relevant work without creating consumer adequacy, proof, historical identity or source authority."
+  "Plato/JMD/DASHI source roles snowball with provenance; Dewey and QID route traversal, same QID does not determine claim role, citation count does not establish independence, and Pareto position selects residual-relevant work without creating consumer adequacy, proof, historical identity or source authority."
