@@ -44,7 +44,6 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanClayT5OSReconstructionCyclicityExact as Cyclic
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
-import DASHI.Physics.YangMills.BalabanSubgapGeometricSeparationRound294Exact as R294
 
 ------------------------------------------------------------------------
 -- Source-independent geometric dominance, with BOTH ratios explicit.
@@ -204,36 +203,6 @@ asSubgapSeparatingTimeData dominance semantics = record
   }
 
 ------------------------------------------------------------------------
--- Compatibility: the historical `1/2` semantic package embeds into the new
--- source-native shape once the generic dominance authority is available.
-------------------------------------------------------------------------
-
-fromHalfSpecificSemantics :
-  ∀ {Measure TestObservable Energy Vector}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
-    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
-    {tests : R278.SelectedConnectedCovarianceTests dataSet}
-    {core : R288.CyclicCovarianceSpectralCore dataSet extension tests} →
-  R294.SubgapGeometricRateSemantics core →
-  SourceNativeSubgapGeometricRateSemantics core
-fromHalfSpecificSemantics old = record
-  { fastAmplitude = R294.fastAmplitude old
-  ; fastRatio =
-      -- Keep the existing canonical ratio only in this compatibility adapter.
-      Data.Rational.Base._/_ (Data.Integer.Base.+ 1) 2
-  ; subgapAmplitude = R294.subgapAmplitude old
-  ; subgapRatio = R294.subgapRatio old
-  ; fastAmplitudeNonnegative = R294.fastAmplitudeNonnegative old
-  ; fastRatioNonnegative = Data.Rational.Properties.≤-refl
-  ; subgapAmplitudePositive = R294.subgapAmplitudePositive old
-  ; positiveSubgapHasSlowerRatio = R294.positiveSubgapHasSlowerRatio old
-  ; subgapRatioStrictlyBelowOne = R294.subgapRatioStrictlyBelowOne old
-  ; clusteringEnvelopeIsSourceNativeGeometric =
-      R294.clusteringEnvelopeIsFastGeometric old
-  ; subgapEnvelopeIsSlowGeometric = R294.subgapEnvelopeIsSlowGeometric old
-  }
-
-------------------------------------------------------------------------
 -- Pareto / authority boundary.
 ------------------------------------------------------------------------
 
@@ -294,4 +263,3 @@ clayPromotion : Bool
 clayPromotion = false
 
 clayPromotionIsFalse : clayPromotion ≡ false
-clayPromotionIsFalse = refl
