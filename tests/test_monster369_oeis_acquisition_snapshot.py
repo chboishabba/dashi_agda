@@ -39,6 +39,18 @@ def test_a025616_parent_lattice_contains_90_729_65610_196830():
     assert relation["same_object_paid"] is False
 
 
+def test_42d_snapshot_retains_17496_eta_product_bridge_candidate():
+    runtime = load_runtime()
+    node = runtime.SEQUENCES["A058678"]
+
+    assert node["class_label"] == "42d"
+    assert 17496 in node["selected_values"]
+    assert "eta(q^3)" in node["formula"]
+    relation = runtime.RELATIONS["42d-17496-to-n3b-restriction"]
+    assert relation["paid"] is True
+    assert relation["same_object_paid"] is False
+
+
 def test_6b_normalization_family_retains_q6_32772_across_three_manifests():
     runtime = load_runtime()
 
@@ -69,6 +81,7 @@ def test_snapshot_keeps_positive_bridge_signal_separate_from_proof_authority():
     assert report["positive_bridge_candidates"]["a005052-heisenberg-ladder"] is True
     assert report["positive_bridge_candidates"]["a025616-parent-lattice"] is True
     assert report["positive_bridge_candidates"]["6b-q6-to-c6-spectrum-32772"] is True
+    assert report["positive_bridge_candidates"]["17496-42d-to-n3b-restriction"] is True
     assert report["authority"]["oeis_snapshot_creates_same_object"] is False
     assert report["authority"]["oeis_snapshot_creates_monster_action"] is False
     assert report["authority"]["positive_bridge_signal_creates_theorem"] is False
