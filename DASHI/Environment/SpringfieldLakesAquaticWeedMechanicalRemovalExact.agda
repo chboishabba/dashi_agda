@@ -87,17 +87,6 @@ vistulaHarvesterReceipt = springfieldMechanicalRemovalReceipt
   true
 
 ------------------------------------------------------------------------
--- Repository easter egg.
---
--- The address is source-bound. The pop-culture wordplay is not a source claim,
--- scientific datum, quantitative equipment property, or efficacy statement.
-------------------------------------------------------------------------
-
-overNineThousandSpiderEasterEgg : String
-overNineThousandSpiderEasterEgg =
-  "You can view the spider at 9000 Viewpoint Drive: the spider is OVER 9000. WHAT? 9000? That's impossible!"
-
-------------------------------------------------------------------------
 -- Species-transfer and outcome boundaries.
 ------------------------------------------------------------------------
 
@@ -127,10 +116,6 @@ record SpringfieldMechanicalRemovalBoundary : Set where
     removalMassAloneProvesNetEcosystemBenefitIsFalse :
       removalMassAloneProvesNetEcosystemBenefit ≡ false
 
-    easterEggCreatesScientificEvidence : Bool
-    easterEggCreatesScientificEvidenceIsFalse :
-      easterEggCreatesScientificEvidence ≡ false
-
 canonicalSpringfieldMechanicalRemovalBoundary : SpringfieldMechanicalRemovalBoundary
 canonicalSpringfieldMechanicalRemovalBoundary = springfieldMechanicalRemovalBoundary
   true refl
@@ -139,8 +124,33 @@ canonicalSpringfieldMechanicalRemovalBoundary = springfieldMechanicalRemovalBoun
   true refl
   true refl
   false refl
-  false refl
 
 operationalReading : String
 operationalReading =
-  "Springfield Lakes supplies a local, source-paid example that mechanical weed removal has equipment/access geometry: spider excavator for a steep hard-to-access pond and aquatic weed harvester for a dense surface mat. Because the reported weed is salvinia, this is an operational analogue for the biocontrol biomass-fate experiment, not water-hyacinth efficacy evidence."
+  "Springfield Lakes supplies a local, source-paid example that mechanical weed removal has equipment/access geometry: spider excavator for a steep hard-to-access pond and aquatic weed harvester for a dense surface mat.  Because the reported weed is salvinia, this is an operational analogue for the biocontrol biomass-fate experiment, not water-hyacinth efficacy evidence."
+
+------------------------------------------------------------------------
+-- Repository easter egg only.
+--
+-- This is intentionally outside every empirical/proof receipt above.  The
+-- address is source-paid; the joke is Johl/DASHI commentary and carries no
+-- evidentiary, ecological, metrological, or deployment meaning.
+------------------------------------------------------------------------
+
+over9000ViewpointSpiderJoke : String
+over9000ViewpointSpiderJoke =
+  "You can view the spider at 9000 Viewpoint Drive: the spider is OVER 9000. WHAT? 9000? That's impossible!"
+
+record SpiderJokeAttributionBoundary : Set where
+  constructor spiderJokeAttributionBoundary
+  field
+    jokeIsSourceClaim : Bool
+    jokeIsSourceClaimIsFalse : jokeIsSourceClaim ≡ false
+    jokeCreatesScientificEvidence : Bool
+    jokeCreatesScientificEvidenceIsFalse : jokeCreatesScientificEvidence ≡ false
+    addressRemainsSourceBound : Bool
+    addressRemainsSourceBoundIsTrue : addressRemainsSourceBound ≡ true
+
+canonicalSpiderJokeAttributionBoundary : SpiderJokeAttributionBoundary
+canonicalSpiderJokeAttributionBoundary =
+  spiderJokeAttributionBoundary false refl false refl true refl
