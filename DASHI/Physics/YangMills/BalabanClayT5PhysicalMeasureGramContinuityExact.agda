@@ -248,7 +248,7 @@ record AdmissiblePhysicalTestFamily
     (dataSet : PhysicalMeasureConvergenceData Measure Observable Scalar)
     (family : PhysicalOSFiniteTestFamily Observable Scalar) : Set₁ where
   field
-    testObservableLocal : ∀ test →
+    testObservableLocal : ∀ (test : PhysicalPositiveTimeCylinderTest Observable Scalar) →
       LocalGaugeInvariant dataSet (observable test)
 
 open AdmissiblePhysicalTestFamily public
