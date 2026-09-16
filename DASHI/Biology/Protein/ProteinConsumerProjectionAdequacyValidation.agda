@@ -22,6 +22,10 @@ rateTopologyDefectRetained : Bool
 rateTopologyDefectRetained =
   Portfolio.ProteinConsumerProjectionBoundary.topologyProjectionInadequateForRate boundary
 
+thiolCysteinePresenceDefectRetained : Bool
+thiolCysteinePresenceDefectRetained =
+  Portfolio.ProteinConsumerProjectionBoundary.cysteinePresenceProjectionInadequateForModification boundary
+
 thermalRepairRetained : Bool
 thermalRepairRetained =
   Portfolio.ProteinConsumerProjectionBoundary.residueAwareThermalRepairRetained boundary
@@ -33,6 +37,14 @@ conformationRepairRetained =
 rateRepairRetained : Bool
 rateRepairRetained =
   Portfolio.ProteinConsumerProjectionBoundary.rateCoordinateRepairRetained boundary
+
+thiolRepairRetained : Bool
+thiolRepairRetained =
+  Portfolio.ProteinConsumerProjectionBoundary.accessibilityAwareModificationRepairRetained boundary
+
+thirdProteinSystemRetained : Bool
+thirdProteinSystemRetained =
+  Portfolio.ProteinConsumerProjectionBoundary.thirdIndependentProteinSystemRetained boundary
 
 sourceRolesRemainDistinct : Bool
 sourceRolesRemainDistinct =
