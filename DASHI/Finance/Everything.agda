@@ -44,6 +44,16 @@ import DASHI.Finance.TrumpFamilyTradeIndependentCorroborationValidation
 import DASHI.Finance.TrumpPortfolioManagementAttributionValidation
 import DASHI.Finance.TrumpFamilyTradeSourceQualityValidation
 
+-- Additional exact row-level acquisition and cross-domain theorems. These add
+-- missing 278-T/13D propositions and prove that exact source evidence remains
+-- orthogonal to PNF information cuts, strategic-identification state, and
+-- situated dashiTRADE actionability.
+import DASHI.Finance.TrumpFamilyTradeSourceAtlas2026SupplementExact
+import DASHI.Finance.TrumpFamilyTradePNFChronologyExact
+import DASHI.Finance.TrumpFamilyTradeSituatedActionabilityExact
+import DASHI.Finance.TrumpFamilyTradeStrategicIdentificationExact
+import DASHI.Finance.TrumpFamilyTradePNFTradeIntegrationValidation
+
 -- Canonical trading-control semantics. Earlier BAN/action experiments remain
 -- in the branch as historical development artifacts but are deliberately not
 -- imported by this aggregate.
