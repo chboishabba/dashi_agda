@@ -16,3 +16,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObservableId
 -- observation surface distinct from the three-CV landscape coordinates without
 -- promoting RMSD to an independent or universally required consumer coordinate.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDObservableSetAcquisitionExact
+
+-- Machine-readable Figure-5 qualitative free-energy relations: gamma is the
+-- relative-energy reference; alpha/beta/gamma are reported as an energy-valley
+-- near-level set; red/dashed routes retain favorable/alternative source roles.
+-- No qualitative relation is promoted to a missing per-state Delta-G numeral.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigure5QualitativeFreeEnergyAcquisitionExact
