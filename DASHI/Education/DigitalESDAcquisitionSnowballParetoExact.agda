@@ -90,6 +90,32 @@ oecdDigitalLearningImpactSource =
     "Literature-review source for access-to-technology not guaranteeing educational gain and for the continuing pedagogical implementation dependency."
     Attr.publicAttribution
 
+pinzoneEducationLCASource : Attr.AttributedSource
+pinzoneEducationLCASource =
+  Attr.mkDOISource
+    "Marta Pinzone; Damiano Sarti; Luca Amodeo"
+    "What is the environmental impact of digitally enhanced education? Findings from a life cycle assessment of educational scenarios at an Italian university"
+    "The International Journal of Life Cycle Assessment"
+    "2026"
+    "10.1007/s11367-026-02656-7"
+    "https://doi.org/10.1007/s11367-026-02656-7"
+    Attr.academicArticleSource
+    "Education-scenario LCA benchmark comparing face-to-face, hybrid and online higher-education scenarios; pays a contextual lifecycle-method/evidence benchmark but not the same-object footprint or universal superiority of any digital-ESD intervention."
+    Attr.publicAttribution
+
+descampsDigitalSobrietySource : Attr.AttributedSource
+descampsDigitalSobrietySource =
+  Attr.mkDOISource
+    "Sarah Descamps; Gaetan Temperman; Bruno De Lievre"
+    "Effects of two scenario approaches for digital sobriety education among higher education students"
+    "International Journal of Educational Technology in Higher Education"
+    "2025"
+    "10.1186/s41239-025-00569-3"
+    "https://doi.org/10.1186/s41239-025-00569-3"
+    Attr.academicArticleSource
+    "Experimental digital-sobriety education source and reflexive-sustainability comparator: digital technology can be an environmental object of inquiry, not merely a tool used to teach environmental content; does not establish a universal pedagogy or infrastructure result."
+    Attr.publicAttribution
+
 ieaEnergyAISource : Attr.AttributedSource
 ieaEnergyAISource =
   Attr.mkNoDOISource
@@ -149,13 +175,15 @@ canonicalDigitalESDAcquisitionSourceAtlas =
     ∷ unescoGEMTechnologySource
     ∷ unescoYouthTechnologySource
     ∷ oecdDigitalLearningImpactSource
+    ∷ pinzoneEducationLCASource
+    ∷ descampsDigitalSobrietySource
     ∷ ieaEnergyAISource
     ∷ ieaKeyQuestionsEnergyAISource
     ∷ ituGlobalEwasteSource
     ∷ unescoSixPillarsSource
     ∷ []
     )
-    "Exact call antecedents plus pedagogical, learner-centred and infrastructure sustainability context. Source identity and source role remain non-promoting; general energy/e-waste evidence is explicitly not an education-specific intervention footprint."
+    "Exact call antecedents plus pedagogical, learner-centred, education-LCA, digital-sobriety and infrastructure sustainability context. Source identity and role remain non-promoting; contextual benchmarks do not become a same-object intervention footprint or universal rule."
 
 ------------------------------------------------------------------------
 -- Source-role snowball receipts. These reuse the canonical owner directly.
@@ -175,6 +203,16 @@ oecdSourceRoleReceipt :
   Snowball.SourceRoleSnowballReceipt oecdDigitalLearningImpactSource
 oecdSourceRoleReceipt =
   Snowball.canonicalSourceRoleSnowballReceipt oecdDigitalLearningImpactSource
+
+pinzoneSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt pinzoneEducationLCASource
+pinzoneSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt pinzoneEducationLCASource
+
+descampsSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt descampsDigitalSobrietySource
+descampsSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt descampsDigitalSobrietySource
 
 ieaSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt ieaEnergyAISource
 ieaSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt ieaEnergyAISource
@@ -202,6 +240,12 @@ record DigitalESDAcquisitionAtlas : Set where
     learnerCentredInstitutionalSourcePaid : Bool
     learnerCentredInstitutionalSourcePaidIsTrue :
       learnerCentredInstitutionalSourcePaid ≡ true
+    educationScenarioLCABenchmarkPaid : Bool
+    educationScenarioLCABenchmarkPaidIsTrue :
+      educationScenarioLCABenchmarkPaid ≡ true
+    digitalSobrietyPedagogySourcePaid : Bool
+    digitalSobrietyPedagogySourcePaidIsTrue :
+      digitalSobrietyPedagogySourcePaid ≡ true
     generalDataCentreEnergyContextPaid : Bool
     generalDataCentreEnergyContextPaidIsTrue :
       generalDataCentreEnergyContextPaid ≡ true
@@ -236,6 +280,8 @@ canonicalDigitalESDAcquisitionAtlas =
     true refl
     true refl
     true refl
+    true refl
+    true refl
     false refl
     false refl
     true refl
@@ -247,6 +293,18 @@ data CitationPromotesDigitalESDConclusion : Set where
 citationDoesNotPromoteDigitalESDConclusion :
   CitationPromotesDigitalESDConclusion → ⊥
 citationDoesNotPromoteDigitalESDConclusion ()
+
+data TeachingSustainabilityWithTechnologyPromotesSustainabilityOfTechnology : Set where
+
+teachingSustainabilityWithTechnologyDoesNotPromoteSustainabilityOfTechnology :
+  TeachingSustainabilityWithTechnologyPromotesSustainabilityOfTechnology → ⊥
+teachingSustainabilityWithTechnologyDoesNotPromoteSustainabilityOfTechnology ()
+
+data OneEducationLCAEstablishesUniversalOnlineSuperiority : Set where
+
+oneEducationLCADoesNotEstablishUniversalOnlineSuperiority :
+  OneEducationLCAEstablishesUniversalOnlineSuperiority → ⊥
+oneEducationLCADoesNotEstablishUniversalOnlineSuperiority ()
 
 ------------------------------------------------------------------------
 -- Bidi acquisition leaves: evidence -> bounded claim; consumer -> reopen debt.
@@ -269,7 +327,7 @@ leafReference pedagogicalNonSufficiencyContext =
 leafReference genericInfrastructureExternalityContext =
   "IEA energy/AI + ITU e-waste + UNESCO lifecycle/TCO planning context"
 leafReference educationSpecificLifecycleMeasurement =
-  "measured device/network/cloud/data-centre lifecycle inventory for the actual education intervention or governed deployment class"
+  "Pinzone/Sarti/Amodeo education-scenario LCA benchmark plus still-unpaid same-object device/network/cloud/data-centre lifecycle inventory for the actual intervention"
 leafReference longitudinalInterventionImpact =
   "longitudinal educational, inclusion, institutional and sustainability outcomes beyond short-term engagement/learning"
 leafReference esdParticipantGovernanceTransfer =
@@ -312,9 +370,9 @@ lifecycleMeasurementBidi : AcquisitionBidiReceipt
 lifecycleMeasurementBidi =
   acquisition-bidi-receipt
     educationSpecificLifecycleMeasurement
-    "current IEA/ITU/UNESCO sources establish general infrastructure/resource/lifecycle relevance only"
-    "digital education has material/energy/e-waste/TCO coordinates that remain relevant to sustainability assessment"
-    "any intervention-specific environmental-impact claim must reopen this leaf until actual device/network/cloud procurement, use, replacement, electricity and end-of-life carriers are measured or otherwise source-paid"
+    "Pinzone/Sarti/Amodeo pays a standardized higher-education scenario-LCA benchmark; IEA/ITU/UNESCO pay broader energy/e-waste/TCO context"
+    "digital education has measurable material, transport, electricity, device, streaming/recording and AI-sensitive lifecycle coordinates whose relative importance depends on scenario and context"
+    "the proposed Alice/digital-ESD intervention remains unpaid as a same-object lifecycle object; reopen before turning benchmark scenario results into its footprint or into universal online-vs-face-to-face superiority"
     true true true true false false
 
 longitudinalImpactBidi : AcquisitionBidiReceipt
@@ -439,7 +497,8 @@ frontierView =
     "retain multiple non-dominated acquisition leaves; execution order is consumer-relative"
 
 -- Paid antecedent/context leaves remain in provenance history but are removed
--- from the live unpaid frontier.
+-- from the live unpaid frontier. The LCA benchmark reduces conceptual/method
+-- debt but does not pay the same-object intervention lifecycle leaf.
 currentAcquisitionFrontier : List AcquisitionLeaf
 currentAcquisitionFrontier =
   educationSpecificLifecycleMeasurement
@@ -462,6 +521,8 @@ record SnowballParetoBoundary : Set where
     citationCreatesAuthority : Bool
     genericInfrastructureEvidenceEqualsEducationInterventionLCA : Bool
     consultationEqualsConstitutiveParticipantAuthority : Bool
+    oneScenarioLCAEstablishesUniversalOrdering : Bool
+    sustainabilityTeachingImpliesSustainableTechnology : Bool
     paretoRequiresScalarScore : Bool
     lowestAcquisitionEffortAutomaticallyWins : Bool
     paidLeafMustStayOnUnpaidFrontier : Bool
@@ -473,8 +534,8 @@ open SnowballParetoBoundary public
 canonicalSnowballParetoBoundary : SnowballParetoBoundary
 canonicalSnowballParetoBoundary =
   snowball-pareto-boundary
-    false false false false false false false false true true
+    false false false false false false false false false false true true
 
 currentHighestAlphaReading : String
 currentHighestAlphaReading =
-  "Exact Special-Issue antecedents and general pedagogical/infrastructure context are paid as source-role/same-object history. The first live acquisition target is education-specific lifecycle measurement because current IEA/ITU/UNESCO infrastructure evidence cannot identify the footprint of a particular digital-education intervention. Longitudinal impact, ESD-specific participant-governance transfer, and openness/interoperability durability remain parallel non-dominated debts."
+  "Exact Special-Issue antecedents and general pedagogical/infrastructure context are paid. An education-scenario LCA benchmark and a digital-sobriety pedagogy source are now also paid as contextual source-role evidence. The first live target remains the same-object lifecycle measurement for the proposed/governed digital-ESD intervention: a benchmark scenario cannot pay that identity. Longitudinal impact, ESD-specific participant-governance transfer, and openness/interoperability durability remain parallel non-dominated debts."
