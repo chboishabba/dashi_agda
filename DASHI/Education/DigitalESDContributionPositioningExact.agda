@@ -3,6 +3,7 @@ module DASHI.Education.DigitalESDContributionPositioningExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -14,20 +15,23 @@ import DASHI.Education.DigitalESDParticipantGovernanceContextTransferExact as Go
 import DASHI.Education.DigitalESDManuscriptDependencyPaymentAdapterExact as Payment
 
 ------------------------------------------------------------------------
--- CONTRIBUTION POSITIONING AGAINST A CLOSE ANTECEDENT
+-- CONTRIBUTION POSITIONING AGAINST CLOSE ANTECEDENTS
 --
--- This is a thin attribution/comparison adapter, not a novelty oracle. Chugh's
--- 2026 sustainability-paradox paper pays a close antecedent for the reverse
--- claim that digital education itself has environmental/social sustainability
--- costs and should be governed with lifecycle/procurement/circularity thinking.
---
--- The adapter records which current manuscript coordinates are not supplied by
--- that one antecedent. It does NOT conclude that those differences are globally
--- novel; that remains contingent on the completed structured search/screening.
+-- This is a thin attribution/comparison adapter, not a novelty oracle.
+-- Chugh pays the reverse sustainability-paradox antecedent. Böhme pays a still
+-- closer conceptual antecedent for mutually coupled sustainability/digitality
+-- as a twin transformation in education. These findings contract the candidate
+-- contribution rather than being ignored or treated as proof of duplication.
 ------------------------------------------------------------------------
 
-closeAntecedent : Attr.AttributedSource
-closeAntecedent = Scholarly.chughSustainabilityParadoxSource
+reverseSustainabilityAntecedent : Attr.AttributedSource
+reverseSustainabilityAntecedent = Scholarly.chughSustainabilityParadoxSource
+
+twinTransformationAntecedent : Attr.AttributedSource
+twinTransformationAntecedent = Scholarly.boehmeDigitainabilitySource
+
+closeAntecedents : List Attr.AttributedSource
+closeAntecedents = reverseSustainabilityAntecedent ∷ twinTransformationAntecedent ∷ []
 
 reciprocalFrameworkRetained = Braid.canonicalDigitalESDReciprocalBraid
 methodologyRetained = Method.canonicalMethodologyBoundary
@@ -36,7 +40,7 @@ paymentDependencyRetained = Payment.canonicalManuscriptDependencyPaymentBoundary
 
 data ContributionCoordinate : Set where
   reverseSustainabilityParadox : ContributionCoordinate
-  reciprocalESDCapacityIntegration : ContributionCoordinate
+  twinTransformationIntegration : ContributionCoordinate
   adoptionPerformanceTransformationSeparation : ContributionCoordinate
   sourceRoleSameObjectPaymentDiscipline : ContributionCoordinate
   participantAuthorityContextTransfer : ContributionCoordinate
@@ -44,19 +48,27 @@ data ContributionCoordinate : Set where
 
 chughPaysCoordinate : ContributionCoordinate → Bool
 chughPaysCoordinate reverseSustainabilityParadox = true
-chughPaysCoordinate reciprocalESDCapacityIntegration = false
+chughPaysCoordinate twinTransformationIntegration = false
 chughPaysCoordinate adoptionPerformanceTransformationSeparation = false
 chughPaysCoordinate sourceRoleSameObjectPaymentDiscipline = false
 chughPaysCoordinate participantAuthorityContextTransfer = false
 chughPaysCoordinate dependencyAwareSearchSynthesisLineage = false
 
+boehmePaysCoordinate : ContributionCoordinate → Bool
+boehmePaysCoordinate reverseSustainabilityParadox = false
+boehmePaysCoordinate twinTransformationIntegration = true
+boehmePaysCoordinate adoptionPerformanceTransformationSeparation = false
+boehmePaysCoordinate sourceRoleSameObjectPaymentDiscipline = false
+boehmePaysCoordinate participantAuthorityContextTransfer = false
+boehmePaysCoordinate dependencyAwareSearchSynthesisLineage = false
+
 coordinateReference : ContributionCoordinate → String
 coordinateReference reverseSustainabilityParadox =
   "digital education creates environmental/social sustainability tensions and should be addressed with lifecycle/procurement/circularity thinking"
-coordinateReference reciprocalESDCapacityIntegration =
-  "one framework jointly asks how digital education builds ESD capacity and how sustainability constrains digital education itself"
+coordinateReference twinTransformationIntegration =
+  "sustainability/ESD and digitality are treated as mutually coupled educational transformations rather than adjacent agendas"
 coordinateReference adoptionPerformanceTransformationSeparation =
-  "typed separation of technology adoption, task performance/learning and institutional/system transformation"
+  "typed separation of technology adoption, implementation activity, input integration, task performance/learning and institutional/system transformation"
 coordinateReference sourceRoleSameObjectPaymentDiscipline =
   "source role, scope, same-object status and unpaid residuals retained through evidence payment"
 coordinateReference participantAuthorityContextTransfer =
@@ -69,36 +81,51 @@ data FormalDifferenceAutomaticallyCreatesPublicationNovelty : Set where
 data OneAntecedentExhaustsNoveltySearch : Set where
 data CitationCountDeterminesNovelty : Set where
 
-closeAntecedentDoesNotAutomaticallyMakeDuplicate :
-  CloseAntecedentAutomaticallyMakesDuplicate → ⊥
+data TwinTransformationAntecedentLeavesNoDistinctEvidenceArchitecture : Set where
+
+closeAntecedentDoesNotAutomaticallyMakeDuplicate : CloseAntecedentAutomaticallyMakesDuplicate → ⊥
 closeAntecedentDoesNotAutomaticallyMakeDuplicate ()
 
-formalDifferenceDoesNotAutomaticallyCreatePublicationNovelty :
-  FormalDifferenceAutomaticallyCreatesPublicationNovelty → ⊥
+formalDifferenceDoesNotAutomaticallyCreatePublicationNovelty : FormalDifferenceAutomaticallyCreatesPublicationNovelty → ⊥
 formalDifferenceDoesNotAutomaticallyCreatePublicationNovelty ()
 
-oneAntecedentDoesNotExhaustNoveltySearch :
-  OneAntecedentExhaustsNoveltySearch → ⊥
+oneAntecedentDoesNotExhaustNoveltySearch : OneAntecedentExhaustsNoveltySearch → ⊥
 oneAntecedentDoesNotExhaustNoveltySearch ()
 
 citationCountDoesNotDetermineNovelty : CitationCountDeterminesNovelty → ⊥
 citationCountDoesNotDetermineNovelty ()
+
+twinTransformationAntecedentDoesNotEraseEvidenceArchitecture :
+  TwinTransformationAntecedentLeavesNoDistinctEvidenceArchitecture → ⊥
+twinTransformationAntecedentDoesNotEraseEvidenceArchitecture ()
 
 record ContributionPositionBoundary : Set where
   constructor contribution-position-boundary
   field
     reverseSustainabilityAntecedentPaid : Bool
     reverseSustainabilityAntecedentPaidIsTrue : reverseSustainabilityAntecedentPaid ≡ true
+
+    twinTransformationAntecedentPaid : Bool
+    twinTransformationAntecedentPaidIsTrue : twinTransformationAntecedentPaid ≡ true
+
     chughPaysReciprocalESDCapacityIntegration : Bool
     chughPaysReciprocalESDCapacityIntegrationIsFalse : chughPaysReciprocalESDCapacityIntegration ≡ false
-    chughPaysSameObjectPaymentDiscipline : Bool
-    chughPaysSameObjectPaymentDisciplineIsFalse : chughPaysSameObjectPaymentDiscipline ≡ false
-    chughPaysParticipantAuthorityBoundary : Bool
-    chughPaysParticipantAuthorityBoundaryIsFalse : chughPaysParticipantAuthorityBoundary ≡ false
-    chughPaysDependencyAwareSearchSynthesisLineage : Bool
-    chughPaysDependencyAwareSearchSynthesisLineageIsFalse : chughPaysDependencyAwareSearchSynthesisLineage ≡ false
-    closeAntecedentRetainedAndCited : Bool
-    closeAntecedentRetainedAndCitedIsTrue : closeAntecedentRetainedAndCited ≡ true
+
+    boehmePaysTwinTransformationIntegration : Bool
+    boehmePaysTwinTransformationIntegrationIsTrue : boehmePaysTwinTransformationIntegration ≡ true
+
+    boehmePaysSameObjectPaymentDiscipline : Bool
+    boehmePaysSameObjectPaymentDisciplineIsFalse : boehmePaysSameObjectPaymentDiscipline ≡ false
+
+    closeAntecedentsPayParticipantAuthorityBoundary : Bool
+    closeAntecedentsPayParticipantAuthorityBoundaryIsFalse : closeAntecedentsPayParticipantAuthorityBoundary ≡ false
+
+    closeAntecedentsPayDependencyAwareSearchSynthesisLineage : Bool
+    closeAntecedentsPayDependencyAwareSearchSynthesisLineageIsFalse : closeAntecedentsPayDependencyAwareSearchSynthesisLineage ≡ false
+
+    closeAntecedentsRetainedAndCited : Bool
+    closeAntecedentsRetainedAndCitedIsTrue : closeAntecedentsRetainedAndCited ≡ true
+
     globalNoveltyClaimPaid : Bool
     globalNoveltyClaimPaidIsFalse : globalNoveltyClaimPaid ≡ false
 
@@ -107,7 +134,9 @@ open ContributionPositionBoundary public
 canonicalContributionPositionBoundary : ContributionPositionBoundary
 canonicalContributionPositionBoundary = contribution-position-boundary
   true refl
+  true refl
   false refl
+  true refl
   false refl
   false refl
   false refl
@@ -116,4 +145,4 @@ canonicalContributionPositionBoundary = contribution-position-boundary
 
 contributionPositionReading : String
 contributionPositionReading =
-  "Chugh (2026) is retained as a close conceptual antecedent for the sustainability-paradox/reverse-direction claim. The current manuscript should therefore avoid claiming novelty for the bare proposition that digital education itself must be sustainable. Its candidate distinctive synthesis instead lies in reciprocal integration with ESD-capacity mechanisms plus explicit adoption/performance/transformation separations, source-role/same-object payment discipline, participant-authority/context-transfer boundaries, and dependency-aware structured-search-to-synthesis lineage. These differences do not themselves establish global publication novelty; that claim remains unpaid until the declared search and positioning work is complete."
+  "Two close 2026 antecedents materially contract the candidate contribution. Chugh pays the sustainability-paradox/reverse-sustainability premise; Böhme's Digitainability Framework pays a mutually coupled sustainability/digitality twin-transformation premise in education. The manuscript should therefore claim neither of those ideas as novel in the bare form. Its remaining candidate distinction lies in the evidence architecture: explicit adoption/activity/input/performance/learning/transformation separations, source-role and same-object payment discipline, participant-authority/context-transfer obligations, lifecycle method-versus-deployment residuals, and dependency-aware structured-search-to-synthesis lineage. Those differences still do not establish global publication novelty; that remains unpaid until the declared search and positioning work is complete."
