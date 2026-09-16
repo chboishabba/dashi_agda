@@ -31,11 +31,13 @@ The claim-ceiling pilot now exercises the following evidence modes:
 6. Pinzone, Sarti & Amodeo — model-based education LCA with sensitivity/Monte Carlo uncertainty;
 7. Holst et al. — longitudinal input-level document monitoring;
 8. Fishlock et al. — mixed-method implementation pilot with multiple method-specific analysis Ns;
-9. Collado et al. — quasi-experimental one-year longitudinal association with unresolved same-object numeric extraction debt.
+9. Collado et al. — quasi-experimental one-year longitudinal association with unresolved same-object numeric extraction debt;
+10. Braßler — quasi-experimental two-group pre/post digital-competence study with source-reported partial-eta-squared effect sizes and unresolved analysis-N discrepancy;
+11. Deng, Sun, Ho & Lee — multi-region short-term sustainability-education program evaluation with n=1408, Cohen's dz and an explicit 95% CI for the paired mean gain.
 
 These are method-validation/pre-screen profiles only. They do not pay final eligibility or this manuscript's database search.
 
-## Attribution correction discovered by ingestion
+## Attribution corrections / normalisations discovered by ingestion
 
 The existing feature-branch source object for DOI `10.1007/s11367-026-02656-7` retained incorrect co-author given names. Publisher metadata identifies:
 
@@ -44,6 +46,8 @@ The existing feature-branch source object for DOI `10.1007/s11367-026-02656-7` r
 - Elisa Amodeo.
 
 `DigitalESDSourceAttributionCorrectionExact` now owns the corrected source object. The legacy source remains reachable only as correction provenance and must not seed new extraction.
+
+The existing OER/HESD object for DOI `10.3390/su16041674` used the ASCII transliteration `Mirjam Brassler`. Publisher metadata displays `Mirjam Braßler`. This is treated as an orthographic normalization of the same person/source identity rather than as a wrong-person attribution; new exact extraction uses the publisher spelling while the earlier source object remains provenance ancestry.
 
 The important rule is:
 
@@ -67,6 +71,27 @@ Same-object publisher material pays:
 It does not pay a standardized between-group effect size, educational-effect confidence interval, long-term persistence, universal transport, or system transformation.
 
 The profile ceiling is therefore a bounded contrast rather than a universal causal-effect claim.
+
+## Braßler effect-size pilot
+
+Same-object primary material pays:
+
+- two-group pretest-posttest quasi-experimental design;
+- reported study sample N=409, with 83 OER-production students and 326 same-cohort controls;
+- five-item Creative Internet Skills Scale with alpha=.84 at baseline and .88 post-course;
+- OER-group means 2.49 -> 3.42 and control means 2.22 -> 2.54;
+- Time main effect F(1,191)=59.7, p<0.001, partial eta-squared=.238;
+- Time×Group interaction F(1,191)=22.4, p<0.001, partial eta-squared=.105;
+- explicit source limitations covering quasi-experimental group equivalence, self-selection and subjective self-report measurement.
+
+The source does not explain in the visible primary Methods/Results why the inferential model reports denominator df=191 while the stated study sample is N=409. Therefore:
+
+```text
+study N = 409
+analysis N = unresolved
+```
+
+No analysis N is reverse-engineered from degrees of freedom. The source pays an effect magnitude but not an educational-effect confidence interval. Its ceiling is `derivesBoundedContrast`, not `attributesCausalEffect`.
 
 ## Pinzone lifecycle-model evidence
 
@@ -94,6 +119,34 @@ and the firewall:
 model 95% interval
 != same-object deployment measurement
 ```
+
+## Deng–Sun–Ho–Lee positive uncertainty path
+
+A new primary source was acquired specifically to exercise the positive `effect + uncertainty` path:
+
+- Wen-Jing Deng; Jiayue Sun; Wingkei Ho; John Chi-Kin Lee;
+- *Short-Term Knowledge Gains and Regional Heterogeneity in a STEM-Based Indoor Air Quality Education Intervention for Sustainability Across Asian Regions*;
+- Sustainability 18(14), 7165 (2026);
+- DOI `10.3390/su18147165`.
+
+Same-object source material pays:
+
+- n=1408 Grades 5-10 students across Sri Lanka, Nepal, Malaysia, Indonesia and Guangxi (China);
+- overall knowledge gain +9.25 points;
+- 95% CI [7.58, 10.92];
+- p=2.30e-26;
+- Cohen's dz=.289;
+- significant regional heterogeneity (ANOVA eta-squared=.070);
+- sensitivity analysis for post-test-zero records.
+
+But the design is a one-group pre/post program evaluation with no comparison group. Therefore the interval belongs to the observed paired mean-gain estimand, not to a counterfactual treatment effect.
+
+```text
+precise paired-gain CI
+!= causal treatment-effect CI
+```
+
+The source ceiling is `derivesBoundedContrast`. This acquisition demonstrates that the existing effect/uncertainty coordinates can represent a genuine CI without adding another schema dimension, provided the estimand and design interpretation remain attached.
 
 ## Holst input-monitoring ceiling
 
@@ -157,17 +210,27 @@ exact source
 -> do not generalize the repair beyond its demonstrated consumer need
 ```
 
-This pass produced one real schema extension (model-based environmental-impact claim kind), one deferred schema residual (multiple analysis Ns), one metadata correction, and one source-specific numeric acquisition debt. No generic proof-search calculus was added.
+This acquisition sequence produced:
+
+- one real schema extension: `modelBasedEnvironmentalImpactClaim`;
+- one deferred schema residual: multiple method-specific analysis Ns;
+- one metadata correction plus one publisher-orthography normalization;
+- two source-specific numeric acquisition debts: Collado's unresolved n/effect/CI details and Braßler's unresolved analysis denominator;
+- one positive effect-size path without a CI (Braßler);
+- one positive effect-size + 95% CI path whose causal ceiling remains blocked by the absence of a comparison group (Deng et al.).
+
+No generic proof-search calculus was added.
 
 ## Immediate acquisition frontier
 
 Highest-value next acquisitions are now:
 
 1. recover Collado full same-object methods/results to pay exact sample/retention/model/effect/CI coordinates;
-2. ingest another quantitative digital-ESD/ESD intervention that reports an actual effect magnitude plus uncertainty interval, to test the positive statistical path;
-3. ingest an institutional/government evaluation source where the analytic carrier is jurisdiction/document/system rather than participants;
-4. continue lifecycle/circularity acquisition only where it supplies deployment-relevant measurement or model assumptions not already represented;
-5. screen each acquired source before any promotion into final manuscript inclusion.
+2. recover/explain the Braßler N=409 versus F(1,191) inferential-denominator discrepancy from same-object supplementary/data material if available;
+3. ingest a controlled/randomized digital-ESD/ESD intervention that reports effect magnitude plus CI, so the causal-identification path can be tested without confusing precision with randomization/control;
+4. ingest an institutional/government evaluation source where the analytic carrier is jurisdiction/document/system rather than participants;
+5. continue lifecycle/circularity acquisition only where it supplies deployment-relevant measurement or model assumptions not already represented;
+6. screen each acquired source before any promotion into final manuscript inclusion.
 
 ## Verification status
 
