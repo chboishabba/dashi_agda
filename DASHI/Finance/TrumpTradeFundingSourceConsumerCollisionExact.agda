@@ -106,11 +106,6 @@ decisionMakerDiffersAcrossSameReportedTrade ()
 
 ------------------------------------------------------------------------
 -- Reopening receipt.
---
--- Funding/decision-maker information is exactly the residual needed to reopen
--- this toy quotient.  A source consumer may safely use the coarse transaction
--- for event-existence queries, but a funding-source or decision-maker consumer
--- must retain/acquire the residual rather than treating it as already known.
 ------------------------------------------------------------------------
 
 record TradeHiddenReceipt : Set where
@@ -170,7 +165,7 @@ canonicalConsumerAdequacyBoundary =
 data ReutersCryptoSynthesisSelectsFundingWorldPermission : Set where
 data FamilyBusinessIncomeSelectsFundingWorldPermission : Set where
 data FiledTradeSelectsDecisionMakerPermission : Set where
-\data CandidateWorldIsEmpiricalClaimPermission : Set where
+data CandidateWorldIsEmpiricalClaimPermission : Set where
 
 reutersSynthesisDoesNotSelectFundingWorld :
   ReutersCryptoSynthesisSelectsFundingWorldPermission → ⊥
