@@ -14,6 +14,7 @@ def _node(
     q0: int | None = None,
     positive_coefficients: dict[int, int] | None = None,
     selected_terms: dict[int, int] | None = None,
+    selected_values: set[int] | None = None,
     formula: str | None = None,
     authority: str,
     url: str,
@@ -26,6 +27,7 @@ def _node(
         "q0": q0,
         "positive_coefficients": positive_coefficients or {},
         "selected_terms": selected_terms or {},
+        "selected_values": selected_values or set(),
         "formula": formula,
         "authority": authority,
         "url": url,
@@ -45,6 +47,19 @@ SEQUENCES: dict[str, dict[str, object]] = {
         notes=(
             "Exact numerical ladder used for 90 -> 65610 -> 196830 discovery. "
             "Does not identify Monster carriers or representations."
+        ),
+    ),
+    "A025616": _node(
+        "A025616",
+        title="Numbers of form 3^i*10^j, with i,j >= 0",
+        selected_values={90, 729, 65610, 196830},
+        formula="3^i*10^j",
+        authority="numerical-navigation",
+        url="https://oeis.org/A025616",
+        notes=(
+            "Broader multiplicative parent lattice. The key Monster369 arithmetic "
+            "coordinates are 90=3^2*10, 729=3^6, 65610=3^8*10, "
+            "196830=3^9*10. Arithmetic structure only."
         ),
     ),
     "A007255": _node(
@@ -142,6 +157,15 @@ RELATIONS: dict[str, dict[str, object]] = {
         "paid": True,
         "same_object_paid": False,
     },
+    "a025616-parent-lattice": {
+        "sources": ["A025616", "A005052"],
+        "observed": (
+            "90=3^2*10, 729=3^6, 65610=3^8*10, 196830=3^9*10; "
+            "the 90*729=65610 lift is exponent addition (2,1)+(6,0)=(8,1)"
+        ),
+        "paid": True,
+        "same_object_paid": False,
+    },
     "6b-q6-to-c6-spectrum-32772": {
         "sources": ["A007255", "A045485", "A121665"],
         "observed": "normalization-stable q^6 coefficient 32772 equals independent C6 m1=m5=32772",
@@ -159,13 +183,14 @@ RELATIONS: dict[str, dict[str, object]] = {
 
 def build_report() -> dict[str, object]:
     return {
-        "schema": "monster369-oeis-acquisition-snapshot-v1",
+        "schema": "monster369-oeis-acquisition-snapshot-v2",
         "retrieved": RETRIEVED,
         "sequence_count": len(SEQUENCES),
         "sequences": SEQUENCES,
         "relations": RELATIONS,
         "positive_bridge_candidates": {
             "a005052-heisenberg-ladder": True,
+            "a025616-parent-lattice": True,
             "6b-q6-to-c6-spectrum-32772": True,
             "17496-42d-to-n3b-restriction": True,
         },
@@ -178,7 +203,16 @@ def build_report() -> dict[str, object]:
 
 
 def main() -> int:
-    print(json.dumps(build_report(), indent=2, sort_keys=True))
+    def normalize(value: object) -> object:
+        if isinstance(value, set):
+            return sorted(value)
+        if isinstance(value, dict):
+            return {key: normalize(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [normalize(item) for item in value]
+        return value
+
+    print(json.dumps(normalize(build_report()), indent=2, sort_keys=True))
     return 0
 
 
