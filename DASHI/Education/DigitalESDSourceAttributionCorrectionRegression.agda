@@ -21,3 +21,19 @@ legacyAttributionSupersededRegression :
     Correction.canonicalAttributionCorrectionBoundary
   ≡ false
 legacyAttributionSupersededRegression = refl
+
+brasslerPublisherSpellingRegression :
+  Attr.AttributedSource.sourceAuthor Correction.brasslerOERESDPublisherSpellingSource
+  ≡ "Mirjam Braßler"
+brasslerPublisherSpellingRegression = refl
+
+brasslerDOIRegression :
+  Attr.AttributedSource.doiState Correction.brasslerOERESDPublisherSpellingSource
+  ≡ Attr.doiRecorded "10.3390/su16041674"
+brasslerDOIRegression = refl
+
+brasslerASCIIAncestorRetainedRegression :
+  Correction.AttributionCorrectionBoundary.legacyBrasslerASCIIIdentityMayRemainAsAncestor
+    Correction.canonicalAttributionCorrectionBoundary
+  ≡ true
+brasslerASCIIAncestorRetainedRegression = refl
