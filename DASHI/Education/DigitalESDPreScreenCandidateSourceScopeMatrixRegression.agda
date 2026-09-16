@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDPreScreenCandidateSourceScopeMatrixExact as Matrix
 
-candidateCountRegression : Matrix.candidateSourceCount ≡ 18
+candidateCountRegression : Matrix.candidateSourceCount ≡ 19
 candidateCountRegression = refl
 
 allRowsRemainCandidateRegression : Matrix.SourceScopeMatrixBoundary.allRowsCandidateOnly Matrix.canonicalSourceScopeMatrixBoundary ≡ true
@@ -54,6 +54,9 @@ boehmeRemainsCandidateRegression = refl
 
 holstRemainsCandidateRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.holstSDG47MonitoringCandidate ≡ true
 holstRemainsCandidateRegression = refl
+
+martinezReviewRemainsCandidateRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.martinezDigitalEducationReviewCandidate ≡ true
+martinezReviewRemainsCandidateRegression = refl
 
 midtermRetainsGlobalProgrammeScopeRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.unescoMidtermCandidate ≡ true
 midtermRetainsGlobalProgrammeScopeRegression = refl
