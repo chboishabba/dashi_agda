@@ -23,8 +23,8 @@ import DASHI.Education.DigitalInnovationESDSourceAtlas as Call
 --   * same-object identity, source kind, relationship and visibility survive;
 --   * citation imports neither proof nor authority;
 --   * downstream payment may not silently skip an unpaid dependency;
---   * external infrastructure evidence remains scope-bounded and does not
---     become an education-intervention-specific lifecycle estimate.
+--   * contextual evidence can pay a coarse/source-role coordinate while a
+--     finer same-object/context-transfer/authority coordinate remains unpaid.
 ------------------------------------------------------------------------
 
 gianniniTwinTransitionSource : Attr.AttributedSource
@@ -116,6 +116,58 @@ descampsDigitalSobrietySource =
     "Experimental digital-sobriety education source and reflexive-sustainability comparator: digital technology can be an environmental object of inquiry, not merely a tool used to teach environmental content; does not establish a universal pedagogy or infrastructure result."
     Attr.publicAttribution
 
+fernandoTajanParticipatoryESDSource : Attr.AttributedSource
+fernandoTajanParticipatoryESDSource =
+  Attr.mkDOISource
+    "Alexa Ray R. Fernando; Gizelle P. Tajan"
+    "Education for sustainable development (ESD) through participatory research (PR): A systematic review"
+    "Journal of Cleaner Production 482, 144237"
+    "2024"
+    "10.1016/j.jclepro.2024.144237"
+    "https://doi.org/10.1016/j.jclepro.2024.144237"
+    Attr.academicArticleSource
+    "Systematic-review context for participatory ESD, local knowledge, collaborative knowledge co-generation and stakeholder involvement; does not by itself establish Alice Brown's stronger constitutive epistemic-agency stages or authority for a new participant population."
+    Attr.publicAttribution
+
+colladoLongitudinalESDSource : Attr.AttributedSource
+colladoLongitudinalESDSource =
+  Attr.mkDOISource
+    "Silvia Collado; Jose David Moreno; Jose Martin-Albo"
+    "Innovation for environmental sustainability: longitudinal effects of an education for sustainable development intervention on university students' pro-environmentalism"
+    "International Journal of Sustainability in Higher Education 23(6), 1277-1293"
+    "2022"
+    "10.1108/IJSHE-07-2021-0315"
+    "https://doi.org/10.1108/IJSHE-07-2021-0315"
+    Attr.academicArticleSource
+    "One-year longitudinal ESD intervention benchmark for pro-environmental knowledge, norms and self-reported behaviour; not a digital-ESD, infrastructure, institutional-lock-in or seven-generation result."
+    Attr.publicAttribution
+
+aksoyZawackiRichterOERSustainabilitySource : Attr.AttributedSource
+aksoyZawackiRichterOERSustainabilitySource =
+  Attr.mkDOISource
+    "Dilara Arzugul Aksoy; Olaf Zawacki-Richter"
+    "Factors affecting the sustainability of open educational resource initiatives in higher education: A systematic review"
+    "Review of Education 13(1), e70029"
+    "2025"
+    "10.1002/rev3.70029"
+    "https://doi.org/10.1002/rev3.70029"
+    Attr.academicArticleSource
+    "Systematic-review source for organisational and practice sustainability of OER initiatives across platform, creator, learner, material and institutional contexts; organisational durability does not pay material repairability, hardware longevity or infrastructure interoperability."
+    Attr.publicAttribution
+
+brasslerOERESDStudentProducerSource : Attr.AttributedSource
+brasslerOERESDStudentProducerSource =
+  Attr.mkDOISource
+    "Mirjam Brassler"
+    "Students' Digital Competence Development in the Production of Open Educational Resources in Education for Sustainable Development"
+    "Sustainability 16(4), 1674"
+    "2024"
+    "10.3390/su16041674"
+    "https://doi.org/10.3390/su16041674"
+    Attr.academicArticleSource
+    "Higher-education ESD/OER source in which students produce open resources and digital competence is evaluated; supports an open-practice/student-producer precedent, not constitutive authority, material sustainability or universal transfer."
+    Attr.publicAttribution
+
 ieaEnergyAISource : Attr.AttributedSource
 ieaEnergyAISource =
   Attr.mkNoDOISource
@@ -177,13 +229,17 @@ canonicalDigitalESDAcquisitionSourceAtlas =
     ∷ oecdDigitalLearningImpactSource
     ∷ pinzoneEducationLCASource
     ∷ descampsDigitalSobrietySource
+    ∷ fernandoTajanParticipatoryESDSource
+    ∷ colladoLongitudinalESDSource
+    ∷ aksoyZawackiRichterOERSustainabilitySource
+    ∷ brasslerOERESDStudentProducerSource
     ∷ ieaEnergyAISource
     ∷ ieaKeyQuestionsEnergyAISource
     ∷ ituGlobalEwasteSource
     ∷ unescoSixPillarsSource
     ∷ []
     )
-    "Exact call antecedents plus pedagogical, learner-centred, education-LCA, digital-sobriety and infrastructure sustainability context. Source identity and role remain non-promoting; contextual benchmarks do not become a same-object intervention footprint or universal rule."
+    "Exact call antecedents plus pedagogical, participatory, learner-centred, longitudinal, OER/open-practice, education-LCA, digital-sobriety and infrastructure sustainability context. Contextual payments retain scope and do not erase finer same-object, transfer, material or authority residuals."
 
 ------------------------------------------------------------------------
 -- Source-role snowball receipts. These reuse the canonical owner directly.
@@ -214,6 +270,26 @@ descampsSourceRoleReceipt :
 descampsSourceRoleReceipt =
   Snowball.canonicalSourceRoleSnowballReceipt descampsDigitalSobrietySource
 
+participatoryESDSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt fernandoTajanParticipatoryESDSource
+participatoryESDSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt fernandoTajanParticipatoryESDSource
+
+longitudinalESDSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt colladoLongitudinalESDSource
+longitudinalESDSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt colladoLongitudinalESDSource
+
+oerSustainabilitySourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt aksoyZawackiRichterOERSustainabilitySource
+oerSustainabilitySourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt aksoyZawackiRichterOERSustainabilitySource
+
+oerESDStudentProducerSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt brasslerOERESDStudentProducerSource
+oerESDStudentProducerSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt brasslerOERESDStudentProducerSource
+
 ieaSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt ieaEnergyAISource
 ieaSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt ieaEnergyAISource
 
@@ -221,7 +297,8 @@ ituSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt ituGlobalEwasteSource
 ituSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt ituGlobalEwasteSource
 
 ------------------------------------------------------------------------
--- Acquisition state.
+-- Acquisition state. Paid here means exactly the named contextual coordinate,
+-- never the stronger downstream consumer claim.
 ------------------------------------------------------------------------
 
 record DigitalESDAcquisitionAtlas : Set where
@@ -246,6 +323,18 @@ record DigitalESDAcquisitionAtlas : Set where
     digitalSobrietyPedagogySourcePaid : Bool
     digitalSobrietyPedagogySourcePaidIsTrue :
       digitalSobrietyPedagogySourcePaid ≡ true
+    participatoryESDResearchContextPaid : Bool
+    participatoryESDResearchContextPaidIsTrue :
+      participatoryESDResearchContextPaid ≡ true
+    longitudinalESDBenchmarkPaid : Bool
+    longitudinalESDBenchmarkPaidIsTrue :
+      longitudinalESDBenchmarkPaid ≡ true
+    oerOrganisationalSustainabilityReviewPaid : Bool
+    oerOrganisationalSustainabilityReviewPaidIsTrue :
+      oerOrganisationalSustainabilityReviewPaid ≡ true
+    oerESDStudentProducerEvidencePaid : Bool
+    oerESDStudentProducerEvidencePaidIsTrue :
+      oerESDStudentProducerEvidencePaid ≡ true
     generalDataCentreEnergyContextPaid : Bool
     generalDataCentreEnergyContextPaidIsTrue :
       generalDataCentreEnergyContextPaid ≡ true
@@ -282,6 +371,10 @@ canonicalDigitalESDAcquisitionAtlas =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     true refl
@@ -306,6 +399,24 @@ oneEducationLCADoesNotEstablishUniversalOnlineSuperiority :
   OneEducationLCAEstablishesUniversalOnlineSuperiority → ⊥
 oneEducationLCADoesNotEstablishUniversalOnlineSuperiority ()
 
+data ParticipatoryESDPromotesConstitutiveEpistemicAuthority : Set where
+
+participatoryESDDoesNotPromoteConstitutiveEpistemicAuthority :
+  ParticipatoryESDPromotesConstitutiveEpistemicAuthority → ⊥
+participatoryESDDoesNotPromoteConstitutiveEpistemicAuthority ()
+
+data OneYearESDResultPaysDigitalESDLongHorizonImpact : Set where
+
+oneYearESDResultDoesNotPayDigitalESDLongHorizonImpact :
+  OneYearESDResultPaysDigitalESDLongHorizonImpact → ⊥
+oneYearESDResultDoesNotPayDigitalESDLongHorizonImpact ()
+
+data OEROrganisationalSustainabilityPaysMaterialRepairability : Set where
+
+oerOrganisationalSustainabilityDoesNotPayMaterialRepairability :
+  OEROrganisationalSustainabilityPaysMaterialRepairability → ⊥
+oerOrganisationalSustainabilityDoesNotPayMaterialRepairability ()
+
 ------------------------------------------------------------------------
 -- Bidi acquisition leaves: evidence -> bounded claim; consumer -> reopen debt.
 ------------------------------------------------------------------------
@@ -329,11 +440,11 @@ leafReference genericInfrastructureExternalityContext =
 leafReference educationSpecificLifecycleMeasurement =
   "Pinzone/Sarti/Amodeo education-scenario LCA benchmark plus still-unpaid same-object device/network/cloud/data-centre lifecycle inventory for the actual intervention"
 leafReference longitudinalInterventionImpact =
-  "longitudinal educational, inclusion, institutional and sustainability outcomes beyond short-term engagement/learning"
+  "Collado/Moreno/Martin-Albo one-year ESD benchmark plus still-unpaid digital-ESD/institutional/long-horizon outcome carrier"
 leafReference esdParticipantGovernanceTransfer =
-  "context-generalised participant-agency/voice governance evidence specifically in ESD/digital-green settings"
+  "Fernando/Tajan participatory-ESD review plus still-unpaid context-generalised Alice constitutive-agency/authority transfer"
 leafReference openInteroperabilityDurability =
-  "evidence connecting openness/interoperability/repairability/reuse/maintenance to durable educational and sustainability outcomes"
+  "Aksoy/Zawacki-Richter OER organisational-sustainability review + Brassler student-producer OER/ESD precedent; material repairability/interoperability/lifecycle durability remains unpaid"
 
 data PaymentState : Set where
   unpaid : PaymentState
@@ -379,27 +490,27 @@ longitudinalImpactBidi : AcquisitionBidiReceipt
 longitudinalImpactBidi =
   acquisition-bidi-receipt
     longitudinalInterventionImpact
-    "call requests stronger evidence about outcomes, conditions, scalability, institutionalisation and longer-term impact"
-    "short-term engagement or learning measures cannot by themselves pay long-horizon transformative/sustainability claims"
-    "reopen longitudinal outcomes whenever a downstream claim exceeds the time horizon and consumer scope of its underlying study"
+    "Collado/Moreno/Martin-Albo pays a one-year ESD intervention/follow-up precedent; the Special Issue asks for longer-term digital/transformative conditions and impacts"
+    "longitudinal ESD effects are empirically measurable and can persist beyond an intervention in at least the studied context"
+    "reopen digital-ESD/institutional/long-horizon claims: one ESD intervention and one-year self-reported outcomes do not identify digital infrastructure durability, transfer, institutional memory, or future-option effects"
     true true true true false false
 
 participantGovernanceBidi : AcquisitionBidiReceipt
 participantGovernanceBidi =
   acquisition-bidi-receipt
     esdParticipantGovernanceTransfer
-    "UNESCO youth consultation plus canonical Alice Brown participant-agency machinery"
-    "learner-centred governance is a live ESD design coordinate, but constitutive agency must remain context- and source-specific"
-    "reopen context transfer before promoting Alice's Australian/regional education findings or UNESCO consultation framing into a universal ESD participant-authority theorem"
+    "Fernando/Tajan pays participatory-ESD/local-knowledge/stakeholder context; UNESCO youth consultation and canonical Alice Brown machinery remain separately attributed"
+    "participatory research and collaborative knowledge co-generation are established ESD practices in the reviewed literature"
+    "reopen context/authority transfer before promoting participation into Alice's question/coding/co-interpretation/co-design/evidence-return stages or assigning authority to a new population"
     true true true true false false
 
 openDurabilityBidi : AcquisitionBidiReceipt
 openDurabilityBidi =
   acquisition-bidi-receipt
     openInteroperabilityDurability
-    "current discussion raises openness as a possible sustainability mechanism"
-    "openness/interoperability/repairability may be acquisition targets but are not yet paid as a sustainability theorem"
-    "reopen this leaf before claiming source availability, interoperability, repairability, reuse or maintenance causes durable sustainability"
+    "Aksoy/Zawacki-Richter pays an OER initiative-sustainability review and Brassler pays a student-producer OER/HESD precedent"
+    "open-resource sustainability depends on multiple institutional/platform/creator/learner/material factors, and students can co-produce OERs in HESD"
+    "reopen before claiming source availability, licensing or OER organisational sustainability pays hardware repairability, interoperability, energy/material lifecycle durability or durable governance of the actual digital-ESD system"
     true true true true false false
 
 ------------------------------------------------------------------------
@@ -428,15 +539,15 @@ leafCost sourceDependencyDebt exactCallAntecedentIdentity = 0
 leafCost sourceDependencyDebt pedagogicalNonSufficiencyContext = 0
 leafCost sourceDependencyDebt genericInfrastructureExternalityContext = 0
 leafCost sourceDependencyDebt educationSpecificLifecycleMeasurement = 1
-leafCost sourceDependencyDebt longitudinalInterventionImpact = 2
+leafCost sourceDependencyDebt longitudinalInterventionImpact = 1
 leafCost sourceDependencyDebt esdParticipantGovernanceTransfer = 1
-leafCost sourceDependencyDebt openInteroperabilityDurability = 2
+leafCost sourceDependencyDebt openInteroperabilityDurability = 1
 
 leafCost consumerSpecificityDebt exactCallAntecedentIdentity = 1
 leafCost consumerSpecificityDebt pedagogicalNonSufficiencyContext = 1
 leafCost consumerSpecificityDebt genericInfrastructureExternalityContext = 3
 leafCost consumerSpecificityDebt educationSpecificLifecycleMeasurement = 0
-leafCost consumerSpecificityDebt longitudinalInterventionImpact = 0
+leafCost consumerSpecificityDebt longitudinalInterventionImpact = 1
 leafCost consumerSpecificityDebt esdParticipantGovernanceTransfer = 1
 leafCost consumerSpecificityDebt openInteroperabilityDurability = 2
 
@@ -462,13 +573,13 @@ leafCost opportunityLoss genericInfrastructureExternalityContext = 2
 leafCost opportunityLoss educationSpecificLifecycleMeasurement = 0
 leafCost opportunityLoss longitudinalInterventionImpact = 1
 leafCost opportunityLoss esdParticipantGovernanceTransfer = 1
-leafCost opportunityLoss openInteroperabilityDurability = 3
+leafCost opportunityLoss openInteroperabilityDurability = 2
 
 leafCost acquisitionEffort exactCallAntecedentIdentity = 0
 leafCost acquisitionEffort pedagogicalNonSufficiencyContext = 0
 leafCost acquisitionEffort genericInfrastructureExternalityContext = 0
 leafCost acquisitionEffort educationSpecificLifecycleMeasurement = 3
-leafCost acquisitionEffort longitudinalInterventionImpact = 4
+leafCost acquisitionEffort longitudinalInterventionImpact = 3
 leafCost acquisitionEffort esdParticipantGovernanceTransfer = 2
 leafCost acquisitionEffort openInteroperabilityDurability = 2
 
@@ -496,9 +607,8 @@ frontierView =
     true
     "retain multiple non-dominated acquisition leaves; execution order is consumer-relative"
 
--- Paid antecedent/context leaves remain in provenance history but are removed
--- from the live unpaid frontier. The LCA benchmark reduces conceptual/method
--- debt but does not pay the same-object intervention lifecycle leaf.
+-- Coarse/contextual payments remain in provenance history while the finer
+-- same-object/context-transfer/material-authority residuals stay live.
 currentAcquisitionFrontier : List AcquisitionLeaf
 currentAcquisitionFrontier =
   educationSpecificLifecycleMeasurement
@@ -523,6 +633,9 @@ record SnowballParetoBoundary : Set where
     consultationEqualsConstitutiveParticipantAuthority : Bool
     oneScenarioLCAEstablishesUniversalOrdering : Bool
     sustainabilityTeachingImpliesSustainableTechnology : Bool
+    participatoryContextCreatesParticipantAuthority : Bool
+    oneYearESDClosesDigitalLongHorizonImpact : Bool
+    oerOrganisationalDurabilityEqualsMaterialDurability : Bool
     paretoRequiresScalarScore : Bool
     lowestAcquisitionEffortAutomaticallyWins : Bool
     paidLeafMustStayOnUnpaidFrontier : Bool
@@ -534,8 +647,8 @@ open SnowballParetoBoundary public
 canonicalSnowballParetoBoundary : SnowballParetoBoundary
 canonicalSnowballParetoBoundary =
   snowball-pareto-boundary
-    false false false false false false false false false false true true
+    false false false false false false false false false false false false false true true
 
 currentHighestAlphaReading : String
 currentHighestAlphaReading =
-  "Exact Special-Issue antecedents and general pedagogical/infrastructure context are paid. An education-scenario LCA benchmark and a digital-sobriety pedagogy source are now also paid as contextual source-role evidence. The first live target remains the same-object lifecycle measurement for the proposed/governed digital-ESD intervention: a benchmark scenario cannot pay that identity. Longitudinal impact, ESD-specific participant-governance transfer, and openness/interoperability durability remain parallel non-dominated debts."
+  "Exact call antecedents, pedagogical context, participatory-ESD context, a one-year ESD longitudinal benchmark, OER organisational-sustainability review, student-producer OER/HESD precedent, education-scenario LCA benchmark, digital-sobriety pedagogy, and general infrastructure context are now source-role paid. The live frontier intentionally remains four finer residuals: same-object intervention lifecycle measurement; digital-ESD/institutional long-horizon impact; context-generalised constitutive participant governance; and material/interoperability/repairability durability. Context acquisition reduces debt without silently paying these stronger consumers."
