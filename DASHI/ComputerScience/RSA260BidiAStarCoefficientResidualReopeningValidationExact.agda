@@ -1,0 +1,15 @@
+module DASHI.ComputerScience.RSA260BidiAStarCoefficientResidualReopeningValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiAStarCoefficientResidualReopeningExact as Reopening
+
+geometry : Reopening.GeneratorCoefficientReopening
+geometry = Reopening.generatorCoefficientReopening
+
+coarseCollisionNeedsResidual : Reopening.GeneratorFineSensitiveConsumer
+coarseCollisionNeedsResidual = Reopening.generatorFineSensitiveConsumer
+
+boundary : Reopening.CoefficientResidualReopeningBoundary
+boundary = Reopening.canonicalCoefficientResidualReopeningBoundary
+
+firstResidual : Reopening.CoefficientResidualReopeningResidual
+firstResidual = Reopening.firstCoefficientResidualReopeningResidual

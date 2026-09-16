@@ -1,0 +1,11 @@
+module DASHI.ComputerScience.RSA260BidiMksolStyleConsumerCollisionValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.ComputerScience.RSA260BidiMksolStyleConsumerCollisionExact as C
+
+boundary : C.MksolStyleConsumerCollisionBoundary
+boundary = C.canonicalMksolStyleConsumerCollisionBoundary
+
+firstResidual : C.MksolStyleConsumerCollisionResidual
+firstResidual = C.firstMksolStyleConsumerCollisionResidual

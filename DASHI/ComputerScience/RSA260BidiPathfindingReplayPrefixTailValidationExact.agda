@@ -1,0 +1,12 @@
+module DASHI.ComputerScience.RSA260BidiPathfindingReplayPrefixTailValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiPathfindingReplayPrefixTailExact as Bridge
+
+boundary : Bridge.PathfindingReplayPrefixTailBoundary
+boundary = Bridge.canonicalPathfindingReplayPrefixTailBoundary
+
+factorisation : Bridge.GeneratorReplayPullFactorisation
+factorisation = Bridge.generatorReplayPullFactorisation
+
+firstResidual : Bridge.PathfindingReplayPrefixTailResidual
+firstResidual = Bridge.firstPathfindingReplayPrefixTailResidual

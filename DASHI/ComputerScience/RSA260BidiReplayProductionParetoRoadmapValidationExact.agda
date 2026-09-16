@@ -1,0 +1,15 @@
+module DASHI.ComputerScience.RSA260BidiReplayProductionParetoRoadmapValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiReplayProductionParetoRoadmapExact as Roadmap
+
+boundary : Roadmap.ReplayProductionParetoBoundary
+boundary = Roadmap.canonicalReplayProductionParetoBoundary
+
+syntheticTarget : Roadmap.SyntheticReplayTarget
+syntheticTarget = Roadmap.firstSyntheticReplayTarget
+
+productionTarget : Roadmap.ProductionTarget
+productionTarget = Roadmap.firstProductionTarget
+
+globalTarget : Roadmap.GlobalParetoTarget
+globalTarget = Roadmap.firstGlobalParetoTarget

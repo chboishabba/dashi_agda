@@ -1,0 +1,14 @@
+module DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeStressValidationExact where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Analysis.RiemannG2PhaseSensitiveRuntimeStressExact as Stress
+
+boundary : Stress.PhaseSensitiveRuntimeStressBoundary
+boundary = Stress.canonicalPhaseSensitiveRuntimeStressBoundary
+
+runtime : Stress.PhaseSensitiveRuntimeStressReceipt
+runtime = Stress.currentPhaseSensitiveRuntimeStressReceipt
+
+firstResidual : Stress.PhaseSensitiveRuntimeStressResidual
+firstResidual = Stress.firstPhaseSensitiveRuntimeStressResidual

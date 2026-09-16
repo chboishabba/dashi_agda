@@ -1,0 +1,6 @@
+module DASHI.Core.ConsumerIndexedResidualLocalizationValidationExact where
+
+import DASHI.Core.ConsumerIndexedResidualLocalizationExact as Localization
+
+boundary : Localization.ConsumerIndexedResidualLocalizationBoundary
+boundary = Localization.canonicalConsumerIndexedResidualLocalizationBoundary

@@ -1,0 +1,9 @@
+module DASHI.ComputerScience.RSA260BidiRawRankCrossValidationAcquisitionValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiRawRankCrossValidationAcquisitionExact as Acquisition
+
+boundary : Acquisition.RawRankCrossValidationAcquisitionBoundary
+boundary = Acquisition.canonicalRawRankCrossValidationAcquisitionBoundary
+
+firstResidual : Acquisition.RawRankCrossValidationAcquisitionResidual
+firstResidual = Acquisition.firstRawRankCrossValidationAcquisitionResidual

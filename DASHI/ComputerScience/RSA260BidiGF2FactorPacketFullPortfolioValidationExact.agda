@@ -1,0 +1,15 @@
+module DASHI.ComputerScience.RSA260BidiGF2FactorPacketFullPortfolioValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiGF2FactorPacketFullPortfolioExact as Portfolio
+
+layerCount : Portfolio.compiledFactorLayerCount ≡ 28
+layerCount = Portfolio.compiledFactorLayerCountIsTwentyEight
+
+rowCount : Portfolio.compiledRowCount ≡ 224
+rowCount = Portfolio.compiledRowCountIsTwoHundredTwentyFour
+
+boundary : Portfolio.GF2FactorPacketFullPortfolioBoundary
+boundary = Portfolio.canonicalGF2FactorPacketFullPortfolioBoundary
+
+firstResidual : Portfolio.GF2FactorPacketFullPortfolioResidual
+firstResidual = Portfolio.firstGF2FactorPacketFullPortfolioResidual
