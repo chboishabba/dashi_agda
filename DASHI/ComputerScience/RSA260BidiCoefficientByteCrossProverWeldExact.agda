@@ -15,9 +15,13 @@ import DASHI.ComputerScience.RSA260BidiSyntheticCrossProverObjectWeldExact as Ob
 -- bytes, with a pinned SHA-256.  dashi_lean4 independently exposes a canonical
 -- 136-byte serializer for its 17 x 8 x 8 finite GF(2) coefficient fixture.
 --
--- This puts both producers on one finite representation carrier.  Source
--- agreement and an intended common convention are not promoted into a Lean
--- kernel theorem or cross-prover same-object equality here.
+-- A dashiRTX crosscheck source now pins the exact Lean fixture commit and the
+-- exact runtime producer commit and compares those 136 bytes.  That checker is
+-- source-written here, but no execution receipt for the exact committed checker
+-- is promoted by this owner.
+--
+-- Source agreement and an intended common convention are not a Lean kernel
+-- theorem or production same-object identity.
 ------------------------------------------------------------------------
 
 objectBoundary : Objects.SyntheticCrossProverObjectWeldBoundary
@@ -34,6 +38,10 @@ record CoefficientByteSourceReceipt : Set where
     runtimeByteCount : Nat
     runtimeRowBytesSHA256 : String
     runtimeRowBytesHex : String
+    runtimeCrosscheckRegressionPath : String
+    runtimeCrosscheckPath : String
+    runtimeCrosscheckRedCommit : String
+    runtimeCrosscheckSourceCommit : String
 
     leanRepository : String
     leanBranch : String
@@ -56,7 +64,11 @@ currentCoefficientByteSourceReceipt =
     "test_rsa260_bidi_mksol_action_binding.py"
     136
     "2545d4185bffa89562aebf7405a1db81443a7d49f64aeb83dc564a940ce13e79"
-    "000000000000000048480048484848488d5e681991b956ba9ecf127bd9c3402f149d07f109827ffc74c77c54eb2f0ff73e86c7e4655b2423764903ed69d18482a77a93909d8940e8aa606979f949c0233bf6207175d6e49ec94f905edb01a69a9a2b6a0ca90a1f6ee740e77e71033f36b1a922f45c7d6582ad213da4146ada00005300000000000000"
+    "000000000000000048480048484848488d5e681991b956ba9ecf127bd9c3402f149d07f109827ffc74c77c54eb2f0ff73e86c7e4655b2423764903ed69d18482a77a93909d8940e8aa606979f949c0233bf6207175d6e49ec94f905edb01a69a2b6a0ca90a1f6ee740e77e71033f36b1a922f45c7d6582ad213da4146ada00005300000000000000"
+    "test_rsa260_bidi_lean_coefficient_fixture_crosscheck.py"
+    "rsa260_bidi_lean_coefficient_fixture_crosscheck.py"
+    "2d80de8901ca8e3e79279bd59ae8eb88ccf8068d"
+    "bcb4aba313ce6def6e2c79f47116a7f1ce9236ac"
     "chboishabba/dashi_lean4"
     "agent/rsa-consumer-kernel-bypass"
     "1e3542098a6a644a6d0916d4286d33e8b92f366b"
@@ -73,7 +85,6 @@ currentCoefficientByteSourceReceipt =
 
 data SourceByteConventionCreatesKernelEquality : Set where
 data ByteEqualityCreatesProductionGeneratorIdentity : Set where
-
 data RuntimeHashCreatesLeanKernelReceipt : Set where
 
 sourceByteConventionDoesNotCreateKernelEquality :
@@ -94,12 +105,14 @@ record CoefficientByteCrossProverWeldBoundary : Set where
     runtimeCoefficientByteCountIs136 : Bool
     runtimeCoefficientBytesHashRetained : Bool
     runtimeCoefficientByteRegressionWritten : Bool
+    pinnedFiniteCrosscheckSourceWritten : Bool
 
     leanCoefficientFixtureSourceWritten : Bool
     leanCanonical136ByteSerializerSourceWritten : Bool
     leanByteRegressionWritten : Bool
     commonRowMajorConventionRecorded : Bool
 
+    exactCommittedCrosscheckExecuted : Bool
     leanKernelReceiptObserved : Bool
     leanSerializerEvaluatedToRuntimeBytes : Bool
     runtimeCoefficientBytesBoundToLeanBytes : Bool
@@ -116,8 +129,8 @@ canonicalCoefficientByteCrossProverWeldBoundary :
   CoefficientByteCrossProverWeldBoundary
 canonicalCoefficientByteCrossProverWeldBoundary =
   coefficient-byte-cross-prover-weld-boundary
+    true true true true true
     true true true true
-    true true true true
-    false false false false false false
+    false false false false false false false
     false false
-    "kernel-check/evaluate the Lean 136-byte serializer and compare its complete output with the pinned dashiRTX coefficient bytes.  If equal, promote only the synthetic runtime-F ↔ Lean-F representation weld, then use the already-assembled Lean baseline action to attack the runtime-action equality.  Production CADO generator identity remains separate."
+    "execute the exact committed dashiRTX finite crosscheck and obtain a Lean kernel receipt for the 136-byte serializer.  Only then promote the synthetic runtime-F ↔ Lean-F representation weld.  Next, compare the already-assembled Lean baseline action against the hash-bound runtime action; production CADO generator identity remains separate."
