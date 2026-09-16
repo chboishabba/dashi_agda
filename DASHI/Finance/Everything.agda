@@ -35,6 +35,16 @@ import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressExact
 import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressRound3Exact
 import DASHI.Finance.TrumpFamilyTradeSourceQualityExact
 import DASHI.Finance.TrumpFamilyTradeSourceQualityRound3Exact
+
+-- Round-four acquisition: exact Eric-ABTC transaction mechanisms, narrow
+-- independent corroboration, and policy/market source triangulation.  These
+-- strengthen documentary support without promoting timing/ownership into
+-- knowledge, influence, causation, illegality, or trading permission.
+import DASHI.Finance.TrumpFamilyTradeSourceQualityRound4Exact
+import DASHI.Finance.TrumpFamilyPolicyMarketSourceAtlasExact
+import DASHI.Finance.TrumpFamilyPolicyMarketPNFBridgeExact
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressRound4Exact
+
 import DASHI.Finance.TrumpFamilyTradeSourceStackExact
 import DASHI.Finance.TrumpFamilyTradeEvidenceValidation
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Validation
@@ -43,6 +53,8 @@ import DASHI.Finance.TrumpFamilyTradePrimarySourceRound4Validation
 import DASHI.Finance.TrumpFamilyTradeIndependentCorroborationValidation
 import DASHI.Finance.TrumpPortfolioManagementAttributionValidation
 import DASHI.Finance.TrumpFamilyTradeSourceQualityValidation
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressRound4Validation
+import DASHI.Finance.TrumpFamilyPolicyMarketAcquisitionValidation
 
 -- Additional exact row-level acquisition and cross-domain theorems. These add
 -- missing 278-T/13D propositions and prove that exact source evidence remains
