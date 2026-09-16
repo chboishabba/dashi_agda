@@ -51,6 +51,21 @@ def test_42d_snapshot_retains_17496_eta_product_bridge_candidate():
     assert relation["same_object_paid"] is False
 
 
+def test_42_class_eta_family_retains_native_14_and_42_levels():
+    runtime = load_runtime()
+
+    assert runtime.SEQUENCES["A058674"]["class_label"] == "42D"
+    assert "eta(q^14)" in runtime.SEQUENCES["A058674"]["formula"]
+    assert "eta(q^42)" in runtime.SEQUENCES["A058674"]["formula"]
+    assert runtime.SEQUENCES["A058676"]["class_label"] == "42b"
+    assert runtime.SEQUENCES["A058677"]["class_label"] == "42c"
+    assert runtime.SEQUENCES["A058678"]["class_label"] == "42d"
+    relation = runtime.RELATIONS["42-class-eta-level-family"]
+    assert relation["paid"] is True
+    assert relation["levels"] == {3, 7, 14, 21, 42}
+    assert relation["fifteen_minus_one_explanation_paid"] is False
+
+
 def test_42d_five_mode_phase_probe_realizes_15_14_42_without_authority_promotion():
     runtime = load_runtime()
     probe = runtime.build_42d_five_mode_phase_probe()
@@ -100,6 +115,7 @@ def test_snapshot_keeps_positive_bridge_signal_separate_from_proof_authority():
     assert report["positive_bridge_candidates"]["6b-q6-to-c6-spectrum-32772"] is True
     assert report["positive_bridge_candidates"]["17496-42d-to-n3b-restriction"] is True
     assert report["positive_bridge_candidates"]["42d-five-mode-phase-carrier"] is True
+    assert report["positive_bridge_candidates"]["42-class-eta-level-family"] is True
     assert report["authority"]["oeis_snapshot_creates_same_object"] is False
     assert report["authority"]["oeis_snapshot_creates_monster_action"] is False
     assert report["authority"]["positive_bridge_signal_creates_theorem"] is False
