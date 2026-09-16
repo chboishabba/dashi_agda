@@ -62,7 +62,7 @@ grep -q '^longitudinalResidualRegression :' "$REGRESSION"
 grep -q '^openDurabilityResidualRegression :' "$REGRESSION"
 grep -q '^frontierStillRetainsResidualsRegression :' "$REGRESSION"
 
-# Refined ICT lifecycle / circularity method child.  Methods may pay method
+# Refined ICT lifecycle / circularity method child. Methods may pay method
 # coordinates, but the parent's same-object durability/lifecycle residual stays
 # unpaid until intervention-specific evidence exists.
 grep -q 'ITU-T L.1410 (11/2024)' "$ICT_OWNER"
@@ -85,10 +85,16 @@ grep -q '^refinedSameObjectLifecycleResidualRegression :' "$ICT_REGRESSION"
 grep -q '^refinedHardwareCircularityResidualRegression :' "$ICT_REGRESSION"
 
 # Citation-resistant residuals route to evidence/authority producers instead of
-# being 'paid' by further bibliography.
+# being 'paid' by further bibliography. The domain adapter must reuse the
+# canonical RequirementProducerSchedulerExact rather than invent a planner.
+grep -q 'import DASHI.Core.RequirementProducerSchedulerExact as CoreScheduler' "$SCHEDULER"
 grep -q '^producerForAcquisitionLeaf :' "$SCHEDULER"
 grep -q '^requiredProducersForAcquisitionLeaf :' "$SCHEDULER"
 grep -q '^producerForRefinedLifecycle :' "$SCHEDULER"
+grep -q '^digitalESDAcquisitionRequirementSystem :' "$SCHEDULER"
+grep -q '^lifecycleInventoryMissingReceipt :' "$SCHEDULER"
+grep -q '^lifecycleInventoryScheduledProducer :' "$SCHEDULER"
+grep -q '^producerIdentityStillDoesNotCloseRequirement :' "$SCHEDULER"
 grep -q '^currentProducerFrontier :' "$SCHEDULER"
 grep -q '^externalCitationDoesNotPaySameObjectLCI :' "$SCHEDULER"
 grep -q '^priorStudyDoesNotPayFutureLongitudinalOutcome :' "$SCHEDULER"
@@ -104,6 +110,10 @@ grep -q '^longitudinalProducerRegression :' "$SCHEDULER_REGRESSION"
 grep -q '^participantGovernanceProducerRegression :' "$SCHEDULER_REGRESSION"
 grep -q '^schedulerRetainsAttributionRegression :' "$SCHEDULER_REGRESSION"
 grep -q '^schedulerForbidsSkippedDependencyRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^canonicalSchedulerReuseRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^lifecycleInventoryMissingRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^canonicalScheduledLCIProducerRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^canonicalSchedulerBoundaryRegression :' "$SCHEDULER_REGRESSION"
 
 if command -v nix >/dev/null 2>&1 && [[ -x scripts/run_agda29_parallel_check.sh ]]; then
   scripts/run_agda29_parallel_check.sh "$SCHEDULER_REGRESSION"
