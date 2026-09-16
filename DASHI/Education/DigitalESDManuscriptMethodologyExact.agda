@@ -17,6 +17,7 @@ import DASHI.Education.DigitalESDPrimarySourceMethodologyAtlasExact as Primary
 import DASHI.Education.DigitalInnovationESDTransformationExact as Transformation
 import DASHI.Education.DigitalESDEducationSustainabilityLiteratureMapExact as Literature
 import DASHI.Education.DigitalESDParticipantGovernanceContextTransferExact as Governance
+import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact as Derivation
 
 currentPaperType : Paper.PaperType
 currentPaperType = Paper.currentPaperType
@@ -64,6 +65,9 @@ structuredSearchLedger : Search.StructuredSearchLedger
 structuredSearchLedger = Search.canonicalStructuredSearchLedger
 
 manuscriptDependencyGraph = Payment.canonicalManuscriptDependencyGraph
+
+principleDerivationBoundary : Derivation.PrincipleDerivationBoundary
+principleDerivationBoundary = Derivation.canonicalPrincipleDerivationBoundary
 
 data EvidenceRole : Set where
   empiricalOutcomeEvidence : EvidenceRole
@@ -263,4 +267,4 @@ canonicalMethodologyBoundary : MethodologyBoundary
 canonicalMethodologyBoundary = methodology-boundary true refl true refl true refl true refl true refl true refl false refl false refl false refl false refl false refl
 
 methodologyReading : String
-methodologyReading = "This manuscript is an integrative conceptual review with a transparent structured search, not a systematic review and not an empirical intervention study. Search execution, eligibility, extraction and synthesis remain distinct receipts. Sources are extracted with role, population/context, time horizon, lifecycle/governance coordinates and explicit limitations. Regional implementation evaluations, adopted ministerial statements, consultation discussion papers and commissioned background papers remain distinct source roles. The reciprocal synthesis asks both how digital education can build ESD capacity and how sustainability should constrain digital education itself."
+methodologyReading = "This manuscript is an integrative conceptual review with a transparent structured search and an explicit candidate-principle derivation method. Candidate principles may be generated from the bounded source-attributed digital-education corpus before search closure, but the pre-search framework is not a review result and must be challenged/revised against the searched, screened and extracted corpus. Search execution, eligibility, extraction and synthesis remain distinct receipts. Sources are extracted with role, population/context, time horizon, lifecycle/governance coordinates and explicit limitations. Regional implementation evaluations, adopted ministerial statements, consultation discussion papers and commissioned background papers remain distinct source roles."
