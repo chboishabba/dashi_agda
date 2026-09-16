@@ -44,6 +44,7 @@ on:
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_five_orbit_d4_n3b_screen.g'
+      - 'scripts/monster_3b_five_orbit_d4_n3b_receipt_summary.py'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
       - 'scripts/monster_3b_suzuki_main_quotient_match.g'
       - 'scripts/monster_3b_inertia_phase_resolution.g'
@@ -58,6 +59,7 @@ on:
       - 'scripts/check_monster_3b_suzuki_main_quotient_match.sh'
       - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
       - 'tests/test_monster_3b_five_orbit_d4_n3b_screen.py'
+      - 'tests/test_monster_3b_five_orbit_d4_n3b_receipt_summary.py'
       - 'tests/test_monster_3b_five_orbit_d4_n3b_ci_contract.py'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
@@ -105,6 +107,7 @@ on:
       - 'scripts/monster_3b_normalizer_restriction.g'
       - 'scripts/monster_3b_actual_kernel_structure.g'
       - 'scripts/monster_3b_five_orbit_d4_n3b_screen.g'
+      - 'scripts/monster_3b_five_orbit_d4_n3b_receipt_summary.py'
       - 'scripts/monster_3b_suzuki_multiplicity_characters.g'
       - 'scripts/monster_3b_suzuki_main_quotient_match.g'
       - 'scripts/monster_3b_inertia_phase_resolution.g'
@@ -119,6 +122,7 @@ on:
       - 'scripts/check_monster_3b_suzuki_main_quotient_match.sh'
       - 'scripts/check_monster_3b_inertia_phase_resolution.sh'
       - 'tests/test_monster_3b_five_orbit_d4_n3b_screen.py'
+      - 'tests/test_monster_3b_five_orbit_d4_n3b_receipt_summary.py'
       - 'tests/test_monster_3b_five_orbit_d4_n3b_ci_contract.py'
       - 'Docs/support/reference/Monster3BActualKernelCharacterRound4.md'
       - '.github/workflows/monster-3b-actual-kernel-character-round4.yml'
@@ -232,6 +236,7 @@ jobs:
             build/monster_3b_actual_kernel_structure.json
             build/monster_3b_actual_kernel_character_certificate.json
             build/monster_3b_five_orbit_d4_n3b_screen.json
+            build/monster_3b_five_orbit_d4_n3b_summary.json
             build/monster_3b_suzuki_multiplicity_characters.json
             build/monster_3b_suzuki_main_quotient_match.json
             build/monster_3b_inertia_phase_resolution.json
