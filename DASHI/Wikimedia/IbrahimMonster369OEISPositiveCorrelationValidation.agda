@@ -25,6 +25,10 @@ fortyTwoCarrierRegression :
   P.fortyTwoCarrierBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 fortyTwoCarrierRegression = refl
 
+fortyTwoEtaFamilyRegression :
+  P.fortyTwoEtaFamilyBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
+fortyTwoEtaFamilyRegression = refl
+
 c6SpectrumSourceRegression :
   P.c6WeightTwoSpectrumBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 c6SpectrumSourceRegression = refl
