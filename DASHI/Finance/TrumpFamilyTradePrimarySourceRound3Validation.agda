@@ -7,3 +7,4 @@ module DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Validation where
 
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Exact
 import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressRound3Exact
+import DASHI.Finance.TrumpTradeFundingSourceConsumerCollisionExact
