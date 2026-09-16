@@ -7,3 +7,4 @@ import DASHI.Finance.TrumpFamilyTradeClaimIdentityPromotionExact
 import DASHI.Finance.TrumpFamilyTradeSourceGenealogyExact
 import DASHI.Finance.TrumpFamilyTradeEvidenceHealthExact
 import DASHI.Finance.TrumpSpaceXPrimaryAcquisitionExact
+import DASHI.Finance.TrumpSpaceXPropositionGenealogyExact
