@@ -10,8 +10,10 @@ ICT_OWNER=DASHI/Education/DigitalESDICTLifecycleCircularitySnowballExact.agda
 ICT_REGRESSION=DASHI/Education/DigitalESDICTLifecycleCircularitySnowballRegression.agda
 SCHEDULER=DASHI/Education/DigitalESDSameObjectAcquisitionSchedulerExact.agda
 SCHEDULER_REGRESSION=DASHI/Education/DigitalESDSameObjectAcquisitionSchedulerRegression.agda
+PARTICIPANT_OWNER=DASHI/Education/DigitalESDParticipantGovernanceContextTransferExact.agda
+PARTICIPANT_REGRESSION=DASHI/Education/DigitalESDParticipantGovernanceContextTransferRegression.agda
 
-for file in "$OWNER" "$REGRESSION" "$ICT_OWNER" "$ICT_REGRESSION" "$SCHEDULER" "$SCHEDULER_REGRESSION"; do
+for file in "$OWNER" "$REGRESSION" "$ICT_OWNER" "$ICT_REGRESSION" "$SCHEDULER" "$SCHEDULER_REGRESSION" "$PARTICIPANT_OWNER" "$PARTICIPANT_REGRESSION"; do
   [[ -f "$file" ]] || { echo "required acquisition-snowball source is missing: $file" >&2; exit 1; }
   if grep -nE '\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$' "$file"; then
     echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
@@ -129,11 +131,39 @@ grep -q '^inadmissibleCannotWinByShortCodeRegression :' "$SCHEDULER_REGRESSION"
 grep -q '^consumerInadequateCannotWinByShortCodeRegression :' "$SCHEDULER_REGRESSION"
 grep -q '^paretoAxesRemainApplicationDeclaredRegression :' "$SCHEDULER_REGRESSION"
 
+# Participant-governance/context-transfer refinement. The exact target context
+# indexes the participant-authority receipt; canonical Snowball attribution is
+# reused directly, and neither one-sided receipt may skip the other dependency.
+grep -q 'import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball' "$PARTICIPANT_OWNER"
+grep -q '^canonicalAttributionSnowballBoundaryRetained :' "$PARTICIPANT_OWNER"
+grep -q '^record ParticipantAuthorityReceipt (targetContext : String)' "$PARTICIPANT_OWNER"
+grep -q '^record ParticipantGovernanceContextTransferAdmission :' "$PARTICIPANT_OWNER"
+grep -q '^admitParticipantGovernanceContextTransfer :' "$PARTICIPANT_OWNER"
+grep -q '^literatureDoesNotCreateParticipantAuthority :' "$PARTICIPANT_OWNER"
+grep -q '^consentDoesNotCreateParticipantAuthority :' "$PARTICIPANT_OWNER"
+grep -q '^proceduralEthicsDoesNotCreateParticipantAuthority :' "$PARTICIPANT_OWNER"
+grep -q '^aliceCorpusDoesNotCreateLocalParticipantAuthority :' "$PARTICIPANT_OWNER"
+grep -q '^contextSimilarityDoesNotCreateGeneralisationReceipt :' "$PARTICIPANT_OWNER"
+grep -q '^paidContextReceiptDoesNotSkipAuthorityReceipt :' "$PARTICIPANT_OWNER"
+grep -q '^paidAuthorityReceiptDoesNotSkipContextReceipt :' "$PARTICIPANT_OWNER"
+grep -q '^canonicalParticipantGovernanceContextTransferBoundary :' "$PARTICIPANT_OWNER"
+grep -q '^conceptualReviewDoesNotRequireAuthorityRegression :' "$PARTICIPANT_REGRESSION"
+grep -q '^participantTransferRequiresContextRegression :' "$PARTICIPANT_REGRESSION"
+grep -q '^participantTransferRequiresAuthorityRegression :' "$PARTICIPANT_REGRESSION"
+grep -q '^admissionRequiresBothReceiptsRegression :' "$PARTICIPANT_REGRESSION"
+grep -q '^canonicalAttributionSnowballReuseRegression :' "$PARTICIPANT_REGRESSION"
+grep -q '^contextReceiptCannotSkipAuthorityRegression :' "$PARTICIPANT_REGRESSION"
+grep -q '^authorityReceiptCannotSkipContextRegression :' "$PARTICIPANT_REGRESSION"
+grep -q '^transferBoundaryCurrentReviewDoesNotInventStudyRegression :' "$PARTICIPANT_REGRESSION"
+grep -q '^transferBoundaryLabelsDASHISynthesisRegression :' "$PARTICIPANT_REGRESSION"
+
 if command -v nix >/dev/null 2>&1 && [[ -x scripts/run_agda29_parallel_check.sh ]]; then
+  scripts/run_agda29_parallel_check.sh "$PARTICIPANT_REGRESSION"
   scripts/run_agda29_parallel_check.sh "$SCHEDULER_REGRESSION"
   scripts/run_agda29_parallel_check.sh "$ICT_REGRESSION"
   scripts/run_agda29_parallel_check.sh "$REGRESSION"
 elif command -v agda >/dev/null 2>&1; then
+  agda -i . "$PARTICIPANT_REGRESSION"
   agda -i . "$SCHEDULER_REGRESSION"
   agda -i . "$ICT_REGRESSION"
   agda -i . "$REGRESSION"
