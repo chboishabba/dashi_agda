@@ -11,10 +11,12 @@ import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 ------------------------------------------------------------------------
 -- ADDITIONAL HETEROGENEOUS PILOT PROFILES
 --
--- These remain method-validation / pre-screen fixtures. They test two evidence
+-- These remain method-validation / pre-screen fixtures. They test evidence
 -- shapes that a participant-trial-centric schema can mishandle:
---   * a large longitudinal document-monitoring corpus; and
---   * a mixed-method pilot with distinct survey and focus-group analysis Ns.
+--   * a large longitudinal document-monitoring corpus;
+--   * a mixed-method pilot with distinct survey and focus-group analysis Ns;
+--   * a one-year quasi-experimental intervention whose accessible same-object
+--     source confirms design/comparator/time but not the exact sample numerics.
 ------------------------------------------------------------------------
 
 holstPilotProfile : Ceiling.StudyClaimProfile
@@ -97,9 +99,49 @@ fishlockPilotProfile = Ceiling.study-claim-profile
   "supports context-bounded implementation evidence that right-to-repair principles can be embedded in a first-year PBL design module and that responding students reported strong engagement/future intention; does not establish causal educational effectiveness, general prevalence or actual future repair behaviour"
   "small single-institution pilot; no control group; distinct survey/focus-group analysis populations; self-report intentions are not observed future behaviour; no long-term follow-up"
 
+colladoPilotProfile : Ceiling.StudyClaimProfile
+colladoPilotProfile = Ceiling.study-claim-profile
+  "collado-2022-longitudinal-esd-intervention"
+  Acquisition.colladoLongitudinalESDSource
+  "candidate quasi-experimental longitudinal association evidence"
+  "10.1108/IJSHE-07-2021-0315; publisher abstract/design; University of Zaragoza repository abstract"
+  "quasi-experimental ESD intervention comparing participating university students with a non-participating control group, with repeated measurement including a one-year follow-up"
+  (Ceiling.sourceReportedDesignUnmapped
+    "quasi-experimental longitudinal intervention"
+    "same-object accessible source material confirms quasi-experimental intervention/control design and one-year follow-up, but the exact allocation/sample numerics are not currently recovered here; do not promote to a stronger canonical design receipt without those details")
+  "university students in intervention and non-participation control groups; exact same-object sample counts remain acquisition debt in this pass"
+  (Ceiling.natNotReported "exact enrolled/group sample counts not recovered from currently accessible same-object publisher/repository text")
+  (Ceiling.natNotReported "exact analysed/follow-up n not recovered from currently accessible same-object source text")
+  "quasi-experimental participation condition; no random-allocation claim is imported"
+  "ESD-intervention participants compared with university students who did not participate"
+  "self-reported pro-environmental knowledge, personal environmental norm and pro-environmental behaviours measured immediately and again at one-year follow-up"
+  "longitudinal retention/attrition numerics remain unpaid in this pass because the accessible same-object abstract does not provide them"
+  "quasi-experimental comparison retains possible selection/confounding residuals; no randomization is inferred from the word experimental group"
+  "intervention exposure is the declared treatment; detailed fidelity receipt remains source-level debt until full methods are acquired"
+  "no multiplicity-adjustment receipt or exact model specification is promoted from abstract-level access"
+  (Ceiling.reported-surface Ceiling.notReported
+    "the accessible same-object abstract reports enhanced knowledge/norm/behaviour relative to control but does not expose exact effect magnitudes in the material acquired here"
+    "publisher/repository abstract"
+    "effect magnitude remains unpaid rather than reconstructed from figures hosted by a secondary platform")
+  (Ceiling.reported-surface Ceiling.notReported
+    "same-object accessible abstract confirms one-year persistence but exact CI endpoints/model uncertainty are not acquired in this pass"
+    "publisher/repository abstract"
+    "do not import 95% CI imagery from a secondary figure host as if it were a same-object numeric extraction")
+  "immediate post-intervention and one-year follow-up"
+  "university-student quasi-experimental context; population transport beyond the sampled institutional context remains unpaid"
+  (Ceiling.reportedEpistemicRole Design.informant
+    "students provide self-reported pro-environmental outcomes; participant reporting does not create causal identification or policy authority")
+  (Ceiling.implicationConeClaim Cone.associatesTreatmentAndOutcome)
+  "supports a bounded longitudinal association between participation in the ESD intervention and higher reported pro-environmental knowledge, personal norm and behaviour relative to the non-participation group, with reported persistence at one year; stronger causal and transport claims await full design/sample/model receipts"
+  "same-object design/time/comparator paid at abstract level; exact n, retention, model specification, effect magnitude and uncertainty remain acquisition debt; self-report outcomes and quasi-experimental allocation limit causal promotion"
+
 extensionProfiles : List Ceiling.StudyClaimProfile
-extensionProfiles = holstPilotProfile ∷ fishlockPilotProfile ∷ []
+extensionProfiles = holstPilotProfile ∷ fishlockPilotProfile ∷ colladoPilotProfile ∷ []
 
 multiAnalysisNResidual : String
 multiAnalysisNResidual =
   "Fishlock exposes a real extraction-shape residual: one study can have several method-specific analysis Ns. The current StudyClaimProfile retains one primary analysisN field, so this pilot keeps that field explicitly unresolved at study level while separately typing survey n=14 and focus-group n=5. Do not redesign the global schema unless additional admitted studies make a structured multi-analysis-N carrier a recurring consumer requirement."
+
+colladoAcquisitionResidual : String
+colladoAcquisitionResidual =
+  "Collado demonstrates the attribution rule operationally: same-object accessible material pays quasi-experimental comparator and one-year follow-up, but exact sample sizes, retention, model/effect estimates and uncertainty are still unpaid. Secondary-hosted figures or citing papers are not allowed to backfill those source-specific numerics."
