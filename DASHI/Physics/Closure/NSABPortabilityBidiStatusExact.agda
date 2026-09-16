@@ -91,10 +91,10 @@ coordinates =
     "Transport the local damped mixed-product identity to the whole-space Fourier convolution carrier; do not import the torus fixed-output enumeration as theorem authority."
     false
   ∷ ab-portability-coordinate
-    "#957 S2b2d1b signed coherent covariance"
-    "current local quantitative payment after the damped-tangent recut"
+    "#957 S2b2d1b signed coherent covariance / ordered-kernel payment"
+    "current local quantitative payment, sharpened to the signed ordered-kernel endpoint budget"
     unresolvedWholeSpaceTransport
-    "Determine a formulation of the signed coherent covariance/endpoint payment that survives replacing finite fixed-output sums by whole-space convolution fibres."
+    "Determine a formulation of the signed coherent covariance / ordered-kernel budget that survives replacing finite fixed-output sums by whole-space convolution fibres."
     false
   ∷ ab-portability-coordinate
     "R291/R573 signed Hermitian linearization"
@@ -134,6 +134,9 @@ d1aDampedTangentAnalyticCoreTracked = true
 d1bWholeSpaceTransportStillOpen : Bool
 d1bWholeSpaceTransportStillOpen = true
 
+d1bOrderedKernelCoordinateTracked : Bool
+d1bOrderedKernelCoordinateTracked = true
+
 wholeSpaceTransportObserved : Bool
 wholeSpaceTransportObserved = false
 
@@ -168,6 +171,10 @@ d1aDampedTangentAnalyticCoreTrackedIsTrue = refl
 d1bWholeSpaceTransportStillOpenIsTrue :
   d1bWholeSpaceTransportStillOpen ≡ true
 d1bWholeSpaceTransportStillOpenIsTrue = refl
+
+d1bOrderedKernelCoordinateTrackedIsTrue :
+  d1bOrderedKernelCoordinateTracked ≡ true
+d1bOrderedKernelCoordinateTrackedIsTrue = refl
 
 wholeSpaceTransportObservedIsFalse :
   wholeSpaceTransportObserved ≡ false
