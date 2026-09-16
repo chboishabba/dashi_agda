@@ -27,6 +27,7 @@ import DASHI.Physics.Closure.NSTriadKNLowCollarRemotePacketSplitRegression
 import DASHI.Physics.Closure.NSTriadKNTwoShellLowRemoteEuclideanGapRegression
 import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleRegression
 import DASHI.Physics.Closure.NSTriadKNLowRemoteSpectralDatumRound98Regression
+import DASHI.Physics.Closure.NSTriadKNCollarHeatNestedSameOutputWeldRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
@@ -35,9 +36,9 @@ import DASHI.Physics.Closure.NSTriadKNLowRemoteSpectralDatumRound98Regression
 -- the authoritative owners it imports. The canonical coordinator regression,
 -- thin S2b successor delta, explicit A/B portability audit, strict S0/S1/S2
 -- representation regressions, and the current S2b2 sign/no-go/collar/
--- three-region/gap/live-norm/low-remote-datum regressions are imported so the
--- current A/B routing and physical phase seams are checked by the same root
--- whenever it is actually kernel-run.
+-- three-region/gap/live-norm/low-remote-datum/collar-carrier regressions are
+-- imported so the current A/B routing and physical phase seams are checked by
+-- the same root whenever it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
@@ -45,10 +46,10 @@ import DASHI.Physics.Closure.NSTriadKNLowRemoteSpectralDatumRound98Regression
 -- packet realization, packet-complement antisymmetry, the adjacent-shell-gap
 -- no-go, exact collar/remote split, exact low/collar/remote flux identity,
 -- two-shell concrete frequency gap, rational live-norm transport, the literal
--- low/remote R98 datum and A/B portability classification may all be
--- source-written while concrete scalar FTC / integration authorities, collar
--- quantitative payment, initial ceiling and retained-viscosity payments remain
--- unobserved or open.
+-- low/remote R98 datum, the collar heat-nested same-output weld and A/B
+-- portability classification may all be source-written while concrete scalar
+-- FTC / integration authorities, the quantitative collar signed payment,
+-- initial ceiling and retained-viscosity payments remain unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
