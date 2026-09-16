@@ -1,0 +1,26 @@
+module DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionBandTransferRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionBandTransferExact as Subject
+
+literalBandTransferEmbeddingClosed :
+  Subject.literalCriticalProductionBandTransferEmbeddingClosed ≡ true
+literalBandTransferEmbeddingClosed =
+  Subject.literalCriticalProductionBandTransferEmbeddingClosedIsTrue
+
+weightedTransferMatchesLiteralProductionCarrier :
+  Subject.weightedTransferMatchesLiteralProductionCarrierClosed ≡ true
+weightedTransferMatchesLiteralProductionCarrier =
+  Subject.weightedTransferMatchesLiteralProductionCarrierClosedIsTrue
+
+radialSuffixRealizationStillOpen :
+  Subject.literalRadialSuffixRealizationClosed ≡ false
+radialSuffixRealizationStillOpen =
+  Subject.literalRadialSuffixRealizationClosedIsFalse
+
+quantitativeS2EstimateStillOpen :
+  Subject.s2QuantitativePacketFluxEstimateClosed ≡ false
+quantitativeS2EstimateStillOpen =
+  Subject.s2QuantitativePacketFluxEstimateClosedIsFalse

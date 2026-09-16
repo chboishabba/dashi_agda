@@ -5,26 +5,39 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Papers.NavierStokes.TheoremInterface as Paper
 import DASHI.Papers.NavierStokes.FourLaneProofProgramCoordinatorRegression
+import DASHI.Papers.NavierStokes.FourLaneProofProgramS2bBandTransferRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionProjectedPairingRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionBandTransferRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderRegression
+import DASHI.Physics.Closure.NSTriadKNSelectedPacketNonzeroCutoffBridgeRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellPacketSelectorRegression
+import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellCanonicalSuffixRegression
+import DASHI.Physics.Closure.NSTriadKNR104StrictShellJumpTailRegression
+import DASHI.Physics.Closure.NSTriadKNUpperShellPrefixErasureRegression
+import DASHI.Physics.Closure.NSTriadKNR104GlobalLayerCakePhysicalPacketWeldRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
--- the authoritative owners it imports. The coordinator regression plus the
--- strict S0/S1/S2a regressions are imported so the current A/B/C/D routing
--- state and first physical phase seams are checked by the same root whenever
--- it is actually kernel-run.
+-- the authoritative owners it imports. The canonical coordinator regression,
+-- thin S2b successor delta, and strict S0/S1/S2 representation regressions are
+-- imported so current A/B/C/D routing and physical phase seams are checked by
+-- the same root whenever it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
--- compiler and the S2a same-object production weld may be source-written while
--- concrete scalar FTC / integration authorities, the quantitative S2 payment,
--- initial ceiling and retained-viscosity payments remain unobserved or open.
+-- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1a radial
+-- ordering/permutation, reject-zero full->nonzero transport, upper-shell R98
+-- transport, canonical suffix realization, local strict-jump tails, prefix
+-- erasure, and the global R104 physical packet layer-cake weld may all be
+-- source-written while concrete scalar FTC / integration authorities, the
+-- quantitative S2 payment, initial ceiling and retained-viscosity payments
+-- remain unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
