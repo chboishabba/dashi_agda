@@ -1,0 +1,7 @@
+module DASHI.ComputerScience.RSA260BidiLeanKrylovFamilyActionBindingValidationExact where
+
+import DASHI.ComputerScience.RSA260BidiLeanKrylovFamilyActionBindingExact
+
+open DASHI.ComputerScience.RSA260BidiLeanKrylovFamilyActionBindingExact
+
+_ = canonicalLeanKrylovFamilyActionBindingBoundary
