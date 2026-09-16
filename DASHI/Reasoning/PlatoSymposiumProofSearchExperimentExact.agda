@@ -13,18 +13,10 @@ import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeExact as Plato
 
 ------------------------------------------------------------------------
 -- PLATO SYMPOSIUM x PROOF SEARCH / EXPERIMENT DESIGN
---
--- JMD's source-bounded Symposium formalisation supplies a fixture in which
--- distinct speeches, reported teachings and later questions retain tension and
--- alter what distinction becomes useful next.  DASHI already owns the generic
--- proof-search and sequential-experiment machinery.  This bridge therefore
--- introduces no planner and no proof-validity semantics.
---
--- New theorem-bearing content is limited to finite collisions showing that:
---   * current utterance alone does not determine the next useful probe;
---   * support count alone does not determine inquiry state;
---   * consensus status alone does not determine consumer-relevant resolution.
 ------------------------------------------------------------------------
+
+existingProofSearchOwnersReused : Bool
+existingProofSearchOwnersReused = true
 
 existingDialecticalSearchBoundary : DialecticalSearch.DialecticalSearchBoundary
 existingDialecticalSearchBoundary = DialecticalSearch.canonicalDialecticalSearchBoundary
@@ -66,10 +58,7 @@ currentUtteranceProjection sameClaimWithUnresolvedLineage = sameCurrentClaim
 NextProbeAnswerFor : NextProbeQuery → Set
 NextProbeAnswerFor nextUsefulProbeQuestion = NextProbeAnswer
 
-askNextProbe :
-  (query : NextProbeQuery) →
-  DialogueHistoryWorld →
-  NextProbeAnswerFor query
+askNextProbe : (query : NextProbeQuery) → DialogueHistoryWorld → NextProbeAnswerFor query
 askNextProbe nextUsefulProbeQuestion sameClaimWithLiveContradiction = contradictionDiscriminator
 askNextProbe nextUsefulProbeQuestion sameClaimWithUnresolvedLineage = provenanceDiscriminator
 
@@ -77,24 +66,16 @@ nextProbeQuestions : Query.InquiryQuestionFamily DialogueHistoryWorld NextProbeQ
 nextProbeQuestions = Query.inquiryQuestionFamily NextProbeAnswerFor askNextProbe
 
 currentUtteranceDoesNotDetermineNextProbe :
-  Query.FactorsThrough
-    nextProbeQuestions
-    currentUtteranceProjection
-    nextUsefulProbeQuestion → ⊥
+  Query.FactorsThrough nextProbeQuestions currentUtteranceProjection nextUsefulProbeQuestion → ⊥
 currentUtteranceDoesNotDetermineNextProbe factor = helper first second
   where
-    first :
-      contradictionDiscriminator ≡ Query.quotientAnswer factor sameCurrentClaim
+    first : contradictionDiscriminator ≡ Query.quotientAnswer factor sameCurrentClaim
     first = Query.factorisation factor sameClaimWithLiveContradiction
-
-    second :
-      provenanceDiscriminator ≡ Query.quotientAnswer factor sameCurrentClaim
+    second : provenanceDiscriminator ≡ Query.quotientAnswer factor sameCurrentClaim
     second = Query.factorisation factor sameClaimWithUnresolvedLineage
-
     helper :
       contradictionDiscriminator ≡ Query.quotientAnswer factor sameCurrentClaim →
-      provenanceDiscriminator ≡ Query.quotientAnswer factor sameCurrentClaim →
-      ⊥
+      provenanceDiscriminator ≡ Query.quotientAnswer factor sameCurrentClaim → ⊥
     helper refl ()
 
 ------------------------------------------------------------------------
@@ -122,10 +103,7 @@ supportCountProjection twoSupportsWithResolvedDiscriminator = twoSupports
 InquiryStateAnswerFor : InquiryStateQuery → Set
 InquiryStateAnswerFor inquiryStateQuestion = InquiryStateAnswer
 
-askInquiryState :
-  (query : InquiryStateQuery) →
-  SupportWorld →
-  InquiryStateAnswerFor query
+askInquiryState : (query : InquiryStateQuery) → SupportWorld → InquiryStateAnswerFor query
 askInquiryState inquiryStateQuestion twoSupportsWithOpenDefeater = defeaterSearchStillRequired
 askInquiryState inquiryStateQuestion twoSupportsWithResolvedDiscriminator = consumerDiscriminatorResolved
 
@@ -138,14 +116,11 @@ supportCountDoesNotDetermineInquiryState factor = helper first second
   where
     first : defeaterSearchStillRequired ≡ Query.quotientAnswer factor twoSupports
     first = Query.factorisation factor twoSupportsWithOpenDefeater
-
     second : consumerDiscriminatorResolved ≡ Query.quotientAnswer factor twoSupports
     second = Query.factorisation factor twoSupportsWithResolvedDiscriminator
-
     helper :
       defeaterSearchStillRequired ≡ Query.quotientAnswer factor twoSupports →
-      consumerDiscriminatorResolved ≡ Query.quotientAnswer factor twoSupports →
-      ⊥
+      consumerDiscriminatorResolved ≡ Query.quotientAnswer factor twoSupports → ⊥
     helper refl ()
 
 ------------------------------------------------------------------------
@@ -174,9 +149,7 @@ ConsumerResolutionAnswerFor : ConsumerResolutionQuery → Set
 ConsumerResolutionAnswerFor consumerResolutionQuestion = ConsumerResolutionAnswer
 
 askConsumerResolution :
-  (query : ConsumerResolutionQuery) →
-  ConsensusWorld →
-  ConsumerResolutionAnswerFor query
+  (query : ConsumerResolutionQuery) → ConsensusWorld → ConsumerResolutionAnswerFor query
 askConsumerResolution consumerResolutionQuestion noConsensusButConsumerResolved = sufficientForDeclaredConsumer
 askConsumerResolution consumerResolutionQuestion noConsensusAndConsumerOpen = insufficientForDeclaredConsumer
 
@@ -184,22 +157,16 @@ consumerResolutionQuestions : Query.InquiryQuestionFamily ConsensusWorld Consume
 consumerResolutionQuestions = Query.inquiryQuestionFamily ConsumerResolutionAnswerFor askConsumerResolution
 
 consensusDoesNotDetermineConsumerResolution :
-  Query.FactorsThrough
-    consumerResolutionQuestions
-    consensusStatusProjection
-    consumerResolutionQuestion → ⊥
+  Query.FactorsThrough consumerResolutionQuestions consensusStatusProjection consumerResolutionQuestion → ⊥
 consensusDoesNotDetermineConsumerResolution factor = helper first second
   where
     first : sufficientForDeclaredConsumer ≡ Query.quotientAnswer factor noConsensusSurface
     first = Query.factorisation factor noConsensusButConsumerResolved
-
     second : insufficientForDeclaredConsumer ≡ Query.quotientAnswer factor noConsensusSurface
     second = Query.factorisation factor noConsensusAndConsumerOpen
-
     helper :
       sufficientForDeclaredConsumer ≡ Query.quotientAnswer factor noConsensusSurface →
-      insufficientForDeclaredConsumer ≡ Query.quotientAnswer factor noConsensusSurface →
-      ⊥
+      insufficientForDeclaredConsumer ≡ Query.quotientAnswer factor noConsensusSurface → ⊥
     helper refl ()
 
 ------------------------------------------------------------------------
@@ -209,8 +176,7 @@ consensusDoesNotDetermineConsumerResolution factor = helper first second
 supportDoesNotCreateTruth : DialecticalSearch.RetrievedSupportMeansTruth → ⊥
 supportDoesNotCreateTruth = DialecticalSearch.supportDoesNotMeanTruth
 
-moreSupportDoesNotReplaceDefeaterSearch :
-  DialecticalSearch.MoreSupportMayReplaceDefeaterSearch → ⊥
+moreSupportDoesNotReplaceDefeaterSearch : DialecticalSearch.MoreSupportMayReplaceDefeaterSearch → ⊥
 moreSupportDoesNotReplaceDefeaterSearch = DialecticalSearch.supportDoesNotReplaceDefeaterSearch
 
 searchPolicyDoesNotReplaceProofValidity :
@@ -244,15 +210,29 @@ open PlatoSymposiumProofSearchBoundary public
 
 canonicalPlatoSymposiumProofSearchBoundary : PlatoSymposiumProofSearchBoundary
 canonicalPlatoSymposiumProofSearchBoundary =
-  plato-symposium-proof-search-boundary
-    false
-    false
-    false
-    false
-    true
-    true
-    true
-    true
+  plato-symposium-proof-search-boundary false false false false true true true true
+
+------------------------------------------------------------------------
+-- Compatibility surface for the dedicated concurrent regression owner.
+------------------------------------------------------------------------
+
+canonicalPlatoProofSearchExperimentBoundary : PlatoSymposiumProofSearchBoundary
+canonicalPlatoProofSearchExperimentBoundary = canonicalPlatoSymposiumProofSearchBoundary
+
+currentUtteranceDeterminesNextProbe : PlatoSymposiumProofSearchBoundary → Bool
+currentUtteranceDeterminesNextProbe = currentUtteranceAloneDeterminesNextProbe
+
+supportCountDeterminesInquiryState : PlatoSymposiumProofSearchBoundary → Bool
+supportCountDeterminesInquiryState _ = false
+
+consensusDeterminesConsumerRelevantResolution : PlatoSymposiumProofSearchBoundary → Bool
+consensusDeterminesConsumerRelevantResolution = consensusClosesEveryConsumer
+
+nextQuestionMayDependOnObservedOutcome : PlatoSymposiumProofSearchBoundary → Bool
+nextQuestionMayDependOnObservedOutcome = sequentialExperimentMayDependOnPriorOutcome
+
+searchStrategyCreatesProofValidity : PlatoSymposiumProofSearchBoundary → Bool
+searchStrategyCreatesProofValidity _ = false
 
 proofSearchSummary : String
 proofSearchSummary =
