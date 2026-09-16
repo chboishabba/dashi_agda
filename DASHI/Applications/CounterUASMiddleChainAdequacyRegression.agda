@@ -8,6 +8,23 @@ import DASHI.Core.QueryIndexedProjectionAdequacyExact as Adequacy
 record CounterUASMiddleChainAdequacyRegression : Set₁ where
   constructor counterUASMiddleChainAdequacyRegression
   field
+    observationSurfaceHasAssociationAdequacyDefect :
+      Adequacy.QueryAdequacyDefect
+        Middle.observationSurfaceProjection
+        Middle.associationSemantics
+        Middle.associationStatusQuery
+    observationSurfaceAloneCannotDetermineAssociation :
+      Adequacy.AdequateFor
+        Middle.observationSurfaceProjection
+        Middle.associationSemantics
+        Middle.associationStatusQuery → ⊥
+    observationAndAssociationLineageDetermineAssociation :
+      Adequacy.AdequateFor
+        Middle.observationAndAssociationProjection
+        Middle.associationSemantics
+        Middle.associationStatusQuery
+    fusedObservationsDoNotCreateSameObjectAssociation :
+      Middle.fusedObservationsCreateSameObjectAssociation ≡ false
     classificationOnlyHasThreatAdequacyDefect :
       Adequacy.QueryAdequacyDefect
         Middle.classificationOnlyProjection
@@ -34,6 +51,10 @@ canonicalCounterUASMiddleChainAdequacyRegression :
   CounterUASMiddleChainAdequacyRegression
 canonicalCounterUASMiddleChainAdequacyRegression =
   counterUASMiddleChainAdequacyRegression
+    Middle.observationSurfaceAssociationAdequacyDefect
+    Middle.observationSurfaceCannotDetermineAssociation
+    Middle.observationAndAssociationDetermineAssociation
+    refl
     Middle.classificationOnlyThreatAdequacyDefect
     Middle.classificationOnlyCannotDetermineThreat
     Middle.classificationAndContextDetermineThreat
