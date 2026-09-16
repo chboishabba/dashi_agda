@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'agent/dewey-qid-firstlink-coverage-priorart'
+      - 'agent/monster369-d4-nineorbit-kernel-character-exec'
     paths:
       - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda'
