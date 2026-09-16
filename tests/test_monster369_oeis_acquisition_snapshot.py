@@ -66,6 +66,23 @@ def test_42_class_eta_family_retains_native_14_and_42_levels():
     assert relation["fifteen_minus_one_explanation_paid"] is False
 
 
+def test_ternary27_reduces_as_three_preserved_phases_times_five_inner_orbits():
+    runtime = load_runtime()
+    probe = runtime.build_ternary27_phase_preserving_reduction_probe()
+
+    assert probe["raw_state_count"] == 27
+    assert probe["outer_phase_count"] == 3
+    assert probe["inner_sheet_state_count"] == 9
+    assert probe["inner_global_inversion_orbit_count"] == 5
+    assert probe["phase_preserving_reduced_state_count"] == 15
+    assert probe["image_state_count"] == 15
+    assert probe["fiber_size_histogram"] == {1: 3, 2: 12}
+    assert probe["full_global_inversion_orbit_count"] == 14
+    assert probe["phase_preserving_reduction_is_full_global_inversion"] is False
+    assert probe["twenty_seven_to_three_times_five_reduction_paid"] is True
+    assert probe["three_times_five_carrier_is_monster_class_42d_paid"] is False
+
+
 def test_42d_five_mode_phase_probe_realizes_15_14_42_without_authority_promotion():
     runtime = load_runtime()
     probe = runtime.build_42d_five_mode_phase_probe()
@@ -80,6 +97,7 @@ def test_42d_five_mode_phase_probe_realizes_15_14_42_without_authority_promotion
     assert probe["outer_phase_count"] == 3
     assert probe["outer_phase_times_residual"] == 42
     assert probe["twenty_seven_to_five_mode_selection_paid"] is False
+    assert probe["twenty_seven_to_three_times_five_reduction_paid"] is True
     assert probe["forty_two_carrier_is_monster_class_42d_paid"] is False
 
 
@@ -116,6 +134,7 @@ def test_snapshot_keeps_positive_bridge_signal_separate_from_proof_authority():
     assert report["positive_bridge_candidates"]["17496-42d-to-n3b-restriction"] is True
     assert report["positive_bridge_candidates"]["42d-five-mode-phase-carrier"] is True
     assert report["positive_bridge_candidates"]["42-class-eta-level-family"] is True
+    assert report["positive_bridge_candidates"]["ternary27-phase-preserving-3x5-reduction"] is True
     assert report["authority"]["oeis_snapshot_creates_same_object"] is False
     assert report["authority"]["oeis_snapshot_creates_monster_action"] is False
     assert report["authority"]["positive_bridge_signal_creates_theorem"] is False
