@@ -12,19 +12,22 @@ import DASHI.Physics.YangMills.YMClayMassGapAssemblyParityExact as Assembly
 open Form
 open Assembly
 
-boundedFormPackageAvailable : Set₁
+boundedFormPackageAvailable : ∀ Hilbert Scalar → Set₁
 boundedFormPackageAvailable = BoundedFormGapPackage
 
-massGapConclusionAvailable : Set₁
+massGapConclusionAvailable :
+  ∀ ContinuumHamiltonian Vacuum GapParameter → Set₁
 massGapConclusionAvailable = MassGapConclusion
 
-energyFormRouteAvailable : Set₁
+energyFormRouteAvailable : ∀ Hilbert Scalar FiniteGap → Set₁
 energyFormRouteAvailable = EnergyFormRoute
 
-sourceRouteAvailable : Set₁
+sourceRouteAvailable :
+  ∀ SpectralRepresentation CovarianceDecay FiniteGap → Set₁
 sourceRouteAvailable = SourceClusteringRoute
 
-commonContinuumRouteAvailable : Set₁
+commonContinuumRouteAvailable :
+  ∀ FiniteGap ContinuumGap ContinuumHamiltonian Vacuum GapParameter → Set₁
 commonContinuumRouteAvailable = CommonContinuumOSRoute
 
 -- The validation surface intentionally names the two headline assemblers.
@@ -33,3 +36,9 @@ energyAssemblerIsPresent = EnergyAssemblerPresent
 
 sourceAssemblerIsPresent : Set
 sourceAssemblerIsPresent = SourceAssemblerPresent
+
+energyAssemblerWitnessAvailable : EnergyAssemblerPresent
+energyAssemblerWitnessAvailable = energyAssemblerWitness
+
+sourceAssemblerWitnessAvailable : SourceAssemblerPresent
+sourceAssemblerWitnessAvailable = sourceAssemblerWitness
