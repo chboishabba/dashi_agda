@@ -22,13 +22,13 @@ import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
 -- This thin owner adds only the allocation question forced by shared digital
 -- infrastructure: how a fixed/shared embodied, training or infrastructure
 -- burden is allocated to a request, learner, task, course or other functional
--- unit.  Allocation is source/model-relative accounting, not a new physical
+-- unit. Allocation is source/model-relative accounting, not a new physical
 -- measurement and not a moral distribution theorem.
 ------------------------------------------------------------------------
 
 ecologitsSource : Attr.AttributedSource
 ecologitsSource = Attr.mkDOISource
-  "Samuel Rince; Adrien Banse"
+  "Samuel Rincé; Adrien Banse"
   "EcoLogits: Evaluating the Environmental Impacts of Generative AI"
   "Journal of Open Source Software 10(111):7471"
   "2025"
@@ -112,8 +112,8 @@ trainingServingReading =
 -- Constructive collisions.
 --
 -- Same total shared impact can yield different per-consumer allocations when
--- usage/denominator differs.  Conversely, the same consumer count can yield
--- different allocations when time/resource share differs.  Therefore neither
+-- usage/denominator differs. Conversely, the same consumer count can yield
+-- different allocations when time/resource share differs. Therefore neither
 -- total impact nor headcount alone determines per-consumer material burden.
 ------------------------------------------------------------------------
 
