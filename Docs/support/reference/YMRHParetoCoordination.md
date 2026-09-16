@@ -24,7 +24,7 @@ Use this as the first-stop **current** state sheet; use the archaeology files fo
        direct selected finite spectral upper -> covariance -> continuum -> gap
 
 #967  open/draft — LIVE SOURCE/PRODUCER feeding merged #970:
-       R387–R407 consumer-first reconstruction of the selected CMP116 upper
+       R387–R408 consumer-first reconstruction of the selected CMP116 upper
 ```
 
 #970 is a stable merged consumer. #967 has one job: manufacture its selected finite mixed-log upper without reopening dominated architecture.
@@ -41,7 +41,12 @@ CMP99 marked propagator/background replacement         [published/source]
 R407 literal CMP109 four-stage factor carrier          [source written]
   path -> transport -> dexp^-1/log -> outer dexp
   ordinary before/after stage bounds                   [compiler-owned]
-  marked stage-domain difference                       [LIVE source leaf]
+                |
+                v
+R408 one changed stage = existing resolvent defect
+  changed-stage ||A-B|| <= m                           [compiler-owned]
+  literally unchanged stage A=B -> zero marked budget [Round72 algebra law]
+  CMP99 defect/stage same-object attachment            [LIVE source leaf]
                 |
                 v
 R406 noncommutative selected term localization
@@ -173,36 +178,64 @@ For a neighboring before/after pair it proves, stage-by-stage,
 
 from the already-existing Gate4 pipeline estimates and transports the AFTER estimate onto the BEFORE operator-norm algebra when the two pipeline algebras are identified. Thus the **ordinary** factor half of R406/P0b1 is no longer a fresh analytic leaf.
 
-The next live source theorem is narrower:
+R407 is source-written only; no Agda/kernel receipt is claimed.
+
+### R408 — CMP99 marked changed-stage compiler
+
+RED validation:
+`DASHI/Physics/YangMills/BalabanCMP99MarkedStageDifferenceRound408Validation.agda`
+
+Production source:
+`DASHI/Physics/YangMills/BalabanCMP99MarkedStageDifferenceRound408Exact.agda`
+
+R408 reuses the existing
+`BalabanClayGate4ResolventDefectPipelineExact.resolventDifferenceNormBelowBudget`.
+It does **not** accept a fresh source field
 
 ```text
-same selected R318/CMP116 term
-x literal four-stage CMP109 before/after entry
-x CMP99 marked domain replacement on the changed stage
----------------------------------------------------------
-||A_i - B_i|| <= m_i
+||A_changed - B_changed|| <= m_changed.
 ```
 
-for the stage(s) changed by the domain/background replacement. The whole product difference remains compiler-owned by R406/Round72.
+Instead it requires exact same-object/representation coordinates identifying the selected R407 changed stage with the existing resolvent defect, transports the resolvent order/norm into the R406/Round72 algebra, and derives the marked changed-stage bound mechanically.
 
-R407 is a source-written compiler surface. No Agda/kernel receipt is claimed here.
+The underlying Round72 operator algebra was also tightened with the standard law
+
+```text
+||A - A|| <= 0
+```
+
+for arbitrary operators. Therefore every literally unchanged R407 stage can carry exact zero marked budget; R408 exports `unchangedStageDifferenceBelowZero` rather than requiring three artificial marked estimates.
+
+So the old P0b1b leaf has split cleanly:
+
+```text
+actual marked norm inequality for changed stage        [compiler-owned by R408]
+unchanged-stage marked inequalities                    [zero from exact equality]
+CMP99 defect <-> selected R407 changed-stage identity  [LIVE source/same-object]
+selected R407 product <-> selected R406 term identity  [LIVE same-object]
+```
+
+R408 is source-written only; `round408KernelCertifiedAtCurrentHead = false` and its local ProofLevel remains non-promotable pending an observed kernel receipt.
 
 ## Current YM payments
 
 ```text
-YM-P0a   selected-density/J/decoupling same-object replay — UNPAID.
-YM-P0b0  literal CMP109 four-stage factor carrier — PAID by R407 source.
-YM-P0b1a ordinary before/after stage norm bounds — PAID by R407 from Gate4 pipelines.
-YM-P0b1b marked stage-domain difference bounds — UNPAID / next source frontier.
-YM-P0b2  factorwise bounds -> whole differentiated-term majorant — PAID by noncommutative Round72/R406.
-YM-P0c   absolute finite-polydisc coefficient extraction — PAID by R402.
-YM-P0d   common-Y + nested source summation — PAID by R404/R405.
+YM-P0a    selected-density/J/decoupling same-object replay — UNPAID.
+YM-P0b0   literal CMP109 four-stage factor carrier — PAID by R407 source.
+YM-P0b1a  ordinary before/after stage norm bounds — PAID by R407/Gate4.
+YM-P0b1b1 changed-stage marked norm inequality — PAID at source/compiler level by R408 resolvent compiler.
+YM-P0b1b2 unchanged-stage marked norm inequalities — PAID by exact equality + self-difference-zero law.
+YM-P0b1c  CMP99 resolvent defect / changed-stage same-object attachment — UNPAID / LIVE FRONTIER.
+YM-P0b1d  four-stage product-difference / selected R406 term same-object weld — UNPAID / LIVE FRONTIER.
+YM-P0b2   factorwise bounds -> whole differentiated-term majorant — PAID by noncommutative Round72/R406.
+YM-P0c    absolute finite-polydisc coefficient extraction — PAID by R402.
+YM-P0d    common-Y + nested finite source summation — PAID by R404/R405.
 
-YM-P1    generic sourceEnvelope<=shell route — optional if direct R320/#970 is cheaper.
-YM-P2    time <= selected physicalDistance on the single R318 carrier.
-YM-P3    same-Hamiltonian q(E)/candidate-energy identity only where R400 is used.
-YM-P4    same-family finite->continuum covariance transport — existing.
-YM-P5    clustering/positive-subgap -> transfer gap — existing.
+YM-P1     generic sourceEnvelope<=shell route — optional if direct R320/#970 is cheaper.
+YM-P2     time <= selected physicalDistance on the single R318 carrier.
+YM-P3     same-Hamiltonian q(E)/candidate-energy identity only where R400 is used.
+YM-P4     same-family finite->continuum covariance transport — existing.
+YM-P5     clustering/positive-subgap -> transfer gap — existing.
 ```
 
 ## Paid/compiler-owned
@@ -212,6 +245,8 @@ normalized two-source log calculus
 mixed-log second derivative = finite connected covariance
 observable-indexed source presentation (R403)
 CMP109 four-stage ordinary factor extraction (R407)
+resolvent-defect norm assembly for the changed stage (R408)
+unchanged-stage zero marked cost from exact operator equality (Round72/R408)
 noncommutative marked operator-product telescope (Round72/R406)
 absolute common-Y walk resummation (R404)
 nested localization-domain summation (R405)
@@ -228,8 +263,8 @@ clustering -> transfer-gap contradiction
 
 ```text
 P0a selected-density, actual J pair and decoupling-boundary same-object replay
-P0b1b CMP99 marked stage-domain replacement estimate on the literal four-stage CMP109 entry
-exact same-object weld from that four-stage entry/product difference to the selected R406 differentiated term
+P0b1c literal CMP99 Theorem 3.14/(3.154) defect/budget attached to the actual changed R407 stage
+P0b1d exact four-stage product-difference attached to the selected R406 differentiated term
 CMP116 positive common-Y / outer shell majorants on that same selected decomposition
 P2 selected support/time geometry inhabitant
 P3 same-Hamiltonian ratio/energy identity only where used
@@ -239,12 +274,12 @@ P3 same-Hamiltonian ratio/energy identity only where used
 
 | Priority | Work |
 |---|---|
-| 1 | **R408: pay the literal CMP99 marked difference for the changed R407 stage and weld that four-stage entry to the selected R406 term** |
-| 2 | **YM-P2: `time <= selected physicalDistance` if not definitional from selected support** |
-| 3 | **YM-P3 only where the source-native-q route actually consumes it** |
-| 4 | generic source envelope/rate producer only if cheaper than direct R320/merged-#970 |
-| 5 | RH-R2 direct strict literal complement |
-| 6 | RH-R1 only on new theorem-bearing same-object evidence |
+| 1 | **R409: weld the literal CMP99 resolvent defect to the actual changed R407 stage, prove the other stage equalities, and compile the resulting four-stage marked family directly into the selected R406 term** |
+| 2 | **finish the remaining CMP116 positive common-Y / outer majorant attachment on that same selected decomposition if R409 does not make it definitional** |
+| 3 | **YM-P2: `time <= selected physicalDistance` if not definitional from selected support** |
+| 4 | **YM-P3 only where the source-native-q route actually consumes it** |
+| 5 | generic source envelope/rate producer only if cheaper than direct R320/merged-#970 |
+| 6 | RH-R2 direct strict literal complement |
 
 ## Do not reopen
 
@@ -252,9 +287,11 @@ Unless a literal current consumer requires it:
 
 - no new generic P0 wrapper;
 - no opaque whole-term source inequality;
+- no opaque changed-stage `||A-B||<=m` field after R408;
+- no marked assumptions for literally unchanged stages; use exact equality -> zero marked budget;
 - no commutative scalar replacement for CMP109 operator/multilinear products;
 - no independent observable->source-direction carrier;
-- no R76 `E^(2)/Pi` bridge unless the four-stage R407/R408 replay proves it necessary;
+- no R76 `E^(2)/Pi` bridge unless the direct R407/R408/R409 replay proves it necessary;
 - no citation/`ProofLevel` promotion into a theorem term;
 - no comparison-only Hessian stability as absolute localization;
 - no generic source-envelope plumbing when direct R320/merged-#970 is cheaper;
@@ -272,7 +309,7 @@ Unless a literal current consumer requires it:
 - CMP116: Tadeusz Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, DOI `10.1007/BF01239022`.
 - CMP119: DOI `10.1007/BF01217741`.
 
-CMP99 Theorem 3.14/(3.154) is the marked domain/background replacement donor. CMP109 (4.3)–(4.5) supplies the differentiated operator/tree structure; the repository Gate4 pipeline already exposes its physical derivative entry as the four ordered stages used by R407. CMP116 Sect. 1 supplies the generalized-walk/decoupling construction around (1.6)–(1.21), differentiated representation around (1.23), and positive tree/localization summation around (1.29)–(1.36).
+CMP99 Theorem 3.14/(3.154) is the marked domain/background replacement donor. CMP109 (4.3)–(4.5) supplies the differentiated operator/tree structure; the repository Gate4 pipeline exposes the physical derivative entry as the four ordered stages used by R407. The existing Gate4 resolvent-defect owner supplies the exact inverse-difference norm compiler consumed by R408. CMP116 Sect. 1 supplies the generalized-walk/decoupling construction around (1.6)–(1.21), differentiated representation around (1.23), and positive tree/localization summation around (1.29)–(1.36).
 
 Citation/source status does not itself inhabit P0.
 
@@ -301,6 +338,12 @@ a766bcec...  R406 source-faithful noncommutative factor telescope
 42406135...  coordination sync through R406
 0469bf19...  R407 RED validation
 8e4b619e...  R407 literal four-stage ordinary-factor compiler source
+e09ee044...  coordination sync through R407
+e0e1b616...  R407 proof-status correction
+4e1cff78...  R408 RED validation
+305028b8...  Round72 general self-difference-zero operator norm law
+7227ce94...  initial R408 resolvent-defect changed-stage compiler
+dd1bea92...  R408 exact unchanged-stage zero marked bound / safety cleanup
 ```
 
 Per user instruction, CI is not part of this tranche. No current-head Agda/kernel certification is claimed.
@@ -311,6 +354,7 @@ Per user instruction, CI is not part of this tranche. No current-head Agda/kerne
 - R402/R403/R404/R405 remain paid compiler layers.
 - R406 retains the noncommutative product-difference formulation.
 - R407 reuses the existing CMP109 Gate4 derivative pipeline and pays the ordinary before/after factor estimates on the literal four-stage carrier.
-- The immediate source frontier is now the **marked domain-difference estimate for the changed stage**, plus the same-object weld of that four-stage entry to the selected R318/CMP116 differentiated term.
-- The R76 `E^(2)/Pi` representation bridge remains donor-only unless this direct replay demonstrates a need.
+- R408 removes the final *inequality-shaped* marked-stage leaf: the genuinely changed stage is bounded by the existing resolvent-defect compiler, while unchanged stages have exact zero marked cost from equality.
+- The immediate frontier is now same-object/representation only at the factor layer: attach CMP99's literal marked defect to the actual changed R407 stage, prove the unchanged stage identities, and weld the resulting four-stage product difference to the selected R406 term.
+- The R76 `E^(2)/Pi` representation bridge remains donor-only unless this direct route demonstrates a need.
 - RH remains behind YM in the live Pareto order.
