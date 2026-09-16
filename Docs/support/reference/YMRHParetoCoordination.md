@@ -28,7 +28,7 @@ Current specialist:
 
 ```text
 #967  open/draft — source-native CMP116 decay + one-sided selected geometry
-current source-written frontier: R387–R398
+current source-written frontier: R387–R400
 ```
 
 ## 1. YM current route — #967
@@ -40,8 +40,8 @@ The terminal consumer remains same-family quantitative covariance decay followed
 - **R387:** `q_fast = 1/2` is not primitive. The spectral contradiction needs only `0 <= q_fast < q_slow < 1` with the usual amplitude signs.
 - **R388:** exact `sourceDistance = physicalDistance = time` is not primitive. The geometric consumer needs only `time <= sourceDistance`.
 - **R389:** the least-privilege finite theorem is directly `literal selected response <= A_fast * q_fast^sourceDistance` plus `time <= sourceDistance`; post-hoc magnitude/root/distance welds are pruned.
-- **R390/R391:** the older half-rate route also works with only `time <= physicalDistance` and carries that through the existing finite->continuum/subgap machinery.
-- **R392:** R349 cross-carrier equality weakens to `d_R284(selected pair) <= d_R318(selected pair)` if an independently supplied R284 shell is retained. R304 already owns `d_R284(selected pair) = time` on the exact same pair/time/decomposition.
+- **R390/R391:** the older half-rate route also works with only `time <= physicalDistance` and carries that through the existing finite->continuum covariance and positive-subgap contradiction machinery.
+- **R392:** if an independently supplied R284 shell is retained, R349 cross-carrier equality weakens to `d_R284(selected pair) <= d_R318(selected pair)`. R304 already owns `d_R284(selected pair) = time` on the exact same pair/time/decomposition.
 
 ### R393: localization theorem vs selected application
 
@@ -51,11 +51,12 @@ The live source/application chain is:
 
 ```text
 published CMP116 differentiated localization             [source-owned]
- -> literal selected-trajectory application              [R342]
+ -> literal selected-trajectory application              [R342 / local replay]
  -> selected source-envelope <= selected shell           [physical one-sided attachment]
  -> source-native shell <= A_fast * q_fast^d             [quantitative calibration]
  -> selected support/time geometry                       [one physical geometry coordinate]
- -> source-rate -> reconstructed spectral semantics      [physical]
+ -> same-Hamiltonian energy <-> decay-ratio coordinate   [physical]
+ -> gapCandidate = energyOfRatio(q_fast)                 [same-Hamiltonian identification]
  -> existing finite->continuum + subgap compilers.
 ```
 
@@ -102,57 +103,90 @@ time <= sourceDistance.
 
 This matches the buried R334/R339 source-facing application shape and does not strengthen the source theorem merely to match a later representation.
 
-### R398: construct the old R284 direct shell from R318 instead of welding distances afterwards
+### Two distinct R398 donor/compiler results
 
-Historical R304/R349 permit an independently supplied `R284.DirectT5TwoSourceShell`; that is why R349 had to ask for
+The branch now contains two conceptually distinct R398 reductions; do not conflate them.
+
+**Historical R343 -> current R397 producer compiler**
+
+`BalabanCMP116R343ToR397SourceNativeRound398Exact` shows that the mature R343 dyadic source object compiles into the R397 ABI while preserving its actual source ratio. For that stronger historical producer its existing selected-envelope equality and selected-distance equality pay the weaker current attachment/geometry fields. It does **not** construct a concrete R343 physical inhabitant and is not mandatory architecture.
+
+**Canonical R318 -> R284 direct-shell constructor**
+
+`BalabanR318CanonicalDirectShellRound398Exact` removes an independent representation problem. Historical R304/R349 permit an independently supplied `R284.DirectT5TwoSourceShell`; that is why R349 had to compare its distance to R318's. R398 instead constructs R284 from R318/R320 with
 
 ```text
-d_R318(selected pair) = d_R284(selected pair)
+shellData        := R318.shellData
+scaleAtCutoff    := R318.scaleOf
+volumeAtCutoff   := R318.volumeOf
+physicalDistance := R318.physicalDistance
+connectingRoot   := R318.connectingRoot
 ```
 
-and R392 later weakened it to a one-sided comparison.
+and transports mixed-log magnitude to exact finite covariance through R295. Hence the R284/R318 distance and root agreements are `refl` on this preferred construction. R349/R392 cross-carrier welding is not a mandatory physical leaf there.
 
-R398 takes the preferred consumer-first route instead. From the exact R318 selected T5 carrier plus the one R320 direct selected-shell theorem, it constructs the R284 direct shell with
+### R399: the actual geometry leaf is one-sided support/time semantics
+
+The older arbitrary-pair presentation carried exact
 
 ```text
-shellData       := R318.shellData
-scaleAtCutoff   := R318.scaleOf
-volumeAtCutoff  := R318.volumeOf
-physicalDistance:= R318.physicalDistance
-connectingRoot  := R318.connectingRoot
+supportDistance(left, timeTranslate(right,t)) = t.
 ```
 
-and transports mixed-log magnitude to exact finite covariance through the already-owned R295 identity.
-
-Therefore, on this canonical construction,
+The source-native consumer only needs
 
 ```text
-d_R284(left,right) = d_R318(left,right)
+t <= selectedPhysicalDistance.
 ```
 
-and the root identity are `refl`. The R349/R392 **cross-carrier** weld is not a mandatory physical leaf on the preferred route.
+R399 makes this one-sided statement the primitive geometry ABI on the single canonical R318 carrier. Exact distance=time and independent distance-carrier welding are stronger optional producers.
 
-R398 does **not** manufacture the remaining physical statement that the selected spectral test pair has support separation at least `time`; it only removes the false second distance carrier.
+### R400: source-native spectral-rate semantics reuses the existing transfer coordinate
 
-### Current YM payments after R398
+R302 already isolates the physical OS/transfer-semigroup content as one order-reversing coordinate
 
 ```text
-YM-P0  actual proof-bearing CMP116 source theorem / R342 literal selected trajectory
-       on the physical selected source carrier.
-       The generic differentiated localization theorem itself is source-owned.
+Energy <-> decay ratio q(E).
+```
 
-YM-P1  source-native geometric-majorant realization:
+R400 generalizes its old `1/2` candidate specialization to arbitrary source-native `q_fast`. Once the selected mode ratio is the same `q(E)` and the spectrum's threshold is identified with
+
+```text
+gapCandidate = energyOfRatio(q_fast),
+```
+
+then for positive `E < gapCandidate` the inequalities
+
+```text
+q_fast < q(E) < 1
+```
+
+are compiler output. No separate family of positive-subgap rate inequalities or fresh spectral-dominance theorem is primitive.
+
+### Current YM payments after R400
+
+```text
+YM-P0  local same-object/source replay:
+       instantiate the externally established CMP116 differentiated localization
+       on the literal selected T5/RG state and selected J directions.
+       R338 common-domain/order plumbing is compiler-owned.
+
+YM-P1  source-native quantitative calibration:
        selected sourceEnvelope <= selected shell
        + source-native shell <= A_fast * q_fast^d.
-       Equality and fixed q=1/2 are not required.
+       Equality, fixed q=1/2, and dyadic normalization are not required.
+       The R343 route is an optional stronger producer for its own carrier.
 
 YM-P2  selected support/time geometry on ONE canonical physical-distance carrier:
        time <= selected physical/source distance.
-       The old R284<->R318 cross-carrier weld is compiler/representation debt
-       when R284 is constructed canonically by R398.
+       The old R284<->R318 cross-carrier weld is representation debt on R398's
+       canonical construction.
 
-YM-P3  source q_fast/rate -> reconstructed spectral semantics sufficient for
-       q_fast < q_subgap for every alleged positive subgap mode.
+YM-P3  same-Hamiltonian transfer coordinate:
+       selected spectral mode ratio = q(E),
+       gapCandidate = energyOfRatio(q_fast),
+       with the existing order-reversing positive transfer semantics.
+       q_fast < q_subgap < 1 is then compiler output.
 
 YM-P4  same-family finite -> continuum covariance transport — existing machinery.
 YM-P5  positive-subgap/clustering -> gap contradiction — existing compiler.
@@ -196,7 +230,7 @@ The 8889 lower-envelope lane is optional until theorem-bearing same-carrier tran
 
 | Priority | Work |
 |---|---|
-| 1 | **#967 YM: source-envelope<=shell + source-native rate realization + selected support/time geometry + spectral-rate semantics** |
+| 1 | **#967 YM-P0: literal CMP116 selected-state/J replay; then P1/P2/P3 same-object calibrations** |
 | 2 | **RH-R2 direct strict literal complement** |
 | 3 | RH-R1 only on new theorem-bearing same-object evidence |
 | 4 | #949 CMP119/BC1 retained source foundation |
@@ -209,8 +243,10 @@ Unless a current consumer proves otherwise, do not spend cycles on:
 - re-proving CMP116 differentiated localization;
 - selected `sourceEnvelope = shell` equality when the one-sided upper is sufficient;
 - independently supplied R284/R318 distance carriers when R398 can use one canonical carrier;
+- exact `distance = time` when R399's one-sided lower separation suffices;
 - fixed `q_fast = 1/2` as a primitive requirement;
 - dyadic normalization as mandatory architecture;
+- separate `q_fast < q_E < 1` theorems once the same-Hamiltonian R302/R400 transfer coordinate is paid;
 - exact `sourceDistance = physicalDistance = time` welds;
 - exact R349 cross-carrier equality on the R398 canonical route;
 - R353–R385 sensitivity as mandatory architecture;
@@ -256,7 +292,7 @@ Agda/kernel receipt observed?
 cross-prover proof transported?
 ```
 
-R387–R398 are source-written on #967. R397 and R398 have focused validation surfaces, but no exact-head Agda/kernel receipt is claimed until an actual run is observed. CodeRabbit success alone is not an Agda/kernel receipt.
+R387–R400 are source-written on #967. Focused validation surfaces exist for the current R397/R398/R399/R400 additions, but no exact-head Agda/kernel receipt is claimed until an actual run is observed. CodeRabbit success alone is not an Agda/kernel receipt.
 
 ## 7. Update log — 2026-09-16
 
@@ -266,6 +302,9 @@ R387–R398 are source-written on #967. R397 and R398 have focused validation su
 - R394 compiles R342 literal localization + source-native envelope/geometry into R389.
 - R395 removes `q<=1/2` from the primitive geometric-majorant ABI while retaining the dyadic carrier as an optional producer.
 - R396 shows equality-based selected envelope attachment is sufficient.
-- R397 weakens that equality to the one-sided `sourceEnvelope <= shell` attachment actually observed by R394; R334/R339 are buried donors for this orientation.
-- R398 constructs the historical R284 direct shell canonically from R318/R320 and removes the R284<->R318 distance/root weld on the preferred route. Selected support/time semantics remains physical.
+- R397 weakens that equality to the one-sided `sourceEnvelope <= shell` attachment; R334/R339 are buried donors for this orientation.
+- Concurrent historical-producer R398 compiles R343 into the weaker R397 ABI without constructing a physical R343 inhabitant.
+- Canonical-carrier R398 constructs R284 directly from R318/R320 and removes the R284<->R318 distance/root weld on the preferred route.
+- R399 weakens exact support-distance=time to the one-sided support/time lower bound actually observed by the consumer.
+- R400 generalizes the existing transfer energy-ratio compiler from fixed `1/2` to source-native `q_fast`; positive-subgap ratio inequalities become compiler output.
 - RH remains at the R1 stop condition followed by direct R2.
