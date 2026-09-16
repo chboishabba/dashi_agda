@@ -1,0 +1,23 @@
+module DASHI.Education.DigitalESDMaterialImpactAllocationRegression where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDMaterialImpactAllocationExact as Allocation
+import DASHI.Core.IntersectionalNonFactorability as Factors
+
+allocationQuestionCountRegression : Allocation.allocationAuditQuestionCount ≡ 8
+allocationQuestionCountRegression = refl
+
+perConsumerNotFromTotalRegression :
+  Factors.FactorsThrough Allocation.totalImpactProjection Allocation.perConsumerImpactClass → ⊥
+perConsumerNotFromTotalRegression = Allocation.totalImpactCannotDeterminePerConsumerImpact
+
+perConsumerNotFromConsumerCountRegression :
+  Factors.FactorsThrough Allocation.consumerCountProjection Allocation.perConsumerImpactClass → ⊥
+perConsumerNotFromConsumerCountRegression = Allocation.consumerCountCannotDeterminePerConsumerImpact
+
+allocationDoesNotCreateDeploymentFootprintRegression :
+  Allocation.ContextualAllocationCreatesEducationDeploymentFootprint → ⊥
+allocationDoesNotCreateDeploymentFootprintRegression =
+  Allocation.contextualAllocationDoesNotCreateEducationDeploymentFootprint
