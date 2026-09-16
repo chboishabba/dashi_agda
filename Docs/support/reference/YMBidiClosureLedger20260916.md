@@ -2,18 +2,18 @@
 
 Status: **live proof-search bookkeeping**, not theorem authority and not a Clay-completion claim.
 
-This ledger supplements `YMRHParetoCoordination.md` for the current Lean/Agda cross-lane closure pass. It distinguishes repository/compiler debt from genuinely uninhabited source/physical theorems.
+This ledger supplements `YMRHParetoCoordination.md` for the current Lean/Agda cross-lane closure pass. It distinguishes compiler debt from genuinely uninhabited source/physical theorems.
 
 ## Current lanes
 
 - `dashi_agda` PR #967 — source producer feeding merged #970.
-- `dashi_lean4` PR #7 — vacuum/operator backward consumer plus retained BIDI theorem tranche.
+- `dashi_lean4` PR #7 — retained BIDI/operator theorems plus active backward/closure welds.
 
-## Newly paid / corrected in this closure pass
+## Closure-pass theorem surface
 
-### BIDI theorem package — RETAINED / theorem-bearing upstream receipt
+### Retained BIDI package
 
-The supplied machine-checked `RequestProject.YangMills.BIDI.*` tranche is now retained on Lean #7 under
+The supplied machine-checked `RequestProject.YangMills.BIDI.*` tranche is retained on Lean #7 under
 
 `ImportedLeans/aristotle-results/ym-bidi-task-449b959c-20260916/output-final_aristotle/`
 
@@ -37,152 +37,238 @@ end-to-end implication and non-vacuity witnesses
 axiom audit
 ```
 
-The worker's build/axiom receipt belongs to the retained supplied source. The current Lean branch head still requires its own exact-head build receipt before the new Lake/weld integration is called certified.
+The worker build/axiom receipt belongs to the retained supplied source. Current Lean branch integration still needs an exact-head Lean receipt before promotion.
 
-### M7a finite-measure carrier — NARROWED, NOT PHYSICALLY CLOSED
+### R410 remains same-object source debt
 
-`BalabanDensityToLiteralFiniteMeasureRound124Exact` supplies a machine-checked **compiler/projection** from a `BalabanDensityLiteralFiniteMeasureWeld` inhabitant:
+R406 already scalarizes the selected differentiated term as a noncommutative operator-product difference and compiles factorwise ordinary/marked bounds through Round72. R407/R408/R409 supply the four-stage carrier, changed-stage resolvent compiler, unchanged-stage zero compiler, and conditional one-marked whole-product compiler.
+
+The remaining source identities are therefore:
 
 ```text
-BalabanDensityLiteralFiniteMeasureWeld
-  -> densityAtScaleIsLiteralFiniteMeasure
-  -> balabanDensityMapsToLiteralFiniteMeasure.
+S0 selected density / actual J_L,J_R / decoupling replay
+S1 literal CMP99 defect = actual changed CMP109/R407 factor(s)
+S2 exact equality of factors that are genuinely unchanged
+S3 R409 product-difference norm = selected R406 scalar term
+S4 positive CMP116 common-Y / outer majorants on that SAME decomposition
 ```
 
-The equality itself is a field of the weld record; R124 does not construct the physical weld from first principles. Its own status explicitly keeps
+Do not add another generic product wrapper. Do not assume exactly one changed stage unless literal source replay proves it.
 
-`literalBalabanDensityIsClayFiniteMeasureLevel = conditional`.
+### Row-B entropy is paid; source-shaped activity compiler is now active
 
-Therefore the old label
+The generic BIDI polymer theorem originally accepted:
 
 ```text
-M7a' literal selected Balaban finite measure — wholly unpaid
+hact  generic exponential activity majorant
+hcard generic shell-cardinality bound.
 ```
 
-is still too coarse, but it must be split without promoting the record projection:
+Both artificial interfaces have now been narrowed.
+
+`LatticeAnimalEntropy` proves the four-dimensional shell-cardinality theorem, so `hcard` is compiler-owned.
+
+Lean #7 `Welds.YMBidiLatticeShell` now also consumes CMP116 in its source-native volume form:
 
 ```text
-M7a0c density -> literal finite-measure equality compiler       PAID / machine-checked
-M7a0p physical weld inhabitant for that SAME equality           LIVE physical theorem
-M7a1  expectation/L2/null semantics on that SAME measure        LIVE physical semantics
+|act(S)|
+  <= A * n^m * exp(-(cmp116BlockRate(kappa1)/M^4) * vol(S))
+vol(S) = M^4 n
+kappa1 > 5 + 8 log 8
 ```
 
-R205 supplies the generic finite-measure expectation/null/quotient compiler once M7a0p/M7a1 are inhabited.
-
-### Row-B polymer entropy — PAID
-
-The generic BIDI shell theorem accepted both:
+and compiles:
 
 ```text
-hact   exponential activity majorant
-hcard  shell cardinality / entropy bound.
-```
-
-For the literal four-dimensional lattice, `LatticeAnimalEntropy` proves `hcard`. Lean #7 now contains RED/GREEN `Welds.YMBidiLatticeShell`, which compiles
-
-```text
-connected Z^4 lattice shell
- -> lattice4ShellCardBound
+source volume form
+ -> M^-4 cancellation
+ -> block-unit polynomial-marked decay
+ -> marked_activity_bound
+ -> proved Z^4 entropy
  -> far-shell exponential tail
- -> Cauchy-weighted BIDI shell estimate.
+ -> Cauchy-weighted shell estimate.
 ```
 
-Thus the live Row-B residual is only the **literal differentiated CMP116 activity majorant / same-object activity identification**. Do not continue listing polymer entropy/cardinality as an independent physical hypothesis.
+The surviving mass is
+
+```text
+markedRate(cmp116BlockRate(kappa1), lattice4EntropyRate)
+  - lattice4EntropyRate,
+```
+
+which is half of the original activity/entropy margin.
+
+`Welds.YMCMP116SourceCovariance` then specializes the retained BIDI end-to-end source theorem:
+
+```text
+literal CMP116 source-shaped activity hypothesis
++ selected source attachment hattach
++ selected source-domain holomorphy
++ physical finite->continuum covariance convergence
+---------------------------------------------------
+continuum covariance exponential decay
+```
+
+Thus generic polymer `hact`/`hcard` are no longer live proof-search leaves.
+
+The actual theorem still missing is the source/same-object statement that the **literal differentiated CMP116 activity** satisfies the published/source-shaped majorant on the selected decomposition.
+
+### Finite measure is split correctly
+
+`BalabanDensityToLiteralFiniteMeasureRound124Exact` is a machine-checked compiler from an explicit `BalabanDensityLiteralFiniteMeasureWeld` inhabitant. The equality is a field of that record; R124 does not construct the physical weld.
+
+Use:
+
+```text
+M7a0c density -> literal finite-measure equality compiler       PAID
+M7a0p physical density/finite-measure weld inhabitant           LIVE
+M7a1  expectation/L2/null semantics on that SAME measure        LIVE
+```
+
+R205/R206 own the generic expectation/null/quotient and same-measure IBP-symmetry compilers once the physical identities are supplied.
+
+### Operator closure normal form is now explicit
+
+Lean #7 `Welds.YMPhysicalClosureNormalForm` adds the missing cross-cutoff compiler.
+
+A `RowA1CutoffFamily` consists of genuine finite `RowA1PhysicalGapInstance`s with the same `SU(N)` and Row-A1 source parameters. It derives:
+
+```text
+forall n,
+  HasVacuumFormGap H_n Omega_n bMinus
+```
+
+with the same `bMinus` at every cutoff.
+
+Given an actual vacuum-sector graph limit, it derives the continuum zero-shift budget
+
+```text
+||psi|| <= bMinus^-1 ||H_inf psi||.
+```
+
+Given additionally an actual equality of YM/OS evolutions on a common core, it derives
+
+```text
+||psi|| <= bMinus^-1 ||H_OS psi||.
+```
+
+No gap constant, Hamiltonian, graph limit, or evolution equality is manufactured. Consequently the **operator compiler path is now complete up to physical inhabitation**.
 
 ## Current source/correlation residual
 
 ```text
-S0  selected density / actual J_L,J_R / decoupling replay             LIVE
-S1  CMP99 defect = actual R407 changed factor                          LIVE
-S2  exact equality of remaining R407 factors                           LIVE
-S3  R409 product-difference norm = selected R406 scalar term            LIVE
-S4  CMP116 positive majorants attached to that same decomposition       LIVE
-S5  literal differentiated CMP116 activity satisfies source majorant    LIVE
-S6  source-domain holomorphy / source analytic theorem application      LIVE theorem socket
-S7  physical finite->continuum covariance convergence                   LIVE
-S8  OS/spectral correlation same-object representation                  LIVE
+S0  selected density / actual J_L,J_R / decoupling replay                 LIVE
+S1  CMP99 defect = actual R407 changed factor(s)                           LIVE
+S2  exact equality of genuinely unchanged R407 factors                    LIVE
+S3  R409 product-difference norm = selected R406 scalar term               LIVE
+S4  CMP116 positive majorants on that same decomposition                   LIVE
+S5  literal differentiated CMP116 activity satisfies source volume majorant LIVE
+S6  selected physical source coordinates + uniform analytic radii          LIVE
+S7  physical finite->continuum covariance convergence                       LIVE
+S8  OS/spectral correlation same-object representation                      LIVE
 ```
 
-Items S1--S3 are the Agda #967 R410 frontier. Existing norm/product inequalities are already compiler-owned and must not be reopened.
-
-Source archaeology confirms that CMP116 Sect. 1 analyticity/localization is represented by the proof-bearing ABI `PublishedCMP116DifferentiatedLocalization`, but no selected physical inhabitant with uniform radii/constants is manufactured: `physicalCMP116MarkedCoordinateAndUniformRadiusIdentificationLevel = conditional`. Likewise the CMP109 source transcription retains analytic source properties without creating the selected physical analytic package. S6 therefore remains genuine.
+The generic activity/entropy/Cauchy/continuum-order machinery around S5--S7 is now compiler-owned.
 
 ## Current finite physical-operator residual
 
 ```text
-M7a0c density -> literal finite-measure equality compiler             PAID R124 compiler
-M7a0p physical density/finite-measure weld inhabitant                  LIVE
-M7a1  expectation/L2/null semantics on SAME literal measure            LIVE
-M7b   literal finite-spacing YM H_a = selected action variation         LIVE
-M7c   common invariant dense core + self-adjoint realization            LIVE
-M9c   bMinus<=gap -> form-gap / inverse-budget compiler                 SOURCE-WRITTEN Lean #7
-M9p   literal bMinus<=gap(H_a) for SAME physical H_a                    LIVE
+M7a0c density -> literal finite-measure equality compiler                 PAID
+M7a0p physical density/finite-measure weld inhabitant                      LIVE
+M7a1  expectation/L2/null semantics on SAME literal measure                LIVE
+M7b   literal finite-spacing YM H_a = selected action variation             LIVE
+M7c   common invariant dense core + self-adjoint realization                LIVE
+M9c   bMinus<=gap -> form-gap/inverse compiler                              SOURCE-WRITTEN
+M9p   literal bMinus<=gap(H_a) for SAME physical H_a                        LIVE
+M9f   uniform finite Row-A1 family -> continuum -> same-object compiler     SOURCE-WRITTEN
 ```
 
-R206 already compiles the selected discrete IBP equality to symmetry on the same finite-measure pairing once the literal physical pairings/action operator/boundary convention are supplied. Symmetry is not self-adjointness; M7c remains genuine.
+R206 symmetry is not self-adjointness; M7c remains genuine.
 
 ## Current continuum/operator residual
 
 ```text
-C1 actual cutoff physical Hamiltonian family -> continuum graph limit   LIVE
-C2 physical continuum self-adjoint H_infinity / normalized zero vacuum  LIVE instance
-C3 actual U^YM = U^OS on a common core                                  LIVE
-C4 physical spectral/OS representation identifying correlations         LIVE
+C1 actual cutoff physical Hamiltonian family -> continuum graph limit      LIVE
+C2 physical continuum self-adjoint H_inf / normalized zero vacuum           LIVE
+C3 actual U^YM = U^OS on a common core                                     LIVE
+C4 physical spectral/OS representation identifying correlations            LIVE
 ```
 
-Generic compilers are already paid:
+Generic compilers are paid:
 
 ```text
 vacuum-sector form gap -> resolvent bound
+uniform finite Row-A1 form gap -> continuum form gap / zero-shift budget
 uniform cutoff gap + graph limit -> continuum form gap
 same evolution + common core -> equality of unbounded operators
 clustering spectral data -> vacuum form gap
 ```
 
-## Lean #7 focused commits from this closure pass
+## Lean #7 focused commits from this continuation
 
 ```text
-2241359b... retain BIDI noncommutative telescope
-ccbf3274... retain BIDI localization
-3bab9b2d... retain BIDI resolvent defect
-762df340... retain BIDI source calculus
-4560368f... retain BIDI Cauchy extraction
-d57765c0... retain BIDI continuum bridge
-9f8f3c7f... retain bounded spectral exclusion
-bc230925... retain clustering -> form gap
-fd655919... retain generic polymer shell bridge
-f2094154... retain BIDI witnesses
-fbd18e80... retain BIDI assembly
-2b40e14d... retain end-to-end chain
-cde73915... retain end-to-end witness
-28f5a828... retain BIDI axiom audit
-fdb1543b... expose YMBidi opt-in Lake library
-afb836c9... RED: lattice shell specialization
-6ff69a56... discharge four-dimensional shell entropy hypothesis
-794c1ad9... aggregate Welds audit sync
+e8c4d4ba...  RED physical closure normal form
+a82dc323...  uniform Row-A1 cutoff -> continuum -> YM/OS inverse compiler
+b625b14b...  RED source-shaped CMP116 activity bridge
+0c8da1df...  strengthen RED with far-shell theorem
+42611747...  CMP116 source-volume -> marked far-shell/Cauchy compiler
+56287394...  RED CMP116-native continuum covariance weld
+227dfc33...  recut RED to dedicated source-covariance owner
+c83f1a6b...  CMP116-native source -> continuum covariance decay
+a6b49b46...  aggregate physical/source-shaped axiom audit
+bc0baf96...  aggregate source-covariance axiom audit
 ```
 
-## Proof-search order after this pass
+Earlier retained-BIDI commits remain listed in Lean #7.
 
-1. **R410 source identities**: source-read/identify the actual CMP99 replacement inside the literal CMP109 differentiated entry. Do not guess a single changed stage if the source expression changes more than one factor.
-2. **Literal CMP116 activity majorant**: instantiate the already-proved Row-B rate/entropy machinery with the actual differentiated source activities.
-3. **M7a0p/M7a1/M7b**: inhabit the physical density->measure weld, then same literal measure -> expectation/L2 semantics -> action-variation Hamiltonian.
-4. **M7c/M9p**: common core/self-adjoint realization and the Row-A1 lower form-gap inequality on that exact H_a.
-5. **S6/S7/S8 + C1--C4**: source analyticity, physical covariance/OS representation, and actual cutoff-to-continuum operator construction.
+## Compressed current wall
+
+After the new compilers, equation (118) should be read as **inhabitation debt**, not missing formal plumbing:
+
+```text
+SOURCE IDENTITIES
+  R410 same-object CMP99/CMP109/R406 attachment
+  literal differentiated CMP116 activity -> source volume-form majorant
+  selected physical source analytic domain / radii
+  physical covariance convergence and OS correlation identification
+
+FINITE PHYSICAL OBJECT
+  physical Balaban density -> literal finite measure
+  same-measure L2 expectation semantics
+  literal action-variation Hamiltonian H_a
+  common dense core + self-adjoint realization
+  bMinus <= gap(H_a) on that same H_a
+
+CONTINUUM / RECONSTRUCTION
+  actual physical cutoff family -> graph limit H_inf
+  continuum physical self-adjoint/vacuum instance
+  actual U^YM = U^OS on common core
+  physical spectral/OS representation
+```
+
+Everything between these inhabitants and the terminal quantitative gap/resolvent statement is now represented by theorem-producing compilers in the current Lean/Agda lanes.
+
+## Proof-search order
+
+1. **R410 literal source replay** — establish S0--S4, without guessing a one-stage replacement.
+2. **Literal CMP116 differentiated activity theorem** — establish S5 in the exact source volume/tree form; the rest of Row B is now theorem output.
+3. **M7a0p/M7a1/M7b** — construct the actual finite physical measure semantics and action-variation Hamiltonian.
+4. **M7c/M9p** — self-adjoint realization and direct Row-A1 lower quadratic-form/gap theorem on the same operator.
+5. **S6--S8 / C1--C4** — selected analytic uniformity, physical covariance/OS representation, and actual continuum reconstruction.
 
 ## Hard boundary
 
-The following must **not** be represented as completed merely by creating another record or adapter:
+Do not mark the following complete by creating another record, receipt, Boolean, or adapter:
 
 ```text
 literal CMP99/CMP109 same-object identity
-literal differentiated CMP116 activity estimate
-physical Balaban density -> literal finite-measure weld inhabitant
-physical Yang--Mills L2 expectation semantics on that selected measure
+literal differentiated CMP116 source activity estimate
+physical density -> measure weld inhabitant
+physical L2 expectation semantics on that measure
 literal self-adjoint finite-spacing YM Hamiltonian
-bMinus lower-bounds that same Hamiltonian's vacuum form
+Row-A1 lower bound on that same Hamiltonian
 actual 4D physical cutoff -> continuum construction
-actual YM = OS evolution/reconstruction identity
+actual YM = OS reconstruction identity
 ```
 
-If no theorem-strength source/repository inhabitant exists, these remain mathematical hypotheses. Closing the bookkeeping around them is not closing the Yang--Mills problem.
+If no theorem-strength inhabitant exists, these remain mathematical hypotheses. The new normal forms make that fact sharper; they do not turn the open physical problem into a completed Clay proof.
