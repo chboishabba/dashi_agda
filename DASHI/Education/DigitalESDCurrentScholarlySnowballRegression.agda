@@ -18,6 +18,9 @@ zagamiSourcePaidRegression = refl
 chughSourcePaidRegression : Scholarly.ScholarlyCandidateBoundary.chughSourceRolePaid Scholarly.canonicalScholarlyCandidateBoundary ≡ true
 chughSourcePaidRegression = refl
 
+boehmeSourcePaidRegression : Scholarly.ScholarlyCandidateBoundary.boehmeSourceRolePaid Scholarly.canonicalScholarlyCandidateBoundary ≡ true
+boehmeSourcePaidRegression = refl
+
 holstSourcePaidRegression : Scholarly.ScholarlyCandidateBoundary.holstSourceRolePaid Scholarly.canonicalScholarlyCandidateBoundary ≡ true
 holstSourcePaidRegression = refl
 
@@ -35,6 +38,11 @@ opinionPaperDoesNotCreateEmpiricalEffectRegression = Scholarly.opinionPaperDoesN
 
 paradoxFramingDoesNotExhaustReciprocalFrameworkRegression : Scholarly.SustainabilityParadoxExhaustsReciprocalDigitalESDFramework → ⊥
 paradoxFramingDoesNotExhaustReciprocalFrameworkRegression = Scholarly.sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework
+
+twinTransformationDoesNotPayEvidenceArchitectureRegression :
+  Scholarly.TwinTransformationFrameworkCreatesEvidencePaymentArchitecture → ⊥
+twinTransformationDoesNotPayEvidenceArchitectureRegression =
+  Scholarly.twinTransformationFrameworkDoesNotCreateEvidencePaymentArchitecture
 
 inputMonitoringDoesNotPayOutcomeRegression : Scholarly.InputIndicatorMonitoringCreatesOutcomeTransformation → ⊥
 inputMonitoringDoesNotPayOutcomeRegression = Scholarly.inputIndicatorMonitoringDoesNotCreateOutcomeTransformation
