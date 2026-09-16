@@ -23,9 +23,9 @@ import DASHI.Reasoning.JMDAristotleSymposiumSourceAtlasExact as Source
 -- through change, and the Republic craft argument.
 --
 -- This bridge does NOT import those Lean theorems as Agda proofs and does NOT
--- claim that later DASHI carriers are Platonic.  It records the source-facing
--- theorem contracts and then proves independent finite non-collapse results
--- useful to the existing DASHI philosophy spine.
+-- claim that later DASHI carriers are Platonic. It records the source-facing
+-- theorem contracts and proves independent finite non-collapse results useful
+-- to the existing DASHI philosophy spine.
 ------------------------------------------------------------------------
 
 record LeanPhilosophyTheoremContract : Set where
@@ -57,7 +57,7 @@ erosPhilosopherContract = mkJMDContract
 rightOpinionContract : LeanPhilosophyTheoremContract
 rightOpinionContract = mkJMDContract
   "RequestProject.SymposiumFurther"
-  "Plato.DiotimaMiddle.dichotomy_fails"
+  "Plato.DiotimaMiddle.KB.dichotomy_fails"
   "not-knowledge does not collapse to ignorance; right opinion occupies an intermediate epistemic state"
 
 diotimaAscentContract : LeanPhilosophyTheoremContract
@@ -69,25 +69,25 @@ diotimaAscentContract = mkJMDContract
 aristophanesHalvesContract : LeanPhilosophyTheoremContract
 aristophanesHalvesContract = mkJMDContract
   "RequestProject.SymposiumMountain"
-  "Plato.AristophanesHalves.half_involutive"
+  "Plato.AristophanesHalves.KB.half_involutive"
   "the source-defined otherHalf operation is involutive"
 
 alcibiadesAppearanceContract : LeanPhilosophyTheoremContract
 alcibiadesAppearanceContract = mkJMDContract
   "RequestProject.SymposiumAlcibiades"
-  "Plato.AlcibiadesSilenus.outside_hides_inside"
+  "Plato.AlcibiadesSilenus.KB.outside_hides_inside"
   "a ridiculous exterior may coexist with a source-defined divine interior"
 
 pluralSpeechConflictContract : LeanPhilosophyTheoremContract
 pluralSpeechConflictContract = mkJMDContract
   "RequestProject.SymposiumMountain"
-  "Plato.FullSymposium.phaedrus_agathon_incompatible"
+  "Plato.phaedrus_agathon_incompatible"
   "two Symposium speech commitments are formally incompatible within the supplied full-Symposium KB"
 
 mortalPersistenceContract : LeanPhilosophyTheoremContract
 mortalPersistenceContract = mkJMDContract
   "RequestProject.SymposiumInvariants"
-  "Plato.DiotimaFlux.mortal_same_yet_other"
+  "Plato.DiotimaFlux.KB.mortal_same_yet_other"
   "mortal persistence is represented as same-orbit continuity together with change"
 
 republicCraftContract : LeanPhilosophyTheoremContract
