@@ -79,14 +79,15 @@ unexecutedDatabaseDoesNotCreateReceiptRegression =
 ------------------------------------------------------------------------
 
 closureRequiresExecutedDatabasesRegression :
-  Search.DatabaseExecutionReceipt Search.scopus →
-  Search.DatabaseExecutionReceipt Search.webOfScience →
-  Search.DatabaseExecutionReceipt Search.eric →
-  Search.DatabaseExecutionReceipt Search.acmDigitalLibrary →
-  Search.DatabaseExecutionReceipt Search.ieeeXplore →
-  Search.DeduplicationReceipt →
-  Search.EligibilityScreeningReceipt →
-  Search.StructuredExtractionReceipt →
+  (scopusReceipt : Search.DatabaseExecutionReceipt Search.scopus) →
+  (wosReceipt : Search.DatabaseExecutionReceipt Search.webOfScience) →
+  (ericReceipt : Search.DatabaseExecutionReceipt Search.eric) →
+  (acmReceipt : Search.DatabaseExecutionReceipt Search.acmDigitalLibrary) →
+  (ieeeReceipt : Search.DatabaseExecutionReceipt Search.ieeeXplore) →
+  (dedup : Search.DeduplicationReceipt
+    scopusReceipt wosReceipt ericReceipt acmReceipt ieeeReceipt) →
+  (screening : Search.EligibilityScreeningReceipt dedup) →
+  (extraction : Search.StructuredExtractionReceipt screening) →
   Search.TransparentStructuredSearchClosureReceipt
 closureRequiresExecutedDatabasesRegression = Search.closeTransparentStructuredSearch
 
