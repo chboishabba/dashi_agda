@@ -21,11 +21,11 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact where
 -- * A1/A2 theorem-bearing Lean receipts: dedicated periodic-B Aristotle task.
 -- * G0': existing R291 real-Hermitian scalarization into the old R27 pair.
 -- * G2 algebra donor: finite path difference -> gradient-energy theorem.
--- * G1 magnitude donor: exact modal-energy/Cauchy amplitude machinery.
+-- * G1 local scalar envelope: exact rational Hermitian Young on G0' carrier.
 --
 -- The Lean radial receipts do not themselves construct the rational Agda
--- family/sample weld.  G0' does not construct a global scalar Fourier state and
--- does not pay G2/G1.  Those remain the live state-side physical envelopes.
+-- family/sample weld.  G0' plus the local G1 theorem still do not pay G2 or a
+-- cutoff-uniform family envelope.  Those remain live state-side obligations.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -42,13 +42,13 @@ import DASHI.Physics.Closure.NSTriadKNR571HomochiralPairedSecondMomentRealizatio
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceExact as Taylor
 import DASHI.Physics.Closure.NSTriadKNR571LeanGateAEnvelopeReceiptExact as LeanReceipt
 import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact as G0
+import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeExact as G1Local
 
 -- Existing donors.  Importing them here is intentional: this is the typed
 -- archaeology/crosswalk surface for the four Gate-A leaves.
 import DASHI.Physics.Closure.NSTriadKNExternalHHOutputRadialGapRound124Exact as A1Donor
 import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact as RadiusDonor
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePathDifferenceDiffusionExact as G2Donor
-import DASHI.Physics.Closure.NSTriadKNWaleffeAmplitudeEnergyProductRound105Exact as G1Donor
 
 preferredLinearModel :
   R311.HelicitySign →
@@ -127,11 +127,9 @@ r571GateAA1PhysicalFamilyUniformBoundClosed = false
 -- G0'/G2/G1 state side.
 ------------------------------------------------------------------------
 
--- The local vector->scalar bridge is now source-written: two literal rational
--- C^3 samples are paired against the existing spectator via the R291
--- real-Hermitian functional and packaged into the old opposite R27 pair.  This
--- is a same-object adapter only; it does not choose the eventual physical
--- X-/X+ grouping and does not add an estimate.
+-- The local vector->scalar bridge is source-written: two literal rational C^3
+-- samples are paired against the existing spectator via the R291
+-- real-Hermitian functional and packaged into the old opposite R27 pair.
 r571GateAG0HermitianScalarizedPairClosed : Bool
 r571GateAG0HermitianScalarizedPairClosed =
   G0.r571HermitianScalarizedOppositePairClosed
@@ -146,8 +144,17 @@ r571GateAG2FinitePathDonorLocated = true
 r571GateAG2PhysicalGradientCrosswalkClosed : Bool
 r571GateAG2PhysicalGradientCrosswalkClosed = false
 
-r571GateAG1ModalEnergyDonorLocated : Bool
-r571GateAG1ModalEnergyDonorLocated = true
+-- R579 now pays the local G1 magnitude step directly on the same G0'
+-- Hermitian scalarization.  This is intentionally weaker than a cutoff-uniform
+-- shifted-coefficient family envelope: it introduces no fibre sum or scale
+-- constant, and leaves G2 untouched.
+r571GateAG1LocalHermitianEnvelopeClosed : Bool
+r571GateAG1LocalHermitianEnvelopeClosed =
+  G1Local.r571LocalHermitianG1EnvelopeClosed
+
+r571GateAG1LocalHermitianEnvelopeUsesSquareRoot : Bool
+r571GateAG1LocalHermitianEnvelopeUsesSquareRoot =
+  G1Local.r571LocalHermitianG1UsesSquareRoot
 
 r571GateAG1ShiftedCoefficientEnvelopeClosed : Bool
 r571GateAG1ShiftedCoefficientEnvelopeClosed = false

@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_)
 import DASHI.Papers.NavierStokes.TheoremInterface as Paper
 import DASHI.Papers.NavierStokes.FourLaneProofProgramCoordinatorRegression
 import DASHI.Papers.NavierStokes.FourLaneProofProgramS2bBandTransferRegression
+import DASHI.Physics.Closure.NSABPortabilityBidiStatusRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyPointwiseRegression
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierRegression
@@ -19,25 +20,44 @@ import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellCanonicalSuffixRegression
 import DASHI.Physics.Closure.NSTriadKNR104StrictShellJumpTailRegression
 import DASHI.Physics.Closure.NSTriadKNUpperShellPrefixErasureRegression
 import DASHI.Physics.Closure.NSTriadKNR104GlobalLayerCakePhysicalPacketWeldRegression
+import DASHI.Physics.Closure.NSTriadKNPacketBoundaryFluxComplementRound98Regression
+import DASHI.Physics.Closure.NSTriadKNS2b2AdjacentShellSpectralGapNoGoRegression
+import DASHI.Physics.Closure.NSTriadKNUpperShellCollarRemoteSplitRegression
+import DASHI.Physics.Closure.NSTriadKNLowCollarRemotePacketSplitRegression
+import DASHI.Physics.Closure.NSTriadKNTwoShellLowRemoteEuclideanGapRegression
+import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleRegression
+import DASHI.Physics.Closure.NSTriadKNLowRemoteSpectralDatumRound98Regression
+import DASHI.Physics.Closure.NSTriadKNCollarHeatNestedSameOutputWeldRegression
+import DASHI.Physics.Closure.NSTriadKNOutputLocalSelectorFixedOutputReductionRegression
+import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentRegression
+import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
 --
 -- This file certifies only that the paper-facing status surface agrees with
 -- the authoritative owners it imports. The canonical coordinator regression,
--- thin S2b successor delta, and strict S0/S1/S2 representation regressions are
--- imported so current A/B/C/D routing and physical phase seams are checked by
--- the same root whenever it is actually kernel-run.
+-- thin S2b successor delta, explicit A/B portability audit, strict S0/S1/S2
+-- representation regressions, and the current S2b2 sign/no-go/collar/
+-- three-region/gap/live-norm/low-remote-datum/collar-carrier/output-local/
+-- damped-tangent/local-Hermitian-G1 regressions are imported so the current
+-- A/B routing and physical phase seams are checked by the same root whenever
+-- it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
--- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1a radial
--- ordering/permutation, reject-zero full->nonzero transport, upper-shell R98
--- transport, canonical suffix realization, local strict-jump tails, prefix
--- erasure, and the global R104 physical packet layer-cake weld may all be
--- source-written while concrete scalar FTC / integration authorities, the
--- quantitative S2 payment, initial ceiling and retained-viscosity payments
--- remain unobserved or open.
+-- compiler, S2a same-object weld, S2b0 BandTransfer embedding, S2b1 radial
+-- packet realization, packet-complement antisymmetry, the adjacent-shell-gap
+-- no-go, exact collar/remote split, exact low/collar/remote flux identity,
+-- two-shell concrete frequency gap, rational live-norm transport, the literal
+-- low/remote R98 datum, the collar heat-nested same-output weld, the generic
+-- output-local fixed-output selector reduction, the exact fixed-output
+-- damped-tangent/commutator residual decomposition, the local R571 Hermitian G1
+-- envelope and A/B portability classification may all be source-written while
+-- concrete scalar FTC / integration authorities, the quantitative signed
+-- coherent-covariance fixed-output payment, G2 physical state-difference
+-- transport, initial ceiling and retained-viscosity payments remain unobserved
+-- or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
