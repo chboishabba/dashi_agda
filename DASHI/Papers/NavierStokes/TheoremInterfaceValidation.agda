@@ -29,6 +29,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleRegre
 import DASHI.Physics.Closure.NSTriadKNLowRemoteSpectralDatumRound98Regression
 import DASHI.Physics.Closure.NSTriadKNCollarHeatNestedSameOutputWeldRegression
 import DASHI.Physics.Closure.NSTriadKNOutputLocalSelectorFixedOutputReductionRegression
+import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentRegression
 import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeRegression
 
 ------------------------------------------------------------------------
@@ -39,9 +40,9 @@ import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeRegress
 -- thin S2b successor delta, explicit A/B portability audit, strict S0/S1/S2
 -- representation regressions, and the current S2b2 sign/no-go/collar/
 -- three-region/gap/live-norm/low-remote-datum/collar-carrier/output-local/
--- local-Hermitian-G1 regressions are imported so the current A/B routing and
--- physical phase seams are checked by the same root whenever it is actually
--- kernel-run.
+-- damped-tangent/local-Hermitian-G1 regressions are imported so the current
+-- A/B routing and physical phase seams are checked by the same root whenever
+-- it is actually kernel-run.
 --
 -- IMPORTANT: checking this file does NOT promote branch-recovery/source status
 -- into an observed commit-specific Agda receipt. S0, S1a, the conditional S1b
@@ -50,11 +51,13 @@ import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeRegress
 -- no-go, exact collar/remote split, exact low/collar/remote flux identity,
 -- two-shell concrete frequency gap, rational live-norm transport, the literal
 -- low/remote R98 datum, the collar heat-nested same-output weld, the generic
--- output-local fixed-output selector reduction, the local R571 Hermitian G1
+-- output-local fixed-output selector reduction, the exact fixed-output
+-- damped-tangent/commutator residual decomposition, the local R571 Hermitian G1
 -- envelope and A/B portability classification may all be source-written while
--- concrete scalar FTC / integration authorities, the quantitative unweighted
--- fixed-output collar payment, G2 physical state-difference transport, initial
--- ceiling and retained-viscosity payments remain unobserved or open.
+-- concrete scalar FTC / integration authorities, the quantitative signed
+-- coherent-covariance fixed-output payment, G2 physical state-difference
+-- transport, initial ceiling and retained-viscosity payments remain unobserved
+-- or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
