@@ -238,7 +238,7 @@ Its Lean files show substantial downstream closure once source-shaped inputs are
 - `MarkedPolymerDecay.lean`: fixed-order source derivatives cost a polynomial in polymer size, absorbed by an arbitrarily small decay-rate loss;
 - `RowBShellEnergy.lean`: exponential activity + entropy -> geometric shell energy;
 - `PolymerActivityDecay.lean`: Mayer/product smallness -> explicit activity rate;
-- `WeightedInfluenceRows.lean`: one weighted row -> all iterates/quasi-locality;
+- `WeightedInfluenceRows.lean`: one weighted row -> all iterates / quasi-locality;
 - `RowBToRowCTemporalFusion.lean`: Row-B marked shell + covariance response -> much of Row-C temporal accumulated-curvature debt.
 
 But the bundle remains fail-closed at the same physical source step: the literal differentiated CMP116 activity/source majorant (`hact`) and same-object source identification remain inputs. Thus it compresses producer plumbing but does not pay B1.
@@ -295,6 +295,10 @@ R350 stale-import repair:
                  20d4354d9dd031ce38e21ac93f1a1104b502c150
 ```
 
-## 16. Verification boundary
+## 16. Exact-head snapshot
+
+At the R386 documentation snapshot the branch head is updated by the subsequent documentation commits. PR metadata/status should be read from GitHub rather than inferred from this list. No exact-head Agda workflow receipt has been observed in this tranche.
+
+## 17. Verification boundary
 
 R381–R386 are source-written reductions. `machineChecked` fields are repository classification values, not a fresh exact-head Agda receipt. The stale-import repairs remove known source blockers but do not constitute a kernel run. No continuum YM construction, mass gap, Clay completion or external acceptance is claimed here.
