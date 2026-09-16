@@ -204,7 +204,7 @@ Do not schedule as independent mathematics:
 
 ## Attachment / Aristotle donor interpretation
 
-The supplied `ym-clay-final-output-20260916` bundle is useful as a producer donor, not as Agda theorem authority. In particular its Lean `CMP116ActivityRate`, `MarkedPolymerDecay`, `RowBShellEnergy` and `PolymerActivityDecay` files show that, **once** the literal differentiated CMP116 activity majorant is supplied, block-size cancellation, entropy competition, marked-activity polynomial cost, geometric shell summation and several Row-B/Row-C consequences are compiler/theorem output with explicit constants.
+The supplied `ym-clay-final-output-20260916` bundle is useful as a producer donor, not as Agda theorem authority. In particular its Lean `CMP116ActivityRate`, `MarkedPolymerDecay`, `RowBShellEnergy`, `PolymerActivityDecay`, `WeightedInfluenceRows`, and `RowBToRowCTemporalFusion` files show that, **once** the literal differentiated CMP116 activity majorant is supplied, block-size cancellation, entropy competition, marked-activity polynomial cost, geometric shell summation and several Row-B/Row-C consequences are compiler/theorem output with explicit constants.
 
 The bundle itself remains fail-closed at the same physical point: the literal differentiated CMP116 activity/source majorant (`hact` / same-object source identification) is still an input. This reinforces the present consumer-first cut rather than closing it.
 
@@ -242,6 +242,10 @@ Do not merge these queues merely because all mention CMP116.
 - CMP122 II — DOI `10.1007/BF01238433`.
 
 Person QID / exact paper-specific Dewey remain unresolved unless an authoritative identity/catalogue source is acquired. Do not guess them.
+
+## Exact-head snapshot
+
+At the end of the R386 source tranche the exact head is resolved from GitHub; do not infer it from internal round commit labels. Exact-head combined status must likewise be checked directly.
 
 ## Validation boundary
 
