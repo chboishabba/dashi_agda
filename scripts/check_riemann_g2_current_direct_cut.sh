@@ -41,11 +41,9 @@ for f in "${FILES[@]}"; do
   fi
 done
 
-# R1 archaeology regression: keep the representation wall split into theorem-
-# bearing same-object obligations.  Generic phase algebra/source-status receipts
-# must not be mistaken for the actual pole-quotient realization or checked-scalar
-# transport.
 R1="DASHI/Analysis/RiemannG2FinalNearLiteralKernelExact.agda"
+
+# Existing fail-closed R1 archaeology surface.
 grep -q 'genericTargetGapCosineLawClosed' "$R1"
 grep -q 'reflectionPairLiteralFormulaSourceOwned' "$R1"
 grep -q 'actualUniversalPoleQuotientPhaseRealizationInhabited' "$R1"
@@ -54,6 +52,30 @@ grep -q 'statusReceiptPaysR1Equality' "$R1"
 grep -q 'actualUniversalPoleQuotientPhaseRealizationInhabitedIsFalse' "$R1"
 grep -q 'checkedNearScalarBridgeInhabitedIsFalse' "$R1"
 grep -q 'statusReceiptPaysR1EqualityIsFalse' "$R1"
+
+# R1a/R1b must be separately inhabitable theorem obligations.
+grep -q 'FinalNearCheckedScalarAttachment' "$R1"
+grep -q 'CheckedScalarLiteralFoldIdentification' "$R1"
+grep -q 'compileFinalNearCheckedScalarBridge' "$R1"
+grep -q 'compileFinalNearRepresentationEqualityFromSplit' "$R1"
+
+# R1b is itself two source-shaped payments: the checked scalar must first be
+# identified with the literal reflection-pair scalar on the final pole-quotient
+# carrier, and only then must that SAME scalar be identified with the finite fold.
+grep -q 'CheckedScalarLiteralReflectionPairIdentification' "$R1"
+grep -q 'LiteralReflectionPairFiniteFoldIdentification' "$R1"
+grep -q 'compileCheckedScalarLiteralFoldIdentificationFromReflectionPairSplit' "$R1"
+grep -q 'r1b1CheckedScalarReflectionPairIdentificationInhabited' "$R1"
+grep -q 'r1b1CheckedScalarReflectionPairIdentificationInhabitedIsFalse' "$R1"
+grep -q 'r1b2ReflectionPairFiniteFoldIdentificationInhabited' "$R1"
+grep -q 'r1b2ReflectionPairFiniteFoldIdentificationInhabitedIsFalse' "$R1"
+
+# Source/status audit must fail-close every independently payable representation
+# edge. A future recovery may pay R1a, R1b1, or R1b2 separately.
+grep -q 'r1aCheckedScalarAttachmentInhabited' "$R1"
+grep -q 'r1aCheckedScalarAttachmentInhabitedIsFalse' "$R1"
+grep -q 'r1bLiteralFoldIdentificationInhabited' "$R1"
+grep -q 'r1bLiteralFoldIdentificationInhabitedIsFalse' "$R1"
 
 if command -v agda >/dev/null 2>&1; then
   echo "Agda: $(agda --version)"
