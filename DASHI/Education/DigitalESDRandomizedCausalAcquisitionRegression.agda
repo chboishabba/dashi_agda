@@ -17,7 +17,12 @@ trialNRegression :
   ≡ Ceiling.explicitlyReportedNat 106 "randomised controlled factorial trial total n"
 trialNRegression = refl
 
-causalCeilingRegression :
+reportedAnalysisNRegression :
+  Ceiling.StudyClaimProfile.analysisN RCT.greenMolloyDugganPilotProfile
+  ≡ Ceiling.natNotReported "106 complete randomized datasets exist, but reported inferential contrasts use analysis-local exclusions (e.g. simulation 24 vs control 27 after control outlier removal); no single analysis n represents all reported tests"
+reportedAnalysisNRegression = refl
+
+causalPromotionStillUnpaidRegression :
   Ceiling.StudyClaimProfile.strongestSupportedClaim RCT.greenMolloyDugganPilotProfile
-  ≡ Ceiling.implicationConeClaim Cone.attributesCausalEffect
-causalCeilingRegression = refl
+  ≡ Ceiling.implicationConeClaim Cone.associatesTreatmentAndOutcome
+causalPromotionStillUnpaidRegression = refl
