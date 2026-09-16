@@ -4,16 +4,17 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Education.DigitalESDColladoAnalysisSetExact as Sets
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
+import DASHI.Education.DigitalESDStudyAnalysisSetRefinementExact as Analysis
 
 immediateSetNRegression :
-  Sets.Analysis.AnalysisSetReceipt.analysisN Sets.colladoImmediateSet
+  Analysis.AnalysisSetReceipt.analysisN Sets.colladoImmediateSet
   ≡ Ceiling.derivedNatWithSameObjectReceipt 257
       "120 experimental + 137 control complete T0/T1 cases"
       "same-object arithmetic from Participants and procedure"
 immediateSetNRegression = refl
 
 longitudinalSetNRegression :
-  Sets.Analysis.AnalysisSetReceipt.analysisN Sets.colladoT2Set
+  Analysis.AnalysisSetReceipt.analysisN Sets.colladoT2Set
   ≡ Ceiling.explicitlyReportedNat 98
       "49 experimental + 49 control completed T2"
 longitudinalSetNRegression = refl
