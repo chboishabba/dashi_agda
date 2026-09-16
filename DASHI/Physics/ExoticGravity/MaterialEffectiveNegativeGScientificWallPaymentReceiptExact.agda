@@ -13,6 +13,14 @@ import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingModelDiscrim
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScalingReplicationIdentityWeldExact as Replication
 import DASHI.Physics.ExoticGravity.MaterialEffectiveNegativeGScientificWallProgressionExact as Progress
 
+------------------------------------------------------------------------
+-- RECEIPT-INDEXED TERMINAL SCIENTIFIC-WALL PAYMENT
+--
+-- The five-bit progression state is a scheduler, not evidence.  The terminal
+-- all-paid state is admissible for downstream use only when backed by the
+-- actual existing receipts and same-object welds below.
+------------------------------------------------------------------------
+
 record FullyPaidScientificWallReceipt
     {prediction : GR.OrdinaryGRPredictionReceipt}
     (ratio : Ratio.ConstitutiveRatioMeasurementReceipt prediction)
@@ -21,11 +29,16 @@ record FullyPaidScientificWallReceipt
   field
     massCurrent : Current.MassCurrentSourceReconstructionReceipt
     stressEnergy : Stress.LaboratoryStressEnergyReceipt
-    stressEnergyUsesSameMassCurrent : Stress.massCurrentSource stressEnergy ≡ massCurrent
+    stressEnergyUsesSameMassCurrent :
+      Stress.massCurrentSource stressEnergy ≡ massCurrent
+
     discrimination : Cutset.MaterialEffectiveNegativeGDiscriminationReceipt
     modelSeparation : Scaling.ScalingModelSeparationReceipt
-    modelSeparationUsesSameDiscrimination : Scaling.upstreamCutset modelSeparation ≡ discrimination
+    modelSeparationUsesSameDiscrimination :
+      Scaling.upstreamCutset modelSeparation ≡ discrimination
+
     scalingReplicationWeld : Replication.ScalingReplicationIdentityWeld ratio bundle
+
     sameNegativeGInterpretation :
       Cutset.constitutiveNegativeGWeld discrimination
         ≡ Replication.compileConstitutiveNegativeGReceipt scalingReplicationWeld
@@ -36,7 +49,8 @@ paymentStateFromFullyPaidReceipt :
   {prediction : GR.OrdinaryGRPredictionReceipt} →
   {ratio : Ratio.ConstitutiveRatioMeasurementReceipt prediction} →
   {bundle : Plan.ScalingReplicationBundleReceipt} →
-  FullyPaidScientificWallReceipt ratio bundle → Progress.ScientificWallPaymentState
+  FullyPaidScientificWallReceipt ratio bundle →
+  Progress.ScientificWallPaymentState
 paymentStateFromFullyPaidReceipt _ = Progress.fullyPaidWall
 
 fullyPaidReceiptClosesScientificWall :
@@ -44,8 +58,19 @@ fullyPaidReceiptClosesScientificWall :
   {ratio : Ratio.ConstitutiveRatioMeasurementReceipt prediction} →
   {bundle : Plan.ScalingReplicationBundleReceipt} →
   (receipt : FullyPaidScientificWallReceipt ratio bundle) →
-  Progress.firstOpenScientificWallLeaf (paymentStateFromFullyPaidReceipt receipt) ≡ Progress.scientificWallClosed
+  Progress.firstOpenScientificWallLeaf (paymentStateFromFullyPaidReceipt receipt)
+    ≡ Progress.scientificWallClosed
 fullyPaidReceiptClosesScientificWall _ = Progress.fullyPaidWallIsClosed
+
+fullyPaidReceiptSchedulesNoFurtherWallAcquisition :
+  {prediction : GR.OrdinaryGRPredictionReceipt} →
+  {ratio : Ratio.ConstitutiveRatioMeasurementReceipt prediction} →
+  {bundle : Plan.ScalingReplicationBundleReceipt} →
+  (receipt : FullyPaidScientificWallReceipt ratio bundle) →
+  Progress.decisionForLeaf
+    (Progress.firstOpenScientificWallLeaf (paymentStateFromFullyPaidReceipt receipt))
+    ≡ Progress.noFurtherScientificWallAcquisition
+fullyPaidReceiptSchedulesNoFurtherWallAcquisition _ = Progress.closedWallHasNoFurtherAcquisition
 
 record ScientificWallPaymentReceiptBoundary : Set where
   constructor scientific-wall-payment-receipt-boundary
@@ -59,4 +84,5 @@ record ScientificWallPaymentReceiptBoundary : Set where
     fullyPaidReceiptAutomaticallyProvesPhysicalNegativeG : Bool
 
 canonicalScientificWallPaymentReceiptBoundary : ScientificWallPaymentReceiptBoundary
-canonicalScientificWallPaymentReceiptBoundary = scientific-wall-payment-receipt-boundary false true true true true false false
+canonicalScientificWallPaymentReceiptBoundary =
+  scientific-wall-payment-receipt-boundary false true true true true false false
