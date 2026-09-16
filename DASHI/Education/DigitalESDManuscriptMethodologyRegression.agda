@@ -16,6 +16,9 @@ paperTypeRegression = refl
 researchQuestionCountRegression : Method.researchQuestionCount ≡ 5
 researchQuestionCountRegression = refl
 
+extractionCoordinateCountRegression : Method.extractionCoordinateCount ≡ 19
+extractionCoordinateCountRegression = refl
+
 methodRetainsStructuredSearchRegression : Method.MethodologyBoundary.transparentStructuredSearchRequired Method.canonicalMethodologyBoundary ≡ true
 methodRetainsStructuredSearchRegression = refl
 
