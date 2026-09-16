@@ -30,6 +30,5 @@
       "reason": "Top-level capstone importing 2890 modules; scheduled after ordinary modules to leverage cached interfaces."
     }
   },
-
   "prefix": []
 }
