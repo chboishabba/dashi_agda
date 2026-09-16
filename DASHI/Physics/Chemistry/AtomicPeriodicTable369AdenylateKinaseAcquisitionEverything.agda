@@ -35,6 +35,13 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFreeEnergyTe
 -- coordinates, never Kramers rates or experimental kinetics.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDTextAcquisitionExact
 
+-- Additional ligand-free temporal observations: typical open-start LID closure
+-- at ~10 ns and reopening at ~100 ns, ~100--800 ns reversible open/semi-open
+-- switching, and three source-identified cracking regions (60--63, 110--120,
+-- 160--175) with ~10--100 ns secondary-structure switching. These remain LT-MD
+-- observations, not Kramers rates, experimental kinetics or universal timing.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLigandFreeTemporalDynamicsTextAcquisitionExact
+
 -- Source-text intermediate geometry envelope: ligand-free semi-open/semi-closed
 -- structures are reported in theta1 ~60--70 deg, theta2 ~35--60 deg and
 -- dLN ~16--30 A, with example LT-MD snapshot locators.  This narrows the dLN
