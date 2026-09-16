@@ -35,6 +35,7 @@ import DASHI.Physics.YangMills.BalabanCMP116TwoSourceConnectedClusteringRound274
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanT5DirectSelectedMarkedDecayRound320Exact as R320
 import DASHI.Physics.YangMills.BalabanCMP116R281ModeSelectedDirectRound341Exact as R341
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact as Unified
 
 r320PaymentAsR274ConnectedShell :
@@ -65,7 +66,7 @@ r320PaymentAsR274ConnectedShell
         subst
           (λ lower →
             lower ≤
-              DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact.rootedShell
+              Shell.rootedShell
                 (R318.shellData base)
                 (R318.scaleOf base cutoff)
                 (R318.volumeOf base cutoff)
