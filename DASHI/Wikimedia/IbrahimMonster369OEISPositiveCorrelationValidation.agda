@@ -21,6 +21,10 @@ c6SpectrumSourceRegression :
   P.c6WeightTwoSpectrumBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 c6SpectrumSourceRegression = refl
 
+normalizationStableQSixRegression :
+  P.sixBPositiveDegreeNormalizationBridgePaid P.currentPositiveCorrelationBoundary ≡ true
+normalizationStableQSixRegression = refl
+
 sameObjectFirewallRegression :
   P.sameObjectPaid P.correlation32772 ≡ false
 sameObjectFirewallRegression = refl
