@@ -12,6 +12,10 @@ import DASHI.Education.DigitalESDStudyClaimPilotExact as Pilot
 import DASHI.Education.DigitalESDRandomizedCausalAcquisitionExact as Green
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
+import DASHI.Reasoning.AristotleExperimentalProofSearchExact as ProofSearch
+
+proofSearchBoundary : ProofSearch.AristotleExperimentalProofSearchBoundary
+proofSearchBoundary = ProofSearch.canonicalAristotleExperimentalProofSearchBoundary
 
 ------------------------------------------------------------------------
 -- STUDY RESULT -> PNF -> IMPLICATION / PROOF-SEARCH FRONTIER
@@ -22,6 +26,9 @@ import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 -- context, intervention, comparator, outcome, time and inferential-force
 -- coordinates, then states the strongest implication paid by those receipts.
 -- The first stronger unpaid implication is retained as proof-search debt.
+-- Canonical proof-search semantics are reused above: a useful next probe must
+-- discriminate a consumer-relevant collision; search policy does not replace
+-- proof-validity semantics and may adapt to the previous observed outcome.
 ------------------------------------------------------------------------
 
 record StudyResultAudit : Set where
@@ -39,10 +46,6 @@ record StudyResultAudit : Set where
     promotionResidual : String
 
 open StudyResultAudit public
-
-------------------------------------------------------------------------
--- Deng, Sun, Ho & Lee 2026: observed paired knowledge gain.
-------------------------------------------------------------------------
 
 iaqScope : PNF.AssertionScope
 iaqScope = PNF.assertionScope
@@ -92,10 +95,6 @@ iaqResultAudit = study-result-audit
   "no untreated or alternative-intervention comparator; testing/history/secular explanations remain live"
   "next causal probe would require a design that identifies the counterfactual programme effect; more precision on the paired gain cannot substitute for that comparator"
 
-------------------------------------------------------------------------
--- Braßler 2024: Time x Group interaction in a quasi-experiment.
-------------------------------------------------------------------------
-
 brasslerScope : PNF.AssertionScope
 brasslerScope = PNF.assertionScope
   "University of Hamburg students in the reported OER-production and same-cohort comparison groups"
@@ -144,10 +143,6 @@ brasslerResultAudit = study-result-audit
   "self-selection and unresolved group equivalence prevent the observed interaction from independently identifying a population causal effect"
   "next useful acquisition is the same-object missing-data/analysis-set account behind the N=409 versus F(1,191) discrepancy; even paying that would not itself remove non-random allocation"
 
-------------------------------------------------------------------------
--- Descamps et al. 2025: two active digital-sobriety scenarios.
-------------------------------------------------------------------------
-
 descampsScope : PNF.AssertionScope
 descampsScope = PNF.assertionScope
   "107 complete pre/post first-year university student cases"
@@ -195,10 +190,6 @@ descampsResultAudit = study-result-audit
   Cone.attributesCausalEffect
   "two active scenarios do not identify the effect of digital-sobriety education versus no intervention, and complete-case loss remains material"
   "next causal discriminator would need an estimand-specific control/comparator and an attrition/missingness account; a significant p-value on one sub-outcome cannot pay those predicates"
-
-------------------------------------------------------------------------
--- Green, Molloy & Duggan 2022: randomized design, analysis-local exclusions.
-------------------------------------------------------------------------
 
 greenScope : PNF.AssertionScope
 greenScope = PNF.assertionScope
@@ -249,16 +240,11 @@ greenResultAudit = study-result-audit
   "next proof-search target is not another supporting citation: it is the analysis-set/estimand question—whether the reported exclusion rule is admissible for the declared causal consumer; construct completeness and transport remain separate later obligations"
 
 studyResultAudits : List StudyResultAudit
-studyResultAudits =
-  iaqResultAudit
-  ∷ brasslerResultAudit
-  ∷ descampsResultAudit
-  ∷ greenResultAudit
-  ∷ []
+studyResultAudits = iaqResultAudit ∷ brasslerResultAudit ∷ descampsResultAudit ∷ greenResultAudit ∷ []
 
 studyResultAssertionCount : Nat
 studyResultAssertionCount = 4
 
 studyResultPNFReading : String
 studyResultPNFReading =
-  "Digital-ESD synthesis now consumes explicit study-result predicates rather than article-level rhetoric. Each audit retains the sampled population, context, intervention/exposure, comparator, measured outcome, time window and inferential force together with n/effect/uncertainty receipts. Proof search starts at the first unpaid implication: Deng needs counterfactual control for causal promotion; Brassler needs both analysis-set recovery and non-random-allocation repair; Descamps needs an estimand-specific control plus missingness account; Green needs an explicit post-randomization analysis-set/estimand decision before causal promotion. More citations cannot substitute for those discriminators."
+  "Digital-ESD synthesis now consumes explicit study-result predicates rather than article-level rhetoric. Each audit retains the sampled population, context, intervention/exposure, comparator, measured outcome, time window and inferential force together with n/effect/uncertainty receipts. Canonical Aristotle experimental proof-search semantics are reused only for discriminator/search structure: proof search starts at the first unpaid implication and seeks the least consumer-relevant observation that separates live worlds. Deng needs counterfactual control for causal promotion; Brassler needs both analysis-set recovery and non-random-allocation repair; Descamps needs an estimand-specific control plus missingness account; Green needs an explicit post-randomization analysis-set/estimand decision before causal promotion. More citations cannot substitute for those discriminators."
