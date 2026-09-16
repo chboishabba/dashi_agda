@@ -55,6 +55,18 @@ oecdDigitalEducationOutlook2026Source =
     "Primary OECD synthesis/report for current digital/GenAI education policy and evidence. Supports the distinction between task performance and learning, and the need for pedagogical guidance, human-centred design, research, governance and enabling infrastructure; it does not establish sustainability or learning effects for every technology or context."
     Attr.publicAttribution
 
+unescoAICommonGoodMinisterialSource : Attr.AttributedSource
+unescoAICommonGoodMinisterialSource =
+  Attr.mkNoDOISource
+    "Education ministers and designated representatives convened by UNESCO"
+    "Ministerial Statement: Sustaining education as a common good in the age of AI"
+    "UNESCO Digital Learning Week 2026"
+    "2026"
+    "https://www.unesco.org/en/articles/education-ministers-call-education-remain-common-good-age-ai-unescos-digital-learning-week"
+    Attr.institutionalSource
+    "Primary intergovernmental normative/governance source adopted during UNESCO Digital Learning Week 2026. Supports deliberative governance, public accountability, learner/teacher rights and source-bounded procurement/infrastructure principles including total-cost-of-ownership, interoperability, portability and open systems; it is not evidence that any named AI or digital-education intervention is effective or sustainable."
+    Attr.publicAttribution
+
 primaryMethodologySourceAtlas : Attr.AttributedSourceAtlas
 primaryMethodologySourceAtlas =
   Attr.mkSourceAtlas
@@ -63,8 +75,9 @@ primaryMethodologySourceAtlas =
     ( unescoESD2030RoadmapSource
     ∷ unescoESD2030MidtermSource
     ∷ oecdDigitalEducationOutlook2026Source
+    ∷ unescoAICommonGoodMinisterialSource
     ∷ [] )
-    "Primary institutional sources for ESD system transformation and current digital-education conditions. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
+    "Primary institutional sources for ESD system transformation, current digital-education conditions and 2026 AI-era public-purpose governance. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
 
 unescoRoadmapSourceRoleReceipt :
   Snowball.SourceRoleSnowballReceipt unescoESD2030RoadmapSource
@@ -81,6 +94,11 @@ oecdOutlookSourceRoleReceipt :
 oecdOutlookSourceRoleReceipt =
   Snowball.canonicalSourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
 
+unescoAICommonGoodMinisterialSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
+unescoAICommonGoodMinisterialSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
+
 priorAcquisitionAtlasRetained : Prior.DigitalESDAcquisitionAtlas
 priorAcquisitionAtlasRetained = Prior.canonicalDigitalESDAcquisitionAtlas
 
@@ -91,6 +109,7 @@ priorAcquisitionAtlasRetained = Prior.canonicalDigitalESDAcquisitionAtlas
 data InstitutionalFrameworkCreatesInterventionEffect : Set where
 data MidtermProgrammeEvaluationCreatesLocalCausalEffect : Set where
 data DigitalEducationOutlookCreatesSustainabilityProof : Set where
+data MinisterialGovernanceSourceCreatesInterventionEffect : Set where
 
 institutionalFrameworkDoesNotCreateInterventionEffect :
   InstitutionalFrameworkCreatesInterventionEffect → ⊥
@@ -103,6 +122,10 @@ midtermEvaluationDoesNotCreateLocalCausalEffect ()
 digitalEducationOutlookDoesNotCreateSustainabilityProof :
   DigitalEducationOutlookCreatesSustainabilityProof → ⊥
 digitalEducationOutlookDoesNotCreateSustainabilityProof ()
+
+ministerialGovernanceSourceDoesNotCreateInterventionEffect :
+  MinisterialGovernanceSourceCreatesInterventionEffect → ⊥
+ministerialGovernanceSourceDoesNotCreateInterventionEffect ()
 
 record PrimarySourceMethodologyBoundary : Set where
   constructor primary-source-methodology-boundary
@@ -120,6 +143,9 @@ record PrimarySourceMethodologyBoundary : Set where
     institutionalReportCreatesSameObjectInterventionEffect : Bool
     institutionalReportCreatesSameObjectInterventionEffectIsFalse :
       institutionalReportCreatesSameObjectInterventionEffect ≡ false
+    ministerialGovernanceSourceCreatesInterventionEffect : Bool
+    ministerialGovernanceSourceCreatesInterventionEffectIsFalse :
+      ministerialGovernanceSourceCreatesInterventionEffect ≡ false
 
 open PrimarySourceMethodologyBoundary public
 
@@ -128,6 +154,7 @@ canonicalPrimarySourceMethodologyBoundary =
   primary-source-methodology-boundary
     true refl
     true refl
+    false refl
     false refl
     false refl
     false refl
