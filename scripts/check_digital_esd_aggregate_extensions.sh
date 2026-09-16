@@ -31,6 +31,8 @@ grep -q '^import DASHI.Education.DigitalESDStructuredSearchRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDPrimarySourceMethodologyAtlasExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDManuscriptMethodologyExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDManuscriptMethodologyRegression$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDPreScreenCandidateSourceScopeMatrixExact$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDPreScreenCandidateSourceScopeMatrixRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDCanonicalOwnerRegression$' "$AGG"
 grep -q '^crossRoundAttributionOwnerRegression :' "$CANONICAL_REGRESSION"
 
