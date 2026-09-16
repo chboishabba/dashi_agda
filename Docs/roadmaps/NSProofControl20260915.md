@@ -428,6 +428,23 @@ rates. R232 separately rules out a generic pointwise half-derivative gain.
 R432/R487 already own the cardinality-free downstream compiler once theorem-
 bearing local budgets exist.
 
+Same-object audit on 2026-09-16: the new
+`NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact` owner already closes
+the division-free finite algebra
+
+```text
+n * W(M, variableDecay) + (sum rates) * W(M,M)
+  = - sum_{i<j} (r_i-r_j)(w_i-w_j)
+```
+
+on the literal fixed-output mixed-helicity fibre. Thus the live local payment
+is no longer an unspecified covariance residual; it is the theorem-bearing
+signed pair-difference budget for that exact family. R472/R480 remain useful
+older R432 producers, but their own status lines still keep the physical
+snapshot/same-object weld false, so they do not currently close d1b2 by alias.
+The next search should be for a same-carrier pair-difference payment or a proof
+that the existing physical snapshot weld is exactly this d1b2 family.
+
 #### Recovered historical donor: R571 -> Aug-5 paired second moment
 
 Do not search for a missing centered scalarization adapter. PR #920 already
