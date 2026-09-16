@@ -42,3 +42,11 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCitationNeig
 -- local unfolding.  These remain source-local computational observations and do
 -- not overwrite Li-Liu-Ji state labels, rates or FRET interpretation.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseZhengCui2018AcquisitionExact
+
+-- Named-intermediate geometry constraints: combine source-paid gamma/delta roles
+-- with the same-article LT-MD intermediate-region envelopes.  This narrows the
+-- admissible geometry (including delta's NMP semi-open theta2 ~35--45 deg) only
+-- at constraint level; the Figure-5 gamma/delta theta/dLN ledger cells remain
+-- explicitly unpaid.  The composition is DASHI synthesis and transfers no
+-- source authorship; DOI/PMID/PMCID/QID/UniProt remain provenance coordinates.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNamedIntermediateGeometryConstraintAcquisitionExact
