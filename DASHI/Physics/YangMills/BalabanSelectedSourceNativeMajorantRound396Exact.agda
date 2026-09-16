@@ -23,7 +23,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as Nat
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
+import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Exact as R342
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectoryToSourceNativeRound394Exact as R394
 import DASHI.Physics.YangMills.BalabanSourceNativeGeometricMajorantRound395Exact as R395
@@ -115,8 +116,7 @@ asR394Calibration
         subst
           (λ shell →
             shell ≤ R395.amplitude majorant
-              * DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact.rationalPower
-                  (R395.ratio majorant) distance)
+              * Power.rationalPower (R395.ratio majorant) distance)
           (sym (selectedSourceEnvelopeIsMajorantShell application
             cutoff observable time))
           (R395.sourceNativeGeometricBound majorant distance)
