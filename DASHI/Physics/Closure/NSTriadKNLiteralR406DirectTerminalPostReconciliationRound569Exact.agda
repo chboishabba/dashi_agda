@@ -5,14 +5,18 @@ module DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalPostReconciliatio
 --
 -- R565--R568 reduce leaf A to one signed commutator spacetime budget.  R577
 -- keeps absolute row/column Schur as a sufficient fallback, while R578 restores
--- signed R336/R29 pairwise aggregation as the preferred least-privilege route.
+-- signed pairwise aggregation as the preferred least-privilege route.
 --
--- R579/R580 close a local Hermitian overlap envelope on the literal nested
--- carrier.  R581 originally named the next debt "shell-decay envelope mass".
--- R582 tightens that statement after finding an observer defect: R336 shell
--- labels are free Nat metadata and are not yet realized by any physical mode.
--- Therefore the first signed-nested residual is now physical operator-shell
--- realization, before any separation-decay or summability theorem.
+-- R579/R580/R581 exposed a useful but historically over-restricted R329/R336
+-- path.  R582/R583 then found two observer defects there: free shell labels and
+-- an uncalibrated strong-low scale tag.  R571--R573 make both restrictions
+-- unnecessary for the modern direct route.
+--
+-- R584 moves the preferred overlap onto the literal unrestricted R573 weighted
+-- nested companion cell.  R585 normalizes the operator shell to the outer
+-- forcing leg p, the source-native output indexing R573's complete inner fibre.
+-- R586 then keeps the consumer minimal: cutoff-uniform same-output envelope
+-- mass is canonical; explicit shell decay is only one possible producer.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -29,6 +33,10 @@ import DASHI.Physics.Closure.NSTriadKNRationalHermitianYoungRound579Exact as R57
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedPairwiseMassEnvelopeRound580Exact as R580
 import DASHI.Physics.Closure.NSTriadKNSignedNestedDecayFrontierRound581Exact as R581
 import DASHI.Physics.Closure.NSTriadKNLiteralNestedShellObserverRepairRound582Exact as R582
+import DASHI.Physics.Closure.NSTriadKNLiteralStrongLowScaleCalibrationRound583Exact as R583
+import DASHI.Physics.Closure.NSTriadKNUnrestrictedNestedSignedOverlapRound584Exact as R584
+import DASHI.Physics.Closure.NSTriadKNUnrestrictedNestedOperatorShellNormalizationRound585Exact as R585
+import DASHI.Physics.Closure.NSTriadKNUnrestrictedNestedOverlapFrontierRound586Exact as R586
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
 round569TemporalGenerationsReconciled : Bool
@@ -46,32 +54,32 @@ round569LiveCommutatorSpacetimeBudgetClosed = R568.round568LiveCommutatorSpaceti
 round569AbsoluteNestedSchurIsFallback : Bool
 round569AbsoluteNestedSchurIsFallback = R578.round578AbsoluteNestedSchurHighestAlpha
 
-round569SignedPairwiseOverlapPreferred : Bool
-round569SignedPairwiseOverlapPreferred = R578.round578SignedPairwiseOverlapHighestAlpha
+round569HistoricalR336FreeShellLabelsPhysicallyBound : Bool
+round569HistoricalR336FreeShellLabelsPhysicallyBound = R582.round582R336FreeShellLabelsPhysicallyBound
 
-round569LocalHermitianEnvelopeClosed : Bool
-round569LocalHermitianEnvelopeClosed = R579.round579LocalHermitianEnvelopeClosed
+round569HistoricalR329StrongLowPhysicallyCalibrated : Bool
+round569HistoricalR329StrongLowPhysicallyCalibrated = R583.round583ExistingR329StrongLowPhysicallyCalibrated
 
-round569LiteralR336LocalOverlapConstructed : Bool
-round569LiteralR336LocalOverlapConstructed = R580.round580LiteralR336LocalOverlapReceiptConstructed
+round569PreferredCarrierUsesUnrestrictedR573Cell : Bool
+round569PreferredCarrierUsesUnrestrictedR573Cell = R584.round584LiteralWeightedR294NestedSameObject
 
-round569SameFinalOutputExplicit : Bool
-round569SameFinalOutputExplicit = R580.round580SameFinalOutputIsExplicitPremise
+round569PreferredCarrierRequiresStrongLowSubcone : Bool
+round569PreferredCarrierRequiresStrongLowSubcone = R586.round586StrongLowSubconeMandatory
 
-round569CoarseShellDecayEnvelopeMassClosed : Bool
-round569CoarseShellDecayEnvelopeMassClosed = R581.round581ShellDecayEnvelopeMassClosed
+round569OperatorShellNormalizedToOuterForcing : Bool
+round569OperatorShellNormalizedToOuterForcing = R585.round585CanonicalOperatorShellCoordinateSelected
 
-round569R336ShellLabelsPhysicallyBound : Bool
-round569R336ShellLabelsPhysicallyBound = R582.round582R336FreeShellLabelsPhysicallyBound
+round569LocalUnrestrictedSignedOverlapEnvelopeClosed : Bool
+round569LocalUnrestrictedSignedOverlapEnvelopeClosed = R584.round584LocalSignedOverlapEnvelopeClosed
 
-round569CanonicalLiteralShellFunctionAvailable : Bool
-round569CanonicalLiteralShellFunctionAvailable = R582.round582CanonicalLiteralShellFunctionAvailable
+round569CutoffUniformSameOutputEnvelopeMassClosed : Bool
+round569CutoffUniformSameOutputEnvelopeMassClosed = R586.round586CutoffUniformSameOutputEnvelopeMassClosed
 
-round569PhysicalOperatorShellCoordinateSelected : Bool
-round569PhysicalOperatorShellCoordinateSelected = R582.round582PhysicalOperatorShellCoordinateSelected
+round569ExplicitShellDecayMandatory : Bool
+round569ExplicitShellDecayMandatory = R586.round586ExplicitSeparationDecayMandatory
 
-round569FirstSignedNestedResidual : R582.NestedShellObserverResidual582
-round569FirstSignedNestedResidual = R582.currentResidual582
+round569FirstSignedNestedResidual : R586.UnrestrictedOverlapResidual586
+round569FirstSignedNestedResidual = R586.currentResidual586
 
 round569CurrentGlobalFirstResidualStillLeafA :
   R504.firstTerminalResidual R504.currentTerminalStatus
@@ -85,25 +93,29 @@ round569TemporalGenerationsReconciledIsTrue :
   round569TemporalGenerationsReconciled ≡ true
 round569TemporalGenerationsReconciledIsTrue = R565.round565ConcurrentTemporalOwnersReconciledIsTrue
 
-round569LocalHermitianEnvelopeClosedIsTrue :
-  round569LocalHermitianEnvelopeClosed ≡ true
-round569LocalHermitianEnvelopeClosedIsTrue = R579.round579LocalHermitianEnvelopeClosedIsTrue
+round569PreferredCarrierUsesUnrestrictedR573CellIsTrue :
+  round569PreferredCarrierUsesUnrestrictedR573Cell ≡ true
+round569PreferredCarrierUsesUnrestrictedR573CellIsTrue = R584.round584LiteralWeightedR294NestedSameObjectIsTrue
 
-round569LiteralR336LocalOverlapConstructedIsTrue :
-  round569LiteralR336LocalOverlapConstructed ≡ true
-round569LiteralR336LocalOverlapConstructedIsTrue = R580.round580LiteralR336LocalOverlapReceiptConstructedIsTrue
+round569PreferredCarrierRequiresStrongLowSubconeIsFalse :
+  round569PreferredCarrierRequiresStrongLowSubcone ≡ false
+round569PreferredCarrierRequiresStrongLowSubconeIsFalse = R586.round586StrongLowSubconeMandatoryIsFalse
 
-round569SameFinalOutputExplicitIsTrue :
-  round569SameFinalOutputExplicit ≡ true
-round569SameFinalOutputExplicitIsTrue = R580.round580SameFinalOutputIsExplicitPremiseIsTrue
+round569OperatorShellNormalizedToOuterForcingIsTrue :
+  round569OperatorShellNormalizedToOuterForcing ≡ true
+round569OperatorShellNormalizedToOuterForcingIsTrue = R585.round585CanonicalOperatorShellCoordinateSelectedIsTrue
 
-round569R336ShellLabelsPhysicallyBoundIsFalse :
-  round569R336ShellLabelsPhysicallyBound ≡ false
-round569R336ShellLabelsPhysicallyBoundIsFalse = R582.round582R336FreeShellLabelsPhysicallyBoundIsFalse
+round569LocalUnrestrictedSignedOverlapEnvelopeClosedIsTrue :
+  round569LocalUnrestrictedSignedOverlapEnvelopeClosed ≡ true
+round569LocalUnrestrictedSignedOverlapEnvelopeClosedIsTrue = R584.round584LocalSignedOverlapEnvelopeClosedIsTrue
 
-round569CanonicalLiteralShellFunctionAvailableIsTrue :
-  round569CanonicalLiteralShellFunctionAvailable ≡ true
-round569CanonicalLiteralShellFunctionAvailableIsTrue = R582.round582CanonicalLiteralShellFunctionAvailableIsTrue
+round569CutoffUniformSameOutputEnvelopeMassClosedIsFalse :
+  round569CutoffUniformSameOutputEnvelopeMassClosed ≡ false
+round569CutoffUniformSameOutputEnvelopeMassClosedIsFalse = R586.round586CutoffUniformSameOutputEnvelopeMassClosedIsFalse
+
+round569ExplicitShellDecayMandatoryIsFalse :
+  round569ExplicitShellDecayMandatory ≡ false
+round569ExplicitShellDecayMandatoryIsFalse = R586.round586ExplicitSeparationDecayMandatoryIsFalse
 
 round569LiveCommutatorSpacetimeBudgetClosedIsFalse :
   round569LiveCommutatorSpacetimeBudgetClosed ≡ false
