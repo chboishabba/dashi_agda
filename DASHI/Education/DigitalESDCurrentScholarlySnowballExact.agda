@@ -61,6 +61,18 @@ chughSustainabilityParadoxSource = Attr.mkDOISource
   "Opinion paper framing digital education as a sustainability paradox across environmental and social dimensions, with lifecycle-oriented attention to energy, devices, data infrastructure, equity, procurement and circular-economy strategies. It is a close conceptual antecedent for the reverse-direction sustainability claim and must be cited as such; it does not supply empirical intervention effects or the manuscript's reciprocal ESD-capacity/payment/participant-authority machinery."
   Attr.publicAttribution
 
+holstSDG47MonitoringSource : Attr.AttributedSource
+holstSDG47MonitoringSource = Attr.mkDOISource
+  "Jorrit Holst; Mandy Singer-Brodowski; Antje Brock; Gerhard de Haan"
+  "Monitoring SDG 4.7: Assessing Education for Sustainable Development in policies, curricula, training of educators and student assessment (input-indicator)"
+  "Sustainable Development 32(4), 3908-3923"
+  "2024"
+  "10.1002/sd.2865"
+  "https://doi.org/10.1002/sd.2865"
+  Attr.academicArticleSource
+  "Longitudinal input-level ESD monitoring study and methodology using more than 11,000 documents across ten years and all formal education sectors in Germany. Supports independent assessment of depth and speed of ESD integration in policies, curricula, educator training and student assessment; input integration does not by itself establish learning, output/outcome transformation or digital-ESD effects."
+  Attr.publicAttribution
+
 canonicalCurrentScholarlySourceAtlas : Attr.AttributedSourceAtlas
 canonicalCurrentScholarlySourceAtlas = Attr.mkSourceAtlas
   "current digital-ESD scholarly snowball extension"
@@ -69,8 +81,9 @@ canonicalCurrentScholarlySourceAtlas = Attr.mkSourceAtlas
   ∷ gousetiPlatformisationSource
   ∷ zagamiAustralianEdtechSource
   ∷ chughSustainabilityParadoxSource
+  ∷ holstSDG47MonitoringSource
   ∷ [] )
-  "Recent scholarly candidates extending the existing digital-ESD literature map with higher-education sustainability co-design, school platformisation experience, Australian edtech governance/durability cases, and a close sustainability-paradox conceptual antecedent. Acquisition remains candidate-only pending structured search and screening."
+  "Recent scholarly candidates extending the existing digital-ESD literature map with higher-education sustainability co-design, school platformisation experience, Australian edtech governance/durability cases, a close sustainability-paradox conceptual antecedent, and longitudinal SDG 4.7 input-monitoring methodology. Acquisition remains candidate-only pending structured search and screening."
 
 ardilaSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt ardilaDigitalFuturesSource
 ardilaSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt ardilaDigitalFuturesSource
@@ -84,6 +97,9 @@ zagamiSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt zagamiAust
 chughSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt chughSustainabilityParadoxSource
 chughSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt chughSustainabilityParadoxSource
 
+holstSourceRoleReceipt : Snowball.SourceRoleSnowballReceipt holstSDG47MonitoringSource
+holstSourceRoleReceipt = Snowball.canonicalSourceRoleSnowballReceipt holstSDG47MonitoringSource
+
 priorLiteratureMapRetained : PriorMap.DigitalESDLiteratureMap
 priorLiteratureMapRetained = PriorMap.canonicalDigitalESDLiteratureMap
 
@@ -92,6 +108,7 @@ data TwoSchoolPlatformStudyCreatesUniversalPlatformEffect : Set where
 data AustralianEdtechCaseCreatesUniversalDurabilityRule : Set where
 data OpinionPaperCreatesEmpiricalDigitalESDEffect : Set where
 data SustainabilityParadoxExhaustsReciprocalDigitalESDFramework : Set where
+data InputIndicatorMonitoringCreatesOutcomeTransformation : Set where
 
 singleCaseDoesNotCreateUniversalDigitalESDRule : SingleCaseCreatesUniversalDigitalESDRule → ⊥
 singleCaseDoesNotCreateUniversalDigitalESDRule ()
@@ -105,9 +122,11 @@ australianEdtechCaseDoesNotCreateUniversalDurabilityRule ()
 opinionPaperDoesNotCreateEmpiricalDigitalESDEffect : OpinionPaperCreatesEmpiricalDigitalESDEffect → ⊥
 opinionPaperDoesNotCreateEmpiricalDigitalESDEffect ()
 
-sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework :
-  SustainabilityParadoxExhaustsReciprocalDigitalESDFramework → ⊥
+sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework : SustainabilityParadoxExhaustsReciprocalDigitalESDFramework → ⊥
 sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework ()
+
+inputIndicatorMonitoringDoesNotCreateOutcomeTransformation : InputIndicatorMonitoringCreatesOutcomeTransformation → ⊥
+inputIndicatorMonitoringDoesNotCreateOutcomeTransformation ()
 
 record ScholarlyCandidateBoundary : Set where
   constructor scholarly-candidate-boundary
@@ -120,6 +139,8 @@ record ScholarlyCandidateBoundary : Set where
     zagamiSourceRolePaidIsTrue : zagamiSourceRolePaid ≡ true
     chughSourceRolePaid : Bool
     chughSourceRolePaidIsTrue : chughSourceRolePaid ≡ true
+    holstSourceRolePaid : Bool
+    holstSourceRolePaidIsTrue : holstSourceRolePaid ≡ true
     acquisitionCreatesInclusion : Bool
     acquisitionCreatesInclusionIsFalse : acquisitionCreatesInclusion ≡ false
     citationImportsProof : Bool
@@ -131,4 +152,4 @@ open ScholarlyCandidateBoundary public
 
 canonicalScholarlyCandidateBoundary : ScholarlyCandidateBoundary
 canonicalScholarlyCandidateBoundary = scholarly-candidate-boundary
-  true refl true refl true refl true refl false refl false refl false refl
+  true refl true refl true refl true refl true refl false refl false refl false refl
