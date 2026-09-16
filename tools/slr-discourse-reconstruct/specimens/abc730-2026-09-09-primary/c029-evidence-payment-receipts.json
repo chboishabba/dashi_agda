@@ -1,0 +1,50 @@
+{
+  "schema": "abc730-c029-evidence-payment-receipts-v1",
+  "source_role": "append-only evidence-to-obligation payment candidates; not a truth ledger",
+  "candidate_only": true,
+  "semantic_promotion": false,
+  "receipts": [
+    {
+      "receipt_id": "C029-payment-candidate:uk-origin-differentiation",
+      "obligation_id": "C029:settlementSubcountryClassifier",
+      "claim_ref": "ABC730-2026-09-09-C029",
+      "evidence_reference": "DASHI.Policy.ABC730UnintendedConsequencesSnowballEvidenceExact.ukSettlementOriginMechanism",
+      "evidence_kind": "application/classifier evidence",
+      "payment_disposition": "partial-comparator-only",
+      "target_obligation_weld_paid": true,
+      "claim_role_weld_paid": true,
+      "evidence_kind_compatible": true,
+      "reviewed_for_payment": true,
+      "pays_obligation": false,
+      "residual": "Pays that a UK settlement-origin differentiation mechanism exists; does not pay an Australian settlement-place classifier or its application semantics."
+    },
+    {
+      "receipt_id": "C029-payment-candidate:pcbs-settlement-workers",
+      "obligation_id": "C029:palestinianNetIncidence",
+      "claim_ref": "ABC730-2026-09-09-C029",
+      "evidence_reference": "DASHI.Policy.ABC730PalestinianIncidenceSnowballExact.pcbsSettlementWorkers",
+      "evidence_kind": "situated incidence evidence",
+      "payment_disposition": "partial-exposure-only",
+      "target_obligation_weld_paid": true,
+      "claim_role_weld_paid": true,
+      "evidence_kind_compatible": true,
+      "reviewed_for_payment": true,
+      "pays_obligation": false,
+      "residual": "Pays settlement-employment exposure population; does not pay displacement, substitution, household-income or net-effect sign."
+    },
+    {
+      "receipt_id": "C029-payment-candidate:uk-settlement-measurement-gap",
+      "obligation_id": "C029:settlementTradeMagnitude",
+      "claim_ref": "ABC730-2026-09-09-C029",
+      "evidence_reference": "DASHI.Policy.ABC730SettlementTradeMeasurementGapExact.ukSettlementValueNotSeparatelyIdentified",
+      "evidence_kind": "settlement-specific measurement",
+      "payment_disposition": "measurement-block-confirmed",
+      "target_obligation_weld_paid": true,
+      "claim_role_weld_paid": true,
+      "evidence_kind_compatible": true,
+      "reviewed_for_payment": true,
+      "pays_obligation": false,
+      "residual": "Confirms ordinary country-code aggregates cannot pay settlement-specific magnitude; origin-level reconstruction or uncertainty-bounded modelling remains required."
+    }
+  ]
+}

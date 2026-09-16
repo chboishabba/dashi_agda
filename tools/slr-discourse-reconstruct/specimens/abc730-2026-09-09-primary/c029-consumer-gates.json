@@ -1,0 +1,13 @@
+{
+  "schema": "c029-consumer-gates-v1",
+  "consumer_reference": "ABC730 C029 unintended-consequences comparative/evaluative consumer",
+  "consumer_adequate": false,
+  "current_residual": "settlementClassifierResidual",
+  "evaluate_aptness_enabled": false,
+  "legal_cutset_reference": "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact.canonicalC029Cutset",
+  "world_constraint_reference": "DASHI.Interop.SLRC029WorldConstraintFibreBridgeExact.canonicalC029WorldConstraintState",
+  "gate_state_role": "structural-consumer-admission-state-not-empirical-evidence",
+  "candidate_only": true,
+  "semantic_promotion": false,
+  "truth_promoted": false
+}
