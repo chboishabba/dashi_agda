@@ -10,3 +10,4 @@ import DASHI.Finance.TruthAPIIndependentCorroborationExact
 import DASHI.Finance.TruthAPILitigationAllegationExact
 import DASHI.Finance.TruthAPIExecutiveStatementExact
 import DASHI.Finance.TruthAPISourceRoleTriangulationExact
+import DASHI.Finance.TrumpFamilyTradeSourceQualityRound3Exact
