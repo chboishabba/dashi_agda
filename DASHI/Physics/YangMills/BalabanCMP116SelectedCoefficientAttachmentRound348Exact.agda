@@ -4,8 +4,6 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedCoefficientAttachmentRound34
 ------------------------------------------------------------------------
 -- ROUND348 / REMOVE A FAKE "SELECT THE J DIRECTIONS" OBLIGATION
 --
--- R347 correctly leaves a SAME-object attachment between the source/Cauchy
--- coefficient and R318's literal selected two-J mixed-log response.  However,
 -- R318 already fixes WHICH source directions are used:
 --
 --   J_L = sourceDirectionOf (meaning base) left
@@ -18,17 +16,15 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedCoefficientAttachmentRound34
 --   source/Cauchy coefficient(J_L,J_R)
 --     = literal selected mixed-log response(J_L,J_R).
 --
--- This is intentionally weaker than R318's older three-coordinate applicability
--- record: the preferred R346/R347 route already uses the selected connecting root
--- and physical distance directly.  Root and distance source-welds are not
+-- The preferred R346 route already uses the selected connecting root and
+-- physical distance directly.  Root and abstract source-distance welds are not
 -- reintroduced here.
 --
--- Independent live leaves remain:
---   * the selected CMP116 pointwise boundary/substitution comparison;
---   * D_time, selected R318 physical distance = Euclidean spectral time.
---
--- This module is a Pareto frontier refinement only.  It does not inhabit the
--- coefficient identity and does not manufacture R346 L_marked.
+-- NOTE (R380 audit): an earlier draft imported a non-existent
+-- `BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact`.  The only facts
+-- consumed from that stale name were status projections already owned by R346:
+-- literal selected differentiated localization and physical-distance/time
+-- semantics.  This owner now depends on R346 directly.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -36,7 +32,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
-import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedBoundaryFrontierRound347Exact as R347
+import DASHI.Physics.YangMills.BalabanCMP116SharedMarkedAmplitudeDirectRound346Exact as R346
 
 ------------------------------------------------------------------------
 -- Existing selected-direction construction.
@@ -49,9 +45,6 @@ selectedJDirectionsAlreadyChosenByR318IsTrue :
   selectedJDirectionsAlreadyChosenByR318 ≡ true
 selectedJDirectionsAlreadyChosenByR318IsTrue = refl
 
--- R318's selected carrier stores `meaning`; the selected source directions are
--- obtained by applying `sourceDirectionOf meaning` to the already-selected
--- observables.  This is carrier construction, not an additional physical theorem.
 selectedJDirectionConstructionLevel : ProofLevel
 selectedJDirectionConstructionLevel = machineChecked
 
@@ -59,24 +52,26 @@ selectedJDirectionConstructionLevel = machineChecked
 -- Residual SAME-object payment.
 ------------------------------------------------------------------------
 
--- Identify the source/Cauchy Hessian coefficient obtained from the R347 marked
--- boundary theorem with the literal selected mixed-log response on the SAME
--- already-fixed J_L,J_R pair.  The precise coefficient carrier is supplied by
--- the eventual physical/source instantiation; this owner records only the
--- minimal theorem debt and does not guess a source representation.
+-- Identify the source/Cauchy Hessian coefficient with the literal selected
+-- mixed-log response on the SAME already-fixed J_L,J_R pair.  The precise
+-- coefficient carrier is supplied by the eventual physical/source
+-- instantiation; this owner records only the minimal theorem debt and does not
+-- guess a source representation.
 selectedCoefficientSameObjectLevel : ProofLevel
 selectedCoefficientSameObjectLevel = conditional
 
--- R347's source-specific boundary/substitution comparison remains independent.
+-- R346's literal selected differentiated-localization theorem remains the
+-- actual source-facing physical inequality.
 selectedMarkedBoundarySubstitutionLevel : ProofLevel
 selectedMarkedBoundarySubstitutionLevel =
-  R347.selectedMarkedBoundarySubstitutionLevel
+  R346.round346LiteralSelectedLocalizationLevel
 
 -- R346's distance/time semantics remains independent of the scalar coefficient
 -- identity.  R318 fixes the physicalDistance function, not its equality to time
--- on R300's selected spectral pair.
+-- on the selected spectral pair.
 selectedDistanceTimeLevel : ProofLevel
-selectedDistanceTimeLevel = R347.selectedDistanceTimeLevel
+selectedDistanceTimeLevel =
+  R346.round346SelectedPhysicalDistanceMeaningLevel
 
 ------------------------------------------------------------------------
 -- Pareto firewalls.
@@ -103,12 +98,12 @@ sourceDistanceWeldRequiredByPreferredRouteIsFalse :
   sourceDistanceWeldRequiredByPreferredRoute ≡ false
 sourceDistanceWeldRequiredByPreferredRouteIsFalse = refl
 
-boundaryComparisonStillIndependent : Bool
-boundaryComparisonStillIndependent = true
+literalSelectedLocalizationStillIndependent : Bool
+literalSelectedLocalizationStillIndependent = true
 
-boundaryComparisonStillIndependentIsTrue :
-  boundaryComparisonStillIndependent ≡ true
-boundaryComparisonStillIndependentIsTrue = refl
+literalSelectedLocalizationStillIndependentIsTrue :
+  literalSelectedLocalizationStillIndependent ≡ true
+literalSelectedLocalizationStillIndependentIsTrue = refl
 
 selectedDistanceTimeStillIndependent : Bool
 selectedDistanceTimeStillIndependent = true
@@ -128,9 +123,9 @@ record Round348Boundary : Set where
     coefficientSameObjectStillProofBearingIsTrue :
       coefficientSameObjectStillProofBearing ≡ true
 
-    boundaryComparisonStillProofBearing : Bool
-    boundaryComparisonStillProofBearingIsTrue :
-      boundaryComparisonStillProofBearing ≡ true
+    literalSelectedLocalizationStillProofBearing : Bool
+    literalSelectedLocalizationStillProofBearingIsTrue :
+      literalSelectedLocalizationStillProofBearing ≡ true
 
     distanceTimeStillProofBearing : Bool
     distanceTimeStillProofBearingIsTrue :
@@ -138,11 +133,7 @@ record Round348Boundary : Set where
 
 canonicalRound348Boundary : Round348Boundary
 canonicalRound348Boundary =
-  round348-boundary
-    true refl
-    true refl
-    true refl
-    true refl
+  round348-boundary true refl true refl true refl true refl
 
 round348FrontierRefinementLevel : ProofLevel
 round348FrontierRefinementLevel = machineChecked
@@ -151,4 +142,3 @@ clayPromotion : Bool
 clayPromotion = false
 
 clayPromotionIsFalse : clayPromotion ≡ false
-clayPromotionIsFalse = refl
