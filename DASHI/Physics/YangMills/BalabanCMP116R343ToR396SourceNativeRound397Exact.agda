@@ -13,13 +13,14 @@ module DASHI.Physics.YangMills.BalabanCMP116R343ToR396SourceNativeRound397Exact 
 --     source per-shell decay q and only additionally proves q<=1/2.
 --
 -- R395 deliberately forgets the stronger dyadic criterion while preserving
--- that same q.  Therefore an R343 producer can inhabit the current R396
--- application interface mechanically.  No new localization, geometry, or
+-- that same q. Therefore an R343 producer can inhabit the current R396
+-- application interface mechanically. No new localization, geometry, or
 -- decay estimate is introduced here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 import Data.Nat.Base as Nat
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -35,7 +36,7 @@ import DASHI.Physics.YangMills.BalabanSelectedSourceNativeMajorantRound396Exact 
 
 r343SourceNativeMajorant :
   ∀ {Measure TestObservable SpectralObservable Energy}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.Base.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
     {demands : R104.CMP116FiniteNormalizedAnalyticDemands}
@@ -51,7 +52,7 @@ r343SourceNativeMajorant source =
 
 r343AsR396Application :
   ∀ {Measure TestObservable SpectralObservable Energy}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.Base.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
     {demands : R104.CMP116FiniteNormalizedAnalyticDemands}
@@ -79,9 +80,9 @@ r343AsR396Application source = record
 -- Pareto / authority boundary.
 --
 -- This adapter proves that the mature R343 producer already pays the current
--- R396 attachment and one-sided geometry coordinates FOR THAT PRODUCER.  R343
+-- R396 attachment and one-sided geometry coordinates FOR THAT PRODUCER. R343
 -- itself still carries physical/source fields whose inhabitants are not created
--- here.  The weaker R395/R396 ABI remains preferred architecture because a new
+-- here. The weaker R395/R396 ABI remains preferred architecture because a new
 -- source producer need not prove q<=1/2 or distance=time.
 ------------------------------------------------------------------------
 
