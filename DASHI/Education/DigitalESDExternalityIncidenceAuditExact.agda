@@ -106,11 +106,18 @@ energyCalibration = Energy.canonicalTrumpEnergyCrackSpreadBoundary
 
 aggregateCannotRecoverBurden = Distribution.aggregateCannotRecoverBurden
 aggregateCannotRecoverVoice = Distribution.aggregateCannotRecoverVoice
-responsibilityDoesNotEqualBurden = Responsibility.canonicalResponsibilityBurdenBoundary
 presentBenefitCannotRecoverLaterBurden = Temporal.presentBenefitCannotRecoverLaterBurden
 serviceCannotRecoverPowerTopology = Power.serviceCannotRecoverPowerTopology
 participationCannotRecoverMediation = Power.participationCannotRecoverMediation
 petroleumLabelCannotRecoverLifecycleStage = Petrochem.petroleumLabelCannotFactorLifecycleStage
+visibleCarrierDoesNotEstablishSufficientCause =
+  Carrier.visibleCarrierDoesNotEstablishSufficientCause
+
+contributionEqualsBurdenIsFalse :
+  Responsibility.ResponsibilityBurdenBoundary.contributionEqualsBurden
+    Responsibility.canonicalResponsibilityBurdenBoundary
+  ≡ false
+contributionEqualsBurdenIsFalse = refl
 
 ------------------------------------------------------------------------
 -- Cross-domain firewall.
@@ -118,7 +125,6 @@ petroleumLabelCannotRecoverLifecycleStage = Petrochem.petroleumLabelCannotFactor
 
 data CrossDomainCalibrationCreatesDigitalESDPoliticalConclusion : Set where
 data CrossDomainCalibrationCreatesDeploymentMeasurement : Set where
-data VisibleExternalityCarrierCreatesSufficientCause : Set where
 
 crossDomainCalibrationDoesNotCreateDigitalESDPoliticalConclusion :
   CrossDomainCalibrationCreatesDigitalESDPoliticalConclusion → ⊥
@@ -127,10 +133,6 @@ crossDomainCalibrationDoesNotCreateDigitalESDPoliticalConclusion ()
 crossDomainCalibrationDoesNotCreateDeploymentMeasurement :
   CrossDomainCalibrationCreatesDeploymentMeasurement → ⊥
 crossDomainCalibrationDoesNotCreateDeploymentMeasurement ()
-
-visibleExternalityCarrierDoesNotCreateSufficientCause :
-  VisibleExternalityCarrierCreatesSufficientCause → ⊥
-visibleExternalityCarrierDoesNotCreateSufficientCause ()
 
 ------------------------------------------------------------------------
 -- Application boundary.
