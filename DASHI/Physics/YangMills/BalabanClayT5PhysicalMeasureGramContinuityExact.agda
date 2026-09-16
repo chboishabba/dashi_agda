@@ -73,7 +73,7 @@ physicalReflectedGramEntry operations measure left right =
         (observable right)))
 
 sumList :
-  ∀ {A Scalar : Set₁} →
+  ∀ {A : Set₁} {Scalar : Set} →
   (Scalar → Scalar → Scalar) → Scalar →
   List A → (A → Scalar) → Scalar
 sumList add zero [] term = zero
@@ -161,16 +161,16 @@ finiteSumCommutesWithLimit :
       sumList addValue zeroValue values
         (λ value → sequence value cutoff))
     (sumList addValue zeroValue values limit)
-  finiteSumCommutesWithLimit algebra [] sequence limit pointwise =
-    constantConverges algebra _
-  finiteSumCommutesWithLimit algebra (value ∷ values) sequence limit pointwise =
-    addConverges algebra
-      (sequence value) (limit value)
-      (λ cutoff →
-        sumList _ _ values (λ tail → sequence tail cutoff))
-      (sumList _ _ values limit)
-      (pointwise value)
-      (finiteSumCommutesWithLimit algebra values sequence limit pointwise)
+finiteSumCommutesWithLimit algebra [] sequence limit pointwise =
+  constantConverges algebra _
+finiteSumCommutesWithLimit algebra (value ∷ values) sequence limit pointwise =
+  addConverges algebra
+    (sequence value) (limit value)
+    (λ cutoff →
+      sumList _ _ values (λ tail → sequence tail cutoff))
+    (sumList _ _ values limit)
+    (pointwise value)
+    (finiteSumCommutesWithLimit algebra values sequence limit pointwise)
 
 record PhysicalMeasureConvergenceData
     (Measure Observable Scalar : Set) : Set₁ where
