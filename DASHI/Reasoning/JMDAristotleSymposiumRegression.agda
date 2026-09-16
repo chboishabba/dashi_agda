@@ -7,6 +7,7 @@ import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeExact as Plato
 import DASHI.Reasoning.PlatoSymposiumDialecticBraidHyperformalExact as Hyperformal
 import DASHI.Reasoning.PlatoSymposiumProofSearchExperimentExact as ProofSearch
 import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionExact as Transmission
+import DASHI.Reasoning.PlatoSymposiumSnowballParetoIndexingExact as Indexing
 
 ------------------------------------------------------------------------
 -- RED/GREEN regression surface for the JMD-owned Aristotle Symposium bundle.
@@ -14,7 +15,8 @@ import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionExact as Transmissio
 -- entailment from empirical authority, separate content-addressed procedural
 -- invariance from epistemic correctness, keep Plato-shaped philosophical
 -- carriers distinct from DASHI dialectic/braid/369/hyperfabric semantics,
--- and preserve proof-search / transmission-history boundaries.
+-- preserve proof-search / transmission-history boundaries, and keep
+-- snowball/Pareto/Dewey/QID coordinates non-promoting.
 ------------------------------------------------------------------------
 
 sourceAtlasPinned = Source.jmdAristotleSymposiumSourceAtlas
@@ -51,3 +53,11 @@ claimRoleSpeakerBoundary = Transmission.immediateSpeakerDoesNotDetermineClaimRol
 transmissionPathPinned = Transmission.canonicalDiotimaTransmissionPath
 attributionSnowballPinned = Transmission.existingJMDBundleSnowballReceipt
 transmissionBoundary = Transmission.canonicalPlatoSymposiumTransmissionBoundary
+
+qidAuthorityBoundary = Indexing.qidDoesNotDetermineSourceAuthority
+deweyAuthorityBoundary = Indexing.deweyDoesNotDetermineSourceAuthority
+citationIndependenceBoundary = Indexing.citationCountDoesNotDetermineIndependentSupport
+paretoAdequacyBoundary = Indexing.paretoRankDoesNotDetermineConsumerAdequacy
+indexingBoundary = Indexing.canonicalPlatoSymposiumIndexingBoundary
+canonicalAttributionSnowballPinned = Indexing.existingAttributionSnowballBoundary
+canonicalTraversalBoundaryPinned = Indexing.existingKnowledgeTraversalBoundary
