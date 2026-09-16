@@ -24,6 +24,13 @@ import DASHI.Environment.PhotosyntheticLightOptimizationExact
 import DASHI.Environment.PhotosyntheticAssimilationValidationExact
 import DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollinationExact
 
+-- Dryland Acacia senegal carbon / hydrology study as a source-bounded LES
+-- consumer-separation fixture: SOC / hydraulic capacity / realised moisture /
+-- runoff / infiltration / ET / drainage remain distinct coordinates.
+import DASHI.Environment.AcaciaSenegalDrylandWaterCarbonExact
+import DASHI.Environment.AcaciaSenegalDrylandTaskFactorisationExact
+import DASHI.Environment.AcaciaSenegalDrylandWaterCarbonRegression
+
 -- Water-hyacinth biocontrol as a concrete LES / experimental-coordinate /
 -- active proof-search consumer with canonical attribution, SI semantics,
 -- actual-chemistry/369 indexing, contextual classification, consumer-indexed
