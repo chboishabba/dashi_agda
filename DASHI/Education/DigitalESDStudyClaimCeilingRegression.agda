@@ -40,6 +40,9 @@ nonApplicableParticipantRoleRegression = refl
 qualitativeAndReviewClaimsFirstClassRegression : Ceiling.StudyClaimCeilingBoundary.qualitativeAndReviewClaimsRemainFirstClass Ceiling.canonicalStudyClaimCeilingBoundary ≡ true
 qualitativeAndReviewClaimsFirstClassRegression = refl
 
+modelBasedLifecycleClaimsFirstClassRegression : Ceiling.StudyClaimCeilingBoundary.modelBasedLifecycleClaimsRemainFirstClass Ceiling.canonicalStudyClaimCeilingBoundary ≡ true
+modelBasedLifecycleClaimsFirstClassRegression = refl
+
 sampleSizeRetainedRegression : Ceiling.StudyClaimCeilingBoundary.sampleSizeAndAnalysisNRetained Ceiling.canonicalStudyClaimCeilingBoundary ≡ true
 sampleSizeRetainedRegression = refl
 
@@ -75,3 +78,6 @@ unmappedDesignNotForcedRegression = Ceiling.unmappedDesignMayNotBeForcedIntoNear
 
 nonApplicableRoleNotInventedRegression : Ceiling.NonApplicableParticipantRoleMayBeInvented → ⊥
 nonApplicableRoleNotInventedRegression = Ceiling.nonApplicableParticipantRoleMayNotBeInvented
+
+modelCIIsNotDeploymentMeasurementRegression : Ceiling.ModelUncertaintyIntervalCreatesDeploymentMeasurement → ⊥
+modelCIIsNotDeploymentMeasurementRegression = Ceiling.modelUncertaintyIntervalDoesNotCreateDeploymentMeasurement
