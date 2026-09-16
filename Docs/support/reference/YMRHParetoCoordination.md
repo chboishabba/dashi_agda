@@ -24,23 +24,29 @@ Use this as the first-stop **current** state sheet; use the archaeology files fo
        direct selected finite spectral upper -> covariance -> continuum -> gap
 
 #967  open/draft — LIVE SOURCE/PRODUCER feeding merged #970:
-       R387–R406 consumer-first reconstruction of the selected CMP116 upper
+       R387–R407 consumer-first reconstruction of the selected CMP116 upper
 ```
 
-#970 is a stable merged consumer. #967 now has one job: manufacture its selected finite mixed-log upper without reopening dominated architecture.
+#970 is a stable merged consumer. #967 has one job: manufacture its selected finite mixed-log upper without reopening dominated architecture.
 
 ## Current direct chain
 
 ```text
-CMP99 marked propagator/background-factor decay        [published/source]
- + CMP109 differentiated operator/multilinear products [published/source]
+CMP99 marked propagator/background replacement         [published/source]
+ + CMP109 differentiated operator/multilinear entry    [published/source]
  + CMP116 decoupled local-activity construction        [published/source]
  + selected T5/RG physical source semantics            [physical]
                 |
                 v
-R406 NONCOMMUTATIVE SELECTED TERM LOCALIZATION          [compiler strengthened]
-  literal operator-factor norm bounds                  [source replay unpaid]
-  -> whole differentiated-term majorant                [Round72 operator compiler / paid]
+R407 literal CMP109 four-stage factor carrier          [source written]
+  path -> transport -> dexp^-1/log -> outer dexp
+  ordinary before/after stage bounds                   [compiler-owned]
+  marked stage-domain difference                       [LIVE source leaf]
+                |
+                v
+R406 noncommutative selected term localization
+  selected scalar term = operator product-difference norm
+  marked stage bounds -> whole term majorant           [Round72 compiler]
                 |
                 v
 R404 common-Y absolute finite-walk resummation         [compiler / paid]
@@ -49,17 +55,14 @@ R404 common-Y absolute finite-walk resummation         [compiler / paid]
 R405 nested localization-domain/tree summation         [compiler / paid]
                 |
                 v
-pointwise absolute selected CMP116 boundary localization
-                |
-                v
 R402 absolute finite-polydisc Cauchy lift              [compiler / paid]
                 |
                 v
-R320/R274 selected two-J rooted-shell upper            [compiler after P0]
+R320/R274 selected two-J rooted-shell upper
                 |
                 v
-R398 canonical direct shell                            [compiler]
-R399 time <= selected physicalDistance                 [small physical coordinate]
+R398 canonical direct shell
+R399 time <= selected physicalDistance
                 |
                 v
 MERGED #970 direct selected spectral upper             [terminal B ABI]
@@ -78,8 +81,6 @@ Paid:
 pointwise absolute CMP116 boundary control
   -> absolute finite-polydisc coefficient control.
 ```
-
-Historical difference-only Cauchy machinery is no longer a blocker for canonical B.
 
 ### R403 — observable-indexed source directions
 
@@ -119,118 +120,99 @@ selected boundary = finite sum common-Y contributions
 
 Therefore finite summation/resummation is compiler-owned.
 
-### R406 — literal selected term/local-activity localization
+### R406 — noncommutative selected term/local-activity localization
 
-RED-first validation:
-
+Validation:
 `DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Validation.agda`
 
-Production owner:
-
+Owner:
 `DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Exact.agda`
 
-Historical milestones:
+Key milestones:
 
 ```text
 b2ec32e1...  initial theorem-bearing owner
 75201514...  R318 carrier / observable-index type repair
-51d90057...  scalar factorwise cut exposed the right frontier
-              but was too lossy to call literal CMP109 replay
-a766bcec...  source-faithful correction to the existing noncommutative
-              Round72 operator/multilinear telescope
+51d90057...  scalar factorwise cut exposed the right frontier but was too lossy
+a766bcec...  source-faithful noncommutative Round72 operator telescope
 ```
 
-The current R406 source imports:
-
-`BalabanNoncommutativeMarkedOperatorProductExact.operatorProductDifferenceFromFactorwiseBounds`.
-
-Accordingly R406 no longer asks the physical/source replay to hand it an opaque theorem
+R406 no longer takes an opaque
 
 ```text
-|differentiated term| <= differentiated term majorant.
+|differentiated term| <= differentiated term majorant
 ```
 
-Nor does it identify a CMP109 operator product with a commutative scalar product. Instead each differentiated CMP116 term carries:
+field. Each selected differentiated term is scalarized exactly as the norm of a noncommutative product difference, then
+`BalabanNoncommutativeMarkedOperatorProductExact.operatorProductDifferenceFromFactorwiseBounds`
+derives the whole-term majorant from factorwise ordinary/marked norm estimates.
+
+### R407 — literal CMP109 four-stage ordinary-factor replay
+
+RED validation:
+`DASHI/Physics/YangMills/BalabanCMP109FourStageOperatorFactorRound407Validation.agda`
+
+Production source:
+`DASHI/Physics/YangMills/BalabanCMP109FourStageOperatorFactorRound407Exact.agda`
+
+R407 uses the existing `BalabanClayGate4OperatorNormPipelineExact.CMP109DerivativeEntryPipeline` rather than inventing another factor model. The literal ordered carrier is
 
 ```text
-operator algebra
-ordered factor list
-before/after operator factors
-ordinary factor norm majorants
-marked one-factor replacement norm majorants
+path derivative
+-> transport derivative
+-> dexp^-1/log derivative
+-> outer dexp derivative.
 ```
 
-plus the exact scalarization boundary
+For a neighboring before/after pair it proves, stage-by-stage,
 
 ```text
-|differentiated scalar term|
-  = operatorNorm(before-product - after-product).
+||A_i|| <= b_i
+||B_i|| <= b_i
 ```
 
-The live source-native leaves are then:
+from the already-existing Gate4 pipeline estimates and transports the AFTER estimate onto the BEFORE operator-norm algebra when the two pipeline algebras are identified. Thus the **ordinary** factor half of R406/P0b1 is no longer a fresh analytic leaf.
+
+The next live source theorem is narrower:
 
 ```text
-||before operator factor|| <= ordinary factor majorant
-||after operator factor|| <= ordinary factor majorant
-||before factor - after factor|| <= marked factor majorant
+same selected R318/CMP116 term
+x literal four-stage CMP109 before/after entry
+x CMP99 marked domain replacement on the changed stage
+---------------------------------------------------------
+||A_i - B_i|| <= m_i
 ```
 
-in the operator algebra's order, together with an explicit transport from that order to the repository real order. The noncommutative Round72 theorem derives the whole-product replacement majorant mechanically; R404 and R405 then finish the two finite positive sums.
+for the stage(s) changed by the domain/background replacement. The whole product difference remains compiler-owned by R406/Round72.
 
-This is the current frontier cut:
-
-```text
-whole differentiated-term majorant                    [NO LONGER primitive]
-        ^
-        | noncommutative Round72 telescope compiler
-        |
-literal CMP99/CMP109 operator-factor norm bounds       [LIVE source replay]
-```
-
-The remaining source/application inputs are therefore:
-
-```text
-selected T5/RG density
-x actual observable-indexed J_L,J_R insertions
-x CMP116 decoupling boundary assignment
-x selected term absolute magnitude = operator product-difference norm
-x literal CMP99/CMP109 ordinary + marked operator-factor norm bounds
-x CMP116 positive common-Y / outer localization majorants
---------------------------------------------------------------------------
-selected differentiated term/common-Y/localization bound.
-```
-
-No concrete selected source replay inhabitant is claimed yet, and no current-head Agda/kernel receipt has been observed.
-
-Do **not** satisfy R406 by reintroducing an opaque whole-term inequality, by replacing the CMP109 operator product with a commutative scalar-factor fiction, by adding another P0 receipt/record, by promoting a citation/`ProofLevel`, or by creating another source-direction representation layer.
-
-The older R76 `E^(2)/Pi` -> R318 mixed-log bridge remains **conditional donor structure only**. Activate it only if the literal operator-factor replay cannot be expressed directly through R403/R318.
+R407 is a source-written compiler surface. No Agda/kernel receipt is claimed here.
 
 ## Current YM payments
 
 ```text
-YM-P0a  selected-density/J/decoupling same-object replay — UNPAID / R406 frontier.
-YM-P0b1 literal CMP99/CMP109 operator-factor norm bounds — UNPAID / R406 frontier.
-YM-P0b2 operator-factor bounds -> whole differentiated-term majorant — PAID by noncommutative Round72 and consumed by R406.
-YM-P0c  absolute finite-polydisc coefficient extraction — PAID by R402.
-YM-P0d  common-Y + nested finite source summation — PAID by R404/R405.
+YM-P0a   selected-density/J/decoupling same-object replay — UNPAID.
+YM-P0b0  literal CMP109 four-stage factor carrier — PAID by R407 source.
+YM-P0b1a ordinary before/after stage norm bounds — PAID by R407 from Gate4 pipelines.
+YM-P0b1b marked stage-domain difference bounds — UNPAID / next source frontier.
+YM-P0b2  factorwise bounds -> whole differentiated-term majorant — PAID by noncommutative Round72/R406.
+YM-P0c   absolute finite-polydisc coefficient extraction — PAID by R402.
+YM-P0d   common-Y + nested source summation — PAID by R404/R405.
 
-YM-P1   generic sourceEnvelope<=shell route — optional if direct R320/#970 is cheaper.
-YM-P2   time <= selected physicalDistance on the single R318 carrier.
-YM-P3   same-Hamiltonian q(E)/candidate-energy identity only where R400 is used.
-YM-P4   same-family finite->continuum covariance transport — existing.
-YM-P5   clustering/positive-subgap -> transfer gap — existing.
+YM-P1    generic sourceEnvelope<=shell route — optional if direct R320/#970 is cheaper.
+YM-P2    time <= selected physicalDistance on the single R318 carrier.
+YM-P3    same-Hamiltonian q(E)/candidate-energy identity only where R400 is used.
+YM-P4    same-family finite->continuum covariance transport — existing.
+YM-P5    clustering/positive-subgap -> transfer gap — existing.
 ```
 
-## Paid vs theorem-bearing
-
-Paid/compiler-owned:
+## Paid/compiler-owned
 
 ```text
 normalized two-source log calculus
 mixed-log second derivative = finite connected covariance
 observable-indexed source presentation (R403)
-noncommutative marked operator-product telescope (Round72, consumed by R406)
+CMP109 four-stage ordinary factor extraction (R407)
+noncommutative marked operator-product telescope (Round72/R406)
 absolute common-Y walk resummation (R404)
 nested localization-domain summation (R405)
 absolute Cauchy coefficient lift (R402)
@@ -242,13 +224,13 @@ finite->continuum order closure
 clustering -> transfer-gap contradiction
 ```
 
-Still theorem-bearing/physical:
+## Still theorem-bearing / physical
 
 ```text
-R406 / P0a selected-density, actual J pair and decoupling-boundary same-object replay
-R406 / P0b1 literal CMP99/CMP109 operator-factor ordinary/marked norm estimates on the selected differentiated term
-R406 exact scalarization of the selected differentiated term to the noncommutative product-difference norm
-R406 CMP116 positive common-Y / outer shell majorants on that same selected decomposition
+P0a selected-density, actual J pair and decoupling-boundary same-object replay
+P0b1b CMP99 marked stage-domain replacement estimate on the literal four-stage CMP109 entry
+exact same-object weld from that four-stage entry/product difference to the selected R406 differentiated term
+CMP116 positive common-Y / outer shell majorants on that same selected decomposition
 P2 selected support/time geometry inhabitant
 P3 same-Hamiltonian ratio/energy identity only where used
 ```
@@ -257,7 +239,7 @@ P3 same-Hamiltonian ratio/energy identity only where used
 
 | Priority | Work |
 |---|---|
-| 1 | **R406 / YM-P0a/P0b1: instantiate the selected CMP109 operator factors and literal CMP99 marked replacement bounds on the existing R318 J pair** |
+| 1 | **R408: pay the literal CMP99 marked difference for the changed R407 stage and weld that four-stage entry to the selected R406 term** |
 | 2 | **YM-P2: `time <= selected physicalDistance` if not definitional from selected support** |
 | 3 | **YM-P3 only where the source-native-q route actually consumes it** |
 | 4 | generic source envelope/rate producer only if cheaper than direct R320/merged-#970 |
@@ -268,11 +250,11 @@ P3 same-Hamiltonian ratio/energy identity only where used
 
 Unless a literal current consumer requires it:
 
-- no new P0 alias/record/wrapper;
-- no opaque `|term| <= termMajorant` source field after `a766bcec...`;
+- no new generic P0 wrapper;
+- no opaque whole-term source inequality;
 - no commutative scalar replacement for CMP109 operator/multilinear products;
 - no independent observable->source-direction carrier;
-- no R76 `E^(2)/Pi` bridge unless R406 proves it necessary;
+- no R76 `E^(2)/Pi` bridge unless the four-stage R407/R408 replay proves it necessary;
 - no citation/`ProofLevel` promotion into a theorem term;
 - no comparison-only Hessian stability as absolute localization;
 - no generic source-envelope plumbing when direct R320/merged-#970 is cheaper;
@@ -290,9 +272,9 @@ Unless a literal current consumer requires it:
 - CMP116: Tadeusz Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, DOI `10.1007/BF01239022`.
 - CMP119: DOI `10.1007/BF01217741`.
 
-CMP99 Theorem 3.14/(3.154) is the marked background/propagator replacement donor used by the Round72 operator telescope. CMP109 (4.3)–(4.5) supplies the differentiated finite operator/tree structure and ordinary decay inputs. CMP116 Sect. 1 supplies the generalized-walk/decoupling construction around (1.6)–(1.21), differentiated Cauchy representation around (1.23), and positive tree/localization summation around (1.29)–(1.36).
+CMP99 Theorem 3.14/(3.154) is the marked domain/background replacement donor. CMP109 (4.3)–(4.5) supplies the differentiated operator/tree structure; the repository Gate4 pipeline already exposes its physical derivative entry as the four ordered stages used by R407. CMP116 Sect. 1 supplies the generalized-walk/decoupling construction around (1.6)–(1.21), differentiated representation around (1.23), and positive tree/localization summation around (1.29)–(1.36).
 
-Citation/source status does not itself inhabit R406/P0.
+Citation/source status does not itself inhabit P0.
 
 ## Validation / closure boundary
 
@@ -312,25 +294,23 @@ Current focused commits:
 
 ```text
 224bb0b3...  R404 absolute common-Y finite-walk resummation
-143c8f66...  R405 nested source-domain summation GREEN source
-14b13cbf...  R406 RED-first validation requires missing literal theorem owner
-75201514...  R406 owner type-fix: selected J insertions aligned with R318 carrier
-51d90057...  intermediate scalar factorwise cut
-086d1bb1...  ledger synchronization for that intermediate cut
-a766bcec...  R406 source-faithful noncommutative operator-factor correction
+143c8f66...  R405 nested source-domain summation source
+14b13cbf...  R406 RED-first validation
+75201514...  R406 R318/J carrier type repair
+a766bcec...  R406 source-faithful noncommutative factor telescope
+42406135...  coordination sync through R406
+0469bf19...  R407 RED validation
+8e4b619e...  R407 literal four-stage ordinary-factor compiler source
 ```
 
-No exact-head pull-request workflow has yet been observed for `a766bcec...` in this connector session. Do not upgrade source ordering to kernel certification.
+Per user instruction, CI is not part of this tranche. No current-head Agda/kernel certification is claimed.
 
 ## Update log — 2026-09-16
 
-- #970 is merged and stable as the terminal B consumer.
-- #967 is the live producer branch.
-- R402 pays absolute coefficient extraction.
-- R403 pays observable-index representation.
-- R404/R405 pay both finite summation layers.
-- R406 is now materially narrower and source-faithful: the whole differentiated-term majorant is compiler-owned via the existing noncommutative Round72 operator-product telescope.
-- The live P0 source replay is now the literal selected density/J/boundary decomposition plus the exact scalarization to an operator product-difference norm, CMP99/CMP109 ordinary and marked operator-factor bounds, and CMP116 positive localization majorants.
-- No concrete source replay inhabitant or current-head Agda/kernel receipt is claimed.
-- The R76 `E^(2)/Pi` representation bridge remains donor-only unless the operator-factor replay demonstrates a need.
+- #970 remains the merged terminal B consumer; #967 remains the live producer.
+- R402/R403/R404/R405 remain paid compiler layers.
+- R406 retains the noncommutative product-difference formulation.
+- R407 reuses the existing CMP109 Gate4 derivative pipeline and pays the ordinary before/after factor estimates on the literal four-stage carrier.
+- The immediate source frontier is now the **marked domain-difference estimate for the changed stage**, plus the same-object weld of that four-stage entry to the selected R318/CMP116 differentiated term.
+- The R76 `E^(2)/Pi` representation bridge remains donor-only unless this direct replay demonstrates a need.
 - RH remains behind YM in the live Pareto order.
