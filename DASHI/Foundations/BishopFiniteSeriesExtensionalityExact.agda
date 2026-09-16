@@ -21,8 +21,8 @@ finiteSumCongruent :
   (∀ n → BishopReal._≃_ (left n) (right n)) →
   ∀ count →
   BishopReal._≃_
-    (BishopSequence.∑₀ left count)
-    (BishopSequence.∑₀ right count)
+    (BishopReal.∑₀ left count)
+    (BishopReal.∑₀ right count)
 finiteSumCongruent termCongruence zero = BishopP.≃-refl
 finiteSumCongruent termCongruence (suc count) =
   BishopP.+-cong
