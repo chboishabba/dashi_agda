@@ -10,7 +10,9 @@ command -v gap >/dev/null 2>&1 || {
 }
 
 mkdir -p build
-rm -f build/monster_3b_five_orbit_d4_n3b_screen.json
+rm -f \
+  build/monster_3b_five_orbit_d4_n3b_screen.json \
+  build/monster_3b_five_orbit_d4_n3b_summary.json
 
 gap -q scripts/monster_3b_five_orbit_d4_n3b_screen.g
 
@@ -58,3 +60,10 @@ print(
     sep="",
 )
 PY
+
+python3 scripts/monster_3b_five_orbit_d4_n3b_receipt_summary.py \
+  build/monster_3b_five_orbit_d4_n3b_screen.json \
+  --output build/monster_3b_five_orbit_d4_n3b_summary.json
+
+test -s build/monster_3b_five_orbit_d4_n3b_summary.json
+cat build/monster_3b_five_orbit_d4_n3b_summary.json
