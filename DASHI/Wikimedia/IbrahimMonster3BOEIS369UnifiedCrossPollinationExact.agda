@@ -17,6 +17,7 @@ import DASHI.Wikimedia.JInvariantOEISExactPrefixSameObjectSnowballExact as JPref
 import DASHI.Physics.Closure.NSCriticalConeResidualFibre369CrossPollinationExact as NS369
 import DASHI.Unified.GRQuantumCrossPollinationBridge as Unified
 import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
+import DASHI.Wikimedia.IbrahimMonster3BOEISSameIntegerRoleCollisionExact as OEISCollision
 
 ------------------------------------------------------------------------
 -- MONSTER 3B / A005052 / BASE369 / J / PHYSICS CROSS-POLLINATION
@@ -246,6 +247,9 @@ audit196883 = Audit.canonical196883MultiView
 audit196884 : Audit.MultiView196884
 audit196884 = Audit.canonical196884MultiView
 
+sameIntegerCollisionBoundary : OEISCollision.OEISSameIntegerCollisionFrontier
+sameIntegerCollisionBoundary = OEISCollision.currentOEISSameIntegerCollisionFrontier
+
 ------------------------------------------------------------------------
 -- Exact frontier.
 ------------------------------------------------------------------------
@@ -258,6 +262,7 @@ record MonsterOEIS369Frontier : Set where
     c3CharacterResidual53Paid : Bool
     conformal53PlusOneTo54Paid : Bool
     divisor369SurfaceArithmeticPaid : Bool
+    sameIntegerCollisionCounterexamplePaid : Bool
     literalSameActionRegularResidualLiftPaid : Bool
     base369Residual53IntertwinerPaid : Bool
     exceptionalAlbertResidualIntertwinerPaid : Bool
@@ -267,9 +272,9 @@ open MonsterOEIS369Frontier public
 
 currentMonsterOEIS369Frontier : MonsterOEIS369Frontier
 currentMonsterOEIS369Frontier = monster-oeis-369-frontier
-  true true true true true
+  true true true true true true
   false false false false
-  "construct the existing ActualRegularC3BulkResidualLift on one literal Monster action; only then compare its literal Residual53 with the Base369 54-1 fibre or the Albert/F4 1+26+26 candidate by an explicit intertwiner"
+  "retain role-indexed OEIS coordinates and the A058678-vs-N(3B) 17496 collision as a non-promotion regression; construct the existing ActualRegularC3BulkResidualLift on one literal Monster action, and identify 12/78 only through the source-native action/character/intertwiner lane rather than any shared integer"
 
 ------------------------------------------------------------------------
 -- WrongType / non-promotion firewalls.
