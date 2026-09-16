@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+OWNER="DASHI/Culture/MissingDeceasedTwentyScientistRound50ProfessionalEvidenceRoomExact.agda"
+[ -f "$OWNER" ]
+grep -q "ProfessionalRole" "$OWNER"
+grep -q "SharedEvidenceRoomItem" "$OWNER"
+grep -q "investigatorConsumer" "$OWNER"
+grep -q "lawyerConsumer" "$OWNER"
+grep -q "journalistConsumer" "$OWNER"
+grep -q "sameEvidenceDifferentConsumerGates" "$OWNER"
+grep -q "leadIsNotEvidence" "$OWNER"
+grep -q "publicationReadinessDoesNotEqualLegalAdmissibility" "$OWNER"
+grep -q "legalAdmissibilityDoesNotEqualPublicationEthics" "$OWNER"
+grep -q "nativeCarrierPreservationRequired" "$OWNER"
+grep -q "rightOfReplyRequiredForAdversePublication" "$OWNER"
+grep -q "authenticationRequiredForLegalUse" "$OWNER"
+grep -q "hypothesisDiscriminationRequiredForInvestigation" "$OWNER"
+grep -q "berkeleyProtocolAttributed" "$OWNER"
+grep -q "spjAttributed" "$OWNER"
+grep -q "federalRule901Attributed" "$OWNER"
+grep -q "round50H2PaidCount" "$OWNER"
+grep -q "round50H3PaidCount" "$OWNER"
