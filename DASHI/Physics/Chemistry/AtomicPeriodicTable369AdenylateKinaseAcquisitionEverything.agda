@@ -149,3 +149,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureFivePa
 -- theta2 intervals for alpha_L/beta_L/gamma_L/delta_L/epsilon_L/zeta_L/mu_L/
 -- lambda_L. Ligand context is retained; exact centroids and dLN remain unpaid.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureSixPanelAVisualGeometryEnvelopeExact
+
+-- Three-CV manifestation frontier: source prose explicitly says pathway states
+-- are characterised by theta1/theta2/dLN and points to Supporting Figure S18
+-- when discussing simultaneous three-coordinate mapping and gamma/delta-style
+-- intermediates.  S18 is retained as a same-article acquisition target only;
+-- its citation does not manufacture an exact named-state table or dLN numeral.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNamedStateThreeCVManifestationFrontierExact
