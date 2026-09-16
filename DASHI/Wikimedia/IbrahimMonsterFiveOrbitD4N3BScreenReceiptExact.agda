@@ -28,9 +28,11 @@ import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BCharacterAcquisitionExact as 
 -- discovery, canonical isomorphism, unique ambient class identification,
 -- character-table admissibility and character compatibility remain separate
 -- observations. Source for both stages is written. The dedicated shell checker,
--- the existing GAP/CTblLib/AtlasRep workflow wiring and the JSON artifact upload
--- path are also written. These execution-enablement receipts remain strictly
--- weaker than observing a GAP runtime result on this revision.
+-- the existing GAP/CTblLib/AtlasRep workflow wiring, a direct push trigger for
+-- the isolated execution branch, the raw JSON artifact, and the derived
+-- fail-locating summary artifact are all source-written. These execution-
+-- enablement receipts remain strictly weaker than observing a GAP runtime
+-- result on this revision.
 ------------------------------------------------------------------------
 
 kernelBoundary : Kernel.FiveOrbitD4KernelCharacterBoundary
@@ -79,7 +81,10 @@ record FiveOrbitD4N3BScreenReceipt : Set where
     failLocatingRuntimeReceiptSourceWritten : Bool
     executionCheckerSourceWritten : Bool
     existingGapWorkflowWired : Bool
+    directExecutionBranchPushTriggerWritten : Bool
+    failLocatingSummaryClassifierSourceWritten : Bool
     jsonArtifactUploadWired : Bool
+    summaryArtifactUploadWired : Bool
     possibleFusionCountObserved : Bool
     characterCompatibleFusionCountObserved : Bool
     actualD4SubgroupRuntimeObserved : Bool
@@ -95,7 +100,7 @@ currentFiveOrbitD4N3BScreenReceipt : FiveOrbitD4N3BScreenReceipt
 currentFiveOrbitD4N3BScreenReceipt =
   five-orbit-d4-n3b-screen-receipt
     true true true true true
-    true true true true
+    true true true true true true true
     false false false false false
     false false false
-    "The producer, fail-locating JSON schema, dedicated checker, established GAP/CTblLib/AtlasRep workflow hook and JSON artifact upload path are all source-written. Execute the workflow and observe build/monster_3b_five_orbit_d4_n3b_screen.json before promoting any runtime field. First record the exhaustive D4->MN3B character-fusion count and which fusions contain theta=(5,5,1,3,3)=3A1+B1+B2. Then follow the fail-locating realization chain: AtlasRep group -> D8 subgroup -> canonical D4 isomorphism -> unique ambient class fusion -> table-admissible realized fusion -> character-compatible realized fusion. Even a positive realized subgroup remains weaker than Selected3BNormalizerMonsterActionWeld: the actual selected Monster carrier/action intertwiner must still be paid independently."
+    "The producer, fail-locating raw JSON schema, dedicated checker, established GAP/CTblLib/AtlasRep workflow hook, direct execution-branch push trigger, fail-locating summary classifier, and both raw/summary JSON artifact upload paths are source-written. No current workflow run has been observed on this revision, so every runtime observation remains false. When execution becomes available, first consume build/monster_3b_five_orbit_d4_n3b_screen.json and build/monster_3b_five_orbit_d4_n3b_summary.json. A zero character-compatible fusion count falsifies the current five-orbit D4 route. Otherwise follow the realization ladder AtlasRep group -> D8 subgroup -> canonical D4 isomorphism -> unique ambient class fusion -> table-admissible realized fusion -> character-compatible realized fusion. Even a positive realized compatible subgroup remains weaker than Selected3BNormalizerMonsterActionWeld: the actual selected Monster carrier/action intertwiner must still be paid independently."
