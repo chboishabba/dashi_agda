@@ -6,11 +6,12 @@ module DASHI.Wikimedia.IbrahimMonster369OEISHyperfabricTrancheExact where
 -- Keep the numerical/source atlas, A005052/A025616 positive arithmetic lattice,
 -- its localized actual-zeta recognition acquisition target, the 42d/17496 and
 -- 6B/32772 positive bridge frontiers, the repo-native 5 x 3 = 15 -> 14 -> 42
--- carrier candidate, typed 54/729 carrier chart, source-paid C6 weight-two
--- spectrum, separating hypergraph, Python runtime receipts, literal same-integer
--- collision portfolio, positive-correlation receipts, and WrongType regressions
--- visible together without turning OEIS identity or runtime search into
--- representation/action authority.
+-- carrier candidate, the neighboring Monster class-42 eta-level family,
+-- typed 54/729 carrier chart, source-paid C6 weight-two spectrum, separating
+-- hypergraph, Python runtime receipts, literal same-integer collision portfolio,
+-- positive-correlation receipts, and WrongType regressions visible together
+-- without turning OEIS identity or runtime search into representation/action
+-- authority.
 ------------------------------------------------------------------------
 
 import DASHI.Wikimedia.DASHIMathOEIS196883AuditRoadmapExact
@@ -27,6 +28,8 @@ import DASHI.Wikimedia.IbrahimMonster42d17496PositiveBridgeAcquisitionExact
 import DASHI.Wikimedia.IbrahimMonster42d17496PositiveBridgeAcquisitionValidation
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierValidation
+import DASHI.Wikimedia.IbrahimMonster42ClassEtaFamilyOEISAcquisitionExact
+import DASHI.Wikimedia.IbrahimMonster42ClassEtaFamilyOEISAcquisitionValidation
 import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact
 import DASHI.Wikimedia.IbrahimMonster369A005052HeisenbergLadderPositiveExact
 import DASHI.Wikimedia.IbrahimMonster369A005052HeisenbergLadderPositiveValidation
