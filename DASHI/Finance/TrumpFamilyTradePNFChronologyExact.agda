@@ -3,19 +3,12 @@ module DASHI.Finance.TrumpFamilyTradePNFChronologyExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.EventAlgebra as Event
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 import DASHI.Finance.TrumpFamilyTradePNFBridgeExact as Bridge
-
-------------------------------------------------------------------------
--- EXACT CLAIM <-> PNF CHRONOLOGY BINDING
---
--- Event time, disclosure/publication time, and later observation/ingestion time
--- are distinct coordinates in EventPNF.  For a financial filing, an exact PNF
--- binding therefore has to pay the event/disclosure equalities separately.
-------------------------------------------------------------------------
 
 record ExactTradeClaimPNFChronology
     (claim : Atlas.TradeEvidenceClaim) : Set₁ where
@@ -30,10 +23,6 @@ record ExactTradeClaimPNFChronology
     ingestionCutReference : String
 
 open ExactTradeClaimPNFChronology public
-
-------------------------------------------------------------------------
--- Filing/disclosure time is not retroactive public knowledge at event time.
-------------------------------------------------------------------------
 
 data FilingBackdatesPublicKnowledgePermission : Set where
 data FamilyRelationBackdatesKnowledgePermission : Set where
@@ -55,12 +44,6 @@ eventDateDoesNotMeanDisclosureDate ()
 laterDisclosureDoesNotRevealEarlierMotive :
   LaterDisclosureMeansEarlierMotivePermission → ⊥
 laterDisclosureDoesNotRevealEarlierMotive ()
-
-------------------------------------------------------------------------
--- Point-in-time admissibility remains application-supplied.  This is the PNF
--- hook needed for event studies: a claim can be used at time t only if its
--- actual information-cut witness says it was admissible then.
-------------------------------------------------------------------------
 
 record TradeInformationCutWitness
     (claim : Atlas.TradeEvidenceClaim)
