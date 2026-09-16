@@ -33,12 +33,14 @@ import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonDomainSourceRound338Exact as R338
 import DASHI.Physics.YangMills.BalabanCMP116R281ModeSelectedDirectRound341Exact as R341
 import DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342Exact as R342
 import DASHI.Physics.YangMills.BalabanCMP116R281SelectedSourceUpperRound343Exact as R343
@@ -83,14 +85,13 @@ fromR343 :
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
-    {demands source tests spectrumSource} →
+    {demands : R104.CMP116FiniteNormalizedAnalyticDemands}
+    {source : R338.CanonicalCommonDomainCMP116Source base demands}
+    {tests : R278.SelectedConnectedCovarianceTests dataSet}
+    {spectrumSource : R281.ContinuumCovarianceSpectrumData
+      {SpectralObservable = SpectralObservable} {Energy = Energy}
+      dataSet extension tests} →
   R343.SelectedResponseSourceUpperApplication
-    {Measure = Measure}
-    {TestObservable = TestObservable}
-    {SpectralObservable = SpectralObservable}
-    {Energy = Energy}
-    {dataSet = dataSet}
-    {extension = extension}
     base demands source tests spectrumSource →
   DirectSelectedSpectralUpper base tests spectrumSource
 fromR343 application = record
