@@ -77,7 +77,7 @@ trustSchedule13DControl =
 data VotingInvestmentPowerAutomaticallyMeansEveryTradeDirected : Set where
 data TrusteeControlAutomaticallyMeansBeneficiarySharesPrivateInformation : Set where
 data SoleBeneficiaryAutomaticallyMeansOperationalManagement : Set where
-\data TrustControlAutomaticallyMeansPresidentialPolicyInfluence : Set where
+data TrustControlAutomaticallyMeansPresidentialPolicyInfluence : Set where
 
 votingPowerDoesNotProveEveryTradeDirected :
   VotingInvestmentPowerAutomaticallyMeansEveryTradeDirected → ⊥
