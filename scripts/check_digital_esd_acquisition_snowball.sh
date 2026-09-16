@@ -8,8 +8,10 @@ OWNER=DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 REGRESSION=DASHI/Education/DigitalESDAcquisitionSnowballRegression.agda
 ICT_OWNER=DASHI/Education/DigitalESDICTLifecycleCircularitySnowballExact.agda
 ICT_REGRESSION=DASHI/Education/DigitalESDICTLifecycleCircularitySnowballRegression.agda
+SCHEDULER=DASHI/Education/DigitalESDSameObjectAcquisitionSchedulerExact.agda
+SCHEDULER_REGRESSION=DASHI/Education/DigitalESDSameObjectAcquisitionSchedulerRegression.agda
 
-for file in "$OWNER" "$REGRESSION" "$ICT_OWNER" "$ICT_REGRESSION"; do
+for file in "$OWNER" "$REGRESSION" "$ICT_OWNER" "$ICT_REGRESSION" "$SCHEDULER" "$SCHEDULER_REGRESSION"; do
   [[ -f "$file" ]] || { echo "required acquisition-snowball source is missing: $file" >&2; exit 1; }
   if grep -nE '\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$' "$file"; then
     echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
@@ -82,10 +84,33 @@ grep -q '^parentResidualStillUnpaidRegression :' "$ICT_REGRESSION"
 grep -q '^refinedSameObjectLifecycleResidualRegression :' "$ICT_REGRESSION"
 grep -q '^refinedHardwareCircularityResidualRegression :' "$ICT_REGRESSION"
 
+# Citation-resistant residuals route to evidence/authority producers instead of
+# being 'paid' by further bibliography.
+grep -q '^producerForAcquisitionLeaf :' "$SCHEDULER"
+grep -q '^requiredProducersForAcquisitionLeaf :' "$SCHEDULER"
+grep -q '^producerForRefinedLifecycle :' "$SCHEDULER"
+grep -q '^currentProducerFrontier :' "$SCHEDULER"
+grep -q '^externalCitationDoesNotPaySameObjectLCI :' "$SCHEDULER"
+grep -q '^priorStudyDoesNotPayFutureLongitudinalOutcome :' "$SCHEDULER"
+grep -q '^literatureSimilarityDoesNotCreateContextTransferReceipt :' "$SCHEDULER"
+grep -q '^standardsDocumentDoesNotProveActualRepairSupport :' "$SCHEDULER"
+grep -q '^openStandardsDocumentDoesNotProvePersistentInteroperability :' "$SCHEDULER"
+grep -q '^citationDoesNotCreateParticipantAuthority :' "$SCHEDULER"
+grep -q '^acquisitionOrderDoesNotCreatePaymentOrder :' "$SCHEDULER"
+grep -q '^paidSiblingDoesNotAllowSkippedDependency :' "$SCHEDULER"
+grep -q '^canonicalSameObjectAcquisitionSchedulerBoundary :' "$SCHEDULER"
+grep -q '^lifecycleLeafProducerRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^longitudinalProducerRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^participantGovernanceProducerRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^schedulerRetainsAttributionRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^schedulerForbidsSkippedDependencyRegression :' "$SCHEDULER_REGRESSION"
+
 if command -v nix >/dev/null 2>&1 && [[ -x scripts/run_agda29_parallel_check.sh ]]; then
+  scripts/run_agda29_parallel_check.sh "$SCHEDULER_REGRESSION"
   scripts/run_agda29_parallel_check.sh "$ICT_REGRESSION"
   scripts/run_agda29_parallel_check.sh "$REGRESSION"
 elif command -v agda >/dev/null 2>&1; then
+  agda -i . "$SCHEDULER_REGRESSION"
   agda -i . "$ICT_REGRESSION"
   agda -i . "$REGRESSION"
 elif [[ "${1:-}" == "--source-only" ]]; then
