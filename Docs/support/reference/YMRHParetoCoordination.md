@@ -32,12 +32,15 @@ Use this as the first-stop **current** state sheet; use the archaeology files fo
 ## Current direct chain
 
 ```text
-CMP99 generalized-walk propagator decay               [published/source]
- + CMP116 decoupled local-activity construction       [published/source]
- + selected T5/RG physical source semantics           [physical]
+CMP99 marked propagator/background-factor decay        [published/source]
+ + CMP109 differentiated finite factor products        [published/source]
+ + CMP116 decoupled local-activity construction        [published/source]
+ + selected T5/RG physical source semantics            [physical]
                 |
                 v
-R406 LITERAL SELECTED TERM/COMMON-Y LOCALIZATION       [owner written / source replay unpaid]
+R406 FACTORWISE SELECTED TERM LOCALIZATION              [compiler strengthened]
+  literal ordinary/marked factor bounds                [source replay unpaid]
+  -> whole differentiated-term majorant                [Round72 compiler / paid]
                 |
                 v
 R404 common-Y absolute finite-walk resummation         [compiler / paid]
@@ -118,39 +121,87 @@ Therefore finite summation/resummation is compiler-owned.
 
 ### R406 — literal selected term/local-activity localization
 
-RED-first validation is now present:
+RED-first validation:
 
 `DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Validation.agda`
 
-The theorem-bearing owner is now written:
+Production owner:
 
 `DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Exact.agda`
 
-Initial owner commit: `b2ec32e1c0f8b13ccc471b75d35edcebcc9a5078`.
-Current owner/type-fix head: `7520151494f2b6d425d4b481847eff91b5a79645`.
+Historical milestones:
 
-It composes R404 and R405 into the selected boundary inequality and binds the selected R318 carrier, observable-indexed J insertions, and decoupling-boundary coordinate. Its fields still require the literal CMP99/CMP116 source replay; no concrete source replay inhabitant or kernel receipt is claimed.
+```text
+b2ec32e1...  initial theorem-bearing owner
+75201514...  R318 carrier / observable-index type repair
+51d90057...  whole-term majorant removed as primitive source assumption
+```
 
-The remaining source/application inputs are:
+The latest R406 source now imports the existing machine-checked Round72 finite-product theorem:
+
+`BalabanDifferentiatedMarkedFactorProductExact.markedProductDifferenceFromFactorwiseBounds`.
+
+Accordingly R406 no longer asks the physical/source replay to hand it an opaque theorem
+
+```text
+|differentiated term| <= differentiated term majorant.
+```
+
+Instead each CMP116 differentiated term carries its literal finite factorization:
+
+```text
+before factors
+after factors
+ordinary factor majorants
+marked one-factor replacement majorants
+```
+
+with source-native leaves
+
+```text
+0 <= ordinary factor majorant
+|before factor| <= ordinary factor majorant
+|after factor| <= ordinary factor majorant
+|before factor - after factor| <= marked factor majorant.
+```
+
+Round72 then derives the whole-term telescope majorant mechanically, after which R404 and R405 finish the two finite positive summations.
+
+This is a genuine frontier move:
+
+```text
+whole differentiated-term majorant                  [NO LONGER primitive]
+        ^
+        | Round72 exact telescope compiler
+        |
+literal CMP99/CMP109 factorwise ordinary/marked bounds [LIVE source replay]
+```
+
+The remaining source/application inputs are therefore narrower:
 
 ```text
 selected T5/RG density
 x actual observable-indexed J_L,J_R insertions
 x CMP116 decoupling boundary assignment
-x CMP99/CMP116 generalized-walk/local-activity localization
-----------------------------------------------------------------
-differentiated term/common-Y majorants required by R404/R405.
+x literal differentiated term = neighboring finite-product difference
+x literal CMP99/CMP109 ordinary + marked factor bounds
+x CMP116 positive common-Y / outer localization majorants
+--------------------------------------------------------------------------
+selected differentiated term/common-Y/localization bound.
 ```
 
-Do **not** satisfy R406 by adding another P0 receipt/record, a citation-only owner, or a `ProofLevel` flag. The existing `BalabanMarkedHessianPublishedDecayBoundaryExact` source donor records the published status but does not inhabit this inequality.
+No concrete selected source replay inhabitant is claimed yet, and no current-head Agda/kernel receipt has been observed.
 
-The older R76 `E^(2)/Pi` -> R318 mixed-log bridge remains **conditional donor structure only**. Activate it only if direct R403 source replay cannot express a required source coordinate.
+Do **not** satisfy R406 by reintroducing an opaque whole-term inequality, adding another P0 receipt/record, promoting a citation/`ProofLevel`, or creating another source-direction representation layer.
+
+The older R76 `E^(2)/Pi` -> R318 mixed-log bridge remains **conditional donor structure only**. Activate it only if the literal factor replay cannot be expressed directly through R403/R318.
 
 ## Current YM payments
 
 ```text
-YM-P0a  selected-density semantic source replay — UNPAID / R406 frontier.
-YM-P0b  source-native term/local-activity absolute localization — UNPAID / R406 frontier.
+YM-P0a  selected-density/J/decoupling same-object replay — UNPAID / R406 frontier.
+YM-P0b1 literal CMP99/CMP109 factorwise ordinary/marked bounds — UNPAID / R406 frontier.
+YM-P0b2 factorwise bounds -> whole differentiated-term majorant — PAID by Round72, now consumed by R406.
 YM-P0c  absolute finite-polydisc coefficient extraction — PAID by R402.
 YM-P0d  common-Y + nested finite source summation — PAID by R404/R405.
 
@@ -169,6 +220,7 @@ Paid/compiler-owned:
 normalized two-source log calculus
 mixed-log second derivative = finite connected covariance
 observable-indexed source presentation (R403)
+factorwise marked finite-product telescope (Round72, consumed by R406)
 absolute common-Y walk resummation (R404)
 nested localization-domain summation (R405)
 absolute Cauchy coefficient lift (R402)
@@ -183,8 +235,9 @@ clustering -> transfer-gap contradiction
 Still theorem-bearing/physical:
 
 ```text
-R406 / P0a selected-density source applicability for actual J insertions — owner interface written; inhabitant unpaid
-R406 / P0b CMP99/CMP116 differentiated term/local-activity majorants — owner interface written; inhabitant unpaid
+R406 / P0a selected-density, actual J pair and decoupling-boundary same-object replay
+R406 / P0b1 literal CMP99/CMP109 factorwise ordinary/marked estimates on the selected differentiated term
+R406 CMP116 positive common-Y / outer shell majorants on that same selected decomposition
 P2 selected support/time geometry inhabitant
 P3 same-Hamiltonian ratio/energy identity only where used
 ```
@@ -193,7 +246,7 @@ P3 same-Hamiltonian ratio/energy identity only where used
 
 | Priority | Work |
 |---|---|
-| 1 | **R406 / YM-P0a/P0b: literal selected CMP99/CMP116 term/local-activity localization consumed by R404/R405** |
+| 1 | **R406 / YM-P0a/P0b1: instantiate the literal selected CMP99/CMP109 factor bounds and CMP116 decomposition on the existing R318 J pair** |
 | 2 | **YM-P2: `time <= selected physicalDistance` if not definitional from selected support** |
 | 3 | **YM-P3 only where the source-native-q route actually consumes it** |
 | 4 | generic source envelope/rate producer only if cheaper than direct R320/merged-#970 |
@@ -205,6 +258,7 @@ P3 same-Hamiltonian ratio/energy identity only where used
 Unless a literal current consumer requires it:
 
 - no new P0 alias/record/wrapper;
+- no opaque `|term| <= termMajorant` source field after `51d90057...`;
 - no independent observable->source-direction carrier;
 - no R76 `E^(2)/Pi` bridge unless R406 proves it necessary;
 - no citation/`ProofLevel` promotion into a theorem term;
@@ -224,7 +278,7 @@ Unless a literal current consumer requires it:
 - CMP116: Tadeusz Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, DOI `10.1007/BF01239022`.
 - CMP119: DOI `10.1007/BF01217741`.
 
-CMP116 live source neighbourhood: generalized-walk/decoupling around (1.6)–(1.21), differentiated Cauchy representation around (1.23), positive tree/localization summation around (1.29)–(1.36).
+CMP99 Theorem 3.14/(3.154) is the marked background/propagator replacement donor used by Round72. CMP109 (4.3)–(4.5) supplies the differentiated finite factor/tree structure and ordinary decay inputs. CMP116 Sect. 1 supplies the generalized-walk/decoupling construction around (1.6)–(1.21), differentiated Cauchy representation around (1.23), and positive tree/localization summation around (1.29)–(1.36).
 
 Citation/source status does not itself inhabit R406/P0.
 
@@ -246,14 +300,13 @@ Current focused commits:
 
 ```text
 224bb0b3...  R404 absolute common-Y finite-walk resummation
-                R405 RED validation already existed on #967
 143c8f66...  R405 nested source-domain summation GREEN source
 14b13cbf...  R406 RED-first validation requires missing literal theorem owner
 75201514...  R406 owner type-fix: selected J insertions aligned with R318 carrier
-                R404/R405 composition present; source replay still unpaid
+51d90057...  R406 factorwise cut: Round72 derives whole-term majorant from literal factor bounds
 ```
 
-No exact-head workflow has been observed for the R405/R406 head in this connector session. Do not upgrade source ordering to kernel certification.
+No pull-request-triggered workflow was present for exact head `51d90057...` when checked in this connector session. Do not upgrade source ordering to kernel certification.
 
 ## Update log — 2026-09-16
 
@@ -262,6 +315,8 @@ No exact-head workflow has been observed for the R405/R406 head in this connecto
 - R402 pays absolute coefficient extraction.
 - R403 pays observable-index representation.
 - R404/R405 pay both finite summation layers.
-- R406 now has a theorem-bearing owner and explicit R404/R405 composition; the selected-density/J/source-localization fields remain unpaid until an inhabitant is supplied.
-- The R76 `E^(2)/Pi` representation bridge is donor-only unless R406 demonstrates a need.
+- R406 is now materially narrower: the whole differentiated-term majorant is compiler-owned via the existing Round72 factorwise marked-product telescope.
+- The live P0 source replay is now the literal selected density/J/boundary decomposition plus CMP99/CMP109 ordinary and marked **factor** bounds and CMP116 positive localization majorants.
+- No concrete source replay inhabitant or current-head Agda/kernel receipt is claimed.
+- The R76 `E^(2)/Pi` representation bridge remains donor-only unless the factor replay demonstrates a need.
 - RH remains behind YM in the live Pareto order.
