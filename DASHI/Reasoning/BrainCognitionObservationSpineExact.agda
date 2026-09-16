@@ -5,55 +5,95 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.List.Base using (List; _∷_; [])
 
-import DASHI.Core.ConsumerFamilyRefinementKernelExact as Family
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.LearningAlgebra as Learning
 import DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact as Decision
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as Brain
 import DASHI.Reasoning.AuthorityBooleanPolarityRepairExact as Authority
-import DASHI.Reasoning.MaleCNSConsumerRelativeLatentParetoExact as Pareto
-import DASHI.Reasoning.MaleCNSLatentStateMoEGrokkingAnimalexicCrossPollinationExact as Programme
+import DASHI.Reasoning.ConsumerRelativeLatentExtractionExact as Latent
+import DASHI.Reasoning.MaleCNSTypedHyperfabricChartProjectionExact as MaleCNS
+import DASHI.Reasoning.FibreRoutingMaleCNSMagnitudeAssignmentReplicationFrontierExact as Replication
 
 ------------------------------------------------------------------------
 -- BRAIN / COGNITION / OBSERVATION SPINE
 --
--- Existing MaleCNS Z_d is a consumer-relative structure/function code.  This
--- owner asks which *additional* latent questions could factor through a code.
--- It does not identify the current structural latent with memory, motor policy,
--- decision state, semantic content, mechanism, or subjective state.
+-- This owner adds no new neuroscience ontology. It composes existing owners
+-- around one common rule:
+--
+--   latent/fine state -> lossy consumer observation.
+--
+-- Exact extraction of a requested latent L from observation Q is a separate
+-- factorisation obligation L = decode o Q. Observational equality therefore
+-- does not itself authorize latent-state identity or reverse inference.
 ------------------------------------------------------------------------
 
-data CognitionConsumer : Set where
-  rememberedEventConsumer : CognitionConsumer
-  memoryInfluenceConsumer : CognitionConsumer
-  motorPolicyConsumer : CognitionConsumer
-  fineDecisionStateConsumer : CognitionConsumer
-  futureActionConsumer : CognitionConsumer
-  functionalObservationConsumer : CognitionConsumer
+data LatentConsumerQuery : Set where
+  rememberedEventQuery : LatentConsumerQuery
+  memoryInfluenceQuery : LatentConsumerQuery
+  motorPolicyQuery : LatentConsumerQuery
+  decisionCommitmentQuery : LatentConsumerQuery
+  executedActionQuery : LatentConsumerQuery
+  functionalObservationQuery : LatentConsumerQuery
 
-CognitionConsumerFamily : Set → Set₁
-CognitionConsumerFamily State = Family.ConsumerFamily State CognitionConsumer
+data LatentExtractionStatus : Set where
+  candidateOnly : LatentExtractionStatus
+  representationAdequacyPaid : LatentExtractionStatus
+  decoderIdentityPaid : LatentExtractionStatus
 
-CognitionCodeAdequacy :
-  ∀ {State Code : Set} →
-  (encode : State → Code) →
-  CognitionConsumerFamily State →
-  Set₁
-CognitionCodeAdequacy = Family.FamilyFactorsThrough
+record CandidateLatentConsumerQuestion : Set where
+  constructor candidate-latent-consumer-question
+  field
+    query : LatentConsumerQuery
+    fineCarrier : String
+    observationSurface : String
+    candidateProjection : String
+    requiredReceipt : String
+    status : LatentExtractionStatus
+    interpretation : String
 
-consumerAdequacyFromWholeFamily :
-  ∀ {State Code}
-    {encode : State → Code}
-    {family : CognitionConsumerFamily State} →
-  CognitionCodeAdequacy encode family →
-  (consumer : CognitionConsumer) →
-  NF.FactorsThrough encode (Family.observe family consumer)
-consumerAdequacyFromWholeFamily = Family.consumerFactor
+open CandidateLatentConsumerQuestion public
+
+candidateLatentConsumerQuestion : List CandidateLatentConsumerQuestion
+candidateLatentConsumerQuestion =
+  candidate-latent-consumer-question
+    rememberedEventQuery
+    "versioned MemoryFibre / remembered PNF event"
+    "behavioural, functional-imaging, or other declared observation"
+    "consumer-relative quotient of latent state"
+    "FactorsThrough observation rememberedEvent, or a non-factorability witness proving this observer cannot decode it"
+    candidateOnly
+    "Memory identity is represented in the repo, but no MaleCNS/connectome observation currently decodes remembered semantic event identity."
+  ∷ candidate-latent-consumer-question
+    memoryInfluenceQuery
+    "memory valuation/salience/action-weight/retrieval coordinates"
+    "declared behaviour or functional observation"
+    "consumer-relative influence code"
+    "FactorsThrough observation requested influence coordinate plus held-out/intervention adequacy for the declared consumer"
+    candidateOnly
+    "Present influence may change while the remembered event persists; influence is a different latent query from memory identity."
+  ∷ candidate-latent-consumer-question
+    motorPolicyQuery
+    "internal policy / transition / actuation state"
+    "executed movement or behavioural action"
+    "minimal policy code adequate for a declared future-action consumer"
+    "FactorsThrough observation motorPolicy with policy-labelled intervention or same-object latent/behaviour binding"
+    candidateOnly
+    "A compact motor-policy latent is a valid target question, but action alone does not establish its identity."
+  ∷ candidate-latent-consumer-question
+    decisionCommitmentQuery
+    "fine decision state"
+    "executed action"
+    "action quotient"
+    "existing NonFactorabilityWitness already proves this action observer cannot decode the fine state"
+    representationAdequacyPaid
+    "The current repo proves that identical observed action can hide distinct fine decision states."
+  ∷ []
 
 ------------------------------------------------------------------------
--- Existing paid cognition anchors.
+-- Existing paid theorem anchors.
 ------------------------------------------------------------------------
 
 memoryContentMayPersistWhileInfluenceChanges :
@@ -70,10 +110,17 @@ extinctionLearningPreservesSemanticContent :
 extinctionLearningPreservesSemanticContent memory =
   Learning.publicSemanticContentPreservedIsTrue (Learning.extinctionReceipt memory)
 
-observedActionDoesNotFactorFineDecisionState :
-  NF.FactorsThrough Decision.observedAction Decision.fineDecisionState → ⊥
-observedActionDoesNotFactorFineDecisionState =
-  Decision.actionCannotRecoverFineDecisionState
+observedActionDoesNotRecoverFineDecisionState :
+  Latent.CanExtractLatent Decision.observedAction Decision.fineDecisionState → ⊥
+observedActionDoesNotRecoverFineDecisionState =
+  Latent.decisionFineStateNotExtractableFromAction
+
+latentExtractionIsFactorisation :
+  ∀ {State Observation RequestedLatent : Set}
+    (observe : State → Observation)
+    (latent : State → RequestedLatent) →
+  Set₁
+latentExtractionIsFactorisation = Latent.CanExtractLatent
 
 highResolutionImagingIsObservationChannel :
   Brain.highResolutionFMRIIsObservationChannel
@@ -83,181 +130,183 @@ highResolutionImagingIsObservationChannel =
   Brain.highResolutionFMRIIsObservationChannelIsTrue
     Brain.canonicalBrainConnectomeFMRIObservationBoundary
 
-------------------------------------------------------------------------
--- Current MaleCNS learned/derived structural latent receipt.
-------------------------------------------------------------------------
-
-currentD2LowestObservedDiscoveryMAE :
-  Pareto.d2LowestObservedMAE Pareto.currentPythonLatentDiscoveryRuntimeReceipt
+maleCNSHyperfabricProjectionIsExecuted :
+  MaleCNS.empiricalHyperfabricRoundtripLosslessForDeclaredConsumer
+    MaleCNS.canonicalMaleCNSHyperfabricChartProjectionBoundary
   ≡ true
-currentD2LowestObservedDiscoveryMAE = refl
+maleCNSHyperfabricProjectionIsExecuted = refl
 
-currentD2DoesNotDominateSenderGainAcrossMetrics :
-  Pareto.d2DominatesSenderGainAcrossReportedMetrics
-    Pareto.currentPythonLatentDiscoveryRuntimeReceipt
+maleCNSSenderGainProjectionIsExact :
+  MaleCNS.empiricalSenderGainProjectionExact
+    MaleCNS.canonicalMaleCNSHyperfabricChartProjectionBoundary
+  ≡ true
+maleCNSSenderGainProjectionIsExact = refl
+
+maleCNSSenderGainProjectionDoesNotPromoteSufficiency :
+  MaleCNS.exactProjectionPromotesSufficiency
+    MaleCNS.canonicalMaleCNSHyperfabricChartProjectionBoundary
   ≡ false
-currentD2DoesNotDominateSenderGainAcrossMetrics = refl
-
-currentD2DoesNotPromoteUniversalMinimum :
-  Pareto.discoveryBestDimensionPromotesUniversalMinimum
-    Pareto.currentPythonLatentDiscoveryRuntimeReceipt
-  ≡ false
-currentD2DoesNotPromoteUniversalMinimum = refl
-
-------------------------------------------------------------------------
--- Gauthey behavior observation acquisition coordinate.
---
--- Source-bounded paper facts: adult behaving flies were recorded on an
--- air-suspended ball; ball motion was acquired at 100 Hz and locomotion was
--- extracted with FicTrac; stimulus delivery and behavioral quantification were
--- synchronized.  The exact deposited behavior member and same-trial timebase
--- binding remain acquisition obligations in dashiBRAIN.
-------------------------------------------------------------------------
-
-record GautheyBehaviorObservationFrontier : Set where
-  constructor gauthey-behavior-observation-frontier
-  field
-    paperDoi : String
-    behavingFlyRecordingReported : Bool
-    ballTracking100HzReported : Bool
-    fictracLocomotionReported : Bool
-    stimulusBehaviorSynchronizationReported : Bool
-    gautheyBehaviorRecordedAndSynchronized : Bool
-    behaviorResolverSource : String
-    behaviorResolverSourceWritten : Bool
-    exactBehaviorDepositMemberResolved : Bool
-    exactTrialBehaviorBindingPaid : Bool
-    neuralBehaviorTimebaseReceiptPaid : Bool
-    motorPolicyDecoderPaid : Bool
-    interpretation : String
-
-open GautheyBehaviorObservationFrontier public
-
-currentGautheyBehaviorObservationFrontier : GautheyBehaviorObservationFrontier
-currentGautheyBehaviorObservationFrontier = gauthey-behavior-observation-frontier
-  "10.1038/s41467-026-72437-1"
-  true
-  true
-  true
-  true
-  true
-  "dashiBRAIN:scripts/resolve_gauthey_behavior_sources.py"
-  true
-  false
-  false
-  false
-  false
-  "The publication pays existence of synchronized locomotor behavior recording, not the exact deposited behavior artifact or a motor-policy latent. The next empirical seam is archive-member identity plus same-trial neural/behavior timebase binding."
+maleCNSSenderGainProjectionDoesNotPromoteSufficiency = refl
 
 ------------------------------------------------------------------------
 -- Non-promotion firewalls.
 ------------------------------------------------------------------------
 
-data StructuralLatentIsMemoryContent : Set where
-structuralLatentDoesNotBecomeMemoryContent : StructuralLatentIsMemoryContent → ⊥
-structuralLatentDoesNotBecomeMemoryContent ()
-
-data StructuralLatentIsMotorPolicy : Set where
-structuralLatentDoesNotBecomeMotorPolicy : StructuralLatentIsMotorPolicy → ⊥
-structuralLatentDoesNotBecomeMotorPolicy ()
-
-data StructuralLatentDimensionIsPhysicalBrainDimension : Set where
-structuralLatentDimensionDoesNotIdentifyPhysicalBrainDimension :
-  StructuralLatentDimensionIsPhysicalBrainDimension → ⊥
-structuralLatentDimensionDoesNotIdentifyPhysicalBrainDimension ()
-
 data ObservationEqualityImpliesLatentIdentity : Set where
+
 observationEqualityDoesNotAuthorizeLatentIdentity :
   ObservationEqualityImpliesLatentIdentity → ⊥
 observationEqualityDoesNotAuthorizeLatentIdentity ()
 
+data ConnectomeDecodesMemoryContent : Set where
+
+connectomeDoesNotDecodeMemoryContent : ConnectomeDecodesMemoryContent → ⊥
+connectomeDoesNotDecodeMemoryContent ()
+
+data ConnectomeDecodesMotorPlan : Set where
+
+connectomeDoesNotDecodeMotorPlan : ConnectomeDecodesMotorPlan → ⊥
+connectomeDoesNotDecodeMotorPlan ()
+
+data ObservationAuthorizesTraumaInference : Set where
+
+observationDoesNotAuthorizeTraumaInference :
+  ObservationAuthorizesTraumaInference → ⊥
+observationDoesNotAuthorizeTraumaInference ()
+
+data ConsumerMinimalityImpliesPhysicalLatentDimension : Set where
+
+consumerMinimalityDoesNotIdentifyPhysicalLatentDimension :
+  ConsumerMinimalityImpliesPhysicalLatentDimension → ⊥
+consumerMinimalityDoesNotIdentifyPhysicalLatentDimension ()
+
 ------------------------------------------------------------------------
--- Current missing-field frontier.
+-- Current bounded state / missing-fields ledger.
 ------------------------------------------------------------------------
 
-record BrainCognitionObservationBoundary : Set where
-  constructor brain-cognition-observation-boundary
+record BrainLatentExtractionMissingFields : Set where
+  constructor brain-latent-extraction-missing-fields
   field
-    cognitionUsesExistingConsumerFamilyKernel : Bool
-    cognitionUsesExistingConsumerFamilyKernelIsTrue :
-      cognitionUsesExistingConsumerFamilyKernel ≡ true
+    rememberedEventDecoder : Bool
+    memoryInfluenceDecoder : Bool
+    internalisedMotorPolicyDecoder : Bool
+    fineDecisionStateDecoderFromAction : Bool
+    refinedDecisionObserverNeeded : Bool
+    sameObjectLatentObservationBindingNeeded : Bool
+    interventionOrTransportReceiptNeeded : Bool
+    interpretation : String
 
-    currentStructuralLatentRuntimeObserved : Bool
-    currentStructuralLatentRuntimeObservedIsTrue :
-      currentStructuralLatentRuntimeObserved ≡ true
+open BrainLatentExtractionMissingFields public
 
-    currentD2IsDiscoveryMAECoordinate : Bool
-    currentD2IsDiscoveryMAECoordinateIsTrue :
-      currentD2IsDiscoveryMAECoordinate ≡ true
+currentBrainLatentExtractionMissingFields : BrainLatentExtractionMissingFields
+currentBrainLatentExtractionMissingFields = brain-latent-extraction-missing-fields
+  false
+  false
+  false
+  false
+  true
+  true
+  true
+  "Open latent-extraction obligations are query-specific. Action-only fine-decision decoding is ruled out by an existing non-factorability witness; memory identity, memory influence, and motor-policy decoding need their own observation bindings/factorisation receipts rather than inheriting authority from the connectome or MaleCNS compression result."
 
-    currentStructuralLatentFactorsWholeCognitionFamily : Bool
-    currentStructuralLatentFactorsWholeCognitionFamilyIsFalse :
-      currentStructuralLatentFactorsWholeCognitionFamily ≡ false
+record BrainCognitionObservationSpineBoundary : Set where
+  constructor brain-cognition-observation-spine-boundary
+  field
+    memoryIdentitySeparatedFromCurrentInfluence : Bool
+    memoryIdentitySeparatedFromCurrentInfluenceIsTrue :
+      memoryIdentitySeparatedFromCurrentInfluence ≡ true
 
-    rememberedEventFactorisationPaid : Bool
-    rememberedEventFactorisationPaidIsFalse :
-      rememberedEventFactorisationPaid ≡ false
+    learningMayChangeInfluenceWithoutSemanticErasure : Bool
+    learningMayChangeInfluenceWithoutSemanticErasureIsTrue :
+      learningMayChangeInfluenceWithoutSemanticErasure ≡ true
 
-    memoryInfluenceFactorisationPaid : Bool
-    memoryInfluenceFactorisationPaidIsFalse :
-      memoryInfluenceFactorisationPaid ≡ false
+    exactLatentExtractionRequiresFactorisation : Bool
+    exactLatentExtractionRequiresFactorisationIsTrue :
+      exactLatentExtractionRequiresFactorisation ≡ true
 
-    motorPolicyFactorisationPaid : Bool
-    motorPolicyFactorisationPaidIsFalse :
-      motorPolicyFactorisationPaid ≡ false
+    actionProjectionNonfactorabilityPaid : Bool
+    actionProjectionNonfactorabilityPaidIsTrue :
+      actionProjectionNonfactorabilityPaid ≡ true
 
-    fineDecisionStateFromActionFactorisationPaid : Bool
-    fineDecisionStateFromActionFactorisationPaidIsFalse :
-      fineDecisionStateFromActionFactorisationPaid ≡ false
+    connectomeConstrainedObservationIsCandidateSurface : Bool
+    connectomeConstrainedObservationIsCandidateSurfaceIsTrue :
+      connectomeConstrainedObservationIsCandidateSurface ≡ true
+
+    maleCNSStructuralFunctionalProjectionExecuted : Bool
+    maleCNSStructuralFunctionalProjectionExecutedIsTrue :
+      maleCNSStructuralFunctionalProjectionExecuted ≡ true
+
+    authorityPolarityRepairRequired : Bool
+    authorityPolarityRepairRequiredIsTrue :
+      authorityPolarityRepairRequired ≡ true
+
+    reverseInferenceBlocked : Bool
+    reverseInferenceBlockedIsTrue :
+      reverseInferenceBlocked ≡ true
+
+    mindReadingBlocked : Bool
+    mindReadingBlockedIsTrue :
+      mindReadingBlocked ≡ true
 
     minimalLearnedLatentExtractionPaid : Bool
     minimalLearnedLatentExtractionPaidIsFalse :
       minimalLearnedLatentExtractionPaid ≡ false
 
-    exactBehaviorObservationArtifactPaid : Bool
-    exactBehaviorObservationArtifactPaidIsFalse :
-      exactBehaviorObservationArtifactPaid ≡ false
+    memoryContentExtractionPaid : Bool
+    memoryContentExtractionPaidIsFalse :
+      memoryContentExtractionPaid ≡ false
+
+    internalisedMotorPlanExtractionPaid : Bool
+    internalisedMotorPlanExtractionPaidIsFalse :
+      internalisedMotorPlanExtractionPaid ≡ false
+
+    traumaInferenceFromObservationPaid : Bool
+    traumaInferenceFromObservationPaidIsFalse :
+      traumaInferenceFromObservationPaid ≡ false
 
     ninetyPercentUnusedBrainClaimPaid : Bool
     ninetyPercentUnusedBrainClaimPaidIsFalse :
       ninetyPercentUnusedBrainClaimPaid ≡ false
 
-    structuralLatentDimensionEqualsPhysicalBrainDimension : Bool
-    structuralLatentDimensionEqualsPhysicalBrainDimensionIsFalse :
-      structuralLatentDimensionEqualsPhysicalBrainDimension ≡ false
+    consumerMinimalRepresentationEqualsPhysicalLatentDimension : Bool
+    consumerMinimalRepresentationEqualsPhysicalLatentDimensionIsFalse :
+      consumerMinimalRepresentationEqualsPhysicalLatentDimension ≡ false
 
-    consumerMinimalCodeMayBeLowerDimensionalThanFineState : Bool
-    consumerMinimalCodeMayBeLowerDimensionalThanFineStateIsTrue :
-      consumerMinimalCodeMayBeLowerDimensionalThanFineState ≡ true
-
-    authorityPolarityRepairConsumed : Bool
-    authorityPolarityRepairConsumedIsTrue :
-      authorityPolarityRepairConsumed ≡ true
+    replicationIdentityRecoveryEqualsIndependentReplication : Bool
+    replicationIdentityRecoveryEqualsIndependentReplicationIsFalse :
+      replicationIdentityRecoveryEqualsIndependentReplication ≡ false
 
     interpretation : String
 
-open BrainCognitionObservationBoundary public
+open BrainCognitionObservationSpineBoundary public
 
-canonicalBrainCognitionObservationBoundary : BrainCognitionObservationBoundary
-canonicalBrainCognitionObservationBoundary = brain-cognition-observation-boundary
-  true refl
-  true refl
-  true refl
-  false refl
-  false refl
-  false refl
-  false refl
-  false refl
-  false refl
-  false refl
-  false refl
-  false refl
-  true refl
-  true refl
-  "The executed Z_d ladder is a structure/function consumer-relative latent search. Z2 currently has the lowest discovery MAE but is not a whole-cognition latent and is not identified with memory, motor policy, fine decision state, semantic content, or a physical two-dimensional brain state. A genuinely learned/internal latent becomes extractable only for the consumers whose outcomes factor through the proposed code."
+canonicalBrainCognitionObservationSpineBoundary :
+  BrainCognitionObservationSpineBoundary
+canonicalBrainCognitionObservationSpineBoundary =
+  brain-cognition-observation-spine-boundary
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    "Unified bounded thesis: cognitive state is multi-coordinate/history-dependent; memory content may persist while influence changes; learning changes weighting/transition structure; action and imaging are lossy observations; exact latent extraction is a consumer-specific factorisation obligation. Connectome structure constrains candidate dynamics but does not decode memory, motor policy, trauma, or latent identity. MaleCNS pays one structural-to-functional projection result only. Consumer-relative compression may identify a useful minimal representation for a declared task without identifying a physically minimal brain state."
 
 authorityBoundary : Authority.AuthorityBooleanPolarityRepair
 authorityBoundary = Authority.canonicalAuthorityBooleanPolarityRepair
 
-programmeBoundary : Programme.LatentStateProgrammeBoundary
-programmeBoundary = Programme.canonicalLatentStateProgrammeBoundary
+latentExtractionFrontier : Latent.LatentExtractionFrontier
+latentExtractionFrontier = Latent.canonicalLatentExtractionFrontier
+
+replicationFrontier : Replication.MagnitudeReplicationBoundary
+replicationFrontier = Replication.canonicalMagnitudeReplicationBoundary

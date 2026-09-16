@@ -1,27 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repair="DASHI/Reasoning/AuthorityBooleanPolarityRepairExact.agda"
-spine="DASHI/Reasoning/BrainCognitionObservationSpineExact.agda"
+owner="DASHI/Reasoning/BrainCognitionObservationSpineExact.agda"
 
-[[ -f "$repair" ]]
-[[ -f "$spine" ]]
+[[ -f "$owner" ]]
 
-grep -q 'legacyBlockedBooleanPolarityInverted' "$repair"
-grep -q 'blockedMeansAuthorityUnavailable' "$repair"
-grep -q 'functionalConnectomeMindReadingBlocked' "$repair"
-grep -q 'fmriProxyHiddenChartRecoveryBlocked' "$repair"
-
-grep -q 'DASHI.Core.ConsumerFamilyRefinementKernelExact' "$spine"
-grep -q 'DASHI.Reasoning.MaleCNSConsumerRelativeLatentParetoExact' "$spine"
-grep -q 'rememberedEventConsumer' "$spine"
-grep -q 'memoryInfluenceConsumer' "$spine"
-grep -q 'motorPolicyConsumer' "$spine"
-grep -q 'fineDecisionStateConsumer' "$spine"
-grep -q 'currentStructuralLatentFactorsWholeCognitionFamily' "$spine"
-grep -q 'observedActionDoesNotFactorFineDecisionState' "$spine"
-grep -q 'minimalLearnedLatentExtractionPaid' "$spine"
-grep -q 'ninetyPercentUnusedBrainClaimPaid' "$spine"
-grep -q 'structuralLatentDimensionEqualsPhysicalBrainDimension' "$spine"
-grep -q 'gautheyBehaviorRecordedAndSynchronized' "$spine"
-grep -q 'exactBehaviorDepositMemberResolved' "$spine"
+grep -q 'DASHI.Cognition.PNF.MemoryFibre' "$owner"
+grep -q 'DASHI.Cognition.PNF.LearningAlgebra' "$owner"
+grep -q 'DASHI.Cognition.PNF.DecisionActionProjectionNonFactorabilityExact' "$owner"
+grep -q 'DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient' "$owner"
+grep -q 'DASHI.Reasoning.AuthorityBooleanPolarityRepairExact' "$owner"
+grep -q 'DASHI.Reasoning.MaleCNSTypedHyperfabricChartProjectionExact' "$owner"
+grep -q 'memoryContentMayPersistWhileInfluenceChanges' "$owner"
+grep -q 'observedActionDoesNotRecoverFineDecisionState' "$owner"
+grep -q 'observationEqualityDoesNotAuthorizeLatentIdentity' "$owner"
+grep -q 'connectomeDoesNotDecodeMemoryContent' "$owner"
+grep -q 'connectomeDoesNotDecodeMotorPlan' "$owner"
+grep -q 'observationDoesNotAuthorizeTraumaInference' "$owner"
+grep -q 'ninetyPercentUnusedBrainClaimPaid' "$owner"
+grep -q 'minimalLearnedLatentExtractionPaid' "$owner"
+grep -q 'candidateLatentConsumerQuestion' "$owner"

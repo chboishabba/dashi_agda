@@ -6,14 +6,6 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
 
-------------------------------------------------------------------------
--- LIVE INDEPENDENT-REPLICATION ACQUISITION FRONTIER
---
--- This owner records source/acquisition state only.  It does not turn exact
--- source-trace identity recovery into atlas identity, independent replication,
--- biological mechanism, or population generalisation.
-------------------------------------------------------------------------
-
 record TrialIdentityCount : Set where
   constructor trial-identity-count
   field
@@ -66,12 +58,6 @@ accumulationReceiptPath : String
 accumulationReceiptPath =
   "data/gauthey_lbm/reconstruction_all_available/gauthey_lbm_identity_accumulation.json"
 
-------------------------------------------------------------------------
--- Public source attribution.  These sources pay only the bounded deposition
--- and processing statements named below; citation imports neither proof nor
--- authority.
-------------------------------------------------------------------------
-
 gautheyPaper : Source.AttributedSource
 gautheyPaper = Source.mkDOISource
   "Wayan Gauthey; Albert Lin; Osama M. Ahmed; Andrew M. Leifer; Mala Murthy; Stephan Y. Thiberge"
@@ -81,7 +67,7 @@ gautheyPaper = Source.mkDOISource
   "10.1038/s41467-026-72437-1"
   "https://doi.org/10.1038/s41467-026-72437-1"
   Source.academicArticleSource
-  "Pays the bounded public data-availability statement: raw data are deposited for a representative trial, while preprocessed data are deposited for all trials. It does not prove that a missing same-trial anatomical carrier cannot exist elsewhere."
+  "Pays only the bounded public data-availability statement: raw data are deposited for a representative trial, while preprocessed data are deposited for all trials."
   Source.publicAttribution
 
 gautheyAnalysisRepository : Source.AttributedSource
@@ -92,70 +78,15 @@ gautheyAnalysisRepository = Source.mkNoDOISource
   "2026 snapshot"
   "https://github.com/murthylab/lightbead-analysis"
   (Source.namedSourceKind "scientific software repository")
-  "Pays the bounded pipeline statement that batch_tiff_to_dff_mean_brain_RigE.sh creates a mean brain from raw TIFF input before downstream motion-correction and signal extraction. Historical commits additionally preserve Princeton HPC processing paths; those paths are provenance coordinates, not public access receipts."
-  Source.publicAttribution
-
-princetonDataCommons : Source.AttributedSource
-princetonDataCommons = Source.mkDOISource
-  "Princeton University / Gauthey et al."
-  "Data for High-speed whole-brain imaging in Drosophila"
-  "Princeton Data Commons"
-  "2025"
-  "10.34770/s5hx-1x75"
-  "https://doi.org/10.34770/s5hx-1x75"
-  (Source.namedSourceKind "research data repository")
-  "Pays only the public mirror/repository coordinate for the deposited Gauthey data. Generic Princeton Data Commons Globus support for large deposits does not create a dataset-specific public Globus endpoint or non-discovery raw/anatomical carrier."
+  "Pays only the bounded pipeline statement that the published signal-extraction route creates a mean brain from raw TIFF input before downstream extraction."
   Source.publicAttribution
 
 replicationAcquisitionSourceAtlas : Source.AttributedSourceAtlas
 replicationAcquisitionSourceAtlas = Source.mkSourceAtlas
   "MaleCNS Gauthey independent-replication acquisition sources"
   "DASHI.Reasoning.MaleCNSIndependentReplicationAcquisitionFrontierExact"
-  (gautheyPaper ∷ gautheyAnalysisRepository ∷ princetonDataCommons ∷ [])
-  "Source-bounded data-availability, repository-mirror, processing-pipeline and historical-path provenance only; empirical counts come from dashiBRAIN runtime receipts."
-
-------------------------------------------------------------------------
--- Public-access archaeology boundary.
-------------------------------------------------------------------------
-
-record PublicAccessArchaeologyBoundary : Set where
-  constructor public-access-archaeology-boundary
-  field
-    representativeRawPublic : Bool
-    allTrialPreprocessedPublic : Bool
-    princetonMirrorAdvertised : Bool
-    pdcGenericGlobusSupportObserved : Bool
-    historicalPrincetonHPCNamespaceObserved : Bool
-    historicalPrincetonHPCNamespace : String
-    publicNonDiscoveryRawRouteObserved : Bool
-    publicNonDiscoveryAnatomyRouteObserved : Bool
-    datasetSpecificPublicGlobusEndpointObserved : Bool
-    internalHPCPathCreatesPublicAccessReceipt : Bool
-    genericGlobusSupportCreatesDatasetAccessReceipt : Bool
-    archaeologyPaysSameTrialAnatomy : Bool
-    interpretation : String
-
-open PublicAccessArchaeologyBoundary public
-
-canonicalPublicAccessArchaeologyBoundary : PublicAccessArchaeologyBoundary
-canonicalPublicAccessArchaeologyBoundary = public-access-archaeology-boundary
-  true
-  true
-  true
-  true
-  true
-  "/scratch/gpfs/albertl/rigE_data/"
-  false
-  false
-  false
-  false
-  false
-  false
-  "Historical lightbead-analysis commits expose Princeton internal processing namespaces and trial-like file paths, while Princeton Data Commons generically supports Globus for large deposits. The current public audit did not locate a dataset-specific public Globus endpoint, non-discovery raw TIFF carrier, anatomical/reference volume, or saved same-trial transform. Internal HPC paths and generic transfer infrastructure are discovery/provenance coordinates only; neither pays public access or same-object registration. This bounded audit does not prove that private or unindexed files do not exist."
-
-------------------------------------------------------------------------
--- a1_r1 route-A inspection boundary.
-------------------------------------------------------------------------
+  (gautheyPaper ∷ gautheyAnalysisRepository ∷ [])
+  "Source-bounded deposition and mean-brain-pipeline provenance; empirical counts come from dashiBRAIN runtime receipts."
 
 record A1R1ContainerInspectionReceipt : Set where
   constructor a1r1-container-inspection-receipt
@@ -186,11 +117,7 @@ a1r1ContainerInspectionReceipt = a1r1-container-inspection-receipt
   false
   false
   false
-  "The inspected preprocessed a1_r1 payload contains functional ROI-by-time arrays and timing/stimulus metadata but no observed anatomy, spatial ROI coordinates, transform, deformation field, or atlas reference. This closes only the in-container route; it does not prove that no authoritative external same-trial anatomy exists."
-
-------------------------------------------------------------------------
--- Promotion firewall / actual current wall.
-------------------------------------------------------------------------
+  "The inspected a1_r1 preprocessed payload pays a negative in-container search result only; it does not prove that no authoritative external same-trial anatomy exists."
 
 record IndependentReplicationAcquisitionBoundary : Set where
   constructor independent-replication-acquisition-boundary
@@ -201,8 +128,6 @@ record IndependentReplicationAcquisitionBoundary : Set where
     nativeFieldsCanBeMaterializedForRecoveredNonzeroTrials : Bool
     a1r1PreprocessedContainerPaysSameTrialAnatomy : Bool
     publicRepresentativeRawDepositPaysA1R1Anatomy : Bool
-    historicalInternalPathPaysSameTrialAnatomy : Bool
-    genericPDCGlobusSupportPaysDatasetSpecificAccess : Bool
     sameRegionLabelsAuthorizeFrozenEncoderReuse : Bool
     sameTrialAnatomyOrExecutedTransformStillRequired : Bool
     registeredIndependentReplicationPaid : Bool
@@ -222,9 +147,7 @@ canonicalIndependentReplicationAcquisitionBoundary =
     false
     false
     false
-    false
-    false
     true
     false
     false
-    "Live frontier: all six Gauthey LBM source trials have been searched and 1209/1620 selected rows have exact source-trace identities. Public-source archaeology now additionally resolves the historical Princeton processing namespace and the Princeton Data Commons mirror/Globus context, but no dataset-specific public non-discovery raw/anatomy/transform route was observed. The first independent common-atlas replication therefore remains blocked on a same-trial anatomical image or equivalent executed transform receipt for a non-discovery recording."
+    "Live frontier: all six Gauthey LBM source trials have been searched and 1209/1620 selected rows have exact source-trace identities. Independent common-atlas replication remains blocked on a same-trial anatomical image or equivalent executed transform receipt for a non-discovery recording."

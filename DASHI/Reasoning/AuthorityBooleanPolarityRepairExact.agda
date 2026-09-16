@@ -9,14 +9,20 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Biology.BodyMemoryMeasurementProxyBoundary as Measurement
 import DASHI.Biology.FunctionalConnectomeBodyMemoryBridge as Functional
 import DASHI.Biology.FMRIConnectomeProxyGovernance as FMRI
+import DASHI.Biology.NeurochemicalBrainCarrierBridge as Neurochemical
+import DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge as Neurodivergent
 
 ------------------------------------------------------------------------
 -- AUTHORITY-BOOLEAN POLARITY REPAIR
 --
--- Some legacy biology records use names such as `mindReadingBlocked` while
--- storing `false`, even though their route-level semantics make the prohibited
--- route uninhabitable.  New consumers should derive authority from the route
--- rejection witnesses and use positive `blocked = true` semantics here.
+-- Several legacy biology records use names such as `mindReadingBlocked` while
+-- instantiating the Boolean as `false`.  Their route-level semantics and prose
+-- consistently mean that the corresponding authority is unavailable.
+--
+-- This owner does not mutate those legacy records.  It makes the authoritative
+-- interpretation explicit and derives it from the existing inadmissible-route
+-- witnesses.  New consumers should use this surface rather than interpreting
+-- the polarity of the legacy `...Blocked` Boolean fields.
 ------------------------------------------------------------------------
 
 measurementMindReadingAuthorityUnavailable :
@@ -97,36 +103,78 @@ fmriClinicalAuthorityUnavailable = FMRI.clinicalAuthorityRouteRejected
 record AuthorityBooleanPolarityRepair : Set where
   constructor authority-boolean-polarity-repair
   field
+    bodyMeasurementMindReadingBlocked : Bool
+    bodyMeasurementMindReadingBlockedIsTrue :
+      bodyMeasurementMindReadingBlocked ≡ true
+
+    bodyMeasurementReverseInferenceBlocked : Bool
+    bodyMeasurementReverseInferenceBlockedIsTrue :
+      bodyMeasurementReverseInferenceBlocked ≡ true
+
+    bodyMeasurementDiagnosisBlocked : Bool
+    bodyMeasurementDiagnosisBlockedIsTrue :
+      bodyMeasurementDiagnosisBlocked ≡ true
+
+    bodyMeasurementClinicalAuthorityBlocked : Bool
+    bodyMeasurementClinicalAuthorityBlockedIsTrue :
+      bodyMeasurementClinicalAuthorityBlocked ≡ true
+
     functionalConnectomeMindReadingBlocked : Bool
     functionalConnectomeMindReadingBlockedIsTrue :
       functionalConnectomeMindReadingBlocked ≡ true
+
     functionalConnectomeReverseInferenceBlocked : Bool
     functionalConnectomeReverseInferenceBlockedIsTrue :
       functionalConnectomeReverseInferenceBlocked ≡ true
+
     functionalConnectomeDiagnosisBlocked : Bool
     functionalConnectomeDiagnosisBlockedIsTrue :
       functionalConnectomeDiagnosisBlocked ≡ true
+
     functionalConnectomeTreatmentBlocked : Bool
     functionalConnectomeTreatmentBlockedIsTrue :
       functionalConnectomeTreatmentBlocked ≡ true
+
+    functionalConnectomeClinicalAuthorityBlocked : Bool
+    functionalConnectomeClinicalAuthorityBlockedIsTrue :
+      functionalConnectomeClinicalAuthorityBlocked ≡ true
+
     fmriProxyMindReadingBlocked : Bool
     fmriProxyMindReadingBlockedIsTrue :
       fmriProxyMindReadingBlocked ≡ true
+
     fmriProxyReverseInferenceBlocked : Bool
     fmriProxyReverseInferenceBlockedIsTrue :
       fmriProxyReverseInferenceBlocked ≡ true
+
     fmriProxyHiddenChartRecoveryBlocked : Bool
     fmriProxyHiddenChartRecoveryBlockedIsTrue :
       fmriProxyHiddenChartRecoveryBlocked ≡ true
+
+    fmriProxyDiagnosisBlocked : Bool
+    fmriProxyDiagnosisBlockedIsTrue :
+      fmriProxyDiagnosisBlocked ≡ true
+
+    fmriProxyTreatmentBlocked : Bool
+    fmriProxyTreatmentBlockedIsTrue :
+      fmriProxyTreatmentBlocked ≡ true
+
+    fmriProxyClinicalAuthorityBlocked : Bool
+    fmriProxyClinicalAuthorityBlockedIsTrue :
+      fmriProxyClinicalAuthorityBlocked ≡ true
+
     legacyBlockedBooleanPolarityInverted : Bool
     legacyBlockedBooleanPolarityInvertedIsTrue :
       legacyBlockedBooleanPolarityInverted ≡ true
+
     blockedMeansAuthorityUnavailable : Bool
     blockedMeansAuthorityUnavailableIsTrue :
       blockedMeansAuthorityUnavailable ≡ true
+
     legacyFalseMeansBlockedIsDeprecated : Bool
     legacyFalseMeansBlockedIsDeprecatedIsTrue :
       legacyFalseMeansBlockedIsDeprecated ≡ true
+
     auditedLegacyModules : List String
     interpretation : String
 
@@ -144,8 +192,31 @@ canonicalAuthorityBooleanPolarityRepair = authority-boolean-polarity-repair
   true refl
   true refl
   true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
+  true refl
   ("DASHI.Biology.BodyMemoryMeasurementProxyBoundary"
    ∷ "DASHI.Biology.FunctionalConnectomeBodyMemoryBridge"
    ∷ "DASHI.Biology.FMRIConnectomeProxyGovernance"
+   ∷ "DASHI.Biology.NeurochemicalBrainCarrierBridge"
+   ∷ "DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge"
    ∷ [])
-  "Authority is derived from the existing rejected/inadmissible routes. Legacy fields whose name says Blocked while the Boolean is false are compatibility metadata only; new consumers use blocked=true to mean the authority is unavailable."
+  "Authoritative polarity repair: blocked=true means the corresponding inference/diagnosis/treatment/clinical authority is unavailable. Legacy records whose field name says Blocked while the Boolean is false are retained only for compatibility; route inadmissibility/rejection owns the semantic boundary."
+
+------------------------------------------------------------------------
+-- Donor anchors retained so the repair cannot drift away from the actual
+-- modules whose legacy Boolean polarity is being corrected.
+------------------------------------------------------------------------
+
+neurochemicalLegacySurfaceRetained : String
+neurochemicalLegacySurfaceRetained =
+  "DASHI.Biology.NeurochemicalBrainCarrierBridge retained; consume authority through the repaired boundary"
+
+neurodivergentLegacySurfaceRetained : String
+neurodivergentLegacySurfaceRetained =
+  "DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge retained; consume authority through the repaired boundary"
