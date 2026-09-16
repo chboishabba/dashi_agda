@@ -51,6 +51,18 @@ def test_42d_snapshot_retains_17496_eta_product_bridge_candidate():
     assert relation["same_object_paid"] is False
 
 
+def test_oeis_42d_and_atlas_42D_labels_are_not_silently_identified():
+    runtime = load_runtime()
+    relation = runtime.RELATIONS["oeis42d-atlas42D-label-disambiguation"]
+
+    assert relation["oeis_sequence"] == "A058678"
+    assert relation["oeis_label"] == "42d"
+    assert relation["atlas_label"] == "42D"
+    assert relation["atlas_fourteenth_power_target"] == "3A"
+    assert relation["atlas_direct_power_target_3B"] is False
+    assert relation["same_class_paid"] is False
+
+
 def test_42_class_eta_family_retains_native_14_and_42_levels():
     runtime = load_runtime()
 
