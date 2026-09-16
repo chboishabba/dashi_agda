@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Cognition.PNF.LearningAlgebra as Learning
 import DASHI.Biology.StudentVoiceEpistemicAgencyBridge as Voice
 import DASHI.Education.AliceBrownDigitalESDEpistemicGovernanceBridgeExact as Alice
@@ -13,20 +14,20 @@ import DASHI.Education.AliceBrownDigitalESDEpistemicGovernanceBridgeExact as Ali
 ------------------------------------------------------------------------
 -- PARTICIPANT GOVERNANCE / CONTEXT-TRANSFER THIN BRIDGE
 --
--- DASHI synthesis.  The canonical Alice/voice owners supply source-bounded
+-- DASHI synthesis. The canonical Alice/voice owners supply source-bounded
 -- methodological constraints; LearningAlgebra supplies the canonical context
--- generalisation receipt.  None of those sources or citations manufactures
--- authority for a new participant population.
---
--- Attribution invariant:
---   * source identity + role + same-object status survive the transfer;
---   * citation imports neither proof nor authority;
---   * acquisition order does not imply payment order;
---   * downstream payment cannot skip an unpaid dependency.
+-- generalisation receipt; SnowballAttributionProvenanceInvariantExact supplies
+-- the repository-wide source-role/proof/authority preservation boundary.
+-- None manufactures authority for a new participant population.
 ------------------------------------------------------------------------
 
+canonicalAttributionSnowballBoundaryRetained :
+  Snowball.AttributionSnowballBoundary
+canonicalAttributionSnowballBoundaryRetained =
+  Snowball.canonicalAttributionSnowballBoundary
+
 -- The target context is an index, not a free text assertion inside the
--- receipt.  An authority receipt for another context therefore cannot inhabit
+-- receipt. An authority receipt for another context therefore cannot inhabit
 -- the type required by an admission for this context.
 record ParticipantAuthorityReceipt (targetContext : String) : Set where
   constructor participant-authority-receipt
