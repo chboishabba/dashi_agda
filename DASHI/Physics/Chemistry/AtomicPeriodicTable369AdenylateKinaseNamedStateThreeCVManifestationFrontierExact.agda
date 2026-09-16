@@ -96,8 +96,8 @@ collectiveVariableBoundary = CV.canonicalAdKCollectiveVariableDefinitionAcquisit
 priorAcquisitionFrontier : Frontier.AdKCalibrationAcquisitionFrontierBoundary
 priorAcquisitionFrontier = Frontier.canonicalAdKCalibrationAcquisitionFrontierBoundary
 
-projectionBoundary : Projection.OneDimensionalDLnProjectionAcquisitionBoundary
-projectionBoundary = Projection.canonicalOneDimensionalDLnProjectionAcquisitionBoundary
+projectionBoundary : Projection.AdKOneDimensionalDLnProjectionBoundary
+projectionBoundary = Projection.canonicalAdKOneDimensionalDLnProjectionBoundary
 
 sameArticleSourcePaid : Bool
 sameArticleSourcePaid = true
