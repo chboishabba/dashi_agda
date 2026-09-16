@@ -4,7 +4,7 @@
 
 **Goal:** Factor the existing twenty scientist science fibres through six reusable scientific operator families and expose a science-only BIDI over those factorisations.
 
-**Architecture:** Add one generic science-operator registry in `DASHI/Core`, six focused family adapters in `DASHI/Culture`, an all-20 coverage/factorisation ledger, and a science-only BIDI projection/reverse router. Reuse existing scientist science owners and `QueryFactorisationSufficiency` terminology; do not replace domain equations or imply common empirical mechanisms. The live branch already contains `Round13ReferenceKernelProgressExact`, so this tranche is numbered Round 14.
+**Architecture:** Add one generic science-operator registry in `DASHI/Core`, six focused family adapters in `DASHI/Culture`, an all-20 coverage/factorisation ledger, and a science-only BIDI projection/reverse router. Reuse existing scientist science owners and `QueryFactorisationSufficiency` terminology; do not replace domain equations or imply common empirical mechanisms. The live history already contains `Round13ReferenceKernelProgressExact`, so this tranche is numbered Round 14.
 
 **Tech Stack:** Agda, existing DASHI `Prelude`, `QueryFactorisationSufficiency`, static shell contracts.
 
@@ -31,45 +31,43 @@
 - Produces: a failing contract requiring all Round-14 owners and invariants.
 
 - [ ] **Step 1: Write the failing checker** requiring `DASHI/Core/ScientificOperatorFamilyExact.agda`, six family adapters, `MissingDeceasedTwentyScientistScientificOperatorFactorisationExact.agda`, `MissingDeceasedTwentyScientistScientificOperatorBidiExact.agda`, counts `20/18/2`, all six family names, and aggregate imports.
-- [ ] **Step 2: Verify RED** by fetching `DASHI/Core/ScientificOperatorFamilyExact.agda` on `agent/amy-memorial-bidi-mass-current` and confirming 404 before production creation.
+- [ ] **Step 2: Verify RED** by confirming the remaining all-20 factorisation owner is absent on current master before production creation; the generic core/adapters are already landed on master.
 - [ ] **Step 3: Commit** the contract only.
 
 ### Task 2: Generic scientific operator family owner
 
 **Files:**
-- Create: `DASHI/Core/ScientificOperatorFamilyExact.agda`
+- Existing on master: `DASHI/Core/ScientificOperatorFamilyExact.agda`
 
 **Interfaces:**
 - Consumes: `DASHI.Core.Prelude`, conceptual terminology from `DASHI.Core.QueryFactorisationSufficiency`.
 - Produces: `ScientificOperatorFamily`, `ScientificOperatorShape`, `OperatorFactorisation`, canonical six shapes, and firewalls.
 
-- [ ] **Step 1: Implement six family constructors:** `weakSignalInverseInference`, `resilientSensingControlVerification`, `materialsProcessStructureProperty`, `molecularSpectroscopyChemicalBiology`, `fieldPlasmaPrecisionForceDiscrimination`, `classificationEvidenceGovernance`.
-- [ ] **Step 2: Define canonical shape records** with input/transform/output/reverse-obligation descriptions.
-- [ ] **Step 3: Define thin factorisation record** retaining person, domain owner, family, and bounded-reading string.
-- [ ] **Step 4: Add firewalls:** family sharing does not imply same equations/mechanism/programme/collaboration/common cause.
-- [ ] **Step 5: Source-inspect the file** after creation.
+- [ ] **Step 1: Confirm six family constructors:** `weakSignalInverseInference`, `resilientSensingControlVerification`, `materialsProcessStructureProperty`, `molecularSpectroscopyChemicalBiology`, `fieldPlasmaPrecisionForceDiscrimination`, `classificationEvidenceGovernance`.
+- [ ] **Step 2: Confirm canonical shape records** with input/transform/output/reverse-obligation descriptions.
+- [ ] **Step 3: Confirm thin factorisation record** retaining person, domain owner, family, and bounded-reading string.
+- [ ] **Step 4: Confirm firewalls:** family sharing does not imply same equations/mechanism/programme/collaboration/common cause.
 
 ### Task 3: Six focused family adapters
 
 **Files:**
-- Create: `DASHI/Culture/MissingDeceasedWeakSignalInverseInferenceOperatorExact.agda`
-- Create: `DASHI/Culture/MissingDeceasedResilientControlOperatorExact.agda`
-- Create: `DASHI/Culture/MissingDeceasedMaterialsProcessOperatorExact.agda`
-- Create: `DASHI/Culture/MissingDeceasedMolecularMeasurementOperatorExact.agda`
-- Create: `DASHI/Culture/MissingDeceasedFieldComparatorOperatorExact.agda`
-- Create: `DASHI/Culture/MissingDeceasedClassificationEvidenceOperatorExact.agda`
+- Existing on master: `DASHI/Culture/MissingDeceasedWeakSignalInverseInferenceOperatorExact.agda`
+- Existing on master: `DASHI/Culture/MissingDeceasedResilientControlOperatorExact.agda`
+- Existing on master: `DASHI/Culture/MissingDeceasedMaterialsProcessOperatorExact.agda`
+- Existing on master: `DASHI/Culture/MissingDeceasedMolecularMeasurementOperatorExact.agda`
+- Existing on master: `DASHI/Culture/MissingDeceasedFieldComparatorOperatorExact.agda`
+- Existing on master: `DASHI/Culture/MissingDeceasedClassificationEvidenceOperatorExact.agda`
 
 **Interfaces:**
 - Consumes: existing scientist domain owners and `ScientificOperatorFamilyExact`.
 - Produces: named `OperatorFactorisation` values and family-specific reverse scientific leaves.
 
-- [ ] **Step 1: Weak-signal adapter** for Grillmair, Hicks, Zhang Xiaoxin, Maiwald, Thomas.
-- [ ] **Step 2: Resilient-control adapter** for LeBlanc, McCasland, Zhang Daibing, Chen, Yan.
-- [ ] **Step 3: Materials adapter** for Reza, Zhou, Fang.
-- [ ] **Step 4: Molecular adapter** for Maiwald, Thomas, Li Minyong.
-- [ ] **Step 5: Field/comparator adapter** for Nuno, Ning, Amy; Amy explicitly gated.
-- [ ] **Step 6: Classification/evidence adapter** for Feng, Liu, Chen.
-- [ ] **Step 7: Source-inspect each adapter** and confirm no historical/collaboration promotion.
+- [ ] **Step 1: Confirm weak-signal adapter** for Grillmair, Hicks, Zhang Xiaoxin, Maiwald, Thomas.
+- [ ] **Step 2: Confirm resilient-control adapter** for LeBlanc, McCasland, Zhang Daibing, Chen, Yan.
+- [ ] **Step 3: Confirm materials adapter** for Reza, Zhou, Fang.
+- [ ] **Step 4: Confirm molecular adapter** for Maiwald, Thomas, Li Minyong.
+- [ ] **Step 5: Confirm field/comparator adapter** for Nuno, Ning, Amy; Amy explicitly gated.
+- [ ] **Step 6: Confirm classification/evidence adapter** for Feng, Liu, Chen.
 
 ### Task 4: All-20 operator factorisation ledger
 
@@ -77,7 +75,7 @@
 - Create: `DASHI/Culture/MissingDeceasedTwentyScientistScientificOperatorFactorisationExact.agda`
 
 **Interfaces:**
-- Consumes: six family adapters.
+- Consumes: six family adapters/core.
 - Produces: exactly twenty rows and the `20/18/2` coverage invariants.
 
 - [ ] **Step 1: Define `FactorisationStatus = paid | gated`.**
@@ -124,6 +122,6 @@
 - Produces: source-level verification status only unless executable CI/compiler evidence exists.
 
 - [ ] **Step 1: Fetch every created owner from the exact branch.**
-- [ ] **Step 2: Fetch PR #872 exact head metadata.**
+- [ ] **Step 2: Compare the fresh branch to current master.**
 - [ ] **Step 3: Query exact-head workflow runs.**
 - [ ] **Step 4: Report `source-written/static-contract integrated` unless an actual shell/Agda run exists.**
