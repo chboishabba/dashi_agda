@@ -10,6 +10,7 @@ import DASHI.Culture.CohnInstitutionalResidualDiagnosisExact as Diagnosis
 import DASHI.Culture.CohnInstitutionalProofSearchResidualPortfolioReuseExact as PortfolioReuse
 import DASHI.Reasoning.Spacy369AdaptiveConsumerProbeSchedulerExact as Scheduler369
 import DASHI.Reasoning.Spacy369ConsumerScheduleNonfactorabilityExact as Schedule369
+import DASHI.Reasoning.Spacy369ConsumerRevisionTemporalBidiExact as Revision369
 
 ------------------------------------------------------------------------
 -- COHN INSTITUTIONAL EPISTEMICS x HISTORY-SENSITIVE PROBE SCHEDULING x 369
@@ -21,7 +22,8 @@ import DASHI.Reasoning.Spacy369ConsumerScheduleNonfactorabilityExact as Schedule
 -- redirects generic portfolio/search machinery to canonical owners.  The 369
 -- reasoning lane independently proves that the same materialised forward
 -- evidence can support different downstream information policies when the
--- declared consumer changes.
+-- declared consumer changes, and that later consumer demand creates a new
+-- obligation without retroactively falsifying earlier indexed sufficiency.
 --
 -- The only new theorem here isolates another independent coordinate: retained
 -- inquiry history.  Even when the current institutional statement AND declared
@@ -45,6 +47,11 @@ existing369ScheduleNonfactorabilityBoundary :
   Schedule369.Spacy369ConsumerScheduleNonfactorabilityBoundary
 existing369ScheduleNonfactorabilityBoundary =
   Schedule369.canonicalSpacy369ConsumerScheduleNonfactorabilityBoundary
+
+existing369TemporalRevisionBoundary :
+  Revision369.Spacy369ConsumerRevisionTemporalBidiBoundary
+existing369TemporalRevisionBoundary =
+  Revision369.canonicalSpacy369ConsumerRevisionTemporalBidiBoundary
 
 ------------------------------------------------------------------------
 -- Finite institutional inquiry fixture.
@@ -148,7 +155,7 @@ newGenericSetCoverStillNotRequired :
 newGenericSetCoverStillNotRequired = refl
 
 ------------------------------------------------------------------------
--- 369 scheduler pins.
+-- 369 scheduler and revision pins.
 ------------------------------------------------------------------------
 
 declaredConsumerMayChangeProbePath369 :
@@ -171,6 +178,21 @@ differentConsumersMayShareProbe369 :
     Schedule369.canonicalSpacy369ConsumerScheduleNonfactorabilityBoundary ≡ true
 differentConsumersMayShareProbe369 = refl
 
+newConsumerDemandCreatesNewObligation369 :
+  Revision369.newConsumerDemandCreatesNewObligation
+    Revision369.canonicalSpacy369ConsumerRevisionTemporalBidiBoundary ≡ true
+newConsumerDemandCreatesNewObligation369 = refl
+
+newConsumerDemandDoesNotFalsifyOldIndexedAnswer369 :
+  Revision369.newConsumerDemandMakesOldIndexedAnswerFalse
+    Revision369.canonicalSpacy369ConsumerRevisionTemporalBidiBoundary ≡ false
+newConsumerDemandDoesNotFalsifyOldIndexedAnswer369 = refl
+
+forwardEvidenceRemainsFrozenAcrossConsumerRevision369 :
+  Revision369.consumerRevisionRewritesMaterialisedParserEvidence
+    Revision369.canonicalSpacy369ConsumerRevisionTemporalBidiBoundary ≡ false
+forwardEvidenceRemainsFrozenAcrossConsumerRevision369 = refl
+
 ------------------------------------------------------------------------
 -- Boundary.
 ------------------------------------------------------------------------
@@ -183,6 +205,8 @@ record HistorySensitiveProbeBoundary : Set where
     retainedInquiryHistoryMayChangeNextProbe : Bool
     declaredConsumerMayChangeProbePath : Bool
     probePolicyChangeRewritesCurrentInstitutionalSurface : Bool
+    laterConsumerDemandCreatesNewObligation : Bool
+    laterConsumerDemandMakesEarlierIndexedAnswerFalse : Bool
     sameProbeUniquelyIdentifiesConsumer : Bool
     existingResidualPortfolioAlreadyOwned : Bool
     newPlannerRequired : Bool
@@ -199,6 +223,8 @@ canonicalHistorySensitiveProbeBoundary =
     true
     true
     false
+    true
+    false
     false
     true
     false
@@ -207,4 +233,4 @@ canonicalHistorySensitiveProbeBoundary =
 
 bridgeSummary : String
 bridgeSummary =
-  "The same current institutional statement and even the same declared consumer can require different next probes when retained inquiry history differs. Cohn supplies application-specific residual candidates; existing proof-search portfolio owners supply admission/Pareto/reopening; the 369 scheduler independently proves that consumer changes can alter information policy without rewriting materialised evidence. No new planner, dialectic ontology, or source-derived historical fact is introduced."
+  "The same current institutional statement and even the same declared consumer can require different next probes when retained inquiry history differs. Cohn supplies application-specific residual candidates; existing proof-search portfolio owners supply admission/Pareto/reopening; the 369 scheduler and temporal BIDI owners independently prove that consumer revision can change information policy and create new obligations without rewriting forward evidence or falsifying earlier consumer-indexed closure. No new planner, dialectic ontology, or source-derived historical fact is introduced."
