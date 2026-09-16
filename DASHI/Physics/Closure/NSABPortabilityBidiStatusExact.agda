@@ -79,10 +79,22 @@ coordinates =
     "Whole-space A should not need integer-embedding common-scale calibration; identify the corresponding continuous frequency-order statement directly."
     false
   ∷ ab-portability-coordinate
-    "#957 S2b2d exact-shell collar"
-    "same-scale signed local cancellation leaf"
+    "#957 S2b2d0 output-local fixed-output reduction"
+    "periodic collar selector reduces to the ordinary unweighted fixed-output commutator"
+    domainIndependentCandidate
+    "Keep the unweighted fixed-output commutator theorem generic while treating finite output-fibre enumeration as the periodic realization."
+    false
+  ∷ ab-portability-coordinate
+    "#957 S2b2d1a damped-tangent residual identity"
+    "unweighted mixed commutator is the forcing residual in a damped mixed-product tangent"
+    domainIndependentCandidate
+    "Transport the local damped mixed-product identity to the whole-space Fourier convolution carrier; do not import the torus fixed-output enumeration as theorem authority."
+    false
+  ∷ ab-portability-coordinate
+    "#957 S2b2d1b signed coherent covariance"
+    "current local quantitative payment after the damped-tangent recut"
     unresolvedWholeSpaceTransport
-    "Determine whether the collar proof depends only on local signed commutator structure or essentially on discrete shell/output-fibre enumeration."
+    "Determine a formulation of the signed coherent covariance/endpoint payment that survives replacing finite fixed-output sums by whole-space convolution fibres."
     false
   ∷ ab-portability-coordinate
     "R291/R573 signed Hermitian linearization"
@@ -116,6 +128,12 @@ torusSpecificRealizationSeparated = true
 currentS2b2PortabilityFactored : Bool
 currentS2b2PortabilityFactored = true
 
+d1aDampedTangentAnalyticCoreTracked : Bool
+d1aDampedTangentAnalyticCoreTracked = true
+
+d1bWholeSpaceTransportStillOpen : Bool
+d1bWholeSpaceTransportStillOpen = true
+
 wholeSpaceTransportObserved : Bool
 wholeSpaceTransportObserved = false
 
@@ -142,6 +160,14 @@ torusSpecificRealizationSeparatedIsTrue = refl
 
 currentS2b2PortabilityFactoredIsTrue : currentS2b2PortabilityFactored ≡ true
 currentS2b2PortabilityFactoredIsTrue = refl
+
+d1aDampedTangentAnalyticCoreTrackedIsTrue :
+  d1aDampedTangentAnalyticCoreTracked ≡ true
+d1aDampedTangentAnalyticCoreTrackedIsTrue = refl
+
+d1bWholeSpaceTransportStillOpenIsTrue :
+  d1bWholeSpaceTransportStillOpen ≡ true
+d1bWholeSpaceTransportStillOpenIsTrue = refl
 
 wholeSpaceTransportObservedIsFalse :
   wholeSpaceTransportObserved ≡ false
