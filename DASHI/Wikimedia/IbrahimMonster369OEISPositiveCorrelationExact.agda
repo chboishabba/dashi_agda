@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.IbrahimMonster3BOEISSameIntegerRoleCollisionExact as Collision
 import DASHI.Wikimedia.IbrahimMonster42d17496PositiveBridgeAcquisitionExact as FortyTwoD
+import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact as FortyTwoCarrier
 import DASHI.Wikimedia.IbrahimMonster6BWeightTwoC6FourierOEISExact as C6
 import DASHI.Wikimedia.IbrahimMonster6BPositiveDegreeNormalizationAcquisitionExact as Acquisition
 
@@ -62,7 +63,7 @@ correlation17496 = positive-correlation-receipt
   crossContextNumericalEcho
   true true true false false true
   false false false false
-  "inspect whether the 42d graded trace and N(3B) restriction degree factor through a shared Monster character, power map, induction/restriction, or graded-module construction"
+  "inspect whether the 42d graded trace and N(3B) restriction degree factor through a shared Monster character, power map, induction/restriction, or graded-module construction; retain the independent 15 -> 14 -> 42 carrier as an additional search coordinate without identifying it with class 42d"
 
 correlation32772 : PositiveCorrelationReceipt
 correlation32772 = positive-correlation-receipt
@@ -89,6 +90,9 @@ same32772IntegerPaid = Collision.sameSeriesDifferentRoleCollisionPaid
 
 fortyTwoDBridgeAcquisition : FortyTwoD.Monster42d17496BridgeBoundary
 fortyTwoDBridgeAcquisition = FortyTwoD.currentMonster42d17496BridgeBoundary
+
+fortyTwoCarrierBoundary : FortyTwoCarrier.Monster42dFifteenFourteenBoundary
+fortyTwoCarrierBoundary = FortyTwoCarrier.currentMonster42dFifteenFourteenBoundary
 
 c6WeightTwoSpectrumReceipt : C6.C6WeightTwoMultiplicitySpectrum
 c6WeightTwoSpectrumReceipt = C6.canonicalC6WeightTwoMultiplicitySpectrum
@@ -137,6 +141,7 @@ record PositiveCorrelationBoundary : Set where
     correlation17496RetainedAsPositiveSignal : Bool
     correlation32772RetainedAsPositiveSignal : Bool
     fortyTwoDRestrictionBridgeSourcePaid : Bool
+    fortyTwoCarrierBridgeSourcePaid : Bool
     c6WeightTwoSpectrumBridgeSourcePaid : Bool
     sixBPositiveDegreeNormalizationBridgePaid : Bool
     sameClassSourceFamilyBridgeSearchFirst : Bool
@@ -148,6 +153,6 @@ open PositiveCorrelationBoundary public
 
 currentPositiveCorrelationBoundary : PositiveCorrelationBoundary
 currentPositiveCorrelationBoundary = positive-correlation-boundary
-  true true true true true true true
+  true true true true true true true true
   false false false
-  "Prioritize the 32772 6B same-class cross-role bridge, where the graded-trace side is normalization-stable and the C6 side is source-bound to the exact weight-two Fourier spectrum. Retain 17496 as a separate positive cross-context bridge whose 42d modular-function side and actual N(3B) degree-occurrence side are now both source-paid. Search each for an explicit shared character, power-map, restriction/induction, graded-module, or spectral-projector construction. Promote neither shared integer to same-object or representation identity without that bridge."
+  "Prioritize the 32772 6B same-class cross-role bridge, where the graded-trace side is normalization-stable and the C6 side is source-bound to the exact weight-two Fourier spectrum. Retain 17496 as a separate positive cross-context bridge whose 42d modular-function side and actual N(3B) degree-occurrence side are source-paid, and whose independent repo-native 5 x 3 = 15 -> 14 -> 3 x 14 = 42 carrier is now also explicit. Search each for an actual shared character, power-map, restriction/induction, graded-module, spectral-projector, or carrier-action construction. Promote neither shared integer nor the 42-state carrier to same-object or representation identity without that bridge."
