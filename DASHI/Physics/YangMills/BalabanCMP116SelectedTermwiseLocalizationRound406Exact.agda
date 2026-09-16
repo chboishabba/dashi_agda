@@ -16,14 +16,14 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedTermwiseLocalizationRound406
 --   * the selected T5/RG density;
 --   * the actual observable-indexed J_L/J_R insertions;
 --   * the CMP116 decoupling-boundary assignment;
---   * the literal CMP99/CMP109 factorwise ordinary/marked estimates inside
---     each differentiated CMP116 generalized-walk/local-activity term.
+--   * the literal CMP99/CMP109 operator-factor ordinary/marked estimates
+--     inside each differentiated CMP116 generalized-walk/local-activity term.
 --
--- Round72 already proves that those factorwise estimates telescope into a
--- whole differentiated-product majorant.  Therefore this owner must not take
--- `|term| <= termMajorant` as an opaque physical field.  It derives that
--- inequality mechanically and leaves only the literal source factor bounds as
--- the P0a/P0b replay obligation.
+-- Round72 already proves the NONCOMMUTATIVE finite-product telescope needed
+-- for CMP109 operator/multilinear factors.  Therefore this owner must not take
+-- `|term| <= termMajorant` as an opaque physical field, and it must not replace
+-- the source operator product by a commutative scalar-factor identity.  The
+-- scalar boundary is only the explicit operator norm of that product difference.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -32,7 +32,7 @@ open import Data.List.Base using (List)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  ( ℝ ; 0ℝ ; _-ℝ_ ; absℝ ; _≤ℝ_ )
+  ( ℝ ; absℝ ; _≤ℝ_ )
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
@@ -42,8 +42,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact a
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
-import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian as Hess
-import DASHI.Physics.YangMills.BalabanDifferentiatedMarkedFactorProductExact as FactorProduct
+import DASHI.Physics.YangMills.BalabanNoncommutativeMarkedOperatorProductExact as OperatorProduct
 
 ------------------------------------------------------------------------
 -- The source/application coordinates are carried by the existing selected
@@ -81,7 +80,7 @@ record SelectedCMP116TermwiseLocalization
 
     -- One term is the differentiated (1.23) generalized-walk/local-activity
     -- contribution at the selected boundary assignment.
-    Term Domain Factor : Set
+    Term Domain Factor Operator : Set
     localizedDomains : List Domain
     termsWithCommonY : Domain → List Term
     differentiatedTerm : Domain → Term → ℝ
@@ -89,53 +88,69 @@ record SelectedCMP116TermwiseLocalization
     commonYBoundaryIntegrand commonYShell : Domain → ℝ
     selectedBoundaryIntegrand selectedConnectingShell : ℝ
 
-    -- Literal source-level finite product carried by each differentiated term.
-    -- `beforeFactor` and `afterFactor` are the two neighboring decoupled/local
-    -- products; `ordinaryFactorMajorant` bounds either factor, while
-    -- `markedFactorMajorant` bounds the one-factor replacement difference.
+    -- Literal source-level NONCOMMUTATIVE finite product carried by each term.
+    -- The algebra's bound carrier is the repository real carrier.  Its own
+    -- `LessEqual` remains explicit and is transported to `_≤ℝ_` below rather
+    -- than being silently identified by a proof-level flag.
+    operatorAlgebra : OperatorProduct.MarkedOperatorNormAlgebra Operator ℝ
+    operatorOrderToReal : ∀ {lower upper} →
+      OperatorProduct.LessEqual operatorAlgebra lower upper →
+      lower ≤ℝ upper
+
     termFactors : Domain → Term → List Factor
-    beforeFactor afterFactor : Domain → Term → Factor → ℝ
+    beforeOperator afterOperator : Domain → Term → Factor → Operator
     ordinaryFactorMajorant markedFactorMajorant :
       Domain → Term → Factor → ℝ
 
-    differentiatedTermIsMarkedProductDifference :
+    -- This is the exact scalarization boundary: the absolute scalar
+    -- differentiated term is the norm of the noncommutative product difference.
+    differentiatedTermAbsoluteIsOperatorDifferenceNorm :
       ∀ domain term →
-      differentiatedTerm domain term ≡
-        Hess.productℝ (beforeFactor domain term) (termFactors domain term)
-        -ℝ
-        Hess.productℝ (afterFactor domain term) (termFactors domain term)
+      absℝ (differentiatedTerm domain term) ≡
+        OperatorProduct.operatorNorm operatorAlgebra
+          (OperatorProduct.difference operatorAlgebra
+            (OperatorProduct.operatorProduct
+              operatorAlgebra
+              (beforeOperator domain term)
+              (termFactors domain term))
+            (OperatorProduct.operatorProduct
+              operatorAlgebra
+              (afterOperator domain term)
+              (termFactors domain term)))
 
-    differentiatedTermMajorantIsFactorwiseMarkedProduct :
+    differentiatedTermMajorantIsOperatorMarkedProduct :
       ∀ domain term →
       differentiatedTermMajorant domain term ≡
-        FactorProduct.markedProductMajorant
+        OperatorProduct.markedProductMajorant
+          operatorAlgebra
           (ordinaryFactorMajorant domain term)
           (markedFactorMajorant domain term)
           (termFactors domain term)
 
-    -- These are now the literal source-replay leaves.  Round72 compiles them
-    -- into the whole-term majorant; R406 no longer accepts that conclusion as
-    -- a separate physical assumption.
-    ordinaryFactorMajorantNonnegative :
+    -- These are now the literal source-replay leaves.  The noncommutative
+    -- Round72 theorem compiles them into the whole differentiated-term bound.
+    beforeOperatorBelowOrdinary :
       ∀ domain term factor →
-      0ℝ ≤ℝ ordinaryFactorMajorant domain term factor
+      OperatorProduct.LessEqual operatorAlgebra
+        (OperatorProduct.operatorNorm operatorAlgebra
+          (beforeOperator domain term factor))
+        (ordinaryFactorMajorant domain term factor)
 
-    beforeFactorBelowOrdinary :
+    afterOperatorBelowOrdinary :
       ∀ domain term factor →
-      absℝ (beforeFactor domain term factor)
-        ≤ℝ ordinaryFactorMajorant domain term factor
+      OperatorProduct.LessEqual operatorAlgebra
+        (OperatorProduct.operatorNorm operatorAlgebra
+          (afterOperator domain term factor))
+        (ordinaryFactorMajorant domain term factor)
 
-    afterFactorBelowOrdinary :
+    markedOperatorDifferenceBelow :
       ∀ domain term factor →
-      absℝ (afterFactor domain term factor)
-        ≤ℝ ordinaryFactorMajorant domain term factor
-
-    markedFactorDifferenceBelow :
-      ∀ domain term factor →
-      absℝ
-        (beforeFactor domain term factor
-          -ℝ afterFactor domain term factor)
-        ≤ℝ markedFactorMajorant domain term factor
+      OperatorProduct.LessEqual operatorAlgebra
+        (OperatorProduct.operatorNorm operatorAlgebra
+          (OperatorProduct.difference operatorAlgebra
+            (beforeOperator domain term factor)
+            (afterOperator domain term factor)))
+        (markedFactorMajorant domain term factor)
 
     -- Literal CMP116 source replay: the complete selected boundary is the sum
     -- of common-Y contributions, and each common-Y contribution is the sum of
@@ -167,7 +182,8 @@ record SelectedCMP116TermwiseLocalization
 open SelectedCMP116TermwiseLocalization public
 
 ------------------------------------------------------------------------
--- Round72 discharges the whole-term majorant from the literal factor bounds.
+-- Round72 discharges the whole-term majorant from literal operator-factor
+-- bounds.  No commutativity of CMP109 factors is assumed here.
 ------------------------------------------------------------------------
 
 differentiatedTermBelowMajorant :
@@ -180,18 +196,19 @@ differentiatedTermBelowMajorant :
   absℝ (differentiatedTerm application domain term)
     ≤ℝ differentiatedTermMajorant application domain term
 differentiatedTermBelowMajorant application domain term
-  rewrite differentiatedTermIsMarkedProductDifference application domain term
-        | differentiatedTermMajorantIsFactorwiseMarkedProduct application domain term =
-  FactorProduct.markedProductDifferenceFromFactorwiseBounds
-    (beforeFactor application domain term)
-    (afterFactor application domain term)
-    (ordinaryFactorMajorant application domain term)
-    (markedFactorMajorant application domain term)
-    (termFactors application domain term)
-    (ordinaryFactorMajorantNonnegative application domain term)
-    (beforeFactorBelowOrdinary application domain term)
-    (afterFactorBelowOrdinary application domain term)
-    (markedFactorDifferenceBelow application domain term)
+  rewrite differentiatedTermAbsoluteIsOperatorDifferenceNorm application domain term
+        | differentiatedTermMajorantIsOperatorMarkedProduct application domain term =
+  operatorOrderToReal application
+    (OperatorProduct.operatorProductDifferenceFromFactorwiseBounds
+      (operatorAlgebra application)
+      (beforeOperator application domain term)
+      (afterOperator application domain term)
+      (ordinaryFactorMajorant application domain term)
+      (markedFactorMajorant application domain term)
+      (termFactors application domain term)
+      (beforeOperatorBelowOrdinary application domain term)
+      (afterOperatorBelowOrdinary application domain term)
+      (markedOperatorDifferenceBelow application domain term))
 
 ------------------------------------------------------------------------
 -- The actual theorem-bearing composition consumed by R402.
@@ -238,7 +255,7 @@ selectedBoundaryLocalizationFromR404R405 application =
 
 ------------------------------------------------------------------------
 -- Status boundary: the owner is theorem-bearing, but an inhabitant still
--- requires the literal selected CMP99/CMP109/CMP116 factorwise replay above.
+-- requires the literal selected CMP99/CMP109/CMP116 operator-factor replay.
 -- These booleans are deliberately not used as proof terms.
 ------------------------------------------------------------------------
 
@@ -256,12 +273,19 @@ round406OpaqueWholeTermMajorantStillPrimitiveIsFalse :
   round406OpaqueWholeTermMajorantStillPrimitive ≡ false
 round406OpaqueWholeTermMajorantStillPrimitiveIsFalse = refl
 
-round406FactorwiseSourceBoundsStillProofBearing : Bool
-round406FactorwiseSourceBoundsStillProofBearing = true
+round406CommutativeScalarFactorReplayMandatory : Bool
+round406CommutativeScalarFactorReplayMandatory = false
 
-round406FactorwiseSourceBoundsStillProofBearingIsTrue :
-  round406FactorwiseSourceBoundsStillProofBearing ≡ true
-round406FactorwiseSourceBoundsStillProofBearingIsTrue = refl
+round406CommutativeScalarFactorReplayMandatoryIsFalse :
+  round406CommutativeScalarFactorReplayMandatory ≡ false
+round406CommutativeScalarFactorReplayMandatoryIsFalse = refl
+
+round406NoncommutativeOperatorFactorBoundsStillProofBearing : Bool
+round406NoncommutativeOperatorFactorBoundsStillProofBearing = true
+
+round406NoncommutativeOperatorFactorBoundsStillProofBearingIsTrue :
+  round406NoncommutativeOperatorFactorBoundsStillProofBearing ≡ true
+round406NoncommutativeOperatorFactorBoundsStillProofBearingIsTrue = refl
 
 round406ConcreteSelectedSourceReplayObserved : Bool
 round406ConcreteSelectedSourceReplayObserved = false
