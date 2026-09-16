@@ -4,7 +4,7 @@
 
 ## 1. From digital activity to ESD capacity
 
-The candidate evidence supports a distinction between the presence of digital technology and the educational mechanisms through which sustainability capabilities may develop. OECD's *Digital Education Outlook 2026* explicitly separates improved task performance with general-purpose generative AI from durable learning, emphasizing pedagogical purpose, human-centred teaching, research, governance and enabling infrastructure as conditions on educational benefit. This is compatible with the paper's formal non-factorisation of technology presence and educational transformation.
+The candidate evidence supports a distinction between the presence of digital technology and the educational mechanisms through which sustainability capabilities may develop. OECD's *Digital Education Outlook 2026* explicitly separates improved task performance with general-purpose generative AI from durable learning, emphasizing pedagogical purpose, human-centred teaching, research, governance and enabling infrastructure as conditions on educational benefit.
 
 A more direct digital-ESD mechanism appears in Ardila Echeverry, Gauthier, Hartikainen and Vasalou (2025; DOI 10.3390/su17104289). Their reflective case study followed two five-member postgraduate higher-education teams during a ten-week design-thinking module in which students co-designed digital educational technologies around sustainability challenges. The study reports that sustainability competencies did not arise from digital design activity uniformly: particular practices—including user-specific literature review, research with target users, and reflection on sustainability values and design decisions—could foster or hinder the development of sustainability competencies. This provides a concrete candidate mechanism for RQ1 and RQ2 while remaining bounded to a small, specific postgraduate context.
 
@@ -19,19 +19,19 @@ The source-bounded implication is therefore not that co-design or digital techno
 
 with population, context and implementation details retained.
 
-## 2. Transformation is not adoption, activity, input integration or performance
+## 2. Integration and transformation are not the same thing
 
-The current candidate source families converge on the need to keep activity, input integration, performance and transformation separate.
+The current source set now provides both a conceptual integration antecedent and implementation evidence showing why integration remains a live problem.
 
-UNESCO's 2026 mid-term evaluation of ESD for 2030 reports substantial programme implementation activity alongside limited systemic transformation. This is programme-level evidence, not evidence about the present digital-ESD manuscript, but it demonstrates why implementation activity cannot stand in for system change.
+Böhme (2026; DOI 10.3390/educsci16050721) explicitly reconstructs sustainability/ESD and digitality as a mutually coupled **twin transformation** in education, using a double perspective of sustainable digitality and sustainability under conditions of digitality. This is close prior conceptual work: the present manuscript should not claim novelty for the bare idea that the green/sustainability and digital transformations should be integrated reciprocally.
 
-Holst, Singer-Brodowski, Brock and de Haan (2024; DOI 10.1002/sd.2865) provide a more explicit monitoring architecture. Their longitudinal analysis covers more than 11,000 documents across ten years and all formal education sectors in Germany, operationalising the **depth** and **speed** of ESD integration in policies, curricula, educator training and student assessment. The paper also argues for monitoring across input, process, output and outcome. This is valuable precisely because it marks the input boundary: deeper or faster integration in formal system documents is measurable institutional evidence, but it does not itself establish learning, behavioural outcomes or broader transformation.
+At the implementation level, the UNECE fifth evaluation report of the regional ESD strategy synthesises 31 national reports from the 2021–2025 implementation phase. It reports growing use of digital platforms, tools, access initiatives and digital resources while also identifying limited and uneven intentional integration of sustainability principles into digital-education policy and practice. The report therefore supplies a regional implementation-gap premise: digitalisation and ESD can both advance while remaining insufficiently integrated. It does not supply a causal digital-ESD intervention effect.
 
-OECD's 2026 digital-education synthesis provides the corresponding learning-level distinction: successful task completion using generative AI can occur without learning gains. The relevant transformation chain therefore cannot be collapsed to tool uptake or immediate output quality.
+UNESCO's 2026 mid-term evaluation of ESD for 2030 independently reports substantial programme implementation activity alongside limited systemic transformation. Holst, Singer-Brodowski, Brock and de Haan (2024; DOI 10.1002/sd.2865) add a sharper monitoring architecture: across more than 11,000 documents and ten years, they operationalise the **depth** and **speed** of ESD integration in policies, curricula, educator training and student assessment, while distinguishing input monitoring from process, output and outcome. OECD's 2026 digital-education synthesis provides the learning-level analogue: successful task completion using generative AI does not automatically imply learning.
 
-Zagami (2026; DOI 10.1080/17439884.2026.2683480) supplies a different level of analysis through four Australian edtech case histories—Canva for Education, Education Perfect, LearningField and Grok Academy. The comparative case study argues that platform trajectories were shaped by governance, funding, legitimacy and sustainable capital rather than technological novelty alone, and that collapse or restructuring often followed governance, ethical or trust crises. This does not establish a universal law of edtech success, but it adds an institutional-durability coordinate missing from purely pedagogical accounts.
+Zagami (2026; DOI 10.1080/17439884.2026.2683480) provides another layer through four Australian edtech case histories—Canva for Education, Education Perfect, LearningField and Grok Academy. These trajectories were shaped by governance, funding, legitimacy and sustainable capital rather than technical novelty alone. This does not establish a universal law of edtech success, but it adds an institutional-durability coordinate missing from purely pedagogical accounts.
 
-Taken together, these candidates suggest a multi-level transformation ladder:
+Taken together, the candidate evidence requires a multi-level ladder rather than a single transformation label:
 
 \[
 \text{technology presence}
@@ -49,21 +49,21 @@ Taken together, these candidates suggest a multi-level transformation ladder:
 \text{system transformation}.
 \]
 
-The final review should therefore code evidence separately at each level rather than treating all positive digital-education or ESD indicators as instances of transformation.
+The final review should code evidence separately at each level.
 
 ## 3. Sustainability must constrain digital education itself
 
-The reverse direction of the reciprocal framework is increasingly well-supported at the level of method, governance and contextual evidence, even though same-object deployment measurements remain unpaid.
+The reverse direction is now supported by several distinct source roles, but same-object deployment measurements remain unpaid.
 
-The UNESCO-UNICEF-ITU *Charter for Public Digital Learning Platforms* identifies public accountability, inclusion, pedagogical purpose, complementarity, openness, interoperability and trustworthiness as design/governance principles. The September 2026 UNESCO ministerial statement adds an adopted intergovernmental governance layer: it calls for auditable systems, portable data, public oversight, total-cost-of-ownership consideration, interoperability, portability and open systems when AI is adopted in education. These are normative/governance coordinates, not empirical proof that a deployed platform meets them.
+Chugh (2026; DOI 10.1057/s41599-026-06845-5) is a close conceptual antecedent for the **sustainability paradox**: educational digitalisation can expand access and participation while also producing environmental and social costs, motivating lifecycle, procurement and circularity responses. This means the manuscript should not claim novelty for the bare proposition that digital education itself must be sustainable.
 
-UNESCO's 2026 consultation materials add two narrower analytical tools. Gulson, Huang, Bello Villarino and Vlies frame AI procurement as a governance lever; Krueger and Jackson argue for total-cost-of-ownership reasoning beyond purchase price. Because both are commissioned background papers within an active consultation, they should inform extraction categories and discussion rather than be cited as adopted policy.
+The UNESCO-UNICEF-ITU *Charter for Public Digital Learning Platforms* identifies public accountability, inclusion, pedagogical purpose, complementarity, openness, interoperability and trustworthiness as platform-governance principles. The September 2026 UNESCO ministerial statement adds an adopted intergovernmental governance layer: auditable systems, portable data, public oversight, total-cost-of-ownership consideration, interoperability, portability and open systems. UNESCO's consultation materials add narrower analytical tools: Gulson, Huang, Bello Villarino and Vlies frame AI procurement as a governance lever, while Krueger and Jackson argue for total-cost-of-ownership reasoning beyond purchase price. The latter two remain commissioned consultation-background papers, not adopted policy.
 
-The environmental measurement boundary remains stronger. ITU-T L.1410 supplies an in-force methodology for life-cycle assessment of ICT goods, networks and services, including comparative analysis against a reference product system. ITU-T L.1023 supplies circularity assessment coordinates including durability, repair, reuse, recycling and upgradeability. These methods define what a credible assessment would need to observe; they do not create the inventory, reference system or circularity score for a particular digital-education deployment.
+The environmental measurement boundary is stronger still. ITU-T L.1410 supplies an in-force methodology for life-cycle assessment of ICT goods, networks and services, including comparative analysis against a reference product system. ITU-T L.1023 supplies circularity assessment coordinates including durability, repair, reuse, recycling and upgradeability. These methods define what a credible assessment would need to observe; they do not create the inventory, reference system or circularity score for a particular digital-education deployment.
 
-Existing education-specific contextual evidence in the repository strengthens this distinction. Pinzone, Sarti and Amodeo (2026; DOI 10.1007/s11367-026-02656-7) conduct a life-cycle assessment of higher-education delivery scenarios, while Radovan, Košmerl and Makovec Radovan (2026; DOI 10.3390/su18147213) systematically review environmental impacts of generative AI in education and report sparse, heterogeneous education-specific environmental evidence. Neither source justifies a universal ranking of online, hybrid or face-to-face education.
+Education-specific contextual evidence in the repository strengthens this distinction. Pinzone, Sarti and Amodeo (2026; DOI 10.1007/s11367-026-02656-7) conduct a life-cycle assessment of higher-education delivery scenarios, while Radovan, Košmerl and Makovec Radovan (2026; DOI 10.3390/su18147213) systematically review environmental impacts of generative AI in education. Neither source justifies a universal ranking of online, hybrid or face-to-face education.
 
-The resulting candidate structure is:
+Thus:
 
 \[
 \text{normative infrastructure principles}
@@ -74,13 +74,13 @@ The resulting candidate structure is:
 \text{same-object sustainable deployment}.
 \]
 
-Instead, it identifies the deployment-specific measurements that remain to be produced.
+Instead, these sources identify the deployment-specific measurements that remain to be produced.
 
 ## 4. Platform governance, participant experience and epistemic agency
 
-Digital-platform governance also has empirical social coordinates that are not reducible to technical functionality. Gouseti and Shaw (2026; DOI 10.1080/17439884.2026.2653746) report qualitative findings from school leaders, teachers, students and parents in two English secondary schools. Participants valued streamlined administration, teaching/learning support and communication, while the study also identified monitoring and surveillance, digital exclusion and impacts on teacher digital wellbeing. The study is deliberately retained as a two-school qualitative context rather than a universal claim about platformisation.
+Digital-platform governance has empirical social coordinates that are not reducible to technical functionality. Gouseti and Shaw (2026; DOI 10.1080/17439884.2026.2653746) report qualitative findings from leaders, teachers, students and parents in two English secondary schools. Participants valued streamlined administration, teaching/learning support and communication, while the study also identified monitoring and surveillance, digital exclusion and impacts on teacher digital wellbeing. The study remains a two-school qualitative context, not a universal claim about platformisation.
 
-These situated findings complement, but do not replace, the manuscript's stronger participant-governance boundary. Evidence that users experience or comment on platforms is not equivalent to constitutive epistemic authority over research questions, coding, interpretation or institutional choice. Likewise, UNESCO's consultation processes and ministerial commitments to deliberative governance do not create local participant authority for a different population.
+These situated findings complement, but do not replace, the manuscript's stronger participant-governance boundary. Evidence that users experience or comment on platforms is not equivalent to constitutive epistemic authority over research questions, coding, interpretation or institutional choice. Likewise, UNESCO consultation processes and ministerial commitments to deliberative governance do not create local participant authority for a different population.
 
 The synthesis should therefore retain at least three participant-related coordinates:
 
@@ -92,9 +92,9 @@ These coordinates may co-occur but should not be promoted into one another witho
 
 ## 5. Durability and longitudinal evidence remain the weakest same-object lane
 
-The current candidate set now contains useful longitudinal and institutional monitoring precedents, but comparatively little evidence that follows a **digital-ESD intervention itself** through sustained institutionalisation, infrastructure support windows, replacement cycles and long-horizon educational outcomes.
+The current candidate set contains useful longitudinal and institutional monitoring precedents, but comparatively little evidence that follows a **digital-ESD intervention itself** through sustained institutionalisation, infrastructure support windows, replacement cycles and long-horizon educational outcomes.
 
-Holst et al. provide ten-year longitudinal monitoring of ESD integration at the system-input level. Zagami's Australian cases provide historical trajectories of edtech institutions and platforms. Existing ESD sources in the acquisition atlas include a one-year longitudinal intervention benchmark, and the UNESCO ESD mid-term evaluation provides programme-level evidence across 2021–2024. These improve the methodological and contextual basis for RQ5, but they observe different objects and cannot be combined into a same-object long-horizon claim.
+Holst et al. provide ten-year longitudinal monitoring of ESD integration at the system-input level. Zagami provides historical trajectories of edtech institutions and platforms. Existing ESD sources in the acquisition atlas include a one-year longitudinal intervention benchmark, and the UNESCO ESD mid-term evaluation provides programme-level evidence across 2021–2024. These improve the methodological and contextual basis for RQ5, but they observe different objects and cannot be combined into a same-object long-horizon claim.
 
 The final paper should therefore distinguish:
 
@@ -112,27 +112,33 @@ The final paper should therefore distinguish:
 \text{intergenerational option preservation}.
 \]
 
-At present, the missing same-object digital-ESD longitudinal carrier is appropriately represented as a residual rather than filled by analogy.
+The missing same-object digital-ESD longitudinal carrier remains an explicit residual.
 
-## 6. Contribution positioning against the sustainability-paradox antecedent
+## 6. Contribution positioning after the close-antecedent snowball
 
-A close conceptual antecedent materially narrows the contribution claim. Chugh (2026; DOI 10.1057/s41599-026-06845-5), *The sustainability paradox: rethinking digital technologies in education for a sustainable future*, already argues that educational digitalisation can improve access and participation while producing environmental and social costs, and advocates lifecycle-oriented, procurement and circular-economy responses. The present manuscript should therefore **not** claim novelty for the bare proposition that digital education itself must be sustainable.
+The novelty snowball has materially contracted the defensible contribution claim.
 
-The candidate distinctive contribution is narrower and compound. Relative to this close antecedent, the present framework attempts to integrate:
+**Chugh (2026)** already pays the reverse sustainability-paradox premise: digital education can yield educational/social benefits while generating environmental and social costs, making lifecycle, procurement and circularity relevant.
 
-1. the **forward** question of how digital education can build ESD capacities with the **reverse** sustainability constraint on digital education itself;
-2. explicit separations among technology adoption, implementation activity, system-input integration, task performance, learning, institutional durability and system transformation;
-3. source-role, population/context, time-horizon and same-object evidence-payment discipline;
-4. a participant-governance boundary in which context generalisation and same-target-context epistemic authority are separate conjunctive obligations; and
-5. a dependency-aware review method in which search, eligible corpus, source/scope extraction and synthesis remain separately receipted.
+**Böhme (2026)** goes further and already pays a coupled twin-transformation premise: sustainability/ESD and digitality should be addressed as mutually interdependent educational transformations, including the perspectives of sustainable digitality and sustainability under conditions of digitality.
 
-These differences are a **candidate contribution position**, not yet a global novelty claim. A close antecedent does not by itself make the manuscript duplicative, but formal differences from one antecedent do not themselves establish publication novelty either. That question remains open until the declared structured search and screening are completed.
+The present paper should therefore claim novelty for **neither** proposition in bare form.
+
+The remaining candidate contribution is instead an **evidence and governance architecture applied to the coupled problem**. Relative to these close antecedents, the current manuscript attempts to add:
+
+1. explicit separations among technology adoption, implementation activity, input integration, task performance, learning, institutional durability and system transformation;
+2. source-role, population/context, time-horizon and same-object evidence-payment discipline;
+3. participant-governance rules in which context generalisation and same-target-context epistemic authority remain separate conjunctive obligations;
+4. lifecycle/circularity method-versus-deployment residuals, preventing standards or contextual LCAs from becoming same-object measurements; and
+5. dependency-aware review lineage in which search execution, eligible corpus, source/scope extraction and synthesis remain separately receipted and non-skippable.
+
+This is a **candidate contribution position**, not a global novelty claim. Close antecedents neither prove duplication nor establish that the remaining architecture is publication-novel. That claim remains unpaid until the declared structured search and screening are complete.
 
 ## 7. Working synthesis claim
 
-The pre-screen evidence increasingly supports the paper's reciprocal architecture while also narrowing what can responsibly be claimed. Digital education can contribute to sustainability learning and competencies under identifiable pedagogical and design conditions. At the same time, digital education creates governance, social, material, lifecycle and institutional obligations that cannot be inferred from educational benefit alone.
+The pre-screen evidence increasingly supports a conditional architecture while narrowing what can responsibly be claimed. Digital education can contribute to sustainability learning and competencies under identifiable pedagogical and design conditions. Sustainability and digitality are already recognised in prior work as mutually coupled educational problems. The manuscript's candidate contribution is therefore to make the evidence, authority and dependency structure of that coupling explicit and operational.
 
-The strongest candidate synthesis is therefore conditional rather than promotional:
+The strongest working synthesis is:
 
 \[
 \boxed{
