@@ -87,8 +87,15 @@ R104 signed Abel/layer-cake algebra       domain-independent candidate
 R98 packet-boundary cancellation          mixed; selector algebra vs finite Fourier realization
 #957 low/collar/remote shell split        torus-specific realization
 R291/R573 signed Hermitian linearization  domain-independent candidate
+S2b2d0 output-local fixed-output reduction domain-independent candidate
 R568/R572/R503 commutator chain           mixed; analytic core vs output-fibre/lattice plumbing
 ```
+
+The new `S2b2d0` result is especially important for BIDI: once an output is
+selected, the periodic exact-shell 0/1 weight disappears completely on that
+fixed-output fibre. The hard local analytic object is therefore the ordinary
+unweighted fixed-output mixed commutator; `shellIndex` only decides which
+outputs are active.
 
 BIDI questions:
 
@@ -149,8 +156,10 @@ S2b2b upper packet = exact-shell collar + remote             DONE source
 S2b2c0 low + collar + remote physical flux identity          DONE source
 S2b2c1 two-shell low/remote integer Euclidean gap            DONE source
 S2b2c2a integer gap -> live rational C3.normSquared          DONE source
-S2b2c2b literal low/remote R98 spectral datum                IMPLEMENTATION IN REVIEW
-S2b2d exact-shell collar signed local payment                OPEN PRIMARY
+S2b2c2b literal low/remote R98 spectral datum                SOURCE-WRITTEN / certification pending
+S2b2d0 output-local collar weight -> active unweighted fibre DONE source
+S2b2d1 unweighted fixed-output mixed commutator payment       OPEN PRIMARY
+S2b2d2 cutoff-uniform sum of fixed-output budgets             OPEN after d1
 S3 cutoff-uniform initial critical ceiling                   OPEN
 S4 positive retained viscosity 0 < 2*nu-a                   OPEN
 ```
@@ -253,13 +262,10 @@ Because `c^2 >= 0`, the concrete `3 < 4` low/remote ordering transports to the
 same live `C3.normSquared` used by R407 viscosity. No separate calibration
 receipt is introduced.
 
-### S2b2c2b — REMOTE packet datum: implementation in review
+### S2b2c2b — REMOTE packet datum: SOURCE-WRITTEN, certification pending
 
-The target is the literal
-
-`R98.SpectralCrossDissipationDatum`
-
-on the SAME low/remote packets. The normalization is fixed:
+`NSTriadKNLowRemoteSpectralDatumRound98Exact` constructs the literal
+`R98.SpectralCrossDissipationDatum` on the same low/remote packets with
 
 ```text
 E_P = (1/2) sum_P |u_k|^2
@@ -269,26 +275,53 @@ lambda_low    = 2*nu*omega_low
 lambda_remote = 2*nu*omega_remote.
 ```
 
-A RED regression exists. `NSTriadKNLowRemoteSpectralDatumRound98Exact` is
-source-drafted and constructs the finite selected-energy/dissipation lift from
-`0 <= nu`; static repair/review is still required before this tracker promotes
-c2b to DONE source. `0 <= nu` is the ordinary physical viscosity premise and is
-strictly weaker/different from S4's later `0 < 2*nu-a`.
+It uses only ordinary physical `0 <= nu`, not S4's later `0 < 2*nu-a`.
+Existing R98 spectral-cross coercivity is therefore the remote compiler once
+this source surface is actually certified.
 
-Once c2b is stable, existing R98 spectral-cross coercivity is a compiler for the
-remote contribution.
+### S2b2d0 — DONE SOURCE: periodic collar weight disappears on fixed output
 
-### S2b2d — PRIMARY analytic leaf: exact-shell collar
+`NSTriadKNOutputLocalSelectorFixedOutputReductionExact` first proves the generic
+output-local theorem. For any Boolean selector depending only on the final
+output:
 
 ```text
-preserve signed exact-shell physical components
- -> exploit local same-scale cancellation/depletion
- -> pay the collar without Schur/Wiener flattening
- -> recombine collar + remote
- -> integrated R104/R414 S2b2 inequality.
+selected(output)=true
+  -> weighted fixed-output commutator = ordinary unweighted fixed-output commutator
+
+selected(output)=false
+  -> weighted fixed-output commutator = 0.
 ```
 
-This is currently the highest-alpha new PDE mathematics.
+The exact-shell collar is only a corollary. This removes `shellIndex` from the
+hard local analytic theorem and strengthens the A/B portability cut.
+
+### S2b2d1 — PRIMARY analytic leaf: unweighted fixed-output commutator
+
+The remaining local theorem is now domain-generic in shape:
+
+```text
+ordinary fixed-output mixed commutator
+  -> theorem-bearing signed fibre budget
+  -> R432/R487 fixed-output payment.
+```
+
+R232 rules out the generic pointwise half-derivative route. R294 owns the exact
+pre-norm commutator collapse. R432/R487 own cardinality-free summation once
+fixed-output budgets exist. Therefore the first genuinely new local analysis is
+the same-scale summed quantitative payment on this unweighted fixed-output
+object, not another shell representation theorem.
+
+### S2b2d2 — global aggregation after local payments
+
+Once d1 exists, the next residual is exactly R488's second node:
+
+```text
+4 * sum_k B_k <= B(T)
+```
+
+with no output-count factor. Do not search this global theorem before the local
+fixed-output family exists.
 
 # S3 / S4
 
@@ -315,8 +348,8 @@ modern signed/nested commutator route           selected B_comm producer family
 
 ```text
 P0  keep this tracker + #957 + #883 archaeology summary synchronized
-P1  B_phase S2b2d exact-shell collar signed local payment
-P2  repair/validate S2b2c2b literal low/remote R98 spectral datum
+P1  B_phase S2b2d1 unweighted fixed-output same-scale signed payment
+P2  static/certification validation of S2b2c2b remote datum and S2b2d0 reduction
 P3  A/B portability BIDI audit on each paid B theorem family (non-promoting)
 P4  S1b infrastructure: concrete scalar FTC / integrateTo linearity
 P5  B_phase S3/S4
@@ -330,8 +363,9 @@ Operating rule:
 focus A/B only;
 A proof discovery deferred, A portability BIDI active;
 no broad NS archaeology;
-B new mathematics starts at collar or a named c2b repair only;
+B new mathematics starts at the unweighted fixed-output collar payment;
 preserve signed/local components before norms;
+only after d1 search the cutoff-uniform sum d2;
 never infer B -> A or A -> B without explicit same-object transport.
 ```
 
