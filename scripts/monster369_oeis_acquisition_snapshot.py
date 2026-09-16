@@ -66,6 +66,43 @@ SEQUENCES: dict[str, dict[str, object]] = {
             "196830=3^9*10. Arithmetic structure only."
         ),
     ),
+    "A058674": _node(
+        "A058674",
+        title="McKay-Thompson series of class 42D for Monster",
+        class_label="42D",
+        formula=(
+            "-1+eta(q^2)*eta(q^6)*eta(q^7)*eta(q^21)/"
+            "(eta(q)*eta(q^3)*eta(q^14)*eta(q^42))"
+        ),
+        authority="source-navigation",
+        url="https://oeis.org/A058674",
+        notes=(
+            "Neighboring Monster class-42 series. Its eta quotient explicitly contains "
+            "levels 14 and 42, useful as source-native coordinates for the 42-family search."
+        ),
+    ),
+    "A058676": _node(
+        "A058676",
+        title="McKay-Thompson series of class 42b for Monster",
+        class_label="42b",
+        formula=(
+            "A+q/A where A=q^(1/2)*eta(q^3)*eta(q^7)/(eta(q)*eta(q^21))"
+        ),
+        authority="source-navigation",
+        url="https://oeis.org/A058676",
+        notes="Neighboring Monster class-42 series built from the same 3/7/21 eta block as 42d.",
+    ),
+    "A058677": _node(
+        "A058677",
+        title="McKay-Thompson series of class 42c for Monster",
+        class_label="42c",
+        formula=(
+            "A+2*q^2/A where A=q*eta(q^3)*eta(q^21)/(eta(q^6)*eta(q^42))"
+        ),
+        authority="source-navigation",
+        url="https://oeis.org/A058677",
+        notes="Neighboring Monster class-42 series with an explicit eta(q^42) level.",
+    ),
     "A058678": _node(
         "A058678",
         title="McKay-Thompson series of class 42d for Monster",
@@ -184,6 +221,17 @@ RELATIONS: dict[str, dict[str, object]] = {
         "paid": True,
         "same_object_paid": False,
     },
+    "42-class-eta-level-family": {
+        "sources": ["A058674", "A058676", "A058677", "A058678"],
+        "levels": {3, 7, 14, 21, 42},
+        "observed": (
+            "neighboring Monster 42-class McKay-Thompson eta formulas expose the "
+            "source-native level coordinates 3,7,14,21,42"
+        ),
+        "paid": True,
+        "fifteen_minus_one_explanation_paid": False,
+        "same_object_paid": False,
+    },
     "42d-17496-to-n3b-restriction": {
         "sources": ["A058678"],
         "observed": (
@@ -244,7 +292,7 @@ def build_42d_five_mode_phase_probe() -> dict[str, object]:
 
 def build_report() -> dict[str, object]:
     return {
-        "schema": "monster369-oeis-acquisition-snapshot-v4",
+        "schema": "monster369-oeis-acquisition-snapshot-v5",
         "retrieved": RETRIEVED,
         "sequence_count": len(SEQUENCES),
         "sequences": SEQUENCES,
@@ -258,6 +306,7 @@ def build_report() -> dict[str, object]:
             "6b-q6-to-c6-spectrum-32772": True,
             "17496-42d-to-n3b-restriction": True,
             "42d-five-mode-phase-carrier": True,
+            "42-class-eta-level-family": True,
         },
         "authority": {
             "oeis_snapshot_creates_same_object": False,
