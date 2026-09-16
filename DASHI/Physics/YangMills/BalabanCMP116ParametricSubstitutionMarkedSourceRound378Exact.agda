@@ -31,6 +31,7 @@ module DASHI.Physics.YangMills.BalabanCMP116ParametricSubstitutionMarkedSourceRo
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Foundations.FinitePolydiscCauchyAxioms as Cauchy
@@ -73,15 +74,13 @@ parametricSensitivityToR351Source dataSet = record
 
 r378SourceDistance :
   (dataSet : R370.CMP116DirectParametricSensitivityData) →
-  ParametricBoundaryPoint dataSet →
-  DASHI.Foundations.RealAnalysisAxioms.ℝ
+  ParametricBoundaryPoint dataSet → ℝ
 r378SourceDistance dataSet =
   R351.sourceSubstitutionDistance
     (parametricSensitivityToR351Source dataSet)
 
 r378MarkedUpper :
-  (dataSet : R370.CMP116DirectParametricSensitivityData) →
-  DASHI.Foundations.RealAnalysisAxioms.ℝ
+  (dataSet : R370.CMP116DirectParametricSensitivityData) → ℝ
 r378MarkedUpper dataSet =
   R351.sourceMarkedInput
     (parametricSensitivityToR351Source dataSet)
@@ -89,9 +88,7 @@ r378MarkedUpper dataSet =
 r378SourcePayment :
   (dataSet : R370.CMP116DirectParametricSensitivityData) →
   ∀ s →
-  DASHI.Foundations.RealAnalysisAxioms._≤ℝ_
-    (r378SourceDistance dataSet s)
-    (r378MarkedUpper dataSet)
+  r378SourceDistance dataSet s ≤ℝ r378MarkedUpper dataSet
 r378SourcePayment dataSet =
   R351.sourceSubstitutionMarked
     (parametricSensitivityToR351Source dataSet)
