@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (true; false)
 
 import DASHI.Culture.CohnInstitutionalIbrahimDeweyTraversalExact as Traversal
 import DASHI.Core.AttributedSourceCore as Source
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Wikimedia.IdentifierExact as Id
 import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Ibrahim
 
@@ -31,6 +32,48 @@ frickerAuthorQidPinned = refl
 epistemicInjusticeConceptQidPinned :
   Id.rawItemId Traversal.epistemicInjusticeConceptQid ≡ "Q48970669"
 epistemicInjusticeConceptQidPinned = refl
+
+harawayAuthorPinned :
+  Source.sourceAuthor Traversal.harawaySituatedKnowledges ≡ "Donna Haraway"
+harawayAuthorPinned = refl
+
+blackwellAuthorPinned :
+  Source.sourceAuthor Traversal.blackwellEquivalentComparisons ≡ "David Blackwell"
+blackwellAuthorPinned = refl
+
+frickerAuthorPinned :
+  Source.sourceAuthor Traversal.frickerEpistemicInjustice ≡ "Miranda Fricker"
+frickerAuthorPinned = refl
+
+harawayDoiPinned :
+  Source.doiState Traversal.harawaySituatedKnowledges ≡
+  Source.doiRecorded "10.2307/3178066"
+harawayDoiPinned = refl
+
+blackwellDoiPinned :
+  Source.doiState Traversal.blackwellEquivalentComparisons ≡
+  Source.doiRecorded "10.1214/aoms/1177729032"
+blackwellDoiPinned = refl
+
+frickerDoiPinned :
+  Source.doiState Traversal.frickerEpistemicInjustice ≡
+  Source.doiRecorded "10.1093/acprof:oso/9780198237907.001.0001"
+frickerDoiPinned = refl
+
+harawaySnowballReceipt :
+  Snowball.SourceRoleSnowballReceipt Traversal.harawaySituatedKnowledges
+harawaySnowballReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt Traversal.harawaySituatedKnowledges
+
+blackwellSnowballReceipt :
+  Snowball.SourceRoleSnowballReceipt Traversal.blackwellEquivalentComparisons
+blackwellSnowballReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt Traversal.blackwellEquivalentComparisons
+
+frickerSnowballReceipt :
+  Snowball.SourceRoleSnowballReceipt Traversal.frickerEpistemicInjustice
+frickerSnowballReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt Traversal.frickerEpistemicInjustice
 
 blackwellPublicationQidStillDebt :
   Traversal.blackwellPublicationQidResolved
