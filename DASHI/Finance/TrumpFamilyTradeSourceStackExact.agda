@@ -8,6 +8,8 @@ import DASHI.Finance.OGE278TReportingSemanticsExact
 import DASHI.Finance.TrumpPresident278TTechnologyBasketExact
 import DASHI.Finance.TrumpTradePointInTimeInformationExact
 import DASHI.Finance.TrumpTMTGTrustControlPrimaryExact
+import DASHI.Finance.TrumpPortfolioManagementAttributionExact
+import DASHI.Finance.TrumpTradeOversightAcquisitionExact
 import DASHI.Finance.TrumpFamilyExternalCounterpartyEvidenceExact
 import DASHI.Finance.TrumpFamilyExternalCounterpartyPrimaryExact
 import DASHI.Finance.TruthAPIExecutiveStatementExact
