@@ -25,9 +25,12 @@ Use this as the first-stop **current** state sheet; use the archaeology files fo
 
 #967  open/draft — LIVE SOURCE/PRODUCER feeding merged #970:
        R387–R409 consumer-first reconstruction of the selected CMP116 upper
+
+dashi_lean4 #7 open/draft — PARALLEL OPERATOR/BACKWARD CONSUMER:
+       vacuum-sector quantitative bounds + Row-A1 physical-gap instantiation interface
 ```
 
-#970 is a stable merged consumer. #967 has one job: manufacture its selected finite mixed-log upper without reopening dominated architecture.
+#970 is a stable merged consumer. #967 has one job: manufacture its selected finite mixed-log upper without reopening dominated architecture. Lean #7 attacks the independent operator/vacuum side and must not be used to silently discharge #967's source same-object payments.
 
 ## Current direct chain
 
@@ -72,6 +75,34 @@ MERGED #970 direct selected spectral upper             [terminal B ABI]
                 v
 finite covariance -> continuum -> gap                  [existing compiler chain]
 ```
+
+## Parallel operator / vacuum chain
+
+The repo audit recuts the operator frontier more tightly than the older “build the Hilbert space” wording.
+
+```text
+finite gauge configuration / rooted physical quotient           [existing]
+  -> gauge-invariant wavefunction carrier (R202)                 [existing]
+  -> finite-measure pairing/null semantics (R203/R205 family)    [existing compiler]
+  -> selected finite IBP -> sample-local symmetric operator      [existing compiler]
+  -> literal selected Balaban physical measure                   [LIVE physical instance]
+  -> literal finite-spacing YM H_a as selected action variation  [LIVE physical instance]
+  -> common invariant dense core + self-adjoint realization      [LIVE physical instance]
+  -> genuine VacuumGapDatum                                      [existing Lean carrier]
+
+Row-A1 source mathematics
+  -> 0 < bMinus(SU(N);r,h)                                       [existing Lean theorem]
+  -> bMinus <= gap(H_a) on the SAME H_a                          [LIVE physical theorem]
+  -> HasVacuumFormGap H_a Omega_a bMinus                         [Lean #7 source-written compiler]
+  -> ||psi|| <= bMinus^-1 ||H_a psi||                            [Lean #7 source-written compiler]
+  -> continuum graph-limit transport                             [existing Lean compiler]
+  -> same-evolution YM/OS operator equality                      [existing Lean compiler; physical equality LIVE]
+  -> terminal vacuum-sector spectral exclusion                   [existing Lean compiler]
+```
+
+The important existing Agda owner here is `BalabanSelectedIBPWavefunctionSymmetryWeldRound205Exact`: it compiles the selected finite IBP law into sample-local wavefunction symmetry, but explicitly leaves the literal physical YM Hamiltonian-as-action-variation, literal physical L2 pairing, and physical boundary cancellation conditional. Therefore no later bookkeeping flag may be used to pretend M7b/M7c are already physically instantiated.
+
+Lean PR #7 now adds `Welds/YMFinitePhysicalInstantiation.lean`. Its `RowA1PhysicalGapInstance` requires a genuine `VacuumGapDatum` and the explicit same-object inequality `bMinus <= datum.gap`; `rowA1VacuumFormGap` and `rowA1PhysicalZeroShiftBound` are then compiler output. This pays the M9 **interface/compiler**, not the physical inhabitant.
 
 ## Round ledger
 
@@ -190,6 +221,15 @@ YM-P2     time <= selected physicalDistance on the single R318 carrier.
 YM-P3     same-Hamiltonian q(E)/candidate-energy identity only where R400 is used.
 YM-P4     same-family finite->continuum covariance transport — existing.
 YM-P5     clustering/positive-subgap -> transfer gap — existing.
+
+YM-M7a    finite/gauge/wavefunction/L2 carrier framework — EXISTING.
+YM-M7a'   literal selected Balaban finite-measure instance — UNPAID physical instance.
+YM-M7b    literal finite-spacing YM H_a as selected action variation — UNPAID physical instance.
+YM-M7c    common invariant dense core + physical self-adjoint realization — UNPAID physical instance.
+YM-M9c    bMinus<=gap -> Row-A1 form-gap/inverse compiler — SOURCE-WRITTEN on Lean #7.
+YM-M9p    literal bMinus<=gap(H_a) same-object inhabitant — UNPAID physical theorem.
+YM-M8     actual U^YM=U^OS on common core — UNPAID physical theorem.
+YM-C      actual finite->continuum YM operator family — UNPAID physical theorem.
 ```
 
 ## Paid/compiler-owned
@@ -212,6 +252,12 @@ one-sided time/distance consumer shape (R399)
 merged #970 terminal consumer
 finite->continuum order closure
 clustering -> transfer-gap contradiction
+finite gauge/gauge-invariant wavefunction carrier framework
+finite-measure pairing/null-quotient compiler framework
+selected finite IBP -> sample-local symmetric wavefunction operator compiler
+vacuum-sector unbounded-operator/spectral compilers (Lean imported tranche)
+Row-A1 bMinus positivity (Lean existing theorem)
+Row-A1 physical-gap lowering interface (Lean #7 source-written)
 ```
 
 ## Still theorem-bearing / physical
@@ -223,6 +269,12 @@ P0b1e exact R409 four-stage product-difference norm attached to the selected R40
 CMP116 positive common-Y / outer shell majorants on that same selected decomposition
 P2 selected support/time geometry inhabitant
 P3 same-Hamiltonian ratio/energy identity only where used
+M7a' literal selected finite Balaban measure on the existing gauge-invariant carrier
+M7b literal finite-spacing YM action-variation Hamiltonian on that carrier
+M7c common dense core + physical self-adjoint realization
+M9p same-object Row-A1 lower form/gap inequality for that literal H_a
+M8 actual YM/OS evolution equality on the common core
+C actual finite-to-continuum YM operator family
 ```
 
 ## Pareto order
@@ -230,11 +282,14 @@ P3 same-Hamiltonian ratio/energy identity only where used
 | Priority | Work |
 |---|---|
 | 1 | **R410: use existing source identities to select the actual CMP99-changed R407 stage, prove the other three stage equalities, and weld the resulting R409 four-stage product-difference norm directly to the selected R406 differentiated term** |
-| 2 | **finish CMP116 positive common-Y / outer majorant attachment on that same selected decomposition if not already definitional** |
-| 3 | **YM-P2: `time <= selected physicalDistance` if not definitional from selected support** |
-| 4 | **YM-P3 only where actually consumed** |
-| 5 | generic source envelope/rate producer only if cheaper than direct R320/merged-#970 |
-| 6 | RH-R2 direct strict literal complement |
+| 2 | **M7a'/M7b: instantiate the existing gauge-invariant finite-measure carrier with the literal selected Balaban measure and literal action-variation Hamiltonian; reuse R205 selected-IBP symmetry rather than inventing a second Hamiltonian calculus** |
+| 3 | **M7c/M9p: construct the common physical core/self-adjoint realization and prove `bMinus <= gap(H_a)` (or the equivalent vacuum-complement quadratic-form inequality)** |
+| 4 | **finish CMP116 positive common-Y / outer majorant attachment on the same selected source decomposition** |
+| 5 | **YM-P2: `time <= selected physicalDistance` if not definitional from selected support** |
+| 6 | **M8/C: physical YM/OS same-evolution and finite->continuum operator-family instances** |
+| 7 | RH-R2 direct strict literal complement |
+
+R410 and M7/M9 are independent high-alpha fronts. Do not block one on the other unless a literal same-object dependency is discovered.
 
 ## Do not reopen
 
@@ -254,7 +309,9 @@ Unless a literal current consumer requires it:
 - no further finite-summation wrapper after R404/R405;
 - no exact distance=time when only time<=distance is consumed;
 - no fixed q_fast=1/2 architecture;
-- no generic CMP109/116/119/122 re-formalization without a current consumer.
+- no generic CMP109/116/119/122 re-formalization without a current consumer;
+- no new Hilbert/L2/unbounded-operator framework when R202/R203/R205 + imported Lean operator machinery already own it;
+- no promotion of sample-local R205 symmetry into literal physical L2 symmetry without the physical pairing/measure weld.
 
 ## Source attribution
 
@@ -265,7 +322,7 @@ Unless a literal current consumer requires it:
 
 CMP99 Theorem 3.14/(3.154) is the marked domain/background replacement donor. CMP109 (4.3)–(4.5) supplies the differentiated operator/tree structure. The existing Gate4 operator and resolvent pipelines supply the finite norm compilers consumed by R407/R408. CMP116 Sect. 1 supplies generalized-walk/decoupling and positive localization summability.
 
-Citation/source status does not itself inhabit P0.
+Citation/source status does not itself inhabit P0 or M7/M9.
 
 ## Validation / closure boundary
 
@@ -277,6 +334,7 @@ focused RED observed?
 production owner written?
 exact-head workflow observed?
 Agda/kernel receipt observed?
+Lean/kernel receipt observed?
 external/source theorem replay formalized?
 Clay/external acceptance?
 ```
@@ -301,18 +359,26 @@ dd1bea92...  R408 unchanged-stage zero theorem / safety cleanup
 524ea5c4...  R408 Gate4 -> Round72 norm/order transport
 c8593d2a...  R409 RED validation
 8b7dc577...  R409 one-marked-stage four-stage product compiler
+
+Lean #7:
+ec94abca...  RED-first finite physical-instantiation regression
+2a007650...  RowA1PhysicalGapInstance + form-gap/zero-shift compiler
+d13af94b...  Welds aggregate axiom-audit import
 ```
 
-Per user instruction, CI is not part of this tranche. No current-head Agda/kernel certification is claimed.
+Per user instruction, CI is not part of the Agda source tranche. No current-head Agda/kernel certification is claimed. The new Lean #7 physical-instantiation owner is likewise source-written at the current head; the retained imported operator tranche has its own earlier machine-check receipt, which must not be attributed to the new files.
 
 ## Update log — 2026-09-16
 
-- #970 remains the merged terminal B consumer; #967 remains the live producer.
+- #970 remains the merged terminal B consumer; #967 remains the live source producer.
 - R402/R403/R404/R405 remain paid compiler layers.
 - R406 retains the noncommutative product-difference formulation.
 - R407 pays all ordinary four-stage factor estimates.
 - R408 pays the changed-stage resolvent inequality and unchanged-stage zero inequalities, plus the Gate4/round72 norm/order seam.
 - R409 pays the entire one-marked-stage four-factor product inequality for any of the four possible changed stages.
 - The live P0 frontier has moved from analytic/factorwise inequality construction to **source identity and same-object attachment**: choose the actual CMP99 stage/equalities and weld the exact R409 product-difference to the selected R406 term.
-- The R76 `E^(2)/Pi` bridge remains donor-only unless this direct route demonstrates a need.
-- RH remains behind YM in the live Pareto order.
+- Operator-side repo archaeology confirms the finite gauge/wavefunction/L2 framework already exists; the genuine remaining work is physical instantiation, not another carrier framework.
+- `BalabanSelectedIBPWavefunctionSymmetryWeldRound205Exact` is a usable compiler donor, but explicitly does not pay the literal physical L2/Hamiltonian/boundary-cancellation leaves.
+- Lean #7 now has a typed Row-A1 physical-gap instance interface. Given a genuine physical `VacuumGapDatum` and `bMinus <= gap`, it produces the Row-A1 vacuum form gap and zero-shift bound; the literal inhabitant remains live.
+- The R76 `E^(2)/Pi` bridge remains donor-only unless the direct source route demonstrates a need.
+- RH remains behind the two active YM fronts in the live Pareto order.
