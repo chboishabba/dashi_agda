@@ -245,7 +245,7 @@ Person QID / exact paper-specific Dewey remain unresolved unless an authoritativ
 
 ## Exact-head snapshot
 
-At the end of the R386 source tranche the exact head is resolved from GitHub; do not infer it from internal round commit labels. Exact-head combined status must likewise be checked directly.
+The exact branch head and combined status are queried directly from GitHub; do not infer them from internal round commit labels.
 
 ## Validation boundary
 
