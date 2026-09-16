@@ -2,34 +2,46 @@ module DASHI.Reasoning.PlatoSymposiumProofSearchExperimentRegression where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (true; false)
+open import Data.Empty using (⊥)
 
+import DASHI.Core.QueryFactorisationSufficiency as Query
 import DASHI.Reasoning.PlatoSymposiumProofSearchExperimentExact as Bridge
 
 currentUtteranceDoesNotFixNextProbe :
-  Bridge.currentUtteranceDeterminesNextProbe
-    Bridge.canonicalPlatoProofSearchExperimentBoundary ≡ false
-currentUtteranceDoesNotFixNextProbe = refl
+  Query.FactorsThrough
+    Bridge.nextProbeQuestions
+    Bridge.currentUtteranceProjection
+    Bridge.nextUsefulProbeQuestion → ⊥
+currentUtteranceDoesNotFixNextProbe =
+  Bridge.currentUtteranceDoesNotDetermineNextProbe
 
 supportCountDoesNotFixInquiryState :
-  Bridge.supportCountDeterminesInquiryState
-    Bridge.canonicalPlatoProofSearchExperimentBoundary ≡ false
-supportCountDoesNotFixInquiryState = refl
+  Query.FactorsThrough
+    Bridge.inquiryStateQuestions
+    Bridge.supportCountProjection
+    Bridge.inquiryStateQuestion → ⊥
+supportCountDoesNotFixInquiryState =
+  Bridge.supportCountDoesNotDetermineInquiryState
 
 consensusDoesNotFixConsumerResolution :
-  Bridge.consensusDeterminesConsumerRelevantResolution
-    Bridge.canonicalPlatoProofSearchExperimentBoundary ≡ false
-consensusDoesNotFixConsumerResolution = refl
+  Query.FactorsThrough
+    Bridge.consumerResolutionQuestions
+    Bridge.consensusStatusProjection
+    Bridge.consumerResolutionQuestion → ⊥
+consensusDoesNotFixConsumerResolution =
+  Bridge.consensusDoesNotDetermineConsumerResolution
 
 questionSequenceIsNotFixedScript :
-  Bridge.nextQuestionMayDependOnObservedOutcome
-    Bridge.canonicalPlatoProofSearchExperimentBoundary ≡ true
+  Bridge.sequentialExperimentMayDependOnPriorOutcome
+    Bridge.canonicalPlatoSymposiumProofSearchBoundary ≡ true
 questionSequenceIsNotFixedScript = refl
 
 proofValidityStaysSeparateFromSearchPolicy :
-  Bridge.searchStrategyCreatesProofValidity
-    Bridge.canonicalPlatoProofSearchExperimentBoundary ≡ false
+  Bridge.proofValidityRemainsSeparatelyOwned
+    Bridge.canonicalPlatoSymposiumProofSearchBoundary ≡ true
 proofValidityStaysSeparateFromSearchPolicy = refl
 
-existingSearchOwnersAreReused :
-  Bridge.existingProofSearchOwnersReused ≡ true
-existingSearchOwnersAreReused = refl
+pluralDialogueIsNotProofSearchAlgorithm :
+  Bridge.symposiumDialogueIsProofSearchAlgorithm
+    Bridge.canonicalPlatoSymposiumProofSearchBoundary ≡ false
+pluralDialogueIsNotProofSearchAlgorithm = refl
