@@ -85,9 +85,10 @@ grep -q '^refinedSameObjectLifecycleResidualRegression :' "$ICT_REGRESSION"
 grep -q '^refinedHardwareCircularityResidualRegression :' "$ICT_REGRESSION"
 
 # Citation-resistant residuals route to evidence/authority producers instead of
-# being 'paid' by further bibliography. The domain adapter must reuse the
-# canonical RequirementProducerSchedulerExact rather than invent a planner.
+# being 'paid' by further bibliography. The domain adapter must reuse canonical
+# RequirementProducerSchedulerExact and admissibility/Pareto machinery.
 grep -q 'import DASHI.Core.RequirementProducerSchedulerExact as CoreScheduler' "$SCHEDULER"
+grep -q 'import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL' "$SCHEDULER"
 grep -q '^producerForAcquisitionLeaf :' "$SCHEDULER"
 grep -q '^requiredProducersForAcquisitionLeaf :' "$SCHEDULER"
 grep -q '^producerForRefinedLifecycle :' "$SCHEDULER"
@@ -95,6 +96,7 @@ grep -q '^digitalESDAcquisitionRequirementSystem :' "$SCHEDULER"
 grep -q '^lifecycleInventoryMissingReceipt :' "$SCHEDULER"
 grep -q '^lifecycleInventoryScheduledProducer :' "$SCHEDULER"
 grep -q '^producerIdentityStillDoesNotCloseRequirement :' "$SCHEDULER"
+grep -q '^canonicalProducerParetoEligibilityBoundary :' "$SCHEDULER"
 grep -q '^currentProducerFrontier :' "$SCHEDULER"
 grep -q '^externalCitationDoesNotPaySameObjectLCI :' "$SCHEDULER"
 grep -q '^priorStudyDoesNotPayFutureLongitudinalOutcome :' "$SCHEDULER"
@@ -114,6 +116,10 @@ grep -q '^canonicalSchedulerReuseRegression :' "$SCHEDULER_REGRESSION"
 grep -q '^lifecycleInventoryMissingRegression :' "$SCHEDULER_REGRESSION"
 grep -q '^canonicalScheduledLCIProducerRegression :' "$SCHEDULER_REGRESSION"
 grep -q '^canonicalSchedulerBoundaryRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^canonicalParetoEligibilityBoundaryRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^inadmissibleCannotWinByShortCodeRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^consumerInadequateCannotWinByShortCodeRegression :' "$SCHEDULER_REGRESSION"
+grep -q '^paretoAxesRemainApplicationDeclaredRegression :' "$SCHEDULER_REGRESSION"
 
 if command -v nix >/dev/null 2>&1 && [[ -x scripts/run_agda29_parallel_check.sh ]]; then
   scripts/run_agda29_parallel_check.sh "$SCHEDULER_REGRESSION"
