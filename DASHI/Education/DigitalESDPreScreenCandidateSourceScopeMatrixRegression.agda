@@ -7,11 +7,10 @@ open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDPreScreenCandidateSourceScopeMatrixExact as Matrix
 
-candidateCountRegression : Matrix.candidateSourceCount ≡ 15
+candidateCountRegression : Matrix.candidateSourceCount ≡ 16
 candidateCountRegression = refl
 
-allRowsRemainCandidateRegression :
-  Matrix.SourceScopeMatrixBoundary.allRowsCandidateOnly Matrix.canonicalSourceScopeMatrixBoundary ≡ true
+allRowsRemainCandidateRegression : Matrix.SourceScopeMatrixBoundary.allRowsCandidateOnly Matrix.canonicalSourceScopeMatrixBoundary ≡ true
 allRowsRemainCandidateRegression = refl
 
 matrixDoesNotCreateInclusionRegression : Matrix.PreScreenMatrixCreatesIncludedCorpus → ⊥
@@ -46,6 +45,9 @@ zagamiRemainsCandidateRegression = refl
 
 chughRemainsCandidateRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.chughSustainabilityParadoxCandidate ≡ true
 chughRemainsCandidateRegression = refl
+
+holstRemainsCandidateRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.holstSDG47MonitoringCandidate ≡ true
+holstRemainsCandidateRegression = refl
 
 midtermRetainsGlobalProgrammeScopeRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.unescoMidtermCandidate ≡ true
 midtermRetainsGlobalProgrammeScopeRegression = refl
