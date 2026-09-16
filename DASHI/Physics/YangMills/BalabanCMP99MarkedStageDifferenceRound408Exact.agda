@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP99MarkedStageDifferenceRound408Exact where
 
 ------------------------------------------------------------------------
@@ -162,6 +161,35 @@ changedStageDifferenceBelowMarkedMajorant dataSet =
         upper)
     (sym (markedStageMajorantIsResolventBudget dataSet))
     selectedDifferenceBound
+
+------------------------------------------------------------------------
+-- Literally unchanged stages carry exact zero marked cost.
+------------------------------------------------------------------------
+
+unchangedStageDifferenceBelowZero :
+  ∀ {Operator Bound}
+    (dataSet : CMP99MarkedR407StageDifference Operator Bound)
+    stage →
+  R407.stageOperator (R407.before (ordinaryPair dataSet)) stage
+    ≡ R407.stageOperator (R407.after (ordinaryPair dataSet)) stage →
+  Marked.LessEqual (telescopeAlgebra dataSet)
+    (Marked.operatorNorm (telescopeAlgebra dataSet)
+      (Marked.difference (telescopeAlgebra dataSet)
+        (R407.stageOperator (R407.before (ordinaryPair dataSet)) stage)
+        (R407.stageOperator (R407.after (ordinaryPair dataSet)) stage)))
+    (Marked.zeroBound (telescopeAlgebra dataSet))
+unchangedStageDifferenceBelowZero dataSet stage stageEqual =
+  subst
+    (λ afterStage →
+      Marked.LessEqual (telescopeAlgebra dataSet)
+        (Marked.operatorNorm (telescopeAlgebra dataSet)
+          (Marked.difference (telescopeAlgebra dataSet)
+            (R407.stageOperator (R407.before (ordinaryPair dataSet)) stage)
+            afterStage))
+        (Marked.zeroBound (telescopeAlgebra dataSet)))
+    (sym stageEqual)
+    (Marked.selfDifferenceNormBound (telescopeAlgebra dataSet)
+      (R407.stageOperator (R407.before (ordinaryPair dataSet)) stage))
 
 ------------------------------------------------------------------------
 -- Status / Pareto boundary.
