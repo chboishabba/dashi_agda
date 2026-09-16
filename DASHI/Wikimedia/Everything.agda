@@ -9,6 +9,7 @@ module DASHI.Wikimedia.Everything where
 
 import DASHI.Wikimedia.AristotleNativeModelSourceExact
 import DASHI.Wikimedia.IdentifierExact
+import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact
 import DASHI.Wikimedia.NativeStatementExact
 import DASHI.Wikimedia.SourceProvenanceExact
 import DASHI.Wikimedia.NativeReferenceSemanticsExact

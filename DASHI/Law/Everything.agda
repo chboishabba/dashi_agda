@@ -119,7 +119,6 @@ import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchBidiExact
 import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything
 import DASHI.Law.SensibLawParetoBoundSourceDemandExact
 import DASHI.Law.SensibLawParetoBoundProofDirectedCorpusSearchEverything
-
 -- Solomon Islands / Australia source-attribution and legal-characterisation lane.
 import DASHI.Law.LegalAuthorityCitationExact
 import DASHI.Law.SolomonIslandsForeignInterferenceAttributionExact
@@ -134,3 +133,5 @@ import DASHI.Law.SolomonIslandsDefeatMotionRepublicationIndependenceExact
 import DASHI.Law.SolomonIslandsWrongTypeIntersectionalAdmissibilityExact
 import DASHI.Law.SolomonIslandsWrongTypeLegalElementDerivationExact
 import DASHI.Law.SolomonIslandsAtomicPremiseRegistryExact
+import DASHI.Law.SensibLawWoogarooEvidenceDependencyMatrixExact
+import DASHI.Law.SensibLawWoogarooKoalaPopulationConnectivitySnowballExact
