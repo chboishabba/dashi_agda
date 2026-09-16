@@ -17,6 +17,10 @@ sameClassStrengthRegression :
   P.strength P.correlation32772 ≡ P.sameClassCrossRoleEcho
 sameClassStrengthRegression = refl
 
+fortyTwoDBridgeSourceRegression :
+  P.fortyTwoDRestrictionBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
+fortyTwoDBridgeSourceRegression = refl
+
 c6SpectrumSourceRegression :
   P.c6WeightTwoSpectrumBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 c6SpectrumSourceRegression = refl
