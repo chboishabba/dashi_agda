@@ -55,6 +55,7 @@ def test_42_class_eta_family_retains_native_14_and_42_levels():
     runtime = load_runtime()
 
     assert runtime.SEQUENCES["A058674"]["class_label"] == "42D"
+    assert runtime.SEQUENCES["A058674"]["positive_coefficients"] == {1: 1, 2: 3, 3: 3}
     assert "eta(q^14)" in runtime.SEQUENCES["A058674"]["formula"]
     assert "eta(q^42)" in runtime.SEQUENCES["A058674"]["formula"]
     assert runtime.SEQUENCES["A058676"]["class_label"] == "42b"
