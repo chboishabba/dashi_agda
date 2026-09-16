@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDPreScreenCandidateSourceScopeMatrixExact as Matrix
 
-candidateCountRegression : Matrix.candidateSourceCount ≡ 16
+candidateCountRegression : Matrix.candidateSourceCount ≡ 18
 candidateCountRegression = refl
 
 allRowsRemainCandidateRegression : Matrix.SourceScopeMatrixBoundary.allRowsCandidateOnly Matrix.canonicalSourceScopeMatrixBoundary ≡ true
@@ -21,6 +21,9 @@ matrixDoesNotCloseSearchRegression = Matrix.preScreenMatrixDoesNotCloseStructure
 
 l1410RemainsMethodOnlyRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.ituL1410Candidate ≡ true
 l1410RemainsMethodOnlyRegression = refl
+
+uneceRemainsRegionalEvaluationRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.uneceFifthESDEvaluationCandidate ≡ true
+uneceRemainsRegionalEvaluationRegression = refl
 
 ministerialRemainsGovernanceRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.unescoAICommonGoodCandidate ≡ true
 ministerialRemainsGovernanceRegression = refl
@@ -45,6 +48,9 @@ zagamiRemainsCandidateRegression = refl
 
 chughRemainsCandidateRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.chughSustainabilityParadoxCandidate ≡ true
 chughRemainsCandidateRegression = refl
+
+boehmeRemainsCandidateRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.boehmeDigitainabilityCandidate ≡ true
+boehmeRemainsCandidateRegression = refl
 
 holstRemainsCandidateRegression : Matrix.CandidateSourceScopeRow.candidateOnly Matrix.holstSDG47MonitoringCandidate ≡ true
 holstRemainsCandidateRegression = refl
