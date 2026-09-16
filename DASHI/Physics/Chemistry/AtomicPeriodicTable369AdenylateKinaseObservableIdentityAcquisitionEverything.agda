@@ -29,3 +29,16 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigure5Quali
 -- coordinates. Duan/Meagher DOIs are source-lineage metadata; their article QIDs
 -- remain unresolved and neither method citation imports an AdK result.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDProtocolAcquisitionExact
+
+-- Citation/related-source neighbourhood: predecessor and later AdK studies are
+-- retained with independent DOI/PMID/PMCID/OpenAlex/QID status and source roles.
+-- Citation or topic proximity does not import Li-Liu-Ji numeric cells, observable
+-- identity, mechanism or scientific authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCitationNeighbourhoodExact
+
+-- First high-yield later-source acquisition: Zheng-Cui 2018 pays its own ~50-us
+-- apo-AdK atomistic/Markov-state sampling, an open-NMP/closed-LID basin, multiple
+-- pathways/time scales, two-force-field robustness and no observed significant
+-- local unfolding.  These remain source-local computational observations and do
+-- not overwrite Li-Liu-Ji state labels, rates or FRET interpretation.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseZhengCui2018AcquisitionExact
