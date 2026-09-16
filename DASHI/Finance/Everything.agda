@@ -19,6 +19,8 @@ import DASHI.Finance.OGE278TReportingSemanticsExact
 import DASHI.Finance.TrumpPresident278TTechnologyBasketExact
 import DASHI.Finance.TrumpTradePointInTimeInformationExact
 import DASHI.Finance.TrumpTMTGTrustControlPrimaryExact
+import DASHI.Finance.TrumpPortfolioManagementAttributionExact
+import DASHI.Finance.TrumpTradeOversightAcquisitionExact
 import DASHI.Finance.TrumpFamilyExternalCounterpartyEvidenceExact
 import DASHI.Finance.TrumpFamilyExternalCounterpartyPrimaryExact
 import DASHI.Finance.TruthAPIExecutiveStatementExact
@@ -39,6 +41,7 @@ import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Validation
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Validation
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound4Validation
 import DASHI.Finance.TrumpFamilyTradeIndependentCorroborationValidation
+import DASHI.Finance.TrumpPortfolioManagementAttributionValidation
 import DASHI.Finance.TrumpFamilyTradeSourceQualityValidation
 
 -- Canonical trading-control semantics. Earlier BAN/action experiments remain
