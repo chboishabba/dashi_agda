@@ -1,0 +1,12 @@
+module DASHI.Core.PortableSemanticInterpretationValidation where
+
+import DASHI.Core.PortableSemanticInterpretationExact
+import DASHI.Core.PortableSemanticInterpretationRegression
+import DASHI.Core.PortableInteractiveViewExact
+import DASHI.Core.PortableInteractiveViewRegression
+import DASHI.Core.PortableLoopInterpretationExact
+import DASHI.Core.PortableLoopInterpretationRegression
+import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
+import DASHI.Core.PortableSemanticConsumerAdequacyRegression
+import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
+import DASHI.Core.PortableSemanticTranslationRealisationRegression
