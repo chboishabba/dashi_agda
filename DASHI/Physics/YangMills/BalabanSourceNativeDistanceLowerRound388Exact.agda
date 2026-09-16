@@ -23,8 +23,9 @@ module DASHI.Physics.YangMills.BalabanSourceNativeDistanceLowerRound388Exact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Nat.Base using (_≤_)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
+import Data.Nat.Base as Nat
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_)
+import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
@@ -38,7 +39,7 @@ record RationalPowerDistanceAntitone (ratio : ℚ) : Set₁ where
   field
     ratioNonnegative : 0ℚ ℚ.≤ ratio
     powerAntitone : ∀ {near far : Nat} →
-      near Data.Nat.Base.≤ far →
+      near Nat.≤ far →
       Power.rationalPower ratio far ℚ.≤ Power.rationalPower ratio near
 
 open RationalPowerDistanceAntitone public
@@ -59,18 +60,17 @@ record SourceNativeDistanceLowerData : Set₁ where
       response ℚ.≤ amplitude * Power.rationalPower ratio sourceDistance
 
     -- The only geometric information seen by the decaying consumer.
-    timeBelowSourceDistance : time Data.Nat.Base.≤ sourceDistance
+    timeBelowSourceDistance : time Nat.≤ sourceDistance
 
 open SourceNativeDistanceLowerData public
 
 responseBelowPhysicalTimeGeometric :
-  (authority : RationalPowerDistanceAntitone
-    (ratio _)) →
   (dataSet : SourceNativeDistanceLowerData) →
+  RationalPowerDistanceAntitone (ratio dataSet) →
   response dataSet
     ℚ.≤ amplitude dataSet * Power.rationalPower (ratio dataSet) (time dataSet)
-responseBelowPhysicalTimeGeometric authority dataSet =
-  ℚ.≤-trans
+responseBelowPhysicalTimeGeometric dataSet authority =
+  ℚP.≤-trans
     (responseBelowSourceDistance dataSet)
     (Norm.scaleNonnegative
       (amplitude dataSet)
