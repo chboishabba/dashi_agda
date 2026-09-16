@@ -5,41 +5,42 @@ open import Agda.Builtin.Bool using (true; false)
 
 import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeExact as Bridge
 
-rightOpinionIsNotCollapsedIntoIgnorance :
-  Bridge.rightOpinionEqualsIgnorance
-    Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ false
-rightOpinionIsNotCollapsedIntoIgnorance = refl
+jmdOwnershipRemainsExplicit :
+  Bridge.jmdOwnershipRetained
+    Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ true
+jmdOwnershipRemainsExplicit = refl
 
-pluralSpeechDoesNotGuaranteeReconciliation :
-  Bridge.dialogueGuaranteesReconciliation
+leanSourceDoesNotBecomeAgdaProof :
+  Bridge.leanTheoremsImportedAsAgdaProofs
     Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ false
-pluralSpeechDoesNotGuaranteeReconciliation = refl
+leanSourceDoesNotBecomeAgdaProof = refl
+
+rightOpinionKeepsNonBinaryRoom :
+  Bridge.rightOpinionRequiresNonBinaryEpistemicRoom
+    Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ true
+rightOpinionKeepsNonBinaryRoom = refl
+
+pluralSpeechMayRetainContradiction :
+  Bridge.contradictionMayRemainWithoutForcedConsensus
+    Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ true
+pluralSpeechMayRetainContradiction = refl
 
 complementarityDoesNotPayRelationalAdequacy :
-  Bridge.complementarityImpliesRelationalAdequacy
+  Bridge.aristophanicHalfDefinesRelationalAdequacy
     Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ false
 complementarityDoesNotPayRelationalAdequacy = refl
 
 surfaceDoesNotDetermineInteriorSignificance :
-  Bridge.surfaceAppearanceDeterminesInteriorSignificance
+  Bridge.alcibiadesExteriorDeterminesInterior
     Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ false
 surfaceDoesNotDetermineInteriorSignificance = refl
 
-sameAscentCarrierDoesNotMeanSameSemantics :
-  Bridge.sameAscentCarrierMeansSameSemantics
-    Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ false
-sameAscentCarrierDoesNotMeanSameSemantics = refl
+sameShapeRequiresSemanticBridge :
+  Bridge.sharedShapeRequiresSeparateSemanticBridge
+    Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ true
+sameShapeRequiresSemanticBridge = refl
 
-rulerRoleDoesNotDetermineServiceOrientation :
-  Bridge.roleAuthorityDeterminesServiceOrientation
+lackAloneDoesNotDefinePhilosophy :
+  Bridge.lackAloneDefinesPhilosophy
     Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ false
-rulerRoleDoesNotDetermineServiceOrientation = refl
-
-jmdSourceDoesNotOwnDashiNonfactorability :
-  Bridge.jmdLeanOwnsDashiFactorisationTheorems
-    Bridge.canonicalPlatoSymposiumPhilosophyBoundary ≡ false
-jmdSourceDoesNotOwnDashiNonfactorability = refl
-
-sourceAtlasRemainsParent :
-  Bridge.jmdSourceAtlasRetained ≡ true
-sourceAtlasRemainsParent = refl
+lackAloneDoesNotDefinePhilosophy = refl
