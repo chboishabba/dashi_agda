@@ -54,7 +54,7 @@ hajjHassanDigitalToolsReviewSource =
 andersenCompulsoryTechnologyESDSource : Attr.AttributedSource
 andersenCompulsoryTechnologyESDSource =
   Attr.mkDOISource
-    "Lars Bo Andersen; Aabo Jette Frydendahl; Sanne Lisborg; Jesper Juellund Jensen; Jakob Damgaard Laursen; Claes Weise Schiermer Morkeberg; Camilla Balslev Nielsen; Vibeke Schroder"
+    "Lars Bo Andersen; Aabo Jette Frydendahl; Sanne Lisborg; Jesper Juellund Jensen; Jakob Damgaard Laursen; Claes Weise Schiermer Mørkeberg; Camilla Balslev Nielsen; Vibeke Schrøder"
     "Technology education for sustainable development– a scoping review"
     "International Journal of Technology and Design Education 36, 1425-1443"
     "2026"
@@ -67,7 +67,7 @@ andersenCompulsoryTechnologyESDSource =
 petersComputingEducationReviewSource : Attr.AttributedSource
 petersComputingEducationReviewSource =
   Attr.mkDOISource
-    "Anne-Kathrin Peters; Rafael Capilla; Vlad Constantin Coroama; Rogardt Heldal; Patricia Lago; Ola Leifler; Ana Moreira; Joao Paulo Fernandes; Birgit Penzenstadler; Jari Porras; Colin C. Venters"
+    "Anne-Kathrin Peters; Rafael Capilla; Vlad Constantin Coroamă; Rogardt Heldal; Patricia Lago; Ola Leifler; Ana Moreira; João Paulo Fernandes; Birgit Penzenstadler; Jari Porras; Colin C. Venters"
     "Sustainability in Computing Education: A Systematic Literature Review"
     "ACM Transactions on Computing Education 24(1), Article 13"
     "2024"
@@ -80,7 +80,7 @@ petersComputingEducationReviewSource =
 radovanGenAIEducationEnvironmentSource : Attr.AttributedSource
 radovanGenAIEducationEnvironmentSource =
   Attr.mkDOISource
-    "Marko Radovan; Tadej Kosmerl; Danijela Makovec Radovan"
+    "Marko Radovan; Tadej Košmerl; Danijela Makovec Radovan"
     "Environmental Impacts of Generative AI in Education: A Systematic Review of Educational and Technical Evidence"
     "Sustainability 18(14), 7213"
     "2026"
