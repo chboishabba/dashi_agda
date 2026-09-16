@@ -7,6 +7,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Nat using (_+_; _*_; _∸_)
+open import Data.Nat.DivMod using (_/_)
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Raw
@@ -14,9 +15,9 @@ import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Raw
 ------------------------------------------------------------------------
 -- KERNEL-LEVEL D4 ACTION ON THE FIVE GLOBAL-INVERSION ORBITS
 --
--- One nine-state sheet is T^2.  Triadic.quotientNine identifies x with -x,
--- leaving five global-inversion orbits.  The square symmetries descend to this
--- quotient.  In particular the 180-degree rotation is simultaneous negation,
+-- One nine-state sheet is T^2. Triadic.quotientNine identifies x with -x,
+-- leaving five global-inversion orbits. The square symmetries descend to this
+-- quotient. In particular the 180-degree rotation is simultaneous negation,
 -- so it acts trivially after quotienting; the descended D4 action is therefore
 -- deliberately non-faithful.
 ------------------------------------------------------------------------
@@ -102,18 +103,31 @@ axisConjugatesQuarterTurnToInverse Triadic.equalSignOrbit = refl
 axisConjugatesQuarterTurnToInverse Triadic.oppositeSignOrbit = refl
 
 ------------------------------------------------------------------------
--- Permutation character: fixed quotient orbits by D4 element.
+-- Permutation character derived from the action itself.
 ------------------------------------------------------------------------
 
+sameOrbit : Triadic.NineOrbit → Triadic.NineOrbit → Bool
+sameOrbit Triadic.zeroOrbit Triadic.zeroOrbit = true
+sameOrbit Triadic.firstAxisOrbit Triadic.firstAxisOrbit = true
+sameOrbit Triadic.secondAxisOrbit Triadic.secondAxisOrbit = true
+sameOrbit Triadic.equalSignOrbit Triadic.equalSignOrbit = true
+sameOrbit Triadic.oppositeSignOrbit Triadic.oppositeSignOrbit = true
+sameOrbit _ _ = false
+
+indicator : Bool → Nat
+indicator true = 1
+indicator false = 0
+
+fixedIndicator : D4Element → Triadic.NineOrbit → Nat
+fixedIndicator g o = indicator (sameOrbit (act g o) o)
+
 fixedOrbitCount : D4Element → Nat
-fixedOrbitCount e = 5
-fixedOrbitCount r = 1
-fixedOrbitCount r2 = 5
-fixedOrbitCount r3 = 1
-fixedOrbitCount sAxis = 3
-fixedOrbitCount sAxisR2 = 3
-fixedOrbitCount sDiag = 3
-fixedOrbitCount sDiagR2 = 3
+fixedOrbitCount g =
+  fixedIndicator g Triadic.zeroOrbit
+  + fixedIndicator g Triadic.firstAxisOrbit
+  + fixedIndicator g Triadic.secondAxisOrbit
+  + fixedIndicator g Triadic.equalSignOrbit
+  + fixedIndicator g Triadic.oppositeSignOrbit
 
 infixr 5 _∷ₙ_
 _∷ₙ_ : Nat → List Nat → List Nat
@@ -132,28 +146,86 @@ quotientCharacterVector =
   ∷ₙ []ₙ
 
 ------------------------------------------------------------------------
--- D4 irreducible multiplicities and finite character reconstruction.
--- Class order used above:
---   e, r^2, {r,r^3}, axis reflections, diagonal reflections.
+-- Finite D4 character inner products.
+-- Class order and sizes:
+--   e, r^2, {r,r^3}, axis reflections, diagonal reflections
+--   1,   1,      2,                 2,                    2.
 --
--- For 3 A1 + B1 + B2 the values are
---   5, 5, 3-1-1, 3+1-1, 3-1+1 = 5,5,1,3,3.
+-- Rather than postulating the multiplicities, compute the signed numerator of
+-- <chi_quot, chi_irrep> and divide by |D4|=8. Natural subtraction is safe here
+-- because every displayed positive contribution dominates its negative part.
 ------------------------------------------------------------------------
 
+characterE : Nat
+characterE = fixedOrbitCount e
+
+characterR2 : Nat
+characterR2 = fixedOrbitCount r2
+
+characterR : Nat
+characterR = fixedOrbitCount r
+
+characterAxis : Nat
+characterAxis = fixedOrbitCount sAxis
+
+characterDiag : Nat
+characterDiag = fixedOrbitCount sDiag
+
+quotientA1Numerator : Nat
+quotientA1Numerator =
+  characterE + characterR2 + 2 * characterR + 2 * characterAxis + 2 * characterDiag
+
+quotientA2Numerator : Nat
+quotientA2Numerator =
+  (characterE + characterR2 + 2 * characterR)
+  ∸ (2 * characterAxis + 2 * characterDiag)
+
+quotientB1Numerator : Nat
+quotientB1Numerator =
+  (characterE + characterR2 + 2 * characterAxis)
+  ∸ (2 * characterR + 2 * characterDiag)
+
+quotientB2Numerator : Nat
+quotientB2Numerator =
+  (characterE + characterR2 + 2 * characterDiag)
+  ∸ (2 * characterR + 2 * characterAxis)
+
+quotientENumerator : Nat
+quotientENumerator = (2 * characterE) ∸ (2 * characterR2)
+
+quotientA1NumeratorIsTwentyFour : quotientA1Numerator ≡ 24
+quotientA1NumeratorIsTwentyFour = refl
+
+quotientA2NumeratorIsZero : quotientA2Numerator ≡ 0
+quotientA2NumeratorIsZero = refl
+
+quotientB1NumeratorIsEight : quotientB1Numerator ≡ 8
+quotientB1NumeratorIsEight = refl
+
+quotientB2NumeratorIsEight : quotientB2Numerator ≡ 8
+quotientB2NumeratorIsEight = refl
+
+quotientENumeratorIsZero : quotientENumerator ≡ 0
+quotientENumeratorIsZero = refl
+
 quotientA1Multiplicity : Nat
-quotientA1Multiplicity = 3
+quotientA1Multiplicity = quotientA1Numerator / 8
 
 quotientA2Multiplicity : Nat
-quotientA2Multiplicity = 0
+quotientA2Multiplicity = quotientA2Numerator / 8
 
 quotientB1Multiplicity : Nat
-quotientB1Multiplicity = 1
+quotientB1Multiplicity = quotientB1Numerator / 8
 
 quotientB2Multiplicity : Nat
-quotientB2Multiplicity = 1
+quotientB2Multiplicity = quotientB2Numerator / 8
 
 quotientEMultiplicity : Nat
-quotientEMultiplicity = 0
+quotientEMultiplicity = quotientENumerator / 8
+
+------------------------------------------------------------------------
+-- Character reconstruction from the derived multiplicities.
+------------------------------------------------------------------------
 
 reconstructedIdentity : Nat
 reconstructedIdentity =
@@ -196,9 +268,8 @@ reconstructedCharacterIsQuotientCharacter :
 reconstructedCharacterIsQuotientCharacter = refl
 
 ------------------------------------------------------------------------
--- Raw-nine comparison.  Existing source multiplicities are
--- 3 A1 + B1 + B2 + 2 E.  Removing the two E copies changes only e/r^2;
--- on the quotient r^2 is simultaneous negation and hence acts trivially.
+-- Raw-nine comparison. Existing source multiplicities are
+-- 3 A1 + B1 + B2 + 2 E. Removing the two E copies changes e/r^2 only.
 ------------------------------------------------------------------------
 
 rawA1 : Nat
@@ -273,8 +344,8 @@ record FiveOrbitD4KernelCharacterBoundary : Set where
   field
     quotientActionDefined : Bool
     d4GeneratorRelationsPaid : Bool
-    fixedOrbitCharacterKernelWritten : Bool
-    characterReconstructionKernelWritten : Bool
+    fixedOrbitCharacterComputedFromAction : Bool
+    characterInnerProductsComputed : Bool
     quotientThreeA1B1B2Written : Bool
     rawNineTwoERemovalWritten : Bool
     fiveOrbitsAreFiveIrrepsOneToOne : Bool
