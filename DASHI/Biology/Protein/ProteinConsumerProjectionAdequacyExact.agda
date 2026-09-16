@@ -14,17 +14,20 @@ import DASHI.Biology.Protein.AdenylateKinaseSituatedProteinWitnessExact as AdK
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalExact as AdKCore
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseRateObserverAdequacyExact as Rate
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAttributionEnvelopeExact as AdKSource
+import DASHI.Biology.Protein.AlliumThiolSituatedProteinWitnessExact as Allium
+import DASHI.Biology.Protein.AlliumThiolSourceAttributionEnvelopeExact as AlliumSource
 
 ------------------------------------------------------------------------
 -- PROTEIN CONSUMER-PROJECTION ADEQUACY PORTFOLIO
 --
--- This owner composes three already-paid information-loss witnesses.  It does
--- not introduce a universal protein ontology and it does not claim that one
--- repaired observation is sufficient for every protein consumer.
+-- This owner composes already-paid information-loss witnesses across three
+-- independent protein-system lanes.  It does not introduce a universal protein
+-- ontology and it does not claim one repair is sufficient for every consumer.
 --
---   TRPA1 thermal query : protein identity is too coarse; retain residue state.
---   AdK conformation    : sequence is too coarse; retain environment/context.
---   AdK transition rate : route topology is too coarse; retain rate coordinate.
+--   TRPA1 thermal query  : protein identity too coarse; retain residue state.
+--   AdK conformation     : sequence too coarse; retain environment/context.
+--   AdK transition rate  : route topology too coarse; retain rate coordinate.
+--   Allium thiol query   : cysteine presence too coarse; retain accessibility.
 --
 -- The empirical/source propositions remain owned by their original sources.
 -- The portfolio and the query-indexed comparison are DASHI synthesis.
@@ -34,6 +37,7 @@ data ProteinConsumer : Set where
   thermalResponseConsumer : ProteinConsumer
   resolvedConformationConsumer : ProteinConsumer
   transitionRateConsumer : ProteinConsumer
+  thiolModificationConsumer : ProteinConsumer
 
 data ProteinCoordinateClass : Set where
   proteinIdentityCoordinate : ProteinCoordinateClass
@@ -45,6 +49,7 @@ data ProteinCoordinateClass : Set where
   observableDefinitionCoordinate : ProteinCoordinateClass
   routeTopologyCoordinate : ProteinCoordinateClass
   rateCoordinate : ProteinCoordinateClass
+  siteAccessibilityCoordinate : ProteinCoordinateClass
   sourceProvenanceCoordinate : ProteinCoordinateClass
 
 record ConsumerProjectionProfile : Set where
@@ -85,8 +90,17 @@ rateProjectionProfile = consumer-projection-profile
   "Li, Liu & Ji 2015 pays the source-bounded Kramers-rate coordinate/methodology and calibration roles; DOI 10.1016/j.bpj.2015.06.059, PMID 26244746, PMCID PMC4572606; article QID unresolved"
   "DASHI query-adequacy collision and enriched-observer repair"
 
+thiolModificationProjectionProfile : ConsumerProjectionProfile
+thiolModificationProjectionProfile = consumer-projection-profile
+  thiolModificationConsumer
+  "cysteine presence"
+  siteAccessibilityCoordinate
+  "cysteine presence + accessibility/local thiol context"
+  "Rabinkov 1998 plus Borlinghaus 2014/2021 retain the source-bounded allicin/thiol-protein accessibility premise; DOI/PMID/PMCID retained, article QIDs unresolved unless verified"
+  "DASHI finite collision and query-indexed accessibility repair"
+
 ------------------------------------------------------------------------
--- The three theorem-bearing defects are inherited, not recreated.
+-- The theorem-bearing defects are inherited, not recreated.
 ------------------------------------------------------------------------
 
 thermalIdentityNotAdequate :
@@ -113,6 +127,15 @@ transitionRateTopologyNotAdequate :
   ⊥
 transitionRateTopologyNotAdequate = Rate.topologyTransitionRateNotAdequate
 
+thiolCysteinePresenceNotAdequate :
+  Query.AdequateFor
+    Allium.cysteinePresenceProjection
+    Allium.modificationSemantics
+    Allium.allicinModificationQuery →
+  ⊥
+thiolCysteinePresenceNotAdequate =
+  Allium.cysteinePresenceNotAdequateForModificationQuery
+
 ------------------------------------------------------------------------
 -- Constructive local repairs remain consumer-specific.
 ------------------------------------------------------------------------
@@ -136,6 +159,13 @@ transitionRateCoordinateRepair :
     Rate.transitionRateQuery
 transitionRateCoordinateRepair = Rate.enrichedTransitionRateAdequate
 
+thiolAccessibilityRepair :
+  Query.AdequateFor
+    Allium.accessibilityAwareProjection
+    Allium.modificationSemantics
+    Allium.allicinModificationQuery
+thiolAccessibilityRepair = Allium.accessibilityAwareRepair
+
 ------------------------------------------------------------------------
 -- Attribution/source-role donors.
 ------------------------------------------------------------------------
@@ -143,10 +173,11 @@ transitionRateCoordinateRepair = Rate.enrichedTransitionRateAdequate
 situatedProteinBoundary = Situated.canonicalProteinSituatedHyperfabricBoundary
 trpa1AttributionBoundary = TRPA1Source.canonicalTRPA1SourceAttributionBoundary
 adkAttributionSource = AdKSource.liLiuJiSource
+alliumAttributionBoundary = AlliumSource.canonicalAlliumThiolSourceAttributionBoundary
 
 attributionRule : String
 attributionRule =
-  "Feng/TRPA1, the 4AKE/1AKE structural sources, and Li-Liu-Ji/AdK retain ownership only of their acquired domain propositions. DOI/PMID/PMCID/QID/PDB/UniProt identify publications or objects and retain provenance; they do not create a biological proposition. The shared consumer-projection portfolio, FactorsThrough defects, and cross-domain comparison are DASHI synthesis. A repair paid for one consumer or protein lane cannot be transferred to another without a separate witness."
+  "Feng/TRPA1, the 4AKE/1AKE structural sources, Li-Liu-Ji/AdK, and the Allium/allicin thiol literature retain ownership only of their acquired domain propositions. DOI/PMID/PMCID/QID/PDB/UniProt identify publications or objects and retain provenance; they do not create a biological proposition. The shared consumer-projection portfolio, FactorsThrough defects, and cross-domain comparison are DASHI synthesis. A repair paid for one consumer or protein lane cannot be transferred to another without a separate witness."
 
 ------------------------------------------------------------------------
 -- WrongType / cross-domain firewalls.
@@ -155,6 +186,7 @@ attributionRule =
 data ThermalResidueRepairCreatesAdKRate : Set where
 data EnvironmentRepairCreatesTRPA1ThermalLaw : Set where
 data RateCoordinateCreatesConformation : Set where
+data AccessibilityRepairCreatesOtherProteinMechanism : Set where
 data CrossDomainAttributionTransfers : Set where
 data ExternalIdentityCreatesBiologicalAuthority : Set where
 data OneRepairSufficesForEveryProteinConsumer : Set where
@@ -167,6 +199,10 @@ environmentRepairDoesNotCreateTrpa1ThermalLaw ()
 
 rateCoordinateDoesNotCreateConformation : RateCoordinateCreatesConformation → ⊥
 rateCoordinateDoesNotCreateConformation ()
+
+accessibilityRepairDoesNotCreateOtherProteinMechanism :
+  AccessibilityRepairCreatesOtherProteinMechanism → ⊥
+accessibilityRepairDoesNotCreateOtherProteinMechanism ()
 
 crossDomainAttributionDoesNotTransfer : CrossDomainAttributionTransfers → ⊥
 crossDomainAttributionDoesNotTransfer ()
@@ -187,10 +223,13 @@ record ProteinConsumerProjectionBoundary : Set where
     thermalIdentityProjectionInadequate : Bool
     sequenceProjectionInadequateForConformation : Bool
     topologyProjectionInadequateForRate : Bool
+    cysteinePresenceProjectionInadequateForModification : Bool
     residueAwareThermalRepairRetained : Bool
     environmentAwareConformationRepairRetained : Bool
     rateCoordinateRepairRetained : Bool
+    accessibilityAwareModificationRepairRetained : Bool
     queryRelativeProjectionArchitectureReused : Bool
+    thirdIndependentProteinSystemRetained : Bool
     sourceRolesRemainDomainLocal : Bool
     crossDomainAttributionTransfer : Bool
     externalIdentityCreatesBiologicalAuthority : Bool
@@ -199,7 +238,7 @@ open ProteinConsumerProjectionBoundary public
 
 canonicalProteinConsumerProjectionBoundary : ProteinConsumerProjectionBoundary
 canonicalProteinConsumerProjectionBoundary = protein-consumer-projection-boundary
+  true true true true
+  true true true true
   true true true
-  true true true
-  true true
   false false false
