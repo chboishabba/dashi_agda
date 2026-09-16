@@ -219,4 +219,4 @@ slrRuntimeReceiptObserved : Bool
 slrRuntimeReceiptObserved = false
 
 agdaKernelReceiptObserved : Bool
-agdaKernelReceiptObserved = false
+agdaKernelReceiptObserved = true
