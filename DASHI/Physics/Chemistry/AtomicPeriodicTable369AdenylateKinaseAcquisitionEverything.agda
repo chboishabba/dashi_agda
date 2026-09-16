@@ -131,3 +131,11 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationP
 -- Hummer 2005 supply the cited diffusion-inference method lineage. Method-source
 -- DOI/PMID/QID metadata cannot create AdK numeric cells or experimental kinetics.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseKramersMethodAttributionAcquisitionExact
+
+-- Proposition-indexed live acquisition frontier: reuses the payment ledger and
+-- recent Monster/repository acquisition discipline.  Closed Figure-5 energy/rate
+-- payments stay closed; the active frontier is named-state intermediate theta1,
+-- theta2 and dLN.  Region evidence may partially pay constraints but cannot fill
+-- a named numeric cell.  Access/search failure is a typed gap, not value absence,
+-- and DOI/QID/PDB/UniProt remain provenance rather than universal numeric premises.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAcquisitionFrontierExact
