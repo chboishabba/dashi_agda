@@ -1,0 +1,41 @@
+module DASHI.Culture.CohnInstitutionalEpistemicConsequenceRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Culture.CohnInstitutionalEpistemicConsequenceCrossPollinationExact as Bridge
+import DASHI.Law.SensibLawEpistemicConsequenceBoundaryExact as Consequence
+
+consequenceProfileCannotRecoverAdequacy :
+  INF.FactorsThrough Bridge.consequenceProfile Bridge.evidenceAdequacySurface → ⊥
+consequenceProfileCannotRecoverAdequacy =
+  Bridge.consequenceCannotDetermineEvidenceAdequacy
+
+adequacyCannotRecoverConsequenceProfile :
+  INF.FactorsThrough Bridge.evidenceAdequacySurface Bridge.consequenceProfile → ⊥
+adequacyCannotRecoverConsequenceProfile =
+  Bridge.evidenceAdequacyCannotDetermineConsequenceProfile
+
+highConsequenceNotAutomaticInferenceFalsity :
+  Consequence.highConsequenceAutomaticallyUnderlyingInferenceFalse
+    Bridge.parentEpistemicConsequenceBoundary ≡ false
+highConsequenceNotAutomaticInferenceFalsity =
+  Bridge.highConsequenceDoesNotProveInferenceFalse
+
+highUncertaintyNotAutomaticIllegality :
+  Consequence.highUncertaintyAutomaticallyEstablishesIllegality
+    Bridge.parentEpistemicConsequenceBoundary ≡ false
+highUncertaintyNotAutomaticIllegality =
+  Bridge.highUncertaintyDoesNotAutomaticallyEstablishIllegality
+
+legalAvailabilityNotUniversalAdequacy :
+  Consequence.legalAvailabilityAutomaticallyAdequateForEveryConsumer
+    Bridge.parentEpistemicConsequenceBoundary ≡ false
+legalAvailabilityNotUniversalAdequacy =
+  Bridge.legalAvailabilityDoesNotCreateUniversalConsumerAdequacy
+
+severityAndReversibilityStayDistinct :
+  Consequence.severityAndReversibilityAreSeparateCoordinates
+    Bridge.parentEpistemicConsequenceBoundary ≡ true
+severityAndReversibilityStayDistinct =
+  Bridge.severityAndReversibilityRemainSeparate
