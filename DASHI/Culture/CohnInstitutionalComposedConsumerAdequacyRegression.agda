@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Culture.CohnInstitutionalComposedConsumerAdequacyExact as Composed
+import DASHI.Culture.CohnInstitutionalLeastCoordinateRepairRegression
 
 ------------------------------------------------------------------------
 -- Regression contract for stagewise / composed consumer adequacy.
