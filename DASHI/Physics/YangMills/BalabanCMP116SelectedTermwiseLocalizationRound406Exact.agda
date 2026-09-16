@@ -59,17 +59,16 @@ record SelectedCMP116TermwiseLocalization
     selectedT5RGDensity : Set
     selectedT5RGDensityIsBase : selectedT5RGDensity ≡ R318.SourceDirection base
 
-    -- Actual observable-indexed insertions on the canonical R403 carrier.
-    leftObservable rightObservable : TestObservable
+    -- Actual observable-indexed insertions on the existing R318 carrier.
+    -- For the canonical R403 constructor this carrier is definitionally
+    -- `TestObservable`; keeping the field at the carrier level also lets the
+    -- owner remain generic over the already-established R318 interface.
+    leftObservable rightObservable : R318.SourceDirection base
     leftJ rightJ : R318.SourceDirection base
     leftJIsObservableIndexed :
-      leftJ ≡
-        Cumulant.sourceDirectionOf
-          (R318.meaning base) leftObservable
+      leftJ ≡ Cumulant.sourceDirectionOf (R318.meaning base) leftObservable
     rightJIsObservableIndexed :
-      rightJ ≡
-        Cumulant.sourceDirectionOf
-          (R318.meaning base) rightObservable
+      rightJ ≡ Cumulant.sourceDirectionOf (R318.meaning base) rightObservable
 
     -- The literal CMP116 decoupling boundary is retained as an input
     -- coordinate.  Its admissibility is not inferred from a source label.
