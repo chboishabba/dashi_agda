@@ -15,15 +15,17 @@ institutional adaptation contribute to building capacity for sustainable
 development?
 ```
 
-The proposed output was a conceptual framework / set of transferable principles grounded in the team's existing research, with independent sustainability expertise and literature brought in rather than treating the digital-education corpus as sufficient sustainability authority.
+The intended output was a conceptual framework / set of transferable principles grounded in the team's existing digital-education research, then challenged and constrained by independent sustainability expertise and literature rather than treating the digital-education corpus as sufficient sustainability authority.
 
-The same conversation also introduced a reciprocal constraint: digital systems used for ESD are themselves environmental, social, economic, epistemic, pedagogical and infrastructural objects. Hardware replacement, resource use, open source, duplication, externalities, younger learner perspectives and long-horizon option preservation therefore belong inside the problem rather than outside it.
+The same conversation introduced a reciprocal constraint: digital systems used for ESD are themselves environmental, social, economic, epistemic, pedagogical and infrastructural objects. Hardware replacement, resource use, open source, duplication, externalities, younger learner perspectives and long-horizon option preservation therefore belong inside the problem rather than outside it.
+
+The originating conversation also explicitly contemplated bringing a sustainability expert/collaborator into the paper. That is retained here as a **human challenge/collaboration goal**, not as evidence payment. Expert participation cannot substitute for structured search, source evidence, participant authority or deployment measurement.
 
 This internal conversation is retained as **design-intent provenance only**. It is not peer-reviewed evidence and cannot pay a scholarly claim.
 
 ## 2. Current paper centre
 
-The paper is now organised around:
+The paper is organised around:
 
 ```text
 Corpus A: mature digital-education research
@@ -37,20 +39,26 @@ Corpus B: independent sustainability/ESD constraints and evidence
 candidate transformative digital-ESD framework
         ↓
 searched + screened corpus challenge and revision
+        ↓
+human sustainability challenge / co-author review
+        ↓
+final evidence-governed synthesis
 ```
 
-This replaces the weaker framing in which the principal contribution was merely a reciprocal or twin transformation between digitality and sustainability.
+The seven-principle translational framework remains the paper's centre. Externality incidence is a cross-cutting audit/extraction layer, not an eighth principle and not a replacement for the manuscript's main contribution.
+
+This framing is narrower and stronger than claiming novelty for a generic digital/sustainability or twin-transformation connection.
 
 ## 3. Prior-art contraction
 
-Two close antecedents are explicitly retained:
+Two close antecedents remain explicit:
 
 - **Chugh (2026)** pays the sustainability-paradox antecedent: digital education may expand educational/social opportunity while also creating environmental and social costs, motivating lifecycle/procurement/circularity responses.
 - **Böhme (2026)** pays the coupled/twin-transformation antecedent: sustainability/ESD and digitality can be conceptualised as mutually dependent educational transformations.
 
 Therefore the paper does **not** claim novelty for either bare proposition.
 
-The candidate contribution is narrower: an evidence-governed architecture for translating a source-attributed digital-education corpus into candidate transformative principles while retaining enactment conditions, participant authority, sustainability constraints, same-object/context distinctions and non-skippable search/extraction lineage.
+The candidate contribution is an evidence-governed architecture for translating a source-attributed digital-education corpus into candidate transformative principles while retaining enactment conditions, participant authority, sustainability constraints, externality incidence, same-object/context distinctions and non-skippable search/extraction lineage.
 
 Global publication novelty remains unpaid until the declared search and screening are complete.
 
@@ -119,7 +127,7 @@ No B-side sustainability source is retroactively promoted into an Alice-source f
 
 ## 8. Externality incidence audit
 
-`DigitalESDExternalityIncidenceAuditExact` now makes **who bears the externalities?** an explicit distributional audit rather than a synonym for total impact.
+`DigitalESDExternalityIncidenceAuditExact` makes **who bears the externalities?** an explicit distributional audit rather than a synonym for total impact.
 
 Nine questions are retained separately:
 
@@ -147,7 +155,7 @@ intermediate margin != end-user benefit
 capacity planning != permanent chokepoint
 ```
 
-TSMC/HBM manufacturing, petrochemical lifecycle, Iran/Trump-energy and socio-technical-power owners are used only as bounded structural calibration. They do not create a digital-education empirical result, a deployment measurement or a political conclusion.
+TSMC/HBM manufacturing, petrochemical lifecycle, Iran/Trump-energy and socio-technical-power owners remain bounded structural calibration only. They do not create a digital-education empirical result, a deployment measurement or a political conclusion.
 
 The practical digital-ESD distinction is:
 
@@ -155,23 +163,54 @@ The practical digital-ESD distinction is:
 impact magnitude != impact incidence
 ```
 
-A correct total footprint can therefore remain distributionally inadequate if it erases who supplied inputs, who captured benefit, who bore burdens, who controlled the decision, who lacked exit, or where/when impacts were displaced.
+A correct total footprint can remain distributionally inadequate if it erases who supplied inputs, who captured benefit, who bore burdens, who controlled the decision, who lacked exit, or where/when impacts were displaced.
 
-## 9. Candidate epistemic-incidence refinement
+## 9. Epistemic-incidence stop rule
 
-The open #981 Longino/Dotson/Medina acquisition suggests a possible future refinement inside `whoHasVoice`:
+The #981 Longino/Dotson/Medina/Tuana/Pohlhaus/Anderson lane supplies source-bounded candidate residual families and a mature generic repair grammar. It does **not** justify adding dimensions to digital ESD merely because a concept is available.
+
+The possible future refinement remains:
 
 ```text
 voice present != testimony uptake != interpretive-resource adequacy
 ```
 
-This is **not promoted** into a tenth incidence coordinate. The current student-voice owner already distinguishes feedback, survey capture and researcher interpretation from constitutive agency, but it does not yet prove the finer collision where a voice surface is present while testimony uptake or shared interpretive resources differ.
+but this is **not promoted** into a tenth incidence coordinate unless a concrete digital-ESD consumer collision demonstrates that `whoHasVoice` loses a decision-relevant distinction.
 
-Following least-coordinate discipline, Longino/Dotson/Medina remain candidate coordinate families until an actual digital-ESD consumer collision demonstrates that the existing nine-coordinate audit is insufficient.
+The stop rule is:
 
-## 10. Transformation ladder
+```text
+source suggests candidate coordinate
+!= coordinate required
+```
 
-The paper currently requires the following states to remain distinct:
+and:
+
+```text
+structural analogue
+!= source-specific payment
+```
+
+## 10. Proof-search reuse boundary
+
+The #981 audit establishes that the repository already owns the generic residual-search machinery required for collision-driven refinement:
+
+```text
+live residuals
+→ candidate probes
+→ admission
+→ discrimination
+→ least/Pareto eligible choice
+→ targeted reopening
+```
+
+Therefore digital ESD should **not** add a new generic residual-portfolio, global set-cover or search calculus.
+
+Digital ESD may instantiate the existing machinery only when the admitted review corpus or a concrete manuscript consumer exposes a real collision. The stronger arbitrary-family globally minimum residual-subset theorem remains YAGNI unless a literal consumer requires it.
+
+## 11. Transformation ladder
+
+The paper requires the following states to remain distinct:
 
 ```text
 technology presence
@@ -185,7 +224,7 @@ technology presence
 
 UNESCO, UNECE, OECD, Holst and Martínez García et al. currently support different parts of this distinction while retaining their respective populations and source roles.
 
-## 11. Candidate-principle derivation method
+## 12. Candidate-principle derivation method
 
 Six stages are source-written:
 
@@ -210,7 +249,28 @@ pre-search candidate framework != final review result
 
 and final principle promotion before search closure remains blocked.
 
-## 12. Paper artifacts
+## 13. Human sustainability challenge lane
+
+The originating research brief explicitly envisaged independent sustainability expertise being brought alongside the digital-education team. The operational role should be bounded as follows:
+
+- challenge the seven candidate principles for sustainability blind spots;
+- challenge the constraint and externality-incidence vocabulary;
+- identify missing sustainability terminology, disciplines and likely search concepts;
+- interrogate lifecycle, social, economic and intergenerational assumptions;
+- review whether Results/Discussion overstate what the admitted corpus supports; and
+- contribute substantive co-authorship only through actual intellectual contribution.
+
+This role does **not**:
+
+- close database execution;
+- turn expert opinion into empirical evidence;
+- create same-object deployment measurements;
+- create participant authority for affected populations; or
+- replace source-attributed literature support.
+
+No named sustainability collaborator or completed expert-challenge receipt is claimed in the current repository state.
+
+## 14. Paper artifacts
 
 Current principal artifacts:
 
@@ -220,18 +280,21 @@ Current principal artifacts:
 - `docs/digital-esd-pre-screen-source-scope-matrix.md` — 19 candidate source-role/scope rows.
 - `docs/digital-esd-search-protocol-v1.md` — frozen platform-neutral search protocol.
 
-## 13. Formal owners
+## 15. Formal owners
 
-Key new owners in the principle/externality tranche:
+Key current owners in the principle/externality tranche:
 
 - `DigitalESDTransferablePedagogicalPrinciplesExact.agda`
 - `DigitalESDExternalityIncidenceAuditExact.agda`
 - `DigitalESDTransformativePrincipleMatrixExact.agda`
 - `DigitalESDTransferablePrincipleDerivationMethodExact.agda`
+- `DigitalESDManuscriptMethodologyExact.agda`
+- `DigitalESDDatabaseSearchProtocolExact.agda`
+- `DigitalESDManuscriptDependencyPaymentAdapterExact.agda`
 
 The manuscript methodology pins both the canonical principle-derivation boundary and the canonical incidence boundary directly.
 
-## 14. Review/search status
+## 16. Review/search status
 
 Paid/source-written at design level:
 
@@ -249,44 +312,66 @@ Paid/source-written at design level:
 Still operationally unpaid:
 
 - exact platform translations for Scopus, Web of Science, ERIC, ACM DL and IEEE Xplore;
-- database executions and exports;
-- deduplication;
+- database executions and retained exports/counts;
+- cross-database deduplication;
 - eligibility screening/exclusion reasons;
 - structured extraction of the included corpus;
 - challenge/revision of the seven principles against that corpus;
 - empirical allocation of externality incidence for any named deployment;
+- completed human sustainability challenge/co-author review;
 - corpus-dependent final findings; and
 - final global novelty positioning.
 
-Another review's Scopus/WoS execution does not pay this review's execution.
+Another review's database execution, a source citation, an expert opinion or an open-web discovery does not pay this review's execution.
 
-## 15. Repository integration status
+## 17. Roadmap recut: P0 / P1 / P2
 
-The feature branch currently has substantial divergence from `master` because the repository has advanced rapidly in unrelated lanes. Current inspection shows no newer domain-specific rewrite of the two canonical Alice parents used by the new principles (`EducationCorpusSourceRegistry` and `CrossPaperDialecticalDevelopment`), and `master` has not acquired a competing newer digital-ESD manuscript-method owner.
+### P0 — operational review completion
 
-Therefore:
+These are now the binding paper bottlenecks.
+
+1. **Reconcile the digital-ESD branch with current `master` before another large formal tranche.** The branch is currently 92 commits ahead and 1242 behind `master`; #981 itself is current at 26 ahead / 0 behind. Large master drift does not falsify the paper architecture, but further implementation on the stale branch compounds integration risk.
+2. **Translate the six frozen query families into exact database-specific syntax** for Scopus, Web of Science, ERIC, ACM Digital Library and IEEE Xplore, retaining platform/interface, fields, syntax and filters verbatim.
+3. **Run a human sustainability challenge on the frozen vocabulary and candidate framework before/alongside search execution.** This is a quality-control input, not source payment; it may suggest query terms or missing constraint families but cannot close them by opinion.
+4. **Execute all five declared searches and retain exports/counts/query receipts.** No substitution by open-web, Elicit, another review or reconstructed searches.
+5. **Deduplicate, screen and structurally extract the admitted corpus** using the 19-coordinate schema, including externality incidence and explicit source role/context/time/limitations.
+
+### P1 — corpus challenge and manuscript completion
+
+6. **Challenge the seven principles against the admitted corpus:** support, narrow, split, merge, defeat or extend.
+7. **Challenge the nine-coordinate incidence audit against admitted sources.** If a literal consumer collision shows `whoHasVoice` is too coarse, instantiate source-derived candidate residuals through existing Proof Search machinery; otherwise retain nine coordinates.
+8. **Rewrite Results and Discussion from the admitted corpus**, not from the pre-search matrix.
+9. **Re-run contribution/novelty positioning after corpus closure.** Chugh/Böhme remain close antecedents; novelty cannot be fixed in advance of the completed search.
+10. **Run sustainability-expert/co-author challenge on the near-final synthesis**, recording intellectual changes without promoting expertise into evidence.
+
+### P2 — only if a concrete residual demands it
+
+11. Acquire further sustainability/philosophy/epistemic sources only when they pay a declared principle, incidence, transformation or interpretation gap.
+12. Exercise #981's residual-diagnosis / least-coordinate machinery only against a concrete digital-ESD collision.
+13. Do **not** build a new generic proof-search portfolio, global residual set-cover theorem or generic externality calculus unless an actual consumer requires it.
+14. Do **not** add a tenth epistemic-incidence coordinate from conceptual adjacency alone.
+
+The practical stopping rule is:
 
 ```text
-large master commit drift != evidence that the paper architecture is stale
+more formal machinery is dominated
+until search execution / corpus admission / framework challenge creates a new unpaid consumer
 ```
 
-but the branch still carries **integration/rebase debt** before eventual merge. Reconciliation with current `master` should be done deliberately rather than assuming the branch is current merely because its local digital-ESD graph is coherent.
+## 18. Repository integration status
 
-## 16. Immediate Pareto frontier
+Fresh comparison at this roadmap recut:
 
-The next highest-value work is no longer generic source accumulation.
+```text
+agent/digital-esd-paper-methodology-primary-sources:
+  92 ahead / 1242 behind master
 
-1. Continue close reading of the Alice/co-author corpus only where a source fibre materially changes or defeats one of the seven candidate principles.
-2. Test whether `whoHasVoice` ever fails a concrete consumer because testimony uptake / interpretive-resource adequacy remains hidden; only then split that coordinate.
-3. Acquire sustainability/ESD evidence only when it pays an open principle constraint, incidence coordinate or transformation-level coordinate.
-4. Translate the frozen six query families into exact syntax for the five declared databases.
-5. Execute searches and retain exact exports/metadata.
-6. Deduplicate, screen and structurally extract the corpus using the 19-coordinate schema.
-7. Challenge the seven principles: support, narrow, split, merge, defeat or extend them.
-8. Rewrite Results/Discussion from the admitted corpus rather than the pre-screen candidate matrix.
-9. Re-run novelty positioning after corpus closure.
-10. Reconcile the feature branch with current `master` before integration.
+agent/cohn-least-coordinate-repair-v3 (#981):
+  26 ahead / 0 behind master
+```
 
-## 17. Certification boundary
+Therefore the generic repair/proof-search work can be treated as a current donor, while the digital-ESD branch needs deliberate reconciliation before continued large-scale code growth.
+
+## 19. Certification boundary
 
 Current work is repository/source-written and statically inspected. No new Agda/Nix kernel receipt is claimed for this tranche, and CI is not part of the present roadmap requirement.
