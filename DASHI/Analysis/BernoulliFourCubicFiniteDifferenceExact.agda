@@ -47,8 +47,13 @@ bernoulliFourFiniteDifferenceIsFourCubes :
   (x : ℚ) →
   bernoulliFourPolynomial (x + 1ℚ) - bernoulliFourPolynomial x
   ≡ four * cube x
-bernoulliFourFiniteDifferenceIsFourCubes x =
-  ℚRing.solve (x ∷ [])
+bernoulliFourFiniteDifferenceIsFourCubes x = step
+  where
+    step :
+      ((((x + 1ℚ) * (x + 1ℚ)) * ((x + 1ℚ) * (x + 1ℚ)) - ((1ℚ + 1ℚ) * (((x + 1ℚ) * (x + 1ℚ)) * (x + 1ℚ)))) + ((x + 1ℚ) * (x + 1ℚ))) - (+ 1 / 30)
+      - (((((x * x) * (x * x)) - ((1ℚ + 1ℚ) * ((x * x) * x))) + (x * x)) - (+ 1 / 30))
+      ≡ ((1ℚ + 1ℚ) + (1ℚ + 1ℚ)) * ((x * x) * x)
+    step = ℚRing.solve (x ∷ [])
 
 record CubicBernoulliFiniteDifferenceReceipt : Set where
   field

@@ -31,17 +31,34 @@ sumCubesQ : Nat → ℚ
 sumCubesQ zero = 0ℚ
 sumCubesQ (suc n) = sumCubesQ n + B4.cube (natQ n)
 
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong₂)
+
+subSplit : (a b c : ℚ) → a - c ≡ (a - b) + (b - c)
+subSplit a b c = ℚRing.solve (a ∷ b ∷ c ∷ [])
+
+distribFour : (k c s : ℚ) → (k * c) + (k * s) ≡ k * (s + c)
+distribFour k c s = ℚRing.solve (k ∷ c ∷ s ∷ [])
+
 bernoulliFourTelescopesCubicSum :
   (n : Nat) →
   B4.bernoulliFourPolynomial (natQ n)
     - B4.bernoulliFourPolynomial 0ℚ
   ≡ B4.four * sumCubesQ n
-bernoulliFourTelescopesCubicSum zero =
-  ℚRing.solve []
-bernoulliFourTelescopesCubicSum (suc n)
-  rewrite bernoulliFourTelescopesCubicSum n
-        | B4.bernoulliFourFiniteDifferenceIsFourCubes (natQ n) =
-  ℚRing.solve (natQ n ∷ sumCubesQ n ∷ [])
+bernoulliFourTelescopesCubicSum zero = refl
+bernoulliFourTelescopesCubicSum (suc n) =
+  trans (subSplit A B C)
+    (trans (cong₂ _+_ stepDiff stepIH)
+           (distribFour B4.four (B4.cube (natQ n)) (sumCubesQ n)))
+  where
+    A = B4.bernoulliFourPolynomial (natQ (suc n))
+    B = B4.bernoulliFourPolynomial (natQ n)
+    C = B4.bernoulliFourPolynomial 0ℚ
+
+    stepDiff : A - B ≡ B4.four * B4.cube (natQ n)
+    stepDiff = B4.bernoulliFourFiniteDifferenceIsFourCubes (natQ n)
+
+    stepIH : B - C ≡ B4.four * sumCubesQ n
+    stepIH = bernoulliFourTelescopesCubicSum n
 
 record FiniteCubicBernoulliSumReceipt : Set where
   field
