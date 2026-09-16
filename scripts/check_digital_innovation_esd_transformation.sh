@@ -10,6 +10,7 @@ FILES=(
   DASHI/Education/MDPISpecialIssueResearchGovernanceExact.agda
   DASHI/Education/AliceBrownDigitalESDEpistemicGovernanceBridgeExact.agda
   DASHI/Education/DigitalESDReciprocalBraidExact.agda
+  DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
   DASHI/Education/DigitalInnovationESDRegression.agda
   DASHI/EverythingDigitalESDReciprocalBraid.agda
 )
@@ -31,11 +32,6 @@ grep -q '^canonicalTwinTransitionCoordinates :' DASHI/Education/DigitalInnovatio
 grep -q '^canonicalDigitalInnovationESDSourceAtlas :' DASHI/Education/DigitalInnovationESDSourceAtlas.agda
 grep -q '^editorialCallDoesNotSupplyEffectivenessEvidence :' DASHI/Education/DigitalInnovationESDSourceAtlas.agda
 grep -q '^editorialCallCannotPromoteAgendaToConclusion :' DASHI/Education/DigitalInnovationESDSourceAtlas.agda
-grep -q '^transformationCoordinatesRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
-grep -q '^sustainabilityCoordinatesRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
-grep -q '^scalingConditionsRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
-grep -q '^technologyCollisionWitnessRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
-grep -q '^learningCollisionWitnessRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^proceduralEthicsDoesNotPromoteEpistemicParticipation :' DASHI/Education/AliceBrownDigitalESDEpistemicGovernanceBridgeExact.agda
 grep -q '^aiClassificationDoesNotPromoteStudentMeaning :' DASHI/Education/AliceBrownDigitalESDEpistemicGovernanceBridgeExact.agda
 grep -q '^dataAvailabilityDoesNotPromoteContextPreservingReuse :' DASHI/Education/AliceBrownDigitalESDEpistemicGovernanceBridgeExact.agda
@@ -56,6 +52,18 @@ grep -q 'canonicalKimmererTransferResidualBoundary' DASHI/Education/DigitalESDRe
 grep -q 'Memory.revaluePreservesRememberedEvent' DASHI/Education/DigitalESDReciprocalBraidExact.agda
 grep -q 'Learning.generalisationIsAutomaticIsFalse' DASHI/Education/DigitalESDReciprocalBraidExact.agda
 grep -q 'Seven.canonicalSevenGenerationBNFBoundary' DASHI/Education/DigitalESDReciprocalBraidExact.agda
+
+grep -q '^canonicalDigitalESDAcquisitionAtlas :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '^currentAcquisitionFrontier :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '^firstAcquisitionLeaf :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '^citationDoesNotPromoteDigitalESDConclusion :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q 'canonicalSourceRoleSnowballReceipt' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '10.54675/ZACQ4808' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '10.3390/educsci13010033' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '10.1787/9997e7b3-en' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q 'Global E-waste Monitor 2024' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q 'Energy and AI' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+
 grep -q '^reciprocalDirectionsRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^contextTransferAdmissionRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^institutionalNonErasureRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
@@ -70,6 +78,17 @@ grep -q '^reviewerGenAIRegression :' DASHI/Education/DigitalInnovationESDRegress
 grep -q '^editorGenAIDecisionRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^substantiveGenAIDisclosureRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^humanAccountabilityRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^acquisitionAtlasRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^unescoTwinTransitionSameObjectRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^reviewAntecedentSameObjectRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^citationNonPromotionSnowballRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^energySourceScopeRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^ewasteSourceScopeRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^lifecyclePaymentRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^currentAcquisitionFrontierRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^firstAcquisitionLeafRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^acquisitionOrderPaymentOrderRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^unpaidDependencyReopensRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 
 if command -v nix >/dev/null 2>&1 && [[ -x scripts/run_agda29_parallel_check.sh ]]; then
   scripts/run_agda29_parallel_check.sh DASHI/Education/DigitalInnovationESDRegression.agda
