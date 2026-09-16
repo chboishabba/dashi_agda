@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.SourceConditionedObservationExact as Source
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Exact as Round3
 
@@ -37,9 +38,9 @@ truthAPIReutersCorroboration =
       "no DOI"
       "https://www.reuters.com/world/us/trump-medias-quarterly-loss-widens-238-million-20-million-year-earlier-2026-08-11/"
       Atlas.independentReporting)
-    (DASHI.Core.SourceConditionedObservationExact.sourceArtifact
+    (Source.sourceArtifact
       "Reuters-2026-08-11-TMTG-Q2-Truth-API"
-      DASHI.Core.SourceConditionedObservationExact.derivedArtifact
+      Source.derivedArtifact
       "https://www.reuters.com/world/us/trump-medias-quarterly-loss-widens-238-million-20-million-year-earlier-2026-08-11/"
       "Reuters")
     "Corroborates launch, more-than-ten signed agreements, and revenue generation at the level reported by Reuters. It does not pay individual customer identity or contract terms."
