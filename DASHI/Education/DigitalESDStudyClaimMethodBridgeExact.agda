@@ -11,11 +11,6 @@ import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
 
 ------------------------------------------------------------------------
 -- THIN METHOD BRIDGE
---
--- The manuscript's existing 19-coordinate schema remains canonical.  This
--- bridge appends one review-level coordinate containing the structured
--- study-claim ceiling profile.  It does not duplicate the base methodology or
--- the generic experimental/statistical theories.
 ------------------------------------------------------------------------
 
 baseMethodBoundary : Method.MethodologyBoundary
@@ -36,32 +31,23 @@ record StudyClaimMethodBoundary : Set where
     baseMethodRetained : Bool
     baseMethodRetainedIsTrue : baseMethodRetained ≡ true
     baseNineteenCoordinatesRetained : Bool
-    baseNineteenCoordinatesRetainedIsTrue :
-      baseNineteenCoordinatesRetained ≡ true
+    baseNineteenCoordinatesRetainedIsTrue : baseNineteenCoordinatesRetained ≡ true
     studyClaimCeilingRequired : Bool
     studyClaimCeilingRequiredIsTrue : studyClaimCeilingRequired ≡ true
     effectiveTwentyCoordinateExtraction : Bool
-    effectiveTwentyCoordinateExtractionIsTrue :
-      effectiveTwentyCoordinateExtraction ≡ true
+    effectiveTwentyCoordinateExtractionIsTrue : effectiveTwentyCoordinateExtraction ≡ true
+    qualitativeAndReviewClaimKindsRetained : Bool
+    qualitativeAndReviewClaimKindsRetainedIsTrue : qualitativeAndReviewClaimKindsRetained ≡ true
     unreportedQuantitiesMayBeFilledFromNarrativeConfidence : Bool
-    unreportedQuantitiesMayBeFilledFromNarrativeConfidenceIsFalse :
-      unreportedQuantitiesMayBeFilledFromNarrativeConfidence ≡ false
-    strongerImplicationMayBePromotedWithoutReceipt : Bool
-    strongerImplicationMayBePromotedWithoutReceiptIsFalse :
-      strongerImplicationMayBePromotedWithoutReceipt ≡ false
+    unreportedQuantitiesMayBeFilledFromNarrativeConfidenceIsFalse : unreportedQuantitiesMayBeFilledFromNarrativeConfidence ≡ false
+    strongerClaimMayBePromotedWithoutReceipt : Bool
+    strongerClaimMayBePromotedWithoutReceiptIsFalse : strongerClaimMayBePromotedWithoutReceipt ≡ false
 
 open StudyClaimMethodBoundary public
 
 canonicalStudyClaimMethodBoundary : StudyClaimMethodBoundary
-canonicalStudyClaimMethodBoundary =
-  study-claim-method-boundary
-    true refl
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
+canonicalStudyClaimMethodBoundary = study-claim-method-boundary true refl true refl true refl true refl true refl false refl false refl
 
 studyClaimMethodReading : String
 studyClaimMethodReading =
-  "The digital-ESD review retains the existing 19-coordinate manuscript extraction schema and adds one structured study-claim-ceiling coordinate, yielding 20 top-level extraction coordinates. The appended profile retains design type, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect size, uncertainty/confidence-interval semantics, time horizon, external-validity domain, participant role and the strongest implication the study can support. Missing quantities are not reconstructed from prose confidence, and stronger causal, mechanistic, transport, prevalence, practice or system-transformation claims require independent receipts."
+  "The digital-ESD review retains the existing 19-coordinate manuscript extraction schema and adds one structured study-claim-ceiling coordinate, yielding 20 top-level extraction coordinates. The appended profile retains source-reported design, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect size, uncertainty/confidence-interval semantics, time horizon, external-validity domain, participant-role applicability and the strongest admissible claim kind. Claim kind may be a causal/experimental implication, lived-experience claim, implementation-context claim, review synthesis or conceptual mechanism. Missing quantities are not reconstructed from prose confidence, and stronger causal, mechanistic, transport, prevalence, practice or system-transformation claims require independent receipts."
