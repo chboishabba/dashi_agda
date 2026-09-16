@@ -2,11 +2,13 @@ module DASHI.Wikimedia.IbrahimMonster369OEISPositiveCorrelationExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.IbrahimMonster3BOEISSameIntegerRoleCollisionExact as Collision
+import DASHI.Wikimedia.IbrahimMonster6BWeightTwoC6FourierOEISExact as C6
 
 ------------------------------------------------------------------------
 -- MONSTER369 / OEIS POSITIVE CORRELATION RECEIPTS
@@ -71,8 +73,7 @@ correlation32772 = positive-correlation-receipt
   "inspect the 6B McKay-Thompson graded trace against the weight-two C6 Fourier decomposition, power maps, and eigenvalue multiplicity generating functions before introducing any same-object claim"
 
 ------------------------------------------------------------------------
--- Source anchors: the underlying exact integer equalities and non-promotion
--- boundary already live in the same-integer owner.
+-- Source anchors.
 ------------------------------------------------------------------------
 
 sameIntegerCollisionBoundary : Collision.OEISSameIntegerCollisionFrontier
@@ -83,6 +84,15 @@ same17496IntegerPaid = Collision.sameIntegerCollisionCounterexamplePaid
 
 same32772IntegerPaid : Bool
 same32772IntegerPaid = Collision.sameSeriesDifferentRoleCollisionPaid
+
+c6WeightTwoSpectrumReceipt : C6.C6WeightTwoMultiplicitySpectrum
+c6WeightTwoSpectrumReceipt = C6.canonicalC6WeightTwoMultiplicitySpectrum
+
+c6M1Is32772 : C6.m1 c6WeightTwoSpectrumReceipt ≡ 32772
+c6M1Is32772 = refl
+
+c6M5Is32772 : C6.m5 c6WeightTwoSpectrumReceipt ≡ 32772
+c6M5Is32772 = refl
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.
@@ -108,7 +118,8 @@ searchPriorityDoesNotCreateEvidenceWeight ()
 -- Search-priority boundary.
 --
 -- 32772 is inspected first because it shares the Monster class/source family
--- while crossing roles.  This is a deterministic search heuristic only.
+-- while crossing roles, and the C6 side is now bound to an actual source-paid
+-- Fourier-spectrum theorem.  This is still a search heuristic, not authority.
 ------------------------------------------------------------------------
 
 record PositiveCorrelationBoundary : Set where
@@ -117,6 +128,7 @@ record PositiveCorrelationBoundary : Set where
     sameIntegerCanBePositiveBridgeSignal : Bool
     correlation17496RetainedAsPositiveSignal : Bool
     correlation32772RetainedAsPositiveSignal : Bool
+    c6WeightTwoSpectrumBridgeSourcePaid : Bool
     sameClassSourceFamilyBridgeSearchFirst : Bool
     positiveCorrelationCreatesSameObject : Bool
     positiveCorrelationCreatesRepresentationTheorem : Bool
@@ -126,6 +138,6 @@ open PositiveCorrelationBoundary public
 
 currentPositiveCorrelationBoundary : PositiveCorrelationBoundary
 currentPositiveCorrelationBoundary = positive-correlation-boundary
-  true true true true
+  true true true true true
   false false false
-  "Prioritize the 32772 6B same-class cross-role bridge: compare the q^6 graded-trace coefficient with the weight-two C6 Fourier eigenspace multiplicity through existing 6B power-map/Fourier owners. In parallel retain 17496 as a positive cross-context Monster bridge candidate. Promote neither to same-object or representation identity until an explicit factorization/intertwiner or source-paid bridge is obtained."
+  "Prioritize the 32772 6B same-class cross-role bridge. The C6 side is now source-bound to the exact weight-two Fourier spectrum m1=m5=32772, so inspect the normalized 6B q^6 graded trace against that spectrum through the existing power-map/replicability/Fourier owners. In parallel retain 17496 as a positive cross-context Monster bridge candidate. Promote neither to same-object or representation identity until an explicit factorization/intertwiner or source-paid bridge is obtained."
