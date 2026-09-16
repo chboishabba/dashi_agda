@@ -7,7 +7,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Nat using (_+_; _*_)
+open import Data.Nat using (_+_; _*_; _∸_)
 
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Biology.TernaryMonsterSymmetryCandidateExact as Symmetry
@@ -168,7 +168,6 @@ reductionBoundary = Reduction.currentTernary27PhasePreservingReductionBoundary
 data FiveOrbitCountCreatesFiveIrrepBijection : Set where
 data PythonCharacterCreatesAgdaKernelTheorem : Set where
 data D4CharacterCreatesMonster42dAction : Set where
-
 data QuotientRemovesEThereforeMonsterIdentification : Set where
 
 fiveOrbitCountDoesNotCreateFiveIrrepBijection :
