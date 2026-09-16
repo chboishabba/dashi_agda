@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDManuscriptMethodologyExact as Method
+import DASHI.Education.DigitalESDStudyClaimMethodBridgeExact as ClaimMethod
 import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact as Derivation
 import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
@@ -17,8 +18,12 @@ paperTypeRegression = refl
 researchQuestionCountRegression : Method.researchQuestionCount ≡ 5
 researchQuestionCountRegression = refl
 
-extractionCoordinateCountRegression : Method.extractionCoordinateCount ≡ 20
-extractionCoordinateCountRegression = refl
+baseExtractionCoordinateCountRegression : Method.extractionCoordinateCount ≡ 19
+baseExtractionCoordinateCountRegression = refl
+
+effectiveExtractionCoordinateCountRegression :
+  ClaimMethod.effectiveExtractionCoordinateCount ≡ 20
+effectiveExtractionCoordinateCountRegression = refl
 
 methodRetainsStructuredSearchRegression : Method.MethodologyBoundary.transparentStructuredSearchRequired Method.canonicalMethodologyBoundary ≡ true
 methodRetainsStructuredSearchRegression = refl
@@ -45,16 +50,19 @@ methodRequiresExternalityIncidenceAuditRegression :
   ≡ true
 methodRequiresExternalityIncidenceAuditRegression = refl
 
-methodRetainsStudyClaimCeilingRegression :
-  Method.studyClaimCeilingBoundary
-  ≡ Ceiling.canonicalStudyClaimCeilingBoundary
-methodRetainsStudyClaimCeilingRegression = refl
+studyClaimBridgePinsBaseMethodRegression :
+  ClaimMethod.baseMethodBoundary ≡ Method.canonicalMethodologyBoundary
+studyClaimBridgePinsBaseMethodRegression = refl
 
-methodRequiresStudyClaimCeilingRegression :
-  Method.MethodologyBoundary.studyClaimCeilingRetained
-    Method.canonicalMethodologyBoundary
+studyClaimBridgePinsCeilingRegression :
+  ClaimMethod.studyClaimCeilingBoundary ≡ Ceiling.canonicalStudyClaimCeilingBoundary
+studyClaimBridgePinsCeilingRegression = refl
+
+studyClaimBridgeRequiresCeilingRegression :
+  ClaimMethod.StudyClaimMethodBoundary.studyClaimCeilingRequired
+    ClaimMethod.canonicalStudyClaimMethodBoundary
   ≡ true
-methodRequiresStudyClaimCeilingRegression = refl
+studyClaimBridgeRequiresCeilingRegression = refl
 
 searchClosureDoesNotEqualSynthesisRegression : Method.SearchClosureEqualsEvidenceSynthesis → ⊥
 searchClosureDoesNotEqualSynthesisRegression = Method.searchClosureDoesNotEqualEvidenceSynthesis
