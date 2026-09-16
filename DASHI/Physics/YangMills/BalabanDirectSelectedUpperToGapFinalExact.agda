@@ -84,8 +84,18 @@ sourceEnvelopeMandatoryForTerminalGapIsFalse :
   sourceEnvelopeMandatoryForTerminalGap ≡ false
 sourceEnvelopeMandatoryForTerminalGapIsFalse = refl
 
+-- Source is written, but this connector session has not observed an Agda kernel
+-- check for the exact feature-branch head.  Keep the local proof level
+-- non-promotable until an actual receipt exists.
 finalDirectUpperCompilerLevel : ProofLevel
-finalDirectUpperCompilerLevel = machineChecked
+finalDirectUpperCompilerLevel = conditional
+
+finalDirectUpperKernelCertifiedAtCurrentHead : Bool
+finalDirectUpperKernelCertifiedAtCurrentHead = false
+
+finalDirectUpperKernelCertifiedAtCurrentHeadIsFalse :
+  finalDirectUpperKernelCertifiedAtCurrentHead ≡ false
+finalDirectUpperKernelCertifiedAtCurrentHeadIsFalse = refl
 
 -- This is a compiler level only.  The direct selected YM upper itself retains
 -- R387's conditional physical/source status until an actual producer inhabits
