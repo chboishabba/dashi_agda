@@ -10,6 +10,7 @@ import DASHI.Law.SensibLawAdaptiveLegalResearchFeedbackLoopExact as Feedback
 import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Assessment
 import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact as Paper
 import DASHI.Education.DigitalESDStructuredSearchExact as Search
+import DASHI.Education.DigitalESDManuscriptDependencyPaymentAdapterExact as Payment
 
 queryFamilyRegression :
   Search.canonicalSearchQueryFamilies
@@ -132,32 +133,32 @@ searchClosureDoesNotCloseSynthesisRegression =
 canonicalManuscriptDependencyGraphRegression :
   Provenance.TypedDependencyGraph
 canonicalManuscriptDependencyGraphRegression =
-  Search.canonicalManuscriptDependencyGraph
+  Payment.canonicalManuscriptDependencyGraph
 
 searchToEligibleCorpusRequiredRegression :
-  Provenance.requiredForTarget Search.searchToEligibleCorpus ≡ true
+  Provenance.requiredForTarget Payment.searchToEligibleCorpus ≡ true
 searchToEligibleCorpusRequiredRegression = refl
 
 eligibleCorpusToSourceScopeRequiredRegression :
-  Provenance.requiredForTarget Search.eligibleCorpusToSourceScope ≡ true
+  Provenance.requiredForTarget Payment.eligibleCorpusToSourceScope ≡ true
 eligibleCorpusToSourceScopeRequiredRegression = refl
 
 sourceScopeToLifecycleRequiredRegression :
-  Provenance.requiredForTarget Search.sourceScopeToLifecycleSynthesis ≡ true
+  Provenance.requiredForTarget Payment.sourceScopeToLifecycleSynthesis ≡ true
 sourceScopeToLifecycleRequiredRegression = refl
 
 sourceScopeToParticipantGovernanceRequiredRegression :
-  Provenance.requiredForTarget Search.sourceScopeToParticipantGovernanceSynthesis ≡ true
+  Provenance.requiredForTarget Payment.sourceScopeToParticipantGovernanceSynthesis ≡ true
 sourceScopeToParticipantGovernanceRequiredRegression = refl
 
 sourceScopeToLongitudinalRequiredRegression :
-  Provenance.requiredForTarget Search.sourceScopeToLongitudinalSynthesis ≡ true
+  Provenance.requiredForTarget Payment.sourceScopeToLongitudinalSynthesis ≡ true
 sourceScopeToLongitudinalRequiredRegression = refl
 
 requiredSearchSupportCannotBeResidualizedRegression :
-  Search.RequiredStructuredSearchSupportMayBeResidualized → ⊥
+  Payment.RequiredStructuredSearchSupportMayBeResidualized → ⊥
 requiredSearchSupportCannotBeResidualizedRegression =
-  Search.requiredStructuredSearchSupportCannotBeResidualized
+  Payment.requiredStructuredSearchSupportCannotBeResidualized
 
 admittedSearchNarrowingRerunsParetoRegression :
   Feedback.feedbackDisposition
@@ -165,7 +166,7 @@ admittedSearchNarrowingRerunsParetoRegression :
     Assessment.frontierNarrowed
   ≡ Feedback.recomputeFrontier
 admittedSearchNarrowingRerunsParetoRegression =
-  Search.admittedSearchNarrowingRerunsPareto
+  Payment.admittedSearchNarrowingRerunsPareto
 
 reopenedSearchFrontierRerunsParetoRegression :
   Feedback.feedbackDisposition
@@ -173,10 +174,10 @@ reopenedSearchFrontierRerunsParetoRegression :
     Assessment.frontierReopened
   ≡ Feedback.recomputeFrontier
 reopenedSearchFrontierRerunsParetoRegression =
-  Search.reopenedSearchFrontierRerunsPareto
+  Payment.reopenedSearchFrontierRerunsPareto
 
 canonicalProvenanceBoundaryRegression :
   Provenance.TypedProvenanceDependencyBoundary.graphCanExposeRequiredDependencies
-    Search.canonicalManuscriptProvenanceBoundary
+    Payment.canonicalManuscriptProvenanceBoundary
   ≡ true
 canonicalProvenanceBoundaryRegression = refl
