@@ -1,0 +1,27 @@
+module DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as S
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as V
+
+regressionFiniteCenteringIdentity :
+  S.divisionFreePairDifferenceCenteringClosed ≡ true
+regressionFiniteCenteringIdentity =
+  S.divisionFreePairDifferenceCenteringClosedIsTrue
+
+regressionPhysicalFixedOutputAttachment :
+  S.fixedOutputCovariancePairDifferenceAttachmentClosed ≡ true
+regressionPhysicalFixedOutputAttachment =
+  S.fixedOutputCovariancePairDifferenceAttachmentClosedIsTrue
+
+regressionWorkDifferenceVectorBridge :
+  V.fixedOutputWorkDifferenceVectorBridgeClosed ≡ true
+regressionWorkDifferenceVectorBridge =
+  V.fixedOutputWorkDifferenceVectorBridgeClosedIsTrue
+
+regressionQuantitativePairDifferencePaymentStillOpen :
+  S.quantitativePairDifferencePaymentClosed ≡ false
+regressionQuantitativePairDifferencePaymentStillOpen =
+  S.quantitativePairDifferencePaymentClosedIsFalse
