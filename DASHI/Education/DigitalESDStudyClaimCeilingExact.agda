@@ -14,10 +14,6 @@ import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 import DASHI.Biology.CausalEstimandStatisticalRealisationExact as Statistical
 import DASHI.Biology.CausalEstimatorGuaranteesExact as Guarantees
 
-------------------------------------------------------------------------
--- DIGITAL-ESD STUDY CLAIM CEILING
-------------------------------------------------------------------------
-
 data ReportingState : Set where
   explicitlyReported : ReportingState
   derivableWithSameObjectReceipt : ReportingState
@@ -35,7 +31,6 @@ record ReportedSurface : Set where
     surfaceReference : String
     locatorReference : String
     interpretationReference : String
-
 open ReportedSurface public
 
 data DesignReceiptStatus : Set where
@@ -46,6 +41,13 @@ data EpistemicRoleStatus : Set where
   reportedEpistemicRole : Design.EpistemicRole → String → EpistemicRoleStatus
   epistemicRoleNotApplicable : String → EpistemicRoleStatus
   epistemicRoleUnresolved : String → EpistemicRoleStatus
+
+data AdmissibleClaimKind : Set where
+  implicationConeClaim : Cone.ImplicationKind → AdmissibleClaimKind
+  livedExperienceClaim : AdmissibleClaimKind
+  implementationContextClaim : AdmissibleClaimKind
+  reviewSynthesisClaim : AdmissibleClaimKind
+  conceptualMechanismClaim : AdmissibleClaimKind
 
 data StudyClaimCoordinate : Set where
   sourcePopulationCoordinate : StudyClaimCoordinate
@@ -66,24 +68,7 @@ data StudyClaimCoordinate : Set where
   implicationCeilingCoordinate : StudyClaimCoordinate
 
 studyClaimCoordinates : List StudyClaimCoordinate
-studyClaimCoordinates =
-  sourcePopulationCoordinate
-  ∷ enrolledOrReportedNCoordinate
-  ∷ analysisNCoordinate
-  ∷ allocationCoordinate
-  ∷ comparatorCoordinate
-  ∷ measurementValidityCoordinate
-  ∷ attritionMissingnessCoordinate
-  ∷ confoundingControlCoordinate
-  ∷ implementationFidelityCoordinate
-  ∷ multiplicityCoordinate
-  ∷ effectSizeCoordinate
-  ∷ uncertaintyIntervalCoordinate
-  ∷ timeHorizonCoordinate
-  ∷ externalValidityCoordinate
-  ∷ participantRoleCoordinate
-  ∷ implicationCeilingCoordinate
-  ∷ []
+studyClaimCoordinates = sourcePopulationCoordinate ∷ enrolledOrReportedNCoordinate ∷ analysisNCoordinate ∷ allocationCoordinate ∷ comparatorCoordinate ∷ measurementValidityCoordinate ∷ attritionMissingnessCoordinate ∷ confoundingControlCoordinate ∷ implementationFidelityCoordinate ∷ multiplicityCoordinate ∷ effectSizeCoordinate ∷ uncertaintyIntervalCoordinate ∷ timeHorizonCoordinate ∷ externalValidityCoordinate ∷ participantRoleCoordinate ∷ implicationCeilingCoordinate ∷ []
 
 studyClaimCoordinateCount : Nat
 studyClaimCoordinateCount = 16
@@ -112,21 +97,17 @@ record StudyClaimProfile : Set where
     timeHorizonReference : String
     externalValidityReference : String
     participantRoleStatus : EpistemicRoleStatus
-    strongestSupportedImplication : Cone.ImplicationKind
-    strongestSupportedImplicationReference : String
+    strongestSupportedClaim : AdmissibleClaimKind
+    strongestSupportedClaimReference : String
     explicitLimitationsReference : String
-
 open StudyClaimProfile public
 
 designBoundary : Design.EvidenceDesignBoundary
 designBoundary = Design.canonicalEvidenceDesignBoundary
-
 implicationConeBoundary : Cone.ExperimentalAssertionConeBoundary
 implicationConeBoundary = Cone.canonicalExperimentalAssertionConeBoundary
-
 statisticalBoundary : Statistical.CausalEstimandStatisticalRealisationBoundary
 statisticalBoundary = Statistical.canonicalCausalEstimandStatisticalRealisationBoundary
-
 guaranteeBoundary : Guarantees.CausalEstimatorGuaranteeBoundary
 guaranteeBoundary = Guarantees.canonicalCausalEstimatorGuaranteeBoundary
 
@@ -144,34 +125,24 @@ data NonApplicableParticipantRoleMayBeInvented : Set where
 
 reportedPValueDoesNotCreateCausalIdentification : ReportedPValueCreatesCausalIdentification → ⊥
 reportedPValueDoesNotCreateCausalIdentification ()
-
 largeSampleDoesNotCreateRepresentativePopulation : LargeSampleCreatesRepresentativePopulation → ⊥
 largeSampleDoesNotCreateRepresentativePopulation ()
-
 confidenceIntervalDoesNotCreatePopulationTransport : ConfidenceIntervalCreatesPopulationTransport → ⊥
 confidenceIntervalDoesNotCreatePopulationTransport ()
-
 qualitativeFindingDoesNotCreatePopulationPrevalence : QualitativeFindingCreatesPopulationPrevalence → ⊥
 qualitativeFindingDoesNotCreatePopulationPrevalence ()
-
 studyFindingDoesNotCreateSystemTransformation : StudyFindingCreatesSystemTransformation → ⊥
 studyFindingDoesNotCreateSystemTransformation ()
-
 missingUncertaintyMayNotBeInvented : MissingUncertaintyMayBeInvented → ⊥
 missingUncertaintyMayNotBeInvented ()
-
 narrowIntervalDoesNotCreateMechanismIdentification : NarrowIntervalCreatesMechanismIdentification → ⊥
 narrowIntervalDoesNotCreateMechanismIdentification ()
-
 statisticalSignificanceDoesNotCreatePracticalSignificance : StatisticalSignificanceCreatesPracticalSignificance → ⊥
 statisticalSignificanceDoesNotCreatePracticalSignificance ()
-
 associationDoesNotCreatePracticeRecommendation : AssociationCreatesPracticeRecommendation → ⊥
 associationDoesNotCreatePracticeRecommendation ()
-
 unmappedDesignMayNotBeForcedIntoNearestCanonicalKind : UnmappedDesignMayBeForcedIntoNearestCanonicalKind → ⊥
 unmappedDesignMayNotBeForcedIntoNearestCanonicalKind ()
-
 nonApplicableParticipantRoleMayNotBeInvented : NonApplicableParticipantRoleMayBeInvented → ⊥
 nonApplicableParticipantRoleMayNotBeInvented ()
 
@@ -186,6 +157,8 @@ record StudyClaimCeilingBoundary : Set where
     unresolvedDesignMappingPermittedIsTrue : unresolvedDesignMappingPermitted ≡ true
     nonApplicableParticipantRolePermitted : Bool
     nonApplicableParticipantRolePermittedIsTrue : nonApplicableParticipantRolePermitted ≡ true
+    qualitativeAndReviewClaimsRemainFirstClass : Bool
+    qualitativeAndReviewClaimsRemainFirstClassIsTrue : qualitativeAndReviewClaimsRemainFirstClass ≡ true
     sampleSizeAndAnalysisNRetained : Bool
     sampleSizeAndAnalysisNRetainedIsTrue : sampleSizeAndAnalysisNRetained ≡ true
     unreportedSampleSizeHasNoFabricatedNat : Bool
@@ -208,28 +181,10 @@ record StudyClaimCeilingBoundary : Set where
     missingQuantitiesMayBeInventedIsFalse : missingQuantitiesMayBeInvented ≡ false
     oneStudyMayClosePopulationCausalMechanismAndPolicyAtOnce : Bool
     oneStudyMayClosePopulationCausalMechanismAndPolicyAtOnceIsFalse : oneStudyMayClosePopulationCausalMechanismAndPolicyAtOnce ≡ false
-
 open StudyClaimCeilingBoundary public
 
 canonicalStudyClaimCeilingBoundary : StudyClaimCeilingBoundary
-canonicalStudyClaimCeilingBoundary =
-  study-claim-ceiling-boundary
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
+canonicalStudyClaimCeilingBoundary = study-claim-ceiling-boundary true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl false refl false refl
 
 studyClaimCeilingReading : String
-studyClaimCeilingReading =
-  "Each admitted digital-ESD paper is indexed by its exact AttributedSource object and interpreted through a design-relative claim ceiling. The source-reported study design is retained verbatim; if the generic design ontology has no exact constructor, mapping remains explicitly unresolved rather than forcing the source into a nearby design class. Participant epistemic role is likewise allowed to be source-reported, unresolved or not applicable, so a systematic review is not assigned a fictional participant role. Source role/locator, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect-size surface, uncertainty/confidence-interval semantics, time horizon, external-validity domain and the strongest supported implication are retained separately. Reported and same-object-derived sample sizes carry Nat values; an unreported sample size has no fabricated Nat payload. Reported p-values, large n, narrow confidence intervals, statistical significance, qualitative richness or a positive study finding do not independently manufacture causal identification, representativeness, mechanism, practical significance, population transport, practice recommendation or system transformation. Unreported numerical/statistical quantities remain unreported unless a same-object derivation receipt pays them."
+studyClaimCeilingReading = "Each admitted digital-ESD paper is indexed by its exact AttributedSource object and interpreted through a design-relative claim ceiling. Source-reported design is retained verbatim and may remain unmapped when the canonical design ontology lacks an exact constructor. Participant epistemic role may be source-reported, unresolved or not applicable. Strongest supported claim may be a causal/experimental implication, lived-experience claim, implementation-context claim, review synthesis or conceptual mechanism, so qualitative and review evidence are not forced into a causal ladder. Sample sizes, effect/uncertainty surfaces, time, transport and limitations remain source-specific; missing quantities are not invented."
