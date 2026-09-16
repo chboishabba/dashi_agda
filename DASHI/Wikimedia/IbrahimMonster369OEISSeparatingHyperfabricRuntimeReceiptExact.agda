@@ -7,16 +7,17 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- RUNTIME RECEIPT ONLY
 --
--- The companion Python harness exhaustively enumerates hitting sets over the
--- CURRENT finite Monster369/OEIS consumer portfolio.  On that declared
--- portfolio it observed one size-two minimum transversal:
+-- The schematic five-edge portfolio previously produced one size-two runtime
+-- transversal:
 --
 --   { monster3B65610Character , actualWeylActionCoordinate }.
 --
--- This file records the runtime observation and its scope.  It does not turn
--- the Python exhaustive search into an Agda minimum theorem, nor does selecting
--- either coordinate inhabit the representation/action theorem named by that
--- slot.  OEIS remains navigation/discovery only.
+-- The coordinate universe has since expanded from 23 to 24 by adding the
+-- source-paid C6 weight-two spectrum coordinate.  The five schematic edges did
+-- not change, so the previous finite minimum remains a retained observation;
+-- however an exact current-revision repo pytest/drift-guard execution has not
+-- been observed after this expansion.  The literal collision portfolio is the
+-- stronger current runtime surface and is recorded separately.
 ------------------------------------------------------------------------
 
 record Monster369RuntimeReceipt : Set where
@@ -25,16 +26,18 @@ record Monster369RuntimeReceipt : Set where
     runtimeSchema : String
     coordinateCount : Nat
     edgeCount : Nat
-    runtimeMinimumTransversalSize : Nat
-    runtimeMinimumTransversalCount : Nat
+    previousRuntimeMinimumTransversalSize : Nat
+    previousRuntimeMinimumTransversalCount : Nat
     minimumCoordinateA : String
     minimumCoordinateB : String
 
-    exhaustiveRuntimeSearchCompleted : Bool
-    agdaCoordinateDriftGuardObserved : Bool
+    previousExhaustiveRuntimeSearchObserved : Bool
+    exactCurrentRevisionRuntimeObserved : Bool
+    exactCurrentRevisionAgdaCoordinateDriftGuardObserved : Bool
     canonicalTypedSelectionHitsEveryDeclaredConsumer : Bool
     oeisOnlyHitsEveryDeclaredConsumer : Bool
     sameIntegerCollisionCoordinateRemainsUnpaid : Bool
+    c6WeightTwoSpectrumCoordinateAddedAfterPreviousRuntime : Bool
 
     minimumContainsMonster3B65610Character : Bool
     minimumContainsActualWeylActionCoordinate : Bool
@@ -51,11 +54,11 @@ open Monster369RuntimeReceipt public
 currentMonster369RuntimeReceipt : Monster369RuntimeReceipt
 currentMonster369RuntimeReceipt =
   monster369-runtime-receipt
-    "monster369-oeis-separating-hyperfabric-runtime-v1"
-    23 5 2 1
+    "monster369-oeis-separating-hyperfabric-runtime-v3"
+    24 5 2 1
     "actualWeylActionCoordinate"
     "monster3B65610Character"
-    true true true false true
+    true false false true false true true
     true true
     false false false false false
-    "Replace manually declared consumer edges with literal paired Monster worlds already present in the repo, then rerun the same exhaustive finite search. A new collision should add only the first typed coordinate that separates that concrete consumer pair. Preserve OEIS as a candidate-coordinate and negative-control source; do not use this runtime minimum as representation/action authority or as a global minimum beyond the current five-edge portfolio."
+    "Treat the old size-two result as the retained minimum of the unchanged five schematic edges, not as the current literal-world frontier. The current universe adds the source-paid C6 weight-two spectrum coordinate and the literal portfolio adds the positive 32772 bridge. Run the exact current-revision Python tests when a repository runtime is available; use the literal collision portfolio for further coordinate discovery and keep all runtime minima non-authoritative for Monster proof." 
