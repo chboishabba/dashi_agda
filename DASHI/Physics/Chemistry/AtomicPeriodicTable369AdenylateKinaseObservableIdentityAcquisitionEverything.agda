@@ -22,3 +22,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDObservab
 -- near-level set; red/dashed routes retain favorable/alternative source roles.
 -- No qualitative relation is promoted to a missing per-state Delta-G numeral.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigure5QualitativeFreeEnergyAcquisitionExact
+
+-- Machine-readable LT-MD protocol envelope: GROMACS + AMBER ffamber03, cited
+-- ATP/AMP parameter lineage, pH/protonation examples, TIP3P solvation, PME,
+-- minimization/heating and production dynamics are retained as method/setup
+-- coordinates. Duan/Meagher DOIs are source-lineage metadata; their article QIDs
+-- remain unresolved and neither method citation imports an AdK result.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDProtocolAcquisitionExact
