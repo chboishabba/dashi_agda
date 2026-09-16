@@ -14,13 +14,20 @@ import DASHI.Finance.TradeRealizationSharpeAuthorityExact
 import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact
 import DASHI.Finance.TrumpFamilyTradePrimarySourceExtensionExact
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Exact
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Exact
 import DASHI.Finance.TrumpFamilyExternalCounterpartyEvidenceExact
 import DASHI.Finance.TrumpFamilyExternalCounterpartyPrimaryExact
 import DASHI.Finance.TrumpFamilyTradePNFBridgeExact
 import DASHI.Finance.TrumpFamilyTradeGameTheoryBridgeExact
 import DASHI.Finance.TrumpFamilyTradeAcquisitionFrontierExact
 import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressExact
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressRound3Exact
+import DASHI.Finance.TrumpFamilyTradeSourceQualityExact
+import DASHI.Finance.TrumpFamilyTradeSourceStackExact
 import DASHI.Finance.TrumpFamilyTradeEvidenceValidation
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Validation
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Validation
+import DASHI.Finance.TrumpFamilyTradeSourceQualityValidation
 
 -- Canonical trading-control semantics. Earlier BAN/action experiments remain
 -- in the branch as historical development artifacts but are deliberately not
