@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressExact as Progress
 import DASHI.Finance.TrumpFamilyTradePrimarySourceRound3Exact as Round3
+import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 
 ------------------------------------------------------------------------
 -- ROUND-THREE ACQUISITION PROGRESS
@@ -57,13 +58,11 @@ theLaunchDoesNotPayCustomerIdentity :
 theLaunchDoesNotPayCustomerIdentity ()
 
 president278TReceiptIsPrimary :
-  DASHI.Finance.TrumpFamilyTradeSourceAtlasExact.primarySourcePaid
-    Round3.trumpCoinbaseSale20260212 ≡ true
+  Atlas.primarySourcePaid Round3.trumpCoinbaseSale20260212 ≡ true
 president278TReceiptIsPrimary = refl
 
 truthAPILaunchReceiptIsPrimary :
-  DASHI.Finance.TrumpFamilyTradeSourceAtlasExact.primarySourcePaid
-    Round3.truthAPILaunchIn10Q ≡ true
+  Atlas.primarySourcePaid Round3.truthAPILaunchIn10Q ≡ true
 truthAPILaunchReceiptIsPrimary = refl
 
 record TrumpFamilyTradeAcquisitionProgressRound3Boundary : Set where
