@@ -17,15 +17,20 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalR370R373BoundaryRound381Exa
 -- Therefore choose the R373 boundary carrier to BE the R370 boundary carrier
 -- and choose its selected distance to BE R370.boundarySubstitutionDistance.
 --
--- The historical R380 equality and boundary map then become refl.  The real
--- same-object obligations are pushed to the source-facing Hessian coordinates:
+-- The historical R380 equality and boundary map then become refl.
+--
+-- IMPORTANT WrongType correction: the fixed-point parametric Lipschitz constant
+-- from R370 and the Hessian-family Lipschitz constant from R372 are different
+-- consumers.  Round381 does NOT identify them.  R373's selected Lipschitz is
+-- definitionally the R372 Hessian Lipschitz.  Thus the only source-facing
+-- same-object obligations retained here are:
 --
 --   * R372 Hessian scalar = the literal boundary Hessian scalar;
---   * R372 Lipschitz coordinate = R370 selected/source Lipschitz coordinate;
 --   * R372 substitution distance = the SAME R370 boundary fixed-point distance.
 --
--- This owner does not prove any of those physical/source identifications.  It
--- only removes a duplicated selected-distance coordinate between two compilers.
+-- This owner proves neither physical/source identification.  It only removes a
+-- duplicated selected-distance coordinate and an unnecessary cross-consumer
+-- Lipschitz equality.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -62,10 +67,6 @@ record CanonicalR370R373BoundaryData : Set₁ where
         (R370.rightVariation parametric)
         s
 
-    hessianLipschitzIsParametricLipschitz :
-      R372.sourceHessianLipschitz hessian
-      ≡ R370.sourceLipschitz parametric
-
     hessianDistanceIsParametricBoundaryDistance :
       ∀ s →
       R372.sourceSubstitutionDistance hessian
@@ -84,15 +85,14 @@ canonicalJoint dataSet = record
   ; R373.component = R370.component (parametric dataSet)
   ; R373.leftVariation = R370.leftVariation (parametric dataSet)
   ; R373.rightVariation = R370.rightVariation (parametric dataSet)
-  ; R373.selectedLipschitz = R370.sourceLipschitz (parametric dataSet)
+  ; R373.selectedLipschitz = R372.sourceHessianLipschitz (hessian dataSet)
   ; R373.selectedBoundarySubstitutionDistance =
       R370.boundarySubstitutionDistance (parametric dataSet)
   ; R373.hessian = hessian dataSet
   ; R373.boundaryToHessianBoundary = boundaryToHessianBoundary dataSet
   ; R373.hessianDifferenceIsBoundaryNorm =
       hessianDifferenceIsBoundaryNorm dataSet
-  ; R373.hessianLipschitzIsSelectedLipschitz =
-      hessianLipschitzIsParametricLipschitz dataSet
+  ; R373.hessianLipschitzIsSelectedLipschitz = refl
   ; R373.hessianDistanceIsSelectedBoundaryDistance =
       hessianDistanceIsParametricBoundaryDistance dataSet
   }
@@ -100,7 +100,7 @@ canonicalJoint dataSet = record
 canonicalRound380 :
   (dataSet : CanonicalR370R373BoundaryData) →
   (selectedLipschitzNonnegative :
-    0ℝ ≤ℝ R370.sourceLipschitz (parametric dataSet)) →
+    0ℝ ≤ℝ R372.sourceHessianLipschitz (hessian dataSet)) →
   R380.CMP116ParametricDistanceUpperHessianData
 canonicalRound380 dataSet selectedLipschitzNonnegative = record
   { R380.joint = canonicalJoint dataSet
@@ -117,10 +117,16 @@ selectedDistanceIsLiterallyR370BoundaryDistance :
   ≡ R370.boundarySubstitutionDistance (parametric dataSet) s
 selectedDistanceIsLiterallyR370BoundaryDistance dataSet s = refl
 
+selectedLipschitzIsLiterallyHessianLipschitz :
+  (dataSet : CanonicalR370R373BoundaryData) →
+  R373.selectedLipschitz (canonicalJoint dataSet)
+  ≡ R372.sourceHessianLipschitz (hessian dataSet)
+selectedLipschitzIsLiterallyHessianLipschitz dataSet = refl
+
 r380BoundaryMapIsIdentity :
   (dataSet : CanonicalR370R373BoundaryData) →
   (selectedLipschitzNonnegative :
-    0ℝ ≤ℝ R370.sourceLipschitz (parametric dataSet)) →
+    0ℝ ≤ℝ R372.sourceHessianLipschitz (hessian dataSet)) →
   ∀ s →
   R380.jointBoundaryToParametricBoundary
     (canonicalRound380 dataSet selectedLipschitzNonnegative) s
@@ -148,6 +154,13 @@ r373ToR370BoundaryMapPrimitiveAfterRound381IsFalse :
   r373ToR370BoundaryMapPrimitiveAfterRound381 ≡ false
 r373ToR370BoundaryMapPrimitiveAfterRound381IsFalse = refl
 
+fixedPointLipschitzEqualsHessianLipschitzRequired : Bool
+fixedPointLipschitzEqualsHessianLipschitzRequired = false
+
+fixedPointLipschitzEqualsHessianLipschitzRequiredIsFalse :
+  fixedPointLipschitzEqualsHessianLipschitzRequired ≡ false
+fixedPointLipschitzEqualsHessianLipschitzRequiredIsFalse = refl
+
 literalHessianScalarizationStillRequired : Bool
 literalHessianScalarizationStillRequired = true
 
@@ -173,13 +186,17 @@ record Round381Boundary : Set where
     selectedDistanceWeldReducedToReflIsTrue :
       selectedDistanceWeldReducedToRefl ≡ true
 
+    hessianLipschitzKeptDistinctFromFixedPointLipschitz : Bool
+    hessianLipschitzKeptDistinctFromFixedPointLipschitzIsTrue :
+      hessianLipschitzKeptDistinctFromFixedPointLipschitz ≡ true
+
     sourceFacingHessianAttachmentsRemainProofBearing : Bool
     sourceFacingHessianAttachmentsRemainProofBearingIsTrue :
       sourceFacingHessianAttachmentsRemainProofBearing ≡ true
 
 canonicalRound381Boundary : Round381Boundary
 canonicalRound381Boundary =
-  round381-boundary true refl true refl true refl
+  round381-boundary true refl true refl true refl true refl
 
 round381FrontierRefinementLevel : ProofLevel
 round381FrontierRefinementLevel = machineChecked
@@ -188,4 +205,3 @@ clayPromotion : Bool
 clayPromotion = false
 
 clayPromotionIsFalse : clayPromotion ≡ false
-clayPromotionIsFalse = refl
