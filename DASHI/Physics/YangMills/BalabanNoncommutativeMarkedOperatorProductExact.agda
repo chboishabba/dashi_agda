@@ -80,6 +80,14 @@ record MarkedOperatorNormAlgebra (Operator Bound : Set) : Set₁ where
       LessEqual (multiplyBound a c) (multiplyBound b d)
 
     identityNormBound : LessEqual (operatorNorm identityOperator) oneBound
+
+    -- General norm law needed by the one-marked-stage replay: a factor which
+    -- is literally unchanged across the two domains contributes zero marked
+    -- budget.  The older identity-only field is retained for compatibility
+    -- with the empty-product proof below.
+    selfDifferenceNormBound : ∀ operator →
+      LessEqual (operatorNorm (difference operator operator)) zeroBound
+
     zeroDifferenceNormBound :
       LessEqual (operatorNorm (difference identityOperator identityOperator))
         zeroBound
