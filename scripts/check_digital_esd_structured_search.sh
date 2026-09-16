@@ -25,6 +25,18 @@ grep -q '^searchMethodCitationDoesNotPromoteSystematicReview :' "$OWNER"
 grep -q '^plannedDatabaseDoesNotCreateExecutionReceipt :' "$OWNER"
 grep -q '^searchHitDoesNotCreateIncludedStudy :' "$OWNER"
 grep -q '^searchResultSnippetDoesNotPayFullSourceClaim :' "$OWNER"
+grep -q '^unobservedDatabaseDoesNotCloseStructuredSearch :' "$OWNER"
+grep -q '^structuredSearchClosureDoesNotPayEvidenceSynthesis :' "$OWNER"
+
+# Same-object search execution lineage: database exports -> dedup -> screening
+# -> extraction -> closure. There is deliberately no canonical closed receipt.
+grep -q '^record DatabaseExecutionReceipt (searchSurface : SearchSurface)' "$OWNER"
+grep -q '^record DeduplicationReceipt' "$OWNER"
+grep -q '^record EligibilityScreeningReceipt' "$OWNER"
+grep -q '^record StructuredExtractionReceipt' "$OWNER"
+grep -q '^record TransparentStructuredSearchClosureReceipt :' "$OWNER"
+grep -q '^closeTransparentStructuredSearch :' "$OWNER"
+grep -q 'sourceRoleAndExecutionLineageRetained' "$OWNER"
 
 grep -q '^queryFamilyRegression :' "$REGRESSION"
 grep -q '^openWebExecutionRegression :' "$REGRESSION"
@@ -34,6 +46,12 @@ grep -q '^ericExecutionRegression :' "$REGRESSION"
 grep -q '^acmExecutionRegression :' "$REGRESSION"
 grep -q '^ieeeExecutionRegression :' "$REGRESSION"
 grep -q '^structuredSearchStillOpenRegression :' "$REGRESSION"
+grep -q '^closureRequiresExecutedDatabasesRegression :' "$REGRESSION"
+grep -q '^closureDoesNotPromoteSystematicReviewRegression :' "$REGRESSION"
+grep -q '^executionReceiptRetainsQueryRegression :' "$REGRESSION"
+grep -q '^executionReceiptRetainsExportRegression :' "$REGRESSION"
+grep -q '^closureWithoutExecutionBlockedRegression :' "$REGRESSION"
+grep -q '^searchClosureDoesNotCloseSynthesisRegression :' "$REGRESSION"
 
 if command -v nix >/dev/null 2>&1 && [[ -x scripts/run_agda29_parallel_check.sh ]]; then
   scripts/run_agda29_parallel_check.sh "$REGRESSION"
