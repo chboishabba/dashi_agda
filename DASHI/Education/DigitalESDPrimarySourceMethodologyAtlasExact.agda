@@ -1,0 +1,133 @@
+module DASHI.Education.DigitalESDPrimarySourceMethodologyAtlasExact where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+
+import DASHI.Core.AttributedSourceCore as Attr
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Prior
+
+------------------------------------------------------------------------
+-- PRIMARY-SOURCE EXTENSION ATLAS FOR THE MANUSCRIPT/METHOD TRANCHE
+--
+-- Only genuinely new source objects live here. Existing call, Charter, LCA,
+-- circularity, participatory and longitudinal sources remain owned by their
+-- prior canonical atlases and are imported rather than duplicated.
+------------------------------------------------------------------------
+
+unescoESD2030RoadmapSource : Attr.AttributedSource
+unescoESD2030RoadmapSource =
+  Attr.mkNoDOISource
+    "UNESCO"
+    "Education for sustainable development: a roadmap"
+    "UNESCO"
+    "2020"
+    "https://www.unesco.org/en/articles/education-sustainable-development-roadmap"
+    Attr.institutionalSource
+    "Primary UNESCO implementation framework for ESD for 2030. Supports five priority action areas and the system-transformation framing; it is normative/programmatic guidance, not evidence that a named digital intervention achieved transformation."
+    Attr.publicAttribution
+
+unescoESD2030MidtermSource : Attr.AttributedSource
+unescoESD2030MidtermSource =
+  Attr.mkNoDOISource
+    "Simon Broek; Anahat Kaur; Ockham IPS (Netherlands); UNESCO"
+    "Mid-term evaluation of the ESD for 2030 framework, 2021-2024"
+    "UNESCO"
+    "2026"
+    "https://www.unesco.org/en/articles/mid-term-evaluation-esd-2030-framework-2021-2024"
+    Attr.institutionalSource
+    "Primary institutional evaluation of ESD-for-2030 implementation. Supports the source-bounded observation that substantial activity can coexist with limited systemic transformation and recommendations for stronger coherence, monitoring and national ownership; does not evaluate this manuscript's proposed digital-ESD framework."
+    Attr.publicAttribution
+
+oecdDigitalEducationOutlook2026Source : Attr.AttributedSource
+oecdDigitalEducationOutlook2026Source =
+  Attr.mkDOISource
+    "OECD"
+    "OECD Digital Education Outlook 2026: Exploring Effective Uses of Generative AI in Education"
+    "OECD Publishing"
+    "2026"
+    "10.1787/062a7394-en"
+    "https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html"
+    Attr.institutionalSource
+    "Primary OECD synthesis/report for current digital/GenAI education policy and evidence. Supports the distinction between task performance and learning, and the need for pedagogical guidance, human-centred design, research, governance and enabling infrastructure; it does not establish sustainability or learning effects for every technology or context."
+    Attr.publicAttribution
+
+primaryMethodologySourceAtlas : Attr.AttributedSourceAtlas
+primaryMethodologySourceAtlas =
+  Attr.mkSourceAtlas
+    "digital ESD manuscript primary-source methodology extension"
+    "DASHI.Education.DigitalESDPrimarySourceMethodologyAtlasExact"
+    ( unescoESD2030RoadmapSource
+    ∷ unescoESD2030MidtermSource
+    ∷ oecdDigitalEducationOutlook2026Source
+    ∷ [] )
+    "Primary institutional sources for ESD system transformation and current digital-education conditions. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
+
+unescoRoadmapSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt unescoESD2030RoadmapSource
+unescoRoadmapSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt unescoESD2030RoadmapSource
+
+unescoMidtermSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt unescoESD2030MidtermSource
+unescoMidtermSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt unescoESD2030MidtermSource
+
+oecdOutlookSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
+oecdOutlookSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt oecdDigitalEducationOutlook2026Source
+
+priorAcquisitionAtlasRetained : Prior.DigitalESDAcquisitionAtlas
+priorAcquisitionAtlasRetained = Prior.canonicalDigitalESDAcquisitionAtlas
+
+------------------------------------------------------------------------
+-- Promotion firewalls.
+------------------------------------------------------------------------
+
+data InstitutionalFrameworkCreatesInterventionEffect : Set where
+data MidtermProgrammeEvaluationCreatesLocalCausalEffect : Set where
+data DigitalEducationOutlookCreatesSustainabilityProof : Set where
+
+institutionalFrameworkDoesNotCreateInterventionEffect :
+  InstitutionalFrameworkCreatesInterventionEffect → ⊥
+institutionalFrameworkDoesNotCreateInterventionEffect ()
+
+midtermEvaluationDoesNotCreateLocalCausalEffect :
+  MidtermProgrammeEvaluationCreatesLocalCausalEffect → ⊥
+midtermEvaluationDoesNotCreateLocalCausalEffect ()
+
+digitalEducationOutlookDoesNotCreateSustainabilityProof :
+  DigitalEducationOutlookCreatesSustainabilityProof → ⊥
+digitalEducationOutlookDoesNotCreateSustainabilityProof ()
+
+record PrimarySourceMethodologyBoundary : Set where
+  constructor primary-source-methodology-boundary
+  field
+    primaryInstitutionalSourcesAttributed : Bool
+    primaryInstitutionalSourcesAttributedIsTrue :
+      primaryInstitutionalSourcesAttributed ≡ true
+    priorAtlasRetainedWithoutDuplication : Bool
+    priorAtlasRetainedWithoutDuplicationIsTrue :
+      priorAtlasRetainedWithoutDuplication ≡ true
+    citationImportsProof : Bool
+    citationImportsProofIsFalse : citationImportsProof ≡ false
+    citationCreatesAuthority : Bool
+    citationCreatesAuthorityIsFalse : citationCreatesAuthority ≡ false
+    institutionalReportCreatesSameObjectInterventionEffect : Bool
+    institutionalReportCreatesSameObjectInterventionEffectIsFalse :
+      institutionalReportCreatesSameObjectInterventionEffect ≡ false
+
+open PrimarySourceMethodologyBoundary public
+
+canonicalPrimarySourceMethodologyBoundary : PrimarySourceMethodologyBoundary
+canonicalPrimarySourceMethodologyBoundary =
+  primary-source-methodology-boundary
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
