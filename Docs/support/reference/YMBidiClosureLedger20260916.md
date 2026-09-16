@@ -39,15 +39,19 @@ axiom audit
 
 The worker's build/axiom receipt belongs to the retained supplied source. The current Lean branch head still requires its own exact-head build receipt before the new Lake/weld integration is called certified.
 
-### M7a finite-measure carrier — NARROWED
+### M7a finite-measure carrier — NARROWED, NOT PHYSICALLY CLOSED
 
-`BalabanDensityToLiteralFiniteMeasureRound124Exact` already proves, for a supplied density/finite-measure weld,
+`BalabanDensityToLiteralFiniteMeasureRound124Exact` supplies a machine-checked **compiler/projection** from a `BalabanDensityLiteralFiniteMeasureWeld` inhabitant:
 
 ```text
-BetaDensity.densityAt scale
-  -> densityToFiniteMeasure
-  = Top.finiteMeasure Y group (cutoffAtScale scale).
+BalabanDensityLiteralFiniteMeasureWeld
+  -> densityAtScaleIsLiteralFiniteMeasure
+  -> balabanDensityMapsToLiteralFiniteMeasure.
 ```
+
+The equality itself is a field of the weld record; R124 does not construct the physical weld from first principles. Its own status explicitly keeps
+
+`literalBalabanDensityIsClayFiniteMeasureLevel = conditional`.
 
 Therefore the old label
 
@@ -55,16 +59,15 @@ Therefore the old label
 M7a' literal selected Balaban finite measure — wholly unpaid
 ```
 
-is too coarse.
-
-Use instead:
+is still too coarse, but it must be split without promoting the record projection:
 
 ```text
-M7a0 density -> literal finite-measure carrier equality       PAID compiler/theorem
-M7a1 expectation/L2/null semantics on that SAME measure      LIVE physical semantics
+M7a0c density -> literal finite-measure equality compiler       PAID / machine-checked
+M7a0p physical weld inhabitant for that SAME equality           LIVE physical theorem
+M7a1  expectation/L2/null semantics on that SAME measure        LIVE physical semantics
 ```
 
-R205 already supplies the generic finite-measure expectation/null/quotient compiler once M7a1 is inhabited.
+R205 supplies the generic finite-measure expectation/null/quotient compiler once M7a0p/M7a1 are inhabited.
 
 ### Row-B polymer entropy — PAID
 
@@ -95,17 +98,20 @@ S2  exact equality of remaining R407 factors                           LIVE
 S3  R409 product-difference norm = selected R406 scalar term            LIVE
 S4  CMP116 positive majorants attached to that same decomposition       LIVE
 S5  literal differentiated CMP116 activity satisfies source majorant    LIVE
-S6  source-domain holomorphy / CMP109 analytic source theorem           LIVE theorem socket
+S6  source-domain holomorphy / source analytic theorem application      LIVE theorem socket
 S7  physical finite->continuum covariance convergence                   LIVE
 S8  OS/spectral correlation same-object representation                  LIVE
 ```
 
 Items S1--S3 are the Agda #967 R410 frontier. Existing norm/product inequalities are already compiler-owned and must not be reopened.
 
+Source archaeology confirms that CMP116 Sect. 1 analyticity/localization is represented by the proof-bearing ABI `PublishedCMP116DifferentiatedLocalization`, but no selected physical inhabitant with uniform radii/constants is manufactured: `physicalCMP116MarkedCoordinateAndUniformRadiusIdentificationLevel = conditional`. Likewise the CMP109 source transcription retains analytic source properties without creating the selected physical analytic package. S6 therefore remains genuine.
+
 ## Current finite physical-operator residual
 
 ```text
-M7a0  density -> literal finite-measure carrier equality               PAID by R124 compiler
+M7a0c density -> literal finite-measure equality compiler             PAID R124 compiler
+M7a0p physical density/finite-measure weld inhabitant                  LIVE
 M7a1  expectation/L2/null semantics on SAME literal measure            LIVE
 M7b   literal finite-spacing YM H_a = selected action variation         LIVE
 M7c   common invariant dense core + self-adjoint realization            LIVE
@@ -160,7 +166,7 @@ afb836c9... RED: lattice shell specialization
 
 1. **R410 source identities**: source-read/identify the actual CMP99 replacement inside the literal CMP109 differentiated entry. Do not guess a single changed stage if the source expression changes more than one factor.
 2. **Literal CMP116 activity majorant**: instantiate the already-proved Row-B rate/entropy machinery with the actual differentiated source activities.
-3. **M7a1/M7b**: same literal finite measure -> expectation/L2 semantics -> action-variation Hamiltonian.
+3. **M7a0p/M7a1/M7b**: inhabit the physical density->measure weld, then same literal measure -> expectation/L2 semantics -> action-variation Hamiltonian.
 4. **M7c/M9p**: common core/self-adjoint realization and the Row-A1 lower form-gap inequality on that exact H_a.
 5. **S6/S7/S8 + C1--C4**: source analyticity, physical covariance/OS representation, and actual cutoff-to-continuum operator construction.
 
@@ -171,7 +177,8 @@ The following must **not** be represented as completed merely by creating anothe
 ```text
 literal CMP99/CMP109 same-object identity
 literal differentiated CMP116 activity estimate
-physical Yang--Mills L2 expectation semantics on the selected measure
+physical Balaban density -> literal finite-measure weld inhabitant
+physical Yang--Mills L2 expectation semantics on that selected measure
 literal self-adjoint finite-spacing YM Hamiltonian
 bMinus lower-bounds that same Hamiltonian's vacuum form
 actual 4D physical cutoff -> continuum construction
