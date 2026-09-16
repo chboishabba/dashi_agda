@@ -24,8 +24,8 @@ module DASHI.Physics.YangMills.BalabanR318CanonicalDirectShellRound398Exact wher
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Ex
 import DASHI.Physics.YangMills.BalabanT5DirectSelectedMarkedDecayRound320Exact as R320
 import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact as R295
 import DASHI.Physics.YangMills.BalabanCMP116DirectT5ContinuumClusteringRound284Exact as R284
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 
 canonicalDirectShell :
   ∀ {Measure TestObservable}
@@ -65,8 +66,11 @@ canonicalDirectShell {dataSet = dataSet} {extension = extension} base payment =
           in
           subst
             (λ lower →
-              lower ℚ.≤
-              _)
+              lower ≤ Shell.rootedShell (R318.shellData base)
+                (R318.scaleOf base cutoff)
+                (R318.volumeOf base cutoff)
+                (R318.connectingRoot base cutoff left right)
+                (R318.physicalDistance base left right))
             equality
             literalBound
     ; R284.DirectT5TwoSourceShell.connectingClusterMeetsBothSupports =
