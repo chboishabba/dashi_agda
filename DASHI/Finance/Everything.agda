@@ -45,9 +45,11 @@ import DASHI.Finance.TrumpPortfolioManagementAttributionValidation
 import DASHI.Finance.TrumpFamilyTradeSourceQualityValidation
 
 -- April 2025 tariff/public-signal and decision-provenance extension.  The
--- public sequence, later transaction disclosures, manager attribution, PNF /
--- game-theory information cuts and dashiTRADE authority remain separate.
+-- public sequence, anonymous options timing, later transaction disclosures,
+-- manager attribution, PNF/game-theory information cuts and dashiTRADE
+-- authority remain separate.
 import DASHI.Finance.TrumpTariffMarketSignalSourceExact
+import DASHI.Finance.TrumpTariffOptionsTimingEvidenceExact
 import DASHI.Finance.TrumpTradeDecisionProvenanceExact
 import DASHI.Finance.TrumpTariffMarketPNFGameBridgeExact
 import DASHI.Finance.TrumpTariffDashiTradeBoundaryExact
