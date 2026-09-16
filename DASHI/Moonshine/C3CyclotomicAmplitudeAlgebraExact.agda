@@ -76,19 +76,19 @@ norm (cyclotomic3 u v) = u * u - u * v + v * v
 
 zetaSquaredIsZetaTimesZeta : multiply zeta zeta ≡ zetaSquared
 zetaSquaredIsZetaTimesZeta =
-  cyclotomic3Ext (solve []) (solve [])
+  cyclotomic3Ext refl refl
 
 zetaCubedIsOne : multiply zetaSquared zeta ≡ one
-zetaCubedIsOne = cyclotomic3Ext (solve []) (solve [])
+zetaCubedIsOne = cyclotomic3Ext refl refl
 
 conjugateZetaIsZetaSquared : conjugate zeta ≡ zetaSquared
-conjugateZetaIsZetaSquared = cyclotomic3Ext (solve []) (solve [])
+conjugateZetaIsZetaSquared = cyclotomic3Ext refl refl
 
 conjugateZetaSquaredIsZeta : conjugate zetaSquared ≡ zeta
-conjugateZetaSquaredIsZeta = cyclotomic3Ext (solve []) (solve [])
+conjugateZetaSquaredIsZeta = cyclotomic3Ext refl refl
 
 zetaTimesConjugateZetaIsOne : multiply zeta (conjugate zeta) ≡ one
-zetaTimesConjugateZetaIsOne = cyclotomic3Ext (solve []) (solve [])
+zetaTimesConjugateZetaIsOne = cyclotomic3Ext refl refl
 
 ------------------------------------------------------------------------
 -- Conjugation and real-valued trace/norm descent.
@@ -96,45 +96,61 @@ zetaTimesConjugateZetaIsOne = cyclotomic3Ext (solve []) (solve [])
 conjugationInvolutive : (value : Cyclotomic3) →
   conjugate (conjugate value) ≡ value
 conjugationInvolutive (cyclotomic3 u v) =
-  cyclotomic3Ext (solve (u ∷ v ∷ [])) (solve (v ∷ []))
+  cyclotomic3Ext step1 step2
+  where
+    step1 : (u - v) - (- v) ≡ u
+    step1 = solve (u ∷ v ∷ [])
+
+    step2 : - (- v) ≡ v
+    step2 = solve (v ∷ [])
 
 traceConjugationInvariant : (value : Cyclotomic3) →
   trace (conjugate value) ≡ trace value
-traceConjugationInvariant (cyclotomic3 u v) =
-  solve (u ∷ v ∷ [])
+traceConjugationInvariant (cyclotomic3 u v) = step
+  where
+    step : ((u - v) + (u - v)) - (- v) ≡ (u + u) - v
+    step = solve (u ∷ v ∷ [])
 
 normConjugationInvariant : (value : Cyclotomic3) →
   norm (conjugate value) ≡ norm value
-normConjugationInvariant (cyclotomic3 u v) =
-  solve (u ∷ v ∷ [])
+normConjugationInvariant (cyclotomic3 u v) = step
+  where
+    step :
+      ((u - v) * (u - v) - (u - v) * (- v)) + (- v) * (- v)
+      ≡ (u * u - u * v) + v * v
+    step = solve (u ∷ v ∷ [])
 
 multiplyByConjugateLandsOnNorm : (value : Cyclotomic3) →
   multiply value (conjugate value) ≡ embedRational (norm value)
 multiplyByConjugateLandsOnNorm (cyclotomic3 u v) =
-  cyclotomic3Ext
-    (solve (u ∷ v ∷ []))
-    (solve (u ∷ v ∷ []))
+  cyclotomic3Ext step1 step2
+  where
+    step1 : (u * (u - v)) - (v * (- v)) ≡ ((u * u) - (u * v)) + (v * v)
+    step1 = solve (u ∷ v ∷ [])
+
+    step2 : ((u * (- v)) + (v * (u - v))) - (v * (- v)) ≡ 0ℚ
+    step2 = solve (u ∷ v ∷ [])
 
 ------------------------------------------------------------------------
 -- Calibration on the three C3 phases.
 
 traceOneIsTwo : trace one ≡ 1ℚ + 1ℚ
-traceOneIsTwo = solve []
+traceOneIsTwo = refl
 
 traceZetaIsMinusOne : trace zeta ≡ - 1ℚ
-traceZetaIsMinusOne = solve []
+traceZetaIsMinusOne = refl
 
 traceZetaSquaredIsMinusOne : trace zetaSquared ≡ - 1ℚ
-traceZetaSquaredIsMinusOne = solve []
+traceZetaSquaredIsMinusOne = refl
 
 normOneIsOne : norm one ≡ 1ℚ
-normOneIsOne = solve []
+normOneIsOne = refl
 
 normZetaIsOne : norm zeta ≡ 1ℚ
-normZetaIsOne = solve []
+normZetaIsOne = refl
 
 normZetaSquaredIsOne : norm zetaSquared ≡ 1ℚ
-normZetaSquaredIsOne = solve []
+normZetaSquaredIsOne = refl
 
 ------------------------------------------------------------------------
 -- Rational-axis calibration.  This is the fixed-field direction used by the
@@ -143,12 +159,24 @@ normZetaSquaredIsOne = solve []
 conjugateEmbeddedRational : (r : ℚ) →
   conjugate (embedRational r) ≡ embedRational r
 conjugateEmbeddedRational r =
-  cyclotomic3Ext (solve (r ∷ [])) (solve [])
+  cyclotomic3Ext step1 step2
+  where
+    step1 : r - 0ℚ ≡ r
+    step1 = solve (r ∷ [])
+
+    step2 : - 0ℚ ≡ 0ℚ
+    step2 = refl
 
 traceEmbeddedRational : (r : ℚ) →
   trace (embedRational r) ≡ r + r
-traceEmbeddedRational r = solve (r ∷ [])
+traceEmbeddedRational r = step
+  where
+    step : (r + r) - 0ℚ ≡ r + r
+    step = solve (r ∷ [])
 
 normEmbeddedRational : (r : ℚ) →
   norm (embedRational r) ≡ r * r
-normEmbeddedRational r = solve (r ∷ [])
+normEmbeddedRational r = step
+  where
+    step : ((r * r) - (r * 0ℚ)) + (0ℚ * 0ℚ) ≡ r * r
+    step = solve (r ∷ [])
