@@ -13,4 +13,8 @@ grabAGunTriadIsPresent = Policy.canonicalGrabAGunPolicyMarketTriad
 policySourceIsPrimary = Policy.grabAGunATFNonOTCProposal
 independentCounterevidenceIsRetained = Policy.grabAGunReutersPolicyExposure
 knowledgeIsStillUnpaid = Policy.grabAGunKnowledgeBoundary
+
+truthAPITriadIsPresent = Policy.canonicalTruthAPIPolicyMarketTriad
+truthAPIIndependentMarketAccessIsPresent = Policy.truthAPIReutersMarketAccess
+
 policyPNFBoundaryIsPresent = PolicyPNF.canonicalPolicyMarketPNFBoundary
