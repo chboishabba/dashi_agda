@@ -76,10 +76,10 @@ lcpLen-ultratriangle [] [] [] = z≤n
 lcpLen-ultratriangle (x ∷ xs) (y ∷ ys) (z ∷ zs) with x | y | z
 ... | true  | true  | true  = s≤s (lcpLen-ultratriangle xs ys zs)
 ... | false | false | false = s≤s (lcpLen-ultratriangle xs ys zs)
-... | true  | false | _     rewrite ⊓-zeroˡ (lcpLen (y ∷ ys) (z ∷ zs)) = z≤n
-... | false | true  | _     rewrite ⊓-zeroˡ (lcpLen (y ∷ ys) (z ∷ zs)) = z≤n
-... | true  | true  | false rewrite ⊓-zeroʳ (lcpLen (x ∷ xs) (y ∷ ys)) = z≤n
-... | false | false | true  rewrite ⊓-zeroʳ (lcpLen (x ∷ xs) (y ∷ ys)) = z≤n
+... | true  | false | z     rewrite ⊓-zeroˡ (lcpLen (false ∷ ys) (z ∷ zs)) = z≤n
+... | false | true  | z     rewrite ⊓-zeroˡ (lcpLen (true ∷ ys) (z ∷ zs)) = z≤n
+... | true  | true  | false rewrite ⊓-zeroʳ (suc (lcpLen xs ys)) = z≤n
+... | false | false | true  rewrite ⊓-zeroʳ (suc (lcpLen xs ys)) = z≤n
 
 ultraMask : ∀ x y z → dMask {15} x z ≤ (dMask {15} x y ⊔ dMask {15} y z)
 ultraMask x y z =

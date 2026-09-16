@@ -119,9 +119,9 @@ Promoted :
     PromotionPolicy measurement →
     MeasurementRecord measurement →
     Set (ℓq ⊔ ℓd)
-Promoted policy record =
-  Candidate policy record
-  × EvidenceSufficient (evidenceLedger policy record)
+Promoted policy rec =
+  Candidate policy rec
+  × EvidenceSufficient (evidenceLedger policy rec)
 
 promote :
   ∀ {ℓq ℓd}
@@ -129,11 +129,11 @@ promote :
     {Datum : Set ℓd}
     {measurement : MeasurementOp QState Datum}
     (policy : PromotionPolicy measurement)
-    (record : MeasurementRecord measurement) →
-    Candidate policy record →
-    EvidenceSufficient (evidenceLedger policy record) →
-    Promoted policy record
-promote policy record candidate sufficient = candidate , sufficient
+    (rec : MeasurementRecord measurement) →
+    Candidate policy rec →
+    EvidenceSufficient (evidenceLedger policy rec) →
+    Promoted policy rec
+promote policy rec candidate sufficient = candidate , sufficient
 
 promotion-fail-closed-candidate :
   ∀ {ℓq ℓd}
@@ -141,10 +141,10 @@ promotion-fail-closed-candidate :
     {Datum : Set ℓd}
     {measurement : MeasurementOp QState Datum}
     (policy : PromotionPolicy measurement)
-    (record : MeasurementRecord measurement) →
-    Promoted policy record →
-    Candidate policy record
-promotion-fail-closed-candidate policy record = proj₁
+    (rec : MeasurementRecord measurement) →
+    Promoted policy rec →
+    Candidate policy rec
+promotion-fail-closed-candidate policy rec = proj₁
 
 promotion-fail-closed-evidence :
   ∀ {ℓq ℓd}
@@ -152,10 +152,10 @@ promotion-fail-closed-evidence :
     {Datum : Set ℓd}
     {measurement : MeasurementOp QState Datum}
     (policy : PromotionPolicy measurement)
-    (record : MeasurementRecord measurement) →
-    Promoted policy record →
-    EvidenceSufficient (evidenceLedger policy record)
-promotion-fail-closed-evidence policy record = proj₂
+    (rec : MeasurementRecord measurement) →
+    Promoted policy rec →
+    EvidenceSufficient (evidenceLedger policy rec)
+promotion-fail-closed-evidence policy rec = proj₂
 
 ------------------------------------------------------------------------
 -- Full executable seam: latent input → reversible step → measurement record.

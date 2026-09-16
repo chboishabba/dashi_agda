@@ -1,6 +1,6 @@
 module DASHI.Algebra.Quantum.OrdinaryComplexQutritUnitary where
 
-open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong₂)
 
 open import DASHI.Analysis.ConstructiveRealSpine
 open import DASHI.Analysis.ConcreteComplex
@@ -11,25 +11,23 @@ open import DASHI.Algebra.Quantum.OrdinaryComplexQutrit
 open import DASHI.Algebra.Quantum.QutritPermutationUnitary
 
 complexAddAssoc :
-  ∀ {R : ConstructedOrderedCompleteReal} →
-  ∀ a b c →
-  _+C_ (_+C_ a b) c ≡ _+C_ a (_+C_ b c)
+  ∀ {R : ConstructedOrderedCompleteReal}
+    (a b c : ComplexPair R) →
+    _+C_ (_+C_ a b) c ≡ _+C_ a (_+C_ b c)
 complexAddAssoc {R}
   (complex ar ai)
   (complex br bi)
-  (complex cr ci)
-  rewrite addAssoc R ar br cr
-        | addAssoc R ai bi ci = refl
+  (complex cr ci) =
+  cong₂ (complex {R}) (addAssoc R ar br cr) (addAssoc R ai bi ci)
 
 complexAddComm :
-  ∀ {R : ConstructedOrderedCompleteReal} →
-  ∀ a b →
-  _+C_ a b ≡ _+C_ b a
+  ∀ {R : ConstructedOrderedCompleteReal}
+    (a b : ComplexPair R) →
+    _+C_ a b ≡ _+C_ b a
 complexAddComm {R}
   (complex ar ai)
-  (complex br bi)
-  rewrite addComm R ar br
-        | addComm R ai bi = refl
+  (complex br bi) =
+  cong₂ (complex {R}) (addComm R ar br) (addComm R ai bi)
 
 ordinaryComplexAdditiveLaws :
   ∀ {R : ConstructedOrderedCompleteReal}
@@ -37,10 +35,10 @@ ordinaryComplexAdditiveLaws :
     (Z : RealZeroMultiplicationLaws R) →
   ScalarAdditiveCommutativeLaws
     (scalarSemiring (ordinaryQutritScalarPackage C Z))
-ordinaryComplexAdditiveLaws C Z =
+ordinaryComplexAdditiveLaws {R} C Z =
   record
-    { addAssoc = complexAddAssoc
-    ; addComm = complexAddComm
+    { addAssoc = complexAddAssoc {R}
+    ; addComm = complexAddComm {R}
     }
 
 ordinaryQutritPermutationUnitary :
@@ -63,13 +61,13 @@ record OrdinaryPermutationMatrixUnitaryReceipt
   A = scalarSemiring (ordinaryQutritScalarPackage C Z)
 
   field
-    gate : QutritGate
+    permutationGate : QutritGate
     matrixAction : QutritState A → QutritState A
     matrixAgreesWithPermutation : ∀ state →
-      matrixAction state ≡ applyAmplitudeGate gate state
+      matrixAction state ≡ applyAmplitudeGate permutationGate state
 
   permutationUnitary :
-    QutritUnitary A (applyAmplitudeGate gate)
-  permutationUnitary = ordinaryQutritPermutationUnitary C Z gate
+    QutritUnitary A (applyAmplitudeGate permutationGate)
+  permutationUnitary = ordinaryQutritPermutationUnitary C Z permutationGate
 
 open OrdinaryPermutationMatrixUnitaryReceipt public
