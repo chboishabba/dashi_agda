@@ -1,10 +1,9 @@
 module DASHI.Analysis.ZetaMinusThreeBernoulliArithmeticExact where
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; -_; _*_; _/_)
-import Data.Rational.Tactic.RingSolver as ℚRing
 
 ------------------------------------------------------------------------
 -- ZETA(-3) NUMERICAL COMPILER
@@ -29,7 +28,7 @@ minusB4OverFour = (- bernoulliB4) * oneQuarter
 
 bernoulliB4CompilerProducesOneOver120 :
   minusB4OverFour ≡ oneOver120
-bernoulliB4CompilerProducesOneOver120 = ℚRing.solve []
+bernoulliB4CompilerProducesOneOver120 = refl
 
 record ZetaMinusThreeBernoulliAnalyticReceipt : Set₁ where
   field

@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Algebra.Trit where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
