@@ -117,13 +117,24 @@ def class_character() -> list[int]:
     return values
 
 
-def character_inner_product(left: list[int], right: list[int]) -> int:
+def weighted_inner_product_split(left: list[int], right: list[int]) -> dict[str, int]:
     class_sizes = [len(members) for _, members in CONJUGACY_CLASSES]
-    numerator = sum(
+    terms = [
         size * a * b for size, a, b in zip(class_sizes, left, right, strict=True)
-    )
+    ]
+    positive = sum(term for term in terms if term > 0)
+    negative = sum(-term for term in terms if term < 0)
+    numerator = positive - negative
     assert numerator % 8 == 0
-    return numerator // 8
+    return {
+        "positive": positive,
+        "negative": negative,
+        "multiplicity": numerator // 8,
+    }
+
+
+def character_inner_product(left: list[int], right: list[int]) -> int:
+    return weighted_inner_product_split(left, right)["multiplicity"]
 
 
 def decompose(character: list[int]) -> dict[str, int]:
@@ -136,6 +147,10 @@ def decompose(character: list[int]) -> dict[str, int]:
 def build_report() -> dict[str, object]:
     character = class_character()
     multiplicities = decompose(character)
+    weighted_splits = {
+        irrep: weighted_inner_product_split(character, irrep_character)
+        for irrep, irrep_character in IRREP_CHARACTERS.items()
+    }
     dimension_check = sum(
         multiplicities[name] * IRREP_DIMENSIONS[name]
         for name in multiplicities
@@ -150,13 +165,14 @@ def build_report() -> dict[str, object]:
     removed_dimension = sum(removed[name] * IRREP_DIMENSIONS[name] for name in removed)
 
     return {
-        "schema": "monster369-five-orbit-d4-character-probe-v1",
+        "schema": "monster369-five-orbit-d4-character-probe-v2",
         "orbit_count": len(ORBIT_REPRESENTATIVES),
         "orbits": list(ORBIT_REPRESENTATIVES),
         "conjugacy_classes": [name for name, _ in CONJUGACY_CLASSES],
         "conjugacy_class_sizes": [len(members) for _, members in CONJUGACY_CLASSES],
         "permutation_character": character,
         "irrep_multiplicities": multiplicities,
+        "weighted_inner_product_splits": weighted_splits,
         "quotient_irrep_multiplicities": multiplicities,
         "raw_nine_irrep_multiplicities": raw_nine,
         "dimension_check": dimension_check,
