@@ -15,34 +15,57 @@ import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Quotient
 import DASHI.Biology.SSP15ComplementPhaseProjectorExact as SSP15
 import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
 import DASHI.Wikimedia.IbrahimMonster42d17496PositiveBridgeAcquisitionExact as Bridge
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Reduction
 
 ------------------------------------------------------------------------
--- MONSTER 42d / FIFTEEN -> FOURTEEN -> FORTY-TWO POSITIVE CARRIER
+-- MONSTER 42d / TERNARY27 -> FIFTEEN -> FOURTEEN -> FORTY-TWO CARRIER
 --
--- The repository already owns two finite structures built from the same
+-- The primary 15-state construction is now source-bound to the exact
+-- phase-preserving ternary-27 symmetry reduction:
+--
+--   T^3 = T x T^2
+--       -> T x (T^2 / inner global inversion)
+--       = 3 x 5
+--       = 15.
+--
+-- The repository also owns two finite structures built from the same
 -- five-mode/D4-label family:
 --
 --   * five modes x three balanced phases = 15 (SSP15),
---   * five D4 labels x two binary orientations = 10 (Base369 five-mode lane).
+--   * five D4 labels x two binary orientations = 10.
 --
--- This owner records the exact finite arithmetic suggested by the 42d
--- acquisition:
+-- Hence 15 = 5 + 10 is retained as a secondary decomposition of the same
+-- five-mode phase carrier: five neutral phase states plus ten non-neutral
+-- oriented states.  Then:
 --
---   15 = 5 + 10,
 --   14 = 15 - one distinguished neutral lane,
 --   42 = 3 * 14.
 --
 -- The 14-state residual is an explicit list of the canonical SSP15 lanes with
--- only (mode09, zeroTrit) omitted.  Hence the deletion is attached to an
--- actual repo carrier, not merely the numeral 15.
---
--- This is positive carrier structure only.  It does NOT identify the resulting
--- outer-phase x residual carrier with a Monster class-42d element/action, and
--- no 27 -> five-mode selection is claimed here.
+-- only (mode09, zeroTrit) omitted.  The map from the five inner inversion
+-- orbits to ComplementMode5 is an indexing bijection only; it is not a D4 or
+-- Monster semantic identity.  Likewise no direct 27 -> 5 selector is claimed.
 ------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
--- 1. Exact five-mode and ten-oriented carrier counts.
+-- 1. Exact phase-preserving 27 -> 3 x 5 source.
+------------------------------------------------------------------------
+
+ternary27ReductionBoundary : Reduction.Ternary27ReductionBoundary
+ternary27ReductionBoundary = Reduction.currentTernary27ReductionBoundary
+
+phaseOrbit15ToSSP15RoundTrip :
+  (lane : Reduction.PhaseOrbit15) →
+  Reduction.ssp15ToPhaseOrbit (Reduction.phaseOrbitToSSP15 lane) ≡ lane
+phaseOrbit15ToSSP15RoundTrip = Reduction.phaseOrbitSSP15RoundTrip
+
+ssp15ToPhaseOrbit15RoundTrip :
+  (lane : SSP15.SSP15InternalLane) →
+  Reduction.phaseOrbitToSSP15 (Reduction.ssp15ToPhaseOrbit lane) ≡ lane
+ssp15ToPhaseOrbit15RoundTrip = Reduction.ssp15PhaseOrbitRoundTrip
+
+------------------------------------------------------------------------
+-- 2. Exact five-mode and ten-oriented carrier counts.
 ------------------------------------------------------------------------
 
 canonicalFiveModes : List Five.D4IrreducibleType
@@ -83,7 +106,7 @@ fiveTimesThreeSourceCountIsFifteen : 5 * 3 ≡ 15
 fiveTimesThreeSourceCountIsFifteen = SSP15.fiveModesTimesThreePhasesIsFifteen
 
 ------------------------------------------------------------------------
--- 2. Delete the distinguished neutral lane from the canonical SSP15 carrier.
+-- 3. Delete the distinguished neutral lane from the canonical SSP15 carrier.
 ------------------------------------------------------------------------
 
 distinguishedNeutralLane : SSP15.SSP15InternalLane
@@ -117,7 +140,7 @@ distinguishedPlusResidualIsFifteen :
 distinguishedPlusResidualIsFifteen = refl
 
 ------------------------------------------------------------------------
--- 3. Outer balanced ternary phase gives the 42-count candidate.
+-- 4. Outer balanced ternary phase gives the 42-count candidate.
 ------------------------------------------------------------------------
 
 outerBalancedPhaseCount : Nat
@@ -128,14 +151,14 @@ outerThreeTimesFourteenArithmetic :
 outerThreeTimesFourteenArithmetic = refl
 
 ------------------------------------------------------------------------
--- 4. 42d acquisition anchor.
+-- 5. 42d acquisition anchor.
 ------------------------------------------------------------------------
 
 monster42dBridgeBoundary : Bridge.Monster42d17496BridgeBoundary
 monster42dBridgeBoundary = Bridge.currentMonster42d17496BridgeBoundary
 
 ------------------------------------------------------------------------
--- 5. WrongType firewalls.
+-- 6. WrongType firewalls.
 ------------------------------------------------------------------------
 
 data FortyTwoCarrierCreatesMonster42dSameObject : Set where
@@ -155,12 +178,14 @@ twentySevenDoesNotCreateFiveModeSelection :
 twentySevenDoesNotCreateFiveModeSelection ()
 
 ------------------------------------------------------------------------
--- 6. Positive carrier frontier.
+-- 7. Positive carrier frontier.
 ------------------------------------------------------------------------
 
 record Monster42dFifteenFourteenBoundary : Set where
   constructor monster42d-fifteen-fourteen-boundary
   field
+    ternary27PhasePreservingReductionSourcePaid : Bool
+    twentySevenToThreeTimesFiveSymmetryReductionPaid : Bool
     ssp15FifteenLaneSourcePaid : Bool
     fiveModeSourcePaid : Bool
     tenOrientedCarrierSourcePaid : Bool
@@ -179,6 +204,6 @@ currentMonster42dFifteenFourteenBoundary :
   Monster42dFifteenFourteenBoundary
 currentMonster42dFifteenFourteenBoundary =
   monster42d-fifteen-fourteen-boundary
-    true true true true true true true true
+    true true true true true true true true true true
     false false false
-    "Retain the exact repo-native 5 x 3 = 15 carrier, the 5 + 10 = 15 decomposition, the explicit deletion of the neutral mode09 lane to a 14-state residual, and the outer 3 x 14 = 42 count as positive Monster42d acquisition structure. The next structural payment is either (a) a source-paid map from the relevant 27-state ternary carrier into the five selected modes, or (b) a Monster-theoretic bridge from this 42-state carrier to the selected class-42d graded action. Neither is created by the arithmetic or by A058678 itself."
+    "The 15-state carrier is now source-bound to the exact phase-preserving symmetry reduction T^3 -> T x (T^2/inner inversion) = 3 x 5 = 15, and to the existing SSP15 carrier by a two-sided finite indexing. Retain 5 + 10 = 15 as the neutral/non-neutral decomposition, the explicit deletion of one neutral mode09 lane to 14, and the outer 3 x 14 = 42 carrier as positive Monster42d acquisition structure. A direct 27 -> 5 selector remains false: the paid quotient preserves the outer ternary phase. The remaining proof-bearing debt is a Monster-theoretic bridge from this 42-state carrier to the selected class-42d graded action; neither the arithmetic nor A058678 supplies that action."
