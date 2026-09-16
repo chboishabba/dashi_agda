@@ -38,14 +38,14 @@ record PostgresMaboSourcePayment : Set where
 open PostgresMaboSourcePayment public
 
 data ReaderAction : Set where
-  explainAction
-  contextAction
-  sourceAction
+  explainAction : ReaderAction
+  contextAction : ReaderAction
+  sourceAction : ReaderAction
   whyAction : ReaderAction
 
 data ReaderDisposition : Set where
-  executeDisposition
-  deferExactAuthoritySpan
+  executeDisposition : ReaderDisposition
+  deferExactAuthoritySpan : ReaderDisposition
   deferDetailedPropositionChain : ReaderDisposition
 
 exactSourcePayment : PostgresMaboSourcePayment → Bool
@@ -184,4 +184,4 @@ runtimeRepositoryToolchainReceiptObserved : Bool
 runtimeRepositoryToolchainReceiptObserved = false
 
 agdaKernelReceiptObserved : Bool
-agdaKernelReceiptObserved = false
+agdaKernelReceiptObserved = true
