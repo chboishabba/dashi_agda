@@ -33,11 +33,16 @@ FILES=(
   DASHI/Biology/CausalEstimatorFiniteTestDistributionConvergenceExact.agda
   DASHI/Biology/CausalEstimatorWeakNormalLimitDebtSplitExact.agda
   DASHI/Biology/CausalEstimatorAsymptoticProofDebtExact.agda
+  DASHI/Core/ProofDebtUniverseLiftExact.agda
   DASHI/GameTheory/GameTheorySourceAtlasExact.agda
   DASHI/GameTheory/StrategicInteractionCoreExact.agda
   DASHI/GameTheory/FiniteMixedStrategyExpectedUtilityExact.agda
   DASHI/GameTheory/FiniteMixedNashProductCorrectionExact.agda
+  DASHI/GameTheory/FiniteMixedNashReceiptBindingExact.agda
+  DASHI/GameTheory/Nash1950CorrectedExistenceAlignmentExact.agda
   DASHI/GameTheory/FiniteIncompleteInformationBayesianExact.agda
+  DASHI/GameTheory/FiniteBayesianAgentNormalFormReductionExact.agda
+  DASHI/GameTheory/FiniteMixedBayesianExistenceViaNashExact.agda
   DASHI/GameTheory/SequentialExtensiveFormExact.agda
   DASHI/GameTheory/SequentialGameFractranWolframCrossPollinationExact.agda
   DASHI/GameTheory/GameComputationSourceAttributionExact.agda
@@ -51,6 +56,7 @@ FILES=(
   DASHI/GameTheory/CooperativeCoalitionBargainingCoreExact.agda
   DASHI/GameTheory/MechanismDesignIncentiveCompatibilityExact.agda
   DASHI/GameTheory/StrategicExperimentalIdentificationFibreExact.agda
+  DASHI/GameTheory/GameTheoryIntrospectiveCompletionCutExact.agda
   DASHI/GameTheory/GameTheoryCompletionFrontierExact.agda
   DASHI/GameTheory/Everything.agda
   DASHI/AgenticMaterialBidiEverything.agda
@@ -73,4 +79,4 @@ if command -v agda >/dev/null 2>&1; then
   done
 fi
 
-echo "directional evidence / logistic population / resource-coupled evolution / metabolic open-balance / metabolic admissibility / proto-agency / heritable agentic organisation / open-ended repertoire / historical evidence / multiscale causal provenance / causal identification families / causal estimands / estimator-uncertainty realization / finite rational expectation / estimator guarantees / metric consistency / finite dispersion-MSE / finite probability consistency / finite test distribution convergence / weak-normal-limit debt split / asymptotic proof-debt frontier / corrected product-law mixed Nash / ternary-Life pure-Nash fixture / attributed pure-mixed-Bayesian-sequential game theory / FRACTRAN-Wolfram strategic computation / agentic-evolutionary ESS-replicator-memory-cooperative-mechanism-identification game bridges / DNA-neural-memory-trauma-Amalek cross-pollination checks passed"
+echo "directional evidence / causal-estimator finite+metric cone / proof-debt universe lift / corrected exact-receipt product-law Nash / Nash-1950 source alignment / finite Bayesian agent-normal-form reduction / mixed Bayesian existence via Nash / ternary-Life pure-Nash fixture / Bayesian-sequential-FRACTRAN-Wolfram / agentic-evolutionary ESS-replicator-memory-cooperative-mechanism-identification / DNA-neural-memory-trauma-Amalek cross-pollination checks passed"

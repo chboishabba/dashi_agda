@@ -7,7 +7,12 @@ open import Data.Empty using (⊥)
 import DASHI.Core.ProofDebtRouterExact as Debt
 import DASHI.GameTheory.StrategicInteractionCoreExact as Core
 import DASHI.GameTheory.FiniteMixedStrategyExpectedUtilityExact as Mixed
+import DASHI.GameTheory.FiniteMixedNashProductCorrectionExact as Correction
+import DASHI.GameTheory.FiniteMixedNashReceiptBindingExact as Binding
+import DASHI.GameTheory.Nash1950CorrectedExistenceAlignmentExact as Nash1950
 import DASHI.GameTheory.FiniteIncompleteInformationBayesianExact as Bayesian
+import DASHI.GameTheory.FiniteBayesianAgentNormalFormReductionExact as BayesianReduction
+import DASHI.GameTheory.FiniteMixedBayesianExistenceViaNashExact as BayesianViaNash
 import DASHI.GameTheory.SequentialExtensiveFormExact as Sequential
 import DASHI.GameTheory.SequentialGameFractranWolframCrossPollinationExact as Computation
 import DASHI.GameTheory.AgenticStrategicInteractionBridgeExact as AgenticBridge
@@ -24,57 +29,50 @@ import DASHI.GameTheory.GameTheorySourceAtlasExact as Sources
 ------------------------------------------------------------------------
 -- GAME THEORY COMPLETION FRONTIER
 --
--- Definitions/carriers are not existence theorems.  We now own bounded pure,
--- finite mixed, finite common-prior Bayesian, sequential/extensive, invasion,
--- classic symmetric ESS-shape, finite replicator, cooperative/core/bargaining,
--- mechanism-design, experimental-identification, agentic/evolutionary, memory,
--- FRACTRAN and Wolfram-residual bridges.  Existence, characterization,
--- posterior hierarchies and empirical application receipts remain separate.
+-- The corrected mixed-Nash consumer is now source-aligned to Nash 1950 for an
+-- exact finite normal-form receipt, so its remaining theorem debt is
+-- certification, not transcription.  Finite MIXED Bayesian existence is reduced
+-- to that same theorem through the contingent-plan agent normal form; it does
+-- not require a second fixed-point theorem.  Pure Bayesian equilibrium,
+-- posterior semantics, existence/characterization results in other lanes and
+-- empirical applications remain separate.
 ------------------------------------------------------------------------
 
-data StandardGameTheoremFamily : Set where
-  finiteMixedNashExistence
-  finiteBayesianNashExistence : StandardGameTheoremFamily
+data SharedExistenceTheoremLeaf : Set where
+  correctedFiniteMixedNash
+  finiteMixedBayesianViaNash : SharedExistenceTheoremLeaf
 
-standardGameTheoremRoute :
-  StandardGameTheoremFamily → Debt.ProofDebtRoutingReceipt
-standardGameTheoremRoute _ =
-  Debt.proof-debt-routing-receipt
-    Debt.deductiveTheorem
-    Debt.sourceEstablished
-    Debt.notTranscribed
-    Debt.uncertified
-    Debt.sourceOnly
-    Debt.transcriptionDebt
-    refl
+sharedExistenceRoute :
+  SharedExistenceTheoremLeaf → Debt.ProofDebtRoutingReceipt
+sharedExistenceRoute _ = Nash1950.nash1950PostAlignmentRoute
 
-finiteMixedNashExistenceNeedsTranscription :
-  Debt.routedDebt (standardGameTheoremRoute finiteMixedNashExistence)
-  ≡ Debt.transcriptionDebt
-finiteMixedNashExistenceNeedsTranscription = refl
+correctedMixedNashIsCertificationDebt :
+  Debt.routedDebt (sharedExistenceRoute correctedFiniteMixedNash)
+  ≡ Debt.certificationDebt
+correctedMixedNashIsCertificationDebt = refl
 
-finiteBayesianNashExistenceNeedsTranscription :
-  Debt.routedDebt (standardGameTheoremRoute finiteBayesianNashExistence)
-  ≡ Debt.transcriptionDebt
-finiteBayesianNashExistenceNeedsTranscription = refl
+finiteMixedBayesianSharesNashCertificationDebt :
+  Debt.routedDebt (sharedExistenceRoute finiteMixedBayesianViaNash)
+  ≡ Debt.certificationDebt
+finiteMixedBayesianSharesNashCertificationDebt = refl
 
-standardGameTheoremSchedulerAction :
-  (family : StandardGameTheoremFamily) →
+sharedExistenceSchedulerAction :
+  (leaf : SharedExistenceTheoremLeaf) →
   Debt.scheduleAction
-    (Debt.routedDebt (standardGameTheoremRoute family))
-    (Debt.statementStatus (standardGameTheoremRoute family))
+    (Debt.routedDebt (sharedExistenceRoute leaf))
+    (Debt.statementStatus (sharedExistenceRoute leaf))
     Debt.constrained32GB
     Debt.heavyReplay
-  ≡ Debt.auditTranscription
-standardGameTheoremSchedulerAction family = refl
+  ≡ Debt.sendAristotleLean
+sharedExistenceSchedulerAction leaf = refl
 
 ------------------------------------------------------------------------
 -- Distinct residual coordinates.
 ------------------------------------------------------------------------
 
 data GameTheoryResidual : Set where
-  finiteMixedNashExistenceTheorem
-  finiteBayesianNashExistenceTheorem
+  correctedFiniteMixedNashCertification
+  pureFiniteBayesianEquilibriumExistenceIfRequired
   posteriorConditioningAndBayesUpdate
   generalTypeHierarchyAndCommonKnowledge
   subgamePerfectExistenceTheorem
@@ -96,8 +94,20 @@ strategicBoundary = Core.canonicalStrategicInteractionBoundary
 mixedBoundary : Mixed.FiniteMixedStrategyBoundary
 mixedBoundary = Mixed.canonicalFiniteMixedStrategyBoundary
 
+mixedCorrectionBoundary : Correction.FiniteMixedNashCorrectionBoundary
+mixedCorrectionBoundary = Correction.canonicalFiniteMixedNashCorrectionBoundary
+
+mixedReceiptBindingBoundary : Binding.FiniteMixedNashReceiptBindingBoundary
+mixedReceiptBindingBoundary = Binding.canonicalFiniteMixedNashReceiptBindingBoundary
+
 bayesianBoundary : Bayesian.FiniteBayesianGameBoundary
 bayesianBoundary = Bayesian.canonicalFiniteBayesianGameBoundary
+
+bayesianNormalFormBoundary : BayesianReduction.FiniteBayesianNormalFormBoundary
+bayesianNormalFormBoundary = BayesianReduction.canonicalFiniteBayesianNormalFormBoundary
+
+bayesianViaNashBoundary : BayesianViaNash.FiniteMixedBayesianViaNashBoundary
+bayesianViaNashBoundary = BayesianViaNash.canonicalFiniteMixedBayesianViaNashBoundary
 
 sequentialBoundary : Sequential.SequentialExtensiveFormBoundary
 sequentialBoundary = Sequential.canonicalSequentialExtensiveFormBoundary
@@ -139,7 +149,9 @@ sourceAtlasCount = Sources.canonicalGameTheorySourceCountIsEight
 -- Firewalls.
 ------------------------------------------------------------------------
 
-data MixedNashCarrierMeansExistenceTheoremPermission : Set where
+data SourceAlignmentMeansCertifiedNashPermission : Set where
+
+data MixedBayesianReductionMeansPureBayesianPermission : Set where
 
 data BayesianCarrierMeansPosteriorTheoremPermission : Set where
 
@@ -169,9 +181,13 @@ data FractranTraceMeansStrategicEquilibriumPermission : Set where
 
 data WolframCausalInvarianceMeansStrategicEquilibriumPermission : Set where
 
-mixedNashCarrierDoesNotProveExistence :
-  MixedNashCarrierMeansExistenceTheoremPermission → ⊥
-mixedNashCarrierDoesNotProveExistence ()
+sourceAlignmentDoesNotCertifyMixedNash :
+  SourceAlignmentMeansCertifiedNashPermission → ⊥
+sourceAlignmentDoesNotCertifyMixedNash ()
+
+mixedBayesianReductionDoesNotBecomePureBayesian :
+  MixedBayesianReductionMeansPureBayesianPermission → ⊥
+mixedBayesianReductionDoesNotBecomePureBayesian ()
 
 bayesianCarrierDoesNotInventPosteriorTheorem :
   BayesianCarrierMeansPosteriorTheoremPermission → ⊥
@@ -233,9 +249,17 @@ record GameTheoryCompletionFrontier : Set where
     pureNashDefinitionClosed : Bool
     dominanceAndParetoClosed : Bool
     finiteMixedExpectedUtilityClosed : Bool
-    finiteMixedNashDefinitionClosed : Bool
+    correctedIndependentProductMixedNashClosed : Bool
+    exactFiniteReceiptBindingClosed : Bool
+    nash1950StatementSourceAligned : Bool
+    nash1950KernelCertified : Bool
+
     finiteBayesianCommonPriorClosed : Bool
-    finiteBayesianNashDefinitionClosed : Bool
+    pureFiniteBayesianNashDefinitionClosed : Bool
+    finiteBayesianAgentNormalFormReductionClosed : Bool
+    finiteMixedBayesianExistenceReducedToNash : Bool
+    pureBayesianExistenceProved : Bool
+
     sequentialExtensiveFormClosed : Bool
     subgamePerfectDefinitionClosed : Bool
     fractranSequentialRepresentationBridgeClosed : Bool
@@ -251,9 +275,6 @@ record GameTheoryCompletionFrontier : Set where
     mechanismDesignDSICCarrierClosed : Bool
     strategicExperimentalIdentificationClosed : Bool
 
-    finiteMixedNashExistenceNeedsSourceTranscription : Bool
-    finiteBayesianNashExistenceNeedsSourceTranscription : Bool
-
     posteriorConditioningClosed : Bool
     generalTypeHierarchyClosed : Bool
     subgamePerfectExistenceClosed : Bool
@@ -268,14 +289,10 @@ record GameTheoryCompletionFrontier : Set where
 canonicalGameTheoryCompletionFrontier : GameTheoryCompletionFrontier
 canonicalGameTheoryCompletionFrontier =
   game-theory-completion-frontier
-    true
     true true true true true
-    true true
-    true true
-    true true
-    true true
-    true true true
-    true
+    true true true false
+    true true true true false
     true true true true
-    true true
+    true true true true true true
+    true true true true
     false false false false false false false false false false
