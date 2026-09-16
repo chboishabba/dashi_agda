@@ -3,6 +3,7 @@ module DASHI.Finance.TrumpFamilyTradePNFChronologyExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.EventAlgebra as Event
