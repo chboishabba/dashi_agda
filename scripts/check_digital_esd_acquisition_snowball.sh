@@ -6,8 +6,10 @@ cd "$ROOT"
 
 OWNER=DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 REGRESSION=DASHI/Education/DigitalESDAcquisitionSnowballRegression.agda
+ICT_OWNER=DASHI/Education/DigitalESDICTLifecycleCircularitySnowballExact.agda
+ICT_REGRESSION=DASHI/Education/DigitalESDICTLifecycleCircularitySnowballRegression.agda
 
-for file in "$OWNER" "$REGRESSION"; do
+for file in "$OWNER" "$REGRESSION" "$ICT_OWNER" "$ICT_REGRESSION"; do
   [[ -f "$file" ]] || { echo "required acquisition-snowball source is missing: $file" >&2; exit 1; }
   if grep -nE '\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$' "$file"; then
     echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
@@ -58,9 +60,33 @@ grep -q '^longitudinalResidualRegression :' "$REGRESSION"
 grep -q '^openDurabilityResidualRegression :' "$REGRESSION"
 grep -q '^frontierStillRetainsResidualsRegression :' "$REGRESSION"
 
+# Refined ICT lifecycle / circularity method child.  Methods may pay method
+# coordinates, but the parent's same-object durability/lifecycle residual stays
+# unpaid until intervention-specific evidence exists.
+grep -q 'ITU-T L.1410 (11/2024)' "$ICT_OWNER"
+grep -q 'ITU-T L.1023 (08/2023)' "$ICT_OWNER"
+grep -q '^canonicalICTLifecycleCircularityAcquisition :' "$ICT_OWNER"
+grep -q '^ictLifecycleMethodDoesNotPayDeploymentInventory :' "$ICT_OWNER"
+grep -q '^circularityMethodDoesNotPayDeploymentCircularity :' "$ICT_OWNER"
+grep -q '^circularityMethodDoesNotProveDeploymentDurability :' "$ICT_OWNER"
+grep -q '^l1410LifecycleBidi :' "$ICT_OWNER"
+grep -q '^l1023CircularityBidi :' "$ICT_OWNER"
+grep -q '^parentOpenDurabilityRemainsUnpaid :' "$ICT_OWNER"
+grep -q '^currentRefinedLifecycleFrontier :' "$ICT_OWNER"
+grep -q '^l1410MethodPaidRegression :' "$ICT_REGRESSION"
+grep -q '^l1023CircularityMethodPaidRegression :' "$ICT_REGRESSION"
+grep -q '^l1410DoesNotPaySameObjectInventoryRegression :' "$ICT_REGRESSION"
+grep -q '^l1023DoesNotPayDeploymentCircularityRegression :' "$ICT_REGRESSION"
+grep -q '^methodDoesNotPayDurabilityRegression :' "$ICT_REGRESSION"
+grep -q '^parentResidualStillUnpaidRegression :' "$ICT_REGRESSION"
+grep -q '^refinedSameObjectLifecycleResidualRegression :' "$ICT_REGRESSION"
+grep -q '^refinedHardwareCircularityResidualRegression :' "$ICT_REGRESSION"
+
 if command -v nix >/dev/null 2>&1 && [[ -x scripts/run_agda29_parallel_check.sh ]]; then
+  scripts/run_agda29_parallel_check.sh "$ICT_REGRESSION"
   scripts/run_agda29_parallel_check.sh "$REGRESSION"
 elif command -v agda >/dev/null 2>&1; then
+  agda -i . "$ICT_REGRESSION"
   agda -i . "$REGRESSION"
 elif [[ "${1:-}" == "--source-only" ]]; then
   echo "acquisition snowball source audit passed; Agda kernel receipt unobserved (--source-only explicitly selected)"
