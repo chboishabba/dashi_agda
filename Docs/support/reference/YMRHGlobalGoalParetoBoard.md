@@ -20,45 +20,53 @@ RH high = R1 representation -> R2 strict actual-ClusterResponse theorem
 RH R3 = independent critical-line / verified-region carrier work
 ```
 
-## Current Pareto queue
+Frozen YM A/B/C/D remain lower-level research rows/donors, not four Clay problems.
+
+## Current Pareto queue — 16 Sep 2026
 
 ```text
-GLOBAL #1
-  YM #944 / T78-B / R353 H_scale
+GLOBAL #1 — YM specialist #944
+  current preferred BIDI path is no longer the old R353 H_scale scheduler.
 
-  M_Hessian^src <= L^src * d_sub^src
+  R371 published CMP116 parametric family
+    -> R370 parametric fixed-point sensitivity
+    -> selected R373 <-> R370 boundary-distance same-object attachment
+    -> R380 direct distance-upper bridge
+    -> R379 least-privilege Hessian coefficient consumer
+    -> R375 coefficient/Hessian payment
+    -> same-family continuum covariance decay
+    -> existing clustering-to-gap compiler.
 
-  This is the current specialist mathematical attack. Do not duplicate #944 on
-  the coordinator branch.
+  #940 MUST NOT duplicate #944 theorem files.
 
-GLOBAL FALLBACK
-  YM #944 / R364 analytic substituted-background path
-
-  exact admissible substituted-background segment
-  + uniform derivative bound for ACTUAL CMP116 Hessian map
-  + standard mean-value/FTC
-  -> H_stab^src
-
-  Valid alternate producer, but currently more source debt than H_scale.
-
-COORDINATOR #1
-  RH #940 / R1 representation
+COORDINATOR #1 — RH #940 / R1 representation
 
   R1a:
-    final nearResponseAt(J) = checked/imported finite-near scalar
+    final nearResponseAt(J)
+      = checked/imported finite-near scalar
 
   R1b1:
-    SAME checked scalar = literal reflection-pair scalar on the final
-    universal pole-quotient carrier
+    SAME checked scalar
+      = literal reflection-pair scalar on the final universal pole-quotient carrier
 
   R1b2:
-    SAME literal reflection-pair scalar = literal finiteNearSum(cellResponse)
+    SAME literal reflection-pair scalar
+      = literal finiteNearSum(cellResponse)
 
-  all three are independently fail-closed. R1b compiles from R1b1+R1b2;
-  final R1 compiles from R1a+R1b.
+  all three are independently fail-closed.
+  R1b compiles from R1b1 + R1b2.
+  final R1 compiles from R1a + R1b.
 
-NEXT TRUE RH MATH
-  R2:
+COORDINATOR PARETO STOP
+  R1a/R1b1 cannot be paid by status metadata.
+  R1b2 cannot be made reflexive by inventing a convenient intermediate scalar;
+  that would merely move the old same-object debt into R1b1.
+
+  If no theorem-bearing checked-near bytes or genuine final-carrier reflection-pair
+  scalar constructor is recovered, stop interface refactoring and spend proof-search
+  budget on R2.
+
+NEXT TRUE RH MATH — R2
   D_near(J) + B_far(J) + D_Gamma(g_pole)
     < actual ClusterResponse(g_pole)
 
@@ -67,101 +75,40 @@ LATER / OPPORTUNISTIC
   RH R3 remains independent.
 ```
 
-# YM #944 current cut
+# YM specialist ownership — PR #944
 
 Terminal consumer is quantitative connected-correlation decay on the **same reconstructed continuum family**, followed by the already-owned clustering -> physical spectral-gap compiler.
 
-CMP99/CMP109/CMP116, marked walks, Row C, Heat/Doob/Langevin and polymer/KP machinery are producers beneath that consumer.
-
-## R360--R363 already removed fake fresh mathematics
+Current #944 source replay has moved well beyond the earlier R343/R353 coordinator summaries. The latest preferred direct route is:
 
 ```text
-R360 marked metric:
-  R_collar <= d_CMP99
-  + d_selected = d_CMP99
-  -> selected marked-distance branch.
-
-R361 exponent -> majorant:
-  Q_required <= Q_combined
-  + standard exp(-x) antitonicity
-  + same-object raw/charged exponential attachments.
-
-R362 H_sum:
-  published CMP116 generalized-walk/tree summability
-  + walk/majorant/envelope attachments.
-
-R363 H_factor:
-  CMP109 ordinary differentiated-factor bounds
-  + CMP99 marked changed-factor bound
-  + literal factor attachment
-  + already-owned finite product telescope.
-```
-
-Do **not** reopen generic exponential order, finite telescoping or finite summation.
-
-## Preferred Route A: R353 H_scale
-
-R353 already gets
-
-```text
-Hdiff^src <= M_Hessian^src
-```
-
-from marked-walk resummation. The surviving field is
-
-```text
-H_scale:
-  M_Hessian^src <= L^src * d_sub^src.
-```
-
-The historical `MarkedWalkHessianData.hessianMarkedMajorant` is opaque: it does not expose a stored `d_sub` factor that generic algebra can pull out. R362's source `sourceEnvelope` is likewise opaque and currently has no in-repo constructor revealing it as `L*d_sub`.
-
-Primary CMP116 source audit also does not print this exact endpoint-difference inequality. Hence H_scale currently looks like a genuine local quantitative source/application theorem, not another compiler alias.
-
-## Fallback Route B: R364 analytic path
-
-It factors H_stab^src through:
-
-```text
-A_path:
-  selected substituted-background segment stays in the common analytic domain
-
-A_D3:
-  uniform derivative bound for the ACTUAL CMP116 Hessian map on that segment
-
-standard mean-value / FTC-to-Lipschitz authority
-
-=> H_stab^src.
-```
-
-Source audit:
-
-- CMP116 (1.18)--(1.21) gives analyticity and uniform substituted-background bounds.
-- CMP116 (1.39)--(1.40) gives localized/absolute second-derivative bounds, **not** the required endpoint Lipschitz inequality.
-- R104/R114 machine-construct one positive common radius and first/second Cauchy validity once four finite normalized source demands are extracted.
-- literal demand/coordinate extraction is still conditional.
-- `FinitePolydiscCauchyAxioms` controls coefficient differences from boundary envelopes; it is not an arbitrary third field-derivative theorem.
-- no explicit third/background-derivative theorem of the R364 shape was found in the retained CMP116 extract.
-
-Therefore Route B currently costs at least `A_path + A_D3`; it does not dominate the single Route-A H_scale payment.
-
-## YM downstream after H_stab^src
-
-```text
-H_stab^src
--> selected H_stab same-object attachment
-
-H_sub^src
-+ selected H_sub attachment
-
-H_stab + H_sub
--> existing boundary/Cauchy compiler
-+ C_attach
--> literal mixed-log response
-+ D_time
--> same-family continuum covariance decay
+CMP116 published common parametric analytic family
+-> R371 source family
+-> R370 Cauchy/mean-value parametric sensitivity
+-> [R373 selected boundary distance = R370 boundary fixed-point distance]
+-> R380 choose U := U_par = L_par * d_parameter
+-> R379 least-privilege distanceUpper consumer
+-> R375 Hessian-coefficient payment
+-> downstream selected attachments
+-> same-family finite-to-continuum connected-covariance decay
 -> existing clustering-to-gap compiler.
 ```
+
+Current non-dominated source/same-object payments in #944 include:
+
+1. selected R370 fixed-point family = literal CMP116 substituted-background family;
+2. selected R372/R373 Hessian family = literal differentiated CMP109/CMP116 family;
+3. selected parameters lie in the published common complex neighbourhood;
+4. selected canonical radius/magnitude data instantiate source bounds;
+5. selected parameter-distance upper is paid;
+6. **R373 selected boundary distance = R370 boundary fixed-point distance on the same selected object**;
+7. R348 selected coefficient/mixed-log same-object attachment `C_attach`;
+8. R346 selected differentiated localization on the shared Hessian mark;
+9. R346 selected physical distance = Euclidean spectral time `D_time`;
+10. same-family finite-to-continuum connected-covariance limit;
+11. existing clustering-to-gap compiler.
+
+The historical marked-walk/collar/rate-split route, R364 analytic-path route, CMP102/CMP99 cross-propagator route, Row-C Heat/Doob/Langevin, and unified polymer norm remain donors/optional producers unless a current consumer requires their extra semantics.
 
 Source coordinates:
 
@@ -174,6 +121,21 @@ Source coordinates:
 - Yang--Mills QID `Q1192873`
 
 Bałaban QID / exact paper Dewey remain unresolved; do not guess them.
+
+# YM BC1/source route retained as a separate lower-level lane
+
+The active CMP119 regular-E route from the earlier Pareto tranche remains useful and should not be confused with #944's current mass-gap specialist path:
+
+```text
+finite beta history
+-> active density family
+-> CMP122 Sect.-2 FORM witness
+-> active function-valued regular E_k + literal localization
+-> CMP109/CMP116 continuation
+-> BC1.
+```
+
+The active source theorem was recut to a **form-only** projection: BC1 does not primitively require the independent quantitative Sect.-2 bounds merely to obtain regular-E/localization. The remaining payment is literal source realization on the exact active carrier, not more compiler plumbing.
 
 # RH #940 current cut
 
@@ -209,49 +171,49 @@ R1b1 = unpaid
 R1b2 = unpaid
 ```
 
-Implementation sequence for the current split:
+Implementation history for this recut:
 
 ```text
-460933bfd... original RED R1a/R1b split
-ff8f5daf3... original GREEN split
+460933bfd... RED original R1a/R1b split
+ff8f5daf3... GREEN original split
 e57b08b86... projection-name hygiene
 92fce82b9... RED R1b1/R1b2 split
 6b631363d... GREEN R1b1/R1b2 + transitivity compiler
 ```
 
-The 8883 Lean return reports `nearFinset` / `nearOffFinset`, `nearSignedSum`, explicit far-shell decay and the literal D_off cutoff theorem, but explicitly says the proof terms were not transported into Agda. It therefore pays none of R1a/R1b1/R1b2.
+The 8883 Lean return reports `nearFinset` / `nearOffFinset`, `nearSignedSum`, explicit far-shell decay and the literal `D_off` cutoff theorem, but its proof terms were not transported into Agda. It therefore pays none of R1a/R1b1/R1b2.
 
-The retained reflection-pair source names
+The retained reflection-pair source names:
 
 ```text
 LiteralWeilOffOrdinateReflectionPair.zeroConeValue_add_reflect_eq_integral
 ```
 
-and records the individual cell formula
+with individual-pair formula:
 
 ```text
 4 * g(u) * cosh(a*u) * cos(delta*u).
 ```
 
-That return is source-owned only: its own status says not machine-checked for that return and not transported into Agda. It therefore does **not** inhabit R1b1. It also does not provide the final `nearOffFinset` fold identity, so it does not inhabit R1b2.
+Its retained return says source-written, **not machine-checked for that return**, and not transported into Agda. It does not inhabit R1b1. It also does not own the final `nearOffFinset` fold identity, so it does not inhabit R1b2.
 
-Historical #642 / `NearCoreDeterminantTaper.lean` kernel-checked a whole finite near scalar and an equivalent finite exponential-sum form, but the determinant taper is not definitionally the final universal pole-quotient taper. It remains donor-only without a theorem-bearing same-carrier bridge.
+Historical #642 / `NearCoreDeterminantTaper.lean` owns a different finite-near scalar on the determinant taper. It remains donor-only unless a theorem-bearing same-carrier bridge to the final universal pole-quotient taper is recovered.
 
-### Pareto stop condition for R1 refactoring
+### Pareto stop condition for R1
 
-Do not create further intermediate scalar names unless they correspond to a real source or carrier boundary. In particular, making a newly named `literalReflectionPairScalar` *definitionally equal* to the finite fold would only move the entire old R1b debt into R1b1; it would not pay mathematics or same-object transport.
+Do not create further intermediate scalar names unless they correspond to a real source/carrier boundary.
 
-Further R1 work is justified only by one of:
+Further R1 implementation is justified only by:
 
 1. recovered theorem-bearing checked-near bytes / cross-prover transport;
-2. a genuine final-carrier object that already owns the reflection-pair finite scalar;
+2. a genuine final-carrier object that owns the reflection-pair finite scalar;
 3. a concrete finite enumeration/fold constructor that pays R1b2 without using the target final-near equality.
 
-Otherwise move proof-search budget to R2 rather than adding interface layers.
+Otherwise spend proof-search budget on R2.
 
 # RH R2
 
-After R1, preferred theorem is already least consumer-visible:
+Preferred theorem:
 
 ```text
 D_near(J)
@@ -261,6 +223,8 @@ D_near(J)
 ```
 
 uniformly for every arbitrary high off-line nontrivial zero.
+
+The current direct-frontier audit reports **no exact same-object harmonic donor already found**. This is therefore genuine analytic search unless a new same-carrier donor is recovered.
 
 Optional certified route:
 
