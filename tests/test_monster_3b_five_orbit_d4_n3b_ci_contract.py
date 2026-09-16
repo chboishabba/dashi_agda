@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CHECKER = ROOT / "scripts" / "check_monster_3b_five_orbit_d4_n3b_screen.sh"
 WORKFLOW = ROOT / ".github" / "workflows" / "monster-3b-actual-kernel-character-round4.yml"
+EXECUTION_BRANCH = "agent/monster369-d4-nineorbit-kernel-character-exec"
 
 
 def test_d4_n3b_screen_has_dedicated_checker():
@@ -19,3 +20,8 @@ def test_existing_monster3b_workflow_executes_and_uploads_screen_receipt():
     text = WORKFLOW.read_text()
     assert "check_monster_3b_five_orbit_d4_n3b_screen.sh" in text
     assert "build/monster_3b_five_orbit_d4_n3b_screen.json" in text
+
+
+def test_execution_branch_push_deterministically_triggers_existing_gap_workflow():
+    text = WORKFLOW.read_text()
+    assert EXECUTION_BRANCH in text
