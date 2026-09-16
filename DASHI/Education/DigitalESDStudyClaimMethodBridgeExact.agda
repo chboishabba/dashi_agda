@@ -8,9 +8,16 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Education.DigitalESDManuscriptMethodologyExact as Method
 import DASHI.Education.DigitalESDStudyClaimCeilingExact as Ceiling
+import DASHI.Education.DigitalESDStudyIntersectionalAbsenceAuditExact as Absence
+import DASHI.Education.DigitalESDMaterialEnvironmentalSubstrateExact as Material
+import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 
 ------------------------------------------------------------------------
 -- THIN METHOD BRIDGE
+--
+-- The 20-coordinate extraction remains stable.  Predicate-level result
+-- auditing, intersectional absence and material/environmental substrate are
+-- mandatory overlays rather than silently adding more flat columns.
 ------------------------------------------------------------------------
 
 baseMethodBoundary : Method.MethodologyBoundary
@@ -25,6 +32,15 @@ baseExtractionCoordinateCount = Method.extractionCoordinateCount
 effectiveExtractionCoordinateCount : Nat
 effectiveExtractionCoordinateCount = 20
 
+intersectionalAbsenceQuestionCount : Nat
+intersectionalAbsenceQuestionCount = Absence.absenceAuditQuestionCount
+
+materialAuditQuestionCount : Nat
+materialAuditQuestionCount = Material.materialAuditQuestionCount
+
+predicateNormalFormBoundary : PNF.PredicateNormalFormBoundary
+predicateNormalFormBoundary = PNF.canonicalPredicateNormalFormBoundary
+
 record StudyClaimMethodBoundary : Set where
   constructor study-claim-method-boundary
   field
@@ -36,18 +52,41 @@ record StudyClaimMethodBoundary : Set where
     studyClaimCeilingRequiredIsTrue : studyClaimCeilingRequired ≡ true
     effectiveTwentyCoordinateExtraction : Bool
     effectiveTwentyCoordinateExtractionIsTrue : effectiveTwentyCoordinateExtraction ≡ true
+    predicateLevelResultAuditRequired : Bool
+    predicateLevelResultAuditRequiredIsTrue : predicateLevelResultAuditRequired ≡ true
+    intersectionalAbsenceAuditRequired : Bool
+    intersectionalAbsenceAuditRequiredIsTrue : intersectionalAbsenceAuditRequired ≡ true
+    materialEnvironmentalAuditRequired : Bool
+    materialEnvironmentalAuditRequiredIsTrue : materialEnvironmentalAuditRequired ≡ true
     qualitativeAndReviewClaimKindsRetained : Bool
     qualitativeAndReviewClaimKindsRetainedIsTrue : qualitativeAndReviewClaimKindsRetained ≡ true
     unreportedQuantitiesMayBeFilledFromNarrativeConfidence : Bool
     unreportedQuantitiesMayBeFilledFromNarrativeConfidenceIsFalse : unreportedQuantitiesMayBeFilledFromNarrativeConfidence ≡ false
     strongerClaimMayBePromotedWithoutReceipt : Bool
     strongerClaimMayBePromotedWithoutReceiptIsFalse : strongerClaimMayBePromotedWithoutReceipt ≡ false
+    absentGroupMayBeInferredFromUnreportedDemographics : Bool
+    absentGroupMayBeInferredFromUnreportedDemographicsIsFalse : absentGroupMayBeInferredFromUnreportedDemographics ≡ false
+    genericInfrastructureAverageMayBecomeDeploymentFootprint : Bool
+    genericInfrastructureAverageMayBecomeDeploymentFootprintIsFalse : genericInfrastructureAverageMayBecomeDeploymentFootprint ≡ false
 
 open StudyClaimMethodBoundary public
 
 canonicalStudyClaimMethodBoundary : StudyClaimMethodBoundary
-canonicalStudyClaimMethodBoundary = study-claim-method-boundary true refl true refl true refl true refl true refl false refl false refl
+canonicalStudyClaimMethodBoundary =
+  study-claim-method-boundary
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
 
 studyClaimMethodReading : String
 studyClaimMethodReading =
-  "The digital-ESD review retains the existing 19-coordinate manuscript extraction schema and adds one structured study-claim-ceiling coordinate, yielding 20 top-level extraction coordinates. The appended profile retains source-reported design, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect size, uncertainty/confidence-interval semantics, time horizon, external-validity domain, participant-role applicability and the strongest admissible claim kind. Claim kind may be a causal/experimental implication, lived-experience claim, implementation-context claim, review synthesis or conceptual mechanism. Missing quantities are not reconstructed from prose confidence, and stronger causal, mechanistic, transport, prevalence, practice or system-transformation claims require independent receipts."
+  "The digital-ESD review retains the existing 19-coordinate manuscript extraction schema plus one structured study-claim-ceiling coordinate, yielding 20 top-level extraction coordinates. Every admitted study is additionally audited at three non-flat overlays: (1) a paid Predicate Normal Form result assertion exposing population/context/intervention/comparator/outcome/time and inferential force; (2) a 'who is not at the table?' intersectional absence audit covering realised sample, structural exclusion, disability/access, disclosure, affected-but-unsampled parties, interpretation and authority; and (3) a material/environmental substrate audit covering chips/devices, compute/data centres, electricity, water, embodied materials, service life, repair/reuse and e-waste. These overlays do not fabricate demographics or deployment footprints when sources do not report them. Missing statistical quantities remain unfilled, and stronger causal, mechanistic, transport, prevalence, practice or system-transformation claims require independent receipts."
