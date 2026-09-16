@@ -7,41 +7,35 @@ open import Data.Empty using (⊥)
 import DASHI.Education.DigitalESDContributionPositioningExact as Position
 
 reverseAntecedentPaidRegression :
-  Position.ContributionPositionBoundary.reverseSustainabilityAntecedentPaid
-    Position.canonicalContributionPositionBoundary
-  ≡ true
+  Position.ContributionPositionBoundary.reverseSustainabilityAntecedentPaid Position.canonicalContributionPositionBoundary ≡ true
 reverseAntecedentPaidRegression = refl
 
+twinTransformationAntecedentPaidRegression :
+  Position.ContributionPositionBoundary.twinTransformationAntecedentPaid Position.canonicalContributionPositionBoundary ≡ true
+twinTransformationAntecedentPaidRegression = refl
+
 reciprocalIntegrationNotPaidByChughRegression :
-  Position.ContributionPositionBoundary.chughPaysReciprocalESDCapacityIntegration
-    Position.canonicalContributionPositionBoundary
-  ≡ false
+  Position.ContributionPositionBoundary.chughPaysReciprocalESDCapacityIntegration Position.canonicalContributionPositionBoundary ≡ false
 reciprocalIntegrationNotPaidByChughRegression = refl
 
-sameObjectDisciplineNotPaidByChughRegression :
-  Position.ContributionPositionBoundary.chughPaysSameObjectPaymentDiscipline
-    Position.canonicalContributionPositionBoundary
-  ≡ false
-sameObjectDisciplineNotPaidByChughRegression = refl
+boehmePaysTwinTransformationRegression :
+  Position.ContributionPositionBoundary.boehmePaysTwinTransformationIntegration Position.canonicalContributionPositionBoundary ≡ true
+boehmePaysTwinTransformationRegression = refl
 
-participantAuthorityNotPaidByChughRegression :
-  Position.ContributionPositionBoundary.chughPaysParticipantAuthorityBoundary
-    Position.canonicalContributionPositionBoundary
-  ≡ false
-participantAuthorityNotPaidByChughRegression = refl
+boehmeDoesNotPaySameObjectDisciplineRegression :
+  Position.ContributionPositionBoundary.boehmePaysSameObjectPaymentDiscipline Position.canonicalContributionPositionBoundary ≡ false
+boehmeDoesNotPaySameObjectDisciplineRegression = refl
+
+participantAuthorityNotPaidByAntecedentsRegression :
+  Position.ContributionPositionBoundary.closeAntecedentsPayParticipantAuthorityBoundary Position.canonicalContributionPositionBoundary ≡ false
+participantAuthorityNotPaidByAntecedentsRegression = refl
 
 noveltyStillOpenRegression :
-  Position.ContributionPositionBoundary.globalNoveltyClaimPaid
-    Position.canonicalContributionPositionBoundary
-  ≡ false
+  Position.ContributionPositionBoundary.globalNoveltyClaimPaid Position.canonicalContributionPositionBoundary ≡ false
 noveltyStillOpenRegression = refl
 
-antecedentDoesNotMakeDuplicateRegression :
-  Position.CloseAntecedentAutomaticallyMakesDuplicate → ⊥
-antecedentDoesNotMakeDuplicateRegression =
-  Position.closeAntecedentDoesNotAutomaticallyMakeDuplicate
+antecedentDoesNotMakeDuplicateRegression : Position.CloseAntecedentAutomaticallyMakesDuplicate → ⊥
+antecedentDoesNotMakeDuplicateRegression = Position.closeAntecedentDoesNotAutomaticallyMakeDuplicate
 
-differenceDoesNotMakeNovelRegression :
-  Position.FormalDifferenceAutomaticallyCreatesPublicationNovelty → ⊥
-differenceDoesNotMakeNovelRegression =
-  Position.formalDifferenceDoesNotAutomaticallyCreatePublicationNovelty
+differenceDoesNotMakeNovelRegression : Position.FormalDifferenceAutomaticallyCreatesPublicationNovelty → ⊥
+differenceDoesNotMakeNovelRegression = Position.formalDifferenceDoesNotAutomaticallyCreatePublicationNovelty
