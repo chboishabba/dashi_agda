@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDManuscriptMethodologyExact as Method
+import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact as Derivation
 import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact as Paper
 import DASHI.Education.DigitalESDStructuredSearchExact as Search
 
@@ -19,11 +20,11 @@ methodRetainsStructuredSearchRegression = refl
 
 methodRetainsPrincipleDerivationRegression :
   Method.principleDerivationBoundary
-  ≡ Method.Derivation.canonicalPrincipleDerivationBoundary
+  ≡ Derivation.canonicalPrincipleDerivationBoundary
 methodRetainsPrincipleDerivationRegression = refl
 
 preSearchFrameworkNotReviewResultRegression :
-  Method.Derivation.PrincipleDerivationBoundary.preSearchFrameworkEqualsReviewResult
+  Derivation.PrincipleDerivationBoundary.preSearchFrameworkEqualsReviewResult
     Method.principleDerivationBoundary
   ≡ false
 preSearchFrameworkNotReviewResultRegression = refl
