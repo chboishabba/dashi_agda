@@ -1,0 +1,14 @@
+module DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Validation where
+
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Exact as Primary2
+import DASHI.Finance.TrumpFamilyExternalCounterpartyPrimaryExact as Counterparty2
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressExact as Progress
+
+primary2Boundary : Primary2.TrumpFamilyPrimarySourceRound2Boundary
+primary2Boundary = Primary2.canonicalTrumpFamilyPrimarySourceRound2Boundary
+
+counterparty2Boundary : Counterparty2.TrumpFamilyExternalCounterpartyPrimaryBoundary
+counterparty2Boundary = Counterparty2.canonicalTrumpFamilyExternalCounterpartyPrimaryBoundary
+
+progressBoundary : Progress.AcquisitionProgressBoundary
+progressBoundary = Progress.canonicalAcquisitionProgressBoundary
