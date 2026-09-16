@@ -9,6 +9,7 @@ import DASHI.Finance.TrumpFamilyTradeClaimIdentityPromotionExact as Identity
 import DASHI.Finance.TrumpFamilyTradeSourceGenealogyExact as Genealogy
 import DASHI.Finance.TrumpFamilyTradeEvidenceHealthExact as Health
 import DASHI.Finance.TrumpSpaceXPrimaryAcquisitionExact as SpaceX
+import DASHI.Finance.TrumpSpaceXPropositionGenealogyExact as SpaceXGenealogy
 import DASHI.Finance.TrumpFamilyTradePNFChronologyExact as Chronology
 import DASHI.Finance.TrumpFamilyTradeStrategicIdentificationExact as Identification
 
@@ -49,6 +50,18 @@ visiblePairStillGenealogicallyDependent =
   Genealogy.primaryPlusDerivativeReportNotIndependent
 
 ------------------------------------------------------------------------
+-- The same Reuters article also demonstrates why genealogy must be proposition
+-- indexed: its transaction statement routes upstream to a financial disclosure,
+-- while its portfolio-management representation routes to an attributed White
+-- House statement. Same carrier != same evidentiary ancestry for every claim.
+------------------------------------------------------------------------
+
+spaceXPropositionGenealogyBoundary :
+  SpaceXGenealogy.SpaceXPropositionGenealogyBoundary
+spaceXPropositionGenealogyBoundary =
+  SpaceXGenealogy.canonicalSpaceXPropositionGenealogyBoundary
+
+------------------------------------------------------------------------
 -- Strategic-identification and chronology owners remain authoritative for two
 -- distinct questions:
 --   exact observed transaction != hidden information state;
@@ -73,6 +86,7 @@ record TrumpFamilyTradeEvidenceQualityRound6Boundary : Set where
     sourceCountNotCorroboration : Bool
     sameObjectPromotionNeedsExactTransactionCoordinates : Bool
     SpaceXPrimaryRowStillUnpaid : Bool
+    sameCarrierCanHaveDifferentPropositionGenealogy : Bool
     laterDisclosureDoesNotIdentifyEarlierInformationState : Bool
     observedTransactionDoesNotIdentifyLatentInformationState : Bool
     evidentiaryHealthDoesNotCreateCausationIllegalityOrMotive : Bool
@@ -80,4 +94,4 @@ record TrumpFamilyTradeEvidenceQualityRound6Boundary : Set where
 canonicalTrumpFamilyTradeEvidenceQualityRound6Boundary :
   TrumpFamilyTradeEvidenceQualityRound6Boundary
 canonicalTrumpFamilyTradeEvidenceQualityRound6Boundary =
-  trump-family-trade-evidence-quality-round6-boundary true true true true true true
+  trump-family-trade-evidence-quality-round6-boundary true true true true true true true
