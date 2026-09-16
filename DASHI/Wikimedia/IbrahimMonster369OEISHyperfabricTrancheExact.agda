@@ -7,12 +7,13 @@ module DASHI.Wikimedia.IbrahimMonster369OEISHyperfabricTrancheExact where
 -- its localized actual-zeta recognition acquisition target, the 42d/17496 and
 -- 6B/32772 positive bridge frontiers, the exact phase-preserving
 -- T^3 -> T x (T^2/inner inversion) = 3 x 5 = 15 reduction, the D4 character
--- probe of the five inner inversion orbits, the downstream 15 -> 14 -> 42
--- carrier candidate, the neighboring Monster class-42 eta-level family,
--- typed 54/729 carrier chart, source-paid C6 weight-two spectrum, separating
--- hypergraph, Python runtime receipts, literal same-integer collision portfolio,
--- positive-correlation receipts, and WrongType regressions visible together
--- without turning OEIS identity or runtime search into representation/action
+-- probe and kernel-side action on the five inner inversion orbits, the
+-- downstream 15 -> 14 -> 42 carrier candidate, the neighboring Monster
+-- class-42 eta-level family, typed 54/729 carrier chart, source-paid C6
+-- weight-two spectrum, separating hypergraph, Python runtime receipts, literal
+-- same-integer collision portfolio, positive-correlation receipts, and
+-- WrongType regressions visible together without turning OEIS identity,
+-- runtime search, or quotient character arithmetic into representation/action
 -- authority.
 ------------------------------------------------------------------------
 
@@ -32,6 +33,10 @@ import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionE
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionValidation
 import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4CharacterBridgeExact
 import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4CharacterBridgeValidation
+import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4KernelCharacterExact
+import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4KernelCharacterValidation
+import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BCharacterAcquisitionExact
+import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BCharacterAcquisitionValidation
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierValidation
 import DASHI.Wikimedia.IbrahimMonster42ClassEtaFamilyOEISAcquisitionExact
