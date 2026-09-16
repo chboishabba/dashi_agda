@@ -1,18 +1,18 @@
 module DASHI.Finance.TrumpFamilyTradeAcquisitionParetoValidation where
 
-import DASHI.Finance.TrumpFamilyTradeSourceAtlasRound2Exact as Atlas2
-import DASHI.Finance.TrumpFamilyTradeAcquisitionParetoExact as Pareto
+import DASHI.Finance.TrumpFamilyTradePrimarySourceRound2Exact as Primary2
+import DASHI.Finance.TrumpFamilyTradeAcquisitionProgressRound4Exact as Progress4
 
 ------------------------------------------------------------------------
--- RED/GREEN regression surface.
+-- RED/GREEN regression: exact Eric-ABTC transaction mechanisms must live in the
+-- canonical primary-source sequence, and acquisition progress must preserve the
+-- still-unpaid independent/causal/knowledge coordinates.
 ------------------------------------------------------------------------
 
-ericABTCInitial13DIsPresent = Atlas2.ericAmericanBitcoinInitial13D
-ericABTCTrustTransferIsPresent = Atlas2.ericAmericanBitcoinTrustTransfer
-ericABTCCashPurchaseIsPresent = Atlas2.ericAmericanBitcoinCashPurchase
+ericABTCTrustTransferIsPresent = Primary2.ericAmericanBitcoinTrustTransfer
+ericABTCCashPurchaseIsPresent = Primary2.ericAmericanBitcoinCashPurchase
 
-donJrPSQHPaidPurchaseIsPresent = Atlas2.donJrPSQHPaidPurchase2026Aug13
+donJrPSQHPaidPurchaseIsPresent = Primary2.donJrPSQHPrivatePlacementPersonalAllocation
 
-acquisitionFrontierIsPresent = Pareto.canonicalTrumpFamilyTradeAcquisitionFrontier
-primaryDeficitCannotBePaidBySecondaryOnly = Pareto.secondaryOnlyCannotPayPrimaryDebt
-issuerMaterialCannotPayIndependenceDebt = Pareto.issuerMaterialCannotPayIndependentDebt
+round4ProgressIsPresent = Progress4.currentTrumpFamilyTradeAcquisitionProgressRound4
+cashPurchaseIndependentCorroborationIsPresent = Progress4.ericCashPurchaseIndependentCorroboration
