@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 ADAPTIVE="$ROOT/scripts/run_agda29_adaptive_repo_check.sh"
 PROFILE="$ROOT/scripts/agda_typecheck_resource_profiles.json"
 TRIADIC="DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda"
+AFTER="DASHI/After.agda"
 
 fail() {
   echo "FAIL: $*" >&2
@@ -22,7 +23,18 @@ PY
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
 fixture="$tmp/fixture"
-mkdir -p "$fixture/scripts" "$fixture/.cache"
+mkdir -p "$fixture/scripts" "$fixture/.cache" "$fixture/DASHI/Algebra"
+
+cat > "$fixture/DASHI/Before.agda" <<'EOF'
+module DASHI.Before where
+EOF
+cat > "$fixture/DASHI/Algebra/TriadicDepthTwoCyclotomicDFT.agda" <<'EOF'
+module DASHI.Algebra.TriadicDepthTwoCyclotomicDFT where
+EOF
+cat > "$fixture/DASHI/After.agda" <<'EOF'
+module DASHI.After where
+import DASHI.Algebra.TriadicDepthTwoCyclotomicDFT
+EOF
 
 cat > "$fixture/scripts/plan_agda_typecheck_targets.py" <<'PY'
 #!/usr/bin/env python3
@@ -99,17 +111,20 @@ DASHI_MEMINFO_PATH="$tmp/meminfo-high" \
     fail "adaptive resume failed"
   }
 
-grep -Fxq '2|8192|DASHI/After.agda' "$tmp/invocations" || {
+# AFTER imports TRIADIC, so the resource class must propagate through the import
+# graph; otherwise checking AFTER as ordinary simply recompiles the memory-risk
+# dependency and recreates the OOM.
+grep -Fxq "1|5120|$TRIADIC,$AFTER" "$tmp/invocations" || {
   cat "$tmp/invocations" >&2
-  fail "ordinary resumed suffix did not use jobs=2/rss=8192"
-}
-grep -Fxq "1|5120|$TRIADIC" "$tmp/invocations" || {
-  cat "$tmp/invocations" >&2
-  fail "Triadic target did not run memory-risk jobs=1/rss=5120"
+  fail "memory-risk class did not propagate to importer"
 }
 if grep -q 'DASHI/Before.agda' "$tmp/invocations"; then
   cat "$tmp/invocations" >&2
   fail "resume re-ran already-checked prefix"
+fi
+if grep -q '^2|' "$tmp/invocations"; then
+  cat "$tmp/invocations" >&2
+  fail "memory-risk importer escaped into ordinary class"
 fi
 [ ! -e "$tmp/report/last-success.json" ] || fail "resumed run must not mint full success receipt"
 
