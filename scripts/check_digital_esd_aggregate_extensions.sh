@@ -5,7 +5,10 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 AGG=DASHI/EverythingDigitalESDReciprocalBraid.agda
-[[ -f "$AGG" ]] || { echo "missing aggregate: $AGG" >&2; exit 1; }
+CANONICAL_REGRESSION=DASHI/Education/DigitalESDCanonicalOwnerRegression.agda
+for file in "$AGG" "$CANONICAL_REGRESSION"; do
+  [[ -f "$file" ]] || { echo "missing digital ESD aggregate source: $file" >&2; exit 1; }
+done
 
 grep -q '^import DASHI.Education.DigitalESDCrossRoundAttributionBoundaryExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact$' "$AGG"
@@ -23,5 +26,6 @@ grep -q '^import DASHI.Education.DigitalESDConsumerRelativeLifecycleRegression$'
 grep -q '^import DASHI.Education.DigitalESDStructuredSearchExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDStructuredSearchRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDCanonicalOwnerRegression$' "$AGG"
+grep -q '^crossRoundAttributionOwnerRegression :' "$CANONICAL_REGRESSION"
 
 echo "digital ESD aggregate extension source audit passed"
