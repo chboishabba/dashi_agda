@@ -46,6 +46,15 @@ unescoAICommonGoodMinisterialReceiptRegression :
   Method.SourceReceipt.observed Method.unescoAICommonGoodMinisterialReceipt ≡ true
 unescoAICommonGoodMinisterialReceiptRegression = refl
 
+unescoAIConsultationDiscussionReceiptRegression :
+  Method.SourceReceipt.observed Method.unescoAIConsultationDiscussionReceipt ≡ true
+unescoAIConsultationDiscussionReceiptRegression = refl
+
+consultationDoesNotEqualAdoptedStatementRegression :
+  Method.ConsultationDiscussionPaperEqualsAdoptedMinisterialStatement → ⊥
+consultationDoesNotEqualAdoptedStatementRegression =
+  Method.consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement
+
 systemTransformationNotActivityRegression :
   Method.ActivityLevelDeterminesSystemTransformation → ⊥
 systemTransformationNotActivityRegression =
