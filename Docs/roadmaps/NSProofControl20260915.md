@@ -26,6 +26,7 @@ Boolean status field cannot manufacture a theorem or kernel receipt.
 merged #937   canonical A/B/C/D baseline + S0/S1/S2a state
 open   #948   completed S2b finite/same-object packet representation
 open   #957   live S2b2 quantitative analytic successor
+#920          R571 -> Aug-5 paired-second-moment representation transplant
 #945          Gate-A cross-prover receipt/status surface
 #947          local Hermitian G0' splice
 #890          retained comparable/P3 route + negative controls
@@ -83,12 +84,13 @@ unresolvedWholeSpaceTransport
 Current coordinates include:
 
 ```text
-R104 signed Abel/layer-cake algebra       domain-independent candidate
-R98 packet-boundary cancellation          mixed; selector algebra vs finite Fourier realization
-#957 low/collar/remote shell split        torus-specific realization
-R291/R573 signed Hermitian linearization  domain-independent candidate
+R104 signed Abel/layer-cake algebra        domain-independent candidate
+R98 packet-boundary cancellation           mixed; selector algebra vs finite Fourier realization
+#957 low/collar/remote shell split         torus-specific realization
+R291/R573 signed Hermitian linearization   domain-independent candidate
 S2b2d0 output-local fixed-output reduction domain-independent candidate
-R568/R572/R503 commutator chain           mixed; analytic core vs output-fibre/lattice plumbing
+#920 paired-second-moment compiler         mixed; generic centered algebra vs periodic realization
+R568/R572/R503 commutator chain            mixed; analytic core vs output-fibre/lattice plumbing
 ```
 
 The new `S2b2d0` result is especially important for BIDI: once an output is
@@ -312,6 +314,47 @@ fixed-output budgets exist. Therefore the first genuinely new local analysis is
 the same-scale summed quantitative payment on this unweighted fixed-output
 object, not another shell representation theorem.
 
+#### Recovered historical donor: R571 -> Aug-5 paired second moment
+
+Do not search for a missing centered scalarization adapter. PR #920 already
+source-wrote the representation chain
+
+```text
+R571 physical multiplier difference
+ -> R571/R311/R27 radial same-object weld
+ -> paired Taylor identity
+ -> paired second-order defect
+ -> absolute-magnitude PairedSecondMomentSample
+ -> finite family-scoped paired-second-moment compiler.
+```
+
+`NSTriadKNR571PhysicalSecondMomentEnvelopeSplitExact` shows that the remaining
+physical leaves of that donor route are only
+
+```text
+radial Taylor:
+  |L| <= |y| A1
+  |R+|,|R-| <= |y|^2 A2
+
+state side:
+  |g+ - g-| <= |y| G2
+  |g+|,|g-| <= G1.
+```
+
+PR #945 records theorem-bearing Lean receipts for the periodic-B A1/A2 radial
+mathematics.  It keeps the Agda sample/same-object transport distinct, and it
+identifies the existing finite-path difference theorem as G2 donor and the
+Waleffe amplitude-energy theorem as G1 donor.  The G0' local Hermitian
+vector->scalar splice is source-written.  The state-side G1/G2 physical
+crosswalk remains a named unpaid field.
+
+For S2b2d1 this entire route is a **candidate producer donor**, not a competing
+endpoint.  Search first for a same-object attachment from its already-owned
+G1/G2 envelope consequences to the ordinary unweighted fixed-output d1 carrier.
+If that attachment requires stronger hypotheses or loses the signed
+cancellation, retain #920/#945 as historical/provenance donors and prove d1
+directly.  Do not reopen the representation/scalarization chain.
+
 ### S2b2d2 — global aggregation after local payments
 
 Once d1 exists, the next residual is exactly R488's second node:
@@ -338,6 +381,8 @@ A1-A9 / ESS / Abel-defect manuscript route     historicalAlternativeRoute
 R179-R214 comparable / P3 route                retainedComparator + negativeControls
 R303/R353/R372 signed-resolvent route          serious precursor; production identity stayed input
 #890 incidence/P3 work                         retained theorem-bearing comparator
+#920 R571/Aug-5 paired-second-moment transplant theorem-bearing representation donor
+#945/#947 Gate-A/G0' work                      cross-prover + same-object donor surfaces
 R576/R577 positive Gram/Schur route            fallbackProducerRoute
 constant shell-localization payment            refuted as sufficient by R214
 adjacent max-shell -> Euclidean gap             refuted by #957 explicit witness
@@ -348,7 +393,7 @@ modern signed/nested commutator route           selected B_comm producer family
 
 ```text
 P0  keep this tracker + #957 + #883 archaeology summary synchronized
-P1  B_phase S2b2d1 unweighted fixed-output same-scale signed payment
+P1  B_phase S2b2d1: search existing #920/#945 G1/G2 donor attachment, then new analysis only if absent
 P2  static/certification validation of S2b2c2b remote datum and S2b2d0 reduction
 P3  A/B portability BIDI audit on each paid B theorem family (non-promoting)
 P4  S1b infrastructure: concrete scalar FTC / integrateTo linearity
@@ -362,8 +407,11 @@ Operating rule:
 ```text
 focus A/B only;
 A proof discovery deferred, A portability BIDI active;
-no broad NS archaeology;
-B new mathematics starts at the unweighted fixed-output collar payment;
+never restart broad NS archaeology;
+start every search from a named unpaid theorem/field;
+assume useful machinery may already exist in-repo and search aliases/provenance first;
+preserve failed/superseded routes as append-only provenance;
+B new mathematics starts only after the existing donor search fails on S2b2d1;
 preserve signed/local components before norms;
 only after d1 search the cutoff-uniform sum d2;
 never infer B -> A or A -> B without explicit same-object transport.
