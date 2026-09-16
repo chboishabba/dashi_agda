@@ -1,21 +1,18 @@
 module DASHI.Finance.TrumpFamilyTradeAcquisitionParetoValidation where
 
-import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
+import DASHI.Finance.TrumpFamilyTradeSourceAtlasRound2Exact as Atlas2
 import DASHI.Finance.TrumpFamilyTradeAcquisitionParetoExact as Pareto
 
 ------------------------------------------------------------------------
--- RED regression surface.
---
--- The source atlas must retain exact primary-source witnesses for the next
--- acquisition tranche, and the acquisition owner must expose a consumer-safe
--- source-debt frontier rather than another generic scheduler.
+-- RED/GREEN regression surface.
 ------------------------------------------------------------------------
 
-ericABTCInitial13DIsPresent = Atlas.ericAmericanBitcoinInitial13D
-ericABTCTrustTransferIsPresent = Atlas.ericAmericanBitcoinTrustTransfer
-ericABTCCashPurchaseIsPresent = Atlas.ericAmericanBitcoinCashPurchase
+ericABTCInitial13DIsPresent = Atlas2.ericAmericanBitcoinInitial13D
+ericABTCTrustTransferIsPresent = Atlas2.ericAmericanBitcoinTrustTransfer
+ericABTCCashPurchaseIsPresent = Atlas2.ericAmericanBitcoinCashPurchase
 
-donJrPSQHPaidPurchaseIsPresent = Atlas.donJrPSQHPaidPurchase2026Aug13
+donJrPSQHPaidPurchaseIsPresent = Atlas2.donJrPSQHPaidPurchase2026Aug13
 
 acquisitionFrontierIsPresent = Pareto.canonicalTrumpFamilyTradeAcquisitionFrontier
 primaryDeficitCannotBePaidBySecondaryOnly = Pareto.secondaryOnlyCannotPayPrimaryDebt
+issuerMaterialCannotPayIndependenceDebt = Pareto.issuerMaterialCannotPayIndependentDebt
