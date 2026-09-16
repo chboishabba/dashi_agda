@@ -16,18 +16,18 @@ import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4CharacterBridgeExact as Runtime
 -- KERNEL-VISIBLE D4 PERMUTATION CHARACTER ON THE FIVE INNER ORBITS
 --
 -- The phase-preserving ternary-27 reduction keeps one outer trit and sends the
--- inner nine-state sheet to Triadic.NineOrbit.  This owner pays the next finite
--- theorem directly in Agda: the ordinary square symmetries act on those five
--- orbit constructors with fixed-point character
+-- inner nine-state sheet to Triadic.NineOrbit.  This owner writes the next
+-- finite theorem candidate directly in Agda: the ordinary square symmetries
+-- act on those five orbit constructors with fixed-point character
 --
 --   e, r^2, {r,r^3}, axis reflections, diagonal reflections
 --   5,   5,       1,                3,                    3.
 --
 -- The Python owner already discovered that this character decomposes as
--- 3 A1 + B1 + B2.  This file intentionally stops one step earlier: it pays
--- the permutation action/character in the Agda kernel, but does not import the
--- Python decomposition as a kernel theorem and does not create Monster-42d
--- action authority.
+-- 3 A1 + B1 + B2.  This file intentionally stops one step earlier: it writes
+-- the permutation action/character as Agda source, but does not promote source
+-- to an observed kernel receipt, does not import the Python decomposition as a
+-- kernel theorem, and does not create Monster-42d action authority.
 ------------------------------------------------------------------------
 
 data D4Element : Set where
@@ -190,6 +190,7 @@ record FiveOrbitD4PermutationKernelBoundary : Set where
   field
     phasePreservingThreeTimesFiveReductionSourcePaid : Bool
     explicitFiveOrbitD4ActionWritten : Bool
+    agdaKernelPermutationCharacterSourceWritten : Bool
     agdaKernelPermutationCharacterObserved : Bool
     runtimeIrrepDecompositionRetained : Bool
     agdaKernelIrrepDecompositionObserved : Bool
@@ -200,5 +201,5 @@ open FiveOrbitD4PermutationKernelBoundary public
 currentFiveOrbitD4PermutationKernelBoundary : FiveOrbitD4PermutationKernelBoundary
 currentFiveOrbitD4PermutationKernelBoundary =
   five-orbit-d4-permutation-kernel-boundary
-    true true true true false false
-    "Kernelize only the remaining signed D4 character arithmetic: prove that the Agda permutation character (5,5,1,3,3) has irreducible multiplicities 3*A1 + B1 + B2 and zero A2/E. Keep the orbit constructors distinct from irrep labels, and keep all Monster class-42d action/representation identification separately unpaid."
+    true true true false true false false
+    "Run the Agda validation to obtain a kernel receipt for the explicit five-orbit D4 action and permutation character (5,5,1,3,3). Separately kernelize the signed D4 character arithmetic proving irreducible multiplicities 3*A1 + B1 + B2 and zero A2/E. Keep the orbit constructors distinct from irrep labels, and keep all Monster class-42d action/representation identification separately unpaid."
