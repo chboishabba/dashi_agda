@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 
 participatoryESDContextRegression :
@@ -91,3 +92,26 @@ frontierStillRetainsResidualsRegression :
   ∷ Acquisition.openInteroperabilityDurability
   ∷ []
 frontierStillRetainsResidualsRegression = refl
+
+crossRoundAttributionBoundaryRegression :
+  Acquisition.crossRoundAttributionBoundary
+  ≡ Snowball.canonicalAttributionSnowballBoundary
+crossRoundAttributionBoundaryRegression = refl
+
+futureSourceRolesMaySnowballRegression :
+  Snowball.AttributionSnowballBoundary.sourceRolesMaySnowball
+    Acquisition.crossRoundAttributionBoundary
+  ≡ true
+futureSourceRolesMaySnowballRegression = refl
+
+crossRoundCitationProofRegression :
+  Snowball.AttributionSnowballBoundary.citationMayPromoteProof
+    Acquisition.crossRoundAttributionBoundary
+  ≡ false
+crossRoundCitationProofRegression = refl
+
+crossRoundCitationAuthorityRegression :
+  Snowball.AttributionSnowballBoundary.citationMayCreateAuthority
+    Acquisition.crossRoundAttributionBoundary
+  ≡ false
+crossRoundCitationAuthorityRegression = refl
