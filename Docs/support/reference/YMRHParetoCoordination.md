@@ -1,302 +1,228 @@
 # YM / RH Pareto Coordination
 
-Status: **live coordination sheet**. Not theorem authority, not source authority, not a Clay-completion claim.
+Status: **live coordination sheet**. Not theorem authority, source authority, or a Clay-completion claim.
 
 Historical companions:
-
 - `Docs/support/reference/YMRHPRRoundArchaeologyAudit.md` — broad PR/round card catalogue.
-- `Docs/support/reference/YMRHFinalizationProducerAtlas.md` — alternate producer/construction atlas.
-- `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 completion/status boundary.
+- `Docs/support/reference/YMRHFinalizationProducerAtlas.md` — producer/construction atlas.
+- `Docs/support/reference/YMCMPWorkStatus.md` — CMP109/116/119/122 status boundary.
 - `Docs/support/reference/YMRHGlobalGoalParetoBoard.md` — global scheduling board.
 - `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda` — typed archaeology ledger.
 
-This file is the **first-stop current-state sheet**. Update it whenever a Pareto pass changes a live primitive, demotes a route, closes a compiler seam, or discovers a better producer. Do not make future investigators reconstruct the current cut from chat history.
+Use this as the first-stop current-state sheet; use the archaeology audit for history.
 
 ## Snapshot — 2026-09-16
 
-Merged foundations / retained lanes:
+Merged foundations:
 
 ```text
-#918  merged — active CMP119 regular-E compression + RH R1 fail-closed decomposition
-#934  merged — producer atlas + CMP completion boundary
-#940  merged — global YM/RH Pareto board + RH R1 checked-scalar split
-#944  merged — detailed CMP116 marked/localization and R345–R386 sensitivity audit
-#949  merged — preferred concrete CMP119 source route + live coordination sheet
-#953  merged — Round131 common-metric/unification transport recut
+#918  merged — active CMP119 regular-E compression + RH R1 decomposition
+#934  merged — producer atlas + CMP status boundary
+#940  merged — global YM/RH board + RH R1 checked-scalar split
+#944  merged — detailed CMP116 R345–R386 sensitivity/localization audit
+#949  merged — concrete CMP119 source route
+#953  merged — Round131 common-metric/unification recut
 ```
 
-Current detailed specialist owner:
+Current specialist:
 
 ```text
-#967  open/draft — YM source-native CMP116 clustering ratio / one-sided geometry route
-current source frontier: R387–R393
+#967  open/draft — source-native CMP116 decay + one-sided selected geometry
+current source-written frontier: R387–R396
 ```
 
-PR #944 is historical foundation for the detailed B-facing route. PR #967 is its specialist successor.
+## 1. YM current route — #967
 
-Do not infer exact-head Agda/kernel validation from this bookkeeping snapshot.
+The terminal consumer remains same-family quantitative covariance decay followed by the existing positive-subgap contradiction / clustering-to-gap compiler.
 
-## 1. Current Pareto frontier
+### R387–R392: remove historical overpayments
 
-### YM — canonical mass-gap / B-facing route
+- **R387:** `q_fast = 1/2` is not primitive. The spectral contradiction needs only `0 <= q_fast < q_slow < 1` with the usual amplitude signs.
+- **R388:** exact `sourceDistance = physicalDistance = time` is not primitive. The geometric consumer needs only `time <= sourceDistance`.
+- **R389:** the least-privilege finite theorem is directly `literal selected response <= A_fast * q_fast^sourceDistance` plus `time <= sourceDistance`; post-hoc magnitude/root/distance welds are pruned.
+- **R390/R391:** the older half-rate route also works with only `time <= physicalDistance` and carries that through the existing finite->continuum/subgap machinery.
+- **R392:** R349 cross-carrier equality weakens to `d_R284(selected pair) <= d_R318(selected pair)`; R304 already owns `d_R284(selected pair) = time` on the exact same pair/time/decomposition.
 
-The current detailed YM frontier is owned by **#967**.
+### R393: localization theorem vs selected application
 
-The terminal consumer remains quantitative decay on the same reconstructed continuum family, followed by the already-owned positive-subgap contradiction / clustering-to-gap compiler. R387–R393 progressively remove stronger-than-consumer source, rate and geometry obligations.
+CMP116 differentiated localization itself is source-owned by `BalabanCMP116DifferentiatedLocalizationSourceExact`; R338 puts it on the canonical common domain. Do **not** treat a new localization theorem as the live leaf.
 
-#### R387 — fixed half-rate is not primitive
-
-The spectral contradiction needs only
+The live source/application chain is:
 
 ```text
-0 <= q_fast < q_slow < 1
-A_fast >= 0
-A_slow > 0
+published CMP116 differentiated localization             [source-owned]
+ -> literal selected-trajectory application              [R342]
+ -> selected source-envelope / shell attachment          [physical same-object]
+ -> source-native geometric majorant A_fast * q_fast^d  [quantitative calibration]
+ -> one-sided selected distance geometry                 [R392 / time<=distance]
+ -> source-rate -> reconstructed spectral semantics      [physical]
+ -> existing finite->continuum + subgap compilers.
 ```
 
-and eventual slower-mode dominance. The source-native positive CMP116 decay ratio can therefore be retained directly; `q_fast = 1/2` is an optional historical specialization.
+### R394: R342 literal source -> R389 consumer
 
-#### R388 — exact source-distance equalities are not primitive
-
-For `0 <= q < 1`, the geometric consumer only needs
+R342 already states localization directly on the literal selected mixed-J response. R394 proves that the only extra inputs needed to construct the R389 source-native upper are:
 
 ```text
-time <= sourceDistance
-```
-
-because increasing the exponent decreases `q^n`. Exact `sourceDistance = physicalDistance = time` is overpayment.
-
-#### R389 — least-privilege source-native finite theorem
-
-The direct source-native finite theorem can be stated as
-
-```text
-literal selected response
-  <= A_fast * q_fast^(sourceDistance)
-
+sourceEnvelope(d) <= A_fast * q_fast^d
 time <= sourceDistance.
 ```
 
-Post-hoc selected-magnitude, root and exact-distance welds are not observed by this consumer when the source theorem is instantiated directly on the selected carrier.
+Thus the literal selected localization is reused; a post-hoc selected-magnitude equality is not reintroduced.
 
-#### R390/R391 — mature half-rate route also needs only one-sided geometry
+### R395: source-native geometric majorant
 
-R390 proves the older half-power upper only needs
+The historical `SourceExponentialShellMajorant` stored the useful theorem `shellValue(d) <= A*q^d` together with stronger dyadic normalization `q <= 1/2`.
+
+R395 separates the consumer-facing interface:
 
 ```text
-time <= physicalDistance,
+shellValue(d) <= A * q^d
+A >= 0
+q >= 0
 ```
 
-not exact equality. R391 carries that weaker input through finite selected covariance, same-family continuum transport, and the existing amplitude-parametric no-positive-subgap contradiction.
+with **no `q <= 1/2` field**. The old dyadic object remains an optional producer and compiles into R395.
 
-#### R392 — cross-carrier equality weakens to one-sided comparison
+### R396: selected envelope attachment
 
-R304 already owns, on the exact selected observable/time pair,
+R396 proves that once
 
 ```text
-d_R284(selected pair) = time.
+selected sourceEnvelope = source-native shell
 ```
 
-The current consumer only requires
+on the same source distance, R395 supplies the pointwise `sourceEnvelope <= A*q^d` theorem mechanically. Together with `time <= sourceDistance`, this builds R394 and then R389.
+
+Therefore the pointwise geometric estimate is no longer an independent selected leaf.
+
+### Current YM payments after R396
 
 ```text
-d_R284(selected pair) <= d_R318(selected pair),
-```
+YM-P0  actual proof-bearing CMP116 source theorem / R342 literal selected trajectory
+       on the physical selected source carrier.
+       The generic differentiated localization theorem itself is source-owned.
 
-not the old R349 equality. This one-sided selected-carrier comparison compiles to `time <= d_R318` without changing the selected pair/time/decomposition.
-
-#### R393 — source localization is owned; selected application is the real seam
-
-The proof-bearing source theorem already exists at the CMP116 boundary:
-
-```text
-BalabanCMP116DifferentiatedLocalizationSourceExact
-```
-
-and R338 places that theorem directly on the canonical common analytic domain. Therefore #967 must not phrase P0 as “prove a new CMP116 differentiated localization theorem.”
-
-The current source/application decomposition is:
-
-```text
-published CMP116 differentiated localization       [source-owned]
-  -> canonical common-domain source alignment      [selected/source alignment]
-  -> selected literal magnitude/envelope calibration
-  -> source-native prefactor + q_fast calibration
-  -> one-sided selected carrier geometry
-  -> source-rate / reconstructed-spectrum semantics
-  -> existing finite->continuum + subgap contradiction compilers.
-```
-
-R339 shows that, after canonical-domain/source-order normalization, the historical selected application had only two coordinates: source magnitude same-object identification and source-envelope calibration. R387–R392 tell us to weaken their downstream geometry/rate consequences rather than recreate the theorem.
-
-### Current YM specialist payments after R393
-
-```text
-YM-P0  canonical proof-bearing CMP116 source alignment on the selected trajectory
-       + selected literal magnitude/envelope attachment.
-       The differentiated localization theorem itself is NOT new analysis.
-
-YM-P1  source-native positive decay ratio and prefactor extraction/uniformity.
-       Fixed 1/2 is optional.
+YM-P1  source-native geometric-majorant realization:
+       selected sourceEnvelope = selected shell
+       + source-native A_fast,q_fast majorant.
+       Fixed q=1/2 is not required.
 
 YM-P2  one-sided selected support geometry:
-         d_R284(selected pair) <= d_R318(selected pair)
-       with d_R284(selected pair) = time already owned by R304.
+       d_R284(selected pair) <= d_R318(selected pair),
+       or equivalently a lawful route to time <= sourceDistance.
 
-YM-P3  source decay ratio/rate -> reconstructed spectral semantics strongly enough
-       to obtain q_fast < q_subgap for every alleged positive subgap mode.
+YM-P3  source q_fast/rate -> reconstructed spectral semantics sufficient for
+       q_fast < q_subgap for every alleged positive subgap mode.
 
-YM-P4  same-family finite -> continuum connected-covariance transport.
-       Existing machinery is reused by R391.
-
-YM-P5  positive-subgap/clustering -> spectral-gap contradiction/compiler.
-       Compiler-owned once P0–P4 are supplied.
+YM-P4  same-family finite -> continuum covariance transport — existing machinery.
+YM-P5  positive-subgap/clustering -> gap contradiction — existing compiler.
 ```
 
-The historical R353–R385 marked-walk/Hessian sensitivity family remains optional producer/subproducer machinery.
+The R353–R385 marked-walk/Hessian sensitivity route remains optional producer machinery.
 
-#### CMP119 / BC1 lane — retained foundation, not current detailed mass-gap specialist
+### Retained YM foundations
 
-Merged #949 retains the concrete source route:
+#949 remains the preferred concrete CMP119/BC1 source-realization lane. Do not reopen broad CMP119/CMP122 formalization merely because #967 is working later mass-gap semantics.
+
+#953 remains downstream common-metric/unification representation work; do not run it backwards to define source semantics.
+
+## 2. RH current route
+
+No newer RH-specific PR has displaced #940/#949.
+
+R1 remains:
 
 ```text
-finite-history raw CMP119 E_k
-  -> concrete Sect.-2 localization predicate
-  -> genuine CMP122 Theorem-1 witness
-  -> active CMP109/CMP116 continuation
-  -> BC1.
+R1a  final nearResponseAt(J) = checked/imported finite-near scalar
+R1b1 same checked scalar = final-carrier reflection-pair scalar
+R1b2 same reflection-pair scalar = finiteNearSum(literal cellResponse)
 ```
 
-On its preferred route, decoder/raw-witness assembly and same-regular-E plumbing are compiler-owned. The theorem-bearing BC1 inputs remain the genuine source witness, physical D2 calculus, literal CMP109 Eq. (5.1) binding, and finite normalized CMP116 demand extraction.
+Resume R1 only if theorem-bearing checked-near bytes/transport, a genuine final reflection-pair scalar, or a concrete finite enumeration/fold constructor appears.
 
-Do not reopen broad CMP119/CMP122 formalization merely because #967 is pursuing the later mass-gap producer.
-
-### RH — current direct high route
-
-No newer RH-specific PR has displaced the #940/#949 direct cut.
-
-R1 remains split into three proof-relevant same-object obligations:
+Absent that, the genuine RH work remains:
 
 ```text
-RH-R1a:
-  final nearResponseAt(chosen J)
-    = checked/imported finite-near scalar
-
-RH-R1b1:
-  SAME checked/imported finite-near scalar
-    = final-carrier reflection-pair scalar
-
-RH-R1b2:
-  SAME final-carrier reflection-pair scalar
-    = finiteNearSum(literal cellResponse).
-```
-
-The bundled final-near equality is compiler output from R1a + R1b1 + R1b2.
-
-**R1 stop condition:** resume R1 only if theorem-bearing checked-near bytes/transport, a genuine final-carrier reflection-pair scalar, or a concrete finite enumeration/fold constructor appears. Otherwise direct R2 dominates:
-
-```text
+RH-R2:
 D_near(J) + B_far(J) + D_Gamma(g_pole)
   < actual ClusterResponse(g_pole)
 ```
 
 uniformly for every arbitrary high off-line nontrivial zero.
 
-The 8889 lower-envelope route remains optional until theorem-bearing same-carrier transport exists.
+The 8889 lower-envelope lane is optional until theorem-bearing same-carrier transport exists.
 
-### Unification / common metric
+## 3. Pareto ordering
 
-Merged #953 remains downstream. It reuses Round131 native sector recovery with common/native perturbation+scalar maps, exact selected `qftTarget` construction attachment, and literal-stress pairing coherence. It does not alter the current YM mass-gap or RH leaves.
+| Priority | Work |
+|---|---|
+| 1 | **#967 YM: selected source-envelope/shell attachment + source-native rate realization + one-sided geometry + spectral-rate semantics** |
+| 2 | **RH-R2 direct strict literal complement** |
+| 3 | RH-R1 only on new theorem-bearing same-object evidence |
+| 4 | #949 CMP119/BC1 retained source foundation |
+| 5 | #953 unification/common-metric downstream representation lane |
 
-## 2. Current Pareto ordering
-
-| Priority | Work | Why |
-|---|---|---|
-| 1 | **#967 YM: source-aligned selected CMP116 application + one-sided selected geometry + source-rate semantics** | R393 makes the source theorem itself upstream-owned; these are the actual live application coordinates. |
-| 2 | **RH-R2 direct strict literal complement** | R1 remains stop-conditioned absent new theorem-bearing same-object material. |
-| 3 | RH-R1a/R1b1/R1b2 only on new theorem-bearing evidence | High fanout, currently representation-blocked. |
-| 4 | CMP119/BC1 source lane (#949 merged) | Retained source-realization foundation. |
-| 5 | Common-metric/unification (#953 merged) | Downstream representation lane. |
-
-## 3. Do-not-reopen list
+## 4. Do-not-reopen
 
 Unless a current consumer proves otherwise, do not spend cycles on:
 
-- re-proving CMP116 differentiated localization already owned at the source boundary;
+- re-proving CMP116 differentiated localization;
 - fixed `q_fast = 1/2` as a primitive requirement;
+- dyadic normalization as mandatory architecture;
 - exact `sourceDistance = physicalDistance = time` welds;
-- exact R349 cross-carrier distance equality when the selected lower comparison suffices;
+- exact R349 cross-carrier equality when R392's lower comparison suffices;
+- R353–R385 sensitivity as mandatory architecture;
 - generic CMP109/116/119/122 re-formalization;
-- running-coupling identity already definitional on the finite history;
-- old all-Nat source histories;
-- R353–R385 marked-walk/Hessian sensitivity as mandatory architecture;
 - Row-C Heat/Doob/Langevin as mandatory architecture;
-- generic promotion from endpoint-difference control to absolute selected localization;
 - RH determinant taper as if definitionally equal to final `g_pole`;
-- generic RH local zero counts that erase target-centred phase;
-- re-searching inaccessible 8883/8889 Lean filenames absent new source bytes/path;
-- new RH scalar aliases whose only purpose is to make R1 reflexive;
+- generic RH zero counts that erase target-centred phase;
+- re-searching inaccessible 8883/8889 proof files absent new bytes/path;
+- new RH scalar aliases whose only function is to make R1 reflexive;
 - unification as an upstream definition of YM source semantics.
 
-## 4. Source / attribution coordinates
+## 5. Source / attribution
 
 Keep identifiers separate from proof payment.
 
-### Yang–Mills / Bałaban source family
+YM/Bałaban:
+- CMP99 DOI `10.1007/BF01240355`
+- CMP109 DOI `10.1007/BF01215223`
+- CMP116 DOI `10.1007/BF01239022`
+- CMP119 DOI `10.1007/BF01217741`
+- CMP122-I DOI `10.1007/BF01257412`
+- CMP122-II DOI `10.1007/BF01238433`
+- Yang–Mills theory QID `Q1192873`
+- Bałaban QID unresolved; paper-specific Dewey unresolved; OEIS not applicable.
 
-- CMP99 — Tadeusz Bałaban, *Propagators for Lattice Gauge Theories in a Background Field*, DOI `10.1007/BF01240355`
-- CMP109 — Tadeusz Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories I*, DOI `10.1007/BF01215223`
-- CMP116 — Tadeusz Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, DOI `10.1007/BF01239022`
-- CMP119 — DOI `10.1007/BF01217741`
-- CMP122 I — DOI `10.1007/BF01257412`
-- CMP122 II — DOI `10.1007/BF01238433`
-- Yang–Mills theory QID `Q1192873` — identity/navigation only
-- Bałaban person QID — unresolved here
-- paper-specific Dewey — unresolved here; do not guess
-- OEIS — not applicable
+For #967 the primary source neighbourhood is CMP116 Sect. 1, differentiated/Cauchy localization around (1.23) and positive exponential localization around (1.29)–(1.36).
 
-CMP116 Sect. 1 / (1.23)–(1.36), especially the positive exponential localization sum around (1.29), is the primary source neighbourhood for #967. Citation/import status does not itself inhabit the selected application/alignment fields.
-
-### RH
-
-- Riemann hypothesis QID `Q205966`
-- Riemann zeta function QID `Q187235`
+RH:
+- RH QID `Q205966`
+- zeta QID `Q187235`
 - Bernhard Riemann QID `Q42299`
-- zeta-function Dewey coordinate `515.56`
+- zeta Dewey `515.56`
 
-These remain discovery/classification coordinates only.
+## 6. Validation boundary
 
-## 5. Validation boundary
-
-No repository `ProofLevel = machineChecked` label created by a source edit is a fresh kernel receipt by itself.
-
-For every active branch/tranche record separately:
+For every tranche keep separate:
 
 ```text
 source written?
-focused validation root updated?
+focused validator written?
 exact-head workflow observed?
 Agda/kernel receipt observed?
-cross-prover theorem transported?
+cross-prover proof transported?
 ```
 
-For #967, R387–R393 are source-written reductions unless an exact-head Agda/kernel receipt is separately observed. CodeRabbit success is not an Agda/kernel receipt.
+R387–R396 are source-written on #967. At the latest check there were no PR-triggered Actions runs; CodeRabbit success alone is not an Agda/kernel receipt.
 
-## 6. Update log
+## 7. Update log — 2026-09-16
 
-### 2026-09-16 — #944 merged; #967 successor through R393
-
-- #944 is merged and historical for the R345–R386 detailed route.
-- #967 is the current specialist continuation.
-- R387 prunes fixed-half normalization.
-- R388 prunes exact source/physical/time distance equality.
-- R389 prunes post-hoc magnitude/root/distance welds from the preferred source-native finite theorem shape.
-- R390 shows the mature half-rate route also needs only one-sided distance geometry.
-- R391 transports that weaker geometry through finite/continuum covariance and the existing subgap contradiction.
-- R392 weakens R349 cross-carrier equality to a one-sided selected carrier comparison.
-- R393 recuts P0: CMP116 differentiated localization is already source-owned; the remaining theorem-bearing work is selected source alignment/calibration, one-sided geometry, and source-rate/spectrum semantics.
-- #949 remains the merged CMP119/BC1 foundation.
-- #953 remains the merged Round131/common-metric foundation.
+- #944 merged; #967 is the specialist successor.
+- R387–R392 prune fixed-half and exact-distance architecture.
+- R393 recuts localization as upstream source authority plus selected application debt.
+- R394 compiles R342 literal localization + source-native envelope/geometry into R389.
+- R395 removes `q<=1/2` from the primitive geometric-majorant ABI while retaining the dyadic carrier as an optional producer.
+- R396 reduces selected pointwise geometric calibration to source-envelope↔shell attachment plus one-sided geometry.
 - RH remains at the R1 stop condition followed by direct R2.
-
-When the next Pareto pass changes any of these statements, update this file in the same tranche as the code change.
