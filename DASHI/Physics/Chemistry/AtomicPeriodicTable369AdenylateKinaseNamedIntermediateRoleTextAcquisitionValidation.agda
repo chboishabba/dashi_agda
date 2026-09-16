@@ -1,0 +1,31 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNamedIntermediateRoleTextAcquisitionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNamedIntermediateRoleTextAcquisitionExact as Target
+
+boundary = Target.canonicalNamedIntermediateRoleTextAcquisitionBoundary
+
+gammaRolePaid : Bool
+gammaRolePaid = Target.NamedIntermediateRoleTextAcquisitionBoundary.gammaNmpOpenRolePaid boundary
+
+deltaRolePaid : Bool
+deltaRolePaid = Target.NamedIntermediateRoleTextAcquisitionBoundary.deltaNmpSemiOpenRolePaid boundary
+
+betaOpenLikePaid : Bool
+betaOpenLikePaid = Target.NamedIntermediateRoleTextAcquisitionBoundary.betaOpenLikePopulationRolePaid boundary
+
+epsilonAlternativePathPaid : Bool
+epsilonAlternativePathPaid = Target.NamedIntermediateRoleTextAcquisitionBoundary.epsilonNmpFirstAlternativeRolePaid boundary
+
+namedAnglesRemainUnpaid : Bool
+namedAnglesRemainUnpaid = Target.NamedIntermediateRoleTextAcquisitionBoundary.namedIntermediateExactAnglesPaid boundary
+
+namedDLnRemainUnpaid : Bool
+namedDLnRemainUnpaid = Target.NamedIntermediateRoleTextAcquisitionBoundary.namedIntermediateExactDLnPaid boundary
+
+sameRoleNotSameObject : Bool
+sameRoleNotSameObject = Target.NamedIntermediateRoleTextAcquisitionBoundary.roleDescriptionCreatesStateIdentity boundary
+
+citationNotProof : Bool
+citationNotProof = Target.NamedIntermediateRoleTextAcquisitionBoundary.citationCreatesScientificAuthority boundary
