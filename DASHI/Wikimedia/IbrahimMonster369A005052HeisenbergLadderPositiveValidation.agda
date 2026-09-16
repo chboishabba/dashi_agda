@@ -1,7 +1,7 @@
 module DASHI.Wikimedia.IbrahimMonster369A005052HeisenbergLadderPositiveValidation where
 
 open import Agda.Builtin.Bool using (true; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (_*_)
 
 import DASHI.Wikimedia.IbrahimMonster369A005052HeisenbergLadderPositiveExact as L
@@ -21,12 +21,12 @@ regularBulkRegression = L.phaseToRegularBulkIsA005052Level9
 
 positiveCorrelationRegression :
   L.positiveStructuralCorrelationRetained L.currentA005052HeisenbergLadderBoundary ≡ true
-positiveCorrelationRegression = L.refl
+positiveCorrelationRegression = refl
 
 regularBulkNotWholePhaseRegression :
   L.regularBulkIsWholeThreePhaseDimension L.currentA005052HeisenbergLadderBoundary ≡ false
-regularBulkNotWholePhaseRegression = L.refl
+regularBulkNotWholePhaseRegression = refl
 
 oeisAuthorityRegression :
   L.oeisCreatesActualMonsterRecognition L.currentA005052HeisenbergLadderBoundary ≡ false
-oeisAuthorityRegression = L.refl
+oeisAuthorityRegression = refl
