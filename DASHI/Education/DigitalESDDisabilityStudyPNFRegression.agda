@@ -20,7 +20,7 @@ zhaoCeilingRegression = refl
 
 yetergeCeilingRegression :
   Audit.DisabilityStudyResultAudit.strongestPaidImplication Audit.yetergeResultAudit
-  ≡ Cone.associatesTreatmentAndOutcome
+  ≡ Cone.restatesMeasuredResult
 yetergeCeilingRegression = refl
 
 noDisabilityStudyPaysUniversalEffectRegression :
