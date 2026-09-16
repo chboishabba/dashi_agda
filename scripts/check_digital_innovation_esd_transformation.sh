@@ -57,10 +57,14 @@ grep -q '^canonicalDigitalESDAcquisitionAtlas :' DASHI/Education/DigitalESDAcqui
 grep -q '^currentAcquisitionFrontier :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 grep -q '^firstAcquisitionLeaf :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 grep -q '^citationDoesNotPromoteDigitalESDConclusion :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '^teachingSustainabilityWithTechnologyDoesNotPromoteSustainabilityOfTechnology :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '^oneEducationLCADoesNotEstablishUniversalOnlineSuperiority :' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 grep -q 'canonicalSourceRoleSnowballReceipt' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 grep -q '10.54675/ZACQ4808' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 grep -q '10.3390/educsci13010033' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 grep -q '10.1787/9997e7b3-en' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '10.1007/s11367-026-02656-7' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
+grep -q '10.1186/s41239-025-00569-3' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 grep -q 'Global E-waste Monitor 2024' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 grep -q 'Energy and AI' DASHI/Education/DigitalESDAcquisitionSnowballParetoExact.agda
 
@@ -84,6 +88,10 @@ grep -q '^reviewAntecedentSameObjectRegression :' DASHI/Education/DigitalInnovat
 grep -q '^citationNonPromotionSnowballRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^energySourceScopeRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^ewasteSourceScopeRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^educationScenarioLCABenchmarkRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^digitalSobrietyPedagogyRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^reflexiveSustainabilityRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
+grep -q '^singleLCAGeneralisationRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^lifecyclePaymentRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^currentAcquisitionFrontierRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
 grep -q '^firstAcquisitionLeafRegression :' DASHI/Education/DigitalInnovationESDRegression.agda
