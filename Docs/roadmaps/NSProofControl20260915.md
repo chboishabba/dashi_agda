@@ -60,6 +60,11 @@ Typed all-four mission owner:
 
 `DASHI/Physics/Closure/NSGlobalFourAlternativeMissionExact.agda`
 
+Typed current control-plane receipt:
+
+`DASHI/Physics/Closure/NSProofControlABCD20260916ReceiptExact.agda`
+`DASHI/Physics/Closure/NSProofControlABCD20260916ReceiptRegression.agda`
+
 Typed released-proof/source-alignment owners for C/D:
 
 ```text

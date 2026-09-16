@@ -24,8 +24,7 @@ open import Data.Integer.Base using (+_)
 import Data.Nat.Base as ℕ
 open ℕ using (NonZero; _≤_; _*_; z≤n; s≤s)
 import Data.Nat.Properties as ℕP
-open import Data.Rational.Unnormalised as ℚ using
-  (_/_; _*_; _≤_)
+open import Data.Rational.Unnormalised as ℚ using (_/_)
 import Data.Rational.Unnormalised.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
