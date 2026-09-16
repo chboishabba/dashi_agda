@@ -1,4 +1,4 @@
-{-# OPTIONS --safe #-}
+
 module DASHI.Physics.YangMills.BalabanClayP2LargeFieldStepVExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
