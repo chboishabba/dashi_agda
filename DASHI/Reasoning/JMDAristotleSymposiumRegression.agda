@@ -5,13 +5,16 @@ import DASHI.Reasoning.JMDAristotleSymposiumEpistemicFirewallExact as Firewall
 import DASHI.Reasoning.ContentAddressedVerificationBridgeExact as Content
 import DASHI.Philosophy.PlatoSymposiumPhilosophyBridgeExact as Plato
 import DASHI.Reasoning.PlatoSymposiumDialecticBraidHyperformalExact as Hyperformal
+import DASHI.Reasoning.PlatoSymposiumProofSearchExperimentExact as ProofSearch
+import DASHI.Reasoning.PlatoSymposiumTransmissionAttributionExact as Transmission
 
 ------------------------------------------------------------------------
 -- RED/GREEN regression surface for the JMD-owned Aristotle Symposium bundle.
 -- The imported owners must preserve source attribution, distinguish formal
 -- entailment from empirical authority, separate content-addressed procedural
--- invariance from epistemic correctness, and keep Plato-shaped philosophical
--- carriers distinct from DASHI dialectic/braid/369/hyperfabric semantics.
+-- invariance from epistemic correctness, keep Plato-shaped philosophical
+-- carriers distinct from DASHI dialectic/braid/369/hyperfabric semantics,
+-- and preserve proof-search / transmission-history boundaries.
 ------------------------------------------------------------------------
 
 sourceAtlasPinned = Source.jmdAristotleSymposiumSourceAtlas
@@ -38,3 +41,13 @@ existingTypedHyperfabricBraidBoundaryPinned = Hyperformal.existingTypedHyperfabr
 existing369RoleBoundaryPinned = Hyperformal.existingBase369RoleBoundary
 existingMonsterObserverBoundaryPinned = Hyperformal.existingMonsterObserverBoundary
 existingJMDLegacyAtlasPinned = Hyperformal.existingJMDLegacySourceAtlas
+
+nextProbeHistoryBoundary = ProofSearch.currentUtteranceDoesNotDetermineNextProbe
+supportCountInquiryBoundary = ProofSearch.supportCountDoesNotDetermineInquiryState
+consensusResolutionBoundary = ProofSearch.consensusDoesNotDetermineConsumerResolution
+proofSearchBoundary = ProofSearch.canonicalPlatoSymposiumProofSearchBoundary
+
+claimRoleSpeakerBoundary = Transmission.immediateSpeakerDoesNotDetermineClaimRole
+transmissionPathPinned = Transmission.canonicalDiotimaTransmissionPath
+attributionSnowballPinned = Transmission.existingJMDBundleSnowballReceipt
+transmissionBoundary = Transmission.canonicalPlatoSymposiumTransmissionBoundary
