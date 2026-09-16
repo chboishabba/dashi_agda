@@ -173,6 +173,9 @@ unescoESD2030MidtermReceipt = source-receipt Primary.unescoESD2030MidtermSource 
 oecdDigitalEducationOutlook2026Receipt : SourceReceipt
 oecdDigitalEducationOutlook2026Receipt = source-receipt Primary.oecdDigitalEducationOutlook2026Source "2026-09-16" "primary institutional evidence/policy synthesis / performance-versus-learning and pedagogical-condition context" true refl
 
+uneceFifthESDEvaluationReceipt : SourceReceipt
+uneceFifthESDEvaluationReceipt = source-receipt Primary.uneceFifthESDEvaluationSource "2026-09-16" "primary UNECE regional implementation evaluation / national-report synthesis showing digital-ESD integration remains uneven and intentional sustainability integration in digital education remains limited" true refl
+
 unescoAICommonGoodMinisterialReceipt : SourceReceipt
 unescoAICommonGoodMinisterialReceipt = source-receipt Primary.unescoAICommonGoodMinisterialSource "2026-09-16" "primary adopted intergovernmental normative/governance source / public-purpose, deliberative-governance and infrastructure-procurement context" true refl
 
@@ -193,6 +196,7 @@ data MethodCitationCreatesExecution : Set where
 data InstitutionalFrameworkCreatesLocalAuthority : Set where
 data ConsultationDiscussionPaperEqualsAdoptedMinisterialStatement : Set where
 data ConsultationBackgroundPaperEqualsAdoptedPolicy : Set where
+data RegionalImplementationReportsCreateDigitalESDEffect : Set where
 
 activityDoesNotDetermineSystemTransformation : ActivityLevelDeterminesSystemTransformation → ⊥
 activityDoesNotDetermineSystemTransformation ()
@@ -217,6 +221,9 @@ consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement ()
 
 consultationBackgroundPaperDoesNotEqualAdoptedPolicy : ConsultationBackgroundPaperEqualsAdoptedPolicy → ⊥
 consultationBackgroundPaperDoesNotEqualAdoptedPolicy ()
+
+regionalImplementationReportsDoNotCreateDigitalESDEffect : RegionalImplementationReportsCreateDigitalESDEffect → ⊥
+regionalImplementationReportsDoNotCreateDigitalESDEffect ()
 
 transformationBoundary = Transformation.canonicalIntegratedTransitionBoundary
 literatureObserverMap = Literature.canonicalDigitalESDLiteratureMap
@@ -256,4 +263,4 @@ canonicalMethodologyBoundary : MethodologyBoundary
 canonicalMethodologyBoundary = methodology-boundary true refl true refl true refl true refl true refl true refl false refl false refl false refl false refl false refl
 
 methodologyReading : String
-methodologyReading = "This manuscript is an integrative conceptual review with a transparent structured search, not a systematic review and not an empirical intervention study. Search execution, eligibility, extraction and synthesis remain distinct receipts. Sources are extracted with role, population/context, time horizon, lifecycle/governance coordinates and explicit limitations. Adopted ministerial statements remain distinct from consultation discussion papers and commissioned background papers. The reciprocal synthesis asks both how digital education can build ESD capacity and how sustainability should constrain digital education itself."
+methodologyReading = "This manuscript is an integrative conceptual review with a transparent structured search, not a systematic review and not an empirical intervention study. Search execution, eligibility, extraction and synthesis remain distinct receipts. Sources are extracted with role, population/context, time horizon, lifecycle/governance coordinates and explicit limitations. Regional implementation evaluations, adopted ministerial statements, consultation discussion papers and commissioned background papers remain distinct source roles. The reciprocal synthesis asks both how digital education can build ESD capacity and how sustainability should constrain digital education itself."
