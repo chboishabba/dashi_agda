@@ -17,7 +17,9 @@ import DASHI.Reasoning.TypedHyperfabricLocalRefinementBridgeExact as LocalRefine
 import DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact as PantsGluing
 import DASHI.Reasoning.TypedHyperfabricActionCrossingTransportExact as CrossingTransport
 import DASHI.Reasoning.MaleCNSTypedHyperfabricChartProjectionExact as MaleCNSChart
-import DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact as Braid
+import DASHI.Topology.FiniteBraidRhizomeCalculus as FiniteBraid
+import DASHI.Reasoning.TypedHyperfabricFiniteBraidEquivarianceExact as BraidEquivariance
+import DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact as BraidTrace
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 
 ------------------------------------------------------------------------
@@ -62,11 +64,11 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Reasoning.TypedHyperfabricLocalRefinementBridgeExact.LocalStalkRefinement"
   "DASHI.Topology.ClopenNDimFibreBoundary.ClopenBallDescriptor / FiniteFibreAt"
   "DASHI.Topology.TetrationalGateField.TowerTransition"
-  "DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact.HyperfabricPantsGluing over RelationalBranchCobordismGeometry.InterfaceMatch"
-  "DASHI.Reasoning.TypedHyperfabricActionCrossingTransportExact over ActionCrossingTraceCalculusExact + BraidedEvidenceTraceBidiCrossPollination2026Exact"
+"DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact.HyperfabricPantsGluing over RelationalBranchCobordismGeometry.InterfaceMatch"
+  "DASHI.Topology.FiniteBraidRhizomeCalculus (deformation/action/isotopy) + DASHI.Reasoning.TypedHyperfabricActionCrossingTransportExact (ordered crossing transport) + DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact (strand provenance/history)"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is now a composition of existing theorem surfaces plus thin adapters only. TypedHyperfabric owns compatible GlobalSections in Set₁. Local refinement is pinned to refineWithinChart; pants gluing requires the canonical five-coordinate InterfaceMatch after domain interpretation of edge stalks; ordered action-crossing traces transport compatible sections through a domain-supplied step while preserving order/provenance and refusing automatic reversibility or braid-group promotion. Consumer reduction still acts through Set-sized selected-section codes. MaleCNS remains only one witness of the general architecture."
+  "The local-fibre architecture is now a composition of existing theorem surfaces plus thin adapters only. TypedHyperfabric owns compatible GlobalSections in Set₁. Local refinement is pinned to refineWithinChart; pants gluing requires the canonical five-coordinate InterfaceMatch after domain interpretation of edge stalks; ordered action-crossing traces transport compatible sections through a domain-supplied step while preserving order/provenance and refusing automatic reversibility. FiniteBraidRhizomeCalculus owns the actual finite two-strand braid action and isotopy class while BraidedEvidenceTrace owns path/provenance identity; TypedHyperfabricFiniteBraidEquivarianceExact supplies the explicit incidence/stalk/restriction-equivariance interface needed before a braid can transport a fabric section, without asserting every hyperfabric automatically admits such an action. Consumer reduction still acts through Set-sized selected-section codes. MaleCNS remains only one witness of the general architecture."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -122,8 +124,22 @@ pantsSeamDoesNotRewriteTopologyByItself :
     PantsGluing.canonicalTypedHyperfabricPantsGluingBoundary ≡ false
 pantsSeamDoesNotRewriteTopologyByItself = refl
 
+finiteBraidActionIsCanonicalDonor :
+  FiniteBraid.braidAssociativityChecked FiniteBraid.finiteBraidRhizomeReceipt ≡ true
+finiteBraidActionIsCanonicalDonor = refl
+
+finiteBraidHyperfabricRequiresRestrictionEquivariance :
+  BraidEquivariance.restrictionEquivarianceRequired
+    BraidEquivariance.canonicalTypedHyperfabricFiniteBraidBoundary ≡ true
+finiteBraidHyperfabricRequiresRestrictionEquivariance = refl
+
+actionTraceAloneDoesNotPayBraidTransport :
+  BraidEquivariance.actionTraceAlonePaysHyperfabricBraidTransport
+    BraidEquivariance.canonicalTypedHyperfabricFiniteBraidBoundary ≡ false
+actionTraceAloneDoesNotPayBraidTransport = refl
+
 braidCrossingRetainsIdentity :
-  Braid.coordinationWithoutFusion Braid.canonicalBraidedEvidenceBoundary ≡ true
+  BraidTrace.coordinationWithoutFusion BraidTrace.canonicalBraidedEvidenceBoundary ≡ true
 braidCrossingRetainsIdentity = refl
 
 orderedCrossingTransportPreservesCompatibilityTyping :
@@ -282,10 +298,10 @@ currentLocalFibreMissingFields : LocalFibreMissingFields
 currentLocalFibreMissingFields = local-fibre-missing-fields
   true
   true
-  true
+  false
   true
   true
   false
   true
   true
-  "The three generic adapter seams are now source-present without a parallel ontology: TypedHyperfabricLocalRefinementBridgeExact pins local section refinement to refineWithinChart; TypedHyperfabricPantsGluingBridgeExact lifts the canonical five-coordinate InterfaceMatch to a typed seam certificate without rewriting topology; TypedHyperfabricActionCrossingTransportExact transports compatible GlobalSections along ordered crossing traces with trace order retained as provenance and no automatic reversibility/braid-group promotion. Consumer reduction remains universe-correct through Set-sized selected-section codes. MaleCNS chart realization is paid, while source-bound raw neuron/synapse physical incidence remains distinct and unpaid."
+"The three generic adapter seams are now source-present without a parallel ontology: TypedHyperfabricLocalRefinementBridgeExact pins local section refinement to refineWithinChart; TypedHyperfabricPantsGluingBridgeExact lifts the canonical five-coordinate InterfaceMatch to a typed seam certificate without rewriting topology; TypedHyperfabricActionCrossingTransportExact transports compatible GlobalSections along ordered crossing traces with trace order retained as provenance and no automatic reversibility. The canonical finite braid action now also has an explicit TypedHyperfabric equivariance/section-transport interface (TypedHyperfabricFiniteBraidEquivarianceExact) and one exact two-strand specimen, but arbitrary fabrics still require supplied vertex/edge actions, invertible stalk maps, incidence transport and restriction equivariance, so generic braidDeformationLiftedToGenericHyperfabricTransport remains unpaid. Consumer reduction remains universe-correct through Set-sized selected-section codes. MaleCNS chart realization is paid, while source-bound raw neuron/synapse physical incidence remains distinct and unpaid."
