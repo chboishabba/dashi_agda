@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMSourceAuthoritySurface where
 
 open import Agda.Builtin.Bool using (Bool; false; true)

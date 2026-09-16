@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)

@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanRenormalisedCouplingExistence where
 
 -- Assembly surface for the one substantive finite-cutoff RG theorem.  A

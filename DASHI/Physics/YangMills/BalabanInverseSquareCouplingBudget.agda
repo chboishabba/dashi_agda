@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget where
 
 -- Finite-cutoff coupling control for the inverse-square coordinate in

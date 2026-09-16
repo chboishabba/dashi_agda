@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact where
 
 open import Agda.Builtin.Nat using (Nat)

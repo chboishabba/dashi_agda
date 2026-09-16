@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)

@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra where
 
 -- Additive algebra for the cumulative determinant route on an arbitrary scale

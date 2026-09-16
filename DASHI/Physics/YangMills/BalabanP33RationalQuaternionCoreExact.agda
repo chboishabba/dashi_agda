@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanP33RationalQuaternionCoreExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
