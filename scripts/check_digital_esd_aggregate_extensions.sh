@@ -13,6 +13,7 @@ grep -q '^import DASHI.Education.DigitalESDAcquisitionSnowballRegression$' "$AGG
 grep -q '^import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDSameObjectAcquisitionSchedulerExact$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDSameObjectAcquisitionSchedulerRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDEducationSustainabilityLiteratureMapExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDEducationSustainabilityLiteratureMapRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact$' "$AGG"
