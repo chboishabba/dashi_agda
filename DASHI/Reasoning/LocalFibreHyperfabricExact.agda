@@ -14,7 +14,9 @@ import DASHI.Topology.WormSoilPantsSheafBoundary as WormPants
 import DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact as ReductionBridge
 import DASHI.Reasoning.TypedHyperfabricConsumerReductionBridgeExact as SectionReduction
 import DASHI.Reasoning.MaleCNSTypedHyperfabricChartProjectionExact as MaleCNSChart
-import DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact as Braid
+import DASHI.Topology.FiniteBraidRhizomeCalculus as FiniteBraid
+import DASHI.Reasoning.TypedHyperfabricFiniteBraidEquivarianceExact as BraidEquivariance
+import DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact as BraidTrace
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hypercube
 
 ------------------------------------------------------------------------
@@ -60,10 +62,10 @@ canonicalLocalFibreAuthorityMap = local-fibre-authority-map
   "DASHI.Topology.ClopenNDimFibreBoundary.ClopenBallDescriptor / FiniteFibreAt"
   "DASHI.Topology.TetrationalGateField.TowerTransition"
   "DASHI.Reasoning.RelationalBranchCobordismGeometry.InterfaceMatch / composeAt"
-  "DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact"
+  "DASHI.Topology.FiniteBraidRhizomeCalculus (deformation/action/isotopy) + DASHI.Core.BraidedEvidenceTraceBidiCrossPollination2026Exact (strand provenance/history)"
   "DASHI.Core.ConsumerRelativeReductionCanonicalBridgeExact.ConsumerInvisibleSymmetry"
   "DASHI.Biology.TernaryHypercubeHyperfabricExact (carrier/transition-geometry separation)"
-  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. MaleCNSTypedHyperfabricChartProjectionExact supplies that selected chart-code carrier, executed lossless chart/hyperfabric and sender-gain projection receipts, and the official MaleCNS v1.0 source-authority receipt. The official full segment graph and synaptic-partner table own raw connectivity authority; the complete 26-region support is a derived aggregation and is not the raw neuron/synapse hypergraph."
+  "The local-fibre architecture is a composition of already-owned theorem surfaces. TypedHyperfabric owns compatible GlobalSections in Set₁; a declared Set-sized selected-section code realizes into those sections before consumer reduction. FiniteBraidRhizomeCalculus owns the actual finite two-strand braid action and isotopy class, while BraidedEvidenceTrace owns path/provenance identity. TypedHyperfabricFiniteBraidEquivarianceExact supplies the explicit incidence/stalk/restriction-equivariance interface needed before a braid can transport a fabric section; it does not assert that every hyperfabric automatically admits such an action. MaleCNSTypedHyperfabricChartProjectionExact supplies the selected chart-code carrier, executed lossless chart/hyperfabric and sender-gain projection receipts, and the official MaleCNS v1.0 source-authority receipt."
 
 ------------------------------------------------------------------------
 -- Exact donor anchors.
@@ -94,8 +96,22 @@ pantsPathSensitiveSplitCanConserveCapacity :
 pantsPathSensitiveSplitCanConserveCapacity =
   Pants.phaseChangedCapacityConservative
 
+finiteBraidActionIsCanonicalDonor :
+  FiniteBraid.braidAssociativityChecked FiniteBraid.finiteBraidRhizomeReceipt ≡ true
+finiteBraidActionIsCanonicalDonor = refl
+
+finiteBraidHyperfabricRequiresRestrictionEquivariance :
+  BraidEquivariance.restrictionEquivarianceRequired
+    BraidEquivariance.canonicalTypedHyperfabricFiniteBraidBoundary ≡ true
+finiteBraidHyperfabricRequiresRestrictionEquivariance = refl
+
+actionTraceAloneDoesNotPayBraidTransport :
+  BraidEquivariance.actionTraceAlonePaysHyperfabricBraidTransport
+    BraidEquivariance.canonicalTypedHyperfabricFiniteBraidBoundary ≡ false
+actionTraceAloneDoesNotPayBraidTransport = refl
+
 braidCrossingRetainsIdentity :
-  Braid.coordinationWithoutFusion Braid.canonicalBraidedEvidenceBoundary ≡ true
+  BraidTrace.coordinationWithoutFusion BraidTrace.canonicalBraidedEvidenceBoundary ≡ true
 braidCrossingRetainsIdentity = refl
 
 hypercubeCarrierDoesNotFixTransitionGeometry :
@@ -260,4 +276,4 @@ currentLocalFibreMissingFields = local-fibre-missing-fields
   false
   true
   true
-  "TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam without coercing GlobalSection : Set₁ into Fine : Set. MaleCNSTypedHyperfabricChartProjectionExact pays projection from compatible GlobalSections, the Set-sized complete ordered-pair chart code, the executed lossless runtime projection receipts, and official MaleCNS v1.0 source authority for raw segment/synapse connectivity. The 26-region direct support is empirically complete (676/676) but remains a derived aggregation; the actual source-bound raw physical incidence -> TypedHyperfabric instance is still unpaid. Remaining generic work is NDim refinement, pants seams, braid transport, and that typed raw-incidence adapter."
+  "The canonical finite braid action now has an explicit TypedHyperfabric equivariance/section-transport interface and one exact two-strand specimen, but arbitrary fabrics still require supplied vertex/edge actions, invertible stalk maps, incidence transport and restriction equivariance. Therefore generic braidDeformationLiftedToGenericHyperfabricTransport remains unpaid. ActionCrossingTrace/BraidedEvidenceTrace remains the history/provenance layer rather than the physical braid action. TypedHyperfabricConsumerReductionBridgeExact pays the universe-correct selected-section-code -> consumer-relative reduction seam; MaleCNSTypedHyperfabricChartProjectionExact pays the selected chart projection while raw physical MaleCNS incidence remains separate."
