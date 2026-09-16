@@ -16,12 +16,6 @@ import DASHI.Biology.CausalEstimatorGuaranteesExact as Guarantees
 
 ------------------------------------------------------------------------
 -- DIGITAL-ESD STUDY CLAIM CEILING
---
--- Thin application adapter over existing design, implication-cone and
--- statistical-estimation machinery. Every included paper may contribute only
--- claims supported by its own design, population, realised sample, measurement,
--- uncertainty and transport receipts. Missing numerical/statistical material
--- is retained as missing rather than reconstructed from narrative confidence.
 ------------------------------------------------------------------------
 
 data ReportingState : Set where
@@ -44,18 +38,14 @@ record ReportedSurface : Set where
 
 open ReportedSurface public
 
-------------------------------------------------------------------------
--- Source-reported study design remains primary.
---
--- The generic EvidenceDesignAdmissibility ontology is deliberately finite and
--- does not contain every design label used in the literature. A source may
--- therefore remain unmapped rather than being forced into the nearest existing
--- constructor. Mapping is a separate, explicit receipt.
-------------------------------------------------------------------------
-
 data DesignReceiptStatus : Set where
   canonicalDesignReceipt : Design.StudyDesignReceipt → DesignReceiptStatus
   sourceReportedDesignUnmapped : String → String → DesignReceiptStatus
+
+data EpistemicRoleStatus : Set where
+  reportedEpistemicRole : Design.EpistemicRole → String → EpistemicRoleStatus
+  epistemicRoleNotApplicable : String → EpistemicRoleStatus
+  epistemicRoleUnresolved : String → EpistemicRoleStatus
 
 data StudyClaimCoordinate : Set where
   sourcePopulationCoordinate : StudyClaimCoordinate
@@ -121,17 +111,12 @@ record StudyClaimProfile : Set where
     uncertaintyIntervalSurface : ReportedSurface
     timeHorizonReference : String
     externalValidityReference : String
-    participantRole : Design.EpistemicRole
+    participantRoleStatus : EpistemicRoleStatus
     strongestSupportedImplication : Cone.ImplicationKind
     strongestSupportedImplicationReference : String
     explicitLimitationsReference : String
 
 open StudyClaimProfile public
-
-------------------------------------------------------------------------
--- Canonical owner reuse. These are the theories that give meaning to the
--- design/claim ceiling; this module does not replace them.
-------------------------------------------------------------------------
 
 designBoundary : Design.EvidenceDesignBoundary
 designBoundary = Design.canonicalEvidenceDesignBoundary
@@ -145,10 +130,6 @@ statisticalBoundary = Statistical.canonicalCausalEstimandStatisticalRealisationB
 guaranteeBoundary : Guarantees.CausalEstimatorGuaranteeBoundary
 guaranteeBoundary = Guarantees.canonicalCausalEstimatorGuaranteeBoundary
 
-------------------------------------------------------------------------
--- Non-promotion firewalls.
-------------------------------------------------------------------------
-
 data ReportedPValueCreatesCausalIdentification : Set where
 data LargeSampleCreatesRepresentativePopulation : Set where
 data ConfidenceIntervalCreatesPopulationTransport : Set where
@@ -159,49 +140,40 @@ data NarrowIntervalCreatesMechanismIdentification : Set where
 data StatisticalSignificanceCreatesPracticalSignificance : Set where
 data AssociationCreatesPracticeRecommendation : Set where
 data UnmappedDesignMayBeForcedIntoNearestCanonicalKind : Set where
+data NonApplicableParticipantRoleMayBeInvented : Set where
 
-reportedPValueDoesNotCreateCausalIdentification :
-  ReportedPValueCreatesCausalIdentification → ⊥
+reportedPValueDoesNotCreateCausalIdentification : ReportedPValueCreatesCausalIdentification → ⊥
 reportedPValueDoesNotCreateCausalIdentification ()
 
-largeSampleDoesNotCreateRepresentativePopulation :
-  LargeSampleCreatesRepresentativePopulation → ⊥
+largeSampleDoesNotCreateRepresentativePopulation : LargeSampleCreatesRepresentativePopulation → ⊥
 largeSampleDoesNotCreateRepresentativePopulation ()
 
-confidenceIntervalDoesNotCreatePopulationTransport :
-  ConfidenceIntervalCreatesPopulationTransport → ⊥
+confidenceIntervalDoesNotCreatePopulationTransport : ConfidenceIntervalCreatesPopulationTransport → ⊥
 confidenceIntervalDoesNotCreatePopulationTransport ()
 
-qualitativeFindingDoesNotCreatePopulationPrevalence :
-  QualitativeFindingCreatesPopulationPrevalence → ⊥
+qualitativeFindingDoesNotCreatePopulationPrevalence : QualitativeFindingCreatesPopulationPrevalence → ⊥
 qualitativeFindingDoesNotCreatePopulationPrevalence ()
 
-studyFindingDoesNotCreateSystemTransformation :
-  StudyFindingCreatesSystemTransformation → ⊥
+studyFindingDoesNotCreateSystemTransformation : StudyFindingCreatesSystemTransformation → ⊥
 studyFindingDoesNotCreateSystemTransformation ()
 
 missingUncertaintyMayNotBeInvented : MissingUncertaintyMayBeInvented → ⊥
 missingUncertaintyMayNotBeInvented ()
 
-narrowIntervalDoesNotCreateMechanismIdentification :
-  NarrowIntervalCreatesMechanismIdentification → ⊥
+narrowIntervalDoesNotCreateMechanismIdentification : NarrowIntervalCreatesMechanismIdentification → ⊥
 narrowIntervalDoesNotCreateMechanismIdentification ()
 
-statisticalSignificanceDoesNotCreatePracticalSignificance :
-  StatisticalSignificanceCreatesPracticalSignificance → ⊥
+statisticalSignificanceDoesNotCreatePracticalSignificance : StatisticalSignificanceCreatesPracticalSignificance → ⊥
 statisticalSignificanceDoesNotCreatePracticalSignificance ()
 
-associationDoesNotCreatePracticeRecommendation :
-  AssociationCreatesPracticeRecommendation → ⊥
+associationDoesNotCreatePracticeRecommendation : AssociationCreatesPracticeRecommendation → ⊥
 associationDoesNotCreatePracticeRecommendation ()
 
-unmappedDesignMayNotBeForcedIntoNearestCanonicalKind :
-  UnmappedDesignMayBeForcedIntoNearestCanonicalKind → ⊥
+unmappedDesignMayNotBeForcedIntoNearestCanonicalKind : UnmappedDesignMayBeForcedIntoNearestCanonicalKind → ⊥
 unmappedDesignMayNotBeForcedIntoNearestCanonicalKind ()
 
-------------------------------------------------------------------------
--- Review-level boundary.
-------------------------------------------------------------------------
+nonApplicableParticipantRoleMayNotBeInvented : NonApplicableParticipantRoleMayBeInvented → ⊥
+nonApplicableParticipantRoleMayNotBeInvented ()
 
 record StudyClaimCeilingBoundary : Set where
   constructor study-claim-ceiling-boundary
@@ -212,35 +184,30 @@ record StudyClaimCeilingBoundary : Set where
     sourceReportedDesignRetainedIsTrue : sourceReportedDesignRetained ≡ true
     unresolvedDesignMappingPermitted : Bool
     unresolvedDesignMappingPermittedIsTrue : unresolvedDesignMappingPermitted ≡ true
+    nonApplicableParticipantRolePermitted : Bool
+    nonApplicableParticipantRolePermittedIsTrue : nonApplicableParticipantRolePermitted ≡ true
     sampleSizeAndAnalysisNRetained : Bool
-    sampleSizeAndAnalysisNRetainedIsTrue :
-      sampleSizeAndAnalysisNRetained ≡ true
+    sampleSizeAndAnalysisNRetainedIsTrue : sampleSizeAndAnalysisNRetained ≡ true
     unreportedSampleSizeHasNoFabricatedNat : Bool
-    unreportedSampleSizeHasNoFabricatedNatIsTrue :
-      unreportedSampleSizeHasNoFabricatedNat ≡ true
+    unreportedSampleSizeHasNoFabricatedNatIsTrue : unreportedSampleSizeHasNoFabricatedNat ≡ true
     uncertaintyAndIntervalSemanticsRetained : Bool
-    uncertaintyAndIntervalSemanticsRetainedIsTrue :
-      uncertaintyAndIntervalSemanticsRetained ≡ true
+    uncertaintyAndIntervalSemanticsRetainedIsTrue : uncertaintyAndIntervalSemanticsRetained ≡ true
     designAndComparatorRetained : Bool
     designAndComparatorRetainedIsTrue : designAndComparatorRetained ≡ true
     attritionMissingnessRetained : Bool
     attritionMissingnessRetainedIsTrue : attritionMissingnessRetained ≡ true
     effectSizeAndMultiplicityRetained : Bool
-    effectSizeAndMultiplicityRetainedIsTrue :
-      effectSizeAndMultiplicityRetained ≡ true
+    effectSizeAndMultiplicityRetainedIsTrue : effectSizeAndMultiplicityRetained ≡ true
     populationTimeAndTransportRetained : Bool
-    populationTimeAndTransportRetainedIsTrue :
-      populationTimeAndTransportRetained ≡ true
+    populationTimeAndTransportRetainedIsTrue : populationTimeAndTransportRetained ≡ true
     participantRoleRetained : Bool
     participantRoleRetainedIsTrue : participantRoleRetained ≡ true
     claimStrengthBoundedByDesignAndReceipts : Bool
-    claimStrengthBoundedByDesignAndReceiptsIsTrue :
-      claimStrengthBoundedByDesignAndReceipts ≡ true
+    claimStrengthBoundedByDesignAndReceiptsIsTrue : claimStrengthBoundedByDesignAndReceipts ≡ true
     missingQuantitiesMayBeInvented : Bool
     missingQuantitiesMayBeInventedIsFalse : missingQuantitiesMayBeInvented ≡ false
     oneStudyMayClosePopulationCausalMechanismAndPolicyAtOnce : Bool
-    oneStudyMayClosePopulationCausalMechanismAndPolicyAtOnceIsFalse :
-      oneStudyMayClosePopulationCausalMechanismAndPolicyAtOnce ≡ false
+    oneStudyMayClosePopulationCausalMechanismAndPolicyAtOnceIsFalse : oneStudyMayClosePopulationCausalMechanismAndPolicyAtOnce ≡ false
 
 open StudyClaimCeilingBoundary public
 
@@ -259,9 +226,10 @@ canonicalStudyClaimCeilingBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
 
 studyClaimCeilingReading : String
 studyClaimCeilingReading =
-  "Each admitted digital-ESD paper is indexed by its exact AttributedSource object and interpreted through a design-relative claim ceiling. The source-reported study design is retained verbatim; if the generic design ontology has no exact constructor, mapping remains explicitly unresolved rather than forcing the source into a nearby design class. Source role/locator, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect-size surface, uncertainty/confidence-interval semantics, time horizon, external-validity domain, participant role and the strongest supported implication are retained separately. Reported and same-object-derived sample sizes carry Nat values; an unreported sample size has no fabricated Nat payload. Reported p-values, large n, narrow confidence intervals, statistical significance, qualitative richness or a positive study finding do not independently manufacture causal identification, representativeness, mechanism, practical significance, population transport, practice recommendation or system transformation. Unreported numerical/statistical quantities remain unreported unless a same-object derivation receipt pays them."
+  "Each admitted digital-ESD paper is indexed by its exact AttributedSource object and interpreted through a design-relative claim ceiling. The source-reported study design is retained verbatim; if the generic design ontology has no exact constructor, mapping remains explicitly unresolved rather than forcing the source into a nearby design class. Participant epistemic role is likewise allowed to be source-reported, unresolved or not applicable, so a systematic review is not assigned a fictional participant role. Source role/locator, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect-size surface, uncertainty/confidence-interval semantics, time horizon, external-validity domain and the strongest supported implication are retained separately. Reported and same-object-derived sample sizes carry Nat values; an unreported sample size has no fabricated Nat payload. Reported p-values, large n, narrow confidence intervals, statistical significance, qualitative richness or a positive study finding do not independently manufacture causal identification, representativeness, mechanism, practical significance, population transport, practice recommendation or system transformation. Unreported numerical/statistical quantities remain unreported unless a same-object derivation receipt pays them."
