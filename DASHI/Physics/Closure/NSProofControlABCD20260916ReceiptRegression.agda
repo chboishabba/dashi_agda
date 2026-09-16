@@ -68,6 +68,101 @@ bD1b2PairDifferenceAttachmentClosed :
 bD1b2PairDifferenceAttachmentClosed =
   R.bD1b2PairDifferenceAttachmentClosedIsTrue
 
+bD1b2FinitePairDifferenceAlgebraClosed :
+  R.bD1b2FinitePairDifferenceAlgebraClosed ≡ true
+bD1b2FinitePairDifferenceAlgebraClosed =
+  R.bD1b2FinitePairDifferenceAlgebraClosedIsTrue
+
+bD1b2PairDifferenceR574AggregateClosed :
+  R.bD1b2PairDifferenceR574AggregateClosed ≡ true
+bD1b2PairDifferenceR574AggregateClosed =
+  R.bD1b2PairDifferenceR574AggregateClosedIsTrue
+
+bD1b2PairDifferenceR574LiteralDifferences :
+  R.bD1b2PairDifferenceR574LiteralDifferences ≡ true
+bD1b2PairDifferenceR574LiteralDifferences =
+  R.bD1b2PairDifferenceR574LiteralDifferencesIsTrue
+
+bD1b2PhysicalPairDifferenceLowerPaymentStillOpen :
+  R.bD1b2PhysicalPairDifferenceLowerPaymentClosed ≡ false
+bD1b2PhysicalPairDifferenceLowerPaymentStillOpen =
+  R.bD1b2PhysicalPairDifferenceLowerPaymentClosedIsFalse
+
+bD1b2PairDifferencePaymentCompilerClosed :
+  R.bD1b2PairDifferencePaymentCompilerClosed ≡ true
+bD1b2PairDifferencePaymentCompilerClosed =
+  R.bD1b2PairDifferencePaymentCompilerClosedIsTrue
+
+bD1b2PairDifferencePaymentUsesR574Aggregate :
+  R.bD1b2PairDifferencePaymentUsesR574Aggregate ≡ true
+bD1b2PairDifferencePaymentUsesR574Aggregate =
+  R.bD1b2PairDifferencePaymentUsesR574AggregateIsTrue
+
+bD1b2PhysicalLowerSeparationStillOpen :
+  R.bD1b2PhysicalLowerSeparationClosed ≡ false
+bD1b2PhysicalLowerSeparationStillOpen =
+  R.bD1b2PhysicalLowerSeparationClosedIsFalse
+
+bD1b2CenteredPartnerR205ToR574Closed :
+  R.bD1b2CenteredPartnerR205ToR574Closed ≡ true
+bD1b2CenteredPartnerR205ToR574Closed =
+  R.bD1b2CenteredPartnerR205ToR574ClosedIsTrue
+
+bD1b2CenteredPartnerR574ToR446Closed :
+  R.bD1b2CenteredPartnerR574ToR446Closed ≡ true
+bD1b2CenteredPartnerR574ToR446Closed =
+  R.bD1b2CenteredPartnerR574ToR446ClosedIsTrue
+
+bD1b2CenteredPartnerAmplitudeTelescopeClosed :
+  R.bD1b2CenteredPartnerAmplitudeTelescopeClosed ≡ true
+bD1b2CenteredPartnerAmplitudeTelescopeClosed =
+  R.bD1b2CenteredPartnerAmplitudeTelescopeClosedIsTrue
+
+bD1b2CenteredPartnerSlotDefectClosed :
+  R.bD1b2CenteredPartnerSlotDefectClosed ≡ true
+bD1b2CenteredPartnerSlotDefectClosed =
+  R.bD1b2CenteredPartnerSlotDefectClosedIsTrue
+
+bD1b2CenteredPartnerRadialPlueckerDefectWeldStillOpen :
+  R.bD1b2CenteredPartnerRadialPlueckerDefectWeldClosed ≡ false
+bD1b2CenteredPartnerRadialPlueckerDefectWeldStillOpen =
+  R.bD1b2CenteredPartnerRadialPlueckerDefectWeldClosedIsFalse
+
+bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerStillOpen :
+  R.bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerClosed ≡ false
+bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerStillOpen =
+  R.bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerClosedIsFalse
+
+bD1b2CenteredPartnerCenteredPairCellStillOpen :
+  R.bD1b2CenteredPartnerCenteredPairCellConstructed ≡ false
+bD1b2CenteredPartnerCenteredPairCellStillOpen =
+  R.bD1b2CenteredPartnerCenteredPairCellConstructedIsFalse
+
+bD1b2CenteredPartnerCutoffUniformAggregateStillOpen :
+  R.bD1b2CenteredPartnerCutoffUniformAggregateClosed ≡ false
+bD1b2CenteredPartnerCutoffUniformAggregateStillOpen =
+  R.bD1b2CenteredPartnerCutoffUniformAggregateClosedIsFalse
+
+bD1b2R128PlueckerPolynomialIdentityClosed :
+  R.bD1b2R128PlueckerPolynomialIdentityClosed ≡ true
+bD1b2R128PlueckerPolynomialIdentityClosed =
+  R.bD1b2R128PlueckerPolynomialIdentityClosedIsTrue
+
+bD1b2R128OrderedDropPlueckerRemainderStillOpen :
+  R.bD1b2R128OrderedDropPlueckerRemainderClosed ≡ false
+bD1b2R128OrderedDropPlueckerRemainderStillOpen =
+  R.bD1b2R128OrderedDropPlueckerRemainderClosedIsFalse
+
+bD1b2ConcreteSlotCollisionWitnessClosed :
+  R.bD1b2ConcreteSlotCollisionWitnessClosed ≡ true
+bD1b2ConcreteSlotCollisionWitnessClosed =
+  R.bD1b2ConcreteSlotCollisionWitnessClosedIsTrue
+
+bD1b2IncidenceOnlyRadialPlueckerCoercivityRefutedStillOpen :
+  R.bD1b2IncidenceOnlyRadialPlueckerCoercivityRefuted ≡ false
+bD1b2IncidenceOnlyRadialPlueckerCoercivityRefutedStillOpen =
+  R.bD1b2IncidenceOnlyRadialPlueckerCoercivityRefutedIsFalse
+
 bD1b2QuantitativePaymentStillOpen :
   R.bD1b2QuantitativePaymentClosed ≡ false
 bD1b2QuantitativePaymentStillOpen =

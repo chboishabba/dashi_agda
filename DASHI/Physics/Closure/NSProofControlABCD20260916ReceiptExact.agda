@@ -21,6 +21,9 @@ module DASHI.Physics.Closure.NSProofControlABCD20260916ReceiptExact where
 --
 --   A: independent whole-space obligation; portability audit active.
 --   B: active internal proof-discovery lane; d1b2 is the first nonlinear leaf.
+--      d1b2 pair-difference algebra and the older P1/P2/P3 R574 aggregate /
+--      payment compiler are source-written, but the physical lower-separation
+--      input remains open.
 --   C/D: released external theorem/source side present and Clay-coordinate
 --        aligned; DASHI carrier/reconstruction/adjudication remain separate.
 ------------------------------------------------------------------------
@@ -37,6 +40,13 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExa
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as D1b0
 import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedEndpointCompilerExact as D1b1
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as D1b2
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferenceDebtExact as PairDebt
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferenceAggregateExact as PairAgg
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferencePaymentExact as PairPay
+import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact as CenteredAdapter
+import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact as SlotDefect
+import DASHI.Physics.Closure.NSTriadKNExternalHHSquareGapGramRound128Exact as R128
+import DASHI.Physics.Closure.NSTriadKNFixedOutputConcreteSlotCollisionWitnessExact as SlotCollision
 
 ------------------------------------------------------------------------
 -- A/B/C/D global mission and firewalls.
@@ -101,6 +111,82 @@ bD1b1ConcreteEndpointFTCInstalled =
 bD1b2PairDifferenceAttachmentClosed : Bool
 bD1b2PairDifferenceAttachmentClosed =
   D1b2.fixedOutputCovariancePairDifferenceAttachmentClosed
+
+bD1b2FinitePairDifferenceAlgebraClosed : Bool
+bD1b2FinitePairDifferenceAlgebraClosed =
+  PairDebt.fixedOutputPairDifferenceAlgebraClosed
+
+bD1b2PairDifferenceR574AggregateClosed : Bool
+bD1b2PairDifferenceR574AggregateClosed =
+  PairAgg.fixedOutputPairDifferenceAggregateClosed
+
+bD1b2PairDifferenceR574LiteralDifferences : Bool
+bD1b2PairDifferenceR574LiteralDifferences =
+  PairAgg.fixedOutputPairDifferenceAggregateUsesR574LiteralDifferences
+
+bD1b2PhysicalPairDifferenceLowerPaymentClosed : Bool
+bD1b2PhysicalPairDifferenceLowerPaymentClosed =
+  PairAgg.fixedOutputPairDifferenceLowerBoundClosed
+
+bD1b2PairDifferencePaymentCompilerClosed : Bool
+bD1b2PairDifferencePaymentCompilerClosed =
+  PairPay.fixedOutputPairDifferencePaymentCompilerClosed
+
+bD1b2PairDifferencePaymentUsesR574Aggregate : Bool
+bD1b2PairDifferencePaymentUsesR574Aggregate =
+  PairPay.fixedOutputPairDifferencePaymentUsesLiteralR574Aggregate
+
+bD1b2PhysicalLowerSeparationClosed : Bool
+bD1b2PhysicalLowerSeparationClosed =
+  PairPay.fixedOutputPhysicalLowerSeparationClosed
+
+bD1b2CenteredPartnerR205ToR574Closed : Bool
+bD1b2CenteredPartnerR205ToR574Closed =
+  CenteredAdapter.roundCenteredPartnerR205ToR574DifferenceSameObjectClosed
+
+bD1b2CenteredPartnerR574ToR446Closed : Bool
+bD1b2CenteredPartnerR574ToR446Closed =
+  CenteredAdapter.roundCenteredPartnerR574ToR446DifferenceSameObjectClosed
+
+bD1b2CenteredPartnerAmplitudeTelescopeClosed : Bool
+bD1b2CenteredPartnerAmplitudeTelescopeClosed =
+  CenteredAdapter.roundCenteredPartnerPhysicalAmplitudeTelescopeClosed
+
+bD1b2CenteredPartnerSlotDefectClosed : Bool
+bD1b2CenteredPartnerSlotDefectClosed =
+  SlotDefect.roundCenteredPartnerCompressedDifferenceIsFourSlotDefect
+
+bD1b2CenteredPartnerRadialPlueckerDefectWeldClosed : Bool
+bD1b2CenteredPartnerRadialPlueckerDefectWeldClosed =
+  CenteredAdapter.roundCenteredPartnerRadialPlueckerDefectWeldClosed
+
+bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerClosed : Bool
+bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerClosed =
+  SlotDefect.roundCenteredPartnerSlotDefectRadialPlueckerLowerBoundClosed
+
+bD1b2CenteredPartnerCenteredPairCellConstructed : Bool
+bD1b2CenteredPartnerCenteredPairCellConstructed =
+  CenteredAdapter.roundCenteredPartnerCenteredPairCellConstructed
+
+bD1b2CenteredPartnerCutoffUniformAggregateClosed : Bool
+bD1b2CenteredPartnerCutoffUniformAggregateClosed =
+  CenteredAdapter.roundCenteredPartnerCutoffUniformAggregateClosed
+
+bD1b2R128PlueckerPolynomialIdentityClosed : Bool
+bD1b2R128PlueckerPolynomialIdentityClosed =
+  R128.round128LowOutputTimesHighInputPolynomialIdentityClosed
+
+bD1b2R128OrderedDropPlueckerRemainderClosed : Bool
+bD1b2R128OrderedDropPlueckerRemainderClosed =
+  R128.round128OrderedDropPluckerRemainderClosed
+
+bD1b2ConcreteSlotCollisionWitnessClosed : Bool
+bD1b2ConcreteSlotCollisionWitnessClosed =
+  SlotCollision.roundFixedOutputConcreteDistinctCCCollisionWitnessConstructed
+
+bD1b2IncidenceOnlyRadialPlueckerCoercivityRefuted : Bool
+bD1b2IncidenceOnlyRadialPlueckerCoercivityRefuted =
+  SlotCollision.roundFixedOutputIncidenceOnlyRadialPlueckerCoercivityRefuted
 
 bD1b2QuantitativePaymentClosed : Bool
 bD1b2QuantitativePaymentClosed =
@@ -221,6 +307,98 @@ bD1b2PairDifferenceAttachmentClosedIsTrue :
   bD1b2PairDifferenceAttachmentClosed ≡ true
 bD1b2PairDifferenceAttachmentClosedIsTrue =
   D1b2.fixedOutputCovariancePairDifferenceAttachmentClosedIsTrue
+
+bD1b2FinitePairDifferenceAlgebraClosedIsTrue :
+  bD1b2FinitePairDifferenceAlgebraClosed ≡ true
+bD1b2FinitePairDifferenceAlgebraClosedIsTrue =
+  PairDebt.fixedOutputPairDifferenceAlgebraClosedIsTrue
+
+bD1b2PairDifferenceR574AggregateClosedIsTrue :
+  bD1b2PairDifferenceR574AggregateClosed ≡ true
+bD1b2PairDifferenceR574AggregateClosedIsTrue =
+  PairAgg.fixedOutputPairDifferenceAggregateClosedIsTrue
+
+bD1b2PairDifferenceR574LiteralDifferencesIsTrue :
+  bD1b2PairDifferenceR574LiteralDifferences ≡ true
+bD1b2PairDifferenceR574LiteralDifferencesIsTrue =
+  PairAgg.fixedOutputPairDifferenceAggregateUsesR574LiteralDifferencesIsTrue
+
+bD1b2PhysicalPairDifferenceLowerPaymentClosedIsFalse :
+  bD1b2PhysicalPairDifferenceLowerPaymentClosed ≡ false
+bD1b2PhysicalPairDifferenceLowerPaymentClosedIsFalse =
+  PairAgg.fixedOutputPairDifferenceLowerBoundClosedIsFalse
+
+bD1b2PairDifferencePaymentCompilerClosedIsTrue :
+  bD1b2PairDifferencePaymentCompilerClosed ≡ true
+bD1b2PairDifferencePaymentCompilerClosedIsTrue =
+  PairPay.fixedOutputPairDifferencePaymentCompilerClosedIsTrue
+
+bD1b2PairDifferencePaymentUsesR574AggregateIsTrue :
+  bD1b2PairDifferencePaymentUsesR574Aggregate ≡ true
+bD1b2PairDifferencePaymentUsesR574AggregateIsTrue = refl
+
+bD1b2PhysicalLowerSeparationClosedIsFalse :
+  bD1b2PhysicalLowerSeparationClosed ≡ false
+bD1b2PhysicalLowerSeparationClosedIsFalse =
+  PairPay.fixedOutputPhysicalLowerSeparationClosedIsFalse
+
+bD1b2CenteredPartnerR205ToR574ClosedIsTrue :
+  bD1b2CenteredPartnerR205ToR574Closed ≡ true
+bD1b2CenteredPartnerR205ToR574ClosedIsTrue =
+  CenteredAdapter.roundCenteredPartnerR205ToR574DifferenceSameObjectClosedIsTrue
+
+bD1b2CenteredPartnerR574ToR446ClosedIsTrue :
+  bD1b2CenteredPartnerR574ToR446Closed ≡ true
+bD1b2CenteredPartnerR574ToR446ClosedIsTrue =
+  CenteredAdapter.roundCenteredPartnerR574ToR446DifferenceSameObjectClosedIsTrue
+
+bD1b2CenteredPartnerAmplitudeTelescopeClosedIsTrue :
+  bD1b2CenteredPartnerAmplitudeTelescopeClosed ≡ true
+bD1b2CenteredPartnerAmplitudeTelescopeClosedIsTrue =
+  CenteredAdapter.roundCenteredPartnerPhysicalAmplitudeTelescopeClosedIsTrue
+
+bD1b2CenteredPartnerSlotDefectClosedIsTrue :
+  bD1b2CenteredPartnerSlotDefectClosed ≡ true
+bD1b2CenteredPartnerSlotDefectClosedIsTrue =
+  SlotDefect.roundCenteredPartnerCompressedDifferenceIsFourSlotDefectIsTrue
+
+bD1b2CenteredPartnerRadialPlueckerDefectWeldClosedIsFalse :
+  bD1b2CenteredPartnerRadialPlueckerDefectWeldClosed ≡ false
+bD1b2CenteredPartnerRadialPlueckerDefectWeldClosedIsFalse =
+  CenteredAdapter.roundCenteredPartnerRadialPlueckerDefectWeldClosedIsFalse
+
+bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerClosedIsFalse :
+  bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerClosed ≡ false
+bD1b2CenteredPartnerSlotDefectRadialPlueckerLowerClosedIsFalse =
+  SlotDefect.roundCenteredPartnerSlotDefectRadialPlueckerLowerBoundClosedIsFalse
+
+bD1b2CenteredPartnerCenteredPairCellConstructedIsFalse :
+  bD1b2CenteredPartnerCenteredPairCellConstructed ≡ false
+bD1b2CenteredPartnerCenteredPairCellConstructedIsFalse = refl
+
+bD1b2CenteredPartnerCutoffUniformAggregateClosedIsFalse :
+  bD1b2CenteredPartnerCutoffUniformAggregateClosed ≡ false
+bD1b2CenteredPartnerCutoffUniformAggregateClosedIsFalse = refl
+
+bD1b2R128PlueckerPolynomialIdentityClosedIsTrue :
+  bD1b2R128PlueckerPolynomialIdentityClosed ≡ true
+bD1b2R128PlueckerPolynomialIdentityClosedIsTrue =
+  R128.round128LowOutputTimesHighInputPolynomialIdentityClosedIsTrue
+
+bD1b2R128OrderedDropPlueckerRemainderClosedIsFalse :
+  bD1b2R128OrderedDropPlueckerRemainderClosed ≡ false
+bD1b2R128OrderedDropPlueckerRemainderClosedIsFalse =
+  R128.round128OrderedDropPluckerRemainderClosedIsFalse
+
+bD1b2ConcreteSlotCollisionWitnessClosedIsTrue :
+  bD1b2ConcreteSlotCollisionWitnessClosed ≡ true
+bD1b2ConcreteSlotCollisionWitnessClosedIsTrue =
+  SlotCollision.roundFixedOutputConcreteDistinctCCCollisionWitnessConstructedIsTrue
+
+bD1b2IncidenceOnlyRadialPlueckerCoercivityRefutedIsFalse :
+  bD1b2IncidenceOnlyRadialPlueckerCoercivityRefuted ≡ false
+bD1b2IncidenceOnlyRadialPlueckerCoercivityRefutedIsFalse =
+  SlotCollision.roundFixedOutputIncidenceOnlyRadialPlueckerCoercivityRefutedIsFalse
 
 bD1b2QuantitativePaymentClosedIsFalse :
   bD1b2QuantitativePaymentClosed ≡ false

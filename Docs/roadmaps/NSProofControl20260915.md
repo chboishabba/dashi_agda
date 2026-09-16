@@ -445,6 +445,83 @@ snapshot/same-object weld false, so they do not currently close d1b2 by alias.
 The next search should be for a same-carrier pair-difference payment or a proof
 that the existing physical snapshot weld is exactly this d1b2 family.
 
+Recovered pair-difference archaeology: `NSTriadKNFixedOutputPairDifferenceDebtExact`
+and `NSTriadKNFixedOutputPairDifferenceAggregateExact` already close the finite
+Complex3 complete-graph identity and the literal R574 norm-sum aggregate:
+
+```text
+||sum_i B_i||^2 + PairDiffMass(B) = n * sum_i ||B_i||^2
+PairDiffMass(fixed output) = literal R574 pair-norm mass.
+```
+
+These are exactly the right vocabulary for the d1b2 pair-difference side, but
+their status lines keep the physical lower-bound/payment leaf false. So the
+follow-up is not new finite algebra.
+
+The P3 compiler `NSTriadKNFixedOutputPairDifferencePaymentExact` is also already
+present: an R574 lower-separation premise for the same fixed-output aggregate
+implies the same-output Gram-debt payment. Its status line keeps
+`fixedOutputPhysicalLowerSeparationClosed = false`, so the remaining leaf is the
+physical lower-separation/payment input and its attachment to d1b2's
+rate-weighted signed pair-difference carrier.
+
+The literal geometric donor immediately upstream is
+`NSTriadKNCenteredPartnerDifferenceAdapterExact`: it proves the R205 compressed
+partner difference is the R574/R446 difference value and, on the fixed-output
+carrier, rewrites each slot-kernel difference as two exact amplitude-increment
+branches via `fixedOutputSlotKernelDifferenceTelescopesByAmplitudeIncrements`.
+`NSTriadKNCenteredPartnerSlotDefectExact` then records the norm-level identity
+
+```text
+||B_alpha - B_beta||^2 = 4 ||K_alpha - K_beta||^2.
+```
+
+So the quotient/same-object/amplitude-telescope/slot-defect normalization is
+already source-written. The named open field is now specifically the
+radial/Pluecker lower weld for that slot defect:
+
+```text
+roundCenteredPartnerRadialPlueckerDefectWeldClosed = false
+roundCenteredPartnerSlotDefectRadialPlueckerLowerBoundClosed = false.
+```
+
+That is the next literal search vocabulary for the lower-separation input; it
+is not a request to rebuild the R205/R574 adapter or the norm-four identity.
+
+Literal search also finds the older Luo `CenteredPairCell` compiler in
+`NSTriadKNLuoPhysicalCenteredCommutatorAssemblyExact`; keep it as a structural
+donor, not a live splice. The current same-object adapter still records
+
+```text
+roundCenteredPartnerCenteredPairCellConstructed = false
+roundCenteredPartnerCutoffUniformAggregateClosed = false.
+```
+
+So any promotion through the old centered compiler still needs the live
+centered-partner cell weld, not merely the existence of the historical
+`CenteredPairCell` record.
+
+Guardrail donors around the radial/Pluecker weld are already in-repo.
+`NSTriadKNExternalHHSquareGapGramRound128Exact` closes the exact polynomial
+square-gap/Pluecker identity, but keeps the ordered drop/payment false:
+
+```text
+round128LowOutputTimesHighInputPolynomialIdentityClosed = true
+round128OrderedDropPluckerRemainderClosed = false.
+```
+
+And `NSTriadKNFixedOutputConcreteSlotCollisionWitnessExact` closes the concrete
+distinct-incidence same-slot collision witness. Therefore the live lower weld
+cannot be an incidence-label-only radial/Pluecker coercivity claim:
+
+```text
+roundFixedOutputConcreteDistinctCCCollisionWitnessConstructed = true
+roundFixedOutputIncidenceOnlyRadialPlueckerCoercivityRefuted = false.
+```
+
+The lower weld must see the actual quotient slot defect / amplitude-increment
+data, not merely raw fixed-output incidence separation.
+
 #### Recovered historical donor: R571 -> Aug-5 paired second moment
 
 Do not search for a missing centered scalarization adapter. PR #920 already
@@ -614,6 +691,8 @@ A1-A9 / ESS / Abel-defect manuscript route     historicalAlternativeRoute
 R179-R214 comparable / P3 route                retainedComparator + negativeControls
 R303/R353/R372 signed-resolvent route          serious precursor; production identity stayed input
 #890 incidence/P3 work                         retained theorem-bearing comparator
+P1/P2/P3 fixed-output pair-difference chain    finite/R574/payment compiler donor; lower separation open
+Luo centered pair compiler                     structural donor; live centered-partner cell weld open
 #920 R571/Aug-5 paired-second-moment transplant theorem-bearing representation donor
 #945/#947 Gate-A/G0' work                      cross-prover + same-object donor surfaces
 R579 local Hermitian G1 envelope               same-carrier scalar magnitude donor
