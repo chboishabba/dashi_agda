@@ -1,0 +1,16 @@
+module DASHI.Physics.Closure.NSTriadKNS2b2AdjacentShellSpectralGapNoGoRegression where
+
+open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Equality using (_≡_)
+
+import DASHI.Physics.Closure.NSTriadKNS2b2AdjacentShellSpectralGapNoGoExact as Subject
+
+adjacentShellEuclideanGapNoGoClosed :
+  Subject.adjacentShellEuclideanGapNoGoClosed ≡ true
+adjacentShellEuclideanGapNoGoClosed =
+  Subject.adjacentShellEuclideanGapNoGoClosedIsTrue
+
+r98PositiveGapCannotBeInstantiatedFromAdjacentShellIndexAlone :
+  Subject.r98PositiveGapCannotBeInstantiatedFromAdjacentShellIndexAlone ≡ true
+r98PositiveGapCannotBeInstantiatedFromAdjacentShellIndexAlone =
+  Subject.r98PositiveGapCannotBeInstantiatedFromAdjacentShellIndexAloneIsTrue
