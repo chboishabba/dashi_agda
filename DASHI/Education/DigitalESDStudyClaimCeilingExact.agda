@@ -8,6 +8,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
 import DASHI.Reasoning.ExperimentalAssertionPNFImplicationConeExact as Cone
 import DASHI.Biology.CausalEstimandStatisticalRealisationExact as Statistical
@@ -92,6 +93,9 @@ record StudyClaimProfile : Set where
   constructor study-claim-profile
   field
     studyKey : String
+    source : Attr.AttributedSource
+    sourceRoleReference : String
+    sourceLocatorReference : String
     designReceipt : Design.StudyDesignReceipt
     sourcePopulationReference : String
     enrolledOrReportedN : ReportedNat
@@ -111,7 +115,6 @@ record StudyClaimProfile : Set where
     strongestSupportedImplication : Cone.ImplicationKind
     strongestSupportedImplicationReference : String
     explicitLimitationsReference : String
-    sourceAttributionReference : String
 
 open StudyClaimProfile public
 
@@ -188,6 +191,8 @@ associationDoesNotCreatePracticeRecommendation ()
 record StudyClaimCeilingBoundary : Set where
   constructor study-claim-ceiling-boundary
   field
+    attributedSourceObjectRetained : Bool
+    attributedSourceObjectRetainedIsTrue : attributedSourceObjectRetained ≡ true
     sampleSizeAndAnalysisNRetained : Bool
     sampleSizeAndAnalysisNRetainedIsTrue :
       sampleSizeAndAnalysisNRetained ≡ true
@@ -228,9 +233,10 @@ canonicalStudyClaimCeilingBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
 
 studyClaimCeilingReading : String
 studyClaimCeilingReading =
-  "Each admitted digital-ESD paper is interpreted through a design-relative claim ceiling. Source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect-size surface, uncertainty/confidence-interval semantics, time horizon, external-validity domain, participant role and the strongest supported implication are retained separately. Reported p-values, large n, narrow confidence intervals, statistical significance, qualitative richness or a positive study finding do not independently manufacture causal identification, representativeness, mechanism, practical significance, population transport, practice recommendation or system transformation. Unreported numerical/statistical quantities remain unreported unless a same-object derivation receipt pays them."
+  "Each admitted digital-ESD paper is indexed by its exact AttributedSource object and interpreted through a design-relative claim ceiling. Source role/locator, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect-size surface, uncertainty/confidence-interval semantics, time horizon, external-validity domain, participant role and the strongest supported implication are retained separately. Reported p-values, large n, narrow confidence intervals, statistical significance, qualitative richness or a positive study finding do not independently manufacture causal identification, representativeness, mechanism, practical significance, population transport, practice recommendation or system transformation. Unreported numerical/statistical quantities remain unreported unless a same-object derivation receipt pays them."
