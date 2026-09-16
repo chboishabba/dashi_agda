@@ -2,10 +2,11 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkRegression where
 
 -- RED/GREEN contract for the post-#920 Gate-A tranche.
 -- Production must preserve the merged R571 paired-second-moment carrier,
--- reuse existing donors for A1/G2/G1, isolate A2 as the radial-curvature leaf,
+-- reuse existing donors for A1/G2, isolate A2 as the radial-curvature leaf,
 -- record the theorem-bearing Lean A1/A2 receipts without fabricating an Agda
--- sample transport, expose the local Hermitian G0' weld, and must not promote
--- G1/G2, R568, or a Clay endpoint.
+-- sample transport, expose the local Hermitian G0' weld and the R579 local
+-- Hermitian G1 magnitude envelope, and must not promote G2, the full state
+-- derivative envelope, R568, or a Clay endpoint.
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -55,9 +56,17 @@ existingG2PathDonorRetained :
   GateA.r571GateAG2FinitePathDonorLocated ≡ true
 existingG2PathDonorRetained = refl
 
-existingG1ModalEnvelopeDonorRetained :
-  GateA.r571GateAG1ModalEnergyDonorLocated ≡ true
-existingG1ModalEnvelopeDonorRetained = refl
+localHermitianG1EnvelopeClosed :
+  GateA.r571GateAG1LocalHermitianEnvelopeClosed ≡ true
+localHermitianG1EnvelopeClosed = refl
+
+localHermitianG1EnvelopeUsesNoSquareRoot :
+  GateA.r571GateAG1LocalHermitianEnvelopeUsesSquareRoot ≡ false
+localHermitianG1EnvelopeUsesNoSquareRoot = refl
+
+shiftedCoefficientFamilyEnvelopeStillOpen :
+  GateA.r571GateAG1ShiftedCoefficientEnvelopeClosed ≡ false
+shiftedCoefficientFamilyEnvelopeStillOpen = refl
 
 stateSideEnvelopeStillOpen :
   GateA.r571GateAStateDerivativeEnvelopeClosed ≡ false

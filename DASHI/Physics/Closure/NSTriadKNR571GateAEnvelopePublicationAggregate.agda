@@ -8,7 +8,7 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopePublicationAggregate wher
 -- This tranche adds only the physical-envelope crosswalk boundary:
 --   A1 reverse-triangle/radius donor,
 --   G2 finite path/gradient donor,
---   G1 modal-energy donor,
+--   G1 local Hermitian magnitude envelope on the G0' carrier,
 --   preferred radial linearization with R+ = 0,
 --   isolated A2 centered radial-curvature leaf,
 --   denominator-cleared A2 square-gap rationalization,
@@ -19,9 +19,12 @@ module DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopePublicationAggregate wher
 --   division-free ordered-rational denominator compiler,
 --   literal centered cleared-product bridge and radial-curvature payment.
 --
--- The remaining A2 seam is only the exact sign/absolute-value/stepMagnitude
--- transport into the Gate-A sample.  A1/G2/G1, inner-fibre gain, R568 and Clay
--- promotion remain open.
+-- The remaining radial seam is the exact sign/absolute-value/stepMagnitude
+-- transport into the Gate-A sample.  On the state side, G2 physical-gradient
+-- transport, cutoff-uniform shifted-coefficient/family transport, inner-fibre
+-- gain, R568 and Clay promotion remain open.  The local G1 scalar magnitude
+-- step itself is now paid by the R579 Hermitian Young owner; do not demote it
+-- back to a generic modal-energy search.
 
 import DASHI.Physics.Closure.NSTriadKNR571PairedSecondMomentPublicationAggregate
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact
@@ -33,3 +36,4 @@ import DASHI.Physics.Closure.NSTriadKNR571CenteredAlignedComplementExact
 import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialDenominatorOrderExact
 import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialProductBridgeExact
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkRegression
+import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeRegression
