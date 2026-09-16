@@ -58,3 +58,51 @@ springfieldMechanicalRemovalFirstImplementation = Chronology.first-implementatio
   "Australia/Brisbane (AEST, UTC+10)"
   Chronology.exactRepresentationImplemented
   Chronology.sourceCommittedOnly
+
+biocontrolChemistryObserverParetoFirstImplementation :
+  Chronology.FirstImplementationReceipt
+biocontrolChemistryObserverParetoFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Environment.BiocontrolChemistryObserverParetoExact"
+    "e472798201a360c42670e6218f7911cbef9cabe8"
+    "2026-09-15T04:57:05Z"
+    "2026-09-15T14:57:05+10:00"
+    "Australia/Brisbane (AEST, UTC+10)"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+biocontrolChemistryParetoSchedulerFirstImplementation :
+  Chronology.FirstImplementationReceipt
+biocontrolChemistryParetoSchedulerFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Environment.BiocontrolChemistryParetoExperimentSchedulerExact"
+    "deb98096245b319b9c0e467f393d0c065fb1b6fb"
+    "2026-09-15T05:05:41Z"
+    "2026-09-15T15:05:41+10:00"
+    "Australia/Brisbane (AEST, UTC+10)"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+biocontrolChemistryAcquisitionPromotionFirstImplementation :
+  Chronology.FirstImplementationReceipt
+biocontrolChemistryAcquisitionPromotionFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Environment.BiocontrolChemistryAcquisitionPromotionExact"
+    "3165ff61c335cf5c8a2c189aed8c4380b0886244"
+    "2026-09-15T05:46:49Z"
+    "2026-09-15T15:46:49+10:00"
+    "Australia/Brisbane (AEST, UTC+10)"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
+
+biocontrolAcquisitionParetoFrontierFirstImplementation :
+  Chronology.FirstImplementationReceipt
+biocontrolAcquisitionParetoFrontierFirstImplementation =
+  Chronology.first-implementation-receipt
+    "DASHI.Environment.BiocontrolAcquisitionParetoFrontierExact"
+    "5faa6b71d9c005fc17f25e0fdcedccaff1dcdeb5"
+    "2026-09-15T05:57:53Z"
+    "2026-09-15T15:57:53+10:00"
+    "Australia/Brisbane (AEST, UTC+10)"
+    Chronology.exactRepresentationImplemented
+    Chronology.sourceCommittedOnly
