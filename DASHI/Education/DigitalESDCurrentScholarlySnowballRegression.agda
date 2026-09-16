@@ -6,47 +6,35 @@ open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDCurrentScholarlySnowballExact as Scholarly
 
-ardilaSourcePaidRegression :
-  Scholarly.ScholarlyCandidateBoundary.ardilaSourceRolePaid
-    Scholarly.canonicalScholarlyCandidateBoundary
-  ≡ true
+ardilaSourcePaidRegression : Scholarly.ScholarlyCandidateBoundary.ardilaSourceRolePaid Scholarly.canonicalScholarlyCandidateBoundary ≡ true
 ardilaSourcePaidRegression = refl
 
-gousetiSourcePaidRegression :
-  Scholarly.ScholarlyCandidateBoundary.gousetiSourceRolePaid
-    Scholarly.canonicalScholarlyCandidateBoundary
-  ≡ true
+gousetiSourcePaidRegression : Scholarly.ScholarlyCandidateBoundary.gousetiSourceRolePaid Scholarly.canonicalScholarlyCandidateBoundary ≡ true
 gousetiSourcePaidRegression = refl
 
-zagamiSourcePaidRegression :
-  Scholarly.ScholarlyCandidateBoundary.zagamiSourceRolePaid
-    Scholarly.canonicalScholarlyCandidateBoundary
-  ≡ true
+zagamiSourcePaidRegression : Scholarly.ScholarlyCandidateBoundary.zagamiSourceRolePaid Scholarly.canonicalScholarlyCandidateBoundary ≡ true
 zagamiSourcePaidRegression = refl
 
-chughSourcePaidRegression :
-  Scholarly.ScholarlyCandidateBoundary.chughSourceRolePaid
-    Scholarly.canonicalScholarlyCandidateBoundary
-  ≡ true
+chughSourcePaidRegression : Scholarly.ScholarlyCandidateBoundary.chughSourceRolePaid Scholarly.canonicalScholarlyCandidateBoundary ≡ true
 chughSourcePaidRegression = refl
 
-caseStudyDoesNotUniversaliseRegression :
-  Scholarly.SingleCaseCreatesUniversalDigitalESDRule → ⊥
+holstSourcePaidRegression : Scholarly.ScholarlyCandidateBoundary.holstSourceRolePaid Scholarly.canonicalScholarlyCandidateBoundary ≡ true
+holstSourcePaidRegression = refl
+
+caseStudyDoesNotUniversaliseRegression : Scholarly.SingleCaseCreatesUniversalDigitalESDRule → ⊥
 caseStudyDoesNotUniversaliseRegression = Scholarly.singleCaseDoesNotCreateUniversalDigitalESDRule
 
-platformExperienceDoesNotProveAllPlatformEffectsRegression :
-  Scholarly.TwoSchoolPlatformStudyCreatesUniversalPlatformEffect → ⊥
+platformExperienceDoesNotProveAllPlatformEffectsRegression : Scholarly.TwoSchoolPlatformStudyCreatesUniversalPlatformEffect → ⊥
 platformExperienceDoesNotProveAllPlatformEffectsRegression = Scholarly.twoSchoolPlatformStudyDoesNotCreateUniversalPlatformEffect
 
-historicalCaseDoesNotProveDurabilityRegression :
-  Scholarly.AustralianEdtechCaseCreatesUniversalDurabilityRule → ⊥
+historicalCaseDoesNotProveDurabilityRegression : Scholarly.AustralianEdtechCaseCreatesUniversalDurabilityRule → ⊥
 historicalCaseDoesNotProveDurabilityRegression = Scholarly.australianEdtechCaseDoesNotCreateUniversalDurabilityRule
 
-opinionPaperDoesNotCreateEmpiricalEffectRegression :
-  Scholarly.OpinionPaperCreatesEmpiricalDigitalESDEffect → ⊥
+opinionPaperDoesNotCreateEmpiricalEffectRegression : Scholarly.OpinionPaperCreatesEmpiricalDigitalESDEffect → ⊥
 opinionPaperDoesNotCreateEmpiricalEffectRegression = Scholarly.opinionPaperDoesNotCreateEmpiricalDigitalESDEffect
 
-paradoxFramingDoesNotExhaustReciprocalFrameworkRegression :
-  Scholarly.SustainabilityParadoxExhaustsReciprocalDigitalESDFramework → ⊥
-paradoxFramingDoesNotExhaustReciprocalFrameworkRegression =
-  Scholarly.sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework
+paradoxFramingDoesNotExhaustReciprocalFrameworkRegression : Scholarly.SustainabilityParadoxExhaustsReciprocalDigitalESDFramework → ⊥
+paradoxFramingDoesNotExhaustReciprocalFrameworkRegression = Scholarly.sustainabilityParadoxDoesNotExhaustReciprocalDigitalESDFramework
+
+inputMonitoringDoesNotPayOutcomeRegression : Scholarly.InputIndicatorMonitoringCreatesOutcomeTransformation → ⊥
+inputMonitoringDoesNotPayOutcomeRegression = Scholarly.inputIndicatorMonitoringDoesNotCreateOutcomeTransformation
