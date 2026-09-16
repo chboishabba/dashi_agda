@@ -30,28 +30,28 @@ import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact as Carr
 -- 3 x 14 carrier is a literal class-42d action.
 ------------------------------------------------------------------------
 
-mkOEIS : String → String → String → Attribution.AttributedSource
-mkOEIS aid title url = Attribution.mkNoDOISource
+mkOEIS : String → String → Attribution.AttributedSource
+mkOEIS title url = Attribution.mkNoDOISource
   "N. J. A. Sloane; OEIS contributors"
   title
   "On-Line Encyclopedia of Integer Sequences"
   "retrieved 2026-09-16"
   url
   (Attribution.namedSourceKind "integer-sequence database record")
-  ("Monster class-42 McKay-Thompson source/navigation coordinate " ++ aid ++ "; no DASHI same-object or carrier-action authority")
+  "Monster class-42 McKay-Thompson source/navigation coordinate; no DASHI same-object or carrier-action authority"
   Attribution.publicAttribution
 
 source42D : Attribution.AttributedSource
-source42D = mkOEIS "A058674" "A058674: McKay-Thompson series of class 42D for Monster" "https://oeis.org/A058674"
+source42D = mkOEIS "A058674: McKay-Thompson series of class 42D for Monster" "https://oeis.org/A058674"
 
 source42b : Attribution.AttributedSource
-source42b = mkOEIS "A058676" "A058676: McKay-Thompson series of class 42b for Monster" "https://oeis.org/A058676"
+source42b = mkOEIS "A058676: McKay-Thompson series of class 42b for Monster" "https://oeis.org/A058676"
 
 source42c : Attribution.AttributedSource
-source42c = mkOEIS "A058677" "A058677: McKay-Thompson series of class 42c for Monster" "https://oeis.org/A058677"
+source42c = mkOEIS "A058677: McKay-Thompson series of class 42c for Monster" "https://oeis.org/A058677"
 
 source42d : Attribution.AttributedSource
-source42d = mkOEIS "A058678" "A058678: McKay-Thompson series of class 42d for Monster" "https://oeis.org/A058678"
+source42d = mkOEIS "A058678: McKay-Thompson series of class 42d for Monster" "https://oeis.org/A058678"
 
 source42DAttribution = Snowball.canonicalSourceRoleSnowballReceipt source42D
 source42bAttribution = Snowball.canonicalSourceRoleSnowballReceipt source42b
