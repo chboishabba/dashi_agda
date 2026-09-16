@@ -21,6 +21,10 @@ fortyTwoDBridgeSourceRegression :
   P.fortyTwoDRestrictionBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 fortyTwoDBridgeSourceRegression = refl
 
+ternary27PhaseReductionRegression :
+  P.ternary27PhasePreservingReductionSourcePaid P.currentPositiveCorrelationBoundary ≡ true
+ternary27PhaseReductionRegression = refl
+
 fortyTwoCarrierRegression :
   P.fortyTwoCarrierBridgeSourcePaid P.currentPositiveCorrelationBoundary ≡ true
 fortyTwoCarrierRegression = refl
