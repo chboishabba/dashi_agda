@@ -11,28 +11,22 @@ import DASHI.Core.RequirementProducerSchedulerExact as CoreScheduler
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
+import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact as Paper
 
 ------------------------------------------------------------------------
 -- SAME-OBJECT ACQUISITION SCHEDULER ADAPTER
 --
--- This module supplies only digital-ESD questions, coordinates and producer
--- identities. Requirement/missing-coordinate/producer scheduling semantics
--- are imported from the repository's canonical
--- RequirementProducerSchedulerExact; no parallel planner is introduced here.
--- Pareto/MDL semantics are likewise imported from the canonical admissible
--- consumer MDL owner: cost/ranking begins only after admissibility and consumer
--- adequacy. No synthetic dollar/time score is invented here.
---
--- It does not create evidence and it does not permit literature similarity,
--- standards, or citations to discharge same-object, future, context-transfer,
--- or participant-authority obligations.
+-- Local content: digital-ESD questions, coordinates and producer identities.
+-- Scheduling semantics come from RequirementProducerSchedulerExact; Pareto/MDL
+-- eligibility semantics come from AdmissibleConsumerMDLHyperfabricExact.
+-- Paper-type scope comes from DigitalESDPaperTypeRequirementParetoExact.
 --
 -- Standing attribution invariant:
---   * source identity + role + same-object status survive every round;
---   * citation imports neither proof nor authority;
---   * DASHI scheduling is DASHI synthesis, not a theorem of cited sources;
---   * acquisition may occur out of dependency order;
---   * downstream payment cannot skip an unpaid dependency.
+--   source identity + role + same-object status survive every round;
+--   citation imports neither proof nor authority;
+--   DASHI scheduling is DASHI synthesis, not a theorem of cited sources;
+--   acquisition may occur out of dependency order;
+--   downstream payment cannot skip an unpaid dependency.
 ------------------------------------------------------------------------
 
 data ResidualProducer : Set where
@@ -61,55 +55,31 @@ producerLabel longitudinalFollowupProducer = "future same-cohort/intervention lo
 producerLabel contextGeneralisationReceiptProducer = "canonical context-generalisation receipt producer"
 producerLabel participantAuthorityReceiptProducer = "participant epistemic-authority / governance receipt producer"
 
-------------------------------------------------------------------------
--- Parent acquisition leaves.
-------------------------------------------------------------------------
+producerForAcquisitionLeaf : Acquisition.AcquisitionLeaf → ResidualProducer
+producerForAcquisitionLeaf Acquisition.exactCallAntecedentIdentity = sourceRoleReceiptProducer
+producerForAcquisitionLeaf Acquisition.pedagogicalNonSufficiencyContext = contextEvidenceProducer
+producerForAcquisitionLeaf Acquisition.genericInfrastructureExternalityContext = contextEvidenceProducer
+producerForAcquisitionLeaf Acquisition.educationSpecificLifecycleMeasurement = interventionLCIProducer
+producerForAcquisitionLeaf Acquisition.longitudinalInterventionImpact = longitudinalFollowupProducer
+producerForAcquisitionLeaf Acquisition.esdParticipantGovernanceTransfer = participantAuthorityReceiptProducer
+producerForAcquisitionLeaf Acquisition.openInteroperabilityDurability = interoperabilityPersistenceProducer
 
-producerForAcquisitionLeaf :
-  Acquisition.AcquisitionLeaf → ResidualProducer
-producerForAcquisitionLeaf Acquisition.exactCallAntecedentIdentity =
-  sourceRoleReceiptProducer
-producerForAcquisitionLeaf Acquisition.pedagogicalNonSufficiencyContext =
-  contextEvidenceProducer
-producerForAcquisitionLeaf Acquisition.genericInfrastructureExternalityContext =
-  contextEvidenceProducer
-producerForAcquisitionLeaf Acquisition.educationSpecificLifecycleMeasurement =
-  interventionLCIProducer
-producerForAcquisitionLeaf Acquisition.longitudinalInterventionImpact =
-  longitudinalFollowupProducer
-producerForAcquisitionLeaf Acquisition.esdParticipantGovernanceTransfer =
-  participantAuthorityReceiptProducer
-producerForAcquisitionLeaf Acquisition.openInteroperabilityDurability =
-  interoperabilityPersistenceProducer
-
-requiredProducersForAcquisitionLeaf :
-  Acquisition.AcquisitionLeaf → List ResidualProducer
-requiredProducersForAcquisitionLeaf Acquisition.exactCallAntecedentIdentity =
-  sourceRoleReceiptProducer ∷ []
-requiredProducersForAcquisitionLeaf Acquisition.pedagogicalNonSufficiencyContext =
-  contextEvidenceProducer ∷ []
-requiredProducersForAcquisitionLeaf Acquisition.genericInfrastructureExternalityContext =
-  contextEvidenceProducer ∷ []
+requiredProducersForAcquisitionLeaf : Acquisition.AcquisitionLeaf → List ResidualProducer
+requiredProducersForAcquisitionLeaf Acquisition.exactCallAntecedentIdentity = sourceRoleReceiptProducer ∷ []
+requiredProducersForAcquisitionLeaf Acquisition.pedagogicalNonSufficiencyContext = contextEvidenceProducer ∷ []
+requiredProducersForAcquisitionLeaf Acquisition.genericInfrastructureExternalityContext = contextEvidenceProducer ∷ []
 requiredProducersForAcquisitionLeaf Acquisition.educationSpecificLifecycleMeasurement =
-  interventionLCIProducer
-  ∷ deploymentReferenceSystemProducer
-  ∷ []
+  interventionLCIProducer ∷ deploymentReferenceSystemProducer ∷ []
 requiredProducersForAcquisitionLeaf Acquisition.longitudinalInterventionImpact =
   longitudinalFollowupProducer ∷ []
 requiredProducersForAcquisitionLeaf Acquisition.esdParticipantGovernanceTransfer =
-  contextGeneralisationReceiptProducer
-  ∷ participantAuthorityReceiptProducer
-  ∷ []
+  contextGeneralisationReceiptProducer ∷ participantAuthorityReceiptProducer ∷ []
 requiredProducersForAcquisitionLeaf Acquisition.openInteroperabilityDurability =
   hardwareCircularityProducer
   ∷ procurementRepairSupportProducer
   ∷ serviceLifeSupportProducer
   ∷ interoperabilityPersistenceProducer
   ∷ []
-
-------------------------------------------------------------------------
--- Refined ICT lifecycle/circularity leaves.
-------------------------------------------------------------------------
 
 producerForRefinedLifecycle : ICT.RefinedLifecycleLeaf → ResidualProducer
 producerForRefinedLifecycle ICT.ictLifecycleMethod = sourceRoleReceiptProducer
@@ -122,11 +92,20 @@ producerForRefinedLifecycle ICT.deploymentServiceLife = serviceLifeSupportProduc
 producerForRefinedLifecycle ICT.deploymentInteroperabilityPersistence = interoperabilityPersistenceProducer
 
 ------------------------------------------------------------------------
--- Canonical RequirementProducerSchedulerExact application.
+-- Consumer-/claim-relative application of the canonical scheduler.
+--
+-- Current conceptual-review work has literature/search/synthesis debt in the
+-- paper-type scheduler, but no same-object empirical deployment obligation.
+-- Those obligations reopen only when the manuscript makes the corresponding
+-- empirical, durability, longitudinal, or participant-authority claim.
 ------------------------------------------------------------------------
 
 data DigitalESDAcquisitionQuestion : Set where
-  digitalESDResearchDecision : DigitalESDAcquisitionQuestion
+  currentConceptualReviewSynthesis : DigitalESDAcquisitionQuestion
+  empiricalInterventionLifecycleClaim : DigitalESDAcquisitionQuestion
+  deploymentDurabilityClaim : DigitalESDAcquisitionQuestion
+  longitudinalImpactClaim : DigitalESDAcquisitionQuestion
+  participantGovernanceTransferClaim : DigitalESDAcquisitionQuestion
 
 data SameObjectCoordinate : Set where
   sameObjectInterventionLCI : SameObjectCoordinate
@@ -139,9 +118,21 @@ data SameObjectCoordinate : Set where
   contextGeneralisationAdmission : SameObjectCoordinate
   participantEpistemicAuthority : SameObjectCoordinate
 
-requiredForDigitalESD :
-  DigitalESDAcquisitionQuestion → SameObjectCoordinate → Bool
-requiredForDigitalESD digitalESDResearchDecision _ = true
+requiredForDigitalESD : DigitalESDAcquisitionQuestion → SameObjectCoordinate → Bool
+requiredForDigitalESD currentConceptualReviewSynthesis _ = false
+requiredForDigitalESD empiricalInterventionLifecycleClaim sameObjectInterventionLCI = true
+requiredForDigitalESD empiricalInterventionLifecycleClaim sameObjectReferenceSystem = true
+requiredForDigitalESD empiricalInterventionLifecycleClaim _ = false
+requiredForDigitalESD deploymentDurabilityClaim sameObjectHardwareCircularity = true
+requiredForDigitalESD deploymentDurabilityClaim sameObjectRepairSupport = true
+requiredForDigitalESD deploymentDurabilityClaim sameObjectServiceLife = true
+requiredForDigitalESD deploymentDurabilityClaim sameObjectInteroperabilityPersistence = true
+requiredForDigitalESD deploymentDurabilityClaim _ = false
+requiredForDigitalESD longitudinalImpactClaim sameObjectLongitudinalImpact = true
+requiredForDigitalESD longitudinalImpactClaim _ = false
+requiredForDigitalESD participantGovernanceTransferClaim contextGeneralisationAdmission = true
+requiredForDigitalESD participantGovernanceTransferClaim participantEpistemicAuthority = true
+requiredForDigitalESD participantGovernanceTransferClaim _ = false
 
 closedDigitalESD : SameObjectCoordinate → Bool
 closedDigitalESD _ = false
@@ -166,113 +157,91 @@ digitalESDAcquisitionRequirementSystem =
     requiredForDigitalESD
     closedDigitalESD
     producerForCoordinate
-    "digital-ESD same-object/future/context/authority acquisition requirements"
+    "claim-relative digital-ESD same-object/future/context/authority requirements"
     "same-object measurement, longitudinal observation, canonical context-generalisation and participant-authority receipt producers"
+
+currentPaperTypeRetained : Paper.PaperType
+currentPaperTypeRetained = Paper.currentPaperType
+
+currentPaperTypeIsConceptualReview :
+  currentPaperTypeRetained ≡ Paper.integrativeConceptualReview
+currentPaperTypeIsConceptualReview = refl
 
 lifecycleInventoryMissing :
   CoreScheduler.MissingFor
     digitalESDAcquisitionRequirementSystem
-    digitalESDResearchDecision
+    empiricalInterventionLifecycleClaim
     sameObjectInterventionLCI
 lifecycleInventoryMissing = refl , refl
 
 lifecycleInventoryMissingReceipt :
   CoreScheduler.MissingCoordinateReceipt
     digitalESDAcquisitionRequirementSystem
-    digitalESDResearchDecision
+    empiricalInterventionLifecycleClaim
 lifecycleInventoryMissingReceipt =
-  CoreScheduler.missing-coordinate-receipt
-    sameObjectInterventionLCI
-    lifecycleInventoryMissing
+  CoreScheduler.missing-coordinate-receipt sameObjectInterventionLCI lifecycleInventoryMissing
 
 lifecycleInventoryScheduledProducer : ResidualProducer
-lifecycleInventoryScheduledProducer =
-  CoreScheduler.scheduledProducer lifecycleInventoryMissingReceipt
+lifecycleInventoryScheduledProducer = CoreScheduler.scheduledProducer lifecycleInventoryMissingReceipt
 
 lifecycleInventoryScheduledProducerIsCanonical :
   lifecycleInventoryScheduledProducer ≡ interventionLCIProducer
 lifecycleInventoryScheduledProducerIsCanonical = refl
 
-canonicalSchedulerBoundaryRetained :
-  CoreScheduler.RequirementProducerSchedulerBoundary
-canonicalSchedulerBoundaryRetained =
-  CoreScheduler.canonicalRequirementProducerSchedulerBoundary
+canonicalSchedulerBoundaryRetained : CoreScheduler.RequirementProducerSchedulerBoundary
+canonicalSchedulerBoundaryRetained = CoreScheduler.canonicalRequirementProducerSchedulerBoundary
 
 producerIdentityStillDoesNotCloseRequirement :
   CoreScheduler.ProducerExistenceImpliesCoordinateClosedPermission → ⊥
-producerIdentityStillDoesNotCloseRequirement =
-  CoreScheduler.producerExistenceDoesNotAutoCloseCoordinate
-
-------------------------------------------------------------------------
--- Canonical admissibility/Pareto boundary.
---
--- We deliberately do not manufacture numerical cost axes.  Once application
--- evidence supplies admissibility, adequacy and real cost observations,
--- downstream ranking can instantiate the canonical MDL/Pareto machinery.
-------------------------------------------------------------------------
+producerIdentityStillDoesNotCloseRequirement = CoreScheduler.producerExistenceDoesNotAutoCloseCoordinate
 
 canonicalProducerParetoEligibilityBoundary : MDL.AdmissibleConsumerMDLBoundary
-canonicalProducerParetoEligibilityBoundary =
-  MDL.canonicalAdmissibleConsumerMDLBoundary
+canonicalProducerParetoEligibilityBoundary = MDL.canonicalAdmissibleConsumerMDLBoundary
 
 ------------------------------------------------------------------------
 -- Citation-resistant dependency firewalls.
 ------------------------------------------------------------------------
 
 data ExternalCitationPaysSameObjectLCI : Set where
-
-externalCitationDoesNotPaySameObjectLCI :
-  ExternalCitationPaysSameObjectLCI → ⊥
+externalCitationDoesNotPaySameObjectLCI : ExternalCitationPaysSameObjectLCI → ⊥
 externalCitationDoesNotPaySameObjectLCI ()
 
 data PriorStudyPaysFutureLongitudinalOutcome : Set where
-
-priorStudyDoesNotPayFutureLongitudinalOutcome :
-  PriorStudyPaysFutureLongitudinalOutcome → ⊥
+priorStudyDoesNotPayFutureLongitudinalOutcome : PriorStudyPaysFutureLongitudinalOutcome → ⊥
 priorStudyDoesNotPayFutureLongitudinalOutcome ()
 
 data LiteratureSimilarityCreatesContextTransferReceipt : Set where
-
-literatureSimilarityDoesNotCreateContextTransferReceipt :
-  LiteratureSimilarityCreatesContextTransferReceipt → ⊥
+literatureSimilarityDoesNotCreateContextTransferReceipt : LiteratureSimilarityCreatesContextTransferReceipt → ⊥
 literatureSimilarityDoesNotCreateContextTransferReceipt ()
 
 data StandardsDocumentProvesActualRepairSupport : Set where
-
-standardsDocumentDoesNotProveActualRepairSupport :
-  StandardsDocumentProvesActualRepairSupport → ⊥
+standardsDocumentDoesNotProveActualRepairSupport : StandardsDocumentProvesActualRepairSupport → ⊥
 standardsDocumentDoesNotProveActualRepairSupport ()
 
 data OpenStandardsDocumentProvesPersistentInteroperability : Set where
-
-openStandardsDocumentDoesNotProvePersistentInteroperability :
-  OpenStandardsDocumentProvesPersistentInteroperability → ⊥
+openStandardsDocumentDoesNotProvePersistentInteroperability : OpenStandardsDocumentProvesPersistentInteroperability → ⊥
 openStandardsDocumentDoesNotProvePersistentInteroperability ()
 
 data CitationCreatesParticipantAuthority : Set where
-
-citationDoesNotCreateParticipantAuthority :
-  CitationCreatesParticipantAuthority → ⊥
+citationDoesNotCreateParticipantAuthority : CitationCreatesParticipantAuthority → ⊥
 citationDoesNotCreateParticipantAuthority ()
 
 data AcquisitionOrderCreatesPaymentOrder : Set where
-
-acquisitionOrderDoesNotCreatePaymentOrder :
-  AcquisitionOrderCreatesPaymentOrder → ⊥
+acquisitionOrderDoesNotCreatePaymentOrder : AcquisitionOrderCreatesPaymentOrder → ⊥
 acquisitionOrderDoesNotCreatePaymentOrder ()
 
 data PaidSiblingAllowsSkippedDependency : Set where
-
-paidSiblingDoesNotAllowSkippedDependency :
-  PaidSiblingAllowsSkippedDependency → ⊥
+paidSiblingDoesNotAllowSkippedDependency : PaidSiblingAllowsSkippedDependency → ⊥
 paidSiblingDoesNotAllowSkippedDependency ()
 
 ------------------------------------------------------------------------
--- Current producer frontier.
+-- Potential future same-object producer frontier.  It is not the current
+-- conceptual-review work queue.  Current manuscript work is governed by the
+-- paper-type owner; these producers activate only under the claims above.
 ------------------------------------------------------------------------
 
-currentProducerFrontier : List ResidualProducer
-currentProducerFrontier =
+potentialSameObjectProducerFrontier : List ResidualProducer
+potentialSameObjectProducerFrontier =
   interventionLCIProducer
   ∷ deploymentReferenceSystemProducer
   ∷ hardwareCircularityProducer
@@ -284,72 +253,45 @@ currentProducerFrontier =
   ∷ participantAuthorityReceiptProducer
   ∷ []
 
+currentProducerFrontier : List ResidualProducer
+currentProducerFrontier = []
+
 record SameObjectAcquisitionSchedulerBoundary : Set where
   constructor same-object-acquisition-scheduler-boundary
   field
     schedulerCreatesEvidence : Bool
     schedulerCreatesEvidenceIsFalse : schedulerCreatesEvidence ≡ false
-
     externalCitationPaysSameObjectObservation : Bool
-    externalCitationPaysSameObjectObservationIsFalse :
-      externalCitationPaysSameObjectObservation ≡ false
-
+    externalCitationPaysSameObjectObservationIsFalse : externalCitationPaysSameObjectObservation ≡ false
     priorStudyPaysFutureObservation : Bool
-    priorStudyPaysFutureObservationIsFalse :
-      priorStudyPaysFutureObservation ≡ false
-
+    priorStudyPaysFutureObservationIsFalse : priorStudyPaysFutureObservation ≡ false
     sourceIdentityRoleAndSameObjectRetained : Bool
-    sourceIdentityRoleAndSameObjectRetainedIsTrue :
-      sourceIdentityRoleAndSameObjectRetained ≡ true
-
+    sourceIdentityRoleAndSameObjectRetainedIsTrue : sourceIdentityRoleAndSameObjectRetained ≡ true
     citationImportsProof : Bool
     citationImportsProofIsFalse : citationImportsProof ≡ false
-
     citationCreatesAuthority : Bool
     citationCreatesAuthorityIsFalse : citationCreatesAuthority ≡ false
-
     acquisitionMayOccurOutOfDependencyOrder : Bool
-    acquisitionMayOccurOutOfDependencyOrderIsTrue :
-      acquisitionMayOccurOutOfDependencyOrder ≡ true
-
+    acquisitionMayOccurOutOfDependencyOrderIsTrue : acquisitionMayOccurOutOfDependencyOrder ≡ true
     downstreamPaymentMaySkipUnpaidDependency : Bool
-    downstreamPaymentMaySkipUnpaidDependencyIsFalse :
-      downstreamPaymentMaySkipUnpaidDependency ≡ false
-
+    downstreamPaymentMaySkipUnpaidDependencyIsFalse : downstreamPaymentMaySkipUnpaidDependency ≡ false
     dashiSchedulerIsSourceTheorem : Bool
     dashiSchedulerIsSourceTheoremIsFalse : dashiSchedulerIsSourceTheorem ≡ false
-
     canonicalRequirementSchedulerReused : Bool
-    canonicalRequirementSchedulerReusedIsTrue :
-      canonicalRequirementSchedulerReused ≡ true
-
+    canonicalRequirementSchedulerReusedIsTrue : canonicalRequirementSchedulerReused ≡ true
     paretoRankingRequiresEligibilityFirst : Bool
-    paretoRankingRequiresEligibilityFirstIsTrue :
-      paretoRankingRequiresEligibilityFirst ≡ true
+    paretoRankingRequiresEligibilityFirstIsTrue : paretoRankingRequiresEligibilityFirst ≡ true
+    sameObjectDebtAutomaticallyBecomesCurrentPaperRequirement : Bool
+    sameObjectDebtAutomaticallyBecomesCurrentPaperRequirementIsFalse :
+      sameObjectDebtAutomaticallyBecomesCurrentPaperRequirement ≡ false
 
 open SameObjectAcquisitionSchedulerBoundary public
 
-canonicalSameObjectAcquisitionSchedulerBoundary :
-  SameObjectAcquisitionSchedulerBoundary
+canonicalSameObjectAcquisitionSchedulerBoundary : SameObjectAcquisitionSchedulerBoundary
 canonicalSameObjectAcquisitionSchedulerBoundary =
   same-object-acquisition-scheduler-boundary
-    false refl
-    false refl
-    false refl
-    true refl
-    false refl
-    false refl
-    true refl
-    false refl
-    false refl
-    true refl
-    true refl
-
-------------------------------------------------------------------------
--- BIDI scheduling receipt: an unpaid coordinate determines a producer request;
--- a producer's eventual output may return only as a provenance-bearing receipt
--- for that coordinate. The schedule itself never promotes payment.
-------------------------------------------------------------------------
+    false refl false refl false refl true refl false refl false refl true refl
+    false refl false refl true refl true refl false refl
 
 record ProducerScheduleReceipt : Set where
   constructor producer-schedule-receipt
@@ -366,23 +308,23 @@ open ProducerScheduleReceipt public
 lifecycleInventorySchedule : ProducerScheduleReceipt
 lifecycleInventorySchedule =
   producer-schedule-receipt
-    "education-specific lifecycle measurement"
+    "empirical intervention lifecycle claim"
     interventionLCIProducer
-    "method sources are paid; the proposed intervention's actual inventory is not"
+    "method sources are paid; an empirical claim about the proposed intervention still needs its actual inventory"
     true true false
 
 longitudinalImpactSchedule : ProducerScheduleReceipt
 longitudinalImpactSchedule =
   producer-schedule-receipt
-    "longitudinal intervention impact"
+    "same-object longitudinal impact claim"
     longitudinalFollowupProducer
-    "prior longitudinal ESD studies bound plausibility/method, but cannot observe this intervention's future outcome"
+    "prior longitudinal ESD studies constrain method/context but cannot observe this intervention's future outcome"
     true true false
 
 participantGovernanceSchedule : ProducerScheduleReceipt
 participantGovernanceSchedule =
   producer-schedule-receipt
-    "ESD participant governance transfer"
+    "participant governance transfer claim"
     participantAuthorityReceiptProducer
     "procedural ethics and prior participatory studies do not create participant epistemic authority in this context"
     true true false
@@ -390,11 +332,11 @@ participantGovernanceSchedule =
 interoperabilityPersistenceSchedule : ProducerScheduleReceipt
 interoperabilityPersistenceSchedule =
   producer-schedule-receipt
-    "open interoperability / durability"
+    "deployment durability/interoperability claim"
     interoperabilityPersistenceProducer
     "standards and charters define relevant coordinates but cannot observe persistence of the selected deployment through time"
     true true false
 
 highestAlphaSchedulerReading : String
 highestAlphaSchedulerReading =
-  "The Pareto frontier is partitioned by evidence producer rather than citation count. Method/context sources may be acquired and paid out of order, but same-object deployment, future longitudinal, context-transfer and participant-authority coordinates remain blocked until their own provenance-bearing producers return receipts; no paid sibling or citation can skip those dependencies. Scheduling semantics reuse DASHI.Core.RequirementProducerSchedulerExact, and Pareto ranking is gated by DASHI.Core.AdmissibleConsumerMDLHyperfabricExact rather than by invented synthetic costs."
+  "Same-object/future/authority debt remains explicit but is claim-relative. The current integrative conceptual review does not inherit empirical-intervention LCI, durability, longitudinal-observation or participant-authority obligations merely because those residuals exist. If a later manuscript promotes the corresponding empirical/deployment/governance claim, the canonical requirement scheduler reopens the exact producer; Pareto ranking remains eligibility-gated and citations cannot skip the unpaid dependency."
