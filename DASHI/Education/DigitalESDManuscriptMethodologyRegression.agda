@@ -22,68 +22,59 @@ methodRetainsStructuredSearchRegression = refl
 
 searchClosureDoesNotEqualSynthesisRegression :
   Method.SearchClosureEqualsEvidenceSynthesis → ⊥
-searchClosureDoesNotEqualSynthesisRegression =
-  Method.searchClosureDoesNotEqualEvidenceSynthesis
+searchClosureDoesNotEqualSynthesisRegression = Method.searchClosureDoesNotEqualEvidenceSynthesis
 
 primarySourceDoesNotAutoIncludeRegression :
   Method.PrimarySourceAcquisitionCreatesIncludedStudy → ⊥
-primarySourceDoesNotAutoIncludeRegression =
-  Method.primarySourceAcquisitionDoesNotCreateIncludedStudy
+primarySourceDoesNotAutoIncludeRegression = Method.primarySourceAcquisitionDoesNotCreateIncludedStudy
 
-unescoRoadmapReceiptRegression :
-  Method.SourceReceipt.observed Method.unescoESD2030RoadmapReceipt ≡ true
+unescoRoadmapReceiptRegression : Method.SourceReceipt.observed Method.unescoESD2030RoadmapReceipt ≡ true
 unescoRoadmapReceiptRegression = refl
 
-unescoMidtermReceiptRegression :
-  Method.SourceReceipt.observed Method.unescoESD2030MidtermReceipt ≡ true
+unescoMidtermReceiptRegression : Method.SourceReceipt.observed Method.unescoESD2030MidtermReceipt ≡ true
 unescoMidtermReceiptRegression = refl
 
-oecdOutlookReceiptRegression :
-  Method.SourceReceipt.observed Method.oecdDigitalEducationOutlook2026Receipt ≡ true
+oecdOutlookReceiptRegression : Method.SourceReceipt.observed Method.oecdDigitalEducationOutlook2026Receipt ≡ true
 oecdOutlookReceiptRegression = refl
 
-unescoAICommonGoodMinisterialReceiptRegression :
-  Method.SourceReceipt.observed Method.unescoAICommonGoodMinisterialReceipt ≡ true
+unescoAICommonGoodMinisterialReceiptRegression : Method.SourceReceipt.observed Method.unescoAICommonGoodMinisterialReceipt ≡ true
 unescoAICommonGoodMinisterialReceiptRegression = refl
 
-unescoAIConsultationDiscussionReceiptRegression :
-  Method.SourceReceipt.observed Method.unescoAIConsultationDiscussionReceipt ≡ true
+unescoAIConsultationDiscussionReceiptRegression : Method.SourceReceipt.observed Method.unescoAIConsultationDiscussionReceipt ≡ true
 unescoAIConsultationDiscussionReceiptRegression = refl
+
+unescoAIProcurementBackgroundReceiptRegression : Method.SourceReceipt.observed Method.unescoAIProcurementBackgroundReceipt ≡ true
+unescoAIProcurementBackgroundReceiptRegression = refl
+
+unescoAITCOBackgroundReceiptRegression : Method.SourceReceipt.observed Method.unescoAITCOBackgroundReceipt ≡ true
+unescoAITCOBackgroundReceiptRegression = refl
 
 consultationDoesNotEqualAdoptedStatementRegression :
   Method.ConsultationDiscussionPaperEqualsAdoptedMinisterialStatement → ⊥
-consultationDoesNotEqualAdoptedStatementRegression =
-  Method.consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement
+consultationDoesNotEqualAdoptedStatementRegression = Method.consultationDiscussionPaperDoesNotEqualAdoptedMinisterialStatement
 
-systemTransformationNotActivityRegression :
-  Method.ActivityLevelDeterminesSystemTransformation → ⊥
-systemTransformationNotActivityRegression =
-  Method.activityDoesNotDetermineSystemTransformation
+backgroundPaperDoesNotEqualAdoptedPolicyRegression :
+  Method.ConsultationBackgroundPaperEqualsAdoptedPolicy → ⊥
+backgroundPaperDoesNotEqualAdoptedPolicyRegression = Method.consultationBackgroundPaperDoesNotEqualAdoptedPolicy
 
-performanceNotLearningRegression :
-  Method.TaskPerformanceDeterminesLearning → ⊥
+systemTransformationNotActivityRegression : Method.ActivityLevelDeterminesSystemTransformation → ⊥
+systemTransformationNotActivityRegression = Method.activityDoesNotDetermineSystemTransformation
+
+performanceNotLearningRegression : Method.TaskPerformanceDeterminesLearning → ⊥
 performanceNotLearningRegression = Method.taskPerformanceDoesNotDetermineLearning
 
 methodsExtractionRetainsScopeRegression :
-  Method.MethodologyBoundary.sourcePopulationTimeScopeRetained
-    Method.canonicalMethodologyBoundary
-  ≡ true
+  Method.MethodologyBoundary.sourcePopulationTimeScopeRetained Method.canonicalMethodologyBoundary ≡ true
 methodsExtractionRetainsScopeRegression = refl
 
 methodsExtractionRetainsSourceRoleRegression :
-  Method.MethodologyBoundary.sourceRoleRetained
-    Method.canonicalMethodologyBoundary
-  ≡ true
+  Method.MethodologyBoundary.sourceRoleRetained Method.canonicalMethodologyBoundary ≡ true
 methodsExtractionRetainsSourceRoleRegression = refl
 
 paperMethodologyDoesNotPromoteSystematicReviewRegression :
-  Method.MethodologyBoundary.promotesSystematicReview
-    Method.canonicalMethodologyBoundary
-  ≡ false
+  Method.MethodologyBoundary.promotesSystematicReview Method.canonicalMethodologyBoundary ≡ false
 paperMethodologyDoesNotPromoteSystematicReviewRegression = refl
 
 searchLineageRemainsCanonicalRegression :
-  Search.StructuredSearchLedger.scopusExecutionObserved
-    Search.canonicalStructuredSearchLedger
-  ≡ false
+  Search.StructuredSearchLedger.scopusExecutionObserved Search.canonicalStructuredSearchLedger ≡ false
 searchLineageRemainsCanonicalRegression = refl
