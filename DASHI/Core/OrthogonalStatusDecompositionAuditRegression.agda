@@ -34,3 +34,28 @@ representativeAuditSupportsFactorisation :
   Audit.representativeAuditSupportsOrthogonalFactorisation
     Audit.canonicalOrthogonalStatusAuditBoundary ≡ true
 representativeAuditSupportsFactorisation = refl
+
+multilingualSurfaceAssertionIsIndependent :
+  Audit.multilingualSurfaceAssertionIsIndependentCoordinate
+    Audit.canonicalOrthogonalStatusAuditBoundary ≡ true
+multilingualSurfaceAssertionIsIndependent = refl
+
+fiveStatusAxesDoNotCaptureSurfaceSemanticsAlone :
+  Audit.fiveStatusAxesSufficientForMultilingualSurfaceSemantics
+    Audit.canonicalOrthogonalStatusAuditBoundary ≡ false
+fiveStatusAxesDoNotCaptureSurfaceSemanticsAlone = refl
+
+sharedQidDoesNotPayTranslationEquivalence :
+  Audit.sharedQidPaysTranslationEquivalence
+    Audit.canonicalOrthogonalStatusAuditBoundary ≡ false
+sharedQidDoesNotPayTranslationEquivalence = refl
+
+semanticPropagationDoesNotAssertTargetSurface :
+  Audit.semanticPropagationAssertsTargetSurface
+    Audit.canonicalOrthogonalStatusAuditBoundary ≡ false
+semanticPropagationDoesNotAssertTargetSurface = refl
+
+simpleWikiRemainsPeerSurface :
+  Audit.simpleWikiPresumedEnglishSubset
+    Audit.canonicalOrthogonalStatusAuditBoundary ≡ false
+simpleWikiRemainsPeerSurface = refl
