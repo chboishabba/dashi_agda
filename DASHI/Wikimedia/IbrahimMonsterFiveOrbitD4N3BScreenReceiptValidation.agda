@@ -1,0 +1,26 @@
+module DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BScreenReceiptValidation where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BScreenReceiptExact as R
+
+targetCharacterRegression :
+  R.targetCharacterSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+targetCharacterRegression = refl
+
+characterTableScreenRegression :
+  R.characterTableFusionScreenSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+characterTableScreenRegression = refl
+
+actualGroupRealizationSourceRegression :
+  R.actualD4RealizationSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+actualGroupRealizationSourceRegression = refl
+
+runtimeFirewallRegression :
+  R.gapRuntimeReceiptObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
+runtimeFirewallRegression = refl
+
+sameObjectFirewallRegression :
+  R.selectedActionSameObjectPaid R.currentFiveOrbitD4N3BScreenReceipt ≡ false
+sameObjectFirewallRegression = refl
