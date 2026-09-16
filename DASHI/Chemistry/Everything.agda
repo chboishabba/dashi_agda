@@ -168,3 +168,96 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverPare
 -- repair theorem constructs eligibility inside the same observer family before
 -- minimal-description/Pareto ranking resumes; no new experiment is manufactured.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseObserverLocalRepairExact
+
+-- Generic promotion instantiation: the AdK local repair, minimal-eligible proof,
+-- and Pareto selection are packaged through the domain-neutral Core theorem.
+-- Li-Liu-Ji remain attributed only to the three-CV AdK premise; the generic
+-- counterexample->repair->selection theorem is DASHI synthesis.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConsumerSafePromotionExact
+
+-- Static-to-future promotion weld: the Pareto-selected three-axis model is
+-- explicitly related to a query-adequate, frozen, dynamically safe joined
+-- observer.  The included no-action dynamics is only a repository interface
+-- fixture and is blocked from promotion to physical AdK kinetics or rates.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConsumerSafeFuturePromotionExact
+
+-- Preferred nontrivial future-dynamics continuation: the six source-owned
+-- alpha/beta/gamma/delta/epsilon/xi route edges become typed admissible actions.
+-- The graph coordinate moves while the independent third-axis consumer world is
+-- preserved, so dynamic safety is proved without identifying the two carriers.
+-- Route topology remains computational/source-bounded, not experimental kinetics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBoundedFutureDynamicsExact
+
+-- Composite source-bounded future promotion: the Pareto-selected three-axis
+-- model is now welded to the non-empty graph action system through an explicit
+-- application realisation relation.  Static selection, query adequacy, frozen
+-- selection and dynamic safety remain independent payments; source attribution
+-- is not transferred into the DASHI composition theorem.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceBoundedConsumerSafeFuturePromotionExact
+
+-- Partial state-coordinate alignment: Figure-5 named states are related only to
+-- source-paid theta1/theta2 regions.  Alpha/zeta inherit composed open/closed
+-- endpoint angles; beta/gamma/delta/epsilon remain qualitative semi-open/semi-
+-- closed regions; eta/lambda remain near-closed; per-state dLN stays unpaid.
+-- Equation-level xi is deliberately not identified with Figure-level zeta.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePartialStateCoordinateAlignmentExact
+
+-- Dynamics on the paid alignment fibre: states exist only when a graph node has
+-- a retained Figure-state alignment.  This supports alpha->beta->gamma->delta
+-- and alpha->beta->epsilon prefixes while refusing delta/epsilon->xi until the
+-- xi/zeta seam is paid.  Partiality remains explicit rather than totalized.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePartialAlignedDynamicsExact
+
+-- Source-internal terminal-notation seam: prose/Figure routes terminate at zeta
+-- while Eq. (1) writes the corresponding flux paths with terminal xi.  The
+-- bridge records a shared terminal-closed-route role while preserving distinct
+-- source notation tags; it does not assert xi=zeta or diagnose a source typo.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseTerminalNotationRoleBridgeExact
+
+-- Role-completed aligned dynamics: delta/epsilon can now reach a tagged terminal
+-- route-role state carrying Figure-zeta's closed two-angle region, while the
+-- equation-xi and figure-zeta source objects remain non-identical.  This closes
+-- the route at role level without manufacturing dLN, per-edge rates, or kinetics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseTerminalRoleCompletedDynamicsExact
+
+-- Sparse numerical calibration fibre: reuses AttributedSourceCore, snowball
+-- attribution, and optional external-identity demands rather than inventing an
+-- AdK provenance schema. Paid endpoint angles and the gamma zero-reference sit
+-- beside explicitly missing dLN/free-energy/edge-rate coordinates; RateKind
+-- keeps Kramers-derived values distinct from simulation, experiment and inference.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSparseCalibrationFibreExact
+
+-- Attribution envelope for calibration atoms: DOI, PMID, PMCID, OpenAlex,
+-- unresolved article QID, AdK QID, UniProt and PDB identities are retained via
+-- the repository-wide source/identity machinery.  Identity coordinates remain
+-- non-authoritative and cannot manufacture a missing numerical payment.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAttributionEnvelopeExact
+
+-- Attributed sparse transition kernel: all six paid route edges survive even
+-- while exact Figure-5 Kramers numerics are absent.  Each edge carries its rate
+-- role, source locator and attribution envelope; state geometry/free energy and
+-- path flux remain distinct from edge-rate calibration and experimental kinetics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAttributedSparseTransitionKernelExact
+
+-- Structural identity snowball: PDB deposition DOIs/IDs, UniProt P69441 and
+-- adenylate-kinase Q356240 remain separate from exact PDB-object/article QIDs and
+-- from experimental condition/dynamics authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseStructuralIdentitySnowballExact
+
+-- Supporting-material manifestation guard: the PMC-rendered legacy supplemental
+-- PII is retained as a cross-source mismatch because it resolves to a different
+-- Biophysical Journal article; PMC-attached mmc1/mmc2 remain same-article
+-- candidates, but no numeric calibration is paid without an exact locator.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSupportingMaterialManifestationExact
+
+-- Manifestation-guarded calibration acquisition: sparse cells can be upgraded
+-- only after same-article manifestation, locator-specific and value-role
+-- payments. Foreign legacy supplements and unreceipted visual/OCR-style reads
+-- remain fail-closed.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGuardedCalibrationAcquisitionExact
+
+-- Source-bounded metadynamics uncertainty: the reported ~0.5 kcal/mol BE-META
+-- free-energy error is retained as an uncertainty envelope only. It does not
+-- fill missing per-state energies, make a visual readout exact, or turn relative
+-- free energy into absolute thermodynamic free energy.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMetadynamicsUncertaintyExact
