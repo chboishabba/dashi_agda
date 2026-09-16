@@ -68,6 +68,9 @@ record ContentAddressedVerificationBoundary : Set where
     verifierCorrectnessMustBePaidSeparately : Bool
     sourceOwnershipRetained : Bool
     sourceTheoremImportedAsAgdaProof : Bool
+    zkVerifierAcceptanceAloneCreatesWorldTruth : Bool
+    zkSoundnessContractMustBePaidSeparately : Bool
+    zkSpecCorrectnessMustBePaidSeparately : Bool
 
 open ContentAddressedVerificationBoundary public
 
@@ -83,6 +86,9 @@ canonicalContentAddressedVerificationBoundary =
     true
     true
     false
+    false
+    true
+    true
 
 ------------------------------------------------------------------------
 -- Finite collision: two verifiers are equally content-addressed at the
@@ -151,6 +157,7 @@ data ContentAddressingCreatesTruth : Set where
 data CIDCreatesSemanticAuthority : Set where
 data CIDImportsProof : Set where
 data MirrorAvailabilityPaysEvidence : Set where
+data ZKAcceptanceCreatesWorldTruth : Set where
 
 contentAddressingDoesNotCreateTruth : ContentAddressingCreatesTruth → ⊥
 contentAddressingDoesNotCreateTruth ()
@@ -164,8 +171,15 @@ cidDoesNotImportProof ()
 mirrorAvailabilityDoesNotPayEvidence : MirrorAvailabilityPaysEvidence → ⊥
 mirrorAvailabilityDoesNotPayEvidence ()
 
+zkAcceptanceDoesNotCreateWorldTruth : ZKAcceptanceCreatesWorldTruth → ⊥
+zkAcceptanceDoesNotCreateWorldTruth ()
+
 ------------------------------------------------------------------------
 -- Existing publication/presentation owners are imported rather than cloned.
+-- Verification/ZK.agda is deliberately referenced as an experimental/tooling
+-- soundness contract rather than imported as proof authority: its zkSoundness
+-- theorem is postulated, and therefore cannot pay the soundness or world-truth
+-- obligation for this exact bridge by itself.
 ------------------------------------------------------------------------
 
 existingFederatedContentBoundary : Federated.FederatedContentBoundary
@@ -177,6 +191,9 @@ existingWorldBucketManifestBoundary = WorldBucket.canonicalManifestBoundary
 existingSFMViewAuthorityBoundary : SFM.SFMViewAuthorityBoundary
 existingSFMViewAuthorityBoundary = SFM.canonicalSFMViewAuthorityBoundary
 
+existingExperimentalZKContractReference : String
+existingExperimentalZKContractReference = "Verification.ZK.zkSoundness"
+
 contentAddressingIsProceduralNotEpistemic : String
 contentAddressingIsProceduralNotEpistemic =
-  "content-addressed verdicts preserve same-content procedural invariance; claim truth, source support, semantic authority and evidence payment remain separate obligations"
+  "content-addressed verdicts preserve same-content procedural invariance; claim truth, source support, semantic authority, ZK soundness and evidence payment remain separate obligations"
