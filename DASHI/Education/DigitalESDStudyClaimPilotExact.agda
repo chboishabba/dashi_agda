@@ -10,9 +10,9 @@ import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
 ------------------------------------------------------------------------
 -- PILOT EXTRACTION PROFILES
 --
--- These profiles exercise the claim-ceiling method on three deliberately
--- different source types already in the pre-screen snowball. They are not
--- final inclusion receipts and do not pay the manuscript's database search.
+-- These profiles exercise the claim-ceiling method on deliberately different
+-- source types already in the pre-screen snowball. They are not final inclusion
+-- receipts and do not pay the manuscript's database search.
 ------------------------------------------------------------------------
 
 ardilaPilotProfile : Ceiling.StudyClaimProfile
@@ -123,8 +123,44 @@ martinezPilotProfile = Ceiling.study-claim-profile
   "supports review-level synthesis that digital education is conceptually ambiguous and that reported benefits are conditional on pedagogy, teacher mediation, infrastructure/policy and equity; does not provide a pooled causal effect or pay this manuscript's database search"
   "review not preregistered and no separate protocol was published; no meta-analysis due heterogeneity; evidence strength limited by heterogeneous designs/samples/outcomes, context-specific samples, self-report, limited longitudinal follow-up, fidelity gaps and absent comparison groups in some included studies"
 
+boehmePilotProfile : Ceiling.StudyClaimProfile
+boehmePilotProfile = Ceiling.study-claim-profile
+  "boehme-2026-digitainability-framework"
+  Sources.boehmeDigitainabilitySource
+  "candidate conceptual-framework / prior-art evidence"
+  "10.3390/educsci16050721; conceptual framing and framework sections"
+  "conceptual-synthetic framework paper coupling sustainability/ESD and digitality as a twin transformation"
+  (Ceiling.sourceReportedDesignUnmapped
+    "conceptual-synthetic framework"
+    "the source is not an empirical participant study; no empirical design class is manufactured merely to satisfy the extraction schema")
+  "DACH educational discourse / conceptual literature context; no single empirical participant population"
+  (Ceiling.natNotReported "no empirical enrolled-sample size applies to this conceptual framework source")
+  (Ceiling.natNotReported "no empirical analysis n applies; the analytic object is conceptual/synthetic literature and discourse")
+  "not applicable: no treatment assignment"
+  "not applicable: no experimental comparator"
+  "conceptual distinctions and framework construction rather than participant measurement"
+  "not applicable: no participant attrition surface"
+  "not applicable: no causal confounding-adjustment surface"
+  "not applicable: no intervention-fidelity estimate"
+  "not applicable: no inferential multiplicity-testing surface"
+  (Ceiling.reported-surface Ceiling.notReported
+    "no empirical intervention effect-size estimate"
+    "conceptual framework source"
+    "absence is expected for this source role and is not treated as missing trial reporting")
+  (Ceiling.reported-surface Ceiling.notReported
+    "no empirical confidence interval/uncertainty interval"
+    "conceptual framework source"
+    "conceptual contribution is not converted into pseudo-statistical precision")
+  "conceptual publication horizon; not a longitudinal follow-up study"
+  "framework relevance is conceptual and discourse-bounded; no population transport claim is created"
+  (Ceiling.epistemicRoleNotApplicable
+    "no direct participant epistemic role at the conceptual-framework level")
+  Ceiling.conceptualMechanismClaim
+  "supports prior-art positioning for sustainable digitality/digital sustainability as coupled transformation and constrains novelty; does not establish empirical intervention effects, participant authority, infrastructure lifecycle measurements or the current review's evidence-payment architecture"
+  "conceptual source; no empirical sample, effect estimate or causal identification; useful as antecedent/framework evidence only"
+
 pilotProfiles : List Ceiling.StudyClaimProfile
-pilotProfiles = ardilaPilotProfile ∷ gousetiPilotProfile ∷ martinezPilotProfile ∷ []
+pilotProfiles = ardilaPilotProfile ∷ gousetiPilotProfile ∷ martinezPilotProfile ∷ boehmePilotProfile ∷ []
 
 pilotStatus : String
 pilotStatus = "method-validation pilot only: source acquisition and profile construction do not create final manuscript inclusion"
