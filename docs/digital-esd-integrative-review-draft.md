@@ -18,7 +18,9 @@ A parallel distinction is now prominent in digital education. The OECD Digital E
 
 The green and digital agendas are also not automatically synergistic. UNESCO's 2024 paper on bridging the green and digital transitions through education explicitly frames them as transitions that may be perceived as distinct or in tension, while proposing ways education can bring them into alignment. This creates an important research opportunity. The question is not only how digital technologies can support sustainability learning, but also how sustainability principles should govern digital education itself.
 
-That reverse direction is increasingly concrete. The 2026 UNESCO-UNICEF-ITU Charter for Public Digital Learning Platforms frames public digital learning platforms as components of education systems and identifies public accountability, inclusion, pedagogical purpose, complementarity, openness, interoperability and trustworthiness as design and governance principles. In parallel, ITU-T L.1410 provides a methodology for life-cycle assessment of ICT goods, networks and services, including comparison with a reference product system, while ITU-T L.1023 provides a circularity scoring method covering durability, repair, reuse, recycling and upgradeability. These sources make it possible to move beyond generic claims that digital education should be 'green' toward explicit lifecycle, circularity and infrastructure coordinates.
+That reverse direction is increasingly concrete. The 2026 UNESCO-UNICEF-ITU Charter for Public Digital Learning Platforms frames public digital learning platforms as components of education systems and identifies public accountability, inclusion, pedagogical purpose, complementarity, openness, interoperability and trustworthiness as design and governance principles. In September 2026, education ministers and designated representatives convened by UNESCO adopted a statement framing education as a human right and common good in the age of AI and calling for deliberative governance, public accountability and protection of learner and teacher rights. The associated policy direction also places total cost of ownership, interoperability, portability and open systems within the decision context for AI and digital infrastructure. This is a normative governance source, not evidence that a named intervention is effective or sustainable.
+
+In parallel, ITU-T L.1410 provides a methodology for life-cycle assessment of ICT goods, networks and services, including comparison with a reference product system, while ITU-T L.1023 provides a circularity scoring method covering durability, repair, reuse, recycling and upgradeability. These sources make it possible to move beyond generic claims that digital education should be 'green' toward explicit lifecycle, circularity and infrastructure coordinates.
 
 We therefore frame digital education and ESD as a reciprocal relation:
 
@@ -75,6 +77,8 @@ The framework distinguishes technology adoption, learning or performance change,
 ### 3.4 Epistemic agency and participant governance
 
 Participant engagement is retained as a separate evidence and governance dimension. Participatory ESD, student voice and co-design literature can inform the method, but a prior study cannot create authority for a new participant population. For transfer claims, contextual generalisation and same-target-context participant-authority evidence are treated as conjunctive obligations. Procedural ethics and consent remain necessary where applicable but are not treated as substitutes for constitutive epistemic agency.
+
+The 2026 UNESCO ministerial statement adds a distinct public-governance layer: AI and digital-education decisions are framed as matters requiring deliberative governance and public accountability. That institutional position is retained as a normative governance coordinate. It does not substitute for constitutive participant authority in any local research population.
 
 ### 3.5 Time, durability and intergenerational option preservation
 
@@ -146,7 +150,7 @@ Records will be excluded from a research-question synthesis when they do not add
 - learning gain does not establish system transformation;
 - technology used for sustainability education does not establish sustainability of the technology;
 - a lifecycle or circularity method does not create a deployment-specific inventory;
-- a standard or charter does not prove implementation or durability of a deployed system;
+- a standard, charter or ministerial statement does not prove implementation or durability of a deployed system;
 - participation literature, consultation or consent does not create local participant authority;
 - short-term outcomes do not establish longitudinal durability;
 - citation does not import proof or authority; and
@@ -190,6 +194,7 @@ The review currently retains the following primary institutional sources as sour
 - UNESCO, *Mid-term evaluation of the ESD for 2030 framework, 2021–2024* (2026): programme-level implementation and transformation evidence;
 - UNESCO, *Bridging the green and digital transitions through education* (2024): green/digital twin-transition antecedent and tension/alignment framing;
 - OECD, *OECD Digital Education Outlook 2026: Exploring Effective Uses of Generative AI in Education* (2026), DOI 10.1787/062a7394-en: current digital-education evidence and policy synthesis, including the performance-versus-learning distinction;
+- UNESCO, *Ministerial Statement: Sustaining education as a common good in the age of AI* (2026): intergovernmental normative/governance context for deliberative governance, public accountability, rights and responsible digital/AI procurement; it is not intervention-effect evidence;
 - UNESCO-UNICEF-ITU, *Charter for Public Digital Learning Platforms* (2026): normative infrastructure/governance principles including public accountability, openness, interoperability and trustworthiness;
 - ITU-T L.1410 (11/2024): ICT life-cycle assessment methodology; and
 - ITU-T L.1023 (08/2023): ICT circularity scoring methodology.
@@ -233,6 +238,7 @@ Consequently, this draft does not report review-result counts, pooled effects, p
 - Broek S, Kaur A, Ockham IPS, UNESCO. *Mid-term evaluation of the ESD for 2030 framework, 2021–2024*. 2026. https://www.unesco.org/en/articles/mid-term-evaluation-esd-2030-framework-2021-2024
 - Giannini S. *Bridging the green and digital transitions through education*. UNESCO. 2024. DOI: 10.54675/ZACQ4808.
 - OECD. *OECD Digital Education Outlook 2026: Exploring Effective Uses of Generative AI in Education*. OECD Publishing. 2026. DOI: 10.1787/062a7394-en.
+- Education ministers and designated representatives convened by UNESCO. *Ministerial Statement: Sustaining education as a common good in the age of AI*. UNESCO Digital Learning Week. 2026. https://www.unesco.org/en/articles/education-ministers-call-education-remain-common-good-age-ai-unescos-digital-learning-week
 - UNESCO, UNICEF, ITU. *Charter for Public Digital Learning Platforms*. 2026. https://www.unesco.org/en/digital-education/learning-platforms-gateway/charter
 - ITU-T. *L.1410 (11/2024): Methodology for environmental life cycle assessments of information and communication technology goods, networks and services*. 2024.
 - ITU-T. *L.1023 (08/2023): Assessment method for circular scoring*. 2023.
