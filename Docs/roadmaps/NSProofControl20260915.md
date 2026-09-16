@@ -90,6 +90,9 @@ R98 packet-boundary cancellation           mixed; selector algebra vs finite Fou
 R291/R573 signed Hermitian linearization   domain-independent candidate
 S2b2d0 output-local fixed-output reduction domain-independent candidate
 S2b2d1a damped-tangent residual identity   domain-independent analytic candidate
+S2b2d1b0 coherent-work scalar split        domain-independent analytic candidate
+S2b2d1b1 endpoint compiler                 domain-independent modulo ordinary calculus/FTC
+S2b2d1b2 coherent-covariance payment       unresolved whole-space transport
 #920 paired-second-moment compiler         mixed; generic centered algebra vs periodic realization
 R568/R572/R503 commutator chain            mixed; analytic core vs output-fibre/lattice plumbing
 ```
@@ -102,11 +105,16 @@ active.
 
 `S2b2d1a` sharpens this again without proving A from B: the unweighted
 commutator is exactly the forcing residual in the generic damped mixed-product
-tangent identity.  Its algebra does not mention the periodic shell selector.
-The remaining signed coherent-covariance/endpoint payment is therefore the
-analytic object to keep generic for eventual whole-space transport, while the
-finite output-fibre realization remains periodic plumbing until explicitly
-ported.
+tangent identity. Its algebra does not mention the periodic shell selector.
+
+`S2b2d1b0` then pushes that exact vector identity through the same real-Hermitian
+consumer and isolates, for any common rate, an endpoint/tangent term plus one
+signed coherent-covariance residual. `S2b2d1b1` constructs the actual fixed-
+output derivative on the R408 trajectory and compiles the endpoint term to a
+self-energy endpoint difference given ordinary derivative-of-zero and scalar
+FTC authority. Therefore the only genuinely nonlinear local d1b theorem left
+is the coherent-covariance payment `S2b2d1b2`. None of these classifications
+promotes B to A.
 
 BIDI questions:
 
@@ -170,8 +178,11 @@ S2b2c2a integer gap -> live rational C3.normSquared          DONE source
 S2b2c2b literal low/remote R98 spectral datum                SOURCE-WRITTEN / certification pending
 S2b2d0 output-local collar weight -> active unweighted fibre DONE source
 S2b2d1a fixed-output damped tangent = decay + commutator      SOURCE-WRITTEN / certification pending
-S2b2d1b signed coherent covariance / endpoint payment         OPEN PRIMARY
-S2b2d2 cutoff-uniform sum of fixed-output budgets             OPEN after d1b
+S2b2d1b0 exact coherent-work/covariance scalar split          DONE source
+S2b2d1b1 literal fixed-output endpoint compiler               DONE conditional source
+concrete endpoint zero-derivative + scalar FTC               OPEN infrastructure
+S2b2d1b2 quantitative signed coherent covariance payment      OPEN PRIMARY
+S2b2d2 cutoff-uniform sum of fixed-output budgets             OPEN after d1b2
 S3 cutoff-uniform initial critical ceiling                   OPEN
 S4 positive retained viscosity 0 < 2*nu-a                   OPEN
 ```
@@ -332,22 +343,54 @@ P3's compressed cells are quadratic velocity blocks, while the R230 commutator
 is cubic after inserting physical NS forcing. Any useful bridge must be a typed
 same-object theorem, not analogy.
 
-### S2b2d1b — PRIMARY analytic leaf: signed coherent covariance / endpoint payment
+### S2b2d1b0 — DONE SOURCE: exact coherent-work decomposition
 
-The remaining local theorem is now sharper than “bound the commutator”:
+`NSTriadKNFixedOutputCoherentCovarianceWorkExact` pushes d1a through the same
+real-Hermitian scalar consumer. For any common rate `lambda` it proves exactly
 
 ```text
-fixed-output damped tangent / endpoint term
-+ signed variable-rate viscous covariance
+W(M,C)
+  = W(M,T)
+    + lambda W(M,M)
+    - W(M, D + lambda M),
+```
+
+where `M` is the coherent fixed-output mixed-product sum, `T` its damped
+tangent, `D` the variable viscous-decay sum, and `C` the fixed-output
+commutator. The final term is the signed coherent covariance residual. No sign
+or inequality is assumed.
+
+### S2b2d1b1 — DONE CONDITIONAL SOURCE: endpoint term is ordinary calculus
+
+`NSTriadKNFixedOutputMixedEndpointCompilerExact` constructs the actual R408
+mixed-cell derivatives, folds them on the literal fixed-output fibre, and uses
+R94/R381/R292 to identify that tangent with the same physical damped tangent
+used in d1a. It then proves, given ordinary derivative-of-zero and scalar FTC
+authorities,
+
+```text
+integral W(M,T) dt
+  = Re<M(T),M(T)> - Re<M(0),M(0)>.
+```
+
+Thus the endpoint term is infrastructure/certification debt, not a new NS
+estimate. Concrete zero-derivative and FTC inhabitants remain explicitly open.
+
+### S2b2d1b2 — PRIMARY analytic leaf: signed coherent covariance payment
+
+The only genuinely nonlinear fixed-output theorem remaining in d1b is now
+
+```text
+signed coherent covariance W(M, D + lambda M)
   -> theorem-bearing fixed-output budget B_k
   -> R432/R487 FixedOutputSignedCrossPayment.
 ```
 
-Equivalent formulations are admissible if they pay this SAME fixed-output
-commutator. R232 rules out a generic pointwise half-derivative gain. R229 rules
-out replacing variable cellwise rates by a coherent lower bound without a
-covariance theorem. R432/R487 already own the cardinality-free downstream
-compiler once theorem-bearing local budgets exist.
+The common rate may be chosen to optimize the later budget, but R229 forbids
+inferring a favorable coherent sign merely from cellwise nonnegative excess
+rates. R232 separately rules out a generic pointwise half-derivative gain.
+R432/R487 already own the cardinality-free downstream compiler once theorem-
+bearing local budgets exist.
 
 #### Recovered historical donor: R571 -> Aug-5 paired second moment
 
@@ -383,14 +426,14 @@ Waleffe amplitude-energy theorem as G1 donor. The G0' local Hermitian
 vector->scalar splice is source-written. The state-side G1/G2 physical
 crosswalk remains a named unpaid field.
 
-For S2b2d1b this route remains a candidate donor only. Any attachment must land
-on the same damped-tangent/covariance carrier without losing the signed
-cancellation. Otherwise retain #920/#945 as provenance donors and prove d1b
-directly. Do not reopen their representation/scalarization chain.
+For S2b2d1b2 this route remains a candidate donor only. Any attachment must land
+on the same coherent-covariance carrier without losing the signed cancellation.
+Otherwise retain #920/#945 as provenance donors and prove d1b2 directly. Do not
+reopen their representation/scalarization chain.
 
 ### S2b2d2 — global aggregation after local payments
 
-Once d1b exists, the next residual is exactly R488's second node:
+Once d1b2 exists, the next residual is exactly R488's second node:
 
 ```text
 4 * sum_k B_k <= B(T)
@@ -427,10 +470,10 @@ modern signed/nested commutator route           selected B_comm producer family
 
 ```text
 P0  keep this tracker + #957 + #883 archaeology summary synchronized
-P1  B_phase S2b2d1b: signed coherent covariance / endpoint fixed-output payment
-P2  static/certification validation of d1a + S2b2c2b remote datum + d0 reduction
-P3  A/B portability BIDI audit on each paid B theorem family (non-promoting)
-P4  S1b infrastructure: concrete scalar FTC / integrateTo linearity
+P1  B_phase S2b2d1b2: quantitative signed coherent-covariance fixed-output payment
+P2  standard-analysis/certification: endpoint zero derivative + scalar FTC + S1b calculus
+P3  static/certification validation of d1a/d1b0/d1b1 + S2b2c2b remote datum + d0 reduction
+P4  A/B portability BIDI audit on each paid B theorem family (non-promoting)
 P5  B_phase S3/S4
 P6  B_comm reconstruction/certification
 P7  certify recovered S0/S1/S2/#957 source surfaces
@@ -444,9 +487,9 @@ A proof discovery deferred, A portability BIDI active;
 never restart broad NS archaeology;
 start every search from a named unpaid theorem/field;
 preserve failed/superseded routes as append-only provenance;
-B new mathematics starts at S2b2d1b signed coherent covariance/endpoint payment;
+B new mathematics starts at S2b2d1b2 coherent covariance only;
 preserve signed/local components before norms;
-only after d1b search the cutoff-uniform sum d2;
+only after d1b2 search the cutoff-uniform sum d2;
 never infer B -> A or A -> B without explicit same-object transport.
 ```
 
