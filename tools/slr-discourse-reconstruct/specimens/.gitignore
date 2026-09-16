@@ -1,0 +1,7 @@
+# Ephemeral pipeline runs and html caches
+*.html
+*.tsv
+*.stderr
+*.stdout
+parser.tsv
+source-reconstructed.txt

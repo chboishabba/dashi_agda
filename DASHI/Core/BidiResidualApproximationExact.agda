@@ -204,7 +204,7 @@ bidiEvidenceRefinementShrinksHiddenFibre :
     (EvidenceFibre (compatible problem) strongerEvidence)
     (currentResidualFibre problem)
 bidiEvidenceRefinementShrinksHiddenFibre receipt =
-  evidenceRefinementGivesFibreRefinement (refinesCurrent receipt)
+  λ hidden witness → refinesCurrent receipt hidden witness
 
 BidiClosesConsumer :
   BidiPredictionProblem Evidence Hidden Prediction →
@@ -231,8 +231,8 @@ asExactPlusResidual :
   Residual.ExactPlusResidual Exact ResidualPart
 asExactPlusResidual receipt =
   Residual.exactPlusResidual
-    (exactOrBoundedPart receipt)
-    (unresolvedPart receipt)
+    (ApproximationWithResidualObligation.exactOrBoundedPart receipt)
+    (ApproximationWithResidualObligation.unresolvedPart receipt)
 
 ------------------------------------------------------------------------
 -- Research-design consequence: useful does not mean closing.
