@@ -9,10 +9,10 @@
 #
 # Stage 2 tries to realize an actual D8 subgroup inside the constructible MN3B
 # model already used by monster_3b_actual_kernel_structure.g.  A concrete
-# subgroup is promoted only when each of its conjugacy classes maps uniquely to
-# an MN3B table class by the pair (element order, ambient conjugacy-class size).
-# If that uniqueness check fails, the script keeps the character-table screen
-# but leaves actual_d4_subgroup_realized=false.
+# subgroup is promoted only after an explicit isomorphism from the canonical D4
+# has transported the canonical class representatives into that subgroup, and
+# every transported representative maps uniquely to an MN3B table class by the
+# pair (element order, ambient conjugacy-class size).
 #
 # No character match creates the Selected3BNormalizerMonsterActionWeld or an
 # intertwiner on the selected Monster carrier.
@@ -67,6 +67,8 @@ if fail in [classE,classR2,classR,classAxis,classDiag] then
   Error("failed to identify canonical D4 classes");
 fi;
 canonicalClassOrder := [classE,classR2,classR,classAxis,classDiag];
+canonicalClassRepresentatives := List(canonicalClassOrder,
+  i -> Representative(d4Classes[i]));
 canonicalTargetValues := List(canonicalClassOrder, i -> targetValues[i]);
 if canonicalTargetValues <> [5,5,1,3,3] then
   Error("five-orbit D4 action does not reproduce target character (5,5,1,3,3)");
@@ -182,35 +184,35 @@ if G <> fail then
   od;
 
   if actualD4 <> fail then
-    hClasses := ConjugacyClasses(actualD4);
-    mnOrders := OrdersClassRepresentatives(mn3b);
-    mnSizes := SizesConjugacyClasses(mn3b);
-    candidateFusion := [];
-    unique := true;
+    canonicalToActual := IsomorphismGroups(d4Group,actualD4);
+    if canonicalToActual <> fail then
+      mnOrders := OrdersClassRepresentatives(mn3b);
+      mnSizes := SizesConjugacyClasses(mn3b);
+      candidateFusion := List([1..Length(d4Classes)], i -> fail);
+      unique := true;
 
-    for cl in hClasses do
-      x := Representative(cl);
-      xOrder := Order(x);
-      ambientCentralizerSize := Size(Centralizer(G,x));
-      ambientClassSize := Size(G) / ambientCentralizerSize;
-      matches := Filtered([1..Length(mnOrders)], i ->
-        mnOrders[i] = xOrder and mnSizes[i] = ambientClassSize);
-      if Length(matches) <> 1 then
-        unique := false;
-        break;
-      fi;
-      Add(candidateFusion,matches[1]);
-    od;
+      # Transport each canonical abstract-D4 class representative into the
+      # concrete subgroup, then identify its ambient MN3B class.
+      for canonicalPosition in [1..Length(d4Classes)] do
+        x := Image(canonicalToActual,Representative(d4Classes[canonicalPosition]));
+        xOrder := Order(x);
+        ambientCentralizerSize := Size(Centralizer(G,x));
+        ambientClassSize := Size(G) / ambientCentralizerSize;
+        matches := Filtered([1..Length(mnOrders)], i ->
+          mnOrders[i] = xOrder and mnSizes[i] = ambientClassSize);
+        if Length(matches) <> 1 then
+          unique := false;
+          break;
+        fi;
+        candidateFusion[canonicalPosition] := matches[1];
+      od;
 
-    if unique then
-      actualFusion := candidateFusion;
-      # Compare as a set of class maps against the table-screened fusions.
-      if actualFusion in possibleFusions then
-        actualValues := List(actualFusion, i -> chiMN3BValues[i]);
-        actualChar := ClassFunction(CharacterTable(actualD4), actualValues);
-        # Use the abstract D4 table only for the screen result; the realized
-        # fusion is promoted here only if its map already survived PossibleClassFusions.
-        actualCompatible := actualFusion in List(compatible, rec -> rec.fusion);
+      if unique then
+        actualFusion := candidateFusion;
+        if actualFusion in possibleFusions then
+          compatibleFusions := List(compatible, item -> item.fusion);
+          actualCompatible := actualFusion in compatibleFusions;
+        fi;
       fi;
     fi;
   fi;
