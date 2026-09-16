@@ -6,6 +6,25 @@ Historical archaeology belongs in `YMRHPRRoundArchaeologyAudit.md`; the focused 
 
 **Update rule:** whenever a Pareto recut changes the preferred producer, first live theorem leaf, or same-object acquisition path, update this file in the same tranche. Source/DOI/QID/Dewey/status metadata never manufacture theorem payment.
 
+## 0. Current ownership snapshot — 2026-09-16
+
+```text
+#918  merged — active E-localization compression + RH R1 fail-closed audit
+#934  merged — producer atlas + CMP completion boundary
+#940  merged — global board + RH checked-scalar R1 split
+#949  merged — preferred concrete CMP119/BC1 source route
+#953  merged — Round131 common-metric/unification transport
+#944  OPEN/DRAFT — current detailed YM specialist route
+```
+
+Observed #944 head at this bookkeeping pass:
+
+```text
+60467c74c1c217dbec214bc5b3702ba257c51568
+```
+
+Exact-head validation must be queried independently; this snapshot is not a kernel receipt.
+
 ## 1. Fixed terminal consumers
 
 ### Yang--Mills
@@ -20,12 +39,12 @@ quantitative connected-correlation decay
 ### Riemann hypothesis
 
 ```text
-R1a/R1b final-near same-object representation
+R1a + R1b1 + R1b2 final-near same-object representation
 -> R2 strict literal complement inequality
 -> existing uniform-high contradiction compiler.
 ```
 
-RH stays behind the present YM same-object/source-calibration seam while theorem-bearing checked-near bytes remain unavailable.
+RH same-object archaeology is stop-conditioned while theorem-bearing checked-near bytes remain unavailable. Absent new theorem-bearing R1 evidence, spend coordinator-side mathematical budget on R2.
 
 ## 2. Current YM Pareto frontier — R386 cut
 
@@ -237,13 +256,37 @@ These facts support source theorem shapes. They do not by citation alone identif
 ## 7. Current RH route
 
 ```text
-R1a: nearResponseAt(J) = N_checked
-R1b: N_checked = finiteNearSum(literal cells)
-R2: literalNear(J) + B_far(J) + D_Gamma(g_pole)
-      < actual ClusterResponse(g_pole).
+R1a:
+  nearResponseAt(chosen J) = N_checked
+
+R1b1:
+  N_checked = N_reflectionPair(final universal pole-quotient carrier)
+
+R1b2:
+  N_reflectionPair = finiteNearSum(literal cellResponse)
+
+R2:
+  D_near(J) + B_far(J) + D_Gamma(g_pole)
+    < actual ClusterResponse(g_pole).
 ```
 
-Stop alias archaeology until theorem-bearing checked-near material becomes recoverable. The 8889 cluster return remains an optional donor only if theorem-bearing same-carrier transport is recovered.
+The bundled R1 equality is compiler output from R1a + R1b1 + R1b2.
+
+The retained 8883 `nearSignedSum/nearOffFinset` material and retained reflection-pair theorem names are status/source coordinates only. The window-free compiler confirms the same-object equalities are inputs, not hidden outputs.
+
+### RH R1 stop condition
+
+Do not create more intermediate scalar names merely to make an equality reflexive. Resume R1 only on:
+
+1. theorem-bearing checked-near bytes / cross-prover transport;
+2. a genuine final-carrier reflection-pair scalar object;
+3. a concrete finite enumeration/fold constructor paying R1b2 independently of the target final-near equality.
+
+Absent one of those, direct R2 is the current non-dominated RH proof-search target.
+
+The R0 proof-carrying certificate route remains optional: rational/interval realization still requires the exact embedded finite-fold identity plus order transport and therefore does not bypass R1 by itself.
+
+The 8889 cluster-lower route remains an optional producer only if theorem-bearing same-carrier transport reappears together with a strict local bridge to actual `ClusterResponse`.
 
 ## 8. Firewalls
 
@@ -260,7 +303,9 @@ R385 coefficient comparison -> absolute localization without an anchor
 fixed-point Lipschitz -> Hessian Lipschitz by name
 R374 common radius scalar -> automatic consumer margin interpretation
 shared symbols H/D/C/s -> same-object proof
-external Lean donor theorem -> Agda kernel theorem without a local payment/replay.
+external Lean donor theorem -> Agda kernel theorem without a local payment/replay
+retained RH theorem name/status -> R1 transport
+rational certificate carrier -> exact analytic finite-fold identity by coercion.
 ```
 
 ## 9. Validation boundary
@@ -268,6 +313,7 @@ external Lean donor theorem -> Agda kernel theorem without a local payment/repla
 - R381--R386 are source-written compiler/reduction surfaces on #944.
 - repository `machineChecked` fields are not fresh exact-head kernel receipts.
 - the stale R347 imports in R348/R350 have been removed, but source repair is not a kernel run.
+- #940/#949/#953 are merged bookkeeping/source/unification tranches; their merge status does not validate #944's current exact head.
 - no continuum YM construction, mass-gap theorem, Clay completion or RH proof is claimed.
 
 ## 10. Update log
@@ -278,5 +324,8 @@ external Lean donor theorem -> Agda kernel theorem without a local payment/repla
 - R384: minimal source fixed-point-distance producer removes the legacy `boundaryHessianStable` dependency cycle.
 - R385: R384 distance and literal R103 Hessian feed R379 directly; full R370 and R380--R383 are no longer mandatory.
 - R386: exact comparison-vs-absolute no-go; coefficient sensitivity is demoted to optional subproducer below the literal selected-localization theorem.
+- RH R1: merged #940 split the representation wall into R1a/R1b1/R1b2 and established the stop condition for further alias archaeology.
+- #949: concrete CMP119/BC1 route merged and remains a retained source lane.
+- #953: least-privilege Round131 common-metric/unification transport merged and remains downstream.
 
 Exact-head status is queried directly from GitHub and is not inferred from these round labels.
