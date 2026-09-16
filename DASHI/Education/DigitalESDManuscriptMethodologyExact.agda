@@ -18,6 +18,7 @@ import DASHI.Education.DigitalInnovationESDTransformationExact as Transformation
 import DASHI.Education.DigitalESDEducationSustainabilityLiteratureMapExact as Literature
 import DASHI.Education.DigitalESDParticipantGovernanceContextTransferExact as Governance
 import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact as Derivation
+import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
 
 currentPaperType : Paper.PaperType
 currentPaperType = Paper.currentPaperType
@@ -69,6 +70,9 @@ manuscriptDependencyGraph = Payment.canonicalManuscriptDependencyGraph
 principleDerivationBoundary : Derivation.PrincipleDerivationBoundary
 principleDerivationBoundary = Derivation.canonicalPrincipleDerivationBoundary
 
+externalityIncidenceBoundary : Incidence.ExternalityIncidenceBoundary
+externalityIncidenceBoundary = Incidence.canonicalExternalityIncidenceBoundary
+
 data EvidenceRole : Set where
   empiricalOutcomeEvidence : EvidenceRole
   reviewSynthesisEvidence : EvidenceRole
@@ -118,12 +122,16 @@ data ExtractionCoordinate : Set where
   circularityRepairabilityCoordinate : ExtractionCoordinate
   participantAgencyAuthorityCoordinate : ExtractionCoordinate
   interoperabilityGovernanceCoordinate : ExtractionCoordinate
+  externalityIncidenceCoordinate : ExtractionCoordinate
   sameObjectStatusCoordinate : ExtractionCoordinate
   contextTransferCoordinate : ExtractionCoordinate
   uncertaintyLimitationCoordinate : ExtractionCoordinate
 
 canonicalExtractionSchema : List ExtractionCoordinate
-canonicalExtractionSchema = sourceIdentityCoordinate ∷ sourceKindAndRoleCoordinate ∷ publicationDateCoordinate ∷ populationEducationLevelCoordinate ∷ jurisdictionInstitutionContextCoordinate ∷ digitalTechnologyOrPracticeCoordinate ∷ pedagogyCurriculumCompetenceCoordinate ∷ sustainabilityDimensionCoordinate ∷ studyOrReviewDesignCoordinate ∷ outcomeOrClaimCoordinate ∷ timeHorizonCoordinate ∷ lifecycleBoundaryCoordinate ∷ circularityRepairabilityCoordinate ∷ participantAgencyAuthorityCoordinate ∷ interoperabilityGovernanceCoordinate ∷ sameObjectStatusCoordinate ∷ contextTransferCoordinate ∷ uncertaintyLimitationCoordinate ∷ []
+canonicalExtractionSchema = sourceIdentityCoordinate ∷ sourceKindAndRoleCoordinate ∷ publicationDateCoordinate ∷ populationEducationLevelCoordinate ∷ jurisdictionInstitutionContextCoordinate ∷ digitalTechnologyOrPracticeCoordinate ∷ pedagogyCurriculumCompetenceCoordinate ∷ sustainabilityDimensionCoordinate ∷ studyOrReviewDesignCoordinate ∷ outcomeOrClaimCoordinate ∷ timeHorizonCoordinate ∷ lifecycleBoundaryCoordinate ∷ circularityRepairabilityCoordinate ∷ participantAgencyAuthorityCoordinate ∷ interoperabilityGovernanceCoordinate ∷ externalityIncidenceCoordinate ∷ sameObjectStatusCoordinate ∷ contextTransferCoordinate ∷ uncertaintyLimitationCoordinate ∷ []
+
+extractionCoordinateCount : Nat
+extractionCoordinateCount = 19
 
 data ReciprocityDirection : Set where
   digitalEducationToESDCapacity : ReciprocityDirection
@@ -250,6 +258,8 @@ record MethodologyBoundary : Set where
     lifecycleAndCircularityBoundariesRetainedIsTrue : lifecycleAndCircularityBoundariesRetained ≡ true
     participantAuthorityBoundariesRetained : Bool
     participantAuthorityBoundariesRetainedIsTrue : participantAuthorityBoundariesRetained ≡ true
+    externalityIncidenceAuditRetained : Bool
+    externalityIncidenceAuditRetainedIsTrue : externalityIncidenceAuditRetained ≡ true
     searchClosureEqualsEvidenceSynthesis : Bool
     searchClosureEqualsEvidenceSynthesisIsFalse : searchClosureEqualsEvidenceSynthesis ≡ false
     sourceAcquisitionEqualsStudyInclusion : Bool
@@ -264,7 +274,7 @@ record MethodologyBoundary : Set where
 open MethodologyBoundary public
 
 canonicalMethodologyBoundary : MethodologyBoundary
-canonicalMethodologyBoundary = methodology-boundary true refl true refl true refl true refl true refl true refl false refl false refl false refl false refl false refl
+canonicalMethodologyBoundary = methodology-boundary true refl true refl true refl true refl true refl true refl true refl false refl false refl false refl false refl false refl
 
 methodologyReading : String
-methodologyReading = "This manuscript is an integrative conceptual review with a transparent structured search and an explicit candidate-principle derivation method. Candidate principles may be generated from the bounded source-attributed digital-education corpus before search closure, but the pre-search framework is not a review result and must be challenged/revised against the searched, screened and extracted corpus. Search execution, eligibility, extraction and synthesis remain distinct receipts. Sources are extracted with role, population/context, time horizon, lifecycle/governance coordinates and explicit limitations. Regional implementation evaluations, adopted ministerial statements, consultation discussion papers and commissioned background papers remain distinct source roles."
+methodologyReading = "This manuscript is an integrative conceptual review with a transparent structured search, an explicit candidate-principle derivation method and a retained externality-incidence audit. Candidate principles may be generated from the bounded source-attributed digital-education corpus before search closure, but the pre-search framework is not a review result and must be challenged/revised against the searched, screened and extracted corpus. Search execution, eligibility, extraction and synthesis remain distinct receipts. The 19-coordinate extraction schema retains role, population/context, time horizon, lifecycle/governance and externality-incidence coordinates, including distributional questions about contribution, benefit, burden, voice, control/mediation, exit, lifecycle stage, temporal displacement and material position. Regional implementation evaluations, adopted ministerial statements, consultation discussion papers and commissioned background papers remain distinct source roles."
