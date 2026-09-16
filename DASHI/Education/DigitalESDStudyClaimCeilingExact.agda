@@ -29,14 +29,10 @@ data ReportingState : Set where
   derivableWithSameObjectReceipt : ReportingState
   notReported : ReportingState
 
-record ReportedNat : Set where
-  constructor reported-nat
-  field
-    reportingState : ReportingState
-    valueReference : String
-    locatorReference : String
-
-open ReportedNat public
+data ReportedNat : Set where
+  explicitlyReportedNat : Nat → String → ReportedNat
+  derivedNatWithSameObjectReceipt : Nat → String → String → ReportedNat
+  natNotReported : String → ReportedNat
 
 record ReportedSurface : Set where
   constructor reported-surface
@@ -196,6 +192,9 @@ record StudyClaimCeilingBoundary : Set where
     sampleSizeAndAnalysisNRetained : Bool
     sampleSizeAndAnalysisNRetainedIsTrue :
       sampleSizeAndAnalysisNRetained ≡ true
+    unreportedSampleSizeHasNoFabricatedNat : Bool
+    unreportedSampleSizeHasNoFabricatedNatIsTrue :
+      unreportedSampleSizeHasNoFabricatedNat ≡ true
     uncertaintyAndIntervalSemanticsRetained : Bool
     uncertaintyAndIntervalSemanticsRetainedIsTrue :
       uncertaintyAndIntervalSemanticsRetained ≡ true
@@ -234,9 +233,10 @@ canonicalStudyClaimCeilingBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
 
 studyClaimCeilingReading : String
 studyClaimCeilingReading =
-  "Each admitted digital-ESD paper is indexed by its exact AttributedSource object and interpreted through a design-relative claim ceiling. Source role/locator, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect-size surface, uncertainty/confidence-interval semantics, time horizon, external-validity domain, participant role and the strongest supported implication are retained separately. Reported p-values, large n, narrow confidence intervals, statistical significance, qualitative richness or a positive study finding do not independently manufacture causal identification, representativeness, mechanism, practical significance, population transport, practice recommendation or system transformation. Unreported numerical/statistical quantities remain unreported unless a same-object derivation receipt pays them."
+  "Each admitted digital-ESD paper is indexed by its exact AttributedSource object and interpreted through a design-relative claim ceiling. Source role/locator, source population, reported/enrolled n, analysis n, allocation, comparator, measurement validity, attrition/missingness, confounding control, implementation fidelity, multiplicity, effect-size surface, uncertainty/confidence-interval semantics, time horizon, external-validity domain, participant role and the strongest supported implication are retained separately. Reported and same-object-derived sample sizes carry Nat values; an unreported sample size has no fabricated Nat payload. Reported p-values, large n, narrow confidence intervals, statistical significance, qualitative richness or a positive study finding do not independently manufacture causal identification, representativeness, mechanism, practical significance, population transport, practice recommendation or system transformation. Unreported numerical/statistical quantities remain unreported unless a same-object derivation receipt pays them."
