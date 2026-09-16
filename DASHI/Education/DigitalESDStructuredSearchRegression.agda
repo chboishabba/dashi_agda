@@ -5,6 +5,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.TypedProvenanceDependencyGraphExact as Provenance
+import DASHI.Law.SensibLawAdaptiveLegalResearchFeedbackLoopExact as Feedback
+import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Assessment
 import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact as Paper
 import DASHI.Education.DigitalESDStructuredSearchExact as Search
 
@@ -75,7 +78,7 @@ unexecutedDatabaseDoesNotCreateReceiptRegression =
   Search.plannedDatabaseDoesNotCreateExecutionReceipt
 
 ------------------------------------------------------------------------
--- RED surface for executable transparent-search closure.
+-- Executable transparent-search closure.
 ------------------------------------------------------------------------
 
 closureRequiresExecutedDatabasesRegression :
@@ -121,3 +124,59 @@ searchClosureDoesNotCloseSynthesisRegression :
   Search.StructuredSearchClosurePaysEvidenceSynthesis → ⊥
 searchClosureDoesNotCloseSynthesisRegression =
   Search.structuredSearchClosureDoesNotPayEvidenceSynthesis
+
+------------------------------------------------------------------------
+-- RED: canonical dependency/payment/Pareto cross-pollination.
+------------------------------------------------------------------------
+
+canonicalManuscriptDependencyGraphRegression :
+  Provenance.TypedDependencyGraph
+canonicalManuscriptDependencyGraphRegression =
+  Search.canonicalManuscriptDependencyGraph
+
+searchToEligibleCorpusRequiredRegression :
+  Provenance.requiredForTarget Search.searchToEligibleCorpus ≡ true
+searchToEligibleCorpusRequiredRegression = refl
+
+eligibleCorpusToSourceScopeRequiredRegression :
+  Provenance.requiredForTarget Search.eligibleCorpusToSourceScope ≡ true
+eligibleCorpusToSourceScopeRequiredRegression = refl
+
+sourceScopeToLifecycleRequiredRegression :
+  Provenance.requiredForTarget Search.sourceScopeToLifecycleSynthesis ≡ true
+sourceScopeToLifecycleRequiredRegression = refl
+
+sourceScopeToParticipantGovernanceRequiredRegression :
+  Provenance.requiredForTarget Search.sourceScopeToParticipantGovernanceSynthesis ≡ true
+sourceScopeToParticipantGovernanceRequiredRegression = refl
+
+sourceScopeToLongitudinalRequiredRegression :
+  Provenance.requiredForTarget Search.sourceScopeToLongitudinalSynthesis ≡ true
+sourceScopeToLongitudinalRequiredRegression = refl
+
+requiredSearchSupportCannotBeResidualizedRegression :
+  Search.RequiredStructuredSearchSupportMayBeResidualized → ⊥
+requiredSearchSupportCannotBeResidualizedRegression =
+  Search.requiredStructuredSearchSupportCannotBeResidualized
+
+admittedSearchNarrowingRerunsParetoRegression :
+  Feedback.feedbackDisposition
+    Assessment.proofPaymentAdmitted
+    Assessment.frontierNarrowed
+  ≡ Feedback.recomputeFrontier
+admittedSearchNarrowingRerunsParetoRegression =
+  Search.admittedSearchNarrowingRerunsPareto
+
+reopenedSearchFrontierRerunsParetoRegression :
+  Feedback.feedbackDisposition
+    Assessment.proofPaymentContested
+    Assessment.frontierReopened
+  ≡ Feedback.recomputeFrontier
+reopenedSearchFrontierRerunsParetoRegression =
+  Search.reopenedSearchFrontierRerunsPareto
+
+canonicalProvenanceBoundaryRegression :
+  Provenance.TypedProvenanceDependencyBoundary.graphCanExposeRequiredDependencies
+    Search.canonicalManuscriptProvenanceBoundary
+  ≡ true
+canonicalProvenanceBoundaryRegression = refl
