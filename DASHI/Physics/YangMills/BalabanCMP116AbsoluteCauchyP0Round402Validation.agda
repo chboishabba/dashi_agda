@@ -1,13 +1,15 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP116AbsoluteCauchyP0Round402Validation where
 
--- RED-first validation surface for the first genuinely theorem-producing
+-- Focused validation surface for the first genuinely theorem-producing
 -- coordinate below canonical B/P0.
 --
--- Historical `FinitePolydiscCauchyAxioms` is optimized for differences of two
--- analytic functions.  P0 is an ABSOLUTE selected localization theorem, so this
--- validation deliberately requires a sibling absolute Cauchy authority and the
--- source-shaped absolute decoupled-activity coefficient lift before they exist.
+-- Historical `FinitePolydiscCauchyAxioms` is not a `--safe` module because its
+-- complex-analysis theorem is an imported foundational authority.  This root
+-- therefore deliberately does not pretend that importing the same authority in
+-- absolute form preserves a `--safe` cone.
+--
+-- RED was committed first, before either production owner existed.  The source
+-- surface is now GREEN-by-construction; kernel status remains a separate receipt.
 
 import DASHI.Foundations.FinitePolydiscCauchyAbsoluteAxioms
 import DASHI.Physics.YangMills.BalabanDecoupledActivityAbsoluteCauchyExact
