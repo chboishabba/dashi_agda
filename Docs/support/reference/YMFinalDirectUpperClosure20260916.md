@@ -253,3 +253,42 @@ Unless a literal consumer forces it:
 - no separate self-adjointness proof when Kato closed-form representation applies;
 - no new P33 coercivity calculus when the five-mechanism/floor compiler already exists;
 - no record/Boolean/`ProofLevel` promotion into a theorem inhabitant.
+
+## 10. Exhausted historical-producer audit
+
+A current-master search alone could miss a theorem term living on an old or unmerged branch, so the closure pass also audited historical PRs and exact missing producer names.
+
+### Source A
+
+- PR #648 (`YM post-#644: BIDI literal source closure for A1/A2/BC1/BC2`) was inspected directly.  Its merged diff contains only an audit-start owner/marker; it does not contain a hidden localization constructor.
+- PR #635 provides the strict CMP109/CMP116 differentiated same-carrier compiler.  It proves the CMP109 polarization / CMP116 physical marked-Hessian identities once a literal continuation carrier is supplied, while `literalDifferentiatedCarrierInstantiationLevel` remains conditional.
+- Exact PR-history search for `PublishedCMP116DifferentiatedLocalization` finds only the current #967/#987 bookkeeping/consumer work; no historical producer PR supplies the record inhabitant.
+
+Therefore A is not an orphaned theorem waiting to be cherry-picked.
+
+### Finite physical B
+
+- PR #811 constructs the finite projected `P M P` Hamiltonian, domain invariance and the exact P33 floor **when supplied** a `PhysicalSU2MatrixHessian` coercivity certificate.  It does not construct that certificate.
+- Exact PR-history search for `PrimitiveAbsoluteOperatorNorms` finds no older physical producer.
+- Exact PR-history search for `PhysicalSU2MatrixHessian` finds #811 and current #987; the former is a consumer of the certificate, not its producer.
+
+Therefore B is not an orphaned primitive-norm/Hessian constructor.
+
+### Continuum / OS C
+
+- PR #638/Rounds124--131 unify the same finite-measure, continuum-measure, Schwinger and stress carriers, but Round126 stores `literalFiniteMeasuresConverge` and `literalSchwingerBelongsToContinuumMeasure` as physical continuum input fields.
+- PR #649 propagates one generated action/history into that same Schwinger/stress spine and explicitly leaves the remaining physical source/continuum identities open.
+- Repository and PR-history searches for an actual theorem deriving the pair
+
+```text
+IsContinuumLimitOf finiteMeasure continuumMeasure
+SchwingerBelongsToMeasure continuumMeasure schwinger
+```
+
+find only declarations, stored fields, and projections from already-filled packages.
+
+Therefore C is not an orphaned constructive-continuum theorem.
+
+### Consequence
+
+No further repository wiring or historical transplant can honestly inhabit A/B/C.  Filling them requires new proof-bearing mathematics: the source localization on the literal selected carrier, the concrete physical finite Hessian/form coercivity package, and the constructive continuum/OS same-object theorem.  Those terms must not be simulated with a record field, postulate, citation, `standardImported` label, Boolean, or proof-status receipt.
