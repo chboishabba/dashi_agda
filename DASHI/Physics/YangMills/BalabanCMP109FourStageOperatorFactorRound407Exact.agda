@@ -16,13 +16,14 @@ module DASHI.Physics.YangMills.BalabanCMP109FourStageOperatorFactorRound407Exact
 -- This owner makes that finite factor carrier explicit and proves that one
 -- common stage-majorant family bounds BOTH neighboring entries whenever the
 -- two pipeline bound coordinates are identified with that common family.
--- Thus the ordinary half of R406/P0b1 is compiler-owned.  The remaining live
--- source leaf is the marked DOMAIN-DIFFERENCE estimate for the changed stage
--- (CMP99 Theorem 3.14/(3.154), propagated through the literal CMP109 entry),
--- plus the same-object identification with the selected R318/CMP116 term.
+-- Thus the ordinary half of R406/P0b1 is compiler-owned at source level.  The
+-- remaining live source leaf is the marked DOMAIN-DIFFERENCE estimate for the
+-- changed stage (CMP99 Theorem 3.14/(3.154), propagated through the literal
+-- CMP109 entry), plus the same-object identification with the selected
+-- R318/CMP116 term.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -193,5 +194,15 @@ round407SameObjectSelectedTermWeldStillProofBearingIsTrue :
   round407SameObjectSelectedTermWeldStillProofBearing ≡ true
 round407SameObjectSelectedTermWeldStillProofBearingIsTrue = refl
 
+round407KernelCertifiedAtCurrentHead : Bool
+round407KernelCertifiedAtCurrentHead = false
+
+round407KernelCertifiedAtCurrentHeadIsFalse :
+  round407KernelCertifiedAtCurrentHead ≡ false
+round407KernelCertifiedAtCurrentHeadIsFalse = refl
+
+-- Source has been written but this connector session has not observed an
+-- Agda/kernel check for the exact R407 head, so the local status is deliberately
+-- non-promotable until such a receipt exists.
 round407CompilerLevel : ProofLevel
-round407CompilerLevel = machineChecked
+round407CompilerLevel = conditional
