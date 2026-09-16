@@ -15,12 +15,13 @@ module DASHI.Physics.YangMills.BalabanObservableIndexedT5SourceMeaningRound403Ex
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
+import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact as R295
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 
 canonicalObservableIndexedMeaning :
@@ -59,7 +60,7 @@ observableIndexedUnlocalizedT5 :
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {Scale Volume Root : Set} →
   (calculus : Cumulant.NormalizedLogSourceCalculus
-    (R318.R295.t5FiniteExpectationAlgebra dataSet extension)) →
+    (R295.t5FiniteExpectationAlgebra dataSet extension)) →
   (shellData : Shell.TraversalShellData Scale Volume Root) →
   (scaleOf : Nat → Scale) →
   (volumeOf : Nat → Volume) →
@@ -67,16 +68,17 @@ observableIndexedUnlocalizedT5 :
   (connectingRoot : Nat → TestObservable → TestObservable → Root) →
   (ConnectingClusterMeetsBothSupports :
     Nat → TestObservable → TestObservable → Set) →
-  (signedBelowMagnitude : ∀ value → value R318.≤ R278.magnitude extension value) →
+  (signedBelowMagnitude : ∀ value → value ≤ R278.magnitude extension value) →
   R318.UnlocalizedT5StateFamilyJPresentation dataSet extension
 observableIndexedUnlocalizedT5
+    {TestObservable = TestObservable}
     {Scale = Scale} {Volume = Volume} {Root = Root}
     calculus shellData scaleOf volumeOf physicalDistance connectingRoot
     ConnectingClusterMeetsBothSupports signedBelowMagnitude = record
   { R318.UnlocalizedT5StateFamilyJPresentation.Scale = Scale
   ; R318.UnlocalizedT5StateFamilyJPresentation.Volume = Volume
   ; R318.UnlocalizedT5StateFamilyJPresentation.Root = Root
-  ; R318.UnlocalizedT5StateFamilyJPresentation.SourceDirection = _
+  ; R318.UnlocalizedT5StateFamilyJPresentation.SourceDirection = TestObservable
   ; R318.UnlocalizedT5StateFamilyJPresentation.calculus = calculus
   ; R318.UnlocalizedT5StateFamilyJPresentation.meaning =
       canonicalObservableIndexedMeaning calculus
