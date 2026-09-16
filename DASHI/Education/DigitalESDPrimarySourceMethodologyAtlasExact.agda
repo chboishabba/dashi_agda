@@ -67,6 +67,18 @@ unescoAICommonGoodMinisterialSource =
     "Primary intergovernmental normative/governance source adopted during UNESCO Digital Learning Week 2026. Supports deliberative governance, public accountability, learner/teacher rights and source-bounded procurement/infrastructure principles including total-cost-of-ownership, interoperability, portability and open systems; it is not evidence that any named AI or digital-education intervention is effective or sustainable."
     Attr.publicAttribution
 
+unescoAICommonGoodDiscussionSource : Attr.AttributedSource
+unescoAICommonGoodDiscussionSource =
+  Attr.mkNoDOISource
+    "UNESCO"
+    "Sustaining education as a common good in the age of AI: The case for deliberative governance"
+    "UNESCO global consultation on education in the age of AI"
+    "2026"
+    "https://www.unesco.org/en/digital-education/artificial-intelligence/consultation"
+    Attr.institutionalSource
+    "Primary UNESCO discussion-paper/consultation source. It frames deliberative governance and six directional shifts for public consultation feeding future policy briefs; it is not the adopted ministerial statement, settled policy, intervention evidence, or proof that consultation recommendations have been implemented."
+    Attr.publicAttribution
+
 primaryMethodologySourceAtlas : Attr.AttributedSourceAtlas
 primaryMethodologySourceAtlas =
   Attr.mkSourceAtlas
@@ -76,8 +88,9 @@ primaryMethodologySourceAtlas =
     ∷ unescoESD2030MidtermSource
     ∷ oecdDigitalEducationOutlook2026Source
     ∷ unescoAICommonGoodMinisterialSource
+    ∷ unescoAICommonGoodDiscussionSource
     ∷ [] )
-    "Primary institutional sources for ESD system transformation, current digital-education conditions and 2026 AI-era public-purpose governance. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
+    "Primary institutional sources for ESD system transformation, current digital-education conditions and 2026 AI-era public-purpose governance. The adopted ministerial statement and consultation discussion paper remain distinct source roles. Existing UNESCO-UNICEF-ITU Charter, ITU lifecycle/circularity methods and other evidence remain in the prior acquisition atlas; this extension does not duplicate them."
 
 unescoRoadmapSourceRoleReceipt :
   Snowball.SourceRoleSnowballReceipt unescoESD2030RoadmapSource
@@ -99,6 +112,11 @@ unescoAICommonGoodMinisterialSourceRoleReceipt :
 unescoAICommonGoodMinisterialSourceRoleReceipt =
   Snowball.canonicalSourceRoleSnowballReceipt unescoAICommonGoodMinisterialSource
 
+unescoAICommonGoodDiscussionSourceRoleReceipt :
+  Snowball.SourceRoleSnowballReceipt unescoAICommonGoodDiscussionSource
+unescoAICommonGoodDiscussionSourceRoleReceipt =
+  Snowball.canonicalSourceRoleSnowballReceipt unescoAICommonGoodDiscussionSource
+
 priorAcquisitionAtlasRetained : Prior.DigitalESDAcquisitionAtlas
 priorAcquisitionAtlasRetained = Prior.canonicalDigitalESDAcquisitionAtlas
 
@@ -110,6 +128,7 @@ data InstitutionalFrameworkCreatesInterventionEffect : Set where
 data MidtermProgrammeEvaluationCreatesLocalCausalEffect : Set where
 data DigitalEducationOutlookCreatesSustainabilityProof : Set where
 data MinisterialGovernanceSourceCreatesInterventionEffect : Set where
+data ConsultationDiscussionCreatesAdoptedPolicy : Set where
 
 institutionalFrameworkDoesNotCreateInterventionEffect :
   InstitutionalFrameworkCreatesInterventionEffect → ⊥
@@ -126,6 +145,10 @@ digitalEducationOutlookDoesNotCreateSustainabilityProof ()
 ministerialGovernanceSourceDoesNotCreateInterventionEffect :
   MinisterialGovernanceSourceCreatesInterventionEffect → ⊥
 ministerialGovernanceSourceDoesNotCreateInterventionEffect ()
+
+consultationDiscussionDoesNotCreateAdoptedPolicy :
+  ConsultationDiscussionCreatesAdoptedPolicy → ⊥
+consultationDiscussionDoesNotCreateAdoptedPolicy ()
 
 record PrimarySourceMethodologyBoundary : Set where
   constructor primary-source-methodology-boundary
@@ -146,6 +169,9 @@ record PrimarySourceMethodologyBoundary : Set where
     ministerialGovernanceSourceCreatesInterventionEffect : Bool
     ministerialGovernanceSourceCreatesInterventionEffectIsFalse :
       ministerialGovernanceSourceCreatesInterventionEffect ≡ false
+    consultationDiscussionCreatesAdoptedPolicy : Bool
+    consultationDiscussionCreatesAdoptedPolicyIsFalse :
+      consultationDiscussionCreatesAdoptedPolicy ≡ false
 
 open PrimarySourceMethodologyBoundary public
 
@@ -154,6 +180,7 @@ canonicalPrimarySourceMethodologyBoundary =
   primary-source-methodology-boundary
     true refl
     true refl
+    false refl
     false refl
     false refl
     false refl
