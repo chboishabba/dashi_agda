@@ -172,11 +172,11 @@ oddInverseFactorialStep index =
     instance
       oldFactorialNonZero : NonZero oldFactorial
       oldFactorialNonZero =
-        ℕ.≢-nonZero (ℕP._!≢0 oldExponent)
+        ℕP._!≢0 oldExponent
 
       newFactorialNonZero : NonZero newFactorial
       newFactorialNonZero =
-        ℕ.≢-nonZero (ℕP._!≢0 newExponent)
+        ℕP._!≢0 newExponent
 
       sixNonZero : NonZero six
       sixNonZero = _
