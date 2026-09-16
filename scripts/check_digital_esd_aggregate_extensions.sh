@@ -23,6 +23,8 @@ grep -q '^import DASHI.Education.DigitalESDEducationSustainabilityLiteratureMapE
 grep -q '^import DASHI.Education.DigitalESDEducationSustainabilityLiteratureMapRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDCurrentScholarlySnowballExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDCurrentScholarlySnowballRegression$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDContributionPositioningExact$' "$AGG"
+grep -q '^import DASHI.Education.DigitalESDContributionPositioningRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDPaperTypeRequirementParetoExact$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDPaperTypeRequirementRegression$' "$AGG"
 grep -q '^import DASHI.Education.DigitalESDConsumerRelativeLifecycleExact$' "$AGG"
