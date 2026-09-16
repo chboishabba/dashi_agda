@@ -8,6 +8,11 @@ import DASHI.Finance.UniverseLeakageResidualDependencyExact
 import DASHI.Finance.DashiTradeFibreBridgeExact
 import DASHI.Finance.TradeRealizationSharpeAuthorityExact
 
+-- Source-bounded Trump-family financial-interest / market-information stack.
+-- Documentary ownership/timing/counterparty edges remain separate from PNF,
+-- game-theoretic interpretation and dashiTRADE execution authority.
+import DASHI.Finance.TrumpFamilyTradeSourceStackExact
+
 -- Canonical trading-control semantics. Earlier BAN/action experiments remain
 -- in the branch as historical development artifacts but are deliberately not
 -- imported by this aggregate.
