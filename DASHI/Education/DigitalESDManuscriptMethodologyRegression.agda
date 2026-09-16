@@ -42,6 +42,10 @@ oecdOutlookReceiptRegression :
   Method.SourceReceipt.observed Method.oecdDigitalEducationOutlook2026Receipt ≡ true
 oecdOutlookReceiptRegression = refl
 
+unescoAICommonGoodMinisterialReceiptRegression :
+  Method.SourceReceipt.observed Method.unescoAICommonGoodMinisterialReceipt ≡ true
+unescoAICommonGoodMinisterialReceiptRegression = refl
+
 systemTransformationNotActivityRegression :
   Method.ActivityLevelDeterminesSystemTransformation → ⊥
 systemTransformationNotActivityRegression =
