@@ -3,16 +3,6 @@ module DASHI.Physics.YangMills.YMClayFullChainParityExact where
 
 ------------------------------------------------------------------------
 -- FULL AGDA CHAIN PARITY FOR THE ACTIVE LEAN YMClay ASSEMBLY
---
--- This owner specializes the generic parity assembly to the actual current
--- Agda source consumer R387/#970.  It therefore exposes, in one theorem, the
--- direct selected mixed-log upper -> selected continuum clustering -> positive
--- transfer-gap core -> common cutoff/OS conclusion chain.
---
--- The energy-form route is exposed in parallel using the finite gap datum
--- constructed by YMClayBoundedFormParityExact.  Literal physical forms,
--- cutoff->continuum transport and the YM/OS same-object weld remain explicit
--- inputs; no status bit or citation is promoted into them.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -40,7 +30,7 @@ record DirectSelectedSourceClayInputs
     {spectrumSource : R281.ContinuumCovarianceSpectrumData
       {SpectralObservable = SpectralObservable} {Energy = Energy}
       dataSet extension tests}
-    (ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) : Set₁ where
+    (ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) : Set₂ where
   field
     directSelectedUpper : R387.DirectSelectedSpectralUpper base tests spectrumSource
     selectedLimitClosure : R342.SelectedLimitUpperClosure {dataSet = dataSet}
@@ -71,8 +61,7 @@ directSelectedSourceBuildsMassGapConclusion :
     {spectrumSource = spectrumSource}
     ContinuumGap ContinuumHamiltonian Vacuum GapParameter →
   Assembly.MassGapConclusion ContinuumHamiltonian Vacuum GapParameter
-directSelectedSourceBuildsMassGapConclusion
-    {spectrumSource = spectrumSource} inputs =
+directSelectedSourceBuildsMassGapConclusion inputs =
   Assembly.commonContinuumOSCompiler
     (commonContinuumOS inputs)
     (Final.directSelectedUpperBuildsPositiveTransferGapCore
@@ -81,7 +70,7 @@ directSelectedSourceBuildsMassGapConclusion
       (positiveCandidateGap inputs))
 
 record BoundedFormClayInputs
-    (Hilbert Scalar ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) : Set₁ where
+    (Hilbert Scalar ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) : Set₂ where
   field
     energyRoute : Assembly.EnergyFormRoute Hilbert Scalar
     commonContinuumOS :
