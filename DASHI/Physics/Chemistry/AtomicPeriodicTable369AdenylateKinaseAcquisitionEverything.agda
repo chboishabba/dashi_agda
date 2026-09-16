@@ -131,3 +131,10 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationP
 -- Hummer 2005 supply the cited diffusion-inference method lineage. Method-source
 -- DOI/PMID/QID metadata cannot create AdK numeric cells or experimental kinetics.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseKramersMethodAttributionAcquisitionExact
+
+-- Context-indexed barrier regime from machine-readable article text: ligand-free
+-- AdK has no significant open/closed barrier and multiple intermediates, whereas
+-- ligand-bound AdK favours closed conformations and has a large barrier to opening.
+-- These qualitative regime roles do not manufacture a barrier height, activation
+-- energy or experimental kinetic constant; DOI/QID metadata remains non-authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseBarrierRegimeTextAcquisitionExact
