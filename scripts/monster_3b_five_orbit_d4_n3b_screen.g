@@ -8,14 +8,18 @@
 # character restricted along the fusion contains theta as a subcharacter.
 #
 # Stage 2 tries to realize an actual D8 subgroup inside the constructible MN3B
-# model already used by monster_3b_actual_kernel_structure.g.  A concrete
+# model already used by monster_3b_actual_kernel_structure.g. A concrete
 # subgroup is promoted only after an explicit isomorphism from the canonical D4
 # has transported the canonical class representatives into that subgroup, and
 # every transported representative maps uniquely to an MN3B table class by the
 # pair (element order, ambient conjugacy-class size).
 #
-# No character match creates the Selected3BNormalizerMonsterActionWeld or an
-# intertwiner on the selected Monster carrier.
+# The runtime receipt is deliberately fail-locating: AtlasRep realization,
+# subgroup discovery, canonical isomorphism, unique ambient class fusion,
+# admissibility of the realized fusion and character compatibility are retained
+# as separate booleans. No character match creates the
+# Selected3BNormalizerMonsterActionWeld or an intertwiner on the selected
+# Monster carrier.
 
 if LoadPackage("ctbllib") <> true then
   Error("CTblLib is required");
@@ -67,8 +71,6 @@ if fail in [classE,classR2,classR,classAxis,classDiag] then
   Error("failed to identify canonical D4 classes");
 fi;
 canonicalClassOrder := [classE,classR2,classR,classAxis,classDiag];
-canonicalClassRepresentatives := List(canonicalClassOrder,
-  i -> Representative(d4Classes[i]));
 canonicalTargetValues := List(canonicalClassOrder, i -> targetValues[i]);
 if canonicalTargetValues <> [5,5,1,3,3] then
   Error("five-orbit D4 action does not reproduce target character (5,5,1,3,3)");
@@ -147,6 +149,7 @@ groupNames := [
   "3^1+12.2.Suz.2"
 ];
 G := fail;
+atlasGroupRealized := false;
 for groupName in groupNames do
   infos := AllAtlasGeneratingSetInfos(groupName);
   infos := Filtered(infos, info -> IsBound(info.size) and info.size = expectedGroupOrder);
@@ -154,6 +157,7 @@ for groupName in groupNames do
     candidate := AtlasGroup(info);
     if candidate <> fail and Size(candidate) = expectedGroupOrder then
       G := candidate;
+      atlasGroupRealized := true;
       break;
     fi;
   od;
@@ -163,6 +167,10 @@ od;
 actualD4 := fail;
 actualFusion := fail;
 actualCompatible := false;
+d4SubgroupFound := false;
+canonicalIsomorphismFound := false;
+ambientClassFusionUnique := false;
+actualFusionIsPossible := false;
 
 if G <> fail then
   P := SylowSubgroup(G,2);
@@ -178,6 +186,7 @@ if G <> fail then
       H := Group([rr,candidatesS[1]]);
       if Size(H) = 8 and IsNonabelian(H) then
         actualD4 := H;
+        d4SubgroupFound := true;
         break;
       fi;
     fi;
@@ -186,6 +195,7 @@ if G <> fail then
   if actualD4 <> fail then
     canonicalToActual := IsomorphismGroups(d4Group,actualD4);
     if canonicalToActual <> fail then
+      canonicalIsomorphismFound := true;
       mnOrders := OrdersClassRepresentatives(mn3b);
       mnSizes := SizesConjugacyClasses(mn3b);
       candidateFusion := List([1..Length(d4Classes)], i -> fail);
@@ -208,8 +218,10 @@ if G <> fail then
       od;
 
       if unique then
+        ambientClassFusionUnique := true;
         actualFusion := candidateFusion;
         if actualFusion in possibleFusions then
+          actualFusionIsPossible := true;
           compatibleFusions := List(compatible, item -> item.fusion);
           actualCompatible := actualFusion in compatibleFusions;
         fi;
@@ -218,8 +230,10 @@ if G <> fail then
   fi;
 fi;
 
+actualD4SubgroupRealized := d4SubgroupFound and canonicalIsomorphismFound and ambientClassFusionUnique;
+
 # ----------------------------------------------------------------------
-# Receipt.  Character compatibility is not action/intertwiner authority.
+# Receipt. Character compatibility is not action/intertwiner authority.
 # ----------------------------------------------------------------------
 
 JsonBool := function(x)
@@ -243,7 +257,12 @@ AppendTo(output,"  \"target_character\": [5,5,1,3,3],\n");
 AppendTo(output,"  \"target_multiplicities\": {\"A1\":3,\"A2\":0,\"B1\":1,\"B2\":1,\"E\":0},\n");
 AppendTo(output,"  \"possible_fusion_count\": ",String(Length(possibleFusions)),",\n");
 AppendTo(output,"  \"character_compatible_fusion_count\": ",String(Length(compatible)),",\n");
-AppendTo(output,"  \"actual_d4_subgroup_realized\": ",JsonBool(actualD4 <> fail and actualFusion <> fail),",\n");
+AppendTo(output,"  \"atlas_group_realized\": ",JsonBool(atlasGroupRealized),",\n");
+AppendTo(output,"  \"d4_subgroup_found\": ",JsonBool(d4SubgroupFound),",\n");
+AppendTo(output,"  \"canonical_isomorphism_found\": ",JsonBool(canonicalIsomorphismFound),",\n");
+AppendTo(output,"  \"ambient_class_fusion_unique\": ",JsonBool(ambientClassFusionUnique),",\n");
+AppendTo(output,"  \"actual_fusion_is_possible\": ",JsonBool(actualFusionIsPossible),",\n");
+AppendTo(output,"  \"actual_d4_subgroup_realized\": ",JsonBool(actualD4SubgroupRealized),",\n");
 AppendTo(output,"  \"actual_character_compatible\": ",JsonBool(actualCompatible),",\n");
 if actualFusion = fail then
   AppendTo(output,"  \"actual_realized_fusion\": null,\n");
@@ -260,6 +279,10 @@ CloseStream(output);
 
 Print("D4/N3B character screen written: possible=",Length(possibleFusions),
   "; compatible=",Length(compatible),
-  "; actual-realized=",actualD4 <> fail and actualFusion <> fail,
+  "; atlas-group=",atlasGroupRealized,
+  "; d4-found=",d4SubgroupFound,
+  "; canonical-iso=",canonicalIsomorphismFound,
+  "; fusion-unique=",ambientClassFusionUnique,
+  "; fusion-possible=",actualFusionIsPossible,
   "; actual-compatible=",actualCompatible,"\n");
 QUIT;
