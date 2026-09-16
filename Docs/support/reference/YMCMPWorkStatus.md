@@ -231,6 +231,31 @@ optional coefficient producer:
 
 Do not merge these queues merely because all mention CMP116.
 
+### BC1 source lane retained from the #949 form-flow pass
+
+The active raw-to-BC1 route remains a lower-level source/representation lane,
+not the present mass-gap terminal consumer.  Its compact preferred path is:
+
+```text
+finite-history raw CMP119 objects
+  -> concrete Sect.-2 predicate family
+       ELocalizedAnalytic := exact same-E localization record
+  -> genuine CMP122 Theorem-1 witness on that concrete family
+  -> identity E-localization decoder
+  -> active raw Sect.-2 witness
+  -> active regular-E/localization form
+  -> active CMP109/CMP116 continuation
+  -> BC1 representation.
+```
+
+On that route, decoder/raw-witness assembly, regular-E form projection, active
+continuation, common-radius construction, and BC1 same-E identity are compiler
+or representation plumbing, not primitive payments.  The theorem-bearing BC1
+inputs after representation remain the genuine selected CMP122 witness, physical
+SecondVariationLinearity on the exact active `E_k` carrier, literal CMP109
+Eq.(5.1) binding on that same continuation, and literal extraction of the
+finite normalized CMP116 analytic demands.
+
 ## Primary source coordinates retained
 
 - CMP99 — Bałaban, *Propagators for Lattice Gauge Theories in a Background Field*, DOI `10.1007/BF01240355`.
