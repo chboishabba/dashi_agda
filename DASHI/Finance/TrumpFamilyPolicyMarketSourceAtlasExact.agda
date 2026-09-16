@@ -11,20 +11,22 @@ import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Trade
 ------------------------------------------------------------------------
 -- POLICY / MARKET EXPOSURE SOURCE ATLAS
 --
--- This layer exists because ownership evidence, policy text and claims about
--- knowledge/influence are not the same proposition.  The canonical GrabAGun
--- fixture triangulates:
+-- Ownership evidence, policy text, market-information products and claims about
+-- knowledge/influence are separate propositions.  Two canonical fixtures are
+-- retained:
 --
+-- GrabAGun:
 -- 1. SEC ownership/board evidence already acquired by the trade atlas;
--- 2. ATF's primary text for RIN 1140-AB05, Revising Non-Over-the-Counter
---    Firearms Transaction Requirements (released 2026-05-08; no DOI);
--- 3. Reuters, "Trump Jr.'s 'Amazon of guns' could make millions under new
---    proposed firearm rule" (2026-07-02; no DOI).
+-- 2. ATF RIN 1140-AB05 primary proposed-rule text (2026-05-08; no DOI);
+-- 3. Reuters independent report (2026-07-02; no DOI), including attributed
+--    statements concerning prior knowledge/influence.
 --
--- Reuters reports statements from Trump Jr.'s spokesperson, GrabAGun's CEO,
--- ATF chief counsel Robert Leider, and the White House concerning prior
--- knowledge/influence.  Those statements are retained as attributed
--- counterevidence; they do not become proof of a universal negative.
+-- Truth API:
+-- 1. TMTG's SEC-filed issuer exhibit describing low-latency access to public
+--    Truth Social posts and HFT/algorithmic-firm target customers;
+-- 2. Reuters independent reporting on proposed commercial pricing/market use;
+-- 3. the Schiff/Warren request that the SEC investigate, retained as an
+--    attributed regulatory concern rather than an adjudicated finding.
 ------------------------------------------------------------------------
 
 data PolicyMarketEvidenceKind : Set where
@@ -72,8 +74,7 @@ grabAGunATFNonOTCProposal = policyMarketEvidence
   grabAGunATFArtifact
   "Revising Non-Over-the-Counter Firearms Transaction Requirements (RIN 1140-AB05)"
   "Bureau of Alcohol, Tobacco, Firearms and Explosives"
-  "2026-05-08"
-  "no DOI"
+  "2026-05-08" "no DOI"
   "Supports the existence, scope and stated purpose of the proposed rule only. It does not identify beneficiaries, knowledge, influence, motive or realized market impact."
   true false false false false
 
@@ -93,14 +94,9 @@ grabAGunReutersPolicyExposure = policyMarketEvidence
   grabAGunReutersArtifact
   "Trump Jr.'s 'Amazon of guns' could make millions under new proposed firearm rule"
   "Reuters"
-  "2026-07-02"
-  "no DOI"
+  "2026-07-02" "no DOI"
   "Supports independent reporting on structural business exposure and the existence/content of attributed denials/statements. It does not prove absence of knowledge or influence, realized profit, illegality, or policy causation."
   false true false false false
-
-------------------------------------------------------------------------
--- Knowledge/influence boundary.
-------------------------------------------------------------------------
 
 record GrabAGunKnowledgeBoundary : Set where
   constructor grabAGunKnowledgeBoundaryRecord
@@ -118,14 +114,7 @@ open GrabAGunKnowledgeBoundary public
 
 grabAGunKnowledgeBoundary : GrabAGunKnowledgeBoundary
 grabAGunKnowledgeBoundary =
-  grabAGunKnowledgeBoundaryRecord
-    true true true true false false false false
-
-------------------------------------------------------------------------
--- Triangulated source object.  This is not a corruption/conflict verdict; it is
--- a typed evidence surface for downstream PNF, game-theory and dashiTRADE
--- consumers.
-------------------------------------------------------------------------
+  grabAGunKnowledgeBoundaryRecord true true true true false false false false
 
 record PolicyMarketTriad : Set₁ where
   constructor policyMarketTriad
@@ -150,6 +139,56 @@ canonicalGrabAGunPolicyMarketTriad = policyMarketTriad
   refl refl refl
   "SEC ownership/role + ATF proposed-rule text + Reuters independent exposure/counterevidence synthesis; knowledge, influence and realized benefit remain unpaid."
 
+------------------------------------------------------------------------
+-- Truth API: information-latency monetisation is a market-structure edge, not
+-- evidence of material nonpublic information or a securities-law violation.
+------------------------------------------------------------------------
+
+truthAPIReutersArtifact : Source.SourceArtifact
+truthAPIReutersArtifact = Source.sourceArtifact
+  "Reuters-2026-07-17-Truth-API-market-access"
+  Source.documentaryArtifact
+  "https://www.reuters.com/business/media-telecom/trump-media-pitched-100000-monthly-fee-fast-feed-us-presidents-posts-ft-reports-2026-07-17/"
+  "Reuters"
+
+truthAPIReutersMarketAccess : PolicyMarketEvidence
+truthAPIReutersMarketAccess = policyMarketEvidence
+  "Truth-API-Reuters-2026-07-17"
+  "Trump Media & Technology Group / Truth API"
+  "Reuters reported that Trump Media had pitched institutional customers a high-priced low-latency feed for Truth Social posts, with proposed monthly pricing up to $100,000 and a lower long-term-commitment price; the report framed the service as faster access to public posts for traders."
+  independentReportingWithAttributedStatements
+  truthAPIReutersArtifact
+  "Trump Media pitched $100,000 monthly fee for fastest feed of US president's posts, sources say"
+  "Reuters"
+  "2026-07-17" "no DOI"
+  "Supports independent reporting on proposed commercial terms and market-access design. It does not establish MNPI, trading profit, illegality, policy influence or a particular customer's use."
+  false true false false false
+
+record TruthAPIPolicyMarketTriad : Set₁ where
+  constructor truth-api-policy-market-triad
+  field
+    issuerProductEvidence : Trade.TradeEvidenceClaim
+    independentMarketEvidence : PolicyMarketEvidence
+    attributedRegulatoryConcern : Trade.TradeEvidenceClaim
+    issuerProductPrimaryPaid : Trade.primarySourcePaid issuerProductEvidence ≡ true
+    independentMarketCorroborationPaid : independentCorroborationPaid independentMarketEvidence ≡ true
+    regulatoryConcernIsAttributed : Trade.supportMode attributedRegulatoryConcern ≡ Trade.attributedConcernSupport
+    materialNonpublicInformationPaid : Bool
+    legalViolationPaid : Bool
+    profitableTradingStrategyPaid : Bool
+    triadReference : String
+
+open TruthAPIPolicyMarketTriad public
+
+canonicalTruthAPIPolicyMarketTriad : TruthAPIPolicyMarketTriad
+canonicalTruthAPIPolicyMarketTriad = truth-api-policy-market-triad
+  Trade.truthAPIPrimary
+  truthAPIReutersMarketAccess
+  Trade.truthAPIRegulatoryConcern
+  refl refl refl
+  false false false
+  "SEC-filed issuer product disclosure + Reuters market-access synthesis + attributed Schiff/Warren SEC-investigation request; MNPI, legal violation and profitable strategy remain unpaid."
+
 record PolicyMarketAtlasBoundary : Set where
   constructor policy-market-atlas-boundary
   field
@@ -157,8 +196,10 @@ record PolicyMarketAtlasBoundary : Set where
     policyExposureDoesNotEqualRealizedBenefit : Bool
     denialDoesNotEqualProvedAbsence : Bool
     timingDoesNotEqualCausation : Bool
+    lowLatencyPublicFeedDoesNotEqualMNPI : Bool
+    investigationRequestDoesNotEqualViolation : Bool
     sourceTriangulationCanReduceEvidenceDebt : Bool
 
 canonicalPolicyMarketAtlasBoundary : PolicyMarketAtlasBoundary
 canonicalPolicyMarketAtlasBoundary =
-  policy-market-atlas-boundary true true true true true
+  policy-market-atlas-boundary true true true true true true true
