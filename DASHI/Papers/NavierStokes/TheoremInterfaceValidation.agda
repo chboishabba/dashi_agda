@@ -29,6 +29,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleRegre
 import DASHI.Physics.Closure.NSTriadKNLowRemoteSpectralDatumRound98Regression
 import DASHI.Physics.Closure.NSTriadKNCollarHeatNestedSameOutputWeldRegression
 import DASHI.Physics.Closure.NSTriadKNOutputLocalSelectorFixedOutputReductionRegression
+import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeRegression
 
 ------------------------------------------------------------------------
 -- Focused cumulative validation root for the canonical Paper-1 interface.
@@ -37,8 +38,8 @@ import DASHI.Physics.Closure.NSTriadKNOutputLocalSelectorFixedOutputReductionReg
 -- the authoritative owners it imports. The canonical coordinator regression,
 -- thin S2b successor delta, explicit A/B portability audit, strict S0/S1/S2
 -- representation regressions, and the current S2b2 sign/no-go/collar/
--- three-region/gap/live-norm/low-remote-datum/collar-carrier/output-local
--- fixed-output regressions are imported so the current A/B routing and
+-- three-region/gap/live-norm/low-remote-datum/collar-carrier/output-local/
+-- local-Hermitian-G1 regressions are imported so the current A/B routing and
 -- physical phase seams are checked by the same root whenever it is actually
 -- kernel-run.
 --
@@ -49,11 +50,11 @@ import DASHI.Physics.Closure.NSTriadKNOutputLocalSelectorFixedOutputReductionReg
 -- no-go, exact collar/remote split, exact low/collar/remote flux identity,
 -- two-shell concrete frequency gap, rational live-norm transport, the literal
 -- low/remote R98 datum, the collar heat-nested same-output weld, the generic
--- output-local fixed-output selector reduction and A/B portability
--- classification may all be source-written while concrete scalar FTC /
--- integration authorities, the quantitative unweighted fixed-output collar
--- payment, initial ceiling and retained-viscosity payments remain unobserved or
--- open.
+-- output-local fixed-output selector reduction, the local R571 Hermitian G1
+-- envelope and A/B portability classification may all be source-written while
+-- concrete scalar FTC / integration authorities, the quantitative unweighted
+-- fixed-output collar payment, G2 physical state-difference transport, initial
+-- ceiling and retained-viscosity payments remain unobserved or open.
 ------------------------------------------------------------------------
 
 status : Paper.NSPaperTheoremStatus
