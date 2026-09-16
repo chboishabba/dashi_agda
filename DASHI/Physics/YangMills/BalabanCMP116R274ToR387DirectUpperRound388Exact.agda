@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanCMP116R274ToR387DirectUpperRound388Exact w
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
