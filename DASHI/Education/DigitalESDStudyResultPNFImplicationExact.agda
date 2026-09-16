@@ -8,15 +8,14 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
 import DASHI.Education.DigitalESDQuantitativeUncertaintyAcquisitionExact as Deng
-import DASHI.Education.DigitalESDStudyClaimQuantitativePilotExact as Brassler
-import DASHI.Education.DigitalESDStudyClaimPilotExact as Pilot
+import DASHI.Education.DigitalESDSourceAttributionCorrectionExact as Correction
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 import DASHI.Education.DigitalESDRandomizedCausalAcquisitionExact as Green
 
 ------------------------------------------------------------------------
 -- STUDY RESULT -> PNF -> DESIGN/STATISTICS -> IMPLICATION
 --
--- These are bounded assertions that the current extraction actually pays.  A
+-- These are bounded assertions that the current extraction actually pays. A
 -- paper's discussion/conclusion may state something stronger; promotion from a
 -- paid PNF assertion to a stronger causal, transport or normative assertion
 -- requires a new evidence receipt under PredicateNormalFormEvidenceAuditExact.
@@ -187,7 +186,7 @@ greenPaidAssertion = PNF.predicateNormalAssertion
   "exact primary DOI 10.3390/su14010394; randomized assignment retained, post-randomization exclusion/estimand residual retained"
 
 ------------------------------------------------------------------------
--- Combined audits.  Each paid PNF carries its own statistics and residuals;
+-- Combined audits. Each paid PNF carries its own statistics and residuals;
 -- intersectional/material overlays are mandatory downstream questions rather
 -- than silently inferred from the study's reported sample or outcome.
 ------------------------------------------------------------------------
@@ -204,7 +203,7 @@ dengAudit = study-result-pnf-audit
 
 brasslerAudit : StudyResultPNFAudit
 brasslerAudit = study-result-pnf-audit
-  (PNF.PredicateNormalAssertion.provenance brasslerPaidAssertion `seq` Brassler.Correction.brasslerOERESDPublisherSpellingSource)
+  Correction.brasslerOERESDPublisherSpellingSource
   brasslerPaidAssertion
   "quasi-experimental self-selected groups; same-cohort comparator"
   "reported N=409; Time×Group F(1,191)=22.4; p<.001; partial eta-squared=.105"
@@ -213,7 +212,6 @@ brasslerAudit = study-result-pnf-audit
   "audit platform/device/OER hosting, openness, repair/reuse and infrastructure burden separately from pedagogical outcome"
   "causal effect, analysis-n reconstruction, objective skill performance and transport remain unpaid"
 
--- Use the canonical acquisition source object directly for Descamps.
 descampsAudit : StudyResultPNFAudit
 descampsAudit = study-result-pnf-audit
   Acquisition.descampsDigitalSobrietySource descampsPaidAssertion
