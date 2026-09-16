@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as Intersection
+import DASHI.Interop.PNFHyperfabric369 as PNF369
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.LearningAlgebra as Learning
 import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge as Trauma
@@ -22,7 +23,7 @@ import DASHI.Education.DigitalInnovationESDTransformationExact as Transformation
 --
 -- This module does not create a new loom, hyperfabric, memory algebra,
 -- learning algebra, trauma theory, cultural authority, or seven-generation
--- calculus.  It composes canonical owners and adds only the digital-ESD
+-- calculus. It composes canonical owners and adds only the digital-ESD
 -- reciprocal obligations and admission/non-promotion boundaries.
 ------------------------------------------------------------------------
 
@@ -119,7 +120,8 @@ sevenGenerationHorizonDoesNotCreateCulturalAuthority :
 sevenGenerationHorizonDoesNotCreateCulturalAuthority ()
 
 ------------------------------------------------------------------------
--- Canonical imported boundaries.
+-- Canonical imported boundaries. Retain the exact owner objects, not merely
+-- local booleans saying that some machinery exists.
 ------------------------------------------------------------------------
 
 memoryRevaluationPreservesRememberedEvent :
@@ -128,6 +130,16 @@ memoryRevaluationPreservesRememberedEvent :
   ≡ Memory.rememberedEvent memory
 memoryRevaluationPreservesRememberedEvent memory value =
   Memory.revaluePreservesRememberedEvent memory value
+
+canonicalPNFDocumentTimeHyperfabricBoundary :
+  PNF369.PNFHyperfabric369Surface
+canonicalPNFDocumentTimeHyperfabricBoundary =
+  PNF369.canonicalPNFHyperfabric369Surface
+
+canonicalTraumaAuthorityBoundary :
+  Trauma.TraumaMemoryHypervoxelAuthorityBoundary
+canonicalTraumaAuthorityBoundary =
+  Trauma.canonicalTraumaMemoryHypervoxelAuthorityBoundary
 
 canonicalKimmererTransferResidualBoundary :
   Kimmerer.KimmererTransferResidualBoundary
@@ -144,6 +156,8 @@ record DigitalESDReciprocalBraid : Set where
     transformationBoundary : Transformation.IntegratedTransitionBoundary
     aliceEpistemicGovernanceBoundary :
       Alice.AliceBrownDigitalESDEpistemicGovernanceBridge
+    documentTimeHyperfabricBoundary : PNF369.PNFHyperfabric369Surface
+    traumaAuthorityBoundary : Trauma.TraumaMemoryHypervoxelAuthorityBoundary
     kimmererTransferBoundary : Kimmerer.KimmererTransferResidualBoundary
     sevenGenerationBoundary : Seven.SevenGenerationBNFBoundary
     patternMindBoundary : PatternMind.RelationalQiBridgeRegistry
@@ -179,6 +193,8 @@ canonicalDigitalESDReciprocalBraid =
     canonicalDirectionalObligations
     Transformation.canonicalIntegratedTransitionBoundary
     Alice.canonicalAliceBrownDigitalESDEpistemicGovernanceBridge
+    PNF369.canonicalPNFHyperfabric369Surface
+    Trauma.canonicalTraumaMemoryHypervoxelAuthorityBoundary
     Kimmerer.canonicalKimmererTransferResidualBoundary
     Seven.canonicalSevenGenerationBNFBoundary
     PatternMind.canonicalRelationalQiBridgeRegistry
@@ -190,14 +206,3 @@ canonicalDigitalESDReciprocalBraid =
     false refl
     false refl
     false refl
-
-------------------------------------------------------------------------
--- Trauma machinery is retained only as a safety/heterogeneity boundary.
--- Importing the canonical owner does not promote trauma into a general theory
--- of online learning.  The import is deliberately explicit so downstream
--- users cannot mistake absence of a local reconstruction for absence of the
--- canonical safety machinery.
-------------------------------------------------------------------------
-
-traumaSafetyOwnerRetained : Bool
-traumaSafetyOwnerRetained = true
