@@ -1,0 +1,19 @@
+module DASHI.Biology.Physical.DNASituatedObservationSourceAtlasValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.Biology.Physical.DNASituatedObservationSourceAtlasExact as Atlas
+
+boundary : Atlas.DNASituatedObservationSourceAtlasBoundary
+boundary = Atlas.canonicalDNASituatedObservationSourceAtlasBoundary
+
+standardFrameSourcePaid : Bool
+standardFrameSourcePaid = Atlas.standardFrameSourcePaid boundary
+
+sequenceContextSourcePaid : Bool
+sequenceContextSourcePaid = Atlas.sequenceContextSourcePaid boundary
+
+articleQidsMayRemainUnresolved : Bool
+articleQidsMayRemainUnresolved = Atlas.articleQidsMayRemainUnresolved boundary
+
+citationCreatesGeometryTruth : Bool
+citationCreatesGeometryTruth = Atlas.citationCreatesGeometryTruth boundary
