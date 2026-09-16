@@ -27,9 +27,19 @@ R1a/R1b final-near same-object representation
 
 RH stays behind the present YM same-object/source-calibration seam while theorem-bearing checked-near bytes remain unavailable.
 
-## 2. Current YM Pareto frontier — R378 cut
+## 2. Current YM Pareto frontier — R380 cut
 
-The preferred local BIDI route no longer treats `H_sub : d_sub <= M_marked` as a primitive theorem.
+R378 remains a valid historical-mark compatibility route, but R379/R380 show it is stronger than the **Hessian-coefficient consumer** needs.
+
+R375's theorem only observes a nonnegative scalar upper `U` satisfying
+
+```text
+selectedBoundarySubstitutionDistance(s) <= U.
+```
+
+It does not inspect whether `U` is the historical CMP116/CMP99 marked-input coordinate.
+
+The preferred coefficient route is therefore now:
 
 ```text
 CMP116 Sect.1 published parametric fixed-point family
@@ -37,28 +47,37 @@ CMP116 Sect.1 published parametric fixed-point family
   -> R370 direct Cauchy/mean-value parametric sensitivity
 
 R370 gives:
-  d_sub(s) <= L_par(M,r) * d_parameter
+  d_boundary^R370(s) <= U_par
+  U_par := L_par(M,r) * d_parameter
 
-single remaining scalar calibration:
-  L_par(M,r) * d_parameter <= M_marked
+one same-object boundary attachment:
+  d_selected^R373(s) = d_boundary^R370(iota s)
 
-therefore R378 constructs:
-  R351.CMP116SubstitutionMarkedSource
-
-then:
-  R351 selected attachment
-  -> R377 canonical selected distance
-  -> R376 H_sub splice
-  -> R375 marked Hessian coefficient lift.
+-> R380
+-> R379 consumer-visible distance upper
+-> R375 marked/coefficient lift
+-> ||Delta H_coeff|| <= L_Hessian * U_par.
 ```
 
-So the old standalone physical leaf
+No equality with a historical marked-input coordinate is required by this consumer.
+
+The R351 -> R377 -> R378 route remains valid when a downstream consumer genuinely needs the historical marked coordinate:
 
 ```text
-d_sub^src <= M_marked^src
+U_par <= M_marked
+-> R378 constructs R351 source package
+-> R377 canonical selected distance
+-> R376
+-> R375.
 ```
 
-is no longer primitive. Its source-facing content is factored into the already-owned parametric sensitivity plus one source/application calibration.
+Thus the scalar calibration
+
+```text
+L_par * d_parameter <= M_marked
+```
+
+is now **optional for the coefficient consumer**, not the first mandatory theorem leaf.
 
 ## 3. Current non-dominated YM payments
 
@@ -74,36 +93,47 @@ is no longer primitive. Its source-facing content is factored into the already-o
    Put the selected left/right parameters into the source complex domain used by R371/R372.
 
 4. **common radius / magnitude interpretation**  
-   R374 already removes duplicate radius-scalar debt. Remaining debt is application-specific interpretation of the canonical source radius and magnitude bound on the selected family.
+   R374 removes duplicate radius-scalar debt. Remaining debt is application-specific interpretation of the canonical source radius and magnitude bound on the selected family.
 
-### B. Parameter-to-mark calibration — current `H_sub` leaf
+### B. Preferred direct coefficient seam
 
 5. **selected parameter-distance calibration**
 
 ```text
-parameterDistance(left,right) <= sourceParameterDistance
+parameterDistance(left,right) <= sourceParameterDistance.
 ```
 
-6. **parametric scale to marked input**
+6. **R373 <-> R370 boundary-distance same-object map**
+
+```text
+selectedBoundarySubstitutionDistance_R373(s)
+  = boundarySubstitutionDistance_R370(iota s).
+```
+
+R370 + item 6 -> R380 -> R379 -> R375. No historical mark calibration is required here.
+
+### C. Historical-mark compatibility seam — optional unless semantically consumed
+
+7. If a downstream theorem genuinely consumes the historical/source marked coordinate, prove
 
 ```text
 sourceParametricLipschitz * sourceParameterDistance
   <= sourceMarkedInput.
 ```
 
-R370 + item 6 -> R378 -> R351. No fresh fixed-point displacement theorem is required.
+Then use R378 -> R351 -> R377 -> R376 -> R375.
 
-### C. Remaining selected attachments / terminal coordinates
+### D. Remaining selected attachments / terminal coordinates
 
-7. R351 selected mark attachment / R377 selected carrier identity;
-8. R352 selected local-stability attachment;
-9. R348 `C_attach` mixed-log coefficient attachment;
-10. R346 `D_time` / same-family temporal-to-continuum covariance decay;
-11. existing clustering-to-gap compiler.
+8. R348 `C_attach` mixed-log coefficient same-object attachment;
+9. R346 `D_time` / selected physical-distance-to-time semantics;
+10. R346 literal selected differentiated localization on the shared Hessian mark;
+11. finite-to-continuum same-family covariance limit;
+12. existing clustering-to-gap compiler.
 
 This is Pareto ordering, not a fixed logical sequence. Recut immediately if one source theorem supplies several coordinates.
 
-## 4. BIDI route after R375--R378
+## 4. BIDI route after R375--R380
 
 Backward:
 
@@ -111,21 +141,15 @@ Backward:
 SameHamiltonianPhysicalMassGap
 <- same-family continuum covariance decay
 <- R346 finite selected covariance upper
-<- { C_attach , H_stab , H_sub , D_time }
+<- { C_attach , literal selected localization , D_time }
 
-H_stab
-<- selected R352 attachment
-<- R372/R373 literal Hessian sensitivity
-<- R103/R375 same physical Hessian carrier
-<- shared analytic family/radius/domain attachment.
-
-H_sub
-<- R351 selected source object
-<- R378
-<- R370 parametric fixed-point sensitivity
+selected coefficient/Hessian payment
+<- R375
+<- R379 arbitrary proof-bearing substitution-distance upper
+<- R380 R370 parametric upper
 <- R371 published CMP116 analytic fixed-point family
 <- selected source-family/domain/radius/distance attachment
-   + one scalar parameter-to-mark calibration.
+   + one R373<->R370 distance same-object map.
 ```
 
 Forward:
@@ -139,20 +163,27 @@ CMP116 Sect.1:
 
 source same-object attachments
 -> R370 fixed-point sensitivity
--> d_sub <= L_par * d_parameter
+-> d_boundary^R370 <= U_par
 
-L_par * d_parameter <= M_marked
--> R378 constructs R351 source object
--> R377 canonical selected distance
--> R376
+R373 boundary distance = R370 boundary distance on same selected object
+-> R380
+-> R379
 -> R375 coefficient/Hessian payment.
+```
+
+Compatibility branch:
+
+```text
+U_par <= M_marked
+-> R378 -> R351 -> R377 -> R376 -> R375.
 ```
 
 ## 5. Dominated / optional YM routes
 
-Still valid donors, but not architectural prerequisites for the present consumer:
+Still valid donors, but not architectural prerequisites for the present coefficient consumer:
 
 ```text
+R351--R378 historical-mark route when no mark semantics are consumed;
 R353--R363 marked-walk / H_scale / collar / charging route;
 R364 separate D^3-style analytic-path route;
 R365--R369 contraction + cross-parameter map-defect route;
@@ -161,7 +192,7 @@ Row-C Heat/Doob/Langevin;
 unified polymer/Schwinger norm route.
 ```
 
-Do not reopen these unless the current same-object/calibration path blocks or one donor pays a live coordinate directly.
+Do not reopen these unless the current same-object path blocks or one donor pays a live coordinate directly.
 
 ## 6. Source evidence currently supporting the direct route
 
@@ -181,7 +212,7 @@ Primary source:
 
 Tadeusz Bałaban, *Renormalization Group Approach to Lattice Gauge Field Theories II. Cluster Expansions*, Commun. Math. Phys. 116 (1988), DOI `10.1007/BF01239022`.
 
-These facts support the source theorem shape. They do not by citation alone identify the selected family, metric, parameter distance, mark, or calibration.
+These facts support the source theorem shape. They do not by citation alone identify the selected family, metric, parameter distance, boundary map, mark, or calibration.
 
 ## 7. Current RH route
 
@@ -202,19 +233,21 @@ Do not allow:
 source status -> theorem payment
 source text/citation -> selected same-object family identity
 analyticity -> arbitrary metric/distance calibration
-uniform bound -> exact marked-input bound
-R370 parametric sensitivity -> parameter-to-mark calibration
+uniform bound -> exact historical marked-input identity
+R370 parametric sensitivity -> R373/R370 same-object distance map
+R379 distance upper -> historical mark identity
+R380 compiler -> source family/domain attachment
 R374 common radius scalar -> automatic consumer margin interpretation
 CMP99 marked propagator comparison -> substituted-background displacement
-R375/R376/R377 compiler closure -> source acquisition
 shared symbols H/D/C/s -> same-object proof.
 ```
 
 ## 9. Validation boundary
 
-- R375--R378 are source-written compiler/reduction surfaces on #944.
+- R375--R380 are source-written compiler/reduction surfaces on #944.
 - repository `machineChecked` fields are not fresh exact-head kernel receipts.
-- R378 does not prove `L_par * d_parameter <= M_marked`; it exposes that as the remaining scalar calibration.
+- R379/R380 do not prove the selected source-family or boundary same-object attachment.
+- R378 remains available but its historical mark calibration is no longer mandatory for R375's coefficient consumer.
 - no continuum YM construction, mass-gap theorem, Clay completion or RH proof is claimed.
 
 ## 10. Update log
@@ -227,4 +260,6 @@ shared symbols H/D/C/s -> same-object proof.
 - R375: direct Hessian sensitivity feeds the existing marked coefficient Cauchy lift; separate H_scale is not mandatory.
 - R376: R351 supplies the distance-to-marked-input condition for R375.
 - R377: selected R351/R373 substitution distance is one canonical coordinate; duplicate equality becomes `refl`.
-- **R378:** R351's standalone source displacement theorem is factored through R370. The remaining `H_sub` source payment is one parameter-to-mark scalar calibration after same-object family/domain/radius attachment.
+- R378: R351 source displacement is factored through R370 plus one parametric-to-historical-mark calibration.
+- **R379:** audits R375's actual consumer and replaces the semantic `markedInput` requirement by the least-privilege proof-bearing `distanceUpper` coordinate.
+- **R380:** instantiates R379 directly with R370's `U_par = L_par * d_parameter`; the only new preferred-route weld is the R373<->R370 selected boundary-distance same-object map.
