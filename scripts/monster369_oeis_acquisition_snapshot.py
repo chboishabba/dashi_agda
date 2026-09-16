@@ -62,6 +62,20 @@ SEQUENCES: dict[str, dict[str, object]] = {
             "196830=3^9*10. Arithmetic structure only."
         ),
     ),
+    "A058678": _node(
+        "A058678",
+        title="McKay-Thompson series of class 42d for Monster",
+        class_label="42d",
+        selected_values={17496},
+        formula="q^(1/2)*eta(q^3)*eta(q^7)/(eta(q)*eta(q^21))",
+        authority="source-navigation",
+        url="https://oeis.org/A058678",
+        notes=(
+            "Monster 42d McKay-Thompson source coordinate. The documented coefficient "
+            "17496 is retained as a positive bridge target against the independently "
+            "source-paid N(3B) restriction degree 2*729*12; no same-object bridge is implied."
+        ),
+    ),
     "A007255": _node(
         "A007255",
         title="McKay-Thompson series of class 6B for Monster",
@@ -166,6 +180,15 @@ RELATIONS: dict[str, dict[str, object]] = {
         "paid": True,
         "same_object_paid": False,
     },
+    "42d-17496-to-n3b-restriction": {
+        "sources": ["A058678"],
+        "observed": (
+            "Monster 42d McKay-Thompson coefficient 17496 equals the independently "
+            "source-paid N(3B) restriction constituent degree 2*729*12"
+        ),
+        "paid": True,
+        "same_object_paid": False,
+    },
     "6b-q6-to-c6-spectrum-32772": {
         "sources": ["A007255", "A045485", "A121665"],
         "observed": "normalization-stable q^6 coefficient 32772 equals independent C6 m1=m5=32772",
@@ -183,7 +206,7 @@ RELATIONS: dict[str, dict[str, object]] = {
 
 def build_report() -> dict[str, object]:
     return {
-        "schema": "monster369-oeis-acquisition-snapshot-v2",
+        "schema": "monster369-oeis-acquisition-snapshot-v3",
         "retrieved": RETRIEVED,
         "sequence_count": len(SEQUENCES),
         "sequences": SEQUENCES,
