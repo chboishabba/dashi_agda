@@ -2,45 +2,52 @@ module DASHI.Wikimedia.IbrahimMonster369OEISSeparatingHyperfabricRuntimeReceiptV
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Wikimedia.IbrahimMonster369OEISSeparatingHyperfabricRuntimeReceiptExact as R
 
 receipt : R.Monster369RuntimeReceipt
 receipt = R.currentMonster369RuntimeReceipt
 
-coordinateCountRegression : R.coordinateCount receipt ≡ 23
+coordinateCountRegression : R.coordinateCount receipt ≡ 24
 coordinateCountRegression = refl
 
 edgeCountRegression : R.edgeCount receipt ≡ 5
 edgeCountRegression = refl
 
-minimumSizeRegression : R.runtimeMinimumTransversalSize receipt ≡ 2
-minimumSizeRegression = refl
+previousMinimumSizeRegression : R.previousRuntimeMinimumTransversalSize receipt ≡ 2
+previousMinimumSizeRegression = refl
 
-minimumCountRegression : R.runtimeMinimumTransversalCount receipt ≡ 1
-minimumCountRegression = refl
+previousMinimumCountRegression : R.previousRuntimeMinimumTransversalCount receipt ≡ 1
+previousMinimumCountRegression = refl
 
-characterCoordinateRegression :
-  R.minimumContainsMonster3B65610Character receipt ≡ true
-characterCoordinateRegression = refl
+previousRuntimeObservedRegression :
+  R.previousExhaustiveRuntimeSearchObserved receipt ≡ true
+previousRuntimeObservedRegression = refl
 
-actionCoordinateRegression :
-  R.minimumContainsActualWeylActionCoordinate receipt ≡ true
-actionCoordinateRegression = refl
+currentRuntimeNotObservedRegression :
+  R.exactCurrentRevisionRuntimeObserved receipt ≡ false
+currentRuntimeNotObservedRegression = refl
+
+currentDriftGuardNotObservedRegression :
+  R.exactCurrentRevisionAgdaCoordinateDriftGuardObserved receipt ≡ false
+currentDriftGuardNotObservedRegression = refl
+
+c6ExpansionRegression :
+  R.c6WeightTwoSpectrumCoordinateAddedAfterPreviousRuntime receipt ≡ true
+c6ExpansionRegression = refl
 
 oeisNegativeControlRegression :
   R.oeisOnlyHitsEveryDeclaredConsumer receipt ≡ false
 oeisNegativeControlRegression = refl
 
-pythonAuthorityFirewallRegression :
+pythonAuthorityRegression :
   R.pythonRuntimeCreatesMonsterTheorem receipt ≡ false
-pythonAuthorityFirewallRegression = refl
+pythonAuthorityRegression = refl
 
-kernelMinimumFirewallRegression :
+kernelMinimumRegression :
   R.minimumHittingSetKernelProved receipt ≡ false
-kernelMinimumFirewallRegression = refl
+kernelMinimumRegression = refl
 
-coordinateProofFirewallRegression :
+coordinateProofRegression :
   R.coordinateSelectionCreatesConsumerProof receipt ≡ false
-coordinateProofFirewallRegression = refl
+coordinateProofRegression = refl
