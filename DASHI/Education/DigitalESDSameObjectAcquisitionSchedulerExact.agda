@@ -7,16 +7,21 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.RequirementProducerSchedulerExact as CoreScheduler
 import DASHI.Education.DigitalESDAcquisitionSnowballParetoExact as Acquisition
 import DASHI.Education.DigitalESDICTLifecycleCircularitySnowballExact as ICT
 
 ------------------------------------------------------------------------
--- SAME-OBJECT ACQUISITION SCHEDULER
+-- SAME-OBJECT ACQUISITION SCHEDULER ADAPTER
 --
--- This is a producer router over already-declared acquisition debt.  It does
--- not create evidence and it does not permit literature similarity, standards,
--- or citations to discharge same-object, future, context-transfer, or
--- participant-authority obligations.
+-- This module supplies only digital-ESD questions, coordinates and producer
+-- identities.  Requirement/missing-coordinate/producer scheduling semantics
+-- are imported from the repository's canonical
+-- RequirementProducerSchedulerExact; no parallel planner is introduced here.
+--
+-- It does not create evidence and it does not permit literature similarity,
+-- standards, or citations to discharge same-object, future, context-transfer,
+-- or participant-authority obligations.
 --
 -- Standing attribution invariant:
 --   * source identity + role + same-object status survive every round;
@@ -116,6 +121,88 @@ producerForRefinedLifecycle ICT.deploymentHardwareCircularity = hardwareCircular
 producerForRefinedLifecycle ICT.deploymentRepairSupport = procurementRepairSupportProducer
 producerForRefinedLifecycle ICT.deploymentServiceLife = serviceLifeSupportProducer
 producerForRefinedLifecycle ICT.deploymentInteroperabilityPersistence = interoperabilityPersistenceProducer
+
+------------------------------------------------------------------------
+-- Canonical RequirementProducerSchedulerExact application.
+------------------------------------------------------------------------
+
+data DigitalESDAcquisitionQuestion : Set where
+  digitalESDResearchDecision : DigitalESDAcquisitionQuestion
+
+data SameObjectCoordinate : Set where
+  sameObjectInterventionLCI : SameObjectCoordinate
+  sameObjectReferenceSystem : SameObjectCoordinate
+  sameObjectHardwareCircularity : SameObjectCoordinate
+  sameObjectRepairSupport : SameObjectCoordinate
+  sameObjectServiceLife : SameObjectCoordinate
+  sameObjectInteroperabilityPersistence : SameObjectCoordinate
+  sameObjectLongitudinalImpact : SameObjectCoordinate
+  contextGeneralisationAdmission : SameObjectCoordinate
+  participantEpistemicAuthority : SameObjectCoordinate
+
+requiredForDigitalESD :
+  DigitalESDAcquisitionQuestion → SameObjectCoordinate → Bool
+requiredForDigitalESD digitalESDResearchDecision _ = true
+
+closedDigitalESD : SameObjectCoordinate → Bool
+closedDigitalESD _ = false
+
+producerForCoordinate : SameObjectCoordinate → ResidualProducer
+producerForCoordinate sameObjectInterventionLCI = interventionLCIProducer
+producerForCoordinate sameObjectReferenceSystem = deploymentReferenceSystemProducer
+producerForCoordinate sameObjectHardwareCircularity = hardwareCircularityProducer
+producerForCoordinate sameObjectRepairSupport = procurementRepairSupportProducer
+producerForCoordinate sameObjectServiceLife = serviceLifeSupportProducer
+producerForCoordinate sameObjectInteroperabilityPersistence = interoperabilityPersistenceProducer
+producerForCoordinate sameObjectLongitudinalImpact = longitudinalFollowupProducer
+producerForCoordinate contextGeneralisationAdmission = contextGeneralisationReceiptProducer
+producerForCoordinate participantEpistemicAuthority = participantAuthorityReceiptProducer
+
+digitalESDAcquisitionRequirementSystem : CoreScheduler.RequirementSystem
+digitalESDAcquisitionRequirementSystem =
+  CoreScheduler.requirement-system
+    DigitalESDAcquisitionQuestion
+    SameObjectCoordinate
+    ResidualProducer
+    requiredForDigitalESD
+    closedDigitalESD
+    producerForCoordinate
+    "digital-ESD same-object/future/context/authority acquisition requirements"
+    "same-object measurement, longitudinal observation, canonical context-generalisation and participant-authority receipt producers"
+
+lifecycleInventoryMissing :
+  CoreScheduler.MissingFor
+    digitalESDAcquisitionRequirementSystem
+    digitalESDResearchDecision
+    sameObjectInterventionLCI
+lifecycleInventoryMissing = refl , refl
+
+lifecycleInventoryMissingReceipt :
+  CoreScheduler.MissingCoordinateReceipt
+    digitalESDAcquisitionRequirementSystem
+    digitalESDResearchDecision
+lifecycleInventoryMissingReceipt =
+  CoreScheduler.missing-coordinate-receipt
+    sameObjectInterventionLCI
+    lifecycleInventoryMissing
+
+lifecycleInventoryScheduledProducer : ResidualProducer
+lifecycleInventoryScheduledProducer =
+  CoreScheduler.scheduledProducer lifecycleInventoryMissingReceipt
+
+lifecycleInventoryScheduledProducerIsCanonical :
+  lifecycleInventoryScheduledProducer ≡ interventionLCIProducer
+lifecycleInventoryScheduledProducerIsCanonical = refl
+
+canonicalSchedulerBoundaryRetained :
+  CoreScheduler.RequirementProducerSchedulerBoundary
+canonicalSchedulerBoundaryRetained =
+  CoreScheduler.canonicalRequirementProducerSchedulerBoundary
+
+producerIdentityStillDoesNotCloseRequirement :
+  CoreScheduler.ProducerExistenceImpliesCoordinateClosedPermission → ⊥
+producerIdentityStillDoesNotCloseRequirement =
+  CoreScheduler.producerExistenceDoesNotAutoCloseCoordinate
 
 ------------------------------------------------------------------------
 -- Citation-resistant dependency firewalls.
@@ -224,6 +311,10 @@ record SameObjectAcquisitionSchedulerBoundary : Set where
     dashiSchedulerIsSourceTheorem : Bool
     dashiSchedulerIsSourceTheoremIsFalse : dashiSchedulerIsSourceTheorem ≡ false
 
+    canonicalRequirementSchedulerReused : Bool
+    canonicalRequirementSchedulerReusedIsTrue :
+      canonicalRequirementSchedulerReused ≡ true
+
 open SameObjectAcquisitionSchedulerBoundary public
 
 canonicalSameObjectAcquisitionSchedulerBoundary :
@@ -239,6 +330,7 @@ canonicalSameObjectAcquisitionSchedulerBoundary =
     true refl
     false refl
     false refl
+    true refl
 
 ------------------------------------------------------------------------
 -- BIDI scheduling receipt: an unpaid coordinate determines a producer request;
@@ -292,4 +384,4 @@ interoperabilityPersistenceSchedule =
 
 highestAlphaSchedulerReading : String
 highestAlphaSchedulerReading =
-  "The Pareto frontier is now partitioned by evidence producer rather than citation count. Method/context sources may be acquired and paid out of order, but same-object deployment, future longitudinal, context-transfer and participant-authority coordinates remain blocked until their own provenance-bearing producers return receipts; no paid sibling or citation can skip those dependencies."
+  "The Pareto frontier is now partitioned by evidence producer rather than citation count. Method/context sources may be acquired and paid out of order, but same-object deployment, future longitudinal, context-transfer and participant-authority coordinates remain blocked until their own provenance-bearing producers return receipts; no paid sibling or citation can skip those dependencies. Scheduling semantics reuse DASHI.Core.RequirementProducerSchedulerExact rather than introducing a parallel planner."
