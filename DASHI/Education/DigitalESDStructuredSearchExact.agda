@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -264,6 +265,10 @@ data SearchHitCreatesIncludedStudy : Set where
 
 data SearchResultSnippetPaysFullSourceClaim : Set where
 
+data UnobservedDatabaseClosesStructuredSearch : Set where
+
+data StructuredSearchClosurePaysEvidenceSynthesis : Set where
+
 openWebSnowballDoesNotCloseTransparentStructuredSearch :
   OpenWebSnowballClosesTransparentStructuredSearch → ⊥
 openWebSnowballDoesNotCloseTransparentStructuredSearch ()
@@ -283,6 +288,147 @@ searchResultSnippetDoesNotPayFullSourceClaim :
   SearchResultSnippetPaysFullSourceClaim → ⊥
 searchResultSnippetDoesNotPayFullSourceClaim ()
 
+unobservedDatabaseDoesNotCloseStructuredSearch :
+  UnobservedDatabaseClosesStructuredSearch → ⊥
+unobservedDatabaseDoesNotCloseStructuredSearch ()
+
+structuredSearchClosureDoesNotPayEvidenceSynthesis :
+  StructuredSearchClosurePaysEvidenceSynthesis → ⊥
+structuredSearchClosureDoesNotPayEvidenceSynthesis ()
+
+------------------------------------------------------------------------
+-- Executable search lineage. These types describe the evidence that future
+-- search execution must return; they do not create any canonical database
+-- receipt for searches that have not been observed.
+------------------------------------------------------------------------
+
+record DatabaseExecutionReceipt (searchSurface : SearchSurface) : Set where
+  constructor database-execution-receipt
+  field
+    executedFamilies : List SearchQueryFamily
+    executedQueryReference : String
+    executionDate : String
+    resultExportReference : String
+    resultCount : Nat
+
+    executionObserved : Bool
+    executionObservedIsTrue : executionObserved ≡ true
+
+    queryReferenceRetained : Bool
+    queryReferenceRetainedIsTrue : queryReferenceRetained ≡ true
+
+    resultExportRetained : Bool
+    resultExportRetainedIsTrue : resultExportRetained ≡ true
+
+    sourceRoleRetained : Bool
+    sourceRoleRetainedIsTrue : sourceRoleRetained ≡ true
+
+open DatabaseExecutionReceipt public
+
+record DeduplicationReceipt
+    (scopusReceipt : DatabaseExecutionReceipt scopus)
+    (wosReceipt : DatabaseExecutionReceipt webOfScience)
+    (ericReceipt : DatabaseExecutionReceipt eric)
+    (acmReceipt : DatabaseExecutionReceipt acmDigitalLibrary)
+    (ieeeReceipt : DatabaseExecutionReceipt ieeeXplore) : Set where
+  constructor deduplication-receipt
+  field
+    inputSetReference : String
+    deduplicatedSetReference : String
+    duplicateCount : Nat
+    upstreamExportsRetained : Bool
+    upstreamExportsRetainedIsTrue : upstreamExportsRetained ≡ true
+
+open DeduplicationReceipt public
+
+record EligibilityScreeningReceipt
+    {scopusReceipt : DatabaseExecutionReceipt scopus}
+    {wosReceipt : DatabaseExecutionReceipt webOfScience}
+    {ericReceipt : DatabaseExecutionReceipt eric}
+    {acmReceipt : DatabaseExecutionReceipt acmDigitalLibrary}
+    {ieeeReceipt : DatabaseExecutionReceipt ieeeXplore}
+    (dedup : DeduplicationReceipt
+      scopusReceipt wosReceipt ericReceipt acmReceipt ieeeReceipt) : Set where
+  constructor eligibility-screening-receipt
+  field
+    eligibilityCriteriaReference : String
+    screenedSetReference : String
+    includedSetReference : String
+    excludedSetReference : String
+    exclusionReasonLedgerReference : String
+    deduplicatedInputRetained : Bool
+    deduplicatedInputRetainedIsTrue : deduplicatedInputRetained ≡ true
+
+open EligibilityScreeningReceipt public
+
+record StructuredExtractionReceipt
+    {scopusReceipt : DatabaseExecutionReceipt scopus}
+    {wosReceipt : DatabaseExecutionReceipt webOfScience}
+    {ericReceipt : DatabaseExecutionReceipt eric}
+    {acmReceipt : DatabaseExecutionReceipt acmDigitalLibrary}
+    {ieeeReceipt : DatabaseExecutionReceipt ieeeXplore}
+    {dedup : DeduplicationReceipt
+      scopusReceipt wosReceipt ericReceipt acmReceipt ieeeReceipt}
+    (screening : EligibilityScreeningReceipt dedup) : Set where
+  constructor structured-extraction-receipt
+  field
+    extractionSchemaReference : String
+    extractedDatasetReference : String
+    sourceRoleScopeMatrixReference : String
+    includedSetRetained : Bool
+    includedSetRetainedIsTrue : includedSetRetained ≡ true
+    sourceRoleAndScopeRetained : Bool
+    sourceRoleAndScopeRetainedIsTrue : sourceRoleAndScopeRetained ≡ true
+
+open StructuredExtractionReceipt public
+
+record TransparentStructuredSearchClosureReceipt : Set where
+  constructor transparent-structured-search-closure-receipt
+  field
+    scopusReceipt : DatabaseExecutionReceipt scopus
+    wosReceipt : DatabaseExecutionReceipt webOfScience
+    ericReceipt : DatabaseExecutionReceipt eric
+    acmReceipt : DatabaseExecutionReceipt acmDigitalLibrary
+    ieeeReceipt : DatabaseExecutionReceipt ieeeXplore
+    deduplicationReceipt : DeduplicationReceipt
+      scopusReceipt wosReceipt ericReceipt acmReceipt ieeeReceipt
+    screeningReceipt : EligibilityScreeningReceipt deduplicationReceipt
+    extractionReceipt : StructuredExtractionReceipt screeningReceipt
+
+    promotesSystematicReview : Bool
+    promotesSystematicReviewIsFalse : promotesSystematicReview ≡ false
+
+    closesEvidenceSynthesisCoordinates : Bool
+    closesEvidenceSynthesisCoordinatesIsFalse :
+      closesEvidenceSynthesisCoordinates ≡ false
+
+    sourceRoleAndExecutionLineageRetained : Bool
+    sourceRoleAndExecutionLineageRetainedIsTrue :
+      sourceRoleAndExecutionLineageRetained ≡ true
+
+open TransparentStructuredSearchClosureReceipt public
+
+closeTransparentStructuredSearch :
+  (scopusReceipt : DatabaseExecutionReceipt scopus) →
+  (wosReceipt : DatabaseExecutionReceipt webOfScience) →
+  (ericReceipt : DatabaseExecutionReceipt eric) →
+  (acmReceipt : DatabaseExecutionReceipt acmDigitalLibrary) →
+  (ieeeReceipt : DatabaseExecutionReceipt ieeeXplore) →
+  (dedup : DeduplicationReceipt
+    scopusReceipt wosReceipt ericReceipt acmReceipt ieeeReceipt) →
+  (screening : EligibilityScreeningReceipt dedup) →
+  (extraction : StructuredExtractionReceipt screening) →
+  TransparentStructuredSearchClosureReceipt
+closeTransparentStructuredSearch
+    scopusReceipt wosReceipt ericReceipt acmReceipt ieeeReceipt
+    dedup screening extraction =
+  transparent-structured-search-closure-receipt
+    scopusReceipt wosReceipt ericReceipt acmReceipt ieeeReceipt
+    dedup screening extraction
+    false refl
+    false refl
+    true refl
+
 ------------------------------------------------------------------------
 -- Consumer-relative connection back to the paper scheduler.
 ------------------------------------------------------------------------
@@ -300,4 +446,4 @@ paperTransparentStructuredSearchStillOpen = refl
 
 currentSearchStatusReading : String
 currentSearchStatusReading =
-  "Six query families have open-web snowball execution receipts dated 2026-09-16. Scopus, Web of Science, ERIC, ACM Digital Library and IEEE Xplore execution; database deduplication; eligibility screening; and structured extraction remain unobserved. The current manuscript therefore has a populated acquisition snowball but its transparent structured-search work coordinate remains open."
+  "Six query families have open-web snowball execution receipts dated 2026-09-16. Scopus, Web of Science, ERIC, ACM Digital Library and IEEE Xplore execution; database deduplication; eligibility screening; and structured extraction remain unobserved. The current manuscript therefore has a populated acquisition snowball but its transparent structured-search work coordinate remains open. The closure type now requires same-object database execution exports followed by dependent deduplication, screening and extraction receipts; no canonical instance is manufactured until those work products exist."
