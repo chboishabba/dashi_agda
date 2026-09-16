@@ -8,7 +8,7 @@ module DASHI.Physics.Closure.NSABPortabilityBidiStatusExact where
 --
 -- This owner is deliberately non-promoting.  It does NOT prove B -> A or
 -- A -> B.  It keeps A active as a portability consumer while B remains the
--- current proof-discovery lane.  Every B theorem family is to be factored into
+-- current proof-discovery lane.  Every B theorem family is factored into
 --
 --   domain-independent analytic core
 --   + torus/lattice/cutoff realization
@@ -61,10 +61,28 @@ coordinates =
     "Separate selector/cancellation algebra from finite Fourier packet enumeration."
     false
   ∷ ab-portability-coordinate
+    "R98 spectral-cross coercivity"
+    "ordered low/high frequency dissipation algebra"
+    domainIndependentCandidate
+    "Retain the abstract frequency-order coercivity while replacing finite packet sums by whole-space spectral integrals."
+    false
+  ∷ ab-portability-coordinate
     "#957 S2b2 low/collar/remote split"
-    "quantitative phase-production geometry"
+    "periodic shell realization of the phase-production geometry"
     torusSpecificRealization
-    "Replace shellIndex/cutoff-mode packet geometry by an R^3 Littlewood-Paley or radial-frequency realization."
+    "Replace shellIndex/cutoff-mode regions by an R^3 Littlewood-Paley or radial-frequency partition and re-prove the exact three-region split."
+    false
+  ∷ ab-portability-coordinate
+    "#957 S2b2c2a rational live-norm transport"
+    "lattice norm calibration for the remote packet"
+    torusSpecificRealization
+    "Whole-space A should not need integer-embedding common-scale calibration; identify the corresponding continuous frequency-order statement directly."
+    false
+  ∷ ab-portability-coordinate
+    "#957 S2b2d exact-shell collar"
+    "same-scale signed local cancellation leaf"
+    unresolvedWholeSpaceTransport
+    "Determine whether the collar proof depends only on local signed commutator structure or essentially on discrete shell/output-fibre enumeration."
     false
   ∷ ab-portability-coordinate
     "R291/R573 signed Hermitian linearization"
@@ -95,6 +113,9 @@ bCommAnalyticCoreCandidateTracked = true
 torusSpecificRealizationSeparated : Bool
 torusSpecificRealizationSeparated = true
 
+currentS2b2PortabilityFactored : Bool
+currentS2b2PortabilityFactored = true
+
 wholeSpaceTransportObserved : Bool
 wholeSpaceTransportObserved = false
 
@@ -118,6 +139,9 @@ bCommAnalyticCoreCandidateTrackedIsTrue = refl
 torusSpecificRealizationSeparatedIsTrue :
   torusSpecificRealizationSeparated ≡ true
 torusSpecificRealizationSeparatedIsTrue = refl
+
+currentS2b2PortabilityFactoredIsTrue : currentS2b2PortabilityFactored ≡ true
+currentS2b2PortabilityFactoredIsTrue = refl
 
 wholeSpaceTransportObservedIsFalse :
   wholeSpaceTransportObserved ≡ false
