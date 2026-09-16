@@ -256,6 +256,19 @@ RELATIONS: dict[str, dict[str, object]] = {
         "paid": True,
         "same_object_paid": False,
     },
+    "oeis42d-atlas42D-label-disambiguation": {
+        "oeis_sequence": "A058678",
+        "oeis_label": "42d",
+        "atlas_label": "42D",
+        "atlas_fourteenth_power_target": "3A",
+        "atlas_direct_power_target_3B": False,
+        "same_class_paid": False,
+        "observed": (
+            "Retain the case-sensitive OEIS/ATLAS nomenclature boundary. The ATLAS 42D "
+            "power family may guide search, but it is not transferred to OEIS A058678 "
+            "until an explicit same-class source receipt is acquired."
+        ),
+    },
     "42d-five-mode-phase-carrier": {
         "sources": ["A058678"],
         "observed": (
@@ -363,7 +376,7 @@ def build_42d_five_mode_phase_probe() -> dict[str, object]:
 
 def build_report() -> dict[str, object]:
     return {
-        "schema": "monster369-oeis-acquisition-snapshot-v6",
+        "schema": "monster369-oeis-acquisition-snapshot-v7",
         "retrieved": RETRIEVED,
         "sequence_count": len(SEQUENCES),
         "sequences": SEQUENCES,
