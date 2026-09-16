@@ -28,6 +28,7 @@ import DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollination
 -- consumer-separation fixture: SOC / hydraulic capacity / realised moisture /
 -- runoff / infiltration / ET / drainage remain distinct coordinates.
 import DASHI.Environment.AcaciaSenegalDrylandWaterCarbonExact
+import DASHI.Environment.AcaciaSenegalDrylandTaskFactorisationExact
 import DASHI.Environment.AcaciaSenegalDrylandWaterCarbonRegression
 
 -- Water-hyacinth biocontrol as a concrete LES / experimental-coordinate /
