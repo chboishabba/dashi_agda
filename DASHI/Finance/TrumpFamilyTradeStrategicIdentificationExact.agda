@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.GameTheory.StrategicExperimentalIdentificationFibreExact as Identify
+import DASHI.Finance.TrumpFamilyTradeSourceAtlasExact as Atlas
 import DASHI.Finance.TrumpFamilyTradeSourceAtlas2026SupplementExact as SourceAtlas
 
 ------------------------------------------------------------------------
@@ -92,7 +93,7 @@ transactionObservationCannotIdentifyInformationState =
 -- can recover.
 ------------------------------------------------------------------------
 
-sourceAnchor : SourceAtlas.Atlas.TradeEvidenceClaim
+sourceAnchor : Atlas.TradeEvidenceClaim
 sourceAnchor = SourceAtlas.trumpOGE278TNvidiaSale
 
 record TrumpFamilyTradeStrategicIdentificationBoundary : Set where
