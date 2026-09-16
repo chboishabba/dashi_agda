@@ -7,6 +7,7 @@ cd "$root"
 files=(
   DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
   DASHI/Physics/Foundations/BalabanRound131RecoveredQFTAttachmentExact.agda
+  DASHI/Physics/Foundations/BalabanRound131RecoveredQFTTransportCompilerExact.agda
   DASHI/Physics/Foundations/BalabanRound131RecoveredQFTAttachmentValidation.agda
 )
 
@@ -24,8 +25,15 @@ grep -q 'qftRecoveryAfterCoarseGrainingCommutes' "${files[1]}"
 grep -q '^round131RecoveredQFTAttachmentCompilerLevel :' "${files[1]}"
 grep -q '^recoveredQFTConstructionAttachmentStillRequired : Bool' "${files[1]}"
 
-grep -q 'Attachment.round131RecoveredQFTAttachmentCompilerLevel' "${files[2]}"
-grep -q 'Attachment.recoveredQFTConstructionAttachmentStillRequired' "${files[2]}"
+grep -q '^record Round131RecoveredQFTTransportInputs' "${files[2]}"
+grep -q '^asRound131SharedTransportData :' "${files[2]}"
+grep -q 'Attachment.recoveredAttachmentImpliesSelectedQFTTarget' "${files[2]}"
+grep -q '^round131RecoveredQFTTransportCompilerLevel :' "${files[2]}"
+grep -q '^directSelectedQFTTargetEqualityPrimitive : Bool' "${files[2]}"
+
+grep -q 'Attachment.round131RecoveredQFTAttachmentCompilerLevel' "${files[3]}"
+grep -q 'Transport.round131RecoveredQFTTransportCompilerLevel' "${files[3]}"
+grep -q 'Transport.directSelectedQFTTargetEqualityPrimitive' "${files[3]}"
 
 cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-round131-recovered-qft}"
 export DASHI_AGDA29_CACHE_ROOT="$cache_root"
