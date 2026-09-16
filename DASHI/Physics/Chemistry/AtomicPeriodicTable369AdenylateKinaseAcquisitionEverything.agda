@@ -41,6 +41,13 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseLTMDTextAcqu
 -- residual at region level without paying any named beta/gamma/delta/epsilon dLN cell.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseIntermediateGeometryTextAcquisitionExact
 
+-- Named-state qualitative roles from machine-readable source prose: gamma has
+-- LID closed/contacting NMP while NMP remains open; delta retains the same LID
+-- contact with NMP semi-open; beta is used on the open-like FRET side; epsilon
+-- lies on the source-described NMP-first alternative route.  These role payments
+-- do not manufacture exact theta1/theta2/dLN cells or state-object equality.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseNamedIntermediateRoleTextAcquisitionExact
+
 -- Cross-source gamma-near crystal references: Li-Liu-Ji place PDB 1AK2/2AK2
 -- near gamma under their theta1/theta2 projection, while the primary bovine-AK2
 -- structure paper classifies the same unligated PDB objects as open.  PDB DOI,
