@@ -17,6 +17,34 @@ actualGroupRealizationSourceRegression :
   R.actualD4RealizationSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
 actualGroupRealizationSourceRegression = refl
 
+failLocatingRuntimeSchemaRegression :
+  R.failLocatingRuntimeReceiptSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+failLocatingRuntimeSchemaRegression = refl
+
+executionCheckerRegression :
+  R.executionCheckerSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+executionCheckerRegression = refl
+
+existingGapWorkflowRegression :
+  R.existingGapWorkflowWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+existingGapWorkflowRegression = refl
+
+directExecutionBranchTriggerRegression :
+  R.directExecutionBranchPushTriggerWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+directExecutionBranchTriggerRegression = refl
+
+summaryClassifierRegression :
+  R.failLocatingSummaryClassifierSourceWritten R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+summaryClassifierRegression = refl
+
+jsonArtifactUploadRegression :
+  R.jsonArtifactUploadWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+jsonArtifactUploadRegression = refl
+
+summaryArtifactUploadRegression :
+  R.summaryArtifactUploadWired R.currentFiveOrbitD4N3BScreenReceipt ≡ true
+summaryArtifactUploadRegression = refl
+
 runtimeFirewallRegression :
   R.gapRuntimeReceiptObserved R.currentFiveOrbitD4N3BScreenReceipt ≡ false
 runtimeFirewallRegression = refl
