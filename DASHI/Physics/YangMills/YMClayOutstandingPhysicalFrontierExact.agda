@@ -9,16 +9,18 @@ import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact as Reco
 import DASHI.Physics.YangMills.YMClayVaryingCarrierTransportParityExact as Varying
 
 ------------------------------------------------------------------------
--- Exact residual frontier after the 2026-09-17 Aristotle varying-carrier
--- tranche.
+-- Exact residual frontier after the 2026-09-17 Aristotle varying-carrier and
+-- transfer-operator tranches.
 --
 -- Paid generically / by verified Lean donor:
 --   * literal finite q_a/H_a construction;
 --   * vacuum-sector spectral consequences;
---   * varying-Hilbert transport through isometric embeddings (old F2).
+--   * varying-Hilbert transport through isometric embeddings (old F2);
+--   * literal transfer-operator / decorrelation -> finite form-gap compiler;
+--   * trajectory compiler consuming the per-step defect Delta*a_k <= 1-c_k.
 --
 -- Surviving physical inputs:
---   F1 literal Wilson uniform gap on the actual continuum trajectory;
+--   F1 literal Wilson per-step transfer defect on the actual continuum trajectory;
 --   F3 embedded literal-Wilson graph/Mosco limit and continuum H/Omega;
 --   F4 same physical YM and OS evolution / generator weld.
 ------------------------------------------------------------------------
@@ -46,38 +48,41 @@ record LiteralWilsonUniformGapTrajectory : Set₁ where
       FiniteState volume cutoff → Scalar
 
     betaTrajectory : Cutoff → Coupling
-    inverseLatticeSpacing : Cutoff → Scalar
+    latticeSpacing : Cutoff → Scalar
 
     LessEqual : Scalar → Scalar → Set
-    StrictLess : Scalar → Scalar → Set
     multiply : Scalar → Scalar → Scalar
     subtract : Scalar → Scalar → Scalar
     one : Scalar
 
-    decorrelationConstant : Scalar
-    decorrelationStrictlyBelowOne : StrictLess decorrelationConstant one
+    -- The decorrelation constant is cutoff-dependent.  One trajectory-uniform
+    -- c<1 is not a primitive requirement; c_k may tend to one at O(a_k).
+    decorrelationConstant : Cutoff → Scalar
 
     gap : Scalar
     Positive : Scalar → Set
     gapPositive : Positive gap
 
-    -- Exact finite leaf isolated by Aristotle UniformGapReduction:
-    --   |<P0 psi,P1 psi>| <= c ||psi||^2.
+    -- Literal finite leaf from the transfer-operator reduction:
+    --   |<P0 psi,P1 psi>| <= c_k ||psi||^2.
     literalWilsonDecorrelatorBound :
       (volume : Volume) → (cutoff : Cutoff) →
       (state : FiniteState volume cutoff) →
       VacuumOrthogonal volume cutoff state →
       LessEqual
         (transferCrossMagnitude volume cutoff state)
-        (multiply decorrelationConstant (normSq volume cutoff state))
+        (multiply (decorrelationConstant cutoff)
+          (normSq volume cutoff state))
 
-    -- The chosen positive Delta is below a_k^-1 (1-c) for every cutoff.
+    -- Sharpened trajectory payment:
+    --   Delta * a_k <= 1 - c_k.
+    -- This is equivalent to placing Delta below the finite transfer-form gap
+    -- when q_a carries the a_k^-1 rescaling, without requiring a common c.
     trajectoryGapFitsLiteralWilsonReduction :
       (cutoff : Cutoff) →
-      LessEqual gap
-        (multiply
-          (inverseLatticeSpacing cutoff)
-          (subtract one decorrelationConstant))
+      LessEqual
+        (multiply gap (latticeSpacing cutoff))
+        (subtract one (decorrelationConstant cutoff))
 
     -- Same-object finite physical consequence, retained explicitly rather than
     -- inferred from status metadata.
@@ -92,7 +97,8 @@ record LiteralWilsonUniformGapTrajectory : Set₁ where
 open LiteralWilsonUniformGapTrajectory public
 
 -- Backward-compatible name for old consumers.  Its content is now the actual
--- literal Wilson trajectory estimate rather than a generic RG form record.
+-- literal Wilson trajectory transfer-defect estimate rather than a generic RG
+-- form record or a trajectory-uniform decorrelation constant.
 UniformRGTransferCoercivity : Set₁
 UniformRGTransferCoercivity = LiteralWilsonUniformGapTrajectory
 
@@ -240,6 +246,21 @@ varyingCarrierEmbeddingsRemainF3Data = true
 varyingCarrierEmbeddingsRemainF3DataIsTrue :
   varyingCarrierEmbeddingsRemainF3Data ≡ true
 varyingCarrierEmbeddingsRemainF3DataIsTrue = refl
+
+-- F1 now records the exact second-round transfer-defect normal form.
+f1TrajectoryUniformCRequired : Bool
+f1TrajectoryUniformCRequired = false
+
+f1TrajectoryUniformCRequiredIsFalse :
+  f1TrajectoryUniformCRequired ≡ false
+f1TrajectoryUniformCRequiredIsFalse = refl
+
+f1PerStepTransferDefectForm : Bool
+f1PerStepTransferDefectForm = true
+
+f1PerStepTransferDefectFormIsTrue :
+  f1PerStepTransferDefectForm ≡ true
+f1PerStepTransferDefectFormIsTrue = refl
 
 f1Level : ProofLevel
 f1Level = conditional
