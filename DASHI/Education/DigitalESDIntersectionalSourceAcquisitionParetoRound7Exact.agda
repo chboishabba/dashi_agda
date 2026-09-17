@@ -14,11 +14,6 @@ import DASHI.Education.DigitalESDPhilosophySurveillanceAuditBoundaryExact as Phi
 
 ------------------------------------------------------------------------
 -- ROUND 7: CLASSIFICATION ERROR / HUMAN-CENTRED ABSENCE / DATA AGENCY.
---
--- This round is justified by direct residuals exposed after Round 6:
---   * what real student circumstances exceed a predictive risk model;
---   * whether people affected by algorithms are present in their design;
---   * whether technical dashboard access yields situated data agency.
 ------------------------------------------------------------------------
 
 data Round7Residual : Set where
@@ -63,15 +58,7 @@ mkRound7Candidate source identities residual audit reading limitation =
       (Identity.unresolved "no independently verified same-object article QID recorded by round 7"))
     identities
     "Dewey classification unresolved; no nearest-label substitution"
-    residual
-    audit
-    reading
-    limitation
-    false refl
-
-------------------------------------------------------------------------
--- False-positive / false-negative predictions explained by student interviews.
-------------------------------------------------------------------------
+    residual audit reading limitation false refl
 
 hlostaPapathomaHerodotouSource : Attr.AttributedSource
 hlostaPapathomaHerodotouSource = Attr.mkDOISource
@@ -91,12 +78,8 @@ hlostaCandidate = mkRound7Candidate
   "DOI verified; PMCID PMC7334695 verified for the open-access chapter representation; article-level QID unresolved"
   predictionErrorByUncapturedSituatedFactors
   PhilosophyAudit.philosophyClaimProvenancePromotion
-  "Exceptionally strong 'what exceeds the chart' candidate: prediction errors are investigated by returning to the situated students rather than treating model residuals as unexplained noise. Same prediction carrier can therefore fail to recover financial, personal, technical and practical context relevant to the outcome."
-  "Twelve interviewed students in a distance-learning setting and assignment-submission prediction task; does not establish all predictive errors, causal effects of any one omitted factor, or that collecting more personal data is the appropriate remedy."
-
-------------------------------------------------------------------------
--- Human-centred absence in higher-education algorithm design.
-------------------------------------------------------------------------
+  "Exceptionally strong 'what exceeds the chart' candidate: prediction errors are investigated by returning to the situated students rather than treating model residuals as unexplained noise."
+  "Twelve interviewed students in a distance-learning assignment-submission prediction task; does not establish all predictive errors, causal effects of any one omitted factor, or that collecting more personal data is the appropriate remedy."
 
 mcConveyGuhaKuzminykhSource : Attr.AttributedSource
 mcConveyGuhaKuzminykhSource = Attr.mkDOISource
@@ -115,13 +98,9 @@ mcConveyCandidate = mkRound7Candidate
   mcConveyGuhaKuzminykhSource
   "DOI and arXiv:2302.05839 verified as distinct publication/preprint identities; QID unresolved"
   algorithmDesignByHumanCentredAbsence
-  PhilosophyAudit.feministSubjectPositionProbe
-  "High-alpha 'who is not at the design table?' source: the reviewed algorithm literature increasingly represents protected/personal attributes while affected stakeholder perspectives are comparatively absent from design and value assessment."
+  PhilosophyAudit.philosophyClaimProvenancePromotion
+  "High-alpha 'who is not at the design table?' source: the reviewed algorithm literature increasingly represents protected/personal attributes while affected stakeholder perspectives are comparatively absent from design and value assessment. The more specific feminist/subject-position probe remains a separate probe-owner routing instruction rather than being forged into this four-family audit type."
   "Review of proposed higher-education algorithms, not proof that every deployed system lacks human-centred design or produces harm; presence of protected attributes is not itself evidence of discriminatory treatment."
-
-------------------------------------------------------------------------
--- Technical availability/access versus learner-recognised data agency.
-------------------------------------------------------------------------
 
 lluchMolinsLindinSorianoSource : Attr.AttributedSource
 lluchMolinsLindinSorianoSource = Attr.mkDOISource
@@ -145,15 +124,7 @@ lluchCandidate = mkRound7Candidate
   "Single Spanish university and student-expectation instrument; expectations do not establish realised decision authority, fairness of a named algorithm, longitudinal behaviour change or causal gender mechanisms."
 
 canonicalRound7Frontier : List Round7Candidate
-canonicalRound7Frontier =
-  hlostaCandidate
-  ∷ mcConveyCandidate
-  ∷ lluchCandidate
-  ∷ []
-
-------------------------------------------------------------------------
--- No-promotion / contestability firewalls.
-------------------------------------------------------------------------
+canonicalRound7Frontier = hlostaCandidate ∷ mcConveyCandidate ∷ lluchCandidate ∷ []
 
 data Round7CandidateCreatesIncludedStudy : Set where
 data PredictionErrorCreatesStudentDeficitFact : Set where
@@ -164,23 +135,13 @@ data StudentExpectationCreatesDecisionAuthority : Set where
 
 round7CandidateDoesNotCreateIncludedStudy : Round7CandidateCreatesIncludedStudy → ⊥
 round7CandidateDoesNotCreateIncludedStudy ()
-
-predictionErrorDoesNotCreateStudentDeficitFact :
-  PredictionErrorCreatesStudentDeficitFact → ⊥
+predictionErrorDoesNotCreateStudentDeficitFact : PredictionErrorCreatesStudentDeficitFact → ⊥
 predictionErrorDoesNotCreateStudentDeficitFact ()
-
-errorExplanationDoesNotCreateMoreDataCollectionMandate :
-  ErrorExplanationCreatesMoreDataCollectionMandate → ⊥
+errorExplanationDoesNotCreateMoreDataCollectionMandate : ErrorExplanationCreatesMoreDataCollectionMandate → ⊥
 errorExplanationDoesNotCreateMoreDataCollectionMandate ()
-
-humanCentredReviewDoesNotCreateNamedSystemHarm :
-  HumanCentredReviewCreatesNamedSystemHarm → ⊥
+humanCentredReviewDoesNotCreateNamedSystemHarm : HumanCentredReviewCreatesNamedSystemHarm → ⊥
 humanCentredReviewDoesNotCreateNamedSystemHarm ()
-
-technicalAccessibilityDoesNotCreateDataAgency :
-  TechnicalAccessibilityCreatesDataAgency → ⊥
+technicalAccessibilityDoesNotCreateDataAgency : TechnicalAccessibilityCreatesDataAgency → ⊥
 technicalAccessibilityDoesNotCreateDataAgency ()
-
-studentExpectationDoesNotCreateDecisionAuthority :
-  StudentExpectationCreatesDecisionAuthority → ⊥
+studentExpectationDoesNotCreateDecisionAuthority : StudentExpectationCreatesDecisionAuthority → ⊥
 studentExpectationDoesNotCreateDecisionAuthority ()
