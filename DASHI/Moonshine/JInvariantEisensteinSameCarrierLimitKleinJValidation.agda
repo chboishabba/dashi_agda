@@ -3,9 +3,9 @@ module DASHI.Moonshine.JInvariantEisensteinSameCarrierLimitKleinJValidation wher
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConstructiveSeries as Series
 import DASHI.Analysis.ConcreteComplex as Complex
+import DASHI.Analysis.ConcreteComplexSequenceConvergenceExact as ComplexConvergence
 import DASHI.Analysis.OrdinaryComplexPolar as Polar
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Q
-import DASHI.Moonshine.JInvariantConstructedComplexKleinJBackendExact as CKlein
 import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as FiniteKlein
 import DASHI.Moonshine.JInvariantProofRelevantKleinJExact as Klein
 import DASHI.Moonshine.JInvariantEisensteinSameCarrierLimitCompilerExact as Limit
@@ -24,7 +24,8 @@ e4LimitUsesConcreteCarrier :
          (Real.real (Complex.realPackage C))) ->
   (kernel : Q.DivisorPowerKernel) ->
   (tau : Complex.ComplexPair (Real.real (Complex.realPackage C))) ->
-  Limit.ComplexCauchyForE4 C S kernel tau ->
+  ComplexConvergence.ComplexIsCauchy
+    (Limit.e4TruncationSequence C S kernel tau) ->
   Complex.ComplexPair (Real.real (Complex.realPackage C))
 e4LimitUsesConcreteCarrier = P.e4Limit
 
@@ -34,7 +35,8 @@ e6LimitUsesConcreteCarrier :
          (Real.real (Complex.realPackage C))) ->
   (kernel : Q.DivisorPowerKernel) ->
   (tau : Complex.ComplexPair (Real.real (Complex.realPackage C))) ->
-  Limit.ComplexCauchyForE6 C S kernel tau ->
+  ComplexConvergence.ComplexIsCauchy
+    (Limit.e6TruncationSequence C S kernel tau) ->
   Complex.ComplexPair (Real.real (Complex.realPackage C))
 e6LimitUsesConcreteCarrier = P.e6Limit
 
