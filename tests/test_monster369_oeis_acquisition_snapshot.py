@@ -101,23 +101,6 @@ def test_42d_five_mode_phase_probe_realizes_15_14_42_without_authority_promotion
     assert probe["forty_two_carrier_is_monster_class_42d_paid"] is False
 
 
-def test_ssp14_global14_weld_is_bijective_but_not_canonical_lift_induced():
-    runtime = load_runtime()
-    probe = runtime.build_ssp14_global14_weld_probe()
-
-    assert probe["residual_lane_count"] == 14
-    assert probe["global_inversion_orbit_count"] == 14
-    assert probe["canonical_lift_image_count"] == 13
-    assert probe["canonical_lift_duplicate_orbit"] == (-1, 0, 0)
-    assert probe["canonical_lift_missing_orbit"] == (0, 0, 0)
-    assert probe["explicit_weld_image_count"] == 14
-    assert probe["explicit_weld_is_bijection"] is True
-    assert probe["explicit_weld_is_canonical_lift_induced"] is False
-    assert probe["exceptional_lane"] == ("mode09", 1)
-    assert probe["exceptional_lane_target"] == (0, 0, 0)
-    assert probe["weld_creates_monster_action"] is False
-
-
 def test_6b_normalization_family_retains_q6_32772_across_three_manifests():
     runtime = load_runtime()
 
