@@ -107,8 +107,10 @@ data PhysicalCertificateCompilerPresent : Set where
 physicalCertificateCompilerWitness : PhysicalCertificateCompilerPresent
 physicalCertificateCompilerWitness = physicalCertificateCompilerPresent
 
+-- Explicit source-written adapter term; no exact-head Agda kernel receipt was
+-- run in this connector tranche, so the metadata remains fail-closed.
 r387ToPhysicalMassGapCertificateCompilerLevel : ProofLevel
-r387ToPhysicalMassGapCertificateCompilerLevel = machineChecked
+r387ToPhysicalMassGapCertificateCompilerLevel = conditional
 
 r387PhysicalSpectrumInterpretationLevel : ProofLevel
 r387PhysicalSpectrumInterpretationLevel = conditional
