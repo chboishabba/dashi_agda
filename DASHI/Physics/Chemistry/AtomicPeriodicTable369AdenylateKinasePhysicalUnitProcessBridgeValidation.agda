@@ -28,3 +28,8 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticTra
 -- navigation/provenance fields and remain non-authoritative. Unknown QID/Dewey
 -- values stay explicitly unresolved rather than inferred from nearby classes.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalAttributionCoordinatesValidation
+
+-- Executable PDB acquisition/evaluation contract. The script emits a
+-- content-addressed JSON receipt with explicit model/chain/altloc policy and
+-- per-selection hashes; real 4AKE/1AKE execution remains a separate payment.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVScriptManifestValidation
