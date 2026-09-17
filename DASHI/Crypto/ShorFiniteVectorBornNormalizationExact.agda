@@ -56,7 +56,8 @@ record FiniteBornNormalizationAlgebra
 open FiniteBornNormalizationAlgebra public
 
 sumQuotients :
-  ∀ {Q Coefficient Weight I}
+  ∀ {Q : Nat}
+    {Coefficient Weight I : Set}
     {A : Phase.CyclicPhaseCoefficientAuthority Coefficient Q}
     {W : Weights.CoefficientBornWeightAuthority A Weight}
     (D : Born.FiniteBornDivisionAuthority W)
@@ -73,15 +74,16 @@ sumQuotients :
       denominator
 sumQuotients D L term [] positive =
   sym (zeroQuotient L positive)
-sumQuotients {W = W} D L term (i ∷ is) positive =
+sumQuotients {W = W} D L term (i ∷ is) {denominator = denominator} positive =
   trans
     (cong
-      (Weights.addWeight W (Born.divideWeight D (term i) _))
+      (Weights.addWeight W (Born.divideWeight D (term i) denominator))
       (sumQuotients D L term is positive))
     (sym (addQuotient L positive))
 
 sumExponentProbabilities :
-  ∀ {Q N Coefficient Weight}
+  ∀ {Q N : Nat}
+    {Coefficient Weight : Set}
     {A : Phase.CyclicPhaseCoefficientAuthority Coefficient Q}
     {W : Weights.CoefficientBornWeightAuthority A Weight} →
   (D : Born.FiniteBornDivisionAuthority W) →
@@ -94,7 +96,8 @@ sumExponentProbabilities {Q = Q} {W = W} D state positiveTotal =
     (allFin Q)
 
 sumExponentProbabilitiesIsOne :
-  ∀ {Q N Coefficient Weight}
+  ∀ {Q N : Nat}
+    {Coefficient Weight : Set}
     {A : Phase.CyclicPhaseCoefficientAuthority Coefficient Q}
     {W : Weights.CoefficientBornWeightAuthority A Weight} →
   (D : Born.FiniteBornDivisionAuthority W) →
