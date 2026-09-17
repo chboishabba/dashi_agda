@@ -151,7 +151,7 @@ complexOneMinusOneIsZero :
 complexOneMinusOneIsZero C =
   let R = Real.real (Complex.realPackage C)
   in
-  cong2 Complex.complex
+  cong₂ Complex.complex
     (Real.subSelf R (Real.one R))
     (Real.subSelf R (Real.zero R))
 
