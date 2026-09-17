@@ -11,10 +11,11 @@ import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as 
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as Canonical
 import DASHI.Physics.YangMills.Balaban1989CompleteDensityToYM4RegionExact as Region
 import DASHI.Physics.YangMills.BalabanYM4RGInvariantRegionPhysicalGapExact as RG
+import DASHI.Physics.YangMills.YMClayDenseMarkedSourceF1ProducerExact as DenseMarked
 
 ------------------------------------------------------------------------
--- Exact boundary between the newly tightened Bałaban complete-density lane and
--- the literal transfer/mixing F1 normal form.
+-- Exact boundary between the tightened Bałaban complete-density lane and the
+-- literal transfer/mixing F1 normal form.
 --
 -- What is already constructive/compiler-owned in the repository:
 --
@@ -23,23 +24,24 @@ import DASHI.Physics.YangMills.BalabanYM4RGInvariantRegionPhysicalGapExact as RG
 --     -> same runningCoupling coordinate in the canonical YM4 state
 --     -> source Section-2 bounds assemble the rational invariant region.
 --
--- What does NOT follow from those interfaces as currently typed:
+-- Earlier bookkeeping made the next bridge look artificially unique:
 --
---   conditionalCovarianceNorm <= covarianceCap
---     -> full adjacent-slice joint-density defect
---     -> uniform decorrelator for every vacuum-orthogonal L2 state
+--   complete density -> full adjacent-slice RN defect in L-infinity -> F1.
 --
--- nor:
+-- That route remains valid if a source theorem pays it, but it is no longer a
+-- primitive requirement.  `YMClayDenseL2CorrelationBidiParityExact` and
+-- `YMClayDenseMarkedSourceF1ProducerExact` expose the weaker source-native lane:
 --
---   InYM4RGInvariantRegion
---     -> InYM4RGPhysicalGapRegion.
+--   same beta-driven density
+--     -> selected marked/local Wilson observables
+--     -> published mixed-source separation decay
+--     -> same-object envelope = c_k ||psi||_2^2 normalization on dense L2_0
+--     -> full physical L2_0 decorrelator.
 --
--- The latter record explicitly adds a positive massFloor and the inequality
--- massFloor <= latticeDecayExponent * inversePhysicalSpacing.
---
--- This owner is proof-search bookkeeping.  It does not assert that no such
--- theorem can be proved from stronger source content; it records that the
--- currently owned interfaces do not contain that implication.
+-- Therefore the exact remaining complete-density/source bridge can be paid by
+-- either (A) the stronger full density defect or (B) the dense marked-source
+-- application/normalization weld.  Neither is manufactured from the Section-2
+-- invariant-region fields alone.
 ------------------------------------------------------------------------
 
 data CompleteDensityTransferMixingBoundaryPresent : Set where
@@ -61,6 +63,10 @@ regionDictionaryOwner =
 physicalGapRegionOwner : String
 physicalGapRegionOwner =
   "BalabanYM4RGInvariantRegionPhysicalGapExact"
+
+denseMarkedF1Owner : String
+denseMarkedF1Owner =
+  "YMClayDenseMarkedSourceF1ProducerExact"
 
 betaAndCompleteDensityUseSameCouplingHistory : Bool
 betaAndCompleteDensityUseSameCouplingHistory = true
@@ -90,6 +96,22 @@ conditionalCovarianceCapDirectlyPaysFullL2DecorrelatorIsFalse :
   conditionalCovarianceCapDirectlyPaysFullL2Decorrelator ≡ false
 conditionalCovarianceCapDirectlyPaysFullL2DecorrelatorIsFalse = refl
 
+-- New recut: the full RN density defect is an optional stronger producer, not
+-- the definition of F1 debt.
+fullJointDensityLinfinityDefectPrimitiveForF1 : Bool
+fullJointDensityLinfinityDefectPrimitiveForF1 = false
+
+fullJointDensityLinfinityDefectPrimitiveForF1IsFalse :
+  fullJointDensityLinfinityDefectPrimitiveForF1 ≡ false
+fullJointDensityLinfinityDefectPrimitiveForF1IsFalse = refl
+
+denseMarkedSourceAlternativeRecorded : Bool
+denseMarkedSourceAlternativeRecorded = true
+
+denseMarkedSourceAlternativeRecordedIsTrue :
+  denseMarkedSourceAlternativeRecorded ≡ true
+denseMarkedSourceAlternativeRecordedIsTrue = refl
+
 completeDensityInvariantRegionConstructsPositivePhysicalMassFloor : Bool
 completeDensityInvariantRegionConstructsPositivePhysicalMassFloor = false
 
@@ -97,9 +119,10 @@ completeDensityInvariantRegionConstructsPositivePhysicalMassFloorIsFalse :
   completeDensityInvariantRegionConstructsPositivePhysicalMassFloor ≡ false
 completeDensityInvariantRegionConstructsPositivePhysicalMassFloorIsFalse = refl
 
--- The strongest currently useful next theorem shape.  A future source/repo
--- bridge may pay either this density form directly or an equivalent operator
--- bound, but no such witness is manufactured here.
+------------------------------------------------------------------------
+-- Strong route A: literal adjacent-slice density defect.
+------------------------------------------------------------------------
+
 record CompleteDensityToLiteralTwoSliceMixingTarget : Set₁ where
   field
     Cutoff : Set
@@ -127,6 +150,36 @@ record CompleteDensityToLiteralTwoSliceMixingTarget : Set₁ where
 
 open CompleteDensityToLiteralTwoSliceMixingTarget public
 
+------------------------------------------------------------------------
+-- Weaker route B: source-native dense marked/local observable application.
+--
+-- This record deliberately stores only the SAME-OBJECT/application facts that
+-- connect the beta-driven complete density to the generic marked-source F1
+-- compiler.  The actual analytic inequality lives in the selected CMP109/116
+-- marked-source producer, and its envelope-to-L2 target theorem lives in
+-- `DenseMarkedSourceF1Weld`; neither is duplicated here.
+------------------------------------------------------------------------
+
+record CompleteDensityToDenseMarkedF1Target : Set₁ where
+  field
+    SameBetaDrivenDensityAndMarkedSourceState : Set
+    sameBetaDrivenDensityAndMarkedSourceState :
+      SameBetaDrivenDensityAndMarkedSourceState
+
+    LiteralWilsonDenseCylinderAlgebraIdentified : Set
+    literalWilsonDenseCylinderAlgebraIdentified :
+      LiteralWilsonDenseCylinderAlgebraIdentified
+
+    SelectedMarkedDirectionsArePhysicalSliceObservables : Set
+    selectedMarkedDirectionsArePhysicalSliceObservables :
+      SelectedMarkedDirectionsArePhysicalSliceObservables
+
+    SourceEnvelopeUsesPhysicalL2Normalization : Set
+    sourceEnvelopeUsesPhysicalL2Normalization :
+      SourceEnvelopeUsesPhysicalL2Normalization
+
+open CompleteDensityToDenseMarkedF1Target public
+
 sameTrajectoryCompilerLevel : ProofLevel
 sameTrajectoryCompilerLevel = machineChecked
 
@@ -135,6 +188,14 @@ completeDensityRegionAssemblyLevel = machineChecked
 
 completeDensityToLiteralMixingBridgeLevel : ProofLevel
 completeDensityToLiteralMixingBridgeLevel = conditional
+
+completeDensityToDenseMarkedF1BridgeLevel : ProofLevel
+completeDensityToDenseMarkedF1BridgeLevel = conditional
+
+-- This is the generic dense marked-source compiler level, imported rather than
+-- re-declared as a second theorem family.
+denseMarkedSourceF1CompilerLevel : ProofLevel
+denseMarkedSourceF1CompilerLevel = DenseMarked.denseMarkedSourceF1CompilerLevel
 
 physicalMassFloorFromCompleteDensityLevel : ProofLevel
 physicalMassFloorFromCompleteDensityLevel = conditional
