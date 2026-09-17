@@ -11,6 +11,7 @@ import DASHI.Algebra.Quantum.ShorFiniteVectorAmplitudeRegisterExact as Vector
 import DASHI.Algebra.Quantum.ShorFiniteVectorExecutionPrefixExact as VectorPrefix
 import DASHI.Crypto.ShorOrderFinding as Order
 import DASHI.Crypto.ShorCertifiedFourierSamplingExact as Certified
+import DASHI.Crypto.ShorReversiblePowModOracleWeldExact as PowModWeld
 import DASHI.Crypto.ShorFiniteVectorFourierObservationExact as Observation
 
 ------------------------------------------------------------------------
@@ -43,12 +44,12 @@ observationUsesSelectedExponentExactly :
     (seedState : Nat →
       VectorPrefix.VectorRegisterState
         qNonZero
-        (Order.modulusNonZero P)
+        (PowModWeld.orderModulusNonZero P)
         a A)
     (selectObservedExponent :
       VectorPrefix.VectorRegisterState
         qNonZero
-        (Order.modulusNonZero P)
+        (PowModWeld.orderModulusNonZero P)
         a A →
       Fin Q)
     (candidateExtractor : QFT.FourierSample → Nat)
@@ -56,7 +57,7 @@ observationUsesSelectedExponentExactly :
     (state :
       VectorPrefix.VectorRegisterState
         qNonZero
-        (Order.modulusNonZero P)
+        (PowModWeld.orderModulusNonZero P)
         a A) →
   Certified.rawFourierSample
     (Certified.observeFourierState
