@@ -26,6 +26,14 @@ cofre2026DOIPinned :
   B.cofreEtAl2026DOI ≡ "10.1007/s00374-025-01963-9"
 cofre2026DOIPinned = refl
 
+qiu2026DOIPinned :
+  B.qiuEtAl2026DOI ≡ "10.1111/nph.71575"
+qiu2026DOIPinned = refl
+
+qiu2026PMIDPinned :
+  B.qiuEtAl2026PMID ≡ "42722985"
+qiu2026PMIDPinned = refl
+
 nFixingRoleNotVascularOnly :
   B.nFixingPioneerRoleImpliesVascularPlant B.canonicalBiocrustBoundary ≡ false
 nFixingRoleNotVascularOnly = refl
@@ -49,6 +57,14 @@ seedlingResponseNotTrajectory = refl
 managementContextRetained :
   B.fireGrazingSeasonSoilMayBeDropped B.canonicalBiocrustBoundary ≡ false
 managementContextRetained = refl
+
+directTransferDonorExists :
+  B.directIsotopeTransferMeasurementShapeAvailable B.canonicalBiocrustBoundary ≡ true
+directTransferDonorExists = refl
+
+externalDonorDoesNotBecomeAustralianReceipt :
+  B.externalIsotopeTransferCreatesAustralianSameObjectReceipt B.canonicalBiocrustBoundary ≡ false
+externalDonorDoesNotBecomeAustralianReceipt = refl
 
 acaciaLadderStillOpen :
   B.biocrustEvidenceClosesAcaciaBacterialFixedNFlux B.canonicalBiocrustBoundary ≡ false
