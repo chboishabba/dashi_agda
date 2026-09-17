@@ -6,6 +6,7 @@ import DASHI.Analysis.ConcreteComplex as Complex
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.OrdinaryComplexPolar as Polar
 import DASHI.Moonshine.JInvariantConstructedComplexKleinJBackendExact as CKlein
+import DASHI.Moonshine.JInvariantProofRelevantKleinJExact as ProofKlein
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Series
 import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as Klein
 import DASHI.Moonshine.JInvariantEisensteinCalculatorKleinInputWeldExact as P
@@ -60,3 +61,16 @@ directJRegression :
   P.directJTruncatedCalculatorQ C D F kernel n normalization point
   ≡ Klein.directJTruncated C D F kernel n normalization point
 directJRegression = P.directJTruncatedCalculatorQMatches
+
+sourceFacingKleinRegression :
+  (C : Complex.ConstructedComplexPackage) ->
+  (D : Polar.RealDivisionAndSquareRoot (Real.real (Complex.realPackage C))) ->
+  (F : Polar.ComplexFieldAuthority (Real.real (Complex.realPackage C)) D) ->
+  (kernel : Series.DivisorPowerKernel) ->
+  (n : Nat) ->
+  (normalization : Klein.EisensteinNormalizationData C D F) ->
+  (agreement : Klein.EisensteinKleinNormalizationAgreement C D F kernel n normalization) ->
+  (point : Klein.CertifiedFiniteEisensteinPoint C D F kernel n normalization) ->
+  ProofKlein.KleinJ (Klein.eisensteinKlein C D F kernel n normalization) point
+  ≡ P.directJTruncatedCalculatorQ C D F kernel n normalization point
+sourceFacingKleinRegression = P.sourceFacingKleinJCalculatorQMatches
