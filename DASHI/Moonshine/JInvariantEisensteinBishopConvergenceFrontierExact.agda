@@ -10,37 +10,30 @@ module DASHI.Moonshine.JInvariantEisensteinBishopConvergenceFrontierExact where
 --   finite truncation -> infinite analytic Eisenstein series
 --
 -- debt by reusing the convergence machinery that is already checked and
--- vendored in this repository.  In particular, DASHI already owns:
+-- vendored in this repository. DASHI owns the Bishop/Murray real carrier,
+-- Sequence.SeriesOf, completeness/limit uniqueness, absolute -> ordinary
+-- convergence, the finite-sum -> SeriesOf bridge, and now a componentwise
+-- Bishop-complex series compiler.
 --
---   * the Bishop/Murray real carrier and Sequence.SeriesOf;
---   * Cauchy completeness and uniqueness of limits;
---   * absolute-series convergence -> convergence;
---   * the stdlib finite-sum <-> Bishop SeriesOf prefix bridge.
+-- What remains for the actual E4/E6 route is therefore narrower:
 --
--- What remains is therefore NOT a missing completeness theorem.  For the
--- actual E4/E6 route we still need:
---
---   1. a componentwise convergence carrier for the constructed complex used
---      by JInvariantEisensteinFiniteQSeriesExact;
---   2. concrete absolute-convergence/majorant proofs for
+--   1. weld the Bishop setoid-complex convergence carrier to the older
+--      ConcreteComplex.ComplexPair evaluator used by the finite recurrence;
+--   2. prove concrete absolute-convergence/majorant bounds for
 --        240 sigma_3(n) q^n and -504 sigma_5(n) q^n, |q| < 1;
---   3. a same-object theorem identifying the resulting q-series limits with
---      the analytic lattice-sum EisensteinSeries object.
+--   3. identify the resulting q-series limits with the analytic lattice-sum
+--      EisensteinSeries object.
 --
 -- SOURCE / CODE ATTRIBUTION
---
--- Errett Bishop and Douglas Bridges, Constructive Analysis, Springer, 1985.
--- DOI: 10.1007/978-3-642-61667-9.
---
+-- Errett Bishop and Douglas Bridges, Constructive Analysis, Springer, 1985,
+-- DOI 10.1007/978-3-642-61667-9.
 -- Zachary Murray, "Constructive Analysis in the Agda Proof Assistant",
--- Dalhousie University BSc Honours thesis, 2022, arXiv:2205.08354.
--- No DOI was assigned to the thesis.
+-- Dalhousie University BSc Honours thesis, 2022, arXiv:2205.08354; no DOI.
+-- Viktor Csimma's continuation is pinned by DASHI at vendor/bishop commit
+-- 240e38c7f6938f20f865b1f956c5f084da48bd54.
 --
--- Code continuation: Viktor Csimma, viktorcsimma/bishop, pinned by DASHI at
--- vendor/bishop commit 240e38c7f6938f20f865b1f956c5f084da48bd54.
---
--- The decomposition and adapters below are DASHI contributions.  None of the
--- above citations is treated as importing proof authority by itself.
+-- The decomposition and adapters below are DASHI contributions. Citations do
+-- not import proof authority by themselves.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -51,6 +44,7 @@ import Real as BishopReal
 import RealProperties as BishopProperties
 import Sequence as BishopSequence
 
+import DASHI.Analysis.BishopComplexSeriesConvergenceExact as BishopComplex
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
 
@@ -103,13 +97,16 @@ compileAbsoluteSeriesLimit terms absolute =
     BishopProperties.≃-refl
     (bishopSeriesLimitConvergence terms absolute)
 
+compileComponentwiseComplexLimit :
+  (terms : Nat -> BishopComplex.BishopComplex) ->
+  (absolute : BishopComplex.ComponentwiseAbsoluteSeriesConvergent terms) ->
+  BishopComplex.ComplexSeriesConvergesTo
+    terms
+    (BishopComplex.complexSeriesLimit terms absolute)
+compileComponentwiseComplexLimit = BishopComplex.complexSeriesLimitConvergence
+
 ------------------------------------------------------------------------
 -- Exact residual frontier.
---
--- Keep these booleans descriptive.  In particular, the finite E4/E6 evaluator
--- is on ConcreteComplex.ComplexPair over ConstructiveRealSpine, while the
--- theorem above is the native Bishop real/setoid SeriesOf backend.  We do not
--- identify those carriers merely because both are constructive analysis.
 ------------------------------------------------------------------------
 
 record EisensteinBishopConvergenceFrontier : Set where
@@ -119,8 +116,9 @@ record EisensteinBishopConvergenceFrontier : Set where
     finiteSumToBishopSeriesBridgeOwned : Bool
     absoluteConvergenceToLimitCompilerOwned : Bool
     bishopLimitUniquenessOwned : Bool
+    bishopComplexComponentwiseConvergenceOwned : Bool
 
-    constructedComplexComponentwiseConvergenceOwned : Bool
+    constructedComplexEvaluatorCarrierWeldOwned : Bool
     e4ConcreteAbsoluteConvergenceOwned : Bool
     e6ConcreteAbsoluteConvergenceOwned : Bool
     bishopLimitEqualsAnalyticLatticeEisenstein : Bool
@@ -136,7 +134,7 @@ canonicalEisensteinBishopConvergenceFrontier :
   EisensteinBishopConvergenceFrontier
 canonicalEisensteinBishopConvergenceFrontier =
   eisenstein-bishop-convergence-frontier
-    true true true true
+    true true true true true
     false false false false false
     false false
-    "Bishop completeness is already paid: any real term sequence with a checked absolute-convergence witness has a canonical convergent SeriesOf limit, and finite stdlib sums agree with its prefixes. The remaining Eisenstein debt is the actual constructed-complex lift, concrete E4/E6 majorants for |q|<1, and the q-series-limit = analytic lattice-sum same-object theorem; citations and Python parity do not pay those obligations."
+    "Bishop completeness and generic componentwise complex convergence are paid. The remaining Eisenstein debt is the carrier weld to the existing ConcreteComplex finite evaluator, concrete E4/E6 absolute-convergence majorants for |q|<1, and the q-series-limit = analytic lattice-sum same-object theorem; citations and Python parity do not pay those obligations."
