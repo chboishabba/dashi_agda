@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Crypto.ShorFactoring as Shor
+import DASHI.Crypto.ShorOrderFinding as Order
 import DASHI.Crypto.ShorQuantumRunFactorTransportExact as QuantumFactor
 import DASHI.ComputerScience.FactorProducerReceiptExact as Receipt
 import DASHI.ComputerScience.QuantumExecutionFibreAdapterExact as Exec
@@ -59,7 +60,7 @@ quantumShorRunExecutionFibre :
   (R : Shor.QuantumShorFactoringRun P) →
   Exec.QuantumCostProfile →
   Exec.ShorExecutionFibre
-    (Shor.asHiddenPeriodProblem (Shor.modularOrderProblem R))
+    (Order.asHiddenPeriodProblem (Shor.modularOrderProblem R))
 quantumShorRunExecutionFibre P R cost =
   RunFibre.certifiedOrderFindingRunExecutionFibre
     (Shor.modularOrderProblem R)
