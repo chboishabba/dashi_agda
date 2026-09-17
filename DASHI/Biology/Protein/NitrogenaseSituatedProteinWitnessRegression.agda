@@ -27,6 +27,10 @@ payaTormoDOIIsAttached :
   Attribution.doiRecorded "10.1038/s41589-025-02070-4"
 payaTormoDOIIsAttached = refl
 
+fullSituatedContextRetained :
+  Nif.fullSituatedContextCarrierRetained Nif.canonicalNitrogenaseBoundary ≡ true
+fullSituatedContextRetained = refl
+
 proteinIdentityProjectionIsInadequate :
   Nif.proteinIdentityAloneAdequate Nif.canonicalNitrogenaseBoundary ≡ false
 proteinIdentityProjectionIsInadequate = refl
