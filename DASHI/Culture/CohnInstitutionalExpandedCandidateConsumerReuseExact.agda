@@ -6,6 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.InstitutionalNormProductionExact as Norm
 import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
+import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Culture.CohnInstitutionalExpandedCandidateFibreAskExact as Ask
 import DASHI.Governance.FirstNationsOwnedEvidenceContractExact as FirstNations
 import DASHI.Governance.MoretonRobinsonRecognitionSovereigntyBoundaryExact as Sovereignty
@@ -47,7 +48,7 @@ canonicalExpandedConsumerReuse : ExpandedConsumerReuse
 canonicalExpandedConsumerReuse = expanded-consumer-reuse
   uninstantiatedCandidate
   uninstantiatedCandidate
-  uninstantiatedCandidate
+  existingNeighbourConsumer
   existingNeighbourConsumer
   existingNeighbourConsumer
   uninstantiatedCandidate
@@ -73,6 +74,14 @@ proximityInfluenceDefect = Proximity.influenceQueryAdequacyDefect
 -- history.
 productionHistoryDefect : Norm.ProductionHistoryQueryAdequacyDefect
 productionHistoryDefect = Norm.productionHistoryQueryAdequacyDefect
+
+-- Collins' outsider-within standpoint is source-specific and not identical to
+-- DASHI subject-position grammar.  The canonical neighbour nevertheless pays
+-- the structural point that a representable surface does not recover the
+-- originating subject position.
+subjectPositionNeighbour :
+  Subject.SubjectPositionCollision Subject.canonicalRepresentationSubjectPositionSystem
+subjectPositionNeighbour = Subject.canonicalSubjectPositionCollision
 
 consultationDoesNotPayBalancedParticipation :
   Norm.consultationAutomaticallyBalancedParticipation
@@ -149,7 +158,7 @@ open ExpandedConsumerReuseFrontier public
 canonicalExpandedConsumerReuseFrontier : ExpandedConsumerReuseFrontier
 canonicalExpandedConsumerReuseFrontier = expanded-consumer-reuse-frontier
   "governance/permission -> FirstNationsOwnedEvidenceContractExact; recognition/sovereignty -> MoretonRobinsonRecognitionSovereigntyBoundaryExact"
-  "participation power -> InstitutionalProximityInfluenceAdequacyExact as access/influence neighbour; internal exclusion -> InstitutionalNormProductionExact as included/excluded production-history neighbour; Two-Eyed coexistence/co-learning -> existing Indigenous knowledge/braiding owners"
-  "structural epistemic exclusion; epistemic labour burden; outsider-within standpoint; epistemic activism/proper uptake; relational research burden still lack a direct typed institutional consumer in this audit"
+  "participation power -> InstitutionalProximityInfluenceAdequacyExact as access/influence neighbour; internal exclusion -> InstitutionalNormProductionExact as included/excluded production-history neighbour; outsider-within standpoint -> RepresentationSubjectPositionNonfactorabilityExact; Two-Eyed coexistence/co-learning -> existing Indigenous knowledge/braiding owners"
+  "structural epistemic exclusion; epistemic labour burden; epistemic activism/proper uptake; relational research burden still lack a direct typed institutional consumer in this audit"
   "the expanded source frontier is now partly operationalised by existing consumers without identifying those consumers with the source concepts"
   "prefer concrete fixtures for one of the still-open consumers; do not acquire another paper merely to restate an already represented neighbour"
