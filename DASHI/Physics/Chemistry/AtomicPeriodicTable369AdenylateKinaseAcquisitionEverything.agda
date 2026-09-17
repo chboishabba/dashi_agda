@@ -126,7 +126,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureSixPan
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationPaymentLedgerExact
 
 -- Rate-method attribution: Figure-5/Figure-6 Kramers numerics stay owned by
--- Li-Liu-Ji's same-object manifestations, while Hänggi-Talkner-Borkovec 1990
+-- Li-Liu-Ji's same-object manifestations, while Hanggi-Talkner-Borkovec 1990
 -- supplies general reaction-rate theory and Sriraman/Kevrekidis/Hummer 2005 +
 -- Hummer 2005 supply the cited diffusion-inference method lineage. Method-source
 -- DOI/PMID/QID metadata cannot create AdK numeric cells or experimental kinetics.
@@ -139,3 +139,12 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseKramersMetho
 -- a named numeric cell.  Access/search failure is a typed gap, not value absence,
 -- and DOI/QID/PDB/UniProt remain provenance rather than universal numeric premises.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAcquisitionFrontierExact
+
+-- Geometry-all-the-way-down physical continuation.  These thin adapters reuse
+-- canonical SI, TransitionKernel, atomic/molecular 369 receipts, exact 3-D/CV
+-- definitions and the existing state graph.  Registry identifiers remain
+-- provenance coordinates; unit conversion and lower-layer identity do not
+-- manufacture scientific payment or complete atomistic dynamics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSIQuantityBridgeExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseChemicalSystemExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalDynamicsBridgeExact
