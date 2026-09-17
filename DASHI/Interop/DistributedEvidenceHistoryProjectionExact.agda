@@ -92,11 +92,11 @@ open QueryIndex public
 record AuditableDerivedViewReceipt : Set where
   constructor auditableDerivedViewReceipt
   field
-    exactSource : ImmutableSourceObject
-    signedObservation : SignedObservation
-    authenticatedHistory : AuthenticatedHistory
-    deterministicProjection : DeterministicProjection
-    queryIndex : QueryIndex
+    receiptSource : ImmutableSourceObject
+    receiptObservation : SignedObservation
+    receiptHistory : AuthenticatedHistory
+    receiptProjection : DeterministicProjection
+    receiptIndex : QueryIndex
     sourceRetained : Bool
     sourceRetainedIsTrue : sourceRetained ≡ true
     observationRetained : Bool
@@ -196,7 +196,6 @@ data DeterministicProjectionCreatesSourceEvidence : Set where
 data QueryDiscoverabilityCreatesClaimTruth : Set where
 data DerivedViewReconstructsExactSource : Set where
 data MaterialisedViewIsReplicatedHistory : Set where
-
 data SameDigestCreatesSameSemanticClaim : Set where
 
 byteAvailabilityIsNotWriterProvenance : ByteAvailabilityCreatesWriterProvenance → ⊥
