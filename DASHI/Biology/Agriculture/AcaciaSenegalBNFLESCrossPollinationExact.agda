@@ -77,6 +77,35 @@ canonicalJoinedObserver = acacia-bnf-les-joined-observer
   false refl
 
 ------------------------------------------------------------------------
+-- Typed joined observation.
+--
+-- This is deliberately polymorphic in its BNF state: #980 supplies a concrete
+-- DrylandWaterCarbonState, while no single Acacia BNF paper supplies a complete
+-- ecosystem BNF state.  The bridge can therefore retain a separately sourced
+-- BNF state without fabricating a same-study empirical object.
+------------------------------------------------------------------------
+
+record AcaciaBNFLESObservation (BNFState : Set) : Set where
+  constructor acacia-bnf-les-observation
+  field
+    waterCarbonState : Dryland.DrylandWaterCarbonState
+    bnfState : BNFState
+    rhizobialPartnerReading : String
+    nodulationReading : String
+    nitrogenaseSituatedReading : String
+    fixedNEvidenceReading : String
+    soilNReading : String
+    waterCarbonSourceReading : String
+    bnfSourceReading : String
+    evidenceRoleReading : String
+    sameStudyEmpiricalObject : Bool
+    sameStudyEmpiricalObjectIsFalse : sameStudyEmpiricalObject ≡ false
+open AcaciaBNFLESObservation public
+
+observationTypeRetainsConcreteDrylandState : Set → Set
+observationTypeRetainsConcreteDrylandState = AcaciaBNFLESObservation
+
+------------------------------------------------------------------------
 -- Reuse of canonical BNF / LES owners.
 ------------------------------------------------------------------------
 
@@ -213,6 +242,11 @@ fixedNMetricNotTaskSufficientForRestoration factor =
 record AcaciaBNFLESBoundary : Set where
   constructor acacia-bnf-les-boundary
   field
+    reusesAcaciaWaterCarbonOwner : Bool
+    reusesBNFQualifiedInterventionOwner : Bool
+    reusesSituatedNitrogenaseOwner : Bool
+    reusesNodulationBridge : Bool
+    typedJoinedObservationRetained : Bool
     treeIdentityAloneAdequateForSoilN : Bool
     nodulePresenceAloneAdequateForSoilN : Bool
     rhizobialIdentityAloneAdequateForFixedN : Bool
@@ -229,9 +263,30 @@ open AcaciaBNFLESBoundary public
 
 canonicalAcaciaBNFLESBoundary : AcaciaBNFLESBoundary
 canonicalAcaciaBNFLESBoundary = acacia-bnf-les-boundary
+  true true true true true
   false false false false false false false false false
   true true false
 
+reusesMergedWaterCarbonOwner :
+  reusesAcaciaWaterCarbonOwner canonicalAcaciaBNFLESBoundary ≡ true
+reusesMergedWaterCarbonOwner = refl
+
+reusesExistingBNFQualifiedModel :
+  reusesBNFQualifiedInterventionOwner canonicalAcaciaBNFLESBoundary ≡ true
+reusesExistingBNFQualifiedModel = refl
+
+reusesSituatedNitrogenase :
+  reusesSituatedNitrogenaseOwner canonicalAcaciaBNFLESBoundary ≡ true
+reusesSituatedNitrogenase = refl
+
+reusesNodulation :
+  reusesNodulationBridge canonicalAcaciaBNFLESBoundary ≡ true
+reusesNodulation = refl
+
+typedJoinedObservationIsRetained :
+  typedJoinedObservationRetained canonicalAcaciaBNFLESBoundary ≡ true
+typedJoinedObservationIsRetained = refl
+
 attributionRule : String
 attributionRule =
-  "Abaker/Berninger/Starr DOI 10.1016/j.jaridenv.2017.12.004 remains the source owner for the merged dryland water-carbon observations only. Acacia/Senegalia BNF papers retain their own DOI/PMID-attributed propositions through AcaciaSenegalRhizobialBNFSourceAtlasExact and LegumeNodulationSituatedProteinBridgeExact. DASHI owns only the joined observer, TaskFactorisation collisions and no-promotion boundaries; joining sources does not manufacture a same-study empirical record or deployment authority."
+  "Abaker/Berninger/Starr DOI 10.1016/j.jaridenv.2017.12.004 remains the source owner for the merged dryland water-carbon observations only. Acacia/Senegalia BNF papers retain their own DOI/PMID-attributed propositions through AcaciaSenegalRhizobialBNFSourceAtlasExact and LegumeNodulationSituatedProteinBridgeExact. DASHI owns only the joined observer, typed cross-owner observation carrier, TaskFactorisation collisions and no-promotion boundaries; joining sources does not manufacture a same-study empirical record or deployment authority."
