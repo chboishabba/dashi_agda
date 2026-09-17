@@ -126,7 +126,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseFigureSixPan
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationPaymentLedgerExact
 
 -- Rate-method attribution: Figure-5/Figure-6 Kramers numerics stay owned by
--- Li-Liu-Ji's same-object manifestations, while Hanggi-Talkner-Borkovec 1990
+-- Li-Liu-Ji's same-object manifestations, while Hänggi-Talkner-Borkovec 1990
 -- supplies general reaction-rate theory and Sriraman/Kevrekidis/Hummer 2005 +
 -- Hummer 2005 supply the cited diffusion-inference method lineage. Method-source
 -- DOI/PMID/QID metadata cannot create AdK numeric cells or experimental kinetics.
