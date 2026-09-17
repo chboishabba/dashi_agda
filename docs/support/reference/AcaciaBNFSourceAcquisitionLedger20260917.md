@@ -16,10 +16,11 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1007/s003740050400`
 - `10.1007/BF01378191` — Habish 1970; multi-Acacia soil moisture/temperature/pH nodulation source. Retained as an environmental-enablement donor, not an Acacia-senegal-only quantitative rate law.
 
-## Rhizobial natural populations and competitive occupancy
+## Rhizobial natural populations, competitive occupancy and provenance interaction
 
 - `10.1007/s00248-004-0077-8` — PMID `16184338` — Sarr et al. 2005; natural Acacia senegal / Acacia nilotica soil-rhizobial population structure across Mauritania and Senegal River Valley sites.
 - `10.1007/s11274-006-9288-0` — Sarr & Lesueur 2007; mixed-inoculum nursery/field nodule-occupancy study. Soil/host/phase remain indexed; the paper's strong nursery-to-field ranking reversal is retained as Acacia nilotica evidence rather than relabelled as an Acacia senegal reversal.
+- `10.1007/s11104-015-2655-6` — Bakhoum et al. 2016; direct Senegalia senegal experiment crossing 11 rhizobial strains, three seed provenances and two field soils. Nodulation/growth response remains strain-by-provenance-by-soil indexed; no context-free best-strain ranking is inferred.
 
 ## Dual symbiosis, phosphorus and restoration context
 
