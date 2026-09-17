@@ -1,0 +1,9 @@
+module DASHI.Education.DigitalESDPoliticalEconomyProvisioningRegression where
+
+open import DASHI.Core.Prelude
+import DASHI.Education.DigitalESDPoliticalEconomyProvisioningExact as Political
+
+politicalEconomyBoundary = Political.canonicalDigitalESDPoliticalEconomyBoundary
+politicalEconomyIntersectionalChallenge = Political.canonicalPoliticalEconomyIntersectionalChallenge
+politicalEconomySourceAtlas = Political.canonicalPoliticalEconomySourceAtlas
+capitalismLabelNoPromotion = Political.capitalismLabelDoesNotCreateWastePressure
