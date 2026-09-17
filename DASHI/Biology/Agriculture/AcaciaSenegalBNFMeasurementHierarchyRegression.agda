@@ -12,6 +12,9 @@ bakhoumDOIPinned = refl
 githaeDOIPinned : M.githae2013DOI ≡ "10.1080/15324982.2013.784377"
 githaeDOIPinned = refl
 
+raddadDOIPinned : M.raddad2005DOI ≡ "10.1007/s11104-005-2152-4"
+raddadDOIPinned = refl
+
 assefaKleinerDOIPinned : M.assefaKleiner1998DOI ≡ "10.1007/s003740050400"
 assefaKleinerDOIPinned = refl
 
@@ -30,6 +33,10 @@ saraNotPlantDelivery = refl
 foliarIsotopeNotNitrogenaseFlux :
   M.foliarIsotopeEstimateEqualsDirectNitrogenaseFlux M.canonicalMeasurementBoundary ≡ false
 foliarIsotopeNotNitrogenaseFlux = refl
+
+provenanceTemporalFoliarReceiptIsPlantIntegrated :
+  M.plantIntegratedEvidence M.raddadFoliarReceipt ≡ true
+provenanceTemporalFoliarReceiptIsPlantIntegrated = refl
 
 soilNNotBNFContribution :
   M.soilNPoolEqualsBNFContribution M.canonicalMeasurementBoundary ≡ false
