@@ -139,3 +139,67 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseKramersMetho
 -- a named numeric cell.  Access/search failure is a typed gap, not value absence,
 -- and DOI/QID/PDB/UniProt remain provenance rather than universal numeric premises.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAcquisitionFrontierExact
+
+-- Geometry-all-the-way-down physical continuation.  These thin adapters reuse
+-- canonical SI, TransitionKernel, atomic/molecular 369 receipts, exact 3-D/CV
+-- definitions and the existing state graph.  Registry identifiers remain
+-- provenance coordinates; unit conversion and lower-layer identity do not
+-- manufacture scientific payment or complete atomistic dynamics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSIQuantityBridgeExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseChemicalSystemExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalDynamicsBridgeExact
+
+-- Atomistic configuration/evaluator continuation: atoms retain stable indices,
+-- SI-length coordinates, chemical microstate and provenance; Figure-1 residue
+-- selections become typed objects; COM geometry is mass-convention-aware and
+-- SE(3)-invariant; the existing AtomisticCVProjection interface is inhabited
+-- from those lower carriers without creating a state classifier or mechanics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticConfigurationExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceAtomSelectionExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCOMGeometryExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticCVProjectionExact
+
+-- DASHI-original projection-information-loss continuation. Source-owned AdK
+-- selection roles and attributed mass conventions remain upstream facts; the
+-- selection-extensionality relation, projection collision, and compilation to
+-- the canonical non-factorability spine are DASHI bridge mathematics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCVProjectionNonFactorabilityExact
+
+-- Same-object PDB and mechanics continuation.  4AKE/1AKE entry identities do
+-- not silently choose chain/model/altloc or become coordinate-derived CV values.
+-- Li-Liu-Ji's historical simulation settings are acquired separately from exact
+-- parameter/topology bytes. OpenMM is retained only as a future independent
+-- executable oracle, and trajectory lifting preserves atomistic frames under
+-- CV projection and mesoscopic state classification.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBAtomisticFixtureExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseHistoricalMechanicsExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOpenMMCVOracleExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticTrajectoryLiftExact
+
+-- Provenance-only transport unblocker for coordinate acquisition. Mirror objects
+-- retain their own repository/path/blob identities and the upstream PDB DOI;
+-- they do not claim canonical wwPDB-byte parity or scientific authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBMirrorTransportExact
+
+-- Typed navigation/provenance coordinates for the physical continuation.
+-- DOI/QID/Dewey stay independent, non-authoritative coordinates; unresolved
+-- classifications remain unresolved rather than being guessed from neighbours.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalAttributionCoordinatesExact
+
+-- Canonical executable acquisition/evaluation bridge for future pinned 4AKE/
+-- 1AKE coordinate manifestations. Script v0.2 retains both identity and
+-- mass-coordinate selection hashes; hashes remain audit evidence, not proof of
+-- underlying content equality or scientific authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVScriptManifestExact
+
+-- DASHI-original executable-to-formal weld. An explicit selected-content witness
+-- compiles script-manifest evidence into the selection-extensionality theorem;
+-- equal hashes alone do not. Different source bytes may therefore share the
+-- same CV-relevant quotient without becoming the same byte manifestation.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVManifestExtensionalityExact
+
+-- Transparent canonical selected-content quotient. Canonical row equality is
+-- the concrete SelectionEquivalent relation for a content-sound COM model;
+-- payload hashes remain audit coordinates and do not create content equality,
+-- PDB identity, or scientific authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCanonicalSelectionContentExact
