@@ -1,5 +1,6 @@
 module DASHI.Wikimedia.MaboWorldObjectIdentityValidation where
 
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Wikimedia.MaboWorldObjectIdentityExact
 
