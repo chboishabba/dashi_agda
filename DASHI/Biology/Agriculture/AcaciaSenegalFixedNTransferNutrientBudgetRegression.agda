@@ -27,6 +27,9 @@ fall2012PMIDPinned = refl
 elTahir2009DOIPinned : T.elTahirEtAl2009DOI ≡ "10.1016/j.jaridenv.2008.11.007"
 elTahir2009DOIPinned = refl
 
+basga2018DOIPinned : T.basgaEtAl2018DOI ≡ "10.5897/AJAR2018.13283"
+basga2018DOIPinned = refl
+
 plantFixedNDoesNotCreateInterplantTransfer :
   T.plantFixedNContributionImpliesInterplantTransfer T.canonicalTransferBudgetBoundary ≡ false
 plantFixedNDoesNotCreateInterplantTransfer = refl
@@ -58,6 +61,14 @@ priorAccumulationDoesNotGuaranteePersistenceAfterConversion = refl
 managementHistoryRemainsIndexed :
   T.landUseTransitionAndHistoryMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
 managementHistoryRemainsIndexed = refl
+
+cropYieldWithMineralNDoesNotPayAvoidedMineralN :
+  T.cropYieldUnderCoAppliedMineralNClosesAvoidedMineralN T.canonicalTransferBudgetBoundary ≡ false
+cropYieldWithMineralNDoesNotPayAvoidedMineralN = refl
+
+fertilizerCotreatmentRemainsIndexed :
+  T.mineralFertilizerCotreatmentMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
+fertilizerCotreatmentRemainsIndexed = refl
 
 managementExportRemainsIndexed :
   T.harvestAndExportMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
