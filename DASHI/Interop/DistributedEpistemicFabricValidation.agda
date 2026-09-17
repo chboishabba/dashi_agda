@@ -2,6 +2,7 @@ module DASHI.Interop.DistributedEpistemicFabricValidation where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (false; true)
+open import Data.Empty using (⊥)
 
 import DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact as Sources
 import DASHI.Interop.DistributedEpistemicPlaneSeparationExact as Planes
@@ -75,11 +76,26 @@ publicPathRetainsCommonsLane = refl
 -- stops typechecking rather than silently weakening the architecture.
 ------------------------------------------------------------------------
 
+cidFirewall : Planes.CIDCreatesAuthority → ⊥
 cidFirewall = Planes.cidIsNotAuthority
+
+settlementFirewall : Planes.SettlementCreatesEpistemicTruth → ⊥
 settlementFirewall = Planes.settlementIsNotEpistemicTruth
+
+proofPromotionFirewall : Producer.ProofReceiptCreatesPromotion → ⊥
 proofPromotionFirewall = Producer.proofReceiptIsNotPromotion
+
+missingSourceFirewall : Producer.ThinkPaysMissingSource → ⊥
 missingSourceFirewall = Producer.thinkCannotPayMissingSource
+
+humanReviewFirewall : Producer.ThinkPaysHumanReview → ⊥
 humanReviewFirewall = Producer.thinkCannotPayHumanReview
+
+zeroPriceFirewall : Access.ZeroPriceImpliesEffectiveAccess → ⊥
 zeroPriceFirewall = Access.zeroPriceDoesNotImplyEffectiveAccess
+
+machineRoleFirewall : Access.MachineClientImpliesCommercialRole → ⊥
 machineRoleFirewall = Access.machineClientDoesNotImplyCommercialRole
+
+settledContractFirewall : Access.SettledContractCreatesTruth → ⊥
 settledContractFirewall = Access.settledContractDoesNotCreateTruth
