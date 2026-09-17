@@ -11,7 +11,7 @@ This tranche follows the repository attribution firewall:
 
 Every scientific production owner attaches DOI metadata directly to an Agda source fixture through `DASHI.Core.AttributedSourceCore.mkDOISource`. PMID/PMCID/PDB coordinates are retained when independently verified; unresolved identifiers remain explicitly unresolved/not recorded rather than guessed.
 
-## Newly sharpened source surfaces
+## Newly sharpened Acacia / Senegalia source surfaces
 
 - Habish 1970 — DOI `10.1007/BF01378191` — multi-Acacia moisture/temperature/pH nodulation experiment. The source supports pH as an enablement coordinate and separates plant-growth response from nodule response; it is not an Acacia-senegal-only quantitative rate law.
 - Colonna et al. 1991 — DOI `10.1007/BF00205900` — Acacia senegal Rhizobium/AMF/P factorial greenhouse evidence. AM-fungal state and plant-available-P context remain distinct from compatible-rhizobium identity.
@@ -21,9 +21,26 @@ Every scientific production owner attaches DOI metadata directly to an Agda sour
 - Sarr & Lesueur 2007 — DOI `10.1007/s11274-006-9288-0` — mixed-inoculum nursery/field competitive occupancy. The strongest nursery-to-field rank reversal reported is retained as Acacia nilotica evidence; no Acacia-senegal-specific rank reversal is manufactured.
 - Gerakis & Tsangarakis 1970 — DOI `10.1007/BF01378198` — central-Sudan sand-sheet fertility and former-tree-patch heterogeneity. Current cleared-land cover does not erase spatial soil memory.
 
+## Australian native-legume / regeneration source surfaces
+
+- Burdon et al. 1999 — DOI `10.1046/j.1365-2664.1999.00409.x` — native Australian Acacia × rhizobial-isolate effectiveness varies strongly among host populations and isolates.
+- Thrall, Burdon & Woods 2000 — DOI `10.1046/j.1365-2664.2000.00470.x` — native Australian-legume rhizobial effectiveness retains host/population/isolate context.
+- Murray, Thrall & Woods 2001 — DOI `10.1046/j.1442-8903.2001.00086.x` — restoration implications of Acacia-rhizobial specificity/effectiveness; retained as restoration context, not authority.
+- Thrall et al. 2005 — DOI `10.1111/j.1365-2664.2005.01058.x` — direct-seeding field revegetation with native rhizobial inoculation; establishment, early growth and survival remain distinct and species/site indexed.
+- Bell et al. 2003 — DOI `10.1071/SB02004` — WA AM-inoculation mine rehabilitation; viable inoculum did not guarantee extensive native-plant colonisation or growth benefit and indigenous propagules/context remained important.
+- Moreira-Grez et al. 2019 — DOI `10.3389/fmicb.2019.01617` — agriculture-derived microbial inoculum in Pilbara Acacia ancistrocarpa mine soil; introduced consortium and native-system microbiome are not interchangeable.
+- Kneller et al. 2018 — DOI `10.1016/j.scitotenv.2017.11.219`; PMID `29197793` — Pilbara Triodia/Acacia reconstructed-soil experiment; increased soil C/N or microbial activity did not itself create improved recruitment/survival and topsoil remained a distinct coordinate.
+- Scott & Morgan 2012 — DOI `10.1016/j.jaridenv.2011.08.014` — semi-arid Australian old-field soil/vegetation recovery across a long chronosequence.
+- Standish et al. 2007 — DOI `10.1111/j.1365-2664.2006.01262.x` — WA old-field native recolonisation constrained by dispersal/recruitment and exotic competition.
+- Fensham et al. 2016 — DOI `10.1111/1365-2664.12551` — Queensland subtropical-grassland passive restoration depends on remnant seed sources/dispersal and avoiding deflected succession.
+- Parkhurst, Standish & Prober 2022 — DOI `10.1002/eap.2547`; PMID `35080806` — available soil P remains elevated more than a decade after old-field restoration.
+- Kaneko et al. 2023 — DOI `10.1111/grs.12391` — sorghum-sudangrass as an annual companion during perennial pasture establishment; temporary cover/forage function is distinct from long-term perennial trajectory.
+- Guretzky & Redfearn 2021 — DOI `10.3390/agronomy11122449` — establishment-year sorghum-sudangrass forage response with no residual following-year forage/vegetation effect in the reported system.
+- Burt et al. 2025 — DOI `10.1002/cft2.70055` — agricultural herbage/weed-suppression functions; not native-restoration or biodiversity evidence.
+
 ## Previously retained Acacia / Senegalia evidence
 
-The earlier source atlas and downstream owners retain Fall 2008/2016, Faye 2006, Herrmann 2012, Bakhoum 2015, Nowak 2004, Rasanen 1999/2004, Fall 2011, Isaac 2011 sources, Githae 2013, Raddad 2005/2006/2007, Abaker 2018, Isaac/Hinsinger/Harmand 2012, Deans 1999, Fall 2012, El Tahir 2009, Basga 2018, Gaafar 2006 and Raddad/Luukkanen 2006 under their individual DOI/PMID receipts in `AcaciaBNFSourceAcquisitionLedger20260917.md`.
+The earlier source atlas and downstream owners retain Fall 2008/2016, Faye 2006, Herrmann 2012, Bakhoum 2015/2016, Nowak 2004, Rasanen 1999/2004, Fall 2011, Isaac 2011 sources, Githae 2013, Raddad 2005/2006/2007, Abaker 2018, Isaac/Hinsinger/Harmand 2012, Deans 1999, Fall 2012, El Tahir 2009, Basga 2018, Gaafar 2006 and Raddad/Luukkanen 2006 under their individual DOI/PMID receipts in `AcaciaBNFSourceAcquisitionLedger20260917.md`.
 
 ## Measurement / mechanism donors retained
 
@@ -37,26 +54,38 @@ The earlier source atlas and downstream owners retain Fall 2008/2016, Faye 2006,
 
 ## Promotion firewalls checked
 
-The source-written tranche now explicitly blocks all of the following additional promotions:
+The source-written tranche explicitly blocks:
 
 - compatible rhizobial identity => realised symbiotic performance without AMF/P context;
-- total-P or nominal soil-P label => plant-available/symbiosis-mediated P context;
-- higher nutrient/manure amendment => better nodulation/AM colonization;
-- nursery biomass => field restoration survival;
-- greenhouse dual-symbiosis result => mine-restoration same empirical object;
-- soil moisture/temperature context => adequate nodulation model with pH discarded;
 - plant growth => successful nodulation;
-- instantaneous water state => season-integrated dryland fixation regime;
-- generic dryland-legume seasonality => Acacia same-object seasonal measurement;
 - natural soil rhizobial population => introduced inoculum mixture;
 - strain identity => realised nodule occupancy;
 - nursery occupancy => field occupancy;
-- multi-Acacia occupancy transition => Acacia-senegal-specific rank reversal;
 - nodule occupancy => fixed-N flux or plant assimilation;
 - present cleared-land label => spatially homogeneous soil after prior Acacia occupation;
-- former-tree patch history => discardable field-trial coordinate.
+- Australian native-rhizobial inoculation => effective symbiosis => establishment => growth => survival => whole-community recovery;
+- Australian Acacia/rhizobial field result => Senegalia senegal same-object result;
+- viable or introduced microbial inoculum => extensive field colonisation;
+- field colonisation => plant growth benefit;
+- agriculture-derived microbial consortium => cognate native-system microbiome;
+- increased soil C/N or microbial activity => native recruitment/survival;
+- soil recovery => floristic recovery;
+- old-field abandonment => reference-community recovery;
+- species-richness recovery => reference floristic composition;
+- present restored vegetation => erased agricultural phosphorus legacy;
+- temporary sorghum-sudangrass cover => perennial recovery;
+- biomass increase => biodiversity recovery;
+- weed suppression => native restoration;
+- agricultural pasture result => native grassland same empirical object;
+- shared functional role => same ecological object or transferable response;
+- pioneer establishment => desired successional endpoint;
+- intervention success at t1 => trajectory success at t2.
 
 All earlier no-promotion firewalls remain in force: nodule != active nitrogenase, `nifH` != fixation rate, stoichiometry != in-vivo flux, Ndfa != direct flux, plant fixed-N != interplant transfer, transfer != positive field balance, field balance != fertilizer substitution, co-fertilized crop yield != avoided mineral N, hydrology/crop response remains soil/age/management indexed, and cross-paper provenance labels do not create same-object joins or correlations.
+
+## Comparative regeneration hyperfabric
+
+`DrylandPioneerLegumeGrasslandRegenerationHyperfabricExact` cross-pollinates only typed functional roles: `nFixingPioneer`, `temporaryNurse`, `soilBiotaCarrier`, `groundCoverProvider`, `weedCompetitor`, `hydrologicalActor`, and `recruitmentFacilitator`. Australian Acacia/wattle systems, Pilbara mine rehabilitation, Australian grassland old fields, agricultural sorghum-sudangrass and Senegalia dryland systems remain different empirical objects. The hyperfabric adds a finite `TaskFactorisation` collision proving an early-success projection cannot determine long-term trajectory success.
 
 ## Canonical dependency ladder
 
@@ -69,11 +98,9 @@ Source acquisition still does not mutate the generic ladder:
 - seasonal crop/plant N demand: open;
 - avoided mineral N: open.
 
-The new dual-symbiosis, pH, seasonality and competitive-occupancy sources constrain what a future reaction-enablement inhabitant must retain, but do not manufacture that inhabitant.
-
 ## Current acquisition frontier
 
-The high-information remaining source gap is still a same-object Acacia/Senegalia experiment connecting enabled nodules / realised BNF through season-integrated plant or crop N demand to an explicit mineral-N counterfactual. Public searching has not yielded a clean field receipt sufficient to close `avoidedMineralN`; Basga et al. remains an explicit negative-control because mineral fertilizer was co-applied. Trace-metal/cofactor searches so far produced generic or lower-authority material and were not promoted into Acacia-specific receipts. Elicit API search remains unavailable on the connected account, which limits corpus coverage but is not evidence of source absence.
+The source surface is now substantially broader than Acacia/Senegalia: native Australian legume inoculation, mine-site microbiome matching, grassland/old-field succession and temporary nurse-cover interventions are first-class lanes. The high-information BNF terminal gap remains a same-object Acacia/Senegalia experiment connecting realised BNF through season-integrated crop/plant N demand to an explicit mineral-N counterfactual. Comparative regeneration adds a separate frontier: direct multi-year experiments that jointly observe pioneer/nurse intervention, soil-biota state, recruitment, composition and long-term trajectory on the same restoration object would pay more than additional single-coordinate stress studies.
 
 ## Certification status
 
