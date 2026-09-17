@@ -1,10 +1,8 @@
-# Yang–Mills Aristotle exact residual brief — 2026-09-17 dense-L2 recut
+# Yang–Mills Aristotle exact residual brief — 2026-09-17 dense-marked F1 recut
 
 ## Authority and scope
 
-This is the current bookkeeping surface for PR #996. It supersedes the older F1+F2+F3+F4 and trajectory-uniform-`c` formulations.
-
-The proof-accounting distinction is strict:
+This is the live bookkeeping surface for PR #996. The proof-accounting distinction remains strict:
 
 ```text
 source authority
@@ -19,197 +17,174 @@ The physical frontier remains
 \boxed{F_1+F_3+F_4}.
 \]
 
-Old F2 is not an independent payment. Isometric embeddings remain real data inside F3, but the checked varying-carrier compiler does not require separate Hamiltonian/vacuum-compatibility hypotheses as primitive inputs.
-
-No unconditional Clay completion is claimed.
+Old F2 is not an independent research payment. Isometric embeddings remain real data inside F3, but the varying-carrier theorem already owns the generic transport mathematics. No unconditional Clay completion is claimed.
 
 ## Already paid — do not redo
 
-### Literal finite Wilson theory
+The repository / supplied Aristotle development already owns the main compiler infrastructure:
 
-The retained Lean lattice development supplies the literal four-dimensional SU(2) Wilson/Gibbs carrier, gauge-invariant physical slice Hilbert space, transfer form, finite self-adjoint Hamiltonian, normalized zero-energy vacuum, and the finite coercivity-to-gap compiler.
-
-The literal transfer operator is
-
-\[
-T=P_1^*P_0,
-\]
-
-with
-
-\[
-q(\psi,\psi)=\|\psi\|^2-\operatorname{Re}\langle T\psi,\psi\rangle.
-\]
-
-The continuum trajectory compiler consumes only
-
-\[
-\boxed{\Delta a_k\le 1-c_k},
-\]
-
-so `c_k -> 1` at `O(a_k)` is allowed. One trajectory-uniform `c<1` is stronger than required.
-
-### Vacuum-sector spectral consequences
-
-Use the existing `VacuumGapDatum` theorems for eigenvalue exclusion, vacuum-sector inversion and the `(Delta-lambda)^-1` resolvent bound. Do not rebuild them.
-
-### Mosco / graph-limit / physical L2 infrastructure
-
-The repository already owns serious typed infrastructure here:
-
-- `BalabanVacuumOrthogonalMoscoRecoveryExact.VacuumOrthogonalRecoverySystem`;
-- its vacuum-complement uniform-gap recovery theorem;
-- the selected gauge-invariant physical `L2` carrier architecture;
-- varying-carrier and graph-limit gap compilers;
-- the Aristotle `Clay/MassGapAssembly` and literal `Lattice/ContinuumWeld` consumer shapes.
+- literal finite four-dimensional SU(2) Wilson/Gibbs carrier;
+- gauge-invariant physical slice `L2` language and vacuum complement;
+- transfer-form / finite Hamiltonian / finite spectral-gap consequences;
+- per-step trajectory reduction `Delta * a_k <= 1 - c_k` (no trajectory-uniform `c < 1` required);
+- varying-carrier transport through isometric embeddings;
+- vacuum-orthogonal recovery / Mosco / graph-limit gap transport;
+- OS reconstruction theorem surfaces and common-core generator/evolution uniqueness machinery.
 
 Therefore:
 
 ```text
 MOSCO THEORY      != F3
+OS RECONSTRUCTION != F4
 L2 CONSTRUCTION   != F1/F3/F4
 ```
 
-F3 is the **physical literal-Wilson instantiation** of the already-owned recovery/embedded-graph-limit interface.
-
-The supplied Lean archive additionally proves that the generic direct-sum common carrier is degenerate for a nontrivial physical graph limit (`ymCanonicalCarrier_graphLimit_degenerate`). Generic carrier existence is not a substitute for the physical embedding family.
-
-### OS reconstruction / generator machinery
-
-The repository already owns continuum OS theorem surfaces, preferred physical OS reconstruction compilers, common-core generator uniqueness, and the Aristotle `OSWeld` consumer.
-
-Therefore:
-
-```text
-OS RECONSTRUCTION != F4
-```
-
-F4 is the last-mile same-object identification of the already-available YM and OS dynamics on the physical common core.
+F3 and F4 are last-mile physical instantiation / same-object welds, not requests to rebuild those foundations.
 
 ---
 
-# F1 — literal Wilson transfer defect on the actual continuum trajectory
+# F1 — literal Wilson transfer defect
 
-The terminal payment is
-
-\[
-\exists\Delta>0\quad\forall k,n,\psi\perp\Omega_{n,k},
-\]
+The terminal finite-side payment remains
 
 \[
-|\langle P_0\psi,P_1\psi\rangle|\le c_k\|\psi\|^2,
+|\langle P_0\psi,P_1\psi\rangle|\le c_k\|\psi\|_2^2,
 \qquad
-\Delta a_k\le 1-c_k.
+\Delta a_k\le 1-c_k,
+\qquad \psi\perp\Omega.
 \]
 
-The trajectory must be the same literal Wilson family used by F3.
+The trajectory must be the same literal Wilson family consumed by F3.
 
-## Four honest input normal forms
-
-The finite-side compiler can now be targeted through:
+## Four honest producer normal forms
 
 ```text
-A. direct transfer-operator norm/decorrelator bound on physical L2_0
+A. direct transfer decorrelator on all physical L2_0
 
-B. state-uniform connected/truncated two-slice correlation bound on all L2_0
+B. connected/truncated two-slice correlation bound on all physical L2_0
 
-C. full joint-slice density mixing
+C. stronger full joint-slice density mixing
      d nu_01 / d(nu_0 x nu_1) = 1 + h,
      ||h||_infty <= eps
 
-D. dense local/cylinder observable algebra bound
+D. dense local/cylinder algebra
      D subset L2_0 dense
-     + uniform connected-correlation bound on D
-       -> full physical L2_0 decorrelator
+     + connected-correlation bound on D
+     -> full L2_0 decorrelator
 ```
 
-`CorrelationCriterion.lean` supplies B -> A and C -> A on the literal Wilson slice measure.
+The full `L^infty` Radon--Nikodym defect is therefore an optional strong producer, not a primitive F1 requirement.
 
-## New dense-L2 bidirectional compiler
+## Dense-L2 bidirectional compiler
 
-A new source-written Lean module was produced from the supplied 2026-09-17 Aristotle archive:
+The current branch records the supplied/source-written Lean theorem family
 
 ```text
 RequestProject/YangMills/Lattice/DenseCorrelationCriterion.lean
-```
 
-with theorem targets:
-
-```text
 dense_vacuum_decorrelation_iff_full
 truncated_correlation_eq_decorrelation
 truncated_correlation_iff_decorrelation
 decorrelation_of_dense_truncated_correlation
 ```
 
-Its theorem grammar is:
-
-\[
-D\subset L^2_0,\;\overline D=L^2_0,
-\]
-
-\[
-|\langle P_0\psi,P_1\psi\rangle|\le c\|\psi\|^2\quad(\psi\in D)
-\iff
-|\langle P_0\psi,P_1\psi\rangle|\le c\|\psi\|^2\quad(\psi\in L^2_0).
-\]
-
-On the vacuum complement the disconnected term vanishes, so the connected two-slice correlation equals the transfer pairing. Hence a uniform connected-correlation estimate on any dense physical local/cylinder algebra is enough for the existing F1 transfer compiler.
-
-The proof strategy is ordinary functional analysis: both sides of the inequality are continuous on the closed vacuum complement; the inequality defines a closed set containing the dense test algebra.
-
-**Validation boundary:** the file was written RED-first in the attached tree and the theorem names/static surface were checked, but this runtime has no Lean binary/dependency cache. No fresh Lean kernel receipt is claimed for this new file yet. The Agda bookkeeping owners are therefore conditional:
+through
 
 ```text
 YMClayDenseL2CorrelationBidiParityExact
 YMClayDenseL2CorrelationBidiParityValidation
 ```
 
-This compiler does **not** prove the physical dense-algebra correlation estimate.
+The intended compiler is ordinary closed-set/density mathematics: a continuous quadratic transfer bound holding on a dense subspace of the closed vacuum complement extends to all `L2_0`. On `L2_0` the disconnected vacuum term vanishes, so connected two-slice correlation is the literal transfer pairing.
 
-## Consequence for native KP/Ursell machinery
+No fresh Lean kernel receipt is claimed in this connector session; the bookkeeping status remains conditional until an exact-head Lean build is observed.
 
-The old ceiling was:
+## New dense marked-source producer compiler
+
+The new branch owner
 
 ```text
-pairwise/local observable correlation decay
-  !=
-full operator-strength bound over every psi in physical L2_0
+YMClayDenseMarkedSourceF1ProducerExact
+YMClayDenseMarkedSourceF1ProducerValidation
 ```
 
-The dense-L2 compiler removes the need to jump directly to a global `L^infty` density ratio. The source-side question can instead be:
+cross-pollinates the dense-L2 compiler with the already-existing marked-source machinery.
+
+Existing compiler mathematics already owns
+
+\[
+\partial_A\partial_B\log Z
+=
+\langle AB\rangle-\langle A\rangle\langle B\rangle
+=
+\operatorname{Corr}_c(A,B),
+\]
+
+and `BalabanMarkedLogPartitionConnectedCorrelationCompilerExact.SeparationDecayProducer` already compiles a mixed-source separation-decay theorem into connected-correlation decay.
+
+The new `DenseMarkedSourceF1Weld` chooses a dense physical vacuum-complement observable family and proves, generically,
 
 ```text
-choose a natural dense gauge-invariant local/cylinder algebra D subset L2_0
+selected marked-source decay
 +
-prove a uniform connected two-slice correlation estimate on D
+same literal Wilson observable identification
 +
-prove D is dense in the selected physical vacuum complement
+density in physical L2_0
++
+source decay envelope = physical F1 target c_k ||psi||_2^2
+    -> dense physical F1 connected-correlation bound.
 ```
 
-then use the new compiler to extend to all `L2_0`.
-
-The remaining nontrivial source payment is therefore potentially much more native to cluster/polymer/RG machinery.
-
-## Current CMP116 source-native producer
-
-The canonical current localization cut remains R338/R339:
+Its theorem is
 
 ```text
-R338 CanonicalCommonDomainCMP116Source
-R339 CanonicalSelectedT5CMP116Application
-  -> R339.canonicalApplicationBuildsR320Payment
-  -> R320.localizeBaseDirectlyAsR295
-  -> R295.DirectT5StateFamilyJPresentation
+denseMarkedSourceCorrelationPaysF1
 ```
 
-`YMClayF1CanonicalSourceApplicationExact` records this compiler. R346 remains a weaker alternate presentation but still stores proof-bearing physical localization/time-distance fields.
+and it deliberately keeps the same-object witnesses explicit so generic marked-source decay cannot be silently promoted to physical Wilson currency.
 
-Do not rebuild the older R318 presentation pair or the lower R406--R409 replay unless needed for provenance/source reconstruction.
+This removes another fake leaf: **the dense correlation inequality need not be postulated independently once the selected marked-source producer and physical normalization weld are supplied.**
 
-## Bałaban 1989 complete-density same-trajectory route
+## Exact current source-facing F1 cut
 
-The current repository owns the same-beta-history lane
+The relevant existing source spine is now visibly shared:
+
+```text
+CMP109/CMP116 differentiated marked localization
+    -> mixed log-J response
+    -> connected covariance
+    -> source separation envelope
+    -> NEW same-object envelope/L2 normalization weld
+    -> dense-L2 extension
+    -> full transfer decorrelator
+    -> per-step trajectory gap
+```
+
+The current canonical selected-J localization/application machinery remains the R338/R339 -> R320 -> R295 lane, with the R342/R344 shared-marked direct calibration as a useful equivalent producer view.
+
+In particular `BalabanCMP116SharedMarkedDirectCalibrationRound344Exact` already compiles the actual shared hessian-mark shell to the canonical geometric envelope once its selected physical application data are supplied. It does **not** by itself identify that envelope with `c_k ||psi||_2^2` for arbitrary dense physical `L2_0` cylinder states.
+
+So the new least-privilege physical seam is no longer
+
+```text
+construct a full joint-slice L-infinity density defect.
+```
+
+It is closer to
+
+```text
+1. choose the literal Wilson gauge-invariant local/cylinder test algebra D;
+2. prove D is dense in the selected physical vacuum complement;
+3. identify each psi in D with the selected marked J direction(s) on the same beta-driven density;
+4. prove the marked source envelope is the required c_k ||psi||_2^2 target;
+5. verify Delta * a_k <= 1 - c_k.
+```
+
+Steps 1--4 are the active same-object / normalization proof-search target. The generic extension and transfer consequences are downstream compiler output.
+
+## Complete-density lane recut
+
+The same-beta-history lane remains:
 
 ```text
 Balaban1989BetaSplitInverseSquareTerminalHistoryExact
@@ -217,132 +192,101 @@ Balaban1989BetaSplitInverseSquareTerminalHistoryExact
   -> Balaban1989BetaHistoryToCanonicalCompleteDensityExact
 ```
 
-so the effective-density `couplingAt` is the same coupling history produced by the finite beta trajectory; the small-coupling condition is not being imported on a parallel trajectory.
+with Bałaban CMP 122 authority (DOI `10.1007/BF01238433`) preserving the Section-2 complete-density form/bounds at sufficiently small effective coupling.
 
-The imported Bałaban 1989 CMP 122 theorem (DOI `10.1007/BF01238433`) preserves the Section-2 complete-density form/bounds under sufficiently small effective coupling. The repository dictionary currently compiles those data to `InYM4RGInvariantRegion`, not definitionally to a positive physical mass floor or full transfer mixing.
-
-The preferred next source theorem is now weaker than the old full-density target:
+`YMClayCompleteDensityTransferMixingBoundaryExact` now records **two** honest bridges:
 
 ```text
-same beta-driven CMP119/CMP122 complete-density state
-    -> identify a natural dense local/cylinder algebra in physical L2_0
-    -> uniform adjacent-slice connected-correlation bound on that algebra
-    -> dense-L2 compiler
-    -> full transfer decorrelator
-    -> F1
+Route A (strong):
+complete density
+  -> literal adjacent-slice joint law
+  -> L-infinity density defect
+  -> full L2_0 decorrelator
+
+Route B (preferred/source-native):
+complete density
+  -> same-density selected marked/local Wilson observables
+  -> selected marked-source decay
+  -> physical envelope/L2 normalization on dense D
+  -> dense-L2 compiler
+  -> full L2_0 decorrelator
 ```
 
-The stronger route remains valid:
-
-```text
-same complete-density state
-    -> literal adjacent-slice joint law
-    -> d nu_01 / d(nu_0 x nu_1) - 1 in L-infinity
-    -> full L2_0 decorrelator
-```
-
-but the `L^infty` density defect is no longer a primitive logical requirement of the F1 compiler.
+The Section-2 invariant-region fields alone manufacture neither route.
 
 ---
 
 # F3 — physical literal-Wilson continuum-limit instantiation
 
-F3 is now stated narrowly:
+F3 remains narrowly:
 
 ```text
 literal Wilson cutoff physical L2 spaces
-+ nondegenerate physical isometric embeddings
-+ actual embedded vacuum-sector graph/Mosco limit
-+ continuum Hamiltonian/vacuum
++ nondegenerate physical embeddings
++ physical VacuumOrthogonalRecoverySystem / embedded graph-limit witness
++ continuum Hamiltonian and vacuum
 + self-adjoint/domain/unit-vacuum/ground-state data
 ```
 
-This is an instantiation problem for machinery already present in both Agda and the supplied Lean development, not a request to redevelop Mosco convergence.
-
-`VacuumOrthogonalRecoverySystem` and the Aristotle `EmbeddedContinuumLimit` / `IsEmbeddedVacuumGraphLimit` interfaces are the canonical consumer shapes.
-
-No synthetic/common-carrier witness counts as F3 unless it is tied to the literal Wilson trajectory and is nondegenerate in the physical limit.
+Generic direct-sum/common-carrier existence is not a substitute. The supplied Lean archive's `ymCanonicalCarrier_graphLimit_degenerate` is useful precisely because it blocks that cheat.
 
 ---
 
 # F4 — physical YM/OS same-object weld
 
-F4 is now stated narrowly as
+F4 remains narrowly
 
 \[
 \boxed{U_t^{YM}=U_t^{OS}}
 \]
 
-for the actual continuum theory, together with the common-core/generator witnesses consumed by existing uniqueness machinery.
-
-The supplied Lean development already contains:
-
-```text
-Clay.OSWeld
-GeneratorUniquenessCore.generator_unique_of_evolution_eq
-GaugeInvariantL2Carrier.hamiltonian_eqOn_core_of_same_evolution
-```
-
-and bounded-core special cases.
-
-Do not discharge F4 using a reflexive synthetic `OSWeld.self`, by naming both evolutions equal after the fact, or by substituting Schwinger-family naming for a theorem identifying the physical dynamics.
+for the actual continuum theory, with the common-core/generator witnesses consumed by the already-existing uniqueness machinery. `OSWeld`, generator uniqueness and gauge-invariant `L2` carrier theorems are compilers; the literal same-object physical identification is the remaining payment.
 
 ---
 
-# Empirical contact — CMS-SMP-20-003
+# Empirical contact
 
-The orthogonal empirical axis remains:
+The bounded CMS contact remains orthogonal:
 
 ```text
 CMS-SMP-20-003 / CERN-EP-2022-053
 DOI 10.1140/epjc/s10052-023-11631-7
 HEPData ins2079374/t43 + covariance t44
-50--76 GeV / 76--106 GeV ratio
-chi2 = 38.8173441173
-effective dof = 18
-chi2/dof = 2.1565191176
-mean prediction/data = 0.9941233097
-freeze commit = 3205d746639568762c9e97adf4a3672c356bd491
 ```
 
-`YMClayCMSDrellYanEmpiricalContactBoundaryExact` pins that this is bounded collider/QCD empirical contact and pays none of F1/F3/F4.
+`YMClayCMSDrellYanEmpiricalContactBoundaryExact` explicitly pays none of F1/F3/F4.
 
 ---
 
-# Current acceptance surface
+# Current focused acceptance surface
 
-The focused Agda rollup now includes:
+The parity rollup now includes, among the existing owners:
 
 ```text
-YMClayVaryingCarrierTransportParityExact
-YMClayUniformGapReductionParityExact
 YMClayCorrelationCriterionParityExact
 YMClayDenseL2CorrelationBidiParityExact
 YMClayDenseL2CorrelationBidiParityValidation
+YMClayDenseMarkedSourceF1ProducerExact
+YMClayDenseMarkedSourceF1ProducerValidation
 YMClayUrsellTransferMixingBoundaryExact
 YMClayF1MixingSourceAuditExact
 YMClayCompleteDensityTransferMixingBoundaryExact
-YMClayCMSDrellYanEmpiricalContactBoundaryExact
+YMClayCompleteDensityTransferMixingBoundaryValidation
 YMClayF134ContinuumWeldParityExact
 YMClayF1CanonicalSourceApplicationExact
-YMClayClosedWorldResidualAudit20260917Exact
 YMClayOutstandingPhysicalFrontierExact
 ```
 
-`OutstandingPhysicalFrontier` still has exactly F1/F3/F4. The dense-L2 theorem **weakens the admissible F1 producer shape**; it does not silently construct the physical source estimate.
+`OutstandingPhysicalFrontier` still has exactly F1/F3/F4. The new tranche **shrinks F1's admissible source payment**; it does not claim a physical F1 inhabitant or Clay completion.
 
 ## Verification boundary
 
-Before a completion claim:
+This connector run intentionally does not claim fresh kernel certification. Before any promotion:
 
-1. run `lake build RequestProject` on the exact Lean head containing `DenseCorrelationCriterion.lean` and any eventual physical inhabitants;
-2. report `#print axioms` for the new headline Lean theorems;
-3. typecheck the focused Agda parity/root on the exact branch head;
-4. reject `sorry`, `axiom`, `postulate`, `@[implemented_by]`, trust escapes or unresolved metas in the new proof tranche;
-5. report remaining F1/F3/F4 hypotheses verbatim.
+1. typecheck the focused Agda parity rollup on the exact branch head;
+2. build the exact Lean tree containing `DenseCorrelationCriterion.lean`;
+3. inspect `#print axioms` for the new Lean theorem family;
+4. reject new `sorry`, `axiom`, `postulate`, `@[implemented_by]`, unresolved metas or trust escapes;
+5. report the remaining F1/F3/F4 physical witnesses verbatim.
 
-Until those checks are observed, the new dense-L2 compiler is **source-written / conditional**, not freshly kernel-certified.
-
-## Closed-world audit note
-
-`YMClayClosedWorldResidualAudit20260917Exact` is diagnostic bookkeeping about a searched repository state, not a theorem of global nonexistence and not proof currency.
+The new Agda tranche is therefore **source-written / source-order-RED→implemented**, not freshly kernel-certified.
