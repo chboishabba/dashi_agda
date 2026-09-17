@@ -77,7 +77,7 @@ mkRound4Candidate source identities residual role reading limitation =
 
 jonesEtAlPrivacySource : Attr.AttributedSource
 jonesEtAlPrivacySource = Attr.mkDOISource
-  "Kyle M. L. Jones; A. Asher; A. Goben; M. R. Perry; D. Salo; K. A. Briney; M. B. Robertshaw"
+  "Kyle M. L. Jones; Andrew Asher; Abigail Goben; Michael R. Perry; Dorothea Salo; Kristin A. Briney; M. Brooke Robertshaw"
   "We're being tracked at all times: Student perspectives of their privacy in relation to learning analytics in higher education"
   "Journal of the Association for Information Science and Technology 71, 1044-1059"
   "2020"
