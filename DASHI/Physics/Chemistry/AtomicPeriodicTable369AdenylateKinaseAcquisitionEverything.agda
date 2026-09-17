@@ -197,3 +197,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVScriptM
 -- equal hashes alone do not. Different source bytes may therefore share the
 -- same CV-relevant quotient without becoming the same byte manifestation.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVManifestExtensionalityExact
+
+-- Transparent canonical selected-content quotient. Canonical row equality is
+-- the concrete SelectionEquivalent relation for a content-sound COM model;
+-- payload hashes remain audit coordinates and do not create content equality,
+-- PDB identity, or scientific authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCanonicalSelectionContentExact
