@@ -12,6 +12,8 @@ on:
       - 'DASHI/Algebra/Quantum/ShorCyclicQFTCarrierTransportRegression.agda'
       - 'DASHI/Algebra/Quantum/ShorAmplitudeExecutionPrefixExact.agda'
       - 'DASHI/Algebra/Quantum/ShorAmplitudeExecutionPrefixRegression.agda'
+      - 'DASHI/Algebra/Quantum/ShorPeriodExecutionPipelineExact.agda'
+      - 'DASHI/Algebra/Quantum/ShorPeriodExecutionPipelineRegression.agda'
       - 'DASHI/Algebra/Quantum/DASHIShorProductiveJoin.agda'
       - 'DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda'
       - 'DASHI/Crypto/FiniteFactorArithmetic.agda'
