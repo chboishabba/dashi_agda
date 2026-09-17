@@ -17,9 +17,12 @@ module DASHI.Wikimedia.AgdaSlrJmdLeanBidiEverything where
 -- Mabo P710 provider observation and v2 PostgreSQL identity-class lineage.
 -- The reviewed-evidence payment, recurrent runner and launch-readiness owners
 -- distinguish native launch-ready from recurrent campaign executed/complete.
--- Durable restart state is counted by reviewed identity classes, while a known
--- identity may pay a new residual without advancing novelty or discovery lineage.
--- The consumer-diagnosis owner binds the persisted 100-hop world to an explicit
+-- Durable global identity state remains the SameObject/coherence quotient;
+-- Mabo campaign novelty is a distinct seed-rooted discovery-lineage cardinality.
+-- A known identity may pay a new residual without advancing novelty or
+-- discovery lineage, and unrelated campaign identities cannot pay the Mabo
+-- >=100 target merely by existing in the global durable baseline.
+-- The consumer-diagnosis owner binds the persisted world to an explicit
 -- SameObject review frontier while keeping graph adjacency, proof search,
 -- experiment design, WrongType diagnostics and external comparison strictly
 -- below evidence payment/admission authority.  The reviewed-campaign owner then
@@ -48,9 +51,11 @@ open import DASHI.Wikimedia.MaboKnownIdentityResidualPaymentExact public
 open import DASHI.Wikimedia.MaboP7d5RuntimeLaunchReadinessExact public
 open import DASHI.Wikimedia.MaboConsumerResidualDiagnosisExact public
 open import DASHI.Wikimedia.Mabo100HopReviewedCampaignExact public
+open import DASHI.Wikimedia.MaboCampaignScopedNoveltyExact public
 
 import DASHI.Wikimedia.MaboConsumerResidualDiagnosisValidation
 import DASHI.Wikimedia.Mabo100HopReviewedCampaignValidation
+import DASHI.Wikimedia.MaboCampaignScopedNoveltyValidation
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
 import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact
 import DASHI.Wikimedia.MaboResidualDrivenWorldExpansionStepExact
