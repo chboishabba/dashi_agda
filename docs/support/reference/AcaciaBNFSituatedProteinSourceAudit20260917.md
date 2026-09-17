@@ -11,95 +11,74 @@ This tranche follows the repository attribution firewall:
 
 Every scientific production owner attaches DOI metadata directly to an Agda source fixture through `DASHI.Core.AttributedSourceCore.mkDOISource`. PMID/PMCID/PDB coordinates are retained when independently verified; unresolved identifiers remain explicitly unresolved/not recorded rather than guessed.
 
-## Acacia / Senegalia sources retained
+## Newly sharpened source surfaces
 
-- Fall et al. 2008 — DOI `10.1111/j.1472-765X.2008.02389.x`; PMID `18565139` — root-nodulating bacterial diversity and stress-tolerance phenotypes.
-- Fall et al. 2016 — DOI `10.3389/fpls.2016.01355`; PMID `27656192`; PMCID `PMC5013129` — mature-tree inoculation, soil microbial/mineral-N coordinates, gum production.
-- Faye et al. 2006 — DOI `10.1080/15324980500369475` — mature-tree inoculation / gum production; not a direct fixation-rate source.
-- Herrmann et al. 2012 — DOI `10.1016/j.agee.2011.12.014` — season/site/rhizosphere-community and soil-inorganic-N context.
-- Bakhoum et al. 2015 — DOI `10.1007/s00248-014-0507-1`; PMID `25315832` — Acacia-specific `nodA`, `nodC`, `nifH`, nodulation, biomass, ARA/SARA efficiency tests.
-- Nowak et al. 2004 — DOI `10.1016/j.carres.2004.02.013`; PMID `15063192` — LCO/Nod-factor structural characterization in Acacia-nodulating rhizobia.
-- Rasanen & Lindstrom 1999 — DOI `10.1111/j.1574-6941.1999.tb00561.x` — temperature-context dependence of infection/nodulation and reversibility.
-- Isaac et al. 2011 — DOI `10.1016/j.foreco.2010.11.011` — age/P-indexed natural-population N2-fixation contribution and soil-N context.
-- Isaac, Harmand & Drevon 2011 — DOI `10.1016/j.jplph.2010.10.011`; PMID `21211863` — non-limiting-N phosphorus experiment separating growth/mineral-N uptake from atmospheric-N contribution.
-- Githae et al. 2013 — DOI `10.1080/15324982.2013.784377` — variety/site-indexed foliar `15N` fixation estimates with nodule observations kept separate.
-- Raddad et al. 2005 — DOI `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan.
-- Abaker et al. 2018 — DOI `10.7717/peerj.5232`; PMID `30018862`; PMCID `PMC6044267` — soil nutrient/SOC and foliar isotope evidence; source interpretation does not support important BNF contribution to plantation soil N in that Sudan system.
-- Isaac, Hinsinger & Harmand 2012 — DOI `10.1016/j.scitotenv.2011.12.071`; PMID `22446108` — controlled Acacia-to-wheat below-ground N-transfer evidence indexed by phosphorus, root-contact regime and observation time.
-- Raddad et al. 2006 — DOI `10.1007/s10457-006-9009-6` — four-year Blue Nile treatment nutrient budgets; reported N balance varies by system and omits below-ground tree biomass.
-- Deans et al. 1999 — DOI `10.1016/S0378-1127(99)00063-8` — 3–18 year Senegal fallow nutrient accumulation with biomass/fodder export retained as a nutrient-budget coordinate.
-- Fall et al. 2012 — DOI `10.1016/j.jenvman.2011.03.038`; PMID `21514716` — mineral-N/microbial observations indexed by distance from tree, soil depth and season.
-- El Tahir et al. 2009 — DOI `10.1016/j.jaridenv.2008.11.007` — post-conversion North Kordofan nutrient-stock evidence retaining prior plantation state, conversion regime and subsequent cropping history.
-- Basga et al. 2018 — DOI `10.5897/AJAR2018.13283` — North Cameroon post-fallow sorghum/cowpea yield evidence; all replicated crop treatments received a 4 g NPK 20-10-10 microdose per planting hole, so the result is explicitly not an avoided-mineral-N receipt.
-- Raddad & Luukkanen 2007 — DOI `10.1016/j.agwat.2006.06.001` — Blue Nile clay-soil water/crop response; early-stage little-water-competition and crop-yield result remains soil/age/crop/management bounded.
-- Gaafar et al. 2006 — DOI `10.1007/s10457-005-2918-y` — North Kordofan sandy-soil tree-density/water/gum/crop source providing a contrasting water-competition context.
-- Raddad & Luukkanen 2006 — DOI `10.1016/j.foreco.2006.01.036` — eight-provenance delta-13C/water-use/growth/gum source; no cross-paper Ndfa correlation is inferred from provenance labels.
+- Habish 1970 — DOI `10.1007/BF01378191` — multi-Acacia moisture/temperature/pH nodulation experiment. The source supports pH as an enablement coordinate and separates plant-growth response from nodule response; it is not an Acacia-senegal-only quantitative rate law.
+- Colonna et al. 1991 — DOI `10.1007/BF00205900` — Acacia senegal Rhizobium/AMF/P factorial greenhouse evidence. AM-fungal state and plant-available-P context remain distinct from compatible-rhizobium identity.
+- Yonli et al. 2022 — DOI `10.3389/fenvs.2022.803009` — Senegalia senegal nursery-plus-waste-rock restoration evidence. Nutrient amendment, nodulation/AM colonization, nursery biomass and post-outplant survival are distinct outcomes.
+- Dovrat & Sheffer 2019 — DOI `10.1111/nph.15526`; PMID `30299536` — Calicotome villosa full-year fixation source. Imported only as a generic dryland-legume donor establishing the need to retain season/phenology and regulatory context; it does not create an Acacia seasonal time series.
+- Sarr et al. 2005 — DOI `10.1007/s00248-004-0077-8`; PMID `16184338` — natural Acacia senegal / Acacia nilotica soil-rhizobial population structure. Indigenous population background is distinct from introduced inoculum and realised nodule occupancy.
+- Sarr & Lesueur 2007 — DOI `10.1007/s11274-006-9288-0` — mixed-inoculum nursery/field competitive occupancy. The strongest nursery-to-field rank reversal reported is retained as Acacia nilotica evidence; no Acacia-senegal-specific rank reversal is manufactured.
+- Gerakis & Tsangarakis 1970 — DOI `10.1007/BF01378198` — central-Sudan sand-sheet fertility and former-tree-patch heterogeneity. Current cleared-land cover does not erase spatial soil memory.
 
-## Measurement-method donor retained
+## Previously retained Acacia / Senegalia evidence
 
-- Pate, Unkovich, Armstrong & Sanford 1994 — DOI `10.1071/AR9940133` — reference-plant selection for `15N` natural-abundance assessment of fixation. This is imported only as observer/method calibration. It is not Acacia evidence and supplies no biological mechanism or field-effect proposition for the Acacia lane.
+The earlier source atlas and downstream owners retain Fall 2008/2016, Faye 2006, Herrmann 2012, Bakhoum 2015, Nowak 2004, Rasanen 1999/2004, Fall 2011, Isaac 2011 sources, Githae 2013, Raddad 2005/2006/2007, Abaker 2018, Isaac/Hinsinger/Harmand 2012, Deans 1999, Fall 2012, El Tahir 2009, Basga 2018, Gaafar 2006 and Raddad/Luukkanen 2006 under their individual DOI/PMID receipts in `AcaciaBNFSourceAcquisitionLedger20260917.md`.
 
-## Nitrogenase / protein sources retained
+## Measurement / mechanism donors retained
 
+- Pate, Unkovich, Armstrong & Sanford 1994 — DOI `10.1071/AR9940133` — isotope/reference-plant method calibration only.
 - Seefeldt, Hoffman & Dean 2009 — DOI `10.1146/annurev.biochem.78.070907.103812`; PMID `19489731`; PMCID `PMC2814439` — limiting Mo-nitrogenase chemistry/mechanism calibration.
-- Warmack & Rees 2024 — DOI `10.1038/s41467-024-54713-0`; PMCID `PMC11612016` — multiple structural states under alkaline/acetylene turnover.
-- Narehood et al. 2025 — DOI `10.1038/s41586-024-08311-1`; PMID `39779844`; PMCID `PMC11812610` — FeSII-mediated oxygen-stress conformational protection in `Azotobacter vinelandii`.
-- Paya Tormo et al. 2025/2026 — DOI `10.1038/s41589-025-02070-4`; PMID `41238839`; PDB `9I0F`, `9I0G`, `9I0H` — NifEN cofactor-maturation dynamics.
-- Tsitsikli et al. 2025 — DOI `10.1038/s41586-025-09696-3`; PMID `41193803` — residue-level receptor signalling specificity in Lotus/barley experiments.
-
-## Existing owners reused
-
-- `ProteinSituatedHyperfabricExact`
-- `NitrogenaseChemistryCrossPollinationExact`
-- `BNFQualifiedInterventionModelExact`
-- `AcaciaSenegalDrylandWaterCarbonExact`
-- `AcaciaSenegalDrylandTaskFactorisationExact`
-
-No replacement generic protein, BNF, attribution, factorisation, hydrology or LES ontology is introduced.
+- Warmack & Rees 2024 — DOI `10.1038/s41467-024-54713-0`; PMCID `PMC11612016` — situated structural states.
+- Narehood et al. 2025 — DOI `10.1038/s41586-024-08311-1`; PMID `39779844`; PMCID `PMC11812610` — Azotobacter FeSII oxygen-stress protection, not Acacia same-object evidence.
+- Paya Tormo et al. — DOI `10.1038/s41589-025-02070-4`; PMID `41238839`; PDB `9I0F`, `9I0G`, `9I0H` — NifEN maturation states.
+- Tsitsikli et al. 2025 — DOI `10.1038/s41586-025-09696-3`; PMID `41193803` — Lotus/barley receptor signalling donor, not Acacia same-object evidence.
+- Larrainzar et al. 2020 — DOI `10.1111/nph.16673`; PMID `32442331` — generic/model-legume nodule oxygen-control donor.
 
 ## Promotion firewalls checked
 
-The source-written tranche explicitly blocks:
+The source-written tranche now explicitly blocks all of the following additional promotions:
 
-- nodule presence => active nitrogenase;
-- `nifH` identity => fixation rate;
-- nitrogenase identity => realised functional state;
-- balanced stoichiometry => in-vivo fixed-N flux;
-- fixed-N flux => plant assimilation;
-- plant assimilation => ecosystem soil-N outcome;
-- plant fixed-N contribution => interplant N transfer;
-- interplant N transfer => positive field N balance;
-- above-ground nutrient budget => whole-system nutrient balance;
-- positive field N balance => fertilizer substitution;
-- co-fertilized crop yield => avoided mineral N;
-- fertilizer substitution => restoration/deployment authority;
-- soil mineral-N observation => context-free scalar outcome independent of distance/depth/season;
-- prior plantation nutrient accumulation => persistent nutrient stock following land-use conversion;
-- present land-cover label => sufficient history for a nutrient-stock consumer;
-- species/tree density => universal water-competition or crop-yield response across soil contexts;
-- early-stage no-yield-penalty result => mature-system no-yield-penalty result;
-- crop yield alone => identified water-competition mechanism;
-- shared provenance labels across papers => Ndfa/WUE/gum correlation;
-- shared provenance labels/site description => same empirical object without an explicit join receipt;
-- Lotus/barley receptor result => Acacia same-object mechanism;
-- Azotobacter FeSII protection => Acacia nodule protection mechanism;
-- Abaker/Berninger/Starr 2018 dryland hydrology DOI `10.1016/j.jaridenv.2017.12.004` => BNF measurement;
-- Acacia species identity => one fixed-N contribution across provenance/site/age;
-- a provenance label without age/time context => a realised Ndfa/fixed-N contribution;
-- raw plant `delta-15N` => Ndfa without the reference/baseline observer context;
-- reference-plant/method calibration donor => Acacia biological evidence;
-- foliar `15N`/Ndfa estimate => direct molecular nitrogenase flux or whole-season ecosystem N balance.
+- compatible rhizobial identity => realised symbiotic performance without AMF/P context;
+- total-P or nominal soil-P label => plant-available/symbiosis-mediated P context;
+- higher nutrient/manure amendment => better nodulation/AM colonization;
+- nursery biomass => field restoration survival;
+- greenhouse dual-symbiosis result => mine-restoration same empirical object;
+- soil moisture/temperature context => adequate nodulation model with pH discarded;
+- plant growth => successful nodulation;
+- instantaneous water state => season-integrated dryland fixation regime;
+- generic dryland-legume seasonality => Acacia same-object seasonal measurement;
+- natural soil rhizobial population => introduced inoculum mixture;
+- strain identity => realised nodule occupancy;
+- nursery occupancy => field occupancy;
+- multi-Acacia occupancy transition => Acacia-senegal-specific rank reversal;
+- nodule occupancy => fixed-N flux or plant assimilation;
+- present cleared-land label => spatially homogeneous soil after prior Acacia occupation;
+- former-tree patch history => discardable field-trial coordinate.
 
-The generic nitrogenase dependency ladder is not mutated by these acquisitions. In particular, field budget and crop-yield evidence do not close generic `seasonalCropNDemand` or `avoidedMineralN`.
+All earlier no-promotion firewalls remain in force: nodule != active nitrogenase, `nifH` != fixation rate, stoichiometry != in-vivo flux, Ndfa != direct flux, plant fixed-N != interplant transfer, transfer != positive field balance, field balance != fertilizer substitution, co-fertilized crop yield != avoided mineral N, hydrology/crop response remains soil/age/management indexed, and cross-paper provenance labels do not create same-object joins or correlations.
+
+## Canonical dependency ladder
+
+Source acquisition still does not mutate the generic ladder:
+
+- enzyme stoichiometry: paid in existing owner;
+- reaction enablement: globally open;
+- bacterial fixed-N flux: globally open;
+- plant assimilation: globally open;
+- seasonal crop/plant N demand: open;
+- avoided mineral N: open.
+
+The new dual-symbiosis, pH, seasonality and competitive-occupancy sources constrain what a future reaction-enablement inhabitant must retain, but do not manufacture that inhabitant.
 
 ## Current acquisition frontier
 
-A targeted public-literature search did not identify an Acacia/Senegalia same-object field study with an explicit mineral-N counterfactual adequate to close generic `avoidedMineralN`. Basga et al. 2018 is retained specifically as a negative-control receipt because mineral fertilizer was co-applied to every replicated crop treatment. Short-duration seedling N-fertilizer experiments are not promoted to crop-season fertilizer substitution. The Elicit academic-corpus connector was also unavailable because the connected account lacks API access; this is recorded as a search-coverage limitation, not evidence of source absence.
+The high-information remaining source gap is still a same-object Acacia/Senegalia experiment connecting enabled nodules / realised BNF through season-integrated plant or crop N demand to an explicit mineral-N counterfactual. Public searching has not yielded a clean field receipt sufficient to close `avoidedMineralN`; Basga et al. remains an explicit negative-control because mineral fertilizer was co-applied. Trace-metal/cofactor searches so far produced generic or lower-authority material and were not promoted into Acacia-specific receipts. Elicit API search remains unavailable on the connected account, which limits corpus coverage but is not evidence of source absence.
 
 ## Certification status
 
 - source-written: yes
-- source-order RED receipts: yes for the original four production paths plus focused regression-before-production extensions in the later source-acquisition tranche
+- focused RED-before-production/source-order receipts: yes
 - CI queried: no
 - Agda/kernel receipt: unobserved in this connector-only session
 
