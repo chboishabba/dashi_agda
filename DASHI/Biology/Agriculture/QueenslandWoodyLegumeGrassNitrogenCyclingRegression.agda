@@ -15,6 +15,12 @@ conrad2018DOIPinned = refl
 radrizzani2010DOIPinned : Q.radrizzaniEtAl2010DOI ≡ "10.1071/AN10062"
 radrizzani2010DOIPinned = refl
 
+catchpooleBlair1990TransferDOIPinned : Q.catchpooleBlair1990TransferDOI ≡ "10.1071/AR9900531"
+catchpooleBlair1990TransferDOIPinned = refl
+
+catchpooleBlair1990ResidueDOIPinned : Q.catchpooleBlair1990ResidueDOI ≡ "10.1071/AR9900539"
+catchpooleBlair1990ResidueDOIPinned = refl
+
 fixedNNotGrassCapture :
   Q.woodyLegumeFixedNImpliesCompanionGrassCapture Q.canonicalWoodyLegumeGrassBoundary ≡ false
 fixedNNotGrassCapture = refl
@@ -30,6 +36,22 @@ grazingRedistributionRetained = refl
 animalIntakeNotExport :
   Q.consumedPastureNitrogenEqualsAnimalProductExport Q.canonicalWoodyLegumeGrassBoundary ≡ false
 animalIntakeNotExport = refl
+
+controlledTransferNotFieldTransfer :
+  Q.controlledTransferImpliesFieldTransfer Q.canonicalWoodyLegumeGrassBoundary ≡ false
+controlledTransferNotFieldTransfer = refl
+
+transportRouteRetained :
+  Q.leafFaecesUrineTransportRouteMayBeDropped Q.canonicalWoodyLegumeGrassBoundary ≡ false
+transportRouteRetained = refl
+
+placementRetained :
+  Q.residuePlacementMayBeDroppedFromNitrogenCapture Q.canonicalWoodyLegumeGrassBoundary ≡ false
+placementRetained = refl
+
+externalDonorNotQueenslandObject :
+  Q.externalTransferDonorCreatesQueenslandSameObjectReceipt Q.canonicalWoodyLegumeGrassBoundary ≡ false
+externalDonorNotQueenslandObject = refl
 
 chronosequenceNotLongitudinal :
   Q.pairedChronosequenceCreatesLongitudinalCausalTrajectory Q.canonicalWoodyLegumeGrassBoundary ≡ false
