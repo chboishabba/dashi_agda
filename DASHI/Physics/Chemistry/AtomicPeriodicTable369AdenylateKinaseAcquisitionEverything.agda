@@ -158,3 +158,14 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticCon
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceAtomSelectionExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCOMGeometryExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticCVProjectionExact
+
+-- Same-object PDB and mechanics continuation.  4AKE/1AKE entry identities do
+-- not silently choose chain/model/altloc or become coordinate-derived CV values.
+-- Li-Liu-Ji's historical simulation settings are acquired separately from exact
+-- parameter/topology bytes. OpenMM is retained only as a future independent
+-- executable oracle, and trajectory lifting preserves atomistic frames under
+-- CV projection and mesoscopic state classification.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBAtomisticFixtureExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseHistoricalMechanicsExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOpenMMCVOracleExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticTrajectoryLiftExact
