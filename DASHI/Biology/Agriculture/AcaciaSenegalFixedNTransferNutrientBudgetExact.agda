@@ -32,6 +32,9 @@ fallEtAl2012DOI = "10.1016/j.jenvman.2011.03.038"
 fallEtAl2012PMID : String
 fallEtAl2012PMID = "21514716"
 
+elTahirEtAl2009DOI : String
+elTahirEtAl2009DOI = "10.1016/j.jaridenv.2008.11.007"
+
 isaacHinsingerHarmand2012 : Attribution.AttributedSource
 isaacHinsingerHarmand2012 = Attribution.mkDOISource
   "Marney E. Isaac; Philippe Hinsinger; Jean-Michel Harmand"
@@ -80,12 +83,25 @@ fallEtAl2012 = Attribution.mkDOISource
   "Field source sampling Acacia senegal rhizosphere soil by distance from tree stem, soil depth and dry/wet season. Mineral-N and microbial observations are retained as observer-geometry-indexed ecosystem measurements rather than a scalar BNF output."
   Attribution.publicAttribution
 
+elTahirEtAl2009 : Attribution.AttributedSource
+elTahirEtAl2009 = Attribution.mkDOISource
+  "B. A. El Tahir; D. M. Ahmed; Jonas Ardo; A. M. Gaafar; A. A. Salih"
+  "Changes in soil properties following conversion of Acacia senegal plantation to other land management systems in North Kordofan State, Sudan"
+  "Journal of Arid Environments 73(4-5):499-505"
+  "2009"
+  elTahirEtAl2009DOI
+  "https://doi.org/10.1016/j.jaridenv.2008.11.007"
+  Attribution.academicArticleSource
+  "North Kordofan land-use-transition source following conversion of a six-year Acacia senegal plantation through three cropping seasons. Aggregated mean OC/N/P concentrations and OC/N/P/K stocks declined across the reported land-management systems, so prior plantation nutrient accumulation is not identified with persistent post-conversion nutrient stock."
+  Attribution.publicAttribution
+
 data TransferBudgetEvidenceRole : Set where
   plantFixedNContribution : TransferBudgetEvidenceRole
   interplantNitrogenTransfer : TransferBudgetEvidenceRole
   treatmentFieldNitrogenBalance : TransferBudgetEvidenceRole
   longTermSiteNutrientAccumulation : TransferBudgetEvidenceRole
   spatialSeasonalMineralNObservation : TransferBudgetEvidenceRole
+  postConversionNutrientPersistence : TransferBudgetEvidenceRole
   harvestExportPressure : TransferBudgetEvidenceRole
 
 record TransferBudgetReceipt : Set where
@@ -142,6 +158,16 @@ fallSpatialSeasonalMineralNReceipt = transfer-budget-receipt
   "soil mineral N and microbial biomass are indexed by observer geometry and season; not identified with fixation flux"
   false false false
 
+northKordofanConversionReceipt : TransferBudgetReceipt
+northKordofanConversionReceipt = transfer-budget-receipt
+  elTahirEtAl2009
+  elTahirEtAl2009DOI
+  postConversionNutrientPersistence
+  "three cropping seasons after conversion of a six-year plantation"
+  "North Kordofan land-management systems with pure/intercropped crops and high/low retained-tree density"
+  "previous plantation state, conversion regime, retained-tree density and subsequent cropping history remain explicit"
+  false true false
+
 ------------------------------------------------------------------------
 -- Canonical ladder remains authoritative.
 ------------------------------------------------------------------------
@@ -171,6 +197,8 @@ record TransferBudgetBoundary : Set where
     fieldNBalanceMustRemainTreatmentAndTimeIndexed : Bool
     abovegroundBudgetEqualsWholeSystemNBalance : Bool
     soilMineralNObserverGeometryMayBeDropped : Bool
+    priorNutrientAccumulationImpliesPersistentPostConversionStock : Bool
+    landUseTransitionAndHistoryMustRemainIndexed : Bool
     positiveNBalanceImpliesFertilizerSubstitution : Bool
     fertilizerSubstitutionImpliesDeploymentAuthority : Bool
     harvestAndExportMustRemainIndexed : Bool
@@ -180,7 +208,7 @@ open TransferBudgetBoundary public
 
 canonicalTransferBudgetBoundary : TransferBudgetBoundary
 canonicalTransferBudgetBoundary = transfer-budget-boundary
-  true false true false true false false false false true false false
+  true false true false true false false false true false false true false false
 
 acaciaTransferEvidencePaid :
   acaciaInterplantTransferEvidenceExists canonicalTransferBudgetBoundary ≡ true
@@ -196,4 +224,4 @@ genericAvoidedMineralNNotPromoted = refl
 
 attributionRule : String
 attributionRule =
-  "Isaac, Hinsinger & Harmand 2012 (DOI 10.1016/j.scitotenv.2011.12.071; PMID 22446108) owns its controlled Acacia-to-wheat below-ground N-transfer propositions. Raddad et al. 2006 (DOI 10.1007/s10457-006-9009-6) owns its four-year Blue Nile treatment nutrient-budget propositions, including omission of below-ground biomass from the reported balance. Deans et al. 1999 (DOI 10.1016/S0378-1127(99)00063-8) owns its long-term Senegal nutrient-accumulation and harvest/export propositions. Fall et al. 2012 (DOI 10.1016/j.jenvman.2011.03.038; PMID 21514716) owns its distance/depth/season-indexed soil mineral-N and microbial observations. DASHI owns the typed evidence-role chain and no-promotion boundary. None of these sources alone supplies generic seasonal crop-N-demand closure, counterfactual avoided-mineral-N quantity, universal fertilizer-substitution rule, or deployment authority."
+  "Isaac, Hinsinger & Harmand 2012 (DOI 10.1016/j.scitotenv.2011.12.071; PMID 22446108) owns its controlled Acacia-to-wheat below-ground N-transfer propositions. Raddad et al. 2006 (DOI 10.1007/s10457-006-9009-6) owns its four-year Blue Nile treatment nutrient-budget propositions, including omission of below-ground biomass from the reported balance. Deans et al. 1999 (DOI 10.1016/S0378-1127(99)00063-8) owns its long-term Senegal nutrient-accumulation and harvest/export propositions. Fall et al. 2012 (DOI 10.1016/j.jenvman.2011.03.038; PMID 21514716) owns its distance/depth/season-indexed soil mineral-N and microbial observations. El Tahir et al. 2009 (DOI 10.1016/j.jaridenv.2008.11.007) owns its post-conversion North Kordofan soil nutrient-stock propositions. DASHI owns the typed evidence-role chain and no-promotion boundary. None of these sources alone supplies generic seasonal crop-N-demand closure, counterfactual avoided-mineral-N quantity, universal fertilizer-substitution rule, or deployment authority."
