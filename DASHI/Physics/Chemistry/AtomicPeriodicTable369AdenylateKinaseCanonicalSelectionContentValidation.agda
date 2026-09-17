@@ -11,6 +11,9 @@ boundary = Content.canonicalAdKCanonicalSelectionContentBoundary
 _ : Content.transparentCanonicalRowsRetained boundary ≡ true
 _ = refl
 
+_ : Content.fullEightSelectionPacketExplicit boundary ≡ true
+_ = refl
+
 _ : Content.massSourceAttributionRetained boundary ≡ true
 _ = refl
 
