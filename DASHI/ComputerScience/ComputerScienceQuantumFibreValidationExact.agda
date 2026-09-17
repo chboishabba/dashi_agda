@@ -43,6 +43,10 @@ import DASHI.Algebra.Quantum.DASHIShorProductiveJoin
 import DASHI.Crypto.ShorOrderFinding
 import DASHI.Crypto.ShorReversiblePowModOracleWeldExact
 import DASHI.Crypto.ShorReversiblePowModOracleWeldRegression
+import DASHI.Crypto.ShorFourierOrderCandidateVerificationExact
+import DASHI.Crypto.ShorFourierOrderCandidateVerificationRegression
+import DASHI.Crypto.ShorCertifiedFourierSamplingExact
+import DASHI.Crypto.ShorCertifiedFourierSamplingRegression
 import DASHI.Crypto.ShorFactoring
 import DASHI.Crypto.ShorQuantumRunFactorTransportExact
 import DASHI.Crypto.ShorQuantumRunFactorTransportRegression
