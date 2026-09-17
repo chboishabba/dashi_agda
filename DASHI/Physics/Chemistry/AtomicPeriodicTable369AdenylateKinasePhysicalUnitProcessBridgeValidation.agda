@@ -39,7 +39,11 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBMirrorTra
 -- values stay explicitly unresolved rather than inferred from nearby classes.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalAttributionCoordinatesValidation
 
--- Executable PDB acquisition/evaluation contract. The script emits a
--- content-addressed JSON receipt with explicit model/chain/altloc policy and
--- per-selection hashes; real 4AKE/1AKE execution remains a separate payment.
+-- Executable PDB acquisition/evaluation contract. Script v0.2 retains identity
+-- and mass-coordinate selection hashes while refusing hash-injectivity claims.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVScriptManifestValidation
+
+-- Executable-to-formal weld. Manifest hashes remain audit coordinates; an
+-- explicit selected-content witness pays selection extensionality and hence CV
+-- equality. Different source byte manifestations may share this CV quotient.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVManifestExtensionalityValidation
