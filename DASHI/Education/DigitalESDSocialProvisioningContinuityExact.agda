@@ -23,7 +23,7 @@ import DASHI.Education.DigitalESDStudyIntersectionalAbsenceAuditExact as Absence
 
 duellQueenslandBreakfastSource : Attr.AttributedSource
 duellQueenslandBreakfastSource = Attr.mkDOISource
-  "Rebecca Duell and colleagues"
+  "Rebecca Duell; Danielle Villoresi; Nomxolisi Malope-Rwodzi; Danielle Gallegos"
   "Beyond Breakfast: Exploring What Works for Schools Delivering School Breakfast Programs in Queensland, Australia"
   "Health Promotion Journal of Australia"
   "2026"
@@ -35,7 +35,7 @@ duellQueenslandBreakfastSource = Attr.mkDOISource
 
 heersCommunitySchoolsReview : Attr.AttributedSource
 heersCommunitySchoolsReview = Attr.mkDOISource
-  "Marieke Heers; Chris Van Klaveren; Wim Groot; Henriette Maassen van den Brink"
+  "Marieke Heers; Chris Van Klaveren; Wim Groot; Henriëtte Maassen van den Brink"
   "Community Schools: What We Know and What We Need to Know"
   "Review of Educational Research 86(4)"
   "2016"
