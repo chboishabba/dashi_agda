@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Analysis.ConcreteComplex as Complex
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.OrdinaryComplexPolar as Polar
+import DASHI.Moonshine.JInvariantConstructedComplexKleinJBackendExact as CKlein
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Series
 import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as Klein
 import DASHI.Moonshine.JInvariantEisensteinCalculatorKleinInputWeldExact as P
@@ -37,3 +38,25 @@ directNumeratorRegression :
   P.calculatorDirectJNumerator C kernel n tau
   ≡ P.existingDirectJNumerator C kernel n tau
 directNumeratorRegression = P.calculatorDirectJNumeratorMatches
+
+quotientWitnessRegression :
+  ∀ {R : Real.ConstructedOrderedCompleteReal}
+    {D : Polar.RealDivisionAndSquareRoot R} ->
+  (F : Polar.ComplexFieldAuthority R D) ->
+  (numerator denominator : Complex.ComplexPair R) ->
+  (nz₁ nz₂ : Polar.NonzeroC F denominator) ->
+  CKlein.quotientC F numerator denominator nz₁
+  ≡ CKlein.quotientC F numerator denominator nz₂
+quotientWitnessRegression = P.quotientCWitnessIndependent
+
+directJRegression :
+  (C : Complex.ConstructedComplexPackage) ->
+  (D : Polar.RealDivisionAndSquareRoot (Real.real (Complex.realPackage C))) ->
+  (F : Polar.ComplexFieldAuthority (Real.real (Complex.realPackage C)) D) ->
+  (kernel : Series.DivisorPowerKernel) ->
+  (n : Nat) ->
+  (normalization : Klein.EisensteinNormalizationData C D F) ->
+  (point : Klein.CertifiedFiniteEisensteinPoint C D F kernel n normalization) ->
+  P.directJTruncatedCalculatorQ C D F kernel n normalization point
+  ≡ Klein.directJTruncated C D F kernel n normalization point
+directJRegression = P.directJTruncatedCalculatorQMatches
