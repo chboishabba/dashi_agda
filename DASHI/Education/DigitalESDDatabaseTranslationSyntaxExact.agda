@@ -54,6 +54,17 @@ ieeeCommandSearchHelpSource = Attr.mkNoDOISource
   "Official IEEE Xplore help for Command Search field-name syntax and Boolean/proximity operators. Supports quoted field-name plus colon syntax and AND/OR/NOT/NEAR/ONEAR operators; does not execute this review's queries or establish search completeness."
   Attr.publicAttribution
 
+ericApiSearchHelpSource : Attr.AttributedSource
+ericApiSearchHelpSource = Attr.mkNoDOISource
+  "Institute of Education Sciences"
+  "ERIC API: Search and Export Metadata"
+  "ERIC Support"
+  "2026"
+  "https://api.ies.ed.gov/eric/"
+  Attr.institutionalSource
+  "Official Institute of Education Sciences documentation for the ERIC API. Supports GET queries via https://api.ies.ed.gov/eric/?search= with Solr-style query syntax, explicit Boolean operators AND/OR/NOT, parentheses for grouping, and straight double quotes for phrase searching; does not execute this review's queries or establish search completeness."
+  Attr.publicAttribution
+
 translationSyntaxSourceAtlas : Attr.AttributedSourceAtlas
 translationSyntaxSourceAtlas = Attr.mkSourceAtlas
   "digital ESD database translation syntax sources"
@@ -61,8 +72,9 @@ translationSyntaxSourceAtlas = Attr.mkSourceAtlas
   ( scopusAdvancedSearchHelpSource
   ∷ webOfScienceFieldTagsSource
   ∷ ieeeCommandSearchHelpSource
+  ∷ ericApiSearchHelpSource
   ∷ [] )
-  "Current official/help documentation supporting the reproducible syntax layer for three planned databases. ERIC and ACM DL translation remain explicit debt rather than being inferred from older or UI-only documentation."
+  "Current official/help documentation supporting the reproducible syntax layer for four planned databases. ACM DL translation remains explicit debt rather than being inferred from older or UI-only documentation."
 
 record DatabaseSyntaxReceipt : Set where
   constructor database-syntax-receipt
@@ -103,6 +115,15 @@ ieeeSyntaxReceipt = database-syntax-receipt
   "field-restricted Command Search over IEEE Xplore metadata fields; exact field choices for each frozen query remain to be pinned with the translated query receipt"
   "syntax receipt only; exact seven translated query strings, execution timestamp, result count and export remain separate payments"
 
+ericSyntaxReceipt : DatabaseSyntaxReceipt
+ericSyntaxReceipt = database-syntax-receipt
+  Search.eric
+  ericApiSearchHelpSource
+  "https://api.ies.ed.gov/eric/?search=<query>&format=json&rows=2000"
+  "AND / OR / NOT with parentheses; explicit AND required because default API operator is OR; straight double quotes for phrase searching"
+  "Solr-style search over ERIC indexed fields via official API endpoint; does not execute this review's queries or establish completeness"
+  "syntax receipt only; exact seven translated query strings, execution timestamp, result count and export remain separate payments"
+
 translationProtocolQueryCount : Nat
 translationProtocolQueryCount = Protocol.plannedQueryCount
 
@@ -132,8 +153,8 @@ record DatabaseTranslationBoundary : Set where
     ieeeExactTranslationSyntaxObservedIsTrue :
       ieeeExactTranslationSyntaxObserved ≡ true
     ericExactTranslationSyntaxObserved : Bool
-    ericExactTranslationSyntaxObservedIsFalse :
-      ericExactTranslationSyntaxObserved ≡ false
+    ericExactTranslationSyntaxObservedIsTrue :
+      ericExactTranslationSyntaxObserved ≡ true
     acmExactTranslationSyntaxObserved : Bool
     acmExactTranslationSyntaxObservedIsFalse :
       acmExactTranslationSyntaxObserved ≡ false
@@ -150,11 +171,11 @@ canonicalDatabaseTranslationBoundary = database-translation-boundary
   true refl
   true refl
   true refl
-  false refl
+  true refl
   false refl
   false refl
   false refl
 
 translationSyntaxReading : String
 translationSyntaxReading =
-  "Current official platform documentation pays reproducible search-field syntax for Scopus TITLE-ABS-KEY, Web of Science Core Collection TS Topic, and IEEE Xplore Command Search. ERIC and ACM DL remain translation debt because a current exact executable command/UI recipe has not yet been pinned. Syntax provenance does not create execution, counts, exports, completeness or eligibility."
+  "Current official platform documentation pays reproducible search-field syntax for Scopus TITLE-ABS-KEY, Web of Science Core Collection TS Topic, IEEE Xplore Command Search, and ERIC API GET search. ACM DL remains translation debt because a current exact executable command/UI recipe has not yet been pinned. Syntax provenance does not create execution, counts, exports, completeness or eligibility."

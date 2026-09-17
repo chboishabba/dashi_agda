@@ -11,8 +11,6 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Core.IntersectionalNonFactorability as Intersectional
 import DASHI.Governance.AliceBrownInstitutionalAgencyChoiceBridgeExact as AliceChoice
-import DASHI.Biology.TraumaMemoryAttractorPortfolio as TraumaMemory
-import DASHI.Biology.TrumpPsychogeographicPolicyAtlasExact as TrumpPolicy
 import DASHI.Governance.AmalekProvenanceRoleBinding as Amalek
 
 ------------------------------------------------------------------------

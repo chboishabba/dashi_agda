@@ -8,7 +8,6 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
-import DASHI.Biology.BodyMemoryBiologyRegression as Regression
 
 ------------------------------------------------------------------------
 -- Education/body-memory bridge.

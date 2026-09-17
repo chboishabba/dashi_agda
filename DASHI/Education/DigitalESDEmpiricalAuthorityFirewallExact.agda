@@ -91,19 +91,16 @@ groundingQuestions = Query.inquiryQuestionFamily GroundingAnswerFor askGrounding
 
 formalSurfaceDoesNotFactorGrounding :
   Query.FactorsThrough groundingQuestions formalSurface groundingQuestion → ⊥
-formalSurfaceDoesNotFactorGrounding factor = helper first second
+formalSurfaceDoesNotFactorGrounding factor = answer-collision
   where
-    first : groundedAnswer ≡ Query.quotientAnswer factor sameFormalConsequence
-    first = Query.factorisation factor derivedFromExternallyPaidPremise
+    collision : groundedAnswer ≡ ungroundedAnswer
+    collision =
+      trans
+        (Query.factorisation factor derivedFromExternallyPaidPremise)
+        (sym (Query.factorisation factor derivedFromTranscribedPremiseOnly))
 
-    second : ungroundedAnswer ≡ Query.quotientAnswer factor sameFormalConsequence
-    second = Query.factorisation factor derivedFromTranscribedPremiseOnly
-
-    helper :
-      groundedAnswer ≡ Query.quotientAnswer factor sameFormalConsequence →
-      ungroundedAnswer ≡ Query.quotientAnswer factor sameFormalConsequence →
-      ⊥
-    helper refl ()
+    answer-collision : ⊥
+    answer-collision with () ← collision
 
 ------------------------------------------------------------------------
 -- Constructive collision: same reproducible extraction procedure, different
@@ -140,19 +137,16 @@ extractionQuestions = Query.inquiryQuestionFamily ExtractionAnswerFor askExtract
 
 reproducibilityDoesNotFactorExtractionCorrectness :
   Query.FactorsThrough extractionQuestions reproducibilitySurface extractionCorrectnessQuestion → ⊥
-reproducibilityDoesNotFactorExtractionCorrectness factor = helper first second
+reproducibilityDoesNotFactorExtractionCorrectness factor = answer-collision
   where
-    first : extractionCorrect ≡ Query.quotientAnswer factor sameReproducibleProcedure
-    first = Query.factorisation factor reproducibleCorrectExtraction
+    collision : extractionCorrect ≡ extractionIncorrect
+    collision =
+      trans
+        (Query.factorisation factor reproducibleCorrectExtraction)
+        (sym (Query.factorisation factor reproducibleWrongExtraction))
 
-    second : extractionIncorrect ≡ Query.quotientAnswer factor sameReproducibleProcedure
-    second = Query.factorisation factor reproducibleWrongExtraction
-
-    helper :
-      extractionCorrect ≡ Query.quotientAnswer factor sameReproducibleProcedure →
-      extractionIncorrect ≡ Query.quotientAnswer factor sameReproducibleProcedure →
-      ⊥
-    helper refl ()
+    answer-collision : ⊥
+    answer-collision with () ← collision
 
 ------------------------------------------------------------------------
 -- Existing authority surfaces retained.
