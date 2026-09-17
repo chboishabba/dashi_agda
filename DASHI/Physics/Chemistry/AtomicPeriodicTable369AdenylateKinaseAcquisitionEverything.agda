@@ -176,6 +176,11 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseHistoricalMe
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOpenMMCVOracleExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticTrajectoryLiftExact
 
+-- Provenance-only transport unblocker for coordinate acquisition. Mirror objects
+-- retain their own repository/path/blob identities and the upstream PDB DOI;
+-- they do not claim canonical wwPDB-byte parity or scientific authority.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBMirrorTransportExact
+
 -- Typed navigation/provenance coordinates for the physical continuation.
 -- DOI/QID/Dewey stay independent, non-authoritative coordinates; unresolved
 -- classifications remain unresolved rather than being guessed from neighbours.
