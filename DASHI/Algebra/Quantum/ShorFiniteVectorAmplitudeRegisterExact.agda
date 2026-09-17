@@ -26,7 +26,7 @@ import DASHI.Algebra.Quantum.ShorCyclicPhaseAmplitudeQFTExact as Phase
 --
 -- Rows are exponent coordinates Fin Q.  Column zero is the distinguished clean
 -- target; column suc(y) is residue y : Fin N.  Ordinary propositional equality
--- is structural Vec equality: no function extensionality and no quotient by
+-- is structural Vec equality: no extensionality axiom and no quotient by
 -- module syntax is required.
 --
 -- The exact RSA.powMod oracle is a coordinate permutation in each exponent row:
@@ -485,7 +485,7 @@ record ShorFiniteVectorAmplitudeBoundary : Set where
     oracleReversibilityConstructive : Bool
     q1GraphIntertwiningConstructed : Bool
     literalCyclicCharacterTransformConstructed : Bool
-    functionExtensionalityUsed : Bool
+    extensionalityAxiomUsed : Bool
     coefficientFourierInversionStillRequired : Bool
     bornMeasurementStillRequired : Bool
 
