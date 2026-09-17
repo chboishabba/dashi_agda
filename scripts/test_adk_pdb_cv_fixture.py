@@ -73,6 +73,21 @@ class FixtureScriptTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             m.parse_pdb_text(bad, "A")
 
+    def test_selection_manifest_separates_identity_from_mass_coordinate_content(self):
+        m = self.load()
+        first = m.evaluate_adk_cv(m.parse_pdb_text(self.minimal(), "A"))
+        shifted = m.evaluate_adk_cv(
+            m.parse_pdb_text(self.minimal((1, 0, 0)), "A")
+        )
+        first_manifest = first["selection_manifests"]["theta1_lid_backbone"]
+        shifted_manifest = shifted["selection_manifests"]["theta1_lid_backbone"]
+        self.assertEqual(first_manifest["identity_sha256"], shifted_manifest["identity_sha256"])
+        self.assertNotEqual(
+            first_manifest["mass_coordinate_sha256"],
+            shifted_manifest["mass_coordinate_sha256"],
+        )
+        self.assertEqual(first_manifest["mass_source_doi"], m.ATOMIC_MASS_DOI)
+
     def test_receipt_has_schema_hashes_and_boundary(self):
         m = self.load()
         with tempfile.TemporaryDirectory() as directory:
@@ -84,7 +99,10 @@ class FixtureScriptTests(unittest.TestCase):
         self.assertEqual(len(receipt["source_sha256"]), 64)
         manifests = receipt["cv"]["selection_manifests"]
         self.assertIn("theta1_lid_backbone", manifests)
-        self.assertEqual(len(manifests["theta1_lid_backbone"]["sha256"]), 64)
+        self.assertEqual(len(manifests["theta1_lid_backbone"]["identity_sha256"]), 64)
+        self.assertEqual(
+            len(manifests["theta1_lid_backbone"]["mass_coordinate_sha256"]), 64
+        )
         self.assertFalse(receipt["cv"]["dln_source_atom_subset_resolved"])
         self.assertIn("does not", receipt["promotion_boundary"])
 
