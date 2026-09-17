@@ -14,6 +14,13 @@ fall2011DOIPinned :
   Env.fall2011DOI ≡ "10.1007/s13199-011-0128-0"
 fall2011DOIPinned = refl
 
+leghemoglobinReviewDOIPinned :
+  Env.larrainzar2020DOI ≡ "10.1111/nph.16673"
+leghemoglobinReviewDOIPinned = refl
+
+leghemoglobinReviewPMIDPinned : Env.larrainzar2020PMID ≡ "32442331"
+leghemoglobinReviewPMIDPinned = refl
+
 rhizobialIdentityAloneNotAdequate :
   Env.rhizobialIdentityAloneAdequate Env.canonicalEnvironmentalEnablementBoundary ≡ false
 rhizobialIdentityAloneNotAdequate = refl
@@ -29,6 +36,10 @@ strainIdentityAloneNotAdequateUnderWaterDeficiency = refl
 soilMoistureIsNotNoduleMicroenvironment :
   Env.bulkSoilMoistureEqualsNoduleMicroenvironment Env.canonicalEnvironmentalEnablementBoundary ≡ false
 soilMoistureIsNotNoduleMicroenvironment = refl
+
+genericLegumeOxygenMechanismNotAcaciaMeasurement :
+  Env.genericLegumeOxygenMechanismCreatesAcaciaSameObjectMeasurement Env.canonicalEnvironmentalEnablementBoundary ≡ false
+genericLegumeOxygenMechanismNotAcaciaMeasurement = refl
 
 greenhouseDoesNotCreateFieldDeployment :
   Env.greenhouseWaterDeficiencyCreatesFieldDeploymentAuthority Env.canonicalEnvironmentalEnablementBoundary ≡ false
