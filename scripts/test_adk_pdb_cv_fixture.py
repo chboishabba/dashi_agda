@@ -32,6 +32,13 @@ ATOM      1  N   ALA A   1       0.000   0.000   0.000  1.00 10.00           N  
         add = lambda p: tuple(p[i] + t[i] for i in range(3))
         self.assertAlmostEqual(m.angle_degrees(add(a), add(b), add(c)), 90.0, places=12)
 
+    def test_rcsb_pdb_url_is_canonical_and_uppercase(self):
+        m = self.load()
+        self.assertEqual(
+            m.rcsb_pdb_url("4ake"),
+            "https://files.rcsb.org/download/4AKE.pdb",
+        )
+
     def test_adk_receipt_keeps_dln_conventions_separate(self):
         m = self.load()
         atoms = []
