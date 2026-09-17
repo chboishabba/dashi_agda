@@ -21,6 +21,31 @@ bishopComplexLiftIsOwned :
   P.bishopComplexComponentwiseConvergenceOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopComplexLiftIsOwned = refl
 
+sameCarrierConcreteComplexLimitCompilerIsOwned :
+  P.sameCarrierConcreteComplexLimitCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+sameCarrierConcreteComplexLimitCompilerIsOwned = refl
+
+coefficientPolynomialGrowthIsOwned :
+  P.eisensteinCoefficientPolynomialGrowthOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+coefficientPolynomialGrowthIsOwned = refl
+
+principalStripQModulusCompilerIsOwned :
+  P.principalStripQModulusCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+principalStripQModulusCompilerIsOwned = refl
+
+upperHalfPlaneQDecayCompilerIsOwned :
+  P.upperHalfPlaneQDecayCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+upperHalfPlaneQDecayCompilerIsOwned = refl
+
+concreteQOrderAndStripInputsStillUnpaid :
+  P.concreteQOrderAndStripInputsOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+concreteQOrderAndStripInputsStillUnpaid = refl
+
 constructedEvaluatorCarrierWeldIsStillUnpaid :
   P.constructedComplexEvaluatorCarrierWeldOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ false
 constructedEvaluatorCarrierWeldIsStillUnpaid = refl
