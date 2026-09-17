@@ -12,9 +12,16 @@ bakhoumDOIPinned = refl
 githaeDOIPinned : M.githae2013DOI ≡ "10.1080/15324982.2013.784377"
 githaeDOIPinned = refl
 
+assefaKleinerDOIPinned : M.assefaKleiner1998DOI ≡ "10.1007/s003740050400"
+assefaKleinerDOIPinned = refl
+
 araNotDirectN2Rate :
   M.araEqualsDirectN2FixationRate M.canonicalMeasurementBoundary ≡ false
 araNotDirectN2Rate = refl
+
+araDoesNotDeterminePlantN :
+  M.araDeterminesPlantNitrogenContent M.canonicalMeasurementBoundary ≡ false
+araDoesNotDeterminePlantN = refl
 
 saraNotPlantDelivery :
   M.saraEqualsIntegratedPlantFixedNDelivery M.canonicalMeasurementBoundary ≡ false
