@@ -9,6 +9,7 @@ import DASHI.Culture.CohnInstitutionalIbrahimDeweyTraversalExact as Traversal
 import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionFourExact as Prior
 import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionThreeExact as Three
 import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Ibrahim
+import DASHI.Governance.IndigenousAuthoritySourceRegistryExact as IndigenousSources
 import DASHI.Governance.FirstNationsOwnedEvidenceContractExact as FirstNations
 
 ------------------------------------------------------------------------
@@ -98,8 +99,14 @@ priorEpistemicLabourBoundary = Three.canonicalAcquisitionThreeBoundary
 firstNationsEvidenceBoundary : FirstNations.FirstNationsEvidenceBoundary
 firstNationsEvidenceBoundary = FirstNations.canonicalFirstNationsEvidenceBoundary
 
-careGovernanceSourceAnchor : FirstNations.EvidenceRoute
-careGovernanceSourceAnchor = FirstNations.externalHistoricalBackgroundRoute
+careSourceAnchor : IndigenousSources.SourceReference
+careSourceAnchor = IndigenousSources.care2020
+
+ocapSourceAnchor : IndigenousSources.SourceReference
+ocapSourceAnchor = IndigenousSources.ocapFNIGC
+
+localContextsSourceAnchor : IndigenousSources.SourceReference
+localContextsSourceAnchor = IndigenousSources.localContextsTK
 
 -- The useful reuse is the boundary itself: provenance/ownership cannot stand in
 -- for governance, protocol or permission. We intentionally do not fabricate an
@@ -164,7 +171,7 @@ open AcquisitionFiveFrontier public
 canonicalAcquisitionFiveFrontier : AcquisitionFiveFrontier
 canonicalAcquisitionFiveFrontier = acquisition-five-frontier
   "ethical/equitable Indigenous research relation with rights-holder, relational-labour, burden and systemic-support coordinates"
-  "CARE 2020, OCAP and Local Contexts are already owned by FirstNationsOwnedEvidenceContractExact / IndigenousAuthoritySourceRegistryExact; their governance/permission boundary is reused instead of reacquired"
+  "CARE 2020, OCAP and Local Contexts are already owned by FirstNationsOwnedEvidenceContractExact / IndigenousAuthoritySourceRegistryExact; exact source objects and their governance/permission boundary are reused instead of reacquired"
   "Berenstain epistemic labour burden; Reid et al. 2021 Two-Eyed coexistence/co-production; CARE/OCAP provenance/control; permission/obligation/benefit-sharing owners remain related but definitionally separate"
   "Anderson 2012 system-level epistemic justice, Fraser 1990 counterpublics and Ermine 2007 ethical space remain useful follow candidates but are not admitted here because they presently overlap more strongly with existing structural-exclusion, activism/internal-exclusion and Two-Eyed/interface families"
   "Reid 2024 publication and author QIDs unresolved; publication-specific Dewey unresolved; no identifier or neighbouring class is invented"
