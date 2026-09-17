@@ -1,1 +1,0 @@
-Status: source-written only. No local Agda executable is available in this runtime and container network access to GitHub is disabled. Do not treat this branch or PR metadata as a kernel receipt.
