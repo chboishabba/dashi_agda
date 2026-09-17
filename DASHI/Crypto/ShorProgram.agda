@@ -23,10 +23,6 @@ import DASHI.Algebra.Quantum.ShorCyclicExponentBasisExact
 import DASHI.Algebra.Quantum.ShorCyclicExponentBasisRegression
 import DASHI.Algebra.Quantum.ShorCyclicPhaseAmplitudeQFTExact
 import DASHI.Algebra.Quantum.ShorCyclicPhaseAmplitudeQFTRegression
-import DASHI.Algebra.Quantum.ShorFiniteSyntaxCyclicPhaseQFTExact
-import DASHI.Algebra.Quantum.ShorFiniteSyntaxCyclicPhaseQFTRegression
-import DASHI.Algebra.Quantum.ShorFiniteSyntaxExecutionPrefixExact
-import DASHI.Algebra.Quantum.ShorFiniteSyntaxExecutionPrefixRegression
 import DASHI.Algebra.Quantum.ShorFiniteVectorAmplitudeRegisterExact
 import DASHI.Algebra.Quantum.ShorFiniteVectorAmplitudeRegisterRegression
 import DASHI.Algebra.Quantum.ShorCyclicCharacterResolutionExact
