@@ -30,14 +30,17 @@ import DASHI.Physics.YangMills.YMClayAristotleDonorAtlasExact as Atlas
 -- of exactly the kind a convergent polymer/cluster expansion may supply.
 --
 -- AUTHORITY BOUNDARY:
--- This owner records verified Lean theorem artifacts and the logical reduction.
+-- This owner records a supplied Lean theorem artifact and the logical reduction.
 -- It does NOT prove the interacting Wilson density/mixing hypothesis along the
 -- continuum trajectory; it does NOT import CMP116 source authority; and it does
 -- not identify a generic mixing kernel with Bałaban's source-localization ABI.
 ------------------------------------------------------------------------
 
 correlationCriterionLean : Atlas.LeanTheoremArtifact
-correlationCriterionLean = Atlas.literalSU2CorrelationCriterionLean
+correlationCriterionLean = Atlas.mkAristotleSecondRoundArtifact
+  "RequestProject/YangMills/Lattice/CorrelationCriterion.lean"
+  "integral_norm_sq_slice / decorrelation_of_truncated_correlation / decorrelation_of_uniform_joint_density"
+  "literal Wilson slice L2 norm identity; vacuum-orthogonal truncated two-slice correlation bound -> transfer decorrelator; uniform joint-density mixing |h|<=eps -> decorrelator with constant eps"
 
 correlationCriterionPath : String
 correlationCriterionPath =
