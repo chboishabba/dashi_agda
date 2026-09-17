@@ -20,7 +20,13 @@ _ = refl
 _ : Script.selectionManifestHashesRequired boundary ≡ true
 _ = refl
 
+_ : Script.massCoordinateSelectionHashesRequired boundary ≡ true
+_ = refl
+
 _ : Script.dLnSourceAtomSubsetResolvedByScript boundary ≡ false
+_ = refl
+
+_ : Script.hashEqualityCreatesSelectionContentEquality boundary ≡ false
 _ = refl
 
 _ : Script.scriptExecutionCreatesScientificAuthority boundary ≡ false
