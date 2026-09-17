@@ -7,12 +7,15 @@ module DASHI.Physics.YangMills.YMClayAristotleGapParityValidation where
 --   verified Lean donor theorem/worker receipt
 --   still-open physical Yang--Mills inhabitant
 --
--- The validation root names the exact surfaces required after comparing the
--- 2026-09-17 Aristotle tar with the merged #987 Agda parity lane.
+-- The 2026-09-17 varying-carrier tranche removes F2 as an independent physical
+-- payment.  The live physical frontier is F1/F3/F4; embeddings remain input to
+-- F3, but Hamiltonian/vacuum compatibility are not primitive F2 hypotheses.
 
 import DASHI.Physics.YangMills.YMClayAristotleDonorAtlasExact as Atlas
 import DASHI.Physics.YangMills.YMClayVacuumSectorSpectralGapParityExact as Spectral
 import DASHI.Physics.YangMills.YMClayLiteralSU2LatticeDonorExact as Lattice
+import DASHI.Physics.YangMills.YMClayVaryingCarrierTransportParityExact as Varying
+import DASHI.Physics.YangMills.YMClayUniformGapReductionParityExact as UniformGap
 import DASHI.Physics.YangMills.YMClayR387PhysicalMassGapCertificateExact as R387Physical
 import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as Frontier
 import DASHI.Physics.YangMills.YMClayCanonicalMassGapConclusionExact as Endgame
@@ -20,6 +23,8 @@ import DASHI.Physics.YangMills.YMClayCanonicalMassGapConclusionExact as Endgame
 open Atlas
 open Spectral
 open Lattice
+open Varying
+open UniformGap
 open R387Physical
 open Frontier
 open Endgame
@@ -30,11 +35,21 @@ vacuumSectorDonorAvailable = VacuumSectorLeanDonorPresent
 literalLatticeDonorAvailable : Set
 literalLatticeDonorAvailable = LiteralSU2LatticeLeanDonorPresent
 
+varyingCarrierTransportDonorAvailable : Set
+varyingCarrierTransportDonorAvailable = VaryingCarrierTransportLeanDonorPresent
+
+uniformGapReductionDonorAvailable : Set
+uniformGapReductionDonorAvailable = UniformGapReductionLeanDonorPresent
+
 r387PhysicalCompilerAvailable : Set
 r387PhysicalCompilerAvailable = PhysicalCertificateCompilerPresent
 
 outstandingFrontierAvailable : Set₁
 outstandingFrontierAvailable = OutstandingPhysicalFrontier
+
+f2NoLongerPrimitiveResearchPayment :
+  f2PrimitiveResearchPayment ≡ false
+f2NoLongerPrimitiveResearchPayment = f2PrimitiveResearchPaymentIsFalse
 
 canonicalConclusionAvailable : ∀ Hamiltonian Vacuum Gap → Set₁
 canonicalConclusionAvailable = CanonicalMassGapConclusion
