@@ -75,7 +75,7 @@ certifiedFourierSamplingPipeline :
   Pipeline.ShorSamplingPipeline
     (Order.asHiddenPeriodProblem P)
     prefix
-certifiedFourierSamplingPipeline {r = r} P prefix semantics =
+certifiedFourierSamplingPipeline {r = r} {R = R} P prefix semantics =
   Pipeline.shorSamplingPipeline
     (FourierOrderObservation P)
     (seedState semantics)
@@ -84,7 +84,7 @@ certifiedFourierSamplingPipeline {r = r} P prefix semantics =
     observedCandidate
     successfulRecovery
   where
-    finalState : Nat → _
+    finalState : Nat → Finite.State R
     finalState seed =
       QFT.fourier
         (Prefix.amplitudeFourierTransform prefix)
