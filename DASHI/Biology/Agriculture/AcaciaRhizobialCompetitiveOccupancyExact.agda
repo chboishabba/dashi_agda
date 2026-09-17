@@ -15,10 +15,8 @@ import DASHI.Biology.Agriculture.NitrogenaseChemistryCrossPollinationExact as Ch
 ------------------------------------------------------------------------
 -- ACACIA RHIZOBIAL COMPETITIVE OCCUPANCY
 --
--- Population availability, introduced inoculum identity and realised nodule
--- occupancy are separate empirical objects.  The strongest nursery->field
--- rank reversal in Sarr & Lesueur 2007 is A. nilotica, so this owner is
--- deliberately multi-Acacia and does not manufacture an A. senegal reversal.
+-- Population availability, introduced inoculum identity, provenance/soil
+-- context and realised nodule occupancy are separate empirical objects.
 ------------------------------------------------------------------------
 
 sarrEtAl2005DOI : String
@@ -29,6 +27,9 @@ sarrEtAl2005PMID = "16184338"
 
 sarrLesueur2007DOI : String
 sarrLesueur2007DOI = "10.1007/s11274-006-9288-0"
+
+bakhoumEtAl2016DOI : String
+bakhoumEtAl2016DOI = "10.1007/s11104-015-2655-6"
 
 sarrEtAl2005 : Attribution.AttributedSource
 sarrEtAl2005 = Attribution.mkDOISource
@@ -54,6 +55,18 @@ sarrLesueur2007 = Attribution.mkDOISource
   "Mixed-inoculum nursery/field source showing that realised nodule occupancy depends on strain, host provenance/species and soil environment. The strongest nursery-to-field ranking reversal reported in the source is for Acacia nilotica; Acacia senegal retains CIRADF300 as the majority occupant. DASHI therefore imports the competitive-occupancy/context distinction but does not assert an Acacia-senegal-specific rank reversal."
   Attribution.publicAttribution
 
+bakhoumEtAl2016 : Attribution.AttributedSource
+bakhoumEtAl2016 = Attribution.mkDOISource
+  "Niokhor Bakhoum; David W. Odee; Dioumacor Fall; Fatou Ndoye; Aboubacry Kane; Jacinta M. Kimiti; Alzouma M. Zoubeirou; Samba Nd. Sylla; Kandioura Noba; Diegane Diouf"
+  "Senegalia senegal response to inoculation with rhizobial strains vary in relation to seed provenance and soil type"
+  "Plant and Soil 398(1-2):181-193"
+  "2016"
+  bakhoumEtAl2016DOI
+  "https://doi.org/10.1007/s11104-015-2655-6"
+  Attribution.academicArticleSource
+  "Direct Senegalia senegal greenhouse source crossing 11 selected rhizobial strains, three seed provenances and two Senegal field soils with different nutrient status and indigenous rhizobia. Nodulation and growth vary with strain, provenance, soil type and their interactions; inoculation effects differ between Dahra and Goudiry soils. This supplies an A.-senegal-specific interaction receipt, not a universal strain ranking."
+  Attribution.publicAttribution
+
 ------------------------------------------------------------------------
 -- Population / inoculum / occupancy roles.
 ------------------------------------------------------------------------
@@ -64,6 +77,7 @@ data OccupancyEvidenceRole : Set where
   nurseryNoduleOccupancy : OccupancyEvidenceRole
   fieldNoduleOccupancy : OccupancyEvidenceRole
   hostSoilCompetitivenessInteraction : OccupancyEvidenceRole
+  senegalProvenanceSoilInoculationInteraction : OccupancyEvidenceRole
 
 record OccupancyReceipt : Set where
   constructor occupancy-receipt
@@ -96,6 +110,16 @@ nurseryFieldCompetitionReceipt = occupancy-receipt
   "low-fertility nursery soil versus more fertile field context"
   "mixed introduced strains with occupancy determined from nodules"
   "occupancy rankings depend on host/soil/phase; A. nilotica supplies the clear rank-reversal example, while A. senegal does not"
+
+senegalProvenanceSoilReceipt : OccupancyReceipt
+senegalProvenanceSoilReceipt = occupancy-receipt
+  bakhoumEtAl2016
+  bakhoumEtAl2016DOI
+  senegalProvenanceSoilInoculationInteraction
+  "Dahra, Tera and Makueni Senegalia senegal provenances"
+  "Dahra and Goudiry field soils differing in nutrient status and indigenous rhizobia"
+  "11 selected Senegalia-senegal-nodulating strains"
+  "nodulation and growth responses remain strain-by-provenance-by-soil indexed; no context-free best-strain ranking is created"
 
 ------------------------------------------------------------------------
 -- Finite DASHI information-loss witness.
@@ -156,6 +180,9 @@ record CompetitiveOccupancyBoundary : Set where
     nurseryOccupancyImpliesFieldOccupancy : Bool
     hostSpeciesAndProvenanceMustRemainIndexed : Bool
     soilFertilityAndPhaseMustRemainIndexed : Bool
+    acaciaSenegalProvenanceMayBeDroppedFromInoculationResponse : Bool
+    acaciaSenegalSoilTypeMayBeDroppedFromInoculationResponse : Bool
+    acaciaSenegalStrainEffectUniversalAcrossSoilsAndProvenances : Bool
     multiAcaciaTransitionCreatesAcaciaSenegalRankReversal : Bool
     noduleOccupancyImpliesFixedNFlux : Bool
     occupancyImpliesWholePlantAssimilation : Bool
@@ -165,8 +192,8 @@ open CompetitiveOccupancyBoundary public
 
 canonicalOccupancyBoundary : CompetitiveOccupancyBoundary
 canonicalOccupancyBoundary = competitive-occupancy-boundary
-  false true false false true true false false false false false
+  false true false false true true false false false false false false false false
 
 attributionRule : String
 attributionRule =
-  "Sarr et al. 2005 (DOI 10.1007/s00248-004-0077-8; PMID 16184338) owns its natural Acacia-senegal/Acacia-nilotica soil-rhizobial population propositions. Sarr & Lesueur 2007 (DOI 10.1007/s11274-006-9288-0) owns its mixed-inoculum nursery/field competitive-occupancy propositions. The strong nursery-to-field rank reversal in that paper is retained as Acacia-nilotica evidence and is not relabelled as an Acacia-senegal reversal. DASHI owns only the population/inoculum/occupancy separation, synthetic TaskFactorisation witness and no-promotion boundary. Nodule occupancy is not promoted to fixed-N flux, plant assimilation or deployment authority."
+  "Sarr et al. 2005 (DOI 10.1007/s00248-004-0077-8; PMID 16184338) owns its natural Acacia-senegal/Acacia-nilotica soil-rhizobial population propositions. Sarr & Lesueur 2007 (DOI 10.1007/s11274-006-9288-0) owns its mixed-inoculum nursery/field competitive-occupancy propositions; the strong nursery-to-field rank reversal is retained as Acacia-nilotica evidence and is not relabelled as an Acacia-senegal reversal. Bakhoum et al. 2016 (DOI 10.1007/s11104-015-2655-6) owns its direct Senegalia-senegal strain-by-provenance-by-soil inoculation-response propositions. DASHI owns only the population/inoculum/occupancy and interaction separations, synthetic TaskFactorisation witness and no-promotion boundary. Nodule occupancy or inoculation response is not promoted to fixed-N flux, plant assimilation or deployment authority."
