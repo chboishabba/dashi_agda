@@ -9,7 +9,6 @@ open import Data.Rational using
 import Data.Rational.Properties as ℚP
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans; refl)
-open import Relation.Binary.Reasoning.Setoid ℚP.≡-setoid
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -146,33 +145,32 @@ walshSpectralIdentity (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1
 
 negQq : ∀ q → (- q) * q ≡ -( q * q)
 negQq q =
-  begin_
-    (- q) * q
-  ≈⟨ sym (ℚP.*-distribˡ-+ (- q) q q) ⟩
-    (- q) * (q + q)
-  ≈⟨ cong (λ v → (- q) * v) (ℚP.+-inverseˡ q) ⟩
-    (- q) * 0ℚ
-  ≈⟨ sym (ℚP.*-zeroʳ (- q)) ⟩
-    0ℚ
-  ∎
+  trans
+    (sym (ℚP.*-distribˡ-+ (- q) q q))
+    (trans
+      (cong (λ v → (- q) * v) (ℚP.+-inverseˡ q))
+      (trans
+        (sym (ℚP.*-zeroʳ (- q)))
+        (sym (ℚP.+-inverseˡ (q * q)))))
 
 negSquare : ∀ q → (- q) * (- q) ≡ q * q
 negSquare q =
-  begin_
-    (- q) * (- q)
-  ≈⟨ sym (ℚP.*-distribˡ-+ (- q) (- q) q) ⟩
-    (- q) * (- q) + (- q) * q
-  ≈⟨ cong (λ v → (- q) * v) (ℚP.+-inverseˡ q) ⟩
-    (- q) * ((- q) + q)
-  ≈⟨ sym (ℚP.*-zeroʳ (- q)) ⟩
-    (- q) * 0ℚ
-  ≈⟨ cong (λ v → v + 0ℚ) (sym (ℚP.+-identityˡ ((- q) * (- q)))) ⟩
-    0ℚ + (- q) * (- q)
-  ≈⟨ ℚP.+-comm 0ℚ ((- q) * (- q)) ⟩
-    (- q) * (- q) + 0ℚ
-  ≈⟨ ℚP.+-identityʳ ((- q) * (- q)) ⟩
-    (- q) * (- q)
-  ∎
+  trans
+    (sym (ℚP.*-distribˡ-+ (- q) (- q) q))
+    (trans
+      (cong (λ v → (- q) * v) (ℚP.+-inverseˡ q))
+      (trans
+        (sym (ℚP.*-zeroʳ (- q)))
+        (sym
+          (trans
+            (ℚP.+-inverseˡ ((- q) * q))
+            (trans
+              (sym (ℚP.*-distribˡ-+ (- q) q q))
+              (trans
+                (cong (λ v → (- q) * v + q * q) (ℚP.+-inverseˡ q))
+                (trans
+                  (cong (_+ q * q) (sym (ℚP.*-zeroˡ q)))
+                  (sym (ℚP.+-inverseˡ (q * q))))))))))
 
 negZero : - 0ℚ ≡ 0ℚ
 negZero = trans (sym (ℚP.+-identityʳ (- 0ℚ))) (ℚP.+-inverseˡ 0ℚ)
