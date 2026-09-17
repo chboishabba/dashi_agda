@@ -20,6 +20,7 @@ import DASHI.Physics.YangMills.YMClayVaryingCarrierTransportParityExact as Varyi
 import DASHI.Physics.YangMills.YMClayUniformGapReductionParityExact as UniformGap
 import DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact as F134
 import DASHI.Physics.YangMills.YMClayClosedWorldResidualAudit20260917Exact as ResidualAudit
+import DASHI.Physics.YangMills.YMClayF1CanonicalSourceApplicationValidation as F1Canonical
 import DASHI.Physics.YangMills.YMClayR387PhysicalMassGapCertificateExact as R387Physical
 import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as Frontier
 import DASHI.Physics.YangMills.YMClayCanonicalMassGapConclusionExact as Endgame
@@ -31,6 +32,7 @@ open Varying
 open UniformGap
 open F134
 open ResidualAudit
+open F1Canonical
 open R387Physical
 open Frontier
 open Endgame
@@ -52,6 +54,9 @@ f134ContinuumWeldDonorAvailable = F134ContinuumWeldLeanDonorPresent
 
 closedWorldResidualAuditAvailable : Set
 closedWorldResidualAuditAvailable = ClosedWorldResidualAuditPresent
+
+f1CanonicalSourceApplicationCompilerAvailable : Set
+f1CanonicalSourceApplicationCompilerAvailable = f1CanonicalCompilerAvailable
 
 r387PhysicalCompilerAvailable : Set
 r387PhysicalCompilerAvailable = PhysicalCertificateCompilerPresent
