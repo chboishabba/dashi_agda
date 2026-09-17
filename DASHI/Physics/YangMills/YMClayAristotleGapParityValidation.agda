@@ -49,6 +49,9 @@ varyingCarrierTransportDonorAvailable = VaryingCarrierTransportLeanDonorPresent
 uniformGapReductionDonorAvailable : Set
 uniformGapReductionDonorAvailable = UniformGapReductionLeanDonorPresent
 
+transferOperatorArtifactAvailable : Atlas.LeanTheoremArtifact
+transferOperatorArtifactAvailable = Atlas.literalSU2TransferOperatorGapLean
+
 -- Second-round transfer-operator sharpening: the continuum weld does not need
 -- one trajectory-uniform c<1.  It only consumes the per-step defect relation
 -- Delta*a_k <= 1-c_k; hence c_k may approach one at O(a_k).
