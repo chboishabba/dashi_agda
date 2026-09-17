@@ -126,7 +126,16 @@ The trajectory must be the same literal Wilson family used by F3, including the 
 2. **R387/CMP116 covariance route**: merged #987 already compiles a genuine `R387.DirectSelectedSpectralUpper` plus one-sided limit closure and positivity to `PositiveTransferGapCore`; do not rebuild R410 or the historical factor-by-factor terminal stack.
 3. **P33/Hessian route** can provide finite coercivity and Combes–Thomas inputs but still needs structure-specific Stage-II gap transport; finite Hessian coercivity is not itself the trajectory-uniform transfer gap.
 
-Current closed-world archaeology reaches real physical source leaves rather than compiler plumbing. In particular, R398 constructs the direct R284 shell from R318 once R320's literal selected marked decay theorem is supplied; R346 removes arbitrary source-distance and fixed-amplitude overpayment but retains the literal selected localization and selected physical-distance/time semantics as physical coordinates.
+The final source-native recut below merged #967 is smaller than the historical R406--R409 replay. The consumer-minimal source primitive is:
+
+```text
+PublishedTwoJLocalizationForBase   [source theorem inhabitant]
+SelectedBaseJApplicability         [same-object magnitude/root/distance]
+```
+
+in `BalabanT5UnlocalizedJSourceLocalizationRound318Exact.agda`. Exact repository search on the restored current tree finds only the record definitions and compiler consumers, not concrete inhabitants. The source theorem ABI is motivated by CMP116 Sect. 1 / (1.23)--(1.36), DOI `10.1007/BF01239022`; the DOI and `standardImported` proof classification do not construct an Agda term.
+
+The lower R406--R409 replay remains useful provenance/optional source reconstruction. Its exact remaining attachments are `SingleChangedFourStageAgreement` and `differentiatedTermAbsoluteIsOperatorDifferenceNorm`; exact search likewise finds no external inhabitant on current master.
 
 ---
 
@@ -147,6 +156,8 @@ The Agda semantic cross-check remains `BalabanVacuumOrthogonalMoscoRecoveryExact
 
 The Round124–131 measure/Schwinger/stress lane is valuable same-family infrastructure, but its `literalFiniteMeasuresConverge` and OS/literal-Schwinger weld are stored as physical fields. Measure convergence is not silently promoted to Hamiltonian graph convergence.
 
+Exact closed-world search finds no physical literal-Wilson inhabitant of `VacuumOrthogonalRecoverySystem`, no concrete assignment to `literalFiniteMeasuresConverge`, and no accessible Lean branch containing an additional physical graph-limit instantiation. Aristotle's varying-carrier theorem pays transport once the graph-limit input exists; it does not manufacture that input.
+
 ---
 
 # F4 — actual YM/OS same evolution
@@ -161,7 +172,7 @@ on the actual theory and a common invariant core.
 
 Use the existing generator-uniqueness / same-evolution compilers after this equality is proved. Do not use a reflexive `OSWeld.self`, define both evolutions to be equal post hoc, or substitute Round127 Schwinger-family naming for an evolution theorem.
 
-The repository's common-core Ward/generator compiler is downstream machinery; exact search on current master finds no concrete constructor of its common-core action equality or a later `evolutionsEqual` inhabitant.
+The repository's common-core Ward/generator compiler is downstream machinery. Exact search on current master finds no concrete constructor of `commonCoreActionEquality`, no assignment to the new `YMOSSameObjectWitness.evolutionsEqual`, and no later `sameEvolution` physical inhabitant. Round127's Schwinger-family weld is a distinct obligation and itself has no concrete source-to-literal Schwinger inhabitant on current master.
 
 ---
 
@@ -173,6 +184,7 @@ Agda PR #996 now records:
 YMClayVaryingCarrierTransportParityExact
 YMClayUniformGapReductionParityExact
 YMClayF134ContinuumWeldParityExact
+YMClayClosedWorldResidualAudit20260917Exact
 YMClayOutstandingPhysicalFrontierExact
 ```
 
