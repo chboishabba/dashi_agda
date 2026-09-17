@@ -13,10 +13,16 @@ _ = refl
 _ : nativeRevisionDigestRuntimePaid canonicalLaunchReadiness ≡ true
 _ = refl
 
+_ : nativeReviewedEvidencePaymentPresent canonicalLaunchReadiness ≡ true
+_ = refl
+
 _ : nativeIdentityLineagePgPaid canonicalLaunchReadiness ≡ true
 _ = refl
 
 _ : recurrentRunnerGoldenBoundaryPresent canonicalLaunchReadiness ≡ true
+_ = refl
+
+_ : nativeRunnerLaunchPrerequisitesPaid canonicalLaunchReadiness ≡ true
 _ = refl
 
 _ : jmdGetterParityRequiredForNativeLaunch canonicalLaunchReadiness ≡ false
@@ -29,4 +35,13 @@ _ : recurrentHundredClassCampaignObserved canonicalLaunchReadiness ≡ false
 _ = refl
 
 _ : hundredReviewedIdentityClassesReached canonicalLaunchReadiness ≡ false
+_ = refl
+
+_ : launchReadinessCreatesSemanticAuthority canonicalLaunchReadiness ≡ false
+_ = refl
+
+_ : launchReadinessCreatesClaimTruth canonicalLaunchReadiness ≡ false
+_ = refl
+
+_ : launchReadinessCreatesAgdaProof canonicalLaunchReadiness ≡ false
 _ = refl
