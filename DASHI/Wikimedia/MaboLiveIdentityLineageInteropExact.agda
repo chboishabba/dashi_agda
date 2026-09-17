@@ -1,7 +1,7 @@
 module DASHI.Wikimedia.MaboLiveIdentityLineageInteropExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.MaboWorldObjectIdentityExact as Identity
@@ -69,8 +69,6 @@ liveEddieMaboIdentityAttachment =
 -- do not assert that persistence caused the reviewed identity resolution.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-
 maboCaseLiveIdentityClassMatchesGolden :
   Runtime.identityClassRef Runtime.liveMaboCaseLineage
   ≡ Identity.identityClassReference maboCaseIdentity
@@ -89,7 +87,6 @@ data PersistedIdentityClassEqualsSemanticAuthority : Set where
 data PersistedIdentityClassEqualsClaimTruth : Set where
 data PersistedIdentityClassEqualsApplicability : Set where
 data PersistedIdentityClassEqualsAgdaProof : Set where
-
 data PersistenceCreatesReviewedIdentityResolution : Set where
 
 persistedIdentityClassDoesNotEqualSemanticAuthority :
