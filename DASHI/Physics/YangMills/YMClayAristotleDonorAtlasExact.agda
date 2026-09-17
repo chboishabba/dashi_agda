@@ -40,7 +40,6 @@ aristotleYMLiteratureAtlas = Attr.mkSourceAtlas
   (wilson1974 ∷ [])
   "Wilson lattice-action provenance. Kato, Mosco, Kuwae-Shioya and Osterwalder-Schrader DOI-bearing sources remain canonical in YMOperatorDomainContinuumSources2026Exact and are imported rather than duplicated here."
 
--- Canonical DOI-bearing operator/continuum sources already owned in-repo.
 canonicalOperatorContinuumSources : List CanonicalSources.LiteratureSource
 canonicalOperatorContinuumSources = CanonicalSources.operatorDomainContinuumSources
 
@@ -66,6 +65,15 @@ mkAristotleArtifact file theorem role = lean-theorem-artifact
   theorem
   role
   "supplied archive reports lake build RequestProject green; retain this as donor provenance, not as an Agda kernel receipt"
+  false refl false refl
+
+mkAristotle8220Artifact : String → String → String → LeanTheoremArtifact
+mkAristotle8220Artifact file theorem role = lean-theorem-artifact
+  "Aristotle Yang-Mills varying-carrier tranche / 2026-09-17 worker return"
+  file
+  theorem
+  role
+  "supplied worker reports lake build RequestProject: 8220 jobs, zero errors, zero warnings; no sorry/axiom/postulate/@[implemented_by] in new material; headline #print axioms exactly propext, Classical.choice, Quot.sound. Donor receipt only; not an Agda kernel receipt."
   false refl false refl
 
 vacuumSectorUniqueSolutionLean : LeanTheoremArtifact
@@ -116,6 +124,30 @@ literalSU2StrongCouplingGapLean = mkAristotleArtifact
   "Lattice.ym_phys_massGap_of_coupling_le"
   "gauge-invariant literal SU(2) Wilson theory has a positive fixed-spacing vacuum-sector gap when 64|beta|(n+1)^4 <= 1/10"
 
+varyingCarrierTransportLean : LeanTheoremArtifact
+varyingCarrierTransportLean = mkAristotle8220Artifact
+  "RequestProject/YangMills/VaryingCarrierTransport.lean"
+  "RequestProject.YangMills.VaryingCarrierTransport theorem family"
+  "uniform intrinsic cutoff vacuum gaps transport through linear isometric embeddings from genuinely varying cutoff Hilbert spaces; no separate Hamiltonian/vacuum compatibility hypothesis is primitive"
+
+literalSU2ContinuumWeldLean : LeanTheoremArtifact
+literalSU2ContinuumWeldLean = mkAristotle8220Artifact
+  "RequestProject/YangMills/Lattice/ContinuumWeld.lean"
+  "RequestProject.YangMills.Lattice.ContinuumWeld theorem family"
+  "literal four-dimensional SU(2) Wilson family + uniform positive gap + isometric embeddings + embedded vacuum-sector graph limit -> continuum mass-gap conclusion; OS variant additionally consumes same evolution on a common core"
+
+literalSU2UniformGapReductionLean : LeanTheoremArtifact
+literalSU2UniformGapReductionLean = mkAristotle8220Artifact
+  "RequestProject/YangMills/Lattice/UniformGapReduction.lean"
+  "RequestProject.YangMills.Lattice.UniformGapReduction theorem family"
+  "literal Wilson transfer-form coercivity follows from |<P0 psi,P1 psi>| <= c ||psi||^2 on the vacuum complement, with finite gap a^-1(1-c); a trajectory-uniform c and Delta <= a_k^-1(1-c) supply the continuum-weld uniform gap"
+
+literalSU2ZeroCouplingUniformGapLean : LeanTheoremArtifact
+literalSU2ZeroCouplingUniformGapLean = mkAristotle8220Artifact
+  "RequestProject/YangMills/Lattice/UniformGapReduction.lean"
+  "zero-coupling c=0 uniform-volume witness"
+  "at zero coupling the decorrelation estimate holds with c=0 for every volume, proving that unbounded volume alone is not the interacting continuum obstruction"
+
 aristotleYMDonorArtifacts : List LeanTheoremArtifact
 aristotleYMDonorArtifacts =
   vacuumSectorUniqueSolutionLean ∷
@@ -125,9 +157,12 @@ aristotleYMDonorArtifacts =
   sameEvolutionGapTransferLean ∷
   literalSU2HamiltonianLean ∷
   literalSU2MassGapFromCoercivityLean ∷
-  literalSU2StrongCouplingGapLean ∷ []
+  literalSU2StrongCouplingGapLean ∷
+  varyingCarrierTransportLean ∷
+  literalSU2ContinuumWeldLean ∷
+  literalSU2UniformGapReductionLean ∷
+  literalSU2ZeroCouplingUniformGapLean ∷ []
 
--- Explicit non-collapse sentinels.
 donorLeanTheoremIsAgdaKernelProof : Bool
 donorLeanTheoremIsAgdaKernelProof = false
 
