@@ -56,6 +56,32 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1007/s10457-005-2918-y` — North Kordofan sandy-soil tree-density/water-use/gum/crop-yield study; contrasts with the clay-soil response and therefore blocks species/density-only water-response promotion.
 - `10.1016/j.foreco.2006.01.036` — eight-provenance Blue Nile delta-13C/water-use/growth/gum study. Shared provenance labels with the separate Ndfa source do not create a cross-paper Ndfa-WUE-gum correlation or same-object join.
 
+## Australian native-legume / wattle rhizobial restoration
+
+- `10.1046/j.1365-2664.1999.00409.x` — Burdon et al. 1999; native south-eastern Australian Acacia × rhizobial-isolate effectiveness varies strongly among host populations and isolates.
+- `10.1046/j.1365-2664.2000.00470.x` — Thrall, Burdon & Woods 2000; native Australian legume/rhizobia host-population and isolate interaction context.
+- `10.1046/j.1442-8903.2001.00086.x` — Murray, Thrall & Woods 2001; restoration implications of Australian Acacia-rhizobial specificity/effectiveness.
+- `10.1111/j.1365-2664.2005.01058.x` — Thrall et al. 2005; south-eastern Australian direct-seeding field restoration with native rhizobial inoculation. Establishment, early growth, survival, species and site remain separate coordinates.
+
+## Australian soil biota / mine rehabilitation
+
+- `10.1071/SB02004` — Bell et al. 2003; WA mine-site AM inoculation. Inoculum viability did not guarantee extensive colonisation or plant growth benefit; indigenous propagules and season/environment remain indexed.
+- `10.3389/fmicb.2019.01617` — Moreira-Grez et al. 2019; agriculture-derived microbial inoculum applied to Pilbara Acacia ancistrocarpa mine soil produced ecological mismatch/variable or negative plant-fitness outcomes.
+- `10.1016/j.scitotenv.2017.11.219` — PMID `29197793` — Kneller et al. 2018; Pilbara Triodia/Acacia reconstructed-soil experiment. Increased soil C/N and microbial activity did not itself create improved emergence/survival; topsoil remained a distinct establishment coordinate.
+
+## Australian grassland / old-field regeneration
+
+- `10.1016/j.jaridenv.2011.08.014` — Scott & Morgan 2012; ~100-year south-eastern Australian semi-arid old-field soil/vegetation recovery trajectory.
+- `10.1111/j.1365-2664.2006.01262.x` — Standish et al. 2007; WA old-field recolonisation limited by seed dispersal and recruitment, with exotic annual-grass dominance retained as a competing state.
+- `10.1111/1365-2664.12551` — Fensham et al. 2016; Queensland subtropical-grassland passive restoration depends on remnant seed sources, dispersal and avoidance of deflected succession.
+- `10.1002/eap.2547` — PMID `35080806` — Parkhurst, Standish & Prober 2022; available soil P remains elevated more than a decade after old-field restoration, so present vegetation does not erase agricultural nutrient history.
+
+## Sorghum-sudangrass temporary nurse / cover function
+
+- `10.1111/grs.12391` — Kaneko et al. 2023; sorghum-sudangrass as an annual companion during slow perennial brachiariagrass establishment. Establishment-year cover/forage is not identified with perennial trajectory.
+- `10.3390/agronomy11122449` — Guretzky & Redfearn 2021; seeding-rate dependent establishment-year forage increase with no residual effect on following-year forage mass/vegetation dynamics in the reported cool-season sod system.
+- `10.1002/cft2.70055` — Burt et al. 2025; agricultural sorghum-sudangrass mixtures alter herbage accumulation and weed suppression. These functions are not native-restoration or biodiversity receipts.
+
 ## Isotope observer / method-calibration donors
 
 - `10.1071/AR9940133` — Pate, Unkovich, Armstrong & Sanford 1994; reference-plant selection for `15N` natural-abundance assessment. Retained only as method/observer calibration, not as Acacia biological evidence.
@@ -71,4 +97,4 @@ All identifiers below were acquired/verified during the source-written tranche a
 
 ## Identity / attribution rule
 
-Unverified PMID/PMCID/QID/taxon identifiers remain unfilled; no identifier is inferred from article title alone. DOI/PMID/PMCID/PDB coordinates identify source or object provenance only. They do not create biological truth, same-object identity across studies, DASHI theorem ownership, mechanism transfer, model adequacy, cross-paper correlation, fertilizer substitution, or deployment authority.
+Unverified PMID/PMCID/QID/taxon identifiers remain unfilled; no identifier is inferred from article title alone. DOI/PMID/PMCID/PDB coordinates identify source or object provenance only. They do not create biological truth, same-object identity across studies, DASHI theorem ownership, mechanism transfer, model adequacy, cross-paper correlation, fertilizer substitution, deployment authority, or ecological equivalence across Australian Acacia, Senegalia senegal and agricultural sorghum-sudangrass systems.
