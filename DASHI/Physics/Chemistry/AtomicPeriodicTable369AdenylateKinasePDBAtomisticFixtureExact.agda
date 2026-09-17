@@ -12,6 +12,7 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConformation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseStructuralIdentitySnowballExact as Structural
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourcePaidThreeCVEndpointExact as Endpoint
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAttributionEnvelopeExact as Attr
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVScriptManifestExact as Script
 
 ------------------------------------------------------------------------
 -- PDB SAME-OBJECT FIXTURE ENVELOPE
@@ -20,6 +21,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationA
 -- Both 4AKE and 1AKE contain chains/copies A and B.  Therefore entry identity,
 -- coordinate manifestation, model/chain choice, altloc policy, chemical
 -- microstate and any derived CV observation remain separate receipts.
+--
+-- Concrete byte acquisition/evaluation is delegated to the canonical script
+-- receipt schema.  We do not maintain a competing manual atom-coordinate lane.
 ------------------------------------------------------------------------
 
 articleDOI = Attr.articleDOI
@@ -52,13 +56,13 @@ open4AKEManifestation = pdb-coordinate-manifestation
   "10.2210/pdb4AKE/pdb"
   Structural.open4AKESource
   "wwPDB/RCSB coordinate entry; exact local byte manifestation not embedded in this Agda owner"
-  "https://files.rcsb.org/download/4AKE.cif"
-  "X-ray entry; model selection must be explicit before atom indices are generated"
+  "https://files.rcsb.org/download/4AKE.pdb"
+  "model must be explicit in the script receipt; default evaluator convention is model 1"
   "entry contains protein chains A and B; Li-Liu-Ji endpoint role does not by itself choose one chain in this fixture"
-  "must be explicit when coordinates contain alternate locations"
+  "must be explicit; current script contract supports blank-or-A"
   "PDB experiment does not make simulation hydrogen/protonation placement definitional"
   "water/heterogen inclusion must be explicit for any atomistic configuration"
-  "RCSB entry/revision identity retained; evaluator receipt must pin the actual bytes/revision it consumes"
+  "RCSB entry/revision identity retained; executable receipt must pin the actual bytes by SHA-256"
   false false
   "4AKE is the source-paid open structural reference; PDB identity alone does not create the coordinate list or select chain A/B"
 
@@ -68,13 +72,13 @@ closed1AKEManifestation = pdb-coordinate-manifestation
   "10.2210/pdb1AKE/pdb"
   Structural.closed1AKESource
   "wwPDB/RCSB coordinate entry; exact local byte manifestation not embedded in this Agda owner"
-  "https://files.rcsb.org/download/1AKE.cif"
-  "X-ray entry; model selection must be explicit before atom indices are generated"
+  "https://files.rcsb.org/download/1AKE.pdb"
+  "model must be explicit in the script receipt; default evaluator convention is model 1"
   "entry contains two copies/chains A and B; Muller-Schulz report two complexes in the asymmetric unit, one less well ordered"
-  "must be explicit when coordinates contain alternate locations"
+  "must be explicit; current script contract supports blank-or-A"
   "experimental heavy-atom coordinates do not define a simulation protonation assignment"
   "Ap5A/water inclusion and any later Mg/nucleotide simulation chemistry must remain explicit"
-  "RCSB entry/revision identity retained; evaluator receipt must pin the actual bytes/revision it consumes"
+  "RCSB entry/revision identity retained; executable receipt must pin the actual bytes by SHA-256"
   false false
   "1AKE is the source-paid closed/Ap5A structural reference; the two-copy crystal does not manufacture one canonical chain"
 
@@ -93,6 +97,7 @@ record PDBAtomisticFixture : Set where
   field
     manifestation : PDBCoordinateManifestation
     endpointObservation : Endpoint.ThreeCVEndpoint
+    executableReceiptTemplate : Script.PDBCVExecutableReceiptShape
     configurationCarrier : Set
     configurationRole : String
     entryIdentityAndEndpointSameStructuralRole : Bool
@@ -107,16 +112,18 @@ open4AKEFixture : PDBAtomisticFixture
 open4AKEFixture = pdb-atomistic-fixture
   open4AKEManifestation
   openEndpointObservation
+  Script.unexecuted4AKETemplate
   Config.AtomisticConfiguration
-  "future concrete configuration must be constructed from one pinned 4AKE coordinate manifestation plus explicit model/chain/altloc/chemical-context choices"
+  "future concrete configuration must be constructed from one content-addressed 4AKE script receipt plus explicit model/chain/altloc/chemical-context choices"
   true false false false false false
 
 closed1AKEFixture : PDBAtomisticFixture
 closed1AKEFixture = pdb-atomistic-fixture
   closed1AKEManifestation
   closedEndpointObservation
+  Script.unexecuted1AKETemplate
   Config.AtomisticConfiguration
-  "future concrete configuration must be constructed from one pinned 1AKE coordinate manifestation plus explicit model/chain/altloc/chemical-context choices"
+  "future concrete configuration must be constructed from one content-addressed 1AKE script receipt plus explicit model/chain/altloc/chemical-context choices"
   true false false false false false
 
 ------------------------------------------------------------------------
@@ -166,6 +173,7 @@ record AdKPDBAtomisticFixtureBoundary : Set where
     multiChainAmbiguityRetained : Bool
     modelAltlocHydrogenPoliciesExplicit : Bool
     sourceEndpointTriplesRetained : Bool
+    canonicalScriptReceiptMechanismRetained : Bool
     pdbObjectQidsRetainedAsUnresolvedWhereApplicable : Bool
     deweyCoordinateExplicitlyUnresolved : Bool
     coordinateBytesAcquiredIntoAgdaFixture : Bool
@@ -178,5 +186,5 @@ open AdKPDBAtomisticFixtureBoundary public
 canonicalAdKPDBAtomisticFixtureBoundary : AdKPDBAtomisticFixtureBoundary
 canonicalAdKPDBAtomisticFixtureBoundary =
   adk-pdb-atomistic-fixture-boundary
-    true true true true true true true
+    true true true true true true true true
     false false false false false
