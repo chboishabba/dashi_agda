@@ -13,11 +13,9 @@ import DASHI.Biology.Agriculture.LegumeNodulationSituatedProteinBridgeExact as N
 ------------------------------------------------------------------------
 -- ACACIA-SPECIFIC PLANT NITROGEN ASSIMILATION EVIDENCE
 --
--- This owner distinguishes a positive Acacia-specific evidence payment from the
--- generic BNF dependency ladder. Foliar natural-abundance 15N / N-derived-from-
--- atmosphere measurements are integrative plant-level evidence, but they are
--- not a direct molecular transfer-flux measurement, a seasonal whole-plant N
--- budget, an ecosystem soil-N balance or deployment authority.
+-- Positive Acacia plant-level isotope evidence remains distinct from a direct
+-- molecular transfer flux, whole-season N budget, ecosystem balance or generic
+-- BNF-ladder closure.
 ------------------------------------------------------------------------
 
 naturalPopulationDOI : String
@@ -29,16 +27,32 @@ phosphorusExperimentDOI = Edaphic.isaacHarmandDrevon2011DOI
 phosphorusExperimentPMID : String
 phosphorusExperimentPMID = Edaphic.isaacHarmandDrevon2011PMID
 
+githae2013DOI : String
+githae2013DOI = "10.1080/15324982.2013.784377"
+
 naturalPopulationSource : Attribution.AttributedSource
 naturalPopulationSource = Edaphic.isaacEtAl2011
 
 phosphorusExperimentSource : Attribution.AttributedSource
 phosphorusExperimentSource = Edaphic.isaacHarmandDrevon2011
 
+githaeEtAl2013 : Attribution.AttributedSource
+githaeEtAl2013 = Attribution.mkDOISource
+  "Eunice W. Githae; Charles K. K. Gachene; Jesse T. Njoka; Stephen F. Omondi"
+  "Nitrogen Fixation by Natural Populations of Acacia Senegal in the Drylands of Kenya Using 15N Natural Abundance"
+  "Arid Land Research and Management 27(4):327-336"
+  "2013"
+  githae2013DOI
+  "https://doi.org/10.1080/15324982.2013.784377"
+  Attribution.academicArticleSource
+  "Primary dryland Kenya source estimating N2 fixation for three Acacia senegal varieties using leaf 15N natural abundance while separately collecting soil/nodule observations. The source reports significant variation in amount of N2 fixed among varieties."
+  Attribution.publicAttribution
+
 data PlantNitrogenEvidenceRole : Set where
   foliarNaturalAbundance15N : PlantNitrogenEvidenceRole
   nitrogenDerivedFromAtmosphereEstimate : PlantNitrogenEvidenceRole
   plantNitrogenContent : PlantNitrogenEvidenceRole
+  noduleAssessment : PlantNitrogenEvidenceRole
   sourceInterpretation : PlantNitrogenEvidenceRole
 
 record PlantFixedNEvidence : Set where
@@ -76,6 +90,16 @@ phosphorusExperimentFoliarEvidence = plant-fixed-n-evidence
   "controlled sand culture with low/mid/high phosphorus and uniform non-limiting nitrogen addition"
   true false false false
 
+githaeVarietyFoliarEvidence : PlantFixedNEvidence
+githaeVarietyFoliarEvidence = plant-fixed-n-evidence
+  githaeEtAl2013
+  githae2013DOI
+  nitrogenDerivedFromAtmosphereEstimate
+  "leaves from naturally occurring Acacia senegal varieties"
+  "leaf 15N natural-abundance estimate with a neighboring non-legume reference; nodule assessment retained as a separate observation"
+  "three Acacia senegal varieties across Kenyan dryland sites"
+  true false false false
+
 ------------------------------------------------------------------------
 -- Positive local evidence does not mutate the canonical global ladder.
 ------------------------------------------------------------------------
@@ -94,6 +118,9 @@ record PlantNitrogenAssimilationBoundary : Set where
   field
     acaciaSpecificPlantFixedNContributionEvidence : Bool
     foliarIsotopeEvidenceEqualsDirectTransferFlux : Bool
+    speciesIdentityAloneAdequateForFixedNContribution : Bool
+    noduleAssessmentEqualsFoliarFixationEstimate : Bool
+    varietySiteAndObserverRemainIndexed : Bool
     genericPlantAssimilationStageClosed : Bool
     plantFixedNContributionCreatesSeasonalPlantNBalance : Bool
     plantFixedNContributionCreatesEcosystemSoilNBalance : Bool
@@ -105,7 +132,7 @@ open PlantNitrogenAssimilationBoundary public
 
 canonicalPlantNBoundary : PlantNitrogenAssimilationBoundary
 canonicalPlantNBoundary = plant-nitrogen-assimilation-boundary
-  true false false false false false false true false
+  true false false false true false false false false false true false
 
 acaciaPlantLevelEvidencePaid :
   acaciaSpecificPlantFixedNContributionEvidence canonicalPlantNBoundary ≡ true
@@ -117,4 +144,4 @@ genericAssimilationNotPromoted = refl
 
 attributionRule : String
 attributionRule =
-  "Isaac, Harmand, Lesueur & Lelon 2011 (DOI 10.1016/j.foreco.2010.11.011) owns its natural-population foliar-15N/fixation-context propositions. Isaac, Harmand & Drevon 2011 (DOI 10.1016/j.jplph.2010.10.011; PMID 21211863) owns its controlled phosphorus-gradient plant-N and N-derived-from-atmosphere propositions. DASHI owns only the evidence-role typing and promotion boundary. Plant-level isotope evidence is not relabelled as a direct nitrogenase-to-plant molecular transfer flux, seasonal N balance, soil-N balance, fertilizer substitution or intervention authority."
+  "Isaac, Harmand, Lesueur & Lelon 2011 (DOI 10.1016/j.foreco.2010.11.011) owns its natural-population foliar-15N/fixation-context propositions. Isaac, Harmand & Drevon 2011 (DOI 10.1016/j.jplph.2010.10.011; PMID 21211863) owns its controlled phosphorus-gradient plant-N and N-derived-from-atmosphere propositions. Githae, Gachene, Njoka & Omondi 2013 (DOI 10.1080/15324982.2013.784377) owns its variety/site-indexed leaf-15N fixation estimates and separate nodule observations. DASHI owns only the evidence-role typing and promotion boundary. Plant-level isotope evidence is not relabelled as a direct molecular transfer flux, whole-season N balance, soil-N balance, fertilizer substitution or intervention authority."
