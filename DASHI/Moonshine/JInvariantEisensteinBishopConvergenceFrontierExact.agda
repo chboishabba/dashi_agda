@@ -48,6 +48,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 import Real as BishopReal
+import RealProperties as BishopProperties
 import Sequence as BishopSequence
 
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
@@ -85,7 +86,7 @@ record BishopAbsoluteSeriesLimitReceipt
   field
     absoluteConvergence : Bishop.BishopAbsoluteSeriesConvergent terms
     limit : BishopReal.ℝ
-    canonicalLimit : limit BishopReal.≃ bishopSeriesLimit terms absoluteConvergence
+    canonicalLimit : BishopReal._≃_ limit (bishopSeriesLimit terms absoluteConvergence)
     convergesToLimit :
       Bishop.BishopConvergesTo (BishopSequence.SeriesOf terms) limit
 
@@ -99,7 +100,7 @@ compileAbsoluteSeriesLimit terms absolute =
   bishop-absolute-series-limit-receipt
     absolute
     (bishopSeriesLimit terms absolute)
-    BishopReal.≃-refl
+    BishopProperties.≃-refl
     (bishopSeriesLimitConvergence terms absolute)
 
 ------------------------------------------------------------------------
