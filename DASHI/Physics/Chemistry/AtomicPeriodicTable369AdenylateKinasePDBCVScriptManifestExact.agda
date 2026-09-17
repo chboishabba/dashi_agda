@@ -11,20 +11,21 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalAttr
 -- EXECUTABLE PDB -> CV RECEIPT MANIFEST
 --
 -- `scripts/adk_pdb_cv_fixture.py` is the deterministic acquisition/evaluation
--- bridge for concrete PDB coordinate manifestations.  It is not the scientific
+-- bridge for concrete PDB coordinate manifestations. It is not the scientific
 -- authority for the CV definitions and it is not an Agda proof oracle.
 --
--- The script consumes exact PDB bytes plus explicit model/chain/altloc policy,
--- computes the source-defined theta1/theta2 backbone-COM observables, reports
--- two evaluator conventions for the source-underresolved dLN atom subset, and
--- emits a content-addressed JSON evidence packet.
+-- Script v0.2 retains two distinct per-selection hashes:
+-- * identity SHA-256: model/chain/residue/resname/atom/altloc/serial/element;
+-- * mass-coordinate SHA-256: the same identity row plus attributed mass and xyz.
+-- Hashes remain audit coordinates. Equality of SHA-256 strings is not promoted
+-- into an Agda theorem that the underlying selected contents are equal.
 ------------------------------------------------------------------------
 
 scriptPath : String
 scriptPath = "scripts/adk_pdb_cv_fixture.py"
 
 scriptVersion : String
-scriptVersion = "0.1.0"
+scriptVersion = "0.2.0"
 
 artifactSchema : String
 artifactSchema = "dashi.adk.pdb_cv_fixture.v1"
@@ -65,11 +66,34 @@ record PDBCVSelectionManifestPolicy : Set where
     dLnLidHeavyManifestHashed : Bool
     dLnNmpHeavyManifestHashed : Bool
     manifestCountRetained : Bool
+    identityHashRetained : Bool
+    massCoordinateHashRetained : Bool
+    massSourceDOIRetained : Bool
 open PDBCVSelectionManifestPolicy public
 
 canonicalPDBCVSelectionManifestPolicy : PDBCVSelectionManifestPolicy
 canonicalPDBCVSelectionManifestPolicy = pdb-cv-selection-manifest-policy
-  true true true true true true true true true
+  true true true true true true true true true true true true
+
+record PDBCVSelectionManifestReceipt : Set where
+  constructor pdb-cv-selection-manifest-receipt
+  field
+    selectionLabel : String
+    selectedAtomCountReading : String
+    identitySha256 : String
+    massCoordinateSha256 : String
+    massSourceDOI : String
+    manifestRole : String
+open PDBCVSelectionManifestReceipt public
+
+unexecutedSelectionManifestReceipt : PDBCVSelectionManifestReceipt
+unexecutedSelectionManifestReceipt = pdb-cv-selection-manifest-receipt
+  "unexecuted"
+  "unpaid"
+  "unpaid"
+  "unpaid"
+  "10.1515/pac-2019-0603"
+  "receipt shape only; no selected-content equality or execution is created by this placeholder"
 
 record PDBCVEvaluatorSemantics : Set where
   constructor pdb-cv-evaluator-semantics
@@ -154,8 +178,8 @@ data ScriptExecutionCreatesScientificAuthority : Set where
 data ScriptHashCreatesPDBIdentity : Set where
 data EvaluatorConventionBecomesSourceDefinition : Set where
 data FloatAgreementCreatesExactAgdaTheorem : Set where
-
 data SamePDBIdCreatesSameCoordinateBytes : Set where
+data HashEqualityCreatesSelectionContentEquality : Set where
 
 scriptExecutionDoesNotCreateScientificAuthority :
   ScriptExecutionCreatesScientificAuthority → ⊥
@@ -174,6 +198,10 @@ floatAgreementDoesNotCreateExactAgdaTheorem ()
 samePdbIdDoesNotCreateSameBytes : SamePDBIdCreatesSameCoordinateBytes → ⊥
 samePdbIdDoesNotCreateSameBytes ()
 
+hashEqualityDoesNotCreateSelectionContentEquality :
+  HashEqualityCreatesSelectionContentEquality → ⊥
+hashEqualityDoesNotCreateSelectionContentEquality ()
+
 record AdKPDBCVScriptManifestBoundary : Set where
   constructor adk-pdb-cv-script-manifest-boundary
   field
@@ -181,10 +209,12 @@ record AdKPDBCVScriptManifestBoundary : Set where
     sourceBytesSha256Required : Bool
     modelChainAltlocPolicyExplicit : Bool
     selectionManifestHashesRequired : Bool
+    massCoordinateSelectionHashesRequired : Bool
     thetaSourceBackboneDefinitionRetained : Bool
     dLnSourceAtomSubsetResolvedByScript : Bool
     dLnEvaluatorConventionsRemainDistinct : Bool
     massConventionAttributed : Bool
+    hashEqualityCreatesSelectionContentEquality : Bool
     scriptExecutionCreatesScientificAuthority : Bool
     floatAgreementCreatesExactAgdaTheorem : Bool
     real4AKE1AKEExecutionPaidHere : Bool
@@ -193,5 +223,5 @@ open AdKPDBCVScriptManifestBoundary public
 canonicalAdKPDBCVScriptManifestBoundary : AdKPDBCVScriptManifestBoundary
 canonicalAdKPDBCVScriptManifestBoundary =
   adk-pdb-cv-script-manifest-boundary
-    true true true true true false true true
-    false false false
+    true true true true true true false true true
+    false false false false
