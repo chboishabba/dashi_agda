@@ -12,23 +12,9 @@ import DASHI.Analysis.OrdinaryComplexInverseWitnessIndependenceExact as Inverse
 import DASHI.Moonshine.JInvariantConstructedComplexKleinJBackendExact as CKlein
 import DASHI.Moonshine.JInvariantProofRelevantKleinJExact as ProofKlein
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Series
+import DASHI.Moonshine.JInvariantEisensteinInternalDivisorPowerKernelExact as Internal
 import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as Klein
 import DASHI.Moonshine.JInvariantEisensteinCalculatorQSubstitutionExact as CalcQ
-
-------------------------------------------------------------------------
--- CALCULATOR-q -> FINITE KLEIN WELD
---
--- The proof-relevant Klein backend consumes g2 and Delta.  The existing finite
--- Eisenstein owner instantiates these as E4_N and
---
---   Delta_N = (E4_N^3 - E6_N^2) / 1728.
---
--- The calculator-q substitution proves exact equality of E4_N, E6_N, and the
--- discriminant numerator.  We first push those equalities to the Klein inputs.
--- Then we use the generic uniqueness of the existing reciprocal/inverse value
--- to remove dependence on which NonzeroC proof was transported, allowing the
--- direct finite Klein-j evaluator itself to be welded exactly.
-------------------------------------------------------------------------
 
 private
   ComplexCarrier :
@@ -115,10 +101,6 @@ calculatorDirectJNumeratorMatches :
 calculatorDirectJNumeratorMatches C kernel n tau
   rewrite CalcQ.e4TruncatedCalculatorQMatches C kernel n tau = refl
 
-------------------------------------------------------------------------
--- Generic quotient value does not depend on the proof of nonzeroness.
-------------------------------------------------------------------------
-
 quotientCWitnessIndependent :
   ∀ {R : Real.ConstructedOrderedCompleteReal}
     {D : Polar.RealDivisionAndSquareRoot R} ->
@@ -131,10 +113,6 @@ quotientCWitnessIndependent F numerator denominator nz₁ nz₂ =
   cong
     (λ inv -> Complex._*C_ numerator inv)
     (Inverse.complexInverseWitnessIndependent F denominator nz₁ nz₂)
-
-------------------------------------------------------------------------
--- Transport the original certified nonzero denominator to calculator-q form.
-------------------------------------------------------------------------
 
 calculatorDiscriminantNonzero :
   (C : Complex.ConstructedComplexPackage) ->
@@ -152,10 +130,6 @@ calculatorDiscriminantNonzero C D F kernel n normalization point =
     (sym (CalcQ.discriminantNumeratorCalculatorQMatches
       C kernel n (Klein.tau point)))
     (Klein.discriminantNumeratorNonzero point)
-
-------------------------------------------------------------------------
--- Exact direct finite-j evaluator with calculator q substituted.
-------------------------------------------------------------------------
 
 directJTruncatedCalculatorQ :
   (C : Complex.ConstructedComplexPackage) ->
@@ -195,12 +169,6 @@ directJTruncatedCalculatorQMatches C D F kernel n normalization point
       (calculatorDiscriminantNonzero C D F kernel n normalization point)
       (Klein.discriminantNumeratorNonzero point))
 
-------------------------------------------------------------------------
--- Existing route-normalization authority transports the same equality to the
--- source-facing proof-relevant Klein-j construction.  The agreement remains
--- an explicit input exactly as in the existing owner.
-------------------------------------------------------------------------
-
 sourceFacingKleinJCalculatorQMatches :
   (C : Complex.ConstructedComplexPackage) ->
   (D : Polar.RealDivisionAndSquareRoot (Real.real (Complex.realPackage C))) ->
@@ -218,8 +186,55 @@ sourceFacingKleinJCalculatorQMatches C D F kernel n normalization agreement poin
     (sym (directJTruncatedCalculatorQMatches C D F kernel n normalization point))
 
 ------------------------------------------------------------------------
--- Remaining authority firewalls.
+-- Canonical repo-internal divisor-kernel specialization through finite j.
 ------------------------------------------------------------------------
+
+directJTruncatedInternalCalculatorQ :
+  (C : Complex.ConstructedComplexPackage) ->
+  (D : Polar.RealDivisionAndSquareRoot (Real.real (Complex.realPackage C))) ->
+  (F : Polar.ComplexFieldAuthority (Real.real (Complex.realPackage C)) D) ->
+  (n : Nat) ->
+  (normalization : Klein.EisensteinNormalizationData C D F) ->
+  Klein.CertifiedFiniteEisensteinPoint
+    C D F Internal.internalDivisorPowerKernel n normalization ->
+  ComplexCarrier C
+directJTruncatedInternalCalculatorQ C D F n normalization point =
+  directJTruncatedCalculatorQ
+    C D F Internal.internalDivisorPowerKernel n normalization point
+
+directJTruncatedInternalCalculatorQMatches :
+  (C : Complex.ConstructedComplexPackage) ->
+  (D : Polar.RealDivisionAndSquareRoot (Real.real (Complex.realPackage C))) ->
+  (F : Polar.ComplexFieldAuthority (Real.real (Complex.realPackage C)) D) ->
+  (n : Nat) ->
+  (normalization : Klein.EisensteinNormalizationData C D F) ->
+  (point : Klein.CertifiedFiniteEisensteinPoint
+    C D F Internal.internalDivisorPowerKernel n normalization) ->
+  directJTruncatedInternalCalculatorQ C D F n normalization point
+  ≡ Klein.directJTruncated
+      C D F Internal.internalDivisorPowerKernel n normalization point
+directJTruncatedInternalCalculatorQMatches C D F n normalization point =
+  directJTruncatedCalculatorQMatches
+    C D F Internal.internalDivisorPowerKernel n normalization point
+
+sourceFacingKleinJInternalCalculatorQMatches :
+  (C : Complex.ConstructedComplexPackage) ->
+  (D : Polar.RealDivisionAndSquareRoot (Real.real (Complex.realPackage C))) ->
+  (F : Polar.ComplexFieldAuthority (Real.real (Complex.realPackage C)) D) ->
+  (n : Nat) ->
+  (normalization : Klein.EisensteinNormalizationData C D F) ->
+  (agreement : Klein.EisensteinKleinNormalizationAgreement
+    C D F Internal.internalDivisorPowerKernel n normalization) ->
+  (point : Klein.CertifiedFiniteEisensteinPoint
+    C D F Internal.internalDivisorPowerKernel n normalization) ->
+  ProofKlein.KleinJ
+    (Klein.eisensteinKlein
+      C D F Internal.internalDivisorPowerKernel n normalization)
+    point
+  ≡ directJTruncatedInternalCalculatorQ C D F n normalization point
+sourceFacingKleinJInternalCalculatorQMatches C D F n normalization agreement point =
+  sourceFacingKleinJCalculatorQMatches
+    C D F Internal.internalDivisorPowerKernel n normalization agreement point
 
 data FiniteKleinEqualityCreatesAnalyticJ : Set where
 data FiniteKleinEqualityCreatesInfiniteSeriesConvergence : Set where
@@ -248,6 +263,8 @@ record EisensteinCalculatorKleinInputBoundary : Set where
     proofRelevantQuotientEqualityPaid : Bool
     directFiniteJEvaluatorEqualityPaid : Bool
     sourceFacingRouteTransportAvailable : Bool
+    internalDivisorKernelSpecializedThroughFiniteJ : Bool
+    externalDivisorCallbackRequiredOnCanonicalFiniteJRoute : Bool
     finiteEqualsAnalyticJPaid : Bool
     rhPaid : Bool
     nextResidual : String
@@ -258,5 +275,6 @@ canonicalEisensteinCalculatorKleinInputBoundary :
 canonicalEisensteinCalculatorKleinInputBoundary =
   eisenstein-calculator-klein-input-boundary
     true true true true true true true true true
+    true false
     false false
-    "calculator q is now extensionally invisible through the certified finite direct-j evaluator and, given the existing explicit route-normalization agreement, through the source-facing finite Klein construction; the remaining boundary is finite truncation -> infinite analytic modular forms/Klein-j"
+    "calculator q and repo-owned sigma3/sigma5 are now extensionally invisible through the certified finite direct-j evaluator and, given the existing route-normalization agreement, through source-facing finite Klein-j; the remaining boundary is finite truncation -> infinite analytic modular forms/Klein-j"
