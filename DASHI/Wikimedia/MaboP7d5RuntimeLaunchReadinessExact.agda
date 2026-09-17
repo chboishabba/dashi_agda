@@ -46,9 +46,9 @@ canonicalLaunchReadiness =
     (Runtime.worldIdentityClassRuntimeCertified Runtime.slrP7d5Payment)
     (Runtime.normalizedObservationRuntimeCertified Runtime.slrP7d5Payment)
     (Runtime.producerRevisionDigestRuntimeCertified Runtime.slrP7d5Payment)
-    true
+    (Reviewed.reviewEmitted Reviewed.maboParticipantIdentityPayment)
     (Runtime.identityClassPgLineageObserved Runtime.slrP7d5Payment)
-    true
+    (Runner.targetCountsReviewedIdentityClasses Runner.canonicalRecurrentRunnerBoundary)
     (Runner.launchPrerequisitesPaid Runner.nativeSlrCampaignLaunchPayment)
     false
     false
@@ -61,6 +61,10 @@ canonicalLaunchReadiness =
 nativeRunnerLaunchPaid :
   nativeRunnerLaunchPrerequisitesPaid canonicalLaunchReadiness ≡ true
 nativeRunnerLaunchPaid = refl
+
+reviewPaymentPresent :
+  nativeReviewedEvidencePaymentPresent canonicalLaunchReadiness ≡ true
+reviewPaymentPresent = refl
 
 campaignStillUnobserved :
   recurrentHundredClassCampaignObserved canonicalLaunchReadiness ≡ false
