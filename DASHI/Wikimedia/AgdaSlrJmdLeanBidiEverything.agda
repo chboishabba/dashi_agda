@@ -12,10 +12,11 @@ module DASHI.Wikimedia.AgdaSlrJmdLeanBidiEverything where
 -- commit 349f9b7dd49a7f23bfbd7d9da60416afa5440ccf.  Repository integration is
 -- kept distinct from an observed execution/kernel receipt.
 --
--- The native SLR P7d.5 path now additionally has an observed execution receipt
--- at PR #24 head efba015c78480c324c4f99d7ec8dab4a31020640, including the live
+-- The native SLR P7d.5 path additionally has an observed execution receipt at
+-- PR #24 head efba015c78480c324c4f99d7ec8dab4a31020640, including the live
 -- Mabo P710 provider observation and v2 PostgreSQL identity-class lineage.
--- That native runtime payment does not imply JMD getter parity/replay.
+-- The P7d.5f recurrent runner and explicit reviewed-evidence payment boundary
+-- extend that native path without making JMD/Lean a prerequisite.
 ------------------------------------------------------------------------
 
 open import DASHI.Wikimedia.AristotleLeanMachineAttributionExact public
@@ -30,6 +31,8 @@ open import DASHI.Wikimedia.MaboSlrLeanChallengeReplayFixtureExact public
 open import DASHI.Wikimedia.MaboP7d5SlrRuntimeReceiptExact public
 open import DASHI.Wikimedia.MaboLiveIdentityLineageInteropExact public
 open import DASHI.Wikimedia.MaboWorldObservationInteropExact public
+open import DASHI.Wikimedia.MaboReviewedEvidencePaymentExact public
+open import DASHI.Wikimedia.MaboResidualDrivenWorldRunnerExact public
 
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
 import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact
