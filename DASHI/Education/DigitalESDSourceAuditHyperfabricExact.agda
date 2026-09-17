@@ -22,16 +22,43 @@ import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact as LES
 --
 -- Thin composition only. LES is a structural donor for multi-axis situated
 -- reasoning; no LES empirical proposition is imported as Digital-ESD evidence.
+--
+-- Same-object rule: every source-bearing child object is explicitly welded to
+-- the hyperfabric's indexed source. A top-level source label is not sufficient.
 ------------------------------------------------------------------------
 
-record SourceAuditHyperfabric : Set where
+record SameSourceObservation (source : Attr.AttributedSource) : Set where
+  constructor same-source-observation
+  field
+    observation : Observer.SituatedAuditObservation
+    sourceMatches : Observer.source observation ≡ source
+
+open SameSourceObservation public
+
+record SameSourceAdmissibilityFibre (source : Attr.AttributedSource) : Set where
+  constructor same-source-admissibility-fibre
+  field
+    fibre : Admissibility.AdmissibleEvidenceFibre
+    fibreSourceMatches :
+      Observer.source (Admissibility.observation fibre) ≡ source
+
+open SameSourceAdmissibilityFibre public
+
+record SameSourceIntersectionReceipt (source : Attr.AttributedSource) : Set where
+  constructor same-source-intersection-receipt
+  field
+    intersection : Intersection.IntersectionReceipt
+    intersectionSourceMatches : Intersection.source intersection ≡ source
+
+open SameSourceIntersectionReceipt public
+
+record SourceAuditHyperfabric (source : Attr.AttributedSource) : Set where
   constructor source-audit-hyperfabric
   field
-    source : Attr.AttributedSource
-    observations : List Observer.SituatedAuditObservation
-    admissibilityFibres : List Admissibility.AdmissibleEvidenceFibre
+    observations : List (SameSourceObservation source)
+    admissibilityFibres : List (SameSourceAdmissibilityFibre source)
     standardLenses : List Standards.StandardLens
-    intersections : List Intersection.IntersectionReceipt
+    intersections : List (SameSourceIntersectionReceipt source)
     tensions : List Tension.TensionReceipt
     scoringProtocolVersion : String
     structuralDonorReading : String
@@ -84,12 +111,10 @@ coarseVisibilityProfileCannotDetermineFullAuditState =
   INF.witnessRulesOutEveryFlatFactorisation coarseVisibilityFullStateWitness
 
 data CoarseVisibilityProfileDeterminesFullAuditState : Set where
-
 data ScoreProfileCreatesEvidenceObject : Set where
-
 data SingleObserverCreatesWholeAuditState : Set where
-
 data StructuralDonorCreatesDomainEvidence : Set where
+data TopLevelSourceLabelCreatesSameObjectChildren : Set where
 
 coarseVisibilityProfileDoesNotDetermineFullAuditState :
   CoarseVisibilityProfileDeterminesFullAuditState → ⊥
@@ -104,6 +129,10 @@ singleObserverDoesNotCreateWholeAuditState ()
 structuralDonorDoesNotCreateDomainEvidence : StructuralDonorCreatesDomainEvidence → ⊥
 structuralDonorDoesNotCreateDomainEvidence ()
 
+topLevelSourceLabelDoesNotCreateSameObjectChildren :
+  TopLevelSourceLabelCreatesSameObjectChildren → ⊥
+topLevelSourceLabelDoesNotCreateSameObjectChildren ()
+
 record SourceAuditHyperfabricBoundary : Set where
   constructor source-audit-hyperfabric-boundary
   field
@@ -116,6 +145,8 @@ record SourceAuditHyperfabricBoundary : Set where
       structuralCrossPollinationCreatesEmpiricalAuthority ≡ false
     unresolvedTensionMayRemain : Bool
     unresolvedTensionMayRemainIsTrue : unresolvedTensionMayRemain ≡ true
+    childSourceIdentityWeldRequired : Bool
+    childSourceIdentityWeldRequiredIsTrue : childSourceIdentityWeldRequired ≡ true
 
 open SourceAuditHyperfabricBoundary public
 
@@ -124,4 +155,5 @@ canonicalSourceAuditHyperfabricBoundary = source-audit-hyperfabric-boundary
   false refl
   false refl
   false refl
+  true refl
   true refl
