@@ -31,10 +31,6 @@ attributionReading : String
 attributionReading =
   "Li-Liu-Ji pays selection roles; Prohaska pays the mass convention; executable manifests are DASHI evidence; manifest-to-extensionality compilation is DASHI-original"
 
-------------------------------------------------------------------------
--- One selection receipt pair.
-------------------------------------------------------------------------
-
 record ManifestBackedSelectionAgreement
   {rigidModel : SE3.RigidMotionModel}
   {geometry : Geometry.AdKCOMGeometryModel rigidModel}
@@ -55,7 +51,7 @@ record ManifestBackedSelectionAgreement
       Collision.SelectionEquivalent extensional left right selection
 open ManifestBackedSelectionAgreement public
 
-manifestBackedSelectionCreatesSelectionEquivalence :
+manifestBackedSelectionToSelectionEquivalence :
   {rigidModel : SE3.RigidMotionModel} →
   {geometry : Geometry.AdKCOMGeometryModel rigidModel} →
   {extensional : Collision.SelectionExtensionalCOMModel geometry} →
@@ -63,12 +59,8 @@ manifestBackedSelectionCreatesSelectionEquivalence :
   {selection : Selection.AtomSelectionSpec} →
   ManifestBackedSelectionAgreement extensional left right selection →
   Collision.SelectionEquivalent extensional left right selection
-manifestBackedSelectionCreatesSelectionEquivalence agreement =
+manifestBackedSelectionToSelectionEquivalence agreement =
   selectedContentEquivalent agreement
-
-------------------------------------------------------------------------
--- All source-facing selections used by the three-CV projection.
-------------------------------------------------------------------------
 
 selections : Selection.AdKThreeCVSelections
 selections = Selection.canonicalAdKThreeCVSelections
@@ -106,14 +98,14 @@ record ManifestBackedThreeCVAgreement
         (Selection.dLnSecond selections)
 open ManifestBackedThreeCVAgreement public
 
-manifestBackedThreeCVCreatesSelectionEquivalence :
+manifestBackedThreeCVToSelectionEquivalence :
   {rigidModel : SE3.RigidMotionModel} →
   {geometry : Geometry.AdKCOMGeometryModel rigidModel} →
   (extensional : Collision.SelectionExtensionalCOMModel geometry) →
   (left right : Config.AtomisticConfiguration) →
   ManifestBackedThreeCVAgreement extensional left right →
   Collision.ThreeCVSelectionEquivalent extensional left right
-manifestBackedThreeCVCreatesSelectionEquivalence extensional left right agreement =
+manifestBackedThreeCVToSelectionEquivalence extensional left right agreement =
   Collision.three-cv-selection-equivalent
     (selectedContentEquivalent (thetaOneFirstAgreement agreement))
     (selectedContentEquivalent (thetaOneVertexAgreement agreement))
@@ -124,25 +116,18 @@ manifestBackedThreeCVCreatesSelectionEquivalence extensional left right agreemen
     (selectedContentEquivalent (dLnFirstAgreement agreement))
     (selectedContentEquivalent (dLnSecondAgreement agreement))
 
-manifestBackedThreeCVCreatesThreeCVEquality :
+manifestBackedThreeCVToThreeCVEquality :
   {rigidModel : SE3.RigidMotionModel} →
   {geometry : Geometry.AdKCOMGeometryModel rigidModel} →
   (extensional : Collision.SelectionExtensionalCOMModel geometry) →
   (left right : Config.AtomisticConfiguration) →
   ManifestBackedThreeCVAgreement extensional left right →
   Collision.projectThreeCV geometry left ≡ Collision.projectThreeCV geometry right
-manifestBackedThreeCVCreatesThreeCVEquality extensional left right agreement =
+manifestBackedThreeCVToThreeCVEquality extensional left right agreement =
   Collision.threeCVSelectionEquivalentProjectsEqual
     extensional left right
-    (manifestBackedThreeCVCreatesSelectionEquivalence
+    (manifestBackedThreeCVToSelectionEquivalence
       extensional left right agreement)
-
-------------------------------------------------------------------------
--- Byte-level manifestation identity is intentionally orthogonal to the
--- CV-relevant quotient. Two differently serialized/source-addressed byte objects
--- may still carry an explicitly witnessed identical selected mass/coordinate
--- surface and therefore the same three CVs.
-------------------------------------------------------------------------
 
 record DifferentSourceBytesSameThreeCVRelevantContent
   {rigidModel : SE3.RigidMotionModel}
@@ -168,15 +153,11 @@ differentSourceBytesMayProjectToSameThreeCV :
   Collision.projectThreeCV geometry (leftConfiguration witness)
   ≡ Collision.projectThreeCV geometry (rightConfiguration witness)
 differentSourceBytesMayProjectToSameThreeCV extensional witness =
-  manifestBackedThreeCVCreatesThreeCVEquality
+  manifestBackedThreeCVToThreeCVEquality
     extensional
     (leftConfiguration witness)
     (rightConfiguration witness)
     (manifestAgreement witness)
-
-------------------------------------------------------------------------
--- WrongType / attribution firewalls.
-------------------------------------------------------------------------
 
 data EqualHashesCreateSelectionContentWitness : Set where
 data ExecutableReceiptCreatesScientificSourceAuthority : Set where
