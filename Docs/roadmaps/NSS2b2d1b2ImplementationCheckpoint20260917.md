@@ -1,0 +1,1 @@
+Checkpoint: RED regressions and fail-closed status shells exist. Next work is theorem search in the existing R571/R577--R579/R568 owners; no status promotion has occurred.
