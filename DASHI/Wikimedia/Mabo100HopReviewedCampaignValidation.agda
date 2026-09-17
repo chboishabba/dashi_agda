@@ -6,8 +6,51 @@ open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Wikimedia.Mabo100HopReviewedCampaignExact
 
-validationHopBudget : campaignHopBudget ≡ 100
-validationHopBudget = refl
+validationCampaignCycleBudget : campaignCycleBudget ≡ 100
+validationCampaignCycleBudget = refl
+
+validationWorldViewHopBudget : worldViewHopBudget ≡ 100
+validationWorldViewHopBudget = refl
+
+validationTraversalDepthIsNotCampaignCycle :
+  traversalDepthEqualsCampaignCycle canonicalReviewedCampaignBoundary ≡ false
+validationTraversalDepthIsNotCampaignCycle = refl
+
+validationDurableNovelCountIsNotCampaignCycle :
+  durableNovelIdentityCountEqualsCampaignCycle canonicalReviewedCampaignBoundary ≡ false
+validationDurableNovelCountIsNotCampaignCycle = refl
+
+validationNextHopDependsOnPostAcquisitionAssessment :
+  nextHopDependsOnPostAcquisitionAssessment canonicalReviewedCampaignBoundary ≡ true
+validationNextHopDependsOnPostAcquisitionAssessment = refl
+
+validationPrecomputedSiblingQueueIsNotCampaignScheduler :
+  precomputedSiblingQueueIsCampaignScheduler canonicalReviewedCampaignBoundary ≡ false
+validationPrecomputedSiblingQueueIsNotCampaignScheduler = refl
+
+validationSchedulerSelectionDoesNotDependOnReviewAvailability :
+  schedulerSelectionDependsOnReviewAvailability canonicalReviewedCampaignBoundary ≡ false
+validationSchedulerSelectionDoesNotDependOnReviewAvailability = refl
+
+validationIdentityReviewDoesNotEqualOutgoingContextReview :
+  identityReviewEqualsOutgoingContextReview canonicalReviewedCampaignBoundary ≡ false
+validationIdentityReviewDoesNotEqualOutgoingContextReview = refl
+
+validationLatestLookupDoesNotEqualAdmittedManifestation :
+  latestRevisionLookupEqualsAdmittedSourceManifestation canonicalReviewedCampaignBoundary ≡ false
+validationLatestLookupDoesNotEqualAdmittedManifestation = refl
+
+validationNonNovelAliasDoesNotCreateDiscoveryLineage :
+  nonNovelAliasCreatesDiscoveryLineage canonicalReviewedCampaignBoundary ≡ false
+validationNonNovelAliasDoesNotCreateDiscoveryLineage = refl
+
+validationSourceExpansionDoesNotCountNovelIdentity :
+  sourceExpansionReceiptCountsNovelIdentity canonicalReviewedCampaignBoundary ≡ false
+validationSourceExpansionDoesNotCountNovelIdentity = refl
+
+validationSourceExpansionCanCloseZeroBoundedEdges :
+  sourceExpansionReceiptCanCloseZeroBoundedEdges canonicalReviewedCampaignBoundary ≡ true
+validationSourceExpansionCanCloseZeroBoundedEdges = refl
 
 validationManifestRequired :
   reviewManifestRequired canonicalReviewedCampaignBoundary ≡ true
