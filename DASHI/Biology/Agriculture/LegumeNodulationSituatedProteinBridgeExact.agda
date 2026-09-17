@@ -56,11 +56,11 @@ nowak2004 = nodulation-source
     "Carbohydrate Research 339(6):1061-1067"
     "2004"
     "10.1016/j.carres.2004.02.013"
-    "https://www.sciencedirect.com/science/article/pii/S0008621504000771"
+    "https://pubmed.ncbi.nlm.nih.gov/15063192/"
     Attribution.academicArticleSource
     "Acacia-nodulating rhizobial LCO/Nod-factor chemistry source."
     Attribution.publicAttribution)
-  "not recorded by this atlas"
+  "15063192"
   "not recorded by this atlas"
   "Lipochitooligosaccharide structural characterization in Acacia-senegal-nodulating Sinorhizobium strains"
   "Supports explicit Nod-factor/LCO identity as a signalling coordinate rather than an undifferentiated rhizobium token."
@@ -169,7 +169,7 @@ receptorSituatedWitness = Situated.situated-protein-query-witness
   receptorIdentityDefect
   Situated.slowlyVarying
   "local receptor residue state separates symbiotic and immune-like signalling outputs while coarse receptor-family identity is unchanged"
-  "Tsitsikli et al. 2025 DOI 10.1038/s41586-025-09696-3 PMID 41193803 owns the bounded residue/signalling premise; Bakhoum 2015 DOI 10.1007/s00248-014-0507-1 PMID 25315832, Nowak 2004 DOI 10.1016/j.carres.2004.02.013 and Rasanen/Lindstrom 1999 DOI 10.1111/j.1574-6941.1999.tb00561.x retain Acacia-specific nod/nif/LCO/environment context."
+  "Tsitsikli et al. 2025 DOI 10.1038/s41586-025-09696-3 PMID 41193803 owns the bounded residue/signalling premise; Bakhoum 2015 DOI 10.1007/s00248-014-0507-1 PMID 25315832, Nowak 2004 DOI 10.1016/j.carres.2004.02.013 PMID 15063192 and Rasanen/Lindstrom 1999 DOI 10.1111/j.1574-6941.1999.tb00561.x retain Acacia-specific nod/nif/LCO/environment context."
   "DASHI owns the finite query-inadequacy witness and the cross-source bridge; the witness is not an additional Acacia observation."
 
 receptorIdentityNotAdequateForSignal :
