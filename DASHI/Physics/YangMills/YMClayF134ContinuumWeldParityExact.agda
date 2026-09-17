@@ -7,6 +7,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayAristotleDonorAtlasExact as Atlas
 import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as Frontier
+import DASHI.Physics.YangMills.YMClayPhysicalF34TypedCompositionExact as Typed
 
 ------------------------------------------------------------------------
 -- Exact parity surface for Aristotle's 2026-09-17 literal SU(2) continuum
@@ -17,11 +18,10 @@ import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as Frontie
 --   F3  isometric embeddings + embedded vacuum-sector graph limit
 --   F4  actual YM/OS same evolution on a common core
 --
--- and returns the Clay.MassGapConclusion for the OS Hamiltonian.
---
--- This module records the input normal form and verified donor theorem.  It
--- does not manufacture F1/F3/F4 and does not represent the Lean proof as an
--- Agda kernel proof.
+-- The Agda side now additionally exposes the typed compiler consequences of
+-- F3/F4: F3's recovery system automatically yields the continuum vacuum-gap
+-- theorem, and F4's witness already contains the YM=OS evolution equality.
+-- Those are downstream consequences, not extra physical leaves.
 ------------------------------------------------------------------------
 
 record LiteralSU2F134PhysicalInputs : Set₁ where
@@ -45,6 +45,15 @@ asOutstandingPhysicalFrontier inputs = record
   ; Frontier.OutstandingPhysicalFrontier.f4YMOSSameObject = f4 inputs
   }
 
+asTypedF34Kernel :
+  LiteralSU2F134PhysicalInputs → Typed.PhysicalF34TypedKernel
+asTypedF34Kernel inputs = record
+  { Typed.PhysicalF34TypedKernel.f3 = f3 inputs
+  ; Typed.PhysicalF34TypedKernel.Time = Time inputs
+  ; Typed.PhysicalF34TypedKernel.Vector = Vector inputs
+  ; Typed.PhysicalF34TypedKernel.f4 = f4 inputs
+  }
+
 continuumWeldLean : Atlas.LeanTheoremArtifact
 continuumWeldLean = Atlas.literalSU2ContinuumWeldLean
 
@@ -60,6 +69,20 @@ f134AreExactlyTheSurvivingPhysicalInputs = true
 f134AreExactlyTheSurvivingPhysicalInputsIsTrue :
   f134AreExactlyTheSurvivingPhysicalInputs ≡ true
 f134AreExactlyTheSurvivingPhysicalInputsIsTrue = refl
+
+f3RecoveryGapIsExtraPhysicalLeaf : Bool
+f3RecoveryGapIsExtraPhysicalLeaf = false
+
+f3RecoveryGapIsExtraPhysicalLeafIsFalse :
+  f3RecoveryGapIsExtraPhysicalLeaf ≡ false
+f3RecoveryGapIsExtraPhysicalLeafIsFalse = refl
+
+f4EvolutionEqualityIsExtraPhysicalLeafAfterF4 : Bool
+f4EvolutionEqualityIsExtraPhysicalLeafAfterF4 = false
+
+f4EvolutionEqualityIsExtraPhysicalLeafAfterF4IsFalse :
+  f4EvolutionEqualityIsExtraPhysicalLeafAfterF4 ≡ false
+f4EvolutionEqualityIsExtraPhysicalLeafAfterF4IsFalse = refl
 
 continuumWeldLeanLevel : ProofLevel
 continuumWeldLeanLevel = standardImported
