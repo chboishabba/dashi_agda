@@ -8,6 +8,7 @@ import DASHI.Analysis.OrdinaryComplexPolar as Polar
 import DASHI.Moonshine.JInvariantConstructedComplexKleinJBackendExact as CKlein
 import DASHI.Moonshine.JInvariantProofRelevantKleinJExact as ProofKlein
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Series
+import DASHI.Moonshine.JInvariantEisensteinInternalDivisorPowerKernelExact as Internal
 import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as Klein
 import DASHI.Moonshine.JInvariantEisensteinCalculatorKleinInputWeldExact as P
 
@@ -74,3 +75,28 @@ sourceFacingKleinRegression :
   ProofKlein.KleinJ (Klein.eisensteinKlein C D F kernel n normalization) point
   ≡ P.directJTruncatedCalculatorQ C D F kernel n normalization point
 sourceFacingKleinRegression = P.sourceFacingKleinJCalculatorQMatches
+
+internalDirectJRegression :
+  (C : Complex.ConstructedComplexPackage) ->
+  (D : Polar.RealDivisionAndSquareRoot (Real.real (Complex.realPackage C))) ->
+  (F : Polar.ComplexFieldAuthority (Real.real (Complex.realPackage C)) D) ->
+  (n : Nat) ->
+  (normalization : Klein.EisensteinNormalizationData C D F) ->
+  (point : Klein.CertifiedFiniteEisensteinPoint C D F Internal.internalDivisorPowerKernel n normalization) ->
+  P.directJTruncatedInternalCalculatorQ C D F n normalization point
+  ≡ Klein.directJTruncated C D F Internal.internalDivisorPowerKernel n normalization point
+internalDirectJRegression = P.directJTruncatedInternalCalculatorQMatches
+
+internalSourceFacingKleinRegression :
+  (C : Complex.ConstructedComplexPackage) ->
+  (D : Polar.RealDivisionAndSquareRoot (Real.real (Complex.realPackage C))) ->
+  (F : Polar.ComplexFieldAuthority (Real.real (Complex.realPackage C)) D) ->
+  (n : Nat) ->
+  (normalization : Klein.EisensteinNormalizationData C D F) ->
+  (agreement : Klein.EisensteinKleinNormalizationAgreement C D F Internal.internalDivisorPowerKernel n normalization) ->
+  (point : Klein.CertifiedFiniteEisensteinPoint C D F Internal.internalDivisorPowerKernel n normalization) ->
+  ProofKlein.KleinJ
+    (Klein.eisensteinKlein C D F Internal.internalDivisorPowerKernel n normalization)
+    point
+  ≡ P.directJTruncatedInternalCalculatorQ C D F n normalization point
+internalSourceFacingKleinRegression = P.sourceFacingKleinJInternalCalculatorQMatches
