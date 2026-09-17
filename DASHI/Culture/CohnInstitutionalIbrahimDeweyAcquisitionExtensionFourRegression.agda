@@ -17,6 +17,26 @@ bartlettTwoEyedSourceReused :
   Ext.bartlettTwoEyedSourceReused Ext.canonicalAcquisitionFourBoundary ≡ true
 bartlettTwoEyedSourceReused = refl
 
+medinaAuthorQidResolved :
+  Ext.medinaAuthorQidResolved Ext.canonicalAcquisitionFourBoundary ≡ true
+medinaAuthorQidResolved = refl
+
+youngAuthorQidResolved :
+  Ext.youngAuthorQidResolved Ext.canonicalAcquisitionFourBoundary ≡ true
+youngAuthorQidResolved = refl
+
+medinaPublicationQidStillUnresolved :
+  Ext.medinaPublicationQidResolved Ext.canonicalAcquisitionFourBoundary ≡ false
+medinaPublicationQidStillUnresolved = refl
+
+youngPublicationQidStillUnresolved :
+  Ext.youngPublicationQidResolved Ext.canonicalAcquisitionFourBoundary ≡ false
+youngPublicationQidStillUnresolved = refl
+
+publicationSpecificDeweyStillUnresolved :
+  Ext.publicationSpecificDeweyVerified Ext.canonicalAcquisitionFourBoundary ≡ false
+publicationSpecificDeweyStillUnresolved = refl
+
 formalPresenceDoesNotDetermineInfluence :
   Ext.formalPresenceDeterminesEffectiveCommunicativeInfluence Ext.canonicalAcquisitionFourBoundary ≡ false
 formalPresenceDoesNotDetermineInfluence = refl
