@@ -14,14 +14,16 @@ module DASHI.Moonshine.JInvariantQPrincipalStripModulusExact where
 --
 -- whenever that exact exponent lies in the existing principal strip.
 --
--- This owner does not yet normalize the real part to -2*pi*Im(tau), prove the
--- strip condition from a modular fundamental-domain hypothesis, or derive the
--- strict inequality |q|<1.  Those are kept as separate order/algebra seams.
+-- Once the real part of that exponent is proved negative, the already-owned
+-- strict monotonicity and exp(0)=1 laws discharge |q|<1 directly.  This owner
+-- still does not normalize Re((2*pi*i)tau) to -2*pi*Im(tau) or derive the strip
+-- condition from a modular fundamental-domain hypothesis.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
@@ -66,6 +68,39 @@ qModulusOnPrincipalStrip {C} {D} {F} P B tau strip =
   Modulus.exponentialModulusOnPrincipalStrip
     P B (qExponent C tau) strip
 
+qModulusBelowOneFromNegativeRealPart :
+  ∀ {C : Complex.ConstructedComplexPackage}
+    {D : Polar.RealDivisionAndSquareRoot
+      (Real.real (Complex.realPackage C))}
+    {F : Polar.ComplexFieldAuthority
+      (Real.real (Complex.realPackage C)) D}
+    (P : Polar.OrdinaryPolarData C D F)
+    (B : Polar.OrdinaryPrincipalBranchLaws C D F P)
+    (tau : Complex.ComplexPair (Real.real (Complex.realPackage C)))
+    (strip : Polar.PrincipalStrip P (qExponent C tau)) →
+  Real._<_ (Real.real (Complex.realPackage C))
+    (Complex.re (qExponent C tau))
+    (Real.zero (Real.real (Complex.realPackage C))) →
+  Real._<_ (Real.real (Complex.realPackage C))
+    (Polar.modulus F (Q.qOf C tau))
+    (Real.one (Real.real (Complex.realPackage C)))
+qModulusBelowOneFromNegativeRealPart {C} {D} {F} P B tau strip negative =
+  let
+    R = Real.real (Complex.realPackage C)
+    E = Real.exponential (Complex.realPackage C)
+    modulusEqualsExp = qModulusOnPrincipalStrip P B tau strip
+    expNegativeBelowExpZero = Real.expStrictMonotone E negative
+    expNegativeBelowOne =
+      subst
+        (λ upper → Real._<_ R (Real.exp E (Complex.re (qExponent C tau))) upper)
+        (Real.expZero E)
+        expNegativeBelowExpZero
+  in
+  subst
+    (λ lower → Real._<_ R lower (Real.one R))
+    (Relation.Binary.PropositionalEquality.sym modulusEqualsExp)
+    expNegativeBelowOne
+
 ------------------------------------------------------------------------
 -- Exact frontier after the principal-log route.
 ------------------------------------------------------------------------
@@ -77,9 +112,10 @@ record QPrincipalStripModulusBoundary : Set where
     exactQExponentFactored : Bool
     principalLogModulusCompilerReused : Bool
     pythagoreanRequiredForQModulus : Bool
+    negativeRealPartImpliesQBelowOne : Bool
     qExponentRealPartNormalized : Bool
     principalStripDerivedFromFundamentalDomain : Bool
-    qAbsoluteValueLessThanOneDerived : Bool
+    upperHalfPlaneImpliesNegativeExponentRealPart : Bool
     reading : String
 
 open QPrincipalStripModulusBoundary public
@@ -89,5 +125,6 @@ canonicalQPrincipalStripModulusBoundary =
   q-principal-strip-modulus-boundary
     true true true
     false
+    true
     false false false
-    "the literal q producer now has |q(tau)|=exp(Re((2*pi*i)tau)) on the existing principal strip without Pythagorean input; remaining debt is real-part normalization, strip-domain payment, and strict real-order decay"
+    "the literal q producer now has |q(tau)|=exp(Re((2*pi*i)tau)) on the existing principal strip and negative exponent real part implies |q|<1 using only exp monotonicity and exp(0)=1; remaining debt is real-part normalization and the domain/order payment from the intended upper-half-plane chart"
