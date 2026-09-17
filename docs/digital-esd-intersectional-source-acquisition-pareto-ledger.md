@@ -1,10 +1,10 @@
 # Digital-ESD intersectional source-acquisition Pareto ledger
 
-**Status:** acquisition/provenance working ledger. Candidate discovery does not create review inclusion. Final inclusion still requires declared database execution, deduplication, eligibility screening, structured extraction and `SourceAuditAdmission`.
+**Status:** pre-corpus acquisition frontier frozen at Round 20. Candidate discovery does not create review inclusion. Final inclusion still requires declared database execution, deduplication, eligibility screening, structured extraction and `SourceAuditAdmission`.
 
 ## 1. Governing rule
 
-Acquisition is generated from residuals in the situated/intersectional hyperfabric rather than citation count, fashionable terminology or generic topical relevance.
+Acquisition is generated from residuals in the situated/intersectional hyperfabric rather than citation count, topical fashion or generic adjacency.
 
 ```text
 Pareto priority != source authority
@@ -17,119 +17,143 @@ same programme != same measurement object
 
 QID and Dewey remain unresolved unless exact same-object identity is independently verified. DOI/PMID/PMCID are retained only at the role they actually pay.
 
-## 2. What the Pareto has progressively targeted
+## 2. Residual progression
 
-### Round 1 — disability / absence / provisioning
-Disabled-student lived experience; affordability/connectivity; assistive technology and support continuity; visual-impairment usability; EduNLP stakeholder absence; school meals/household burden.
+Rounds 1-14 progressively targeted:
 
-### Round 2 — lifecycle inequity / surveillance / care / vendor accountability
-Global lifecycle inequity; minoritised-school surveillance; special-needs household burden; vendor/procurement privacy/security accountability.
-
-### Round 3 — funding / social support / community authority
-Disability × public/individual funding; counselling/social-support continuity; Indigenous/community partnership and actual study-design relationships.
-
-### Round 4 — privacy voice / co-design / student policy authorship
-Student privacy/consent/trust; student-teacher analytics co-design; student-led AI-policy recommendations.
-
-### Round 5 — philosophy-seeded surveillance/power, empirically paid
-Foucauldian AI-surveillance interpretation with empirical stakeholders; African-situated privacy; platform owner/intermediation power; cross-cultural student privacy; transparency intervention.
-
-### Round 6 — practical exit / selection / classification / data value
-Opt-in/opt-out selection; algorithmic-bias group coverage; disability/inclusion in learning analytics; EdTech data monetisation/control.
-
-### Round 7 — predictive error / human-centred absence / data agency
-False-positive/false-negative learner predictions with omitted situated circumstances; sparse human-centred algorithm design; technical analytics access != learner data agency.
-
-### Round 8 — material lifecycle with worker/community observers
-Agbogbloshie e-waste workers; formal/informal e-waste labour in Santiago; DRC cobalt miners/traders/community observers. Context/mechanism evidence != same-object supply-chain identity for a named Digital-ESD deployment.
-
-### Round 9 — proctoring / intersectional flagging / disability / adoption
-Automated proctoring disparities and wrongful-flag stakes; institutional adoption authority kept distinct from affected-user voice.
-
-### Round 10 — contestability / future options / repurposing
-Student observer, system-policy/reversal observer and institutional analytics observer kept distinct. System repeal != individual appeal success; enrolment consent != downstream analytics consent.
-
-### Round 11 — selection-by-trace / eligible nonresponse / rural access
-Minimally engaged/dropout learners excluded by activity thresholds; eligible-to-realised sample losses; digital-access/nonresponse uncertainty.
-
-### Round 12 — disclosure-gated support
-Self-recognition != diagnosis != disclosure != granted accommodation != implemented support.
-
-### Round 13 — assessment exclusion / actual withdrawal / migrant-refugee family agency
-Assessment design can alter practical option availability; actual online-HE withdrawal and time poverty; migrant/refugee parent digital/language exclusion.
-
-### Round 14 — identity-system legibility / surveillance / propagation
-More identity visibility != more safety. Preferred-name field != downstream name respect. Legal identity, lived identity, system-visible identity and safe disclosure remain distinct.
+```text
+disability / lived accessibility
+→ affordability / provisioning / support continuity
+→ material lifecycle and affected workers
+→ privacy / surveillance / platform power
+→ practical exit / classification / contestability
+→ predictive error and omitted situated context
+→ disclosure-gated support
+→ withdrawal / migrant-refugee family agency
+→ identity-system propagation / safe visibility
+```
 
 ### Round 15 — eligible-but-hidden populations
 
-- Susan Grimes; Jill Scevak; Erica Southgate; Rachel Buchanan, 2017, DOI `10.1007/s13384-017-0242-y` — non-disclosing disability/learning-challenge population size/characteristics.
-- Susan Grimes; Erica Southgate; Jill Scevak; Rachel Buchanan, 2019, DOI `10.1080/13603116.2018.1442507` — reasons for remaining institutionally invisible.
-- Colin Clark; Rita Kusevskis-Hayes; Matthew Wilkinson, 2018, DOI `10.30688/janzssa.2018.05` — nondisclosure across multiple Australian equity groups.
+- Grimes et al. 2017 — DOI `10.1007/s13384-017-0242-y`;
+- Grimes et al. 2019 — DOI `10.1080/13603116.2018.1442507`;
+- Clark/Kusevskis-Hayes/Wilkinson 2018 — DOI `10.30688/janzssa.2018.05`.
 
-DASHI-owned collision:
+DASHI collision:
 
 ```text
-same realised/registered carrier
-!= same eligible hidden-population state
+same realised/registered carrier != same eligible hidden-population state
 ```
-
-Source programme continuity does not make the 2017 and 2019 Grimes papers the same measurement object.
 
 ### Round 16 — design exclusion / affected-but-unsampled observers
 
-- Mondli Shadrack Hlatshwayo, 2022, DOI `10.25159/1947-9417/11155` — common online transition with poor/working-class material participation constraints.
-- Nerida Spina; Rebecca Spooner-Lane; Emily Seager; Jeanine Gallagher; Susan Danby, 2026 issue / 2025 online, DOI `10.1177/18369391251358010` — children are subjects of first-year-schooling data practices while teachers and school-authority staff form the participant carrier.
-- Annetta Cayas; Nerida Spina; Karen Dooley; Janet Rankin, 2026, DOI `10.1080/01425692.2026.2632302` — student data organise parent labour/family relations; parents/staff supply empirical viewpoints.
-- Anastasia Gouseti; Patricia Shaw, 2026, DOI `10.1080/17439884.2026.2653746` — plural school observers expose distributed platformisation effects and digital exclusion.
+- Hlatshwayo 2022 — DOI `10.25159/1947-9417/11155`;
+- Spina et al. — DOI `10.1177/18369391251358010`;
+- Cayas et al. 2026 — DOI `10.1080/01425692.2026.2632302`;
+- Gouseti/Shaw 2026 — DOI `10.1080/17439884.2026.2653746`.
 
-DASHI-owned collisions:
+DASHI collisions:
 
 ```text
-same formal online-delivery surface
-!= same participation adequacy
-
-same institutional data-practice surface
-!= same affected-observer adequacy
+same formal online-delivery surface != same participation adequacy
+same institutional data-practice surface != same affected-observer adequacy
 ```
 
-Adult institutional/parent observation != child participant authority. Affected population != sampled population.
+### Round 17 — pre-carrier exclusion / procurement end-user absence
 
-## 3. Python-guided frontier after Round 16
+- Händel et al. 2022 — DOI `10.1007/s10639-022-11050-3`, PMID `35464115`, PMCID `PMC9013737`; University of Augsburg repository Dewey `150` retained as navigation/classification only;
+- Bradstreet 2025 — source role `MSc thesis`; ResearchGate artifact identifier retained as artifact metadata rather than peer-reviewed article authority.
+
+DASHI collisions:
+
+```text
+same retained analytic sample != same excluded-population state
+same procurement-professional surface != same student/end-user participation
+```
+
+### Round 18 — trace-governed classification / preserved tension
+
+- Liang et al. 2023 — DOI `10.1016/j.patter.2023.100779`, PMID `37521038`, PMCID `PMC10382961`; typed as a Patterns opinion/news-type article with empirical benchmark analysis;
+- Jiang et al. 2024 — DOI `10.1016/j.compedu.2024.105070`.
+
+Preserved source/method tension:
+
+```text
+one detector/sample shows language-group disparity
+!= universal detector-bias law
+
+one detector/sample shows no disadvantage
+!= universal deployment-fairness law
+```
+
+DASHI collision:
+
+```text
+coarse educational AI-text-detection surface != language-group incidence
+```
+
+### Round 19 — nonresponse / realised-carrier validation
+
+- Standish/Umbach 2019 — DOI `10.1007/s11162-018-9530-2`;
+- Zinn/Landrock/Gnambs 2021 — DOI `10.3758/s13428-020-01480-7`.
+
+DASHI collisions:
+
+```text
+respondent-only survey surface != nonrespondent behaviour
+formal assigned assessment mode != realised participant carrier
+```
+
+### Round 20 — selection on prior digital participation
+
+- D'Ambra/Akter/Mariani 2022 — DOI `10.1016/j.jbusres.2022.05.048`; focal survey evidence conditioned on prior e-textbook use;
+- Santos/Henriques 2023 — DOI `10.1016/j.caeai.2023.100175`; courses filtered on LMS activity and target-class presence before prediction/portability evaluation.
+
+DASHI collisions:
+
+```text
+observed digital-user surface != nonuser constraint state
+retained-course model surface != portability to excluded course contexts
+```
+
+The inclusion/filtering choices above may be methodologically appropriate to their bounded source questions. The formalisation concerns downstream scope and recoverability, not a generic source-quality or bias verdict.
+
+## 3. Python-guided stop condition after Round 20
 
 The matrix is an acquisition/search heuristic only. It is not an evidence-quality score and cannot raise a claim ceiling.
 
-Current deepest residuals:
+After Round 20:
 
 ```text
-P0:
-  whoWasExcludedByDesign
-  whoWasAffectedButUnsampled
+P0 absence cells: NONE
 
-P1:
-  whoWasEligibleButMissing
+P1 / corpus challenge:
   whoHadToDiscloseToBeCounted
-  whichIntersectionsWereUnreported
+  whoWasAffectedButUnsampled
+  whoWasExcludedByDesign
+  whoHadDecisionAuthority
 ```
 
-`whoHadDecisionAuthority` has moved into the represented band. Generic participation/co-design literature is therefore dominated unless it exposes a materially stronger authority collision.
+`whoWasEligibleButMissing` is now represented in the pre-corpus calibration surface.
 
-## 4. High-alpha next-source shapes
+This does **not** mean the literature is complete or balanced. It means the open-web pre-corpus acquisition stop rule has fired.
 
-A Round 17 source should ideally do one of the following:
+## 4. Freeze rule
 
-1. identify people structurally excluded **before** the realised sample/platform trace begins;
-2. directly observe a consequentially affected population absent from the primary participant carrier;
-3. compare included and excluded/nonparticipating populations under the same institutional design;
-4. show how language, disability, poverty, identity requirements, device/connectivity, care/labour or safety conditions prevent entry into the analytic carrier;
-5. identify secondary/future parties bearing effects without being represented in the original decision or study;
-6. expose a new constructive collision where current absence/observer projections fail a downstream consumer.
+Do not create Round 21 from generic relevance.
 
-Another generic digital-divide, privacy, accessibility, sustainability, e-waste or voice paper is dominated unless it beats this frontier.
+The acquisition frontier reopens only if:
 
-## 5. Epistemic/Ibrahim/Cohn interaction
+1. declared database execution/admission exposes a new P0 absence/intersection residual;
+2. an admitted source creates a new constructive `FactorsThrough` collision;
+3. a manuscript consumer requires a population/observer/mechanism not represented in the frozen calibration frontier; or
+4. same-object evidence materially overturns an existing source-bounded reading.
 
-The current generic source-acquisition/proof-search lane leaves only three genuinely open conceptual candidate families after consumer reuse:
+Otherwise new papers remain background/snowball context.
+
+## 5. Ibrahim / Cohn interaction
+
+The generic source-acquisition/proof-search lane currently leaves only three genuinely open conceptual candidate families after consumer reuse:
 
 ```text
 epistemic labour burden
@@ -140,17 +164,20 @@ relational research burden
 They are not added as Digital-ESD audit axes from conceptual adjacency. Promotion requires a literal admitted-corpus collision.
 
 ```text
-source suggests candidate coordinate
-!= coordinate required
+source suggests candidate coordinate != coordinate required
+structural neighbour != source-specific payment
 ```
 
-## 6. Stop rule
+## 6. Next scientific action
 
-Create another formal acquisition round only when a candidate:
+```text
+execute declared searches
+→ deduplicate
+→ eligibility screen
+→ admitted corpus
+→ complete SourceAuditAdmission for every source
+→ compute corpus-level blind spots
+→ challenge the seven principles
+```
 
-- attacks a live P0/P1 residual or exposes a new `FactorsThrough` collision;
-- adds a missing observer/population/context rather than another instance of a saturated one;
-- provides stronger same-object discrimination than the current frontier; and
-- can be represented with exact source identity, bounded role and explicit limitation.
-
-Otherwise retain it as background/snowball context rather than another formal owner.
+Pre-corpus snowball acquisition is now subordinate to that path.
