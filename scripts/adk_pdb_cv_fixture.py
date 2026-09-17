@@ -7,6 +7,7 @@ import json
 import math
 from pathlib import Path
 from typing import Iterable, Sequence
+from urllib.request import Request, urlopen
 
 MASS = {
     "H": 1.008,
@@ -181,6 +182,19 @@ def evaluate_adk_cv(atoms: Sequence[Atom]) -> dict:
     }
 
 
+def rcsb_pdb_url(pdb_id: str) -> str:
+    return f"https://files.rcsb.org/download/{pdb_id.upper()}.pdb"
+
+
+def download_rcsb_pdb(pdb_id: str, output: Path) -> str:
+    url = rcsb_pdb_url(pdb_id)
+    request = Request(url, headers={"User-Agent": "DASHI-AdK-fixture/1"})
+    with urlopen(request) as response:
+        payload = response.read()
+    output.write_bytes(payload)
+    return url
+
+
 def file_receipt(path: Path, chain: str, altloc_policy: str) -> dict:
     raw = path.read_bytes()
     atoms = parse_pdb_text(raw.decode("utf-8"), chain=chain, altloc_policy=altloc_policy)
@@ -199,19 +213,28 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Emit a deterministic same-object AdK PDB/CV fixture receipt."
     )
-    parser.add_argument("pdb", type=Path)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--pdb", type=Path)
+    source.add_argument("--pdb-id")
     parser.add_argument("--chain", required=True)
     parser.add_argument(
         "--altloc-policy", default="blank-or-A", choices=["blank-or-A"]
     )
+    parser.add_argument("--download-path", type=Path)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
-    payload = json.dumps(
-        file_receipt(args.pdb, args.chain, args.altloc_policy),
-        sort_keys=True,
-        indent=2,
-    ) + "\n"
+    acquisition_url = None
+    if args.pdb_id:
+        pdb_path = args.download_path or Path(f"{args.pdb_id.upper()}.pdb")
+        acquisition_url = download_rcsb_pdb(args.pdb_id, pdb_path)
+    else:
+        pdb_path = args.pdb
+
+    receipt = file_receipt(pdb_path, args.chain, args.altloc_policy)
+    receipt["acquisition_url"] = acquisition_url
+    receipt["pdb_id"] = args.pdb_id.upper() if args.pdb_id else None
+    payload = json.dumps(receipt, sort_keys=True, indent=2) + "\n"
     if args.output:
         args.output.write_text(payload)
     else:
