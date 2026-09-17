@@ -38,6 +38,9 @@ elTahirEtAl2009DOI = "10.1016/j.jaridenv.2008.11.007"
 basgaEtAl2018DOI : String
 basgaEtAl2018DOI = "10.5897/AJAR2018.13283"
 
+gerakisTsangarakis1970DOI : String
+gerakisTsangarakis1970DOI = "10.1007/BF01378198"
+
 isaacHinsingerHarmand2012 : Attribution.AttributedSource
 isaacHinsingerHarmand2012 = Attribution.mkDOISource
   "Marney E. Isaac; Philippe Hinsinger; Jean-Michel Harmand"
@@ -110,6 +113,18 @@ basgaEtAl2018 = Attribution.mkDOISource
   "North Cameroon post-fallow crop-yield source. Sorghum and cowpea trials compared continuous cropping and alternative Acacia fallow conversion treatments, but every replicated treatment received a 4 g NPK 20-10-10 microdose per planting hole. Yield differences are therefore retained with mineral-fertilizer cotreatment and cannot serve as an avoided-mineral-N receipt."
   Attribution.publicAttribution
 
+gerakisTsangarakis1970 : Attribution.AttributedSource
+gerakisTsangarakis1970 = Attribution.mkDOISource
+  "P. A. Gerakis; C. Z. Tsangarakis"
+  "The influence of Acacia senegal on the fertility of a Sand Sheet ('goz') soil in the central Sudan"
+  "Plant and Soil 33(1):81-86"
+  "1970"
+  gerakisTsangarakis1970DOI
+  "https://doi.org/10.1007/BF01378198"
+  Attribution.academicArticleSource
+  "Central-Sudan sand-sheet source reporting higher total N and organic C under Acacia senegal and warning that, after clearing, former uprooted-tree patches retain enough spatial fertility heterogeneity to confound later field-trial layout. Former tree location is therefore retained as latent spatial history rather than erased by the current cleared-land label."
+  Attribution.publicAttribution
+
 data TransferBudgetEvidenceRole : Set where
   plantFixedNContribution : TransferBudgetEvidenceRole
   interplantNitrogenTransfer : TransferBudgetEvidenceRole
@@ -117,6 +132,7 @@ data TransferBudgetEvidenceRole : Set where
   longTermSiteNutrientAccumulation : TransferBudgetEvidenceRole
   spatialSeasonalMineralNObservation : TransferBudgetEvidenceRole
   postConversionNutrientPersistence : TransferBudgetEvidenceRole
+  clearedTreePatchSpatialMemory : TransferBudgetEvidenceRole
   coFertilizedCropYield : TransferBudgetEvidenceRole
   harvestExportPressure : TransferBudgetEvidenceRole
 
@@ -184,6 +200,16 @@ northKordofanConversionReceipt = transfer-budget-receipt
   "previous plantation state, conversion regime, retained-tree density and subsequent cropping history remain explicit"
   false true false
 
+clearedGozPatchMemoryReceipt : TransferBudgetReceipt
+clearedGozPatchMemoryReceipt = transfer-budget-receipt
+  gerakisTsangarakis1970
+  gerakisTsangarakis1970DOI
+  clearedTreePatchSpatialMemory
+  "legacy of the preceding Acacia-fallow/tree occupation"
+  "former uprooted-tree patches versus surrounding cleared sand-sheet soil"
+  "current cleared-land label does not erase local fertility memory; plot layout must retain prior tree-patch location"
+  false false false
+
 cameroonCoFertilizedCropYieldReceipt : TransferBudgetReceipt
 cameroonCoFertilizedCropYieldReceipt = transfer-budget-receipt
   basgaEtAl2018
@@ -225,6 +251,8 @@ record TransferBudgetBoundary : Set where
     soilMineralNObserverGeometryMayBeDropped : Bool
     priorNutrientAccumulationImpliesPersistentPostConversionStock : Bool
     landUseTransitionAndHistoryMustRemainIndexed : Bool
+    clearedLandCoverImpliesSpatiallyHomogeneousSoil : Bool
+    formerTreePatchLocationMustRemainIndexed : Bool
     cropYieldUnderCoAppliedMineralNClosesAvoidedMineralN : Bool
     mineralFertilizerCotreatmentMustRemainIndexed : Bool
     positiveNBalanceImpliesFertilizerSubstitution : Bool
@@ -236,7 +264,7 @@ open TransferBudgetBoundary public
 
 canonicalTransferBudgetBoundary : TransferBudgetBoundary
 canonicalTransferBudgetBoundary = transfer-budget-boundary
-  true false true false true false false false true false true false false true false false
+  true false true false true false false false true false true false true false false true false false
 
 acaciaTransferEvidencePaid :
   acaciaInterplantTransferEvidenceExists canonicalTransferBudgetBoundary ≡ true
@@ -252,4 +280,4 @@ genericAvoidedMineralNNotPromoted = refl
 
 attributionRule : String
 attributionRule =
-  "Isaac, Hinsinger & Harmand 2012 (DOI 10.1016/j.scitotenv.2011.12.071; PMID 22446108) owns its controlled Acacia-to-wheat below-ground N-transfer propositions. Raddad et al. 2006 (DOI 10.1007/s10457-006-9009-6) owns its four-year Blue Nile treatment nutrient-budget propositions, including omission of below-ground biomass from the reported balance. Deans et al. 1999 (DOI 10.1016/S0378-1127(99)00063-8) owns its long-term Senegal nutrient-accumulation and harvest/export propositions. Fall et al. 2012 (DOI 10.1016/j.jenvman.2011.03.038; PMID 21514716) owns its distance/depth/season-indexed soil mineral-N and microbial observations. El Tahir et al. 2009 (DOI 10.1016/j.jaridenv.2008.11.007) owns its post-conversion North Kordofan soil nutrient-stock propositions. Basga et al. 2018 (DOI 10.5897/AJAR2018.13283) owns its North Cameroon soil-fertility and co-fertilized sorghum/cowpea yield propositions; the universal 4 g NPK 20-10-10 microdose in replicated treatments is retained as a confounding/intervention coordinate, so the crop-yield result is not an avoided-mineral-N receipt. DASHI owns the typed evidence-role chain and no-promotion boundary. None of these sources alone supplies generic seasonal crop-N-demand closure, counterfactual avoided-mineral-N quantity, universal fertilizer-substitution rule, or deployment authority."
+  "Isaac, Hinsinger & Harmand 2012 (DOI 10.1016/j.scitotenv.2011.12.071; PMID 22446108) owns its controlled Acacia-to-wheat below-ground N-transfer propositions. Raddad et al. 2006 (DOI 10.1007/s10457-006-9009-6) owns its four-year Blue Nile treatment nutrient-budget propositions, including omission of below-ground biomass from the reported balance. Deans et al. 1999 (DOI 10.1016/S0378-1127(99)00063-8) owns its long-term Senegal nutrient-accumulation and harvest/export propositions. Fall et al. 2012 (DOI 10.1016/j.jenvman.2011.03.038; PMID 21514716) owns its distance/depth/season-indexed soil mineral-N and microbial observations. El Tahir et al. 2009 (DOI 10.1016/j.jaridenv.2008.11.007) owns its post-conversion North Kordofan soil nutrient-stock propositions. Gerakis & Tsangarakis 1970 (DOI 10.1007/BF01378198) owns its central-Sudan sand-sheet fertility and former-tree-patch spatial-heterogeneity propositions. Basga et al. 2018 (DOI 10.5897/AJAR2018.13283) owns its North Cameroon soil-fertility and co-fertilized sorghum/cowpea yield propositions; the universal 4 g NPK 20-10-10 microdose in replicated treatments is retained as a confounding/intervention coordinate, so the crop-yield result is not an avoided-mineral-N receipt. DASHI owns the typed evidence-role chain and no-promotion boundary. None of these sources alone supplies generic seasonal crop-N-demand closure, counterfactual avoided-mineral-N quantity, universal fertilizer-substitution rule, or deployment authority."
