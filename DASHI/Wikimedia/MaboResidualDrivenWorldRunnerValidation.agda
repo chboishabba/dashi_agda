@@ -68,6 +68,10 @@ validationExactRevisionDigestObserved :
   exactRevisionDigestObserved nativeSlrCampaignLaunchPayment ≡ true
 validationExactRevisionDigestObserved = refl
 
+validationReviewedEvidencePaymentPresent :
+  explicitReviewedEvidencePaymentPresent nativeSlrCampaignLaunchPayment ≡ true
+validationReviewedEvidencePaymentPresent = refl
+
 validationIdentityClassLineageObserved :
   identityClassDurableLineageObserved nativeSlrCampaignLaunchPayment ≡ true
 validationIdentityClassLineageObserved = refl
