@@ -15,6 +15,9 @@ guretzky2021Pinned = refl
 burt2025Pinned : S.burt2025DOI ≡ "10.1002/cft2.70055"
 burt2025Pinned = refl
 
+paudel2021Pinned : S.paudelEtAl2021DOI ≡ "10.3390/microorganisms9091831"
+paudel2021Pinned = refl
+
 temporaryCoverNotPerennialRecovery : S.temporaryCoverImpliesPerennialRecovery S.canonicalSudangrassBoundary ≡ false
 temporaryCoverNotPerennialRecovery = refl
 
@@ -23,6 +26,17 @@ biomassNotBiodiversity = refl
 
 weedSuppressionNotRestoration : S.weedSuppressionImpliesNativeRestoration S.canonicalSudangrassBoundary ≡ false
 weedSuppressionNotRestoration = refl
+
+soilHealthNotCashCropYield : S.soilHealthImprovementImpliesCashCropYieldGain S.canonicalSudangrassBoundary ≡ false
+soilHealthNotCashCropYield = refl
+
+microbialBiomassNotPathogenPopulationSuppression :
+  S.microbialProfileImprovementImpliesTargetPathogenPopulationSuppression S.canonicalSudangrassBoundary ≡ false
+microbialBiomassNotPathogenPopulationSuppression = refl
+
+varietyAgeTerminationRetained :
+  S.varietyAgeAndTerminationMethodMustRemainIndexed S.canonicalSudangrassBoundary ≡ true
+varietyAgeTerminationRetained = refl
 
 reversibilityRetained : S.terminationAndReversibilityMustRemainIndexed S.canonicalSudangrassBoundary ≡ true
 reversibilityRetained = refl
