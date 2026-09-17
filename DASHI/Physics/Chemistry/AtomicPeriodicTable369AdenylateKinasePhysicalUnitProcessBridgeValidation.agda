@@ -23,3 +23,8 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBAtomistic
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseHistoricalMechanicsValidation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOpenMMCVOracleValidation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticTrajectoryLiftValidation
+
+-- Typed attribution continuation: DOI/QID/Dewey are DashiKnowledgeCoordinate
+-- navigation/provenance fields and remain non-authoritative. Unknown QID/Dewey
+-- values stay explicitly unresolved rather than inferred from nearby classes.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalAttributionCoordinatesValidation
