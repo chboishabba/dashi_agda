@@ -1,6 +1,7 @@
 module DASHI.Moonshine.JInvariantEisensteinInternalDivisorPowerKernelValidation where
 
 open import DASHI.Core.Prelude
+open import Data.Nat.Base using (_≤_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
@@ -17,6 +18,18 @@ sigma5KernelRegression :
   (n : Nat) ->
   Series.sigma5 P.internalDivisorPowerKernel n ≡ Divisor.sigma5 n
 sigma5KernelRegression n = refl
+
+sigma3InternalPolynomialEnvelope :
+  (n : Nat) ->
+  Series.sigma3 P.internalDivisorPowerKernel n
+  ≤ Divisor.powNat n 3 * n
+sigma3InternalPolynomialEnvelope = P.internalSigma3QuarticBound
+
+sigma5InternalPolynomialEnvelope :
+  (n : Nat) ->
+  Series.sigma5 P.internalDivisorPowerKernel n
+  ≤ Divisor.powNat n 5 * n
+sigma5InternalPolynomialEnvelope = P.internalSigma5SexticBound
 
 e4ZeroRegression :
   (C : Complex.ConstructedComplexPackage) ->
