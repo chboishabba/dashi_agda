@@ -8,41 +8,55 @@ open import Data.Empty using (⊥)
 import DASHI.Wikimedia.LeanSlrWorldObservationBidiExact as Observation
 import DASHI.Wikimedia.SensibLawNatClimateSLRFixtureExact as NatClimate
 import DASHI.Wikimedia.MaboWorldObjectIdentityExact as Identity
+import DASHI.Wikimedia.MaboP7d5SlrRuntimeReceiptExact as Runtime
 
 ------------------------------------------------------------------------
 -- CONCRETE GOLDEN OBSERVATIONS
 --
--- These are ABI fixtures, not claims that both runtimes have been executed at
--- this exact branch head. Backend choice is erased by normalization; source,
--- revision, digest and observed value remain semantic coordinates.
+-- The native SLR Mabo P710 observation is now backed by the exact runtime
+-- receipt published on SLR PR #24 at efba015c....  The interop/Lean carrier
+-- below remains only a worked ABI fixture until JMD Lean is actually executed.
+-- Backend choice is erased by normalization; source revision, content digest,
+-- observed object/relation/value remain semantic coordinates.
 ------------------------------------------------------------------------
 
 maboP710Observation : Observation.WorldObservation
 maboP710Observation =
   Observation.mkWorldObservation
     "query:mabo:P710"
-    "Q1501525"
-    "P710"
+    (Runtime.p710ObjectRef Runtime.liveMaboP710Observation)
+    (Runtime.p710RelationRef Runtime.liveMaboP710Observation)
     "wikidata"
-    "wikidata:Q1501525:oldid:2333409615"
-    "digest supplied by runtime receipt"
-    "Q975866"
+    (Runtime.p710RevisionRef Runtime.liveMaboP710Observation)
+    (Runtime.p710ContentDigestRef Runtime.liveMaboP710Observation)
+    (Runtime.p710ValueRef Runtime.liveMaboP710Observation)
     Observation.retrievalSucceeded
     Observation.currentFreshness
     Observation.providerRevisionProvenance
 
 maboSlrGetterFixture : Observation.SlrGetterObservation
 maboSlrGetterFixture =
-  Observation.mkSlrGetterObservation maboP710Observation "slr-native"
+  Observation.mkSlrGetterObservation
+    maboP710Observation
+    "slr-native@efba015c78480c324c4f99d7ec8dab4a31020640"
 
 maboInteropGetterFixture : Observation.LeanGetterObservation
 maboInteropGetterFixture =
-  Observation.mkLeanGetterObservation maboP710Observation "interop-worked-example"
+  Observation.mkLeanGetterObservation maboP710Observation "interop-worked-example:not-run"
 
 maboNormalizedAgreement :
   Observation.normalizeSlrGetter maboSlrGetterFixture
   ≡ Observation.normalizeLeanGetter maboInteropGetterFixture
 maboNormalizedAgreement = refl
+
+maboSlrRuntimeObservationObserved : Bool
+maboSlrRuntimeObservationObserved = true
+
+maboInteropRuntimeObservationObserved : Bool
+maboInteropRuntimeObservationObserved = false
+
+maboCrossRuntimeParityObserved : Bool
+maboCrossRuntimeParityObserved = false
 
 ------------------------------------------------------------------------
 -- NAT CLIMATE: SECOND REAL TEST FAMILY USING THE SAME ABI.
@@ -131,12 +145,12 @@ adaptRevisionedArtifact artifact candidate residual identityClass =
 maboP710Artifact : AcquiredProducerArtifact
 maboP710Artifact =
   acquired-producer-artifact
-    "Q1501525"
-    "P710"
-    "Q975866"
+    (Runtime.p710ObjectRef Runtime.liveMaboP710Observation)
+    (Runtime.p710RelationRef Runtime.liveMaboP710Observation)
+    (Runtime.p710ValueRef Runtime.liveMaboP710Observation)
     "wikidata"
-    "wikidata:Q1501525:oldid:2333409615"
-    "digest supplied by runtime receipt"
+    (Runtime.p710RevisionRef Runtime.liveMaboP710Observation)
+    (Runtime.p710ContentDigestRef Runtime.liveMaboP710Observation)
     true refl false refl false refl
 
 maboP710CandidateProjection : ExpansionCandidateProjection
@@ -194,6 +208,8 @@ data RevisionStringWithoutSourceBindingEqualsRevisionReceipt : Set where
 data RepresentationStringEqualsIdentityClass : Set where
 data NatClimateReviewFixtureEqualsMigrationApproval : Set where
 
+data NativeRuntimeObservationEqualsCrossBackendParity : Set where
+
 getterBackendDoesNotEqualObservationSemantics :
   GetterBackendEqualsObservationSemantics → ⊥
 getterBackendDoesNotEqualObservationSemantics ()
@@ -217,3 +233,7 @@ representationStringDoesNotEqualIdentityClass ()
 natClimateReviewFixtureDoesNotEqualMigrationApproval :
   NatClimateReviewFixtureEqualsMigrationApproval → ⊥
 natClimateReviewFixtureDoesNotEqualMigrationApproval ()
+
+nativeRuntimeObservationDoesNotEqualCrossBackendParity :
+  NativeRuntimeObservationEqualsCrossBackendParity → ⊥
+nativeRuntimeObservationDoesNotEqualCrossBackendParity ()
