@@ -24,6 +24,9 @@ fall2012DOIPinned = refl
 fall2012PMIDPinned : T.fallEtAl2012PMID ≡ "21514716"
 fall2012PMIDPinned = refl
 
+elTahir2009DOIPinned : T.elTahirEtAl2009DOI ≡ "10.1016/j.jaridenv.2008.11.007"
+elTahir2009DOIPinned = refl
+
 plantFixedNDoesNotCreateInterplantTransfer :
   T.plantFixedNContributionImpliesInterplantTransfer T.canonicalTransferBudgetBoundary ≡ false
 plantFixedNDoesNotCreateInterplantTransfer = refl
@@ -47,6 +50,14 @@ abovegroundOnlyBudgetIsNotWholeSystemBudget = refl
 soilMineralNObserverGeometryCannotBeDropped :
   T.soilMineralNObserverGeometryMayBeDropped T.canonicalTransferBudgetBoundary ≡ false
 soilMineralNObserverGeometryCannotBeDropped = refl
+
+priorAccumulationDoesNotGuaranteePersistenceAfterConversion :
+  T.priorNutrientAccumulationImpliesPersistentPostConversionStock T.canonicalTransferBudgetBoundary ≡ false
+priorAccumulationDoesNotGuaranteePersistenceAfterConversion = refl
+
+managementHistoryRemainsIndexed :
+  T.landUseTransitionAndHistoryMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
+managementHistoryRemainsIndexed = refl
 
 managementExportRemainsIndexed :
   T.harvestAndExportMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
