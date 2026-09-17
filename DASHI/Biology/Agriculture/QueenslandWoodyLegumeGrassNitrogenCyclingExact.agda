@@ -11,10 +11,10 @@ import DASHI.Biology.Agriculture.NitrogenaseChemistryCrossPollinationExact as Ch
 ------------------------------------------------------------------------
 -- QUEENSLAND WOODY LEGUME <-> GRASS <-> GRAZING N CYCLING
 --
--- Queensland Leucaena evidence is the local system surface.  Catchpoole &
--- Blair 1990 Parts II-III are retained only as external mechanism/method
--- donors for transfer-route and residue/excreta behaviour.  They do not
--- manufacture Queensland same-object transfer evidence.
+-- Queensland Leucaena evidence is the local system surface. Catchpoole &
+-- Blair 1990 Parts II-III remain external mechanism/method donors. Vallis
+-- 1983 is a Queensland field residue-transfer receipt. None of these routes
+-- are silently identified with contemporaneous living-root transfer.
 ------------------------------------------------------------------------
 
 radrizzaniEtAl2011DOI : String
@@ -31,6 +31,9 @@ catchpooleBlair1990TransferDOI = "10.1071/AR9900531"
 
 catchpooleBlair1990ResidueDOI : String
 catchpooleBlair1990ResidueDOI = "10.1071/AR9900539"
+
+vallis1983DOI : String
+vallis1983DOI = "10.1071/AR9830367"
 
 burleSheltonDalzell2003 : Attribution.AttributedSource
 burleSheltonDalzell2003 = Attribution.mkNoDOISource
@@ -70,7 +73,7 @@ radrizzaniEtAl2010 = Attribution.mkDOISource
   "Animal Production Science 50(10):961-975"
   "2010" radrizzaniEtAl2010DOI "https://doi.org/10.1071/AN10062"
   Attribution.academicArticleSource
-  "Multi-site Queensland fertiliser experiments showing P/S deficiencies can restrict leucaena growth and suppress symbiotic N2 fixation, while companion-grass competition for water/nutrients changes response. Environmental-enable­ment receipt, not a context-free woody-legume N-input law."
+  "Multi-site Queensland fertiliser experiments showing P/S deficiencies can restrict leucaena growth and suppress symbiotic N2 fixation, while companion-grass competition for water/nutrients changes response. Environmental-enablement receipt, not a context-free woody-legume N-input law."
   Attribution.publicAttribution
 
 catchpooleBlair1990Transfer : Attribution.AttributedSource
@@ -93,6 +96,16 @@ catchpooleBlair1990Residue = Attribution.mkDOISource
   "Controlled 15N-labelled residue experiment comparing tree-legume leaf, faeces and urine, placement/incorporation and subsequent Panicum capture/mineral soil N over ten weeks. Recovery differed strongly by residue form and placement. Retained as a route/placement donor rather than field grazing or Queensland same-object evidence."
   Attribution.publicAttribution
 
+vallis1983 : Attribution.AttributedSource
+vallis1983 = Attribution.mkDOISource
+  "I. Vallis"
+  "Uptake by grass and transfer to soil of nitrogen from 15N-labelled legume materials applied to a Rhodes grass pasture"
+  "Australian Journal of Agricultural Research 34(4):367-376"
+  "1983" vallis1983DOI "https://doi.org/10.1071/AR9830367"
+  Attribution.academicArticleSource
+  "South-eastern Queensland field tracer study applying 15N-labelled Siratro and Greenleaf desmodium residues to a Rhodes-grass pasture and following labelled N in grass/soil over one to three years. It is a field residue-transfer receipt, not evidence for contemporaneous living-root or direct below-ground legume-to-grass transfer."
+  Attribution.publicAttribution
+
 data WoodyGrassEvidenceRole : Set where
   shortWindowGrazingNitrogenPool : WoodyGrassEvidenceRole
   longTermSoilCarbonNitrogenStock : WoodyGrassEvidenceRole
@@ -100,6 +113,7 @@ data WoodyGrassEvidenceRole : Set where
   nutrientEnablementConstraint : WoodyGrassEvidenceRole
   controlledLegumeToGrassTransfer : WoodyGrassEvidenceRole
   residueExcretaNitrogenRelease : WoodyGrassEvidenceRole
+  fieldResidueNitrogenTransfer : WoodyGrassEvidenceRole
 
 record WoodyGrassReceipt : Set where
   constructor woody-grass-receipt
@@ -167,6 +181,15 @@ routePlacementReceipt = woody-grass-receipt
   "transport-route/placement sensitivity"
   "leaf, faeces and urine are distinct transport states; placement and volatilisation context cannot be erased"
 
+fieldResidueTransferReceipt : WoodyGrassReceipt
+fieldResidueTransferReceipt = woody-grass-receipt
+  vallis1983 fieldResidueNitrogenTransfer
+  "one-to-three-year field tracer follow-up"
+  "south-eastern Queensland Rhodes-grass pasture receiving surface-applied labelled legume residues"
+  "15N-labelled residue disappearance plus recovery in companion grass and soil"
+  "field residue-mediated companion-grass capture"
+  "residue-mediated transfer is a decomposer/mineralisation route and is not contemporaneous living-legume or direct below-ground transfer"
+
 genericFixedNFluxStillOpen : Chemistry.stageClosed Chemistry.bacterialFixedNFlux ≡ false
 genericFixedNFluxStillOpen = refl
 
@@ -183,6 +206,7 @@ record WoodyLegumeGrassBoundary : Set where
     controlledTransferImpliesFieldTransfer : Bool
     leafFaecesUrineTransportRouteMayBeDropped : Bool
     residuePlacementMayBeDroppedFromNitrogenCapture : Bool
+    fieldResidueTransferImpliesLivingLegumeTransfer : Bool
     externalTransferDonorCreatesQueenslandSameObjectReceipt : Bool
     pairedChronosequenceCreatesLongitudinalCausalTrajectory : Bool
     isotopeAtmosphericContributionEqualsDirectBacterialFlux : Bool
@@ -196,8 +220,8 @@ open WoodyLegumeGrassBoundary public
 
 canonicalWoodyLegumeGrassBoundary : WoodyLegumeGrassBoundary
 canonicalWoodyLegumeGrassBoundary = woody-legume-grass-boundary
-  false false false false false false false false false false false false false false false false
+  false false false false false false false false false false false false false false false false false
 
 attributionRule : String
 attributionRule =
-  "Burle, Shelton & Dalzell 2003 (Tropical Grasslands 37:119-128; no DOI recorded by this atlas) owns its south-east Queensland plant/soil/cattle/excreta N-pool observations. Radrizzani et al. 2011 (DOI 10.1071/CP10115) owns its paired Queensland soil OC/TN observations. Conrad et al. 2018 (DOI 10.1016/j.geoderma.2017.10.029) owns its delta-15N source attribution and soil-N turnover observations. Radrizzani, Shelton & Dalzell 2010 (DOI 10.1071/AN10062) owns its Queensland P/S/fixation and grass-competition observations. Catchpoole & Blair 1990-II (DOI 10.1071/AR9900531) owns its controlled split-root labelled-transfer propositions and the reported contrast with the earlier South-Sulawesi field series. Catchpoole & Blair 1990-III (DOI 10.1071/AR9900539) owns its labelled leaf/faeces/urine release and placement propositions. DASHI owns only the typed source/route/redistribution/stock separation and no-promotion boundary. External transfer donors do not create Queensland same-object transfer, and Leucaena evidence does not create Acacia/Senegalia same-object evidence or close canonical BNF/avoided-mineral-N stages."
+  "Burle, Shelton & Dalzell 2003 (Tropical Grasslands 37:119-128; no DOI recorded by this atlas) owns its south-east Queensland plant/soil/cattle/excreta N-pool observations. Radrizzani et al. 2011 (DOI 10.1071/CP10115) owns its paired Queensland soil OC/TN observations. Conrad et al. 2018 (DOI 10.1016/j.geoderma.2017.10.029) owns its delta-15N source attribution and soil-N turnover observations. Radrizzani, Shelton & Dalzell 2010 (DOI 10.1071/AN10062) owns its Queensland P/S/fixation and grass-competition observations. Catchpoole & Blair 1990-II (DOI 10.1071/AR9900531) owns its controlled split-root labelled-transfer propositions and the reported contrast with the earlier South-Sulawesi field series. Catchpoole & Blair 1990-III (DOI 10.1071/AR9900539) owns its labelled leaf/faeces/urine release and placement propositions. Vallis 1983 (DOI 10.1071/AR9830367) owns its south-eastern Queensland 15N-labelled legume-residue-to-Rhodes-grass/soil field observations. DASHI owns only the typed source/route/redistribution/stock separation and no-promotion boundary. Residue-mediated field capture is not living-root transfer; external transfer donors do not create Queensland same-object transfer; and Leucaena evidence does not create Acacia/Senegalia same-object evidence or close canonical BNF/avoided-mineral-N stages."
