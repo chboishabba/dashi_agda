@@ -1,0 +1,1 @@
+The local four-sign/covariance object must remain signed through the same-object recombination. Do not take absolute values before the signed Gram cancellation has been exposed.
