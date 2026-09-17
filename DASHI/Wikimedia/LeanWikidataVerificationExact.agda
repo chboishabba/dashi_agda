@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Wikimedia.AristotleLeanMachineAttributionExact as Attribution
 open import DASHI.Wikimedia.LeanSlrWorldObservationBidiExact
 
@@ -135,4 +136,5 @@ sameObjectAlignmentDoesNotCreateRelationTruth ()
 -- Exact source owner for this verification ABI.
 ------------------------------------------------------------------------
 
+jmdLeanMachineAttributedSource : Source.AttributedSource
 jmdLeanMachineAttributedSource = Attribution.jmdLeanArchiveSource
