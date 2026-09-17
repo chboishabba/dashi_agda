@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.YMClayLiteralSU2LatticeDonorExact
 import DASHI.Physics.YangMills.YMClayVaryingCarrierTransportParityExact
 import DASHI.Physics.YangMills.YMClayUniformGapReductionParityExact
 import DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact
+import DASHI.Physics.YangMills.YMClayClosedWorldResidualAudit20260917Exact
 import DASHI.Physics.YangMills.YMClayR387PhysicalMassGapCertificateExact
 import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact
 import DASHI.Physics.YangMills.YMClayCanonicalMassGapConclusionExact
