@@ -1,0 +1,127 @@
+module DASHI.Wikimedia.MaboJmdSlrGetterParityFixtureExact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+
+import DASHI.Wikimedia.JmdLeanGoldenAbiAttachmentExact as Jmd
+import DASHI.Wikimedia.JmdLeanIntegratedMachineLineageExact as Machine
+import DASHI.Wikimedia.MaboPropertyTripleProjectionExact as MaboTriple
+import DASHI.Wikimedia.MaboReviewedContextFederationExact as MaboReview
+open import DASHI.Wikimedia.LeanSlrWorldObservationBidiExact
+
+------------------------------------------------------------------------
+-- GOLDEN MABO GETTER-PARITY FIXTURE
+--
+-- This fixture pins the already-formalised source statement
+--   Q1501525 --P710--> Q975866
+-- at Wikidata oldid 2333409615 and projects the same golden observation through
+-- both Lean-getter and SLR-getter carriers.  The definitional equality below is
+-- a test of the ABI shape only; it is deliberately NOT a claim that either
+-- runtime has executed the query at the integrated-machine head.
+------------------------------------------------------------------------
+
+maboGoldenObservation : WorldObservation
+maboGoldenObservation =
+  mkWorldObservation
+    "mabo:getter-parity:Q1501525:P710"
+    "Q1501525"
+    "P710"
+    "wikidata"
+    "wikidata:Q1501525:oldid:2333409615"
+    "digest:runtime-must-supply-exact-content-digest"
+    "Q975866"
+    retrievalSucceeded
+    unknownFreshness
+    providerRevisionProvenance
+
+maboLeanGetterFixture : LeanGetterObservation
+maboLeanGetterFixture =
+  mkLeanGetterObservation
+    maboGoldenObservation
+    "dashi_lean4@349f9b7dd49a7f23bfbd7d9da60416afa5440ccf:RequestProject.Cli.Fetch.fetchEntity"
+
+maboSlrGetterFixture : SlrGetterObservation
+maboSlrGetterFixture =
+  mkSlrGetterObservation
+    maboGoldenObservation
+    "chboishabba/slr:Wikidata production getter adapter"
+
+leanAndSlrFixtureNormalizeToSameObservation :
+  normalizeLeanGetter maboLeanGetterFixture ≡
+  normalizeSlrGetter maboSlrGetterFixture
+leanAndSlrFixtureNormalizeToSameObservation = refl
+
+maboJmdGetterAbiFixture : Jmd.JmdGetterAbiReceipt
+maboJmdGetterAbiFixture =
+  Jmd.mkJmdGetterAbiReceipt
+    maboGoldenObservation
+    "RequestProject.Cli.Fetch.fetchEntity"
+    "golden-fixture:not-runtime-receipt"
+
+record MaboGetterParityFixture : Set where
+  constructor mabo-getter-parity-fixture
+  field
+    sourceTripleReference : String
+    sourceRevisionReference : String
+    jmdMachineCommitReference : String
+    leanGetter : LeanGetterObservation
+    slrGetter : SlrGetterObservation
+    fixtureUsesExactMaboPropertyTriple : Bool
+    sameNormalizedObservationByConstruction : Bool
+    runtimeParityObserved : Bool
+    exactRuntimeDigestObserved : Bool
+    fixtureCreatesWorldTruth : Bool
+    fixtureCreatesLegalAuthority : Bool
+
+open MaboGetterParityFixture public
+
+canonicalMaboGetterParityFixture : MaboGetterParityFixture
+canonicalMaboGetterParityFixture =
+  mabo-getter-parity-fixture
+    "DASHI.Wikimedia.MaboPropertyTripleProjectionExact.maboParticipantPropertyTriple"
+    MaboReview.maboRevision
+    Machine.jmdIntegratedCommit
+    maboLeanGetterFixture
+    maboSlrGetterFixture
+    true
+    true
+    false
+    false
+    false
+    false
+
+------------------------------------------------------------------------
+-- Source-owner reuse pins.  These force the fixture to remain downstream of
+-- the exact existing Mabo triple rather than manufacturing a second claim.
+------------------------------------------------------------------------
+
+_ : MaboTriple.Property.tripleSubject MaboTriple.maboParticipantPropertyTriple ≡ "Q1501525"
+_ = refl
+
+_ : MaboTriple.Property.tripleProperty MaboTriple.maboParticipantPropertyTriple ≡ "P710"
+_ = refl
+
+_ : MaboTriple.Property.tripleObject MaboTriple.maboParticipantPropertyTriple ≡ "Q975866"
+_ = refl
+
+------------------------------------------------------------------------
+-- Firewalls.
+------------------------------------------------------------------------
+
+data GoldenParityFixtureEqualsObservedRuntimeParity : Set where
+data SharedNormalizedObservationEqualsIndependentObservation : Set where
+data PlaceholderDigestEqualsObservedContentDigest : Set where
+
+goldenFixtureDoesNotEqualObservedRuntimeParity :
+  GoldenParityFixtureEqualsObservedRuntimeParity → ⊥
+goldenFixtureDoesNotEqualObservedRuntimeParity ()
+
+sharedNormalizedObservationDoesNotEstablishIndependentObservation :
+  SharedNormalizedObservationEqualsIndependentObservation → ⊥
+sharedNormalizedObservationDoesNotEstablishIndependentObservation ()
+
+placeholderDigestDoesNotEqualObservedContentDigest :
+  PlaceholderDigestEqualsObservedContentDigest → ⊥
+placeholderDigestDoesNotEqualObservedContentDigest ()
