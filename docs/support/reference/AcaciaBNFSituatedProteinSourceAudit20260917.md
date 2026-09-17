@@ -23,13 +23,17 @@ Every scientific production owner attaches DOI metadata directly to an Agda sour
 - Isaac et al. 2011 — DOI `10.1016/j.foreco.2010.11.011` — age/P-indexed natural-population N2-fixation contribution and soil-N context.
 - Isaac, Harmand & Drevon 2011 — DOI `10.1016/j.jplph.2010.10.011`; PMID `21211863` — non-limiting-N phosphorus experiment separating growth/mineral-N uptake from atmospheric-N contribution.
 - Githae et al. 2013 — DOI `10.1080/15324982.2013.784377` — variety/site-indexed foliar `15N` fixation estimates with nodule observations kept separate.
-- Raddad et al. 2005 — DOI `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan; provenance and age remain explicit coordinates and the source's above-ground foliage fixed-N contribution is retained as plant-level evidence rather than direct molecular flux.
+- Raddad et al. 2005 — DOI `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan.
 - Abaker et al. 2018 — DOI `10.7717/peerj.5232`; PMID `30018862`; PMCID `PMC6044267` — soil nutrient/SOC and foliar isotope evidence; source interpretation does not support important BNF contribution to plantation soil N in that Sudan system.
 - Isaac, Hinsinger & Harmand 2012 — DOI `10.1016/j.scitotenv.2011.12.071`; PMID `22446108` — controlled Acacia-to-wheat below-ground N-transfer evidence indexed by phosphorus, root-contact regime and observation time.
 - Raddad et al. 2006 — DOI `10.1007/s10457-006-9009-6` — four-year Blue Nile treatment nutrient budgets; reported N balance varies by system and omits below-ground tree biomass.
 - Deans et al. 1999 — DOI `10.1016/S0378-1127(99)00063-8` — 3–18 year Senegal fallow nutrient accumulation with biomass/fodder export retained as a nutrient-budget coordinate.
 - Fall et al. 2012 — DOI `10.1016/j.jenvman.2011.03.038`; PMID `21514716` — mineral-N/microbial observations indexed by distance from tree, soil depth and season.
 - El Tahir et al. 2009 — DOI `10.1016/j.jaridenv.2008.11.007` — post-conversion North Kordofan nutrient-stock evidence retaining prior plantation state, conversion regime and subsequent cropping history.
+- Basga et al. 2018 — DOI `10.5897/AJAR2018.13283` — North Cameroon post-fallow sorghum/cowpea yield evidence; all replicated crop treatments received a 4 g NPK 20-10-10 microdose per planting hole, so the result is explicitly not an avoided-mineral-N receipt.
+- Raddad & Luukkanen 2007 — DOI `10.1016/j.agwat.2006.06.001` — Blue Nile clay-soil water/crop response; early-stage little-water-competition and crop-yield result remains soil/age/crop/management bounded.
+- Gaafar et al. 2006 — DOI `10.1007/s10457-005-2918-y` — North Kordofan sandy-soil tree-density/water/gum/crop source providing a contrasting water-competition context.
+- Raddad & Luukkanen 2006 — DOI `10.1016/j.foreco.2006.01.036` — eight-provenance delta-13C/water-use/growth/gum source; no cross-paper Ndfa correlation is inferred from provenance labels.
 
 ## Measurement-method donor retained
 
@@ -51,7 +55,7 @@ Every scientific production owner attaches DOI metadata directly to an Agda sour
 - `AcaciaSenegalDrylandWaterCarbonExact`
 - `AcaciaSenegalDrylandTaskFactorisationExact`
 
-No replacement generic protein, BNF, attribution, factorisation, or LES ontology is introduced.
+No replacement generic protein, BNF, attribution, factorisation, hydrology or LES ontology is introduced.
 
 ## Promotion firewalls checked
 
@@ -67,10 +71,16 @@ The source-written tranche explicitly blocks:
 - interplant N transfer => positive field N balance;
 - above-ground nutrient budget => whole-system nutrient balance;
 - positive field N balance => fertilizer substitution;
+- co-fertilized crop yield => avoided mineral N;
 - fertilizer substitution => restoration/deployment authority;
 - soil mineral-N observation => context-free scalar outcome independent of distance/depth/season;
 - prior plantation nutrient accumulation => persistent nutrient stock following land-use conversion;
 - present land-cover label => sufficient history for a nutrient-stock consumer;
+- species/tree density => universal water-competition or crop-yield response across soil contexts;
+- early-stage no-yield-penalty result => mature-system no-yield-penalty result;
+- crop yield alone => identified water-competition mechanism;
+- shared provenance labels across papers => Ndfa/WUE/gum correlation;
+- shared provenance labels/site description => same empirical object without an explicit join receipt;
 - Lotus/barley receptor result => Acacia same-object mechanism;
 - Azotobacter FeSII protection => Acacia nodule protection mechanism;
 - Abaker/Berninger/Starr 2018 dryland hydrology DOI `10.1016/j.jaridenv.2017.12.004` => BNF measurement;
@@ -80,7 +90,11 @@ The source-written tranche explicitly blocks:
 - reference-plant/method calibration donor => Acacia biological evidence;
 - foliar `15N`/Ndfa estimate => direct molecular nitrogenase flux or whole-season ecosystem N balance.
 
-The generic nitrogenase dependency ladder is not mutated by these acquisitions. In particular, field budget evidence does not close generic `seasonalCropNDemand` or `avoidedMineralN`.
+The generic nitrogenase dependency ladder is not mutated by these acquisitions. In particular, field budget and crop-yield evidence do not close generic `seasonalCropNDemand` or `avoidedMineralN`.
+
+## Current acquisition frontier
+
+A targeted public-literature search did not identify an Acacia/Senegalia same-object field study with an explicit mineral-N counterfactual adequate to close generic `avoidedMineralN`. Basga et al. 2018 is retained specifically as a negative-control receipt because mineral fertilizer was co-applied to every replicated crop treatment. Short-duration seedling N-fertilizer experiments are not promoted to crop-season fertilizer substitution. The Elicit academic-corpus connector was also unavailable because the connected account lacks API access; this is recorded as a search-coverage limitation, not evidence of source absence.
 
 ## Certification status
 
