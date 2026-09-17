@@ -102,7 +102,7 @@ compileFiniteSyntaxExecutionPrefix :
     (A : Phase.CyclicPhaseCoefficientAuthority Coefficient Q) →
   (I : SyntaxQFT.SyntaxCyclicPhaseInversionAuthority qNonZero nNonZero A) →
   CompiledSyntaxPrefix qNonZero nNonZero base A I
-compileFiniteSyntaxExecutionPrefix {Coefficient = Coefficient}
+compileFiniteSyntaxExecutionPrefix {N = N} {Coefficient = Coefficient}
   qNonZero nNonZero base A I =
   Prefix.compileShorAmplitudeExecutionPrefix
     (Target.finiteIndependentTargetAmplitudeOracleWeld
@@ -110,9 +110,6 @@ compileFiniteSyntaxExecutionPrefix {Coefficient = Coefficient}
       (SyntaxQFT.cyclicBasis qNonZero)
       base N nNonZero)
     (syntaxIdentityCarrierWeld qNonZero nNonZero A I)
-  where
-    N : Nat
-    N = _
 
 compiledPrefixUsesIdentityFourierCarrierWeld :
   ∀ {Q N Coefficient}
