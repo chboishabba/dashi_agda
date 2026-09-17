@@ -20,6 +20,12 @@ _ = refl
 _ : Fixture.sourceEndpointTriplesRetained boundary ≡ true
 _ = refl
 
+_ : Fixture.canonicalScriptReceiptMechanismRetained boundary ≡ true
+_ = refl
+
+_ : Fixture.coordinateBytesAcquiredIntoAgdaFixture boundary ≡ false
+_ = refl
+
 _ : Fixture.pdbEntryIdentitySelectsCanonicalChain boundary ≡ false
 _ = refl
 
