@@ -9,14 +9,16 @@ import DASHI.Environment.LESResearchCrossPollinationExact as LES
 import DASHI.Biology.Agriculture.AustralianNativeLegumeRhizobiaRestorationExact as AustralianRhizobia
 import DASHI.Biology.Agriculture.AustralianWattleSoilBiotaRehabilitationExact as WattleBiota
 import DASHI.Biology.Agriculture.AustralianGrasslandSuccessionRegenerationExact as Grassland
+import DASHI.Biology.Agriculture.AustralianAcaciaPioneerDisturbanceTrajectoryExact as Pioneer
+import DASHI.Biology.Agriculture.AustralianRestorationMicrobiomeTrajectoryExact as Microbiome
 import DASHI.Biology.Agriculture.SudangrassNurseCoverCropExact as Sudangrass
 import DASHI.Biology.Agriculture.AcaciaSenegalBNFLESCrossPollinationExact as Senegal
 
 ------------------------------------------------------------------------
 -- COMPARATIVE REGENERATION HYPERFABRIC
 --
--- Source systems remain separate.  Only functional roles and consumer
--- requirements are cross-pollinated.
+-- Source systems remain separate. Only functional roles, observer semantics
+-- and trajectory requirements are cross-pollinated.
 ------------------------------------------------------------------------
 
 data RegenerationRole : Set where
@@ -27,11 +29,15 @@ data RegenerationRole : Set where
   weedCompetitor : RegenerationRole
   hydrologicalActor : RegenerationRole
   recruitmentFacilitator : RegenerationRole
+  disturbanceResponsivePioneer : RegenerationRole
+  microbiomeTrajectoryIndicator : RegenerationRole
 
 data RegenerationSystem : Set where
   australianNativeLegumeSystem : RegenerationSystem
   australianMineRehabilitationSystem : RegenerationSystem
   australianGrasslandOldFieldSystem : RegenerationSystem
+  australianAcaciaPioneerSystem : RegenerationSystem
+  australianRestorationMicrobiomeSystem : RegenerationSystem
   sudangrassPastureSystem : RegenerationSystem
   senegaliaDrylandSystem : RegenerationSystem
 
@@ -82,6 +88,12 @@ mineSoilBiotaCarrier = regeneration-role-assignment australianMineRehabilitation
 grasslandRecruitmentFacilitator : RegenerationRoleAssignment
 grasslandRecruitmentFacilitator = regeneration-role-assignment australianGrasslandOldFieldSystem recruitmentFacilitator true
 
+australianAcaciaDisturbancePioneer : RegenerationRoleAssignment
+australianAcaciaDisturbancePioneer = regeneration-role-assignment australianAcaciaPioneerSystem disturbanceResponsivePioneer true
+
+australianMicrobiomeIndicator : RegenerationRoleAssignment
+australianMicrobiomeIndicator = regeneration-role-assignment australianRestorationMicrobiomeSystem microbiomeTrajectoryIndicator true
+
 senegaliaHydrologicalActor : RegenerationRoleAssignment
 senegaliaHydrologicalActor = regeneration-role-assignment senegaliaDrylandSystem hydrologicalActor true
 
@@ -93,9 +105,14 @@ record RegenerationHyperfabricBoundary : Set where
     sourceSystemIdentityMustRemainIndexed : Bool
     inoculationImpliesCommunityRecovery : Bool
     pioneerEstablishmentImpliesDesiredSuccessionalEndpoint : Bool
+    pioneerDominanceImpliesSuccessfulSuccessionalRelease : Bool
+    referenceLikeRichnessImpliesReferenceLikeComposition : Bool
+    disturbanceRegimeMustRemainIndexed : Bool
     temporaryNurseFunctionImpliesNativeCommunityRecovery : Bool
     soilFunctionImprovementImpliesFloristicRecovery : Bool
     weedSuppressionImpliesBiodiversityRecovery : Bool
+    chronosequenceAgeGradientImpliesLongitudinalCausalRecovery : Bool
+    microbiomeReferenceSimilarityImpliesWholeEcosystemRecovery : Bool
     interventionSuccessAtT1ImpliesTrajectorySuccessAtT2 : Bool
     AustralianAcaciaEqualsSenegaliaSenegal : Bool
     agriculturalPastureEqualsNativeGrassland : Bool
@@ -104,7 +121,7 @@ open RegenerationHyperfabricBoundary public
 
 canonicalRegenerationHyperfabricBoundary : RegenerationHyperfabricBoundary
 canonicalRegenerationHyperfabricBoundary = regeneration-hyperfabric-boundary
-  false false true false false false false false false false false false
+  false false true false false false false true false false false false false false false false false
 
 -- Canonical source-bounded lanes are reused, not fused.
 australianRhizobiaBoundaryReused : AustralianRhizobia.AustralianRhizobiaBoundary
@@ -116,9 +133,15 @@ wattleBiotaBoundaryReused = WattleBiota.canonicalWattleSoilBiotaBoundary
 grasslandBoundaryReused : Grassland.GrasslandSuccessionBoundary
 grasslandBoundaryReused = Grassland.canonicalGrasslandBoundary
 
+pioneerBoundaryReused : Pioneer.PioneerTrajectoryBoundary
+pioneerBoundaryReused = Pioneer.canonicalPioneerTrajectoryBoundary
+
+microbiomeBoundaryReused : Microbiome.MicrobiomeTrajectoryBoundary
+microbiomeBoundaryReused = Microbiome.canonicalMicrobiomeTrajectoryBoundary
+
 sudangrassBoundaryReused : Sudangrass.SudangrassBoundary
 sudangrassBoundaryReused = Sudangrass.canonicalSudangrassBoundary
 
 attributionRule : String
 attributionRule =
-  "Australian native-legume, mine-rehabilitation, old-field/grassland, sorghum-sudangrass and Senegalia dryland papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, the finite early-success/long-term-trajectory TaskFactorisation collision and the no-promotion boundary. Shared roles do not create same-object identity, response transfer or deployment authority."
+  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass and Senegalia dryland papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory separations, the finite early-success/long-term-trajectory TaskFactorisation collision and the no-promotion boundary. Shared roles, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, causal recovery, whole-ecosystem recovery or deployment authority."
