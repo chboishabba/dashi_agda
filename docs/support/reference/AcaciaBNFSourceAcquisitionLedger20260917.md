@@ -24,6 +24,14 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan; DOI verified against the University of Helsinki research record and publisher metadata.
 - existing #980 dryland water-carbon source: `10.1016/j.jaridenv.2017.12.004`
 
+## Acacia fixed-N transfer, field budgets and land-use persistence
+
+- `10.1016/j.scitotenv.2011.12.071` — PMID `22446108` — controlled Acacia-to-wheat below-ground N-transfer evidence; phosphorus, root-contact regime and observation time remain indexed.
+- `10.1007/s10457-006-9009-6` — four-year Blue Nile field nutrient budgets; treatment context remains indexed and below-ground tree biomass was omitted from the reported balance.
+- `10.1016/S0378-1127(99)00063-8` — 3–18 year Senegal fallow nutrient accumulation; biomass/fodder export remains part of the nutrient-budget question.
+- `10.1016/j.jenvman.2011.03.038` — PMID `21514716` — soil mineral-N/microbial observations indexed by distance from tree, soil depth and season.
+- `10.1016/j.jaridenv.2008.11.007` — North Kordofan post-conversion nutrient-stock evidence; plantation history, conversion regime and subsequent cropping history remain explicit.
+
 ## Isotope observer / method-calibration donors
 
 - `10.1071/AR9940133` — Pate, Unkovich, Armstrong & Sanford 1994; reference-plant selection for `15N` natural-abundance assessment. Retained only as method/observer calibration, not as Acacia biological evidence.
