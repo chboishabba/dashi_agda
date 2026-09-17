@@ -154,7 +154,7 @@ excludedCarrierWitness =
     sameAnalyticCarrierLargeExcludedPopulation
     refl excludedPopulationDiffers
 
-ExcludedCarrierFactorisation : Set
+ExcludedCarrierFactorisation : Set₁
 ExcludedCarrierFactorisation =
   Intersection.FactorsThrough analyticSampleProjection excludedPopulationMaterial
 
@@ -196,7 +196,7 @@ decisionCarrierWitness =
     sameProcurementSurfaceStudentExcluded
     refl studentDecisionParticipationDiffers
 
-DecisionCarrierFactorisation : Set
+DecisionCarrierFactorisation : Set₁
 DecisionCarrierFactorisation =
   Intersection.FactorsThrough procurementSurfaceProjection studentDecisionParticipation
 

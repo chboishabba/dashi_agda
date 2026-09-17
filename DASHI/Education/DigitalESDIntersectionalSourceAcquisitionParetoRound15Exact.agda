@@ -181,7 +181,7 @@ hiddenPopulationWitness =
     refl
     eligiblePopulationStatesDiffer
 
-HiddenPopulationFactorisation : Set
+HiddenPopulationFactorisation : Set₁
 HiddenPopulationFactorisation =
   Intersection.FactorsThrough realisedCarrierProjection eligiblePopulationState
 

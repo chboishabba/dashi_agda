@@ -200,7 +200,7 @@ designExclusionWitness =
     sameOnlineSurfaceMateriallyExcluded
     refl participationAdequacyDiffers
 
-DesignExclusionFactorisation : Set
+DesignExclusionFactorisation : Set₁
 DesignExclusionFactorisation =
   Intersection.FactorsThrough deliverySurfaceProjection participationAdequacy
 
@@ -242,7 +242,7 @@ affectedObserverWitness =
     sameInstitutionalSurfaceAffectedVoiceAbsent
     refl affectedObserverAdequacyDiffers
 
-AffectedObserverFactorisation : Set
+AffectedObserverFactorisation : Set₁
 AffectedObserverFactorisation =
   Intersection.FactorsThrough institutionalSurfaceProjection affectedObserverAdequacy
 
