@@ -49,6 +49,24 @@ varyingCarrierTransportDonorAvailable = VaryingCarrierTransportLeanDonorPresent
 uniformGapReductionDonorAvailable : Set
 uniformGapReductionDonorAvailable = UniformGapReductionLeanDonorPresent
 
+-- Second-round transfer-operator sharpening: the continuum weld does not need
+-- one trajectory-uniform c<1.  It only consumes the per-step defect relation
+-- Delta*a_k <= 1-c_k; hence c_k may approach one at O(a_k).
+trajectoryUniformDecorrelatorConstantNotRequired :
+  UniformGap.trajectoryUniformCRequired ≡ false
+trajectoryUniformDecorrelatorConstantNotRequired =
+  UniformGap.trajectoryUniformCRequiredIsFalse
+
+perStepTransferDefectSuffices :
+  UniformGap.perStepSpectralDefectConditionSuffices ≡ true
+perStepTransferDefectSuffices =
+  UniformGap.perStepSpectralDefectConditionSufficesIsTrue
+
+literalTransferOperatorParityAvailable :
+  UniformGap.literalTransferOperatorPaymentRecorded ≡ true
+literalTransferOperatorParityAvailable =
+  UniformGap.literalTransferOperatorPaymentRecordedIsTrue
+
 f134ContinuumWeldDonorAvailable : Set
 f134ContinuumWeldDonorAvailable = F134ContinuumWeldLeanDonorPresent
 
