@@ -154,7 +154,7 @@ detectorIncidenceWitness =
     detectorSurfaceNoLanguageDisparityObserved
     refl languageGroupIncidenceReallyDiffers
 
-DetectorIncidenceFactorisation : Set
+DetectorIncidenceFactorisation : Set₁
 DetectorIncidenceFactorisation =
   Intersection.FactorsThrough coarseDetectorProjection languageGroupIncidenceDiffers
 

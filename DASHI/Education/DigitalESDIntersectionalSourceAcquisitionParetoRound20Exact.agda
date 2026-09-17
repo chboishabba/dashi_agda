@@ -147,7 +147,7 @@ participationSelectionWitness =
     sameObservedUsersNonusersConstrained
     refl nonuserConstraintDiffers
 
-ParticipationSelectionFactorisation : Set
+ParticipationSelectionFactorisation : Set₁
 ParticipationSelectionFactorisation =
   Intersection.FactorsThrough observedDigitalUserProjection nonuserConstraintMaterial
 
@@ -190,7 +190,7 @@ courseFilterWitness =
     sameRetainedCoursesExcludedContextDifferent
     refl excludedCoursePortabilityDiffers
 
-CourseFilterFactorisation : Set
+CourseFilterFactorisation : Set₁
 CourseFilterFactorisation =
   Intersection.FactorsThrough retainedCourseProjection excludedCoursePortabilityAdequate
 

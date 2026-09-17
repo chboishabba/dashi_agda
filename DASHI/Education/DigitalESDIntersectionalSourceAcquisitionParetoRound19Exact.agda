@@ -142,7 +142,7 @@ respondentCarrierWitness =
     sameSurveySurfaceNonrespondentsDifferent
     refl nonrespondentBehaviourReallyDiffers
 
-RespondentCarrierFactorisation : Set
+RespondentCarrierFactorisation : Set₁
 RespondentCarrierFactorisation =
   Intersection.FactorsThrough observedSurveyProjection nonrespondentBehaviourMateriallyDiffers
 
@@ -185,7 +185,7 @@ modeParticipationWitness =
     assignedModeLowParticipation
     refl realisedParticipationDiffers
 
-ModeParticipationFactorisation : Set
+ModeParticipationFactorisation : Set₁
 ModeParticipationFactorisation =
   Intersection.FactorsThrough assignedModeProjection realisedParticipationAdequate
 
