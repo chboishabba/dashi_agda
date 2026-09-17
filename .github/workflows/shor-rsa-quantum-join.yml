@@ -22,6 +22,8 @@ on:
       - 'DASHI/Crypto/ShorConcreteExamples.agda'
       - 'DASHI/Crypto/ShorProgram.agda'
       - 'DASHI/ComputerScience/QuantumExecutionFibreAdapterExact.agda'
+      - 'DASHI/ComputerScience/ShorPowModOracleExecutionFibreExact.agda'
+      - 'DASHI/ComputerScience/ShorPowModOracleExecutionFibreRegression.agda'
       - 'DASHI/ComputerScience/ShorCertifiedRunExecutionFibreExact.agda'
       - 'DASHI/ComputerScience/ShorCertifiedRunExecutionFibreRegression.agda'
       - 'DASHI/ComputerScience/FactorProducerReceiptExact.agda'
