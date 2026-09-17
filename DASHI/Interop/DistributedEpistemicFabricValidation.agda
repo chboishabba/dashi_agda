@@ -9,7 +9,6 @@ import DASHI.Interop.DistributedEpistemicPlaneSeparationExact as Planes
 import DASHI.Interop.DistributedProofProducerABIExact as Producer
 import DASHI.Economics.SituatedInformationAccessFabricExact as Access
 
--- RED-first imports for the approved storage/history/projection refinement.
 import DASHI.Interop.DistributedEvidenceHistoryProjectionExact as History
 import DASHI.Interop.ImmutableEvidenceSupersessionExact as Supersession
 import DASHI.Interop.ReplicationCapabilityNonCollapseExact as Replication
@@ -76,6 +75,78 @@ publicPathRetainsCommonsLane :
 publicPathRetainsCommonsLane = refl
 
 ------------------------------------------------------------------------
+-- Evidence/history/projection positive construction.
+------------------------------------------------------------------------
+
+derivedViewRetainsSource :
+  History.sourceRetained History.exampleAuditableDerivedView ≡ true
+derivedViewRetainsSource = refl
+
+derivedViewRetainsObservation :
+  History.observationRetained History.exampleAuditableDerivedView ≡ true
+derivedViewRetainsObservation = refl
+
+derivedViewRetainsHistory :
+  History.historyRetained History.exampleAuditableDerivedView ≡ true
+derivedViewRetainsHistory = refl
+
+derivedViewDoesNotPromoteTruth :
+  History.promotesClaimTruth History.exampleAuditableDerivedView ≡ false
+derivedViewDoesNotPromoteTruth = refl
+
+projectionIsConsumerRelative :
+  History.consumerIdentity History.exampleProjection ≡ "consumer:example"
+projectionIsConsumerRelative = refl
+
+------------------------------------------------------------------------
+-- Immutable supersession positive construction.
+------------------------------------------------------------------------
+
+supersessionKeepsEarlierSource :
+  Supersession.earlierIdentityRetained Supersession.fixtureSupersessionReceipt ≡ true
+supersessionKeepsEarlierSource = refl
+
+supersessionKeepsLaterSource :
+  Supersession.laterIdentityRetained Supersession.fixtureSupersessionReceipt ≡ true
+supersessionKeepsLaterSource = refl
+
+supersessionRelationExplicit :
+  Supersession.relationExplicit Supersession.fixtureSupersessionReceipt ≡ true
+supersessionRelationExplicit = refl
+
+supersessionDoesNotPromoteTruth :
+  Supersession.promotesTruth Supersession.fixtureSupersessionReceipt ≡ false
+supersessionDoesNotPromoteTruth = refl
+
+------------------------------------------------------------------------
+-- Replication/capability taxonomy pins.
+------------------------------------------------------------------------
+
+bitTorrentIsBulkDistribution :
+  Replication.primaryRole Replication.bitTorrentRole ≡ Replication.immutableBulkDistribution
+bitTorrentIsBulkDistribution = refl
+
+ipfsIsLinkedObjectGraph :
+  Replication.primaryRole Replication.ipfsRole ≡ Replication.immutableLinkedObjectGraph
+ipfsIsLinkedObjectGraph = refl
+
+hypercoreAutobaseIsDeterministicMultiWriterProjection :
+  Replication.primaryRole Replication.hypercoreAutobaseRole ≡ Replication.deterministicMultiWriterProjection
+hypercoreAutobaseIsDeterministicMultiWriterProjection = refl
+
+peerbitIsDistributedDiscoveryQuery :
+  Replication.primaryRole Replication.peerbitRole ≡ Replication.distributedDiscoveryQuery
+peerbitIsDistributedDiscoveryQuery = refl
+
+automergeYjsIsSemanticCRDTState :
+  Replication.primaryRole Replication.automergeYjsRole ≡ Replication.semanticCRDTState
+automergeYjsIsSemanticCRDTState = refl
+
+localDatabaseIsMaterialisation :
+  Replication.primaryRole Replication.localDatabaseRole ≡ Replication.localQueryMaterialisation
+localDatabaseIsMaterialisation = refl
+
+------------------------------------------------------------------------
 -- The following theorem references pin the non-collapse API itself.  If a
 -- future refactor removes one of these authority boundaries the focused root
 -- stops typechecking rather than silently weakening the architecture.
@@ -104,3 +175,33 @@ machineRoleFirewall = Access.machineClientDoesNotImplyCommercialRole
 
 settledContractFirewall : Access.SettledContractCreatesTruth → ⊥
 settledContractFirewall = Access.settledContractDoesNotCreateTruth
+
+byteAvailabilityProvenanceFirewall : History.ByteAvailabilityCreatesWriterProvenance → ⊥
+byteAvailabilityProvenanceFirewall = History.byteAvailabilityIsNotWriterProvenance
+
+projectionEvidenceFirewall : History.DeterministicProjectionCreatesSourceEvidence → ⊥
+projectionEvidenceFirewall = History.deterministicProjectionIsNotSourceEvidence
+
+materialisedHistoryFirewall : History.MaterialisedViewIsReplicatedHistory → ⊥
+materialisedHistoryFirewall = History.materialisedViewIsNotReplicatedHistory
+
+supersessionMutationFirewall : Supersession.SupersessionMutatesEarlierBytes → ⊥
+supersessionMutationFirewall = Supersession.supersessionDoesNotMutateEarlierBytes
+
+supersessionInvalidationFirewall : Supersession.SupersessionInvalidatesEarlierSource → ⊥
+supersessionInvalidationFirewall = Supersession.supersessionDoesNotInvalidateEarlierSource
+
+revisionFloatingFirewall : Supersession.ObservationCanFloatAcrossRevision → ⊥
+revisionFloatingFirewall = Supersession.observationDoesNotFloatAcrossRevision
+
+p2pAuthorityFirewall : Replication.PeerToPeerImpliesDecentralizedAuthority → ⊥
+p2pAuthorityFirewall = Replication.peerToPeerDoesNotImplyDecentralizedAuthority
+
+crdtEpistemicFirewall : Replication.CRDTConvergenceImpliesEpistemicAgreement → ⊥
+crdtEpistemicFirewall = Replication.crdtConvergenceDoesNotImplyEpistemicAgreement
+
+signedHeadMultiWriterFirewall : Replication.SignedHeadImpliesMultiWriterConvergence → ⊥
+signedHeadMultiWriterFirewall = Replication.signedHeadDoesNotImplyMultiWriterConvergence
+
+queryTruthFirewall : Replication.QueryDiscoveryImpliesClaimTruth → ⊥
+queryTruthFirewall = Replication.queryDiscoveryDoesNotImplyClaimTruth
