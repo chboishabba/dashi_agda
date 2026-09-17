@@ -76,8 +76,7 @@ record SourceAuditAdmission (source : Attr.AttributedSource) : Set where
   field
     claimCeilingReading : String
     completeCoreCoverage : CompleteCoreAxisCoverage source
-    hyperfabric : Hyperfabric.SourceAuditHyperfabric
-    hyperfabricSourceMatches : Hyperfabric.source hyperfabric ≡ source
+    hyperfabric : Hyperfabric.SourceAuditHyperfabric source
     standardsApplicability : List StandardApplicabilityDeclaration
     standardsApplicabilityDeclared : Bool
     standardsApplicabilityDeclaredIsTrue : standardsApplicabilityDeclared ≡ true
@@ -98,17 +97,15 @@ mkSourceAuditAdmission :
   (source : Attr.AttributedSource) →
   String →
   CompleteCoreAxisCoverage source →
-  (hyperfabric : Hyperfabric.SourceAuditHyperfabric) →
-  Hyperfabric.source hyperfabric ≡ source →
+  Hyperfabric.SourceAuditHyperfabric source →
   List StandardApplicabilityDeclaration →
   String →
   SourceAuditAdmission source
-mkSourceAuditAdmission source ceiling coverage hyperfabric sameSource standards version =
+mkSourceAuditAdmission source ceiling coverage hyperfabric standards version =
   source-audit-admission
     ceiling
     coverage
     hyperfabric
-    sameSource
     standards
     true refl
     true refl
@@ -156,6 +153,8 @@ record SourceAuditAdmissionBoundary : Set where
     noAuthoritativeGrandTotalIsTrue : noAuthoritativeGrandTotal ≡ true
     admissionEqualsClaimAuthority : Bool
     admissionEqualsClaimAuthorityIsFalse : admissionEqualsClaimAuthority ≡ false
+    childSourceIdentityWeldedByType : Bool
+    childSourceIdentityWeldedByTypeIsTrue : childSourceIdentityWeldedByType ≡ true
 
 open SourceAuditAdmissionBoundary public
 
@@ -165,3 +164,4 @@ canonicalSourceAuditAdmissionBoundary = source-audit-admission-boundary
   true refl
   true refl
   false refl
+  true refl
