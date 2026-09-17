@@ -21,6 +21,9 @@ parkhurst2022Pinned = refl
 parkhurstPMIDPinned : G.parkhurst2022PMID ≡ "35080806"
 parkhurstPMIDPinned = refl
 
+johnson2025Pinned : G.johnsonEtAl2025DOI ≡ "10.1016/j.ecoleng.2025.107724"
+johnson2025Pinned = refl
+
 soilNotFlora : G.soilRecoveryImpliesFloristicRecovery G.canonicalGrasslandBoundary ≡ false
 soilNotFlora = refl
 
@@ -32,3 +35,19 @@ seedContextRetained = refl
 
 presentVegetationNotEraseP : G.presentVegetationErasesAgriculturalPLegacy G.canonicalGrasslandBoundary ≡ false
 presentVegetationNotEraseP = refl
+
+regulatoryTargetNotReferenceTrajectory :
+  G.regulatoryTargetAttainmentImpliesSelfSustainingReferenceTrajectory G.canonicalGrasslandBoundary ≡ false
+regulatoryTargetNotReferenceTrajectory = refl
+
+canopyTargetNotNativeGrassRecovery :
+  G.woodyCanopyTargetAttainmentImpliesNativeGrassRecovery G.canonicalGrasslandBoundary ≡ false
+canopyTargetNotNativeGrassRecovery = refl
+
+exoticCompetitionRetained :
+  G.exoticPastureCompetitionMayBeDropped G.canonicalGrasslandBoundary ≡ false
+exoticCompetitionRetained = refl
+
+threeYearsNotLongTerm :
+  G.thirtySixMonthSuccessImpliesLongTermTrajectorySuccess G.canonicalGrasslandBoundary ≡ false
+threeYearsNotLongTerm = refl
