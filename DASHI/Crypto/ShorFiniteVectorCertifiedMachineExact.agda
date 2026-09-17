@@ -43,7 +43,7 @@ compileFiniteVectorCertifiedMachine :
     (support : Supported.CoefficientSupportAuthority A) →
   Supported.FiniteVectorSupportedObservationABI P qNonZero A support →
   Shor.ShorPeriodFindingMachine (Order.asHiddenPeriodProblem P)
-compileFiniteVectorCertifiedMachine P qNonZero A I support abi =
+compileFiniteVectorCertifiedMachine {a = a} P qNonZero A I support abi =
   Certified.compileCertifiedFourierSamplingMachine
     P
     prefix
@@ -54,7 +54,7 @@ compileFiniteVectorCertifiedMachine P qNonZero A I support abi =
       VectorPrefix.compileFiniteVectorExecutionPrefix
         qNonZero
         (PowModWeld.orderModulusNonZero P)
-        _ A I
+        a A I
 
 record ShorFiniteVectorCertifiedMachineBoundary : Set where
   constructor shorFiniteVectorCertifiedMachineBoundary
