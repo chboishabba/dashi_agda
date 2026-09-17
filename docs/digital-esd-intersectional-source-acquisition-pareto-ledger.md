@@ -75,6 +75,15 @@ Philosophy is a probe generator here, not an empirical separator.
 - Kelly McConvey; Shion Guha; Anastasia Kuzminykh, 2023, DOI `10.1145/3544548.3580658`, arXiv `2302.05839` — review of 62 higher-education algorithm papers showing increasing use of personal/protected attributes and opaque methods alongside sparse systematic human-centred/participatory design. Representation in input features != representation in design authority.
 - Laia Lluch Molins; Carles Lindín Soriano, 2026, DOI `10.3389/feduc.2026.1913278` — 1,020-student study of learning-analytics expectations; technical access to analytics != learner-recognised capacity/entitlement to interpret and act on those data.
 
+## Round 8 — material lifecycle with worker/community observers
+
+- Matthew Akormedi; Emmanuel Asampong; Julius N. Fobil, 2013, DOI `10.1179/2049396713Y.0000000034`, PMID `24588034` — direct interviews with informal e-waste workers at Agbogbloshie on working conditions, exposures and worker-created mutual support.
+- Emily A. Yu; Matthew Akormedi; Emmanuel Asampong; Christian G. Meyer; Julius N. Fobil, 2017, DOI `10.1177/1757975916631523`, PMID `27271535` — twenty Agbogbloshie workers on hazard knowledge and preferred livelihood alternatives. Knowledge != realised capacity to exit.
+- Nicolás Labra Cataldo; Alejandro Gallego-Schmid; Carly McLachlan, 2025, DOI `10.1080/15487733.2025.2478697` — participant observation/interviews across formal and informal e-waste labour/value-chain positions in metropolitan Santiago.
+- Benjamin K. Sovacool, 2021, DOI `10.1016/j.exis.2020.11.018` — DRC fieldwork with miners, traders and community members plus mine/trading-site visits; power, gender and child-labour coordinates remain visible.
+
+Round 8 pays the previously weak **material-lifecycle × directly situated worker/community observer** fibre at a contextual/mechanism level. It does **not** pay a same-object supply-chain claim for any named school, device, platform or AI service.
+
 ## Philosophy/audit cross-pollination
 
 `DigitalESDPhilosophySeededAcquisitionProbeExact` keeps the philosophy gamut as typed probe generation rather than a master ontology:
@@ -92,7 +101,7 @@ Philosophy is a probe generator here, not an empirical separator.
 
 Every probe requires an independent empirical/source separator. These audit operators do not create empirical causes, population laws, oppression findings, political conclusions, mandatory new axes or philosopher-owned DASHI theorems.
 
-## Current Pareto residuals after Round 7
+## Current Pareto residuals after Round 8
 
 A new source acquisition round must materially discriminate one or more of these; otherwise it is dominated by the current frontier:
 
@@ -100,12 +109,12 @@ A new source acquisition round must materially discriminate one or more of these
 2. **appeal/correction/contestability after classification** — evidence that affected learners can inspect, challenge or correct a risk/engagement/assessment label and what happens when they do;
 3. **intersectional false-positive/false-negative incidence** — disability × race/class/language/gender or other joint strata rather than marginal bias labels alone;
 4. **platform migration/vendor exit × accessibility continuity** — actual migration/upgrade/exit evidence retaining assistive access, user data and learning continuity;
-5. **material lifecycle × directly affected worker/community observers** — extraction/fabrication/e-waste evidence with those populations actually observed, not generic footprint totals;
+5. **same-object material supply-chain weld** — connect a named Digital-ESD device/service procurement or deployment to its actual extraction/fabrication/end-of-life chain before importing situated worker/community evidence into that deployment claim;
 6. **surveillance/privacy × younger learners × disability/minoritized status** with first-person or directly situated evidence;
 7. **decision authority after participation/co-design** — evidence that participant recommendations actually change procurement, policy, model design or deployment;
 8. **downstream data repurposing with affected-user evidence** — publishers/employers/regulators/advertisers/product-development uses tied to the same student/staff data object and a situated observer of consequences.
 
-Round 7 substantially pays the weaker residual “model error may reflect omitted situated context”; therefore another generic interpretability/error paper is now dominated unless it adds contestability, intersectional incidence or a materially new observer.
+Round 7 substantially pays the weaker residual “model error may reflect omitted situated context”; Round 8 substantially pays “material impacts need directly situated lifecycle observers.” Another generic interpretability/error paper or generic e-waste/critical-minerals footprint paper is therefore dominated unless it adds contestability, intersectional incidence, same-object supply-chain identity or a materially new observer.
 
 ## Policy/practice comparators retained outside the empirical frontier
 
