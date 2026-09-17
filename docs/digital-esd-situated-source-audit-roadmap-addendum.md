@@ -113,18 +113,18 @@ Copyrighted ISO text is not reproduced. Only public bibliographic identity/scope
 
 ## Current integration debt
 
-Fresh comparison after the situated-audit tranche:
+Fresh comparison after the same-object audit repair:
 
 ```text
 agent/digital-esd-paper-methodology-primary-sources
-  261 commits ahead of master
+  264 commits ahead of master
   1318 commits behind master
   merge base: edead965730f745c4deb9710ef5d7750c371999a
-  observed master: ada78badd6ba1c2e24279e1ab2e465a6bf1914e1
+  observed master: f35fe397801dc4f5f4c7daf954ae1f481398ddd9
 ```
 
 This large divergence does not invalidate the source-written architecture, but current-master integration is unpaid. Recent PRs #984 and #991 contain relevant newer attribution/PNF/Ibrahim/re-entry machinery and should be treated as transplant donors, not silently assumed present on this branch.
 
 ## Certification boundary
 
-The new audit owners are source-written. This connector-only session has not produced an exact-head Agda/Nix kernel receipt. Therefore no Agda GREEN, build-pass or kernel-certified status is claimed.
+The new audit owners are source-written. This connector-only session has not produced an exact-head Agda/Nix kernel receipt. The container also could not resolve `github.com`, so no local branch checkout/static-script run could be performed there. Therefore no Agda GREEN, build-pass or kernel-certified status is claimed.
