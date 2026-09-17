@@ -1,1 +1,0 @@
-This implementation branch is periodic-B only. It does not promote whole-space A, and it does not use forced C/D as proof payment. Any later B->A reuse requires an explicit typed portability theorem.
