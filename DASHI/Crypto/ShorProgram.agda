@@ -3,8 +3,12 @@ module DASHI.Crypto.ShorProgram where
 import DASHI.Algebra.Quantum.FiniteQuantumRegister
 import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
 import DASHI.Algebra.Quantum.GeneralShor
+import DASHI.Algebra.Quantum.ShorReversiblePowModOracleExact
+import DASHI.Algebra.Quantum.ShorReversiblePowModOracleRegression
 import DASHI.Crypto.FiniteFactorArithmetic
 import DASHI.Crypto.ShorOrderFinding
+import DASHI.Crypto.ShorReversiblePowModOracleWeldExact
+import DASHI.Crypto.ShorReversiblePowModOracleWeldRegression
 import DASHI.Crypto.ShorFactoring
 import DASHI.Crypto.ShorQuantumRunFactorTransportExact
 import DASHI.Crypto.ShorQuantumRunFactorTransportRegression
