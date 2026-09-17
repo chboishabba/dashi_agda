@@ -1,0 +1,1 @@
+No theorem may pay S2b2d1b2 unless it is attached to the literal fixed-output physical triad fibre and preserves the signed four-helicity recombination used by the downstream consumer.
