@@ -1,0 +1,17 @@
+module DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionEverything where
+
+-- Focused append-only source-acquisition lineage for the Cohn institutional
+-- epistemics lane. This aggregate avoids rewriting the large Culture.Everything
+-- rollup while #981 is being reconciled with current master.
+
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyTraversalExact
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyTraversalRegression
+
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionExact
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionRegression
+
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionTwoExact
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionTwoRegression
+
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionThreeExact
+import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionThreeRegression
