@@ -1,0 +1,10 @@
+module DASHI.Education.DigitalESDDatabaseSearchProtocolV2Regression where
+
+open import DASHI.Core.Prelude
+import DASHI.Education.DigitalESDDatabaseSearchProtocolV2Exact as V2
+
+v2Boundary = V2.canonicalSearchProtocolV2Boundary
+v2IntersectionalChallenge = V2.canonicalV2IntersectionalExtractionChallenge
+politicalEconomyBlock = V2.politicalEconomyBlock
+socialProvisioningBlock = V2.socialProvisioningBlock
+maintenanceDurabilityBlock = V2.maintenanceDurabilityBlock
