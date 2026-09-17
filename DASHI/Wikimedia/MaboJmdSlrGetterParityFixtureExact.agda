@@ -57,11 +57,11 @@ maboJmdGetterAbiFixture =
 record MaboGetterParityFixture : Set where
   constructor mabo-getter-parity-fixture
   field
-    sourceTripleReference : String
-    sourceRevisionReference : String
-    jmdMachineCommitReference : String
-    leanGetter : LeanGetterObservation
-    slrGetter : SlrGetterObservation
+    fixtureSourceTripleReference : String
+    fixtureSourceRevisionReference : String
+    fixtureJmdMachineCommitReference : String
+    fixtureLeanGetter : LeanGetterObservation
+    fixtureSlrGetter : SlrGetterObservation
     fixtureUsesExactMaboPropertyTriple : Bool
     sameNormalizedObservationByConstruction : Bool
     runtimeParityObserved : Bool
