@@ -9,6 +9,10 @@ structuralExclusionHasNeighbour :
   Reuse.structuralEpistemicExclusionStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.existingNeighbourConsumer
 structuralExclusionHasNeighbour = refl
 
+epistemicLabourHasNeighbour :
+  Reuse.epistemicLabourStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.existingNeighbourConsumer
+epistemicLabourHasNeighbour = refl
+
 participationPowerHasNeighbour :
   Reuse.participationPowerStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.existingNeighbourConsumer
 participationPowerHasNeighbour = refl
@@ -21,6 +25,14 @@ outsiderWithinHasNeighbour :
   Reuse.outsiderWithinStandpointStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.existingNeighbourConsumer
 outsiderWithinHasNeighbour = refl
 
+epistemicActivismHasExactApplicationOwner :
+  Reuse.epistemicActivismStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.exactCanonicalOwner
+epistemicActivismHasExactApplicationOwner = refl
+
+relationalResearchBurdenHasNeighbour :
+  Reuse.relationalResearchBurdenStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.existingNeighbourConsumer
+relationalResearchBurdenHasNeighbour = refl
+
 governanceHasExactOwner :
   Reuse.governancePermissionStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.exactCanonicalOwner
 governanceHasExactOwner = refl
@@ -29,18 +41,14 @@ sovereigntyHasExactOwner :
   Reuse.sovereigntyStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.exactCanonicalOwner
 sovereigntyHasExactOwner = refl
 
-epistemicLabourStillOpen :
-  Reuse.epistemicLabourStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.uninstantiatedCandidate
-epistemicLabourStillOpen = refl
-
-epistemicActivismStillOpen :
-  Reuse.epistemicActivismStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.uninstantiatedCandidate
-epistemicActivismStillOpen = refl
-
-relationalResearchBurdenStillOpen :
-  Reuse.relationalResearchBurdenStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.uninstantiatedCandidate
-relationalResearchBurdenStillOpen = refl
-
 neighbourDoesNotCreateIdentity :
   Reuse.neighbouringConsumerDefinitionallyEqualsSourceCoordinate Reuse.canonicalExpandedConsumerReuseBoundary ≡ false
 neighbourDoesNotCreateIdentity = refl
+
+genericBurdenDoesNotBecomeEpistemicLabour :
+  Reuse.genericBurdenGeometryEqualsEpistemicLabour Reuse.canonicalExpandedConsumerReuseBoundary ≡ false
+genericBurdenDoesNotBecomeEpistemicLabour = refl
+
+genericBurdenDoesNotBecomeIndigenousResearchEthics :
+  Reuse.genericBurdenGeometryEqualsIndigenousRelationalEthics Reuse.canonicalExpandedConsumerReuseBoundary ≡ false
+genericBurdenDoesNotBecomeIndigenousResearchEthics = refl
