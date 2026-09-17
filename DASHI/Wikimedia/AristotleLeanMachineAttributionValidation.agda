@@ -1,6 +1,6 @@
 module DASHI.Wikimedia.AristotleLeanMachineAttributionValidation where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.AttributedSourceCore as Source
