@@ -45,6 +45,34 @@ validationWrongTypeFailsClosed :
   wrongTypeFailsClosed canonicalReviewedCampaignBoundary ≡ true
 validationWrongTypeFailsClosed = refl
 
+validationReviewedRelationReplaysProviderProperty :
+  boundedReviewedRelationReplaysExactProviderProperty canonicalReviewedCampaignBoundary ≡ true
+validationReviewedRelationReplaysProviderProperty = refl
+
+validationSameObjectPaymentIsNotParentExpansionRelation :
+  sameObjectPaymentEqualsNewRelatedObject canonicalReviewedCampaignBoundary ≡ false
+validationSameObjectPaymentIsNotParentExpansionRelation = refl
+
+validationAuthorityFamilyRouteDoesNotCreateLegalAuthority :
+  authorityFamilyRouteCreatesLegalAuthority canonicalReviewedCampaignBoundary ≡ false
+validationAuthorityFamilyRouteDoesNotCreateLegalAuthority = refl
+
+validationP710ReplayProperty :
+  providerPropertyReference p710ProviderReplay ≡ "P710"
+validationP710ReplayProperty = refl
+
+validationP710ReplayRole :
+  reviewedRelationRoleReference p710ProviderReplay ≡ "context:wikidata:participant"
+validationP710ReplayRole = refl
+
+validationP4006ReplayProperty :
+  providerPropertyReference p4006ProviderReplay ≡ "P4006"
+validationP4006ReplayProperty = refl
+
+validationP4006ReplayRole :
+  reviewedRelationRoleReference p4006ProviderReplay ≡ "context:wikidata:overrules"
+validationP4006ReplayRole = refl
+
 validationCandidateOnly :
   campaignCandidateOnly canonicalReviewedCampaignBoundary ≡ true
 validationCandidateOnly = refl
