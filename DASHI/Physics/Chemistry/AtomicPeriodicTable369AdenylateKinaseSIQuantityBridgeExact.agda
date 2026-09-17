@@ -29,6 +29,9 @@ adkArticleDOI = Attr.articleDOI
 angstromScale : SI.DecimalScale
 angstromScale = SI.tenTo (negsuc 9)       -- 10^-10 metre
 
+tenthAngstromScale : SI.DecimalScale
+tenthAngstromScale = SI.tenTo (negsuc 10) -- 10^-11 metre
+
 picosecondScale : SI.DecimalScale
 picosecondScale = SI.tenTo (negsuc 11)    -- 10^-12 second
 
@@ -45,10 +48,9 @@ dLnLowerSI = SI.quantity false (Protocol.dLnLowerAngstrom protocol)
 dLnUpperSI : SI.Quantity SI.Length angstromScale
 dLnUpperSI = SI.quantity false (Protocol.dLnUpperAngstrom protocol)
 
-dLnGaussianWidthSI : SI.Quantity SI.Length angstromScale
+dLnGaussianWidthSI : SI.Quantity SI.Length tenthAngstromScale
 dLnGaussianWidthSI =
-  -- The source stores tenths of an angstrom, so use one extra decimal digit.
-  SI.quantity false (Protocol.dLnGaussianWidthTenthsAngstrom protocol * 1)
+  SI.quantity false (Protocol.dLnGaussianWidthTenthsAngstrom protocol)
 
 coordinateSaveTimeSI : SI.Quantity SI.Time picosecondScale
 coordinateSaveTimeSI = SI.quantity false (Protocol.coordinateSavePicoseconds protocol)
