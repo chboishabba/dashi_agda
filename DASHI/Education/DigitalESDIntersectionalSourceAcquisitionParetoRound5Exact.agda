@@ -121,7 +121,7 @@ prinslooCandidate = mkRound5Candidate
 
 nicholsDixonRomanSource : Attr.AttributedSource
 nicholsDixonRomanSource = Attr.mkDOISource
-  "T. Philip Nichols; Ezekiel Dixon-Roman"
+  "T. Philip Nichols; Ezekiel Dixon-Román"
   "Platform Governance and Education Policy: Power and Politics in Emerging Edtech Ecologies"
   "Educational Evaluation and Policy Analysis 46(2)"
   "2024"
@@ -145,7 +145,7 @@ nicholsCandidate = mkRound5Candidate
 
 vibergEtAlSource : Attr.AttributedSource
 vibergEtAlSource = Attr.mkDOISource
-  "Olga Viberg; Rene F. Kizilcec; Ioana Jivet; Alejandra Martinez Mones; Alice Oh; Chantal Mutimukwe; Stefan Hrastinski; Maren Scheffel"
+  "Olga Viberg; René F. Kizilcec; Ioana Jivet; Alejandra Martínez Monés; Alice Oh; Chantal Mutimukwe; Stefan Hrastinski; Maren Scheffel"
   "Cultural differences in students' privacy concerns in learning analytics across Germany, South Korea, Spain, Sweden, and the United States"
   "Computers in Human Behavior Reports 14, 100416"
   "2024"
