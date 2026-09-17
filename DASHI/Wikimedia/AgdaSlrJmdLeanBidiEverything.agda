@@ -21,6 +21,7 @@ open import DASHI.Wikimedia.JmdLeanGoldenAbiAttachmentExact public
 open import DASHI.Wikimedia.SlrLeanChallengeBidiExact public
 open import DASHI.Wikimedia.MaboLeanSlrP7dBidiBridgeExact public
 open import DASHI.Wikimedia.MaboJmdSlrGetterParityFixtureExact public
+open import DASHI.Wikimedia.MaboSlrLeanChallengeReplayFixtureExact public
 
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
 import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact
