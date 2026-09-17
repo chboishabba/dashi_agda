@@ -18,8 +18,23 @@ t1NotT2 = refl
 pioneerNotEndpoint : H.pioneerEstablishmentImpliesDesiredSuccessionalEndpoint H.canonicalRegenerationHyperfabricBoundary ≡ false
 pioneerNotEndpoint = refl
 
+pioneerDominanceNotRelease : H.pioneerDominanceImpliesSuccessfulSuccessionalRelease H.canonicalRegenerationHyperfabricBoundary ≡ false
+pioneerDominanceNotRelease = refl
+
+richnessNotComposition : H.referenceLikeRichnessImpliesReferenceLikeComposition H.canonicalRegenerationHyperfabricBoundary ≡ false
+richnessNotComposition = refl
+
+chronosequenceNotCausalTrajectory : H.chronosequenceAgeGradientImpliesLongitudinalCausalRecovery H.canonicalRegenerationHyperfabricBoundary ≡ false
+chronosequenceNotCausalTrajectory = refl
+
+microbiomeNotWholeEcosystem : H.microbiomeReferenceSimilarityImpliesWholeEcosystemRecovery H.canonicalRegenerationHyperfabricBoundary ≡ false
+microbiomeNotWholeEcosystem = refl
+
+disturbanceRegimeRetained : H.disturbanceRegimeMustRemainIndexed H.canonicalRegenerationHyperfabricBoundary ≡ true
+disturbanceRegimeRetained = refl
+
 nurseNotNativeRecovery : H.temporaryNurseFunctionImpliesNativeCommunityRecovery H.canonicalRegenerationHyperfabricBoundary ≡ false
-temporaryNurseNotNativeRecovery = refl
+nurseNotNativeRecovery = refl
 
 sourceIdentityRetained : H.sourceSystemIdentityMustRemainIndexed H.canonicalRegenerationHyperfabricBoundary ≡ true
 sourceIdentityRetained = refl
