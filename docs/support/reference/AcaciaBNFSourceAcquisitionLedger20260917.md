@@ -21,6 +21,7 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1016/j.foreco.2010.11.011`
 - `10.1016/j.jplph.2010.10.011` — PMID `21211863`
 - `10.1080/15324982.2013.784377`
+- `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan; DOI verified against the University of Helsinki research record and publisher metadata.
 - existing #980 dryland water-carbon source: `10.1016/j.jaridenv.2017.12.004`
 
 ## Nitrogenase / situated-protein donors
