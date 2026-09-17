@@ -219,7 +219,7 @@ data ConfigurationDeterminesMechanicsContext : Set where
 data RegistryIdentityDeterminesAtomicMassConvention : Set where
 data StandardAtomicWeightIsExactIsotopeMass : Set where
 data PDBIdentityCreatesCoordinates : Set where
-\data DOIIdentityCreatesAtomicMassValue : Set where
+data DOIIdentityCreatesAtomicMassValue : Set where
 
 configurationDoesNotDetermineMechanics : ConfigurationDeterminesMechanicsContext → ⊥
 configurationDoesNotDetermineMechanics ()
