@@ -25,6 +25,11 @@ Every scientific production owner attaches DOI metadata directly to an Agda sour
 - Githae et al. 2013 — DOI `10.1080/15324982.2013.784377` — variety/site-indexed foliar `15N` fixation estimates with nodule observations kept separate.
 - Raddad et al. 2005 — DOI `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan; provenance and age remain explicit coordinates and the source's above-ground foliage fixed-N contribution is retained as plant-level evidence rather than direct molecular flux.
 - Abaker et al. 2018 — DOI `10.7717/peerj.5232`; PMID `30018862`; PMCID `PMC6044267` — soil nutrient/SOC and foliar isotope evidence; source interpretation does not support important BNF contribution to plantation soil N in that Sudan system.
+- Isaac, Hinsinger & Harmand 2012 — DOI `10.1016/j.scitotenv.2011.12.071`; PMID `22446108` — controlled Acacia-to-wheat below-ground N-transfer evidence indexed by phosphorus, root-contact regime and observation time.
+- Raddad et al. 2006 — DOI `10.1007/s10457-006-9009-6` — four-year Blue Nile treatment nutrient budgets; reported N balance varies by system and omits below-ground tree biomass.
+- Deans et al. 1999 — DOI `10.1016/S0378-1127(99)00063-8` — 3–18 year Senegal fallow nutrient accumulation with biomass/fodder export retained as a nutrient-budget coordinate.
+- Fall et al. 2012 — DOI `10.1016/j.jenvman.2011.03.038`; PMID `21514716` — mineral-N/microbial observations indexed by distance from tree, soil depth and season.
+- El Tahir et al. 2009 — DOI `10.1016/j.jaridenv.2008.11.007` — post-conversion North Kordofan nutrient-stock evidence retaining prior plantation state, conversion regime and subsequent cropping history.
 
 ## Measurement-method donor retained
 
@@ -58,7 +63,14 @@ The source-written tranche explicitly blocks:
 - balanced stoichiometry => in-vivo fixed-N flux;
 - fixed-N flux => plant assimilation;
 - plant assimilation => ecosystem soil-N outcome;
-- soil-N outcome => restoration/deployment authority;
+- plant fixed-N contribution => interplant N transfer;
+- interplant N transfer => positive field N balance;
+- above-ground nutrient budget => whole-system nutrient balance;
+- positive field N balance => fertilizer substitution;
+- fertilizer substitution => restoration/deployment authority;
+- soil mineral-N observation => context-free scalar outcome independent of distance/depth/season;
+- prior plantation nutrient accumulation => persistent nutrient stock following land-use conversion;
+- present land-cover label => sufficient history for a nutrient-stock consumer;
 - Lotus/barley receptor result => Acacia same-object mechanism;
 - Azotobacter FeSII protection => Acacia nodule protection mechanism;
 - Abaker/Berninger/Starr 2018 dryland hydrology DOI `10.1016/j.jaridenv.2017.12.004` => BNF measurement;
@@ -67,6 +79,8 @@ The source-written tranche explicitly blocks:
 - raw plant `delta-15N` => Ndfa without the reference/baseline observer context;
 - reference-plant/method calibration donor => Acacia biological evidence;
 - foliar `15N`/Ndfa estimate => direct molecular nitrogenase flux or whole-season ecosystem N balance.
+
+The generic nitrogenase dependency ladder is not mutated by these acquisitions. In particular, field budget evidence does not close generic `seasonalCropNDemand` or `avoidedMineralN`.
 
 ## Certification status
 
