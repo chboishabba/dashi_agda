@@ -1,0 +1,15 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound7Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound7Exact as Round7
+
+candidateStillNotIncluded : Round7.Round7CandidateCreatesIncludedStudy → ⊥
+candidateStillNotIncluded = Round7.round7CandidateDoesNotCreateIncludedStudy
+
+modelErrorNotStudentDeficit : Round7.PredictionErrorCreatesStudentDeficitFact → ⊥
+modelErrorNotStudentDeficit = Round7.predictionErrorDoesNotCreateStudentDeficitFact
+
+technicalAccessNotAgency : Round7.TechnicalAccessibilityCreatesDataAgency → ⊥
+technicalAccessNotAgency = Round7.technicalAccessibilityDoesNotCreateDataAgency
