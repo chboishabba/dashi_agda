@@ -44,3 +44,12 @@ quantumShorFactorFromRecoveredOrder :
   Σ Nat (λ d → FactorCertificate N d)
 quantumShorFactorFromRecoveredOrder P R =
   extractCertifiedFactor (quantumRecoveredOrderSplit P R)
+
+quantumRecoveredOrderFactorAgreesWithClassical :
+  ∀ {N} →
+  (P : ShorFactoringProblem N) →
+  (R : QuantumShorFactoringRun P) →
+  quantumShorFactorFromRecoveredOrder P R ≡ classicalShorFactor P
+quantumRecoveredOrderFactorAgreesWithClassical P R
+  with quantumRecoveredOrderIsSplitOrder P R
+... | refl = refl
