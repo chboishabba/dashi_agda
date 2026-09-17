@@ -21,3 +21,5 @@ import DASHI.Biology.Agriculture.LegumeNodulationSituatedProteinBridgeExact
 import DASHI.Biology.Agriculture.LegumeNodulationSituatedProteinBridgeRegression
 import DASHI.Biology.Agriculture.AcaciaSenegalBNFLESCrossPollinationExact
 import DASHI.Biology.Agriculture.AcaciaSenegalBNFLESCrossPollinationRegression
+import DASHI.Biology.Agriculture.AcaciaSenegalBNFEdaphicLESExact
+import DASHI.Biology.Agriculture.AcaciaSenegalBNFEdaphicLESRegression
