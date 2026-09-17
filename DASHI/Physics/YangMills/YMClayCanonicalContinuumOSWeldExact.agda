@@ -73,18 +73,10 @@ canonicalStrongResolventMassGapCertificate = Routes.gapSurvivesTheLimit
 
 ------------------------------------------------------------------------
 -- Preferred physical endgame.
---
--- `terminal` is not an arbitrary OS map.  It is the existing Round308 object
--- carrying the reconstructed physical mass-gap Hamiltonian, the Kato physical
--- Hamiltonian and their same-dynamics witness.  `recoverySystem` is the actual
--- Mosco/recovery object carrying the continuum vacuum-form inequality.
---
--- The gap equality prevents mixing a recovery estimate at one threshold with a
--- spectral certificate at another.
 ------------------------------------------------------------------------
 
 record CanonicalPhysicalMassGapEndgame
-    (Hilbert Scalar Hamiltonian Vacuum ContinuumTheory : Set) : Set₁ where
+    (Hilbert Scalar Hamiltonian Vacuum ContinuumTheory : Set) : Set₂ where
   field
     recoverySystem : Recovery.VacuumOrthogonalRecoverySystem
     terminal : R308.DirectTerminalClayConsumers
