@@ -26,6 +26,9 @@ rasanen2004DOI = "10.1023/B:PLSO.0000030181.03575.e1"
 fall2011DOI : String
 fall2011DOI = "10.1007/s13199-011-0128-0"
 
+habish1970DOI : String
+habish1970DOI = "10.1007/BF01378191"
+
 larrainzar2020DOI : String
 larrainzar2020DOI = "10.1111/nph.16673"
 
@@ -54,6 +57,18 @@ fallEtAl2011 = Attribution.mkDOISource
   "https://doi.org/10.1007/s13199-011-0128-0"
   Attribution.academicArticleSource
   "Primary greenhouse source comparing selected Acacia-senegal-nodulating Mesorhizobium strains under water-deficiency context. It supports strain-by-environment retention, not field deployment authority or a universal drought-tolerance ranking."
+  Attribution.publicAttribution
+
+habish1970 : Attribution.AttributedSource
+habish1970 = Attribution.mkDOISource
+  "H. A. Habish"
+  "Effect of certain soil conditions on nodulation of Acacia spp."
+  "Plant and Soil 33(1):1-6"
+  "1970"
+  habish1970DOI
+  "https://doi.org/10.1007/BF01378191"
+  Attribution.academicArticleSource
+  "Controlled Acacia soil-condition study varying moisture, temperature and pH. Growth and nodulation increased with moisture toward an optimum near 15% soil moisture; nodulation was strongly pH-sensitive, and plant dry-weight response was not identical to nodule response. The multi-species source is retained as an Acacia environmental-enablement donor, not an Acacia-senegal-only quantitative rate law."
   Attribution.publicAttribution
 
 larrainzarEtAl2020 : Attribution.AttributedSource
@@ -89,13 +104,15 @@ record EnvironmentalEnablementReading : Set where
     droughtChangesSymbiosisDevelopment : Bool
     waterDeficiencyRetainsStrainEfficiencyContext : Bool
     soilPAndTreeAgeRemainFixationContext : Bool
+    soilPHRemainsNodulationContext : Bool
+    plantGrowthAndNodulationAreDistinctOutcomes : Bool
     legumeNoduleOxygenControlMattersToNitrogenase : Bool
     bulkSoilWaterIsNotNoduleMicroenvironmentMeasurement : Bool
 open EnvironmentalEnablementReading public
 
 canonicalEnvironmentalReading : EnvironmentalEnablementReading
 canonicalEnvironmentalReading = environmental-enablement-reading
-  true true true true true true true
+  true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Finite DASHI information-loss witnesses.
@@ -184,10 +201,12 @@ record EnvironmentalEnablementRepair : Set where
     rootTemperatureRetained : Bool
     droughtWaterStatusRetained : Bool
     soilPhosphorusRetained : Bool
+    soilPHRetained : Bool
     nitrogenAvailabilityRegimeRetained : Bool
     treeAgeRetained : Bool
     infectionStageRetained : Bool
     nodulationStageRetained : Bool
+    plantGrowthRetainedSeparatelyFromNodulation : Bool
     noduleOxygenControlRetained : Bool
     bulkSoilWaterRetainedSeparately : Bool
     noduleRootMicroenvironmentRetainedSeparately : Bool
@@ -199,7 +218,7 @@ open EnvironmentalEnablementRepair public
 
 canonicalEnvironmentalEnablementRepair : EnvironmentalEnablementRepair
 canonicalEnvironmentalEnablementRepair = environmental-enablement-repair
-  true true true true true true true true true true true true true true true true true
+  true true true true true true true true true true true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Existing nitrogenase ladder remains authoritative.
@@ -217,6 +236,8 @@ record EnvironmentalEnablementBoundary : Set where
     rhizobialStrainIdentityAloneAdequateUnderWaterDeficiency : Bool
     rhizobialPresenceCreatesNodulation : Bool
     soilPAloneDeterminesEnablement : Bool
+    soilPHMayBeDroppedFromEnablementContext : Bool
+    plantGrowthImpliesSuccessfulNodulation : Bool
     bulkSoilMoistureEqualsNoduleMicroenvironment : Bool
     genericLegumeOxygenMechanismCreatesAcaciaSameObjectMeasurement : Bool
     heatRecoveryCreatesUniversalTolerance : Bool
@@ -234,9 +255,9 @@ open EnvironmentalEnablementBoundary public
 
 canonicalEnvironmentalEnablementBoundary : EnvironmentalEnablementBoundary
 canonicalEnvironmentalEnablementBoundary = environmental-enablement-boundary
-  false false false false false false false false false false
+  false false false false false false false false false false false false
   true true false false true true true false
 
 attributionRule : String
 attributionRule =
-  "Rasanen & Lindstrom 1999 (DOI 10.1111/j.1574-6941.1999.tb00561.x) owns its Acacia-rhizobium heat-stress propositions. Rasanen, Saijets, Jokinen & Lindstrom 2004 (DOI 10.1023/B:PLSO.0000030181.03575.e1) owns its controlled Acacia-Sinorhizobium drought-stress propositions. Fall et al. 2011 (DOI 10.1007/s13199-011-0128-0) owns its greenhouse Mesorhizobium strain/water-deficiency propositions. Larrainzar et al. 2020 (DOI 10.1111/nph.16673; PMID 32442331) owns its generic/model-legume hemoglobin/oxygen-buffering review propositions and is not an Acacia same-object measurement. Isaac et al. 2011 sources retain ownership of age/P/N-regime fixation contexts. Abaker/Berninger/Starr hydrology DOI 10.1016/j.jaridenv.2017.12.004 remains a distinct bulk-water measurement object. DASHI owns only the environment-indexed TaskFactorisation collisions, repair surface and no-promotion boundary; this owner does not close canonical reaction enablement, plant assimilation or deployment authority."
+  "Rasanen & Lindstrom 1999 (DOI 10.1111/j.1574-6941.1999.tb00561.x) owns its Acacia-rhizobium heat-stress propositions. Rasanen, Saijets, Jokinen & Lindstrom 2004 (DOI 10.1023/B:PLSO.0000030181.03575.e1) owns its controlled Acacia-Sinorhizobium drought-stress propositions. Fall et al. 2011 (DOI 10.1007/s13199-011-0128-0) owns its greenhouse Mesorhizobium strain/water-deficiency propositions. Habish 1970 (DOI 10.1007/BF01378191) owns its multi-Acacia soil-moisture/temperature/pH nodulation propositions; it is retained as an environmental-enablement donor rather than an Acacia-senegal-only quantitative law. Larrainzar et al. 2020 (DOI 10.1111/nph.16673; PMID 32442331) owns its generic/model-legume hemoglobin/oxygen-buffering review propositions and is not an Acacia same-object measurement. Isaac et al. 2011 sources retain ownership of age/P/N-regime fixation contexts. Abaker/Berninger/Starr hydrology DOI 10.1016/j.jaridenv.2017.12.004 remains a distinct bulk-water measurement object. DASHI owns only the environment-indexed TaskFactorisation collisions, repair surface and no-promotion boundary; this owner does not close canonical reaction enablement, plant assimilation or deployment authority."
