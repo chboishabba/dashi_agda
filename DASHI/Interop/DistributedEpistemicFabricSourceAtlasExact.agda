@@ -67,9 +67,9 @@ johlDiscussionContribution =
 externalTechnologyContribution : ContributionAttribution
 externalTechnologyContribution =
   contributionAttribution
-    "external content-addressed, replicated-log, bulk-distribution and settlement precedents"
+    "external content-addressed, replicated-log, CRDT, bulk-distribution, local-sync and settlement precedents"
     externalTechnologyOrigin
-    "OrbitDB / IPFS / BitTorrent / Solana public project surfaces"
+    "OrbitDB / IPFS / BitTorrent / Hypercore / Autobase / Peerbit / Automerge / Yjs / RxDB / PowerSync / Electric / Solana public project surfaces"
     "External projects are architecture/implementation precedents only; no external project owns the DASHI reconstruction or its finite firewalls."
     false
     refl
@@ -259,7 +259,7 @@ orbitDBSource =
 ipfsSource : Attribution.AttributedSource
 ipfsSource =
   Attribution.mkNoDOISource
-    "IPFS / Protocol Labs ecosystem contributors"
+    "IPFS ecosystem contributors"
     "InterPlanetary File System (IPFS)"
     "public software/documentation project"
     ""
@@ -278,6 +278,66 @@ bitTorrentSource =
     "https://www.bittorrent.org/"
     (Attribution.namedSourceKind "external protocol project")
     "External bulk immutable byte-distribution comparator; swarm availability is not provenance or semantic truth."
+    Attribution.publicAttribution
+
+hypercoreSource : Attribution.AttributedSource
+hypercoreSource =
+  Attribution.mkNoDOISource
+    "Hypercore / Holepunch contributors"
+    "Hypercore"
+    "public software project"
+    ""
+    "https://github.com/holepunchto/hypercore"
+    (Attribution.namedSourceKind "external software project")
+    "External signed append-only writer-history and sparse-replication precedent; cryptographic writer history does not create semantic authority."
+    Attribution.publicAttribution
+
+autobaseSource : Attribution.AttributedSource
+autobaseSource =
+  Attribution.mkNoDOISource
+    "Autobase / Holepunch contributors"
+    "Autobase"
+    "public software/documentation project"
+    ""
+    "https://docs.pears.com/reference/building-blocks/autobase/"
+    (Attribution.namedSourceKind "external software project")
+    "External deterministic multi-writer ordering/materialized-view precedent; deterministic projection remains derived state."
+    Attribution.publicAttribution
+
+peerbitSource : Attribution.AttributedSource
+peerbitSource =
+  Attribution.mkNoDOISource
+    "Peerbit contributors"
+    "Peerbit"
+    "public software project"
+    ""
+    "https://github.com/dao-xyz/peerbit"
+    (Attribution.namedSourceKind "external software project")
+    "External P2P discovery/query/index/sharding precedent; discoverability does not create claim truth."
+    Attribution.publicAttribution
+
+automergeSource : Attribution.AttributedSource
+automergeSource =
+  Attribution.mkNoDOISource
+    "Automerge contributors"
+    "Automerge"
+    "public software project"
+    ""
+    "https://github.com/automerge/automerge"
+    (Attribution.namedSourceKind "external software project")
+    "External semantically mergeable CRDT document/history precedent; CRDT convergence does not imply epistemic agreement."
+    Attribution.publicAttribution
+
+yjsSource : Attribution.AttributedSource
+yjsSource =
+  Attribution.mkNoDOISource
+    "Yjs contributors"
+    "Yjs"
+    "public software project"
+    ""
+    "https://github.com/yjs/yjs"
+    (Attribution.namedSourceKind "external software project")
+    "External shared-type CRDT/sync precedent; networking and application authority remain separate."
     Attribution.publicAttribution
 
 solanaSource : Attribution.AttributedSource
@@ -299,12 +359,13 @@ distributedEpistemicSourceAtlas =
     "DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact"
     (jmdErdfaSource ∷ jmdIpfsDaslSource ∷ jmdMeshSyncSource ∷ jmdZosSource ∷
      jmdSolfunmemeSource ∷ jmdMetaMemeSource ∷ orbitDBSource ∷ ipfsSource ∷
-     bitTorrentSource ∷ solanaSource ∷ [])
+     bitTorrentSource ∷ hypercoreSource ∷ autobaseSource ∷ peerbitSource ∷
+     automergeSource ∷ yjsSource ∷ solanaSource ∷ [])
     "Source/project coordinates for the distributed epistemic fabric formalisation; repository/project observations remain distinct from Johl Brown discussion-origin architecture and DASHI theorem synthesis."
 
 attributionRule : String
 attributionRule =
-  "JMD/meta-introspector repositories retain attribution for observed source artefacts and implementation architecture; Johl Brown is attributed for the 2026-09-17 discussion-origin composition/access-path proposal; external projects retain their own technology claims; DASHI owns the typed reconstruction and finite firewalls. Attribution does not adjudicate legal title, source identity does not import proof, and a licence observation does not itself create semantic authority or a new reuse right."
+  "JMD/meta-introspector repositories retain attribution for observed source artefacts and implementation architecture; Johl Brown is attributed for the 2026-09-17 discussion-origin composition/access-path and evidence-history-projection proposals; external projects retain their own technology claims; DASHI owns the typed reconstruction and finite firewalls. Attribution does not adjudicate legal title, source identity does not import proof, and a licence observation does not itself create semantic authority or a new reuse right."
 
 ------------------------------------------------------------------------
 -- Attribution / licence firewalls.
