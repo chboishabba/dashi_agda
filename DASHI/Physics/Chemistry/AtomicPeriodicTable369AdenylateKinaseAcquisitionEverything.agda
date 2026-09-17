@@ -187,6 +187,13 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBMirrorTra
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalAttributionCoordinatesExact
 
 -- Canonical executable acquisition/evaluation bridge for future pinned 4AKE/
--- 1AKE coordinate manifestations. The script produces content-addressed JSON
--- receipts; source identity and scientific/formal authority remain upstream.
+-- 1AKE coordinate manifestations. Script v0.2 retains both identity and
+-- mass-coordinate selection hashes; hashes remain audit evidence, not proof of
+-- underlying content equality or scientific authority.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVScriptManifestExact
+
+-- DASHI-original executable-to-formal weld. An explicit selected-content witness
+-- compiles script-manifest evidence into the selection-extensionality theorem;
+-- equal hashes alone do not. Different source bytes may therefore share the
+-- same CV-relevant quotient without becoming the same byte manifestation.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVManifestExtensionalityExact
