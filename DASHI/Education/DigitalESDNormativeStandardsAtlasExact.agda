@@ -85,7 +85,7 @@ iso9001_2026 = mkTechnicalStandardLens
   "ISO 9001:2026"
   "2026"
   "Quality management systems — Requirements"
-  "https://www.iso.org/standard/9001.html"
+  "https://committee.iso.org/standard/9001"
   "Public ISO catalogue scope: requirements for establishing, implementing, maintaining and continually improving a quality management system. Does not establish educational effectiveness or sustainability outcomes."
   "unresolved/not assigned by this atlas"
 
@@ -205,7 +205,7 @@ iso24505_2_2025 = mkTechnicalStandardLens
   "ISO 24505-2:2025"
   "2025"
   "Ergonomics — Accessible design — Part 2: Colour combinations for people with colour deficiency and low vision"
-  "https://www.iso.org/standard/88606.html"
+  "https://www.iso.org/standard/81548.html"
   "Version-pinned colour-accessibility lens for colour deficiency/low-vision context; no generic accessibility promotion."
   "unresolved/not assigned by this atlas"
 
@@ -282,8 +282,8 @@ isoIEC42005_2025 = mkTechnicalStandardLens
   "ISO/IEC"
   "ISO/IEC 42005:2025"
   "2025"
-  "Artificial intelligence — AI system impact assessment"
-  "https://www.iso.org/standard/44545.html"
+  "Information technology — Artificial intelligence (AI) — AI system impact assessment"
+  "https://www.iso.org/standard/42005"
   "Adjacent AI impact-assessment lens retained as a bounded candidate for incidence/intersection consumers. Public catalogue identity/scope only; full copyrighted requirements are not reproduced."
   "unresolved/not assigned by this atlas"
 
