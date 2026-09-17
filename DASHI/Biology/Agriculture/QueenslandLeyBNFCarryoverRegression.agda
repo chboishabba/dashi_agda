@@ -21,6 +21,9 @@ pu2001DOIPinned = refl
 peoples2017DOIPinned : Q.peoplesEtAl2017DOI ≡ "10.1071/CP16248"
 peoples2017DOIPinned = refl
 
+strong2006DOIPinned : Q.strongEtAl2006DOI ≡ "10.1071/EA05007"
+strong2006DOIPinned = refl
+
 fixedNNotMineralN :
   Q.fixedNitrogenQuantityImpliesSameMineralNitrogenAtCropSowing Q.canonicalQueenslandLeyBoundary ≡ false
 fixedNNotMineralN = refl
@@ -36,6 +39,14 @@ uptakeNotYield = refl
 fixedNNotReplacement :
   Q.fixedNitrogenInputImpliesAvoidedMineralFertilizer Q.canonicalQueenslandLeyBoundary ≡ false
 fixedNNotReplacement = refl
+
+singleRateEquivalenceNotReplacement :
+  Q.singleFertilizerRateYieldEquivalenceImpliesReplacementValue Q.canonicalQueenslandLeyBoundary ≡ false
+singleRateEquivalenceNotReplacement = refl
+
+waterContextRetained :
+  Q.waterLimitationMayBeDroppedFromFollowingCropResponse Q.canonicalQueenslandLeyBoundary ≡ false
+waterContextRetained = refl
 
 lossesRetained :
   Q.denitrificationLeachingImmobilisationMayBeDropped Q.canonicalQueenslandLeyBoundary ≡ false
