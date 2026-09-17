@@ -7,13 +7,11 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Biology.Agriculture.BNFQualifiedInterventionModelExact as BNF
+import DASHI.Biology.Agriculture.AcaciaSenegalPlantNitrogenAssimilationEvidenceExact as PlantN
 import DASHI.Environment.AcaciaSenegalDrylandWaterCarbonExact as Dryland
 
 ------------------------------------------------------------------------
 -- ACACIA WATER <-> CROP MANAGEMENT CROSS-SITE COLLISION
---
--- Same species and related management coordinates do not determine one
--- universal water-competition/crop-yield response across contrasting soils.
 ------------------------------------------------------------------------
 
 raddadLuukkanen2007DOI : String
@@ -21,6 +19,9 @@ raddadLuukkanen2007DOI = "10.1016/j.agwat.2006.06.001"
 
 gaafarEtAl2006DOI : String
 gaafarEtAl2006DOI = "10.1007/s10457-005-2918-y"
+
+raddadLuukkanenWUE2006DOI : String
+raddadLuukkanenWUE2006DOI = "10.1016/j.foreco.2006.01.036"
 
 raddadLuukkanen2007 : Attribution.AttributedSource
 raddadLuukkanen2007 = Attribution.mkDOISource
@@ -46,9 +47,22 @@ gaafarEtAl2006 = Attribution.mkDOISource
   "North Kordofan sandy-soil source varying Acacia senegal tree density with sorghum and karkadeh, and measuring physiological interactions, yield and soil-water depletion. The reported system showed tree-crop competition for soil water; this is retained as a contrasting site/soil-context proposition rather than a universal species effect."
   Attribution.publicAttribution
 
+raddadLuukkanenWUE2006 : Attribution.AttributedSource
+raddadLuukkanenWUE2006 = Attribution.mkDOISource
+  "El Amin Yousif Raddad; Olavi Luukkanen"
+  "Adaptive genetic variation in water-use efficiency and gum yield in Acacia senegal provenances grown on clay soil in the Blue Nile region, Sudan"
+  "Forest Ecology and Management 226(1-3):219-229"
+  "2006"
+  raddadLuukkanenWUE2006DOI
+  "https://doi.org/10.1016/j.foreco.2006.01.036"
+  Attribution.academicArticleSource
+  "Blue Nile common-site source comparing eight Acacia senegal provenances for growth, carbon-isotope water-use-efficiency proxy and gum production. Provenance groups differed in delta-13C and productivity traits. This source is not joined numerically to the separate Raddad et al. 2005 Ndfa paper merely because the papers use eight provenance labels and a Blue Nile clay-site setting."
+  Attribution.publicAttribution
+
 data WaterCropEvidenceRole : Set where
   claySoilWaterCropResponse : WaterCropEvidenceRole
   sandySoilWaterCropResponse : WaterCropEvidenceRole
+  provenanceWaterUseGumResponse : WaterCropEvidenceRole
   cropYieldResponse : WaterCropEvidenceRole
   managementDensityResponse : WaterCropEvidenceRole
 
@@ -87,12 +101,26 @@ northKordofanSandReceipt = water-crop-context-receipt
   "soil-water depletion and physiological interactions"
   "tree-crop competition for soil water in the reported sandy-soil system"
 
+blueNileProvenanceWUEReceipt : WaterCropContextReceipt
+blueNileProvenanceWUEReceipt = water-crop-context-receipt
+  raddadLuukkanenWUE2006
+  raddadLuukkanenWUE2006DOI
+  "Blue Nile clay common garden with provenances originating from contrasting sand/clay environments"
+  "multi-year tree growth / gum-production observation"
+  "eight provenance identities; provenance-of-origin environment retained"
+  "tree growth and gum production rather than an associated cereal crop"
+  "leaf and branch-wood delta-13C as a water-use-efficiency/adaptation proxy plus soil-water observations"
+  "provenance groups differ in water-use proxy, growth and gum traits; no Ndfa correlation is manufactured by joining to a separate provenance paper"
+
 ------------------------------------------------------------------------
--- Reuse the existing hydrology/ecological consumer surfaces.
+-- Reuse existing plant-N and hydrology/ecological consumer surfaces.
 ------------------------------------------------------------------------
 
 drylandWaterCarbonBoundaryReused : Dryland.AcaciaLESWeld
 drylandWaterCarbonBoundaryReused = Dryland.canonicalAcaciaLESWeld
+
+raddadNdfaEvidenceReused : PlantN.PlantFixedNEvidence
+raddadNdfaEvidenceReused = PlantN.raddadProvenanceTemporalFoliarEvidence
 
 ecologicalConsumerRequiresHydrology :
   BNF.requiredFor BNF.predictEcologicalResponse BNF.hydrologyAdequacy ≡ true
@@ -108,14 +136,17 @@ record WaterCropBoundary : Set where
     cropAndManagementMustRemainIndexed : Bool
     earlyStageNoYieldPenaltyImpliesMatureSystemNoYieldPenalty : Bool
     cropYieldAloneIdentifiesWaterCompetitionMechanism : Bool
+    sharedProvenanceLabelsCreateNdfaWUEGumCorrelation : Bool
+    crossPaperSameEmpiricalObjectMayBeAssumed : Bool
+    provenanceOriginEnvironmentMustRemainIndexed : Bool
     sourceContrastCreatesSameEmpiricalObject : Bool
     waterCropEvidenceCreatesDeploymentAuthority : Bool
 open WaterCropBoundary public
 
 canonicalWaterCropBoundary : WaterCropBoundary
 canonicalWaterCropBoundary = water-crop-boundary
-  true false true true true false false false false
+  true false true true true false false false false true false false
 
 attributionRule : String
 attributionRule =
-  "Raddad & Luukkanen 2007 (DOI 10.1016/j.agwat.2006.06.001) owns its Blue Nile clay-soil water/crop propositions, including the bounded early-stage little-competition result and explicit maturity caution. Gaafar et al. 2006 (DOI 10.1007/s10457-005-2918-y) owns its North Kordofan sandy-soil tree-density/water/crop propositions. DASHI owns the cross-site context separation and no-promotion boundary. Contrasting sources do not become one empirical object, and neither supplies universal water-competition, yield, or deployment authority."
+  "Raddad & Luukkanen 2007 (DOI 10.1016/j.agwat.2006.06.001) owns its Blue Nile clay-soil water/crop propositions, including the bounded early-stage little-competition result and explicit maturity caution. Gaafar et al. 2006 (DOI 10.1007/s10457-005-2918-y) owns its North Kordofan sandy-soil tree-density/water/crop propositions. Raddad & Luukkanen 2006 (DOI 10.1016/j.foreco.2006.01.036) owns its eight-provenance delta-13C/water-use/growth/gum propositions. Raddad et al. 2005 (DOI 10.1007/s11104-005-2152-4), imported via the plant-N owner, separately owns its provenance-indexed Ndfa propositions. DASHI owns the cross-site/context and cross-paper attribution firewalls. Shared provenance labels do not create a cross-paper Ndfa-WUE-gum correlation or same empirical object without an explicit join receipt."
