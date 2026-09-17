@@ -148,3 +148,13 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationA
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSIQuantityBridgeExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseChemicalSystemExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalDynamicsBridgeExact
+
+-- Atomistic configuration/evaluator continuation: atoms retain stable indices,
+-- SI-length coordinates, chemical microstate and provenance; Figure-1 residue
+-- selections become typed objects; COM geometry is mass-convention-aware and
+-- SE(3)-invariant; the existing AtomisticCVProjection interface is inhabited
+-- from those lower carriers without creating a state classifier or mechanics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticConfigurationExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceAtomSelectionExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCOMGeometryExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticCVProjectionExact
