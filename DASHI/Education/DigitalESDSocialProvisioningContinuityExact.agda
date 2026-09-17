@@ -98,10 +98,10 @@ socialProvisioningAdequate : DeliveryWorld → Bool
 socialProvisioningAdequate sameInstructionProvisionRetained = true
 socialProvisioningAdequate sameInstructionProvisionShifted = false
 
-sameInstruction :
+sameInstructionLemma :
   instructionProjection sameInstructionProvisionRetained ≡
   instructionProjection sameInstructionProvisionShifted
-sameInstruction = refl
+sameInstructionLemma = refl
 
 provisioningDiffers :
   socialProvisioningAdequate sameInstructionProvisionRetained ≡
@@ -114,7 +114,7 @@ instructionalDeliveryProvisioningWitness =
   Intersection.nonFactorabilityWitness
     sameInstructionProvisionRetained
     sameInstructionProvisionShifted
-    refl
+    sameInstructionLemma
     provisioningDiffers
 
 instructionalDeliveryCannotDetermineSocialProvisioning :
@@ -122,14 +122,14 @@ instructionalDeliveryCannotDetermineSocialProvisioning :
 instructionalDeliveryCannotDetermineSocialProvisioning =
   Intersection.witnessRulesOutEveryFlatFactorisation instructionalDeliveryProvisioningWitness
 
-communityBoundary : Community.CommunityConnectednessBoundary
-communityBoundary = Community.canonicalCommunityConnectednessBoundary
+canonicalCommunityBoundary : Community.CommunityConnectednessBoundary
+canonicalCommunityBoundary = Community.canonicalCommunityConnectednessBoundary
 
 record SocialProvisioningIntersectionalChallenge : Set where
   constructor social-provisioning-intersectional-challenge
   field
     disabilityBoundary : Disability.DisabilityDigitalESDBoundary
-    absenceAuditQuestionCount : Agda.Builtin.Nat.Nat
+    absenceAuditQuestionCount : Nat
     communityBoundary : Community.CommunityConnectednessBoundary
     challengeReading : String
 

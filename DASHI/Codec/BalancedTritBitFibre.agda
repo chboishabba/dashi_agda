@@ -113,12 +113,18 @@ length : ∀ {A : Set} → List A → Nat
 length [] = zero
 length (_ ∷ xs) = suc (length xs)
 
++-suc : ∀ m n → m + suc n ≡ suc (m + n)
++-suc zero n = refl
++-suc (suc m) n rewrite +-suc m n = refl
+
 wordBitCost-support-plus-sign :
   ∀ ts → wordBitCost ts ≡ length ts + nonZeroCount ts
 wordBitCost-support-plus-sign [] = refl
 wordBitCost-support-plus-sign (neg ∷ ts)
-  rewrite wordBitCost-support-plus-sign ts = refl
+  rewrite wordBitCost-support-plus-sign ts
+        | +-suc (length ts) (nonZeroCount ts) = refl
 wordBitCost-support-plus-sign (zer ∷ ts)
   rewrite wordBitCost-support-plus-sign ts = refl
 wordBitCost-support-plus-sign (pos ∷ ts)
-  rewrite wordBitCost-support-plus-sign ts = refl
+  rewrite wordBitCost-support-plus-sign ts
+        | +-suc (length ts) (nonZeroCount ts) = refl

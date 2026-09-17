@@ -161,8 +161,8 @@ capitalismLabelDoesNotCreateWastePressure ()
 comparativeBoundary : Comparative.ComparativeInstitutionalMeaningBoundary
 comparativeBoundary = Comparative.canonicalComparativeInstitutionalMeaningBoundary
 
-incidenceBoundary : Incidence.ExternalityIncidenceBoundary
-incidenceBoundary = Incidence.canonicalExternalityIncidenceBoundary
+canonicalIncidenceBoundary : Incidence.ExternalityIncidenceBoundary
+canonicalIncidenceBoundary = Incidence.canonicalExternalityIncidenceBoundary
 
 ------------------------------------------------------------------------
 -- Intersectionality is a mandatory challenge surface, not a side appendix.
@@ -172,7 +172,7 @@ record PoliticalEconomyIntersectionalChallenge : Set where
   constructor political-economy-intersectional-challenge
   field
     disabilityBoundary : Disability.DisabilityDigitalESDBoundary
-    absenceQuestionCount : Agda.Builtin.Nat.Nat
+    absenceQuestionCount : Nat
     incidenceBoundary : Incidence.ExternalityIncidenceBoundary
     challengeReading : String
 

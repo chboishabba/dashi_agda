@@ -23,6 +23,11 @@ ieeeSurfaceRegression :
   ≡ Search.ieeeXplore
 ieeeSurfaceRegression = refl
 
+ericSurfaceRegression :
+  Translation.DatabaseSyntaxReceipt.surface Translation.ericSyntaxReceipt
+  ≡ Search.eric
+ericSurfaceRegression = refl
+
 sevenQueryProtocolRetainedRegression :
   Translation.translationProtocolQueryCount ≡ Protocol.plannedQueryCount
 sevenQueryProtocolRetainedRegression = refl
@@ -45,11 +50,11 @@ ieeeTranslationObservedRegression :
   ≡ true
 ieeeTranslationObservedRegression = refl
 
-ericTranslationStillDebtRegression :
+ericTranslationObservedRegression :
   Translation.DatabaseTranslationBoundary.ericExactTranslationSyntaxObserved
     Translation.canonicalDatabaseTranslationBoundary
-  ≡ false
-ericTranslationStillDebtRegression = refl
+  ≡ true
+ericTranslationObservedRegression = refl
 
 acmTranslationStillDebtRegression :
   Translation.DatabaseTranslationBoundary.acmExactTranslationSyntaxObserved

@@ -9,8 +9,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as Intersection
-import DASHI.Education.EarlyLearningIntersectionalCapabilityExact as Situated
-import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge as Trauma
+import DASHI.Cognition.PNF.TraumaMemoryHypervoxelAuthorityBoundaryExact as Trauma
 import DASHI.Education.DigitalESDExternalityIncidenceAuditExact as Incidence
 import DASHI.Education.DigitalESDDisabilityIntersectionalityAuditExact as Disability
 
@@ -81,7 +80,8 @@ disabilityBoundary : Disability.DisabilityDigitalESDBoundary
 disabilityBoundary = Disability.canonicalDisabilityDigitalESDBoundary
 
 situatedCapabilityReading : String
-situatedCapabilityReading = Situated.intersectionalCapabilityReading
+situatedCapabilityReading =
+  "Family choice is one observation surface over a multi-actor situated capability system. Child, family, kin/community, professional and public authority remain coordinate-specific; equal transfers need not create equal reachable opportunity, and equity may require different kinds of connection rather than only more of the same scalar resource."
 
 traumaAuthorityBoundary : Trauma.TraumaMemoryHypervoxelAuthorityBoundary
 traumaAuthorityBoundary = Trauma.canonicalTraumaMemoryHypervoxelAuthorityBoundary

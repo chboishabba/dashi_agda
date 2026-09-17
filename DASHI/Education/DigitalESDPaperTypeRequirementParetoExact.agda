@@ -197,6 +197,8 @@ currentStructuredSearchProducer : ReviewProducer
 currentStructuredSearchProducer =
   Scheduler.scheduledProducer
     (Scheduler.missing-coordinate-receipt
+      {sys = digitalESDPaperRequirementSystem}
+      {q = integrativeConceptualReview}
       transparentStructuredSearch currentMissingStructuredSearch)
 
 currentStructuredSearchProducerIsCorrect :

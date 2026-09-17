@@ -191,7 +191,7 @@ record StudyClaimCeilingBoundary : Set where
 open StudyClaimCeilingBoundary public
 
 canonicalStudyClaimCeilingBoundary : StudyClaimCeilingBoundary
-canonicalStudyClaimCeilingBoundary = study-claim-ceiling-boundary true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl false refl false refl
+canonicalStudyClaimCeilingBoundary = study-claim-ceiling-boundary true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl true refl false refl false refl
 
 studyClaimCeilingReading : String
 studyClaimCeilingReading = "Each admitted digital-ESD paper is indexed by its exact AttributedSource object and interpreted through a design-relative claim ceiling. Source-reported design is retained verbatim and may remain unmapped when the canonical design ontology lacks an exact constructor. Participant epistemic role may be source-reported, unresolved or not applicable. Strongest supported claim may be a causal/experimental implication, lived-experience claim, implementation-context claim, review synthesis, conceptual mechanism, or model-based environmental-impact claim, so qualitative, review, conceptual and lifecycle-model evidence are not forced into one causal ladder. Sample sizes, effect/uncertainty surfaces, time, transport and limitations remain source-specific; missing quantities are not invented. A model-based 95% uncertainty interval remains uncertainty about the modelled result and does not create a measured footprint for another deployment."

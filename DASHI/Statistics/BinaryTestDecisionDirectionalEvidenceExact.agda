@@ -76,7 +76,7 @@ record BinaryDecisionDirectionalInterpretation
     (Result Hypothesis : Set) : Set₁ where
   constructor binary-decision-directional-interpretation
   field
-    semantics : Evidence.DirectionalEvidenceSemantics Result Hypothesis
+    semantics : Evidence.DirectionalInferenceSemantics Result Hypothesis
 
     RejectSupportsPositive : Result → Hypothesis → Set
     RejectSupportsNegative : Result → Hypothesis → Set

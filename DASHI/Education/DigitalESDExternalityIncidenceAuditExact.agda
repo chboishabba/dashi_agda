@@ -14,8 +14,8 @@ import DASHI.Core.ConsentTemporalExternalityExact as Temporal
 import DASHI.Governance.SocioTechnicalPowerSelectionAssayExact as Power
 import DASHI.Governance.ExternalityCarrierAttractor as Carrier
 import DASHI.Economics.TSMCHBMManufacturingDemandPolicy2026Exact as TSMC
-import DASHI.Wikimedia.IbrahimSnowballPetrochemistryLifecycleParentAuditExact as Petrochem
-import DASHI.Governance.TrumpEnergyCrackSpreadCrossPollinationExact as Energy
+import DASHI.Wikimedia.PetrochemistryParentAuditBoundaryExact as Petrochem
+import DASHI.Governance.TrumpEnergyCrackSpreadBoundaryExact as Energy
 
 ------------------------------------------------------------------------
 -- DIGITAL-ESD EXTERNALITY INCIDENCE AUDIT
@@ -113,11 +113,11 @@ petroleumLabelCannotRecoverLifecycleStage = Petrochem.petroleumLabelCannotFactor
 visibleCarrierDoesNotEstablishSufficientCause =
   Carrier.visibleCarrierDoesNotEstablishSufficientCause
 
-contributionEqualsBurdenIsFalse :
+canonicalContributionEqualsBurdenIsFalse :
   Responsibility.ResponsibilityBurdenBoundary.contributionEqualsBurden
     Responsibility.canonicalResponsibilityBurdenBoundary
   ≡ false
-contributionEqualsBurdenIsFalse = refl
+canonicalContributionEqualsBurdenIsFalse = refl
 
 ------------------------------------------------------------------------
 -- Cross-domain firewall.
