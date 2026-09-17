@@ -1,7 +1,7 @@
 module DASHI.Moonshine.JInvariantEisensteinBishopConvergenceFrontierExact where
 
 ------------------------------------------------------------------------
--- EISENSTEIN q-SERIES: EXACT BISHOP CONVERGENCE FRONTIER
+-- EISENSTEIN q-SERIES: EXACT BISHOP / SAME-CARRIER CONVERGENCE FRONTIER
 --
 -- DASHI CONTRIBUTION / REPO CROSS-POLLINATION
 --
@@ -9,20 +9,36 @@ module DASHI.Moonshine.JInvariantEisensteinBishopConvergenceFrontierExact where
 --
 --   finite truncation -> infinite analytic Eisenstein series
 --
--- debt by reusing the convergence machinery that is already checked and
--- vendored in this repository. DASHI owns the Bishop/Murray real carrier,
--- Sequence.SeriesOf, completeness/limit uniqueness, absolute -> ordinary
--- convergence, the finite-sum -> SeriesOf bridge, and now a componentwise
--- Bishop-complex series compiler.
+-- debt by reusing the convergence and q-decay machinery already checked or
+-- source-written in this repository.
 --
--- What remains for the actual E4/E6 route is therefore narrower:
+-- Two convergence routes are kept distinct rather than conflated:
 --
---   1. weld the Bishop setoid-complex convergence carrier to the older
---      ConcreteComplex.ComplexPair evaluator used by the finite recurrence;
---   2. prove concrete absolute-convergence/majorant bounds for
---        240 sigma_3(n) q^n and -504 sigma_5(n) q^n, |q| < 1;
---   3. identify the resulting q-series limits with the analytic lattice-sum
---      EisensteinSeries object.
+--   A. Bishop setoid route
+--      vendored Bishop SeriesOf + absolute convergence + componentwise complex
+--      limits.  Its remaining application seam is still a weld to the older
+--      propositional-equality `ConcreteComplex` evaluator.
+--
+--   B. same-ConcreteComplex route
+--      the literal finite E4/E6 truncation sequences are already compiled to
+--      same-carrier limits from explicit componentwise Cauchy evidence.  This
+--      route avoids the Bishop carrier weld, but still needs the quantitative
+--      Cauchy/majorant proof.
+--
+-- Since the previous frontier, the finite coefficient side is also sharper:
+--
+--   sigma_3(n) <= n^4,
+--   sigma_5(n) <= n^6
+--
+-- are owned on the internal divisor kernel.  The literal q producer now has a
+-- principal-strip modulus compiler and an upper-half-plane decay compiler:
+-- given explicit nondegenerate order/branch evidence,
+--
+--   Im(tau)>0 -> |q(tau)|<1.
+--
+-- The generic compiler is paid; inhabiting those order/branch inputs on a
+-- selected ordinary analytic package is not silently inferred from the bare
+-- ConstructedOrderedCompleteReal interface.
 --
 -- SOURCE / CODE ATTRIBUTION
 -- Errett Bishop and Douglas Bridges, Constructive Analysis, Springer, 1985,
@@ -47,6 +63,10 @@ import Sequence as BishopSequence
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as BishopComplex
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
+import DASHI.Mathematics.NumberTheory.FiniteDivisorPowerSumBoundExact as PowerBound
+import DASHI.Moonshine.JInvariantEisensteinSameCarrierLimitCompilerExact as SameCarrier
+import DASHI.Moonshine.JInvariantQPrincipalStripModulusExact as QModulus
+import DASHI.Moonshine.JInvariantQUpperHalfPlaneDecayCompilerExact as QDecay
 
 ------------------------------------------------------------------------
 -- Canonical aliases to the already-owned checked Bishop convergence engine.
@@ -118,7 +138,16 @@ record EisensteinBishopConvergenceFrontier : Set where
     bishopLimitUniquenessOwned : Bool
     bishopComplexComponentwiseConvergenceOwned : Bool
 
+    sameCarrierConcreteComplexLimitCompilerOwned : Bool
+    eisensteinCoefficientPolynomialGrowthOwned : Bool
+    principalStripQModulusCompilerOwned : Bool
+    upperHalfPlaneQDecayCompilerOwned : Bool
+    concreteQOrderAndStripInputsOwned : Bool
+
+    -- This is specifically the Bishop-setoid -> legacy ConcreteComplex weld.
+    -- The same-carrier route above avoids needing it.
     constructedComplexEvaluatorCarrierWeldOwned : Bool
+
     e4ConcreteAbsoluteConvergenceOwned : Bool
     e6ConcreteAbsoluteConvergenceOwned : Bool
     bishopLimitEqualsAnalyticLatticeEisenstein : Bool
@@ -135,6 +164,8 @@ canonicalEisensteinBishopConvergenceFrontier :
 canonicalEisensteinBishopConvergenceFrontier =
   eisenstein-bishop-convergence-frontier
     true true true true true
-    false false false false false
+    true true true true false
+    false
+    false false false false
     false false
-    "Bishop completeness and generic componentwise complex convergence are paid. The remaining Eisenstein debt is the carrier weld to the existing ConcreteComplex finite evaluator, concrete E4/E6 absolute-convergence majorants for |q|<1, and the q-series-limit = analytic lattice-sum same-object theorem; citations and Python parity do not pay those obligations."
+    "Bishop completeness remains available, while the shortest route now stays on the existing ConcreteComplex carrier: same-carrier Cauchy completion is paid, sigma3/sigma5 polynomial growth is paid, and principal-strip/upper-half-plane q-decay compilers are paid conditionally. The genuine remaining inputs are a nondegenerate ordinary order/polar-branch inhabitant, the concrete polynomial-times-geometric E4/E6 Cauchy majorants, and the limit = analytic lattice-sum same-object theorem."
