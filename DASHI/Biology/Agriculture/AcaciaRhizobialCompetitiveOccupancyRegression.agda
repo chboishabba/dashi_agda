@@ -15,6 +15,9 @@ sarr2005PMIDPinned = refl
 sarrLesueur2007DOIPinned : O.sarrLesueur2007DOI ≡ "10.1007/s11274-006-9288-0"
 sarrLesueur2007DOIPinned = refl
 
+bakhoum2016DOIPinned : O.bakhoumEtAl2016DOI ≡ "10.1007/s11104-015-2655-6"
+bakhoum2016DOIPinned = refl
+
 strainIdentityDoesNotDetermineOccupancy :
   O.strainIdentityAloneDeterminesNoduleOccupancy O.canonicalOccupancyBoundary ≡ false
 strainIdentityDoesNotDetermineOccupancy = refl
@@ -22,6 +25,18 @@ strainIdentityDoesNotDetermineOccupancy = refl
 soilBackgroundCannotBeDropped :
   O.indigenousPopulationAndSoilContextMustRemainIndexed O.canonicalOccupancyBoundary ≡ true
 soilBackgroundCannotBeDropped = refl
+
+senegalProvenanceMustRemainIndexed :
+  O.acaciaSenegalProvenanceMayBeDroppedFromInoculationResponse O.canonicalOccupancyBoundary ≡ false
+senegalProvenanceMustRemainIndexed = refl
+
+senegalSoilTypeMustRemainIndexed :
+  O.acaciaSenegalSoilTypeMayBeDroppedFromInoculationResponse O.canonicalOccupancyBoundary ≡ false
+senegalSoilTypeMustRemainIndexed = refl
+
+strainEffectDoesNotUniversaliseAcrossSenegalSites :
+  O.acaciaSenegalStrainEffectUniversalAcrossSoilsAndProvenances O.canonicalOccupancyBoundary ≡ false
+strainEffectDoesNotUniversaliseAcrossSenegalSites = refl
 
 nurseryOccupancyDoesNotUniversaliseToField :
   O.nurseryOccupancyImpliesFieldOccupancy O.canonicalOccupancyBoundary ≡ false
