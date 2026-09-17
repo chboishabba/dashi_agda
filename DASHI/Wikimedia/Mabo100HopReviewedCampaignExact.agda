@@ -89,36 +89,29 @@ canonicalReviewedCampaignBoundary =
     false
 
 ------------------------------------------------------------------------
--- Reuse the already-formalised diagnosis authority boundaries rather than
--- restating them as campaign-specific facts.
+-- Reuse only the diagnosis owner's public boundary. The campaign does not
+-- reach through its private import aliases merely to restate the same theorem.
 ------------------------------------------------------------------------
 
-campaignExperimentDesignCannotCreateEvidence :
-  Diagnosis.Snow.ExperimentPlanCreatesEvidence → ⊥
-campaignExperimentDesignCannotCreateEvidence =
-  Diagnosis.experimentPlanDoesNotCreateEvidence
+campaignDiagnosisExperimentDesignCannotCreateEvidence :
+  Diagnosis.experimentDesignCreatesEvidence Diagnosis.canonicalDiagnosisBoundary ≡ false
+campaignDiagnosisExperimentDesignCannotCreateEvidence = refl
 
-campaignWrongTypeAdjacencyCannotCreateIdentity :
-  Diagnosis.Snow.WrongTypeAdjacencyCreatesTypeIdentity → ⊥
-campaignWrongTypeAdjacencyCannotCreateIdentity =
-  Diagnosis.wrongTypeAdjacencyDoesNotCreateIdentity
+campaignDiagnosisWrongTypeMayReject :
+  Diagnosis.wrongTypeMayRejectConsumerMismatch Diagnosis.canonicalDiagnosisBoundary ≡ true
+campaignDiagnosisWrongTypeMayReject = refl
 
-campaignRealisedCarrierCannotDetermineEligibleMissingPopulation :
-  Diagnosis.INF.FactorsThrough
-    Diagnosis.realisedAnalyticCarrier
-    Diagnosis.eligibleMemberMissing → ⊥
-campaignRealisedCarrierCannotDetermineEligibleMissingPopulation =
-  Diagnosis.realisedCarrierCannotDetermineEligibleMissingPopulation
+campaignDiagnosisExternalComparisonCannotPay :
+  Diagnosis.externalKnowledgeComparisonCreatesPayment Diagnosis.canonicalDiagnosisBoundary ≡ false
+campaignDiagnosisExternalComparisonCannotPay = refl
 
-campaignExternalKnowledgeComparisonCannotCreatePayment :
-  Diagnosis.ExternalKnowledgeComparisonEqualsPayment → ⊥
-campaignExternalKnowledgeComparisonCannotCreatePayment =
-  Diagnosis.externalKnowledgeComparisonDoesNotCreatePayment
+campaignDiagnosisSemiFormalPresentationCannotPay :
+  Diagnosis.semiFormalPresentationCreatesPayment Diagnosis.canonicalDiagnosisBoundary ≡ false
+campaignDiagnosisSemiFormalPresentationCannotPay = refl
 
-campaignSemiFormalPresentationCannotCreatePayment :
-  Diagnosis.SemiFormalPresentationEqualsPayment → ⊥
-campaignSemiFormalPresentationCannotCreatePayment =
-  Diagnosis.semiFormalPresentationDoesNotCreatePayment
+campaignDiagnosisFailedFactorisationMayDemandRepair :
+  Diagnosis.failedFactorisationMayDemandObserverRepair Diagnosis.canonicalDiagnosisBoundary ≡ true
+campaignDiagnosisFailedFactorisationMayDemandRepair = refl
 
 ------------------------------------------------------------------------
 -- Existing payment/restart theorems remain authoritative.
