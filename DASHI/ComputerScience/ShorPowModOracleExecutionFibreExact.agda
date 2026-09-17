@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Algebra.Quantum.FiniteQuantumRegister as Finite
 import DASHI.Algebra.Quantum.QuantumFourierTransformFinite as QFT
+import DASHI.Algebra.Quantum.GeneralShor as Shor
 import DASHI.Algebra.Quantum.ShorReversiblePowModOracleExact as Oracle
 import DASHI.Crypto.ShorOrderFinding as Order
 import DASHI.Crypto.ShorReversiblePowModOracleWeldExact as Weld
@@ -64,7 +65,7 @@ powModOracleExecutionLoadsHiddenPeriodValue :
   ≡
   Oracle.loaded
     b
-    (Order.oracle (Order.asHiddenPeriodProblem P) (Finite.encode B b))
+    (Shor.oracle (Order.asHiddenPeriodProblem P) (Finite.encode B b))
     refl
 powModOracleExecutionLoadsHiddenPeriodValue P B F b cost =
   Weld.reversiblePowModLoadsHiddenPeriodValue P B b
