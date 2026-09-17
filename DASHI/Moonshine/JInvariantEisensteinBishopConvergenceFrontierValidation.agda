@@ -17,9 +17,13 @@ absoluteToLimitCompilerIsOwned :
   P.absoluteConvergenceToLimitCompilerOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 absoluteToLimitCompilerIsOwned = refl
 
-complexCarrierLiftIsStillUnpaid :
-  P.constructedComplexComponentwiseConvergenceOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ false
-complexCarrierLiftIsStillUnpaid = refl
+bishopComplexLiftIsOwned :
+  P.bishopComplexComponentwiseConvergenceOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopComplexLiftIsOwned = refl
+
+constructedEvaluatorCarrierWeldIsStillUnpaid :
+  P.constructedComplexEvaluatorCarrierWeldOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+constructedEvaluatorCarrierWeldIsStillUnpaid = refl
 
 e4MajorantIsStillUnpaid :
   P.e4ConcreteAbsoluteConvergenceOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ false
