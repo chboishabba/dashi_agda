@@ -12,10 +12,6 @@ import DASHI.Biology.Agriculture.NitrogenaseChemistryCrossPollinationExact as Ch
 
 ------------------------------------------------------------------------
 -- ACACIA FIXED-N TRANSFER -> FIELD NUTRIENT-BUDGET BRIDGE
---
--- This owner extends the Acacia evidence chain downstream without collapsing
--- plant fixed-N contribution, interplant transfer, field nutrient balance,
--- fertilizer substitution, or deployment authority.
 ------------------------------------------------------------------------
 
 isaacHinsingerHarmand2012DOI : String
@@ -29,6 +25,12 @@ raddadEtAl2006DOI = "10.1007/s10457-006-9009-6"
 
 deansEtAl1999DOI : String
 deansEtAl1999DOI = "10.1016/S0378-1127(99)00063-8"
+
+fallEtAl2012DOI : String
+fallEtAl2012DOI = "10.1016/j.jenvman.2011.03.038"
+
+fallEtAl2012PMID : String
+fallEtAl2012PMID = "21514716"
 
 isaacHinsingerHarmand2012 : Attribution.AttributedSource
 isaacHinsingerHarmand2012 = Attribution.mkDOISource
@@ -51,7 +53,7 @@ raddadEtAl2006 = Attribution.mkDOISource
   raddadEtAl2006DOI
   "https://doi.org/10.1007/s10457-006-9009-6"
   Attribution.academicArticleSource
-  "Four-year Blue Nile field nutrient-budget source across Acacia senegal spacing and sorghum/sesame systems. Treatment-level N balances include both gains and losses, while below-ground biomass was not included in the reported balance. This source therefore constrains whole-system promotion rather than proving universal positive N balance."
+  "Four-year Blue Nile field nutrient-budget source across Acacia senegal spacing and sorghum/sesame systems. Treatment-level N balances include both gains and losses, while below-ground biomass was not included in the reported balance. This source constrains whole-system promotion rather than proving universal positive N balance."
   Attribution.publicAttribution
 
 deansEtAl1999 : Attribution.AttributedSource
@@ -66,15 +68,24 @@ deansEtAl1999 = Attribution.mkDOISource
   "Northern Senegal fallow chronosequence source quantifying tree/soil nutrient accumulation from ages 3-18 years. Surface-soil N increased with age/spacing, but biomass and fodder export alter site nutrient budgets; management/export therefore remains a live coordinate."
   Attribution.publicAttribution
 
-------------------------------------------------------------------------
--- Evidence roles: same element, different empirical object.
-------------------------------------------------------------------------
+fallEtAl2012 : Attribution.AttributedSource
+fallEtAl2012 = Attribution.mkDOISource
+  "Dioumacor Fall; Diegane Diouf; Alzouma Mayaki Zoubeirou; Niokhor Bakhoum; Aliou Faye; Saidou Nourou Sall"
+  "Effect of distance and depth on microbial biomass and mineral nitrogen content under Acacia senegal (L.) Willd. trees"
+  "Journal of Environmental Management 95 Suppl:S260-S264"
+  "2012"
+  fallEtAl2012DOI
+  "https://doi.org/10.1016/j.jenvman.2011.03.038"
+  Attribution.academicArticleSource
+  "Field source sampling Acacia senegal rhizosphere soil by distance from tree stem, soil depth and dry/wet season. Mineral-N and microbial observations are retained as observer-geometry-indexed ecosystem measurements rather than a scalar BNF output."
+  Attribution.publicAttribution
 
 data TransferBudgetEvidenceRole : Set where
   plantFixedNContribution : TransferBudgetEvidenceRole
   interplantNitrogenTransfer : TransferBudgetEvidenceRole
   treatmentFieldNitrogenBalance : TransferBudgetEvidenceRole
   longTermSiteNutrientAccumulation : TransferBudgetEvidenceRole
+  spatialSeasonalMineralNObservation : TransferBudgetEvidenceRole
   harvestExportPressure : TransferBudgetEvidenceRole
 
 record TransferBudgetReceipt : Set where
@@ -121,6 +132,16 @@ senegalLongTermNutrientReceipt = transfer-budget-receipt
   "soil/tissue nutrient accumulation and potential biomass/fodder export retained together"
   false true false
 
+fallSpatialSeasonalMineralNReceipt : TransferBudgetReceipt
+fallSpatialSeasonalMineralNReceipt = transfer-budget-receipt
+  fallEtAl2012
+  fallEtAl2012DOI
+  spatialSeasonalMineralNObservation
+  "dry-season and wet-season field sampling"
+  "distance from tree stem crossed with 0-25, 25-50 and 50-75 cm soil depths"
+  "soil mineral N and microbial biomass are indexed by observer geometry and season; not identified with fixation flux"
+  false false false
+
 ------------------------------------------------------------------------
 -- Canonical ladder remains authoritative.
 ------------------------------------------------------------------------
@@ -140,10 +161,6 @@ referencePlantObserverFirewallReused :
   Measurement.rawDelta15NEqualsNdfa Measurement.canonicalMeasurementBoundary ≡ false
 referencePlantObserverFirewallReused = refl
 
-------------------------------------------------------------------------
--- No-promotion boundary.
-------------------------------------------------------------------------
-
 record TransferBudgetBoundary : Set where
   constructor transfer-budget-boundary
   field
@@ -153,6 +170,7 @@ record TransferBudgetBoundary : Set where
     interplantTransferImpliesPositiveFieldNBalance : Bool
     fieldNBalanceMustRemainTreatmentAndTimeIndexed : Bool
     abovegroundBudgetEqualsWholeSystemNBalance : Bool
+    soilMineralNObserverGeometryMayBeDropped : Bool
     positiveNBalanceImpliesFertilizerSubstitution : Bool
     fertilizerSubstitutionImpliesDeploymentAuthority : Bool
     harvestAndExportMustRemainIndexed : Bool
@@ -162,7 +180,7 @@ open TransferBudgetBoundary public
 
 canonicalTransferBudgetBoundary : TransferBudgetBoundary
 canonicalTransferBudgetBoundary = transfer-budget-boundary
-  true false true false true false false false true false false
+  true false true false true false false false false true false false
 
 acaciaTransferEvidencePaid :
   acaciaInterplantTransferEvidenceExists canonicalTransferBudgetBoundary ≡ true
@@ -178,4 +196,4 @@ genericAvoidedMineralNNotPromoted = refl
 
 attributionRule : String
 attributionRule =
-  "Isaac, Hinsinger & Harmand 2012 (DOI 10.1016/j.scitotenv.2011.12.071; PMID 22446108) owns its controlled Acacia-to-wheat below-ground N-transfer propositions. Raddad et al. 2006 (DOI 10.1007/s10457-006-9009-6) owns its four-year Blue Nile treatment nutrient-budget propositions, including the stated omission of below-ground biomass from the reported balance. Deans et al. 1999 (DOI 10.1016/S0378-1127(99)00063-8) owns its long-term Senegal nutrient-accumulation and harvest/export propositions. DASHI owns the typed evidence-role chain and no-promotion boundary. None of these sources alone supplies a generic seasonal crop-N-demand closure, counterfactual avoided-mineral-N quantity, universal fertilizer-substitution rule, or deployment authority."
+  "Isaac, Hinsinger & Harmand 2012 (DOI 10.1016/j.scitotenv.2011.12.071; PMID 22446108) owns its controlled Acacia-to-wheat below-ground N-transfer propositions. Raddad et al. 2006 (DOI 10.1007/s10457-006-9009-6) owns its four-year Blue Nile treatment nutrient-budget propositions, including omission of below-ground biomass from the reported balance. Deans et al. 1999 (DOI 10.1016/S0378-1127(99)00063-8) owns its long-term Senegal nutrient-accumulation and harvest/export propositions. Fall et al. 2012 (DOI 10.1016/j.jenvman.2011.03.038; PMID 21514716) owns its distance/depth/season-indexed soil mineral-N and microbial observations. DASHI owns the typed evidence-role chain and no-promotion boundary. None of these sources alone supplies generic seasonal crop-N-demand closure, counterfactual avoided-mineral-N quantity, universal fertilizer-substitution rule, or deployment authority."
