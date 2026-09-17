@@ -19,6 +19,8 @@ import DASHI.Algebra.Quantum.ShorFinitePowModTargetExact
 import DASHI.Algebra.Quantum.ShorFinitePowModTargetRegression
 import DASHI.Algebra.Quantum.ShorFiniteIndependentTargetAmplitudeOracleExact
 import DASHI.Algebra.Quantum.ShorFiniteIndependentTargetAmplitudeOracleRegression
+import DASHI.Algebra.Quantum.ShorCyclicExponentBasisExact
+import DASHI.Algebra.Quantum.ShorCyclicExponentBasisRegression
 import DASHI.Algebra.Quantum.ShorPeriodExecutionPipelineExact
 import DASHI.Algebra.Quantum.ShorPeriodExecutionPipelineRegression
 import DASHI.Crypto.FiniteFactorArithmetic
