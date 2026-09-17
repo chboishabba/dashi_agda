@@ -1,0 +1,30 @@
+module DASHI.Physics.YangMills.YMClayCompleteDensityTransferMixingBoundaryValidation where
+
+open import Agda.Builtin.Equality using (_≡_)
+
+-- RED-first validation for the exact remaining bridge between the verified
+-- Bałaban complete-density trajectory and the literal transfer/mixing F1 form.
+import DASHI.Physics.YangMills.YMClayCompleteDensityTransferMixingBoundaryExact as Boundary
+
+open Boundary
+
+completeDensityBoundaryAvailable : Set
+completeDensityBoundaryAvailable = CompleteDensityTransferMixingBoundaryPresent
+
+sameTrajectoryPaid : betaAndCompleteDensityUseSameCouplingHistory ≡ true
+sameTrajectoryPaid = betaAndCompleteDensityUseSameCouplingHistoryIsTrue
+
+section2DoesNotSilentlyPayDensityDefect :
+  section2BoundsDirectlyPayJointSliceDensityDefect ≡ false
+section2DoesNotSilentlyPayDensityDefect =
+  section2BoundsDirectlyPayJointSliceDensityDefectIsFalse
+
+covarianceCapDoesNotSilentlyPayOperatorNorm :
+  conditionalCovarianceCapDirectlyPaysFullL2Decorrelator ≡ false
+covarianceCapDoesNotSilentlyPayOperatorNorm =
+  conditionalCovarianceCapDirectlyPaysFullL2DecorrelatorIsFalse
+
+physicalGapFloorNotCompilerOutput :
+  completeDensityInvariantRegionConstructsPositivePhysicalMassFloor ≡ false
+physicalGapFloorNotCompilerOutput =
+  completeDensityInvariantRegionConstructsPositivePhysicalMassFloorIsFalse
