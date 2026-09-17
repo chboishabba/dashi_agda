@@ -59,16 +59,28 @@ record VacuumSectorSpectralConsequences
 
 open VacuumSectorSpectralConsequences public
 
+record VacuumSectorLeanArtifactBundle : Set where
+  field
+    uniqueSolutionArtifact : Atlas.LeanTheoremArtifact
+    resolventBoundArtifact : Atlas.LeanTheoremArtifact
+    eigenvalueExclusionArtifact : Atlas.LeanTheoremArtifact
+
+open VacuumSectorLeanArtifactBundle public
+
+canonicalVacuumSectorLeanArtifacts : VacuumSectorLeanArtifactBundle
+canonicalVacuumSectorLeanArtifacts = record
+  { uniqueSolutionArtifact = Atlas.vacuumSectorUniqueSolutionLean
+  ; resolventBoundArtifact = Atlas.vacuumSectorResolventBoundLean
+  ; eigenvalueExclusionArtifact = Atlas.vacuumSectorEigenvalueExclusionLean
+  }
+
 -- Cross-prover theorem receipt: exact theorem authority is retained separately
 -- from the Agda proposition carrier.
 record VacuumSectorLeanTheoremReceipt
     {Hamiltonian Vacuum Gap : Set}
     (datum : VacuumGapDatum Hamiltonian Vacuum Gap) : Set₁ where
   field
-    uniqueSolutionArtifact : Atlas.LeanTheoremArtifact
-    resolventBoundArtifact : Atlas.LeanTheoremArtifact
-    eigenvalueExclusionArtifact : Atlas.LeanTheoremArtifact
-
+    artifacts : VacuumSectorLeanArtifactBundle
     consequences : VacuumSectorSpectralConsequences datum
 
     exactLeanSourceMatchesDatumShape : Bool
@@ -82,16 +94,6 @@ vacuumSectorConsequencesFromLeanReceipt :
   VacuumSectorLeanTheoremReceipt datum →
   VacuumSectorSpectralConsequences datum
 vacuumSectorConsequencesFromLeanReceipt = consequences
-
--- This is the exact theorem-role inventory retained from the donor archive.
-canonicalVacuumSectorLeanArtifacts :
-  Atlas.LeanTheoremArtifact × Atlas.LeanTheoremArtifact × Atlas.LeanTheoremArtifact
-canonicalVacuumSectorLeanArtifacts =
-  Atlas.vacuumSectorUniqueSolutionLean ,
-  Atlas.vacuumSectorResolventBoundLean ,
-  Atlas.vacuumSectorEigenvalueExclusionLean
-  where
-    open import Agda.Builtin.Sigma using (_×_; _,_)
 
 -- `standardImported` means theorem authority is external to this Agda kernel;
 -- it is deliberately not labelled machineChecked here.
