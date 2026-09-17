@@ -96,8 +96,6 @@ conditionalCovarianceCapDirectlyPaysFullL2DecorrelatorIsFalse :
   conditionalCovarianceCapDirectlyPaysFullL2Decorrelator ≡ false
 conditionalCovarianceCapDirectlyPaysFullL2DecorrelatorIsFalse = refl
 
--- New recut: the full RN density defect is an optional stronger producer, not
--- the definition of F1 debt.
 fullJointDensityLinfinityDefectPrimitiveForF1 : Bool
 fullJointDensityLinfinityDefectPrimitiveForF1 = false
 
@@ -118,10 +116,6 @@ completeDensityInvariantRegionConstructsPositivePhysicalMassFloor = false
 completeDensityInvariantRegionConstructsPositivePhysicalMassFloorIsFalse :
   completeDensityInvariantRegionConstructsPositivePhysicalMassFloor ≡ false
 completeDensityInvariantRegionConstructsPositivePhysicalMassFloorIsFalse = refl
-
-------------------------------------------------------------------------
--- Strong route A: literal adjacent-slice density defect.
-------------------------------------------------------------------------
 
 record CompleteDensityToLiteralTwoSliceMixingTarget : Set₁ where
   field
@@ -150,16 +144,6 @@ record CompleteDensityToLiteralTwoSliceMixingTarget : Set₁ where
 
 open CompleteDensityToLiteralTwoSliceMixingTarget public
 
-------------------------------------------------------------------------
--- Weaker route B: source-native dense marked/local observable application.
---
--- This record deliberately stores only the SAME-OBJECT/application facts that
--- connect the beta-driven complete density to the generic marked-source F1
--- compiler.  The actual analytic inequality lives in the selected CMP109/116
--- marked-source producer, and its envelope-to-L2 target theorem lives in
--- `DenseMarkedSourceF1Weld`; neither is duplicated here.
-------------------------------------------------------------------------
-
 record CompleteDensityToDenseMarkedF1Target : Set₁ where
   field
     SameBetaDrivenDensityAndMarkedSourceState : Set
@@ -180,11 +164,13 @@ record CompleteDensityToDenseMarkedF1Target : Set₁ where
 
 open CompleteDensityToDenseMarkedF1Target public
 
+-- The following two are source-written composition/bookkeeping claims on this
+-- branch.  No exact-head Agda kernel receipt was run in this connector tranche.
 sameTrajectoryCompilerLevel : ProofLevel
-sameTrajectoryCompilerLevel = machineChecked
+sameTrajectoryCompilerLevel = conditional
 
 completeDensityRegionAssemblyLevel : ProofLevel
-completeDensityRegionAssemblyLevel = machineChecked
+completeDensityRegionAssemblyLevel = conditional
 
 completeDensityToLiteralMixingBridgeLevel : ProofLevel
 completeDensityToLiteralMixingBridgeLevel = conditional
