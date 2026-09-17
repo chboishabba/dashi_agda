@@ -113,27 +113,109 @@ nitrogenaseAttributedAtlas = Attribution.mkSourceAtlas
   "Mechanistic/structural sources used to retain chemistry, turnover, oxygen-protection and cofactor-maturation coordinates; source identity never promotes organism transfer or downstream BNF authority."
 
 ------------------------------------------------------------------------
--- Finite situated-state witness.
+-- Explicit situated nitrogenase carrier.
+--
+-- The carrier keeps the coordinates demanded by the generic situated-protein
+-- design visible even though the finite inadequacy proof below projects only
+-- protein identity and functional state.  Values in the two canonical states
+-- are DASHI source-shaped witnesses, not extra experimental observations.
 ------------------------------------------------------------------------
 
 data NitrogenaseIdentity : Set where
   moNitrogenase : NitrogenaseIdentity
 
+data OxygenContext : Set where
+  lowOxygenContext : OxygenContext
+  oxygenStressContext : OxygenContext
+
+data InteractionPartnerState : Set where
+  noProtectivePartner : InteractionPartnerState
+  feSIIAssociated : InteractionPartnerState
+
+data TurnoverContext : Set where
+  catalyticTurnoverContext : TurnoverContext
+  protectionContext : TurnoverContext
+
+data CofactorMaturationState : Set where
+  matureFeMoCofactor : CofactorMaturationState
+  nifENPrecursorState : CofactorMaturationState
+
+data ObserverMethod : Set where
+  mechanisticReviewObserver : ObserverMethod
+  cryoEMObserver : ObserverMethod
+  maturationStructureObserver : ObserverMethod
+
 data NitrogenaseFunctionalState : Set where
   catalyticallyAvailable : NitrogenaseFunctionalState
   conformationallyProtected : NitrogenaseFunctionalState
+
+record NitrogenaseSituatedState : Set where
+  constructor nitrogenase-situated-state
+  field
+    nitrogenaseIdentity : NitrogenaseIdentity
+    oxygenContext : OxygenContext
+    interactionPartner : InteractionPartnerState
+    turnoverContext : TurnoverContext
+    cofactorMaturation : CofactorMaturationState
+    realisedFunctionalState : NitrogenaseFunctionalState
+    historyStressReading : String
+    observerMethod : ObserverMethod
+    sourceProvenanceReading : String
+open NitrogenaseSituatedState public
+
+lowOxygenCatalyticState : NitrogenaseSituatedState
+lowOxygenCatalyticState = nitrogenase-situated-state
+  moNitrogenase
+  lowOxygenContext
+  noProtectivePartner
+  catalyticTurnoverContext
+  matureFeMoCofactor
+  catalyticallyAvailable
+  "DASHI low-oxygen/catalytic context witness; not a new field observation"
+  cryoEMObserver
+  "Warmack & Rees 2024 DOI 10.1038/s41467-024-54713-0 supplies turnover-state structural motivation; Seefeldt/Hoffman/Dean 2009 DOI 10.1146/annurev.biochem.78.070907.103812 supplies chemistry context."
+
+oxygenStressProtectedState : NitrogenaseSituatedState
+oxygenStressProtectedState = nitrogenase-situated-state
+  moNitrogenase
+  oxygenStressContext
+  feSIIAssociated
+  protectionContext
+  matureFeMoCofactor
+  conformationallyProtected
+  "DASHI oxygen-stress/protection context witness; not an Acacia mechanism claim"
+  cryoEMObserver
+  "Narehood et al. 2025 DOI 10.1038/s41586-024-08311-1 PMID 39779844 PMCID PMC11812610 supplies the Azotobacter FeSII protection premise."
+
+nifENMaturationState : NitrogenaseSituatedState
+nifENMaturationState = nitrogenase-situated-state
+  moNitrogenase
+  lowOxygenContext
+  noProtectivePartner
+  protectionContext
+  nifENPrecursorState
+  conformationallyProtected
+  "DASHI maturation-state carrier inhabitant; not catalytic-flux evidence"
+  maturationStructureObserver
+  "Paya Tormo et al. DOI 10.1038/s41589-025-02070-4 PMID 41238839 PDB 9I0F/9I0G/9I0H supplies NifEN precursor-state structural evidence."
+
+------------------------------------------------------------------------
+-- Finite situated-state witness.
+------------------------------------------------------------------------
 
 data NitrogenaseWorld : Set where
   lowOxygenCatalyticWorld : NitrogenaseWorld
   oxygenStressProtectedWorld : NitrogenaseWorld
 
+worldState : NitrogenaseWorld → NitrogenaseSituatedState
+worldState lowOxygenCatalyticWorld = lowOxygenCatalyticState
+worldState oxygenStressProtectedWorld = oxygenStressProtectedState
+
 proteinIdentity : NitrogenaseWorld → NitrogenaseIdentity
-proteinIdentity lowOxygenCatalyticWorld = moNitrogenase
-proteinIdentity oxygenStressProtectedWorld = moNitrogenase
+proteinIdentity world = nitrogenaseIdentity (worldState world)
 
 functionalState : NitrogenaseWorld → NitrogenaseFunctionalState
-functionalState lowOxygenCatalyticWorld = catalyticallyAvailable
-functionalState oxygenStressProtectedWorld = conformationallyProtected
+functionalState world = realisedFunctionalState (worldState world)
 
 sameProteinIdentity :
   proteinIdentity lowOxygenCatalyticWorld ≡ proteinIdentity oxygenStressProtectedWorld
@@ -200,6 +282,7 @@ record NitrogenaseSituatedBoundary : Set where
   constructor nitrogenase-situated-boundary
   field
     usesGenericSituatedProteinWitness : Bool
+    fullSituatedContextCarrierRetained : Bool
     proteinIdentityAloneAdequate : Bool
     balancedStoichiometryCreatesEffectiveFlux : Bool
     azotobacterProtectionTransfersToAcacia : Bool
@@ -210,11 +293,15 @@ open NitrogenaseSituatedBoundary public
 
 canonicalNitrogenaseBoundary : NitrogenaseSituatedBoundary
 canonicalNitrogenaseBoundary = nitrogenase-situated-boundary
-  true false false false false false false
+  true true false false false false false false
 
 proteinIdentityAloneIsInadequate :
   proteinIdentityAloneAdequate canonicalNitrogenaseBoundary ≡ false
 proteinIdentityAloneIsInadequate = refl
+
+fullSituatedContextIsRetained :
+  fullSituatedContextCarrierRetained canonicalNitrogenaseBoundary ≡ true
+fullSituatedContextIsRetained = refl
 
 balancedStoichiometryDoesNotCreateEffectiveFlux :
   balancedStoichiometryCreatesEffectiveFlux canonicalNitrogenaseBoundary ≡ false
