@@ -9,6 +9,7 @@ import DASHI.Chemistry.TransitionKernel as Chemistry
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact as Hyper
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCalibrationAttributionEnvelopeExact as Attr
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConformationalEmpiricalExact as Structure
+import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 
 ------------------------------------------------------------------------
 -- ADENYLATE-KINASE CHEMICAL-SYSTEM IDENTITY / CONTEXT BRIDGE
@@ -45,12 +46,62 @@ adkUniProt = Attr.adkUniProt
 openPDB = Attr.openPDB
 closedPDB = Attr.closedPDB
 
+------------------------------------------------------------------------
+-- PubChem uses the repo-wide optional external-identity carrier.  `verified`
+-- means only that this registry coordinate was inspected; the generic carrier
+-- itself fixes externalIdentityCreatesAuthority = false.
+------------------------------------------------------------------------
+
+atpPubChem : Identity.ExternalIdentityDemand
+atpPubChem = Identity.mkOptionalIdentityDemand
+  "AdK chemical-system bridge"
+  "ATP PubChem CID"
+  "adenosine 5'-triphosphate parent reference"
+  Identity.officialIdentifier
+  (Identity.verified "PubChem inspected 2026-09-17" "CID 5957")
+
+ampPubChem : Identity.ExternalIdentityDemand
+ampPubChem = Identity.mkOptionalIdentityDemand
+  "AdK chemical-system bridge"
+  "AMP PubChem CID"
+  "adenosine 5'-monophosphate parent reference"
+  Identity.officialIdentifier
+  (Identity.verified "PubChem inspected 2026-09-17" "CID 6083")
+
+adpPubChem : Identity.ExternalIdentityDemand
+adpPubChem = Identity.mkOptionalIdentityDemand
+  "AdK chemical-system bridge"
+  "ADP PubChem CID"
+  "adenosine 5'-diphosphate parent reference"
+  Identity.officialIdentifier
+  (Identity.verified "PubChem inspected 2026-09-17" "CID 6022")
+
+ap5aPubChem : Identity.ExternalIdentityDemand
+ap5aPubChem = Identity.mkOptionalIdentityDemand
+  "AdK chemical-system bridge"
+  "Ap5A PubChem CID"
+  "diadenosine pentaphosphate parent reference"
+  Identity.officialIdentifier
+  (Identity.verified "PubChem inspected 2026-09-17" "CID 53477724")
+
+magnesiumPubChem : Identity.ExternalIdentityDemand
+magnesiumPubChem = Identity.mkOptionalIdentityDemand
+  "AdK chemical-system bridge"
+  "magnesium(2+) PubChem CID"
+  "magnesium(2+)"
+  Identity.officialIdentifier
+  (Identity.verified "PubChem inspected 2026-09-17" "CID 888")
+
+chemicalIdentityDemands : List Identity.ExternalIdentityDemand
+chemicalIdentityDemands =
+  articleDOI ∷ adkQID ∷ adkUniProt ∷ openPDB ∷ closedPDB ∷
+  atpPubChem ∷ ampPubChem ∷ adpPubChem ∷ ap5aPubChem ∷ magnesiumPubChem ∷ []
+
 record ChemicalRegistryIdentity : Set where
   constructor chemical-registry-identity
   field
     canonicalLabel : String
-    registry : String
-    registryIdentifier : String
+    externalIdentity : Identity.ExternalIdentityDemand
     molecularFormula : String
     registrySourceLocator : String
     wikidataQidStatus : String
@@ -61,8 +112,7 @@ open ChemicalRegistryIdentity public
 atpIdentity : ChemicalRegistryIdentity
 atpIdentity = chemical-registry-identity
   "adenosine 5'-triphosphate / 5'-ATP parent reference"
-  "PubChem CID"
-  "5957"
+  atpPubChem
   "C10H16N5O13P3"
   "PubChem compound 5957, inspected 2026-09-17"
   "molecule-level QID not independently verified in this bridge"
@@ -72,8 +122,7 @@ atpIdentity = chemical-registry-identity
 ampIdentity : ChemicalRegistryIdentity
 ampIdentity = chemical-registry-identity
   "adenosine 5'-monophosphate / AMP parent reference"
-  "PubChem CID"
-  "6083"
+  ampPubChem
   "C10H14N5O7P"
   "PubChem compound 6083, inspected 2026-09-17"
   "molecule-level QID not independently verified in this bridge"
@@ -83,8 +132,7 @@ ampIdentity = chemical-registry-identity
 adpIdentity : ChemicalRegistryIdentity
 adpIdentity = chemical-registry-identity
   "adenosine 5'-diphosphate / ADP parent reference"
-  "PubChem CID"
-  "6022"
+  adpPubChem
   "C10H15N5O10P2"
   "PubChem compound 6022, inspected 2026-09-17"
   "molecule-level QID not independently verified in this bridge"
@@ -94,8 +142,7 @@ adpIdentity = chemical-registry-identity
 ap5aIdentity : ChemicalRegistryIdentity
 ap5aIdentity = chemical-registry-identity
   "diadenosine pentaphosphate / Ap5A parent reference"
-  "PubChem CID"
-  "53477724"
+  ap5aPubChem
   "C20H29N10O22P5"
   "PubChem compound 53477724, inspected 2026-09-17"
   "molecule-level QID not independently verified in this bridge"
@@ -105,8 +152,7 @@ ap5aIdentity = chemical-registry-identity
 magnesiumIdentity : ChemicalRegistryIdentity
 magnesiumIdentity = chemical-registry-identity
   "magnesium(2+)"
-  "PubChem CID"
-  "888"
+  magnesiumPubChem
   "Mg+2"
   "PubChem compound 888, inspected 2026-09-17"
   "molecule/entity QID not independently verified in this bridge"
@@ -201,6 +247,7 @@ record AdKChemicalSystemBoundary : Set where
   field
     reusesCanonicalChemistryKernel : Bool
     reusesAtomicToMolecularHyperformalism : Bool
+    usesGenericExternalIdentityDemandForPubChem : Bool
     atpAmpAdpRegistryIdentitiesRetained : Bool
     ap5aStructuralContextRetained : Bool
     magnesiumRegistryIdentityRetained : Bool
@@ -218,5 +265,5 @@ open AdKChemicalSystemBoundary public
 canonicalAdKChemicalSystemBoundary : AdKChemicalSystemBoundary
 canonicalAdKChemicalSystemBoundary =
   adk-chemical-system-boundary
-    true true true true true true true true
+    true true true true true true true true true
     false false false false false false
