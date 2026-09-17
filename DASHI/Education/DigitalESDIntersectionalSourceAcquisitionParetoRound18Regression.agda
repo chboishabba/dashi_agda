@@ -1,0 +1,34 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound18Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound18Exact as Round18
+
+candidateStillRequiresCorpusAdmission :
+  Round18.Round18CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round18.round18CandidateDoesNotCreateIncludedStudy
+
+traceBenchmarkNotWriterTestimony :
+  Round18.TraceBenchmarkCreatesWriterTestimony → ⊥
+traceBenchmarkNotWriterTestimony = Round18.traceBenchmarkDoesNotCreateWriterTestimony
+
+falsePositiveDisparityNotObservedSanction :
+  Round18.FalsePositiveDisparityCreatesObservedSanction → ⊥
+falsePositiveDisparityNotObservedSanction = Round18.falsePositiveDisparityDoesNotCreateObservedSanction
+
+biasedFamilyNotUniversalBias :
+  Round18.OneDetectorFamilyCreatesUniversalBiasLaw → ⊥
+biasedFamilyNotUniversalBias = Round18.oneDetectorFamilyDoesNotCreateUniversalBiasLaw
+
+noBiasFamilyNotUniversalFairness :
+  Round18.OneNoBiasResultCreatesUniversalDeploymentFairness → ⊥
+noBiasFamilyNotUniversalFairness = Round18.oneNoBiasResultDoesNotCreateUniversalDeploymentFairness
+
+sourceDisagreementNotContradiction :
+  Round18.SourceDisagreementCreatesLogicalContradiction → ⊥
+sourceDisagreementNotContradiction = Round18.sourceDisagreementDoesNotCreateLogicalContradiction
+
+detectorSurfaceCollisionRulesOutFlatRecovery :
+  Round18.DetectorIncidenceFactorisation → ⊥
+detectorSurfaceCollisionRulesOutFlatRecovery = Round18.detectorIncidenceDoesNotFactorThroughCoarseDetectorSurface
