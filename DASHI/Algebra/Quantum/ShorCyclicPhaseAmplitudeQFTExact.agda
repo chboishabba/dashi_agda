@@ -212,11 +212,11 @@ cyclicPhaseFiniteFourierTransform :
   ∀ {Q N Coefficient}
     (qNonZero : B369.NonZero Q)
     (nNonZero : B369.NonZero N)
-    {A : CyclicPhaseCoefficientAuthority Coefficient Q} →
+    (A : CyclicPhaseCoefficientAuthority Coefficient Q) →
   CyclicPhaseInversionAuthority A →
   QFT.FiniteFourierTransform
     (cyclicPhaseAmplitudeRegister qNonZero nNonZero A)
-cyclicPhaseFiniteFourierTransform qNonZero nNonZero {A} I = record
+cyclicPhaseFiniteFourierTransform qNonZero nNonZero A I = record
   { fourier = cyclicPhaseForward A
   ; inverseFourier = cyclicPhaseInverse A
   ; inverseAfterFourier = inverseAfterForward I
