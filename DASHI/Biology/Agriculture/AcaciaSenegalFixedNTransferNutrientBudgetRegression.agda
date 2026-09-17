@@ -30,6 +30,9 @@ elTahir2009DOIPinned = refl
 basga2018DOIPinned : T.basgaEtAl2018DOI ≡ "10.5897/AJAR2018.13283"
 basga2018DOIPinned = refl
 
+gerakis1970DOIPinned : T.gerakisTsangarakis1970DOI ≡ "10.1007/BF01378198"
+gerakis1970DOIPinned = refl
+
 plantFixedNDoesNotCreateInterplantTransfer :
   T.plantFixedNContributionImpliesInterplantTransfer T.canonicalTransferBudgetBoundary ≡ false
 plantFixedNDoesNotCreateInterplantTransfer = refl
@@ -61,6 +64,14 @@ priorAccumulationDoesNotGuaranteePersistenceAfterConversion = refl
 managementHistoryRemainsIndexed :
   T.landUseTransitionAndHistoryMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
 managementHistoryRemainsIndexed = refl
+
+formerTreePatchMemoryCannotBeDropped :
+  T.clearedLandCoverImpliesSpatiallyHomogeneousSoil T.canonicalTransferBudgetBoundary ≡ false
+formerTreePatchMemoryCannotBeDropped = refl
+
+priorTreePatchLocationRemainsIndexed :
+  T.formerTreePatchLocationMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
+priorTreePatchLocationRemainsIndexed = refl
 
 cropYieldWithMineralNDoesNotPayAvoidedMineralN :
   T.cropYieldUnderCoAppliedMineralNClosesAvoidedMineralN T.canonicalTransferBudgetBoundary ≡ false
