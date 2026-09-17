@@ -152,8 +152,10 @@ selectedMarkedDecayRequiresIndependentF1PaymentIsFalse :
   selectedMarkedDecayRequiresIndependentF1Payment ≡ false
 selectedMarkedDecayRequiresIndependentF1PaymentIsFalse = refl
 
+-- Source-written explicit Agda term in this tranche.  Keep the metadata
+-- fail-closed until an exact-head Agda kernel run is observed.
 r295MarkedSourceAdapterLevel : ProofLevel
-r295MarkedSourceAdapterLevel = machineChecked
+r295MarkedSourceAdapterLevel = conditional
 
 -- The underlying physical selected-J localization remains exactly the R295
 -- source-facing level; the adapter does not alter its proof status.
