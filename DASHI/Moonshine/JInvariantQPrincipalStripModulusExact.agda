@@ -23,7 +23,7 @@ module DASHI.Moonshine.JInvariantQPrincipalStripModulusExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
@@ -98,7 +98,7 @@ qModulusBelowOneFromNegativeRealPart {C} {D} {F} P B tau strip negative =
   in
   subst
     (λ lower → Real._<_ R lower (Real.one R))
-    (Relation.Binary.PropositionalEquality.sym modulusEqualsExp)
+    (sym modulusEqualsExp)
     expNegativeBelowOne
 
 ------------------------------------------------------------------------
