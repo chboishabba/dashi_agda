@@ -15,6 +15,10 @@ import DASHI.Algebra.Quantum.ShorScalarAmplitudeCarrierExact
 import DASHI.Algebra.Quantum.ShorScalarAmplitudeCarrierRegression
 import DASHI.Algebra.Quantum.ShorIndependentTargetAmplitudeOracleExact
 import DASHI.Algebra.Quantum.ShorIndependentTargetAmplitudeOracleRegression
+import DASHI.Algebra.Quantum.ShorFinitePowModTargetExact
+import DASHI.Algebra.Quantum.ShorFinitePowModTargetRegression
+import DASHI.Algebra.Quantum.ShorFiniteIndependentTargetAmplitudeOracleExact
+import DASHI.Algebra.Quantum.ShorFiniteIndependentTargetAmplitudeOracleRegression
 import DASHI.Algebra.Quantum.ShorPeriodExecutionPipelineExact
 import DASHI.Algebra.Quantum.ShorPeriodExecutionPipelineRegression
 import DASHI.Crypto.FiniteFactorArithmetic
