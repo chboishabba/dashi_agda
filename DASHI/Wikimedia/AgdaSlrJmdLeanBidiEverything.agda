@@ -11,6 +11,11 @@ module DASHI.Wikimedia.AgdaSlrJmdLeanBidiEverything where
 -- execution surface is the integrated dashi_lean4 repository generation at
 -- commit 349f9b7dd49a7f23bfbd7d9da60416afa5440ccf.  Repository integration is
 -- kept distinct from an observed execution/kernel receipt.
+--
+-- The native SLR P7d.5 path now additionally has an observed execution receipt
+-- at PR #24 head efba015c78480c324c4f99d7ec8dab4a31020640, including the live
+-- Mabo P710 provider observation and v2 PostgreSQL identity-class lineage.
+-- That native runtime payment does not imply JMD getter parity/replay.
 ------------------------------------------------------------------------
 
 open import DASHI.Wikimedia.AristotleLeanMachineAttributionExact public
@@ -22,10 +27,15 @@ open import DASHI.Wikimedia.SlrLeanChallengeBidiExact public
 open import DASHI.Wikimedia.MaboLeanSlrP7dBidiBridgeExact public
 open import DASHI.Wikimedia.MaboJmdSlrGetterParityFixtureExact public
 open import DASHI.Wikimedia.MaboSlrLeanChallengeReplayFixtureExact public
+open import DASHI.Wikimedia.MaboP7d5SlrRuntimeReceiptExact public
+open import DASHI.Wikimedia.MaboLiveIdentityLineageInteropExact public
+open import DASHI.Wikimedia.MaboWorldObservationInteropExact public
 
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
 import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact
 import DASHI.Wikimedia.MaboResidualDrivenWorldExpansionStepExact
+import DASHI.Wikimedia.MaboWorldObjectIdentityExact
+import DASHI.Wikimedia.MaboIdentityClassTargetExact
 import DASHI.Law.SensibLawMultiResidualProofFrontierExact
 import DASHI.Law.SensibLawParsedAuthorityReasoningGraphExact
 import DASHI.Law.SensibLawImmutableLegalResearchWorldExact
