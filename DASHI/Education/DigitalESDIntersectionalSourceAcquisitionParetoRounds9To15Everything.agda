@@ -3,9 +3,11 @@ module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRounds9To1
 ------------------------------------------------------------------------
 -- Thin import-only rollup for the post-Round-8 acquisition Pareto.
 --
--- This owner creates no new empirical claim, source authority, inclusion
--- decision, QID/Dewey identity, or aggregate quality score. Each round retains
--- its own source-role, same-object and no-promotion boundaries.
+-- Historical module name retained for existing aggregate compatibility; this
+-- rollup now reaches Round 16. It creates no new empirical claim, source
+-- authority, inclusion decision, QID/Dewey identity, or aggregate quality
+-- score. Each round retains its own source-role, same-object and no-promotion
+-- boundaries.
 ------------------------------------------------------------------------
 
 import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound9Exact
@@ -22,3 +24,5 @@ import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound14Exa
 import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound14Regression
 import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound15Exact
 import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound15Regression
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound16Exact
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound16Regression
