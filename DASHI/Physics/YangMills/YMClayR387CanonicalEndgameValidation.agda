@@ -1,0 +1,11 @@
+module DASHI.Physics.YangMills.YMClayR387CanonicalEndgameValidation where
+
+import DASHI.Physics.YangMills.YMClayR387CanonicalEndgameExact as Endgame
+
+open Endgame
+
+canonicalR387EndgameCompilerAvailable : Set
+canonicalR387EndgameCompilerAvailable = CanonicalR387EndgameCompilerPresent
+
+canonicalR387EndgameCompilerWitness : CanonicalR387EndgameCompilerPresent
+canonicalR387EndgameCompilerWitness = canonicalR387EndgameCompilerPresent
