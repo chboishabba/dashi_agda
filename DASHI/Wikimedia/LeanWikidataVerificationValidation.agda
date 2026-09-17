@@ -110,3 +110,32 @@ _ = refl
 
 _ : verificationCreatesLegalAuthority kernelPassedWrongObject ≡ false
 _ = refl
+
+sampleProofDebtStatus : RelationProofDebtStatus
+sampleProofDebtStatus =
+  relationProofDebtStatus
+    "status:mabo:P710"
+    mathematicalEncoded
+    exactStatementKnown
+    leanKernelPassed
+    staleFreshness
+    exactAttachment
+    csvGenerated
+
+_ : mathematicalStatus sampleProofDebtStatus ≡ mathematicalEncoded
+_ = refl
+
+_ : statementStatus sampleProofDebtStatus ≡ exactStatementKnown
+_ = refl
+
+_ : certificationStatus sampleProofDebtStatus ≡ leanKernelPassed
+_ = refl
+
+_ : proofDebtFreshnessStatus sampleProofDebtStatus ≡ staleFreshness
+_ = refl
+
+_ : attachmentStatus sampleProofDebtStatus ≡ exactAttachment
+_ = refl
+
+_ : proofDebtPublicationStatus sampleProofDebtStatus ≡ csvGenerated
+_ = refl
