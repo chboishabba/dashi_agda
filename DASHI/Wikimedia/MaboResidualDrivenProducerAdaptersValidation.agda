@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Wikimedia.LeanSlrWorldObservationBidiExact
 open import DASHI.Wikimedia.LeanWikidataVerificationExact
+open import DASHI.Wikimedia.JmdLeanGoldenAbiAttachmentExact
 open import DASHI.Wikimedia.MaboLeanSlrP7dBidiBridgeExact
 open import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact
 
@@ -54,12 +55,19 @@ sampleVerification =
     exactSameObject
     relationAligned
     "lean:query:mabo:P710"
-    "jmd-aristotle:lean4-v4.28.0"
+    "dashi_lean4@349f9b7dd49a7f23bfbd7d9da60416afa5440ccf"
     reportGenerated
     "csv:mabo-status"
     false
     false
     false
+
+sampleJmdVerification : JmdVerificationAbiReceipt
+sampleJmdVerification =
+  mkJmdVerificationAbiReceipt
+    sampleVerification
+    "RequestProject.Cli.Derive.checkSubChain_sound"
+    "receipt:jmd:mabo:P710"
 
 sampleAttachment : LeanP7AttachmentReceipt
 sampleAttachment =
@@ -106,8 +114,22 @@ _ = refl
 _ : verificationCreatesExpansionCandidate sampleTypedAdapter ≡ false
 _ = refl
 
-_ : typedAdapterCreatesSemanticAuthority sampleTypedAdapter ≡ false
+sampleIntegratedAdapter : IntegratedLeanVerifiedWikidataAdapterReceipt
+sampleIntegratedAdapter =
+  fromJmdVerificationToIntegratedWikidataAdapter
+    sampleJmdVerification
+    sampleAttachment
+    "residual:mabo:identity"
+    "identityResidual"
+
+_ : integratedAdapterUsesCanonicalJmdMachine sampleIntegratedAdapter ≡ true
 _ = refl
 
-_ : typedAdapterCreatesClaimTruth sampleTypedAdapter ≡ false
+_ : integratedAdapterCreatesExpansionCandidate sampleIntegratedAdapter ≡ false
+_ = refl
+
+_ : integratedAdapterCreatesSemanticAuthority sampleIntegratedAdapter ≡ false
+_ = refl
+
+_ : integratedAdapterCreatesClaimTruth sampleIntegratedAdapter ≡ false
 _ = refl
