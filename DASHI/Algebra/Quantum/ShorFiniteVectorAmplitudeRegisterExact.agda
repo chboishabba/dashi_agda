@@ -8,6 +8,7 @@ import Data.Fin.Properties as FinP
 import Data.Vec.Base as Vec
 open import Data.List.Base using (List; []; _∷_; allFin)
 open import Relation.Nullary using (yes; no)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Foundations.Base369Nat as B369
 import DASHI.Algebra.Quantum.FiniteQuantumRegister as Quantum
@@ -21,14 +22,12 @@ import DASHI.Algebra.Quantum.ShorCyclicPhaseAmplitudeQFTExact as Phase
 ------------------------------------------------------------------------
 -- CANONICAL FINITE VECTOR AMPLITUDE REGISTER
 --
--- This replaces raw formal superposition syntax by one canonical finite table:
---
---   Vec (Vec Coefficient (N + 1)) Q.
+--   Vec (Vec Coefficient (N + 1)) Q
 --
 -- Rows are exponent coordinates Fin Q.  Column zero is the distinguished clean
--- target; column suc(y) is residue y : Fin N.  Therefore ordinary propositional
--- equality of states is structural Vec equality: no function extensionality and
--- no quotient by module syntax is required.
+-- target; column suc(y) is residue y : Fin N.  Ordinary propositional equality
+-- is structural Vec equality: no function extensionality and no quotient by
+-- module syntax is required.
 --
 -- The exact RSA.powMod oracle is a coordinate permutation in each exponent row:
 -- clean <-> suc(powMod x), all other target coordinates fixed.  The literal
@@ -177,17 +176,12 @@ basisTable :
   Fin.Fin Q → Fin.Fin (suc N) →
   AmplitudeTable Coefficient Q N
 basisTable A exponent target =
-  tabulateTable λ x slot →
-    decide x slot
+  tabulateTable λ x slot → decide x slot
   where
     decide : Fin.Fin Q → Fin.Fin (suc N) → Coefficient
     decide x slot with FinP._≟_ exponent x | FinP._≟_ target slot
     ... | yes refl | yes refl = Phase.oneCoefficient A
     ... | _ | _ = Phase.zeroCoefficient A
-
-record FiniteVectorAmplitudeState
-    {Q N Coefficient : Nat → Set}
-    (dummy : Set) : Set where
 
 record VectorAmplitudeState
     {Coefficient : Set}
