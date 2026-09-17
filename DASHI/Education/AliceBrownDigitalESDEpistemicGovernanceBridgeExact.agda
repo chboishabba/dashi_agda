@@ -44,7 +44,7 @@ dataAvailabilityDoesNotPromoteContextPreservingReuse :
   DataAvailabilityPromotesContextPreservingReuse → ⊥
 dataAvailabilityDoesNotPromoteContextPreservingReuse ()
 
-record AliceBrownDigitalESDEpistemicGovernanceBridge : Set where
+record AliceBrownDigitalESDEpistemicGovernanceBridge : Set₁ where
   constructor aliceBrownDigitalESDEpistemicGovernanceBridge
   field
     aliceCorpus : Loom.AliceBrownCorpusLoom

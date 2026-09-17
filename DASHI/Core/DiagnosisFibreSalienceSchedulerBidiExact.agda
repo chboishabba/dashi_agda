@@ -90,7 +90,14 @@ smallFrameCheckIsSalient =
       updateDiagnosisFibre smallFrameCheck ambiguousDiagnosisFibre diagnosis →
       ambiguousDiagnosisFibre diagnosis
     refine Backprop.frameConflict ()
-    refine diagnosis proof = proof
+    refine Backprop.modelConflict proof = proof
+    refine Backprop.premiseConflict proof = proof
+    refine Backprop.observationConflict proof = proof
+    refine Backprop.ruleConflict proof = proof
+    refine Backprop.consumerMismatch proof = proof
+    refine Backprop.provenanceConflict proof = proof
+    refine Backprop.authorityMismatch proof = proof
+    refine Backprop.insufficientResolution proof = proof
 
 largeDebugObservationIsInert :
   DiagnosisSalientOn largeButInertDebugObservation ambiguousDiagnosisFibre → ⊥

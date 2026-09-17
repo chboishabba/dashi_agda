@@ -96,7 +96,14 @@ smallModelCheckIsSalient =
       Diagnosis.updateDiagnosisFibre smallModelCheck Diagnosis.ambiguousDiagnosisFibre diagnosis →
       Diagnosis.ambiguousDiagnosisFibre diagnosis
     refine Outcome.modelConflict ()
-    refine diagnosis proof = proof
+    refine Outcome.frameConflict proof = proof
+    refine Outcome.premiseConflict proof = proof
+    refine Outcome.observationConflict proof = proof
+    refine Outcome.ruleConflict proof = proof
+    refine Outcome.consumerMismatch proof = proof
+    refine Outcome.provenanceConflict proof = proof
+    refine Outcome.authorityMismatch proof = proof
+    refine Outcome.insufficientResolution proof = proof
 
 frameWeightedCandidate :
   WeightedDebugCandidate canonicalPriorityPolicy Diagnosis.ambiguousDiagnosisFibre

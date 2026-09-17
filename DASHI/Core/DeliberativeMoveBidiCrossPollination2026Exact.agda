@@ -46,8 +46,8 @@ open DeliberativeMove public
 
 record ReopenOnSeriousObjection : Set where
   constructor reopen-on-serious-objection
-  field objection : Objection
-        seriousIsTrue : serious objection ≡ true
+  field raisedObjection : Objection
+        seriousIsTrue : serious raisedObjection ≡ true
         reopenedResidualReference reformulationReference : String
 open ReopenOnSeriousObjection public
 
