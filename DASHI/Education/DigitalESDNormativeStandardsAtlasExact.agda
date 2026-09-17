@@ -79,8 +79,8 @@ mkFrameworkLens src identifier version scope dewey =
     dewey
     addresses
 
-iso9001_2026 : StandardLens
-iso9001_2026 = mkTechnicalStandardLens
+iso9001-2026 : StandardLens
+iso9001-2026 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 9001:2026"
   "2026"
@@ -89,8 +89,8 @@ iso9001_2026 = mkTechnicalStandardLens
   "Public ISO catalogue scope: requirements for establishing, implementing, maintaining and continually improving a quality management system. Does not establish educational effectiveness or sustainability outcomes."
   "unresolved/not assigned by this atlas"
 
-isoIEC42001_2023 : StandardLens
-isoIEC42001_2023 = mkTechnicalStandardLens
+isoIEC42001-2023 : StandardLens
+isoIEC42001-2023 = mkTechnicalStandardLens
   "ISO/IEC"
   "ISO/IEC 42001:2023"
   "2023"
@@ -99,8 +99,8 @@ isoIEC42001_2023 = mkTechnicalStandardLens
   "AI management-system lens for organisational governance, planning, operation, evaluation and improvement; not pedagogical-effect evidence."
   "unresolved/not assigned by this atlas"
 
-isoIEC27001_2022 : StandardLens
-isoIEC27001_2022 = mkTechnicalStandardLens
+isoIEC27001-2022 : StandardLens
+isoIEC27001-2022 = mkTechnicalStandardLens
   "ISO/IEC"
   "ISO/IEC 27001:2022"
   "2022"
@@ -109,8 +109,8 @@ isoIEC27001_2022 = mkTechnicalStandardLens
   "Information-security management-system lens; confidentiality/integrity/availability management does not imply accessibility, participant authority or educational benefit."
   "unresolved/not assigned by this atlas"
 
-isoIEC27701_2025 : StandardLens
-isoIEC27701_2025 = mkTechnicalStandardLens
+isoIEC27701-2025 : StandardLens
+isoIEC27701-2025 = mkTechnicalStandardLens
   "ISO/IEC"
   "ISO/IEC 27701:2025"
   "2025"
@@ -119,8 +119,8 @@ isoIEC27701_2025 = mkTechnicalStandardLens
   "Privacy-information-management lens; privacy management does not manufacture consent, epistemic agency, or justified retention."
   "unresolved/not assigned by this atlas"
 
-isoIEC23894_2023 : StandardLens
-isoIEC23894_2023 = mkTechnicalStandardLens
+isoIEC23894-2023 : StandardLens
+isoIEC23894-2023 = mkTechnicalStandardLens
   "ISO/IEC"
   "ISO/IEC 23894:2023"
   "2023"
@@ -129,8 +129,8 @@ isoIEC23894_2023 = mkTechnicalStandardLens
   "AI risk-management guidance lens; identifies risk-process obligations but does not establish educational outcome or distributed impact."
   "unresolved/not assigned by this atlas"
 
-iso9241_110_2020 : StandardLens
-iso9241_110_2020 = mkTechnicalStandardLens
+iso9241-110-2020 : StandardLens
+iso9241-110-2020 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 9241-110:2020"
   "2020"
@@ -139,8 +139,8 @@ iso9241_110_2020 = mkTechnicalStandardLens
   "Interaction-principles lens; formal usability does not imply realised accessibility or effective educational participation."
   "unresolved/not assigned by this atlas"
 
-iso9241_161_2025 : StandardLens
-iso9241_161_2025 = mkTechnicalStandardLens
+iso9241-161-2025 : StandardLens
+iso9241-161-2025 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 9241-161:2025"
   "2025"
@@ -149,8 +149,8 @@ iso9241_161_2025 = mkTechnicalStandardLens
   "Visual user-interface element design lens; does not by itself establish access for a situated learner population."
   "unresolved/not assigned by this atlas"
 
-iso9241_210_2019 : StandardLens
-iso9241_210_2019 = mkTechnicalStandardLens
+iso9241-210-2019 : StandardLens
+iso9241-210-2019 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 9241-210:2019"
   "2019"
@@ -159,8 +159,8 @@ iso9241_210_2019 = mkTechnicalStandardLens
   "Human-centred-design process lens; use of a process does not establish whose experience or authority was actually represented."
   "unresolved/not assigned by this atlas"
 
-iso9241_306_2018 : StandardLens
-iso9241_306_2018 = mkTechnicalStandardLens
+iso9241-306-2018 : StandardLens
+iso9241-306-2018 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 9241-306:2018"
   "2018"
@@ -169,8 +169,8 @@ iso9241_306_2018 = mkTechnicalStandardLens
   "Electronic-display field-assessment lens; not a whole educational-accessibility or learning-effect measure."
   "unresolved/not assigned by this atlas"
 
-iso24552_2020 : StandardLens
-iso24552_2020 = mkTechnicalStandardLens
+iso24552-2020 : StandardLens
+iso24552-2020 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 24552:2020"
   "2020"
@@ -179,8 +179,8 @@ iso24552_2020 = mkTechnicalStandardLens
   "Accessible-design lens for information on small visual displays; not a universal disability-access or education-system measure."
   "unresolved/not assigned by this atlas"
 
-iso16817_2017 : StandardLens
-iso16817_2017 = mkTechnicalStandardLens
+iso16817-2017 : StandardLens
+iso16817-2017 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 16817:2017"
   "2017"
@@ -189,8 +189,8 @@ iso16817_2017 = mkTechnicalStandardLens
   "Indoor visual-environment design lens connecting user/environment/building concerns; the physical-school baseline is not treated as impact-free."
   "unresolved/not assigned by this atlas"
 
-iso24505_1_2025 : StandardLens
-iso24505_1_2025 = mkTechnicalStandardLens
+iso24505-1-2025 : StandardLens
+iso24505-1-2025 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 24505-1:2025"
   "2025"
@@ -199,8 +199,8 @@ iso24505_1_2025 = mkTechnicalStandardLens
   "Version-pinned colour-accessibility lens; retained separately from the superseded generic ISO 24505 identity."
   "unresolved/not assigned by this atlas"
 
-iso24505_2_2025 : StandardLens
-iso24505_2_2025 = mkTechnicalStandardLens
+iso24505-2-2025 : StandardLens
+iso24505-2-2025 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 24505-2:2025"
   "2025"
@@ -209,8 +209,8 @@ iso24505_2_2025 = mkTechnicalStandardLens
   "Version-pinned colour-accessibility lens for colour deficiency/low-vision context; no generic accessibility promotion."
   "unresolved/not assigned by this atlas"
 
-iso22727_2007 : StandardLens
-iso22727_2007 = mkTechnicalStandardLens
+iso22727-2007 : StandardLens
+iso22727-2007 = mkTechnicalStandardLens
   "International Organization for Standardization"
   "ISO 22727:2007"
   "2007"
@@ -277,8 +277,8 @@ sixSigmaDMAIC = mkFrameworkLens
   "Measurement/improvement lens: define, measure, analyse, improve and control an existing process; not a sustainability theory or educational-effect source."
   "unresolved/not assigned by this atlas"
 
-isoIEC42005_2025 : StandardLens
-isoIEC42005_2025 = mkTechnicalStandardLens
+isoIEC42005-2025 : StandardLens
+isoIEC42005-2025 = mkTechnicalStandardLens
   "ISO/IEC"
   "ISO/IEC 42005:2025"
   "2025"
@@ -289,24 +289,24 @@ isoIEC42005_2025 = mkTechnicalStandardLens
 
 canonicalStandardLenses : List StandardLens
 canonicalStandardLenses =
-  iso9001_2026
-  ∷ isoIEC42001_2023
-  ∷ isoIEC27001_2022
-  ∷ isoIEC27701_2025
-  ∷ isoIEC23894_2023
-  ∷ iso9241_110_2020
-  ∷ iso9241_161_2025
-  ∷ iso9241_210_2019
-  ∷ iso9241_306_2018
-  ∷ iso24552_2020
-  ∷ iso16817_2017
-  ∷ iso24505_1_2025
-  ∷ iso24505_2_2025
-  ∷ iso22727_2007
+  iso9001-2026
+  ∷ isoIEC42001-2023
+  ∷ isoIEC27001-2022
+  ∷ isoIEC27701-2025
+  ∷ isoIEC23894-2023
+  ∷ iso9241-110-2020
+  ∷ iso9241-161-2025
+  ∷ iso9241-210-2019
+  ∷ iso9241-306-2018
+  ∷ iso24552-2020
+  ∷ iso16817-2017
+  ∷ iso24505-1-2025
+  ∷ iso24505-2-2025
+  ∷ iso22727-2007
   ∷ nistAIRMF10
   ∷ itil4
   ∷ sixSigmaDMAIC
-  ∷ isoIEC42005_2025
+  ∷ isoIEC42005-2025
   ∷ []
 
 ------------------------------------------------------------------------

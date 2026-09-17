@@ -15,7 +15,7 @@ import DASHI.Education.DigitalESDSourceAuditAdmissibilityExact as Admissibility
 import DASHI.Education.DigitalESDNormativeStandardsAtlasExact as Standards
 import DASHI.Education.DigitalESDSourceIntersectionalAuditExact as Intersection
 import DASHI.Education.DigitalESDEvidenceBraidTensionExact as Tension
-import DASHI.Environment.LESSituatedSocioEcologicalHyperfabricExact as LES
+
 
 ------------------------------------------------------------------------
 -- SITUATED SOURCE-AUDIT HYPERFABRIC
