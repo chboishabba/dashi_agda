@@ -72,6 +72,53 @@ record LeanVerificationReceipt : Set where
 
 open LeanVerificationReceipt public
 
+------------------------------------------------------------------------
+-- PROOF-DEBT ROUTER PROJECTION
+------------------------------------------------------------------------
+
+data MathematicalStatus : Set where
+  mathematicalUnencoded : MathematicalStatus
+  mathematicalEncoded : MathematicalStatus
+  mathematicalDerived : MathematicalStatus
+
+data StatementStatus : Set where
+  statementUnresolved : StatementStatus
+  exactStatementKnown : StatementStatus
+  statementNeedsRefinement : StatementStatus
+
+data CertificationStatus : Set where
+  certificationNotRun : CertificationStatus
+  leanKernelPassed : CertificationStatus
+  leanKernelFailed : CertificationStatus
+  certificationBlocked : CertificationStatus
+
+data AttachmentStatus : Set where
+  exactAttachment : AttachmentStatus
+  representationEquivalentAttachment : AttachmentStatus
+  relatedAttachment : AttachmentStatus
+  wrongAttachment : AttachmentStatus
+  ambiguousAttachment : AttachmentStatus
+  unresolvedAttachment : AttachmentStatus
+
+data ProofDebtPublicationStatus : Set where
+  publicationNotGenerated : ProofDebtPublicationStatus
+  csvGenerated : ProofDebtPublicationStatus
+  summaryGenerated : ProofDebtPublicationStatus
+  publicationFailed : ProofDebtPublicationStatus
+
+record RelationProofDebtStatus : Set where
+  constructor relationProofDebtStatus
+  field
+    relationStatusReference : String
+    mathematicalStatus : MathematicalStatus
+    statementStatus : StatementStatus
+    certificationStatus : CertificationStatus
+    proofDebtFreshnessStatus : FreshnessStatus
+    attachmentStatus : AttachmentStatus
+    proofDebtPublicationStatus : ProofDebtPublicationStatus
+
+open RelationProofDebtStatus public
+
 record ImportFaithfulnessReceipt : Set where
   constructor importFaithfulnessReceipt
   field
@@ -105,8 +152,11 @@ data ImportFaithfulnessImpliesWorldTruth : Set where
 data KernelPassedImpliesFreshSource : Set where
 data ReportGeneratedImpliesKernelPassed : Set where
 data LeanKernelReceiptEqualsAgdaProof : Set where
-
 data SameObjectAlignmentImpliesRelationTruth : Set where
+data CertificationStatusDeterminesFreshness : Set where
+data PublicationStatusDeterminesCertification : Set where
+
+data AttachmentStatusDeterminesWorldTruth : Set where
 
 fetchedDoesNotEqualImported : FetchedClaimEqualsImportedAssertion → ⊥
 fetchedDoesNotEqualImported ()
@@ -131,6 +181,15 @@ leanKernelReceiptDoesNotBecomeAgdaProof ()
 sameObjectAlignmentDoesNotCreateRelationTruth :
   SameObjectAlignmentImpliesRelationTruth → ⊥
 sameObjectAlignmentDoesNotCreateRelationTruth ()
+
+certificationDoesNotDetermineFreshness : CertificationStatusDeterminesFreshness → ⊥
+certificationDoesNotDetermineFreshness ()
+
+publicationDoesNotDetermineCertification : PublicationStatusDeterminesCertification → ⊥
+publicationDoesNotDetermineCertification ()
+
+attachmentDoesNotDetermineWorldTruth : AttachmentStatusDeterminesWorldTruth → ⊥
+attachmentDoesNotDetermineWorldTruth ()
 
 ------------------------------------------------------------------------
 -- Exact source owner for this verification ABI.
