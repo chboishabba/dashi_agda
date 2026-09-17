@@ -8,7 +8,8 @@ open import Data.Rational using
   ; NonNegative; Positive; nonNegative; pos )
 import Data.Rational.Properties as ℚP
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans; refl)
+open import Relation.Binary.Reasoning.Setoid using (_≡⟨⟩_; _≡⟨_⟩_; _∎; begin_; _≡_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -143,9 +144,38 @@ walshSpectralIdentity (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1
 -- Positivity of the explicit sum-of-squares remainder.
 ------------------------------------------------------------------------
 
-postulate negSquare : ∀ q → (- q) * (- q) ≡ q * q
+negQq : ∀ q → (- q) * q ≡ -( q * q)
+negQq q =
+  begin_
+    (- q) * q
+  ≈⟨ sym (ℚP.*-distribˡ-+ (- q) q q) ⟩
+    (- q) * (q + q)
+  ≈⟨ cong (λ v → (- q) * v) (ℚP.+-inverseˡ q) ⟩
+    (- q) * 0ℚ
+  ≈⟨ sym (ℚP.*-zeroʳ (- q)) ⟩
+    0ℚ
+  ∎
 
-postulate negZero : - 0ℚ ≡ 0ℚ
+negSquare : ∀ q → (- q) * (- q) ≡ q * q
+negSquare q =
+  begin_
+    (- q) * (- q)
+  ≈⟨ sym (ℚP.*-distribˡ-+ (- q) (- q) q) ⟩
+    (- q) * (- q) + (- q) * q
+  ≈⟨ cong (λ v → (- q) * v) (ℚP.+-inverseˡ q) ⟩
+    (- q) * ((- q) + q)
+  ≈⟨ sym (ℚP.*-zeroʳ (- q)) ⟩
+    (- q) * 0ℚ
+  ≈⟨ cong (λ v → v + 0ℚ) (sym (ℚP.+-identityˡ ((- q) * (- q)))) ⟩
+    0ℚ + (- q) * (- q)
+  ≈⟨ ℚP.+-comm 0ℚ ((- q) * (- q)) ⟩
+    (- q) * (- q) + 0ℚ
+  ≈⟨ ℚP.+-identityʳ ((- q) * (- q)) ⟩
+    (- q) * (- q)
+  ∎
+
+negZero : - 0ℚ ≡ 0ℚ
+negZero = trans (sym (ℚP.+-identityʳ (- 0ℚ))) (ℚP.+-inverseˡ 0ℚ)
 
 squareNonnegative : ∀ q → 0ℚ ≤ sq q
 squareNonnegative q with ℚP.≤-total 0ℚ q
@@ -210,7 +240,8 @@ baseBelowBasePlusRemainder base remainder zero≤remainder =
     (ℚP.+-identityʳ base)
     (ℚP.+-mono-≤ (ℚP.≤-refl {x = base}) zero≤remainder)
 
-postulate zeroSquare : sq 0ℚ ≡ 0ℚ
+zeroSquare : sq 0ℚ ≡ 0ℚ
+zeroSquare = ℚP.*-zeroˡ 0ℚ
 
 meanZeroWalshIdentity : ∀ f →
   blockSum f ≡ 0ℚ →
@@ -241,7 +272,17 @@ meanZeroScaledGap f meanZero =
       (walshRemainder f)
       (walshRemainderNonnegative f))
 
-postulate eightTimesTwo : ∀ q → eightℚ * (twoℚ * q) ≡ sixteenℚ * q
+eightTimesTwo : ∀ q → eightℚ * (twoℚ * q) ≡ sixteenℚ * q
+eightTimesTwo q =
+  trans
+    (sym (ℚP.*-assoc eightℚ twoℚ q))
+    (trans
+      (cong (λ v → v * q) (ℚP.*-comm eightℚ twoℚ))
+      (trans
+        (cong (λ v → v * q) (ℚP.*-comm twoℚ sixteenℚ))
+        (trans
+          (cong (λ v → v * q) (ℚP.*-identityˡ sixteenℚ))
+          refl)))
 
 instance
   onePositive : Positive 1ℚ
@@ -301,7 +342,15 @@ bondEdgeEnergy block =
   + (edgeEnergy (component2 block)
   + edgeEnergy (component3 block)))
 
-postulate twoDistributesFour : ∀ a b c d → twoℚ * (a + (b + (c + d))) ≡ twoℚ * a + (twoℚ * b + (twoℚ * c + twoℚ * d))
+twoDistributesFour : ∀ a b c d → twoℚ * (a + (b + (c + d))) ≡ twoℚ * a + (twoℚ * b + (twoℚ * c + twoℚ * d))
+twoDistributesFour a b c d =
+  trans
+    (sym (ℚP.*-distribˡ-+ twoℚ a (b + (c + d))))
+    (trans
+      (cong (λ v → twoℚ * a + v) (ℚP.*-distribˡ-+ twoℚ b (c + d)))
+      (trans
+        (cong (λ v → twoℚ * a + (twoℚ * b + v)) (ℚP.*-distribˡ-+ twoℚ c d))
+        (ℚP.+-assoc (twoℚ * a) (twoℚ * b) (twoℚ * c + twoℚ * d))))
 
 fourComponentBoolean4BlockPoincare :
   ∀ block →
@@ -345,7 +394,8 @@ familyEdgeEnergy [] = 0ℚ
 familyEdgeEnergy (block ∷ blocks) =
   bondEdgeEnergy block + familyEdgeEnergy blocks
 
-postulate twoDistributesPlus : ∀ a b → twoℚ * (a + b) ≡ twoℚ * a + twoℚ * b
+twoDistributesPlus : ∀ a b → twoℚ * (a + b) ≡ twoℚ * a + twoℚ * b
+twoDistributesPlus a b = ℚP.*-distribˡ-+ twoℚ a b
 
 finiteDisjointBoolean4BlockPoincare :
   ∀ blocks →
