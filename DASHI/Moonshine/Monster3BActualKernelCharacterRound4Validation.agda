@@ -11,6 +11,8 @@ import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact
 import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
 import DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact as Safe
 import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Gap
+import DASHI.Wikimedia.IbrahimMonsterSSP14GlobalInversionOrbitWeldValidation
+import DASHI.Wikimedia.IbrahimMonsterNineOrbitD4N3BScreenAdapterValidation
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (_∷_; [])
