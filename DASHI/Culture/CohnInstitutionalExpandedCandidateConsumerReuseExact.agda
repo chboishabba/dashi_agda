@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.InstitutionalNormProductionExact as Norm
 import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
@@ -80,8 +81,8 @@ productionHistoryDefect = Norm.productionHistoryQueryAdequacyDefect
 -- the structural point that a representable surface does not recover the
 -- originating subject position.
 subjectPositionNeighbour :
-  Subject.SubjectPositionCollision Subject.canonicalRepresentationSubjectPositionSystem
-subjectPositionNeighbour = Subject.canonicalSubjectPositionCollision
+  INF.FactorsThrough Subject.categoryVisibility Subject.subjectPosition → ⊥
+subjectPositionNeighbour = Subject.categoryVisibilityCannotRecoverSubjectPosition
 
 consultationDoesNotPayBalancedParticipation :
   Norm.consultationAutomaticallyBalancedParticipation
