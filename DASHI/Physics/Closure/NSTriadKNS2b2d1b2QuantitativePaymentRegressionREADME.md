@@ -1,0 +1,1 @@
+The sibling Agda regression is intentionally RED until the production payment owner provides the requested proof witnesses. This file is documentation only and is not a proof receipt.
