@@ -10,8 +10,8 @@ import DASHI.Core.AttributedSourceCore as Source
 -- ATTRIBUTED SOURCE ATLAS
 --
 -- Classical modular-form context is separated from executable finite divisor
--- arithmetic.  The two OEIS entries are independent sequence/parity locators,
--- not definitions or theorem authority.
+-- arithmetic.  OEIS entries are independent sequence/parity locators, not
+-- definitions or theorem authority.
 ------------------------------------------------------------------------
 
 serre : Source.AttributedSource
@@ -43,7 +43,7 @@ miyake =
 sigma3OEIS : Source.AttributedSource
 sigma3OEIS =
   Source.mkNoDOISource
-    "N. J. A. Sloane; R. K. Guy"
+    "OEIS Foundation Inc.; sequence contributors"
     "A001158: sigma_3(n), sum of cubes of divisors of n"
     "The On-Line Encyclopedia of Integer Sequences"
     ""
@@ -55,7 +55,7 @@ sigma3OEIS =
 sigma5OEIS : Source.AttributedSource
 sigma5OEIS =
   Source.mkNoDOISource
-    "N. J. A. Sloane"
+    "OEIS Foundation Inc.; sequence contributors"
     "A001160: sigma_5(n), sum of fifth powers of divisors of n"
     "The On-Line Encyclopedia of Integer Sequences"
     ""
@@ -64,19 +64,49 @@ sigma5OEIS =
     "independent sequence-identity and finite-prefix parity coordinate for the repository's internally computed sigma5; not used to define sigma5 or to create modular-form authority"
     Source.publicAttribution
 
+e4OEIS : Source.AttributedSource
+e4OEIS =
+  Source.mkNoDOISource
+    "OEIS Foundation Inc.; sequence contributors"
+    "A004009: Expansion of Eisenstein series E_4(q)"
+    "The On-Line Encyclopedia of Integer Sequences"
+    ""
+    "https://oeis.org/A004009"
+    (Source.namedSourceKind "OEIS sequence record")
+    "independent finite coefficient-prefix parity coordinate for 1 + 240 sum sigma3(n) q^n; not used to define E4, prove convergence, or create modular-form same-object authority"
+    Source.publicAttribution
+
+e6OEIS : Source.AttributedSource
+e6OEIS =
+  Source.mkNoDOISource
+    "OEIS Foundation Inc.; sequence contributors"
+    "A013973: Expansion of Eisenstein series E_6(q)"
+    "The On-Line Encyclopedia of Integer Sequences"
+    ""
+    "https://oeis.org/A013973"
+    (Source.namedSourceKind "OEIS sequence record")
+    "independent finite coefficient-prefix parity coordinate for 1 - 504 sum sigma5(n) q^n; not used to define E6, prove convergence, or create modular-form same-object authority"
+    Source.publicAttribution
+
 canonicalEisensteinDivisorPowerAtlas : Source.AttributedSourceAtlas
 canonicalEisensteinDivisorPowerAtlas =
   Source.mkSourceAtlas
     "Eisenstein divisor-power source atlas"
     "DASHI.Moonshine.JInvariantEisensteinDivisorPowerSourceAtlasExact"
-    (serre ∷ miyake ∷ sigma3OEIS ∷ sigma5OEIS ∷ [])
-    "separates classical normalized Eisenstein-series source context from executable divisor-power arithmetic and OEIS finite-prefix parity coordinates"
+    (serre ∷ miyake ∷ sigma3OEIS ∷ sigma5OEIS ∷ e4OEIS ∷ e6OEIS ∷ [])
+    "separates classical normalized Eisenstein-series source context from executable divisor-power arithmetic and OEIS finite-prefix parity coordinates for sigma3, sigma5, E4, and E6"
 
 sigma3OEISParityOnly : Bool
 sigma3OEISParityOnly = true
 
 sigma5OEISParityOnly : Bool
 sigma5OEISParityOnly = true
+
+e4OEISParityOnly : Bool
+e4OEISParityOnly = true
+
+e6OEISParityOnly : Bool
+e6OEISParityOnly = true
 
 classicalCoefficientAuthoritySeparatedFromFiniteArithmetic : Bool
 classicalCoefficientAuthoritySeparatedFromFiniteArithmetic = true
@@ -100,4 +130,4 @@ canonicalEisensteinDivisorPowerAttributionBoundary =
   eisenstein-divisor-power-attribution-boundary
     true true true true
     false false false
-    "Serre and Miyake carry classical modular-form source context; A001158/A001160 are parity identifiers only; source presence, OEIS agreement, and finite-prefix agreement do not create proof, analytic convergence, or modular-form same-object authority"
+    "Serre and Miyake carry classical modular-form source context; A001158/A001160 and A004009/A013973 are parity identifiers only; source presence, OEIS agreement, and finite-prefix agreement do not create proof, analytic convergence, or modular-form same-object authority"
