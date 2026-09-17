@@ -8,21 +8,13 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.InstitutionalNormProductionExact as Norm
 import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
+import DASHI.Cognition.PNF.SensibLawDominantChartEpistemicCompressionCrossPollinationExact as Dominant
 import DASHI.Culture.CohnInstitutionalExpandedCandidateFibreAskExact as Ask
 import DASHI.Governance.FirstNationsOwnedEvidenceContractExact as FirstNations
 import DASHI.Governance.MoretonRobinsonRecognitionSovereigntyBoundaryExact as Sovereignty
 
 ------------------------------------------------------------------------
 -- EXPANDED CANDIDATE -> EXISTING CONSUMER REUSE MAP
---
--- Three distinct statuses are retained:
---   exactCanonicalOwner      : repo already has a theorem-bearing owner for the
---                              same consumer distinction;
---   existingNeighbourConsumer: repo has a typed nearby distinction that can be
---                              reused structurally, but it is not definitionally
---                              the acquired source coordinate;
---   uninstantiatedCandidate  : source family exists but no current typed
---                              consumer/fixture observes it directly.
 ------------------------------------------------------------------------
 
 data ConsumerReuseStatus : Set where
@@ -47,7 +39,7 @@ open ExpandedConsumerReuse public
 
 canonicalExpandedConsumerReuse : ExpandedConsumerReuse
 canonicalExpandedConsumerReuse = expanded-consumer-reuse
-  uninstantiatedCandidate
+  existingNeighbourConsumer
   uninstantiatedCandidate
   existingNeighbourConsumer
   existingNeighbourConsumer
@@ -63,26 +55,22 @@ canonicalExpandedConsumerReuse = expanded-consumer-reuse
 -- Neighbouring consumers.
 ------------------------------------------------------------------------
 
--- Arnstein-style participation-power is not identified with lobbying/access,
--- but this existing theorem is an exact structural neighbour: the same access
--- surface does not determine decision influence.
 proximityInfluenceDefect : Proximity.InfluenceQueryAdequacyDefect
 proximityInfluenceDefect = Proximity.influenceQueryAdequacyDefect
 
--- Young-style internal exclusion is not identified with this generic history
--- carrier, but same institutional baseline with negotiated vs excluded
--- production histories is an existing typed consumer for erased participation
--- history.
 productionHistoryDefect : Norm.ProductionHistoryQueryAdequacyDefect
 productionHistoryDefect = Norm.productionHistoryQueryAdequacyDefect
 
--- Collins' outsider-within standpoint is source-specific and not identical to
--- DASHI subject-position grammar.  The canonical neighbour nevertheless pays
--- the structural point that a representable surface does not recover the
--- originating subject position.
 subjectPositionNeighbour :
   INF.FactorsThrough Subject.categoryVisibility Subject.subjectPosition → ⊥
 subjectPositionNeighbour = Subject.categoryVisibilityCannotRecoverSubjectPosition
+
+-- Dotson's structural epistemic oppression is not identified with the DASHI
+-- dominant-chart compiler.  This theorem is a structural neighbour: a single
+-- axis/category observer cannot carry the situated relational-power outcome.
+structuralExclusionNeighbour :
+  INF.FactorsThrough INF.flatProjection INF.relationalOutcome → ⊥
+structuralExclusionNeighbour = Dominant.singleAxisCannotCarrySituatedRelationalOutcome
 
 consultationDoesNotPayBalancedParticipation :
   Norm.consultationAutomaticallyBalancedParticipation
@@ -114,10 +102,6 @@ settlerRecognitionDoesNotConstituteSovereignty :
     sovereigntyBoundary ≡ false
 settlerRecognitionDoesNotConstituteSovereignty = refl
 
-------------------------------------------------------------------------
--- Current Cohn fixture remains separately audited.
-------------------------------------------------------------------------
-
 currentFibreAsk : Ask.ExpandedCandidateFibreAsk
 currentFibreAsk = Ask.canonicalExpandedCandidateFibreAsk
 
@@ -141,10 +125,6 @@ canonicalExpandedConsumerReuseBoundary : ExpandedConsumerReuseBoundary
 canonicalExpandedConsumerReuseBoundary = expanded-consumer-reuse-boundary
   false false false false false true
 
-------------------------------------------------------------------------
--- Pareto consequence.
-------------------------------------------------------------------------
-
 record ExpandedConsumerReuseFrontier : Set where
   constructor expanded-consumer-reuse-frontier
   field
@@ -159,7 +139,7 @@ open ExpandedConsumerReuseFrontier public
 canonicalExpandedConsumerReuseFrontier : ExpandedConsumerReuseFrontier
 canonicalExpandedConsumerReuseFrontier = expanded-consumer-reuse-frontier
   "governance/permission -> FirstNationsOwnedEvidenceContractExact; recognition/sovereignty -> MoretonRobinsonRecognitionSovereigntyBoundaryExact"
-  "participation power -> InstitutionalProximityInfluenceAdequacyExact as access/influence neighbour; internal exclusion -> InstitutionalNormProductionExact as included/excluded production-history neighbour; outsider-within standpoint -> RepresentationSubjectPositionNonfactorabilityExact; Two-Eyed coexistence/co-learning -> existing Indigenous knowledge/braiding owners"
-  "structural epistemic exclusion; epistemic labour burden; epistemic activism/proper uptake; relational research burden still lack a direct typed institutional consumer in this audit"
-  "the expanded source frontier is now partly operationalised by existing consumers without identifying those consumers with the source concepts"
-  "prefer concrete fixtures for one of the still-open consumers; do not acquire another paper merely to restate an already represented neighbour"
+  "structural epistemic exclusion -> dominant-chart/intersectional compression neighbour; participation power -> InstitutionalProximityInfluenceAdequacyExact; internal exclusion -> InstitutionalNormProductionExact; outsider-within standpoint -> RepresentationSubjectPositionNonfactorabilityExact; Two-Eyed coexistence/co-learning -> existing Indigenous knowledge/braiding owners"
+  "epistemic labour burden; epistemic activism/proper uptake; relational research burden still lack a direct typed institutional consumer in this audit"
+  "the expanded source frontier is now mostly operationalised by canonical or neighbouring consumers without identifying those consumers with the source concepts"
+  "prefer concrete fixtures for one of the three still-open consumers; do not acquire another paper merely to restate an already represented neighbour"
