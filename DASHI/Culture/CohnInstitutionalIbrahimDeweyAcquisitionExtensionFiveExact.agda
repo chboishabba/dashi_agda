@@ -9,6 +9,7 @@ import DASHI.Culture.CohnInstitutionalIbrahimDeweyTraversalExact as Traversal
 import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionFourExact as Prior
 import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionThreeExact as Three
 import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Ibrahim
+import DASHI.Governance.FirstNationsOwnedEvidenceContractExact as FirstNations
 
 ------------------------------------------------------------------------
 -- FIFTH IBRAHIM / QID / DEWEY ACQUISITION EXTENSION
@@ -21,9 +22,15 @@ import DASHI.Wikimedia.DashiKnowledgeTraversalFunnelExact as Ibrahim
 -- relation, discharge relational labour, respect rights/permission, or supply
 -- the systemic resources needed for that relation.
 --
--- This source is not collapsed into Berenstain's epistemic-exploitation
--- concept, nor into the 2021 Two-Eyed Seeing coexistence source. It provides a
--- source-bounded related manifestation with its own research/rights context.
+-- The adjacent data-governance follow is REUSE, not acquisition: the repo
+-- already owns CARE 2020, OCAP and Local Contexts via
+-- FirstNationsOwnedEvidenceContractExact / IndigenousAuthoritySourceRegistry.
+-- Provenance/ownership remains insufficient for situated, land-management or
+-- normative authority; richer governance/protocol/permission must stay typed.
+--
+-- Reid 2024 is not collapsed into Berenstain's epistemic-exploitation concept,
+-- the 2021 Two-Eyed Seeing coexistence source, CARE/OCAP, or any one Indigenous
+-- governance framework. These remain related but non-identical coordinates.
 ------------------------------------------------------------------------
 
 reidResearchInAGoodWay : Source.AttributedSource
@@ -43,7 +50,7 @@ acquisitionExtensionFiveAtlas = Source.mkSourceAtlas
   "Cohn institutional Ibrahim/QID/Dewey acquisition extension five"
   "DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionFiveExact"
   (reidResearchInAGoodWay ∷ [])
-  "Single Pareto leaf for ethical/equitable Indigenous research relationship, rights/burden and relational labour. The source is kept distinct from generic epistemic labour, Two-Eyed coexistence, consent, permission, benefit sharing, institutional fact and theorem authority."
+  "Single Pareto leaf for ethical/equitable Indigenous research relationship, rights/burden and relational labour. CARE/OCAP/Local Contexts are reused from canonical governance owners rather than reacquired. All sources remain distinct from generic epistemic labour, Two-Eyed coexistence, consent, permission, benefit sharing, institutional fact and theorem authority."
 
 ------------------------------------------------------------------------
 -- QID / Dewey identity state.
@@ -88,15 +95,34 @@ priorTwoEyedBoundary = Prior.canonicalAcquisitionFourBoundary
 priorEpistemicLabourBoundary : Three.AcquisitionThreeBoundary
 priorEpistemicLabourBoundary = Three.canonicalAcquisitionThreeBoundary
 
+firstNationsEvidenceBoundary : FirstNations.FirstNationsEvidenceBoundary
+firstNationsEvidenceBoundary = FirstNations.canonicalFirstNationsEvidenceBoundary
+
+careGovernanceSourceAnchor : FirstNations.EvidenceRoute
+careGovernanceSourceAnchor = FirstNations.externalHistoricalBackgroundRoute
+
+-- The useful reuse is the boundary itself: provenance/ownership cannot stand in
+-- for governance, protocol or permission. We intentionally do not fabricate an
+-- AuthorizedFor witness for high-authority use.
+provenanceAloneCannotAuthorizeSituatedKnowledge :
+  FirstNations.AuthorizedFor FirstNations.firstNationsOwned FirstNations.situatedKnowledgeAuthority → ⊥
+provenanceAloneCannotAuthorizeSituatedKnowledge =
+  FirstNations.ownedProvenanceAloneDoesNotAuthorizeSituatedKnowledge
+
 record AcquisitionFiveBoundary : Set where
   constructor acquisition-five-boundary
   field
     indigenousRelationalResearchBurdenAdded : Bool
+    careOcapGovernanceReused : Bool
+
     knowledgeIncludedImpliesEthicalEquitableRelation : Bool
     engagementImpliesConsentOrPermission : Bool
     indigenousRightsHolderMayBeFlattenedToGenericStakeholder : Bool
     reidRelationalLabourDefinitionallyEqualsBerenstainEpistemicLabour : Bool
     twoEyedCoexistenceDefinitionallyEqualsResearchEthics : Bool
+    provenanceAloneDeterminesPermission : Bool
+    ocapMayBeUniversalizedAcrossAllIndigenousPeoples : Bool
+
     sourceAdjacencyAutomaticallySelectsResidual : Bool
     sourceCreatesInstitutionalFact : Bool
     unverifiedPublicationQidMayBeInvented : Bool
@@ -106,8 +132,9 @@ open AcquisitionFiveBoundary public
 
 canonicalAcquisitionFiveBoundary : AcquisitionFiveBoundary
 canonicalAcquisitionFiveBoundary = acquisition-five-boundary
-  true
-  false false false false false false false false false
+  true true
+  false false false false false false false
+  false false false false
 
 reidCitationDoesNotImportProof :
   Source.citationImportsProof reidResearchInAGoodWay ≡ false
@@ -125,6 +152,7 @@ record AcquisitionFiveFrontier : Set where
   constructor acquisition-five-frontier
   field
     addedFamily : String
+    canonicalGovernanceReuse : String
     relatedButNonidenticalFamilies : String
     deferredSources : String
     qidDeweyDebt : String
@@ -136,8 +164,9 @@ open AcquisitionFiveFrontier public
 canonicalAcquisitionFiveFrontier : AcquisitionFiveFrontier
 canonicalAcquisitionFiveFrontier = acquisition-five-frontier
   "ethical/equitable Indigenous research relation with rights-holder, relational-labour, burden and systemic-support coordinates"
-  "Berenstain epistemic labour burden; Reid et al. 2021 Two-Eyed coexistence/co-production; permission/obligation/benefit-sharing owners remain related but definitionally separate"
-  "Anderson 2012 system-level epistemic justice, Fraser 1990 counterpublics and Ermine 2007 ethical space are retained as useful follow candidates but not admitted here because they presently overlap more strongly with existing structural-exclusion, activism/internal-exclusion and Two-Eyed interface families"
+  "CARE 2020, OCAP and Local Contexts are already owned by FirstNationsOwnedEvidenceContractExact / IndigenousAuthoritySourceRegistryExact; their governance/permission boundary is reused instead of reacquired"
+  "Berenstain epistemic labour burden; Reid et al. 2021 Two-Eyed coexistence/co-production; CARE/OCAP provenance/control; permission/obligation/benefit-sharing owners remain related but definitionally separate"
+  "Anderson 2012 system-level epistemic justice, Fraser 1990 counterpublics and Ermine 2007 ethical space remain useful follow candidates but are not admitted here because they presently overlap more strongly with existing structural-exclusion, activism/internal-exclusion and Two-Eyed/interface families"
   "Reid 2024 publication and author QIDs unresolved; publication-specific Dewey unresolved; no identifier or neighbouring class is invented"
-  "test whether a real institutional fibre can hold knowledge inclusion/presence fixed while differing in rights-holder relation, relational burden or systemic support; only a separating coordinate may enter repair or next-probe scheduling"
-  "stop this branch unless a new source adds a consumer-relevant failure mode beyond coexistence, permission, obligation, participation power, epistemic labour and relational research burden"
+  "test whether a real institutional fibre can hold knowledge inclusion/presence fixed while differing in rights-holder relation, relational burden, permission/governance or systemic support; only a separating coordinate may enter repair or next-probe scheduling"
+  "stop this branch unless a new source adds a consumer-relevant failure mode beyond coexistence, permission, obligation, participation power, epistemic labour, governance/control and relational research burden"
