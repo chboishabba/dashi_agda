@@ -13,49 +13,59 @@ import DASHI.Wikimedia.MaboReviewedEvidencePaymentExact as Payment
 import DASHI.Wikimedia.MaboReviewedContextFederationExact as Context
 
 ------------------------------------------------------------------------
--- REVIEW-DRIVEN 100-HOP MABO CAMPAIGN
+-- ADAPTIVE REVIEW-DRIVEN MABO CAMPAIGN
 --
--- This owner is deliberately downstream of the existing diagnosis surface.
--- It does not invent another planner, review ontology, proof-search system, or
--- evidence-payment calculus. The runtime shape is:
+-- The production recurrence is not a breadth-first 100-hop graph walk. The
+-- graph walker remains an inspection/world-view reader. The campaign budget is
+-- instead a bound on committed epistemic transitions:
 --
---   persisted 100-hop world
---   -> explicit consumer diagnosis / ProofResidual frontier
---   -> explicit operator identity-review manifest
---   -> pinned source reacquisition
---   -> reviewed SameObject payment
---   -> known-identity non-novel contraction OR identity-coherent novel cycle
---   -> durable lineage persistence
---   -> recurrence.
+--   Wᵢ
+--   -> diagnose current world
+--   -> rebuild current ProofFrontier
+--   -> Pareto-select one residual/producer move
+--   -> require the execution review only after selection
+--   -> acquire one exact source manifestation
+--   -> parse bounded context / assess world delta
+--   -> persist payment / identity / lineage / reviewed context
+--   -> Wᵢ₊₁
+--   -> RE-DIAGNOSE BEFORE SELECTING AGAIN.
 --
--- Proof search, experiment design, failed FactorsThrough, WrongType,
--- affected-subject/missing-carrier analysis, SFM, and Perplexity/external
--- comparison remain proposal/diagnostic routes inherited from Diagnosis.
+-- Thus traversal depth, adaptive campaign cycles, and durable novel identity
+-- cardinality are three different coordinates. A precomputed sibling queue is
+-- not the campaign scheduler.
 ------------------------------------------------------------------------
 
 campaignExecutable : String
 campaignExecutable =
-  "cargo run -p sensiblaw-world-expansion-runtime --example mabo_100hop_recurrent_campaign -- [IDENTITY_REVIEW_TSV]"
+  "cargo run -p sensiblaw-world-expansion-runtime --example mabo_100hop_recurrent_campaign -- [IDENTITY_REVIEW_TSV] [CONTEXT_REVIEW_TSV]"
 
 campaignDiagnosisExecutable : String
 campaignDiagnosisExecutable = Diagnosis.slrExecutable
 
+worldViewHopBudget : Nat
+worldViewHopBudget = Diagnosis.requestedHopBudget
+
+campaignCycleBudget : Nat
+campaignCycleBudget = 100
+
+-- Compatibility name retained for downstream consumers. Its campaign meaning
+-- is now the adaptive cycle budget, not graph traversal depth.
 campaignHopBudget : Nat
-campaignHopBudget = Diagnosis.requestedHopBudget
+campaignHopBudget = campaignCycleBudget
+
+identityReviewManifestFormat : String
+identityReviewManifestFormat =
+  "representation_ref<TAB>identity_class_ref<TAB>review_ref"
+
+contextReviewManifestFormat : String
+contextReviewManifestFormat =
+  "source_revision_ref<TAB>bounded_candidate_set_sha256<TAB>review_ref"
 
 reviewManifestFormat : String
-reviewManifestFormat =
-  "representation_ref<TAB>identity_class_ref<TAB>review_ref"
+reviewManifestFormat = identityReviewManifestFormat
 
 ------------------------------------------------------------------------
 -- BOUNDED REVIEWED-CONTEXT -> PROVIDER REPLAY
---
--- SLR persists the semantic reviewed role (participant, judge, overrules, ...)
--- in the latent-world relation rather than a free-standing property id.  The
--- production replay is allowed to recover a Wikidata property only because the
--- canonical federation owner already defines a finite one-to-one map for the
--- five reviewed Mabo properties.  This is not a general label -> property
--- inference rule and introduces no second property ontology here.
 ------------------------------------------------------------------------
 
 record ReviewedRelationProviderReplay : Set where
@@ -105,6 +115,16 @@ record ReviewedCampaignBoundary : Set where
     boundedReviewedRelationReplaysExactProviderProperty : Bool
     sameObjectPaymentEqualsNewRelatedObject : Bool
     authorityFamilyRouteCreatesLegalAuthority : Bool
+    traversalDepthEqualsCampaignCycle : Bool
+    durableNovelIdentityCountEqualsCampaignCycle : Bool
+    nextHopDependsOnPostAcquisitionAssessment : Bool
+    precomputedSiblingQueueIsCampaignScheduler : Bool
+    schedulerSelectionDependsOnReviewAvailability : Bool
+    identityReviewEqualsOutgoingContextReview : Bool
+    latestRevisionLookupEqualsAdmittedSourceManifestation : Bool
+    nonNovelAliasCreatesDiscoveryLineage : Bool
+    sourceExpansionReceiptCountsNovelIdentity : Bool
+    sourceExpansionReceiptCanCloseZeroBoundedEdges : Bool
     campaignCandidateOnly : Bool
     campaignCreatesSemanticAuthority : Bool
     campaignApplicabilityPromoted : Bool
@@ -130,6 +150,16 @@ canonicalReviewedCampaignBoundary =
     true
     false
     false
+    false
+    false
+    true
+    false
+    false
+    false
+    false
+    false
+    false
+    true
     true
     false
     false
@@ -195,6 +225,13 @@ data SemiFormalPresentationEqualsIdentityReview : Set where
 data SameObjectPaymentEqualsNewRelatedObject : Set where
 data AuthorityFamilyRouteEqualsLegalAuthority : Set where
 data BoundedProviderReplayEqualsGeneralSemanticInference : Set where
+data TraversalDepthEqualsCampaignCycle : Set where
+data DurableNovelIdentityCountEqualsCampaignCycle : Set where
+data PrecomputedSiblingQueueEqualsAdaptiveScheduler : Set where
+data IdentityReviewEqualsOutgoingContextReview : Set where
+data LatestRevisionLookupEqualsAdmittedSourceManifestation : Set where
+data NonNovelAliasEqualsDiscoveryLineage : Set where
+data SourceExpansionReceiptEqualsNovelIdentity : Set where
 
 diagnosisProposalDoesNotEqualIdentityReview :
   DiagnosisProposalEqualsIdentityReview → ⊥
@@ -232,6 +269,34 @@ boundedProviderReplayDoesNotEqualGeneralSemanticInference :
   BoundedProviderReplayEqualsGeneralSemanticInference → ⊥
 boundedProviderReplayDoesNotEqualGeneralSemanticInference ()
 
+traversalDepthDoesNotEqualCampaignCycle :
+  TraversalDepthEqualsCampaignCycle → ⊥
+traversalDepthDoesNotEqualCampaignCycle ()
+
+durableNovelIdentityCountDoesNotEqualCampaignCycle :
+  DurableNovelIdentityCountEqualsCampaignCycle → ⊥
+durableNovelIdentityCountDoesNotEqualCampaignCycle ()
+
+precomputedSiblingQueueDoesNotEqualAdaptiveScheduler :
+  PrecomputedSiblingQueueEqualsAdaptiveScheduler → ⊥
+precomputedSiblingQueueDoesNotEqualAdaptiveScheduler ()
+
+identityReviewDoesNotEqualOutgoingContextReview :
+  IdentityReviewEqualsOutgoingContextReview → ⊥
+identityReviewDoesNotEqualOutgoingContextReview ()
+
+latestRevisionLookupDoesNotEqualAdmittedSourceManifestation :
+  LatestRevisionLookupEqualsAdmittedSourceManifestation → ⊥
+latestRevisionLookupDoesNotEqualAdmittedSourceManifestation ()
+
+nonNovelAliasDoesNotEqualDiscoveryLineage :
+  NonNovelAliasEqualsDiscoveryLineage → ⊥
+nonNovelAliasDoesNotEqualDiscoveryLineage ()
+
+sourceExpansionReceiptDoesNotEqualNovelIdentity :
+  SourceExpansionReceiptEqualsNovelIdentity → ⊥
+sourceExpansionReceiptDoesNotEqualNovelIdentity ()
+
 ------------------------------------------------------------------------
 -- Source-written runtime contract only. No Cargo/Agda execution receipt is
 -- manufactured by this owner.
@@ -242,14 +307,23 @@ record ReviewedCampaignRuntimeContract : Set where
   field
     diagnosisExecutableReference : String
     campaignExecutableReference : String
-    reviewManifestSyntax : String
-    maxHopBudget : Nat
-    explicitReviewBeforeProviderIO : Bool
+    identityReviewManifestSyntax : String
+    contextReviewManifestSyntax : String
+    worldInspectionHopBudget : Nat
+    maxAdaptiveCampaignCycles : Nat
+    selectionOccursBeforeReviewLookup : Bool
     exactRevisionReacquisitionRequired : Bool
+    latestLookupOnlyDiscoversRevisionCoordinate : Bool
     boundedContextPropertyReplayRequired : Bool
+    outgoingContextNeedsDistinctReview : Bool
+    candidateSetDigestBindsContextReview : Bool
+    sourceExpansionReceiptRestartStable : Bool
     knownIdentityUsesNonNovelPaymentLane : Bool
+    nonNovelAliasPersistenceRequired : Bool
     novelIdentityUsesIdentityCoherentRunner : Bool
-    lineagePersistenceRequiredBeforeCommit : Bool
+    singleNovelRunnerInvocationBoundedToOneCycle : Bool
+    reDiagnosisRequiredAfterCompletedCycle : Bool
+    lineagePersistenceRequiredBeforeIdentityCommit : Bool
     executionObserved : Bool
 
 open ReviewedCampaignRuntimeContract public
@@ -259,8 +333,17 @@ canonicalReviewedCampaignRuntimeContract =
   reviewed-campaign-runtime-contract
     campaignDiagnosisExecutable
     campaignExecutable
-    reviewManifestFormat
-    campaignHopBudget
+    identityReviewManifestFormat
+    contextReviewManifestFormat
+    worldViewHopBudget
+    campaignCycleBudget
+    true
+    true
+    true
+    true
+    true
+    true
+    true
     true
     true
     true
