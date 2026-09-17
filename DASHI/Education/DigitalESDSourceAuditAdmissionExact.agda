@@ -11,6 +11,7 @@ import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Education.DigitalESDSourceAuditScaleExact as Scale
 import DASHI.Education.DigitalESDNormativeStandardsAtlasExact as Standards
+import DASHI.Education.DigitalESDAuditDomainBoundaryReceiptExact as DomainBoundary
 import DASHI.Education.DigitalESDSourceAuditHyperfabricExact as Hyperfabric
 
 ------------------------------------------------------------------------
@@ -71,11 +72,23 @@ record StandardApplicabilityDeclaration : Set where
 
 open StandardApplicabilityDeclaration public
 
+------------------------------------------------------------------------
+-- SYNTHESIS ADMISSION
+--
+-- Marginal score completeness is necessary but insufficient. Every admitted
+-- source must also carry all seven thin audit-domain boundary receipts so the
+-- hyperfabric remains connected to disability/access, who-is-missing,
+-- externality, political-economy, provisioning, durability and material-
+-- lifecycle semantics without importing the heavyweight producer worlds.
+------------------------------------------------------------------------
+
 record SourceAuditAdmission (source : Attr.AttributedSource) : Set where
   constructor source-audit-admission
   field
     claimCeilingReading : String
     completeCoreCoverage : CompleteCoreAxisCoverage source
+    completeDomainBoundaryCoverage :
+      DomainBoundary.CompleteDomainBoundaryCoverage source
     hyperfabric : Hyperfabric.SourceAuditHyperfabric source
     standardsApplicability : List StandardApplicabilityDeclaration
     standardsApplicabilityDeclared : Bool
@@ -97,14 +110,16 @@ mkSourceAuditAdmission :
   (source : Attr.AttributedSource) →
   String →
   CompleteCoreAxisCoverage source →
+  DomainBoundary.CompleteDomainBoundaryCoverage source →
   Hyperfabric.SourceAuditHyperfabric source →
   List StandardApplicabilityDeclaration →
   String →
   SourceAuditAdmission source
-mkSourceAuditAdmission source ceiling coverage hyperfabric standards version =
+mkSourceAuditAdmission source ceiling coverage domainCoverage hyperfabric standards version =
   source-audit-admission
     ceiling
     coverage
+    domainCoverage
     hyperfabric
     standards
     true refl
@@ -124,6 +139,7 @@ data UnscoredSourceEntersSynthesis : Set where
 data AuditAdmissionCreatesClaimAuthority : Set where
 data AuditAdmissionRaisesClaimCeiling : Set where
 data CompleteCoreCoverageCreatesIntersectionalAdequacy : Set where
+data DomainBoundaryCoverageImportsProducerWorld : Set where
 
 authoritativeGrandTotalDoesNotExist : AuthoritativeGrandTotalExists → ⊥
 authoritativeGrandTotalDoesNotExist ()
@@ -141,12 +157,19 @@ completeCoreCoverageDoesNotCreateIntersectionalAdequacy :
   CompleteCoreCoverageCreatesIntersectionalAdequacy → ⊥
 completeCoreCoverageDoesNotCreateIntersectionalAdequacy ()
 
+domainBoundaryCoverageDoesNotImportProducerWorld :
+  DomainBoundaryCoverageImportsProducerWorld → ⊥
+domainBoundaryCoverageDoesNotImportProducerWorld ()
+
 record SourceAuditAdmissionBoundary : Set where
   constructor source-audit-admission-boundary
   field
     everyAdmittedSourceRequiresCoreCoverage : Bool
     everyAdmittedSourceRequiresCoreCoverageIsTrue :
       everyAdmittedSourceRequiresCoreCoverage ≡ true
+    everyAdmittedSourceRequiresDomainBoundaryCoverage : Bool
+    everyAdmittedSourceRequiresDomainBoundaryCoverageIsTrue :
+      everyAdmittedSourceRequiresDomainBoundaryCoverage ≡ true
     zeroScoresMayStillBeAdmitted : Bool
     zeroScoresMayStillBeAdmittedIsTrue : zeroScoresMayStillBeAdmitted ≡ true
     noAuthoritativeGrandTotal : Bool
@@ -155,6 +178,9 @@ record SourceAuditAdmissionBoundary : Set where
     admissionEqualsClaimAuthorityIsFalse : admissionEqualsClaimAuthority ≡ false
     childSourceIdentityWeldedByType : Bool
     childSourceIdentityWeldedByTypeIsTrue : childSourceIdentityWeldedByType ≡ true
+    boundaryReceiptsImportHeavyweightProducerWorlds : Bool
+    boundaryReceiptsImportHeavyweightProducerWorldsIsFalse :
+      boundaryReceiptsImportHeavyweightProducerWorlds ≡ false
 
 open SourceAuditAdmissionBoundary public
 
@@ -163,5 +189,7 @@ canonicalSourceAuditAdmissionBoundary = source-audit-admission-boundary
   true refl
   true refl
   true refl
+  true refl
   false refl
   true refl
+  false refl
