@@ -11,12 +11,20 @@ open import Agda.Builtin.String using (String)
 -- This is not a proof substitute and not theorem authority.  It records the
 -- exact theorem-bearing cuts found after searching current master, merged
 -- #967/#970/#987, PR #996, the accessible dashi_lean4 branches, and the late
--- R402--R409 source replay.  Its Bool/status fields classify that repository
--- search only; they cannot prove nonexistence outside the searched state.
+-- R318/R320/R322/R327/R338/R339/R342/R346/R397/R401 source-native chain.
+-- Its Bool/status fields classify that repository search only; they cannot prove
+-- nonexistence outside the searched state.
 --
--- The purpose is to stop future work from reopening compiler plumbing while
--- also preventing a source/status receipt from being promoted to the missing
--- physical theorem.
+-- 2026-09-17 third recut: R318's
+--
+--   PublishedTwoJLocalizationForBase + SelectedBaseJApplicability
+--
+-- remains a valid GENERAL external-presentation adapter, but it is not the
+-- least-privilege proof-search cut.  R338 already places the source theorem on
+-- the canonical common CMP116 domain/rational order, while R339 isolates the
+-- selected-T5 magnitude same-object and envelope calibration.  The new
+-- `YMClayF1CanonicalSourceApplicationExact` composes R338 + R339 through R320
+-- into R295.  Nothing in that compiler manufactures either missing inhabitant.
 ------------------------------------------------------------------------
 
 data ResidualClass : Set where
@@ -40,21 +48,33 @@ record ExactResidual : Set where
 
 open ExactResidual public
 
-f1PublishedCMP116Localization : ExactResidual
-f1PublishedCMP116Localization = exact-residual
-  sourceTheoremInhabitant
-  "DASHI/Physics/YangMills/BalabanT5UnlocalizedJSourceLocalizationRound318Exact.agda"
-  "PublishedTwoJLocalizationForBase"
-  unpaid
-  "Exact code search finds the record definition and consumers only. The source ABI is backed by CMP116 Sect. 1, DOI 10.1007/BF01239022, but no in-repo inhabitant of the theorem-bearing record is present on the searched current tree."
+------------------------------------------------------------------------
+-- F1: current canonical source-native primitive cut.
+------------------------------------------------------------------------
 
-f1SelectedBaseApplicability : ExactResidual
-f1SelectedBaseApplicability = exact-residual
-  sameObjectAttachment
-  "DASHI/Physics/YangMills/BalabanT5UnlocalizedJSourceLocalizationRound318Exact.agda"
-  "SelectedBaseJApplicability"
+f1CanonicalCMP116SourceAlignment : ExactResidual
+f1CanonicalCMP116SourceAlignment = exact-residual
+  sourceTheoremInhabitant
+  "DASHI/Physics/YangMills/BalabanCMP116CanonicalCommonDomainSourceRound338Exact.agda"
+  "CanonicalCommonDomainCMP116Source / differentiatedLocalizationOnCanonicalCommonDomain"
   unpaid
-  "The selected application is exactly the magnitude/root/distance same-object weld from the published source carrier to the literal R318 T5 carrier. Exact search finds only its definition and compiler consumers."
+  "R338 is the least-privilege source ABI after canonical common-domain and rational-order normalization. Exact code search finds the record definition and downstream consumers of differentiatedLocalizationOnCanonicalCommonDomain, but no concrete constructor of CanonicalCommonDomainCMP116Source on the selected physical base. CMP116 Sect. 1, DOI 10.1007/BF01239022 supplies external theorem authority; citation/status metadata does not construct the Agda inhabitant or perform the local source-carrier alignment."
+
+f1CanonicalSelectedT5Application : ExactResidual
+f1CanonicalSelectedT5Application = exact-residual
+  sameObjectAttachment
+  "DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedT5ApplicationRound339Exact.agda"
+  "CanonicalSelectedT5CMP116Application: sourceMagnitudeIsSelectedMagnitude + sourceEnvelopeBelowSelectedRootedShell"
+  unpaid
+  "R339 removes independent pair-domain and abstract-order payments. The selected physical application is exactly two coordinates: the CMP116 differentiated response is the literal selected mixed-log response, and the CMP116 source envelope is bounded by the selected rooted shell. Exact search finds these fields and compiler consumers but no concrete application inhabitant on the searched tree."
+
+f1CanonicalR338R339Compiler : ExactResidual
+f1CanonicalR338R339Compiler = exact-residual
+  sameObjectAttachment
+  "DASHI/Physics/YangMills/YMClayF1CanonicalSourceApplicationExact.agda"
+  "canonicalSourceApplicationLocalizesBaseAsR295"
+  compilerOwned
+  "PR #996 now composes R339.canonicalApplicationBuildsR320Payment with R320.localizeBaseDirectlyAsR295. Once R338 source alignment and R339 selected-T5 application are supplied, the exact localized R295 carrier is compiler output. Do not reopen the older R318 magnitude/root/distance presentation as three independent frontier leaves."
 
 f1R409StageAttachment : ExactResidual
 f1R409StageAttachment = exact-residual
@@ -62,7 +82,7 @@ f1R409StageAttachment = exact-residual
   "DASHI/Physics/YangMills/BalabanCMP99SingleMarkedFourStageRound409Exact.agda"
   "SingleChangedFourStageAgreement"
   unpaid
-  "R409 compiles one marked stage plus three exact unchanged-stage equalities to the whole product bound. Exact search finds no external inhabitant selecting the actual CMP99 stage and proving the other three equalities. This is optional lower-level source replay after the R318 recut."
+  "R409 compiles one marked stage plus three exact unchanged-stage equalities to the whole product bound. Exact search finds no external inhabitant selecting the actual CMP99 stage and proving the other three equalities. This is optional lower-level source replay after the canonical R338/R339 recut."
 
 f1R406ScalarizationAttachment : ExactResidual
 f1R406ScalarizationAttachment = exact-residual
@@ -70,7 +90,7 @@ f1R406ScalarizationAttachment = exact-residual
   "DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Exact.agda"
   "differentiatedTermAbsoluteIsOperatorDifferenceNorm"
   unpaid
-  "Exact search finds this equality only as a record field/consumer; no concrete selected source replay inhabits it on the searched current tree. This is optional lower-level source replay after the R318 recut."
+  "Exact search finds this equality only as a record field/consumer; no concrete selected source replay inhabits it on the searched current tree. This is optional lower-level source replay after the canonical R338/R339 recut."
 
 f1R387DownstreamCompiler : ExactResidual
 f1R387DownstreamCompiler = exact-residual
@@ -79,6 +99,10 @@ f1R387DownstreamCompiler = exact-residual
   "directSelectedUpperBuildsPositiveTransferGapCore"
   compilerOwned
   "Merged #987 already compiles a genuine R387 direct selected spectral upper plus one-sided limit closure and positive selected candidate gap into PositiveTransferGapCore. Do not rebuild this layer."
+
+------------------------------------------------------------------------
+-- F3 / F4 unchanged by the F1 source recut.
+------------------------------------------------------------------------
 
 f3VacuumRecoverySystem : ExactResidual
 f3VacuumRecoverySystem = exact-residual
@@ -120,12 +144,30 @@ f4EvolutionEquality = exact-residual
   unpaid
   "Exact search for evolutionsEqual/sameEvolution on the searched current tree finds no physical inhabitant. Round127's Schwinger-family weld is a different same-object obligation and does not imply equality of the reconstructed one-parameter evolutions."
 
+------------------------------------------------------------------------
+-- Search / frontier status.
+------------------------------------------------------------------------
+
 oldF2IndependentResearchPayment : Bool
 oldF2IndependentResearchPayment = false
 
 oldF2IndependentResearchPaymentIsFalse :
   oldF2IndependentResearchPayment ≡ false
 oldF2IndependentResearchPaymentIsFalse = refl
+
+r318ExternalPresentationPairIsPrimitiveF1Cut : Bool
+r318ExternalPresentationPairIsPrimitiveF1Cut = false
+
+r318ExternalPresentationPairIsPrimitiveF1CutIsFalse :
+  r318ExternalPresentationPairIsPrimitiveF1Cut ≡ false
+r318ExternalPresentationPairIsPrimitiveF1CutIsFalse = refl
+
+canonicalR338R339CompilerObserved : Bool
+canonicalR338R339CompilerObserved = true
+
+canonicalR338R339CompilerObservedIsTrue :
+  canonicalR338R339CompilerObserved ≡ true
+canonicalR338R339CompilerObservedIsTrue = refl
 
 f1PhysicalInhabitantObservedInClosedWorldSearch : Bool
 f1PhysicalInhabitantObservedInClosedWorldSearch = false
