@@ -7,13 +7,13 @@ module DASHI.Analysis.BishopComplexSeriesConvergenceExact where
 --
 -- The existing finite Eisenstein evaluator is complex-valued, while DASHI's
 -- strongest concrete checked convergence backend is the vendored Bishop/Murray
--- real library.  This module pays the generic mathematical lift once: a complex
+-- real library. This module pays the generic mathematical lift once: a complex
 -- series is absolutely convergent componentwise when its real and imaginary
 -- component series are absolutely convergent, and its canonical limit is the
 -- pair of their Bishop limits.
 --
 -- This does NOT identify this carrier with the older
--- `DASHI.Analysis.ConcreteComplex.ComplexPair` package.  That same-carrier weld
+-- `DASHI.Analysis.ConcreteComplex.ComplexPair` package. That same-carrier weld
 -- remains explicit at consumers.
 --
 -- SOURCE / CODE ATTRIBUTION
@@ -26,6 +26,7 @@ module DASHI.Analysis.BishopComplexSeriesConvergenceExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_; _,_)
 
 import Real as BishopReal
 import RealProperties as BishopProperties
@@ -43,14 +44,11 @@ open BishopComplex public
 infix 4 _≈C_
 _≈C_ : BishopComplex -> BishopComplex -> Set
 complex a b ≈C complex c d =
-  (BishopReal._≃_ a c) × (BishopReal._≃_ b d)
-  where
-  open import Data.Product using (_×_)
+  BishopReal._≃_ a c × BishopReal._≃_ b d
 
 ≈C-refl : (z : BishopComplex) -> z ≈C z
-≈C-refl (complex a b) = BishopProperties.≃-refl , BishopProperties.≃-refl
-  where
-  open import Data.Product using (_,_)
+≈C-refl (complex a b) =
+  BishopProperties.≃-refl , BishopProperties.≃-refl
 
 realTerms : (Nat -> BishopComplex) -> Nat -> BishopReal.ℝ
 realTerms terms n = re (terms n)
@@ -121,5 +119,3 @@ complexSeriesLimitUnique terms absolute other otherConvergence =
     (imagTerms terms)
     (imagAbsolute absolute)
     (imagConverges otherConvergence)
-  where
-  open import Data.Product using (_,_)
