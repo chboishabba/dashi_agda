@@ -10,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snow
 import DASHI.Core.RobustExperimentInferenceFrontierExact as Experiment
+import DASHI.Reasoning.SFMVerifiedClaimPresentation as SFM
 import DASHI.Wikimedia.MaboReviewedContextFederationExact as Context
 import DASHI.Wikimedia.MaboReviewedEvidencePaymentExact as Payment
 
@@ -90,10 +91,14 @@ semiFormalReasoningDiagnosisRoute = diagnosis-route-receipt
   "DASHI.Reasoning.SFMVerifiedClaimPresentation"
   true true false false
 
+perplexityArchiveComparisonReference : String
+perplexityArchiveComparisonReference =
+  "DASHI.Promotion.StandardModelArchiveContextBinding.perplexityOnline"
+
 externalKnowledgeDiagnosisRoute : DiagnosisRouteReceipt
 externalKnowledgeDiagnosisRoute = diagnosis-route-receipt
   Snow.externalKnowledgeComparison
-  "external-comparison:Perplexity-or-other-retrieval"
+  perplexityArchiveComparisonReference
   true true false false
 
 allDiagnosisRoutes : List DiagnosisRouteReceipt
@@ -106,6 +111,27 @@ allDiagnosisRoutes =
   ∷ semiFormalReasoningDiagnosisRoute
   ∷ externalKnowledgeDiagnosisRoute
   ∷ []
+
+------------------------------------------------------------------------
+-- SFM is an actual donor, not just a prose analogy. Its canonical authority
+-- boundary already separates AI generation and diagnostic presentation from
+-- verification/theorem promotion, exactly the distinction needed here.
+------------------------------------------------------------------------
+
+sfmAIGenerationDoesNotEqualVerification :
+  SFM.SFMViewAuthorityBoundary.aiGenerationEqualsVerification
+    SFM.canonicalSFMViewAuthorityBoundary ≡ false
+sfmAIGenerationDoesNotEqualVerification = refl
+
+sfmDiagnosticPatternDoesNotPromoteTheorem :
+  SFM.SFMViewAuthorityBoundary.diagnosticPatternPromotesTheorem
+    SFM.canonicalSFMViewAuthorityBoundary ≡ false
+sfmDiagnosticPatternDoesNotPromoteTheorem = refl
+
+sfmStatusMustRemainVisible :
+  SFM.SFMViewAuthorityBoundary.statusMustRemainVisible
+    SFM.canonicalSFMViewAuthorityBoundary ≡ true
+sfmStatusMustRemainVisible = refl
 
 ------------------------------------------------------------------------
 -- Explicit context-world identity consumer.
