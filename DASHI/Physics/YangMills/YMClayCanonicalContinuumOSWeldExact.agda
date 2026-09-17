@@ -22,13 +22,15 @@ module DASHI.Physics.YangMills.YMClayCanonicalContinuumOSWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base using (ℚ; _≤_; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact as Recovery
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OSGap
-import DASHI.Physics.YangMills.BalabanClayDirectTerminalConsumerCutRound308Exact as R308
+import DASHI.Physics.YangMills.BalabanMassGapSurvival as Survival
 import DASHI.Physics.YangMills.BalabanPhysicalMassGapRoutes as Routes
+import DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact as Kato
+import DASHI.Physics.YangMills.BalabanClayDirectTerminalConsumerCutRound308Exact as R308
 import DASHI.Physics.YangMills.YMClayMassGapAssemblyParityExact as Assembly
 
 ------------------------------------------------------------------------
@@ -45,7 +47,7 @@ canonicalRecoveryLimitGap :
   (limit : Recovery.LimitVector system) →
   Recovery.limitVacuumOrthogonal system limit →
   Recovery.gapConstant system * Recovery.limitNormSq system limit
-  ℚ.≤ Recovery.limitEnergy system limit
+  ≤ Recovery.limitEnergy system limit
 canonicalRecoveryLimitGap = Recovery.vacuumOrthogonalRecoveryTransfersUniformGap
 
 ------------------------------------------------------------------------
@@ -63,9 +65,7 @@ canonicalClusteringMassGapCertificate =
 
 canonicalStrongResolventMassGapCertificate :
   ∀ {Cutoff Hamiltonian Bound}
-    (dataSet :
-      DASHI.Physics.YangMills.BalabanMassGapSurvival.UniformCutoffGapData
-        Cutoff Hamiltonian Bound) →
+    (dataSet : Survival.UniformCutoffGapData Cutoff Hamiltonian Bound) →
   (convergence : Routes.StrongResolventConvergenceData dataSet) →
   Routes.StrongResolventGapSurvivalAuthority dataSet convergence →
   OSGap.PhysicalMassGapCertificate Hamiltonian Bound
@@ -114,8 +114,7 @@ canonicalPhysicalSameHamiltonianDynamics :
       Hilbert Scalar Hamiltonian Vacuum ContinuumTheory) →
   R308.SameHamiltonianDynamics (terminal endgame)
     (OSGap.hamiltonian (R308.massGap (terminal endgame)))
-    (DASHI.Physics.YangMills.YMKatoClosedFormHamiltonianExact.hamiltonian
-      (R308.physicalKatoPackage (terminal endgame)))
+    (Kato.hamiltonian (R308.physicalKatoPackage (terminal endgame)))
 canonicalPhysicalSameHamiltonianDynamics endgame =
   R308.sameHamiltonianDynamics (terminal endgame)
 
@@ -173,5 +172,5 @@ canonicalPhysicalEndgameAssemblyLevel = machineChecked
 
 -- This is the one generic consequence still only implemented in the retained
 -- Lean YMClay tranche, not proved independently by an Agda theorem term.
-agdavacuumSectorResolventCompilerLevel : ProofLevel
-agdavacuumSectorResolventCompilerLevel = conditional
+agdaVacuumSectorResolventCompilerLevel : ProofLevel
+agdaVacuumSectorResolventCompilerLevel = conditional
