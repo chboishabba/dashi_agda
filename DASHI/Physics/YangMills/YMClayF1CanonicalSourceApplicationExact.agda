@@ -49,7 +49,7 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedT5ApplicationRound3
 --
 -- R339 already compiles the canonical source theorem + selected-T5 application
 -- into R320's one-field direct selected-shell payment.  R320 already compiles
--- that payment into R295.  Compose those two machine-owned maps directly.
+-- that payment into R295.  Compose those two maps directly.
 ------------------------------------------------------------------------
 
 canonicalSourceApplicationLocalizesBaseAsR295 :
@@ -121,5 +121,7 @@ f1EnvelopeCalibrationLevel : ProofLevel
 f1EnvelopeCalibrationLevel =
   R339.round339SourceEnvelopeCalibrationLevel
 
+-- Explicit source-written term, but no exact-head Agda kernel receipt was run
+-- in this connector tranche.  Keep metadata fail-closed until one is observed.
 f1CanonicalCompilerLevel : ProofLevel
-f1CanonicalCompilerLevel = machineChecked
+f1CanonicalCompilerLevel = conditional
