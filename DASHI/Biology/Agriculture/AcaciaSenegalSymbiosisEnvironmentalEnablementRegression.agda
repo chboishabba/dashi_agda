@@ -18,6 +18,13 @@ habish1970DOIPinned :
   Env.habish1970DOI ≡ "10.1007/BF01378191"
 habish1970DOIPinned = refl
 
+dovratSheffer2019DOIPinned :
+  Env.dovratSheffer2019DOI ≡ "10.1111/nph.15526"
+dovratSheffer2019DOIPinned = refl
+
+dovratSheffer2019PMIDPinned : Env.dovratSheffer2019PMID ≡ "30299536"
+dovratSheffer2019PMIDPinned = refl
+
 leghemoglobinReviewDOIPinned :
   Env.larrainzar2020DOI ≡ "10.1111/nph.16673"
 leghemoglobinReviewDOIPinned = refl
@@ -44,6 +51,14 @@ soilPHCannotBeDroppedFromNodulationContext = refl
 plantGrowthDoesNotIdentifySuccessfulNodulation :
   Env.plantGrowthImpliesSuccessfulNodulation Env.canonicalEnvironmentalEnablementBoundary ≡ false
 plantGrowthDoesNotIdentifySuccessfulNodulation = refl
+
+seasonPhenologyRemainsIndexed :
+  Env.seasonAndPhenologyMustRemainIndexed Env.canonicalEnvironmentalEnablementBoundary ≡ true
+seasonPhenologyRemainsIndexed = refl
+
+genericDrylandSeasonalityNotAcaciaSameObject :
+  Env.genericDrylandLegumeSeasonalityCreatesAcaciaSameObjectMeasurement Env.canonicalEnvironmentalEnablementBoundary ≡ false
+genericDrylandSeasonalityNotAcaciaSameObject = refl
 
 soilMoistureIsNotNoduleMicroenvironment :
   Env.bulkSoilMoistureEqualsNoduleMicroenvironment Env.canonicalEnvironmentalEnablementBoundary ≡ false
