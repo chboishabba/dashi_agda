@@ -26,6 +26,12 @@ rasanen2004DOI = "10.1023/B:PLSO.0000030181.03575.e1"
 fall2011DOI : String
 fall2011DOI = "10.1007/s13199-011-0128-0"
 
+larrainzar2020DOI : String
+larrainzar2020DOI = "10.1111/nph.16673"
+
+larrainzar2020PMID : String
+larrainzar2020PMID = "32442331"
+
 rasanenSaijetsJokinenLindstrom2004 : Attribution.AttributedSource
 rasanenSaijetsJokinenLindstrom2004 = Attribution.mkDOISource
   "Leena A. Rasanen; Salla Saijets; Kari Jokinen; Kristina Lindstrom"
@@ -50,6 +56,18 @@ fallEtAl2011 = Attribution.mkDOISource
   "Primary greenhouse source comparing selected Acacia-senegal-nodulating Mesorhizobium strains under water-deficiency context. It supports strain-by-environment retention, not field deployment authority or a universal drought-tolerance ranking."
   Attribution.publicAttribution
 
+larrainzarEtAl2020 : Attribution.AttributedSource
+larrainzarEtAl2020 = Attribution.mkDOISource
+  "Estibaliz Larrainzar; Irene Villar; Maria Carmen Rubio; Carmen Perez-Rontome; Raul Huertas; Shusei Sato; Jeong-Hwan Mun; Manuel Becana"
+  "Hemoglobins in the legume-Rhizobium symbiosis"
+  "New Phytologist 228(2):472-484"
+  "2020"
+  larrainzar2020DOI
+  "https://pubmed.ncbi.nlm.nih.gov/32442331/"
+  Attribution.academicArticleSource
+  "Legume/model-legume review donor for nodule oxygen physiology: leghemoglobins deliver oxygen to bacteroids and buffer oxygen to limit nitrogenase inactivation. This source does not measure Acacia senegal nodules or establish an Acacia-specific hemoglobin state."
+  Attribution.publicAttribution
+
 heatStressSource : Nodulation.NodulationSource
 heatStressSource = Nodulation.rasanen1999
 
@@ -71,18 +89,16 @@ record EnvironmentalEnablementReading : Set where
     droughtChangesSymbiosisDevelopment : Bool
     waterDeficiencyRetainsStrainEfficiencyContext : Bool
     soilPAndTreeAgeRemainFixationContext : Bool
+    legumeNoduleOxygenControlMattersToNitrogenase : Bool
     bulkSoilWaterIsNotNoduleMicroenvironmentMeasurement : Bool
 open EnvironmentalEnablementReading public
 
 canonicalEnvironmentalReading : EnvironmentalEnablementReading
 canonicalEnvironmentalReading = environmental-enablement-reading
-  true true true true true true
+  true true true true true true true
 
 ------------------------------------------------------------------------
 -- Finite DASHI information-loss witnesses.
---
--- These worlds are synthetic. The cited sources own only the environmental
--- sensitivity premises; DASHI owns the factorisation counterexamples.
 ------------------------------------------------------------------------
 
 data EnablementWorld : Set where
@@ -129,9 +145,7 @@ hostIdentityNotTaskSufficient factor =
       factor successfulSymbiosisTask
       {permissiveEnvironment} {droughtBlockedEnvironment} refl)
 
--- Same selected strain token, different water context. This is a synthetic
--- information-loss witness calibrated by the drought/water-deficiency sources,
--- not a claim that either paper published this Boolean model.
+-- Same selected strain token, different water context. Synthetic DASHI witness.
 data StrainWaterWorld : Set where
   selectedStrainPermissive : StrainWaterWorld
   selectedStrainWaterDeficient : StrainWaterWorld
@@ -174,16 +188,18 @@ record EnvironmentalEnablementRepair : Set where
     treeAgeRetained : Bool
     infectionStageRetained : Bool
     nodulationStageRetained : Bool
+    noduleOxygenControlRetained : Bool
     bulkSoilWaterRetainedSeparately : Bool
     noduleRootMicroenvironmentRetainedSeparately : Bool
     greenhouseVsFieldRoleRetained : Bool
+    genericLegumeVsAcaciaSameObjectRoleRetained : Bool
     observerMethodRetained : Bool
     sourceIdentityRetained : Bool
 open EnvironmentalEnablementRepair public
 
 canonicalEnvironmentalEnablementRepair : EnvironmentalEnablementRepair
 canonicalEnvironmentalEnablementRepair = environmental-enablement-repair
-  true true true true true true true true true true true true true true true
+  true true true true true true true true true true true true true true true true true
 
 ------------------------------------------------------------------------
 -- Existing nitrogenase ladder remains authoritative.
@@ -202,10 +218,12 @@ record EnvironmentalEnablementBoundary : Set where
     rhizobialPresenceCreatesNodulation : Bool
     soilPAloneDeterminesEnablement : Bool
     bulkSoilMoistureEqualsNoduleMicroenvironment : Bool
+    genericLegumeOxygenMechanismCreatesAcaciaSameObjectMeasurement : Bool
     heatRecoveryCreatesUniversalTolerance : Bool
     droughtStudyCreatesFieldWaterBalance : Bool
     greenhouseWaterDeficiencyCreatesFieldDeploymentAuthority : Bool
     environmentalContextConstrainsEnablement : Bool
+    noduleOxygenContextRetained : Bool
     reactionEnablementGloballyClosedByThisOwner : Bool
     reactionEnablementPaysPlantAssimilation : Bool
     existingNodulationOwnerReused : Bool
@@ -216,9 +234,9 @@ open EnvironmentalEnablementBoundary public
 
 canonicalEnvironmentalEnablementBoundary : EnvironmentalEnablementBoundary
 canonicalEnvironmentalEnablementBoundary = environmental-enablement-boundary
-  false false false false false false false false false
-  true false false true true true false
+  false false false false false false false false false false
+  true true false false true true true false
 
 attributionRule : String
 attributionRule =
-  "Rasanen & Lindstrom 1999 (DOI 10.1111/j.1574-6941.1999.tb00561.x) owns its Acacia-rhizobium heat-stress propositions. Rasanen, Saijets, Jokinen & Lindstrom 2004 (DOI 10.1023/B:PLSO.0000030181.03575.e1) owns its controlled Acacia-Sinorhizobium drought-stress propositions. Fall et al. 2011 (DOI 10.1007/s13199-011-0128-0) owns its greenhouse Mesorhizobium strain/water-deficiency propositions. Isaac et al. 2011 sources retain ownership of their age/P/N-regime fixation contexts. Abaker/Berninger/Starr hydrology DOI 10.1016/j.jaridenv.2017.12.004 remains a distinct bulk-water measurement object. DASHI owns only the environment-indexed TaskFactorisation collisions, repair surface and no-promotion boundary; this owner does not close canonical reaction enablement, plant assimilation or deployment authority."
+  "Rasanen & Lindstrom 1999 (DOI 10.1111/j.1574-6941.1999.tb00561.x) owns its Acacia-rhizobium heat-stress propositions. Rasanen, Saijets, Jokinen & Lindstrom 2004 (DOI 10.1023/B:PLSO.0000030181.03575.e1) owns its controlled Acacia-Sinorhizobium drought-stress propositions. Fall et al. 2011 (DOI 10.1007/s13199-011-0128-0) owns its greenhouse Mesorhizobium strain/water-deficiency propositions. Larrainzar et al. 2020 (DOI 10.1111/nph.16673; PMID 32442331) owns its generic/model-legume hemoglobin/oxygen-buffering review propositions and is not an Acacia same-object measurement. Isaac et al. 2011 sources retain ownership of age/P/N-regime fixation contexts. Abaker/Berninger/Starr hydrology DOI 10.1016/j.jaridenv.2017.12.004 remains a distinct bulk-water measurement object. DASHI owns only the environment-indexed TaskFactorisation collisions, repair surface and no-promotion boundary; this owner does not close canonical reaction enablement, plant assimilation or deployment authority."
