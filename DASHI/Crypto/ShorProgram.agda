@@ -6,6 +6,8 @@ import DASHI.Algebra.Quantum.GeneralShor
 import DASHI.Crypto.FiniteFactorArithmetic
 import DASHI.Crypto.ShorOrderFinding
 import DASHI.Crypto.ShorFactoring
+import DASHI.Crypto.ShorQuantumRunFactorTransportExact
+import DASHI.Crypto.ShorQuantumRunFactorTransportRegression
 import DASHI.Crypto.ShorDiscreteLog
 import DASHI.Crypto.RSAShorVulnerabilityBridge
 import DASHI.Crypto.ShorConcreteExamples
