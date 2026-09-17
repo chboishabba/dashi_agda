@@ -9,17 +9,11 @@ import DASHI.Wikimedia.JmdLeanGoldenAbiAttachmentExact as Jmd
 import DASHI.Wikimedia.JmdLeanIntegratedMachineLineageExact as Machine
 import DASHI.Wikimedia.MaboPropertyTripleProjectionExact as MaboTriple
 import DASHI.Wikimedia.MaboReviewedContextFederationExact as MaboReview
+import DASHI.Wikimedia.NativePropertyTripleProjectionExact as Property
 open import DASHI.Wikimedia.LeanSlrWorldObservationBidiExact
 
 ------------------------------------------------------------------------
 -- GOLDEN MABO GETTER-PARITY FIXTURE
---
--- This fixture pins the already-formalised source statement
---   Q1501525 --P710--> Q975866
--- at Wikidata oldid 2333409615 and projects the same golden observation through
--- both Lean-getter and SLR-getter carriers.  The definitional equality below is
--- a test of the ABI shape only; it is deliberately NOT a claim that either
--- runtime has executed the query at the integrated-machine head.
 ------------------------------------------------------------------------
 
 maboGoldenObservation : WorldObservation
@@ -85,26 +79,23 @@ canonicalMaboGetterParityFixture =
     Machine.jmdIntegratedCommit
     maboLeanGetterFixture
     maboSlrGetterFixture
-    true
-    true
-    false
-    false
-    false
-    false
+    true true false false false false
 
 ------------------------------------------------------------------------
--- Source-owner reuse pins.  These force the fixture to remain downstream of
--- the exact existing Mabo triple rather than manufacturing a second claim.
+-- Source-owner reuse pins.
 ------------------------------------------------------------------------
 
-_ : MaboTriple.Property.tripleSubject MaboTriple.maboParticipantPropertyTriple ≡ "Q1501525"
-_ = refl
+maboFixtureSubjectPinned :
+  Property.tripleSubject MaboTriple.maboParticipantPropertyTriple ≡ "Q1501525"
+maboFixtureSubjectPinned = MaboTriple.maboParticipantTripleSubject
 
-_ : MaboTriple.Property.tripleProperty MaboTriple.maboParticipantPropertyTriple ≡ "P710"
-_ = refl
+maboFixturePropertyPinned :
+  Property.tripleProperty MaboTriple.maboParticipantPropertyTriple ≡ "P710"
+maboFixturePropertyPinned = MaboTriple.maboParticipantTripleProperty
 
-_ : MaboTriple.Property.tripleObject MaboTriple.maboParticipantPropertyTriple ≡ "Q975866"
-_ = refl
+maboFixtureObjectPinned :
+  Property.tripleObject MaboTriple.maboParticipantPropertyTriple ≡ "Q975866"
+maboFixtureObjectPinned = MaboTriple.maboParticipantTripleObject
 
 ------------------------------------------------------------------------
 -- Firewalls.
