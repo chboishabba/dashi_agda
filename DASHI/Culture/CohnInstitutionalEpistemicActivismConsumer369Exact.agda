@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Culture.CohnInstitutionalIbrahimDeweyAcquisitionExtensionFourExact as SourceFollow
 import DASHI.Governance.SituatedDissentDeceptionAssayExact as Dissent
@@ -14,19 +15,16 @@ import DASHI.Reasoning.Spacy369AdaptiveConsumerProbeSchedulerExact as Scheduler
 -- EPISTEMIC-ACTIVISM / PROPER-UPTAKE CONSUMER RETURN
 --
 -- Medina 2023 contributes a source-bounded candidate family concerning
--- epistemic activism / resistant uptake.  The theorem-bearing consumer is
+-- epistemic activism / resistant uptake. The theorem-bearing consumer is
 -- reused from SituatedDissentDeceptionAssayExact: the same recorded-dissent
 -- surface can coexist with materially effective or decorative dissent.
 --
 -- This owner does not identify Medina's theory with the DASHI dissent assay or
--- with the spaCy/369 fixture.  It returns the source candidate into canonical
+-- with the spaCy/369 fixture. It returns the source candidate into canonical
 -- discriminator, dialectical-search and consumer-relative scheduling grammar.
 ------------------------------------------------------------------------
 
-------------------------------------------------------------------------
--- Source anchor.  Bibliographic/source identity does not import proof.
-------------------------------------------------------------------------
-
+epistemicActivismSource : Attribution.AttributedSource
 epistemicActivismSource = SourceFollow.medinaEpistemologyOfProtest
 
 epistemicActivismTraversal = SourceFollow.medinaToEpistemicActivism
@@ -57,8 +55,6 @@ dialecticalSearchBoundary = Dialectic.canonicalDialecticalSearchBoundary
 
 ------------------------------------------------------------------------
 -- History/consumer-sensitive next probe.
---
--- This is a tiny application adapter. It is not a second proof-search planner.
 ------------------------------------------------------------------------
 
 data UptakeProbe : Set where
@@ -86,10 +82,6 @@ recordedDissentCannotDetermineNextProbe =
 
 ------------------------------------------------------------------------
 -- 369 consumer-relative scheduling reuse.
---
--- We reuse the canonical ScheduledPlan carrier and scheduler boundary, but do
--- not identify these institutional consumers with the spaCy fixture's
--- ConsumerBundle constructors.
 ------------------------------------------------------------------------
 
 data UptakeConsumer : Set where
@@ -136,18 +128,10 @@ open EpistemicActivismConsumerBoundary public
 
 canonicalEpistemicActivismConsumerBoundary : EpistemicActivismConsumerBoundary
 canonicalEpistemicActivismConsumerBoundary = epistemic-activism-consumer-boundary
-  true
-  false
-  false
-  true
-  true
-  false
-  false
-  false
-  false
+  true false false true true false false false false
 
 medinaCitationStillDoesNotImportProof :
-  SourceFollow.Source.citationImportsProof epistemicActivismSource ≡ false
+  Attribution.citationImportsProof epistemicActivismSource ≡ false
 medinaCitationStillDoesNotImportProof = refl
 
 ------------------------------------------------------------------------
