@@ -24,6 +24,9 @@ peoples2017DOIPinned = refl
 strong2006DOIPinned : Q.strongEtAl2006DOI ≡ "10.1071/EA05007"
 strong2006DOIPinned = refl
 
+dalal2004DurationDOIPinned : Q.dalalEtAl2004DurationDOI ≡ "10.1071/EA03166"
+dalal2004DurationDOIPinned = refl
+
 fixedNNotMineralN :
   Q.fixedNitrogenQuantityImpliesSameMineralNitrogenAtCropSowing Q.canonicalQueenslandLeyBoundary ≡ false
 fixedNNotMineralN = refl
@@ -47,6 +50,14 @@ singleRateEquivalenceNotReplacement = refl
 waterContextRetained :
   Q.waterLimitationMayBeDroppedFromFollowingCropResponse Q.canonicalQueenslandLeyBoundary ≡ false
 waterContextRetained = refl
+
+soilNImprovementDoesNotMeanWaterRecovery :
+  Q.soilNitrogenImprovementImpliesRecoveredSoilWater Q.canonicalQueenslandLeyBoundary ≡ false
+soilNImprovementDoesNotMeanWaterRecovery = refl
+
+longerLeyNotMonotoneCropBenefit :
+  Q.longerLeyDurationImpliesMonotoneFollowingCropBenefit Q.canonicalQueenslandLeyBoundary ≡ false
+longerLeyNotMonotoneCropBenefit = refl
 
 lossesRetained :
   Q.denitrificationLeachingImmobilisationMayBeDropped Q.canonicalQueenslandLeyBoundary ≡ false
