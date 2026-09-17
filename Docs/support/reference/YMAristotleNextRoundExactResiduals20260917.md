@@ -216,3 +216,7 @@ Before a completion claim:
 3. No `sorry`, `axiom`, `postulate`, `@[implemented_by]`, trust escape, or unresolved meta appears in the new proof tranche.
 4. `#print axioms` is reported for each Lean headline theorem.
 5. Exact theorem names and remaining hypotheses are reported verbatim. If F1, F3 or F4 remains a physical hypothesis, do not call the Clay theorem unconditional.
+
+## Closed-world audit note
+
+`YMClayClosedWorldResidualAudit20260917Exact` records only the searched repository state. Its Bool/status values are diagnostic evidence about that search and are never used as mathematical proof terms. The audit is intentionally weaker than a theorem of global nonexistence.
