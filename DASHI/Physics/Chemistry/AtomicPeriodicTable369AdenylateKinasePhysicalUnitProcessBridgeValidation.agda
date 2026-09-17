@@ -14,6 +14,11 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceAtomSe
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCOMGeometryValidation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticCVProjectionValidation
 
+-- DASHI-original information-loss theorem over the source-facing CV selection
+-- surface. Scientific attribution remains upstream; projection collision and
+-- non-factorability are repository bridge mathematics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCVProjectionNonFactorabilityValidation
+
 -- Same-object fixture/mechanics/executable-comparison/trajectory continuation.
 -- PDB entry identity is kept apart from chain/coordinate manifestation;
 -- historical mechanics settings are source-paid without claiming exact bytes;
