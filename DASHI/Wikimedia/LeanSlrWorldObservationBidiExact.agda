@@ -148,5 +148,8 @@ importedFromDoesNotMeanIndependentSource ()
 -- Source / downstream ownership pins.
 ------------------------------------------------------------------------
 
+jmdSourceAttribution : Attribution.AristotleLeanMachineAttributionReceipt
 jmdSourceAttribution = Attribution.jmdLeanArchiveAttributionReceipt
+
+slrObservationConsumerBoundary : String
 slrObservationConsumerBoundary = SlrABI.slrSourceHandoffImplementationReference
