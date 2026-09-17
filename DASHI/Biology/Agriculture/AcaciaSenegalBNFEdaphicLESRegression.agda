@@ -12,6 +12,13 @@ peerJDOIPinned = refl
 isaacDOIPinned : Edaphic.isaac2011DOI ≡ "10.1016/j.foreco.2010.11.011"
 isaacDOIPinned = refl
 
+phosphorusExperimentDOIPinned :
+  Edaphic.isaacHarmandDrevon2011DOI ≡ "10.1016/j.jplph.2010.10.011"
+phosphorusExperimentDOIPinned = refl
+
+phosphorusExperimentPMIDPinned : Edaphic.isaacHarmandDrevon2011PMID ≡ "21211863"
+phosphorusExperimentPMIDPinned = refl
+
 ageAloneNotAdequate :
   Edaphic.treeAgeAloneAdequateForFixation Edaphic.canonicalEdaphicBoundary ≡ false
 ageAloneNotAdequate = refl
@@ -19,6 +26,18 @@ ageAloneNotAdequate = refl
 phosphorusAloneNotAdequate :
   Edaphic.soilPAloneAdequateForFixation Edaphic.canonicalEdaphicBoundary ≡ false
 phosphorusAloneNotAdequate = refl
+
+higherPDoesNotUniversallyIncreaseAtmosphericN :
+  Edaphic.higherPUniversallyIncreasesAtmosphericN Edaphic.canonicalEdaphicBoundary ≡ false
+higherPDoesNotUniversallyIncreaseAtmosphericN = refl
+
+higherPDoesNotUniversallyIncreaseNodules :
+  Edaphic.higherPUniversallyIncreasesNodules Edaphic.canonicalEdaphicBoundary ≡ false
+higherPDoesNotUniversallyIncreaseNodules = refl
+
+pEffectRequiresNRegimeContext :
+  Edaphic.phosphorusResponseIndependentOfNitrogenRegime Edaphic.canonicalEdaphicBoundary ≡ false
+pEffectRequiresNRegimeContext = refl
 
 soilNDoesNotIdentifyBNFContribution :
   Edaphic.soilNAccretionIdentifiesBNFContribution Edaphic.canonicalEdaphicBoundary ≡ false
