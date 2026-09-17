@@ -9,6 +9,8 @@ module DASHI.ComputerScience.ComputerScienceQuantumFibreValidationExact where
 
 import DASHI.ComputerScience.FibreProgramComplexityExact
 import DASHI.ComputerScience.QuantumExecutionFibreAdapterExact
+import DASHI.ComputerScience.ShorPowModOracleExecutionFibreExact
+import DASHI.ComputerScience.ShorPowModOracleExecutionFibreRegression
 import DASHI.ComputerScience.ShorCertifiedRunExecutionFibreExact
 import DASHI.ComputerScience.ShorCertifiedRunExecutionFibreRegression
 import DASHI.ComputerScience.FactorProducerReceiptExact
@@ -24,6 +26,8 @@ import DASHI.ComputerScience.CUDAROCmQuantumTernaryCrossPollinationExact
 import DASHI.Algebra.Quantum.FiniteQuantumRegister
 import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
 import DASHI.Algebra.Quantum.GeneralShor
+import DASHI.Algebra.Quantum.ShorReversiblePowModOracleExact
+import DASHI.Algebra.Quantum.ShorReversiblePowModOracleRegression
 import DASHI.Algebra.Quantum.FiniteQutrit
 import DASHI.Algebra.Quantum.QutritWeyl
 import DASHI.Algebra.Quantum.DASHIQuantumBridge
@@ -31,6 +35,8 @@ import DASHI.Algebra.Quantum.DASHIHybridExecution
 import DASHI.Algebra.Quantum.DASHIShorProductiveJoin
 
 import DASHI.Crypto.ShorOrderFinding
+import DASHI.Crypto.ShorReversiblePowModOracleWeldExact
+import DASHI.Crypto.ShorReversiblePowModOracleWeldRegression
 import DASHI.Crypto.ShorFactoring
 import DASHI.Crypto.ShorQuantumRunFactorTransportExact
 import DASHI.Crypto.ShorQuantumRunFactorTransportRegression
