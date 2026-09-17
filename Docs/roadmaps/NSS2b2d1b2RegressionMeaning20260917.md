@@ -1,0 +1,1 @@
+The regression intentionally cannot typecheck while the production owner is fail-closed. It becomes GREEN only when the production theorem exports the demanded witnesses; changing the regression to accept false is prohibited.
