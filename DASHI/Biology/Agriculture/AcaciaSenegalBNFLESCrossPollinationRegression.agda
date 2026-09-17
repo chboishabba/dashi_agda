@@ -9,6 +9,26 @@ import DASHI.Biology.Agriculture.AcaciaSenegalBNFLESCrossPollinationExact as Bri
 abakerDOIRetained : Bridge.abakerDrylandDOI ≡ "10.1016/j.jaridenv.2017.12.004"
 abakerDOIRetained = refl
 
+reusesMergedWaterCarbonLES :
+  Bridge.reusesAcaciaWaterCarbonOwner Bridge.canonicalAcaciaBNFLESBoundary ≡ true
+reusesMergedWaterCarbonLES = refl
+
+reusesExistingBNFModel :
+  Bridge.reusesBNFQualifiedInterventionOwner Bridge.canonicalAcaciaBNFLESBoundary ≡ true
+reusesExistingBNFModel = refl
+
+reusesSituatedNitrogenase :
+  Bridge.reusesSituatedNitrogenaseOwner Bridge.canonicalAcaciaBNFLESBoundary ≡ true
+reusesSituatedNitrogenase = refl
+
+reusesNodulationBridge :
+  Bridge.reusesNodulationBridge Bridge.canonicalAcaciaBNFLESBoundary ≡ true
+reusesNodulationBridge = refl
+
+typedJoinedObservationRetained :
+  Bridge.typedJoinedObservationRetained Bridge.canonicalAcaciaBNFLESBoundary ≡ true
+typedJoinedObservationRetained = refl
+
 soilNNotTreeOnly :
   Bridge.treeIdentityAloneAdequateForSoilN Bridge.canonicalAcaciaBNFLESBoundary ≡ false
 soilNNotTreeOnly = refl
