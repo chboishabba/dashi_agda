@@ -25,6 +25,18 @@ labourBurdenDoesNotBecomeSameConcept :
   Ext.reidRelationalLabourDefinitionallyEqualsBerenstainEpistemicLabour Ext.canonicalAcquisitionFiveBoundary ≡ false
 labourBurdenDoesNotBecomeSameConcept = refl
 
+careOcapAreReusedNotReacquired :
+  Ext.careOcapGovernanceReused Ext.canonicalAcquisitionFiveBoundary ≡ true
+careOcapAreReusedNotReacquired = refl
+
+provenanceStillDoesNotDeterminePermission :
+  Ext.provenanceAloneDeterminesPermission Ext.canonicalAcquisitionFiveBoundary ≡ false
+provenanceStillDoesNotDeterminePermission = refl
+
+ocapNotUniversalized :
+  Ext.ocapMayBeUniversalizedAcrossAllIndigenousPeoples Ext.canonicalAcquisitionFiveBoundary ≡ false
+ocapNotUniversalized = refl
+
 sourceStillDoesNotSelectRepair :
   Ext.sourceAdjacencyAutomaticallySelectsResidual Ext.canonicalAcquisitionFiveBoundary ≡ false
 sourceStillDoesNotSelectRepair = refl
