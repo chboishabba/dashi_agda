@@ -77,7 +77,7 @@ compileFiniteJHeadCorrect :
   Calc.CalculatorMeaning M ->
   (rho : EML.Env M) ->
   EML.evalEML M rho finiteJHeadCompiled
-  ≡ Calc.CalculatorMeaning.meaning _ rho finiteJHeadExpr
+  ≡ Calc.meaning _ rho finiteJHeadExpr
 compileFiniteJHeadCorrect laws meaning rho =
   Calc.calculatorMeaningCompiles laws meaning rho finiteJHeadExpr
 
