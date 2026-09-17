@@ -32,6 +32,8 @@ import DASHI.Algebra.Quantum.ShorCyclicQFTCarrierTransportExact
 import DASHI.Algebra.Quantum.ShorCyclicQFTCarrierTransportRegression
 import DASHI.Algebra.Quantum.ShorAmplitudeExecutionPrefixExact
 import DASHI.Algebra.Quantum.ShorAmplitudeExecutionPrefixRegression
+import DASHI.Algebra.Quantum.ShorPeriodExecutionPipelineExact
+import DASHI.Algebra.Quantum.ShorPeriodExecutionPipelineRegression
 import DASHI.Algebra.Quantum.FiniteQutrit
 import DASHI.Algebra.Quantum.QutritWeyl
 import DASHI.Algebra.Quantum.DASHIQuantumBridge
