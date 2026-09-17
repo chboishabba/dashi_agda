@@ -6,6 +6,8 @@ import DASHI.Analysis.Maass.Everything
 import DASHI.Analysis.RiemannLowOrdinateSourceAtlasExact
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact
 import DASHI.Analysis.RiemannAnalyticCoordinateTerminalRefinementExact
+import DASHI.Analysis.RiemannElementaryCalculatorShellReuseExact
+import DASHI.Analysis.RiemannElementaryCalculatorShellReuseValidation
 
 -- Canonical RH direct-route representation / optional harmonic refinement.
 import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact
