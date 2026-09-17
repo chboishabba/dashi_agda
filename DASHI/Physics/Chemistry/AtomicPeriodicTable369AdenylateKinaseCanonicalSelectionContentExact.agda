@@ -28,6 +28,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceAtomSe
 selectionContentSchema : String
 selectionContentSchema = "dashi.adk.selection_content.v1"
 
+threeCVContentSchema : String
+threeCVContentSchema = "dashi.adk.three_cv_selection_content.v1"
+
 selectionContentScriptPath : String
 selectionContentScriptPath = "scripts/adk_selection_content.py"
 
@@ -94,7 +97,9 @@ contentExtensionalCOMModel contentModel =
     (centerOfMassContentExtensional contentModel)
 
 ------------------------------------------------------------------------
--- Equality over exactly the source-facing selections used by the three-CV map.
+-- Equality over exactly the eight executable/source-facing selection surfaces
+-- used by the three-CV packet: four unique theta groups plus four dLN packets
+-- (backbone and heavy conventions retained independently).
 ------------------------------------------------------------------------
 
 selections : Selection.AdKThreeCVSelections
@@ -190,6 +195,7 @@ record AdKCanonicalSelectionContentBoundary : Set where
   constructor adk-canonical-selection-content-boundary
   field
     transparentCanonicalRowsRetained : Bool
+    fullEightSelectionPacketExplicit : Bool
     massSourceAttributionRetained : Bool
     contentEqualityDefinesSelectionEquivalence : Bool
     contentSoundCOMCreatesThreeCVEquality : Bool
@@ -202,5 +208,5 @@ open AdKCanonicalSelectionContentBoundary public
 canonicalAdKCanonicalSelectionContentBoundary : AdKCanonicalSelectionContentBoundary
 canonicalAdKCanonicalSelectionContentBoundary =
   adk-canonical-selection-content-boundary
-    true true true true true
+    true true true true true true
     false false false
