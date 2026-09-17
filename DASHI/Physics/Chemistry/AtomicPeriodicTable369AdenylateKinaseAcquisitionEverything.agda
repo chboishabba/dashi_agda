@@ -174,3 +174,8 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticTra
 -- DOI/QID/Dewey stay independent, non-authoritative coordinates; unresolved
 -- classifications remain unresolved rather than being guessed from neighbours.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalAttributionCoordinatesExact
+
+-- Canonical executable acquisition/evaluation bridge for future pinned 4AKE/
+-- 1AKE coordinate manifestations. The script produces content-addressed JSON
+-- receipts; source identity and scientific/formal authority remain upstream.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVScriptManifestExact
