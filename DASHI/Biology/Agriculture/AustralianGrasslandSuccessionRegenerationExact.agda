@@ -21,6 +21,9 @@ parkhurst2022DOI = "10.1002/eap.2547"
 parkhurst2022PMID : String
 parkhurst2022PMID = "35080806"
 
+johnsonEtAl2025DOI : String
+johnsonEtAl2025DOI = "10.1016/j.ecoleng.2025.107724"
+
 scottMorgan2012 : Attribution.AttributedSource
 scottMorgan2012 = Attribution.mkDOISource
   "Andrea J. Scott; John W. Morgan"
@@ -61,6 +64,16 @@ parkhurstEtAl2022 = Attribution.mkDOISource
   "Semi-arid Western Australian restored old fields retained elevated available phosphorus relative to reference woodland more than a decade after planting. Present vegetation does not erase agricultural nutrient history."
   Attribution.publicAttribution
 
+johnsonEtAl2025 : Attribution.AttributedSource
+johnsonEtAl2025 = Attribution.mkDOISource
+  "Christopher D. Johnson; Matthew Thomson; Michael Vermeulen; Mark Waud; James McBroom; Ruby N. Michael"
+  "Direct Seeding achieves rehabilitation objectives for an operational sand mine in Southeast Queensland: A case study"
+  "Ecological Engineering 220:107724"
+  "2025" johnsonEtAl2025DOI "https://doi.org/10.1016/j.ecoleng.2025.107724"
+  Attribution.academicArticleSource
+  "Thirty-six-month operational sand-mine rehabilitation case study in southeast Queensland. Direct seeding exceeded reported woody-canopy PRCP density targets at one site, while native-grass persistence remained incomplete and Rhodes-grass dominance inhibited native recruitment at the pasture-history site. Regulatory target attainment, native-grass recovery, exotic competition and long-term self-sustaining trajectory remain separate consumers."
+  Attribution.publicAttribution
+
 record GrasslandSuccessionBoundary : Set where
   constructor grassland-succession-boundary
   field
@@ -72,13 +85,18 @@ record GrasslandSuccessionBoundary : Set where
     presentVegetationErasesAgriculturalPLegacy : Bool
     oldFieldAgeAloneDeterminesTrajectory : Bool
     exoticCompetitionMayBeDropped : Bool
+    regulatoryTargetAttainmentImpliesSelfSustainingReferenceTrajectory : Bool
+    woodyCanopyTargetAttainmentImpliesNativeGrassRecovery : Bool
+    exoticPastureCompetitionMayBeDropped : Bool
+    siteLandUseHistoryMustRemainIndexed : Bool
+    thirtySixMonthSuccessImpliesLongTermTrajectorySuccess : Bool
     passiveSuccessionCreatesDeploymentAuthority : Bool
 open GrasslandSuccessionBoundary public
 
 canonicalGrasslandBoundary : GrasslandSuccessionBoundary
 canonicalGrasslandBoundary = grassland-succession-boundary
-  false false true false false false false false false
+  false false true false false false false false false false false true false false
 
 attributionRule : String
 attributionRule =
-  "Scott & Morgan 2012 owns its south-eastern Australian old-field chronosequence; Standish et al. 2007 owns its WA dispersal/recruitment observations; Fensham et al. 2016 owns its Queensland subtropical-grassland passive-restoration trajectory; Parkhurst/Standish/Prober 2022 (DOI 10.1002/eap.2547; PMID 35080806) owns its persistent soil-P legacy observations. DASHI owns only the typed separation among soil recovery, floristic recovery, dispersal/recruitment constraints and agricultural legacy."
+  "Scott & Morgan 2012 owns its south-eastern Australian old-field chronosequence; Standish et al. 2007 owns its WA dispersal/recruitment observations; Fensham et al. 2016 owns its Queensland subtropical-grassland passive-restoration trajectory; Parkhurst/Standish/Prober 2022 (DOI 10.1002/eap.2547; PMID 35080806) owns its persistent soil-P legacy observations; Johnson et al. 2025 (DOI 10.1016/j.ecoleng.2025.107724) owns its 36-month southeast-Queensland sand-mine direct-seeding, PRCP-target, native-grass and exotic-competition observations. DASHI owns only the typed separation among soil recovery, floristic recovery, recruitment constraints, agricultural legacy, regulatory performance and long-term trajectory."
