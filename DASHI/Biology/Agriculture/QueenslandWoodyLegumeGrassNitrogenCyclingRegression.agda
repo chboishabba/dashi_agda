@@ -21,6 +21,9 @@ catchpooleBlair1990TransferDOIPinned = refl
 catchpooleBlair1990ResidueDOIPinned : Q.catchpooleBlair1990ResidueDOI ≡ "10.1071/AR9900539"
 catchpooleBlair1990ResidueDOIPinned = refl
 
+vallis1983DOIPinned : Q.vallis1983DOI ≡ "10.1071/AR9830367"
+vallis1983DOIPinned = refl
+
 fixedNNotGrassCapture :
   Q.woodyLegumeFixedNImpliesCompanionGrassCapture Q.canonicalWoodyLegumeGrassBoundary ≡ false
 fixedNNotGrassCapture = refl
@@ -48,6 +51,10 @@ transportRouteRetained = refl
 placementRetained :
   Q.residuePlacementMayBeDroppedFromNitrogenCapture Q.canonicalWoodyLegumeGrassBoundary ≡ false
 placementRetained = refl
+
+fieldResidueNotLivingTransfer :
+  Q.fieldResidueTransferImpliesLivingLegumeTransfer Q.canonicalWoodyLegumeGrassBoundary ≡ false
+fieldResidueNotLivingTransfer = refl
 
 externalDonorNotQueenslandObject :
   Q.externalTransferDonorCreatesQueenslandSameObjectReceipt Q.canonicalWoodyLegumeGrassBoundary ≡ false
