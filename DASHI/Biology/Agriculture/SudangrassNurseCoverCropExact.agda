@@ -15,6 +15,9 @@ guretzky2021DOI = "10.3390/agronomy11122449"
 burt2025DOI : String
 burt2025DOI = "10.1002/cft2.70055"
 
+paudelEtAl2021DOI : String
+paudelEtAl2021DOI = "10.3390/microorganisms9091831"
+
 kanekoEtAl2023 : Attribution.AttributedSource
 kanekoEtAl2023 = Attribution.mkDOISource
   "M. Kaneko; et al."
@@ -45,6 +48,16 @@ burtEtAl2025 = Attribution.mkDOISource
   "Agricultural forage-mixture source. Herbage accumulation and weed suppression are retained as management functions, not biodiversity or native-restoration endpoints."
   Attribution.publicAttribution
 
+paudelEtAl2021 : Attribution.AttributedSource
+paudelEtAl2021 = Attribution.mkDOISource
+  "Roshan Paudel; Philip Waisen; Koon-Hui Wang"
+  "Exploiting the Innate Potential of Sorghum/Sorghum-Sudangrass Cover Crops to Improve Soil Microbial Profile That Can Lead to Suppression of Plant-Parasitic Nematodes"
+  "Microorganisms 9(9):1831"
+  "2021" paudelEtAl2021DOI "https://doi.org/10.3390/microorganisms9091831"
+  Attribution.academicArticleSource
+  "Hawaii greenhouse/field cover-crop study spanning variety, plant age, termination and a following eggplant crop. Sorghum/sorghum-sudangrass treatments improved several soil edaphic, microbial and nematode-health indicators within one crop cycle, but did not improve eggplant yield and did not suppress root-knot or reniform nematode population densities."
+  Attribution.publicAttribution
+
 record SudangrassBoundary : Set where
   constructor sudangrass-boundary
   field
@@ -53,6 +66,10 @@ record SudangrassBoundary : Set where
     weedSuppressionImpliesNativeRestoration : Bool
     annualForageGainImpliesLongTermPastureGain : Bool
     agriculturalPastureResultCreatesNativeGrasslandSameObject : Bool
+    soilHealthImprovementImpliesCashCropYieldGain : Bool
+    microbialProfileImprovementImpliesTargetPathogenPopulationSuppression : Bool
+    rootGallReductionEqualsPathogenPopulationEradication : Bool
+    varietyAgeAndTerminationMethodMustRemainIndexed : Bool
     terminationAndReversibilityMustRemainIndexed : Bool
     seedingRateAndMixtureMustRemainIndexed : Bool
     precipitationAndSiteContextMustRemainIndexed : Bool
@@ -61,8 +78,8 @@ open SudangrassBoundary public
 
 canonicalSudangrassBoundary : SudangrassBoundary
 canonicalSudangrassBoundary = sudangrass-boundary
-  false false false false false true true true false
+  false false false false false false false false true true true true false
 
 attributionRule : String
 attributionRule =
-  "Kaneko et al. 2023 owns its brachiariagrass-establishment companion-crop observations; Guretzky & Redfearn 2021 owns its Nebraska sorghum-sudangrass seeding-rate/forage/next-year vegetation observations; Burt et al. 2025 owns its agricultural forage-mixture/weed-suppression observations. DASHI owns only the temporary-nurse/reversibility and no-promotion boundaries. Sorghum-sudangrass is not identified with native restoration vegetation."
+  "Kaneko et al. 2023 owns its brachiariagrass-establishment companion-crop observations; Guretzky & Redfearn 2021 owns its Nebraska sorghum-sudangrass seeding-rate/forage/next-year vegetation observations; Burt et al. 2025 owns its agricultural forage-mixture/weed-suppression observations; Paudel, Waisen & Wang 2021 (DOI 10.3390/microorganisms9091831) owns its sorghum/sorghum-sudangrass variety/age/termination, soil-health, microbial-profile, nematode and following-eggplant observations. DASHI owns only the temporary-nurse/reversibility and no-promotion boundaries. Soil-health or microbial improvements are not promoted to crop-yield gain, target-pathogen population suppression, biodiversity recovery or native restoration."
