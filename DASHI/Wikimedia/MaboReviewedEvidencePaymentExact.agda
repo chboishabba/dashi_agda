@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Wikimedia.LeanSlrWorldObservationBidiExact as GoldenObservation
 import DASHI.Wikimedia.MaboWorldObservationInteropExact as Observation
 
 ------------------------------------------------------------------------
@@ -55,7 +56,7 @@ maboParticipantIdentityReview =
     "consumer:mabo-100-identity-classes"
     "participant-identity"
     sameObject
-    (Observation.Observation.observationSourceRevision Observation.maboP710Observation)
+    (GoldenObservation.sourceRevisionReference Observation.maboP710Observation)
     "query:mabo:P710:Q975866"
     true refl false refl false refl false refl
 
