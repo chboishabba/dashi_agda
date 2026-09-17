@@ -17,6 +17,8 @@ module DASHI.Wikimedia.AgdaSlrJmdLeanBidiEverything where
 -- Mabo P710 provider observation and v2 PostgreSQL identity-class lineage.
 -- The reviewed-evidence payment, recurrent runner and launch-readiness owners
 -- distinguish native launch-ready from recurrent campaign executed/complete.
+-- Durable restart state is counted by reviewed identity classes, while a known
+-- identity may pay a new residual without advancing novelty or discovery lineage.
 -- JMD getter parity/challenge replay remains optional instrumentation and is
 -- not a prerequisite for the native SLR campaign.
 ------------------------------------------------------------------------
@@ -35,6 +37,8 @@ open import DASHI.Wikimedia.MaboLiveIdentityLineageInteropExact public
 open import DASHI.Wikimedia.MaboWorldObservationInteropExact public
 open import DASHI.Wikimedia.MaboReviewedEvidencePaymentExact public
 open import DASHI.Wikimedia.MaboResidualDrivenWorldRunnerExact public
+open import DASHI.Wikimedia.MaboDurableIdentityBaselineExact public
+open import DASHI.Wikimedia.MaboKnownIdentityResidualPaymentExact public
 open import DASHI.Wikimedia.MaboP7d5RuntimeLaunchReadinessExact public
 
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
