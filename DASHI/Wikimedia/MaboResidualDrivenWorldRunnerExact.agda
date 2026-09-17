@@ -10,6 +10,7 @@ import DASHI.Wikimedia.MaboIdentityClassTargetExact as Target
 import DASHI.Wikimedia.MaboResidualDrivenWorldSessionExact as Session
 import DASHI.Wikimedia.MaboP7d5SlrRuntimeReceiptExact as Runtime
 import DASHI.Wikimedia.MaboLiveIdentityLineageInteropExact as LiveLineage
+import DASHI.Wikimedia.MaboReviewedEvidencePaymentExact as Reviewed
 
 ------------------------------------------------------------------------
 -- P7d.5f recurrent runner boundary
@@ -93,8 +94,10 @@ canonicalPreparedCampaignCycleBoundary =
 -- SLR PR #24 at efba015c... has now supplied the concrete runtime prerequisites
 -- for launching the recurrent campaign: Cargo/clippy GREEN, a real pinned P710
 -- provider observation with exact revision+digest, and live v2 PostgreSQL
--- identity-class lineage.  This record deliberately does NOT claim that the
--- recurrent campaign itself has run or that the >=100 target is complete.
+-- identity-class lineage.  The existing reviewed-evidence owner separately pays
+-- the participant same-object requirement.  This record deliberately does NOT
+-- claim that the recurrent campaign itself has run or that the >=100 target is
+-- complete.
 ------------------------------------------------------------------------
 
 record RecurrentCampaignLaunchPayment : Set where
@@ -102,11 +105,13 @@ record RecurrentCampaignLaunchPayment : Set where
   field
     runtimeReceiptReference : Runtime.SlrP7d5ExecutionReceipt
     liveP710ObservationReference : Runtime.LiveMaboP710ObservationReceipt
+    reviewedEvidencePaymentReference : Reviewed.ReviewedEvidencePaymentReceipt
     liveMaboCaseIdentityLineageReference : Runtime.LiveDiscoveryIdentityLineageReceipt
     liveEddieMaboIdentityLineageReference : Runtime.LiveDiscoveryIdentityLineageReceipt
     nativeRuntimeCertified : Bool
     pinnedProviderObservationObserved : Bool
     exactRevisionDigestObserved : Bool
+    explicitReviewedEvidencePaymentPresent : Bool
     identityClassDurableLineageObserved : Bool
     reviewedIdentityClassTargetSemanticsPresent : Bool
     stagedSessionBoundaryPresent : Bool
@@ -126,8 +131,10 @@ nativeSlrCampaignLaunchPayment =
   recurrent-campaign-launch-payment
     Runtime.slrP7d5Execution
     Runtime.liveMaboP710Observation
+    Reviewed.maboParticipantIdentityPayment
     Runtime.liveMaboCaseLineage
     Runtime.liveEddieMaboLineage
+    true
     true
     true
     true
@@ -193,7 +200,10 @@ _ : Set
 _ = LiveLineage.LiveLineageIdentityAttachment
 
 _ : Set
-_ = Session.AtomicWorldExpansionSessionBoundary
+_ = Session.WorldExpansionSessionBoundary
+
+_ : Set
+_ = Reviewed.ReviewedEvidenceCoordinate
 
 ------------------------------------------------------------------------
 -- Non-collapse / transactional firewalls
@@ -209,6 +219,7 @@ data RunnerCreatesClaimTruth : Set where
 data LaunchPrerequisitesEqualCampaignExecution : Set where
 data LaunchPrerequisitesEqualTargetCompletion : Set where
 data NativeLaunchRequiresJmdParity : Set where
+data RetrievedObservationEqualsReviewedEvidencePayment : Set where
 
 sinkFailureDoesNotAdvanceIdentityClassCount :
   SinkFailureAdvancesIdentityClassCount → ⊥
@@ -246,3 +257,7 @@ launchPrerequisitesDoNotEqualTargetCompletion ()
 
 nativeLaunchDoesNotRequireJmdParity : NativeLaunchRequiresJmdParity → ⊥
 nativeLaunchDoesNotRequireJmdParity ()
+
+retrievedObservationDoesNotEqualReviewedEvidencePayment :
+  RetrievedObservationEqualsReviewedEvidencePayment → ⊥
+retrievedObservationDoesNotEqualReviewedEvidencePayment ()
