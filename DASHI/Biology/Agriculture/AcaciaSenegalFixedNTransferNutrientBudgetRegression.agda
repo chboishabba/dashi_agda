@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Biology.Agriculture.AcaciaSenegalFixedNTransferNutrientBudgetExact as T
 
 isaac2012DOIPinned : T.isaacHinsingerHarmand2012DOI ≡ "10.1016/j.scitotenv.2011.12.071"
@@ -32,6 +33,10 @@ basga2018DOIPinned = refl
 
 gerakis1970DOIPinned : T.gerakisTsangarakis1970DOI ≡ "10.1007/BF01378198"
 gerakis1970DOIPinned = refl
+
+elTahir2013NoDOIInvented :
+  Attribution.doiState T.elTahirDaldoumArdo2013 ≡ Attribution.noDOIRecordedByAtlas
+elTahir2013NoDOIInvented = refl
 
 plantFixedNDoesNotCreateInterplantTransfer :
   T.plantFixedNContributionImpliesInterplantTransfer T.canonicalTransferBudgetBoundary ≡ false
@@ -84,3 +89,19 @@ fertilizerCotreatmentRemainsIndexed = refl
 managementExportRemainsIndexed :
   T.harvestAndExportMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
 managementExportRemainsIndexed = refl
+
+noFertilizerApplicationNotSubstitutionCounterfactual :
+  T.noMineralFertilizerAppliedImpliesMeasuredFertilizerSubstitution T.canonicalTransferBudgetBoundary ≡ false
+noFertilizerApplicationNotSubstitutionCounterfactual = refl
+
+modelledBNFNotObservedFlux :
+  T.modelledBNFFractionImpliesObservedFixedNFlux T.canonicalTransferBudgetBoundary ≡ false
+modelledBNFNotObservedFlux = refl
+
+seasonalBudgetNotCropDemand :
+  T.seasonalNutrientBalanceEqualsSeasonalCropNDemand T.canonicalTransferBudgetBoundary ≡ false
+seasonalBudgetNotCropDemand = refl
+
+seasonCropSystemRetained :
+  T.cropSpeciesTreeDensityAndSeasonMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
+seasonCropSystemRetained = refl
