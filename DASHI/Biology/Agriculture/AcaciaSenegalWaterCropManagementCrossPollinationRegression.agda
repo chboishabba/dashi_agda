@@ -12,6 +12,9 @@ raddad2007DOIPinned = refl
 gaafar2006DOIPinned : W.gaafarEtAl2006DOI ≡ "10.1007/s10457-005-2918-y"
 gaafar2006DOIPinned = refl
 
+raddadWUE2006DOIPinned : W.raddadLuukkanenWUE2006DOI ≡ "10.1016/j.foreco.2006.01.036"
+raddadWUE2006DOIPinned = refl
+
 speciesAndDensityDoNotDetermineWaterCompetition :
   W.speciesAndDensityDetermineWaterCompetition W.canonicalWaterCropBoundary ≡ false
 speciesAndDensityDoNotDetermineWaterCompetition = refl
@@ -27,3 +30,11 @@ earlyStageResultDoesNotUniversaliseAcrossAge = refl
 cropYieldDoesNotIdentifyWaterMechanism :
   W.cropYieldAloneIdentifiesWaterCompetitionMechanism W.canonicalWaterCropBoundary ≡ false
 cropYieldDoesNotIdentifyWaterMechanism = refl
+
+sharedProvenanceSetDoesNotCreateCrossPaperCorrelation :
+  W.sharedProvenanceLabelsCreateNdfaWUEGumCorrelation W.canonicalWaterCropBoundary ≡ false
+sharedProvenanceSetDoesNotCreateCrossPaperCorrelation = refl
+
+crossPaperSameObjectMustBeProven :
+  W.crossPaperSameEmpiricalObjectMayBeAssumed W.canonicalWaterCropBoundary ≡ false
+crossPaperSameObjectMustBeProven = refl
