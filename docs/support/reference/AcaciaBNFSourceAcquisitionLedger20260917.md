@@ -15,6 +15,11 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1007/s13199-011-0128-0`
 - `10.1007/s003740050400`
 
+## Dual symbiosis, phosphorus and restoration context
+
+- `10.1007/BF00205900` — Colonna, Thoen, Ducousso & Badji 1991; greenhouse factorial Rhizobium / AMF / P context on degraded Dior soil. Rhizobial identity alone is not promoted to realised symbiotic performance.
+- `10.3389/fenvs.2022.803009` — Yonli et al. 2022; nursery-plus-waste-rock restoration experiment crossing Mesorhizobium, Rhizophagus and manure amendments. Nursery biomass, nodulation/AM colonization and field survival remain separate outcomes.
+
 ## Acacia BNF, edaphic context and plant-N evidence
 
 - `10.7717/peerj.5232` — PMID `30018862`, PMCID `PMC6044267`
@@ -31,6 +36,7 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1016/S0378-1127(99)00063-8` — 3–18 year Senegal fallow nutrient accumulation; biomass/fodder export remains part of the nutrient-budget question.
 - `10.1016/j.jenvman.2011.03.038` — PMID `21514716` — soil mineral-N/microbial observations indexed by distance from tree, soil depth and season.
 - `10.1016/j.jaridenv.2008.11.007` — North Kordofan post-conversion nutrient-stock evidence; plantation history, conversion regime and subsequent cropping history remain explicit.
+- `10.1007/BF01378198` — Gerakis & Tsangarakis 1970; central-Sudan sand-sheet fertility and cleared former-tree-patch heterogeneity. Current cleared-land label does not erase prior tree-patch location as a spatial-history coordinate.
 - `10.5897/AJAR2018.13283` — North Cameroon post-fallow sorghum/cowpea yield evidence; every replicated crop treatment received a 4 g NPK 20-10-10 microdose per planting hole, so this is retained as an explicit non-payment receipt for avoided mineral N.
 
 ## Acacia water, crop management and provenance physiology
