@@ -17,6 +17,8 @@ import DASHI.Biology.Agriculture.Hungria2024HeadlineLineageWeldExact
 -- Acacia/Senegalia dryland BNF <-> situated-protein <-> LES tranche.
 import DASHI.Biology.Agriculture.AcaciaSenegalRhizobialBNFSourceAtlasExact
 import DASHI.Biology.Agriculture.AcaciaSenegalRhizobialBNFSourceAtlasRegression
+import DASHI.Biology.Agriculture.AcaciaRhizobialCompetitiveOccupancyExact
+import DASHI.Biology.Agriculture.AcaciaRhizobialCompetitiveOccupancyRegression
 import DASHI.Biology.Agriculture.LegumeNodulationSituatedProteinBridgeExact
 import DASHI.Biology.Agriculture.LegumeNodulationSituatedProteinBridgeRegression
 import DASHI.Biology.Agriculture.AcaciaSenegalBNFLESCrossPollinationExact
