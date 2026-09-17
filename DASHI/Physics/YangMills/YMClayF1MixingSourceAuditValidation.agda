@@ -1,0 +1,37 @@
+module DASHI.Physics.YangMills.YMClayF1MixingSourceAuditValidation where
+
+open import Agda.Builtin.Equality using (_≡_)
+
+-- RED-first source-order validation.  At the RED commit the production owner
+-- imported below did not exist on this branch.
+import DASHI.Physics.YangMills.YMClayF1MixingSourceAuditExact as Audit
+
+open Audit
+
+mixingSourceAtlasAvailable : Set
+mixingSourceAtlasAvailable = MixingSourceAuditPresent
+
+balabanClusterExpansionDoesNotByItselfPayUniformSliceDensity :
+  balabanCMP116DirectlyPaysUniformTwoSliceDensity ≡ false
+balabanClusterExpansionDoesNotByItselfPayUniformSliceDensity =
+  balabanCMP116DirectlyPaysUniformTwoSliceDensityIsFalse
+
+kpConvergenceDoesNotIdentifyPhysicalWilsonMixing :
+  abstractKPConvergencePaysPhysicalWilsonMixing ≡ false
+kpConvergenceDoesNotIdentifyPhysicalWilsonMixing =
+  abstractKPConvergencePaysPhysicalWilsonMixingIsFalse
+
+classicalStrongMixingNotAutomaticallySU2Wilson :
+  dobrushinShlosmanStrongMixingAutomaticallyAppliesToSU2Wilson ≡ false
+classicalStrongMixingNotAutomaticallySU2Wilson =
+  dobrushinShlosmanStrongMixingAutomaticallyAppliesToSU2WilsonIsFalse
+
+finiteAbelianComparatorDoesNotTransferGroupAuthority :
+  finiteAbelianCorrelationDecayPaysSU2ContinuumF1 ≡ false
+finiteAbelianComparatorDoesNotTransferGroupAuthority =
+  finiteAbelianCorrelationDecayPaysSU2ContinuumF1IsFalse
+
+sourceAuditKeepsPhysicalF1Open :
+  interactingSU2TrajectoryMixingStillOpen ≡ true
+sourceAuditKeepsPhysicalF1Open =
+  interactingSU2TrajectoryMixingStillOpenIsTrue
