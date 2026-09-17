@@ -123,7 +123,7 @@ record ShorFiniteVectorExecutionPrefixBoundary : Set where
     q1GraphIntertwiningRetained : Bool
     literalCyclicCharacterTransformRetained : Bool
     carrierWeldIdentity : Bool
-    functionExtensionalityNeeded : Bool
+    extensionalityAxiomNeeded : Bool
     coefficientFourierInversionStillRequired : Bool
     observationStillRequired : Bool
     probabilityStillRequired : Bool
