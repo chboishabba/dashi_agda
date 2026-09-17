@@ -82,8 +82,10 @@ data CanonicalEndgameCompilerPresent : Set where
 canonicalEndgameCompilerWitness : CanonicalEndgameCompilerPresent
 canonicalEndgameCompilerWitness = canonicalEndgameCompilerPresent
 
+-- Explicit source-written assembly term; no exact-head Agda kernel receipt in
+-- this connector tranche, so metadata remains fail-closed.
 canonicalConclusionAssemblyLevel : ProofLevel
-canonicalConclusionAssemblyLevel = machineChecked
+canonicalConclusionAssemblyLevel = conditional
 
 -- The underlying analytic consequence theorem is paid by the verified Lean
 -- donor but is not relabelled as native Agda kernel mathematics.
