@@ -4,11 +4,13 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.BenefitBurdenExternalityDistributionExact as Distribution
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Core.InstitutionalNormProductionExact as Norm
 import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
 import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
 import DASHI.Cognition.PNF.SensibLawDominantChartEpistemicCompressionCrossPollinationExact as Dominant
+import DASHI.Culture.CohnInstitutionalEpistemicActivismConsumer369Exact as Activism
 import DASHI.Culture.CohnInstitutionalExpandedCandidateFibreAskExact as Ask
 import DASHI.Governance.FirstNationsOwnedEvidenceContractExact as FirstNations
 import DASHI.Governance.MoretonRobinsonRecognitionSovereigntyBoundaryExact as Sovereignty
@@ -40,14 +42,14 @@ open ExpandedConsumerReuse public
 canonicalExpandedConsumerReuse : ExpandedConsumerReuse
 canonicalExpandedConsumerReuse = expanded-consumer-reuse
   existingNeighbourConsumer
-  uninstantiatedCandidate
   existingNeighbourConsumer
   existingNeighbourConsumer
   existingNeighbourConsumer
-  uninstantiatedCandidate
+  existingNeighbourConsumer
+  exactCanonicalOwner
   existingNeighbourConsumer
   existingNeighbourConsumer
-  uninstantiatedCandidate
+  existingNeighbourConsumer
   exactCanonicalOwner
   exactCanonicalOwner
 
@@ -65,12 +67,22 @@ subjectPositionNeighbour :
   INF.FactorsThrough Subject.categoryVisibility Subject.subjectPosition → ⊥
 subjectPositionNeighbour = Subject.categoryVisibilityCannotRecoverSubjectPosition
 
--- Dotson's structural epistemic oppression is not identified with the DASHI
--- dominant-chart compiler.  This theorem is a structural neighbour: a single
--- axis/category observer cannot carry the situated relational-power outcome.
 structuralExclusionNeighbour :
   INF.FactorsThrough INF.flatProjection INF.relationalOutcome → ⊥
 structuralExclusionNeighbour = Dominant.singleAxisCannotCarrySituatedRelationalOutcome
+
+-- Berenstain's epistemic-labour concept and Reid et al.'s relational research
+-- burden are source-specific. The generic research-distribution owner is only a
+-- structural neighbour: aggregate success cannot recover burden or affected
+-- voice, and its own research calibration explicitly asks who bears
+-- participation/extraction/risk/opportunity-cost burden.
+researchBurdenNeighbour :
+  INF.FactorsThrough Distribution.demoAggregate Distribution.demoBurden → ⊥
+researchBurdenNeighbour = Distribution.aggregateCannotRecoverBurden
+
+researchVoiceNeighbour :
+  INF.FactorsThrough Distribution.demoAggregate Distribution.demoVoice → ⊥
+researchVoiceNeighbour = Distribution.aggregateCannotRecoverVoice
 
 consultationDoesNotPayBalancedParticipation :
   Norm.consultationAutomaticallyBalancedParticipation
@@ -83,8 +95,15 @@ accessDoesNotPayInfluence :
 accessDoesNotPayInfluence = refl
 
 ------------------------------------------------------------------------
--- Exact canonical owners.
+-- Exact application/canonical owners.
 ------------------------------------------------------------------------
+
+activismConsumerBoundary : Activism.EpistemicActivismConsumerBoundary
+activismConsumerBoundary = Activism.canonicalEpistemicActivismConsumerBoundary
+
+activismNextProbeNonfactorability :
+  INF.FactorsThrough Activism.Dissent.recordedDissent Activism.nextUptakeProbe → ⊥
+activismNextProbeNonfactorability = Activism.recordedDissentCannotDetermineNextProbe
 
 firstNationsGovernanceBoundary : FirstNations.FirstNationsEvidenceBoundary
 firstNationsGovernanceBoundary = FirstNations.canonicalFirstNationsEvidenceBoundary
@@ -117,13 +136,15 @@ record ExpandedConsumerReuseBoundary : Set where
     exactCanonicalOwnerMakesSourceRedundant : Bool
     uninstantiatedCandidateMayBeAssignedSyntheticValueWithoutObservation : Bool
     sourceFamilyMayOverrideCanonicalGovernanceBoundary : Bool
+    genericBurdenGeometryEqualsEpistemicLabour : Bool
+    genericBurdenGeometryEqualsIndigenousRelationalEthics : Bool
     reuseCanNarrowNextAcquisitionSearch : Bool
 
 open ExpandedConsumerReuseBoundary public
 
 canonicalExpandedConsumerReuseBoundary : ExpandedConsumerReuseBoundary
 canonicalExpandedConsumerReuseBoundary = expanded-consumer-reuse-boundary
-  false false false false false true
+  false false false false false false false true
 
 record ExpandedConsumerReuseFrontier : Set where
   constructor expanded-consumer-reuse-frontier
@@ -138,8 +159,8 @@ open ExpandedConsumerReuseFrontier public
 
 canonicalExpandedConsumerReuseFrontier : ExpandedConsumerReuseFrontier
 canonicalExpandedConsumerReuseFrontier = expanded-consumer-reuse-frontier
-  "governance/permission -> FirstNationsOwnedEvidenceContractExact; recognition/sovereignty -> MoretonRobinsonRecognitionSovereigntyBoundaryExact"
-  "structural epistemic exclusion -> dominant-chart/intersectional compression neighbour; participation power -> InstitutionalProximityInfluenceAdequacyExact; internal exclusion -> InstitutionalNormProductionExact; outsider-within standpoint -> RepresentationSubjectPositionNonfactorabilityExact; Two-Eyed coexistence/co-learning -> existing Indigenous knowledge/braiding owners"
-  "epistemic labour burden; epistemic activism/proper uptake; relational research burden still lack a direct typed institutional consumer in this audit"
-  "the expanded source frontier is now mostly operationalised by canonical or neighbouring consumers without identifying those consumers with the source concepts"
-  "prefer concrete fixtures for one of the three still-open consumers; do not acquire another paper merely to restate an already represented neighbour"
+  "governance/permission -> FirstNationsOwnedEvidenceContractExact; recognition/sovereignty -> MoretonRobinsonRecognitionSovereigntyBoundaryExact; epistemic activism/proper uptake -> CohnInstitutionalEpistemicActivismConsumer369Exact"
+  "structural epistemic exclusion -> dominant-chart/intersectional compression; epistemic labour + relational research burden -> BenefitBurdenExternalityDistributionExact research burden/voice geometry; participation power -> InstitutionalProximityInfluenceAdequacyExact; internal exclusion -> InstitutionalNormProductionExact; outsider-within standpoint -> RepresentationSubjectPositionNonfactorabilityExact; Two-Eyed coexistence/co-learning -> existing Indigenous knowledge/braiding owners"
+  "none of the acquired source families lacks at least one theorem-bearing structural consumer; source-specific empirical instantiations remain unpaid where not separately observed"
+  "the Ibrahim acquisition frontier is structurally saturated for the declared candidate families without identifying source concepts with the reused DASHI consumers"
+  "shift from horizontal acquisition to concrete source-specific observation only when a real institutional case supplies the missing premise; otherwise reconcile/certify the branch"
