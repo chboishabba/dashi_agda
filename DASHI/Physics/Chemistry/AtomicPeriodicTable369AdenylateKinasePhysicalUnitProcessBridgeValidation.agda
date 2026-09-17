@@ -47,3 +47,8 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVScriptM
 -- explicit selected-content witness pays selection extensionality and hence CV
 -- equality. Different source byte manifestations may share this CV quotient.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBCVManifestExtensionalityValidation
+
+-- Transparent canonical selected-content quotient. Canonical row equality,
+-- not hash equality, defines the concrete SelectionEquivalent relation for a
+-- content-sound COM model; scientific/source authority remains upstream.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCanonicalSelectionContentValidation
