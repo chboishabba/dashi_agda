@@ -2,8 +2,8 @@ module DASHI.Physics.YangMills.YMClayAristotleGapParityValidation where
 
 open import Agda.Builtin.Equality using (_≡_)
 
--- RED contract for the Aristotle donor tranche.  The production owners below
--- must keep three authority classes separate:
+-- Validation contract for the Aristotle donor tranche.  The production owners
+-- below keep three authority classes separate:
 --
 --   native Agda theorem term
 --   verified Lean donor theorem/worker receipt
