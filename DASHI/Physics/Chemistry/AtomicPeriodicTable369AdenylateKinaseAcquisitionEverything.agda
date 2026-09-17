@@ -169,3 +169,8 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBAtomistic
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseHistoricalMechanicsExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOpenMMCVOracleExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticTrajectoryLiftExact
+
+-- Typed navigation/provenance coordinates for the physical continuation.
+-- DOI/QID/Dewey stay independent, non-authoritative coordinates; unresolved
+-- classifications remain unresolved rather than being guessed from neighbours.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalAttributionCoordinatesExact
