@@ -1,1 +1,0 @@
-The R577--R579 route is intended to exploit the signed same-output Gram structure. Do not replace it with a fibre-cardinality loss that reintroduces cutoff dependence.
