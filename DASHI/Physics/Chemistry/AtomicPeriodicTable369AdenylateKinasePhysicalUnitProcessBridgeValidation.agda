@@ -1,0 +1,7 @@
+module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalUnitProcessBridgeValidation where
+
+-- Focused regression root for the bounded physical-unit/process continuation.
+-- The three contracts were committed before their production owners.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSIQuantityBridgeValidation
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseChemicalSystemValidation
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePhysicalDynamicsBridgeValidation
