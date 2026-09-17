@@ -15,6 +15,9 @@ githaeDOIPinned = refl
 raddadDOIPinned : M.raddad2005DOI ≡ "10.1007/s11104-005-2152-4"
 raddadDOIPinned = refl
 
+referencePlantMethodDOIPinned : M.pateUnkovich1994DOI ≡ "10.1071/AR9940133"
+referencePlantMethodDOIPinned = refl
+
 assefaKleinerDOIPinned : M.assefaKleiner1998DOI ≡ "10.1007/s003740050400"
 assefaKleinerDOIPinned = refl
 
@@ -29,6 +32,14 @@ araDoesNotDeterminePlantN = refl
 saraNotPlantDelivery :
   M.saraEqualsIntegratedPlantFixedNDelivery M.canonicalMeasurementBoundary ≡ false
 saraNotPlantDelivery = refl
+
+rawDelta15NIsNotNdfa :
+  M.rawDelta15NEqualsNdfa M.canonicalMeasurementBoundary ≡ false
+rawDelta15NIsNotNdfa = refl
+
+referenceContextCannotBeDropped :
+  M.referencePlantAndBValueMayBeDropped M.canonicalMeasurementBoundary ≡ false
+referenceContextCannotBeDropped = refl
 
 foliarIsotopeNotNitrogenaseFlux :
   M.foliarIsotopeEstimateEqualsDirectNitrogenaseFlux M.canonicalMeasurementBoundary ≡ false
