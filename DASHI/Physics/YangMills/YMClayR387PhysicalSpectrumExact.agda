@@ -48,11 +48,12 @@ physicalMassGapCertificateFromTransferGapCore :
   PhysicalSpectrumInterpretation {Hamiltonian = Hamiltonian} spectrum →
   Gap.PositiveTransferGapCore spectrum →
   OSGap.PhysicalMassGapCertificate Hamiltonian ℚ
-physicalMassGapCertificateFromTransferGapCore interpretation core = record
+physicalMassGapCertificateFromTransferGapCore
+    {spectrum = spectrum} interpretation core = record
   { OSGap.PhysicalMassGapCertificate.hamiltonian =
       physicalHamiltonian interpretation
-  ; OSGap.PhysicalMassGapCertificate.gap = Gap.gapCandidate _
-  ; OSGap.PhysicalMassGapCertificate.Positive = Gap.PositiveEnergy _
+  ; OSGap.PhysicalMassGapCertificate.gap = Gap.gapCandidate spectrum
+  ; OSGap.PhysicalMassGapCertificate.Positive = Gap.PositiveEnergy spectrum
   ; OSGap.PhysicalMassGapCertificate.gapPositive =
       Gap.gapCandidatePositive core
   ; OSGap.PhysicalMassGapCertificate.SpectrumAboveVacuumGap =
