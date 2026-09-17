@@ -1,0 +1,1 @@
+The theorem search is restricted to existing R571 state/radial envelopes, R577--R579 literal four-sign Gram machinery, and the R568/R572 commutator consumer. New parallel carrier hierarchies are out of scope.
