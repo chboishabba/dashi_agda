@@ -159,6 +159,12 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseSourceAtomSe
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCOMGeometryExact
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticCVProjectionExact
 
+-- DASHI-original projection-information-loss continuation. Source-owned AdK
+-- selection roles and attributed mass conventions remain upstream facts; the
+-- selection-extensionality relation, projection collision, and compilation to
+-- the canonical non-factorability spine are DASHI bridge mathematics.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseCVProjectionNonFactorabilityExact
+
 -- Same-object PDB and mechanics continuation.  4AKE/1AKE entry identities do
 -- not silently choose chain/model/altloc or become coordinate-derived CV values.
 -- Li-Liu-Ji's historical simulation settings are acquired separately from exact
