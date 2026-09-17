@@ -89,10 +89,6 @@ record CyclicCharacterResolutionAuthority
 
 open CyclicCharacterResolutionAuthority public
 
-------------------------------------------------------------------------
--- Identify the literal vector-table implementation with the scalar transform.
-------------------------------------------------------------------------
-
 vectorForwardLookup :
   ∀ {Coefficient Q N}
     (A : Phase.CyclicPhaseCoefficientAuthority Coefficient Q)
@@ -243,7 +239,7 @@ record ShorCyclicCharacterResolutionBoundary : Set where
     targetDimensionRemovedFromHardLeaf : Bool
     oneDimensionalCyclicResolutionSufficient : Bool
     vectorInversionCompiledConstructively : Bool
-    functionExtensionalityUsed : Bool
+    extensionalityAxiomUsed : Bool
     concreteCoefficientResolutionProvedHere : Bool
     externalLeanSameObjectWeldProvedHere : Bool
 
