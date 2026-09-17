@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Interop.SensibLawFederatedZOSAcquisitionExact as Federated
 import DASHI.Interop.DistributedEpistemicFabricSourceAtlasExact as Sources
+import DASHI.Interop.DistributedEvidenceHistoryProjectionExact as EvidenceHistory
 
 ------------------------------------------------------------------------
 -- DISTRIBUTED EPISTEMIC PLANE SEPARATION
@@ -69,7 +70,7 @@ canonicalTechnologyRoleMap : TechnologyRoleMap
 canonicalTechnologyRoleMap =
   technologyRoleMap
     "IPFS / DASL / eRDFa: immutable or content-addressed artifact identity/publication precedents"
-    "OrbitDB: external replicated authenticated log plus materialized-projection precedent; not asserted deployed here"
+    "OrbitDB / Hypercore-Autobase family: external authenticated-history and derived-view precedents; exact capability roles remain separated by the child owner"
     "JMD mesh-sync-rs / ZOS: synchronization, reconciliation and recovery precedents; transport is not semantic authority"
     "SLR/Postgres/local indexes/UI: consumer-relative operational materializations"
     "Lean/wiki-prover and other checkers: bounded executable proof/search/check producers"
@@ -87,6 +88,11 @@ sourceAtlas = Sources.johlDiscussionContribution
 -- a second content-addressing authority ontology.
 federatedContentBoundary : Federated.FederatedContentBoundary
 federatedContentBoundary = Federated.canonicalFederatedContentBoundary
+
+-- The refined lower braid is a child decomposition of artifact/history/
+-- projection, not a replacement for the eight-plane carrier.
+refinedEvidenceHistoryProjectionPath : List EvidenceHistory.EvidenceLayer
+refinedEvidenceHistoryProjectionPath = EvidenceHistory.canonicalLayerPath
 
 ------------------------------------------------------------------------
 -- Cross-plane firewalls.
