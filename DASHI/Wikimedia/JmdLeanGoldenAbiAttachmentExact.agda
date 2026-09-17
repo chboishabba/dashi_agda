@@ -11,17 +11,12 @@ open import DASHI.Wikimedia.LeanWikidataVerificationExact
 
 ------------------------------------------------------------------------
 -- CONCRETE JMD LEAN DECLARATIONS -> GOLDEN AGDA BIDI ABI
---
--- This is the thin attachment layer between the canonical integrated Lean
--- machine generation and the already-defined golden observation/verification
--- ABI.  It does not reimplement the ontology engine and it does not infer an
--- execution receipt from declaration presence.
 ------------------------------------------------------------------------
 
 record JmdGetterSurface : Set where
   constructor jmd-getter-surface
   field
-    machine : Machine.JmdLeanIntegratedMachine
+    getterMachine : Machine.JmdLeanIntegratedMachine
     entityUrlBinding : Machine.IntegratedDeclarationBinding
     fetchJsonBinding : Machine.IntegratedDeclarationBinding
     fetchEntityBinding : Machine.IntegratedDeclarationBinding
@@ -42,14 +37,12 @@ canonicalJmdGetterSurface =
     Machine.fetchEntityIntegrated
     Machine.scanArticleIntegrated
     Machine.cmdEnrichIntegrated
-    true
-    false
-    false
+    true false false
 
 record JmdVerificationSurface : Set where
   constructor jmd-verification-surface
   field
-    machine : Machine.JmdLeanIntegratedMachine
+    verificationMachine : Machine.JmdLeanIntegratedMachine
     leanCompilerBinding : Machine.IntegratedDeclarationBinding
     subChainSoundBinding : Machine.IntegratedDeclarationBinding
     verificationSurfaceUsesIntegratedMachine : Bool
@@ -65,15 +58,12 @@ canonicalJmdVerificationSurface =
     Machine.canonicalJmdLeanIntegratedMachine
     Machine.cmdLeanIntegrated
     Machine.checkSubChainSoundIntegrated
-    true
-    false
-    false
-    false
+    true false false false
 
 record JmdPublicationSurface : Set where
   constructor jmd-publication-surface
   field
-    machine : Machine.JmdLeanIntegratedMachine
+    publicationMachine : Machine.JmdLeanIntegratedMachine
     reportCsvBinding : Machine.IntegratedDeclarationBinding
     worklistCsvBinding : Machine.IntegratedDeclarationBinding
     publicationSurfaceUsesIntegratedMachine : Bool
@@ -88,23 +78,19 @@ canonicalJmdPublicationSurface =
     Machine.canonicalJmdLeanIntegratedMachine
     Machine.csvOfRowsIntegrated
     Machine.worklistCsvIntegrated
-    true
-    false
-    false
+    true false false
 
 ------------------------------------------------------------------------
--- Runtime-shaped receipts.  These types are the golden contract SLR/Lean can
--- serialize toward; constructing one records an attachment, not execution or
--- truth.  Execution status remains a separate MachineExecutionReceipt.
+-- Runtime-shaped receipt ABIs.
 ------------------------------------------------------------------------
 
 record JmdGetterAbiReceipt : Set where
   constructor jmd-getter-abi-receipt
   field
-    getterSurface : JmdGetterSurface
+    getterReceiptSurface : JmdGetterSurface
     normalizedObservation : WorldObservation
-    producerDeclarationReference : String
-    receiptReference : String
+    getterProducerDeclarationReference : String
+    getterReceiptReference : String
     getterReceiptCreatesWorldTruth : Bool
     getterReceiptCreatesSemanticAuthority : Bool
 
@@ -113,20 +99,15 @@ open JmdGetterAbiReceipt public
 mkJmdGetterAbiReceipt : WorldObservation → String → String → JmdGetterAbiReceipt
 mkJmdGetterAbiReceipt observation producer receipt =
   jmd-getter-abi-receipt
-    canonicalJmdGetterSurface
-    observation
-    producer
-    receipt
-    false
-    false
+    canonicalJmdGetterSurface observation producer receipt false false
 
 record JmdVerificationAbiReceipt : Set where
   constructor jmd-verification-abi-receipt
   field
-    verificationSurface : JmdVerificationSurface
-    verification : LeanVerificationReceipt
-    producerDeclarationReference : String
-    receiptReference : String
+    verificationReceiptSurface : JmdVerificationSurface
+    attachedVerification : LeanVerificationReceipt
+    verificationProducerDeclarationReference : String
+    verificationAbiReceiptReference : String
     verificationReceiptCreatesWorldTruth : Bool
     verificationReceiptCreatesSemanticAuthority : Bool
     verificationReceiptCreatesAgdaProof : Bool
@@ -137,21 +118,15 @@ mkJmdVerificationAbiReceipt :
   LeanVerificationReceipt → String → String → JmdVerificationAbiReceipt
 mkJmdVerificationAbiReceipt verification producer receipt =
   jmd-verification-abi-receipt
-    canonicalJmdVerificationSurface
-    verification
-    producer
-    receipt
-    false
-    false
-    false
+    canonicalJmdVerificationSurface verification producer receipt false false false
 
 record JmdPublicationAbiReceipt : Set where
   constructor jmd-publication-abi-receipt
   field
-    publicationSurface : JmdPublicationSurface
+    publicationReceiptSurface : JmdPublicationSurface
     artifactReference : String
-    producerDeclarationReference : String
-    receiptReference : String
+    publicationProducerDeclarationReference : String
+    publicationAbiReceiptReference : String
     publicationReceiptCreatesKernelStatus : Bool
     publicationReceiptCreatesWorldTruth : Bool
 
@@ -160,12 +135,7 @@ open JmdPublicationAbiReceipt public
 mkJmdPublicationAbiReceipt : String → String → String → JmdPublicationAbiReceipt
 mkJmdPublicationAbiReceipt artifact producer receipt =
   jmd-publication-abi-receipt
-    canonicalJmdPublicationSurface
-    artifact
-    producer
-    receipt
-    false
-    false
+    canonicalJmdPublicationSurface artifact producer receipt false false
 
 ------------------------------------------------------------------------
 -- Cross-layer non-collapse firewalls.
