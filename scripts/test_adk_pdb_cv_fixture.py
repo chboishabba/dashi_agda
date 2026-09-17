@@ -1,5 +1,6 @@
 import importlib.util
 import pathlib
+import sys
 import unittest
 
 SCRIPT = pathlib.Path(__file__).with_name("adk_pdb_cv_fixture.py")
@@ -9,6 +10,7 @@ class FixtureScriptTests(unittest.TestCase):
     def load(self):
         spec = importlib.util.spec_from_file_location("adk_pdb_cv_fixture", SCRIPT)
         module = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = module
         spec.loader.exec_module(module)
         return module
 
