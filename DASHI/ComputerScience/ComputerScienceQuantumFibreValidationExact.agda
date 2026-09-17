@@ -28,6 +28,10 @@ import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
 import DASHI.Algebra.Quantum.GeneralShor
 import DASHI.Algebra.Quantum.ShorReversiblePowModOracleExact
 import DASHI.Algebra.Quantum.ShorReversiblePowModOracleRegression
+import DASHI.Algebra.Quantum.ShorCyclicQFTCarrierTransportExact
+import DASHI.Algebra.Quantum.ShorCyclicQFTCarrierTransportRegression
+import DASHI.Algebra.Quantum.ShorAmplitudeExecutionPrefixExact
+import DASHI.Algebra.Quantum.ShorAmplitudeExecutionPrefixRegression
 import DASHI.Algebra.Quantum.FiniteQutrit
 import DASHI.Algebra.Quantum.QutritWeyl
 import DASHI.Algebra.Quantum.DASHIQuantumBridge
