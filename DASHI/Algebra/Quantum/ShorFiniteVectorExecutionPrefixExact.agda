@@ -7,6 +7,7 @@ import DASHI.Foundations.Base369Nat as B369
 import DASHI.Algebra.Quantum.FiniteQuantumRegister as Finite
 import DASHI.Algebra.Quantum.ShorCyclicQFTCarrierTransportExact as Fourier
 import DASHI.Algebra.Quantum.ShorAmplitudeExecutionPrefixExact as Prefix
+import DASHI.Algebra.Quantum.ShorCyclicExponentBasisExact as Cyclic
 import DASHI.Algebra.Quantum.ShorCyclicPhaseAmplitudeQFTExact as Phase
 import DASHI.Algebra.Quantum.ShorFiniteVectorAmplitudeRegisterExact as Vector
 
@@ -84,7 +85,7 @@ CompiledVectorPrefix :
   Set
 CompiledVectorPrefix {Q} {N} {Coefficient} qNonZero nNonZero base A I =
   Prefix.ShorAmplitudeExecutionPrefix
-    (DASHI.Algebra.Quantum.ShorCyclicExponentBasisExact.cyclicExponentBasis Q qNonZero)
+    (Cyclic.cyclicExponentBasis Q qNonZero)
     base N nNonZero
     (Vector.vectorAmplitudeRegister qNonZero nNonZero base A)
     (vectorCyclicDFTAction qNonZero nNonZero base A I)
