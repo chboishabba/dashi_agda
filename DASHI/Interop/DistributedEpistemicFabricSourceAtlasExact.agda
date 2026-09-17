@@ -16,13 +16,14 @@ import DASHI.Core.AttributedSourceCore as Attribution
 -- source-level architecture/implementation artefacts actually present there.
 -- Johl Brown is attributed here for the 2026-09-17 discussion-origin
 -- architecture proposal joining replicated logs/projections, situated access,
--- SOLFUNMEME settlement, and the Agda : SLR : Lean/wiki-prover braid.
+-- SOLFUNMEME settlement, Agda : SLR : Lean/wiki-prover, and the later
+-- immutable-evidence/history/projection refinement.
 -- External projects retain ownership of their own technology implementations
--- and documentation.  DASHI owns the finite typed reconstruction and the
+-- and documentation. DASHI owns the finite typed reconstruction and the
 -- non-collapse theorems introduced in this repository.
 --
 -- Attribution here does NOT adjudicate copyright ownership, authorship disputes,
--- licence compatibility, or legal title.  Repository licence observations are
+-- licence compatibility, or legal title. Repository licence observations are
 -- exact observations at the inspected root/ref only.
 ------------------------------------------------------------------------
 
@@ -57,19 +58,19 @@ jmdRepositoryContribution =
 johlDiscussionContribution : ContributionAttribution
 johlDiscussionContribution =
   contributionAttribution
-    "2026-09-17 distributed epistemic fabric / situated-access integration proposal"
+    "2026-09-17 distributed epistemic fabric / situated-access / evidence-history-projection integration proposal"
     johlBrownOrigin
     "DASHI design discussion 2026-09-17"
-    "Discussion-origin attribution for the proposed architectural composition and access-path framing; this record does not adjudicate legal ownership or exclusive priority."
+    "Discussion-origin attribution for the proposed architectural composition, access-path framing and immutable-evidence/history/projection refinement; this record does not adjudicate legal ownership or exclusive priority."
     false
     refl
 
 externalTechnologyContribution : ContributionAttribution
 externalTechnologyContribution =
   contributionAttribution
-    "external content-addressed, replicated-log, CRDT, bulk-distribution, local-sync and settlement precedents"
+    "external content-addressed, bulk-distribution, replicated-log, CRDT, local-sync and settlement precedents"
     externalTechnologyOrigin
-    "OrbitDB / IPFS / BitTorrent / Hypercore / Autobase / Peerbit / Automerge / Yjs / RxDB / PowerSync / Electric / Solana public project surfaces"
+    "BitTorrent / IPFS-IPLD-IPNS / Hypercore-Autobase / OrbitDB / Peerbit / Automerge-Yjs / local-sync systems / Solana public project surfaces"
     "External projects are architecture/implementation precedents only; no external project owns the DASHI reconstruction or its finite firewalls."
     false
     refl
@@ -77,7 +78,7 @@ externalTechnologyContribution =
 dashiFormalContribution : ContributionAttribution
 dashiFormalContribution =
   contributionAttribution
-    "typed plane separation, receipt ABI, situated-access carriers and non-collapse firewalls"
+    "typed plane separation, receipt ABI, situated-access carriers, evidence-history-projection braid and non-collapse firewalls"
     dashiSynthesisOrigin
     "chboishabba/dashi_agda"
     "Repository-native DASHI synthesis over the attributed source/discussion coordinates."
@@ -265,7 +266,7 @@ ipfsSource =
     ""
     "https://ipfs.tech/"
     (Attribution.namedSourceKind "external software project")
-    "External content-addressed object-network precedent; CID identity does not create semantic authority."
+    "External content-addressed linked-object-network precedent; CID identity does not create observation identity, writer provenance or semantic authority."
     Attribution.publicAttribution
 
 bitTorrentSource : Attribution.AttributedSource
@@ -277,7 +278,7 @@ bitTorrentSource =
     ""
     "https://www.bittorrent.org/"
     (Attribution.namedSourceKind "external protocol project")
-    "External bulk immutable byte-distribution comparator; swarm availability is not provenance or semantic truth."
+    "External bulk immutable byte-distribution comparator; swarm availability is not application-writer provenance, causal history or semantic truth."
     Attribution.publicAttribution
 
 hypercoreSource : Attribution.AttributedSource
@@ -301,7 +302,7 @@ autobaseSource =
     ""
     "https://docs.pears.com/reference/building-blocks/autobase/"
     (Attribution.namedSourceKind "external software project")
-    "External deterministic multi-writer ordering/materialized-view precedent; deterministic projection remains derived state."
+    "External deterministic multi-writer ordering/materialized-view precedent; deterministic projection remains derived state and does not become source evidence."
     Attribution.publicAttribution
 
 peerbitSource : Attribution.AttributedSource
@@ -313,7 +314,7 @@ peerbitSource =
     ""
     "https://github.com/dao-xyz/peerbit"
     (Attribution.namedSourceKind "external software project")
-    "External P2P discovery/query/index/sharding precedent; discoverability does not create claim truth."
+    "External P2P discovery/query/index/sharding precedent; discoverability does not create claim truth or decentralised semantic authority."
     Attribution.publicAttribution
 
 automergeSource : Attribution.AttributedSource
@@ -325,7 +326,7 @@ automergeSource =
     ""
     "https://github.com/automerge/automerge"
     (Attribution.namedSourceKind "external software project")
-    "External semantically mergeable CRDT document/history precedent; CRDT convergence does not imply epistemic agreement."
+    "External semantically mergeable CRDT document/history precedent; CRDT convergence does not imply epistemic agreement or evidence authority."
     Attribution.publicAttribution
 
 yjsSource : Attribution.AttributedSource
@@ -337,7 +338,7 @@ yjsSource =
     ""
     "https://github.com/yjs/yjs"
     (Attribution.namedSourceKind "external software project")
-    "External shared-type CRDT/sync precedent; networking and application authority remain separate."
+    "External shared-type CRDT/sync precedent; networking, convergence and application authority remain separate."
     Attribution.publicAttribution
 
 solanaSource : Attribution.AttributedSource
@@ -365,7 +366,7 @@ distributedEpistemicSourceAtlas =
 
 attributionRule : String
 attributionRule =
-  "JMD/meta-introspector repositories retain attribution for observed source artefacts and implementation architecture; Johl Brown is attributed for the 2026-09-17 discussion-origin composition/access-path and evidence-history-projection proposals; external projects retain their own technology claims; DASHI owns the typed reconstruction and finite firewalls. Attribution does not adjudicate legal title, source identity does not import proof, and a licence observation does not itself create semantic authority or a new reuse right."
+  "JMD/meta-introspector repositories retain attribution for observed source artefacts and implementation architecture; Johl Brown is attributed for the 2026-09-17 discussion-origin composition/access-path and immutable-evidence/history/projection proposals; external projects retain their own technology claims; DASHI owns the typed reconstruction and finite firewalls. Attribution does not adjudicate legal title, source identity does not import proof, and a licence observation does not itself create semantic authority or a new reuse right."
 
 ------------------------------------------------------------------------
 -- Attribution / licence firewalls.
