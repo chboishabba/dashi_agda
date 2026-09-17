@@ -14,6 +14,10 @@ fall2011DOIPinned :
   Env.fall2011DOI ≡ "10.1007/s13199-011-0128-0"
 fall2011DOIPinned = refl
 
+habish1970DOIPinned :
+  Env.habish1970DOI ≡ "10.1007/BF01378191"
+habish1970DOIPinned = refl
+
 leghemoglobinReviewDOIPinned :
   Env.larrainzar2020DOI ≡ "10.1111/nph.16673"
 leghemoglobinReviewDOIPinned = refl
@@ -32,6 +36,14 @@ hostIdentityAloneNotAdequate = refl
 strainIdentityAloneNotAdequateUnderWaterDeficiency :
   Env.rhizobialStrainIdentityAloneAdequateUnderWaterDeficiency Env.canonicalEnvironmentalEnablementBoundary ≡ false
 strainIdentityAloneNotAdequateUnderWaterDeficiency = refl
+
+soilPHCannotBeDroppedFromNodulationContext :
+  Env.soilPHMayBeDroppedFromEnablementContext Env.canonicalEnvironmentalEnablementBoundary ≡ false
+soilPHCannotBeDroppedFromNodulationContext = refl
+
+plantGrowthDoesNotIdentifySuccessfulNodulation :
+  Env.plantGrowthImpliesSuccessfulNodulation Env.canonicalEnvironmentalEnablementBoundary ≡ false
+plantGrowthDoesNotIdentifySuccessfulNodulation = refl
 
 soilMoistureIsNotNoduleMicroenvironment :
   Env.bulkSoilMoistureEqualsNoduleMicroenvironment Env.canonicalEnvironmentalEnablementBoundary ≡ false
