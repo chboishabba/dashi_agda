@@ -41,7 +41,7 @@ record DomainBoundaryReceipt (source : Attr.AttributedSource) : Set where
     family : DomainBoundaryFamily
     producerModule : String
     producerContract : String
-    consumerAxis : Scale.AuditAxis
+    consumerAxis : Scale.CoreAuditAxis
     applicability : BoundaryApplicability
     sourceSpecificReason : String
     sourceRoleReceipt : Snowball.SourceRoleSnowballReceipt source
@@ -59,7 +59,7 @@ mkDomainBoundaryReceipt :
   DomainBoundaryFamily →
   String →
   String →
-  Scale.AuditAxis →
+  Scale.CoreAuditAxis →
   BoundaryApplicability →
   String →
   DomainBoundaryReceipt source

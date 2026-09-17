@@ -81,7 +81,7 @@ open CandidateMove public
 -- route.  A theorem name, analogy, or conjecture cannot silently close a leaf.
 ------------------------------------------------------------------------
 
-record ProofMoveReceipt (fibre : LiveResidualFibre) : Set where
+record ProofMoveReceipt (fibre : LiveResidualFibre) : Set₁ where
   constructor proof-move-receipt
   field
     candidate : CandidateMove fibre
