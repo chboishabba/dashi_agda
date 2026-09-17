@@ -24,6 +24,10 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan; DOI verified against the University of Helsinki research record and publisher metadata.
 - existing #980 dryland water-carbon source: `10.1016/j.jaridenv.2017.12.004`
 
+## Isotope observer / method-calibration donors
+
+- `10.1071/AR9940133` — Pate, Unkovich, Armstrong & Sanford 1994; reference-plant selection for `15N` natural-abundance assessment. Retained only as method/observer calibration, not as Acacia biological evidence.
+
 ## Nitrogenase / situated-protein donors
 
 - `10.1146/annurev.biochem.78.070907.103812` — PMID `19489731`, PMCID `PMC2814439`
