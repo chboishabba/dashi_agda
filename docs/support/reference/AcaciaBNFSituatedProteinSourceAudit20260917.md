@@ -26,6 +26,10 @@ Every scientific production owner attaches DOI metadata directly to an Agda sour
 - Raddad et al. 2005 — DOI `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan; provenance and age remain explicit coordinates and the source's above-ground foliage fixed-N contribution is retained as plant-level evidence rather than direct molecular flux.
 - Abaker et al. 2018 — DOI `10.7717/peerj.5232`; PMID `30018862`; PMCID `PMC6044267` — soil nutrient/SOC and foliar isotope evidence; source interpretation does not support important BNF contribution to plantation soil N in that Sudan system.
 
+## Measurement-method donor retained
+
+- Pate, Unkovich, Armstrong & Sanford 1994 — DOI `10.1071/AR9940133` — reference-plant selection for `15N` natural-abundance assessment of fixation. This is imported only as observer/method calibration. It is not Acacia evidence and supplies no biological mechanism or field-effect proposition for the Acacia lane.
+
 ## Nitrogenase / protein sources retained
 
 - Seefeldt, Hoffman & Dean 2009 — DOI `10.1146/annurev.biochem.78.070907.103812`; PMID `19489731`; PMCID `PMC2814439` — limiting Mo-nitrogenase chemistry/mechanism calibration.
@@ -60,6 +64,8 @@ The source-written tranche explicitly blocks:
 - Abaker/Berninger/Starr 2018 dryland hydrology DOI `10.1016/j.jaridenv.2017.12.004` => BNF measurement;
 - Acacia species identity => one fixed-N contribution across provenance/site/age;
 - a provenance label without age/time context => a realised Ndfa/fixed-N contribution;
+- raw plant `delta-15N` => Ndfa without the reference/baseline observer context;
+- reference-plant/method calibration donor => Acacia biological evidence;
 - foliar `15N`/Ndfa estimate => direct molecular nitrogenase flux or whole-season ecosystem N balance.
 
 ## Certification status
