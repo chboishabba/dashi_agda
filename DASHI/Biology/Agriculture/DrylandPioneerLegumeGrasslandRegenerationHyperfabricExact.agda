@@ -13,12 +13,15 @@ import DASHI.Biology.Agriculture.AustralianAcaciaPioneerDisturbanceTrajectoryExa
 import DASHI.Biology.Agriculture.AustralianRestorationMicrobiomeTrajectoryExact as Microbiome
 import DASHI.Biology.Agriculture.SudangrassNurseCoverCropExact as Sudangrass
 import DASHI.Biology.Agriculture.AcaciaSenegalBNFLESCrossPollinationExact as Senegal
+import DASHI.Biology.Agriculture.QueenslandLeyBNFCarryoverExact as QueenslandLey
+import DASHI.Biology.Agriculture.QueenslandWoodyLegumeGrassNitrogenCyclingExact as QueenslandWoodyGrass
+import DASHI.Biology.Agriculture.QueenslandDesmanthusGrassBNFInteractionExact as QueenslandDesmanthus
 
 ------------------------------------------------------------------------
 -- COMPARATIVE REGENERATION HYPERFABRIC
 --
--- Source systems remain separate. Only functional roles, observer semantics
--- and trajectory requirements are cross-pollinated.
+-- Source systems remain separate. Only functional roles, observer semantics,
+-- transport semantics and trajectory requirements are cross-pollinated.
 ------------------------------------------------------------------------
 
 data RegenerationRole : Set where
@@ -31,6 +34,9 @@ data RegenerationRole : Set where
   recruitmentFacilitator : RegenerationRole
   disturbanceResponsivePioneer : RegenerationRole
   microbiomeTrajectoryIndicator : RegenerationRole
+  nitrogenCarryoverComparator : RegenerationRole
+  nitrogenTransportCarrier : RegenerationRole
+  competitionMediatedBNFContext : RegenerationRole
 
 data RegenerationSystem : Set where
   australianNativeLegumeSystem : RegenerationSystem
@@ -40,6 +46,9 @@ data RegenerationSystem : Set where
   australianRestorationMicrobiomeSystem : RegenerationSystem
   sudangrassPastureSystem : RegenerationSystem
   senegaliaDrylandSystem : RegenerationSystem
+  queenslandLeyCarryoverSystem : RegenerationSystem
+  queenslandWoodyLegumeGrassSystem : RegenerationSystem
+  queenslandDesmanthusGrassSystem : RegenerationSystem
 
 data TrajectoryWorld : Set where
   earlyFunctionalGainLaterRecovery : TrajectoryWorld
@@ -97,6 +106,15 @@ australianMicrobiomeIndicator = regeneration-role-assignment australianRestorati
 senegaliaHydrologicalActor : RegenerationRoleAssignment
 senegaliaHydrologicalActor = regeneration-role-assignment senegaliaDrylandSystem hydrologicalActor true
 
+queenslandLeyCarryoverComparator : RegenerationRoleAssignment
+queenslandLeyCarryoverComparator = regeneration-role-assignment queenslandLeyCarryoverSystem nitrogenCarryoverComparator true
+
+queenslandWoodyGrassTransportCarrier : RegenerationRoleAssignment
+queenslandWoodyGrassTransportCarrier = regeneration-role-assignment queenslandWoodyLegumeGrassSystem nitrogenTransportCarrier true
+
+queenslandDesmanthusInteractionContext : RegenerationRoleAssignment
+queenslandDesmanthusInteractionContext = regeneration-role-assignment queenslandDesmanthusGrassSystem competitionMediatedBNFContext true
+
 record RegenerationHyperfabricBoundary : Set where
   constructor regeneration-hyperfabric-boundary
   field
@@ -117,11 +135,18 @@ record RegenerationHyperfabricBoundary : Set where
     AustralianAcaciaEqualsSenegaliaSenegal : Bool
     agriculturalPastureEqualsNativeGrassland : Bool
     comparativeRoleCreatesDeploymentAuthority : Bool
+    fixedNitrogenImpliesSameDownstreamNitrogenRoute : Bool
+    residueMediatedTransferImpliesLivingRootTransfer : Bool
+    grassCompetitionHasContextFreeSign : Bool
+    nitrogenServiceCanBeOptimisedWithoutWaterState : Bool
+    queenslandPastureComparatorCreatesAcaciaSameObjectEvidence : Bool
+    explicitCounterfactualRequiredForFertilizerReplacement : Bool
 open RegenerationHyperfabricBoundary public
 
 canonicalRegenerationHyperfabricBoundary : RegenerationHyperfabricBoundary
 canonicalRegenerationHyperfabricBoundary = regeneration-hyperfabric-boundary
   false false true false false false false true false false false false false false false false false
+  false false false false false true
 
 -- Canonical source-bounded lanes are reused, not fused.
 australianRhizobiaBoundaryReused : AustralianRhizobia.AustralianRhizobiaBoundary
@@ -142,6 +167,15 @@ microbiomeBoundaryReused = Microbiome.canonicalMicrobiomeTrajectoryBoundary
 sudangrassBoundaryReused : Sudangrass.SudangrassBoundary
 sudangrassBoundaryReused = Sudangrass.canonicalSudangrassBoundary
 
+queenslandLeyBoundaryReused : QueenslandLey.QueenslandLeyBoundary
+queenslandLeyBoundaryReused = QueenslandLey.canonicalQueenslandLeyBoundary
+
+queenslandWoodyGrassBoundaryReused : QueenslandWoodyGrass.WoodyLegumeGrassBoundary
+queenslandWoodyGrassBoundaryReused = QueenslandWoodyGrass.canonicalWoodyLegumeGrassBoundary
+
+queenslandDesmanthusBoundaryReused : QueenslandDesmanthus.DesmanthusBoundary
+queenslandDesmanthusBoundaryReused = QueenslandDesmanthus.canonicalDesmanthusBoundary
+
 attributionRule : String
 attributionRule =
-  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass and Senegalia dryland papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory separations, the finite early-success/long-term-trajectory TaskFactorisation collision and the no-promotion boundary. Shared roles, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, causal recovery, whole-ecosystem recovery or deployment authority."
+  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass, Senegalia dryland, Queensland ley-carryover, Queensland woody-legume/grass and Queensland Desmanthus papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory/transport separations, the finite early-success/long-term-trajectory TaskFactorisation collision and the no-promotion boundary. Shared roles, fixed-N labels, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, a unique N-transfer route, causal recovery, whole-ecosystem recovery or deployment authority. Queensland residue transfer does not become living-root transfer; Desmanthus grass interaction has no context-free sign; ley N service cannot erase water state; and a quantified fertilizer-replacement claim retains its explicit mineral-N counterfactual requirement. Queensland agricultural comparators do not manufacture Acacia/Senegalia same-object evidence."
