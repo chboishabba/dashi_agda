@@ -29,6 +29,11 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseHistoricalMe
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseOpenMMCVOracleValidation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticTrajectoryLiftValidation
 
+-- Provenance-only mirror transport unblocker. GitHub blob identity is retained
+-- as transport-object evidence while canonical wwPDB byte parity and authority
+-- promotion remain explicitly false.
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinasePDBMirrorTransportValidation
+
 -- Typed attribution continuation: DOI/QID/Dewey are DashiKnowledgeCoordinate
 -- navigation/provenance fields and remain non-authoritative. Unknown QID/Dewey
 -- values stay explicitly unresolved rather than inferred from nearby classes.
