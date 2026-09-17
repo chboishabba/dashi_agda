@@ -18,6 +18,10 @@ varietyStudyDOIPinned :
   PlantN.githae2013DOI ≡ "10.1080/15324982.2013.784377"
 varietyStudyDOIPinned = refl
 
+provenanceTemporalStudyDOIPinned :
+  PlantN.raddad2005DOI ≡ "10.1007/s11104-005-2152-4"
+provenanceTemporalStudyDOIPinned = refl
+
 foliarNdfaIsPlantLevelEvidence :
   PlantN.acaciaSpecificPlantFixedNContributionEvidence PlantN.canonicalPlantNBoundary ≡ true
 foliarNdfaIsPlantLevelEvidence = refl
@@ -29,6 +33,14 @@ foliarNdfaIsNotDirectMolecularTransferFlux = refl
 varietyIdentityAloneNotAdequate :
   PlantN.speciesIdentityAloneAdequateForFixedNContribution PlantN.canonicalPlantNBoundary ≡ false
 varietyIdentityAloneNotAdequate = refl
+
+provenanceAloneNotAdequateWithoutAge :
+  PlantN.provenanceIdentityAloneAdequateWithoutAge PlantN.canonicalPlantNBoundary ≡ false
+provenanceAloneNotAdequateWithoutAge = refl
+
+fixedNContributionRemainsTimeIndexed :
+  PlantN.fixedNContributionMustRemainTimeIndexed PlantN.canonicalPlantNBoundary ≡ true
+fixedNContributionRemainsTimeIndexed = refl
 
 noduleAssessmentNotSameMeasurement :
   PlantN.noduleAssessmentEqualsFoliarFixationEstimate PlantN.canonicalPlantNBoundary ≡ false
