@@ -1,15 +1,13 @@
 module DASHI.Environment.FloatingSolarBiofoulingLESValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Environment.FloatingSolarBiofoulingLESExact as Solar
 
 ------------------------------------------------------------------------
 -- RED-first regression owner.
--- Production must provide exact source attribution, the habitat-opportunity
--- decomposition, and the two non-factorability witnesses below.
 ------------------------------------------------------------------------
 
 sourceDoiIsPinned : Solar.mavrakiEtAl2025DOI ≡ "10.1016/j.seares.2025.102627"
@@ -53,3 +51,13 @@ commercialScalingDoesNotFollowFromDemonstrator =
 harvestExportIsDistinctFromFiltration :
   Solar.FiltrationEqualsNetNutrientExport → ⊥
 harvestExportIsDistinctFromFiltration = Solar.filtrationDoesNotEqualNetNutrientExport
+
+habitatProvisionIsNotAutomaticallyBenignConnectivity :
+  Solar.HabitatProvisionImpliesBenignConnectivity → ⊥
+habitatProvisionIsNotAutomaticallyBenignConnectivity =
+  Solar.habitatProvisionDoesNotCreateBenignConnectivity
+
+seedingDoesNotCreateSelfSustainingReef :
+  Solar.SeedingImpliesSelfSustainingReef → ⊥
+seedingDoesNotCreateSelfSustainingReef =
+  Solar.seedingDoesNotCreateSelfSustainingReef
