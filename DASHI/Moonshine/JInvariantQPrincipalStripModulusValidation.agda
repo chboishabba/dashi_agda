@@ -34,3 +34,22 @@ qPrincipalStripModulusRegression :
   ≡ Real.exp (Real.exponential (Complex.realPackage C))
       (Complex.re (P.qExponent C tau))
 qPrincipalStripModulusRegression = P.qModulusOnPrincipalStrip
+
+qBelowOneFromNegativeExponentRegression :
+  ∀ {C : Complex.ConstructedComplexPackage}
+    {D : Polar.RealDivisionAndSquareRoot
+      (Real.real (Complex.realPackage C))}
+    {F : Polar.ComplexFieldAuthority
+      (Real.real (Complex.realPackage C)) D}
+    (P0 : Polar.OrdinaryPolarData C D F)
+    (B : Polar.OrdinaryPrincipalBranchLaws C D F P0)
+    (tau : Complex.ComplexPair (Real.real (Complex.realPackage C)))
+    (strip : Polar.PrincipalStrip P0 (P.qExponent C tau)) →
+  Real._<_ (Real.real (Complex.realPackage C))
+    (Complex.re (P.qExponent C tau))
+    (Real.zero (Real.real (Complex.realPackage C))) →
+  Real._<_ (Real.real (Complex.realPackage C))
+    (Polar.modulus F (Q.qOf C tau))
+    (Real.one (Real.real (Complex.realPackage C)))
+qBelowOneFromNegativeExponentRegression =
+  P.qModulusBelowOneFromNegativeRealPart
