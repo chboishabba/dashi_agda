@@ -37,6 +37,9 @@ puEtAl2001DOI = "10.1023/A:1014462305825"
 peoplesEtAl2017DOI : String
 peoplesEtAl2017DOI = "10.1071/CP16248"
 
+strongEtAl2006DOI : String
+strongEtAl2006DOI = "10.1071/EA05007"
+
 hossainEtAl1995 : Attribution.AttributedSource
 hossainEtAl1995 = Attribution.mkDOISource
   "Shahid A. Hossain; S. A. Waring; W. M. Strong; Ram C. Dalal; E. J. Weston"
@@ -97,6 +100,18 @@ peoplesEtAl2017 = Attribution.mkDOISource
   "Multi-season, four-location southern-Queensland forage-legume study comparing fixed-N inputs, soil mineral N before following cereal crops and subsequent crop responses. High starting soil mineral N suppressed N2 fixation; shoot-N removal often prevented a positive whole-system N balance; legume effects on following grain yield were site/crop dependent. The source therefore links multiple stages but does not supply a universal fertilizer-replacement value."
   Attribution.publicAttribution
 
+strongEtAl2006 : Attribution.AttributedSource
+strongEtAl2006 = Attribution.mkDOISource
+  "W. M. Strong; Ram C. Dalal; E. J. Weston; K. J. Lehane; J. E. Cooper; A. J. King; C. J. Holmes"
+  "Sustaining productivity of a Vertosol at Warra, Queensland, with fertilisers, no-tillage or legumes. 9. Production and nitrogen benefits from mixed grass and legume pastures in rotation with wheat"
+  "Australian Journal of Experimental Agriculture 46(3):375-385"
+  "2006"
+  strongEtAl2006DOI
+  "https://doi.org/10.1071/EA05007"
+  Attribution.academicArticleSource
+  "Long-term Warra mixed grass-legume ley followed by wheat assays. In most following wheat crops, yield was similar to unfertilised continuous wheat; in selected years pasture-following yield was similar to continuous wheat fertilised with 75 kg N ha-1, while grain protein showed a stronger response. Stored soil water was low enough to limit many assay crops. Retained as a single-rate equivalence and water-limited-response receipt, not a quantified fertilizer-replacement curve."
+  Attribution.publicAttribution
+
 ------------------------------------------------------------------------
 -- Evidence roles and receipts.
 ------------------------------------------------------------------------
@@ -110,6 +125,8 @@ data QueenslandLeyEvidenceRole : Set where
   followingCropYield : QueenslandLeyEvidenceRole
   nitrogenLossOrImmobilisation : QueenslandLeyEvidenceRole
   multiSiteLeyCarryover : QueenslandLeyEvidenceRole
+  singleRateFertilizerEquivalence : QueenslandLeyEvidenceRole
+  waterLimitedCropAssay : QueenslandLeyEvidenceRole
 
 record QueenslandLeyReceipt : Set where
   constructor queensland-ley-receipt
@@ -169,6 +186,15 @@ southernQueenslandLeyReceipt = queensland-ley-receipt
   "multi-site carryover trajectory"
   "high starting soil mineral N suppresses fixation; removed forage N can erase positive system balance; yield response is not universal across site/crop combinations"
 
+warraSingleRateComparatorReceipt : QueenslandLeyReceipt
+warraSingleRateComparatorReceipt = queensland-ley-receipt
+  strongEtAl2006 strongEtAl2006DOI singleRateFertilizerEquivalence
+  "Warra, southern Queensland fertility-depleted Vertosol"
+  "45-month mixed pasture followed by multiple wheat assay years"
+  "pasture-following wheat compared with unfertilised and 75 kg N ha-1 continuous-wheat comparators"
+  "yield/protein response under low stored-water conditions"
+  "similarity to one fertilizer rate in selected years does not identify a response curve or replacement value; water limitation remains an interacting cause"
+
 ------------------------------------------------------------------------
 -- Cross-pollination with the explicit fertilizer-counterfactual template.
 ------------------------------------------------------------------------
@@ -207,6 +233,8 @@ record QueenslandLeyBoundary : Set where
     soilMineralNitrogenImpliesEquivalentCropNitrogenUptake : Bool
     cropNitrogenUptakeImpliesYieldBenefit : Bool
     fixedNitrogenInputImpliesAvoidedMineralFertilizer : Bool
+    singleFertilizerRateYieldEquivalenceImpliesReplacementValue : Bool
+    waterLimitationMayBeDroppedFromFollowingCropResponse : Bool
     denitrificationLeachingImmobilisationMayBeDropped : Bool
     startingMineralNitrogenMayBeDroppedFromBNF : Bool
     cropIdentityAndSeasonMayBeDropped : Bool
@@ -222,7 +250,7 @@ open QueenslandLeyBoundary public
 
 canonicalQueenslandLeyBoundary : QueenslandLeyBoundary
 canonicalQueenslandLeyBoundary = queensland-ley-boundary
-  false false false false false false false false false false
+  false false false false false false false false false false false false
   true true false false false
 
 fixedNDoesNotIdentifySowingMineralN :
@@ -241,10 +269,14 @@ fixedNDoesNotIdentifyReplacement :
   fixedNitrogenInputImpliesAvoidedMineralFertilizer canonicalQueenslandLeyBoundary ≡ false
 fixedNDoesNotIdentifyReplacement = refl
 
+singleRateComparatorDoesNotIdentifyReplacement :
+  singleFertilizerRateYieldEquivalenceImpliesReplacementValue canonicalQueenslandLeyBoundary ≡ false
+singleRateComparatorDoesNotIdentifyReplacement = refl
+
 acaciaAvoidedMineralNStillOpen :
   queenslandLeyEvidenceClosesAcaciaAvoidedMineralN canonicalQueenslandLeyBoundary ≡ false
 acaciaAvoidedMineralNStillOpen = refl
 
 attributionRule : String
 attributionRule =
-  "Hossain, Waring, Strong, Dalal & Weston 1995 (DOI 10.1071/AR9950493) owns its Warra enriched-15N/natural-abundance estimates of legume-system N fixation. Hossain, Dalal, Waring, Strong & Weston 1996-I (DOI 10.1071/SR9960273) owns its soil-N/C accretion, residue/root-N and potentially-mineralisable-N observations. Hossain, Strong, Waring, Dalal & Weston 1996-II (DOI 10.1071/SR9960289) owns its fallow mineral-N, following-wheat N-uptake, grain-yield and protein observations. Pu, Strong, Saffigna & Doughton 2001 (DOI 10.1023/A:1014462305825) owns its Roma applied-15N loss/displacement/immobilisation mass-balance propositions. Bell, Lawrence, Johnson & Peoples 2017 (DOI 10.1071/CP16248) owns its multi-site southern-Queensland forage-legume fixation, soil-mineral-N and following-cereal response observations. DASHI owns only the typed carryover-stage separation and no-promotion boundary. These Queensland agricultural systems are methodological/causal comparators and do not create Acacia/Senegalia same-object evidence, direct bacterial flux, quantified Acacia fertilizer substitution, or deployment authority."
+  "Hossain, Waring, Strong, Dalal & Weston 1995 (DOI 10.1071/AR9950493) owns its Warra enriched-15N/natural-abundance estimates of legume-system N fixation. Hossain, Dalal, Waring, Strong & Weston 1996-I (DOI 10.1071/SR9960273) owns its soil-N/C accretion, residue/root-N and potentially-mineralisable-N observations. Hossain, Strong, Waring, Dalal & Weston 1996-II (DOI 10.1071/SR9960289) owns its fallow mineral-N, following-wheat N-uptake, grain-yield and protein observations. Pu, Strong, Saffigna & Doughton 2001 (DOI 10.1023/A:1014462305825) owns its Roma applied-15N loss/displacement/immobilisation mass-balance propositions. Bell, Lawrence, Johnson & Peoples 2017 (DOI 10.1071/CP16248) owns its multi-site southern-Queensland forage-legume fixation, soil-mineral-N and following-cereal response observations. Strong et al. 2006 (DOI 10.1071/EA05007) owns its Warra mixed-pasture following-wheat yield/protein comparison with unfertilised and 75 kg N ha-1 continuous-wheat comparators and its low stored-water limitation observation. DASHI owns only the typed carryover-stage separation and no-promotion boundary. These Queensland agricultural systems are methodological/causal comparators and do not create Acacia/Senegalia same-object evidence, direct bacterial flux, quantified Acacia fertilizer substitution, or deployment authority."
