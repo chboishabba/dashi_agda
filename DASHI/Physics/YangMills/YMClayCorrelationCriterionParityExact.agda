@@ -110,6 +110,9 @@ correlationCriterionIsAlternateF1ProducerShapeIsTrue :
   correlationCriterionIsAlternateF1ProducerShape ≡ true
 correlationCriterionIsAlternateF1ProducerShapeIsTrue = refl
 
+-- The supplied worker reports this Lean file compiling, but the Agda branch has
+-- not imported a kernel proof of it.  Keep the parity theorem and the physical
+-- hypothesis as distinct levels.
 correlationCriterionLeanLevel : ProofLevel
 correlationCriterionLeanLevel = standardImported
 
