@@ -75,7 +75,7 @@ certifiedFourierSamplingPipeline :
   Pipeline.ShorSamplingPipeline
     (Order.asHiddenPeriodProblem P)
     prefix
-certifiedFourierSamplingPipeline P prefix semantics =
+certifiedFourierSamplingPipeline {r = r} P prefix semantics =
   Pipeline.shorSamplingPipeline
     (FourierOrderObservation P)
     (seedState semantics)
@@ -84,32 +84,20 @@ certifiedFourierSamplingPipeline P prefix semantics =
     observedCandidate
     successfulRecovery
   where
+    finalState : Nat → _
+    finalState seed =
+      QFT.fourier
+        (Prefix.amplitudeFourierTransform prefix)
+        (Finite.run
+          (Prefix.amplitudeOracleCircuit prefix)
+          (seedState semantics seed))
+
     successfulRecovery :
       ∀ seed →
       CandidateExact P
-        (observeFourierState semantics
-          (Pipeline.fourierAfterOracle
-            prefix
-            (Pipeline.shorSamplingPipeline
-              (FourierOrderObservation P)
-              (seedState semantics)
-              (observeFourierState semantics)
-              (CandidateExact P)
-              observedCandidate
-              successfulRecovery)
-            seed)) →
+        (observeFourierState semantics (finalState seed)) →
       observedCandidate
-        (observeFourierState semantics
-          (Pipeline.fourierAfterOracle
-            prefix
-            (Pipeline.shorSamplingPipeline
-              (FourierOrderObservation P)
-              (seedState semantics)
-              (observeFourierState semantics)
-              (CandidateExact P)
-              observedCandidate
-              successfulRecovery)
-            seed))
+        (observeFourierState semantics (finalState seed))
       ≡ r
     successfulRecovery seed candidateCert =
       Verify.exactOrderCertificateUnique
