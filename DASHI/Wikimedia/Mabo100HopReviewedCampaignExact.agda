@@ -10,6 +10,7 @@ import DASHI.Wikimedia.MaboConsumerResidualDiagnosisExact as Diagnosis
 import DASHI.Wikimedia.MaboDurableIdentityBaselineExact as Baseline
 import DASHI.Wikimedia.MaboKnownIdentityResidualPaymentExact as Known
 import DASHI.Wikimedia.MaboReviewedEvidencePaymentExact as Payment
+import DASHI.Wikimedia.MaboReviewedContextFederationExact as Context
 
 ------------------------------------------------------------------------
 -- REVIEW-DRIVEN 100-HOP MABO CAMPAIGN
@@ -46,6 +47,46 @@ reviewManifestFormat : String
 reviewManifestFormat =
   "representation_ref<TAB>identity_class_ref<TAB>review_ref"
 
+------------------------------------------------------------------------
+-- BOUNDED REVIEWED-CONTEXT -> PROVIDER REPLAY
+--
+-- SLR persists the semantic reviewed role (participant, judge, overrules, ...)
+-- in the latent-world relation rather than a free-standing property id.  The
+-- production replay is allowed to recover a Wikidata property only because the
+-- canonical federation owner already defines a finite one-to-one map for the
+-- five reviewed Mabo properties.  This is not a general label -> property
+-- inference rule and introduces no second property ontology here.
+------------------------------------------------------------------------
+
+record ReviewedRelationProviderReplay : Set where
+  constructor reviewed-relation-provider-replay
+  field
+    reviewedRelationRoleReference : String
+    providerPropertyReference : String
+
+open ReviewedRelationProviderReplay public
+
+providerReplay : Context.MaboContextProperty → ReviewedRelationProviderReplay
+providerReplay property =
+  reviewed-relation-provider-replay
+    (Context.relationRole property)
+    (Context.propertyId property)
+
+p1001ProviderReplay : ReviewedRelationProviderReplay
+p1001ProviderReplay = providerReplay Context.p1001
+
+p710ProviderReplay : ReviewedRelationProviderReplay
+p710ProviderReplay = providerReplay Context.p710
+
+p4884ProviderReplay : ReviewedRelationProviderReplay
+p4884ProviderReplay = providerReplay Context.p4884
+
+p1594ProviderReplay : ReviewedRelationProviderReplay
+p1594ProviderReplay = providerReplay Context.p1594
+
+p4006ProviderReplay : ReviewedRelationProviderReplay
+p4006ProviderReplay = providerReplay Context.p4006
+
 record ReviewedCampaignBoundary : Set where
   constructor reviewed-campaign-boundary
   field
@@ -61,6 +102,9 @@ record ReviewedCampaignBoundary : Set where
     pinnedSourceManifestationRequired : Bool
     reviewedPaymentPersistsBeforeNovelCycle : Bool
     durableBaselineQuotientsKnownRepresentations : Bool
+    boundedReviewedRelationReplaysExactProviderProperty : Bool
+    sameObjectPaymentEqualsNewRelatedObject : Bool
+    authorityFamilyRouteCreatesLegalAuthority : Bool
     campaignCandidateOnly : Bool
     campaignCreatesSemanticAuthority : Bool
     campaignApplicabilityPromoted : Bool
@@ -83,6 +127,9 @@ canonicalReviewedCampaignBoundary =
     true
     true
     true
+    true
+    false
+    false
     true
     false
     false
@@ -114,7 +161,7 @@ campaignDiagnosisFailedFactorisationMayDemandRepair :
 campaignDiagnosisFailedFactorisationMayDemandRepair = refl
 
 ------------------------------------------------------------------------
--- Existing payment/restart theorems remain authoritative.
+-- Existing payment/restart/context theorems remain authoritative.
 ------------------------------------------------------------------------
 
 knownIdentityReviewDoesNotAdvanceNovelty :
@@ -131,6 +178,10 @@ baselineConflictsFailClosed :
     Baseline.canonicalMaboDurableIdentityBaselineBoundary ≡ true
 baselineConflictsFailClosed = refl
 
+p4006CandidateStillDoesNotCreateAuthority :
+  Context.p4006AuthoritySourceCandidateCreatesAuthority ≡ false
+p4006CandidateStillDoesNotCreateAuthority = refl
+
 ------------------------------------------------------------------------
 -- Campaign-stage non-collapse firewalls.
 ------------------------------------------------------------------------
@@ -141,6 +192,9 @@ data PersistedPaymentEqualsNovelDurableAdmission : Set where
 data MissingCarrierAnalysisManufacturesMissingValue : Set where
 data ExternalKnowledgeComparisonEqualsIdentityReview : Set where
 data SemiFormalPresentationEqualsIdentityReview : Set where
+data SameObjectPaymentEqualsNewRelatedObject : Set where
+data AuthorityFamilyRouteEqualsLegalAuthority : Set where
+data BoundedProviderReplayEqualsGeneralSemanticInference : Set where
 
 diagnosisProposalDoesNotEqualIdentityReview :
   DiagnosisProposalEqualsIdentityReview → ⊥
@@ -166,6 +220,18 @@ semiFormalPresentationDoesNotEqualIdentityReview :
   SemiFormalPresentationEqualsIdentityReview → ⊥
 semiFormalPresentationDoesNotEqualIdentityReview ()
 
+sameObjectPaymentDoesNotEqualNewRelatedObject :
+  SameObjectPaymentEqualsNewRelatedObject → ⊥
+sameObjectPaymentDoesNotEqualNewRelatedObject ()
+
+authorityFamilyRouteDoesNotEqualLegalAuthority :
+  AuthorityFamilyRouteEqualsLegalAuthority → ⊥
+authorityFamilyRouteDoesNotEqualLegalAuthority ()
+
+boundedProviderReplayDoesNotEqualGeneralSemanticInference :
+  BoundedProviderReplayEqualsGeneralSemanticInference → ⊥
+boundedProviderReplayDoesNotEqualGeneralSemanticInference ()
+
 ------------------------------------------------------------------------
 -- Source-written runtime contract only. No Cargo/Agda execution receipt is
 -- manufactured by this owner.
@@ -180,6 +246,7 @@ record ReviewedCampaignRuntimeContract : Set where
     maxHopBudget : Nat
     explicitReviewBeforeProviderIO : Bool
     exactRevisionReacquisitionRequired : Bool
+    boundedContextPropertyReplayRequired : Bool
     knownIdentityUsesNonNovelPaymentLane : Bool
     novelIdentityUsesIdentityCoherentRunner : Bool
     lineagePersistenceRequiredBeforeCommit : Bool
@@ -194,6 +261,7 @@ canonicalReviewedCampaignRuntimeContract =
     campaignExecutable
     reviewManifestFormat
     campaignHopBudget
+    true
     true
     true
     true
