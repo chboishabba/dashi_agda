@@ -14,11 +14,21 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1023/B:PLSO.0000030181.03575.e1`
 - `10.1007/s13199-011-0128-0`
 - `10.1007/s003740050400`
+- `10.1007/BF01378191` — Habish 1970; multi-Acacia soil moisture/temperature/pH nodulation source. Retained as an environmental-enablement donor, not an Acacia-senegal-only quantitative rate law.
+
+## Rhizobial natural populations and competitive occupancy
+
+- `10.1007/s00248-004-0077-8` — PMID `16184338` — Sarr et al. 2005; natural Acacia senegal / Acacia nilotica soil-rhizobial population structure across Mauritania and Senegal River Valley sites.
+- `10.1007/s11274-006-9288-0` — Sarr & Lesueur 2007; mixed-inoculum nursery/field nodule-occupancy study. Soil/host/phase remain indexed; the paper's strong nursery-to-field ranking reversal is retained as Acacia nilotica evidence rather than relabelled as an Acacia senegal reversal.
 
 ## Dual symbiosis, phosphorus and restoration context
 
 - `10.1007/BF00205900` — Colonna, Thoen, Ducousso & Badji 1991; greenhouse factorial Rhizobium / AMF / P context on degraded Dior soil. Rhizobial identity alone is not promoted to realised symbiotic performance.
 - `10.3389/fenvs.2022.803009` — Yonli et al. 2022; nursery-plus-waste-rock restoration experiment crossing Mesorhizobium, Rhizophagus and manure amendments. Nursery biomass, nodulation/AM colonization and field survival remain separate outcomes.
+
+## Dryland temporal enablement donor
+
+- `10.1111/nph.15526` — PMID `30299536` — Dovrat & Sheffer 2019; full-year Calicotome villosa fixation study. Retained only for the generic need to index season/phenology and regulatory context; it does not create an Acacia same-object seasonal time series.
 
 ## Acacia BNF, edaphic context and plant-N evidence
 
