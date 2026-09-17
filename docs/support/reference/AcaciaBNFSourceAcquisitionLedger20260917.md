@@ -21,7 +21,7 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1016/j.foreco.2010.11.011`
 - `10.1016/j.jplph.2010.10.011` — PMID `21211863`
 - `10.1080/15324982.2013.784377`
-- `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan; DOI verified against the University of Helsinki research record and publisher metadata.
+- `10.1007/s11104-005-2152-4` — eight-provenance, age-indexed foliar `15N`/Ndfa evidence in Blue Nile Sudan.
 - existing #980 dryland water-carbon source: `10.1016/j.jaridenv.2017.12.004`
 
 ## Acacia fixed-N transfer, field budgets and land-use persistence
@@ -31,6 +31,13 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1016/S0378-1127(99)00063-8` — 3–18 year Senegal fallow nutrient accumulation; biomass/fodder export remains part of the nutrient-budget question.
 - `10.1016/j.jenvman.2011.03.038` — PMID `21514716` — soil mineral-N/microbial observations indexed by distance from tree, soil depth and season.
 - `10.1016/j.jaridenv.2008.11.007` — North Kordofan post-conversion nutrient-stock evidence; plantation history, conversion regime and subsequent cropping history remain explicit.
+- `10.5897/AJAR2018.13283` — North Cameroon post-fallow sorghum/cowpea yield evidence; every replicated crop treatment received a 4 g NPK 20-10-10 microdose per planting hole, so this is retained as an explicit non-payment receipt for avoided mineral N.
+
+## Acacia water, crop management and provenance physiology
+
+- `10.1016/j.agwat.2006.06.001` — Blue Nile clay-soil tree-spacing/intercrop water and crop-yield study; early-stage little-water-competition result remains soil/age/crop/management bounded.
+- `10.1007/s10457-005-2918-y` — North Kordofan sandy-soil tree-density/water-use/gum/crop-yield study; contrasts with the clay-soil response and therefore blocks species/density-only water-response promotion.
+- `10.1016/j.foreco.2006.01.036` — eight-provenance Blue Nile delta-13C/water-use/growth/gum study. Shared provenance labels with the separate Ndfa source do not create a cross-paper Ndfa-WUE-gum correlation or same-object join.
 
 ## Isotope observer / method-calibration donors
 
@@ -47,4 +54,4 @@ All identifiers below were acquired/verified during the source-written tranche a
 
 ## Identity / attribution rule
 
-Unverified PMID/PMCID/QID/taxon identifiers remain unfilled; no identifier is inferred from article title alone. DOI/PMID/PMCID/PDB coordinates identify source or object provenance only. They do not create biological truth, same-object identity across studies, DASHI theorem ownership, mechanism transfer, model adequacy, or deployment authority.
+Unverified PMID/PMCID/QID/taxon identifiers remain unfilled; no identifier is inferred from article title alone. DOI/PMID/PMCID/PDB coordinates identify source or object provenance only. They do not create biological truth, same-object identity across studies, DASHI theorem ownership, mechanism transfer, model adequacy, cross-paper correlation, fertilizer substitution, or deployment authority.
