@@ -156,12 +156,16 @@ bindingRole = Chemistry.bindingTransition
 catalyticReactionRole : Chemistry.TransitionKind
 catalyticReactionRole = Chemistry.chemicalReaction
 
+catalyticStoichiometrySource : String
+catalyticStoichiometrySource =
+  "Li, Liu and Ji 2015, DOI 10.1016/j.bpj.2015.06.059, Introduction"
+
 catalyticStoichiometryTarget : String
-catalyticStoichiometryTarget = "ATP + AMP <-> 2 ADP"
+catalyticStoichiometryTarget = "Mg2+.ATP + AMP <-> Mg2+.ADP + ADP"
 
 catalyticStoichiometryPayment : String
 catalyticStoichiometryPayment =
-  "chemical-system target retained for the AdK mechanism layer; this bridge does not promote exact protonation, Mg coordination, chemical potentials, or catalytic kinetics without a dedicated same-object source receipt"
+  "source pays the enzyme-level magnesium-associated substrate/product role; this bridge still does not infer exact protonation, microscopic Mg coordination geometry, chemical potentials, transition state, or catalytic kinetics"
 
 structuralContextReading : String
 structuralContextReading =
@@ -202,6 +206,7 @@ record AdKChemicalSystemBoundary : Set where
     magnesiumRegistryIdentityRetained : Bool
     atomToSpeciesReceiptExplicit : Bool
     speciesToMoleculeReceiptExplicit : Bool
+    sourceCatalyticReactionRolePaid : Bool
     registryIdentitySelectsSimulationProtonation : Bool
     registryIdentitySelectsMgCoordination : Bool
     bindingConformationEqualsCatalyticChemistry : Bool
@@ -213,5 +218,5 @@ open AdKChemicalSystemBoundary public
 canonicalAdKChemicalSystemBoundary : AdKChemicalSystemBoundary
 canonicalAdKChemicalSystemBoundary =
   adk-chemical-system-boundary
-    true true true true true true true
+    true true true true true true true true
     false false false false false false
