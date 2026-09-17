@@ -20,6 +20,8 @@ import DASHI.Physics.YangMills.YMClayVaryingCarrierTransportParityExact as Varyi
 import DASHI.Physics.YangMills.YMClayUniformGapReductionParityExact as UniformGap
 import DASHI.Physics.YangMills.YMClayCorrelationCriterionParityExact as Correlation
 import DASHI.Physics.YangMills.YMClayCorrelationCriterionParityValidation as CorrelationValidation
+import DASHI.Physics.YangMills.YMClayUrsellTransferMixingBoundaryExact as UrsellBoundary
+import DASHI.Physics.YangMills.YMClayUrsellTransferMixingBoundaryValidation as UrsellBoundaryValidation
 import DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact as F134
 import DASHI.Physics.YangMills.YMClayClosedWorldResidualAudit20260917Exact as ResidualAudit
 import DASHI.Physics.YangMills.YMClayF1CanonicalSourceApplicationValidation as F1Canonical
@@ -34,6 +36,8 @@ open Varying
 open UniformGap
 open Correlation
 open CorrelationValidation
+open UrsellBoundary
+open UrsellBoundaryValidation
 open F134
 open ResidualAudit
 open F1Canonical
@@ -55,6 +59,9 @@ uniformGapReductionDonorAvailable = UniformGapReductionLeanDonorPresent
 
 correlationCriterionDonorAvailableInAggregate : Set
 correlationCriterionDonorAvailableInAggregate = CorrelationCriterionLeanDonorPresent
+
+ursellTransferBoundaryAvailableInAggregate : Set
+ursellTransferBoundaryAvailableInAggregate = UrsellTransferMixingBoundaryPresent
 
 transferOperatorArtifactAvailable : Atlas.LeanTheoremArtifact
 transferOperatorArtifactAvailable = Atlas.literalSU2TransferOperatorGapLean
@@ -91,6 +98,16 @@ interactingMixingStillPhysicalDebt :
   Correlation.interactingWilsonMixingBoundProvedByDonor ≡ false
 interactingMixingStillPhysicalDebt =
   Correlation.interactingWilsonMixingBoundProvedByDonorIsFalse
+
+pairwiseUrsellDoesNotSilentlyPayOperatorMixing :
+  UrsellBoundary.pairwiseObservableUrsellDecayPaysUniformL2Mixing ≡ false
+pairwiseUrsellDoesNotSilentlyPayOperatorMixing =
+  UrsellBoundary.pairwiseObservableUrsellDecayPaysUniformL2MixingIsFalse
+
+observableToUniformMixingUpgradeStillOpen :
+  UrsellBoundary.observableToUniformMixingUpgradeStillRequired ≡ true
+observableToUniformMixingUpgradeStillOpen =
+  UrsellBoundary.observableToUniformMixingUpgradeStillRequiredIsTrue
 
 frontierNoLongerChargesUniformC :
   Frontier.f1TrajectoryUniformCRequired ≡ false
