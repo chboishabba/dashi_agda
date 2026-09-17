@@ -14,6 +14,7 @@ import DASHI.Culture.CohnInstitutionalEpistemicActivismConsumer369Exact as Activ
 import DASHI.Culture.CohnInstitutionalExpandedCandidateFibreAskExact as Ask
 import DASHI.Governance.FirstNationsOwnedEvidenceContractExact as FirstNations
 import DASHI.Governance.MoretonRobinsonRecognitionSovereigntyBoundaryExact as Sovereignty
+import DASHI.Governance.SituatedDissentDeceptionAssayExact as Dissent
 
 ------------------------------------------------------------------------
 -- EXPANDED CANDIDATE -> EXISTING CONSUMER REUSE MAP
@@ -71,11 +72,6 @@ structuralExclusionNeighbour :
   INF.FactorsThrough INF.flatProjection INF.relationalOutcome → ⊥
 structuralExclusionNeighbour = Dominant.singleAxisCannotCarrySituatedRelationalOutcome
 
--- Berenstain's epistemic-labour concept and Reid et al.'s relational research
--- burden are source-specific. The generic research-distribution owner is only a
--- structural neighbour: aggregate success cannot recover burden or affected
--- voice, and its own research calibration explicitly asks who bears
--- participation/extraction/risk/opportunity-cost burden.
 researchBurdenNeighbour :
   INF.FactorsThrough Distribution.demoAggregate Distribution.demoBurden → ⊥
 researchBurdenNeighbour = Distribution.aggregateCannotRecoverBurden
@@ -102,7 +98,7 @@ activismConsumerBoundary : Activism.EpistemicActivismConsumerBoundary
 activismConsumerBoundary = Activism.canonicalEpistemicActivismConsumerBoundary
 
 activismNextProbeNonfactorability :
-  INF.FactorsThrough Activism.Dissent.recordedDissent Activism.nextUptakeProbe → ⊥
+  INF.FactorsThrough Dissent.recordedDissent Activism.nextUptakeProbe → ⊥
 activismNextProbeNonfactorability = Activism.recordedDissentCannotDetermineNextProbe
 
 firstNationsGovernanceBoundary : FirstNations.FirstNationsEvidenceBoundary
