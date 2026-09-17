@@ -57,6 +57,8 @@ import DASHI.Crypto.ShorFiniteVectorBornWeightsExact
 import DASHI.Crypto.ShorFiniteVectorBornWeightsRegression
 import DASHI.Crypto.ShorFiniteVectorBornProbabilityExact
 import DASHI.Crypto.ShorFiniteVectorBornProbabilityRegression
+import DASHI.Crypto.ShorFiniteVectorBornNormalizationExact
+import DASHI.Crypto.ShorFiniteVectorBornNormalizationRegression
 import DASHI.Crypto.ShorFactoring
 import DASHI.Crypto.ShorQuantumRunFactorTransportExact
 import DASHI.Crypto.ShorQuantumRunFactorTransportRegression
