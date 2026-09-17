@@ -18,6 +18,12 @@ raddad2006DOIPinned = refl
 deans1999DOIPinned : T.deansEtAl1999DOI ≡ "10.1016/S0378-1127(99)00063-8"
 deans1999DOIPinned = refl
 
+fall2012DOIPinned : T.fallEtAl2012DOI ≡ "10.1016/j.jenvman.2011.03.038"
+fall2012DOIPinned = refl
+
+fall2012PMIDPinned : T.fallEtAl2012PMID ≡ "21514716"
+fall2012PMIDPinned = refl
+
 plantFixedNDoesNotCreateInterplantTransfer :
   T.plantFixedNContributionImpliesInterplantTransfer T.canonicalTransferBudgetBoundary ≡ false
 plantFixedNDoesNotCreateInterplantTransfer = refl
@@ -37,6 +43,10 @@ positiveBalanceDoesNotCreateFertilizerSubstitution = refl
 abovegroundOnlyBudgetIsNotWholeSystemBudget :
   T.abovegroundBudgetEqualsWholeSystemNBalance T.canonicalTransferBudgetBoundary ≡ false
 abovegroundOnlyBudgetIsNotWholeSystemBudget = refl
+
+soilMineralNObserverGeometryCannotBeDropped :
+  T.soilMineralNObserverGeometryMayBeDropped T.canonicalTransferBudgetBoundary ≡ false
+soilMineralNObserverGeometryCannotBeDropped = refl
 
 managementExportRemainsIndexed :
   T.harvestAndExportMustRemainIndexed T.canonicalTransferBudgetBoundary ≡ true
