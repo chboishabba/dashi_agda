@@ -6,7 +6,7 @@ import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Moonshine.JInvariantEisensteinDivisorPowerSourceAtlasExact as P
 
 sourceCountRegression :
-  Source.sourceCount (Source.sources P.canonicalEisensteinDivisorPowerAtlas) ≡ 4
+  Source.sourceCount (Source.sources P.canonicalEisensteinDivisorPowerAtlas) ≡ 6
 sourceCountRegression = refl
 
 atlasNonPromoting :
@@ -18,6 +18,12 @@ sigma3OEISIsParityOnly = refl
 
 sigma5OEISIsParityOnly : P.sigma5OEISParityOnly ≡ true
 sigma5OEISIsParityOnly = refl
+
+e4OEISIsParityOnly : P.e4OEISParityOnly ≡ true
+e4OEISIsParityOnly = refl
+
+e6OEISIsParityOnly : P.e6OEISParityOnly ≡ true
+e6OEISIsParityOnly = refl
 
 classicalCoefficientAuthoritySeparated :
   P.classicalCoefficientAuthoritySeparatedFromFiniteArithmetic ≡ true
