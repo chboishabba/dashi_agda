@@ -14,10 +14,9 @@ import DASHI.Biology.Agriculture.NitrogenaseChemistryCrossPollinationExact as Ch
 ------------------------------------------------------------------------
 -- ACACIA BNF MEASUREMENT HIERARCHY
 --
--- "BNF evidence" is not one observation type. The source corpus contains gene
--- identity, nodulation, acetylene-reduction activity, foliar isotope/Ndfa and
--- ecosystem soil-N observations. They answer different consumer questions and
--- cannot be silently substituted for one another.
+-- "BNF evidence" is not one observation type. Gene identity, nodulation,
+-- acetylene-reduction activity, foliar isotope/Ndfa and ecosystem soil-N
+-- observations answer different consumer questions.
 ------------------------------------------------------------------------
 
 bakhoum2015DOI : String
@@ -28,6 +27,21 @@ githae2013DOI = PlantN.githae2013DOI
 
 peerJ2018DOI : String
 peerJ2018DOI = Edaphic.peerJ2018DOI
+
+assefaKleiner1998DOI : String
+assefaKleiner1998DOI = "10.1007/s003740050400"
+
+assefaKleiner1998 : Attribution.AttributedSource
+assefaKleiner1998 = Attribution.mkDOISource
+  "Fassil Assefa; Dieter Kleiner"
+  "Nodulation pattern and acetylene reduction (nitrogen fixation) activity of some highland and lowland Acacia species of Ethiopia"
+  "Biology and Fertility of Soils 27(1):60-64"
+  "1998"
+  assefaKleiner1998DOI
+  "https://doi.org/10.1007/s003740050400"
+  Attribution.academicArticleSource
+  "Multi-Acacia source including Acacia senegal; reports considerable variation in acetylene-reduction activity and no correlation between acetylene-reduction activity and plant nitrogen content in the studied species set."
+  Attribution.publicAttribution
 
 data BNFMeasurementRole : Set where
   symbioticGeneIdentity : BNFMeasurementRole
@@ -77,6 +91,15 @@ bakhoumSARAReceipt = bnf-measurement-receipt
   "Specific acetylene-reduction activity retained separately from total ARA, nodule count and plant-N integration."
   false false false
 
+assefaKleinerARAReceipt : BNFMeasurementReceipt
+assefaKleinerARAReceipt = bnf-measurement-receipt
+  assefaKleiner1998
+  assefaKleiner1998DOI
+  acetyleneReductionActivity
+  nitrogenaseActivityProxy
+  "Acetylene-reduction activity in a multi-Acacia source including A. senegal; the source reports that ARA variation did not correlate with plant nitrogen content."
+  false false false
+
 isaacFoliarReceipt : BNFMeasurementReceipt
 isaacFoliarReceipt = bnf-measurement-receipt
   Edaphic.isaacEtAl2011
@@ -116,6 +139,7 @@ record BNFMeasurementBoundary : Set where
   constructor bnf-measurement-boundary
   field
     araEqualsDirectN2FixationRate : Bool
+    araDeterminesPlantNitrogenContent : Bool
     saraEqualsIntegratedPlantFixedNDelivery : Bool
     noduleCountEqualsNitrogenaseActivity : Bool
     geneIdentityEqualsRealisedActivity : Bool
@@ -129,8 +153,8 @@ open BNFMeasurementBoundary public
 
 canonicalMeasurementBoundary : BNFMeasurementBoundary
 canonicalMeasurementBoundary = bnf-measurement-boundary
-  false false false false false false false false true true
+  false false false false false false false false false true true
 
 attributionRule : String
 attributionRule =
-  "Bakhoum et al. 2015 (DOI 10.1007/s00248-014-0507-1; PMID 25315832) owns its Acacia nodulation/ARA/SARA source propositions. Isaac et al. 2011 (DOI 10.1016/j.foreco.2010.11.011), Githae et al. 2013 (DOI 10.1080/15324982.2013.784377), and Abaker et al. 2018 (DOI 10.7717/peerj.5232; PMID 30018862; PMCID PMC6044267) own their distinct isotope/plant-N/soil-N propositions. DASHI owns the measurement-role hierarchy and no-substitution boundaries. ARA/SARA, foliar Ndfa, nodule state, gene identity and soil-N outcomes remain different empirical objects."
+  "Bakhoum et al. 2015 (DOI 10.1007/s00248-014-0507-1; PMID 25315832) owns its Acacia nodulation/ARA/SARA propositions. Assefa & Kleiner 1998 (DOI 10.1007/s003740050400) owns its multi-Acacia ARA/plant-N non-correlation proposition; DASHI does not widen that statement beyond the studied source scope. Isaac et al. 2011 (DOI 10.1016/j.foreco.2010.11.011), Githae et al. 2013 (DOI 10.1080/15324982.2013.784377), and Abaker et al. 2018 (DOI 10.7717/peerj.5232; PMID 30018862; PMCID PMC6044267) own their distinct isotope/plant-N/soil-N propositions. DASHI owns the measurement-role hierarchy and no-substitution boundaries."
