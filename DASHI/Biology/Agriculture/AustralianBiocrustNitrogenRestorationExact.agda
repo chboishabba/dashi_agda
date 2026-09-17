@@ -34,6 +34,12 @@ williamsEtAl2022DOI = "10.3390/agronomy12010062"
 cofreEtAl2026DOI : String
 cofreEtAl2026DOI = "10.1007/s00374-025-01963-9"
 
+qiuEtAl2026DOI : String
+qiuEtAl2026DOI = "10.1111/nph.71575"
+
+qiuEtAl2026PMID : String
+qiuEtAl2026PMID = "42722985"
+
 munozRojasEtAl2018 : Attribution.AttributedSource
 munozRojasEtAl2018 = Attribution.mkDOISource
   "Miriam Munoz-Rojas; J. R. Roman; Beatriz Roncero-Ramos; Todd E. Erickson; David J. Merritt; P. Aguila-Carricondo; Yolanda Canton"
@@ -82,6 +88,18 @@ cofreEtAl2026 = Attribution.mkDOISource
   "Australian rangeland biocrust microbiome study retaining grazing management, composition and nutrient-cycling potential. N-fixation-capable lineages/genes and their management sensitivity are treated as potential/indicator evidence; gene frequency is not identified with measured landscape N2-fixation flux."
   Attribution.publicAttribution
 
+qiuEtAl2026 : Attribution.AttributedSource
+qiuEtAl2026 = Attribution.mkDOISource
+  "Dexun Qiu; Bo Xiao; Weiqiang Dou; Tianqi Zhao; Jianying Guo; Raul Ochoa-Hueso"
+  "Biocrusts contribute to shrub nitrogen nutrition via soil transfer in resource-limited drylands"
+  "New Phytologist, online ahead of print"
+  "2026"
+  qiuEtAl2026DOI
+  "https://pubmed.ncbi.nlm.nih.gov/42722985/"
+  Attribution.academicArticleSource
+  "External dryland measurement-method donor using whole-atmosphere 15N2 and 13CO2 pulse labelling plus hyphal-access manipulation. Biocrust-fixed N was traced into shallow soil and subsequently shrub roots/leaves over one month, while biocrust-fixed C did not show the same transfer. This supplies a direct isotope-transfer evidence shape but is not Australian, pasture, Acacia or Senegalia same-object evidence."
+  Attribution.publicAttribution
+
 ------------------------------------------------------------------------
 -- Evidence roles.
 ------------------------------------------------------------------------
@@ -91,6 +109,7 @@ data BiocrustEvidenceRole : Set where
   nativeSeedBioPriming : BiocrustEvidenceRole
   grazingBiocrustManagement : BiocrustEvidenceRole
   microbiomeNFixationPotential : BiocrustEvidenceRole
+  directIsotopePlantTransfer : BiocrustEvidenceRole
 
 record BiocrustReceipt : Set where
   constructor biocrust-receipt
@@ -143,6 +162,16 @@ biocrustGenePotentialReceipt = biocrust-receipt
   "Australian rangeland biocrust samples"
   "grazing management and seasonal context"
   "microbiome composition and N-fixation-gene potential; not direct landscape N2 flux"
+
+qiuDirectTransferMethodReceipt : BiocrustReceipt
+qiuDirectTransferMethodReceipt = biocrust-receipt
+  qiuEtAl2026
+  qiuEtAl2026DOI
+  directIsotopePlantTransfer
+  "biocrust-shrub dryland patch; external non-Australian donor"
+  "biocrust, shallow soil, shrub roots and leaves"
+  "whole-atmosphere isotope pulse labelling with hyphal-access manipulation"
+  "15N2-derived N traced from biocrust through soil into plant tissue; direct transfer-method template only"
 
 ------------------------------------------------------------------------
 -- N-fixing role != vascularity or one mechanism.
@@ -226,6 +255,8 @@ record BiocrustBoundary : Set where
     soilCarbonGainImpliesNativeCommunityRecovery : Bool
     bioPrimingSeedlingResponseImpliesFieldTrajectoryRecovery : Bool
     fireGrazingSeasonSoilMayBeDropped : Bool
+    directIsotopeTransferMeasurementShapeAvailable : Bool
+    externalIsotopeTransferCreatesAustralianSameObjectReceipt : Bool
     biocrustNitrogenInputImpliesCropDemandSatisfaction : Bool
     biocrustEvidenceClosesAcaciaBacterialFixedNFlux : Bool
     biocrustEvidenceCreatesAvoidedMineralNReceipt : Bool
@@ -234,8 +265,8 @@ open BiocrustBoundary public
 
 canonicalBiocrustBoundary : BiocrustBoundary
 canonicalBiocrustBoundary = biocrust-boundary
-  false false false false false false false false false false false false
+  false false false false false false false false true false false false false false
 
 attributionRule : String
 attributionRule =
-  "Munoz-Rojas et al. 2018 (DOI 10.1016/j.scitotenv.2018.04.265; PMID 29913577) owns its Pilbara cyanobacterial-inoculation/biocrust/soil-carbon propositions. Chua et al. 2020 (DOI 10.1111/rec.13040) owns its indigenous-cyanobacteria seed-bio-priming and species/substrate-specific seedling propositions. Williams et al. 2022 (DOI 10.3390/agronomy12010062) owns its Australian grazing/spelling/soil-type biocrust observations. Cofre et al. 2026 (DOI 10.1007/s00374-025-01963-9) owns its grazing-management biocrust microbiome and N-fixation-potential propositions. DASHI owns the non-vascular N-input-role abstraction, synthetic information-loss witness and no-promotion boundary. Presence of cyanobacteria, N-fixation genes, biocrust cover or soil-C improvement is not relabelled as measured N2 flux, crop-N-demand satisfaction, avoided mineral N or Acacia/Senegalia same-object evidence."
+  "Munoz-Rojas et al. 2018 (DOI 10.1016/j.scitotenv.2018.04.265; PMID 29913577) owns its Pilbara cyanobacterial-inoculation/biocrust/soil-carbon propositions. Chua et al. 2020 (DOI 10.1111/rec.13040) owns its indigenous-cyanobacteria seed-bio-priming and species/substrate-specific seedling propositions. Williams et al. 2022 (DOI 10.3390/agronomy12010062) owns its Australian grazing/spelling/soil-type biocrust observations. Cofre et al. 2026 (DOI 10.1007/s00374-025-01963-9) owns its grazing-management biocrust microbiome and N-fixation-potential propositions. Qiu et al. 2026 (DOI 10.1111/nph.71575; PMID 42722985) owns its external dryland whole-atmosphere isotope tracing of biocrust-fixed N into soil and shrub tissues; it is retained only as a direct-transfer measurement-method donor and is not Australian same-object evidence. DASHI owns the non-vascular N-input-role abstraction, synthetic information-loss witness and no-promotion boundary. Presence of cyanobacteria, N-fixation genes, biocrust cover or soil-C improvement is not relabelled as measured N2 flux, crop-N-demand satisfaction, avoided mineral N or Acacia/Senegalia same-object evidence."
