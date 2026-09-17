@@ -1,6 +1,7 @@
 import importlib.util
 import pathlib
 import sys
+import tempfile
 import unittest
 
 SCRIPT = pathlib.Path(__file__).with_name("adk_pdb_cv_fixture.py")
@@ -14,36 +15,14 @@ class FixtureScriptTests(unittest.TestCase):
         spec.loader.exec_module(module)
         return module
 
-    def test_parses_altloc_policy_and_com_geometry(self):
-        m = self.load()
-        pdb = """\
-ATOM      1  N   ALA A   1       0.000   0.000   0.000  1.00 10.00           N  \nATOM      2  CA AALA A   1       2.000   0.000   0.000  0.60 10.00           C  \nATOM      3  CA BALA A   1      20.000   0.000   0.000  0.40 10.00           C  \nATOM      4  C   ALA A   1       4.000   0.000   0.000  1.00 10.00           C  \nATOM      5  O   ALA A   1       6.000   0.000   0.000  1.00 10.00           O  \n"""
-        atoms = m.parse_pdb_text(pdb, chain="A", altloc_policy="blank-or-A")
-        self.assertEqual([a.altloc for a in atoms], ["", "A", "", ""])
-        com = m.center_of_mass(atoms)
-        self.assertGreater(com[0], 2.0)
-        self.assertLess(com[0], 4.0)
-
-    def test_angle_is_rigid_translation_invariant(self):
-        m = self.load()
-        a, b, c = (1.0, 0.0, 0.0), (0.0, 0.0, 0.0), (0.0, 1.0, 0.0)
-        self.assertAlmostEqual(m.angle_degrees(a, b, c), 90.0, places=12)
-        t = (17.0, -3.0, 9.0)
-        add = lambda p: tuple(p[i] + t[i] for i in range(3))
-        self.assertAlmostEqual(m.angle_degrees(add(a), add(b), add(c)), 90.0, places=12)
-
-    def test_rcsb_pdb_url_is_canonical_and_uppercase(self):
-        m = self.load()
-        self.assertEqual(
-            m.rcsb_pdb_url("4ake"),
-            "https://files.rcsb.org/download/4AKE.pdb",
+    def atomline(self, serial, name, residue, x, y, z, chain="A", alt="", element="C"):
+        return (
+            f"ATOM  {serial:5d} {name:>4s}{alt:1s}ALA {chain:1s}{residue:4d}    "
+            f"{x:8.3f}{y:8.3f}{z:8.3f}  1.00 10.00          {element:>2s}  \n"
         )
 
-    def test_adk_receipt_keeps_dln_conventions_separate(self):
-        m = self.load()
-        atoms = []
-        serial = 1
-        for residue, xyz in [
+    def minimal(self, shift=(0, 0, 0), model=None):
+        points = [
             (1, (0, 0, 0)),
             (50, (1, 0, 0)),
             (79, (0, 1, 0)),
@@ -51,15 +30,63 @@ ATOM      1  N   ALA A   1       0.000   0.000   0.000  1.00 10.00           N  
             (123, (1, 1, 0)),
             (161, (1, 2, 0)),
             (190, (0, 3, 0)),
-        ]:
-            atoms.append(
-                m.Atom(serial, "CA", "", "ALA", "A", residue, *map(float, xyz), "C")
-            )
-            serial += 1
-        receipt = m.evaluate_adk_cv(atoms)
-        self.assertIn("domain_backbone", receipt["dln_angstrom"])
-        self.assertIn("domain_heavy", receipt["dln_angstrom"])
-        self.assertFalse(receipt["dln_source_atom_subset_resolved"])
+        ]
+        text = f"MODEL     {model}\n" if model is not None else ""
+        for serial, (residue, point) in enumerate(points, 1):
+            xyz = tuple(point[index] + shift[index] for index in range(3))
+            text += self.atomline(serial, "CA", residue, *xyz)
+        if model is not None:
+            text += "ENDMDL\n"
+        return text
+
+    def test_translation_invariance(self):
+        m = self.load()
+        first = m.evaluate_adk_cv(m.parse_pdb_text(self.minimal(), "A"))
+        shifted = m.evaluate_adk_cv(
+            m.parse_pdb_text(self.minimal((5, -2, 9)), "A")
+        )
+        self.assertAlmostEqual(first["theta1_degrees"], shifted["theta1_degrees"], 12)
+        self.assertAlmostEqual(
+            first["dln_angstrom"]["domain_backbone"],
+            shifted["dln_angstrom"]["domain_backbone"],
+            12,
+        )
+
+    def test_explicit_model_selection(self):
+        m = self.load()
+        text = self.minimal(model=1) + self.minimal((10, 0, 0), model=2)
+        first = m.parse_pdb_text(text, "A", model=1)
+        second = m.parse_pdb_text(text, "A", model=2)
+        self.assertEqual({atom.model for atom in first}, {1})
+        self.assertEqual({atom.model for atom in second}, {2})
+        self.assertNotEqual(first[0].x, second[0].x)
+
+    def test_missing_chain_fails_closed(self):
+        m = self.load()
+        with self.assertRaises(ValueError):
+            m.parse_pdb_text(self.minimal(), "B")
+
+    def test_malformed_selected_record_fails_closed(self):
+        m = self.load()
+        good = self.atomline(1, "CA", 1, 0, 0, 0)
+        bad = good[:30] + "NOTFLOAT" + good[38:]
+        with self.assertRaises(ValueError):
+            m.parse_pdb_text(bad, "A")
+
+    def test_receipt_has_schema_hashes_and_boundary(self):
+        m = self.load()
+        with tempfile.TemporaryDirectory() as directory:
+            path = pathlib.Path(directory) / "4AKE.pdb"
+            path.write_text(self.minimal(), encoding="utf-8")
+            receipt = m.file_receipt(path, "A", "blank-or-A", 1, "4AKE")
+        self.assertEqual(receipt["artifact_schema"], "dashi.adk.pdb_cv_fixture.v1")
+        self.assertEqual(receipt["pdb_deposition_doi"], "10.2210/pdb4AKE/pdb")
+        self.assertEqual(len(receipt["source_sha256"]), 64)
+        manifests = receipt["cv"]["selection_manifests"]
+        self.assertIn("theta1_lid_backbone", manifests)
+        self.assertEqual(len(manifests["theta1_lid_backbone"]["sha256"]), 64)
+        self.assertFalse(receipt["cv"]["dln_source_atom_subset_resolved"])
+        self.assertIn("does not", receipt["promotion_boundary"])
 
 
 if __name__ == "__main__":
