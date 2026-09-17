@@ -70,6 +70,16 @@ literalTransferOperatorParityAvailable :
 literalTransferOperatorParityAvailable =
   UniformGap.literalTransferOperatorPaymentRecordedIsTrue
 
+frontierNoLongerChargesUniformC :
+  Frontier.f1TrajectoryUniformCRequired ≡ false
+frontierNoLongerChargesUniformC =
+  Frontier.f1TrajectoryUniformCRequiredIsFalse
+
+frontierUsesPerStepTransferDefect :
+  Frontier.f1PerStepTransferDefectForm ≡ true
+frontierUsesPerStepTransferDefect =
+  Frontier.f1PerStepTransferDefectFormIsTrue
+
 f134ContinuumWeldDonorAvailable : Set
 f134ContinuumWeldDonorAvailable = F134ContinuumWeldLeanDonorPresent
 
