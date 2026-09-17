@@ -19,6 +19,10 @@ module DASHI.Wikimedia.AgdaSlrJmdLeanBidiEverything where
 -- distinguish native launch-ready from recurrent campaign executed/complete.
 -- Durable restart state is counted by reviewed identity classes, while a known
 -- identity may pay a new residual without advancing novelty or discovery lineage.
+-- The consumer-diagnosis owner now binds the persisted 100-hop world to an
+-- explicit SameObject review frontier while keeping graph adjacency, proof
+-- search, experiment design, WrongType diagnostics and external comparison
+-- strictly below evidence payment/admission authority.
 -- JMD getter parity/challenge replay remains optional instrumentation and is
 -- not a prerequisite for the native SLR campaign.
 ------------------------------------------------------------------------
@@ -40,7 +44,9 @@ open import DASHI.Wikimedia.MaboResidualDrivenWorldRunnerExact public
 open import DASHI.Wikimedia.MaboDurableIdentityBaselineExact public
 open import DASHI.Wikimedia.MaboKnownIdentityResidualPaymentExact public
 open import DASHI.Wikimedia.MaboP7d5RuntimeLaunchReadinessExact public
+open import DASHI.Wikimedia.MaboConsumerResidualDiagnosisExact public
 
+import DASHI.Wikimedia.MaboConsumerResidualDiagnosisValidation
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
 import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact
 import DASHI.Wikimedia.MaboResidualDrivenWorldExpansionStepExact
