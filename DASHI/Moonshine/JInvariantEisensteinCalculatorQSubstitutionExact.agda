@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Series
+import DASHI.Moonshine.JInvariantEisensteinInternalDivisorPowerKernelExact as Internal
 import DASHI.Moonshine.JInvariantConstructedComplexQCalculatorSameExpressionExact as Q
 
 ------------------------------------------------------------------------
@@ -17,6 +18,10 @@ import DASHI.Moonshine.JInvariantConstructedComplexQCalculatorSameExpressionExac
 -- proves that one actual CalculatorExpr evaluates to exactly that same qOf.
 -- Here we replace only the q source in the finite recurrence and prove the
 -- resulting E4/E6/discriminant-numerator values are unchanged.
+--
+-- The generic theorems remain parameterised by DivisorPowerKernel.  The final
+-- specialization below reuses the new repo-owned sigma3/sigma5 kernel, so the
+-- calculator-q finite route no longer depends on an external divisor callback.
 --
 -- This is finite executable substitution only.  It creates no infinite-series
 -- convergence, modular-form, Klein-j, or RH authority.
@@ -101,6 +106,63 @@ discriminantNumeratorCalculatorQMatches C kernel n tau
         | e6TruncatedCalculatorQMatches C kernel n tau = refl
 
 ------------------------------------------------------------------------
+-- Canonical repo-internal specialization.
+------------------------------------------------------------------------
+
+e4InternalCalculatorQ :
+  (C : Complex.ConstructedComplexPackage) ->
+  Nat ->
+  Complex.ComplexPair (Real.real (Complex.realPackage C)) ->
+  Complex.ComplexPair (Real.real (Complex.realPackage C))
+e4InternalCalculatorQ C n tau =
+  e4TruncatedCalculatorQ C Internal.internalDivisorPowerKernel n tau
+
+e6InternalCalculatorQ :
+  (C : Complex.ConstructedComplexPackage) ->
+  Nat ->
+  Complex.ComplexPair (Real.real (Complex.realPackage C)) ->
+  Complex.ComplexPair (Real.real (Complex.realPackage C))
+e6InternalCalculatorQ C n tau =
+  e6TruncatedCalculatorQ C Internal.internalDivisorPowerKernel n tau
+
+discriminantNumeratorInternalCalculatorQ :
+  (C : Complex.ConstructedComplexPackage) ->
+  Nat ->
+  Complex.ComplexPair (Real.real (Complex.realPackage C)) ->
+  Complex.ComplexPair (Real.real (Complex.realPackage C))
+discriminantNumeratorInternalCalculatorQ C n tau =
+  discriminantNumeratorCalculatorQ
+    C Internal.internalDivisorPowerKernel n tau
+
+e4InternalCalculatorQMatches :
+  (C : Complex.ConstructedComplexPackage) ->
+  (n : Nat) ->
+  (tau : Complex.ComplexPair (Real.real (Complex.realPackage C))) ->
+  e4InternalCalculatorQ C n tau ≡ Internal.e4Internal C n tau
+e4InternalCalculatorQMatches C n tau =
+  e4TruncatedCalculatorQMatches
+    C Internal.internalDivisorPowerKernel n tau
+
+e6InternalCalculatorQMatches :
+  (C : Complex.ConstructedComplexPackage) ->
+  (n : Nat) ->
+  (tau : Complex.ComplexPair (Real.real (Complex.realPackage C))) ->
+  e6InternalCalculatorQ C n tau ≡ Internal.e6Internal C n tau
+e6InternalCalculatorQMatches C n tau =
+  e6TruncatedCalculatorQMatches
+    C Internal.internalDivisorPowerKernel n tau
+
+discriminantNumeratorInternalCalculatorQMatches :
+  (C : Complex.ConstructedComplexPackage) ->
+  (n : Nat) ->
+  (tau : Complex.ComplexPair (Real.real (Complex.realPackage C))) ->
+  discriminantNumeratorInternalCalculatorQ C n tau
+  ≡ Internal.discriminantNumeratorInternal C n tau
+discriminantNumeratorInternalCalculatorQMatches C n tau =
+  discriminantNumeratorCalculatorQMatches
+    C Internal.internalDivisorPowerKernel n tau
+
+------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
 
@@ -130,6 +192,8 @@ record EisensteinCalculatorQSubstitutionBoundary : Set where
     finiteE4Preserved : Bool
     finiteE6Preserved : Bool
     discriminantNumeratorPreserved : Bool
+    internalDivisorPowerKernelSpecialized : Bool
+    externalDivisorCallbackRequiredOnCanonicalRoute : Bool
     infiniteSeriesConvergencePaidHere : Bool
     kleinJPaidHere : Bool
     modularityPaidHere : Bool
@@ -142,5 +206,6 @@ canonicalEisensteinCalculatorQSubstitutionBoundary :
 canonicalEisensteinCalculatorQSubstitutionBoundary =
   eisenstein-calculator-q-substitution-boundary
     true true true true true
+    true false
     false false false false
-    "reuse these exact finite substitution theorems in the existing constructed Klein-j backend; do not promote finite truncation to the infinite modular forms without the already-separated analytic convergence payment"
+    "the canonical calculator-q finite E4/E6 route now uses repo-owned sigma3/sigma5; remaining debt is finite-to-infinite analytic identification, not divisor arithmetic or q-expression identity"
