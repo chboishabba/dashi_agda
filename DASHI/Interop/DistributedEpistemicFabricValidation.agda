@@ -9,6 +9,11 @@ import DASHI.Interop.DistributedEpistemicPlaneSeparationExact as Planes
 import DASHI.Interop.DistributedProofProducerABIExact as Producer
 import DASHI.Economics.SituatedInformationAccessFabricExact as Access
 
+-- RED-first imports for the approved storage/history/projection refinement.
+import DASHI.Interop.DistributedEvidenceHistoryProjectionExact as History
+import DASHI.Interop.ImmutableEvidenceSupersessionExact as Supersession
+import DASHI.Interop.ReplicationCapabilityNonCollapseExact as Replication
+
 ------------------------------------------------------------------------
 -- Focused compile-time boundary checks.
 ------------------------------------------------------------------------
