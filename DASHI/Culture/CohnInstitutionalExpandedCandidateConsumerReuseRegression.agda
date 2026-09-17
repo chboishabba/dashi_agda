@@ -13,6 +13,10 @@ internalExclusionHasNeighbour :
   Reuse.internalExclusionStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.existingNeighbourConsumer
 internalExclusionHasNeighbour = refl
 
+outsiderWithinHasNeighbour :
+  Reuse.outsiderWithinStandpointStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.existingNeighbourConsumer
+outsiderWithinHasNeighbour = refl
+
 governanceHasExactOwner :
   Reuse.governancePermissionStatus Reuse.canonicalExpandedConsumerReuse ≡ Reuse.exactCanonicalOwner
 governanceHasExactOwner = refl
