@@ -76,6 +76,15 @@ mkAristotle8220Artifact file theorem role = lean-theorem-artifact
   "supplied worker reports lake build RequestProject: 8220 jobs, zero errors, zero warnings; no sorry/axiom/postulate/@[implemented_by] in new material; headline #print axioms exactly propext, Classical.choice, Quot.sound. Donor receipt only; not an Agda kernel receipt."
   false refl false refl
 
+mkAristotleSecondRoundArtifact : String → String → String → LeanTheoremArtifact
+mkAristotleSecondRoundArtifact file theorem role = lean-theorem-artifact
+  "Aristotle Yang-Mills transfer-operator/frontier-recut tranche / 2026-09-17 second worker return"
+  file
+  theorem
+  role
+  "supplied second-round worker status reports lake build RequestProject green and no sorry/axiom/postulate/@[implemented_by] in the new material; retained as Lean donor provenance only, not as an Agda kernel receipt or a physical F1 inhabitant"
+  false refl false refl
+
 vacuumSectorUniqueSolutionLean : LeanTheoremArtifact
 vacuumSectorUniqueSolutionLean = mkAristotleArtifact
   "RequestProject/YangMills/VacuumSectorSpectralGap.lean"
@@ -137,10 +146,22 @@ literalSU2ContinuumWeldLean = mkAristotle8220Artifact
   "literal four-dimensional SU(2) Wilson family + uniform positive gap + isometric embeddings + embedded vacuum-sector graph limit -> continuum mass-gap conclusion; OS variant additionally consumes same evolution on a common core"
 
 literalSU2UniformGapReductionLean : LeanTheoremArtifact
-literalSU2UniformGapReductionLean = mkAristotle8220Artifact
+literalSU2UniformGapReductionLean = mkAristotleSecondRoundArtifact
   "RequestProject/YangMills/Lattice/UniformGapReduction.lean"
-  "RequestProject.YangMills.Lattice.UniformGapReduction theorem family"
-  "literal Wilson transfer-form coercivity follows from |<P0 psi,P1 psi>| <= c ||psi||^2 on the vacuum complement, with finite gap a^-1(1-c); a trajectory-uniform c and Delta <= a_k^-1(1-c) supply the continuum-weld uniform gap"
+  "ym_uniform_gap_of_trajectory_decorrelation / trajectory_gap_bound_of_defect"
+  "literal Wilson transfer-form coercivity is reduced to per-step decorrelation constants c_k with Delta*a_k <= 1-c_k; one trajectory-uniform c<1 is not required"
+
+literalSU2TransferOperatorGapLean : LeanTheoremArtifact
+literalSU2TransferOperatorGapLean = mkAristotleSecondRoundArtifact
+  "RequestProject/YangMills/Lattice/TransferOperatorGap.lean"
+  "decorrelation_iff_phase_separated and literal transfer-operator gap identities"
+  "defines the literal Euclidean transfer operator T=P1*P0, identifies q(psi,psi)=||psi||^2-Re<Tpsi,psi>, and equates the two-slice correlation payment with phase separation of the slice embeddings"
+
+literalSU2FrontierF1F3F4Lean : LeanTheoremArtifact
+literalSU2FrontierF1F3F4Lean = mkAristotleSecondRoundArtifact
+  "RequestProject/YangMills/Lattice/FrontierF1F3F4.lean"
+  "clay_massGap_of_F1_F3 / clay_massGap_os_of_F1_F3_F4 / clay_massGap_of_transfer_defect_F3"
+  "recut literal endpoint: F1+F3 gives the continuum mass-gap conclusion; F4 adds the OS same-object endpoint; transfer-defect F1 is accepted directly"
 
 literalSU2ZeroCouplingUniformGapLean : LeanTheoremArtifact
 literalSU2ZeroCouplingUniformGapLean = mkAristotle8220Artifact
@@ -161,6 +182,8 @@ aristotleYMDonorArtifacts =
   varyingCarrierTransportLean ∷
   literalSU2ContinuumWeldLean ∷
   literalSU2UniformGapReductionLean ∷
+  literalSU2TransferOperatorGapLean ∷
+  literalSU2FrontierF1F3F4Lean ∷
   literalSU2ZeroCouplingUniformGapLean ∷ []
 
 donorLeanTheoremIsAgdaKernelProof : Bool
