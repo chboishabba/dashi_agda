@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Iterable, Sequence
 from urllib.request import Request, urlopen
 
-SCRIPT_VERSION = "0.1.0"
+SCRIPT_VERSION = "0.2.0"
 ARTIFACT_SCHEMA = "dashi.adk.pdb_cv_fixture.v1"
 LI_LIU_JI_DOI = "10.1016/j.bpj.2015.06.059"
 ATOMIC_MASS_DOI = "10.1515/pac-2019-0603"
@@ -171,26 +171,50 @@ def select_atoms(
     return selected
 
 
+def _atom_identity_row(atom: Atom) -> str:
+    return "|".join(
+        [
+            str(atom.model),
+            atom.chain,
+            str(atom.residue),
+            atom.resname,
+            atom.name,
+            atom.altloc,
+            str(atom.serial),
+            atom.element,
+        ]
+    )
+
+
 def atom_manifest(atoms: Sequence[Atom]) -> dict[str, int | str]:
-    rows = [
-        "|".join(
-            [
-                str(atom.model),
-                atom.chain,
-                str(atom.residue),
-                atom.resname,
-                atom.name,
-                atom.altloc,
-                str(atom.serial),
-                atom.element,
-            ]
+    identity_rows = [_atom_identity_row(atom) for atom in atoms]
+    identity_payload = "\n".join(identity_rows).encode("utf-8")
+
+    mass_coordinate_rows = []
+    for atom in atoms:
+        try:
+            mass = MASS[atom.element]
+        except KeyError as exc:
+            raise ValueError(f"no mass for element {atom.element!r}") from exc
+        mass_coordinate_rows.append(
+            "|".join(
+                [
+                    _atom_identity_row(atom),
+                    f"{mass:.6f}",
+                    f"{atom.x:.3f}",
+                    f"{atom.y:.3f}",
+                    f"{atom.z:.3f}",
+                ]
+            )
         )
-        for atom in atoms
-    ]
-    payload = "\n".join(rows).encode("utf-8")
+    mass_coordinate_payload = "\n".join(mass_coordinate_rows).encode("utf-8")
+    identity_sha256 = hashlib.sha256(identity_payload).hexdigest()
     return {
         "count": len(atoms),
-        "sha256": hashlib.sha256(payload).hexdigest(),
+        "sha256": identity_sha256,
+        "identity_sha256": identity_sha256,
+        "mass_coordinate_sha256": hashlib.sha256(mass_coordinate_payload).hexdigest(),
+        "mass_source_doi": ATOMIC_MASS_DOI,
     }
 
 
