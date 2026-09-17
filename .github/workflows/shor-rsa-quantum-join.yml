@@ -11,10 +11,17 @@ on:
       - 'DASHI/Crypto/FiniteFactorArithmetic.agda'
       - 'DASHI/Crypto/ShorOrderFinding.agda'
       - 'DASHI/Crypto/ShorFactoring.agda'
+      - 'DASHI/Crypto/ShorQuantumRunFactorTransportExact.agda'
+      - 'DASHI/Crypto/ShorQuantumRunFactorTransportRegression.agda'
       - 'DASHI/Crypto/ShorDiscreteLog.agda'
       - 'DASHI/Crypto/RSAShorVulnerabilityBridge.agda'
       - 'DASHI/Crypto/ShorConcreteExamples.agda'
       - 'DASHI/Crypto/ShorProgram.agda'
+      - 'DASHI/ComputerScience/QuantumExecutionFibreAdapterExact.agda'
+      - 'DASHI/ComputerScience/ShorCertifiedRunExecutionFibreExact.agda'
+      - 'DASHI/ComputerScience/ShorCertifiedRunExecutionFibreRegression.agda'
+      - 'DASHI/ComputerScience/ShorClassicalQuantumFibreComparisonExact.agda'
+      - 'DASHI/ComputerScience/ComputerScienceQuantumFibreValidationExact.agda'
       - 'scripts/shor_order_finding_audit.py'
       - 'scripts/tests/test_shor_order_finding_audit.py'
       - 'docs/shor_rsa_quantum_join.md'
@@ -84,7 +91,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: shor-rsa-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
-      - name: Check Shor aggregate
+      - name: Check Shor aggregates
         id: focused
         shell: bash
         run: |
@@ -98,7 +105,8 @@ jobs:
             export AGDA_JOBS=1
             scripts/run_agda29_parallel_check.sh \
               DASHI/Crypto/ShorProgram.agda \
-              DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda
+              DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda \
+              DASHI/ComputerScience/ComputerScienceQuantumFibreValidationExact.agda
           ) > agda-shor-rsa.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
