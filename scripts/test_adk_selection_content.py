@@ -35,6 +35,13 @@ class SelectionContentTests(unittest.TestCase):
             model=1,
         )
 
+    def cv_atoms(self):
+        residues = [1, 30, 50, 79, 104, 122, 123, 159, 161, 190]
+        return [
+            self.atom(index, residue, float(index), float(residue) / 10.0, 0.0)
+            for index, residue in enumerate(residues, 1)
+        ]
+
     def test_canonical_rows_are_explicit_and_deterministic(self):
         atoms = [self.atom(2, 123, 1.0, 2.0, 3.0), self.atom(1, 122, 4.0, 5.0, 6.0)]
         packet = self.canon.selection_content_packet(atoms)
@@ -62,6 +69,41 @@ class SelectionContentTests(unittest.TestCase):
             self.canon.selection_content_packet(left)["rows"],
             self.canon.selection_content_packet(right)["rows"],
         )
+
+    def test_three_cv_packet_contains_all_eight_selection_surfaces(self):
+        packet = self.canon.three_cv_content_packet(self.cv_atoms())
+        self.assertEqual(packet["schema"], "dashi.adk.three_cv_selection_content.v1")
+        self.assertEqual(
+            set(packet["selections"]),
+            {
+                "theta1_lid_backbone",
+                "theta_hinge_backbone",
+                "theta_core_backbone",
+                "theta2_nmp_backbone",
+                "dln_lid_backbone",
+                "dln_nmp_backbone",
+                "dln_lid_heavy",
+                "dln_nmp_heavy",
+            },
+        )
+        self.assertFalse(packet["dln_source_atom_subset_resolved"])
+
+    def test_three_cv_content_equality_ignores_input_atom_order(self):
+        atoms = self.cv_atoms()
+        self.assertTrue(self.canon.same_three_cv_content(atoms, list(reversed(atoms))))
+
+    def test_three_cv_content_detects_selected_coordinate_change(self):
+        left = self.cv_atoms()
+        right = list(left)
+        changed = right[6]
+        right[6] = self.atom(
+            changed.serial,
+            changed.residue,
+            changed.x + 0.001,
+            changed.y,
+            changed.z,
+        )
+        self.assertFalse(self.canon.same_three_cv_content(left, right))
 
 
 if __name__ == "__main__":
