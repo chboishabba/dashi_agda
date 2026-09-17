@@ -24,7 +24,7 @@ certifiedSamplingMachineExists :
   {sourceDFT : Fourier.CyclicDFTAction SourceState} →
   (prefix : Prefix.ShorAmplitudeExecutionPrefix
     B a N (PowModWeld.orderModulusNonZero P) R sourceDFT) →
-  Sampling.ShoreFourierObservationSemantics P prefix →
+  Sampling.ShorFourierObservationSemantics P prefix →
   Shor.ShorPeriodFindingMachine (Order.asHiddenPeriodProblem P)
 certifiedSamplingMachineExists = Sampling.compileCertifiedFourierSamplingMachine
 
@@ -37,7 +37,7 @@ successfulCandidateRecoversExactOrder :
   {sourceDFT : Fourier.CyclicDFTAction SourceState} →
   (prefix : Prefix.ShorAmplitudeExecutionPrefix
     B a N (PowModWeld.orderModulusNonZero P) R sourceDFT) →
-  (S : Sampling.ShoreFourierObservationSemantics P prefix) →
+  (S : Sampling.ShorFourierObservationSemantics P prefix) →
   (seed : Nat) →
   Shor.periodSuccessful
     (Sampling.compileCertifiedFourierSamplingMachine P prefix S)
