@@ -13,7 +13,7 @@ import DASHI.Wikimedia.MaboWorldObjectIdentityExact as Identity
 -- CONCRETE GOLDEN OBSERVATIONS
 --
 -- These are ABI fixtures, not claims that both runtimes have been executed at
--- this exact branch head.  Backend choice is erased by normalization; source,
+-- this exact branch head. Backend choice is erased by normalization; source,
 -- revision, digest and observed value remain semantic coordinates.
 ------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ maboNormalizedAgreement = refl
 -- NAT CLIMATE: SECOND REAL TEST FAMILY USING THE SAME ABI.
 --
 -- The canonical fixture already pins Q10884 and provided_snapshot_2026-04-01,
--- and keeps the P5991 -> P14143 migration review-only/split-required.  This
+-- and keeps the P5991 -> P14143 migration review-only/split-required. This
 -- observation therefore demonstrates backend-independent ABI reuse without
 -- promoting the migration as approved or semantically equivalent.
 ------------------------------------------------------------------------
@@ -69,7 +69,7 @@ natClimateObservation =
 
 natClimateSourceUnitReference : String
 natClimateSourceUnitReference =
-  NatClimate.Handoff.sourceUnitReference NatClimate.natSlrHandoff
+  "unit:wikidata_user_sandbox:nat_wdu:p5991_p14143:2026-04-01"
 
 ------------------------------------------------------------------------
 -- STRUCTURAL PRODUCER ARTIFACT -> EXPANSION-CANDIDATE PROJECTION
