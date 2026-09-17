@@ -13,6 +13,7 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1111/j.1574-6941.1999.tb00561.x`
 - `10.1023/B:PLSO.0000030181.03575.e1`
 - `10.1007/s13199-011-0128-0`
+- `10.1007/s003740050400`
 
 ## Acacia BNF, edaphic context and plant-N evidence
 
