@@ -1,6 +1,7 @@
 module DASHI.Algebra.Quantum.ShorCyclicQFTCarrierTransportExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import DASHI.Algebra.Quantum.FiniteQuantumRegister as Finite
@@ -34,6 +35,32 @@ import DASHI.Analysis.NonArchimedeanLocalDFTParsevalSourceExact as DFTSource
 -- The only mathematical content added here is transport of a two-sided inverse
 -- through an exact carrier equivalence.
 ------------------------------------------------------------------------
+
+record ShorCyclicQFTSourceReceipt : Set where
+  constructor shorCyclicQFTSourceReceipt
+  field
+    sourceRepository : String
+    sourceRevision : String
+    sourceFile : String
+    forwardInverseTheorem : String
+    inverseForwardTheorem : String
+    sourceLicence : String
+    sourceIsExternalLean : Bool
+    agdaKernelChecksSourceTheorem : Bool
+
+open ShorCyclicQFTSourceReceipt public
+
+canonicalShorCyclicQFTSourceReceipt : ShorCyclicQFTSourceReceipt
+canonicalShorCyclicQFTSourceReceipt =
+  shorCyclicQFTSourceReceipt
+    "sneed-and-feed/adelic-spectral-zeta"
+    "0c3e98c144796f99534f372b4aba977e6b76ee19"
+    "formalization/Formalization/Analysis/DFT.lean"
+    "MathlibUpstream.Analysis.DFT.dft_mul_star"
+    "MathlibUpstream.Analysis.DFT.dft_star_mul"
+    "CC BY 4.0"
+    true
+    false
 
 record CyclicDFTAction (SourceState : Set) : Set₁ where
   constructor cyclicDFTAction
@@ -146,6 +173,7 @@ record ShorCyclicQFTTransportBoundary : Set where
   field
     normalizedCyclicDFTSourceOwned : Bool
     sourceTwoSidedInverseOwned : Bool
+    sourceAttributionPinned : Bool
     transportCompilerClosed : Bool
     sourceRegisterSameObjectSuppliedByThisModule : Bool
     samplingDistributionSuppliedByThisModule : Bool
@@ -155,7 +183,7 @@ record ShorCyclicQFTTransportBoundary : Set where
 canonicalShorCyclicQFTTransportBoundary : ShorCyclicQFTTransportBoundary
 canonicalShorCyclicQFTTransportBoundary =
   shorCyclicQFTTransportBoundary
-    true true true false false false false
+    true true true true false false false false
 
 sourceDFTUnitarityReceiptRetained :
   DFTSource.LocalDFTParsevalSourceReceipt.localDFTIsUnitary
