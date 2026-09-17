@@ -24,6 +24,16 @@ covarianceCapDoesNotSilentlyPayOperatorNorm :
 covarianceCapDoesNotSilentlyPayOperatorNorm =
   conditionalCovarianceCapDirectlyPaysFullL2DecorrelatorIsFalse
 
+linfinityDensityDefectIsNoLongerPrimitiveF1Debt :
+  fullJointDensityLinfinityDefectPrimitiveForF1 ≡ false
+linfinityDensityDefectIsNoLongerPrimitiveF1Debt =
+  fullJointDensityLinfinityDefectPrimitiveForF1IsFalse
+
+denseMarkedAlternativeIsExplicit :
+  denseMarkedSourceAlternativeRecorded ≡ true
+denseMarkedAlternativeIsExplicit =
+  denseMarkedSourceAlternativeRecordedIsTrue
+
 physicalGapFloorNotCompilerOutput :
   completeDensityInvariantRegionConstructsPositivePhysicalMassFloor ≡ false
 physicalGapFloorNotCompilerOutput =
