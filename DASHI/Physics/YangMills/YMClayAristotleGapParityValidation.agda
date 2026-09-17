@@ -22,6 +22,8 @@ import DASHI.Physics.YangMills.YMClayCorrelationCriterionParityExact as Correlat
 import DASHI.Physics.YangMills.YMClayCorrelationCriterionParityValidation as CorrelationValidation
 import DASHI.Physics.YangMills.YMClayUrsellTransferMixingBoundaryExact as UrsellBoundary
 import DASHI.Physics.YangMills.YMClayUrsellTransferMixingBoundaryValidation as UrsellBoundaryValidation
+import DASHI.Physics.YangMills.YMClayF1MixingSourceAuditExact as MixingSources
+import DASHI.Physics.YangMills.YMClayF1MixingSourceAuditValidation as MixingSourcesValidation
 import DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact as F134
 import DASHI.Physics.YangMills.YMClayClosedWorldResidualAudit20260917Exact as ResidualAudit
 import DASHI.Physics.YangMills.YMClayF1CanonicalSourceApplicationValidation as F1Canonical
@@ -38,6 +40,8 @@ open Correlation
 open CorrelationValidation
 open UrsellBoundary
 open UrsellBoundaryValidation
+open MixingSources
+open MixingSourcesValidation
 open F134
 open ResidualAudit
 open F1Canonical
@@ -62,6 +66,9 @@ correlationCriterionDonorAvailableInAggregate = CorrelationCriterionLeanDonorPre
 
 ursellTransferBoundaryAvailableInAggregate : Set
 ursellTransferBoundaryAvailableInAggregate = UrsellTransferMixingBoundaryPresent
+
+mixingSourceAuditAvailableInAggregate : Set
+mixingSourceAuditAvailableInAggregate = MixingSourceAuditPresent
 
 transferOperatorArtifactAvailable : Atlas.LeanTheoremArtifact
 transferOperatorArtifactAvailable = Atlas.literalSU2TransferOperatorGapLean
@@ -108,6 +115,21 @@ observableToUniformMixingUpgradeStillOpen :
   UrsellBoundary.observableToUniformMixingUpgradeStillRequired ≡ true
 observableToUniformMixingUpgradeStillOpen =
   UrsellBoundary.observableToUniformMixingUpgradeStillRequiredIsTrue
+
+balabanClusterExpansionDoesNotSilentlyPayDensityDefect :
+  MixingSources.balabanCMP116DirectlyPaysUniformTwoSliceDensity ≡ false
+balabanClusterExpansionDoesNotSilentlyPayDensityDefect =
+  MixingSources.balabanCMP116DirectlyPaysUniformTwoSliceDensityIsFalse
+
+finiteAbelianComparatorDoesNotPaySU2F1 :
+  MixingSources.finiteAbelianCorrelationDecayPaysSU2ContinuumF1 ≡ false
+finiteAbelianComparatorDoesNotPaySU2F1 =
+  MixingSources.finiteAbelianCorrelationDecayPaysSU2ContinuumF1IsFalse
+
+sourceAuditConfirmsInteractingMixingOpen :
+  MixingSources.interactingSU2TrajectoryMixingStillOpen ≡ true
+sourceAuditConfirmsInteractingMixingOpen =
+  MixingSources.interactingSU2TrajectoryMixingStillOpenIsTrue
 
 frontierNoLongerChargesUniformC :
   Frontier.f1TrajectoryUniformCRequired ≡ false
