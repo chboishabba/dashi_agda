@@ -38,3 +38,21 @@ nurseNotNativeRecovery = refl
 
 sourceIdentityRetained : H.sourceSystemIdentityMustRemainIndexed H.canonicalRegenerationHyperfabricBoundary ≡ true
 sourceIdentityRetained = refl
+
+fixedNNotSingleRoute : H.fixedNitrogenImpliesSameDownstreamNitrogenRoute H.canonicalRegenerationHyperfabricBoundary ≡ false
+fixedNNotSingleRoute = refl
+
+residueNotLivingRootTransfer : H.residueMediatedTransferImpliesLivingRootTransfer H.canonicalRegenerationHyperfabricBoundary ≡ false
+residueNotLivingRootTransfer = refl
+
+grassSignNotContextFree : H.grassCompetitionHasContextFreeSign H.canonicalRegenerationHyperfabricBoundary ≡ false
+grassSignNotContextFree = refl
+
+nitrogenServiceNeedsWaterState : H.nitrogenServiceCanBeOptimisedWithoutWaterState H.canonicalRegenerationHyperfabricBoundary ≡ false
+nitrogenServiceNeedsWaterState = refl
+
+queenslandComparatorNotAcaciaObject : H.queenslandPastureComparatorCreatesAcaciaSameObjectEvidence H.canonicalRegenerationHyperfabricBoundary ≡ false
+queenslandComparatorNotAcaciaObject = refl
+
+replacementRequiresCounterfactual : H.explicitCounterfactualRequiredForFertilizerReplacement H.canonicalRegenerationHyperfabricBoundary ≡ true
+replacementRequiresCounterfactual = refl
