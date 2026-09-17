@@ -1,0 +1,1 @@
+The quantitative local theorem and its R568 adapter must use the same physical fixed-output fibre and consumer carrier. A merely isomorphic or separately re-enumerated carrier does not count without an explicit adapter.
