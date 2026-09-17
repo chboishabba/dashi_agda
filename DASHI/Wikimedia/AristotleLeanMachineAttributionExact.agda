@@ -2,6 +2,7 @@ module DASHI.Wikimedia.AristotleLeanMachineAttributionExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
