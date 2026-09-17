@@ -18,6 +18,8 @@ import DASHI.Physics.YangMills.YMClayVacuumSectorSpectralGapParityExact as Spect
 import DASHI.Physics.YangMills.YMClayLiteralSU2LatticeDonorExact as Lattice
 import DASHI.Physics.YangMills.YMClayVaryingCarrierTransportParityExact as Varying
 import DASHI.Physics.YangMills.YMClayUniformGapReductionParityExact as UniformGap
+import DASHI.Physics.YangMills.YMClayCorrelationCriterionParityExact as Correlation
+import DASHI.Physics.YangMills.YMClayCorrelationCriterionParityValidation as CorrelationValidation
 import DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact as F134
 import DASHI.Physics.YangMills.YMClayClosedWorldResidualAudit20260917Exact as ResidualAudit
 import DASHI.Physics.YangMills.YMClayF1CanonicalSourceApplicationValidation as F1Canonical
@@ -30,6 +32,8 @@ open Spectral
 open Lattice
 open Varying
 open UniformGap
+open Correlation
+open CorrelationValidation
 open F134
 open ResidualAudit
 open F1Canonical
@@ -48,6 +52,9 @@ varyingCarrierTransportDonorAvailable = VaryingCarrierTransportLeanDonorPresent
 
 uniformGapReductionDonorAvailable : Set
 uniformGapReductionDonorAvailable = UniformGapReductionLeanDonorPresent
+
+correlationCriterionDonorAvailableInAggregate : Set
+correlationCriterionDonorAvailableInAggregate = CorrelationCriterionLeanDonorPresent
 
 transferOperatorArtifactAvailable : Atlas.LeanTheoremArtifact
 transferOperatorArtifactAvailable = Atlas.literalSU2TransferOperatorGapLean
@@ -69,6 +76,21 @@ literalTransferOperatorParityAvailable :
   UniformGap.literalTransferOperatorPaymentRecorded ≡ true
 literalTransferOperatorParityAvailable =
   UniformGap.literalTransferOperatorPaymentRecordedIsTrue
+
+truncatedCorrelationAlternativeAvailable :
+  Correlation.truncatedCorrelationBoundImpliesTwoSliceDecorrelator ≡ true
+truncatedCorrelationAlternativeAvailable =
+  Correlation.truncatedCorrelationBoundImpliesTwoSliceDecorrelatorIsTrue
+
+uniformJointDensityAlternativeAvailable :
+  Correlation.uniformJointDensityMixingImpliesTwoSliceDecorrelator ≡ true
+uniformJointDensityAlternativeAvailable =
+  Correlation.uniformJointDensityMixingImpliesTwoSliceDecorrelatorIsTrue
+
+interactingMixingStillPhysicalDebt :
+  Correlation.interactingWilsonMixingBoundProvedByDonor ≡ false
+interactingMixingStillPhysicalDebt =
+  Correlation.interactingWilsonMixingBoundProvedByDonorIsFalse
 
 frontierNoLongerChargesUniformC :
   Frontier.f1TrajectoryUniformCRequired ≡ false
