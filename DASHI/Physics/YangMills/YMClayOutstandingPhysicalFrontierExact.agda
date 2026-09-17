@@ -43,8 +43,8 @@ record UniformRGTransferCoercivity : Set₁ where
     Positive : Mass → Set
     gapPositive : Positive gap
 
-    -- This is F1.  The same positive physical mass must survive every cutoff
-    -- and volume on the actual beta(a) RG trajectory.
+    -- F1: the same positive physical mass survives every cutoff and volume on
+    -- the actual beta(a) renormalisation-group trajectory.
     uniformCoercivityAlongRGTrajectory :
       (volume : Volume) → (cutoff : Cutoff) →
       (state : FiniteState volume cutoff) →
@@ -124,6 +124,10 @@ record YMOSSameObjectWitness (Time Vector : Set) : Set₁ where
 
 open YMOSSameObjectWitness public
 
+-- Exact physical leaves retained by the donor
+-- YangMills/RG/BalabanCMP116SourceTheorem.lean and
+-- PhysicalGaugeCMP116RawHsharpFrontier.lean.  Existing resummation/UV/M3
+-- compilers are deliberately not repeated here.
 record CMP116PhysicalSourceResiduals : Set₁ where
   field
     CovarianceRootCertificate : Set
@@ -141,11 +145,69 @@ record CMP116PhysicalSourceResiduals : Set₁ where
     LocalPhysicalActivityConstruction : Set
     localPhysicalActivityConstruction : LocalPhysicalActivityConstruction
 
+    SpectatorSupportSubset : Set
+    spectatorSupportSubset : SpectatorSupportSubset
+
+    FluctuationSupportSubset : Set
+    fluctuationSupportSubset : FluctuationSupportSubset
+
+    ActivityStronglyMeasurable : Set
+    activityStronglyMeasurable : ActivityStronglyMeasurable
+
     RawPointwiseDecay : Set
     rawPointwiseDecay : RawPointwiseDecay
 
-    AppendixFGeometryProfileSmallness : Set
-    appendixFGeometryProfileSmallness : AppendixFGeometryProfileSmallness
+    AmplitudeNonnegativeAndAtMostOne : Set
+    amplitudeNonnegativeAndAtMostOne : AmplitudeNonnegativeAndAtMostOne
+
+    WeightNonnegative : Set
+    weightNonnegative : WeightNonnegative
+
+    ActiveSupportSubsetOmega : Set
+    activeSupportSubsetOmega : ActiveSupportSubsetOmega
+
+    ActiveSupportSubsetSkeleton : Set
+    activeSupportSubsetSkeleton : ActiveSupportSubsetSkeleton
+
+    WeightDominationByAppendixFHoleWeight : Set
+    weightDominationByAppendixFHoleWeight :
+      WeightDominationByAppendixFHoleWeight
+
+    ProbabilityLaw : Set
+    probabilityLaw : ProbabilityLaw
+
+    HolesPairwiseDisjoint : Set
+    holesPairwiseDisjoint : HolesPairwiseDisjoint
+
+    NoEdgesBetweenHoles : Set
+    noEdgesBetweenHoles : NoEdgesBetweenHoles
+
+    HolesNonempty : Set
+    holesNonempty : HolesNonempty
+
+    AppendixFGeometricSmallness : Set
+    appendixFGeometricSmallness : AppendixFGeometricSmallness
+
+    RootedHsharpRemainderIdentity : Set
+    rootedHsharpRemainderIdentity : RootedHsharpRemainderIdentity
+
+    HalfBudget : Set
+    halfBudget : HalfBudget
+
+    ProfileBound : Set
+    profileBound : ProfileBound
+
+    PositiveDecayAndCouplingConstants : Set
+    positiveDecayAndCouplingConstants : PositiveDecayAndCouplingConstants
+
+    CouplingSmallness : Set
+    couplingSmallness : CouplingSmallness
+
+    CouplingRecursion : Set
+    couplingRecursion : CouplingRecursion
+
+    IRExponentialBound : Set
+    irExponentialBound : IRExponentialBound
 
 open CMP116PhysicalSourceResiduals public
 
