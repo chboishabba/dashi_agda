@@ -11,17 +11,6 @@ import DASHI.Physics.Closure.TriadicSectorQSeries as QS
 
 ------------------------------------------------------------------------
 -- EXACT FINITE E4/E6 COEFFICIENT TOWER
---
--- This is the coefficient-side counterpart of the constructed-complex finite
--- recurrence.  It uses the repository's existing finite q-series carrier and
--- the internal divisor-power arithmetic:
---
---   E4 = 1 + 240 sum_{n>=1} sigma3(n) q^n
---   E6 = 1 - 504 sum_{n>=1} sigma5(n) q^n.
---
--- The resulting tower pays exact finite coefficient prefixes.  It does NOT
--- identify that finite tower with the abstract analytic Eisenstein lattice sum,
--- prove convergence, or manufacture modularity from a prefix.
 ------------------------------------------------------------------------
 
 integerQSeriesCarrier : QS.QSeriesCarrier
@@ -45,13 +34,14 @@ data EisensteinCoefficientSector : Set where
   e4Sector : EisensteinCoefficientSector
   e6Sector : EisensteinCoefficientSector
 
+coefficientAt : Nat -> EisensteinCoefficientSector -> ℤ
+coefficientAt n e4Sector = e4Coefficient n
+coefficientAt n e6Sector = e6Coefficient n
+
 eisensteinCoefficientTower : QS.SectorTraceTower integerQSeriesCarrier
 eisensteinCoefficientTower = record
   { QS.Sector = EisensteinCoefficientSector
-  ; QS.traceCoefficient = λ n sector ->
-      case sector of λ where
-        e4Sector -> e4Coefficient n
-        e6Sector -> e6Coefficient n
+  ; QS.traceCoefficient = coefficientAt
   }
 
 e4Prefix : (n : Nat) -> QS.Vec ℤ n
