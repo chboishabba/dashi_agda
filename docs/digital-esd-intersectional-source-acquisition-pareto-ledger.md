@@ -1,133 +1,156 @@
 # Digital-ESD intersectional source-acquisition Pareto ledger
 
-**Status:** acquisition/provenance working ledger only. None of the sources below is thereby included in the final review corpus. Inclusion still requires the declared database-search, deduplication, eligibility-screening, structured-extraction and `SourceAuditAdmission` lineage.
+**Status:** acquisition/provenance working ledger. Candidate discovery does not create review inclusion. Final inclusion still requires declared database execution, deduplication, eligibility screening, structured extraction and `SourceAuditAdmission`.
 
-## Governing rule
+## 1. Governing rule
 
-The source-acquisition frontier is generated from residuals in the situated/intersectional hyperfabric, not from citation count or generic topical relevance.
-
-A candidate is high-alpha when it discriminates one or more currently unresolved joint fibres while retaining source role, observer position, population/context, claim ceiling and provenance.
+Acquisition is generated from residuals in the situated/intersectional hyperfabric rather than citation count, fashionable terminology or generic topical relevance.
 
 ```text
 Pareto priority != source authority
 candidate discovery != corpus inclusion
 identifier completeness != evidence completeness
+source mentions A + B != source studies A x B
 philosophy-seeded question != empirical answer
-source mentions axis A + axis B != source studies A x B
+same programme != same measurement object
 ```
 
-QID and Dewey coordinates remain unresolved unless independently verified. DOI/PMID/PMCID coordinates are retained only when verified as the same source object.
+QID and Dewey remain unresolved unless exact same-object identity is independently verified. DOI/PMID/PMCID are retained only at the role they actually pay.
 
-## Round 1 — situated disability / absence / provisioning
+## 2. What the Pareto has progressively targeted
 
-Primary residuals:
-- disability/access × race/gender/class and student lived experience;
-- child affordability/connectivity × household/school/infrastructure context;
-- disability × assistive technology × support continuity × co-design;
-- visual impairment × screen-reader usability × institutional/social support;
-- EduNLP stakeholder absence × private-sector incentives × deployment;
-- school closure × meal provisioning × household burden.
+### Round 1 — disability / absence / provisioning
+Disabled-student lived experience; affordability/connectivity; assistive technology and support continuity; visual-impairment usability; EduNLP stakeholder absence; school meals/household burden.
 
-Canonical candidates are owned by `DigitalESDIntersectionalSourceAcquisitionParetoExact`.
+### Round 2 — lifecycle inequity / surveillance / care / vendor accountability
+Global lifecycle inequity; minoritised-school surveillance; special-needs household burden; vendor/procurement privacy/security accountability.
 
-## Round 2 — lifecycle inequity / surveillance incidence / care burden / vendor power
+### Round 3 — funding / social support / community authority
+Disability × public/individual funding; counselling/social-support continuity; Indigenous/community partnership and actual study-design relationships.
 
-- Nicholas Werse, 2023, DOI `10.1111/bjet.13327` — conceptual lifecycle/global-inequity residual; not an LCA or affected-community study.
-- Sidra Sheikh; Alexis Stolberg; Allison F. Gilmour, 2025, DOI `10.1177/00420859241279446` — advanced school surveillance × poor/minoritized-school incidence; review-level evidence only.
-- Alfred Sankoh; Jared Hogle; Melinda Payton; Karen Ledbetter, 2023, DOI `10.3389/feduc.2023.1053590` — remote delivery × special-needs household care/teaching burden; parent observer != disabled-student authority.
-- Easton Kelso; Ananta Soneji; Sazzadur Rahaman; Yan Shoshitaishvili; Rakibul Hasan, 2024, DOI `10.1145/3658644.3690353` — procurement/vendor power × privacy/security accountability; institutional observer != student consent.
+### Round 4 — privacy voice / co-design / student policy authorship
+Student privacy/consent/trust; student-teacher analytics co-design; student-led AI-policy recommendations.
 
-## Round 3 — funding/support continuity / community authority
+### Round 5 — philosophy-seeded surveillance/power, empirically paid
+Foucauldian AI-surveillance interpretation with empirical stakeholders; African-situated privacy; platform owner/intermediation power; cross-cultural student privacy; transparency intervention.
 
-Targets:
-- disability × flexible public/individual funding × realised support;
-- school counselling/social-support continuity;
-- Indigenous/local-knowledge/community partnership × actual study-design authority.
+### Round 6 — practical exit / selection / classification / data value
+Opt-in/opt-out selection; algorithmic-bias group coverage; disability/inclusion in learning analytics; EdTech data monetisation/control.
 
-Firewalls remain: funding availability != effective support; family report != student voice; service utilisation != need; community partnership/yarning/Elder involvement != universal Indigenous authority; shared programme population != same measurement object.
+### Round 7 — predictive error / human-centred absence / data agency
+False-positive/false-negative learner predictions with omitted situated circumstances; sparse human-centred algorithm design; technical analytics access != learner data agency.
 
-## Round 4 — student privacy voice / co-design / policy authorship
+### Round 8 — material lifecycle with worker/community observers
+Agbogbloshie e-waste workers; formal/informal e-waste labour in Santiago; DRC cobalt miners/traders/community observers. Context/mechanism evidence != same-object supply-chain identity for a named Digital-ESD deployment.
 
-- Kyle M. L. Jones et al., 2020, DOI `10.1002/asi.24358` — >100 student interviews across eight institutions on learning-analytics privacy, consent and trust; perspective != decision authority.
-- Riordan Alfredo et al., 2025, DOI `10.1186/s41239-025-00572-8` — student/teacher co-design of AI-powered learning analytics; co-design != equal governance authority.
-- Kaoru Seki; Manisha Vijay; Yasmine Kotturi, 2026, DOI `10.1145/3772318.3790691` — student-led AI-policy recommendations; recommendation != institutional adoption/outcome.
+### Round 9 — proctoring / intersectional flagging / disability / adoption
+Automated proctoring disparities and wrongful-flag stakes; institutional adoption authority kept distinct from affected-user voice.
 
-## Round 5 — philosophy-seeded surveillance/power, empirically paid
+### Round 10 — contestability / future options / repurposing
+Student observer, system-policy/reversal observer and institutional analytics observer kept distinct. System repeal != individual appeal success; enrolment consent != downstream analytics consent.
 
-Philosophy is a probe generator here, not an empirical separator.
+### Round 11 — selection-by-trace / eligible nonresponse / rural access
+Minimally engaged/dropout learners excluded by activity thresholds; eligible-to-realised sample losses; digital-access/nonresponse uncertainty.
 
-- Ruixun Dai; Matthew Krehl Edward Thomas; Shaun Rawolle, 2025, DOI `10.1080/01425692.2025.2501118` — Foucauldian analytic frame + 27 plural stakeholders on AI surveillance/norms. Foucault does not own the empirical observations.
-- Paul Prinsloo; Rogers Kaliisa, DOI `10.1080/17439884.2024.2321437` — African HE privacy × colonial/cultural/religious context; expert perspectives do not create one pan-African privacy essence.
-- T. Philip Nichols; Ezekiel Dixon-Román, 2024, DOI `10.3102/01623737231202469` — platform owners/intermediation × commercial/technical/educational power; analytical framework != observed student harm.
-- Olga Viberg; René F. Kizilcec; Ioana Jivet; Alejandra Martínez Monés; Alice Oh; Chantal Mutimukwe; Stefan Hrastinski; Maren Scheffel, 2024, DOI `10.1016/j.chbr.2024.100416` — 762 students across five countries, privacy/control/trust/context variation; variation != deterministic national essence.
-- Stoo Sepp, 2025, DOI `10.18608/jla.2025.8713` — disclosure/transparency intervention × student awareness; awareness != consent/authority/privacy protection.
+### Round 12 — disclosure-gated support
+Self-recognition != diagnosis != disclosure != granted accommodation != implemented support.
 
-## Round 6 — practical exit / selection / classification / data value
+### Round 13 — assessment exclusion / actual withdrawal / migrant-refugee family agency
+Assessment design can alter practical option availability; actual online-HE withdrawal and time poverty; migrant/refugee parent digital/language exclusion.
 
-- Warren Li; Kaiwen Sun; Florian Schaub; Christopher Brooks, 2022, DOI `10.1007/s40593-021-00254-2` — consent propensity and opt-in/opt-out framing. Formal choice != representative remaining analytics population or freedom from consequence.
-- Ryan S. Baker; Aaron Hawn, 2022, DOI `10.1007/s40593-021-00285-9` — algorithmic-bias review mapping studied and under-studied groups/pipeline stages; review != named-system bias finding.
-- Mohammad Khalil; Sharon Slade; Paul Prinsloo, DOI `10.1007/s12528-023-09363-4`, PMID `37359042`, PMCID `PMC10013273` — learning analytics × disability/inclusion evidence map; its own review corpus does not pay this review's search and does not manufacture disabled-student authority.
-- Janja Komljenovic; Kean Birch; Sam Sellar, 2024, DOI `10.1007/s42438-024-00505-0` — empirical EdTech data monetisation/control/consolidation in UK HE. Linked research-data DOI `10.5255/UKDA-SN-856729` remains a distinct dataset identity.
+### Round 14 — identity-system legibility / surveillance / propagation
+More identity visibility != more safety. Preferred-name field != downstream name respect. Legal identity, lived identity, system-visible identity and safe disclosure remain distinct.
 
-## Round 7 — predictive error / human-centred absence / data agency
+### Round 15 — eligible-but-hidden populations
 
-- Martin Hlosta; Tina Papathoma; Christothea Herodotou, 2020, DOI `10.1007/978-3-030-52240-7_22`, PMCID `PMC7334695` — false-positive/false-negative predictive-learning-analytics cases investigated through interviews with affected students; personal, financial, technical and practical circumstances exceeded the captured model data. Prediction error != student deficit and omitted context != mandate to collect every possible datum.
-- Kelly McConvey; Shion Guha; Anastasia Kuzminykh, 2023, DOI `10.1145/3544548.3580658`, arXiv `2302.05839` — review of 62 higher-education algorithm papers showing increasing use of personal/protected attributes and opaque methods alongside sparse systematic human-centred/participatory design. Representation in input features != representation in design authority.
-- Laia Lluch Molins; Carles Lindín Soriano, 2026, DOI `10.3389/feduc.2026.1913278` — 1,020-student study of learning-analytics expectations; technical access to analytics != learner-recognised capacity/entitlement to interpret and act on those data.
+- Susan Grimes; Jill Scevak; Erica Southgate; Rachel Buchanan, 2017, DOI `10.1007/s13384-017-0242-y` — non-disclosing disability/learning-challenge population size/characteristics.
+- Susan Grimes; Erica Southgate; Jill Scevak; Rachel Buchanan, 2019, DOI `10.1080/13603116.2018.1442507` — reasons for remaining institutionally invisible.
+- Colin Clark; Rita Kusevskis-Hayes; Matthew Wilkinson, 2018, DOI `10.30688/janzssa.2018.05` — nondisclosure across multiple Australian equity groups.
 
-## Round 8 — material lifecycle with worker/community observers
+DASHI-owned collision:
 
-- Matthew Akormedi; Emmanuel Asampong; Julius N. Fobil, 2013, DOI `10.1179/2049396713Y.0000000034`, PMID `24588034` — direct interviews with informal e-waste workers at Agbogbloshie on working conditions, exposures and worker-created mutual support.
-- Emily A. Yu; Matthew Akormedi; Emmanuel Asampong; Christian G. Meyer; Julius N. Fobil, 2017, DOI `10.1177/1757975916631523`, PMID `27271535` — twenty Agbogbloshie workers on hazard knowledge and preferred livelihood alternatives. Knowledge != realised capacity to exit.
-- Nicolás Labra Cataldo; Alejandro Gallego-Schmid; Carly McLachlan, 2025, DOI `10.1080/15487733.2025.2478697` — participant observation/interviews across formal and informal e-waste labour/value-chain positions in metropolitan Santiago.
-- Benjamin K. Sovacool, 2021, DOI `10.1016/j.exis.2020.11.018` — DRC fieldwork with miners, traders and community members plus mine/trading-site visits; power, gender and child-labour coordinates remain visible.
+```text
+same realised/registered carrier
+!= same eligible hidden-population state
+```
 
-Round 8 pays the previously weak **material-lifecycle × directly situated worker/community observer** fibre at a contextual/mechanism level. It does **not** pay a same-object supply-chain claim for any named school, device, platform or AI service.
+Source programme continuity does not make the 2017 and 2019 Grimes papers the same measurement object.
 
-## Philosophy/audit cross-pollination
+### Round 16 — design exclusion / affected-but-unsampled observers
 
-`DigitalESDPhilosophySeededAcquisitionProbeExact` keeps the philosophy gamut as typed probe generation rather than a master ontology:
+- Mondli Shadrack Hlatshwayo, 2022, DOI `10.25159/1947-9417/11155` — common online transition with poor/working-class material participation constraints.
+- Nerida Spina; Rebecca Spooner-Lane; Emily Seager; Jeanine Gallagher; Susan Danby, 2026 issue / 2025 online, DOI `10.1177/18369391251358010` — children are subjects of first-year-schooling data practices while teachers and school-authority staff form the participant carrier.
+- Annetta Cayas; Nerida Spina; Karen Dooley; Janet Rankin, 2026, DOI `10.1080/01425692.2026.2632302` — student data organise parent labour/family relations; parents/staff supply empirical viewpoints.
+- Anastasia Gouseti; Patricia Shaw, 2026, DOI `10.1080/17439884.2026.2653746` — plural school observers expose distributed platformisation effects and digital exclusion.
 
-- Foucault: institutional power / subjectification / discipline / legitimacy gaps;
-- Marx/material audit: ownership, material benefit and commercial capture;
-- feminist subject-position audit: originating subject erasure;
-- intersectional audit: affected-community voice and joint-axis collisions;
-- Wittgenstein: policy/category word != actual use/practice;
-- Spinoza: nominal permission != practical capacity to act/exit;
-- Kant: data subject/learner should not be collapsed into an institutional means-coordinate;
-- Levinas: what affected person/experience exceeds the chart;
-- Derrida: closure residual / no category-set presumed complete;
-- Žižek/Lacan lane: excluded residual/master-predicate questions remain candidate-only and require actual institutional/empirical evidence.
+DASHI-owned collisions:
 
-Every probe requires an independent empirical/source separator. These audit operators do not create empirical causes, population laws, oppression findings, political conclusions, mandatory new axes or philosopher-owned DASHI theorems.
+```text
+same formal online-delivery surface
+!= same participation adequacy
 
-## Current Pareto residuals after Round 8
+same institutional data-practice surface
+!= same affected-observer adequacy
+```
 
-A new source acquisition round must materially discriminate one or more of these; otherwise it is dominated by the current frontier:
+Adult institutional/parent observation != child participant authority. Affected population != sampled population.
 
-1. **practical exit without educational penalty** — direct observation of what happens when a learner refuses analytics/data use/intervention, not merely policy wording;
-2. **appeal/correction/contestability after classification** — evidence that affected learners can inspect, challenge or correct a risk/engagement/assessment label and what happens when they do;
-3. **intersectional false-positive/false-negative incidence** — disability × race/class/language/gender or other joint strata rather than marginal bias labels alone;
-4. **platform migration/vendor exit × accessibility continuity** — actual migration/upgrade/exit evidence retaining assistive access, user data and learning continuity;
-5. **same-object material supply-chain weld** — connect a named Digital-ESD device/service procurement or deployment to its actual extraction/fabrication/end-of-life chain before importing situated worker/community evidence into that deployment claim;
-6. **surveillance/privacy × younger learners × disability/minoritized status** with first-person or directly situated evidence;
-7. **decision authority after participation/co-design** — evidence that participant recommendations actually change procurement, policy, model design or deployment;
-8. **downstream data repurposing with affected-user evidence** — publishers/employers/regulators/advertisers/product-development uses tied to the same student/staff data object and a situated observer of consequences.
+## 3. Python-guided frontier after Round 16
 
-Round 7 substantially pays the weaker residual “model error may reflect omitted situated context”; Round 8 substantially pays “material impacts need directly situated lifecycle observers.” Another generic interpretability/error paper or generic e-waste/critical-minerals footprint paper is therefore dominated unless it adds contestability, intersectional incidence, same-object supply-chain identity or a materially new observer.
+The matrix is an acquisition/search heuristic only. It is not an evidence-quality score and cannot raise a claim ceiling.
 
-## Policy/practice comparators retained outside the empirical frontier
+Current deepest residuals:
 
-Institutional/practitioner sources such as the Jisc learning-analytics code and university learning-analytics policies can discriminate the *formal governance surface* (whether opt-out, amendment, data access, human review or portability is promised). They do not establish that learners can exercise those rights in practice, that no penalty exists, or that participant authority is realised. They remain standards/governance lenses rather than substitutes for empirical observation.
+```text
+P0:
+  whoWasExcludedByDesign
+  whoWasAffectedButUnsampled
 
-## Stop rule
+P1:
+  whoWasEligibleButMissing
+  whoHadToDiscloseToBeCounted
+  whichIntersectionsWereUnreported
+```
 
-Do not create another acquisition round merely because a relevant paper exists.
+`whoHadDecisionAuthority` has moved into the represented band. Generic participation/co-design literature is therefore dominated unless it exposes a materially stronger authority collision.
 
-A new round is justified only when a candidate:
-- attacks a live residual above or exposes a new constructive `FactorsThrough` collision;
-- adds a needed observer/population/context not already represented;
-- provides materially stronger same-object evidence or discrimination than the current frontier; and
-- can be attributed with a bounded source role and explicit limitation.
+## 4. High-alpha next-source shapes
 
-Otherwise retain the paper as background/snowball context rather than adding another formal acquisition owner.
+A Round 17 source should ideally do one of the following:
+
+1. identify people structurally excluded **before** the realised sample/platform trace begins;
+2. directly observe a consequentially affected population absent from the primary participant carrier;
+3. compare included and excluded/nonparticipating populations under the same institutional design;
+4. show how language, disability, poverty, identity requirements, device/connectivity, care/labour or safety conditions prevent entry into the analytic carrier;
+5. identify secondary/future parties bearing effects without being represented in the original decision or study;
+6. expose a new constructive collision where current absence/observer projections fail a downstream consumer.
+
+Another generic digital-divide, privacy, accessibility, sustainability, e-waste or voice paper is dominated unless it beats this frontier.
+
+## 5. Epistemic/Ibrahim/Cohn interaction
+
+The current generic source-acquisition/proof-search lane leaves only three genuinely open conceptual candidate families after consumer reuse:
+
+```text
+epistemic labour burden
+epistemic activism / proper uptake
+relational research burden
+```
+
+They are not added as Digital-ESD audit axes from conceptual adjacency. Promotion requires a literal admitted-corpus collision.
+
+```text
+source suggests candidate coordinate
+!= coordinate required
+```
+
+## 6. Stop rule
+
+Create another formal acquisition round only when a candidate:
+
+- attacks a live P0/P1 residual or exposes a new `FactorsThrough` collision;
+- adds a missing observer/population/context rather than another instance of a saturated one;
+- provides stronger same-object discrimination than the current frontier; and
+- can be represented with exact source identity, bounded role and explicit limitation.
+
+Otherwise retain it as background/snowball context rather than another formal owner.
