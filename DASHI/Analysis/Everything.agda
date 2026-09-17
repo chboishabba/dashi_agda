@@ -3,6 +3,8 @@ module DASHI.Analysis.Everything where
 -- Analysis domain ownership spine.
 
 import DASHI.Analysis.Maass.Everything
+import DASHI.Analysis.OrdinaryComplexInverseWitnessIndependenceExact
+import DASHI.Analysis.OrdinaryComplexInverseWitnessIndependenceValidation
 import DASHI.Analysis.RiemannLowOrdinateSourceAtlasExact
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact
 import DASHI.Analysis.RiemannAnalyticCoordinateTerminalRefinementExact
