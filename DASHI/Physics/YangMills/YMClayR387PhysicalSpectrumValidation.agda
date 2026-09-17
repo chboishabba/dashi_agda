@@ -1,0 +1,11 @@
+module DASHI.Physics.YangMills.YMClayR387PhysicalSpectrumValidation where
+
+import DASHI.Physics.YangMills.YMClayR387PhysicalSpectrumExact as Physical
+
+open Physical
+
+physicalSpectrumCompilerAvailable : Set
+physicalSpectrumCompilerAvailable = PhysicalSpectrumCompilerPresent
+
+physicalSpectrumCompilerWitness : PhysicalSpectrumCompilerPresent
+physicalSpectrumCompilerWitness = physicalSpectrumCompilerPresent
