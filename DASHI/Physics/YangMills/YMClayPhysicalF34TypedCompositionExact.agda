@@ -109,5 +109,7 @@ f3RecoveryGapCompilerLevel = Recovery.vacuumOrthogonalMoscoRecoveryLevel
 f4PhysicalWitnessLevel : ProofLevel
 f4PhysicalWitnessLevel = conditional
 
+-- Source-written explicit Agda composition in this tranche.  Keep the metadata
+-- fail-closed until an exact-head Agda kernel run is observed.
 typedF34CompositionLevel : ProofLevel
-typedF34CompositionLevel = machineChecked
+typedF34CompositionLevel = conditional
