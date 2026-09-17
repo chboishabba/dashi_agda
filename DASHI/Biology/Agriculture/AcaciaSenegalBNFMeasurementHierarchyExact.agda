@@ -25,6 +25,9 @@ bakhoum2015DOI = "10.1007/s00248-014-0507-1"
 githae2013DOI : String
 githae2013DOI = PlantN.githae2013DOI
 
+raddad2005DOI : String
+raddad2005DOI = PlantN.raddad2005DOI
+
 peerJ2018DOI : String
 peerJ2018DOI = Edaphic.peerJ2018DOI
 
@@ -118,6 +121,15 @@ githaeFoliarReceipt = bnf-measurement-receipt
   "Leaf 15N natural-abundance fixation estimate across Acacia senegal varieties/sites; nodule assessment is separately observed."
   false true false
 
+raddadFoliarReceipt : BNFMeasurementReceipt
+raddadFoliarReceipt = bnf-measurement-receipt
+  PlantN.raddadEtAl2005
+  PlantN.raddad2005DOI
+  nitrogenDerivedFromAtmosphereEstimate
+  plantIntegratedFixedNContribution
+  "Leaf 15N natural-abundance Ndfa estimate across eight Acacia senegal provenances and tree ages in Blue Nile Sudan; provenance and age remain indexed, and the source's foliage fixed-N contribution is retained as plant-level rather than direct molecular flux."
+  false true false
+
 peerJSoilNReceipt : BNFMeasurementReceipt
 peerJSoilNReceipt = bnf-measurement-receipt
   Edaphic.abakerEtAlPeerJ2018
@@ -157,4 +169,4 @@ canonicalMeasurementBoundary = bnf-measurement-boundary
 
 attributionRule : String
 attributionRule =
-  "Bakhoum et al. 2015 (DOI 10.1007/s00248-014-0507-1; PMID 25315832) owns its Acacia nodulation/ARA/SARA propositions. Assefa & Kleiner 1998 (DOI 10.1007/s003740050400) owns its multi-Acacia ARA/plant-N non-correlation proposition; DASHI does not widen that statement beyond the studied source scope. Isaac et al. 2011 (DOI 10.1016/j.foreco.2010.11.011), Githae et al. 2013 (DOI 10.1080/15324982.2013.784377), and Abaker et al. 2018 (DOI 10.7717/peerj.5232; PMID 30018862; PMCID PMC6044267) own their distinct isotope/plant-N/soil-N propositions. DASHI owns the measurement-role hierarchy and no-substitution boundaries."
+  "Bakhoum et al. 2015 (DOI 10.1007/s00248-014-0507-1; PMID 25315832) owns its Acacia nodulation/ARA/SARA propositions. Assefa & Kleiner 1998 (DOI 10.1007/s003740050400) owns its multi-Acacia ARA/plant-N non-correlation proposition; DASHI does not widen that statement beyond the studied source scope. Isaac et al. 2011 (DOI 10.1016/j.foreco.2010.11.011), Githae et al. 2013 (DOI 10.1080/15324982.2013.784377), Raddad et al. 2005 (DOI 10.1007/s11104-005-2152-4), and Abaker et al. 2018 (DOI 10.7717/peerj.5232; PMID 30018862; PMCID PMC6044267) own their distinct isotope/plant-N/soil-N propositions. DASHI owns the measurement-role hierarchy and no-substitution boundaries."
