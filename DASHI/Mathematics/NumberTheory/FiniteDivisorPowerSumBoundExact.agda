@@ -33,7 +33,6 @@ import Data.List.Relation.Unary.All as All
 open import Data.Nat.Base using (_≤_; z≤n)
 open import Data.Nat.Divisibility using (_∣?_)
 import Data.Nat.Properties as NatP
-open import Data.Product using (proj₂)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -54,7 +53,7 @@ powNatMonotone :
   Power.powNat left exponent ≤ Power.powNat right exponent
 powNatMonotone zero left≤right = NatP.≤-refl
 powNatMonotone (suc exponent) left≤right =
-  NatP.*-mono
+  NatP.*-mono-≤
     left≤right
     (powNatMonotone exponent left≤right)
 
