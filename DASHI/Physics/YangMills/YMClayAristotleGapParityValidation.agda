@@ -3,10 +3,11 @@ module DASHI.Physics.YangMills.YMClayAristotleGapParityValidation where
 open import Agda.Builtin.Equality using (_≡_)
 
 -- Validation contract for the Aristotle donor tranche.  The production owners
--- below keep three authority classes separate:
+-- below keep four authority/evidence classes separate:
 --
 --   native Agda theorem term
 --   verified Lean donor theorem/worker receipt
+--   bounded empirical collider contact
 --   still-open physical Yang--Mills inhabitant
 --
 -- The 2026-09-17 varying-carrier tranche removes F2 as an independent physical
@@ -24,6 +25,8 @@ import DASHI.Physics.YangMills.YMClayUrsellTransferMixingBoundaryExact as Ursell
 import DASHI.Physics.YangMills.YMClayUrsellTransferMixingBoundaryValidation as UrsellBoundaryValidation
 import DASHI.Physics.YangMills.YMClayF1MixingSourceAuditExact as MixingSources
 import DASHI.Physics.YangMills.YMClayF1MixingSourceAuditValidation as MixingSourcesValidation
+import DASHI.Physics.YangMills.YMClayCMSDrellYanEmpiricalContactBoundaryExact as CMSBoundary
+import DASHI.Physics.YangMills.YMClayCMSDrellYanEmpiricalContactBoundaryValidation as CMSBoundaryValidation
 import DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact as F134
 import DASHI.Physics.YangMills.YMClayClosedWorldResidualAudit20260917Exact as ResidualAudit
 import DASHI.Physics.YangMills.YMClayF1CanonicalSourceApplicationValidation as F1Canonical
@@ -42,6 +45,8 @@ open UrsellBoundary
 open UrsellBoundaryValidation
 open MixingSources
 open MixingSourcesValidation
+open CMSBoundary
+open CMSBoundaryValidation
 open F134
 open ResidualAudit
 open F1Canonical
@@ -69,6 +74,9 @@ ursellTransferBoundaryAvailableInAggregate = UrsellTransferMixingBoundaryPresent
 
 mixingSourceAuditAvailableInAggregate : Set
 mixingSourceAuditAvailableInAggregate = MixingSourceAuditPresent
+
+cmsEmpiricalContactAvailableInAggregate : Set
+cmsEmpiricalContactAvailableInAggregate = CMSDrellYanEmpiricalContactPresent
 
 transferOperatorArtifactAvailable : Atlas.LeanTheoremArtifact
 transferOperatorArtifactAvailable = Atlas.literalSU2TransferOperatorGapLean
@@ -130,6 +138,22 @@ sourceAuditConfirmsInteractingMixingOpen :
   MixingSources.interactingSU2TrajectoryMixingStillOpen ≡ true
 sourceAuditConfirmsInteractingMixingOpen =
   MixingSources.interactingSU2TrajectoryMixingStillOpenIsTrue
+
+-- Collider contact is retained as an independent evidence axis, never promoted
+-- into the analytic proof frontier.
+cmsContactDoesNotPayF1InAggregate : CMSBoundary.cmsContactPaysF1 ≡ false
+cmsContactDoesNotPayF1InAggregate = CMSBoundary.cmsContactPaysF1IsFalse
+
+cmsContactDoesNotPayF3InAggregate : CMSBoundary.cmsContactPaysF3 ≡ false
+cmsContactDoesNotPayF3InAggregate = CMSBoundary.cmsContactPaysF3IsFalse
+
+cmsContactDoesNotPayF4InAggregate : CMSBoundary.cmsContactPaysF4 ≡ false
+cmsContactDoesNotPayF4InAggregate = CMSBoundary.cmsContactPaysF4IsFalse
+
+cmsContactRemainsBoundedEmpiricalContact :
+  CMSBoundary.cmsContactIsBoundedExperimentalQCDContact ≡ true
+cmsContactRemainsBoundedEmpiricalContact =
+  CMSBoundary.cmsContactIsBoundedExperimentalQCDContactIsTrue
 
 frontierNoLongerChargesUniformC :
   Frontier.f1TrajectoryUniformCRequired ≡ false
