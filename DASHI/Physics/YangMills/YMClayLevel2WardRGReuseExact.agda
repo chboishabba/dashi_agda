@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact 
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
 import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact as R144
 import DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact as OPERemainder
+import DASHI.Physics.YangMills.YMClayLevel2CompositeTailWeldExact as D1
 import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as D2
 import DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact as D3
 
@@ -147,7 +148,8 @@ dyadicOPERemainderCompilerLevel =
   OPERemainder.sharedMarkedCompositeOPERemainderCompilerLevel
 
 sameFamilyCompositeTailAttachmentLevel : ProofLevel
-sameFamilyCompositeTailAttachmentLevel = conditional
+sameFamilyCompositeTailAttachmentLevel =
+  D1.physicalCompositeTailAttachmentLevel
 
 sameFamilyContinuumWardTransportLevel : ProofLevel
 sameFamilyContinuumWardTransportLevel =
