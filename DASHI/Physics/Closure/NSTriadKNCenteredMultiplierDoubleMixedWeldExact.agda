@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
@@ -49,6 +50,8 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputViscousRateDifferenceFactorizat
 import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Exact as R544
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredMultiplierVectorCovarianceExact as Vector
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Cov
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
+import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExact as D1a
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -342,6 +345,188 @@ module PhysicalCenteredDoubleMixed
           (R291.realScale negativeTotal mixed)
     in
     trans expose (trans replaceFour (trans distribute collect))
+
+
+  workAddLeft :
+    (leftA leftB right : C3.Complex3 F) →
+    Work.coherentWork (C3.complex3Add leftA leftB) right
+    ≡ Work.coherentWork leftA right + Work.coherentWork leftB right
+  workAddLeft leftA leftB right =
+    trans
+      (cong (Work.two *_) (R291.realCrossAddLeft leftA leftB right))
+      (solve
+        ( R179.realHermitianCross leftA right
+        ∷ R179.realHermitianCross leftB right
+        ∷ []))
+
+  four : ℚ
+  four = Work.two * Work.two
+
+  sixteen : ℚ
+  sixteen = four * four
+
+  coherentWorkFourCopies :
+    (left right : C3.Complex3 F) →
+    Work.coherentWork (R225.fourCopies left) (R225.fourCopies right)
+    ≡ sixteen * Work.coherentWork left right
+  coherentWorkFourCopies left right =
+    let
+      ll = C3.complex3Add left left
+      rr = C3.complex3Add right right
+
+      leftSplit :
+        Work.coherentWork (C3.complex3Add ll ll) (C3.complex3Add rr rr)
+        ≡
+        Work.coherentWork ll (C3.complex3Add rr rr)
+        + Work.coherentWork ll (C3.complex3Add rr rr)
+      leftSplit = workAddLeft ll ll (C3.complex3Add rr rr)
+
+      rightSplit :
+        Work.coherentWork ll (C3.complex3Add rr rr)
+        ≡ Work.coherentWork ll rr + Work.coherentWork ll rr
+      rightSplit = Work.workAddRight ll rr rr
+
+      llSplit :
+        Work.coherentWork ll rr
+        ≡ Work.coherentWork left rr + Work.coherentWork left rr
+      llSplit = workAddLeft left left rr
+
+      rrSplit :
+        Work.coherentWork left rr
+        ≡ Work.coherentWork left right + Work.coherentWork left right
+      rrSplit = Work.workAddRight left right right
+
+      x = Work.coherentWork left right
+    in
+    trans leftSplit
+      (trans
+        (cong₂ _+_ rightSplit rightSplit)
+        (trans
+          (cong
+            (λ y → (y + y) + (y + y))
+            llSplit)
+          (trans
+            (cong
+              (λ y →
+                ((y + y) + (y + y))
+                + ((y + y) + (y + y)))
+              rrSplit)
+            (solve (x ∷ [])))))
+
+  fixedOutputDoubleWorkIsSixteenMixedWork :
+    (output : Z3.FourierMode) →
+    let
+      items = Output.physicalOutputFiber (Audit.cutoff system) output
+      mixedValue = R224.mixedPlusMinus S Weighted.D.Pair.velocity
+      doubleValue = R225.doubleMixedCell S Weighted.D.Pair.velocity
+      mixed = R224.foldVector mixedValue items
+      double = R224.foldVector doubleValue items
+      mixedResidual =
+        Vector.centeredMultiplierResidual multiplier mixedValue items
+      doubleResidual =
+        Vector.centeredMultiplierResidual multiplier doubleValue items
+    in
+    Work.coherentWork double doubleResidual
+    ≡ sixteen * Work.coherentWork mixed mixedResidual
+  fixedOutputDoubleWorkIsSixteenMixedWork output =
+    let
+      items = Output.physicalOutputFiber (Audit.cutoff system) output
+      mixedValue = R224.mixedPlusMinus S Weighted.D.Pair.velocity
+      doubleValue = R225.doubleMixedCell S Weighted.D.Pair.velocity
+      mixed = R224.foldVector mixedValue items
+      double = R224.foldVector doubleValue items
+      mixedResidual =
+        Vector.centeredMultiplierResidual multiplier mixedValue items
+      doubleResidual =
+        Vector.centeredMultiplierResidual multiplier doubleValue items
+
+      sumFour :
+        double ≡ R225.fourCopies mixed
+      sumFour =
+        R225.fixedOutputDoubleMixedSumIsFourPlusMinusSum
+          S Weighted.D.Pair.velocity (Audit.cutoff system) output
+
+      residualFour :
+        doubleResidual ≡ R225.fourCopies mixedResidual
+      residualFour =
+        fixedOutputDoubleResidualIsFourMixedResidual output
+    in
+    trans
+      (cong₂ Work.coherentWork sumFour residualFour)
+      (coherentWorkFourCopies mixed mixedResidual)
+
+  literalPhysicalViscousCovarianceOnDoubleMixedCarrier :
+    (nu : ℚ) →
+    (output : Z3.FourierMode) →
+    let
+      cutoff = Audit.cutoff system
+      items = Output.physicalOutputFiber cutoff output
+      velocity = Weighted.D.Pair.velocity
+      mixedValue = D1a.mixedProductCell S velocity
+      doubleValue = R225.doubleMixedCell S velocity
+      mixed = R224.foldVector mixedValue items
+      rho = Vector.Viscous.Centered.modalViscousRate nu I
+      rate = Cov.cellRate rho
+      decay =
+        R224.foldVector (D1a.variableDecayCell rho S velocity) items
+      covarianceNumerator =
+        Cov.natAsRational (length items)
+          * Work.coherentWork mixed decay
+          + Cov.rateSum rate items * Work.coherentWork mixed mixed
+      double = R224.foldVector doubleValue items
+      doubleResidual =
+        Vector.centeredMultiplierResidual multiplier doubleValue items
+    in
+    sixteen * (Rate.two * covarianceNumerator)
+    ≡ 0ℚ - nu * Work.coherentWork double doubleResidual
+  literalPhysicalViscousCovarianceOnDoubleMixedCarrier nu output =
+    let
+      cutoff = Audit.cutoff system
+      items = Output.physicalOutputFiber cutoff output
+      velocity = Weighted.D.Pair.velocity
+      mixedValue = D1a.mixedProductCell S velocity
+      doubleValue = R225.doubleMixedCell S velocity
+      mixed = R224.foldVector mixedValue items
+      rho = Vector.Viscous.Centered.modalViscousRate nu I
+      rate = Cov.cellRate rho
+      decay =
+        R224.foldVector (D1a.variableDecayCell rho S velocity) items
+      covarianceNumerator =
+        Cov.natAsRational (length items)
+          * Work.coherentWork mixed decay
+          + Cov.rateSum rate items * Work.coherentWork mixed mixed
+      mixedResidual =
+        Vector.centeredMultiplierResidual multiplier mixedValue items
+      double = R224.foldVector doubleValue items
+      doubleResidual =
+        Vector.centeredMultiplierResidual multiplier doubleValue items
+
+      base :
+        Rate.two * covarianceNumerator
+        ≡ 0ℚ - nu * Work.coherentWork mixed mixedResidual
+      base =
+        Vector.literalPhysicalViscousCovarianceIsCenteredMultiplierWork
+          E I nu S velocity cutoff output
+
+      scaled :
+        sixteen * (Rate.two * covarianceNumerator)
+        ≡ sixteen * (0ℚ - nu * Work.coherentWork mixed mixedResidual)
+      scaled = cong (sixteen *_) base
+
+      doubleWork :
+        Work.coherentWork double doubleResidual
+        ≡ sixteen * Work.coherentWork mixed mixedResidual
+      doubleWork =
+        fixedOutputDoubleWorkIsSixteenMixedWork output
+    in
+    trans scaled
+      (trans
+        (solve
+          ( nu
+          ∷ Work.coherentWork mixed mixedResidual
+          ∷ sixteen
+          ∷ []))
+        (cong (λ w → 0ℚ - nu * w) (sym doubleWork)))
 
 centeredMultiplierWeightedDoubleMixedWeldClosed : Bool
 centeredMultiplierWeightedDoubleMixedWeldClosed = true
