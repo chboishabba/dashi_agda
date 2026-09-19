@@ -23,12 +23,14 @@ module DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExa
 open import DASHI.Core.Prelude
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
 import DASHI.Mathematics.Arithmetic.BirchSwinnertonDyerBoundary as BSD
+import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact as Elliptic
 
 ------------------------------------------------------------------------
 -- Generic residual classification.
@@ -149,7 +151,7 @@ hodgeConjectureIsExactlyCycleClassReopening cycleMap codimension =
 ------------------------------------------------------------------------
 
 record BSDRankTwoObserverWeld
-    (curve : BSD.E.ShortWeierstrassCurve)
+    (curve : Elliptic.ShortWeierstrassCurve)
     (mordellWeil : BSD.MordellWeilData curve)
     (lFunction : BSD.EllipticLFunctionData curve) : Set where
   constructor bsd-rank-two-observer-weld
