@@ -11,7 +11,7 @@ module DASHI.Analysis.RiemannG2ClayTerminalLocatedR3StarExact where
 -- input for R1+R2.  No equality-at-threshold decision is required.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set₁)
+open import Agda.Primitive using (Set₁; Set₂)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
