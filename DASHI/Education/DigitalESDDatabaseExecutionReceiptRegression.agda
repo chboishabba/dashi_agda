@@ -94,11 +94,11 @@ acmExecutionAttemptedRegression = refl
 ieeeInterfaceFailureBeforeSubmissionRegression :
   Exec.DatabaseExecutionReceipt.outcome Exec.ieeeQ1Execution
   ≡ Exec.interfaceFailureBeforeSubmission
-      "current web transport could not retrieve an IEEE Xplore search-result page for the submitted URL"
+      "current web transport could not retrieve an IEEE Xplore search-result page for the query-bearing URL"
 ieeeInterfaceFailureBeforeSubmissionRegression = refl
 
 acmInterfaceFailureBeforeSubmissionRegression :
   Exec.DatabaseExecutionReceipt.outcome Exec.acmQ1Execution
   ≡ Exec.interfaceFailureBeforeSubmission
-      "current web transport could not retrieve an ACM Digital Library search-result page for the submitted URL"
+      "current web transport could not retrieve an ACM Digital Library search-result page for the query-bearing URL"
 acmInterfaceFailureBeforeSubmissionRegression = refl
