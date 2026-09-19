@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumSources2026Exact as CanonicalSources
+import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact as RouteS20260919
 
 ------------------------------------------------------------------------
 -- Attribution boundary
@@ -197,3 +198,29 @@ fixedSpacingGapIsContinuumClayProof = false
 
 fixedSpacingGapIsContinuumClayProofIsFalse : fixedSpacingGapIsContinuumClayProof ≡ false
 fixedSpacingGapIsContinuumClayProofIsFalse = refl
+
+------------------------------------------------------------------------
+-- 2026-09-19 literal Route-S tranche.
+------------------------------------------------------------------------
+
+routeS20260919ArchiveSHA256 : String
+routeS20260919ArchiveSHA256 =
+  "95bb6c4c2613a4dff9750940757094354d9344f78e63a3db7ded36cf08567137"
+
+routeS20260919LeanKernelRevalidated : Bool
+routeS20260919LeanKernelRevalidated =
+  RouteS20260919.routeSLeanKernelRevalidatedAtSuppliedProject
+
+routeS20260919LeanKernelRevalidatedIsTrue :
+  routeS20260919LeanKernelRevalidated ≡ true
+routeS20260919LeanKernelRevalidatedIsTrue =
+  RouteS20260919.routeSLeanKernelRevalidatedAtSuppliedProjectIsTrue
+
+routeS20260919IsAgdaKernelProof : Bool
+routeS20260919IsAgdaKernelProof =
+  RouteS20260919.routeSLeanTheoremIsAgdaKernelProof
+
+routeS20260919IsAgdaKernelProofIsFalse :
+  routeS20260919IsAgdaKernelProof ≡ false
+routeS20260919IsAgdaKernelProofIsFalse =
+  RouteS20260919.routeSLeanTheoremIsAgdaKernelProofIsFalse
