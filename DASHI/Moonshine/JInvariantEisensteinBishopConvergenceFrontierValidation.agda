@@ -81,6 +81,36 @@ bishopFixedDegreePolynomialGeometricConvergenceIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopFixedDegreePolynomialGeometricConvergenceIsOwned = refl
 
+bishopFixedDegreePolynomialGeometricAbsoluteConvergenceIsOwned :
+  P.bishopFixedDegreePolynomialGeometricAbsoluteConvergenceOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopFixedDegreePolynomialGeometricAbsoluteConvergenceIsOwned = refl
+
+bishopShiftedScaledPolynomialGeometricAbsoluteConvergenceIsOwned :
+  P.bishopShiftedScaledPolynomialGeometricAbsoluteConvergenceOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopShiftedScaledPolynomialGeometricAbsoluteConvergenceIsOwned = refl
+
+bishopEisensteinMajorantSpecializationIsOwned :
+  P.bishopEisensteinMajorantSpecializationOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopEisensteinMajorantSpecializationIsOwned = refl
+
+bishopLiteralRadiusMajorantCompilerIsOwned :
+  P.bishopLiteralRadiusMajorantCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopLiteralRadiusMajorantCompilerIsOwned = refl
+
+canonicalBishopQuotientRadiusRelationIsOwned :
+  P.canonicalBishopQuotientRadiusRelationOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+canonicalBishopQuotientRadiusRelationIsOwned = refl
+
+literalQToBishopRadiusSameObjectStillUnpaid :
+  P.literalQToBishopRadiusSameObjectOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+literalQToBishopRadiusSameObjectStillUnpaid = refl
+
 bishopDegreeFourPolynomialGeometricConvergenceIsOwned :
   P.bishopDegreeFourPolynomialGeometricConvergenceOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
@@ -111,10 +141,10 @@ genericSetoidComplexQuotientRingWeldIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 genericSetoidComplexQuotientRingWeldIsOwned = refl
 
-fastCauchyQuotientOperationCompatibilityCompilerIsOwned :
-  P.fastCauchyQuotientOperationCompatibilityCompilerOwned
+fastCauchySetQuotientComplexCompatibilityCompilerIsOwned :
+  P.fastCauchySetQuotientComplexCompatibilityCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
-fastCauchyQuotientOperationCompatibilityCompilerIsOwned = refl
+fastCauchySetQuotientComplexCompatibilityCompilerIsOwned = refl
 
 concreteLegacyQuotientStillUnpaid :
   P.concreteLegacyQuotientInhabited
