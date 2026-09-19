@@ -27,8 +27,8 @@ module DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationExact w
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)\nimport Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
@@ -105,7 +105,7 @@ pointwiseDefectBelowFiniteDyadicTail :
 pointwiseDefectBelowFiniteDyadicTail defect pointwise start zero =
   Ursell.rationalReflexive 0ℚ
 pointwiseDefectBelowFiniteDyadicTail defect pointwise start (suc count) =
-  Data.Rational.Properties.+-mono-≤
+  ℚP.+-mono-≤
     (pointwise start)
     (pointwiseDefectBelowFiniteDyadicTail
       defect pointwise (suc start) count)
