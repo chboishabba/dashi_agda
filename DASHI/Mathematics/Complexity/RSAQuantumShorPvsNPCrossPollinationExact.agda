@@ -22,6 +22,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact as CostFactor
+import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact as SelfReduce
 import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 import DASHI.Crypto.ShorFactoring as Shor
 import DASHI.ComputerScience.ShorOrderClassicalQuantumMachineComparisonExact as Comparison
@@ -231,8 +233,11 @@ record PvsNPRSAQuantumCrossPollinationBoundary : Set where
     recoverableQuotientInfrastructurePresent : Bool
     hyperfabricConsumerReductionInfrastructurePresent : Bool
     explicitSeamCompatibilityInfrastructurePresent : Bool
+    costAwareFactorisationCompilerPresent : Bool
+    decisionToSearchSelfReductionEnginePresent : Bool
 
     genericCookLevinCNFPolynomialityPaid : Bool
+    booleanFormulaSATSelfReductionInstantiationPaid : Bool
     uniformClassicalRecoveryForNPCompleteWitnessesPaid : Bool
     classicalSuperPolynomialLowerBoundPaid : Bool
     classicalPvsNPResolved : Bool
@@ -244,18 +249,37 @@ canonicalPvsNPRSAQuantumCrossPollinationBoundary :
 canonicalPvsNPRSAQuantumCrossPollinationBoundary =
   pvsnp-rsa-quantum-crosspollination-boundary
     true true true true true true true
-    false false false false
+    true true
+    false false false false false
 
 classicalPvsNPStillOpen :
   classicalPvsNPResolved canonicalPvsNPRSAQuantumCrossPollinationBoundary
   ≡ false
 classicalPvsNPStillOpen = refl
 
+costAwareFactorisationNowPaid :
+  costAwareFactorisationCompilerPresent
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+costAwareFactorisationNowPaid = refl
+
+decisionSearchEngineNowPaid :
+  decisionToSearchSelfReductionEnginePresent
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+decisionSearchEngineNowPaid = refl
+
 genericCookLevinStillOpen :
   genericCookLevinCNFPolynomialityPaid
     canonicalPvsNPRSAQuantumCrossPollinationBoundary
   ≡ false
 genericCookLevinStillOpen = refl
+
+booleanFormulaSATInstantiationStillOpen :
+  booleanFormulaSATSelfReductionInstantiationPaid
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ false
+booleanFormulaSATInstantiationStillOpen = refl
 
 uniformClassicalRecoveryStillOpen :
   uniformClassicalRecoveryForNPCompleteWitnessesPaid
