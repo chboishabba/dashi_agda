@@ -89,7 +89,7 @@ absoluteDefectPartialBelowFiniteDyadicTail dataSet start zero observable
   rewrite Metric.absZeroℚ =
   ℚP.≤-refl
 absoluteDefectPartialBelowFiniteDyadicTail dataSet start (suc count) observable =
-  ℚP.≤-ℚP.≤-trans
+  ℚP.≤-trans
     (ℚP.∣p+q∣≤∣p∣+∣q∣
       (oneStepDefect dataSet start observable)
       (Sum.defectPartial
