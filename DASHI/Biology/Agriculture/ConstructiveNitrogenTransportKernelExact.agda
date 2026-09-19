@@ -233,6 +233,41 @@ bishopRouteMajorantAbsolutelyConvergent problem =
   BishopCompartment.compartmentMajorantAbsolutelyConvergent
     (compartment problem)
 
+
+record BishopNitrogenRouteDominatedSeries : Set where
+  field
+    route : NitrogenTransportRoute
+    dominatedSeries :
+      BishopCompartment.BishopDominatedCompartmentSeries
+
+open BishopNitrogenRouteDominatedSeries public
+
+bishopRouteActualContribution :
+  BishopNitrogenRouteDominatedSeries →
+  Nat →
+  BishopReal.ℝ
+bishopRouteActualContribution problem =
+  BishopCompartment.actualContribution
+    (dominatedSeries problem)
+
+bishopRouteActualSeriesConvergent :
+  (problem : BishopNitrogenRouteDominatedSeries) →
+  BishopSequence._isConvergent
+    (BishopSequence.SeriesOf
+      (bishopRouteActualContribution problem))
+bishopRouteActualSeriesConvergent problem =
+  BishopCompartment.dominatedCompartmentSeriesConvergent
+    (dominatedSeries problem)
+
+bishopRouteActualPartialSumsCauchy :
+  (problem : BishopNitrogenRouteDominatedSeries) →
+  BishopSequence._isCauchy
+    (BishopSequence.SeriesOf
+      (bishopRouteActualContribution problem))
+bishopRouteActualPartialSumsCauchy problem =
+  BishopCompartment.dominatedCompartmentPartialSumsCauchy
+    (dominatedSeries problem)
+
 ------------------------------------------------------------------------
 -- Mathematical / empirical boundary.
 ------------------------------------------------------------------------
@@ -243,6 +278,7 @@ record NitrogenTransportMathBoundary : Set where
     genericDominatedTailCompilerOwned : Bool
     genericTailToCauchyCompositionOwned : Bool
     arbitraryDegreeBishopMajorantConvergenceOwned : Bool
+    dominatedActualRouteCauchyCompilerOwned : Bool
 
     empiricalKernelBoundAutomaticallyOwned : Bool
     geometricLawAssertedForQueenslandSources : Bool
@@ -257,6 +293,7 @@ canonicalNitrogenTransportMathBoundary = record
   ; genericDominatedTailCompilerOwned = true
   ; genericTailToCauchyCompositionOwned = true
   ; arbitraryDegreeBishopMajorantConvergenceOwned = true
+  ; dominatedActualRouteCauchyCompilerOwned = true
   ; empiricalKernelBoundAutomaticallyOwned = false
   ; geometricLawAssertedForQueenslandSources = false
   ; routeIdentityErasedByConvergenceProof = false
