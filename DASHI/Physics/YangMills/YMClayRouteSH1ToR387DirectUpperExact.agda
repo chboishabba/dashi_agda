@@ -12,6 +12,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
+import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanT5DirectSelectedMarkedDecayRound320Exact as R320
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
 import DASHI.Physics.YangMills.BalabanCMP116DirectSelectedSpectralUpperRound387Exact as R387
@@ -84,11 +85,11 @@ selectedMixedDerivativeBelowRootedGeometric :
     right = R278.right tests index
   in
   R278.magnitude extension
-    (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.literalMixedSecondLogDerivative
+    (Cumulant.literalMixedSecondLogDerivative
       (R318.meaning base)
-      (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
+      (Cumulant.sourceDirectionOf
         (R318.meaning base) left)
-      (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
+      (Cumulant.sourceDirectionOf
         (R318.meaning base) right)
       cutoff)
   ≤ Shell.quarter * Power.rationalPower Geo.half time
@@ -122,11 +123,11 @@ selectedMixedDerivativeBelowRootedGeometric
       subst
         (λ power →
           R278.magnitude extension
-            (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.literalMixedSecondLogDerivative
+            (Cumulant.literalMixedSecondLogDerivative
               (R318.meaning base)
-              (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
+              (Cumulant.sourceDirectionOf
                 (R318.meaning base) left)
-              (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
+              (Cumulant.sourceDirectionOf
                 (R318.meaning base) right)
               cutoff)
           ≤ Shell.quarter * power)
@@ -136,11 +137,11 @@ selectedMixedDerivativeBelowRootedGeometric
   subst
     (λ distance →
       R278.magnitude extension
-        (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.literalMixedSecondLogDerivative
+        (Cumulant.literalMixedSecondLogDerivative
           (R318.meaning base)
-          (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
+          (Cumulant.sourceDirectionOf
             (R318.meaning base) left)
-          (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
+          (Cumulant.sourceDirectionOf
             (R318.meaning base) right)
           cutoff)
       ≤ Shell.quarter * Power.rationalPower Geo.half distance)
@@ -160,25 +161,27 @@ h1CalibrationBuildsR387DirectUpper :
   RouteSH1TerminalCalibration base tests spectrumSource →
   R387.DirectSelectedSpectralUpper base tests spectrumSource
 h1CalibrationBuildsR387DirectUpper
-    {spectrumSource = spectrumSource} calibration = record
+    {extension = extension} {base = base}
+    {tests = tests} {spectrumSource = spectrumSource}
+    calibration = record
   { R387.DirectSelectedSpectralUpper.selectedResponseBelowSpectrumEnvelope =
       λ cutoff observable time →
+        let
+          index = R281.indexFor spectrumSource observable time
+          left = R278.left tests index
+          right = R278.right tests index
+        in
         subst
           (λ upper →
-            let index = R281.indexFor spectrumSource observable time
-                left = R278.left _ index
-                right = R278.right _ index
-            in
-            R278.magnitude _
-              (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.literalMixedSecondLogDerivative
-                (R318.meaning _)
-                (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
-                  (R318.meaning _) left)
-                (DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact.sourceDirectionOf
-                  (R318.meaning _) right)
+            R278.magnitude extension
+              (Cumulant.literalMixedSecondLogDerivative
+                (R318.meaning base)
+                (Cumulant.sourceDirectionOf (R318.meaning base) left)
+                (Cumulant.sourceDirectionOf (R318.meaning base) right)
                 cutoff)
             ≤ upper)
-          (sym (spectrumEnvelopeIsRootedGeometric calibration observable time))
+          (sym (spectrumEnvelopeIsRootedGeometric
+            calibration observable time))
           (selectedMixedDerivativeBelowRootedGeometric
             calibration cutoff observable time)
   }
