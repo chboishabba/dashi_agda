@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact where
 
 ------------------------------------------------------------------------
