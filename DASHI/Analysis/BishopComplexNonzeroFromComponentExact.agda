@@ -43,6 +43,52 @@ negativeNegatesPositive {x} xNegative =
   BishopP.<-respʳ-≃ rightNeg
     (BishopP.<-respˡ-≃ leftZero shifted)
 
+apartCongruent :
+  ∀ {left right : BishopReal.ℝ} →
+  BishopReal._≃_ left right →
+  BishopReal._≄0 left →
+  BishopReal._≄0 right
+apartCongruent equivalent (inj₁ leftNegative) =
+  inj₁
+    (BishopP.<-respˡ-≃
+      (BishopP.≃-symm equivalent)
+      leftNegative)
+apartCongruent equivalent (inj₂ leftPositive) =
+  inj₂
+    (BishopP.<-respʳ-≃
+      equivalent
+      leftPositive)
+
+positiveNegatesNegative :
+  ∀ {x : BishopReal.ℝ} →
+  BishopReal._<_ BishopReal.0ℝ x →
+  BishopReal._<_ (BishopReal.- x) BishopReal.0ℝ
+positiveNegatesNegative {x} xPositive =
+  let
+    shifted =
+      BishopP.+-monoʳ-< (BishopReal.- x) xPositive
+
+    leftNeg :
+      BishopReal._≃_
+        (BishopReal._+_ (BishopReal.- x) BishopReal.0ℝ)
+        (BishopReal.- x)
+    leftNeg = BishopP.+-identityʳ (BishopReal.- x)
+
+    rightZero :
+      BishopReal._≃_
+        (BishopReal._+_ (BishopReal.- x) x)
+        BishopReal.0ℝ
+    rightZero =
+      let open BishopP.ℝ-Solver in
+      solve 1
+        (λ x′ → (⊝ x′) ⊕ x′ ⊜ Κ 0ℚᵘ)
+        BishopP.≃-refl x
+  in
+  BishopP.<-respʳ-≃ rightZero
+    (BishopP.<-respˡ-≃
+      (BishopP.≃-symm leftNeg)
+      shifted)
+
 squarePositiveFromApart :
   ∀ {x : BishopReal.ℝ} →
   BishopReal._≄0 x →
