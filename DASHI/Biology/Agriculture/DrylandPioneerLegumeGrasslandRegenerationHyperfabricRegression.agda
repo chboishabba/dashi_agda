@@ -100,3 +100,9 @@ routeFallowRecoveryJoinLifted :
   H.queenslandRouteFallowRecoveryJoinOwned
     H.canonicalRegenerationHyperfabricBoundary ≡ true
 routeFallowRecoveryJoinLifted = refl
+
+
+queenslandResponseCurveLifted :
+  H.queenslandMultiRateFertilizerResponseCurveOwned
+    H.canonicalRegenerationHyperfabricBoundary ≡ true
+queenslandResponseCurveLifted = refl
