@@ -41,6 +41,8 @@ import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as BishopExp
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as FiniteQ
 import DASHI.Moonshine.JInvariantQPrincipalStripModulusExact as QModulus
 import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneRadiusExact as BishopRadius
+import DASHI.Moonshine.JInvariantQBishopExponentTransportCompilerExact as Exponent
+import DASHI.Analysis.MarxConstructiveRealRingNormalisation as Ring
 import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldExact as RadiusWeld
 
 qExponent :
@@ -79,6 +81,33 @@ record LiteralQBishopRadiusTransport
             (BishopRadius.qExponentMagnitude piB imagB)))
 
 open LiteralQBishopRadiusTransport public
+
+
+transportFromMagnitudeAndExponential :
+  ∀ {C : Complex.ConstructedComplexPackage}
+    (N : Ring.ConstructedRealRingNormalisationLaws
+      (Real.real (Complex.realPackage C)))
+    (tau : Complex.ComplexPair (Real.real (Complex.realPackage C)))
+    {piB imagB : BishopReal.ℝ}
+    (magnitude :
+      Exponent.QBishopExponentMagnitudeTransport C tau piB imagB) →
+  (Exponent.toLegacy magnitude
+      (BishopExp.bishopExp
+        (BishopReal.-_
+          (BishopRadius.qExponentMagnitude piB imagB)))
+    ≡
+    Real.exp
+      (Real.exponential (Complex.realPackage C))
+      (Exponent.toLegacy magnitude
+        (BishopReal.-_
+          (BishopRadius.qExponentMagnitude piB imagB)))) →
+  LiteralQBishopRadiusTransport C tau piB imagB
+transportFromMagnitudeAndExponential N tau magnitude expAgreement = record
+  { toLegacy = Exponent.toLegacy magnitude
+  ; exponentAgreement =
+      Exponent.compileExponentAgreement N tau magnitude
+  ; exponentialAgreement = expAgreement
+  }
 
 LegacyRadiusRelation :
   ∀ {C tau piB imagB} →
