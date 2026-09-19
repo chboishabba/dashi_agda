@@ -288,6 +288,41 @@ The R0 proof-carrying certificate route remains optional: rational/interval real
 
 The 8889 cluster-lower route remains an optional producer only if theorem-bearing same-carrier transport reappears together with a strict local bridge to actual `ClusterResponse`.
 
+### RH R2 inverse-square coefficient recut — 2026-09-19
+
+NEW PRODUCER / ANALYTIC RECUT:
+
+The companion Lean branch now source-writes a domain-neutral coefficient-composition theorem:
+
+```text
+near <= cNear/t^2
+far <= cFar/t^2
+gamma <= cGamma/t^2
+cCluster/t^2 <= actual ClusterResponse
+cNear + cFar + cGamma < cCluster
+------------------------------------------------
+near + far + gamma < actual ClusterResponse.
+```
+
+The already-written quartic far-shell donor specializes the far channel to
+
+```text
+J=t^4,
+farShell <= 144*A/t^2,
+so cFar = 144*A.
+```
+
+This does not close R2 in Agda: the new Lean theorem still needs theorem-bearing replay/transport to the selected final scalar/order.  But it removes the combined strict inequality as fresh arithmetic.  The remaining analytic rate inputs are now:
+
+```text
+N2  literal/certified near <= cNear/t^2
+G2  sharp same-taper Gamma <= cGamma/t^2
+C2  cCluster/t^2 <= actual ClusterResponse
+K2  cNear + 144*A + cGamma < cCluster.
+```
+
+Do not count `K2` plus the generic composition theorem as a new cluster surrogate; the terminal consumer remains the actual `ClusterResponse`.
+
 ## 8. Firewalls
 
 Do not allow:
