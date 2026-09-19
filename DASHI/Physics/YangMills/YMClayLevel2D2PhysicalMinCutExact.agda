@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.YMClayLevel2R129CompositeOperatorAttachmentExact 
 import DASHI.Physics.YangMills.YMClayLevel2R129LiteralOPECoefficientWeldExact as R129Literal
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as OPE
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTransportABIInsufficiencyExact as Sound
+import DASHI.Physics.YangMills.YMClayLevel2D2R129CompositeConvergenceExact as D2d
 
 ------------------------------------------------------------------------
 -- LEVEL-2 D2 PHYSICAL MIN-CUT
@@ -117,6 +118,28 @@ parallelCompositeOperatorTheoryAllowed = false
 parallelCompositeOperatorTheoryAllowedIsFalse :
   parallelCompositeOperatorTheoryAllowed ≡ false
 parallelCompositeOperatorTheoryAllowedIsFalse = refl
+
+
+d2dFiniteDepthEqualityMandatory : Bool
+d2dFiniteDepthEqualityMandatory = D2d.finiteDepthEqualsCompletedCompositeRequired
+
+d2dFiniteDepthEqualityMandatoryIsFalse :
+  d2dFiniteDepthEqualityMandatory ≡ false
+d2dFiniteDepthEqualityMandatoryIsFalse =
+  D2d.finiteDepthEqualsCompletedCompositeRequiredIsFalse
+
+d2dSameFamilyCompositeConvergenceRequired : Bool
+d2dSameFamilyCompositeConvergenceRequired =
+  D2d.sameFamilyCompositeConvergenceRequired
+
+d2dSameFamilyCompositeConvergenceRequiredIsTrue :
+  d2dSameFamilyCompositeConvergenceRequired ≡ true
+d2dSameFamilyCompositeConvergenceRequiredIsTrue =
+  D2d.sameFamilyCompositeConvergenceRequiredIsTrue
+
+d2dUnifiedCompositeCompletionCompilerLevel : ProofLevel
+d2dUnifiedCompositeCompletionCompilerLevel =
+  D2d.unifiedCompositeCompletionCompilerLevel
 
 r129SameFamilyOperatorAttachmentStillPhysical : Bool
 r129SameFamilyOperatorAttachmentStillPhysical = true
