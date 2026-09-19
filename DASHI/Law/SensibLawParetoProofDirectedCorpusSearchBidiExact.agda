@@ -89,9 +89,9 @@ herzogIncidentWeldSearchDirective = certified-search-directive
 ------------------------------------------------------------------------
 
 data SearchAssessmentDisposition : Set where
-  sourceMayPayRequirement
-  sourceMayActivateDefeater
-  sourceLeavesRequirementOpen
+  sourceMayPayRequirement : SearchAssessmentDisposition
+  sourceMayActivateDefeater : SearchAssessmentDisposition
+  sourceLeavesRequirementOpen : SearchAssessmentDisposition
   : SearchAssessmentDisposition
 
 data ParetoCertificateAutomaticallyPaysProofGap : Set where

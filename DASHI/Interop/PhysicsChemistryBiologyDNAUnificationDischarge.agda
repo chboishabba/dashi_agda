@@ -24,23 +24,17 @@ import DASHI.Physics.Closure.DevelopmentalGenomicInverseBridge as Dev
 -- to organism-scale closure.
 
 data PhysicsChemistryBiologyDNALane : Set where
-  physicsToChemistryRightLimitsLane :
-    PhysicsChemistryBiologyDNALane
+  physicsToChemistryRightLimitsLane : PhysicsChemistryBiologyDNALane
 
-  proteinHormoneChemistryCellLane :
-    PhysicsChemistryBiologyDNALane
+  proteinHormoneChemistryCellLane : PhysicsChemistryBiologyDNALane
 
-  developmentalGenomicInverseLane :
-    PhysicsChemistryBiologyDNALane
+  developmentalGenomicInverseLane : PhysicsChemistryBiologyDNALane
 
-  genomeSensorimotorConstraintLane :
-    PhysicsChemistryBiologyDNALane
+  genomeSensorimotorConstraintLane : PhysicsChemistryBiologyDNALane
 
-  bioAnimalexicBodyMeaningLane :
-    PhysicsChemistryBiologyDNALane
+  bioAnimalexicBodyMeaningLane : PhysicsChemistryBiologyDNALane
 
-  observationTransportGovernanceLane :
-    PhysicsChemistryBiologyDNALane
+  observationTransportGovernanceLane : PhysicsChemistryBiologyDNALane
 
 canonicalPhysicsChemistryBiologyDNALanes :
   List PhysicsChemistryBiologyDNALane
@@ -54,38 +48,27 @@ canonicalPhysicsChemistryBiologyDNALanes =
   ∷ []
 
 data PhysicsChemistryBiologyDNAGuard : Set where
-  NoPhysicsToBiologyDerivationClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoPhysicsToBiologyDerivationClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoFinishedChemistryClosureClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoFinishedChemistryClosureClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoFullProteinFoldingClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoFullProteinFoldingClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoHormoneToBehaviourClosureClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoHormoneToBehaviourClosureClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoDNAEncodesMeaningClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoDNAEncodesMeaningClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoDNAEncodesQualiaClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoDNAEncodesQualiaClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoGenomeToConnectomeClosureClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoGenomeToConnectomeClosureClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoDiseaseCausationClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoDiseaseCausationClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoFullBiologyClosureClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoFullBiologyClosureClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoCrossSpeciesIsomorphismClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoCrossSpeciesIsomorphismClaim : PhysicsChemistryBiologyDNAGuard
 
-  NoExternalAuthorityPromotionClaim :
-    PhysicsChemistryBiologyDNAGuard
+  NoExternalAuthorityPromotionClaim : PhysicsChemistryBiologyDNAGuard
 
 canonicalPhysicsChemistryBiologyDNAGuards :
   List PhysicsChemistryBiologyDNAGuard

@@ -224,9 +224,13 @@ wikipediaEnumerationDoesNotCreateFormalCoverage :
   WikipediaEnumerationCreatesFormalCoverage → ⊥
 wikipediaEnumerationDoesNotCreateFormalCoverage ()
 
-sharedBridgeRetainsDisciplineSources :
+sharedBridgeRetainsDisciplineSpecificSources :
   SocialScienceBridgeErasesDisciplineSpecificSources → ⊥
 sharedBridgeRetainsDisciplineSpecificSources ()
+
+sharedBridgeRetainsDisciplineSources :
+  SocialScienceBridgeErasesDisciplineSpecificSources → ⊥
+sharedBridgeRetainsDisciplineSources = sharedBridgeRetainsDisciplineSpecificSources
 
 record SocialScienceFunnelBoundary : Set where
   constructor social-science-funnel-boundary

@@ -18,8 +18,8 @@ import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
 ------------------------------------------------------------------------
 
 data ThirdOrderRole : Set where
-  subclassRelation partRelation oppositeRelation studiesRelation subjectRelation
-  formulaSymbolRelation externalIdentifierRelation ontologyFacetRelation
+  subclassRelation partRelation oppositeRelation studiesRelation subjectRelation : ThirdOrderRole
+  formulaSymbolRelation externalIdentifierRelation ontologyFacetRelation : ThirdOrderRole
   repositoryReuseRelation unresolvedNextRelation : ThirdOrderRole
 
 record ThirdOrderRelation : Set where

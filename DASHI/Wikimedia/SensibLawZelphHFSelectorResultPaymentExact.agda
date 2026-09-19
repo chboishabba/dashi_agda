@@ -19,19 +19,12 @@ import DASHI.Wikimedia.SensibLawZelphHFPrerequisiteBridgeExact as Zelph
 ------------------------------------------------------------------------
 
 data SelectorExecutionOutcome : Set where
-  executedWithOutput
-  executedNoMatch
-  failedRequiredOutputContract
-  engineUnavailable
-  engineFailed
-  : SelectorExecutionOutcome
+  executedWithOutput executedNoMatch failedRequiredOutputContract : SelectorExecutionOutcome
+  engineUnavailable engineFailed : SelectorExecutionOutcome
 
 data ResultSignal : Set where
-  supportsCurrentObligation
-  insufficientForCurrentObligation
-  conflictingBoundedEvidence
-  changedContradictoryEvidence
-  : ResultSignal
+  supportsCurrentObligation insufficientForCurrentObligation : ResultSignal
+  conflictingBoundedEvidence changedContradictoryEvidence : ResultSignal
 
 record ContentAddressReceipt : Set where
   constructor content-address-receipt
@@ -106,11 +99,11 @@ open VerifiedPrerequisitePayment public
 
 data SelectorResultDecision (result : BoundedSelectorResult) : Set where
   payPrerequisite :
-    VerifiedPrerequisitePayment result → SelectorResultDecision result
+  VerifiedPrerequisitePayment result → SelectorResultDecision result :
   keepOpen :
-    String → SelectorResultDecision result
+  String → SelectorResultDecision result :
   splitDiagnosis :
-    List Search.BundleDiagnosis → String → SelectorResultDecision result
+  List Search.BundleDiagnosis → String → SelectorResultDecision result :
   reactivateDiagnosis :
     Search.BundleDiagnosis → String → String → SelectorResultDecision result
 

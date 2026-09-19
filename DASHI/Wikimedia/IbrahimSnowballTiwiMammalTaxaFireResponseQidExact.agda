@@ -59,7 +59,7 @@ paleFieldRatQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data TiwiMammalSourceRole : Set where
-  experimentalFireMammalResponse
+  experimentalFireMammalResponse : TiwiMammalSourceRole
   exactPlotRelativeAbundanceDataset : TiwiMammalSourceRole
 
 record TiwiMammalPrimarySource : Set where
@@ -106,12 +106,12 @@ daviesDryad2018 = tiwi-mammal-primary-source
 ------------------------------------------------------------------------
 
 data TiwiMammalTaxon : Set where
-  northernBrownBandicoot
-  commonBrushtailPossum
-  blackFootedTreeRat
-  brushTailedRabbitRat
-  grasslandMelomys
-  paleFieldRat
+  northernBrownBandicoot : TiwiMammalTaxon
+  commonBrushtailPossum : TiwiMammalTaxon
+  blackFootedTreeRat : TiwiMammalTaxon
+  brushTailedRabbitRat : TiwiMammalTaxon
+  grasslandMelomys : TiwiMammalTaxon
+  paleFieldRat : TiwiMammalTaxon
   miceAndDunnartsAggregate : TiwiMammalTaxon
 
 record TiwiMammalEvidenceCell : Set where

@@ -108,7 +108,7 @@ data DemoState : Set where
   restoredWithoutResidue : DemoState
   restoredWithResidue : DemoState
 
-data DemoEndpoint : Set where sameEndpoint : DemoEndpoint
+data DemoEndpoint : Set where demoEndpoint : DemoEndpoint
 data DemoRecovery : Set where recovered impaired : DemoRecovery
 data DemoFuture : Set where broadFuture constrainedFuture : DemoFuture
 
@@ -118,7 +118,7 @@ demoFibre = record
   ; CoarseEndpoint = DemoEndpoint
   ; RecoveryState = DemoRecovery
   ; FutureCone = DemoFuture
-  ; endpointOf = λ _ → sameEndpoint
+  ; endpointOf = λ _ → demoEndpoint
   ; residueOf = λ
       { original → Residue.residueAbsent
       ; restoredWithoutResidue → Residue.residueAbsent
@@ -174,3 +174,25 @@ restoredEndpointDoesNotAutoPromoteToResidueErased ()
 recoveryDoesNotAutoPromoteToHistoricalLossErased :
   RecoveryImpliesHistoricalLossErasedPermission → ⊥
 recoveryDoesNotAutoPromoteToHistoricalLossErased ()
+
+record TrajectoryRecoveryFibreBoundary : Set where
+  constructor trajectoryRecoveryFibreBoundary
+  field
+    restoredEndpointImpliesRecoveredState : Bool
+    restoredEndpointImpliesRecoveredStateIsFalse :
+      restoredEndpointImpliesRecoveredState ≡ false
+
+    restoredEndpointImpliesResidueErased : Bool
+    restoredEndpointImpliesResidueErasedIsFalse :
+      restoredEndpointImpliesResidueErased ≡ false
+
+    recoveryImpliesHistoricalLossErased : Bool
+    recoveryImpliesHistoricalLossErasedIsFalse :
+      recoveryImpliesHistoricalLossErased ≡ false
+
+canonicalTrajectoryRecoveryFibreBoundary : TrajectoryRecoveryFibreBoundary
+canonicalTrajectoryRecoveryFibreBoundary =
+  trajectoryRecoveryFibreBoundary
+    false refl
+    false refl
+    false refl

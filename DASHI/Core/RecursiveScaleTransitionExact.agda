@@ -28,12 +28,12 @@ record SituatedLowerState
 open SituatedLowerState public
 
 data PersistentRole : Set where
-  orbitClass
-  invariantSet
-  metastableClass
-  resonanceClass
-  symmetrySector
-  quotientClass
+  orbitClass : PersistentRole
+  invariantSet : PersistentRole
+  metastableClass : PersistentRole
+  resonanceClass : PersistentRole
+  symmetrySector : PersistentRole
+  quotientClass : PersistentRole
   attractorClass : PersistentRole
 
 ------------------------------------------------------------------------

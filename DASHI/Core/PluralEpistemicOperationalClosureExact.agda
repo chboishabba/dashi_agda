@@ -38,20 +38,20 @@ record PluralOperationalSystem
 open PluralOperationalSystem public
 
 data OperationalClosureCoordinate : Set where
-  declaredCommitmentCoordinate
-  realisedEffectCoordinate
-  communityDefinedOutcomeCoordinate
-  communityAuthorityCoordinate
-  independentMonitoringCoordinate
-  correctionResponseCoordinate
-  preventionOfRecurrenceCoordinate
+  declaredCommitmentCoordinate : OperationalClosureCoordinate
+  realisedEffectCoordinate : OperationalClosureCoordinate
+  communityDefinedOutcomeCoordinate : OperationalClosureCoordinate
+  communityAuthorityCoordinate : OperationalClosureCoordinate
+  independentMonitoringCoordinate : OperationalClosureCoordinate
+  correctionResponseCoordinate : OperationalClosureCoordinate
+  preventionOfRecurrenceCoordinate : OperationalClosureCoordinate
   : OperationalClosureCoordinate
 
 data OperationalClosureState : Set where
-  coordinatePaid
-  coordinatePartial
-  coordinateOpen
-  coordinateSourceUnresolved
+  coordinatePaid : OperationalClosureState
+  coordinatePartial : OperationalClosureState
+  coordinateOpen : OperationalClosureState
+  coordinateSourceUnresolved : OperationalClosureState
   : OperationalClosureState
 
 record OperationalClosureSnapshot : Set where
@@ -73,10 +73,10 @@ record FullOperationalClosure (snapshot : OperationalClosureSnapshot) : Set wher
     recurrencePreventionPaid : stateFor snapshot preventionOfRecurrenceCoordinate ≡ coordinatePaid
 
 data EvidenceStrand : Set where
-  institutionalSelfReportStrand
-  affectedCommunityStrand
-  independentMonitoringStrand
-  externalReviewStrand
+  institutionalSelfReportStrand : EvidenceStrand
+  affectedCommunityStrand : EvidenceStrand
+  independentMonitoringStrand : EvidenceStrand
+  externalReviewStrand : EvidenceStrand
   : EvidenceStrand
 
 record PluralEvidenceAssessment : Set where
@@ -141,8 +141,8 @@ coordinatedUseDoesNotRequireFusion :
 coordinatedUseDoesNotRequireFusion = refl
 
 data DemoState : Set where
-  reportSameOutcomeUnrepaired
-  reportSameOutcomeRepaired
+  reportSameOutcomeUnrepaired : DemoState
+  reportSameOutcomeRepaired : DemoState
   : DemoState
 
 data DemoDeclaration : Set where sameBenevolentDeclaration : DemoDeclaration
@@ -237,11 +237,11 @@ declarationCannotRecoverCorrectionResponse =
       sameDeclarationsCollide correctionResponsesDiffer)
 
 data OperationalRelationClass : Set where
-  declaredOnly
-  activityWithoutRealisedClosure
-  partialOperationalCorrection
-  authorityBearingMaterialTransformation
-  correctionClosureRisk
+  declaredOnly : OperationalRelationClass
+  activityWithoutRealisedClosure : OperationalRelationClass
+  partialOperationalCorrection : OperationalRelationClass
+  authorityBearingMaterialTransformation : OperationalRelationClass
+  correctionClosureRisk : OperationalRelationClass
   : OperationalRelationClass
 
 record OperationalRelationReceipt : Set where
@@ -261,11 +261,11 @@ record OperationalRelationReceipt : Set where
 open OperationalRelationReceipt public
 
 data OperationalProducer : Set where
-  realisedOutcomeProducer
-  communityAuthorityProducer
-  independentMonitoringProducer
-  correctionLoopProducer
-  recurrencePreventionProducer
+  realisedOutcomeProducer : OperationalProducer
+  communityAuthorityProducer : OperationalProducer
+  independentMonitoringProducer : OperationalProducer
+  correctionLoopProducer : OperationalProducer
+  recurrencePreventionProducer : OperationalProducer
   : OperationalProducer
 
 producerFor : OperationalClosureCoordinate → OperationalProducer

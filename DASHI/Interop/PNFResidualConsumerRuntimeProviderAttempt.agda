@@ -18,8 +18,7 @@ import Ontology.Hecke.PNFResidualBridge as Hecke
 -- consumer ids, or Hecke candidate-pool receipt ids.
 
 data PNFResidualConsumerRuntimeProviderConclusion : Set where
-  diagnosticOnlyMissingRuntimePayload :
-    PNFResidualConsumerRuntimeProviderConclusion
+  diagnosticOnlyMissingRuntimePayload : PNFResidualConsumerRuntimeProviderConclusion
 
 record PNFResidualConsumerRuntimeProviderAttempt : Setω where
   field
@@ -125,8 +124,8 @@ runtimeProviderAttemptConclusionIsDiagnostic = refl
 
 data PNFResidualConsumerRuntimeProviderOutput : Setω where
   runtimePayloadPresent :
-    Request.PNFResidualConsumerRuntimeReceiptPayload →
-    PNFResidualConsumerRuntimeProviderOutput
+  Request.PNFResidualConsumerRuntimeReceiptPayload → :
+  PNFResidualConsumerRuntimeProviderOutput :
   runtimePayloadAbsentDiagnostic :
     PNFResidualConsumerRuntimeProviderAttempt →
     PNFResidualConsumerRuntimeProviderOutput

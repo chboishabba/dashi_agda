@@ -26,8 +26,7 @@ listCount (_ ∷ xs) =
   suc (listCount xs)
 
 data YinYangPolarityBoundaryStatus : Set where
-  candidateOnlyNonPromotingBoundary :
-    YinYangPolarityBoundaryStatus
+  candidateOnlyNonPromotingBoundary : YinYangPolarityBoundaryStatus
 
 data PolarityTerm : Set where
   yinPole : PolarityTerm

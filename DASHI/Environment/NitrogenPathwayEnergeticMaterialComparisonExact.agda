@@ -20,24 +20,24 @@ import DASHI.Environment.PlasmaActivatedWaterAquaticNutrientBridgeExact as PAW
 ------------------------------------------------------------------------
 
 data NitrogenOrigin : Set where
-  newlyFixedAtmosphericNitrogen
-  recycledPreviouslyFixedNitrogen
+  newlyFixedAtmosphericNitrogen : NitrogenOrigin
+  recycledPreviouslyFixedNitrogen : NitrogenOrigin
   mixedOrOriginUnresolved : NitrogenOrigin
 
 data NitrogenPathway : Set where
-  haberBoschDerivedNitrogen
-  plasmaFixedNitrogen
-  biologicalNitrogenFixation
-  compostMineralisation
-  aquaponicWasteRecovery
+  haberBoschDerivedNitrogen : NitrogenPathway
+  plasmaFixedNitrogen : NitrogenPathway
+  biologicalNitrogenFixation : NitrogenPathway
+  compostMineralisation : NitrogenPathway
+  aquaponicWasteRecovery : NitrogenPathway
   knfLocalRecycling : NitrogenPathway
 
 data NitrogenDeliveryRoute : Set where
-  manufacturedFertiliserInput
-  aqueousNutrientInput
-  symbioticRootFixation
-  soilOrganicAmendment
-  recirculatingAquaticNutrient
+  manufacturedFertiliserInput : NitrogenDeliveryRoute
+  aqueousNutrientInput : NitrogenDeliveryRoute
+  symbioticRootFixation : NitrogenDeliveryRoute
+  soilOrganicAmendment : NitrogenDeliveryRoute
+  recirculatingAquaticNutrient : NitrogenDeliveryRoute
   localMaterialRecycling : NitrogenDeliveryRoute
 
 originForPathway : NitrogenPathway → NitrogenOrigin

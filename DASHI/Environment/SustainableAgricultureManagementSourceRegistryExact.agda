@@ -15,30 +15,30 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 
 data ClaimStage : Set where
-  externalSourceClaim
-  dashiReconstruction
-  dashiCrossSourceInference
-  dashiTheorem
+  externalSourceClaim : ClaimStage
+  dashiReconstruction : ClaimStage
+  dashiCrossSourceInference : ClaimStage
+  dashiTheorem : ClaimStage
   promotedRecommendation : ClaimStage
 
 data SourceKind : Set where
-  intergovernmentalFramework
-  governmentPracticeStandard
-  governmentExtension
-  scholarlyOrTechnicalNote
+  intergovernmentalFramework : SourceKind
+  governmentPracticeStandard : SourceKind
+  governmentExtension : SourceKind
+  scholarlyOrTechnicalNote : SourceKind
   existingTypedOwner : SourceKind
 
 data PracticeFamily : Set where
-  agroecologyFramework
-  integratedPestManagement
-  coverCropping
-  conservationNoTill
-  conservationCropRotation
-  agroforestry
-  silvopasture
-  prescribedGrazing
-  organicSoilHealthManagement
-  koreanNaturalFarming
+  agroecologyFramework : PracticeFamily
+  integratedPestManagement : PracticeFamily
+  coverCropping : PracticeFamily
+  conservationNoTill : PracticeFamily
+  conservationCropRotation : PracticeFamily
+  agroforestry : PracticeFamily
+  silvopasture : PracticeFamily
+  prescribedGrazing : PracticeFamily
+  organicSoilHealthManagement : PracticeFamily
+  koreanNaturalFarming : PracticeFamily
   permacultureDesign : PracticeFamily
 
 record SustainableAgricultureSource : Set where

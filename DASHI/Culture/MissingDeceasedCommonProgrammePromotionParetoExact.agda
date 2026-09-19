@@ -17,10 +17,10 @@ import DASHI.Culture.MissingDeceasedCommonProgrammePromotionStateExact as Promot
 ------------------------------------------------------------------------
 
 data PromotionSearchClass : Set where
-  explicitHistoricalReference
-  programmeIdentifierSecondPersonSearch
-  institutionalWorkPackageSearch
-  intermediaryChainSearch
+  explicitHistoricalReference : PromotionSearchClass
+  programmeIdentifierSecondPersonSearch : PromotionSearchClass
+  institutionalWorkPackageSearch : PromotionSearchClass
+  intermediaryChainSearch : PromotionSearchClass
   preEventOperationalSearch : PromotionSearchClass
 
 record PromotionSearchCandidate : Set where

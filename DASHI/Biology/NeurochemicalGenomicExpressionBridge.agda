@@ -24,26 +24,19 @@ import DASHI.Physics.Closure.DevelopmentalGenomicInverseBridge as Developmental
 data Never : Set where
 
 data GenomicExpressionBridgeRoute : Set where
-  boundedCandidateObservationRoute :
-    GenomicExpressionBridgeRoute
+  boundedCandidateObservationRoute : GenomicExpressionBridgeRoute
 
-  genomeToBehaviorClosureRoute :
-    GenomicExpressionBridgeRoute
+  genomeToBehaviorClosureRoute : GenomicExpressionBridgeRoute
 
-  genomeToConnectomeClosureRoute :
-    GenomicExpressionBridgeRoute
+  genomeToConnectomeClosureRoute : GenomicExpressionBridgeRoute
 
-  psychiatricGeneticsRoute :
-    GenomicExpressionBridgeRoute
+  psychiatricGeneticsRoute : GenomicExpressionBridgeRoute
 
-  diseaseCausationRoute :
-    GenomicExpressionBridgeRoute
+  diseaseCausationRoute : GenomicExpressionBridgeRoute
 
-  clinicalAuthorityRoute :
-    GenomicExpressionBridgeRoute
+  clinicalAuthorityRoute : GenomicExpressionBridgeRoute
 
-  therapeuticAuthorityRoute :
-    GenomicExpressionBridgeRoute
+  therapeuticAuthorityRoute : GenomicExpressionBridgeRoute
 
 AdmissibleGenomicExpressionBridgeRoute :
   GenomicExpressionBridgeRoute → Set

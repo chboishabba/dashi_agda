@@ -29,9 +29,10 @@ record CellPhysicalOrganisationCore : Set where
       stressGranuleVoltageWitness ≡
       Granule.canonicalStressGranuleVoltageWitness
 
-    existingBiologyAdapterType : Set
-    existingBiologyAdapterTypeIsCanonical :
-      existingBiologyAdapterType ≡ Existing.ExistingBiologyPhysicalStateAdapter
+    existingBiologyAdapterModuleName : String
+    existingBiologyAdapterModuleNameIsCanonical :
+      existingBiologyAdapterModuleName ≡
+      "DASHI.Biology.Levin.ExistingBiologyPhysicalStateAdapter"
 
     candidateOnly : Bool
     candidateOnlyIsTrue : candidateOnly ≡ true
@@ -62,8 +63,9 @@ canonicalCellPhysicalOrganisationCore = record
   ; ATPOrganisationWitnessIsCanonical = refl
   ; stressGranuleVoltageWitness = Granule.canonicalStressGranuleVoltageWitness
   ; stressGranuleVoltageWitnessIsCanonical = refl
-  ; existingBiologyAdapterType = Existing.ExistingBiologyPhysicalStateAdapter
-  ; existingBiologyAdapterTypeIsCanonical = refl
+  ; existingBiologyAdapterModuleName =
+      "DASHI.Biology.Levin.ExistingBiologyPhysicalStateAdapter"
+  ; existingBiologyAdapterModuleNameIsCanonical = refl
   ; candidateOnly = true
   ; candidateOnlyIsTrue = refl
   ; noStructuredWaterUniversalism = false

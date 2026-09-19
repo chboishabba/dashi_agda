@@ -27,32 +27,23 @@ listCount (_ ∷ xs) =
 -- Candidate-only vocabulary.
 
 data CandidateOnlyKind : Set where
-  rowCandidateKind :
-    CandidateOnlyKind
+  rowCandidateKind : CandidateOnlyKind
 
-  proposalCandidateKind :
-    CandidateOnlyKind
+  proposalCandidateKind : CandidateOnlyKind
 
-  diagnosticCandidateKind :
-    CandidateOnlyKind
+  diagnosticCandidateKind : CandidateOnlyKind
 
-  bridgeCandidateKind :
-    CandidateOnlyKind
+  bridgeCandidateKind : CandidateOnlyKind
 
-  roleCandidateKind :
-    CandidateOnlyKind
+  roleCandidateKind : CandidateOnlyKind
 
-  vectorCandidateKind :
-    CandidateOnlyKind
+  vectorCandidateKind : CandidateOnlyKind
 
-  rankingCandidateKind :
-    CandidateOnlyKind
+  rankingCandidateKind : CandidateOnlyKind
 
-  functionalCandidateKind :
-    CandidateOnlyKind
+  functionalCandidateKind : CandidateOnlyKind
 
-  operatorCandidateKind :
-    CandidateOnlyKind
+  operatorCandidateKind : CandidateOnlyKind
 
   namedCandidateKind :
     String →
@@ -76,32 +67,23 @@ canonicalCandidateOnlyKindCount =
   listCount canonicalCandidateOnlyKinds
 
 data CandidateOnlyStatus : Set where
-  rowCandidateOnlyStatus :
-    CandidateOnlyStatus
+  rowCandidateOnlyStatus : CandidateOnlyStatus
 
-  proposalCandidateOnlyStatus :
-    CandidateOnlyStatus
+  proposalCandidateOnlyStatus : CandidateOnlyStatus
 
-  diagnosticCandidateOnlyStatus :
-    CandidateOnlyStatus
+  diagnosticCandidateOnlyStatus : CandidateOnlyStatus
 
-  bridgeCandidateOnlyStatus :
-    CandidateOnlyStatus
+  bridgeCandidateOnlyStatus : CandidateOnlyStatus
 
-  roleCandidateOnlyStatus :
-    CandidateOnlyStatus
+  roleCandidateOnlyStatus : CandidateOnlyStatus
 
-  vectorCandidateOnlyStatus :
-    CandidateOnlyStatus
+  vectorCandidateOnlyStatus : CandidateOnlyStatus
 
-  rankingCandidateOnlyStatus :
-    CandidateOnlyStatus
+  rankingCandidateOnlyStatus : CandidateOnlyStatus
 
-  functionalCandidateOnlyStatus :
-    CandidateOnlyStatus
+  functionalCandidateOnlyStatus : CandidateOnlyStatus
 
-  operatorCandidateOnlyStatus :
-    CandidateOnlyStatus
+  operatorCandidateOnlyStatus : CandidateOnlyStatus
 
   namedCandidateOnlyStatus :
     String →
@@ -149,23 +131,17 @@ canonicalCandidateOnlyStatusCount =
   listCount canonicalCandidateOnlyStatuses
 
 data CandidateAuthorityLane : Set where
-  truthAuthorityLane :
-    CandidateAuthorityLane
+  truthAuthorityLane : CandidateAuthorityLane
 
-  supportAuthorityLane :
-    CandidateAuthorityLane
+  supportAuthorityLane : CandidateAuthorityLane
 
-  admissibilityAuthorityLane :
-    CandidateAuthorityLane
+  admissibilityAuthorityLane : CandidateAuthorityLane
 
-  tradingAuthorityLane :
-    CandidateAuthorityLane
+  tradingAuthorityLane : CandidateAuthorityLane
 
-  runtimeAuthorityLane :
-    CandidateAuthorityLane
+  runtimeAuthorityLane : CandidateAuthorityLane
 
-  theoremAuthorityLane :
-    CandidateAuthorityLane
+  theoremAuthorityLane : CandidateAuthorityLane
 
 canonicalCandidateAuthorityLanes : List CandidateAuthorityLane
 canonicalCandidateAuthorityLanes =

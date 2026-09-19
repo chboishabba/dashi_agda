@@ -17,7 +17,7 @@ import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact as NingE
 ------------------------------------------------------------------------
 
 data RosterExtensionKind : Set where
-  scientificWorkIdentity
+  scientificWorkIdentity : RosterExtensionKind
   nonScientificNarrativeRole : RosterExtensionKind
 
 record RosterExtensionReceipt : Set where

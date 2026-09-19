@@ -60,12 +60,12 @@ record CostedSearchIteration : Set₁ where
 open CostedSearchIteration public
 
 data ExecutionEscalationStage : Set where
-  inspectLocalFixture
-  inspectPersistedAuthorityReceipt
-  inspectLocalWorldGraph
-  governedLiveReferenceSearch
-  governedExactAuthorityFetch
-  governedBoundedCitationFollow
+  inspectLocalFixture : ExecutionEscalationStage
+  inspectPersistedAuthorityReceipt : ExecutionEscalationStage
+  inspectLocalWorldGraph : ExecutionEscalationStage
+  governedLiveReferenceSearch : ExecutionEscalationStage
+  governedExactAuthorityFetch : ExecutionEscalationStage
+  governedBoundedCitationFollow : ExecutionEscalationStage
   : ExecutionEscalationStage
 
 record EscalationDecision : Set₁ where

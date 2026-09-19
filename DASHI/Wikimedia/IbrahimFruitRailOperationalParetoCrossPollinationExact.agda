@@ -138,9 +138,9 @@ canonicalFruitAdmissionBoundary =
 ------------------------------------------------------------------------
 
 data OperationalTarget : Set where
-  railSameObjectNetworkLeg
-  fruitSameObjectOutputConsumer
-  railFleetOrRouteDynamics
+  railSameObjectNetworkLeg : OperationalTarget
+  fruitSameObjectOutputConsumer : OperationalTarget
+  railFleetOrRouteDynamics : OperationalTarget
   fruitCausalYieldModel : OperationalTarget
 
 record OperationalParetoStep : Set where
@@ -186,15 +186,15 @@ fourthOperationalTarget = operational-pareto-step
 ------------------------------------------------------------------------
 
 data OperationalTime : Set where
-  ibrahimNavigationTime
-  dashiStructuralBridgeTime
-  sameObjectAdmissionTime
+  ibrahimNavigationTime : OperationalTime
+  dashiStructuralBridgeTime : OperationalTime
+  sameObjectAdmissionTime : OperationalTime
   validatedConsumerTime : OperationalTime
 
 data OperationalInterpretation : Set where
-  navigationOnly
-  structuralConsumerCandidate
-  sameObjectConsumer
+  navigationOnly : OperationalInterpretation
+  structuralConsumerCandidate : OperationalInterpretation
+  sameObjectConsumer : OperationalInterpretation
   validatedConsumer : OperationalInterpretation
 
 data OperationalSummary : Set where operationalFrontierOpen : OperationalSummary

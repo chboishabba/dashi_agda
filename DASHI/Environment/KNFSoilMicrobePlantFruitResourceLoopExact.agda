@@ -22,29 +22,29 @@ import DASHI.Biology.FruitBoundaryResourcePaidRepairExact as FruitRepair
 ------------------------------------------------------------------------
 
 data SoilMicrobialResponse : Set where
-  microbialResponseUnresolved
-  microbialCommunityChanged
+  microbialResponseUnresolved : SoilMicrobialResponse
+  microbialCommunityChanged : SoilMicrobialResponse
   microbialCommunityUnchanged : SoilMicrobialResponse
 
 data SoilNutrientResponse : Set where
-  nutrientResponseUnresolved
-  nutrientAvailabilityChanged
+  nutrientResponseUnresolved : SoilNutrientResponse
+  nutrientAvailabilityChanged : SoilNutrientResponse
   nutrientAvailabilityUnchanged : SoilNutrientResponse
 
 data PlantAcquisitionResponse : Set where
-  acquisitionUnresolved
-  rootAcquisitionChanged
+  acquisitionUnresolved : PlantAcquisitionResponse
+  rootAcquisitionChanged : PlantAcquisitionResponse
   rootAcquisitionUnchanged : PlantAcquisitionResponse
 
 data PlantAllocationResponse : Set where
-  allocationUnresolved
-  fruitAllocationChanged
+  allocationUnresolved : PlantAllocationResponse
+  fruitAllocationChanged : PlantAllocationResponse
   fruitAllocationUnchanged : PlantAllocationResponse
 
 data FruitResourceResponse : Set where
-  fruitResourceUnresolved
-  fruitInvestmentChanged
-  fruitRepairPoolChanged
+  fruitResourceUnresolved : FruitResourceResponse
+  fruitInvestmentChanged : FruitResourceResponse
+  fruitRepairPoolChanged : FruitResourceResponse
   fruitResourceUnchanged : FruitResourceResponse
 
 ------------------------------------------------------------------------

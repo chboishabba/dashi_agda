@@ -23,53 +23,53 @@ import DASHI.Governance.SteffensenCulturalFireAuthorityExact as CulturalFire
 ------------------------------------------------------------------------
 
 data FireManagementIdentity : Set where
-  patchBurnGrazing
-  pyricHerbivoryExperiment
-  genericPrescribedMosaicBurn
+  patchBurnGrazing : FireManagementIdentity
+  pyricHerbivoryExperiment : FireManagementIdentity
+  genericPrescribedMosaicBurn : FireManagementIdentity
   IndigenousCulturalBurning : FireManagementIdentity
 
 data HerbivoreKind : Set where
   cattle sheep goats mixedLivestock nativeHerbivore otherHerbivore : HerbivoreKind
 
 data MosaicCoordinate : Set where
-  firePatchGeometry
-  fireTiming
-  fireIntensity
-  fuelLoad
-  vegetationStructure
-  forageQuality
-  herbivoreSelection
-  stockingPressure
-  soilNutrients
-  soilCover
-  erosion
-  woodyEncroachment
-  biodiversity
-  habitatHeterogeneity
-  carbonState
-  livestockPerformance
-  economicCost
-  smokeAirQuality
-  culturalAuthority
+  firePatchGeometry : MosaicCoordinate
+  fireTiming : MosaicCoordinate
+  fireIntensity : MosaicCoordinate
+  fuelLoad : MosaicCoordinate
+  vegetationStructure : MosaicCoordinate
+  forageQuality : MosaicCoordinate
+  herbivoreSelection : MosaicCoordinate
+  stockingPressure : MosaicCoordinate
+  soilNutrients : MosaicCoordinate
+  soilCover : MosaicCoordinate
+  erosion : MosaicCoordinate
+  woodyEncroachment : MosaicCoordinate
+  biodiversity : MosaicCoordinate
+  habitatHeterogeneity : MosaicCoordinate
+  carbonState : MosaicCoordinate
+  livestockPerformance : MosaicCoordinate
+  economicCost : MosaicCoordinate
+  smokeAirQuality : MosaicCoordinate
+  culturalAuthority : MosaicCoordinate
   safetyLegality : MosaicCoordinate
 
 data AcquisitionEvidenceKind : Set where
-  sourceDocument
-  burnPlan
-  fireWeatherObservation
-  patchMap
-  remoteSensing
-  GPSAnimalTrack
-  vegetationSurvey
-  forageAssay
-  soilAssay
-  fuelSurvey
-  biodiversitySurvey
-  carbonMeasurement
-  livestockMeasurement
-  economicLedger
-  authorityReceipt
-  safetyReceipt
+  sourceDocument : AcquisitionEvidenceKind
+  burnPlan : AcquisitionEvidenceKind
+  fireWeatherObservation : AcquisitionEvidenceKind
+  patchMap : AcquisitionEvidenceKind
+  remoteSensing : AcquisitionEvidenceKind
+  GPSAnimalTrack : AcquisitionEvidenceKind
+  vegetationSurvey : AcquisitionEvidenceKind
+  forageAssay : AcquisitionEvidenceKind
+  soilAssay : AcquisitionEvidenceKind
+  fuelSurvey : AcquisitionEvidenceKind
+  biodiversitySurvey : AcquisitionEvidenceKind
+  carbonMeasurement : AcquisitionEvidenceKind
+  livestockMeasurement : AcquisitionEvidenceKind
+  economicLedger : AcquisitionEvidenceKind
+  authorityReceipt : AcquisitionEvidenceKind
+  safetyReceipt : AcquisitionEvidenceKind
   replicationDataset : AcquisitionEvidenceKind
 
 record MosaicEvidenceCell : Set where
@@ -127,25 +127,25 @@ open MosaicSnowballAcquisitionState public
 ------------------------------------------------------------------------
 
 data CulturalAuthorityRequirement : Set where
-  culturalAuthorityRequired
+  culturalAuthorityRequired : CulturalAuthorityRequirement
   genericFireManagementNoCulturalIdentityClaim : CulturalAuthorityRequirement
 
 data PaymentGate : Set where
-  interventionIdentityGate
-  culturalAuthorityGate
-  fireLegalitySafetyGate
-  sameLandscapePatchGate
-  fireExecutionGate
-  herbivoreExposureGate
-  fireGrazingCouplingGate
-  heterogeneityEffectGate
-  fuelEffectGate
-  soilEffectGate
-  biodiversityEffectGate
-  livestockEffectGate
-  carbonEffectGate
-  economicEffectGate
-  replicationGate
+  interventionIdentityGate : PaymentGate
+  culturalAuthorityGate : PaymentGate
+  fireLegalitySafetyGate : PaymentGate
+  sameLandscapePatchGate : PaymentGate
+  fireExecutionGate : PaymentGate
+  herbivoreExposureGate : PaymentGate
+  fireGrazingCouplingGate : PaymentGate
+  heterogeneityEffectGate : PaymentGate
+  fuelEffectGate : PaymentGate
+  soilEffectGate : PaymentGate
+  biodiversityEffectGate : PaymentGate
+  livestockEffectGate : PaymentGate
+  carbonEffectGate : PaymentGate
+  economicEffectGate : PaymentGate
+  replicationGate : PaymentGate
   transportRecommendationGate : PaymentGate
 
 record MosaicPaymentEligibility : Set where

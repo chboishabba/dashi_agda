@@ -80,12 +80,12 @@ releasedFln = snowball-attribution
 ------------------------------------------------------------------------
 
 data CoreNode : Set where
-  awareness
-  conscious
-  consciousness
-  qualityPhilosophy
-  philosophy
-  reality
+  awareness : CoreNode
+  conscious : CoreNode
+  consciousness : CoreNode
+  qualityPhilosophy : CoreNode
+  philosophy : CoreNode
+  reality : CoreNode
   existence : CoreNode
 
 record HistoricalFirstLinkEdge : Set where

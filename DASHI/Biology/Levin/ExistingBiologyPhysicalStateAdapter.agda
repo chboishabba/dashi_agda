@@ -2,6 +2,7 @@ module DASHI.Biology.Levin.ExistingBiologyPhysicalStateAdapter where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.EpigeneticTemporalRegulationBridge as Epigenetic
@@ -22,17 +23,25 @@ import DASHI.Biology.Levin.StressGranuleVoltageBoundary as Granule
 
 record ExistingBiologyPhysicalStateAdapter : Set where
   field
-    epigeneticTemporalRegulationBridge :
-      Epigenetic.EpigeneticTemporalRegulationBridge
+    epigeneticTemporalRoute :
+      Epigenetic.TemporalRegulationRoute
+    epigeneticTemporalRouteIsCandidateOnly :
+      epigeneticTemporalRoute ≡ Epigenetic.candidateOnlyTemporalRegulationRoute
 
-    longitudinalResidualDynamics :
-      Longitudinal.IntersectionalLongitudinalResidualDynamics
+    intersectionalAxes :
+      List Longitudinal.IntersectionalAxis
+    intersectionalAxesAreCanonical :
+      intersectionalAxes ≡ Longitudinal.canonicalIntersectionalAxes
 
-    bodyMemoryMeasurementProxyBoundary :
-      Measurement.BodyMemoryMeasurementProxyBoundary
+    bodyMemoryBoundaryClaims :
+      List Measurement.BoundaryClaimKind
+    bodyMemoryBoundaryClaimsAreCanonical :
+      bodyMemoryBoundaryClaims ≡ Measurement.canonicalBoundaryClaims
 
-    traumaClinicalGovernanceBoundary :
-      Governance.TraumaClinicalGovernanceBoundary
+    traumaGovernanceAxes :
+      List Governance.TraumaClinicalGovernanceAxis
+    traumaGovernanceAxesAreCanonical :
+      traumaGovernanceAxes ≡ Governance.canonicalTraumaClinicalGovernanceAxes
 
     condensateWitness :
       Condensate.ElectroosmoticCondensateWitness
@@ -61,3 +70,35 @@ record ExistingBiologyPhysicalStateAdapter : Set where
     reading : String
 
 open ExistingBiologyPhysicalStateAdapter public
+
+canonicalExistingBiologyPhysicalStateAdapter : ExistingBiologyPhysicalStateAdapter
+canonicalExistingBiologyPhysicalStateAdapter = record
+  { epigeneticTemporalRoute =
+      Epigenetic.candidateOnlyTemporalRegulationRoute
+  ; epigeneticTemporalRouteIsCandidateOnly = refl
+  ; intersectionalAxes =
+      Longitudinal.canonicalIntersectionalAxes
+  ; intersectionalAxesAreCanonical = refl
+  ; bodyMemoryBoundaryClaims =
+      Measurement.canonicalBoundaryClaims
+  ; bodyMemoryBoundaryClaimsAreCanonical = refl
+  ; traumaGovernanceAxes =
+      Governance.canonicalTraumaClinicalGovernanceAxes
+  ; traumaGovernanceAxesAreCanonical = refl
+  ; condensateWitness =
+      Condensate.canonicalElectroosmoticCondensateWitness
+  ; ATPOrganisationWitness =
+      ATP.canonicalATPOrganisationWitness
+  ; stressGranuleVoltageWitness =
+      Granule.canonicalStressGranuleVoltageWitness
+  ; physicalStateIsObservationLayer = true
+  ; physicalStateIsObservationLayerIsTrue = refl
+  ; physicalStateDoesNotRecoverHiddenChart = false
+  ; physicalStateDoesNotRecoverHiddenChartIsFalse = refl
+  ; associationIsNotCausalClosure = false
+  ; associationIsNotCausalClosureIsFalse = refl
+  ; noClinicalAuthority = false
+  ; noClinicalAuthorityIsFalse = refl
+  ; reading =
+      "Levin physical state observations adapt to existing biology lanes as candidate-only layers without clinical or causal closure authority."
+  }

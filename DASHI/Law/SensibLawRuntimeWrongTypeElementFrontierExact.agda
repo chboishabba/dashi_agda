@@ -109,10 +109,10 @@ frontierStatus paymentUnresolved = unresolved
 ------------------------------------------------------------------------
 
 data RuntimeLegalFrontierProducer : Set where
-  noProducerRequired
-  authorityProducerRequired
-  applicabilityProducerRequired
-  evidenceReviewProducerRequired
+  noProducerRequired :
+  authorityProducerRequired :
+  applicabilityProducerRequired :
+  evidenceReviewProducerRequired :
   causationProducerRequired :
     Element.CausationElementProducer → RuntimeLegalFrontierProducer
 

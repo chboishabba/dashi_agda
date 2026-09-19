@@ -3,6 +3,7 @@ module DASHI.Biology.WaveControlledCoalitionBridgeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Primitive using (Setω)
 open import Data.Empty using (⊥)
 
 import DASHI.Biology.ConsciousAccessCoalition as Coalition
@@ -19,7 +20,7 @@ import DASHI.Cognition.PNF.FastAccessControlFieldExact as Access
 -- supplies a candidate fast producer for time/context-dependent recruitment.
 ------------------------------------------------------------------------
 
-record WaveSupportedAccessCandidate : Set₁ where
+record WaveSupportedAccessCandidate : Setω where
   constructor waveSupportedAccessCandidate
   field
     accessCoalition : Coalition.ConsciousAccessCoalition
