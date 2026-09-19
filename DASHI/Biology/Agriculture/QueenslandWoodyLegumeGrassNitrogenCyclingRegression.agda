@@ -24,6 +24,9 @@ catchpooleBlair1990ResidueDOIPinned = refl
 vallis1983DOIPinned : Q.vallis1983DOI ≡ "10.1071/AR9830367"
 vallis1983DOIPinned = refl
 
+sierraNygren2006DOIPinned : Q.sierraNygren2006DOI ≡ "10.1016/j.soilbio.2005.12.012"
+sierraNygren2006DOIPinned = refl
+
 fixedNNotGrassCapture :
   Q.woodyLegumeFixedNImpliesCompanionGrassCapture Q.canonicalWoodyLegumeGrassBoundary ≡ false
 fixedNNotGrassCapture = refl
@@ -75,3 +78,14 @@ grassCompetitionRetained = refl
 acaciaNotClosed :
   Q.queenslandLeucaenaEvidenceClosesAcaciaAvoidedMineralN Q.canonicalWoodyLegumeGrassBoundary ≡ false
 acaciaNotClosed = refl
+
+
+externalFieldBelowGroundDonorNotQueenslandObject :
+  Q.externalFieldBelowGroundTransferCreatesQueenslandSameObjectReceipt
+    Q.canonicalWoodyLegumeGrassBoundary ≡ false
+externalFieldBelowGroundDonorNotQueenslandObject = refl
+
+referencePlantProblemRetained :
+  Q.belowGroundTransferReferencePlantProblemMayBeDropped
+    Q.canonicalWoodyLegumeGrassBoundary ≡ false
+referencePlantProblemRetained = refl
