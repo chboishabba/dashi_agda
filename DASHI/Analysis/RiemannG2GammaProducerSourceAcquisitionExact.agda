@@ -32,7 +32,7 @@ data GammaProducerRecoveryStage : Set where
   sharpSameTaperRepairOwned : GammaProducerRecoveryStage
 
 currentGammaProducerRecoveryStage : GammaProducerRecoveryStage
-currentGammaProducerRecoveryStage = finalProducerIdentityRequired
+currentGammaProducerRecoveryStage = precisionLossLocalized
 
 record GammaProducerSourceArtifact : Set₁ where
   field
@@ -133,12 +133,12 @@ record GammaProducerSourceAcquisitionBoundary : Set where
       concreteCandidateGammaProducerFamilyRecovered ≡ true
 
     exactUniformGammaProducerIdentityRecoveredOnThisBranch : Bool
-    exactUniformGammaProducerIdentityRecoveredOnThisBranchIsFalse :
-      exactUniformGammaProducerIdentityRecoveredOnThisBranch ≡ false
+    exactUniformGammaProducerIdentityRecoveredOnThisBranchIsTrue :
+      exactUniformGammaProducerIdentityRecoveredOnThisBranch ≡ true
 
     firstPrecisionLosingAnalyticStepRecovered : Bool
-    firstPrecisionLosingAnalyticStepRecoveredIsFalse :
-      firstPrecisionLosingAnalyticStepRecovered ≡ false
+    firstPrecisionLosingAnalyticStepRecoveredIsTrue :
+      firstPrecisionLosingAnalyticStepRecovered ≡ true
 
     genericGammaSourceSearchStillLive : Bool
     genericGammaSourceSearchStillLiveIsFalse :
@@ -148,9 +148,9 @@ record GammaProducerSourceAcquisitionBoundary : Set where
     genericAsymptoticGuessCanReplaceProducerIdentityIsFalse :
       genericAsymptoticGuessCanReplaceProducerIdentity ≡ false
 
-    sameConsumerProducerIdentityIsLive : Bool
-    sameConsumerProducerIdentityIsLiveIsTrue :
-      sameConsumerProducerIdentityIsLive ≡ true
+    sameConsumerProducerIdentityIsStillLive : Bool
+    sameConsumerProducerIdentityIsStillLiveIsFalse :
+      sameConsumerProducerIdentityIsStillLive ≡ false
 
     sharpGammaRepairStillOpen : Bool
     sharpGammaRepairStillOpenIsTrue : sharpGammaRepairStillOpen ≡ true
@@ -166,11 +166,11 @@ canonicalGammaProducerSourceAcquisitionBoundary :
 canonicalGammaProducerSourceAcquisitionBoundary =
   gamma-producer-source-acquisition-boundary
     true refl
-    false refl
-    false refl
-    false refl
-    false refl
     true refl
+    true refl
+    false refl
+    false refl
+    false refl
     true refl
     false refl
     "retained Zeta23Bridge/LiteralWeilGammaConeBound.lean: epsGamma / gammaConeEnvelope; detailed provenance is owned by RiemannG2GammaCandidateSourceLineageRecoveryExact"
