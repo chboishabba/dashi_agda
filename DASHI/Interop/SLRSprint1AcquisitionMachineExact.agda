@@ -78,7 +78,7 @@ sprint1Milestones =
   ∷ []
 
 record CanonicalPhysicalPlanParity : Set where
-  constructor canonicalPhysicalPlanParity
+  constructor physicalPlanParity
   field
     logicalRequestsAreConcurrencyDomain : Bool
     providerResolutionPrecedesScheduling : Bool
@@ -94,7 +94,7 @@ open CanonicalPhysicalPlanParity public
 
 canonicalPhysicalPlanParity : CanonicalPhysicalPlanParity
 canonicalPhysicalPlanParity =
-  canonicalPhysicalPlanParity
+  physicalPlanParity
     false
     true
     true
