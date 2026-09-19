@@ -230,7 +230,7 @@ level2OPEProductTailIdentification = exact-residual
   "YMClayLevel2R129CompositeTailAttachmentExact.agda"
   "literal product remainder on the R129-exported completed composite projection = selected composite marked tail"
   unpaid
-  "R129 already exports the composite marked-source data from the same completed state used by stress. D1 therefore no longer accepts an independent composite carrier. Its sole physical field is equality between the literal product remainder on that R129-selected composite and Shared.compositeInsertionTail; the DyadicOPERemainderMajorant is compiler output."
+  "R129 already exports the composite marked-source data from the same completed state used by stress. D1 therefore accepts no independent composite carrier. The physical seam is a semantic weld: the product remainder of that completed composite must be identified both with the literal Clay opeRemainder and with Shared.compositeInsertionTail. Their direct equality and the DyadicOPERemainderMajorant are then compiler output; no new analytic inequality is introduced."
 
 level2GlobalAFSecondPayment : ExactResidual
 level2GlobalAFSecondPayment = exact-residual
@@ -377,6 +377,9 @@ d1IndependentCompositeCarrierAfterR129 = false
 
 d1IndependentCompositeCompletionAfterR129 : Bool
 d1IndependentCompositeCompletionAfterR129 = false
+
+d1NewAnalyticInequalityRequired : Bool
+d1NewAnalyticInequalityRequired = false
 
 globalAsymptoticFreedomTrajectoryIndependentInLevel2D : Bool
 globalAsymptoticFreedomTrajectoryIndependentInLevel2D = false
