@@ -58,3 +58,14 @@ p0fUsesRepoPareto = refl
 p0gKeepsSLRDownstream :
   P0.slrOnlyAfterRetainedOrProbable P0.canonicalAdaptiveScreeningBoundary ≡ true
 p0gKeepsSLRDownstream = refl
+
+
+candidateSurfaceCannotDetermineReviewedDecision :
+  P0.CandidateAssessmentFactorisation → ⊥
+candidateSurfaceCannotDetermineReviewedDecision =
+  P0.candidateAssessmentCannotDetermineReviewedDecision
+
+similarityCannotDetermineStudyIdentity :
+  P0.FamilySimilarityFactorisation → ⊥
+similarityCannotDetermineStudyIdentity =
+  P0.familySimilarityCannotDetermineSameEmpiricalStudy
