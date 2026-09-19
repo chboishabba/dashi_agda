@@ -41,6 +41,7 @@ data ResidualClass : Set where
 data ResidualStatus : Set where
   unpaid : ResidualStatus
   compilerOwned : ResidualStatus
+  kernelRevalidatedDonor : ResidualStatus
   obsoleteStrength : ResidualStatus
   routeSpecific : ResidualStatus
 
@@ -64,8 +65,16 @@ sourceSelectedLocalization = exact-residual
   sourceLocalization
   "YMClayRouteSH1DirectSelectedMarkedDecayExact.agda / R320 / R398 / R304"
   "R320 mixedDerivativeMagnitudeBelowSelectedShell on the exact selected R318/T5 carrier"
+  routeSpecific
+  "R320 is now classified as one Agda producer of the canonical physical finite-clustering input, not as a globally mandatory Route-S coordinate. The verified literal-Wilson Lean terminal theorem consumes the resulting finite clustering estimate directly."
+
+literalWilsonFiniteClustering : ExactResidual
+literalWilsonFiniteClustering = exact-residual
+  sourceLocalization
+  "YMClayLiteralWilsonRouteSThreeInputBoundaryExact.agda / Aristotle RouteS Assembly.lean"
+  "finite clustering estimate for the selected literal Wilson-loop pair at every cutoff and Euclidean separation"
   unpaid
-  "Canonical H1 has one theorem-bearing physical/source field. R320 transports it to literal J directions; R398 constructs the exact finite T5 direct shell. The preferred mode-selected route then uses only supportDistance=time and SelectedLimitUpperClosure to compile the continuum C_mode(t) <= (1/4)(1/2)^t upper through R304. No source envelope or arbitrary clusteringEnvelope calibration is mandatory."
+  "This is physical input P1 of the kernel-revalidated wilson_routeS_massGapConclusion theorem. Marked-source differentiation, literal Wilson loops, Euclidean translation and covariance algebra are compiler/donor-owned; the quantitative finite clustering estimate itself is not manufactured."
 
 historicalH1PublishedApplicabilityPackaging : ExactResidual
 historicalH1PublishedApplicabilityPackaging = exact-residual
@@ -94,18 +103,18 @@ wilsonR295CarrierEquality = exact-residual
 h2aOSIndexedTimeSupport : ExactResidual
 h2aOSIndexedTimeSupport = exact-residual
   sameObjectAttachment
-  "BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact.agda"
-  "Euclidean time element + supportDistanceIsTime on the OS1 translation action"
-  unpaid
-  "The translated observable uses the OS1 action definitionally; the remaining physical fields identify integer Euclidean time and the selected support distance."
+  "RequestProject/YangMills/RouteS/EuclideanTime.lean"
+  "timeTranslate_add + measurePreserving_timeTranslate_gibbs + wilsonLoop_timeTranslate"
+  kernelRevalidatedDonor
+  "The supplied 8236-job Lean project constructs S2 directly on the literal Wilson lattice: separation t is the actual Euclidean-time translation action and translated Wilson loops are definitionally the displaced literal loops. Agda R332 remains a compatibility route, not an independent physical research leaf."
 
 h2bWilsonCylinderPresentation : ExactResidual
 h2bWilsonCylinderPresentation = exact-residual
   sameObjectAttachment
-  "BalabanPairwiseWilsonBoundedTestsRound315Exact.agda"
-  "PairwiseWilsonCylinderPresentation"
-  unpaid
-  "Finite Wilson-cylinder boundedness is already imported/compiler-owned. The physical residue is the same-carrier Wilson product/multiplication presentation."
+  "RequestProject/YangMills/Lattice/WilsonLoop.lean / RouteS/WilsonCovariance.lean"
+  "literal Wilson-loop construction + translated-loop covariance presentation"
+  kernelRevalidatedDonor
+  "The supplied Lean tranche constructs literal Wilson loops, gauge invariance, translation covariance, plaquette/action presentation and the exact translated Wilson-loop covariance. R315 remains a valid Agda same-carrier presentation ABI, but S3 is no longer an unconstructed global research leaf."
 
 h2cSequentialOrderClosure : ExactResidual
 h2cSequentialOrderClosure = exact-residual
@@ -118,10 +127,10 @@ h2cSequentialOrderClosure = exact-residual
 h2cSelectedLimitUpperClosure : ExactResidual
 h2cSelectedLimitUpperClosure = exact-residual
   physicalContinuumConstruction
-  "YMClayRouteSSelectedLimitClosureExact.agda / BalabanCMP116R281SourceResponseSameObjectRound342Exact.agda"
-  "SelectedLimitUpperClosure on the actual R278/T5 scalar convergence"
-  unpaid
-  "This is the exact one-sided ordered-limit proposition consumed by the preferred R304 mode-selected continuum-upper compiler as well as the R387 compatibility route: Converges sequence target and sequence <= upper imply target <= upper. It is standard/shared analysis rather than a fresh YM decay estimate. PhysicalMeasureConvergenceData alone does not store order-closedness, so an inhabitant is still required."
+  "RequestProject/YangMills/RouteS/Covariance.lean / Assembly.lean"
+  "uniform finite covariance bound survives the selected expectation limit"
+  kernelRevalidatedDonor
+  "The Lean Route-S compiler proves the ordered-limit step directly (norm_le_of_tendsto_of_eventually_le and continuum_clustering_of_expectation_limits). The Agda SelectedLimitUpperClosure remains a compatibility input only for the native R304/R387 producer route."
 
 literalMeasureExpectationConvergence : ExactResidual
 literalMeasureExpectationConvergence = exact-residual
@@ -144,40 +153,48 @@ h3SameHamiltonianPositiveSpectralDecomposition = exact-residual
   physicalSpectralIdentification
   "BalabanPositiveSpectralComponentLowerRound300Exact.agda"
   "selectedCorrelationSpectralDecomposition + spectralRemainderNonnegative on the SAME reconstructed Hamiltonian"
-  unpaid
-  "The preferred mode-selected route does not need a separate spectral-lower inequality: R300 compiles the lower bound once the exact selected continuum covariance is decomposed into the chosen positive spectral component plus a nonnegative remainder on the same reconstructed Hamiltonian."
+  routeSpecific
+  "This is sufficient for the native Agda R300/R306 spectral route, but the kernel-revalidated literal-Wilson Lean terminal theorem does not require this mode decomposition as an independent physical input. Its canonical P3 input is the same-object OS spectral/correlation identification."
 
 h3TransferEnergyDecayCoordinate : ExactResidual
 h3TransferEnergyDecayCoordinate = exact-residual
   physicalSpectralIdentification
   "BalabanTransferEnergyDecayRatioCoordinateRound302Exact.agda / BalabanOSIndexedTransferCoordinateRound331Exact.agda"
   "one order-reversing transfer-energy/decay-ratio coordinate of the actual reconstructed H_OS"
-  unpaid
-  "R302 removes separate candidate-rate and subgap-rate semantics. R331 keeps the genuinely physical statement proof-relevant: the selected energy/decay coordinate is the transfer coordinate OF the same OS reconstructed Hamiltonian."
+  routeSpecific
+  "This remains a valid native-Agda same-Hamiltonian producer route. It is not a primitive physical field of the verified Lean terminal theorem, which consumes the reconstructed spectral representation and same-object OS correlation estimate directly."
 
 h3ModeRatioSameCoordinateWeld : ExactResidual
 h3ModeRatioSameCoordinateWeld = exact-residual
   sameObjectAttachment
   "BalabanTransferEnergyDecayRatioCoordinateRound302Exact.agda"
   "ModeRatioUsesTransferCoordinate"
+  routeSpecific
+  "Required by the native Agda R302/R305 contradiction path, but bypassed by the kernel-revalidated Lean spectral assembly once the canonical same-object OS correlation input is supplied."
+
+sameOSCorrelationIdentification : ExactResidual
+sameOSCorrelationIdentification = exact-residual
+  physicalSpectralIdentification
+  "YMClayLiteralWilsonRouteSThreeInputBoundaryExact.agda / RequestProject/YangMills/RouteS/Assembly.lean"
+  "OS spectral correlation of every vacuum-orthogonal state is bounded by the SAME continuum literal-Wilson covariance"
   unpaid
-  "The decay ratio appearing in the R300 selected spectral component must be the ratioOfEnergy of the same transfer coordinate. R303/R305 then compile all positive-subgap rate inequalities."
+  "This is physical input P3 of wilson_routeS_massGapConclusion. It is the canonical same-object Hamiltonian seam after the verified Lean terminal assembly; R300/R302/R331 are native Agda producer/compatibility routes for stronger decomposed semantics."
 
 halfRateSpectralTransfer : ExactResidual
 halfRateSpectralTransfer = exact-residual
   physicalSpectralIdentification
-  "YMClayRouteSDirectPositiveGapCoreExact.agda / R303-R306"
-  "positive candidate energy + no positive subgap mode"
-  compilerOwned
-  "After H1, distance=time, selected limit closure, R300 same-H spectral decomposition and the R302 mode-ratio weld, the mode-selected contradiction and terminal positive-gap core are machine-checked. No arbitrary clustering envelope, old rate record, separate overlap leaf or separate spectral-lower inequality is needed."
+  "RequestProject/YangMills/RouteS/Assembly.lean / YMClayRouteSDirectPositiveGapCoreExact.agda"
+  "clustering plus same-object OS spectral representation -> positive mass gap"
+  kernelRevalidatedDonor
+  "The supplied Lean theorem routeS_massGapConclusion/wilson_routeS_massGapConclusion kernel-checks the terminal spectral assembly directly. The native Agda R303-R306 contradiction remains an independently useful machine-checked compatibility route."
 
 directSourceOSMassGapCompiler : ExactResidual
 directSourceOSMassGapCompiler = exact-residual
   physicalSpectralIdentification
-  "YMClayRouteSDirectPositiveGapCoreExact.agda / R306"
-  "ModeIndexedPositiveGapCore on the selected physical spectral carrier"
-  compilerOwned
-  "The preferred terminal algebra now factors through R304/R300/R302/R305/R306 rather than the stronger R333 package. A final same-object application still has to identify this Energy/SubgapMode carrier with the actual reconstructed H_OS spectrum. No dense-L2 normalization, finite trajectory-gap calibration or P_a/E_a Mosco recovery is consumed."
+  "RequestProject/YangMills/RouteS/Assembly.lean"
+  "wilson_routeS_massGapConclusion"
+  kernelRevalidatedDonor
+  "The supplied Lean project kernel-checks the literal Wilson end-to-end compiler. Its only physical inputs are P1 finite literal clustering, P2 the three literal expectation limits, and P3 the same-object OS correlation/spectral identification. No dense-L2 normalization, trajectory-gap calibration, P_a/E_a recovery, R300 mode decomposition or R302 ratio weld is primitive to this terminal theorem."
 
 ------------------------------------------------------------------------
 -- Route G only: strong finite-gap / Mosco recovery.
