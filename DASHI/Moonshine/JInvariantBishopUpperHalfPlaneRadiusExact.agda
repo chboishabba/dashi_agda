@@ -24,12 +24,14 @@ import Data.Rational.Unnormalised.Properties as RatP
 
 import Real as BishopReal
 import RealProperties as BishopP
+import Sequence as BishopSequence
 
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Foundations.BishopSqrtTwoThirdsMachinConstantExact as MachinPositive
 import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as NegExp
+import DASHI.Moonshine.JInvariantEisensteinBishopMajorantSeriesExact as Majorant
 
 two : BishopReal.ℝ
 two = Exp.embed (+ 2 / 1)
@@ -112,3 +114,49 @@ machinQRadiusUnitInterval imagPositive =
   qRadiusUnitInterval
     MachinPositive.machinPiPositive
     imagPositive
+
+
+------------------------------------------------------------------------
+-- Direct Eisenstein majorant receipts from positive Bishop upper-half-plane
+-- data.  This stays entirely on the Bishop carrier.
+------------------------------------------------------------------------
+
+e4MajorantAbsoluteConvergenceAtUpperHalfPlane :
+  ∀ {piB imag : BishopReal.ℝ} →
+  (piPositive : BishopReal._<_ BishopReal.0ℝ piB) →
+  (imagPositive : BishopReal._<_ BishopReal.0ℝ imag) →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (Majorant.e4MajorantTerm (qRadius piB imag))
+e4MajorantAbsoluteConvergenceAtUpperHalfPlane
+    piPositive imagPositive =
+  Majorant.e4MajorantAbsoluteConvergence
+    (qRadiusUnitInterval piPositive imagPositive)
+
+e6MajorantAbsoluteConvergenceAtUpperHalfPlane :
+  ∀ {piB imag : BishopReal.ℝ} →
+  (piPositive : BishopReal._<_ BishopReal.0ℝ piB) →
+  (imagPositive : BishopReal._<_ BishopReal.0ℝ imag) →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (Majorant.e6MajorantTerm (qRadius piB imag))
+e6MajorantAbsoluteConvergenceAtUpperHalfPlane
+    piPositive imagPositive =
+  Majorant.e6MajorantAbsoluteConvergence
+    (qRadiusUnitInterval piPositive imagPositive)
+
+machinE4MajorantAbsoluteConvergence :
+  ∀ {imag : BishopReal.ℝ} →
+  BishopReal._<_ BishopReal.0ℝ imag →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (Majorant.e4MajorantTerm (machinQRadius imag))
+machinE4MajorantAbsoluteConvergence imagPositive =
+  Majorant.e4MajorantAbsoluteConvergence
+    (machinQRadiusUnitInterval imagPositive)
+
+machinE6MajorantAbsoluteConvergence :
+  ∀ {imag : BishopReal.ℝ} →
+  BishopReal._<_ BishopReal.0ℝ imag →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (Majorant.e6MajorantTerm (machinQRadius imag))
+machinE6MajorantAbsoluteConvergence imagPositive =
+  Majorant.e6MajorantAbsoluteConvergence
+    (machinQRadiusUnitInterval imagPositive)
