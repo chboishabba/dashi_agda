@@ -18,6 +18,9 @@ import DASHI.Education.DigitalESDEligibilityFrameExclusionExact as Frame
 import DASHI.Education.DigitalESDSearchToSourceAuditAdmissionExact as SearchAudit
 import DASHI.Education.DigitalESDSLRSourceReviewBridgeExact as SLR
 import DASHI.Education.DigitalESDSourceAuditAdmissionExact as Audit
+import DASHI.Education.DigitalESDSourceAuditHyperfabricExact as Hyper
+import DASHI.Education.DigitalESDTransformativePrincipleMatrixExact as Matrix
+import DASHI.Education.DigitalESDTransferablePrincipleDerivationMethodExact as Derivation
 
 ------------------------------------------------------------------------
 -- DIGITAL-ESD P0-A ... P0-G ADAPTIVE SCREENING PROGRAMME
@@ -515,15 +518,59 @@ record CanonicalFullTextReviewCarrier
 
 open CanonicalFullTextReviewCarrier public
 
-record P0GAdmittedAuditedCarrier
-    (source : Attr.AttributedSource) : Set where
-  constructor p0g-admitted-audited-carrier
-  field
-    canonicalReview : CanonicalFullTextReviewCarrier source
-    sourceAuditAdmission : Audit.SourceAuditAdmission source
-    corpusAuditedSource : SearchAudit.CorpusAuditedSource source
+data FrameworkChallengeDisposition : Set where
+  supportsCandidatePrinciple
+  narrowsCandidatePrinciple
+  splitsCandidatePrinciple
+  mergesCandidatePrinciple
+  defeatsCandidatePrinciple
+  extendsCandidatePrinciple
+  unresolvedFrameworkChallenge
+  : FrameworkChallengeDisposition
 
-open P0GAdmittedAuditedCarrier public
+record FrameworkChallengeReceipt
+    (source : Attr.AttributedSource) : Set where
+  constructor framework-challenge-receipt
+  field
+    slrAssistedCorpusSource : SLR.SLRAssistedCorpusAuditedSource source
+    sourceAuditHyperfabric : Hyper.SourceAuditHyperfabric source
+    candidatePrincipleRow : Matrix.PrincipleConstraintRow
+
+    disposition : FrameworkChallengeDisposition
+    challengeEvidenceReferences : List String
+    challengeReason : String
+    challengeReference : String
+
+    challengeCreatesFinalPrinciplePromotion : Bool
+    challengeCreatesFinalPrinciplePromotionIsFalse :
+      challengeCreatesFinalPrinciplePromotion ≡ false
+    singleSourceChallengeCreatesCorpusConclusion : Bool
+    singleSourceChallengeCreatesCorpusConclusionIsFalse :
+      singleSourceChallengeCreatesCorpusConclusion ≡ false
+
+open FrameworkChallengeReceipt public
+
+record CorpusFrameworkRevisionReceipt : Set where
+  constructor corpus-framework-revision-receipt
+  field
+    challengeReceiptReferences : List String
+    derivationStage : Derivation.PrincipleDerivationStage
+    derivationStageIsStructuredCorpusChallenge :
+      derivationStage ≡ Derivation.structuredCorpusChallengeAndRevision
+
+    reviewedCorpusReference : String
+    reviewedCorpusSha256 : String
+    frameworkRevisionReference : String
+    revisionReason : String
+
+    corpusRevisionCreatesUniversalTruth : Bool
+    corpusRevisionCreatesUniversalTruthIsFalse :
+      corpusRevisionCreatesUniversalTruth ≡ false
+    revisionMayPromoteBeforeCorpusChallenge : Bool
+    revisionMayPromoteBeforeCorpusChallengeIsFalse :
+      revisionMayPromoteBeforeCorpusChallenge ≡ false
+
+open CorpusFrameworkRevisionReceipt public
 
 ------------------------------------------------------------------------
 -- Phase / denominator firewalls.
@@ -543,6 +590,9 @@ data FullTextRetrievalCreatesSourceAuditAdmission : Set where
 data FullTextRetrievalCreatesSourceTruth : Set where
 data ScreeningSelectionCreatesEligibilityFrameTruth : Set where
 data ScreeningPriorityScoreCreatesSourceQuality : Set where
+data FrameworkChallengeCreatesFinalPrinciplePromotion : Set where
+data SingleSourceChallengeCreatesCorpusConclusion : Set where
+data CorpusFrameworkRevisionCreatesUniversalTruth : Set where
 
 candidateAssessmentDoesNotCreateScreeningDecision :
   CandidateAssessmentCreatesScreeningDecision → ⊥
@@ -599,6 +649,18 @@ screeningSelectionDoesNotCreateEligibilityFrameTruth ()
 screeningPriorityScoreDoesNotCreateSourceQuality :
   ScreeningPriorityScoreCreatesSourceQuality → ⊥
 screeningPriorityScoreDoesNotCreateSourceQuality ()
+
+frameworkChallengeDoesNotCreateFinalPrinciplePromotion :
+  FrameworkChallengeCreatesFinalPrinciplePromotion → ⊥
+frameworkChallengeDoesNotCreateFinalPrinciplePromotion ()
+
+singleSourceChallengeDoesNotCreateCorpusConclusion :
+  SingleSourceChallengeCreatesCorpusConclusion → ⊥
+singleSourceChallengeDoesNotCreateCorpusConclusion ()
+
+corpusFrameworkRevisionDoesNotCreateUniversalTruth :
+  CorpusFrameworkRevisionCreatesUniversalTruth → ⊥
+corpusFrameworkRevisionDoesNotCreateUniversalTruth ()
 
 ------------------------------------------------------------------------
 -- Programme state.
@@ -678,6 +740,14 @@ record AdaptiveScreeningBoundary : Set where
     sourceAuditAdmissionRemainsIndependentIsTrue :
       sourceAuditAdmissionRemainsIndependent ≡ true
 
+    hyperfabricRequiresAdmittedAuditedSource : Bool
+    hyperfabricRequiresAdmittedAuditedSourceIsTrue :
+      hyperfabricRequiresAdmittedAuditedSource ≡ true
+
+    frameworkChallengeRemainsCandidateUntilCorpusRevision : Bool
+    frameworkChallengeRemainsCandidateUntilCorpusRevisionIsTrue :
+      frameworkChallengeRemainsCandidateUntilCorpusRevision ≡ true
+
     upstreamEligibilityFrameRemainsVisible : Bool
     upstreamEligibilityFrameRemainsVisibleIsTrue :
       upstreamEligibilityFrameRemainsVisible ≡ true
@@ -698,7 +768,9 @@ canonicalAdaptiveScreeningBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
 
 adaptiveScreeningReading : String
 adaptiveScreeningReading =
-  "Digital-ESD P0-A..P0-G is an epistemically governed adaptive-screening programme over the exact deduplicated corpus. Every input record remains either pending or explicitly reviewed in the authoritative screening ledger. Machine/model candidate assessments, duplicate/study-family hypotheses, calibration diagnostics and Pareto priority receipts are candidate-only work-allocation surfaces and cannot create inclusion, exclusion, source truth, study identity, eligibility-frame truth or SourceAuditAdmission. The queue reuses DASHI's non-scalar N-dimensional Pareto hyperfabric. Only authoritative include/probable screening decisions may escalate to full-text retrieval; canonical SLR review and SourceAuditAdmission remain downstream independent payments."
+  "Digital-ESD P0-A..P0-G is an epistemically governed adaptive-screening programme over the exact deduplicated corpus. Every input record remains either pending or explicitly reviewed in the authoritative screening ledger. Machine/model candidate assessments, duplicate/study-family hypotheses, calibration diagnostics and Pareto priority receipts are candidate-only work-allocation surfaces and cannot create inclusion, exclusion, source truth, study identity, eligibility-frame truth or SourceAuditAdmission. The queue reuses DASHI's non-scalar N-dimensional Pareto hyperfabric. Only authoritative include/probable screening decisions may escalate to full-text retrieval; canonical SLR review and SourceAuditAdmission remain downstream independent payments. P0-G then reuses SLRAssistedCorpusAuditedSource, the same-source SourceAuditHyperfabric and the seven-row TransformativePrincipleMatrix to record support/narrow/split/merge/defeat/extend/unresolved challenges. A single source challenge cannot promote a final principle or create a corpus conclusion; final revision is represented only at the structuredCorpusChallengeAndRevision stage."
