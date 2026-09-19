@@ -24,6 +24,7 @@ open import Data.Empty using (⊥)
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact as CostFactor
 import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact as SelfReduce
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SATSearch
 import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 import DASHI.Crypto.ShorFactoring as Shor
 import DASHI.ComputerScience.ShorOrderClassicalQuantumMachineComparisonExact as Comparison
@@ -250,7 +251,7 @@ canonicalPvsNPRSAQuantumCrossPollinationBoundary =
   pvsnp-rsa-quantum-crosspollination-boundary
     true true true true true true true
     true true
-    false false false false false
+    false true false false false
 
 classicalPvsNPStillOpen :
   classicalPvsNPResolved canonicalPvsNPRSAQuantumCrossPollinationBoundary
@@ -275,11 +276,11 @@ genericCookLevinStillOpen :
   ≡ false
 genericCookLevinStillOpen = refl
 
-booleanFormulaSATInstantiationStillOpen :
+booleanFormulaSATInstantiationNowPaid :
   booleanFormulaSATSelfReductionInstantiationPaid
     canonicalPvsNPRSAQuantumCrossPollinationBoundary
-  ≡ false
-booleanFormulaSATInstantiationStillOpen = refl
+  ≡ true
+booleanFormulaSATInstantiationNowPaid = refl
 
 uniformClassicalRecoveryStillOpen :
   uniformClassicalRecoveryForNPCompleteWitnessesPaid
