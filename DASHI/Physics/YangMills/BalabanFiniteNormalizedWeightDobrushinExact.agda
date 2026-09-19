@@ -482,5 +482,99 @@ normalizedRowL1BelowTwiceRawL1 dataSet =
     f x y ≡ f x' y'
   cong₂ f refl refl = refl
 
+
+record RelativeRawWeightPerturbation
+    {State : Set}
+    (dataSet : NormalizedFiniteWeightPair State) : Set₁ where
+  field
+    epsilon : ℚ
+    epsilonNonnegative : 0ℚ ≤ epsilon
+    pointwiseRelativeDifference : ∀ state →
+      ∣ leftRaw dataSet state - rightRaw dataSet state ∣
+      ≤ epsilon * leftRaw dataSet state
+
+open RelativeRawWeightPerturbation public
+
+rawL1BelowRelativeMass :
+  ∀ {State}
+    {dataSet : NormalizedFiniteWeightPair State}
+    (relative : RelativeRawWeightPerturbation dataSet) →
+  rawL1Difference dataSet
+  ≤ epsilon relative * leftMass dataSet
+rawL1BelowRelativeMass {dataSet = dataSet} relative =
+  let
+    summed =
+      Dobrushin.sumMono
+        (states dataSet)
+        (λ state →
+          ∣ leftRaw dataSet state - rightRaw dataSet state ∣)
+        (λ state → epsilon relative * leftRaw dataSet state)
+        (pointwiseRelativeDifference relative)
+    factor =
+      Sums.sumRationalScale
+        (epsilon relative)
+        (states dataSet)
+        (leftRaw dataSet)
+  in
+  subst
+    (λ upper → rawL1Difference dataSet ≤ upper)
+    factor
+    summed
+
+leftNormalizedScaleCancelsMass :
+  ∀ {State} (dataSet : NormalizedFiniteWeightPair State) epsilonValue →
+  leftNormalizer dataSet * (epsilonValue * leftMass dataSet)
+  ≡ epsilonValue
+leftNormalizedScaleCancelsMass dataSet epsilonValue =
+  trans
+    (ℚRing.solve-∀
+      (leftNormalizer dataSet)
+      epsilonValue
+      (leftMass dataSet) :
+      leftNormalizer dataSet * (epsilonValue * leftMass dataSet)
+      ≡ epsilonValue * (leftNormalizer dataSet * leftMass dataSet))
+    (trans
+      (cong (epsilonValue *_) (leftNormalized dataSet))
+      (ℚP.*-identityʳ epsilonValue)))
+
+normalizedRowL1BelowTwiceRelativePerturbation :
+  ∀ {State}
+    {dataSet : NormalizedFiniteWeightPair State}
+    (relative : RelativeRawWeightPerturbation dataSet) →
+  normalizedRowL1Difference dataSet
+  ≤ (1ℚ + 1ℚ) * epsilon relative
+normalizedRowL1BelowTwiceRelativePerturbation
+    {dataSet = dataSet} relative =
+  let
+    rawBound =
+      rawL1BelowRelativeMass relative
+
+    scaledRaw :
+      leftNormalizer dataSet * rawL1Difference dataSet
+      ≤ epsilon relative
+    scaledRaw =
+      subst
+        (λ upper →
+          leftNormalizer dataSet * rawL1Difference dataSet
+          ≤ upper)
+        (leftNormalizedScaleCancelsMass dataSet (epsilon relative))
+        (Norm.scaleNonnegative
+          (leftNormalizer dataSet)
+          (leftNormalizerNonnegative dataSet)
+          rawBound)
+
+    twoNN : 0ℚ ≤ 1ℚ + 1ℚ
+    twoNN = ℚP.+-mono-≤ ℚP.0≤1 ℚP.0≤1
+
+    scaledTwo =
+      Norm.scaleNonnegative
+        (1ℚ + 1ℚ)
+        twoNN
+        scaledRaw
+  in
+  ℚP.≤-trans
+    (normalizedRowL1BelowTwiceRawL1 dataSet)
+    scaledTwo
+
 finiteNormalizedWeightDobrushinLevel : ProofLevel
 finiteNormalizedWeightDobrushinLevel = machineChecked
