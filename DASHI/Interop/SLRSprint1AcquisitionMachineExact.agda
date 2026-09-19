@@ -84,6 +84,7 @@ record CanonicalPhysicalPlanParity : Set where
     providerResolutionPrecedesScheduling : Bool
     internalNodeOrSourceCoordinateExplicit : Bool
     nodeRouteIndexUsedForGeneralSnapshot : Bool
+    physicalObjectIsConcreteShardOrByteRange : Bool
     physicalObjectsDeduplicatedBeforeConcurrency : Bool
     repeatedLogicalRequestsCoalescedByPhysicalObject : Bool
     ordinaryPathLoadsAllAdjacency : Bool
@@ -96,6 +97,7 @@ canonicalPhysicalPlanParity : CanonicalPhysicalPlanParity
 canonicalPhysicalPlanParity =
   physicalPlanParity
     false
+    true
     true
     true
     true
@@ -154,6 +156,7 @@ record GenericProducerControllerParity : Set where
     identitySourceFamilyReference : String
     authoritySourceFamilyReference : String
     sameControllerABI : Bool
+    selectedRouteLowersWithoutProducerReinterpretation : Bool
     acquisitionAutomaticallyPaysResidual : Bool
     evidenceMustRemainCandidateOnly : Bool
     evidenceMayCreateApplicability : Bool
@@ -167,6 +170,7 @@ canonicalGenericProducerControllerParity =
     "ClassificationEvidence -> P31/P279"
     "IdentitySource -> Wikidata/persisted identity evidence"
     "AuthoritySource -> governed legal authority/OALC"
+    true
     true
     false
     true
