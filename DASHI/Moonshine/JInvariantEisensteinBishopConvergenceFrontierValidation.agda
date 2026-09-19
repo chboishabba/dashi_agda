@@ -141,6 +141,11 @@ qExponentMagnitudeToLiteralExponentCompilerIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 qExponentMagnitudeToLiteralExponentCompilerIsOwned = refl
 
+qMagnitudeCoordinateTransportCompilerIsOwned :
+  P.qMagnitudeCoordinateTransportCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+qMagnitudeCoordinateTransportCompilerIsOwned = refl
+
 bishopLiteralRadiusMajorantCompilerIsOwned :
   P.bishopLiteralRadiusMajorantCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
