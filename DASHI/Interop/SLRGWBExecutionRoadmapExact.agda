@@ -83,6 +83,9 @@ gwbSLRRoadmap =
   ∷ gwbRoadmapCoordinate "Pareto acquisition frontier + explicit gap-flow accounting" implementedAwaitingRuntime
     "non-scalar dimensions: cross-language gap coverage / source-surface support / root-QID support / typed Wikidata target; receipt separates contracted/persisting/new gaps and obligation churn"
     "validate that semantic payoff selection replaces lexical-QID accident while frontier rank remains non-truth-bearing"
+  ∷ gwbRoadmapCoordinate "ambiguity-directed reviewed 100-hop campaign" implementedAwaitingRuntime
+    "SLR agent/gwb-ambiguity-100hop-v1: current-world residuals -> non-scalar question frontier -> exactly one exact acquisition -> explicit review -> atomic residual/trajectory commit -> fresh diagnosis; P31/P279 classification, property, multilingual surface, external-ontology and Snowball tiers retained"
+    "source-written only until focused Rust execution observes reviewed hops; 100 hops do not imply consumer closure or ontology completeness"
   ∷ gwbRoadmapCoordinate "consumer-specific graph residual contraction" active
     "reuse semantic closure, Q/P parent/surrounding graph and claim-relative source roles against declared consumer obligations"
     "identify which semantic/world residuals are paid and which survive to acquisition"
