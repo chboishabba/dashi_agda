@@ -67,3 +67,14 @@ failedFactorisationDrivesAxisDiscovery :
   H.failedFactorisationMayDriveExperimentalAxisDiscovery
     H.canonicalRegenerationHyperfabricBoundary ≡ true
 failedFactorisationDrivesAxisDiscovery = refl
+
+
+constructiveTransportMathLifted :
+  H.constructiveNitrogenTransportMathOwned
+    H.canonicalRegenerationHyperfabricBoundary ≡ true
+constructiveTransportMathLifted = refl
+
+empiricalKernelMajorantStillUnpaid :
+  H.empiricalNitrogenKernelMajorantInhabited
+    H.canonicalRegenerationHyperfabricBoundary ≡ false
+empiricalKernelMajorantStillUnpaid = refl
