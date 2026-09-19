@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as Intersection
 import DASHI.Core.ParticipationSelectionQuotient as Selection
+import DASHI.Core.ReopenableProjectionComposition as Reopenable
 import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
 
 ------------------------------------------------------------------------
@@ -27,7 +28,7 @@ import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
 -- attributed to any external source.
 ------------------------------------------------------------------------
 
-selectionPipelineDonor : Selection.ExactReopenableProjection Selection.PopulationState Selection.ParticipatingSurface
+selectionPipelineDonor : Reopenable.ExactReopenableProjection Selection.PopulationState Selection.ParticipatingSurface
 selectionPipelineDonor = Selection.populationToParticipating
 
 samplingFrameCoordinateReading : String
@@ -71,7 +72,7 @@ eligibilityFrameWitness =
     refl
     frameStatesDiffer
 
-EligibilityFrameFactorisation : Set
+EligibilityFrameFactorisation : Set₁
 EligibilityFrameFactorisation =
   Intersection.FactorsThrough declaredEligibleProjection eligibilityFrameState
 
