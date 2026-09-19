@@ -117,25 +117,25 @@ palantirSecurityCapabilityDoesNotDetermineContestability =
 ------------------------------------------------------------------------
 
 palantirSubjectContestabilityNotInstalled :
-  Palantir.PalantirCapabilityBoundary.subjectInspectionCorrectionAppealInstalled
+  Palantir.subjectInspectionCorrectionAppealInstalled
     palantirCapabilityBoundary
   ≡ false
 palantirSubjectContestabilityNotInstalled = refl
 
 panopticonObservationDoesNotCreateAuthority :
-  Panopticon.AntiPanopticonBoundary.observationCreatesInterventionAuthority
+  Panopticon.observationCreatesInterventionAuthority
     antiPanopticonBoundary
   ≡ false
 panopticonObservationDoesNotCreateAuthority = refl
 
 existingTriadicNetworkStillNotConstructed :
-  Existing.HansonIsraelJewishSurveillanceBoundary.hansonSegalPalantirNetworkConstructed
+  Existing.hansonSegalPalantirNetworkConstructed
     existingApplicationBoundary
   ≡ false
 existingTriadicNetworkStillNotConstructed = refl
 
 existingUniversalMinorityProtectionStillNotAutoPaid :
-  Existing.HansonIsraelJewishSurveillanceBoundary.universalMinorityProtectionAutomaticallyPaid
+  Existing.universalMinorityProtectionAutomaticallyPaid
     existingApplicationBoundary
   ≡ false
 existingUniversalMinorityProtectionStillNotAutoPaid = refl
