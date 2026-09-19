@@ -48,3 +48,12 @@ routeMajorantAbsoluteConvergenceRegression :
     (P.bishopRouteMajorantTerm problem)
 routeMajorantAbsoluteConvergenceRegression =
   P.bishopRouteMajorantAbsolutelyConvergent
+
+
+routeDominatedPartialSumsCauchyRegression :
+  (problem : P.BishopNitrogenRouteDominatedSeries) →
+  BishopSequence._isCauchy
+    (BishopSequence.SeriesOf
+      (P.bishopRouteActualContribution problem))
+routeDominatedPartialSumsCauchyRegression =
+  P.bishopRouteActualPartialSumsCauchy
