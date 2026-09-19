@@ -72,29 +72,11 @@ basisInsertionNormSqBelowOne :
       axis site)
   ≤ 1ℚ
 basisInsertionNormSqBelowOne
-    (pair targetCoord targetCell) axis site =
-  subst
-    (λ value → value ≤ 1ℚ)
-    (sym (basisInsertionNormSqExact targetCoord targetCell axis site))
-    (let
-      k = Basis.kronecker Calibration.bondCellDecidableEquality
-        (pair axis site) targetCell
-     in
-     caseBound k)
-  where
-  caseBound :
-    ∀ cellSelector →
-    cellSelector ≡
-      Basis.kronecker Calibration.bondCellDecidableEquality
-        (pair axis site) targetCell →
-    cellSelector ≤ 1ℚ
-  caseBound cellSelector selectorEq
-    with Calibration.bondCellDecidableEquality (pair axis site) targetCell
-  ... | yes _ =
-    subst (λ value → value ≤ 1ℚ) (sym selectorEq) ℚP.≤-refl
-  ... | no _ =
-    subst (λ value → value ≤ 1ℚ) (sym selectorEq)
-      (ℚP.nonNegative⁻¹ 1ℚ)
+    (pair targetCoord targetCell) axis site
+  rewrite basisInsertionNormSqExact targetCoord targetCell axis site
+  with Calibration.bondCellDecidableEquality (pair axis site) targetCell
+... | yes _ = ℚP.≤-refl
+... | no _ = ℚP.nonNegative⁻¹ 1ℚ
 
 selectedWilsonBasisInsertionNormLevel : ProofLevel
 selectedWilsonBasisInsertionNormLevel = machineChecked
