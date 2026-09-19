@@ -21,12 +21,23 @@ open import Agda.Builtin.Nat using (Nat; suc; _*_)
 import Data.Nat.Properties as NatP
 open import Data.Integer.Base using (+_)
 open import Data.Product.Base using (proj₁; proj₂)
-open import Data.Rational.Unnormalised as Rat using (_/_)
+open import Data.Rational.Unnormalised as Rat using (ℚᵘ; 0ℚᵘ; _/_)
 import Data.Rational.Unnormalised.Properties as RatP
+open import NonReflectiveZ as ZSolver using ()
+  renaming
+    ( solve to Zsolve
+    ; _⊕_ to _:+_
+    ; _⊗_ to _:*_
+    ; _⊜_ to _:=_
+    ; Κ to ZK
+    )
 
 import Real as BishopReal
 import RealProperties as BishopP
 import Sequence as BishopSequence
+
+embed : ℚᵘ → BishopReal.ℝ
+embed = BishopReal._⋆
 
 vanishingDifferenceConvergence :
   ∀ {left right error : Nat → BishopReal.ℝ}
@@ -57,9 +68,9 @@ vanishingDifferenceConvergence
           halfPlusHalf :
             BishopReal._≃_
               (BishopReal._+_
-                (((+ 1 / precision)) BishopReal.⋆)
-                (((+ 1 / precision)) BishopReal.⋆))
-              (((+ 1 / k)) BishopReal.⋆)
+                embed (+ 1 / precision)
+                embed (+ 1 / precision))
+              embed (+ 1 / k)
           halfPlusHalf =
             BishopP.≃-trans
               (BishopP.≃-symm
@@ -68,17 +79,16 @@ vanishingDifferenceConvergence
                   (+ 1 / precision)))
               (BishopP.⋆-cong
                 (RatP.*≡*
-                  (let open BishopP.ℤ-Solver
-                   in solve 1
-                     (λ k′ →
-                       ((Κ (+ 1) ⊗ (Κ (+ 2) ⊗ k′)) ⊕
-                        (Κ (+ 1) ⊗ (Κ (+ 2) ⊗ k′))) ⊗ k′
-                       ⊜
-                       Κ (+ 1) ⊗
-                         ((Κ (+ 2) ⊗ k′) ⊗
-                          (Κ (+ 2) ⊗ k′)))
-                     refl
-                     (+ k))))
+                  (Zsolve 1
+                    (λ k′ →
+                      ((ZK (+ 1) :* (ZK (+ 2) :* k′)) :+
+                       (ZK (+ 1) :* (ZK (+ 2) :* k′))) :* k′
+                      :=
+                      ZK (+ 1) :*
+                        ((ZK (+ 2) :* k′) :*
+                         (ZK (+ 2) :* k′)))
+                    refl
+                    (+ k))))
         in
         NatP.pred cutoff ,
         λ
@@ -89,20 +99,15 @@ vanishingDifferenceConvergence
               errorAtN :
                 BishopReal._≤_
                   (BishopReal.∣ error n ∣)
-                  (((+ 1 / precision)) BishopReal.⋆)
+                  embed (+ 1 / precision)
               errorAtN =
                 BishopP.≤-respˡ-≃
-                  (BishopP.≃-trans
-                    (BishopP.∣-∣-cong
-                      (BishopP.≃-symm
-                        (BishopP.+-identityʳ (error n))))
-                    (BishopP.∣-∣-cong
-                      (BishopP.+-cong
-                        BishopP.≃-refl
-                        (BishopP.≃-symm
-                          (BishopP.-‿cong
-                            (BishopP.≃-symm
-                              (BishopP.+-inverseʳ BishopReal.0ℝ)))))))
+                  (BishopP.∣-∣-cong
+                    (let open BishopP.ℝ-Solver
+                     in solve 1
+                       (λ value → value ⊜ value ⊖ Κ Rat.0ℚᵘ)
+                       BishopP.≃-refl
+                       (error n)))
                   (proj₂ (errorConverges precision)
                     n
                     (NatP.≤-trans
@@ -114,7 +119,7 @@ vanishingDifferenceConvergence
                   (BishopReal.∣
                     BishopReal._-_ (right n) limit
                   ∣)
-                  (((+ 1 / precision)) BishopReal.⋆)
+                  embed (+ 1 / precision)
               rightAtN =
                 proj₂ (rightConverges precision)
                   n
@@ -156,10 +161,10 @@ vanishingDifferenceConvergence
                       errorAtN)
                     rightAtN ⟩
               BishopReal._+_
-                (((+ 1 / precision)) BishopReal.⋆)
-                (((+ 1 / precision)) BishopReal.⋆)
+                embed (+ 1 / precision)
+                embed (+ 1 / precision)
                 ≈⟨ halfPlusHalf ⟩
-              (((+ 1 / k)) BishopReal.⋆)
+              embed (+ 1 / k)
                 ∎
           }
       }
