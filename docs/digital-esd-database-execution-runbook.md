@@ -276,3 +276,36 @@ Only after title/abstract screening should full text enter the SLR/SensibLaw
 second-stage lane. The evidence-bearing coordinates lower onto SLR Sprint-2's
 canonical Rust substrate; the historical Python source-unit batch is merely a
 temporary execution adapter.
+
+
+## Adaptive screening after ERIC deduplication
+
+The post-deduplication P0-A through P0-G execution contract now lives in:
+
+docs/digital-esd-adaptive-screening-p0a-g.md
+
+Do not interpret the 43,996-record screening step as a requirement for serial
+manual review.
+
+The implemented control loop is:
+
+~~~
+authoritative unresolved/reviewed ledger
+-> candidate-only assessment
+-> study-family hypotheses
+-> stratified calibration
+-> reviewed-subset diagnostics
+-> non-scalar Pareto work queue
+-> explicit review overlay
+-> regenerate authoritative ledger
+-> repeat
+~~~
+
+The adaptive layer may prioritise work but cannot write include/exclude
+decisions, remove pending records from the denominator, create same-study
+identity or promote a source into audit admission.
+
+Only authoritative include/probable decisions enter the P0-G full-text
+worklist. P0-G then preserves exact full-text hashes and canonical-evidence
+coordinates before SLR review, SourceAuditAdmission, same-source hyperfabric
+and structured framework challenge/revision.
