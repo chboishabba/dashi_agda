@@ -3,6 +3,8 @@ module DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldValidation where
 import Real as BishopReal
 import Sequence as BishopSequence
 
+import DASHI.Analysis.ConstructedRealBackendSpineExact as Spine
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
 import DASHI.Moonshine.JInvariantEisensteinBishopMajorantSeriesExact as Majorant
 import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldExact as P
 
@@ -35,3 +37,14 @@ e6ReceiptRegression :
 e6ReceiptRegression weld =
   P.e6AbsoluteConvergence
     (P.compileEisensteinBishopMajorants weld)
+
+
+concreteQuotientRadiusWeldRegression :
+  (Q : Spine.PropositionalQuotientRealization P.BishopSetoidReal) →
+  (radius : BishopReal.ℝ) →
+  Unit.BishopUnitIntervalRatio radius →
+  P.LiteralRadiusBishopWeld
+    (P.QuotientRadiusRelation Q)
+    (Spine.quotient Q radius)
+concreteQuotientRadiusWeldRegression =
+  P.radiusWeldFromConcreteBishopQuotient
