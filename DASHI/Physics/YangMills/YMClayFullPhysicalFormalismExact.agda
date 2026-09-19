@@ -7,6 +7,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 import DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact as RouteSH2c
+import DASHI.Physics.YangMills.YMClayRouteSH1DirectSelectedMarkedDecayExact as RouteSH1
+import DASHI.Physics.YangMills.YMClayRouteSH1ToR387DirectUpperExact as RouteSH1R387
 import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as RouteG
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
 import DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact as Level2
@@ -179,6 +181,52 @@ routeSTerminalRequiresSelectedLimitUpperClosureIsTrue :
   routeSTerminalRequiresSelectedLimitUpperClosure ≡ true
 routeSTerminalRequiresSelectedLimitUpperClosureIsTrue =
   RouteSH2c.terminalRouteRequiresSelectedLimitUpperClosureIsTrue
+
+
+routeSH1HasOneTheoremBearingField : Bool
+routeSH1HasOneTheoremBearingField =
+  RouteSH1.canonicalH1HasOneTheoremBearingField
+
+routeSH1HasOneTheoremBearingFieldIsTrue :
+  routeSH1HasOneTheoremBearingField ≡ true
+routeSH1HasOneTheoremBearingFieldIsTrue =
+  RouteSH1.canonicalH1HasOneTheoremBearingFieldIsTrue
+
+routeSH1RequiresHistoricalPublishedWrapper : Bool
+routeSH1RequiresHistoricalPublishedWrapper =
+  RouteSH1.publishedLocalizationWrapperMandatoryForCanonicalH1
+
+routeSH1RequiresHistoricalPublishedWrapperIsFalse :
+  routeSH1RequiresHistoricalPublishedWrapper ≡ false
+routeSH1RequiresHistoricalPublishedWrapperIsFalse =
+  RouteSH1.publishedLocalizationWrapperMandatoryForCanonicalH1IsFalse
+
+routeSH1ToR387RequiresSourceEnvelope : Bool
+routeSH1ToR387RequiresSourceEnvelope =
+  RouteSH1R387.sourceEnvelopeRequiredBetweenH1AndR387
+
+routeSH1ToR387RequiresSourceEnvelopeIsFalse :
+  routeSH1ToR387RequiresSourceEnvelope ≡ false
+routeSH1ToR387RequiresSourceEnvelopeIsFalse =
+  RouteSH1R387.sourceEnvelopeRequiredBetweenH1AndR387IsFalse
+
+routeSH1TimeMeaningRemainsSeparate : Bool
+routeSH1TimeMeaningRemainsSeparate =
+  RouteSH1R387.selectedTimeMeaningRemainsOutsideH1
+
+routeSH1TimeMeaningRemainsSeparateIsTrue :
+  routeSH1TimeMeaningRemainsSeparate ≡ true
+routeSH1TimeMeaningRemainsSeparateIsTrue =
+  RouteSH1R387.selectedTimeMeaningRemainsOutsideH1IsTrue
+
+routeSH1FastEnvelopeMeaningRemainsSeparate : Bool
+routeSH1FastEnvelopeMeaningRemainsSeparate =
+  RouteSH1R387.selectedFastEnvelopeMeaningRemainsOutsideH1
+
+routeSH1FastEnvelopeMeaningRemainsSeparateIsTrue :
+  routeSH1FastEnvelopeMeaningRemainsSeparate ≡ true
+routeSH1FastEnvelopeMeaningRemainsSeparateIsTrue =
+  RouteSH1R387.selectedFastEnvelopeMeaningRemainsOutsideH1IsTrue
 
 f2PrimitiveResearchPayment : Bool
 f2PrimitiveResearchPayment = RouteG.f2PrimitiveResearchPayment
