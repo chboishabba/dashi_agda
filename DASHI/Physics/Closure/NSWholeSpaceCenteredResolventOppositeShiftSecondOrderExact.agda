@@ -259,7 +259,7 @@ oppositeShiftSecondOrderExact D =
         (BishopReal._-_ p m)
         (BishopReal.-_
           (BishopReal._*_
-            (BishopReal._*
+            (BishopReal._*_
               two
               h')
             (BishopReal._*_ p m)))
