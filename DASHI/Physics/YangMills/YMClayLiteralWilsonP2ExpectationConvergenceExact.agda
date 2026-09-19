@@ -3,6 +3,7 @@ module DASHI.Physics.YangMills.YMClayLiteralWilsonP2ExpectationConvergenceExact 
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
 
@@ -127,7 +128,7 @@ canonicalS2BuildsSelectedExpectationLimits :
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
     (inputs : S2.CanonicalWilsonProductS2Inputs finite)
-    (left right : Agda.Builtin.List.List Loop)
+    (left right : List Loop)
     (time : Nat) →
   LiteralWilsonSelectedExpectationLimits
     (S2.canonicalWilsonPairwiseSemantics inputs) left right time
