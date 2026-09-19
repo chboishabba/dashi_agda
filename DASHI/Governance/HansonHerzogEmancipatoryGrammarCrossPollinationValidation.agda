@@ -1,7 +1,7 @@
 module DASHI.Governance.HansonHerzogEmancipatoryGrammarCrossPollinationValidation where
 
 open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.EmancipatoryVocabularyRelationalGrammarNoncollapseExact as V
@@ -50,7 +50,7 @@ protectiveLanguageDoesNotDetermineRouting =
 
 makaluRemainsOpen :
   H.currentMakaluStatus ≡ H.independentInvestigationOpen
-makaluRemainsOpen = H.refl
+makaluRemainsOpen = refl
 
 domainsRemainDistinct :
   H.hansonHerzogPoliticalIdentityClaimed
