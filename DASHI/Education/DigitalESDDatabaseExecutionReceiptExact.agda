@@ -194,6 +194,100 @@ ericQ7Execution : DatabaseExecutionReceipt
 ericQ7Execution = ericInterfaceFailureExecution Queries.ericQ7OpenInteroperableRepairable
 
 
+
+------------------------------------------------------------------------
+-- 2026-09-19 operator-observed live ERIC result-count executions.
+--
+-- A later local execution environment reached the official public ERIC API
+-- successfully for all seven frozen queries and observed HTTP 200 JSON
+-- responses with exact numFound counts. Those probes did not yet retain the
+-- paginated result-set export, so exportNotObserved remains explicit and these
+-- receipts cannot cross the successful structured-search bridge.
+------------------------------------------------------------------------
+
+ericObservedExecutionTimestamp : String
+ericObservedExecutionTimestamp =
+  "2026-09-19 local operator execution; exact clock time not retained in attached execution log"
+
+ericObservedCountExecution :
+  Queries.TranslatedQueryReceipt → Nat → String → String → DatabaseExecutionReceipt
+ericObservedCountExecution q count resultSetRef note =
+  database-execution-receipt
+    q
+    Search.eric
+    true refl
+    true
+    ericObservedExecutionTimestamp
+    ericAPIEntrypoint
+    (executedWithObservedResultSet
+      count
+      resultSetRef
+      (exportNotObserved
+        "count-only probe observed; paginated JSON/CSV export not yet retained")
+      note)
+    "local operator Python execution against official https://api.ies.ed.gov/eric/ public API"
+    "observed result-count receipt only: query submission and result-set existence are paid, but retained export/digest, deduplication, screening, eligibility and evidence payment remain unpaid"
+
+ericQ1ObservedExecution : DatabaseExecutionReceipt
+ericQ1ObservedExecution = ericObservedCountExecution
+  Queries.ericQ1DigitalEducationESD
+  642
+  "ERIC Q1 live JSON result set observed from official public API"
+  "HTTP 200; numFound=642"
+
+ericQ2ObservedExecution : DatabaseExecutionReceipt
+ericQ2ObservedExecution = ericObservedCountExecution
+  Queries.ericQ2Transformation
+  290
+  "ERIC Q2 live JSON result set observed from official public API"
+  "HTTP 200; numFound=290"
+
+ericQ3ObservedExecution : DatabaseExecutionReceipt
+ericQ3ObservedExecution = ericObservedCountExecution
+  Queries.ericQ3ReflexiveSustainability
+  1594
+  "ERIC Q3 live JSON result set observed from official public API"
+  "HTTP 200; numFound=1594"
+
+ericQ4ObservedExecution : DatabaseExecutionReceipt
+ericQ4ObservedExecution = ericObservedCountExecution
+  Queries.ericQ4LifecycleCircularity
+  41889
+  "ERIC Q4 live JSON result set observed from official public API"
+  "HTTP 200; numFound=41889"
+
+ericQ5ObservedExecution : DatabaseExecutionReceipt
+ericQ5ObservedExecution = ericObservedCountExecution
+  Queries.ericQ5ParticipantGovernance
+  214
+  "ERIC Q5 live JSON result set observed from official public API"
+  "HTTP 200; numFound=214"
+
+ericQ6ObservedExecution : DatabaseExecutionReceipt
+ericQ6ObservedExecution = ericObservedCountExecution
+  Queries.ericQ6LongitudinalInstitutional
+  293
+  "ERIC Q6 live JSON result set observed from official public API"
+  "HTTP 200; numFound=293"
+
+ericQ7ObservedExecution : DatabaseExecutionReceipt
+ericQ7ObservedExecution = ericObservedCountExecution
+  Queries.ericQ7OpenInteroperableRepairable
+  1675
+  "ERIC Q7 live JSON result set observed from official public API"
+  "HTTP 200; numFound=1675"
+
+canonicalERICObservedCountExecutions : List DatabaseExecutionReceipt
+canonicalERICObservedCountExecutions =
+  ericQ1ObservedExecution
+  ∷ ericQ2ObservedExecution
+  ∷ ericQ3ObservedExecution
+  ∷ ericQ4ObservedExecution
+  ∷ ericQ5ObservedExecution
+  ∷ ericQ6ObservedExecution
+  ∷ ericQ7ObservedExecution
+  ∷ []
+
 ------------------------------------------------------------------------
 -- 2026-09-19 IEEE Xplore and ACM DL search-result retrieval attempts.
 --
@@ -309,10 +403,17 @@ canonicalExecutionReceipts =
   ∷ acmQ5Execution
   ∷ acmQ6Execution
   ∷ acmQ7Execution
+  ∷ ericQ1ObservedExecution
+  ∷ ericQ2ObservedExecution
+  ∷ ericQ3ObservedExecution
+  ∷ ericQ4ObservedExecution
+  ∷ ericQ5ObservedExecution
+  ∷ ericQ6ObservedExecution
+  ∷ ericQ7ObservedExecution
   ∷ []
 
 executionReceiptCount : Nat
-executionReceiptCount = 35
+executionReceiptCount = 42
 
 ------------------------------------------------------------------------
 -- Promotion firewalls.
@@ -378,4 +479,4 @@ canonicalDatabaseExecutionBoundary = database-execution-boundary
 
 executionReceiptReading : String
 executionReceiptReading =
-  "All thirty-five frozen translated queries now carry explicit execution-attempt receipts. Scopus/Web of Science were blocked before submission by HTTP 403; ERIC direct API response retrieval was unavailable in the current transport; IEEE Xplore and ACM Digital Library live search-result pages were likewise inaccessible through the current web transport. All outcomes remain pre-result failures and therefore carry no observed result counts or exports. querySubmitted remains a retained coordinate so a future successful execution can record true together with executedWithObservedResultSet, exact translated query, count, result-set identity/export state and execution evidence."
+  "The append-only execution ledger now contains forty-two receipts: the original thirty-five platform-specific attempts plus seven later local ERIC executions that successfully submitted the frozen queries to the official public API and observed HTTP 200 JSON numFound counts (Q1=642, Q2=290, Q3=1594, Q4=41889, Q5=214, Q6=293, Q7=1675). The earlier ERIC transport failures remain provenance rather than being overwritten. The seven live ERIC receipts use executedWithObservedResultSet but retain exportNotObserved, because no paginated JSON/CSV artifact or digest is yet recorded. Therefore observed result sets are now 7/35 query identities, retained exports remain 0/35, and no ERIC receipt can yet cross the structured-search success bridge."
