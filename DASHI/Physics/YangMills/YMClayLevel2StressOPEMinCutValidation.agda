@@ -9,6 +9,18 @@ r129PaysWeldAndStressDerivative :
   L2.r129RecoveryPaysR127AndStressDerivative ≡ true
 r129PaysWeldAndStressDerivative = refl
 
+globalAFNotChargedAgain :
+  L2.globalAsymptoticFreedomTrajectoryIndependentInLevel2 ≡ false
+globalAFNotChargedAgain = refl
+
+finiteWardAlgebraNotChargedAgain :
+  L2.finiteWardSliceConservationIndependentInLevel2 ≡ false
+finiteWardAlgebraNotChargedAgain = refl
+
+generatedActionStressProvenanceNotChargedAgain :
+  L2.generatedActionStressProvenanceIndependentInLevel2 ≡ false
+generatedActionStressProvenanceNotChargedAgain = refl
+
 dyadicDecayNotIndependent :
   L2.dyadicOPERemainderDecayIndependentAfterCompositeTailIdentification ≡ false
 dyadicDecayNotIndependent = refl
