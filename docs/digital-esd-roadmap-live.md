@@ -812,3 +812,113 @@ The external walls for the review are now:
 2. **IEEE Xplore & ACM Digital Library:** Search-result retrieval blocked by current web transport.
 3. **Downstream Review Payments:** 5-database joint deduplication requires exports from the other 4 surfaces; eligibility screening, structured extraction, and per-source audit admission remain unpaid.
 
+
+
+## 27. Screened full-text -> SensibLaw / SLR review bridge
+
+Digital-ESD now has a source-written second-stage review bridge:
+
+`DASHI/Education/DigitalESDSLRSourceReviewBridgeExact.agda`
+
+with RED-first regression:
+
+`DASHI/Education/DigitalESDSLRSourceReviewBridgeRegression.agda`.
+
+The bridge is intentionally downstream of screening and source-specific inclusion lineage:
+
+```text
+IncludedSourceLineage source
+-> FullTextArtifactReceipt source
+-> SLRSourceUnitAnalysisReceipt source
+-> SLRCandidateAuditObservation source
+-> SLRObservationReviewReceipt source
+-> ReviewedSLRAuditObservation source
+```
+
+It intentionally does **not** provide:
+
+```text
+ReviewedSLRAuditObservation source
+-> SourceAuditAdmission source
+```
+
+because SLR/SensibLaw review output is an evidence-decomposition and review-acceleration surface, not the Digital-ESD synthesis-admission authority.
+
+### Donor surfaces checked, not modified
+
+No SensibLaw or SLR runtime code was changed.
+
+The bridge reuses the semantics of existing DASHI/SensibLaw owners:
+
+- `DASHI/Wikimedia/SensibLawSourceUnitReviewHandoffExact.agda`
+  - revision/source-anchor preservation;
+  - runtime owns neither source authority nor semantic promotion;
+  - shallow parse / review packet / follow receipt do not create truth.
+- `DASHI/Interop/SLRWikipediaArticlePNFWorldProducerExact.agda`
+  - source manifestation -> parser observations -> candidate PNF;
+  - parser/PNF output is candidate-only and does not create claim or ontology truth;
+  - same-object identity coordinates remain separate proof obligations.
+- `DASHI/Interop/SLRNatClimateSourceUnitPNFBatchExact.agda`
+  - one source-unit record per source fibre;
+  - source hash and revision/snapshot identity retained;
+  - batch size, source role and parser output do not create promotion.
+
+The live SensibLaw runtime at reviewed revision `d25cddf73540bdbb313777bbf566280f4e34313b` independently matches this posture: its public documentation describes SensibLaw as a deterministic review/provenance layer, its current compiler spine keeps candidate identity / refined PNF / claim-target selection / promotion separate, and its review-claim records explicitly carry review-only evidence status and provenance.
+
+### Publication identity discipline
+
+The existing concrete `SensibLawSourceUnit` type requires an `entityQid`. That carrier is therefore **not** reused as the scholarly-paper identity type.
+
+Digital-ESD instead indexes its bridge directly by the existing `AttributedSource` and retains:
+
+```text
+ERIC identifier (when present)
+DOI (when verified)
+PMID (when verified)
+full-text artifact reference
+full-text SHA-256
+retrieval reference/time
+explicit same-object identity review reference
+SLR source-unit reference
+```
+
+with the firewall:
+
+```text
+title match alone != same-object publication identity
+publication QID unresolved != bridge blocked
+publication QID unresolved != permission to invent QID
+```
+
+### Authority firewalls
+
+The new bridge makes these boundaries theorem-bearing:
+
+```text
+metadata-only candidate != SLR second-stage input
+SLR extraction != SourceAuditAdmission
+SLR claim candidate != paper truth
+reviewer-accepted SLR observation != complete SourceAuditAdmission
+SLR runtime != corpus inclusion authority
+PNF residual != empirical fact
+review packet != raised claim ceiling
+```
+
+The intended operational sequence is now:
+
+```text
+search/export
+-> metadata dedup
+-> title/abstract eligibility screening
+-> IncludedSourceLineage
+-> retrieve + hash full text
+-> SensibLaw/SLR source-unit + PNF/review processing
+-> source-indexed candidate situated observations
+-> explicit review acceptance
+-> complete all independent Digital-ESD audit coordinates
+-> SourceAuditAdmission
+-> CorpusAuditedSource
+-> corpus hyperfabric / blind-spot matrix
+```
+
+This bridge is source-written after the pushed local GREEN commit `c0fedffdf...`; it does not inherit that local Agda receipt until the new aggregate delta is reconciled and checked.
