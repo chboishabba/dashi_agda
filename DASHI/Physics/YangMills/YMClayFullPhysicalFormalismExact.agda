@@ -30,6 +30,9 @@ import DASHI.Physics.YangMills.YMClayLevel2D2PhysicalMinCutExact as D2
 import DASHI.Physics.YangMills.YMClayLevel2D2TransportGeneratedRecurrenceExact as D2Generated
 import DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact as D3
 import DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeExact as D3Finite
+import DASHI.Physics.YangMills.YMClayLevel2D2R129CompositeConvergenceExact as D2Conv
+import DASHI.Physics.YangMills.YMClayLevel2CompositeTransportABIInsufficiencyExact as D2Sound
+import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundExact as S2Trace
 import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact as StrongF4
 import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact as Scale
 import DASHI.Physics.YangMills.YMClayCMSDrellYanEmpiricalContactBoundaryExact as CMS
@@ -549,6 +552,48 @@ routeSS2IdentityBoundednessStillPhysicalIsTrue :
   routeSS2IdentityBoundednessStillPhysical ≡ true
 routeSS2IdentityBoundednessStillPhysicalIsTrue =
   S2.identityObservableBoundednessStillPhysicalIsTrue
+
+
+routeSS2ConcreteSU2TraceBoundPaid : Bool
+routeSS2ConcreteSU2TraceBoundPaid = true
+
+routeSS2ConcreteSU2TraceBoundPaidIsTrue :
+  routeSS2ConcreteSU2TraceBoundPaid ≡ true
+routeSS2ConcreteSU2TraceBoundPaidIsTrue = refl
+
+routeSS2QuantitativeBoundToT5PredicateStillPhysical : Bool
+routeSS2QuantitativeBoundToT5PredicateStillPhysical = true
+
+routeSS2QuantitativeBoundToT5PredicateStillPhysicalIsTrue :
+  routeSS2QuantitativeBoundToT5PredicateStillPhysical ≡ true
+routeSS2QuantitativeBoundToT5PredicateStillPhysicalIsTrue = refl
+
+d2BareTransportABIPaysPhysicalMixing : Bool
+d2BareTransportABIPaysPhysicalMixing =
+  D2Sound.bareTransportInhabitantPaysPhysicalD2a
+
+d2BareTransportABIPaysPhysicalMixingIsFalse :
+  d2BareTransportABIPaysPhysicalMixing ≡ false
+d2BareTransportABIPaysPhysicalMixingIsFalse =
+  D2Sound.bareTransportInhabitantPaysPhysicalD2aIsFalse
+
+d2FiniteDepthEqualsCompletedCompositeRequired : Bool
+d2FiniteDepthEqualsCompletedCompositeRequired =
+  D2Conv.finiteDepthEqualsCompletedCompositeRequired
+
+d2FiniteDepthEqualsCompletedCompositeRequiredIsFalse :
+  d2FiniteDepthEqualsCompletedCompositeRequired ≡ false
+d2FiniteDepthEqualsCompletedCompositeRequiredIsFalse =
+  D2Conv.finiteDepthEqualsCompletedCompositeRequiredIsFalse
+
+d2SameFamilyCompositeConvergenceStillPhysical : Bool
+d2SameFamilyCompositeConvergenceStillPhysical =
+  D2Conv.sameFamilyCompositeConvergenceRequired
+
+d2SameFamilyCompositeConvergenceStillPhysicalIsTrue :
+  d2SameFamilyCompositeConvergenceStillPhysical ≡ true
+d2SameFamilyCompositeConvergenceStillPhysicalIsTrue =
+  D2Conv.sameFamilyCompositeConvergenceRequiredIsTrue
 
 f2PrimitiveResearchPayment : Bool
 f2PrimitiveResearchPayment = RouteG.f2PrimitiveResearchPayment
