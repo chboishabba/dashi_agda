@@ -36,6 +36,7 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedMomentCompactContainmentExac
 import DASHI.Physics.YangMills.BalabanClayT5UniformTightnessSubsequenceInheritanceExact as Uniform
 import DASHI.Physics.YangMills.BalabanClayT5SelectedSequentialConvergenceExact as Selected
 import DASHI.Physics.YangMills.BalabanClayT5SelectedProkhorovExtractionExact as Prokhorov
+import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact as Subsequence
 
 record SelectedMarkovProkhorovTightnessInputs
     (Measure Observable Scalar Epsilon Witness : Set)
@@ -129,10 +130,10 @@ selectedMarkovFurtherSubsequence :
       SelectedMarkovProkhorovTightnessInputs
         Measure Observable Scalar Epsilon Witness expectationData authority)
     (subsequence :
-      DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact.SubsequenceWitness
+      Subsequence.SubsequenceWitness
         (T5.diagonalMeasure expectationData)) →
-  DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact.SubsequenceWitness
-    (DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact.values
+  Subsequence.SubsequenceWitness
+    (Subsequence.values
       subsequence)
 selectedMarkovFurtherSubsequence prokhorov inputs subsequence =
   Prokhorov.selectedFurther
