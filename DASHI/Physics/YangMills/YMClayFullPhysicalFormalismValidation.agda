@@ -73,6 +73,16 @@ d1NeedsNoNewAnalyticInequality :
 d1NeedsNoNewAnalyticInequality =
   Full.d1NewAnalyticInequalityRequiredIsFalse
 
+d1NeedsNoAuxiliaryProductRemainder :
+  Full.d1AuxiliaryProductRemainderFunctionRequired ≡ false
+d1NeedsNoAuxiliaryProductRemainder =
+  Full.d1AuxiliaryProductRemainderFunctionRequiredIsFalse
+
+d1NeedsNoIndependentCompositeCarrierAfterR129 :
+  Full.d1IndependentCompositeCarrierRequiredAfterR129 ≡ false
+d1NeedsNoIndependentCompositeCarrierAfterR129 =
+  Full.d1IndependentCompositeCarrierRequiredAfterR129IsFalse
+
 d2StillNeedsSameCoordinate :
   Full.d2SameCoordinateAttachmentStillPhysical ≡ true
 d2StillNeedsSameCoordinate =
