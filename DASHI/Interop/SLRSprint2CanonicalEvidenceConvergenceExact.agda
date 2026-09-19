@@ -39,10 +39,10 @@ m22State : Sprint2MilestoneState
 m22State = paid
 
 m23State : Sprint2MilestoneState
-m23State = implementedAwaitingRuntime
+m23State = paid
 
 m24State : Sprint2MilestoneState
-m24State = required
+m24State = implementedAwaitingRuntime
 
 m25State : Sprint2MilestoneState
 m25State = required
@@ -53,8 +53,11 @@ m21StateIsPaid = refl
 m22StateIsPaid : m22State ≡ paid
 m22StateIsPaid = refl
 
-m23StateAwaitsRuntime : m23State ≡ implementedAwaitingRuntime
-m23StateAwaitsRuntime = refl
+m23StateIsPaid : m23State ≡ paid
+m23StateIsPaid = refl
+
+m24StateAwaitsRuntime : m24State ≡ implementedAwaitingRuntime
+m24StateAwaitsRuntime = refl
 
 record Sprint2Milestone : Set where
   constructor sprint2Milestone
@@ -132,7 +135,7 @@ canonicalManifestationEnvelope =
     true
     true
     true
-    false
+    true
     false
     false
 
