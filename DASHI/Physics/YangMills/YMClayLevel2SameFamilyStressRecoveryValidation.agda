@@ -24,3 +24,7 @@ stressDerivativeNotIndependentAfterR129 = refl
 promotionFailClosed :
   L2.clayPromotion ≡ false
 promotionFailClosed = refl
+
+compositeMarkedSourceNotIndependentAfterR129 :
+  L2.compositeMarkedSourceDataIndependentAfterR129Recovery ≡ false
+compositeMarkedSourceNotIndependentAfterR129 = refl
