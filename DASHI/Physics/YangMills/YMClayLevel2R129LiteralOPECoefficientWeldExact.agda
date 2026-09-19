@@ -132,8 +132,9 @@ literalClayCoefficientMatchesProjectedAFAtSameSelectedDepth :
   ≡
   D2c.projectedAFCoefficientAtLiteralDepth Y group literal
 literalClayCoefficientMatchesProjectedAFAtSameSelectedDepth
-    Y group weld =
-  D2c.literalClayCoefficientMatchesProjectedAFAtSelectedDepth Y group _
+    Y group {literal = literal} weld =
+  D2c.literalClayCoefficientMatchesProjectedAFAtSelectedDepth
+    Y group literal
 
 ------------------------------------------------------------------------
 -- Frontier classification.
