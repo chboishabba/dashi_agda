@@ -17,6 +17,7 @@ module DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _*_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -24,6 +25,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
 import DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact as Probability
+import DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact as R283
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
 import DASHI.Physics.YangMills.BalabanClayT5PreferredDiagonalExpectationProducerExact as Preferred
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -55,11 +57,11 @@ path4FiniteProbabilityIntegral :
   ∀ {Measure Fine Coarse thermodynamic preferred probability realization} →
   Path4PreferredFiniteProbabilitySemantics
     Measure Fine Coarse thermodynamic preferred probability realization →
-  (cutoff : Agda.Builtin.Nat.Nat) → ℚ
+  (cutoff : Nat) → ℚ
 path4FiniteProbabilityIntegral
   {probability = probability} {realization = realization} semantics cutoff =
   let
-    step = DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact.stepAt
+    step = R283.stepAt
       (Probability.presentation probability) cutoff
   in
   Sums.sumRational
@@ -83,7 +85,7 @@ rgPath4ObservableIntegralAgreement
   {probability = probability} {realization = realization}
   semantics cutoff =
   let
-    step = DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact.stepAt
+    step = R283.stepAt
       (Probability.presentation probability) cutoff
   in
   Sums.sumRationalCong
