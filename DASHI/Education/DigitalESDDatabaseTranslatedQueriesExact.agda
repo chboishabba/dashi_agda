@@ -132,111 +132,172 @@ wosQ7OpenInteroperableRepairable = translated-query-receipt Search.webOfScience 
   false refl
   "exact translation of protocol Q7 into Web of Science Core Collection TS Topic"
 
+
 ------------------------------------------------------------------------
--- IEEE Xplore: Command Search over All Metadata.
+-- IEEE Xplore Command Search: free-text nested Boolean concepts.
 ------------------------------------------------------------------------
 
 ieeeQ1DigitalEducationESD : TranslatedQueryReceipt
 ieeeQ1DigitalEducationESD = translated-query-receipt Search.ieeeXplore Search.digitalEducationESD
   (Protocol.PlannedQuery.queryId Protocol.q1DigitalEducationESD) Syntax.ieeeSyntaxReceipt
-  "\"All Metadata\":(((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\")))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\"))"
   false refl
-  "exact translation of protocol Q1 into IEEE Xplore Command Search All Metadata"
+  "exact free-text Command Search translation of protocol Q1; no execution/result receipt"
 
 ieeeQ2Transformation : TranslatedQueryReceipt
 ieeeQ2Transformation = translated-query-receipt Search.ieeeXplore Search.digitalEducationESD
   (Protocol.PlannedQuery.queryId Protocol.q2Transformation) Syntax.ieeeSyntaxReceipt
-  "\"All Metadata\":(((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (transform* OR \"system change\" OR institutional* OR \"institutional change\" OR \"whole institution\" OR curriculum OR pedagogy OR competenc* OR \"learning environment*\")))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (transform* OR \"system change\" OR institutional* OR \"institutional change\" OR \"whole institution\" OR curriculum OR pedagogy OR competenc* OR \"learning environment*\"))"
   false refl
-  "exact translation of protocol Q2 into IEEE Xplore Command Search All Metadata"
+  "exact free-text Command Search translation of protocol Q2"
 
 ieeeQ3ReflexiveSustainability : TranslatedQueryReceipt
 ieeeQ3ReflexiveSustainability = translated-query-receipt Search.ieeeXplore Search.reflexiveDigitalSustainability
   (Protocol.PlannedQuery.queryId Protocol.q3ReflexiveSustainability) Syntax.ieeeSyntaxReceipt
-  "\"All Metadata\":(((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission* OR water OR \"e-waste\" OR circular* OR repair* OR reuse OR recycl* OR upgrade* OR durability OR \"service life\")))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission* OR water OR \"e-waste\" OR circular* OR repair* OR reuse OR recycl* OR upgrade* OR durability OR \"service life\"))"
   false refl
-  "exact translation of protocol Q3 into IEEE Xplore Command Search All Metadata"
+  "exact free-text Command Search translation of protocol Q3"
 
 ieeeQ4LifecycleCircularity : TranslatedQueryReceipt
 ieeeQ4LifecycleCircularity = translated-query-receipt Search.ieeeXplore Search.lifecycleCircularity
   (Protocol.PlannedQuery.queryId Protocol.q4LifecycleCircularity) Syntax.ieeeSyntaxReceipt
-  "\"All Metadata\":((\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission* OR water OR \"e-waste\" OR circular* OR repair* OR reuse OR recycl* OR upgrade* OR durability OR \"service life\"))"
+  "(\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission* OR water OR \"e-waste\" OR circular* OR repair* OR reuse OR recycl* OR upgrade* OR durability OR \"service life\")"
   false refl
-  "exact translation of protocol Q4 into IEEE Xplore Command Search All Metadata"
+  "exact free-text Command Search translation of protocol Q4"
 
 ieeeQ5ParticipantGovernance : TranslatedQueryReceipt
 ieeeQ5ParticipantGovernance = translated-query-receipt Search.ieeeXplore Search.participantAgencyGovernance
   (Protocol.PlannedQuery.queryId Protocol.q5ParticipantGovernance) Syntax.ieeeSyntaxReceipt
-  "\"All Metadata\":(((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (\"student voice\" OR \"learner voice\" OR \"learner agency\" OR \"student agency\" OR participatory OR \"participatory research\" OR co-design OR codesign OR governance OR \"public accountability\")))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (\"student voice\" OR \"learner voice\" OR \"learner agency\" OR \"student agency\" OR participatory OR \"participatory research\" OR co-design OR codesign OR governance OR \"public accountability\"))"
   false refl
-  "exact translation of protocol Q5 into IEEE Xplore Command Search All Metadata"
+  "exact free-text Command Search translation of protocol Q5"
 
 ieeeQ6LongitudinalInstitutional : TranslatedQueryReceipt
 ieeeQ6LongitudinalInstitutional = translated-query-receipt Search.ieeeXplore Search.longitudinalInstitutionalImpact
   (Protocol.PlannedQuery.queryId Protocol.q6LongitudinalInstitutional) Syntax.ieeeSyntaxReceipt
-  "\"All Metadata\":(((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (longitudinal OR long-term OR durability OR sustainab* OR institutionalisation OR institutionalization OR persistence OR retention OR follow-up OR \"follow up\")))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (longitudinal OR long-term OR durability OR sustainab* OR institutionalisation OR institutionalization OR persistence OR retention OR follow-up OR \"follow up\"))"
   false refl
-  "exact translation of protocol Q6 into IEEE Xplore Command Search All Metadata"
+  "exact free-text Command Search translation of protocol Q6"
 
 ieeeQ7OpenInteroperableRepairable : TranslatedQueryReceipt
 ieeeQ7OpenInteroperableRepairable = translated-query-receipt Search.ieeeXplore Search.openInteroperabilityRepairability
   (Protocol.PlannedQuery.queryId Protocol.q7OpenInteroperableRepairable) Syntax.ieeeSyntaxReceipt
-  "\"All Metadata\":(((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (interoperab* OR \"open standard*\" OR \"open source\" OR OER OR \"open educational resource*\" OR portability OR migration OR export* OR \"vendor lock-in\" OR repairab* OR \"right to repair\")))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (interoperab* OR \"open standard*\" OR \"open source\" OR OER OR \"open educational resource*\" OR portability OR migration OR export* OR \"vendor lock-in\" OR repairab* OR \"right to repair\"))"
   false refl
-  "exact translation of protocol Q7 into IEEE Xplore Command Search All Metadata"
+  "exact free-text Command Search translation of protocol Q7"
 
 ------------------------------------------------------------------------
--- ERIC: Solr-style API GET Search.
+-- ERIC public API: documented Boolean / quoted-phrase search parameter.
+-- Stems are expanded explicitly rather than assuming undocumented wildcard
+-- semantics.
 ------------------------------------------------------------------------
 
 ericQ1DigitalEducationESD : TranslatedQueryReceipt
 ericQ1DigitalEducationESD = translated-query-receipt Search.eric Search.digitalEducationESD
   (Protocol.PlannedQuery.queryId Protocol.q1DigitalEducationESD) Syntax.ericSyntaxReceipt
-  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\"))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\"))"
   false refl
-  "exact translation of protocol Q1 into ERIC API search syntax"
+  "exact ERIC API search-parameter translation of protocol Q1; stems expanded explicitly"
 
 ericQ2Transformation : TranslatedQueryReceipt
 ericQ2Transformation = translated-query-receipt Search.eric Search.digitalEducationESD
   (Protocol.PlannedQuery.queryId Protocol.q2Transformation) Syntax.ericSyntaxReceipt
-  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (transform* OR \"system change\" OR institutional* OR \"institutional change\" OR \"whole institution\" OR curriculum OR pedagogy OR competenc* OR \"learning environment*\"))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (transform OR transformation OR transformative OR \"system change\" OR institution OR institutional OR institutionalisation OR institutionalization OR \"institutional change\" OR \"whole institution\" OR curriculum OR pedagogy OR competence OR competencies OR \"learning environment\" OR \"learning environments\"))"
   false refl
-  "exact translation of protocol Q2 into ERIC API search syntax"
+  "exact ERIC API translation of protocol Q2 with explicit stem expansion"
 
 ericQ3ReflexiveSustainability : TranslatedQueryReceipt
 ericQ3ReflexiveSustainability = translated-query-receipt Search.eric Search.reflexiveDigitalSustainability
   (Protocol.PlannedQuery.queryId Protocol.q3ReflexiveSustainability) Syntax.ericSyntaxReceipt
-  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission* OR water OR \"e-waste\" OR circular* OR repair* OR reuse OR recycl* OR upgrade* OR durability OR \"service life\"))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission OR emissions OR water OR \"e-waste\" OR circular OR circularity OR repair OR repairability OR reuse OR recycle OR recycling OR upgrade OR upgrades OR durability OR \"service life\"))"
   false refl
-  "exact translation of protocol Q3 into ERIC API search syntax"
+  "exact ERIC API translation of protocol Q3 with explicit stem expansion"
 
 ericQ4LifecycleCircularity : TranslatedQueryReceipt
 ericQ4LifecycleCircularity = translated-query-receipt Search.eric Search.lifecycleCircularity
   (Protocol.PlannedQuery.queryId Protocol.q4LifecycleCircularity) Syntax.ericSyntaxReceipt
-  "(\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission* OR water OR \"e-waste\" OR circular* OR repair* OR reuse OR recycl* OR upgrade* OR durability OR \"service life\")"
+  "(\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission OR emissions OR water OR \"e-waste\" OR circular OR circularity OR repair OR repairability OR reuse OR recycle OR recycling OR upgrade OR upgrades OR durability OR \"service life\")"
   false refl
-  "exact translation of protocol Q4 into ERIC API search syntax"
+  "exact ERIC API translation of protocol Q4"
 
 ericQ5ParticipantGovernance : TranslatedQueryReceipt
 ericQ5ParticipantGovernance = translated-query-receipt Search.eric Search.participantAgencyGovernance
   (Protocol.PlannedQuery.queryId Protocol.q5ParticipantGovernance) Syntax.ericSyntaxReceipt
-  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (\"student voice\" OR \"learner voice\" OR \"learner agency\" OR \"student agency\" OR participatory OR \"participatory research\" OR co-design OR codesign OR governance OR \"public accountability\"))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (\"student voice\" OR \"learner voice\" OR \"learner agency\" OR \"student agency\" OR participatory OR \"participatory research\" OR co-design OR codesign OR governance OR \"public accountability\"))"
   false refl
-  "exact translation of protocol Q5 into ERIC API search syntax"
+  "exact ERIC API translation of protocol Q5"
 
 ericQ6LongitudinalInstitutional : TranslatedQueryReceipt
 ericQ6LongitudinalInstitutional = translated-query-receipt Search.eric Search.longitudinalInstitutionalImpact
   (Protocol.PlannedQuery.queryId Protocol.q6LongitudinalInstitutional) Syntax.ericSyntaxReceipt
-  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (longitudinal OR long-term OR durability OR sustainab* OR institutionalisation OR institutionalization OR persistence OR retention OR follow-up OR \"follow up\"))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (longitudinal OR long-term OR durability OR sustainability OR sustainable OR institutionalisation OR institutionalization OR persistence OR retention OR follow-up OR \"follow up\"))"
   false refl
-  "exact translation of protocol Q6 into ERIC API search syntax"
+  "exact ERIC API translation of protocol Q6 with explicit stem expansion"
 
 ericQ7OpenInteroperableRepairable : TranslatedQueryReceipt
 ericQ7OpenInteroperableRepairable = translated-query-receipt Search.eric Search.openInteroperabilityRepairability
   (Protocol.PlannedQuery.queryId Protocol.q7OpenInteroperableRepairable) Syntax.ericSyntaxReceipt
-  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform*\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (interoperab* OR \"open standard*\" OR \"open source\" OR OER OR \"open educational resource*\" OR portability OR migration OR export* OR \"vendor lock-in\" OR repairab* OR \"right to repair\"))"
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (interoperability OR interoperable OR \"open standard\" OR \"open standards\" OR \"open source\" OR OER OR \"open educational resource\" OR \"open educational resources\" OR portability OR migration OR export OR exports OR exporting OR \"vendor lock-in\" OR repairable OR repairability OR \"right to repair\"))"
   false refl
-  "exact translation of protocol Q7 into ERIC API search syntax"
+  "exact ERIC API translation of protocol Q7 with explicit stem expansion"
+
+
+
+------------------------------------------------------------------------
+-- ACM Digital Library Advanced Search: ACM Full-Text collection / Anywhere.
+-- Stems are expanded explicitly rather than assuming undocumented wildcard
+-- behaviour.
+------------------------------------------------------------------------
+
+acmQ1DigitalEducationESD : TranslatedQueryReceipt
+acmQ1DigitalEducationESD = translated-query-receipt Search.acmDigitalLibrary Search.digitalEducationESD
+  (Protocol.PlannedQuery.queryId Protocol.q1DigitalEducationESD) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q1 over the ACM Full-Text collection / Anywhere field"
+
+acmQ2Transformation : TranslatedQueryReceipt
+acmQ2Transformation = translated-query-receipt Search.acmDigitalLibrary Search.digitalEducationESD
+  (Protocol.PlannedQuery.queryId Protocol.q2Transformation) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (transform OR transformation OR transformative OR \"system change\" OR institution OR institutional OR institutionalisation OR institutionalization OR \"institutional change\" OR \"whole institution\" OR curriculum OR pedagogy OR competence OR competencies OR \"learning environment\" OR \"learning environments\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q2 with explicit stem expansion"
+
+acmQ3ReflexiveSustainability : TranslatedQueryReceipt
+acmQ3ReflexiveSustainability = translated-query-receipt Search.acmDigitalLibrary Search.reflexiveDigitalSustainability
+  (Protocol.PlannedQuery.queryId Protocol.q3ReflexiveSustainability) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission OR emissions OR water OR \"e-waste\" OR circular OR circularity OR repair OR repairability OR reuse OR recycle OR recycling OR upgrade OR upgrades OR durability OR \"service life\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q3 with explicit stem expansion"
+
+acmQ4LifecycleCircularity : TranslatedQueryReceipt
+acmQ4LifecycleCircularity = translated-query-receipt Search.acmDigitalLibrary Search.lifecycleCircularity
+  (Protocol.PlannedQuery.queryId Protocol.q4LifecycleCircularity) Syntax.acmSyntaxReceipt
+  "(\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission OR emissions OR water OR \"e-waste\" OR circular OR circularity OR repair OR repairability OR reuse OR recycle OR recycling OR upgrade OR upgrades OR durability OR \"service life\")"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q4"
+
+acmQ5ParticipantGovernance : TranslatedQueryReceipt
+acmQ5ParticipantGovernance = translated-query-receipt Search.acmDigitalLibrary Search.participantAgencyGovernance
+  (Protocol.PlannedQuery.queryId Protocol.q5ParticipantGovernance) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (\"student voice\" OR \"learner voice\" OR \"learner agency\" OR \"student agency\" OR participatory OR \"participatory research\" OR co-design OR codesign OR governance OR \"public accountability\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q5"
+
+acmQ6LongitudinalInstitutional : TranslatedQueryReceipt
+acmQ6LongitudinalInstitutional = translated-query-receipt Search.acmDigitalLibrary Search.longitudinalInstitutionalImpact
+  (Protocol.PlannedQuery.queryId Protocol.q6LongitudinalInstitutional) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (longitudinal OR long-term OR durability OR sustainability OR sustainable OR institutionalisation OR institutionalization OR persistence OR retention OR follow-up OR \"follow up\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q6 with explicit stem expansion"
+
+acmQ7OpenInteroperableRepairable : TranslatedQueryReceipt
+acmQ7OpenInteroperableRepairable = translated-query-receipt Search.acmDigitalLibrary Search.openInteroperabilityRepairability
+  (Protocol.PlannedQuery.queryId Protocol.q7OpenInteroperableRepairable) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (interoperability OR interoperable OR \"open standard\" OR \"open standards\" OR \"open source\" OR OER OR \"open educational resource\" OR \"open educational resources\" OR portability OR migration OR export OR exports OR exporting OR \"vendor lock-in\" OR repairable OR repairability OR \"right to repair\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q7 with explicit stem expansion"
+
 
 canonicalTranslatedQueries : List TranslatedQueryReceipt
 canonicalTranslatedQueries =
@@ -268,10 +329,17 @@ canonicalTranslatedQueries =
   ∷ ericQ5ParticipantGovernance
   ∷ ericQ6LongitudinalInstitutional
   ∷ ericQ7OpenInteroperableRepairable
+  ∷ acmQ1DigitalEducationESD
+  ∷ acmQ2Transformation
+  ∷ acmQ3ReflexiveSustainability
+  ∷ acmQ4LifecycleCircularity
+  ∷ acmQ5ParticipantGovernance
+  ∷ acmQ6LongitudinalInstitutional
+  ∷ acmQ7OpenInteroperableRepairable
   ∷ []
 
 translatedQueryCount : Nat
-translatedQueryCount = 28
+translatedQueryCount = 35
 
 data TranslatedQueryCreatesResultSet : Set where
 data TranslatedQueryCreatesExecutionTimestamp : Set where
@@ -298,7 +366,7 @@ record DatabaseTranslatedQueryBoundary : Set where
     ericSevenExactQueriesFrozen : Bool
     ericSevenExactQueriesFrozenIsTrue : ericSevenExactQueriesFrozen ≡ true
     acmSevenExactQueriesFrozen : Bool
-    acmSevenExactQueriesFrozenIsFalse : acmSevenExactQueriesFrozen ≡ false
+    acmSevenExactQueriesFrozenIsTrue : acmSevenExactQueriesFrozen ≡ true
     anyTranslatedQueryExecutionObserved : Bool
     anyTranslatedQueryExecutionObservedIsFalse : anyTranslatedQueryExecutionObserved ≡ false
 
@@ -310,9 +378,9 @@ canonicalDatabaseTranslatedQueryBoundary = database-translated-query-boundary
   true refl
   true refl
   true refl
-  false refl
+  true refl
   false refl
 
 translatedQueryReading : String
 translatedQueryReading =
-  "Twenty-eight exact platform-specific queries are frozen across four databases (seven each for Scopus TITLE-ABS-KEY, Web of Science Core Collection TS Topic, IEEE Xplore Command Search, and ERIC API search). ACM DL exact queries remain explicit translation debt (7 of 35 planned queries unpaid). No translated query has been executed, counted, exported, deduplicated, screened or promoted into evidence completeness."
+  "All thirty-five platform-specific queries are frozen: seven each for Scopus TITLE-ABS-KEY, Web of Science Core Collection TS Topic, IEEE Xplore free-text Command Search, the ERIC public API, and ACM Digital Library Advanced Search over the ACM Full-Text collection / Anywhere field. ERIC and ACM stem-like terms are expanded explicitly rather than assuming undocumented wildcard semantics. No translated query is thereby executed, counted, exported, deduplicated, screened or promoted into evidence completeness."

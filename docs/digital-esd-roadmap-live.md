@@ -347,3 +347,344 @@ framework mostly paid
 → let corpus defeat/refine the seven principles
 → reopen formal/source acquisition only on a literal residual
 ```
+
+
+## 16. Certification recut: full aggregate now has a local GREEN reference object
+
+Operator-observed local execution now supersedes the older core-only certification boundary for the **local executable generation**:
+
+```text
+local branch/worktree: work-esd-audit
+exact commit: 94d77498b417f2328b685e186c3f4750f575956c
+target: DASHI/EverythingDigitalESDReciprocalBraid.agda
+Agda 2.9: PASS
+aggregate/dependency count: 911/911 GREEN
+AGDA_RTS_HEAP: 7G
+DASHI_AGDA_RSS_LIMIT_MB: 8192
+static audit over 48 modified/added Agda files: PASS 48/48
+axioms / holes / postulate leaks reported by static audit: 0
+```
+
+This receipt is attached **only** to that exact local commit. It must not be retroactively attached to older remote Digital-ESD heads or to source-written commits added after `94d77498...`.
+
+The local GREEN work also paid:
+
+- decoupling of heavy cross-domain transitive imports so the aggregate no longer drags the >1,800-module physics/algebra closure;
+- Pareto Rounds 15-20 in the executable local generation;
+- IEEE + ERIC query translation surface, leaving ACM explicitly unpaid;
+- direct constructive rational equalities replacing heavy reflected ring-solver use in `GenericExpectedFibreRateExact`;
+- Agda 2.9 universe/name/scope repairs across the aggregate dependency graph.
+
+The remote feature branch may therefore contain later source-written commits that do **not** inherit this receipt.
+
+## 17. New upstream residual: who was never counted as eligible?
+
+The Round-20 eleven-question acquisition Pareto remains frozen. #981's eligible-missing carrier exposes a genuinely harder consumer one level upstream:
+
+```text
+target universe
+→ eligibility-definition / administrative-register / recruitment frame
+→ declared eligible carrier
+→ disclosure / invitation / response / consent gates
+→ realised analytic carrier
+```
+
+Digital-ESD now has a thin owner:
+
+`DigitalESDEligibilityFrameExclusionExact.agda`
+
+with the DASHI-owned result:
+
+```text
+same declared eligible carrier
+!= same upstream frame exclusion
+
+EligibilityFrameState
+not FactorsThrough
+DeclaredEligibleCarrier
+```
+
+This reuses `ParticipationSelectionQuotient` and `EvidenceDesignAdmissibilityExact.samplingFrame`; it does not create another generic eligibility/sampling ontology.
+
+The first Python-guided source front is:
+
+- NCVER 2024 Student Outcomes Survey technical notes — population/frame/invitation contraction and contactability restrictions;
+- Social Research Centre / QILT 2022 Student Experience Survey methodology — Australian higher-education eligibility identification, supplementation of enrolments missing from TCSI extracts, population-frame construction and exclusion rules;
+- Voorheis 2021 Census working paper — administrative college-record frame coverage and subgroup undercoverage;
+- Dynarski/Hemelt/Hyman 2015 — DOI `10.3102/0162373715576078`, independent NSC subgroup undercoverage/noncoverage mechanisms;
+- Fisher et al. 2019 — DOI `10.3389/fpubh.2019.00217`, independent Australian recruitment-frame/reachability construction;
+- Creagh 2016 — DOI `10.1080/02680939.2015.1066870`, independent category-construction/LBOTE residual;
+- Clutterbuck/Hardy/Creagh — DOI `10.1080/02680939.2021.1972166`, Queensland OneSchool preclusion/omission.
+
+These are calibration/acquisition candidates, not final-corpus admissions.
+
+The new controlling distinction is:
+
+```text
+eligible-but-missing
+!=
+never-counted-as-eligible
+```
+
+## 18. Roadmap effect
+
+The main scientific P0 is unchanged:
+
+```text
+execute declared database searches
+→ deduplicate
+→ screen
+→ admitted corpus
+→ SourceAuditAdmission per included source
+→ corpus-level blind-spot matrix
+→ support | narrow | split | merge | defeat | extend the seven principles
+```
+
+The upstream eligibility-frame owner is allowed because it is a literal consumer residual exposed by the existing Pareto/#981 spine. It does **not** reopen generic pre-corpus snowballing.
+
+Future conceptual additions remain blocked unless a concrete admitted-corpus collision demands them, including the current #981 candidate families:
+
+```text
+epistemic labour burden
+epistemic activism / proper uptake
+relational research burden
+```
+
+```text
+source suggests candidate coordinate != coordinate required
+```
+
+
+## 19. Upstream eligibility-frame acquisition freeze
+
+The upstream Python matrix now has plural calibration for every declared residual:
+
+```text
+target -> frame contraction
+eligibility-definition rule
+administrative-register coverage
+recruitment/contact reachability
+subgroup undercoverage
+category/data omission
+same-object frame comparison
+```
+
+This is a **calibration stop condition**, not an evidence-completeness claim. It does not convert any candidate into an included study or raise any source's claim ceiling.
+
+Accordingly:
+
+```text
+Round 20 old-matrix acquisition      frozen
+upstream eligibility-frame acquisition frozen
+declared database execution          still P0
+dedup / screening / SourceAuditAdmission still P0
+```
+
+The next acquisition round is blocked until the admitted corpus or a same-object manuscript consumer exposes a distinction that the current surfaces cannot separate.
+
+
+## 20. Structured-search to source-audit admission weld
+
+The repository now has an explicit same-object consumer between the existing transparent structured-search closure and the situated source-audit gate:
+
+`DASHI/Education/DigitalESDSearchToSourceAuditAdmissionExact.agda`
+
+with RED-first regression:
+
+`DigitalESDSearchToSourceAuditAdmissionRegression.agda`.
+
+The final source carrier is:
+
+```text
+TransparentStructuredSearchClosureReceipt
++ source-specific included-set / screening / extraction lineage
++ SourceAuditAdmission source
+-> CorpusAuditedSource source
+```
+
+This deliberately preserves two independent payments:
+
+```text
+search/screen/extraction lineage != source audit admission
+source audit admission != proof of declared-search inclusion
+```
+
+A pre-screen candidate, search hit, included-set string reference or completed audit cannot manufacture the other side of the weld. The source identity is indexed across both receipts; inclusion remains an observed review-work fact, and audit admission remains a source-bounded completeness/admissibility fact rather than claim authority.
+
+Accordingly, the P0 execution target is now operationally precise:
+
+```text
+successful database executions with retained exports
+-> cross-database deduplication
+-> eligibility screening + exclusion ledger
+-> structured extraction
+-> source-specific included lineage
+-> SourceAuditAdmission
+-> CorpusAuditedSource
+-> corpus-level blind-spot matrix
+-> challenge seven principles
+```
+
+The current review still has no manufactured canonical `CorpusAuditedSource`; those can exist only after real search/screen/extraction work products and per-source audit receipts exist.
+
+### Remote aggregate note
+
+The connector branch had four eligibility-frame imports serialized as literal `\\n` text rather than actual newlines. Commit `8c8c04ea...` repairs that remote-only source defect and wires the search-to-audit weld into the aggregate. This repair does not alter or extend the local aggregate GREEN receipt at exact commit `94d77498...`.
+
+
+## 21. Database execution recut: 28/35 translated, 21 attempts, zero observed result sets
+
+The remote Digital-ESD source generation now mirrors the locally intended translation surface:
+
+```text
+Scopus              7/7
+Web of Science      7/7
+IEEE Xplore         7/7
+ERIC                 7/7
+ACM Digital Library  0/7
+total               28/35
+```
+
+ERIC syntax is sourced from the official IES/ERIC public API documentation. IEEE uses the already-pinned official Command Search documentation. ERIC stems are expanded explicitly rather than assuming undocumented wildcard semantics.
+
+Execution history now contains 21 query-specific attempt receipts:
+
+```text
+Scopus         7: HTTP 403 before submission
+Web of Science 7: HTTP 403 before submission
+ERIC            7: current web transport refused direct API response access before an observed result set
+IEEE            0
+ACM             0
+```
+
+Therefore the exact current state is:
+
+```text
+translations frozen       28/35
+execution attempts         21
+queries with observed result set 0
+retained database exports 0
+deduplication              unpaid
+eligibility screening      unpaid
+structured extraction      unpaid
+CorpusAuditedSource        none manufactured
+```
+
+These failure receipts are append-only provenance. They are not zero-result searches and do not close any search family.
+
+Operational instructions are frozen in:
+
+`docs/digital-esd-database-execution-runbook.md`
+
+The current execution Pareto is readiness-only:
+
+```text
+ERIC local/public API first
+-> IEEE exact Command Search
+-> authenticated Scopus / Web of Science
+-> ACM only after official syntax + seven translations are pinned
+```
+
+This ordering is not an evidence/source-quality rank.
+
+
+## 22. Attempt-ledger to successful-execution bridge
+
+The repository now has a physical weld between the query-specific attempt/outcome ledger and the successful execution receipt required by `DigitalESDStructuredSearchExact`:
+
+`DASHI/Education/DigitalESDDatabaseExecutionStructuredSearchBridgeExact.agda`
+
+with RED-first regression:
+
+`DigitalESDDatabaseExecutionStructuredSearchBridgeRegression.agda`.
+
+The success discriminator is intentionally strict:
+
+```text
+execution attempt
++ exact search-surface match
++ querySubmitted = true
++ executedWithObservedResultSet
++ exportObserved
+-> StructuredSearch.DatabaseExecutionReceipt surface
+```
+
+Blocked-before-submission, authentication failure, interface failure, an observed count without a retained export, or a submitted query without an observed result set cannot cross this bridge.
+
+The existing Scopus Q1 blocked receipt and ERIC Q1 transport-failure receipt are explicitly used as negative witnesses.
+
+This closes the formal glue needed for a future successful local/API execution to enter the dependent structured-search chain. It does not create a successful execution, deduplication, screening or corpus admission in the current state.
+
+
+## 23. Translation surface complete: 35/35
+
+The declared five-database translation surface is now complete:
+
+```text
+Scopus              7/7
+Web of Science      7/7
+IEEE Xplore         7/7
+ERIC                 7/7
+ACM Digital Library  7/7
+total               35/35
+```
+
+ACM syntax is sourced from official ACM Digital Library materials documenting Advanced Search, Boolean AND/OR/NOT, exact-phrase quotation and the Anywhere search surface. The frozen ACM translations use the ACM Full-Text collection / Anywhere scope and explicitly expand stem-like terms instead of assuming undocumented wildcard behaviour.
+
+The controlling distinction remains:
+
+```text
+35/35 translations frozen
+!=
+35/35 queries executed
+```
+
+Current observed execution result sets remain zero. Translation closure removes a planning debt; it does not pay execution, export retention, deduplication, screening, extraction or corpus admission.
+
+Accordingly the scientific P0 is now pure execution work rather than further query formalisation.
+
+
+## 24. All declared queries now have attempt receipts
+
+All 35 frozen platform-specific queries now have query-specific execution-attempt receipts:
+
+```text
+Scopus              7/7 attempted
+Web of Science      7/7 attempted
+ERIC                 7/7 attempted
+IEEE Xplore         7/7 attempted
+ACM Digital Library  7/7 attempted
+total               35/35 attempted
+```
+
+Observed successful result sets remain:
+
+```text
+0/35
+```
+
+and retained database exports remain zero.
+
+The failure classes remain source/surface-specific and append-only:
+
+- Scopus / Web of Science: HTTP 403 before query submission;
+- ERIC: current web transport could not retrieve the direct API response;
+- IEEE Xplore / ACM Digital Library: current web transport could not retrieve live query-bearing result pages.
+
+None of these states can inhabit `SuccessfulObservedOutcome`, so none can cross
+`DigitalESDDatabaseExecutionStructuredSearchBridgeExact`.
+
+The current programme boundary is therefore:
+
+```text
+query formalisation        paid 35/35
+attempt provenance         paid 35/35
+observed result sets       unpaid 0/35
+retained exports           unpaid
+deduplication              unpaid
+screening                  unpaid
+structured extraction      unpaid
+CorpusAuditedSource        none
+```
+
+Further framework/query formalisation is dominated until a genuinely reachable execution environment produces observed counts/exports.

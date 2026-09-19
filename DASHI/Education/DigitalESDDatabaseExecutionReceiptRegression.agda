@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 import DASHI.Education.DigitalESDDatabaseExecutionReceiptExact as Exec
 import DASHI.Education.DigitalESDDatabaseTranslatedQueriesExact as Queries
 
-executionReceiptCountRegression : Exec.executionReceiptCount ≡ 14
+executionReceiptCountRegression : Exec.executionReceiptCount ≡ 35
 executionReceiptCountRegression = refl
 
 scopusExecutionAttemptedRegression :
@@ -61,3 +61,44 @@ blockedExecutionCannotCreateIncludedCorpusRegression :
   Exec.ExecutionReceiptCreatesIncludedCorpus → ⊥
 blockedExecutionCannotCreateIncludedCorpusRegression =
   Exec.executionReceiptDoesNotCreateIncludedCorpus
+
+
+ericExecutionAttemptedRegression :
+  Exec.DatabaseExecutionReceipt.executionAttempted Exec.ericQ1Execution ≡ true
+ericExecutionAttemptedRegression = refl
+
+ericCurrentQueryNotSubmittedRegression :
+  Exec.DatabaseExecutionReceipt.querySubmitted Exec.ericQ1Execution ≡ false
+ericCurrentQueryNotSubmittedRegression = refl
+
+ericInterfaceFailureBeforeSubmissionRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.ericQ1Execution
+  ≡ Exec.interfaceFailureBeforeSubmission
+      "current web transport refused direct api.ies.ed.gov access before a result response could be observed"
+ericInterfaceFailureBeforeSubmissionRegression = refl
+
+ericTranslatedQueryIdentityRegression :
+  Exec.DatabaseExecutionReceipt.translatedQuery Exec.ericQ1Execution
+  ≡ Queries.ericQ1DigitalEducationESD
+ericTranslatedQueryIdentityRegression = refl
+
+
+ieeeExecutionAttemptedRegression :
+  Exec.DatabaseExecutionReceipt.executionAttempted Exec.ieeeQ1Execution ≡ true
+ieeeExecutionAttemptedRegression = refl
+
+acmExecutionAttemptedRegression :
+  Exec.DatabaseExecutionReceipt.executionAttempted Exec.acmQ1Execution ≡ true
+acmExecutionAttemptedRegression = refl
+
+ieeeInterfaceFailureBeforeSubmissionRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.ieeeQ1Execution
+  ≡ Exec.interfaceFailureBeforeSubmission
+      "current web transport could not retrieve an IEEE Xplore search-result page for the query-bearing URL"
+ieeeInterfaceFailureBeforeSubmissionRegression = refl
+
+acmInterfaceFailureBeforeSubmissionRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.acmQ1Execution
+  ≡ Exec.interfaceFailureBeforeSubmission
+      "current web transport could not retrieve an ACM Digital Library search-result page for the query-bearing URL"
+acmInterfaceFailureBeforeSubmissionRegression = refl
