@@ -8,6 +8,8 @@ open import DASHI.Governance.HansonPoliticalEquilibriumNonfactorabilityExact pub
 open import DASHI.Governance.HansonPoliticalEquilibriumNonfactorabilityValidation public
 open import DASHI.Governance.HansonBurqaIslamophobiaFeministRelationalExact public
 open import DASHI.Governance.HansonBurqaIslamophobiaFeministRelationalValidation public
+open import DASHI.Governance.HansonStuntLacanIrigarayGrammarExact public
+open import DASHI.Governance.HansonStuntLacanIrigarayGrammarValidation public
 open import DASHI.Core.IntersectionalNonFactorability public
 open import DASHI.Core.QueryFactorisationSufficiency public
 open import DASHI.Core.DeclaredRealizedIntegrityResidualExact public
