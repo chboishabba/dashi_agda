@@ -59,13 +59,21 @@ f1R339MagnitudeEquality = exact-residual
   obsoleteStrength
   "R343 records sourceMagnitudeEqualityPrimitiveForMassGapConsumer = false. Do not pay this equality merely to satisfy the historical R339 ABI."
 
-f1BWilsonR295SameObject : ExactResidual
-f1BWilsonR295SameObject = exact-residual
+f1BWilsonR295CarrierEquality : ExactResidual
+f1BWilsonR295CarrierEquality = exact-residual
   sameObjectAttachment
-  "YMClayF1PhysicalMinCutExact.agda"
-  "LiteralWilsonEqualsSelectedT5Observable"
+  "YMClayF1WilsonR295SameObjectWeldExact.agda"
+  "independentWilsonToR295CarrierEqualityRequired"
+  compilerOwned
+  "R313 machine-checks R295 -> R296, and R315 is parameterized by that same PhysicalMeasureConvergenceData/TestObservable carrier. Once the typed R315 presentation exists there is no further Wilson-to-R295 carrier equality theorem."
+
+f1BPhysicalWilsonPresentation : ExactResidual
+f1BPhysicalWilsonPresentation = exact-residual
+  sameObjectAttachment
+  "BalabanPairwiseWilsonBoundedTestsRound315Exact.agda / YMClayF1WilsonR295SameObjectWeldExact.agda"
+  "PairwiseWilsonCylinderPresentation on the R295-derived carrier"
   unpaid
-  "The P33 literal Wilson Hessian/coercivity stack and the R295 statistical connected-covariance stack are both substantial, but they are WrongType unless the local/cylinder observable is proved to be the same physical Gibbs observable."
+  "The remaining F1-B payment is the physical Wilson-cylinder presentation itself: selected physical observables decode as finite Wilson products, Wilson multiplication is the exact T5 multiplication, and the Wilson bound predicate feeds the T5 bounded-observable predicate. R315's compiler is machine-checked; its physical presentation level remains conditional."
 
 f1CEnvelopeL2Calibration : ExactResidual
 f1CEnvelopeL2Calibration = exact-residual
