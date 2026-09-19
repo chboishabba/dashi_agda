@@ -1,0 +1,25 @@
+module DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassWeldValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassWeldExact as Weld
+
+constrainedMassPositivityCompilerOwned :
+  Weld.cmp119Gate4ConstrainedMassPositivityCompilerLevel ≡ machineChecked
+constrainedMassPositivityCompilerOwned = refl
+
+constrainedMassSupportCompilerOwned :
+  Weld.cmp119Gate4ConstrainedMassSupportCompilerLevel ≡ machineChecked
+constrainedMassSupportCompilerOwned = refl
+
+constrainedMassFiniteSlowDensityCompilerOwned :
+  Weld.cmp119Gate4ConstrainedMassToFiniteSlowDensityCompilerLevel ≡ machineChecked
+constrainedMassFiniteSlowDensityCompilerOwned = refl
+
+assembledDensityConstrainedMassIdentityRemainsPhysical :
+  Weld.literalCMP119AssembledDensityIsGate4ConstrainedMassLevel ≡ conditional
+assembledDensityConstrainedMassIdentityRemainsPhysical = refl
+
+selectedSlowStateNonemptyRemainsPhysical :
+  Weld.selectedSlowStateFamilyNonemptyLevel ≡ conditional
+selectedSlowStateNonemptyRemainsPhysical = refl
