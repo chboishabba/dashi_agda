@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.YMClayLevel2LiteralOPECoefficientScaleAttachmentE
 import DASHI.Physics.YangMills.YMClayLevel2R129CompositeOperatorAttachmentExact as R129Operator
 import DASHI.Physics.YangMills.YMClayLevel2R129LiteralOPECoefficientWeldExact as R129Literal
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as OPE
+import DASHI.Physics.YangMills.YMClayLevel2CompositeTransportABIInsufficiencyExact as Sound
 
 ------------------------------------------------------------------------
 -- LEVEL-2 D2 PHYSICAL MIN-CUT
@@ -127,6 +128,24 @@ r129SameFamilyOperatorAttachmentStillPhysicalIsTrue = refl
 positionDepthSemanticsIsIndependentPhysicalAttachmentIsTrue :
   positionDepthSemanticsIsIndependentPhysicalAttachment ≡ true
 positionDepthSemanticsIsIndependentPhysicalAttachmentIsTrue = refl
+
+
+bareTransportABIEnoughForPhysicalD2a : Bool
+bareTransportABIEnoughForPhysicalD2a = Sound.bareTransportInhabitantPaysPhysicalD2a
+
+bareTransportABIEnoughForPhysicalD2aIsFalse :
+  bareTransportABIEnoughForPhysicalD2a ≡ false
+bareTransportABIEnoughForPhysicalD2aIsFalse =
+  Sound.bareTransportInhabitantPaysPhysicalD2aIsFalse
+
+physicalD2aRequiresInsertionOrBlockingNaturality : Bool
+physicalD2aRequiresInsertionOrBlockingNaturality =
+  Sound.physicalD2aNeedsInsertionOrBlockingNaturality
+
+physicalD2aRequiresInsertionOrBlockingNaturalityIsTrue :
+  physicalD2aRequiresInsertionOrBlockingNaturality ≡ true
+physicalD2aRequiresInsertionOrBlockingNaturalityIsTrue =
+  Sound.physicalD2aNeedsInsertionOrBlockingNaturalityIsTrue
 
 newGlobalAFTheoremRequired : Bool
 newGlobalAFTheoremRequired = false
