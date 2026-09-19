@@ -31,8 +31,8 @@ projectiveRescalingSetoid :
   (laws : CP.ProjectiveMultiplicativeLaws field) →
   {dimension : Nat} →
   Quotient.SetoidSurface lzero lzero
-projectiveRescalingSetoid laws = record
-  { Quotient.Carrier = CP.HomogeneousVector _ _
+projectiveRescalingSetoid {field} laws {dimension} = record
+  { Quotient.Carrier = CP.HomogeneousVector field dimension
   ; Quotient._≈_ = CP.ProjectiveRescaling
   ; Quotient.isEquivalence =
       projectiveRescalingEquivalence laws
