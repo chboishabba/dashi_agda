@@ -65,6 +65,8 @@ import DASHI.Interop.SLRSprint1AcquisitionMachineExact
 import DASHI.Interop.SLRSprint2CanonicalEvidenceConvergenceExact
 import DASHI.Interop.SLRSharedEvidenceReducerExact
 import DASHI.Interop.SLRSharedEvidenceReducerRegression
+import DASHI.Interop.SLRProviderNormalisationRegression
+import DASHI.Interop.SLRProviderNormalisationExact
 import DASHI.Interop.SLRGWBWikimediaReplayableHandoffExact
 import DASHI.Interop.SLRGWBWikimediaIdentityResidualContractionExact
 import DASHI.Interop.SLRGWBClaimRelativeSourceRoleAtlasExact
