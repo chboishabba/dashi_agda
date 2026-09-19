@@ -37,3 +37,23 @@ e6LimitRegression :
   Complex.BishopComplex
 e6LimitRegression q unit envelope =
   P.e6BishopLimit q unit envelope
+
+e4TailConvergenceRegression :
+  ∀ (q : Complex.BishopComplex) {ratio}
+    (unit : Unit.BishopUnitIntervalRatio ratio)
+    (envelope : P.BishopQPowerComponentEnvelope q ratio) →
+  Complex.ComplexSeriesConvergesTo
+    (P.e4BishopTerm q)
+    (P.e4BishopTailLimit q unit envelope)
+e4TailConvergenceRegression =
+  P.e4BishopTailConvergence
+
+e6TailConvergenceRegression :
+  ∀ (q : Complex.BishopComplex) {ratio}
+    (unit : Unit.BishopUnitIntervalRatio ratio)
+    (envelope : P.BishopQPowerComponentEnvelope q ratio) →
+  Complex.ComplexSeriesConvergesTo
+    (P.e6BishopUnsignedTerm q)
+    (P.e6BishopUnsignedTailLimit q unit envelope)
+e6TailConvergenceRegression =
+  P.e6BishopUnsignedTailConvergence
