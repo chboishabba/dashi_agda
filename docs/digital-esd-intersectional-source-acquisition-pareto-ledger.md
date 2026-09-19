@@ -230,8 +230,9 @@ Existing repo donors are reused rather than duplicated:
 The upstream acquisition matrix ranked three source roles above generic nonresponse literature:
 
 1. **NCVER 2024, National Student Outcomes Survey 2024 — technical notes** — institutional methodology source with explicit population -> sampling frame -> invitation construction. The sampling frame is restricted to de-duplicated records available for surveying and with obtainable contact details before sampling.
-2. **John Voorheis, 2021, Evaluating Administrative Records as a Potential Sample Frame for the National Survey of College Graduates** — U.S. Census Bureau CARRA Working Paper 18-14; same-object frame comparison with subgroup-specific administrative-record undercoverage.
-3. **Jennifer Clutterbuck; Ian Hardy; Sue Creagh, 2023 issue / 2021 online, DOI `10.1080/02680939.2021.1972166`** — Queensland OneSchool data-infrastructure study paying category/data preclusion and omission, including omitted Indigenous-language enrolment information.
+2. **Social Research Centre / QILT, 2022 Student Experience Survey Methodological Report** — independent Australian higher-education methodology source: TCSI records are screened for eligibility, institutions can supplement enrolments missing from the extract, templates are combined into a population frame, and exclusion rules are applied before final institution population files.
+3. **John Voorheis, 2021, Evaluating Administrative Records as a Potential Sample Frame for the National Survey of College Graduates** — U.S. Census Bureau CARRA Working Paper 18-14; same-object frame comparison with subgroup-specific administrative-record undercoverage.
+4. **Jennifer Clutterbuck; Ian Hardy; Sue Creagh, 2023 issue / 2021 online, DOI `10.1080/02680939.2021.1972166`** — Queensland OneSchool data-infrastructure study paying category/data preclusion and omission, including omitted Indigenous-language enrolment information.
 
 Canonical candidate owner:
 
