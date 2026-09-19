@@ -52,16 +52,15 @@ def sha256_bytes(data: bytes) -> str:
 
 
 def extract_query(owner_text: str, agda_name: str) -> str:
-    pattern = re.compile(
-        rf"(?ms)^{re.escape(agda_name)}\s*:\s*TranslatedQueryReceipt.*?"
-        rf"Syntax\.ericSyntaxReceipt\s*\n\s*(\"(?:[^\"\\\\]|\\\\.)*\")"
-    )
-    match = pattern.search(owner_text)
-    if not match:
+    prefix = owner_text.find(agda_name + " =")
+    if prefix == -1:
         raise RuntimeError(f"Could not locate exact ERIC query for {agda_name}")
-    # Agda string escaping used here is compatible with Python's ordinary
-    # quoted-string escapes for the frozen query text.
-    return ast.literal_eval(match.group(1))
+    start_quote = owner_text.find('"', prefix)
+    end_quote = owner_text.find("\n  false refl", start_quote)
+    if start_quote == -1 or end_quote == -1:
+        raise RuntimeError(f"Could not locate string delimiters for {agda_name}")
+    raw_str = owner_text[start_quote:end_quote].strip()
+    return ast.literal_eval(raw_str)
 
 
 def load_queries(repo_root: pathlib.Path) -> dict[str, str]:
@@ -70,7 +69,7 @@ def load_queries(repo_root: pathlib.Path) -> dict[str, str]:
     return {qid: extract_query(text, name) for qid, name in QUERY_NAMES.items()}
 
 
-def request_page(query: str, start: int, rows: int, timeout: float) -> tuple[bytes, str]:
+def request_page(query: str, start: int, rows: int, timeout: float, max_retries: int = 5) -> tuple[bytes, str]:
     params = {
         "search": query,
         "rows": rows,
@@ -82,8 +81,15 @@ def request_page(query: str, start: int, rows: int, timeout: float) -> tuple[byt
         url,
         headers={"User-Agent": "Mozilla/5.0 (compatible; DASHI-Digital-ESD/1.0)"},
     )
-    with urllib.request.urlopen(req, timeout=timeout) as response:
-        return response.read(), url
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                return response.read(), url
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise
+            backoff = (attempt + 1) * 2.0
+            time.sleep(backoff)
 
 
 def execute_query(
