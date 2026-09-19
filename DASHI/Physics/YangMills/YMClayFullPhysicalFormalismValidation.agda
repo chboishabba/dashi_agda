@@ -48,6 +48,21 @@ directRouteStillNeedsOS :
 directRouteStillNeedsOS =
   Full.routeSStillRequiresOSReconstructionIsTrue
 
+directRouteNeedsNoSequentialOrderClosureRecord :
+  Full.routeSTerminalRequiresSequentialOrderClosureRecord ≡ false
+directRouteNeedsNoSequentialOrderClosureRecord =
+  Full.routeSTerminalRequiresSequentialOrderClosureRecordIsFalse
+
+directRouteNeedsNoSameConvergenceWeld :
+  Full.routeSTerminalRequiresSameConvergenceWeld ≡ false
+directRouteNeedsNoSameConvergenceWeld =
+  Full.routeSTerminalRequiresSameConvergenceWeldIsFalse
+
+directRouteStillNeedsSelectedLimitClosure :
+  Full.routeSTerminalRequiresSelectedLimitUpperClosure ≡ true
+directRouteStillNeedsSelectedLimitClosure =
+  Full.routeSTerminalRequiresSelectedLimitUpperClosureIsTrue
+
 f2IsCompilerOwned :
   Full.f2PrimitiveResearchPayment ≡ false
 f2IsCompilerOwned =
