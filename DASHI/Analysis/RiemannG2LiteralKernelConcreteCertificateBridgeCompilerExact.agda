@@ -13,7 +13,7 @@ module DASHI.Analysis.RiemannG2LiteralKernelConcreteCertificateBridgeCompilerExa
 -- a second independent nearResponseAt representation theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set₁)
+open import Agda.Primitive using (Set; Set₁)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
