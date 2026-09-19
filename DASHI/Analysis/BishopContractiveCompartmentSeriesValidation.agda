@@ -21,3 +21,20 @@ majorantConvergenceRegression :
       (P.compartmentMajorantTerm problem))
 majorantConvergenceRegression =
   P.compartmentMajorantConvergent
+
+
+dominatedSeriesConvergenceRegression :
+  (problem : P.BishopDominatedCompartmentSeries) →
+  BishopSequence._isConvergent
+    (BishopSequence.SeriesOf
+      (P.actualContribution problem))
+dominatedSeriesConvergenceRegression =
+  P.dominatedCompartmentSeriesConvergent
+
+dominatedPartialSumsCauchyRegression :
+  (problem : P.BishopDominatedCompartmentSeries) →
+  BishopSequence._isCauchy
+    (BishopSequence.SeriesOf
+      (P.actualContribution problem))
+dominatedPartialSumsCauchyRegression =
+  P.dominatedCompartmentPartialSumsCauchy
