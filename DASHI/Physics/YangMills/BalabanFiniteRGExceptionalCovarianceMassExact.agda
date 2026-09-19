@@ -37,6 +37,7 @@ import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteRGTotalCovarianceExact as Total
 import DASHI.Physics.YangMills.BalabanFiniteRestrictedExpectationBoundExact as Restricted
+import DASHI.Physics.YangMills.BalabanFiniteBoundedCovarianceExact as FiniteCov
 import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonBoundedAlgebraExact as Bound
 
 twoℚ : ℚ
@@ -52,6 +53,45 @@ record PositiveFiniteRGReopening
       ∀ coarse fine → 0ℚ ≤ Reopen.reopeningKernel step coarse fine
 
 open PositiveFiniteRGReopening public
+
+
+fibreProbability :
+  ∀ {Fine Coarse}
+    {step : Reopen.FiniteRGReopeningStep Fine Coarse} →
+  PositiveFiniteRGReopening step →
+  Coarse →
+  FiniteCov.FiniteRationalProbability Fine
+fibreProbability {step = step} positive coarse = record
+  { FiniteCov.FiniteRationalProbability.states = Reopen.fineStates step
+  ; FiniteCov.FiniteRationalProbability.weight =
+      Reopen.reopeningKernel step coarse
+  ; FiniteCov.FiniteRationalProbability.weightNonnegative =
+      reopeningKernelNonnegative positive coarse
+  ; FiniteCov.FiniteRationalProbability.normalized =
+      Reopen.reopeningNormalized step coarse
+  }
+
+transportIsFibreExpectation :
+  ∀ {Fine Coarse}
+    {step : Reopen.FiniteRGReopeningStep Fine Coarse}
+    (positive : PositiveFiniteRGReopening step)
+    (observable : Reopen.Observable Fine)
+    coarse →
+  Reopen.transportObservable step observable coarse
+  ≡ FiniteCov.expectation
+      (fibreProbability positive coarse) observable
+transportIsFibreExpectation positive observable coarse = refl
+
+conditionalCovarianceIsFibreProbabilityCovariance :
+  ∀ {Fine Coarse}
+    {step : Reopen.FiniteRGReopeningStep Fine Coarse}
+    (positive : PositiveFiniteRGReopening step)
+    (left right : Reopen.Observable Fine)
+    coarse →
+  Total.conditionalCovariance step left right coarse
+  ≡ FiniteCov.covariance
+      (fibreProbability positive coarse) left right
+conditionalCovarianceIsFibreProbabilityCovariance positive left right coarse = refl
 
 PointwiseUnitBounded :
   ∀ {State} → Reopen.Observable State → Set
