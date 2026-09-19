@@ -89,8 +89,8 @@ sqrtRespectsEquality :
   left ≡ right →
   Polar.sqrtNonnegative D left leftNN
   ≡ Polar.sqrtNonnegative D right rightNN
-sqrtRespectsEquality S leftNN rightNN refl =
-  sqrtProofIrrelevant S _ leftNN rightNN
+sqrtRespectsEquality S {left = left} leftNN rightNN refl =
+  sqrtProofIrrelevant S left leftNN rightNN
 
 compileComplexModulusMultiplicationLaws :
   ∀ {C : Complex.ConstructedComplexPackage}
