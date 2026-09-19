@@ -6,6 +6,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact as LeanRouteS
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP1FiniteClusteringExact as P1
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP2ExpectationConvergenceExact as P2
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP3SameOSCorrelationExact as P3
 
 ------------------------------------------------------------------------
 -- LITERAL WILSON ROUTE-S: EXACT THREE-PHYSICAL-INPUT BOUNDARY
@@ -137,6 +140,73 @@ threeLiteralWilsonExpectationLimitsStillPhysicalIsTrue = refl
 sameOSCorrelationIdentificationStillPhysicalIsTrue :
   sameOSCorrelationIdentificationStillPhysical ≡ true
 sameOSCorrelationIdentificationStillPhysicalIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- 2026-09-19 theorem-proof reduction of the three Lean hypotheses.
+--
+-- Important distinction:
+--
+--   * the Lean terminal theorem still has three displayed hypothesis classes;
+--   * those classes are no longer three independent Agda physical theorems.
+--
+-- P1 is compiler output from R320 plus the same-carrier Wilson/T5 presentation.
+-- P2's three expectation limits are compiler output from that same Wilson
+-- presentation and PhysicalMeasureConvergenceData.
+-- P3's continuum covariance = spectrum-correlation equality is definitional in
+-- R281; the physical residue is only that this R281 spectrum is the spectrum of
+-- the actual OS-reconstructed Hamiltonian.
+------------------------------------------------------------------------
+
+p1NeedsNewClusteringAnalysisAfterR320 : Bool
+p1NeedsNewClusteringAnalysisAfterR320 =
+  P1.newFiniteClusteringInequalityRequiredAfterR320
+
+p1NeedsNewClusteringAnalysisAfterR320IsFalse :
+  p1NeedsNewClusteringAnalysisAfterR320 ≡ false
+p1NeedsNewClusteringAnalysisAfterR320IsFalse =
+  P1.newFiniteClusteringInequalityRequiredAfterR320IsFalse
+
+p2ThreeLimitsIndependentPhysicalTheorems : Bool
+p2ThreeLimitsIndependentPhysicalTheorems =
+  P2.threeExpectationLimitsIndependentPhysicalLeaves
+
+p2ThreeLimitsIndependentPhysicalTheoremsIsFalse :
+  p2ThreeLimitsIndependentPhysicalTheorems ≡ false
+p2ThreeLimitsIndependentPhysicalTheoremsIsFalse =
+  P2.threeExpectationLimitsIndependentPhysicalLeavesIsFalse
+
+p3PostHocCovarianceCorrelationIdentityStillPhysical : Bool
+p3PostHocCovarianceCorrelationIdentityStillPhysical =
+  P3.postHocCorrelationIdentityStillPhysical
+
+p3PostHocCovarianceCorrelationIdentityStillPhysicalIsFalse :
+  p3PostHocCovarianceCorrelationIdentityStillPhysical ≡ false
+p3PostHocCovarianceCorrelationIdentityStillPhysicalIsFalse =
+  P3.postHocCorrelationIdentityStillPhysicalIsFalse
+
+p3SameReconstructedHamiltonianSpectrumStillPhysical : Bool
+p3SameReconstructedHamiltonianSpectrumStillPhysical =
+  P3.sameReconstructedHamiltonianSpectrumStillPhysical
+
+p3SameReconstructedHamiltonianSpectrumStillPhysicalIsTrue :
+  p3SameReconstructedHamiltonianSpectrumStillPhysical ≡ true
+p3SameReconstructedHamiltonianSpectrumStillPhysicalIsTrue =
+  P3.sameReconstructedHamiltonianSpectrumStillPhysicalIsTrue
+
+threeLeanHypothesisClassesAreThreeIndependentPhysicalTheorems : Bool
+threeLeanHypothesisClassesAreThreeIndependentPhysicalTheorems = false
+
+threeLeanHypothesisClassesAreThreeIndependentPhysicalTheoremsIsFalse :
+  threeLeanHypothesisClassesAreThreeIndependentPhysicalTheorems ≡ false
+threeLeanHypothesisClassesAreThreeIndependentPhysicalTheoremsIsFalse = refl
+
+routeSIndependentPhysicalPaymentsAfterAgdaReduction : Bool
+routeSIndependentPhysicalPaymentsAfterAgdaReduction = true
+
+routeSIndependentPhysicalPaymentsAfterAgdaReductionIsTrue :
+  routeSIndependentPhysicalPaymentsAfterAgdaReduction ≡ true
+routeSIndependentPhysicalPaymentsAfterAgdaReductionIsTrue = refl
 
 ------------------------------------------------------------------------
 -- Cross-prover authority boundary.
