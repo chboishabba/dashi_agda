@@ -40,14 +40,19 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_; _≤_)
+import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNFixedOutputLiveGlobalFluxRound406Exact as R406
@@ -85,14 +90,14 @@ finiteRemainderIsGramPlusFluxTangent pairs
 
 module FibreNormalForm
     (physicalSystem :
-      DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.PhysicalFiniteComplex3GalerkinSystem F)
+      Field30.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F) where
 
   module Fibre = R497.DirectFibre physicalSystem S
 
   directFibreCompanionIsGramPlusFluxTangent :
     (items :
-      List DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration.PhysicalTriadIncidence) →
+      List Physical.PhysicalTriadIncidence) →
     (positive : Fibre.Local.PairRatePositiveOn items) →
     R299.four * Fibre.directFibreCompanion items positive
     ≡
@@ -107,19 +112,19 @@ module FibreNormalForm
 
 module GlobalNormalForm
     (physicalSystem :
-      DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.PhysicalFiniteComplex3GalerkinSystem F)
+      Field30.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F)
     (L : Helical.PeriodicHelicalProjectorLaws F
-      (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.physicalEmbedding physicalSystem)
-      (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.physicalInverseSquare physicalSystem)
+      (Field30.physicalEmbedding physicalSystem)
+      (Field30.physicalInverseSquare physicalSystem)
       S)
     (H : R142.HelicalHalfCalibration S)
-    (P : DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact.PhysicalFixedOutputHelicityData
-      (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.physicalEmbedding physicalSystem)
-      (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.physicalInverseSquare physicalSystem)
+    (P : R225.PhysicalFixedOutputHelicityData
+      (Field30.physicalEmbedding physicalSystem)
+      (Field30.physicalInverseSquare physicalSystem)
       S L H
-      (DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit.velocityAt
-        (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.finiteSystem physicalSystem))) where
+      (Audit.velocityAt
+        (Field30.finiteSystem physicalSystem))) where
 
   module Global = R498.DirectGlobal physicalSystem S L H P
 
@@ -329,7 +334,7 @@ module LiveNormalForm
               (fluxEndpointBudget P cutoff terminal)
 
           paid =
-            DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.addMonotone
+            ℚP.+-mono-≤
               (integratedGramBudget P cutoff terminal)
               fluxPaid
         in
