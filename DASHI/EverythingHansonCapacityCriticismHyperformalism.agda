@@ -2,6 +2,8 @@ module DASHI.EverythingHansonCapacityCriticismHyperformalism where
 
 open import DASHI.Governance.HansonCapacityCriticismHyperformalismExact public
 open import DASHI.Governance.HansonCapacityCriticismHyperformalismValidation public
+open import DASHI.Governance.HansonOneNationPoliticalEcologyExact public
+open import DASHI.Governance.HansonOneNationPoliticalEcologyValidation public
 open import DASHI.Core.IntersectionalNonFactorability public
 open import DASHI.Core.QueryFactorisationSufficiency public
 open import DASHI.Core.DeclaredRealizedIntegrityResidualExact public
