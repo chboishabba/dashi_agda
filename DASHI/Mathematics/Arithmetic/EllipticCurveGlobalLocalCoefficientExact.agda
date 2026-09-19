@@ -19,9 +19,11 @@ module DASHI.Mathematics.Arithmetic.EllipticCurveGlobalLocalCoefficientExact whe
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 open import Relation.Binary.PropositionalEquality using (cong)
+open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact as Elliptic
 import DASHI.Mathematics.Automorphic.TruncatedLFunctionExact as Truncated
@@ -121,7 +123,12 @@ goodPrimeLocalFactorIsGlobalPolynomial family p good T
     with constantIsOne (localAtPrime family p)
        | goodLinearMeaning (localAtPrime family p) good
        | goodQuadraticMeaning (localAtPrime family p) good
-... | refl | refl | refl = refl
+... | refl | refl | refl =
+  solve
+    (frobeniusCoefficient (localAtPrime family p)
+    ∷ primeAsRational (localAtPrime family p)
+    ∷ T
+    ∷ [])
 
 record FiniteGoodPrimeRestriction
     {curve : Elliptic.ShortWeierstrassCurve}
