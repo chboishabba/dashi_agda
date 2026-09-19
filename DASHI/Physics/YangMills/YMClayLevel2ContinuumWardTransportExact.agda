@@ -82,9 +82,17 @@ record ContinuumWardTransport
 
     -- The finite Ward charge is attached to the SAME generated-action stress
     -- family rather than to an unrelated conserved lattice current.
-    FiniteWardChargeIsGeneratedActionStressCharge : Set
+    FiniteWardChargeIsGeneratedActionStressCharge :
+      Domain.MetricPerturbation
+        (R134.presentCutCanonicalMetricDomain metricInputs) →
+      Nat → Ward.LatticeStressWardCharge → Set
+
     finiteWardChargeIsGeneratedActionStressCharge :
+      ∀ perturbation depth →
+      Domain.AdmissibleMetricPerturbation
+        (R134.presentCutCanonicalMetricDomain metricInputs) perturbation →
       FiniteWardChargeIsGeneratedActionStressCharge
+        perturbation depth (finiteWardChargeAt perturbation depth)
 
     -- Convergence/continuum meaning is explicit on the real scalar carrier.
     Converges :
