@@ -18,6 +18,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Bool.Base using (T; _∧_; not)
+open import Data.Bool.Properties using (T-∧)
 open import Data.Fin.Base using (Fin)
 open import Data.List.Base using
   (List; []; _∷_; allFin; cartesianProductWith; filterᵇ; map)
@@ -26,6 +27,7 @@ import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Product using (Σ; _×_; _,_)
 open import Function.Base using (_∘_)
+open import Function.Bundles using (Equivalence)
 open import Relation.Nullary.Decidable.Core using (T?)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
@@ -204,7 +206,7 @@ decodeSquareCodeInSquare :
   (code : SquareCode radius) →
   T (insideSquare? radius (decodeSquareCode radius code))
 decodeSquareCodeInSquare radius (i , j) =
-  Data.Bool.Properties.T-∧.from
+  Equivalence.from T-∧
     (Cutoff.decodeCoordinateInCutoff radius i
     ,
     Cutoff.decodeCoordinateInCutoff radius j)
@@ -218,7 +220,7 @@ squareDecodeComplete :
 squareDecodeComplete radius
     (Lattice.lattice-point horizontal vertical)
     inside
-  with Data.Bool.Properties.T-∧.to inside
+  with Equivalence.to T-∧ inside
 ... | horizontalInside , verticalInside
   with Cutoff.decodeCoordinateComplete
         radius horizontal horizontalInside
