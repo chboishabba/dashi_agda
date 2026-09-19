@@ -464,18 +464,33 @@ normalizedRowL1BelowTwiceRawL1 dataSet =
       a * d + a * d ≡ (1ℚ + 1ℚ) * (a * d)
     twiceExact = ℚRing.solve-∀ a d
   in
+  let
+    splitBound :
+      Sums.sumRational (states dataSet)
+        (λ state →
+          ∣ a * (leftRaw dataSet state - rightRaw dataSet state) ∣
+          +
+          ∣ (a - rightNormalizer dataSet)
+              * rightRaw dataSet state ∣)
+      ≤ a * d + a * d
+    splitBound =
+      subst
+        (λ left → left ≤ a * d + a * d)
+        (sym split)
+        second
+  in
   ℚP.≤-trans first
     (subst
       (λ upper →
         Sums.sumRational (states dataSet)
           (λ state →
             ∣ a * (leftRaw dataSet state - rightRaw dataSet state) ∣
-            + ∣ (a - rightNormalizer dataSet)
+            +
+            ∣ (a - rightNormalizer dataSet)
                 * rightRaw dataSet state ∣)
         ≤ upper)
-      (trans split (trans (cong₂ _+_ rawScaledExact correctionScaledExact)
-        twiceExact))
-      ℚP.≤-refl)
+      twiceExact
+      splitBound)
   where
   cong₂ : ∀ {A B C : Set} {x x' : A} {y y' : B} →
     (f : A → B → C) → x ≡ x' → y ≡ y' →
