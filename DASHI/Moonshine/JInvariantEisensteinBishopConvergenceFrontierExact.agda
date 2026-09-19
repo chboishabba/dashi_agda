@@ -139,6 +139,7 @@ record EisensteinBishopConvergenceFrontier : Set where
     absoluteConvergenceToLimitCompilerOwned : Bool
     bishopLimitUniquenessOwned : Bool
     bishopComplexComponentwiseConvergenceOwned : Bool
+    concreteMurrayBishopSetoidBackendOwned : Bool
 
     sameCarrierConcreteComplexLimitCompilerOwned : Bool
     eisensteinCoefficientPolynomialGrowthOwned : Bool
@@ -175,9 +176,9 @@ canonicalEisensteinBishopConvergenceFrontier :
   EisensteinBishopConvergenceFrontier
 canonicalEisensteinBishopConvergenceFrontier =
   eisenstein-bishop-convergence-frontier
-    true true true true true
+    true true true true true true
     true true true true true true true true false true false false true true false
     false
     false false false false
     false false
-    "Bishop completeness remains available, while the shortest route now stays on the existing ConcreteComplex carrier: same-carrier Cauchy completion is paid, sigma3/sigma5 polynomial growth is paid, the exact E4/E6 successor increments and their 240/504 coefficient envelopes are paid; q-power modulus propagation and polynomial-times-geometric increment-modulus compilers are also paid. Generic dominated-tail vanishing and generic tail-to-IsCauchy bridge surfaces are now paid in Analysis. The old Fast-Cauchy quotient realization is also welded definition-for-definition into the newer backend quotient seam, while an actual concrete legacy quotient / selected tail-to-Cauchy inhabitant remains unpaid. Their ordinary modulus multiplication/triangle/order package remains an explicit same-carrier inhabitant, and principal-strip/upper-half-plane q-decay compilers remain paid conditionally. The genuine remaining inputs are a nondegenerate ordinary order/polar-branch inhabitant, the concrete polynomial-times-geometric E4/E6 Cauchy majorants, and the limit = analytic lattice-sum same-object theorem."
+    "The nondegenerate Murray-Bishop setoid ordered-complete backend is concrete and its Cauchy completeness is already owned. The shortest literal-q route still stays on the existing ConcreteComplex carrier: same-carrier Cauchy completion is paid, sigma3/sigma5 polynomial growth is paid, the exact E4/E6 successor increments and their 240/504 coefficient envelopes are paid; q-power modulus propagation and polynomial-times-geometric increment-modulus compilers are also paid. Generic dominated-tail vanishing and generic tail-to-IsCauchy bridge surfaces are now paid in Analysis. The old Fast-Cauchy quotient realization is also welded definition-for-definition into the newer backend quotient seam, while an actual concrete legacy quotient / selected tail-to-Cauchy inhabitant remains unpaid. Their ordinary modulus multiplication/triangle/order package remains an explicit same-carrier inhabitant, and principal-strip/upper-half-plane q-decay compilers remain paid conditionally. The genuine remaining inputs are a nondegenerate ordinary order/polar-branch inhabitant, the concrete polynomial-times-geometric E4/E6 Cauchy majorants, and the limit = analytic lattice-sum same-object theorem."
