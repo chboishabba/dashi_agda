@@ -48,6 +48,47 @@ directRouteStillNeedsOS :
 directRouteStillNeedsOS =
   Full.routeSStillRequiresOSReconstructionIsTrue
 
+
+preferredRouteNeedsNoArbitraryClusteringEnvelope :
+  Full.routeSPreferredRequiresArbitraryClusteringEnvelope ≡ false
+preferredRouteNeedsNoArbitraryClusteringEnvelope =
+  Full.routeSPreferredRequiresArbitraryClusteringEnvelopeIsFalse
+
+preferredRouteNeedsNoFastEnvelopeCalibration :
+  Full.routeSPreferredRequiresFastEnvelopeCalibration ≡ false
+preferredRouteNeedsNoFastEnvelopeCalibration =
+  Full.routeSPreferredRequiresFastEnvelopeCalibrationIsFalse
+
+preferredRouteStillNeedsDistanceTime :
+  Full.routeSPreferredDistanceTimeStillPhysical ≡ true
+preferredRouteStillNeedsDistanceTime =
+  Full.routeSPreferredDistanceTimeStillPhysicalIsTrue
+
+preferredRouteNeedsNoOldModeRateRecord :
+  Full.routeSPreferredOldModeRateRecordMandatory ≡ false
+preferredRouteNeedsNoOldModeRateRecord =
+  Full.routeSPreferredOldModeRateRecordMandatoryIsFalse
+
+preferredRouteStillNeedsSameHamiltonianDecomposition :
+  Full.routeSSameHamiltonianSpectralDecompositionStillPhysical ≡ true
+preferredRouteStillNeedsSameHamiltonianDecomposition =
+  Full.routeSSameHamiltonianSpectralDecompositionStillPhysicalIsTrue
+
+preferredRouteStillNeedsTransferCoordinate :
+  Full.routeSTransferEnergyDecayCoordinateStillPhysical ≡ true
+preferredRouteStillNeedsTransferCoordinate =
+  Full.routeSTransferEnergyDecayCoordinateStillPhysicalIsTrue
+
+preferredRouteStillNeedsModeRatioWeld :
+  Full.routeSModeRatioSameCoordinateWeldStillPhysical ≡ true
+preferredRouteStillNeedsModeRatioWeld =
+  Full.routeSModeRatioSameCoordinateWeldStillPhysicalIsTrue
+
+preferredRouteGapCoreIsCompilerOwnedAfterPayments :
+  Full.routeSPositiveGapCoreAfterPaymentsCompilerOwned ≡ true
+preferredRouteGapCoreIsCompilerOwnedAfterPayments =
+  Full.routeSPositiveGapCoreAfterPaymentsCompilerOwnedIsTrue
+
 directRouteNeedsNoSequentialOrderClosureRecord :
   Full.routeSTerminalRequiresSequentialOrderClosureRecord ≡ false
 directRouteNeedsNoSequentialOrderClosureRecord =
