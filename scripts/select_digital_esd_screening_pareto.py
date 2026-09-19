@@ -161,11 +161,29 @@ def dominates(a: dict[str, Any], b: dict[str, Any]) -> bool:
 
 
 def pareto_front(rows: list[dict[str, Any]]) -> set[str]:
-    front: set[str] = set()
-    for i, row in enumerate(rows):
-        if not any(i != j and dominates(other, row) for j, other in enumerate(rows)):
-            front.add(str(row["source_identity_reference"]))
-    return front
+    # Costs occupy a deliberately small discrete grid.  Compute dominance once
+    # per unique vector rather than O(N^2) over ~44k records.
+    vector_to_refs: dict[tuple[int, ...], list[str]] = {}
+    for row in rows:
+        vector = tuple(int(row[k]) for k in AXES)
+        vector_to_refs.setdefault(vector, []).append(str(row["source_identity_reference"]))
+
+    vectors = list(vector_to_refs)
+    nondominated: set[tuple[int, ...]] = set()
+    for vector in vectors:
+        if not any(
+            other != vector
+            and all(a <= b for a, b in zip(other, vector))
+            and any(a < b for a, b in zip(other, vector))
+            for other in vectors
+        ):
+            nondominated.add(vector)
+
+    return {
+        ref
+        for vector in nondominated
+        for ref in vector_to_refs[vector]
+    }
 
 
 def calibration_diagnostics(
@@ -333,6 +351,38 @@ def main() -> int:
         encoding="utf-8",
     )
 
+    front_strata = Counter(
+        row["calibration_stratum_reference"]
+        for row in queue
+        if row["pareto_front"]
+    )
+    pending_publication_types = Counter(
+        publication_type_key(ledger_by_ref[row["source_identity_reference"]])
+        for row in queue
+    )
+    process_audit = {
+        "schema": "digital-esd-screening-process-audit-v1",
+        "exact_ledger_record_count": len(ledger_rows),
+        "explicitly_reviewed_count": sum(
+            1 for row in ledger_rows if authoritative_reviewed(row)
+        ),
+        "unresolved_queue_count": len(queue),
+        "missing_abstract_count": sum(
+            1 for row in queue
+            if row["calibration_stratum_reference"] == "missingAbstractOrMalformedMetadata"
+        ),
+        "pending_by_publication_type": dict(pending_publication_types.most_common()),
+        "pareto_front_by_stratum": dict(sorted(front_strata.items())),
+        "audit_interpretation": (
+            "descriptive screening-process visibility only; does not establish "
+            "bias, harm, source quality, eligibility-frame truth, or exclusion authority"
+        ),
+    }
+    (args.out_dir / "screening-process-audit.json").write_text(
+        json.dumps(process_audit, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
     manifest = {
         "schema": "digital-esd-screening-pareto-manifest-v1",
         "ledger_reference": str(args.ledger),
@@ -343,6 +393,9 @@ def main() -> int:
         "calibration_selection_count": len(calibration_rows),
         "stratum_counts": {k: len(v) for k, v in sorted(by_stratum.items())},
         "pareto_axes": list(AXES),
+        "unique_cost_vector_count": len({
+            tuple(int(row[k]) for k in AXES) for row in queue
+        }),
         "scalar_score_used": False,
         "pareto_priority_creates_screening_decision": False,
         "pareto_priority_creates_exclusion": False,
