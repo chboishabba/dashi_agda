@@ -4,6 +4,7 @@ module DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact whe
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as OPE
@@ -103,8 +104,8 @@ literalOPECoefficientMatchesProjectedAFAtEveryDepth
     projectedMatch =
       OPE.projectedCoefficientMatch (projection weld) depth
   in
-  Relation.Binary.PropositionalEquality.trans
-    (Relation.Binary.PropositionalEquality.sym physicalToLiteral)
+  trans
+    (sym physicalToLiteral)
     projectedMatch
 
 ------------------------------------------------------------------------
