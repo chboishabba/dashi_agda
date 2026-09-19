@@ -194,7 +194,7 @@ currentSprint2ExitGate =
   sprint2ExitGate
     true
     true
-    false
+    true
     false
     false
     false
