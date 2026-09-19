@@ -268,9 +268,9 @@ level2ContinuumWardTransport : ExactResidual
 level2ContinuumWardTransport = exact-residual
   physicalClayStressConstruction
   "YMClayLevel2ContinuumWardTransportExact.agda"
-  "mapped finite Ward-charge sequence converges to the recovered continuum stress first variation"
+  "for every admissible perturbation h: mapped cutoff-indexed Ward-charge sequence iota_k(Q_k[h]) converges to the recovered continuum stress first variation deltaS_infinity[h]"
   unpaid
-  "This is the genuine Ward residue left by archaeology. The finite charge is rational while the recovered stress lives in StressRep.PairingScalar, so the bridge explicitly supplies the finite-charge representation map and convergence to the exact R131/R136 continuum first-variation target. No carrier equality by name is allowed."
+  "This is the genuine Ward residue left by archaeology. The finite charge is rational while the recovered stress lives in StressRep.PairingScalar. The charge family must be indexed by the same metric perturbation h, and the rational-to-pairing representation may depend on cutoff k: the target is iota_k(Q_k[h]) -> deltaS_infinity[h]. R131/R136 supplies the exact continuum target but no finite-charge convergence theorem."
 
 level2LiteralClayStressOPECompiler : ExactResidual
 level2LiteralClayStressOPECompiler = exact-residual
@@ -410,6 +410,12 @@ d3FiniteWardAlgebraNewPhysicalTheorem = false
 
 d3FiniteToContinuumSameCurrentTransportStillPhysical : Bool
 d3FiniteToContinuumSameCurrentTransportStillPhysical = true
+
+d3PerturbationIndependentWardSequenceWouldBeTooWeak : Bool
+d3PerturbationIndependentWardSequenceWouldBeTooWeak = true
+
+d3CutoffIndependentChargeMapRequired : Bool
+d3CutoffIndependentChargeMapRequired = false
 
 f4EvolutionEqualityPrimitive : Bool
 f4EvolutionEqualityPrimitive = false
