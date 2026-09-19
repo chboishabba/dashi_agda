@@ -232,21 +232,45 @@ level2OPEProductTailIdentification = exact-residual
   unpaid
   "This is genuine physical same-object analysis. Once supplied, YangMillsSharedMarkedCompositeOPERemainderExact makes the dyadic OPE remainder decay compiler-owned."
 
-level2OPECoefficientOneStepAF : ExactResidual
-level2OPECoefficientOneStepAF = exact-residual
+level2GlobalAFSecondPayment : ExactResidual
+level2GlobalAFSecondPayment = exact-residual
   physicalClayStressConstruction
-  "BalabanOPECoefficientRGRecurrenceUniquenessExact.agda / YMClayLevel2StressOPEMinCutExact.agda"
-  "same one-step operator-mixing law + same UV normalization"
-  unpaid
-  "The physical coefficient coordinate must obey the same one-step AF mixing law and UV normalization. All-depth coefficient equality is then machine-checked induction."
+  "BalabanPointwiseBetaBoundsToFrozenRowAExact.agda / YMClayLevel2WardRGReuseExact.agda"
+  "second global asymptotic-freedom trajectory theorem in Row D"
+  obsoleteStrength
+  "The positive/tuned global AF trajectory is already Row A. Level 2 must not charge another AF theorem; only attachment of the literal OPE coefficient to the already-selected RG mixing/UV coordinate remains."
 
-level2LocalTranslationWardStress : ExactResidual
-level2LocalTranslationWardStress = exact-residual
+level2OPECoefficientRGCoordinateAttachment : ExactResidual
+level2OPECoefficientRGCoordinateAttachment = exact-residual
   physicalClayStressConstruction
-  "BalabanClayHighestAlphaRound87FourAnalyticLemmaExact.agda / YMClayLevel2StressOPEMinCutExact.agda"
-  "local translation Ward/stress law on the same continuum family"
+  "BalabanOPECoefficientRGRecurrenceUniquenessExact.agda / YMClayLevel2WardRGReuseExact.agda"
+  "literal OPE coefficient = same one-step RG mixing/UV coordinate"
   unpaid
-  "No hidden constructor was found from the recovered stress derivative directly to HasStressTensorAndOPE. The local stress/Ward semantic identification remains part of the shortest physical D-row."
+  "This is a same-object coordinate attachment, not a second global AF proof. Once supplied, all-depth OPE coefficient equality is machine-checked induction."
+
+level2FiniteWardConservation : ExactResidual
+level2FiniteWardConservation = exact-residual
+  physicalClayStressConstruction
+  "YangMillsLatticeStressWardSliceConservationExact.agda"
+  "finite periodic Ward balance -> conserved slice charge"
+  compilerOwned
+  "The finite Ward algebra is already machine-checked and must not be re-proved in Level 2."
+
+level2GeneratedActionStressProvenance : ExactResidual
+level2GeneratedActionStressProvenance = exact-residual
+  physicalClayStressConstruction
+  "BalabanUnifiedGeneratedActionRecoveryRound136Exact.agda / BalabanCompositeStressFirstVariationRound144Exact.agda"
+  "same generated action / first variation / localized D1 stress provenance"
+  compilerOwned
+  "R132-R136 and R142-R144 already provide the compiler spine once their physical source-instantiation fields are inhabited."
+
+level2ContinuumWardTransport : ExactResidual
+level2ContinuumWardTransport = exact-residual
+  physicalClayStressConstruction
+  "YMClayLevel2WardRGReuseExact.agda"
+  "finite translation-Ward current = recovered continuum stress insertion on the same family"
+  unpaid
+  "This is the genuine Ward residue left by archaeology: transport the already-owned finite Ward current through the already-owned generated-action/stress recovery and show it is the same continuum stress insertion. No hidden theorem currently discharges that same-object continuum transport."
 
 level2LiteralClayStressOPECompiler : ExactResidual
 level2LiteralClayStressOPECompiler = exact-residual
@@ -341,6 +365,15 @@ r127IndependentAfterR129Recovery = false
 
 dyadicOPERemainderIndependentAfterCompositeTailIdentification : Bool
 dyadicOPERemainderIndependentAfterCompositeTailIdentification = false
+
+globalAsymptoticFreedomTrajectoryIndependentInLevel2D : Bool
+globalAsymptoticFreedomTrajectoryIndependentInLevel2D = false
+
+finiteWardSliceConservationIndependentInLevel2D : Bool
+finiteWardSliceConservationIndependentInLevel2D = false
+
+generatedActionStressProvenanceIndependentAfterR136 : Bool
+generatedActionStressProvenanceIndependentAfterR136 = false
 
 allDepthOPECoefficientEqualityIndependentAfterOneStepLaw : Bool
 allDepthOPECoefficientEqualityIndependentAfterOneStepLaw = false
