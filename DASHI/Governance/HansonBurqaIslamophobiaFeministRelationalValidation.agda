@@ -6,6 +6,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.HansonBurqaIslamophobiaFeministRelationalExact as B
+import DASHI.Culture.AmalekAuthorityProjectionBoundary as Amalek
 
 veilSymbolDoesNotRecoverAgency :
   INF.FactorsThrough B.veilObserver B.originatingAgency → ⊥
@@ -43,7 +44,7 @@ feminismDoesNotRequireOneDressPosition =
   B.feminismDoesNotRequireSingleDressPosition
 
 humanGroupNeverBecomesAmalek :
-  B.Amalek.ethnicOrReligiousEssentialismPromotion B.amalekBoundary ≡ false
+  Amalek.ethnicOrReligiousEssentialismPromotion B.amalekBoundary ≡ false
 humanGroupNeverBecomesAmalek =
   B.humanGroupCannotInhabitAmalekPredicate
 
