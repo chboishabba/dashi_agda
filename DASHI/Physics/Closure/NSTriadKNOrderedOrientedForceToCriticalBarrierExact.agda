@@ -39,6 +39,8 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
 import DASHI.Physics.Closure.NSTriadKNDirectResolventSignedCrossToR415Round503Exact as R503
+import DASHI.Physics.Closure.NSTriadKNDirectResolventCompanionToR423Round501Exact as R501
+import DASHI.Physics.Closure.NSTriadKNQuadraticCompanionSignedHeatToBarrierRound423Exact as R423
 import DASHI.Physics.Closure.NSTriadKNOrderedOrientedForceToR503BidiExact as Ordered
 import DASHI.Physics.Closure.NSTriadKNOneCancellationPaysRemainderAndCriticalRound414Exact as R414
 import DASHI.Physics.Closure.NSTriadKNSignedHeatCrossDirectToCriticalBarrierRound421Exact as R421
@@ -65,6 +67,10 @@ module CanonicalCriticalEndgame
     Time initialTime integrateTo DerivativeOf integration
   module Direct = R503.DirectSignedCross
     Time initialTime integrateTo DerivativeOf integration
+  module DirectToR423 = R501.DirectToR423
+    Time initialTime integrateTo DerivativeOf integration
+  module Companion = R423.QuadraticCompanionBarrier
+    Time initialTime integrateTo DerivativeOf
   module Unified = R414.Unified
     Time initialTime integrateTo DerivativeOf
   module Barrier = R421.DirectBarrier
@@ -106,6 +112,41 @@ module CanonicalCriticalEndgame
   signedOrderedBudgetBuildsR415 I =
     Direct.directBudgetBuildsR415 (signedOrderedBudgetBuildsR503 I)
 
+  signedOrderedBudgetBuildsR501 :
+    ∀ {T R terminal} →
+    CanonicalCriticalEndgameInputs T R terminal →
+    DirectToR423.DirectResolventCompanionBudget T R
+  signedOrderedBudgetBuildsR501 I = record
+    { DirectToR423.cutoffIndependentCompanionBound =
+        Direct.cutoffIndependentBound (signedOrderedBudgetBuildsR503 I)
+    ; DirectToR423.directCompanionBudget =
+        Direct.directOffDiagonalBudget (signedOrderedBudgetBuildsR503 I)
+    }
+
+  signedOrderedBudgetBuildsCanonicalR423 :
+    ∀ {T R terminal} →
+    CanonicalCriticalEndgameInputs T R terminal →
+    Companion.QuadraticCompanionSignedPayment T R
+  signedOrderedBudgetBuildsCanonicalR423 I =
+    DirectToR423.directBudgetBuildsR423
+      (signedOrderedBudgetBuildsR501 I)
+
+  canonicalR423CriticalData :
+    ∀ {T R terminal} →
+    (I : CanonicalCriticalEndgameInputs T R terminal) →
+    Companion.QuadraticCompanionCriticalData T R terminal
+  canonicalR423CriticalData I = record
+    { Companion.companionPayment =
+        signedOrderedBudgetBuildsCanonicalR423 I
+    ; Companion.sliceData = literalCriticalSlice I
+    ; Companion.uniformInitialCeiling =
+        Initial.cutoffIndependentInitialCeiling
+          (initialCriticalRealization I)
+    ; Companion.uniformInitialCritical =
+        Initial.realizationPaysUniformInitialCritical
+          (initialCriticalRealization I)
+    }
+
   canonicalR421Data :
     ∀ {T R terminal} →
     (I : CanonicalCriticalEndgameInputs T R terminal) →
@@ -121,8 +162,8 @@ module CanonicalCriticalEndgame
     CanonicalCriticalEndgameInputs T R terminal →
     Signed.UniformSignedCriticalProductionFamily
   canonicalUniformSignedCriticalFamily I =
-    Barrier.signedHeatCrossBuildsUniformCriticalFamily
-      (canonicalR421Data I)
+    Companion.quadraticCompanionPaymentBuildsUniformCriticalFamily
+      (canonicalR423CriticalData I)
 
   canonicalUniformCriticalBarrier :
     ∀ {T R terminal} →
@@ -134,6 +175,6 @@ module CanonicalCriticalEndgame
           * Signed.criticalDissipation (Signed.slice family cutoff)
     ≤ Signed.uniformCriticalCeiling family
   canonicalUniformCriticalBarrier I cutoff =
-    Barrier.signedHeatCrossBuildsUniformCriticalBarrier
-      (canonicalR421Data I)
+    Companion.quadraticCompanionPaymentBuildsUniformCriticalBarrier
+      (canonicalR423CriticalData I)
       cutoff
