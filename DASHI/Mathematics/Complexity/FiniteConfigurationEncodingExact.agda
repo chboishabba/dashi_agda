@@ -39,16 +39,6 @@ record FiniteConfigurationCodec (Configuration : Set) : Set₁ where
 
 open FiniteConfigurationCodec public
 
-record PolynomialConfigurationWidth
-    {Configuration : Set}
-    (codec : FiniteConfigurationCodec Configuration) : Set₁ where
-  field
-    inputLength : Set
-    widthEnvelope : Nat → Nat
-    widthPolynomial : ERQ.PolynomialBound widthEnvelope
-
-open PolynomialConfigurationWidth public
-
 record CookLevinEncodingFoundation
     (Configuration : Set) : Set₁ where
   field
