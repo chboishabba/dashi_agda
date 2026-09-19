@@ -26,6 +26,7 @@ module DASHI.Analysis.ContractiveCompartmentTailExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Sigma using (Σ)
 open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
@@ -84,6 +85,22 @@ actualTailVanishes {K = K} {S = S} problem =
     S
     (actualBelowMajorant problem)
     (majorantTailVanishes problem)
+
+
+consumerDecisionHorizon :
+  ∀ {Scalar : Set}
+    {K : Tail.OrderedTailKernel Scalar}
+    {S : Tail.TailSmallness K} →
+  (problem : ContractiveCompartmentProblem K S) →
+  (precision : Nat) →
+  Σ Nat (λ start →
+    ∀ count →
+    Tail.SmallAt S precision
+      (Tail.finiteTail K
+        (actualContribution problem)
+        start count))
+consumerDecisionHorizon problem precision =
+  actualTailVanishes problem precision
 
 compileContractiveCompartmentCauchy :
   ∀ {Scalar : Set}
