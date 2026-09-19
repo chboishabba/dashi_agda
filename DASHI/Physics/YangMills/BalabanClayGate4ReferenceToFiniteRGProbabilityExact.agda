@@ -32,6 +32,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibrePositiveMassExact a
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalReferenceNormalizationExact as Canonical
 import DASHI.Physics.YangMills.BalabanClayGate4FlatReferencePositiveWitnessExact as Flat
+import DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact as R283
+import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
 
 record RationalReferenceFoldSemantics
     {Scale Fine SlowField Component Functional : Set}
@@ -321,9 +323,6 @@ normalizedReferenceReopeningSameObjectLevel = conditional
 ------------------------------------------------------------------------
 -- Lift the pointwise Gate4/reopening weld over every selected cutoff.
 ------------------------------------------------------------------------
-
-import DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact as R283
-import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
 
 record Gate4SelectedProbabilityPresentationInputs
     {Scale Fine SlowField Component Functional Coarse Measure : Set}
