@@ -15,11 +15,12 @@ module DASHI.Physics.YangMills.BalabanClayGate4CanonicalFiniteRGReopeningExact w
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
+import DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact as Probability
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact as PhysicalT
 import DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationExact as Preferred
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact as Gate4
@@ -50,7 +51,7 @@ record CanonicalGate4ReopeningData
 
     reopeningOffFibreZero : ∀ coarse fine →
       (FibreSupport coarse fine → ⊥) →
-      reopeningKernel coarse fine ≡ Data.Rational.Base.0ℚ
+      reopeningKernel coarse fine ≡ 0ℚ
 
     reopeningNormalized : ∀ coarse →
       Sums.sumRational
@@ -58,7 +59,7 @@ record CanonicalGate4ReopeningData
           (PhysicalT.canonicalPhysicalTData construction)
           scale component)
         (reopeningKernel coarse)
-      ≡ Data.Rational.Base.1ℚ
+      ≡ 1ℚ
 
     disintegrationExact : ∀ fine →
       Gate4.selectedReferenceProbabilityWeight
@@ -169,7 +170,7 @@ canonicalGate4ReopeningProbabilityLaw :
       Preferred.PreferredRationalReferenceNormalizationInputs
         {construction = construction}}
     (dataSet : CanonicalGate4ReopeningData referenceInputs) →
-  DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact.FiniteRGProbabilityLaw
+  Probability.FiniteRGProbabilityLaw
     (canonicalGate4ReopeningStep dataSet)
 canonicalGate4ReopeningProbabilityLaw dataSet =
   Gate4.compileNormalizedReferenceProbabilityLaw
