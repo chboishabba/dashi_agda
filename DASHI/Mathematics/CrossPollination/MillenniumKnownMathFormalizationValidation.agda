@@ -6,9 +6,11 @@ module DASHI.Mathematics.CrossPollination.MillenniumKnownMathFormalizationValida
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHodgeReopeningCompilerExact as HodgeCP
 import DASHI.Mathematics.Arithmetic.EllipticCurveGlobalLocalCoefficientExact as BSDLocal
+import DASHI.Mathematics.Automorphic.TruncatedLFunctionExact as Truncated
 import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationExact as PNP
 
 projectiveSpaceReopeningCompilerPresent :
@@ -68,10 +70,10 @@ globalLocalFamilyTypeAvailable curve =
 goodPrimeRestrictionTheoremAvailable :
   ∀ {curve}
     (family : BSDLocal.EllipticCurveGlobalLocalCoefficient curve)
-    (p : Agda.Builtin.Nat.Nat)
+    (p : Nat)
     (restriction : BSDLocal.FiniteGoodPrimeRestriction family p)
     T →
-  BSDLocal.Truncated.localEulerFactorValue
+  Truncated.localEulerFactorValue
     (BSDLocal.goodPrimeCoefficientData family)
     (BSDLocal.restrictedPrimeNorm restriction)
     T
