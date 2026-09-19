@@ -39,3 +39,24 @@ shiftedScaledConvergenceRegression :
         scale ratio degree))
 shiftedScaledConvergenceRegression =
   P.shiftedScaledPolynomialGeometricSeriesConvergent
+
+
+fixedDegreeAbsoluteConvergenceRegression :
+  ∀ (ratio : BishopReal.ℝ) degree →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
+  BishopReal._<_ ratio BishopReal.1ℝ →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (P.polynomialGeometricTerm ratio degree)
+fixedDegreeAbsoluteConvergenceRegression =
+  P.polynomialGeometricSeriesAbsolutelyConvergent
+
+shiftedScaledAbsoluteConvergenceRegression :
+  ∀ (ratio scale : BishopReal.ℝ) degree →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
+  BishopReal._<_ ratio BishopReal.1ℝ →
+  BishopReal.NonNegative scale →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (P.shiftedScaledPolynomialGeometricTerm
+      scale ratio degree)
+shiftedScaledAbsoluteConvergenceRegression =
+  P.shiftedScaledPolynomialGeometricSeriesAbsolutelyConvergent
