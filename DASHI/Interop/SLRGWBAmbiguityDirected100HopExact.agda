@@ -128,6 +128,23 @@ canonicalGWBParetoCoordinatePolicy =
     true true true true true true true
     false false false
 
+record GWBClassDisambiguationPolicy : Set where
+  constructor gwb-class-disambiguation-policy
+  field
+    similarityAloneMayMergeClasses : Bool
+    reviewedSharedSuperclassMayBeRetained : Bool
+    reviewedBridgeClassMayBeRetained : Bool
+    reviewedConditionalDistinctionMayBeRetained : Bool
+    externalClassCreatesInternalOntologyTruth : Bool
+    classReviewCreatesLegalNormativity : Bool
+
+open GWBClassDisambiguationPolicy public
+
+canonicalGWBClassDisambiguationPolicy : GWBClassDisambiguationPolicy
+canonicalGWBClassDisambiguationPolicy =
+  gwb-class-disambiguation-policy
+    false true true true false false
+
 ------------------------------------------------------------------------
 -- One reviewed hop.
 ------------------------------------------------------------------------
@@ -137,6 +154,9 @@ data GWBReviewOutcome : Set where
   sameObjectOutcome : GWBReviewOutcome
   newRelatedObjectOutcome : GWBReviewOutcome
   newConceptualParentOutcome : GWBReviewOutcome
+  sharedSuperclassOutcome : GWBReviewOutcome
+  bridgeClassOutcome : GWBReviewOutcome
+  conditionalDistinctionOutcome : GWBReviewOutcome
   newEvidentiarySourceOutcome : GWBReviewOutcome
   wrongTypeOutcome : GWBReviewOutcome
   duplicateOutcome : GWBReviewOutcome
