@@ -595,3 +595,65 @@ The absolute route
 is retained only as an auxiliary fallback.  It should not be treated as the preferred theorem unless the signed baseline route is shown impossible.
 
 The expanding finite-near estimate is also no longer automatically a primitive R2 leaf.  The whole infinite final Off response already has a centered quadratic theorem.  If the signed whole-response route attaches directly to the final consumer, the finite-near work may remain primarily R1 / cross-prover representation debt.
+
+
+### Exact centered sign cut — 2026-09-20
+
+The centered-complement work has now been sharpened from a magnitude estimate to an exact same-consumer identity:
+
+```text
+S_g(t,r) := Off_g(t,r) + Q_Gamma,g(t,r)
+
+h_r(u) := g(u)(cos(r u)-1)
+
+S_g(t,r) - S_g(t,0)
+  = S_{h_r}(t,0).
+```
+
+For the positive taper, (h_rle0) pointwise.
+
+The previously obtained estimate
+
+```text
+|S_g(t,r)-S_g(t,0)| <= r^2 E_center(g,Lambda,t)
+```
+
+is therefore only a magnitude envelope around one explicit centered response.
+
+A new theorem-source no-go also records the uniformity obstruction:
+
+```text
+E>0, c>=0
+  -> exists a != 0 with c*a^2 < E.
+```
+
+Hence no fixed positive (a)-independent error can satisfy
+
+```text
+E < c*a^2
+```
+
+for every nonzero horizontal displacement arbitrarily close to the critical line.
+
+CANONICAL ANALYTIC CONSEQUENCE:
+
+```text
+do not spend the next tranche merely shrinking E_center.
+
+The prize-facing centered leaf must instead be one of:
+
+  S_{h_r}(t,0) <= 0
+  S_{h_r}(t,0) = 0
+  |S_{h_r}(t,0)| <= a^2 * E_a
+  or an equivalent favourable signed theorem.
+```
+
+The radius-zero baseline remains nontrivial because the pole channel survives there.  The absolute baseline route remains a fallback only.
+
+Additional pole-sign work has started:
+
+```text
+ell(Q_pole(0)) = -4 * poleEvenResp(g,t,0)
+```
+
+and the two-window taper construction has been decomposed into a de-weighting mechanism showing how the selected-radius pole cancellation can force a signed unweighted residue once the localized integral hypotheses are attached.
