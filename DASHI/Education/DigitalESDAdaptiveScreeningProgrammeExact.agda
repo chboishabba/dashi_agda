@@ -12,6 +12,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Pareto
 import DASHI.Core.NDimParetoHyperfabricExact as NDim
 import DASHI.Core.AttributedSourceCore as Attr
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Education.DigitalESDTitleAbstractScreeningExact as Screen
 import DASHI.Education.DigitalESDEligibilityFrameExclusionExact as Frame
 import DASHI.Education.DigitalESDSearchToSourceAuditAdmissionExact as SearchAudit
@@ -132,6 +133,126 @@ record ScreeningCandidateAssessment : Set where
     createsSourceTruthIsFalse : createsSourceTruth ≡ false
 
 open ScreeningCandidateAssessment public
+
+
+------------------------------------------------------------------------
+-- Constructive non-factorability: candidate assessment cannot determine the
+-- authoritative reviewed screening decision.
+------------------------------------------------------------------------
+
+data CandidateAssessmentWorld : Set where
+  sameCandidateSurfaceReviewedInclude : CandidateAssessmentWorld
+  sameCandidateSurfaceReviewedExclude : CandidateAssessmentWorld
+
+data CandidateAssessmentSurface : Set where
+  sameCandidateAssessmentSurface : CandidateAssessmentSurface
+
+candidateAssessmentProjection :
+  CandidateAssessmentWorld → CandidateAssessmentSurface
+candidateAssessmentProjection sameCandidateSurfaceReviewedInclude =
+  sameCandidateAssessmentSurface
+candidateAssessmentProjection sameCandidateSurfaceReviewedExclude =
+  sameCandidateAssessmentSurface
+
+reviewedScreeningOutcome :
+  CandidateAssessmentWorld → Screen.ScreeningDecision
+reviewedScreeningOutcome sameCandidateSurfaceReviewedInclude = Screen.include
+reviewedScreeningOutcome sameCandidateSurfaceReviewedExclude = Screen.exclude
+
+reviewedOutcomesDiffer :
+  reviewedScreeningOutcome sameCandidateSurfaceReviewedInclude ≡
+  reviewedScreeningOutcome sameCandidateSurfaceReviewedExclude → ⊥
+reviewedOutcomesDiffer ()
+
+candidateAssessmentNonFactorWitness :
+  NonFactor.NonFactorabilityWitness
+    candidateAssessmentProjection
+    reviewedScreeningOutcome
+candidateAssessmentNonFactorWitness =
+  NonFactor.nonFactorabilityWitness
+    sameCandidateSurfaceReviewedInclude
+    sameCandidateSurfaceReviewedExclude
+    refl
+    reviewedOutcomesDiffer
+
+candidateAssessmentCannotDetermineReviewedDecision :
+  NonFactor.FactorsThrough
+    candidateAssessmentProjection
+    reviewedScreeningOutcome → ⊥
+candidateAssessmentCannotDetermineReviewedDecision =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    candidateAssessmentNonFactorWitness
+
+------------------------------------------------------------------------
+-- Constructive non-factorability: a similarity/family surface cannot determine
+-- whether two publications instantiate the same empirical study.
+------------------------------------------------------------------------
+
+data FamilySimilarityWorld : Set where
+  sameSimilaritySameStudy : FamilySimilarityWorld
+  sameSimilarityDifferentStudy : FamilySimilarityWorld
+
+data FamilySimilaritySurface : Set where
+  sameFamilySimilaritySurface : FamilySimilaritySurface
+
+familySimilarityProjection :
+  FamilySimilarityWorld → FamilySimilaritySurface
+familySimilarityProjection sameSimilaritySameStudy =
+  sameFamilySimilaritySurface
+familySimilarityProjection sameSimilarityDifferentStudy =
+  sameFamilySimilaritySurface
+
+sameEmpiricalStudyState : FamilySimilarityWorld → Bool
+sameEmpiricalStudyState sameSimilaritySameStudy = true
+sameEmpiricalStudyState sameSimilarityDifferentStudy = false
+
+studyIdentityStatesDiffer :
+  sameEmpiricalStudyState sameSimilaritySameStudy ≡
+  sameEmpiricalStudyState sameSimilarityDifferentStudy → ⊥
+studyIdentityStatesDiffer ()
+
+familySimilarityNonFactorWitness :
+  NonFactor.NonFactorabilityWitness
+    familySimilarityProjection
+    sameEmpiricalStudyState
+familySimilarityNonFactorWitness =
+  NonFactor.nonFactorabilityWitness
+    sameSimilaritySameStudy
+    sameSimilarityDifferentStudy
+    refl
+    studyIdentityStatesDiffer
+
+familySimilarityCannotDetermineSameEmpiricalStudy :
+  NonFactor.FactorsThrough
+    familySimilarityProjection
+    sameEmpiricalStudyState → ⊥
+familySimilarityCannotDetermineSameEmpiricalStudy =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    familySimilarityNonFactorWitness
+
+------------------------------------------------------------------------
+-- Review-process missingness / frame probes.
+------------------------------------------------------------------------
+
+data ScreeningProcessAbsenceProbe : Set where
+  inspectSearchVocabularyExclusion
+  inspectMissingAbstractOrMetadata
+  inspectSystematicDeprioritisation
+  inspectUnderrepresentedSourceTypes
+  inspectTerminologyOutsideFrozenQueries
+  : ScreeningProcessAbsenceProbe
+
+screeningProcessProbeReading : ScreeningProcessAbsenceProbe → String
+screeningProcessProbeReading inspectSearchVocabularyExclusion =
+  "inspect which potentially relevant populations, practices or source genres could not enter the retrieved universe because the frozen search vocabulary did not name them"
+screeningProcessProbeReading inspectMissingAbstractOrMetadata =
+  "inspect records whose title/abstract or metadata are absent, malformed or too sparse for the same screening process"
+screeningProcessProbeReading inspectSystematicDeprioritisation =
+  "inspect whether a candidate-ranking process repeatedly delays particular populations, terminologies, source roles or publication forms"
+screeningProcessProbeReading inspectUnderrepresentedSourceTypes =
+  "inspect source types or publication forms that occupy sparse cells in the retrieved/screened carrier"
+screeningProcessProbeReading inspectTerminologyOutsideFrozenQueries =
+  "inspect terminology used by relevant communities or disciplines that falls outside the seven frozen query families"
 
 ------------------------------------------------------------------------
 -- P0-C — record/report/study-family hypotheses remain hypotheses.
