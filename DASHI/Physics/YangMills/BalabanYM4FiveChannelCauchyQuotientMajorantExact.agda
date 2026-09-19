@@ -361,6 +361,72 @@ completedCauchyCoefficientNonnegative dataSet =
   ℚP.nonNegative⁻¹
     (amplitude dataSet * geometricBound dataSet)
 
+------------------------------------------------------------------------
+-- Raw coefficient package -> completed quotient package.
+------------------------------------------------------------------------
+
+record RawCompletedCauchyQuotient : Set₁ where
+  field
+    raw : RawCauchyCoefficientMajorant
+    geometricBound : ℚ
+    quotient : ℚ
+
+    analyticRadiusMargin :
+      0ℚ < 1ℚ - evaluatedRatio raw
+    geometricBoundIdentity :
+      (1ℚ - evaluatedRatio raw) * geometricBound ≡ 1ℚ
+
+    Converges : (Nat → ℚ) → ℚ → Set
+    quotientSeriesConverges :
+      Converges (seriesPartial (evaluatedTerm raw)) quotient
+
+    lowerBoundClosedUnderConvergence :
+      ∀ lower sequence limit →
+      (∀ cutoff → lower ≤ sequence cutoff) →
+      Converges sequence limit →
+      lower ≤ limit
+
+open RawCompletedCauchyQuotient public
+
+rawToCompletedCauchyQuotient :
+  RawCompletedCauchyQuotient → CompletedCauchyQuotient
+rawToCompletedCauchyQuotient dataSet = record
+  { CompletedCauchyQuotient.amplitude =
+      amplitude (raw dataSet)
+  ; CompletedCauchyQuotient.ratio =
+      evaluatedRatio (raw dataSet)
+  ; CompletedCauchyQuotient.geometricBound =
+      RawCompletedCauchyQuotient.geometricBound dataSet
+  ; CompletedCauchyQuotient.term =
+      evaluatedTerm (raw dataSet)
+  ; CompletedCauchyQuotient.quotient =
+      RawCompletedCauchyQuotient.quotient dataSet
+  ; CompletedCauchyQuotient.amplitudeNonnegative =
+      amplitudeNonnegativeRaw (raw dataSet)
+  ; CompletedCauchyQuotient.ratioNonnegative =
+      evaluatedRatioNonnegative (raw dataSet)
+  ; CompletedCauchyQuotient.analyticRadiusMargin =
+      RawCompletedCauchyQuotient.analyticRadiusMargin dataSet
+  ; CompletedCauchyQuotient.geometricBoundIdentity =
+      RawCompletedCauchyQuotient.geometricBoundIdentity dataSet
+  ; CompletedCauchyQuotient.cauchyCoefficientLower =
+      evaluatedCoefficientLower (raw dataSet)
+  ; CompletedCauchyQuotient.Converges =
+      RawCompletedCauchyQuotient.Converges dataSet
+  ; CompletedCauchyQuotient.quotientSeriesConverges =
+      RawCompletedCauchyQuotient.quotientSeriesConverges dataSet
+  ; CompletedCauchyQuotient.lowerBoundClosedUnderConvergence =
+      RawCompletedCauchyQuotient.lowerBoundClosedUnderConvergence dataSet
+  }
+
+rawCompletedCauchyQuotientLower :
+  (dataSet : RawCompletedCauchyQuotient) →
+  - (amplitude (raw dataSet)
+      * RawCompletedCauchyQuotient.geometricBound dataSet)
+  ≤ RawCompletedCauchyQuotient.quotient dataSet
+rawCompletedCauchyQuotientLower dataSet =
+  completedCauchyQuotientLower (rawToCompletedCauchyQuotient dataSet)
+
 record FiveChannelCauchyTailData (Cell : Set) : Set₁ where
   field
     cells : List Cell
@@ -415,6 +481,9 @@ cauchyTailGlobalQuarticLower :
 cauchyTailGlobalQuarticLower dataSet =
   Fourth.factorizedGlobalQuarticLower
     (asFourthOrderFactorizedFiveChannelData dataSet)
+
+rawCauchyCoefficientEvaluationLevel : ProofLevel
+rawCauchyCoefficientEvaluationLevel = machineChecked
 
 finiteCauchyCoefficientGeometricMajorantLevel : ProofLevel
 finiteCauchyCoefficientGeometricMajorantLevel = machineChecked
