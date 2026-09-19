@@ -3,7 +3,6 @@ module DASHI.Physics.YangMills.YMClayDenseMarkedSourceF1ProducerExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanMarkedLogPartitionConnectedCorrelationCompilerExact as Marked
@@ -13,36 +12,21 @@ import DASHI.Physics.YangMills.YMClayR295MarkedSourceAdapterExact as R295Adapter
 ------------------------------------------------------------------------
 -- DENSE PHYSICAL F1 PRODUCER FROM THE EXISTING MARKED-SOURCE COMPILER
 --
--- This is the source-native counterpart of `YMClayDenseL2CorrelationBidiParityExact`.
--- The latter says that a uniform connected-correlation estimate on a dense
--- physical L2_0 algebra extends to the full vacuum complement.  The present
--- owner removes one more fake leaf: the dense correlation estimate itself need
--- not be postulated independently once the existing marked-source response and
--- separation-decay producer are on the SAME literal Wilson observables.
+-- Corrected min-cut:
 --
--- Existing compiler mathematics:
+--   * F1 is a TWO-SLICE transfer/correlation statement.  The source pair must
+--     therefore be the selected left observable and its translated/right-slice
+--     partner, not the same marked observable inserted twice.
 --
---   mixed d_A d_B log Z
---       = <AB> - <A><B>
---       = connectedCorrelation A B
+--   * The physical target only needs a one-sided calibration
 --
--- and
+--         decayEnvelope(left,right) <= c_k ||psi||^2,
 --
---   |mixed d_A d_B log Z| <= decayEnvelope(distance A B)
---       ->
---   |connectedCorrelation A B| <= decayEnvelope(distance A B).
+--     not equality of the source envelope with that target.
 --
--- R295 is now adapted directly to this generic marked-source ABI by
--- `YMClayR295MarkedSourceAdapterExact`, so the selected marked response/decay
--- producer is not an additional F1 leaf after the canonical R338/R339 -> R295
--- route.  The remaining theorem-bearing weld is the SAME-OBJECT dense/L2
--- normalization:
---
---   decayEnvelope(distance (A_psi) (A_psi))
---       = c_k * ||psi||_2^2
---
--- together with the fact that the selected local/cylinder family is dense in
--- the literal physical vacuum complement.
+-- R295 still supplies the generic marked response and separation-decay theorem;
+-- this owner only composes that decay with the translated-pair physical
+-- calibration and density in the literal Wilson vacuum complement.
 ------------------------------------------------------------------------
 
 record DenseMarkedSourceF1Weld
@@ -51,23 +35,40 @@ record DenseMarkedSourceF1Weld
     (producer : Marked.SeparationDecayProducer response) : Set₁ where
   field
     DensePhysicalObservable : Set
-    asMarkedObservable : DensePhysicalObservable → Observable
+
+    -- Selected two-slice source pair.  For the R310/R315 Wilson-cylinder route
+    -- these are intended to be decode(psi) and timeTranslate(psi,1).
+    leftMarkedObservable :
+      DensePhysicalObservable → Observable
+    rightMarkedObservable :
+      DensePhysicalObservable → Observable
 
     DenseInPhysicalVacuumComplement : Set
     denseInPhysicalVacuumComplement : DenseInPhysicalVacuumComplement
 
-    SameLiteralWilsonSliceObservable : Set
-    sameLiteralWilsonSliceObservable : SameLiteralWilsonSliceObservable
+    SameLiteralWilsonTwoSliceObservables : Set
+    sameLiteralWilsonTwoSliceObservables :
+      SameLiteralWilsonTwoSliceObservables
 
     f1TargetBound : DensePhysicalObservable → Bound
 
-    sourceEnvelopeIsPhysicalF1Target :
+    -- Standard order/compiler input.  R295 realizes LessEqual pointwise by
+    -- rational <=, where this is ordinary transitivity.
+    lessEqualTransitive :
+      ∀ {lower middle upper} →
+      Marked.LessEqual producer lower middle →
+      Marked.LessEqual producer middle upper →
+      Marked.LessEqual producer lower upper
+
+    -- Least-privilege physical normalization: only an upper is required.
+    sourceEnvelopeBelowPhysicalF1Target :
       (psi : DensePhysicalObservable) →
-      Marked.decayEnvelope producer
-        (Marked.distance producer
-          (asMarkedObservable psi)
-          (asMarkedObservable psi))
-      ≡ f1TargetBound psi
+      Marked.LessEqual producer
+        (Marked.decayEnvelope producer
+          (Marked.distance producer
+            (leftMarkedObservable psi)
+            (rightMarkedObservable psi)))
+        (f1TargetBound psi)
 
 open DenseMarkedSourceF1Weld public
 
@@ -80,22 +81,15 @@ denseMarkedSourceCorrelationPaysF1 :
   Marked.LessEqual producer
     (Marked.absoluteValue producer
       (Marked.connectedCorrelation response
-        (asMarkedObservable weld psi)
-        (asMarkedObservable weld psi)))
+        (leftMarkedObservable weld psi)
+        (rightMarkedObservable weld psi)))
     (f1TargetBound weld psi)
 denseMarkedSourceCorrelationPaysF1 {response = response} {producer = producer} weld psi =
-  subst
-    (λ upper →
-      Marked.LessEqual producer
-        (Marked.absoluteValue producer
-          (Marked.connectedCorrelation response
-            (asMarkedObservable weld psi)
-            (asMarkedObservable weld psi)))
-        upper)
-    (sourceEnvelopeIsPhysicalF1Target weld psi)
+  lessEqualTransitive weld
     (Marked.connectedCorrelationDecayFromMarkedSource producer
-      (asMarkedObservable weld psi)
-      (asMarkedObservable weld psi))
+      (leftMarkedObservable weld psi)
+      (rightMarkedObservable weld psi))
+    (sourceEnvelopeBelowPhysicalF1Target weld psi)
 
 ------------------------------------------------------------------------
 -- Frontier bookkeeping.
@@ -122,9 +116,34 @@ sameObjectEnvelopeToPhysicalL2NormalizationStillRequiredIsTrue :
   sameObjectEnvelopeToPhysicalL2NormalizationStillRequired ≡ true
 sameObjectEnvelopeToPhysicalL2NormalizationStillRequiredIsTrue = refl
 
--- R295 now definitionally supplies the generic response/decay producer used by
--- this module.  The underlying selected-J localization can remain conditional,
--- but there is no second adapter/producer theorem to pay afterwards.
+sameObservableInsertedTwiceIsCorrectF1Pair : Bool
+sameObservableInsertedTwiceIsCorrectF1Pair = false
+
+sameObservableInsertedTwiceIsCorrectF1PairIsFalse :
+  sameObservableInsertedTwiceIsCorrectF1Pair ≡ false
+sameObservableInsertedTwiceIsCorrectF1PairIsFalse = refl
+
+translatedTwoSlicePairRequired : Bool
+translatedTwoSlicePairRequired = true
+
+translatedTwoSlicePairRequiredIsTrue :
+  translatedTwoSlicePairRequired ≡ true
+translatedTwoSlicePairRequiredIsTrue = refl
+
+envelopeEqualityRequired : Bool
+envelopeEqualityRequired = false
+
+envelopeEqualityRequiredIsFalse :
+  envelopeEqualityRequired ≡ false
+envelopeEqualityRequiredIsFalse = refl
+
+oneSidedEnvelopeUpperSuffices : Bool
+oneSidedEnvelopeUpperSuffices = true
+
+oneSidedEnvelopeUpperSufficesIsTrue :
+  oneSidedEnvelopeUpperSuffices ≡ true
+oneSidedEnvelopeUpperSufficesIsTrue = refl
+
 selectedPhysicalMarkedDecayProducerStillRequired : Bool
 selectedPhysicalMarkedDecayProducerStillRequired = false
 
