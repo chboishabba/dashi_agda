@@ -1,5 +1,6 @@
 module DASHI.Biology.Agriculture.DrylandRegenerationNitrogenFactorisationRegression where
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
