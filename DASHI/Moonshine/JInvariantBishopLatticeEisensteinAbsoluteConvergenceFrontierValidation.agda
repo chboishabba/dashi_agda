@@ -35,10 +35,16 @@ coercivityPaid :
   ≡ true
 coercivityPaid = refl
 
+radiusSquareLowerPaid :
+  F.squareShellRadiusSquareLowerBoundExact
+    F.canonicalBishopLatticeEisensteinAbsoluteConvergenceFrontier
+  ≡ true
+radiusSquareLowerPaid = refl
+
 firstResidualRegression :
   F.firstResidual
     F.canonicalBishopLatticeEisensteinAbsoluteConvergenceFrontier
-  ≡ F.missingSquareShellRadiusSquareLowerBound
+  ≡ F.missingCoercivityToReciprocalPowerMajorant
 firstResidualRegression = refl
 
 absoluteSumStillOpen :
