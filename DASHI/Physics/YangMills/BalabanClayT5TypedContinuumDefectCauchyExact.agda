@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyExact where
 
 ------------------------------------------------------------------------
@@ -126,8 +125,7 @@ expectationDifferenceBelowFiniteDyadicTail :
   (dataSet : TypedContinuumDefectCauchyData Observable) →
   ∀ start count observable →
   ∣ expectation dataSet start observable
-      - Configured.expectation
-          (dataSet) (advance start count) observable ∣
+      - expectation dataSet (advance start count) observable ∣
   ≤ Configured.finiteDyadicTail start count
 expectationDifferenceBelowFiniteDyadicTail dataSet start count observable =
   subst
@@ -144,8 +142,7 @@ expectationCauchyModulus :
   (dataSet : TypedContinuumDefectCauchyData Observable) →
   ∀ start count observable →
   ∣ expectation dataSet start observable
-      - Configured.expectation
-          (dataSet) (advance start count) observable ∣
+      - expectation dataSet (advance start count) observable ∣
   ≤ Configured.configuredInfiniteTailMajorant start
 expectationCauchyModulus dataSet start count observable =
   trans
@@ -164,8 +161,7 @@ ExpectationHasConfiguredCauchyModulus :
 ExpectationHasConfiguredCauchyModulus dataSet observable =
   ∀ start count →
   ∣ expectation dataSet start observable
-      - Configured.expectation
-          (dataSet) (advance start count) observable ∣
+      - expectation dataSet (advance start count) observable ∣
   ≤ Configured.configuredInfiniteTailMajorant start
 
 expectationHasConfiguredCauchyModulus :
