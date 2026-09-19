@@ -140,6 +140,31 @@ voorheisCandidate = mkEligibilityFrameCandidate
 
 
 
+
+
+------------------------------------------------------------------------
+-- Fisher et al. 2019: recruitment-frame / reachability construction.
+------------------------------------------------------------------------
+
+fisherMikolajczakSource : Attr.AttributedSource
+fisherMikolajczakSource = Attr.mkDOISource
+  "Christopher Fisher; Gosia Mikolajczak; Paulina Ezer; Lucille Kerr; Rosalind Bellamy; Graham Brown; Andrea Waling; Jayne Lucke"
+  "Study Protocol: 6th National Survey of Australian Secondary Students and Adolescent Sexual Health, 2018"
+  "Frontiers in Public Health 7:217"
+  "2019"
+  "10.3389/fpubh.2019.00217"
+  "https://doi.org/10.3389/fpubh.2019.00217"
+  Attr.academicArticleSource
+  "Australian secondary-student survey protocol documenting explicit age/location eligibility criteria, minimum-quota sampling and a two-phase recruitment strategy centred on online/social-media reach. The final analytic sample is further conditioned by completion/data-cleaning rules."
+  Attr.publicAttribution
+
+fisherMikolajczakCandidate : EligibilityFrameCandidate
+fisherMikolajczakCandidate = mkEligibilityFrameCandidate
+  fisherMikolajczakSource
+  populationToSurveyableFrameContraction
+  "Independent recruitment-frame donor: substantive target population, platform-reachable recruitment surface, survey starts and retained analytic sample remain distinct carriers. Recruitment through a digital/social-media surface therefore cannot silently recover young people outside that reach."
+  "Survey-protocol evidence for one Australian adolescent study. The recruitment design does not establish that unreached adolescents differ in any specific direction, nor a universal digital-recruitment bias or Digital-ESD intervention effect."
+
 ------------------------------------------------------------------------
 -- Dynarski / Hemelt / Hyman 2015: subgroup-specific administrative coverage.
 ------------------------------------------------------------------------
@@ -217,6 +242,7 @@ canonicalEligibilityFrameAcquisitionFrontier =
   ∷ qilt2022Candidate
   ∷ voorheisCandidate
   ∷ dynarskiHemeltHymanCandidate
+  ∷ fisherMikolajczakCandidate
   ∷ creaghLBOTECandidate
   ∷ clutterbuckCandidate
   ∷ []
