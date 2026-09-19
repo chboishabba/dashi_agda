@@ -47,6 +47,8 @@ import DASHI.Analysis.TailModulusCauchyBridgeExact as Bridge
 import DASHI.Analysis.ContractiveCompartmentTailExact as Compartment
 import DASHI.Analysis.BishopContractiveCompartmentSeriesExact as BishopCompartment
 
+open Compartment.ContractiveCompartmentProblem
+
 ------------------------------------------------------------------------
 -- Typed route / stage coordinates.
 ------------------------------------------------------------------------
@@ -149,10 +151,10 @@ asContractiveCompartment :
   NitrogenRouteTailProblem K S →
   Compartment.ContractiveCompartmentProblem K S
 asContractiveCompartment problem = record
-  { Compartment.actualContribution = routeContribution problem
-  ; Compartment.majorantContribution = routeMajorant problem
-  ; Compartment.actualBelowMajorant = routeBelowMajorant problem
-  ; Compartment.majorantTailVanishes = routeMajorantTailVanishes problem
+  { actualContribution = routeContribution problem
+  ; majorantContribution = routeMajorant problem
+  ; actualBelowMajorant = routeBelowMajorant problem
+  ; majorantTailVanishes = routeMajorantTailVanishes problem
   }
 
 routeFiniteTailBelowMajorant :
