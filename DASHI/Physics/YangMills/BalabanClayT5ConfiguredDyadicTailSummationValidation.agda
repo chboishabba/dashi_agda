@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationValidation where
 
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
