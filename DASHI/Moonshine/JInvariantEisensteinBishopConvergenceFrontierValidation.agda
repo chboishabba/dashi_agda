@@ -111,6 +111,11 @@ literalQToBishopRadiusSameObjectStillUnpaid :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
 literalQToBishopRadiusSameObjectStillUnpaid = refl
 
+bishopLiteralRadiusWeldCompilerIsOwned :
+  P.bishopLiteralRadiusWeldCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopLiteralRadiusWeldCompilerIsOwned = refl
+
 bishopDegreeFourPolynomialGeometricConvergenceIsOwned :
   P.bishopDegreeFourPolynomialGeometricConvergenceOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
