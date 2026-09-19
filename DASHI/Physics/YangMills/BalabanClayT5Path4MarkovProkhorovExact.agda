@@ -11,6 +11,7 @@ module DASHI.Physics.YangMills.BalabanClayT5Path4MarkovProkhorovExact where
 -- pointwise observable semantics, together with admissible compact sublevels.
 ------------------------------------------------------------------------
 
+open import Data.Rational using (ℚ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
 import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyObservableRealizationExact as Realization
@@ -23,7 +24,7 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedProkhorovExtractionExact as 
 record Path4MarkovProkhorovInputs
     (Measure Observable Configuration Epsilon Witness : Set)
     (expectationData :
-      T5.PhysicalExpectationProducerData Measure Observable Data.Rational.ℚ)
+      T5.PhysicalExpectationProducerData Measure Observable ℚ)
     (realization :
       Realization.Path4GaugeEnergyObservableRealization
         Measure Observable Configuration expectationData) : Set₁ where
@@ -40,21 +41,21 @@ open Path4MarkovProkhorovInputs public
 path4SelectedContainment :
   ∀ {Measure Observable Configuration Epsilon Witness}
     {expectationData :
-      T5.PhysicalExpectationProducerData Measure Observable Data.Rational.ℚ}
+      T5.PhysicalExpectationProducerData Measure Observable ℚ}
     {realization :
       Realization.Path4GaugeEnergyObservableRealization
         Measure Observable Configuration expectationData} →
   Path4MarkovProkhorovInputs
     Measure Observable Configuration Epsilon Witness expectationData realization →
   Moment.SelectedMomentCompactContainmentInputs
-    Measure Observable Data.Rational.ℚ Epsilon Witness expectationData
+    Measure Observable ℚ Epsilon Witness expectationData
 path4SelectedContainment inputs =
   Path4.compilePath4MomentCompactContainmentInputs (containment inputs)
 
 path4UniformTightness :
   ∀ {Measure Observable Configuration Epsilon Witness}
     {expectationData :
-      T5.PhysicalExpectationProducerData Measure Observable Data.Rational.ℚ}
+      T5.PhysicalExpectationProducerData Measure Observable ℚ}
     {realization :
       Realization.Path4GaugeEnergyObservableRealization
         Measure Observable Configuration expectationData}
@@ -74,7 +75,7 @@ path4UniformTightness inputs =
 compilePath4ProkhorovTightness :
   ∀ {Measure Observable Configuration Epsilon Witness}
     {expectationData :
-      T5.PhysicalExpectationProducerData Measure Observable Data.Rational.ℚ}
+      T5.PhysicalExpectationProducerData Measure Observable ℚ}
     {realization :
       Realization.Path4GaugeEnergyObservableRealization
         Measure Observable Configuration expectationData} →
