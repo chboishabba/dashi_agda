@@ -614,3 +614,31 @@ Blocked-before-submission, authentication failure, interface failure, an observe
 The existing Scopus Q1 blocked receipt and ERIC Q1 transport-failure receipt are explicitly used as negative witnesses.
 
 This closes the formal glue needed for a future successful local/API execution to enter the dependent structured-search chain. It does not create a successful execution, deduplication, screening or corpus admission in the current state.
+
+
+## 23. Translation surface complete: 35/35
+
+The declared five-database translation surface is now complete:
+
+```text
+Scopus              7/7
+Web of Science      7/7
+IEEE Xplore         7/7
+ERIC                 7/7
+ACM Digital Library  7/7
+total               35/35
+```
+
+ACM syntax is sourced from official ACM Digital Library materials documenting Advanced Search, Boolean AND/OR/NOT, exact-phrase quotation and the Anywhere search surface. The frozen ACM translations use the ACM Full-Text collection / Anywhere scope and explicitly expand stem-like terms instead of assuming undocumented wildcard behaviour.
+
+The controlling distinction remains:
+
+```text
+35/35 translations frozen
+!=
+35/35 queries executed
+```
+
+Current observed execution result sets remain zero. Translation closure removes a planning debt; it does not pay execution, export retention, deduplication, screening, extraction or corpus admission.
+
+Accordingly the scientific P0 is now pure execution work rather than further query formalisation.
