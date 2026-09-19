@@ -1,6 +1,6 @@
 module DASHI.Foundations.BishopFiniteCauchyWingAbsoluteBoundValidation where
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 
 import Real as BishopReal
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact as Rectangle
