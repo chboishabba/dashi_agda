@@ -215,3 +215,22 @@ bsdFinitePlacesAreLiteralPrimes :
     BSDPlaces.canonicalEllipticRationalPlaceSelmerBoundary
   ≡ true
 bsdFinitePlacesAreLiteralPrimes = refl
+
+
+------------------------------------------------------------------------
+-- FIFTH CONTINUATION: exact overlapping local-pattern grammar.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as PNPPatterns
+
+pnpDirectionalOverlapGrammarPaid :
+  PNPPatterns.completeDirectionalOverlapPatternGrammarPaid
+    PNPPatterns.canonicalConcreteTapeLocalWindowPatternsBoundary
+  ≡ true
+pnpDirectionalOverlapGrammarPaid = refl
+
+pnpWholeRowWindowScanStillOpen :
+  PNPPatterns.wholeRowAllWindowScanPaid
+    PNPPatterns.canonicalConcreteTapeLocalWindowPatternsBoundary
+  ≡ false
+pnpWholeRowWindowScanStillOpen = refl
