@@ -259,6 +259,185 @@ fixedOutputViscousRateWorkDifferenceFactor
     (cong (λ rateDefect → rateDefect * (workA - workB)) base)
 
 ------------------------------------------------------------------------
+-- Same-output resonance makes the centered multiplier difference first-order
+-- in the partner displacement.
+------------------------------------------------------------------------
+
+pX :
+  (E : C3.IntegerEmbedding F) → Z3.FourierMode → ℚ
+pX E mode = C3.embedInteger E (Z3.kx mode)
+
+pY :
+  (E : C3.IntegerEmbedding F) → Z3.FourierMode → ℚ
+pY E mode = C3.embedInteger E (Z3.ky mode)
+
+pZ :
+  (E : C3.IntegerEmbedding F) → Z3.FourierMode → ℚ
+pZ E mode = C3.embedInteger E (Z3.kz mode)
+
+inputSumModesEqual :
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ Physical.k beta →
+  Z3.addMode (Physical.p alpha) (Physical.q alpha)
+  ≡ Z3.addMode (Physical.p beta) (Physical.q beta)
+inputSumModesEqual alpha beta sameOutput =
+  trans
+    (Physical.resonance alpha)
+    (trans sameOutput (sym (Physical.resonance beta)))
+
+embeddedXInputSumEqual :
+  (E : C3.IntegerEmbedding F) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ Physical.k beta →
+  pX E (Physical.p alpha) + pX E (Physical.q alpha)
+  ≡ pX E (Physical.p beta) + pX E (Physical.q beta)
+embeddedXInputSumEqual E alpha beta sameOutput =
+  let
+    modeEquality = inputSumModesEqual alpha beta sameOutput
+    integerEquality =
+      cong Z3.kx modeEquality
+    embeddedEquality =
+      cong (C3.embedInteger E) integerEquality
+  in
+  trans
+    (sym
+      (C3.embedAdd E
+        (Z3.kx (Physical.p alpha))
+        (Z3.kx (Physical.q alpha))))
+    (trans embeddedEquality
+      (C3.embedAdd E
+        (Z3.kx (Physical.p beta))
+        (Z3.kx (Physical.q beta))))
+
+embeddedYInputSumEqual :
+  (E : C3.IntegerEmbedding F) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ Physical.k beta →
+  pY E (Physical.p alpha) + pY E (Physical.q alpha)
+  ≡ pY E (Physical.p beta) + pY E (Physical.q beta)
+embeddedYInputSumEqual E alpha beta sameOutput =
+  let
+    modeEquality = inputSumModesEqual alpha beta sameOutput
+    integerEquality = cong Z3.ky modeEquality
+    embeddedEquality = cong (C3.embedInteger E) integerEquality
+  in
+  trans
+    (sym
+      (C3.embedAdd E
+        (Z3.ky (Physical.p alpha))
+        (Z3.ky (Physical.q alpha))))
+    (trans embeddedEquality
+      (C3.embedAdd E
+        (Z3.ky (Physical.p beta))
+        (Z3.ky (Physical.q beta))))
+
+embeddedZInputSumEqual :
+  (E : C3.IntegerEmbedding F) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ Physical.k beta →
+  pZ E (Physical.p alpha) + pZ E (Physical.q alpha)
+  ≡ pZ E (Physical.p beta) + pZ E (Physical.q beta)
+embeddedZInputSumEqual E alpha beta sameOutput =
+  let
+    modeEquality = inputSumModesEqual alpha beta sameOutput
+    integerEquality = cong Z3.kz modeEquality
+    embeddedEquality = cong (C3.embedInteger E) integerEquality
+  in
+  trans
+    (sym
+      (C3.embedAdd E
+        (Z3.kz (Physical.p alpha))
+        (Z3.kz (Physical.q alpha))))
+    (trans embeddedEquality
+      (C3.embedAdd E
+        (Z3.kz (Physical.p beta))
+        (Z3.kz (Physical.q beta))))
+
+centeredXDifferenceIsDoubleP :
+  (E : C3.IntegerEmbedding F) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ Physical.k beta →
+  centeredX E (Physical.p alpha) (Physical.q alpha)
+    - centeredX E (Physical.p beta) (Physical.q beta)
+  ≡ two * (pX E (Physical.p alpha) - pX E (Physical.p beta))
+centeredXDifferenceIsDoubleP E alpha beta sameOutput
+  rewrite embeddedXInputSumEqual E alpha beta sameOutput =
+  solve
+    ( pX E (Physical.p alpha) ∷ pX E (Physical.q alpha)
+    ∷ pX E (Physical.p beta) ∷ pX E (Physical.q beta) ∷ [])
+
+centeredYDifferenceIsDoubleP :
+  (E : C3.IntegerEmbedding F) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ Physical.k beta →
+  centeredY E (Physical.p alpha) (Physical.q alpha)
+    - centeredY E (Physical.p beta) (Physical.q beta)
+  ≡ two * (pY E (Physical.p alpha) - pY E (Physical.p beta))
+centeredYDifferenceIsDoubleP E alpha beta sameOutput
+  rewrite embeddedYInputSumEqual E alpha beta sameOutput =
+  solve
+    ( pY E (Physical.p alpha) ∷ pY E (Physical.q alpha)
+    ∷ pY E (Physical.p beta) ∷ pY E (Physical.q beta) ∷ [])
+
+centeredZDifferenceIsDoubleP :
+  (E : C3.IntegerEmbedding F) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ Physical.k beta →
+  centeredZ E (Physical.p alpha) (Physical.q alpha)
+    - centeredZ E (Physical.p beta) (Physical.q beta)
+  ≡ two * (pZ E (Physical.p alpha) - pZ E (Physical.p beta))
+centeredZDifferenceIsDoubleP E alpha beta sameOutput
+  rewrite embeddedZInputSumEqual E alpha beta sameOutput =
+  solve
+    ( pZ E (Physical.p alpha) ∷ pZ E (Physical.q alpha)
+    ∷ pZ E (Physical.p beta) ∷ pZ E (Physical.q beta) ∷ [])
+
+firstOrderCenteredDefect :
+  (E : C3.IntegerEmbedding F) →
+  Physical.PhysicalTriadIncidence →
+  Physical.PhysicalTriadIncidence → ℚ
+firstOrderCenteredDefect E alpha beta =
+    (pX E (Physical.p alpha) - pX E (Physical.p beta))
+      * ( centeredX E (Physical.p alpha) (Physical.q alpha)
+        + centeredX E (Physical.p beta) (Physical.q beta))
+  + (pY E (Physical.p alpha) - pY E (Physical.p beta))
+      * ( centeredY E (Physical.p alpha) (Physical.q alpha)
+        + centeredY E (Physical.p beta) (Physical.q beta))
+  + (pZ E (Physical.p alpha) - pZ E (Physical.p beta))
+      * ( centeredZ E (Physical.p alpha) (Physical.q alpha)
+        + centeredZ E (Physical.p beta) (Physical.q beta))
+
+fixedOutputCenteredSquareDifferenceIsFirstOrder :
+  (E : C3.IntegerEmbedding F) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  (sameOutput : Physical.k alpha ≡ Physical.k beta) →
+  centeredSquare E (Physical.p alpha) (Physical.q alpha)
+    - centeredSquare E (Physical.p beta) (Physical.q beta)
+  ≡ two * firstOrderCenteredDefect E alpha beta
+fixedOutputCenteredSquareDifferenceIsFirstOrder E alpha beta sameOutput =
+  trans
+    (centeredSquareDifferenceFactors E
+      (Physical.p alpha) (Physical.q alpha)
+      (Physical.p beta) (Physical.q beta))
+    (let
+      dx = centeredXDifferenceIsDoubleP E alpha beta sameOutput
+      dy = centeredYDifferenceIsDoubleP E alpha beta sameOutput
+      dz = centeredZDifferenceIsDoubleP E alpha beta sameOutput
+    in
+    rewrite dx | dy | dz =
+      solve
+        ( pX E (Physical.p alpha) ∷ pX E (Physical.p beta)
+        ∷ pY E (Physical.p alpha) ∷ pY E (Physical.p beta)
+        ∷ pZ E (Physical.p alpha) ∷ pZ E (Physical.p beta)
+        ∷ centeredX E (Physical.p alpha) (Physical.q alpha)
+        ∷ centeredX E (Physical.p beta) (Physical.q beta)
+        ∷ centeredY E (Physical.p alpha) (Physical.q alpha)
+        ∷ centeredY E (Physical.p beta) (Physical.q beta)
+        ∷ centeredZ E (Physical.p alpha) (Physical.q alpha)
+        ∷ centeredZ E (Physical.p beta) (Physical.q beta)
+        ∷ []))
+
+------------------------------------------------------------------------
 -- Trust boundary.
 ------------------------------------------------------------------------
 
