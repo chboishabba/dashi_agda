@@ -26,6 +26,7 @@ module DASHI.Analysis.ContractiveCompartmentTailExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.PolynomialGeometricTailDominationExact as Tail
@@ -105,12 +106,21 @@ compileContractiveCompartmentCauchy problem bridge =
 
 record ContractiveCompartmentBoundary : Set where
   field
-    dominationCompilerOwned : Set
-    tailTransferCompilerOwned : Set
-    cauchyCompositionCompilerOwned : Set
-
-    empiricalPointwiseMajorantStillApplicationOwned : Set
-    empiricalSystemLiterallyPolynomialGeometric : Set
-    finiteObservationWindowEqualsAsymptoticStabilisation : Set
+    dominationCompilerOwned : Bool
+    tailTransferCompilerOwned : Bool
+    cauchyCompositionCompilerOwned : Bool
+    empiricalPointwiseMajorantStillApplicationOwned : Bool
+    empiricalSystemLiterallyPolynomialGeometric : Bool
+    finiteObservationWindowEqualsAsymptoticStabilisation : Bool
 
 open ContractiveCompartmentBoundary public
+
+canonicalContractiveCompartmentBoundary : ContractiveCompartmentBoundary
+canonicalContractiveCompartmentBoundary = record
+  { dominationCompilerOwned = true
+  ; tailTransferCompilerOwned = true
+  ; cauchyCompositionCompilerOwned = true
+  ; empiricalPointwiseMajorantStillApplicationOwned = true
+  ; empiricalSystemLiterallyPolynomialGeometric = false
+  ; finiteObservationWindowEqualsAsymptoticStabilisation = false
+  }
