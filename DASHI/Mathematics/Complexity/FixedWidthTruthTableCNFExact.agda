@@ -321,10 +321,10 @@ truthTableCNFComplete :
     (assignment : Bits n) →
   predicate assignment ≡ true →
   evaluateCNF (truthTableCNF predicate) assignment ≡ true
-truthTableCNFComplete predicate assignment =
+truthTableCNFComplete {n} predicate assignment =
   compiledRowsComplete
     predicate
-    (allBits _)
+    (allBits n)
     assignment
 
 truthTableCNFSound :
@@ -333,10 +333,10 @@ truthTableCNFSound :
     (assignment : Bits n) →
   evaluateCNF (truthTableCNF predicate) assignment ≡ true →
   predicate assignment ≡ true
-truthTableCNFSound predicate assignment =
+truthTableCNFSound {n} predicate assignment =
   compiledRowsSoundAtMember
     predicate
-    (allBits _)
+    (allBits n)
     assignment
     (allBitsComplete assignment)
 
