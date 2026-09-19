@@ -162,7 +162,7 @@ record EisensteinBishopConvergenceFrontier : Set where
     selectedTailToCauchyBridgeInhabited : Bool
     fastCauchyLegacyQuotientInterfaceWeldOwned : Bool
     genericSetoidComplexQuotientRingWeldOwned : Bool
-    fastCauchySetQuotientComplexCompatibilityCompilerOwned : Bool
+    fastCauchyQuotientOperationCompatibilityCompilerOwned : Bool
     concreteLegacyQuotientInhabited : Bool
     modulusMultiplicationFactorCompilerOwned : Bool
     complexNormSquareCompositionInhabited : Bool
@@ -217,7 +217,7 @@ canonicalEisensteinBishopConvergenceFrontier = record
   ; selectedTailToCauchyBridgeInhabited = false
   ; fastCauchyLegacyQuotientInterfaceWeldOwned = true
   ; genericSetoidComplexQuotientRingWeldOwned = true
-  ; fastCauchySetQuotientComplexCompatibilityCompilerOwned = true
+  ; fastCauchyQuotientOperationCompatibilityCompilerOwned = true
   ; concreteLegacyQuotientInhabited = false
   ; modulusMultiplicationFactorCompilerOwned = true
   ; complexNormSquareCompositionInhabited = false
