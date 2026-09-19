@@ -38,6 +38,7 @@ import DASHI.Analysis.RiemannG2Vendored8889SourceAuditExact as R28889
 import DASHI.Analysis.RiemannG2BaselineExcessR2TargetExact as R2Baseline
 import DASHI.Analysis.RiemannG2DisplacementAdaptiveFarShellLeanDonorExact as R2FarAdaptive
 import DASHI.Analysis.RiemannG2AdaptiveCutoffCrossingCompatibilityLeanDonorExact as R2CutoffCompat
+import DASHI.Analysis.RiemannG2AdaptiveBaselineExcessAcquisitionExact as R2Adaptive
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -464,6 +465,21 @@ adaptiveExactFinalCarrierCutoffTransportStillOpen :
   R2CutoffCompat.AdaptiveCutoffCrossingBoundary.exactFinalCarrierCutoffTransportPaid
     R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ false
 adaptiveExactFinalCarrierCutoffTransportStillOpen = refl
+
+adaptiveCutoffMayEnlargeFiniteNearCarrier :
+  R2Adaptive.AdaptiveBaselineExcessBoundary.adaptiveCutoffMayEnlargeFiniteNearCarrier
+    R2Adaptive.canonicalAdaptiveBaselineExcessBoundary ≡ true
+adaptiveCutoffMayEnlargeFiniteNearCarrier = refl
+
+remainingNearLeafIsUniformSignedFiniteCoreCancellation :
+  R2Adaptive.AdaptiveBaselineExcessBoundary.nearLeafIsUniformSignedFiniteCoreCancellation
+    R2Adaptive.canonicalAdaptiveBaselineExcessBoundary ≡ true
+remainingNearLeafIsUniformSignedFiniteCoreCancellation = refl
+
+remainingGammaLeafIsSharpSameTaperRepair :
+  R2Adaptive.AdaptiveBaselineExcessBoundary.gammaLeafIsSharpSameTaperRepair
+    R2Adaptive.canonicalAdaptiveBaselineExcessBoundary ≡ true
+remainingGammaLeafIsSharpSameTaperRepair = refl
 
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
