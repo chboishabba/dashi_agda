@@ -34,6 +34,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanFiniteRGTotalCovarianceExact as Total
 import DASHI.Physics.YangMills.BalabanFiniteRestrictedExpectationBoundExact as Restricted
 import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonBoundedAlgebraExact as Bound
@@ -143,7 +144,7 @@ transportObservableUnitBound {step = step} positive observable bounded coarse =
       ≡ 1ℚ
     massIsOne =
       trans
-        (Reopen.Sums.sumRationalCong
+        (Sums.sumRationalCong
           (Reopen.fineStates step)
           (λ fine → Reopen.reopeningKernel step coarse fine * 1ℚ)
           (Reopen.reopeningKernel step coarse)
@@ -232,7 +233,7 @@ exceptionalMass :
     {step : Reopen.FiniteRGReopeningStep Fine Coarse} →
   ExceptionalCovarianceMask step → ℚ
 exceptionalMass {step = step} bad =
-  Reopen.Sums.sumRational (Reopen.coarseStates step)
+  Sums.sumRational (Reopen.coarseStates step)
     (λ coarse → Reopen.coarseWeight step coarse * mask bad coarse)
 
 exceptionalCovarianceContribution :
@@ -241,7 +242,7 @@ exceptionalCovarianceContribution :
   ExceptionalCovarianceMask step →
   Reopen.Observable Fine → Reopen.Observable Fine → ℚ
 exceptionalCovarianceContribution {step = step} bad left right =
-  Reopen.Sums.sumRational (Reopen.coarseStates step)
+  Sums.sumRational (Reopen.coarseStates step)
     (λ coarse →
       (Reopen.coarseWeight step coarse * mask bad coarse)
         * Total.conditionalCovariance step left right coarse)
