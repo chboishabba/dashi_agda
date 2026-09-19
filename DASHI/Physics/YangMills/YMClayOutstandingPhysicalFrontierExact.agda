@@ -10,9 +10,16 @@ import DASHI.Physics.YangMills.YMClayVaryingCarrierTransportParityExact as Varyi
 import DASHI.Physics.YangMills.YMClayF3SprintConstructionFrontierExact as F3
 import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact as F4
 import DASHI.Physics.YangMills.YangMillsStressWardCommonCoreGeneratorExact as CommonCore
+import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as Direct
 
 ------------------------------------------------------------------------
--- Reconciled physical frontier.
+-- STRONG FINITE-GAP / RECOVERY FRONTIER.
+--
+-- This record remains the canonical compatibility carrier for the route
+-- finite transfer gap -> physical recovery -> continuum gap -> YM/OS weld.
+-- It is NOT the unique terminal mass-gap route: the direct source/OS route in
+-- YMClayDirectSourceOSMassGapFrontierExact bypasses dense-L2 normalization,
+-- Delta*a_k finite-gap calibration and P_a/E_a Mosco recovery.
 --
 -- F1: source localization + Wilson/R295 same-object/L2 weld + beta/a
 --     trajectory calibration. Full R339 magnitude equality is not primitive.
@@ -305,6 +312,24 @@ f4Level = F4.physicalStressOSCommonCoreLevel
 
 cmp116PhysicalSourceResidualsLevel : ProofLevel
 cmp116PhysicalSourceResidualsLevel = conditional
+
+strongFiniteGapRecoveryFrontierIsOnlyTerminalRoute : Bool
+strongFiniteGapRecoveryFrontierIsOnlyTerminalRoute = false
+
+strongFiniteGapRecoveryFrontierIsOnlyTerminalRouteIsFalse :
+  strongFiniteGapRecoveryFrontierIsOnlyTerminalRoute ≡ false
+strongFiniteGapRecoveryFrontierIsOnlyTerminalRouteIsFalse = refl
+
+directSourceOSRouteAvailable : Bool
+directSourceOSRouteAvailable = true
+
+directSourceOSRouteAvailableIsTrue :
+  directSourceOSRouteAvailable ≡ true
+directSourceOSRouteAvailableIsTrue = refl
+
+directSourceRouteRequiresPaEaMosco : Bool
+directSourceRouteRequiresPaEaMosco =
+  Direct.paEaMoscoRecoveryMandatoryForDirectSourceRoute
 
 unconditionalPhysicalFrontierClosed : Bool
 unconditionalPhysicalFrontierClosed = false
