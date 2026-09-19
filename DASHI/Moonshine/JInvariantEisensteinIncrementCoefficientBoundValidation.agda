@@ -1,6 +1,6 @@
 module DASHI.Moonshine.JInvariantEisensteinIncrementCoefficientBoundValidation where
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_≤_)
 
 import DASHI.Mathematics.NumberTheory.FiniteDivisorPowerSumExact as Divisor
