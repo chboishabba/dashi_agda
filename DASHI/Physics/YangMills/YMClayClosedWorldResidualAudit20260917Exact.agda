@@ -291,35 +291,27 @@ level2GlobalAFSecondPayment = exact-residual
 
 level2OPECoefficientRGCoordinateAttachment : ExactResidual
 level2OPECoefficientRGCoordinateAttachment = exact-residual
-  physicalClayStressConstruction
-  "YMClayLevel2D2PhysicalMinCutExact.agda / YMClayLevel2LiteralOPECoefficientScaleAttachmentExact.agda"
-  "physical composite-operator transport + same operator recurrence + literal position-to-RG-depth coefficient attachment"
+  sameObjectAttachment
+  "YMClayLevel2D2PhysicalMinCutExact.agda / YMClayLevel2D2TransportGeneratedRecurrenceExact.agda / YMClayLevel2R129LiteralOPECoefficientWeldExact.agda"
+  "physical CompositeRGParallelTransport + common UV normalization + literal position/depth projection + SAME R129 completed-composite attachment"
   unpaid
-  "The repo already owns the CompositeRGParallelTransport interface, so no second mixing-map abstraction is needed. But no physical inhabitant of that transport was found, and the literal Clay opeCoefficient is position-indexed rather than Nat-indexed. D2 therefore requires: instantiate the native operator transport, put physical/reference coefficient trajectories on that same transport with common UV normalization, and certify which short-distance RG depth corresponds to the literal insertion position. All-depth coefficient equality is then compiler-owned."
+  "D2b has been reduced: defining both coefficient trajectories by the same canonical transportToDepth makes both one-step recurrence laws refl, and the existing uniqueness theorem gives all-depth equality. No second mixing map or recurrence proof remains. Physical work is D2a actual transport instantiation, one common UV normalization, D2c position/depth literal projection, and D2d selected operator = R129 completed composite."
 
 level2FiniteWardConservation : ExactResidual
 level2FiniteWardConservation = exact-residual
   physicalClayStressConstruction
-  "YangMillsLatticeStressWardSliceConservationExact.agda"
-  "finite periodic Ward balance -> conserved slice charge"
+  "YMClayLevel2D3ConservedWardChargeExact.agda / YangMillsLatticeStressWardSliceConservationExact.agda"
+  "finite periodic Ward charge is exactly conserved: chargeAfter = chargeBefore"
   compilerOwned
-  "The finite Ward algebra is already machine-checked and must not be re-proved in Level 2."
-
-level2GeneratedActionStressProvenance : ExactResidual
-level2GeneratedActionStressProvenance = exact-residual
-  physicalClayStressConstruction
-  "BalabanUnifiedGeneratedActionRecoveryRound136Exact.agda / BalabanCompositeStressFirstVariationRound144Exact.agda"
-  "same generated action / first variation / localized D1 stress provenance"
-  compilerOwned
-  "R132-R136 and R142-R144 already provide the compiler spine once their physical source-instantiation fields are inhabited."
+  "The lattice Ward theorem gives chargeAfter-chargeBefore=0; rational ring normalization now derives exact equality. D3 must not recharge any finite-time conservation theorem."
 
 level2ContinuumWardTransport : ExactResidual
 level2ContinuumWardTransport = exact-residual
   physicalClayStressConstruction
-  "YMClayLevel2ContinuumWardTransportExact.agda"
-  "for every admissible perturbation h: mapped cutoff-indexed Ward-charge sequence iota_k(Q_k[h]) converges to the recovered continuum stress first variation deltaS_infinity[h]"
+  "YMClayLevel2ContinuumWardTransportExact.agda / R109 / R131 / R136"
+  "for every admissible h, the cutoff-indexed conserved Ward charge is the SAME generated-action stress representative and its mapped sequence converges to deltaS_infinity[h]"
   unpaid
-  "This is the genuine Ward residue left by archaeology. The finite charge is rational while the recovered stress lives in StressRep.PairingScalar. The charge family must be indexed by the same metric perturbation h, and the rational-to-pairing representation may depend on cutoff k: the target is iota_k(Q_k[h]) -> deltaS_infinity[h]. R131/R136 supplies the exact continuum target but no finite-charge convergence theorem."
+  "This is the genuine D3 residue. Finite Ward conservation is now compiler-owned, and R131/R136 already construct the continuum target and identify it with the literal stress pairing. What is absent is the same-object theorem connecting the finite conserved Ward-current sequence to the source-native stress Cauchy/completion lane across cutoff/RG depth."
 
 level2LiteralClayStressOPECompiler : ExactResidual
 level2LiteralClayStressOPECompiler = exact-residual
@@ -463,8 +455,23 @@ d2SecondMixingMapAbstractionRequired = false
 d2LiteralClayCoefficientIsNatIndexed : Bool
 d2LiteralClayCoefficientIsNatIndexed = false
 
+d2IndependentPhysicalOneStepRecurrenceRequired : Bool
+d2IndependentPhysicalOneStepRecurrenceRequired = false
+
+d2IndependentAFOneStepRecurrenceRequired : Bool
+d2IndependentAFOneStepRecurrenceRequired = false
+
+d2CommonUVNormalizationStillPhysical : Bool
+d2CommonUVNormalizationStillPhysical = true
+
 d2PositionDepthSemanticsRequired : Bool
 d2PositionDepthSemanticsRequired = true
+
+d3IndependentFiniteTimeConservationRequired : Bool
+d3IndependentFiniteTimeConservationRequired = false
+
+d3CutoffToContinuumConservedChargeTransportStillPhysical : Bool
+d3CutoffToContinuumConservedChargeTransportStillPhysical = true
 
 d3FiniteWardAlgebraNewPhysicalTheorem : Bool
 d3FiniteWardAlgebraNewPhysicalTheorem = false
