@@ -157,4 +157,4 @@ seriesConvergentFromScaledGeometricMajorant
       pointwiseMajorant (suc index)})
 
 bishopGeometricMajorantSeriesConvergenceLevel : ProofLevel
-bishopGeometricMajorantSeriesConvergenceLevel = machineChecked
+bishopGeometricMajorantSeriesConvergenceLevel = conditional
