@@ -1029,3 +1029,117 @@ S3  R281 covariance-built spectrum is the actual H_OS spectrum
 
 No CI or Agda kernel build was run in this continuation.  The new modules are
 source-written and must remain classified accordingly until Agda 2.9 is run.
+
+
+## 2026-09-19 full-closure push: three attempted completions
+
+This pass attempted to close all three requested theorem classes rather than add
+another status wrapper.
+
+### S1 result
+
+The exact source theorem still has no in-repo inhabitant.
+
+The shortest chain is now:
+
+```text
+BalabanObservableIndexedT5SourceMeaningRound403Exact
+  SourceDirection = TestObservable            [definitional]
+
+BalabanCMP116119NormalizedExpectationDerivativeRound281Exact
+  published two-source localization
+  + literal normalized-expectation weld
+    -> R279 spatial shell
+
+R279
+  -> hessian-mark shell
+  -> rooted shell
+  -> geometric decay
+  -> R320/P1.
+```
+
+The remaining theorem is the actual published CMP116/CMP119 differentiated
+localization inhabitant on the selected two-J carrier. Repository history itself
+records that no inhabitant of `PublishedCMP116DifferentiatedLocalization` was
+found; `standardImported` is authority metadata and is not a proof term.
+
+### S2 result
+
+The concrete SU(N) Wilson class-function owner was inspected directly.
+
+`SUNWilsonClassFunction.SUNWilsonTraceAuthority` contains only
+
+```text
+normalizedRealTrace
+traceConjugationInvariant
+```
+
+and therefore supplies gauge invariance but no quantitative
+`|W_C| <= dim(R)`, sup-norm, or other bound that can inhabit
+`Gram.BoundedObservable`.
+
+The Lp and preferred T5 measure adapters preserve the same abstract
+`BoundedObservable` predicate; they do not construct it.
+
+Thus the remaining S2 theorem is not a presentation weld. It is the actual
+bounded-observable algebra theorem on the selected physical measure carrier:
+literal Wilson loops bounded, identity bounded, and closure under multiplication.
+
+### D2a/D2d result and soundness correction
+
+A deeper search found the scale-indexed composite trajectory machinery:
+
+```text
+BalabanUnifiedPolymerSchwingerNormExact
+  stateAtScale
+  compositeProjection
+  compositeIncrementBound
+
+BalabanUnifiedCompletedStateProjectionExact
+  compositeProjection(stateAtScale n)
+    -> compositeProjection(limitState)
+```
+
+but R129 does not expose an RG one-step operator mixing law connecting that
+trajectory to `CompositeRGParallelTransport.oneStepMixing`.
+
+More importantly, the current transport ABI is underconstrained. New theorem:
+
+```text
+YMClayLevel2CompositeTransportABIInsufficiencyExact
+```
+
+constructively proves that ANY trajectory `q : Nat -> Operator` can generate a
+`CompositeRGParallelTransport` by
+
+```text
+oneStepMixing n _ = q (n+1).
+```
+
+and `transportToDepth` then reproduces the arbitrary trajectory.
+
+Therefore a bare transport inhabitant cannot count as physical D2a. A valid D2a
+must additionally carry insertion/blocking naturality tying one-step mixing to
+the actual RG transformation.
+
+This prevents a formally easy but physically vacuous fake closure.
+
+### Exact surviving theorem-sized blockers
+
+```text
+S1
+  actual proof-bearing CMP116/CMP119 two-J differentiated-localization theorem
+  on the selected literal source carrier
+
+S2
+  actual Gram.BoundedObservable realization for literal Wilson loops,
+  identity, and finite products on the selected measure algebra
+
+D2
+  actual one-step composite-operator mixing tied by insertion/blocking
+  naturality to the unified/R129 RG trajectory, plus its convergence/same-family
+  identification with the R129 completed composite
+```
+
+These are mathematical proof obligations. No combination of existing wrappers,
+status records, or definitional carrier choices supplies their proof terms.
