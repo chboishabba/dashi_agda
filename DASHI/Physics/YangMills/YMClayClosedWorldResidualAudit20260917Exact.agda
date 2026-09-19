@@ -71,10 +71,10 @@ sourceSelectedLocalization = exact-residual
 literalWilsonFiniteClustering : ExactResidual
 literalWilsonFiniteClustering = exact-residual
   sourceLocalization
-  "YMClayLiteralWilsonP1FiniteClusteringExact.agda / R320"
-  "selected R320 literal-J localization plus same-carrier Wilson/T5 presentation"
+  "BalabanCMP116TwoSourceSpatialShellRound279Exact.agda / R320 / YMClayLiteralWilsonP1FiniteClusteringExact.agda"
+  "instantiate CMP116 differentiated localization with the two selected literal J directions on the SAME hessian/spatial marked shell"
   unpaid
-  "The finite clustering inequality itself is now compiler output: R320 -> R387/R274 -> quarter*(half)^distance, then selected Euclidean semantics rewrites distance=time. No second clustering estimate remains. The physical source payment is the R320 selected localization inhabitant; the representation payment is the same-carrier Wilson/T5 presentation."
+  "The finite clustering inequality is compiler-owned after the source payment. R279 identifies the exact analytic leaf: the selected mixed-log response must be the literal two-J hessian-mark response on the same physical shell. R320 then feeds the already-constructed literal Wilson clustering theorem. Do not count a second clustering estimate."
 
 historicalH1PublishedApplicabilityPackaging : ExactResidual
 historicalH1PublishedApplicabilityPackaging = exact-residual
@@ -135,10 +135,10 @@ h2cSelectedLimitUpperClosure = exact-residual
 literalMeasureExpectationConvergence : ExactResidual
 literalMeasureExpectationConvergence = exact-residual
   physicalContinuumConstruction
-  "YMClayLiteralWilsonP2ExpectationConvergenceExact.agda / R315 / R278"
-  "three selected Wilson expectation limits"
-  compilerOwned
-  "The three limits are now constructed from one PairwiseWilsonCylinderPresentation: R315 gives bounded left/right/product tests and R278.selectedExpectationConverges applies PhysicalMeasureConvergenceData to each. P2 has no independent convergence theorem after the same-carrier Wilson presentation and continuum measure data are available."
+  "YMClayLiteralWilsonS2CanonicalProductPresentationExact.agda / YMClayLiteralWilsonS2SameAlgebraBoundExact.agda / YMClayLiteralWilsonP2ExpectationConvergenceExact.agda"
+  "canonical Wilson-list Euclidean geometry plus bounded-observable algebra inputs"
+  unpaid
+  "P2's three expectation limits are compiler output. S2 now chooses PhysicalObservable = List Loop, so decode/product and translated-product equalities are refl. Its WilsonCylinderBoundData is built directly on Gram.operations with Bound := Gram.BoundedObservable, so the Wilson/T5 multiplication and bound-predicate welds are also definitional. Remaining physical inputs are loopwise Euclidean translation with support distance=time, literal-loop boundedness, bounded-observable multiplication closure, and identity boundedness on the same T5 carrier."
 
 connectedCovarianceLimit : ExactResidual
 connectedCovarianceLimit = exact-residual
@@ -424,6 +424,27 @@ d1SameCompletedCompositeTailAttachmentStillPhysical = true
 
 d1AuxiliaryProductRemainderFunctionRequired : Bool
 d1AuxiliaryProductRemainderFunctionRequired = false
+
+s2DecodeProductRepresentationIndependent : Bool
+s2DecodeProductRepresentationIndependent = false
+
+s2TranslatedProductRepresentationIndependent : Bool
+s2TranslatedProductRepresentationIndependent = false
+
+s2WilsonT5MultiplicationWeldIndependent : Bool
+s2WilsonT5MultiplicationWeldIndependent = false
+
+s2WilsonBoundPredicateWeldIndependent : Bool
+s2WilsonBoundPredicateWeldIndependent = false
+
+s2LiteralLoopBoundednessStillPhysical : Bool
+s2LiteralLoopBoundednessStillPhysical = true
+
+s2BoundedObservableMultiplyClosureStillPhysical : Bool
+s2BoundedObservableMultiplyClosureStillPhysical = true
+
+s2IdentityBoundednessStillPhysical : Bool
+s2IdentityBoundednessStillPhysical = true
 
 d1IndependentCompositeCarrierAfterR129 : Bool
 d1IndependentCompositeCarrierAfterR129 = false
