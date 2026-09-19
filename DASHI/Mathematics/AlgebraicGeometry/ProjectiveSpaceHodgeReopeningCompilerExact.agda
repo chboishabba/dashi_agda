@@ -17,7 +17,8 @@ module DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHodgeReopeningCompiler
 -- singular/de Rham comparison, or the hyperplane-power theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
@@ -56,8 +57,9 @@ projectiveSpaceCycleRepresentative :
     cycleMap codimension →
   Hodge.RationalHodgeClass hodge codimension →
   Hodge.Cycle cycleMap codimension
-projectiveSpaceCycleRepresentative spanning hodgeClass =
-  Hodge.scaleCycle _ _
+projectiveSpaceCycleRepresentative {cycleMap = cycleMap} {codimension = codimension}
+    spanning hodgeClass =
+  Hodge.scaleCycle cycleMap codimension
     (coefficientOf spanning hodgeClass)
     (hyperplanePowerCycle spanning)
 
