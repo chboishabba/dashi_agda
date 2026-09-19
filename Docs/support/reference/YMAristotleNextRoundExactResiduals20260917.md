@@ -541,3 +541,69 @@ positive Euclidean weight
 and therefore does not import the finite Shor/Born toy surface as a Yang--Mills
 theorem donor.  CMS contact remains explicitly orthogonal to Clay proof
 closure.  No unconditional Clay promotion is introduced by this aggregate.
+
+
+## Level-2 D2/D3 final index and same-family recut
+
+### D2
+
+The repo already owns the algebraic one-step operator carrier:
+
+```text
+BalabanCompositeOperatorRGParallelTransportExact
+  CompositeRGParallelTransport.oneStepMixing
+```
+
+so a second abstract mixing map is not a research obligation.
+
+The physical D2 cut is now:
+
+```text
+D2a  instantiate CompositeRGParallelTransport on the physical composite operators
+
+D2b  physical/reference operator-coefficient trajectories use that SAME
+     one-step map + SAME UV normalization
+
+D2c  certify the short-distance RG depth corresponding to the literal
+     position-dependent Top.opeCoefficient
+
+D2d  prove that this operator trajectory is the operator-mixing view of the
+     SAME R129 completed composite family at that SAME selected depth
+```
+
+The literal Clay coefficient is position-indexed, not Nat-indexed, so it must
+not be represented as a constant depth family. Once D2a-d are supplied, the
+existing recurrence theorem gives the all-depth physical/reference equality and
+the new R129 literal weld proves the selected literal coefficient is both:
+
+```text
+projection(operator extracted from the R129 completed composite)
+projection(AF/reference coefficient at the same selected depth)
+```
+
+No existing physical `CompositeRGParallelTransport` inhabitant, R129-to-operator
+attachment, or position-to-RG-depth selector was found.
+
+### D3
+
+The Ward transport is now typed as the intended perturbation-indexed theorem:
+
+```text
+Q_k[h] : finite LatticeStressWardCharge
+iota_k : Rational -> PairingScalar
+
+iota_k(Q_k[h]) -> delta S_infinity[h]
+```
+
+Both indices matter:
+
+- the finite charge depends on the same admissible metric perturbation `h`;
+- the rational-to-continuum representation may depend on cutoff `k`.
+
+A perturbation-independent finite-charge sequence would incorrectly require one
+sequence to converge to every stress first variation. A cutoff-independent
+scalar coercion is also unnecessary overstrength.
+
+R131/R136 already supplies the exact continuum first-variation/stress-pairing
+target, but no in-repo theorem was found transporting the finite Ward charge to
+that target. This remains genuine physical continuum analysis.
