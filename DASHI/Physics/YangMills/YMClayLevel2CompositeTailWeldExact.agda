@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.BalabanMarkedSourceNuclearCompositeFieldExact as 
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact as Tail
 import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 ------------------------------------------------------------------------
 -- LEVEL-2 D1: SAME-FAMILY COMPOSITE PRODUCT-TAIL WELD
@@ -123,7 +124,7 @@ literalCompletedCompositeOPERemainderMajorant
         λ depth →
           subst
             (λ selected →
-              selected ≤ Local.coefficient marked * Local.Geo.halfPower depth)
+              selected ≤ Local.coefficient marked * Geo.halfPower depth)
             (sym (literalOPERemainderIsSelectedCompositeTail weld depth))
             (Local.remainderBelowDyadic marked depth)
     }
@@ -157,8 +158,7 @@ compositeTailWeldCompilerLevel : ProofLevel
 compositeTailWeldCompilerLevel = machineChecked
 
 physicalCompositeTailAttachmentLevel : ProofLevel
-physicalCompositeTailAttachmentLevel =
-  Tail.physicalSameFamilyCompositeOPEIdentificationLevel
+physicalCompositeTailAttachmentLevel = conditional
 
 clayPromotion : Bool
 clayPromotion = false
