@@ -43,32 +43,32 @@ record EvidenceManifestation : Set where
   constructor evidence-manifestation
   field
     manifestationRef : String
-    family : EvidenceManifestationFamily
-    sourceRef : String
-    sourceRevisionRef : String
-    contentDigestRef : String
-    acquisitionReceiptRef : String
+    manifestationFamily : EvidenceManifestationFamily
+    manifestationSourceRef : String
+    manifestationSourceRevisionRef : String
+    manifestationContentDigestRef : String
+    manifestationAcquisitionReceiptRef : String
 
-    candidateOnly : Bool
-    candidateOnlyIsTrue : candidateOnly ≡ true
+    manifestationCandidateOnly : Bool
+    manifestationCandidateOnlyIsTrue : manifestationCandidateOnly ≡ true
 
-    createsSemanticAuthority : Bool
-    createsSemanticAuthorityIsFalse : createsSemanticAuthority ≡ false
+    manifestationCreatesSemanticAuthority : Bool
+    manifestationCreatesSemanticAuthorityIsFalse : manifestationCreatesSemanticAuthority ≡ false
 
-    applicabilityPromoted : Bool
-    applicabilityPromotedIsFalse : applicabilityPromoted ≡ false
+    manifestationApplicabilityPromoted : Bool
+    manifestationApplicabilityPromotedIsFalse : manifestationApplicabilityPromoted ≡ false
 
-    claimTruthPromoted : Bool
-    claimTruthPromotedIsFalse : claimTruthPromoted ≡ false
+    manifestationClaimTruthPromoted : Bool
+    manifestationClaimTruthPromotedIsFalse : manifestationClaimTruthPromoted ≡ false
 
 open EvidenceManifestation public
 
 record EvidenceSourceRevision : Set where
   constructor evidence-source-revision
   field
-    sourceRevisionRef : String
+    manifestationSourceRevisionRef : String
     manifestationRef : String
-    contentDigestRef : String
+    manifestationContentDigestRef : String
     revisionReceiptRef : String
 
 open EvidenceSourceRevision public
@@ -81,7 +81,7 @@ data EvidenceSpanKind : Set where
 record EvidenceSpan : Set where
   constructor evidence-span
   field
-    sourceRevisionRef : String
+    manifestationSourceRevisionRef : String
     spanRef : String
     kind : EvidenceSpanKind
 
@@ -91,22 +91,22 @@ record EvidenceObservation : Set where
   constructor evidence-observation
   field
     observationRef : String
-    sourceRevisionRef : String
+    manifestationSourceRevisionRef : String
     span : EvidenceSpan
     predicateRef : String
     valueRef : String
 
-    candidateOnly : Bool
-    candidateOnlyIsTrue : candidateOnly ≡ true
+    manifestationCandidateOnly : Bool
+    manifestationCandidateOnlyIsTrue : manifestationCandidateOnly ≡ true
 
-    createsSemanticAuthority : Bool
-    createsSemanticAuthorityIsFalse : createsSemanticAuthority ≡ false
+    manifestationCreatesSemanticAuthority : Bool
+    manifestationCreatesSemanticAuthorityIsFalse : manifestationCreatesSemanticAuthority ≡ false
 
-    applicabilityPromoted : Bool
-    applicabilityPromotedIsFalse : applicabilityPromoted ≡ false
+    manifestationApplicabilityPromoted : Bool
+    manifestationApplicabilityPromotedIsFalse : manifestationApplicabilityPromoted ≡ false
 
-    claimTruthPromoted : Bool
-    claimTruthPromotedIsFalse : claimTruthPromoted ≡ false
+    manifestationClaimTruthPromoted : Bool
+    manifestationClaimTruthPromotedIsFalse : manifestationClaimTruthPromoted ≡ false
 
 open EvidenceObservation public
 
@@ -118,8 +118,8 @@ record ObservationRevisionWeld (observation : EvidenceObservation) : Set where
   constructor observation-revision-weld
   field
     observationRevisionMatchesSpan :
-      EvidenceObservation.sourceRevisionRef observation
-      ≡ EvidenceSpan.sourceRevisionRef (EvidenceObservation.span observation)
+      EvidenceObservation.observationSourceRevisionRef observation
+      ≡ EvidenceSpan.spanSourceRevisionRef (EvidenceObservation.observationSpan observation)
 
 open ObservationRevisionWeld public
 
@@ -156,9 +156,9 @@ mkSourceRevision :
   EvidenceSourceRevision
 mkSourceRevision m revisionReceipt =
   evidence-source-revision
-    (EvidenceManifestation.sourceRevisionRef m)
+    (EvidenceManifestation.manifestationSourceRevisionRef m)
     (EvidenceManifestation.manifestationRef m)
-    (EvidenceManifestation.contentDigestRef m)
+    (EvidenceManifestation.manifestationContentDigestRef m)
     revisionReceipt
 
 mkTextRange :
