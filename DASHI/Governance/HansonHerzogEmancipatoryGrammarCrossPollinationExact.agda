@@ -271,6 +271,14 @@ data MakaluStatus : Set where
 currentMakaluStatus : MakaluStatus
 currentMakaluStatus = independentInvestigationOpen
 
+currentMakaluSourceReference : String
+currentMakaluSourceReference =
+  "Law Enforcement Conduct Commission, Operation Makalu investigation progress update, 15 September 2026: investigation continuing; public examinations not held in September due to procedural issues"
+
+bodycamCurrentSourceReference : String
+bodycamCurrentSourceReference =
+  "ABC News, 1 September 2026: leaked/body-worn vision shows officers discussing striking a protester; LECC investigation remains the independent closure route"
+
 data OpenInvestigationEqualsFinalFinding : Set where
 
 makaluOpenDoesNotEqualFinalFinding :
