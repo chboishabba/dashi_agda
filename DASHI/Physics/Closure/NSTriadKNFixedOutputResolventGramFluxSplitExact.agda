@@ -164,10 +164,11 @@ module FixedOutputSplit
     trans
       (cong (λ selected → selected * R290.gram pair) weightMeaning)
       (trans
-        (cong (λ selected → selected * g)
+        (cong
+          (λ selected → selected * g)
           (trans
             (solve (w ∷ w0 ∷ []))
-            defect))
+            (cong (w0 +_) defect)))
         (trans
           (solve (w ∷ w0 ∷ s ∷ g ∷ []))
           (cong
