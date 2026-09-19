@@ -19,3 +19,23 @@ finalR2NotClaimed :
   O.ProjectiveJointQuadraticBoundary.jointDonorAlreadyPaysFinalR2
     O.canonicalProjectiveJointQuadraticBoundary ≡ false
 finalR2NotClaimed = refl
+
+taperOnlyBridgeInsufficient :
+  O.ProjectiveJointQuadraticBoundary.taperEqualityAloneSufficesForFinalReuse
+    O.canonicalProjectiveJointQuadraticBoundary ≡ false
+taperOnlyBridgeInsufficient = refl
+
+responseAndBalanceTransportRequired :
+  O.ProjectiveJointQuadraticBoundary.explicitResponseAndBalanceTransportRequiredForFinalReuse
+    O.canonicalProjectiveJointQuadraticBoundary ≡ true
+responseAndBalanceTransportRequired = refl
+
+projectiveStrictBalancedConsumerRejected :
+  O.ProjectiveJointQuadraticBoundary.projectiveBalancedStrictConsumerAdmissible
+    O.canonicalProjectiveJointQuadraticBoundary ≡ false
+projectiveStrictBalancedConsumerRejected = refl
+
+finalPoleLaneUsesChangedAdmissibleComparison :
+  O.ProjectiveJointQuadraticBoundary.finalPoleQuotientLaneUsesDifferentAdmissibleComparisonObject
+    O.canonicalProjectiveJointQuadraticBoundary ≡ true
+finalPoleLaneUsesChangedAdmissibleComparison = refl
