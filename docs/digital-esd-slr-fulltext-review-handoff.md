@@ -21,15 +21,41 @@ database export
 SLR/SensibLaw is therefore a **second-stage consumer of screened full text**.
 It is not the inclusion classifier and is not the source of review truth.
 
-## Existing implementation donors checked
+## Production evidence authority checked
 
 No SLR or SensibLaw implementation was modified.
 
-### SLR runtime in this repository
+The current production evidence authority is the Rust SLR repository:
+
+`chboishabba/slr`
+
+reviewed at Sprint-2 branch head:
+
+`6594899bfe38ce0892f4f7712fba554ba05d0d00`
+
+on `agent/sprint2-canonical-evidence-convergence`.
+
+The canonical implemented source-written M2.1/M2.2 substrate is:
+
+```text
+EvidenceManifestation
+-> EvidenceSourceRevision
+-> EvidenceSpan
+   |- TextRange
+   |- StructuredCoordinate
+   `- WholeRevision
+-> EvidenceObservation
+```
+
+owned by `sensiblaw-core::canonical_evidence`.
+
+The SLR sprint board records M2.3 `shared_reducer` as the **next structural min-cut**. It is therefore a future consumer target, not a current production ABI or certification claim.
+
+### Historical / compatibility SLR adapter in this repository
 
 `tools/slr-discourse-reconstruct/slr_source_unit_pnf_batch.py`
 
-The current implementation:
+The current Python adapter implementation:
 
 - accepts one source-unit row with `source_unit_ref`, `revision_ref`, language,
   source kind/role and either inline `text` or `text_path`;
@@ -107,7 +133,7 @@ author QID != publication QID
 missing publication QID != missing source identity
 ```
 
-## Future JSONL handoff from screened full text
+## Temporary JSONL execution adapter from screened full text
 
 After screening/full-text retrieval, construct one JSON object per included
 source for the existing SLR batch runner:
@@ -127,7 +153,7 @@ Optional metadata such as DOI/ERIC ID belongs in the Digital-ESD identity
 sidecar; it must not be converted into a QID merely to satisfy another lane's
 carrier.
 
-Run the existing SLR batch without modifying it:
+Until the Rust scholarly-document adapter lands, the existing Python batch may be used as a temporary execution adapter without treating its JSON shape as the production semantic ABI:
 
 ```bash
 python3 tools/slr-discourse-reconstruct/slr_source_unit_pnf_batch.py \
@@ -178,3 +204,48 @@ decomposition can materially reduce manual review work.
 
 The Digital-ESD Pareto may use SLR residuals as **review priorities**, never as
 source-quality or truth scores.
+
+
+## Canonical Sprint-2 lowering required
+
+The Digital-ESD Agda bridge now imports
+`DASHI.Interop.SLRCanonicalEvidenceSubstrateExact`, a golden mirror of the
+source-written Rust M2.1/M2.2 carrier.
+
+Application-specific lineage remains above the substrate:
+
+```text
+IncludedSourceLineage source
+-> FullTextArtifactReceipt source
+   -> EvidenceManifestation
+   -> EvidenceSourceRevision
+-> SLRSourceUnitAnalysisReceipt source
+   -> [EvidenceObservation]
+-> Digital-ESD review projection
+```
+
+For ordinary scholarly prose, exact evidence normally uses
+`EvidenceSpan::TextRange`. The abstraction is deliberately not reduced to
+text ranges: ERIC/DOI metadata, citation graphs and other structured evidence
+may use `StructuredCoordinate`, and whole-artifact observations may use
+`WholeRevision`.
+
+No Digital-ESD wrapper may replace those canonical anchors with an untyped
+span string.
+
+## M2.3 future route
+
+When SLR implements and certifies M2.3, the intended route is:
+
+```text
+canonical reviewed evidence
+-> SharedEvidenceReducer
+   |- world projection
+   |- legal projection
+   `- Digital-ESD audit projection
+        -> SituatedAuditObservation
+```
+
+Until then, Digital-ESD may project reviewed canonical evidence locally, but
+must record that as an application projection rather than calling it the
+production SharedEvidenceReducer.
