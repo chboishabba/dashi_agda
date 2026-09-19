@@ -88,11 +88,11 @@ rawSelectedDensityWeights :
     {construction = construction}
     referenceInputs typed →
   Nat → Normalize.FinitePositiveWeightFamily SlowField
-rawSelectedDensityWeights realization cutoff = record
+rawSelectedDensityWeights {source = source} realization cutoff = record
   { states = slowStatesAt realization cutoff
   ; rawWeight =
       weightOfDensity realization
-        (CMP119.densityAt _ cutoff)
+        (CMP119.densityAt source cutoff)
   ; rawWeightNonnegative =
       selectedDensityWeightNonnegative realization cutoff
   ; positiveWitness =
