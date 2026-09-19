@@ -21,6 +21,7 @@ import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as Recovery
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTailWeldExact as D1
+import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
 
 ------------------------------------------------------------------------
 -- R129-SPECIALIZED LEVEL-2 D1 ATTACHMENT
@@ -120,7 +121,7 @@ r129AttachmentBuildsLiteralDyadicOPERemainder :
     {shared : Shared.SharedMarkedAnalyticShellControl Scale Volume Root}
     {scale : Scale} {volume : Volume} {root : Root} →
   (attachment : R129CompositeTailAttachment export shared scale volume root) →
-  DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact.DyadicOPERemainderMajorant
+  Local.DyadicOPERemainderMajorant
 r129AttachmentBuildsLiteralDyadicOPERemainder attachment =
   D1.literalCompletedCompositeOPERemainderMajorant
     (asCompositeProductTailWeld attachment)
