@@ -56,3 +56,14 @@ queenslandComparatorNotAcaciaObject = refl
 
 replacementRequiresCounterfactual : H.explicitCounterfactualRequiredForFertilizerReplacement H.canonicalRegenerationHyperfabricBoundary ≡ true
 replacementRequiresCounterfactual = refl
+
+
+typedNitrogenFactorisationWitnessesOwned :
+  H.typedNitrogenNonFactorabilityWitnessesOwned
+    H.canonicalRegenerationHyperfabricBoundary ≡ true
+typedNitrogenFactorisationWitnessesOwned = refl
+
+failedFactorisationDrivesAxisDiscovery :
+  H.failedFactorisationMayDriveExperimentalAxisDiscovery
+    H.canonicalRegenerationHyperfabricBoundary ≡ true
+failedFactorisationDrivesAxisDiscovery = refl
