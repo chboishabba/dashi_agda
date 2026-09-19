@@ -36,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNEuclideanRawGramQuadraticMajorantExact as 
 import DASHI.Physics.Closure.NSTriadKNEuclideanViscousHeatRateExact as Heat
 import DASHI.Physics.Closure.NSWholeSpaceCenteredResolventSaturationExact as Saturation
 import DASHI.Physics.Closure.NSWholeSpaceSaturationOriginCancellationExact as Origin
+import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact as Reciprocal
 
 record WholeSpaceProjectedSaturationCell : Set where
   constructor whole-space-projected-saturation-cell
@@ -172,7 +173,7 @@ viscosityNonzero :
   (D : WholeSpaceProjectedSaturationCell) →
   BishopReal._≄0 (viscosity D)
 viscosityNonzero D =
-  Heat.Reciprocal.xNonzero (viscosityPositive D)
+  Reciprocal.xNonzero (viscosityPositive D)
 
 viscosityInverse :
   WholeSpaceProjectedSaturationCell → BishopReal.ℝ
