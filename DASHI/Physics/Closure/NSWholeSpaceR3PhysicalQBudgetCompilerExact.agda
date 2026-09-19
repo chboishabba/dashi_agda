@@ -99,7 +99,7 @@ secondMomentNonnegative :
     PhysicalQBudgetInputs
       dataSet output gramFactor secondMoment gramMajorant) →
   BishopReal.NonNegative secondMoment
-secondMomentNonnegative inputs =
+secondMomentNonnegative {output = output} inputs =
   BishopP.0≤x⇒nonNegx
     (BishopP.≤-respˡ-≃
       (Directional.secondMomentIsDirectionalSquare
@@ -107,7 +107,7 @@ secondMomentNonnegative inputs =
       (BishopP.nonNegx⇒0≤x
         (SquareNN.bishopSquareNonnegative
           (Directional.dot
-            _
+            output
             (Directional.derivativeVector
               (directionalSecondMoment inputs))))))
 
