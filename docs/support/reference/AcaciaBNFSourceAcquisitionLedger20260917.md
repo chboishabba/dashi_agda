@@ -88,6 +88,12 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1016/j.soilbio.2005.12.012` — Sierra & Nygren 2006; Guadeloupe field Gliricidia-Dichanthium silvopastoral design excluding above-ground recycling, using natural-abundance `15N`, tree-root density and explicit reference-plant/isotope-baseline treatment. Retained as a field below-ground transfer design donor, not Australian or Acacia/Senegalia same-object evidence.
 - `10.1071/AR9940133` — Pate, Unkovich, Armstrong & Sanford 1994; reference-plant selection for `15N` natural-abundance assessment. Retained only as method/observer calibration, not as Acacia biological evidence.
 
+
+## Quantitative N-kinetics / restoration-trajectory data acquisitions
+
+- `10.1071/EA05290` — Thomson, Cameron, Dalal & Hoult 2007; northern-Australian semiarid-subtropical Vertisol legume-residue experiment. The source reports first-order residue-N release over a 17-week experiment, with `k = 0.045-0.325 week^-1` and half-times `2.1-15.4 weeks` at 23 C. Retained as a source-bounded **residue-mineralisation kinetic-shape** receipt. The k range is not one universal rate; glasshouse kinetics are not field kinetics; residue mineralisation is not living-root transfer; and the finite fitted first-order law is not promoted to infinite-horizon tail authority or directly to a Bishop discrete ratio.
+- `10.1016/j.jenvman.2022.114748` — Liddicoat et al. 2022; quantitative soil-eDNA rehabilitation-trajectory assessment across Huntly, Eneabba and Worsley mine-rehabilitation chronosequences. Supporting data/code deposit exposes Huntly 2-29 years, Eneabba 7-38 years and Worsley 2-28 years. The deposited dataset records CC-BY reuse; the public `liddic/resto_traj` code repository declares MIT. Article, dataset and code licensing/authority remain separate. The source is a quantitative age-indexed **chronosequence** data surface, not repeated same-plot longitudinal increments or whole-ecosystem state.
+
 ## Nitrogenase / situated-protein donors
 
 - `10.1146/annurev.biochem.78.070907.103812` — PMID `19489731`, PMCID `PMC2814439`
