@@ -530,3 +530,59 @@ The current review still has no manufactured canonical `CorpusAuditedSource`; th
 ### Remote aggregate note
 
 The connector branch had four eligibility-frame imports serialized as literal `\\n` text rather than actual newlines. Commit `8c8c04ea...` repairs that remote-only source defect and wires the search-to-audit weld into the aggregate. This repair does not alter or extend the local aggregate GREEN receipt at exact commit `94d77498...`.
+
+
+## 21. Database execution recut: 28/35 translated, 21 attempts, zero observed result sets
+
+The remote Digital-ESD source generation now mirrors the locally intended translation surface:
+
+```text
+Scopus              7/7
+Web of Science      7/7
+IEEE Xplore         7/7
+ERIC                 7/7
+ACM Digital Library  0/7
+total               28/35
+```
+
+ERIC syntax is sourced from the official IES/ERIC public API documentation. IEEE uses the already-pinned official Command Search documentation. ERIC stems are expanded explicitly rather than assuming undocumented wildcard semantics.
+
+Execution history now contains 21 query-specific attempt receipts:
+
+```text
+Scopus         7: HTTP 403 before submission
+Web of Science 7: HTTP 403 before submission
+ERIC            7: current web transport refused direct API response access before an observed result set
+IEEE            0
+ACM             0
+```
+
+Therefore the exact current state is:
+
+```text
+translations frozen       28/35
+execution attempts         21
+queries with observed result set 0
+retained database exports 0
+deduplication              unpaid
+eligibility screening      unpaid
+structured extraction      unpaid
+CorpusAuditedSource        none manufactured
+```
+
+These failure receipts are append-only provenance. They are not zero-result searches and do not close any search family.
+
+Operational instructions are frozen in:
+
+`docs/digital-esd-database-execution-runbook.md`
+
+The current execution Pareto is readiness-only:
+
+```text
+ERIC local/public API first
+-> IEEE exact Command Search
+-> authenticated Scopus / Web of Science
+-> ACM only after official syntax + seven translations are pinned
+```
+
+This ordering is not an evidence/source-quality rank.
