@@ -916,3 +916,116 @@ Level 2:
 
 No CI or Agda kernel build was run in this connector tranche.  These new Agda
 modules are source-written and statically trust-scanned only.
+
+
+## 2026-09-19 continuation: S1 archaeology and canonical S2 carrier
+
+### S1 / R320
+
+The direct R320 constructor archaeology bottoms out at the already-existing
+R279 source-native leaf rather than a new clustering theorem.
+
+```text
+BalabanCMP116TwoSourceSpatialShellRound279Exact
+  covarianceIsTwoSourceShell
+  twoSourceShellBelowHessianMarkedAnalytic
+    ->
+  connected covariance <= C_H * rooted hessian shell
+    ->
+  existing marked/rooted geometric compilers
+```
+
+The genuine source theorem is therefore:
+
+```text
+instantiate CMP116 differentiated localization
+with the TWO selected literal J directions
+on the SAME hessian/spatial marked shell.
+```
+
+R338/R339 and the later R344/R346/R393 families repackage or calibrate this
+same source/application theorem; none currently constructs it.  No local proof
+term was found and no citation was promoted into one.
+
+The fixed-quarter R320 ABI additionally requires the selected calibration to its
+configured rooted shell.  The source-native R346 route naturally permits a
+general hessian amplitude, but the Agda donor receipt does not expose enough of
+the Lean terminal signature to justify silently replacing the fixed R320
+normalization.
+
+### S2 / canonical finite Wilson-product carrier
+
+New theorem owners:
+
+```text
+YMClayLiteralWilsonS2CanonicalProductPresentationExact.agda
+YMClayLiteralWilsonS2CanonicalProductPresentationValidation.agda
+YMClayLiteralWilsonS2SameAlgebraBoundExact.agda
+YMClayLiteralWilsonS2SameAlgebraBoundValidation.agda
+```
+
+First reduction: choose the Route-S physical observable carrier to be
+`List Loop`.
+
+```text
+decode loops = productLoopObservable loops
+translate loops t = productLoopObservable (map (translateLoop _ t) loops)
+```
+
+Therefore R315's generic fields
+
+```text
+decodedIsWilsonProduct
+translatedIsWilsonProduct
+```
+
+are both `refl`.
+
+Second reduction: construct `WilsonCylinderBoundData` directly on the T5
+observable algebra:
+
+```text
+Wilson.multiplyObservable := Gram.multiplyObservable
+Wilson.Bound observable _  := Gram.BoundedObservable observable
+```
+
+Therefore the former same-carrier fields
+
+```text
+wilsonMultiplyIsT5Multiply
+wilsonBoundImpliesT5Bounded
+```
+
+are also definitional.
+
+This strongest canonical S2 carrier composes directly into
+`YMClayLiteralWilsonP2ExpectationConvergenceExact.sameAlgebraS2BuildsSelectedExpectationLimits`,
+so all three P2 expectation limits are generated mechanically.
+
+The remaining S2 physical inputs are now only:
+
+```text
+1. literal loopwise Euclidean translation / support-distance = time;
+2. each literal Wilson loop is Gram.BoundedObservable;
+3. Gram.BoundedObservable is closed under observable multiplication;
+4. the identity observable is Gram.BoundedObservable.
+```
+
+The T5 producer currently keeps `BoundedObservable` abstract and no in-repo
+constructor for (2)--(4) was found, so these are not promoted away.
+
+### Updated Route-S physical cut
+
+```text
+S1  two selected literal J directions instantiate the CMP116 hessian-mark
+    differentiated-localization theorem on the same selected shell
+
+S2  loopwise Euclidean time/support geometry
+    + T5 boundedness of literal loops, products, and identity
+    (Wilson-product representation and Wilson/T5 algebra welds compiler-owned)
+
+S3  R281 covariance-built spectrum is the actual H_OS spectrum
+```
+
+No CI or Agda kernel build was run in this continuation.  The new modules are
+source-written and must remain classified accordingly until Agda 2.9 is run.
