@@ -83,6 +83,10 @@ ericQ1TransportFailureCannotCreateSuccessfulOutcome :
   SuccessfulObservedOutcome (Exec.outcome Exec.ericQ1Execution) → ⊥
 ericQ1TransportFailureCannotCreateSuccessfulOutcome ()
 
+ericQ1ObservedCountWithoutExportCannotCreateSuccessfulOutcome :
+  SuccessfulObservedOutcome (Exec.outcome Exec.ericQ1ObservedExecution) → ⊥
+ericQ1ObservedCountWithoutExportCannotCreateSuccessfulOutcome ()
+
 ------------------------------------------------------------------------
 -- Promotion firewalls.
 ------------------------------------------------------------------------
@@ -110,4 +114,4 @@ successfulExecutionDoesNotCreateIncludedCorpus ()
 
 bridgeReading : String
 bridgeReading =
-  "The attempt ledger and the successful structured-search execution receipt remain distinct. A receipt crosses the bridge only with an explicit surface match, querySubmitted=true, an executedWithObservedResultSet outcome, and exportObserved. Existing Scopus/WoS access failures and ERIC transport failures cannot inhabit SuccessfulObservedOutcome. Conversion still creates only a successful database-execution receipt; deduplication, screening, extraction and corpus admission remain downstream payments."
+  "The attempt ledger and the successful structured-search execution receipt remain distinct. A receipt crosses the bridge only with an explicit surface match, querySubmitted=true, an executedWithObservedResultSet outcome, and exportObserved. Existing Scopus/WoS access failures and ERIC transport failures cannot inhabit SuccessfulObservedOutcome; neither can the later ERIC count-only executions because they retain exportNotObserved. Conversion still creates only a successful database-execution receipt; deduplication, screening, extraction and corpus admission remain downstream payments."

@@ -657,13 +657,18 @@ ACM Digital Library  7/7 attempted
 total               35/35 attempted
 ```
 
-Observed successful result sets remain:
+Observed result sets are now:
 
 ```text
-0/35
+ERIC                 7/7 submitted + HTTP-200 count observed
+Scopus               0/7
+Web of Science       0/7
+IEEE Xplore          0/7
+ACM Digital Library  0/7
+total                 7/35
 ```
 
-and retained database exports remain zero.
+The ERIC observations are count-only receipts with `exportNotObserved`; retained database exports therefore remain zero.
 
 The failure classes remain source/surface-specific and append-only:
 
@@ -678,9 +683,9 @@ The current programme boundary is therefore:
 
 ```text
 query formalisation        paid 35/35
-attempt provenance         paid 35/35
-observed result sets       unpaid 0/35
-retained exports           unpaid
+attempt provenance         paid 35/35 + append-only ERIC retry provenance
+observed result sets       partial 7/35
+retained exports           unpaid 0/35
 deduplication              unpaid
 screening                  unpaid
 structured extraction      unpaid
@@ -688,3 +693,75 @@ CorpusAuditedSource        none
 ```
 
 Further framework/query formalisation is dominated until a genuinely reachable execution environment produces observed counts/exports.
+
+
+## 25. ERIC execution wall moved from connectivity to export retention
+
+Operator-observed local execution on 2026-09-19 reached the official public ERIC API for all seven frozen ERIC queries and observed HTTP 200 JSON result sets:
+
+```text
+Q1  642
+Q2  290
+Q3  1594
+Q4  41889
+Q5  214
+Q6  293
+Q7  1675
+```
+
+These later successful count observations are appended to, not substituted for, the earlier ChatGPT-transport failure receipts.
+
+The execution owner now distinguishes:
+
+```text
+earlier transport failure
+!=
+later query submission / result-count observation
+!=
+retained paginated export
+```
+
+The seven new ERIC receipts therefore carry:
+
+```text
+querySubmitted = true
+executedWithObservedResultSet
+exact numFound
+exportNotObserved
+```
+
+and remain constructively unable to inhabit
+`SuccessfulObservedOutcome` in
+`DigitalESDDatabaseExecutionStructuredSearchBridgeExact`.
+
+The exact next payment is no longer network reachability. It is:
+
+```text
+paginate each frozen ERIC query
+-> retain every raw JSON page
+-> retain page / manifest SHA-256 digests
+-> prove pagination complete against numFound
+-> upgrade exportNotObserved to exportObserved
+-> cross the structured-search bridge
+```
+
+A checked-in runner now owns that operational step:
+
+`scripts/execute_digital_esd_eric.py`
+
+It parses the canonical ERIC strings directly from
+`DigitalESDDatabaseTranslatedQueriesExact.agda`, preventing executable-query drift from the formal owner, and emits raw page artifacts plus per-query summaries and a run manifest. The runner does not perform deduplication, screening or corpus admission.
+
+The operator also reported an exact reconciled local executable generation:
+
+```text
+branch: work-merge-remote-methodology
+commit: 0ef43e3d093825c0b58f5786fdcc2892775cddb2
+EverythingDigitalESDReciprocalBraid: 921/921 GREEN
+Agda 2.9
+AGDA_RTS_HEAP=7G
+RSS watchdog=8192 MB
+static audit: 15/15 affected modules PASS
+```
+
+That receipt belongs only to exact local commit `0ef43e3d...`. The later remote count-receipt/export-runner commits do not inherit it until reconciled and rechecked.
