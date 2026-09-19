@@ -28,9 +28,12 @@ import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as Direc
 --     quotient/gauge, norm/residual, energy-recovery and measure-convergence
 --     construction program; abstract Mosco recovery is already compiler-owned.
 --
--- F4: construct physical stress/OS common-core data and closure
+-- Strong stress-generator extension:
+--     construct physical stress/OS common-core data and closure
 --     identifications. Evolution equality is derived downstream from
 --     same-generator + Stone/OS uniqueness rather than assumed as a primitive.
+--     This is NOT a primitive literal-Clay stress/OPE payment; the literal
+--     Clay endpoint is tracked separately by YMClayOSLiteralStressRouteParetoExact.
 ------------------------------------------------------------------------
 
 record LiteralWilsonUniformGapTrajectory : Set₁ where
@@ -237,6 +240,8 @@ record OutstandingPhysicalFrontier : Set₁ where
   field
     f1LiteralWilsonUniformGap : LiteralWilsonUniformGapTrajectory
     f3PhysicalContinuumLimit : PhysicalContinuumLimitWitness
+    -- Compatibility field for the stronger same-generator extension.
+    -- It is not part of the least-privilege literal Clay stress/OPE cut.
     f4PhysicalStressOSCommonCore :
       F4.PhysicalStressOSCommonCoreWitness
 
@@ -297,6 +302,20 @@ f4EvolutionEqualityPrimitive = false
 f4EvolutionEqualityPrimitiveIsFalse :
   f4EvolutionEqualityPrimitive ≡ false
 f4EvolutionEqualityPrimitiveIsFalse = refl
+
+f4CommonCoreMandatoryForLiteralClayStressOPE : Bool
+f4CommonCoreMandatoryForLiteralClayStressOPE = false
+
+f4CommonCoreMandatoryForLiteralClayStressOPEIsFalse :
+  f4CommonCoreMandatoryForLiteralClayStressOPE ≡ false
+f4CommonCoreMandatoryForLiteralClayStressOPEIsFalse = refl
+
+f4CommonCoreIsOptionalStrongerGeneratorRoute : Bool
+f4CommonCoreIsOptionalStrongerGeneratorRoute = true
+
+f4CommonCoreIsOptionalStrongerGeneratorRouteIsTrue :
+  f4CommonCoreIsOptionalStrongerGeneratorRoute ≡ true
+f4CommonCoreIsOptionalStrongerGeneratorRouteIsTrue = refl
 
 f1Level : ProofLevel
 f1Level = conditional
