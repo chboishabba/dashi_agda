@@ -283,6 +283,16 @@ e6MajorantIsStillUnpaid :
   P.e6ConcreteAbsoluteConvergenceOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ false
 e6MajorantIsStillUnpaid = refl
 
+abstractEisensteinLatticeReindexingTransformationIsOwned :
+  P.abstractEisensteinLatticeReindexingTransformationOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+abstractEisensteinLatticeReindexingTransformationIsOwned = refl
+
+concreteClassicalLatticeEisensteinModelStillUnpaid :
+  P.concreteClassicalLatticeEisensteinModelOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+concreteClassicalLatticeEisensteinModelStillUnpaid = refl
+
 analyticSameObjectIsStillUnpaid :
   P.bishopLimitEqualsAnalyticLatticeEisenstein P.canonicalEisensteinBishopConvergenceFrontier ≡ false
 analyticSameObjectIsStillUnpaid = refl
