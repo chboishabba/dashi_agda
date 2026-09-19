@@ -15,6 +15,8 @@ module DASHI.Foundations.BishopNonnegativeSquareReflectionExact where
 -- x<=y.  No square-root or classical trichotomy principle is used.
 ------------------------------------------------------------------------
 
+open import Relation.Nullary using (¬_)
+
 import Real as BishopReal
 import RealProperties as BishopP
 
