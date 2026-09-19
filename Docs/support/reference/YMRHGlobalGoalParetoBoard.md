@@ -657,3 +657,70 @@ ell(Q_pole(0)) = -4 * poleEvenResp(g,t,0)
 ```
 
 and the two-window taper construction has been decomposed into a de-weighting mechanism showing how the selected-radius pole cancellation can force a signed unweighted residue once the localized integral hypotheses are attached.
+
+
+### Canonical taper radius-zero pole sign — 2026-09-20
+
+The two-window de-weighting mechanism has now been pushed through the actual positive-taper constructor rather than left as an abstract donor.
+
+The strengthened Lean constructor owns, for the same canonical taper,
+
+```text
+poleEvenResp(g,t,r) = 0
+0 < poleEvenResp(g,t,0)
+```
+
+and the public historical constructor API is retained as a backward-compatible wrapper.
+
+Therefore the actual final even-cone pole coordinate satisfies
+
+```text
+ell(Q_pole(0)) = -4 * poleEvenResp(g,t,0) < 0.
+```
+
+This sign is obtained from the taper construction itself, not from the downstream explicit-formula balance.
+
+The analytic mechanism is:
+
+```text
+outer positive window:  tu ~ 2pi
+inner negative window:  tu ~ pi
+r = t/16
+
+cos(r u) is strictly smaller on the outer window
+than on the inner window.
+
+selected-radius weighted pole cancellation
+        =>
+positive unweighted radius-zero pole residue.
+```
+
+However this does NOT yet imply the desired centered whole-complement sign.
+
+For the centered taper
+
+```text
+h_r = g (cos(r u)-1) <= 0
+```
+
+the off-ordinate reflection-pair kernel remains
+
+```text
+4 h_r(u) cosh(a u) cos(delta u),
+```
+
+and companion Lean source now contains an explicit sign-reversal witness showing that a negative taper value can yield a positive pair kernel when the oscillatory cosine is negative.
+
+So the current high-analysis leaf is genuinely global:
+
+```text
+S_{h_r}(t,0) <= 0           OPEN
+or
+S_{h_r}(t,0) = 0            OPEN
+or
+S_{h_r}(t,0) carries a^2    OPEN
+```
+
+The existing oscillatory/curvature/far-shell machinery gives magnitude decay and summability, not this sign.
+
+Do not use the explicit-formula balance to turn the favourable pole sign into the strict payment; that would cross the balance-free firewall.
