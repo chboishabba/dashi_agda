@@ -1,35 +1,60 @@
 module DASHI.Mathematics.Arithmetic.EllipticRationalPlaceSelmerExact where
 
 ------------------------------------------------------------------------
--- BSD 2-DESCENT: MAKE "ALL PLACES OF Q" AN EXPLICIT SPLIT
---
--- This owner does not construct Q_v.  It pays the indexing/assembly theorem:
--- one infinite place plus a family of finite-place local conditions compile
--- into the single all-place predicate consumed by SelmerTwoElement.
+-- BSD 2-DESCENT: ACTUAL PRIME-INDEXED FINITE PLACES OF Q
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
+open import Data.Nat.Base using (_≤_)
+open import Data.Product using (Σ; _,_)
+open import Data.Sum.Base using (_⊎_)
 
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact as Elliptic
 import DASHI.Mathematics.Arithmetic.EllipticTwoDescentRoadExact as Descent
 
+Divides : Nat → Nat → Set
+Divides divisor value =
+  Σ Nat (λ quotient → divisor * quotient ≡ value)
+
+record PrimeNat (value : Nat) : Set where
+  field
+    atLeastTwo : suc (suc 0) ≤ value
+
+    onlyTrivialDivisors :
+      (divisor : Nat) →
+      Divides divisor value →
+      divisor ≡ suc 0 ⊎ divisor ≡ value
+
+open PrimeNat public
+
+record FinitePrime : Set where
+  constructor finite-prime
+  field
+    primeValue : Nat
+    primeProof : PrimeNat primeValue
+
+open FinitePrime public
+
 data RationalPlace : Set where
   infinitePlace : RationalPlace
-  finitePlace : Nat → RationalPlace
+  finitePlace : FinitePrime → RationalPlace
 
 record RationalPlaceTwoDescentData
     (curve : Elliptic.ShortWeierstrassCurve) : Set₁ where
   field
     GlobalCohomology : Set
     InfiniteLocalCohomology : Set
-    FiniteLocalCohomology : Nat → Set
+    FiniteLocalCohomology : FinitePrime → Set
 
     localizeInfinity :
       GlobalCohomology → InfiniteLocalCohomology
 
     localizeFinite :
-      (p : Nat) → GlobalCohomology → FiniteLocalCohomology p
+      (p : FinitePrime) →
+      GlobalCohomology →
+      FiniteLocalCohomology p
 
     GlobalKummerImage :
       GlobalCohomology → Set
@@ -38,7 +63,9 @@ record RationalPlaceTwoDescentData
       InfiniteLocalCohomology → Set
 
     FiniteKummerImage :
-      (p : Nat) → FiniteLocalCohomology p → Set
+      (p : FinitePrime) →
+      FiniteLocalCohomology p →
+      Set
 
 open RationalPlaceTwoDescentData public
 
@@ -70,8 +97,8 @@ record RationalSelmerConditions
       InfiniteKummerImage data
         (localizeInfinity data cohomologyClass)
 
-    everyFiniteCondition :
-      (p : Nat) →
+    everyFinitePrimeCondition :
+      (p : FinitePrime) →
       FiniteKummerImage data p
         (localizeFinite data p cohomologyClass)
 
@@ -92,7 +119,7 @@ rationalConditionsGiveAllPlaces :
 rationalConditionsGiveAllPlaces conditions infinitePlace =
   infiniteCondition conditions
 rationalConditionsGiveAllPlaces conditions (finitePlace p) =
-  everyFiniteCondition conditions p
+  everyFinitePrimeCondition conditions p
 
 rationalConditionsGiveSelmerElement :
   ∀ {curve data}
@@ -110,9 +137,9 @@ record EllipticRationalPlaceSelmerBoundary : Set where
   constructor elliptic-rational-place-selmer-boundary
   field
     rationalPlaceSplitPaid : Bool
+    primePredicateOnFiniteLabelsPaid : Bool
     allPlaceConditionAssemblyPaid : Bool
     splitConditionsToSelmerCompilerPaid : Bool
-    primePredicateOnFiniteLabelsPaid : Bool
     actualQvKummerRealizationPaid : Bool
     rationalSquareClassRealizationPaid : Bool
     globalSelmerComputationPaid : Bool
@@ -123,4 +150,4 @@ canonicalEllipticRationalPlaceSelmerBoundary :
   EllipticRationalPlaceSelmerBoundary
 canonicalEllipticRationalPlaceSelmerBoundary =
   elliptic-rational-place-selmer-boundary
-    true true true false false false false false false
+    true true true true false false false false false

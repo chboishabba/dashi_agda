@@ -183,3 +183,35 @@ bsdActualLocalFieldsStillOpen :
     BSDPlaces.canonicalEllipticRationalPlaceSelmerBoundary
   ≡ false
 bsdActualLocalFieldsStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- FOURTH CONTINUATION: repair exact projective semantics, enforce the unique
+-- tape head invariant, and replace finite-place Nat labels by literal primes.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as PNPWF
+
+pnpUniqueHeadInvariantPaid :
+  PNPWF.uniqueHeadConfigurationInvariantPaid
+    PNPWF.canonicalConcreteTapeWellFormedBoundary
+  ≡ true
+pnpUniqueHeadInvariantPaid = refl
+
+pnpWellFormedAllWindowReverseStillOpen :
+  PNPWF.wellFormedAllWindowReversePaid
+    PNPWF.canonicalConcreteTapeWellFormedBoundary
+  ≡ false
+pnpWellFormedAllWindowReverseStillOpen = refl
+
+hodgeExactRescalingEquivalencePaid :
+  HodgeQuot.concreteRescalingEquivalencePaid
+    HodgeQuot.canonicalProjectiveSpaceSetoidQuotientWeldBoundary
+  ≡ true
+hodgeExactRescalingEquivalencePaid = refl
+
+bsdFinitePlacesAreLiteralPrimes :
+  BSDPlaces.primePredicateOnFiniteLabelsPaid
+    BSDPlaces.canonicalEllipticRationalPlaceSelmerBoundary
+  ≡ true
+bsdFinitePlacesAreLiteralPrimes = refl
