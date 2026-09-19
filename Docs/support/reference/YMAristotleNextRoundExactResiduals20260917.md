@@ -1143,3 +1143,109 @@ D2
 
 These are mathematical proof obligations. No combination of existing wrappers,
 status records, or definitional carrier choices supplies their proof terms.
+
+
+## 2026-09-19 direct theorem push: trace bound + sound D2 endpoint
+
+This pass stopped changing architecture unless a theorem was actually proved or
+an unsound interface was removed.
+
+### S2 theorem actually proved
+
+New modules:
+
+```text
+BalabanSU2RationalWilsonTraceBoundExact.agda
+BalabanSU2RationalWilsonTraceBoundValidation.agda
+```
+
+On the repo's exact rational SU(2) quaternion carrier, unit norm plus the exact
+trace/chordal identity now proves
+
+```text
+-1 <= realPart(q) <= 1.
+```
+
+The proof is internal rational-order algebra. No trace-bound authority or
+matrix-norm postulate is introduced.
+
+Therefore the compact-group Wilson trace inequality itself is no longer an S2
+research payment on this carrier.
+
+What remains is the semantic realization theorem that a quantitative Wilson
+bound inhabits the selected T5 producer's opaque `BoundedObservable`
+predicate. Inspection of the preferred diagonal, Lp, expectation-linked OS, and
+determining-observable owners confirms that each preserves or assumes that
+predicate; none constructs it from a numerical bound.
+
+### S1 local re-proof attempt
+
+The source-local proof stack was inspected below the imported theorem:
+
+```text
+BalabanDecoupledActivityHessian
+  pointwise marked boundary comparison
+    -> Cauchy coefficient/Hessian bound            [machine checked]
+
+R104/R114
+  finite normalized demands
+    -> one positive common analytic radius          [machine checked]
+```
+
+The remaining source-specific theorem is the marked substituted-background /
+boundary comparison itself.  This is precisely the CMP116 Sect.1 analytic
+estimate whose proof-bearing source inhabitant is absent.  No algebraic or
+representation debt remains between it and R279/R320/P1.
+
+### D2 soundness and endpoint correction
+
+New modules:
+
+```text
+YMClayLevel2CompositeTransportABIInsufficiencyExact.agda
+YMClayLevel2D2R129CompositeConvergenceExact.agda
+```
+
+The first constructively proves that the bare
+`CompositeRGParallelTransport` ABI can be manufactured from an arbitrary
+operator trajectory, so it cannot by itself pay physical D2a.
+
+The second replaces the overstrong finite-depth equality target by the actual
+theorem already supported by the unified completion machinery:
+
+```text
+compositeProjection(stateAtScale n)
+  --CompositeConverges-->
+compositeProjection(limitState).
+```
+
+The remaining D2 theorem is now correctly:
+
+```text
+actual insertion/blocking naturality for the source-native one-step RG
++
+same-family identification of the resulting composite trajectory
+with the R129 completed composite.
+```
+
+Search of the older source-native strong-state lane confirms that this content
+is exactly what the still-conditional `PhysicalUnifiedOneStepYMEstimate` was
+intended to provide; no hidden proof term exists elsewhere.
+
+### Honest theorem frontier after this pass
+
+```text
+S1
+  prove the CMP116 marked boundary/substitution stability estimate
+  for the selected literal two-J source pair
+
+S2
+  prove quantitative-bound -> selected-T5 BoundedObservable realization
+  (the rational SU2 trace bound itself is now proved)
+
+D2
+  prove actual composite insertion/blocking naturality under one-step RG
+  and identify/converge that SAME trajectory to R129's completed composite
+```
+
+Those are now theorem-sized analytic obligations, not architecture gaps.
