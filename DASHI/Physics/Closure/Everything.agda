@@ -267,3 +267,4 @@ import DASHI.Physics.Closure.NSWholeSpaceR3PhysicalKernelProjectedQWeldExact
 import DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalProjectedGramPairExact
 
 import DASHI.Physics.Closure.NSWholeSpacePhysicalKernelSaturationOriginExact
+\nimport DASHI.Physics.Closure.NSTriadKNEuclideanSignedGramPairCarrierRealizationExact\n\nimport DASHI.Physics.Closure.NSWholeSpaceCoherentSaturationReductionExact\n\nimport DASHI.Physics.Closure.NSWholeSpaceBishopFiniteCauchyPSDExact\n\nimport DASHI.Physics.Closure.NSWholeSpaceBishopComplex3CauchyPSDExact\n
