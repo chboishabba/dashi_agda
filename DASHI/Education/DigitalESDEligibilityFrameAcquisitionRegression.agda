@@ -1,0 +1,21 @@
+module DASHI.Education.DigitalESDEligibilityFrameAcquisitionRegression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDEligibilityFrameAcquisitionExact as Acquisition
+
+candidateDoesNotCreateIncludedStudy :
+  Acquisition.EligibilityFrameCandidateCreatesIncludedStudy → ⊥
+candidateDoesNotCreateIncludedStudy =
+  Acquisition.eligibilityFrameCandidateDoesNotCreateIncludedStudy
+
+institutionalFrameDoesNotCreatePopulationTruth :
+  Acquisition.InstitutionalFrameCreatesPopulationTruth → ⊥
+institutionalFrameDoesNotCreatePopulationTruth =
+  Acquisition.institutionalFrameDoesNotCreatePopulationTruth
+
+categoryOmissionDoesNotCreateIndividualOutcome :
+  Acquisition.CategoryOmissionCreatesIndividualOutcome → ⊥
+categoryOmissionDoesNotCreateIndividualOutcome =
+  Acquisition.categoryOmissionDoesNotCreateIndividualOutcome
