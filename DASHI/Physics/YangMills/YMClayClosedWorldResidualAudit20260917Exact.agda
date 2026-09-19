@@ -243,10 +243,10 @@ level2GlobalAFSecondPayment = exact-residual
 level2OPECoefficientRGCoordinateAttachment : ExactResidual
 level2OPECoefficientRGCoordinateAttachment = exact-residual
   physicalClayStressConstruction
-  "YMClayLevel2OPECoefficientCoordinateWeldExact.agda"
-  "literal OPE coefficient = projection of the same RG/composite coordinate"
+  "YMClayLevel2D2PhysicalMinCutExact.agda / YMClayLevel2LiteralOPECoefficientScaleAttachmentExact.agda"
+  "physical composite-operator transport + same operator recurrence + literal position-to-RG-depth coefficient attachment"
   unpaid
-  "This is a same-object coordinate attachment, not a second global AF proof. Once supplied, all-depth OPE coefficient equality is machine-checked induction."
+  "The repo already owns the CompositeRGParallelTransport interface, so no second mixing-map abstraction is needed. But no physical inhabitant of that transport was found, and the literal Clay opeCoefficient is position-indexed rather than Nat-indexed. D2 therefore requires: instantiate the native operator transport, put physical/reference coefficient trajectories on that same transport with common UV normalization, and certify which short-distance RG depth corresponds to the literal insertion position. All-depth coefficient equality is then compiler-owned."
 
 level2FiniteWardConservation : ExactResidual
 level2FiniteWardConservation = exact-residual
@@ -395,6 +395,15 @@ allDepthOPECoefficientEqualityIndependentAfterOneStepLaw = false
 
 d2NewGlobalAFTheoremRequired : Bool
 d2NewGlobalAFTheoremRequired = false
+
+d2SecondMixingMapAbstractionRequired : Bool
+d2SecondMixingMapAbstractionRequired = false
+
+d2LiteralClayCoefficientIsNatIndexed : Bool
+d2LiteralClayCoefficientIsNatIndexed = false
+
+d2PositionDepthSemanticsRequired : Bool
+d2PositionDepthSemanticsRequired = true
 
 d3FiniteWardAlgebraNewPhysicalTheorem : Bool
 d3FiniteWardAlgebraNewPhysicalTheorem = false
