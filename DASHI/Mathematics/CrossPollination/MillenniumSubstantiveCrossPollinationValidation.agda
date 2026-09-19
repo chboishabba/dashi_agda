@@ -46,3 +46,8 @@ import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierVal
 import DASHI.Mathematics.CrossPollination.MillenniumKnownMathFormalizationValidation
 
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact
+
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact
+import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact
+import DASHI.Mathematics.Complexity.DeterministicMachineToInPExact
+import DASHI.Mathematics.Automorphic.EllipticModularityReceiptExact
