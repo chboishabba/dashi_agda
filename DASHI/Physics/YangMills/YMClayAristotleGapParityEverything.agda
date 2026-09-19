@@ -91,3 +91,6 @@ import DASHI.Physics.YangMills.YMClayLiteralWilsonP3SameOSCorrelationExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP123ReductionValidation
 import DASHI.Physics.YangMills.YMClayLevel2D2TransportGeneratedRecurrenceExact
 import DASHI.Physics.YangMills.YMClayLevel2D2TransportGeneratedRecurrenceValidation
+
+import DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeExact
+import DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeValidation
