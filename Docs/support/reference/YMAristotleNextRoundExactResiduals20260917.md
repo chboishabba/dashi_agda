@@ -669,3 +669,105 @@ It does not pay the same-Hamiltonian seam. Searches found no constructor of
 `R331.coordinateOfReconstructedHamiltonian`, `TransferCoordinateOf`, or
 `R302.ModeRatioUsesTransferCoordinate` on the actual OS reconstruction.
 Those same-object transfer/semigroup identifications remain proof-bearing.
+
+## 2026-09-19 literal Route-S closure tranche
+
+The supplied Aristotle archive is now pinned in-repo:
+
+```text
+archive
+  ym-aristotle-009295-latest-20260919.tar.gz
+
+sha256
+  95bb6c4c2613a4dff9750940757094354d9344f78e63a3db7ded36cf08567137
+
+worker receipt
+  lake build RequestProject
+  8236 jobs / zero errors
+
+headline axiom audit
+  propext
+  Classical.choice
+  Quot.sound
+```
+
+Canonical donor owner:
+
+```text
+YMClayAristotleRouteSLiteralWilsonDonorExact.agda
+```
+
+The verified Lean tranche pays the compiler/application mathematics for literal
+Wilson loops, literal Euclidean time, translated-loop covariance, the
+mixed-log-source derivative = connected covariance identity, selected
+expectation-limit covariance transport, integer-to-real separation, and the
+terminal Route-S spectral assembly.
+
+Therefore the canonical cross-prover Route-S physical cut is now exactly:
+
+```text
+P1  finite clustering estimate for one selected literal Wilson-loop pair
+
+P2  convergence of the three selected literal Wilson expectations
+    (product / left / right) for each Euclidean separation
+
+P3  same-object OS spectral/correlation identification:
+    the reconstructed-H_OS spectral correlation is bounded by
+    that SAME continuum literal-Wilson covariance
+```
+
+Owner:
+
+```text
+YMClayLiteralWilsonRouteSThreeInputBoundaryExact.agda
+```
+
+The native Agda R320/R304/R300/R302/R306/R331 route remains a valid producer and
+compatibility path, but its decomposed H1/H2/H3 coordinates are no longer
+globally mandatory physical leaves once the kernel-revalidated literal-Wilson
+Lean compiler is admitted.
+
+The literal Clay endpoint is now wired directly through the existing Round78
+top-down theorem:
+
+```text
+A  UVToContinuumYM Y
+B  Route-S physical mass-gap realization on SAME Y
+C  literal local fields / AF / stress-OPE on SAME Y
+   + standard same-H nontriviality consequence
+        |
+        v
+ClayYangMillsSolution (literalClayVocabulary Y)
+```
+
+New owners:
+
+```text
+YMClayLiteralLocalFieldsClosureExact.agda
+YMClayLiteralTopDownRouteSClosureExact.agda
+YMClayLiteralTopDownRouteSClosureValidation.agda
+```
+
+The actual result constructor is:
+
+```text
+literalClaySolutionFromRouteSAndLiteralLocalFields
+```
+
+and its codomain is the repository's official `ClayYangMillsSolution`, not a
+new status/roadmap type.
+
+The remaining Route-S research walls are genuine:
+
+```text
+P1  actual finite interacting literal-Wilson clustering
+P2  actual three selected Wilson expectation limits
+P3  actual same-reconstructed-H_OS correlation identification
+```
+
+Search found no producer turning R129's abstract `IsContinuumLimitOf` evidence
+into P2's concrete selected expectation limits, and no constructor of P3's
+same-Hamiltonian covariance identity.  Likewise native R320 producer wrappers
+ultimately still consume an uninhabited selected localization/source theorem.
+
+No unconditional Clay promotion is asserted.
