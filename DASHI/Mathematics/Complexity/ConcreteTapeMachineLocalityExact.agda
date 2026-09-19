@@ -1,9 +1,20 @@
 module DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact where
 
+------------------------------------------------------------------------
+-- CONCRETE FINITE TAPE-MACHINE LOCALITY
+--
+-- A machine step is a literal contiguous radius-one rewrite:
+--
+--   common prefix ++ old 3-cell window ++ common suffix
+--        ->
+--   common prefix ++ new 3-cell window ++ common suffix.
+--
+-- RuleRealizesWindow has one constructor for each head direction, so the
+-- six-cell transition pattern is no longer an opaque proposition.
+------------------------------------------------------------------------
+
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
 
 data Direction : Set where
   moveLeft : Direction
@@ -63,14 +74,71 @@ record SixCellWindow (machine : ConcreteTapeMachine) : Set where
 
 open SixCellWindow public
 
-record RuleRealizesWindow
+data RuleRealizesWindow
+    (machine : ConcreteTapeMachine) :
+    TapeRule (State machine) (Symbol machine) →
+    SixCellWindow machine →
+    Set where
+
+  realizes-left :
+    ∀ {q q' a b leftSymbol rightSymbol} →
+    RuleRealizesWindow machine
+      (tape-rule q a q' b moveLeft)
+      (six-cell-window
+        (plain leftSymbol)
+        (headed q a)
+        (plain rightSymbol)
+        (headed q' leftSymbol)
+        (plain b)
+        (plain rightSymbol))
+
+  realizes-stay :
+    ∀ {q q' a b leftSymbol rightSymbol} →
+    RuleRealizesWindow machine
+      (tape-rule q a q' b stayPut)
+      (six-cell-window
+        (plain leftSymbol)
+        (headed q a)
+        (plain rightSymbol)
+        (plain leftSymbol)
+        (headed q' b)
+        (plain rightSymbol))
+
+  realizes-right :
+    ∀ {q q' a b leftSymbol rightSymbol} →
+    RuleRealizesWindow machine
+      (tape-rule q a q' b moveRight)
+      (six-cell-window
+        (plain leftSymbol)
+        (headed q a)
+        (plain rightSymbol)
+        (plain leftSymbol)
+        (plain b)
+        (headed q' rightSymbol))
+
+append : ∀ {A : Set} → List A → List A → List A
+append [] ys = ys
+append (x ∷ xs) ys = x ∷ append xs ys
+
+record WindowRewriteOccurrence
     (machine : ConcreteTapeMachine)
-    (rule : TapeRule (State machine) (Symbol machine))
+    (before after : TapeRow machine)
     (window : SixCellWindow machine) : Set where
   field
-    realizes : Set
+    prefix suffix :
+      List (TapeCell (State machine) (Symbol machine))
 
-open RuleRealizesWindow public
+    beforeShape :
+      cells before
+      ≡ append prefix
+          (oldLeft window ∷ oldCenter window ∷ oldRight window ∷ suffix)
+
+    afterShape :
+      cells after
+      ≡ append prefix
+          (newLeft window ∷ newCenter window ∷ newRight window ∷ suffix)
+
+open WindowRewriteOccurrence public
 
 record LocalStepWitness
     (machine : ConcreteTapeMachine)
@@ -79,8 +147,7 @@ record LocalStepWitness
     rule : TapeRule (State machine) (Symbol machine)
     window : SixCellWindow machine
     ruleIsConfigured : RuleRealizesWindow machine rule window
-    windowOccursInBeforeAfter : Set
-    outsideWindowPreserved : Set
+    occurrence : WindowRewriteOccurrence machine before after window
 
 open LocalStepWitness public
 
@@ -106,9 +173,11 @@ record ConcreteTapeMachineLocalityBoundary : Set where
   constructor concrete-tape-machine-locality-boundary
   field
     finiteMachineCarrierPaid : Bool
+    exactDirectionalWindowRulesPaid : Bool
+    contiguousRewriteOccurrencePaid : Bool
     localStepWitnessSemanticsPaid : Bool
     genericMachineAdapterPaid : Bool
-    overlappingWindowExtractionPaid : Bool
+    allOverlappingWindowsCharacterizationPaid : Bool
     runToCanonicalSATPaid : Bool
     pVsNPResolved : Bool
 
@@ -116,4 +185,4 @@ canonicalConcreteTapeMachineLocalityBoundary :
   ConcreteTapeMachineLocalityBoundary
 canonicalConcreteTapeMachineLocalityBoundary =
   concrete-tape-machine-locality-boundary
-    true true false false false false
+    true true true true false false false false
