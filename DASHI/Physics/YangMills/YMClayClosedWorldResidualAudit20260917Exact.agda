@@ -71,10 +71,10 @@ sourceSelectedLocalization = exact-residual
 literalWilsonFiniteClustering : ExactResidual
 literalWilsonFiniteClustering = exact-residual
   sourceLocalization
-  "YMClayLiteralWilsonRouteSThreeInputBoundaryExact.agda / Aristotle RouteS Assembly.lean"
-  "finite clustering estimate for the selected literal Wilson-loop pair at every cutoff and Euclidean separation"
+  "YMClayLiteralWilsonP1FiniteClusteringExact.agda / R320"
+  "selected R320 literal-J localization plus same-carrier Wilson/T5 presentation"
   unpaid
-  "This is physical input P1 of the kernel-revalidated wilson_routeS_massGapConclusion theorem. Marked-source differentiation, literal Wilson loops, Euclidean translation and covariance algebra are compiler/donor-owned; the quantitative finite clustering estimate itself is not manufactured."
+  "The finite clustering inequality itself is now compiler output: R320 -> R387/R274 -> quarter*(half)^distance, then selected Euclidean semantics rewrites distance=time. No second clustering estimate remains. The physical source payment is the R320 selected localization inhabitant; the representation payment is the same-carrier Wilson/T5 presentation."
 
 historicalH1PublishedApplicabilityPackaging : ExactResidual
 historicalH1PublishedApplicabilityPackaging = exact-residual
@@ -135,10 +135,10 @@ h2cSelectedLimitUpperClosure = exact-residual
 literalMeasureExpectationConvergence : ExactResidual
 literalMeasureExpectationConvergence = exact-residual
   physicalContinuumConstruction
-  "BalabanClayT5PhysicalMeasureGramContinuityExact.agda"
-  "PhysicalMeasureConvergenceData expectation convergence on selected Wilson tests"
-  unpaid
-  "The direct route still needs the literal finite measures/expectations to converge to the SAME continuum measure. R278 then derives connected-covariance convergence mechanically."
+  "YMClayLiteralWilsonP2ExpectationConvergenceExact.agda / R315 / R278"
+  "three selected Wilson expectation limits"
+  compilerOwned
+  "The three limits are now constructed from one PairwiseWilsonCylinderPresentation: R315 gives bounded left/right/product tests and R278.selectedExpectationConverges applies PhysicalMeasureConvergenceData to each. P2 has no independent convergence theorem after the same-carrier Wilson presentation and continuum measure data are available."
 
 connectedCovarianceLimit : ExactResidual
 connectedCovarianceLimit = exact-residual
@@ -175,10 +175,10 @@ h3ModeRatioSameCoordinateWeld = exact-residual
 sameOSCorrelationIdentification : ExactResidual
 sameOSCorrelationIdentification = exact-residual
   physicalSpectralIdentification
-  "YMClayLiteralWilsonRouteSThreeInputBoundaryExact.agda / RequestProject/YangMills/RouteS/Assembly.lean"
-  "OS spectral correlation of every vacuum-orthogonal state is bounded by the SAME continuum literal-Wilson covariance"
+  "YMClayLiteralWilsonP3SameOSCorrelationExact.agda / BalabanContinuumCovarianceSpectrumConstructorRound281Exact.agda"
+  "the exact R281 continuum-covariance spectrum is the spectrum of the actual OS-reconstructed Hamiltonian"
   unpaid
-  "This is physical input P3 of wilson_routeS_massGapConclusion. It is the canonical same-object Hamiltonian seam after the verified Lean terminal assembly; R300/R302/R331 are native Agda producer/compatibility routes for stronger decomposed semantics."
+  "The post-hoc covariance = connectedCorrelation equality has disappeared: R281 constructs connectedCorrelation directly from the selected continuum covariance, so the equality is refl. The remaining P3 theorem is only same-object spectral indexing to H_OS."
 
 halfRateSpectralTransfer : ExactResidual
 halfRateSpectralTransfer = exact-residual
