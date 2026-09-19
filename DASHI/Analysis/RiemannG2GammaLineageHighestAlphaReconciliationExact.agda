@@ -11,22 +11,19 @@ import DASHI.Analysis.RiemannG2GammaCandidateSourceLineageRecoveryExact as Candi
 ------------------------------------------------------------------------
 -- POST-RECOVERY GAMMA BIDI CUT
 --
--- The generic acquisition owner predates recovery of retained source history.
--- We now know one concrete source family:
+-- The vendored companion source now settles the historical identity question:
 --
---   LiteralWeilGammaConeBound.epsGamma
---   LiteralWeilGammaConeBound.gammaConeEnvelope
---     -> LiteralWeilTwoRadiusResidualEnvelope.abs_residualCone_le.
+--   PoleQuotientGammaBudget.exists_gamma_budget_linear_in_stripConst
+--     -> LiteralWeilGammaConeBound.gammaConeEnvelope.
 --
--- What remains unknown on THAT HISTORICAL REPAIR ROUTE is whether the reported
--- 8889 pole-quotient uniform Gamma producer is this exact source chain (or
--- another one). Precision-loss localization of the historical producer is
--- blocked until that same-consumer provenance edge is proved.
+-- Thus the epsGamma/gammaConeEnvelope chain IS the reported pole-quotient Gamma
+-- producer at source level.  Its own source also identifies the coarse scaling
+-- mechanism: stripConst contains the sample-test second-derivative L1 norm,
+-- which grows quadratically as the taper support shrinks.
 --
--- This is not a global prerequisite for the terminal RH consumer. A fresh,
--- theorem-bearing same-g_pole proof of the final Gamma allowance payment may be
--- constructed independently of the 8889 implementation. Historical identity is
--- required only before attributing/localising/repairing loss inside 8889.
+-- The historical repair route therefore begins at the localized strip/C2 norm
+-- estimate.  A fresh theorem-bearing same-g_pole proof remains an equally valid
+-- alternative final-consumer route.
 ------------------------------------------------------------------------
 
 data GammaHighestAlphaPayment : Set where
@@ -49,11 +46,11 @@ data PaymentState : Set where
 paymentState : GammaHighestAlphaPayment → PaymentState
 paymentState discoverAnyConcreteGammaSourceFamily = pruned
 paymentState recoverEpsGammaEnvelopeLineage = owned
-paymentState proveLineageIs8889PoleQuotientProducer = live
-paymentState recoverAlternate8889ProducerIfNot = live
-paymentState localizeFirstLossBeforeConsumerIdentity = blocked
-paymentState localizeFirstLossAfterConsumerIdentity = downstream
-paymentState repairIdentifiedLoss = downstream
+paymentState proveLineageIs8889PoleQuotientProducer = owned
+paymentState recoverAlternate8889ProducerIfNot = pruned
+paymentState localizeFirstLossBeforeConsumerIdentity = pruned
+paymentState localizeFirstLossAfterConsumerIdentity = owned
+paymentState repairIdentifiedLoss = live
 
 concreteSourceDiscoveryPruned :
   paymentState discoverAnyConcreteGammaSourceFamily ≡ pruned
@@ -63,13 +60,17 @@ candidateLineageOwned :
   paymentState recoverEpsGammaEnvelopeLineage ≡ owned
 candidateLineageOwned = refl
 
-sameConsumerIdentityLive :
-  paymentState proveLineageIs8889PoleQuotientProducer ≡ live
-sameConsumerIdentityLive = refl
+sameConsumerIdentityOwned :
+  paymentState proveLineageIs8889PoleQuotientProducer ≡ owned
+sameConsumerIdentityOwned = refl
 
-localizationBeforeIdentityBlocked :
-  paymentState localizeFirstLossBeforeConsumerIdentity ≡ blocked
-localizationBeforeIdentityBlocked = refl
+localizedHistoricalLossOwned :
+  paymentState localizeFirstLossAfterConsumerIdentity ≡ owned
+localizedHistoricalLossOwned = refl
+
+repairLocalizedHistoricalLossLive :
+  paymentState repairIdentifiedLoss ≡ live
+repairLocalizedHistoricalLossLive = refl
 
 candidateOwnerAgreesSourceFamilyRecovered :
   Candidate.concreteGammaSourceFamilyRecovered
@@ -78,11 +79,11 @@ candidateOwnerAgreesSourceFamilyRecovered =
   Candidate.concreteGammaSourceFamilyRecoveredIsTrue
     Candidate.canonicalGammaCandidateLineageBoundary
 
-candidateOwnerAgreesConsumerIdentityOpen :
+candidateOwnerAgreesConsumerIdentityRecovered :
   Candidate.exact8889ConsumerIdentityRecovered
-    Candidate.canonicalGammaCandidateLineageBoundary ≡ false
-candidateOwnerAgreesConsumerIdentityOpen =
-  Candidate.exact8889ConsumerIdentityRecoveredIsFalse
+    Candidate.canonicalGammaCandidateLineageBoundary ≡ true
+candidateOwnerAgreesConsumerIdentityRecovered =
+  Candidate.exact8889ConsumerIdentityRecoveredIsTrue
     Candidate.canonicalGammaCandidateLineageBoundary
 
 record GammaLineageHighestAlphaBoundary : Set where
@@ -97,12 +98,12 @@ record GammaLineageHighestAlphaBoundary : Set where
       concreteEpsGammaEnvelopeFamilyRecovered ≡ true
 
     sameConsumer8889ProvenanceStillRequired : Bool
-    sameConsumer8889ProvenanceStillRequiredIsTrue :
-      sameConsumer8889ProvenanceStillRequired ≡ true
+    sameConsumer8889ProvenanceStillRequiredIsFalse :
+      sameConsumer8889ProvenanceStillRequired ≡ false
 
-    sourcePrecisionLossLocalizationAdmissibleBeforeThatIdentity : Bool
-    sourcePrecisionLossLocalizationAdmissibleBeforeThatIdentityIsFalse :
-      sourcePrecisionLossLocalizationAdmissibleBeforeThatIdentity ≡ false
+    sourcePrecisionLossLocalizationRecovered : Bool
+    sourcePrecisionLossLocalizationRecoveredIsTrue :
+      sourcePrecisionLossLocalizationRecovered ≡ true
 
     sourceFreeStirlingOrDigammaGuessAdmissible : Bool
     sourceFreeStirlingOrDigammaGuessAdmissibleIsFalse :
@@ -118,11 +119,11 @@ canonicalGammaLineageHighestAlphaBoundary =
   gamma-lineage-highest-alpha-boundary
     false refl
     true refl
+    false refl
     true refl
     false refl
     false refl
-    false refl
-    "On the historical 8889-repair route, retained Zeta23 source history recovers a theorem-bearing epsGamma/gammaConeEnvelope lineage but not its identity with the 8889 pole-quotient producer. Recover that provenance edge, or the actual alternate producer, before localising loss inside 8889. This statement is route-local: it does not block an independently proved final same-g_pole Gamma allowance theorem. Source-free guesses may not be represented as historical precision-loss localisation. RH remains open."
+    "The exact vendored PoleQuotientGammaBudget source identifies the epsGamma/gammaConeEnvelope producer and localizes the coarse high-ordinate scaling at stripConst's second-derivative L1 term. Historical producer discovery is therefore paid. The live historical route is repair/bypass of that localized C2 taper-norm estimate; the fresh same-g_pole theorem route remains independently admissible. RH remains open."
 
 ------------------------------------------------------------------------
 -- FINAL-PAYMENT / HISTORICAL-REPAIR ROUTE SEPARATION
@@ -138,8 +139,9 @@ canonicalGammaLineageHighestAlphaBoundary =
 --     prove the final assigned allowance directly on the literal g_pole;
 --
 --   repairHistorical8889Producer
---     first identify the exact 8889 producer, then localise and repair its
---     precision loss until it instantiates the same final allowance interface.
+--     reuse the now-identified exact 8889 producer and repair/bypass its
+--     localized stripConst precision loss until it instantiates the same final
+--     allowance interface.
 --
 -- Provenance is mandatory for claims ABOUT the historical producer, not for an
 -- independent theorem whose carrier/consumer identity is proved directly.
@@ -224,4 +226,4 @@ canonicalFinalGammaRouteReconciliationBoundary =
     false refl
     false refl
     false refl
-    "The final Gamma consumer asks for a theorem on the literal universal pole taper with the assigned allowance; it does not ask for the identity of the historical 8889 implementation. Therefore a fresh same-g_pole theorem and a source-exact repair of 8889 are both live proof routes. The latter requires producer identity before any precision-loss attribution; the former requires direct carrier/taper/consumer identity instead. Neither route is completed here and RH remains open."
+    "The final Gamma consumer asks for a theorem on the literal universal pole taper with the assigned allowance; it does not ask for historical provenance. Both a fresh same-g_pole theorem and a source-exact repair of 8889 remain live. On the historical route the producer identity and first precision-loss localization are now source-recovered, so the remaining work is the sharp stripConst/C2 repair plus theorem replay/transport. Neither route is completed here and RH remains open."
