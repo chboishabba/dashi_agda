@@ -188,6 +188,21 @@ import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDCanonicalReconstructionExact
 import DASHI.Physics.Closure.NSCanonicalLiteralABCDInstanceExact
 
+-- Four-lane hard continuation.
+-- A: concrete continuous Fourier interaction objects plus high-shell and
+--    low-frequency product-level centered-resolvent mathematics.
+-- B: sharp squared Hermitian G2 path payment.
+-- C/D: released comparator shape/no-global consumer reconstruction and
+--      domain-specific Fourier representation targets.
+import DASHI.Physics.Closure.NSTriadKNEuclideanPhysicalFourierNSExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanCenteredResolventScaleRelativeExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanCenteredResolventLowFrequencyCompensationExact
+import DASHI.Physics.Closure.NSTriadKNR290HermitianG2SquaredCauchyExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedComparatorCanonicalShapeExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedComparatorCanonicalWitnessExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicFourierReconstructionExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedEuclideanFourierReconstructionExact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
