@@ -8,6 +8,9 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact as RouteSLean
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact as RouteS3
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP1FiniteClusteringExact as P1
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP2ExpectationConvergenceExact as P2
+import DASHI.Physics.YangMills.YMClayLiteralWilsonP3SameOSCorrelationExact as P3
 import DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact as LiteralLocal
 import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact as LiteralClosure
 import DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact as RouteSH2c
@@ -22,6 +25,7 @@ import DASHI.Physics.YangMills.YMClayLevel2R129CompositeTailAttachmentExact as D
 import DASHI.Physics.YangMills.YMClayLevel2D1PhysicalMinCutExact as D1
 import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as D2Compat
 import DASHI.Physics.YangMills.YMClayLevel2D2PhysicalMinCutExact as D2
+import DASHI.Physics.YangMills.YMClayLevel2D2TransportGeneratedRecurrenceExact as D2Generated
 import DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact as D3
 import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact as StrongF4
 import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact as Scale
@@ -407,6 +411,74 @@ routeSSameOSCorrelationStillPhysicalIsTrue :
   routeSSameOSCorrelationStillPhysical ≡ true
 routeSSameOSCorrelationStillPhysicalIsTrue =
   RouteS3.sameOSCorrelationIdentificationStillPhysicalIsTrue
+
+
+------------------------------------------------------------------------
+-- Theorem-proof reductions from the 2026-09-19 attack.
+------------------------------------------------------------------------
+
+routeSP1NeedsNewClusteringInequalityAfterR320 : Bool
+routeSP1NeedsNewClusteringInequalityAfterR320 =
+  P1.newFiniteClusteringInequalityRequiredAfterR320
+
+routeSP1NeedsNewClusteringInequalityAfterR320IsFalse :
+  routeSP1NeedsNewClusteringInequalityAfterR320 ≡ false
+routeSP1NeedsNewClusteringInequalityAfterR320IsFalse =
+  P1.newFiniteClusteringInequalityRequiredAfterR320IsFalse
+
+routeSP2ThreeExpectationLimitsIndependent : Bool
+routeSP2ThreeExpectationLimitsIndependent =
+  P2.threeExpectationLimitsIndependentPhysicalLeaves
+
+routeSP2ThreeExpectationLimitsIndependentIsFalse :
+  routeSP2ThreeExpectationLimitsIndependent ≡ false
+routeSP2ThreeExpectationLimitsIndependentIsFalse =
+  P2.threeExpectationLimitsIndependentPhysicalLeavesIsFalse
+
+routeSP3PostHocCovarianceCorrelationIdentityPhysical : Bool
+routeSP3PostHocCovarianceCorrelationIdentityPhysical =
+  P3.postHocCorrelationIdentityStillPhysical
+
+routeSP3PostHocCovarianceCorrelationIdentityPhysicalIsFalse :
+  routeSP3PostHocCovarianceCorrelationIdentityPhysical ≡ false
+routeSP3PostHocCovarianceCorrelationIdentityPhysicalIsFalse =
+  P3.postHocCorrelationIdentityStillPhysicalIsFalse
+
+routeSP3SameReconstructedHamiltonianSpectrumPhysical : Bool
+routeSP3SameReconstructedHamiltonianSpectrumPhysical =
+  P3.sameReconstructedHamiltonianSpectrumStillPhysical
+
+routeSP3SameReconstructedHamiltonianSpectrumPhysicalIsTrue :
+  routeSP3SameReconstructedHamiltonianSpectrumPhysical ≡ true
+routeSP3SameReconstructedHamiltonianSpectrumPhysicalIsTrue =
+  P3.sameReconstructedHamiltonianSpectrumStillPhysicalIsTrue
+
+d2IndependentPhysicalOneStepRecurrenceRequired : Bool
+d2IndependentPhysicalOneStepRecurrenceRequired =
+  D2Generated.independentPhysicalOneStepRecurrenceProofRequired
+
+d2IndependentPhysicalOneStepRecurrenceRequiredIsFalse :
+  d2IndependentPhysicalOneStepRecurrenceRequired ≡ false
+d2IndependentPhysicalOneStepRecurrenceRequiredIsFalse =
+  D2Generated.independentPhysicalOneStepRecurrenceProofRequiredIsFalse
+
+d2IndependentAFOneStepRecurrenceRequired : Bool
+d2IndependentAFOneStepRecurrenceRequired =
+  D2Generated.independentAFOneStepRecurrenceProofRequired
+
+d2IndependentAFOneStepRecurrenceRequiredIsFalse :
+  d2IndependentAFOneStepRecurrenceRequired ≡ false
+d2IndependentAFOneStepRecurrenceRequiredIsFalse =
+  D2Generated.independentAFOneStepRecurrenceProofRequiredIsFalse
+
+d2CommonUVNormalizationStillPhysical : Bool
+d2CommonUVNormalizationStillPhysical =
+  D2Generated.commonUVNormalizationStillPhysical
+
+d2CommonUVNormalizationStillPhysicalIsTrue :
+  d2CommonUVNormalizationStillPhysical ≡ true
+d2CommonUVNormalizationStillPhysicalIsTrue =
+  D2Generated.commonUVNormalizationStillPhysicalIsTrue
 
 f2PrimitiveResearchPayment : Bool
 f2PrimitiveResearchPayment = RouteG.f2PrimitiveResearchPayment
