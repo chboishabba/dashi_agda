@@ -51,11 +51,11 @@ ericTranslationObservedRegression :
   ≡ true
 ericTranslationObservedRegression = refl
 
-acmTranslationStillDebtRegression :
+acmTranslationObservedRegression :
   Translation.DatabaseTranslationBoundary.acmExactTranslationSyntaxObserved
     Translation.canonicalDatabaseTranslationBoundary
-  ≡ false
-acmTranslationStillDebtRegression = refl
+  ≡ true
+acmTranslationObservedRegression = refl
 
 translationDoesNotCreateExecutionReceiptRegression :
   Translation.ExactTranslationCreatesExecutionReceipt → ⊥
