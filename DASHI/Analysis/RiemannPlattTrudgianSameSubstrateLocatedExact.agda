@@ -18,6 +18,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
+import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannAnalyticLocatedHeightCarrierRealizationExact as Located
 import DASHI.Analysis.RiemannAnalyticLocatedLowCriticalityCompilerExact as Compile
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BishopComplex
@@ -34,11 +35,11 @@ record PlattTrudgianSameSubstrateLocatedVerification
   field
     verifiedLocatedZeroCritical :
       (rho :
-        DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact.AnalyticNontrivialZero analytic) →
+        Universal.AnalyticNontrivialZero analytic) →
       Located.LocatedVerifiedRegion
         (BishopAttachment.toBishopLocatedHeightAttachment carrier)
         rho →
-      DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact.analyticCritical rho
+      Universal.analyticCritical rho
 
     transportReference : String
 
