@@ -586,3 +586,31 @@ ERIC local/public API first
 ```
 
 This ordering is not an evidence/source-quality rank.
+
+
+## 22. Attempt-ledger to successful-execution bridge
+
+The repository now has a physical weld between the query-specific attempt/outcome ledger and the successful execution receipt required by `DigitalESDStructuredSearchExact`:
+
+`DASHI/Education/DigitalESDDatabaseExecutionStructuredSearchBridgeExact.agda`
+
+with RED-first regression:
+
+`DigitalESDDatabaseExecutionStructuredSearchBridgeRegression.agda`.
+
+The success discriminator is intentionally strict:
+
+```text
+execution attempt
++ exact search-surface match
++ querySubmitted = true
++ executedWithObservedResultSet
++ exportObserved
+-> StructuredSearch.DatabaseExecutionReceipt surface
+```
+
+Blocked-before-submission, authentication failure, interface failure, an observed count without a retained export, or a submitted query without an observed result set cannot cross this bridge.
+
+The existing Scopus Q1 blocked receipt and ERIC Q1 transport-failure receipt are explicitly used as negative witnesses.
+
+This closes the formal glue needed for a future successful local/API execution to enter the dependent structured-search chain. It does not create a successful execution, deduplication, screening or corpus admission in the current state.
