@@ -21,10 +21,10 @@ module DASHI.Physics.YangMills.BalabanFiniteBoundaryConditionedDobrushinExact wh
 
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; ∣_∣)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣; NonNegative; nonNegative)
+import Data.Rational.Properties as ℚP
 
-open import DASHI.Physics.YangMills.CompactLieProofLevel
-import DASHI.Physics.YangMills.BalabanFiniteDobrushinReopeningExact as Dobrushin
+open import DASHI.Physics.YangMills.CompactLieProofLevelimport DASHI.Physics.YangMills.BalabanFiniteDobrushinReopeningExact as Dobrushin
 import DASHI.Physics.YangMills.BalabanFiniteNormalizedWeightDobrushinExact as Normalize
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
@@ -43,8 +43,7 @@ record BoundaryConditionedFiniteFibre
 
     normalized : ∀ boundary →
       normalizer boundary
-      * DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRational
-          localStates (rawWeight boundary)
+      * Sums.sumRational localStates (rawWeight boundary)
       ≡ 1ℚ
 
 open BoundaryConditionedFiniteFibre public
@@ -169,18 +168,8 @@ relativeBoundaryInfluenceImpliesExpectationOscillation
     rowBound =
       relativeBoundaryInfluenceImpliesRowL1 influence
 
-    twoEpsilonNN : 0ℚ ≤ (1ℚ + 1ℚ) * epsilon influence
-    twoEpsilonNN =
-      let
-        twoNN : 0ℚ ≤ 1ℚ + 1ℚ
-        twoNN = DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact.baseBelowBasePlusRemainder
-          0ℚ (1ℚ + 1ℚ) (Data.Rational.Properties.+-mono-≤ Data.Rational.Properties.0≤1 Data.Rational.Properties.0≤1)
-      in
-      Norm.productNonnegative
-        (1ℚ + 1ℚ) (epsilon influence)
-        twoNN (epsilonNonnegative influence)
   in
-  Data.Rational.Properties.≤-trans raw
+  ℚP.≤-trans raw
     (Norm.scaleNonnegative majorant majorantNN rowBound)
 
 boundaryConditionedNormalizationStabilityLevel : ProofLevel
