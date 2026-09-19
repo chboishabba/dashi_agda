@@ -939,3 +939,92 @@ hard-code `candidate_only=true`, `semantic_promotion=false`,
 
 This matches the reused DASHI interop boundaries. No SLR/SensibLaw runtime code
 was modified by this Digital-ESD tranche.
+
+
+## 28. Sprint-2 SLR canonical evidence convergence + durable screening
+
+The Digital-ESD/SensibLaw bridge has been recut against the current production
+SLR authority rather than the pre-Sprint-2 Python source-unit shape.
+
+Reviewed SLR source:
+
+```text
+repo:   chboishabba/slr
+branch: agent/sprint2-canonical-evidence-convergence
+head:   6594899bfe38ce0892f4f7712fba554ba05d0d00
+```
+
+The source-written Rust M2.1/M2.2 carrier is mirrored in:
+
+`DASHI/Interop/SLRCanonicalEvidenceSubstrateExact.agda`
+
+with:
+
+```text
+EvidenceManifestation
+-> EvidenceSourceRevision
+-> EvidenceSpan(TextRange | StructuredCoordinate | WholeRevision)
+-> EvidenceObservation
+```
+
+The carrier is candidate-only and creates no semantic authority,
+applicability promotion or claim truth.
+
+The Digital-ESD full-text bridge now wraps that substrate rather than defining
+a parallel scholarly evidence ontology. The Python source-unit batch is retained
+only as a temporary execution adapter. Publication QIDs remain optional and are
+never invented.
+
+SLR M2.3 `SharedEvidenceReducer` is **not yet production-certified**; the SLR
+Sprint-2 board names it as the next structural min-cut. Digital-ESD records it
+as a future reducer target only.
+
+### Durable title/abstract screening
+
+New owner:
+
+`DASHI/Education/DigitalESDTitleAbstractScreeningExact.agda`
+
+with RED-first regression and local ledger compiler:
+
+`scripts/prepare_digital_esd_screening_ledger.py`
+
+Every deduplicated metadata record receives a durable append-only decision
+receipt retaining:
+
+```text
+source identity
+metadata revision/hash
+title+abstract snapshot hash
+rubric version/reference
+include | probable | exclude | unresolved
+reason codes
+reviewer/model/process reference
+timestamp
+explicit supersedes reference
+```
+
+Excluded and unresolved records remain in the ledger.
+
+The following remain distinct:
+
+```text
+metadata duplicate
+!= publication duplicate
+!= report-family duplicate
+!= same empirical study
+```
+
+and:
+
+```text
+screening decision
+!= source truth
+!= SourceAuditAdmission
+```
+
+The remote branch does not contain the 43,996-record deduplicated artifact, so
+this environment cannot honestly execute the actual screen. The next local
+execution is to run the ledger compiler over the retained exact artifact, then
+apply explicit review decisions as overlays while preserving every excluded and
+unresolved row.
