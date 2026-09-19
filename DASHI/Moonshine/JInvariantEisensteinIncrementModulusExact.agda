@@ -21,7 +21,7 @@ module DASHI.Moonshine.JInvariantEisensteinIncrementModulusExact where
 -- IsCauchy remain downstream.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; subst)
+open import Agda.Builtin.Equality using (_≡_; refl; subst; sym)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
@@ -96,7 +96,7 @@ scaleNatCModulusBound {C} {D} {F} T zero z =
       Real._≤_ (Real.real (Complex.realPackage C))
         value
         (Real.zero (Real.real (Complex.realPackage C))))
-    (modulusZero T)
+    (sym (modulusZero T))
     (leRefl T (Real.zero (Real.real (Complex.realPackage C))))
 scaleNatCModulusBound {C} {D} {F} T (suc n) z =
   leTrans T
