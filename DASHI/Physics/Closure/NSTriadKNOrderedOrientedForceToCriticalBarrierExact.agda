@@ -31,7 +31,7 @@ module DASHI.Physics.Closure.NSTriadKNOrderedOrientedForceToCriticalBarrierExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
