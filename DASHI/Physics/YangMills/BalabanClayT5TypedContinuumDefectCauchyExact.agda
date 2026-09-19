@@ -13,8 +13,9 @@ module DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyExact wher
 -- only as Set-valued names.  They cannot consume the rational dyadic theorem
 -- proved in BalabanClayT5ConfiguredDyadicTailSummationExact.
 --
--- This module strengthens exactly the two physical facts needed for the
--- quantitative continuum argument, on the SAME existing physical instance:
+-- This module isolates exactly the two physical facts needed for the
+-- quantitative continuum argument on one typed carrier.  It deliberately
+-- does not depend on the legacy Set-valued continuum-limit fields:
 --
 --   (1) |delta_k(O)| <= (1/4) 2^{-k};
 --   (2) E_k(O) - E_{k+N}(O) is exactly the signed finite defect sum.
@@ -48,28 +49,29 @@ advance : Nat → Nat → Nat
 advance start zero = start
 advance start (suc count) = advance (suc start) count
 
-record TypedContinuumDefectCauchyUpgrade (Observable : Set) : Set₁ where
+record TypedContinuumDefectCauchyData (Observable : Set) : Set₁ where
   field
-    legacy : Configured.PhysicalContinuumDefectInstance Observable
+    -- Canonical A3 carrier.  This deliberately does NOT contain the legacy
+    -- Set-valued continuumDefectLimitExists / finiteTailControls... fields.
+    expectation : Nat → Observable → ℚ
+    oneStepDefect : Nat → Observable → ℚ
 
-    -- This is the physically correct strengthening of the old signed upper
-    -- bound when the consumer is a metric/Cauchy theorem.
+    -- Physical A1 input in the form actually needed by a metric/Cauchy theorem.
     oneStepDefectAbsoluteBound :
       ∀ cutoff observable →
-      ∣ Configured.oneStepDefect legacy cutoff observable ∣
+      ∣ oneStepDefect cutoff observable ∣
       ≤ Tail.rootedShellTail cutoff
 
-    -- Same-object typed replacement for the old Set-valued telescoping name.
+    -- Narrow remaining A3 physical seam: exact same-observable telescoping.
     telescopingExpectationDifferenceExact :
       ∀ start count observable →
-      Configured.expectation legacy start observable
-        - Configured.expectation legacy (advance start count) observable
+      expectation start observable
+        - expectation (advance start count) observable
       ≡ Sum.defectPartial
-          (λ cutoff →
-            Configured.oneStepDefect legacy cutoff observable)
+          (λ cutoff → oneStepDefect cutoff observable)
           start count
 
-open TypedContinuumDefectCauchyUpgrade public
+open TypedContinuumDefectCauchyData public
 
 ------------------------------------------------------------------------
 -- Absolute finite defect sum.
@@ -77,11 +79,11 @@ open TypedContinuumDefectCauchyUpgrade public
 
 absoluteDefectPartialBelowFiniteDyadicTail :
   ∀ {Observable} →
-  (dataSet : TypedContinuumDefectCauchyUpgrade Observable) →
+  (dataSet : TypedContinuumDefectCauchyData Observable) →
   ∀ start count observable →
   ∣ Sum.defectPartial
       (λ cutoff →
-        Configured.oneStepDefect (legacy dataSet) cutoff observable)
+        oneStepDefect dataSet cutoff observable)
       start count ∣
   ≤ Configured.finiteDyadicTail start count
 absoluteDefectPartialBelowFiniteDyadicTail dataSet start zero observable
@@ -90,10 +92,10 @@ absoluteDefectPartialBelowFiniteDyadicTail dataSet start zero observable
 absoluteDefectPartialBelowFiniteDyadicTail dataSet start (suc count) observable =
   ℚP.≤-trans
     (ℚP.∣p+q∣≤∣p∣+∣q∣
-      (Configured.oneStepDefect (legacy dataSet) start observable)
+      (oneStepDefect dataSet start observable)
       (Sum.defectPartial
         (λ cutoff →
-          Configured.oneStepDefect (legacy dataSet) cutoff observable)
+          oneStepDefect dataSet cutoff observable)
         (suc start) count))
     (ℚP.+-mono-≤
       (oneStepDefectAbsoluteBound dataSet start observable)
@@ -102,11 +104,11 @@ absoluteDefectPartialBelowFiniteDyadicTail dataSet start (suc count) observable 
 
 absoluteDefectPartialBelowInfiniteMajorant :
   ∀ {Observable} →
-  (dataSet : TypedContinuumDefectCauchyUpgrade Observable) →
+  (dataSet : TypedContinuumDefectCauchyData Observable) →
   ∀ start count observable →
   ∣ Sum.defectPartial
       (λ cutoff →
-        Configured.oneStepDefect (legacy dataSet) cutoff observable)
+        oneStepDefect dataSet cutoff observable)
       start count ∣
   ≤ Configured.configuredInfiniteTailMajorant start
 absoluteDefectPartialBelowInfiniteMajorant dataSet start count observable =
@@ -121,11 +123,11 @@ absoluteDefectPartialBelowInfiniteMajorant dataSet start count observable =
 
 expectationDifferenceBelowFiniteDyadicTail :
   ∀ {Observable} →
-  (dataSet : TypedContinuumDefectCauchyUpgrade Observable) →
+  (dataSet : TypedContinuumDefectCauchyData Observable) →
   ∀ start count observable →
-  ∣ Configured.expectation (legacy dataSet) start observable
+  ∣ expectation dataSet start observable
       - Configured.expectation
-          (legacy dataSet) (advance start count) observable ∣
+          (dataSet) (advance start count) observable ∣
   ≤ Configured.finiteDyadicTail start count
 expectationDifferenceBelowFiniteDyadicTail dataSet start count observable =
   subst
@@ -139,11 +141,11 @@ expectationDifferenceBelowFiniteDyadicTail dataSet start count observable =
 
 expectationCauchyModulus :
   ∀ {Observable} →
-  (dataSet : TypedContinuumDefectCauchyUpgrade Observable) →
+  (dataSet : TypedContinuumDefectCauchyData Observable) →
   ∀ start count observable →
-  ∣ Configured.expectation (legacy dataSet) start observable
+  ∣ expectation dataSet start observable
       - Configured.expectation
-          (legacy dataSet) (advance start count) observable ∣
+          (dataSet) (advance start count) observable ∣
   ≤ Configured.configuredInfiniteTailMajorant start
 expectationCauchyModulus dataSet start count observable =
   trans
@@ -157,18 +159,18 @@ expectationCauchyModulus dataSet start count observable =
 
 ExpectationHasConfiguredCauchyModulus :
   ∀ {Observable} →
-  TypedContinuumDefectCauchyUpgrade Observable →
+  TypedContinuumDefectCauchyData Observable →
   Observable → Set
 ExpectationHasConfiguredCauchyModulus dataSet observable =
   ∀ start count →
-  ∣ Configured.expectation (legacy dataSet) start observable
+  ∣ expectation dataSet start observable
       - Configured.expectation
-          (legacy dataSet) (advance start count) observable ∣
+          (dataSet) (advance start count) observable ∣
   ≤ Configured.configuredInfiniteTailMajorant start
 
 expectationHasConfiguredCauchyModulus :
   ∀ {Observable} →
-  (dataSet : TypedContinuumDefectCauchyUpgrade Observable) →
+  (dataSet : TypedContinuumDefectCauchyData Observable) →
   ∀ observable →
   ExpectationHasConfiguredCauchyModulus dataSet observable
 expectationHasConfiguredCauchyModulus dataSet observable =
