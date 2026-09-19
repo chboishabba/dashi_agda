@@ -13,6 +13,7 @@ import DASHI.Interop.SLRBoundedResearchIterationControlExact as Iteration
 import DASHI.Interop.SLRWorldModelSuiteConvergenceRoadmapExact as Suite
 import DASHI.Interop.SLRGWBPhysicalObjectAcquisitionPolicyExact as Physical
 import DASHI.Interop.SLRSprint1AcquisitionMachineExact as Sprint1
+import DASHI.Interop.SLRSprint2CanonicalEvidenceConvergenceExact as Sprint2
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact as External
 
 ------------------------------------------------------------------------
@@ -72,14 +73,14 @@ productionRoadmap : List CapabilitySprint
 productionRoadmap =
     capabilitySprint
       "1"
-      active
+      paid
       "recurrent acquisition machine: residual -> producer plan -> bounded physical acquisition -> candidate evidence -> review/payment -> fresh world -> re-diagnosis"
-      "M1.1-M1.5 implemented; exact Rust runtime receipt, persisted campaign replay and exact Agda kernel receipt required before closure"
+      "M1.1-M1.5 certified with exact Rust tests, live PostgreSQL replay and exact-head Agda kernel receipt"
   ∷ capabilitySprint
       "2"
-      next
+      active
       "canonical evidence convergence across world, legal-authority and narrative acquisition"
-      "one manifestation/source-revision/span/observation substrate replays exact provenance across producer families"
+      "M2.1 canonical manifestation envelope is source-written; M2.2-M2.5 remain the active convergence cut"
   ∷ capabilitySprint
       "3"
       next
@@ -210,3 +211,7 @@ externalOntologyAnchor = External.canonicalExternalOntologyPolicy
 
 sprint1Anchor : Sprint1.Sprint1ExitGate
 sprint1Anchor = Sprint1.currentSprint1ExitGate
+
+
+sprint2Anchor : Sprint2.Sprint2ExitGate
+sprint2Anchor = Sprint2.currentSprint2ExitGate
