@@ -249,8 +249,5 @@ screeningBoundaryAnchor = Screen.canonicalScreeningBoundary
 searchAuditBoundaryAnchor : Audit.SearchAuditWeldBoundary
 searchAuditBoundaryAnchor = Audit.canonicalSearchAuditWeldBoundary
 
-slrReviewBoundaryAnchor : SLR.SLRSourceReviewBoundary
-slrReviewBoundaryAnchor = SLR.canonicalSLRSourceReviewBoundary
-
 situatedObserverBoundaryAnchor : Situated.SituatedObserverBoundary
 situatedObserverBoundaryAnchor = Situated.canonicalSituatedObserverBoundary
