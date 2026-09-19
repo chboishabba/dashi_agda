@@ -25,6 +25,7 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact as CostFactor
 import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact as SelfReduce
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SATSearch
+import DASHI.Mathematics.Complexity.PolynomialClassicalObserverExact as PolyObserver
 import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 import DASHI.Crypto.ShorFactoring as Shor
 import DASHI.ComputerScience.ShorOrderClassicalQuantumMachineComparisonExact as Comparison
@@ -236,6 +237,7 @@ record PvsNPRSAQuantumCrossPollinationBoundary : Set where
     explicitSeamCompatibilityInfrastructurePresent : Bool
     costAwareFactorisationCompilerPresent : Bool
     decisionToSearchSelfReductionEnginePresent : Bool
+    sizedPolynomialClassicalObserverCarrierPresent : Bool
 
     genericCookLevinCNFPolynomialityPaid : Bool
     booleanFormulaSATSelfReductionInstantiationPaid : Bool
@@ -250,7 +252,7 @@ canonicalPvsNPRSAQuantumCrossPollinationBoundary :
 canonicalPvsNPRSAQuantumCrossPollinationBoundary =
   pvsnp-rsa-quantum-crosspollination-boundary
     true true true true true true true
-    true true
+    true true true
     false true false false false
 
 classicalPvsNPStillOpen :
@@ -269,6 +271,12 @@ decisionSearchEngineNowPaid :
     canonicalPvsNPRSAQuantumCrossPollinationBoundary
   ≡ true
 decisionSearchEngineNowPaid = refl
+
+sizedPolynomialObserverCarrierNowPaid :
+  sizedPolynomialClassicalObserverCarrierPresent
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+sizedPolynomialObserverCarrierNowPaid = refl
 
 genericCookLevinStillOpen :
   genericCookLevinCNFPolynomialityPaid
