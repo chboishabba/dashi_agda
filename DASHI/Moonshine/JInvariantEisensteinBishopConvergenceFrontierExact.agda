@@ -171,7 +171,7 @@ canonicalEisensteinBishopConvergenceFrontier :
 canonicalEisensteinBishopConvergenceFrontier =
   eisenstein-bishop-convergence-frontier
     true true true true true
-    true true true true true true true true false true true false
+    true true true true true true false true true false
     false
     false false false false
     false false
