@@ -18,6 +18,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (map; _++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -86,9 +87,15 @@ foldPairListAppend cutoff contribution (pair ∷ rest) right
   with Physical.modeWithinCutoff cutoff
     (Z3.addMode (Cube.first pair) (Cube.second pair))
 ... | true =
-    cong
-      (contribution (Physical.pairTriad pair) +_)
-      (foldPairListAppend cutoff contribution rest right)
+    trans
+      (cong
+        (contribution (Physical.pairTriad pair) +_)
+        (foldPairListAppend cutoff contribution rest right))
+      (solve
+        ( contribution (Physical.pairTriad pair)
+        ∷ foldPairList cutoff contribution rest
+        ∷ foldPairList cutoff contribution right
+        ∷ [] ))
 ... | false =
     foldPairListAppend cutoff contribution rest right
 
