@@ -14,6 +14,7 @@ module DASHI.Mathematics.Complexity.CookLevinPolynomialSizeExact where
 -- obligations independently of the remaining semantic placement theorem.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; _*_)
 open import Agda.Builtin.List using (List)
 
@@ -81,18 +82,18 @@ replicatedLocalClauseCountPolynomial representation template =
 record CookLevinPolynomialSizeBoundary : Set where
   constructor cook-levin-polynomial-size-boundary
   field
-    polynomialGridSizePaid : Agda.Builtin.Bool.Bool
-    polynomialVariableCountPaid : Agda.Builtin.Bool.Bool
-    fixedTemplatePolynomialClauseCountPaid : Agda.Builtin.Bool.Bool
-    windowVariablePlacementSemanticsPaid : Agda.Builtin.Bool.Bool
-    fullCookLevinReductionPaid : Agda.Builtin.Bool.Bool
+    polynomialGridSizePaid : Bool
+    polynomialVariableCountPaid : Bool
+    fixedTemplatePolynomialClauseCountPaid : Bool
+    windowVariablePlacementSemanticsPaid : Bool
+    fullCookLevinReductionPaid : Bool
 
 canonicalCookLevinPolynomialSizeBoundary :
   CookLevinPolynomialSizeBoundary
 canonicalCookLevinPolynomialSizeBoundary =
   cook-levin-polynomial-size-boundary
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.false
+    true
+    true
+    true
+    false
+    false
