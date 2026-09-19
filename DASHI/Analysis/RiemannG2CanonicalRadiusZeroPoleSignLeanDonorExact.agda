@@ -45,8 +45,8 @@ currentCanonicalRadiusZeroPoleSignLeanReceipt =
     "agent/rh-farshell-quartic-bypass"
     "Imported/Zeta23Bridge/Zeta23Bridge/LiteralWeilEvenChannelTaper.lean"
     "Synthesis/RiemannCanonicalTaperRadiusZeroPoleSign.lean"
-    "4a797c8a795f5d5b5f200b032c806382bd1d639c"
-    "ff430008db582c32ab9e012434022b9fcead8764"
+    "b171d9143affc74a209f661b1a2942bd3b8fa11e"
+    "f57816aaea83f739d1af13f419e2085e15f635cd"
 
 record CanonicalRadiusZeroPoleSignBoundary : Set where
   constructor canonical-radius-zero-pole-sign-boundary
