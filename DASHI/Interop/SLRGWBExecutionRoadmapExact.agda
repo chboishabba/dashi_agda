@@ -102,12 +102,12 @@ gwbSLRRoadmap =
   ∷ gwbRoadmapCoordinate "snapshot-first P31/P279 provider seam + governed live fallback" implementedAwaitingRuntime
     "SLR PR #28: TieredTypeClosureProvider; explicit immutable snapshot reference; paced/retried revision-pinned live fallback"
     "runtime verification plus physically bounded HF selection remain before transport closure"
-  ∷ gwbRoadmapCoordinate "physical-object-bounded HF classification fast path" active
-    "specialised P31/P279 slice -> nodeRouteIndex general fallback -> physical-object dedupe/coalescing -> at most five distinct cold remote objects -> transport receipt"
-    "logical QID concurrency is not the bound; transport must remain semantically non-authoritative"
-  ∷ gwbRoadmapCoordinate "generic residual-family -> producer-plan scheduler convergence" next
-    "reuse ConsumerRequirementV2 / residual planner / route selector / executor / reviewed evidence payment across multiple producer families"
-    "one scheduler ABI must replace GWB-specific control logic before broader provider expansion"
+  ∷ gwbRoadmapCoordinate "physical-object-bounded HF classification fast path" implementedAwaitingRuntime
+    "Sprint 1 physical plan/transport ABI: specialised P31/P279 slice -> route-aware general snapshot -> physical-object dedupe/coalescing -> at most five distinct cold objects per batch -> deterministic transport receipt"
+    "exact runtime receipt still required; logical QID concurrency is not the bound and transport remains semantically non-authoritative"
+  ∷ gwbRoadmapCoordinate "generic residual-family -> producer-plan scheduler convergence" implementedAwaitingRuntime
+    "Sprint1ProducerController reuses existing ProducerFamily and fail-closed candidate evidence across classification, identity/source and authority/source"
+    "exact runtime campaign must demonstrate the three families through one controller/review boundary before certification"
   ∷ gwbRoadmapCoordinate "reviewed world-state -> typed legal-issue projection" next
     "ReviewedObservation -> EventCandidate -> reviewed Event -> ClaimEvent/element evidence; pinned source -> Provision -> WrongElementRequirement"
     "event/harm/ontology class/source presence cannot create wrong, legal category, applicability or satisfied element"
