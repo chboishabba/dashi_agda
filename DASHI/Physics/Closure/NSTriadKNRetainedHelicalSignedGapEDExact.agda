@@ -36,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
 import DASHI.Physics.Closure.NSTriadKNMHDRadiusReciprocalToNormalizedDirectionRound464Exact as R464
 import DASHI.Physics.Closure.NSTriadKNPhysicalHHAndNestedRadiusCompilerRound468Exact as R468
@@ -101,7 +102,7 @@ module PhysicalRetainedGap
 
   retainedRadiusBelowSquare :
     (mode : Z3.FourierMode) →
-    (member : mode Cube.∈ Field30.Audit.modes system) →
+    (member : mode Cube.∈ Audit.modes system) →
     radius mode ≤ squareRadius mode
   retainedRadiusBelowSquare mode member =
     radiusBelowSquareFromUnitGap
@@ -130,8 +131,8 @@ module PhysicalRetainedGap
 
   plusPlusGapBelowSquares :
     (p q : Z3.FourierMode) →
-    (pMember : p Cube.∈ Field30.Audit.modes system) →
-    (qMember : q Cube.∈ Field30.Audit.modes system) →
+    (pMember : p Cube.∈ Audit.modes system) →
+    (qMember : q Cube.∈ Audit.modes system) →
     radius q - radius p ≤ squareRadius p + squareRadius q
   plusPlusGapBelowSquares p q pMember qMember =
     let
@@ -162,8 +163,8 @@ module PhysicalRetainedGap
 
   minusMinusGapBelowSquares :
     (p q : Z3.FourierMode) →
-    (pMember : p Cube.∈ Field30.Audit.modes system) →
-    (qMember : q Cube.∈ Field30.Audit.modes system) →
+    (pMember : p Cube.∈ Audit.modes system) →
+    (qMember : q Cube.∈ Audit.modes system) →
     (- radius q) - (- radius p) ≤ squareRadius p + squareRadius q
   minusMinusGapBelowSquares p q pMember qMember =
     subst
@@ -195,8 +196,8 @@ module PhysicalRetainedGap
 
   minusPlusGapBelowSquares :
     (p q : Z3.FourierMode) →
-    (pMember : p Cube.∈ Field30.Audit.modes system) →
-    (qMember : q Cube.∈ Field30.Audit.modes system) →
+    (pMember : p Cube.∈ Audit.modes system) →
+    (qMember : q Cube.∈ Audit.modes system) →
     radius q - (- radius p) ≤ squareRadius p + squareRadius q
   minusPlusGapBelowSquares p q pMember qMember =
     let
@@ -212,11 +213,15 @@ module PhysicalRetainedGap
         (ℚP.+-comm (squareRadius q) (squareRadius p))
         summed)
 
+  caseSign : Helical.HelicitySign → ℚ → ℚ
+  caseSign Helical.plus r = r
+  caseSign Helical.minus r = - r
+
   signedGapBelowSquares :
     (signP signQ : Helical.HelicitySign) →
     (p q : Z3.FourierMode) →
-    (pMember : p Cube.∈ Field30.Audit.modes system) →
-    (qMember : q Cube.∈ Field30.Audit.modes system) →
+    (pMember : p Cube.∈ Audit.modes system) →
+    (qMember : q Cube.∈ Audit.modes system) →
     let signedP =
           caseSign signP (radius p)
         signedQ =
@@ -231,7 +236,3 @@ module PhysicalRetainedGap
   signedGapBelowSquares Helical.minus Helical.minus p q pMember qMember =
     minusMinusGapBelowSquares p q pMember qMember
 
-  where
-  caseSign : Helical.HelicitySign → ℚ → ℚ
-  caseSign Helical.plus r = r
-  caseSign Helical.minus r = - r
