@@ -138,6 +138,56 @@ voorheisCandidate = mkEligibilityFrameCandidate
   "Same-object frame-comparison donor: an administrative education-record source can have high aggregate coverage while still under-covering particular subgroups. Aggregate frame coverage therefore cannot silently stand in for subgroup coverage."
   "The analysed National Student Clearinghouse extract is geographically/temporally constrained and the source itself does not establish the full-current-NSC coverage state or a Digital-ESD intervention effect."
 
+
+
+------------------------------------------------------------------------
+-- Dynarski / Hemelt / Hyman 2015: subgroup-specific administrative coverage.
+------------------------------------------------------------------------
+
+dynarskiHemeltHymanSource : Attr.AttributedSource
+dynarskiHemeltHymanSource = Attr.mkDOISource
+  "Susan M. Dynarski; Steven W. Hemelt; Joshua M. Hyman"
+  "The Missing Manual: Using National Student Clearinghouse Data to Track Postsecondary Outcomes"
+  "Educational Evaluation and Policy Analysis 37(1_suppl):53S-79S"
+  "2015"
+  "10.3102/0162373715576078"
+  "https://doi.org/10.3102/0162373715576078"
+  Attr.academicArticleSource
+  "Empirical/methodological study of National Student Clearinghouse coverage. It estimates coverage by state, institution type and demographic subgroup, reports lower coverage for some minority and for-profit-college populations, and discusses suppressed records and matching errors as additional sources of noncoverage."
+  Attr.publicAttribution
+
+dynarskiHemeltHymanCandidate : EligibilityFrameCandidate
+dynarskiHemeltHymanCandidate = mkEligibilityFrameCandidate
+  dynarskiHemeltHymanSource
+  administrativeFrameSubgroupUndercoverage
+  "Independent subgroup-undercoverage donor: high aggregate administrative coverage can coexist with lower coverage for specific institution and demographic groups, so aggregate frame adequacy cannot recover subgroup frame adequacy."
+  "Source-specific NSC coverage analysis; it does not establish the current coverage state of every administrative education system, nor a Digital-ESD intervention effect."
+
+
+
+------------------------------------------------------------------------
+-- Creagh 2016: category construction can erase within-category difference.
+------------------------------------------------------------------------
+
+creaghLBOTESource : Attr.AttributedSource
+creaghLBOTESource = Attr.mkDOISource
+  "Sue Creagh"
+  "A critical analysis of the Language Background Other Than English (LBOTE) category in the Australian national testing system: a Foucauldian perspective"
+  "Journal of Education Policy 31(3):275-289"
+  "2016"
+  "10.1080/02680939.2015.1066870"
+  "https://doi.org/10.1080/02680939.2015.1066870"
+  Attr.academicArticleSource
+  "Australian national-testing analysis of the LBOTE statistical category. The source argues that aggregating heterogeneous students under LBOTE can homogenise variation and obscure the relation between language background and test performance."
+  Attr.publicAttribution
+
+creaghLBOTECandidate : EligibilityFrameCandidate
+creaghLBOTECandidate = mkEligibilityFrameCandidate
+  creaghLBOTESource
+  administrativeCategoryPreclusionOmission
+  "Independent category-construction donor: inclusion in an administrative/statistical category does not guarantee that the category preserves distinctions needed by a downstream equity or pedagogy consumer."
+  "Foucauldian/source-bounded analysis of the Australian LBOTE category; it does not establish one universal category ontology, one causal educational effect, or that every use of an aggregate language category is invalid."
+
 ------------------------------------------------------------------------
 -- Clutterbuck / Hardy / Creagh 2023 issue, 2021 online: OneSchool omissions.
 ------------------------------------------------------------------------
@@ -163,7 +213,13 @@ clutterbuckCandidate = mkEligibilityFrameCandidate
 
 canonicalEligibilityFrameAcquisitionFrontier : List EligibilityFrameCandidate
 canonicalEligibilityFrameAcquisitionFrontier =
-  ncverCandidate ∷ qilt2022Candidate ∷ voorheisCandidate ∷ clutterbuckCandidate ∷ []
+  ncverCandidate
+  ∷ qilt2022Candidate
+  ∷ voorheisCandidate
+  ∷ dynarskiHemeltHymanCandidate
+  ∷ creaghLBOTECandidate
+  ∷ clutterbuckCandidate
+  ∷ []
 
 ------------------------------------------------------------------------
 -- Reuse the theorem-bearing frame owner without transferring source authority.
