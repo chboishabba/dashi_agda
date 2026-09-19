@@ -724,3 +724,86 @@ S_{h_r}(t,0) carries a^2    OPEN
 The existing oscillatory/curvature/far-shell machinery gives magnitude decay and summability, not this sign.
 
 Do not use the explicit-formula balance to turn the favourable pole sign into the strict payment; that would cross the balance-free firewall.
+
+### Centered near sign + quantitative taper — 2026-09-20
+
+The centered Off lane is now substantially sharper.
+
+On the exact final near carrier, companion Lean source proves:
+
+```text
+h_r(u)=g(u)(cos(r u)-1) <= 0
+
+|delta| Lambda <= pi/2
+  -> reflectionPairResponse(h_r,delta) <= 0
+
+J Lambda <= pi/2
+  -> finiteNearCore(h_r,J) <= 0.
+```
+
+Therefore the finite signed near core is not a positive analytic risk inside the cosine window. Combining with the final near/far theorem gives:
+
+```text
+Off_{h_r}(t,0)
+  <= explicit far remainder.
+```
+
+The pair curvature is now explicit:
+
+```text
+C_pair(g,Lambda,r)
+ = 4 cosh(Lambda/2) r^2 *
+   [ (Lambda^2/2) M2
+     + (2 Lambda + Lambda^2/2) M1
+     + (1 + Lambda + Lambda^2/2) M0 ].
+```
+
+For |t|>=18 and canonical support, the natural cutoff
+
+```text
+J=floor(|t|/9)
+```
+
+satisfies
+
+```text
+1<=J
+J Lambda<=pi/2
+|t|/18<=J
+```
+
+and yields an explicit far-shell upper.
+
+A fixed-template quantitative taper has also been source-written. It replaces the opaque variable-radius bump norms by exact affine scaling:
+
+```text
+M0(scaled bump) = R M0*
+M1(scaled bump) = M1*
+M2(scaled bump) = R^-1 M2*
+```
+
+with factor-two symmetrisation bounds. The canonical two-window quantitative taper uses one common template, has a positive uniformly bounded pole-cancelling mixing coefficient, kills the selected-radius pole, and owns explicit M0/M1/M2 upper bounds.
+
+DIAGNOSTIC CONSEQUENCE:
+
+```text
+R ~ 1/t
+M0 ~ 1/t
+M1 ~ 1
+M2 ~ t
+```
+
+so the current two-integration-by-parts absolute curvature route is not, by itself, the uniform a^2 prize-facing closure. This reinforces the signed/global route rather than invalidating the centered work.
+
+Current analytic classification:
+
+```text
+finite centered near core              one-sided / source-written
+centered Off far-only reduction        source-written
+explicit curvature and cutoff          source-written
+quantitative canonical taper           source-written
+absolute far magnitude                 diagnostic
+global centered complement sign        OPEN
+Gamma centered sign / cancellation     OPEN
+own-a^2 correction alternative         OPEN
+```
