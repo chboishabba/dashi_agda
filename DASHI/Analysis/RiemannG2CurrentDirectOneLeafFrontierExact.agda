@@ -37,6 +37,7 @@ import DASHI.Analysis.RiemannG2InverseSquareCoefficientR2TargetExact as R2Rate
 import DASHI.Analysis.RiemannG2Vendored8889SourceAuditExact as R28889
 import DASHI.Analysis.RiemannG2BaselineExcessR2TargetExact as R2Baseline
 import DASHI.Analysis.RiemannG2DisplacementAdaptiveFarShellLeanDonorExact as R2FarAdaptive
+import DASHI.Analysis.RiemannG2AdaptiveCutoffCrossingCompatibilityLeanDonorExact as R2CutoffCompat
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -448,6 +449,21 @@ baselineExcessIsCanonicalR2AcquisitionShape :
   R2Baseline.BaselineExcessR2Boundary.sharedBaselinePrimitive
     R2Baseline.canonicalBaselineExcessR2Boundary ≡ true
 baselineExcessIsCanonicalR2AcquisitionShape = refl
+
+adaptiveCutoffCrossingAndFarAccuracyCompatible :
+  R2CutoffCompat.AdaptiveCutoffCrossingBoundary.crossingAndFarAccuracyAsymptoticallyCompatible
+    R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ true
+adaptiveCutoffCrossingAndFarAccuracyCompatible = refl
+
+adaptiveNaturalCutoffExistenceSourceWritten :
+  R2CutoffCompat.AdaptiveCutoffCrossingBoundary.genericNaturalCutoffExistenceSourceWritten
+    R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ true
+adaptiveNaturalCutoffExistenceSourceWritten = refl
+
+adaptiveExactFinalCarrierCutoffTransportStillOpen :
+  R2CutoffCompat.AdaptiveCutoffCrossingBoundary.exactFinalCarrierCutoffTransportPaid
+    R2CutoffCompat.canonicalAdaptiveCutoffCrossingBoundary ≡ false
+adaptiveExactFinalCarrierCutoffTransportStillOpen = refl
 
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
