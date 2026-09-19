@@ -185,10 +185,6 @@ centeredResolventSecondOrderMagnitudeEnvelope
 
     twoHSquareNN : 0ℚ ≤ two * h * h
     twoHSquareNN =
-      let
-        first = Moment.productNonnegative two h twoNonnegative
-          (ℚP.≤-trans (ℚP.≤-refl {x = 0ℚ}) (Rational.squareNonnegative h))
-      in
       subst
         (0ℚ ≤_)
         (solve (two ∷ h ∷ []))
