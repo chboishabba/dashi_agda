@@ -23,8 +23,9 @@ module DASHI.Physics.Closure.NSTriadKNSignedNetworkToLiteralR406CriticalSliceExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using
-  (ℚ; Positive; NonNegative; nonNegative; _+_; _*_; _≤_)
+  (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; nonNegative; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -175,8 +176,8 @@ module LiteralR406SignedNetwork
     ∀ {N T R terminal cutoff}
       (initialCritical terminalCritical criticalDissipation
        integratedSignedProduction viscousCoefficient absorbedCoefficient : ℚ) →
-    initialCritical + viscousCoefficient * criticalDissipation
-      ≤ terminalCritical + integratedSignedProduction →
+    terminalCritical + viscousCoefficient * criticalDissipation
+      ≤ initialCritical + integratedSignedProduction →
     SignedNetworkLiteralPayment
       N T R terminal cutoff
       integratedSignedProduction criticalDissipation absorbedCoefficient →
