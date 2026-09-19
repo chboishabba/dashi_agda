@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 import DASHI.Education.DigitalESDDatabaseExecutionReceiptExact as Exec
 import DASHI.Education.DigitalESDDatabaseTranslatedQueriesExact as Queries
 
-executionReceiptCountRegression : Exec.executionReceiptCount ≡ 21
+executionReceiptCountRegression : Exec.executionReceiptCount ≡ 35
 executionReceiptCountRegression = refl
 
 scopusExecutionAttemptedRegression :
@@ -81,3 +81,24 @@ ericTranslatedQueryIdentityRegression :
   Exec.DatabaseExecutionReceipt.translatedQuery Exec.ericQ1Execution
   ≡ Queries.ericQ1DigitalEducationESD
 ericTranslatedQueryIdentityRegression = refl
+
+
+ieeeExecutionAttemptedRegression :
+  Exec.DatabaseExecutionReceipt.executionAttempted Exec.ieeeQ1Execution ≡ true
+ieeeExecutionAttemptedRegression = refl
+
+acmExecutionAttemptedRegression :
+  Exec.DatabaseExecutionReceipt.executionAttempted Exec.acmQ1Execution ≡ true
+acmExecutionAttemptedRegression = refl
+
+ieeeInterfaceFailureBeforeSubmissionRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.ieeeQ1Execution
+  ≡ Exec.interfaceFailureBeforeSubmission
+      "current web transport could not retrieve an IEEE Xplore search-result page for the submitted URL"
+ieeeInterfaceFailureBeforeSubmissionRegression = refl
+
+acmInterfaceFailureBeforeSubmissionRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.acmQ1Execution
+  ≡ Exec.interfaceFailureBeforeSubmission
+      "current web transport could not retrieve an ACM Digital Library search-result page for the submitted URL"
+acmInterfaceFailureBeforeSubmissionRegression = refl
