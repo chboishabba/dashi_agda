@@ -132,3 +132,6 @@ import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact
 import DASHI.Moonshine.C3FourierConjugationExact
 import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact
+
+import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldExact
+import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldValidation
