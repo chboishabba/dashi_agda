@@ -41,9 +41,11 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 --     metric pairing.
 --
 -- The remaining D3 theorem is precisely the representation/convergence weld
--- showing that the finite Ward charge/current from that generated-action family
--- is the finite representative whose continuum limit is the recovered stress
--- pairing.
+-- showing that the perturbation-indexed finite Ward charge/current from that
+-- generated-action family is the finite representative whose continuum limit is
+-- the recovered stress pairing.  The finite-to-continuum scalar map is allowed
+-- to depend on cutoff/depth: the physical theorem is iota_k(Q_k[h]) -> deltaS[h],
+-- not one universal scalar coercion applied to every cutoff.
 ------------------------------------------------------------------------
 
 record ContinuumWardTransport
@@ -70,10 +72,13 @@ record ContinuumWardTransport
     (recovery : R136.UnifiedGeneratedActionSectorRecovery scaleWeld)
     : Set₁ where
   field
-    finiteWardChargeAt : Nat → Ward.LatticeStressWardCharge
+    finiteWardChargeAt :
+      Domain.MetricPerturbation
+        (R134.presentCutCanonicalMetricDomain metricInputs) →
+      Nat → Ward.LatticeStressWardCharge
 
-    wardChargeToPairingScalar :
-      ℚ → StressRep.PairingScalar representation
+    wardChargeToPairingScalarAt :
+      Nat → ℚ → StressRep.PairingScalar representation
 
     -- The finite Ward charge is attached to the SAME generated-action stress
     -- family rather than to an unrelated conserved lattice current.
@@ -93,8 +98,8 @@ record ContinuumWardTransport
         (R134.presentCutCanonicalMetricDomain metricInputs) perturbation →
       Converges
         (λ depth →
-          wardChargeToPairingScalar
-            (Ward.chargeAfter (finiteWardChargeAt depth)))
+          wardChargeToPairingScalarAt depth
+            (Ward.chargeAfter (finiteWardChargeAt perturbation depth)))
         (R131.continuumSectorFirstVariation
           (R136.asCommonMetricReadyBalabanSectorRecovery recovery)
           perturbation)
@@ -111,11 +116,12 @@ finiteSliceChargeConservationAlreadyCompilerOwned :
       {metricInputs = metricInputs} {representation = representation}
       {C = C} {S = S} {Y = Y} {group = group}
       {lane = lane} {scaleWeld = scaleWeld} recovery) →
-  ∀ depth →
-  Ward.chargeAfter (finiteWardChargeAt transport depth)
-    - Ward.chargeBefore (finiteWardChargeAt transport depth) ≡ 0ℚ
-finiteSliceChargeConservationAlreadyCompilerOwned transport depth =
-  Ward.sliceChargeDifferenceZero (finiteWardChargeAt transport depth)
+  ∀ perturbation depth →
+  Ward.chargeAfter (finiteWardChargeAt transport perturbation depth)
+    - Ward.chargeBefore (finiteWardChargeAt transport perturbation depth) ≡ 0ℚ
+finiteSliceChargeConservationAlreadyCompilerOwned transport perturbation depth =
+  Ward.sliceChargeDifferenceZero
+    (finiteWardChargeAt transport perturbation depth)
 
 ------------------------------------------------------------------------
 -- Frontier classification.
@@ -137,6 +143,20 @@ generatedActionStressProvenanceNewPhysicalTheoremInD3IsFalse = refl
 
 finiteToContinuumSameCurrentTransportStillPhysical : Bool
 finiteToContinuumSameCurrentTransportStillPhysical = true
+
+perturbationIndependentWardChargeSequenceWouldBeTooWeak : Bool
+perturbationIndependentWardChargeSequenceWouldBeTooWeak = true
+
+perturbationIndependentWardChargeSequenceWouldBeTooWeakIsTrue :
+  perturbationIndependentWardChargeSequenceWouldBeTooWeak ≡ true
+perturbationIndependentWardChargeSequenceWouldBeTooWeakIsTrue = refl
+
+cutoffIndependentChargeRepresentationMapRequired : Bool
+cutoffIndependentChargeRepresentationMapRequired = false
+
+cutoffIndependentChargeRepresentationMapRequiredIsFalse :
+  cutoffIndependentChargeRepresentationMapRequired ≡ false
+cutoffIndependentChargeRepresentationMapRequiredIsFalse = refl
 
 finiteToContinuumSameCurrentTransportStillPhysicalIsTrue :
   finiteToContinuumSameCurrentTransportStillPhysical ≡ true
