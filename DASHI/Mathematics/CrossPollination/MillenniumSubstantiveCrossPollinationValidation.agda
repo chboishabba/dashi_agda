@@ -27,6 +27,7 @@ import DASHI.Mathematics.Arithmetic.EllipticCurveHodgeFrobeniusCrossPollination
 import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact
 import DASHI.Mathematics.Complexity.PolynomialReductionExact
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary
+import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationValidation
 
 import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact
 import DASHI.Mathematics.NumberTheory.RiemannCompletedZetaBoundary
