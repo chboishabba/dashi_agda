@@ -2,7 +2,7 @@
 module DASHI.Physics.YangMills.BalabanFiniteRGReopeningDobrushinExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; ∣_∣)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; ∣_∣)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
@@ -79,22 +79,14 @@ reopeningTransportOscillationBelowEnvelope :
 reopeningTransportOscillationBelowEnvelope
     {step = step}
     rowEnvelope observable majorant majorantNN bounded distance =
-  let
-    base =
-      reopeningTransportOscillationBelowRowL1
-        step observable majorant majorantNN bounded _ _
-  in
-  ℚP.≤-trans base
-    (Dobrushin.transportOscillationBelowEnvelope
-      (record
-        { Dobrushin.DobrushinRowEnvelope.envelope =
-            envelope rowEnvelope
-        ; Dobrushin.DobrushinRowEnvelope.rowDistanceBelowEnvelope =
-            rowL1BelowEnvelope rowEnvelope
-        })
-      observable majorant majorantNN bounded distance)
-  where
-  import Data.Rational.Properties as ℚP
+  Dobrushin.transportOscillationBelowEnvelope
+    (record
+      { Dobrushin.DobrushinRowEnvelope.envelope =
+          envelope rowEnvelope
+      ; Dobrushin.DobrushinRowEnvelope.rowDistanceBelowEnvelope =
+          rowL1BelowEnvelope rowEnvelope
+      })
+    observable majorant majorantNN bounded distance
 
 finiteRGReopeningDobrushinSameObjectLevel : ProofLevel
 finiteRGReopeningDobrushinSameObjectLevel = machineChecked
