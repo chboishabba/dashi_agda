@@ -9,6 +9,8 @@ import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact as L
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP1FiniteClusteringExact as P1
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP2ExpectationConvergenceExact as P2
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP3SameOSCorrelationExact as P3
+import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact as S2Product
+import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as S2
 
 ------------------------------------------------------------------------
 -- LITERAL WILSON ROUTE-S: EXACT THREE-PHYSICAL-INPUT BOUNDARY
@@ -207,6 +209,72 @@ routeSIndependentPhysicalPaymentsAfterAgdaReduction = true
 routeSIndependentPhysicalPaymentsAfterAgdaReductionIsTrue :
   routeSIndependentPhysicalPaymentsAfterAgdaReduction ≡ true
 routeSIndependentPhysicalPaymentsAfterAgdaReductionIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- S2 canonical-carrier reduction.
+------------------------------------------------------------------------
+
+s2DecodeWilsonProductEqualityIndependent : Bool
+s2DecodeWilsonProductEqualityIndependent =
+  S2Product.independentDecodeToWilsonProductEqualityRequired
+
+s2DecodeWilsonProductEqualityIndependentIsFalse :
+  s2DecodeWilsonProductEqualityIndependent ≡ false
+s2DecodeWilsonProductEqualityIndependentIsFalse =
+  S2Product.independentDecodeToWilsonProductEqualityRequiredIsFalse
+
+s2TranslatedWilsonProductEqualityIndependent : Bool
+s2TranslatedWilsonProductEqualityIndependent =
+  S2Product.independentTranslatedWilsonProductEqualityRequired
+
+s2TranslatedWilsonProductEqualityIndependentIsFalse :
+  s2TranslatedWilsonProductEqualityIndependent ≡ false
+s2TranslatedWilsonProductEqualityIndependentIsFalse =
+  S2Product.independentTranslatedWilsonProductEqualityRequiredIsFalse
+
+s2WilsonT5MultiplicationWeldIndependent : Bool
+s2WilsonT5MultiplicationWeldIndependent =
+  S2.independentWilsonT5MultiplicationWeldRequired
+
+s2WilsonT5MultiplicationWeldIndependentIsFalse :
+  s2WilsonT5MultiplicationWeldIndependent ≡ false
+s2WilsonT5MultiplicationWeldIndependentIsFalse =
+  S2.independentWilsonT5MultiplicationWeldRequiredIsFalse
+
+s2WilsonBoundPredicateWeldIndependent : Bool
+s2WilsonBoundPredicateWeldIndependent =
+  S2.independentWilsonBoundPredicateWeldRequired
+
+s2WilsonBoundPredicateWeldIndependentIsFalse :
+  s2WilsonBoundPredicateWeldIndependent ≡ false
+s2WilsonBoundPredicateWeldIndependentIsFalse =
+  S2.independentWilsonBoundPredicateWeldRequiredIsFalse
+
+s2LiteralLoopBoundednessStillPhysical : Bool
+s2LiteralLoopBoundednessStillPhysical = S2.literalLoopBoundednessStillPhysical
+
+s2LiteralLoopBoundednessStillPhysicalIsTrue :
+  s2LiteralLoopBoundednessStillPhysical ≡ true
+s2LiteralLoopBoundednessStillPhysicalIsTrue =
+  S2.literalLoopBoundednessStillPhysicalIsTrue
+
+s2BoundedMultiplicationClosureStillPhysical : Bool
+s2BoundedMultiplicationClosureStillPhysical =
+  S2.boundedObservableMultiplicationClosureStillPhysical
+
+s2BoundedMultiplicationClosureStillPhysicalIsTrue :
+  s2BoundedMultiplicationClosureStillPhysical ≡ true
+s2BoundedMultiplicationClosureStillPhysicalIsTrue =
+  S2.boundedObservableMultiplicationClosureStillPhysicalIsTrue
+
+s2IdentityBoundednessStillPhysical : Bool
+s2IdentityBoundednessStillPhysical = S2.identityObservableBoundednessStillPhysical
+
+s2IdentityBoundednessStillPhysicalIsTrue :
+  s2IdentityBoundednessStillPhysical ≡ true
+s2IdentityBoundednessStillPhysicalIsTrue =
+  S2.identityObservableBoundednessStillPhysicalIsTrue
 
 ------------------------------------------------------------------------
 -- Cross-prover authority boundary.
