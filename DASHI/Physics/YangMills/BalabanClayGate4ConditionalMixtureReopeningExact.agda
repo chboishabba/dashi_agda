@@ -21,6 +21,7 @@ open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact as Integral
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact as T
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact as PhysicalT
 import DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationExact as Preferred
@@ -50,7 +51,7 @@ record Gate4SlowFieldProbabilityLaw
       0ℚ ≤ slowWeight slow
 
     slowWeightNormalized :
-      DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRational
+      Sums.sumRational
         slowStates slowWeight
       ≡ 1ℚ
 
