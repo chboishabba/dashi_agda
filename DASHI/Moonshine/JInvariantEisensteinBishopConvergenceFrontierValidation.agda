@@ -111,6 +111,11 @@ genericSetoidComplexQuotientRingWeldIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 genericSetoidComplexQuotientRingWeldIsOwned = refl
 
+fastCauchySetQuotientComplexCompatibilityCompilerIsOwned :
+  P.fastCauchySetQuotientComplexCompatibilityCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+fastCauchySetQuotientComplexCompatibilityCompilerIsOwned = refl
+
 concreteLegacyQuotientStillUnpaid :
   P.concreteLegacyQuotientInhabited
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
