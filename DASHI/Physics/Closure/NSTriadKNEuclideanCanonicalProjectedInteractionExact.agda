@@ -34,6 +34,9 @@ import DASHI.Physics.Closure.NSTriadKNEuclideanBishopLerayPythagorasExact as Ler
 import DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalLerayProjectionExact as CanonicalLeray
 import DASHI.Physics.Closure.NSTriadKNEuclideanProjectedInteractionQWeldExact as Weld
 
+-- A simpler definitionally transparent constructor.  Keeping the meaning
+-- fields at reflexive propositions avoids assigning independent authority to
+-- formulas that are already the definitions of the canonical interaction.
 canonicalProjectedInteraction :
   ∀ {S : Canonical.CanonicalNSSemantics} →
   (trajectory : Physical.EuclideanFourierTrajectory S) →
@@ -43,64 +46,6 @@ canonicalProjectedInteraction :
   Canonical.Time →
   Physical.EuclideanProjectedInteraction trajectory
 canonicalProjectedInteraction trajectory point interaction outputExact time =
-  let
-    uEta =
-      Physical.velocityHat trajectory time (Euclidean.eta interaction)
-    uZeta =
-      Physical.velocityHat trajectory time (Euclidean.zeta interaction)
-    raw =
-      Output.divergenceFormRawCell
-        (Heat.frequency point)
-        uEta uZeta
-    projected =
-      Leray.lerayProject
-        (Heat.frequency point)
-        (CanonicalLeray.canonicalLerayInverse point)
-        raw
-  in
-  record
-    { Physical.interaction = interaction
-    ; Physical.time = time
-    ; Physical.uEta = uEta
-    ; Physical.uEtaExact = refl
-    ; Physical.uZeta = uZeta
-    ; Physical.uZetaExact = refl
-    ; Physical.rawConvolutionCell = raw
-    ; Physical.lerayProjectedCell = projected
-    ; Physical.RawInteractionMeaning =
-        Physical.rawConvolutionCell
-          (record
-            { Physical.interaction = interaction
-            ; Physical.time = time
-            ; Physical.uEta = uEta
-            ; Physical.uEtaExact = refl
-            ; Physical.uZeta = uZeta
-            ; Physical.uZetaExact = refl
-            ; Physical.rawConvolutionCell = raw
-            ; Physical.lerayProjectedCell = projected
-            ; Physical.RawInteractionMeaning = raw ≡ raw
-            ; Physical.LerayProjectionMeaning = projected ≡ projected
-            ; Physical.rawInteractionExact = refl
-            ; Physical.lerayProjectionExact = refl
-            })
-        ≡ raw
-    ; Physical.LerayProjectionMeaning = projected ≡ projected
-    ; Physical.rawInteractionExact = refl
-    ; Physical.lerayProjectionExact = refl
-    }
-
--- A simpler definitionally transparent constructor.  Keeping the meaning
--- fields at reflexive propositions avoids assigning independent authority to
--- formulas that are already the definitions of the canonical interaction.
-canonicalProjectedInteractionDirect :
-  ∀ {S : Canonical.CanonicalNSSemantics} →
-  (trajectory : Physical.EuclideanFourierTrajectory S) →
-  (point : Heat.PuncturedEuclideanFrequency) →
-  (interaction : Euclidean.EuclideanInteraction) →
-  Euclidean.xi interaction ≡ Heat.frequency point →
-  Canonical.Time →
-  Physical.EuclideanProjectedInteraction trajectory
-canonicalProjectedInteractionDirect trajectory point interaction outputExact time =
   let
     uEta =
       Physical.velocityHat trajectory time (Euclidean.eta interaction)
@@ -140,7 +85,7 @@ canonicalProjectedInteractionFormulaWeld :
     (time : Canonical.Time) →
   Weld.ProjectedInteractionFormulaWeld
     point
-    (canonicalProjectedInteractionDirect
+    (canonicalProjectedInteraction
       trajectory point interaction outputExact time)
 canonicalProjectedInteractionFormulaWeld outputExact time =
   record
