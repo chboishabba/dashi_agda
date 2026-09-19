@@ -231,7 +231,7 @@ module PhysicalComponentED
               (C3.complexMultiply scalar
                 (C3.hermitianPairing3 PX PX))
             ≡ d * C3.real (C3.hermitianPairing3 PX PX))
-          (deltaComplexMeaning signP signQ p q)
+          (sym (deltaComplexMeaning signP signQ p q))
           scaled)
         (cong (d *_) selfNorm))
 
