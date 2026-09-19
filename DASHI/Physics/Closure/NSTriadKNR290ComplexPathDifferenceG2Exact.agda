@@ -134,7 +134,7 @@ complexPathDifferenceBound plus minus R =
         Path.pathStepCount (realPath R) * Path.pathGradientEnergy (realPath R)
         +
         Path.pathStepCount (imagPath R) * Path.pathGradientEnergy (imagPath R))
-    (complexDifferenceNormSplit plus minus)
+    (sym (complexDifferenceNormSplit plus minus))
     (subst
       (λ left →
         left
