@@ -16,6 +16,7 @@ import DASHI.Moonshine.JInvariantBishopLatticeEisensteinKernelExact
 import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneLatticeDenominatorExact
 import DASHI.Moonshine.JInvariantPuncturedLatticeReindexExact
 import DASHI.Moonshine.JInvariantPuncturedLatticeSquareShellExact
+import DASHI.Moonshine.JInvariantPuncturedLatticeSquareShellRadiusExact
 import DASHI.Moonshine.JInvariantBishopLatticeDenominatorCoercivityExact
 import DASHI.Moonshine.JInvariantBishopPuncturedLatticeEisensteinCompilerExact
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact
@@ -85,7 +86,7 @@ canonicalBishopLatticeEisensteinAbsoluteConvergenceFrontier = record
   ; denominatorCoordinateIdentitiesExact = true
   ; divisionFreeLatticeCoercivityExact = true
 
-  ; squareShellRadiusSquareLowerBoundExact = false
+  ; squareShellRadiusSquareLowerBoundExact = true
   ; reciprocalPowerShellMajorantExact = false
   ; finiteShellAbsoluteFoldDominationExact = false
   ; bishopBaselBackendAlreadyOwned = true
@@ -95,5 +96,5 @@ canonicalBishopLatticeEisensteinAbsoluteConvergenceFrontier = record
   ; qSeriesEqualsNormalizedLatticeE4E6 = false
   ; qSeriesModularityCompilerReady = true
 
-  ; firstResidual = missingSquareShellRadiusSquareLowerBound
+  ; firstResidual = missingCoercivityToReciprocalPowerMajorant
   }
