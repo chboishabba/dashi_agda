@@ -333,13 +333,13 @@ rawCellAtZeroOutputVanishes uEta uZeta =
       in complex-equivalent
         (solve 2
           (λ r i →
-            BishopReal.0ℝ ⊗ r - BishopReal.0ℝ ⊗ i
+            BishopReal.0ℝ ⊗ r ⊖ BishopReal.0ℝ ⊗ i
             ⊜ BishopReal.0ℝ)
           BishopP.≃-refl
           (Physical.realPart z) (Physical.imaginaryPart z))
         (solve 2
           (λ r i →
-            BishopReal.0ℝ ⊗ i + BishopReal.0ℝ ⊗ r
+            BishopReal.0ℝ ⊗ i ⊕ BishopReal.0ℝ ⊗ r
             ⊜ BishopReal.0ℝ)
           BishopP.≃-refl
           (Physical.realPart z) (Physical.imaginaryPart z))
