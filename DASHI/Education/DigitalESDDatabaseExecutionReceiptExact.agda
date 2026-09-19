@@ -211,12 +211,12 @@ acmEntrypoint = "https://dl.acm.org/action/doSearch"
 ieeeInterfaceFailureOutcome : ExecutionOutcome
 ieeeInterfaceFailureOutcome =
   interfaceFailureBeforeSubmission
-    "current web transport could not retrieve an IEEE Xplore search-result page for the submitted URL"
+    "current web transport could not retrieve an IEEE Xplore search-result page for the query-bearing URL"
 
 acmInterfaceFailureOutcome : ExecutionOutcome
 acmInterfaceFailureOutcome =
   interfaceFailureBeforeSubmission
-    "current web transport could not retrieve an ACM Digital Library search-result page for the submitted URL"
+    "current web transport could not retrieve an ACM Digital Library search-result page for the query-bearing URL"
 
 ieeeInterfaceFailureExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
 ieeeInterfaceFailureExecution q = database-execution-receipt
@@ -242,20 +242,34 @@ acmInterfaceFailureExecution q = database-execution-receipt
   "ChatGPT web retrieval environment; exact ACM translation available, live search-result retrieval inaccessible"
   "attempt receipt only: no observed result page, count, export, deduplication, screening, eligibility or evidence payment is created"
 
+ieeeQ1Execution : DatabaseExecutionReceipt
 ieeeQ1Execution = ieeeInterfaceFailureExecution Queries.ieeeQ1DigitalEducationESD
+ieeeQ2Execution : DatabaseExecutionReceipt
 ieeeQ2Execution = ieeeInterfaceFailureExecution Queries.ieeeQ2Transformation
+ieeeQ3Execution : DatabaseExecutionReceipt
 ieeeQ3Execution = ieeeInterfaceFailureExecution Queries.ieeeQ3ReflexiveSustainability
+ieeeQ4Execution : DatabaseExecutionReceipt
 ieeeQ4Execution = ieeeInterfaceFailureExecution Queries.ieeeQ4LifecycleCircularity
+ieeeQ5Execution : DatabaseExecutionReceipt
 ieeeQ5Execution = ieeeInterfaceFailureExecution Queries.ieeeQ5ParticipantGovernance
+ieeeQ6Execution : DatabaseExecutionReceipt
 ieeeQ6Execution = ieeeInterfaceFailureExecution Queries.ieeeQ6LongitudinalInstitutional
+ieeeQ7Execution : DatabaseExecutionReceipt
 ieeeQ7Execution = ieeeInterfaceFailureExecution Queries.ieeeQ7OpenInteroperableRepairable
 
+acmQ1Execution : DatabaseExecutionReceipt
 acmQ1Execution = acmInterfaceFailureExecution Queries.acmQ1DigitalEducationESD
+acmQ2Execution : DatabaseExecutionReceipt
 acmQ2Execution = acmInterfaceFailureExecution Queries.acmQ2Transformation
+acmQ3Execution : DatabaseExecutionReceipt
 acmQ3Execution = acmInterfaceFailureExecution Queries.acmQ3ReflexiveSustainability
+acmQ4Execution : DatabaseExecutionReceipt
 acmQ4Execution = acmInterfaceFailureExecution Queries.acmQ4LifecycleCircularity
+acmQ5Execution : DatabaseExecutionReceipt
 acmQ5Execution = acmInterfaceFailureExecution Queries.acmQ5ParticipantGovernance
+acmQ6Execution : DatabaseExecutionReceipt
 acmQ6Execution = acmInterfaceFailureExecution Queries.acmQ6LongitudinalInstitutional
+acmQ7Execution : DatabaseExecutionReceipt
 acmQ7Execution = acmInterfaceFailureExecution Queries.acmQ7OpenInteroperableRepairable
 
 canonicalExecutionReceipts : List DatabaseExecutionReceipt
