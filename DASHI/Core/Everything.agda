@@ -175,3 +175,5 @@ import DASHI.Core.PortableInteractiveViewExact
 import DASHI.Core.PortableLoopInterpretationExact
 import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
 import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
+
+import DASHI.Core.EmancipatoryVocabularyRelationalGrammarNoncollapseExact
