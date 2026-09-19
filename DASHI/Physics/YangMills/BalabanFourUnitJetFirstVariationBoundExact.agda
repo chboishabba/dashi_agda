@@ -5,7 +5,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; ∣_∣; NonNegative; Positive; nonNegative; positive)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _<_; ∣_∣; NonNegative; Positive; nonNegative; positive)
+open import Data.Sum.Base using (inj₁; inj₂)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -197,8 +198,8 @@ squareBelowOneImpliesAbsoluteBelowOne :
   ∣ value ∣ ≤ 1ℚ
 squareBelowOneImpliesAbsoluteBelowOne value squareBound
   with ℚP.≤-total ∣ value ∣ 1ℚ
-... | Data.Sum.Base.inj₁ already = already
-... | Data.Sum.Base.inj₂ oneBelow =
+... | inj₁ already = already
+... | inj₂ oneBelow =
   let
     absoluteSquareBound : ∣ value ∣ * ∣ value ∣ ≤ 1ℚ * 1ℚ
     absoluteSquareBound =
@@ -214,15 +215,23 @@ squareBelowOneImpliesAbsoluteBelowOne value squareBound
     instance
       absPositive : Positive ∣ value ∣
       absPositive = positive absolutePositive
+    oneNonnegative : 0ℚ ≤ 1ℚ
+    oneNonnegative = ℚP.nonNegative⁻¹ 1ℚ
+
+    instance
+      oneNN : NonNegative 1ℚ
+      oneNN = nonNegative oneNonnegative
+
+    lowerProduct : 1ℚ * 1ℚ ≤ 1ℚ * ∣ value ∣
+    lowerProduct = ℚP.*-monoˡ-≤-nonNeg 1ℚ oneBelow
+
     mixed : ∣ value ∣ * ∣ value ∣ ≤ ∣ value ∣ * 1ℚ
     mixed =
       ℚP.≤-trans absoluteSquareBound
-        (let
-          instance
-            oneNN : NonNegative 1ℚ
-            oneNN = nonNegative (ℚP.nonNegative⁻¹ 1ℚ)
-         in
-         ℚP.*-monoˡ-≤-nonNeg 1ℚ oneBelow)
+        (subst
+          (λ upper → 1ℚ * 1ℚ ≤ upper)
+          (ℚP.*-comm 1ℚ ∣ value ∣)
+          lowerProduct)
   in
   ℚP.*-cancelˡ-≤-pos ∣ value ∣ mixed
 
@@ -246,18 +255,33 @@ fourAtomScalarSumAbsoluteBelowFour :
   ∣ a2 ∣ ≤ 1ℚ → ∣ a3 ∣ ≤ 1ℚ →
   ∣ a0 + (a1 + (a2 + a3)) ∣ ≤ (+ 4 / 1)
 fourAtomScalarSumAbsoluteBelowFour a0 a1 a2 a3 b0 b1 b2 b3 =
-  ℚP.≤-trans
-    (ℚP.∣p+q∣≤∣p∣+∣q∣ a0 (a1 + (a2 + a3)))
-    (ℚP.+-mono-≤ b0
-      (ℚP.≤-trans
-        (ℚP.∣p+q∣≤∣p∣+∣q∣ a1 (a2 + a3))
-        (ℚP.+-mono-≤ b1
-          (ℚP.≤-trans
-            (ℚP.∣p+q∣≤∣p∣+∣q∣ a2 a3)
-            (subst
-              (λ value → ∣ a2 ∣ + ∣ a3 ∣ ≤ value)
-              (sym (ℚRing.solve []))
-              (ℚP.+-mono-≤ b2 b3))))))
+  let
+    triangle0 =
+      ℚP.∣p+q∣≤∣p∣+∣q∣ a0 (a1 + (a2 + a3))
+    triangle1 =
+      ℚP.∣p+q∣≤∣p∣+∣q∣ a1 (a2 + a3)
+    triangle2 =
+      ℚP.∣p+q∣≤∣p∣+∣q∣ a2 a3
+    inner :
+      ∣ a2 + a3 ∣ ≤ 1ℚ + 1ℚ
+    inner = ℚP.≤-trans triangle2 (ℚP.+-mono-≤ b2 b3)
+    middle :
+      ∣ a1 + (a2 + a3) ∣ ≤ 1ℚ + (1ℚ + 1ℚ)
+    middle =
+      ℚP.≤-trans triangle1
+        (ℚP.+-mono-≤ b1 inner)
+    raw :
+      ∣ a0 + (a1 + (a2 + a3)) ∣
+      ≤ 1ℚ + (1ℚ + (1ℚ + 1ℚ))
+    raw =
+      ℚP.≤-trans triangle0
+        (ℚP.+-mono-≤ b0 middle)
+  in
+  subst
+    (λ upper →
+      ∣ a0 + (a1 + (a2 + a3)) ∣ ≤ upper)
+    (ℚRing.solve [])
+    raw
 
 fourUnitJetWilsonFirstVariationAbsoluteBelowFour :
   ∀ j0 j1 j2 j3 →
