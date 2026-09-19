@@ -23,6 +23,12 @@ import DASHI.Analysis.ContractiveCompartmentTailValidation
 import DASHI.Analysis.ContractiveCompartmentTailExact
 import DASHI.Analysis.BishopContractiveCompartmentSeriesValidation
 import DASHI.Analysis.BishopContractiveCompartmentSeriesExact
+import DASHI.Analysis.BishopConvergentDoubleTailValidation
+import DASHI.Analysis.BishopConvergentDoubleTailExact
+import DASHI.Analysis.BishopVanishingDifferenceConvergenceValidation
+import DASHI.Analysis.BishopVanishingDifferenceConvergenceExact
+import DASHI.Analysis.BishopFirstOrderRateDiscreteContractionValidation
+import DASHI.Analysis.BishopFirstOrderRateDiscreteContractionExact
 
 -- Canonical RH direct-route representation / optional harmonic refinement.
 import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact
