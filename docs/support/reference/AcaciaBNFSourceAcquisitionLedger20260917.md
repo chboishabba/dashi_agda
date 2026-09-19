@@ -94,6 +94,11 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1071/EA05290` — Thomson, Cameron, Dalal & Hoult 2007; northern-Australian semiarid-subtropical Vertisol legume-residue experiment. The source reports first-order residue-N release over a 17-week experiment, with `k = 0.045-0.325 week^-1` and half-times `2.1-15.4 weeks` at 23 C. Retained as a source-bounded **residue-mineralisation kinetic-shape** receipt. The k range is not one universal rate; glasshouse kinetics are not field kinetics; residue mineralisation is not living-root transfer; and the finite fitted first-order law is not promoted to infinite-horizon tail authority or directly to a Bishop discrete ratio.
 - `10.1016/j.jenvman.2022.114748` — Liddicoat et al. 2022; quantitative soil-eDNA rehabilitation-trajectory assessment across Huntly, Eneabba and Worsley mine-rehabilitation chronosequences. Supporting data/code deposit exposes Huntly 2-29 years, Eneabba 7-38 years and Worsley 2-28 years. The deposited dataset records CC-BY reuse; the public `liddic/resto_traj` code repository declares MIT. Article, dataset and code licensing/authority remain separate. The source is a quantitative age-indexed **chronosequence** data surface, not repeated same-plot longitudinal increments or whole-ecosystem state.
 
+
+### High-priority acquisition target not yet promoted
+
+- GRDC Grains Research Update, Goondiwindi, 3 March 2026 — Thi Thanh Hai Nguyen, Michael Bell, Chelsea Janke & Alwyn Williams, *Residue-derived nitrogen recovery from above and below ground legume residues under contrasting fallow durations*. Public GRDC metadata identifies this as a North-region/UQ Gatton update paper explicitly about above- and below-ground legume residues, contrasting fallow durations and residue-derived N recovery. The accessible index did **not** expose the quantitative results during this pass, so DASHI records it only as an acquisition target. No effect size, recovery fraction, kinetic rate, same-object kernel, below-ground transfer mechanism, or fertilizer-replacement proposition is attributed until the paper/proceedings results are retrieved and parsed.
+
 ## Nitrogenase / situated-protein donors
 
 - `10.1146/annurev.biochem.78.070907.103812` — PMID `19489731`, PMCID `PMC2814439`
