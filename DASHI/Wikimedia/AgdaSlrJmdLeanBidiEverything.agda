@@ -52,10 +52,12 @@ open import DASHI.Wikimedia.MaboP7d5RuntimeLaunchReadinessExact public
 open import DASHI.Wikimedia.MaboConsumerResidualDiagnosisExact public
 open import DASHI.Wikimedia.Mabo100HopReviewedCampaignExact public
 open import DASHI.Wikimedia.MaboCampaignScopedNoveltyExact public
+open import DASHI.Wikimedia.MaboAdaptiveHeterogeneousTrajectoryExact public
 
 import DASHI.Wikimedia.MaboConsumerResidualDiagnosisValidation
 import DASHI.Wikimedia.Mabo100HopReviewedCampaignValidation
 import DASHI.Wikimedia.MaboCampaignScopedNoveltyValidation
+import DASHI.Wikimedia.MaboAdaptiveHeterogeneousTrajectoryValidation
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
 import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact
 import DASHI.Wikimedia.MaboResidualDrivenWorldExpansionStepExact
