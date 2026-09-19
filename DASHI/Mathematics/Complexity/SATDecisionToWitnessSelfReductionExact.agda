@@ -15,8 +15,9 @@ module DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 record BinarySelfReduction : Set₁ where
   field
@@ -97,36 +98,25 @@ recoverWitness reduction oracle {zero} node satisfiable = record
 recoverWitness reduction oracle {suc remaining} node satisfiable
     with decide oracle (chooseFalse reduction node)
 ... | true =
-  let nextSat =
-        sound oracle
-          (chooseFalse reduction node)
-          refl
-      recursive =
+  let recursive =
         recoverWitness reduction oracle
           (chooseFalse reduction node)
-          nextSat
+          (sound oracle (chooseFalse reduction node) refl)
   in record
       { terminal = terminal recursive
       ; witness = witness recursive
       ; decisionQueries = suc (decisionQueries recursive)
-      ; exactQueryCount =
-          cong-suc (exactQueryCount recursive)
+      ; exactQueryCount = cong suc (exactQueryCount recursive)
       }
-  where
-    cong-suc : ∀ {left right} → left ≡ right → suc left ≡ suc right
-    cong-suc refl = refl
 ... | false with satisfiableSplits reduction node satisfiable
-... | inj₁ falseSat =
-  contradiction
+...   | inj₁ falseSat =
+  ⊥-elim
     (falseDecisionExcludesSatisfiable
       oracle
       (chooseFalse reduction node)
       refl
       falseSat)
-  where
-    contradiction : ⊥ → SearchResult reduction (suc remaining) node
-    contradiction ()
-... | inj₂ trueSat =
+...   | inj₂ trueSat =
   let recursive =
         recoverWitness reduction oracle
           (chooseTrue reduction node)
@@ -135,12 +125,8 @@ recoverWitness reduction oracle {suc remaining} node satisfiable
       { terminal = terminal recursive
       ; witness = witness recursive
       ; decisionQueries = suc (decisionQueries recursive)
-      ; exactQueryCount =
-          cong-suc (exactQueryCount recursive)
+      ; exactQueryCount = cong suc (exactQueryCount recursive)
       }
-  where
-    cong-suc : ∀ {left right} → left ≡ right → suc left ≡ suc right
-    cong-suc refl = refl
 
 record SATDecisionSearchBoundary : Set where
   constructor sat-decision-search-boundary
