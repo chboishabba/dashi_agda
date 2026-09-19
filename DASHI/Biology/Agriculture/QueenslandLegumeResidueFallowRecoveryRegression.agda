@@ -61,3 +61,14 @@ notAcaciaSameObject :
   R.queenslandCroppingResidueRecoveryCreatesAcaciaSameObjectEvidence
     R.canonicalFallowRecoveryBoundary ≡ false
 notAcaciaSameObject = refl
+
+
+belowGroundObserverCalibrationReused :
+  R.belowGroundObserverCalibrationReused
+    R.canonicalFallowRecoveryBoundary ≡ true
+belowGroundObserverCalibrationReused = refl
+
+externalComparatorFractionsNotTransferred :
+  R.externalRouteComparatorFractionsTransferredToQueensland
+    R.canonicalFallowRecoveryBoundary ≡ false
+externalComparatorFractionsNotTransferred = refl
