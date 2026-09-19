@@ -15,9 +15,10 @@ module DASHI.Physics.YangMills.BalabanFiniteRestrictedExpectationBoundExact wher
 -- theorem is therefore reusable directly inside a finite RG reopening fibre.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _*_; _≤_; ∣_∣; NonNegative; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; ∣_∣; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
@@ -170,7 +171,7 @@ restrictedExpectationBelowMass dataSet =
 
 unitBoundedRestrictedExpectationBelowMass :
   ∀ {State} (dataSet : FiniteRestrictedExpectationData State) →
-  majorant dataSet ℚ.≡ ℚ.1ℚ →
+  majorant dataSet ≡ 1ℚ →
   ∣ restrictedExpectation dataSet ∣ ≤ restrictedMass dataSet
 unitBoundedRestrictedExpectationBelowMass dataSet refl =
   subst
