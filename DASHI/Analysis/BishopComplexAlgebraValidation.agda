@@ -18,3 +18,10 @@ scaleCongruenceRegression :
   ∀ n →
   Complex._≈C_ (P.scaleNatC n left) (P.scaleNatC n right)
 scaleCongruenceRegression = P.scaleNatCCongruent
+
+scalarCongruenceRegression :
+  ∀ {left right : Complex.BishopComplex} →
+  Complex._≈C_ left right →
+  ∀ scalar →
+  Complex._≈C_ (P.scaleC scalar left) (P.scaleC scalar right)
+scalarCongruenceRegression = P.scaleCCongruent
