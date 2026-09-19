@@ -15,7 +15,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base as Rational using (ℚ; _/_)
+open import Data.Rational.Base using (ℚ)
 open import Data.Rational.Unnormalised as ℚ using (_≤_; _-_; ∣_∣; _/_)
 import Data.Rational.Unnormalised.Properties as ℚP
 open ℚP using (_≤?_)
@@ -25,13 +25,14 @@ open import Relation.Binary.PropositionalEquality using (_≢_)
 import Real as Bishop
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
+import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact as RX
 import DASHI.Analysis.RiemannBishopLocatedHeightCarrierExact as BishopHeight
 import DASHI.Analysis.RiemannAnalyticLocatedHeightCarrierRealizationExact as Located
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as BishopCarrier
 
 halfRational : ℚ
-halfRational = + 1 Rational./ 2
+halfRational = RX.half
 
 bishopHalf : Bishop.ℝ
 bishopHalf = BishopCarrier.bishopRationalEmbed halfRational
@@ -43,7 +44,7 @@ bishopEqualityBound :
   {n≢0 : n ≢ 0} →
   ℚ.∣ Bishop.seq left n ℚ.- Bishop.seq right n ∣
   ℚ.≤
-  (+ 2 ℚ./ n)
+  (+ 2 / n)
 bishopEqualityBound (Bishop.*≃* bounds) n = bounds n
 
 bishopSetoidEqualityStable :
@@ -58,11 +59,11 @@ bishopSetoidEqualityStable left right nn =
     {n≢0 : n ≢ 0} →
     ℚ.∣ Bishop.seq left n ℚ.- Bishop.seq right n ∣
     ℚ.≤
-    (+ 2 ℚ./ n)
+    (+ 2 / n)
   bounds n with
     ℚP._≤?_
       ℚ.∣ Bishop.seq left n ℚ.- Bishop.seq right n ∣
-      (+ 2 ℚ./ n)
+      (+ 2 / n)
   ... | yes bound = bound
   ... | no notBound =
     ⊥-elim
@@ -123,7 +124,7 @@ compileBishopCriticalLinePredicateRefinement :
   BishopCriticalLineHalfCharacterization analytic attachment →
   Stability.CriticalLinePredicateRefinement analytic
 compileBishopCriticalLinePredicateRefinement
-    {attachment = attachment} characterization = record
+    {analytic = analytic} {attachment = attachment} characterization = record
   { Stability.CriticalLinePredicateRefinement.RefinedCritical =
       BishopHalfPredicate attachment
   ; Stability.CriticalLinePredicateRefinement.abstractImpliesRefined =
