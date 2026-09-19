@@ -24,6 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNEuclideanRawGramQuadraticMajorantExact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Unnormalised using (_/_; +_; Κ)
 
 import Real as BishopReal
 import RealProperties as BishopP
