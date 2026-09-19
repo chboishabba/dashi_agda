@@ -120,7 +120,7 @@ This leaves a sharply typed mathematical seam between the continuous source fit 
 
 ```text
 source first-order k > 0
-      ↓  [continuous-to-discrete compiler still explicit]
+      ↓  [DASHI constructive compiler now owned]
 r = exp(-k Δt), 0 < r < 1
       ↓
 discrete polynomial/geometric majorant
@@ -128,7 +128,67 @@ discrete polynomial/geometric majorant
 constructive tail / Cauchy compiler
 ```
 
-The first line is now source-paid for the Thomson residue system; the compiler/application bridge is not silently attributed to the paper.
+The source first-order shape is paid for the Thomson residue system, and DASHI now separately owns the generic positive-rate x positive-time-step -> Bishop contraction compiler. Selecting/embedding a particular empirical k and time step for asymptotic use, and authorizing extrapolation beyond the fitted window, remain separate application/source payments.
+
+
+## Route x fallow x recovery join
+
+Owner: `DASHI/Biology/Agriculture/QueenslandLegumeResidueFallowRecoveryExact.agda`
+
+Nguyen, Bell, Janke & Williams 2026 (GRDC Grains Research Update, Goondiwindi; no DOI recorded by this atlas) supplies a UQ Gatton same-experiment join across residue placement, fallow duration and following-crop recovery.
+
+```text
+short fallow ~2 months:
+  lablab/millet -> barley
+  AG / BG / AG&BG / bare-fallow treatments
+  soil mineral N at 0, 30, 60 d
+  barley receives uniform 50 kg N/ha urea
+  AG Ndfr ~11-14 kg N/ha
+  AG&BG Ndfr ~20-25 kg N/ha
+
+long fallow ~9 months:
+  mungbean -> sorghum
+  sorghum receives 0 fertilizer N
+  total N uptake ~180-200 kg N/ha, no residue-treatment difference
+  AG Ndfr ~9-10 kg N/ha
+  AG&BG Ndfr ~14-16 kg N/ha
+```
+
+The source explicitly states that complete BG residue-N input could not be directly quantified. Recovery-efficiency calculations therefore assumed BG residue N equal to half the corresponding measured AG residue-N input. DASHI keeps isotope-derived Ndfr and assumption-dependent recovery efficiency as distinct evidence objects.
+
+The observer calibration lane additionally records McNeill & Unkovich 2024 (DOI `10.1007/s11104-024-06515-y`) and Liu et al. 2024 (DOI `10.1016/j.fcr.2024.109412`) without transferring their percentages to Queensland.
+
+## Queensland multi-rate fertilizer counterfactual
+
+Owner: `DASHI/Biology/Agriculture/QueenslandChickpeaWheatFertilizerEquivalentExact.agda`
+
+Dalal et al. 1998 (DOI `10.1071/EA98027`) provides the Queensland evidence shape that the earlier single-rate comparator could not pay. The adjacent wheat experiment applied multiple fresh urea-N rates and used linear/quadratic grain-N response curves to estimate the fertilizer-N equivalent of unfertilized wheat following chickpea.
+
+Usable-season equivalents were:
+
+```text
+1989  50.1 kg N/ha
+1990  57.9
+1992  50.5
+1993  47.3
+1996  40.0
+
+mean = 49.2 +/- 6.4 kg N/ha
+```
+
+1988 was 114.6 kg N/ha under anomalous preceding chickpea/nitrate conditions. 1994 and 1995 were explicitly non-estimable because low in-crop rainfall caused poor fertilizer-N uptake.
+
+Therefore the repository now distinguishes:
+
+```text
+explicit multi-rate response curve exists
+!=
+response curve informative this season
+!=
+one season-invariant replacement value
+!=
+Acacia/Senegalia avoided mineral N.
+```
 
 ## Constructive transport / convergence mathematics
 
