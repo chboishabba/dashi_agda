@@ -6,7 +6,7 @@ module DASHI.Foundations.BishopNatEmbeddingPowerExact where
 -- DASHI CONTRIBUTION
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -33,3 +33,16 @@ natRealPowNat base (suc exponent) =
       (BishopP.*-comm
         (NatReal.natReal base)
         (BishopReal.pow (NatReal.natReal base) exponent)))
+
+natRealPowNatTimesBase :
+  ∀ base exponent →
+  BishopReal._≃_
+    (NatReal.natReal (Divisor.powNat base exponent * base))
+    (BishopReal.pow (NatReal.natReal base) (suc exponent))
+natRealPowNatTimesBase base exponent =
+  BishopP.≃-trans
+    (NatReal.natRealMul
+      (Divisor.powNat base exponent)
+      base)
+    (BishopP.*-congʳ
+      (natRealPowNat base exponent))
