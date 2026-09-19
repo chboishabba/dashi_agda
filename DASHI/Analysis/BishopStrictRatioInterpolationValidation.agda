@@ -9,7 +9,7 @@ import DASHI.Analysis.BishopStrictRatioInterpolationExact as P
 
 interpolationRegression :
   ∀ {ratio : BishopReal.ℝ} →
-  BishopReal._<_ BishopReal.0ℝ ratio →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
   BishopReal._<_ ratio BishopReal.1ℝ →
   Σ BishopReal.ℝ (λ larger →
     BishopReal._<_ BishopReal.0ℝ larger ×
