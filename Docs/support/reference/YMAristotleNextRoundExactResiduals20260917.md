@@ -442,3 +442,36 @@ R131/R136.
 Finite Ward telescoping/conservation and generated-action stress provenance are
 not re-proved. The remaining theorem is only the same-current continuum
 transport.
+
+
+## Level-2 D1 final compression
+
+D1 has now been specialized to the actual R129 recovery object.
+
+The selected R129 stress coordinate already carries a marked completion whose
+`SameCompletedCompositeStressMarkedSource` contains both stress and composite
+marked-source data on the SAME completed state. Therefore the composite carrier
+and its completion are not independent D1 inputs.
+
+The source-written route is now:
+
+```text
+R129 BalabanSectorQFTRecoveryExport
+  -> selected LiteralStressCoordinate
+  -> selected marked completion
+  -> SAME completed composite marked-source data
+  -> literal product remainder on that completed composite
+       =
+     Shared.compositeInsertionTail
+  -> literal DyadicOPERemainderMajorant
+```
+
+The only surviving D1 physical statement is the displayed equality between the
+literal OPE product remainder and the selected composite marked tail. The
+composite completion, same-family provenance, nonnegativity and dyadic decay are
+all downstream/compiler-owned once R129 and that equality are supplied.
+
+No in-repo theorem was found that already identifies the literal product
+remainder with the composite mark/tail. CMP116/Round84 supply differentiated
+localization and composite-mark source-response semantics, but not this exact
+product-expansion remainder identity.
