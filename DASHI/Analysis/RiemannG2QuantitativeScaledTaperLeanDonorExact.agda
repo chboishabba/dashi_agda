@@ -44,11 +44,13 @@ record QuantitativeScaledTaperLeanReceipt : Set where
     symmetricMassPath : String
     positivityPath : String
     mixingPath : String
+    canonicalTaperPath : String
     bumpCommit : String
     massCommit : String
     symmetricMassCommit : String
     positivityCommit : String
     mixingCommit : String
+    canonicalTaperCommit : String
 
 open QuantitativeScaledTaperLeanReceipt public
 
@@ -62,11 +64,13 @@ currentQuantitativeScaledTaperLeanReceipt =
     "Synthesis/RiemannQuantitativeSymmetricBumpMass.lean"
     "Synthesis/RiemannQuantitativeScaledBumpPositivity.lean"
     "Synthesis/RiemannQuantitativeTaperMixingBound.lean"
+    "Synthesis/RiemannQuantitativeCanonicalTaper.lean"
     "1c937b85ff6a8a01611c5163e41928119b078372"
     "28eb1b4f9b4583065278e3de6508177fe13ea76c"
     "560d0470d2e16873e49a1b55f783307ab67ea159"
     "74d3136a420a889dee48c770791b245143582690"
     "770b3bda7a6932f31f13f8ac5db69ec082fac5bd"
+    "8f70cf9cc07c04344aeff82b23bc85d76212acda"
 
 record QuantitativeScaledTaperBoundary : Set where
   constructor quantitative-scaled-taper-boundary
@@ -76,6 +80,10 @@ record QuantitativeScaledTaperBoundary : Set where
     symmetricL1BoundsSourceWritten : Bool
     positiveWeightedIntegralSourceWritten : Bool
     abstractUniformMixingRatioSourceWritten : Bool
+    canonicalPoleKillingTaperSourceWritten : Bool
+    canonicalTaperMass0ScalingSourceWritten : Bool
+    canonicalTaperMass1ScalingSourceWritten : Bool
+    canonicalTaperMass2ScalingSourceWritten : Bool
 
     quantitativeCanonicalTaperConstructed : Bool
     quantitativeCanonicalTaperAttachedToFinalLane : Bool
@@ -95,8 +103,12 @@ canonicalQuantitativeScaledTaperBoundary =
     true
     true
     true
+    true
+    true
+    true
+    true
 
-    false
+    true
     false
     false
 
