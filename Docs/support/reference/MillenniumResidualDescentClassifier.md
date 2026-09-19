@@ -107,3 +107,55 @@ any of the three Millennium problems solved here
 
 Source-written only in this connector session; no fresh Agda/kernel receipt is
 claimed.
+
+
+## 2026-09-19 payable-formalisation continuation
+
+The branch is now stacked directly on the canonical #999 observer/descent/gluing
+spine rather than on master.  The following requested debts are source-written:
+
+- cost-aware decision factorisation, including explicit observer and downstream
+  polynomial-time obligations;
+- a sized polynomial-classical observer carrier with representation-size,
+  construction-cost and recovery-cost polynomial envelopes;
+- exact binary decision-to-search self-reduction;
+- a finite-variable Boolean SAT instantiation with restriction correctness,
+  satisfiability splitting, solution lifting and exactly one SAT decision query
+  per remaining variable;
+- a prime-indexed elliptic local-data carrier with explicit good,
+  multiplicative-bad and additive-bad branches, plus a theorem identifying every
+  finite good-prime local factor as a restriction of that global family;
+- a projective-space hyperplane-power reopening compiler: one-dimensional
+  H^(p,p) spanning plus an algebraic hyperplane-power cycle compiles to the
+  literal HodgeConjectureAtCodimension.
+
+The remaining known-mathematics/formalisation min-cuts are now sharper:
+
+```text
+P-vs-NP / Cook-Levin
+  arbitrary Configuration : Set
+    -> missing finite tape/state/configuration encoding
+    -> Boolean cell variables / clauses / polynomial bit size
+  (run <-> finite tableau is already paid)
+
+Hodge / CP^n
+  finite hyperplane-power basis pattern                    PAID
+  hyperplane-power spanning -> literal reopening compiler PAID
+  actual CP^n geometric carrier                           OPEN
+  singular/de Rham same-object identification             OPEN
+  actual hyperplane cycle-class theorem                   OPEN
+
+BSD
+  finite Euler algebra / finite Dirichlet multiplicativity PAID
+  checked small-prime Frobenius rows                        PAID
+  all-prime good/bad local-data carrier                     PAID
+  actual all-prime arithmetic inhabitant                    OPEN
+  Q*/Q*^2 and Q_v global 2-descent realization              OPEN
+  infinite Dirichlet/Euler convergence                      OPEN
+  actual modular Mellin realization                         OPEN
+```
+
+These are not promoted to the Millennium conclusions.  The irreducible walls
+remain general BSD rank/leading-term-Sha, general Hodge algebraicity, and either
+a polynomial classical algorithm for an NP-complete language or a genuine
+uniform lower bound excluding all such algorithms.
