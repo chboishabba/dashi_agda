@@ -176,6 +176,18 @@ import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondMomentAdapterExact
 import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondOrderEnvelopeExact
 import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredResolventUniformCurvatureExact
 
+-- Four-lane continuation after signed-core extraction.
+-- A: independent Bishop-R3 interaction carrier and Lebesgue aggregation compiler.
+-- B: literal Hermitian G2 scalar->vector weld and six-real-coordinate path bound.
+-- C/D: canonical R3 field semantics plus released-proof reconstruction compilers.
+import DASHI.Physics.Closure.NSTriadKNEuclideanSignedFrequencyCarrierRealizationExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanLebesgueSignedAggregationExact
+import DASHI.Physics.Closure.NSTriadKNR290HermitianG2StateDifferenceExact
+import DASHI.Physics.Closure.NSTriadKNR290ComplexPathDifferenceG2Exact
+import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDCanonicalReconstructionExact
+import DASHI.Physics.Closure.NSCanonicalLiteralABCDInstanceExact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
