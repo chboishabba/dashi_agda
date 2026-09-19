@@ -66,6 +66,16 @@ selectedTailToCauchyBridgeStillUnpaid :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
 selectedTailToCauchyBridgeStillUnpaid = refl
 
+fastCauchyLegacyQuotientInterfaceWeldIsOwned :
+  P.fastCauchyLegacyQuotientInterfaceWeldOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+fastCauchyLegacyQuotientInterfaceWeldIsOwned = refl
+
+concreteLegacyQuotientStillUnpaid :
+  P.concreteLegacyQuotientInhabited
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+concreteLegacyQuotientStillUnpaid = refl
+
 sameCarrierModulusAlgebraStillUnpaid :
   P.sameCarrierModulusAlgebraInhabited
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
