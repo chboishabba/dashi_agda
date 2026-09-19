@@ -62,27 +62,27 @@ literalPositiveGap :
     (attachment : RouteSPhysicalGapToLiteralYAttachment Y) G →
   Top.IsStrictlyPositiveFiniteMassGap S
     (Top.hamiltonian Y G) (Top.massGap Y G)
-literalPositiveGap attachment G =
+literalPositiveGap {S = S} {Y = Y} attachment G =
   let
     source =
       certificatePositivityMeaning attachment G
         (OS.gapPositive (certificate attachment G))
 
     gapTransported :
-      Top.IsStrictlyPositiveFiniteMassGap _
+      Top.IsStrictlyPositiveFiniteMassGap S
         (OS.hamiltonian (certificate attachment G))
-        (Top.massGap _ G)
+        (Top.massGap Y G)
     gapTransported =
       subst
-        (Top.IsStrictlyPositiveFiniteMassGap _
+        (Top.IsStrictlyPositiveFiniteMassGap S
           (OS.hamiltonian (certificate attachment G)))
         (sameGap attachment G)
         source
   in
   subst
     (λ h →
-      Top.IsStrictlyPositiveFiniteMassGap _
-        h (Top.massGap _ G))
+      Top.IsStrictlyPositiveFiniteMassGap S
+        h (Top.massGap Y G))
     (sameHamiltonian attachment G)
     gapTransported
 
@@ -90,9 +90,9 @@ literalPhysicalScaleLowerBound :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
     (attachment : RouteSPhysicalGapToLiteralYAttachment Y) G →
   Top.PhysicalScaleLowerBoundUniform S G (Top.massGap Y G)
-literalPhysicalScaleLowerBound attachment G =
+literalPhysicalScaleLowerBound {S = S} attachment G =
   subst
-    (Top.PhysicalScaleLowerBoundUniform _ G)
+    (Top.PhysicalScaleLowerBoundUniform S G)
     (sameGap attachment G)
     (certificatePhysicalScaleLowerBound attachment G)
 
@@ -101,27 +101,27 @@ literalNoSpectralPollution :
     (attachment : RouteSPhysicalGapToLiteralYAttachment Y) G →
   Top.NoSpectralPollutionBelowGap S G
     (Top.hamiltonian Y G) (Top.massGap Y G)
-literalNoSpectralPollution attachment G =
+literalNoSpectralPollution {S = S} {Y = Y} attachment G =
   let
     source =
       certificateSpectrumMeaning attachment G
         (OS.spectrumAboveVacuumGap (certificate attachment G))
 
     gapTransported :
-      Top.NoSpectralPollutionBelowGap _ G
+      Top.NoSpectralPollutionBelowGap S G
         (OS.hamiltonian (certificate attachment G))
-        (Top.massGap _ G)
+        (Top.massGap Y G)
     gapTransported =
       subst
-        (Top.NoSpectralPollutionBelowGap _ G
+        (Top.NoSpectralPollutionBelowGap S G
           (OS.hamiltonian (certificate attachment G)))
         (sameGap attachment G)
         source
   in
   subst
     (λ h →
-      Top.NoSpectralPollutionBelowGap _ G
-        h (Top.massGap _ G))
+      Top.NoSpectralPollutionBelowGap S G
+        h (Top.massGap Y G))
     (sameHamiltonian attachment G)
     gapTransported
 
