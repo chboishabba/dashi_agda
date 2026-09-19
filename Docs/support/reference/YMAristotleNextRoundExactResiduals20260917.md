@@ -314,10 +314,16 @@ MASS-GAP ROUTE S
   half-rate clustering -> spectral gap                standard/compiler-owned
 
 LITERAL CLAY LOCAL-QFT/STRESS
-  R127 OS-system = literal Schwinger family weld       open same-object application
-  physical stress tensor on that family               open physical construction
-  physical OPE coefficients/remainders                open physical construction
-  literal stress/OPE postcondition                    compiler-owned
+  actual R129 same-family recovery package             open physical application
+    -> R127 OS/literal Schwinger weld                  compiler-owned export
+    -> literal continuum/Schwinger membership          compiler-owned export
+    -> literal stress source derivative                compiler-owned export
+  same-family RG product tail identification           open physical analysis
+  same one-step AF mixing law + UV normalization       open physical analysis
+  local translation Ward/stress law                    open physical analysis
+  dyadic OPE remainder decay                           compiler-owned
+  all-depth OPE coefficient equality                   compiler-owned
+  literal stress/OPE postcondition                     compiler-owned
 
 ROUTE G ONLY
   translated-pair shell -> c_k ||ψ||²                 open quantitative theorem
@@ -342,3 +348,39 @@ F1→F3→F4 picture.
 This tranche is source-written only. No exact-head Agda or Lean kernel build was run.
 
 No source citation, status Boolean, Sprint receipt or compiler theorem is promoted to a physical theorem inhabitant.
+
+
+## Level-2 same-family recovery compression
+
+R126-R129 pay more of the local-QFT endpoint than the coarse audit previously
+recorded. An inhabited `BalabanSectorQFTRecoveryExport` already exports:
+
+```text
+R127 OSLiteralSchwingerWeld
+literal finite -> continuum measure recovery
+literal Schwinger membership
+literal stress source-derivative identification
+```
+
+Therefore R127 is not a second independent payment after the R129 recovery
+package is chosen.
+
+The shortest remaining physical local row is the existing Round87 D package:
+
+```text
+same-family physical RG product remainder = composite marked tail
++ same one-step OPE/AF mixing law and UV normalization
++ local translation Ward/stress law
+```
+
+From there:
+
+```text
+composite tail -> dyadic OPE remainder decay            machine-checked
+one-step law + UV normalization -> all-depth equality   machine-checked
+same-family stress/OPE predicates -> Clay postcondition machine-checked
+```
+
+No hidden theorem was found that promotes the recovered stress derivative
+directly into `HasStressTensorAndOPE`; that semantic/local Ward identification
+remains genuine physical work.
