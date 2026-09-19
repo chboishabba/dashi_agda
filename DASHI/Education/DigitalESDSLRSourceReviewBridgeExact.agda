@@ -72,14 +72,14 @@ record FullTextArtifactReceipt (source : Attr.AttributedSource) : Set where
 
     canonicalManifestation : Canonical.EvidenceManifestation
     canonicalManifestationFamilyIsPdf :
-      Canonical.family canonicalManifestation ≡ Canonical.pdfDocument
+      Canonical.manifestationFamily canonicalManifestation ≡ Canonical.pdfDocument
     canonicalSourceRevision : Canonical.EvidenceSourceRevision
     canonicalRevisionMatchesManifestation :
-      Canonical.EvidenceSourceRevision.sourceRevisionRef canonicalSourceRevision
-      ≡ Canonical.EvidenceManifestation.sourceRevisionRef canonicalManifestation
+      Canonical.EvidenceSourceRevision.revisionSourceRevisionRef canonicalSourceRevision
+      ≡ Canonical.EvidenceManifestation.manifestationSourceRevisionRef canonicalManifestation
     canonicalDigestMatchesManifestation :
-      Canonical.EvidenceSourceRevision.contentDigestRef canonicalSourceRevision
-      ≡ Canonical.EvidenceManifestation.contentDigestRef canonicalManifestation
+      Canonical.EvidenceSourceRevision.revisionContentDigestRef canonicalSourceRevision
+      ≡ Canonical.EvidenceManifestation.manifestationContentDigestRef canonicalManifestation
 
     titleMatchAlonePaysIdentity : Bool
     titleMatchAlonePaysIdentityIsFalse : titleMatchAlonePaysIdentity ≡ false
