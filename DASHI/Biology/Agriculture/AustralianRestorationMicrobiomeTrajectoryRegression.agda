@@ -33,3 +33,14 @@ samplingContextRetained = refl
 microbiomeNotWholeEcosystem :
   M.microbiomeReferenceSimilarityImpliesWholeEcosystemRecovery M.canonicalMicrobiomeTrajectoryBoundary ≡ false
 microbiomeNotWholeEcosystem = refl
+
+
+openQuantitativeTrajectoryDataOwned :
+  M.openQuantitativeTrajectoryDataSurfaceOwned
+    M.canonicalMicrobiomeTrajectoryBoundary ≡ true
+openQuantitativeTrajectoryDataOwned = refl
+
+dataSurfaceNotSamePlotIncrementMajorant :
+  M.quantitativeTrajectoryDataSuppliesSamePlotIncrementMajorant
+    M.canonicalMicrobiomeTrajectoryBoundary ≡ false
+dataSurfaceNotSamePlotIncrementMajorant = refl
