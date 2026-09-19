@@ -9,6 +9,8 @@ import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact as
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact as Strong
+import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as L2Recovery
+import DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact as L2
 
 ------------------------------------------------------------------------
 -- CLAY / OS / STRESS ROUTE PARETO
@@ -59,6 +61,32 @@ literalClayStressOPEPostcondition :
 literalClayStressOPEPostcondition {Y = Y} {group = group} inputs =
   Stress.literalStressOPEEvidenceIsClayPostcondition
     Y (stressOPEEvidence inputs) group
+
+
+------------------------------------------------------------------------
+-- Level-2 compression through the existing R126-R129 / Round87 chain.
+------------------------------------------------------------------------
+
+r127IndependentAfterR129Recovery : Bool
+r127IndependentAfterR129Recovery = L2Recovery.r127IndependentAfterR129Recovery
+
+r129PaysLiteralStressDerivative : Bool
+r129PaysLiteralStressDerivative =
+  L2.r129RecoveryPaysR127AndStressDerivative
+
+dyadicOPERemainderDecayIndependentPhysicalLeaf : Bool
+dyadicOPERemainderDecayIndependentPhysicalLeaf =
+  L2.dyadicOPERemainderDecayIndependentAfterCompositeTailIdentification
+
+allDepthOPECoefficientEqualityIndependentPhysicalLeaf : Bool
+allDepthOPECoefficientEqualityIndependentPhysicalLeaf =
+  L2.allDepthOPECoefficientEqualityIndependentAfterOneStepLaw
+
+level2SameFamilyRecoveryLevel : ProofLevel
+level2SameFamilyRecoveryLevel = L2.physicalR129RecoveryLevel
+
+level2ShortDistanceOPEStressAFLevel : ProofLevel
+level2ShortDistanceOPEStressAFLevel = L2.physicalRound87DLevel
 
 ------------------------------------------------------------------------
 -- Exact route classification.
