@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationAssemblyRealizatio
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (Positive)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
@@ -167,7 +168,7 @@ selectedSourceDensityEvaluationIsPhysicalTOperation :
       (PhysicalT.canonicalPhysicalTData construction))
 selectedSourceDensityEvaluationIsPhysicalTOperation
   {semantics = semantics} realization cutoff slow =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (Assembly.selectedDensityEvaluationIsAssembledWeight
       semantics cutoff slow)
     (operationActionIsPhysicalTOperation realization cutoff slow)
