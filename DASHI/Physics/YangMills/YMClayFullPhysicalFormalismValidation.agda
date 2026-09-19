@@ -104,6 +104,57 @@ directRouteStillNeedsSelectedLimitClosure :
 directRouteStillNeedsSelectedLimitClosure =
   Full.routeSTerminalRequiresSelectedLimitUpperClosureIsTrue
 
+
+verifiedLeanTerminalCompiler :
+  Full.routeSLeanTerminalCompilerKernelRevalidated ≡ true
+verifiedLeanTerminalCompiler =
+  Full.routeSLeanTerminalCompilerKernelRevalidatedIsTrue
+
+crossProverRouteSHasThreePhysicalClasses :
+  Full.routeSCrossProverPhysicalCutHasExactlyThreeClasses ≡ true
+crossProverRouteSHasThreePhysicalClasses =
+  Full.routeSCrossProverPhysicalCutHasExactlyThreeClassesIsTrue
+
+literalTimeNoLongerIndependentResearchLeaf :
+  Full.routeSLiteralEuclideanTimeIsIndependentResearchLeaf ≡ false
+literalTimeNoLongerIndependentResearchLeaf =
+  Full.routeSLiteralEuclideanTimeIsIndependentResearchLeafIsFalse
+
+literalWilsonPresentationNoLongerIndependentResearchLeaf :
+  Full.routeSLiteralWilsonPresentationIsIndependentResearchLeaf ≡ false
+literalWilsonPresentationNoLongerIndependentResearchLeaf =
+  Full.routeSLiteralWilsonPresentationIsIndependentResearchLeafIsFalse
+
+markedSourceIdentityNoLongerIndependentResearchLeaf :
+  Full.routeSMarkedSourceIdentityIsIndependentResearchLeaf ≡ false
+markedSourceIdentityNoLongerIndependentResearchLeaf =
+  Full.routeSMarkedSourceIdentityIsIndependentResearchLeafIsFalse
+
+covarianceLimitAlgebraNoLongerIndependentResearchLeaf :
+  Full.routeSCovarianceLimitAlgebraIsIndependentResearchLeaf ≡ false
+covarianceLimitAlgebraNoLongerIndependentResearchLeaf =
+  Full.routeSCovarianceLimitAlgebraIsIndependentResearchLeafIsFalse
+
+terminalAssemblyNoLongerIndependentResearchLeaf :
+  Full.routeSTerminalAssemblyIsIndependentResearchLeaf ≡ false
+terminalAssemblyNoLongerIndependentResearchLeaf =
+  Full.routeSTerminalAssemblyIsIndependentResearchLeafIsFalse
+
+finiteLiteralClusteringStillPhysical :
+  Full.routeSFiniteLiteralClusteringStillPhysical ≡ true
+finiteLiteralClusteringStillPhysical =
+  Full.routeSFiniteLiteralClusteringStillPhysicalIsTrue
+
+threeExpectationLimitsStillPhysical :
+  Full.routeSThreeExpectationLimitsStillPhysical ≡ true
+threeExpectationLimitsStillPhysical =
+  Full.routeSThreeExpectationLimitsStillPhysicalIsTrue
+
+sameOSCorrelationStillPhysical :
+  Full.routeSSameOSCorrelationStillPhysical ≡ true
+sameOSCorrelationStillPhysical =
+  Full.routeSSameOSCorrelationStillPhysicalIsTrue
+
 f2IsCompilerOwned :
   Full.f2PrimitiveResearchPayment ≡ false
 f2IsCompilerOwned =
