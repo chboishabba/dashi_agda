@@ -1,6 +1,6 @@
 # Digital-ESD paper live roadmap
 
-**Branch:** `agent/digital-esd-paper-methodology-primary-sources`
+**Branch:** `agent/digital-esd-adaptive-screening-p0a-g`
 
 **Status:** current working roadmap. This file records design intent, repository state and unpaid review work. It is not scholarly evidence and cannot pay a manuscript claim.
 
@@ -1028,3 +1028,144 @@ this environment cannot honestly execute the actual screen. The next local
 execution is to run the ledger compiler over the retained exact artifact, then
 apply explicit review decisions as overlays while preserving every excluded and
 unresolved row.
+
+
+## 29. Adaptive screening P0-A through P0-G
+
+The current Digital-ESD critical path is now governed screening rather than
+further evidence-representation architecture.
+
+New formal owner:
+
+DASHI/Education/DigitalESDAdaptiveScreeningProgrammeExact.agda
+
+Regression:
+
+DASHI/Education/DigitalESDAdaptiveScreeningProgrammeRegression.agda
+
+Execution/runbook:
+
+docs/digital-esd-adaptive-screening-p0a-g.md
+
+The programme reuses the authoritative screening, eligibility-frame, Pareto,
+SLR and source-audit owners rather than replacing them.
+
+### P0-A — exact universe / denominator integrity
+
+Source-written runtime:
+scripts/prepare_digital_esd_screening_ledger.py
+
+The exact 43,996-record ERIC set remains the denominator. The formal runtime
+receipt requires emittedReceiptCount ≡ inputRecordCount. Each input has a total
+review state: pending or explicitly reviewed.
+
+### P0-B — candidate assessment
+
+Source-written runtime:
+scripts/assess_digital_esd_screening_candidates.py
+
+Machine/deterministic candidate assessments are candidate-only. Constructive
+non-factorability proves the same candidate-assessment surface can coexist with
+different reviewed decisions, so candidate assessment does not determine the
+authoritative screening decision.
+
+### P0-C — duplicate / report-family / study-family hypotheses
+
+The same runtime creates bounded candidate fibres from DOI/title/author/year
+and similarity evidence. Exact DOI/title groups use representative-star edges
+instead of O(k²) pair output.
+
+A second constructive collision proves the same similarity surface can coexist
+with same-study and different-study states:
+
+similar metadata != publication identity != report-family identity != same empirical study.
+
+### P0-D — stratified calibration
+
+Source-written runtime:
+scripts/select_digital_esd_screening_pareto.py
+
+Strata:
+- obvious include candidate;
+- obvious exclude candidate;
+- high uncertainty;
+- high duplicate ambiguity;
+- rare terminology/source type;
+- missing abstract/malformed metadata.
+
+Calibration selection creates review work, not decisions.
+
+### P0-E — bounded calibration diagnostics
+
+The calibration estimate records candidate false-negative proxy,
+candidate/reviewer disagreement, rubric ambiguity/residuals and explicitly
+reviewed unresolved cases only over observed reviewed cases.
+
+calibration estimate != population truth != screening decision.
+
+### P0-F — adaptive Pareto queue
+
+The queue reuses AdmissibleConsumerMDLHyperfabricExact and
+NDimParetoHyperfabricExact.
+
+Five non-scalar axes:
+- information-gain loss;
+- likely corpus-contraction loss;
+- rare-cell coverage loss;
+- duplicate-family payoff loss;
+- reviewer cost.
+
+No weighted scalar score exists. Runtime dominance is computed over unique
+discrete cost vectors rather than pairwise over all records.
+
+The process audit retains reviewed/unresolved counts, missing abstracts,
+publication-type distribution and Pareto-front composition. These are
+visibility coordinates, not automatic bias/harm/source-quality verdicts.
+
+### P0-G — retained/probable -> full text -> audit -> framework challenge
+
+Source-written runtime:
+scripts/prepare_digital_esd_fulltext_handoff.py
+
+Only authoritative include/probable decisions have a RetainedForFullText
+witness.
+
+The formal endpoint is:
+
+screening decision
+-> full-text artifact
+-> canonical SLR review packet
+-> independent SourceAuditAdmission
+-> SLRAssistedCorpusAuditedSource
+-> same-source SourceAuditHyperfabric
+-> candidate TransformativePrincipleMatrix row
+-> support | narrow | split | merge | defeat | extend | unresolved challenge
+-> corpus-level structuredCorpusChallengeAndRevision receipt
+
+A single-source framework challenge cannot promote a final principle or create
+a corpus conclusion.
+
+### Review-process missingness probes
+
+The adaptive programme also turns the review process itself into an auditable
+selection surface:
+- frozen search vocabulary exclusion;
+- missing/malformed abstracts;
+- systematic deprioritisation;
+- sparse source/publication forms;
+- terminology outside the seven frozen query families.
+
+Those probes reuse the eligibility-frame/nonfactorability discipline and create
+no automatic bias or harm verdict.
+
+### Current payment state
+
+P0-A through P0-F are implemented/source-written awaiting execution on the exact
+local 43,996-record artifact.
+
+P0-G implementation is source-written but runtime-blocked on authoritative
+retained/probable decisions and actual full-text retrieval.
+
+The adaptive-screening branch has not yet received a fresh Agda aggregate
+receipt and the new Python tools have not yet been executed against the real
+corpus in this environment.
