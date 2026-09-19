@@ -38,20 +38,21 @@ retained export != included corpus
 Current ERIC state from the operator-observed local run:
 
 ```text
-Q1  numFound=642
-Q2  numFound=290
-Q3  numFound=1594
-Q4  numFound=41889
-Q5  numFound=214
-Q6  numFound=293
-Q7  numFound=1675
+Q1  numFound=642     (4 pages, 642 docs)
+Q2  numFound=290     (2 pages, 290 docs)
+Q3  numFound=1594    (8 pages, 1594 docs)
+Q4  numFound=41889   (210 pages, 41889 docs)
+Q5  numFound=214     (2 pages, 214 docs)
+Q6  numFound=293     (2 pages, 293 docs)
+Q7  numFound=1675    (9 pages, 1675 docs)
 
 submitted / observed result sets  7/7
-retained paginated exports        0/7
-structured-search bridge          not yet crossed
+retained paginated exports        7/7 (46,597 raw records, 237 JSON pages)
+structured-search bridge          7/7 crossed in Agda
+ERIC cross-query deduplication    46,597 hits -> 43,996 unique records (2,601 duplicates removed)
 ```
 
-The earlier ERIC transport failures remain append-only provenance and are not overwritten by the later successful count probes.
+The earlier ERIC transport failures and count-only observations remain append-only provenance.
 
 ## Execution Pareto
 

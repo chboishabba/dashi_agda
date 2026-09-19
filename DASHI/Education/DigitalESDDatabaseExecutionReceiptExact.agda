@@ -289,6 +289,113 @@ canonicalERICObservedCountExecutions =
   ∷ []
 
 ------------------------------------------------------------------------
+-- 2026-09-19 operator-observed live ERIC paginated export executions.
+--
+-- All seven queries were executed against the official public ERIC API,
+-- paginating rows=200 until numFound was exhausted. All 237 raw JSON page
+-- artifacts and 7 summary.json files are retained with exact SHA-256 digests.
+-- These receipts carry exportObserved and are ready to cross the success bridge.
+------------------------------------------------------------------------
+
+ericObservedExportExecution :
+  Queries.TranslatedQueryReceipt →
+  Nat →
+  String →
+  String →
+  String →
+  String →
+  DatabaseExecutionReceipt
+ericObservedExportExecution q count timestamp exportPath resultSetRef note =
+  database-execution-receipt
+    q
+    Search.eric
+    true refl
+    true
+    timestamp
+    ericAPIEntrypoint
+    (executedWithObservedResultSet
+      count
+      resultSetRef
+      (exportObserved exportPath "JSON")
+      note)
+    "local operator Python execution against official https://api.ies.ed.gov/eric/ public API"
+    "observed result-export receipt: query submission, result-set existence, and paginated JSON export/digests are paid; deduplication, screening, eligibility and evidence payment remain downstream review payments"
+
+ericQ1ObservedExportExecution : DatabaseExecutionReceipt
+ericQ1ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ1DigitalEducationESD
+  642
+  "2026-09-19T22:46:25+10:00"
+  "artifacts/digital-esd/eric/Q1/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q1/summary.json); pagination complete"
+  "HTTP 200; numFound=642; 4 pages fetched (642 docs); summarySha256=faa8cf35e1a34ec06a9cc97a816f78099752605aaf4a70c6b1493e1d24dd2e4b"
+
+ericQ2ObservedExportExecution : DatabaseExecutionReceipt
+ericQ2ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ2Transformation
+  290
+  "2026-09-19T22:46:37+10:00"
+  "artifacts/digital-esd/eric/Q2/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q2/summary.json); pagination complete"
+  "HTTP 200; numFound=290; 2 pages fetched (290 docs); summarySha256=5a01ede4bcd53a8068f32fefd9e47d2e7f113a3acec214ed7b9609f47d0a110d"
+
+ericQ3ObservedExportExecution : DatabaseExecutionReceipt
+ericQ3ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ3ReflexiveSustainability
+  1594
+  "2026-09-19T22:47:45+10:00"
+  "artifacts/digital-esd/eric/Q3/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q3/summary.json); pagination complete"
+  "HTTP 200; numFound=1594; 8 pages fetched (1594 docs); summarySha256=76ad0a9a971a6f9dadb90df29f18ce70533ab839ca78489ecf7f6b606e410c88"
+
+ericQ4ObservedExportExecution : DatabaseExecutionReceipt
+ericQ4ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ4LifecycleCircularity
+  41889
+  "2026-09-19T23:07:37+10:00"
+  "artifacts/digital-esd/eric/Q4/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q4/summary.json); pagination complete"
+  "HTTP 200; numFound=41889; 210 pages fetched (41889 docs); summarySha256=bee52dd930f2ae6da0004ea56c0378f0445ad3ec0877a479f8fecb6ec557b53f"
+
+ericQ5ObservedExportExecution : DatabaseExecutionReceipt
+ericQ5ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ5ParticipantGovernance
+  214
+  "2026-09-19T22:45:43+10:00"
+  "artifacts/digital-esd/eric/Q5/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q5/summary.json); pagination complete"
+  "HTTP 200; numFound=214; 2 pages fetched (214 docs); summarySha256=0302dfbc15b67be4d1664653bda4d5e0dcb99d547345f09c58588a2ea44feb90"
+
+ericQ6ObservedExportExecution : DatabaseExecutionReceipt
+ericQ6ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ6LongitudinalInstitutional
+  293
+  "2026-09-19T22:47:56+10:00"
+  "artifacts/digital-esd/eric/Q6/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q6/summary.json); pagination complete"
+  "HTTP 200; numFound=293; 2 pages fetched (293 docs); summarySha256=f96cf23bef0516d4f4fc2fa2d0cfb992cf187c67e7ca7389111b6eedb5122cb0"
+
+ericQ7ObservedExportExecution : DatabaseExecutionReceipt
+ericQ7ObservedExportExecution = ericObservedExportExecution
+  Queries.ericQ7OpenInteroperableRepairable
+  1675
+  "2026-09-19T22:49:33+10:00"
+  "artifacts/digital-esd/eric/Q7/summary.json"
+  "ERIC live JSON result set (artifacts/digital-esd/eric/Q7/summary.json); pagination complete"
+  "HTTP 200; numFound=1675; 9 pages fetched (1675 docs); summarySha256=2cac198aa4c2270cdc30691edbf67387341026ea77adc671c9007ee1efe4a88d"
+
+canonicalERICObservedExportExecutions : List DatabaseExecutionReceipt
+canonicalERICObservedExportExecutions =
+  ericQ1ObservedExportExecution
+  ∷ ericQ2ObservedExportExecution
+  ∷ ericQ3ObservedExportExecution
+  ∷ ericQ4ObservedExportExecution
+  ∷ ericQ5ObservedExportExecution
+  ∷ ericQ6ObservedExportExecution
+  ∷ ericQ7ObservedExportExecution
+  ∷ []
+
+------------------------------------------------------------------------
 -- 2026-09-19 IEEE Xplore and ACM DL search-result retrieval attempts.
 --
 -- Exact query translations exist, but the current web transport could not
@@ -410,10 +517,17 @@ canonicalExecutionReceipts =
   ∷ ericQ5ObservedExecution
   ∷ ericQ6ObservedExecution
   ∷ ericQ7ObservedExecution
+  ∷ ericQ1ObservedExportExecution
+  ∷ ericQ2ObservedExportExecution
+  ∷ ericQ3ObservedExportExecution
+  ∷ ericQ4ObservedExportExecution
+  ∷ ericQ5ObservedExportExecution
+  ∷ ericQ6ObservedExportExecution
+  ∷ ericQ7ObservedExportExecution
   ∷ []
 
 executionReceiptCount : Nat
-executionReceiptCount = 42
+executionReceiptCount = 49
 
 ------------------------------------------------------------------------
 -- Promotion firewalls.
@@ -479,4 +593,5 @@ canonicalDatabaseExecutionBoundary = database-execution-boundary
 
 executionReceiptReading : String
 executionReceiptReading =
-  "The append-only execution ledger now contains forty-two receipts: the original thirty-five platform-specific attempts plus seven later local ERIC executions that successfully submitted the frozen queries to the official public API and observed HTTP 200 JSON numFound counts (Q1=642, Q2=290, Q3=1594, Q4=41889, Q5=214, Q6=293, Q7=1675). The earlier ERIC transport failures remain provenance rather than being overwritten. The seven live ERIC receipts use executedWithObservedResultSet but retain exportNotObserved, because no paginated JSON/CSV artifact or digest is yet recorded. Therefore observed result sets are now 7/35 query identities, retained exports remain 0/35, and no ERIC receipt can yet cross the structured-search success bridge."
+  "The append-only execution ledger now contains forty-nine receipts: the original thirty-five platform-specific attempts, seven earlier local ERIC count-only observations, plus seven later local ERIC paginated export executions that successfully submitted the frozen queries to the official public API, observed HTTP 200 JSON numFound counts (Q1=642, Q2=290, Q3=1594, Q4=41889, Q5=214, Q6=293, Q7=1675), and retained all 237 paginated JSON artifacts and SHA-256 digests. Earlier failure and count-only attempts remain append-only provenance. The seven new ERIC receipts use executedWithObservedResultSet with exportObserved, enabling ERIC to cross the structured-search success bridge. Retained exports are now 7/35 query identities, while Scopus, WoS, IEEE, and ACM remain unexecuted or access-blocked."
+

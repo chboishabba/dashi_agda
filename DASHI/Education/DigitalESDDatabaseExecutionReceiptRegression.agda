@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 import DASHI.Education.DigitalESDDatabaseExecutionReceiptExact as Exec
 import DASHI.Education.DigitalESDDatabaseTranslatedQueriesExact as Queries
 
-executionReceiptCountRegression : Exec.executionReceiptCount ≡ 42
+executionReceiptCountRegression : Exec.executionReceiptCount ≡ 49
 executionReceiptCountRegression = refl
 
 scopusExecutionAttemptedRegression :
@@ -127,3 +127,26 @@ ericObservedQ7CountRegression :
         "count-only probe observed; paginated JSON/CSV export not yet retained")
       "HTTP 200; numFound=1675"
 ericObservedQ7CountRegression = refl
+
+ericObservedExportQ1SubmittedRegression :
+  Exec.DatabaseExecutionReceipt.querySubmitted Exec.ericQ1ObservedExportExecution ≡ true
+ericObservedExportQ1SubmittedRegression = refl
+
+ericObservedExportQ1OutcomeRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.ericQ1ObservedExportExecution
+  ≡ Exec.executedWithObservedResultSet
+      642
+      "ERIC live JSON result set (artifacts/digital-esd/eric/Q1/summary.json); pagination complete"
+      (Exec.exportObserved "artifacts/digital-esd/eric/Q1/summary.json" "JSON")
+      "HTTP 200; numFound=642; 4 pages fetched (642 docs); summarySha256=faa8cf35e1a34ec06a9cc97a816f78099752605aaf4a70c6b1493e1d24dd2e4b"
+ericObservedExportQ1OutcomeRegression = refl
+
+ericObservedExportQ7OutcomeRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.ericQ7ObservedExportExecution
+  ≡ Exec.executedWithObservedResultSet
+      1675
+      "ERIC live JSON result set (artifacts/digital-esd/eric/Q7/summary.json); pagination complete"
+      (Exec.exportObserved "artifacts/digital-esd/eric/Q7/summary.json" "JSON")
+      "HTTP 200; numFound=1675; 9 pages fetched (1675 docs); summarySha256=2cac198aa4c2270cdc30691edbf67387341026ea77adc671c9007ee1efe4a88d"
+ericObservedExportQ7OutcomeRegression = refl
+
