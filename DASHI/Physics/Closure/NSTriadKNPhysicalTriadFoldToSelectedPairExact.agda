@@ -16,8 +16,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using (map; _++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -73,105 +74,66 @@ foldEnumerateFromPairs cutoff contribution (pair ∷ rest)
 ... | false =
     foldEnumerateFromPairs cutoff contribution rest
 
-foldFixedLeft :
-  Nat →
-  (Physical.PhysicalTriadIncidence → ℚ) →
-  Z3.FourierMode →
-  List Z3.FourierMode → ℚ
-foldFixedLeft cutoff contribution p [] = 0ℚ
-foldFixedLeft cutoff contribution p (q ∷ rest)
-    with Physical.modeWithinCutoff cutoff (Z3.addMode p q)
+foldPairListAppend :
+  (cutoff : Nat) →
+  (contribution : Physical.PhysicalTriadIncidence → ℚ) →
+  (left right : List (Cube.Pair Z3.FourierMode Z3.FourierMode)) →
+  foldPairList cutoff contribution (left ++ right)
+  ≡ foldPairList cutoff contribution left
+      + foldPairList cutoff contribution right
+foldPairListAppend cutoff contribution [] right = refl
+foldPairListAppend cutoff contribution (pair ∷ rest) right
+  with Physical.modeWithinCutoff cutoff
+    (Z3.addMode (Cube.first pair) (Cube.second pair))
 ... | true =
-    contribution (Physical.pairTriad (Cube.pair p q))
-      + foldFixedLeft cutoff contribution p rest
+    cong
+      (contribution (Physical.pairTriad pair) +_)
+      (foldPairListAppend cutoff contribution rest right)
 ... | false =
-    foldFixedLeft cutoff contribution p rest
+    foldPairListAppend cutoff contribution rest right
 
-selectedInnerMeaning :
+foldMappedLeft :
   (cutoff : Nat) →
   (contribution : Physical.PhysicalTriadIncidence → ℚ) →
   (p : Z3.FourierMode) →
   (rights : List Z3.FourierMode) →
+  foldPairList cutoff contribution (map (λ q → Cube.pair p q) rights)
+  ≡
   PairPay.selectedContributionInner
     (resonantOutputSelected cutoff)
     (pairContribution contribution)
     p rights
-  ≡ foldFixedLeft cutoff contribution p rights
-selectedInnerMeaning cutoff contribution p [] = refl
-selectedInnerMeaning cutoff contribution p (q ∷ rest)
+foldMappedLeft cutoff contribution p [] = refl
+foldMappedLeft cutoff contribution p (q ∷ rest)
   with Physical.modeWithinCutoff cutoff (Z3.addMode p q)
 ... | true =
     cong
       (contribution (Physical.pairTriad (Cube.pair p q)) +_)
-      (selectedInnerMeaning cutoff contribution p rest)
+      (foldMappedLeft cutoff contribution p rest)
 ... | false =
-    selectedInnerMeaning cutoff contribution p rest
+    foldMappedLeft cutoff contribution p rest
 
-foldCartesian :
-  Nat →
-  (Physical.PhysicalTriadIncidence → ℚ) →
-  List Z3.FourierMode →
-  List Z3.FourierMode → ℚ
-foldCartesian cutoff contribution [] rights = 0ℚ
-foldCartesian cutoff contribution (p ∷ rest) rights =
-  foldFixedLeft cutoff contribution p rights
-    + foldCartesian cutoff contribution rest rights
-
-selectedCartesianMeaning :
+foldCartesianIsSelectedContribution :
   (cutoff : Nat) →
   (contribution : Physical.PhysicalTriadIncidence → ℚ) →
   (lefts rights : List Z3.FourierMode) →
+  foldPairList cutoff contribution (Cube.cartesian lefts rights)
+  ≡
   PairPay.selectedContributionSum
     (resonantOutputSelected cutoff)
     (pairContribution contribution)
     lefts rights
-  ≡ foldCartesian cutoff contribution lefts rights
-selectedCartesianMeaning cutoff contribution [] rights = refl
-selectedCartesianMeaning cutoff contribution (p ∷ rest) rights =
+foldCartesianIsSelectedContribution cutoff contribution [] rights = refl
+foldCartesianIsSelectedContribution cutoff contribution (p ∷ rest) rights =
   trans
-    (cong
-      (_+ PairPay.selectedContributionSum
-        (resonantOutputSelected cutoff)
-        (pairContribution contribution)
-        rest rights)
-      (selectedInnerMeaning cutoff contribution p rights))
-    (cong
-      (foldFixedLeft cutoff contribution p rights +_)
-      (selectedCartesianMeaning cutoff contribution rest rights))
-
-foldCartesianIsFoldPairList :
-  (cutoff : Nat) →
-  (contribution : Physical.PhysicalTriadIncidence → ℚ) →
-  (lefts rights : List Z3.FourierMode) →
-  foldCartesian cutoff contribution lefts rights
-  ≡ foldPairList cutoff contribution (Cube.cartesian lefts rights)
-foldCartesianIsFoldPairList cutoff contribution [] rights = refl
-foldCartesianIsFoldPairList cutoff contribution (p ∷ rest) rights =
-  trans
-    (cong
-      (foldFixedLeft cutoff contribution p rights +_)
-      (foldCartesianIsFoldPairList cutoff contribution rest rights))
-    (sym (foldPairListCartesianHead cutoff contribution p rest rights))
-
-foldPairListCartesianHead :
-  (cutoff : Nat) →
-  (contribution : Physical.PhysicalTriadIncidence → ℚ) →
-  (p : Z3.FourierMode) →
-  (rest rights : List Z3.FourierMode) →
-  foldPairList cutoff contribution
-    (Cube.cartesian (p ∷ rest) rights)
-  ≡
-  foldFixedLeft cutoff contribution p rights
-    + foldPairList cutoff contribution (Cube.cartesian rest rights)
-foldPairListCartesianHead cutoff contribution p rest [] = refl
-foldPairListCartesianHead cutoff contribution p rest (q ∷ rights)
-  with Physical.modeWithinCutoff cutoff (Z3.addMode p q)
-... | true =
-    cong
-      (contribution (Physical.pairTriad (Cube.pair p q)) +_)
-      (foldPairListCartesianHead cutoff contribution p rest rights)
-... | false =
-    foldPairListCartesianHead cutoff contribution p rest rights
+    (foldPairListAppend
+      cutoff contribution
+      (map (λ q → Cube.pair p q) rights)
+      (Cube.cartesian rest rights))
+    (cong₂ _+_
+      (foldMappedLeft cutoff contribution p rights)
+      (foldCartesianIsSelectedContribution
+        cutoff contribution rest rights))
 
 physicalTriadFoldIsSelectedOrderedPairFold :
   (cutoff : Nat) →
@@ -190,9 +152,8 @@ physicalTriadFoldIsSelectedOrderedPairFold cutoff contribution =
   in
   trans
     (foldEnumerateFromPairs cutoff contribution pairs)
-    (trans
-      (sym (foldCartesianIsFoldPairList cutoff contribution modes modes))
-      (sym (selectedCartesianMeaning cutoff contribution modes modes)))
+    (foldCartesianIsSelectedContribution
+      cutoff contribution modes modes)
 
 physicalTriadFoldUsesUniqueOrderedPairOutput : Bool
 physicalTriadFoldUsesUniqueOrderedPairOutput = true
