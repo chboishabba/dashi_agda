@@ -193,6 +193,71 @@ ericQ6Execution = ericInterfaceFailureExecution Queries.ericQ6LongitudinalInstit
 ericQ7Execution : DatabaseExecutionReceipt
 ericQ7Execution = ericInterfaceFailureExecution Queries.ericQ7OpenInteroperableRepairable
 
+
+------------------------------------------------------------------------
+-- 2026-09-19 IEEE Xplore and ACM DL search-result retrieval attempts.
+--
+-- Exact query translations exist, but the current web transport could not
+-- retrieve the live search-result pages. These remain interface failures with
+-- no observed counts/exports and therefore cannot cross the success bridge.
+------------------------------------------------------------------------
+
+ieeeEntrypoint : String
+ieeeEntrypoint = "https://ieeexplore.ieee.org/search/searchresult.jsp"
+
+acmEntrypoint : String
+acmEntrypoint = "https://dl.acm.org/action/doSearch"
+
+ieeeInterfaceFailureOutcome : ExecutionOutcome
+ieeeInterfaceFailureOutcome =
+  interfaceFailureBeforeSubmission
+    "current web transport could not retrieve an IEEE Xplore search-result page for the submitted URL"
+
+acmInterfaceFailureOutcome : ExecutionOutcome
+acmInterfaceFailureOutcome =
+  interfaceFailureBeforeSubmission
+    "current web transport could not retrieve an ACM Digital Library search-result page for the submitted URL"
+
+ieeeInterfaceFailureExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
+ieeeInterfaceFailureExecution q = database-execution-receipt
+  q
+  Search.ieeeXplore
+  true refl
+  false
+  attemptTimestamp20260919
+  ieeeEntrypoint
+  ieeeInterfaceFailureOutcome
+  "ChatGPT web retrieval environment; exact IEEE translation available, live search-result retrieval inaccessible"
+  "attempt receipt only: no observed result page, count, export, deduplication, screening, eligibility or evidence payment is created"
+
+acmInterfaceFailureExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
+acmInterfaceFailureExecution q = database-execution-receipt
+  q
+  Search.acmDigitalLibrary
+  true refl
+  false
+  attemptTimestamp20260919
+  acmEntrypoint
+  acmInterfaceFailureOutcome
+  "ChatGPT web retrieval environment; exact ACM translation available, live search-result retrieval inaccessible"
+  "attempt receipt only: no observed result page, count, export, deduplication, screening, eligibility or evidence payment is created"
+
+ieeeQ1Execution = ieeeInterfaceFailureExecution Queries.ieeeQ1DigitalEducationESD
+ieeeQ2Execution = ieeeInterfaceFailureExecution Queries.ieeeQ2Transformation
+ieeeQ3Execution = ieeeInterfaceFailureExecution Queries.ieeeQ3ReflexiveSustainability
+ieeeQ4Execution = ieeeInterfaceFailureExecution Queries.ieeeQ4LifecycleCircularity
+ieeeQ5Execution = ieeeInterfaceFailureExecution Queries.ieeeQ5ParticipantGovernance
+ieeeQ6Execution = ieeeInterfaceFailureExecution Queries.ieeeQ6LongitudinalInstitutional
+ieeeQ7Execution = ieeeInterfaceFailureExecution Queries.ieeeQ7OpenInteroperableRepairable
+
+acmQ1Execution = acmInterfaceFailureExecution Queries.acmQ1DigitalEducationESD
+acmQ2Execution = acmInterfaceFailureExecution Queries.acmQ2Transformation
+acmQ3Execution = acmInterfaceFailureExecution Queries.acmQ3ReflexiveSustainability
+acmQ4Execution = acmInterfaceFailureExecution Queries.acmQ4LifecycleCircularity
+acmQ5Execution = acmInterfaceFailureExecution Queries.acmQ5ParticipantGovernance
+acmQ6Execution = acmInterfaceFailureExecution Queries.acmQ6LongitudinalInstitutional
+acmQ7Execution = acmInterfaceFailureExecution Queries.acmQ7OpenInteroperableRepairable
+
 canonicalExecutionReceipts : List DatabaseExecutionReceipt
 canonicalExecutionReceipts =
   scopusQ1Execution
@@ -216,10 +281,24 @@ canonicalExecutionReceipts =
   ∷ ericQ5Execution
   ∷ ericQ6Execution
   ∷ ericQ7Execution
+  ∷ ieeeQ1Execution
+  ∷ ieeeQ2Execution
+  ∷ ieeeQ3Execution
+  ∷ ieeeQ4Execution
+  ∷ ieeeQ5Execution
+  ∷ ieeeQ6Execution
+  ∷ ieeeQ7Execution
+  ∷ acmQ1Execution
+  ∷ acmQ2Execution
+  ∷ acmQ3Execution
+  ∷ acmQ4Execution
+  ∷ acmQ5Execution
+  ∷ acmQ6Execution
+  ∷ acmQ7Execution
   ∷ []
 
 executionReceiptCount : Nat
-executionReceiptCount = 21
+executionReceiptCount = 35
 
 ------------------------------------------------------------------------
 -- Promotion firewalls.
@@ -285,4 +364,4 @@ canonicalDatabaseExecutionBoundary = database-execution-boundary
 
 executionReceiptReading : String
 executionReceiptReading =
-  "Twenty-one frozen translated queries now carry explicit execution-attempt receipts: fourteen Scopus/Web-of-Science attempts from 2026-09-16 and seven ERIC public-API attempts from 2026-09-19. Scopus/WoS returned HTTP 403 before submission; the current web transport refused direct api.ies.ed.gov response access before an ERIC result set could be observed. All remain pre-result failures and therefore carry no result counts or exports. querySubmitted remains a retained coordinate so a future successful execution can record true together with executedWithObservedResultSet, exact translated query, count, result-set identity/export state and execution evidence."
+  "All thirty-five frozen translated queries now carry explicit execution-attempt receipts. Scopus/Web of Science were blocked before submission by HTTP 403; ERIC direct API response retrieval was unavailable in the current transport; IEEE Xplore and ACM Digital Library live search-result pages were likewise inaccessible through the current web transport. All outcomes remain pre-result failures and therefore carry no observed result counts or exports. querySubmitted remains a retained coordinate so a future successful execution can record true together with executedWithObservedResultSet, exact translated query, count, result-set identity/export state and execution evidence."
