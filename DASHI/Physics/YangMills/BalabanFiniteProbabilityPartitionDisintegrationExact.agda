@@ -1,13 +1,13 @@
 module DASHI.Physics.YangMills.BalabanFiniteProbabilityPartitionDisintegrationExact where
 
 ------------------------------------------------------------------------
--- FINITE PROBABILITY LAW + COARSE PARTITION -> NORMALIZED REOPENING KERNEL
+-- FINITE WEIGHTED LAW + COARSE PARTITION -> NORMALIZED REOPENING KERNEL
 --
--- Let mu be a finite rational probability law on an explicit fine-state list.
+-- Let mu be nonnegative finite rational weights on an explicit fine-state list.
 -- A finite coarse partition is represented by Boolean masks chi_y(x).
 --
---   mu_Y(y)   = sum_x chi_y(x) mu(x)
---   kappa(y,x)= mu_Y(y)^(-1) chi_y(x) mu(x).
+--   mu_Y(y)    = sum_x chi_y(x) mu(x)
+--   kappa(y,x) = mu_Y(y)^(-1) chi_y(x) mu(x).
 --
 -- If every listed coarse fibre has strictly positive mass and the masks form a
 -- partition of unity on each fine state, then:
@@ -22,23 +22,25 @@ module DASHI.Physics.YangMills.BalabanFiniteProbabilityPartitionDisintegrationEx
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Data.Empty using (⊥)
-open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; Positive; NonNegative; nonNegative; _+_; _*_; _≤_)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Rational.Base using
+  (ℚ; 0ℚ; 1ℚ; Positive; _*_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
-import DASHI.Physics.YangMills.BalabanFiniteRationalOrderCoreExact as Order
 import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
-import DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact as Probability
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
+
+indicator : Bool → ℚ
+indicator true = 1ℚ
+indicator false = 0ℚ
 
 record FiniteCoarsePartition
     {Fine Coarse : Set}
-    (stepStates : List Fine)
+    (states : List Fine)
     (fineWeight : Fine → ℚ) : Set₁ where
   field
     coarseStates : List Coarse
@@ -48,37 +50,23 @@ record FiniteCoarsePartition
     Match : Coarse → Fine → Set
     matchTrue : ∀ coarse fine →
       matches coarse fine ≡ true → Match coarse fine
-    matchFalse : ∀ coarse fine →
-      matches coarse fine ≡ false → Match coarse fine → ⊥
-
     matchProjects : ∀ {coarse fine} →
       Match coarse fine → project fine ≡ coarse
 
-    -- Exact finite partition-of-unity receipt.  This simultaneously encodes
-    -- coverage and uniqueness of the listed coarse fibres.
+    -- Coverage + uniqueness of the listed coarse fibres, encoded exactly in Q.
     partitionOfUnity : ∀ fine →
       Sums.sumRational coarseStates
         (λ coarse → indicator (matches coarse fine))
       ≡ 1ℚ
 
-    -- Every listed coarse fibre has positive probability mass.  Zero-mass
-    -- coarse states should be omitted from the selected coarse list.
+    -- Zero-mass coarse fibres are omitted from the selected coarse list.
     coarseFibreMassPositive : ∀ coarse →
       Positive
-        (Sums.sumRational stepStates
+        (Sums.sumRational states
           (λ fine →
             indicator (matches coarse fine) * fineWeight fine))
 
-  where
-  indicator : Bool → ℚ
-  indicator true = 1ℚ
-  indicator false = 0ℚ
-
 open FiniteCoarsePartition public
-
-indicator : Bool → ℚ
-indicator true = 1ℚ
-indicator false = 0ℚ
 
 maskedFineWeight :
   ∀ {Fine Coarse}
@@ -151,11 +139,7 @@ conditionalKernelOffFibreZero :
 conditionalKernelOffFibreZero partition coarse fine noMatch
   with matches partition coarse fine
 ... | true =
-  let
-    impossible =
-      noMatch (matchTrue partition coarse fine refl)
-  in
-  ⊥-elim impossible
+  ⊥-elim (noMatch (matchTrue partition coarse fine refl))
 ... | false =
   ℚRing.solve-∀
     (coarseMassReciprocal partition coarse)
@@ -192,13 +176,17 @@ coarseTimesConditionalPointwise partition coarse fine =
     mass = coarseMass partition coarse
     inv = coarseMassReciprocal partition coarse
     masked = maskedFineWeight partition coarse fine
+
+    rearrange :
+      mass * (inv * masked) ≡ (inv * mass) * masked
+    rearrange = ℚRing.solve-∀ mass inv masked
+
     cancel : inv * mass ≡ 1ℚ
     cancel = coarseMassReciprocalTimesMass partition coarse
   in
-  trans
-    (ℚRing.solve-∀ mass inv masked)
+  trans rearrange
     (trans
-      (cong (_* masked) cancel)
+      (cong (λ value → value * masked) cancel)
       (ℚP.*-identityˡ masked))
 
 sumMaskedAcrossCoarse :
@@ -212,38 +200,45 @@ sumMaskedAcrossCoarse :
   ≡ fineWeight fine
 sumMaskedAcrossCoarse partition fine =
   let
-    distribute :
+    commute :
       Sums.sumRational (coarseStates partition)
         (λ coarse →
           indicator (matches partition coarse fine) * fineWeight fine)
       ≡
       Sums.sumRational (coarseStates partition)
-        (λ coarse → indicator (matches partition coarse fine))
-        * fineWeight fine
-    distribute =
-      trans
-        (Sums.sumRationalCong
-          (coarseStates partition)
-          (λ coarse →
-            indicator (matches partition coarse fine) * fineWeight fine)
-          (λ coarse →
-            fineWeight fine * indicator (matches partition coarse fine))
-          (λ coarse →
-            ℚP.*-comm
-              (indicator (matches partition coarse fine))
-              (fineWeight fine)))
-        (Sums.sumRationalScale
-          (fineWeight fine)
-          (coarseStates partition)
-          (λ coarse → indicator (matches partition coarse fine)))
+        (λ coarse →
+          fineWeight fine * indicator (matches partition coarse fine))
+    commute =
+      Sums.sumRationalCong
+        (coarseStates partition)
+        _
+        _
+        (λ coarse →
+          ℚP.*-comm
+            (indicator (matches partition coarse fine))
+            (fineWeight fine))
 
-    one =
-      partitionOfUnity partition fine
+    factor :
+      Sums.sumRational (coarseStates partition)
+        (λ coarse →
+          fineWeight fine * indicator (matches partition coarse fine))
+      ≡
+      fineWeight fine
+        * Sums.sumRational (coarseStates partition)
+            (λ coarse → indicator (matches partition coarse fine))
+    factor =
+      Sums.sumRationalScale
+        (fineWeight fine)
+        (coarseStates partition)
+        (λ coarse → indicator (matches partition coarse fine))
+
+    one = partitionOfUnity partition fine
   in
-  trans distribute
-    (trans
-      (cong (_* fineWeight fine) one)
-      (ℚP.*-identityˡ (fineWeight fine)))
+  trans commute
+    (trans factor
+      (trans
+        (cong (λ value → fineWeight fine * value) one)
+        (ℚP.*-identityʳ (fineWeight fine))))
 
 conditionalDisintegrationExact :
   ∀ {Fine Coarse}
@@ -274,12 +269,10 @@ compileFiniteRGReopeningStep :
   ∀ {Fine Coarse}
     {states : List Fine}
     {fineWeight : Fine → ℚ} →
-  Probability.FiniteRGProbabilityLaw
-    (dummyFineStep states fineWeight) →
-  (partition : FiniteCoarsePartition states fineWeight) →
+  FiniteCoarsePartition states fineWeight →
   Reopen.FiniteRGReopeningStep Fine Coarse
 compileFiniteRGReopeningStep {states = states} {fineWeight = fineWeight}
-  probability partition = record
+  partition = record
   { fineStates = states
   ; coarseStates = coarseStates partition
   ; project = project partition
@@ -295,23 +288,6 @@ compileFiniteRGReopeningStep {states = states} {fineWeight = fineWeight}
   ; disintegrationExact =
       conditionalDisintegrationExact partition
   }
-  where
-  dummyFineStep :
-    List Fine → (Fine → ℚ) →
-    Reopen.FiniteRGReopeningStep Fine Fine
-  dummyFineStep states fineWeight = record
-    { fineStates = states
-    ; coarseStates = states
-    ; project = λ fine → fine
-    ; fineWeight = fineWeight
-    ; coarseWeight = fineWeight
-    ; reopeningKernel = λ _ _ → 0ℚ
-    ; FibreSupport = λ _ _ → ⊥
-    ; fibreSupportProjects = λ ()
-    ; reopeningOffFibreZero = λ _ _ _ → refl
-    ; reopeningNormalized = λ _ → refl
-    ; disintegrationExact = λ _ → refl
-    }
 
 finitePartitionConditionalKernelLevel : ProofLevel
 finitePartitionConditionalKernelLevel = machineChecked
@@ -321,3 +297,6 @@ finitePartitionKernelNormalizationLevel = machineChecked
 
 finitePartitionDisintegrationLevel : ProofLevel
 finitePartitionDisintegrationLevel = machineChecked
+
+finitePartitionReopeningCompilerLevel : ProofLevel
+finitePartitionReopeningCompilerLevel = machineChecked
