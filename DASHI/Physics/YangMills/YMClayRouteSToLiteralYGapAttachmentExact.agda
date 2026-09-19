@@ -1,8 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClayRouteSToLiteralYGapAttachmentExact where
 
-open import Agda.Builtin.Equality using (_≡_; subst)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ)
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
@@ -12,11 +13,9 @@ import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Fi
 ------------------------------------------------------------------------
 -- B4 / EXACT ROUTE-S PHYSICAL GAP -> LITERAL-Y ATTACHMENT.
 --
--- Do not accept an opaque CutoffUniformPhysicalMassGap Y as the cross-prover
--- bridge.  The source object is a physical gap certificate on the reconstructed
--- Hamiltonian.  The integration theorem must attach that exact Hamiltonian and
--- exact gap value to Y and interpret its positivity/spectral content as the
--- literal endpoint predicates.
+-- The source predicates below are stated on the certificate's OWN Hamiltonian
+-- and gap.  The compiler must transport them through sameHamiltonian/sameGap;
+-- merely storing equalities beside already-literal predicates is not accepted.
 ------------------------------------------------------------------------
 
 record RouteSPhysicalGapToLiteralYAttachment
@@ -37,23 +36,94 @@ record RouteSPhysicalGapToLiteralYAttachment
       Top.IsVacuumSectorAndPositiveEnergyComplement S
         (Top.hilbertSpace Y G) (Top.hamiltonian Y G) (Top.vacuum Y G)
 
-    certificatePositivityMeansLiteralPositiveGap : ∀ G →
+    certificatePositivityMeaning : ∀ G →
       OS.Positive (certificate G) (OS.gap (certificate G)) →
       Top.IsStrictlyPositiveFiniteMassGap S
-        (Top.hamiltonian Y G) (Top.massGap Y G)
+        (OS.hamiltonian (certificate G))
+        (OS.gap (certificate G))
 
-    physicalScaleLowerBoundUniform : ∀ G →
-      Top.PhysicalScaleLowerBoundUniform S G (Top.massGap Y G)
+    certificatePhysicalScaleLowerBound : ∀ G →
+      Top.PhysicalScaleLowerBoundUniform S G
+        (OS.gap (certificate G))
 
-    certificateSpectrumMeansNoPollution : ∀ G →
+    certificateSpectrumMeaning : ∀ G →
       OS.SpectrumAboveVacuumGap (certificate G) →
       Top.NoSpectralPollutionBelowGap S G
-        (Top.hamiltonian Y G) (Top.massGap Y G)
+        (OS.hamiltonian (certificate G))
+        (OS.gap (certificate G))
 
     gapAndClusteringDerived : ∀ G →
       Top.GapAndClusteringAreDerivedNotAssumed S G
 
 open RouteSPhysicalGapToLiteralYAttachment public
+
+literalPositiveGap :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
+    (attachment : RouteSPhysicalGapToLiteralYAttachment Y) G →
+  Top.IsStrictlyPositiveFiniteMassGap S
+    (Top.hamiltonian Y G) (Top.massGap Y G)
+literalPositiveGap attachment G =
+  let
+    source =
+      certificatePositivityMeaning attachment G
+        (OS.gapPositive (certificate attachment G))
+
+    gapTransported :
+      Top.IsStrictlyPositiveFiniteMassGap _
+        (OS.hamiltonian (certificate attachment G))
+        (Top.massGap _ G)
+    gapTransported =
+      subst
+        (Top.IsStrictlyPositiveFiniteMassGap _
+          (OS.hamiltonian (certificate attachment G)))
+        (sameGap attachment G)
+        source
+  in
+  subst
+    (λ h →
+      Top.IsStrictlyPositiveFiniteMassGap _
+        h (Top.massGap _ G))
+    (sameHamiltonian attachment G)
+    gapTransported
+
+literalPhysicalScaleLowerBound :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
+    (attachment : RouteSPhysicalGapToLiteralYAttachment Y) G →
+  Top.PhysicalScaleLowerBoundUniform S G (Top.massGap Y G)
+literalPhysicalScaleLowerBound attachment G =
+  subst
+    (Top.PhysicalScaleLowerBoundUniform _ G)
+    (sameGap attachment G)
+    (certificatePhysicalScaleLowerBound attachment G)
+
+literalNoSpectralPollution :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S}
+    (attachment : RouteSPhysicalGapToLiteralYAttachment Y) G →
+  Top.NoSpectralPollutionBelowGap S G
+    (Top.hamiltonian Y G) (Top.massGap Y G)
+literalNoSpectralPollution attachment G =
+  let
+    source =
+      certificateSpectrumMeaning attachment G
+        (OS.spectrumAboveVacuumGap (certificate attachment G))
+
+    gapTransported :
+      Top.NoSpectralPollutionBelowGap _ G
+        (OS.hamiltonian (certificate attachment G))
+        (Top.massGap _ G)
+    gapTransported =
+      subst
+        (Top.NoSpectralPollutionBelowGap _ G
+          (OS.hamiltonian (certificate attachment G)))
+        (sameGap attachment G)
+        source
+  in
+  subst
+    (λ h →
+      Top.NoSpectralPollutionBelowGap _ G
+        h (Top.massGap _ G))
+    (sameHamiltonian attachment G)
+    gapTransported
 
 routeSPhysicalGapBuildsLiteralYGap :
   ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
@@ -63,15 +133,11 @@ routeSPhysicalGapBuildsLiteralYGap attachment = record
   { Five.CutoffUniformPhysicalMassGap.vacuumSectorAndPositiveEnergyComplement =
       vacuumSectorAndPositiveEnergyComplement attachment
   ; Five.CutoffUniformPhysicalMassGap.strictlyPositiveFiniteMassGap =
-      λ G →
-        certificatePositivityMeansLiteralPositiveGap attachment G
-          (OS.gapPositive (certificate attachment G))
+      literalPositiveGap attachment
   ; Five.CutoffUniformPhysicalMassGap.physicalScaleLowerBoundUniform =
-      physicalScaleLowerBoundUniform attachment
+      literalPhysicalScaleLowerBound attachment
   ; Five.CutoffUniformPhysicalMassGap.noSpectralPollutionBelowGap =
-      λ G →
-        certificateSpectrumMeansNoPollution attachment G
-          (OS.spectrumAboveVacuumGap (certificate attachment G))
+      literalNoSpectralPollution attachment
   ; Five.CutoffUniformPhysicalMassGap.gapAndClusteringDerived =
       gapAndClusteringDerived attachment
   }
