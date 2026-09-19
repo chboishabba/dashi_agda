@@ -1,8 +1,8 @@
-# Yang–Mills Aristotle exact residual brief — 2026-09-17 typed-composition recut
+# Yang–Mills exact residual brief — 2026-09-19 frontier reconciliation
 
 ## Authority and scope
 
-This is the live bookkeeping surface for PR #996. The accounting distinction remains strict:
+This is the live bookkeeping surface for PR #996 after the closed-world/min-cut reconciliation.
 
 ```text
 source authority
@@ -11,277 +11,286 @@ source authority
 != empirical contact
 ```
 
-The top-level physical frontier remains
+The top-level frontier remains
 
-\[
-\boxed{F_1+F_3+F_4}.
-\]
+[
+oxed{F_1+F_3+F_4}.
+]
 
-Old F2 is not an independent research payment. Isometric embeddings remain real F3 data, while generic varying-carrier transport is already compiler-owned. No unconditional Clay completion is claimed.
-
-## Paid compiler surface — do not rebuild
-
-The current Agda / supplied Aristotle corpus already owns:
-
-- literal finite four-dimensional SU(2) Wilson/Gibbs carrier and physical slice language;
-- transfer-form / finite-Hamiltonian / finite vacuum-gap consequences;
-- the per-step trajectory reduction `Delta * a_k <= 1 - c_k`;
-- varying-carrier transport through isometric embeddings;
-- dense-local-observable <-> full-`L2_0` transfer/correlation extension machinery;
-- exact finite-T5 normalized source calculus and mixed-log connected covariance;
-- vacuum-orthogonal recovery -> continuum lower-gap transport;
-- common-core / same-evolution generator-uniqueness compilers.
-
-Thus:
-
-```text
-MOSCO THEORY      != F3
-OS UNIQUENESS     != F4
-L2 CONSTRUCTION   != F1/F3/F4
-```
-
-The residuals are same-object physical instantiations, not requests to redevelop those foundations.
+What changed is the location of the primitive cuts.
 
 ---
 
-# F1 — literal Wilson transfer defect
+# Paid structure — do not rebuild
+
+The repository already owns substantial machinery for:
+
+- literal finite four-dimensional SU(2) Wilson/Gibbs carriers, plaquettes and action;
+- gauge invariance and literal physical Wilson jets/Hessian/coercivity;
+- normalized T5 source algebra and exact connected-covariance identities;
+- marked-source decay compilers and dense-local -> full-`L2_0` extension;
+- finite transfer/form-gap and varying-carrier transport compilers;
+- beta-driven same-history complete-density / finite-measure carriers;
+- abstract Mosco/recovery -> continuum-gap transport;
+- OS reconstruction, Stone uniqueness, local-core cutoff stabilization;
+- common-core equality -> equality of self-adjoint generators.
+
+Therefore:
+
+```text
+PLAQUETTE/WILSON CONSTRUCTION   != F1
+FULL R339 MAGNITUDE EQUALITY   != F1
+ABSTRACT MOSCO THEORY         != F3
+STONE / GENERATOR UNIQUENESS  != F4
+EVOLUTION EQUALITY AS AXIOM   != F4
+```
+
+---
+
+# F1 — weakest physical min-cut
 
 The terminal finite-side target remains
 
-\[
-|\langle P_0\psi,P_1\psi\rangle|\le c_k\|\psi\|_2^2,
-\qquad
-\Delta a_k\le1-c_k,
-\qquad \psi\perp\Omega.
-\]
+[
+|langle P_0psi,P_1psiangle|
+ le c_k|psi|_2^2,
+qquad
+Delta a_kle1-c_k.
+]
 
-A single trajectory-uniform `c < 1` is not required.
+A trajectory-uniform constant `c < 1` is not required.
 
-## Dense-L2 compiler
+## R339 recut
 
-`YMClayDenseL2CorrelationBidiParityExact` records the supplied/source-written theorem family
+`BalabanCMP116R281SelectedSourceUpperRound343Exact` explicitly records
 
 ```text
-dense_vacuum_decorrelation_iff_full
-truncated_correlation_eq_decorrelation
-truncated_correlation_iff_decorrelation
-decorrelation_of_dense_truncated_correlation
+sourceMagnitudeEqualityPrimitiveForMassGapConsumer = false
 ```
 
-so a connected-correlation inequality on a dense physical vacuum-complement algebra is enough to enter the existing full-`L2_0` transfer compiler. The stronger full joint-slice `L^infinity` density defect remains an optional producer, not a primitive logical requirement.
+and replaces source/selected magnitude equality by the one-sided selected-response upper actually consumed downstream.
 
-No fresh Lean kernel receipt is claimed for that source-written theorem family in this connector session.
-
-## R338/R339 -> R295 now reaches the generic marked-source ABI directly
-
-The canonical source/application route remains
+R344 and R346 continue weakening the source interface on the actual shared-marked carrier. Therefore
 
 ```text
-R338 CanonicalCommonDomainCMP116Source
-  + R339 CanonicalSelectedT5CMP116Application
-    -> R320 direct selected marked decay
-    -> R295 DirectT5StateFamilyJPresentation.
+R339.sourceMagnitudeIsSelectedMagnitude
+```
+
+is an obsolete-strength ABI for the mass-gap route, not primitive proof debt.
+
+The new owner
+
+```text
+YMClayF1PhysicalMinCutExact
+```
+
+records the four physical leaves:
+
+```text
+F1-A  actual selected CMP116 localization
+      on the canonical physical source carrier
+
+F1-B  literal Wilson local/cylinder observable
+      = selected R295/T5 Gibbs observable
+
+F1-C  rooted/source envelope
+      <= c_k ||psi||^2_(L2 mu_k)
+      on a dense physical vacuum-complement algebra
+
+F1-D  Delta*a_k <= 1-c_k
+      on the existing beta-history / literal-Wilson trajectory
+```
+
+R403 already makes `SourceDirection = TestObservable` definitionally, so F1-A does not need a new observable-to-J representation theorem.
+
+The WrongType firewall remains explicit: P33 Wilson “correlation” is Hessian/coercivity structure; R295 connected covariance is statistical Gibbs covariance. F1-B is the physical same-object weld between those worlds.
+
+After F1-B/C, the existing route is:
+
+```text
+R295
+ -> marked-source adapter
+ -> connected-correlation bound
+ -> dense physical F1 producer
+ -> dense-L2 extension
+ -> full physical L2_0 decorrelator.
+```
+
+---
+
+# F3 — finish the existing Sprint construction program
+
+F3 is not “implement Mosco recovery from scratch.”
+
+The concrete implementation staircase already exists:
+
+```text
+Sprint109-110
+  recovery/Mosco/common-carrier consumers
+
+Sprint111
+  finite <-> continuum embedding/projection surface
+
+Sprint112
+  P_a sampling candidate
+  E_a renormalized interpolation candidate
+  quotient-independence diagrams
+
+Sprint113+
+  gauge covariance
+  quotient/norm/Jacobian/quadrature estimates
+
+Sprint114-122
+  closure criteria, reducers and propagation
 ```
 
 The new owner
 
 ```text
-YMClayR295MarkedSourceAdapterExact
-YMClayR295MarkedSourceAdapterValidation
+YMClayF3SprintConstructionFrontierExact
 ```
 
-uses facts already stored in R295 rather than asking for another source theorem. R295 already has:
+makes the actual physical inputs explicit:
 
 ```text
-exact finite-T5 expectation/product algebra
-+ literal J direction for each selected T5 observable
-+ mixed log-J derivative = exact connected covariance
-+ selected mixed-log magnitude <= rooted-shell envelope.
+actual P_a
+actual E_a
+representative independence + gauge/quotient compatibility
+uniform norm + approximate inverse control
+residual + strong convergence
+energy liminf/limsup recovery
+vacuum-sector stability
+literal Wilson measure convergence
 ```
 
-It therefore constructs, definitionally/structurally, the generic
+The existing Sprint flags remain fail-closed. In particular:
 
 ```text
-MarkedTwoSourceResponse
-SeparationDecayProducer
+Sprint112 samplingProjectionMapConstructedHere = false
+Sprint112 interpolationMapConstructedHere = false
+Sprint116 unconditionalNormWindowTheoremProvedHere = false
+Sprint116 quotientGaugeAnalyticFeedsDischargedHere = false
 ```
 
-consumed by `YMClayDenseMarkedSourceF1ProducerExact`.
+Reducer receipts are diagnostic surfaces only and do not inhabit the new physical F3 record.
 
-Consequently:
+Once these analytic maps/estimates produce the actual
 
 ```text
-selected marked decay after R295
+VacuumOrthogonalRecoverySystem
 ```
 
-is **not an independent F1 payment**. The underlying selected physical CMP116 application/localization can still be proof-bearing; the point is that once R295 exists, no second adapter or generic marked-decay theorem remains.
+the continuum vacuum-gap theorem is existing compiler output.
 
-## Exact F1 source-facing cut after this tranche
-
-The live route is now
-
-```text
-same beta-driven source state
-  -> canonical R338/R339 application
-  -> exact R295 finite-T5 source algebra
-  -> generic marked response + separation-decay producer       [compiler]
-  -> literal-Wilson dense-carrier/L2 normalization weld        [physical]
-  -> dense connected-correlation F1 inequality                 [compiler]
-  -> full L2_0 decorrelator                                    [compiler]
-  -> Delta * a_k <= 1 - c_k                                    [trajectory payment]
-  -> F1.
-```
-
-The remaining same-object F1 seam is therefore approximately:
-
-```text
-1. choose D = the literal gauge-invariant local/cylinder algebra;
-2. prove closure(D) = physical L2_0(mu_k);
-3. identify D with the R295 selected T5 observables on the same literal Wilson slice;
-4. calibrate the R295 rooted-shell/source envelope to c_k ||psi||_2^2;
-5. pay Delta * a_k <= 1 - c_k on the same continuum trajectory.
-```
-
-Items 1--4 are the dense-carrier / physical-normalization weld. The mixed-log/correlation/marked-decay algebra after R295 is no longer a separate leaf.
-
-## Complete-density route
-
-The same-history lane remains
-
-```text
-Balaban1989BetaSplitInverseSquareTerminalHistoryExact
-  -> Balaban1989BetaDrivenCompleteDensityFlowExact
-  -> Balaban1989BetaHistoryToCanonicalCompleteDensityExact.
-```
-
-Bałaban CMP 122, DOI `10.1007/BF01238433`, remains source authority for preservation of the stated complete-density form/bounds at sufficiently small effective coupling. It is not silently promoted to F1.
-
-Two honest routes remain:
-
-```text
-Route A — strong density route
-complete density
-  -> literal adjacent-slice joint law
-  -> L-infinity RN defect
-  -> full L2_0 decorrelator
-
-Route B — source-native route
-complete density / same physical source family
-  -> R338/R339 -> R295
-  -> R295 marked adapter
-  -> dense physical L2 normalization weld
-  -> dense-L2 extension
-  -> full L2_0 decorrelator.
-```
+The literal finite-measure convergence theorem remains a separate physical leaf on the same beta-driven Wilson family; Round126 stores it and later rounds export it but do not construct it.
 
 ---
 
-# F3 — physical literal-Wilson continuum-limit witness
+# F4 — common-core physical data, then compiler output
 
-`PhysicalContinuumLimitWitness` already stores an actual
-
-```text
-BalabanVacuumOrthogonalMoscoRecoveryExact.VacuumOrthogonalRecoverySystem.
-```
-
-The new owner
+The primitive F4 boundary is now
 
 ```text
-YMClayPhysicalF34TypedCompositionExact
-YMClayPhysicalF34TypedCompositionValidation
+YMClayPhysicalStressOSCommonCoreWitnessExact.PhysicalStressOSCommonCoreWitness
 ```
 
-makes the consequence explicit:
+rather than `YMOSSameObjectWitness.evolutionsEqual`.
+
+Its physical content is:
 
 ```text
-f3PhysicalVacuumGapAfterRecovery :
-  PhysicalContinuumLimitWitness
-    -> PhysicalVacuumGapAfterRecovery recoverySystem
+actual reconstructed common core
+actual YM/stress core action
+actual OS core action
+core-action equality
+YM closure / essential-self-adjointness identification
+OS closure / essential-self-adjointness identification
 ```
 
-using the existing theorem `physicalVacuumGapAfterRecovery`.
-
-Therefore, **after F3 has supplied the physical recovery system, recovery of the continuum vacuum-complement lower gap is compiler output and is not another independent physical payment.**
-
-The remaining F3 construction is the actual literal-Wilson instantiation:
+via the existing
 
 ```text
-literal Wilson cutoff physical carriers
-+ nondegenerate physical embedding family
-+ actual physical recovery system / embedded vacuum graph-Mosco limit
-+ continuum Hamiltonian and vacuum on that same carrier.
+YangMillsStressWardCommonCoreGeneratorExact.StressOSCommonCoreData.
 ```
 
-Generic direct-sum carrier existence or historical Boolean receipts do not inhabit this record.
+The compiler chain is now explicit:
+
+```text
+physical StressOSCommonCoreData
+  -> commonCoreWardImpliesSameGenerator
+  -> same self-adjoint generator
+  -> Stone/OS generator-to-evolution bridge
+  -> YM evolution = OS evolution
+  -> derived YMOSSameObjectWitness
+```
+
+Thus evolution equality is no longer a primitive field of `OutstandingPhysicalFrontier`.
+
+The remaining physical work upstream is the continuum stress/Ward construction:
+
+```text
+renormalized local stress/current
++ translation Ward identity
++ microcausal/local shell data
++ stabilized local charge action
++ common-core closure identifications.
+```
+
+Generic cutoff stabilization, outer-shell elimination, closure equality and Stone uniqueness are already compiler-owned.
 
 ---
 
-# F4 — physical YM/OS same-object witness
-
-`YMOSSameObjectWitness` already stores
+# Canonical current min-cut
 
 ```text
-ymEvolution : Time -> Vector -> Vector
-osEvolution : Time -> Vector -> Vector
-CommonInvariantCore
-YMGeneratorOnCore
-OSGeneratorOnCore
-evolutionsEqual : ymEvolution ≡ osEvolution.
+F1
+  1. selected CMP116 physical localization
+  2. Wilson <-> R295 same-object observable weld
+  3. rooted/source shell <-> physical L2 normalization
+  4. beta/a trajectory gap calibration
+
+F3
+  5. actual P_a sampling map
+  6. actual E_a interpolation map
+  7. quotient/gauge/norm/approximate-inverse control
+  8. strong/residual convergence + energy recovery + vacuum stability
+  9. literal Wilson measure convergence
+
+F4
+  10. continuum renormalized stress/current Ward data
+  11. local-charge stabilization inputs on the reconstructed core
+  12. physical YM/OS common-core action + closure identifications
 ```
 
-`YMClayPhysicalF34TypedCompositionExact.f4PhysicalEvolutionEquality` simply exposes that proof-bearing equality.
+Several of these are expected to collapse together under the right physical constructors.
 
-Therefore, **once an F4 witness exists, `U^YM = U^OS` is not another downstream physical axiom.** The real F4 payment is construction of the physical same-object witness itself: the actual reconstructed OS dynamics, selected YM dynamics, and their common-core/generator semantics.
-
-`YMClayF134ContinuumWeldParityExact.asTypedF34Kernel` now feeds the literal F1/F3/F4 input package directly into the typed F3/F4 composition kernel.
-
-This does not promote historical Sprint128/129 receipt bits: `BalabanCMP98TerminalHamiltonianBidiRound188Exact` correctly keeps Boolean/evidence receipts distinct from actual M7--M9 theorem kernels.
-
----
-
-# Current focused acceptance surface
-
-The focused rollup now additionally imports:
+The conceptual status is:
 
 ```text
-YMClayR295MarkedSourceAdapterExact
-YMClayR295MarkedSourceAdapterValidation
-YMClayPhysicalF34TypedCompositionExact
-YMClayPhysicalF34TypedCompositionValidation
-YMClayF134TypedCompositionValidation
+finite Wilson geometry/action/plaquettes          deeply paid
+finite physical transfer/gap compilers            paid
+source/cumulant/covariance algebra                paid
+dense observable -> L2_0 extension                paid
+varying-carrier abstract transport                paid
+Mosco/recovery abstract theorem                   paid
+OS/Stone uniqueness                               paid
+common-core equality -> generator equality        paid
+
+same-object physical instantiations               remaining
+scale-uniform analytic estimates                  remaining
+continuum sampling/interpolation estimates        remaining
+continuum stress/Ward identification              remaining
 ```
-
-alongside the existing dense-L2, dense-marked, complete-density, canonical-source, F134 and frontier owners.
-
-The strongest current compression is:
-
-```text
-F1:
-  post-R295 marked-response/decay adapter        paid by compiler composition
-  remaining: dense literal-Wilson carrier + L2 envelope normalization
-             + trajectory defect
-
-F3:
-  recovery-system -> recovered continuum gap    paid by compiler composition
-  remaining: construct the actual physical literal-Wilson F3 witness
-
-F4:
-  F4 witness -> YM=OS evolution equality        stored theorem field / compiler extraction
-  remaining: construct the actual physical same-object F4 witness
-```
-
-The top-level frontier is still F1/F3/F4 because these physical witness constructors have not been manufactured from status metadata.
 
 ## Verification boundary
 
-The new files were written RED-first at the import/contract level: their validation owners were committed while the production modules were absent, and missing imports were observed before implementation.
+This reconciliation tranche is source-written only. No exact-head Agda or Lean kernel run was performed in this connector session.
 
-This connector session has **not** run the exact-head Agda or Lean kernel builds. Before promotion:
+Before promotion:
 
-1. typecheck `YMClayAristotleGapParityEverything.agda` on the exact head;
-2. build the exact Lean tree containing `DenseCorrelationCriterion.lean`;
-3. inspect the new Lean headline theorems for axioms/trust escapes;
-4. reject new `sorry`, `axiom`, `postulate`, `@[implemented_by]` or unresolved metas;
-5. report the remaining physical dense-carrier/F3/F4 constructors verbatim.
+1. typecheck `YMClayAristotleGapParityEverything.agda` on the exact branch head;
+2. build the corresponding Lean tree where relevant;
+3. audit for `sorry`, `axiom`, `postulate`, `@[implemented_by]` and unresolved metas;
+4. preserve all physical F1/F3/F4 records as conditional until actual inhabitants are constructed.
 
-Until then, the newly written Agda adapters are **source-written / RED->implemented**, not freshly kernel-certified.
+No status Boolean, source citation or historical receipt is promoted to a physical theorem inhabitant.
