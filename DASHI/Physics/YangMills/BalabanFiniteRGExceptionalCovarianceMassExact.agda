@@ -226,38 +226,17 @@ conditionalCovarianceTwoBound :
   PointwiseUnitBounded right →
   ∀ coarse →
   ∣ Total.conditionalCovariance step left right coarse ∣ ≤ twoℚ
-conditionalCovarianceTwoBound {step = step} positive left right
+conditionalCovarianceTwoBound positive left right
     leftBounded rightBounded coarse =
-  let
-    productBound =
-      transportObservableUnitBound positive
-        (λ fine → left fine * right fine)
-        (productPointwiseUnitBounded left right leftBounded rightBounded)
-        coarse
-
-    leftBound =
-      transportObservableUnitBound positive left leftBounded coarse
-    rightBound =
-      transportObservableUnitBound positive right rightBounded coarse
-
-    meanProductBound :
-      ∣ Reopen.transportObservable step left coarse
-          * Reopen.transportObservable step right coarse ∣ ≤ 1ℚ
-    meanProductBound =
-      subst
-        (_≤ 1ℚ)
-        (ℚP.*-identityʳ 1ℚ)
-        (Bound.absoluteProductBound
-          leftBound rightBound oneNonnegative oneNonnegative)
-
-    triangle =
-      ℚP.∣p-q∣≤∣p∣+∣q∣
-        (Reopen.transportComposite step left right coarse)
-        (Reopen.transportObservable step left coarse
-          * Reopen.transportObservable step right coarse)
-  in
-  ℚP.≤-trans triangle
-    (ℚP.+-mono-≤ productBound meanProductBound)
+  subst
+    (λ value → ∣ value ∣ ≤ twoℚ)
+    (sym
+      (conditionalCovarianceIsFibreProbabilityCovariance
+        positive left right coarse))
+    (FiniteCov.unitBoundedCovariance
+      (fibreProbability positive coarse)
+      left right
+      leftBounded rightBounded)
 
 record ExceptionalCovarianceMask
     {Fine Coarse : Set}
