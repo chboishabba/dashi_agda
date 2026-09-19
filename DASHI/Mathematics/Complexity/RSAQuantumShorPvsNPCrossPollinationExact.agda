@@ -26,6 +26,8 @@ import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact as CostFact
 import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact as SelfReduce
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SATSearch
 import DASHI.Mathematics.Complexity.PolynomialClassicalObserverExact as PolyObserver
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as WordSize
+import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact as ConfigEncoding
 import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 import DASHI.Crypto.ShorFactoring as Shor
 import DASHI.ComputerScience.ShorOrderClassicalQuantumMachineComparisonExact as Comparison
@@ -238,6 +240,8 @@ record PvsNPRSAQuantumCrossPollinationBoundary : Set where
     costAwareFactorisationCompilerPresent : Bool
     decisionToSearchSelfReductionEnginePresent : Bool
     sizedPolynomialClassicalObserverCarrierPresent : Bool
+    concreteWordSizeMetricPresent : Bool
+    finiteConfigurationCodecInterfacePresent : Bool
 
     genericCookLevinCNFPolynomialityPaid : Bool
     booleanFormulaSATSelfReductionInstantiationPaid : Bool
@@ -252,7 +256,7 @@ canonicalPvsNPRSAQuantumCrossPollinationBoundary :
 canonicalPvsNPRSAQuantumCrossPollinationBoundary =
   pvsnp-rsa-quantum-crosspollination-boundary
     true true true true true true true
-    true true true
+    true true true true true
     false true false false false
 
 classicalPvsNPStillOpen :
@@ -277,6 +281,18 @@ sizedPolynomialObserverCarrierNowPaid :
     canonicalPvsNPRSAQuantumCrossPollinationBoundary
   ≡ true
 sizedPolynomialObserverCarrierNowPaid = refl
+
+concreteWordSizeMetricNowPaid :
+  concreteWordSizeMetricPresent
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+concreteWordSizeMetricNowPaid = refl
+
+finiteConfigurationCodecInterfaceNowPaid :
+  finiteConfigurationCodecInterfacePresent
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+finiteConfigurationCodecInterfaceNowPaid = refl
 
 genericCookLevinStillOpen :
   genericCookLevinCNFPolynomialityPaid
