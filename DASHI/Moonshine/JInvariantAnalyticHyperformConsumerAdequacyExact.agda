@@ -32,15 +32,17 @@ import DASHI.Topology.TernaryPantsFrontierExact as Pants
 
 import DASHI.Moonshine.JInvariantAnalyticHyperformChartGluingExact as Atlas
 import DASHI.Moonshine.JInvariantAnalyticStructuredPantsHyperformObserverExact as PantsObserver
+import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact as Chart
+import DASHI.Moonshine.JInvariantBishopLatticeEisensteinSameObjectCompilerExact as Lattice
 
 interactionRechart :
-  Atlas.Chart.JTwoPlusNine →
+  Chart.JTwoPlusNine →
   Fabric.Ternary27Point
 interactionRechart =
   PantsObserver.chartToInteractionVoxel
 
 pantsRechart :
-  Atlas.Chart.JTwoPlusNine →
+  Chart.JTwoPlusNine →
   Pants.PantsPath 3
 pantsRechart =
   PantsObserver.chartToPants3
@@ -49,7 +51,7 @@ parameterInteractionObserver :
   ∀ {M qE4 qE6 system} →
   Atlas.JInvariantAnalyticHyperformAtlas M qE4 qE6 system →
   Glue.ObserverWithFibre
-    (Atlas.Lattice.Parameter M)
+    (Lattice.Parameter M)
     Fabric.Ternary27Point
 parameterInteractionObserver atlas =
   Factor.rechartObserver
@@ -60,7 +62,7 @@ parameterPantsObserver :
   ∀ {M qE4 qE6 system} →
   Atlas.JInvariantAnalyticHyperformAtlas M qE4 qE6 system →
   Glue.ObserverWithFibre
-    (Atlas.Lattice.Parameter M)
+    (Lattice.Parameter M)
     (Pants.PantsPath 3)
 parameterPantsObserver atlas =
   Factor.rechartObserver
@@ -70,7 +72,7 @@ parameterPantsObserver atlas =
 interactionObserverAgreesWithAtlas :
   ∀ {M qE4 qE6 system}
     (atlas : Atlas.JInvariantAnalyticHyperformAtlas M qE4 qE6 system)
-    (tau : Atlas.Lattice.Parameter M) →
+    (tau : Lattice.Parameter M) →
   Glue.observe (parameterInteractionObserver atlas) tau
   ≡ Atlas.observeInteractionAtParameter atlas tau
 interactionObserverAgreesWithAtlas atlas tau = refl
@@ -78,7 +80,7 @@ interactionObserverAgreesWithAtlas atlas tau = refl
 pantsObserverAgreesWithAtlas :
   ∀ {M qE4 qE6 system}
     (atlas : Atlas.JInvariantAnalyticHyperformAtlas M qE4 qE6 system)
-    (tau : Atlas.Lattice.Parameter M) →
+    (tau : Lattice.Parameter M) →
   Glue.observe (parameterPantsObserver atlas) tau
   ≡ Atlas.observePantsAtParameter atlas tau
 pantsObserverAgreesWithAtlas atlas tau = refl
@@ -86,7 +88,7 @@ pantsObserverAgreesWithAtlas atlas tau = refl
 interactionCannotRecoverStructuredObserverDistinction :
   ∀ {M qE4 qE6 system Outcome}
     (atlas : Atlas.JInvariantAnalyticHyperformAtlas M qE4 qE6 system)
-    {consumer : Atlas.Lattice.Parameter M → Outcome} →
+    {consumer : Lattice.Parameter M → Outcome} →
   INF.NonFactorabilityWitness
     (Glue.observe (Atlas.parameterStructuredObserver atlas))
     consumer →
@@ -102,7 +104,7 @@ interactionCannotRecoverStructuredObserverDistinction atlas =
 pantsCannotRecoverStructuredObserverDistinction :
   ∀ {M qE4 qE6 system Outcome}
     (atlas : Atlas.JInvariantAnalyticHyperformAtlas M qE4 qE6 system)
-    {consumer : Atlas.Lattice.Parameter M → Outcome} →
+    {consumer : Lattice.Parameter M → Outcome} →
   INF.NonFactorabilityWitness
     (Glue.observe (Atlas.parameterStructuredObserver atlas))
     consumer →
