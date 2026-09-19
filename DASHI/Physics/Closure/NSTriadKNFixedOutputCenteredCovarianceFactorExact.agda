@@ -182,8 +182,10 @@ againstHeadFactor E I nu work {output} head (x ∷ xs) homogeneous =
       pairFactor E I nu work head x sameOutput
 
     tailHom : OutputHomogeneous output (head ∷ xs)
-    tailHom tau member =
-      homogeneous tau (Cube.there member)
+    tailHom .head (Cube.here refl) =
+      homogeneous head (Cube.here refl)
+    tailHom tau (Cube.there member) =
+      homogeneous tau (Cube.there (Cube.there member))
 
     tail =
       againstHeadFactor E I nu work head xs tailHom
