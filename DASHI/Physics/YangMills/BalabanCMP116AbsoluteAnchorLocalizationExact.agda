@@ -22,9 +22,10 @@ module DASHI.Physics.YangMills.BalabanCMP116AbsoluteAnchorLocalizationExact wher
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
+  (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
-open import Data.Rational.Unnormalised using (∣_∣)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
@@ -52,23 +53,20 @@ absoluteSplit : ∀ selectedValue referenceValue →
   ∣ selectedValue ∣
   ≤ ∣ selectedValue - referenceValue ∣ + ∣ referenceValue ∣
 absoluteSplit selectedValue referenceValue =
-  let
-    decomposition : selectedValue ≡
-      (selectedValue - referenceValue) + referenceValue
-    decomposition = ℚP.+-∸ selectedValue referenceValue
-  in
   subst
-    (λ value → value ≤
-      ∣ selectedValue - referenceValue ∣ + ∣ referenceValue ∣)
-    (cong ∣_∣ decomposition)
-    (ℚP.∣p+q∣≤∣p∣+∣q∣ (selectedValue - referenceValue) referenceValue)
+    (λ value →
+      ∣ value ∣
+      ≤ ∣ selectedValue - referenceValue ∣ + ∣ referenceValue ∣)
+    (decomposition selectedValue referenceValue)
+    (ℚP.∣p+q∣≤∣p∣+∣q∣
+      (selectedValue - referenceValue) referenceValue)
   where
-  cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
-  cong f refl = refl
+  decomposition : ∀ s r → s ≡ (s - r) + r
+  decomposition = ℚRing.solve-∀
 
 sumAmplitudeFactor : ∀ a b factor →
   a * factor + b * factor ≡ (a + b) * factor
-sumAmplitudeFactor a b factor = ℚP.*-distribʳ-+ factor a b
+sumAmplitudeFactor = ℚRing.solve-∀
 
 selectedAbsoluteBound : (dataSet : AbsoluteAnchorLocalizationData) → ∀ depth →
   ∣ selected dataSet depth ∣
