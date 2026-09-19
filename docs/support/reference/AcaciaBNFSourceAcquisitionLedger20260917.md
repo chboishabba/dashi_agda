@@ -75,6 +75,7 @@ All identifiers below were acquired/verified during the source-written tranche a
 - `10.1111/j.1365-2664.2006.01262.x` — Standish et al. 2007; WA old-field recolonisation limited by seed dispersal and recruitment, with exotic annual-grass dominance retained as a competing state.
 - `10.1111/1365-2664.12551` — Fensham et al. 2016; Queensland subtropical-grassland passive restoration depends on remnant seed sources, dispersal and avoidance of deflected succession.
 - `10.1002/eap.2547` — PMID `35080806` — Parkhurst, Standish & Prober 2022; available soil P remains elevated more than a decade after old-field restoration, so present vegetation does not erase agricultural nutrient history.
+- `10.1016/j.agee.2012.05.024` — Vickers, Gillespie & Gravina 2012; annual north-west Queensland post-mine rehabilitation monitoring of vegetation composition, structure and function. Repeated monitoring is stronger than age-only chronosequence evidence but does not itself pay a joint soil-biota/propagule trajectory.
 
 ## Sorghum-sudangrass temporary nurse / cover function
 
@@ -84,6 +85,7 @@ All identifiers below were acquired/verified during the source-written tranche a
 
 ## Isotope observer / method-calibration donors
 
+- `10.1016/j.soilbio.2005.12.012` — Sierra & Nygren 2006; Guadeloupe field Gliricidia-Dichanthium silvopastoral design excluding above-ground recycling, using natural-abundance `15N`, tree-root density and explicit reference-plant/isotope-baseline treatment. Retained as a field below-ground transfer design donor, not Australian or Acacia/Senegalia same-object evidence.
 - `10.1071/AR9940133` — Pate, Unkovich, Armstrong & Sanford 1994; reference-plant selection for `15N` natural-abundance assessment. Retained only as method/observer calibration, not as Acacia biological evidence.
 
 ## Nitrogenase / situated-protein donors
