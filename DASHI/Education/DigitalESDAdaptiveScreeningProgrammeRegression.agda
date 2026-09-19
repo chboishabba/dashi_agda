@@ -69,3 +69,19 @@ similarityCannotDetermineStudyIdentity :
   P0.FamilySimilarityFactorisation → ⊥
 similarityCannotDetermineStudyIdentity =
   P0.familySimilarityCannotDetermineSameEmpiricalStudy
+
+
+singleSourceFrameworkChallengeCannotPromoteFinalPrinciple :
+  P0.FrameworkChallengeCreatesFinalPrinciplePromotion → ⊥
+singleSourceFrameworkChallengeCannotPromoteFinalPrinciple =
+  P0.frameworkChallengeDoesNotCreateFinalPrinciplePromotion
+
+singleSourceFrameworkChallengeCannotCreateCorpusConclusion :
+  P0.SingleSourceChallengeCreatesCorpusConclusion → ⊥
+singleSourceFrameworkChallengeCannotCreateCorpusConclusion =
+  P0.singleSourceChallengeDoesNotCreateCorpusConclusion
+
+corpusRevisionCannotCreateUniversalTruth :
+  P0.CorpusFrameworkRevisionCreatesUniversalTruth → ⊥
+corpusRevisionCannotCreateUniversalTruth =
+  P0.corpusFrameworkRevisionDoesNotCreateUniversalTruth
