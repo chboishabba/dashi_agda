@@ -45,11 +45,11 @@ ieeeTranslationObservedRegression :
   ≡ true
 ieeeTranslationObservedRegression = refl
 
-ericTranslationStillDebtRegression :
+ericTranslationObservedRegression :
   Translation.DatabaseTranslationBoundary.ericExactTranslationSyntaxObserved
     Translation.canonicalDatabaseTranslationBoundary
-  ≡ false
-ericTranslationStillDebtRegression = refl
+  ≡ true
+ericTranslationObservedRegression = refl
 
 acmTranslationStillDebtRegression :
   Translation.DatabaseTranslationBoundary.acmExactTranslationSyntaxObserved
