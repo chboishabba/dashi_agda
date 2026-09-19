@@ -81,10 +81,10 @@ gammaCandidateFamilyAlreadyRecovered :
     Gamma.canonicalPoleQuotientGammaAllowanceDirectCompilerBoundary ≡ true
 gammaCandidateFamilyAlreadyRecovered = refl
 
-gammaFinalProducerIdentityStillOpen :
+gammaFinalProducerIdentityRecovered :
   Gamma.PoleQuotientGammaAllowanceDirectCompilerBoundary.candidateLineageAlreadyIdentifiedWithFinal8889Producer
-    Gamma.canonicalPoleQuotientGammaAllowanceDirectCompilerBoundary ≡ false
-gammaFinalProducerIdentityStillOpen = refl
+    Gamma.canonicalPoleQuotientGammaAllowanceDirectCompilerBoundary ≡ true
+gammaFinalProducerIdentityRecovered = refl
 
 gammaAllowancePaymentCompilesAfterInput :
   Gamma.PoleQuotientGammaAllowanceDirectCompilerBoundary.finalGammaAllowancePaymentCompiles
@@ -99,10 +99,7 @@ rhStillNotDerived = refl
 ------------------------------------------------------------------------
 -- Shortest-path scheduler reading.
 --
--- Gamma has one source/same-object seam ahead of its terminal analytic allowance
--- fit. Off has no analogous source-discovery seam: its near/far composition and
--- far shell are already owned, so work begins immediately at the signed-near
--- common-cutoff payment and assigned-allowance fit.
+-- Gamma source/same-consumer identity is now source-recovered from vendored theorem bytes; only theorem replay and the sharp quantitative repair/bypass remain. Off has no source-discovery seam: its near/far composition and far shell are already owned, so work begins at the adaptive signed-near/common-cutoff payment and final baseline-excess fit.
 ------------------------------------------------------------------------
 
 data TerminalPhase : Set where
@@ -111,7 +108,7 @@ data TerminalPhase : Set where
 
 
 phase : TerminalSubleaf → TerminalPhase
-phase gammaCandidateEqualsFinalProducer = representationFirst
+phase gammaCandidateEqualsFinalProducer = analyticPayment
 phase offSignedNearAtCommonCutoff = analyticPayment
 phase offNearPlusFarFitsAssignedAllowance = analyticPayment
 phase gammaBudgetFitsAssignedAllowance = analyticPayment
@@ -124,7 +121,7 @@ record TerminalPaymentCompressionBoundary : Set where
     gammaGenericSourceDiscoveryStillLive : Bool
     gammaGenericSourceDiscoveryStillLiveIsFalse : gammaGenericSourceDiscoveryStillLive ≡ false
     gammaSameConsumerProducerIdentityStillLive : Bool
-    gammaSameConsumerProducerIdentityStillLiveIsTrue : gammaSameConsumerProducerIdentityStillLive ≡ true
+    gammaSameConsumerProducerIdentityStillLiveIsFalse : gammaSameConsumerProducerIdentityStillLive ≡ false
     finalPaymentRecordsShouldBeHandBuiltAfterInputs : Bool
     finalPaymentRecordsShouldBeHandBuiltAfterInputsIsFalse : finalPaymentRecordsShouldBeHandBuiltAfterInputs ≡ false
     fourSubleavesAreClaimsOfProof : Bool
@@ -132,4 +129,4 @@ record TerminalPaymentCompressionBoundary : Set where
 
 canonicalTerminalPaymentCompressionBoundary : TerminalPaymentCompressionBoundary
 canonicalTerminalPaymentCompressionBoundary =
-  terminal-payment-compression-boundary false refl false refl true refl false refl false refl
+  terminal-payment-compression-boundary false refl false refl false refl false refl false refl
