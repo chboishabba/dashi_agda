@@ -31,7 +31,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -57,6 +57,7 @@ centeredSquare E (Z3.mode px py pz) (Z3.mode qx qy qz) =
   + Rational.square (C3.embedInteger E pz - C3.embedInteger E qz)
 
 inputSquareMass :
+  {E : C3.IntegerEmbedding F} →
   (I : C3.ModeInverseSquare F E) →
   Z3.FourierMode → Z3.FourierMode → ℚ
 inputSquareMass I p q = C3.normSquared I p + C3.normSquared I q
@@ -94,7 +95,9 @@ incidenceParallelogram :
 incidenceParallelogram E I tau =
   trans
     (inputParallelogram E I (Physical.p tau) (Physical.q tau))
-    (cong (_+ centeredSquare E (Physical.p tau) (Physical.q tau))
+    (cong
+      (λ outputSquare →
+        outputSquare + centeredSquare E (Physical.p tau) (Physical.q tau))
       (cong (C3.normSquared I) (Physical.resonance tau)))
 
 ------------------------------------------------------------------------
@@ -129,15 +132,33 @@ fixedOutputInputSquareDifference E I alpha beta sameOutput =
 
     sameK : Ka ≡ Kb
     sameK = cong (C3.normSquared I) sameOutput
+    distribute :
+      two * (Sa - Sb) ≡ two * Sa - two * Sb
+    distribute = solve (Sa ∷ Sb ∷ [])
+
+    replaceParallelograms :
+      two * Sa - two * Sb ≡ (Ka + Ca) - (Kb + Cb)
+    replaceParallelograms = cong₂ _-_ pa pb
+
+    replaceOutput :
+      (Ka + Ca) - (Kb + Cb) ≡ (Kb + Ca) - (Kb + Cb)
+    replaceOutput =
+      cong (λ outputSquare → (outputSquare + Ca) - (Kb + Cb)) sameK
+
+    cancelOutput :
+      (Kb + Ca) - (Kb + Cb) ≡ Ca - Cb
+    cancelOutput = solve (Kb ∷ Ca ∷ Cb ∷ [])
   in
-  rewrite pa | pb | sameK =
-    solve (Kb ∷ Ca ∷ Cb ∷ [])
+  trans distribute
+    (trans replaceParallelograms
+      (trans replaceOutput cancelOutput))
 
 ------------------------------------------------------------------------
 -- Physical viscosity scaling.
 ------------------------------------------------------------------------
 
 viscousCellRate :
+  {E : C3.IntegerEmbedding F} →
   (nu : ℚ) →
   (I : C3.ModeInverseSquare F E) →
   Physical.PhysicalTriadIncidence → ℚ
@@ -235,7 +256,7 @@ fixedOutputViscousRateWorkDifferenceFactor
   in
   trans
     (solve (rateA ∷ rateB ∷ workA ∷ workB ∷ []))
-    (cong (_* (workA - workB)) base)
+    (cong (λ rateDefect → rateDefect * (workA - workB)) base)
 
 ------------------------------------------------------------------------
 -- Trust boundary.
