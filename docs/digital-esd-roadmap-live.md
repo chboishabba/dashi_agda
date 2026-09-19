@@ -642,3 +642,49 @@ The controlling distinction remains:
 Current observed execution result sets remain zero. Translation closure removes a planning debt; it does not pay execution, export retention, deduplication, screening, extraction or corpus admission.
 
 Accordingly the scientific P0 is now pure execution work rather than further query formalisation.
+
+
+## 24. All declared queries now have attempt receipts
+
+All 35 frozen platform-specific queries now have query-specific execution-attempt receipts:
+
+```text
+Scopus              7/7 attempted
+Web of Science      7/7 attempted
+ERIC                 7/7 attempted
+IEEE Xplore         7/7 attempted
+ACM Digital Library  7/7 attempted
+total               35/35 attempted
+```
+
+Observed successful result sets remain:
+
+```text
+0/35
+```
+
+and retained database exports remain zero.
+
+The failure classes remain source/surface-specific and append-only:
+
+- Scopus / Web of Science: HTTP 403 before query submission;
+- ERIC: current web transport could not retrieve the direct API response;
+- IEEE Xplore / ACM Digital Library: current web transport could not retrieve live query-bearing result pages.
+
+None of these states can inhabit `SuccessfulObservedOutcome`, so none can cross
+`DigitalESDDatabaseExecutionStructuredSearchBridgeExact`.
+
+The current programme boundary is therefore:
+
+```text
+query formalisation        paid 35/35
+attempt provenance         paid 35/35
+observed result sets       unpaid 0/35
+retained exports           unpaid
+deduplication              unpaid
+screening                  unpaid
+structured extraction      unpaid
+CorpusAuditedSource        none
+```
+
+Further framework/query formalisation is dominated until a genuinely reachable execution environment produces observed counts/exports.
