@@ -263,3 +263,7 @@ import DASHI.Physics.Closure.MultiverseAttractorDiscriminatorBidiExact
 import DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalProjectedInteractionExact
 
 import DASHI.Physics.Closure.NSWholeSpaceR3PhysicalKernelProjectedQWeldExact
+
+import DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalProjectedGramPairExact
+
+import DASHI.Physics.Closure.NSWholeSpacePhysicalKernelSaturationOriginExact
