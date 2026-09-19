@@ -29,3 +29,9 @@ titleIdentityCannotReplaceSameObjectWeld :
   Bridge.TitleMatchCreatesSameObjectPaperIdentity → ⊥
 titleIdentityCannotReplaceSameObjectWeld =
   Bridge.titleMatchDoesNotCreateSameObjectPaperIdentity
+
+
+slrReviewPacketCannotCreateCorpusAuditedSource :
+  Bridge.SLRReviewPacketCreatesCorpusAuditedSource → ⊥
+slrReviewPacketCannotCreateCorpusAuditedSource =
+  Bridge.slrReviewPacketDoesNotCreateCorpusAuditedSource
