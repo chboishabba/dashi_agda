@@ -184,6 +184,127 @@ carryoverCannotDetermineReplacementValue =
   INF.witnessRulesOutEveryFlatFactorisation replacementCounterfactualWitness
 
 ------------------------------------------------------------------------
+-- Enriched-observer repairs.
+--
+-- These finite repair theorems state only that the missing distinction is
+-- sufficient for the synthetic witness consumer. They do not claim that the
+-- listed coordinate set is universally sufficient for field deployment.
+------------------------------------------------------------------------
+
+data TransportRouteObservation : Set where
+  observedLivingBelowGroundRoute : TransportRouteObservation
+  observedResidueMineralisationRoute : TransportRouteObservation
+
+transportRouteEnrichedProjection :
+  NitrogenTransportWorld → TransportRouteObservation
+transportRouteEnrichedProjection fixedNViaLivingBelowGroundRoute =
+  observedLivingBelowGroundRoute
+transportRouteEnrichedProjection fixedNViaResidueMineralisationRoute =
+  observedResidueMineralisationRoute
+
+interpretTransportRouteObservation :
+  TransportRouteObservation → TransportRouteOutcome
+interpretTransportRouteObservation observedLivingBelowGroundRoute =
+  livingBelowGroundRoute
+interpretTransportRouteObservation observedResidueMineralisationRoute =
+  residueMineralisationRoute
+
+transportRouteEnrichedFactorisation :
+  INF.FactorsThrough transportRouteEnrichedProjection transportRouteOutcome
+transportRouteEnrichedFactorisation =
+  INF.factorsThrough interpretTransportRouteObservation factor
+  where
+    factor : ∀ state →
+      transportRouteOutcome state ≡
+      interpretTransportRouteObservation (transportRouteEnrichedProjection state)
+    factor fixedNViaLivingBelowGroundRoute = refl
+    factor fixedNViaResidueMineralisationRoute = refl
+
+data ReleaseTimingObservation : Set where
+  observedDemandAlignedRelease : ReleaseTimingObservation
+  observedPreDemandLoss : ReleaseTimingObservation
+
+releaseTimingEnrichedProjection :
+  NitrogenTimingWorld → ReleaseTimingObservation
+releaseTimingEnrichedProjection releaseAlignedWithConsumerDemand =
+  observedDemandAlignedRelease
+releaseTimingEnrichedProjection releaseLostBeforeConsumerDemand =
+  observedPreDemandLoss
+
+interpretReleaseTimingObservation : ReleaseTimingObservation → Bool
+interpretReleaseTimingObservation observedDemandAlignedRelease = true
+interpretReleaseTimingObservation observedPreDemandLoss = false
+
+releaseTimingEnrichedFactorisation :
+  INF.FactorsThrough releaseTimingEnrichedProjection demandCaptureOutcome
+releaseTimingEnrichedFactorisation =
+  INF.factorsThrough interpretReleaseTimingObservation factor
+  where
+    factor : ∀ state →
+      demandCaptureOutcome state ≡
+      interpretReleaseTimingObservation (releaseTimingEnrichedProjection state)
+    factor releaseAlignedWithConsumerDemand = refl
+    factor releaseLostBeforeConsumerDemand = refl
+
+data NitrogenWaterObservation : Set where
+  observedAdequateWater : NitrogenWaterObservation
+  observedWaterConstraint : NitrogenWaterObservation
+
+nitrogenWaterEnrichedProjection :
+  NitrogenWaterWorld → NitrogenWaterObservation
+nitrogenWaterEnrichedProjection nitrogenServiceWithAdequateWater =
+  observedAdequateWater
+nitrogenWaterEnrichedProjection nitrogenServiceUnderWaterConstraint =
+  observedWaterConstraint
+
+interpretNitrogenWaterObservation : NitrogenWaterObservation → Bool
+interpretNitrogenWaterObservation observedAdequateWater = true
+interpretNitrogenWaterObservation observedWaterConstraint = false
+
+nitrogenWaterEnrichedFactorisation :
+  INF.FactorsThrough nitrogenWaterEnrichedProjection waterCoupledOutcome
+nitrogenWaterEnrichedFactorisation =
+  INF.factorsThrough interpretNitrogenWaterObservation factor
+  where
+    factor : ∀ state →
+      waterCoupledOutcome state ≡
+      interpretNitrogenWaterObservation (nitrogenWaterEnrichedProjection state)
+    factor nitrogenServiceWithAdequateWater = refl
+    factor nitrogenServiceUnderWaterConstraint = refl
+
+data ReplacementCounterfactualObservation : Set where
+  observedHigherReplacementCurve : ReplacementCounterfactualObservation
+  observedLowerReplacementCurve : ReplacementCounterfactualObservation
+
+replacementCounterfactualEnrichedProjection :
+  FertilizerReplacementWorld → ReplacementCounterfactualObservation
+replacementCounterfactualEnrichedProjection sameCarryoverHighMineralNReplacement =
+  observedHigherReplacementCurve
+replacementCounterfactualEnrichedProjection sameCarryoverLowMineralNReplacement =
+  observedLowerReplacementCurve
+
+interpretReplacementCounterfactualObservation :
+  ReplacementCounterfactualObservation → ReplacementOutcome
+interpretReplacementCounterfactualObservation observedHigherReplacementCurve =
+  largerReplacementValue
+interpretReplacementCounterfactualObservation observedLowerReplacementCurve =
+  smallerReplacementValue
+
+replacementCounterfactualEnrichedFactorisation :
+  INF.FactorsThrough
+    replacementCounterfactualEnrichedProjection
+    replacementOutcome
+replacementCounterfactualEnrichedFactorisation =
+  INF.factorsThrough interpretReplacementCounterfactualObservation factor
+  where
+    factor : ∀ state →
+      replacementOutcome state ≡
+      interpretReplacementCounterfactualObservation
+        (replacementCounterfactualEnrichedProjection state)
+    factor sameCarryoverHighMineralNReplacement = refl
+    factor sameCarryoverLowMineralNReplacement = refl
+
+------------------------------------------------------------------------
 -- Failed factorisation -> missing-axis / experiment-design proposals.
 --
 -- These are DASHI planning receipts only. They do not create measurements.
@@ -251,6 +372,8 @@ record NitrogenFactorisationBoundary : Set where
     nitrogenWaterNonFactorabilityOwned : Bool
     fertilizerCounterfactualNonFactorabilityOwned : Bool
     failedFactorisationMayProposeRepairAxis : Bool
+    enrichedObserverRepairFactorisationsOwned : Bool
+    enrichedFiniteRepairClaimedUniversallySufficient : Bool
     proposalCreatesEmpiricalEvidence : Bool
     finiteWitnessCreatesSourceProposition : Bool
     comparatorCreatesAcaciaSameObjectEvidence : Bool
@@ -264,6 +387,8 @@ canonicalNitrogenFactorisationBoundary = record
   ; nitrogenWaterNonFactorabilityOwned = true
   ; fertilizerCounterfactualNonFactorabilityOwned = true
   ; failedFactorisationMayProposeRepairAxis = true
+  ; enrichedObserverRepairFactorisationsOwned = true
+  ; enrichedFiniteRepairClaimedUniversallySufficient = false
   ; proposalCreatesEmpiricalEvidence = false
   ; finiteWitnessCreatesSourceProposition = false
   ; comparatorCreatesAcaciaSameObjectEvidence = false
@@ -271,4 +396,4 @@ canonicalNitrogenFactorisationBoundary = record
 
 attributionRule : String
 attributionRule =
-  "DASHI owns the finite non-factorability witnesses, FactorsThrough exclusions and Snowball axis proposals in this module. They are synthetic representation/experimental-design results, not propositions attributed to Vallis, Catchpoole & Blair, Hossain, Bell/Peoples, Fontes or any Acacia/Senegalia source. Empirical route, timing, water, crop-response and counterfactual claims remain owned by their source-specific agriculture modules. Failed factorisation may identify what an experiment must distinguish; it does not create the missing measurement, same-object relation, fertilizer-replacement value or deployment authority."
+  "DASHI owns the finite non-factorability witnesses, FactorsThrough exclusions, finite enriched-observer repair factorisations and Snowball axis proposals in this module. They are synthetic representation/experimental-design results, not propositions attributed to Vallis, Catchpoole & Blair, Hossain, Bell/Peoples, Fontes or any Acacia/Senegalia source. Empirical route, timing, water, crop-response and counterfactual claims remain owned by their source-specific agriculture modules. Failed factorisation may identify what an experiment must distinguish; it does not create the missing measurement, same-object relation, fertilizer-replacement value or deployment authority."
