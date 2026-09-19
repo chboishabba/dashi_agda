@@ -243,8 +243,8 @@ level2GlobalAFSecondPayment = exact-residual
 level2OPECoefficientRGCoordinateAttachment : ExactResidual
 level2OPECoefficientRGCoordinateAttachment = exact-residual
   physicalClayStressConstruction
-  "BalabanOPECoefficientRGRecurrenceUniquenessExact.agda / YMClayLevel2WardRGReuseExact.agda"
-  "literal OPE coefficient = same one-step RG mixing/UV coordinate"
+  "YMClayLevel2OPECoefficientCoordinateWeldExact.agda"
+  "literal OPE coefficient = projection of the same RG/composite coordinate"
   unpaid
   "This is a same-object coordinate attachment, not a second global AF proof. Once supplied, all-depth OPE coefficient equality is machine-checked induction."
 
@@ -267,10 +267,10 @@ level2GeneratedActionStressProvenance = exact-residual
 level2ContinuumWardTransport : ExactResidual
 level2ContinuumWardTransport = exact-residual
   physicalClayStressConstruction
-  "YMClayLevel2WardRGReuseExact.agda"
-  "finite translation-Ward current = recovered continuum stress insertion on the same family"
+  "YMClayLevel2ContinuumWardTransportExact.agda"
+  "mapped finite Ward-charge sequence converges to the recovered continuum stress first variation"
   unpaid
-  "This is the genuine Ward residue left by archaeology: transport the already-owned finite Ward current through the already-owned generated-action/stress recovery and show it is the same continuum stress insertion. No hidden theorem currently discharges that same-object continuum transport."
+  "This is the genuine Ward residue left by archaeology. The finite charge is rational while the recovered stress lives in StressRep.PairingScalar, so the bridge explicitly supplies the finite-charge representation map and convergence to the exact R131/R136 continuum first-variation target. No carrier equality by name is allowed."
 
 level2LiteralClayStressOPECompiler : ExactResidual
 level2LiteralClayStressOPECompiler = exact-residual
@@ -377,6 +377,15 @@ generatedActionStressProvenanceIndependentAfterR136 = false
 
 allDepthOPECoefficientEqualityIndependentAfterOneStepLaw : Bool
 allDepthOPECoefficientEqualityIndependentAfterOneStepLaw = false
+
+d2NewGlobalAFTheoremRequired : Bool
+d2NewGlobalAFTheoremRequired = false
+
+d3FiniteWardAlgebraNewPhysicalTheorem : Bool
+d3FiniteWardAlgebraNewPhysicalTheorem = false
+
+d3FiniteToContinuumSameCurrentTransportStillPhysical : Bool
+d3FiniteToContinuumSameCurrentTransportStillPhysical = true
 
 f4EvolutionEqualityPrimitive : Bool
 f4EvolutionEqualityPrimitive = false
