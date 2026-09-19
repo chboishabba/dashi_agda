@@ -24,9 +24,11 @@ module DASHI.Analysis.BishopContractiveCompartmentSeriesExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 import Real as BishopReal
+import RealProperties as BishopP
 import Sequence as BishopSequence
 
 import DASHI.Analysis.BishopPolynomialGeometricSeriesConvergenceExact as PolyGeo
+import DASHI.Analysis.BishopFirstOrderRateDiscreteContractionExact as FirstOrder
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as BishopBridge
 
 record BishopPolynomialGeometricCompartment : Set where
@@ -45,6 +47,26 @@ record BishopPolynomialGeometricCompartment : Set where
       BishopReal.NonNegative scale
 
 open BishopPolynomialGeometricCompartment public
+
+
+firstOrderPolynomialGeometricCompartment :
+  FirstOrder.PositiveFirstOrderDiscretisation →
+  (scale : BishopReal.ℝ) →
+  (degree : Nat) →
+  BishopReal.NonNegative scale →
+  BishopPolynomialGeometricCompartment
+firstOrderPolynomialGeometricCompartment inputs scale degree scaleNonnegative =
+  record
+    { scale = scale
+    ; ratio = FirstOrder.discreteContractionRatio inputs
+    ; degree = degree
+    ; ratioNonnegative =
+        BishopP.<⇒≤
+          (FirstOrder.discreteContractionRatioPositive inputs)
+    ; ratioBelowOne =
+        FirstOrder.discreteContractionRatioBelowOne inputs
+    ; scaleNonnegative = scaleNonnegative
+    }
 
 compartmentMajorantTerm :
   BishopPolynomialGeometricCompartment →
