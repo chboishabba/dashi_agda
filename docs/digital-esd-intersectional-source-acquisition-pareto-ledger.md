@@ -181,3 +181,87 @@ execute declared searches
 ```
 
 Pre-corpus snowball acquisition is now subordinate to that path.
+
+
+## 7. Upstream eligibility-frame residual — outside Round 21
+
+Round 20 remains the frozen endpoint of the original eleven-question pre-corpus acquisition matrix. The next residual is **upstream** of `whoWasEligibleButMissing`:
+
+```text
+target universe
+!= administrative / eligibility / recruitment frame
+!= declared eligible carrier
+!= invitation / response / consent carrier
+!= realised analytic carrier
+```
+
+This is therefore not called Round 21. It is a separate consumer exposed by the #981 eligible-missing work and by Digital-ESD's own frozen matrix.
+
+Canonical theorem owner:
+
+`DASHI/Education/DigitalESDEligibilityFrameExclusionExact.agda`
+
+with regression:
+
+`DigitalESDEligibilityFrameExclusionRegression.agda`.
+
+DASHI finite collision:
+
+```text
+same declared eligible carrier
+!= same upstream eligibility-frame state
+```
+
+or, formally:
+
+```text
+EligibilityFrameState
+not FactorsThrough
+DeclaredEligibleCarrier
+```
+
+Existing repo donors are reused rather than duplicated:
+
+- `DASHI.Core.ParticipationSelectionQuotient` for eligibility -> invitation -> participation separation;
+- `DASHI.Reasoning.EvidenceDesignAdmissibilityExact` for `samplingFrame` as a study-design coordinate.
+
+### Python/Pareto acquisition front
+
+The upstream acquisition matrix ranked three source roles above generic nonresponse literature:
+
+1. **NCVER 2024, National Student Outcomes Survey 2024 — technical notes** — institutional methodology source with explicit population -> sampling frame -> invitation construction. The sampling frame is restricted to de-duplicated records available for surveying and with obtainable contact details before sampling.
+2. **John Voorheis, 2021, Evaluating Administrative Records as a Potential Sample Frame for the National Survey of College Graduates** — U.S. Census Bureau CARRA Working Paper 18-14; same-object frame comparison with subgroup-specific administrative-record undercoverage.
+3. **Jennifer Clutterbuck; Ian Hardy; Sue Creagh, 2023 issue / 2021 online, DOI `10.1080/02680939.2021.1972166`** — Queensland OneSchool data-infrastructure study paying category/data preclusion and omission, including omitted Indigenous-language enrolment information.
+
+Canonical candidate owner:
+
+`DASHI/Education/DigitalESDEligibilityFrameAcquisitionExact.agda`
+
+with regression:
+
+`DigitalESDEligibilityFrameAcquisitionRegression.agda`.
+
+Attribution firewalls remain:
+
+```text
+source proposition != DASHI finite collision
+institutional frame != population truth
+administrative presence != complete representation
+category omission != individual outcome
+candidate acquisition != final corpus inclusion
+QID unresolved != guessed QID
+Dewey navigation != evidence or authority
+```
+
+The empirical sources do not populate the synthetic worlds or prove the `FactorsThrough` theorem.
+
+### Updated acquisition stop rule
+
+Broad pre-corpus acquisition remains frozen. Reopen only on:
+
+- an admitted-corpus P0 residual;
+- a new constructive consumer collision;
+- a stronger same-object frame/recruitment observation;
+- or a literal need to distinguish target-universe construction from declared eligibility.
+
+Generic additional nonresponse or digital-divide papers remain dominated.
