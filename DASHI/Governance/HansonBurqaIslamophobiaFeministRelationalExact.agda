@@ -18,6 +18,7 @@ import DASHI.Core.FeministRechartingSourceBridgeExact as Feminist
 import DASHI.Core.DominantChartEpistemicCompressionExact as Compression
 import DASHI.Culture.AmalekAuthorityProjectionBoundary as Amalek
 import DASHI.Cognition.PNF.SensibLawReopenableRelationalAuthorityExact as Relational
+import DASHI.Cognition.PNF.SensibLawHaudenosauneeConsensusDeliberationReceiptExact as Haudenosaunee
 import DASHI.Governance.HansonCapacityCriticismHyperformalismExact as Hanson
 import DASHI.Governance.HansonOneNationPoliticalEcologyExact as Ecology
 import DASHI.Governance.HansonPoliticalEquilibriumNonfactorabilityExact as Equilibrium
@@ -567,7 +568,7 @@ genericRelationalProcedure = Relational.decision-procedure
   true
   true
   false
-  (Relational.source Relational.haudenosauneeProcedure)
+  (Relational.source Haudenosaunee.haudenosauneeProcedure)
   false
 
 ------------------------------------------------------------------------
