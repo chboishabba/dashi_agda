@@ -16,29 +16,27 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data ScreeningDecision : Set where
-  include
-  probable
-  exclude
-  unresolved
-  : ScreeningDecision
+  include : ScreeningDecision
+  probable : ScreeningDecision
+  exclude : ScreeningDecision
+  unresolved : ScreeningDecision
 
 data ScreeningReasonCode : Set where
-  populationMismatch
-  educationContextMismatch
-  interventionOrTechnologyMismatch
-  sustainabilityQuestionMismatch
-  noEmpiricalStudy
-  noRelevantReviewOrMethodRole
-  insufficientTitleAbstractEvidence
-  inaccessibleAbstract
-  languageOutsideDeclaredScope
-  publicationTypeOutsideDeclaredScope
-  duplicateCandidate
-  awaitingScreeningReview
-  potentiallyRelevant
-  requiresFullText
-  otherScreeningReason
-  : ScreeningReasonCode
+  populationMismatch : ScreeningReasonCode
+  educationContextMismatch : ScreeningReasonCode
+  interventionOrTechnologyMismatch : ScreeningReasonCode
+  sustainabilityQuestionMismatch : ScreeningReasonCode
+  noEmpiricalStudy : ScreeningReasonCode
+  noRelevantReviewOrMethodRole : ScreeningReasonCode
+  insufficientTitleAbstractEvidence : ScreeningReasonCode
+  inaccessibleAbstract : ScreeningReasonCode
+  languageOutsideDeclaredScope : ScreeningReasonCode
+  publicationTypeOutsideDeclaredScope : ScreeningReasonCode
+  duplicateCandidate : ScreeningReasonCode
+  awaitingScreeningReview : ScreeningReasonCode
+  potentiallyRelevant : ScreeningReasonCode
+  requiresFullText : ScreeningReasonCode
+  otherScreeningReason : ScreeningReasonCode
 
 data OptionalReference : Set where
   noReference : OptionalReference
@@ -49,11 +47,10 @@ data OptionalReference : Set where
 ------------------------------------------------------------------------
 
 data DuplicateRelationKind : Set where
-  metadataDuplicate
-  publicationDuplicate
-  reportFamilyDuplicate
-  sameEmpiricalStudy
-  : DuplicateRelationKind
+  metadataDuplicate : DuplicateRelationKind
+  publicationDuplicate : DuplicateRelationKind
+  reportFamilyDuplicate : DuplicateRelationKind
+  sameEmpiricalStudy : DuplicateRelationKind
 
 record DuplicateRelationReceipt : Set where
   constructor duplicate-relation-receipt

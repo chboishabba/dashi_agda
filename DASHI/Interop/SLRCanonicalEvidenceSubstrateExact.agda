@@ -28,16 +28,15 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data EvidenceManifestationFamily : Set where
-  zelphHyperfabric
-  wikidata
-  wikipedia
-  oalc
-  legalAuthority
-  pdfDocument
-  transcript
-  userEvidence
-  otherEvidence
-  : EvidenceManifestationFamily
+  zelphHyperfabric : EvidenceManifestationFamily
+  wikidata : EvidenceManifestationFamily
+  wikipedia : EvidenceManifestationFamily
+  oalc : EvidenceManifestationFamily
+  legalAuthority : EvidenceManifestationFamily
+  pdfDocument : EvidenceManifestationFamily
+  transcript : EvidenceManifestationFamily
+  userEvidence : EvidenceManifestationFamily
+  otherEvidence : EvidenceManifestationFamily
 
 record EvidenceManifestation : Set where
   constructor evidence-manifestation

@@ -28,16 +28,28 @@ data RevisionId : Set where
   numericRevisionId : Nat → RevisionId
 
 data RetrievalMethod : Set where
-  pdfSnapshot htmlSnapshot wikiRevision csvSnapshot chatCapture otherRetrieval
-  : RetrievalMethod
+  pdfSnapshot : RetrievalMethod
+  htmlSnapshot : RetrievalMethod
+  wikiRevision : RetrievalMethod
+  csvSnapshot : RetrievalMethod
+  chatCapture : RetrievalMethod
+  otherRetrieval : RetrievalMethod
 
 data SourceType : Set where
-  pdfSource htmlSource wikiSource csvSource chatSource textSource otherSource
-  : SourceType
+  pdfSource : SourceType
+  htmlSource : SourceType
+  wikiSource : SourceType
+  csvSource : SourceType
+  chatSource : SourceType
+  textSource : SourceType
+  otherSource : SourceType
 
 data ContentFormat : Set where
-  textFormat htmlFormat markdownFormat csvFormat otherFormat
-  : ContentFormat
+  textFormat : ContentFormat
+  htmlFormat : ContentFormat
+  markdownFormat : ContentFormat
+  csvFormat : ContentFormat
+  otherFormat : ContentFormat
 
 record SourceRevision : Set where
   constructor source-revision
@@ -91,24 +103,22 @@ open SensibLawSourceUnit public
 ------------------------------------------------------------------------
 
 data ReviewRoute : Set where
-  fullAuto
-  splitAuto
-  repairPlusMigrateReview
-  reviewOnlyTypedHold
-  manualReconstruction
-  : ReviewRoute
+  fullAuto : ReviewRoute
+  splitAuto : ReviewRoute
+  repairPlusMigrateReview : ReviewRoute
+  reviewOnlyTypedHold : ReviewRoute
+  manualReconstruction : ReviewRoute
 
 data MigrationDisposition : Set where
-  safeEquivalent
-  safeWithReferenceTransfer
-  qualifierDrift
-  referenceDrift
-  ambiguousSemantics
-  nonEquivalent
-  needsHumanReview
-  abstain
-  splitRequired
-  : MigrationDisposition
+  safeEquivalent : MigrationDisposition
+  safeWithReferenceTransfer : MigrationDisposition
+  qualifierDrift : MigrationDisposition
+  referenceDrift : MigrationDisposition
+  ambiguousSemantics : MigrationDisposition
+  nonEquivalent : MigrationDisposition
+  needsHumanReview : MigrationDisposition
+  abstain : MigrationDisposition
+  splitRequired : MigrationDisposition
 
 record SplitReviewContext : Set where
   constructor split-review-context
@@ -171,9 +181,8 @@ open SensibLawReviewPacket public
 ------------------------------------------------------------------------
 
 data RuntimeConsumer : Set where
-  historicalSensibLawPython
-  slrRustRuntime
-  : RuntimeConsumer
+  historicalSensibLawPython : RuntimeConsumer
+  slrRustRuntime : RuntimeConsumer
 
 record RuntimeHandoffReceipt : Set where
   constructor runtime-handoff-receipt
