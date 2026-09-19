@@ -60,6 +60,16 @@ Typed all-four mission owner:
 
 `DASHI/Physics/Closure/NSGlobalFourAlternativeMissionExact.agda`
 
+Canonical literal Clay proposition endpoint:
+
+`DASHI/Physics/Closure/NSClayLiteralABCDExact.agda`
+
+This is now the theorem-facing A/B/C/D surface.  It replaces the old practice
+of treating `PaymentA/B/C/D` scheduler tokens as if they were the Clay
+propositions themselves.  The legacy tokens remain only for compatibility;
+new terminal consumers should use `LiteralFourAlternativeCompletion` or
+`AnyOneClayResolution`.
+
 Typed current control-plane receipt:
 
 `DASHI/Physics/Closure/NSProofControlABCD20260916ReceiptExact.agda`
