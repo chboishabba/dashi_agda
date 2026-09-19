@@ -153,6 +153,16 @@ import DASHI.Physics.Closure.NSTriadKNCenteredCovarianceR290DynamicNormalFormExa
 import DASHI.Physics.Closure.NSTriadKNFixedOutputResolventCenteredDefectExact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputResolventGramFluxSplitExact
 
+-- Portability quotient for the current centered-resolvent frontier.  The first
+-- owner extracts the exact signed split into a domain-independent interaction
+-- carrier plus a separately supplied aggregation law.  The second proves that
+-- the literal periodic R290 positive double-mixed pair is a concrete
+-- realization of that carrier.  A future R^3/Lebesgue realization must inhabit
+-- the same interface; no B->A implication or continuum measure theorem is
+-- asserted here.
+import DASHI.Physics.Closure.NSTriadKNSignedFrequencyCarrierExact
+import DASHI.Physics.Closure.NSTriadKNPeriodicSignedFrequencyCarrierRealizationExact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
