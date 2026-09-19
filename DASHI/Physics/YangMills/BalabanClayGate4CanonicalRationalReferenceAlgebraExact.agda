@@ -29,9 +29,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibreNormalizationExact 
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibrePositiveMassExact as PositiveMass
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
 
-data Empty : Set where
-
-positiveZeroImpossible : Positive 0ℚ → Empty
+positiveZeroImpossible : Positive 0ℚ → PositiveMass.Empty
 positiveZeroImpossible ()
 
 canonicalReferenceAlgebra :
