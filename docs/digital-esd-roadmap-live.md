@@ -409,6 +409,7 @@ This reuses `ParticipationSelectionQuotient` and `EvidenceDesignAdmissibilityExa
 The first Python-guided source front is:
 
 - NCVER 2024 Student Outcomes Survey technical notes — population/frame/invitation contraction and contactability restrictions;
+- Social Research Centre / QILT 2022 Student Experience Survey methodology — Australian higher-education eligibility identification, supplementation of enrolments missing from TCSI extracts, population-frame construction and exclusion rules;
 - Voorheis 2021 Census working paper — administrative college-record frame coverage and subgroup undercoverage;
 - Clutterbuck/Hardy/Creagh — DOI `10.1080/02680939.2021.1972166`, Queensland OneSchool preclusion/omission.
 
