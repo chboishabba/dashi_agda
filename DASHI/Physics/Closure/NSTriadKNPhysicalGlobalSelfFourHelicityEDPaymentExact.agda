@@ -20,10 +20,12 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalGlobalSelfFourHelicityEDPaymentExa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -55,13 +57,13 @@ nonzeroFromModeEqualFalse :
 nonzeroFromModeEqualFalse mode decision = record
   { Z3.notZero = λ modeZero →
       falseCannotEqualTrue
-        (Relation.Binary.PropositionalEquality.trans
-          (Relation.Binary.PropositionalEquality.sym decision)
+        (trans
+          (sym decision)
           (Output.modeEqualComplete modeZero))
   }
 
 nonzeroOutputSelector :
-  (cutoff : Agda.Builtin.Nat.Nat) →
+  (cutoff : Nat) →
   Z3.FourierMode → Z3.FourierMode → Bool
 nonzeroOutputSelector cutoff p q
   with Physical.modeWithinCutoff cutoff (Z3.addMode p q)
