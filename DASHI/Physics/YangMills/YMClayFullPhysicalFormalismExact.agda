@@ -244,6 +244,25 @@ d2LiteralCoefficientIsConstantNatFamilyIsFalse :
 d2LiteralCoefficientIsConstantNatFamilyIsFalse =
   D2.literalClayCoefficientCanBeTreatedAsConstantNatFamilyIsFalse
 
+
+d2ParallelCompositeOperatorTheoryAllowed : Bool
+d2ParallelCompositeOperatorTheoryAllowed =
+  D2.parallelCompositeOperatorTheoryAllowed
+
+d2ParallelCompositeOperatorTheoryAllowedIsFalse :
+  d2ParallelCompositeOperatorTheoryAllowed ≡ false
+d2ParallelCompositeOperatorTheoryAllowedIsFalse =
+  D2.parallelCompositeOperatorTheoryAllowedIsFalse
+
+d2R129SameFamilyOperatorAttachmentStillPhysical : Bool
+d2R129SameFamilyOperatorAttachmentStillPhysical =
+  D2.r129SameFamilyOperatorAttachmentStillPhysical
+
+d2R129SameFamilyOperatorAttachmentStillPhysicalIsTrue :
+  d2R129SameFamilyOperatorAttachmentStillPhysical ≡ true
+d2R129SameFamilyOperatorAttachmentStillPhysicalIsTrue =
+  D2.r129SameFamilyOperatorAttachmentStillPhysicalIsTrue
+
 d3FiniteToContinuumTransportStillPhysical : Bool
 d3FiniteToContinuumTransportStillPhysical =
   D3.finiteToContinuumSameCurrentTransportStillPhysical
@@ -261,6 +280,25 @@ d3FiniteWardAlgebraNeedsNewPhysicalTheoremIsFalse :
   d3FiniteWardAlgebraNeedsNewPhysicalTheorem ≡ false
 d3FiniteWardAlgebraNeedsNewPhysicalTheoremIsFalse =
   D3.finiteWardAlgebraNewPhysicalTheoremInD3IsFalse
+
+
+d3PerturbationIndependentWardSequenceWouldBeTooWeak : Bool
+d3PerturbationIndependentWardSequenceWouldBeTooWeak =
+  D3.perturbationIndependentWardChargeSequenceWouldBeTooWeak
+
+d3PerturbationIndependentWardSequenceWouldBeTooWeakIsTrue :
+  d3PerturbationIndependentWardSequenceWouldBeTooWeak ≡ true
+d3PerturbationIndependentWardSequenceWouldBeTooWeakIsTrue =
+  D3.perturbationIndependentWardChargeSequenceWouldBeTooWeakIsTrue
+
+d3CutoffIndependentChargeMapRequired : Bool
+d3CutoffIndependentChargeMapRequired =
+  D3.cutoffIndependentChargeRepresentationMapRequired
+
+d3CutoffIndependentChargeMapRequiredIsFalse :
+  d3CutoffIndependentChargeMapRequired ≡ false
+d3CutoffIndependentChargeMapRequiredIsFalse =
+  D3.cutoffIndependentChargeRepresentationMapRequiredIsFalse
 
 literalClayStressOPERequiresStressChargeEqualsOSHamiltonian : Bool
 literalClayStressOPERequiresStressChargeEqualsOSHamiltonian =
