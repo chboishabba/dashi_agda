@@ -28,6 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalGlobalCommutatorSpacetimeEDPayment
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
@@ -40,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
 import DASHI.Physics.Closure.NSTriadKNPhysicalGlobalCommutatorFourHelicityEDPaymentExact as Pointwise
 import DASHI.Physics.Closure.NSTriadKNSelectedPairEnergyDissipationProductRound109Exact as R109
+import DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact as R178
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -170,6 +172,26 @@ module PhysicalCommutatorSpacetime
           S L O
     in R109.sumDissipation G.modalED G.modes
 
+  sumDissipationNonnegative :
+    ∀ {a} {Mode : Set a} →
+    (M : R109.ModalEnergyDissipation Mode) →
+    (modes : List Mode) →
+    0ℚ ≤ R109.sumDissipation M modes
+  sumDissipationNonnegative M [] = ℚP.≤-refl
+  sumDissipationNonnegative M (mode ∷ rest) =
+    ℚP.+-mono-≤
+      (R109.dissipationNonnegative M mode)
+      (sumDissipationNonnegative M rest)
+
+  thirtySixNonnegative : 0ℚ ≤ Pointwise.thirtySix
+  thirtySixNonnegative =
+    let
+      twoNN = Rational.addNonnegative R178.oneNN R178.oneNN
+      nineNN = Rational.productNonnegative R178.threeNN R178.threeNN
+      eighteenNN = Rational.productNonnegative nineNN twoNN
+    in
+    Rational.productNonnegative eighteenNN twoNN
+
   pointwiseMassBelowCeilingTimesDissipation :
     ∀ {D S L O} →
     (I : PhysicalCommutatorSpacetimeEDData D S L O) →
@@ -188,7 +210,7 @@ module PhysicalCommutatorSpacetime
       base = G.globalCommutatorComponentMassBelowThirtySixED
 
       dissNN : 0ℚ ≤ R109.sumDissipation G.modalED G.modes
-      dissNN = R109.sumDissipationNonnegative G.modalED G.modes
+      dissNN = sumDissipationNonnegative G.modalED G.modes
 
       scaledEnergy :
         R109.sumEnergy G.modalED G.modes
@@ -203,13 +225,7 @@ module PhysicalCommutatorSpacetime
           (pointwiseEnergyBound I cutoff time)
 
       thirtySixNN : 0ℚ ≤ Pointwise.thirtySix
-      thirtySixNN =
-        Rational.productNonnegative
-          (Rational.productNonnegative
-            (Rational.productNonnegative
-              Pointwise.R178.threeNN Pointwise.R178.threeNN)
-            (Rational.addNonnegative Pointwise.R178.oneNN Pointwise.R178.oneNN))
-          (Rational.addNonnegative Pointwise.R178.oneNN Pointwise.R178.oneNN)
+      thirtySixNN = thirtySixNonnegative
 
       scaled =
         let instance thirtySixNNI : NonNegative Pointwise.thirtySix
@@ -232,13 +248,7 @@ module PhysicalCommutatorSpacetime
       constant = Pointwise.thirtySix * cutoffIndependentEnergyCeiling I
 
       thirtySixNN : 0ℚ ≤ Pointwise.thirtySix
-      thirtySixNN =
-        Rational.productNonnegative
-          (Rational.productNonnegative
-            (Rational.productNonnegative
-              Pointwise.R178.threeNN Pointwise.R178.threeNN)
-            (Rational.addNonnegative Pointwise.R178.oneNN Pointwise.R178.oneNN))
-          (Rational.addNonnegative Pointwise.R178.oneNN Pointwise.R178.oneNN)
+      thirtySixNN = thirtySixNonnegative
 
       constantNN : 0ℚ ≤ constant
       constantNN =
@@ -264,17 +274,18 @@ module PhysicalCommutatorSpacetime
         let instance constantNNI : NonNegative constant
             constantNNI = nonNegative constantNN
         in ℚP.*-monoˡ-≤-nonNeg constant dissPaid
+      monotoneScaled :
+        integrateTo (globalCommutatorMassAt D S L O cutoff) terminal
+        ≤ constant * integrateTo (dissipationAt D S L O cutoff) terminal
+      monotoneScaled =
+        subst
+          (λ middle →
+            integrateTo (globalCommutatorMassAt D S L O cutoff) terminal
+            ≤ middle)
+          scaledMeaning
+          monotone
     in
-    ℚP.≤-trans
-      monotone
-      (subst
-        (λ left →
-          left
-          ≤ Pointwise.thirtySix
-              * cutoffIndependentEnergyCeiling I
-              * cutoffIndependentDissipationBound I terminal)
-        scaledMeaning
-        finalScale)
+    ℚP.≤-trans monotoneScaled finalScale
 
 roundCommutatorPointwiseThirtySixEDReused : Bool
 roundCommutatorPointwiseThirtySixEDReused = true
