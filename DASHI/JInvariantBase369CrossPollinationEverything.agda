@@ -137,3 +137,5 @@ import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact
 
 import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldExact
 import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldValidation
+import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneRadiusExact
+import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneRadiusValidation
