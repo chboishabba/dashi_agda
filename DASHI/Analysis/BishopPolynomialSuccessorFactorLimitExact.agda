@@ -25,6 +25,7 @@ module DASHI.Analysis.BishopPolynomialSuccessorFactorLimitExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Product.Base using (proj₁; proj₂)
+open import Data.Nat.Base as Nat using (_≤_)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -143,7 +144,7 @@ EventuallyBelow :
 EventuallyBelow sequence upper =
   Σ Nat (λ start →
     ∀ index →
-    start ≤ index →
+    Nat._≤_ start index →
     BishopReal._<_ (sequence index) upper)
 
 polynomialSuccessorFactorEventuallyBelow :
