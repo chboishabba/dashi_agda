@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanClayT5Path4PreferredGate4ProbabilitySemanticsValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayT5Path4PreferredGate4ProbabilitySemanticsExact as Path4
+
+preferredGate4ProbabilityCompilerClosed :
+  Path4.path4PreferredGate4ProbabilityCompilerLevel ≡ machineChecked
+preferredGate4ProbabilityCompilerClosed = refl
+
+path4ExpectationIntegralWeldClosed :
+  Path4.path4Gate4ExpectationIntegralWeldLevel ≡ machineChecked
+path4ExpectationIntegralWeldClosed = refl
+
+path4ObservableApplicationMeaningRemainsPhysical :
+  Path4.path4ObservableApplicationMeaningLevel ≡ conditional
+path4ObservableApplicationMeaningRemainsPhysical = refl
