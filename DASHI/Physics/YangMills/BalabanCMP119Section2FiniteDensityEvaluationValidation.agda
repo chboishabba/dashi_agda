@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanCMP119Section2FiniteDensityEvaluationValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119Section2FiniteDensityEvaluationExact as Eval
+
+sourceFiniteEvaluationCompilerOwned :
+  Eval.cmp119Section2FiniteDensityEvaluationCompilerLevel ≡ machineChecked
+sourceFiniteEvaluationCompilerOwned = refl
+
+selectedEvaluationSameObjectCompilerOwned :
+  Eval.cmp119Section2SelectedEvaluationSameObjectLevel ≡ machineChecked
+selectedEvaluationSameObjectCompilerOwned = refl
+
+literalSourceEvaluationStillPhysical :
+  Eval.literalCMP119Section2FiniteDensityEvaluationLevel ≡ conditional
+literalSourceEvaluationStillPhysical = refl
