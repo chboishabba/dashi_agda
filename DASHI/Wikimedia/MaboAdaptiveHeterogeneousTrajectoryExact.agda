@@ -11,6 +11,7 @@ import DASHI.Core.SnowballPluralLensDiscoveryAdmissionExact as Snow
 import DASHI.Law.SensibLawMultiResidualProofFrontierExact as Frontier
 import DASHI.Law.SensibLawProofSearchIterationReceiptABIExact as Iteration
 import DASHI.Law.SensibLawResearchCompoundingLoopExact as Compounding
+import DASHI.Interop.MaboRadicalTitlePropositionChainPaymentExact as Proposition
 import DASHI.Wikimedia.Mabo100HopReviewedCampaignExact as Campaign
 import DASHI.Wikimedia.MaboConsumerResidualDiagnosisExact as Diagnosis
 import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact as Producers
@@ -285,6 +286,29 @@ parsedResultsFeedFutureSearch :
 parsedResultsFeedFutureSearch = refl
 
 ------------------------------------------------------------------------
+-- Existing Mabo proposition-chain residual semantics are reused.
+------------------------------------------------------------------------
+
+canonicalBoundedWhyRemainsExecutable :
+  Proposition.propositionChainPaid Proposition.canonicalBoundedWhy ≡ true
+canonicalBoundedWhyRemainsExecutable = refl
+
+canonicalQualifierResidualRetained :
+  Proposition.explicitResidualRetained
+    (Proposition.qualifierRole Proposition.canonicalBoundedWhy) ≡ true
+canonicalQualifierResidualRetained = refl
+
+canonicalDefeaterResidualRetained :
+  Proposition.explicitResidualRetained
+    (Proposition.defeaterRole Proposition.canonicalBoundedWhy) ≡ true
+canonicalDefeaterResidualRetained = refl
+
+canonicalComparatorResidualRetained :
+  Proposition.explicitResidualRetained
+    (Proposition.comparatorRole Proposition.canonicalBoundedWhy) ≡ true
+canonicalComparatorResidualRetained = refl
+
+------------------------------------------------------------------------
 -- Golden heterogeneous/adaptive boundary.
 ------------------------------------------------------------------------
 
@@ -306,6 +330,11 @@ record AdaptiveHeterogeneousBoundary : Set where
     negativeKnowledgePersistsAcrossReDiagnosis : Bool
     legalAndProvenanceMayCompeteWithIdentityAndContext : Bool
     sourceFamilySwitchMayBeEndogenous : Bool
+    trajectoryPersistsAcrossOperatorRestart : Bool
+    adaptiveCycleBudgetIsProcessLocal : Bool
+    boundedWhyMayRetainResearchResiduals : Bool
+    explicitResearchResidualMeansPropositionFalse : Bool
+    legalResearchRequiresReacquiringTriggerSource : Bool
     boundaryCandidateOnly : Bool
     boundaryCreatesSemanticAuthority : Bool
     boundaryApplicabilityPromoted : Bool
@@ -331,6 +360,11 @@ canonicalAdaptiveHeterogeneousBoundary =
     true
     true
     true
+    true
+    false
+    true
+    false
+    false
     true
     false
     false
