@@ -71,6 +71,21 @@ bishopActualUnitPhaseStillUnpaid :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
 bishopActualUnitPhaseStillUnpaid = refl
 
+bishopTrigUnitPhaseCompilerIsOwned :
+  P.bishopTrigUnitPhaseCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopTrigUnitPhaseCompilerIsOwned = refl
+
+bishopActualQPhasePythagoreanStillUnpaid :
+  P.bishopActualQPhasePythagoreanOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+bishopActualQPhasePythagoreanStillUnpaid = refl
+
+bishopActualQPhaseAngleSemanticsStillUnpaid :
+  P.bishopActualQPhaseAngleSemanticsOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+bishopActualQPhaseAngleSemanticsStillUnpaid = refl
+
 bishopUpperHalfPlaneEisensteinFromUnitPhaseIsOwned :
   P.bishopUpperHalfPlaneEisensteinFromUnitPhaseOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
