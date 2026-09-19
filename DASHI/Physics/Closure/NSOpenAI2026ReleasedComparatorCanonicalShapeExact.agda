@@ -30,6 +30,7 @@ module DASHI.Physics.Closure.NSOpenAI2026ReleasedComparatorCanonicalShapeExact w
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import Real as BishopReal
 import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact as Canonical
 
 ReleasedInitialFieldShape : Set
@@ -41,7 +42,7 @@ ReleasedVectorHistoryShape =
 
 ReleasedScalarHistoryShape : Set
 ReleasedScalarHistoryShape =
-  Canonical.R3Point → Canonical.Time → Canonical.BishopReal.ℝ
+  Canonical.R3Point → Canonical.Time → BishopReal.ℝ
 
 releasedVectorHistoryToCanonical :
   ReleasedVectorHistoryShape →
