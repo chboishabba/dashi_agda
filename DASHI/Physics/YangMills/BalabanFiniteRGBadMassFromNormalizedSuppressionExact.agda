@@ -22,12 +22,13 @@ module DASHI.Physics.YangMills.BalabanFiniteRGBadMassFromNormalizedSuppressionEx
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; ∣_∣; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
 import DASHI.Physics.YangMills.BalabanFiniteRGExceptionalCovarianceMassExact as Exceptional
 
 sumRationalMono :
@@ -106,7 +107,7 @@ badMassBelowSuppression dataSet =
 
 record ExceptionalBadMassAttachment
     {Fine Coarse : Set}
-    {step : DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact.FiniteRGReopeningStep Fine Coarse}
+    {step : Reopen.FiniteRGReopeningStep Fine Coarse}
     (bad : Exceptional.ExceptionalCovarianceMask step) : Set₁ where
   field
     badMassData : NormalizedSuppressedBadMassData Coarse
@@ -143,11 +144,11 @@ twoTimesMono bound =
 
 exceptionalCovarianceBelowTwiceSuppression :
   ∀ {Fine Coarse}
-    {step : DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact.FiniteRGReopeningStep Fine Coarse}
+    {step : Reopen.FiniteRGReopeningStep Fine Coarse}
     (positive : Exceptional.PositiveFiniteRGReopening step)
     (bad : Exceptional.ExceptionalCovarianceMask step)
     (attachment : ExceptionalBadMassAttachment bad)
-    (left right : DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact.Observable Fine) →
+    (left right : Reopen.Observable Fine) →
   Exceptional.PointwiseUnitBounded left →
   Exceptional.PointwiseUnitBounded right →
   ∣ Exceptional.exceptionalCovarianceContribution bad left right ∣
