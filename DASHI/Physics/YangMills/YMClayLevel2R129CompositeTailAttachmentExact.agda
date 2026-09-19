@@ -32,7 +32,8 @@ import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 -- Level-2 route is sharper: R129's selected stress completion already contains
 -- the composite marked-source data from the SAME completed state.
 --
--- Therefore the only physical D1 payload remaining after R129 is:
+-- Therefore the only physical D1 payload remaining after R129 is the
+-- same-object semantic weld:
 --
 --   the literal Clay Top.opeRemainder for the selected local-operator pair,
 --   attached to the already-selected completed composite projection
@@ -208,12 +209,19 @@ independentCompositeCompletionAfterR129IsFalse :
   independentCompositeCompletionAfterR129 ≡ false
 independentCompositeCompletionAfterR129IsFalse = refl
 
-d1PhysicalResidueIsSingleTailEquality : Bool
-d1PhysicalResidueIsSingleTailEquality = true
+d1PhysicalResidueIsCompletedCompositeSemanticWeld : Bool
+d1PhysicalResidueIsCompletedCompositeSemanticWeld = true
 
-d1PhysicalResidueIsSingleTailEqualityIsTrue :
-  d1PhysicalResidueIsSingleTailEquality ≡ true
-d1PhysicalResidueIsSingleTailEqualityIsTrue = refl
+d1PhysicalResidueIsCompletedCompositeSemanticWeldIsTrue :
+  d1PhysicalResidueIsCompletedCompositeSemanticWeld ≡ true
+d1PhysicalResidueIsCompletedCompositeSemanticWeldIsTrue = refl
+
+d1NewAnalyticInequalityRequired : Bool
+d1NewAnalyticInequalityRequired = false
+
+d1NewAnalyticInequalityRequiredIsFalse :
+  d1NewAnalyticInequalityRequired ≡ false
+d1NewAnalyticInequalityRequiredIsFalse = refl
 
 r129CompositeTailAdapterCompilerLevel : ProofLevel
 r129CompositeTailAdapterCompilerLevel = machineChecked
