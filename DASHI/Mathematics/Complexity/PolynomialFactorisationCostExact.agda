@@ -16,7 +16,7 @@ module DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact where
 -- No complexity lower bound or P = NP consequence is manufactured.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym)
 
