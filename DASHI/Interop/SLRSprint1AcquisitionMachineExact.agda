@@ -227,9 +227,9 @@ canonicalReviewedRecurrenceParity =
     true
     true
     true
-    false
-    false
-    false
+    true
+    true
+    true
 
 record RestartReplayParity : Set where
   constructor restartReplayParity
