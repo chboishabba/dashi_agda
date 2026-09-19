@@ -167,10 +167,41 @@ module PhysicalRetainedGap
     (qMember : q Cube.∈ Audit.modes system) →
     (- radius q) - (- radius p) ≤ squareRadius p + squareRadius q
   minusMinusGapBelowSquares p q pMember qMember =
-    subst
-      (_≤ squareRadius p + squareRadius q)
-      (solve (radius p ∷ radius q ∷ []))
-      (plusPlusGapBelowSquares q p qMember pMember)
+    let
+      p≤p2 = retainedRadiusBelowSquare p pMember
+      qNN = radiusNN q
+      p2NN = squareNN p
+
+      gap≤p : (- radius q) - (- radius p) ≤ radius p
+      gap≤p =
+        let
+          negQ≤zero : - radius q ≤ 0ℚ
+          negQ≤zero = ℚP.neg-mono-≤ qNN
+          shifted = ℚP.+-mono-≤ negQ≤zero ℚP.≤-refl
+          algebra :
+            (- radius q) - (- radius p)
+            ≡ (- radius q) + radius p
+          algebra = solve (radius p ∷ radius q ∷ [])
+        in
+        subst
+          (_≤ radius p)
+          (sym algebra)
+          (subst
+            (λ left → left ≤ radius p)
+            (ℚP.+-comm (- radius q) (radius p))
+            (subst
+              (_≤ radius p)
+              (sym (ℚP.+-identityˡ (radius p)))
+              shifted))
+
+      p2≤sum : squareRadius p ≤ squareRadius p + squareRadius q
+      p2≤sum =
+        subst
+          (squareRadius p ≤_)
+          (sym (ℚP.+-identityʳ (squareRadius p)))
+          (ℚP.+-mono-≤ ℚP.≤-refl (squareNN q))
+    in
+    ℚP.≤-trans gap≤p (ℚP.≤-trans p≤p2 p2≤sum)
 
   plusMinusGapBelowSquares :
     (p q : Z3.FourierMode) →
@@ -203,15 +234,24 @@ module PhysicalRetainedGap
     let
       p≤p2 = retainedRadiusBelowSquare p pMember
       q≤q2 = retainedRadiusBelowSquare q qMember
+      summed :
+        radius q + radius p ≤ squareRadius q + squareRadius p
       summed = ℚP.+-mono-≤ q≤q2 p≤p2
+      reordered :
+        radius q + radius p ≤ squareRadius p + squareRadius q
+      reordered =
+        subst
+          (radius q + radius p ≤_)
+          (ℚP.+-comm (squareRadius q) (squareRadius p))
+          summed
+      algebra :
+        radius q - (- radius p) ≡ radius q + radius p
+      algebra = solve (radius p ∷ radius q ∷ [])
     in
     subst
       (_≤ squareRadius p + squareRadius q)
-      (solve (radius p ∷ radius q ∷ []))
-      (subst
-        (λ upper → radius q + radius p ≤ upper)
-        (ℚP.+-comm (squareRadius q) (squareRadius p))
-        summed)
+      (sym algebra)
+      reordered
 
   caseSign : Helical.HelicitySign → ℚ → ℚ
   caseSign Helical.plus r = r
