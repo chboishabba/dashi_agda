@@ -8,6 +8,7 @@ import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationExact as 
 import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact
 import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact
+import DASHI.Mathematics.Complexity.PolynomialClassicalObserverExact
 
 ------------------------------------------------------------------------
 -- Positive reused structure.
@@ -60,6 +61,12 @@ validationDecisionSearchEngine :
     Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
   ≡ true
 validationDecisionSearchEngine = refl
+
+validationSizedPolynomialObserverCarrier :
+  Cross.sizedPolynomialClassicalObserverCarrierPresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationSizedPolynomialObserverCarrier = refl
 
 ------------------------------------------------------------------------
 -- Fail-closed frontier.
