@@ -9,6 +9,7 @@ import DASHI.Physics.YangMills.BalabanCMP116R281SelectedSourceUpperRound343Exact
 import DASHI.Physics.YangMills.BalabanCMP116SharedMarkedDirectCalibrationRound344Exact as R344
 import DASHI.Physics.YangMills.BalabanCMP116SharedMarkedAmplitudeDirectRound346Exact as R346
 import DASHI.Physics.YangMills.YMClayF1WilsonR295SameObjectWeldExact as WilsonR295
+import DASHI.Physics.YangMills.YMClayF1TranslatedPairL2CalibrationExact as F1C
 
 ------------------------------------------------------------------------
 -- F1 PHYSICAL MIN-CUT RECONCILIATION
@@ -21,7 +22,8 @@ import DASHI.Physics.YangMills.YMClayF1WilsonR295SameObjectWeldExact as WilsonR2
 -- Primitive physical cut:
 --   A. selected CMP116 localization on the actual canonical/source carrier;
 --   B. physical R315 Wilson-cylinder presentation on the SAME R295/T5 carrier;
---   C. rooted/source envelope <= c_k ||psi||^2 on the physical L2 carrier;
+--   C. translated one-step rooted/source envelope <= c_k ||psi||^2 on the
+--      physical L2 carrier (one-sided upper; no envelope equality);
 --   D. Delta*a_k <= 1-c_k on the same beta-history trajectory.
 ------------------------------------------------------------------------
 
@@ -97,6 +99,22 @@ f1BPhysicalResidueIsR315Presentation =
 f1BPhysicalWilsonPresentationLevel : ProofLevel
 f1BPhysicalWilsonPresentationLevel =
   WilsonR295.f1BPhysicalWilsonPresentationLevel
+
+f1CSameObservableDiagonalPairPrimitive : Bool
+f1CSameObservableDiagonalPairPrimitive =
+  F1C.diagonalSameObservablePairSuffices
+
+f1CEnvelopeEqualityPrimitive : Bool
+f1CEnvelopeEqualityPrimitive =
+  F1C.independentEnvelopeEqualityRequired
+
+f1CTranslatedOneStepPairCanonical : Bool
+f1CTranslatedOneStepPairCanonical =
+  F1C.translatedOneStepPairIsCanonical
+
+f1CPhysicalCalibrationLevel : ProofLevel
+f1CPhysicalCalibrationLevel =
+  F1C.physicalTranslatedPairL2CalibrationLevel
 
 weakestSelectedLocalizationLevel : ProofLevel
 weakestSelectedLocalizationLevel =
