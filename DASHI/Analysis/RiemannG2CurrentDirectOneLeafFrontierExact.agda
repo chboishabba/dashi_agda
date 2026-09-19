@@ -10,10 +10,12 @@ import DASHI.Analysis.RiemannG2LiteralPhaseDirectClusterResponseExact as PhaseDi
 import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as High
 import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as LiteralKernel
 import DASHI.Analysis.RiemannG2FinalNearObserverDescentExact as R1Descent
+import DASHI.Analysis.RiemannG2LiteralKernelConcreteCertificateBridgeCompilerExact as R1Certificate
 import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact as FinalCert
 import DASHI.Analysis.RiemannG2CertifiedNearUpperClusterResponseCompilerExact as Certified
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
 import DASHI.Analysis.RiemannAnalyticCoordinateObserverDescentExact as R3Descent
+import DASHI.Analysis.RiemannG2VerifiedRegionComplementHighCoverExact as R4Complement
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -35,6 +37,7 @@ data FrontierCoordinate : Set where
   directLiteralPhaseBelowActualClusterResponse : FrontierCoordinate
   finalClusterBalanceAttachment : FrontierCoordinate
   lowPublishedHeightCarrierTransport : FrontierCoordinate
+  verifiedRegionDecidability : FrontierCoordinate
   verifiedRegionOrHighCover : FrontierCoordinate
   constructiveDoubleNegatedRH : FrontierCoordinate
   criticalLinePredicateRefinement : FrontierCoordinate
@@ -63,7 +66,8 @@ frontierClass certifiedEnvelopeBelowActualClusterResponse = analyticWall
 frontierClass directLiteralPhaseBelowActualClusterResponse = analyticWall
 frontierClass finalClusterBalanceAttachment = representationWall
 frontierClass lowPublishedHeightCarrierTransport = representationWall
-frontierClass verifiedRegionOrHighCover = representationWall
+frontierClass verifiedRegionDecidability = logicalCarrierWall
+frontierClass verifiedRegionOrHighCover = compilerOutput
 frontierClass constructiveDoubleNegatedRH = compilerOutput
 frontierClass criticalLinePredicateRefinement = logicalCarrierWall
 frontierClass quarterPeriodCrossingAdmission = existingInterface
@@ -108,6 +112,16 @@ r1WholeScalarRealizationNotRequiredByOffBudgetConsumer :
   R1Descent.FinalNearObserverDescentBoundary.wholePoleQuotientScalarRealizationRequiredForOffBudgetConsumer
     R1Descent.canonicalFinalNearObserverDescentBoundary ≡ false
 r1WholeScalarRealizationNotRequiredByOffBudgetConsumer = refl
+
+r1CertificateBridgeReusesLiteralKernelRepresentation :
+  R1Certificate.LiteralKernelCertificateBridgeBoundary.literalKernelEqualityReused
+    R1Certificate.canonicalLiteralKernelCertificateBridgeBoundary ≡ true
+r1CertificateBridgeReusesLiteralKernelRepresentation = refl
+
+r1CertificateRouteNeedsOnlyFoldWeldAfterLiteralKernel :
+  R1Certificate.LiteralKernelCertificateBridgeBoundary.certificateRouteStillNeedsLiteralFoldToCertifiedFoldWeld
+    R1Certificate.canonicalLiteralKernelCertificateBridgeBoundary ≡ true
+r1CertificateRouteNeedsOnlyFoldWeldAfterLiteralKernel = refl
 
 literalKernelCompilesExistingObserver :
   LiteralKernel.FinalNearLiteralKernelBoundary.existingFinalObserverModelIsCompilerOutput
@@ -198,6 +212,21 @@ r3NumericVerifiedHeightStillUnpaid :
   R3Descent.AnalyticCoordinateObserverDescentBoundary.numericVerifiedHeightInterpretationPaidHere
     R3Descent.canonicalAnalyticCoordinateObserverDescentBoundary ≡ false
 r3NumericVerifiedHeightStillUnpaid = refl
+
+r4ComplementHighCoverCompilesFromVerifiedRegionDecidability :
+  R4Complement.VerifiedRegionComplementHighBoundary.coverCompilesFromVerifiedRegionDecidability
+    R4Complement.canonicalVerifiedRegionComplementHighBoundary ≡ true
+r4ComplementHighCoverCompilesFromVerifiedRegionDecidability = refl
+
+r4SeparateArbitraryCoverNotRequiredOnComplementRoute :
+  R4Complement.VerifiedRegionComplementHighBoundary.separateArbitraryCoverTheoremRequiredOnComplementRoute
+    R4Complement.canonicalVerifiedRegionComplementHighBoundary ≡ false
+r4SeparateArbitraryCoverNotRequiredOnComplementRoute = refl
+
+r4NumericCarrierDoesNotAutomaticallyDecideVerifiedRegion :
+  R4Complement.VerifiedRegionComplementHighBoundary.numericCarrierInterpretationAutomaticallyDecidable
+    R4Complement.canonicalVerifiedRegionComplementHighBoundary ≡ false
+r4NumericCarrierDoesNotAutomaticallyDecideVerifiedRegion = refl
 
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
@@ -296,4 +325,4 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     "Realize the exact universal pole-quotient finite kernel and prove nearResponseAt(chosen crossing J) = finiteNearSum(cellResponse). The checked Lean status owner does not transport this equality into Agda."
     "After a proof-carrying upper certificate nearResponseAt(J) <= U, independently prove cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
     "Alternatively prove directly cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
-    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The new observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the existing same-object equality is supplied, so whole pole-quotient scalar realization is unnecessary for R1. R3 is likewise one shared realPart observer: criticalLine descends through realPart=half and the published verified region lands in that same coordinate, while the numeric verified-height interpretation remains unpaid. Intermediate M_cluster, separate near/Gamma envelopes, determinant-q payment, and final balance as analytic input are pruned. Exact-head Agda validation is not claimed and RH is not derived."
+    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the same-object equality is supplied, and the optional certificate bridge now reuses the literal-kernel equality plus one literal-fold/certified-fold weld rather than demanding a second nearResponse representation. R3 is one shared realPart observer. On the canonical R4 complement route, High is definitionally not-verified and the cover compiles from decidability of that exact verified-region predicate; therefore the remaining R4 debt is same-carrier verified-region decidability, not an unrelated arbitrary cover theorem. Numeric verified-height interpretation/decidability remains unpaid, R2 remains the primitive strict ClusterResponse analytic family, exact-head Agda validation is not claimed, and RH is not derived."
