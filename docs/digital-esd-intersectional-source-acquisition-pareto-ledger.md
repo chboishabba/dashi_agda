@@ -232,7 +232,10 @@ The upstream acquisition matrix ranked three source roles above generic nonrespo
 1. **NCVER 2024, National Student Outcomes Survey 2024 — technical notes** — institutional methodology source with explicit population -> sampling frame -> invitation construction. The sampling frame is restricted to de-duplicated records available for surveying and with obtainable contact details before sampling.
 2. **Social Research Centre / QILT, 2022 Student Experience Survey Methodological Report** — independent Australian higher-education methodology source: TCSI records are screened for eligibility, institutions can supplement enrolments missing from the extract, templates are combined into a population frame, and exclusion rules are applied before final institution population files.
 3. **John Voorheis, 2021, Evaluating Administrative Records as a Potential Sample Frame for the National Survey of College Graduates** — U.S. Census Bureau CARRA Working Paper 18-14; same-object frame comparison with subgroup-specific administrative-record undercoverage.
-4. **Jennifer Clutterbuck; Ian Hardy; Sue Creagh, 2023 issue / 2021 online, DOI `10.1080/02680939.2021.1972166`** — Queensland OneSchool data-infrastructure study paying category/data preclusion and omission, including omitted Indigenous-language enrolment information.
+4. **Susan M. Dynarski; Steven W. Hemelt; Joshua M. Hyman, 2015, DOI `10.3102/0162373715576078`** — independent National Student Clearinghouse coverage analysis by institution type and demographic subgroup, including privacy-suppressed records and matching error as noncoverage mechanisms.
+5. **Christopher Fisher et al., 2019, DOI `10.3389/fpubh.2019.00217`** — Australian secondary-student survey protocol with explicit eligibility criteria, minimum-quota sampling and a two-phase online/social-media recruitment surface.
+6. **Sue Creagh, 2016, DOI `10.1080/02680939.2015.1066870`** — independent Australian category-construction analysis of LBOTE in national testing; aggregate category membership does not preserve all language/pedagogy distinctions.
+7. **Jennifer Clutterbuck; Ian Hardy; Sue Creagh, 2023 issue / 2021 online, DOI `10.1080/02680939.2021.1972166`** — Queensland OneSchool data-infrastructure study paying category/data preclusion and omission, including omitted Indigenous-language enrolment information.
 
 Canonical candidate owner:
 
@@ -266,3 +269,22 @@ Broad pre-corpus acquisition remains frozen. Reopen only on:
 - or a literal need to distinguish target-universe construction from declared eligibility.
 
 Generic additional nonresponse or digital-divide papers remain dominated.
+
+
+### Upstream calibration stop condition
+
+After QILT + Dynarski/Hemelt/Hyman + Creagh + Fisher were added, the Python matrix reports **plural calibration for every declared upstream residual**:
+
+```text
+target -> frame contraction          plural
+eligibility-definition rule         plural
+administrative-register coverage    plural
+recruitment/contact reachability     plural
+subgroup undercoverage               plural
+category/data omission               plural
+same-object frame comparison         plural
+```
+
+Every declared upstream residual now has plural calibration. This is still an acquisition heuristic, not source quality, authority or final-corpus support.
+
+Therefore this upstream pre-corpus tranche is also frozen. Further source acquisition must be triggered by a real database-admission/corpus collision, stronger same-object evidence, or a new consumer not separated by the current frame vocabulary.
