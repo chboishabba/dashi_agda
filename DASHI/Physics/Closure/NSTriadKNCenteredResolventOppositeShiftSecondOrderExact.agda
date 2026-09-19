@@ -68,26 +68,6 @@ centeredResolventDefectKernelIsProduct
       (a + s) a aPlusSPositive aPositive)
     (solve (inv (a + s) ∷ inv a ∷ a ∷ s ∷ []))
 
-centeredResolventDefectKernelIsEnvelopeKernel :
-  (a s : ℚ) →
-  (aPositive : Positive a) →
-  (aPlusSPositive : Positive (a + s)) →
-  centeredResolventDefectKernel a s
-  ≡
-  Kernel.centeredResolventKernel
-    a s
-    (Data.Rational.Properties.positive⁻¹ a)
-    (Data.Rational.Properties.positive⁻¹ (a + s))
-centeredResolventDefectKernelIsEnvelopeKernel
-    a s aPositive aPlusSPositive =
-  let
-    base =
-      centeredResolventDefectKernelIsProduct
-        a s aPositive aPlusSPositive
-  in
-  trans base
-    (solve (inv (a + s) ∷ inv a ∷ s ∷ []))
-
 oppositeShiftCenteredResolventSecondOrder :
   (a s h : ℚ) →
   (aPositive : Positive a) →
