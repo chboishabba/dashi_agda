@@ -135,8 +135,8 @@ record GammaPrecisionLocalizationBoundary : Set where
       gammaUpperBoundExistenceIsStillTheResearchQuestion ≡ false
 
     exactPrecisionLossStepAlreadyRecoveredOnThisBranch : Bool
-    exactPrecisionLossStepAlreadyRecoveredOnThisBranchIsFalse :
-      exactPrecisionLossStepAlreadyRecoveredOnThisBranch ≡ false
+    exactPrecisionLossStepAlreadyRecoveredOnThisBranchIsTrue :
+      exactPrecisionLossStepAlreadyRecoveredOnThisBranch ≡ true
 
     precisionLossLocalizationIsLive : Bool
     precisionLossLocalizationIsLiveIsTrue :
@@ -159,9 +159,9 @@ canonicalGammaPrecisionLocalizationBoundary : GammaPrecisionLocalizationBoundary
 canonicalGammaPrecisionLocalizationBoundary =
   gamma-precision-localization-boundary
     false refl
-    false refl
+    true refl
     true refl
     false refl
     true refl
     false refl
-    "The 8889 return already supplies existence of a uniform Gamma upper bound and simultaneously proves that this bound misses the sharp pole-quotient comparison window. Do not search for another generic bound. Audit the actual same-taper producer chain, identify the first step that loses the required precision, and repair that exact step. The repaired producer must inhabit the existing PoleQuotientGammaBudgetTarget and carry an explicit sharp-window fit receipt. This branch does not yet identify which analytic step loses the powers, and RH is not derived."
+    "The vendored exact 8889 PoleQuotientGammaBudget source is now recovered. Its proof factors through gammaConeEnvelope and stripConst, and its own source commentary identifies the failure mechanism: stripConst includes the sample-test second-derivative L1 norm, which grows quadratically as the high-ordinate taper support shrinks. Treat taperNormEstimate/stripConst as the localized precision-loss stage. Repair that C2 envelope or bypass it with a sharper same-taper Gamma theorem; a generic Gamma existence proof is already owned. RH is not derived."
