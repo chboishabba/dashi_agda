@@ -219,13 +219,13 @@ legacyComplexMul compat
   (setoid-complex a b)
   (setoid-complex c d)
   rewrite quotientSub compat
-            (Spine._*_ _ a c)
-            (Spine._*_ _ b d)
+            (Spine._*_ R a c)
+            (Spine._*_ R b d)
         | quotientMul compat a c
         | quotientMul compat b d
         | quotientAdd compat
-            (Spine._*_ _ a d)
-            (Spine._*_ _ b c)
+            (Spine._*_ R a d)
+            (Spine._*_ R b c)
         | quotientMul compat a d
         | quotientMul compat b c
   = refl
@@ -250,8 +250,8 @@ legacyNormSq :
     ≡ LegacyComplex.normSqC (legacyComplex Q value)
 legacyNormSq compat (setoid-complex a b)
   rewrite quotientAdd compat
-            (Spine._*_ _ a a)
-            (Spine._*_ _ b b)
+            (Spine._*_ R a a)
+            (Spine._*_ R b b)
         | quotientMul compat a a
         | quotientMul compat b b
   = refl
