@@ -23,6 +23,7 @@ open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteBoundedCovarianceExact as FiniteCov
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanHeatDoobGradientCovarianceMarkedCauchyExact as Grad
 
 record FiniteTemporalGradientCovarianceData (State : Set) : Set₁ where
@@ -41,7 +42,7 @@ record FiniteTemporalGradientCovarianceData (State : Set) : Set₁ where
     localizedGradientGeometricHalf : ∀ n →
       localizedGradientShell n
       ≤ gradientAmplitude
-          * DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.halfPower n
+          * Geo.halfPower n
 
     companionGradientBound : ℚ
     companionGradientBoundNonnegative : 0ℚ ≤ companionGradientBound
