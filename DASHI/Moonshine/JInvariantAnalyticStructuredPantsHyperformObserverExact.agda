@@ -28,6 +28,7 @@ import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.JInvariantAnalyticJCoarseFineObserverExact as Observer
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact as Residual
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as PantsBridge
+import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Finite
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Topology.TernaryPantsFrontierExact as Pants
 
@@ -56,6 +57,38 @@ observeAnalyticPants3 :
 observeAnalyticPants3 observer point =
   PantsBridge.voxel27ToPants3
     (observeAnalyticInteractionVoxel observer point)
+
+
+
+chartToInteractionVoxel :
+  Finite.Chart.JTwoPlusNine ->
+  Fabric.Ternary27Point
+chartToInteractionVoxel state =
+  local27ToTernary27Point
+    (Residual.localJObserver
+      (Observer.structuredFieldOfChart state))
+
+chartToPants3 :
+  Finite.Chart.JTwoPlusNine ->
+  Pants.PantsPath 3
+chartToPants3 state =
+  PantsBridge.voxel27ToPants3
+    (chartToInteractionVoxel state)
+
+analyticFrickeObservedPantsTransport :
+  ∀ {system : Modular.ModularJFrickeSystem}
+    (observer : Observer.AnalyticJStructuredObserver system)
+    (point : Modular.FinePoint system) ->
+  observeAnalyticPants3
+    observer
+    (Modular.fricke system point)
+  ≡
+  chartToPants3
+    (Finite.transportedFiniteFricke
+      (Observer.observe observer point))
+analyticFrickeObservedPantsTransport observer point =
+  cong chartToPants3
+    (Observer.frickeIntertwines observer point)
 
 record AnalyticHyperformContext : Set where
   constructor analytic-hyperform-context
