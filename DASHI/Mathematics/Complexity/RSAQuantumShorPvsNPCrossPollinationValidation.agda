@@ -7,6 +7,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationExact as Cross
 import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact
 import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact
 
 ------------------------------------------------------------------------
 -- Positive reused structure.
@@ -76,11 +77,11 @@ validationCookLevinOpen :
   ≡ false
 validationCookLevinOpen = refl
 
-validationBooleanFormulaSATInstantiationOpen :
+validationBooleanFormulaSATInstantiation :
   Cross.booleanFormulaSATSelfReductionInstantiationPaid
     Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
-  ≡ false
-validationBooleanFormulaSATInstantiationOpen = refl
+  ≡ true
+validationBooleanFormulaSATInstantiation = refl
 
 validationUniformRecoveryOpen :
   Cross.uniformClassicalRecoveryForNPCompleteWitnessesPaid
