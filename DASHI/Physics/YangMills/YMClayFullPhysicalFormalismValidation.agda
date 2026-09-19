@@ -191,6 +191,42 @@ d2UVNormalizationStillPhysical :
 d2UVNormalizationStillPhysical =
   Full.d2CommonUVNormalizationStillPhysicalIsTrue
 
+
+s2DecodeProductEqualityIsDefinitional :
+  Full.routeSS2DecodeProductEqualityIndependent ≡ false
+s2DecodeProductEqualityIsDefinitional =
+  Full.routeSS2DecodeProductEqualityIndependentIsFalse
+
+s2TranslatedProductEqualityIsDefinitional :
+  Full.routeSS2TranslatedProductEqualityIndependent ≡ false
+s2TranslatedProductEqualityIsDefinitional =
+  Full.routeSS2TranslatedProductEqualityIndependentIsFalse
+
+s2MultiplicationWeldIsDefinitional :
+  Full.routeSS2MultiplicationWeldIndependent ≡ false
+s2MultiplicationWeldIsDefinitional =
+  Full.routeSS2MultiplicationWeldIndependentIsFalse
+
+s2BoundPredicateWeldIsDefinitional :
+  Full.routeSS2BoundPredicateWeldIndependent ≡ false
+s2BoundPredicateWeldIsDefinitional =
+  Full.routeSS2BoundPredicateWeldIndependentIsFalse
+
+s2LoopBoundednessRemains :
+  Full.routeSS2LoopBoundednessStillPhysical ≡ true
+s2LoopBoundednessRemains =
+  Full.routeSS2LoopBoundednessStillPhysicalIsTrue
+
+s2BoundedMultiplyClosureRemains :
+  Full.routeSS2BoundedMultiplyClosureStillPhysical ≡ true
+s2BoundedMultiplyClosureRemains =
+  Full.routeSS2BoundedMultiplyClosureStillPhysicalIsTrue
+
+s2IdentityBoundednessRemains :
+  Full.routeSS2IdentityBoundednessStillPhysical ≡ true
+s2IdentityBoundednessRemains =
+  Full.routeSS2IdentityBoundednessStillPhysicalIsTrue
+
 f2IsCompilerOwned :
   Full.f2PrimitiveResearchPayment ≡ false
 f2IsCompilerOwned =
