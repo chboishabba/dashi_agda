@@ -15,6 +15,7 @@ module DASHI.Analysis.BishopComplexAlgebraExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product using (_,_)
 
 import Real as BishopReal
 import RealProperties as BishopP
