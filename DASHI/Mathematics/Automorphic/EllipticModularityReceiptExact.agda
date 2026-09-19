@@ -10,7 +10,9 @@ module DASHI.Mathematics.Automorphic.EllipticModularityReceiptExact where
 -- good-prime local factors and every finite selected Euler denominator agree.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _*_)
 
@@ -25,7 +27,7 @@ record EllipticModularityReceipt
     modularForm : Truncated.ModularFormFourierData
 
     goodPrimeCoefficientAgreement :
-      (p : Agda.Builtin.Nat.Nat) →
+      (p : Nat) →
       Global.GoodPrime family p →
       Global.frobeniusCoefficient (Global.localAtPrime family p)
       ≡ Truncated.coefficient
@@ -39,7 +41,7 @@ open EllipticModularityReceipt public
 modularLocalFactorAtGoodPrime :
   ∀ {curve family}
     (receipt : EllipticModularityReceipt curve family)
-    (p : Agda.Builtin.Nat.Nat)
+    (p : Nat)
     (good : Global.GoodPrime family p)
     T →
   Global.localPolynomialValue (Global.localAtPrime family p) T
@@ -85,7 +87,7 @@ record SelectedGoodPrime
     (family : Global.EllipticCurveGlobalLocalCoefficient curve) : Set where
   constructor selected-good-prime
   field
-    prime : Agda.Builtin.Nat.Nat
+    prime : Nat
     good : Global.GoodPrime family prime
 
 open SelectedGoodPrime public
@@ -165,3 +167,19 @@ selectedGoodEulerProductsAgree {family = family} receipt T (selected ∷ rest) =
           (selectedPrimeNorm selected)
           T
     coefficientFactorAgreement refl = refl
+
+
+record EllipticModularityFormalizationBoundary : Set where
+  constructor elliptic-modularity-formalization-boundary
+  field
+    exactReceiptInterfacePresent : Bool
+    goodPrimeLocalFactorCompilerPresent : Bool
+    finiteGoodPrimeEulerCompilerPresent : Bool
+    concreteModularityReceiptInhabitedHere : Bool
+    infiniteEllipticLFunctionConstructedHere : Bool
+
+canonicalEllipticModularityFormalizationBoundary :
+  EllipticModularityFormalizationBoundary
+canonicalEllipticModularityFormalizationBoundary =
+  elliptic-modularity-formalization-boundary
+    true true true false false
