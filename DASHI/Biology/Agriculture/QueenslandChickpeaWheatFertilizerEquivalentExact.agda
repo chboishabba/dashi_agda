@@ -46,15 +46,14 @@ dalalEtAl1998 = Attribution.mkDOISource
   "Warra chickpea-wheat rotation study with an adjacent multi-rate wheat fertilizer-N response experiment. Linear/quadratic grain-N-yield response curves were used to estimate fertilizer-N equivalents for unfertilized wheat following chickpea. Retained as a Queensland explicit counterfactual/response-curve receipt; seasonal water limitation and response estimability remain indexed."
   Attribution.publicAttribution
 
-data EquivalentEstimateState : Set where
-  estimated : EquivalentEstimateState
-  notEstimated : EquivalentEstimateState
+data FertilizerEquivalentEstimate : Set where
+  estimatedTenthsKgHa : Nat → FertilizerEquivalentEstimate
+  notEstimated : FertilizerEquivalentEstimate
 
 record AnnualFertilizerEquivalent : Set where
   field
     cropYear : Nat
-    state : EquivalentEstimateState
-    equivalentTenthsKgHa : Nat
+    estimate : FertilizerEquivalentEstimate
     reading : String
 
 open AnnualFertilizerEquivalent public
@@ -62,8 +61,7 @@ open AnnualFertilizerEquivalent public
 equivalent1988 : AnnualFertilizerEquivalent
 equivalent1988 = record
   { cropYear = 1988
-  ; state = estimated
-  ; equivalentTenthsKgHa = 1146
+  ; estimate = estimatedTenthsKgHa 1146
   ; reading =
       "114.6 kg N/ha; source discusses frost injury to preceding chickpea, low chickpea grain/N removal and unusually large initial nitrate supply."
   }
@@ -71,40 +69,35 @@ equivalent1988 = record
 equivalent1989 : AnnualFertilizerEquivalent
 equivalent1989 = record
   { cropYear = 1989
-  ; state = estimated
-  ; equivalentTenthsKgHa = 501
+  ; estimate = estimatedTenthsKgHa 501
   ; reading = "50.1 kg N/ha."
   }
 
 equivalent1990 : AnnualFertilizerEquivalent
 equivalent1990 = record
   { cropYear = 1990
-  ; state = estimated
-  ; equivalentTenthsKgHa = 579
+  ; estimate = estimatedTenthsKgHa 579
   ; reading = "57.9 kg N/ha."
   }
 
 equivalent1992 : AnnualFertilizerEquivalent
 equivalent1992 = record
   { cropYear = 1992
-  ; state = estimated
-  ; equivalentTenthsKgHa = 505
+  ; estimate = estimatedTenthsKgHa 505
   ; reading = "50.5 kg N/ha."
   }
 
 equivalent1993 : AnnualFertilizerEquivalent
 equivalent1993 = record
   { cropYear = 1993
-  ; state = estimated
-  ; equivalentTenthsKgHa = 473
+  ; estimate = estimatedTenthsKgHa 473
   ; reading = "47.3 kg N/ha."
   }
 
 equivalent1994 : AnnualFertilizerEquivalent
 equivalent1994 = record
   { cropYear = 1994
-  ; state = notEstimated
-  ; equivalentTenthsKgHa = 0
+  ; estimate = notEstimated
   ; reading =
       "Not estimated: poor fertilizer-N uptake under low in-crop rainfall made the response experiment non-informative for an equivalent."
   }
@@ -112,8 +105,7 @@ equivalent1994 = record
 equivalent1995 : AnnualFertilizerEquivalent
 equivalent1995 = record
   { cropYear = 1995
-  ; state = notEstimated
-  ; equivalentTenthsKgHa = 0
+  ; estimate = notEstimated
   ; reading =
       "Not estimated: poor fertilizer-N uptake under low in-crop rainfall made the response experiment non-informative for an equivalent."
   }
@@ -121,8 +113,7 @@ equivalent1995 = record
 equivalent1996 : AnnualFertilizerEquivalent
 equivalent1996 = record
   { cropYear = 1996
-  ; state = estimated
-  ; equivalentTenthsKgHa = 400
+  ; estimate = estimatedTenthsKgHa 400
   ; reading = "40.0 kg N/ha."
   }
 
