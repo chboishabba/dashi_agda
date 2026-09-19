@@ -9,7 +9,8 @@ import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as Route
 import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as RouteG
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
 import DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact as Level2
-import DASHI.Physics.YangMills.YMClayLevel2R129CompositeTailAttachmentExact as D1
+import DASHI.Physics.YangMills.YMClayLevel2R129CompositeTailAttachmentExact as D1Compat
+import DASHI.Physics.YangMills.YMClayLevel2D1PhysicalMinCutExact as D1
 import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as D2Compat
 import DASHI.Physics.YangMills.YMClayLevel2D2PhysicalMinCutExact as D2
 import DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact as D3
@@ -192,21 +193,39 @@ r129PaysR127AndStressDerivativeIsTrue =
 
 d1IsSemanticWeldNotNewDecayAnalysis : Bool
 d1IsSemanticWeldNotNewDecayAnalysis =
-  D1.d1PhysicalResidueIsCompletedCompositeSemanticWeld
+  D1.directSameObjectRemainderEqualityStillPhysical
 
 d1IsSemanticWeldNotNewDecayAnalysisIsTrue :
   d1IsSemanticWeldNotNewDecayAnalysis ≡ true
 d1IsSemanticWeldNotNewDecayAnalysisIsTrue =
-  D1.d1PhysicalResidueIsCompletedCompositeSemanticWeldIsTrue
+  D1.directSameObjectRemainderEqualityStillPhysicalIsTrue
 
 d1NewAnalyticInequalityRequired : Bool
 d1NewAnalyticInequalityRequired =
-  D1.d1NewAnalyticInequalityRequired
+  D1.newD1AnalyticInequalityRequired
 
 d1NewAnalyticInequalityRequiredIsFalse :
   d1NewAnalyticInequalityRequired ≡ false
 d1NewAnalyticInequalityRequiredIsFalse =
-  D1.d1NewAnalyticInequalityRequiredIsFalse
+  D1.newD1AnalyticInequalityRequiredIsFalse
+
+d1AuxiliaryProductRemainderFunctionRequired : Bool
+d1AuxiliaryProductRemainderFunctionRequired =
+  D1.auxiliaryProductRemainderFunctionRequiredByD1
+
+d1AuxiliaryProductRemainderFunctionRequiredIsFalse :
+  d1AuxiliaryProductRemainderFunctionRequired ≡ false
+d1AuxiliaryProductRemainderFunctionRequiredIsFalse =
+  D1.auxiliaryProductRemainderFunctionRequiredByD1IsFalse
+
+d1IndependentCompositeCarrierRequiredAfterR129 : Bool
+d1IndependentCompositeCarrierRequiredAfterR129 =
+  D1.independentCompositeCarrierRequiredAfterR129
+
+d1IndependentCompositeCarrierRequiredAfterR129IsFalse :
+  d1IndependentCompositeCarrierRequiredAfterR129 ≡ false
+d1IndependentCompositeCarrierRequiredAfterR129IsFalse =
+  D1.independentCompositeCarrierRequiredAfterR129IsFalse
 
 d2SameCoordinateAttachmentStillPhysical : Bool
 d2SameCoordinateAttachmentStillPhysical =
