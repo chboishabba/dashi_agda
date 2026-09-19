@@ -15,6 +15,7 @@ module DASHI.Mathematics.Complexity.CookLevinGridReplicationExact where
 -- constant; no further SAT semantics are hidden here.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
@@ -100,16 +101,16 @@ gridReplicatedClauseCount time space template =
 record CookLevinGridAccountingBoundary : Set where
   constructor cook-levin-grid-accounting-boundary
   field
-    exactTemplateReplicationCountPaid : Agda.Builtin.Bool.Bool
-    localTemplateSemanticsPaid : Agda.Builtin.Bool.Bool
-    polynomialTimeSpaceClosurePaid : Agda.Builtin.Bool.Bool
-    fullGenericCookLevinPaid : Agda.Builtin.Bool.Bool
+    exactTemplateReplicationCountPaid : Bool
+    localTemplateSemanticsPaid : Bool
+    polynomialTimeSpaceClosurePaid : Bool
+    fullGenericCookLevinPaid : Bool
 
 canonicalCookLevinGridAccountingBoundary :
   CookLevinGridAccountingBoundary
 canonicalCookLevinGridAccountingBoundary =
   cook-levin-grid-accounting-boundary
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.false
+    true
+    true
+    false
+    false
