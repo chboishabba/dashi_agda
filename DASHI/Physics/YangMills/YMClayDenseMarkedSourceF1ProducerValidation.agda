@@ -4,8 +4,6 @@ open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.YangMills.YMClayDenseMarkedSourceF1ProducerExact as Producer
 
--- Acceptance surface for the source-native F1 producer recut.
-
 denseMarkedSourceDecayCompilerIsOwned :
   Producer.denseMarkedSourceDecayCompilerOwned ≡ true
 denseMarkedSourceDecayCompilerIsOwned =
@@ -21,8 +19,26 @@ sameObjectNormalizationWeldRemainsExplicit :
 sameObjectNormalizationWeldRemainsExplicit =
   Producer.sameObjectEnvelopeToPhysicalL2NormalizationStillRequiredIsTrue
 
--- R295 now adapts directly to the generic marked-response/separation-decay ABI,
--- so this is no longer a separate post-R295 F1 payment.
+sameObservableTwiceIsRejected :
+  Producer.sameObservableInsertedTwiceIsCorrectF1Pair ≡ false
+sameObservableTwiceIsRejected =
+  Producer.sameObservableInsertedTwiceIsCorrectF1PairIsFalse
+
+translatedPairIsRequired :
+  Producer.translatedTwoSlicePairRequired ≡ true
+translatedPairIsRequired =
+  Producer.translatedTwoSlicePairRequiredIsTrue
+
+envelopeEqualityIsNotRequired :
+  Producer.envelopeEqualityRequired ≡ false
+envelopeEqualityIsNotRequired =
+  Producer.envelopeEqualityRequiredIsFalse
+
+oneSidedEnvelopeUpperIsEnough :
+  Producer.oneSidedEnvelopeUpperSuffices ≡ true
+oneSidedEnvelopeUpperIsEnough =
+  Producer.oneSidedEnvelopeUpperSufficesIsTrue
+
 selectedPhysicalMarkedDecayIsCompilerOutput :
   Producer.selectedPhysicalMarkedDecayProducerStillRequired ≡ false
 selectedPhysicalMarkedDecayIsCompilerOutput =
