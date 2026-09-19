@@ -623,3 +623,49 @@ scalar coercion is also unnecessary overstrength.
 R131/R136 already supplies the exact continuum first-variation/stress-pairing
 target, but no in-repo theorem was found transporting the finite Ward charge to
 that target. This remains genuine physical continuum analysis.
+
+## Route-S terminal H2c compression
+
+The later R387 terminal source compiler consumes a weaker order-closure
+interface than the historical R330/R333 canonical-B package.
+
+R330/R333 ask for:
+
+```text
+RationalSequentialOrderClosure
++ T5SequentialOrderClosureWeld.sameConvergence
+```
+
+only to construct `R310.RationalUpperOrderClosure`.
+
+The terminal route instead consumes exactly:
+
+```text
+R342.SelectedLimitUpperClosure
+
+Converges sequence target
++ (forall cutoff, sequence cutoff <= upper)
+-> target <= upper.
+```
+
+`YMClayRouteSSelectedLimitClosureExact` proves that the stronger R330
+packaging compiles to this proposition. Therefore the full sequential-closure
+record and the `sameConvergence` equality are not terminal Route-S leaves.
+
+The selected one-sided closure itself is still a real input. The current
+`PhysicalMeasureConvergenceData` scalar convergence stores convergence algebra
+such as constant convergence, but does not itself include order-closedness.
+So the residual is shared/standard ordered-limit analysis, not a fresh
+Yang--Mills decay inequality.
+
+## H3 later-round archaeology
+
+R400 (`BalabanSourceNativeTransferEnergyRatioRound400Exact`) removes a family
+of redundant source-rate/spectral-dominance obligations: once one
+order-reversing transfer energy/decay coordinate is fixed, the relevant
+positive-energy and rate-order inequalities are compiler output.
+
+It does not pay the same-Hamiltonian seam. Searches found no constructor of
+`R331.coordinateOfReconstructedHamiltonian`, `TransferCoordinateOf`, or
+`R302.ModeRatioUsesTransferCoordinate` on the actual OS reconstruction.
+Those same-object transfer/semigroup identifications remain proof-bearing.
