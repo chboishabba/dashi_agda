@@ -58,6 +58,9 @@ record ProviderNormalisationParity : Set where
     providerSpecificReviewShortcutExists : Bool
     providerSpecificProjectionShortcutExists : Bool
 
+    cacheFirstPathRetainedInNormalisationReceipt : Bool
+    acquisitionNetworkCountRetained : Bool
+    verificationNetworkCountRetained : Bool
     exactPgHitUsesZeroNetwork : Bool
     pgMissMayAcquireAndPersist : Bool
     postPersistVerificationUsesZeroNetwork : Bool
@@ -77,6 +80,7 @@ canonicalProviderNormalisationParity =
     true true true true
     true true true
     true true false false
+    true true true
     true true true true
     false false false
 
