@@ -3,6 +3,7 @@ module DASHI.Moonshine.JInvariantAnalyticStructuredPantsHyperformObserverValidat
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.JInvariantAnalyticJCoarseFineObserverExact as Observer
 import DASHI.Moonshine.JInvariantAnalyticStructuredPantsHyperformObserverExact as P
+import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Finite
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Topology.TernaryPantsFrontierExact as Pants
 
@@ -22,3 +23,17 @@ interactionProjectionRegression :
     (P.observeAnalyticHyperform observer point context)
   ≡ P.observeAnalyticInteractionVoxel observer point
 interactionProjectionRegression = P.analyticHyperformProjectsToObservedInteraction
+
+frickePantsTransportRegression :
+  ∀ {system : Modular.ModularJFrickeSystem}
+    (observer : Observer.AnalyticJStructuredObserver system)
+    (point : Modular.FinePoint system) →
+  P.observeAnalyticPants3
+    observer
+    (Modular.fricke system point)
+  ≡
+  P.chartToPants3
+    (Finite.transportedFiniteFricke
+      (Observer.observe observer point))
+frickePantsTransportRegression =
+  P.analyticFrickeObservedPantsTransport
