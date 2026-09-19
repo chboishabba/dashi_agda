@@ -119,3 +119,19 @@ grdcJoinNotReplacementCurve :
   Q.routeFallowRecoveryJoinCreatesMineralNResponseCurve
     Q.canonicalQueenslandLeyBoundary ≡ false
 grdcJoinNotReplacementCurve = refl
+
+
+queenslandMultiRateResponseCurveOwned :
+  Q.queenslandMultiRateFertilizerResponseCurveOwned
+    Q.canonicalQueenslandLeyBoundary ≡ true
+queenslandMultiRateResponseCurveOwned = refl
+
+queenslandEquivalentStillNotAcacia :
+  Q.queenslandChickpeaEquivalentClosesAcaciaAvoidedMineralN
+    Q.canonicalQueenslandLeyBoundary ≡ false
+queenslandEquivalentStillNotAcacia = refl
+
+seasonEstimabilityMustRemain :
+  Q.fertilizerEquivalentSeasonEstimabilityMayBeDropped
+    Q.canonicalQueenslandLeyBoundary ≡ false
+seasonEstimabilityMustRemain = refl
