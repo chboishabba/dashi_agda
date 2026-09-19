@@ -8,7 +8,7 @@ import DASHI.Education.DigitalESDDatabaseTranslatedQueriesExact as T
 import DASHI.Education.DigitalESDDatabaseSearchProtocolExact as Protocol
 import DASHI.Education.DigitalESDStructuredSearchExact as Search
 
-translatedQueryCountRegression : T.translatedQueryCount ≡ 14
+translatedQueryCountRegression : T.translatedQueryCount ≡ 28
 translatedQueryCountRegression = refl
 
 scopusQ4FamilyRegression :
@@ -41,3 +41,26 @@ translatedQueryDoesNotCreateResultSetRegression :
   T.TranslatedQueryCreatesResultSet → ⊥
 translatedQueryDoesNotCreateResultSetRegression =
   T.translatedQueryDoesNotCreateResultSet
+
+
+ieeeQ1ProtocolRegression :
+  T.TranslatedQueryReceipt.protocolQueryId T.ieeeQ1DigitalEducationESD
+  ≡ Protocol.PlannedQuery.queryId Protocol.q1DigitalEducationESD
+ieeeQ1ProtocolRegression = refl
+
+ericQ1ProtocolRegression :
+  T.TranslatedQueryReceipt.protocolQueryId T.ericQ1DigitalEducationESD
+  ≡ Protocol.PlannedQuery.queryId Protocol.q1DigitalEducationESD
+ericQ1ProtocolRegression = refl
+
+ieeeFrozenRegression :
+  T.DatabaseTranslatedQueryBoundary.ieeeSevenExactQueriesFrozen
+    T.canonicalDatabaseTranslatedQueryBoundary
+  ≡ true
+ieeeFrozenRegression = refl
+
+ericFrozenRegression :
+  T.DatabaseTranslatedQueryBoundary.ericSevenExactQueriesFrozen
+    T.canonicalDatabaseTranslatedQueryBoundary
+  ≡ true
+ericFrozenRegression = refl
