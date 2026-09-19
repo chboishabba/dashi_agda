@@ -356,7 +356,7 @@ Close scholarly antecedents are retained explicitly. Chugh's sustainability-para
 
 The formal repository represents search and synthesis as dependent receipts. Database exports feed deduplication; the exact deduplicated object feeds screening; the exact screening object feeds structured extraction; and extraction feeds the source/scope matrix used in synthesis. This prevents downstream claims from being marked complete merely because upstream work is described as completed in prose.
 
-The current draft is therefore reproducible at the level of declared method, source-bounded candidate framework and 19-coordinate extraction schema, but not yet at the level of completed database execution. No unobserved database receipt, screening count, externality-incidence allocation or extracted corpus is reported.
+The current draft is therefore reproducible at the level of declared method, source-bounded candidate framework, the frozen 35-query translation surface, retained ERIC exports/digests and ERIC cross-query metadata deduplication, plus the 19-coordinate extraction schema. It is not yet reproducible as a completed five-database review: the four remaining database result sets, title/abstract screening decisions, full-text corpus, structured extraction and corpus-dependent synthesis remain unpaid. No unobserved database receipt, screening-result count, externality-incidence allocation or extracted admitted corpus is reported.
 
 ## 5. Candidate transformative-principle matrix
 
@@ -430,11 +430,9 @@ The repository currently contains a bounded digital-education source corpus, sou
 
 The following remain operationally unpaid:
 
-- translation of the frozen query families into exact database-specific syntax;
-- execution of the five declared bibliographic database searches;
-- retained database exports and counts;
-- cross-database deduplication;
-- eligibility screening with exclusion reasons;
+- successful execution/export of the four still-blocked database surfaces (Scopus, Web of Science, ACM Digital Library and IEEE Xplore);
+- five-database joint deduplication once those exports exist;
+- title/abstract eligibility screening of the current 43,996-record ERIC deduplicated set, with durable include/probable/exclude/unresolved receipts and retained exclusion reasons;
 - structured extraction of the included corpus using the 19-coordinate schema;
 - empirical allocation of externality incidence for any named deployment;
 - challenge/revision of the seven candidate principles and incidence carrier against that corpus; and
