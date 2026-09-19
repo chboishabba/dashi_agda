@@ -38,8 +38,9 @@ module DASHI.Physics.YangMills.BalabanYM4FiveChannelCauchyQuotientMajorantExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_; _<_; NonNegative; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _≤_; _<_; NonNegative; Positive; nonNegative; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst; sym)
@@ -50,6 +51,134 @@ import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as N
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticBetaAdapterExact as Five
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelFourthOrderFactorizationExact as Fourth
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Beta
+
+------------------------------------------------------------------------
+-- Raw Cauchy coefficient estimate evaluated at the physical coupling.
+--
+-- This removes another hidden analytic shortcut.  A source coefficient bound
+--
+--   -A K^n <= a_n
+--
+-- does not need to be re-assumed after evaluation at g.  For g >= 0 it gives
+--
+--   -A (K g)^n <= a_n g^n
+--
+-- exactly.  The only remaining source fact is therefore the Cauchy coefficient
+-- estimate itself.
+------------------------------------------------------------------------
+
+powerProductIdentity : ∀ left right exponent →
+  Geo.pow (left * right) exponent
+  ≡ Geo.pow left exponent * Geo.pow right exponent
+powerProductIdentity left right zero = ℚRing.solve-∀
+powerProductIdentity left right (suc exponent) =
+  let
+    induction =
+      powerProductIdentity left right exponent
+  in
+  subst
+    (λ tail →
+      (left * right) * tail
+      ≡ Geo.pow left (suc exponent) * Geo.pow right (suc exponent))
+    (sym induction)
+    (ℚRing.solve-∀
+      left right (Geo.pow left exponent) (Geo.pow right exponent))
+
+record RawCauchyCoefficientMajorant : Set₁ where
+  field
+    amplitude coefficientRatio coupling : ℚ
+    coefficient : Nat → ℚ
+
+    amplitudeNonnegativeRaw : 0ℚ ≤ amplitude
+    coefficientRatioNonnegative : 0ℚ ≤ coefficientRatio
+    couplingNonnegative : 0ℚ ≤ coupling
+
+    coefficientLower : ∀ exponent →
+      - (amplitude * Geo.pow coefficientRatio exponent)
+      ≤ coefficient exponent
+
+open RawCauchyCoefficientMajorant public
+
+evaluatedTerm : RawCauchyCoefficientMajorant → Nat → ℚ
+evaluatedTerm dataSet exponent =
+  coefficient dataSet exponent * Geo.pow (coupling dataSet) exponent
+
+evaluatedRatio : RawCauchyCoefficientMajorant → ℚ
+evaluatedRatio dataSet =
+  coefficientRatio dataSet * coupling dataSet
+
+evaluatedRatioNonnegative :
+  (dataSet : RawCauchyCoefficientMajorant) →
+  0ℚ ≤ evaluatedRatio dataSet
+evaluatedRatioNonnegative dataSet =
+  let
+    instance
+      kNN = nonNegative (coefficientRatioNonnegative dataSet)
+      gNN = nonNegative (couplingNonnegative dataSet)
+  in
+  ℚP.nonNegative⁻¹
+    (coefficientRatio dataSet * coupling dataSet)
+
+evaluatedCoefficientLower :
+  (dataSet : RawCauchyCoefficientMajorant) →
+  ∀ exponent →
+  - (amplitude dataSet * Geo.pow (evaluatedRatio dataSet) exponent)
+  ≤ evaluatedTerm dataSet exponent
+evaluatedCoefficientLower dataSet exponent =
+  let
+    gPowerNN =
+      Geo.powNonnegative
+        (coupling dataSet) exponent (couplingNonnegative dataSet)
+
+    scaled =
+      Norm.scaleNonnegative
+        (Geo.pow (coupling dataSet) exponent)
+        gPowerNN
+        (coefficientLower dataSet exponent)
+
+    leftIdentity :
+      Geo.pow (coupling dataSet) exponent
+        * (- (amplitude dataSet
+          * Geo.pow (coefficientRatio dataSet) exponent))
+      ≡ - (amplitude dataSet
+        * Geo.pow (evaluatedRatio dataSet) exponent)
+    leftIdentity =
+      subst
+        (λ combined →
+          Geo.pow (coupling dataSet) exponent
+            * (- (amplitude dataSet
+              * Geo.pow (coefficientRatio dataSet) exponent))
+          ≡ - (amplitude dataSet * combined))
+        (sym
+          (powerProductIdentity
+            (coefficientRatio dataSet)
+            (coupling dataSet)
+            exponent))
+        (ℚRing.solve-∀
+          (amplitude dataSet)
+          (Geo.pow (coefficientRatio dataSet) exponent)
+          (Geo.pow (coupling dataSet) exponent))
+
+    rightIdentity :
+      Geo.pow (coupling dataSet) exponent
+        * coefficient dataSet exponent
+      ≡ evaluatedTerm dataSet exponent
+    rightIdentity =
+      ℚRing.solve-∀
+        (Geo.pow (coupling dataSet) exponent)
+        (coefficient dataSet exponent)
+  in
+  subst
+    (λ lower → lower ≤ evaluatedTerm dataSet exponent)
+    leftIdentity
+    (subst
+      (λ upper →
+        Geo.pow (coupling dataSet) exponent
+          * (- (amplitude dataSet
+            * Geo.pow (coefficientRatio dataSet) exponent))
+        ≤ upper)
+      rightIdentity
+      scaled)
 
 seriesPartial : (Nat → ℚ) → Nat → ℚ
 seriesPartial term zero = term zero
@@ -234,7 +363,7 @@ completedCauchyCoefficientNonnegative dataSet =
 
 record FiveChannelCauchyTailData (Cell : Set) : Set₁ where
   field
-    cells : Agda.Builtin.List.List Cell
+    cells : List Cell
     coupling : ℚ
     channelRemainder : Cell → Five.PhysicalBetaChannel → ℚ
 
