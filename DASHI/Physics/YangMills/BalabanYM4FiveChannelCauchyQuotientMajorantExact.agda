@@ -443,6 +443,42 @@ record FiveChannelCauchyTailData (Cell : Set) : Set₁ where
 
 open FiveChannelCauchyTailData public
 
+record RawFiveChannelCauchyTailData (Cell : Set) : Set₁ where
+  field
+    cells : List Cell
+    coupling : ℚ
+    channelRemainder : Cell → Five.PhysicalBetaChannel → ℚ
+
+    quotientData :
+      Cell → Five.PhysicalBetaChannel → RawCompletedCauchyQuotient
+
+    exactFourthOrderFactorization : ∀ cell channel →
+      channelRemainder cell channel
+      ≡ Beta.power4 coupling
+        * RawCompletedCauchyQuotient.quotient
+            (quotientData cell channel)
+
+open RawFiveChannelCauchyTailData public
+
+rawAsFiveChannelCauchyTailData :
+  ∀ {Cell} →
+  RawFiveChannelCauchyTailData Cell →
+  FiveChannelCauchyTailData Cell
+rawAsFiveChannelCauchyTailData dataSet = record
+  { FiveChannelCauchyTailData.cells =
+      RawFiveChannelCauchyTailData.cells dataSet
+  ; FiveChannelCauchyTailData.coupling =
+      RawFiveChannelCauchyTailData.coupling dataSet
+  ; FiveChannelCauchyTailData.channelRemainder =
+      RawFiveChannelCauchyTailData.channelRemainder dataSet
+  ; FiveChannelCauchyTailData.quotientData =
+      λ cell channel →
+        rawToCompletedCauchyQuotient
+          (RawFiveChannelCauchyTailData.quotientData dataSet cell channel)
+  ; FiveChannelCauchyTailData.exactFourthOrderFactorization =
+      RawFiveChannelCauchyTailData.exactFourthOrderFactorization dataSet
+  }
+
 asFourthOrderFactorizedFiveChannelData :
   ∀ {Cell} →
   FiveChannelCauchyTailData Cell →
@@ -468,6 +504,22 @@ asFourthOrderFactorizedFiveChannelData dataSet = record
         completedCauchyCoefficientNonnegative
           (quotientData dataSet cell channel)
   }
+
+rawCauchyTailGlobalQuarticLower :
+  ∀ {Cell} (dataSet : RawFiveChannelCauchyTailData Cell) →
+  - (Five.coefficientTotal
+      (Fourth.asFiveChannelQuarticBetaData
+        (asFourthOrderFactorizedFiveChannelData
+          (rawAsFiveChannelCauchyTailData dataSet)))
+      * Beta.power4 (RawFiveChannelCauchyTailData.coupling dataSet))
+  ≤ Five.betaInt
+      (Fourth.asFiveChannelQuarticBetaData
+        (asFourthOrderFactorizedFiveChannelData
+          (rawAsFiveChannelCauchyTailData dataSet)))
+rawCauchyTailGlobalQuarticLower dataSet =
+  Fourth.factorizedGlobalQuarticLower
+    (asFourthOrderFactorizedFiveChannelData
+      (rawAsFiveChannelCauchyTailData dataSet))
 
 cauchyTailGlobalQuarticLower :
   ∀ {Cell} (dataSet : FiveChannelCauchyTailData Cell) →
