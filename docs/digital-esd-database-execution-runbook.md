@@ -11,9 +11,9 @@ Scopus              7/7 exact translations
 Web of Science      7/7 exact translations
 IEEE Xplore         7/7 exact translations
 ERIC                 7/7 exact translations
-ACM Digital Library  0/7 exact translations
+ACM Digital Library  7/7 exact translations
 
-total               28/35 frozen translations
+total               35/35 frozen translations
 ```
 
 Execution-attempt ledger:
@@ -22,8 +22,8 @@ Execution-attempt ledger:
 Scopus              7 attempts: HTTP 403 before submission
 Web of Science      7 attempts: HTTP 403 before submission
 ERIC                 7 attempts: current web transport failed before observed API response
-IEEE Xplore          0 execution attempts recorded
-ACM Digital Library  0 execution attempts recorded
+IEEE Xplore          7 attempts: current web transport could not retrieve live query-bearing result pages
+ACM Digital Library  7 attempts: current web transport could not retrieve live query-bearing result pages
 ```
 
 Therefore:
@@ -42,7 +42,7 @@ Use this order unless access conditions materially change:
 1. **ERIC** — exact queries and official public API syntax are paid; run locally and retain raw result pages/exports.
 2. **IEEE Xplore** — exact Command Search queries are paid; execute the frozen strings and retain count/export/query evidence.
 3. **Scopus / Web of Science** — execute when authenticated/institutional access is available.
-4. **ACM Digital Library** — do not execute until current official reproducible syntax and seven exact translations are pinned.
+4. **ACM Digital Library** — exact translations are now pinned; execute through the official Advanced Search / ACM Full-Text / Anywhere scope and retain count/export/query evidence.
 
 This is an operational readiness ordering, not a source-quality/evidence ranking.
 
@@ -131,16 +131,16 @@ both belong in append-only execution history.
 
 ## ACM Digital Library
 
-Current state is explicit debt:
+The seven exact ACM Advanced Search translations are frozen in
+`DigitalESDDatabaseTranslatedQueriesExact.agda`, sourced to official ACM
+Digital Library documentation for Advanced Search, Boolean AND/OR/NOT,
+exact-phrase quotation and the Anywhere search surface.
 
-```text
-official current reproducible syntax not yet pinned
-seven exact translations not frozen
-execution not admissible yet
-```
-
-Do not reconstruct ACM syntax from old screenshots, third-party tutorials or
-nearest-database syntax.
+Use the ACM Full-Text collection / Anywhere scope retained by the syntax
+receipt. Retain exact submitted string, timestamp, unfiltered count, filters,
+export artifact and export format. The current web-transport attempt receipts
+are failures before an observed result page and must not be treated as
+zero-result searches.
 
 ## Mapping execution work into the Agda lineage
 
