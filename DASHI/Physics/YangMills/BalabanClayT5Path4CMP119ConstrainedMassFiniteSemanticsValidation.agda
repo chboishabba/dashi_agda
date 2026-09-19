@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanClayT5Path4CMP119ConstrainedMassFiniteSemanticsValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119ConstrainedMassFiniteSemanticsExact as Path4
+
+constrainedMassPath4FiniteCompilerOwned :
+  Path4.path4CMP119ConstrainedMassFiniteSemanticsCompilerLevel ≡ machineChecked
+constrainedMassPath4FiniteCompilerOwned = refl
+
+constrainedMassPath4ExpectationIntegralCompilerOwned :
+  Path4.path4CMP119ConstrainedMassExpectationIntegralCompilerLevel ≡ machineChecked
+constrainedMassPath4ExpectationIntegralCompilerOwned = refl
+
+constrainedMassPath4ObservableEvaluationRemainsPhysical :
+  Path4.path4CMP119ConstrainedMassObservableEvaluationLevel ≡ conditional
+constrainedMassPath4ObservableEvaluationRemainsPhysical = refl
