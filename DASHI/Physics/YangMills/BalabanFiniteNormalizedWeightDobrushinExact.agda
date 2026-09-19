@@ -37,6 +37,19 @@ import DASHI.Physics.YangMills.BalabanFiniteDobrushinReopeningExact as Dobrushin
 import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonBoundedAlgebraExact as Abs
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
+
+absoluteDifferenceSymmetric : ∀ left right →
+  ∣ left - right ∣ ≡ ∣ right - left ∣
+absoluteDifferenceSymmetric left right =
+  let
+    reverseIsNegative :
+      right - left ≡ - (left - right)
+    reverseIsNegative = ℚRing.solve-∀ left right
+  in
+  trans
+    (sym (ℚP.∣-p∣≡∣p∣ (left - right)))
+    (cong ∣_∣ (sym reverseIsNegative))
+
 record NormalizedFiniteWeightPair (State : Set) : Set₁ where
   field
     states : List State
@@ -143,7 +156,7 @@ massDifferenceBelowRawL1 dataSet =
     orient =
       Sums.sumRationalCong
         (states dataSet) _ _
-        (λ state → ℚP.∣p-q∣≡∣q-p∣
+        (λ state → absoluteDifferenceSymmetric
           (rightRaw dataSet state)
           (leftRaw dataSet state))
   in
