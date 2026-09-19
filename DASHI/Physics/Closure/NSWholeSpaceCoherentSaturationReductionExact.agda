@@ -111,7 +111,7 @@ subtractNonnegativeBelowLeft left right rightNN =
   let
     zeroBelowRight = BishopP.nonNegx⇒0≤x rightNN
     negRightBelowZero =
-      BishopP.neg-antitone-≤ zeroBelowRight
+      BishopP.neg-mono-≤ zeroBelowRight
     shifted =
       BishopP.+-monoʳ-≤ left negRightBelowZero
   in
