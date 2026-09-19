@@ -13,11 +13,11 @@ module DASHI.Analysis.BishopStrictRatioInterpolationExact where
 --
 -- DASHI CONTRIBUTION
 --
--- Specialize that theorem to 0 < r < 1.  The resulting larger ratio is an
+-- Specialize that theorem to 0 <= r < 1.  The resulting larger ratio is an
 -- embedded rational and therefore provides the exact constructive witness
 -- required by polynomial/geometric absorption:
 --
---   0 < r < ρ < 1.
+--   0 < ρ,  r < ρ < 1.
 --
 -- No choice principle or new Archimedean/order postulate is introduced.
 ------------------------------------------------------------------------
@@ -32,17 +32,17 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 interpolateStrictUnitRatio :
   ∀ {ratio : BishopReal.ℝ} →
-  BishopReal._<_ BishopReal.0ℝ ratio →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
   BishopReal._<_ ratio BishopReal.1ℝ →
   Σ BishopReal.ℝ (λ larger →
     BishopReal._<_ BishopReal.0ℝ larger ×
     BishopReal._<_ ratio larger ×
     BishopReal._<_ larger BishopReal.1ℝ)
-interpolateStrictUnitRatio {ratio} ratioPositive ratioBelowOne
+interpolateStrictUnitRatio {ratio} ratioNonnegative ratioBelowOne
   with BishopP.fast-density-of-ℚ ratio BishopReal.1ℝ ratioBelowOne
 ... | rational , ratioBelowLarger , largerBelowOne =
   BishopReal._⋆ rational ,
-  BishopP.<-trans ratioPositive ratioBelowLarger ,
+  BishopP.≤-<-trans ratioNonnegative ratioBelowLarger ,
   ratioBelowLarger ,
   largerBelowOne
 
