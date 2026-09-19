@@ -14,6 +14,7 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
 import DASHI.Physics.YangMills.BalabanArbitraryPairContinuumClusteringRound304Exact as R304
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact as S2
+import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundExact as Trace
 
 ------------------------------------------------------------------------
 -- ROUTE-S S2 / WILSON BOUNDS ON THE SAME T5 OBSERVABLE ALGEBRA
@@ -134,6 +135,25 @@ independentWilsonBoundPredicateWeldRequired = false
 independentWilsonBoundPredicateWeldRequiredIsFalse :
   independentWilsonBoundPredicateWeldRequired ≡ false
 independentWilsonBoundPredicateWeldRequiredIsFalse = refl
+
+
+rationalSU2NormalizedTraceBoundCompilerLevel : ProofLevel
+rationalSU2NormalizedTraceBoundCompilerLevel =
+  Trace.rationalSU2NormalizedTraceBoundLevel
+
+independentCompactGroupTraceInequalityStillRequired : Bool
+independentCompactGroupTraceInequalityStillRequired = false
+
+independentCompactGroupTraceInequalityStillRequiredIsFalse :
+  independentCompactGroupTraceInequalityStillRequired ≡ false
+independentCompactGroupTraceInequalityStillRequiredIsFalse = refl
+
+quantitativeBoundToGramPredicateStillPhysical : Bool
+quantitativeBoundToGramPredicateStillPhysical = true
+
+quantitativeBoundToGramPredicateStillPhysicalIsTrue :
+  quantitativeBoundToGramPredicateStillPhysical ≡ true
+quantitativeBoundToGramPredicateStillPhysicalIsTrue = refl
 
 literalLoopBoundednessStillPhysical : Bool
 literalLoopBoundednessStillPhysical = true
