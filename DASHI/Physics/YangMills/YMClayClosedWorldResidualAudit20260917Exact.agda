@@ -208,21 +208,53 @@ strongRouteRecoveryCompiler = exact-residual
 -- separate optional strengthening, not a primitive Clay payment.
 ------------------------------------------------------------------------
 
-osLiteralSchwingerSameFamily : ExactResidual
-osLiteralSchwingerSameFamily = exact-residual
+level2R129SameFamilyRecovery : ExactResidual
+level2R129SameFamilyRecovery = exact-residual
   sameObjectAttachment
-  "BalabanOSLiteralSchwingerWeldRound127Exact.agda"
-  "OSLiteralSchwingerWeld.sourceOSSystemIsLiteralSchwinger"
+  "BalabanSectorQFTRecoveryExportRound129Exact.agda / YMClayLevel2SameFamilyStressRecoveryExact.agda"
+  "actual R129 same-family recovery package"
   unpaid
-  "R127 already owns the machine-checked adapter ABI preventing OS reconstruction and literal Clay stress/OPE from living on parallel continuum objects. The remaining payment is to inhabit it on the actual Balaban/literal continuum family."
+  "Once R129 is inhabited, the R127 OS-to-literal weld, literal continuum-limit evidence, literal Schwinger membership and literal stress source-derivative identification are compiler-owned exports. Do not count R127 again as an independent downstream payment."
 
-literalClayStressOPE : ExactResidual
-literalClayStressOPE = exact-residual
+level2R127AfterR129 : ExactResidual
+level2R127AfterR129 = exact-residual
+  sameObjectAttachment
+  "YMClayLevel2SameFamilyStressRecoveryExact.agda"
+  "r129ExportsOSLiteralWeld"
+  compilerOwned
+  "R129 contains R128, which contains the R127 OSLiteralSchwingerWeld. The same-family equality is therefore an export of the chosen recovery package."
+
+level2OPEProductTailIdentification : ExactResidual
+level2OPEProductTailIdentification = exact-residual
+  physicalClayStressConstruction
+  "YMClayLevel2StressOPEMinCutExact.agda / BalabanClayHighestAlphaRound87FourAnalyticLemmaExact.agda"
+  "same-family physical RG product remainder = composite marked tail"
+  unpaid
+  "This is genuine physical same-object analysis. Once supplied, YangMillsSharedMarkedCompositeOPERemainderExact makes the dyadic OPE remainder decay compiler-owned."
+
+level2OPECoefficientOneStepAF : ExactResidual
+level2OPECoefficientOneStepAF = exact-residual
+  physicalClayStressConstruction
+  "BalabanOPECoefficientRGRecurrenceUniquenessExact.agda / YMClayLevel2StressOPEMinCutExact.agda"
+  "same one-step operator-mixing law + same UV normalization"
+  unpaid
+  "The physical coefficient coordinate must obey the same one-step AF mixing law and UV normalization. All-depth coefficient equality is then machine-checked induction."
+
+level2LocalTranslationWardStress : ExactResidual
+level2LocalTranslationWardStress = exact-residual
+  physicalClayStressConstruction
+  "BalabanClayHighestAlphaRound87FourAnalyticLemmaExact.agda / YMClayLevel2StressOPEMinCutExact.agda"
+  "local translation Ward/stress law on the same continuum family"
+  unpaid
+  "No hidden constructor was found from the recovered stress derivative directly to HasStressTensorAndOPE. The local stress/Ward semantic identification remains part of the shortest physical D-row."
+
+level2LiteralClayStressOPECompiler : ExactResidual
+level2LiteralClayStressOPECompiler = exact-residual
   physicalClayStressConstruction
   "YangMillsClayStressOPERequirementBoundaryExact.agda / YMClayOSLiteralStressRouteParetoExact.agda"
-  "stress tensor on the same Schwinger family + physical OPE coefficients/remainders"
-  unpaid
-  "The literal Clay stress/OPE constructor consumes exactly same-family stress/OPE evidence. It does not consume stress-charge cutoff convergence, common-core generator equality, essential self-adjointness, or equality of exponentials."
+  "LiteralClayStressOPEEvidence -> stressTensorAndOperatorProductExpansion"
+  compilerOwned
+  "Once the same-family stress/OPE predicates are physically inhabited, the literal Clay postcondition is machine-checked. No stress-charge/common-core/Stone theorem is consumed."
 
 ------------------------------------------------------------------------
 -- Optional stronger same-generator theorem.
@@ -303,6 +335,15 @@ literalClayStressOPERequiresStoneEvolutionEquality = false
 
 osReconstructionMachineryMissing : Bool
 osReconstructionMachineryMissing = false
+
+r127IndependentAfterR129Recovery : Bool
+r127IndependentAfterR129Recovery = false
+
+dyadicOPERemainderIndependentAfterCompositeTailIdentification : Bool
+dyadicOPERemainderIndependentAfterCompositeTailIdentification = false
+
+allDepthOPECoefficientEqualityIndependentAfterOneStepLaw : Bool
+allDepthOPECoefficientEqualityIndependentAfterOneStepLaw = false
 
 f4EvolutionEqualityPrimitive : Bool
 f4EvolutionEqualityPrimitive = false
