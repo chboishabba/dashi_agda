@@ -26,6 +26,26 @@ concreteMurrayBishopSetoidBackendIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 concreteMurrayBishopSetoidBackendIsOwned = refl
 
+bishopSetoidComplexAlgebraIsOwned :
+  P.bishopSetoidComplexAlgebraOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopSetoidComplexAlgebraIsOwned = refl
+
+bishopNatCoefficientEmbeddingBridgesAreOwned :
+  P.bishopNatCoefficientEmbeddingBridgesOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopNatCoefficientEmbeddingBridgesAreOwned = refl
+
+bishopSetoidEisensteinSeriesFromPowerEnvelopeIsOwned :
+  P.bishopSetoidEisensteinSeriesFromPowerEnvelopeOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopSetoidEisensteinSeriesFromPowerEnvelopeIsOwned = refl
+
+bishopQPowerComponentEnvelopeStillUnpaid :
+  P.bishopQPowerComponentEnvelopeInhabited
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+bishopQPowerComponentEnvelopeStillUnpaid = refl
+
 sameCarrierConcreteComplexLimitCompilerIsOwned :
   P.sameCarrierConcreteComplexLimitCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
