@@ -101,6 +101,31 @@ r129ExportsLiteralStressDerivative :
 r129ExportsLiteralStressDerivative =
   R129.literalStressDerivativeRecovery
 
+
+r129ExportsCompositeMarkedSourceData :
+  ∀ {trajectory split inputs C S Y group Scale Volume activity}
+    {domain : Domain.CanonicalMetricSourceDomain Scale Volume activity}
+    {representation : StressRep.CanonicalMetricStressRepresentation domain}
+    {stressLane : R123.DensityAnchoredCanonicalMetricStressLane
+      {trajectory = trajectory} {split = split} {inputs = inputs}
+      {C = C} {S = S} {Y = Y} {group = group}
+      domain representation}
+    (export : R129.BalabanSectorQFTRecoveryExport stressLane) →
+  let selected = R120.coordinate (R123.stressLane stressLane)
+      completion = R114.asMarkedCompletion selected (R114.coordinate selected)
+      sources = R109.completedSources completion
+  in
+  Marked.SameFamilyMarkedSourceData
+    (R109.continuityScale completion)
+    (R109.CompletedState completion)
+    (R109.Composite completion)
+r129ExportsCompositeMarkedSourceData {stressLane = stressLane} export =
+  let selected = R120.coordinate (R123.stressLane stressLane)
+      completion = R114.asMarkedCompletion selected (R114.coordinate selected)
+      sources = R109.completedSources completion
+  in
+  StressMarked.compositeData sources
+
 ------------------------------------------------------------------------
 -- Pareto bookkeeping.
 ------------------------------------------------------------------------
@@ -129,9 +154,16 @@ literalSchwingerMembershipIndependentAfterR129RecoveryIsFalse = refl
 literalStressDerivativeIndependentAfterR129Recovery : Bool
 literalStressDerivativeIndependentAfterR129Recovery = false
 
+compositeMarkedSourceDataIndependentAfterR129Recovery : Bool
+compositeMarkedSourceDataIndependentAfterR129Recovery = false
+
 literalStressDerivativeIndependentAfterR129RecoveryIsFalse :
   literalStressDerivativeIndependentAfterR129Recovery ≡ false
 literalStressDerivativeIndependentAfterR129RecoveryIsFalse = refl
+
+compositeMarkedSourceDataIndependentAfterR129RecoveryIsFalse :
+  compositeMarkedSourceDataIndependentAfterR129Recovery ≡ false
+compositeMarkedSourceDataIndependentAfterR129RecoveryIsFalse = refl
 
 r129SameFamilyRecoveryCompilerLevel : ProofLevel
 r129SameFamilyRecoveryCompilerLevel = R129.balabanSectorQFTRecoveryExportCompilerLevel
