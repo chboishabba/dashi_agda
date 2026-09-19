@@ -87,3 +87,14 @@ empiricalKernelBoundStillOpen = refl
 finiteObservationNotAsymptoticStabilisation :
   Q.finiteObservationImpliesAsymptoticStabilisation Q.canonicalQueenslandLeyBoundary ≡ false
 finiteObservationNotAsymptoticStabilisation = refl
+
+
+firstOrderResidueKineticsSourceOwned :
+  Q.firstOrderResidueKineticsSourceOwned
+    Q.canonicalQueenslandLeyBoundary ≡ true
+firstOrderResidueKineticsSourceOwned = refl
+
+kineticsDoesNotDirectlySupplyBishopKernel :
+  Q.firstOrderKineticsDirectlySuppliesDiscreteBishopKernel
+    Q.canonicalQueenslandLeyBoundary ≡ false
+kineticsDoesNotDirectlySupplyBishopKernel = refl
