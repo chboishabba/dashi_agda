@@ -66,6 +66,31 @@ bishopPolynomialGeometricComparisonCompilerIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopPolynomialGeometricComparisonCompilerIsOwned = refl
 
+bishopStrictRatioInterpolationIsOwned :
+  P.bishopStrictRatioInterpolationOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopStrictRatioInterpolationIsOwned = refl
+
+bishopPolynomialSuccessorFactorLimitIsOwned :
+  P.bishopPolynomialSuccessorFactorLimitOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopPolynomialSuccessorFactorLimitIsOwned = refl
+
+bishopFixedDegreePolynomialGeometricConvergenceIsOwned :
+  P.bishopFixedDegreePolynomialGeometricConvergenceOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopFixedDegreePolynomialGeometricConvergenceIsOwned = refl
+
+bishopDegreeFourPolynomialGeometricConvergenceIsOwned :
+  P.bishopDegreeFourPolynomialGeometricConvergenceOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopDegreeFourPolynomialGeometricConvergenceIsOwned = refl
+
+bishopDegreeSixPolynomialGeometricConvergenceIsOwned :
+  P.bishopDegreeSixPolynomialGeometricConvergenceOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopDegreeSixPolynomialGeometricConvergenceIsOwned = refl
+
 genericTailToCauchyBridgeIsOwned :
   P.genericTailToCauchyBridgeOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
