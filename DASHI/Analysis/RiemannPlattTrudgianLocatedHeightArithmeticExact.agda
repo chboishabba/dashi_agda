@@ -17,6 +17,7 @@ module DASHI.Analysis.RiemannPlattTrudgianLocatedHeightArithmeticExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (_+_; _*_)
 open import Data.Integer.Base as Int
 open import Data.Rational.Base as Rational using (ℚ; _/_; _<_)
 import Data.Rational.Properties as RationalLaws
