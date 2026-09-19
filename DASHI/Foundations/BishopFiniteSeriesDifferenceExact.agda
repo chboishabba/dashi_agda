@@ -11,6 +11,7 @@ module DASHI.Foundations.BishopFiniteSeriesDifferenceExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 
 import Real as BishopReal
 import RealProperties as BishopP
