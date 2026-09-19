@@ -104,14 +104,14 @@ projectiveSpaceSpanningGivesHodgeConjecture spanning = record
 record ProjectiveSpaceLiteralReopeningBoundary : Set where
   constructor projective-space-literal-reopening-boundary
   field
-    hyperplanePowerReopeningCompilerPaid : Agda.Builtin.Bool.Bool
-    actualCPnGeometricIdentificationPaid : Agda.Builtin.Bool.Bool
-    generalHodgeConjecturePaid : Agda.Builtin.Bool.Bool
+    hyperplanePowerReopeningCompilerPaid : Bool
+    actualCPnGeometricIdentificationPaid : Bool
+    generalHodgeConjecturePaid : Bool
 
 canonicalProjectiveSpaceLiteralReopeningBoundary :
   ProjectiveSpaceLiteralReopeningBoundary
 canonicalProjectiveSpaceLiteralReopeningBoundary =
   projective-space-literal-reopening-boundary
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.false
+    true
+    false
+    false
