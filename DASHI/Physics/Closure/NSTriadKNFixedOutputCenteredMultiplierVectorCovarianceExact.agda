@@ -35,16 +35,20 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNGramDebtPairExpansionRound383Exact as R383
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Cov
 import DASHI.Physics.Closure.NSTriadKNFixedOutputViscousRateDifferenceFactorizationExact as Rate
+import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExact as D1a
+import DASHI.Physics.Closure.NSTriadKNFixedOutputViscousCenteredCovarianceExact as Viscous
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -181,7 +185,7 @@ literalFixedOutputCenteredMultiplierResidual E value cutoff tau =
 literalFixedOutputCenteredCovarianceIsOneVectorWork :
   (E : C3.IntegerEmbedding F) →
   (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
-  (cutoff : Nat) (output : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode) →
+  (cutoff : Nat) (output : Z3.FourierMode) →
   let
     items = Output.physicalOutputFiber cutoff output
     mixed = R224.foldVector value items
@@ -196,6 +200,70 @@ literalFixedOutputCenteredCovarianceIsOneVectorWork E value cutoff output =
     (centeredFrequencyMultiplier E)
     value
     (Output.physicalOutputFiber cutoff output)
+
+
+literalPhysicalViscousCovarianceIsCenteredMultiplierWork :
+  (E : C3.IntegerEmbedding F) →
+  (I : C3.ModeInverseSquare F E) →
+  (nu : ℚ) →
+  (S : Helical.HelicalModeScalars F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
+  (cutoff : Nat) (output : Z3.FourierMode) →
+  let
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = R224.foldVector value items
+    rho = Viscous.Centered.modalViscousRate nu I
+    rate = Cov.cellRate rho
+    work = Cov.cellWork mixed value
+    decay = R224.foldVector (D1a.variableDecayCell rho S velocity) items
+    covarianceNumerator =
+      Cov.natAsRational (length items)
+        * Work.coherentWork mixed decay
+        + Cov.rateSum rate items * Work.coherentWork mixed mixed
+    residual =
+      centeredMultiplierResidual
+        (centeredFrequencyMultiplier E) value items
+  in
+  Rate.two * covarianceNumerator
+  ≡ 0ℚ - nu * Work.coherentWork mixed residual
+literalPhysicalViscousCovarianceIsCenteredMultiplierWork
+    E I nu S velocity cutoff output =
+  let
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = R224.foldVector value items
+    multiplier = centeredFrequencyMultiplier E
+    work = Cov.cellWork mixed value
+    centeredDefect =
+      Cov.pairDifferenceWorkSum multiplier work items
+    residual = centeredMultiplierResidual multiplier value items
+
+    physical :
+      Rate.two *
+        ( Cov.natAsRational (length items)
+            * Work.coherentWork mixed
+                (R224.foldVector
+                  (D1a.variableDecayCell
+                    (Viscous.Centered.modalViscousRate nu I)
+                    S velocity)
+                  items)
+          + Cov.rateSum
+              (Cov.cellRate (Viscous.Centered.modalViscousRate nu I))
+              items
+              * Work.coherentWork mixed mixed )
+      ≡ 0ℚ - nu * centeredDefect
+    physical =
+      Viscous.literalFixedOutputViscousCenteredCovariance
+        E I nu S velocity cutoff output
+
+    vectorMeaning :
+      centeredDefect ≡ Work.coherentWork mixed residual
+    vectorMeaning =
+      pairDifferenceIsCenteredMultiplierWork multiplier value items
+  in
+  trans physical
+    (cong (λ defect → 0ℚ - nu * defect) vectorMeaning)
 
 centeredCovarianceCollapsedToOneVectorResidual : Bool
 centeredCovarianceCollapsedToOneVectorResidual = true
