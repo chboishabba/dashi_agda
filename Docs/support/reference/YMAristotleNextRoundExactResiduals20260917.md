@@ -466,20 +466,36 @@ R129 BalabanSectorQFTRecoveryExport
   -> literal DyadicOPERemainderMajorant
 ```
 
-The surviving D1 physical content is now a same-object semantic weld on the
-R129-selected completed composite:
+The surviving D1 physical content can be reduced one step further.
+
+The older compatibility record introduced an auxiliary
 
 ```text
-completed-composite product remainder
-  = literal Clay opeRemainder
-completed-composite product remainder
-  = selected composite marked tail
+productRemainder : Composite -> Nat -> Rational
 ```
 
-The direct Clay-remainder = marked-tail equality is derived by transitivity.
-No new analytic inequality is introduced. The composite completion,
-same-family provenance, nonnegativity and dyadic decay are all
-downstream/compiler-owned once R129 and this semantic weld are supplied.
+and then required its value on the selected completed composite to equal both
+the literal Clay remainder and the selected marked tail. Because that function
+is freely supplied, it contributes no additional proof strength.
+
+The canonical D1 min-cut is now the single direct equality:
+
+```text
+Top.opeRemainder Y group left right position depth
+  =
+Shared.compositeInsertionTail shared scale volume root
+  depth (remaining depth)
+```
+
+inside the already-fixed R129 recovery context.
+
+`YMClayLevel2D1PhysicalMinCutExact` compiles this direct equality back into the
+older R129 attachment for compatibility and then reuses the existing marked-tail
+compiler to obtain the literal `DyadicOPERemainderMajorant`.
+
+Thus D1 has exactly one surviving physical theorem: the literal remainder is the
+selected R129 same-family composite tail. No auxiliary remainder carrier, no
+independent composite carrier, and no new analytic inequality are required.
 
 No in-repo theorem was found that already identifies the literal product
 remainder with the composite mark/tail. CMP116/Round84 supply differentiated
