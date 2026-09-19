@@ -21,6 +21,7 @@ module DASHI.Physics.Closure.NSWholeSpaceBishopFiniteCauchyPSDExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Unnormalised using (_/_; +_; Κ)
 
 import Inverse as BishopInverse
 import Real as BishopReal
@@ -227,7 +228,7 @@ headKernelSplit head left right =
       BishopP.≃-trans
         (solve 6
           (λ x' a' b' kxa' kxb' kab' →
-            ((Κ 2ℚᵘ ⊗ x') ⊗ (kxa' ⊗ kxb'))
+            ((Κ (+ 2 / 1) ⊗ x') ⊗ (kxa' ⊗ kxb'))
             ⊕
             (((a' ⊖ x') ⊗ kxa')
               ⊗
@@ -374,7 +375,7 @@ rankOneQuadraticSplit :
 rankOneQuadraticSplit kernel residual u z beta split [] =
   let open BishopP.ℝ-Solver
   in solve 1
-    (λ b → Κ 0ℚᵘ ⊜ (b ⊗ (Κ 0ℚᵘ ⊗ Κ 0ℚᵘ)) ⊕ Κ 0ℚᵘ)
+    (λ b → Κ (+ 0 / 1) ⊜ (b ⊗ (Κ (+ 0 / 1) ⊗ Κ (+ 0 / 1))) ⊕ Κ (+ 0 / 1))
     BishopP.≃-refl beta
 rankOneQuadraticSplit kernel residual u z beta split (head ∷ rest) =
   let
@@ -396,7 +397,7 @@ rankOneQuadraticSplit kernel residual u z beta split (head ∷ rest) =
         (((b ⊗ (uh ⊗ uh)) ⊕ sr)
           ⊗ (zh ⊗ zh))
         ⊕
-        ((Κ 2ℚᵘ ⊗ zh)
+        ((Κ (+ 2 / 1) ⊗ zh)
           ⊗ ((b ⊗ (uh ⊗ su)) ⊕ sr))
         ⊕
         ((b ⊗ (su ⊗ su)) ⊕ q)
@@ -404,7 +405,7 @@ rankOneQuadraticSplit kernel residual u z beta split (head ∷ rest) =
         (b ⊗ ((uh ⊗ zh ⊕ su) ⊗ (uh ⊗ zh ⊕ su)))
         ⊕
         (sr ⊗ (zh ⊗ zh)
-          ⊕ (Κ 2ℚᵘ ⊗ zh) ⊗ sr
+          ⊕ (Κ (+ 2 / 1) ⊗ zh) ⊗ sr
           ⊕ q))
       BishopP.≃-refl
       beta (u head) (z head)
@@ -441,8 +442,8 @@ rankOneQuadraticSplit kernel residual u z beta split (head ∷ rest) =
     let open BishopP.ℝ-Solver
     in solve 2
       (λ b uh →
-        Κ 0ℚᵘ
-        ⊜ (b ⊗ (uh ⊗ Κ 0ℚᵘ)) ⊕ Κ 0ℚᵘ)
+        Κ (+ 0 / 1)
+        ⊜ (b ⊗ (uh ⊗ Κ (+ 0 / 1))) ⊕ Κ (+ 0 / 1))
       BishopP.≃-refl beta (u head)
   rankOneRowSplit kernel residual u z beta split head (cell ∷ rest) =
     let
@@ -511,7 +512,7 @@ headBetaInverseLaw head =
   BishopP.≃-trans
     (BishopP.*-congˡ
       (solve 1
-        (λ x → Κ 2ℚᵘ ⊗ x ⊜ x ⊕ x)
+        (λ x → Κ (+ 2 / 1) ⊗ x ⊜ x ⊕ x)
         BishopP.≃-refl
         (rate head)))
     base
@@ -550,12 +551,12 @@ completeSquare head z rest =
     (solve 4
       (λ k' b' z' s' →
         (k' ⊗ (z' ⊗ z'))
-        ⊕ (Κ 2ℚᵘ ⊗ (z' ⊗ s'))
+        ⊕ (Κ (+ 2 / 1) ⊗ (z' ⊗ s'))
         ⊕ (b' ⊗ (s' ⊗ s'))
         ⊜
         (k' ⊗ (z' ⊗ z'))
         ⊕
-        ((Κ 2ℚᵘ ⊗ (k' ⊗ b')) ⊗ (z' ⊗ s'))
+        ((Κ (+ 2 / 1) ⊗ (k' ⊗ b')) ⊗ (z' ⊗ s'))
         ⊕
         (((k' ⊗ b') ⊗ b') ⊗ (s' ⊗ s')))
       BishopP.≃-refl k beta zz s)
@@ -572,7 +573,7 @@ completeSquare head z rest =
        in solve 4
         (λ k' b' z' s' →
           (k' ⊗ (z' ⊗ z'))
-          ⊕ (Κ 2ℚᵘ ⊗ (z' ⊗ s'))
+          ⊕ (Κ (+ 2 / 1) ⊗ (z' ⊗ s'))
           ⊕ (b' ⊗ (s' ⊗ s'))
           ⊜
           k' ⊗ ((z' ⊕ (b' ⊗ s')) ⊗
