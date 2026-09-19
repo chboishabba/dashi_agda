@@ -86,6 +86,7 @@ candidateTransportRoute = Transport.residueMineralisationRoute
 record FirstOrderKineticsBoundary : Set where
   field
     firstOrderResidueReleaseShapeObserved : Bool
+    reportedUpperHalfTimeInsideExperimentWindow : Bool
     reportedRateRangeImpliesOneUniversalRate : Bool
     residueChemistryMayBeErased : Bool
     moistureRegimeMayBeErased : Bool
@@ -94,6 +95,7 @@ record FirstOrderKineticsBoundary : Set where
     residueMineralisationKineticsEqualsLivingBelowGroundTransfer : Bool
     continuousFirstOrderFitDirectlySuppliesDiscreteBishopRatio : Bool
     sourceFitAutomaticallyPaysPolynomialGeometricMajorant : Bool
+    finiteFirstOrderFitAuthorizesInfiniteHorizonExtrapolation : Bool
     sourceFitCreatesFertilizerReplacementValue : Bool
     sourceFitCreatesDeploymentAuthority : Bool
 
@@ -102,6 +104,7 @@ open FirstOrderKineticsBoundary public
 canonicalFirstOrderKineticsBoundary : FirstOrderKineticsBoundary
 canonicalFirstOrderKineticsBoundary = record
   { firstOrderResidueReleaseShapeObserved = true
+  ; reportedUpperHalfTimeInsideExperimentWindow = true
   ; reportedRateRangeImpliesOneUniversalRate = false
   ; residueChemistryMayBeErased = false
   ; moistureRegimeMayBeErased = false
@@ -110,10 +113,11 @@ canonicalFirstOrderKineticsBoundary = record
   ; residueMineralisationKineticsEqualsLivingBelowGroundTransfer = false
   ; continuousFirstOrderFitDirectlySuppliesDiscreteBishopRatio = false
   ; sourceFitAutomaticallyPaysPolynomialGeometricMajorant = false
+  ; finiteFirstOrderFitAuthorizesInfiniteHorizonExtrapolation = false
   ; sourceFitCreatesFertilizerReplacementValue = false
   ; sourceFitCreatesDeploymentAuthority = false
   }
 
 attributionRule : String
 attributionRule =
-  "Thomson, Cameron, Dalal & Hoult 2007 (DOI 10.1071/EA05290) owns the reported Vertisol experiment, first-order residue-N-release finding, reported k range, half-times, moisture treatments and residue-chemistry relationships. DASHI owns only the typed source receipt, its placement on the residue-mineralisation route, and the no-promotion boundary. DASHI does not attribute its constructive convolution, tail, Bishop-series or future continuous-to-discrete compiler theorems to Thomson et al.; nor does the source create an Acacia/Senegalia same-object kernel, living-root-transfer evidence, fertilizer-replacement value or deployment authority."
+  "Thomson, Cameron, Dalal & Hoult 2007 (DOI 10.1071/EA05290) owns the reported Vertisol experiment, first-order residue-N-release finding, reported k range, half-times, moisture treatments and residue-chemistry relationships. DASHI owns only the typed source receipt, its placement on the residue-mineralisation route, and the no-promotion boundary. DASHI does not attribute its constructive convolution, tail, Bishop-series or future continuous-to-discrete compiler theorems to Thomson et al. The reported maximum half-time (15.4 weeks) is within the 17-week experiment, but the finite fitted first-order law is not promoted to infinite-horizon extrapolation authority. Nor does the source create an Acacia/Senegalia same-object kernel, living-root-transfer evidence, fertilizer-replacement value or deployment authority."
