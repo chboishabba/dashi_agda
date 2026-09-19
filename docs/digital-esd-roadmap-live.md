@@ -411,6 +411,9 @@ The first Python-guided source front is:
 - NCVER 2024 Student Outcomes Survey technical notes — population/frame/invitation contraction and contactability restrictions;
 - Social Research Centre / QILT 2022 Student Experience Survey methodology — Australian higher-education eligibility identification, supplementation of enrolments missing from TCSI extracts, population-frame construction and exclusion rules;
 - Voorheis 2021 Census working paper — administrative college-record frame coverage and subgroup undercoverage;
+- Dynarski/Hemelt/Hyman 2015 — DOI `10.3102/0162373715576078`, independent NSC subgroup undercoverage/noncoverage mechanisms;
+- Fisher et al. 2019 — DOI `10.3389/fpubh.2019.00217`, independent Australian recruitment-frame/reachability construction;
+- Creagh 2016 — DOI `10.1080/02680939.2015.1066870`, independent category-construction/LBOTE residual;
 - Clutterbuck/Hardy/Creagh — DOI `10.1080/02680939.2021.1972166`, Queensland OneSchool preclusion/omission.
 
 These are calibration/acquisition candidates, not final-corpus admissions.
@@ -450,3 +453,31 @@ relational research burden
 ```text
 source suggests candidate coordinate != coordinate required
 ```
+
+
+## 19. Upstream eligibility-frame acquisition freeze
+
+The upstream Python matrix now has plural calibration for every declared residual:
+
+```text
+target -> frame contraction
+eligibility-definition rule
+administrative-register coverage
+recruitment/contact reachability
+subgroup undercoverage
+category/data omission
+same-object frame comparison
+```
+
+This is a **calibration stop condition**, not an evidence-completeness claim. It does not convert any candidate into an included study or raise any source's claim ceiling.
+
+Accordingly:
+
+```text
+Round 20 old-matrix acquisition      frozen
+upstream eligibility-frame acquisition frozen
+declared database execution          still P0
+dedup / screening / SourceAuditAdmission still P0
+```
+
+The next acquisition round is blocked until the admitted corpus or a same-object manuscript consumer exposes a distinction that the current surfaces cannot separate.
