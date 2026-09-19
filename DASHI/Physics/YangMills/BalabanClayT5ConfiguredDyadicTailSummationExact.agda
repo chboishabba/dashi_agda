@@ -28,7 +28,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
@@ -115,7 +115,7 @@ pointwiseRootedShellBoundToUniformFiniteTail :
   defectPartial defect start count
   ≤ Configured.configuredInfiniteTailMajorant start
 pointwiseRootedShellBoundToUniformFiniteTail defect pointwise start count =
-  trans
+  ℚP.≤-trans
     (pointwiseDefectBelowFiniteDyadicTail
       defect pointwise start count)
     (configuredFiniteDyadicTailBelowInfiniteMajorant start count)
