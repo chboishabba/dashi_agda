@@ -5,6 +5,7 @@ module DASHI.Analysis.BishopComplexNonzeroFromComponentExact where
 ------------------------------------------------------------------------
 
 open import Data.Sum.Base using (inj₁; inj₂)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 
 import Real as BishopReal
 import RealProperties as BishopP
