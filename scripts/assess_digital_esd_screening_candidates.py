@@ -307,13 +307,22 @@ def main() -> int:
         key = (a, b, relation)
         edges.setdefault(key, hypothesis(a, b, relation, evidence))
 
+    # Exact blocks use a representative-star rather than O(k^2) all-pairs.
+    # That is enough to preserve the candidate fibre while avoiding quadratic
+    # blow-up for common/generic titles.
     for doi, refs in doi_index.items():
-        for a, b in itertools.combinations(sorted(set(refs)), 2):
-            add_edge(a, b, "publicationDuplicate", {"doi": doi, "basis": "exact-doi"})
+        refs = sorted(set(refs))
+        if len(refs) >= 2:
+            representative = refs[0]
+            for other in refs[1:]:
+                add_edge(representative, other, "publicationDuplicate", {"doi": doi, "basis": "exact-doi"})
 
     for title, refs in title_index.items():
-        for a, b in itertools.combinations(sorted(set(refs)), 2):
-            add_edge(a, b, "publicationDuplicate", {"normalized_title": title, "basis": "exact-normalized-title"})
+        refs = sorted(set(refs))
+        if len(refs) >= 2:
+            representative = refs[0]
+            for other in refs[1:]:
+                add_edge(representative, other, "publicationDuplicate", {"normalized_title": title, "basis": "exact-normalized-title"})
 
     for (author, year), refs in fuzzy_blocks.items():
         refs = sorted(set(refs))
@@ -340,11 +349,17 @@ def main() -> int:
         a = row["left_source_identity_reference"]
         b = row["right_source_identity_reference"]
         dsu.union(a, b)
+    hypothesis_members = {
+        endpoint
+        for h in hypotheses
+        for endpoint in (
+            h["left_source_identity_reference"],
+            h["right_source_identity_reference"],
+        )
+    }
     groups: dict[str, list[str]] = defaultdict(list)
-    for ref in metadata_by_ref:
-        root = dsu.find(ref)
-        if root != ref or any(ref in (h["left_source_identity_reference"], h["right_source_identity_reference"]) for h in hypotheses):
-            groups[root].append(ref)
+    for ref in hypothesis_members:
+        groups[dsu.find(ref)].append(ref)
     for row in hypotheses:
         root = dsu.find(row["left_source_identity_reference"])
         hyp_refs_by_root_input[root].append(row["hypothesis_reference"])
