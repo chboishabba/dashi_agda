@@ -144,6 +144,9 @@ record EisensteinBishopConvergenceFrontier : Set where
     eisensteinCoefficientPolynomialGrowthOwned : Bool
     literalTruncationIncrementIdentityOwned : Bool
     literalIncrementCoefficientEnvelopeOwned : Bool
+    qPowerModulusPropagationCompilerOwned : Bool
+    polynomialGeometricIncrementModulusCompilerOwned : Bool
+    sameCarrierModulusAlgebraInhabited : Bool
     principalStripQModulusCompilerOwned : Bool
     upperHalfPlaneQDecayCompilerOwned : Bool
     concreteQOrderAndStripInputsOwned : Bool
@@ -168,8 +171,8 @@ canonicalEisensteinBishopConvergenceFrontier :
 canonicalEisensteinBishopConvergenceFrontier =
   eisenstein-bishop-convergence-frontier
     true true true true true
-    true true true true true true false
+    true true true true true true true true false true true false
     false
     false false false false
     false false
-    "Bishop completeness remains available, while the shortest route now stays on the existing ConcreteComplex carrier: same-carrier Cauchy completion is paid, sigma3/sigma5 polynomial growth is paid, the exact E4/E6 successor increments and their 240/504 coefficient envelopes are paid, and principal-strip/upper-half-plane q-decay compilers are paid conditionally. The genuine remaining inputs are a nondegenerate ordinary order/polar-branch inhabitant, the concrete polynomial-times-geometric E4/E6 Cauchy majorants, and the limit = analytic lattice-sum same-object theorem."
+    "Bishop completeness remains available, while the shortest route now stays on the existing ConcreteComplex carrier: same-carrier Cauchy completion is paid, sigma3/sigma5 polynomial growth is paid, the exact E4/E6 successor increments and their 240/504 coefficient envelopes are paid; q-power modulus propagation and polynomial-times-geometric increment-modulus compilers are also paid. Their ordinary modulus multiplication/triangle/order package remains an explicit same-carrier inhabitant, and principal-strip/upper-half-plane q-decay compilers remain paid conditionally. The genuine remaining inputs are a nondegenerate ordinary order/polar-branch inhabitant, the concrete polynomial-times-geometric E4/E6 Cauchy majorants, and the limit = analytic lattice-sum same-object theorem."
