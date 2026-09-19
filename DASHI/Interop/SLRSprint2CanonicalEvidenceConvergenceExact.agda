@@ -135,6 +135,45 @@ currentM21Implementation =
     false
     false
 
+data EvidenceSpanKind : Set where
+  textRange : EvidenceSpanKind
+  structuredCoordinate : EvidenceSpanKind
+  wholeRevision : EvidenceSpanKind
+
+record CanonicalSourceSpanObservationParity : Set where
+  constructor canonicalSourceSpanObservationParity
+  field
+    sourceRevisionRetainsManifestationIdentity : Bool
+    sourceRevisionRetainsContentDigest : Bool
+    sourceRevisionRetainsRevisionReceipt : Bool
+    textEvidenceUsesExactCharacterRange : Bool
+    graphEvidenceUsesStructuredCoordinate : Bool
+    graphEvidenceRequiresFabricatedTextRange : Bool
+    observationRevisionMustEqualSpanRevision : Bool
+    worldObservationLowersToCanonicalObservation : Bool
+    compilerTokenRequiresPrecedingExactRevision : Bool
+    compilerMaySwitchDocumentRevisionMidStream : Bool
+    compilerWireVersionChangedForThisWeld : Bool
+    postgresRevisionSpanWeldImplemented : Bool
+
+open CanonicalSourceSpanObservationParity public
+
+currentM22PartialParity : CanonicalSourceSpanObservationParity
+currentM22PartialParity =
+  canonicalSourceSpanObservationParity
+    true
+    true
+    true
+    true
+    true
+    false
+    true
+    true
+    true
+    false
+    false
+    false
+
 record Sprint2ExitGate : Set where
   constructor sprint2ExitGate
   field
@@ -172,6 +211,8 @@ data ManifestationPromotesApplicability : Set where
 data ManifestationPromotesClaimTruth : Set where
 data ProducerSpecificEnvelopeBypassesCanonicalEnvelope : Set where
 data ManifestationEnvelopeMeansSpanConvergencePaid : Set where
+data StructuredEvidenceRequiresFakeTextSpan : Set where
+data TokenMayCompileWithoutExactRevision : Set where
 
 manifestationCannotCreateSemanticAuthority :
   ManifestationCreatesSemanticAuthority → ⊥
@@ -192,3 +233,12 @@ producerSpecificEnvelopeCannotBypassCanonicalEnvelope ()
 manifestationEnvelopeDoesNotPaySpanConvergence :
   ManifestationEnvelopeMeansSpanConvergencePaid → ⊥
 manifestationEnvelopeDoesNotPaySpanConvergence ()
+
+
+structuredEvidenceDoesNotRequireFakeTextSpan :
+  StructuredEvidenceRequiresFakeTextSpan → ⊥
+structuredEvidenceDoesNotRequireFakeTextSpan ()
+
+tokenCannotCompileWithoutExactRevision :
+  TokenMayCompileWithoutExactRevision → ⊥
+tokenCannotCompileWithoutExactRevision ()
