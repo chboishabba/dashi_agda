@@ -177,3 +177,5 @@ import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
 import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
 
 import DASHI.Core.EmancipatoryVocabularyRelationalGrammarNoncollapseExact
+
+import DASHI.Core.ProtectionVocabularyUniversalContestabilityNoncollapseExact
