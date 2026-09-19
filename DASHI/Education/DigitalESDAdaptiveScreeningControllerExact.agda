@@ -13,6 +13,7 @@ import DASHI.Education.DigitalESDTitleAbstractScreeningExact as Screen
 import DASHI.Education.DigitalESDSearchToSourceAuditAdmissionExact as Audit
 import DASHI.Education.DigitalESDSLRSourceReviewBridgeExact as SLR
 import DASHI.Education.DigitalESDSituatedAuditObserverExact as Situated
+import DASHI.Education.DigitalESDEligibilityFrameExclusionExact as Frame
 
 ------------------------------------------------------------------------
 -- DIGITAL-ESD P0-A -> P0-G ADAPTIVE SCREENING CONTROLLER
@@ -251,3 +252,7 @@ searchAuditBoundaryAnchor = Audit.canonicalSearchAuditWeldBoundary
 
 situatedObserverBoundaryAnchor : Situated.SituatedObserverBoundary
 situatedObserverBoundaryAnchor = Situated.canonicalSituatedObserverBoundary
+
+
+eligibilityFrameBoundaryAnchor : Frame.EligibilityFrameBoundary
+eligibilityFrameBoundaryAnchor = Frame.canonicalEligibilityFrameBoundary
