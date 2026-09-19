@@ -11,6 +11,7 @@ import DASHI.Analysis.ConstructiveSeries as Series
 import DASHI.Analysis.PolynomialGeometricTailDominationExact as Tail
 import DASHI.Analysis.TailModulusCauchyBridgeExact as Bridge
 import DASHI.Biology.Agriculture.ConstructiveNitrogenTransportKernelExact as P
+import DASHI.Analysis.BishopFirstOrderRateDiscreteContractionExact as FirstOrder
 
 mineralisationIsConvolutionRegression :
   ∀ (R : Real.ConstructedOrderedCompleteReal)
@@ -57,3 +58,26 @@ routeDominatedPartialSumsCauchyRegression :
       (P.bishopRouteActualContribution problem))
 routeDominatedPartialSumsCauchyRegression =
   P.bishopRouteActualPartialSumsCauchy
+
+
+firstOrderRouteRatioPositiveRegression :
+  (problem : P.BishopFirstOrderNitrogenRouteMajorant) →
+  BishopReal._<_ BishopReal.0ℝ
+    (P.bishopFirstOrderRouteRatio problem)
+firstOrderRouteRatioPositiveRegression =
+  P.bishopFirstOrderRouteRatioPositive
+
+firstOrderRouteRatioBelowOneRegression :
+  (problem : P.BishopFirstOrderNitrogenRouteMajorant) →
+  BishopReal._<_
+    (P.bishopFirstOrderRouteRatio problem)
+    BishopReal.1ℝ
+firstOrderRouteRatioBelowOneRegression =
+  P.bishopFirstOrderRouteRatioBelowOne
+
+firstOrderRouteAbsoluteConvergenceRegression :
+  (problem : P.BishopFirstOrderNitrogenRouteMajorant) →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (P.bishopFirstOrderRouteMajorantTerm problem)
+firstOrderRouteAbsoluteConvergenceRegression =
+  P.bishopFirstOrderRouteMajorantAbsolutelyConvergent
