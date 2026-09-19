@@ -12,7 +12,10 @@ module DASHI.Analysis.BishopComplexReciprocalExact where
 -- the same Bishop complex carrier used by the Eisenstein q-series theorem.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Integer.Base using (+_)
 open import Data.Product using (_,_)
+open import Data.Rational.Unnormalised using (_/_)
 
 import Inverse as BishopInverse
 import Real as BishopReal
@@ -103,7 +106,7 @@ multiplyReciprocal (Complex.complex a b) nz =
 reciprocalPower :
   (z : Complex.BishopComplex) →
   BishopComplexNonzero z →
-  Agda.Builtin.Nat.Nat →
+  Nat →
   Complex.BishopComplex
 reciprocalPower z nz exponent =
   Algebra.powC (reciprocalC z nz) exponent
