@@ -29,6 +29,7 @@ import DASHI.Moonshine.JInvariantAnalyticJCoarseFineObserverExact as Observer
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact as Residual
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as PantsBridge
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Finite
+import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact as Chart
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Topology.TernaryPantsFrontierExact as Pants
 
@@ -61,7 +62,7 @@ observeAnalyticPants3 observer point =
 
 
 chartToInteractionVoxel :
-  Finite.Chart.JTwoPlusNine ->
+  Chart.JTwoPlusNine ->
   Fabric.Ternary27Point
 chartToInteractionVoxel state =
   local27ToTernary27Point
@@ -69,7 +70,7 @@ chartToInteractionVoxel state =
       (Observer.structuredFieldOfChart state))
 
 chartToPants3 :
-  Finite.Chart.JTwoPlusNine ->
+  Chart.JTwoPlusNine ->
   Pants.PantsPath 3
 chartToPants3 state =
   PantsBridge.voxel27ToPants3
