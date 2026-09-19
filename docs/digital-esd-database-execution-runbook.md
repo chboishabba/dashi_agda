@@ -21,7 +21,7 @@ Execution-attempt ledger:
 ```text
 Scopus              7 attempts: HTTP 403 before submission
 Web of Science      7 attempts: HTTP 403 before submission
-ERIC                 7 attempts: current web transport failed before observed API response
+ERIC                 7 earlier transport-failure attempts + 7 later local HTTP-200 count observations
 IEEE Xplore          7 attempts: current web transport could not retrieve live query-bearing result pages
 ACM Digital Library  7 attempts: current web transport could not retrieve live query-bearing result pages
 ```
@@ -34,6 +34,24 @@ query submission != observed result set
 observed result set != retained export
 retained export != included corpus
 ```
+
+Current ERIC state from the operator-observed local run:
+
+```text
+Q1  numFound=642
+Q2  numFound=290
+Q3  numFound=1594
+Q4  numFound=41889
+Q5  numFound=214
+Q6  numFound=293
+Q7  numFound=1675
+
+submitted / observed result sets  7/7
+retained paginated exports        0/7
+structured-search bridge          not yet crossed
+```
+
+The earlier ERIC transport failures remain append-only provenance and are not overwritten by the later successful count probes.
 
 ## Execution Pareto
 
@@ -74,18 +92,28 @@ Canonical request shape:
 https://api.ies.ed.gov/eric/?search=<URL-ENCODED-QUERY>&rows=200&format=json&start=<OFFSET>
 ```
 
-For each Q1-Q7:
+Use the checked-in runner rather than manually copying the strings:
 
-1. copy the exact `exactTranslatedQuery` string from the Agda owner;
-2. URL-encode only for transport; retain the unencoded canonical query separately;
-3. record an offset-aware execution timestamp;
-4. request `start=0&rows=200&format=json`;
-5. retain the raw response before transformation;
-6. record `numFound`;
-7. continue `start=200,400,...` until every record in that result set has been fetched;
-8. retain every raw page or one lossless combined raw export;
-9. retain any derived CSV separately from the raw export;
-10. record a stable local path / artifact reference and preferably a SHA-256 digest.
+```bash
+python3 scripts/execute_digital_esd_eric.py \
+  --repo-root . \
+  --out artifacts/digital-esd/eric
+```
+
+The runner parses the canonical ERIC query strings directly from
+`DigitalESDDatabaseTranslatedQueriesExact.agda`, URL-encodes only for transport,
+requests `rows=200&format=json`, paginates until `numFound` is exhausted, retains
+every raw JSON page, computes SHA-256 digests, and writes a per-query
+`summary.json` plus a top-level `run-manifest.json`.
+
+For a bounded trial:
+
+```bash
+python3 scripts/execute_digital_esd_eric.py --query Q1
+```
+
+A completed export run must retain the raw artifacts; console counts alone are
+not enough to cross the Agda success bridge.
 
 A successful ERIC run should be capable of populating a future
 `executedWithObservedResultSet` outcome. A transport failure, malformed query,
