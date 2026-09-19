@@ -378,11 +378,11 @@ Vendored Lean already proves the off-ordinate and Gamma **projective defects** a
   <= r^2 * (C_off(g,Lambda,t) + C_Gamma(g,Lambda,t)).
 ```
 
-This is a theorem-bearing cancellation-preserving donor and may become competitive if an explicit same-object bridge identifies its rank-two/projective taper and response with the final universal pole-quotient consumer. That bridge is currently absent. Therefore:
+This is a theorem-bearing cancellation-preserving donor, but a taper equality alone would not suffice. The rank-two lane's own projective balance makes its strict balanced consumer inadmissible, whereas the final universal pole-quotient lane deliberately changes the comparison object and retains Gamma. Reuse therefore requires proof-relevant transport of the taper, signed response, and balance/comparison semantics into the final consumer. That full bridge is currently absent. Therefore:
 
 ```text
 joint projective O(r^2) mathematics      source-written
-projective -> final pole taper identity  open / WrongType firewall
+projective -> final pole response/balance transport  open / WrongType firewall
 final R2 payment from this donor          not claimed
 ```
 
