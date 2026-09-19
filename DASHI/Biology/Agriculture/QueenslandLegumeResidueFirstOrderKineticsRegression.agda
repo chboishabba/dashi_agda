@@ -53,3 +53,14 @@ continuousFitNotDiscreteBishopRatio :
   K.continuousFirstOrderFitDirectlySuppliesDiscreteBishopRatio
     K.canonicalFirstOrderKineticsBoundary ≡ false
 continuousFitNotDiscreteBishopRatio = refl
+
+
+upperHalfTimeInsideObservedWindow :
+  K.reportedUpperHalfTimeInsideExperimentWindow
+    K.canonicalFirstOrderKineticsBoundary ≡ true
+upperHalfTimeInsideObservedWindow = refl
+
+finiteFitNotInfiniteTailAuthority :
+  K.finiteFirstOrderFitAuthorizesInfiniteHorizonExtrapolation
+    K.canonicalFirstOrderKineticsBoundary ≡ false
+finiteFitNotInfiniteTailAuthority = refl
