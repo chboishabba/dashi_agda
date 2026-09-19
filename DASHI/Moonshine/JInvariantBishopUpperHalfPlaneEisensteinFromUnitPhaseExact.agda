@@ -32,6 +32,8 @@ import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
 import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneRadiusExact as Radius
 import DASHI.Moonshine.JInvariantBishopQFromUnitPhaseExact as Q
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
+import DASHI.Moonshine.JInvariantBishopTrigUnitPhaseExact as Trig
 
 e4UpperHalfPlaneLimitFromUnitPhase :
   ∀ (phase : Complex.BishopComplex)
@@ -63,4 +65,41 @@ e6UpperHalfPlaneLimitFromUnitPhase
     phase
     phaseUnit
     (Radius.qRadiusUnitInterval piPositive imagPositive)
+    reflection
+
+
+e4UpperHalfPlaneLimitFromTrigPhase :
+  (dataSet : Elementary.BishopElementaryPowerSeriesData) →
+  (angle : BishopReal.ℝ) →
+  (pythagorean : Trig.BishopTrigPythagoreanAt dataSet angle) →
+  ∀ {piB imagB : BishopReal.ℝ} →
+  (piPositive : BishopReal._<_ BishopReal.0ℝ piB) →
+  (imagPositive : BishopReal._<_ BishopReal.0ℝ imagB) →
+  (reflection : Norm.BishopNonnegativeSquareReflection) →
+  Complex.BishopComplex
+e4UpperHalfPlaneLimitFromTrigPhase
+  dataSet angle pythagorean piPositive imagPositive reflection =
+  e4UpperHalfPlaneLimitFromUnitPhase
+    (Trig.bishopTrigPhase dataSet angle)
+    (Trig.bishopTrigPhaseUnit dataSet angle pythagorean)
+    piPositive
+    imagPositive
+    reflection
+
+e6UpperHalfPlaneLimitFromTrigPhase :
+  (dataSet : Elementary.BishopElementaryPowerSeriesData) →
+  (angle : BishopReal.ℝ) →
+  (pythagorean : Trig.BishopTrigPythagoreanAt dataSet angle) →
+  ∀ {piB imagB : BishopReal.ℝ} →
+  (piPositive : BishopReal._<_ BishopReal.0ℝ piB) →
+  (imagPositive : BishopReal._<_ BishopReal.0ℝ imagB) →
+  (reflection : Norm.BishopNonnegativeSquareReflection) →
+  Complex.BishopComplex
+e6UpperHalfPlaneLimitFromTrigPhase
+  dataSet angle pythagorean piPositive imagPositive reflection =
+  e6UpperHalfPlaneLimitFromUnitPhase
+    (Trig.bishopTrigPhase dataSet angle)
+    (Trig.bishopTrigPhaseUnit dataSet angle pythagorean)
+    piPositive
+    imagPositive
     reflection
