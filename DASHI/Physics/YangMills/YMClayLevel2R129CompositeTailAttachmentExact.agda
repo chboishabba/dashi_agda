@@ -32,8 +32,8 @@ import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExa
 --
 -- Therefore the only physical D1 payload remaining after R129 is:
 --
---   the literal OPE product remainder evaluated on that already-selected
---   completed composite projection
+--   the literal Clay Top.opeRemainder for the selected local-operator pair,
+--   attached to the already-selected completed composite projection
 --
 --       =
 --
@@ -69,17 +69,14 @@ record R129CompositeTailAttachment
     compositeData = Recovery.r129ExportsCompositeMarkedSourceData export
 
   field
-    literalProductRemainder :
-      R109.Composite completion → Nat → ℚ
+    left right : Top.LocalOperator C
+    position : Top.Position C
 
     remaining : Nat → Nat
 
-    literalProductRemainderIsSelectedR129CompositeTail :
+    literalOPEProductRemainderIsSelectedR129CompositeTail :
       ∀ depth →
-      literalProductRemainder
-        (Marked.compositeProjection compositeData
-          (Marked.completedState compositeData))
-        depth
+      Top.opeRemainder Y group left right position depth
       ≡ Shared.compositeInsertionTail
           shared scale volume root depth (remaining depth)
 
@@ -100,13 +97,15 @@ asCompositeProductTailWeld :
   D1.CompositeProductTailWeld
     (Recovery.r129ExportsCompositeMarkedSourceData export)
     shared scale volume root
-asCompositeProductTailWeld attachment = record
+asCompositeProductTailWeld {Y = Y} {group = group} attachment = record
   { D1.CompositeProductTailWeld.literalProductRemainder =
-      literalProductRemainder attachment
+      λ _ depth →
+        Top.opeRemainder Y group
+          (left attachment) (right attachment) (position attachment) depth
   ; D1.CompositeProductTailWeld.remaining =
       remaining attachment
   ; D1.CompositeProductTailWeld.literalProductRemainderIsCompositeTail =
-      literalProductRemainderIsSelectedR129CompositeTail attachment
+      literalOPEProductRemainderIsSelectedR129CompositeTail attachment
   }
 
 r129AttachmentBuildsLiteralDyadicOPERemainder :
