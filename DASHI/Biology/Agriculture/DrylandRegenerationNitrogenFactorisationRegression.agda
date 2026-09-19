@@ -34,3 +34,24 @@ routeAxisWasDiscoveredByFailedFactorisation = refl
 counterfactualAxisTargetsExperiment :
   Discovery.route P.mineralNCounterfactualAxisProposal ≡ Discovery.experimentalDesign
 counterfactualAxisTargetsExperiment = refl
+
+
+transportRouteRepairFactors :
+  INF.FactorsThrough P.transportRouteEnrichedProjection P.transportRouteOutcome
+transportRouteRepairFactors =
+  P.transportRouteEnrichedFactorisation
+
+demandTimingRepairFactors :
+  INF.FactorsThrough P.releaseTimingEnrichedProjection P.demandCaptureOutcome
+demandTimingRepairFactors =
+  P.releaseTimingEnrichedFactorisation
+
+waterStateRepairFactors :
+  INF.FactorsThrough P.nitrogenWaterEnrichedProjection P.waterCoupledOutcome
+waterStateRepairFactors =
+  P.nitrogenWaterEnrichedFactorisation
+
+counterfactualRepairFactors :
+  INF.FactorsThrough P.replacementCounterfactualEnrichedProjection P.replacementOutcome
+counterfactualRepairFactors =
+  P.replacementCounterfactualEnrichedFactorisation
