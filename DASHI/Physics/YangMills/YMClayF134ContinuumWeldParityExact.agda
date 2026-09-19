@@ -7,31 +7,25 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayAristotleDonorAtlasExact as Atlas
 import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as Frontier
+import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact as F4
 import DASHI.Physics.YangMills.YMClayPhysicalF34TypedCompositionExact as Typed
 
 ------------------------------------------------------------------------
--- Exact parity surface for Aristotle's 2026-09-17 literal SU(2) continuum
--- weld.  The Lean theorem family consumes precisely the surviving physical
--- data after the varying-carrier recut:
+-- Exact parity surface after the physical frontier recut:
 --
---   F1  uniform positive gap on the literal Wilson cutoff trajectory
---   F3  isometric embeddings + embedded vacuum-sector graph limit
---   F4  actual YM/OS same evolution on a common core
+--   F1  literal Wilson finite-gap trajectory
+--   F3  actual Sprint-backed physical continuum/recovery witness
+--   F4  actual stress/OS common-core + closure witness
 --
--- The Agda side now additionally exposes the typed compiler consequences of
--- F3/F4: F3's recovery system automatically yields the continuum vacuum-gap
--- theorem, and F4's witness already contains the YM=OS evolution equality.
--- Those are downstream consequences, not extra physical leaves.
+-- YM=OS evolution equality is compiled from F4 rather than accepted as an
+-- independent physical input.
 ------------------------------------------------------------------------
 
 record LiteralSU2F134PhysicalInputs : Set₁ where
   field
     f1 : Frontier.LiteralWilsonUniformGapTrajectory
     f3 : Frontier.PhysicalContinuumLimitWitness
-
-    Time : Set
-    Vector : Set
-    f4 : Frontier.YMOSSameObjectWitness Time Vector
+    f4 : F4.PhysicalStressOSCommonCoreWitness
 
 open LiteralSU2F134PhysicalInputs public
 
@@ -40,17 +34,13 @@ asOutstandingPhysicalFrontier :
 asOutstandingPhysicalFrontier inputs = record
   { Frontier.OutstandingPhysicalFrontier.f1LiteralWilsonUniformGap = f1 inputs
   ; Frontier.OutstandingPhysicalFrontier.f3PhysicalContinuumLimit = f3 inputs
-  ; Frontier.OutstandingPhysicalFrontier.Time = Time inputs
-  ; Frontier.OutstandingPhysicalFrontier.Vector = Vector inputs
-  ; Frontier.OutstandingPhysicalFrontier.f4YMOSSameObject = f4 inputs
+  ; Frontier.OutstandingPhysicalFrontier.f4PhysicalStressOSCommonCore = f4 inputs
   }
 
 asTypedF34Kernel :
   LiteralSU2F134PhysicalInputs → Typed.PhysicalF34TypedKernel
 asTypedF34Kernel inputs = record
   { Typed.PhysicalF34TypedKernel.f3 = f3 inputs
-  ; Typed.PhysicalF34TypedKernel.Time = Time inputs
-  ; Typed.PhysicalF34TypedKernel.Vector = Vector inputs
   ; Typed.PhysicalF34TypedKernel.f4 = f4 inputs
   }
 
