@@ -130,7 +130,7 @@ ahrcIslamophobiaReport = attributed-source
   "research resource"
   "https://humanrights.gov.au/resource-hub/theres-nothing-casual-about-racism/research-publication/islamophobia-in-australia-iv-2014-2021"
   islamophobiaEvidence
-  "reported-incident evidence concerning Islamophobia in Australia; does not make every disputed political act definitionally Islamophobic"
+  "reported-incident evidence concerning Islamophobia in Australia, including gendered targeting of visibly Muslim women; does not make every disputed political act definitionally Islamophobic"
   false refl
 
 mirHosseiniMusawah : AttributedSource
@@ -158,14 +158,14 @@ moustafaPluralism2018 = attributed-source
   "Tamir Moustafa"
   "Islamic Law, Women's Rights, and Popular Legal Consciousness in Malaysia"
   "Law & Social Inquiry, published online 2018-12-27"
-  "Cambridge Core article record"
+  "DOI 10.1111/j.1747-4469.2012.01298.x"
   islamicLegalPluralismResearch
   "reports that classical Islamic legal theory included commitments to pluralism and human juristic agency, contrasting this with lay understandings of one purely divine correct answer"
   false refl
 
 shariaCourtsAgency2022 : AttributedSource
 shariaCourtsAgency2022 = attributed-source
-  "Law & Social Inquiry / Cambridge University Press"
+  "Sagnik Dutta"
   "Competing Allies: Legal Pluralism, and Gendered Agency in Mumbai's Sharia Courts"
   "47(2), 2022, 514-534"
   "DOI 10.1017/lsi.2021.39"
