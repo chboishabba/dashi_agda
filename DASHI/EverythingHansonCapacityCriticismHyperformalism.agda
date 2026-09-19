@@ -20,3 +20,7 @@ open import DASHI.Cognition.PNF.FibreLearningDynamics public
 open import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge public
 open import DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge public
 open import DASHI.ComputerScience.SuicidePreventionTraumaMemoryLearningHyperfabricExact public
+
+open import DASHI.Core.EmancipatoryVocabularyRelationalGrammarNoncollapseExact public
+open import DASHI.Governance.HansonHerzogEmancipatoryGrammarCrossPollinationExact public
+open import DASHI.Governance.HansonHerzogEmancipatoryGrammarCrossPollinationValidation public
