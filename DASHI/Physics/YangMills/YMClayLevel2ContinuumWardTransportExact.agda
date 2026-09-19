@@ -17,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionFirstVariationRound1
 import DASHI.Physics.YangMills.BalabanPresentCutCanonicalMetricDomainRound134Exact as R134
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact as R135
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
+import DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact as R131
 import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact as Ward
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 
@@ -80,31 +81,23 @@ record ContinuumWardTransport
     finiteWardChargeIsGeneratedActionStressCharge :
       FiniteWardChargeIsGeneratedActionStressCharge
 
-    -- Convergence/continuum meaning is kept explicit because the finite Ward
-    -- value is rational while the stress pairing scalar is representation-
-    -- dependent.
-    WardChargeConvergesToStressPairing :
-      (Domain.MetricPerturbation
-        (R134.presentCutCanonicalMetricDomain metricInputs)) →
+    -- Convergence/continuum meaning is explicit on the real scalar carrier.
+    Converges :
+      (Nat → StressRep.PairingScalar representation) →
+      StressRep.PairingScalar representation →
       Set
 
     finiteWardChargeConvergesToRecoveredStress :
       ∀ perturbation →
       Domain.AdmissibleMetricPerturbation
         (R134.presentCutCanonicalMetricDomain metricInputs) perturbation →
-      WardChargeConvergesToStressPairing perturbation
-
-    -- The target of the transport is exactly the already-recovered continuum
-    -- first variation, which R136 proves equal to the literal stress pairing.
-    transportedWardTargetIsRecoveredFirstVariation :
-      ∀ perturbation →
-      WardChargeConvergesToStressPairing perturbation →
-      Set
-
-    transportedWardTargetIsLiteralStressPairing :
-      ∀ perturbation
-        (transport : WardChargeConvergesToStressPairing perturbation) →
-      transportedWardTargetIsRecoveredFirstVariation perturbation transport
+      Converges
+        (λ depth →
+          wardChargeToPairingScalar
+            (Ward.chargeAfter (finiteWardChargeAt depth)))
+        (R131.continuumSectorFirstVariation
+          (R136.asCommonMetricReadyBalabanSectorRecovery recovery)
+          perturbation)
 
 open ContinuumWardTransport public
 
