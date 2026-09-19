@@ -22,6 +22,7 @@ module DASHI.Physics.Closure.NSTriadKNEuclideanDivergenceFormOutputFactorExact w
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -209,18 +210,18 @@ frequencyDotZero velocity =
   complex-equivalent
     (solve 3
       (λ a b c →
-        BishopReal.0ℝ ⊗ a
-        ⊕ (BishopReal.0ℝ ⊗ b ⊕ BishopReal.0ℝ ⊗ c)
-        ⊜ BishopReal.0ℝ)
+        Κ 0ℚᵘ ⊗ a
+        ⊕ (Κ 0ℚᵘ ⊗ b ⊕ Κ 0ℚᵘ ⊗ c)
+        ⊜ Κ 0ℚᵘ)
       BishopP.≃-refl
       (Physical.realPart (Physical.cx velocity))
       (Physical.realPart (Physical.cy velocity))
       (Physical.realPart (Physical.cz velocity)))
     (solve 3
       (λ a b c →
-        BishopReal.0ℝ ⊗ a
-        ⊕ (BishopReal.0ℝ ⊗ b ⊕ BishopReal.0ℝ ⊗ c)
-        ⊜ BishopReal.0ℝ)
+        Κ 0ℚᵘ ⊗ a
+        ⊕ (Κ 0ℚᵘ ⊗ b ⊕ Κ 0ℚᵘ ⊗ c)
+        ⊜ Κ 0ℚᵘ)
       BishopP.≃-refl
       (Physical.imaginaryPart (Physical.cx velocity))
       (Physical.imaginaryPart (Physical.cy velocity))
@@ -333,14 +334,14 @@ rawCellAtZeroOutputVanishes uEta uZeta =
       in complex-equivalent
         (solve 2
           (λ r i →
-            BishopReal.0ℝ ⊗ r ⊖ BishopReal.0ℝ ⊗ i
-            ⊜ BishopReal.0ℝ)
+            Κ 0ℚᵘ ⊗ r ⊖ Κ 0ℚᵘ ⊗ i
+            ⊜ Κ 0ℚᵘ)
           BishopP.≃-refl
           (Physical.realPart z) (Physical.imaginaryPart z))
         (solve 2
           (λ r i →
-            BishopReal.0ℝ ⊗ i ⊕ BishopReal.0ℝ ⊗ r
-            ⊜ BishopReal.0ℝ)
+            Κ 0ℚᵘ ⊗ i ⊕ Κ 0ℚᵘ ⊗ r
+            ⊜ Κ 0ℚᵘ)
           BishopP.≃-refl
           (Physical.realPart z) (Physical.imaginaryPart z))
   in
