@@ -133,3 +133,28 @@ constantMultiplePolynomialBound constant {cost} bound =
         (NatP.*-mono-≤
           NatP.≤-refl
           (ERQ.bounded bound n))
+
+
+rightConstantMultiplePolynomialBound :
+  ∀ constant {cost : Nat → Nat} →
+  ERQ.PolynomialBound cost →
+  ERQ.PolynomialBound (λ n → cost n * constant)
+rightConstantMultiplePolynomialBound constant {cost} bound =
+  transportPolynomialBound
+    (constantMultiplePolynomialBound constant bound)
+  where
+    transportPolynomialBound :
+      ERQ.PolynomialBound (λ n → constant * cost n) →
+      ERQ.PolynomialBound (λ n → cost n * constant)
+    transportPolynomialBound leftBound =
+      ERQ.polynomialBound
+        (ERQ.coefficient leftBound)
+        (ERQ.exponent leftBound)
+        (λ n →
+          subst
+            (λ lower →
+              lower
+              ≤ ERQ.coefficient leftBound
+                * ERQ.pow (suc n) (ERQ.exponent leftBound))
+            (NatP.*-comm (cost n) constant)
+            (ERQ.bounded leftBound n))
