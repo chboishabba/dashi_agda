@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Attribution
+import DASHI.Biology.Agriculture.AustralianRestorationTrajectoryDataSurfaceExact as QuantitativeData
 
 gellieEtAl2017DOI : String
 gellieEtAl2017DOI = "10.1111/mec.14081"
@@ -102,12 +103,30 @@ record MicrobiomeTrajectoryBoundary : Set where
     samplingSeasonSoilChemistryAndReferenceChoiceMustRemainIndexed : Bool
     plantRevegetationAndMicrobiomeStateMustRemainJointlyObservedForCausalClaim : Bool
     microbiomeTrajectoryCreatesDeploymentAuthority : Bool
+    openQuantitativeTrajectoryDataSurfaceOwned : Bool
+    quantitativeTrajectoryDataSuppliesSamePlotIncrementMajorant : Bool
 open MicrobiomeTrajectoryBoundary public
 
 canonicalMicrobiomeTrajectoryBoundary : MicrobiomeTrajectoryBoundary
-canonicalMicrobiomeTrajectoryBoundary = microbiome-trajectory-boundary
-  false false false false false true true false
+canonicalMicrobiomeTrajectoryBoundary = record
+  { chronosequenceSimilarityImpliesLongitudinalCausalRecovery = false
+  ; restorationAgeImpliesObservedWithinSiteChange = false
+  ; alphaDiversityRecoveryImpliesCommunityCompositionRecovery = false
+  ; microbiomeReferenceSimilarityImpliesWholeEcosystemRecovery = false
+  ; crossStudyReferenceSimilarityCreatesSameEmpiricalObject = false
+  ; samplingSeasonSoilChemistryAndReferenceChoiceMustRemainIndexed = true
+  ; plantRevegetationAndMicrobiomeStateMustRemainJointlyObservedForCausalClaim = true
+  ; microbiomeTrajectoryCreatesDeploymentAuthority = false
+  ; openQuantitativeTrajectoryDataSurfaceOwned = true
+  ; quantitativeTrajectoryDataSuppliesSamePlotIncrementMajorant = false
+  }
+
+
+quantitativeTrajectoryDataBoundaryReused :
+  QuantitativeData.TrajectoryDataBoundary
+quantitativeTrajectoryDataBoundaryReused =
+  QuantitativeData.canonicalTrajectoryDataBoundary
 
 attributionRule : String
 attributionRule =
-  "Gellie et al. 2017 (DOI 10.1111/mec.14081), Ngugi et al. 2018 (DOI 10.1111/rec.12631), Lem et al. 2022 (DOI 10.1111/rec.13635) and Peddle et al. 2023 (DOI 10.1111/rec.13706) own their respective Australian restoration microbiome observations. DASHI owns only the typed separation between cross-sectional chronosequence evidence, longitudinal change, alpha diversity, composition and causal-recovery claims. Cross-study similarity trends do not create same-object identity or deployment authority."
+  "Gellie et al. 2017 (DOI 10.1111/mec.14081), Ngugi et al. 2018 (DOI 10.1111/rec.12631), Lem et al. 2022 (DOI 10.1111/rec.13635) and Peddle et al. 2023 (DOI 10.1111/rec.13706) own their respective Australian restoration microbiome observations. DASHI owns only the typed separation between cross-sectional chronosequence evidence, longitudinal change, alpha diversity, composition and causal-recovery claims, plus reuse of the separately attributed open quantitative trajectory data surface. Cross-study similarity trends do not create same-object identity or deployment authority."
