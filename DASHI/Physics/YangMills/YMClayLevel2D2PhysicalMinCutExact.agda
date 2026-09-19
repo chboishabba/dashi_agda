@@ -7,6 +7,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCompositeOperatorRGParallelTransportExact as Transport
 import DASHI.Physics.YangMills.YMClayLevel2CompositeOperatorCoefficientWeldExact as Native
+import DASHI.Physics.YangMills.YMClayLevel2D2TransportGeneratedRecurrenceExact as Generated
 import DASHI.Physics.YangMills.YMClayLevel2LiteralOPECoefficientScaleAttachmentExact as Literal
 import DASHI.Physics.YangMills.YMClayLevel2R129CompositeOperatorAttachmentExact as R129Operator
 import DASHI.Physics.YangMills.YMClayLevel2R129LiteralOPECoefficientWeldExact as R129Literal
@@ -43,7 +44,11 @@ d2aPhysicalCompositeOperatorTransportLevel =
   Transport.physicalYMCompositeMixingLevel
 
 d2bSameTransportCoefficientTrajectoryLevel : ProofLevel
-d2bSameTransportCoefficientTrajectoryLevel = conditional
+d2bSameTransportCoefficientTrajectoryLevel =
+  Generated.transportGeneratedRecurrenceCompilerLevel
+
+d2bCommonUVNormalizationLevel : ProofLevel
+d2bCommonUVNormalizationLevel = conditional
 
 d2cLiteralPositionDepthAttachmentLevel : ProofLevel
 d2cLiteralPositionDepthAttachmentLevel =
@@ -69,6 +74,24 @@ allDepthCoefficientCompilerLevel =
 literalSelectedDepthCoefficientCompilerLevel : ProofLevel
 literalSelectedDepthCoefficientCompilerLevel =
   Literal.scaleAttachmentCompilerLevel
+
+independentPhysicalOneStepRecurrenceRequired : Bool
+independentPhysicalOneStepRecurrenceRequired =
+  Generated.independentPhysicalOneStepRecurrenceProofRequired
+
+independentPhysicalOneStepRecurrenceRequiredIsFalse :
+  independentPhysicalOneStepRecurrenceRequired ≡ false
+independentPhysicalOneStepRecurrenceRequiredIsFalse =
+  Generated.independentPhysicalOneStepRecurrenceProofRequiredIsFalse
+
+independentAFOneStepRecurrenceRequired : Bool
+independentAFOneStepRecurrenceRequired =
+  Generated.independentAFOneStepRecurrenceProofRequired
+
+independentAFOneStepRecurrenceRequiredIsFalse :
+  independentAFOneStepRecurrenceRequired ≡ false
+independentAFOneStepRecurrenceRequiredIsFalse =
+  Generated.independentAFOneStepRecurrenceProofRequiredIsFalse
 
 secondMixingMapResearchProblem : Bool
 secondMixingMapResearchProblem = false
