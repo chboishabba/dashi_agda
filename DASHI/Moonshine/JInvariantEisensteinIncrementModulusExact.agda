@@ -222,9 +222,9 @@ scaleNatRMonotoneCount :
   Real._≤_ (Real.real (Complex.realPackage C))
     (scaleNatR (Real.real (Complex.realPackage C)) left x)
     (scaleNatR (Real.real (Complex.realPackage C)) right x)
-scaleNatRMonotoneCount {C} T {zero} {right} z≤n x xNN =
+scaleNatRMonotoneCount {C} {left = zero} {right = right} T z≤n x xNN =
   scaleNatRNonnegative T right x xNN
-scaleNatRMonotoneCount {C} T {suc left} {suc right} (s≤s left≤right) x xNN =
+scaleNatRMonotoneCount {C} {left = suc left} {right = suc right} T (s≤s left≤right) x xNN =
   addLeftMonotone T x
     (scaleNatRMonotoneCount T left≤right x xNN)
 
@@ -275,14 +275,14 @@ e4InternalPolynomialGeometricModulusBound :
         (Real.real (Complex.realPackage C))
         (Polar.modulus F (Finite.qOf C tau))
         (suc n)))
-e4InternalPolynomialGeometricModulusBound {C} M T tau n =
+e4InternalPolynomialGeometricModulusBound {C} {F = F} M T tau n =
   leTrans T
     (e4IncrementModulusBound M T Internal.internalDivisorPowerKernel tau n)
     (scaleNatRMonotoneCount T
       (Coefficient.e4IncrementCoefficientBound n)
       (Series.powerR
         (Real.real (Complex.realPackage C))
-        (Polar.modulus _ (Finite.qOf C tau))
+        (Polar.modulus F (Finite.qOf C tau))
         (suc n))
       (qPowerModulusNonnegative M tau (suc n)))
 
@@ -306,13 +306,13 @@ e6InternalPolynomialGeometricModulusBound :
         (Real.real (Complex.realPackage C))
         (Polar.modulus F (Finite.qOf C tau))
         (suc n)))
-e6InternalPolynomialGeometricModulusBound {C} M T tau n =
+e6InternalPolynomialGeometricModulusBound {C} {F = F} M T tau n =
   leTrans T
     (e6IncrementModulusBound M T Internal.internalDivisorPowerKernel tau n)
     (scaleNatRMonotoneCount T
       (Coefficient.e6IncrementCoefficientBound n)
       (Series.powerR
         (Real.real (Complex.realPackage C))
-        (Polar.modulus _ (Finite.qOf C tau))
+        (Polar.modulus F (Finite.qOf C tau))
         (suc n))
       (qPowerModulusNonnegative M tau (suc n)))
