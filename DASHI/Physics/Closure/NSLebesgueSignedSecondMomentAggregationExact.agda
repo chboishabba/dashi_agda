@@ -32,6 +32,7 @@ import Real as BishopReal
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignedFrequencyCarrierRealizationExact as Euclidean
 import DASHI.Physics.Closure.NSTriadKNEuclideanLebesgueSignedAggregationExact as Lebesgue
 import DASHI.Physics.Closure.NSWholeSpaceLowFrequencyCompensationExact as Low
+import DASHI.Foundations.BishopGeometricReciprocalSquareFromCrossExact as Reciprocal
 
 record OrderedEuclideanLebesgueAuthority
     {dataSet : Euclidean.EuclideanSignedFluxData}
@@ -93,7 +94,7 @@ record LowFrequencySecondMomentField
           (BishopReal._*_
             (Low.inverseCube
               (heatRate I)
-              (Low.Reciprocal.xNonzero
+              (Reciprocal.xNonzero
                 (Low.heatRatePositive (pointwiseCompensation I))))
             (stateFactor I)))
 
@@ -116,7 +117,7 @@ compensatedSecondMomentIntegrand field I =
     (BishopReal._*_
       (Low.inverseCube
         (heatRate field I)
-        (Low.Reciprocal.xNonzero
+        (Reciprocal.xNonzero
           (Low.heatRatePositive (pointwiseCompensation field I))))
       (stateFactor field I))
 
