@@ -48,6 +48,8 @@ import DASHI.Analysis.BishopVanishingDifferenceConvergenceValidation
 import DASHI.Analysis.RiemannLowOrdinateSourceAtlasExact
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact
 import DASHI.Analysis.RiemannAnalyticCoordinateTerminalRefinementExact
+import DASHI.Analysis.RiemannAnalyticCoordinateObserverDescentExact
+import DASHI.Analysis.RiemannAnalyticCoordinateObserverDescentValidation
 import DASHI.Analysis.RiemannElementaryCalculatorShellReuseExact
 import DASHI.Analysis.RiemannElementaryCalculatorShellReuseValidation
 
@@ -55,6 +57,8 @@ import DASHI.Analysis.RiemannElementaryCalculatorShellReuseValidation
 import DASHI.Analysis.RiemannG2ProofRelevantTargetTranslationModulationExact
 import DASHI.Analysis.RiemannG2FinalPoleNearObserverRefinementExact
 import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact
+import DASHI.Analysis.RiemannG2FinalNearObserverDescentExact
+import DASHI.Analysis.RiemannG2FinalNearObserverDescentValidation
 
 -- Concrete execution boundary and window-free proof-carrying certification.
 import DASHI.Analysis.RiemannG2ConcreteCertificateFinalScalarBridgeExact
