@@ -308,7 +308,7 @@ module GlobalCommutatorPayment
 
       epEqNN : 0ℚ ≤ ep * eq
       epEqNN =
-        R178.Rational.productNonnegative
+        Rational.productNonnegative
           (Separation.complex3NormSquaredNonnegative (velocity p))
           (Separation.complex3NormSquaredNonnegative (velocity q))
 
@@ -334,16 +334,28 @@ module GlobalCommutatorPayment
             nineNNI = nonNegative nineNN
         in ℚP.*-monoˡ-≤-nonNeg R178.nine triangleTimesEnergy
 
+      leftMeaning :
+        R178.nine * (k2 * (ep * eq))
+        ≡ R178.nine * k2 * ep * eq
+      leftMeaning = solve (R178.nine ∷ k2 ∷ ep ∷ eq ∷ [])
+
+      rightMeaning :
+        R178.nine * (two * (p2 + q2) * (ep * eq))
+        ≡ eighteen * (p2 * ep * eq + ep * (q2 * eq))
+      rightMeaning =
+        solve (R178.nine ∷ two ∷ p2 ∷ q2 ∷ ep ∷ eq ∷ [])
+
       endpoint :
         R178.nine * k2 * ep * eq
         ≤ eighteen * (p2 * ep * eq + ep * (q2 * eq))
       endpoint =
         subst
-          (R178.nine * k2 * ep * eq ≤_)
-          (solve (R178.nine ∷ two ∷ p2 ∷ q2 ∷ ep ∷ eq ∷ []))
+          (λ lower →
+            lower ≤ eighteen * (p2 * ep * eq + ep * (q2 * eq)))
+          leftMeaning
           (subst
-            (_≤ R178.nine * (two * (p2 + q2) * (ep * eq)))
-            (solve (R178.nine ∷ k2 ∷ ep ∷ eq ∷ []))
+            (R178.nine * (k2 * (ep * eq)) ≤_)
+            rightMeaning
             scaledTriangle)
 
       pairMeaning :
