@@ -369,6 +369,25 @@ Replay    transport theorem-bearing Lean producers into the selected Agda order
 
 Do not force these back into independent absolute `cNear/t^2`, `cGamma/t^2`, `cCluster/t^2` coefficients unless a particular producer benefits from that stronger sufficient form.  The prize-facing consumer remains the actual `ClusterResponse`.
 
+Alternate determinant/projective donor — retained, not promoted:
+
+Vendored Lean already proves the off-ordinate and Gamma **projective defects** are individually `O(r^2)` on the same projective taper. Companion source now composes them into
+
+```text
+|D_off^proj(r) + D_Gamma^proj(r)|
+  <= r^2 * (C_off(g,Lambda,t) + C_Gamma(g,Lambda,t)).
+```
+
+This is a theorem-bearing cancellation-preserving donor and may become competitive if an explicit same-object bridge identifies its rank-two/projective taper and response with the final universal pole-quotient consumer. That bridge is currently absent. Therefore:
+
+```text
+joint projective O(r^2) mathematics      source-written
+projective -> final pole taper identity  open / WrongType firewall
+final R2 payment from this donor          not claimed
+```
+
+Do not use similarity of reflection-paired cosine formulas as that bridge.
+
 
 ## 8. Firewalls
 
