@@ -3,36 +3,35 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalGlobalCommutatorFourHelicityEDPaym
 ------------------------------------------------------------------------
 -- GLOBAL FOUR-HELICITY PURE-COMMUTATOR MASS PAYMENT
 --
--- R574 proves componentwise, for every helical sign pair,
+-- For every retained resonant ordered pair p,q -> k and every helical signs
+-- s,t, R574 gives
 --
 --   ||M^{s,t}_{p,q}||^2 <= 9 |k|^2 E_p^s E_q^t.
 --
--- Summing the four sign pairs and using exact helical Pythagoras gives
+-- The four helical input masses collapse exactly by R475, while R218 gives
 --
---   sum_{s,t} ||M^{s,t}_{p,q}||^2 <= 9 |k|^2 E_p E_q.
+--   |k|^2 <= 2 (|p|^2 + |q|^2).
 --
--- R218 gives the literal resonant square triangle
---
---   |k|^2 <= 2 (|p|^2 + |q|^2),
---
--- hence, with D_p = |p|^2 E_p,
+-- Hence, writing D_p = |p|^2 E_p,
 --
 --   sum_{s,t} ||M^{s,t}_{p,q}||^2
 --     <= 18 (D_p E_q + E_p D_q).
 --
--- Finally R109 sums ANY Boolean-selected ordered-pair family by
+-- R109 then sums any Boolean-selected ordered-pair family without cardinality
+-- loss:
 --
 --   sum (D_p E_q + E_p D_q) <= 2 E D.
 --
--- Therefore the complete literal nonzero-output selected family satisfies
+-- Therefore the complete literal nonzero-output selected family obeys
 --
---   sum commutator-component-mass <= 36 E D
+--   sum commutator-component-mass <= 36 E D.
 --
--- with no pair count, output-fibre count, shell count, or Galerkin-cutoff
--- factor.  This is a positive mass theorem for the exact R571/R574 four-sign
--- multiplier-difference components.  It does not identify that mass by fiat
--- with the signed R568 resolvent full-square or with the R109 external quartic
--- production scalar; those remain separate same-object/weighting transports.
+-- IMPORTANT: this owner uses only the retained-mode transversality actually
+-- carried by PhysicalFiniteComplex3GalerkinSystem.  It does NOT assume a
+-- stronger global divergence-free velocity law.  It also does not identify
+-- this positive mass by fiat with R568's signed resolvent full-square or the
+-- external Waleffe production scalar; those require explicit weighting/pairing
+-- transports.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -44,7 +43,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
@@ -54,11 +53,13 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
+import DASHI.Physics.Closure.NSTriadKNConvectiveRotationalTriadIdentityRound93Exact as Conv
+import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106
 import DASHI.Physics.Closure.NSTriadKNWeightedHelicalGramOperatorSplitRound475Exact as R475
-import DASHI.Physics.Closure.NSTriadKNInnerHelicalComponentCommutatorRound571Exact as R571
 import DASHI.Physics.Closure.NSTriadKNR106ComponentLowOutputBoundRound574Exact as R574
 import DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact as R178
 import DASHI.Physics.Closure.NSTriadKNPhysicalResonantEuclideanSquareTriangleRound218Exact as R218
@@ -87,14 +88,11 @@ nonzeroFromModeEqualFalse :
 nonzeroFromModeEqualFalse mode decision = record
   { Z3.notZero = λ modeZero →
       falseCannotEqualTrue
-        (trans
-          (sym decision)
-          (Output.modeEqualComplete modeZero))
+        (trans (sym decision) (Output.modeEqualComplete modeZero))
   }
 
 nonzeroOutputSelector :
-  (cutoff : Nat) →
-  Z3.FourierMode → Z3.FourierMode → Bool
+  Nat → Z3.FourierMode → Z3.FourierMode → Bool
 nonzeroOutputSelector cutoff p q
   with Physical.modeWithinCutoff cutoff (Z3.addMode p q)
      | Output.modeEqual (Z3.addMode p q) Z3.zeroMode
@@ -120,28 +118,59 @@ module GlobalCommutatorPayment
   modes = Audit.modes system
   velocity = Audit.velocity system
 
-  velocityTransverse :
-    (mode : Z3.FourierMode) →
-    mode Cube.∈ modes →
-    Helical.Transverse E mode (velocity mode)
-  velocityTransverse mode member =
-    Field30.retainedVelocityTransverse physicalSystem mode member
+  component :
+    Helical.HelicitySign → Z3.FourierMode → C3.Complex3 F
+  component sign mode =
+    Helical.helicalProjector E I S sign mode (velocity mode)
 
-  module C = R571.Componentwise
-    system S L
-    (λ mode →
-      -- The componentwise algebra only consumes transversality on modes that
-      -- occur in the selected physical pairs below.  The raw system itself
-      -- carries a global divergence-free velocity law.
-      Audit.divergenceFree system mode)
+  signedEigenvalue :
+    Helical.HelicitySign → Z3.FourierMode → C3.Complex F
+  signedEigenvalue Helical.plus mode =
+    C3.realEmbed F (Helical.modeNorm S mode)
+  signedEigenvalue Helical.minus mode =
+    C3.realEmbed F (C3.negate F (Helical.modeNorm S mode))
 
-  module Low = R574.PhysicalComponents
-    E I O system S L (Audit.divergenceFree system)
+  componentCurlEigen :
+    (sign : Helical.HelicitySign) (mode : Z3.FourierMode) →
+    Conv.curlFromWave (C3.modeVector E mode) (component sign mode)
+    ≡ C3.complex3Scale
+        (signedEigenvalue sign mode)
+        (component sign mode)
+  componentCurlEigen Helical.plus mode =
+    Helical.helicalCurlEigenvaluePlus L mode (velocity mode)
+  componentCurlEigen Helical.minus mode =
+    Helical.helicalCurlEigenvalueMinus L mode (velocity mode)
+
+  componentPairData :
+    (tau : Physical.PhysicalTriadIncidence) →
+    Z3.NonZeroMode (Physical.k tau) →
+    (signP signQ : Helical.HelicitySign) →
+    R106.ProjectedHelicalPairData E I
+      (Physical.p tau) (Physical.q tau) (Physical.k tau)
+  componentPairData tau outputNonzero signP signQ =
+    R106.projected-helical-pair-data
+      (Physical.resonance tau)
+      outputNonzero
+      (component signP (Physical.p tau))
+      (component signQ (Physical.q tau))
+      (signedEigenvalue signP (Physical.p tau))
+      (signedEigenvalue signQ (Physical.q tau))
+      (componentCurlEigen signP (Physical.p tau))
+      (componentCurlEigen signQ (Physical.q tau))
+
+  multiplierDifferenceVector :
+    (tau : Physical.PhysicalTriadIncidence) →
+    Z3.NonZeroMode (Physical.k tau) →
+    Helical.HelicitySign → Helical.HelicitySign →
+    C3.Complex3 F
+  multiplierDifferenceVector tau outputNonzero signP signQ =
+    R574.r106MultiplierDifferenceVector
+      (componentPairData tau outputNonzero signP signQ)
 
   componentEnergy :
     Helical.HelicitySign → Z3.FourierMode → ℚ
   componentEnergy sign mode =
-    L2.complex3NormSquared (C.component sign mode)
+    L2.complex3NormSquared (component sign mode)
 
   modalEnergy : Z3.FourierMode → ℚ
   modalEnergy mode = L2.complex3NormSquared (velocity mode)
@@ -151,48 +180,67 @@ module GlobalCommutatorPayment
 
   componentEnergySplit :
     (mode : Z3.FourierMode) →
+    mode Cube.∈ modes →
     componentEnergy Helical.plus mode
       + componentEnergy Helical.minus mode
     ≡ modalEnergy mode
-  componentEnergySplit mode =
+  componentEnergySplit mode member =
     sym
       (R475.l2NormHelicalSplit E I S L mode (velocity mode)
-        (Audit.divergenceFree system mode))
+        (Field30.retainedVelocityTransverse physicalSystem mode member))
+
+  componentBound :
+    (tau : Physical.PhysicalTriadIncidence) →
+    (outputNonzero : Z3.NonZeroMode (Physical.k tau)) →
+    (signP signQ : Helical.HelicitySign) →
+    L2.complex3NormSquared
+      (multiplierDifferenceVector tau outputNonzero signP signQ)
+    ≤ R178.nine * C3.normSquared I (Physical.k tau)
+        * componentEnergy signP (Physical.p tau)
+        * componentEnergy signQ (Physical.q tau)
+  componentBound tau outputNonzero signP signQ =
+    R574.r106MultiplierDifferenceLowOutputBound
+      O
+      (componentPairData tau outputNonzero signP signQ)
+      (Helical.helicalProjectorDivergenceFree
+        L signP (Physical.p tau) (velocity (Physical.p tau)))
+      (Helical.helicalProjectorDivergenceFree
+        L signQ (Physical.q tau) (velocity (Physical.q tau)))
 
   fourSignCommutatorMass :
     (tau : Physical.PhysicalTriadIncidence) →
+    Z3.NonZeroMode (Physical.k tau) →
     ℚ
-  fourSignCommutatorMass tau =
+  fourSignCommutatorMass tau outputNonzero =
       L2.complex3NormSquared
-        (C.multiplierDifferenceVector tau Helical.plus Helical.plus)
+        (multiplierDifferenceVector tau outputNonzero Helical.plus Helical.plus)
     + L2.complex3NormSquared
-        (C.multiplierDifferenceVector tau Helical.plus Helical.minus)
+        (multiplierDifferenceVector tau outputNonzero Helical.plus Helical.minus)
     + L2.complex3NormSquared
-        (C.multiplierDifferenceVector tau Helical.minus Helical.plus)
+        (multiplierDifferenceVector tau outputNonzero Helical.minus Helical.plus)
     + L2.complex3NormSquared
-        (C.multiplierDifferenceVector tau Helical.minus Helical.minus)
+        (multiplierDifferenceVector tau outputNonzero Helical.minus Helical.minus)
 
   fourSignCommutatorMassBelowOutputEnergyProduct :
     (tau : Physical.PhysicalTriadIncidence) →
     (outputNonzero : Z3.NonZeroMode (Physical.k tau)) →
-    fourSignCommutatorMass tau
+    (pMember : Physical.p tau Cube.∈ modes) →
+    (qMember : Physical.q tau Cube.∈ modes) →
+    fourSignCommutatorMass tau outputNonzero
     ≤ R178.nine * C3.normSquared I (Physical.k tau)
         * modalEnergy (Physical.p tau)
         * modalEnergy (Physical.q tau)
-  fourSignCommutatorMassBelowOutputEnergyProduct tau outputNonzero =
+  fourSignCommutatorMassBelowOutputEnergyProduct
+      tau outputNonzero pMember qMember =
     let
       p = Physical.p tau
       q = Physical.q tau
       k2 = C3.normSquared I (Physical.k tau)
 
-      bPP = Low.componentLowOutputBound
-        tau outputNonzero Helical.plus Helical.plus
-      bPM = Low.componentLowOutputBound
-        tau outputNonzero Helical.plus Helical.minus
-      bMP = Low.componentLowOutputBound
-        tau outputNonzero Helical.minus Helical.plus
-      bMM = Low.componentLowOutputBound
-        tau outputNonzero Helical.minus Helical.minus
+      bPP = componentBound tau outputNonzero Helical.plus Helical.plus
+      bPM = componentBound tau outputNonzero Helical.plus Helical.minus
+      bMP = componentBound tau outputNonzero Helical.minus Helical.plus
+      bMM = componentBound tau outputNonzero Helical.minus Helical.minus
 
       summed =
         ℚP.+-mono-≤
@@ -218,8 +266,8 @@ module GlobalCommutatorPayment
         ≡
         R178.nine * k2 * modalEnergy p * modalEnergy q
       endpoint
-        rewrite sym (componentEnergySplit p)
-              | sym (componentEnergySplit q) =
+        rewrite sym (componentEnergySplit p pMember)
+              | sym (componentEnergySplit q qMember) =
         solve
           ( R178.nine ∷ k2
           ∷ componentEnergy Helical.plus p
@@ -229,18 +277,21 @@ module GlobalCommutatorPayment
           ∷ [])
     in
     subst
-      (fourSignCommutatorMass tau ≤_)
+      (fourSignCommutatorMass tau outputNonzero ≤_)
       endpoint
       summed
 
   fourSignCommutatorMassBelowEDKernel :
     (tau : Physical.PhysicalTriadIncidence) →
     (outputNonzero : Z3.NonZeroMode (Physical.k tau)) →
-    fourSignCommutatorMass tau
-    ≤ eighteen
-        * (modalDissipation (Physical.p tau) * modalEnergy (Physical.q tau)
-          + modalEnergy (Physical.p tau) * modalDissipation (Physical.q tau))
-  fourSignCommutatorMassBelowEDKernel tau outputNonzero =
+    (pMember : Physical.p tau Cube.∈ modes) →
+    (qMember : Physical.q tau Cube.∈ modes) →
+    fourSignCommutatorMass tau outputNonzero
+    ≤ eighteen * R109.pairKernel
+        (R219.physicalModalED E I velocity)
+        (Physical.p tau) (Physical.q tau)
+  fourSignCommutatorMassBelowEDKernel
+      tau outputNonzero pMember qMember =
     let
       p = Physical.p tau
       q = Physical.q tau
@@ -251,19 +302,15 @@ module GlobalCommutatorPayment
       q2 = C3.normSquared I q
       k2 = C3.normSquared I k
 
-      componentBound =
-        fourSignCommutatorMassBelowOutputEnergyProduct tau outputNonzero
+      first =
+        fourSignCommutatorMassBelowOutputEnergyProduct
+          tau outputNonzero pMember qMember
 
-      epNN = Rational.complex3NormSquaredNonnegative (velocity p)
-      eqNN = Rational.complex3NormSquaredNonnegative (velocity q)
       epEqNN : 0ℚ ≤ ep * eq
       epEqNN =
-        let
-          instance epNNI : NonNegative ep
-          epNNI = nonNegative epNN
-          eqNNI : NonNegative eq
-          eqNNI = nonNegative eqNN
-        in ℚP.nonNegative⁻¹ (ep * eq)
+        R178.Rational.productNonnegative
+          (Separation.complex3NormSquaredNonnegative (velocity p))
+          (Separation.complex3NormSquaredNonnegative (velocity q))
 
       triangle =
         R218.resonantEuclideanSquareTriangle E I (Physical.resonance tau)
@@ -277,7 +324,7 @@ module GlobalCommutatorPayment
         in ℚP.*-monoʳ-≤-nonNeg (ep * eq) triangle
 
       nineNN : 0ℚ ≤ R178.nine
-      nineNN = Rational.squareNonnegative R178.three
+      nineNN = Rational.productNonnegative R178.threeNN R178.threeNN
 
       scaledTriangle :
         R178.nine * (k2 * (ep * eq))
@@ -287,31 +334,28 @@ module GlobalCommutatorPayment
             nineNNI = nonNegative nineNN
         in ℚP.*-monoˡ-≤-nonNeg R178.nine triangleTimesEnergy
 
-      leftMeaning :
-        R178.nine * k2 * ep * eq
-        ≡ R178.nine * (k2 * (ep * eq))
-      leftMeaning = solve (R178.nine ∷ k2 ∷ ep ∷ eq ∷ [])
-
-      rightMeaning :
-        R178.nine * (two * (p2 + q2) * (ep * eq))
-        ≡ eighteen * (p2 * ep * eq + ep * (q2 * eq))
-      rightMeaning =
-        solve (R178.nine ∷ two ∷ p2 ∷ q2 ∷ ep ∷ eq ∷ [])
-
-      triangleEndpoint :
+      endpoint :
         R178.nine * k2 * ep * eq
         ≤ eighteen * (p2 * ep * eq + ep * (q2 * eq))
-      triangleEndpoint =
+      endpoint =
         subst
-          (λ left →
-            left ≤ eighteen * (p2 * ep * eq + ep * (q2 * eq)))
-          (sym leftMeaning)
+          (R178.nine * k2 * ep * eq ≤_)
+          (solve (R178.nine ∷ two ∷ p2 ∷ q2 ∷ ep ∷ eq ∷ []))
           (subst
-            (R178.nine * (k2 * (ep * eq)) ≤_)
-            rightMeaning
+            (_≤ R178.nine * (two * (p2 + q2) * (ep * eq)))
+            (solve (R178.nine ∷ k2 ∷ ep ∷ eq ∷ []))
             scaledTriangle)
+
+      pairMeaning :
+        R109.pairKernel (R219.physicalModalED E I velocity) p q
+        ≡ p2 * ep * eq + ep * (q2 * eq)
+      pairMeaning = solve (p2 ∷ q2 ∷ ep ∷ eq ∷ [])
     in
-    ℚP.≤-trans componentBound triangleEndpoint
+    ℚP.≤-trans first
+      (subst
+        (λ rhs → R178.nine * k2 * ep * eq ≤ eighteen * rhs)
+        (sym pairMeaning)
+        endpoint)
 
   modalED : R109.ModalEnergyDissipation Z3.FourierMode
   modalED = R219.physicalModalED E I velocity
@@ -329,27 +373,17 @@ module GlobalCommutatorPayment
   ... | true | false =
       let
         tau = Physical.pairTriad (Cube.pair p q)
-        outputNonzero =
-          nonzeroFromModeEqualFalse (Z3.addMode p q) refl
+        outputNonzero = nonzeroFromModeEqualFalse (Z3.addMode p q) refl
         includeTail :
           (selected : Z3.FourierMode) →
-          selected Cube.∈ rest →
-          selected Cube.∈ modes
-        includeTail selected member =
-          include selected (Cube.there member)
+          selected Cube.∈ rest → selected Cube.∈ modes
+        includeTail selected member = include selected (Cube.there member)
       in
-      fourSignCommutatorMass tau
+      fourSignCommutatorMass tau outputNonzero
         + massInner p pMember rest includeTail
   ... | _ | _ =
-      let
-        includeTail :
-          (selected : Z3.FourierMode) →
-          selected Cube.∈ rest →
-          selected Cube.∈ modes
-        includeTail selected member =
-          include selected (Cube.there member)
-      in
-      massInner p pMember rest includeTail
+      massInner p pMember rest
+        (λ selected member → include selected (Cube.there member))
 
   massInnerBelowSelectedED :
     (p : Z3.FourierMode) →
@@ -368,21 +402,18 @@ module GlobalCommutatorPayment
   ... | true | false =
       let
         tau = Physical.pairTriad (Cube.pair p q)
-        outputNonzero =
-          nonzeroFromModeEqualFalse (Z3.addMode p q) refl
+        outputNonzero = nonzeroFromModeEqualFalse (Z3.addMode p q) refl
+        qMember = include q (Cube.here refl)
         includeTail :
           (selected : Z3.FourierMode) →
-          selected Cube.∈ rest →
-          selected Cube.∈ modes
-        includeTail selected member =
-          include selected (Cube.there member)
+          selected Cube.∈ rest → selected Cube.∈ modes
+        includeTail selected member = include selected (Cube.there member)
 
-        headBound =
-          fourSignCommutatorMassBelowEDKernel tau outputNonzero
-
-        tailBound =
+        head =
+          fourSignCommutatorMassBelowEDKernel
+            tau outputNonzero pMember qMember
+        tail =
           massInnerBelowSelectedED p pMember rest includeTail
-
         endpoint :
           eighteen * R109.pairKernel modalED p q
             + eighteen * R109.selectedInner modalED
@@ -401,7 +432,7 @@ module GlobalCommutatorPayment
       subst
         (massInner p pMember (q ∷ rest) include ≤_)
         endpoint
-        (ℚP.+-mono-≤ headBound tailBound)
+        (ℚP.+-mono-≤ head tail)
   ... | _ | _ =
       massInnerBelowSelectedED p pMember rest
         (λ selected member → include selected (Cube.there member))
@@ -433,10 +464,7 @@ module GlobalCommutatorPayment
     let
       head =
         massInnerBelowSelectedED
-          p
-          (include p (Cube.here refl))
-          modes
-          (λ q member → member)
+          p (include p (Cube.here refl)) modes (λ q member → member)
       tail =
         massSumBelowSelectedED
           rest
@@ -478,18 +506,12 @@ module GlobalCommutatorPayment
         R109.selectedPairEnergyDissipationProductBound
           modalED (nonzeroOutputSelector cutoff) modes
 
+      nineNN : 0ℚ ≤ R178.nine
+      nineNN = Rational.productNonnegative R178.threeNN R178.threeNN
+      twoNN : 0ℚ ≤ two
+      twoNN = Rational.addNonnegative R178.oneNN R178.oneNN
       eighteenNN : 0ℚ ≤ eighteen
-      eighteenNN =
-        let
-          nineNN = Rational.squareNonnegative R178.three
-          twoNN = Rational.addNonnegative
-            (Rational.squareNonnegative 1ℚ)
-            (Rational.squareNonnegative 1ℚ)
-          instance nineNNI : NonNegative R178.nine
-          nineNNI = nonNegative nineNN
-          twoNNI : NonNegative two
-          twoNNI = nonNegative twoNN
-        in ℚP.nonNegative⁻¹ eighteen
+      eighteenNN = Rational.productNonnegative nineNN twoNN
 
       scaledSecond :
         eighteen * R109.selectedOrderedPairSum modalED
@@ -509,8 +531,7 @@ module GlobalCommutatorPayment
         ≡ thirtySix *
           (R109.sumEnergy modalED modes * R109.sumDissipation modalED modes)
       endpoint = solve
-        ( eighteen
-        ∷ two
+        ( eighteen ∷ two
         ∷ R109.sumEnergy modalED modes
         ∷ R109.sumDissipation modalED modes
         ∷ [])
