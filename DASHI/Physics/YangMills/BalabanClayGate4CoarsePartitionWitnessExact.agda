@@ -12,11 +12,12 @@ module DASHI.Physics.YangMills.BalabanClayGate4CoarsePartitionWitnessExact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ; Positive)
+open import Data.Rational.Base using (ℚ; 1ℚ; Positive)
 open import Agda.Builtin.List using (List)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteProbabilityPartitionDisintegrationExact as Partition
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact as PhysicalT
 import DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationExact as Reference
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact as Probability
@@ -47,10 +48,10 @@ record Gate4CoarsePartitionWitnessData
       Match coarse fine → project fine ≡ coarse
 
     partitionOfUnity : ∀ fine →
-      DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.sumRational
+      Sums.sumRational
         coarseStates
         (λ coarse → Partition.indicator (matches coarse fine))
-      ≡ Data.Rational.Base.1ℚ
+      ≡ 1ℚ
 
     positiveWitness : Coarse → Fine
 
@@ -81,16 +82,16 @@ compileGate4FiniteCoarsePartitionWitness :
         Scale Fine SlowField Component Functional}
     {referenceInputs :
       Reference.PreferredRationalReferenceNormalizationInputs
-        {construction = construction}} →
-  Gate4CoarsePartitionWitnessData referenceInputs →
+        {construction = construction}}
+    (dataSet : Gate4CoarsePartitionWitnessData referenceInputs) →
   Partition.FiniteCoarsePartitionWitness
     (T.fastFibre
       (PhysicalT.canonicalPhysicalTData construction)
-      (scale _) (component _))
+      (scale dataSet) (component dataSet))
     (Probability.selectedReferenceProbabilityWeight
       (Reference.compilePreferredRationalReferenceNormalization
         referenceInputs)
-      (scale _) (component _) (slow _))
+      (scale dataSet) (component dataSet) (slow dataSet))
 compileGate4FiniteCoarsePartitionWitness
   {referenceInputs = referenceInputs} dataSet = record
   { coarseStates = coarseStates dataSet
