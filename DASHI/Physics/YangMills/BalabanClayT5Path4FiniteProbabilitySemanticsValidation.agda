@@ -1,0 +1,22 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsExact as Semantics
+
+path4FiniteProbabilitySemanticsIsCompilerOwned :
+  Semantics.path4FiniteProbabilitySemanticsCompilerLevel ≡ machineChecked
+path4FiniteProbabilitySemanticsIsCompilerOwned = refl
+
+path4SelectedExpectationIntegralWeldIsCompilerOwned :
+  Semantics.path4SelectedExpectationIntegralWeldLevel ≡ machineChecked
+path4SelectedExpectationIntegralWeldIsCompilerOwned = refl
+
+path4FiniteProbabilityPresentationRemainsPhysical :
+  Semantics.path4FiniteProbabilityPresentationLevel ≡ conditional
+path4FiniteProbabilityPresentationRemainsPhysical = refl
+
+path4ObservableEvaluationRealizationRemainsPhysical :
+  Semantics.path4ObservableEvaluationRealizationLevel ≡ conditional
+path4ObservableEvaluationRealizationRemainsPhysical = refl
