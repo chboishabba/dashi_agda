@@ -19,6 +19,7 @@ import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135E
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
 import DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact as R131
 import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact as Ward
+import DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeExact as Conserved
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 
 ------------------------------------------------------------------------
@@ -131,9 +132,37 @@ finiteSliceChargeConservationAlreadyCompilerOwned transport perturbation depth =
   Ward.sliceChargeDifferenceZero
     (finiteWardChargeAt transport perturbation depth)
 
+
+finiteWardChargeAlreadyConserved :
+  ∀ {trajectory split inputs History Cell cutoff present actionWeld firstWeld
+      metricInputs representation C S Y group lane scaleWeld recovery}
+    (transport : ContinuumWardTransport
+      {trajectory = trajectory} {split = split} {inputs = inputs}
+      {History = History} {Cell = Cell} {cutoff = cutoff}
+      {present = present} {actionWeld = actionWeld} {firstWeld = firstWeld}
+      {metricInputs = metricInputs} {representation = representation}
+      {C = C} {S = S} {Y = Y} {group = group}
+      {lane = lane} {scaleWeld = scaleWeld} recovery) →
+  ∀ perturbation depth →
+  Ward.chargeAfter (finiteWardChargeAt transport perturbation depth)
+    ≡ Ward.chargeBefore (finiteWardChargeAt transport perturbation depth)
+finiteWardChargeAlreadyConserved transport perturbation depth =
+  Conserved.wardChargeConserved
+    (finiteWardChargeAt transport perturbation depth)
+
 ------------------------------------------------------------------------
 -- Frontier classification.
 ------------------------------------------------------------------------
+
+
+independentFiniteTimeChargeConservationRequired : Bool
+independentFiniteTimeChargeConservationRequired =
+  Conserved.independentFiniteTimeChargeConservationRequiredInD3
+
+independentFiniteTimeChargeConservationRequiredIsFalse :
+  independentFiniteTimeChargeConservationRequired ≡ false
+independentFiniteTimeChargeConservationRequiredIsFalse =
+  Conserved.independentFiniteTimeChargeConservationRequiredInD3IsFalse
 
 finiteWardAlgebraNewPhysicalTheoremInD3 : Bool
 finiteWardAlgebraNewPhysicalTheoremInD3 = false
