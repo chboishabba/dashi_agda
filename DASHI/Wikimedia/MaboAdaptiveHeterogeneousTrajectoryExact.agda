@@ -38,6 +38,9 @@ slrTrajectoryBranch = "agent/mabo-adaptive-trajectory-v1"
 slrTrajectoryBaseHead : String
 slrTrajectoryBaseHead = "2f87b4207e798785507b37b3abcb4d565c53b09e"
 
+slrTrajectorySourceWrittenHead : String
+slrTrajectorySourceWrittenHead = "d8e5ef0400a7538005d4110bca0c582273452491"
+
 ------------------------------------------------------------------------
 -- Existing multi-residual frontier ABI is reused literally.
 ------------------------------------------------------------------------
