@@ -98,3 +98,24 @@ kineticsDoesNotDirectlySupplyBishopKernel :
   Q.firstOrderKineticsDirectlySuppliesDiscreteBishopKernel
     Q.canonicalQueenslandLeyBoundary ≡ false
 kineticsDoesNotDirectlySupplyBishopKernel = refl
+
+
+firstOrderDiscreteCompilerOwned :
+  Q.firstOrderRateToDiscreteContractionCompilerOwned
+    Q.canonicalQueenslandLeyBoundary ≡ true
+firstOrderDiscreteCompilerOwned = refl
+
+selectedRateStepStillOpen :
+  Q.selectedEmpiricalRateTimeStepEmbeddedForAsymptoticUse
+    Q.canonicalQueenslandLeyBoundary ≡ false
+selectedRateStepStillOpen = refl
+
+routeFallowRecoveryJoinOwned :
+  Q.queenslandRouteFallowRecoveryJoinOwned
+    Q.canonicalQueenslandLeyBoundary ≡ true
+routeFallowRecoveryJoinOwned = refl
+
+grdcJoinNotReplacementCurve :
+  Q.routeFallowRecoveryJoinCreatesMineralNResponseCurve
+    Q.canonicalQueenslandLeyBoundary ≡ false
+grdcJoinNotReplacementCurve = refl
