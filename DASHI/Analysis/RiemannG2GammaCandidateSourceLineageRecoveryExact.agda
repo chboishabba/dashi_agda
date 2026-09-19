@@ -9,28 +9,24 @@ import DASHI.Analysis.RiemannG2GammaProducerSourceAcquisitionExact as Acquisitio
 import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as Return8889
 
 ------------------------------------------------------------------------
--- RECOVERED GAMMA SOURCE FAMILY, WITHOUT SAME-CONSUMER PROMOTION
+-- RECOVERED EXACT 8889 GAMMA SOURCE LINEAGE
 --
--- Retained checked-source artifacts expose an actual Gamma estimate family:
+-- The companion dashi_lean4 repository vendors both the original envelope
 --
---   Zeta23Bridge/LiteralWeilGammaConeBound.lean
---     epsGamma
---     gammaConeEnvelope
+--   LiteralWeilGammaConeBound.gammaConeEnvelope
 --
--- and a downstream theorem-bearing consumer:
+-- and the exact pole-quotient consumer
 --
---   LiteralWeilTwoRadiusResidualEnvelope.abs_residualCone_le
+--   PoleQuotientGammaBudget.exists_gamma_budget_linear_in_stripConst.
 --
--- whose residual envelope is
+-- The latter calls gammaConeEnvelope directly.  Therefore the historical
+-- epsGamma/gammaConeEnvelope chain is now source-identified with the reported
+-- 8889 pole-quotient Gamma producer.  This is source custody, not Agda proof
+-- transport.
 --
---   epsZero + epsGamma + 4 * |poleEvenResp|.
---
--- This materially improves source acquisition: a concrete Gamma producer family
--- and downstream use are known.  But the retained artifact inspected here is an
--- earlier two-radius/projective lane.  We have not recovered an exact theorem
--- stating that the 8889 pole-quotient uniform Gamma bound is produced by this
--- same gammaConeEnvelope/epsGamma chain.  Therefore this module refuses to set
--- Acquisition.GammaProducerSourceArtifact.decompositionFeedsReportedUniformBound.
+-- The producer's own source commentary also identifies why it misses the sharp
+-- window: stripConst carries a second-derivative L1 term which grows
+-- quadratically when the high-ordinate taper support shrinks.
 ------------------------------------------------------------------------
 
 record RecoveredGammaCandidateLineage : Set where
