@@ -16,7 +16,8 @@ module DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationWeldExact where
 
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; Positive)
+open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _≤_)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
@@ -104,14 +105,14 @@ assembledPhysicalTOperationWeightNonnegative :
         {construction = construction}
         referenceInputs typed evaluator)
     cutoff slow →
-  Data.Rational.Base.0ℚ ≤
+  0ℚ ≤
     Assembled.assembledSelectedWeight evaluator cutoff slow
 assembledPhysicalTOperationWeightNonnegative
   {referenceInputs = referenceInputs}
   weld cutoff slow =
-  Relation.Binary.PropositionalEquality.subst
-    (λ value → Data.Rational.Base.0ℚ ≤ value)
-    (Relation.Binary.PropositionalEquality.sym
+  subst
+    (λ value → 0ℚ ≤ value)
+    (sym
       (assembledDensityIsPhysicalTOperation weld cutoff slow))
     (Nonnegative.canonicalPhysicalTOperationAtOneRationalNonnegative
       referenceInputs
