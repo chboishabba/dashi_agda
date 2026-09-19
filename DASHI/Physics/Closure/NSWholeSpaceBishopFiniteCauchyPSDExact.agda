@@ -242,7 +242,13 @@ headKernelSplit head left right =
         (BishopP.*-cong
           (BishopP.*-cong lawXA lawXB)
           BishopP.≃-refl)
-        (BishopP.*-identityˡ kab)))
+        (let open BishopP.ℝ-Solver
+         in solve 1
+          (λ k' →
+            ((Κ (+ 1 / 1) ⊗ Κ (+ 1 / 1)) ⊗ k')
+            ⊜ k')
+          BishopP.≃-refl
+          kab)))
 
 ------------------------------------------------------------------------
 -- Complete square and recursive PSD.
@@ -321,9 +327,9 @@ completeSquareFromInverse k beta z s inverseLaw =
         (BishopP.+-cong
           BishopP.≃-refl
           (BishopP.*-cong
-            BishopP.≃-refl
             (BishopP.*-cong
-              inverseLaw BishopP.≃-refl)))
+              BishopP.≃-refl inverseLaw)
+            BishopP.≃-refl))
         (BishopP.*-cong
           (BishopP.*-cong
             inverseLaw BishopP.≃-refl)
@@ -401,8 +407,8 @@ headCauchySchurDecomposition head rest z =
       BishopP.≃-refl
       tail)
     (BishopP.≃-trans
-      (solve 5
-        (λ a b c d e →
+      (solve 4
+        (λ a b c d →
           (a ⊕ b) ⊕ (c ⊕ d)
           ⊜ (a ⊕ b ⊕ c) ⊕ d)
         BishopP.≃-refl
@@ -417,8 +423,7 @@ headCauchySchurDecomposition head rest z =
           (BishopReal._*_ beta s) s)
         (cauchyQuadratic
           (transformedCoefficient head z)
-          rest)
-        BishopReal.0ℝ)
+          rest))
       (BishopP.+-cong square BishopP.≃-refl))
 
 headPivotNonnegative :
