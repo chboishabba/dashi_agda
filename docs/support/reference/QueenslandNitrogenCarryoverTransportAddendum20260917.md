@@ -88,6 +88,48 @@ The generic `IntersectionalNonFactorability` and Snowball discovery machinery is
 
 Each coarse observer has a finite non-factorability witness, and each corresponding enriched observer has a finite positive `FactorsThrough` repair. Failed factorisation generates a typed route/timing/water/mineral-N-response axis proposal. These finite worlds and proposals are DASHI synthetic reasoning objects, not empirical source propositions and not evidence that the proposed measurement has been performed.
 
+
+## First-order residue-N kinetics payment
+
+Owner: `DASHI/Biology/Agriculture/QueenslandLegumeResidueFirstOrderKineticsExact.agda`
+
+Thomson, Cameron, Dalal & Hoult 2007 — DOI `10.1071/EA05290` — materially changes the quantitative frontier. In a 17-week northern-Australian Vertisol glasshouse experiment, the source reports first-order N release from added legume residues. Reported rate constants span `0.045-0.325 week^-1`; corresponding half-times span `2.1-15.4 weeks` at 23 C. Residue identity/chemistry and moisture treatment remain part of the observation.
+
+The source payment is therefore:
+
+```text
+residue-mineralisation route
++ finite time unit (weeks)
++ first-order kinetic shape
++ reported source rate/half-time ranges
+```
+
+It is **not**:
+
+```text
+one universal k
+= field living-root transfer
+= Acacia/Senegalia same-object kernel
+= a constructed Bishop ratio r
+= an infinite-horizon geometric-tail theorem
+```
+
+The largest reported half-time (15.4 weeks) lies inside the 17-week experimental window, so the source genuinely constrains a decay timescale within the fitted experiment. DASHI nevertheless keeps `finiteFirstOrderFitAuthorizesInfiniteHorizonExtrapolation = false`: extending the fitted first-order law to an infinite tail is a separate modelling/source-authority payment.
+
+This leaves a sharply typed mathematical seam between the continuous source fit and the already-owned discrete convergence machinery:
+
+```text
+source first-order k > 0
+      ↓  [continuous-to-discrete compiler still explicit]
+r = exp(-k Δt), 0 < r < 1
+      ↓
+discrete polynomial/geometric majorant
+      ↓
+constructive tail / Cauchy compiler
+```
+
+The first line is now source-paid for the Thomson residue system; the compiler/application bridge is not silently attributed to the paper.
+
 ## Constructive transport / convergence mathematics
 
 The Moonshine convergence work is now imported as application-neutral Analysis infrastructure and reused by agriculture rather than copied semantically.
