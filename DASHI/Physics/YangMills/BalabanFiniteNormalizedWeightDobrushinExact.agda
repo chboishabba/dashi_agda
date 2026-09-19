@@ -26,7 +26,7 @@ module DASHI.Physics.YangMills.BalabanFiniteNormalizedWeightDobrushinExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣; NonNegative; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; ∣_∣; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
