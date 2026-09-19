@@ -1,0 +1,9 @@
+module DASHI.Foundations.BishopNonnegativeSquareReflectionValidation where
+
+import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
+import DASHI.Foundations.BishopNonnegativeSquareReflectionExact as P
+
+concreteSquareReflectionRegression :
+  Norm.BishopNonnegativeSquareReflection
+concreteSquareReflectionRegression =
+  P.bishopNonnegativeSquareReflection
