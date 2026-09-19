@@ -270,6 +270,129 @@ literalFixedOutputCenteredCovarianceFactor E I nu work cutoff output =
     (Output.physicalOutputFiber cutoff output)
     (literalOutputFibreHomogeneous cutoff output)
 
+------------------------------------------------------------------------
+-- First-order partner-displacement form.
+------------------------------------------------------------------------
+
+firstOrderAgainstHead :
+  (E : C3.IntegerEmbedding F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  Physical.PhysicalTriadIncidence →
+  List Physical.PhysicalTriadIncidence → ℚ
+firstOrderAgainstHead E work head [] = 0ℚ
+firstOrderAgainstHead E work head (x ∷ xs) =
+    Rate.firstOrderCenteredDefect E head x * (work head - work x)
+  + firstOrderAgainstHead E work head xs
+
+firstOrderPairDifferenceWorkSum :
+  (E : C3.IntegerEmbedding F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  List Physical.PhysicalTriadIncidence → ℚ
+firstOrderPairDifferenceWorkSum E work [] = 0ℚ
+firstOrderPairDifferenceWorkSum E work (x ∷ xs) =
+  firstOrderAgainstHead E work x xs
+  + firstOrderPairDifferenceWorkSum E work xs
+
+centeredPairFactorFirstOrder :
+  (E : C3.IntegerEmbedding F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ Physical.k beta →
+  ( Rate.centeredSquare E (Physical.p alpha) (Physical.q alpha)
+  - Rate.centeredSquare E (Physical.p beta) (Physical.q beta))
+    * (work alpha - work beta)
+  ≡
+    Rate.two
+      * (Rate.firstOrderCenteredDefect E alpha beta
+          * (work alpha - work beta))
+centeredPairFactorFirstOrder E work alpha beta sameOutput =
+  let
+    base =
+      Rate.fixedOutputCenteredSquareDifferenceIsFirstOrder
+        E alpha beta sameOutput
+  in
+  trans
+    (cong
+      (λ centeredDefect → centeredDefect * (work alpha - work beta))
+      base)
+    (solve
+      ( Rate.firstOrderCenteredDefect E alpha beta
+      ∷ work alpha ∷ work beta ∷ []))
+
+centeredAgainstHeadFirstOrder :
+  (E : C3.IntegerEmbedding F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  {output : Z3.FourierMode} →
+  (head : Physical.PhysicalTriadIncidence) →
+  (xs : List Physical.PhysicalTriadIncidence) →
+  OutputHomogeneous output (head ∷ xs) →
+  centeredAgainstHead E work head xs
+  ≡ Rate.two * firstOrderAgainstHead E work head xs
+centeredAgainstHeadFirstOrder E work head [] homogeneous = solve []
+centeredAgainstHeadFirstOrder E work {output} head (x ∷ xs) homogeneous =
+  let
+    sameOutput =
+      pairSameOutput homogeneous x (Cube.here refl)
+
+    headPart =
+      centeredPairFactorFirstOrder E work head x sameOutput
+
+    tailHom : OutputHomogeneous output (head ∷ xs)
+    tailHom .head (Cube.here refl) =
+      homogeneous head (Cube.here refl)
+    tailHom tau (Cube.there member) =
+      homogeneous tau (Cube.there (Cube.there member))
+
+    tailPart =
+      centeredAgainstHeadFirstOrder E work head xs tailHom
+  in
+  trans
+    (cong₂ _+_ headPart tailPart)
+    (solve
+      ( Rate.firstOrderCenteredDefect E head x
+      ∷ work head ∷ work x
+      ∷ firstOrderAgainstHead E work head xs
+      ∷ []))
+
+centeredPairSumFirstOrder :
+  (E : C3.IntegerEmbedding F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  {output : Z3.FourierMode} →
+  (items : List Physical.PhysicalTriadIncidence) →
+  OutputHomogeneous output items →
+  centeredPairDifferenceWorkSum E work items
+  ≡ Rate.two * firstOrderPairDifferenceWorkSum E work items
+centeredPairSumFirstOrder E work [] homogeneous = solve []
+centeredPairSumFirstOrder E work {output} (head ∷ xs) homogeneous =
+  let
+    headPart =
+      centeredAgainstHeadFirstOrder E work head xs homogeneous
+    tailPart =
+      centeredPairSumFirstOrder E work xs (tailHomogeneous homogeneous)
+  in
+  trans
+    (cong₂ _+_ headPart tailPart)
+    (solve
+      ( firstOrderAgainstHead E work head xs
+      ∷ firstOrderPairDifferenceWorkSum E work xs
+      ∷ []))
+
+literalFixedOutputFirstOrderCovarianceFactor :
+  (E : C3.IntegerEmbedding F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  (cutoff : Nat) →
+  (output : Z3.FourierMode) →
+  centeredPairDifferenceWorkSum E work
+      (Output.physicalOutputFiber cutoff output)
+  ≡
+    Rate.two *
+      firstOrderPairDifferenceWorkSum E work
+        (Output.physicalOutputFiber cutoff output)
+literalFixedOutputFirstOrderCovarianceFactor E work cutoff output =
+  centeredPairSumFirstOrder E work
+    (Output.physicalOutputFiber cutoff output)
+    (literalOutputFibreHomogeneous cutoff output)
+
 literalFixedOutputCenteredCovarianceFactorClosed : Bool
 literalFixedOutputCenteredCovarianceFactorClosed = true
 
