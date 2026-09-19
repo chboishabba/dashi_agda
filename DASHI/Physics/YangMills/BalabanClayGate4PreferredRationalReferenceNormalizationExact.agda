@@ -31,6 +31,8 @@ import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibreNormalizationExact 
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceFibrePositiveMassExact as PositiveMass
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact as Probability
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact as Integral
+import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact as T
+import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
 
 record PreferredRationalReferenceNormalizationInputs
     {Scale Fine SlowField Component Functional : Set}
@@ -54,7 +56,7 @@ record PreferredRationalReferenceNormalizationInputs
     selectedReferenceIntegrandMeaning :
       ∀ scale component slow fine →
       Integral.selectedWith
-        (DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact.sumData
+        (T.sumData
           (PhysicalT.canonicalPhysicalTData construction))
         (referenceIntegrand scale component slow)
         slow fine
@@ -65,7 +67,7 @@ record PreferredRationalReferenceNormalizationInputs
         (suppression scale)
         (Reference.normalizedReferenceSelector
           (PositiveMass.reciprocalReferenceMassFromPositiveWitness
-            (DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact.rationalPositiveMassReciprocalAlgebra
+            (Reciprocal.rationalPositiveMassReciprocalAlgebra
               (Algebra.canonicalRationalPositiveMassInterpretation
                 (PhysicalT.sumCarrier construction)))
             (Flat.positiveSelectedReferenceFibreFromFlat
