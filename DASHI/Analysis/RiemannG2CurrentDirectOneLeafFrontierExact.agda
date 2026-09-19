@@ -18,6 +18,8 @@ import DASHI.Analysis.RiemannAnalyticCoordinateObserverDescentExact as R3Descent
 import DASHI.Analysis.RiemannG2VerifiedRegionComplementHighCoverExact as R4Complement
 import DASHI.Analysis.RiemannAnalyticCoordinateVerifiedRegionRealizationExact as R3Star
 import DASHI.Analysis.RiemannG2ClayTerminalR3StarExact as R3StarClay
+import DASHI.Analysis.RiemannAnalyticLocatedVerifiedHeightExact as LocatedR3
+import DASHI.Analysis.RiemannG2ClayTerminalLocatedR3StarExact as LocatedClay
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -255,6 +257,31 @@ r3StarAndUniformHighProducerCompileRH :
     R3StarClay.canonicalClayTerminalR3StarBoundary ≡ true
 r3StarAndUniformHighProducerCompileRH = refl
 
+locatedR3NeedsNoExactThresholdDecision :
+  LocatedR3.LocatedVerifiedHeightBoundary.exactRealThresholdDecidabilityRequired
+    LocatedR3.canonicalLocatedVerifiedHeightBoundary ≡ false
+locatedR3NeedsNoExactThresholdDecision = refl
+
+locatedR3CotransitivityConstructsLowHighCover :
+  LocatedR3.LocatedVerifiedHeightBoundary.strictOrderCotransitivityConstructsCover
+    LocatedR3.canonicalLocatedVerifiedHeightBoundary ≡ true
+locatedR3CotransitivityConstructsLowHighCover = refl
+
+locatedR3AllowsConstructiveOverlap :
+  LocatedR3.LocatedVerifiedHeightBoundary.lowAndHighMayOverlap
+    LocatedR3.canonicalLocatedVerifiedHeightBoundary ≡ true
+locatedR3AllowsConstructiveOverlap = refl
+
+locatedTerminalNeedsNoArbitraryCover :
+  LocatedClay.ClayTerminalLocatedR3StarBoundary.arbitraryCoverPrimitive
+    LocatedClay.canonicalClayTerminalLocatedR3StarBoundary ≡ false
+locatedTerminalNeedsNoArbitraryCover = refl
+
+locatedTerminalCompilesRH :
+  LocatedClay.ClayTerminalLocatedR3StarBoundary.theseInputsCompileRH
+    LocatedClay.canonicalClayTerminalLocatedR3StarBoundary ≡ true
+locatedTerminalCompilesRH = refl
+
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
     Donor.canonicalExistingScalarDonorInventoryBoundary ≡ false
@@ -352,4 +379,4 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     "Realize the exact universal pole-quotient finite kernel and prove nearResponseAt(chosen crossing J) = finiteNearSum(cellResponse). The checked Lean status owner does not transport this equality into Agda."
     "After a proof-carrying upper certificate nearResponseAt(J) <= U, independently prove cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
     "Alternatively prove directly cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
-    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the same-object equality is supplied, and the optional certificate bridge now reuses the literal-kernel equality plus one literal-fold/certified-fold weld rather than demanding a second nearResponse representation. R3 is one shared realPart observer. On the canonical complement route, High is definitionally not-verified and the cover compiles from decidability of that exact verified-region predicate. R3-star now packages that decision with the same-carrier criticalLine/realPart=half and verified-height realization, so primitive R4 bookkeeping disappears from the canonical terminal surface. The substantive low-side debt is still the actual numeric/carrier realization capable of inhabiting that package; AnalyticSubstrate.Real currently has no order/decision structure from which it could be fabricated. R2 remains the primitive strict ClusterResponse analytic family, exact-head Agda validation is not claimed, and RH is not derived."
+    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the same-object equality is supplied, and the optional certificate bridge now reuses the literal-kernel equality plus one literal-fold/certified-fold weld rather than demanding a second nearResponse representation. R3 is one shared realPart observer. The exact-complement Dec(V) route remains available, but it is no longer preferred: exact comparison at a constructive-real threshold is unnecessarily strong. The preferred R3-star route now attaches AnalyticSubstrate.Real to a ConstructiveCompleteRealPackage, represents a high-start and published height through its rational embedding, and uses strict-order cotransitivity T_high<T_PT to construct for every analytic zero the overlapping cover T_high<|Im rho| or |Im rho|<T_PT. Thus no excluded middle or equality-at-threshold decision is required. The low branch still needs the genuine same-carrier Platt--Trudgian theorem, while the high branch is handed directly to the implementation-neutral high producer. R2 remains the primitive strict ClusterResponse analytic family, exact-head Agda validation is not claimed, and RH is not derived."
