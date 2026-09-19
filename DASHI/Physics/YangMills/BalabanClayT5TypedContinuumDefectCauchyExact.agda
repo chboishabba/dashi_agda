@@ -30,7 +30,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Analysis.CanonicalRationalMetric as Metric
@@ -89,7 +89,7 @@ absoluteDefectPartialBelowFiniteDyadicTail dataSet start zero observable
   rewrite Metric.absZeroℚ =
   ℚP.≤-refl
 absoluteDefectPartialBelowFiniteDyadicTail dataSet start (suc count) observable =
-  ℚP.≤-trans
+  ℚP.≤-ℚP.≤-trans
     (ℚP.∣p+q∣≤∣p∣+∣q∣
       (oneStepDefect dataSet start observable)
       (Sum.defectPartial
@@ -111,7 +111,7 @@ absoluteDefectPartialBelowInfiniteMajorant :
       start count ∣
   ≤ Configured.configuredInfiniteTailMajorant start
 absoluteDefectPartialBelowInfiniteMajorant dataSet start count observable =
-  trans
+  ℚP.≤-trans
     (absoluteDefectPartialBelowFiniteDyadicTail
       dataSet start count observable)
     (Sum.configuredFiniteDyadicTailBelowInfiniteMajorant start count)
@@ -145,7 +145,7 @@ expectationCauchyModulus :
       - expectation dataSet (advance start count) observable ∣
   ≤ Configured.configuredInfiniteTailMajorant start
 expectationCauchyModulus dataSet start count observable =
-  trans
+  ℚP.≤-trans
     (expectationDifferenceBelowFiniteDyadicTail
       dataSet start count observable)
     (Sum.configuredFiniteDyadicTailBelowInfiniteMajorant start count)
