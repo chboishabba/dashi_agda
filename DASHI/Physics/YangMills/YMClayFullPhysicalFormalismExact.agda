@@ -11,6 +11,8 @@ import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact 
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP1FiniteClusteringExact as P1
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP2ExpectationConvergenceExact as P2
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP3SameOSCorrelationExact as P3
+import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact as S2Product
+import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as S2
 import DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact as LiteralLocal
 import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact as LiteralClosure
 import DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact as RouteSH2c
@@ -480,6 +482,73 @@ d2CommonUVNormalizationStillPhysicalIsTrue :
   d2CommonUVNormalizationStillPhysical ≡ true
 d2CommonUVNormalizationStillPhysicalIsTrue =
   D2Generated.commonUVNormalizationStillPhysicalIsTrue
+
+
+------------------------------------------------------------------------
+-- S2 canonical finite-Wilson carrier reductions.
+------------------------------------------------------------------------
+
+routeSS2DecodeProductEqualityIndependent : Bool
+routeSS2DecodeProductEqualityIndependent =
+  S2Product.independentDecodeToWilsonProductEqualityRequired
+
+routeSS2DecodeProductEqualityIndependentIsFalse :
+  routeSS2DecodeProductEqualityIndependent ≡ false
+routeSS2DecodeProductEqualityIndependentIsFalse =
+  S2Product.independentDecodeToWilsonProductEqualityRequiredIsFalse
+
+routeSS2TranslatedProductEqualityIndependent : Bool
+routeSS2TranslatedProductEqualityIndependent =
+  S2Product.independentTranslatedWilsonProductEqualityRequired
+
+routeSS2TranslatedProductEqualityIndependentIsFalse :
+  routeSS2TranslatedProductEqualityIndependent ≡ false
+routeSS2TranslatedProductEqualityIndependentIsFalse =
+  S2Product.independentTranslatedWilsonProductEqualityRequiredIsFalse
+
+routeSS2MultiplicationWeldIndependent : Bool
+routeSS2MultiplicationWeldIndependent =
+  S2.independentWilsonT5MultiplicationWeldRequired
+
+routeSS2MultiplicationWeldIndependentIsFalse :
+  routeSS2MultiplicationWeldIndependent ≡ false
+routeSS2MultiplicationWeldIndependentIsFalse =
+  S2.independentWilsonT5MultiplicationWeldRequiredIsFalse
+
+routeSS2BoundPredicateWeldIndependent : Bool
+routeSS2BoundPredicateWeldIndependent =
+  S2.independentWilsonBoundPredicateWeldRequired
+
+routeSS2BoundPredicateWeldIndependentIsFalse :
+  routeSS2BoundPredicateWeldIndependent ≡ false
+routeSS2BoundPredicateWeldIndependentIsFalse =
+  S2.independentWilsonBoundPredicateWeldRequiredIsFalse
+
+routeSS2LoopBoundednessStillPhysical : Bool
+routeSS2LoopBoundednessStillPhysical = S2.literalLoopBoundednessStillPhysical
+
+routeSS2LoopBoundednessStillPhysicalIsTrue :
+  routeSS2LoopBoundednessStillPhysical ≡ true
+routeSS2LoopBoundednessStillPhysicalIsTrue =
+  S2.literalLoopBoundednessStillPhysicalIsTrue
+
+routeSS2BoundedMultiplyClosureStillPhysical : Bool
+routeSS2BoundedMultiplyClosureStillPhysical =
+  S2.boundedObservableMultiplicationClosureStillPhysical
+
+routeSS2BoundedMultiplyClosureStillPhysicalIsTrue :
+  routeSS2BoundedMultiplyClosureStillPhysical ≡ true
+routeSS2BoundedMultiplyClosureStillPhysicalIsTrue =
+  S2.boundedObservableMultiplicationClosureStillPhysicalIsTrue
+
+routeSS2IdentityBoundednessStillPhysical : Bool
+routeSS2IdentityBoundednessStillPhysical =
+  S2.identityObservableBoundednessStillPhysical
+
+routeSS2IdentityBoundednessStillPhysicalIsTrue :
+  routeSS2IdentityBoundednessStillPhysical ≡ true
+routeSS2IdentityBoundednessStillPhysicalIsTrue =
+  S2.identityObservableBoundednessStillPhysicalIsTrue
 
 f2PrimitiveResearchPayment : Bool
 f2PrimitiveResearchPayment = RouteG.f2PrimitiveResearchPayment
