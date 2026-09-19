@@ -34,6 +34,9 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
+import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
+import DASHI.Physics.Closure.NSTriadKNRationalNormalizedDirectionUnitRound455Exact as R455
+import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedAntiParallelComplementRound467Exact as R467
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact as R311
 import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact as Weld
@@ -92,7 +95,7 @@ centerRadiusAtLeastOne {S = S} {center = center} D unitSquare =
     radius radiusNN
     (subst
       (1ℚ ≤_)
-      (sym (Double.R455.modeNormSquareMeaning squareMeaning))
+      (sym (R455.modeNormSquareMeaning squareMeaning))
       unitSquare)
 
 centeredAngularMassNonnegative :
@@ -105,17 +108,17 @@ centeredAngularMassNonnegative :
     (Helical.modeNorm S p * Helical.modeNorm S q)
       * Aligned.norm
           (Aligned.differenceVector
-            (Aligned.R167.normalizedDirection E S p)
-            (Aligned.R167.normalizedDirection E S q))
+            (R167.normalizedDirection E S p)
+            (R167.normalizedDirection E S q))
 centeredAngularMassNonnegative D =
   let
     P = Product.physicalComplement D
-    radiusProductNN = Aligned.R467.radiusProductNonnegative P
+    radiusProductNN = R467.radiusProductNonnegative P
     vectorNN =
       Separation.complex3NormSquaredNonnegative
         (Aligned.differenceVector
-          (Aligned.R167.normalizedDirection _ _ _)
-          (Aligned.R167.normalizedDirection _ _ _))
+          (R167.normalizedDirection _ _ _)
+          (R167.normalizedDirection _ _ _))
   in
   Rational.productNonnegative radiusProductNN vectorNN
 
@@ -142,8 +145,8 @@ centeredSumPositive D centerFloor =
     rpqNN : 0ℚ ≤ rp + rq
     rpqNN =
       Rational.addNonnegative
-        (Aligned.R467.radiusPNN P)
-        (Aligned.R467.radiusQNN P)
+        (R467.radiusPNN P)
+        (R467.radiusQNN P)
 
     onePositive : 0ℚ < 1ℚ
     onePositive = ℚP.positive⁻¹ 1ℚ
