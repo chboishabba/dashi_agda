@@ -18,7 +18,7 @@ module DASHI.Moonshine.JInvariantQPowerModulusExact where
 -- shapes, but neither is silently promoted into this transcendental package.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; trans; cong₂)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans; cong₂)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
