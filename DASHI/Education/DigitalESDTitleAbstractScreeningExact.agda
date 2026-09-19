@@ -34,6 +34,7 @@ data ScreeningReasonCode : Set where
   languageOutsideDeclaredScope
   publicationTypeOutsideDeclaredScope
   duplicateCandidate
+  awaitingScreeningReview
   potentiallyRelevant
   requiresFullText
   otherScreeningReason
