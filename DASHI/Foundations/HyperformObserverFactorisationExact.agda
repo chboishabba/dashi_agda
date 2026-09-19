@@ -27,6 +27,9 @@ open import Agda.Builtin.Equality using (cong)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ConsumerFibreRepairExact as Repair
+import DASHI.Core.FactorisationSpineCrosswalkExact as Spine
 import DASHI.Foundations.HyperformChartGluingExact as Glue
 
 ObserverConsumerAdequate :
@@ -35,7 +38,15 @@ ObserverConsumerAdequate :
   (Fine → Outcome) →
   Set₁
 ObserverConsumerAdequate observer consumer =
-  INF.FactorsThrough (Glue.observe observer) consumer
+  Descent.FactorsThrough (Glue.observe observer) consumer
+
+ObserverConsumerSufficient :
+  ∀ {Fine Coarse Outcome : Set} →
+  Glue.ObserverWithFibre Fine Coarse →
+  (Fine → Outcome) →
+  Set
+ObserverConsumerSufficient observer consumer =
+  Descent.ConsumerSufficient (Glue.observe observer) consumer
 
 record ObserverFibreDistinction
     {Fine Coarse Outcome : Set}
@@ -52,6 +63,21 @@ record ObserverFibreDistinction
 
 open ObserverFibreDistinction public
 
+asConsumerNonDescentWitness :
+  ∀ {Fine Coarse Outcome}
+    {observer : Glue.ObserverWithFibre Fine Coarse}
+    {consumer : Fine → Outcome} →
+  ObserverFibreDistinction observer consumer →
+  Descent.ConsumerNonDescentWitness
+    (Glue.observe observer)
+    consumer
+asConsumerNonDescentWitness witness =
+  Descent.consumerNonDescentWitness
+    (left witness)
+    (right witness)
+    (sameObservation witness)
+    (consumerDistinguishes witness)
+
 asNonFactorabilityWitness :
   ∀ {Fine Coarse Outcome}
     {observer : Glue.ObserverWithFibre Fine Coarse}
@@ -61,11 +87,8 @@ asNonFactorabilityWitness :
     (Glue.observe observer)
     consumer
 asNonFactorabilityWitness witness =
-  INF.nonFactorabilityWitness
-    (left witness)
-    (right witness)
-    (sameObservation witness)
-    (consumerDistinguishes witness)
+  Spine.nonDescentToNonFactorability
+    (asConsumerNonDescentWitness witness)
 
 nonFactorableObserverIsNotConsumerAdequate :
   ∀ {Fine Coarse Outcome}
@@ -75,8 +98,35 @@ nonFactorableObserverIsNotConsumerAdequate :
   ObserverConsumerAdequate observer consumer →
   ⊥
 nonFactorableObserverIsNotConsumerAdequate witness =
-  INF.witnessRulesOutEveryFlatFactorisation
-    (asNonFactorabilityWitness witness)
+  Descent.nonDescentWitnessBlocksFactorization
+    (asConsumerNonDescentWitness witness)
+
+nonFactorableObserverIsNotConsumerSufficient :
+  ∀ {Fine Coarse Outcome}
+    {observer : Glue.ObserverWithFibre Fine Coarse}
+    {consumer : Fine → Outcome} →
+  ObserverFibreDistinction observer consumer →
+  ObserverConsumerSufficient observer consumer →
+  ⊥
+nonFactorableObserverIsNotConsumerSufficient witness =
+  Descent.nonDescentWitnessBlocksSufficiency
+    (asConsumerNonDescentWitness witness)
+
+observerRepairRequiresWitnessSeparation :
+  ∀ {Fine Coarse Refinement Outcome}
+    {observer : Glue.ObserverWithFibre Fine Coarse}
+    {refine : Fine → Refinement}
+    {consumer : Fine → Outcome} →
+  (witness : ObserverFibreDistinction observer consumer) →
+  Repair.RefinementRepairs
+    (Glue.observe observer)
+    refine
+    consumer →
+  refine (left witness) ≡ refine (right witness) →
+  ⊥
+observerRepairRequiresWitnessSeparation witness =
+  Repair.refinementRepairSeparatesWitness
+    (asConsumerNonDescentWitness witness)
 
 rechartObserver :
   ∀ {Fine Coarse Recharted} →
@@ -127,7 +177,9 @@ record HyperformObserverFactorisationBoundary : Set where
   field
     everyConsumerFactorsThroughCoarseObserver : Bool
     adequacyIsConsumerIndexed : Bool
+    canonicalConsumerDescentSpineReused : Bool
     fibreCollisionMayWitnessInformationLoss : Bool
+    sufficientRepairMustSeparateWitnessedCollision : Bool
     postcompositionCanRecoverErasedDistinction : Bool
     richerIndependentContextMayRequireSeparateAnalysis : Bool
 
@@ -137,4 +189,4 @@ canonicalHyperformObserverFactorisationBoundary :
   HyperformObserverFactorisationBoundary
 canonicalHyperformObserverFactorisationBoundary =
   hyperform-observer-factorisation-boundary
-    false true true false true
+    false true true true true false true
