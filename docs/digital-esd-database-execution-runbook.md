@@ -229,3 +229,16 @@ Reopen source acquisition/formalism only if the admitted corpus exposes:
 - a new upstream eligibility-frame residual;
 - a constructive `FactorsThrough` collision;
 - or materially stronger same-object evidence required by a manuscript consumer.
+
+
+## SensibLaw / SLR after screening
+
+After title/abstract screening and source-specific inclusion lineage exist, use
+the Digital-ESD-side handoff contract:
+
+`docs/digital-esd-slr-fulltext-review-handoff.md`
+
+Do not send the full deduplicated metadata corpus into deep SLR processing.
+Retrieve/hash full text for the retained/probable-inclusion tranche, then use the
+existing SLR source-unit batch runtime. SLR output remains candidate/review
+material and cannot create inclusion or `SourceAuditAdmission`.
