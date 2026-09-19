@@ -115,3 +115,6 @@ import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureValidatio
 
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationValidation
+
+import DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyExact
+import DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyValidation
