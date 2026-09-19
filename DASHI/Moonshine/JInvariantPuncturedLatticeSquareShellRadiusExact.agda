@@ -15,11 +15,11 @@ module DASHI.Moonshine.JInvariantPuncturedLatticeSquareShellRadiusExact where
 -- coercivity theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Unit using (tt)
-open import Data.Bool.Base using (T)
+open import Data.Bool.Base using (T; _∧_; not)
 open import Data.Bool.Properties using (T-∧)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Integer.Base as ℤ using (ℤ; +_; -[1+_])
@@ -31,6 +31,7 @@ open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Function.Bundles using (Equivalence)
 open import Relation.Binary.PropositionalEquality using
   (cong; subst; sym)
+open import Relation.Nullary.Decidable.Core using (yes; no)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -123,13 +124,8 @@ coordinateOnSuccessorBoundary inner (+ n) outer innerFalse
     n≡next = NatP.≤-antisym n≤next next≤n
   in
   positiveEndpoint (cong +_ n≡next)
-coordinateOnSuccessorBoundary inner (-[1+ n ]) outer innerFalse
-  with inner
-... | zero =
-  let
-    n≤zero = negativeOuterMagnitudeBound zero n outer
-  in
-  caseZero n n≤zero
+coordinateOnSuccessorBoundary zero (-[1+ n ]) outer innerFalse =
+  caseZero n (negativeOuterMagnitudeBound zero n outer)
   where
   caseZero :
     (m : Nat) →
@@ -137,7 +133,7 @@ coordinateOnSuccessorBoundary inner (-[1+ n ]) outer innerFalse
     SuccessorBoundaryCoordinate zero (-[1+ m ])
   caseZero zero z≤ = negativeEndpoint refl
   caseZero (suc m) ()
-... | suc radius
+coordinateOnSuccessorBoundary (suc radius) (-[1+ n ]) outer innerFalse
   with NatP._≤?_ n radius
 ... | yes n≤radius =
   ⊥-elim
@@ -152,7 +148,7 @@ coordinateOnSuccessorBoundary inner (-[1+ n ]) outer innerFalse
     n≡inner = NatP.≤-antisym n≤inner inner≤n
   in
   negativeEndpoint
-    (cong -[1+_] n≡inner)
+    (cong (λ k → -[1+ k ]) n≡inner)
 
 data SuccessorSquareBoundaryPoint
     (inner : Nat)
@@ -187,11 +183,10 @@ successorSquareShellHasBoundaryCoordinate inner point shellProof =
   outerVertical = proj₂ outerParts
 
   go :
-    (horizontalInner verticalInner : Agda.Builtin.Bool.Bool) →
+    (horizontalInner verticalInner : Bool) →
     T (Cutoff.coordinateInCutoff? (suc inner) (Lattice.horizontal point)) →
     T (Cutoff.coordinateInCutoff? (suc inner) (Lattice.vertical point)) →
-    T (Data.Bool.Base.not
-      (horizontalInner Data.Bool.Base.∧ verticalInner)) →
+    T (not (horizontalInner ∧ verticalInner)) →
     SuccessorSquareBoundaryPoint inner point
   go true true outerH outerV ()
   go false true outerH outerV outside =
