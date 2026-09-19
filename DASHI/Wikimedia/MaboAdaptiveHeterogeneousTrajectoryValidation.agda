@@ -1,0 +1,74 @@
+module DASHI.Wikimedia.MaboAdaptiveHeterogeneousTrajectoryValidation where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+open import DASHI.Wikimedia.MaboAdaptiveHeterogeneousTrajectoryExact
+
+validationWholeFrontierRecomputedAfterCommit :
+  wholeFrontierRecomputedAfterCommit canonicalAdaptiveHeterogeneousBoundary ≡ true
+validationWholeFrontierRecomputedAfterCommit = refl
+
+validationHeterogeneousResidualsShareOneFrontier :
+  heterogeneousResidualsShareOneFrontier canonicalAdaptiveHeterogeneousBoundary ≡ true
+validationHeterogeneousResidualsShareOneFrontier = refl
+
+validationProducerDoesNotDetermineResidualClass :
+  producerIdentityDeterminesResidualClass canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationProducerDoesNotDetermineResidualClass = refl
+
+validationWrongTypeSuppressesMove :
+  wrongTypeMaySuppressExactMove canonicalAdaptiveHeterogeneousBoundary ≡ true
+validationWrongTypeSuppressesMove = refl
+
+validationWrongTypeDoesNotSatisfyResidual :
+  wrongTypeSatisfiesResidual canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationWrongTypeDoesNotSatisfyResidual = refl
+
+validationFailedFactorsThroughMayDemandRepair :
+  failedFactorsThroughMayDemandObserverRepair canonicalAdaptiveHeterogeneousBoundary ≡ true
+validationFailedFactorsThroughMayDemandRepair = refl
+
+validationFailedFactorsThroughDoesNotCreateEvidence :
+  failedFactorsThroughCreatesEvidence canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationFailedFactorsThroughDoesNotCreateEvidence = refl
+
+validationParsedSourceMayCreateResidual :
+  parsedSourceMayCreateNewConsumerResidual canonicalAdaptiveHeterogeneousBoundary ≡ true
+validationParsedSourceMayCreateResidual = refl
+
+validationNextResidualNeedNotDiffer :
+  adaptiveFreshnessRequiresDifferentResidual canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationNextResidualNeedNotDiffer = refl
+
+validationReviewAvailabilityNotSchedulerPrior :
+  reviewAvailabilityIsSchedulerPrior canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationReviewAvailabilityNotSchedulerPrior = refl
+
+validationTrajectoryReceiptNotProof :
+  trajectoryReceiptCreatesFormalProof canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationTrajectoryReceiptNotProof = refl
+
+validationTrajectoryReceiptNotAuthority :
+  trajectoryReceiptCreatesLegalAuthority canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationTrajectoryReceiptNotAuthority = refl
+
+validationNegativeConstraintCandidateOnly :
+  negativeConstraintCandidateOnly canonicalWrongTypeConstraint ≡ true
+validationNegativeConstraintCandidateOnly = refl
+
+validationNegativeConstraintResidualOpen :
+  negativeConstraintSatisfiesResidual canonicalWrongTypeConstraint ≡ false
+validationNegativeConstraintResidualOpen = refl
+
+validationNegativeConstraintSuppressesMove :
+  negativeConstraintMakesMoveInadmissible canonicalWrongTypeConstraint ≡ true
+validationNegativeConstraintSuppressesMove = refl
+
+validationTrajectorySelectionFresh :
+  selectionFromPostCommitFrontier canonicalTrajectoryLink ≡ true
+validationTrajectorySelectionFresh = refl
+
+validationTrajectoryNotQueued :
+  precomputedExecutionAuthority canonicalTrajectoryLink ≡ false
+validationTrajectoryNotQueued = refl
