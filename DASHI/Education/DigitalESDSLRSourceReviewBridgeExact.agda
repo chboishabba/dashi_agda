@@ -71,12 +71,25 @@ record FullTextArtifactReceipt (source : Attr.AttributedSource) : Set where
     sameObjectIdentityReviewedIsTrue : sameObjectIdentityReviewed ≡ true
 
     canonicalManifestation : Canonical.EvidenceManifestation
-    canonicalManifestationFamilyIsPdf :
-      Canonical.manifestationFamily canonicalManifestation ≡ Canonical.pdfDocument
+    canonicalManifestationFamilyReference : String
+    canonicalManifestationFamilyReviewed : Bool
+    canonicalManifestationFamilyReviewedIsTrue :
+      canonicalManifestationFamilyReviewed ≡ true
+
+    canonicalManifestationRevisionMatchesFullText :
+      Canonical.EvidenceManifestation.manifestationSourceRevisionRef canonicalManifestation
+      ≡ fullTextRevisionReference
+    canonicalManifestationDigestMatchesFullText :
+      Canonical.EvidenceManifestation.manifestationContentDigestRef canonicalManifestation
+      ≡ fullTextArtifactSha256
+
     canonicalSourceRevision : Canonical.EvidenceSourceRevision
     canonicalRevisionMatchesManifestation :
       Canonical.EvidenceSourceRevision.revisionSourceRevisionRef canonicalSourceRevision
       ≡ Canonical.EvidenceManifestation.manifestationSourceRevisionRef canonicalManifestation
+    canonicalRevisionManifestationRefMatches :
+      Canonical.EvidenceSourceRevision.revisionManifestationRef canonicalSourceRevision
+      ≡ Canonical.EvidenceManifestation.manifestationRef canonicalManifestation
     canonicalDigestMatchesManifestation :
       Canonical.EvidenceSourceRevision.revisionContentDigestRef canonicalSourceRevision
       ≡ Canonical.EvidenceManifestation.manifestationContentDigestRef canonicalManifestation
