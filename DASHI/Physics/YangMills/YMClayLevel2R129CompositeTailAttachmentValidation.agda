@@ -13,9 +13,13 @@ noIndependentCompositeCompletionAfterR129 :
   D1.independentCompositeCompletionAfterR129 ≡ false
 noIndependentCompositeCompletionAfterR129 = refl
 
-d1ResidueIsOneTailEquality :
-  D1.d1PhysicalResidueIsSingleTailEquality ≡ true
-d1ResidueIsOneTailEquality = refl
+d1ResidueIsCompletedCompositeSemanticWeld :
+  D1.d1PhysicalResidueIsCompletedCompositeSemanticWeld ≡ true
+d1ResidueIsCompletedCompositeSemanticWeld = refl
+
+noNewD1AnalyticInequality :
+  D1.d1NewAnalyticInequalityRequired ≡ false
+noNewD1AnalyticInequality = refl
 
 promotionFailClosed :
   D1.clayPromotion ≡ false
