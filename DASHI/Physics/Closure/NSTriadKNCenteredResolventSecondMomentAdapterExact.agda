@@ -97,14 +97,12 @@ resolventTaylorCenteredSecondDifferenceExact :
   (a s h : ℚ) →
   Taylor.centeredSecondDifference (resolventTaylorPair a s h)
   ≡ Resolvent.centeredSecondDifference a s h
-resolventTaylorCenteredSecondDifferenceExact a s h =
-  trans
-    (Taylor.centeredSecondDifferenceCancelsLinearSymbol
-      (resolventTaylorPair a s h))
-    (trans
-      (resolventTaylorMinusRemainderIsCenteredSecondDifference a s h)
-      (solve
-        (Resolvent.centeredSecondDifference a s h ∷ [])))
+resolventTaylorCenteredSecondDifferenceExact a s h
+  rewrite Taylor.centeredSecondDifferenceCancelsLinearSymbol
+    (resolventTaylorPair a s h)
+        | resolventTaylorPlusRemainderZero a s h
+        | resolventTaylorMinusRemainderIsCenteredSecondDifference a s h =
+  solve (Resolvent.centeredSecondDifference a s h ∷ [])
 
 resolventTaylorMinusRemainderSecondOrderExact :
   (a s h : ℚ) →
