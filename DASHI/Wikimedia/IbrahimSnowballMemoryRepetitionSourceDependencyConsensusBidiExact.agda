@@ -69,7 +69,7 @@ scientificReplicationQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 memoryDewey : Dewey.DeweyCoordinate
-memoryDewey = MemoryReplication.memoryDewey
+memoryDewey = Testimony.memoryDewey
 
 reproducibilityDewey : Dewey.DeweyCoordinate
 reproducibilityDewey = MemoryReplication.reproducibilityDewey

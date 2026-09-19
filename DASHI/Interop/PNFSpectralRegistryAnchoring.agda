@@ -22,8 +22,7 @@ import DASHI.Interop.VectorNonAuthorityCore as VectorNA
 -- the admitted object lane.
 
 data PNFSpectralRegistryAnchoringStatus : Set where
-  checkedRegistryAnchoringSurface_failClosed :
-    PNFSpectralRegistryAnchoringStatus
+  checkedRegistryAnchoringSurface_failClosed : PNFSpectralRegistryAnchoringStatus
 
 ------------------------------------------------------------------------
 -- Sections 1 and 2: canonical documents and evidence spans.

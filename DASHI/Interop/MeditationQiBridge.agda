@@ -39,46 +39,35 @@ open FormalLensCore
 -- metaphysical truth, admissibility, or reciprocal-practice authority.
 
 data MindCarrier : Set where
-  mindCarrier :
-    MindCarrier
+  mindCarrier : MindCarrier
 
 data AttentionField : Set where
-  focusedAttentionField :
-    AttentionField
+  focusedAttentionField : AttentionField
 
-  openAttentionField :
-    AttentionField
+  openAttentionField : AttentionField
 
 data BreathField : Set where
-  breathRhythmField :
-    BreathField
+  breathRhythmField : BreathField
 
 data BodySensationField : Set where
-  embodiedSensationField :
-    BodySensationField
+  embodiedSensationField : BodySensationField
 
 data ThoughtStream : Set where
-  arisingThoughtStream :
-    ThoughtStream
+  arisingThoughtStream : ThoughtStream
 
 data AffectField : Set where
-  valenceAffectField :
-    AffectField
+  valenceAffectField : AffectField
 
 data AwarenessBoundary : Set where
-  boundedAwarenessBoundary :
-    AwarenessBoundary
+  boundedAwarenessBoundary : AwarenessBoundary
 
-  openAwarenessBoundary :
-    AwarenessBoundary
+  openAwarenessBoundary : AwarenessBoundary
 
 data ResidualField : Set where
-  residualMindNoiseField :
-    ResidualField
+  residualMindNoiseField : ResidualField
 
 data IntentionYi : Set where
-  nonForcingIntentionYi :
-    IntentionYi
+  nonForcingIntentionYi : IntentionYi
 
 record MeditationState : Set where
   constructor meditationState
@@ -126,35 +115,25 @@ canonicalMeditationState =
     nonForcingIntentionYi
 
 data FlowStateDimension : Set where
-  intensityDimension :
-    FlowStateDimension
+  intensityDimension : FlowStateDimension
 
-  directionDimension :
-    FlowStateDimension
+  directionDimension : FlowStateDimension
 
-  velocityDimension :
-    FlowStateDimension
+  velocityDimension : FlowStateDimension
 
-  coherenceDimension :
-    FlowStateDimension
+  coherenceDimension : FlowStateDimension
 
-  stickinessDimension :
-    FlowStateDimension
+  stickinessDimension : FlowStateDimension
 
-  spaciousnessDimension :
-    FlowStateDimension
+  spaciousnessDimension : FlowStateDimension
 
-  valenceDimension :
-    FlowStateDimension
+  valenceDimension : FlowStateDimension
 
-  recurrenceDimension :
-    FlowStateDimension
+  recurrenceDimension : FlowStateDimension
 
-  embodimentDimension :
-    FlowStateDimension
+  embodimentDimension : FlowStateDimension
 
-  renewalDimension :
-    FlowStateDimension
+  renewalDimension : FlowStateDimension
 
 canonicalFlowStateDimensions : List FlowStateDimension
 canonicalFlowStateDimensions =
@@ -171,38 +150,27 @@ canonicalFlowStateDimensions =
   ∷ []
 
 data MeditationOperator : Set where
-  breathAnchorOperator :
-    MeditationOperator
+  breathAnchorOperator : MeditationOperator
 
-  bodyScanOperator :
-    MeditationOperator
+  bodyScanOperator : MeditationOperator
 
-  openMonitoringOperator :
-    MeditationOperator
+  openMonitoringOperator : MeditationOperator
 
-  mettaOperator :
-    MeditationOperator
+  mettaOperator : MeditationOperator
 
-  labelingOperator :
-    MeditationOperator
+  labelingOperator : MeditationOperator
 
-  notingOperator :
-    MeditationOperator
+  notingOperator : MeditationOperator
 
-  concentrationOperator :
-    MeditationOperator
+  concentrationOperator : MeditationOperator
 
-  inquiryOperator :
-    MeditationOperator
+  inquiryOperator : MeditationOperator
 
-  groundingOperator :
-    MeditationOperator
+  groundingOperator : MeditationOperator
 
-  equanimityOperator :
-    MeditationOperator
+  equanimityOperator : MeditationOperator
 
-  releaseOperator :
-    MeditationOperator
+  releaseOperator : MeditationOperator
 
 canonicalMeditationOperators : List MeditationOperator
 canonicalMeditationOperators =
@@ -220,44 +188,31 @@ canonicalMeditationOperators =
   ∷ []
 
 data MeditationHamiltonianTerm : Set where
-  agitationTerm :
-    MeditationHamiltonianTerm
+  agitationTerm : MeditationHamiltonianTerm
 
-  dullnessTerm :
-    MeditationHamiltonianTerm
+  dullnessTerm : MeditationHamiltonianTerm
 
-  dissociationTerm :
-    MeditationHamiltonianTerm
+  dissociationTerm : MeditationHamiltonianTerm
 
-  ruminationTerm :
-    MeditationHamiltonianTerm
+  ruminationTerm : MeditationHamiltonianTerm
 
-  compulsiveGraspingTerm :
-    MeditationHamiltonianTerm
+  compulsiveGraspingTerm : MeditationHamiltonianTerm
 
-  avoidanceTerm :
-    MeditationHamiltonianTerm
+  avoidanceTerm : MeditationHamiltonianTerm
 
-  affectFloodingTerm :
-    MeditationHamiltonianTerm
+  affectFloodingTerm : MeditationHamiltonianTerm
 
-  selfAttackTerm :
-    MeditationHamiltonianTerm
+  selfAttackTerm : MeditationHamiltonianTerm
 
-  clarityCreditTerm :
-    MeditationHamiltonianTerm
+  clarityCreditTerm : MeditationHamiltonianTerm
 
-  embodimentCreditTerm :
-    MeditationHamiltonianTerm
+  embodimentCreditTerm : MeditationHamiltonianTerm
 
-  equanimityCreditTerm :
-    MeditationHamiltonianTerm
+  equanimityCreditTerm : MeditationHamiltonianTerm
 
-  compassionCreditTerm :
-    MeditationHamiltonianTerm
+  compassionCreditTerm : MeditationHamiltonianTerm
 
-  renewalCreditTerm :
-    MeditationHamiltonianTerm
+  renewalCreditTerm : MeditationHamiltonianTerm
 
 canonicalMeditationHamiltonianTerms :
   List MeditationHamiltonianTerm
@@ -278,29 +233,21 @@ canonicalMeditationHamiltonianTerms =
   ∷ []
 
 data MeditationSpectralMode : Set where
-  ruminationMode :
-    MeditationSpectralMode
+  ruminationMode : MeditationSpectralMode
 
-  intrusionMode :
-    MeditationSpectralMode
+  intrusionMode : MeditationSpectralMode
 
-  dullnessMode :
-    MeditationSpectralMode
+  dullnessMode : MeditationSpectralMode
 
-  bodyPresenceMode :
-    MeditationSpectralMode
+  bodyPresenceMode : MeditationSpectralMode
 
-  breathRhythmMode :
-    MeditationSpectralMode
+  breathRhythmMode : MeditationSpectralMode
 
-  selfAttackMode :
-    MeditationSpectralMode
+  selfAttackMode : MeditationSpectralMode
 
-  openAwarenessMode :
-    MeditationSpectralMode
+  openAwarenessMode : MeditationSpectralMode
 
-  compassionMode :
-    MeditationSpectralMode
+  compassionMode : MeditationSpectralMode
 
 canonicalMeditationSpectralModes : List MeditationSpectralMode
 canonicalMeditationSpectralModes =
@@ -315,20 +262,15 @@ canonicalMeditationSpectralModes =
   ∷ []
 
 data MeditationBoundaryGate : Set where
-  breathAnchorGate :
-    MeditationBoundaryGate
+  breathAnchorGate : MeditationBoundaryGate
 
-  bodySensationGate :
-    MeditationBoundaryGate
+  bodySensationGate : MeditationBoundaryGate
 
-  openAwarenessGate :
-    MeditationBoundaryGate
+  openAwarenessGate : MeditationBoundaryGate
 
-  traumaContentGate :
-    MeditationBoundaryGate
+  traumaContentGate : MeditationBoundaryGate
 
-  groundingGate :
-    MeditationBoundaryGate
+  groundingGate : MeditationBoundaryGate
 
 canonicalMeditationBoundaryGates : List MeditationBoundaryGate
 canonicalMeditationBoundaryGates =
@@ -340,14 +282,11 @@ canonicalMeditationBoundaryGates =
   ∷ []
 
 data MeditationSafetyRoute : Set where
-  observeLabelMetaboliseRoute :
-    MeditationSafetyRoute
+  observeLabelMetaboliseRoute : MeditationSafetyRoute
 
-  groundNarrowOpenEyesMoveSeekSupportRoute :
-    MeditationSafetyRoute
+  groundNarrowOpenEyesMoveSeekSupportRoute : MeditationSafetyRoute
 
-  refuseDeepeningReturnExternalCarrierRoute :
-    MeditationSafetyRoute
+  refuseDeepeningReturnExternalCarrierRoute : MeditationSafetyRoute
 
 canonicalMeditationSafetyRoutes : List MeditationSafetyRoute
 canonicalMeditationSafetyRoutes =

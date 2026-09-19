@@ -28,26 +28,19 @@ listCount (_ ∷ xs) =
 -- Routes.
 
 data PrimeFibreRoute : Set where
-  candidateOnlyRoute :
-    PrimeFibreRoute
+  candidateOnlyRoute : PrimeFibreRoute
 
-  singleAxisProjectionRoute :
-    PrimeFibreRoute
+  singleAxisProjectionRoute : PrimeFibreRoute
 
-  identityCollapseRoute :
-    PrimeFibreRoute
+  identityCollapseRoute : PrimeFibreRoute
 
-  causalProofRoute :
-    PrimeFibreRoute
+  causalProofRoute : PrimeFibreRoute
 
-  socialAuthorityRoute :
-    PrimeFibreRoute
+  socialAuthorityRoute : PrimeFibreRoute
 
-  legalAuthorityRoute :
-    PrimeFibreRoute
+  legalAuthorityRoute : PrimeFibreRoute
 
-  clinicalAuthorityRoute :
-    PrimeFibreRoute
+  clinicalAuthorityRoute : PrimeFibreRoute
 
 data Never : Set where
 
@@ -93,26 +86,19 @@ clinicalAuthorityRouteRejected :
 clinicalAuthorityRouteRejected impossible = impossible
 
 data RouteGate : Set where
-  candidateOnlyGate :
-    RouteGate
+  candidateOnlyGate : RouteGate
 
-  singleAxisProjectionBlockedGate :
-    RouteGate
+  singleAxisProjectionBlockedGate : RouteGate
 
-  identityCollapseBlockedGate :
-    RouteGate
+  identityCollapseBlockedGate : RouteGate
 
-  causalProofBlockedGate :
-    RouteGate
+  causalProofBlockedGate : RouteGate
 
-  socialAuthorityBlockedGate :
-    RouteGate
+  socialAuthorityBlockedGate : RouteGate
 
-  legalAuthorityBlockedGate :
-    RouteGate
+  legalAuthorityBlockedGate : RouteGate
 
-  clinicalAuthorityBlockedGate :
-    RouteGate
+  clinicalAuthorityBlockedGate : RouteGate
 
 canonicalRouteGates : List RouteGate
 canonicalRouteGates =
@@ -129,41 +115,29 @@ canonicalRouteGates =
 -- Axis and prime data.
 
 data IntersectionalAxis : Set where
-  raceAxis :
-    IntersectionalAxis
+  raceAxis : IntersectionalAxis
 
-  classAxis :
-    IntersectionalAxis
+  classAxis : IntersectionalAxis
 
-  genderAxis :
-    IntersectionalAxis
+  genderAxis : IntersectionalAxis
 
-  sexualityAxis :
-    IntersectionalAxis
+  sexualityAxis : IntersectionalAxis
 
-  disabilityAxis :
-    IntersectionalAxis
+  disabilityAxis : IntersectionalAxis
 
-  neurotypeAxis :
-    IntersectionalAxis
+  neurotypeAxis : IntersectionalAxis
 
-  religionAxis :
-    IntersectionalAxis
+  religionAxis : IntersectionalAxis
 
-  colonialityAxis :
-    IntersectionalAxis
+  colonialityAxis : IntersectionalAxis
 
-  lawAxis :
-    IntersectionalAxis
+  lawAxis : IntersectionalAxis
 
-  landAxis :
-    IntersectionalAxis
+  landAxis : IntersectionalAxis
 
-  familyAxis :
-    IntersectionalAxis
+  familyAxis : IntersectionalAxis
 
-  institutionAxis :
-    IntersectionalAxis
+  institutionAxis : IntersectionalAxis
 
 canonicalIntersectionalAxes : List IntersectionalAxis
 canonicalIntersectionalAxes =
@@ -182,29 +156,21 @@ canonicalIntersectionalAxes =
   ∷ []
 
 data PrimeKind : Set where
-  prime2 :
-    PrimeKind
+  prime2 : PrimeKind
 
-  prime3 :
-    PrimeKind
+  prime3 : PrimeKind
 
-  prime5 :
-    PrimeKind
+  prime5 : PrimeKind
 
-  prime7 :
-    PrimeKind
+  prime7 : PrimeKind
 
-  prime11 :
-    PrimeKind
+  prime11 : PrimeKind
 
-  prime13 :
-    PrimeKind
+  prime13 : PrimeKind
 
-  prime17 :
-    PrimeKind
+  prime17 : PrimeKind
 
-  prime19 :
-    PrimeKind
+  prime19 : PrimeKind
 
 canonicalPrimeKinds : List PrimeKind
 canonicalPrimeKinds =
@@ -219,23 +185,17 @@ canonicalPrimeKinds =
   ∷ []
 
 data FibreKind : Set where
-  primeFibreKind :
-    FibreKind
+  primeFibreKind : FibreKind
 
-  productFibreKind :
-    FibreKind
+  productFibreKind : FibreKind
 
-  sharedRootClosenessKind :
-    FibreKind
+  sharedRootClosenessKind : FibreKind
 
-  singleAxisProjectionKind :
-    FibreKind
+  singleAxisProjectionKind : FibreKind
 
-  causalProofKind :
-    FibreKind
+  causalProofKind : FibreKind
 
-  authorityProjectionKind :
-    FibreKind
+  authorityProjectionKind : FibreKind
 
 canonicalFibreKinds : List FibreKind
 canonicalFibreKinds =
@@ -248,17 +208,13 @@ canonicalFibreKinds =
   ∷ []
 
 data AddressKind : Set where
-  axisAddressKind :
-    AddressKind
+  axisAddressKind : AddressKind
 
-  primeFibreAddressKind :
-    AddressKind
+  primeFibreAddressKind : AddressKind
 
-  productFibreAddressKind :
-    AddressKind
+  productFibreAddressKind : AddressKind
 
-  sharedRootAddressKind :
-    AddressKind
+  sharedRootAddressKind : AddressKind
 
 canonicalAddressKinds : List AddressKind
 canonicalAddressKinds =
@@ -580,29 +536,21 @@ canonicalAxisPrimeProductRowCertificates =
 -- Projection rows and blocked projections.
 
 data ProjectionRoute : Set where
-  candidateProjectionRoute :
-    ProjectionRoute
+  candidateProjectionRoute : ProjectionRoute
 
-  singleAxisProjectionRoute :
-    ProjectionRoute
+  singleAxisProjectionRoute : ProjectionRoute
 
-  productCollapseRoute :
-    ProjectionRoute
+  productCollapseRoute : ProjectionRoute
 
-  identityProjectionRoute :
-    ProjectionRoute
+  identityProjectionRoute : ProjectionRoute
 
-  causalProjectionRoute :
-    ProjectionRoute
+  causalProjectionRoute : ProjectionRoute
 
-  socialAuthorityProjectionRoute :
-    ProjectionRoute
+  socialAuthorityProjectionRoute : ProjectionRoute
 
-  legalAuthorityProjectionRoute :
-    ProjectionRoute
+  legalAuthorityProjectionRoute : ProjectionRoute
 
-  clinicalAuthorityProjectionRoute :
-    ProjectionRoute
+  clinicalAuthorityProjectionRoute : ProjectionRoute
 
 AdmissibleProjectionRoute :
   ProjectionRoute →
@@ -652,26 +600,19 @@ clinicalAuthorityProjectionRouteRejected :
 clinicalAuthorityProjectionRouteRejected impossible = impossible
 
 data ProjectionRowKind : Set where
-  singleAxisBlockedProjectionRowKind :
-    ProjectionRowKind
+  singleAxisBlockedProjectionRowKind : ProjectionRowKind
 
-  productFibreBlockedProjectionRowKind :
-    ProjectionRowKind
+  productFibreBlockedProjectionRowKind : ProjectionRowKind
 
-  identityCollapseBlockedProjectionRowKind :
-    ProjectionRowKind
+  identityCollapseBlockedProjectionRowKind : ProjectionRowKind
 
-  causalProofBlockedProjectionRowKind :
-    ProjectionRowKind
+  causalProofBlockedProjectionRowKind : ProjectionRowKind
 
-  socialAuthorityBlockedProjectionRowKind :
-    ProjectionRowKind
+  socialAuthorityBlockedProjectionRowKind : ProjectionRowKind
 
-  legalAuthorityBlockedProjectionRowKind :
-    ProjectionRowKind
+  legalAuthorityBlockedProjectionRowKind : ProjectionRowKind
 
-  clinicalAuthorityBlockedProjectionRowKind :
-    ProjectionRowKind
+  clinicalAuthorityBlockedProjectionRowKind : ProjectionRowKind
 
 canonicalProjectionRowKinds : List ProjectionRowKind
 canonicalProjectionRowKinds =

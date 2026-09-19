@@ -21,10 +21,10 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 ------------------------------------------------------------------------
 
 data ReopeningTrigger : Set where
-  materialConditionChanged
-  tensionActivated
-  futureConsumerCollision
-  interpretationReframed
+  materialConditionChanged : ReopeningTrigger
+  tensionActivated : ReopeningTrigger
+  futureConsumerCollision : ReopeningTrigger
+  interpretationReframed : ReopeningTrigger
   : ReopeningTrigger
 
 record DialecticalSourceReopening : Set where

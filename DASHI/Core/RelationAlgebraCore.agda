@@ -86,26 +86,19 @@ rangeIsDomainOfConverse =
 -- Authority boundary.
 
 data RelationAlgebraSurfaceKind : Set where
-  converseSurface :
-    RelationAlgebraSurfaceKind
+  converseSurface : RelationAlgebraSurfaceKind
 
-  domainSurface :
-    RelationAlgebraSurfaceKind
+  domainSurface : RelationAlgebraSurfaceKind
 
-  rangeSurface :
-    RelationAlgebraSurfaceKind
+  rangeSurface : RelationAlgebraSurfaceKind
 
-  fieldSurface :
-    RelationAlgebraSurfaceKind
+  fieldSurface : RelationAlgebraSurfaceKind
 
-  relativeProductSurface :
-    RelationAlgebraSurfaceKind
+  relativeProductSurface : RelationAlgebraSurfaceKind
 
-  restrictionSurface :
-    RelationAlgebraSurfaceKind
+  restrictionSurface : RelationAlgebraSurfaceKind
 
-  subrelationSurface :
-    RelationAlgebraSurfaceKind
+  subrelationSurface : RelationAlgebraSurfaceKind
 
 canonicalRelationAlgebraSurfaceKinds :
   List RelationAlgebraSurfaceKind

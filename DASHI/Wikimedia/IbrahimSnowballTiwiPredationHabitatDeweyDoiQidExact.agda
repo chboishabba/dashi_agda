@@ -121,8 +121,8 @@ habitatSupportsPredation = Traversal.dashi-first-link-edge
 ------------------------------------------------------------------------
 
 data PredationHabitatSourceRole : Set where
-  predatorHabitatSelectionStudy
-  predatorAccessPopulationExperiment
+  predatorHabitatSelectionStudy : PredationHabitatSourceRole
+  predatorAccessPopulationExperiment : PredationHabitatSourceRole
   predatorOccupancyHabitatSurvey : PredationHabitatSourceRole
 
 record PredationHabitatPrimarySource : Set where

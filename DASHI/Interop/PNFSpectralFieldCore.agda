@@ -19,8 +19,7 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 -- or candidate search results into semantic truth, support, or admissibility.
 
 data PNFSpectralFieldStatus : Set where
-  checkedCoreSurface_noRuntimePromotion :
-    PNFSpectralFieldStatus
+  checkedCoreSurface_noRuntimePromotion : PNFSpectralFieldStatus
 
 data PredicateAtomRef : Set where
   predicateAtomRef : Nat → PredicateAtomRef
@@ -537,35 +536,25 @@ pnfSpectralFieldPromotionImpossible :
 pnfSpectralFieldPromotionImpossible ()
 
 data PNFSpectralFieldComponent : Set where
-  predicateAtomReferenceVocabulary :
-    PNFSpectralFieldComponent
+  predicateAtomReferenceVocabulary : PNFSpectralFieldComponent
 
-  predicatePNFReferenceVocabulary :
-    PNFSpectralFieldComponent
+  predicatePNFReferenceVocabulary : PNFSpectralFieldComponent
 
-  typedFibreAndResidualEdgeVocabulary :
-    PNFSpectralFieldComponent
+  typedFibreAndResidualEdgeVocabulary : PNFSpectralFieldComponent
 
-  braidPathAndSupportPacketVocabulary :
-    PNFSpectralFieldComponent
+  braidPathAndSupportPacketVocabulary : PNFSpectralFieldComponent
 
-  chamberProjectionOverResidualPNF :
-    PNFSpectralFieldComponent
+  chamberProjectionOverResidualPNF : PNFSpectralFieldComponent
 
-  evidenceProvenanceTimeBase :
-    PNFSpectralFieldComponent
+  evidenceProvenanceTimeBase : PNFSpectralFieldComponent
 
-  productBaseOverStructuralEvidence :
-    PNFSpectralFieldComponent
+  productBaseOverStructuralEvidence : PNFSpectralFieldComponent
 
-  canonicalProductProjectionReceipt :
-    PNFSpectralFieldComponent
+  canonicalProductProjectionReceipt : PNFSpectralFieldComponent
 
-  explicitEmbeddingBoundary :
-    PNFSpectralFieldComponent
+  explicitEmbeddingBoundary : PNFSpectralFieldComponent
 
-  receiptOnlyNoRuntimePromotion :
-    PNFSpectralFieldComponent
+  receiptOnlyNoRuntimePromotion : PNFSpectralFieldComponent
 
 canonicalPNFSpectralFieldComponents :
   List PNFSpectralFieldComponent

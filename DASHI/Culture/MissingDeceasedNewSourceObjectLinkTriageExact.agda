@@ -13,13 +13,13 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data SourceObjectRole : Set where
-  primaryRetainedScience
-  primaryRetainedApplicationObject
-  primaryInstitutionalProgrammeObject
-  retainedEventLead
-  secondaryCaseAggregation
-  nonRosterScienceControl
-  speculativeSynthesis
+  primaryRetainedScience : SourceObjectRole
+  primaryRetainedApplicationObject : SourceObjectRole
+  primaryInstitutionalProgrammeObject : SourceObjectRole
+  retainedEventLead : SourceObjectRole
+  secondaryCaseAggregation : SourceObjectRole
+  nonRosterScienceControl : SourceObjectRole
+  speculativeSynthesis : SourceObjectRole
   identityCollisionControl : SourceObjectRole
 
 record SourceObjectReceipt : Set where

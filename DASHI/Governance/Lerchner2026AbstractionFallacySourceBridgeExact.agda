@@ -91,6 +91,8 @@ record LerchnerSourceAuthorityBoundary : Set where
     sourceClaimSettlesMoralStatusPolicy : Bool
     sourceClaimSettlesMoralStatusPolicyIsFalse : sourceClaimSettlesMoralStatusPolicy ≡ false
 
+open LerchnerSourceAuthorityBoundary public
+
 canonicalLerchnerSourceAuthorityBoundary : LerchnerSourceAuthorityBoundary
 canonicalLerchnerSourceAuthorityBoundary =
   lerchner-source-authority-boundary

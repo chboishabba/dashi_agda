@@ -39,8 +39,7 @@ data ScaleBand : Set where
   megaScale : ScaleBand
 
 data GovernanceStyle : Set where
-  domesticDefensive commercialCompetitor sovereignFoundational :
-    GovernanceStyle
+  domesticDefensive commercialCompetitor sovereignFoundational : GovernanceStyle
 
 data CoreDirective : Set where
   decoupleAndHide : CoreDirective
@@ -53,8 +52,7 @@ data StrategicVector : Set where
   dominantSovereign : StrategicVector
 
 data AuthoritySurface : Set where
-  householdOrBlock farmOrCommercialOperator sovereignTerritory :
-    AuthoritySurface
+  householdOrBlock farmOrCommercialOperator sovereignTerritory : AuthoritySurface
 
 data SubstrateBinding : Set where
   domesticPatch : SubstrateBinding

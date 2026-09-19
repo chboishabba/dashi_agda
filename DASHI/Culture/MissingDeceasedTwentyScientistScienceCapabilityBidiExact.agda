@@ -809,11 +809,11 @@ possibleApplicationFactors = Q.factorsThrough projectedPossible proof
 ------------------------------------------------------------------------
 
 data IntegratedSubsystemRole : Set where
-  plasmaModeling powerAndControls molecularDiagnostics extremeMaterials
-  astronomicalInference planetaryCharacterisation structuralResilience
-  acceleratorDiagnostics chemicalBiology mechanismDiscrimination
-  hardwareVerification robustDecisionAI thermalMaterials dataSecurityGovernance
-  spaceWeatherForecasting autonomousMobility photochemicalSensing
+  plasmaModeling powerAndControls molecularDiagnostics extremeMaterials : IntegratedSubsystemRole
+  astronomicalInference planetaryCharacterisation structuralResilience : IntegratedSubsystemRole
+  acceleratorDiagnostics chemicalBiology mechanismDiscrimination : IntegratedSubsystemRole
+  hardwareVerification robustDecisionAI thermalMaterials dataSecurityGovernance : IntegratedSubsystemRole
+  spaceWeatherForecasting autonomousMobility photochemicalSensing : IntegratedSubsystemRole
   metamaterialDesign highSpeedFlowControl : IntegratedSubsystemRole
 
 record IntegratedFibreUse : Set where

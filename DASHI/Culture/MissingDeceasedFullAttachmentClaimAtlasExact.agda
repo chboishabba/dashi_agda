@@ -14,25 +14,25 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AttachmentClaimClass : Set where
-  maiwaldPublicScience
-  rosterAndArea51Narrative
-  engineeringStackConvergence
-  nonScientistOperationalSweep
-  southwestGeography
-  reportedForensicAnomaly
-  evidentiaryGap
-  oxygenRichAlloy
-  singleCrystalMetamaterialConflation
-  anomalousMaterialSample
-  informationPoisoning
-  effectiveGravityRepulsion
-  timeCrystalPropulsion
-  qetScaleUp
-  wormholeScaleUp
-  disclosureAssetConsolidation
-  counterEspionageSweep
-  armyCommercialTransfer
-  congressionalHoneyPot
+  maiwaldPublicScience : AttachmentClaimClass
+  rosterAndArea51Narrative : AttachmentClaimClass
+  engineeringStackConvergence : AttachmentClaimClass
+  nonScientistOperationalSweep : AttachmentClaimClass
+  southwestGeography : AttachmentClaimClass
+  reportedForensicAnomaly : AttachmentClaimClass
+  evidentiaryGap : AttachmentClaimClass
+  oxygenRichAlloy : AttachmentClaimClass
+  singleCrystalMetamaterialConflation : AttachmentClaimClass
+  anomalousMaterialSample : AttachmentClaimClass
+  informationPoisoning : AttachmentClaimClass
+  effectiveGravityRepulsion : AttachmentClaimClass
+  timeCrystalPropulsion : AttachmentClaimClass
+  qetScaleUp : AttachmentClaimClass
+  wormholeScaleUp : AttachmentClaimClass
+  disclosureAssetConsolidation : AttachmentClaimClass
+  counterEspionageSweep : AttachmentClaimClass
+  armyCommercialTransfer : AttachmentClaimClass
+  congressionalHoneyPot : AttachmentClaimClass
   archivePrediction : AttachmentClaimClass
 
 record AttachmentClaim : Set where

@@ -33,8 +33,8 @@ data PlantPart : Set where
   wholePlant stem leaf flower fruitPart seedPart : PlantPart
 
 data InvestmentHistory : Set where
-  intactDevelopment
-  repairedAfterDamage
+  intactDevelopment : InvestmentHistory
+  repairedAfterDamage : InvestmentHistory
   repeatedPestPressure : InvestmentHistory
 
 data FutureVulnerability : Set where

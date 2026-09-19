@@ -19,15 +19,15 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data PrimaryDependencyDomain : Set where
-  fireToFuel
-  grazingToFuel
-  nitrogenToCropSoil
+  fireToFuel : PrimaryDependencyDomain
+  grazingToFuel : PrimaryDependencyDomain
+  nitrogenToCropSoil : PrimaryDependencyDomain
   hydraulicHeadToWaterService : PrimaryDependencyDomain
 
 data PrimaryEvidenceDesign : Set where
-  prescribedFireFieldExperiment
-  replicatedFactorialFieldExperiment
-  isotopeTracerFieldExperiment
+  prescribedFireFieldExperiment : PrimaryEvidenceDesign
+  replicatedFactorialFieldExperiment : PrimaryEvidenceDesign
+  isotopeTracerFieldExperiment : PrimaryEvidenceDesign
   hydraulicPerformanceExperiment : PrimaryEvidenceDesign
 
 record PrimaryDependencySource : Set where

@@ -71,8 +71,8 @@ understoreySupportsRabbitRat = Traversal.dashi-first-link-edge
 ------------------------------------------------------------------------
 
 data TiwiMediationSourceRole : Set where
-  longTermDistributionPredationStudy
-  hollowDependentMammalUnderstoreyStudy
+  longTermDistributionPredationStudy : TiwiMediationSourceRole
+  hollowDependentMammalUnderstoreyStudy : TiwiMediationSourceRole
   adjacentIslandPopulationTrajectoryStudy : TiwiMediationSourceRole
 
 record TiwiMediationPrimarySource : Set where

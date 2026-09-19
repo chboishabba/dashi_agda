@@ -46,12 +46,12 @@ routeFromOutcome Wildcard.ambiguousResidual = residualLegacyRoute
 
 data HybridDecision (Observation Residual : Set) : Set where
   boundedCertified :
-    (boundedObservation legacyObservation : Observation) →
+  (boundedObservation legacyObservation : Observation) →
     boundedObservation ≡ legacyObservation →
     HybridDecision Observation Residual
 
   residualFallback :
-    (legacyObservation : Observation) →
+  (legacyObservation : Observation) →
     Residual →
     HybridDecision Observation Residual
 

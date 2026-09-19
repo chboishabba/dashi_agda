@@ -8,6 +8,7 @@ import DASHI.Biology.StudentVoiceEpistemicAgencyBridge as Voice
 import DASHI.Biology.BrownKimberGovernanceProfileBridge as BrownKimber
 import DASHI.Biology.AliceBrownDissentGovernanceCrossPollinationExact as Dissent
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.EpistemicInquiryGovernance
 
 ------------------------------------------------------------------------
 -- JANE ELLIOTT x ALICE BROWN
@@ -22,8 +23,8 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 ------------------------------------------------------------------------
 
 data ElliottAliceCoordinate : Set where
-  assignedCategory authorityTreatment participantExperience peerResponse
-  performanceAffect voice contestability framingPower interpretationPower
+  assignedCategory authorityTreatment participantExperience peerResponse : ElliottAliceCoordinate
+  performanceAffect voice contestability framingPower interpretationPower : ElliottAliceCoordinate
   downstreamUse revisionPower : ElliottAliceCoordinate
 
 record ElliottAliceBridgeBoundary : Set where

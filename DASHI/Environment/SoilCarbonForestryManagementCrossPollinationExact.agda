@@ -17,25 +17,25 @@ import DASHI.Environment.SoilBiogeochemistryProcessNetworkExact as Soil
 ------------------------------------------------------------------------
 
 data SoilCarbonManagementLever : Set where
-  retainLivingRoots
-  retainSurfaceResidue
-  returnWoodyBiomass
-  addStableCarbonMaterial
-  reduceMechanicalDisturbance
-  diversifyPlantCommunity
-  integrateWoodyPerennials
-  manageGrazingReturn
-  increaseOrganicAmendment
+  retainLivingRoots : SoilCarbonManagementLever
+  retainSurfaceResidue : SoilCarbonManagementLever
+  returnWoodyBiomass : SoilCarbonManagementLever
+  addStableCarbonMaterial : SoilCarbonManagementLever
+  reduceMechanicalDisturbance : SoilCarbonManagementLever
+  diversifyPlantCommunity : SoilCarbonManagementLever
+  integrateWoodyPerennials : SoilCarbonManagementLever
+  manageGrazingReturn : SoilCarbonManagementLever
+  increaseOrganicAmendment : SoilCarbonManagementLever
   manageForestRegeneration : SoilCarbonManagementLever
 
 data CarbonMeasurementCoordinate : Set where
-  soilOrganicCarbonStock
-  soilOrganicMatterProxy
-  abovegroundBiomassCarbon
-  belowgroundBiomassCarbon
-  deadwoodCarbon
-  litterCarbon
-  greenhouseGasFlux
+  soilOrganicCarbonStock : CarbonMeasurementCoordinate
+  soilOrganicMatterProxy : CarbonMeasurementCoordinate
+  abovegroundBiomassCarbon : CarbonMeasurementCoordinate
+  belowgroundBiomassCarbon : CarbonMeasurementCoordinate
+  deadwoodCarbon : CarbonMeasurementCoordinate
+  litterCarbon : CarbonMeasurementCoordinate
+  greenhouseGasFlux : CarbonMeasurementCoordinate
   wholeSystemCarbonBalance : CarbonMeasurementCoordinate
 
 record CarbonManagementCandidate : Set where

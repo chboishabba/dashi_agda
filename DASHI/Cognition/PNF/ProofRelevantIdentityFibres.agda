@@ -113,8 +113,7 @@ record IdentityWitness : Set where
 open IdentityWitness public
 
 data WitnessAdmission : Set where
-  candidateWitness acceptedWitness rejectedWitness supersededWitness :
-    WitnessAdmission
+  candidateWitness acceptedWitness rejectedWitness supersededWitness : WitnessAdmission
 
 record AdmittedIdentityWitness : Set where
   constructor admittedIdentityWitness

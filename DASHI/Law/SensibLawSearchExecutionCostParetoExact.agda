@@ -22,12 +22,12 @@ import DASHI.Law.SensibLawProofSearchParetoSaturationExact as SearchPareto
 ------------------------------------------------------------------------
 
 data ExecutionStrategy : Set where
-  localFixtureExecution
-  persistedAuthorityReceiptExecution
-  localWorldGraphExecution
-  governedLiveSearchExecution
-  governedExactFetchExecution
-  governedCitationFollowExecution
+  localFixtureExecution : ExecutionStrategy
+  persistedAuthorityReceiptExecution : ExecutionStrategy
+  localWorldGraphExecution : ExecutionStrategy
+  governedLiveSearchExecution : ExecutionStrategy
+  governedExactFetchExecution : ExecutionStrategy
+  governedCitationFollowExecution : ExecutionStrategy
   : ExecutionStrategy
 
 record LegalExecutionCostVector : Set where

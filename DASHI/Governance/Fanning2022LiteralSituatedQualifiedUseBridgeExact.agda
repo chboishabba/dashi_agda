@@ -29,11 +29,11 @@ import DASHI.Governance.SafeJustSituatedClaimAuthorityBridgeExact as Authority
 
 data BAUProjectionDatum (datum : Data.CountryYearDatum) : Set where
   medianProjectionDatum :
-    Data.CountryYearDatum.authority datum ≡ Data.projectedMedian →
-    BAUProjectionDatum datum
+  Data.CountryYearDatum.authority datum ≡ Data.projectedMedian → :
+  BAUProjectionDatum datum :
   lower66ProjectionDatum :
-    Data.CountryYearDatum.authority datum ≡ Data.projectedLower66 →
-    BAUProjectionDatum datum
+  Data.CountryYearDatum.authority datum ≡ Data.projectedLower66 → :
+  BAUProjectionDatum datum :
   upper66ProjectionDatum :
     Data.CountryYearDatum.authority datum ≡ Data.projectedUpper66 →
     BAUProjectionDatum datum

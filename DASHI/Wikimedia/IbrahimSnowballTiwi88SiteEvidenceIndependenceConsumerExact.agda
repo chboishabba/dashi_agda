@@ -49,7 +49,7 @@ penton2021Source = Tiwi88.penton2021
 ------------------------------------------------------------------------
 
 data ThreePaperCase : Set where
-  threeIndependentStudyCarriers
+  threeIndependentStudyCarriers : ThreePaperCase
   threePapersShared88SiteCarrier : ThreePaperCase
 
 data PublicationCountSurface : Set where threePublishedAnalyses : PublicationCountSurface
@@ -80,7 +80,7 @@ publicationMultiplicityCannotFactorStudyIndependence =
 ------------------------------------------------------------------------
 
 data SharedCarrierCase : Set where
-  same88DifferentResponseA
+  same88DifferentResponseA : SharedCarrierCase
   same88DifferentResponseB : SharedCarrierCase
 
 data SiteCarrierSurface : Set where same2015Melville88Carrier : SiteCarrierSurface
@@ -108,7 +108,7 @@ same88SiteCarrierCannotFactorAnalysisRole =
 ------------------------------------------------------------------------
 
 data AgreementCase : Set where
-  agreementIndependentData
+  agreementIndependentData : AgreementCase
   agreementSharedCarrier : AgreementCase
 
 data AgreementSurface : Set where sameCrossPaperAgreement : AgreementSurface

@@ -19,130 +19,89 @@ open import Data.List.Base using (List; _∷_; [])
 -- invertible reconstruction.
 
 data ObservationDomain : Set where
-  itirPNFDomain :
-    ObservationDomain
+  itirPNFDomain : ObservationDomain
 
-  nashiDomain :
-    ObservationDomain
+  nashiDomain : ObservationDomain
 
-  seaMeInItDomain :
-    ObservationDomain
+  seaMeInItDomain : ObservationDomain
 
-  brainDomain :
-    ObservationDomain
+  brainDomain : ObservationDomain
 
-  avianCompassDomain :
-    ObservationDomain
+  avianCompassDomain : ObservationDomain
 
-  wikidataDomain :
-    ObservationDomain
+  wikidataDomain : ObservationDomain
 
-  wikidataWikipediaJoinDomain :
-    ObservationDomain
+  wikidataWikipediaJoinDomain : ObservationDomain
 
-  lightTransportDomain :
-    ObservationDomain
+  lightTransportDomain : ObservationDomain
 
-  lesGlesWorldTransportDomain :
-    ObservationDomain
+  lesGlesWorldTransportDomain : ObservationDomain
 
-  quantumPathFibreDomain :
-    ObservationDomain
+  quantumPathFibreDomain : ObservationDomain
 
-  stationaryPhaseToyReceiptDomain :
-    ObservationDomain
+  stationaryPhaseToyReceiptDomain : ObservationDomain
 
-  videoCodecDomain :
-    ObservationDomain
+  videoCodecDomain : ObservationDomain
 
-  chemistryRightLimitsDomain :
-    ObservationDomain
+  chemistryRightLimitsDomain : ObservationDomain
 
-  proteinHormoneChemistryCellDomain :
-    ObservationDomain
+  proteinHormoneChemistryCellDomain : ObservationDomain
 
-  developmentalGenomicInverseDomain :
-    ObservationDomain
+  developmentalGenomicInverseDomain : ObservationDomain
 
-  genomeSensorimotorConstraintDomain :
-    ObservationDomain
+  genomeSensorimotorConstraintDomain : ObservationDomain
 
-  bioAnimalexicDomain :
-    ObservationDomain
+  bioAnimalexicDomain : ObservationDomain
 
-  physicsChemistryBiologyDNAAggregateDomain :
-    ObservationDomain
+  physicsChemistryBiologyDNAAggregateDomain : ObservationDomain
 
-  persistentComputationDomain :
-    ObservationDomain
+  persistentComputationDomain : ObservationDomain
 
-  aggregateBidiTranslationDomain :
-    ObservationDomain
+  aggregateBidiTranslationDomain : ObservationDomain
 
-  evolutionaryMDLTransportDomain :
-    ObservationDomain
+  evolutionaryMDLTransportDomain : ObservationDomain
 
-  multiObserverScienceDomain :
-    ObservationDomain
+  multiObserverScienceDomain : ObservationDomain
 
-  freeWillPNFBranchDomain :
-    ObservationDomain
+  freeWillPNFBranchDomain : ObservationDomain
 
-  inverseCultureOperatorDomain :
-    ObservationDomain
+  inverseCultureOperatorDomain : ObservationDomain
 
-  observerCultureEvolutionAggregateDomain :
-    ObservationDomain
+  observerCultureEvolutionAggregateDomain : ObservationDomain
 
-  operatorInvariantEquivalenceDomain :
-    ObservationDomain
+  operatorInvariantEquivalenceDomain : ObservationDomain
 
-  metaphorAlignmentDomain :
-    ObservationDomain
+  metaphorAlignmentDomain : ObservationDomain
 
-  succinctCommunicationDomain :
-    ObservationDomain
+  succinctCommunicationDomain : ObservationDomain
 
-  misunderstandingQuotientDomain :
-    ObservationDomain
+  misunderstandingQuotientDomain : ObservationDomain
 
-  semanticOperatorAlignmentAggregateDomain :
-    ObservationDomain
+  semanticOperatorAlignmentAggregateDomain : ObservationDomain
 
-  fibrePressureMetricDomain :
-    ObservationDomain
+  fibrePressureMetricDomain : ObservationDomain
 
-  knotWeaveTopologyCultureDomain :
-    ObservationDomain
+  knotWeaveTopologyCultureDomain : ObservationDomain
 
 data PromotionBoundary : Set where
-  diagnosticOnly :
-    PromotionBoundary
+  diagnosticOnly : PromotionBoundary
 
-  candidateSurfaceOnly :
-    PromotionBoundary
+  candidateSurfaceOnly : PromotionBoundary
 
-  promotedArtifact :
-    PromotionBoundary
+  promotedArtifact : PromotionBoundary
 
-  nonPromotingObservation :
-    PromotionBoundary
+  nonPromotingObservation : PromotionBoundary
 
 data NonClaimBoundary : Set where
-  quotientIsNotInjective :
-    NonClaimBoundary
+  quotientIsNotInjective : NonClaimBoundary
 
-  correlationIsNotCausation :
-    NonClaimBoundary
+  correlationIsNotCausation : NonClaimBoundary
 
-  behaviorIsNotQualia :
-    NonClaimBoundary
+  behaviorIsNotQualia : NonClaimBoundary
 
-  reportIsNotGroundTruth :
-    NonClaimBoundary
+  reportIsNotGroundTruth : NonClaimBoundary
 
-  localReceiptIsNotGlobalOntology :
-    NonClaimBoundary
+  localReceiptIsNotGlobalOntology : NonClaimBoundary
 
 record ObservationTransportSurface : Set₁ where
   field
@@ -247,8 +206,7 @@ record JointObservationNarrowing
 open JointObservationNarrowing public
 
 data BoundaryAcknowledgement : Set where
-  acknowledged :
-    BoundaryAcknowledgement
+  acknowledged : BoundaryAcknowledgement
 
 record ObservationTransportGovernance
     (surface : ObservationTransportSurface) : Set where

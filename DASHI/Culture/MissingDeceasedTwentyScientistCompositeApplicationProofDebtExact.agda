@@ -19,7 +19,7 @@ import DASHI.Culture.MissingDeceasedTwentyScientistEmbodiedReferenceRuntimeBidiE
 ------------------------------------------------------------------------
 
 data ProofDebtKind : Set where
-  identityHardGate authorshipHardGate sourceReplayDebt calibrationDebt
+  identityHardGate authorshipHardGate sourceReplayDebt calibrationDebt : ProofDebtKind
   qualificationDebt operatingWindowDebt validationDebt custodyDebt : ProofDebtKind
 
 record ProofDebtItem : Set where

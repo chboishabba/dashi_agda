@@ -9,9 +9,9 @@ module DASHI.Cognition.PNF.GenericExpectedFibreRateExact where
 -- conditional entropy, not a Shannon coding theorem.
 ------------------------------------------------------------------------
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_≤_; _+_; _*_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
-open import Data.Rational.Tactic.RingSolver using (solve-∀)
+import Data.Rational.Properties as ℚP
 
 record FibreRateAtom : Set where
   constructor fibreRateAtom
@@ -66,16 +66,17 @@ constantRateExpectation r (a ∷ as) =
 
 constantRateFactors : (r : ℚ) (atoms : List ProbabilityAtom) →
   constantRateExpectation r atoms ≡ probabilityTotal atoms * r
-constantRateFactors r [] = solve-∀
+constantRateFactors r [] = sym (ℚP.*-zeroˡ r)
 constantRateFactors r (a ∷ as)
-  rewrite constantRateFactors r as = solve-∀
+  rewrite constantRateFactors r as =
+    sym (ℚP.*-distribʳ-+ r (probabilityMass a) (probabilityTotal as))
 
 normalizedConstantRateIsRate :
   (r : ℚ) (atoms : List ProbabilityAtom) →
   probabilityTotal atoms ≡ 1ℚ →
   constantRateExpectation r atoms ≡ r
 normalizedConstantRateIsRate r atoms normalizedMass
-  rewrite constantRateFactors r atoms | normalizedMass = solve-∀
+  rewrite constantRateFactors r atoms | normalizedMass = ℚP.*-identityˡ r
 
 ------------------------------------------------------------------------
 -- Fibre-local sparsity: a zero-rate fibre contributes exactly zero regardless
@@ -83,7 +84,7 @@ normalizedConstantRateIsRate r atoms normalizedMass
 ------------------------------------------------------------------------
 
 zeroRateContribution : (p : ℚ) → p * 0ℚ ≡ 0ℚ
-zeroRateContribution p = solve-∀
+zeroRateContribution p = ℚP.*-zeroʳ p
 
 ------------------------------------------------------------------------
 -- Three-fibre specialization.  This strictly generalizes the signed-zero
@@ -114,7 +115,12 @@ orientedZeroNormalizedExpectedRate :
       negativeMass zeroMass positiveMass
       0ℚ 1ℚ 0ℚ
       norm) ≡ zeroMass
-orientedZeroNormalizedExpectedRate negativeMass zeroMass positiveMass norm = solve-∀
+orientedZeroNormalizedExpectedRate negativeMass zeroMass positiveMass norm
+  rewrite ℚP.*-zeroʳ negativeMass
+        | ℚP.*-identityʳ zeroMass
+        | ℚP.*-zeroʳ positiveMass
+        | ℚP.+-identityˡ zeroMass
+        | ℚP.+-identityʳ zeroMass = refl
 
 ------------------------------------------------------------------------
 -- Boundary: these are expected fixed local widths.  Prefix-code optimality and

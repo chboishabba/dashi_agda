@@ -134,8 +134,8 @@ coSmokeGlyphosateFalseDominanceWitness = cross-consumer-collision
 ------------------------------------------------------------------------
 
 data MetaConsumer : Set where
-  unresolvedRiskReductionPerResearchBurden
-  regulatoryBlindSpotClosure
+  unresolvedRiskReductionPerResearchBurden : MetaConsumer
+  regulatoryBlindSpotClosure : MetaConsumer
   inhalationExposureClosure : MetaConsumer
 
 record RoadmapPreference : Set where

@@ -23,25 +23,25 @@ import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
 ------------------------------------------------------------------------
 
 data OEISFamily : Set where
-  powerSequence
-  representationDimension
-  lieInvariant
-  rootWeylCoxeter
-  latticeTheta
-  modularCoefficient
-  divisorFactor
-  finiteFieldProjective
-  partitionCombinatorics
-  physicalCount
+  powerSequence : OEISFamily
+  representationDimension : OEISFamily
+  lieInvariant : OEISFamily
+  rootWeylCoxeter : OEISFamily
+  latticeTheta : OEISFamily
+  modularCoefficient : OEISFamily
+  divisorFactor : OEISFamily
+  finiteFieldProjective : OEISFamily
+  partitionCombinatorics : OEISFamily
+  physicalCount : OEISFamily
   otherTypedFamily : OEISFamily
 
 data TypedMatchStrength : Set where
-  exactSameObject
-  directTypedRole
-  derivedTypedRole
-  candidateRole
-  collisionOnly
-  negativeControl
+  exactSameObject : TypedMatchStrength
+  directTypedRole : TypedMatchStrength
+  derivedTypedRole : TypedMatchStrength
+  candidateRole : TypedMatchStrength
+  collisionOnly : TypedMatchStrength
+  negativeControl : TypedMatchStrength
   unqueried : TypedMatchStrength
 
 record TypedOEISRole : Set where
@@ -342,11 +342,11 @@ knownTypedRoles =
 ------------------------------------------------------------------------
 
 data AuditStage : Set where
-  locateRepoRole
-  queryTypedFamily
-  verifyExactIndexOrInvariant
-  attachPrimarySourceQidDewey
-  testSameCarrier
+  locateRepoRole : AuditStage
+  queryTypedFamily : AuditStage
+  verifyExactIndexOrInvariant : AuditStage
+  attachPrimarySourceQidDewey : AuditStage
+  testSameCarrier : AuditStage
   testActionOrIntertwiner : AuditStage
 
 canonicalAuditOrder : List AuditStage

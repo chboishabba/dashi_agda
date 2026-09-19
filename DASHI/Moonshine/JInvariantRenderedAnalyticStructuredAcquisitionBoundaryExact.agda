@@ -100,14 +100,10 @@ localTwentySevenIsNotGloballyReconstructive = true
 ------------------------------------------------------------------------
 
 data RenderedAnalyticAcquisitionResidual : Set where
-  missingRenderedPixelToAnalyticModularCoordinate :
-    RenderedAnalyticAcquisitionResidual
-  missingAnalyticModularCoordinateToStructuredJField :
-    RenderedAnalyticAcquisitionResidual
-  missingStructuredJFieldToOrbitIndexRecognizer :
-    RenderedAnalyticAcquisitionResidual
-  missingAnalyticFrickeFiniteTransportIntertwiner :
-    RenderedAnalyticAcquisitionResidual
+  missingRenderedPixelToAnalyticModularCoordinate : RenderedAnalyticAcquisitionResidual
+  missingAnalyticModularCoordinateToStructuredJField : RenderedAnalyticAcquisitionResidual
+  missingStructuredJFieldToOrbitIndexRecognizer : RenderedAnalyticAcquisitionResidual
+  missingAnalyticFrickeFiniteTransportIntertwiner : RenderedAnalyticAcquisitionResidual
 
 record RenderedAnalyticAcquisitionFrontier : Set where
   constructor rendered-analytic-acquisition-frontier

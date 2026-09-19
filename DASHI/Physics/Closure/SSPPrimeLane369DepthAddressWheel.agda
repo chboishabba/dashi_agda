@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans; cong)
 
 import DASHI.Biology.TernaryCantorWheelDiffusionExact as Cantor
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
@@ -39,15 +39,21 @@ wheelDepthCoordinate zero = mkWheelDepthCoordinate zero Wheel.phase-0
 wheelDepthCoordinate (suc d) =
   advanceWheelDepthCoordinate (wheelDepthCoordinate d)
 
+advanceResidualPhase :
+  (c : WheelDepthCoordinate) →
+  residualPhase (advanceWheelDepthCoordinate c) ≡ Wheel.nextDepthWheelPhase (residualPhase c)
+advanceResidualPhase (mkWheelDepthCoordinate q Wheel.phase-0) = refl
+advanceResidualPhase (mkWheelDepthCoordinate q Wheel.phase-1) = refl
+advanceResidualPhase (mkWheelDepthCoordinate q Wheel.phase-2) = refl
+
 wheelCoordinatePhaseMatchesDepth :
   (d : Nat) →
   residualPhase (wheelDepthCoordinate d) ≡ Wheel.depthWheelPhase d
 wheelCoordinatePhaseMatchesDepth zero = refl
-wheelCoordinatePhaseMatchesDepth (suc d)
-  with wheelDepthCoordinate d | wheelCoordinatePhaseMatchesDepth d
-... | mkWheelDepthCoordinate q Wheel.phase-0 | refl = refl
-... | mkWheelDepthCoordinate q Wheel.phase-1 | refl = refl
-... | mkWheelDepthCoordinate q Wheel.phase-2 | refl = refl
+wheelCoordinatePhaseMatchesDepth (suc d) =
+  trans
+    (advanceResidualPhase (wheelDepthCoordinate d))
+    (cong Wheel.nextDepthWheelPhase (wheelCoordinatePhaseMatchesDepth d))
 
 advanceCoordinateThree :
   (c : WheelDepthCoordinate) →

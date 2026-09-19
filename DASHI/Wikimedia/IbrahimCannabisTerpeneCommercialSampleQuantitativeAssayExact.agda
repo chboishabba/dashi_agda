@@ -59,11 +59,11 @@ wishart2024 = quantitative-composition-source
 ------------------------------------------------------------------------
 
 data CommercialSample : Set where
-  alienDawg
-  tangerineDream
-  sensiStar
-  quadra
-  gabriola
+  alienDawg : CommercialSample
+  tangerineDream : CommercialSample
+  sensiStar : CommercialSample
+  quadra : CommercialSample
+  gabriola : CommercialSample
   islandHoney : CommercialSample
 
 sampleLabel : CommercialSample → String
@@ -105,9 +105,9 @@ canonicalSampleCustody sample = sample-custody-receipt
 ------------------------------------------------------------------------
 
 data QuantifiedTerpene : Set where
-  betaMyrcene
-  rPlusLimonene
-  linalool
+  betaMyrcene : QuantifiedTerpene
+  rPlusLimonene : QuantifiedTerpene
+  linalool : QuantifiedTerpene
   transCaryophyllene : QuantifiedTerpene
 
 record TerpeneRegistryJoin : Set where
@@ -324,11 +324,11 @@ currentMechanismBridgeResidual = composition-to-mechanism-bridge
 ------------------------------------------------------------------------
 
 data CommercialAssayParetoTarget : Set where
-  quantitativeSameSampleTerpeneProfile
-  exactPerSampleCannabinoidVector
-  preparationTransformation
-  exposureTranslation
-  concentrationMatchedInteraction
+  quantitativeSameSampleTerpeneProfile : CommercialAssayParetoTarget
+  exactPerSampleCannabinoidVector : CommercialAssayParetoTarget
+  preparationTransformation : CommercialAssayParetoTarget
+  exposureTranslation : CommercialAssayParetoTarget
+  concentrationMatchedInteraction : CommercialAssayParetoTarget
   umbrellaEntourage : CommercialAssayParetoTarget
 
 record CommercialAssayParetoStep : Set where

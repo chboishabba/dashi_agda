@@ -78,9 +78,8 @@ forestEcologyQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data EcologySecondOrderNode : Set where
-  plantEcologyNode microbialEcologyNode aquaticEcologyNode freshwaterEcologyNode
-  ecohydrologyNode habitatNode nicheNode grasslandEcologyNode forestEcologyNode :
-  EcologySecondOrderNode
+  plantEcologyNode microbialEcologyNode aquaticEcologyNode freshwaterEcologyNode : EcologySecondOrderNode
+  ecohydrologyNode habitatNode nicheNode grasslandEcologyNode forestEcologyNode : EcologySecondOrderNode
 
 record EcologySecondOrderAudit : Set where
   constructor ecology-second-order-audit

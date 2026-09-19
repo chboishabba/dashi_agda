@@ -17,18 +17,18 @@ import DASHI.Wikimedia.IbrahimDisposableVapeChemicalCensusExperimentExact as Cen
 ------------------------------------------------------------------------
 
 data IdentityGrade : Set where
-  featureOnly
-  libraryCandidate
-  orthogonalSupport
-  standardConfirmed
+  featureOnly : IdentityGrade
+  libraryCandidate : IdentityGrade
+  orthogonalSupport : IdentityGrade
+  standardConfirmed : IdentityGrade
   matrixQuantified : IdentityGrade
 
 data OriginHypothesis : Set where
-  formulationIngredient
-  storageReaction
-  thermalReaction
-  deviceLeachable
-  concentrationByDepletion
+  formulationIngredient : OriginHypothesis
+  storageReaction : OriginHypothesis
+  thermalReaction : OriginHypothesis
+  deviceLeachable : OriginHypothesis
+  concentrationByDepletion : OriginHypothesis
   unresolvedOrigin : OriginHypothesis
 
 record UnknownFeatureReceipt : Set where

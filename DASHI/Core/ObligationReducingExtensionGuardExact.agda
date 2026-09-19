@@ -55,21 +55,21 @@ open ExposureReceipt public
 
 data ExtensionProgressReceipt : Set₁ where
   discharged :
-    {Obligation : Set} →
-    {liveBefore liveAfter : Obligation → Set} →
+  {Obligation : Set} →
+  {liveBefore liveAfter : Obligation → Set} →
     DischargeReceipt Obligation liveBefore liveAfter →
     ExtensionProgressReceipt
 
   refined :
-    {Fine Old New : Set} →
-    {oldObserve : Fine → Old} →
-    {newObserve : Fine → New} →
+  {Fine Old New : Set} →
+  {oldObserve : Fine → Old} →
+  {newObserve : Fine → New} →
     StrictObserverRefinementReceipt Fine Old New oldObserve newObserve →
     ExtensionProgressReceipt
 
   exposed :
-    {Obligation : Set} →
-    {visibleBefore visibleAfter : Obligation → Set} →
+  {Obligation : Set} →
+  {visibleBefore visibleAfter : Obligation → Set} →
     ExposureReceipt Obligation visibleBefore visibleAfter →
     ExtensionProgressReceipt
 

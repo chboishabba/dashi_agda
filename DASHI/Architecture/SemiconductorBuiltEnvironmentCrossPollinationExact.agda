@@ -13,12 +13,10 @@ import DASHI.Architecture.SpatialRealisationExact as Spatial
 ------------------------------------------------------------------------
 
 data ChipRepresentation : Set where
-  rtl netlist floorplan placementRouting maskGeometry fabricatedChip :
-    ChipRepresentation
+  rtl netlist floorplan placementRouting maskGeometry fabricatedChip : ChipRepresentation
 
 data BuiltRepresentation : Set where
-  brief coordinatedModel technicalModel construction asBuilt :
-    BuiltRepresentation
+  brief coordinatedModel technicalModel construction asBuilt : BuiltRepresentation
 
 nextChip : ChipRepresentation → ChipRepresentation
 nextChip rtl = netlist

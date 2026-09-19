@@ -31,53 +31,53 @@ import DASHI.Environment.NitrogenPathwayEnergeticMaterialComparisonExact as Nitr
 ------------------------------------------------------------------------
 
 data LandscapeDomain : Set where
-  hydrology
-  aquaticWaterQuality
-  fireRegime
-  grazing
-  fuel
-  soil
-  carbon
-  nitrogen
-  biodiversity
-  agroforestry
-  livestock
-  energy
-  passiveStorage
-  infrastructure
-  governanceAuthority
+  hydrology : LandscapeDomain
+  aquaticWaterQuality : LandscapeDomain
+  fireRegime : LandscapeDomain
+  grazing : LandscapeDomain
+  fuel : LandscapeDomain
+  soil : LandscapeDomain
+  carbon : LandscapeDomain
+  nitrogen : LandscapeDomain
+  biodiversity : LandscapeDomain
+  agroforestry : LandscapeDomain
+  livestock : LandscapeDomain
+  energy : LandscapeDomain
+  passiveStorage : LandscapeDomain
+  infrastructure : LandscapeDomain
+  governanceAuthority : LandscapeDomain
   economics : LandscapeDomain
 
 data LandscapeEvidenceRole : Set where
-  externalSourceObservation
-  directSiteMeasurement
-  modelOutput
-  causalEstimate
-  authorityReceipt
-  safetyLegalityReceipt
-  replicationObservation
-  transportObservation
+  externalSourceObservation : LandscapeEvidenceRole
+  directSiteMeasurement : LandscapeEvidenceRole
+  modelOutput : LandscapeEvidenceRole
+  causalEstimate : LandscapeEvidenceRole
+  authorityReceipt : LandscapeEvidenceRole
+  safetyLegalityReceipt : LandscapeEvidenceRole
+  replicationObservation : LandscapeEvidenceRole
+  transportObservation : LandscapeEvidenceRole
   adjacentMechanismEvidence : LandscapeEvidenceRole
 
 data DependencyKind : Set where
-  mechanisticDependency
-  conservationDependency
-  hydraulicDependency
-  energeticDependency
-  ecologicalDependency
-  failurePropagationDependency
-  causalDependency
-  authorityConditionDependency
-  serviceComparisonDependency
+  mechanisticDependency : DependencyKind
+  conservationDependency : DependencyKind
+  hydraulicDependency : DependencyKind
+  energeticDependency : DependencyKind
+  ecologicalDependency : DependencyKind
+  failurePropagationDependency : DependencyKind
+  causalDependency : DependencyKind
+  authorityConditionDependency : DependencyKind
+  serviceComparisonDependency : DependencyKind
   transportDependency : DependencyKind
 
 data DependencyStrength : Set where
-  exactSameObjectReceipt
-  directMeasurementReceipt
-  causalIdentificationReceipt
-  conservationReceipt
-  documentedEngineeringBridge
-  adjacentMechanismOnly
+  exactSameObjectReceipt : DependencyStrength
+  directMeasurementReceipt : DependencyStrength
+  causalIdentificationReceipt : DependencyStrength
+  conservationReceipt : DependencyStrength
+  documentedEngineeringBridge : DependencyStrength
+  adjacentMechanismOnly : DependencyStrength
   unresolvedCandidate : DependencyStrength
 
 record LandscapeEvidenceCell : Set where
@@ -147,8 +147,8 @@ record LandscapeDependencyEdge : Set where
 open LandscapeDependencyEdge public
 
 data LandscapeEdgeDisposition : Set where
-  survivesLandscapeDependencyQuotient
-  retainedAsAdjacentMechanismCandidate
+  survivesLandscapeDependencyQuotient : LandscapeEdgeDisposition
+  retainedAsAdjacentMechanismCandidate : LandscapeEdgeDisposition
   retainedAsUnresolvedCandidate : LandscapeEdgeDisposition
 
 edgeDisposition : LandscapeDependencyEdge → LandscapeEdgeDisposition
@@ -175,28 +175,28 @@ open SurvivingLandscapeDependency public
 ------------------------------------------------------------------------
 
 data WholeLandscapeGate : Set where
-  interventionIdentityGate
-  attributionEntitlementGate
-  culturalAuthorityGateWhenClaimed
-  safetyLegalityGate
-  sameSiteHistoryGate
-  waterHydrologyGate
-  fireExecutionGate
-  grazingExposureGate
-  fireGrazingCouplingGate
-  fuelStateGate
-  nitrogenDeliveryGate
-  nitrogenUptakeGate
-  soilResponseGate
-  carbonResponseGate
-  biodiversityResponseGate
-  livestockResponseGate
-  infrastructureReliabilityGate
-  energyServiceGate
-  economicBoundaryGate
-  causalIdentificationGate
-  replicationGate
-  transportGate
+  interventionIdentityGate : WholeLandscapeGate
+  attributionEntitlementGate : WholeLandscapeGate
+  culturalAuthorityGateWhenClaimed : WholeLandscapeGate
+  safetyLegalityGate : WholeLandscapeGate
+  sameSiteHistoryGate : WholeLandscapeGate
+  waterHydrologyGate : WholeLandscapeGate
+  fireExecutionGate : WholeLandscapeGate
+  grazingExposureGate : WholeLandscapeGate
+  fireGrazingCouplingGate : WholeLandscapeGate
+  fuelStateGate : WholeLandscapeGate
+  nitrogenDeliveryGate : WholeLandscapeGate
+  nitrogenUptakeGate : WholeLandscapeGate
+  soilResponseGate : WholeLandscapeGate
+  carbonResponseGate : WholeLandscapeGate
+  biodiversityResponseGate : WholeLandscapeGate
+  livestockResponseGate : WholeLandscapeGate
+  infrastructureReliabilityGate : WholeLandscapeGate
+  energyServiceGate : WholeLandscapeGate
+  economicBoundaryGate : WholeLandscapeGate
+  causalIdentificationGate : WholeLandscapeGate
+  replicationGate : WholeLandscapeGate
+  transportGate : WholeLandscapeGate
   recommendationGate : WholeLandscapeGate
 
 record WholeLandscapePaymentState : Set where

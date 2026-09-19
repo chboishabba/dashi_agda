@@ -23,11 +23,11 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data ContextRole : Set where
-  analyticalMethodsReview
-  standardisationReview
-  labelAccuracySystematicReview
-  commercialDiversityEmpirical
-  entourageEvidenceReview
+  analyticalMethodsReview : ContextRole
+  standardisationReview : ContextRole
+  labelAccuracySystematicReview : ContextRole
+  commercialDiversityEmpirical : ContextRole
+  entourageEvidenceReview : ContextRole
   currentAnalyticalFrameworkReview : ContextRole
 
 record PublicContextSource : Set where
@@ -128,15 +128,15 @@ shawkyEtAl2026 = public-context-source
 ------------------------------------------------------------------------
 
 data DiscrepancyCandidate : Set where
-  sourceVersionDifference
-  sampleIdentityDifference
-  extractionOrPreparationDifference
-  analyticalPlatformDifference
-  calibrationOrMatrixEffectDifference
-  cannabinoidDefinitionDifference
-  unitOrConversionDifference
-  replicateAggregationDifference
-  databaseIngestionOrTransformationDifference
+  sourceVersionDifference : DiscrepancyCandidate
+  sampleIdentityDifference : DiscrepancyCandidate
+  extractionOrPreparationDifference : DiscrepancyCandidate
+  analyticalPlatformDifference : DiscrepancyCandidate
+  calibrationOrMatrixEffectDifference : DiscrepancyCandidate
+  cannabinoidDefinitionDifference : DiscrepancyCandidate
+  unitOrConversionDifference : DiscrepancyCandidate
+  replicateAggregationDifference : DiscrepancyCandidate
+  databaseIngestionOrTransformationDifference : DiscrepancyCandidate
   unresolvedCandidate : DiscrepancyCandidate
 
 record CandidateContextReceipt : Set where
@@ -204,12 +204,12 @@ sameCitationDoesNotCreateSameVersion ()
 ------------------------------------------------------------------------
 
 data ReviewContextParetoTarget : Set where
-  acquireSupportingTableS5
-  inspectCCDConcentrationDetailLineage
-  compareCompoundSemantics
-  compareUnitsAndTransforms
-  freezeSameObjectVector
-  resumeExposureInteraction
+  acquireSupportingTableS5 : ReviewContextParetoTarget
+  inspectCCDConcentrationDetailLineage : ReviewContextParetoTarget
+  compareCompoundSemantics : ReviewContextParetoTarget
+  compareUnitsAndTransforms : ReviewContextParetoTarget
+  freezeSameObjectVector : ReviewContextParetoTarget
+  resumeExposureInteraction : ReviewContextParetoTarget
   broadReviewSnowball : ReviewContextParetoTarget
 
 record ReviewContextParetoStep : Set where
@@ -277,15 +277,15 @@ pareto99 = review-context-pareto-step
 ------------------------------------------------------------------------
 
 data ContextTime : Set where
-  preWishartReviews
-  wishartPublication2024
-  currentCCDObservation
+  preWishartReviews : ContextTime
+  wishartPublication2024 : ContextTime
+  currentCCDObservation : ContextTime
   currentReviewContext2026 : ContextTime
 
 data ContextInterpretation : Set where
-  variabilityKnownInField
-  wishartArticleValueSurface
-  ccdValueSurface
+  variabilityKnownInField : ContextInterpretation
+  wishartArticleValueSurface : ContextInterpretation
+  ccdValueSurface : ContextInterpretation
   exactDiscrepancyExplained : ContextInterpretation
 
 data ContextSummary : Set where publicContextDoesNotResolveSameObject : ContextSummary

@@ -22,15 +22,15 @@ data DrugPolicyEra : Set where
 
 
 data HistoricalActor : Set where
-  harryAnslinger
-  richardNixon
-  johnMitchell
-  johnEhrlichman
-  egilKrogh
-  jeromeJaffe
-  raymondShafer
-  ronaldReagan
-  nancyReagan
+  harryAnslinger : String → HistoricalActor
+  richardNixon : String → HistoricalActor
+  johnMitchell : String → HistoricalActor
+  johnEhrlichman : String → HistoricalActor
+  egilKrogh : String → HistoricalActor
+  jeromeJaffe : String → HistoricalActor
+  raymondShafer : String → HistoricalActor
+  ronaldReagan : String → HistoricalActor
+  nancyReagan : String → HistoricalActor
   namedActor : String → HistoricalActor
 
 data ActorRole : Set where

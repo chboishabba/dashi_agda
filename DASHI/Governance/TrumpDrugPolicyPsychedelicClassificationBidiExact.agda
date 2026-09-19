@@ -16,11 +16,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data PolicyActor : Set where
-  donaldTrump
-  saraCarter
-  robertFKennedyJr
-  martyMakary
-  dougCollins
+  donaldTrump : String → PolicyActor
+  saraCarter : String → PolicyActor
+  robertFKennedyJr : String → PolicyActor
+  martyMakary : String → PolicyActor
+  dougCollins : String → PolicyActor
   namedPolicyActor : String → PolicyActor
 
 data DrugGovernanceRoute : Set where

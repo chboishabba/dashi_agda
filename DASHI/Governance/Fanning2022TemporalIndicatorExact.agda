@@ -22,8 +22,7 @@ open import DASHI.Governance.SafeJustSourceRegistryExact as Sources
 ------------------------------------------------------------------------
 
 data FanningNationalBiophysicalIndicator : Set where
-  co2F phosphorusF nitrogenF landSystemChangeF ecologicalFootprintF materialFootprintF :
-    FanningNationalBiophysicalIndicator
+  co2F phosphorusF nitrogenF landSystemChangeF ecologicalFootprintF materialFootprintF : FanningNationalBiophysicalIndicator
 
 fanningToONeillBiophysical :
   FanningNationalBiophysicalIndicator → ONeill.BiophysicalIndicator

@@ -66,14 +66,14 @@ data RH8894Leaf : Set where
   proveTargetLocalSecondMoment
   supplyZetaLongWindowLowerDensity
 
-  searchForAnyGammaBound
-  guessGammaLossWithoutSource
-  recoverExactGammaProducerArtifact
-  recoverExactGammaProducerDecomposition
-  localizeGammaPrecisionLossOnRecoveredProducer
-  repairGammaToSharpWindow
-  attachOwnedClusterMargin
-  combineFinalIndependentBudgets
+  searchForAnyGammaBound : RH8894Leaf
+  guessGammaLossWithoutSource : RH8894Leaf
+  recoverExactGammaProducerArtifact : RH8894Leaf
+  recoverExactGammaProducerDecomposition : RH8894Leaf
+  localizeGammaPrecisionLossOnRecoveredProducer : RH8894Leaf
+  repairGammaToSharpWindow : RH8894Leaf
+  attachOwnedClusterMargin : RH8894Leaf
+  combineFinalIndependentBudgets : RH8894Leaf
   : RH8894Leaf
 
 data LeafState : Set where

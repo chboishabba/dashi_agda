@@ -145,8 +145,8 @@ record CaseFrame : Set where
 -- Normative source layer.
 
 data NormSourceForm : Set where
-  constitution statute regulation caseLaw treaty custom religiousText
-    communityRule : NormSourceForm
+  constitution statute regulation caseLaw treaty custom religiousText : NormSourceForm
+  communityRule : NormSourceForm
 
 record LegalSystem : Set where
   constructor legalSystem

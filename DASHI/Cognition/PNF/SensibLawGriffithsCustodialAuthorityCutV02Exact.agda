@@ -48,8 +48,8 @@ griffithsHistoricalRepresentation = historical-proceeding-representation-v02
 ------------------------------------------------------------------------
 
 data GriffithsAuthorityResidual : Set where
-  presentCustodialMandateResidual
-  roleScopeCorrespondenceResidual
+  presentCustodialMandateResidual : GriffithsAuthorityResidual
+  roleScopeCorrespondenceResidual : GriffithsAuthorityResidual
   : GriffithsAuthorityResidual
 
 currentGriffithsAuthorityResidual : GriffithsAuthorityResidual

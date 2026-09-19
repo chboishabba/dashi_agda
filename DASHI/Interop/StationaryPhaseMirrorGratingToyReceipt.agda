@@ -29,23 +29,17 @@ import DASHI.Physics.Closure.QuantumPathFibreObservationQuotient as Quantum
 -- side-information, and empirical renderer conformance receipts remain open.
 
 data StationaryPhaseToyStage : Set where
-  knownOpticalSetupStage :
-    StationaryPhaseToyStage
+  knownOpticalSetupStage : StationaryPhaseToyStage
 
-  pathFibreCompilerStage :
-    StationaryPhaseToyStage
+  pathFibreCompilerStage : StationaryPhaseToyStage
 
-  maskedGratingTransportClosureStage :
-    StationaryPhaseToyStage
+  maskedGratingTransportClosureStage : StationaryPhaseToyStage
 
-  predictedIntensityPatternStage :
-    StationaryPhaseToyStage
+  predictedIntensityPatternStage : StationaryPhaseToyStage
 
-  analyticReferenceComparisonStage :
-    StationaryPhaseToyStage
+  analyticReferenceComparisonStage : StationaryPhaseToyStage
 
-  residualBoundStage :
-    StationaryPhaseToyStage
+  residualBoundStage : StationaryPhaseToyStage
 
 canonicalStationaryPhaseToyStages : List StationaryPhaseToyStage
 canonicalStationaryPhaseToyStages =
@@ -58,27 +52,20 @@ canonicalStationaryPhaseToyStages =
   ∷ []
 
 data StationaryPhaseToySetup : Set where
-  mirrorFermatToySetup :
-    StationaryPhaseToySetup
+  mirrorFermatToySetup : StationaryPhaseToySetup
 
-  gratingMaskToySetup :
-    StationaryPhaseToySetup
+  gratingMaskToySetup : StationaryPhaseToySetup
 
 data StationaryPhaseToyNonPromotionGuard : Set where
-  noFullRendererPromotion :
-    StationaryPhaseToyNonPromotionGuard
+  noFullRendererPromotion : StationaryPhaseToyNonPromotionGuard
 
-  noMaterialScatteringPromotion :
-    StationaryPhaseToyNonPromotionGuard
+  noMaterialScatteringPromotion : StationaryPhaseToyNonPromotionGuard
 
-  noRuntimeComplexityPromotion :
-    StationaryPhaseToyNonPromotionGuard
+  noRuntimeComplexityPromotion : StationaryPhaseToyNonPromotionGuard
 
-  noEmpiricalConformancePromotion :
-    StationaryPhaseToyNonPromotionGuard
+  noEmpiricalConformancePromotion : StationaryPhaseToyNonPromotionGuard
 
-  noGlobalO1Promotion :
-    StationaryPhaseToyNonPromotionGuard
+  noGlobalO1Promotion : StationaryPhaseToyNonPromotionGuard
 
 canonicalStationaryPhaseToyGuards :
   List StationaryPhaseToyNonPromotionGuard

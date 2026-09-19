@@ -23,24 +23,18 @@ receiptCount (_ ∷ receipts) =
 -- Receipt vocabulary.
 
 data ReceiptPromotionStatus : Set where
-  receiptNonPromoting :
-    ReceiptPromotionStatus
+  receiptNonPromoting : ReceiptPromotionStatus
 
-  receiptPromotionClaimed :
-    ReceiptPromotionStatus
+  receiptPromotionClaimed : ReceiptPromotionStatus
 
 data ReceiptPolarity : Set where
-  failClosedReceipt :
-    ReceiptPolarity
+  failClosedReceipt : ReceiptPolarity
 
-  advancingReceipt :
-    ReceiptPolarity
+  advancingReceipt : ReceiptPolarity
 
-  blockingReceipt :
-    ReceiptPolarity
+  blockingReceipt : ReceiptPolarity
 
-  boundaryReceipt :
-    ReceiptPolarity
+  boundaryReceipt : ReceiptPolarity
 
 ------------------------------------------------------------------------
 -- Generic receipt record.

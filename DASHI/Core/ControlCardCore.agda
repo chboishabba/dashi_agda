@@ -29,29 +29,21 @@ listCount (_ ∷ xs) =
 -- Slot vocabulary.
 
 data ControlCardSlot : Set where
-  orchestrationSlot :
-    ControlCardSlot
+  orchestrationSlot : ControlCardSlot
 
-  receiptSlot :
-    ControlCardSlot
+  receiptSlot : ControlCardSlot
 
-  candidateSlot :
-    ControlCardSlot
+  candidateSlot : ControlCardSlot
 
-  surfaceSlot :
-    ControlCardSlot
+  surfaceSlot : ControlCardSlot
 
-  lensSlot :
-    ControlCardSlot
+  lensSlot : ControlCardSlot
 
-  promotionSlot :
-    ControlCardSlot
+  promotionSlot : ControlCardSlot
 
-  governanceSlot :
-    ControlCardSlot
+  governanceSlot : ControlCardSlot
 
-  failClosedSlot :
-    ControlCardSlot
+  failClosedSlot : ControlCardSlot
 
   namedControlCardSlot :
     String →

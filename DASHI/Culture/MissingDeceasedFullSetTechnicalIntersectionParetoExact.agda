@@ -18,10 +18,10 @@ import DASHI.Core.NDimParetoHyperfabricExact as Pareto
 ------------------------------------------------------------------------
 
 data IntersectionStrength : Set where
-  exactWorkObject
-  programmeBackedDomainBridge
-  domainAdjacencyOnly
-  roleCapabilityOnly
+  exactWorkObject : IntersectionStrength
+  programmeBackedDomainBridge : IntersectionStrength
+  domainAdjacencyOnly : IntersectionStrength
+  roleCapabilityOnly : IntersectionStrength
   identityWeldPending : IntersectionStrength
 
 record FullSetTechnicalIntersection : Set where

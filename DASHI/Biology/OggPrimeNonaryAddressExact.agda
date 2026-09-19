@@ -112,8 +112,8 @@ data PhaseMobileMode : Quotient.ComplementMode5 → Set where
   mobile45 : PhaseMobileMode Quotient.mode45
 
 data NonThreeOggLane : Set where
-  lane2 lane5 lane7 lane11 lane13 lane17 lane19
-    lane23 lane29 lane31 lane41 lane47 lane59 lane71 : NonThreeOggLane
+  lane2 lane5 lane7 lane11 lane13 lane17 lane19 : NonThreeOggLane
+  lane23 lane29 lane31 lane41 lane47 lane59 lane71 : NonThreeOggLane
 
 toOggLane : NonThreeOggLane → Lane.MonsterPrimeLane
 toOggLane lane2 = Lane.p2

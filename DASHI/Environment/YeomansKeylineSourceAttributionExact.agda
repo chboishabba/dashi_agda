@@ -17,22 +17,22 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data KeylineSourceRole : Set where
-  primaryDesignLineage
-  scholarlyHistoricalReview
-  directKeylineFieldStudy
-  keylineModelStudy
+  primaryDesignLineage : KeylineSourceRole
+  scholarlyHistoricalReview : KeylineSourceRole
+  directKeylineFieldStudy : KeylineSourceRole
+  keylineModelStudy : KeylineSourceRole
   methodAdjacentContourFieldStudy : KeylineSourceRole
 
 data KeylineEvidenceRelation : Set where
-  sourceDefinesDesignLineage
-  directlyStudiesKeyline
-  modelsKeyline
+  sourceDefinesDesignLineage : KeylineEvidenceRelation
+  directlyStudiesKeyline : KeylineEvidenceRelation
+  modelsKeyline : KeylineEvidenceRelation
   adjacentMethodEvidence : KeylineEvidenceRelation
 
 data KeylineEvidenceForm : Set where
-  primaryBook
-  peerReviewedReview
-  peerReviewedFieldExperiment
+  primaryBook : KeylineEvidenceForm
+  peerReviewedReview : KeylineEvidenceForm
+  peerReviewedFieldExperiment : KeylineEvidenceForm
   peerReviewedModelStudy : KeylineEvidenceForm
 
 record KeylineSource : Set where

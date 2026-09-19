@@ -22,59 +22,49 @@ data PNFObjectRef : Set where
     Nat →
     PNFObjectRef
 
-  pnfObjectFallback :
-    PNFObjectRef
+  pnfObjectFallback : PNFObjectRef
 
 data SpanRef : Set where
   spanRef :
     Nat →
     SpanRef
 
-  spanFallback :
-    SpanRef
+  spanFallback : SpanRef
 
 data ReceiptRef : Set where
   receiptRef :
     Nat →
     ReceiptRef
 
-  receiptFallback :
-    ReceiptRef
+  receiptFallback : ReceiptRef
 
 data QueryRef : Set where
   queryRef :
     Nat →
     QueryRef
 
-  queryFallback :
-    QueryRef
+  queryFallback : QueryRef
 
 data PackageRef : Set where
   packageRef :
     Nat →
     PackageRef
 
-  packageFallback :
-    PackageRef
+  packageFallback : PackageRef
 
 ------------------------------------------------------------------------
 -- Query and rejection vocabulary.
 
 data QueryMode : Set where
-  exactObjectLookup :
-    QueryMode
+  exactObjectLookup : QueryMode
 
-  residualNeighborhoodLookup :
-    QueryMode
+  residualNeighborhoodLookup : QueryMode
 
-  hybridPNFNavigation :
-    QueryMode
+  hybridPNFNavigation : QueryMode
 
-  selectorAdmissionRequest :
-    QueryMode
+  selectorAdmissionRequest : QueryMode
 
-  packageCommitmentRequest :
-    QueryMode
+  packageCommitmentRequest : QueryMode
 
 canonicalQueryModes : List QueryMode
 canonicalQueryModes =
@@ -86,32 +76,23 @@ canonicalQueryModes =
   ∷ []
 
 data RejectionReason : Set where
-  noRejection :
-    RejectionReason
+  noRejection : RejectionReason
 
-  unresolvedCandidate :
-    RejectionReason
+  unresolvedCandidate : RejectionReason
 
-  missingObjectRef :
-    RejectionReason
+  missingObjectRef : RejectionReason
 
-  missingSpanRef :
-    RejectionReason
+  missingSpanRef : RejectionReason
 
-  missingReceiptRef :
-    RejectionReason
+  missingReceiptRef : RejectionReason
 
-  contradictionRequiresReceipt :
-    RejectionReason
+  contradictionRequiresReceipt : RejectionReason
 
-  residualNotAdmissible :
-    RejectionReason
+  residualNotAdmissible : RejectionReason
 
-  scoreClaimedAsAuthority :
-    RejectionReason
+  scoreClaimedAsAuthority : RejectionReason
 
-  directCandidateCommitment :
-    RejectionReason
+  directCandidateCommitment : RejectionReason
 
 canonicalRejectionReasons : List RejectionReason
 canonicalRejectionReasons =
@@ -126,17 +107,13 @@ canonicalRejectionReasons =
   ∷ []
 
 data PackageAdmissionStatus : Set where
-  candidateOnlyStatus :
-    PackageAdmissionStatus
+  candidateOnlyStatus : PackageAdmissionStatus
 
-  admittedStatus :
-    PackageAdmissionStatus
+  admittedStatus : PackageAdmissionStatus
 
-  rejectedStatus :
-    PackageAdmissionStatus
+  rejectedStatus : PackageAdmissionStatus
 
-  failClosedStatus :
-    PackageAdmissionStatus
+  failClosedStatus : PackageAdmissionStatus
 
 ------------------------------------------------------------------------
 -- Fail-closed invariant surface.

@@ -61,9 +61,9 @@ open CacheHitAdmission public
 
 data CacheLookupState (demand : ExactCacheLookupDemand) : Set where
   exactPGHit :
-    (hit : ExactPersistedCacheHit demand) →
-    CacheHitAdmission hit →
-    CacheLookupState demand
+  (hit : ExactPersistedCacheHit demand) →
+  CacheHitAdmission hit → : CacheLookupState demand
+  CacheLookupState demand : CacheLookupState demand
   pgMiss : CacheLookupState demand
   malformedCachedRow : String → CacheLookupState demand
   databaseUnavailable : String → CacheLookupState demand

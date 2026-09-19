@@ -36,14 +36,8 @@ sensibLawHFTransportReference =
   "SensibLaw build_zelph_hf_transport_normalized_artifact / zelph-hf-layout/v2 @ d25cddf73540bdbb313777bbf566280f4e34313b"
 
 data ZelphHFOperation : Set where
-  headerProbe
-  selectedChunkRead
-  nodeRouteSelection
-  sparqlSubset
-  transitivePropertyPaths
-  partialLoading
-  qualifierImport
-  : ZelphHFOperation
+  headerProbe selectedChunkRead nodeRouteSelection sparqlSubset : ZelphHFOperation
+  transitivePropertyPaths partialLoading qualifierImport : ZelphHFOperation
 
 record ZelphHFCapabilities : Set where
   constructor zelph-hf-capabilities

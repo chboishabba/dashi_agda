@@ -22,16 +22,16 @@ import DASHI.Law.SensibLawProofSearchExpansionBidiExact as Expansion
 ------------------------------------------------------------------------
 
 data HistoricalResearchMove : Set where
-  digestOrSubjectClassification
-  leadingAuthorityLookup
-  noteUpInboundCitations
-  inspectAuthoritiesCited
-  inspectLegislationCited
-  factPatternSearch
-  secondarySourceVocabularyBridge
-  textbookTreatiseBridge
-  journalCommentaryBridge
-  refinedIssueClassification
+  digestOrSubjectClassification : HistoricalResearchMove
+  leadingAuthorityLookup : HistoricalResearchMove
+  noteUpInboundCitations : HistoricalResearchMove
+  inspectAuthoritiesCited : HistoricalResearchMove
+  inspectLegislationCited : HistoricalResearchMove
+  factPatternSearch : HistoricalResearchMove
+  secondarySourceVocabularyBridge : HistoricalResearchMove
+  textbookTreatiseBridge : HistoricalResearchMove
+  journalCommentaryBridge : HistoricalResearchMove
+  refinedIssueClassification : HistoricalResearchMove
   : HistoricalResearchMove
 
 record HistoricalResearchStep : Set₁ where
@@ -64,13 +64,13 @@ open HistoricalResearchTrace public
 ------------------------------------------------------------------------
 
 data ModernSearchOperationClass : Set where
-  classificationExpansionOperation
-  exactAuthorityOperation
-  inboundCitationTraversalOperation
-  outboundCitationTraversalOperation
-  legislationTraversalOperation
-  fullTextFactSearchOperation
-  secondaryNavigationOperation
+  classificationExpansionOperation : ModernSearchOperationClass
+  exactAuthorityOperation : ModernSearchOperationClass
+  inboundCitationTraversalOperation : ModernSearchOperationClass
+  outboundCitationTraversalOperation : ModernSearchOperationClass
+  legislationTraversalOperation : ModernSearchOperationClass
+  fullTextFactSearchOperation : ModernSearchOperationClass
+  secondaryNavigationOperation : ModernSearchOperationClass
   : ModernSearchOperationClass
 
 modernOperationFor : HistoricalResearchMove → ModernSearchOperationClass

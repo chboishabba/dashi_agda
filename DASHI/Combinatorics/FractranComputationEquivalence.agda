@@ -115,8 +115,7 @@ catalogue-roundtrip C = representative-sound C
 ------------------------------------------------------------------------
 
 data FractranUniversalityStatus : Set where
-  concreteMachineAndConditionalRepresentationOnly :
-    FractranUniversalityStatus
+  concreteMachineAndConditionalRepresentationOnly : FractranUniversalityStatus
 
 record FractranUniversalityBoundary : Set where
   field

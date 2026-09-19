@@ -21,14 +21,9 @@ import DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact as Handoff
 ------------------------------------------------------------------------
 
 data ArtifactKind : Set where
-  externalSourceArtifact
-  sourceUnitArtifact
-  observationClaimArtifact
-  migrationCandidateArtifact
-  splitPlanArtifact
-  reviewPacketArtifact
-  canonicalPromotedArtifact
-  : ArtifactKind
+  externalSourceArtifact sourceUnitArtifact observationClaimArtifact : ArtifactKind
+  migrationCandidateArtifact splitPlanArtifact reviewPacketArtifact : ArtifactKind
+  canonicalPromotedArtifact : ArtifactKind
 
 data MorphismDeterminism : Set where
   deterministicMorphism heuristicMorphism mixedMorphism : MorphismDeterminism

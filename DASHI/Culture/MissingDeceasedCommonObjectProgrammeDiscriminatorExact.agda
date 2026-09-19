@@ -22,27 +22,27 @@ data HypothesisClass : Set where
   H0 H1 H2 H3 : HypothesisClass
 
 data ProgrammeClass : Set where
-  longDurationAutonomousExtremeEnvironment
-  highEnergyExperimentalInfrastructure
-  advancedPropulsionAnomalousFieldTestbed
+  longDurationAutonomousExtremeEnvironment : ProgrammeClass
+  highEnergyExperimentalInfrastructure : ProgrammeClass
+  advancedPropulsionAnomalousFieldTestbed : ProgrammeClass
   strategicRDPortfolio : ProgrammeClass
 
 data EventClass : Set where
-  disappearance
-  death
-  homicide
-  accident
-  illness
-  retirementOrSeparation
-  staleInstitutionalSurface
-  posthumousPublication
+  disappearance : EventClass
+  death : EventClass
+  homicide : EventClass
+  accident : EventClass
+  illness : EventClass
+  retirementOrSeparation : EventClass
+  staleInstitutionalSurface : EventClass
+  posthumousPublication : EventClass
   ordinaryRoleTransition : EventClass
 
 data ReceiptStrength : Set where
-  capabilityOnly
-  thematicAdjacency
-  literalSameObject
-  literalCrossPerson
+  capabilityOnly : ReceiptStrength
+  thematicAdjacency : ReceiptStrength
+  literalSameObject : ReceiptStrength
+  literalCrossPerson : ReceiptStrength
   operationalTargeting : ReceiptStrength
 
 record RequiredCapability : Set where

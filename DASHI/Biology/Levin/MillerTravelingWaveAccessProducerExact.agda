@@ -59,13 +59,13 @@ excitabilityAt rightSite secondTick = true
 canonicalTravelingField :
   Field.TravelingFieldSystem Site2 Tick2 Phase2 Nat Bool
 canonicalTravelingField = record
-  { Field.phaseAt = phaseAt
-  ; Field.amplitudeAt = amplitudeAt
-  ; Field.excitabilityAt = excitabilityAt
-  ; Field.fieldModulatesSpikeTiming = true
-  ; Field.fieldPatternMovesAcrossCarrier = true
-  ; Field.contextCanSelectFieldPattern = true
-  ; Field.interpretation =
+  { phaseAt = phaseAt
+  ; amplitudeAt = amplitudeAt
+  ; excitabilityAt = excitabilityAt
+  ; fieldModulatesSpikeTiming = true
+  ; fieldPatternMovesAcrossCarrier = true
+  ; contextCanSelectFieldPattern = true
+  ; interpretation =
       "finite moving stencil: field-supported excitability moves across a fixed two-site carrier"
   }
 
@@ -97,10 +97,10 @@ movingSupportActuallyChanges = trueNotFalse
 
 waveFastAccessField : Access.FastAccessControlField
 waveFastAccessField = record
-  { Access.Carrier = Site2
-  ; Access.Time = Tick2
-  ; Access.Context = FrequencyBand
-  ; Access.accessAt = λ t band site → accessByBand band t site
+  { Carrier = Site2
+  ; Time = Tick2
+  ; Context = FrequencyBand
+  ; accessAt = λ t band site → accessByBand band t site
   }
   where
     accessByBand : FrequencyBand → Tick2 → Site2 → Bool
@@ -116,10 +116,10 @@ waveRetentionWithoutRewiring =
 
 canonicalWaveCarrier : Wave.WaveCarrier Site2 Phase2 Nat FrequencyBand
 canonicalWaveCarrier = record
-  { Wave.phaseAt = λ site → phaseAt site firstTick
-  ; Wave.amplitudeAt = λ site → amplitudeAt site firstTick
-  ; Wave.frequency = betaBand
-  ; Wave.travels = true
+  { phaseAt = λ site → phaseAt site firstTick
+  ; amplitudeAt = λ site → amplitudeAt site firstTick
+  ; frequency = betaBand
+  ; travels = true
   }
 
 record MillerWaveAccessBoundary : Set where

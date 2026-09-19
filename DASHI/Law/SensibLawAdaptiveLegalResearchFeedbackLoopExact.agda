@@ -21,11 +21,11 @@ import DASHI.Cognition.PNF.SensibLawClimateDutyRouteSearchExact as Climate
 ------------------------------------------------------------------------
 
 data FeedbackDisposition : Set where
-  stopCandidate
-  recomputeFrontier
-  reopenForDefeater
-  expandSearch
-  continueSearch
+  stopCandidate : FeedbackDisposition
+  recomputeFrontier : FeedbackDisposition
+  reopenForDefeater : FeedbackDisposition
+  expandSearch : FeedbackDisposition
+  continueSearch : FeedbackDisposition
   : FeedbackDisposition
 
 feedbackDisposition :

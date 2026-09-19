@@ -16,23 +16,17 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- authority.
 
 data BridgeRequirementStatus : Set where
-  bridgeRequired :
-    BridgeRequirementStatus
+  bridgeRequired : BridgeRequirementStatus
 
-  bridgeAbsent :
-    BridgeRequirementStatus
+  bridgeAbsent : BridgeRequirementStatus
 
-  bridgeSuppliedCandidateOnly :
-    BridgeRequirementStatus
+  bridgeSuppliedCandidateOnly : BridgeRequirementStatus
 
-  backgroundBridgeOnly :
-    BridgeRequirementStatus
+  backgroundBridgeOnly : BridgeRequirementStatus
 
-  transportMapRequired :
-    BridgeRequirementStatus
+  transportMapRequired : BridgeRequirementStatus
 
-  noBridgePromotion :
-    BridgeRequirementStatus
+  noBridgePromotion : BridgeRequirementStatus
 
 ------------------------------------------------------------------------
 -- Status-level gates.

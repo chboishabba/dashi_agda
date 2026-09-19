@@ -125,11 +125,11 @@ productPotencyDoesNotCreateConsumerDose ()
 ------------------------------------------------------------------------
 
 data BtProductParetoTarget : Set where
-  measurePostApplicationFlowerBurden
-  resolveEVBProteinComplement
-  distinguishSporesFromCryProtein
-  combustionFate
-  vaporisationFate
+  measurePostApplicationFlowerBurden : BtProductParetoTarget
+  resolveEVBProteinComplement : BtProductParetoTarget
+  distinguishSporesFromCryProtein : BtProductParetoTarget
+  combustionFate : BtProductParetoTarget
+  vaporisationFate : BtProductParetoTarget
   inhaledDose : BtProductParetoTarget
 
 record BtProductParetoStep : Set where
@@ -189,14 +189,14 @@ pareto9 = bt-product-pareto-step
 ------------------------------------------------------------------------
 
 data BtProductTime : Set where
-  genericBtState
-  cannabisUseProductsResolved
+  genericBtState : BtProductTime
+  cannabisUseProductsResolved : BtProductTime
   currentBtProductState : BtProductTime
 
 data BtProductInterpretation : Set where
-  exactCannabisUseProductsExist
-  abts351CryComplementResolved
-  evb11319CryComplementResolved
+  exactCannabisUseProductsExist : BtProductInterpretation
+  abts351CryComplementResolved : BtProductInterpretation
+  evb11319CryComplementResolved : BtProductInterpretation
   harvestResidueResolved : BtProductInterpretation
 
 data BtProductSummary : Set where cannabisBtIdentityPaidExposureOpen : BtProductSummary

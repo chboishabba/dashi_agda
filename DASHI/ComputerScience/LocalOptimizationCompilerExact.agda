@@ -123,10 +123,10 @@ record StreamingResidencyCertificate : Set where
 ------------------------------------------------------------------------
 
 data OptimizationFailure : Set where
-  semanticLawFailure
-  foldCompositionFailure
-  resourceBoundFailure
-  resourceEnvelopeExhaustion
+  semanticLawFailure : OptimizationFailure
+  foldCompositionFailure : OptimizationFailure
+  resourceBoundFailure : OptimizationFailure
+  resourceEnvelopeExhaustion : OptimizationFailure
   performanceRegression : OptimizationFailure
 
 record EmpiricalResourceWitness : Set where

@@ -22,27 +22,20 @@ NO_TYPED_MEET =
 -- none of those options promotes truth, support, admissibility, or authority.
 
 data InspectionLevel : Set where
-  currentStructuralInspection :
-    InspectionLevel
+  currentStructuralInspection : InspectionLevel
 
-  deeperParseInspection :
-    InspectionLevel
+  deeperParseInspection : InspectionLevel
 
-  bridgeAwareInspection :
-    InspectionLevel
+  bridgeAwareInspection : InspectionLevel
 
-  newRoleAssignmentInspection :
-    InspectionLevel
+  newRoleAssignmentInspection : InspectionLevel
 
 data RevisionRoute : Set where
-  deeperParseRoute :
-    RevisionRoute
+  deeperParseRoute : RevisionRoute
 
-  explicitBridgeRoute :
-    RevisionRoute
+  explicitBridgeRoute : RevisionRoute
 
-  newRoleAssignmentRoute :
-    RevisionRoute
+  newRoleAssignmentRoute : RevisionRoute
 
 inspectionCanReviseNoTypedMeet :
   InspectionLevel →

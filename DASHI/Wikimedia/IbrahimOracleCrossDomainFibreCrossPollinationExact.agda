@@ -23,8 +23,8 @@ data OracleSeed : Set where
   bananaFruitSeed trainRailSeed physicsNaturalScienceSeed bobDylanSongSeed : OracleSeed
 
 data DomainFibre : Set where
-  lesPlantOutputFibre petrochemicalLogisticsFibre
-  navierStokesPhysicsFibre yangMillsPhysicsFibre
+  lesPlantOutputFibre petrochemicalLogisticsFibre : DomainFibre
+  navierStokesPhysicsFibre yangMillsPhysicsFibre : DomainFibre
   musicObjectFibre physicsMusicSharedStructureFibre : DomainFibre
 
 record CrossPollinationReceipt : Set where

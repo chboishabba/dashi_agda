@@ -46,9 +46,9 @@ tiwiLandCouncilQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data TiwiJoinSourceRole : Set where
-  experimentDefinitionAnd2009Baseline
-  vegetation2015SameTreatmentSites
-  mammal2015ExactPlotDataset
+  experimentDefinitionAnd2009Baseline : TiwiJoinSourceRole
+  vegetation2015SameTreatmentSites : TiwiJoinSourceRole
+  mammal2015ExactPlotDataset : TiwiJoinSourceRole
   longTermCarbonFollowup : TiwiJoinSourceRole
 
 record TiwiJoinPrimarySource : Set where
@@ -124,7 +124,7 @@ ng2026 = tiwi-join-primary-source
 ------------------------------------------------------------------------
 
 data TiwiJoinAxis : Set where
-  programmeAxis locationAxis treatmentAxis plotSetAxis exactPlotAxis transectAxis
+  programmeAxis locationAxis treatmentAxis plotSetAxis exactPlotAxis transectAxis : TiwiJoinAxis
   sampleAxis measurementWindowAxis fireHistoryAxis covariateAxis : TiwiJoinAxis
 
 record TiwiJoinReceipt : Set where

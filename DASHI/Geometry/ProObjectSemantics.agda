@@ -583,23 +583,17 @@ canonicalProObjectUltrametricTopologySurface P =
     }
 
 data B01ConstructiveComponent : Set where
-  compatibleFamilyLimit :
-    B01ConstructiveComponent
+  compatibleFamilyLimit : B01ConstructiveComponent
 
-  depthProjection :
-    B01ConstructiveComponent
+  depthProjection : B01ConstructiveComponent
 
-  refinementCoherence :
-    B01ConstructiveComponent
+  refinementCoherence : B01ConstructiveComponent
 
-  depthwiseAgreementBall :
-    B01ConstructiveComponent
+  depthwiseAgreementBall : B01ConstructiveComponent
 
-  depthZeroFormalDisk :
-    B01ConstructiveComponent
+  depthZeroFormalDisk : B01ConstructiveComponent
 
-  equivalenceRelationLaws :
-    B01ConstructiveComponent
+  equivalenceRelationLaws : B01ConstructiveComponent
 
 canonicalB01ConstructiveComponents :
   List B01ConstructiveComponent
@@ -613,29 +607,21 @@ canonicalB01ConstructiveComponents =
   ∷ []
 
 data B01RemainingProofObligation : Set where
-  missingDecidableSeparationDepth :
-    B01RemainingProofObligation
+  missingDecidableSeparationDepth : B01RemainingProofObligation
 
-  missingRealValuedRho :
-    B01RemainingProofObligation
+  missingRealValuedRho : B01RemainingProofObligation
 
-  missingMetricCompletionProof :
-    B01RemainingProofObligation
+  missingMetricCompletionProof : B01RemainingProofObligation
 
-  missingCompactProfiniteProof :
-    B01RemainingProofObligation
+  missingCompactProfiniteProof : B01RemainingProofObligation
 
-  missingTransportSmoothFunctionSheaf :
-    B01RemainingProofObligation
+  missingTransportSmoothFunctionSheaf : B01RemainingProofObligation
 
-  missingFirstOrderApproximationLemma :
-    B01RemainingProofObligation
+  missingFirstOrderApproximationLemma : B01RemainingProofObligation
 
-  missingDCHoTTFormalDiskEquivalence :
-    B01RemainingProofObligation
+  missingDCHoTTFormalDiskEquivalence : B01RemainingProofObligation
 
-  missingLinearRefinementVectorSpaceBinding :
-    B01RemainingProofObligation
+  missingLinearRefinementVectorSpaceBinding : B01RemainingProofObligation
 
 canonicalB01RemainingProofObligations :
   List B01RemainingProofObligation

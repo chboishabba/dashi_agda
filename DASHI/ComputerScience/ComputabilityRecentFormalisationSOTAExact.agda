@@ -46,16 +46,16 @@ recentComputabilitySOTAAtlas =
 ------------------------------------------------------------------------
 
 data ComputabilitySOTARole : Set where
-  finiteExactValueProducer
-  universalUpperBoundReductionProducer
+  finiteExactValueProducer : ComputabilitySOTARole
+  universalUpperBoundReductionProducer : ComputabilitySOTARole
   universalMachineProducer : ComputabilitySOTARole
 
 data ComputabilityCoordinate : Set where
-  finiteHaltingClassification
-  exactBusyBeaverValue
-  upperBoundDecidesHalting
-  universalHaltingUndecidability
-  universalMachineEncoding
+  finiteHaltingClassification : ComputabilityCoordinate
+  exactBusyBeaverValue : ComputabilityCoordinate
+  upperBoundDecidesHalting : ComputabilityCoordinate
+  universalHaltingUndecidability : ComputabilityCoordinate
+  universalMachineEncoding : ComputabilityCoordinate
   programInputPairEncoding : ComputabilityCoordinate
 
 record ComputabilitySOTAProducerReceipt : Set where

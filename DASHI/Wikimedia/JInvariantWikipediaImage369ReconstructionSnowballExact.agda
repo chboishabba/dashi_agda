@@ -106,7 +106,7 @@ sourceBoundary = SourceAtlas.canonicalJImageAttributionBoundary
 ------------------------------------------------------------------------
 
 data VisualCoordinate : Set where
-  analyticPoint complexValue realPart imaginaryPart continuousPhase tone hue
+  analyticPoint complexValue realPart imaginaryPart continuousPhase tone hue : VisualCoordinate
   modularFundamentalDomain phaseWinding gluingState observer3 observer6 observer9 observer27 : VisualCoordinate
 
 record VisualFibreRole : Set where

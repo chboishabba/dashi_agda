@@ -3,6 +3,7 @@ module DASHI.Cognition.PNF.PNFWaveAccessTraumaLearningRegression where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Primitive using (Setω)
 open import Data.Empty using (⊥)
 
 import DASHI.Biology.DynamicEffectiveTopology as Topology
@@ -32,7 +33,7 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 -- the tranche; no new semantics are introduced here.
 ------------------------------------------------------------------------
 
-record PNFWaveAccessTraumaLearningRegression : Set₁ where
+record PNFWaveAccessTraumaLearningRegression : Setω where
   field
     decisionFibrePotentialRegression : Decision.DecisionFibrePotentialRegression
 

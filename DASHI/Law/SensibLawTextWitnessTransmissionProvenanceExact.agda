@@ -17,19 +17,19 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data WitnessStageKind : Set where
-  originalUtteranceOrAct
-  judicialDraftOrReasons
-  courtReporterObservation
-  courtroomNote
-  legalRepresentativeNote
-  registryOrAdministrativeTranscript
-  typistOrPublisherTranscription
-  authorisedReportPublication
-  unofficialReportPublication
-  digitisationStage
-  ocrStage
-  canonicalTextAdaptation
-  parserObservationStage
+  originalUtteranceOrAct : WitnessStageKind
+  judicialDraftOrReasons : WitnessStageKind
+  courtReporterObservation : WitnessStageKind
+  courtroomNote : WitnessStageKind
+  legalRepresentativeNote : WitnessStageKind
+  registryOrAdministrativeTranscript : WitnessStageKind
+  typistOrPublisherTranscription : WitnessStageKind
+  authorisedReportPublication : WitnessStageKind
+  unofficialReportPublication : WitnessStageKind
+  digitisationStage : WitnessStageKind
+  ocrStage : WitnessStageKind
+  canonicalTextAdaptation : WitnessStageKind
+  parserObservationStage : WitnessStageKind
   : WitnessStageKind
 
 record TextWitnessStage : Set where
@@ -58,11 +58,11 @@ record TextWitnessLineage : Set₁ where
 open TextWitnessLineage public
 
 data WitnessRelation : Set where
-  sameSourceDifferentTranscription
-  sameEventIndependentObservation
-  derivativePublication
-  quotedDerivative
-  uncertainWitnessRelation
+  sameSourceDifferentTranscription : WitnessRelation
+  sameEventIndependentObservation : WitnessRelation
+  derivativePublication : WitnessRelation
+  quotedDerivative : WitnessRelation
+  uncertainWitnessRelation : WitnessRelation
   : WitnessRelation
 
 record WitnessComparison : Set where

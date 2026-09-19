@@ -24,7 +24,7 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data RootNitrogenSpecies : Set where
-  nitrate15N
+  nitrate15N : RootNitrogenSpecies
   ammonium15N : RootNitrogenSpecies
 
 record RootNitrogenFluxPrimarySource : Set where

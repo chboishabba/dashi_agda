@@ -2963,16 +2963,11 @@ canonicalGF2FactorPacketFullPortfolioBoundary =
     false
 
 data GF2FactorPacketFullPortfolioResidual : Set where
-  obtainExactHeadAgdaKernelReceiptForCompiledPortfolio :
-    GF2FactorPacketFullPortfolioResidual
-  weldPackedRuntimeBytesToFormalFactorConstructors :
-    GF2FactorPacketFullPortfolioResidual
-  provePackedEightBitRowRepresentationExact :
-    GF2FactorPacketFullPortfolioResidual
-  compileCertifiedFactorPacketsIntoHybridLayerCodec :
-    GF2FactorPacketFullPortfolioResidual
-  acquireSameObjectAStarOrFSols :
-    GF2FactorPacketFullPortfolioResidual
+  obtainExactHeadAgdaKernelReceiptForCompiledPortfolio : GF2FactorPacketFullPortfolioResidual
+  weldPackedRuntimeBytesToFormalFactorConstructors : GF2FactorPacketFullPortfolioResidual
+  provePackedEightBitRowRepresentationExact : GF2FactorPacketFullPortfolioResidual
+  compileCertifiedFactorPacketsIntoHybridLayerCodec : GF2FactorPacketFullPortfolioResidual
+  acquireSameObjectAStarOrFSols : GF2FactorPacketFullPortfolioResidual
 
 firstGF2FactorPacketFullPortfolioResidual :
   GF2FactorPacketFullPortfolioResidual

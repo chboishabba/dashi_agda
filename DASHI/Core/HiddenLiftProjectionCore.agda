@@ -23,58 +23,47 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- claim fail-closed.
 
 data PrivateCoordinateSpace : Set where
-  structuredPrivateState :
-    PrivateCoordinateSpace
+  structuredPrivateState : PrivateCoordinateSpace
 
-  fiberIndexedPrivateState :
-    PrivateCoordinateSpace
+  fiberIndexedPrivateState : PrivateCoordinateSpace
 
-  residueIndexedPrivateState :
-    PrivateCoordinateSpace
+  residueIndexedPrivateState : PrivateCoordinateSpace
 
   namedPrivateCoordinateSpace :
     String →
     PrivateCoordinateSpace
 
 data PublicQuotientSpace : Set where
-  publicQuotientProjection :
-    PublicQuotientSpace
+  publicQuotientProjection : PublicQuotientSpace
 
-  publicQuotientShadow :
-    PublicQuotientSpace
+  publicQuotientShadow : PublicQuotientSpace
 
   namedPublicQuotientSpace :
     String →
     PublicQuotientSpace
 
 data ProjectionShadow : Set where
-  shadowedProjection :
-    ProjectionShadow
+  shadowedProjection : ProjectionShadow
 
-  shadowOnlyProjection :
-    ProjectionShadow
+  shadowOnlyProjection : ProjectionShadow
 
   namedProjectionShadow :
     String →
     ProjectionShadow
 
 data PublicOperator : Set where
-  quotientOperator :
-    PublicOperator
+  quotientOperator : PublicOperator
 
-  publicMapOperator :
-    PublicOperator
+  publicMapOperator : PublicOperator
 
   namedPublicOperator :
     String →
     PublicOperator
 
 data HiddenLiftWitness : Set where
-  hiddenLiftWitnessCandidateOnly :
-    HiddenLiftWitness
+  hiddenLiftWitnessCandidateOnly : HiddenLiftWitness
 
-  hiddenLiftWitnessHidden :
-    HiddenLiftWitness
+  hiddenLiftWitnessHidden : HiddenLiftWitness
 
   namedHiddenLiftWitness :
     String →

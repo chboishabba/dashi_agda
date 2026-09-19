@@ -27,20 +27,14 @@ bool-select true  x _ = x
 bool-select false _ y = y
 
 data LightCodecCorrespondenceStatus : Set where
-  conditionalMDLInstance_analogyIdentityStillFalse :
-    LightCodecCorrespondenceStatus
+  conditionalMDLInstance_analogyIdentityStillFalse : LightCodecCorrespondenceStatus
 
 data LightCodecBinding : Set where
-  modelLenIsRateComputeTv :
-    LightCodecBinding
-  residLenIsDistance :
-    LightCodecBinding
-  updateIsRefreshReuseStep :
-    LightCodecBinding
-  admissibleIsDistanceAboveThreshold :
-    LightCodecBinding
-  descentComesOnlyFromMDLTradeoff :
-    LightCodecBinding
+  modelLenIsRateComputeTv : LightCodecBinding
+  residLenIsDistance : LightCodecBinding
+  updateIsRefreshReuseStep : LightCodecBinding
+  admissibleIsDistanceAboveThreshold : LightCodecBinding
+  descentComesOnlyFromMDLTradeoff : LightCodecBinding
 
 canonicalLightCodecBindings :
   List LightCodecBinding
@@ -105,16 +99,11 @@ record LightCodecTransportMDLBinding
 open LightCodecTransportMDLBinding public
 
 data LightCodecCorrespondenceNonClaim : Set where
-  codecIsNotLightPhysics :
-    LightCodecCorrespondenceNonClaim
-  noGlobalRenderingExactness :
-    LightCodecCorrespondenceNonClaim
-  noResidualSuppressionWithoutAccounting :
-    LightCodecCorrespondenceNonClaim
-  noEmpiricalBenchmarkPromotion :
-    LightCodecCorrespondenceNonClaim
-  noAnalogyIdentityPromotion :
-    LightCodecCorrespondenceNonClaim
+  codecIsNotLightPhysics : LightCodecCorrespondenceNonClaim
+  noGlobalRenderingExactness : LightCodecCorrespondenceNonClaim
+  noResidualSuppressionWithoutAccounting : LightCodecCorrespondenceNonClaim
+  noEmpiricalBenchmarkPromotion : LightCodecCorrespondenceNonClaim
+  noAnalogyIdentityPromotion : LightCodecCorrespondenceNonClaim
 
 canonicalLightCodecCorrespondenceNonClaims :
   List LightCodecCorrespondenceNonClaim

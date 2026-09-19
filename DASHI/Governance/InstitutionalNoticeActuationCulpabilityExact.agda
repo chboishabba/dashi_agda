@@ -56,8 +56,7 @@ data CoarseObservation : Set where
   threeDaysShortObservation : CoarseObservation
 
 data DiagnosticObservation : Set where
-  jurisdictionQuestionObservation factualTypingQuestionObservation :
-    DiagnosticObservation
+  jurisdictionQuestionObservation factualTypingQuestionObservation : DiagnosticObservation
 
 data FineObservation : Set where
   fatalObservation : FineObservation
@@ -137,9 +136,8 @@ diagnosticToExpertStrictRefinement =
 ------------------------------------------------------------------------
 
 data FolkFormationSource : Set where
-  familySource schoolSource communitySource mediaSource workplaceSource
-  policeSource popularLegalCultureSource priorInstitutionSource :
-    FolkFormationSource
+  familySource schoolSource communitySource mediaSource workplaceSource : FolkFormationSource
+  policeSource popularLegalCultureSource priorInstitutionSource : FolkFormationSource
 
 canonicalFolkFormationSources : List FolkFormationSource
 canonicalFolkFormationSources =
@@ -182,8 +180,7 @@ formalContestabilityDoesNotImplyAffordableRefinement =
 ------------------------------------------------------------------------
 
 data LegalAction : Set where
-  withdrawAction seekAdviceAction generateSubmissionAction persistAction :
-    LegalAction
+  withdrawAction seekAdviceAction generateSubmissionAction persistAction : LegalAction
 
 data ReachableWithoutAI : LegalAction → Set where
   unaidedWithdraw : ReachableWithoutAI withdrawAction

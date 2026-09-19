@@ -272,20 +272,15 @@ canonicalRSASharedPrimeCollapseVerifier = record
 -- Shared-prime collapse boundary surface.
 
 data RSASharedPrimeCollapseBoundaryKind : Set where
-  commonDivisorWitnessKind :
-    RSASharedPrimeCollapseBoundaryKind
+  commonDivisorWitnessKind : RSASharedPrimeCollapseBoundaryKind
 
-  nontrivialCommonDivisorKind :
-    RSASharedPrimeCollapseBoundaryKind
+  nontrivialCommonDivisorKind : RSASharedPrimeCollapseBoundaryKind
 
-  recoveredFactorWitnessKind :
-    RSASharedPrimeCollapseBoundaryKind
+  recoveredFactorWitnessKind : RSASharedPrimeCollapseBoundaryKind
 
-  batchBoundaryIntegrationKind :
-    RSASharedPrimeCollapseBoundaryKind
+  batchBoundaryIntegrationKind : RSASharedPrimeCollapseBoundaryKind
 
-  futureRSAArithmeticCoreKind :
-    RSASharedPrimeCollapseBoundaryKind
+  futureRSAArithmeticCoreKind : RSASharedPrimeCollapseBoundaryKind
 
 canonicalRSASharedPrimeCollapseBoundaryKinds :
   List RSASharedPrimeCollapseBoundaryKind

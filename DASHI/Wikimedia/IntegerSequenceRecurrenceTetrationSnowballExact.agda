@@ -23,8 +23,8 @@ import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
 ------------------------------------------------------------------------
 
 data RecursiveConstructionRole : Set where
-  explicitFormula fixedIndexRecurrence memberPredicate powerSequence
-  incidenceCountSequence functionSpaceRecurrence selfIndexedAxisRecurrence
+  explicitFormula fixedIndexRecurrence memberPredicate powerSequence : RecursiveConstructionRole
+  incidenceCountSequence functionSpaceRecurrence selfIndexedAxisRecurrence : RecursiveConstructionRole
   recursiveHiddenFibre tetrationRole : RecursiveConstructionRole
 
 record RecursiveConstructionCoordinate : Set where

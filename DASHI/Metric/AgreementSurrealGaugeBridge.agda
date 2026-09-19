@@ -188,41 +188,31 @@ canonicalMetricAuthorityReceipt n =
 -- Symbolic No/surreal gauge slot.
 
 data GaugeAuthorityScope : Set where
-  externalChangeOfGaugeAuthoritySlot :
-    GaugeAuthorityScope
+  externalChangeOfGaugeAuthoritySlot : GaugeAuthorityScope
 
 data SurrealGaugeBlocker : Set where
-  missingNoSurrealGaugeAuthority :
-    SurrealGaugeBlocker
+  missingNoSurrealGaugeAuthority : SurrealGaugeBlocker
 
 data GaugeAntitoneDirection : Set where
-  depthIncreasesGaugeDoesNotIncrease :
-    GaugeAntitoneDirection
+  depthIncreasesGaugeDoesNotIncrease : GaugeAntitoneDirection
 
 data GaugeLawShapeKind : Set where
-  agreeDepthVariableLawShape :
-    GaugeLawShapeKind
+  agreeDepthVariableLawShape : GaugeLawShapeKind
 
-  symbolicThreePowerMinusDepthGaugeLawShape :
-    GaugeLawShapeKind
+  symbolicThreePowerMinusDepthGaugeLawShape : GaugeLawShapeKind
 
-  antitoneDirectionLawShape :
-    GaugeLawShapeKind
+  antitoneDirectionLawShape : GaugeLawShapeKind
 
-  ultrametricInheritancePrerequisiteLawShape :
-    GaugeLawShapeKind
+  ultrametricInheritancePrerequisiteLawShape : GaugeLawShapeKind
 
 data MonotoneEquivalentGaugeLaw : Set where
-  prefixDistanceMonotoneEquivalentToDepthAntitoneGauge :
-    MonotoneEquivalentGaugeLaw
+  prefixDistanceMonotoneEquivalentToDepthAntitoneGauge : MonotoneEquivalentGaugeLaw
 
 data RationalGaugeAntitoneDependency : Set where
-  symbolicThreeMinusDepthDependsOnNatDepthOrderAndQQOrder :
-    RationalGaugeAntitoneDependency
+  symbolicThreeMinusDepthDependsOnNatDepthOrderAndQQOrder : RationalGaugeAntitoneDependency
 
 data NaiveRationalGaugeEqualityFailureReason : Set where
-  fullAgreementDistanceZeroButSymbolicGaugeRemainsThreeMinusDepth :
-    NaiveRationalGaugeEqualityFailureReason
+  fullAgreementDistanceZeroButSymbolicGaugeRemainsThreeMinusDepth : NaiveRationalGaugeEqualityFailureReason
 
 ------------------------------------------------------------------------
 -- Internal symbolic ordered-QQ proof-term receipts.

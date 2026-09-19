@@ -28,32 +28,23 @@ import Ontology.ClinicalDiagnostics.ClinicalDiagnosticsCore as Clinical
 -- thread the boundary surface without bypassing those authorities.
 
 data TraumaClinicalGovernanceAxis : Set where
-  traumaCandidateAxis :
-    TraumaClinicalGovernanceAxis
+  traumaCandidateAxis : TraumaClinicalGovernanceAxis
 
-  bodyMemoryCandidateAxis :
-    TraumaClinicalGovernanceAxis
+  bodyMemoryCandidateAxis : TraumaClinicalGovernanceAxis
 
-  consentGateAxis :
-    TraumaClinicalGovernanceAxis
+  consentGateAxis : TraumaClinicalGovernanceAxis
 
-  pacingGateAxis :
-    TraumaClinicalGovernanceAxis
+  pacingGateAxis : TraumaClinicalGovernanceAxis
 
-  reviewGateAxis :
-    TraumaClinicalGovernanceAxis
+  reviewGateAxis : TraumaClinicalGovernanceAxis
 
-  diagnosisBlockedAxis :
-    TraumaClinicalGovernanceAxis
+  diagnosisBlockedAxis : TraumaClinicalGovernanceAxis
 
-  treatmentPrescriptionBlockedAxis :
-    TraumaClinicalGovernanceAxis
+  treatmentPrescriptionBlockedAxis : TraumaClinicalGovernanceAxis
 
-  exposureForcingBlockedAxis :
-    TraumaClinicalGovernanceAxis
+  exposureForcingBlockedAxis : TraumaClinicalGovernanceAxis
 
-  vulnerableUserAuthorityBlockedAxis :
-    TraumaClinicalGovernanceAxis
+  vulnerableUserAuthorityBlockedAxis : TraumaClinicalGovernanceAxis
 
 canonicalTraumaClinicalGovernanceAxes :
   List TraumaClinicalGovernanceAxis

@@ -17,31 +17,31 @@ import DASHI.Culture.MissingDeceasedTwentyScientistScienceFiniteWitnessBidiExact
 ------------------------------------------------------------------------
 
 data EmbodiedSubsystemRole : Set where
-  plasmaModel
-  harshEnvironmentPowerControl
-  molecularDiagnostics
-  oxygenServiceMaterials
-  astronomicalInference
-  planetaryCharacterisation
-  resilientStructureControl
-  acceleratorDiagnostics
-  chemicalBiologyAssays
-  anomalousForceDiscrimination
-  precisionForceMetrology
-  hardwareVerification
-  robustDecisionSupport
-  thermalProtection
-  dataSecurityGovernance
-  spaceWeatherForecasting
-  autonomousMobility
-  photochemicalControl
-  adaptiveStructuralWaves
+  plasmaModel : EmbodiedSubsystemRole
+  harshEnvironmentPowerControl : EmbodiedSubsystemRole
+  molecularDiagnostics : EmbodiedSubsystemRole
+  oxygenServiceMaterials : EmbodiedSubsystemRole
+  astronomicalInference : EmbodiedSubsystemRole
+  planetaryCharacterisation : EmbodiedSubsystemRole
+  resilientStructureControl : EmbodiedSubsystemRole
+  acceleratorDiagnostics : EmbodiedSubsystemRole
+  chemicalBiologyAssays : EmbodiedSubsystemRole
+  anomalousForceDiscrimination : EmbodiedSubsystemRole
+  precisionForceMetrology : EmbodiedSubsystemRole
+  hardwareVerification : EmbodiedSubsystemRole
+  robustDecisionSupport : EmbodiedSubsystemRole
+  thermalProtection : EmbodiedSubsystemRole
+  dataSecurityGovernance : EmbodiedSubsystemRole
+  spaceWeatherForecasting : EmbodiedSubsystemRole
+  autonomousMobility : EmbodiedSubsystemRole
+  photochemicalControl : EmbodiedSubsystemRole
+  adaptiveStructuralWaves : EmbodiedSubsystemRole
   highSpeedFlowControl : EmbodiedSubsystemRole
 
 data CompositeApplication : Set where
-  longDurationSciencePlatform
-  extremeEnvironmentResearchTestbed
-  autonomousRemoteSurveyPlatform
+  longDurationSciencePlatform : CompositeApplication
+  extremeEnvironmentResearchTestbed : CompositeApplication
+  autonomousRemoteSurveyPlatform : CompositeApplication
   multiDomainResearchLaboratory : CompositeApplication
 
 record EmbodiedTechnologySlot : Set where

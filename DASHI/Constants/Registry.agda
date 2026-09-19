@@ -1558,8 +1558,7 @@ knownLawSlotCount registry =
   + lawSlotCount (ConstantsRegistry.empiricalRuntimeLawSlots registry)
 
 data KnownInputsPopulationStatus : Set where
-  externalInputSlotsPopulatedNonPromoting :
-    KnownInputsPopulationStatus
+  externalInputSlotsPopulatedNonPromoting : KnownInputsPopulationStatus
 
 record KnownInputsPopulationReceipt : Set₁ where
   field

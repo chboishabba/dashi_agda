@@ -14,8 +14,7 @@ open import Agda.Builtin.Nat using (Nat)
 ------------------------------------------------------------------------
 
 data CoarseContentUnit : Set where
-  noteUnit chatTurnUnit articleUnit chapterUnit bookUnit documentUnit :
-    CoarseContentUnit
+  noteUnit chatTurnUnit articleUnit chapterUnit bookUnit documentUnit : CoarseContentUnit
 
 record TokenNormalisedWorkload : Set where
   constructor tokenNormalisedWorkload

@@ -26,31 +26,31 @@ import DASHI.Wikimedia.IbrahimCannabisGlyphosateAMPAPyrolysisParetoExact as Glyp
 ------------------------------------------------------------------------
 
 data ScientificConsumer : Set where
-  inhaledDoseConsumer
-  mixedCombustionInteractionConsumer
-  btHarvestBurdenConsumer
-  glyphosateOccurrenceConsumer
-  regulatoryModelFreshnessConsumer
+  inhaledDoseConsumer : ScientificConsumer
+  mixedCombustionInteractionConsumer : ScientificConsumer
+  btHarvestBurdenConsumer : ScientificConsumer
+  glyphosateOccurrenceConsumer : ScientificConsumer
+  regulatoryModelFreshnessConsumer : ScientificConsumer
   nonFoodToFoodLifecycleConsumer : ScientificConsumer
 
 data ExperimentFamily : Set where
-  sameMaterialThreeArmCombustion
-  matchedCannabisVapeTransfer
-  btPostApplicationHarvestSeries
-  glyphosateAMPADedicatedSurvey
-  exposurePriorBacktest
+  sameMaterialThreeArmCombustion : ExperimentFamily
+  matchedCannabisVapeTransfer : ExperimentFamily
+  btPostApplicationHarvestSeries : ExperimentFamily
+  glyphosateAMPADedicatedSurvey : ExperimentFamily
+  exposurePriorBacktest : ExperimentFamily
   nonFoodFoodLifecycleResidueFollowup : ExperimentFamily
 
 data ObservationClass : Set where
-  sourceResidueVector
-  mainstreamSmokeParentVector
-  emittedAerosolParentVector
-  thermalProductVector
-  viableBtCount
-  btStrainIdentity
-  cryVipProteinBurden
-  glyphosateAMPAVector
-  consumptionDistribution
+  sourceResidueVector : ObservationClass
+  mainstreamSmokeParentVector : ObservationClass
+  emittedAerosolParentVector : ObservationClass
+  thermalProductVector : ObservationClass
+  viableBtCount : ObservationClass
+  btStrainIdentity : ObservationClass
+  cryVipProteinBurden : ObservationClass
+  glyphosateAMPAVector : ObservationClass
+  consumptionDistribution : ObservationClass
   legalMarketState : ObservationClass
 
 record ExperimentCarrier : Set where

@@ -107,7 +107,7 @@ currentMathematicsNumberTheoryCycle = current-two-cycle-receipt
 ------------------------------------------------------------------------
 
 data ArithmeticRole : Set where
-  powerSequence coefficientSequence representationDegreeSequence divisorSequence
+  powerSequence coefficientSequence representationDegreeSequence divisorSequence : ArithmeticRole
   incidenceCountSequence localStageAddress modularFunctionCoefficient otherArithmeticRole : ArithmeticRole
 
 record SequenceRoleBridge : Set where

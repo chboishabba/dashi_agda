@@ -1,7 +1,6 @@
 module DASHI.Cognition.PNF.ContinuousOscillatorMemoryObservationQuotientExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
 
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.ContinuousOscillatorMemoryRefinementExact as Parent

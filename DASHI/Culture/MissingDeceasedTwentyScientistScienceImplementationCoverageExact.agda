@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
 data ScienceImplementationDepth : Set where
-  sourceAttributed typedMechanism equationDepth finiteWitness executableWitness
+  sourceAttributed typedMechanism equationDepth finiteWitness executableWitness : ScienceImplementationDepth
   identityGated programmeOnly : ScienceImplementationDepth
 
 record ScienceImplementationCoverage : Set where

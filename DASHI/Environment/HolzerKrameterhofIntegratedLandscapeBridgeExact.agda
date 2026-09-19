@@ -22,20 +22,20 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as LES
 ------------------------------------------------------------------------
 
 data KrameterhofPracticeElement : Set where
-  terraceCropping
-  altitudeStaggeredCropping
-  cascadingPondSystem
-  gravityWaterDistribution
-  mixedDepthPondHabitat
-  fishCrayfishAquaculture
-  plantedRestPond
-  openChannelReaeration
-  adjustablePondStandpipe
-  terraceAgroforestry
-  coppiceWithStandardsWoodland
-  terraceEmbankmentGrazing
-  rotationalPigGrazing
-  passiveEarthCellarStorage
+  terraceCropping : KrameterhofPracticeElement
+  altitudeStaggeredCropping : KrameterhofPracticeElement
+  cascadingPondSystem : KrameterhofPracticeElement
+  gravityWaterDistribution : KrameterhofPracticeElement
+  mixedDepthPondHabitat : KrameterhofPracticeElement
+  fishCrayfishAquaculture : KrameterhofPracticeElement
+  plantedRestPond : KrameterhofPracticeElement
+  openChannelReaeration : KrameterhofPracticeElement
+  adjustablePondStandpipe : KrameterhofPracticeElement
+  terraceAgroforestry : KrameterhofPracticeElement
+  coppiceWithStandardsWoodland : KrameterhofPracticeElement
+  terraceEmbankmentGrazing : KrameterhofPracticeElement
+  rotationalPigGrazing : KrameterhofPracticeElement
+  passiveEarthCellarStorage : KrameterhofPracticeElement
   microHydroPotential : KrameterhofPracticeElement
 
 record SituatedKrameterhofPractice : Set where

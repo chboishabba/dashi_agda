@@ -22,14 +22,14 @@ import DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact as Atom
 ------------------------------------------------------------------------
 
 data LocalPopulationSourceRole : Set where
-  primaryResearchReport
-  primaryLocalGovernmentPlan
+  primaryResearchReport : LocalPopulationSourceRole
+  primaryLocalGovernmentPlan : LocalPopulationSourceRole
   primaryRegionalPopulationStudy : LocalPopulationSourceRole
 
 data LocalPopulationRelation : Set where
-  ipswichWide
-  whiteRockSpringMountainAdjacent
-  regionalGeneticContext
+  ipswichWide : LocalPopulationRelation
+  whiteRockSpringMountainAdjacent : LocalPopulationRelation
+  regionalGeneticContext : LocalPopulationRelation
   exactSpringviewUnresolved : LocalPopulationRelation
 
 koalaQid : Id.ItemId

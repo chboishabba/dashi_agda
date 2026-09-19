@@ -25,20 +25,15 @@ listCount (_ ∷ xs) =
 -- Shared domain vocabulary.
 
 data BridgeDomain : Set where
-  educationDomain :
-    BridgeDomain
+  educationDomain : BridgeDomain
 
-  traumaBodyMemoryDomain :
-    BridgeDomain
+  traumaBodyMemoryDomain : BridgeDomain
 
-  qiRelationalFlowDomain :
-    BridgeDomain
+  qiRelationalFlowDomain : BridgeDomain
 
-  reciprocityDomain :
-    BridgeDomain
+  reciprocityDomain : BridgeDomain
 
-  lawPowerInterfaceDomain :
-    BridgeDomain
+  lawPowerInterfaceDomain : BridgeDomain
 
   namedBridgeDomain :
     String →
@@ -60,14 +55,11 @@ canonicalBridgeDomainCount =
   listCount canonicalBridgeDomains
 
 data TopologyNode : Set where
-  chartTopologyNode :
-    TopologyNode
+  chartTopologyNode : TopologyNode
 
-  residualTopologyNode :
-    TopologyNode
+  residualTopologyNode : TopologyNode
 
-  plusOneTopologyNode :
-    TopologyNode
+  plusOneTopologyNode : TopologyNode
 
 canonicalTopologySignature :
   List TopologyNode
@@ -83,32 +75,23 @@ canonicalTopologyNodeCount =
   listCount canonicalTopologySignature
 
 data BridgeGuardKind : Set where
-  candidateOnlyGuardKind :
-    BridgeGuardKind
+  candidateOnlyGuardKind : BridgeGuardKind
 
-  chartTopologyGuardKind :
-    BridgeGuardKind
+  chartTopologyGuardKind : BridgeGuardKind
 
-  residualTopologyGuardKind :
-    BridgeGuardKind
+  residualTopologyGuardKind : BridgeGuardKind
 
-  plusOneTopologyGuardKind :
-    BridgeGuardKind
+  plusOneTopologyGuardKind : BridgeGuardKind
 
-  noMysticalAuthorityGuardKind :
-    BridgeGuardKind
+  noMysticalAuthorityGuardKind : BridgeGuardKind
 
-  noClinicalAuthorityGuardKind :
-    BridgeGuardKind
+  noClinicalAuthorityGuardKind : BridgeGuardKind
 
-  noLegalAuthorityGuardKind :
-    BridgeGuardKind
+  noLegalAuthorityGuardKind : BridgeGuardKind
 
-  noPowerAuthorityGuardKind :
-    BridgeGuardKind
+  noPowerAuthorityGuardKind : BridgeGuardKind
 
-  noInterfaceAuthorityGuardKind :
-    BridgeGuardKind
+  noInterfaceAuthorityGuardKind : BridgeGuardKind
 
 canonicalBridgeGuardKinds :
   List BridgeGuardKind

@@ -17,16 +17,11 @@ import DASHI.Algebra.Trit as Trit
 -- necessarily collapses negOne with negHalf and posHalf with posOne.
 
 data HalfTrit : Set where
-  negOne :
-    HalfTrit
-  negHalf :
-    HalfTrit
-  zero :
-    HalfTrit
-  posHalf :
-    HalfTrit
-  posOne :
-    HalfTrit
+  negOne : HalfTrit
+  negHalf : HalfTrit
+  zero : HalfTrit
+  posHalf : HalfTrit
+  posOne : HalfTrit
 
 embedTrit :
   HalfTrit →
@@ -74,26 +69,18 @@ embedTrit-posHalf-collapses-with-posOne :
 embedTrit-posHalf-collapses-with-posOne = refl
 
 data HalfTritConstructionStatus : Set where
-  halfTritCarrierConstructedEmbedNonInjective :
-    HalfTritConstructionStatus
+  halfTritCarrierConstructedEmbedNonInjective : HalfTritConstructionStatus
 
 data HalfTritDuplicateFreedomStatus : Set where
-  duplicateFreedomAvailableOnHalfTritCarrierOnly :
-    HalfTritDuplicateFreedomStatus
-  duplicateFreedomObstructedForEmbedTrit :
-    HalfTritDuplicateFreedomStatus
+  duplicateFreedomAvailableOnHalfTritCarrierOnly : HalfTritDuplicateFreedomStatus
+  duplicateFreedomObstructedForEmbedTrit : HalfTritDuplicateFreedomStatus
 
 data HalfTritResidualObligation : Set where
-  e8EightCoordinateCarrierStillMissing :
-    HalfTritResidualObligation
-  e8RootEqualityDecisionStillMissing :
-    HalfTritResidualObligation
-  e8RootEnumeratorStillMissing :
-    HalfTritResidualObligation
-  e8DuplicateFreedomNotDerivableFromEmbedTrit :
-    HalfTritResidualObligation
-  e8CompletenessStillMissing :
-    HalfTritResidualObligation
+  e8EightCoordinateCarrierStillMissing : HalfTritResidualObligation
+  e8RootEqualityDecisionStillMissing : HalfTritResidualObligation
+  e8RootEnumeratorStillMissing : HalfTritResidualObligation
+  e8DuplicateFreedomNotDerivableFromEmbedTrit : HalfTritResidualObligation
+  e8CompletenessStillMissing : HalfTritResidualObligation
 
 canonicalHalfTritResidualObligations :
   List HalfTritResidualObligation

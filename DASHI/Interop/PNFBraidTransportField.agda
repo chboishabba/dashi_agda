@@ -21,24 +21,18 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 -- authority, physics theorem, or Clay promotion is constructed here.
 
 data PNFBraidTransportStatus : Set where
-  pnfBraidTransportRecordedNoPromotion :
-    PNFBraidTransportStatus
+  pnfBraidTransportRecordedNoPromotion : PNFBraidTransportStatus
 
 data SourceEventKind : Set where
-  newsEvent :
-    SourceEventKind
+  newsEvent : SourceEventKind
 
-  correctionEvent :
-    SourceEventKind
+  correctionEvent : SourceEventKind
 
-  sourceUpdateEvent :
-    SourceEventKind
+  sourceUpdateEvent : SourceEventKind
 
-  retractionEvent :
-    SourceEventKind
+  retractionEvent : SourceEventKind
 
-  backgroundContextEvent :
-    SourceEventKind
+  backgroundContextEvent : SourceEventKind
 
 record SourceEvent : Set where
   constructor sourceEvent
@@ -64,17 +58,13 @@ record SourceEvent : Set where
 open SourceEvent public
 
 data TimeSliceKind : Set where
-  initialSlice :
-    TimeSliceKind
+  initialSlice : TimeSliceKind
 
-  revisionSlice :
-    TimeSliceKind
+  revisionSlice : TimeSliceKind
 
-  correctionSlice :
-    TimeSliceKind
+  correctionSlice : TimeSliceKind
 
-  supersededSlice :
-    TimeSliceKind
+  supersededSlice : TimeSliceKind
 
 record TimeSliceRevision : Set where
   constructor timeSliceRevision
@@ -94,20 +84,15 @@ record TimeSliceRevision : Set where
 open TimeSliceRevision public
 
 data PNFStrandRole : Set where
-  sourceStrand :
-    PNFStrandRole
+  sourceStrand : PNFStrandRole
 
-  temporalStrand :
-    PNFStrandRole
+  temporalStrand : PNFStrandRole
 
-  candidateRefStrand :
-    PNFStrandRole
+  candidateRefStrand : PNFStrandRole
 
-  residualStrand :
-    PNFStrandRole
+  residualStrand : PNFStrandRole
 
-  supportStrand :
-    PNFStrandRole
+  supportStrand : PNFStrandRole
 
 record PNFRef : Set where
   constructor pnfRef
@@ -161,32 +146,23 @@ record PNFStrand : Set where
 open PNFStrand public
 
 data PNFCrossingKind : Set where
-  sameFibreCrossing :
-    PNFCrossingKind
+  sameFibreCrossing : PNFCrossingKind
 
-  partialResidualCrossing :
-    PNFCrossingKind
+  partialResidualCrossing : PNFCrossingKind
 
-  contradictionCrossing :
-    PNFCrossingKind
+  contradictionCrossing : PNFCrossingKind
 
-  supportStrengthening :
-    PNFCrossingKind
+  supportStrengthening : PNFCrossingKind
 
-  supportWeakening :
-    PNFCrossingKind
+  supportWeakening : PNFCrossingKind
 
-  sourceContinuation :
-    PNFCrossingKind
+  sourceContinuation : PNFCrossingKind
 
-  mergeCrossing :
-    PNFCrossingKind
+  mergeCrossing : PNFCrossingKind
 
-  swapCrossing :
-    PNFCrossingKind
+  swapCrossing : PNFCrossingKind
 
-  strandTerminationCrossing :
-    PNFCrossingKind
+  strandTerminationCrossing : PNFCrossingKind
 
 canonicalCrossingKinds :
   List PNFCrossingKind
@@ -287,43 +263,31 @@ record BraidSignature : Set where
 open BraidSignature public
 
 data TransportResolutionState : Set where
-  proposedOnly :
-    TransportResolutionState
+  proposedOnly : TransportResolutionState
 
-  resolvedByConsumer :
-    TransportResolutionState
+  resolvedByConsumer : TransportResolutionState
 
-  selectedByPolicy :
-    TransportResolutionState
+  selectedByPolicy : TransportResolutionState
 
-  itirValidated :
-    TransportResolutionState
+  itirValidated : TransportResolutionState
 
-  commitReady :
-    TransportResolutionState
+  commitReady : TransportResolutionState
 
 data TransportCommitGate : Set where
-  requiresResolution :
-    TransportCommitGate
+  requiresResolution : TransportCommitGate
 
-  requiresSelection :
-    TransportCommitGate
+  requiresSelection : TransportCommitGate
 
-  requiresITIRValidation :
-    TransportCommitGate
+  requiresITIRValidation : TransportCommitGate
 
-  commitBlockedUntilReceipts :
-    TransportCommitGate
+  commitBlockedUntilReceipts : TransportCommitGate
 
 data ResidualTransportGate : Set where
-  residualMayContinue :
-    ResidualTransportGate
+  residualMayContinue : ResidualTransportGate
 
-  residualNoTypedMeetTerminates :
-    ResidualTransportGate
+  residualNoTypedMeetTerminates : ResidualTransportGate
 
-  residualContradictionTerminates :
-    ResidualTransportGate
+  residualContradictionTerminates : ResidualTransportGate
 
 residualTerminationThreshold :
   Residual.ResidualLevel
@@ -491,29 +455,21 @@ pnfBraidTransportPromotionImpossible :
 pnfBraidTransportPromotionImpossible ()
 
 data PNFBraidTransportNonClaim : Set where
-  noTruthClaim :
-    PNFBraidTransportNonClaim
+  noTruthClaim : PNFBraidTransportNonClaim
 
-  noSourceAuthorityPromotion :
-    PNFBraidTransportNonClaim
+  noSourceAuthorityPromotion : PNFBraidTransportNonClaim
 
-  noLegalOrPolicyAuthority :
-    PNFBraidTransportNonClaim
+  noLegalOrPolicyAuthority : PNFBraidTransportNonClaim
 
-  noWikidataAuthority :
-    PNFBraidTransportNonClaim
+  noWikidataAuthority : PNFBraidTransportNonClaim
 
-  noRuntimeITIRAuthority :
-    PNFBraidTransportNonClaim
+  noRuntimeITIRAuthority : PNFBraidTransportNonClaim
 
-  noCommitWithoutResolutionSelectionValidation :
-    PNFBraidTransportNonClaim
+  noCommitWithoutResolutionSelectionValidation : PNFBraidTransportNonClaim
 
-  noPhysicsPromotion :
-    PNFBraidTransportNonClaim
+  noPhysicsPromotion : PNFBraidTransportNonClaim
 
-  noClayPromotion :
-    PNFBraidTransportNonClaim
+  noClayPromotion : PNFBraidTransportNonClaim
 
 canonicalPNFBraidTransportNonClaims :
   List PNFBraidTransportNonClaim
