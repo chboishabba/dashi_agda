@@ -65,6 +65,8 @@ import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bishop
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
 import DASHI.Mathematics.NumberTheory.FiniteDivisorPowerSumBoundExact as PowerBound
 import DASHI.Moonshine.JInvariantEisensteinSameCarrierLimitCompilerExact as SameCarrier
+import DASHI.Moonshine.JInvariantEisensteinTruncationIncrementExact as Increment
+import DASHI.Moonshine.JInvariantEisensteinIncrementCoefficientBoundExact as IncrementBound
 import DASHI.Moonshine.JInvariantQPrincipalStripModulusExact as QModulus
 import DASHI.Moonshine.JInvariantQUpperHalfPlaneDecayCompilerExact as QDecay
 
@@ -140,6 +142,8 @@ record EisensteinBishopConvergenceFrontier : Set where
 
     sameCarrierConcreteComplexLimitCompilerOwned : Bool
     eisensteinCoefficientPolynomialGrowthOwned : Bool
+    literalTruncationIncrementIdentityOwned : Bool
+    literalIncrementCoefficientEnvelopeOwned : Bool
     principalStripQModulusCompilerOwned : Bool
     upperHalfPlaneQDecayCompilerOwned : Bool
     concreteQOrderAndStripInputsOwned : Bool
@@ -164,8 +168,8 @@ canonicalEisensteinBishopConvergenceFrontier :
 canonicalEisensteinBishopConvergenceFrontier =
   eisenstein-bishop-convergence-frontier
     true true true true true
-    true true true true false
+    true true true true true true false
     false
     false false false false
     false false
-    "Bishop completeness remains available, while the shortest route now stays on the existing ConcreteComplex carrier: same-carrier Cauchy completion is paid, sigma3/sigma5 polynomial growth is paid, and principal-strip/upper-half-plane q-decay compilers are paid conditionally. The genuine remaining inputs are a nondegenerate ordinary order/polar-branch inhabitant, the concrete polynomial-times-geometric E4/E6 Cauchy majorants, and the limit = analytic lattice-sum same-object theorem."
+    "Bishop completeness remains available, while the shortest route now stays on the existing ConcreteComplex carrier: same-carrier Cauchy completion is paid, sigma3/sigma5 polynomial growth is paid, the exact E4/E6 successor increments and their 240/504 coefficient envelopes are paid, and principal-strip/upper-half-plane q-decay compilers are paid conditionally. The genuine remaining inputs are a nondegenerate ordinary order/polar-branch inhabitant, the concrete polynomial-times-geometric E4/E6 Cauchy majorants, and the limit = analytic lattice-sum same-object theorem."
