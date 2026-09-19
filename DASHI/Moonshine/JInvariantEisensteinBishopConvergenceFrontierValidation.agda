@@ -126,6 +126,11 @@ bishopUpperHalfPlaneEisensteinMajorantsAreOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopUpperHalfPlaneEisensteinMajorantsAreOwned = refl
 
+bishopUpperHalfPlaneQuotientRadiusWeldCompilerIsOwned :
+  P.bishopUpperHalfPlaneQuotientRadiusWeldCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopUpperHalfPlaneQuotientRadiusWeldCompilerIsOwned = refl
+
 bishopLiteralRadiusMajorantCompilerIsOwned :
   P.bishopLiteralRadiusMajorantCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
