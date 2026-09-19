@@ -317,3 +317,62 @@ rationalReferenceFoldSemanticsLevel = conditional
 
 normalizedReferenceReopeningSameObjectLevel : ProofLevel
 normalizedReferenceReopeningSameObjectLevel = conditional
+
+
+------------------------------------------------------------------------
+-- Lift the pointwise Gate4/reopening weld over every selected cutoff.
+------------------------------------------------------------------------
+
+import DASHI.Physics.YangMills.BalabanFiniteVolumeReopeningPresentationRound283Exact as R283
+import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
+
+record Gate4SelectedProbabilityPresentationInputs
+    {Scale Fine SlowField Component Functional Coarse Measure : Set}
+    {tData : T.FiniteLocalTOperationData
+      Scale Fine SlowField Component Functional ℚ}
+    {canonical :
+      Canonical.CanonicalRationalReferenceNormalizationData
+        Scale Fine SlowField Component Functional tData}
+    (semantics : RationalReferenceFoldSemantics canonical)
+    (thermodynamic :
+      T5.PhysicalThermodynamicClusterData
+        Measure (Reopen.Observable Fine) ℚ)
+    (presentation :
+      R283.FiniteVolumeReopeningPresentation
+        Measure Fine Coarse thermodynamic) : Set₁ where
+  field
+    normalizedReferenceWeldAt : ∀ cutoff →
+      NormalizedReferenceReopeningWeld
+        semantics
+        (R283.stepAt presentation cutoff)
+
+open Gate4SelectedProbabilityPresentationInputs public
+
+compileGate4SelectedT5FiniteProbabilityPresentation :
+  ∀ {Scale Fine SlowField Component Functional Coarse Measure}
+    {tData : T.FiniteLocalTOperationData
+      Scale Fine SlowField Component Functional ℚ}
+    {canonical :
+      Canonical.CanonicalRationalReferenceNormalizationData
+        Scale Fine SlowField Component Functional tData}
+    {semantics : RationalReferenceFoldSemantics canonical}
+    {thermodynamic :
+      T5.PhysicalThermodynamicClusterData
+        Measure (Reopen.Observable Fine) ℚ}
+    {presentation :
+      R283.FiniteVolumeReopeningPresentation
+        Measure Fine Coarse thermodynamic} →
+  Gate4SelectedProbabilityPresentationInputs
+    semantics thermodynamic presentation →
+  Probability.SelectedT5FiniteProbabilityPresentation
+    Measure Fine Coarse thermodynamic
+compileGate4SelectedT5FiniteProbabilityPresentation
+  {presentation = presentation} inputs = record
+  { presentation = presentation
+  ; probabilityAt = λ cutoff →
+      compileNormalizedReferenceProbabilityLaw
+        (normalizedReferenceWeldAt inputs cutoff)
+  }
+
+gate4SelectedT5ProbabilityPresentationCompilerLevel : ProofLevel
+gate4SelectedT5ProbabilityPresentationCompilerLevel = machineChecked
