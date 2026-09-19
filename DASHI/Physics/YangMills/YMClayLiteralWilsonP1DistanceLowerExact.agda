@@ -1,10 +1,10 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClayLiteralWilsonP1DistanceLowerExact where
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool; false)\nopen import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as Nat
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -46,7 +46,7 @@ literalWilsonFiniteClusteringFromDistanceLower :
   ≤ Shell.quarter * Power.rationalPower Geo.half time
 literalWilsonFiniteClusteringFromDistanceLower
     {dataSet = dataSet} {extension = extension}
-    base payment magnitudeIsAbsolute cutoff left right time timeBelow =
+    base payment cutoff left right time timeBelow =
   let
     shell = R387.r320PaymentAsR274ConnectedShell base payment
     distance = R274.physicalDistance shell left right
