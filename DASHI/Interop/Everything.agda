@@ -59,6 +59,8 @@ import DASHI.Interop.SLRGWBCandidateWorldProjectionExact
 import DASHI.Interop.SLRGWBExecutionRoadmapExact
 import DASHI.Interop.SLRGWBAmbiguityDirected100HopExact
 import DASHI.Interop.SLRGWBAmbiguityDirected100HopValidation
+import DASHI.Interop.SLRGWBSupervisedTypeClosureExact
+import DASHI.Interop.SLRGWBSupervisedTypeClosureValidation
 import DASHI.Interop.SLRWikimediaFirstWorldAcquisitionExact
 import DASHI.Interop.SLRGWBReviewedWikimediaIdentityAndTieredTransportExact
 import DASHI.Interop.SLRGWBWikimediaReplayableHandoffExact
