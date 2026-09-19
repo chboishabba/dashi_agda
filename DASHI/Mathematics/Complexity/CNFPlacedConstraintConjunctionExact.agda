@@ -7,6 +7,7 @@ module DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
@@ -46,7 +47,7 @@ evaluateCNFAppend (clause ∷ clauses) right assignment
 ... | false | false | false = refl
 
 record PlacedPredicate
-    (local global : Agda.Builtin.Nat.Nat) : Set₁ where
+    (local global : Nat) : Set₁ where
   constructor placed-predicate
   field
     rename :
@@ -77,7 +78,7 @@ compilePlacedAll (placed ∷ rest) =
     (compilePlacedAll rest)
 
 data AllPlacedSatisfied
-    {local global : Agda.Builtin.Nat.Nat}
+    {local global : Nat}
     (assignment : CNF.Bits global) :
     List (PlacedPredicate local global) →
     Set where
