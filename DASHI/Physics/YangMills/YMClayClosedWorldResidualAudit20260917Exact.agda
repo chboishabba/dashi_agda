@@ -6,14 +6,26 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- CLOSED-WORLD RESIDUAL AUDIT — frontier-reconciliation recut
+-- CLOSED-WORLD RESIDUAL AUDIT — 2026-09-19 route-Pareto recut
 --
 -- Search result != theorem authority != physical inhabitant.
 --
--- This recut removes obsolete-strength interfaces from the primitive frontier:
--- * full R339 source-magnitude equality is not required by the mass-gap consumer;
--- * generic Mosco/recovery theory is not the F3 leaf;
--- * YM=OS evolution equality is not a primitive F4 payment.
+-- Two honest mass-gap routes now coexist:
+--
+--   S / direct source-OS route:
+--     selected finite T5 source localization
+--       -> continuum pair clustering
+--       -> SAME reconstructed OS Hamiltonian spectral transfer
+--       -> physical mass-gap certificate.
+--
+--   G / strong finite-gap-recovery route:
+--     dense L2 transfer defect
+--       -> uniform finite gap
+--       -> P_a/E_a + Mosco/recovery
+--       -> continuum gap.
+--
+-- F1-C/F1-D and Sprint P_a/E_a are genuine mathematics on route G, but are
+-- not globally mandatory terminal leaves because route S bypasses them.
 ------------------------------------------------------------------------
 
 data ResidualClass : Set where
@@ -21,12 +33,14 @@ data ResidualClass : Set where
   sameObjectAttachment : ResidualClass
   quantitativeCalibration : ResidualClass
   physicalContinuumConstruction : ResidualClass
+  physicalSpectralIdentification : ResidualClass
   physicalCommonCoreConstruction : ResidualClass
 
 data ResidualStatus : Set where
   unpaid : ResidualStatus
   compilerOwned : ResidualStatus
   obsoleteStrength : ResidualStatus
+  routeSpecific : ResidualStatus
 
 record ExactResidual : Set where
   constructor exact-residual
@@ -40,128 +54,168 @@ record ExactResidual : Set where
 open ExactResidual public
 
 ------------------------------------------------------------------------
--- F1 — weakest physical min-cut.
+-- Shared / direct-source route coordinates.
 ------------------------------------------------------------------------
 
-f1ASelectedCMP116Localization : ExactResidual
-f1ASelectedCMP116Localization = exact-residual
+sourceSelectedLocalization : ExactResidual
+sourceSelectedLocalization = exact-residual
   sourceLocalization
-  "BalabanCMP116CanonicalCommonDomainSourceRound338Exact / R343-R346 weak selected route"
-  "selected differentiated CMP116 localization on the actual canonical physical source carrier"
+  "R296 / R343-R346 / R387"
+  "literal selected two-J magnitude / direct selected spectral upper"
   unpaid
-  "R403 already makes observable-to-source attachment definitional. R343 proves full source/selected magnitude equality is stronger than the mass-gap consumer needs; R344/R346 continue on the actual shared-marked carrier. The remaining source payment is the selected localization theorem itself, not full R339."
+  "R387 is the least-privilege terminal source consumer. Full R339 magnitude equality, source-root presentation and source-envelope coordinates are not terminal fields."
 
-f1R339MagnitudeEquality : ExactResidual
-f1R339MagnitudeEquality = exact-residual
+r339MagnitudeEquality : ExactResidual
+r339MagnitudeEquality = exact-residual
   sameObjectAttachment
   "BalabanCMP116CanonicalSelectedT5ApplicationRound339Exact.agda"
   "sourceMagnitudeIsSelectedMagnitude"
   obsoleteStrength
-  "R343 records sourceMagnitudeEqualityPrimitiveForMassGapConsumer = false. Do not pay this equality merely to satisfy the historical R339 ABI."
+  "R343 records sourceMagnitudeEqualityPrimitiveForMassGapConsumer = false."
 
-f1BWilsonR295CarrierEquality : ExactResidual
-f1BWilsonR295CarrierEquality = exact-residual
+wilsonR295CarrierEquality : ExactResidual
+wilsonR295CarrierEquality = exact-residual
   sameObjectAttachment
   "YMClayF1WilsonR295SameObjectWeldExact.agda"
-  "independentWilsonToR295CarrierEqualityRequired"
+  "independent Wilson-to-R295 carrier equality"
   compilerOwned
-  "R313 machine-checks R295 -> R296, and R315 is parameterized by that same PhysicalMeasureConvergenceData/TestObservable carrier. Once the typed R315 presentation exists there is no further Wilson-to-R295 carrier equality theorem."
+  "R313 builds R296 on the same T5 carrier and R315 supplies the proof-relevant Wilson-cylinder presentation there."
 
-f1BPhysicalWilsonPresentation : ExactResidual
-f1BPhysicalWilsonPresentation = exact-residual
+h2aOSIndexedTimeSupport : ExactResidual
+h2aOSIndexedTimeSupport = exact-residual
   sameObjectAttachment
-  "BalabanPairwiseWilsonBoundedTestsRound315Exact.agda / YMClayF1WilsonR295SameObjectWeldExact.agda"
-  "PairwiseWilsonCylinderPresentation on the R295-derived carrier"
+  "BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact.agda"
+  "Euclidean time element + supportDistanceIsTime on the OS1 translation action"
   unpaid
-  "The remaining F1-B payment is the physical Wilson-cylinder presentation itself: selected physical observables decode as finite Wilson products, Wilson multiplication is the exact T5 multiplication, and the Wilson bound predicate feeds the T5 bounded-observable predicate. R315's compiler is machine-checked; its physical presentation level remains conditional."
+  "The translated observable uses the OS1 action definitionally; the remaining physical fields identify integer Euclidean time and the selected support distance."
 
-f1CEnvelopeL2Calibration : ExactResidual
-f1CEnvelopeL2Calibration = exact-residual
+h2bWilsonCylinderPresentation : ExactResidual
+h2bWilsonCylinderPresentation = exact-residual
+  sameObjectAttachment
+  "BalabanPairwiseWilsonBoundedTestsRound315Exact.agda"
+  "PairwiseWilsonCylinderPresentation"
+  unpaid
+  "Finite Wilson-cylinder boundedness is already imported/compiler-owned. The physical residue is the same-carrier Wilson product/multiplication presentation."
+
+h2cSequentialOrderClosure : ExactResidual
+h2cSequentialOrderClosure = exact-residual
+  physicalContinuumConstruction
+  "BalabanClayCanonicalBFrontierRound330Exact.agda"
+  "T5SequentialOrderClosureWeld + shared RationalSequentialOrderClosure"
+  unpaid
+  "No new YM decay estimate is needed; the one-sided limit passage is a shared analysis capability plus a convergence-carrier weld."
+
+literalMeasureExpectationConvergence : ExactResidual
+literalMeasureExpectationConvergence = exact-residual
+  physicalContinuumConstruction
+  "BalabanClayT5PhysicalMeasureGramContinuityExact.agda"
+  "PhysicalMeasureConvergenceData expectation convergence on selected Wilson tests"
+  unpaid
+  "The direct route still needs the literal finite measures/expectations to converge to the SAME continuum measure. R278 then derives connected-covariance convergence mechanically."
+
+connectedCovarianceLimit : ExactResidual
+connectedCovarianceLimit = exact-residual
+  physicalContinuumConstruction
+  "BalabanConnectedCovarianceExpectationLimitRound278Exact.agda"
+  "selectedConnectedCovarianceMagnitudeConverges"
+  compilerOwned
+  "Once the selected left/right/product expectation convergence and scalar continuity are supplied, covariance-magnitude convergence is machine-checked."
+
+h3OSHamiltonianTransferCoordinate : ExactResidual
+h3OSHamiltonianTransferCoordinate = exact-residual
+  physicalSpectralIdentification
+  "BalabanOSIndexedTransferCoordinateRound331Exact.agda"
+  "coordinateOfReconstructedHamiltonian"
+  unpaid
+  "The remaining H3 theorem is exactly that the decay/energy coordinate is the transfer coordinate OF the SAME OS reconstructed Hamiltonian."
+
+halfRateSpectralTransfer : ExactResidual
+halfRateSpectralTransfer = exact-residual
+  physicalSpectralIdentification
+  "BalabanHalfRateTransferCoordinateMassGapRound316Exact.agda"
+  "halfRateClusteringTransfer"
+  compilerOwned
+  "The concrete q=1/2 clustering-to-spectrum theorem is standard imported spectral mathematics once the same-Hamiltonian transfer coordinate is supplied."
+
+directSourceOSMassGapCompiler : ExactResidual
+directSourceOSMassGapCompiler = exact-residual
+  physicalSpectralIdentification
+  "YMClayDirectSourceOSMassGapFrontierExact.agda / R333"
+  "directSourceOSBuildsPhysicalMassGap"
+  compilerOwned
+  "R333 composes H2a/H2b/H2c/H3 and R316 produces the physical mass-gap certificate. No dense-L2 normalization, finite trajectory-gap calibration or P_a/E_a Mosco recovery is consumed by this direct route."
+
+------------------------------------------------------------------------
+-- Route G only: strong finite-gap / Mosco recovery.
+------------------------------------------------------------------------
+
+strongRouteF1CTranslatedL2 : ExactResidual
+strongRouteF1CTranslatedL2 = exact-residual
   quantitativeCalibration
-  "YMClayF1PhysicalMinCutExact.agda"
-  "RootedSourceEnvelopeL2Calibration + DensePhysicalVacuumComplement"
-  unpaid
-  "R295 and the marked-source adapter already give connected covariance <= rooted/source envelope. Dense-L2 extension is compiler-owned. The physical payment is envelope <= c_k ||psi||^2 on a dense literal-Wilson vacuum-complement algebra."
+  "YMClayF1TranslatedPairL2CalibrationExact.agda"
+  "selected one-step rooted shell <= c_k * physicalNormSq"
+  routeSpecific
+  "This is a genuine one-sided physical contraction theorem for the strong finite-gap route. The corrected pair is decode(psi), tau_1 psi; diagonal insertion and envelope equality are both overstrong. R387/R333 do not consume this theorem."
 
-f1DTrajectoryCalibration : ExactResidual
-f1DTrajectoryCalibration = exact-residual
+strongRouteF1DTrajectory : ExactResidual
+strongRouteF1DTrajectory = exact-residual
   quantitativeCalibration
   "YMClayOutstandingPhysicalFrontierExact.agda"
-  "trajectoryGapFitsLiteralWilsonReduction"
-  unpaid
-  "The beta-driven complete-density / literal finite-measure chain keeps the physical family aligned. The remaining theorem is the thin same-history calibration Delta*a_k <= 1-c_k."
+  "Delta*a_k <= 1-c_k"
+  routeSpecific
+  "Needed to turn the dense transfer defect into a uniform finite gap. The direct source/OS spectral route does not consume it."
 
-------------------------------------------------------------------------
--- F3 — concrete Sprint111-122 construction program.
-------------------------------------------------------------------------
-
-f3SamplingProjection : ExactResidual
-f3SamplingProjection = exact-residual
+strongRoutePa : ExactResidual
+strongRoutePa = exact-residual
   physicalContinuumConstruction
   "YMSprint112ContinuumSamplingProjectionMapCandidate.agda"
-  "actual P_a sampling/projection theorem"
-  unpaid
-  "The candidate and recipe are recorded, but samplingProjectionMapConstructedHere remains false."
+  "actual P_a sampling/projection"
+  routeSpecific
+  "Required by the finite-gap/Mosco recovery route; samplingProjectionMapConstructedHere remains false."
 
-f3Interpolation : ExactResidual
-f3Interpolation = exact-residual
+strongRouteEa : ExactResidual
+strongRouteEa = exact-residual
   physicalContinuumConstruction
   "YMSprint112RenormalizedInterpolationMapCandidate.agda"
-  "actual E_a renormalized interpolation theorem"
-  unpaid
-  "The candidate recipe is recorded, but interpolationMapConstructedHere remains false."
+  "actual E_a interpolation"
+  routeSpecific
+  "Required by the finite-gap/Mosco recovery route; interpolationMapConstructedHere remains false."
 
-f3GaugeNormResidual : ExactResidual
-f3GaugeNormResidual = exact-residual
+strongRouteGaugeNormResidual : ExactResidual
+strongRouteGaugeNormResidual = exact-residual
   physicalContinuumConstruction
   "YMSprint113-122 estimate/reducer chain"
-  "representative independence + quotient/gauge + uniform norm + approximate inverse + residual convergence"
-  unpaid
-  "Sprint116 closes internal reducer grammars conditionally while unconditionalNormWindowTheoremProvedHere and quotientGaugeAnalyticFeedsDischargedHere remain false. Reducer receipts are not physical theorem inhabitants."
+  "gauge/quotient + norm + approximate inverse + residual/energy recovery"
+  routeSpecific
+  "The Sprint reducers remain fail-closed. These estimates construct the actual recovery system, but are not terminal prerequisites of the direct source/OS route."
 
-f3EnergyVacuumRecovery : ExactResidual
-f3EnergyVacuumRecovery = exact-residual
-  physicalContinuumConstruction
-  "YMSprint109-116 recovery/sector chain"
-  "strong recovery + energy liminf/limsup + vacuum-sector stability"
-  unpaid
-  "BalabanVacuumOrthogonalMoscoRecoveryExact is already the terminal compiler. What remains is constructing its actual physical recovery data from the concrete map/estimate package."
-
-f3LiteralMeasureLimit : ExactResidual
-f3LiteralMeasureLimit = exact-residual
-  physicalContinuumConstruction
-  "BalabanLiteralSchwingerStressRecoveryRound126Exact.agda"
-  "literalFiniteMeasuresConverge on the same beta-driven Wilson family"
-  unpaid
-  "Round126 stores this as an input and later rounds export it. The literal measure convergence theorem itself is not constructed by the export chain."
-
-f3RecoveryCompiler : ExactResidual
-f3RecoveryCompiler = exact-residual
+strongRouteRecoveryCompiler : ExactResidual
+strongRouteRecoveryCompiler = exact-residual
   physicalContinuumConstruction
   "BalabanVacuumOrthogonalMoscoRecoveryExact.agda"
   "physicalVacuumGapAfterRecovery"
   compilerOwned
-  "Once an actual VacuumOrthogonalRecoverySystem is supplied, the continuum vacuum-complement gap is compiler output."
+  "Once an actual physical recovery system exists, continuum gap transport is compiler output."
 
 ------------------------------------------------------------------------
--- F4 — physical common-core construction, not primitive evolution equality.
+-- Common downstream physical YM/OS identification.
 ------------------------------------------------------------------------
 
 f4StressCurrentWard : ExactResidual
 f4StressCurrentWard = exact-residual
   physicalCommonCoreConstruction
   "YangMillsStressChargeLocalCoreCutoffStabilizationExact + YangMillsLocalCurrentMicrocausalShellExact"
-  "renormalized continuum stress current + translation Ward/locality data"
+  "renormalized stress/current + translation Ward/locality data"
   unpaid
-  "Cutoff stabilization and outer-shell elimination are already generic compilers. The missing input is the actual renormalized stress/current Ward data on the reconstructed continuum."
+  "Generic cutoff stabilization and outer-shell elimination are paid. The actual continuum stress/Ward data remain physical."
 
 f4CommonCoreClosure : ExactResidual
 f4CommonCoreClosure = exact-residual
   physicalCommonCoreConstruction
   "YMClayPhysicalStressOSCommonCoreWitnessExact.agda"
-  "StressOSCommonCoreData on the actual reconstructed physical core"
+  "StressOSCommonCoreData on the actual reconstructed continuum"
   unpaid
-  "Need same physical YM and OS core actions plus both closure/essential-self-adjointness identifications. YangMillsStressWardCommonCoreGeneratorExact then derives equality of generators."
+  "Need same physical YM and OS core actions and both closure identifications."
 
 f4EvolutionEquality : ExactResidual
 f4EvolutionEquality = exact-residual
@@ -169,60 +223,51 @@ f4EvolutionEquality = exact-residual
   "YMClayPhysicalStressOSCommonCoreWitnessExact.agda"
   "physicalSameEvolution"
   compilerOwned
-  "Evolution equality is derived from the common-core same-generator theorem through the Stone/OS generator-to-evolution adapter. It is no longer a primitive field of OutstandingPhysicalFrontier."
+  "Same generator follows from common-core equality; Stone/OS then gives same evolution."
 
 ------------------------------------------------------------------------
--- Search / frontier status.
+-- Route-Pareto bookkeeping.
 ------------------------------------------------------------------------
-
-oldF2IndependentResearchPayment : Bool
-oldF2IndependentResearchPayment = false
-
-oldF2IndependentResearchPaymentIsFalse :
-  oldF2IndependentResearchPayment ≡ false
-oldF2IndependentResearchPaymentIsFalse = refl
 
 fullR339MagnitudeEqualityPrimitive : Bool
 fullR339MagnitudeEqualityPrimitive = false
+
+directSourceRouteRequiresDenseL2F1C : Bool
+directSourceRouteRequiresDenseL2F1C = false
+
+directSourceRouteRequiresTrajectoryF1D : Bool
+directSourceRouteRequiresTrajectoryF1D = false
+
+directSourceRouteRequiresPaEaMosco : Bool
+directSourceRouteRequiresPaEaMosco = false
+
+directSourceRouteRequiresLiteralMeasureConvergence : Bool
+directSourceRouteRequiresLiteralMeasureConvergence = true
+
+directSourceRouteRequiresOSReconstruction : Bool
+directSourceRouteRequiresOSReconstruction = true
+
+strongFiniteGapRecoveryRouteStillValid : Bool
+strongFiniteGapRecoveryRouteStillValid = true
+
+f4EvolutionEqualityPrimitive : Bool
+f4EvolutionEqualityPrimitive = false
 
 fullR339MagnitudeEqualityPrimitiveIsFalse :
   fullR339MagnitudeEqualityPrimitive ≡ false
 fullR339MagnitudeEqualityPrimitiveIsFalse = refl
 
-genericMoscoTheoryIsF3ResearchLeaf : Bool
-genericMoscoTheoryIsF3ResearchLeaf = false
+directSourceRouteRequiresDenseL2F1CIsFalse :
+  directSourceRouteRequiresDenseL2F1C ≡ false
+directSourceRouteRequiresDenseL2F1CIsFalse = refl
 
-genericMoscoTheoryIsF3ResearchLeafIsFalse :
-  genericMoscoTheoryIsF3ResearchLeaf ≡ false
-genericMoscoTheoryIsF3ResearchLeafIsFalse = refl
+directSourceRouteRequiresTrajectoryF1DIsFalse :
+  directSourceRouteRequiresTrajectoryF1D ≡ false
+directSourceRouteRequiresTrajectoryF1DIsFalse = refl
 
-f4EvolutionEqualityPrimitive : Bool
-f4EvolutionEqualityPrimitive = false
-
-f4EvolutionEqualityPrimitiveIsFalse :
-  f4EvolutionEqualityPrimitive ≡ false
-f4EvolutionEqualityPrimitiveIsFalse = refl
-
-f1PhysicalInhabitantObservedInClosedWorldSearch : Bool
-f1PhysicalInhabitantObservedInClosedWorldSearch = false
-
-f1PhysicalInhabitantObservedInClosedWorldSearchIsFalse :
-  f1PhysicalInhabitantObservedInClosedWorldSearch ≡ false
-f1PhysicalInhabitantObservedInClosedWorldSearchIsFalse = refl
-
-f3PhysicalInhabitantObservedInClosedWorldSearch : Bool
-f3PhysicalInhabitantObservedInClosedWorldSearch = false
-
-f3PhysicalInhabitantObservedInClosedWorldSearchIsFalse :
-  f3PhysicalInhabitantObservedInClosedWorldSearch ≡ false
-f3PhysicalInhabitantObservedInClosedWorldSearchIsFalse = refl
-
-f4PhysicalInhabitantObservedInClosedWorldSearch : Bool
-f4PhysicalInhabitantObservedInClosedWorldSearch = false
-
-f4PhysicalInhabitantObservedInClosedWorldSearchIsFalse :
-  f4PhysicalInhabitantObservedInClosedWorldSearch ≡ false
-f4PhysicalInhabitantObservedInClosedWorldSearchIsFalse = refl
+directSourceRouteRequiresPaEaMoscoIsFalse :
+  directSourceRouteRequiresPaEaMosco ≡ false
+directSourceRouteRequiresPaEaMoscoIsFalse = refl
 
 unconditionalClayTheoremSupportedBySearchedRepositoryState : Bool
 unconditionalClayTheoremSupportedBySearchedRepositoryState = false
