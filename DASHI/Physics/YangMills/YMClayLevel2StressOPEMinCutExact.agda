@@ -10,6 +10,7 @@ import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact 
 import DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact as OPERemainder
 import DASHI.Physics.YangMills.BalabanSectorQFTRecoveryExportRound129Exact as R129
 import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as Recovery
+import DASHI.Physics.YangMills.YMClayLevel2WardRGReuseExact as Reuse
 
 ------------------------------------------------------------------------
 -- LEVEL-2 LITERAL CLAY STRESS/OPE MIN-CUT
@@ -25,16 +26,21 @@ import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as Reco
 -- The remaining physical local-QFT theorem is therefore not "construct OS" and
 -- not "prove stress-charge = H_OS".  The shortest existing owner is Round87 D:
 --
---   SAME-family short-distance OPE / stress / AF identification
+--   SAME-family short-distance OPE / stress identification.
 --
--- whose proof-bearing content is:
+-- Archaeology sharpens the old Round87-D "AF/Ward" wording.  Global positive
+-- tuned asymptotic freedom is already the Row-A trajectory machinery; finite
+-- periodic Ward balance -> slice-charge conservation is machine-owned; and
+-- R132-R136/R142-R144 already own the generated-action/stress provenance.
+--
+-- The remaining proof-bearing content is only:
 --
 --   (1) identify the physical RG product remainder with the composite marked
 --       tail on the SAME continuum family;
---   (2) identify the literal OPE coefficient coordinate with the SAME one-step
---       operator-mixing law and SAME UV normalization as the AF coefficient;
---   (3) prove the local translation Ward/stress law required by the literal
---       stress/OPE semantics.
+--   (2) attach the literal OPE coefficient to the SAME one-step RG mixing
+--       coordinate and UV normalization already selected by the RG/AF lane;
+--   (3) transport the already-owned finite translation Ward current to the
+--       recovered continuum stress insertion on that SAME family.
 --
 -- Once (1) is supplied, geometric dyadic OPE decay is compiler-owned.
 -- Once (2) is supplied, all-depth coefficient equality is compiler-owned.
@@ -47,13 +53,13 @@ record Level2StressOPEPhysicalResidue : Set₁ where
     sameFamilyPhysicalRGProductTailIdentification :
       SameFamilyPhysicalRGProductTailIdentification
 
-    SameOneStepAFMixingAndUVNormalization : Set
-    sameOneStepAFMixingAndUVNormalization :
-      SameOneStepAFMixingAndUVNormalization
+    SameRGOPECoefficientCoordinateAttachment : Set
+    sameRGOPECoefficientCoordinateAttachment :
+      SameRGOPECoefficientCoordinateAttachment
 
-    LocalTranslationWardStressLaw : Set
-    localTranslationWardStressLaw :
-      LocalTranslationWardStressLaw
+    SameFamilyContinuumWardTransport : Set
+    sameFamilyContinuumWardTransport :
+      SameFamilyContinuumWardTransport
 
 open Level2StressOPEPhysicalResidue public
 
@@ -67,6 +73,19 @@ r129RecoveryPaysR127AndStressDerivative = true
 r129RecoveryPaysR127AndStressDerivativeIsTrue :
   r129RecoveryPaysR127AndStressDerivative ≡ true
 r129RecoveryPaysR127AndStressDerivativeIsTrue = refl
+
+
+globalAsymptoticFreedomTrajectoryIndependentInLevel2 : Bool
+globalAsymptoticFreedomTrajectoryIndependentInLevel2 =
+  Reuse.globalAsymptoticFreedomTrajectoryIndependentInLevel2D
+
+finiteWardSliceConservationIndependentInLevel2 : Bool
+finiteWardSliceConservationIndependentInLevel2 =
+  Reuse.finiteWardSliceConservationIndependentInLevel2D
+
+generatedActionStressProvenanceIndependentInLevel2 : Bool
+generatedActionStressProvenanceIndependentInLevel2 =
+  Reuse.generatedActionStressProvenanceIndependentAfterR136
 
 dyadicOPERemainderDecayIndependentAfterCompositeTailIdentification : Bool
 dyadicOPERemainderDecayIndependentAfterCompositeTailIdentification = false
@@ -98,6 +117,24 @@ physicalR129RecoveryLevel = Recovery.physicalR129SameFamilyRecoveryLevel
 
 physicalRound87DLevel : ProofLevel
 physicalRound87DLevel = R87.sameFamilyShortDistanceOPEStressAFLevel
+
+rowAPositiveTunedTrajectoryLevel : ProofLevel
+rowAPositiveTunedTrajectoryLevel = Reuse.rowAPhysicalTrajectoryLevel
+
+finiteWardCompilerLevel : ProofLevel
+finiteWardCompilerLevel = Reuse.finiteWardSliceConservationCompilerLevel
+
+generatedActionStressRecoveryCompilerLevel : ProofLevel
+generatedActionStressRecoveryCompilerLevel =
+  Reuse.unifiedGeneratedActionStressRecoveryCompilerLevel
+
+sameRGOPECoefficientAttachmentLevel : ProofLevel
+sameRGOPECoefficientAttachmentLevel =
+  Reuse.sameRGOPECoefficientCoordinateAttachmentLevel
+
+sameFamilyContinuumWardTransportLevel : ProofLevel
+sameFamilyContinuumWardTransportLevel =
+  Reuse.sameFamilyContinuumWardTransportLevel
 
 dyadicOPERemainderCompilerLevel : ProofLevel
 dyadicOPERemainderCompilerLevel =
