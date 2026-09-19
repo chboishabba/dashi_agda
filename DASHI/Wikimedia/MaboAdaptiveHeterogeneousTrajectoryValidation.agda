@@ -72,3 +72,24 @@ validationTrajectorySelectionFresh = refl
 validationTrajectoryNotQueued :
   precomputedExecutionAuthority canonicalTrajectoryLink ≡ false
 validationTrajectoryNotQueued = refl
+
+
+validationTrajectoryPersistsAcrossRestart :
+  trajectoryPersistsAcrossOperatorRestart canonicalAdaptiveHeterogeneousBoundary ≡ true
+validationTrajectoryPersistsAcrossRestart = refl
+
+validationCycleBudgetNotProcessLocal :
+  adaptiveCycleBudgetIsProcessLocal canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationCycleBudgetNotProcessLocal = refl
+
+validationBoundedWhyMayRetainResearchResiduals :
+  boundedWhyMayRetainResearchResiduals canonicalAdaptiveHeterogeneousBoundary ≡ true
+validationBoundedWhyMayRetainResearchResiduals = refl
+
+validationExplicitResidualNotFalsehood :
+  explicitResearchResidualMeansPropositionFalse canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationExplicitResidualNotFalsehood = refl
+
+validationLegalResearchNeedNotReacquireSameSource :
+  legalResearchRequiresReacquiringTriggerSource canonicalAdaptiveHeterogeneousBoundary ≡ false
+validationLegalResearchNeedNotReacquireSameSource = refl
