@@ -42,6 +42,7 @@ import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as FiniteQ
 import DASHI.Moonshine.JInvariantQPrincipalStripModulusExact as QModulus
 import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneRadiusExact as BishopRadius
 import DASHI.Moonshine.JInvariantQBishopExponentTransportCompilerExact as Exponent
+import DASHI.Moonshine.JInvariantQBishopMagnitudeCoordinateTransportExact as Coordinates
 import DASHI.Analysis.MarxConstructiveRealRingNormalisation as Ring
 import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldExact as RadiusWeld
 
@@ -108,6 +109,33 @@ transportFromMagnitudeAndExponential N tau magnitude expAgreement = record
       Exponent.compileExponentAgreement N tau magnitude
   ; exponentialAgreement = expAgreement
   }
+
+
+
+transportFromCoordinatesAndExponential :
+  ∀ {C : Complex.ConstructedComplexPackage}
+    (N : Ring.ConstructedRealRingNormalisationLaws
+      (Real.real (Complex.realPackage C)))
+    (tau : Complex.ComplexPair (Real.real (Complex.realPackage C)))
+    {piB imagB : BishopReal.ℝ}
+    (coordinates :
+      Coordinates.QBishopMagnitudeCoordinateTransport C tau piB imagB) →
+  (Coordinates.toLegacy coordinates
+      (BishopExp.bishopExp
+        (BishopReal.-_
+          (BishopRadius.qExponentMagnitude piB imagB)))
+    ≡
+    Real.exp
+      (Real.exponential (Complex.realPackage C))
+      (Coordinates.toLegacy coordinates
+        (BishopReal.-_
+          (BishopRadius.qExponentMagnitude piB imagB)))) →
+  LiteralQBishopRadiusTransport C tau piB imagB
+transportFromCoordinatesAndExponential N tau coordinates expAgreement =
+  transportFromMagnitudeAndExponential
+    N tau
+    (Coordinates.compileExponentMagnitudeTransport tau coordinates)
+    expAgreement
 
 LegacyRadiusRelation :
   ∀ {C tau piB imagB} →
