@@ -27,3 +27,7 @@ open import DASHI.Governance.HansonHerzogEmancipatoryGrammarCrossPollinationVali
 
 open import DASHI.Governance.HansonIsraelJewishPluralitySurveillanceGrammarExact public
 open import DASHI.Governance.HansonIsraelJewishPluralitySurveillanceGrammarValidation public
+
+open import DASHI.Core.ProtectionVocabularyUniversalContestabilityNoncollapseExact public
+open import DASHI.Governance.HansonIsraelProtectionContestabilityAdapterExact public
+open import DASHI.Governance.HansonIsraelProtectionContestabilityAdapterValidation public
