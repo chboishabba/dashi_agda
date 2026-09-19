@@ -175,10 +175,14 @@ candidateAssessmentNonFactorWitness =
     refl
     reviewedOutcomesDiffer
 
-candidateAssessmentCannotDetermineReviewedDecision :
+CandidateAssessmentFactorisation : Set₁
+CandidateAssessmentFactorisation =
   NonFactor.FactorsThrough
     candidateAssessmentProjection
-    reviewedScreeningOutcome → ⊥
+    reviewedScreeningOutcome
+
+candidateAssessmentCannotDetermineReviewedDecision :
+  CandidateAssessmentFactorisation → ⊥
 candidateAssessmentCannotDetermineReviewedDecision =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     candidateAssessmentNonFactorWitness
@@ -222,10 +226,14 @@ familySimilarityNonFactorWitness =
     refl
     studyIdentityStatesDiffer
 
-familySimilarityCannotDetermineSameEmpiricalStudy :
+FamilySimilarityFactorisation : Set₁
+FamilySimilarityFactorisation =
   NonFactor.FactorsThrough
     familySimilarityProjection
-    sameEmpiricalStudyState → ⊥
+    sameEmpiricalStudyState
+
+familySimilarityCannotDetermineSameEmpiricalStudy :
+  FamilySimilarityFactorisation → ⊥
 familySimilarityCannotDetermineSameEmpiricalStudy =
   NonFactor.witnessRulesOutEveryFlatFactorisation
     familySimilarityNonFactorWitness
