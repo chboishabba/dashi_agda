@@ -47,7 +47,6 @@ record SaturatedPhysicalOriginCell : Set where
           residual)
 
     gram majorant : BishopReal.ℝ
-    gramNonnegative : BishopReal.NonNegative gram
     majorantNonnegative : BishopReal.NonNegative majorant
     gramCarriesOutputSquare :
       BishopReal._≤_
@@ -102,37 +101,43 @@ outputInverseNonnegative D =
       (R3.heatRateNonzero (positiveRateData D))
       (BishopP.0<x⇒posx (R3.heatRatePositive (positiveRateData D))))
 
-kernelTimesGramBelowOutputInverseGram :
+kernelTimesGramBelowKernelMajorant :
   (D : SaturatedPhysicalOriginCell) →
   BishopReal._≤_
     (BishopReal._*_
       (Saturation.kernel (saturationInputs D))
       (gram D))
     (BishopReal._*_
-      (outputInverse D)
-      (gram D))
-kernelTimesGramBelowOutputInverseGram D =
-  let
-    kernelBound =
-      Saturation.kernelBelowOutputInverse (saturationInputs D)
-  in
-  BishopP.*-monoʳ-≤-nonNeg
-    kernelBound
-    (gramNonnegative D)
+      (Saturation.kernel (saturationInputs D))
+      (BishopReal._*_ (radiusSquared D) (majorant D)))
+kernelTimesGramBelowKernelMajorant D =
+  BishopP.*-monoˡ-≤-nonNeg
+    (gramCarriesOutputSquare D)
+    (Saturation.kernelNonnegative (saturationInputs D))
 
-outputInverseGramBelowOutputInverseMajorant :
+outputMajorantNonnegative :
+  (D : SaturatedPhysicalOriginCell) →
+  BishopReal.NonNegative
+    (BishopReal._*_ (radiusSquared D) (majorant D))
+outputMajorantNonnegative D =
+  BishopP.nonNegx,y⇒nonNegx*y
+    (BishopP.pos⇒nonNeg
+      (BishopP.0<x⇒posx (radiusSquaredPositive D)))
+    (majorantNonnegative D)
+
+kernelMajorantBelowOutputInverseMajorant :
   (D : SaturatedPhysicalOriginCell) →
   BishopReal._≤_
     (BishopReal._*_
-      (outputInverse D)
-      (gram D))
+      (Saturation.kernel (saturationInputs D))
+      (BishopReal._*_ (radiusSquared D) (majorant D)))
     (BishopReal._*_
       (outputInverse D)
       (BishopReal._*_ (radiusSquared D) (majorant D)))
-outputInverseGramBelowOutputInverseMajorant D =
-  BishopP.*-monoˡ-≤-nonNeg
-    (gramCarriesOutputSquare D)
-    (outputInverseNonnegative D)
+kernelMajorantBelowOutputInverseMajorant D =
+  BishopP.*-monoʳ-≤-nonNeg
+    (Saturation.kernelBelowOutputInverse (saturationInputs D))
+    (outputMajorantNonnegative D)
 
 outputInverseCancelsOutputSquare :
   (D : SaturatedPhysicalOriginCell) →
@@ -189,9 +194,9 @@ saturatedOriginBound :
       (majorant D))
 saturatedOriginBound D =
   BishopP.≤-trans
-    (kernelTimesGramBelowOutputInverseGram D)
+    (kernelTimesGramBelowKernelMajorant D)
     (BishopP.≤-trans
-      (outputInverseGramBelowOutputInverseMajorant D)
+      (kernelMajorantBelowOutputInverseMajorant D)
       (BishopP.≤-respʳ-≃
         (outputInverseCancelsOutputSquare D)
         BishopP.≤-refl))
