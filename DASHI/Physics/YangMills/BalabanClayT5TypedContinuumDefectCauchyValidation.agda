@@ -12,6 +12,10 @@ typedTelescopingProducesCauchyModulus :
   Cauchy.typedTelescopingToCauchyCompilerLevel ≡ machineChecked
 typedTelescopingProducesCauchyModulus = refl
 
+fastRealRepresentativeIsCompilerOwned :
+  Cauchy.typedExpectationFastRealCompilerLevel ≡ machineChecked
+fastRealRepresentativeIsCompilerOwned = refl
+
 absoluteOneStepDefectRemainsPhysical :
   Cauchy.physicalAbsoluteOneStepDefectLevel ≡ conditional
 absoluteOneStepDefectRemainsPhysical = refl
