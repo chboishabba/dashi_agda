@@ -32,6 +32,7 @@ import RealProperties as BishopP
 import Sequence as BishopSequence
 
 import DASHI.Analysis.BishopArchimedeanLinearAbsorptionExact as Absorb
+import DASHI.Analysis.BishopUnitIntervalMidpointExact as Midpoint
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact as NatReal
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as DegreeOne
 import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as SeriesExt
@@ -705,3 +706,25 @@ degreeSixAbsoluteConvergence inputs =
     (λ {(suc count-1) →
       BishopP.≃-symm (partials (suc count-1))})
     convergent
+
+
+------------------------------------------------------------------------
+-- Canonical specialization: no explicit larger-ratio witness remains.
+
+degreeFourUnitRatioAbsoluteConvergence :
+  ∀ {ratio} →
+  DegreeOne.BishopUnitIntervalRatio ratio →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (degreeFourTerm ratio)
+degreeFourUnitRatioAbsoluteConvergence inputs =
+  degreeFourAbsoluteConvergence
+    (Midpoint.canonicalMidpointRatioPair inputs)
+
+degreeSixUnitRatioAbsoluteConvergence :
+  ∀ {ratio} →
+  DegreeOne.BishopUnitIntervalRatio ratio →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (degreeSixTerm ratio)
+degreeSixUnitRatioAbsoluteConvergence inputs =
+  degreeSixAbsoluteConvergence
+    (Midpoint.canonicalMidpointRatioPair inputs)
