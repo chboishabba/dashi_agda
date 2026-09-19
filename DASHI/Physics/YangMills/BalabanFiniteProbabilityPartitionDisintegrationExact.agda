@@ -432,17 +432,15 @@ coarseFibreMassPositiveFromWitness
         (indicator
           (FiniteCoarsePartitionWitness.matches witnessData coarse witness)
           * fineWeight witness)
-    witnessTermPositive =
+    witnessTermPositive
+      rewrite
+        FiniteCoarsePartitionWitness.positiveWitnessMatches
+          witnessData coarse =
       subst
-        (λ value → Positive (value * fineWeight witness))
-        (cong indicator
-          (FiniteCoarsePartitionWitness.positiveWitnessMatches
-            witnessData coarse))
-        (subst
-          Positive
-          (sym (ℚP.*-identityˡ (fineWeight witness)))
-          (FiniteCoarsePartitionWitness.positiveWitnessWeight
-            witnessData coarse))
+        Positive
+        (sym (ℚP.*-identityˡ (fineWeight witness)))
+        (FiniteCoarsePartitionWitness.positiveWitnessWeight
+          witnessData coarse)
   in
   sumRationalPositiveAtMember
     states
