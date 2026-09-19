@@ -83,6 +83,22 @@ normSqPower q (suc n) =
         (normSqC q)
         (BishopReal.pow (normSqC q) n)))
 
+record BishopQPowerComponentEnvelope
+    (q : Complex.BishopComplex)
+    (ratio : BishopReal.ℝ) : Set₁ where
+  field
+    realPowerBound : ∀ n →
+      BishopReal._≤_
+        (BishopReal.∣ Complex.re (Algebra.powC q (suc n)) ∣)
+        (BishopReal.pow ratio (suc n))
+
+    imagPowerBound : ∀ n →
+      BishopReal._≤_
+        (BishopReal.∣ Complex.im (Algebra.powC q (suc n)) ∣)
+        (BishopReal.pow ratio (suc n))
+
+open BishopQPowerComponentEnvelope public
+
 record BishopNonnegativeSquareReflection : Set₁ where
   field
     squareReflects :
@@ -186,17 +202,10 @@ powerEnvelopeFromNormSquare :
   BishopReal._≃_
     (normSqC q)
     (square ratio) →
+  BishopQPowerComponentEnvelope q ratio
+powerEnvelopeFromNormSquare q {ratio} reflection ratioNN normAgreement =
   let
     radius : BishopQNormSquareRadius q ratio
-    radius = record
-      { ratioNonnegative = _
-      ; normSquareAgreement = _
-      }
-  in
-  Set
-powerEnvelopeFromNormSquare q reflection ratioNN normAgreement =
-  let
-    radius : BishopQNormSquareRadius q _
     radius = record
       { ratioNonnegative = ratioNN
       ; normSquareAgreement = normAgreement
@@ -204,14 +213,15 @@ powerEnvelopeFromNormSquare q reflection ratioNN normAgreement =
 
     componentBound :
       ∀ n component →
-      (Complex.BishopComplex → BishopReal.ℝ) →
-      BishopReal._≤_ (square component) (normSqC (Algebra.powC q (suc n))) →
+      BishopReal._≤_
+        (square component)
+        (normSqC (Algebra.powC q (suc n))) →
       BishopReal._≤_
         (BishopReal.∣ component ∣)
-        (BishopReal.pow _ (suc n))
-    componentBound n component projection squaredBelow =
+        (BishopReal.pow ratio (suc n))
+    componentBound n component squaredBelow =
       let
-        ratioPower = BishopReal.pow _ (suc n)
+        ratioPower = BishopReal.pow ratio (suc n)
         ratioPowerNN =
           BishopSequence.nonNegx⇒nonNegxⁿ (suc n) ratioNN
         squaredTarget :
@@ -234,13 +244,11 @@ powerEnvelopeFromNormSquare q reflection ratioNN normAgreement =
     { realPowerBound = λ n →
         componentBound n
           (Complex.re (Algebra.powC q (suc n)))
-          Complex.re
           (componentSquareBelowNormSqReal
             (Algebra.powC q (suc n)))
     ; imagPowerBound = λ n →
         componentBound n
           (Complex.im (Algebra.powC q (suc n)))
-          Complex.im
           (componentSquareBelowNormSqImag
             (Algebra.powC q (suc n)))
     }
