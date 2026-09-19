@@ -24,9 +24,10 @@ module DASHI.Physics.Closure.NSTriadKNCenteredMultiplierDoubleMixedWeldExact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -119,10 +120,10 @@ module PhysicalCenteredDoubleMixed
   foldPointwise :
     (left right : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
     ((tau : Physical.PhysicalTriadIncidence) → left tau ≡ right tau) →
-    (items : Agda.Builtin.List.List Physical.PhysicalTriadIncidence) →
+    (items : List Physical.PhysicalTriadIncidence) →
     R224.foldVector left items ≡ R224.foldVector right items
-  foldPointwise left right pointwise Agda.Builtin.List.[] = refl
-  foldPointwise left right pointwise (tau Agda.Builtin.List.∷ rest) =
+  foldPointwise left right pointwise [] = refl
+  foldPointwise left right pointwise (tau ∷ rest) =
     cong₂ C3.complex3Add
       (pointwise tau)
       (foldPointwise left right pointwise rest)
