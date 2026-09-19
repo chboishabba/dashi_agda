@@ -62,10 +62,10 @@ open ExactResidual public
 sourceSelectedLocalization : ExactResidual
 sourceSelectedLocalization = exact-residual
   sourceLocalization
-  "YMClayRouteSH1DirectSelectedMarkedDecayExact.agda / R320 / R398 / R387"
+  "YMClayRouteSH1DirectSelectedMarkedDecayExact.agda / R320 / R398 / R304"
   "R320 mixedDerivativeMagnitudeBelowSelectedShell on the exact selected R318/T5 carrier"
   unpaid
-  "Canonical H1 has one theorem-bearing physical/source field. R320 transports it to literal J directions; R398 constructs the exact finite T5 direct shell; R274/R284/R388 compile onward to the R387 terminal ABI. PublishedTwoJLocalization wrappers and separate source magnitude/root/distance applicability are optional stronger producer packaging, not canonical H1 coordinates."
+  "Canonical H1 has one theorem-bearing physical/source field. R320 transports it to literal J directions; R398 constructs the exact finite T5 direct shell. The preferred mode-selected route then uses only supportDistance=time and SelectedLimitUpperClosure to compile the continuum C_mode(t) <= (1/4)(1/2)^t upper through R304. No source envelope or arbitrary clusteringEnvelope calibration is mandatory."
 
 historicalH1PublishedApplicabilityPackaging : ExactResidual
 historicalH1PublishedApplicabilityPackaging = exact-residual
@@ -121,7 +121,7 @@ h2cSelectedLimitUpperClosure = exact-residual
   "YMClayRouteSSelectedLimitClosureExact.agda / BalabanCMP116R281SourceResponseSameObjectRound342Exact.agda"
   "SelectedLimitUpperClosure on the actual R278/T5 scalar convergence"
   unpaid
-  "This is the exact one-sided ordered-limit proposition consumed by R387: Converges sequence target and sequence <= upper imply target <= upper. It is standard/shared analysis rather than a fresh YM decay estimate. PhysicalMeasureConvergenceData alone does not store order-closedness, so an inhabitant is still required."
+  "This is the exact one-sided ordered-limit proposition consumed by the preferred R304 mode-selected continuum-upper compiler as well as the R387 compatibility route: Converges sequence target and sequence <= upper imply target <= upper. It is standard/shared analysis rather than a fresh YM decay estimate. PhysicalMeasureConvergenceData alone does not store order-closedness, so an inhabitant is still required."
 
 literalMeasureExpectationConvergence : ExactResidual
 literalMeasureExpectationConvergence = exact-residual
@@ -139,29 +139,45 @@ connectedCovarianceLimit = exact-residual
   compilerOwned
   "Once the selected left/right/product expectation convergence and scalar continuity are supplied, covariance-magnitude convergence is machine-checked."
 
-h3OSHamiltonianTransferCoordinate : ExactResidual
-h3OSHamiltonianTransferCoordinate = exact-residual
+h3SameHamiltonianPositiveSpectralDecomposition : ExactResidual
+h3SameHamiltonianPositiveSpectralDecomposition = exact-residual
   physicalSpectralIdentification
-  "BalabanOSIndexedTransferCoordinateRound331Exact.agda"
-  "coordinateOfReconstructedHamiltonian"
+  "BalabanPositiveSpectralComponentLowerRound300Exact.agda"
+  "selectedCorrelationSpectralDecomposition + spectralRemainderNonnegative on the SAME reconstructed Hamiltonian"
   unpaid
-  "The remaining H3 theorem is exactly that the decay/energy coordinate is the transfer coordinate OF the SAME OS reconstructed Hamiltonian."
+  "The preferred mode-selected route does not need a separate spectral-lower inequality: R300 compiles the lower bound once the exact selected continuum covariance is decomposed into the chosen positive spectral component plus a nonnegative remainder on the same reconstructed Hamiltonian."
+
+h3TransferEnergyDecayCoordinate : ExactResidual
+h3TransferEnergyDecayCoordinate = exact-residual
+  physicalSpectralIdentification
+  "BalabanTransferEnergyDecayRatioCoordinateRound302Exact.agda / BalabanOSIndexedTransferCoordinateRound331Exact.agda"
+  "one order-reversing transfer-energy/decay-ratio coordinate of the actual reconstructed H_OS"
+  unpaid
+  "R302 removes separate candidate-rate and subgap-rate semantics. R331 keeps the genuinely physical statement proof-relevant: the selected energy/decay coordinate is the transfer coordinate OF the same OS reconstructed Hamiltonian."
+
+h3ModeRatioSameCoordinateWeld : ExactResidual
+h3ModeRatioSameCoordinateWeld = exact-residual
+  sameObjectAttachment
+  "BalabanTransferEnergyDecayRatioCoordinateRound302Exact.agda"
+  "ModeRatioUsesTransferCoordinate"
+  unpaid
+  "The decay ratio appearing in the R300 selected spectral component must be the ratioOfEnergy of the same transfer coordinate. R303/R305 then compile all positive-subgap rate inequalities."
 
 halfRateSpectralTransfer : ExactResidual
 halfRateSpectralTransfer = exact-residual
   physicalSpectralIdentification
-  "BalabanHalfRateTransferCoordinateMassGapRound316Exact.agda"
-  "halfRateClusteringTransfer"
+  "YMClayRouteSDirectPositiveGapCoreExact.agda / R303-R306"
+  "positive candidate energy + no positive subgap mode"
   compilerOwned
-  "The concrete q=1/2 clustering-to-spectrum theorem is standard imported spectral mathematics once the same-Hamiltonian transfer coordinate is supplied."
+  "After H1, distance=time, selected limit closure, R300 same-H spectral decomposition and the R302 mode-ratio weld, the mode-selected contradiction and terminal positive-gap core are machine-checked. No arbitrary clustering envelope, old rate record, separate overlap leaf or separate spectral-lower inequality is needed."
 
 directSourceOSMassGapCompiler : ExactResidual
 directSourceOSMassGapCompiler = exact-residual
   physicalSpectralIdentification
-  "YMClayDirectSourceOSMassGapFrontierExact.agda / R333"
-  "directSourceOSBuildsPhysicalMassGap"
+  "YMClayRouteSDirectPositiveGapCoreExact.agda / R306"
+  "ModeIndexedPositiveGapCore on the selected physical spectral carrier"
   compilerOwned
-  "R333 composes H2a/H2b/H2c/H3 and R316 produces the physical mass-gap certificate. No dense-L2 normalization, finite trajectory-gap calibration or P_a/E_a Mosco recovery is consumed by this direct route."
+  "The preferred terminal algebra now factors through R304/R300/R302/R305/R306 rather than the stronger R333 package. A final same-object application still has to identify this Energy/SubgapMode carrier with the actual reconstructed H_OS spectrum. No dense-L2 normalization, finite trajectory-gap calibration or P_a/E_a Mosco recovery is consumed."
 
 ------------------------------------------------------------------------
 -- Route G only: strong finite-gap / Mosco recovery.
