@@ -25,3 +25,14 @@ qiltPaysIndependentEligibilityFrame :
   Acquisition.EligibilityFrameResidual
 qiltPaysIndependentEligibilityFrame =
   Acquisition.targetResidual Acquisition.qilt2022Candidate
+
+
+dynarskiPaysIndependentUndercoverage :
+  Acquisition.EligibilityFrameResidual
+dynarskiPaysIndependentUndercoverage =
+  Acquisition.targetResidual Acquisition.dynarskiHemeltHymanCandidate
+
+creaghPaysIndependentCategoryConstruction :
+  Acquisition.EligibilityFrameResidual
+creaghPaysIndependentCategoryConstruction =
+  Acquisition.targetResidual Acquisition.creaghLBOTECandidate
