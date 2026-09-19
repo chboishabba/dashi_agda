@@ -74,3 +74,16 @@ cropSeasonRetained = refl
 acaciaLadderNotClosed :
   Q.queenslandLeyEvidenceClosesAcaciaAvoidedMineralN Q.canonicalQueenslandLeyBoundary ≡ false
 acaciaLadderNotClosed = refl
+
+
+constructiveTransportMathOwned :
+  Q.constructiveTransportKernelMathOwned Q.canonicalQueenslandLeyBoundary ≡ true
+constructiveTransportMathOwned = refl
+
+empiricalKernelBoundStillOpen :
+  Q.empiricalPolynomialGeometricKernelBoundOwned Q.canonicalQueenslandLeyBoundary ≡ false
+empiricalKernelBoundStillOpen = refl
+
+finiteObservationNotAsymptoticStabilisation :
+  Q.finiteObservationImpliesAsymptoticStabilisation Q.canonicalQueenslandLeyBoundary ≡ false
+finiteObservationNotAsymptoticStabilisation = refl
