@@ -61,7 +61,7 @@ squareReflectsOnNonnegative {left} {right} leftNN rightNN squared =
             (BishopReal._*_ left right)
             (BishopReal._*_ left left)
         mixedLtLeftSquare =
-          BishopP.*-monoʳ-<-pos
+          BishopP.*-monoˡ-<-pos
             leftPositive
             rightBelowLeft
 
