@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanLiteralWilsonNativeThermodynamicProducerEx
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import Data.Product.Base using (Σ; _,_)
 open import Function.Base using (id)
 
