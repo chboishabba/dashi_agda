@@ -31,6 +31,7 @@ import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
 import DASHI.Analysis.RiemannAnalyticCoordinateTerminalRefinementExact as Coordinate
 import DASHI.Analysis.RiemannG2UniformHighContradictionExact as High
 import DASHI.Analysis.RiemannG2ClayTerminalGenericHighCoordinateExact as Clay
+import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 
 VerifiedRegionComplementHigh :
   ∀ {analytic} →
@@ -100,7 +101,7 @@ compileComplementHighCoordinateClayInput input = record
 compiledComplementHighDoubleNegatedRH :
   ∀ {analytic} →
   ComplementHighCoordinateClayInput analytic →
-  Clay.Negative.DoubleNegatedRiemannHypothesisFor analytic
+  Negative.DoubleNegatedRiemannHypothesisFor analytic
 compiledComplementHighDoubleNegatedRH input =
   Clay.compiledDoubleNegatedRH
     (compileComplementHighCoordinateClayInput input)
