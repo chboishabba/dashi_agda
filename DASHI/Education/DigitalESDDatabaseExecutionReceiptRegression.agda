@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 import DASHI.Education.DigitalESDDatabaseExecutionReceiptExact as Exec
 import DASHI.Education.DigitalESDDatabaseTranslatedQueriesExact as Queries
 
-executionReceiptCountRegression : Exec.executionReceiptCount ≡ 35
+executionReceiptCountRegression : Exec.executionReceiptCount ≡ 42
 executionReceiptCountRegression = refl
 
 scopusExecutionAttemptedRegression :
@@ -102,3 +102,28 @@ acmInterfaceFailureBeforeSubmissionRegression :
   ≡ Exec.interfaceFailureBeforeSubmission
       "current web transport could not retrieve an ACM Digital Library search-result page for the query-bearing URL"
 acmInterfaceFailureBeforeSubmissionRegression = refl
+
+
+ericObservedQ1SubmittedRegression :
+  Exec.DatabaseExecutionReceipt.querySubmitted Exec.ericQ1ObservedExecution ≡ true
+ericObservedQ1SubmittedRegression = refl
+
+ericObservedQ1CountRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.ericQ1ObservedExecution
+  ≡ Exec.executedWithObservedResultSet
+      642
+      "ERIC Q1 live JSON result set observed from official public API"
+      (Exec.exportNotObserved
+        "count-only probe observed; paginated JSON/CSV export not yet retained")
+      "HTTP 200; numFound=642"
+ericObservedQ1CountRegression = refl
+
+ericObservedQ7CountRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.ericQ7ObservedExecution
+  ≡ Exec.executedWithObservedResultSet
+      1675
+      "ERIC Q7 live JSON result set observed from official public API"
+      (Exec.exportNotObserved
+        "count-only probe observed; paginated JSON/CSV export not yet retained")
+      "HTTP 200; numFound=1675"
+ericObservedQ7CountRegression = refl
