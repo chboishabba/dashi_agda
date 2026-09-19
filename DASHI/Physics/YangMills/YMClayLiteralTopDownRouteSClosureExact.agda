@@ -11,6 +11,7 @@ import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Fi
 import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact as R78
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact as RouteS
 import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact as Stress
+import DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact as Local
 
 ------------------------------------------------------------------------
 -- LITERAL CLAY TOP-DOWN CLOSURE THROUGH THE VERIFIED ROUTE-S MIN-CUT
@@ -111,6 +112,30 @@ literalClaySolutionFromRouteS Y structural uv routeS local standard =
     Y structural uv
     (routeSIntegrationBuildsRound78B routeS)
     local standard
+
+
+------------------------------------------------------------------------
+-- Fully minimized literal endpoint constructor.
+--
+-- The caller supplies Round78-A, the exact Route-S B integration, and the
+-- literal local-field inputs that compile to Round78-C.  The result is the
+-- official repository ClayYangMillsSolution, not another frontier receipt.
+------------------------------------------------------------------------
+
+literalClaySolutionFromRouteSAndLiteralLocalFields :
+  ∀ {C S} (Y : Top.LiteralYangMillsConstruction C S) →
+  Five.LiteralClayStructuralBase Y →
+  R78.UVToContinuumYM Y →
+  RouteSLiteralMassGapIntegration Y →
+  Local.LiteralLocalFieldClosureInputs Y →
+  R78.StandardSameHGaussianNontrivialityConsequence Y →
+  Clay.ClayYangMillsSolution (Top.literalClayVocabulary Y)
+literalClaySolutionFromRouteSAndLiteralLocalFields
+    Y structural uv routeS local standard =
+  literalClaySolutionFromRouteS
+    Y structural uv routeS
+    (Local.literalLocalFieldClosureBuildsRound78C local)
+    standard
 
 ------------------------------------------------------------------------
 -- Exact closure accounting.
