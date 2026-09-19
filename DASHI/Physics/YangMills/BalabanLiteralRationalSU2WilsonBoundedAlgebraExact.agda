@@ -18,8 +18,9 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _≤_; -_; ∣_∣; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Data.Sum.Base using (inj₁; inj₂)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanRootedPolymerWordEntropyExact
@@ -64,15 +65,21 @@ absBoundFromTwoSided {x} lower upper with ℚP.≤-total 0ℚ x
   let
     negUpperRaw = ℚP.neg-antimono-≤ lower
     negUpper : - x ≤ 1ℚ
-    negUpper = negUpperRaw
+    negUpper =
+      subst (λ right → - x ≤ right)
+        (ℚRing.solve-∀ 1ℚ)
+        negUpperRaw
 
     negXNNRaw = ℚP.neg-antimono-≤ xNP
     negXNN : 0ℚ ≤ - x
-    negXNN = negXNNRaw
+    negXNN =
+      subst (λ left → left ≤ - x)
+        (ℚRing.solve [])
+        negXNNRaw
 
     absNegative : ∣ x ∣ ≡ - x
     absNegative =
-      Relation.Binary.PropositionalEquality.trans
+      trans
         (sym (ℚP.∣-p∣≡∣p∣ x))
         (ℚP.0≤p⇒∣p∣≡p negXNN)
   in
