@@ -45,3 +45,22 @@ cacheHitCannotRequireNetwork :
   Norm.ExactPgHitRequiresNetwork → ⊥
 cacheHitCannotRequireNetwork =
   Norm.exactPgHitDoesNotRequireNetwork
+
+
+cacheFirstPathIsRetained :
+  Norm.cacheFirstPathRetainedInNormalisationReceipt
+    Norm.canonicalProviderNormalisationParity
+  ≡ true
+cacheFirstPathIsRetained = refl
+
+cacheFirstAcquisitionCountIsRetained :
+  Norm.acquisitionNetworkCountRetained
+    Norm.canonicalProviderNormalisationParity
+  ≡ true
+cacheFirstAcquisitionCountIsRetained = refl
+
+cacheFirstVerificationCountIsRetained :
+  Norm.verificationNetworkCountRetained
+    Norm.canonicalProviderNormalisationParity
+  ≡ true
+cacheFirstVerificationCountIsRetained = refl
