@@ -144,8 +144,8 @@ compileLiteralQRadiusWeld :
     (LegacyRadiusRelation transport)
     (Polar.modulus F (FiniteQ.qOf C tau))
 compileLiteralQRadiusWeld
-  polar branch tau transport strip piPositive imagPositive = record
-  { RadiusWeld.bishopRadius = BishopRadius.qRadius _ _
+  polar branch tau {piB} {imagB} transport strip piPositive imagPositive = record
+  { RadiusWeld.bishopRadius = BishopRadius.qRadius piB imagB
   ; RadiusWeld.sameRadius =
       literalQModulusMatchesBishopRadius
         polar branch tau transport strip
