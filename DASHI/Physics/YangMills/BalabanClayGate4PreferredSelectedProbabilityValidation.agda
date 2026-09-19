@@ -1,0 +1,13 @@
+module DASHI.Physics.YangMills.BalabanClayGate4PreferredSelectedProbabilityValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayGate4PreferredSelectedProbabilityExact as Preferred
+
+preferredSelectedProbabilityCompilerClosed :
+  Preferred.preferredSelectedProbabilityCompilerLevel ≡ machineChecked
+preferredSelectedProbabilityCompilerClosed = refl
+
+referenceReopeningSameObjectRemainsPhysical :
+  Preferred.preferredReferenceReopeningSameObjectLevel ≡ conditional
+referenceReopeningSameObjectRemainsPhysical = refl
