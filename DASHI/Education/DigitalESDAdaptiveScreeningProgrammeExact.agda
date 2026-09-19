@@ -89,7 +89,8 @@ record ScreeningUniverseRuntimeReceipt : Set where
     unresolvedLedgerReference : String
     unresolvedLedgerSha256 : String
     emittedReceiptCount : Nat
-    countEqualityReference : String
+    emittedReceiptCountMatchesInput :
+      emittedReceiptCount ≡ inputRecordCount
     runtimeReference : String
     runtimeTimestamp : String
     allInputRecordsReceivedReceipts : Bool
