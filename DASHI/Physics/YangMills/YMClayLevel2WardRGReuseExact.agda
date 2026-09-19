@@ -14,7 +14,8 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 import DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact as OPERemainder
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTailWeldExact as D1
 import DASHI.Physics.YangMills.YMClayLevel2R129CompositeTailAttachmentExact as D1R129
-import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as D2
+import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as D2Compat
+import DASHI.Physics.YangMills.YMClayLevel2D2PhysicalMinCutExact as D2
 import DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact as D3
 
 ------------------------------------------------------------------------
@@ -142,7 +143,7 @@ allDepthCoefficientCompilerLevel =
 
 sameRGOPECoefficientCoordinateAttachmentLevel : ProofLevel
 sameRGOPECoefficientCoordinateAttachmentLevel =
-  D2.physicalCoordinateAttachmentLevel
+  D2.d2PhysicalMinCutLevel
 
 dyadicOPERemainderCompilerLevel : ProofLevel
 dyadicOPERemainderCompilerLevel =
