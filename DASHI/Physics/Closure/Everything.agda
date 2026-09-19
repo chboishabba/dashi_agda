@@ -172,6 +172,9 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicSignedFrequencyCarrierRealizationE
 import DASHI.Physics.Closure.NSTriadKNCenteredResolventKernelEnvelopeExact
 import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredResolventKernelEnvelopeExact
 import DASHI.Physics.Closure.NSTriadKNCenteredResolventOppositeShiftSecondOrderExact
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondMomentAdapterExact
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondOrderEnvelopeExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredResolventUniformCurvatureExact
 
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
