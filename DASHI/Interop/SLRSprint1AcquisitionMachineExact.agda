@@ -107,6 +107,30 @@ canonicalPhysicalPlanParity =
     true
     true
 
+record ClassificationProviderOrderParity : Set where
+  constructor classificationProviderOrderParity
+  field
+    specialisedSliceIsFirstTier : Bool
+    routeAwareGeneralSnapshotIsSecondTier : Bool
+    governedLiveWikidataIsThirdTier : Bool
+    specialisedSliceContainsOnlyP31P279 : Bool
+    specialisedSliceMissCreatesNegativeOntologyFact : Bool
+    generalSnapshotFallbackCountsAsLiveMix : Bool
+    actualLiveFallbackRevokesSnapshotSimultaneity : Bool
+
+open ClassificationProviderOrderParity public
+
+canonicalClassificationProviderOrderParity : ClassificationProviderOrderParity
+canonicalClassificationProviderOrderParity =
+  classificationProviderOrderParity
+    true
+    true
+    true
+    true
+    false
+    false
+    true
+
 record BoundedPhysicalTransportParity : Set where
   constructor boundedPhysicalTransportParity
   field
@@ -261,6 +285,9 @@ currentSprint1ExitGate =
 -- Firewalls.
 ------------------------------------------------------------------------
 
+data GeneralSnapshotMayRunBeforeSpecialisedSlice : Set where
+data SliceMissIsOntologyNegation : Set where
+data GeneralSnapshotFallbackIsLiveMix : Set where
 data LogicalQidCountIsPhysicalConcurrencyBound : Set where
 data CacheHitRequiresNetwork : Set where
 data RetrievalGapIsOntologyNegation : Set where
@@ -268,6 +295,18 @@ data AcquisitionPaysWithoutReview : Set where
 data FixedQueueIsAdaptiveRecurrence : Set where
 data ReplayMayRewriteWorld : Set where
 data TransportCreatesSemanticAuthority : Set where
+
+generalSnapshotCannotPrecedeSpecialisedSlice :
+  GeneralSnapshotMayRunBeforeSpecialisedSlice → ⊥
+generalSnapshotCannotPrecedeSpecialisedSlice ()
+
+sliceMissDoesNotCreateOntologyNegation :
+  SliceMissIsOntologyNegation → ⊥
+sliceMissDoesNotCreateOntologyNegation ()
+
+generalSnapshotFallbackIsNotLiveMix :
+  GeneralSnapshotFallbackIsLiveMix → ⊥
+generalSnapshotFallbackIsNotLiveMix ()
 
 logicalQidCountIsNotPhysicalConcurrencyBound :
   LogicalQidCountIsPhysicalConcurrencyBound → ⊥
