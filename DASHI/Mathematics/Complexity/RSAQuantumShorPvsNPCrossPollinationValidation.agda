@@ -3,7 +3,6 @@ module DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationValidatio
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
 
 import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationExact as Cross
 
@@ -11,25 +10,41 @@ import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationExact as 
 -- Positive reused structure.
 ------------------------------------------------------------------------
 
-validationSameConsumer :
-  Cross.sameOrderConsumerAlreadyPaid ≡ refl
-validationSameConsumer = refl
+validationProducerVerifierSeparation :
+  Cross.producerVerifierSeparationPresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationProducerVerifierSeparation = refl
 
-validationShorHiddenPeriod :
-  Cross.shorHiddenPeriodSurfaceExists ≡ refl
-validationShorHiddenPeriod = refl
+validationModelFibreSeparation :
+  Cross.computationalModelFibreSeparationPresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationModelFibreSeparation = refl
 
-validationShorFourier :
-  Cross.shorFourierPeriodMachineExists ≡ refl
-validationShorFourier = refl
+validationShorReductionTemplate :
+  Cross.shorSymmetryReductionTemplatePresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationShorReductionTemplate = refl
+
+validationRecoverableQuotient :
+  Cross.recoverableQuotientInfrastructurePresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationRecoverableQuotient = refl
 
 validationHyperformalReduction :
-  Cross.hyperfabricSelectedSectionReductionAvailable ≡ refl
+  Cross.hyperfabricConsumerReductionInfrastructurePresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
 validationHyperformalReduction = refl
 
-validationPantsInterface :
-  Cross.pantsSeamRequiresAndCarriesInterfaceMatch ≡ refl
-validationPantsInterface = refl
+validationExplicitSeamCompatibility :
+  Cross.explicitSeamCompatibilityInfrastructurePresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationExplicitSeamCompatibility = refl
 
 ------------------------------------------------------------------------
 -- Fail-closed frontier.
