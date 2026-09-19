@@ -22,6 +22,7 @@ import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantAnalyticJCoarseFineFrickeIntertwinerExact
+import DASHI.Moonshine.JInvariantAnalyticJCoarseFineObserverExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
@@ -73,7 +74,9 @@ record RoadmapState : Set where
     analyticModularCoordinateToStructuredJFieldExact : Bool
     analyticStructuredSeamCompilerExact : Bool
     analyticFrickeFiniteTransportIntertwinerExact : Bool
-    concreteAnalyticJCoarseFineEquivalencePaid : Bool
+    analyticStructuredObserverInterfaceExact : Bool
+    concreteAnalyticStructuredObserverPaid : Bool
+    legacyConcreteAnalyticJCoarseFineEquivalencePaid : Bool
     jActualAnalyticGluingLawExact : Bool
 
     monsterGradeWiseSignedFibreIntertwinerExact : Bool
@@ -120,7 +123,9 @@ canonicalRoadmapState = record
   ; analyticModularCoordinateToStructuredJFieldExact = true
   ; analyticStructuredSeamCompilerExact = true
   ; analyticFrickeFiniteTransportIntertwinerExact = true
-  ; concreteAnalyticJCoarseFineEquivalencePaid = false
+  ; analyticStructuredObserverInterfaceExact = true
+  ; concreteAnalyticStructuredObserverPaid = false
+  ; legacyConcreteAnalyticJCoarseFineEquivalencePaid = false
   ; jActualAnalyticGluingLawExact = false
 
   ; monsterGradeWiseSignedFibreIntertwinerExact = true
@@ -132,7 +137,8 @@ canonicalRoadmapState = record
 data FirstLiveRoadmapResidual : Set where
   missingConcretePixelToAnalyticBoxCalibration : FirstLiveRoadmapResidual
   missingSymbolicOrbitToAnalyticRealisation : FirstLiveRoadmapResidual
-  missingConcreteAnalyticJCoarseFineEquivalence : FirstLiveRoadmapResidual
+  missingConcreteAnalyticStructuredObserver : FirstLiveRoadmapResidual
+  missingLegacyConcreteAnalyticJCoarseFineEquivalence : FirstLiveRoadmapResidual
   missingAnalyticGluingTransport : FirstLiveRoadmapResidual
   missingConcreteGradeWise3BRecognitionAssignment : FirstLiveRoadmapResidual
   missingCompressionCostTheorem : FirstLiveRoadmapResidual
@@ -142,7 +148,8 @@ data FirstLiveRoadmapResidual : Set where
 -- theorem/compiler or empirical-source-binding layer.  The first remaining
 -- j-side residual is a STRONGER coordinate not present in that table: prove a
 -- concrete pixel box is an analytic Mobius box, rather than merely retaining
--- its measured scale/candidate binding.
+-- its measured scale/candidate binding.  The canonical analytic/finite target
+-- is now an observer-with-fibre, not a global finite/analytic bijection.
 firstJMonsterResidual : FirstLiveRoadmapResidual
 firstJMonsterResidual = missingConcretePixelToAnalyticBoxCalibration
 
