@@ -139,6 +139,60 @@ wosQ6Execution = wosBlockedExecution Queries.wosQ6LongitudinalInstitutional
 wosQ7Execution : DatabaseExecutionReceipt
 wosQ7Execution = wosBlockedExecution Queries.wosQ7OpenInteroperableRepairable
 
+
+------------------------------------------------------------------------
+-- 2026-09-19 ERIC public-API execution attempt.
+--
+-- The exact ERIC translations and public API syntax are now frozen, but this
+-- execution environment's web transport refused direct access to
+-- api.ies.ed.gov before a response body/result count could be observed.
+-- Therefore these are interface-failure-before-submission receipts only.
+------------------------------------------------------------------------
+
+attemptTimestamp20260919 : String
+attemptTimestamp20260919 = "2026-09-19T13:31:00+10:00"
+
+ericAPIEntrypoint : String
+ericAPIEntrypoint = "https://api.ies.ed.gov/eric/"
+
+ericInterfaceFailureOutcome : ExecutionOutcome
+ericInterfaceFailureOutcome =
+  interfaceFailureBeforeSubmission
+    "current web transport refused direct api.ies.ed.gov access before a result response could be observed"
+
+ericInterfaceFailureExecution : Queries.TranslatedQueryReceipt → DatabaseExecutionReceipt
+ericInterfaceFailureExecution q = database-execution-receipt
+  q
+  Search.eric
+  true refl
+  false
+  attemptTimestamp20260919
+  ericAPIEntrypoint
+  ericInterfaceFailureOutcome
+  "ChatGPT web retrieval environment; official ERIC API syntax verified, direct API response retrieval unavailable in this transport"
+  "attempt receipt only: no observed API response, result count, export, deduplication, screening, eligibility or evidence payment is created"
+
+ericQ1Execution : DatabaseExecutionReceipt
+ericQ1Execution = ericInterfaceFailureExecution Queries.ericQ1DigitalEducationESD
+
+ericQ2Execution : DatabaseExecutionReceipt
+ericQ2Execution = ericInterfaceFailureExecution Queries.ericQ2Transformation
+
+ericQ3Execution : DatabaseExecutionReceipt
+ericQ3Execution = ericInterfaceFailureExecution Queries.ericQ3ReflexiveSustainability
+
+ericQ4Execution : DatabaseExecutionReceipt
+ericQ4Execution = ericInterfaceFailureExecution Queries.ericQ4LifecycleCircularity
+
+ericQ5Execution : DatabaseExecutionReceipt
+ericQ5Execution = ericInterfaceFailureExecution Queries.ericQ5ParticipantGovernance
+
+ericQ6Execution : DatabaseExecutionReceipt
+ericQ6Execution = ericInterfaceFailureExecution Queries.ericQ6LongitudinalInstitutional
+
+ericQ7Execution : DatabaseExecutionReceipt
+ericQ7Execution = ericInterfaceFailureExecution Queries.ericQ7OpenInteroperableRepairable
+
 canonicalExecutionReceipts : List DatabaseExecutionReceipt
 canonicalExecutionReceipts =
   scopusQ1Execution
@@ -155,10 +209,17 @@ canonicalExecutionReceipts =
   ∷ wosQ5Execution
   ∷ wosQ6Execution
   ∷ wosQ7Execution
+  ∷ ericQ1Execution
+  ∷ ericQ2Execution
+  ∷ ericQ3Execution
+  ∷ ericQ4Execution
+  ∷ ericQ5Execution
+  ∷ ericQ6Execution
+  ∷ ericQ7Execution
   ∷ []
 
 executionReceiptCount : Nat
-executionReceiptCount = 14
+executionReceiptCount = 21
 
 ------------------------------------------------------------------------
 -- Promotion firewalls.
@@ -224,4 +285,4 @@ canonicalDatabaseExecutionBoundary = database-execution-boundary
 
 executionReceiptReading : String
 executionReceiptReading =
-  "All fourteen frozen Scopus/Web-of-Science translations received explicit execution-attempt receipts on 2026-09-16. Both live database entrypoints returned HTTP 403 before query submission in the available web execution environment. The blocked outcome constructors cannot carry result counts or exports, so access failure cannot be mistaken for zero results. querySubmitted is a retained coordinate rather than globally forced false, allowing a future authenticated execution to record true together with executedWithObservedResultSet, exact translated query, count, result-set identity/export state and execution evidence."
+  "Twenty-one frozen translated queries now carry explicit execution-attempt receipts: fourteen Scopus/Web-of-Science attempts from 2026-09-16 and seven ERIC public-API attempts from 2026-09-19. Scopus/WoS returned HTTP 403 before submission; the current web transport refused direct api.ies.ed.gov response access before an ERIC result set could be observed. All remain pre-result failures and therefore carry no result counts or exports. querySubmitted remains a retained coordinate so a future successful execution can record true together with executedWithObservedResultSet, exact translated query, count, result-set identity/export state and execution evidence."
