@@ -83,6 +83,17 @@ d2NeedsNoNewGlobalAF :
 d2NeedsNoNewGlobalAF =
   Full.d2NewGlobalAFTheoremRequiredIsFalse
 
+
+d2NeedsNoSecondMixingMap :
+  Full.d2SecondMixingMapRequired ≡ false
+d2NeedsNoSecondMixingMap =
+  Full.d2SecondMixingMapRequiredIsFalse
+
+d2LiteralCoefficientIsNotConstantNatFamily :
+  Full.d2LiteralCoefficientIsConstantNatFamily ≡ false
+d2LiteralCoefficientIsNotConstantNatFamily =
+  Full.d2LiteralCoefficientIsConstantNatFamilyIsFalse
+
 d3StillNeedsPhysicalTransport :
   Full.d3FiniteToContinuumTransportStillPhysical ≡ true
 d3StillNeedsPhysicalTransport =
