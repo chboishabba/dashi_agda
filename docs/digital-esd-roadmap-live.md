@@ -922,3 +922,20 @@ search/export
 ```
 
 This bridge is source-written after the pushed local GREEN commit `c0fedffdf...`; it does not inherit that local Agda receipt until the new aggregate delta is reconciled and checked.
+
+
+### SLR/SensibLaw runtime correspondence
+
+The exact Digital-ESD-side operational contract is documented in:
+
+`docs/digital-esd-slr-fulltext-review-handoff.md`
+
+The live SLR implementation was checked rather than inferred. The current
+`slr_source_unit_pnf_batch.py` and its generic producer emit source-text hashes,
+revision references, parser receipts and source-span-bounded PNF candidates, and
+hard-code `candidate_only=true`, `semantic_promotion=false`,
+`source_role_creates_claim_truth=false`, and
+`parser_output_creates_ontology_truth=false`.
+
+This matches the reused DASHI interop boundaries. No SLR/SensibLaw runtime code
+was modified by this Digital-ESD tranche.
