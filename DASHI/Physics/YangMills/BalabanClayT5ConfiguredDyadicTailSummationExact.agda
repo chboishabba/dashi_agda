@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationExact where
 
 ------------------------------------------------------------------------
