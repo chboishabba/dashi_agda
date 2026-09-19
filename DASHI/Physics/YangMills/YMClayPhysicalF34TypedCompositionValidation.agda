@@ -9,10 +9,10 @@ f3RecoveryGapIsCompilerOutput :
 f3RecoveryGapIsCompilerOutput =
   Typed.f3RecoveryGapRequiresIndependentPaymentIsFalse
 
-f4EvolutionEqualityIsStoredPhysicalPayment :
-  Typed.f4EvolutionEqualityRequiresAnotherSameObjectAxiom ≡ false
-f4EvolutionEqualityIsStoredPhysicalPayment =
-  Typed.f4EvolutionEqualityRequiresAnotherSameObjectAxiomIsFalse
+f4EvolutionEqualityIsCompilerOutput :
+  Typed.f4EvolutionEqualityRequiresPrimitivePhysicalAxiom ≡ false
+f4EvolutionEqualityIsCompilerOutput =
+  Typed.f4EvolutionEqualityRequiresPrimitivePhysicalAxiomIsFalse
 
 legacyReceiptBitsDoNotPayTypedF34 :
   Typed.legacyBooleanReceiptsPayTypedPhysicalF34 ≡ false
