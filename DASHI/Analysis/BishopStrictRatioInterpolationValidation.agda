@@ -1,6 +1,7 @@
 module DASHI.Analysis.BishopStrictRatioInterpolationValidation where
 
 open import Agda.Builtin.Sigma using (Σ)
+open import Data.Product.Base using (_×_)
 
 import Real as BishopReal
 
