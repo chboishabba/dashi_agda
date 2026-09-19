@@ -74,11 +74,11 @@ record HeterogeneousResidualMove : Set₁ where
     producerLaneReference : String
     moveReference : String
     diagnosisReference : String
-    candidateOnly : Bool
-    admissible : Bool
-    createsSemanticAuthority : Bool
-    applicabilityPromoted : Bool
-    claimTruthPromoted : Bool
+    moveCandidateOnly : Bool
+    moveAdmissible : Bool
+    moveCreatesSemanticAuthority : Bool
+    moveApplicabilityPromoted : Bool
+    moveClaimTruthPromoted : Bool
 
 open HeterogeneousResidualMove public
 
@@ -229,10 +229,10 @@ record AdaptiveTrajectoryLink : Set₁ where
     selectionFromPostCommitFrontier : Bool
     precomputedExecutionAuthority : Bool
     adaptiveFreshnessRequiresDifferentResidual : Bool
-    candidateOnly : Bool
-    createsSemanticAuthority : Bool
-    applicabilityPromoted : Bool
-    claimTruthPromoted : Bool
+    trajectoryCandidateOnly : Bool
+    trajectoryCreatesSemanticAuthority : Bool
+    trajectoryApplicabilityPromoted : Bool
+    trajectoryClaimTruthPromoted : Bool
 
 open AdaptiveTrajectoryLink public
 
@@ -306,10 +306,10 @@ record AdaptiveHeterogeneousBoundary : Set where
     negativeKnowledgePersistsAcrossReDiagnosis : Bool
     legalAndProvenanceMayCompeteWithIdentityAndContext : Bool
     sourceFamilySwitchMayBeEndogenous : Bool
-    candidateOnly : Bool
-    createsSemanticAuthority : Bool
-    applicabilityPromoted : Bool
-    claimTruthPromoted : Bool
+    boundaryCandidateOnly : Bool
+    boundaryCreatesSemanticAuthority : Bool
+    boundaryApplicabilityPromoted : Bool
+    boundaryClaimTruthPromoted : Bool
 
 open AdaptiveHeterogeneousBoundary public
 
