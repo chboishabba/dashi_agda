@@ -3,6 +3,7 @@ module DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeValidation where
 import Real as BishopReal
 
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
+import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
 import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as P
 
 normSquareMultiplicationRegression :
@@ -23,3 +24,13 @@ powerEnvelopeRegression :
   P.BishopQPowerComponentEnvelope q ratio
 powerEnvelopeRegression =
   P.powerEnvelopeFromNormSquare
+
+unitPhaseScaledNormSquareRegression :
+  ∀ {phase ratio} →
+  BishopReal._≃_ (P.normSqC phase) BishopReal.1ℝ →
+  BishopReal._≃_
+    (P.normSqC
+      (Algebra.scaleC ratio phase))
+    (BishopReal._*_ ratio ratio)
+unitPhaseScaledNormSquareRegression =
+  P.unitPhaseScaledNormSquare
