@@ -3,7 +3,8 @@ module DASHI.Physics.YangMills.YMClayLevel2CompositeOperatorCoefficientWeldExact
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Nat using (Nat; suc)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCompositeOperatorRGParallelTransportExact as Transport
@@ -39,13 +40,13 @@ record SameCompositeOperatorCoefficientRecurrence
 
     physicalUsesSameOperatorMixing :
       ∀ depth →
-      physicalOperatorCoefficient (Agda.Builtin.Nat.suc depth)
+      physicalOperatorCoefficient (suc depth)
       ≡ Transport.oneStepMixing transport depth
           (physicalOperatorCoefficient depth)
 
     asymptoticFreedomUsesSameOperatorMixing :
       ∀ depth →
-      asymptoticFreedomOperatorCoefficient (Agda.Builtin.Nat.suc depth)
+      asymptoticFreedomOperatorCoefficient (suc depth)
       ≡ Transport.oneStepMixing transport depth
           (asymptoticFreedomOperatorCoefficient depth)
 
