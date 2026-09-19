@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Interop.SLRSpacyObservationWorldCompilerParityExact
@@ -31,6 +32,30 @@ data Sprint2MilestoneState : Set where
   implementedAwaitingRuntime : Sprint2MilestoneState
   required : Sprint2MilestoneState
 
+m21State : Sprint2MilestoneState
+m21State = paid
+
+m22State : Sprint2MilestoneState
+m22State = paid
+
+m23State : Sprint2MilestoneState
+m23State = implementedAwaitingRuntime
+
+m24State : Sprint2MilestoneState
+m24State = required
+
+m25State : Sprint2MilestoneState
+m25State = required
+
+m21StateIsPaid : m21State ≡ paid
+m21StateIsPaid = refl
+
+m22StateIsPaid : m22State ≡ paid
+m22StateIsPaid = refl
+
+m23StateAwaitsRuntime : m23State ≡ implementedAwaitingRuntime
+m23StateAwaitsRuntime = refl
+
 record Sprint2Milestone : Set where
   constructor sprint2Milestone
   field
@@ -45,27 +70,27 @@ sprint2Milestones : List Sprint2Milestone
 sprint2Milestones =
     sprint2Milestone
       "M2.1"
-      implementedAwaitingRuntime
+      m21State
       "one canonical evidence manifestation envelope across structured graph, Wikimedia, legal-authority, PDF, transcript and user evidence families"
       "every manifestation names source, exact revision, content digest and acquisition receipt while remaining candidate-only/non-promoting"
   ∷ sprint2Milestone
       "M2.2"
-      implementedAwaitingRuntime
+      m22State
       "one EvidenceManifestation -> SourceRevision -> exact source anchor -> Observation substrate"
       "text evidence uses exact character ranges; structured evidence uses exact structured coordinates; compiler and persisted PG spans retain exact revision identity"
   ∷ sprint2Milestone
       "M2.3"
-      required
+      m23State
       "shared reducer production ABI"
       "world, matter and law projections consume the same reviewed evidence substrate without internal shortcuts"
   ∷ sprint2Milestone
       "M2.4"
-      required
+      m24State
       "legal source providers are ordinary producers over the same evidence substrate"
       "PG hit uses zero network; miss acquires/persists; exact second request reuses the stored revision"
   ∷ sprint2Milestone
       "M2.5"
-      required
+      m25State
       "cross-family exact replay capstone"
       "classification, Australian authority and matter/narrative evidence replay through one source/revision/span/observation/review/projection spine"
   ∷ []
@@ -132,7 +157,7 @@ currentM21Implementation =
     true
     true
     true
-    false
+    true
     false
 
 data EvidenceSpanKind : Set where
