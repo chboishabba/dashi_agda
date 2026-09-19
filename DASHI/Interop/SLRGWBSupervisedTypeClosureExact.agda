@@ -17,6 +17,7 @@ import DASHI.Ontology.LeanWikidataFullSourceManifest as LeanManifest
 -- Production runtime:
 --   chboishabba/slr
 --   branch agent/gwb-supervised-type-closure-v1
+--   source-written head fdf2281fa7fa830b1ee4f06dc95f782c603a47fe
 --
 -- SensibLaw donors:
 --   docs/planning/wikidata_nat_cohort_d_type_probing_surface_20260402.md
@@ -32,6 +33,10 @@ import DASHI.Ontology.LeanWikidataFullSourceManifest as LeanManifest
 -- SUPPLIED KB. It does not certify that a live fetched slice is globally
 -- complete, simultaneous, reliable, authoritative or epistemically true.
 ------------------------------------------------------------------------
+
+slrSupervisedTypeClosureHead : String
+slrSupervisedTypeClosureHead =
+  "fdf2281fa7fa830b1ee4f06dc95f782c603a47fe"
 
 dashiLean4ReferenceHead : String
 dashiLean4ReferenceHead =
