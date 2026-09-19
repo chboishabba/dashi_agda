@@ -118,3 +118,6 @@ import DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationValidat
 
 import DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyExact
 import DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyValidation
+
+import DASHI.Physics.YangMills.BalabanClayT5MarkovToProkhorovTightnessExact
+import DASHI.Physics.YangMills.BalabanClayT5MarkovToProkhorovTightnessValidation
