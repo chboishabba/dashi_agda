@@ -23,6 +23,7 @@ module DASHI.Foundations.HyperformObserverFactorisationExact where
 
 open import Agda.Primitive using (Set; Set₁)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (cong)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -120,8 +121,6 @@ observerFibreDistinctionSurvivesRechart
     (right witness)
     (cong rechart (sameObservation witness))
     (consumerDistinguishes witness)
-  where
-  open import Agda.Builtin.Equality using (cong)
 
 record HyperformObserverFactorisationBoundary : Set where
   constructor hyperform-observer-factorisation-boundary
