@@ -67,3 +67,60 @@ bsdGlobalDescentStillOpen :
     BSDArithmetic.canonicalEllipticTwoDescentRoadBoundary
   ≡ false
 bsdGlobalDescentStillOpen = refl
+
+------------------------------------------------------------------------
+-- SECOND CONTINUATION: concrete index geometry and existing-proof reuse.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeIndexedWindowExact as PNPIndex
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineGenericCycleClassWeldExact as HodgeP1Weld
+import DASHI.Mathematics.Automorphic.EllipticEulerCauchyToLimitExact as BSDCauchy
+import DASHI.Mathematics.Arithmetic.EllipticFiniteSeedToSelmerExact as BSDSeed
+
+pnpIndexedWindowGeometryPaid :
+  PNPIndex.indexedWindowGeometryPaid
+    PNPIndex.canonicalConcreteTapeIndexedWindowBoundary
+  ≡ true
+pnpIndexedWindowGeometryPaid = refl
+
+pnpAllWindowLocalityStillOpen :
+  PNPIndex.allWindowLocalityEquivalencePaid
+    PNPIndex.canonicalConcreteTapeIndexedWindowBoundary
+  ≡ false
+pnpAllWindowLocalityStillOpen = refl
+
+hodgeP1GenericWeldCompilerPaid :
+  HodgeP1Weld.projectiveLineGenericCycleWeldCompilerPaid
+    HodgeP1Weld.canonicalProjectiveLineGenericCycleWeldBoundary
+  ≡ true
+hodgeP1GenericWeldCompilerPaid = refl
+
+hodgeCPnComparisonStillOpen :
+  HodgeP1Weld.literalCPnComparisonPaid
+    HodgeP1Weld.canonicalProjectiveLineGenericCycleWeldBoundary
+  ≡ false
+hodgeCPnComparisonStillOpen = refl
+
+bsdCauchyCompletionCompilerPaid :
+  BSDCauchy.cauchyToConstructiveLimitCompilerPaid
+    BSDCauchy.canonicalEllipticEulerCauchyToLimitBoundary
+  ≡ true
+bsdCauchyCompletionCompilerPaid = refl
+
+bsdEulerCauchyEstimateStillOpen :
+  BSDCauchy.eulerCauchyEstimatePaid
+    BSDCauchy.canonicalEllipticEulerCauchyToLimitBoundary
+  ≡ false
+bsdEulerCauchyEstimateStillOpen = refl
+
+bsdFiniteSeedSelmerCompilerPaid :
+  BSDSeed.finiteSeedToSelmerCompilerPaid
+    BSDSeed.canonicalEllipticFiniteSeedToSelmerBoundary
+  ≡ true
+bsdFiniteSeedSelmerCompilerPaid = refl
+
+bsdActualGlobalSelmerStillOpen :
+  BSDSeed.actualGlobalSelmerInhabitantPaid
+    BSDSeed.canonicalEllipticFiniteSeedToSelmerBoundary
+  ≡ false
+bsdActualGlobalSelmerStillOpen = refl
