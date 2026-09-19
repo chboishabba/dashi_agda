@@ -13,7 +13,7 @@ module DASHI.Analysis.BishopPolynomialGeometricSeriesConvergenceExact where
 --
 -- For every fixed natural degree k and every Bishop-real contraction
 --
---     0 < r < 1,
+--     0 <= r < 1,
 --
 -- this owner proves convergence of
 --
@@ -200,29 +200,29 @@ natRealNonnegative index =
 
 polynomialGeometricTermNonnegative :
   ∀ {ratio} →
-  BishopReal._<_ BishopReal.0ℝ ratio →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
   ∀ degree index →
   BishopReal.NonNegative
     (polynomialGeometricTerm ratio degree index)
-polynomialGeometricTermNonnegative ratioPositive degree index =
+polynomialGeometricTermNonnegative ratioNonnegative degree index =
   BishopP.nonNegx,y⇒nonNegx*y
     (BishopSequence.nonNegx⇒nonNegxⁿ degree
       (natRealNonnegative index))
     (BishopSequence.nonNegx⇒nonNegxⁿ index
-      (BishopP.0≤x⇒nonNegx (BishopP.<⇒≤ ratioPositive)))
+      (BishopP.0≤x⇒nonNegx ratioNonnegative))
 
 polynomialGeometricAbsIsSelf :
   ∀ {ratio} →
-  BishopReal._<_ BishopReal.0ℝ ratio →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
   ∀ degree index →
   BishopReal._≃_
     (BishopReal.∣_∣
       (polynomialGeometricTerm ratio degree index))
     (polynomialGeometricTerm ratio degree index)
-polynomialGeometricAbsIsSelf ratioPositive degree index =
+polynomialGeometricAbsIsSelf ratioNonnegative degree index =
   BishopP.nonNegx⇒∣x∣≃x
     (polynomialGeometricTermNonnegative
-      ratioPositive degree index)
+      ratioNonnegative degree index)
 
 ------------------------------------------------------------------------
 -- Eventual ratio and convergence.
@@ -230,7 +230,7 @@ polynomialGeometricAbsIsSelf ratioPositive degree index =
 
 eventualSuccessorRatio :
   ∀ {ratio larger : BishopReal.ℝ} degree →
-  BishopReal._<_ BishopReal.0ℝ ratio →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
   BishopReal._<_ ratio larger →
   Σ Nat (λ start →
     ∀ index →
@@ -243,7 +243,7 @@ eventualSuccessorRatio :
         (BishopReal.∣_∣
           (polynomialGeometricTerm ratio degree (suc index)))))
 eventualSuccessorRatio
-    {ratio} {larger} degree ratioPositive ratioBelowLarger
+    {ratio} {larger} degree ratioNonnegative ratioBelowLarger
   with Limit.polynomialSuccessorFactorEventuallyBelow
     degree ratioBelowLarger
 ... | start , factorBelow =
@@ -263,39 +263,39 @@ eventualSuccessorRatio
           (BishopP.<⇒≤
             (factorBelow index indexAtLeastStart))
           (polynomialGeometricTermNonnegative
-            ratioPositive degree (suc index))
+            ratioNonnegative degree (suc index))
     in
     BishopP.≤-respˡ-≃
       (BishopP.≃-trans
         (polynomialGeometricAbsIsSelf
-          ratioPositive degree (suc (suc index)))
+          ratioNonnegative degree (suc (suc index)))
         (polynomialGeometricSuccessorFactorization
           ratio degree index))
       (BishopP.≤-respʳ-≃
         (BishopP.*-congˡ
           (BishopP.≃-symm
             (polynomialGeometricAbsIsSelf
-              ratioPositive degree (suc index))))
+              ratioNonnegative degree (suc index))))
         raw)
 
 polynomialGeometricSeriesConvergent :
   ∀ (ratio : BishopReal.ℝ) degree →
-  BishopReal._<_ BishopReal.0ℝ ratio →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
   BishopReal._<_ ratio BishopReal.1ℝ →
   BishopSequence._isConvergent
     (BishopSequence.SeriesOf
       (polynomialGeometricTerm ratio degree))
 polynomialGeometricSeriesConvergent
-    ratio degree ratioPositive ratioBelowOne
+    ratio degree ratioNonnegative ratioBelowOne
   with Interpolate.interpolateStrictUnitRatio
-    ratioPositive ratioBelowOne
+    ratioNonnegative ratioBelowOne
 ... | larger ,
       largerPositive ,
       ratioBelowLarger ,
       largerBelowOne
   with eventualSuccessorRatio
     {ratio = ratio} {larger = larger}
-    degree ratioPositive ratioBelowLarger
+    degree ratioNonnegative ratioBelowLarger
 ... | start , successorBound =
   BishopSequence.proposition-3-6-1
     (largerPositive , largerBelowOne)
