@@ -365,22 +365,43 @@ literal stress source-derivative identification
 Therefore R127 is not a second independent payment after the R129 recovery
 package is chosen.
 
-The shortest remaining physical local row is the existing Round87 D package:
+The shortest remaining physical local row is smaller than the old Round87-D
+wording suggests.
+
+Global asymptotic freedom is **not** a second Level-2 theorem.  The positive and
+tuned literal beta trajectory already belongs to Row A, via the same generated
+coupling history.  Likewise, finite periodic Ward balance -> conserved slice
+charge is already machine-checked, and R132-R136/R142-R144 already provide the
+same-generated-action / first-variation / localized-D1 stress provenance.
+
+The remaining physical Level-2 row is therefore:
 
 ```text
-same-family physical RG product remainder = composite marked tail
-+ same one-step OPE/AF mixing law and UV normalization
-+ local translation Ward/stress law
+D1  same-family physical RG product remainder
+    = selected composite marked tail
+
+D2  literal OPE coefficient coordinate
+    = SAME one-step RG mixing / UV-normalization coordinate
+      already selected by the RG/AF lane
+
+D3  finite translation-Ward current
+    = recovered continuum stress insertion
+      on the SAME literal continuum family
 ```
+
+This is the new `YMClayLevel2WardRGReuseExact` boundary.
 
 From there:
 
 ```text
-composite tail -> dyadic OPE remainder decay            machine-checked
-one-step law + UV normalization -> all-depth equality   machine-checked
-same-family stress/OPE predicates -> Clay postcondition machine-checked
+composite tail -> dyadic OPE remainder decay             machine-checked
+same one-step coordinate -> all-depth coefficient match  machine-checked
+finite Ward balance -> slice-charge conservation         machine-checked
+generated action -> continuum stress first variation     compiler-owned spine
+same-family stress/OPE predicates -> Clay postcondition  machine-checked
 ```
 
-No hidden theorem was found that promotes the recovered stress derivative
-directly into `HasStressTensorAndOPE`; that semantic/local Ward identification
-remains genuine physical work.
+No hidden theorem was found for D3.  Thus the genuine Ward work is not
+"prove a Ward identity from scratch"; it is the same-object continuum transport
+showing that the already-owned finite Ward current is exactly the recovered
+stress insertion on the same continuum family.
