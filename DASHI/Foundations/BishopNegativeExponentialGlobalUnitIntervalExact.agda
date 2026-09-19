@@ -42,7 +42,7 @@ oneNonzero = inj₂ onePositive
 
 inverseOneIsOne :
   BishopReal._≃_
-    (BishopReal._⁻¹ BishopReal.1ℝ oneNonzero)
+    (BishopInverse._⁻¹ BishopReal.1ℝ oneNonzero)
     BishopReal.1ℝ
 inverseOneIsOne =
   BishopP.≃-symm
@@ -72,7 +72,7 @@ negativeExpIsInversePositiveExp :
   (xPositive : BishopReal._<_ BishopReal.0ℝ x) →
   BishopReal._≃_
     (Exp.bishopExp (BishopReal.- x))
-    (BishopReal._⁻¹
+    (BishopInverse._⁻¹
       (Exp.bishopExp x)
       (expNonzero xPositive))
 negativeExpIsInversePositiveExp {x} xPositive =
@@ -115,8 +115,8 @@ negativeExpBelowOne {x} xPositive =
 
     inverseOrder :
       BishopReal._<_
-        (BishopReal._⁻¹ expX expXNonzero)
-        (BishopReal._⁻¹ BishopReal.1ℝ oneNonzero)
+        (BishopInverse._⁻¹ expX expXNonzero)
+        (BishopInverse._⁻¹ BishopReal.1ℝ oneNonzero)
     inverseOrder =
       BishopInverse.x<y∧posx,y⇒y⁻¹<x⁻¹
         (Positive.bishopExpStrictlyAboveOneOnPositive xPositive)
