@@ -103,6 +103,50 @@ def load_screening_ledger(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
+def first_text(row: dict[str, Any], *keys: str) -> str:
+    for key in keys:
+        value = row.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return ""
+
+
+def load_metadata_records(path: Path | None) -> dict[str, dict[str, Any]]:
+    if path is None:
+        return {}
+    payload = read_json(path)
+    if isinstance(payload, list):
+        rows = payload
+    elif isinstance(payload, dict):
+        rows = None
+        for key in ("records", "items", "docs", "results"):
+            candidate = payload.get(key)
+            if isinstance(candidate, list):
+                rows = candidate
+                break
+        if rows is None:
+            raise ValueError("metadata input object lacks records/items/docs/results")
+    else:
+        raise ValueError("metadata input must be an array or object containing an array")
+
+    out: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        eric_id = first_text(row, "ID", "id", "ERICNumber", "eric_id", "ericId")
+        doi = first_text(row, "DOI", "doi")
+        if eric_id:
+            src = f"ERIC:{' '.join(eric_id.split()).strip()}"
+        elif doi:
+            src = f"DOI:{' '.join(doi.split()).strip().lower()}"
+        else:
+            continue
+        if src in out:
+            raise ValueError(f"metadata input duplicates stable source identity: {src}")
+        out[src] = row
+    return out
+
+
 def tokens(row: dict[str, Any]) -> set[str]:
     snap = row.get("title_abstract_snapshot") or {}
     text = " ".join(str(snap.get(k) or "") for k in ("title", "abstract"))
@@ -198,36 +242,77 @@ def pair_similarity(a: dict[str, Any], b: dict[str, Any]) -> float:
     return len(ta & tb) / len(ta | tb)
 
 
-def build_family_hypotheses(rows: list[dict[str, Any]], threshold: float) -> list[dict[str, Any]]:
-    # Candidate fibres only. Block by normalised title prefix to stay bounded.
+def build_family_hypotheses(
+    rows: list[dict[str, Any]],
+    threshold: float,
+    metadata: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    # Candidate fibres only. DOI/author/year strengthen a hypothesis but never
+    # create same-empirical-study identity.
     blocks: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
+        src = row["source_identity_reference"]
+        meta = metadata.get(src, {})
+        doi = first_text(meta, "DOI", "doi").lower()
         title = normalised_title(row)
+        if doi:
+            blocks[f"doi:{doi}"].append(row)
         key = " ".join(title.split()[:4])
         if key:
-            blocks[key].append(row)
+            blocks[f"title:{key}"].append(row)
 
     out = []
+    seen_pairs: set[tuple[str, str]] = set()
     for key, members in sorted(blocks.items()):
         if len(members) < 2:
             continue
-        # Limit quadratic comparison to title-prefix blocks.
         for i in range(len(members)):
             for j in range(i + 1, len(members)):
                 a, b = members[i], members[j]
-                sim = pair_similarity(a, b)
-                if sim < threshold:
+                sa, sb = a["source_identity_reference"], b["source_identity_reference"]
+                pair = tuple(sorted((sa, sb)))
+                if pair in seen_pairs:
                     continue
-                relation = "publicationDuplicate" if normalised_title(a) == normalised_title(b) else "reportFamilyDuplicate"
+
+                ma, mb = metadata.get(sa, {}), metadata.get(sb, {})
+                doi_a = first_text(ma, "DOI", "doi").lower()
+                doi_b = first_text(mb, "DOI", "doi").lower()
+                author_a = first_text(ma, "Author", "Authors", "author", "authors").lower()
+                author_b = first_text(mb, "Author", "Authors", "author", "authors").lower()
+                year_a = first_text(ma, "PublicationDate", "publication_date", "Year", "year")
+                year_b = first_text(mb, "PublicationDate", "publication_date", "Year", "year")
+                sim = pair_similarity(a, b)
+                exact_doi = bool(doi_a and doi_a == doi_b)
+                exact_title = normalised_title(a) == normalised_title(b)
+                author_overlap = bool(author_a and author_b and (author_a == author_b or author_a in author_b or author_b in author_a))
+                year_match = bool(year_a and year_b and year_a[:4] == year_b[:4])
+
+                if not exact_doi and sim < threshold:
+                    continue
+                relation = (
+                    "publicationDuplicate"
+                    if exact_doi or (exact_title and author_overlap and year_match)
+                    else "reportFamilyDuplicate"
+                )
+                evidence = {
+                    "title_abstract_jaccard": round(sim, 6),
+                    "exact_doi": exact_doi,
+                    "exact_normalised_title": exact_title,
+                    "author_overlap": author_overlap,
+                    "year_match": year_match,
+                    "block": key,
+                }
                 payload = {
-                    "fibre_reference": stable_ref("study-family-hypothesis", [a["source_identity_reference"], b["source_identity_reference"], relation]),
-                    "member_source_references": [a["source_identity_reference"], b["source_identity_reference"]],
+                    "fibre_reference": stable_ref("study-family-hypothesis", [sa, sb, relation, evidence]),
+                    "member_source_references": [sa, sb],
                     "relation_kind": relation,
-                    "evidence_reference": f"title-abstract-jaccard:{sim:.6f}",
+                    "evidence_reference": stable_ref("study-family-evidence", evidence),
+                    "evidence": evidence,
                     "reviewed_as_same_object": False,
                     "hypothesis_creates_empirical_study_identity": False,
                 }
                 out.append(payload)
+                seen_pairs.add(pair)
     return out
 
 
@@ -487,6 +572,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--ledger", required=True, type=Path)
     ap.add_argument("--out-dir", required=True, type=Path)
+    ap.add_argument("--metadata-input", type=Path)
     ap.add_argument("--model-reference", default="digital-esd-baseline-candidate-assessor-v1")
     ap.add_argument("--family-threshold", type=float, default=0.72)
     ap.add_argument("--calibration-per-stratum", type=int, default=20)
@@ -495,8 +581,9 @@ def main() -> int:
     args = ap.parse_args()
 
     ledger = load_screening_ledger(args.ledger)
+    metadata = load_metadata_records(args.metadata_input)
     assessments = [candidate_assessment(r, args.model_reference) for r in ledger]
-    hypotheses = build_family_hypotheses(ledger, args.family_threshold)
+    hypotheses = build_family_hypotheses(ledger, args.family_threshold, metadata)
     calibration = calibration_queue(
         ledger, assessments, hypotheses, args.calibration_per_stratum
     )
@@ -522,6 +609,8 @@ def main() -> int:
         "ledger_reference": str(args.ledger),
         "ledger_sha256": sha256_bytes(args.ledger.read_bytes()),
         "input_records": len(ledger),
+        "metadata_input_reference": str(args.metadata_input) if args.metadata_input else None,
+        "metadata_records_available_for_family_hypotheses": len(metadata),
         "candidate_assessments": len(assessments),
         "study_family_hypotheses": len(hypotheses),
         "calibration_queue": len(calibration),
