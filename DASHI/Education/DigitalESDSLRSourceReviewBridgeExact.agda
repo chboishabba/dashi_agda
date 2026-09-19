@@ -10,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Education.DigitalESDSearchToSourceAuditAdmissionExact as SearchAudit
 import DASHI.Education.DigitalESDSituatedAuditObserverExact as Situated
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as Canonical
 import DASHI.Interop.SLRWikipediaArticlePNFWorldProducerExact as SLRWorld
 import DASHI.Interop.SLRNatClimateSourceUnitPNFBatchExact as SLRBatch
 import DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact as SensibLaw
@@ -62,11 +63,24 @@ record FullTextArtifactReceipt (source : Attr.AttributedSource) : Set where
     pmidIdentifier : OptionalIdentifier
     fullTextArtifactReference : String
     fullTextArtifactSha256 : String
+    fullTextRevisionReference : String
     retrievalReference : String
     retrievalTimestamp : String
     sameObjectIdentityReference : String
     sameObjectIdentityReviewed : Bool
     sameObjectIdentityReviewedIsTrue : sameObjectIdentityReviewed ≡ true
+
+    canonicalManifestation : Canonical.EvidenceManifestation
+    canonicalManifestationFamilyIsPdf :
+      Canonical.family canonicalManifestation ≡ Canonical.pdfDocument
+    canonicalSourceRevision : Canonical.EvidenceSourceRevision
+    canonicalRevisionMatchesManifestation :
+      Canonical.EvidenceSourceRevision.sourceRevisionRef canonicalSourceRevision
+      ≡ Canonical.EvidenceManifestation.sourceRevisionRef canonicalManifestation
+    canonicalDigestMatchesManifestation :
+      Canonical.EvidenceSourceRevision.contentDigestRef canonicalSourceRevision
+      ≡ Canonical.EvidenceManifestation.contentDigestRef canonicalManifestation
+
     titleMatchAlonePaysIdentity : Bool
     titleMatchAlonePaysIdentityIsFalse : titleMatchAlonePaysIdentity ≡ false
 
@@ -87,7 +101,8 @@ record SLRSourceUnitAnalysisReceipt (source : Attr.AttributedSource) : Set where
     pnfCandidateManifestReference : String
     reviewClaimBundleReference : String
     unresolvedResidualReference : String
-    sourceSpanIndexReference : String
+    canonicalEvidenceObservations : List Canonical.EvidenceObservation
+    canonicalEvidenceReference : String
     producerABIReference : String
     sourceRoleRetained : Bool
     sourceRoleRetainedIsTrue : sourceRoleRetained ≡ true
@@ -112,7 +127,9 @@ record SLRCandidateAuditObservation (source : Attr.AttributedSource) : Set where
     candidateObservation : Situated.SituatedAuditObservation
     candidateObservationSourceIsSame :
       Situated.source candidateObservation ≡ source
-    sourceSpanReference : String
+    canonicalEvidenceObservation : Canonical.EvidenceObservation
+    canonicalObservationRevisionWeld :
+      Canonical.ObservationRevisionWeld canonicalEvidenceObservation
     claimCandidateReference : String
     pnfCandidateReference : String
     extractionBasis : String
@@ -218,6 +235,9 @@ data SLRRuntimeCreatesCorpusInclusion : Set where
 data PNFResidualCreatesEmpiricalFact : Set where
 data ReviewPacketRaisesClaimCeiling : Set where
 data SLRReviewPacketCreatesCorpusAuditedSource : Set where
+data DigitalESDInventsParallelEvidenceSubstrate : Set where
+data TextEvidenceForcesAllEvidenceToTextRanges : Set where
+data FutureSharedReducerCreatesAdmission : Set where
 
 metadataOnlyCandidateDoesNotEnterSLRSecondStage :
   MetadataOnlyCandidateEntersSLRSecondStage → ⊥
@@ -255,6 +275,18 @@ slrReviewPacketDoesNotCreateCorpusAuditedSource :
   SLRReviewPacketCreatesCorpusAuditedSource → ⊥
 slrReviewPacketDoesNotCreateCorpusAuditedSource ()
 
+digitalESDDoesNotInventParallelEvidenceSubstrate :
+  DigitalESDInventsParallelEvidenceSubstrate → ⊥
+digitalESDDoesNotInventParallelEvidenceSubstrate ()
+
+textEvidenceDoesNotForceAllEvidenceToTextRanges :
+  TextEvidenceForcesAllEvidenceToTextRanges → ⊥
+textEvidenceDoesNotForceAllEvidenceToTextRanges ()
+
+futureSharedReducerDoesNotCreateAdmission :
+  FutureSharedReducerCreatesAdmission → ⊥
+futureSharedReducerDoesNotCreateAdmission ()
+
 ------------------------------------------------------------------------
 -- Boundary / roadmap reading.
 ------------------------------------------------------------------------
@@ -278,6 +310,18 @@ record DigitalESDSLRBridgeBoundary : Set where
     sourceAuditAdmissionRemainsIndependentIsTrue :
       sourceAuditAdmissionRemainsIndependent ≡ true
 
+    canonicalSprint2EvidenceSubstrateUsed : Bool
+    canonicalSprint2EvidenceSubstrateUsedIsTrue :
+      canonicalSprint2EvidenceSubstrateUsed ≡ true
+
+    pythonBatchIsProductionSemanticABI : Bool
+    pythonBatchIsProductionSemanticABIIsFalse :
+      pythonBatchIsProductionSemanticABI ≡ false
+
+    sharedReducerIsImplementedProductionABI : Bool
+    sharedReducerIsImplementedProductionABIIsFalse :
+      sharedReducerIsImplementedProductionABI ≡ false
+
 open DigitalESDSLRBridgeBoundary public
 
 canonicalDigitalESDSLRBridgeBoundary : DigitalESDSLRBridgeBoundary
@@ -289,7 +333,10 @@ canonicalDigitalESDSLRBridgeBoundary =
     true refl
     true refl
     true refl
+    true refl
+    false refl
+    false refl
 
 digitalESDSLRBridgeReading : String
 digitalESDSLRBridgeReading =
-  "Digital-ESD uses SensibLaw/SLR only after search lineage and screening have identified a source for full-text review. Full-text artifacts are same-object welded to the AttributedSource through explicit identifiers, artifact hashes and a reviewed identity reference; title equality is insufficient and publication QIDs are not required or invented. SLR/SensibLaw source-unit, parser, PNF, claim, tension and residual products remain candidate/review surfaces. They may propose source-indexed situated audit observations, but neither extraction nor reviewer acceptance constructs SourceAuditAdmission, raises the source claim ceiling, creates corpus inclusion or turns a claim candidate into paper truth. A final SLRAssistedCorpusAuditedSource exists only by pairing an already-constructed CorpusAuditedSource with the same-source SLR review packet; the sidecar cannot create admission."
+  "Digital-ESD uses SensibLaw/SLR only after search lineage and screening have identified a source for full-text review. Its application-level lineage wrappers lower evidence-bearing coordinates onto the canonical SLR Sprint-2 EvidenceManifestation -> EvidenceSourceRevision -> EvidenceSpan -> EvidenceObservation substrate rather than defining a parallel scholarly evidence ontology. Full-text artifacts remain same-object welded to AttributedSource through explicit identifiers, artifact hashes and a reviewed identity reference; title equality is insufficient and publication QIDs are not required or invented. Exact anchors are canonical EvidenceSpan values, which may be TextRange, StructuredCoordinate or WholeRevision. The pre-Sprint-2 Python source-unit batch remains a temporary execution adapter rather than production semantic authority. M2.3 SharedEvidenceReducer is a future consumer target only until SLR implements/certifies it. SLR/SensibLaw products may propose source-indexed situated audit observations, but neither extraction, reviewer acceptance nor a future shared reducer constructs SourceAuditAdmission, raises the source claim ceiling, creates corpus inclusion or turns a claim candidate into paper truth. A final SLRAssistedCorpusAuditedSource exists only by pairing an already-constructed CorpusAuditedSource with the same-source SLR review packet; the sidecar cannot create admission."
