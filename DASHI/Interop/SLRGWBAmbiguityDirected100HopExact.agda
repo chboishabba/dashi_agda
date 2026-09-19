@@ -29,7 +29,7 @@ import DASHI.Interop.GodsEyeViewWorldResearchFrontierActionExact as FrontierActi
 -- Runtime owner:
 --   chboishabba/slr
 --   branch agent/gwb-ambiguity-100hop-v1
---   source-written head b2b3ca63b507f4395c11c7f649dc564681e5cc7f
+--   verified runtime head 9ef5d562a510d4a9cb861d66016d28d84eaa8ddd
 --
 -- SensibLaw reference:
 --   chboishabba/SensibLaw
@@ -43,7 +43,7 @@ import DASHI.Interop.GodsEyeViewWorldResearchFrontierActionExact as FrontierActi
 ------------------------------------------------------------------------
 
 slrSourceWrittenHead : String
-slrSourceWrittenHead = "b2b3ca63b507f4395c11c7f649dc564681e5cc7f"
+slrSourceWrittenHead = "9ef5d562a510d4a9cb861d66016d28d84eaa8ddd"
 
 sensibLawReferenceHead : String
 sensibLawReferenceHead = "d25cddf73540bdbb313777bbf566280f4e34313b"
