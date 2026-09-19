@@ -232,6 +232,67 @@ constrainedReferenceKernel referenceInputs scale component slow fine =
   constrainedReferenceReciprocal referenceInputs scale component slow
   * constrainedRawReference referenceInputs scale component slow fine
 
+
+
+constrainedReferenceReciprocalNonnegative :
+  ∀ {Scale Fine SlowField Component Functional}
+    {construction :
+      PhysicalT.CanonicalRationalPhysicalTConstruction
+        Scale Fine SlowField Component Functional}
+    {referenceInputs :
+      Preferred.PreferredRationalReferenceNormalizationInputs
+        {construction = construction}}
+    (typed : TypedReferenceCoarseConstraint referenceInputs)
+    scale component slow →
+  0ℚ ≤ constrainedReferenceReciprocal
+    referenceInputs scale component slow
+constrainedReferenceReciprocalNonnegative
+  {referenceInputs = referenceInputs}
+  typed scale component slow =
+  Reciprocal.safeRationalReciprocalNonnegative
+    (constrainedReferenceMass referenceInputs scale component slow)
+    (constrainedReferenceMassPositive typed scale component slow)
+
+constrainedReferenceKernelNonnegative :
+  ∀ {Scale Fine SlowField Component Functional}
+    {construction :
+      PhysicalT.CanonicalRationalPhysicalTConstruction
+        Scale Fine SlowField Component Functional}
+    {referenceInputs :
+      Preferred.PreferredRationalReferenceNormalizationInputs
+        {construction = construction}}
+    (typed : TypedReferenceCoarseConstraint referenceInputs)
+    scale component slow fine →
+  0ℚ ≤ constrainedReferenceKernel
+    referenceInputs scale component slow fine
+constrainedReferenceKernelNonnegative
+  {referenceInputs = referenceInputs}
+  typed scale component slow fine =
+  let
+    reciprocal =
+      constrainedReferenceReciprocal
+        referenceInputs scale component slow
+    selected =
+      constrainedRawReference
+        referenceInputs scale component slow fine
+
+    reciprocalNN =
+      constrainedReferenceReciprocalNonnegative
+        typed scale component slow
+
+    selectedNN =
+      constrainedRawReferenceNonnegative
+        referenceInputs scale component slow fine
+
+    instance
+      reciprocalNNI : NonNegative reciprocal
+      reciprocalNNI = nonNegative reciprocalNN
+
+      selectedNNI : NonNegative selected
+      selectedNNI = nonNegative selectedNN
+  in
+  ℚP.nonNegative⁻¹ _
+
 constrainedReferenceKernelNormalized :
   ∀ {Scale Fine SlowField Component Functional}
     {construction :
@@ -300,6 +361,9 @@ constrainedReferenceKernelOffFibreZero
 
 constrainedReferenceKernelLevel : ProofLevel
 constrainedReferenceKernelLevel = machineChecked
+
+constrainedReferenceKernelNonnegativeLevel : ProofLevel
+constrainedReferenceKernelNonnegativeLevel = machineChecked
 
 constrainedReferenceKernelNormalizationLevel : ProofLevel
 constrainedReferenceKernelNormalizationLevel = machineChecked
