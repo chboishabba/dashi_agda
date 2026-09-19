@@ -108,6 +108,7 @@ asDenseMarkedSourceF1Weld :
 asDenseMarkedSourceF1Weld
     {PhysicalObservable = PhysicalObservable}
     {r295 = r295}
+    {magnitudeIsAbsolute = magnitudeIsAbsolute}
     {semantics = semantics}
     {wilsonWeld = wilsonWeld}
     calibration = record
@@ -123,7 +124,7 @@ asDenseMarkedSourceF1Weld
       denseInPhysicalVacuumComplement calibration
   ; Dense.DenseMarkedSourceF1Weld.SameLiteralWilsonTwoSliceObservables =
       Wilson.PhysicalWilsonR295SameObjectWeld
-        r295 _ semantics
+        r295 magnitudeIsAbsolute semantics
   ; Dense.DenseMarkedSourceF1Weld.sameLiteralWilsonTwoSliceObservables =
       wilsonWeld
   ; Dense.DenseMarkedSourceF1Weld.f1TargetBound =
