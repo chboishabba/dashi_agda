@@ -31,6 +31,16 @@ coefficientPolynomialGrowthIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 coefficientPolynomialGrowthIsOwned = refl
 
+literalTruncationIncrementIdentityIsOwned :
+  P.literalTruncationIncrementIdentityOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+literalTruncationIncrementIdentityIsOwned = refl
+
+literalIncrementCoefficientEnvelopeIsOwned :
+  P.literalIncrementCoefficientEnvelopeOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+literalIncrementCoefficientEnvelopeIsOwned = refl
+
 principalStripQModulusCompilerIsOwned :
   P.principalStripQModulusCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
