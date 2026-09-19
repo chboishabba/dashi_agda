@@ -130,6 +130,12 @@ module GlobalCommutatorPayment
   signedEigenvalue Helical.minus mode =
     C3.realEmbed F (C3.negate F (Helical.modeNorm S mode))
 
+  curlOperatorsAgree :
+    (mode : Z3.FourierMode) (value : C3.Complex3 F) →
+    Conv.curlFromWave (C3.modeVector E mode) value
+    ≡ Helical.curlSymbol E mode value
+  curlOperatorsAgree mode value = refl
+
   componentCurlEigen :
     (sign : Helical.HelicitySign) (mode : Z3.FourierMode) →
     Conv.curlFromWave (C3.modeVector E mode) (component sign mode)
@@ -137,9 +143,13 @@ module GlobalCommutatorPayment
         (signedEigenvalue sign mode)
         (component sign mode)
   componentCurlEigen Helical.plus mode =
-    Helical.helicalCurlEigenvaluePlus L mode (velocity mode)
+    trans
+      (curlOperatorsAgree mode (component Helical.plus mode))
+      (Helical.helicalCurlEigenvaluePlus L mode (velocity mode))
   componentCurlEigen Helical.minus mode =
-    Helical.helicalCurlEigenvalueMinus L mode (velocity mode)
+    trans
+      (curlOperatorsAgree mode (component Helical.minus mode))
+      (Helical.helicalCurlEigenvalueMinus L mode (velocity mode))
 
   componentPairData :
     (tau : Physical.PhysicalTriadIncidence) →
