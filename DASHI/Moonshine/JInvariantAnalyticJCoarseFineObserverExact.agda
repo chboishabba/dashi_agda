@@ -25,6 +25,7 @@ open import DASHI.Core.Prelude
 import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact as Chart
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Finite
+import DASHI.Moonshine.JInvariantAnalyticJCoarseFineFrickeIntertwinerExact as Legacy
 
 record AnalyticJStructuredObserver
     (system : Modular.ModularJFrickeSystem) : Set₁ where
@@ -40,6 +41,17 @@ record AnalyticJStructuredObserver
       Finite.transportedFiniteFricke (observe point)
 
 open AnalyticJStructuredObserver public
+
+
+
+observerFromLegacyEquivalence :
+  ∀ {system : Modular.ModularJFrickeSystem} ->
+  Legacy.AnalyticJCoarseFineFrickeEquivalence system ->
+  AnalyticJStructuredObserver system
+observerFromLegacyEquivalence bridge = record
+  { observe = Legacy.toStructured bridge
+  ; frickeIntertwines = Legacy.frickeIntertwines bridge
+  }
 
 ObserverFibre :
   ∀ {system : Modular.ModularJFrickeSystem} ->
