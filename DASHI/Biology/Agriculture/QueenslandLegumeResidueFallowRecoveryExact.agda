@@ -47,12 +47,12 @@ grdcSourceURL =
   "https://grdc.com.au/resources-and-publications/grdc-update-papers/tab-content/grdc-update-papers/2026/03/residue-derived-nitrogen-recovery-from-above-and-below-ground-legume-residues-under-contrasting-fallow-durations"
 
 nguyenEtAl2026 : Attribution.AttributedSource
-nguyenEtAl2026 = Attribution.mkDOISource
+nguyenEtAl2026 = Attribution.mkNoDOISource
   "Thi Thanh Hai Nguyen; Michael Bell; Chelsea Janke; Alwyn Williams"
   "Residue-derived nitrogen recovery from above and below ground legume residues under contrasting fallow durations"
   "GRDC Grains Research Update, Goondiwindi"
-  "2026" "" grdcSourceURL
-  Attribution.academicArticleSource
+  "2026" grdcSourceURL
+  Attribution.institutionalSource
   "University of Queensland Gatton field experiments using 15N-enriched tracing to separate above-ground, below-ground and combined residue contributions to following-cereal N uptake after approximately two- and nine-month fallows. Retained as a Queensland route x fallow x recovery source, not an Acacia/Senegalia result and not a fertilizer-replacement experiment."
   Attribution.publicAttribution
 
