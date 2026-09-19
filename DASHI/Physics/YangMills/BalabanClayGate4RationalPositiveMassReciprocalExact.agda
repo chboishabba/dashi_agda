@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExa
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using
-  (ℚ; 0ℚ; 1ℚ; Positive; _*_; 1/_; _≟_; ≢-nonZero)
+  (ℚ; 0ℚ; 1ℚ; Positive; _*_; _≤_; 1/_; _≟_; ≢-nonZero)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 open import Relation.Nullary using (yes; no)
@@ -58,7 +58,7 @@ safeRationalReciprocalPositive value positive with value ≟ 0ℚ
 
 safeRationalReciprocalNonnegative :
   ∀ (value : ℚ) → Positive value →
-  0ℚ Data.Rational.Base.≤ safeRationalReciprocal value
+  0ℚ ≤ safeRationalReciprocal value
 safeRationalReciprocalNonnegative value positive =
   ℚP.<⇒≤ (safeRationalReciprocalPositive value positive)
 
