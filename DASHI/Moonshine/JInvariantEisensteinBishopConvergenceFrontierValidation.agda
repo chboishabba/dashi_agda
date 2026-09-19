@@ -41,6 +41,21 @@ literalIncrementCoefficientEnvelopeIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 literalIncrementCoefficientEnvelopeIsOwned = refl
 
+qPowerModulusPropagationCompilerIsOwned :
+  P.qPowerModulusPropagationCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+qPowerModulusPropagationCompilerIsOwned = refl
+
+polynomialGeometricIncrementModulusCompilerIsOwned :
+  P.polynomialGeometricIncrementModulusCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+polynomialGeometricIncrementModulusCompilerIsOwned = refl
+
+sameCarrierModulusAlgebraStillUnpaid :
+  P.sameCarrierModulusAlgebraInhabited
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+sameCarrierModulusAlgebraStillUnpaid = refl
+
 principalStripQModulusCompilerIsOwned :
   P.principalStripQModulusCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
