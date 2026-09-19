@@ -46,6 +46,7 @@ import DASHI.Analysis.PolynomialGeometricTailDominationExact as Tail
 import DASHI.Analysis.TailModulusCauchyBridgeExact as Bridge
 import DASHI.Analysis.ContractiveCompartmentTailExact as Compartment
 import DASHI.Analysis.BishopContractiveCompartmentSeriesExact as BishopCompartment
+import DASHI.Analysis.BishopFirstOrderRateDiscreteContractionExact as FirstOrder
 
 open Compartment.ContractiveCompartmentProblem
 
@@ -236,6 +237,70 @@ bishopRouteMajorantAbsolutelyConvergent problem =
     (compartment problem)
 
 
+record BishopFirstOrderNitrogenRouteMajorant : Set where
+  field
+    firstOrderRoute : NitrogenTransportRoute
+    discretisation : FirstOrder.PositiveFirstOrderDiscretisation
+    scale : BishopReal.ℝ
+    degree : Nat
+    scaleNonnegative : BishopReal.NonNegative scale
+
+open BishopFirstOrderNitrogenRouteMajorant public
+
+asBishopFirstOrderRouteMajorant :
+  BishopFirstOrderNitrogenRouteMajorant →
+  BishopNitrogenRouteMajorant
+asBishopFirstOrderRouteMajorant problem = record
+  { majorantRoute = firstOrderRoute problem
+  ; compartment =
+      BishopCompartment.firstOrderPolynomialGeometricCompartment
+        (discretisation problem)
+        (scale problem)
+        (degree problem)
+        (scaleNonnegative problem)
+  }
+
+bishopFirstOrderRouteRatio :
+  BishopFirstOrderNitrogenRouteMajorant →
+  BishopReal.ℝ
+bishopFirstOrderRouteRatio problem =
+  FirstOrder.discreteContractionRatio
+    (discretisation problem)
+
+bishopFirstOrderRouteRatioPositive :
+  (problem : BishopFirstOrderNitrogenRouteMajorant) →
+  BishopReal._<_ BishopReal.0ℝ
+    (bishopFirstOrderRouteRatio problem)
+bishopFirstOrderRouteRatioPositive problem =
+  FirstOrder.discreteContractionRatioPositive
+    (discretisation problem)
+
+bishopFirstOrderRouteRatioBelowOne :
+  (problem : BishopFirstOrderNitrogenRouteMajorant) →
+  BishopReal._<_
+    (bishopFirstOrderRouteRatio problem)
+    BishopReal.1ℝ
+bishopFirstOrderRouteRatioBelowOne problem =
+  FirstOrder.discreteContractionRatioBelowOne
+    (discretisation problem)
+
+bishopFirstOrderRouteMajorantTerm :
+  BishopFirstOrderNitrogenRouteMajorant →
+  Nat →
+  BishopReal.ℝ
+bishopFirstOrderRouteMajorantTerm problem =
+  bishopRouteMajorantTerm
+    (asBishopFirstOrderRouteMajorant problem)
+
+bishopFirstOrderRouteMajorantAbsolutelyConvergent :
+  (problem : BishopFirstOrderNitrogenRouteMajorant) →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (bishopFirstOrderRouteMajorantTerm problem)
+bishopFirstOrderRouteMajorantAbsolutelyConvergent problem =
+  bishopRouteMajorantAbsolutelyConvergent
+    (asBishopFirstOrderRouteMajorant problem)
+
+
 record BishopNitrogenRouteDominatedSeries : Set where
   field
     dominatedRoute : NitrogenTransportRoute
@@ -281,6 +346,7 @@ record NitrogenTransportMathBoundary : Set where
     genericTailToCauchyCompositionOwned : Bool
     arbitraryDegreeBishopMajorantConvergenceOwned : Bool
     dominatedActualRouteCauchyCompilerOwned : Bool
+    positiveFirstOrderRateDiscreteContractionCompilerOwned : Bool
 
     empiricalKernelBoundAutomaticallyOwned : Bool
     geometricLawAssertedForQueenslandSources : Bool
@@ -296,6 +362,7 @@ canonicalNitrogenTransportMathBoundary = record
   ; genericTailToCauchyCompositionOwned = true
   ; arbitraryDegreeBishopMajorantConvergenceOwned = true
   ; dominatedActualRouteCauchyCompilerOwned = true
+  ; positiveFirstOrderRateDiscreteContractionCompilerOwned = true
   ; empiricalKernelBoundAutomaticallyOwned = false
   ; geometricLawAssertedForQueenslandSources = false
   ; routeIdentityErasedByConvergenceProof = false
