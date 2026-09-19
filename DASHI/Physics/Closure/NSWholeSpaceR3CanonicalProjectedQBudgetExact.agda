@@ -22,6 +22,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import Real as BishopReal
+import RealProperties as BishopP
 
 import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact as Canonical
 import DASHI.Physics.Closure.NSTriadKNEuclideanPhysicalFourierNSExact as Physical
@@ -89,22 +90,14 @@ canonicalProjectedInputsToPhysicalQBudget
   Budget.canonical-physical-q-budget-inputs
     (Leray.complex3NormSquaredNonnegative
       (Physical.lerayProjectedCell cell))
-    (Leray.complex3NormSquaredNonnegative
-      (Physical.uEta cell)
-      |> λ uEtaNN →
-        Leray.complex3NormSquaredNonnegative
-          (Physical.uZeta cell)
-        |> λ uZetaNN →
-          RealProperties.nonNegx,y⇒nonNegx*y uEtaNN uZetaNN)
+    (BishopP.nonNegx,y⇒nonNegx*y
+      (Leray.complex3NormSquaredNonnegative
+        (Physical.uEta cell))
+      (Leray.complex3NormSquaredNonnegative
+        (Physical.uZeta cell)))
     (Weld.physicalProjectedCellOutputQBound
       (formulaWeld inputs))
     (directionalSecondMoment inputs)
-  where
-  open import RealProperties
-  infixl 0 _|>_
-  _|>_ : ∀ {A B : Set} → A → (A → B) → B
-  x |> f = f x
-
 canonicalProjectedInputsBuildRadialBudget :
   ∀ {S trajectory fluid point cell secondMoment} →
   (inputs :
