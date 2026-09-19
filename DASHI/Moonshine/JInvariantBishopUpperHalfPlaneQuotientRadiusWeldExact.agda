@@ -36,10 +36,10 @@ upperHalfPlaneRadiusWeldFromConcreteBishopQuotient :
   Weld.LiteralRadiusBishopWeld
     (Weld.QuotientRadiusRelation Q)
     (Spine.quotient Q (Radius.qRadius piB imag))
-upperHalfPlaneRadiusWeldFromConcreteBishopQuotient Q piPositive imagPositive =
+upperHalfPlaneRadiusWeldFromConcreteBishopQuotient Q {piB} {imag} piPositive imagPositive =
   Weld.radiusWeldFromConcreteBishopQuotient
     Q
-    (Radius.qRadius _ _)
+    (Radius.qRadius piB imag)
     (Radius.qRadiusUnitInterval piPositive imagPositive)
 
 upperHalfPlaneMajorantsFromConcreteBishopQuotient :
