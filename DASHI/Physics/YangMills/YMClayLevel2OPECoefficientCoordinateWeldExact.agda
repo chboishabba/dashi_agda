@@ -8,6 +8,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as OPE
+import DASHI.Physics.YangMills.YMClayLevel2CompositeOperatorCoefficientWeldExact as Native
 
 ------------------------------------------------------------------------
 -- LEVEL-2 D2: OPE COEFFICIENT / RG COORDINATE WELD
@@ -108,6 +109,58 @@ literalOPECoefficientMatchesProjectedAFAtEveryDepth
     (sym physicalToLiteral)
     projectedMatch
 
+
+------------------------------------------------------------------------
+-- Repo-native specialization.
+--
+-- The actual repository already has CompositeRGParallelTransport, so the
+-- abstract RGCoordinate layer above is compatibility-only once a native
+-- composite-operator coefficient recurrence/projection is supplied.
+------------------------------------------------------------------------
+
+nativeCompositeOperatorProjectionBuildsCoordinateWeld :
+  ∀ {Operator PhysicalCoefficient}
+    {transport :
+      DASHI.Physics.YangMills.BalabanCompositeOperatorRGParallelTransportExact.CompositeRGParallelTransport
+        Operator}
+    {dataSet :
+      Native.SameCompositeOperatorCoefficientRecurrence Operator transport} →
+  (literal : Native.LiteralOPECoefficientProjection
+    {PhysicalCoefficient = PhysicalCoefficient} dataSet) →
+  OPECoefficientRGCoordinateWeld
+    Operator Operator PhysicalCoefficient
+    (Native.asCoefficientRGRecurrence dataSet)
+nativeCompositeOperatorProjectionBuildsCoordinateWeld {dataSet = dataSet} literal =
+  record
+    { OPECoefficientRGCoordinateWeld.rgCoordinateAt =
+        Native.physicalOperatorCoefficient dataSet
+    ; OPECoefficientRGCoordinateWeld.physicalCoefficientOfRGCoordinate =
+        Native.projectOPECoefficient literal
+    ; OPECoefficientRGCoordinateWeld.recurrenceCoefficientToPhysical =
+        Native.projectOPECoefficient literal
+    ; OPECoefficientRGCoordinateWeld.literalOPECoefficientAt =
+        Native.literalOPECoefficientAt literal
+    ; OPECoefficientRGCoordinateWeld.literalCoefficientIsRGProjection =
+        Native.literalOPEIsProjectedPhysicalOperator literal
+    ; OPECoefficientRGCoordinateWeld.recurrencePhysicalCoefficientIsLiteral =
+        λ depth →
+          sym (Native.literalOPEIsProjectedPhysicalOperator literal depth)
+    ; OPECoefficientRGCoordinateWeld.projection =
+        record
+          { OPE.MatchedCoefficientProjection.project =
+              Native.projectOPECoefficient literal
+          }
+    ; OPECoefficientRGCoordinateWeld.projectionIsDeclaredPhysicalProjection =
+        refl
+    }
+
+abstractRGCoordinateIndependentAfterNativeCompositeTransport : Bool
+abstractRGCoordinateIndependentAfterNativeCompositeTransport = false
+
+abstractRGCoordinateIndependentAfterNativeCompositeTransportIsFalse :
+  abstractRGCoordinateIndependentAfterNativeCompositeTransport ≡ false
+abstractRGCoordinateIndependentAfterNativeCompositeTransportIsFalse = refl
+
 ------------------------------------------------------------------------
 -- Frontier classification.
 ------------------------------------------------------------------------
@@ -138,7 +191,7 @@ coordinateWeldCompilerLevel = machineChecked
 
 physicalCoordinateAttachmentLevel : ProofLevel
 physicalCoordinateAttachmentLevel =
-  OPE.physicalSameFamilyOPECoefficientOneStepAFIdentificationLevel
+  Native.physicalCompositeOperatorMixingLevel
 
 clayPromotion : Bool
 clayPromotion = false
