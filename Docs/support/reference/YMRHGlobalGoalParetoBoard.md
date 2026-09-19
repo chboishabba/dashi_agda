@@ -526,3 +526,72 @@ B0-ABS:
 ```
 
 together with the signed finite-near adaptive control and the final strict inequality against the off-line (a^2) cluster margin.  No claim is made that B0-ABS is already true; it is now simply the exact scalar obstruction exposed by the centered reduction.
+
+
+### Signed-consumer audit after centered complement — 2026-09-20
+
+The absolute radius-zero budget is no longer canonical.
+
+The final Agda contradiction consumer is signed/order-valued: its primitive scalar object is the surviving complement response, and the direct Gamma target may use the literal response as its own budget by source-order reflexivity.  Therefore separate absolute Off/Gamma budgets are only a sufficient factorization.
+
+Companion Lean source now proves for the actual literal final complement
+
+```text
+S(g,t,r) := Off(g,t,r) + Q_Gamma(g,t,r)
+
+|S(g,t,r) - S(g,t,0)| <= r^2 E_center(g,Lambda,t)
+
+S(g,t,r) <= S(g,t,0) + r^2 E_center(g,Lambda,t).
+```
+
+This corrects an earlier sign ambiguity: the previously written combination using the unswitched GammaResp correction is not itself the literal (Off+Q_Gamma) difference because (Q_Gamma=-(GammaResp(r)+GammaResp(-r))).
+
+However the hoped-for immediate baseline theorem
+
+```text
+S(g,t,0) <= B0
+```
+
+is NOT supplied by the existing pinned-complement theorem.
+
+Reason:
+
+* the explicit positive taper kills the pole response at the selected positive radius (r=t/16), not at radius zero;
+* complementChannels_pinned is stated at that selected pole-killing radius and is derived from the downstream three-channel balance;
+* at radius zero, even when the prime term vanishes, companion source gives
+
+```text
+-S(g,t,0) = Cluster(g,t,0) + Pole(g,t,0).
+```
+
+So using complementChannels_pinned to manufacture the analytic strict payment would violate the existing balance-free trust boundary, and radius zero has an additional pole contribution anyway.
+
+PROVISIONAL CANONICAL CUT:
+
+```text
+SIGNED-CENTERED WHOLE RESPONSE
+  literal |S(r)-S(0)| <= r^2 E_center         SOURCE WRITTEN
+  literal S(r) <= S(0)+r^2 E_center           SOURCE WRITTEN
+
+SIGNED BASELINE
+  independent sign-normalized S0 vs B0 theorem OPEN
+  must not be manufactured from final balance
+  must account for radius-zero pole/sign convention
+
+STRICT EXCESS
+  centered excess < off-line cluster surplus   OPEN after baseline alignment
+
+REPRESENTATION
+  exact final-near same-object weld             OPEN
+  sign-normalized Lean -> Agda complement weld  OPEN
+```
+
+The absolute route
+
+```text
+|Off(0)| + 2|GammaResp(t,0)|
+```
+
+is retained only as an auxiliary fallback.  It should not be treated as the preferred theorem unless the signed baseline route is shown impossible.
+
+The expanding finite-near estimate is also no longer automatically a primitive R2 leaf.  The whole infinite final Off response already has a centered quadratic theorem.  If the signed whole-response route attaches directly to the final consumer, the finite-near work may remain primarily R1 / cross-prover representation debt.
