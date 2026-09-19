@@ -21,12 +21,13 @@ module DASHI.Analysis.BishopContractiveCompartmentSeriesExact where
 -- still prove that its actual contribution is bounded by such a majorant.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 import Real as BishopReal
 import Sequence as BishopSequence
 
 import DASHI.Analysis.BishopPolynomialGeometricSeriesConvergenceExact as PolyGeo
+import DASHI.Foundations.BishopConstructiveRealBridgeExact as BishopBridge
 
 record BishopPolynomialGeometricCompartment : Set where
   field
@@ -81,3 +82,43 @@ compartmentMajorantAbsolutelyConvergent problem =
     (ratioNonnegative problem)
     (ratioBelowOne problem)
     (scaleNonnegative problem)
+
+
+------------------------------------------------------------------------
+-- Actual complicated contribution dominated by a tractable compartment
+-- majorant.
+------------------------------------------------------------------------
+
+record BishopDominatedCompartmentSeries : Set where
+  field
+    majorant : BishopPolynomialGeometricCompartment
+    actualContribution : Nat → BishopReal.ℝ
+
+    actualAbsBelowMajorant :
+      ∀ index →
+      BishopReal._≤_
+        (BishopReal.∣ actualContribution index ∣)
+        (compartmentMajorantTerm majorant index)
+
+open BishopDominatedCompartmentSeries public
+
+dominatedCompartmentSeriesConvergent :
+  (problem : BishopDominatedCompartmentSeries) →
+  BishopSequence._isConvergent
+    (BishopSequence.SeriesOf
+      (actualContribution problem))
+dominatedCompartmentSeriesConvergent problem =
+  BishopSequence.proposition-3-5
+    (compartmentMajorantConvergent
+      (majorant problem))
+    (zero , λ {(suc index) indexPastCutoff →
+      actualAbsBelowMajorant problem (suc index)})
+
+dominatedCompartmentPartialSumsCauchy :
+  (problem : BishopDominatedCompartmentSeries) →
+  BishopSequence._isCauchy
+    (BishopSequence.SeriesOf
+      (actualContribution problem))
+dominatedCompartmentPartialSumsCauchy problem =
+  BishopBridge.bishopConvergentImpliesCauchy
+    (dominatedCompartmentSeriesConvergent problem)
