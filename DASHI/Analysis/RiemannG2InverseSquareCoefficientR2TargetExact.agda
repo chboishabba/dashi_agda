@@ -1,15 +1,16 @@
 module DASHI.Analysis.RiemannG2InverseSquareCoefficientR2TargetExact where
 
 ------------------------------------------------------------------------
--- CONSUMER-RELATIVE R2 RATE TARGET
+-- COARSE ABSOLUTE INVERSE-SQUARE COMPATIBILITY TARGET
 --
--- This does not introduce a new terminal response.  It records the exact
--- theorem-bearing inputs which, after replay/transport of the companion Lean
--- coefficient-composition theorem, are sufficient for the existing direct R2
--- consumer.
+-- This surface remains mathematically valid as a sufficient producer, but the
+-- vendored 8889 theorem bytes show it is not the canonical uniform acquisition
+-- surface.  The actual cluster theorem is centered at baselineCluster and its
+-- surplus vanishes like a^2.  A fixed 144*A/t^2 far envelope therefore cannot
+-- be uniformly sufficient as a -> 0.
 --
--- The far channel is deliberately not a free coefficient: its preferred
--- quartic-cutoff donor fixes the coefficient to 144*A.
+-- Prefer RiemannG2BaselineExcessR2TargetExact plus the displacement-adaptive
+-- far-shell donor for the prize-facing route.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Set₁)
@@ -81,6 +82,8 @@ record InverseSquareR2RateBoundary : Set where
     coefficientSlackStillAnalytic : Bool
     coefficientCompositionNeedsFreshMathematics : Bool
     coefficientCompositionNeedsCrossProverReplayOrLocalProof : Bool
+    canonicalUniformAcquisitionSurface : Bool
+    fixedQuarticUniformAsHorizontalDisplacementTendsToZero : Bool
     r2DerivedHere : Bool
 
 open InverseSquareR2RateBoundary public
@@ -96,4 +99,6 @@ canonicalInverseSquareR2RateBoundary =
     true
     false
     true
+    false
+    false
     false
