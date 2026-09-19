@@ -2,7 +2,7 @@
 module DASHI.Physics.YangMills.BalabanFiniteRGReopeningDobrushinExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_; ∣_∣)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_; _*_; _≤_; ∣_∣)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
