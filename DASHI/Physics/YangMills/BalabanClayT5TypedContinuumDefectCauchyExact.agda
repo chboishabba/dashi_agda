@@ -27,6 +27,8 @@ module DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyExact wher
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_+_)
+open import Data.Nat.Properties using (+-comm)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
@@ -34,6 +36,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Analysis.CanonicalRationalMetric as Metric
+import DASHI.Analysis.FastCauchyReals as Fast
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredGeometricTailExact as Tail
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredPhysicalTailMomentInstanceExact as Configured
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationExact as Sum
@@ -45,8 +48,7 @@ import DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationExact a
 ------------------------------------------------------------------------
 
 advance : Nat → Nat → Nat
-advance start zero = start
-advance start (suc count) = advance (suc start) count
+advance start count = start + count
 
 record TypedContinuumDefectCauchyData (Observable : Set) : Set₁ where
   field
@@ -172,6 +174,134 @@ expectationHasConfiguredCauchyModulus :
 expectationHasConfiguredCauchyModulus dataSet observable =
   λ start count →
     expectationCauchyModulus dataSet start count observable
+
+------------------------------------------------------------------------
+-- Completion-side scalar realization.
+--
+-- The configured tail is exactly the next canonical dyadic error.  Therefore
+-- the tail theorem gives a genuine FastCauchyReal representative without
+-- asserting convergence inside ℚ.
+------------------------------------------------------------------------
+
+powHalfIsCanonicalDyadic : ∀ depth →
+  Tail.powHalf depth ≡ Metric.dyadicQ depth
+powHalfIsCanonicalDyadic zero = refl
+powHalfIsCanonicalDyadic (suc depth)
+  rewrite powHalfIsCanonicalDyadic depth =
+  refl
+
+configuredInfiniteTailIsNextDyadic : ∀ depth →
+  Configured.configuredInfiniteTailMajorant depth
+  ≡ Metric.dyadicQ (suc depth)
+configuredInfiniteTailIsNextDyadic depth
+  rewrite powHalfIsCanonicalDyadic depth =
+  refl
+
+configuredInfiniteTailBelowCurrentDyadic : ∀ depth →
+  Configured.configuredInfiniteTailMajorant depth
+  ≤ Metric.dyadicQ depth
+configuredInfiniteTailBelowCurrentDyadic depth =
+  subst
+    (λ lower → lower ≤ Metric.dyadicQ depth)
+    (sym (configuredInfiniteTailIsNextDyadic depth))
+    (Metric.dyadicOneStep depth)
+
+expectationPairFastCauchy :
+  ∀ {Observable} →
+  (dataSet : TypedContinuumDefectCauchyData Observable) →
+  (observable : Observable) →
+  ∀ m n →
+  ∣ expectation dataSet m observable
+      - expectation dataSet n observable ∣
+  ≤ Metric.dyadicQ m + Metric.dyadicQ n
+expectationPairFastCauchy dataSet observable m n =
+  let
+    common : Nat
+    common = m + n
+
+    mToCommon :
+      ∣ expectation dataSet m observable
+          - expectation dataSet common observable ∣
+      ≤ Configured.configuredInfiniteTailMajorant m
+    mToCommon =
+      expectationCauchyModulus dataSet m n observable
+
+    nToCommonRaw :
+      ∣ expectation dataSet n observable
+          - expectation dataSet (n + m) observable ∣
+      ≤ Configured.configuredInfiniteTailMajorant n
+    nToCommonRaw =
+      expectationCauchyModulus dataSet n m observable
+
+    nToCommon :
+      ∣ expectation dataSet n observable
+          - expectation dataSet common observable ∣
+      ≤ Configured.configuredInfiniteTailMajorant n
+    nToCommon =
+      subst
+        (λ endpoint →
+          ∣ expectation dataSet n observable
+              - expectation dataSet endpoint observable ∣
+          ≤ Configured.configuredInfiniteTailMajorant n)
+        (+-comm n m)
+        nToCommonRaw
+
+    commonToN :
+      ∣ expectation dataSet common observable
+          - expectation dataSet n observable ∣
+      ≤ Configured.configuredInfiniteTailMajorant n
+    commonToN =
+      subst
+        (λ magnitude →
+          magnitude ≤ Configured.configuredInfiniteTailMajorant n)
+        (Metric.absDifferenceSymmetry
+          (expectation dataSet n observable)
+          (expectation dataSet common observable))
+        nToCommon
+
+    triangle :
+      ∣ expectation dataSet m observable
+          - expectation dataSet n observable ∣
+      ≤
+        ∣ expectation dataSet m observable
+            - expectation dataSet common observable ∣
+        +
+        ∣ expectation dataSet common observable
+            - expectation dataSet n observable ∣
+    triangle =
+      Metric.absDifferenceTriangle
+        (expectation dataSet m observable)
+        (expectation dataSet common observable)
+        (expectation dataSet n observable)
+
+    tailBound :
+      ∣ expectation dataSet m observable
+          - expectation dataSet n observable ∣
+      ≤ Configured.configuredInfiniteTailMajorant m
+        + Configured.configuredInfiniteTailMajorant n
+    tailBound =
+      ℚP.≤-trans
+        triangle
+        (ℚP.+-mono-≤ mToCommon commonToN)
+  in
+  ℚP.≤-trans
+    tailBound
+    (ℚP.+-mono-≤
+      (configuredInfiniteTailBelowCurrentDyadic m)
+      (configuredInfiniteTailBelowCurrentDyadic n))
+
+expectationFastCauchyReal :
+  ∀ {Observable} →
+  TypedContinuumDefectCauchyData Observable →
+  Observable →
+  Fast.FastCauchyReal Metric.canonicalRationalMetricAuthority
+expectationFastCauchyReal dataSet observable = record
+  { approximate = λ depth → expectation dataSet depth observable
+  ; fastCauchy = expectationPairFastCauchy dataSet observable
+  }
+
+typedExpectationFastRealCompilerLevel : ProofLevel
+typedExpectationFastRealCompilerLevel = machineChecked
 
 typedAbsoluteDefectSummationLevel : ProofLevel
 typedAbsoluteDefectSummationLevel = machineChecked
