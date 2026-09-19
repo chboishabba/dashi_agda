@@ -64,3 +64,26 @@ cacheFirstVerificationCountIsRetained :
     Norm.canonicalProviderNormalisationParity
   ≡ true
 cacheFirstVerificationCountIsRetained = refl
+
+
+locallyIngestedDocumentUsesSharedCanonicalCarrier :
+  Norm.locallyIngestedDocumentUsesCanonicalCarrier
+    Norm.canonicalProviderNormalisationParity
+  ≡ true
+locallyIngestedDocumentUsesSharedCanonicalCarrier = refl
+
+pdfDocumentUsesCanonicalPdfFamily :
+  Norm.pdfDocumentUsesCanonicalFamily
+    Norm.canonicalProviderNormalisationParity
+  ≡ true
+pdfDocumentUsesCanonicalPdfFamily = refl
+
+uningestedDocumentCannotEnter :
+  Norm.UningestedDocumentMayEnterCanonicalCarrier → ⊥
+uningestedDocumentCannotEnter =
+  Norm.uningestedDocumentCannotEnterCanonicalCarrier
+
+documentIngestionCannotCreateAuthority :
+  Norm.DocumentIngestionCreatesLegalAuthority → ⊥
+documentIngestionCannotCreateAuthority =
+  Norm.documentIngestionDoesNotCreateLegalAuthority
