@@ -6,10 +6,7 @@ module DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact where
 -- This is the exact algorithmic core used by SAT self-reducibility:
 -- at each remaining Boolean variable, query one restricted branch; if that
 -- branch is satisfiable take it, otherwise the split theorem forces the other
--- branch.  Hence an n-variable search uses exactly n decision queries.
---
--- This module deliberately separates the generic self-reduction theorem from
--- the BooleanFormula-specific substitution/variable-bound instantiation.
+-- branch. Hence an n-choice search uses exactly n decision queries.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -23,7 +20,7 @@ record BinarySelfReduction : Set₁ where
   field
     Node : Nat → Set
     SatisfiableAt : ∀ {remaining} → Node remaining → Set
-    Witness : Node zero → Set
+    Solution : ∀ {remaining} → Node remaining → Set
 
     chooseFalse : ∀ {remaining} → Node (suc remaining) → Node remaining
     chooseTrue : ∀ {remaining} → Node (suc remaining) → Node remaining
@@ -34,10 +31,20 @@ record BinarySelfReduction : Set₁ where
       SatisfiableAt (chooseFalse node) ⊎
       SatisfiableAt (chooseTrue node)
 
-    terminalWitness :
+    terminalSolution :
       (node : Node zero) →
       SatisfiableAt node →
-      Witness node
+      Solution node
+
+    liftFalseSolution :
+      ∀ {remaining} (node : Node (suc remaining)) →
+      Solution (chooseFalse node) →
+      Solution node
+
+    liftTrueSolution :
+      ∀ {remaining} (node : Node (suc remaining)) →
+      Solution (chooseTrue node) →
+      Solution node
 
 open BinarySelfReduction public
 
@@ -75,8 +82,7 @@ record SearchResult
     (remaining : Nat)
     (start : Node reduction remaining) : Set₁ where
   field
-    terminal : Node reduction zero
-    witness : Witness reduction terminal
+    solution : Solution reduction start
     decisionQueries : Nat
     exactQueryCount : decisionQueries ≡ remaining
 
@@ -90,8 +96,7 @@ recoverWitness :
   SatisfiableAt reduction node →
   SearchResult reduction remaining node
 recoverWitness reduction oracle {zero} node satisfiable = record
-  { terminal = node
-  ; witness = terminalWitness reduction node satisfiable
+  { solution = terminalSolution reduction node satisfiable
   ; decisionQueries = zero
   ; exactQueryCount = refl
   }
@@ -103,8 +108,8 @@ recoverWitness reduction oracle {suc remaining} node satisfiable
           (chooseFalse reduction node)
           (sound oracle (chooseFalse reduction node) refl)
   in record
-      { terminal = terminal recursive
-      ; witness = witness recursive
+      { solution =
+          liftFalseSolution reduction node (solution recursive)
       ; decisionQueries = suc (decisionQueries recursive)
       ; exactQueryCount = cong suc (exactQueryCount recursive)
       }
@@ -122,8 +127,8 @@ recoverWitness reduction oracle {suc remaining} node satisfiable
           (chooseTrue reduction node)
           trueSat
   in record
-      { terminal = terminal recursive
-      ; witness = witness recursive
+      { solution =
+          liftTrueSolution reduction node (solution recursive)
       ; decisionQueries = suc (decisionQueries recursive)
       ; exactQueryCount = cong suc (exactQueryCount recursive)
       }
