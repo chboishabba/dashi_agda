@@ -250,3 +250,49 @@ loop.
 
 Do not mark a runtime stage paid until its exact artifacts/counts/hashes are
 observed locally.
+
+
+## P0-G final audit / framework challenge carrier
+
+The formal owner continues beyond full-text handoff using existing domain owners.
+
+For each admitted source:
+
+~~~
+SLRAssistedCorpusAuditedSource source
++
+SourceAuditHyperfabric source
++
+one existing TransformativePrincipleMatrix row
+        ↓
+FrameworkChallengeReceipt source
+~~~
+
+Allowed dispositions:
+
+- supportsCandidatePrinciple
+- narrowsCandidatePrinciple
+- splitsCandidatePrinciple
+- mergesCandidatePrinciple
+- defeatsCandidatePrinciple
+- extendsCandidatePrinciple
+- unresolvedFrameworkChallenge
+
+The challenge keeps source-specific evidence references and reasoning. It cannot
+create final principle promotion and one source cannot manufacture a corpus
+conclusion.
+
+Corpus-level revision is represented separately by
+CorpusFrameworkRevisionReceipt and requires its derivation stage to be exactly:
+
+structuredCorpusChallengeAndRevision
+
+from DigitalESDTransferablePrincipleDerivationMethodExact.
+
+This preserves:
+
+~~~
+source challenge != final corpus synthesis
+framework revision != universal truth
+candidate framework before review != final review result
+~~~
