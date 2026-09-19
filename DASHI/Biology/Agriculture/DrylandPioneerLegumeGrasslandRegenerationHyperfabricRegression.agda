@@ -78,3 +78,14 @@ empiricalKernelMajorantStillUnpaid :
   H.empiricalNitrogenKernelMajorantInhabited
     H.canonicalRegenerationHyperfabricBoundary ≡ false
 empiricalKernelMajorantStillUnpaid = refl
+
+
+firstOrderResidueKineticsLifted :
+  H.firstOrderResidueKineticsSourceOwned
+    H.canonicalRegenerationHyperfabricBoundary ≡ true
+firstOrderResidueKineticsLifted = refl
+
+quantitativeRestorationDataLifted :
+  H.quantitativeRestorationTrajectoryDataSurfaceOwned
+    H.canonicalRegenerationHyperfabricBoundary ≡ true
+quantitativeRestorationDataLifted = refl
