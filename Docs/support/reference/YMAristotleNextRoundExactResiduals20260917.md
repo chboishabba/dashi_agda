@@ -771,3 +771,148 @@ same-Hamiltonian covariance identity.  Likewise native R320 producer wrappers
 ultimately still consume an uninhabited selected localization/source theorem.
 
 No unconditional Clay promotion is asserted.
+
+
+## 2026-09-19 theorem-proof attack: P1/P2/P3/D2/D3 reductions
+
+This round attacked the displayed six-wall list as mathematics rather than
+frontier bookkeeping.
+
+### P1
+
+New owner:
+
+`YMClayLiteralWilsonP1FiniteClusteringExact.agda`
+
+The theorem `literalWilsonFiniteClustering` composes:
+
+```text
+R320 selected mixed-log-source localization
+  -> R320.localizeBaseDirectlyAsR295
+  -> R313 exact T5 magnitude presentation
+  -> R387/R274 connected-covariance shell
+  -> C_k <= (1/4)(1/2)^distance
+  -> R310 supportDistanceIsTime
+  -> C_k(t) <= (1/4)(1/2)^t.
+```
+
+So P1 no longer contains a second finite-clustering inequality.  The surviving
+physical inputs are the R320 selected-localization inhabitant and the literal
+Wilson/T5 same-carrier presentation.
+
+### P2
+
+New owner:
+
+`YMClayLiteralWilsonP2ExpectationConvergenceExact.agda`
+
+The three Route-S expectation limits are now constructed from one
+`PairwiseWilsonCylinderPresentation`.  R315 supplies bounded left,
+translated-right and product tests; R278 then applies the existing
+`PhysicalMeasureConvergenceData` expectation-convergence theorem to all three.
+
+Thus the three limits are not three independent physical theorems.
+
+### P3
+
+New owner:
+
+`YMClayLiteralWilsonP3SameOSCorrelationExact.agda`
+
+R281 already constructs the reconstructed-clustering spectrum with
+`connectedCorrelation` definitionally equal to the selected continuum
+covariance.  The equality is therefore compiler-owned (`refl`).
+
+The only surviving P3 theorem is:
+
+```text
+the exact R281 covariance-built spectrum
+=
+the spectrum of the actual OS-reconstructed Hamiltonian H_OS.
+```
+
+### D1
+
+No hidden constructor was found.  The current
+`YMClayLevel2D1PhysicalMinCutExact` is already minimal: one same-object
+equality
+
+```text
+Top.opeRemainder Y G left right position depth
+=
+Shared.compositeInsertionTail ... depth ...
+```
+
+on the R129 completed composite family.  The dyadic remainder inequality and
+vanishing modulus are already compiler-owned downstream.  Search found no
+concrete construction of `LiteralYangMillsConstruction` that defines
+`Top.opeRemainder` from this R129/shared tail, so this semantic attachment
+remains physical.
+
+### D2
+
+New owner:
+
+`YMClayLevel2D2TransportGeneratedRecurrenceExact.agda`
+
+Once D2a supplies one `CompositeRGParallelTransport`, both physical and
+AF/reference coefficient trajectories can be defined by the same canonical
+`transportToDepth`.  Their one-step recurrence equations are then
+definitional `refl`, and the existing recurrence-uniqueness theorem gives
+all-depth equality.
+
+D2b is therefore reduced to common UV normalization.  The surviving D2 physics
+is:
+
+```text
+D2a actual physical CompositeRGParallelTransport
+D2b common UV normalization
+D2c literal position <-> RG depth + coefficient projection
+D2d selected transported operator = SAME R129 completed composite.
+```
+
+### D3
+
+New owner:
+
+`YMClayLevel2D3ConservedWardChargeExact.agda`
+
+The finite Ward theorem already proves
+`chargeAfter - chargeBefore = 0`; rational ring normalization now gives
+`chargeAfter = chargeBefore`.  Hence no independent finite-time conservation
+theorem remains in D3.
+
+The surviving D3 theorem is exactly cutoff/RG transport:
+
+```text
+iota_k(Q_k[h]) -> delta S_infinity[h]
+```
+
+where the finite conserved charge must be the SAME generated-action stress
+representative and the target is the R131/R136 completed stress first
+variation.  R109 supplies the source-native stress Cauchy lane, but no theorem
+currently identifies the finite Ward-charge sequence with that completion.
+
+### Resulting independent physical cut
+
+The original P1/P2/P3 theorem hypotheses remain useful interfaces, but after
+the Agda reductions they are not three independent analyses.  The live physical
+payments are now more precisely:
+
+```text
+Route S:
+  S1  R320 selected literal-J localization
+  S2  literal Wilson/T5 same-carrier presentation
+  S3  R281 covariance-built spectrum is the actual H_OS spectrum
+
+Level 2:
+  D1  literal Clay OPE remainder = R129/shared marked tail
+  D2a actual composite RG transport
+  D2b common UV normalization
+  D2c position/depth + literal coefficient projection
+  D2d same R129 completed-composite operator attachment
+  D3  conserved finite Ward current -> completed continuum stress transport
+```
+
+No CI or Agda kernel build was run in this connector tranche.  These new Agda
+modules are source-written and statically trust-scanned only.
