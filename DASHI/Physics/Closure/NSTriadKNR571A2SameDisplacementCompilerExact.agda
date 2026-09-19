@@ -34,10 +34,13 @@ import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNNestedInnerHelicityRouteSplitRound311Exact as R311
+import DASHI.Physics.Closure.NSTriadKNR571HomochiralRadialIncrementSpecializationExact as Weld
+import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as CenteredShift
 import DASHI.Physics.Closure.NSTriadKNR571GateAEnvelopeCrosswalkExact as GateA
 import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialDenominatorOrderExact as Order
 import DASHI.Physics.Closure.NSTriadKNR571CenteredRadialProductBridgeExact as Product
@@ -79,11 +82,11 @@ inflateFour smallNN smallBelowLarge =
   in ℚP.*-monoˡ-≤-nonNeg four smallBelowLarge
 
 record A2SameDisplacementData
-    (E : C3.IntegerEmbedding GateA.Weld.F)
-    (I : C3.ModeInverseSquare GateA.Weld.F E)
-    (S : Helical.HelicalModeScalars GateA.Weld.F)
+    (E : C3.IntegerEmbedding Weld.F)
+    (I : C3.ModeInverseSquare Weld.F E)
+    (S : Helical.HelicalModeScalars Weld.F)
     (sign : R311.HelicitySign)
-    (center displacement : GateA.Z3.FourierMode)
+    (center displacement : Z3.FourierMode)
     (stepMagnitude : ℚ) : Set₁ where
   field
     physical :
@@ -95,8 +98,8 @@ record A2SameDisplacementData
     centeredExcessNonnegative :
       0ℚ ≤
       Order.centeredExcess
-        (Helical.modeNorm S (Product.CenteredShift.plusMode center displacement))
-        (Helical.modeNorm S (Product.CenteredShift.minusMode center displacement))
+        (Helical.modeNorm S (CenteredShift.plusMode center displacement))
+        (Helical.modeNorm S (CenteredShift.minusMode center displacement))
         (Helical.modeNorm S center)
 
     stepMagnitudeNonnegative : 0ℚ ≤ stepMagnitude
@@ -109,12 +112,12 @@ record A2SameDisplacementData
       ∣ Taylor.minusRemainder
           (GateA.preferredRadialTaylorPair
             sign S center
-            (Product.CenteredShift.plusMode center displacement)
-            (Product.CenteredShift.minusMode center displacement)) ∣
+            (CenteredShift.plusMode center displacement)
+            (CenteredShift.minusMode center displacement)) ∣
       ≡
       Order.centeredExcess
-        (Helical.modeNorm S (Product.CenteredShift.plusMode center displacement))
-        (Helical.modeNorm S (Product.CenteredShift.minusMode center displacement))
+        (Helical.modeNorm S (CenteredShift.plusMode center displacement))
+        (Helical.modeNorm S (CenteredShift.minusMode center displacement))
         (Helical.modeNorm S center)
 
 open A2SameDisplacementData public
@@ -126,15 +129,15 @@ a2SameDisplacementBound :
   ∣ Taylor.minusRemainder
       (GateA.preferredRadialTaylorPair
         sign S center
-        (Product.CenteredShift.plusMode center displacement)
-        (Product.CenteredShift.minusMode center displacement)) ∣
+        (CenteredShift.plusMode center displacement)
+        (CenteredShift.minusMode center displacement)) ∣
   ≤ stepMagnitude * stepMagnitude * four
 a2SameDisplacementBound
     {I = I} {S = S} {center = center}
     {displacement = displacement} {stepMagnitude = stepMagnitude} D =
   let
-    p = Product.CenteredShift.plusMode center displacement
-    q = Product.CenteredShift.minusMode center displacement
+    p = CenteredShift.plusMode center displacement
+    q = CenteredShift.minusMode center displacement
     excess =
       Order.centeredExcess
         (Helical.modeNorm S p)
@@ -187,8 +190,8 @@ compileA2SameDisplacementSample
   { Boundary.sign = sign
   ; Boundary.scalars = S
   ; Boundary.center = center
-  ; Boundary.plus = Product.CenteredShift.plusMode center displacement
-  ; Boundary.minus = Product.CenteredShift.minusMode center displacement
+  ; Boundary.plus = CenteredShift.plusMode center displacement
+  ; Boundary.minus = CenteredShift.minusMode center displacement
   ; Boundary.stepMagnitude = stepMagnitude
   ; Boundary.transportCurvature = four
   ; Boundary.stepMagnitudeNonnegative = stepMagnitudeNonnegative D
