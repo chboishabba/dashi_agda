@@ -55,6 +55,7 @@ record R129CompositeOperatorAttachment
     {Operator : Set}
     {transport : Transport.CompositeRGParallelTransport Operator}
     (recurrence : D2.SameCompositeOperatorCoefficientRecurrence Operator transport)
+    (selectedDepth : Nat)
     : Set₁ where
 
   private
@@ -73,10 +74,8 @@ record R129CompositeOperatorAttachment
     physicalOperatorTrajectoryIsR129CompositeRG :
       PhysicalOperatorTrajectoryIsR129CompositeRG
 
-    completedDepth : Nat
-
     selectedOperatorIsCompletedR129Composite :
-      D2.physicalOperatorCoefficient recurrence completedDepth
+      D2.physicalOperatorCoefficient recurrence selectedDepth
       ≡ operatorOfCompletedComposite completedComposite
 
 open R129CompositeOperatorAttachment public
