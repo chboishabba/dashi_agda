@@ -51,20 +51,22 @@ finiteTailAbsoluteBound terms start zero =
     (BishopP.≤-respˡ-≃
       (BishopP.∣-∣-cong
         (BishopP.≃-trans
-          (BishopP.-‿cong
+          (BishopP.+-cong
             (BishopP.≃-refl₂
               (cong
                 (BishopSequence.SeriesOf terms)
-                (NatP.+-identityʳ start))))
+                (NatP.+-identityʳ start)))
+            (BishopP.-‿cong BishopP.≃-refl))
           (BishopP.+-inverseʳ
             (BishopSequence.SeriesOf terms start))))
       (BishopP.≤-respʳ-≃
         (BishopP.≃-trans
-          (BishopP.-‿cong
+          (BishopP.+-cong
             (BishopP.≃-refl₂
               (cong
                 (BishopSequence.SeriesOf (absoluteTerms terms))
-                (NatP.+-identityʳ start))))
+                (NatP.+-identityʳ start)))
+            (BishopP.-‿cong BishopP.≃-refl))
           (BishopP.+-inverseʳ
             (BishopSequence.SeriesOf (absoluteTerms terms) start)))
         BishopP.≤-refl))
@@ -88,11 +90,12 @@ finiteTailAbsoluteBound terms start (suc count) =
           (terms end))
     signedStep =
       BishopP.≃-trans
-        (BishopP.-‿cong
+        (BishopP.+-cong
           (BishopP.≃-refl₂
             (cong
               (BishopSequence.SeriesOf terms)
-              (NatP.+-suc start count))))
+              (NatP.+-suc start count)))
+          (BishopP.-‿cong BishopP.≃-refl))
         (let open BishopP.ℝ-Solver in
          solve 3
            (λ prefix term startValue →
@@ -115,11 +118,12 @@ finiteTailAbsoluteBound terms start (suc count) =
           (BishopReal.∣ terms end ∣))
     absoluteStep =
       BishopP.≃-trans
-        (BishopP.-‿cong
+        (BishopP.+-cong
           (BishopP.≃-refl₂
             (cong
               (BishopSequence.SeriesOf (absoluteTerms terms))
-              (NatP.+-suc start count))))
+              (NatP.+-suc start count)))
+          (BishopP.-‿cong BishopP.≃-refl))
         (let open BishopP.ℝ-Solver in
          solve 3
            (λ prefix termAbs startValue →
