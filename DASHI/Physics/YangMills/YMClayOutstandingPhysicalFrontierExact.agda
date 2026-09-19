@@ -7,22 +7,23 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanVacuumOrthogonalMoscoRecoveryExact as Recovery
 import DASHI.Physics.YangMills.YMClayVaryingCarrierTransportParityExact as Varying
+import DASHI.Physics.YangMills.YMClayF3SprintConstructionFrontierExact as F3
+import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact as F4
+import DASHI.Physics.YangMills.YangMillsStressWardCommonCoreGeneratorExact as CommonCore
 
 ------------------------------------------------------------------------
--- Exact residual frontier after the 2026-09-17 Aristotle varying-carrier and
--- transfer-operator tranches.
+-- Reconciled physical frontier.
 --
--- Paid generically / by verified Lean donor:
---   * literal finite q_a/H_a construction;
---   * vacuum-sector spectral consequences;
---   * varying-Hilbert transport through isometric embeddings (old F2);
---   * literal transfer-operator / decorrelation -> finite form-gap compiler;
---   * trajectory compiler consuming the per-step defect Delta*a_k <= 1-c_k.
+-- F1: source localization + Wilson/R295 same-object/L2 weld + beta/a
+--     trajectory calibration. Full R339 magnitude equality is not primitive.
 --
--- Surviving physical inputs:
---   F1 literal Wilson per-step transfer defect on the actual continuum trajectory;
---   F3 embedded literal-Wilson graph/Mosco limit and continuum H/Omega;
---   F4 same physical YM and OS evolution / generator weld.
+-- F3: finish the existing Sprint111-122 physical sampling/interpolation,
+--     quotient/gauge, norm/residual, energy-recovery and measure-convergence
+--     construction program; abstract Mosco recovery is already compiler-owned.
+--
+-- F4: construct physical stress/OS common-core data and closure
+--     identifications. Evolution equality is derived downstream from
+--     same-generator + Stone/OS uniqueness rather than assumed as a primitive.
 ------------------------------------------------------------------------
 
 record LiteralWilsonUniformGapTrajectory : Set₁ where
@@ -55,16 +56,12 @@ record LiteralWilsonUniformGapTrajectory : Set₁ where
     subtract : Scalar → Scalar → Scalar
     one : Scalar
 
-    -- The decorrelation constant is cutoff-dependent.  One trajectory-uniform
-    -- c<1 is not a primitive requirement; c_k may tend to one at O(a_k).
     decorrelationConstant : Cutoff → Scalar
 
     gap : Scalar
     Positive : Scalar → Set
     gapPositive : Positive gap
 
-    -- Literal finite leaf from the transfer-operator reduction:
-    --   |<P0 psi,P1 psi>| <= c_k ||psi||^2.
     literalWilsonDecorrelatorBound :
       (volume : Volume) → (cutoff : Cutoff) →
       (state : FiniteState volume cutoff) →
@@ -74,18 +71,12 @@ record LiteralWilsonUniformGapTrajectory : Set₁ where
         (multiply (decorrelationConstant cutoff)
           (normSq volume cutoff state))
 
-    -- Sharpened trajectory payment:
-    --   Delta * a_k <= 1 - c_k.
-    -- This is equivalent to placing Delta below the finite transfer-form gap
-    -- when q_a carries the a_k^-1 rescaling, without requiring a common c.
     trajectoryGapFitsLiteralWilsonReduction :
       (cutoff : Cutoff) →
       LessEqual
         (multiply gap (latticeSpacing cutoff))
         (subtract one (decorrelationConstant cutoff))
 
-    -- Same-object finite physical consequence, retained explicitly rather than
-    -- inferred from status metadata.
     literalWilsonFiniteGap :
       (volume : Volume) → (cutoff : Cutoff) →
       (state : FiniteState volume cutoff) →
@@ -96,19 +87,16 @@ record LiteralWilsonUniformGapTrajectory : Set₁ where
 
 open LiteralWilsonUniformGapTrajectory public
 
--- Backward-compatible name for old consumers.  Its content is now the actual
--- literal Wilson trajectory transfer-defect estimate rather than a generic RG
--- form record or a trajectory-uniform decorrelation constant.
 UniformRGTransferCoercivity : Set₁
 UniformRGTransferCoercivity = LiteralWilsonUniformGapTrajectory
 
 record PhysicalContinuumLimitWitness : Set₁ where
   field
-    -- Old F2 is compiler-owned.  The embeddings remain real data because F3's
-    -- embedded graph limit needs them, but no independent Hamiltonian/vacuum
-    -- compatibility fields are charged here.
-    embeddingFamily : Varying.EmbeddingOnlyCarrierFamily
+    -- Explicit upstream construction package from the existing Sprint111-122
+    -- map/estimate program. Receipts do not inhabit this field.
+    constructionInputs : F3.PhysicalF3ConstructionInputs
 
+    embeddingFamily : Varying.EmbeddingOnlyCarrierFamily
     recoverySystem : Recovery.VacuumOrthogonalRecoverySystem
 
     PhysicalWilsonCutoffFamilyIsRecoveryFamily : Set
@@ -123,9 +111,17 @@ record PhysicalContinuumLimitWitness : Set₁ where
       ContinuumHamiltonianVacuumConstructed
 
     ActualEmbeddedVacuumGraphOrMoscoLimit : Set
-    actualEmbeddedVacuumGraphOrMoscoLimit : ActualEmbeddedVacuumGraphOrMoscoLimit
+    actualEmbeddedVacuumGraphOrMoscoLimit :
+      ActualEmbeddedVacuumGraphOrMoscoLimit
 
 open PhysicalContinuumLimitWitness public
+
+------------------------------------------------------------------------
+-- Derived F4 output ABI.
+--
+-- Kept for downstream compatibility, but it is no longer a primitive field of
+-- OutstandingPhysicalFrontier.
+------------------------------------------------------------------------
 
 record YMOSSameObjectWitness (Time Vector : Set) : Set₁ where
   field
@@ -145,9 +141,34 @@ record YMOSSameObjectWitness (Time Vector : Set) : Set₁ where
 
 open YMOSSameObjectWitness public
 
--- Historical decomposed CMP116 source leaves remain available as optional F1
--- producers.  They are not mandatory terminal architecture after merged #987 /
--- R387, so this record is deliberately not a field of OutstandingPhysicalFrontier.
+physicalStressOSBuildsYMOSSameObjectWitness :
+  (witness : F4.PhysicalStressOSCommonCoreWitness) →
+  YMOSSameObjectWitness
+    (F4.Time witness)
+    (CommonCore.Vector (F4.calculus witness))
+physicalStressOSBuildsYMOSSameObjectWitness witness = record
+  { YMOSSameObjectWitness.ymEvolution = F4.ymEvolution witness
+  ; YMOSSameObjectWitness.osEvolution = F4.osEvolution witness
+  ; YMOSSameObjectWitness.CommonInvariantCore =
+      CommonCore.Core (F4.calculus witness)
+  ; YMOSSameObjectWitness.commonInvariantCore =
+      F4.reconstructedCoreWitness witness
+  ; YMOSSameObjectWitness.YMGeneratorOnCore =
+      F4.SelectedYMGeneratorOnCore witness
+  ; YMOSSameObjectWitness.ymGeneratorOnCore =
+      F4.selectedYMGeneratorOnCore witness
+  ; YMOSSameObjectWitness.OSGeneratorOnCore =
+      F4.ReconstructedOSGeneratorOnCore witness
+  ; YMOSSameObjectWitness.osGeneratorOnCore =
+      F4.reconstructedOSGeneratorOnCore witness
+  ; YMOSSameObjectWitness.evolutionsEqual =
+      F4.physicalSameEvolution witness
+  }
+
+------------------------------------------------------------------------
+-- Historical decomposed CMP116 source leaves remain optional producer data.
+------------------------------------------------------------------------
+
 record CMP116PhysicalSourceResiduals : Set₁ where
   field
     CovarianceRootCertificate : Set
@@ -209,10 +230,8 @@ record OutstandingPhysicalFrontier : Set₁ where
   field
     f1LiteralWilsonUniformGap : LiteralWilsonUniformGapTrajectory
     f3PhysicalContinuumLimit : PhysicalContinuumLimitWitness
-
-    Time : Set
-    Vector : Set
-    f4YMOSSameObject : YMOSSameObjectWitness Time Vector
+    f4PhysicalStressOSCommonCore :
+      F4.PhysicalStressOSCommonCoreWitness
 
 open OutstandingPhysicalFrontier public
 
@@ -230,9 +249,6 @@ vacuumSectorResolventCompilerStillOpenMathematicallyIsFalse :
   vacuumSectorResolventCompilerStillOpenMathematically ≡ false
 vacuumSectorResolventCompilerStillOpenMathematicallyIsFalse = refl
 
--- F2 was a structural mismatch, not a remaining physical theorem.  Aristotle's
--- varying-carrier theorem pays it with isometric embeddings; the embedding
--- family itself is retained under F3 where the actual graph limit consumes it.
 f2PrimitiveResearchPayment : Bool
 f2PrimitiveResearchPayment = false
 
@@ -247,7 +263,6 @@ varyingCarrierEmbeddingsRemainF3DataIsTrue :
   varyingCarrierEmbeddingsRemainF3Data ≡ true
 varyingCarrierEmbeddingsRemainF3DataIsTrue = refl
 
--- F1 now records the exact second-round transfer-defect normal form.
 f1TrajectoryUniformCRequired : Bool
 f1TrajectoryUniformCRequired = false
 
@@ -262,6 +277,20 @@ f1PerStepTransferDefectFormIsTrue :
   f1PerStepTransferDefectForm ≡ true
 f1PerStepTransferDefectFormIsTrue = refl
 
+fullR339MagnitudeEqualityPrimitive : Bool
+fullR339MagnitudeEqualityPrimitive = false
+
+fullR339MagnitudeEqualityPrimitiveIsFalse :
+  fullR339MagnitudeEqualityPrimitive ≡ false
+fullR339MagnitudeEqualityPrimitiveIsFalse = refl
+
+f4EvolutionEqualityPrimitive : Bool
+f4EvolutionEqualityPrimitive = false
+
+f4EvolutionEqualityPrimitiveIsFalse :
+  f4EvolutionEqualityPrimitive ≡ false
+f4EvolutionEqualityPrimitiveIsFalse = refl
+
 f1Level : ProofLevel
 f1Level = conditional
 
@@ -269,10 +298,10 @@ varyingCarrierTransportCompilerLevel : ProofLevel
 varyingCarrierTransportCompilerLevel = standardImported
 
 f3Level : ProofLevel
-f3Level = conditional
+f3Level = F3.physicalF3ConstructionLevel
 
 f4Level : ProofLevel
-f4Level = conditional
+f4Level = F4.physicalStressOSCommonCoreLevel
 
 cmp116PhysicalSourceResidualsLevel : ProofLevel
 cmp116PhysicalSourceResidualsLevel = conditional
