@@ -388,6 +388,30 @@ e6BishopUnsignedTailLimit q unit envelope =
     (e6BishopUnsignedTerm q)
     (e6BishopComponentwiseAbsoluteConvergence q unit envelope)
 
+e4BishopTailConvergence :
+  ∀ (q : Complex.BishopComplex) {ratio}
+    (unit : Unit.BishopUnitIntervalRatio ratio)
+    (envelope : BishopQPowerComponentEnvelope q ratio) →
+  Complex.ComplexSeriesConvergesTo
+    (e4BishopTerm q)
+    (e4BishopTailLimit q unit envelope)
+e4BishopTailConvergence q unit envelope =
+  Complex.complexSeriesLimitConvergence
+    (e4BishopTerm q)
+    (e4BishopComponentwiseAbsoluteConvergence q unit envelope)
+
+e6BishopUnsignedTailConvergence :
+  ∀ (q : Complex.BishopComplex) {ratio}
+    (unit : Unit.BishopUnitIntervalRatio ratio)
+    (envelope : BishopQPowerComponentEnvelope q ratio) →
+  Complex.ComplexSeriesConvergesTo
+    (e6BishopUnsignedTerm q)
+    (e6BishopUnsignedTailLimit q unit envelope)
+e6BishopUnsignedTailConvergence q unit envelope =
+  Complex.complexSeriesLimitConvergence
+    (e6BishopUnsignedTerm q)
+    (e6BishopComponentwiseAbsoluteConvergence q unit envelope)
+
 e4BishopLimit :
   ∀ (q : Complex.BishopComplex) {ratio} →
   (unit : Unit.BishopUnitIntervalRatio ratio) →
