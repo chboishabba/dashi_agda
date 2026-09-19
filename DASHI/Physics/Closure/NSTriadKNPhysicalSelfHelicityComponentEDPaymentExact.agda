@@ -32,14 +32,21 @@ import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exa
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3LerayPythagoras as Leray
 import DASHI.Physics.Closure.NSTriadKNComplex3EuclideanSelfPairing as SelfPair
 import DASHI.Physics.Closure.NSTriadKNLiteralThreeLegWaleffeCommonAmplitudeRound93Exact as R93
+import DASHI.Physics.Closure.NSTriadKNCriticalRawCurlPhysicalWeldRound170Exact as R170
+import DASHI.Physics.Closure.NSTriadKNExactSignedGalerkinCoefficient as Signed
 import DASHI.Physics.Closure.NSTriadKNProjectedHelicalSelfForcingVectorRound106Exact as R106Vector
 import DASHI.Physics.Closure.NSTriadKNSelfWaleffePhaseProjectedCrossMassRound106Exact as R106
 import DASHI.Physics.Closure.NSTriadKNProjectedCrossEnergyBoundRound110Exact as R110
 import DASHI.Physics.Closure.NSTriadKNSignedSelfPhaseEDKernelExact as SignedED
 import DASHI.Physics.Closure.NSTriadKNRetainedHelicalSignedGapEDExact as Gap
+import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
+import DASHI.Physics.Closure.NSTriadKNMHDRadiusReciprocalToNormalizedDirectionRound464Exact as R464
+import DASHI.Physics.Closure.NSTriadKNPhysicalHHAndNestedRadiusCompilerRound468Exact as R468
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -55,13 +62,13 @@ module PhysicalComponentED
     (O : Leray.RationalInverseNormOrder
       (Field30.physicalEmbedding physicalSystem)
       (Field30.physicalInverseSquare physicalSystem))
-    (unitGap : Gap.R450.CanonicalFourierUnitGap physicalSystem)
+    (unitGap : R450.CanonicalFourierUnitGap physicalSystem)
     (radiusCalibration :
-      Gap.R464.PhysicalSquareAndMHDCalibration
+      R464.PhysicalSquareAndMHDCalibration
         (Field30.physicalEmbedding physicalSystem)
         (Field30.physicalInverseSquare physicalSystem)
         S)
-    (orientation : Gap.R468.PhysicalRadiusOrientation S) where
+    (orientation : R468.PhysicalRadiusOrientation S) where
 
   E = Field30.physicalEmbedding physicalSystem
   I = Field30.physicalInverseSquare physicalSystem
@@ -181,7 +188,7 @@ module PhysicalComponentED
     let H = componentPairData tau outputNonzero signP signQ
         X = crossVector tau signP signQ
         force =
-          R106Vector.Signed.orderedPairVelocityInteraction
+          Signed.orderedPairVelocityInteraction
             (C3.complex3VelocityGalerkinLaws F E I)
             (Physical.k tau)
             (Physical.p tau)
@@ -198,7 +205,7 @@ module PhysicalComponentED
     selfPhaseReal tau outputNonzero signP signQ
     ≡
     delta signP signQ (Physical.p tau) (Physical.q tau)
-      * Rational.squareMass (projectedCross tau signP signQ)
+      * L2.complex3NormSquared (projectedCross tau signP signQ)
   selfPhaseRealMeaning tau outputNonzero signP signQ =
     let
       p = Physical.p tau
@@ -212,7 +219,7 @@ module PhysicalComponentED
           (deltaComplexReal signP signQ p q)
       realExact = cong C3.real phaseExact
       scaled =
-        R93.realOfRealScale d (C3.hermitianPairing3 PX PX)
+        R170.realOfRealScale d (C3.hermitianPairing3 PX PX)
       selfNorm =
         SelfPair.complex3SelfPairingRealPartIsNormSquared PX
     in
@@ -231,7 +238,7 @@ module PhysicalComponentED
   componentEnergy :
     Helical.HelicitySign → Z3.FourierMode → ℚ
   componentEnergy sign mode =
-    Rational.squareMass (component sign mode)
+    L2.complex3NormSquared (component sign mode)
 
   componentDissipation :
     Helical.HelicitySign → Z3.FourierMode → ℚ
@@ -263,13 +270,13 @@ module PhysicalComponentED
       q2 = C3.normSquared I q
       eP = componentEnergy signP p
       eQ = componentEnergy signQ q
-      m = Rational.squareMass PX
+      m = L2.complex3NormSquared PX
 
       p2NN = G.squareNN p
       q2NN = G.squareNN q
-      ePNN = Rational.squareMassNonnegative uP
-      eQNN = Rational.squareMassNonnegative uQ
-      mNN = Rational.squareMassNonnegative PX
+      ePNN = Separation.complex3NormSquaredNonnegative uP
+      eQNN = Separation.complex3NormSquaredNonnegative uQ
+      mNN = Separation.complex3NormSquaredNonnegative PX
 
       dBound =
         G.signedGapBelowSquares signP signQ p q pMember qMember
