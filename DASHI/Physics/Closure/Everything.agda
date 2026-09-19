@@ -163,6 +163,16 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputResolventGramFluxSplitExact
 import DASHI.Physics.Closure.NSTriadKNSignedFrequencyCarrierExact
 import DASHI.Physics.Closure.NSTriadKNPeriodicSignedFrequencyCarrierRealizationExact
 
+-- Hard analytic centered-resolvent tranche.  The generic kernel owner proves
+-- the two exact envelopes s/[a(a+s)] <= s/a^2 and <= 1/a.  The physical owner
+-- constructs their hypotheses from positive viscosity/nonzero output and
+-- identifies the literal R290 correction coefficient with that kernel.  The
+-- opposite-shift owner then proves exact first-order cancellation, leaving a
+-- quadratic h^2 resolvent defect before any absolute-value observer.
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventKernelEnvelopeExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredResolventKernelEnvelopeExact
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventOppositeShiftSecondOrderExact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
