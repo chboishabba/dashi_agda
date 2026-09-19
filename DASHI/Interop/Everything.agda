@@ -104,3 +104,5 @@ import DASHI.Interop.SensibLawMaboProgressiveExplanationProjectionExact
 import DASHI.Interop.SemanticReaderElucidatoryConeExact
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact
 import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateRegression
