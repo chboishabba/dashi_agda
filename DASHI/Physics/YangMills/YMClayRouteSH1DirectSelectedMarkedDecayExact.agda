@@ -3,12 +3,14 @@ module DASHI.Physics.YangMills.YMClayRouteSH1DirectSelectedMarkedDecayExact wher
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
+import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact as R295
 import DASHI.Physics.YangMills.BalabanT5DirectSelectedMarkedDecayRound320Exact as R320
 import DASHI.Physics.YangMills.BalabanR318CanonicalDirectShellRound398Exact as R398
 import DASHI.Physics.YangMills.BalabanCMP116DirectT5ContinuumClusteringRound284Exact as R284
@@ -60,7 +62,7 @@ h1BuildsLocalizedR295 :
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     (base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension) →
   RouteSH1DirectSelectedPayment base →
-  DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact.DirectT5StateFamilyJPresentation
+  R295.DirectT5StateFamilyJPresentation
     dataSet extension
 h1BuildsLocalizedR295 base payment =
   R320.localizeBaseDirectlyAsR295 base (directSelectedDecay payment)
@@ -83,7 +85,7 @@ h1BuildsExactConnectedRootedShell :
   RouteSH1DirectSelectedPayment base →
   R274.TwoSourceConnectedRootedShellData
     (R318.Scale base) (R318.Volume base) (R318.Root base)
-    Agda.Builtin.Nat.Nat TestObservable
+    Nat TestObservable
 h1BuildsExactConnectedRootedShell base payment =
   R274Weld.r320PaymentAsR274ConnectedShell
     base (directSelectedDecay payment)
