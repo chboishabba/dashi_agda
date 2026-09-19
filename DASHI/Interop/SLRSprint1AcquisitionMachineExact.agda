@@ -210,6 +210,8 @@ record ReviewedRecurrenceParity : Set where
     producerFamilyMayChange : Bool
     newResidualsMayOpen : Bool
     rejectedEvidenceRemainsRecorded : Bool
+    existingWorldExpansionRunnerIsSourceSinkGeneric : Bool
+    gwbSpecificSupervisoryLoopRequired : Bool
     fixedQueueCountsAsAdaptive : Bool
     recurrenceCreatesTruth : Bool
 
@@ -224,6 +226,8 @@ canonicalReviewedRecurrenceParity =
     true
     true
     true
+    true
+    false
     false
     false
 
