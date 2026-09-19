@@ -17,10 +17,10 @@ import DASHI.Analysis.RiemannG2PoleQuotientProducerReconciliation8889Exact as PQ
 -- same-taper producer chain and replace only that step by a consumer-adequate
 -- estimate.
 --
--- This module intentionally does not guess whether the loss occurs in a kernel
--- estimate, an absolute-value envelope, a taper norm, a parameter supremum, an
--- asymptotic remainder, or only in the final constant comparison.  A source
--- audit must identify that step explicitly.
+-- The vendored exact source now identifies the first coarse scaling mechanism:
+-- PoleQuotientGammaBudget factors through stripConst, whose sample-test C2 norm
+-- contains a second-derivative L1 term that grows quadratically as support
+-- shrinks.  Thus taperNormEstimate is the recovered precision-loss stage.
 ------------------------------------------------------------------------
 
 data GammaPrecisionStage : Set where
@@ -31,6 +31,9 @@ data GammaPrecisionStage : Set where
   asymptoticRemainder : GammaPrecisionStage
   finalConstantComparison : GammaPrecisionStage
   sourceLocalizationStillRequired : GammaPrecisionStage
+
+currentGammaPrecisionLossStage : GammaPrecisionStage
+currentGammaPrecisionLossStage = taperNormEstimate
 
 
 record ExistingCoarseGammaProducer : Set₁ where
