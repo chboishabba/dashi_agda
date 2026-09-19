@@ -21,7 +21,7 @@ module DASHI.Moonshine.JInvariantEisensteinIncrementModulusExact where
 -- IsCauchy remain downstream.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; subst; sym)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 
