@@ -142,6 +142,17 @@ import DASHI.Physics.Closure.NSTriadKNStrictR423ProofSearchRound493Exact
 -- cone for focused validation.
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact
 
+-- Post-R505 covariance/resolvent consolidation.  These exact owners put the
+-- physical R229 centered covariance and the R290/R503 resolvent lane on the
+-- same literal double-mixed pair carrier.  The pair-rate weight is retained,
+-- then the fixed-output resolvent is split into one common output heat
+-- resolvent plus a centered-frequency correction.  No analytic payment or
+-- Clay promotion is asserted here.
+import DASHI.Physics.Closure.NSTriadKNFixedOutputRateWeightedGramToR290Exact
+import DASHI.Physics.Closure.NSTriadKNCenteredCovarianceR290DynamicNormalFormExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputResolventCenteredDefectExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputResolventGramFluxSplitExact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
