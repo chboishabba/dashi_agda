@@ -286,42 +286,89 @@ Absent one of those, direct R2 is the current non-dominated RH proof-search targ
 
 The R0 proof-carrying certificate route remains optional: rational/interval realization still requires the exact embedded finite-fold identity plus order transport and therefore does not bypass R1 by itself.
 
-The 8889 cluster-lower route remains an optional producer only if theorem-bearing same-carrier transport reappears together with a strict local bridge to actual `ClusterResponse`.
+The exact 8889 theorem bytes are now located in vendored `dashi_lean4/Imported/Zeta23Bridge`. The cluster theorem is therefore no longer a fresh-analysis archaeology target; theorem-bearing replay/same-object transport into the selected Agda `ClusterResponse` remains unpaid.
 
-### RH R2 inverse-square coefficient recut — 2026-09-19
+### RH R2 baseline-surplus recut — 2026-09-19
 
 NEW PRODUCER / ANALYTIC RECUT:
 
-The companion Lean branch now source-writes a domain-neutral coefficient-composition theorem:
+Direct inspection of the vendored 8889 theorem bytes corrects the earlier absolute inverse-square cut.  The exact theorem
 
 ```text
-near <= cNear/t^2
-far <= cFar/t^2
-gamma <= cGamma/t^2
-cCluster/t^2 <= actual ClusterResponse
-cNear + cFar + cGamma < cCluster
-------------------------------------------------
-near + far + gamma < actual ClusterResponse.
+PoleQuotientClusterMargin.clusterValue_ge_baseline_add_margin
 ```
 
-The already-written quartic far-shell donor specializes the far channel to
+gives, on the source carrier,
 
 ```text
-J=t^4,
-farShell <= 144*A/t^2,
-so cFar = 144*A.
+baselineCluster
+  + (sqrt(2)/2) * a^2 * secondMoment(g)
+  <= actual cluster value,
 ```
 
-This does not close R2 in Agda: the new Lean theorem still needs theorem-bearing replay/transport to the selected final scalar/order.  But it removes the combined strict inequality as fresh arithmetic.  The remaining analytic rate inputs are now:
+where `a = Re(rho)-1/2`.  The quantitative window theorem shows the available surplus is relative `O(a^2/t^2)`, not merely absolute `O(t^-2)`.  Since an arbitrary off-line zero may have arbitrarily small nonzero `a`, a fixed absolute `c/t^2` envelope is not the canonical uniform acquisition surface.
+
+The preferred R2 producer is now
 
 ```text
-N2  literal/certified near <= cNear/t^2
-G2  sharp same-taper Gamma <= cGamma/t^2
-C2  cCluster/t^2 <= actual ClusterResponse
-K2  cNear + 144*A + cGamma < cCluster.
+M(a,g) := (sqrt(2)/2) * a^2 * secondMoment(g)
+
+cluster source:
+  baselineCluster + M(a,g) <= actual ClusterResponse
+
+complement analysis:
+  B_comp <= baselineCluster + E_comp
+  E_comp < M(a,g)
+
+compiler:
+  B_comp < actual ClusterResponse.
 ```
 
-Do not count `K2` plus the generic composition theorem as a new cluster surrogate; the terminal consumer remains the actual `ClusterResponse`.
+The baseline-excess compiler arithmetic is source-written in companion Lean.
+
+Far-channel status:
+
+```text
+fixed J=t^4:
+  far <= 144*A/t^2
+  -- valid donor, but not uniform as a -> 0
+
+adaptive real schedule J_real=(t/alpha)^4:
+  far <= 144*A*alpha^2/t^2
+  -- source-written for 0<alpha<=1
+```
+
+Taking `alpha=|a|` matches the horizontal-square scale.  A second domain-neutral Lean theorem now proves that quarter-period crossing and arbitrarily sharp far accuracy are asymptotically compatible: if `Lambda>0`, `epsilon>0`, and `far(J)->0`, then some natural `J>=1` simultaneously has `pi/2 < J*Lambda` and `far(J)<epsilon`.  Literal far-shell instantiation and exact final-carrier cutoff transport remain open.
+
+Gamma status is also sharper.  The exact vendored
+
+```text
+PoleQuotientGammaBudget.lean
+```
+
+calls `gammaConeEnvelope` directly, so the historical `epsGamma/gammaConeEnvelope` same-consumer identity is recovered.  Its own source identifies the coarse scaling mechanism: `stripConst` contains the sample-test second-derivative L1 norm, which grows quadratically as support shrinks.  Therefore:
+
+```text
+generic Gamma existence            owned
+historical producer identity       owned at source level
+first precision-loss stage         stripConst / C2 taper norm
+sharp same-taper Gamma repair      live
+Agda theorem replay/transport      live
+```
+
+Current high-side live debts are therefore:
+
+```text
+C-source  replay/attach baselineCluster + M(a,g) <= actual ClusterResponse
+Off       control finite near + far excess above the shared baseline
+Far       instantiate an adaptive natural cutoff on the literal carrier
+Gamma     repair/bypass stripConst so Gamma fits the same a^2-scale window
+Strict    prove the combined excess E_comp < M(a,g)
+Replay    transport theorem-bearing Lean producers into the selected Agda order
+```
+
+Do not force these back into independent absolute `cNear/t^2`, `cGamma/t^2`, `cCluster/t^2` coefficients unless a particular producer benefits from that stronger sufficient form.  The prize-facing consumer remains the actual `ClusterResponse`.
+
 
 ## 8. Firewalls
 
