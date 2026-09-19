@@ -242,3 +242,37 @@ Do not send the full deduplicated metadata corpus into deep SLR processing.
 Retrieve/hash full text for the retained/probable-inclusion tranche, then use the
 existing SLR source-unit batch runtime. SLR output remains candidate/review
 material and cannot create inclusion or `SourceAuditAdmission`.
+
+
+## Title / abstract screening ledger
+
+After ERIC deduplication, compile the exact screening universe locally:
+
+```bash
+python3 scripts/prepare_digital_esd_screening_ledger.py \
+  --input artifacts/digital-esd/deduplication/eric-deduplicated-records.json \
+  --out-dir artifacts/digital-esd/screening
+```
+
+The first pass intentionally emits every record as
+`unresolved / awaitingScreeningReview`. It is a durable worklist, not an
+automatic exclusion classifier.
+
+Apply explicit decisions with a JSONL overlay:
+
+```bash
+python3 scripts/prepare_digital_esd_screening_ledger.py \
+  --input artifacts/digital-esd/deduplication/eric-deduplicated-records.json \
+  --decisions artifacts/digital-esd/screening/reviewer-decisions.jsonl \
+  --out-dir artifacts/digital-esd/screening
+```
+
+Each decision is bound to the exact source identity, metadata SHA-256,
+title/abstract snapshot SHA-256, rubric version, reviewer/model/process
+reference and timestamp. Missing decisions remain `unresolved`; exclusions
+and ambiguities are never dropped.
+
+Only after title/abstract screening should full text enter the SLR/SensibLaw
+second-stage lane. The evidence-bearing coordinates lower onto SLR Sprint-2's
+canonical Rust substrate; the historical Python source-unit batch is merely a
+temporary execution adapter.
