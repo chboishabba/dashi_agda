@@ -62,10 +62,18 @@ open ExactResidual public
 sourceSelectedLocalization : ExactResidual
 sourceSelectedLocalization = exact-residual
   sourceLocalization
-  "R296 / R343-R346 / R387"
-  "literal selected two-J magnitude / direct selected spectral upper"
+  "YMClayRouteSH1DirectSelectedMarkedDecayExact.agda / R320 / R398 / R387"
+  "R320 mixedDerivativeMagnitudeBelowSelectedShell on the exact selected R318/T5 carrier"
   unpaid
-  "R387 is the least-privilege terminal source consumer. Full R339 magnitude equality, source-root presentation and source-envelope coordinates are not terminal fields."
+  "Canonical H1 has one theorem-bearing physical/source field. R320 transports it to literal J directions; R398 constructs the exact finite T5 direct shell; R274/R284/R388 compile onward to the R387 terminal ABI. PublishedTwoJLocalization wrappers and separate source magnitude/root/distance applicability are optional stronger producer packaging, not canonical H1 coordinates."
+
+historicalH1PublishedApplicabilityPackaging : ExactResidual
+historicalH1PublishedApplicabilityPackaging = exact-residual
+  sameObjectAttachment
+  "BalabanT5UnlocalizedJSourceLocalizationRound318Exact.agda / R322 / R327"
+  "PublishedTwoJLocalizationForBase + separate selected source magnitude/root/distance applicability"
+  obsoleteStrength
+  "R320 is a strictly smaller consumer-first H1 ABI with one selected-carrier inequality. R322/R327 and the source-authority adapter remain valid producer tactics because they compile into R320."
 
 r339MagnitudeEquality : ExactResidual
 r339MagnitudeEquality = exact-residual
