@@ -227,10 +227,10 @@ level2R127AfterR129 = exact-residual
 level2OPEProductTailIdentification : ExactResidual
 level2OPEProductTailIdentification = exact-residual
   physicalClayStressConstruction
-  "YMClayLevel2R129CompositeTailAttachmentExact.agda"
-  "literal product remainder on the R129-exported completed composite projection = selected composite marked tail"
+  "YMClayLevel2D1PhysicalMinCutExact.agda"
+  "literal Clay opeRemainder = selected R129 compositeInsertionTail"
   unpaid
-  "R129 already exports the composite marked-source data from the same completed state used by stress. D1 therefore accepts no independent composite carrier. The physical seam is a semantic weld: the product remainder of that completed composite must be identified both with the literal Clay opeRemainder and with Shared.compositeInsertionTail. Their direct equality and the DyadicOPERemainderMajorant are then compiler output; no new analytic inequality is introduced."
+  "R129 already fixes the same completed composite family. The older auxiliary productRemainder function adds no proof strength: choosing it freely plus two equalities is equivalent to this one direct equality. The compatibility compiler reconstructs the old record and the existing marked-tail theorem then builds the DyadicOPERemainderMajorant. No independent composite carrier and no new analytic inequality are introduced."
 
 level2GlobalAFSecondPayment : ExactResidual
 level2GlobalAFSecondPayment = exact-residual
@@ -371,6 +371,9 @@ d1NewCompositeTailDecayTheoremRequired = false
 
 d1SameCompletedCompositeTailAttachmentStillPhysical : Bool
 d1SameCompletedCompositeTailAttachmentStillPhysical = true
+
+d1AuxiliaryProductRemainderFunctionRequired : Bool
+d1AuxiliaryProductRemainderFunctionRequired = false
 
 d1IndependentCompositeCarrierAfterR129 : Bool
 d1IndependentCompositeCarrierAfterR129 = false
