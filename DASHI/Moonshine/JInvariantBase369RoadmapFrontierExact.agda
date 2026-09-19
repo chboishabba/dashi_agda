@@ -24,6 +24,7 @@ import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact
 import DASHI.Moonshine.JInvariantAnalyticJCoarseFineFrickeIntertwinerExact
 import DASHI.Moonshine.JInvariantAnalyticJCoarseFineObserverExact
 import DASHI.Moonshine.JInvariantAnalyticStructuredPantsHyperformObserverExact
+import DASHI.Moonshine.JInvariantAnalyticObserverSeamCompilerBridgeExact
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact
 import DASHI.Moonshine.JInvariantRenderedAnalyticStructuredAcquisitionBoundaryExact
 import DASHI.Moonshine.JInvariantRenderedIntervalOrbitRecognitionBidiExact
@@ -79,6 +80,8 @@ record RoadmapState : Set where
     analyticObserverToLocalTwentySevenExact : Bool
     analyticObserverToPantsPathThreeExact : Bool
     analyticObserverHyperformContextSeparatedExact : Bool
+    analyticObserverToSeamOrbitCompilerExact : Bool
+    analyticFrickeToObservedPantsTransportExact : Bool
     concreteAnalyticStructuredObserverPaid : Bool
     legacyConcreteAnalyticJCoarseFineEquivalencePaid : Bool
     jActualAnalyticGluingLawExact : Bool
@@ -131,6 +134,8 @@ canonicalRoadmapState = record
   ; analyticObserverToLocalTwentySevenExact = true
   ; analyticObserverToPantsPathThreeExact = true
   ; analyticObserverHyperformContextSeparatedExact = true
+  ; analyticObserverToSeamOrbitCompilerExact = true
+  ; analyticFrickeToObservedPantsTransportExact = true
   ; concreteAnalyticStructuredObserverPaid = false
   ; legacyConcreteAnalyticJCoarseFineEquivalencePaid = false
   ; jActualAnalyticGluingLawExact = false
