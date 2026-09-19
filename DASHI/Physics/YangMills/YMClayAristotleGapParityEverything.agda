@@ -1,9 +1,8 @@
 module DASHI.Physics.YangMills.YMClayAristotleGapParityEverything where
 
--- Focused rollup for the post-#987 Aristotle donor reconciliation.  This is
+-- Focused rollup for the post-#987 Aristotle donor reconciliation. This is
 -- intentionally separate from the historical global Yang-Mills rollup so the
--- cross-prover authority boundary remains inspectable and does not make a
--- `--safe` claim on behalf of imported Lean mathematics.
+-- cross-prover authority boundary remains inspectable.
 
 import DASHI.Physics.YangMills.YMClayAristotleDonorAtlasExact
 import DASHI.Physics.YangMills.YMClayVacuumSectorSpectralGapParityExact
@@ -18,6 +17,8 @@ import DASHI.Physics.YangMills.YMClayDenseMarkedSourceF1ProducerExact
 import DASHI.Physics.YangMills.YMClayDenseMarkedSourceF1ProducerValidation
 import DASHI.Physics.YangMills.YMClayR295MarkedSourceAdapterExact
 import DASHI.Physics.YangMills.YMClayR295MarkedSourceAdapterValidation
+import DASHI.Physics.YangMills.YMClayF1PhysicalMinCutExact
+import DASHI.Physics.YangMills.YMClayF1PhysicalMinCutValidation
 import DASHI.Physics.YangMills.YMClayUrsellTransferMixingBoundaryExact
 import DASHI.Physics.YangMills.YMClayUrsellTransferMixingBoundaryValidation
 import DASHI.Physics.YangMills.YMClayF1MixingSourceAuditExact
@@ -26,6 +27,10 @@ import DASHI.Physics.YangMills.YMClayCompleteDensityTransferMixingBoundaryExact
 import DASHI.Physics.YangMills.YMClayCompleteDensityTransferMixingBoundaryValidation
 import DASHI.Physics.YangMills.YMClayCMSDrellYanEmpiricalContactBoundaryExact
 import DASHI.Physics.YangMills.YMClayCMSDrellYanEmpiricalContactBoundaryValidation
+import DASHI.Physics.YangMills.YMClayF3SprintConstructionFrontierExact
+import DASHI.Physics.YangMills.YMClayF3SprintConstructionFrontierValidation
+import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact
+import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessValidation
 import DASHI.Physics.YangMills.YMClayF134ContinuumWeldParityExact
 import DASHI.Physics.YangMills.YMClayF134TypedCompositionValidation
 import DASHI.Physics.YangMills.YMClayPhysicalF34TypedCompositionExact
