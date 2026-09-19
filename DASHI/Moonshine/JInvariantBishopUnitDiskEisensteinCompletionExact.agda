@@ -24,6 +24,7 @@ module DASHI.Moonshine.JInvariantBishopUnitDiskEisensteinCompletionExact where
 ------------------------------------------------------------------------
 
 import Real as BishopReal
+import RealProperties as BishopP
 
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
@@ -51,7 +52,7 @@ powerEnvelope {q} {ratio} input =
   Norm.powerEnvelopeFromNormSquare
     q
     SquareReflection.bishopNonnegativeSquareReflection
-    (BishopReal.0≤x⇒nonNegx (Unit.ratioNonnegative (unitInterval input)))
+    (BishopP.0≤x⇒nonNegx (Unit.ratioNonnegative (unitInterval input)))
     (normSquareAgreement input)
 
 record BishopUnitDiskEisensteinCompletion
@@ -124,6 +125,6 @@ completeBishopUnitDiskEisenstein {q} {ratio} input =
         Eisenstein.e4BishopTailConvergence q unit envelope
     ; e6Converges =
         Eisenstein.e6BishopUnsignedTailConvergence q unit envelope
-    ; e4Canonical = Complex.≈C-refl
-    ; e6Canonical = Complex.≈C-refl
+    ; e4Canonical = Complex.≈C-refl _
+    ; e6Canonical = Complex.≈C-refl _
     }
