@@ -12,6 +12,7 @@ open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFinitePositiveWeightNormalizationExact as Normalize
+import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact as PhysicalT
 import DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationExact as Preferred
 import DASHI.Physics.YangMills.BalabanClayGate4ConstrainedReferenceKernelExact as Kernel
@@ -72,7 +73,7 @@ compileRawSlowDensityReopeningStep :
     {typed :
       Kernel.TypedReferenceCoarseConstraint referenceInputs} →
   Gate4RawSlowFieldDensity referenceInputs typed →
-  DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact.FiniteRGReopeningStep
+  Reopen.FiniteRGReopeningStep
     Fine SlowField
 compileRawSlowDensityReopeningStep dataSet =
   Mixture.gate4ConditionalMixtureReopeningStep
