@@ -17,7 +17,7 @@ module DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -53,17 +53,10 @@ open CostAwareDecisionFactorisation public
 
 factorisationCompositePolynomial :
   ∀ {Word} {cost : PR.PolynomialCostModel Word}
-    {consumer : Word → Bool} →
-  CostAwareDecisionFactorisation cost consumer →
+    {consumer : Word → Bool}
+    (factorisation : CostAwareDecisionFactorisation cost consumer) →
   PR.polynomialTimeDecider cost
-    (λ word →
-      consumeObserved
-        {cost = cost}
-        {consumer = consumer}
-        _ (observe
-          {cost = cost}
-          {consumer = consumer}
-          _ word))
+    (λ word → consumeObserved factorisation (observe factorisation word))
 factorisationCompositePolynomial {cost = cost} factorisation =
   PR.deciderClosedUnderPrecomposition cost
     (observe factorisation)
@@ -86,18 +79,14 @@ costAwareFactorisationGivesPolynomialDecision
 record PolynomialFactorisationBoundary : Set where
   constructor polynomial-factorisation-boundary
   field
-    extensionalFactorisationAloneImpliesPolynomialTime : Agda.Builtin.Bool.Bool
-    observerCostRequired : Agda.Builtin.Bool.Bool
-    downstreamCostRequired : Agda.Builtin.Bool.Bool
-    equalityTransportRequiredByCurrentCostInterface : Agda.Builtin.Bool.Bool
-    costAwareCompilerConstructed : Agda.Builtin.Bool.Bool
+    extensionalFactorisationAloneImpliesPolynomialTime : Bool
+    observerCostRequired : Bool
+    downstreamCostRequired : Bool
+    equalityTransportRequiredByCurrentCostInterface : Bool
+    costAwareCompilerConstructed : Bool
 
 canonicalPolynomialFactorisationBoundary :
   PolynomialFactorisationBoundary
 canonicalPolynomialFactorisationBoundary =
   polynomial-factorisation-boundary
-    Agda.Builtin.Bool.false
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
-    Agda.Builtin.Bool.true
+    false true true true true
