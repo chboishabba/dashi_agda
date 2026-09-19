@@ -28,6 +28,9 @@ import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SATSe
 import DASHI.Mathematics.Complexity.PolynomialClassicalObserverExact as PolyObserver
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as WordSize
 import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact as ConfigEncoding
+import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as TruthCNF
+import DASHI.Mathematics.Complexity.FiniteLocalTableauEncodingExact as LocalTableau
+import DASHI.Mathematics.Complexity.DeterministicMachineToInPExact as MachineToP
 import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 import DASHI.Crypto.ShorFactoring as Shor
 import DASHI.ComputerScience.ShorOrderClassicalQuantumMachineComparisonExact as Comparison
@@ -242,6 +245,9 @@ record PvsNPRSAQuantumCrossPollinationBoundary : Set where
     sizedPolynomialClassicalObserverCarrierPresent : Bool
     concreteWordSizeMetricPresent : Bool
     finiteConfigurationCodecInterfacePresent : Bool
+    deterministicMachineToInPCompilerPresent : Bool
+    finiteLocalTableauRepresentationPresent : Bool
+    fixedWidthTruthTableCNFCompilerPresent : Bool
 
     genericCookLevinCNFPolynomialityPaid : Bool
     booleanFormulaSATSelfReductionInstantiationPaid : Bool
@@ -256,7 +262,7 @@ canonicalPvsNPRSAQuantumCrossPollinationBoundary :
 canonicalPvsNPRSAQuantumCrossPollinationBoundary =
   pvsnp-rsa-quantum-crosspollination-boundary
     true true true true true true true
-    true true true true true
+    true true true true true true true true
     false true false false false
 
 classicalPvsNPStillOpen :
@@ -293,6 +299,24 @@ finiteConfigurationCodecInterfaceNowPaid :
     canonicalPvsNPRSAQuantumCrossPollinationBoundary
   ≡ true
 finiteConfigurationCodecInterfaceNowPaid = refl
+
+deterministicMachineToInPCompilerNowPaid :
+  deterministicMachineToInPCompilerPresent
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+deterministicMachineToInPCompilerNowPaid = refl
+
+finiteLocalTableauRepresentationNowPaid :
+  finiteLocalTableauRepresentationPresent
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+finiteLocalTableauRepresentationNowPaid = refl
+
+fixedWidthTruthTableCNFCompilerNowPaid :
+  fixedWidthTruthTableCNFCompilerPresent
+    canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+fixedWidthTruthTableCNFCompilerNowPaid = refl
 
 genericCookLevinStillOpen :
   genericCookLevinCNFPolynomialityPaid
