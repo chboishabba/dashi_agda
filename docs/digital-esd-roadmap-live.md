@@ -347,3 +347,105 @@ framework mostly paid
 → let corpus defeat/refine the seven principles
 → reopen formal/source acquisition only on a literal residual
 ```
+
+
+## 16. Certification recut: full aggregate now has a local GREEN reference object
+
+Operator-observed local execution now supersedes the older core-only certification boundary for the **local executable generation**:
+
+```text
+local branch/worktree: work-esd-audit
+exact commit: 94d77498b417f2328b685e186c3f4750f575956c
+target: DASHI/EverythingDigitalESDReciprocalBraid.agda
+Agda 2.9: PASS
+aggregate/dependency count: 911/911 GREEN
+AGDA_RTS_HEAP: 7G
+DASHI_AGDA_RSS_LIMIT_MB: 8192
+static audit over 48 modified/added Agda files: PASS 48/48
+axioms / holes / postulate leaks reported by static audit: 0
+```
+
+This receipt is attached **only** to that exact local commit. It must not be retroactively attached to older remote Digital-ESD heads or to source-written commits added after `94d77498...`.
+
+The local GREEN work also paid:
+
+- decoupling of heavy cross-domain transitive imports so the aggregate no longer drags the >1,800-module physics/algebra closure;
+- Pareto Rounds 15-20 in the executable local generation;
+- IEEE + ERIC query translation surface, leaving ACM explicitly unpaid;
+- direct constructive rational equalities replacing heavy reflected ring-solver use in `GenericExpectedFibreRateExact`;
+- Agda 2.9 universe/name/scope repairs across the aggregate dependency graph.
+
+The remote feature branch may therefore contain later source-written commits that do **not** inherit this receipt.
+
+## 17. New upstream residual: who was never counted as eligible?
+
+The Round-20 eleven-question acquisition Pareto remains frozen. #981's eligible-missing carrier exposes a genuinely harder consumer one level upstream:
+
+```text
+target universe
+→ eligibility-definition / administrative-register / recruitment frame
+→ declared eligible carrier
+→ disclosure / invitation / response / consent gates
+→ realised analytic carrier
+```
+
+Digital-ESD now has a thin owner:
+
+`DigitalESDEligibilityFrameExclusionExact.agda`
+
+with the DASHI-owned result:
+
+```text
+same declared eligible carrier
+!= same upstream frame exclusion
+
+EligibilityFrameState
+not FactorsThrough
+DeclaredEligibleCarrier
+```
+
+This reuses `ParticipationSelectionQuotient` and `EvidenceDesignAdmissibilityExact.samplingFrame`; it does not create another generic eligibility/sampling ontology.
+
+The first Python-guided source front is:
+
+- NCVER 2024 Student Outcomes Survey technical notes — population/frame/invitation contraction and contactability restrictions;
+- Voorheis 2021 Census working paper — administrative college-record frame coverage and subgroup undercoverage;
+- Clutterbuck/Hardy/Creagh — DOI `10.1080/02680939.2021.1972166`, Queensland OneSchool preclusion/omission.
+
+These are calibration/acquisition candidates, not final-corpus admissions.
+
+The new controlling distinction is:
+
+```text
+eligible-but-missing
+!=
+never-counted-as-eligible
+```
+
+## 18. Roadmap effect
+
+The main scientific P0 is unchanged:
+
+```text
+execute declared database searches
+→ deduplicate
+→ screen
+→ admitted corpus
+→ SourceAuditAdmission per included source
+→ corpus-level blind-spot matrix
+→ support | narrow | split | merge | defeat | extend the seven principles
+```
+
+The upstream eligibility-frame owner is allowed because it is a literal consumer residual exposed by the existing Pareto/#981 spine. It does **not** reopen generic pre-corpus snowballing.
+
+Future conceptual additions remain blocked unless a concrete admitted-corpus collision demands them, including the current #981 candidate families:
+
+```text
+epistemic labour burden
+epistemic activism / proper uptake
+relational research burden
+```
+
+```text
+source suggests candidate coordinate != coordinate required
+```
