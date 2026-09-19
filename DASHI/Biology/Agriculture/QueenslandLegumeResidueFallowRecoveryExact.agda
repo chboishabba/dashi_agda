@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Biology.Agriculture.ConstructiveNitrogenTransportKernelExact as Transport
+import DASHI.Biology.Agriculture.GrainLegumeBelowGroundNitrogenObserverExact as BGObserver
 
 ------------------------------------------------------------------------
 -- QUEENSLAND LEGUME RESIDUE ROUTE x FALLOW x FOLLOWING-CROP RECOVERY
@@ -129,6 +130,7 @@ record FallowRecoveryBoundary : Set where
     sameExperimentRouteFallowRecoveryJoinOwned : Bool
     shortFallowSoilMineralNTimeSeriesOwned : Bool
     isotopeDerivedNdfrDirectlyObserved : Bool
+    belowGroundObserverCalibrationReused : Bool
 
     bgRecoveryEfficiencyDenominatorDirectlyMeasured : Bool
     recoveryEfficiencyEqualsIsotopeDerivedNdfr : Bool
@@ -140,6 +142,7 @@ record FallowRecoveryBoundary : Set where
     rainfallAndSeasonMayBeErased : Bool
     queenslandCroppingResidueRecoveryCreatesAcaciaSameObjectEvidence : Bool
     sourceCreatesDeploymentAuthority : Bool
+    externalRouteComparatorFractionsTransferredToQueensland : Bool
 
 open FallowRecoveryBoundary public
 
@@ -148,6 +151,7 @@ canonicalFallowRecoveryBoundary = record
   { sameExperimentRouteFallowRecoveryJoinOwned = true
   ; shortFallowSoilMineralNTimeSeriesOwned = true
   ; isotopeDerivedNdfrDirectlyObserved = true
+  ; belowGroundObserverCalibrationReused = true
   ; bgRecoveryEfficiencyDenominatorDirectlyMeasured = false
   ; recoveryEfficiencyEqualsIsotopeDerivedNdfr = false
   ; shortFallowRecoveryEqualsAvoidedMineralFertiliser = false
@@ -158,8 +162,15 @@ canonicalFallowRecoveryBoundary = record
   ; rainfallAndSeasonMayBeErased = false
   ; queenslandCroppingResidueRecoveryCreatesAcaciaSameObjectEvidence = false
   ; sourceCreatesDeploymentAuthority = false
+  ; externalRouteComparatorFractionsTransferredToQueensland = false
   }
+
+
+belowGroundObserverBoundaryReused :
+  BGObserver.BelowGroundObserverBoundary
+belowGroundObserverBoundaryReused =
+  BGObserver.canonicalBelowGroundObserverBoundary
 
 attributionRule : String
 attributionRule =
-  "Nguyen, Bell, Janke & Williams 2026 owns the UQ Gatton field design, AG/BG/AG&BG residue treatments, approximately two- and nine-month fallows, soil-mineral-N observations, isotope-derived residue-N uptake results, crop-N/biomass observations and the stated BG-input assumption used for recovery-efficiency calculations. DASHI owns only the typed route/time/recovery reconstruction and no-promotion boundary. The source does not own DASHI's convolution, continuous-to-discrete, tail or Cauchy mathematics; the assumption-dependent BG recovery denominator is not relabelled as direct measurement; and the experiment does not create Acacia/Senegalia same-object evidence, living symbiotic transfer, an explicit mineral-N response curve, fertilizer-replacement value or deployment authority."
+  "Nguyen, Bell, Janke & Williams 2026 owns the UQ Gatton field design, AG/BG/AG&BG residue treatments, approximately two- and nine-month fallows, soil-mineral-N observations, isotope-derived residue-N uptake results, crop-N/biomass observations and the stated BG-input assumption used for recovery-efficiency calculations. DASHI owns only the typed route/time/recovery reconstruction and no-promotion boundary. The source does not own DASHI's convolution, continuous-to-discrete, tail or Cauchy mathematics. McNeill & Unkovich 2024 is reused only as a separate below-ground observer-calibration donor and Liu et al. 2024 only as an external route comparator; neither converts the assumption-dependent GRDC BG recovery denominator into direct measurement nor transfers Canadian route fractions into Queensland; and the experiment does not create Acacia/Senegalia same-object evidence, living symbiotic transfer, an explicit mineral-N response curve, fertilizer-replacement value or deployment authority."
