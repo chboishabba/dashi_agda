@@ -21,6 +21,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _≤_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -90,11 +91,12 @@ selectedAssembledWeightNonnegative
   subst
     (λ value → 0ℚ ≤ value)
     (sym (assembledDensityIsConstrainedReferenceMass weld cutoff slow))
-    (Kernel.constrainedReferenceMassNonnegative
-      typed
-      (scaleAt weld cutoff)
-      (componentAt weld cutoff)
-      slow)
+    (ℚP.<⇒≤
+      (Kernel.constrainedReferenceMassPositive
+        typed
+        (scaleAt weld cutoff)
+        (componentAt weld cutoff)
+        slow))
 
 selectedAssembledWeightPositive :
   ∀ {trajectory split source family
