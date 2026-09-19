@@ -8,6 +8,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCompositeOperatorRGParallelTransportExact as Transport
 import DASHI.Physics.YangMills.YMClayLevel2CompositeOperatorCoefficientWeldExact as Native
 import DASHI.Physics.YangMills.YMClayLevel2LiteralOPECoefficientScaleAttachmentExact as Literal
+import DASHI.Physics.YangMills.YMClayLevel2R129CompositeOperatorAttachmentExact as R129Operator
+import DASHI.Physics.YangMills.YMClayLevel2R129LiteralOPECoefficientWeldExact as R129Literal
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as OPE
 
 ------------------------------------------------------------------------
@@ -23,7 +25,10 @@ import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact 
 --
 --   D2c  attach the literal position-dependent Clay OPE coefficient to the
 --        projected physical operator coordinate at a certified short-distance
---        RG depth.
+--        RG depth;
+--
+--   D2d  prove that this operator trajectory is the operator-mixing view of the
+--        SAME R129 completed composite family, at that SAME selected depth.
 --
 -- Everything after those attachments is compiler-owned:
 --
@@ -43,6 +48,15 @@ d2bSameTransportCoefficientTrajectoryLevel = conditional
 d2cLiteralPositionDepthAttachmentLevel : ProofLevel
 d2cLiteralPositionDepthAttachmentLevel =
   Literal.physicalPositionDepthAttachmentLevel
+
+
+d2dR129SameFamilyOperatorAttachmentLevel : ProofLevel
+d2dR129SameFamilyOperatorAttachmentLevel =
+  R129Operator.physicalR129CompositeOperatorAttachmentLevel
+
+r129LiteralCoefficientWeldCompilerLevel : ProofLevel
+r129LiteralCoefficientWeldCompilerLevel =
+  R129Literal.r129LiteralCoefficientWeldCompilerLevel
 
 compositeOperatorToRecurrenceCompilerLevel : ProofLevel
 compositeOperatorToRecurrenceCompilerLevel =
@@ -72,6 +86,20 @@ literalClayCoefficientCanBeTreatedAsConstantNatFamilyIsFalse = refl
 
 positionDepthSemanticsIsIndependentPhysicalAttachment : Bool
 positionDepthSemanticsIsIndependentPhysicalAttachment = true
+
+parallelCompositeOperatorTheoryAllowed : Bool
+parallelCompositeOperatorTheoryAllowed = false
+
+parallelCompositeOperatorTheoryAllowedIsFalse :
+  parallelCompositeOperatorTheoryAllowed ≡ false
+parallelCompositeOperatorTheoryAllowedIsFalse = refl
+
+r129SameFamilyOperatorAttachmentStillPhysical : Bool
+r129SameFamilyOperatorAttachmentStillPhysical = true
+
+r129SameFamilyOperatorAttachmentStillPhysicalIsTrue :
+  r129SameFamilyOperatorAttachmentStillPhysical ≡ true
+r129SameFamilyOperatorAttachmentStillPhysicalIsTrue = refl
 
 positionDepthSemanticsIsIndependentPhysicalAttachmentIsTrue :
   positionDepthSemanticsIsIndependentPhysicalAttachment ≡ true
