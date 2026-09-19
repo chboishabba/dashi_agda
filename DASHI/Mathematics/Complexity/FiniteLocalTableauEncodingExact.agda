@@ -24,6 +24,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
+import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
+
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
 listLength (_ ∷ xs) = suc (listLength xs)
@@ -225,7 +227,7 @@ record CookLevinFiniteRepresentation
     predicates : LocalTableauPredicates code
     timeBound : Nat → Nat
     spaceBound : Nat → Nat
-    timePolynomial : Set
-    spacePolynomial : Set
+    timePolynomial : ERQ.PolynomialBound timeBound
+    spacePolynomial : ERQ.PolynomialBound spaceBound
 
 open CookLevinFiniteRepresentation public
