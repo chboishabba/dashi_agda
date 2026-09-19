@@ -47,6 +47,7 @@ import DASHI.Analysis.BishopStrictRatioInterpolationExact as Interpolate
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
 import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as Reciprocal
+import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as SeriesExt
 import DASHI.Mathematics.NumberTheory.FiniteNatRationalEmbeddingExact as NatEmbed
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -305,3 +306,205 @@ polynomialGeometricSeriesConvergent
 
 bishopPolynomialGeometricSeriesConvergenceLevel : ProofLevel
 bishopPolynomialGeometricSeriesConvergenceLevel = conditional
+
+
+------------------------------------------------------------------------
+-- Absolute convergence: these terms are nonnegative, so the magnitude series
+-- is extensionally the same series.
+
+polynomialGeometricSeriesAbsolutelyConvergent :
+  ∀ (ratio : BishopReal.ℝ) degree →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
+  BishopReal._<_ ratio BishopReal.1ℝ →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (polynomialGeometricTerm ratio degree)
+polynomialGeometricSeriesAbsolutelyConvergent
+    ratio degree ratioNonnegative ratioBelowOne =
+  let
+    convergent =
+      polynomialGeometricSeriesConvergent
+        ratio degree ratioNonnegative ratioBelowOne
+    limit = proj₁ convergent
+    partials =
+      SeriesExt.seriesPartialSumsCongruent
+        (polynomialGeometricAbsIsSelf ratioNonnegative degree)
+  in
+  limit ,
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc count-1) →
+      BishopP.≃-symm (partials (suc count-1))})
+    convergent
+
+------------------------------------------------------------------------
+-- Literal Eisenstein shape: scale * (n+1)^degree * ratio^(n+1).
+
+shiftedScaledPolynomialGeometricTerm :
+  BishopReal.ℝ →
+  BishopReal.ℝ →
+  Nat →
+  Nat →
+  BishopReal.ℝ
+shiftedScaledPolynomialGeometricTerm scale ratio degree index =
+  BishopReal._*_
+    scale
+    (polynomialGeometricTerm ratio degree (suc index))
+
+shiftedScaledPolynomialGeometricTermNonnegative :
+  ∀ {ratio scale} →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
+  BishopReal.NonNegative scale →
+  ∀ degree index →
+  BishopReal.NonNegative
+    (shiftedScaledPolynomialGeometricTerm scale ratio degree index)
+shiftedScaledPolynomialGeometricTermNonnegative
+    ratioNonnegative scaleNonnegative degree index =
+  BishopP.nonNegx,y⇒nonNegx*y
+    scaleNonnegative
+    (polynomialGeometricTermNonnegative
+      ratioNonnegative degree (suc index))
+
+shiftedScaledPolynomialGeometricAbsIsSelf :
+  ∀ {ratio scale} →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
+  BishopReal.NonNegative scale →
+  ∀ degree index →
+  BishopReal._≃_
+    (BishopReal.∣_∣
+      (shiftedScaledPolynomialGeometricTerm
+        scale ratio degree index))
+    (shiftedScaledPolynomialGeometricTerm
+      scale ratio degree index)
+shiftedScaledPolynomialGeometricAbsIsSelf
+    ratioNonnegative scaleNonnegative degree index =
+  BishopP.nonNegx⇒∣x∣≃x
+    (shiftedScaledPolynomialGeometricTermNonnegative
+      ratioNonnegative scaleNonnegative degree index)
+
+shiftedScaledEventualSuccessorRatio :
+  ∀ {ratio larger scale : BishopReal.ℝ} degree →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
+  BishopReal.NonNegative scale →
+  BishopReal._<_ ratio larger →
+  Σ Nat (λ start →
+    ∀ index →
+    Nat._≤_ start index →
+    BishopReal._≤_
+      (BishopReal.∣_∣
+        (shiftedScaledPolynomialGeometricTerm
+          scale ratio degree (suc index)))
+      (BishopReal._*_
+        larger
+        (BishopReal.∣_∣
+          (shiftedScaledPolynomialGeometricTerm
+            scale ratio degree index))))
+shiftedScaledEventualSuccessorRatio
+    {ratio} {larger} {scale}
+    degree ratioNonnegative scaleNonnegative ratioBelowLarger
+  with eventualSuccessorRatio
+    {ratio = ratio} {larger = larger}
+    degree ratioNonnegative ratioBelowLarger
+... | start , baseBound =
+  start ,
+  λ index indexAtLeastStart →
+    let
+      raw =
+        BishopP.*-monoˡ-≤-nonNeg
+          (baseBound index indexAtLeastStart)
+          scaleNonnegative
+
+      leftMeaning =
+        shiftedScaledPolynomialGeometricAbsIsSelf
+          ratioNonnegative scaleNonnegative degree (suc index)
+
+      rightMeaning :
+        BishopReal._≃_
+          (BishopReal._*_
+            scale
+            (BishopReal._*_
+              larger
+              (BishopReal.∣_∣
+                (polynomialGeometricTerm
+                  ratio degree (suc index)))))
+          (BishopReal._*_
+            larger
+            (BishopReal.∣_∣
+              (shiftedScaledPolynomialGeometricTerm
+                scale ratio degree index)))
+      rightMeaning =
+        let open BishopP.ℝ-Solver
+        in
+        BishopP.≃-trans
+          (BishopP.*-congʳ
+            (BishopP.*-congˡ
+              (polynomialGeometricAbsIsSelf
+                ratioNonnegative degree (suc index))))
+          (BishopP.≃-trans
+            (solve 3
+              (λ scale′ larger′ term′ →
+                scale′ ⊗ (larger′ ⊗ term′)
+                ⊜ larger′ ⊗ (scale′ ⊗ term′))
+              BishopP.≃-refl
+              scale larger
+              (polynomialGeometricTerm
+                ratio degree (suc index)))
+            (BishopP.*-congˡ
+              (BishopP.≃-symm
+                (shiftedScaledPolynomialGeometricAbsIsSelf
+                  ratioNonnegative scaleNonnegative degree index))))
+    in
+    BishopP.≤-respʳ-≃ rightMeaning
+      (BishopP.≤-respˡ-≃ leftMeaning raw)
+
+shiftedScaledPolynomialGeometricSeriesConvergent :
+  ∀ (ratio scale : BishopReal.ℝ) degree →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
+  BishopReal._<_ ratio BishopReal.1ℝ →
+  BishopReal.NonNegative scale →
+  BishopSequence._isConvergent
+    (BishopSequence.SeriesOf
+      (shiftedScaledPolynomialGeometricTerm
+        scale ratio degree))
+shiftedScaledPolynomialGeometricSeriesConvergent
+    ratio scale degree ratioNonnegative ratioBelowOne scaleNonnegative
+  with Interpolate.interpolateStrictUnitRatio
+    ratioNonnegative ratioBelowOne
+... | larger ,
+      largerPositive ,
+      ratioBelowLarger ,
+      largerBelowOne
+  with shiftedScaledEventualSuccessorRatio
+    {ratio = ratio} {larger = larger} {scale = scale}
+    degree ratioNonnegative scaleNonnegative ratioBelowLarger
+... | start , successorBound =
+  BishopSequence.proposition-3-6-1
+    (largerPositive , largerBelowOne)
+    (start ,
+      λ {(suc index) (s≤s indexAtLeastStart) →
+        successorBound index indexAtLeastStart})
+
+shiftedScaledPolynomialGeometricSeriesAbsolutelyConvergent :
+  ∀ (ratio scale : BishopReal.ℝ) degree →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
+  BishopReal._<_ ratio BishopReal.1ℝ →
+  BishopReal.NonNegative scale →
+  BishopSequence.SeriesOf_ConvergesAbsolutely
+    (shiftedScaledPolynomialGeometricTerm
+      scale ratio degree)
+shiftedScaledPolynomialGeometricSeriesAbsolutelyConvergent
+    ratio scale degree ratioNonnegative ratioBelowOne scaleNonnegative =
+  let
+    convergent =
+      shiftedScaledPolynomialGeometricSeriesConvergent
+        ratio scale degree
+        ratioNonnegative ratioBelowOne scaleNonnegative
+    limit = proj₁ convergent
+    partials =
+      SeriesExt.seriesPartialSumsCongruent
+        (shiftedScaledPolynomialGeometricAbsIsSelf
+          ratioNonnegative scaleNonnegative degree)
+  in
+  limit ,
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc count-1) →
+      BishopP.≃-symm (partials (suc count-1))})
+    convergent
