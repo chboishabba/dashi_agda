@@ -178,6 +178,33 @@ record SLRSourceReviewPacket (source : Attr.AttributedSource) : Set where
 
 open SLRSourceReviewPacket public
 
+
+------------------------------------------------------------------------
+-- Optional final same-source product: SLR sidecar accompanies an already
+-- admitted corpus source. The constructor requires CorpusAuditedSource rather
+-- than deriving it.
+------------------------------------------------------------------------
+
+record SLRAssistedCorpusAuditedSource (source : Attr.AttributedSource) : Set where
+  constructor slr-assisted-corpus-audited-source
+  field
+    corpusSource : SearchAudit.CorpusAuditedSource source
+    slrReviewPacket : SLRSourceReviewPacket source
+    sidecarReference : String
+    slrSidecarCreatesAdmission : Bool
+    slrSidecarCreatesAdmissionIsFalse : slrSidecarCreatesAdmission ≡ false
+
+open SLRAssistedCorpusAuditedSource public
+
+mkSLRAssistedCorpusAuditedSource :
+  (source : Attr.AttributedSource) →
+  SearchAudit.CorpusAuditedSource source →
+  SLRSourceReviewPacket source →
+  String →
+  SLRAssistedCorpusAuditedSource source
+mkSLRAssistedCorpusAuditedSource source corpus packet ref =
+  slr-assisted-corpus-audited-source corpus packet ref false refl
+
 ------------------------------------------------------------------------
 -- Firewalls.
 ------------------------------------------------------------------------
@@ -190,6 +217,7 @@ data TitleMatchCreatesSameObjectPaperIdentity : Set where
 data SLRRuntimeCreatesCorpusInclusion : Set where
 data PNFResidualCreatesEmpiricalFact : Set where
 data ReviewPacketRaisesClaimCeiling : Set where
+data SLRReviewPacketCreatesCorpusAuditedSource : Set where
 
 metadataOnlyCandidateDoesNotEnterSLRSecondStage :
   MetadataOnlyCandidateEntersSLRSecondStage → ⊥
@@ -222,6 +250,10 @@ pnfResidualDoesNotCreateEmpiricalFact ()
 reviewPacketDoesNotRaiseClaimCeiling :
   ReviewPacketRaisesClaimCeiling → ⊥
 reviewPacketDoesNotRaiseClaimCeiling ()
+
+slrReviewPacketDoesNotCreateCorpusAuditedSource :
+  SLRReviewPacketCreatesCorpusAuditedSource → ⊥
+slrReviewPacketDoesNotCreateCorpusAuditedSource ()
 
 ------------------------------------------------------------------------
 -- Boundary / roadmap reading.
@@ -260,4 +292,4 @@ canonicalDigitalESDSLRBridgeBoundary =
 
 digitalESDSLRBridgeReading : String
 digitalESDSLRBridgeReading =
-  "Digital-ESD uses SensibLaw/SLR only after search lineage and screening have identified a source for full-text review. Full-text artifacts are same-object welded to the AttributedSource through explicit identifiers, artifact hashes and a reviewed identity reference; title equality is insufficient and publication QIDs are not required or invented. SLR/SensibLaw source-unit, parser, PNF, claim, tension and residual products remain candidate/review surfaces. They may propose source-indexed situated audit observations, but neither extraction nor reviewer acceptance constructs SourceAuditAdmission, raises the source claim ceiling, creates corpus inclusion or turns a claim candidate into paper truth."
+  "Digital-ESD uses SensibLaw/SLR only after search lineage and screening have identified a source for full-text review. Full-text artifacts are same-object welded to the AttributedSource through explicit identifiers, artifact hashes and a reviewed identity reference; title equality is insufficient and publication QIDs are not required or invented. SLR/SensibLaw source-unit, parser, PNF, claim, tension and residual products remain candidate/review surfaces. They may propose source-indexed situated audit observations, but neither extraction nor reviewer acceptance constructs SourceAuditAdmission, raises the source claim ceiling, creates corpus inclusion or turns a claim candidate into paper truth. A final SLRAssistedCorpusAuditedSource exists only by pairing an already-constructed CorpusAuditedSource with the same-source SLR review packet; the sidecar cannot create admission."
