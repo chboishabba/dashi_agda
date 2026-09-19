@@ -12,6 +12,8 @@ import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact 
 import DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionRecoveryRound136Exact as R136
 import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact as R144
 import DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact as OPERemainder
+import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as D2
+import DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact as D3
 
 ------------------------------------------------------------------------
 -- LEVEL-2 REUSE: DO NOT RE-PROVE AF, WARD ALGEBRA, OR STRESS PROVENANCE
@@ -138,7 +140,7 @@ allDepthCoefficientCompilerLevel =
 
 sameRGOPECoefficientCoordinateAttachmentLevel : ProofLevel
 sameRGOPECoefficientCoordinateAttachmentLevel =
-  OPECoeff.physicalSameFamilyOPECoefficientOneStepAFIdentificationLevel
+  D2.physicalCoordinateAttachmentLevel
 
 dyadicOPERemainderCompilerLevel : ProofLevel
 dyadicOPERemainderCompilerLevel =
@@ -148,7 +150,8 @@ sameFamilyCompositeTailAttachmentLevel : ProofLevel
 sameFamilyCompositeTailAttachmentLevel = conditional
 
 sameFamilyContinuumWardTransportLevel : ProofLevel
-sameFamilyContinuumWardTransportLevel = conditional
+sameFamilyContinuumWardTransportLevel =
+  D3.physicalContinuumWardTransportLevel
 
 level2PhysicalAttachmentResidueLevel : ProofLevel
 level2PhysicalAttachmentResidueLevel = conditional
