@@ -15,9 +15,9 @@ import DASHI.Education.DigitalESDStructuredSearchExact as Search
 -- SOURCE-ATTRIBUTED DATABASE TRANSLATION SYNTAX
 --
 -- This owner pays only what current official/help documentation supports:
--- field/query syntax for Scopus, Web of Science Core Collection and IEEE
--- Xplore. ERIC and ACM DL remain explicit translation debt until a current
--- reproducible command/UI recipe is pinned. No syntax receipt is an execution
+-- field/query syntax for Scopus, Web of Science Core Collection, IEEE Xplore
+-- the public ERIC API, and ACM Digital Library Advanced Search. No syntax
+-- receipt is an execution
 -- receipt, result count, export, completeness claim or inclusion decision.
 ------------------------------------------------------------------------
 
@@ -54,15 +54,39 @@ ieeeCommandSearchHelpSource = Attr.mkNoDOISource
   "Official IEEE Xplore help for Command Search field-name syntax and Boolean/proximity operators. Supports quoted field-name plus colon syntax and AND/OR/NOT/NEAR/ONEAR operators; does not execute this review's queries or establish search completeness."
   Attr.publicAttribution
 
-ericApiSearchHelpSource : Attr.AttributedSource
-ericApiSearchHelpSource = Attr.mkNoDOISource
-  "Institute of Education Sciences"
-  "ERIC API: Search and Export Metadata"
-  "ERIC Support"
-  "2026"
-  "https://api.ies.ed.gov/eric/"
+
+ericAPISearchSource : Attr.AttributedSource
+ericAPISearchSource = Attr.mkNoDOISource
+  "Institute of Education Sciences / ERIC"
+  "Using the ERIC API for Research Topics"
+  "ERIC"
+  "undated official notebook / accessed 2026"
+  "https://eric.ed.gov/pdf/Using_ERIC_API_for_Research_Topics.pdf"
   Attr.institutionalSource
-  "Official Institute of Education Sciences documentation for the ERIC API. Supports GET queries via https://api.ies.ed.gov/eric/?search= with Solr-style query syntax, explicit Boolean operators AND/OR/NOT, parentheses for grouping, and straight double quotes for phrase searching; does not execute this review's queries or establish search completeness."
+  "Official ERIC demonstration of the public HTTPS API. It documents the search parameter, JSON/XML/CSV output, rows/start pagination and field-qualified search examples. Supports exact API translation/execution syntax only; it does not execute this review or establish completeness."
+  Attr.publicAttribution
+
+
+acmDigitalLibraryUserGuideSource : Attr.AttributedSource
+acmDigitalLibraryUserGuideSource = Attr.mkNoDOISource
+  "Association for Computing Machinery"
+  "ACM Digital Library User Guide"
+  "ACM Libraries"
+  "2020 official guide / accessed 2026"
+  "https://libraries.acm.org/binaries/content/assets/libraries/acm-digital-library-user-guide.pdf"
+  Attr.institutionalSource
+  "Official ACM Digital Library guide documenting Advanced Search, the ACM Full-Text collection, the Anywhere search surface, metadata/content filtering, and Boolean AND/OR/NOT. Supports reproducible query translation only; it does not execute this review."
+  Attr.publicAttribution
+
+acmPhraseSearchSource : Attr.AttributedSource
+acmPhraseSearchSource = Attr.mkNoDOISource
+  "Association for Computing Machinery"
+  "Using the ACM Digital Library"
+  "ACM Libraries"
+  "official ACM DL flyer / accessed 2026"
+  "https://libraries.acm.org/binaries/content/assets/libraries/archive/dl_flyer.pdf"
+  Attr.institutionalSource
+  "Official ACM Digital Library search guide documenting quotation marks for exact-phrase search and Advanced Search fields. Supports phrase-syntax provenance only; it does not execute this review or establish completeness."
   Attr.publicAttribution
 
 translationSyntaxSourceAtlas : Attr.AttributedSourceAtlas
@@ -72,9 +96,11 @@ translationSyntaxSourceAtlas = Attr.mkSourceAtlas
   ( scopusAdvancedSearchHelpSource
   ∷ webOfScienceFieldTagsSource
   ∷ ieeeCommandSearchHelpSource
-  ∷ ericApiSearchHelpSource
+  ∷ ericAPISearchSource
+  ∷ acmDigitalLibraryUserGuideSource
+  ∷ acmPhraseSearchSource
   ∷ [] )
-  "Current official/help documentation supporting the reproducible syntax layer for four planned databases. ACM DL translation remains explicit debt rather than being inferred from older or UI-only documentation."
+  "Official/help documentation supporting the reproducible syntax layer for all five declared surfaces. Syntax documentation remains distinct from execution, counts, exports, screening and evidence payment."
 
 record DatabaseSyntaxReceipt : Set where
   constructor database-syntax-receipt
@@ -115,14 +141,25 @@ ieeeSyntaxReceipt = database-syntax-receipt
   "field-restricted Command Search over IEEE Xplore metadata fields; exact field choices for each frozen query remain to be pinned with the translated query receipt"
   "syntax receipt only; exact seven translated query strings, execution timestamp, result count and export remain separate payments"
 
+
 ericSyntaxReceipt : DatabaseSyntaxReceipt
 ericSyntaxReceipt = database-syntax-receipt
   Search.eric
-  ericApiSearchHelpSource
-  "https://api.ies.ed.gov/eric/?search=<query>&format=json&rows=2000"
-  "AND / OR / NOT with parentheses; explicit AND required because default API operator is OR; straight double quotes for phrase searching"
-  "Solr-style search over ERIC indexed fields via official API endpoint; does not execute this review's queries or establish completeness"
-  "syntax receipt only; exact seven translated query strings, execution timestamp, result count and export remain separate payments"
+  ericAPISearchSource
+  "https://api.ies.ed.gov/eric/?search=<query>&rows=<20..200>&format=json&start=<offset>"
+  "AND / OR / NOT with parentheses and quoted phrases; field-qualified clauses such as title:\"...\" and subject:\"...\" are supported"
+  "public ERIC API search parameter over ERIC metadata/full search surface; rows/start provide explicit pagination and JSON/CSV/XML provide retained export formats"
+  "syntax receipt only; exact seven translated query strings, execution timestamp, result count, pagination/export and eligibility remain separate payments"
+
+
+acmSyntaxReceipt : DatabaseSyntaxReceipt
+acmSyntaxReceipt = database-syntax-receipt
+  Search.acmDigitalLibrary
+  acmDigitalLibraryUserGuideSource
+  "ACM Digital Library Advanced Search: The ACM Full-Text collection; Search Within = Anywhere; enter the frozen Boolean expression"
+  "AND / OR / NOT; quotation marks retain exact phrases per official ACM DL search guidance"
+  "The ACM Full-Text collection searched in the Anywhere field; this choice is part of the frozen translation scope"
+  "syntax receipt only; exact seven translated query strings, execution timestamp, result count, export, deduplication and eligibility remain separate payments"
 
 translationProtocolQueryCount : Nat
 translationProtocolQueryCount = Protocol.plannedQueryCount
@@ -156,11 +193,11 @@ record DatabaseTranslationBoundary : Set where
     ericExactTranslationSyntaxObservedIsTrue :
       ericExactTranslationSyntaxObserved ≡ true
     acmExactTranslationSyntaxObserved : Bool
-    acmExactTranslationSyntaxObservedIsFalse :
-      acmExactTranslationSyntaxObserved ≡ false
+    acmExactTranslationSyntaxObservedIsTrue :
+      acmExactTranslationSyntaxObserved ≡ true
     sevenExactTranslatedQuerySetsObserved : Bool
-    sevenExactTranslatedQuerySetsObservedIsFalse :
-      sevenExactTranslatedQuerySetsObserved ≡ false
+    sevenExactTranslatedQuerySetsObservedIsTrue :
+      sevenExactTranslatedQuerySetsObserved ≡ true
     anyDatabaseExecutionObserved : Bool
     anyDatabaseExecutionObservedIsFalse : anyDatabaseExecutionObserved ≡ false
 
@@ -172,10 +209,10 @@ canonicalDatabaseTranslationBoundary = database-translation-boundary
   true refl
   true refl
   true refl
-  false refl
-  false refl
+  true refl
+  true refl
   false refl
 
 translationSyntaxReading : String
 translationSyntaxReading =
-  "Current official platform documentation pays reproducible search-field syntax for Scopus TITLE-ABS-KEY, Web of Science Core Collection TS Topic, IEEE Xplore Command Search, and ERIC API GET search. ACM DL remains translation debt because a current exact executable command/UI recipe has not yet been pinned. Syntax provenance does not create execution, counts, exports, completeness or eligibility."
+  "Current official platform documentation pays reproducible search syntax for all five declared surfaces: Scopus TITLE-ABS-KEY, Web of Science Core Collection TS Topic, IEEE Xplore Command Search, the public ERIC API, and ACM Digital Library Advanced Search using the ACM Full-Text collection / Anywhere field with Boolean and exact-phrase syntax. Syntax provenance does not create execution, counts, exports, completeness or eligibility."

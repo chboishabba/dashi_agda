@@ -181,3 +181,110 @@ execute declared searches
 ```
 
 Pre-corpus snowball acquisition is now subordinate to that path.
+
+
+## 7. Upstream eligibility-frame residual — outside Round 21
+
+Round 20 remains the frozen endpoint of the original eleven-question pre-corpus acquisition matrix. The next residual is **upstream** of `whoWasEligibleButMissing`:
+
+```text
+target universe
+!= administrative / eligibility / recruitment frame
+!= declared eligible carrier
+!= invitation / response / consent carrier
+!= realised analytic carrier
+```
+
+This is therefore not called Round 21. It is a separate consumer exposed by the #981 eligible-missing work and by Digital-ESD's own frozen matrix.
+
+Canonical theorem owner:
+
+`DASHI/Education/DigitalESDEligibilityFrameExclusionExact.agda`
+
+with regression:
+
+`DigitalESDEligibilityFrameExclusionRegression.agda`.
+
+DASHI finite collision:
+
+```text
+same declared eligible carrier
+!= same upstream eligibility-frame state
+```
+
+or, formally:
+
+```text
+EligibilityFrameState
+not FactorsThrough
+DeclaredEligibleCarrier
+```
+
+Existing repo donors are reused rather than duplicated:
+
+- `DASHI.Core.ParticipationSelectionQuotient` for eligibility -> invitation -> participation separation;
+- `DASHI.Reasoning.EvidenceDesignAdmissibilityExact` for `samplingFrame` as a study-design coordinate.
+
+### Python/Pareto acquisition front
+
+The upstream acquisition matrix ranked three source roles above generic nonresponse literature:
+
+1. **NCVER 2024, National Student Outcomes Survey 2024 — technical notes** — institutional methodology source with explicit population -> sampling frame -> invitation construction. The sampling frame is restricted to de-duplicated records available for surveying and with obtainable contact details before sampling.
+2. **Social Research Centre / QILT, 2022 Student Experience Survey Methodological Report** — independent Australian higher-education methodology source: TCSI records are screened for eligibility, institutions can supplement enrolments missing from the extract, templates are combined into a population frame, and exclusion rules are applied before final institution population files.
+3. **John Voorheis, 2021, Evaluating Administrative Records as a Potential Sample Frame for the National Survey of College Graduates** — U.S. Census Bureau CARRA Working Paper 18-14; same-object frame comparison with subgroup-specific administrative-record undercoverage.
+4. **Susan M. Dynarski; Steven W. Hemelt; Joshua M. Hyman, 2015, DOI `10.3102/0162373715576078`** — independent National Student Clearinghouse coverage analysis by institution type and demographic subgroup, including privacy-suppressed records and matching error as noncoverage mechanisms.
+5. **Christopher Fisher et al., 2019, DOI `10.3389/fpubh.2019.00217`** — Australian secondary-student survey protocol with explicit eligibility criteria, minimum-quota sampling and a two-phase online/social-media recruitment surface.
+6. **Sue Creagh, 2016, DOI `10.1080/02680939.2015.1066870`** — independent Australian category-construction analysis of LBOTE in national testing; aggregate category membership does not preserve all language/pedagogy distinctions.
+7. **Jennifer Clutterbuck; Ian Hardy; Sue Creagh, 2023 issue / 2021 online, DOI `10.1080/02680939.2021.1972166`** — Queensland OneSchool data-infrastructure study paying category/data preclusion and omission, including omitted Indigenous-language enrolment information.
+
+Canonical candidate owner:
+
+`DASHI/Education/DigitalESDEligibilityFrameAcquisitionExact.agda`
+
+with regression:
+
+`DigitalESDEligibilityFrameAcquisitionRegression.agda`.
+
+Attribution firewalls remain:
+
+```text
+source proposition != DASHI finite collision
+institutional frame != population truth
+administrative presence != complete representation
+category omission != individual outcome
+candidate acquisition != final corpus inclusion
+QID unresolved != guessed QID
+Dewey navigation != evidence or authority
+```
+
+The empirical sources do not populate the synthetic worlds or prove the `FactorsThrough` theorem.
+
+### Updated acquisition stop rule
+
+Broad pre-corpus acquisition remains frozen. Reopen only on:
+
+- an admitted-corpus P0 residual;
+- a new constructive consumer collision;
+- a stronger same-object frame/recruitment observation;
+- or a literal need to distinguish target-universe construction from declared eligibility.
+
+Generic additional nonresponse or digital-divide papers remain dominated.
+
+
+### Upstream calibration stop condition
+
+After QILT + Dynarski/Hemelt/Hyman + Creagh + Fisher were added, the Python matrix reports **plural calibration for every declared upstream residual**:
+
+```text
+target -> frame contraction          plural
+eligibility-definition rule         plural
+administrative-register coverage    plural
+recruitment/contact reachability     plural
+subgroup undercoverage               plural
+category/data omission               plural
+same-object frame comparison         plural
+```
+
+Every declared upstream residual now has plural calibration. This is still an acquisition heuristic, not source quality, authority or final-corpus support.
+
+Therefore this upstream pre-corpus tranche is also frozen. Further source acquisition must be triggered by a real database-admission/corpus collision, stronger same-object evidence, or a new consumer not separated by the current frame vocabulary.
