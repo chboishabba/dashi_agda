@@ -27,7 +27,8 @@ module DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationExact w
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)\nimport Data.Rational.Properties as ℚP
+open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -62,8 +63,6 @@ finiteDyadicTailAgreement start (suc count) =
   cong₂ _+_
     (rootedShellTailAgreement start)
     (finiteDyadicTailAgreement (suc start) count)
-  where
-  open import Relation.Binary.PropositionalEquality using (cong₂)
 
 configuredInfiniteTailAgreement : ∀ start →
   Configured.configuredInfiniteTailMajorant start
@@ -109,8 +108,6 @@ pointwiseDefectBelowFiniteDyadicTail defect pointwise start (suc count) =
     (pointwise start)
     (pointwiseDefectBelowFiniteDyadicTail
       defect pointwise (suc start) count)
-  where
-  import Data.Rational.Properties
 
 pointwiseRootedShellBoundToUniformFiniteTail :
   (defect : Nat → ℚ) →
