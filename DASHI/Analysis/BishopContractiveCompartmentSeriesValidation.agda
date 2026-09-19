@@ -45,7 +45,7 @@ firstOrderCompartmentRatioPositiveRegression :
   (inputs : FirstOrder.PositiveFirstOrderDiscretisation) →
   (scale : BishopReal.ℝ) →
   (degree : Nat) →
-  BishopReal.NonNegative scale →
+  (scaleNN : BishopReal.NonNegative scale) →
   BishopReal._<_
     BishopReal.0ℝ
     (P.ratio
