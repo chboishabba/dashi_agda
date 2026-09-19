@@ -92,6 +92,30 @@ ncverCandidate = mkEligibilityFrameCandidate
   "Direct upstream-frame donor: the named population, surveyable/contactable sampling frame and invited sample are distinct same-program objects. It therefore pays the question 'who was never carried from the target population into the surveyable frame?' without treating later response as the only missingness mechanism."
   "Institutional technical notes describe the 2024 Australian VET survey design and cannot establish an individual educational effect, a universal contactability mechanism, or that every excluded record corresponds to disadvantage."
 
+
+
+------------------------------------------------------------------------
+-- QILT / Social Research Centre 2022: higher-education population frame.
+------------------------------------------------------------------------
+
+qilt2022SESMethodologicalSource : Attr.AttributedSource
+qilt2022SESMethodologicalSource = Attr.mkNoDOISource
+  "Social Research Centre"
+  "2022 Student Experience Survey Methodological Report"
+  "Quality Indicators for Learning and Teaching (QILT)"
+  "2022"
+  "https://www.qilt.edu.au/docs/default-source/default-document-library/ses-2022-methodological-report---accessible011f286115974581a347d02cafe4bb48.pdf"
+  Attr.institutionalSource
+  "Australian higher-education survey methodology source. TCSI extracts are reviewed to identify records eligible for the Student Experience Survey; institutions can add enrolments missing from the extract; submitted templates are combined into a population frame and exclusion rules are applied before final institution population files are produced."
+  Attr.publicAttribution
+
+qilt2022Candidate : EligibilityFrameCandidate
+qilt2022Candidate = mkEligibilityFrameCandidate
+  qilt2022SESMethodologicalSource
+  populationToSurveyableFrameContraction
+  "Independent Australian higher-education frame-construction donor: eligibility identification, missing-enrolment supplementation and exclusion rules are explicit stages between institutional enrolment data and the final survey population frame. A clean final frame therefore cannot by itself recover records omitted before or during construction."
+  "Institutional methodology source, not participant-outcome evidence. The report documents the survey's construction process and does not establish that an omitted record represents harm, disadvantage or an incorrect exclusion."
+
 ------------------------------------------------------------------------
 -- Voorheis 2021: alternate administrative frame coverage for college graduates.
 ------------------------------------------------------------------------
@@ -139,7 +163,7 @@ clutterbuckCandidate = mkEligibilityFrameCandidate
 
 canonicalEligibilityFrameAcquisitionFrontier : List EligibilityFrameCandidate
 canonicalEligibilityFrameAcquisitionFrontier =
-  ncverCandidate ∷ voorheisCandidate ∷ clutterbuckCandidate ∷ []
+  ncverCandidate ∷ qilt2022Candidate ∷ voorheisCandidate ∷ clutterbuckCandidate ∷ []
 
 ------------------------------------------------------------------------
 -- Reuse the theorem-bearing frame owner without transferring source authority.
