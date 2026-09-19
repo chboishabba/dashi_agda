@@ -5,6 +5,8 @@ open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationExact as Cross
+import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact
+import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact
 
 ------------------------------------------------------------------------
 -- Positive reused structure.
@@ -46,6 +48,18 @@ validationExplicitSeamCompatibility :
   ≡ true
 validationExplicitSeamCompatibility = refl
 
+validationCostAwareFactorisation :
+  Cross.costAwareFactorisationCompilerPresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationCostAwareFactorisation = refl
+
+validationDecisionSearchEngine :
+  Cross.decisionToSearchSelfReductionEnginePresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationDecisionSearchEngine = refl
+
 ------------------------------------------------------------------------
 -- Fail-closed frontier.
 ------------------------------------------------------------------------
@@ -61,6 +75,12 @@ validationCookLevinOpen :
     Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
   ≡ false
 validationCookLevinOpen = refl
+
+validationBooleanFormulaSATInstantiationOpen :
+  Cross.booleanFormulaSATSelfReductionInstantiationPaid
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ false
+validationBooleanFormulaSATInstantiationOpen = refl
 
 validationUniformRecoveryOpen :
   Cross.uniformClassicalRecoveryForNPCompleteWitnessesPaid
