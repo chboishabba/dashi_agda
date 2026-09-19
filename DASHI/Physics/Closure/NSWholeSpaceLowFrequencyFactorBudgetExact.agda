@@ -76,7 +76,7 @@ gramUpperNonnegative :
   BishopReal.NonNegative
     (BishopReal._*_ a gramMajorant)
 gramUpperNonnegative budget =
-  BishopP.posx,y⇒nonNegx*y
+  BishopP.nonNegx,y⇒nonNegx*y
     (heatRateNonnegative budget)
     (gramMajorantNonnegative budget)
 
@@ -91,11 +91,11 @@ secondMomentUpperNonnegative :
 secondMomentUpperNonnegative {a} budget =
   let
     a2NN =
-      BishopP.posx,y⇒nonNegx*y
+      BishopP.nonNegx,y⇒nonNegx*y
         (heatRateNonnegative budget)
         (heatRateNonnegative budget)
   in
-  BishopP.posx,y⇒nonNegx*y
+  BishopP.nonNegx,y⇒nonNegx*y
     a2NN
     (secondMomentMajorantNonnegative budget)
 
@@ -175,10 +175,10 @@ factorBudgetToLowFrequencyCompensation :
 factorBudgetToLowFrequencyCompensation aPositive budget =
   Low.bishop-low-frequency-state-compensation
     aPositive
-    (BishopP.posx,y⇒nonNegx*y
+    (BishopP.nonNegx,y⇒nonNegx*y
       (gramFactorNonnegative budget)
       (secondMomentFactorNonnegative budget))
-    (BishopP.posx,y⇒nonNegx*y
+    (BishopP.nonNegx,y⇒nonNegx*y
       (gramMajorantNonnegative budget)
       (secondMomentMajorantNonnegative budget))
     (factorProductCarriesHeatCube budget)
