@@ -276,3 +276,90 @@ Only after title/abstract screening should full text enter the SLR/SensibLaw
 second-stage lane. The evidence-bearing coordinates lower onto SLR Sprint-2's
 canonical Rust substrate; the historical Python source-unit batch is merely a
 temporary execution adapter.
+
+
+## Adaptive P0-A -> P0-G screening execution
+
+The screening ledger is the authority surface. The adaptive controller may rank,
+cluster and suggest, but it cannot write authoritative include/exclude decisions.
+
+First materialise the exact denominator:
+
+```bash
+python3 scripts/prepare_digital_esd_screening_ledger.py \
+  --input artifacts/digital-esd/deduplication/eric-deduplicated-records.json \
+  --out-dir artifacts/digital-esd/screening
+```
+
+Then compile the non-authoritative adaptive work products:
+
+```bash
+python3 scripts/run_digital_esd_adaptive_screening.py \
+  --ledger artifacts/digital-esd/screening/screening-decisions.jsonl \
+  --out-dir artifacts/digital-esd/screening/adaptive
+```
+
+This emits:
+
+```text
+P0-A denominator-integrity.json
+P0-B candidate-assessments.jsonl
+P0-C study-family-hypotheses.jsonl
+P0-D calibration-queue.jsonl
+P0-E calibration-diagnostics.json
+P0-F pareto-review-queue.jsonl
+     adaptive-screening-manifest.json
+```
+
+Candidate assessments and Pareto selection are work-queue evidence only:
+
+```text
+candidate assessment != screening decision
+Pareto selection       != screening decision
+family hypothesis      != same empirical study
+unselected             != excluded
+missing abstract       != excluded
+```
+
+Apply reviewed decisions only through the existing explicit decision overlay and
+regenerate the screening ledger. Re-running the adaptive controller over the new
+ledger then updates calibration diagnostics and the unresolved Pareto queue
+without mutating prior screening authority.
+
+For P0-G, retain full-text acquisition attempts in a JSONL inventory. Successful
+rows name the retained local artifact and an explicit same-object identity review
+reference; unsuccessful attempts set `full_text_unavailable=true` and remain
+in the denominator.
+
+Compile the verified full-text index:
+
+```bash
+python3 scripts/prepare_digital_esd_fulltext_index.py \
+  --ledger artifacts/digital-esd/screening/screening-decisions.jsonl \
+  --retrieval-inventory artifacts/digital-esd/fulltext/retrieval-inventory.jsonl \
+  --output artifacts/digital-esd/fulltext/verified-fulltext-index.jsonl
+```
+
+The compiler computes SHA-256 from the retained artifact itself and rejects
+full-text handoff for sources without an explicit include/probable screening
+decision or without the same-object identity review coordinate.
+
+Then emit P0-G SLR handoffs:
+
+```bash
+python3 scripts/run_digital_esd_adaptive_screening.py \
+  --ledger artifacts/digital-esd/screening/screening-decisions.jsonl \
+  --fulltext-index artifacts/digital-esd/fulltext/verified-fulltext-index.jsonl \
+  --out-dir artifacts/digital-esd/screening/adaptive
+```
+
+This additionally emits:
+
+```text
+p0g-fulltext-handoffs.jsonl
+```
+
+Each handoff requires downstream canonical SLR evidence, explicit SLR review,
+Digital-ESD audit projection, independent SourceAuditAdmission,
+CorpusAuditedSource, hyperfabric audit and framework challenge. Neither
+screening nor SLR review performs those admissions automatically.
