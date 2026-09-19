@@ -175,11 +175,6 @@ module PhysicalCenteredR290
           (Vector.weightedVectorWorkMeaning
             mixed centeredMultiplier value items)
 
-      rowSplit :
-        Row.rateDiagonalGram rate value items
-          + Row.pairRateOffDiagonalGram rate value items
-        ≡ common * Work.coherentWork mixed mixed
-          + halfNu * Work.coherentWork mixed centeredVector
       replaceSelf :
         common * Cov.workSum work items
           + halfNu * Cov.weightedWorkSum centeredMultiplier work items
@@ -204,6 +199,11 @@ module PhysicalCenteredR290
               + halfNu * centeredWork)
           centered
 
+      rowSplit :
+        Row.rateDiagonalGram rate value items
+          + Row.pairRateOffDiagonalGram rate value items
+        ≡ common * Work.coherentWork mixed mixed
+          + halfNu * Work.coherentWork mixed centeredVector
       rowSplit =
         trans row
           (trans weightedWork
