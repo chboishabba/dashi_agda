@@ -502,3 +502,27 @@ joint excess < a^2 cluster margin             OPEN
 ```
 
 Do not promote the centered O(r^2) result to a full Gamma budget: the potentially large radius-zero Gamma/Off baseline remains and must be handled jointly.
+
+
+Centered absolute-budget reduction now source-written:
+
+```text
+B_comp(r)
+  := |Off(r)| + |GammaCone(r)|
+
+B_comp(0)
+  := |Off(0)| + 2 |GammaResp(t,0)|
+
+B_comp(r)
+  <= B_comp(0) + r^2 * E_center(g,Lambda,t).
+```
+
+So the old live label “repair Gamma until it is absolutely small” is too coarse.  The radius-dependent Gamma and Off corrections are now theorem-source controlled on the final universal consumer.  The precise remaining baseline leaf is:
+
+```text
+B0-ABS:
+  compare/control |Off(0)| + 2|GammaResp(t,0)|
+  against baselineCluster(g,t,r)
+```
+
+together with the signed finite-near adaptive control and the final strict inequality against the off-line (a^2) cluster margin.  No claim is made that B0-ABS is already true; it is now simply the exact scalar obstruction exposed by the centered reduction.
