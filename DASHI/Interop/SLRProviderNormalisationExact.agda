@@ -43,6 +43,9 @@ record ProviderNormalisationParity : Set where
     wikipediaUsesCanonicalCarrier : Bool
     oalcUsesCanonicalCarrier : Bool
     cachedLegalUsesCanonicalCarrier : Bool
+    locallyIngestedDocumentUsesCanonicalCarrier : Bool
+    pdfDocumentUsesCanonicalFamily : Bool
+    legalDocumentMayUseLegalAuthorityFamily : Bool
 
     wikidataUsesStructuredCoordinate : Bool
     wikipediaMayUseWholeRevision : Bool
@@ -77,6 +80,7 @@ canonicalProviderNormalisationParity =
   providerNormalisationParity
     true true true true true
     true true true true
+    true true true
     true true true true
     true true true
     true true false false
@@ -113,6 +117,8 @@ data ProviderFamilyPromotesClaimTruth : Set where
 data ExactPgHitRequiresNetwork : Set where
 data PersistedSourceRequiresReacquisition : Set where
 data WikidataStructuredCoordinateRequiresFakeTextSpan : Set where
+data UningestedDocumentMayEnterCanonicalCarrier : Set where
+data DocumentIngestionCreatesLegalAuthority : Set where
 
 providerSpecificEvidenceCannotBypassCanonicalCarrier :
   ProviderSpecificEvidenceBypassesCanonicalCarrier → ⊥
@@ -144,3 +150,12 @@ persistedSourceDoesNotRequireReacquisition ()
 wikidataStructuredCoordinateDoesNotRequireFakeTextSpan :
   WikidataStructuredCoordinateRequiresFakeTextSpan → ⊥
 wikidataStructuredCoordinateDoesNotRequireFakeTextSpan ()
+
+
+uningestedDocumentCannotEnterCanonicalCarrier :
+  UningestedDocumentMayEnterCanonicalCarrier → ⊥
+uningestedDocumentCannotEnterCanonicalCarrier ()
+
+documentIngestionDoesNotCreateLegalAuthority :
+  DocumentIngestionCreatesLegalAuthority → ⊥
+documentIngestionDoesNotCreateLegalAuthority ()
