@@ -66,6 +66,7 @@ triangleInsideSquare
     (BishopP.≤-respˡ-≃
       (BishopP.≃-trans
         (Row.triangleIsMertensRow left right count)
-        (Existing.allRowsIsMertensRow left right count))
+        (BishopP.≃-symm
+          (Existing.allRowsIsMertensRow left right count)))
       (triangleRowsBelowSquareRows
         leftNonnegative rightNonnegative count))
