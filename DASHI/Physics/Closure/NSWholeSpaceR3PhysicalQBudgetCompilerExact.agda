@@ -205,9 +205,9 @@ canonicalInputsToPhysicalQBudget :
     (CanonicalRadial.canonicalRadialData fluid point)
     (Heat.frequency point)
     gramFactor secondMoment gramMajorant
-canonicalInputsToPhysicalQBudget inputs =
+canonicalInputsToPhysicalQBudget {fluid = fluid} {point = point} inputs =
   physical-q-budget-inputs
-    (CanonicalRadial.canonicalRadialQEquivalent _ _)
+    (CanonicalRadial.canonicalRadialQEquivalent fluid point)
     (gramFactorNonnegativeCanonical inputs)
     (gramMajorantNonnegativeCanonical inputs)
     (gramCarriesOutputQCanonical inputs)
