@@ -16,6 +16,7 @@ module DASHI.Moonshine.JInvariantBishopLatticeEisensteinKernelExact where
 -- or modularity.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
@@ -105,20 +106,20 @@ latticeEisensteinSummand geometry weight index parameter =
 
 record BishopLiteralLatticeKernelBoundary : Set where
   field
-    concreteIntegerEmbeddingConstructed : Agda.Builtin.Bool.Bool
-    literalMτPlusNConstructed : Agda.Builtin.Bool.Bool
-    complexReciprocalConstructed : Agda.Builtin.Bool.Bool
-    literalInversePowerSummandConstructed : Agda.Builtin.Bool.Bool
-    upperHalfPlaneDenominatorNonzeroProvedHere : Agda.Builtin.Bool.Bool
-    z2AbsoluteSummabilityProvedHere : Agda.Builtin.Bool.Bool
+    concreteIntegerEmbeddingConstructed : Bool
+    literalMτPlusNConstructed : Bool
+    complexReciprocalConstructed : Bool
+    literalInversePowerSummandConstructed : Bool
+    upperHalfPlaneDenominatorNonzeroProvedHere : Bool
+    z2AbsoluteSummabilityProvedHere : Bool
 
 canonicalBishopLiteralLatticeKernelBoundary :
   BishopLiteralLatticeKernelBoundary
 canonicalBishopLiteralLatticeKernelBoundary = record
-  { concreteIntegerEmbeddingConstructed = Agda.Builtin.Bool.true
-  ; literalMτPlusNConstructed = Agda.Builtin.Bool.true
-  ; complexReciprocalConstructed = Agda.Builtin.Bool.true
-  ; literalInversePowerSummandConstructed = Agda.Builtin.Bool.true
-  ; upperHalfPlaneDenominatorNonzeroProvedHere = Agda.Builtin.Bool.false
-  ; z2AbsoluteSummabilityProvedHere = Agda.Builtin.Bool.false
+  { concreteIntegerEmbeddingConstructed = true
+  ; literalMτPlusNConstructed = true
+  ; complexReciprocalConstructed = true
+  ; literalInversePowerSummandConstructed = true
+  ; upperHalfPlaneDenominatorNonzeroProvedHere = false
+  ; z2AbsoluteSummabilityProvedHere = false
   }
