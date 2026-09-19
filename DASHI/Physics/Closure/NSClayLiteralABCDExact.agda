@@ -142,8 +142,8 @@ record FeffermanEuclideanForcedBreakdownCarrier : Set₁ where
     GlobalVelocityC : Set
     GlobalPressureC : Set
 
-    VelocitySmoothC : GlobalVelocityC → Set
-    PressureSmoothC : GlobalPressureC → Set
+    VelocitySmoothPredicateC : GlobalVelocityC → Set
+    PressureSmoothPredicateC : GlobalPressureC → Set
 
     SolvesForcedNavierStokesC :
       ViscosityC →
@@ -153,9 +153,9 @@ record FeffermanEuclideanForcedBreakdownCarrier : Set₁ where
       ForcingC →
       Set
 
-    IncompressibleC : GlobalVelocityC → Set
-    AttainsInitialDatumC : GlobalVelocityC → InitialDatumC → Set
-    BoundedEnergyC : GlobalVelocityC → Set
+    IncompressiblePredicateC : GlobalVelocityC → Set
+    AttainsInitialDatumPredicateC : GlobalVelocityC → InitialDatumC → Set
+    BoundedEnergyPredicateC : GlobalVelocityC → Set
 
 open FeffermanEuclideanForcedBreakdownCarrier public
 
@@ -167,14 +167,14 @@ record FeffermanEuclideanForcedGlobalSolution
   field
     velocityC : GlobalVelocityC carrier
     pressureC : GlobalPressureC carrier
-    velocitySmoothC : VelocitySmoothC carrier velocityC
-    pressureSmoothC : PressureSmoothC carrier pressureC
+    velocitySmoothC : VelocitySmoothPredicateC carrier velocityC
+    pressureSmoothC : PressureSmoothPredicateC carrier pressureC
     solvesEquationC :
       SolvesForcedNavierStokesC carrier
         viscosity velocityC pressureC initial forcing
-    incompressibleC : IncompressibleC carrier velocityC
-    initialTraceC : AttainsInitialDatumC carrier velocityC initial
-    boundedEnergyC : BoundedEnergyC carrier velocityC
+    incompressibleC : IncompressiblePredicateC carrier velocityC
+    initialTraceC : AttainsInitialDatumPredicateC carrier velocityC initial
+    boundedEnergyC : BoundedEnergyPredicateC carrier velocityC
 
 open FeffermanEuclideanForcedGlobalSolution public
 
@@ -227,10 +227,10 @@ record FeffermanPeriodicForcedBreakdownCarrier : Set₁ where
     GlobalVelocityD : Set
     GlobalPressureD : Set
 
-    VelocitySmoothD : GlobalVelocityD → Set
-    PressureSmoothD : GlobalPressureD → Set
-    VelocityUnitPeriodicD : GlobalVelocityD → Set
-    PressureUnitPeriodicD : GlobalPressureD → Set
+    VelocitySmoothPredicateD : GlobalVelocityD → Set
+    PressureSmoothPredicateD : GlobalPressureD → Set
+    VelocityUnitPeriodicPredicateD : GlobalVelocityD → Set
+    PressureUnitPeriodicPredicateD : GlobalPressureD → Set
 
     SolvesForcedNavierStokesD :
       ViscosityD →
@@ -240,8 +240,8 @@ record FeffermanPeriodicForcedBreakdownCarrier : Set₁ where
       ForcingD →
       Set
 
-    IncompressibleD : GlobalVelocityD → Set
-    AttainsInitialDatumD : GlobalVelocityD → InitialDatumD → Set
+    IncompressiblePredicateD : GlobalVelocityD → Set
+    AttainsInitialDatumPredicateD : GlobalVelocityD → InitialDatumD → Set
 
 open FeffermanPeriodicForcedBreakdownCarrier public
 
@@ -253,15 +253,15 @@ record FeffermanPeriodicForcedGlobalSolution
   field
     velocityD : GlobalVelocityD carrier
     pressureD : GlobalPressureD carrier
-    velocitySmoothD : VelocitySmoothD carrier velocityD
-    pressureSmoothD : PressureSmoothD carrier pressureD
-    velocityPeriodicD : VelocityUnitPeriodicD carrier velocityD
-    pressurePeriodicD : PressureUnitPeriodicD carrier pressureD
+    velocitySmoothD : VelocitySmoothPredicateD carrier velocityD
+    pressureSmoothD : PressureSmoothPredicateD carrier pressureD
+    velocityPeriodicD : VelocityUnitPeriodicPredicateD carrier velocityD
+    pressurePeriodicD : PressureUnitPeriodicPredicateD carrier pressureD
     solvesEquationD :
       SolvesForcedNavierStokesD carrier
         viscosity velocityD pressureD initial forcing
-    incompressibleD : IncompressibleD carrier velocityD
-    initialTraceD : AttainsInitialDatumD carrier velocityD initial
+    incompressibleD : IncompressiblePredicateD carrier velocityD
+    initialTraceD : AttainsInitialDatumPredicateD carrier velocityD initial
 
 open FeffermanPeriodicForcedGlobalSolution public
 
