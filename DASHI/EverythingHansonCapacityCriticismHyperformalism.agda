@@ -6,6 +6,8 @@ open import DASHI.Governance.HansonOneNationPoliticalEcologyExact public
 open import DASHI.Governance.HansonOneNationPoliticalEcologyValidation public
 open import DASHI.Governance.HansonPoliticalEquilibriumNonfactorabilityExact public
 open import DASHI.Governance.HansonPoliticalEquilibriumNonfactorabilityValidation public
+open import DASHI.Governance.HansonBurqaIslamophobiaFeministRelationalExact public
+open import DASHI.Governance.HansonBurqaIslamophobiaFeministRelationalValidation public
 open import DASHI.Core.IntersectionalNonFactorability public
 open import DASHI.Core.QueryFactorisationSufficiency public
 open import DASHI.Core.DeclaredRealizedIntegrityResidualExact public
