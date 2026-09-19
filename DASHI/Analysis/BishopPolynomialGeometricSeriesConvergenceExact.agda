@@ -33,8 +33,9 @@ module DASHI.Analysis.BishopPolynomialGeometricSeriesConvergenceExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Nat.Base as Nat using (_≤_; s≤s)
-open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ)
+open import Data.Rational.Unnormalised as ℚ using (0ℚᵘ; 1ℚᵘ)
 import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
@@ -44,6 +45,7 @@ import Sequence as BishopSequence
 import DASHI.Analysis.BishopPolynomialSuccessorFactorLimitExact as Limit
 import DASHI.Analysis.BishopStrictRatioInterpolationExact as Interpolate
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
+import DASHI.Foundations.BishopBaselReciprocalSquareConvergenceExact as Basel
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as Reciprocal
 import DASHI.Mathematics.NumberTheory.FiniteNatRationalEmbeddingExact as NatEmbed
 
@@ -86,14 +88,13 @@ positiveNatTimesOnePlusReciprocal :
 positiveNatTimesOnePlusReciprocal index =
   let
     n = NatReal.natReal (suc index)
-    reciprocal = Reciprocal.Basel.embed
-      (Reciprocal.reciprocalNatRational index)
+    reciprocal = Basel.reciprocalSequence index
     open BishopP.ℝ-Solver
   in
   BishopP.≃-trans
     (solve 2
       (λ n′ reciprocal′ →
-        n′ ⊗ (Κ (+ 1 / 1) ⊕ reciprocal′)
+        n′ ⊗ (Κ 1ℚᵘ ⊕ reciprocal′)
         ⊜ n′ ⊕ (reciprocal′ ⊗ n′))
       BishopP.≃-refl
       n reciprocal)
