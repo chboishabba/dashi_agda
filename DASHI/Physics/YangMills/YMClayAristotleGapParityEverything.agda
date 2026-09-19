@@ -101,3 +101,7 @@ import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundValidation
 
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTransportABIInsufficiencyExact
+
+import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundExact
+import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundValidation
+import DASHI.Physics.YangMills.YMClayLevel2D2R129CompositeConvergenceExact
