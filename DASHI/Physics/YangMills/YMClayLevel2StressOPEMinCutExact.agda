@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanSectorQFTRecoveryExportRound129Exact as R1
 import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as Recovery
 import DASHI.Physics.YangMills.YMClayLevel2WardRGReuseExact as Reuse
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTailWeldExact as D1
+import DASHI.Physics.YangMills.YMClayLevel2R129CompositeTailAttachmentExact as D1R129
 
 ------------------------------------------------------------------------
 -- LEVEL-2 LITERAL CLAY STRESS/OPE MIN-CUT
@@ -132,7 +133,7 @@ generatedActionStressRecoveryCompilerLevel =
 
 sameFamilyCompositeTailAttachmentLevel : ProofLevel
 sameFamilyCompositeTailAttachmentLevel =
-  D1.physicalCompositeTailAttachmentLevel
+  D1R129.physicalD1R129TailEqualityLevel
 
 sameRGOPECoefficientAttachmentLevel : ProofLevel
 sameRGOPECoefficientAttachmentLevel =
