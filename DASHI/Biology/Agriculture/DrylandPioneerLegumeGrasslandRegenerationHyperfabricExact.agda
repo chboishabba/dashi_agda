@@ -20,6 +20,7 @@ import DASHI.Biology.Agriculture.DrylandRegenerationNitrogenFactorisationExact a
 import DASHI.Biology.Agriculture.ConstructiveNitrogenTransportKernelExact as NitrogenTransport
 import DASHI.Biology.Agriculture.QueenslandLegumeResidueFirstOrderKineticsExact as Kinetics
 import DASHI.Biology.Agriculture.QueenslandLegumeResidueFallowRecoveryExact as FallowRecovery
+import DASHI.Biology.Agriculture.QueenslandChickpeaWheatFertilizerEquivalentExact as ChickpeaEquivalent
 import DASHI.Biology.Agriculture.AustralianRestorationTrajectoryDataSurfaceExact as QuantitativeTrajectory
 
 ------------------------------------------------------------------------
@@ -154,6 +155,7 @@ record RegenerationHyperfabricBoundary : Set where
     quantitativeRestorationTrajectoryDataSurfaceOwned : Bool
     firstOrderRateToDiscreteContractionCompilerOwned : Bool
     queenslandRouteFallowRecoveryJoinOwned : Bool
+    queenslandMultiRateFertilizerResponseCurveOwned : Bool
 open RegenerationHyperfabricBoundary public
 
 canonicalRegenerationHyperfabricBoundary : RegenerationHyperfabricBoundary
@@ -189,6 +191,7 @@ canonicalRegenerationHyperfabricBoundary = record
   ; quantitativeRestorationTrajectoryDataSurfaceOwned = true
   ; firstOrderRateToDiscreteContractionCompilerOwned = true
   ; queenslandRouteFallowRecoveryJoinOwned = true
+  ; queenslandMultiRateFertilizerResponseCurveOwned = true
   }
 
 nitrogenFactorisationBoundaryReused :
@@ -218,6 +221,12 @@ fallowRecoveryBoundaryReused :
   FallowRecovery.FallowRecoveryBoundary
 fallowRecoveryBoundaryReused =
   FallowRecovery.canonicalFallowRecoveryBoundary
+
+
+chickpeaEquivalentBoundaryReused :
+  ChickpeaEquivalent.ChickpeaEquivalentBoundary
+chickpeaEquivalentBoundaryReused =
+  ChickpeaEquivalent.canonicalChickpeaEquivalentBoundary
 
 -- Canonical source-bounded lanes are reused, not fused.
 australianRhizobiaBoundaryReused : AustralianRhizobia.AustralianRhizobiaBoundary
@@ -249,4 +258,4 @@ queenslandDesmanthusBoundaryReused = QueenslandDesmanthus.canonicalDesmanthusBou
 
 attributionRule : String
 attributionRule =
-  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass, Senegalia dryland, Queensland ley-carryover, Queensland woody-legume/grass and Queensland Desmanthus papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory/transport separations, the finite early-success/long-term-trajectory TaskFactorisation collision, the nitrogen-route/timing/water/counterfactual non-factorability witnesses, their missing-axis experimental-design routing, the constructive convolution/tail/Cauchy transport mathematics, and the no-promotion boundary. Generic convergence does not create an empirical route-kernel majorant. Thomson et al. supplies a finite-window first-order residue-mineralisation shape; DASHI owns the separate constructive rate/time-step -> discrete contraction compiler, but not authority to extrapolate a selected empirical fit indefinitely. Nguyen et al. 2026 supplies a Queensland same-experiment AG/BG route x fallow-duration x following-crop recovery join, with assumption-dependent BG recovery denominators retained. The Liddicoat data surface supplies quantitative age-indexed microbiome trajectories, not repeated same-plot whole-ecosystem increments. Shared roles, fixed-N labels, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, a unique N-transfer route, causal recovery, whole-ecosystem recovery or deployment authority. Queensland residue transfer does not become living-root transfer; Desmanthus grass interaction has no context-free sign; ley N service cannot erase water state; and a quantified fertilizer-replacement claim retains its explicit mineral-N counterfactual requirement. Queensland agricultural comparators do not manufacture Acacia/Senegalia same-object evidence."
+  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass, Senegalia dryland, Queensland ley-carryover, Queensland woody-legume/grass and Queensland Desmanthus papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory/transport separations, the finite early-success/long-term-trajectory TaskFactorisation collision, the nitrogen-route/timing/water/counterfactual non-factorability witnesses, their missing-axis experimental-design routing, the constructive convolution/tail/Cauchy transport mathematics, and the no-promotion boundary. Generic convergence does not create an empirical route-kernel majorant. Thomson et al. supplies a finite-window first-order residue-mineralisation shape; DASHI owns the separate constructive rate/time-step -> discrete contraction compiler, but not authority to extrapolate a selected empirical fit indefinitely. Nguyen et al. 2026 supplies a Queensland same-experiment AG/BG route x fallow-duration x following-crop recovery join, with assumption-dependent BG recovery denominators retained. Dalal et al. 1998 supplies a Queensland multi-rate fertilizer-N response curve and season-gated chickpea->wheat fertilizer-equivalent estimate; neither result transfers to Acacia/Senegalia. The Liddicoat data surface supplies quantitative age-indexed microbiome trajectories, not repeated same-plot whole-ecosystem increments. Shared roles, fixed-N labels, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, a unique N-transfer route, causal recovery, whole-ecosystem recovery or deployment authority. Queensland residue transfer does not become living-root transfer; Desmanthus grass interaction has no context-free sign; ley N service cannot erase water state; and a quantified fertilizer-replacement claim retains its explicit mineral-N counterfactual requirement. Queensland agricultural comparators do not manufacture Acacia/Senegalia same-object evidence."
