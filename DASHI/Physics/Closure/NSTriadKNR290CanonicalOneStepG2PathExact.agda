@@ -18,7 +18,7 @@ module DASHI.Physics.Closure.NSTriadKNR290CanonicalOneStepG2PathExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (1ℚ)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -30,7 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFinitePathDifferenceDiffusionExact as P
 
 F = G0.Weld.F
 
-singletonPath : Gram.Vec3 → Agda.Builtin.List.List Gram.Vec3
+singletonPath : Gram.Vec3 → List Gram.Vec3
 singletonPath increment = increment ∷ []
 
 singletonPathEndpoint :
