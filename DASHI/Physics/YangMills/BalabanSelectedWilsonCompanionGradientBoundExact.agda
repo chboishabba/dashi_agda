@@ -6,6 +6,7 @@ open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (pair)
 import DASHI.Physics.YangMills.BalabanFiniteBoundedCovarianceExact as FiniteCov
 import DASHI.Physics.YangMills.BalabanP33PhysicalRationalWilsonPlaquetteJetExact as Plaquette
 import DASHI.Physics.YangMills.BalabanP33PhysicalSU2FiniteCoordinatesExact as Coordinates
@@ -31,7 +32,7 @@ wilsonCompanionGradientPointwiseBelowFour :
     (wilsonCompanionGradient plaquette coordinate)
     four
 wilsonCompanionGradientPointwiseBelowFour
-    (DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier.pair site axes)
+    (pair site axes)
     coordinate
     background =
   Bound.plaquetteBasisFirstVariationAbsoluteBelowFour
