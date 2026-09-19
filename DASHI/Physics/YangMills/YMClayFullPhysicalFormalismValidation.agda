@@ -227,6 +227,32 @@ s2IdentityBoundednessRemains :
 s2IdentityBoundednessRemains =
   Full.routeSS2IdentityBoundednessStillPhysicalIsTrue
 
+
+s2ConcreteSU2TraceBoundIsPaid :
+  Full.routeSS2ConcreteSU2TraceBoundPaid ≡ true
+s2ConcreteSU2TraceBoundIsPaid =
+  Full.routeSS2ConcreteSU2TraceBoundPaidIsTrue
+
+s2QuantitativeBoundPredicateRealizationRemains :
+  Full.routeSS2QuantitativeBoundToT5PredicateStillPhysical ≡ true
+s2QuantitativeBoundPredicateRealizationRemains =
+  Full.routeSS2QuantitativeBoundToT5PredicateStillPhysicalIsTrue
+
+d2BareTransportDoesNotPayPhysicalMixing :
+  Full.d2BareTransportABIPaysPhysicalMixing ≡ false
+d2BareTransportDoesNotPayPhysicalMixing =
+  Full.d2BareTransportABIPaysPhysicalMixingIsFalse
+
+d2FiniteDepthEqualityIsNotRequired :
+  Full.d2FiniteDepthEqualsCompletedCompositeRequired ≡ false
+d2FiniteDepthEqualityIsNotRequired =
+  Full.d2FiniteDepthEqualsCompletedCompositeRequiredIsFalse
+
+d2SameFamilyCompositeConvergenceRemains :
+  Full.d2SameFamilyCompositeConvergenceStillPhysical ≡ true
+d2SameFamilyCompositeConvergenceRemains =
+  Full.d2SameFamilyCompositeConvergenceStillPhysicalIsTrue
+
 f2IsCompilerOwned :
   Full.f2PrimitiveResearchPayment ≡ false
 f2IsCompilerOwned =
