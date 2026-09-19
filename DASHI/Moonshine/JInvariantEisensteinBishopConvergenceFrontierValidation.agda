@@ -106,6 +106,11 @@ fastCauchyLegacyQuotientInterfaceWeldIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 fastCauchyLegacyQuotientInterfaceWeldIsOwned = refl
 
+genericSetoidComplexQuotientRingWeldIsOwned :
+  P.genericSetoidComplexQuotientRingWeldOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+genericSetoidComplexQuotientRingWeldIsOwned = refl
+
 concreteLegacyQuotientStillUnpaid :
   P.concreteLegacyQuotientInhabited
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
