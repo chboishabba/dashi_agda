@@ -16,11 +16,13 @@ module DASHI.Physics.YangMills.BalabanClayT5Path4PreferredGate4ProbabilitySemant
 --   * observableValue O x = O x.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanClayT5PreferredDiagonalExpectationProducerExact as Diagonal
 import DASHI.Physics.YangMills.BalabanClayT5Path4GaugeEnergyObservableRealizationExact as Path4
 import DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsExact as Path4Probability
@@ -128,7 +130,7 @@ selectedPath4ExpectationIsGate4FiniteProbabilityIntegral :
       Path4PreferredGate4ProbabilityInputs
         gate4Probability diagonal realization)
     cutoff →
-  DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact.expectation
+  Gram.expectation
     (T5.operations thermodynamic)
     (T5.diagonalMeasure
       (Diagonal.compilePreferredDiagonalExpectationProducer diagonal)
