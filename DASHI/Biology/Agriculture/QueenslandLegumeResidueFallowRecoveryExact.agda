@@ -74,8 +74,7 @@ record FallowRecoveryReceipt : Set where
     agBgNdfrLowerKgHa : Nat
     agBgNdfrUpperKgHa : Nat
 
-    totalCropNUptakeLowerKgHa : Nat
-    totalCropNUptakeUpperKgHa : Nat
+    totalCropNUptakeReading : String
 
     measuredReading : String
     recoveryEfficiencyReading : String
@@ -94,8 +93,8 @@ shortFallowBarleyReceipt = record
   ; agNdfrUpperKgHa = 14
   ; agBgNdfrLowerKgHa = 20
   ; agBgNdfrUpperKgHa = 25
-  ; totalCropNUptakeLowerKgHa = 0
-  ; totalCropNUptakeUpperKgHa = 0
+  ; totalCropNUptakeReading =
+      "This typed receipt does not encode a short-fallow total-crop-N range; the source result used here is isotope-derived residue N uptake and recovery-efficiency contrast."
   ; measuredReading =
       "After the approximately two-month fallow, barley residue-derived N uptake was about 11-14 kg N/ha for AG-only and about 20-25 kg N/ha for AG&BG; AG&BG exceeded AG significantly. Soil mineral N was observed at 0, 30 and 60 days and was generally lower under BG-inclusive treatments. Barley received a uniform 50 kg N/ha urea application."
   ; recoveryEfficiencyReading =
@@ -115,8 +114,8 @@ longFallowSorghumReceipt = record
   ; agNdfrUpperKgHa = 10
   ; agBgNdfrLowerKgHa = 14
   ; agBgNdfrUpperKgHa = 16
-  ; totalCropNUptakeLowerKgHa = 180
-  ; totalCropNUptakeUpperKgHa = 200
+  ; totalCropNUptakeReading =
+      "Total sorghum N uptake averaged approximately 180-200 kg N/ha and did not differ significantly among residue-component treatments."
   ; measuredReading =
       "After the approximately nine-month fallow, sorghum total biomass and total N uptake did not differ significantly among residue-component treatments; total N uptake averaged about 180-200 kg N/ha. Isotope-derived total-biomass Ndfr was about 9-10 kg N/ha in AG and 14-16 kg N/ha in AG&BG, with AG&BG significantly greater than AG. Sorghum received no fertilizer N."
   ; recoveryEfficiencyReading =
