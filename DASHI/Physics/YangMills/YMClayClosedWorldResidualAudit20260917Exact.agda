@@ -227,10 +227,10 @@ level2R127AfterR129 = exact-residual
 level2OPEProductTailIdentification : ExactResidual
 level2OPEProductTailIdentification = exact-residual
   physicalClayStressConstruction
-  "YMClayLevel2CompositeTailWeldExact.agda"
-  "literal product remainder on the actual completed composite projection = selected composite marked tail"
+  "YMClayLevel2R129CompositeTailAttachmentExact.agda"
+  "literal product remainder on the R129-exported completed composite projection = selected composite marked tail"
   unpaid
-  "The same-family carrier is now explicit: the remainder is evaluated on Marked.compositeProjection completedState, not an arbitrary function. The only physical field is equality with Shared.compositeInsertionTail; the literal DyadicOPERemainderMajorant is then compiler output."
+  "R129 already exports the composite marked-source data from the same completed state used by stress. D1 therefore no longer accepts an independent composite carrier. Its sole physical field is equality between the literal product remainder on that R129-selected composite and Shared.compositeInsertionTail; the DyadicOPERemainderMajorant is compiler output."
 
 level2GlobalAFSecondPayment : ExactResidual
 level2GlobalAFSecondPayment = exact-residual
@@ -371,6 +371,12 @@ d1NewCompositeTailDecayTheoremRequired = false
 
 d1SameCompletedCompositeTailAttachmentStillPhysical : Bool
 d1SameCompletedCompositeTailAttachmentStillPhysical = true
+
+d1IndependentCompositeCarrierAfterR129 : Bool
+d1IndependentCompositeCarrierAfterR129 = false
+
+d1IndependentCompositeCompletionAfterR129 : Bool
+d1IndependentCompositeCompletionAfterR129 = false
 
 globalAsymptoticFreedomTrajectoryIndependentInLevel2D : Bool
 globalAsymptoticFreedomTrajectoryIndependentInLevel2D = false
