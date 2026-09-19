@@ -4,7 +4,7 @@ module DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _-_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
@@ -120,7 +120,7 @@ finiteSliceChargeConservationAlreadyCompilerOwned :
       {lane = lane} {scaleWeld = scaleWeld} recovery) →
   ∀ depth →
   Ward.chargeAfter (finiteWardChargeAt transport depth)
-    Ward.chargeBefore (finiteWardChargeAt transport depth) ≡ 0ℚ
+    - Ward.chargeBefore (finiteWardChargeAt transport depth) ≡ 0ℚ
 finiteSliceChargeConservationAlreadyCompilerOwned transport depth =
   Ward.sliceChargeDifferenceZero (finiteWardChargeAt transport depth)
 
