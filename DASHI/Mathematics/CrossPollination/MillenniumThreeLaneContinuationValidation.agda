@@ -124,3 +124,62 @@ bsdActualGlobalSelmerStillOpen :
     BSDSeed.canonicalEllipticFiniteSeedToSelmerBoundary
   ≡ false
 bsdActualGlobalSelmerStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- THIRD CONTINUATION: exact coordinate derivation, quotient weld, and
+-- application-neutral convergence / all-place descent reuse.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as PNPCoord
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceSetoidQuotientWeldExact as HodgeQuot
+import DASHI.Mathematics.Automorphic.EllipticEulerSummableIncrementExact as BSDInc
+import DASHI.Mathematics.Arithmetic.EllipticRationalPlaceSelmerExact as BSDPlaces
+
+pnpRewriteCoordinateDerived :
+  PNPCoord.rewriteCoordinateDerivationPaid
+    PNPCoord.canonicalConcreteTapeOccurrenceCoordinateBoundary
+  ≡ true
+pnpRewriteCoordinateDerived = refl
+
+pnpAllOverlappingWindowsStillOpen :
+  PNPCoord.allOverlappingWindowsCharacterized
+    PNPCoord.canonicalConcreteTapeOccurrenceCoordinateBoundary
+  ≡ false
+pnpAllOverlappingWindowsStillOpen = refl
+
+hodgeSetoidQuotientCompilerPaid :
+  HodgeQuot.setoidQuotientToLiteralProjectiveSpaceCompilerPaid
+    HodgeQuot.canonicalProjectiveSpaceSetoidQuotientWeldBoundary
+  ≡ true
+hodgeSetoidQuotientCompilerPaid = refl
+
+hodgeConcreteQuotientStillOpen :
+  HodgeQuot.concreteProjectiveQuotientInhabitantPaid
+    HodgeQuot.canonicalProjectiveSpaceSetoidQuotientWeldBoundary
+  ≡ false
+hodgeConcreteQuotientStillOpen = refl
+
+bsdSummableIncrementCompilerPaid :
+  BSDInc.summableIncrementToEulerCauchyCompilerPaid
+    BSDInc.canonicalEllipticEulerSummableIncrementBoundary
+  ≡ true
+bsdSummableIncrementCompilerPaid = refl
+
+bsdEllipticIncrementEstimateStillOpen :
+  BSDInc.ellipticIncrementMajorantPaid
+    BSDInc.canonicalEllipticEulerSummableIncrementBoundary
+  ≡ false
+bsdEllipticIncrementEstimateStillOpen = refl
+
+bsdRationalPlaceSplitPaid :
+  BSDPlaces.rationalPlaceSplitPaid
+    BSDPlaces.canonicalEllipticRationalPlaceSelmerBoundary
+  ≡ true
+bsdRationalPlaceSplitPaid = refl
+
+bsdActualLocalFieldsStillOpen :
+  BSDPlaces.actualQvKummerRealizationPaid
+    BSDPlaces.canonicalEllipticRationalPlaceSelmerBoundary
+  ≡ false
+bsdActualLocalFieldsStillOpen = refl
