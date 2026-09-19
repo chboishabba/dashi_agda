@@ -89,3 +89,14 @@ quantitativeRestorationDataLifted :
   H.quantitativeRestorationTrajectoryDataSurfaceOwned
     H.canonicalRegenerationHyperfabricBoundary ≡ true
 quantitativeRestorationDataLifted = refl
+
+
+continuousToDiscreteCompilerLifted :
+  H.firstOrderRateToDiscreteContractionCompilerOwned
+    H.canonicalRegenerationHyperfabricBoundary ≡ true
+continuousToDiscreteCompilerLifted = refl
+
+routeFallowRecoveryJoinLifted :
+  H.queenslandRouteFallowRecoveryJoinOwned
+    H.canonicalRegenerationHyperfabricBoundary ≡ true
+routeFallowRecoveryJoinLifted = refl
