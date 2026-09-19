@@ -234,3 +234,22 @@ pnpWholeRowWindowScanStillOpen :
     PNPPatterns.canonicalConcreteTapeLocalWindowPatternsBoundary
   ≡ false
 pnpWholeRowWindowScanStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- BSD literal rational square-class setoid.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Arithmetic.RationalSquareClassSetoidExact as BSDSquare
+
+bsdRationalSquareClassRelationPaid :
+  BSDSquare.rationalSquareClassSetoidPaid
+    BSDSquare.canonicalRationalSquareClassBoundary
+  ≡ true
+bsdRationalSquareClassRelationPaid = refl
+
+bsdRationalSquareClassQuotientStillOpen :
+  BSDSquare.quotientCarrierConstructed
+    BSDSquare.canonicalRationalSquareClassBoundary
+  ≡ false
+bsdRationalSquareClassQuotientStillOpen = refl
