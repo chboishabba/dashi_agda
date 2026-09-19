@@ -203,12 +203,8 @@ signedWingRowAbsoluteBound left right count index index<count =
     factorNonnegative =
       BishopP.0≤x⇒nonNegx
         (BishopP.≤-trans
-          (BishopP.≤-respʳ-≃
-            (BishopP.+-inverseʳ
-              (FinSum.finSum
-                (absoluteTerms right)
-                (count Nat.∸ index)))
-            (BishopP.≤-refl))
+          (BishopP.nonNegx⇒0≤x
+            (BishopP.nonNeg∣x∣ factor))
           factorBound)
 
     rowFactorization :
@@ -274,17 +270,13 @@ signedWingIsRowSeries :
       (signedWingRow left right count)
       count)
 signedWingIsRowSeries left right count =
-  BishopP.≃-trans
-    (Difference.finiteSeriesDifference
-      (λ index →
-        BishopReal._*_
-          (left index)
-          (FinSum.finSum right count))
-      (RectInside.triangleRow left right count)
-      count)
-    (Ext.finiteSumCongruent
-      (λ index → BishopP.≃-refl)
-      count)
+  Difference.finiteSeriesDifference
+    (λ index →
+      BishopReal._*_
+        (left index)
+        (FinSum.finSum right count))
+    (RectInside.triangleRow left right count)
+    count
 
 positiveWingIsRowSeries :
   (left right : Nat → BishopReal.ℝ) →
