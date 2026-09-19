@@ -27,7 +27,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (toℕ)
 import Data.Nat.Base as Nat
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans; sym)
 
 import Algebra.Properties.Semiring.Sum as SemiringSum
 import Real as BishopReal
@@ -146,9 +146,9 @@ doubleIsAddSelf : ∀ count → Double.double count ≡ count + count
 doubleIsAddSelf zero = refl
 doubleIsAddSelf (suc count) =
   cong suc
-    (NatP.≡-trans
+    (trans
       (cong suc (doubleIsAddSelf count))
-      (NatP.≡-sym (NatP.+-suc count count)))
+      (sym (NatP.+-suc count count)))
 
 absoluteTriangleWingTail :
   BishopReal.ℝ →
