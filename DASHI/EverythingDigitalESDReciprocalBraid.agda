@@ -172,3 +172,5 @@ import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact
 import DASHI.Interop.SLRCanonicalEvidenceSubstrateRegression
 import DASHI.Education.DigitalESDTitleAbstractScreeningExact
 import DASHI.Education.DigitalESDTitleAbstractScreeningRegression
+import DASHI.Education.DigitalESDAdaptiveScreeningControllerExact
+import DASHI.Education.DigitalESDAdaptiveScreeningControllerRegression
