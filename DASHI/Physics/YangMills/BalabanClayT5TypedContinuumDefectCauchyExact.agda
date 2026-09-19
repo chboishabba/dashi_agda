@@ -187,7 +187,8 @@ physicalAbsoluteOneStepDefectLevel = conditional
 physicalTypedTelescopingIdentityLevel : ProofLevel
 physicalTypedTelescopingIdentityLevel = conditional
 
--- Deliberately not promoted: a Cauchy sequence of rationals need not converge
--- to a rational.  Completion/continuum-measure realization remains downstream.
-rationalLimitExistenceFromCauchyAloneLevel : ProofLevel
-rationalLimitExistenceFromCauchyAloneLevel = conjectural
+-- Deliberately separate: a Cauchy sequence of rationals need not converge to
+-- a rational.  The completion / continuum-measure realization is a downstream
+-- attachment, not a consequence in the rational carrier itself.
+completionOrTopologyRealizationAfterCauchyLevel : ProofLevel
+completionOrTopologyRealizationAfterCauchyLevel = conditional
