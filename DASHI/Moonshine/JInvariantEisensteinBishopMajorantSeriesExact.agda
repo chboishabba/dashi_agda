@@ -24,6 +24,8 @@ module DASHI.Moonshine.JInvariantEisensteinBishopMajorantSeriesExact where
 -- already-owned increment inequalities onto this carrier.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat)
+
 import Real as BishopReal
 import Sequence as BishopSequence
 
@@ -43,12 +45,12 @@ e4ScaleNonnegative = PolyGeo.natRealNonnegative 240
 e6ScaleNonnegative : BishopReal.NonNegative e6Scale
 e6ScaleNonnegative = PolyGeo.natRealNonnegative 504
 
-e4MajorantTerm : BishopReal.ℝ → _ 
+e4MajorantTerm : BishopReal.ℝ → Nat → BishopReal.ℝ
 e4MajorantTerm ratio =
   PolyGeo.shiftedScaledPolynomialGeometricTerm
     e4Scale ratio 4
 
-e6MajorantTerm : BishopReal.ℝ → _
+e6MajorantTerm : BishopReal.ℝ → Nat → BishopReal.ℝ
 e6MajorantTerm ratio =
   PolyGeo.shiftedScaledPolynomialGeometricTerm
     e6Scale ratio 6
