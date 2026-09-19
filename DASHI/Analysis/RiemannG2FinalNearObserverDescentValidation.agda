@@ -34,5 +34,7 @@ offBudgetFactorsThroughFold :
     (R1.finalNearPlusFarConsumer S
       (Transport.farBudgetAt transport
         (Direct.chosenCutoff offInput)))
-offBudgetFactorsThroughFold {S = S} bridge =
-  R1.finalNearPlusFarFactorsThroughObservedFold S _
+offBudgetFactorsThroughFold {S = S} {transport = transport} {offInput = offInput} bridge =
+  R1.finalNearPlusFarFactorsThroughObservedFold S
+    (Transport.farBudgetAt transport
+      (Direct.chosenCutoff offInput))
