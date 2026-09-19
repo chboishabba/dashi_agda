@@ -11,6 +11,7 @@ module DASHI.Mathematics.Arithmetic.EllipticFiniteSeedToSelmerExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Mathematics.Arithmetic.EllipticCurveFiniteTwoDescentSeedExact as Seed
+import DASHI.Mathematics.Arithmetic.EllipticCurveTwoTorsionAndBadPrimeExact as Torsion
 import DASHI.Mathematics.Arithmetic.EllipticCurveFrobeniusExact as Elliptic
 import DASHI.Mathematics.Arithmetic.EllipticTwoDescentRoadExact as Descent
 
@@ -49,16 +50,24 @@ finiteSeedPairToSelmer realization pair = record
 finiteKummerPointToSelmer :
   ∀ {carrier} →
   FiniteSeedGlobalRealization carrier →
-  Seed.Torsion.TwoTorsionCode →
+  Torsion.TwoTorsionCode →
   Descent.SelmerTwoElement carrier
 finiteKummerPointToSelmer realization point =
   finiteSeedPairToSelmer realization (Seed.finiteKummerMap point)
+
+finiteSeedInfinityToSelmer :
+  ∀ {carrier} →
+  FiniteSeedGlobalRealization carrier →
+  Descent.SelmerTwoElement carrier
+finiteSeedInfinityToSelmer realization =
+  finiteKummerPointToSelmer realization Torsion.pointAtInfinityCode
 
 record EllipticFiniteSeedToSelmerBoundary : Set where
   constructor elliptic-finite-seed-to-selmer-boundary
   field
     finiteKummerSeedPaid : Bool
     finiteSeedToSelmerCompilerPaid : Bool
+    distinguishedInfinitySeedCompilerPaid : Bool
     rationalSquareClassRealizationPaid : Bool
     localKummerRealizationPaid : Bool
     actualGlobalSelmerInhabitantPaid : Bool
@@ -69,4 +78,4 @@ canonicalEllipticFiniteSeedToSelmerBoundary :
   EllipticFiniteSeedToSelmerBoundary
 canonicalEllipticFiniteSeedToSelmerBoundary =
   elliptic-finite-seed-to-selmer-boundary
-    true true false false false false false
+    true true true false false false false false
