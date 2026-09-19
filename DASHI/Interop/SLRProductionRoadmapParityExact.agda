@@ -80,7 +80,7 @@ productionRoadmap =
       "2"
       active
       "canonical evidence convergence across world, legal-authority and narrative acquisition"
-      "M2.1 canonical manifestation envelope is source-written; M2.2-M2.5 remain the active convergence cut"
+      "M2.1 manifestation envelope and M2.2 exact revision/anchor/observation substrate are source-written; M2.3 shared reducer is the active min-cut"
   ∷ capabilitySprint
       "3"
       next
