@@ -113,8 +113,8 @@ open LexicalCounterfactualEnvelopeReceipt public
 -- Existing wildcard owner is the mathematical anchor.
 ------------------------------------------------------------------------
 
-wildcardOwnerReference : String
-wildcardOwnerReference =
+canonicalWildcardOwnerReference : String
+canonicalWildcardOwnerReference =
   "DASHI.Cognition.PNF.AmbiguityPreservingBoundedWildcardExact:MembershipEnvelope/InvariantTopK/ambiguousResidual"
 
 -- Stable membership in a coarse projection is not enough to certify a richer
