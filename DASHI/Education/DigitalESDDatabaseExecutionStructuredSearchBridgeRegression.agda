@@ -17,3 +17,10 @@ ericTransportFailureCannotQualify :
     (Exec.outcome Exec.ericQ1Execution) → ⊥
 ericTransportFailureCannotQualify =
   Bridge.ericQ1TransportFailureCannotCreateSuccessfulOutcome
+
+
+ericObservedCountWithoutExportCannotQualify :
+  Bridge.SuccessfulObservedOutcome
+    (Exec.outcome Exec.ericQ1ObservedExecution) → ⊥
+ericObservedCountWithoutExportCannotQualify =
+  Bridge.ericQ1ObservedCountWithoutExportCannotCreateSuccessfulOutcome
