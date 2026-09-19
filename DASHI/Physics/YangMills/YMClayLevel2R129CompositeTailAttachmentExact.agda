@@ -3,8 +3,9 @@ module DASHI.Physics.YangMills.YMClayLevel2R129CompositeTailAttachmentExact wher
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans; subst)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
@@ -22,6 +23,7 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as Recovery
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTailWeldExact as D1
 import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 ------------------------------------------------------------------------
 -- R129-SPECIALIZED LEVEL-2 D1 ATTACHMENT
@@ -72,11 +74,27 @@ record R129CompositeTailAttachment
     left right : Top.LocalOperator C
     position : Top.Position C
 
+    -- Physical product-expansion semantics on the actual completed composite
+    -- exported by this R129 recovery object.
+    productRemainder :
+      R109.Composite completion → Nat → ℚ
+
     remaining : Nat → Nat
 
-    literalOPEProductRemainderIsSelectedR129CompositeTail :
+    completedCompositeProductRemainderIsLiteralClay :
       ∀ depth →
-      Top.opeRemainder Y group left right position depth
+      productRemainder
+        (Marked.compositeProjection compositeData
+          (Marked.completedState compositeData))
+        depth
+      ≡ Top.opeRemainder Y group left right position depth
+
+    completedCompositeProductRemainderIsSelectedTail :
+      ∀ depth →
+      productRemainder
+        (Marked.compositeProjection compositeData
+          (Marked.completedState compositeData))
+        depth
       ≡ Shared.compositeInsertionTail
           shared scale volume root depth (remaining depth)
 
@@ -97,16 +115,37 @@ asCompositeProductTailWeld :
   D1.CompositeProductTailWeld
     (Recovery.r129ExportsCompositeMarkedSourceData export)
     shared scale volume root
-asCompositeProductTailWeld {Y = Y} {group = group} attachment = record
+asCompositeProductTailWeld attachment = record
   { D1.CompositeProductTailWeld.literalProductRemainder =
-      λ _ depth →
-        Top.opeRemainder Y group
-          (left attachment) (right attachment) (position attachment) depth
+      productRemainder attachment
   ; D1.CompositeProductTailWeld.remaining =
       remaining attachment
   ; D1.CompositeProductTailWeld.literalProductRemainderIsCompositeTail =
-      literalOPEProductRemainderIsSelectedR129CompositeTail attachment
+      completedCompositeProductRemainderIsSelectedTail attachment
   }
+
+
+literalClayOPERemainderIsSelectedCompositeTail :
+  ∀ {trajectory split inputs C S Y group Scale Volume Root activity}
+    {domain : Domain.CanonicalMetricSourceDomain Scale Volume activity}
+    {representation : StressRep.CanonicalMetricStressRepresentation domain}
+    {stressLane : R123.DensityAnchoredCanonicalMetricStressLane
+      {trajectory = trajectory} {split = split} {inputs = inputs}
+      {C = C} {S = S} {Y = Y} {group = group}
+      domain representation}
+    {export : R129.BalabanSectorQFTRecoveryExport stressLane}
+    {shared : Shared.SharedMarkedAnalyticShellControl Scale Volume Root}
+    {scale : Scale} {volume : Volume} {root : Root}
+    (attachment : R129CompositeTailAttachment export shared scale volume root) →
+  ∀ depth →
+  Top.opeRemainder Y group
+    (left attachment) (right attachment) (position attachment) depth
+  ≡ Shared.compositeInsertionTail
+      shared scale volume root depth (remaining attachment depth)
+literalClayOPERemainderIsSelectedCompositeTail attachment depth =
+  trans
+    (sym (completedCompositeProductRemainderIsLiteralClay attachment depth))
+    (completedCompositeProductRemainderIsSelectedTail attachment depth)
 
 r129AttachmentBuildsLiteralDyadicOPERemainder :
   ∀ {trajectory split inputs C S Y group Scale Volume Root activity}
@@ -121,9 +160,35 @@ r129AttachmentBuildsLiteralDyadicOPERemainder :
     {scale : Scale} {volume : Volume} {root : Root} →
   (attachment : R129CompositeTailAttachment export shared scale volume root) →
   Local.DyadicOPERemainderMajorant
-r129AttachmentBuildsLiteralDyadicOPERemainder attachment =
-  D1.literalCompletedCompositeOPERemainderMajorant
-    (asCompositeProductTailWeld attachment)
+r129AttachmentBuildsLiteralDyadicOPERemainder
+    {Y = Y} {group = group} attachment =
+  let
+    physical =
+      D1.literalCompletedCompositeOPERemainderMajorant
+        (asCompositeProductTailWeld attachment)
+  in record
+    { Local.DyadicOPERemainderMajorant.coefficient =
+        Local.coefficient physical
+    ; Local.DyadicOPERemainderMajorant.coefficientNonnegative =
+        Local.coefficientNonnegative physical
+    ; Local.DyadicOPERemainderMajorant.remainderMagnitude =
+        λ depth →
+          Top.opeRemainder Y group
+            (left attachment) (right attachment) (position attachment) depth
+    ; Local.DyadicOPERemainderMajorant.remainderNonnegative =
+        λ depth →
+          subst
+            (λ selected → 0ℚ ≤ selected)
+            (completedCompositeProductRemainderIsLiteralClay attachment depth)
+            (Local.remainderNonnegative physical depth)
+    ; Local.DyadicOPERemainderMajorant.remainderBelowDyadic =
+        λ depth →
+          subst
+            (λ selected →
+              selected ≤ Local.coefficient physical * Geo.halfPower depth)
+            (completedCompositeProductRemainderIsLiteralClay attachment depth)
+            (Local.remainderBelowDyadic physical depth)
+    }
 
 ------------------------------------------------------------------------
 -- Frontier classification.
