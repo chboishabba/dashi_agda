@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as Reco
 import DASHI.Physics.YangMills.YMClayLevel2WardRGReuseExact as Reuse
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTailWeldExact as D1
 import DASHI.Physics.YangMills.YMClayLevel2R129CompositeTailAttachmentExact as D1R129
+import DASHI.Physics.YangMills.YMClayLevel2D2PhysicalMinCutExact as D2
 
 ------------------------------------------------------------------------
 -- LEVEL-2 LITERAL CLAY STRESS/OPE MIN-CUT
@@ -137,7 +138,7 @@ sameFamilyCompositeTailAttachmentLevel =
 
 sameRGOPECoefficientAttachmentLevel : ProofLevel
 sameRGOPECoefficientAttachmentLevel =
-  Reuse.sameRGOPECoefficientCoordinateAttachmentLevel
+  D2.d2PhysicalMinCutLevel
 
 sameFamilyContinuumWardTransportLevel : ProofLevel
 sameFamilyContinuumWardTransportLevel =
