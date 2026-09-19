@@ -36,6 +36,7 @@ record ReviewedCanonicalEvidenceParity : Set where
     consumerReferenceExplicit : Bool
     requirementReferenceExplicit : Bool
     reviewEvidenceReferenceMustEqualObservationReference : Bool
+    reviewedEvidenceReferenceCanonicalAndRevalidated : Bool
     canonicalObservationValidationRequired : Bool
     reviewedEvidenceCreatesSemanticAuthority : Bool
     reviewedEvidencePromotesApplicability : Bool
@@ -46,7 +47,7 @@ open ReviewedCanonicalEvidenceParity public
 canonicalReviewedEvidenceParity : ReviewedCanonicalEvidenceParity
 canonicalReviewedEvidenceParity =
   reviewedCanonicalEvidenceParity
-    true true true true true true true
+    true true true true true true true true
     false false false
 
 record SharedEvidenceReducerParity : Set where
@@ -89,6 +90,7 @@ data SharedReducerPromotesClaimTruth : Set where
 data ProjectionMayReplaceSourceRevision : Set where
 data ProjectionMayReplaceEvidenceSpan : Set where
 data ReviewedEvidenceMeansClaimTruth : Set where
+data ReviewedEvidenceIdentityMayBeRewritten : Set where
 data AbstentionRequiresFabricatedDelta : Set where
 
 projectionSpecificEvidenceCannotBypassSharedReducer :
@@ -118,6 +120,10 @@ projectionCannotReplaceEvidenceSpan ()
 reviewedEvidenceDoesNotMeanClaimTruth :
   ReviewedEvidenceMeansClaimTruth → ⊥
 reviewedEvidenceDoesNotMeanClaimTruth ()
+
+reviewedEvidenceIdentityCannotBeRewritten :
+  ReviewedEvidenceIdentityMayBeRewritten → ⊥
+reviewedEvidenceIdentityCannotBeRewritten ()
 
 abstentionDoesNotRequireFabricatedDelta :
   AbstentionRequiresFabricatedDelta → ⊥
