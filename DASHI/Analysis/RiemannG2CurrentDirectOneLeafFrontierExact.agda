@@ -9,9 +9,11 @@ import DASHI.Analysis.RiemannG2DirectClusterResponseContradictionExact as Cluste
 import DASHI.Analysis.RiemannG2LiteralPhaseDirectClusterResponseExact as PhaseDirect
 import DASHI.Analysis.RiemannG2UniformLiteralPhaseHighProducerExact as High
 import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact as LiteralKernel
+import DASHI.Analysis.RiemannG2FinalNearObserverDescentExact as R1Descent
 import DASHI.Analysis.RiemannG2FinalCarrierFiniteSumCertificateExact as FinalCert
 import DASHI.Analysis.RiemannG2CertifiedNearUpperClusterResponseCompilerExact as Certified
 import DASHI.Analysis.RiemannCriticalLineStabilityRefinementExact as Stability
+import DASHI.Analysis.RiemannAnalyticCoordinateObserverDescentExact as R3Descent
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -92,6 +94,21 @@ oneLiteralRepresentationEqualityRemains :
     LiteralKernel.canonicalFinalNearLiteralKernelBoundary ≡ true
 oneLiteralRepresentationEqualityRemains = refl
 
+r1EmbeddedFoldIsSameObjectChartWitness :
+  R1Descent.FinalNearObserverDescentBoundary.embeddedFoldEqualityIsSameObjectChartWitness
+    R1Descent.canonicalFinalNearObserverDescentBoundary ≡ true
+r1EmbeddedFoldIsSameObjectChartWitness = refl
+
+r1DirectOffBudgetDescendsThroughEmbeddedFold :
+  R1Descent.FinalNearObserverDescentBoundary.directOffBudgetFactorsThroughEmbeddedNearFold
+    R1Descent.canonicalFinalNearObserverDescentBoundary ≡ true
+r1DirectOffBudgetDescendsThroughEmbeddedFold = refl
+
+r1WholeScalarRealizationNotRequiredByOffBudgetConsumer :
+  R1Descent.FinalNearObserverDescentBoundary.wholePoleQuotientScalarRealizationRequiredForOffBudgetConsumer
+    R1Descent.canonicalFinalNearObserverDescentBoundary ≡ false
+r1WholeScalarRealizationNotRequiredByOffBudgetConsumer = refl
+
 literalKernelCompilesExistingObserver :
   LiteralKernel.FinalNearLiteralKernelBoundary.existingFinalObserverModelIsCompilerOutput
     LiteralKernel.canonicalFinalNearLiteralKernelBoundary ≡ true
@@ -166,6 +183,21 @@ criticalPredicateRefinementCompilesStability :
   Stability.CriticalLineStabilityRefinementBoundary.exactPredicateRefinementPlusStabilityCompilesConsumerReceipt
     Stability.canonicalCriticalLineStabilityRefinementBoundary ≡ true
 criticalPredicateRefinementCompilesStability = refl
+
+r3CriticalPredicateDescendsThroughRealPart :
+  R3Descent.AnalyticCoordinateObserverDescentBoundary.criticalLinePredicateFactorsThroughRealPart
+    R3Descent.canonicalAnalyticCoordinateObserverDescentBoundary ≡ true
+r3CriticalPredicateDescendsThroughRealPart = refl
+
+r3VerifiedRegionUsesSameHalfCoordinate :
+  R3Descent.AnalyticCoordinateObserverDescentBoundary.verifiedRegionLandsInSameHalfCoordinate
+    R3Descent.canonicalAnalyticCoordinateObserverDescentBoundary ≡ true
+r3VerifiedRegionUsesSameHalfCoordinate = refl
+
+r3NumericVerifiedHeightStillUnpaid :
+  R3Descent.AnalyticCoordinateObserverDescentBoundary.numericVerifiedHeightInterpretationPaidHere
+    R3Descent.canonicalAnalyticCoordinateObserverDescentBoundary ≡ false
+r3NumericVerifiedHeightStillUnpaid = refl
 
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
@@ -264,4 +296,4 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     "Realize the exact universal pole-quotient finite kernel and prove nearResponseAt(chosen crossing J) = finiteNearSum(cellResponse). The checked Lean status owner does not transport this equality into Agda."
     "After a proof-carrying upper certificate nearResponseAt(J) <= U, independently prove cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
     "Alternatively prove directly cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
-    "The preferred direct route has one exact representation seam followed by one strict high analytic family. A proof-carrying finite upper is a valid window-free computational producer between them. Intermediate M_cluster, separate near/Gamma envelopes, determinant-q payment, and final balance as analytic input are pruned. Low-source transport and critical-predicate refinement remain independent terminal coordinates. Exact-head Agda validation is not claimed and RH is not derived."
+    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The new observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the existing same-object equality is supplied, so whole pole-quotient scalar realization is unnecessary for R1. R3 is likewise one shared realPart observer: criticalLine descends through realPart=half and the published verified region lands in that same coordinate, while the numeric verified-height interpretation remains unpaid. Intermediate M_cluster, separate near/Gamma envelopes, determinant-q payment, and final balance as analytic input are pruned. Exact-head Agda validation is not claimed and RH is not derived."
