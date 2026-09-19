@@ -49,6 +49,36 @@ normSqOne =
      ⊜ Κ (+ 1 / 1))
     BishopP.≃-refl
 
+normSqScale :
+  ∀ scalar value →
+  BishopReal._≃_
+    (normSqC (Algebra.scaleC scalar value))
+    (BishopReal._*_
+      (square scalar)
+      (normSqC value))
+normSqScale scalar (Complex.complex a b) =
+  let open BishopP.ℝ-Solver
+  in solve 3
+    (λ s x y →
+      ((s ⊗ x) ⊗ (s ⊗ x)) ⊕
+      ((s ⊗ y) ⊗ (s ⊗ y))
+      ⊜
+      (s ⊗ s) ⊗ ((x ⊗ x) ⊕ (y ⊗ y)))
+    BishopP.≃-refl scalar a b
+
+unitPhaseScaledNormSquare :
+  ∀ {phase ratio} →
+  BishopReal._≃_ (normSqC phase) BishopReal.1ℝ →
+  BishopReal._≃_
+    (normSqC (Algebra.scaleC ratio phase))
+    (square ratio)
+unitPhaseScaledNormSquare {phase} {ratio} phaseUnit =
+  BishopP.≃-trans
+    (normSqScale ratio phase)
+    (BishopP.≃-trans
+      (BishopP.*-congˡ phaseUnit)
+      (BishopP.*-identityʳ (square ratio)))
+
 normSqMultiply :
   ∀ left right →
   BishopReal._≃_
