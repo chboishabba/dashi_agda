@@ -7,11 +7,12 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Foundations.HyperformChartGluingExact as Glue
 import DASHI.Moonshine.JInvariantAnalyticHyperformChartGluingExact as Atlas
 import DASHI.Moonshine.JInvariantAnalyticHyperformConsumerAdequacyExact as Adequacy
+import DASHI.Moonshine.JInvariantBishopLatticeEisensteinSameObjectCompilerExact as Lattice
 
 pantsPostprocessingCannotRepair :
   ∀ {M qE4 qE6 system Outcome}
     (atlas : Atlas.JInvariantAnalyticHyperformAtlas M qE4 qE6 system)
-    (consumer : Atlas.Lattice.Parameter M → Outcome) →
+    (consumer : Lattice.Parameter M → Outcome) →
   INF.NonFactorabilityWitness
     (Glue.observe (Atlas.parameterStructuredObserver atlas))
     consumer →
