@@ -10,7 +10,8 @@ import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as RouteG
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
 import DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact as Level2
 import DASHI.Physics.YangMills.YMClayLevel2R129CompositeTailAttachmentExact as D1
-import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as D2
+import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as D2Compat
+import DASHI.Physics.YangMills.YMClayLevel2D2PhysicalMinCutExact as D2
 import DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact as D3
 import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact as StrongF4
 import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact as Scale
@@ -209,21 +210,39 @@ d1NewAnalyticInequalityRequiredIsFalse =
 
 d2SameCoordinateAttachmentStillPhysical : Bool
 d2SameCoordinateAttachmentStillPhysical =
-  D2.sameCoordinateAttachmentStillPhysical
+  D2.positionDepthSemanticsIsIndependentPhysicalAttachment
 
 d2SameCoordinateAttachmentStillPhysicalIsTrue :
   d2SameCoordinateAttachmentStillPhysical ≡ true
 d2SameCoordinateAttachmentStillPhysicalIsTrue =
-  D2.sameCoordinateAttachmentStillPhysicalIsTrue
+  D2.positionDepthSemanticsIsIndependentPhysicalAttachmentIsTrue
 
 d2NewGlobalAFTheoremRequired : Bool
 d2NewGlobalAFTheoremRequired =
-  D2.newGlobalAFTheoremRequiredByD2
+  D2.newGlobalAFTheoremRequired
 
 d2NewGlobalAFTheoremRequiredIsFalse :
   d2NewGlobalAFTheoremRequired ≡ false
 d2NewGlobalAFTheoremRequiredIsFalse =
-  D2.newGlobalAFTheoremRequiredByD2IsFalse
+  D2.newGlobalAFTheoremRequiredIsFalse
+
+d2SecondMixingMapRequired : Bool
+d2SecondMixingMapRequired =
+  D2.secondMixingMapResearchProblem
+
+d2SecondMixingMapRequiredIsFalse :
+  d2SecondMixingMapRequired ≡ false
+d2SecondMixingMapRequiredIsFalse =
+  D2.secondMixingMapResearchProblemIsFalse
+
+d2LiteralCoefficientIsConstantNatFamily : Bool
+d2LiteralCoefficientIsConstantNatFamily =
+  D2.literalClayCoefficientCanBeTreatedAsConstantNatFamily
+
+d2LiteralCoefficientIsConstantNatFamilyIsFalse :
+  d2LiteralCoefficientIsConstantNatFamily ≡ false
+d2LiteralCoefficientIsConstantNatFamilyIsFalse =
+  D2.literalClayCoefficientCanBeTreatedAsConstantNatFamilyIsFalse
 
 d3FiniteToContinuumTransportStillPhysical : Bool
 d3FiniteToContinuumTransportStillPhysical =
