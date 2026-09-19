@@ -32,29 +32,15 @@ import DASHI.Physics.Closure.NSTriadKNEuclideanPhysicalFourierNSExact as Physica
 import DASHI.Physics.Closure.NSTriadKNEuclideanDivergenceFormOutputFactorExact as Output
 import DASHI.Physics.Closure.NSTriadKNEuclideanRawGramOutputQuadraticExact as Gram
 import DASHI.Physics.Closure.NSTriadKNEuclideanViscousHeatRateExact as Heat
+import DASHI.Foundations.BishopSquareNonnegativeExact as SquareNN
 
 square : BishopReal.ℝ → BishopReal.ℝ
 square x = BishopReal._*_ x x
 
-squareNonnegative :
-  (x : BishopReal.ℝ) →
-  BishopReal.NonNegative (square x)
-squareNonnegative x =
-  BishopP.nonNegx,y⇒nonNegx*y
-    (BishopP.nonNeg∣x∣ x)
-    (BishopP.nonNeg∣x∣ x)
-  where
-  -- x^2 is represented directly below; this local proof is replaced by the
-  -- standard constructive square theorem through order transport.
-  -- The absolute-value presentation keeps no sign assumption on x.
-
--- A direct, sign-free square nonnegativity owner using x*x.
 directSquareNonnegative :
   (x : BishopReal.ℝ) →
   BishopReal.NonNegative (BishopReal._*_ x x)
-directSquareNonnegative x =
-  BishopP.0≤x⇒nonNegx
-    (BishopP.squareNonnegative x)
+directSquareNonnegative = SquareNN.bishopSquareNonnegative
 
 complexModulusSquared :
   Physical.BishopComplex → BishopReal.ℝ
@@ -76,7 +62,7 @@ complexModulusSquaredNonnegative :
   (z : Physical.BishopComplex) →
   BishopReal.NonNegative (complexModulusSquared z)
 complexModulusSquaredNonnegative z =
-  BishopP.+-nonNeg
+  BishopP.nonNegx,y⇒nonNegx+y
     (directSquareNonnegative (Physical.realPart z))
     (directSquareNonnegative (Physical.imaginaryPart z))
 
@@ -84,9 +70,9 @@ complex3NormSquaredNonnegative :
   (v : Physical.BishopComplex3) →
   BishopReal.NonNegative (complex3NormSquared v)
 complex3NormSquaredNonnegative v =
-  BishopP.+-nonNeg
+  BishopP.nonNegx,y⇒nonNegx+y
     (complexModulusSquaredNonnegative (Physical.cx v))
-    (BishopP.+-nonNeg
+    (BishopP.nonNegx,y⇒nonNegx+y
       (complexModulusSquaredNonnegative (Physical.cy v))
       (complexModulusSquaredNonnegative (Physical.cz v)))
 
@@ -163,12 +149,12 @@ lagrangeRemainderNonnegative :
   (ux uy uz : BishopReal.ℝ) →
   BishopReal.NonNegative (lagrangeRemainder xi ux uy uz)
 lagrangeRemainderNonnegative xi ux uy uz =
-  BishopP.+-nonNeg
+  BishopP.nonNegx,y⇒nonNegx+y
     (directSquareNonnegative
       (BishopReal._-_
         (BishopReal._*_ (Euclidean.x xi) uy)
         (BishopReal._*_ (Euclidean.y xi) ux)))
-    (BishopP.+-nonNeg
+    (BishopP.nonNegx,y⇒nonNegx+y
       (directSquareNonnegative
         (BishopReal._-_
           (BishopReal._*_ (Euclidean.x xi) uz)
@@ -331,11 +317,11 @@ realHermitianYoung
 
     remainderNN : BishopReal.NonNegative remainder
     remainderNN =
-      BishopP.+-nonNeg (directSquareNonnegative (BishopReal._-_ axr bxr))
-      (BishopP.+-nonNeg (directSquareNonnegative (BishopReal._-_ axi bxi))
-      (BishopP.+-nonNeg (directSquareNonnegative (BishopReal._-_ ayr byr))
-      (BishopP.+-nonNeg (directSquareNonnegative (BishopReal._-_ ayi byi))
-      (BishopP.+-nonNeg (directSquareNonnegative (BishopReal._-_ azr bzr))
+      BishopP.nonNegx,y⇒nonNegx+y (directSquareNonnegative (BishopReal._-_ axr bxr))
+      (BishopP.nonNegx,y⇒nonNegx+y (directSquareNonnegative (BishopReal._-_ axi bxi))
+      (BishopP.nonNegx,y⇒nonNegx+y (directSquareNonnegative (BishopReal._-_ ayr byr))
+      (BishopP.nonNegx,y⇒nonNegx+y (directSquareNonnegative (BishopReal._-_ ayi byi))
+      (BishopP.nonNegx,y⇒nonNegx+y (directSquareNonnegative (BishopReal._-_ azr bzr))
                         (directSquareNonnegative (BishopReal._-_ azi bzi))))))
 
     open BishopP.ℝ-Solver
