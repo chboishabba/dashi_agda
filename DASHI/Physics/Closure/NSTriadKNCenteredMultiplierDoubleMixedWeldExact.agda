@@ -47,6 +47,7 @@ import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Ex
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNFixedOutputViscousRateDifferenceFactorizationExact as Rate
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredCovarianceFactorExact as Centered
 import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleCellAmplitudeFoldRound544Exact as R544
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredMultiplierVectorCovarianceExact as Vector
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Cov
@@ -347,18 +348,6 @@ module PhysicalCenteredDoubleMixed
     trans expose (trans replaceFour (trans distribute collect))
 
 
-  workAddLeft :
-    (leftA leftB right : C3.Complex3 F) →
-    Work.coherentWork (C3.complex3Add leftA leftB) right
-    ≡ Work.coherentWork leftA right + Work.coherentWork leftB right
-  workAddLeft leftA leftB right =
-    trans
-      (cong (Work.two *_) (R291.realCrossAddLeft leftA leftB right))
-      (solve
-        ( R179.realHermitianCross leftA right
-        ∷ R179.realHermitianCross leftB right
-        ∷ []))
-
   four : ℚ
   four = Work.two * Work.two
 
@@ -369,49 +358,14 @@ module PhysicalCenteredDoubleMixed
     (left right : C3.Complex3 F) →
     Work.coherentWork (R225.fourCopies left) (R225.fourCopies right)
     ≡ sixteen * Work.coherentWork left right
-  coherentWorkFourCopies left right =
-    let
-      ll = C3.complex3Add left left
-      rr = C3.complex3Add right right
-
-      leftSplit :
-        Work.coherentWork (C3.complex3Add ll ll) (C3.complex3Add rr rr)
-        ≡
-        Work.coherentWork ll (C3.complex3Add rr rr)
-        + Work.coherentWork ll (C3.complex3Add rr rr)
-      leftSplit = workAddLeft ll ll (C3.complex3Add rr rr)
-
-      rightSplit :
-        Work.coherentWork ll (C3.complex3Add rr rr)
-        ≡ Work.coherentWork ll rr + Work.coherentWork ll rr
-      rightSplit = Work.workAddRight ll rr rr
-
-      llSplit :
-        Work.coherentWork ll rr
-        ≡ Work.coherentWork left rr + Work.coherentWork left rr
-      llSplit = workAddLeft left left rr
-
-      rrSplit :
-        Work.coherentWork left rr
-        ≡ Work.coherentWork left right + Work.coherentWork left right
-      rrSplit = Work.workAddRight left right right
-
-      x = Work.coherentWork left right
-    in
-    trans leftSplit
-      (trans
-        (cong₂ _+_ rightSplit rightSplit)
-        (trans
-          (cong
-            (λ y → (y + y) + (y + y))
-            llSplit)
-          (trans
-            (cong
-              (λ y →
-                ((y + y) + (y + y))
-                + ((y + y) + (y + y)))
-              rrSplit)
-            (solve (x ∷ [])))))
+  coherentWorkFourCopies
+      (C3.complex3
+        (C3.complex lx lxi) (C3.complex ly lyi) (C3.complex lz lzi))
+      (C3.complex3
+        (C3.complex rx rxi) (C3.complex ry ryi) (C3.complex rz rzi)) =
+    solve
+      ( lx ∷ lxi ∷ ly ∷ lyi ∷ lz ∷ lzi
+      ∷ rx ∷ rxi ∷ ry ∷ ryi ∷ rz ∷ rzi ∷ [])
 
   fixedOutputDoubleWorkIsSixteenMixedWork :
     (output : Z3.FourierMode) →
@@ -465,7 +419,7 @@ module PhysicalCenteredDoubleMixed
       mixedValue = D1a.mixedProductCell S velocity
       doubleValue = R225.doubleMixedCell S velocity
       mixed = R224.foldVector mixedValue items
-      rho = Vector.Viscous.Centered.modalViscousRate nu I
+      rho = Centered.modalViscousRate nu I
       rate = Cov.cellRate rho
       decay =
         R224.foldVector (D1a.variableDecayCell rho S velocity) items
@@ -487,7 +441,7 @@ module PhysicalCenteredDoubleMixed
       mixedValue = D1a.mixedProductCell S velocity
       doubleValue = R225.doubleMixedCell S velocity
       mixed = R224.foldVector mixedValue items
-      rho = Vector.Viscous.Centered.modalViscousRate nu I
+      rho = Centered.modalViscousRate nu I
       rate = Cov.cellRate rho
       decay =
         R224.foldVector (D1a.variableDecayCell rho S velocity) items
