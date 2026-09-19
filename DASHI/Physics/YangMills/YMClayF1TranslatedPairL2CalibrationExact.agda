@@ -4,7 +4,7 @@ module DASHI.Physics.YangMills.YMClayF1TranslatedPairL2CalibrationExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_; _*_)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_; _*_; ∣_∣)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact a
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact as R295
 import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact as R310
+import DASHI.Physics.YangMills.BalabanDirectR295ToR296MagnitudeCompilerRound313Exact as R313
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.YMClayR295MarkedSourceAdapterExact as Adapter
 import DASHI.Physics.YangMills.YMClayDenseMarkedSourceF1ProducerExact as Dense
@@ -32,8 +33,8 @@ import DASHI.Physics.YangMills.YMClayF1WilsonR295SameObjectWeldExact as Wilson
 --     rootedShell_k(decode psi, tau_1 psi)
 --       <= c_k * normSq_k(psi).
 --
--- No equality of envelopes is required.  No new marked-source/covariance
--- compiler is required.  This owner compiles exactly that one-sided physical
+-- No equality of envelopes is required. No new marked-source/covariance
+-- compiler is required. This owner compiles exactly that one-sided physical
 -- estimate into the corrected DenseMarkedSourceF1Weld.
 ------------------------------------------------------------------------
 
@@ -46,15 +47,13 @@ record TranslatedPairPhysicalL2Calibration
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     (r295 : R295.DirectT5StateFamilyJPresentation dataSet extension)
     (magnitudeIsAbsolute :
-      ∀ value → R278.magnitude extension value ≡ ℚ.∣ value ∣)
+      ∀ value → R278.magnitude extension value ≡ ∣ value ∣)
     (semantics :
       R310.PairwiseEuclideanTimeSemantics
         {PhysicalObservable = PhysicalObservable}
         {dataSet = dataSet}
         {extension = extension}
-        {finite =
-          DASHI.Physics.YangMills.BalabanDirectR295ToR296MagnitudeCompilerRound313Exact.exactT5JMagnitudeFromR295
-            r295 magnitudeIsAbsolute})
+        {finite = R313.exactT5JMagnitudeFromR295 r295 magnitudeIsAbsolute})
     (wilsonWeld :
       Wilson.PhysicalWilsonR295SameObjectWeld
         {Loop = Loop} r295 magnitudeIsAbsolute semantics)
@@ -91,15 +90,13 @@ asDenseMarkedSourceF1Weld :
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {r295 : R295.DirectT5StateFamilyJPresentation dataSet extension}
     {magnitudeIsAbsolute :
-      ∀ value → R278.magnitude extension value ≡ ℚ.∣ value ∣}
+      ∀ value → R278.magnitude extension value ≡ ∣ value ∣}
     {semantics :
       R310.PairwiseEuclideanTimeSemantics
         {PhysicalObservable = PhysicalObservable}
         {dataSet = dataSet}
         {extension = extension}
-        {finite =
-          DASHI.Physics.YangMills.BalabanDirectR295ToR296MagnitudeCompilerRound313Exact.exactT5JMagnitudeFromR295
-            r295 magnitudeIsAbsolute}}
+        {finite = R313.exactT5JMagnitudeFromR295 r295 magnitudeIsAbsolute}}
     {wilsonWeld :
       Wilson.PhysicalWilsonR295SameObjectWeld
         {Loop = Loop} r295 magnitudeIsAbsolute semantics} →
@@ -109,9 +106,13 @@ asDenseMarkedSourceF1Weld :
     (Adapter.r295MarkedResponse dataSet extension r295)
     (Adapter.r295MarkedSeparationDecayProducer dataSet extension r295)
 asDenseMarkedSourceF1Weld
-    {r295 = r295} {semantics = semantics} calibration = record
+    {PhysicalObservable = PhysicalObservable}
+    {r295 = r295}
+    {semantics = semantics}
+    {wilsonWeld = wilsonWeld}
+    calibration = record
   { Dense.DenseMarkedSourceF1Weld.DensePhysicalObservable =
-      _
+      PhysicalObservable
   ; Dense.DenseMarkedSourceF1Weld.leftMarkedObservable =
       R310.decode semantics
   ; Dense.DenseMarkedSourceF1Weld.rightMarkedObservable =
@@ -121,9 +122,10 @@ asDenseMarkedSourceF1Weld
   ; Dense.DenseMarkedSourceF1Weld.denseInPhysicalVacuumComplement =
       denseInPhysicalVacuumComplement calibration
   ; Dense.DenseMarkedSourceF1Weld.SameLiteralWilsonTwoSliceObservables =
-      _
+      Wilson.PhysicalWilsonR295SameObjectWeld
+        r295 _ semantics
   ; Dense.DenseMarkedSourceF1Weld.sameLiteralWilsonTwoSliceObservables =
-      Wilson.wilsonPresentation _
+      wilsonWeld
   ; Dense.DenseMarkedSourceF1Weld.f1TargetBound =
       λ psi cutoff →
         decorrelationConstant calibration cutoff
