@@ -7,7 +7,7 @@ open import Data.Empty using (⊥)
 import DASHI.Education.DigitalESDDatabaseExecutionReceiptExact as Exec
 import DASHI.Education.DigitalESDDatabaseTranslatedQueriesExact as Queries
 
-executionReceiptCountRegression : Exec.executionReceiptCount ≡ 14
+executionReceiptCountRegression : Exec.executionReceiptCount ≡ 21
 executionReceiptCountRegression = refl
 
 scopusExecutionAttemptedRegression :
@@ -61,3 +61,23 @@ blockedExecutionCannotCreateIncludedCorpusRegression :
   Exec.ExecutionReceiptCreatesIncludedCorpus → ⊥
 blockedExecutionCannotCreateIncludedCorpusRegression =
   Exec.executionReceiptDoesNotCreateIncludedCorpus
+
+
+ericExecutionAttemptedRegression :
+  Exec.DatabaseExecutionReceipt.executionAttempted Exec.ericQ1Execution ≡ true
+ericExecutionAttemptedRegression = refl
+
+ericCurrentQueryNotSubmittedRegression :
+  Exec.DatabaseExecutionReceipt.querySubmitted Exec.ericQ1Execution ≡ false
+ericCurrentQueryNotSubmittedRegression = refl
+
+ericInterfaceFailureBeforeSubmissionRegression :
+  Exec.DatabaseExecutionReceipt.outcome Exec.ericQ1Execution
+  ≡ Exec.interfaceFailureBeforeSubmission
+      "current web transport refused direct api.ies.ed.gov access before a result response could be observed"
+ericInterfaceFailureBeforeSubmissionRegression = refl
+
+ericTranslatedQueryIdentityRegression :
+  Exec.DatabaseExecutionReceipt.translatedQuery Exec.ericQ1Execution
+  ≡ Queries.ericQ1DigitalEducationESD
+ericTranslatedQueryIdentityRegression = refl
