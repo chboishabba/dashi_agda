@@ -10,9 +10,10 @@ module DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceSetoidQuotientWeldExac
 -- definitionally.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (lzero)
+open import Agda.Primitive using (Setω; lzero)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Foundations.QuotientSetoidSurface as Quotient
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHomogeneousCoordinatesExact as CP
@@ -32,7 +33,7 @@ projectiveRescalingSetoid {field} {dimension} equivalence = record
 
 record ExactProjectiveRescalingQuotient
     (field : CP.ComplexFieldPresentation)
-    (dimension : Agda.Builtin.Nat.Nat) : Set₁ where
+    (dimension : Nat) : Setω where
   field
     rescalingEquivalence :
       Quotient.IsEquivalence
