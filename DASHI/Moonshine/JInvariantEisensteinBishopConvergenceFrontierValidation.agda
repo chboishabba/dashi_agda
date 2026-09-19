@@ -136,6 +136,11 @@ literalQToBishopRadiusReductionCompilerIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 literalQToBishopRadiusReductionCompilerIsOwned = refl
 
+qExponentMagnitudeToLiteralExponentCompilerIsOwned :
+  P.qExponentMagnitudeToLiteralExponentCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+qExponentMagnitudeToLiteralExponentCompilerIsOwned = refl
+
 bishopLiteralRadiusMajorantCompilerIsOwned :
   P.bishopLiteralRadiusMajorantCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
