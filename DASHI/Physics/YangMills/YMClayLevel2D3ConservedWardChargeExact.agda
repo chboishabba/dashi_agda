@@ -4,8 +4,8 @@ module DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _-_)
-import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (trans; sym)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact as Ward
@@ -28,14 +28,11 @@ differenceZeroImpliesEqual :
   left - right ≡ 0ℚ →
   left ≡ right
 differenceZeroImpliesEqual left right differenceZero =
-  let
-    rearranged : left ≡ (left - right) + right
-    rearranged = sym (ℚP.+-minus-telescope left right)
-  in
-  trans rearranged
+  trans
+    (sym (ℚRing.solve-∀ left right))
     (trans
       (cong (λ value → value + right) differenceZero)
-      (ℚP.+-identityˡ right))
+      (ℚRing.solve-∀ right))
 
 wardChargeConserved :
   (charge : Ward.LatticeStressWardCharge) →
