@@ -39,7 +39,7 @@ import DASHI.GameTheory.GameTheorySourceAtlasExact as Sources
 ------------------------------------------------------------------------
 
 data SharedExistenceTheoremLeaf : Set where
-  correctedFiniteMixedNash
+  correctedFiniteMixedNash : SharedExistenceTheoremLeaf
   finiteMixedBayesianViaNash : SharedExistenceTheoremLeaf
 
 sharedExistenceRoute :
@@ -71,17 +71,17 @@ sharedExistenceSchedulerAction leaf = refl
 ------------------------------------------------------------------------
 
 data GameTheoryResidual : Set where
-  correctedFiniteMixedNashCertification
-  pureFiniteBayesianEquilibriumExistenceIfRequired
-  posteriorConditioningAndBayesUpdate
-  generalTypeHierarchyAndCommonKnowledge
-  subgamePerfectExistenceTheorem
-  perfectRecallBehaviouralEquivalence
-  generalReplicatorODEAndStability
-  empiricalEvolutionaryFixation
-  cooperativeCoreExistenceOrNonemptiness
-  bargainingSolutionCharacterization
-  mechanismDesignNamedTruthfulnessTheorems
+  correctedFiniteMixedNashCertification : GameTheoryResidual
+  pureFiniteBayesianEquilibriumExistenceIfRequired : GameTheoryResidual
+  posteriorConditioningAndBayesUpdate : GameTheoryResidual
+  generalTypeHierarchyAndCommonKnowledge : GameTheoryResidual
+  subgamePerfectExistenceTheorem : GameTheoryResidual
+  perfectRecallBehaviouralEquivalence : GameTheoryResidual
+  generalReplicatorODEAndStability : GameTheoryResidual
+  empiricalEvolutionaryFixation : GameTheoryResidual
+  cooperativeCoreExistenceOrNonemptiness : GameTheoryResidual
+  bargainingSolutionCharacterization : GameTheoryResidual
+  mechanismDesignNamedTruthfulnessTheorems : GameTheoryResidual
   empiricalStrategicApplicationReceipt : GameTheoryResidual
 
 ------------------------------------------------------------------------

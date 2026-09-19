@@ -24,36 +24,26 @@ import UFTC_Lattice as UFTC
 -- and vector/spectral non-authority gates.  It is a receipt surface only.
 
 data PNFResidualFieldInvariantStatus : Set where
-  residualFieldInvariants_checkedNoAuthorityPromotion :
-    PNFResidualFieldInvariantStatus
+  residualFieldInvariants_checkedNoAuthorityPromotion : PNFResidualFieldInvariantStatus
 
 data PNFResidualFieldInvariantComponent : Set where
-  structuralProjectionComponent :
-    PNFResidualFieldInvariantComponent
+  structuralProjectionComponent : PNFResidualFieldInvariantComponent
 
-  sameFibreComparabilityComponent :
-    PNFResidualFieldInvariantComponent
+  sameFibreComparabilityComponent : PNFResidualFieldInvariantComponent
 
-  explicitBridgeTransportExceptionComponent :
-    PNFResidualFieldInvariantComponent
+  explicitBridgeTransportExceptionComponent : PNFResidualFieldInvariantComponent
 
-  fourLevelResidualSeverityComponent :
-    PNFResidualFieldInvariantComponent
+  fourLevelResidualSeverityComponent : PNFResidualFieldInvariantComponent
 
-  severityMaxJoinComponent :
-    PNFResidualFieldInvariantComponent
+  severityMaxJoinComponent : PNFResidualFieldInvariantComponent
 
-  contradictionMonotonicityComponent :
-    PNFResidualFieldInvariantComponent
+  contradictionMonotonicityComponent : PNFResidualFieldInvariantComponent
 
-  visibleResidualSeverityComponent :
-    PNFResidualFieldInvariantComponent
+  visibleResidualSeverityComponent : PNFResidualFieldInvariantComponent
 
-  residualCorroboratedProximityComponent :
-    PNFResidualFieldInvariantComponent
+  residualCorroboratedProximityComponent : PNFResidualFieldInvariantComponent
 
-  vectorSpectralNonAuthorityComponent :
-    PNFResidualFieldInvariantComponent
+  vectorSpectralNonAuthorityComponent : PNFResidualFieldInvariantComponent
 
 canonicalPNFResidualFieldInvariantComponents :
   List PNFResidualFieldInvariantComponent
@@ -285,11 +275,9 @@ sameFibreComparabilityOfReceipts leftObj rightObj fibre left right =
     refl
 
 data BridgeTransportMode : Set where
-  sameFibreTransport :
-    BridgeTransportMode
+  sameFibreTransport : BridgeTransportMode
 
-  explicitBridgeTransportException :
-    BridgeTransportMode
+  explicitBridgeTransportException : BridgeTransportMode
 
 bridgeTransportMayCrossFibre :
   BridgeTransportMode →
@@ -377,17 +365,13 @@ visibleJoinSeverityMax =
 -- Vector and spectral non-authority gates.
 
 data NonAuthorityCarrier : Set where
-  textEmbeddingCarrier :
-    NonAuthorityCarrier
+  textEmbeddingCarrier : NonAuthorityCarrier
 
-  vectorProximityCarrier :
-    NonAuthorityCarrier
+  vectorProximityCarrier : NonAuthorityCarrier
 
-  spectralCoordinateCarrier :
-    NonAuthorityCarrier
+  spectralCoordinateCarrier : NonAuthorityCarrier
 
-  signedLaplacianCarrier :
-    NonAuthorityCarrier
+  signedLaplacianCarrier : NonAuthorityCarrier
 
 vectorOrSpectralPromotesTruth :
   NonAuthorityCarrier →

@@ -1,0 +1,133 @@
+module DASHI.Wikimedia.Mabo100HopReviewedCampaignValidation where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+
+open import DASHI.Wikimedia.Mabo100HopReviewedCampaignExact
+
+validationCampaignCycleBudget : campaignCycleBudget ≡ 100
+validationCampaignCycleBudget = refl
+
+validationWorldViewHopBudget : worldViewHopBudget ≡ 100
+validationWorldViewHopBudget = refl
+
+validationTraversalDepthIsNotCampaignCycle :
+  traversalDepthEqualsCampaignCycle canonicalReviewedCampaignBoundary ≡ false
+validationTraversalDepthIsNotCampaignCycle = refl
+
+validationDurableNovelCountIsNotCampaignCycle :
+  durableNovelIdentityCountEqualsCampaignCycle canonicalReviewedCampaignBoundary ≡ false
+validationDurableNovelCountIsNotCampaignCycle = refl
+
+validationNextHopDependsOnPostAcquisitionAssessment :
+  nextHopDependsOnPostAcquisitionAssessment canonicalReviewedCampaignBoundary ≡ true
+validationNextHopDependsOnPostAcquisitionAssessment = refl
+
+validationPrecomputedSiblingQueueIsNotCampaignScheduler :
+  precomputedSiblingQueueIsCampaignScheduler canonicalReviewedCampaignBoundary ≡ false
+validationPrecomputedSiblingQueueIsNotCampaignScheduler = refl
+
+validationSchedulerSelectionDoesNotDependOnReviewAvailability :
+  schedulerSelectionDependsOnReviewAvailability canonicalReviewedCampaignBoundary ≡ false
+validationSchedulerSelectionDoesNotDependOnReviewAvailability = refl
+
+validationIdentityReviewDoesNotEqualOutgoingContextReview :
+  identityReviewEqualsOutgoingContextReview canonicalReviewedCampaignBoundary ≡ false
+validationIdentityReviewDoesNotEqualOutgoingContextReview = refl
+
+validationLatestLookupDoesNotEqualAdmittedManifestation :
+  latestRevisionLookupEqualsAdmittedSourceManifestation canonicalReviewedCampaignBoundary ≡ false
+validationLatestLookupDoesNotEqualAdmittedManifestation = refl
+
+validationNonNovelAliasDoesNotCreateDiscoveryLineage :
+  nonNovelAliasCreatesDiscoveryLineage canonicalReviewedCampaignBoundary ≡ false
+validationNonNovelAliasDoesNotCreateDiscoveryLineage = refl
+
+validationSourceExpansionDoesNotCountNovelIdentity :
+  sourceExpansionReceiptCountsNovelIdentity canonicalReviewedCampaignBoundary ≡ false
+validationSourceExpansionDoesNotCountNovelIdentity = refl
+
+validationSourceExpansionCanCloseZeroBoundedEdges :
+  sourceExpansionReceiptCanCloseZeroBoundedEdges canonicalReviewedCampaignBoundary ≡ true
+validationSourceExpansionCanCloseZeroBoundedEdges = refl
+
+validationManifestRequired :
+  reviewManifestRequired canonicalReviewedCampaignBoundary ≡ true
+validationManifestRequired = refl
+
+validationDiagnosisDoesNotEqualReview :
+  diagnosisProposalEqualsIdentityReview canonicalReviewedCampaignBoundary ≡ false
+validationDiagnosisDoesNotEqualReview = refl
+
+validationReviewDoesNotEqualPayment :
+  identityReviewEqualsPersistedPayment canonicalReviewedCampaignBoundary ≡ false
+validationReviewDoesNotEqualPayment = refl
+
+validationPaymentDoesNotEqualNovelAdmission :
+  persistedPaymentEqualsNovelDurableAdmission canonicalReviewedCampaignBoundary ≡ false
+validationPaymentDoesNotEqualNovelAdmission = refl
+
+validationKnownIdentityPaymentNonNovel :
+  knownIdentityPaymentCountsNovel canonicalReviewedCampaignBoundary ≡ false
+validationKnownIdentityPaymentNonNovel = refl
+
+validationMissingCarrierCannotManufactureValue :
+  missingCarrierAnalysisCreatesMissingValue canonicalReviewedCampaignBoundary ≡ false
+validationMissingCarrierCannotManufactureValue = refl
+
+validationExternalComparisonCannotReview :
+  externalKnowledgeComparisonCreatesIdentityReview canonicalReviewedCampaignBoundary ≡ false
+validationExternalComparisonCannotReview = refl
+
+validationSfmCannotReview :
+  semiFormalPresentationCreatesIdentityReview canonicalReviewedCampaignBoundary ≡ false
+validationSfmCannotReview = refl
+
+validationWrongTypeFailsClosed :
+  wrongTypeFailsClosed canonicalReviewedCampaignBoundary ≡ true
+validationWrongTypeFailsClosed = refl
+
+validationReviewedRelationReplaysProviderProperty :
+  boundedReviewedRelationReplaysExactProviderProperty canonicalReviewedCampaignBoundary ≡ true
+validationReviewedRelationReplaysProviderProperty = refl
+
+validationSameObjectPaymentIsNotParentExpansionRelation :
+  sameObjectPaymentEqualsNewRelatedObject canonicalReviewedCampaignBoundary ≡ false
+validationSameObjectPaymentIsNotParentExpansionRelation = refl
+
+validationAuthorityFamilyRouteDoesNotCreateLegalAuthority :
+  authorityFamilyRouteCreatesLegalAuthority canonicalReviewedCampaignBoundary ≡ false
+validationAuthorityFamilyRouteDoesNotCreateLegalAuthority = refl
+
+validationP710ReplayProperty :
+  providerPropertyReference p710ProviderReplay ≡ "P710"
+validationP710ReplayProperty = refl
+
+validationP710ReplayRole :
+  reviewedRelationRoleReference p710ProviderReplay ≡ "context:wikidata:participant"
+validationP710ReplayRole = refl
+
+validationP4006ReplayProperty :
+  providerPropertyReference p4006ProviderReplay ≡ "P4006"
+validationP4006ReplayProperty = refl
+
+validationP4006ReplayRole :
+  reviewedRelationRoleReference p4006ProviderReplay ≡ "context:wikidata:overrules"
+validationP4006ReplayRole = refl
+
+validationCandidateOnly :
+  campaignCandidateOnly canonicalReviewedCampaignBoundary ≡ true
+validationCandidateOnly = refl
+
+validationNoAuthority :
+  campaignCreatesSemanticAuthority canonicalReviewedCampaignBoundary ≡ false
+validationNoAuthority = refl
+
+validationNoApplicability :
+  campaignApplicabilityPromoted canonicalReviewedCampaignBoundary ≡ false
+validationNoApplicability = refl
+
+validationNoTruth :
+  campaignClaimTruthPromoted canonicalReviewedCampaignBoundary ≡ false
+validationNoTruth = refl

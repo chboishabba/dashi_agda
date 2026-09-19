@@ -10,7 +10,8 @@ module DASHI.Core.NonFactorabilityCompositionExact where
 -- institutional/public surface.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; cong)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NF

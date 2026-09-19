@@ -19,8 +19,7 @@ import DASHI.Wikimedia.NativeReferenceAttributedSourceBridgeExact as NativeBridg
 ------------------------------------------------------------------------
 
 data ExternalIdentityKind : Set where
-  wikidataQid canonicalURL doi arxiv officialIdentifier wikimediaReferenceUrl :
-    ExternalIdentityKind
+  wikidataQid canonicalURL doi arxiv officialIdentifier wikimediaReferenceUrl : ExternalIdentityKind
 
 data IdentityResolution : Set where
   notApplicable : String → IdentityResolution
@@ -81,7 +80,7 @@ attributionSnowballAlreadyRetainsIdentityAxes =
   AttributionSnowball.AttributionSnowballBoundary.attributionInstantiatesPluralLens
     AttributionSnowball.canonicalAttributionSnowballBoundary
 
-record AttributedIdentityBundle (source : Attribution.AttributedSource) : Set where
+record AttributedIdentityBundle (source : Attribution.AttributedSource) : Set₁ where
   constructor attributed-identity-bundle
   field
     sourceRoleReceipt : AttributionSnowball.SourceRoleSnowballReceipt source

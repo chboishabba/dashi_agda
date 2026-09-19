@@ -19,26 +19,19 @@ open import Agda.Builtin.Unit using (⊤; tt)
 data Never : Set where
 
 data InterpretiveRoute : Set where
-  candidateInterpretiveRoute :
-    InterpretiveRoute
+  candidateInterpretiveRoute : InterpretiveRoute
 
-  neutralTriadUniversalismRoute :
-    InterpretiveRoute
+  neutralTriadUniversalismRoute : InterpretiveRoute
 
-  monocultureCompressionRoute :
-    InterpretiveRoute
+  monocultureCompressionRoute : InterpretiveRoute
 
-  socialTruthProofRoute :
-    InterpretiveRoute
+  socialTruthProofRoute : InterpretiveRoute
 
-  clinicalAuthorityRoute :
-    InterpretiveRoute
+  clinicalAuthorityRoute : InterpretiveRoute
 
-  legalAuthorityRoute :
-    InterpretiveRoute
+  legalAuthorityRoute : InterpretiveRoute
 
-  educationalAuthorityRoute :
-    InterpretiveRoute
+  educationalAuthorityRoute : InterpretiveRoute
 
 interpretiveRouteName : InterpretiveRoute → String
 interpretiveRouteName candidateInterpretiveRoute =
@@ -100,29 +93,21 @@ educationalAuthorityRouteRejected :
 educationalAuthorityRouteRejected ()
 
 data TriadicRelationSurface : Set where
-  dialecticTriadSurface :
-    TriadicRelationSurface
+  dialecticTriadSurface : TriadicRelationSurface
 
-  spiralTriadSurface :
-    TriadicRelationSurface
+  spiralTriadSurface : TriadicRelationSurface
 
-  hypervoxelTriadSurface :
-    TriadicRelationSurface
+  hypervoxelTriadSurface : TriadicRelationSurface
 
-  hyperfabricTriadSurface :
-    TriadicRelationSurface
+  hyperfabricTriadSurface : TriadicRelationSurface
 
-  tritTriadSurface :
-    TriadicRelationSurface
+  tritTriadSurface : TriadicRelationSurface
 
-  stageTriadSurface :
-    TriadicRelationSurface
+  stageTriadSurface : TriadicRelationSurface
 
-  primeTriadSurface :
-    TriadicRelationSurface
+  primeTriadSurface : TriadicRelationSurface
 
-  padicTriadSurface :
-    TriadicRelationSurface
+  padicTriadSurface : TriadicRelationSurface
 
 triadicRelationSurfaceName :
   TriadicRelationSurface →
@@ -423,35 +408,25 @@ canonicalStageSpiralHyperfabricRows =
   ∷ []
 
 data IntersectionalAxis : Set where
-  dialecticAxis :
-    IntersectionalAxis
+  dialecticAxis : IntersectionalAxis
 
-  spiralAxis :
-    IntersectionalAxis
+  spiralAxis : IntersectionalAxis
 
-  hypervoxelAxis :
-    IntersectionalAxis
+  hypervoxelAxis : IntersectionalAxis
 
-  hyperfabricAxis :
-    IntersectionalAxis
+  hyperfabricAxis : IntersectionalAxis
 
-  tritAxis :
-    IntersectionalAxis
+  tritAxis : IntersectionalAxis
 
-  threeSixNineAxis :
-    IntersectionalAxis
+  threeSixNineAxis : IntersectionalAxis
 
-  stageAxis :
-    IntersectionalAxis
+  stageAxis : IntersectionalAxis
 
-  primeAxis :
-    IntersectionalAxis
+  primeAxis : IntersectionalAxis
 
-  padicAxis :
-    IntersectionalAxis
+  padicAxis : IntersectionalAxis
 
-  bodyMemoryAxis :
-    IntersectionalAxis
+  bodyMemoryAxis : IntersectionalAxis
 
 axisName : IntersectionalAxis → String
 axisName dialecticAxis =
@@ -656,14 +631,11 @@ canonicalIntersectionalAxisAuditRows =
   ∷ []
 
 data CulturalTriadRole : Set where
-  originAuthorityRole :
-    CulturalTriadRole
+  originAuthorityRole : CulturalTriadRole
 
-  embodiedSubjectRole :
-    CulturalTriadRole
+  embodiedSubjectRole : CulturalTriadRole
 
-  relationalMediatorRole :
-    CulturalTriadRole
+  relationalMediatorRole : CulturalTriadRole
 
 culturalTriadRoleName : CulturalTriadRole → String
 culturalTriadRoleName originAuthorityRole =
@@ -674,41 +646,29 @@ culturalTriadRoleName relationalMediatorRole =
   "relational-mediator-role"
 
 data PowerAtlasAxis : Set where
-  racePowerAxis :
-    PowerAtlasAxis
+  racePowerAxis : PowerAtlasAxis
 
-  classPowerAxis :
-    PowerAtlasAxis
+  classPowerAxis : PowerAtlasAxis
 
-  genderPowerAxis :
-    PowerAtlasAxis
+  genderPowerAxis : PowerAtlasAxis
 
-  sexualityPowerAxis :
-    PowerAtlasAxis
+  sexualityPowerAxis : PowerAtlasAxis
 
-  disabilityPowerAxis :
-    PowerAtlasAxis
+  disabilityPowerAxis : PowerAtlasAxis
 
-  neurotypePowerAxis :
-    PowerAtlasAxis
+  neurotypePowerAxis : PowerAtlasAxis
 
-  religionPowerAxis :
-    PowerAtlasAxis
+  religionPowerAxis : PowerAtlasAxis
 
-  colonialityPowerAxis :
-    PowerAtlasAxis
+  colonialityPowerAxis : PowerAtlasAxis
 
-  lawPowerAxis :
-    PowerAtlasAxis
+  lawPowerAxis : PowerAtlasAxis
 
-  landPowerAxis :
-    PowerAtlasAxis
+  landPowerAxis : PowerAtlasAxis
 
-  familyPowerAxis :
-    PowerAtlasAxis
+  familyPowerAxis : PowerAtlasAxis
 
-  institutionPowerAxis :
-    PowerAtlasAxis
+  institutionPowerAxis : PowerAtlasAxis
 
 powerAtlasAxisName : PowerAtlasAxis → String
 powerAtlasAxisName racePowerAxis =
@@ -753,29 +713,21 @@ canonicalPowerAtlasAxes =
   ∷ []
 
 data CrenshawTheoremKind : Set where
-  trinityIntersectionalDeconstructionKind :
-    CrenshawTheoremKind
+  trinityIntersectionalDeconstructionKind : CrenshawTheoremKind
 
-  intersectionalTriTruthKind :
-    CrenshawTheoremKind
+  intersectionalTriTruthKind : CrenshawTheoremKind
 
-  singleAxisProjectionLossKind :
-    CrenshawTheoremKind
+  singleAxisProjectionLossKind : CrenshawTheoremKind
 
-  primeFibreIntersectionalityKind :
-    CrenshawTheoremKind
+  primeFibreIntersectionalityKind : CrenshawTheoremKind
 
-  padicSharedRootNotReductionKind :
-    CrenshawTheoremKind
+  padicSharedRootNotReductionKind : CrenshawTheoremKind
 
-  stableNineNotJusticeKind :
-    CrenshawTheoremKind
+  stableNineNotJusticeKind : CrenshawTheoremKind
 
-  hypervoxelLocalRepairKind :
-    CrenshawTheoremKind
+  hypervoxelLocalRepairKind : CrenshawTheoremKind
 
-  hyperfabricNoErasureGluingKind :
-    CrenshawTheoremKind
+  hyperfabricNoErasureGluingKind : CrenshawTheoremKind
 
 crenshawTheoremKindName : CrenshawTheoremKind → String
 crenshawTheoremKindName trinityIntersectionalDeconstructionKind =
@@ -796,23 +748,17 @@ crenshawTheoremKindName hyperfabricNoErasureGluingKind =
   "hyperfabric-no-erasure-gluing"
 
 data ProjectionForm : Set where
-  axisPreservingProductProjection :
-    ProjectionForm
+  axisPreservingProductProjection : ProjectionForm
 
-  singleAxisCollapseProjection :
-    ProjectionForm
+  singleAxisCollapseProjection : ProjectionForm
 
-  abstractHumanityProjection :
-    ProjectionForm
+  abstractHumanityProjection : ProjectionForm
 
-  abstractHumanityGluingProjection :
-    ProjectionForm
+  abstractHumanityGluingProjection : ProjectionForm
 
-  neutralTriadProjection :
-    ProjectionForm
+  neutralTriadProjection : ProjectionForm
 
-  stableNineJusticePromotionProjection :
-    ProjectionForm
+  stableNineJusticePromotionProjection : ProjectionForm
 
 ProjectionAdmissible : ProjectionForm → Set
 ProjectionAdmissible axisPreservingProductProjection = ⊤

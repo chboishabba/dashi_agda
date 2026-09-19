@@ -22,12 +22,7 @@ import DASHI.Wikimedia.SensibLawStatementBundleSparseReopenExact as Bundle
 ------------------------------------------------------------------------
 
 data BundleDiagnosis : Set where
-  mainSnakMismatch
-  qualifierDrift
-  referenceDrift
-  rankQuestion
-  provenanceGap
-  : BundleDiagnosis
+  mainSnakMismatch qualifierDrift referenceDrift rankQuestion provenanceGap : BundleDiagnosis
 
 record BundleDiagnosisFibre : Set₁ where
   constructor bundle-diagnosis-fibre
@@ -56,12 +51,8 @@ natDiagnosisFibre =
 ------------------------------------------------------------------------
 
 data BundleProducerKind : Set where
-  establishSemanticCorrespondence
-  proveQualifierTransport
-  acquireReferenceEvidence
-  interpretRank
-  acquireProvenanceEvidence
-  : BundleProducerKind
+  establishSemanticCorrespondence proveQualifierTransport : BundleProducerKind
+  acquireReferenceEvidence interpretRank acquireProvenanceEvidence : BundleProducerKind
 
 producerForDiagnosis : BundleDiagnosis → BundleProducerKind
 producerForDiagnosis mainSnakMismatch = establishSemanticCorrespondence

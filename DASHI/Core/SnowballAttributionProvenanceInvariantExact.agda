@@ -16,7 +16,7 @@ import DASHI.Core.SnowballPluralLensInvariantExact as Lens
 ------------------------------------------------------------------------
 
 data AttributionAxis : Set where
-  authorAxis titleAxis publicationAxis doiAxis canonicalURLAxis sourceKindAxis
+  authorAxis titleAxis publicationAxis doiAxis canonicalURLAxis sourceKindAxis : AttributionAxis
   formalisationRelationshipAxis visibilityAxis proofImportAxis authorityAxis : AttributionAxis
 
 attributionRelevant : AttributionAxis → Bool

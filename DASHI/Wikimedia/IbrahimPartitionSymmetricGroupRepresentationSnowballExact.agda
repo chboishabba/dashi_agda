@@ -72,8 +72,8 @@ youngTableauQid = Identity.mkOptionalIdentityDemand
   (Identity.verified "Q2166280" "Wikidata oldid 2440388593 inspected 2026-09-11")
 
 data EdgeRole : Set where
-  currentFirstBody combinatorialIndexing conjugacyClassIndexing
-  irreducibleRepresentationIndexing representationCharacter
+  currentFirstBody combinatorialIndexing conjugacyClassIndexing : EdgeRole
+  irreducibleRepresentationIndexing representationCharacter : EdgeRole
   genericRepositorySubstrate : EdgeRole
 
 record TypedEdge : Set where

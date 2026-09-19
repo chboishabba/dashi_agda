@@ -82,8 +82,8 @@ record DecisionFibrePotentialRegression : Set₁ where
         ≡ Bounded.committed
 
     commitmentNeedNotActuate :
-      Dynamics.actuate Dynamics.blocked Dynamics.counterCommitted
-      ≡ Dynamics.actuate Dynamics.released Dynamics.counterCommitted → ⊥
+      Dynamics.actuate Dynamics.blocked Dynamics.supportCommitted
+      ≡ Dynamics.actuate Dynamics.released Dynamics.supportCommitted → ⊥
 
     goNoGoChangesReleaseForSameCommitment :
       Dynamics.actuate (GoNoGo.releaseGate GoNoGo.high GoNoGo.low)

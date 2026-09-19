@@ -16,13 +16,13 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data VapeObservationLayer : Set where
-  labelAndDeclaredComposition
-  virginELiquidComposition
-  agedELiquidComposition
-  deviceMaterialComposition
-  emittedAerosolOrganicChemistry
-  emittedAerosolElements
-  productLifeCycle
+  labelAndDeclaredComposition : VapeObservationLayer
+  virginELiquidComposition : VapeObservationLayer
+  agedELiquidComposition : VapeObservationLayer
+  deviceMaterialComposition : VapeObservationLayer
+  emittedAerosolOrganicChemistry : VapeObservationLayer
+  emittedAerosolElements : VapeObservationLayer
+  productLifeCycle : VapeObservationLayer
   humanDose : VapeObservationLayer
 
 record VapeStudyReceipt : Set where

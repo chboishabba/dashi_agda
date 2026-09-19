@@ -23,11 +23,11 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 data SmokeSource : Set where cannabis tobacco mixedCannabisTobacco : SmokeSource
 
 data RegulatoryTestingMode : Set where
-  statutoryResidueTolerance
-  constituentReporting
-  productApplicationAnalytics
-  batchMultiresiduePanel
-  ignitionPerformanceOnly
+  statutoryResidueTolerance : RegulatoryTestingMode
+  constituentReporting : RegulatoryTestingMode
+  productApplicationAnalytics : RegulatoryTestingMode
+  batchMultiresiduePanel : RegulatoryTestingMode
+  ignitionPerformanceOnly : RegulatoryTestingMode
   ingredientReporting : RegulatoryTestingMode
 
 record TobaccoRegulatoryReceipt : Set where
@@ -190,12 +190,12 @@ cannabisCleanDoesNotCreateSpliffClean ()
 ------------------------------------------------------------------------
 
 data CoSmokeParetoTarget : Set where
-  quantifyTobaccoRetailResidues
-  identifySharedAnalytes
-  controlledMixedCombustion
-  comparePureCannabisPureTobaccoMixed
-  includeHPHCBackground
-  routeDoseModel
+  quantifyTobaccoRetailResidues : CoSmokeParetoTarget
+  identifySharedAnalytes : CoSmokeParetoTarget
+  controlledMixedCombustion : CoSmokeParetoTarget
+  comparePureCannabisPureTobaccoMixed : CoSmokeParetoTarget
+  includeHPHCBackground : CoSmokeParetoTarget
+  routeDoseModel : CoSmokeParetoTarget
   broaderBehaviouralLiterature : CoSmokeParetoTarget
 
 record CoSmokeParetoStep : Set where
@@ -264,8 +264,8 @@ pareto99 = co-smoke-pareto-step
 data CoSmokeTime : Set where tobaccoRegulatoryBaseline cannabisResidueProgramme mixedSourceFrontier : CoSmokeTime
 
 data CoSmokeInterpretation : Set where
-  tobaccoHasIndependentResidueSource
-  mixedUseExists
+  tobaccoHasIndependentResidueSource : CoSmokeInterpretation
+  mixedUseExists : CoSmokeInterpretation
   mixedChemistryPaid : CoSmokeInterpretation
 
 data CoSmokeSummary : Set where mixedSourceNeedsDualProvenance : CoSmokeSummary

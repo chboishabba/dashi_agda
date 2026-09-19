@@ -20,20 +20,20 @@ import DASHI.Culture.MissingDeceasedTernaryAdversarialObserverExact as Observer
 ------------------------------------------------------------------------
 
 data SpeculativeClaimClass : Set where
-  zeroPointSuppression
-  mondaloyS4Metamaterial
-  maiwaldNhiSampleAnalysis
-  personnelCleanup
-  breakawayRelocation
-  reactiveInquiryCoverStory
-  armyCommercialTransfer
-  engineeringStackConvergence
-  informationPoisoning
-  declassificationAcclimatisation
-  timeCrystalPropulsion
-  qetScaleUp
-  wormholeScaleUp
-  anomalousMaterialSample
+  zeroPointSuppression : SpeculativeClaimClass
+  mondaloyS4Metamaterial : SpeculativeClaimClass
+  maiwaldNhiSampleAnalysis : SpeculativeClaimClass
+  personnelCleanup : SpeculativeClaimClass
+  breakawayRelocation : SpeculativeClaimClass
+  reactiveInquiryCoverStory : SpeculativeClaimClass
+  armyCommercialTransfer : SpeculativeClaimClass
+  engineeringStackConvergence : SpeculativeClaimClass
+  informationPoisoning : SpeculativeClaimClass
+  declassificationAcclimatisation : SpeculativeClaimClass
+  timeCrystalPropulsion : SpeculativeClaimClass
+  qetScaleUp : SpeculativeClaimClass
+  wormholeScaleUp : SpeculativeClaimClass
+  anomalousMaterialSample : SpeculativeClaimClass
   counterEspionageSweep : SpeculativeClaimClass
 
 record ClaimDiscriminator : Set where

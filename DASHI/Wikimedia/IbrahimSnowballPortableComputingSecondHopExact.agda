@@ -130,11 +130,11 @@ googleTPUReceipt = primary-technical-receipt
 ------------------------------------------------------------------------
 
 data SecondHopNode : Set where
-  flynnNode simdNode misdNode mimdNode sisdNode armNode neonNode sveNode smeNode
+  flynnNode simdNode misdNode mimdNode sisdNode armNode neonNode sveNode smeNode : SecondHopNode
   heterogeneousNode openMPNode tpuNode aiAcceleratorNode systolicNode matrixMultiplyNode : SecondHopNode
 
 data SecondHopRelation : Set where
-  partOfNavigation subclassNavigation architectureExtensionNavigation
+  partOfNavigation subclassNavigation architectureExtensionNavigation : SecondHopRelation
   offloadModelNavigation hasPartNavigation acceleratesNavigation : SecondHopRelation
 
 record SecondHopEdge : Set where

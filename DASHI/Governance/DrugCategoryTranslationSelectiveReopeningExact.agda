@@ -24,16 +24,16 @@ data TranslationArtifact : Set where
   materialResidualArtifact
   sovereigntyResidualArtifact
 
-  stateClinicalTranslationCertificate
-  clinicalLivedTranslationCertificate
-  commercialTranslationCertificate
-  lexicalMeaningCertificate
-  clinicalSafetyCertificate
-  subjectAuthorityCertificate
-  historicalContinuityCertificate
-  commercialBenefitCertificate
-  sovereignAuthorityCertificate
-  downstreamConsumerCertificate
+  stateClinicalTranslationCertificate : TranslationArtifact
+  clinicalLivedTranslationCertificate : TranslationArtifact
+  commercialTranslationCertificate : TranslationArtifact
+  lexicalMeaningCertificate : TranslationArtifact
+  clinicalSafetyCertificate : TranslationArtifact
+  subjectAuthorityCertificate : TranslationArtifact
+  historicalContinuityCertificate : TranslationArtifact
+  commercialBenefitCertificate : TranslationArtifact
+  sovereignAuthorityCertificate : TranslationArtifact
+  downstreamConsumerCertificate : TranslationArtifact
   : TranslationArtifact
 
 data Depends : TranslationArtifact → TranslationArtifact → Set where

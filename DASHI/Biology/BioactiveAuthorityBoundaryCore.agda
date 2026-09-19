@@ -16,29 +16,21 @@ import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 -- the existing local false/blocking surfaces.
 
 data BioactiveBlockedClaim : Set where
-  clinicalAuthorityBlockedClaim :
-    BioactiveBlockedClaim
+  clinicalAuthorityBlockedClaim : BioactiveBlockedClaim
 
-  doseResponseAuthorityBlockedClaim :
-    BioactiveBlockedClaim
+  doseResponseAuthorityBlockedClaim : BioactiveBlockedClaim
 
-  prescribingAuthorityBlockedClaim :
-    BioactiveBlockedClaim
+  prescribingAuthorityBlockedClaim : BioactiveBlockedClaim
 
-  diseaseAuthorityBlockedClaim :
-    BioactiveBlockedClaim
+  diseaseAuthorityBlockedClaim : BioactiveBlockedClaim
 
-  behaviorAuthorityBlockedClaim :
-    BioactiveBlockedClaim
+  behaviorAuthorityBlockedClaim : BioactiveBlockedClaim
 
-  biomarkerAuthorityBlockedClaim :
-    BioactiveBlockedClaim
+  biomarkerAuthorityBlockedClaim : BioactiveBlockedClaim
 
-  receptorActionIdentityBlockedClaim :
-    BioactiveBlockedClaim
+  receptorActionIdentityBlockedClaim : BioactiveBlockedClaim
 
-  shapeEffectIdentityBlockedClaim :
-    BioactiveBlockedClaim
+  shapeEffectIdentityBlockedClaim : BioactiveBlockedClaim
 
 canonicalBioactiveBlockedClaims : List BioactiveBlockedClaim
 canonicalBioactiveBlockedClaims =

@@ -16,9 +16,9 @@ import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact as Extens
 ------------------------------------------------------------------------
 
 data RosterScope : Set where
-  houseApril2026Core
-  expandedUAPNarrative
-  historicalTechnicalGenealogy
+  houseApril2026Core : RosterScope
+  expandedUAPNarrative : RosterScope
+  historicalTechnicalGenealogy : RosterScope
   chinaMediaComparison : RosterScope
 
 record ScopeReceipt : Set where

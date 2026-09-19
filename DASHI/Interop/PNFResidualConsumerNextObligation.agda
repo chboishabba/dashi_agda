@@ -111,86 +111,52 @@ pnfResidualConsumerReceiptFromRuntimeEvidence
 -- Current blocked status.
 
 data PNFResidualConsumerMissingReceiptField : Set where
-  missingLeftEmissionReceipt :
-    PNFResidualConsumerMissingReceiptField
-  missingRightEmissionReceipt :
-    PNFResidualConsumerMissingReceiptField
-  missingReceiptBackedAtomProjection :
-    PNFResidualConsumerMissingReceiptField
-  missingReceiptBackedResidualComputation :
-    PNFResidualConsumerMissingReceiptField
-  missingRuntimeConsumerProfile :
-    PNFResidualConsumerMissingReceiptField
-  missingRuntimeReceiptId :
-    PNFResidualConsumerMissingReceiptField
-  missingHeckeCandidatePoolReceipt :
-    PNFResidualConsumerMissingReceiptField
+  missingLeftEmissionReceipt : PNFResidualConsumerMissingReceiptField
+  missingRightEmissionReceipt : PNFResidualConsumerMissingReceiptField
+  missingReceiptBackedAtomProjection : PNFResidualConsumerMissingReceiptField
+  missingReceiptBackedResidualComputation : PNFResidualConsumerMissingReceiptField
+  missingRuntimeConsumerProfile : PNFResidualConsumerMissingReceiptField
+  missingRuntimeReceiptId : PNFResidualConsumerMissingReceiptField
+  missingHeckeCandidatePoolReceipt : PNFResidualConsumerMissingReceiptField
 
 data PNFResidualConsumerNonInspectionBoundary : Set where
-  noWrapperByInspection :
-    PNFResidualConsumerNonInspectionBoundary
-  noQualifierByInspection :
-    PNFResidualConsumerNonInspectionBoundary
-  noRoleBindingByInspection :
-    PNFResidualConsumerNonInspectionBoundary
-  noResidualLevelByInspection :
-    PNFResidualConsumerNonInspectionBoundary
-  noHeckeFibreLabelByInspection :
-    PNFResidualConsumerNonInspectionBoundary
+  noWrapperByInspection : PNFResidualConsumerNonInspectionBoundary
+  noQualifierByInspection : PNFResidualConsumerNonInspectionBoundary
+  noRoleBindingByInspection : PNFResidualConsumerNonInspectionBoundary
+  noResidualLevelByInspection : PNFResidualConsumerNonInspectionBoundary
+  noHeckeFibreLabelByInspection : PNFResidualConsumerNonInspectionBoundary
 
 data PNFResidualConsumerDerivedReceiptField : Set where
-  emittedAtomsDeriveFromEmissionReceipts :
-    PNFResidualConsumerDerivedReceiptField
-  residualLevelDerivesFromReceiptResidual :
-    PNFResidualConsumerDerivedReceiptField
-  heckeBoundaryDerivesFromBridgeSurface :
-    PNFResidualConsumerDerivedReceiptField
+  emittedAtomsDeriveFromEmissionReceipts : PNFResidualConsumerDerivedReceiptField
+  residualLevelDerivesFromReceiptResidual : PNFResidualConsumerDerivedReceiptField
+  heckeBoundaryDerivesFromBridgeSurface : PNFResidualConsumerDerivedReceiptField
 
 data PNFResidualConsumerRuntimeSuppliedField : Set where
-  runtimeSuppliesConsumerProfile :
-    PNFResidualConsumerRuntimeSuppliedField
-  runtimeSuppliesReceiptId :
-    PNFResidualConsumerRuntimeSuppliedField
-  runtimeSuppliesLeftEmissionReceipt :
-    PNFResidualConsumerRuntimeSuppliedField
-  runtimeSuppliesRightEmissionReceipt :
-    PNFResidualConsumerRuntimeSuppliedField
-  runtimeSuppliesHeckeCandidatePoolReceiptId :
-    PNFResidualConsumerRuntimeSuppliedField
+  runtimeSuppliesConsumerProfile : PNFResidualConsumerRuntimeSuppliedField
+  runtimeSuppliesReceiptId : PNFResidualConsumerRuntimeSuppliedField
+  runtimeSuppliesLeftEmissionReceipt : PNFResidualConsumerRuntimeSuppliedField
+  runtimeSuppliesRightEmissionReceipt : PNFResidualConsumerRuntimeSuppliedField
+  runtimeSuppliesHeckeCandidatePoolReceiptId : PNFResidualConsumerRuntimeSuppliedField
 
 data PNFResidualConsumerExistingRuntimeSource : Set where
-  pnfEmissionReceiptConstructorExists :
-    PNFResidualConsumerExistingRuntimeSource
-  pnfResidualConsumerBuilderExists :
-    PNFResidualConsumerExistingRuntimeSource
-  heckeCandidatePoolSurfaceExists :
-    PNFResidualConsumerExistingRuntimeSource
+  pnfEmissionReceiptConstructorExists : PNFResidualConsumerExistingRuntimeSource
+  pnfResidualConsumerBuilderExists : PNFResidualConsumerExistingRuntimeSource
+  heckeCandidatePoolSurfaceExists : PNFResidualConsumerExistingRuntimeSource
 
 data PNFResidualConsumerMissingRuntimeSource : Set where
-  missingConcreteConsumerProfileValue :
-    PNFResidualConsumerMissingRuntimeSource
-  missingConcreteRuntimeReceiptIdValue :
-    PNFResidualConsumerMissingRuntimeSource
-  missingConcreteLeftPNFEmissionReceiptValue :
-    PNFResidualConsumerMissingRuntimeSource
-  missingConcreteRightPNFEmissionReceiptValue :
-    PNFResidualConsumerMissingRuntimeSource
-  missingConcreteReceiptBackedResidualComputation :
-    PNFResidualConsumerMissingRuntimeSource
-  missingConcreteHeckeCandidatePoolReceiptIdValue :
-    PNFResidualConsumerMissingRuntimeSource
+  missingConcreteConsumerProfileValue : PNFResidualConsumerMissingRuntimeSource
+  missingConcreteRuntimeReceiptIdValue : PNFResidualConsumerMissingRuntimeSource
+  missingConcreteLeftPNFEmissionReceiptValue : PNFResidualConsumerMissingRuntimeSource
+  missingConcreteRightPNFEmissionReceiptValue : PNFResidualConsumerMissingRuntimeSource
+  missingConcreteReceiptBackedResidualComputation : PNFResidualConsumerMissingRuntimeSource
+  missingConcreteHeckeCandidatePoolReceiptIdValue : PNFResidualConsumerMissingRuntimeSource
 
 data PNFResidualConsumerCurrentStatus : Set where
-  receiptConsumerObligationOnly :
-    PNFResidualConsumerCurrentStatus
-  runtimePNFReceiptsBlocked :
-    PNFResidualConsumerCurrentStatus
-  residualComputationReceiptBlocked :
-    PNFResidualConsumerCurrentStatus
-  heckeCandidatePoolReceiptBlocked :
-    PNFResidualConsumerCurrentStatus
-  nonPromotingDiagnostic :
-    PNFResidualConsumerCurrentStatus
+  receiptConsumerObligationOnly : PNFResidualConsumerCurrentStatus
+  runtimePNFReceiptsBlocked : PNFResidualConsumerCurrentStatus
+  residualComputationReceiptBlocked : PNFResidualConsumerCurrentStatus
+  heckeCandidatePoolReceiptBlocked : PNFResidualConsumerCurrentStatus
+  nonPromotingDiagnostic : PNFResidualConsumerCurrentStatus
 
 record PNFResidualConsumerMissingReceiptDiagnostic : Setω where
   field

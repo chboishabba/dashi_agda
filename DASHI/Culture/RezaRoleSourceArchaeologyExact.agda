@@ -15,17 +15,17 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data RezaRoleSourceClass : Set where
-  primaryInstitutionalRoleRecord
-  primaryHistoricalIdentityRecord
-  primaryLawEnforcementIdentityRecord
-  primaryPatentManifestation
-  patentAssignmentIndexManifestation
-  renderedIndexManifestation
-  primaryCongressionalDocument
-  directColleagueWitnessSurface
-  directFamilyWitnessViaReporting
-  secondaryPressReporting
-  sourceOfSourceRepetition
+  primaryInstitutionalRoleRecord : RezaRoleSourceClass
+  primaryHistoricalIdentityRecord : RezaRoleSourceClass
+  primaryLawEnforcementIdentityRecord : RezaRoleSourceClass
+  primaryPatentManifestation : RezaRoleSourceClass
+  patentAssignmentIndexManifestation : RezaRoleSourceClass
+  renderedIndexManifestation : RezaRoleSourceClass
+  primaryCongressionalDocument : RezaRoleSourceClass
+  directColleagueWitnessSurface : RezaRoleSourceClass
+  directFamilyWitnessViaReporting : RezaRoleSourceClass
+  secondaryPressReporting : RezaRoleSourceClass
+  sourceOfSourceRepetition : RezaRoleSourceClass
   semanticCoordinateOnly : RezaRoleSourceClass
 
 record RezaRoleSourceCarrier : Set where

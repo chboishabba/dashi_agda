@@ -40,32 +40,23 @@ listCount (_ ∷ xs) =
 -- Vocabulary.
 
 data RSAEntropySourceStatisticalKind : Set where
-  entropySourceCandidateKind :
-    RSAEntropySourceStatisticalKind
+  entropySourceCandidateKind : RSAEntropySourceStatisticalKind
 
-  generatorHealthModelKind :
-    RSAEntropySourceStatisticalKind
+  generatorHealthModelKind : RSAEntropySourceStatisticalKind
 
-  modulusDistributionStatisticKind :
-    RSAEntropySourceStatisticalKind
+  modulusDistributionStatisticKind : RSAEntropySourceStatisticalKind
 
-  pairwiseGcdStatisticKind :
-    RSAEntropySourceStatisticalKind
+  pairwiseGcdStatisticKind : RSAEntropySourceStatisticalKind
 
-  residueDistributionStatisticKind :
-    RSAEntropySourceStatisticalKind
+  residueDistributionStatisticKind : RSAEntropySourceStatisticalKind
 
-  anomalyScoreKind :
-    RSAEntropySourceStatisticalKind
+  anomalyScoreKind : RSAEntropySourceStatisticalKind
 
-  nullHypothesisKind :
-    RSAEntropySourceStatisticalKind
+  nullHypothesisKind : RSAEntropySourceStatisticalKind
 
-  sourceWeaknessHypothesisKind :
-    RSAEntropySourceStatisticalKind
+  sourceWeaknessHypothesisKind : RSAEntropySourceStatisticalKind
 
-  statisticalSourceWeaknessCandidateKind :
-    RSAEntropySourceStatisticalKind
+  statisticalSourceWeaknessCandidateKind : RSAEntropySourceStatisticalKind
 
   namedRSAEntropySourceStatisticalKind :
     String →

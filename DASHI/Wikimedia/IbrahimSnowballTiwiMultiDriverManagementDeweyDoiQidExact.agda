@@ -81,7 +81,7 @@ managementToEmpiricalSearchObligation = Traversal.dashi-first-link-edge
 ------------------------------------------------------------------------
 
 data ManagementSourceRole : Set where
-  primaryEmpiricalPublication
+  primaryEmpiricalPublication : ManagementSourceRole
   primaryInstitutionalManagementPlan : ManagementSourceRole
 
 record TiwiManagementAttributedSource : Set where

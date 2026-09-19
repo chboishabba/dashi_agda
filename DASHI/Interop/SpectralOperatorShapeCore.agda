@@ -39,60 +39,43 @@ data TwoCellRef : Set where
   twoCellFallback : TwoCellRef
 
 data OperatorTag : Set where
-  signedResidualLaplacianOperator :
-    OperatorTag
+  signedResidualLaplacianOperator : OperatorTag
 
-  hodgeBoundaryOperator :
-    OperatorTag
+  hodgeBoundaryOperator : OperatorTag
 
-  hodgeDiagnosticOperator :
-    OperatorTag
+  hodgeDiagnosticOperator : OperatorTag
 
-  spectralCoordinateOperator :
-    OperatorTag
+  spectralCoordinateOperator : OperatorTag
 
 data LaplacianKind : Set where
-  signedResidualGraphLaplacian0 :
-    LaplacianKind
+  signedResidualGraphLaplacian0 : LaplacianKind
 
-  hodgeLaplacian1Diagnostic :
-    LaplacianKind
+  hodgeLaplacian1Diagnostic : LaplacianKind
 
-  hodgeLaplacian2Diagnostic :
-    LaplacianKind
+  hodgeLaplacian2Diagnostic : LaplacianKind
 
 data SignedWeightKind : Set where
-  unsignedResidualWeight :
-    SignedWeightKind
+  unsignedResidualWeight : SignedWeightKind
 
-  positiveResidualWeight :
-    SignedWeightKind
+  positiveResidualWeight : SignedWeightKind
 
-  negativeContradictionWeight :
-    SignedWeightKind
+  negativeContradictionWeight : SignedWeightKind
 
-  diagnosticSignedIncidenceWeight :
-    SignedWeightKind
+  diagnosticSignedIncidenceWeight : SignedWeightKind
 
 data SpectralCoordinateKind : Set where
-  residualSeverityCoordinate :
-    SpectralCoordinateKind
+  residualSeverityCoordinate : SpectralCoordinateKind
 
-  signedFrustrationCoordinate :
-    SpectralCoordinateKind
+  signedFrustrationCoordinate : SpectralCoordinateKind
 
-  hodgeCycleDiagnosticCoordinate :
-    SpectralCoordinateKind
+  hodgeCycleDiagnosticCoordinate : SpectralCoordinateKind
 
-  hodgeCavityDiagnosticCoordinate :
-    SpectralCoordinateKind
+  hodgeCavityDiagnosticCoordinate : SpectralCoordinateKind
 
 data DiagnosticGate : Set where
-  implementableSignedResidualGate :
-    DiagnosticGate
+  implementableSignedResidualGate : DiagnosticGate
 
-  diagnosticOnlyFailClosedGate :
-    DiagnosticGate
+  diagnosticOnlyFailClosedGate : DiagnosticGate
 
 ------------------------------------------------------------------------
 -- Canonical shape functions.
@@ -183,23 +166,17 @@ spectralOperatorShapePromotionImpossible :
 spectralOperatorShapePromotionImpossible ()
 
 data SpectralOperatorShapeComponent : Set where
-  zeroOneTwoCellReferenceComponent :
-    SpectralOperatorShapeComponent
+  zeroOneTwoCellReferenceComponent : SpectralOperatorShapeComponent
 
-  operatorTagComponent :
-    SpectralOperatorShapeComponent
+  operatorTagComponent : SpectralOperatorShapeComponent
 
-  signedResidualLaplacianFirstComponent :
-    SpectralOperatorShapeComponent
+  signedResidualLaplacianFirstComponent : SpectralOperatorShapeComponent
 
-  signedWeightKindComponent :
-    SpectralOperatorShapeComponent
+  signedWeightKindComponent : SpectralOperatorShapeComponent
 
-  spectralCoordinateKindComponent :
-    SpectralOperatorShapeComponent
+  spectralCoordinateKindComponent : SpectralOperatorShapeComponent
 
-  hodgeDiagnosticFailClosedComponent :
-    SpectralOperatorShapeComponent
+  hodgeDiagnosticFailClosedComponent : SpectralOperatorShapeComponent
 
 canonicalSpectralOperatorShapeComponents :
   List SpectralOperatorShapeComponent
