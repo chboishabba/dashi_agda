@@ -481,3 +481,52 @@ dedup / screening / SourceAuditAdmission still P0
 ```
 
 The next acquisition round is blocked until the admitted corpus or a same-object manuscript consumer exposes a distinction that the current surfaces cannot separate.
+
+
+## 20. Structured-search to source-audit admission weld
+
+The repository now has an explicit same-object consumer between the existing transparent structured-search closure and the situated source-audit gate:
+
+`DASHI/Education/DigitalESDSearchToSourceAuditAdmissionExact.agda`
+
+with RED-first regression:
+
+`DigitalESDSearchToSourceAuditAdmissionRegression.agda`.
+
+The final source carrier is:
+
+```text
+TransparentStructuredSearchClosureReceipt
++ source-specific included-set / screening / extraction lineage
++ SourceAuditAdmission source
+-> CorpusAuditedSource source
+```
+
+This deliberately preserves two independent payments:
+
+```text
+search/screen/extraction lineage != source audit admission
+source audit admission != proof of declared-search inclusion
+```
+
+A pre-screen candidate, search hit, included-set string reference or completed audit cannot manufacture the other side of the weld. The source identity is indexed across both receipts; inclusion remains an observed review-work fact, and audit admission remains a source-bounded completeness/admissibility fact rather than claim authority.
+
+Accordingly, the P0 execution target is now operationally precise:
+
+```text
+successful database executions with retained exports
+-> cross-database deduplication
+-> eligibility screening + exclusion ledger
+-> structured extraction
+-> source-specific included lineage
+-> SourceAuditAdmission
+-> CorpusAuditedSource
+-> corpus-level blind-spot matrix
+-> challenge seven principles
+```
+
+The current review still has no manufactured canonical `CorpusAuditedSource`; those can exist only after real search/screen/extraction work products and per-source audit receipts exist.
+
+### Remote aggregate note
+
+The connector branch had four eligibility-frame imports serialized as literal `\\n` text rather than actual newlines. Commit `8c8c04ea...` repairs that remote-only source defect and wires the search-to-audit weld into the aggregate. This repair does not alter or extend the local aggregate GREEN receipt at exact commit `94d77498...`.
