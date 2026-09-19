@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Biology.Agriculture.NitrogenaseChemistryCrossPollinationExact as Chemistry
 import DASHI.Biology.Agriculture.CoverCropNitrogenCarryoverCounterfactualExact as Counterfactual
+import DASHI.Biology.Agriculture.ConstructiveNitrogenTransportKernelExact as Transport
 
 ------------------------------------------------------------------------
 -- QUEENSLAND LEY BNF -> N CARRYOVER -> FOLLOWING-CROP RESPONSE
@@ -210,12 +211,40 @@ record QueenslandLeyBoundary : Set where
     queenslandLeyEvidenceClosesAcaciaAvoidedMineralN : Bool
     queenslandLeyEvidenceCreatesAcaciaSameObjectReceipt : Bool
     queenslandLeyEvidenceCreatesDeploymentAuthority : Bool
+    constructiveTransportKernelMathOwned : Bool
+    empiricalPolynomialGeometricKernelBoundOwned : Bool
+    finiteObservationImpliesAsymptoticStabilisation : Bool
 open QueenslandLeyBoundary public
 
 canonicalQueenslandLeyBoundary : QueenslandLeyBoundary
-canonicalQueenslandLeyBoundary = queensland-ley-boundary
-  false false false false false false false false false false false false false false
-  true true false false false
+canonicalQueenslandLeyBoundary = record
+  { fixedNitrogenQuantityImpliesSameMineralNitrogenAtCropSowing = false
+  ; soilMineralNitrogenImpliesEquivalentCropNitrogenUptake = false
+  ; cropNitrogenUptakeImpliesYieldBenefit = false
+  ; fixedNitrogenInputImpliesAvoidedMineralFertilizer = false
+  ; singleFertilizerRateYieldEquivalenceImpliesReplacementValue = false
+  ; waterLimitationMayBeDroppedFromFollowingCropResponse = false
+  ; soilNitrogenImprovementImpliesRecoveredSoilWater = false
+  ; longerLeyDurationImpliesMonotoneFollowingCropBenefit = false
+  ; denitrificationLeachingImmobilisationMayBeDropped = false
+  ; startingMineralNitrogenMayBeDroppedFromBNF = false
+  ; cropIdentityAndSeasonMayBeDropped = false
+  ; isotopeDerivedBNFEqualsDirectBacterialFlux = false
+  ; soilNitrogenAccretionEqualsBiologicalFixation = false
+  ; forageShootExportMayBeDroppedFromSystemBalance = false
+  ; explicitMineralNRateCounterfactualRequiredForReplacement = true
+  ; fixationSoilMineralNUptakeAndYieldRemainSeparateStages = true
+  ; queenslandLeyEvidenceClosesAcaciaAvoidedMineralN = false
+  ; queenslandLeyEvidenceCreatesAcaciaSameObjectReceipt = false
+  ; queenslandLeyEvidenceCreatesDeploymentAuthority = false
+  ; constructiveTransportKernelMathOwned = true
+  ; empiricalPolynomialGeometricKernelBoundOwned = false
+  ; finiteObservationImpliesAsymptoticStabilisation = false
+  }
+
+constructiveTransportMathReused : Transport.NitrogenTransportMathBoundary
+constructiveTransportMathReused =
+  Transport.canonicalNitrogenTransportMathBoundary
 
 fixedNDoesNotIdentifySowingMineralN : fixedNitrogenQuantityImpliesSameMineralNitrogenAtCropSowing canonicalQueenslandLeyBoundary ≡ false
 fixedNDoesNotIdentifySowingMineralN = refl
@@ -237,4 +266,4 @@ acaciaAvoidedMineralNStillOpen = refl
 
 attributionRule : String
 attributionRule =
-  "Hossain et al. 1995 (DOI 10.1071/AR9950493) owns its Warra isotope-derived fixation estimates. Hossain et al. 1996-I (DOI 10.1071/SR9960273) owns its soil-N/C and potentially-mineralisable-N observations. Hossain et al. 1996-II (DOI 10.1071/SR9960289) owns its mineral-N, following-wheat N-uptake/yield/protein observations. Pu et al. 2001 (DOI 10.1023/A:1014462305825) owns its Roma 15N loss/displacement observations. Bell, Lawrence, Johnson & Peoples 2017 (DOI 10.1071/CP16248) owns its multi-site forage-legume fixation/mineral-N/following-crop observations. Strong et al. 2006 (DOI 10.1071/EA05007) owns its Warra mixed-pasture wheat comparison and stored-water limitation observations. Dalal et al. 2004 (DOI 10.1071/EA03166) owns its lucerne-duration × soil-N × soil-water × following-wheat observations. DASHI owns only the typed stage/resource separations and no-promotion boundary. These Queensland systems do not create Acacia/Senegalia same-object evidence, direct bacterial flux, quantified Acacia fertilizer substitution, or deployment authority."
+  "Hossain et al. 1995 (DOI 10.1071/AR9950493) owns its Warra isotope-derived fixation estimates. Hossain et al. 1996-I (DOI 10.1071/SR9960273) owns its soil-N/C and potentially-mineralisable-N observations. Hossain et al. 1996-II (DOI 10.1071/SR9960289) owns its mineral-N, following-wheat N-uptake/yield/protein observations. Pu et al. 2001 (DOI 10.1023/A:1014462305825) owns its Roma 15N loss/displacement observations. Bell, Lawrence, Johnson & Peoples 2017 (DOI 10.1071/CP16248) owns its multi-site forage-legume fixation/mineral-N/following-crop observations. Strong et al. 2006 (DOI 10.1071/EA05007) owns its Warra mixed-pasture wheat comparison and stored-water limitation observations. Dalal et al. 2004 (DOI 10.1071/EA03166) owns its lucerne-duration × soil-N × soil-water × following-wheat observations. DASHI owns only the typed stage/resource separations, reuse of the generic constructive transport/convergence mathematics, and the no-promotion boundary. The imported convolution/tail theorems do not assert that any Queensland source follows a polynomial-geometric kernel; such a pointwise empirical majorant remains unpaid. These Queensland systems do not create Acacia/Senegalia same-object evidence, direct bacterial flux, quantified Acacia fertilizer substitution, or deployment authority."
