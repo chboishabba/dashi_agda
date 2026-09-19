@@ -21,7 +21,7 @@ module DASHI.Analysis.RiemannAnalyticLocatedVerifiedHeightExact where
 -- to decide equality at the published threshold.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set; Set₁)
+open import Agda.Primitive using (Set; Set₁; Set₂)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
