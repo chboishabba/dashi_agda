@@ -172,6 +172,27 @@ guardianGasReversal = attributed-public-source
   "reports a 2026 One Nation reversal from supporting to opposing domestic gas reservation after industry consultation; critics' donor-influence claims remain attributed"
   false refl
 
+
+abcFarrer2026 : AttributedPublicSource
+abcFarrer2026 = attributed-public-source
+  "ABC News"
+  "One Nation scores historic win in Farrer by-election"
+  "2026-05-09"
+  "https://www.abc.net.au/news/2026-05-09/farrer-sat-night-results/106656856"
+  electoralResult
+  "documents David Farley's One Nation win in Farrer, the party's first elected federal House of Representatives seat"
+  false refl
+
+guardianIndigenousComments2026 : AttributedPublicSource
+guardianIndigenousComments2026 = attributed-public-source
+  "Guardian Australia"
+  "Pauline Hanson's comments about Indigenous Australians condemned as 'nasty' and 'derogatory'"
+  "2026-09-14"
+  "https://www.theguardian.com/australia-news/2026/sep/14/pauline-hansons-comments-about-indigenous-australians-condemned-as-nasty-and-derogatory"
+  parliamentaryConduct
+  "reports resurfaced 2025 remarks about Indigenous Australians and attributes condemnation to identified political actors; the conduct record does not create a clinical attribution"
+  false refl
+
 abcSecretHarbour : AttributedPublicSource
 abcSecretHarbour = attributed-public-source
   "ABC News"
@@ -212,6 +233,8 @@ canonicalPublicSources =
   ∷ guardianRinehartRelationship
   ∷ abcRinehartItaly
   ∷ guardianGasReversal
+  ∷ abcFarrer2026
+  ∷ guardianIndigenousComments2026
   ∷ abcSecretHarbour
   ∷ abcIpswichContext
   ∷ aecGroomContext
@@ -618,6 +641,15 @@ burqa2017Receipt =
 burqa2025Receipt : ConductEventReceipt
 burqa2025Receipt =
   conduct-event-receipt burqaSenate2025 abcBurqa2025 true refl false refl
+
+indigenousCommentsReceipt : ConductEventReceipt
+indigenousCommentsReceipt =
+  conduct-event-receipt
+    indigenousComments2025Reported2026
+    guardianIndigenousComments2026
+    true refl
+    false refl
+
 
 ------------------------------------------------------------------------
 -- DECLARED / REALISED / POLICY-REVERSAL SURFACE
