@@ -125,12 +125,12 @@ open SprintATransportGate public
 currentSprintATransportGate : SprintATransportGate
 currentSprintATransportGate =
   sprintATransportGate
-    required
-    required
-    required
-    required
-    required
-    required
+    implementedAwaitingRuntime
+    implementedAwaitingRuntime
+    implementedAwaitingRuntime
+    implementedAwaitingRuntime
+    implementedAwaitingRuntime
+    implementedAwaitingRuntime
     false
     false
 
