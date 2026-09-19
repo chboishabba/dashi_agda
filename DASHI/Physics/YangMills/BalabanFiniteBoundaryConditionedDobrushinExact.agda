@@ -24,7 +24,9 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 
-open import DASHI.Physics.YangMills.CompactLieProofLevelimport DASHI.Physics.YangMills.BalabanFiniteDobrushinReopeningExact as Dobrushin
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
+import DASHI.Physics.YangMills.BalabanFiniteDobrushinReopeningExact as Dobrushin
 import DASHI.Physics.YangMills.BalabanFiniteNormalizedWeightDobrushinExact as Normalize
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 
@@ -48,7 +50,6 @@ record BoundaryConditionedFiniteFibre
 
 open BoundaryConditionedFiniteFibre public
 
-import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 
 conditionalRow :
   ∀ {Local Boundary} →
