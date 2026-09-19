@@ -227,10 +227,10 @@ level2R127AfterR129 = exact-residual
 level2OPEProductTailIdentification : ExactResidual
 level2OPEProductTailIdentification = exact-residual
   physicalClayStressConstruction
-  "YMClayLevel2StressOPEMinCutExact.agda / BalabanClayHighestAlphaRound87FourAnalyticLemmaExact.agda"
-  "same-family physical RG product remainder = composite marked tail"
+  "YMClayLevel2CompositeTailWeldExact.agda"
+  "literal product remainder on the actual completed composite projection = selected composite marked tail"
   unpaid
-  "This is genuine physical same-object analysis. Once supplied, YangMillsSharedMarkedCompositeOPERemainderExact makes the dyadic OPE remainder decay compiler-owned."
+  "The same-family carrier is now explicit: the remainder is evaluated on Marked.compositeProjection completedState, not an arbitrary function. The only physical field is equality with Shared.compositeInsertionTail; the literal DyadicOPERemainderMajorant is then compiler output."
 
 level2GlobalAFSecondPayment : ExactResidual
 level2GlobalAFSecondPayment = exact-residual
@@ -365,6 +365,12 @@ r127IndependentAfterR129Recovery = false
 
 dyadicOPERemainderIndependentAfterCompositeTailIdentification : Bool
 dyadicOPERemainderIndependentAfterCompositeTailIdentification = false
+
+d1NewCompositeTailDecayTheoremRequired : Bool
+d1NewCompositeTailDecayTheoremRequired = false
+
+d1SameCompletedCompositeTailAttachmentStillPhysical : Bool
+d1SameCompletedCompositeTailAttachmentStillPhysical = true
 
 globalAsymptoticFreedomTrajectoryIndependentInLevel2D : Bool
 globalAsymptoticFreedomTrajectoryIndependentInLevel2D = false
