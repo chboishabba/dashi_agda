@@ -14,6 +14,7 @@ import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R2
 import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact as R310
 import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact as R315
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact as S2
+import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as S2Same
 
 ------------------------------------------------------------------------
 -- ROUTE-S P2 / THREE LITERAL-WILSON EXPECTATION LIMITS
@@ -136,6 +137,24 @@ canonicalS2BuildsSelectedExpectationLimits inputs left right time =
   literalWilsonSelectedExpectationLimits
     (S2.canonicalWilsonPairwiseSemantics inputs)
     (S2.canonicalWilsonCylinderPresentation inputs)
+    left right time
+
+
+sameAlgebraS2BuildsSelectedExpectationLimits :
+  ∀ {Measure TestObservable Loop}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
+    (inputs : S2Same.SameAlgebraCanonicalS2Inputs {Loop = Loop} finite)
+    (left right : List Loop)
+    (time : Nat) →
+  LiteralWilsonSelectedExpectationLimits
+    (S2.canonicalWilsonPairwiseSemantics
+      (S2Same.asCanonicalWilsonProductS2Inputs inputs))
+    left right time
+sameAlgebraS2BuildsSelectedExpectationLimits inputs left right time =
+  canonicalS2BuildsSelectedExpectationLimits
+    (S2Same.asCanonicalWilsonProductS2Inputs inputs)
     left right time
 
 ------------------------------------------------------------------------
