@@ -51,6 +51,21 @@ polynomialGeometricIncrementModulusCompilerIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 polynomialGeometricIncrementModulusCompilerIsOwned = refl
 
+genericDominatedTailCompilerIsOwned :
+  P.genericDominatedTailCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+genericDominatedTailCompilerIsOwned = refl
+
+genericTailToCauchyBridgeIsOwned :
+  P.genericTailToCauchyBridgeOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+genericTailToCauchyBridgeIsOwned = refl
+
+selectedTailToCauchyBridgeStillUnpaid :
+  P.selectedTailToCauchyBridgeInhabited
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+selectedTailToCauchyBridgeStillUnpaid = refl
+
 sameCarrierModulusAlgebraStillUnpaid :
   P.sameCarrierModulusAlgebraInhabited
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
