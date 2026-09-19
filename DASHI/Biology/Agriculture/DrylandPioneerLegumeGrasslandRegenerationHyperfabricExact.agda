@@ -17,6 +17,7 @@ import DASHI.Biology.Agriculture.QueenslandLeyBNFCarryoverExact as QueenslandLey
 import DASHI.Biology.Agriculture.QueenslandWoodyLegumeGrassNitrogenCyclingExact as QueenslandWoodyGrass
 import DASHI.Biology.Agriculture.QueenslandDesmanthusGrassBNFInteractionExact as QueenslandDesmanthus
 import DASHI.Biology.Agriculture.DrylandRegenerationNitrogenFactorisationExact as NitrogenFactorisation
+import DASHI.Biology.Agriculture.ConstructiveNitrogenTransportKernelExact as NitrogenTransport
 
 ------------------------------------------------------------------------
 -- COMPARATIVE REGENERATION HYPERFABRIC
@@ -144,6 +145,8 @@ record RegenerationHyperfabricBoundary : Set where
     explicitCounterfactualRequiredForFertilizerReplacement : Bool
     typedNitrogenNonFactorabilityWitnessesOwned : Bool
     failedFactorisationMayDriveExperimentalAxisDiscovery : Bool
+    constructiveNitrogenTransportMathOwned : Bool
+    empiricalNitrogenKernelMajorantInhabited : Bool
 open RegenerationHyperfabricBoundary public
 
 canonicalRegenerationHyperfabricBoundary : RegenerationHyperfabricBoundary
@@ -173,12 +176,20 @@ canonicalRegenerationHyperfabricBoundary = record
   ; explicitCounterfactualRequiredForFertilizerReplacement = true
   ; typedNitrogenNonFactorabilityWitnessesOwned = true
   ; failedFactorisationMayDriveExperimentalAxisDiscovery = true
+  ; constructiveNitrogenTransportMathOwned = true
+  ; empiricalNitrogenKernelMajorantInhabited = false
   }
 
 nitrogenFactorisationBoundaryReused :
   NitrogenFactorisation.NitrogenFactorisationBoundary
 nitrogenFactorisationBoundaryReused =
   NitrogenFactorisation.canonicalNitrogenFactorisationBoundary
+
+
+nitrogenTransportMathBoundaryReused :
+  NitrogenTransport.NitrogenTransportMathBoundary
+nitrogenTransportMathBoundaryReused =
+  NitrogenTransport.canonicalNitrogenTransportMathBoundary
 
 -- Canonical source-bounded lanes are reused, not fused.
 australianRhizobiaBoundaryReused : AustralianRhizobia.AustralianRhizobiaBoundary
@@ -210,4 +221,4 @@ queenslandDesmanthusBoundaryReused = QueenslandDesmanthus.canonicalDesmanthusBou
 
 attributionRule : String
 attributionRule =
-  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass, Senegalia dryland, Queensland ley-carryover, Queensland woody-legume/grass and Queensland Desmanthus papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory/transport separations, the finite early-success/long-term-trajectory TaskFactorisation collision, the nitrogen-route/timing/water/counterfactual non-factorability witnesses, their missing-axis experimental-design routing, and the no-promotion boundary. Shared roles, fixed-N labels, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, a unique N-transfer route, causal recovery, whole-ecosystem recovery or deployment authority. Queensland residue transfer does not become living-root transfer; Desmanthus grass interaction has no context-free sign; ley N service cannot erase water state; and a quantified fertilizer-replacement claim retains its explicit mineral-N counterfactual requirement. Queensland agricultural comparators do not manufacture Acacia/Senegalia same-object evidence."
+  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass, Senegalia dryland, Queensland ley-carryover, Queensland woody-legume/grass and Queensland Desmanthus papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory/transport separations, the finite early-success/long-term-trajectory TaskFactorisation collision, the nitrogen-route/timing/water/counterfactual non-factorability witnesses, their missing-axis experimental-design routing, the constructive convolution/tail/Cauchy transport mathematics, and the no-promotion boundary. Generic convergence does not create an empirical route-kernel majorant. Shared roles, fixed-N labels, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, a unique N-transfer route, causal recovery, whole-ecosystem recovery or deployment authority. Queensland residue transfer does not become living-root transfer; Desmanthus grass interaction has no context-free sign; ley N service cannot erase water state; and a quantified fertilizer-replacement claim retains its explicit mineral-N counterfactual requirement. Queensland agricultural comparators do not manufacture Acacia/Senegalia same-object evidence."
