@@ -1,5 +1,7 @@
 module DASHI.Analysis.RiemannBishopSetoidCriticalLineRefinementValidation where
 
+open import Data.Empty using (⊥)
+
 import Real as Bishop
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannBishopLocatedHeightCarrierExact as BishopHeight
@@ -9,7 +11,7 @@ import DASHI.Analysis.RiemannBishopSetoidCriticalLineRefinementExact as BishopCr
 
 bishopEqualityDoubleNegationEliminates :
   (left right : Bishop.ℝ) →
-  ((Bishop._≃_ left right → Data.Empty.⊥) → Data.Empty.⊥) →
+  ((Bishop._≃_ left right → ⊥) → ⊥) →
   Bishop._≃_ left right
 bishopEqualityDoubleNegationEliminates =
   BishopCritical.bishopSetoidEqualityStable
