@@ -18,6 +18,7 @@ module DASHI.Physics.Closure.NSTriadKNSignedSelfPhaseSelectedPairPaymentExact wh
 
 open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
