@@ -94,10 +94,35 @@ def main() -> int:
                 f"found {decision.get('decision')!r}"
             )
 
+        unavailable = bool(row.get("full_text_unavailable") is True)
         path_text = str(row.get("text_path") or "").strip()
         identity_review = str(
             row.get("same_object_identity_review_reference") or ""
         ).strip()
+
+        if unavailable:
+            out.append({
+                "schema": "digital-esd-verified-fulltext-index-v1",
+                "source_identity_reference": src,
+                "screening_decision_reference": decision.get("decision_reference"),
+                "screening_decision": decision.get("decision"),
+                "text_path": "",
+                "full_text_artifact_reference": "",
+                "full_text_sha256": "",
+                "full_text_obtained": False,
+                "full_text_unavailable": True,
+                "same_object_identity_review_reference": identity_review,
+                "retrieval_reference": str(row.get("retrieval_reference") or ""),
+                "retrieval_timestamp": str(row.get("retrieval_timestamp") or ""),
+                "unavailability_reason": str(row.get("unavailability_reason") or ""),
+                "language": str(row.get("language") or "en"),
+                "source_audit_admitted": False,
+                "rejected_after_full_text": False,
+                "screening_creates_source_truth": False,
+                "screening_creates_source_audit_admission": False,
+            })
+            continue
+
         if not path_text:
             raise ValueError(f"{src}: missing text_path")
         if not identity_review:
