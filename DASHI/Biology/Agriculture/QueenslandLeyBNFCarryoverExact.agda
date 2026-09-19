@@ -10,6 +10,7 @@ import DASHI.Biology.Agriculture.NitrogenaseChemistryCrossPollinationExact as Ch
 import DASHI.Biology.Agriculture.CoverCropNitrogenCarryoverCounterfactualExact as Counterfactual
 import DASHI.Biology.Agriculture.ConstructiveNitrogenTransportKernelExact as Transport
 import DASHI.Biology.Agriculture.QueenslandLegumeResidueFirstOrderKineticsExact as Kinetics
+import DASHI.Biology.Agriculture.QueenslandLegumeResidueFallowRecoveryExact as FallowRecovery
 
 ------------------------------------------------------------------------
 -- QUEENSLAND LEY BNF -> N CARRYOVER -> FOLLOWING-CROP RESPONSE
@@ -217,6 +218,10 @@ record QueenslandLeyBoundary : Set where
     finiteObservationImpliesAsymptoticStabilisation : Bool
     firstOrderResidueKineticsSourceOwned : Bool
     firstOrderKineticsDirectlySuppliesDiscreteBishopKernel : Bool
+    firstOrderRateToDiscreteContractionCompilerOwned : Bool
+    selectedEmpiricalRateTimeStepEmbeddedForAsymptoticUse : Bool
+    queenslandRouteFallowRecoveryJoinOwned : Bool
+    routeFallowRecoveryJoinCreatesMineralNResponseCurve : Bool
 open QueenslandLeyBoundary public
 
 canonicalQueenslandLeyBoundary : QueenslandLeyBoundary
@@ -245,6 +250,10 @@ canonicalQueenslandLeyBoundary = record
   ; finiteObservationImpliesAsymptoticStabilisation = false
   ; firstOrderResidueKineticsSourceOwned = true
   ; firstOrderKineticsDirectlySuppliesDiscreteBishopKernel = false
+  ; firstOrderRateToDiscreteContractionCompilerOwned = true
+  ; selectedEmpiricalRateTimeStepEmbeddedForAsymptoticUse = false
+  ; queenslandRouteFallowRecoveryJoinOwned = true
+  ; routeFallowRecoveryJoinCreatesMineralNResponseCurve = false
   }
 
 constructiveTransportMathReused : Transport.NitrogenTransportMathBoundary
@@ -259,6 +268,19 @@ firstOrderKineticsBoundaryReused =
 firstOrderKineticsReceiptReused : Kinetics.FirstOrderResidueKineticsReceipt
 firstOrderKineticsReceiptReused =
   Kinetics.thomson2007Kinetics
+
+
+fallowRecoveryBoundaryReused : FallowRecovery.FallowRecoveryBoundary
+fallowRecoveryBoundaryReused =
+  FallowRecovery.canonicalFallowRecoveryBoundary
+
+shortFallowRecoveryReceiptReused : FallowRecovery.FallowRecoveryReceipt
+shortFallowRecoveryReceiptReused =
+  FallowRecovery.shortFallowBarleyReceipt
+
+longFallowRecoveryReceiptReused : FallowRecovery.FallowRecoveryReceipt
+longFallowRecoveryReceiptReused =
+  FallowRecovery.longFallowSorghumReceipt
 
 fixedNDoesNotIdentifySowingMineralN : fixedNitrogenQuantityImpliesSameMineralNitrogenAtCropSowing canonicalQueenslandLeyBoundary ≡ false
 fixedNDoesNotIdentifySowingMineralN = refl
@@ -280,4 +302,4 @@ acaciaAvoidedMineralNStillOpen = refl
 
 attributionRule : String
 attributionRule =
-  "Hossain et al. 1995 (DOI 10.1071/AR9950493) owns its Warra isotope-derived fixation estimates. Hossain et al. 1996-I (DOI 10.1071/SR9960273) owns its soil-N/C and potentially-mineralisable-N observations. Hossain et al. 1996-II (DOI 10.1071/SR9960289) owns its mineral-N, following-wheat N-uptake/yield/protein observations. Pu et al. 2001 (DOI 10.1023/A:1014462305825) owns its Roma 15N loss/displacement observations. Bell, Lawrence, Johnson & Peoples 2017 (DOI 10.1071/CP16248) owns its multi-site forage-legume fixation/mineral-N/following-crop observations. Strong et al. 2006 (DOI 10.1071/EA05007) owns its Warra mixed-pasture wheat comparison and stored-water limitation observations. Dalal et al. 2004 (DOI 10.1071/EA03166) owns its lucerne-duration × soil-N × soil-water × following-wheat observations. DASHI owns only the typed stage/resource separations, reuse of the generic constructive transport/convergence mathematics, reuse of the Thomson et al. first-order residue-kinetics source receipt, and the no-promotion boundary. The imported convolution/tail theorems do not assert that any Queensland source follows a polynomial-geometric kernel. Thomson et al. 2007 does pay a source-bounded first-order residue-N kinetic shape, but it does not directly construct the Bishop discrete ratio or a same-object pointwise majorant; those remain unpaid. These Queensland systems do not create Acacia/Senegalia same-object evidence, direct bacterial flux, quantified Acacia fertilizer substitution, or deployment authority."
+  "Hossain et al. 1995 (DOI 10.1071/AR9950493) owns its Warra isotope-derived fixation estimates. Hossain et al. 1996-I (DOI 10.1071/SR9960273) owns its soil-N/C and potentially-mineralisable-N observations. Hossain et al. 1996-II (DOI 10.1071/SR9960289) owns its mineral-N, following-wheat N-uptake/yield/protein observations. Pu et al. 2001 (DOI 10.1023/A:1014462305825) owns its Roma 15N loss/displacement observations. Bell, Lawrence, Johnson & Peoples 2017 (DOI 10.1071/CP16248) owns its multi-site forage-legume fixation/mineral-N/following-crop observations. Strong et al. 2006 (DOI 10.1071/EA05007) owns its Warra mixed-pasture wheat comparison and stored-water limitation observations. Dalal et al. 2004 (DOI 10.1071/EA03166) owns its lucerne-duration × soil-N × soil-water × following-wheat observations. DASHI owns only the typed stage/resource separations, reuse of the generic constructive transport/convergence mathematics, reuse of the Thomson et al. first-order residue-kinetics source receipt, and the no-promotion boundary. The imported convolution/tail theorems do not assert that any Queensland source follows a polynomial-geometric kernel. Thomson et al. 2007 pays a source-bounded first-order residue-N kinetic shape. DASHI now owns the application-neutral positive-rate/time-step -> Bishop discrete contraction compiler, but no selected Thomson rate/time-step pair is promoted to asymptotic use without a separate empirical/model-authority payment. Nguyen et al. 2026 pays a Queensland same-experiment AG/BG route x fallow-duration x following-crop recovery join, while its BG recovery-efficiency denominator remains assumption-indexed and the experiment does not identify a mineral-N response curve. These Queensland systems do not create Acacia/Senegalia same-object evidence, direct bacterial flux, quantified Acacia fertilizer substitution, or deployment authority."
