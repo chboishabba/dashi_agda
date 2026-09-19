@@ -8,6 +8,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
 import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact as RouteSLean
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact as RouteS3
+import DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact as LiteralLocal
+import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact as LiteralClosure
 import DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact as RouteSH2c
 import DASHI.Physics.YangMills.YMClayRouteSH1DirectSelectedMarkedDecayExact as RouteSH1
 import DASHI.Physics.YangMills.YMClayRouteSH1ToR387DirectUpperExact as RouteSH1R387
@@ -664,6 +666,43 @@ strongStressGeneratorLevel = StrongF4.physicalStressOSCommonCoreLevel
 
 siNaturalUnitMassConversionLevel : ProofLevel
 siNaturalUnitMassConversionLevel = Scale.naturalUnitMassConversionLevel
+
+
+------------------------------------------------------------------------
+-- Official literal Clay endpoint.
+------------------------------------------------------------------------
+
+officialLiteralClaySolutionCompilerPresent : Bool
+officialLiteralClaySolutionCompilerPresent = true
+
+officialLiteralClaySolutionCompilerPresentIsTrue :
+  officialLiteralClaySolutionCompilerPresent ≡ true
+officialLiteralClaySolutionCompilerPresentIsTrue = refl
+
+officialLiteralClaySolutionCompilerUsesRound78ABC : Bool
+officialLiteralClaySolutionCompilerUsesRound78ABC = true
+
+officialLiteralClaySolutionCompilerUsesRound78ABCIsTrue :
+  officialLiteralClaySolutionCompilerUsesRound78ABC ≡ true
+officialLiteralClaySolutionCompilerUsesRound78ABCIsTrue = refl
+
+routeSToLiteralYMassGapIntegrationStillRequired : Bool
+routeSToLiteralYMassGapIntegrationStillRequired =
+  LiteralClosure.routeSToLiteralYMassGapIntegrationStillRequired
+
+routeSToLiteralYMassGapIntegrationStillRequiredIsTrue :
+  routeSToLiteralYMassGapIntegrationStillRequired ≡ true
+routeSToLiteralYMassGapIntegrationStillRequiredIsTrue =
+  LiteralClosure.routeSToLiteralYMassGapIntegrationStillRequiredIsTrue
+
+round78CNeedsSecondStressOPEEndpoint : Bool
+round78CNeedsSecondStressOPEEndpoint =
+  LiteralLocal.secondLiteralStressOPEEndpointRequired
+
+round78CNeedsSecondStressOPEEndpointIsFalse :
+  round78CNeedsSecondStressOPEEndpoint ≡ false
+round78CNeedsSecondStressOPEEndpointIsFalse =
+  LiteralLocal.secondLiteralStressOPEEndpointRequiredIsFalse
 
 unconditionalClayPromotion : Bool
 unconditionalClayPromotion = false
