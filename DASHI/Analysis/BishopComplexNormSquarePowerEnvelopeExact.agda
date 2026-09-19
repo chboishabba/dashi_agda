@@ -19,6 +19,8 @@ module DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (_/_)
 open import Data.Product.Base using (_,_)
 
 import Real as BishopReal
