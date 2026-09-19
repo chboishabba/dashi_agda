@@ -171,10 +171,13 @@ bsdRankConjectureToTwoObserverWeld :
   ∀ {curve mordellWeil lFunction} →
   BSD.BSDRankConjecture curve mordellWeil lFunction →
   BSDRankTwoObserverWeld curve mordellWeil lFunction
-bsdRankConjectureToTwoObserverWeld conjecture =
+bsdRankConjectureToTwoObserverWeld
+    {mordellWeil = mordellWeil}
+    {lFunction = lFunction}
+    conjecture =
   bsd-rank-two-observer-weld
-    (BSD.analyticRank _)
-    (BSD.freeRank _)
+    (BSD.analyticRank lFunction)
+    (BSD.freeRank mordellWeil)
     refl
     refl
     (BSD.analyticRankEqualsAlgebraicRank conjecture)
