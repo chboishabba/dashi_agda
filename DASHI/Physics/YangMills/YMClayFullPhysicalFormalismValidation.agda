@@ -155,6 +155,42 @@ sameOSCorrelationStillPhysical :
 sameOSCorrelationStillPhysical =
   Full.routeSSameOSCorrelationStillPhysicalIsTrue
 
+
+p1NoNewFiniteClusteringInequalityAfterR320 :
+  Full.routeSP1NeedsNewClusteringInequalityAfterR320 ≡ false
+p1NoNewFiniteClusteringInequalityAfterR320 =
+  Full.routeSP1NeedsNewClusteringInequalityAfterR320IsFalse
+
+p2ThreeExpectationLimitsAreDerived :
+  Full.routeSP2ThreeExpectationLimitsIndependent ≡ false
+p2ThreeExpectationLimitsAreDerived =
+  Full.routeSP2ThreeExpectationLimitsIndependentIsFalse
+
+p3PostHocCorrelationIdentityIsDerived :
+  Full.routeSP3PostHocCovarianceCorrelationIdentityPhysical ≡ false
+p3PostHocCorrelationIdentityIsDerived =
+  Full.routeSP3PostHocCovarianceCorrelationIdentityPhysicalIsFalse
+
+p3SameHOSSpectrumStillPhysical :
+  Full.routeSP3SameReconstructedHamiltonianSpectrumPhysical ≡ true
+p3SameHOSSpectrumStillPhysical =
+  Full.routeSP3SameReconstructedHamiltonianSpectrumPhysicalIsTrue
+
+d2PhysicalOneStepRecurrenceIsDerived :
+  Full.d2IndependentPhysicalOneStepRecurrenceRequired ≡ false
+d2PhysicalOneStepRecurrenceIsDerived =
+  Full.d2IndependentPhysicalOneStepRecurrenceRequiredIsFalse
+
+d2AFOneStepRecurrenceIsDerived :
+  Full.d2IndependentAFOneStepRecurrenceRequired ≡ false
+d2AFOneStepRecurrenceIsDerived =
+  Full.d2IndependentAFOneStepRecurrenceRequiredIsFalse
+
+d2UVNormalizationStillPhysical :
+  Full.d2CommonUVNormalizationStillPhysical ≡ true
+d2UVNormalizationStillPhysical =
+  Full.d2CommonUVNormalizationStillPhysicalIsTrue
+
 f2IsCompilerOwned :
   Full.f2PrimitiveResearchPayment ≡ false
 f2IsCompilerOwned =
