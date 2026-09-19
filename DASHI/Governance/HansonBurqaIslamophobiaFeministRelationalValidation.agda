@@ -1,7 +1,7 @@
 module DASHI.Governance.HansonBurqaIslamophobiaFeministRelationalValidation where
 
 open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -75,4 +75,4 @@ positiveRepairRetainsSituatedResidual :
   B.positiveRepairAddsSituatedResidual
     B.canonicalHansonBurqaFeministRelationalBoundary
     ≡ true
-positiveRepairRetainsSituatedResidual = B.refl
+positiveRepairRetainsSituatedResidual = refl
