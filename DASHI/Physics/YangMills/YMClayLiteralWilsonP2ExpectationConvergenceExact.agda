@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
 import DASHI.Physics.YangMills.BalabanPairwiseEuclideanSemanticsRound310Exact as R310
 import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact as R315
+import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact as S2
 
 ------------------------------------------------------------------------
 -- ROUTE-S P2 / THREE LITERAL-WILSON EXPECTATION LIMITS
@@ -114,6 +115,27 @@ literalWilsonSelectedExpectationLimits {dataSet = dataSet}
             (R310.timeTranslate semantics right time))
           (R310.translatedProductBounded bounded left right time)
     }
+
+
+------------------------------------------------------------------------
+-- Canonical S2 carrier -> all three P2 expectation limits.
+------------------------------------------------------------------------
+
+canonicalS2BuildsSelectedExpectationLimits :
+  ∀ {Measure TestObservable Loop}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {finite : R296.ExactT5JMagnitudePresentation dataSet extension}
+    (inputs : S2.CanonicalWilsonProductS2Inputs finite)
+    (left right : Agda.Builtin.List.List Loop)
+    (time : Nat) →
+  LiteralWilsonSelectedExpectationLimits
+    (S2.canonicalWilsonPairwiseSemantics inputs) left right time
+canonicalS2BuildsSelectedExpectationLimits inputs left right time =
+  literalWilsonSelectedExpectationLimits
+    (S2.canonicalWilsonPairwiseSemantics inputs)
+    (S2.canonicalWilsonCylinderPresentation inputs)
+    left right time
 
 ------------------------------------------------------------------------
 -- Frontier reduction.
