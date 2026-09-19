@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact where
 
 ------------------------------------------------------------------------
