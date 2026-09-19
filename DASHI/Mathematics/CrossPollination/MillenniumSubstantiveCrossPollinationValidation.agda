@@ -43,5 +43,6 @@ import DASHI.Moonshine.GradedVertexOperatorAlgebraBoundary
 import DASHI.Moonshine.MonsterGradedVOABridgeExact
 
 import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierValidation
+import DASHI.Mathematics.CrossPollination.MillenniumKnownMathFormalizationValidation
 
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact
