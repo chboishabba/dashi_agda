@@ -30,6 +30,8 @@ import DASHI.Analysis.RiemannBishopAnalyticLocatedHeightAttachmentExact as Bisho
 import DASHI.Analysis.RiemannBishopSetoidCriticalLineRefinementExact as BishopCritical
 import DASHI.Analysis.RiemannPlattTrudgianSameSubstrateLocatedExact as PTSame
 import DASHI.Analysis.RiemannG2ClayTerminalBishopLocatedExact as BishopClay
+import DASHI.Analysis.RiemannBishopPositiveHeightSymmetryCutExact as PositiveCut
+import DASHI.Analysis.RiemannAnalyticConjugationAuthorityGapExact as ConjGap
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -357,6 +359,31 @@ bishopNativeTerminalCompilesRH :
     BishopClay.canonicalClayTerminalBishopLocatedBoundary ≡ true
 bishopNativeTerminalCompilesRH = refl
 
+positiveHeightRouteNeedsNoClassicalSignDecision :
+  PositiveCut.BishopPositiveHeightSymmetryCutBoundary.classicalSignDecisionRequired
+    PositiveCut.canonicalBishopPositiveHeightSymmetryCutBoundary ≡ false
+positiveHeightRouteNeedsNoClassicalSignDecision = refl
+
+positiveHeightRouteNeedsNonzeroSignedOrdinate :
+  PositiveCut.BishopPositiveHeightSymmetryCutBoundary.nonzeroSignedOrdinateTheoremRequired
+    PositiveCut.canonicalBishopPositiveHeightSymmetryCutBoundary ≡ true
+positiveHeightRouteNeedsNonzeroSignedOrdinate = refl
+
+positiveHeightRouteNeedsZeroConjugation :
+  PositiveCut.BishopPositiveHeightSymmetryCutBoundary.conjugateNontrivialZeroTheoremRequired
+    PositiveCut.canonicalBishopPositiveHeightSymmetryCutBoundary ≡ true
+positiveHeightRouteNeedsZeroConjugation = refl
+
+currentAnalyticSubstrateDoesNotDeriveZeroConjugation :
+  ConjGap.AnalyticConjugationAuthorityGapBoundary.nontrivialZeroConjugationDerivableFromCurrentFieldsAlone
+    ConjGap.canonicalAnalyticConjugationAuthorityGapBoundary ≡ false
+currentAnalyticSubstrateDoesNotDeriveZeroConjugation = refl
+
+olderCompletedZetaSymmetryNeedsSameObjectWeld :
+  ConjGap.AnalyticConjugationAuthorityGapBoundary.sameObjectBridgeToOlderPackageStillRequiredForReuse
+    ConjGap.canonicalAnalyticConjugationAuthorityGapBoundary ≡ true
+olderCompletedZetaSymmetryNeedsSameObjectWeld = refl
+
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
     Donor.canonicalExistingScalarDonorInventoryBoundary ≡ false
@@ -454,4 +481,4 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     "Realize the exact universal pole-quotient finite kernel and prove nearResponseAt(chosen crossing J) = finiteNearSum(cellResponse). The checked Lean status owner does not transport this equality into Agda."
     "After a proof-carrying upper certificate nearResponseAt(J) <= U, independently prove cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
     "Alternatively prove directly cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
-    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the same-object equality is supplied, and the optional certificate bridge now reuses the literal-kernel equality plus one literal-fold/certified-fold weld rather than demanding a second nearResponse representation. R3 is one shared realPart observer. The exact-complement Dec(V) route and the full ConstructiveCompleteRealPackage located route remain compatibility paths, but neither is preferred. The minimal route now reconstructs the exact rational window X/2 < T_PT with X=6000000185827 and T_PT=3000175332800, transports that inequality concretely to the pinned Murray--Bishop real carrier, and inhabits a minimal LocatedHeightCarrier using Bishop's fast-corollary-2-17. The terminal RH split therefore needs only abs, strict order, the two concrete thresholds, and locatedness: no reciprocal, rational density, Archimedean ceiling, Cauchy package, exact threshold decision, or arbitrary cover. The preferred low-side route is now Bishop-native. A concrete Bishop complex analytic carrier makes conjugation ordinary and Real definitionally Bishop.ℝ; one whole selected-carrier same-object equality compiles the minimal height attachment. Agda record equality is explicitly rejected as real equality. The refined critical predicate is Bishop setoid equality realPart ~= 1/2, and its double-negation stability is now proved constructively from the decidable rational bounds defining Bishop equality, so the former opaque stability field is paid. The remaining low-side semantic seams are only: the whole selected AnalyticSubstrate carrier identity, the exact criticalLine iff Bishop-realPart ~= 1/2 characterization on its completed-zeta predicate, and the same-substrate Platt--Trudgian theorem carrying every located verified zero to that critical predicate (including the positive-to-absolute symmetry transport). The high branch is handed directly to the implementation-neutral high producer. R2 remains the primitive strict ClusterResponse analytic family, exact-head Agda validation is not claimed, and RH is not derived."
+    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the same-object equality is supplied, and the optional certificate bridge now reuses the literal-kernel equality plus one literal-fold/certified-fold weld rather than demanding a second nearResponse representation. R3 is one shared realPart observer. The exact-complement Dec(V) route and the full ConstructiveCompleteRealPackage located route remain compatibility paths, but neither is preferred. The minimal route now reconstructs the exact rational window X/2 < T_PT with X=6000000185827 and T_PT=3000175332800, transports that inequality concretely to the pinned Murray--Bishop real carrier, and inhabits a minimal LocatedHeightCarrier using Bishop's fast-corollary-2-17. The terminal RH split therefore needs only abs, strict order, the two concrete thresholds, and locatedness: no reciprocal, rational density, Archimedean ceiling, Cauchy package, exact threshold decision, or arbitrary cover. The preferred low-side route is now Bishop-native. A concrete Bishop complex analytic carrier makes conjugation ordinary and Real definitionally Bishop.ℝ; one whole selected-carrier same-object equality compiles the minimal height attachment. Agda record equality is explicitly rejected as real equality. The refined critical predicate is Bishop setoid equality realPart ~= 1/2, and its double-negation stability is now proved constructively from the decidable rational bounds defining Bishop equality, so the former opaque stability field is paid. The remaining low-side semantic seams are now decomposed further. The whole selected AnalyticSubstrate carrier identity and criticalLine iff Bishop-realPart ~= 1/2 remain same-object/predicate welds. For Platt--Trudgian, the positive-height published theorem is separated from the symmetric absolute-height compiler: Bishop sign apartness and abs/neg order geometry are constructive, so no classical sign decision is needed; the actual analytic debts are (a) prove selected nontrivial zeros have nonzero signed ordinate, and (b) prove the selected completed-zeta nontrivial-zero predicate is preserved by conjugation. The current AnalyticSubstrate cannot derive (b) because its abstract isZero predicate lacks equality transport/conjugate-zero laws; the older CompletedZetaData package owns those laws but requires a same-object bridge before reuse. The high branch is handed directly to the implementation-neutral high producer. R2 remains the primitive strict ClusterResponse analytic family, exact-head Agda validation is not claimed, and RH is not derived."
