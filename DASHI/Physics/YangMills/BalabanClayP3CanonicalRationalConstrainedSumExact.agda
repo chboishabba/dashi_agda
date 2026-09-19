@@ -9,8 +9,8 @@ module DASHI.Physics.YangMills.BalabanClayP3CanonicalRationalConstrainedSumExact
 -- without changing any physical carrier, block map, fibre selector or weight.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -25,11 +25,11 @@ record CanonicalRationalConstrainedSumData
     blockMap : Fine → Coarse
     coarseMatches : Fine → Coarse → Bool
     coarseMatchesSound : ∀ fineField coarse →
-      coarseMatches fineField coarse ≡ Agda.Builtin.Bool.true →
+      coarseMatches fineField coarse ≡ true →
       blockMap fineField ≡ coarse
     coarseMatchesComplete : ∀ fineField coarse →
       blockMap fineField ≡ coarse →
-      coarseMatches fineField coarse ≡ Agda.Builtin.Bool.true
+      coarseMatches fineField coarse ≡ true
 
     isSmall : Fine → Bool
     weight : Fine → ℚ
@@ -60,7 +60,7 @@ canonicalZeroIsRationalZero :
   ∀ {Fine Coarse}
     (dataSet : CanonicalRationalConstrainedSumData Fine Coarse) →
   Integral.zero (canonicalRationalConstrainedSum dataSet) ≡ 0ℚ
-canonicalZeroIsRationalZero dataSet = Agda.Builtin.Equality.refl
+canonicalZeroIsRationalZero dataSet = refl
 
 canonicalAddIsRationalAdd :
   ∀ {Fine Coarse}
@@ -68,7 +68,7 @@ canonicalAddIsRationalAdd :
     left right →
   Integral.add (canonicalRationalConstrainedSum dataSet) left right
   ≡ left + right
-canonicalAddIsRationalAdd dataSet left right = Agda.Builtin.Equality.refl
+canonicalAddIsRationalAdd dataSet left right = refl
 
 canonicalRationalConstrainedSumLevel : ProofLevel
 canonicalRationalConstrainedSumLevel = machineChecked
