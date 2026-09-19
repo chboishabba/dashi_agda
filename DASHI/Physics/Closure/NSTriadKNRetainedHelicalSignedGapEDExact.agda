@@ -140,24 +140,41 @@ module PhysicalRetainedGap
       pNN = radiusNN p
       p2NN = squareNN p
 
+      negP≤zero : - radius p ≤ 0ℚ
+      negP≤zero = ℚP.neg-mono-≤ pNN
+
+      addNeg :
+        radius q + (- radius p) ≤ radius q + 0ℚ
+      addNeg = ℚP.+-mono-≤ ℚP.≤-refl negP≤zero
+
       gap≤q : radius q - radius p ≤ radius q
       gap≤q =
         let
-          negP≤zero : - radius p ≤ 0ℚ
-          negP≤zero = ℚP.neg-mono-≤ pNN
-          shifted = ℚP.+-mono-≤ ℚP.≤-refl negP≤zero
+          leftMeaning :
+            radius q - radius p ≡ radius q + (- radius p)
+          leftMeaning = solve (radius p ∷ radius q ∷ [])
+          rightMeaning : radius q + 0ℚ ≡ radius q
+          rightMeaning = ℚP.+-identityʳ (radius q)
         in
         subst
-          (radius q - radius p ≤_)
-          (sym (ℚP.+-identityʳ (radius q)))
-          shifted
+          (_≤ radius q)
+          (sym leftMeaning)
+          (subst
+            (radius q + (- radius p) ≤_)
+            rightMeaning
+            addNeg)
 
       q2≤sum : squareRadius q ≤ squareRadius p + squareRadius q
       q2≤sum =
+        let
+          add : 0ℚ + squareRadius q
+            ≤ squareRadius p + squareRadius q
+          add = ℚP.+-mono-≤ p2NN ℚP.≤-refl
+        in
         subst
           (_≤ squareRadius p + squareRadius q)
           (ℚP.+-identityˡ (squareRadius q))
-          (ℚP.+-mono-≤ p2NN ℚP.≤-refl)
+          add
     in
     ℚP.≤-trans gap≤q (ℚP.≤-trans q≤q2 q2≤sum)
 
@@ -170,36 +187,43 @@ module PhysicalRetainedGap
     let
       p≤p2 = retainedRadiusBelowSquare p pMember
       qNN = radiusNN q
-      p2NN = squareNN p
+
+      negQ≤zero : - radius q ≤ 0ℚ
+      negQ≤zero = ℚP.neg-mono-≤ qNN
+
+      add :
+        (- radius q) + radius p ≤ 0ℚ + radius p
+      add = ℚP.+-mono-≤ negQ≤zero ℚP.≤-refl
 
       gap≤p : (- radius q) - (- radius p) ≤ radius p
       gap≤p =
         let
-          negQ≤zero : - radius q ≤ 0ℚ
-          negQ≤zero = ℚP.neg-mono-≤ qNN
-          shifted = ℚP.+-mono-≤ negQ≤zero ℚP.≤-refl
-          algebra :
+          leftMeaning :
             (- radius q) - (- radius p)
             ≡ (- radius q) + radius p
-          algebra = solve (radius p ∷ radius q ∷ [])
+          leftMeaning = solve (radius p ∷ radius q ∷ [])
+          rightMeaning : 0ℚ + radius p ≡ radius p
+          rightMeaning = ℚP.+-identityˡ (radius p)
         in
         subst
           (_≤ radius p)
-          (sym algebra)
+          (sym leftMeaning)
           (subst
-            (λ left → left ≤ radius p)
-            (ℚP.+-comm (- radius q) (radius p))
-            (subst
-              (_≤ radius p)
-              (sym (ℚP.+-identityˡ (radius p)))
-              shifted))
+            ((- radius q) + radius p ≤_)
+            rightMeaning
+            add)
 
       p2≤sum : squareRadius p ≤ squareRadius p + squareRadius q
       p2≤sum =
+        let
+          add2 : squareRadius p + 0ℚ
+            ≤ squareRadius p + squareRadius q
+          add2 = ℚP.+-mono-≤ ℚP.≤-refl (squareNN q)
+        in
         subst
-          (squareRadius p ≤_)
-          (sym (ℚP.+-identityʳ (squareRadius p)))
-          (ℚP.+-mono-≤ ℚP.≤-refl (squareNN q))
+          (_≤ squareRadius p + squareRadius q)
+          (ℚP.+-identityʳ (squareRadius p))
+          add2
     in
     ℚP.≤-trans gap≤p (ℚP.≤-trans p≤p2 p2≤sum)
 
@@ -208,19 +232,34 @@ module PhysicalRetainedGap
     (- radius q) - radius p ≤ squareRadius p + squareRadius q
   plusMinusGapBelowSquares p q =
     let
-      pNN = radiusNN p
-      qNN = radiusNN q
-      negQ≤zero = ℚP.neg-mono-≤ qNN
-      negP≤zero = ℚP.neg-mono-≤ pNN
+      negQ≤zero : - radius q ≤ 0ℚ
+      negQ≤zero = ℚP.neg-mono-≤ (radiusNN q)
+      negP≤zero : - radius p ≤ 0ℚ
+      negP≤zero = ℚP.neg-mono-≤ (radiusNN p)
+
+      add :
+        (- radius q) + (- radius p) ≤ 0ℚ + 0ℚ
+      add = ℚP.+-mono-≤ negQ≤zero negP≤zero
+
       left≤zero : (- radius q) - radius p ≤ 0ℚ
       left≤zero =
         let
-          summed = ℚP.+-mono-≤ negQ≤zero negP≤zero
+          leftMeaning :
+            (- radius q) - radius p
+            ≡ (- radius q) + (- radius p)
+          leftMeaning = solve (radius p ∷ radius q ∷ [])
+          rightMeaning : 0ℚ + 0ℚ ≡ 0ℚ
+          rightMeaning = ℚP.+-identityˡ 0ℚ
         in
         subst
-          ((- radius q) - radius p ≤_)
-          (solve [])
-          summed
+          (_≤ 0ℚ)
+          (sym leftMeaning)
+          (subst
+            ((- radius q) + (- radius p) ≤_)
+            rightMeaning
+            add)
+
+      sumNN : 0ℚ ≤ squareRadius p + squareRadius q
       sumNN = ℚP.+-mono-≤ (squareNN p) (squareNN q)
     in
     ℚP.≤-trans left≤zero sumNN
@@ -234,9 +273,11 @@ module PhysicalRetainedGap
     let
       p≤p2 = retainedRadiusBelowSquare p pMember
       q≤q2 = retainedRadiusBelowSquare q qMember
+
       summed :
         radius q + radius p ≤ squareRadius q + squareRadius p
       summed = ℚP.+-mono-≤ q≤q2 p≤p2
+
       reordered :
         radius q + radius p ≤ squareRadius p + squareRadius q
       reordered =
@@ -244,13 +285,14 @@ module PhysicalRetainedGap
           (radius q + radius p ≤_)
           (ℚP.+-comm (squareRadius q) (squareRadius p))
           summed
-      algebra :
+
+      leftMeaning :
         radius q - (- radius p) ≡ radius q + radius p
-      algebra = solve (radius p ∷ radius q ∷ [])
+      leftMeaning = solve (radius p ∷ radius q ∷ [])
     in
     subst
       (_≤ squareRadius p + squareRadius q)
-      (sym algebra)
+      (sym leftMeaning)
       reordered
 
   caseSign : Helical.HelicitySign → ℚ → ℚ
