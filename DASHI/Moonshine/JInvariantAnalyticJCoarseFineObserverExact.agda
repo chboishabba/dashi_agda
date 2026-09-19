@@ -26,6 +26,8 @@ import DASHI.Moonshine.ModularCurveJFrickeInterfaceExact as Modular
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact as Chart
 import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Finite
 import DASHI.Moonshine.JInvariantAnalyticJCoarseFineFrickeIntertwinerExact as Legacy
+import DASHI.Biology.TernaryPhaseQuotientJCoarseBridgeExact as Coarse
+import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact as Residual
 
 record AnalyticJStructuredObserver
     (system : Modular.ModularJFrickeSystem) : Set₁ where
@@ -91,6 +93,38 @@ observedBoundaryExchange :
   Finite.BoundaryExchangeReceipt (observe observer point)
 observedBoundaryExchange observer point =
   Finite.canonicalBoundaryExchange (observe observer point)
+
+
+
+structuredFieldOfChart :
+  Chart.JTwoPlusNine ->
+  Residual.StructuredJField
+structuredFieldOfChart (coarse , fine) =
+  Coarse.balancedPairToPhaseQuotient coarse , fine
+
+observeStructuredField :
+  ∀ {system : Modular.ModularJFrickeSystem} ->
+  AnalyticJStructuredObserver system ->
+  Modular.FinePoint system ->
+  Residual.StructuredJField
+observeStructuredField observer point =
+  structuredFieldOfChart (observe observer point)
+
+observeLocal27 :
+  ∀ {system : Modular.ModularJFrickeSystem} ->
+  AnalyticJStructuredObserver system ->
+  Modular.FinePoint system ->
+  Residual.LocalJ27
+observeLocal27 observer point =
+  Residual.localJObserver (observeStructuredField observer point)
+
+local27IsDownstreamObserver :
+  ∀ {system : Modular.ModularJFrickeSystem}
+    (observer : AnalyticJStructuredObserver system)
+    (point : Modular.FinePoint system) ->
+  observeLocal27 observer point
+  ≡ Residual.localJObserver (observeStructuredField observer point)
+local27IsDownstreamObserver observer point = refl
 
 record AnalyticObservedFrickeReceipt
     {system : Modular.ModularJFrickeSystem}
