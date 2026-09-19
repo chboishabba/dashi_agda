@@ -131,7 +131,10 @@ def main() -> int:
             raise ValueError(f"{ref}: retrieved sha256 must be a 64-hex digest")
         int(digest, 16)
 
-        artifact_path = Path(str(retrieved.get("artifact_path") or ""))
+        artifact_text = str(retrieved.get("artifact_path") or "").strip()
+        if not artifact_text:
+            raise ValueError(f"{ref}: retrieved artifact_path is required")
+        artifact_path = Path(artifact_text)
         if args.verify_files:
             if not artifact_path.exists():
                 raise FileNotFoundError(f"{ref}: {artifact_path}")
@@ -171,16 +174,22 @@ def main() -> int:
             "creates_source_audit_admission": False,
         })
 
-        adapter_rows.append({
-            "source_unit_ref": f"digital-esd:{ref}:{digest}",
-            "source_kind": "scholarly-full-text",
-            "source_role": "screened-digital-esd-study",
-            "language": str(retrieved.get("language") or "en"),
-            "revision_ref": revision_ref,
-            "text_path": str(retrieved.get("text_path") or artifact_path),
-            "canonical_evidence_manifestation_ref": manifestation_ref,
-            "adapter_is_production_semantic_abi": False,
-        })
+        # The historical Python SLR batch consumes text, not arbitrary PDFs.
+        # Emit an adapter row only when an explicit materialised text path is
+        # supplied.  Canonical manifestation/revision preparation does not
+        # depend on this compatibility adapter.
+        text_path = str(retrieved.get("text_path") or "").strip()
+        if text_path:
+            adapter_rows.append({
+                "source_unit_ref": f"digital-esd:{ref}:{digest}",
+                "source_kind": "scholarly-full-text",
+                "source_role": "screened-digital-esd-study",
+                "language": str(retrieved.get("language") or "en"),
+                "revision_ref": revision_ref,
+                "text_path": text_path,
+                "canonical_evidence_manifestation_ref": manifestation_ref,
+                "adapter_is_production_semantic_abi": False,
+            })
 
     with canonical_path.open("w", encoding="utf-8") as fh:
         for row in canonical_rows:
