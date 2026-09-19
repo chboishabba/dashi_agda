@@ -24,6 +24,9 @@ parkhurstPMIDPinned = refl
 johnson2025Pinned : G.johnsonEtAl2025DOI ≡ "10.1016/j.ecoleng.2025.107724"
 johnson2025Pinned = refl
 
+vickers2012Pinned : G.vickersEtAl2012DOI ≡ "10.1016/j.agee.2012.05.024"
+vickers2012Pinned = refl
+
 soilNotFlora : G.soilRecoveryImpliesFloristicRecovery G.canonicalGrasslandBoundary ≡ false
 soilNotFlora = refl
 
@@ -51,3 +54,16 @@ exoticCompetitionRetained = refl
 threeYearsNotLongTerm :
   G.thirtySixMonthSuccessImpliesLongTermTrajectorySuccess G.canonicalGrasslandBoundary ≡ false
 threeYearsNotLongTerm = refl
+
+
+annualMonitoringNotChronosequence :
+  G.annualRepeatedMonitoringEqualsChronosequence G.canonicalGrasslandBoundary ≡ false
+annualMonitoringNotChronosequence = refl
+
+compositionStructureFunctionSeparate :
+  G.compositionStructureAndFunctionMayBeCollapsed G.canonicalGrasslandBoundary ≡ false
+compositionStructureFunctionSeparate = refl
+
+annualMonitoringStillNeedsSoilBiota :
+  G.annualVegetationMonitoringClosesJointSoilBiotaTrajectory G.canonicalGrasslandBoundary ≡ false
+annualMonitoringStillNeedsSoilBiota = refl
