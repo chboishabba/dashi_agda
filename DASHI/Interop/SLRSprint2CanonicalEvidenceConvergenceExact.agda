@@ -50,9 +50,9 @@ sprint2Milestones =
       "every manifestation names source, exact revision, content digest and acquisition receipt while remaining candidate-only/non-promoting"
   ∷ sprint2Milestone
       "M2.2"
-      required
-      "one EvidenceManifestation -> SourceRevision -> TextSpan -> Observation substrate"
-      "source/span identity is shared across producer families and exact replay"
+      implementedAwaitingRuntime
+      "one EvidenceManifestation -> SourceRevision -> exact source anchor -> Observation substrate"
+      "text evidence uses exact character ranges; structured evidence uses exact structured coordinates; compiler and persisted PG spans retain exact revision identity"
   ∷ sprint2Milestone
       "M2.3"
       required
@@ -172,7 +172,7 @@ currentM22PartialParity =
     true
     false
     false
-    false
+    true
 
 record Sprint2ExitGate : Set where
   constructor sprint2ExitGate
@@ -193,7 +193,7 @@ currentSprint2ExitGate : Sprint2ExitGate
 currentSprint2ExitGate =
   sprint2ExitGate
     true
-    false
+    true
     false
     false
     false
