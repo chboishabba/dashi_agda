@@ -1,296 +1,308 @@
-# Yang–Mills exact residual brief — 2026-09-19 frontier reconciliation
+# Yang–Mills exact residual brief — 2026-09-19 route-Pareto recut
 
-## Authority and scope
+## Authority boundary
 
-This is the live bookkeeping surface for PR #996 after the closed-world/min-cut reconciliation.
+The accounting distinction remains strict:
 
-```text
+\`\`\`text
 source authority
 != compiler theorem
 != physical inhabitant
 != empirical contact
-```
+\`\`\`
 
-The top-level frontier remains
+The important correction is that there is **not one mandatory linear mass-gap route**.
 
-[
-oxed{F_1+F_3+F_4}.
-]
+The repository now exposes two honest routes.
 
-What changed is the location of the primitive cuts.
+\`\`\`text
+Route S — preferred direct source/OS route
 
----
+literal finite Wilson/T5 source localization
+  -> selected finite covariance bound
+  -> literal measure / expectation convergence
+  -> continuum pair clustering
+  -> SAME OS reconstructed transfer coordinate
+  -> physical spectral gap certificate
+\`\`\`
 
-# Paid structure — do not rebuild
+and
 
-The repository already owns substantial machinery for:
+\`\`\`text
+Route G — strong finite-gap / recovery route
 
-- literal finite four-dimensional SU(2) Wilson/Gibbs carriers, plaquettes and action;
-- gauge invariance and literal physical Wilson jets/Hessian/coercivity;
-- normalized T5 source algebra and exact connected-covariance identities;
-- marked-source decay compilers and dense-local -> full-`L2_0` extension;
-- finite transfer/form-gap and varying-carrier transport compilers;
-- beta-driven same-history complete-density / finite-measure carriers;
-- abstract Mosco/recovery -> continuum-gap transport;
-- OS reconstruction, Stone uniqueness, local-core cutoff stabilization;
-- common-core equality -> equality of self-adjoint generators.
+dense physical L2 transfer defect
+  -> uniform finite gap
+  -> P_a / E_a + quotient / norm / residual estimates
+  -> Mosco / recovery
+  -> continuum gap
+\`\`\`
 
-Therefore:
-
-```text
-PLAQUETTE/WILSON CONSTRUCTION   != F1
-FULL R339 MAGNITUDE EQUALITY   != F1
-ABSTRACT MOSCO THEORY         != F3
-STONE / GENERATOR UNIQUENESS  != F4
-EVOLUTION EQUALITY AS AXIOM   != F4
-```
+Both remain conditional at their physical application seams. Route G is useful and stronger, but it is no longer the least-privilege terminal path.
 
 ---
 
-# F1 — weakest physical min-cut
+# Route S — direct source / OS spectral route
 
-The terminal finite-side target remains
+The key existing compiler spine is:
 
-[
-|langle P_0psi,P_1psiangle|
- le c_k|psi|_2^2,
-qquad
-Delta a_kle1-c_k.
-]
+\`\`\`text
+R295 / R296
+  exact finite T5 source/covariance shell
 
-A trajectory-uniform constant `c < 1` is not required.
+R304
+  arbitrary-pair finite shell -> continuum pair clustering
 
-## R339 recut
+R330-R333
+  canonical-B OS-indexed application
 
-`BalabanCMP116R281SelectedSourceUpperRound343Exact` explicitly records
-
-```text
-sourceMagnitudeEqualityPrimitiveForMassGapConsumer = false
-```
-
-and replaces source/selected magnitude equality by the one-sided selected-response upper actually consumed downstream.
-
-R344 and R346 continue weakening the source interface on the actual shared-marked carrier. Therefore
-
-```text
-R339.sourceMagnitudeIsSelectedMagnitude
-```
-
-is an obsolete-strength ABI for the mass-gap route, not primitive proof debt.
+R316
+  concrete half-rate clustering -> physical mass-gap certificate
+\`\`\`
 
 The new owner
 
-```text
-YMClayF1PhysicalMinCutExact
-```
+\`\`\`text
+YMClayDirectSourceOSMassGapFrontierExact
+\`\`\`
 
-records the four physical leaves:
+makes this route explicit.
 
-```text
-F1-A  actual selected CMP116 localization
-      on the canonical physical source carrier
+## H1 — selected source localization
 
-F1-B  literal Wilson local/cylinder observable
-      = selected R295/T5 Gibbs observable
+The terminal source consumer is R387:
 
-F1-C  rooted/source envelope
-      <= c_k ||psi||^2_(L2 mu_k)
-      on a dense physical vacuum-complement algebra
+\`\`\`text
+|D²_{J_L,J_R} log Z_N|
+  <= clusteringEnvelope(O,t)
+\`\`\`
 
-F1-D  Delta*a_k <= 1-c_k
-      on the existing beta-history / literal-Wilson trajectory
-```
+on the exact selected pair.
 
-R403 already makes `SourceDirection = TestObservable` definitionally, so F1-A does not need a new observable-to-J representation theorem.
+Therefore the following are **not terminal primitives**:
 
-The WrongType firewall remains explicit: P33 Wilson “correlation” is Hessian/coercivity structure; R295 connected covariance is statistical Gibbs covariance. F1-B is the physical same-object weld between those worlds.
+\`\`\`text
+full R339 source/selected magnitude equality
+source-root presentation
+source-distance presentation
+source-envelope coordinate as such
+dense-L2 envelope normalization
+\`\`\`
 
-After F1-B/C, the existing route is:
+R343/R344/R346 remain useful producer routes.
 
-```text
-R295
- -> marked-source adapter
- -> connected-correlation bound
- -> dense physical F1 producer
- -> dense-L2 extension
- -> full physical L2_0 decorrelator.
-```
+## H2a — OS-indexed Euclidean time/support semantics
+
+R332 removes arbitrary time-translation freedom.
+
+The translated observable is definitionally the OS1 action. The physical residue is:
+
+\`\`\`text
+which translation element means integer Euclidean time t
++
+selected support distance = t
+\`\`\`
+
+on the same T5/Wilson observable carrier.
+
+## H2b — Wilson-cylinder presentation
+
+R315 already compiles finite Wilson-cylinder bounds to the exact T5 bounded-test predicate.
+
+The remaining physical payment is the typed presentation:
+
+\`\`\`text
+decoded physical observable = finite Wilson product
+translated physical observable = finite Wilson product
+Wilson multiplication = T5 multiplication
+\`\`\`
+
+No independent Wilson→R295 carrier equality is needed.
+
+## H2c — one-sided continuum order closure
+
+R330 reuses the shared \`SequentialOrderClosure\` machinery.
+
+The remaining application payment is the convergence-carrier weld between the T5 scalar convergence and that shared rational order closure. This is analysis/topology, not a fresh Yang–Mills decay inequality.
+
+## Literal measure / expectation convergence
+
+The direct route still needs real continuum construction.
+
+\`PhysicalMeasureConvergenceData\` carries the same finite measure sequence and continuum measure together with convergence of selected bounded Wilson expectations.
+
+R278 then proves, mechanically:
+
+\`\`\`text
+E_N[F] -> E[F]
+E_N[G] -> E[G]
+E_N[FG] -> E[FG]
+
+=> |Cov_N(F,G)| -> |Cov(F,G)|.
+\`\`\`
+
+So connected-covariance convergence is compiler-owned once the physical expectation convergence is supplied.
+
+## H3 — transfer coordinate of the SAME OS Hamiltonian
+
+R331 is the repaired same-object boundary:
+
+\`\`\`text
+coordinateOfReconstructedHamiltonian
+\`\`\`
+
+The physical theorem is that the order-reversing decay-ratio / energy coordinate is the transfer-semigroup coordinate of the **same Hamiltonian produced by OS reconstruction**.
+
+R316 then uses the standard spectral theorem at the concrete half-rate:
+
+\`\`\`text
+C_{A,B}(t) <= (1/4)(1/2)^t
+    -> spectrum separated above energyOfRatio(1/2).
+\`\`\`
+
+The spectral transfer itself is standard imported mathematics.
+
+## Route-S min-cut
+
+The current direct-route physical cut is approximately:
+
+\`\`\`text
+S1  selected CMP116/T5 two-J localization on the actual source carrier
+
+S2  OS1-indexed time/support semantics
+
+S3  physical R315 Wilson-cylinder presentation
+
+S4  literal finite-measure / bounded-expectation convergence
+    + convergence-carrier order weld
+
+S5  transfer-energy / decay coordinate OF the reconstructed OS Hamiltonian
+
+S6  actual continuum OS reconstruction / same continuum family
+\`\`\`
+
+R330 explicitly records that the number of mandatory **fresh B-side YM analytic inequalities** after these application coordinates is zero.
 
 ---
 
-# F3 — finish the existing Sprint construction program
+# Route G — strong finite-gap / recovery route
 
-F3 is not “implement Mosco recovery from scratch.”
+This route remains mathematically meaningful, but its hard leaves are now route-specific.
 
-The concrete implementation staircase already exists:
+## G1 — translated-pair L² contraction
 
-```text
-Sprint109-110
-  recovery/Mosco/common-carrier consumers
+The corrected owner is:
 
-Sprint111
-  finite <-> continuum embedding/projection surface
+\`\`\`text
+YMClayF1TranslatedPairL2CalibrationExact
+\`\`\`
 
-Sprint112
-  P_a sampling candidate
-  E_a renormalized interpolation candidate
-  quotient-independence diagrams
+The selected pair is
 
-Sprint113+
-  gauge covariance
-  quotient/norm/Jacobian/quadrature estimates
+\`\`\`text
+decode(ψ), τ₁ decode(ψ)
+\`\`\`
 
-Sprint114-122
-  closure criteria, reducers and propagation
-```
+not the diagonal pair \`decode(ψ), decode(ψ)\`.
 
-The new owner
+The least-privilege theorem is one-sided:
 
-```text
-YMClayF3SprintConstructionFrontierExact
-```
+\[
+\operatorname{rootedShell}_k(\psi,\tau_1\psi)
+\le c_k \|\psi\|^2_{L^2(\mu_k)}.
+\]
 
-makes the actual physical inputs explicit:
+No envelope equality is required.
 
-```text
+This theorem is still real quantitative analysis if Route G is pursued, but Route S does not consume it.
+
+## G2 — finite trajectory calibration
+
+\[
+\Delta a_k \le 1-c_k.
+\]
+
+This is still the thin same-beta-history payment needed to convert the dense transfer defect into a uniform finite gap.
+
+It is **not** consumed by Route S.
+
+## G3 — physical recovery maps
+
+The Sprint111–122 programme remains the right implementation surface for Route G:
+
+\`\`\`text
 actual P_a
 actual E_a
-representative independence + gauge/quotient compatibility
-uniform norm + approximate inverse control
-residual + strong convergence
-energy liminf/limsup recovery
+representative independence
+gauge / quotient compatibility
+uniform norm window
+approximate inverse
+residual / strong convergence
+energy recovery
 vacuum-sector stability
-literal Wilson measure convergence
-```
+\`\`\`
 
-The existing Sprint flags remain fail-closed. In particular:
+The existing reducers remain fail-closed.
 
-```text
-Sprint112 samplingProjectionMapConstructedHere = false
-Sprint112 interpolationMapConstructedHere = false
-Sprint116 unconditionalNormWindowTheoremProvedHere = false
-Sprint116 quotientGaugeAnalyticFeedsDischargedHere = false
-```
-
-Reducer receipts are diagnostic surfaces only and do not inhabit the new physical F3 record.
-
-Once these analytic maps/estimates produce the actual
-
-```text
-VacuumOrthogonalRecoverySystem
-```
-
-the continuum vacuum-gap theorem is existing compiler output.
-
-The literal finite-measure convergence theorem remains a separate physical leaf on the same beta-driven Wilson family; Round126 stores it and later rounds export it but do not construct it.
+Once an actual \`VacuumOrthogonalRecoverySystem\` is constructed, continuum gap transport is compiler-owned.
 
 ---
 
-# F4 — common-core physical data, then compiler output
+# Common downstream YM/OS identification
 
-The primitive F4 boundary is now
+The physical F4 boundary remains upstream of evolution equality:
 
-```text
-YMClayPhysicalStressOSCommonCoreWitnessExact.PhysicalStressOSCommonCoreWitness
-```
+\`\`\`text
+actual continuum stress/current
+translation Ward identity
+local charge stabilization
+YM action on reconstructed core
+OS Hamiltonian action on SAME core
+both closure identifications
+\`\`\`
 
-rather than `YMOSSameObjectWitness.evolutionsEqual`.
+via
 
-Its physical content is:
+\`\`\`text
+PhysicalStressOSCommonCoreWitness
+  -> StressOSCommonCoreData
+  -> same generator
+  -> Stone / OS uniqueness
+  -> same evolution.
+\`\`\`
 
-```text
-actual reconstructed common core
-actual YM/stress core action
-actual OS core action
-core-action equality
-YM closure / essential-self-adjointness identification
-OS closure / essential-self-adjointness identification
-```
-
-via the existing
-
-```text
-YangMillsStressWardCommonCoreGeneratorExact.StressOSCommonCoreData.
-```
-
-The compiler chain is now explicit:
-
-```text
-physical StressOSCommonCoreData
-  -> commonCoreWardImpliesSameGenerator
-  -> same self-adjoint generator
-  -> Stone/OS generator-to-evolution bridge
-  -> YM evolution = OS evolution
-  -> derived YMOSSameObjectWitness
-```
-
-Thus evolution equality is no longer a primitive field of `OutstandingPhysicalFrontier`.
-
-The remaining physical work upstream is the continuum stress/Ward construction:
-
-```text
-renormalized local stress/current
-+ translation Ward identity
-+ microcausal/local shell data
-+ stabilized local charge action
-+ common-core closure identifications.
-```
-
-Generic cutoff stabilization, outer-shell elimination, closure equality and Stone uniqueness are already compiler-owned.
+Thus \`evolutionsEqual\` remains compiler output, not a primitive physical axiom.
 
 ---
 
-# Canonical current min-cut
+# Current route-Pareto status
 
-```text
-F1
-  1. selected CMP116 physical localization
-  2. Wilson <-> R295 same-object observable weld
-  3. rooted/source shell <-> physical L2 normalization
-  4. beta/a trajectory gap calibration
+\`\`\`text
+SHARED / ROUTE S
+  selected CMP116/T5 localization                     open physical application
+  OS1 time/support same-object semantics              open physical application
+  R315 Wilson-cylinder presentation                   open physical application
+  literal measure/expectation convergence             open physical continuum input
+  covariance convergence                              compiler-owned
+  same-OS-Hamiltonian transfer coordinate             open physical application
+  half-rate clustering -> spectral gap                standard/compiler-owned
 
-F3
-  5. actual P_a sampling map
-  6. actual E_a interpolation map
-  7. quotient/gauge/norm/approximate-inverse control
-  8. strong/residual convergence + energy recovery + vacuum stability
-  9. literal Wilson measure convergence
+ROUTE G ONLY
+  translated-pair shell -> c_k ||ψ||²                 open quantitative theorem
+  Delta*a_k <= 1-c_k                                  open trajectory theorem
+  P_a / E_a + gauge/norm/residual recovery            open analytic programme
+  recovery system -> continuum gap                    compiler-owned
 
-F4
-  10. continuum renormalized stress/current Ward data
-  11. local-charge stabilization inputs on the reconstructed core
-  12. physical YM/OS common-core action + closure identifications
-```
+COMMON DOWNSTREAM
+  physical stress/Ward common-core data               open
+  common-core equality -> same generator              compiler-owned
+  same generator -> same evolution                    compiler-owned
+\`\`\`
 
-Several of these are expected to collapse together under the right physical constructors.
-
-The conceptual status is:
-
-```text
-finite Wilson geometry/action/plaquettes          deeply paid
-finite physical transfer/gap compilers            paid
-source/cumulant/covariance algebra                paid
-dense observable -> L2_0 extension                paid
-varying-carrier abstract transport                paid
-Mosco/recovery abstract theorem                   paid
-OS/Stone uniqueness                               paid
-common-core equality -> generator equality        paid
-
-same-object physical instantiations               remaining
-scale-uniform analytic estimates                  remaining
-continuum sampling/interpolation estimates        remaining
-continuum stress/Ward identification              remaining
-```
+This is a strictly smaller terminal min-cut than the earlier linear F1→F3→F4 picture.
 
 ## Verification boundary
 
-This reconciliation tranche is source-written only. No exact-head Agda or Lean kernel run was performed in this connector session.
+This tranche is source-written only. No exact-head Agda or Lean kernel build was run.
 
-Before promotion:
-
-1. typecheck `YMClayAristotleGapParityEverything.agda` on the exact branch head;
-2. build the corresponding Lean tree where relevant;
-3. audit for `sorry`, `axiom`, `postulate`, `@[implemented_by]` and unresolved metas;
-4. preserve all physical F1/F3/F4 records as conditional until actual inhabitants are constructed.
-
-No status Boolean, source citation or historical receipt is promoted to a physical theorem inhabitant.
+No source citation, status Boolean, Sprint receipt or compiler theorem is promoted to a physical theorem inhabitant.
