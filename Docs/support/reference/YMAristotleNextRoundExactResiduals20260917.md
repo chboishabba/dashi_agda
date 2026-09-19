@@ -405,3 +405,40 @@ No hidden theorem was found for D3.  Thus the genuine Ward work is not
 "prove a Ward identity from scratch"; it is the same-object continuum transport
 showing that the already-owned finite Ward current is exactly the recovered
 stress insertion on the same continuum family.
+
+
+## Level-2 D2/D3 typed welds
+
+The remaining two same-object seams are now typed directly.
+
+### D2 — OPE coefficient / RG coordinate
+
+`YMClayLevel2OPECoefficientCoordinateWeldExact` separates the physical
+attachment from the already-paid recurrence algebra.
+
+The physical input is only that the literal OPE coefficient is the declared
+projection of the SAME existing RG/composite coordinate and that the recurrence
+coefficient projects to that literal coordinate. Then the existing
+`BalabanOPECoefficientRGRecurrenceUniquenessExact` gives the projected
+AF/reference coefficient equality at every depth.
+
+Thus D2 does not require a second global AF theorem or a second all-depth
+coefficient theorem.
+
+### D3 — finite Ward current / recovered continuum stress
+
+`YMClayLevel2ContinuumWardTransportExact` records the genuine carrier change:
+
+```text
+finite Ward charge : Rational
+continuum stress   : StressRep.PairingScalar
+```
+
+The bridge must therefore supply an explicit finite-charge-to-pairing-scalar
+map and a convergence relation proving that the mapped finite Ward-charge
+sequence converges to the exact continuum first variation already produced by
+R131/R136.
+
+Finite Ward telescoping/conservation and generated-action stress provenance are
+not re-proved. The remaining theorem is only the same-current continuum
+transport.
