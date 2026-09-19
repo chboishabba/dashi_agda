@@ -444,13 +444,14 @@ def fulltext_handoff(ledger: list[dict[str, Any]], fulltext_index: list[dict[str
             continue
         src = row["source_identity_reference"]
         ft = by_src.get(src)
-        if not ft:
+        if not ft or ft.get("full_text_obtained") is not True:
             continue
-        path = Path(str(ft.get("text_path") or ""))
-        digest = str(ft.get("full_text_sha256") or "")
-        identity_review = str(ft.get("same_object_identity_review_reference") or "")
-        if not path.as_posix() or not digest or not identity_review:
+        path_text = str(ft.get("text_path") or "").strip()
+        digest = str(ft.get("full_text_sha256") or "").strip()
+        identity_review = str(ft.get("same_object_identity_review_reference") or "").strip()
+        if not path_text or not digest or not identity_review:
             raise ValueError(f"{src}: incomplete full-text identity/index row")
+        path = Path(path_text)
         payload = {
             "source_identity_reference": src,
             "retained_screening_decision_reference": row["decision_reference"],
