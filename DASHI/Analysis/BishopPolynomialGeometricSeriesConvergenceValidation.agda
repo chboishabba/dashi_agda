@@ -19,7 +19,7 @@ successorFactorizationRegression =
 
 fixedDegreeConvergenceRegression :
   ∀ (ratio : BishopReal.ℝ) degree →
-  BishopReal._<_ BishopReal.0ℝ ratio →
+  BishopReal._≤_ BishopReal.0ℝ ratio →
   BishopReal._<_ ratio BishopReal.1ℝ →
   BishopSequence._isConvergent
     (BishopSequence.SeriesOf
