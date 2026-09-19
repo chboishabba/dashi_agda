@@ -129,6 +129,8 @@ record P0GFullTextExecutionParity : Set where
     includeOrProbableRequired : Bool
     fullTextArtifactIdentityRequired : Bool
     fullTextSha256Required : Bool
+    fullTextDigestComputedFromArtifact : Bool
+    fullTextUnavailableAttemptRetained : Bool
     sameObjectIdentityReviewRequired : Bool
     slrSourceUnitManifestEmitted : Bool
     canonicalSLREvidenceRequired : Bool
@@ -146,7 +148,7 @@ open P0GFullTextExecutionParity public
 canonicalP0GExecution : P0GFullTextExecutionParity
 canonicalP0GExecution =
   p0g-fulltext-execution-parity
-    true true true true true true true true true true true true
+    true true true true true true true true true true true true true true
     false false
 
 record P0AToGExecutionBoundary : Set where
