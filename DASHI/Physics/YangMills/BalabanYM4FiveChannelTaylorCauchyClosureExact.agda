@@ -26,6 +26,7 @@ module DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base using (ℚ; _*_; -_; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
