@@ -6,6 +6,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
+import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact as RouteSLean
+import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact as RouteS3
 import DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact as RouteSH2c
 import DASHI.Physics.YangMills.YMClayRouteSH1DirectSelectedMarkedDecayExact as RouteSH1
 import DASHI.Physics.YangMills.YMClayRouteSH1ToR387DirectUpperExact as RouteSH1R387
@@ -302,6 +304,107 @@ routeSPositiveGapCoreAfterPaymentsCompilerOwnedIsTrue :
   routeSPositiveGapCoreAfterPaymentsCompilerOwned ≡ true
 routeSPositiveGapCoreAfterPaymentsCompilerOwnedIsTrue =
   RouteSGapCore.positiveCandidateAndNoSubgapAfterPaymentsCompilerOwnedIsTrue
+
+
+------------------------------------------------------------------------
+-- Verified literal-Wilson Route-S donor recut.
+--
+-- The supplied 8236-job Lean tranche constructs S2/S3, the marked-source
+-- covariance identity, the covariance-limit compiler, and terminal Route-S
+-- assembly on literal Wilson objects.  Therefore the cross-prover terminal
+-- physical cut is exactly three classes: finite literal clustering, three
+-- expectation limits, and same-object OS correlation identification.
+------------------------------------------------------------------------
+
+routeSLeanTerminalCompilerKernelRevalidated : Bool
+routeSLeanTerminalCompilerKernelRevalidated =
+  RouteS3.leanTerminalCompilerKernelRevalidated
+
+routeSLeanTerminalCompilerKernelRevalidatedIsTrue :
+  routeSLeanTerminalCompilerKernelRevalidated ≡ true
+routeSLeanTerminalCompilerKernelRevalidatedIsTrue =
+  RouteS3.leanTerminalCompilerKernelRevalidatedIsTrue
+
+routeSCrossProverPhysicalCutHasExactlyThreeClasses : Bool
+routeSCrossProverPhysicalCutHasExactlyThreeClasses =
+  RouteS3.exactlyThreePhysicalInputClasses
+
+routeSCrossProverPhysicalCutHasExactlyThreeClassesIsTrue :
+  routeSCrossProverPhysicalCutHasExactlyThreeClasses ≡ true
+routeSCrossProverPhysicalCutHasExactlyThreeClassesIsTrue =
+  RouteS3.exactlyThreePhysicalInputClassesIsTrue
+
+routeSLiteralEuclideanTimeIsIndependentResearchLeaf : Bool
+routeSLiteralEuclideanTimeIsIndependentResearchLeaf =
+  RouteS3.literalEuclideanTimeSemanticsIndependentPhysicalLeaf
+
+routeSLiteralEuclideanTimeIsIndependentResearchLeafIsFalse :
+  routeSLiteralEuclideanTimeIsIndependentResearchLeaf ≡ false
+routeSLiteralEuclideanTimeIsIndependentResearchLeafIsFalse =
+  RouteS3.literalEuclideanTimeSemanticsIndependentPhysicalLeafIsFalse
+
+routeSLiteralWilsonPresentationIsIndependentResearchLeaf : Bool
+routeSLiteralWilsonPresentationIsIndependentResearchLeaf =
+  RouteS3.literalWilsonPresentationIndependentPhysicalLeaf
+
+routeSLiteralWilsonPresentationIsIndependentResearchLeafIsFalse :
+  routeSLiteralWilsonPresentationIsIndependentResearchLeaf ≡ false
+routeSLiteralWilsonPresentationIsIndependentResearchLeafIsFalse =
+  RouteS3.literalWilsonPresentationIndependentPhysicalLeafIsFalse
+
+routeSMarkedSourceIdentityIsIndependentResearchLeaf : Bool
+routeSMarkedSourceIdentityIsIndependentResearchLeaf =
+  RouteS3.markedSourceCovarianceIdentityIndependentPhysicalLeaf
+
+routeSMarkedSourceIdentityIsIndependentResearchLeafIsFalse :
+  routeSMarkedSourceIdentityIsIndependentResearchLeaf ≡ false
+routeSMarkedSourceIdentityIsIndependentResearchLeafIsFalse =
+  RouteS3.markedSourceCovarianceIdentityIndependentPhysicalLeafIsFalse
+
+routeSCovarianceLimitAlgebraIsIndependentResearchLeaf : Bool
+routeSCovarianceLimitAlgebraIsIndependentResearchLeaf =
+  RouteS3.covarianceLimitAlgebraIndependentPhysicalLeaf
+
+routeSCovarianceLimitAlgebraIsIndependentResearchLeafIsFalse :
+  routeSCovarianceLimitAlgebraIsIndependentResearchLeaf ≡ false
+routeSCovarianceLimitAlgebraIsIndependentResearchLeafIsFalse =
+  RouteS3.covarianceLimitAlgebraIndependentPhysicalLeafIsFalse
+
+routeSTerminalAssemblyIsIndependentResearchLeaf : Bool
+routeSTerminalAssemblyIsIndependentResearchLeaf =
+  RouteS3.terminalSpectralAssemblyIndependentPhysicalLeaf
+
+routeSTerminalAssemblyIsIndependentResearchLeafIsFalse :
+  routeSTerminalAssemblyIsIndependentResearchLeaf ≡ false
+routeSTerminalAssemblyIsIndependentResearchLeafIsFalse =
+  RouteS3.terminalSpectralAssemblyIndependentPhysicalLeafIsFalse
+
+routeSFiniteLiteralClusteringStillPhysical : Bool
+routeSFiniteLiteralClusteringStillPhysical =
+  RouteS3.finiteLiteralWilsonClusteringStillPhysical
+
+routeSFiniteLiteralClusteringStillPhysicalIsTrue :
+  routeSFiniteLiteralClusteringStillPhysical ≡ true
+routeSFiniteLiteralClusteringStillPhysicalIsTrue =
+  RouteS3.finiteLiteralWilsonClusteringStillPhysicalIsTrue
+
+routeSThreeExpectationLimitsStillPhysical : Bool
+routeSThreeExpectationLimitsStillPhysical =
+  RouteS3.threeLiteralWilsonExpectationLimitsStillPhysical
+
+routeSThreeExpectationLimitsStillPhysicalIsTrue :
+  routeSThreeExpectationLimitsStillPhysical ≡ true
+routeSThreeExpectationLimitsStillPhysicalIsTrue =
+  RouteS3.threeLiteralWilsonExpectationLimitsStillPhysicalIsTrue
+
+routeSSameOSCorrelationStillPhysical : Bool
+routeSSameOSCorrelationStillPhysical =
+  RouteS3.sameOSCorrelationIdentificationStillPhysical
+
+routeSSameOSCorrelationStillPhysicalIsTrue :
+  routeSSameOSCorrelationStillPhysical ≡ true
+routeSSameOSCorrelationStillPhysicalIsTrue =
+  RouteS3.sameOSCorrelationIdentificationStillPhysicalIsTrue
 
 f2PrimitiveResearchPayment : Bool
 f2PrimitiveResearchPayment = RouteG.f2PrimitiveResearchPayment
