@@ -17,6 +17,7 @@ import DASHI.Physics.YangMills.BalabanOSIndexedPairwiseEuclideanSemanticsRound33
 import DASHI.Physics.YangMills.BalabanPairwiseWilsonBoundedTestsRound315Exact as R315
 import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact as R331
 import DASHI.Physics.YangMills.BalabanHalfRateTransferCoordinateMassGapRound316Exact as R316
+import DASHI.Physics.YangMills.YMClayRouteSH1DirectSelectedMarkedDecayExact as H1
 
 ------------------------------------------------------------------------
 -- DIRECT SOURCE -> CONTINUUM OS MASS-GAP FRONTIER
@@ -127,6 +128,40 @@ mandatoryFreshBAnalyticInequalityCountIsZero : Bool
 mandatoryFreshBAnalyticInequalityCountIsZero =
   R330.Round330Boundary.mandatoryFreshBYMAnalyticInequalityCountIsZero
     R330.canonicalRound330Boundary
+
+
+canonicalH1HasOneTheoremBearingField : Bool
+canonicalH1HasOneTheoremBearingField =
+  H1.canonicalH1HasOneTheoremBearingField
+
+canonicalH1HasOneTheoremBearingFieldIsTrue :
+  canonicalH1HasOneTheoremBearingField ≡ true
+canonicalH1HasOneTheoremBearingFieldIsTrue =
+  H1.canonicalH1HasOneTheoremBearingFieldIsTrue
+
+historicalPublishedLocalizationWrapperMandatory : Bool
+historicalPublishedLocalizationWrapperMandatory =
+  H1.publishedLocalizationWrapperMandatoryForCanonicalH1
+
+historicalPublishedLocalizationWrapperMandatoryIsFalse :
+  historicalPublishedLocalizationWrapperMandatory ≡ false
+historicalPublishedLocalizationWrapperMandatoryIsFalse =
+  H1.publishedLocalizationWrapperMandatoryForCanonicalH1IsFalse
+
+h1IndependentDirectShellRequired : Bool
+h1IndependentDirectShellRequired =
+  H1.independentDirectT5ShellMandatoryAfterH1
+
+h1IndependentDirectShellRequiredIsFalse :
+  h1IndependentDirectShellRequired ≡ false
+h1IndependentDirectShellRequiredIsFalse =
+  H1.independentDirectT5ShellMandatoryAfterH1IsFalse
+
+h1PhysicalDirectSelectedDecayLevel : ProofLevel
+h1PhysicalDirectSelectedDecayLevel = H1.routeSH1PhysicalLevel
+
+h1CompilerLevel : ProofLevel
+h1CompilerLevel = H1.routeSH1CompilerLevel
 
 directSourceApplicationCompilerLevel : ProofLevel
 directSourceApplicationCompilerLevel = R333.round333ApplicationCompilerLevel
