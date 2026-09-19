@@ -103,6 +103,92 @@ multiplyReciprocal (Complex.complex a b) nz =
       ⊜ Κ (+ 0 / 1))
     BishopP.≃-refl a b dInv
 
+normSquareConjugate :
+  (z : Complex.BishopComplex) →
+  BishopReal._≃_
+    (Norm.normSqC (conjugateC z))
+    (Norm.normSqC z)
+normSquareConjugate (Complex.complex a b) =
+  let open BishopP.ℝ-Solver in
+  solve 2
+    (λ a′ b′ →
+      (a′ ⊗ a′) ⊕ ((⊝ b′) ⊗ (⊝ b′))
+      ⊜
+      (a′ ⊗ a′) ⊕ (b′ ⊗ b′))
+    BishopP.≃-refl a b
+
+normSquareScale :
+  (scalar : BishopReal.ℝ) →
+  (z : Complex.BishopComplex) →
+  BishopReal._≃_
+    (Norm.normSqC (Algebra.scaleC scalar z))
+    (BishopReal._*_
+      (Norm.square scalar)
+      (Norm.normSqC z))
+normSquareScale scalar (Complex.complex a b) =
+  let open BishopP.ℝ-Solver in
+  solve 3
+    (λ s a′ b′ →
+      ((s ⊗ a′) ⊗ (s ⊗ a′))
+      ⊕ ((s ⊗ b′) ⊗ (s ⊗ b′))
+      ⊜
+      (s ⊗ s)
+      ⊗ ((a′ ⊗ a′) ⊕ (b′ ⊗ b′)))
+    BishopP.≃-refl scalar a b
+
+normSquareReciprocal :
+  (z : Complex.BishopComplex) →
+  (nz : BishopComplexNonzero z) →
+  BishopReal._≃_
+    (Norm.normSqC (reciprocalC z nz))
+    (BishopInverse._⁻¹
+      (Norm.normSqC z)
+      (normSquareNonzero nz))
+normSquareReciprocal z nz =
+  let
+    d = Norm.normSqC z
+    inv = BishopInverse._⁻¹ d (normSquareNonzero nz)
+    inverseLaw = BishopInverse.*-inverseʳ d (normSquareNonzero nz)
+
+    regroup :
+      BishopReal._≃_
+        (BishopReal._*_
+          (Norm.square inv)
+          d)
+        (BishopReal._*_
+          inv
+          (BishopReal._*_ d inv))
+    regroup =
+      let open BishopP.ℝ-Solver in
+      solve 2
+        (λ d′ inv′ →
+          (inv′ ⊗ inv′) ⊗ d′
+          ⊜ inv′ ⊗ (d′ ⊗ inv′))
+        BishopP.≃-refl d inv
+  in
+  BishopP.≃-trans
+    (normSquareScale inv (conjugateC z))
+    (BishopP.≃-trans
+      (BishopP.*-congˡ
+        (normSquareConjugate z))
+      (BishopP.≃-trans
+        regroup
+        (BishopP.≃-trans
+          (BishopP.*-congˡ inverseLaw)
+          (BishopP.*-identityʳ inv))))
+
+reciprocalNormSquarePositive :
+  (z : Complex.BishopComplex) →
+  (nz : BishopComplexNonzero z) →
+  BishopReal._<_ BishopReal.0ℝ
+    (Norm.normSqC (reciprocalC z nz))
+reciprocalNormSquarePositive z nz =
+  BishopP.<-respʳ-≃
+    (BishopP.≃-symm (normSquareReciprocal z nz))
+    (BishopInverse.0<x⇒0<x⁻¹
+      (normSquareNonzero nz)
+      (normSquarePositive nz))
+
 reciprocalPower :
   (z : Complex.BishopComplex) →
   BishopComplexNonzero z →
