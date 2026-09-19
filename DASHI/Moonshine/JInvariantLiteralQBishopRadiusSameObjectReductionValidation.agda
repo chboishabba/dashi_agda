@@ -9,6 +9,7 @@ import DASHI.Analysis.MarxConstructiveRealRingNormalisation as Ring
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as FiniteQ
 import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldExact as RadiusWeld
 import DASHI.Moonshine.JInvariantQBishopExponentTransportCompilerExact as Exponent
+import DASHI.Moonshine.JInvariantQBishopMagnitudeCoordinateTransportExact as Coordinates
 import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneRadiusExact as BishopRadius
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as BishopExp
 import DASHI.Moonshine.JInvariantLiteralQBishopRadiusSameObjectReductionExact as P
@@ -54,3 +55,25 @@ transportConstructorRegression :
   P.LiteralQBishopRadiusTransport C tau piB imagB
 transportConstructorRegression =
   P.transportFromMagnitudeAndExponential
+
+coordinateTransportConstructorRegression :
+  ∀ {C : Complex.ConstructedComplexPackage}
+    (N : Ring.ConstructedRealRingNormalisationLaws
+      (Real.real (Complex.realPackage C)))
+    (tau : Complex.ComplexPair (Real.real (Complex.realPackage C)))
+    {piB imagB : BishopReal.ℝ}
+    (coordinates :
+      Coordinates.QBishopMagnitudeCoordinateTransport C tau piB imagB) →
+  (Coordinates.toLegacy coordinates
+      (BishopExp.bishopExp
+        (BishopReal.-_
+          (BishopRadius.qExponentMagnitude piB imagB)))
+    ≡
+    Real.exp
+      (Real.exponential (Complex.realPackage C))
+      (Coordinates.toLegacy coordinates
+        (BishopReal.-_
+          (BishopRadius.qExponentMagnitude piB imagB)))) →
+  P.LiteralQBishopRadiusTransport C tau piB imagB
+coordinateTransportConstructorRegression =
+  P.transportFromCoordinatesAndExponential
