@@ -245,12 +245,12 @@ module PhysicalComponentED
   componentDissipation sign mode =
     C3.normSquared I mode * componentEnergy sign mode
 
-  selfPhaseComponentBelowED :
+  selfPhaseComponentBelowEDNonzero :
     (tau : Physical.PhysicalTriadIncidence) →
     (outputNonzero : Z3.NonZeroMode (Physical.k tau)) →
     (signP signQ : Helical.HelicitySign) →
-    (pMember : Physical.p tau Cube.∈ Audit.modes system) →
-    (qMember : Physical.q tau Cube.∈ Audit.modes system) →
+    Z3.NonZeroMode (Physical.p tau) →
+    Z3.NonZeroMode (Physical.q tau) →
     selfPhaseReal tau outputNonzero signP signQ
     ≤
     componentDissipation signP (Physical.p tau)
@@ -258,7 +258,8 @@ module PhysicalComponentED
       +
     componentEnergy signP (Physical.p tau)
       * componentDissipation signQ (Physical.q tau)
-  selfPhaseComponentBelowED tau outputNonzero signP signQ pMember qMember =
+  selfPhaseComponentBelowEDNonzero
+      tau outputNonzero signP signQ pNonzero qNonzero =
     let
       p = Physical.p tau
       q = Physical.q tau
@@ -279,7 +280,8 @@ module PhysicalComponentED
       mNN = Separation.complex3NormSquaredNonnegative PX
 
       dBound =
-        G.signedGapBelowSquares signP signQ p q pMember qMember
+        G.signedGapBelowSquaresNonzero
+          signP signQ p q pNonzero qNonzero
 
       massBound =
         R110.projectedCrossNormSquaredBelowProduct
@@ -297,3 +299,22 @@ module PhysicalComponentED
         ≤ (p2 * eP) * eQ + eP * (q2 * eQ))
       (sym (selfPhaseRealMeaning tau outputNonzero signP signQ))
       kernelBound
+
+  selfPhaseComponentBelowED :
+    (tau : Physical.PhysicalTriadIncidence) →
+    (outputNonzero : Z3.NonZeroMode (Physical.k tau)) →
+    (signP signQ : Helical.HelicitySign) →
+    (pMember : Physical.p tau Cube.∈ Audit.modes system) →
+    (qMember : Physical.q tau Cube.∈ Audit.modes system) →
+    selfPhaseReal tau outputNonzero signP signQ
+    ≤
+    componentDissipation signP (Physical.p tau)
+      * componentEnergy signQ (Physical.q tau)
+      +
+    componentEnergy signP (Physical.p tau)
+      * componentDissipation signQ (Physical.q tau)
+  selfPhaseComponentBelowED tau outputNonzero signP signQ pMember qMember =
+    selfPhaseComponentBelowEDNonzero
+      tau outputNonzero signP signQ
+      (Field30.retainedModeNonzero physicalSystem (Physical.p tau) pMember)
+      (Field30.retainedModeNonzero physicalSystem (Physical.q tau) qMember)
