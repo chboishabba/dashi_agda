@@ -120,3 +120,24 @@ validationReviewBundleNotAuthority = refl
 validationAtomicStateTrajectory :
   reviewedStateAndTrajectoryCommitAtomically canonicalReviewedHopBoundary ≡ true
 validationAtomicStateTrajectory = refl
+
+
+validationSimilarityDoesNotMerge :
+  similarityAloneMayMergeClasses canonicalGWBClassDisambiguationPolicy ≡ false
+validationSimilarityDoesNotMerge = refl
+
+validationSharedSuperclassReview :
+  reviewedSharedSuperclassMayBeRetained canonicalGWBClassDisambiguationPolicy ≡ true
+validationSharedSuperclassReview = refl
+
+validationBridgeClassReview :
+  reviewedBridgeClassMayBeRetained canonicalGWBClassDisambiguationPolicy ≡ true
+validationBridgeClassReview = refl
+
+validationConditionalDistinctionReview :
+  reviewedConditionalDistinctionMayBeRetained canonicalGWBClassDisambiguationPolicy ≡ true
+validationConditionalDistinctionReview = refl
+
+validationExternalClassNotInternalTruth :
+  externalClassCreatesInternalOntologyTruth canonicalGWBClassDisambiguationPolicy ≡ false
+validationExternalClassNotInternalTruth = refl
