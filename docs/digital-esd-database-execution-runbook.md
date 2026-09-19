@@ -296,6 +296,7 @@ Then compile the non-authoritative adaptive work products:
 ```bash
 python3 scripts/run_digital_esd_adaptive_screening.py \
   --ledger artifacts/digital-esd/screening/screening-decisions.jsonl \
+  --metadata-input artifacts/digital-esd/deduplication/eric-deduplicated-records.json \
   --out-dir artifacts/digital-esd/screening/adaptive
 ```
 
@@ -349,6 +350,7 @@ Then emit P0-G SLR handoffs:
 ```bash
 python3 scripts/run_digital_esd_adaptive_screening.py \
   --ledger artifacts/digital-esd/screening/screening-decisions.jsonl \
+  --metadata-input artifacts/digital-esd/deduplication/eric-deduplicated-records.json \
   --fulltext-index artifacts/digital-esd/fulltext/verified-fulltext-index.jsonl \
   --out-dir artifacts/digital-esd/screening/adaptive
 ```
