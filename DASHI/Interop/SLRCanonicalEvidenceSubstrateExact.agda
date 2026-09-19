@@ -66,9 +66,9 @@ open EvidenceManifestation public
 record EvidenceSourceRevision : Set where
   constructor evidence-source-revision
   field
-    manifestationSourceRevisionRef : String
-    manifestationRef : String
-    manifestationContentDigestRef : String
+    revisionSourceRevisionRef : String
+    revisionManifestationRef : String
+    revisionContentDigestRef : String
     revisionReceiptRef : String
 
 open EvidenceSourceRevision public
@@ -81,9 +81,9 @@ data EvidenceSpanKind : Set where
 record EvidenceSpan : Set where
   constructor evidence-span
   field
-    manifestationSourceRevisionRef : String
+    spanSourceRevisionRef : String
     spanRef : String
-    kind : EvidenceSpanKind
+    spanKind : EvidenceSpanKind
 
 open EvidenceSpan public
 
@@ -91,22 +91,22 @@ record EvidenceObservation : Set where
   constructor evidence-observation
   field
     observationRef : String
-    manifestationSourceRevisionRef : String
-    span : EvidenceSpan
+    observationSourceRevisionRef : String
+    observationSpan : EvidenceSpan
     predicateRef : String
     valueRef : String
 
-    manifestationCandidateOnly : Bool
-    manifestationCandidateOnlyIsTrue : manifestationCandidateOnly ≡ true
+    observationCandidateOnly : Bool
+    observationCandidateOnlyIsTrue : observationCandidateOnly ≡ true
 
-    manifestationCreatesSemanticAuthority : Bool
-    manifestationCreatesSemanticAuthorityIsFalse : manifestationCreatesSemanticAuthority ≡ false
+    observationCreatesSemanticAuthority : Bool
+    observationCreatesSemanticAuthorityIsFalse : observationCreatesSemanticAuthority ≡ false
 
-    manifestationApplicabilityPromoted : Bool
-    manifestationApplicabilityPromotedIsFalse : manifestationApplicabilityPromoted ≡ false
+    observationApplicabilityPromoted : Bool
+    observationApplicabilityPromotedIsFalse : observationApplicabilityPromoted ≡ false
 
-    manifestationClaimTruthPromoted : Bool
-    manifestationClaimTruthPromotedIsFalse : manifestationClaimTruthPromoted ≡ false
+    observationClaimTruthPromoted : Bool
+    observationClaimTruthPromotedIsFalse : observationClaimTruthPromoted ≡ false
 
 open EvidenceObservation public
 
