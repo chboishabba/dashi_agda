@@ -26,9 +26,13 @@ module DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldExact where
 -- remains in this compiler.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
+
 import Real as BishopReal
 import Sequence as BishopSequence
 
+import DASHI.Analysis.BishopConstructedRealBackendExact as BishopBackend
+import DASHI.Analysis.ConstructedRealBackendSpineExact as Spine
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
 import DASHI.Moonshine.JInvariantEisensteinBishopMajorantSeriesExact as Majorant
 
@@ -76,3 +80,46 @@ compileEisensteinBishopMajorants weld = record
       Majorant.e6MajorantAbsoluteConvergence
         (unitInterval weld)
   }
+
+
+------------------------------------------------------------------------
+-- Canonical same-object relation induced by a concrete quotient of the
+-- repository's selected Murray/Bishop setoid backend.
+------------------------------------------------------------------------
+
+BishopSetoidReal : Spine.SetoidOrderedCompleteReal
+BishopSetoidReal =
+  BishopBackend.bishopImportedSetoidOrderedCompleteReal
+
+QuotientRadiusRelation :
+  (Q : Spine.PropositionalQuotientRealization BishopSetoidReal) →
+  Spine.Quotient Q →
+  BishopReal.ℝ →
+  Set
+QuotientRadiusRelation Q legacyRadius radius =
+  Spine.quotient Q radius ≡ legacyRadius
+
+radiusWeldFromConcreteBishopQuotient :
+  (Q : Spine.PropositionalQuotientRealization BishopSetoidReal) →
+  (radius : BishopReal.ℝ) →
+  Unit.BishopUnitIntervalRatio radius →
+  LiteralRadiusBishopWeld
+    (QuotientRadiusRelation Q)
+    (Spine.quotient Q radius)
+radiusWeldFromConcreteBishopQuotient Q radius unit = record
+  { bishopRadius = radius
+  ; sameRadius = refl
+  ; unitInterval = unit
+  }
+
+majorantsFromConcreteBishopQuotient :
+  (Q : Spine.PropositionalQuotientRealization BishopSetoidReal) →
+  (radius : BishopReal.ℝ) →
+  (unit : Unit.BishopUnitIntervalRatio radius) →
+  EisensteinBishopMajorantReceipt
+    (QuotientRadiusRelation Q)
+    (Spine.quotient Q radius)
+    (radiusWeldFromConcreteBishopQuotient Q radius unit)
+majorantsFromConcreteBishopQuotient Q radius unit =
+  compileEisensteinBishopMajorants
+    (radiusWeldFromConcreteBishopQuotient Q radius unit)
