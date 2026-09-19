@@ -16,6 +16,7 @@ import DASHI.Biology.Agriculture.AcaciaSenegalBNFLESCrossPollinationExact as Sen
 import DASHI.Biology.Agriculture.QueenslandLeyBNFCarryoverExact as QueenslandLey
 import DASHI.Biology.Agriculture.QueenslandWoodyLegumeGrassNitrogenCyclingExact as QueenslandWoodyGrass
 import DASHI.Biology.Agriculture.QueenslandDesmanthusGrassBNFInteractionExact as QueenslandDesmanthus
+import DASHI.Biology.Agriculture.DrylandRegenerationNitrogenFactorisationExact as NitrogenFactorisation
 
 ------------------------------------------------------------------------
 -- COMPARATIVE REGENERATION HYPERFABRIC
@@ -141,12 +142,43 @@ record RegenerationHyperfabricBoundary : Set where
     nitrogenServiceCanBeOptimisedWithoutWaterState : Bool
     queenslandPastureComparatorCreatesAcaciaSameObjectEvidence : Bool
     explicitCounterfactualRequiredForFertilizerReplacement : Bool
+    typedNitrogenNonFactorabilityWitnessesOwned : Bool
+    failedFactorisationMayDriveExperimentalAxisDiscovery : Bool
 open RegenerationHyperfabricBoundary public
 
 canonicalRegenerationHyperfabricBoundary : RegenerationHyperfabricBoundary
-canonicalRegenerationHyperfabricBoundary = regeneration-hyperfabric-boundary
-  false false true false false false false true false false false false false false false false false
-  false false false false false true
+canonicalRegenerationHyperfabricBoundary = record
+  { sameFunctionalRoleCreatesSameEcologicalObject = false
+  ; sameFunctionalRoleCreatesTransferableResponse = false
+  ; sourceSystemIdentityMustRemainIndexed = true
+  ; inoculationImpliesCommunityRecovery = false
+  ; pioneerEstablishmentImpliesDesiredSuccessionalEndpoint = false
+  ; pioneerDominanceImpliesSuccessfulSuccessionalRelease = false
+  ; referenceLikeRichnessImpliesReferenceLikeComposition = false
+  ; disturbanceRegimeMustRemainIndexed = true
+  ; temporaryNurseFunctionImpliesNativeCommunityRecovery = false
+  ; soilFunctionImprovementImpliesFloristicRecovery = false
+  ; weedSuppressionImpliesBiodiversityRecovery = false
+  ; chronosequenceAgeGradientImpliesLongitudinalCausalRecovery = false
+  ; microbiomeReferenceSimilarityImpliesWholeEcosystemRecovery = false
+  ; interventionSuccessAtT1ImpliesTrajectorySuccessAtT2 = false
+  ; AustralianAcaciaEqualsSenegaliaSenegal = false
+  ; agriculturalPastureEqualsNativeGrassland = false
+  ; comparativeRoleCreatesDeploymentAuthority = false
+  ; fixedNitrogenImpliesSameDownstreamNitrogenRoute = false
+  ; residueMediatedTransferImpliesLivingRootTransfer = false
+  ; grassCompetitionHasContextFreeSign = false
+  ; nitrogenServiceCanBeOptimisedWithoutWaterState = false
+  ; queenslandPastureComparatorCreatesAcaciaSameObjectEvidence = false
+  ; explicitCounterfactualRequiredForFertilizerReplacement = true
+  ; typedNitrogenNonFactorabilityWitnessesOwned = true
+  ; failedFactorisationMayDriveExperimentalAxisDiscovery = true
+  }
+
+nitrogenFactorisationBoundaryReused :
+  NitrogenFactorisation.NitrogenFactorisationBoundary
+nitrogenFactorisationBoundaryReused =
+  NitrogenFactorisation.canonicalNitrogenFactorisationBoundary
 
 -- Canonical source-bounded lanes are reused, not fused.
 australianRhizobiaBoundaryReused : AustralianRhizobia.AustralianRhizobiaBoundary
@@ -178,4 +210,4 @@ queenslandDesmanthusBoundaryReused = QueenslandDesmanthus.canonicalDesmanthusBou
 
 attributionRule : String
 attributionRule =
-  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass, Senegalia dryland, Queensland ley-carryover, Queensland woody-legume/grass and Queensland Desmanthus papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory/transport separations, the finite early-success/long-term-trajectory TaskFactorisation collision and the no-promotion boundary. Shared roles, fixed-N labels, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, a unique N-transfer route, causal recovery, whole-ecosystem recovery or deployment authority. Queensland residue transfer does not become living-root transfer; Desmanthus grass interaction has no context-free sign; ley N service cannot erase water state; and a quantified fertilizer-replacement claim retains its explicit mineral-N counterfactual requirement. Queensland agricultural comparators do not manufacture Acacia/Senegalia same-object evidence."
+  "Australian native-legume, mine-rehabilitation, old-field/grassland, Acacia-pioneer/disturbance, restoration-microbiome, sorghum-sudangrass, Senegalia dryland, Queensland ley-carryover, Queensland woody-legume/grass and Queensland Desmanthus papers retain ownership of their own empirical propositions. DASHI owns only the comparative role assignments, observer/trajectory/transport separations, the finite early-success/long-term-trajectory TaskFactorisation collision, the nitrogen-route/timing/water/counterfactual non-factorability witnesses, their missing-axis experimental-design routing, and the no-promotion boundary. Shared roles, fixed-N labels, reference-like richness, chronosequence age gradients or microbiome similarity do not create same-object identity, response transfer, a unique N-transfer route, causal recovery, whole-ecosystem recovery or deployment authority. Queensland residue transfer does not become living-root transfer; Desmanthus grass interaction has no context-free sign; ley N service cannot erase water state; and a quantified fertilizer-replacement claim retains its explicit mineral-N counterfactual requirement. Queensland agricultural comparators do not manufacture Acacia/Senegalia same-object evidence."
