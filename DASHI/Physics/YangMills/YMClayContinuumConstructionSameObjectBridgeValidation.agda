@@ -8,6 +8,7 @@ module DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeValida
 -- the physical same-object attachment to the literal Y remains conditional.
 ------------------------------------------------------------------------
 
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeExact as Bridge
 
