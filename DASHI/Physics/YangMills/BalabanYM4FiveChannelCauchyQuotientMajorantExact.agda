@@ -70,7 +70,7 @@ import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Be
 powerProductIdentity : ∀ left right exponent →
   Geo.pow (left * right) exponent
   ≡ Geo.pow left exponent * Geo.pow right exponent
-powerProductIdentity left right zero = ℚRing.solve-∀
+powerProductIdentity left right zero = refl
 powerProductIdentity left right (suc exponent) =
   let
     induction =
