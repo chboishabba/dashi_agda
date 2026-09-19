@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact w
 -- nonnegativity.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; 0ℚ; _≤_)
 
@@ -105,8 +106,8 @@ canonicalRationalReferenceFoldSemantics :
   RationalReferenceConeMeaning canonical →
   Probability.RationalReferenceFoldSemantics canonical
 canonicalRationalReferenceFoldSemantics cone = record
-  { zeroMeaning = Agda.Builtin.Equality.refl
-  ; addMeaning = λ left right → Agda.Builtin.Equality.refl
+  { zeroMeaning = refl
+  ; addMeaning = λ left right → refl
   ; nonnegativeMeaning =
       nonnegativeMeansRationalNonnegative cone
   }
