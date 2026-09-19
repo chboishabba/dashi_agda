@@ -20,6 +20,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (1ℚ)
+open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact as G0
@@ -35,7 +36,14 @@ singletonPath increment = increment ∷ []
 singletonPathEndpoint :
   (increment : Gram.Vec3) →
   Path.pathEndpointDifference (singletonPath increment) ≡ increment
-singletonPathEndpoint (Gram.vec3 ix iy iz) = refl
+singletonPathEndpoint (Gram.vec3 ix iy iz) =
+  cong₃ Gram.vec3
+    (solve (ix ∷ []))
+    (solve (iy ∷ []))
+    (solve (iz ∷ []))
+  where
+  open import Agda.Builtin.List using ([]; _∷_)
+  open import Relation.Binary.PropositionalEquality using (cong₃)
 
 canonicalOneStepComplexPath :
   (plus minus : C3.Complex3 F) →
