@@ -41,6 +41,21 @@ bishopSetoidEisensteinSeriesFromPowerEnvelopeIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopSetoidEisensteinSeriesFromPowerEnvelopeIsOwned = refl
 
+bishopComplexNormSquarePowerEnvelopeCompilerIsOwned :
+  P.bishopComplexNormSquarePowerEnvelopeCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopComplexNormSquarePowerEnvelopeCompilerIsOwned = refl
+
+bishopNonnegativeSquareReflectionStillUnpaid :
+  P.bishopNonnegativeSquareReflectionInhabited
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+bishopNonnegativeSquareReflectionStillUnpaid = refl
+
+bishopActualQNormSquareRadiusStillUnpaid :
+  P.bishopActualQNormSquareRadiusOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+bishopActualQNormSquareRadiusStillUnpaid = refl
+
 bishopQPowerComponentEnvelopeStillUnpaid :
   P.bishopQPowerComponentEnvelopeInhabited
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
