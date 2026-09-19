@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicFourierReconstructionEx
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+import Real as BishopReal
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact as Canonical
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedComparatorCanonicalShapeExact as Shape
@@ -36,7 +37,7 @@ PeriodicFourierForcingHistory =
 
 record ReleasedPeriodicFourierReconstruction
     (S : Canonical.CanonicalNSSemantics)
-    (viscosity : Shape.BishopReal.ℝ)
+    (viscosity : BishopReal.ℝ)
     (released : Witness.ReleasedComparatorDWitness S viscosity) : Set₁ where
   field
     initialHat : PeriodicFourierVectorField
@@ -77,7 +78,7 @@ base369RepresentativeReturnsSelectedFibre =
 
 record ReleasedPeriodicForcedEquationFourierWeld
     {S : Canonical.CanonicalNSSemantics}
-    {viscosity : Shape.BishopReal.ℝ}
+    {viscosity : BishopReal.ℝ}
     {released : Witness.ReleasedComparatorDWitness S viscosity}
     (fourier : ReleasedPeriodicFourierReconstruction S viscosity released) : Set₁ where
   field
