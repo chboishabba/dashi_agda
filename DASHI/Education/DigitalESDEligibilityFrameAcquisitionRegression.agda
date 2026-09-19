@@ -36,3 +36,9 @@ creaghPaysIndependentCategoryConstruction :
   Acquisition.EligibilityFrameResidual
 creaghPaysIndependentCategoryConstruction =
   Acquisition.targetResidual Acquisition.creaghLBOTECandidate
+
+
+fisherPaysIndependentRecruitmentFrame :
+  Acquisition.EligibilityFrameResidual
+fisherPaysIndependentRecruitmentFrame =
+  Acquisition.targetResidual Acquisition.fisherMikolajczakCandidate
