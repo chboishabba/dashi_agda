@@ -12,6 +12,7 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound78TopDownThreeAnalyti
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact as RouteS
 import DASHI.Physics.YangMills.YangMillsClayStressOPERequirementBoundaryExact as Stress
 import DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact as Local
+import DASHI.Physics.YangMills.YMClayRouteSToLiteralYGapAttachmentExact as GapAttach
 
 ------------------------------------------------------------------------
 -- LITERAL CLAY TOP-DOWN CLOSURE THROUGH THE VERIFIED ROUTE-S MIN-CUT
@@ -136,6 +137,54 @@ literalClaySolutionFromRouteSAndLiteralLocalFields
     Y structural uv routeS
     (Local.literalLocalFieldClosureBuildsRound78C local)
     standard
+
+
+------------------------------------------------------------------------
+-- Certificate-level Route-S integration.
+--
+-- This removes the old freedom to pair Route-S inputs with an unrelated
+-- preassembled literal gap record.  The literal-Y gap is compiled from an
+-- explicit physical certificate attachment on the same Y.
+------------------------------------------------------------------------
+
+record RouteSLiteralMassGapCertificateIntegration
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    (Y : Top.LiteralYangMillsConstruction C S) : Set₁ where
+  field
+    routeSPhysicalInputs :
+      RouteS.LiteralWilsonRouteSPhysicalInputs
+    physicalGapAttachment :
+      GapAttach.RouteSPhysicalGapToLiteralYAttachment Y
+
+open RouteSLiteralMassGapCertificateIntegration public
+
+certificateIntegrationAsLegacy :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
+  RouteSLiteralMassGapCertificateIntegration Y →
+  RouteSLiteralMassGapIntegration Y
+certificateIntegrationAsLegacy integration = record
+  { RouteSLiteralMassGapIntegration.routeSPhysicalInputs =
+      RouteSLiteralMassGapCertificateIntegration.routeSPhysicalInputs integration
+  ; RouteSLiteralMassGapIntegration.literalPhysicalGap =
+      GapAttach.routeSPhysicalGapBuildsLiteralYGap
+        (physicalGapAttachment integration)
+  }
+
+literalClaySolutionFromRouteSCertificateAndLiteralLocalFields :
+  ∀ {C S} (Y : Top.LiteralYangMillsConstruction C S) →
+  Five.LiteralClayStructuralBase Y →
+  R78.UVToContinuumYM Y →
+  RouteSLiteralMassGapCertificateIntegration Y →
+  Local.LiteralLocalFieldClosureInputs Y →
+  R78.StandardSameHGaussianNontrivialityConsequence Y →
+  Clay.ClayYangMillsSolution (Top.literalClayVocabulary Y)
+literalClaySolutionFromRouteSCertificateAndLiteralLocalFields
+    Y structural uv routeS local standard =
+  literalClaySolutionFromRouteSAndLiteralLocalFields
+    Y structural uv
+    (certificateIntegrationAsLegacy routeS)
+    local standard
 
 ------------------------------------------------------------------------
 -- Exact closure accounting.
