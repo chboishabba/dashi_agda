@@ -46,10 +46,15 @@ bishopComplexNormSquarePowerEnvelopeCompilerIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopComplexNormSquarePowerEnvelopeCompilerIsOwned = refl
 
-bishopNonnegativeSquareReflectionStillUnpaid :
+bishopNonnegativeSquareReflectionIsOwned :
   P.bishopNonnegativeSquareReflectionInhabited
-    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
-bishopNonnegativeSquareReflectionStillUnpaid = refl
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopNonnegativeSquareReflectionIsOwned = refl
+
+bishopUnitDiskEisensteinCompletionIsOwned :
+  P.bishopUnitDiskEisensteinCompletionOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopUnitDiskEisensteinCompletionIsOwned = refl
 
 bishopActualQNormSquareRadiusStillUnpaid :
   P.bishopActualQNormSquareRadiusOwned
