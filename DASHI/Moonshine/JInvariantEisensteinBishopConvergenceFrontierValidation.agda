@@ -61,6 +61,11 @@ genericDominatedTailCompilerIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 genericDominatedTailCompilerIsOwned = refl
 
+bishopPolynomialGeometricComparisonCompilerIsOwned :
+  P.bishopPolynomialGeometricComparisonCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopPolynomialGeometricComparisonCompilerIsOwned = refl
+
 genericTailToCauchyBridgeIsOwned :
   P.genericTailToCauchyBridgeOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
