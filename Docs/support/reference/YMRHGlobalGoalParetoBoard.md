@@ -430,3 +430,75 @@ rational certificate carrier -> exact analytic finite-fold identity by coercion.
 - #953: least-privilege Round131 common-metric/unification transport merged and remains downstream.
 
 Exact-head status is queried directly from GitHub and is not inferred from these round labels.
+
+
+### RH R2 final-carrier centered-complement advance — 2026-09-20
+
+NEW THEOREM-SOURCE ANALYTICS:
+
+Companion Lean source now works directly on the final universal even-cone consumer, without importing the rank-two/projective balance semantics.
+
+1. Final Off near/far split:
+
+```text
+D_off^final(g,t,s)
+  = 1/2 * finiteSignedNear(g,t,s,J) + R_J
+
+|R_J| <= 1/2 * C_s * farShellBound A |t| J
+R_J -> 0.
+```
+
+The finite core remains signed.  Therefore the live near theorem is no longer acquisition of a final-carrier finite split; it is quantitative signed control of the adaptively expanding finite core plus same-object replay into the Agda near observer.
+
+2. Centered Gamma:
+
+```text
+h_r(u) = g(u)(cos(ru)-1)
+
+Gamma_g(t,r)+Gamma_g(t,-r)-2 Gamma_g(t,0)
+  = 2 Gamma_{h_r}(t,0).
+```
+
+Lean source proves the pointwise derivative bounds
+
+```text
+|h_r|   <= r^2 (Lambda^2/2) |g|
+|h_r'|  <= r^2 ((Lambda^2/2)|g'| + Lambda|g|)
+|h_r''| <= r^2 ((Lambda^2/2)|g''| + 2 Lambda|g'| + |g|)
+```
+
+and consequently
+
+```text
+stripConst(sampleTest h_r t 0, Lambda)
+  <= r^2 * gammaCenteredStripCoeff(g,Lambda,t).
+```
+
+Thus the raw shrinking-support ||g''||_1 loss of the old radiuswise Gamma envelope is not intrinsic to the centered radius correction.
+
+3. Final joint correction:
+
+The same centering identity is proved for the actual final Off response.  Companion source then gives a same-carrier estimate of the form
+
+```text
+|(D_off(r)-D_off(0))
+  + ((Gamma(r)+Gamma(-r))-2 Gamma(0))|
+ <= r^2 * C_joint(g,Lambda,t).
+```
+
+This does NOT close R2.  It shifts the remaining hard baseline question to the radius-zero joint complement and the a^2-vanishing cluster surplus.
+
+LIVE CANONICAL HIGH CUT:
+
+```text
+cluster source/replay                         source theorem exists; transport open
+adaptive final far tail                       source-written
+final signed near/far decomposition           source-written
+adaptive finite signed near-core cancellation OPEN
+centered Gamma radius correction O(r^2)       source-written
+centered final Off+Gamma correction O(r^2)    source-written
+radius-zero joint complement vs baseline B0   OPEN
+joint excess < a^2 cluster margin             OPEN
+```
+
+Do not promote the centered O(r^2) result to a full Gamma budget: the potentially large radius-zero Gamma/Off baseline remains and must be handled jointly.
