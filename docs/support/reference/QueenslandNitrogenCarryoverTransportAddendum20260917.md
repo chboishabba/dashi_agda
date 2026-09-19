@@ -36,6 +36,7 @@ Owner: `DASHI/Biology/Agriculture/QueenslandWoodyLegumeGrassNitrogenCyclingExact
 - Catchpoole & Blair 1990 II — DOI `10.1071/AR9900531` — controlled split-root labelled transfer; retained as an external mechanism/method donor, not Queensland same-object evidence.
 - Catchpoole & Blair 1990 III — DOI `10.1071/AR9900539` — labelled leaf/faeces/urine release and placement; retained as an external route/placement donor.
 - Vallis 1983 — DOI `10.1071/AR9830367` — south-eastern Queensland field application of 15N-labelled Siratro/Greenleaf-desmodium residues to Rhodes grass, with labelled-N recovery followed in grass and soil.
+- Sierra & Nygren 2006 — DOI `10.1016/j.soilbio.2005.12.012` — Guadeloupe field silvopastoral design excluding above-ground litter/excreta recycling, with natural-abundance 15N, tree fine-root density and explicit reference-plant/isotope-baseline checks. Retained as an external field route-discrimination donor, not Australian same-object evidence.
 
 Typed transport separation:
 
@@ -45,7 +46,7 @@ and
 
 `N fixed != N consumed != N excreted/recycled != N soil stock != companion-grass capture`.
 
-The Vallis receipt pays a Queensland **field residue-transfer route** only. It does not pay contemporaneous living-root transfer. Controlled transfer does not imply detectable field transfer, and long-term soil total N does not identify a transfer pathway.
+The Vallis receipt pays a Queensland **field residue-transfer route** only. It does not pay contemporaneous living-root transfer. Sierra & Nygren show a stronger field design shape for isolating below-ground transfer, but in a Guadeloupe Gliricidia-Dichanthium system; the reference-plant/root-invasion problem and isotope baseline remain part of the measurement object. Controlled transfer does not imply detectable field transfer, and long-term soil total N does not identify a transfer pathway.
 
 ## Queensland Desmanthus <-> Rhizobium <-> grass / soil-N interaction
 
@@ -73,6 +74,19 @@ The companion-grass interaction has no context-free sign. Grass may compete for 
 - quantified fertiliser replacement retains an explicit mineral-N counterfactual requirement.
 
 The canonical Acacia/Senegalia ladder remains unchanged: reaction enablement, bacterial fixed-N flux, generic plant assimilation, seasonal demand and avoided mineral N are not closed by these comparator studies.
+
+## Factorisation / experiment-design cross-pollination
+
+Owner: `DASHI/Biology/Agriculture/DrylandRegenerationNitrogenFactorisationExact.agda`
+
+The generic `IntersectionalNonFactorability` and Snowball discovery machinery is now applied to four ecology-specific coarse observers:
+
+- fixed-N label -> transport route;
+- released-N label -> demand-time crop capture;
+- N-service label -> water-coupled outcome;
+- carryover label -> quantified fertiliser replacement.
+
+Each coarse observer has a finite non-factorability witness, and each corresponding enriched observer has a finite positive `FactorsThrough` repair. Failed factorisation generates a typed route/timing/water/mineral-N-response axis proposal. These finite worlds and proposals are DASHI synthetic reasoning objects, not empirical source propositions and not evidence that the proposed measurement has been performed.
 
 ## Certification boundary
 
