@@ -21,6 +21,7 @@ open import Agda.Primitive using (Set; Set₁)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Nullary using (Dec)
+open import Data.Sum using (_⊎_)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
 import DASHI.Analysis.RiemannAristotleUniversalEvenConeBidiExact as Universal
