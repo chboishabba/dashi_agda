@@ -2,14 +2,11 @@ module DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineGenericCycleClassWeldEx
 
 ------------------------------------------------------------------------
 -- PROJECTIVE-LINE FINITE MODEL -> GENERIC HODGE CYCLE-CLASS WELD
---
--- The repository already proves literal surjectivity of the Q-valued P^1
--- cycle-class model.  This module isolates the exact same-object bridge needed
--- to transport that finite theorem onto a supplied generic Hodge cycle map.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCycleClassExact as P1
@@ -69,11 +66,16 @@ genericP1CycleRepresents :
   Hodge.cycleClass cycleMap 1
     (genericP1CycleRepresentative weld h)
   ≡ Hodge.hodgeClassValue h
-genericP1CycleRepresents weld h
-    rewrite P1.p1CycleClassSurjective (h11FromGeneric weld h)
-          | h11RoundTrip weld h =
-  cycleClassCommutes weld
-    (P1.cycleRepresentingH11Class (h11FromGeneric weld h))
+genericP1CycleRepresents weld h =
+  trans
+    (cycleClassCommutes weld
+      (P1.cycleRepresentingH11Class (h11FromGeneric weld h)))
+    (trans
+      (cong
+        (λ h11 →
+          Hodge.hodgeClassValue (genericFromP1 weld h11))
+        (P1.p1CycleClassSurjective (h11FromGeneric weld h)))
+      (cong Hodge.hodgeClassValue (h11RoundTrip weld h)))
 
 genericP1WeldGivesHodgeAtOne :
   ∀ {variety comparison hodge cycleMap} →
