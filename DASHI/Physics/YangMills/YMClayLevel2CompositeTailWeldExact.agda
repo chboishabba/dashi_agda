@@ -69,7 +69,7 @@ literalCompletedComposite :
     {scale : Scale} {volume : Volume} {root : Root} →
   CompositeProductTailWeld compositeData shared scale volume root →
   Composite
-literalCompletedComposite {compositeData = compositeData} _ =
+literalCompletedComposite {compositeData = compositeData} weld =
   Marked.compositeProjection compositeData (Marked.completedState compositeData)
 
 literalOPERemainderMagnitude :
