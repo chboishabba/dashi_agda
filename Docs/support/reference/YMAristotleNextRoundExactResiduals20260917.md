@@ -485,3 +485,59 @@ No in-repo theorem was found that already identifies the literal product
 remainder with the composite mark/tail. CMP116/Round84 supply differentiated
 localization and composite-mark source-response semantics, but not this exact
 product-expansion remainder identity.
+
+## Canonical whole-programme formalism owner
+
+The route-Pareto formalism is now source-owned by:
+
+- `DASHI/Physics/YangMills/YMClayFullPhysicalFormalismExact.agda`
+- `DASHI/Physics/YangMills/YMClayFullPhysicalFormalismValidation.agda`
+
+This owner is deliberately architectural rather than a second proof-bearing frontier.
+The existing Route-S, Route-G and Level-2 owners remain authoritative for their
+actual theorem inputs.  The aggregate fixes the following whole-programme
+classification in one place:
+
+```text
+preferred mass-gap route
+  Route S:
+    selected source localization
+    + OS-indexed time/support semantics
+    + literal Wilson presentation
+    + same-continuum expectation convergence
+    + same-OS-Hamiltonian transfer coordinate
+
+strong independent route
+  Route G:
+    F1 strong finite transfer gap
+    + F2 compiler-owned varying-carrier transport
+    + F3 physical P_a/E_a + recovery programme
+
+literal Clay local-QFT
+  R129 same-family recovery
+    + D1 completed-composite semantic weld
+    + D2 OPE/RG coordinate weld
+    + D3 finite Ward-current -> continuum stress transport
+
+optional stronger physics
+  stress/Ward common core -> same generator -> same evolution
+  same physical stress -> GR stress/Bianchi weld
+
+physical interpretation
+  inverse correlation length
+    -> explicit hbar/c SI mass conversion
+    -> observable/calibration map
+    -> bounded empirical contact
+```
+
+The aggregate also records the probability firewall
+
+```text
+positive Euclidean weight
+  != normalized Euclidean Gibbs probability
+  != reconstructed quantum measurement law
+```
+
+and therefore does not import the finite Shor/Born toy surface as a Yang--Mills
+theorem donor.  CMS contact remains explicitly orthogonal to Clay proof
+closure.  No unconditional Clay promotion is introduced by this aggregate.
