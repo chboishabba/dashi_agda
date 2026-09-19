@@ -30,6 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNEuclideanViscousHeatRateExact as Heat
 import DASHI.Physics.Closure.NSWholeSpaceR3RadialOriginCancellationExact as Radial
 import DASHI.Physics.Closure.NSWholeSpaceR3RadialFactorBudgetExact as Budget
 import DASHI.Physics.Closure.NSWholeSpaceR3DirectionalSecondMomentQGainExact as Directional
+import DASHI.Physics.Closure.NSWholeSpaceR3CanonicalRadialDataExact as CanonicalRadial
 
 record PhysicalQBudgetInputs
     (dataSet : Radial.PositiveViscosityRadiusSquare)
@@ -167,6 +168,67 @@ physicalInputsBuildRadialFactorBudget inputs =
     (secondMomentCarriesRadialQ inputs)
 
 ------------------------------------------------------------------------
+-- Canonical constructor: q = |xi|^2 is now definitional.
+------------------------------------------------------------------------
+
+record CanonicalPhysicalQBudgetInputs
+    (fluid : Heat.PositiveViscosity)
+    (point : Heat.PuncturedEuclideanFrequency)
+    (gramFactor secondMoment gramMajorant : BishopReal.ℝ) : Set where
+  constructor canonical-physical-q-budget-inputs
+  field
+    gramFactorNonnegativeCanonical :
+      BishopReal.NonNegative gramFactor
+
+    gramMajorantNonnegativeCanonical :
+      BishopReal.NonNegative gramMajorant
+
+    gramCarriesOutputQCanonical :
+      BishopReal._≤_
+        gramFactor
+        (BishopReal._*_
+          (Heat.frequencyNormSquared (Heat.frequency point))
+          gramMajorant)
+
+    directionalSecondMomentCanonical :
+      Directional.DirectionalSecondMomentSlot
+        (Heat.frequency point)
+        secondMoment
+
+open CanonicalPhysicalQBudgetInputs public
+
+canonicalInputsToPhysicalQBudget :
+  ∀ {fluid point gramFactor secondMoment gramMajorant} →
+  CanonicalPhysicalQBudgetInputs
+    fluid point gramFactor secondMoment gramMajorant →
+  PhysicalQBudgetInputs
+    (CanonicalRadial.canonicalRadialData fluid point)
+    (Heat.frequency point)
+    gramFactor secondMoment gramMajorant
+canonicalInputsToPhysicalQBudget inputs =
+  physical-q-budget-inputs
+    (CanonicalRadial.canonicalRadialQEquivalent _ _)
+    (gramFactorNonnegativeCanonical inputs)
+    (gramMajorantNonnegativeCanonical inputs)
+    (gramCarriesOutputQCanonical inputs)
+    (directionalSecondMomentCanonical inputs)
+
+canonicalInputsBuildRadialFactorBudget :
+  ∀ {fluid point gramFactor secondMoment gramMajorant} →
+  (inputs :
+    CanonicalPhysicalQBudgetInputs
+      fluid point gramFactor secondMoment gramMajorant) →
+  Budget.R3RadialFactorBudget
+    (CanonicalRadial.canonicalRadialData fluid point)
+    gramFactor
+    secondMoment
+    gramMajorant
+    (derivativeMajorant (canonicalInputsToPhysicalQBudget inputs))
+canonicalInputsBuildRadialFactorBudget inputs =
+  physicalInputsBuildRadialFactorBudget
+    (canonicalInputsToPhysicalQBudget inputs)
+
+------------------------------------------------------------------------
 -- Exact remaining physical boundary:
 --
 --  1. identify q in radial coordinates with |xi|^2 (representation);
@@ -191,7 +253,7 @@ physicalDerivativeSlotWeldClosedHere : Bool
 physicalDerivativeSlotWeldClosedHere = false
 
 radialCoordinateSameObjectClosedHere : Bool
-radialCoordinateSameObjectClosedHere = false
+radialCoordinateSameObjectClosedHere = true
 
 clayPromotion : Bool
 clayPromotion = false
