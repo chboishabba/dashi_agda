@@ -121,3 +121,6 @@ import DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyValidation
 
 import DASHI.Physics.YangMills.BalabanClayT5MarkovToProkhorovTightnessExact
 import DASHI.Physics.YangMills.BalabanClayT5MarkovToProkhorovTightnessValidation
+
+import DASHI.Physics.YangMills.BalabanClayT5Path4MarkovProkhorovExact
+import DASHI.Physics.YangMills.BalabanClayT5Path4MarkovProkhorovValidation
