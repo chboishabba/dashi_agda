@@ -24,3 +24,14 @@ ericObservedCountWithoutExportCannotQualify :
     (Exec.outcome Exec.ericQ1ObservedExecution) → ⊥
 ericObservedCountWithoutExportCannotQualify =
   Bridge.ericQ1ObservedCountWithoutExportCannotCreateSuccessfulOutcome
+
+ericExportQ1PassesBridgeRegression :
+  Bridge.SuccessfulExecutionForSurface.attempt Bridge.ericQ1SuccessfulExecution
+  ≡ Exec.ericQ1ObservedExportExecution
+ericExportQ1PassesBridgeRegression = refl
+
+ericExportQ7PassesBridgeRegression :
+  Bridge.SuccessfulExecutionForSurface.attempt Bridge.ericQ7SuccessfulExecution
+  ≡ Exec.ericQ7ObservedExportExecution
+ericExportQ7PassesBridgeRegression = refl
+

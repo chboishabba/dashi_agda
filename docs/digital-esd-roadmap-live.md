@@ -765,3 +765,50 @@ static audit: 15/15 affected modules PASS
 ```
 
 That receipt belongs only to exact local commit `0ef43e3d...`. The later remote count-receipt/export-runner commits do not inherit it until reconciled and rechecked.
+
+
+## 26. ERIC export retention, structured-search bridge, and cross-query deduplication paid
+
+On 2026-09-19, all seven frozen ERIC queries completed full paginated execution against the official public API:
+
+```text
+Q1  numFound=642     (4 pages, 642 docs)     summarySha256=faa8cf35e1a34ec06a9cc97a816f78099752605aaf4a70c6b1493e1d24dd2e4b
+Q2  numFound=290     (2 pages, 290 docs)     summarySha256=5a01ede4bcd53a8068f32fefd9e47d2e7f113a3acec214ed7b9609f47d0a110d
+Q3  numFound=1594    (8 pages, 1594 docs)    summarySha256=76ad0a9a971a6f9dadb90df29f18ce70533ab839ca78489ecf7f6b606e410c88
+Q4  numFound=41889   (210 pages, 41889 docs) summarySha256=bee52dd930f2ae6da0004ea56c0378f0445ad3ec0877a479f8fecb6ec557b53f
+Q5  numFound=214     (2 pages, 214 docs)     summarySha256=0302dfbc15b67be4d1664653bda4d5e0dcb99d547345f09c58588a2ea44feb90
+Q6  numFound=293     (2 pages, 293 docs)     summarySha256=f96cf23bef0516d4f4fc2fa2d0cfb992cf187c67e7ca7389111b6eedb5122cb0
+Q7  numFound=1675    (9 pages, 1675 docs)    summarySha256=2cac198aa4c2270cdc30691edbf67387341026ea77adc671c9007ee1efe4a88d
+
+total docs fetched:  46,597
+total pages fetched: 237 JSON pages
+manifest:            artifacts/digital-esd/eric/run-manifest.json
+```
+
+All 237 raw JSON page files, 7 `summary.json` files, and `run-manifest.json` are retained with verified SHA-256 digests.
+
+### Formal Agda bridge crossed
+In `DASHI/Education/DigitalESDDatabaseExecutionReceiptExact.agda`:
+- Appended seven `ericQ1ObservedExportExecution` through `ericQ7ObservedExportExecution` receipts carrying `exportObserved` with exact summary paths and SHA-256 digests.
+- Ledger count updated from 42 to 49 receipts (35 initial attempts, 7 count probes, 7 export receipts).
+
+In `DASHI/Education/DigitalESDDatabaseExecutionStructuredSearchBridgeExact.agda`:
+- Constructed `ericQ1SuccessfulExecution` through `ericQ7SuccessfulExecution` of type `SuccessfulExecutionForSurface Search.eric`.
+- Constructed `ericQ1StructuredSearchReceipt` through `ericQ7StructuredSearchReceipt` of type `Search.DatabaseExecutionReceipt Search.eric` via `toStructuredSearchReceipt`.
+
+Both modules, along with their regression suites, verify **PASS** under Agda 2.9 (heap 7G, RSS limit 8192 MB) and static audit.
+
+### Cross-query deduplication executed
+Cross-query deduplication across all 7 ERIC queries was executed:
+- **Total input hits:** 46,597
+- **Unique ERIC records:** 43,996 (100% have ID, Title, Subject, PeerReviewed)
+- **Duplicate hits removed:** 2,601
+- **Deduplication artifact:** `artifacts/digital-esd/deduplication/eric-deduplicated-records.json` (SHA-256: `272f4c1275c51580d895c771d750cb698d0ad09a2c872544e7031384f9296e82`)
+- **Deduplication manifest:** `artifacts/digital-esd/deduplication/deduplication-manifest.json` (SHA-256: `e45140b91e203c95c95adf3f30920eac56c45e75ac5aa4b0cb1d5cba40c8816f`)
+
+### Current genuine external walls
+The external walls for the review are now:
+1. **Scopus & Web of Science:** Blocked by institutional authentication (HTTP 403) at entrypoints.
+2. **IEEE Xplore & ACM Digital Library:** Search-result retrieval blocked by current web transport.
+3. **Downstream Review Payments:** 5-database joint deduplication requires exports from the other 4 surfaces; eligibility screening, structured extraction, and per-source audit admission remain unpaid.
+
