@@ -34,7 +34,9 @@ data ResidualClass : Set where
   quantitativeCalibration : ResidualClass
   physicalContinuumConstruction : ResidualClass
   physicalSpectralIdentification : ResidualClass
+  physicalClayStressConstruction : ResidualClass
   physicalCommonCoreConstruction : ResidualClass
+  physicalGRUnificationConstruction : ResidualClass
 
 data ResidualStatus : Set where
   unpaid : ResidualStatus
@@ -198,32 +200,69 @@ strongRouteRecoveryCompiler = exact-residual
   "Once an actual physical recovery system exists, continuum gap transport is compiler output."
 
 ------------------------------------------------------------------------
--- Common downstream physical YM/OS identification.
+-- Literal Clay local-QFT/stress endpoint.
+--
+-- OS reconstruction machinery is already extensive.  The Clay-local residual
+-- is the existing R127 same-family inhabitant plus physical stress/OPE data on
+-- that literal family.  The stronger stress-charge/common-core theorem is a
+-- separate optional strengthening, not a primitive Clay payment.
 ------------------------------------------------------------------------
 
-f4StressCurrentWard : ExactResidual
-f4StressCurrentWard = exact-residual
+osLiteralSchwingerSameFamily : ExactResidual
+osLiteralSchwingerSameFamily = exact-residual
+  sameObjectAttachment
+  "BalabanOSLiteralSchwingerWeldRound127Exact.agda"
+  "OSLiteralSchwingerWeld.sourceOSSystemIsLiteralSchwinger"
+  unpaid
+  "R127 already owns the machine-checked adapter ABI preventing OS reconstruction and literal Clay stress/OPE from living on parallel continuum objects. The remaining payment is to inhabit it on the actual Balaban/literal continuum family."
+
+literalClayStressOPE : ExactResidual
+literalClayStressOPE = exact-residual
+  physicalClayStressConstruction
+  "YangMillsClayStressOPERequirementBoundaryExact.agda / YMClayOSLiteralStressRouteParetoExact.agda"
+  "stress tensor on the same Schwinger family + physical OPE coefficients/remainders"
+  unpaid
+  "The literal Clay stress/OPE constructor consumes exactly same-family stress/OPE evidence. It does not consume stress-charge cutoff convergence, common-core generator equality, essential self-adjointness, or equality of exponentials."
+
+------------------------------------------------------------------------
+-- Optional stronger same-generator theorem.
+------------------------------------------------------------------------
+
+strongStressCurrentWard : ExactResidual
+strongStressCurrentWard = exact-residual
   physicalCommonCoreConstruction
   "YangMillsStressChargeLocalCoreCutoffStabilizationExact + YangMillsLocalCurrentMicrocausalShellExact"
   "renormalized stress/current + translation Ward/locality data"
-  unpaid
-  "Generic cutoff stabilization and outer-shell elimination are paid. The actual continuum stress/Ward data remain physical."
+  routeSpecific
+  "Needed for the stronger local theorem identifying the stress charge with H_OS, not for the literal Clay stress/OPE postcondition."
 
-f4CommonCoreClosure : ExactResidual
-f4CommonCoreClosure = exact-residual
+strongCommonCoreClosure : ExactResidual
+strongCommonCoreClosure = exact-residual
   physicalCommonCoreConstruction
   "YMClayPhysicalStressOSCommonCoreWitnessExact.agda"
   "StressOSCommonCoreData on the actual reconstructed continuum"
-  unpaid
-  "Need same physical YM and OS core actions and both closure identifications."
+  routeSpecific
+  "Same physical core actions and closure identifications remain genuine inputs for the stronger stress-generator theorem."
 
-f4EvolutionEquality : ExactResidual
-f4EvolutionEquality = exact-residual
+strongEvolutionEquality : ExactResidual
+strongEvolutionEquality = exact-residual
   physicalCommonCoreConstruction
   "YMClayPhysicalStressOSCommonCoreWitnessExact.agda"
   "physicalSameEvolution"
   compilerOwned
-  "Same generator follows from common-core equality; Stone/OS then gives same evolution."
+  "On the stronger route, same generator follows from common-core equality and Stone/OS then gives same evolution."
+
+------------------------------------------------------------------------
+-- GR / unification consumption is another distinct strengthening.
+------------------------------------------------------------------------
+
+grStressIdentification : ExactResidual
+grStressIdentification = exact-residual
+  physicalGRUnificationConstruction
+  "PhysicalRGCFTFullPhysicsBridge.agda / W4MatterStressEnergyInterfaceReceipt.agda"
+  "stressTensorMatchesEinsteinStressEnergy + stressWardMatchesContractedBianchi"
+  routeSpecific
+  "These are bridge fields/receipt targets, not inhabitants. The generic StressEnergyBridgeReceiptSurface contains postulated AQFT target declarations and is intentionally excluded from the trusted YM theorem cone."
 
 ------------------------------------------------------------------------
 -- Route-Pareto bookkeeping.
@@ -249,6 +288,21 @@ directSourceRouteRequiresOSReconstruction = true
 
 strongFiniteGapRecoveryRouteStillValid : Bool
 strongFiniteGapRecoveryRouteStillValid = true
+
+strongStressGeneratorRouteIsClayPrimitive : Bool
+strongStressGeneratorRouteIsClayPrimitive = false
+
+grStressUnificationRouteIsClayPrimitive : Bool
+grStressUnificationRouteIsClayPrimitive = false
+
+literalClayStressOPERequiresCommonCoreGeneratorEquality : Bool
+literalClayStressOPERequiresCommonCoreGeneratorEquality = false
+
+literalClayStressOPERequiresStoneEvolutionEquality : Bool
+literalClayStressOPERequiresStoneEvolutionEquality = false
+
+osReconstructionMachineryMissing : Bool
+osReconstructionMachineryMissing = false
 
 f4EvolutionEqualityPrimitive : Bool
 f4EvolutionEqualityPrimitive = false
