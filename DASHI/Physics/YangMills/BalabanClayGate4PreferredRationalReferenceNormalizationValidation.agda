@@ -1,0 +1,25 @@
+module DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationExact as Preferred
+
+preferredNormalizationCompilerClosed :
+  Preferred.preferredRationalReferenceNormalizationCompilerLevel ≡ machineChecked
+preferredNormalizationCompilerClosed = refl
+
+preferredConeCompilerClosed :
+  Preferred.preferredRationalReferenceConeCompilerLevel ≡ machineChecked
+preferredConeCompilerClosed = refl
+
+preferredFoldSemanticsCompilerClosed :
+  Preferred.preferredRationalReferenceFoldSemanticsCompilerLevel ≡ machineChecked
+preferredFoldSemanticsCompilerClosed = refl
+
+referenceFactorInputsRemainPhysical :
+  Preferred.preferredReferenceFactorInputsLevel ≡ conditional
+referenceFactorInputsRemainPhysical = refl
+
+referenceIntegrandMeaningRemainsPhysical :
+  Preferred.preferredSelectedReferenceIntegrandMeaningLevel ≡ conditional
+referenceIntegrandMeaningRemainsPhysical = refl
