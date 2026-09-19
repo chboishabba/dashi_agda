@@ -24,6 +24,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Analysis.RiemannAristotleRankTwoPoleQuotientLaneSeparationExact as Separation
+
 record ProjectiveJointQuadraticLeanReceipt : Set where
   constructor projective-joint-quadratic-lean-receipt
   field
@@ -57,9 +59,13 @@ record ProjectiveJointQuadraticBoundary : Set where
     jointProjectiveQuadraticCompositionSourceWritten : Bool
 
     projectiveTaperDefinitionallyFinalUniversalPoleQuotientTaper : Bool
-    explicitSameObjectBridgeRequiredForFinalReuse : Bool
+    projectiveBalancedStrictConsumerAdmissible : Bool
+    finalPoleQuotientLaneUsesDifferentAdmissibleComparisonObject : Bool
 
-    jointDonorMayBeUsedAfterSameObjectBridge : Bool
+    taperEqualityAloneSufficesForFinalReuse : Bool
+    explicitResponseAndBalanceTransportRequiredForFinalReuse : Bool
+
+    jointDonorMayBeUsedAfterFullSameObjectBridge : Bool
     jointDonorAlreadyPaysFinalR2 : Bool
     leanTheoremTransportedIntoAgda : Bool
     rhDerivedHere : Bool
@@ -73,6 +79,9 @@ canonicalProjectiveJointQuadraticBoundary =
     true
     true
     false
+    false
+    true
+    false
     true
     true
     false
@@ -83,3 +92,27 @@ projectiveCarrierFirewall :
   ProjectiveJointQuadraticBoundary.projectiveTaperDefinitionallyFinalUniversalPoleQuotientTaper
     canonicalProjectiveJointQuadraticBoundary ≡ false
 projectiveCarrierFirewall = refl
+
+projectiveBalancedStrictConsumerIsKnownNoGo :
+  Separation.RankTwoPoleQuotientLaneSeparation.rankTwoStrictBalancedConsumerAdmissible
+    Separation.canonicalRankTwoPoleQuotientLaneSeparation ≡ false
+projectiveBalancedStrictConsumerIsKnownNoGo =
+  Separation.rankTwoStrictBalancedConsumerAdmissibleIsFalse
+    Separation.canonicalRankTwoPoleQuotientLaneSeparation
+
+finalPoleQuotientLaneIsTheAdmissibleChangedComparison :
+  Separation.RankTwoPoleQuotientLaneSeparation.poleQuotientFinalLaneAdmissible
+    Separation.canonicalRankTwoPoleQuotientLaneSeparation ≡ true
+finalPoleQuotientLaneIsTheAdmissibleChangedComparison =
+  Separation.poleQuotientFinalLaneAdmissibleIsTrue
+    Separation.canonicalRankTwoPoleQuotientLaneSeparation
+
+taperOnlyBridgeIsInsufficient :
+  ProjectiveJointQuadraticBoundary.taperEqualityAloneSufficesForFinalReuse
+    canonicalProjectiveJointQuadraticBoundary ≡ false
+taperOnlyBridgeIsInsufficient = refl
+
+fullProjectiveReuseNeedsResponseAndBalanceTransport :
+  ProjectiveJointQuadraticBoundary.explicitResponseAndBalanceTransportRequiredForFinalReuse
+    canonicalProjectiveJointQuadraticBoundary ≡ true
+fullProjectiveReuseNeedsResponseAndBalanceTransport = refl
