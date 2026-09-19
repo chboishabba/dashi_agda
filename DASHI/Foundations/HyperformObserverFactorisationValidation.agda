@@ -23,6 +23,23 @@ phenomenon right = true
 distinguishes : phenomenon left ≡ phenomenon right → ⊥
 distinguishes ()
 
+
+distinction :
+  Factor.ObserverFibreDistinction observer phenomenon
+distinction =
+  Factor.observer-fibre-distinction
+    left right refl distinguishes
+
+notConsumerSufficient :
+  Factor.ObserverConsumerSufficient observer phenomenon → ⊥
+notConsumerSufficient =
+  Factor.nonFactorableObserverIsNotConsumerSufficient distinction
+
+notConsumerAdequate :
+  Factor.ObserverConsumerAdequate observer phenomenon → ⊥
+notConsumerAdequate =
+  Factor.nonFactorableObserverIsNotConsumerAdequate distinction
+
 witness :
   INF.NonFactorabilityWitness
     (Glue.observe observer)
