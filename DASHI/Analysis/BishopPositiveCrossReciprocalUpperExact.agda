@@ -120,5 +120,5 @@ positiveCrossReciprocalUpper {a} {c} {d}
           (BishopP.*-identityʳ invD))
   in
   BishopP.≤-respˡ-≃
-    (BishopP.≃-symm cancelA)
+    cancelA
     scaleByInvA
