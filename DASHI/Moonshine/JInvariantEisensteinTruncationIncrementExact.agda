@@ -17,14 +17,13 @@ module DASHI.Moonshine.JInvariantEisensteinTruncationIncrementExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Finite
 
-private
-  ROf : Complex.ConstructedComplexPackage -> Real.ConstructedOrderedCompleteReal
+ROf : Complex.ConstructedComplexPackage -> Real.ConstructedOrderedCompleteReal
   ROf C = Real.real (Complex.realPackage C)
 
 e4Increment :
