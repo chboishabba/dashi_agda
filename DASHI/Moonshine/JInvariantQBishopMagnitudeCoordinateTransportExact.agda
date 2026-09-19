@@ -133,14 +133,10 @@ compileMagnitudeAgreement {C} tau {piB} {imagB} transport =
     (mulAgreement transport
       (BishopReal._*_ BishopRadius.two piB)
       imagB)
-    (trans
-      (cong₂
-        (Real._*_ R)
-        innerAgreement
-        (imagAgreement transport))
-      (cong
-        (λ right → Real._*_ R (Cartesian.twoPi C) right)
-        (Real.addZeroRight R (Complex.im tau))))
+    (cong₂
+      (Real._*_ R)
+      innerAgreement
+      (imagAgreement transport))
 
 compileExponentMagnitudeTransport :
   ∀ {C : Complex.ConstructedComplexPackage}
