@@ -96,6 +96,36 @@ bishopEisensteinMajorantSpecializationIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopEisensteinMajorantSpecializationIsOwned = refl
 
+bishopLiteralRadiusWeldCompilerIsOwned :
+  P.bishopLiteralRadiusWeldCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopLiteralRadiusWeldCompilerIsOwned = refl
+
+bishopFiniteCauchyWingIsOwned :
+  P.bishopFiniteCauchyWingOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopFiniteCauchyWingIsOwned = refl
+
+bishopExponentialAdditivityIsOwned :
+  P.bishopExponentialAdditivityOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopExponentialAdditivityIsOwned = refl
+
+bishopGlobalNegativeExponentialUnitIntervalIsOwned :
+  P.bishopGlobalNegativeExponentialUnitIntervalOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopGlobalNegativeExponentialUnitIntervalIsOwned = refl
+
+bishopUpperHalfPlaneRadiusIsOwned :
+  P.bishopUpperHalfPlaneRadiusOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopUpperHalfPlaneRadiusIsOwned = refl
+
+bishopUpperHalfPlaneEisensteinMajorantsAreOwned :
+  P.bishopUpperHalfPlaneEisensteinMajorantsOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopUpperHalfPlaneEisensteinMajorantsAreOwned = refl
+
 bishopLiteralRadiusMajorantCompilerIsOwned :
   P.bishopLiteralRadiusMajorantCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
@@ -110,11 +140,6 @@ literalQToBishopRadiusSameObjectStillUnpaid :
   P.literalQToBishopRadiusSameObjectOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
 literalQToBishopRadiusSameObjectStillUnpaid = refl
-
-bishopLiteralRadiusWeldCompilerIsOwned :
-  P.bishopLiteralRadiusWeldCompilerOwned
-    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
-bishopLiteralRadiusWeldCompilerIsOwned = refl
 
 bishopDegreeFourPolynomialGeometricConvergenceIsOwned :
   P.bishopDegreeFourPolynomialGeometricConvergenceOwned
