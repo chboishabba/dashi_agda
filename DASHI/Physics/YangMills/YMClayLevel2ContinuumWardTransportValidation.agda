@@ -17,6 +17,15 @@ sameCurrentContinuumTransportStillPhysical :
   D3.finiteToContinuumSameCurrentTransportStillPhysical ≡ true
 sameCurrentContinuumTransportStillPhysical = refl
 
+
+perturbationIndependentSequenceIsTooWeak :
+  D3.perturbationIndependentWardChargeSequenceWouldBeTooWeak ≡ true
+perturbationIndependentSequenceIsTooWeak = refl
+
+cutoffIndependentScalarMapNotRequired :
+  D3.cutoffIndependentChargeRepresentationMapRequired ≡ false
+cutoffIndependentScalarMapNotRequired = refl
+
 promotionFailClosed :
   D3.clayPromotion ≡ false
 promotionFailClosed = refl
