@@ -61,6 +61,21 @@ bishopQPowerComponentEnvelopeStillUnpaid :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
 bishopQPowerComponentEnvelopeStillUnpaid = refl
 
+bishopQFromUnitPhaseCompilerIsOwned :
+  P.bishopQFromUnitPhaseCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopQFromUnitPhaseCompilerIsOwned = refl
+
+bishopActualUnitPhaseStillUnpaid :
+  P.bishopActualUnitPhaseOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+bishopActualUnitPhaseStillUnpaid = refl
+
+bishopUpperHalfPlaneEisensteinFromUnitPhaseIsOwned :
+  P.bishopUpperHalfPlaneEisensteinFromUnitPhaseOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+bishopUpperHalfPlaneEisensteinFromUnitPhaseIsOwned = refl
+
 sameCarrierConcreteComplexLimitCompilerIsOwned :
   P.sameCarrierConcreteComplexLimitCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
