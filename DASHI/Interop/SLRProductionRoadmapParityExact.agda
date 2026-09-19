@@ -12,6 +12,7 @@ import DASHI.Interop.SLRReviewedEvidencePaymentExact as Review
 import DASHI.Interop.SLRBoundedResearchIterationControlExact as Iteration
 import DASHI.Interop.SLRWorldModelSuiteConvergenceRoadmapExact as Suite
 import DASHI.Interop.SLRGWBPhysicalObjectAcquisitionPolicyExact as Physical
+import DASHI.Interop.SLRSprint1AcquisitionMachineExact as Sprint1
 import DASHI.Interop.SLRExternalOntologyEnrichmentRouterExact as External
 
 ------------------------------------------------------------------------
@@ -70,35 +71,25 @@ open CapabilitySprint public
 productionRoadmap : List CapabilitySprint
 productionRoadmap =
     capabilitySprint
-      "A"
+      "1"
       active
-      "bounded ontology transport closure: specialised P31/P279 slice, route-aware general HF fallback, physical-object deduplication/coalescing, bounded remote scheduler, transport receipt"
-      "representative replay proves bounded physical acquisition, cache-only replay, mixed-provider provenance and abstention on truncation"
+      "recurrent acquisition machine: residual -> producer plan -> bounded physical acquisition -> candidate evidence -> review/payment -> fresh world -> re-diagnosis"
+      "M1.1-M1.5 implemented; exact Rust runtime receipt, persisted campaign replay and exact Agda kernel receipt required before closure"
   ∷ capabilitySprint
-      "B"
+      "2"
       next
-      "generic epistemic scheduler over typed ConsumerRequirement -> ProducerPlan -> execution -> evidence -> review/payment -> residual recomputation"
-      "one persisted/restartable recurrent campaign traverses at least three producer families through one scheduler ABI"
+      "canonical evidence convergence across world, legal-authority and narrative acquisition"
+      "one manifestation/source-revision/span/observation substrate replays exact provenance across producer families"
   ∷ capabilitySprint
-      "C"
-      next
-      "canonical evidence reducer plus legal-source acquisition convergence"
-      "world, legal-authority and narrative evidence reuse one canonical source/span/observation substrate with exact replay provenance"
-  ∷ capabilitySprint
-      "D"
+      "3"
       next
       "reviewed world state to typed legal issue projection"
       "one matter maps reviewed evidence and pinned authority into support/contradiction/unknown element state without semantic overpromotion"
   ∷ capabilitySprint
-      "E"
+      "4"
       later
-      "legal reasoning kernel over elements, conditions, exceptions, defences, time, jurisdiction, authorities and remedies"
-      "reviewer can inspect rule source, element evidence, unknowns, defences, as-at revision and next acquisition need"
-  ∷ capabilitySprint
-      "F"
-      later
-      "human-facing matter/source/issue/evidence/receipt product surface"
-      "UI is a projection over the same typed state and introduces no parallel reasoning ontology"
+      "legal reasoning kernel plus human-facing matter/source/issue/evidence/receipt product surface"
+      "complete issue reasoning remains inspectable through why/what-missing/as-at queries and the UI introduces no parallel ontology"
   ∷ []
 
 record SprintDiscipline : Set where
@@ -215,3 +206,7 @@ physicalTransportAnchor = Physical.canonicalPhysicalObjectAcquisitionPolicy
 
 externalOntologyAnchor : External.ExternalOntologyPolicy
 externalOntologyAnchor = External.canonicalExternalOntologyPolicy
+
+
+sprint1Anchor : Sprint1.Sprint1ExitGate
+sprint1Anchor = Sprint1.currentSprint1ExitGate
