@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSTriadKNEuclideanRawGramOutputQuadraticExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -56,7 +57,7 @@ complexRealScaleMeaning scalar value =
     (solve 3
       (λ s r i →
         s ⊗ r
-        ⊜ (s ⊗ r) ⊖ (BishopReal.0ℝ ⊗ i))
+        ⊜ (s ⊗ r) ⊖ (Κ 0ℚᵘ ⊗ i))
       BishopP.≃-refl
       scalar
       (Physical.realPart value)
@@ -64,7 +65,7 @@ complexRealScaleMeaning scalar value =
     (solve 3
       (λ s r i →
         s ⊗ i
-        ⊜ (s ⊗ i) ⊕ (BishopReal.0ℝ ⊗ r))
+        ⊜ (s ⊗ i) ⊕ (Κ 0ℚᵘ ⊗ r))
       BishopP.≃-refl
       scalar
       (Physical.realPart value)
@@ -422,15 +423,15 @@ rawGramAtZeroOutputVanishes aEta aZeta bEta bZeta =
         BishopReal.0ℝ
     zeroCross =
       solve 0
-        (((BishopReal.0ℝ ⊗ BishopReal.0ℝ)
-          ⊕ (BishopReal.0ℝ ⊗ BishopReal.0ℝ))
+        (((Κ 0ℚᵘ ⊗ BishopReal.0ℝ)
+          ⊕ (Κ 0ℚᵘ ⊗ BishopReal.0ℝ))
          ⊕
-         (((BishopReal.0ℝ ⊗ BishopReal.0ℝ)
-          ⊕ (BishopReal.0ℝ ⊗ BishopReal.0ℝ))
+         (((Κ 0ℚᵘ ⊗ BishopReal.0ℝ)
+          ⊕ (Κ 0ℚᵘ ⊗ BishopReal.0ℝ))
           ⊕
-          ((BishopReal.0ℝ ⊗ BishopReal.0ℝ)
-           ⊕ (BishopReal.0ℝ ⊗ BishopReal.0ℝ)))
-         ⊜ BishopReal.0ℝ)
+          ((Κ 0ℚᵘ ⊗ BishopReal.0ℝ)
+           ⊕ (Κ 0ℚᵘ ⊗ BishopReal.0ℝ)))
+         ⊜ Κ 0ℚᵘ)
         BishopP.≃-refl
   in
   BishopP.≃-trans
