@@ -156,14 +156,17 @@ data FirstLiveRoadmapResidual : Set where
   missingCompressionCostTheorem : FirstLiveRoadmapResidual
   missingKernelCertification : FirstLiveRoadmapResidual
 
--- Every row in the requested status table is now closed at the appropriate
--- theorem/compiler or empirical-source-binding layer.  The first remaining
--- j-side residual is a STRONGER coordinate not present in that table: prove a
--- concrete pixel box is an analytic Mobius box, rather than merely retaining
--- its measured scale/candidate binding.  The canonical analytic/finite target
--- is now an observer-with-fibre, not a global finite/analytic bijection.
+-- The canonical analytic/finite target is now an observer-with-fibre, not a
+-- global finite/analytic bijection.  Accordingly the first semantic j/369
+-- residual is construction of that observer on the actual analytic modular
+-- carrier.  Rendered pixel -> analytic-box calibration remains a distinct
+-- acquisition residual rather than being allowed to stand in for the observer.
 firstJMonsterResidual : FirstLiveRoadmapResidual
-firstJMonsterResidual = missingConcretePixelToAnalyticBoxCalibration
+firstJMonsterResidual = missingConcreteAnalyticStructuredObserver
+
+firstRenderedAcquisitionResidual : FirstLiveRoadmapResidual
+firstRenderedAcquisitionResidual =
+  missingConcretePixelToAnalyticBoxCalibration
 
 firstPhiResidual : FirstLiveRoadmapResidual
 firstPhiResidual = missingKernelCertification
