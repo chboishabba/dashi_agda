@@ -21,6 +21,8 @@ open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFiniteProbabilityPartitionDisintegrationExact as Partition
+import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as Reopen
+import DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact as FiniteProbability
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact as PhysicalT
 import DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationExact as Reference
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact as Probability
@@ -93,7 +95,7 @@ partitionedGate4ReopeningStep :
       Reference.PreferredRationalReferenceNormalizationInputs
         {construction = construction}} →
   CanonicalGate4CoarsePartitionData referenceInputs →
-  DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact.FiniteRGReopeningStep
+  Reopen.FiniteRGReopeningStep
     Fine Coarse
 partitionedGate4ReopeningStep dataSet =
   Reopening.canonicalGate4ReopeningStep
@@ -108,7 +110,7 @@ partitionedGate4ProbabilityLaw :
       Reference.PreferredRationalReferenceNormalizationInputs
         {construction = construction}}
     (dataSet : CanonicalGate4CoarsePartitionData referenceInputs) →
-  DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact.FiniteRGProbabilityLaw
+  FiniteProbability.FiniteRGProbabilityLaw
     (partitionedGate4ReopeningStep dataSet)
 partitionedGate4ProbabilityLaw dataSet =
   Reopening.canonicalGate4ReopeningProbabilityLaw
