@@ -48,6 +48,7 @@ record CenteredGammaQuadraticLeanReceipt : Set where
     centeredStripPath : String
     centeredEnvelopePath : String
     finalComplementPath : String
+    finalBudgetReductionPath : String
     regressionPath : String
 
     centeredIdentityCommit : String
@@ -56,6 +57,7 @@ record CenteredGammaQuadraticLeanReceipt : Set where
     centeredStripCommit : String
     centeredEnvelopeCommit : String
     finalComplementCommit : String
+    finalBudgetReductionCommit : String
     regressionCommit : String
 
 open CenteredGammaQuadraticLeanReceipt public
@@ -73,6 +75,7 @@ currentCenteredGammaQuadraticLeanReceipt =
     "Synthesis/RiemannGammaCenteredQuadraticStrip.lean"
     "Synthesis/RiemannGammaCenteredQuadraticEnvelope.lean"
     "Synthesis/RiemannFinalComplementCenteredQuadratic.lean"
+    "Synthesis/RiemannFinalComplementBudgetExcessReduction.lean"
     "Synthesis/RiemannGammaCenteredQuadraticRegression.lean"
 
     "582825abd2db87ba3822e56fdc1b9a3a42dcabbc"
@@ -81,6 +84,7 @@ currentCenteredGammaQuadraticLeanReceipt =
     "636677ff12bda68bc7fd747b00606fe9d54f8bf6"
     "8a268d57dbe030a76146e5321cd7d416c830605c"
     "dec899ad449ed1fe09da35392e663802b2035f36"
+    "476475952a774cb52be2f3915f1b6bb70276e229"
     "75f8d241739ac3a88cdf6731e7bef235f03216aa"
 
 record CenteredGammaQuadraticDonorBoundary : Set where
@@ -94,12 +98,14 @@ record CenteredGammaQuadraticDonorBoundary : Set where
     centeredGammaCorrectionQuadraticSourceWritten : Bool
     finalOffCorrectionQuadraticSourceWritten : Bool
     finalJointOffGammaCorrectionQuadraticSourceWritten : Bool
+    finalAbsoluteBudgetReducedToRadiusZeroPlusQuadraticExcess : Bool
 
     projectiveBalanceImported : Bool
     finalUniversalResponseUsed : Bool
     rawShrinkingSupportSecondDerivativePenaltyIntrinsicToCorrection : Bool
 
     radiusZeroJointBaselineStillRequiresIdentification : Bool
+    radiusZeroAbsoluteBudgetIsNowExplicitSingleSeam : Bool
     finiteNearSignedCoreStillRequiresControl : Bool
 
     leanKernelReceiptOwnedHere : Bool
@@ -122,9 +128,11 @@ canonicalCenteredGammaQuadraticDonorBoundary =
     true
     true
     true
+    true
     false
     true
     false
+    true
     true
     true
     false
