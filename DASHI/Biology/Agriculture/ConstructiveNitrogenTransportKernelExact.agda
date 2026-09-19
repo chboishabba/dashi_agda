@@ -127,7 +127,7 @@ record NitrogenRouteTailProblem
     (K : Tail.OrderedTailKernel Scalar)
     (S : Tail.TailSmallness K) : Set₁ where
   field
-    route : NitrogenTransportRoute
+    tailRoute : NitrogenTransportRoute
     routeContribution : Nat → Scalar
     routeMajorant : Nat → Scalar
 
@@ -202,7 +202,7 @@ compileRouteCauchy problem bridge =
 
 record BishopNitrogenRouteMajorant : Set where
   field
-    route : NitrogenTransportRoute
+    majorantRoute : NitrogenTransportRoute
     compartment :
       BishopCompartment.BishopPolynomialGeometricCompartment
 
@@ -236,7 +236,7 @@ bishopRouteMajorantAbsolutelyConvergent problem =
 
 record BishopNitrogenRouteDominatedSeries : Set where
   field
-    route : NitrogenTransportRoute
+    dominatedRoute : NitrogenTransportRoute
     dominatedSeries :
       BishopCompartment.BishopDominatedCompartmentSeries
 
