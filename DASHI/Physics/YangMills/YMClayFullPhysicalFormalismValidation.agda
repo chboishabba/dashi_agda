@@ -94,6 +94,17 @@ d2LiteralCoefficientIsNotConstantNatFamily :
 d2LiteralCoefficientIsNotConstantNatFamily =
   Full.d2LiteralCoefficientIsConstantNatFamilyIsFalse
 
+
+d2ForbidsParallelCompositeTheory :
+  Full.d2ParallelCompositeOperatorTheoryAllowed ≡ false
+d2ForbidsParallelCompositeTheory =
+  Full.d2ParallelCompositeOperatorTheoryAllowedIsFalse
+
+d2StillNeedsR129OperatorAttachment :
+  Full.d2R129SameFamilyOperatorAttachmentStillPhysical ≡ true
+d2StillNeedsR129OperatorAttachment =
+  Full.d2R129SameFamilyOperatorAttachmentStillPhysicalIsTrue
+
 d3StillNeedsPhysicalTransport :
   Full.d3FiniteToContinuumTransportStillPhysical ≡ true
 d3StillNeedsPhysicalTransport =
@@ -103,6 +114,17 @@ d3NeedsNoNewFiniteWardAlgebra :
   Full.d3FiniteWardAlgebraNeedsNewPhysicalTheorem ≡ false
 d3NeedsNoNewFiniteWardAlgebra =
   Full.d3FiniteWardAlgebraNeedsNewPhysicalTheoremIsFalse
+
+
+d3NeedsPerturbationIndexedWardSequence :
+  Full.d3PerturbationIndependentWardSequenceWouldBeTooWeak ≡ true
+d3NeedsPerturbationIndexedWardSequence =
+  Full.d3PerturbationIndependentWardSequenceWouldBeTooWeakIsTrue
+
+d3AllowsCutoffDependentChargeMap :
+  Full.d3CutoffIndependentChargeMapRequired ≡ false
+d3AllowsCutoffDependentChargeMap =
+  Full.d3CutoffIndependentChargeMapRequiredIsFalse
 
 literalClayDoesNotRequireStressHamiltonianEquality :
   Full.literalClayStressOPERequiresStressChargeEqualsOSHamiltonian ≡ false
