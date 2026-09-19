@@ -108,3 +108,7 @@ import DASHI.Physics.YangMills.YMClayLevel2D2R129CompositeConvergenceExact
 
 import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeExact
 import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeValidation
+
+import DASHI.Physics.YangMills.BalabanYM4FiveChannelCauchyQuotientMajorantExact
+import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureExact
+import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureValidation
