@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
