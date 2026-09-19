@@ -9,6 +9,8 @@ import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact
 import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact
 import DASHI.Mathematics.Complexity.PolynomialClassicalObserverExact
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact
+import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact
 
 ------------------------------------------------------------------------
 -- Positive reused structure.
@@ -67,6 +69,18 @@ validationSizedPolynomialObserverCarrier :
     Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
   ≡ true
 validationSizedPolynomialObserverCarrier = refl
+
+validationConcreteWordSizeMetric :
+  Cross.concreteWordSizeMetricPresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationConcreteWordSizeMetric = refl
+
+validationFiniteConfigurationCodecInterface :
+  Cross.finiteConfigurationCodecInterfacePresent
+    Cross.canonicalPvsNPRSAQuantumCrossPollinationBoundary
+  ≡ true
+validationFiniteConfigurationCodecInterface = refl
 
 ------------------------------------------------------------------------
 -- Fail-closed frontier.
