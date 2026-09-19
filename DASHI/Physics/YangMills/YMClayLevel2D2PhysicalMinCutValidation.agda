@@ -17,6 +17,15 @@ positionDepthAttachmentStillPhysical :
   D2.positionDepthSemanticsIsIndependentPhysicalAttachment ≡ true
 positionDepthAttachmentStillPhysical = refl
 
+
+noParallelCompositeOperatorTheory :
+  D2.parallelCompositeOperatorTheoryAllowed ≡ false
+noParallelCompositeOperatorTheory = refl
+
+r129SameFamilyOperatorAttachmentStillPhysical :
+  D2.r129SameFamilyOperatorAttachmentStillPhysical ≡ true
+r129SameFamilyOperatorAttachmentStillPhysical = refl
+
 noSecondGlobalAFTheorem :
   D2.newGlobalAFTheoremRequired ≡ false
 noSecondGlobalAFTheorem = refl
