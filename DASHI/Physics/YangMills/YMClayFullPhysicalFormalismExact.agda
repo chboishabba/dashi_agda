@@ -27,6 +27,7 @@ import DASHI.Physics.YangMills.YMClayLevel2OPECoefficientCoordinateWeldExact as 
 import DASHI.Physics.YangMills.YMClayLevel2D2PhysicalMinCutExact as D2
 import DASHI.Physics.YangMills.YMClayLevel2D2TransportGeneratedRecurrenceExact as D2Generated
 import DASHI.Physics.YangMills.YMClayLevel2ContinuumWardTransportExact as D3
+import DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeExact as D3Finite
 import DASHI.Physics.YangMills.YMClayPhysicalStressOSCommonCoreWitnessExact as StrongF4
 import DASHI.Physics.YangMills.BalabanClayT5MassScaleDimensionExact as Scale
 import DASHI.Physics.YangMills.YMClayCMSDrellYanEmpiricalContactBoundaryExact as CMS
@@ -609,6 +610,25 @@ d2R129SameFamilyOperatorAttachmentStillPhysicalIsTrue :
   d2R129SameFamilyOperatorAttachmentStillPhysical ≡ true
 d2R129SameFamilyOperatorAttachmentStillPhysicalIsTrue =
   D2.r129SameFamilyOperatorAttachmentStillPhysicalIsTrue
+
+
+d3IndependentFiniteTimeConservationRequired : Bool
+d3IndependentFiniteTimeConservationRequired =
+  D3Finite.independentFiniteTimeChargeConservationRequiredInD3
+
+d3IndependentFiniteTimeConservationRequiredIsFalse :
+  d3IndependentFiniteTimeConservationRequired ≡ false
+d3IndependentFiniteTimeConservationRequiredIsFalse =
+  D3Finite.independentFiniteTimeChargeConservationRequiredInD3IsFalse
+
+d3CutoffToContinuumConservedChargeTransportStillPhysical : Bool
+d3CutoffToContinuumConservedChargeTransportStillPhysical =
+  D3Finite.cutoffToContinuumConservedChargeTransportStillPhysical
+
+d3CutoffToContinuumConservedChargeTransportStillPhysicalIsTrue :
+  d3CutoffToContinuumConservedChargeTransportStillPhysical ≡ true
+d3CutoffToContinuumConservedChargeTransportStillPhysicalIsTrue =
+  D3Finite.cutoffToContinuumConservedChargeTransportStillPhysicalIsTrue
 
 d3FiniteToContinuumTransportStillPhysical : Bool
 d3FiniteToContinuumTransportStillPhysical =
