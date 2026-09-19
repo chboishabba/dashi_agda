@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationExact as Presentation
+
+splitRound283CompilerOwned :
+  Presentation.cmp119SplitPhysicalTOperationRound283CompilerLevel ≡ machineChecked
+splitRound283CompilerOwned = refl
+
+splitSelectedProbabilityCompilerOwned :
+  Presentation.cmp119SplitPhysicalTOperationSelectedProbabilityCompilerLevel ≡ machineChecked
+splitSelectedProbabilityCompilerOwned = refl
+
+splitT5ExpectationSameObjectRemainsPhysical :
+  Presentation.cmp119SplitPhysicalTOperationT5ExpectationSameObjectLevel ≡ conditional
+splitT5ExpectationSameObjectRemainsPhysical = refl
