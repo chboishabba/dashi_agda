@@ -39,6 +39,7 @@ import Sequence as BishopSequence
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
 import DASHI.Analysis.BishopPolynomialGeometricSeriesConvergenceExact as PolyGeo
+open import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact public using (BishopQPowerComponentEnvelope; realPowerBound; imagPowerBound)
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
 import DASHI.Foundations.BishopNatEmbeddingMonotoneExact as NatMono
@@ -148,22 +149,6 @@ e6CoefficientNonnegative n =
 ------------------------------------------------------------------------
 -- q power component envelope.
 ------------------------------------------------------------------------
-
-record BishopQPowerComponentEnvelope
-    (q : Complex.BishopComplex)
-    (ratio : BishopReal.ℝ) : Set₁ where
-  field
-    realPowerBound : ∀ n →
-      BishopReal._≤_
-        (BishopReal.∣ Complex.re (Algebra.powC q (suc n)) ∣)
-        (BishopReal.pow ratio (suc n))
-
-    imagPowerBound : ∀ n →
-      BishopReal._≤_
-        (BishopReal.∣ Complex.im (Algebra.powC q (suc n)) ∣)
-        (BishopReal.pow ratio (suc n))
-
-open BishopQPowerComponentEnvelope public
 
 ratioPowerNonnegative :
   ∀ {ratio} →
