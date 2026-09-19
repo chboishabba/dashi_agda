@@ -60,6 +60,7 @@ import DASHI.Analysis.RiemannG2FinalNearLiteralKernelExact
 import DASHI.Analysis.RiemannG2FinalNearObserverDescentExact
 import DASHI.Analysis.RiemannG2FinalNearObserverDescentValidation
 import DASHI.Analysis.RiemannG2LiteralKernelConcreteCertificateBridgeCompilerExact
+import DASHI.Analysis.RiemannG2LiteralKernelConcreteCertificateBridgeCompilerValidation
 
 -- Concrete execution boundary and window-free proof-carrying certification.
 import DASHI.Analysis.RiemannG2ConcreteCertificateFinalScalarBridgeExact
