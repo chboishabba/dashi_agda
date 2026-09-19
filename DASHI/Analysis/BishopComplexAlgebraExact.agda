@@ -96,6 +96,24 @@ mulCCongruent
     (BishopP.*-cong a≈a' d≈d')
     (BishopP.*-cong b≈b' c≈c')
 
+scaleC : BishopReal.ℝ → Complex.BishopComplex → Complex.BishopComplex
+scaleC scalar (Complex.complex a b) =
+  Complex.complex
+    (BishopReal._*_ scalar a)
+    (BishopReal._*_ scalar b)
+
+scaleCCongruent :
+  ∀ {left right} →
+  Complex._≈C_ left right →
+  ∀ scalar →
+  Complex._≈C_ (scaleC scalar left) (scaleC scalar right)
+scaleCCongruent
+  {Complex.complex a b} {Complex.complex a' b'}
+  (a≈a' , b≈b') scalar =
+  BishopP.*-cong BishopP.≃-refl a≈a'
+  ,
+  BishopP.*-cong BishopP.≃-refl b≈b'
+
 scaleNatC : Nat → Complex.BishopComplex → Complex.BishopComplex
 scaleNatC zero value = zeroC
 scaleNatC (suc n) value = value +C scaleNatC n value
