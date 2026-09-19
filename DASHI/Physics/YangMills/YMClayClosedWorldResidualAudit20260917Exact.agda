@@ -6,36 +6,27 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- CLOSED-WORLD RESIDUAL AUDIT — 2026-09-17
+-- CLOSED-WORLD RESIDUAL AUDIT — frontier-reconciliation recut
 --
--- This is not a proof substitute and not theorem authority.  It records the
--- exact theorem-bearing cuts found after searching current master, merged
--- #967/#970/#987, PR #996, the accessible dashi_lean4 branches, and the late
--- R318/R320/R322/R327/R338/R339/R342/R346/R397/R401 source-native chain.
--- Its Bool/status fields classify that repository search only; they cannot prove
--- nonexistence outside the searched state.
+-- Search result != theorem authority != physical inhabitant.
 --
--- 2026-09-17 third recut: R318's
---
---   PublishedTwoJLocalizationForBase + SelectedBaseJApplicability
---
--- remains a valid GENERAL external-presentation adapter, but it is not the
--- least-privilege proof-search cut.  R338 already places the source theorem on
--- the canonical common CMP116 domain/rational order, while R339 isolates the
--- selected-T5 magnitude same-object and envelope calibration.  The new
--- `YMClayF1CanonicalSourceApplicationExact` composes R338 + R339 through R320
--- into R295.  Nothing in that compiler manufactures either missing inhabitant.
+-- This recut removes obsolete-strength interfaces from the primitive frontier:
+-- * full R339 source-magnitude equality is not required by the mass-gap consumer;
+-- * generic Mosco/recovery theory is not the F3 leaf;
+-- * YM=OS evolution equality is not a primitive F4 payment.
 ------------------------------------------------------------------------
 
 data ResidualClass : Set where
-  sourceTheoremInhabitant : ResidualClass
+  sourceLocalization : ResidualClass
   sameObjectAttachment : ResidualClass
-  physicalOperatorLimit : ResidualClass
-  sameEvolutionWeld : ResidualClass
+  quantitativeCalibration : ResidualClass
+  physicalContinuumConstruction : ResidualClass
+  physicalCommonCoreConstruction : ResidualClass
 
 data ResidualStatus : Set where
   unpaid : ResidualStatus
   compilerOwned : ResidualStatus
+  obsoleteStrength : ResidualStatus
 
 record ExactResidual : Set where
   constructor exact-residual
@@ -49,100 +40,128 @@ record ExactResidual : Set where
 open ExactResidual public
 
 ------------------------------------------------------------------------
--- F1: current canonical source-native primitive cut.
+-- F1 — weakest physical min-cut.
 ------------------------------------------------------------------------
 
-f1CanonicalCMP116SourceAlignment : ExactResidual
-f1CanonicalCMP116SourceAlignment = exact-residual
-  sourceTheoremInhabitant
-  "DASHI/Physics/YangMills/BalabanCMP116CanonicalCommonDomainSourceRound338Exact.agda"
-  "CanonicalCommonDomainCMP116Source / differentiatedLocalizationOnCanonicalCommonDomain"
+f1ASelectedCMP116Localization : ExactResidual
+f1ASelectedCMP116Localization = exact-residual
+  sourceLocalization
+  "BalabanCMP116CanonicalCommonDomainSourceRound338Exact / R343-R346 weak selected route"
+  "selected differentiated CMP116 localization on the actual canonical physical source carrier"
   unpaid
-  "R338 is the least-privilege source ABI after canonical common-domain and rational-order normalization. Exact code search finds the record definition and downstream consumers of differentiatedLocalizationOnCanonicalCommonDomain, but no concrete constructor of CanonicalCommonDomainCMP116Source on the selected physical base. CMP116 Sect. 1, DOI 10.1007/BF01239022 supplies external theorem authority; citation/status metadata does not construct the Agda inhabitant or perform the local source-carrier alignment."
+  "R403 already makes observable-to-source attachment definitional. R343 proves full source/selected magnitude equality is stronger than the mass-gap consumer needs; R344/R346 continue on the actual shared-marked carrier. The remaining source payment is the selected localization theorem itself, not full R339."
 
-f1CanonicalSelectedT5Application : ExactResidual
-f1CanonicalSelectedT5Application = exact-residual
+f1R339MagnitudeEquality : ExactResidual
+f1R339MagnitudeEquality = exact-residual
   sameObjectAttachment
-  "DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedT5ApplicationRound339Exact.agda"
-  "CanonicalSelectedT5CMP116Application: sourceMagnitudeIsSelectedMagnitude + sourceEnvelopeBelowSelectedRootedShell"
+  "BalabanCMP116CanonicalSelectedT5ApplicationRound339Exact.agda"
+  "sourceMagnitudeIsSelectedMagnitude"
+  obsoleteStrength
+  "R343 records sourceMagnitudeEqualityPrimitiveForMassGapConsumer = false. Do not pay this equality merely to satisfy the historical R339 ABI."
+
+f1BWilsonR295SameObject : ExactResidual
+f1BWilsonR295SameObject = exact-residual
+  sameObjectAttachment
+  "YMClayF1PhysicalMinCutExact.agda"
+  "LiteralWilsonEqualsSelectedT5Observable"
   unpaid
-  "R339 removes independent pair-domain and abstract-order payments. The selected physical application is exactly two coordinates: the CMP116 differentiated response is the literal selected mixed-log response, and the CMP116 source envelope is bounded by the selected rooted shell. Exact search finds these fields and compiler consumers but no concrete application inhabitant on the searched tree."
+  "The P33 literal Wilson Hessian/coercivity stack and the R295 statistical connected-covariance stack are both substantial, but they are WrongType unless the local/cylinder observable is proved to be the same physical Gibbs observable."
 
-f1CanonicalR338R339Compiler : ExactResidual
-f1CanonicalR338R339Compiler = exact-residual
-  sameObjectAttachment
-  "DASHI/Physics/YangMills/YMClayF1CanonicalSourceApplicationExact.agda"
-  "canonicalSourceApplicationLocalizesBaseAsR295"
-  compilerOwned
-  "PR #996 now composes R339.canonicalApplicationBuildsR320Payment with R320.localizeBaseDirectlyAsR295. Once R338 source alignment and R339 selected-T5 application are supplied, the exact localized R295 carrier is compiler output. Do not reopen the older R318 magnitude/root/distance presentation as three independent frontier leaves."
-
-f1R409StageAttachment : ExactResidual
-f1R409StageAttachment = exact-residual
-  sameObjectAttachment
-  "DASHI/Physics/YangMills/BalabanCMP99SingleMarkedFourStageRound409Exact.agda"
-  "SingleChangedFourStageAgreement"
+f1CEnvelopeL2Calibration : ExactResidual
+f1CEnvelopeL2Calibration = exact-residual
+  quantitativeCalibration
+  "YMClayF1PhysicalMinCutExact.agda"
+  "RootedSourceEnvelopeL2Calibration + DensePhysicalVacuumComplement"
   unpaid
-  "R409 compiles one marked stage plus three exact unchanged-stage equalities to the whole product bound. Exact search finds no external inhabitant selecting the actual CMP99 stage and proving the other three equalities. This is optional lower-level source replay after the canonical R338/R339 recut."
+  "R295 and the marked-source adapter already give connected covariance <= rooted/source envelope. Dense-L2 extension is compiler-owned. The physical payment is envelope <= c_k ||psi||^2 on a dense literal-Wilson vacuum-complement algebra."
 
-f1R406ScalarizationAttachment : ExactResidual
-f1R406ScalarizationAttachment = exact-residual
-  sameObjectAttachment
-  "DASHI/Physics/YangMills/BalabanCMP116SelectedTermwiseLocalizationRound406Exact.agda"
-  "differentiatedTermAbsoluteIsOperatorDifferenceNorm"
+f1DTrajectoryCalibration : ExactResidual
+f1DTrajectoryCalibration = exact-residual
+  quantitativeCalibration
+  "YMClayOutstandingPhysicalFrontierExact.agda"
+  "trajectoryGapFitsLiteralWilsonReduction"
   unpaid
-  "Exact search finds this equality only as a record field/consumer; no concrete selected source replay inhabits it on the searched current tree. This is optional lower-level source replay after the canonical R338/R339 recut."
-
-f1R387DownstreamCompiler : ExactResidual
-f1R387DownstreamCompiler = exact-residual
-  sameObjectAttachment
-  "DASHI/Physics/YangMills/BalabanDirectSelectedUpperToGapFinalExact.agda"
-  "directSelectedUpperBuildsPositiveTransferGapCore"
-  compilerOwned
-  "Merged #987 already compiles a genuine R387 direct selected spectral upper plus one-sided limit closure and positive selected candidate gap into PositiveTransferGapCore. Do not rebuild this layer."
+  "The beta-driven complete-density / literal finite-measure chain keeps the physical family aligned. The remaining theorem is the thin same-history calibration Delta*a_k <= 1-c_k."
 
 ------------------------------------------------------------------------
--- F3 / F4 unchanged by the F1 source recut.
+-- F3 — concrete Sprint111-122 construction program.
 ------------------------------------------------------------------------
 
-f3VacuumRecoverySystem : ExactResidual
-f3VacuumRecoverySystem = exact-residual
-  physicalOperatorLimit
-  "DASHI/Physics/YangMills/BalabanVacuumOrthogonalMoscoRecoveryExact.agda"
-  "VacuumOrthogonalRecoverySystem"
+f3SamplingProjection : ExactResidual
+f3SamplingProjection = exact-residual
+  physicalContinuumConstruction
+  "YMSprint112ContinuumSamplingProjectionMapCandidate.agda"
+  "actual P_a sampling/projection theorem"
   unpaid
-  "The typed recovery system exists and its gap compiler is machine-checked. Sprint129 evidence/status booleans do not construct this record, and exact search finds no physical literal-Wilson inhabitant on the searched current tree."
+  "The candidate and recipe are recorded, but samplingProjectionMapConstructedHere remains false."
+
+f3Interpolation : ExactResidual
+f3Interpolation = exact-residual
+  physicalContinuumConstruction
+  "YMSprint112RenormalizedInterpolationMapCandidate.agda"
+  "actual E_a renormalized interpolation theorem"
+  unpaid
+  "The candidate recipe is recorded, but interpolationMapConstructedHere remains false."
+
+f3GaugeNormResidual : ExactResidual
+f3GaugeNormResidual = exact-residual
+  physicalContinuumConstruction
+  "YMSprint113-122 estimate/reducer chain"
+  "representative independence + quotient/gauge + uniform norm + approximate inverse + residual convergence"
+  unpaid
+  "Sprint116 closes internal reducer grammars conditionally while unconditionalNormWindowTheoremProvedHere and quotientGaugeAnalyticFeedsDischargedHere remain false. Reducer receipts are not physical theorem inhabitants."
+
+f3EnergyVacuumRecovery : ExactResidual
+f3EnergyVacuumRecovery = exact-residual
+  physicalContinuumConstruction
+  "YMSprint109-116 recovery/sector chain"
+  "strong recovery + energy liminf/limsup + vacuum-sector stability"
+  unpaid
+  "BalabanVacuumOrthogonalMoscoRecoveryExact is already the terminal compiler. What remains is constructing its actual physical recovery data from the concrete map/estimate package."
 
 f3LiteralMeasureLimit : ExactResidual
 f3LiteralMeasureLimit = exact-residual
-  physicalOperatorLimit
-  "DASHI/Physics/YangMills/BalabanLiteralSchwingerStressRecoveryRound126Exact.agda"
-  "literalFiniteMeasuresConverge"
+  physicalContinuumConstruction
+  "BalabanLiteralSchwingerStressRecoveryRound126Exact.agda"
+  "literalFiniteMeasuresConverge on the same beta-driven Wilson family"
   unpaid
-  "Round126 stores the literal finite-measure continuum theorem as a physical field. Round129 exports it from a supplied recovery object but does not construct the field. Measure convergence also does not by itself supply Hamiltonian graph convergence."
+  "Round126 stores this as an input and later rounds export it. The literal measure convergence theorem itself is not constructed by the export chain."
 
-f3EmbeddedGraphLimit : ExactResidual
-f3EmbeddedGraphLimit = exact-residual
-  physicalOperatorLimit
-  "RequestProject/YangMills/Lattice/ContinuumWeld.lean"
-  "embedded literal-Wilson vacuum-sector graph limit input"
-  unpaid
-  "Aristotle's 8220-job donor pays the varying-carrier compiler, not the physical graph-limit inhabitant. No accessible dashi_lean4 branch contains the new donor files or an additional physical instantiation branch."
+f3RecoveryCompiler : ExactResidual
+f3RecoveryCompiler = exact-residual
+  physicalContinuumConstruction
+  "BalabanVacuumOrthogonalMoscoRecoveryExact.agda"
+  "physicalVacuumGapAfterRecovery"
+  compilerOwned
+  "Once an actual VacuumOrthogonalRecoverySystem is supplied, the continuum vacuum-complement gap is compiler output."
 
-f4CommonCoreActionEquality : ExactResidual
-f4CommonCoreActionEquality = exact-residual
-  sameEvolutionWeld
-  "DASHI/Physics/YangMills/YangMillsStressWardCommonCoreGeneratorExact.agda"
-  "commonCoreActionEquality"
+------------------------------------------------------------------------
+-- F4 — physical common-core construction, not primitive evolution equality.
+------------------------------------------------------------------------
+
+f4StressCurrentWard : ExactResidual
+f4StressCurrentWard = exact-residual
+  physicalCommonCoreConstruction
+  "YangMillsStressChargeLocalCoreCutoffStabilizationExact + YangMillsLocalCurrentMicrocausalShellExact"
+  "renormalized continuum stress current + translation Ward/locality data"
   unpaid
-  "The common-core generator equality compiler is present, but exact search finds no concrete physical constructor of its common-core action equality on the searched current tree."
+  "Cutoff stabilization and outer-shell elimination are already generic compilers. The missing input is the actual renormalized stress/current Ward data on the reconstructed continuum."
+
+f4CommonCoreClosure : ExactResidual
+f4CommonCoreClosure = exact-residual
+  physicalCommonCoreConstruction
+  "YMClayPhysicalStressOSCommonCoreWitnessExact.agda"
+  "StressOSCommonCoreData on the actual reconstructed physical core"
+  unpaid
+  "Need same physical YM and OS core actions plus both closure/essential-self-adjointness identifications. YangMillsStressWardCommonCoreGeneratorExact then derives equality of generators."
 
 f4EvolutionEquality : ExactResidual
 f4EvolutionEquality = exact-residual
-  sameEvolutionWeld
-  "DASHI/Physics/YangMills/YMClayOutstandingPhysicalFrontierExact.agda"
-  "YMOSSameObjectWitness.evolutionsEqual"
-  unpaid
-  "Exact search for evolutionsEqual/sameEvolution on the searched current tree finds no physical inhabitant. Round127's Schwinger-family weld is a different same-object obligation and does not imply equality of the reconstructed one-parameter evolutions."
+  physicalCommonCoreConstruction
+  "YMClayPhysicalStressOSCommonCoreWitnessExact.agda"
+  "physicalSameEvolution"
+  compilerOwned
+  "Evolution equality is derived from the common-core same-generator theorem through the Stone/OS generator-to-evolution adapter. It is no longer a primitive field of OutstandingPhysicalFrontier."
 
 ------------------------------------------------------------------------
 -- Search / frontier status.
@@ -155,19 +174,26 @@ oldF2IndependentResearchPaymentIsFalse :
   oldF2IndependentResearchPayment ≡ false
 oldF2IndependentResearchPaymentIsFalse = refl
 
-r318ExternalPresentationPairIsPrimitiveF1Cut : Bool
-r318ExternalPresentationPairIsPrimitiveF1Cut = false
+fullR339MagnitudeEqualityPrimitive : Bool
+fullR339MagnitudeEqualityPrimitive = false
 
-r318ExternalPresentationPairIsPrimitiveF1CutIsFalse :
-  r318ExternalPresentationPairIsPrimitiveF1Cut ≡ false
-r318ExternalPresentationPairIsPrimitiveF1CutIsFalse = refl
+fullR339MagnitudeEqualityPrimitiveIsFalse :
+  fullR339MagnitudeEqualityPrimitive ≡ false
+fullR339MagnitudeEqualityPrimitiveIsFalse = refl
 
-canonicalR338R339CompilerObserved : Bool
-canonicalR338R339CompilerObserved = true
+genericMoscoTheoryIsF3ResearchLeaf : Bool
+genericMoscoTheoryIsF3ResearchLeaf = false
 
-canonicalR338R339CompilerObservedIsTrue :
-  canonicalR338R339CompilerObserved ≡ true
-canonicalR338R339CompilerObservedIsTrue = refl
+genericMoscoTheoryIsF3ResearchLeafIsFalse :
+  genericMoscoTheoryIsF3ResearchLeaf ≡ false
+genericMoscoTheoryIsF3ResearchLeafIsFalse = refl
+
+f4EvolutionEqualityPrimitive : Bool
+f4EvolutionEqualityPrimitive = false
+
+f4EvolutionEqualityPrimitiveIsFalse :
+  f4EvolutionEqualityPrimitive ≡ false
+f4EvolutionEqualityPrimitiveIsFalse = refl
 
 f1PhysicalInhabitantObservedInClosedWorldSearch : Bool
 f1PhysicalInhabitantObservedInClosedWorldSearch = false
