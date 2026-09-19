@@ -289,7 +289,7 @@ scaledQuadratic kernel scale z (head ∷ rest) =
   BishopP.≃-trans
     (BishopP.+-cong
       (BishopP.+-cong
-        (solve 4
+        (solve 3
           (λ khh sh zh →
             (sh ⊗ (khh ⊗ sh)) ⊗ (zh ⊗ zh)
             ⊜
@@ -326,7 +326,7 @@ scaledQuadratic kernel scale z (head ∷ rest) =
     in
     BishopP.≃-trans
       (BishopP.+-cong
-        (solve 5
+        (solve 4
           (λ sh sc k zc →
             (sh ⊗ (k ⊗ sc)) ⊗ zc
             ⊜ sh ⊗ (k ⊗ (sc ⊗ zc)))
@@ -391,7 +391,7 @@ rankOneQuadraticSplit kernel residual u z beta split (head ∷ rest) =
         (BishopP.*-congˡ
           (BishopP.*-congˡ row)))
       tail)
-    (solve 8
+    (solve 6
       (λ b uh zh su sr q →
         (((b ⊗ (uh ⊗ uh)) ⊕ sr)
           ⊗ (zh ⊗ zh))
@@ -454,7 +454,7 @@ rankOneQuadraticSplit kernel residual u z beta split (head ∷ rest) =
       (BishopP.+-cong
         (BishopP.*-congˡ (split head cell))
         tail)
-      (solve 7
+      (solve 6
         (λ b uh uc zc su sr →
           ((b ⊗ (uh ⊗ uc) ⊕ sr) ⊗ zc)
           ⊕
