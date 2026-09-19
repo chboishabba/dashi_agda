@@ -178,7 +178,7 @@ S4  literal finite-measure / bounded-expectation convergence
 
 S5  transfer-energy / decay coordinate OF the reconstructed OS Hamiltonian
 
-S6  actual continuum OS reconstruction / same continuum family
+S6  inhabit R127 OSLiteralSchwingerWeld on the actual Balaban/literal continuum family
 \`\`\`
 
 R330 explicitly records that the number of mandatory **fresh B-side YM analytic inequalities** after these application coordinates is zero.
@@ -248,37 +248,63 @@ Once an actual \`VacuumOrthogonalRecoverySystem\` is constructed, continuum gap 
 
 ---
 
-# Common downstream YM/OS identification
+# Literal Clay stress/OPE endpoint vs stronger generator theorem
 
-The physical F4 boundary remains upstream of evolution equality:
-
-\`\`\`text
-actual continuum stress/current
-translation Ward identity
-local charge stabilization
-YM action on reconstructed core
-OS Hamiltonian action on SAME core
-both closure identifications
-\`\`\`
-
-via
+The repository already has extensive OS reconstruction machinery. The remaining
+same-object Clay-local payment is not "construct OS reconstruction"; it is:
 
 \`\`\`text
-PhysicalStressOSCommonCoreWitness
-  -> StressOSCommonCoreData
-  -> same generator
-  -> Stone / OS uniqueness
-  -> same evolution.
+R127 OSLiteralSchwingerWeld:
+  source OS ContinuumSchwingerSystem
+  =
+  literal Clay Schwinger family
 \`\`\`
 
-Thus \`evolutionsEqual\` remains compiler output, not a primitive physical axiom.
+on the actual Balaban/literal continuum object.
+
+The literal Clay stress/OPE boundary then consumes only:
+
+\`\`\`text
+stress tensor on that SAME literal Schwinger family
++ physical OPE coefficients
++ physical OPE remainders
+\`\`\`
+
+via \`YangMillsClayStressOPERequirementBoundaryExact\`.
+
+It does **not** consume a stress-charge cutoff theorem, common-core generator
+equality, essential self-adjointness, or equality of exponentials.
+
+Those belong to a stronger optional theorem:
+
+\`\`\`text
+stress/current + Ward/local charge
++ common invariant core
++ both closure identifications
+  -> stress generator = H_OS
+  -> same Stone evolution
+\`\`\`
+
+The GR/unification lane is a third consumer of the eventual physical stress
+constructor. \`PhysicalRGCFTFullPhysicsBridge\` already exposes the intended
+same-object fields
+
+\`\`\`text
+stressTensorMatchesEinsteinStressEnergy
+stressWardMatchesContractedBianchi
+\`\`\`
+
+but those remain bridge fields to be inhabited. The generic
+\`StressEnergyBridgeReceiptSurface\` is target/socket vocabulary only and
+contains postulated AQFT stress targets; it must not be imported as a theorem
+donor into the trusted YM cone.
 
 ---
 
 # Current route-Pareto status
 
 \`\`\`text
-SHARED / ROUTE S
+MASS-GAP ROUTE S
   selected CMP116/T5 localization                     open physical application
   OS1 time/support same-object semantics              open physical application
   R315 Wilson-cylinder presentation                   open physical application
@@ -287,19 +313,29 @@ SHARED / ROUTE S
   same-OS-Hamiltonian transfer coordinate             open physical application
   half-rate clustering -> spectral gap                standard/compiler-owned
 
+LITERAL CLAY LOCAL-QFT/STRESS
+  R127 OS-system = literal Schwinger family weld       open same-object application
+  physical stress tensor on that family               open physical construction
+  physical OPE coefficients/remainders                open physical construction
+  literal stress/OPE postcondition                    compiler-owned
+
 ROUTE G ONLY
   translated-pair shell -> c_k ||ψ||²                 open quantitative theorem
   Delta*a_k <= 1-c_k                                  open trajectory theorem
   P_a / E_a + gauge/norm/residual recovery            open analytic programme
   recovery system -> continuum gap                    compiler-owned
 
-COMMON DOWNSTREAM
-  physical stress/Ward common-core data               open
+OPTIONAL STRONGER YM GENERATOR THEOREM
+  physical stress/Ward common-core data               route-specific/open
   common-core equality -> same generator              compiler-owned
   same generator -> same evolution                    compiler-owned
+
+OPTIONAL GR / UNIFICATION CONSUMER
+  T_YM = T_GR + Ward/Bianchi compatibility            route-specific/open
 \`\`\`
 
-This is a strictly smaller terminal min-cut than the earlier linear F1→F3→F4 picture.
+This is a strictly smaller terminal Clay min-cut than the earlier linear
+F1→F3→F4 picture.
 
 ## Verification boundary
 
