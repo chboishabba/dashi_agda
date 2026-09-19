@@ -83,9 +83,12 @@ gwbSLRRoadmap =
   ∷ gwbRoadmapCoordinate "Pareto acquisition frontier + explicit gap-flow accounting" implementedAwaitingRuntime
     "non-scalar dimensions: cross-language gap coverage / source-surface support / root-QID support / typed Wikidata target; receipt separates contracted/persisting/new gaps and obligation churn"
     "validate that semantic payoff selection replaces lexical-QID accident while frontier rank remains non-truth-bearing"
+  ∷ gwbRoadmapCoordinate "supervised Wikidata type-closure fallback" implementedAwaitingRuntime
+    "SLR agent/gwb-supervised-type-closure-v1@fdf2281fa7fa830b1ee4f06dc95f782c603a47fe: revision-pinned P31/P279 observation surface -> bounded P279 closure -> supervised disposition -> ordinary GWB review bundle; reuses SensibLaw Nat observed-absence and Climate hold/review discipline plus dashi_lean4 executable Wikidata closure semantics"
+    "source-written only until hop 2 executes on live exact revisions and a human-reviewed bundle commits; bounded closure is not global ontology completeness, a simultaneous snapshot, or residual payment"
   ∷ gwbRoadmapCoordinate "ambiguity-directed reviewed 100-hop campaign" implementedAwaitingRuntime
     "SLR agent/gwb-ambiguity-100hop-v1: current-world residuals -> non-scalar question frontier -> exactly one exact acquisition -> explicit review -> atomic residual/trajectory commit -> fresh diagnosis; P31/P279 classification, property, multilingual surface, external-ontology and Snowball tiers retained"
-    "source-written only until focused Rust execution observes reviewed hops; 100 hops do not imply consumer closure or ontology completeness"
+    "runtime-observed through two committed hops at SLR main@9ef5d562a510d4a9cb861d66016d28d84eaa8ddd; hop 2 exposed supervised-classification provider debt; 100 hops still do not imply consumer closure or ontology completeness"
   ∷ gwbRoadmapCoordinate "consumer-specific graph residual contraction" active
     "reuse semantic closure, Q/P parent/surrounding graph and claim-relative source roles against declared consumer obligations"
     "identify which semantic/world residuals are paid and which survive to acquisition"
