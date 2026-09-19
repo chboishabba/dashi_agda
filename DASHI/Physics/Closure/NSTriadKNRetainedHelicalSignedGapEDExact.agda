@@ -100,20 +100,26 @@ module PhysicalRetainedGap
     0ℚ ≤ radius mode
   radiusNN mode = R468.modeNormNonnegative orientation mode
 
+  nonzeroRadiusBelowSquare :
+    (mode : Z3.FourierMode) →
+    Z3.NonZeroMode mode →
+    radius mode ≤ squareRadius mode
+  nonzeroRadiusBelowSquare mode nonzero =
+    radiusBelowSquareFromUnitGap
+      (radius mode)
+      (squareRadius mode)
+      (radiusNN mode)
+      (R450.nonzeroModeSquareAtLeastOne unitGap mode nonzero)
+      (R464.modeNormSquareMeaning
+        (R464.squareCalibration radiusCalibration mode))
+
   retainedRadiusBelowSquare :
     (mode : Z3.FourierMode) →
     (member : mode Cube.∈ Audit.modes system) →
     radius mode ≤ squareRadius mode
   retainedRadiusBelowSquare mode member =
-    radiusBelowSquareFromUnitGap
-      (radius mode)
-      (squareRadius mode)
-      (radiusNN mode)
-      (R450.nonzeroModeSquareAtLeastOne
-        unitGap mode
-        (Field30.retainedModeNonzero physicalSystem mode member))
-      (R464.modeNormSquareMeaning
-        (R464.squareCalibration radiusCalibration mode))
+    nonzeroRadiusBelowSquare mode
+      (Field30.retainedModeNonzero physicalSystem mode member)
 
   squareNN :
     (mode : Z3.FourierMode) →
@@ -317,4 +323,110 @@ module PhysicalRetainedGap
     minusPlusGapBelowSquares p q pMember qMember
   signedGapBelowSquares Helical.minus Helical.minus p q pMember qMember =
     minusMinusGapBelowSquares p q pMember qMember
+
+  plusPlusGapBelowSquaresNonzero :
+    (p q : Z3.FourierMode) →
+    Z3.NonZeroMode p →
+    Z3.NonZeroMode q →
+    radius q - radius p ≤ squareRadius p + squareRadius q
+  plusPlusGapBelowSquaresNonzero p q pNZ qNZ =
+    let
+      q≤q2 = nonzeroRadiusBelowSquare q qNZ
+      pNN = radiusNN p
+      p2NN = squareNN p
+      negP≤zero : - radius p ≤ 0ℚ
+      negP≤zero = ℚP.neg-mono-≤ pNN
+      addNeg :
+        radius q + (- radius p) ≤ radius q + 0ℚ
+      addNeg = ℚP.+-mono-≤ ℚP.≤-refl negP≤zero
+      gap≤q : radius q - radius p ≤ radius q
+      gap≤q =
+        subst
+          (_≤ radius q)
+          (sym (solve (radius p ∷ radius q ∷ [])))
+          (subst
+            (radius q + (- radius p) ≤_)
+            (ℚP.+-identityʳ (radius q))
+            addNeg)
+      q2≤sum : squareRadius q ≤ squareRadius p + squareRadius q
+      q2≤sum =
+        subst
+          (_≤ squareRadius p + squareRadius q)
+          (ℚP.+-identityˡ (squareRadius q))
+          (ℚP.+-mono-≤ p2NN ℚP.≤-refl)
+    in
+    ℚP.≤-trans gap≤q (ℚP.≤-trans q≤q2 q2≤sum)
+
+  minusMinusGapBelowSquaresNonzero :
+    (p q : Z3.FourierMode) →
+    Z3.NonZeroMode p →
+    Z3.NonZeroMode q →
+    (- radius q) - (- radius p) ≤ squareRadius p + squareRadius q
+  minusMinusGapBelowSquaresNonzero p q pNZ qNZ =
+    let
+      p≤p2 = nonzeroRadiusBelowSquare p pNZ
+      qNN = radiusNN q
+      negQ≤zero : - radius q ≤ 0ℚ
+      negQ≤zero = ℚP.neg-mono-≤ qNN
+      add : (- radius q) + radius p ≤ 0ℚ + radius p
+      add = ℚP.+-mono-≤ negQ≤zero ℚP.≤-refl
+      gap≤p : (- radius q) - (- radius p) ≤ radius p
+      gap≤p =
+        subst
+          (_≤ radius p)
+          (sym (solve (radius p ∷ radius q ∷ [])))
+          (subst
+            ((- radius q) + radius p ≤_)
+            (ℚP.+-identityˡ (radius p))
+            add)
+      p2≤sum : squareRadius p ≤ squareRadius p + squareRadius q
+      p2≤sum =
+        subst
+          (_≤ squareRadius p + squareRadius q)
+          (ℚP.+-identityʳ (squareRadius p))
+          (ℚP.+-mono-≤ ℚP.≤-refl (squareNN q))
+    in
+    ℚP.≤-trans gap≤p (ℚP.≤-trans p≤p2 p2≤sum)
+
+  minusPlusGapBelowSquaresNonzero :
+    (p q : Z3.FourierMode) →
+    Z3.NonZeroMode p →
+    Z3.NonZeroMode q →
+    radius q - (- radius p) ≤ squareRadius p + squareRadius q
+  minusPlusGapBelowSquaresNonzero p q pNZ qNZ =
+    let
+      p≤p2 = nonzeroRadiusBelowSquare p pNZ
+      q≤q2 = nonzeroRadiusBelowSquare q qNZ
+      summed :
+        radius q + radius p ≤ squareRadius q + squareRadius p
+      summed = ℚP.+-mono-≤ q≤q2 p≤p2
+      reordered :
+        radius q + radius p ≤ squareRadius p + squareRadius q
+      reordered =
+        subst
+          (radius q + radius p ≤_)
+          (ℚP.+-comm (squareRadius q) (squareRadius p))
+          summed
+    in
+    subst
+      (_≤ squareRadius p + squareRadius q)
+      (sym (solve (radius p ∷ radius q ∷ [])))
+      reordered
+
+  signedGapBelowSquaresNonzero :
+    (signP signQ : Helical.HelicitySign) →
+    (p q : Z3.FourierMode) →
+    Z3.NonZeroMode p →
+    Z3.NonZeroMode q →
+    let signedP = caseSign signP (radius p)
+        signedQ = caseSign signQ (radius q)
+    in signedQ - signedP ≤ squareRadius p + squareRadius q
+  signedGapBelowSquaresNonzero Helical.plus Helical.plus p q pNZ qNZ =
+    plusPlusGapBelowSquaresNonzero p q pNZ qNZ
+  signedGapBelowSquaresNonzero Helical.plus Helical.minus p q pNZ qNZ =
+    plusMinusGapBelowSquares p q
+  signedGapBelowSquaresNonzero Helical.minus Helical.plus p q pNZ qNZ =
+    minusPlusGapBelowSquaresNonzero p q pNZ qNZ
+  signedGapBelowSquaresNonzero Helical.minus Helical.minus p q pNZ qNZ =
+    minusMinusGapBelowSquaresNonzero p q pNZ qNZ
 
