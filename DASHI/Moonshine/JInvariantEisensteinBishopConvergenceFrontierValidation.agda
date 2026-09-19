@@ -124,6 +124,21 @@ concreteLegacyQuotientStillUnpaid = refl
 sameCarrierModulusAlgebraStillUnpaid :
   P.sameCarrierModulusAlgebraInhabited
     P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+modulusMultiplicationFactorCompilerIsOwned :
+  P.modulusMultiplicationFactorCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+modulusMultiplicationFactorCompilerIsOwned = refl
+
+complexNormSquareCompositionStillUnpaid :
+  P.complexNormSquareCompositionInhabited
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+complexNormSquareCompositionStillUnpaid = refl
+
+nonnegativeSquareRootMultiplicationStillUnpaid :
+  P.nonnegativeSquareRootMultiplicationInhabited
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ false
+nonnegativeSquareRootMultiplicationStillUnpaid = refl
+
 sameCarrierModulusAlgebraStillUnpaid = refl
 
 principalStripQModulusCompilerIsOwned :
