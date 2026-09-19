@@ -21,6 +21,11 @@ bishopComplexLiftIsOwned :
   P.bishopComplexComponentwiseConvergenceOwned P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopComplexLiftIsOwned = refl
 
+concreteMurrayBishopSetoidBackendIsOwned :
+  P.concreteMurrayBishopSetoidBackendOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+concreteMurrayBishopSetoidBackendIsOwned = refl
+
 sameCarrierConcreteComplexLimitCompilerIsOwned :
   P.sameCarrierConcreteComplexLimitCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
