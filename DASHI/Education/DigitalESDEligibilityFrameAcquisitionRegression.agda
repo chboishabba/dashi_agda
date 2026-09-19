@@ -19,3 +19,9 @@ categoryOmissionDoesNotCreateIndividualOutcome :
   Acquisition.CategoryOmissionCreatesIndividualOutcome → ⊥
 categoryOmissionDoesNotCreateIndividualOutcome =
   Acquisition.categoryOmissionDoesNotCreateIndividualOutcome
+
+
+qiltPaysIndependentEligibilityFrame :
+  Acquisition.EligibilityFrameResidual
+qiltPaysIndependentEligibilityFrame =
+  Acquisition.targetResidual Acquisition.qilt2022Candidate
