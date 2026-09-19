@@ -1,5 +1,7 @@
 module DASHI.Analysis.RiemannG2LiteralKernelConcreteCertificateBridgeCompilerValidation where
 
+open import Agda.Builtin.Equality using (_≡_)
+
 import DASHI.Core.ProofCarryingFiniteSumEnclosureExact as Cert
 import DASHI.Analysis.RiemannG2ExplicitCutoffNearFarAgdaTransportCompilerExact as Transport
 import DASHI.Analysis.RiemannG2LiteralComplementDirectTargetExact as Direct
