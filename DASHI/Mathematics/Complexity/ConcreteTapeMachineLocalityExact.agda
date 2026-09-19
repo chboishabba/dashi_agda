@@ -14,6 +14,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 
 data Direction : Set where
@@ -26,6 +27,17 @@ record FiniteEnumeration (A : Set) : Set₁ where
     values : List A
     occurs : A → Set
     complete : (x : A) → occurs x
+
+    decideEqual : A → A → Bool
+
+    decideEqualRefl :
+      (x : A) →
+      decideEqual x x ≡ true
+
+    decideEqualSound :
+      ∀ {x y} →
+      decideEqual x y ≡ true →
+      x ≡ y
 
 open FiniteEnumeration public
 
