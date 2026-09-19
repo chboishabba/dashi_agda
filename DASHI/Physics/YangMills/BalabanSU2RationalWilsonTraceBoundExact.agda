@@ -37,30 +37,18 @@ wilsonTraceDeficitNonnegative q =
 normalizedTraceUpperBound :
   ∀ q → SU2.realPart q ≤ 1ℚ
 normalizedTraceUpperBound q =
-  let d = wilsonTraceDeficitNonnegative q
-  in
-  ℚP.≤-trans
+  subst
+    (λ left → left ≤ 1ℚ)
+    (sym (ℚP.+-identityʳ (SU2.realPart q)))
     (subst
-      (λ x → SU2.realPart q ≤ x)
-      (sym (ℚP.+-identityʳ (SU2.realPart q)))
+      (λ right → SU2.realPart q + 0ℚ ≤ right)
+      (regroup (SU2.realPart q))
       (ℚP.+-mono-≤
         (ℚP.≤-refl {x = SU2.realPart q})
-        d))
-    (subst
-      (λ x → SU2.realPart q ≤ x)
-      (regroup (SU2.realPart q))
-      (ℚP.≤-refl {x = 1ℚ}))
+        (wilsonTraceDeficitNonnegative q)))
   where
   regroup : ∀ a → a + (1ℚ - a) ≡ 1ℚ
-  regroup a = trans
-    (sym (ℚP.+-assoc a 1ℚ (- a)))
-    (trans
-      (cong (a +_) (ℚP.+-comm 1ℚ (- a)))
-      (trans
-        (ℚP.+-assoc a (- a) 1ℚ)
-        (trans
-          (cong (_+ 1ℚ) (ℚP.+-inverseʳ a))
-          (ℚP.+-identityˡ 1ℚ))))
+  regroup = ℚRing.solve-∀
 
 negateQuaternion :
   SU2.RationalUnitQuaternion → SU2.RationalUnitQuaternion
@@ -103,8 +91,11 @@ negateQuaternion q =
 normalizedTraceLowerBound :
   ∀ q → - 1ℚ ≤ SU2.realPart q
 normalizedTraceLowerBound q =
-  ℚP.neg-antimono-≤
-    (normalizedTraceUpperBound (negateQuaternion q))
+  subst
+    (λ right → - 1ℚ ≤ right)
+    (ℚP.neg-involutive (SU2.realPart q))
+    (ℚP.neg-antimono-≤
+      (normalizedTraceUpperBound (negateQuaternion q)))
 
 record RationalSU2NormalizedTraceBound (q : SU2.RationalUnitQuaternion) : Set where
   constructor traceBound
