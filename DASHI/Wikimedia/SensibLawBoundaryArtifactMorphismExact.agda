@@ -21,29 +21,39 @@ import DASHI.Wikimedia.SensibLawSourceUnitReviewHandoffExact as Handoff
 ------------------------------------------------------------------------
 
 data ArtifactKind : Set where
-  externalSourceArtifact
-  sourceUnitArtifact
-  observationClaimArtifact
-  migrationCandidateArtifact
-  splitPlanArtifact
-  reviewPacketArtifact
-  canonicalPromotedArtifact
-  : ArtifactKind
+  externalSourceArtifact : ArtifactKind
+  sourceUnitArtifact : ArtifactKind
+  observationClaimArtifact : ArtifactKind
+  migrationCandidateArtifact : ArtifactKind
+  splitPlanArtifact : ArtifactKind
+  reviewPacketArtifact : ArtifactKind
+  canonicalPromotedArtifact : ArtifactKind
 
 data MorphismDeterminism : Set where
-  deterministicMorphism heuristicMorphism mixedMorphism : MorphismDeterminism
+  deterministicMorphism : MorphismDeterminism
+  heuristicMorphism : MorphismDeterminism
+  mixedMorphism : MorphismDeterminism
 
 data MorphismTotality : Set where
-  totalMorphism partialMorphism abstainingMorphism : MorphismTotality
+  totalMorphism : MorphismTotality
+  partialMorphism : MorphismTotality
+  abstainingMorphism : MorphismTotality
 
 data AuthorityLevel : Set where
-  signalAuthority candidateAuthority reviewedAuthority promotedAuthority : AuthorityLevel
+  signalAuthority : AuthorityLevel
+  candidateAuthority : AuthorityLevel
+  reviewedAuthority : AuthorityLevel
+  promotedAuthority : AuthorityLevel
 
 data Lossiness : Set where
-  lossless lossy unknownLossiness : Lossiness
+  lossless : Lossiness
+  lossy : Lossiness
+  unknownLossiness : Lossiness
 
 data ReviewRequirement : Set where
-  noReview reviewRequired verificationRequired : ReviewRequirement
+  noReview : ReviewRequirement
+  reviewRequired : ReviewRequirement
+  verificationRequired : ReviewRequirement
 
 record GovernedMorphism : Set where
   constructor governed-morphism
