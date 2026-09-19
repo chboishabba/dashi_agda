@@ -242,6 +242,63 @@ ericQ7OpenInteroperableRepairable = translated-query-receipt Search.eric Search.
   "exact ERIC API translation of protocol Q7 with explicit stem expansion"
 
 
+
+------------------------------------------------------------------------
+-- ACM Digital Library Advanced Search: ACM Full-Text collection / Anywhere.
+-- Stems are expanded explicitly rather than assuming undocumented wildcard
+-- behaviour.
+------------------------------------------------------------------------
+
+acmQ1DigitalEducationESD : TranslatedQueryReceipt
+acmQ1DigitalEducationESD = translated-query-receipt Search.acmDigitalLibrary Search.digitalEducationESD
+  (Protocol.PlannedQuery.queryId Protocol.q1DigitalEducationESD) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q1 over the ACM Full-Text collection / Anywhere field"
+
+acmQ2Transformation : TranslatedQueryReceipt
+acmQ2Transformation = translated-query-receipt Search.acmDigitalLibrary Search.digitalEducationESD
+  (Protocol.PlannedQuery.queryId Protocol.q2Transformation) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (transform OR transformation OR transformative OR \"system change\" OR institution OR institutional OR institutionalisation OR institutionalization OR \"institutional change\" OR \"whole institution\" OR curriculum OR pedagogy OR competence OR competencies OR \"learning environment\" OR \"learning environments\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q2 with explicit stem expansion"
+
+acmQ3ReflexiveSustainability : TranslatedQueryReceipt
+acmQ3ReflexiveSustainability = translated-query-receipt Search.acmDigitalLibrary Search.reflexiveDigitalSustainability
+  (Protocol.PlannedQuery.queryId Protocol.q3ReflexiveSustainability) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission OR emissions OR water OR \"e-waste\" OR circular OR circularity OR repair OR repairability OR reuse OR recycle OR recycling OR upgrade OR upgrades OR durability OR \"service life\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q3 with explicit stem expansion"
+
+acmQ4LifecycleCircularity : TranslatedQueryReceipt
+acmQ4LifecycleCircularity = translated-query-receipt Search.acmDigitalLibrary Search.lifecycleCircularity
+  (Protocol.PlannedQuery.queryId Protocol.q4LifecycleCircularity) Syntax.acmSyntaxReceipt
+  "(\"life cycle assessment\" OR LCA OR energy OR electricity OR carbon OR emission OR emissions OR water OR \"e-waste\" OR circular OR circularity OR repair OR repairability OR reuse OR recycle OR recycling OR upgrade OR upgrades OR durability OR \"service life\")"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q4"
+
+acmQ5ParticipantGovernance : TranslatedQueryReceipt
+acmQ5ParticipantGovernance = translated-query-receipt Search.acmDigitalLibrary Search.participantAgencyGovernance
+  (Protocol.PlannedQuery.queryId Protocol.q5ParticipantGovernance) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (\"student voice\" OR \"learner voice\" OR \"learner agency\" OR \"student agency\" OR participatory OR \"participatory research\" OR co-design OR codesign OR governance OR \"public accountability\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q5"
+
+acmQ6LongitudinalInstitutional : TranslatedQueryReceipt
+acmQ6LongitudinalInstitutional = translated-query-receipt Search.acmDigitalLibrary Search.longitudinalInstitutionalImpact
+  (Protocol.PlannedQuery.queryId Protocol.q6LongitudinalInstitutional) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (\"education for sustainable development\" OR ESD OR \"sustainable development education\" OR \"sustainability education\" OR \"environmental education\" OR \"sustainable education\") AND (longitudinal OR long-term OR durability OR sustainability OR sustainable OR institutionalisation OR institutionalization OR persistence OR retention OR follow-up OR \"follow up\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q6 with explicit stem expansion"
+
+acmQ7OpenInteroperableRepairable : TranslatedQueryReceipt
+acmQ7OpenInteroperableRepairable = translated-query-receipt Search.acmDigitalLibrary Search.openInteroperabilityRepairability
+  (Protocol.PlannedQuery.queryId Protocol.q7OpenInteroperableRepairable) Syntax.acmSyntaxReceipt
+  "((\"digital education\" OR \"digital learning\" OR \"educational technology\" OR edtech OR \"online learning\" OR \"blended learning\" OR \"digital learning platform\" OR \"digital learning platforms\" OR \"generative AI\" OR GenAI OR \"artificial intelligence\") AND (interoperability OR interoperable OR \"open standard\" OR \"open standards\" OR \"open source\" OR OER OR \"open educational resource\" OR \"open educational resources\" OR portability OR migration OR export OR exports OR exporting OR \"vendor lock-in\" OR repairable OR repairability OR \"right to repair\"))"
+  false refl
+  "exact ACM DL Advanced Search translation of protocol Q7 with explicit stem expansion"
+
+
 canonicalTranslatedQueries : List TranslatedQueryReceipt
 canonicalTranslatedQueries =
   scopusQ1DigitalEducationESD
@@ -272,10 +329,17 @@ canonicalTranslatedQueries =
   ∷ ericQ5ParticipantGovernance
   ∷ ericQ6LongitudinalInstitutional
   ∷ ericQ7OpenInteroperableRepairable
+  ∷ acmQ1DigitalEducationESD
+  ∷ acmQ2Transformation
+  ∷ acmQ3ReflexiveSustainability
+  ∷ acmQ4LifecycleCircularity
+  ∷ acmQ5ParticipantGovernance
+  ∷ acmQ6LongitudinalInstitutional
+  ∷ acmQ7OpenInteroperableRepairable
   ∷ []
 
 translatedQueryCount : Nat
-translatedQueryCount = 28
+translatedQueryCount = 35
 
 data TranslatedQueryCreatesResultSet : Set where
 data TranslatedQueryCreatesExecutionTimestamp : Set where
@@ -302,7 +366,7 @@ record DatabaseTranslatedQueryBoundary : Set where
     ericSevenExactQueriesFrozen : Bool
     ericSevenExactQueriesFrozenIsTrue : ericSevenExactQueriesFrozen ≡ true
     acmSevenExactQueriesFrozen : Bool
-    acmSevenExactQueriesFrozenIsFalse : acmSevenExactQueriesFrozen ≡ false
+    acmSevenExactQueriesFrozenIsTrue : acmSevenExactQueriesFrozen ≡ true
     anyTranslatedQueryExecutionObserved : Bool
     anyTranslatedQueryExecutionObservedIsFalse : anyTranslatedQueryExecutionObserved ≡ false
 
@@ -314,9 +378,9 @@ canonicalDatabaseTranslatedQueryBoundary = database-translated-query-boundary
   true refl
   true refl
   true refl
-  false refl
+  true refl
   false refl
 
 translatedQueryReading : String
 translatedQueryReading =
-  "Twenty-eight exact platform-specific queries are frozen: seven each for Scopus TITLE-ABS-KEY, Web of Science Core Collection TS Topic, IEEE Xplore free-text Command Search, and the ERIC public API. ERIC wildcard-like stems are expanded explicitly instead of assuming undocumented wildcard semantics. ACM DL remains translation debt. No translated query is thereby executed, counted, exported, deduplicated, screened or promoted into evidence completeness."
+  "All thirty-five platform-specific queries are frozen: seven each for Scopus TITLE-ABS-KEY, Web of Science Core Collection TS Topic, IEEE Xplore free-text Command Search, the ERIC public API, and ACM Digital Library Advanced Search over the ACM Full-Text collection / Anywhere field. ERIC and ACM stem-like terms are expanded explicitly rather than assuming undocumented wildcard semantics. No translated query is thereby executed, counted, exported, deduplicated, screened or promoted into evidence completeness."
