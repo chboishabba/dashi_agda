@@ -53,6 +53,17 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenc
 F : C3.RealField _
 F = Rational.rationalRealField
 
+centeredSquareSymmetric :
+  (E : C3.IntegerEmbedding F) →
+  (p q : Z3.FourierMode) →
+  Rate.centeredSquare E p q ≡ Rate.centeredSquare E q p
+centeredSquareSymmetric E
+    (Z3.mode px py pz) (Z3.mode qx qy qz) =
+  solve
+    ( C3.embedInteger E px ∷ C3.embedInteger E py ∷ C3.embedInteger E pz
+    ∷ C3.embedInteger E qx ∷ C3.embedInteger E qy ∷ C3.embedInteger E qz
+    ∷ [])
+
 centeredSquareSwap :
   (E : C3.IntegerEmbedding F) →
   (tau : Physical.PhysicalTriadIncidence) →
@@ -61,16 +72,10 @@ centeredSquareSwap :
       (Physical.q (Symmetry.swapTriad tau))
   ≡
   Rate.centeredSquare E (Physical.p tau) (Physical.q tau)
-centeredSquareSwap E tau =
-  let
-    px = C3.embedInteger E (Z3.kx (Physical.p tau))
-    py = C3.embedInteger E (Z3.ky (Physical.p tau))
-    pz = C3.embedInteger E (Z3.kz (Physical.p tau))
-    qx = C3.embedInteger E (Z3.kx (Physical.q tau))
-    qy = C3.embedInteger E (Z3.ky (Physical.q tau))
-    qz = C3.embedInteger E (Z3.kz (Physical.q tau))
-  in
-  solve (px ∷ py ∷ pz ∷ qx ∷ qy ∷ qz ∷ [])
+centeredSquareSwap E tau
+  rewrite Symmetry.swapTriadP tau
+        | Symmetry.swapTriadQ tau =
+  centeredSquareSymmetric E (Physical.q tau) (Physical.p tau)
 
 centeredSquareWeight :
   (E : C3.IntegerEmbedding F) →
