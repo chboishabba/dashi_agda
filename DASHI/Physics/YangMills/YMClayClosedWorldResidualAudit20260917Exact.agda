@@ -103,9 +103,17 @@ h2cSequentialOrderClosure : ExactResidual
 h2cSequentialOrderClosure = exact-residual
   physicalContinuumConstruction
   "BalabanClayCanonicalBFrontierRound330Exact.agda"
-  "T5SequentialOrderClosureWeld + shared RationalSequentialOrderClosure"
+  "full SequentialOrderClosure record + sameConvergence weld"
+  obsoleteStrength
+  "R330/R333 remain a valid stronger compatibility packaging, but the terminal R387 compiler does not consume this record or the sameConvergence equality."
+
+h2cSelectedLimitUpperClosure : ExactResidual
+h2cSelectedLimitUpperClosure = exact-residual
+  physicalContinuumConstruction
+  "YMClayRouteSSelectedLimitClosureExact.agda / BalabanCMP116R281SourceResponseSameObjectRound342Exact.agda"
+  "SelectedLimitUpperClosure on the actual R278/T5 scalar convergence"
   unpaid
-  "No new YM decay estimate is needed; the one-sided limit passage is a shared analysis capability plus a convergence-carrier weld."
+  "This is the exact one-sided ordered-limit proposition consumed by R387: Converges sequence target and sequence <= upper imply target <= upper. It is standard/shared analysis rather than a fresh YM decay estimate. PhysicalMeasureConvergenceData alone does not store order-closedness, so an inhabitant is still required."
 
 literalMeasureExpectationConvergence : ExactResidual
 literalMeasureExpectationConvergence = exact-residual
@@ -338,6 +346,15 @@ directSourceRouteRequiresPaEaMosco = false
 
 directSourceRouteRequiresLiteralMeasureConvergence : Bool
 directSourceRouteRequiresLiteralMeasureConvergence = true
+
+directSourceTerminalRequiresR330SequentialClosureRecord : Bool
+directSourceTerminalRequiresR330SequentialClosureRecord = false
+
+directSourceTerminalRequiresR330SameConvergenceWeld : Bool
+directSourceTerminalRequiresR330SameConvergenceWeld = false
+
+directSourceTerminalRequiresSelectedLimitUpperClosure : Bool
+directSourceTerminalRequiresSelectedLimitUpperClosure = true
 
 directSourceRouteRequiresOSReconstruction : Bool
 directSourceRouteRequiresOSReconstruction = true
