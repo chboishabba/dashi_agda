@@ -283,6 +283,27 @@ cmsIsOrthogonalToProofFrontier :
 cmsIsOrthogonalToProofFrontier =
   Full.cmsContactOrthogonalToClayProofFrontierIsTrue
 
+
+officialLiteralClaySolutionCompilerExists :
+  Full.officialLiteralClaySolutionCompilerPresent ≡ true
+officialLiteralClaySolutionCompilerExists =
+  Full.officialLiteralClaySolutionCompilerPresentIsTrue
+
+officialLiteralClayCompilerUsesRound78ABC :
+  Full.officialLiteralClaySolutionCompilerUsesRound78ABC ≡ true
+officialLiteralClayCompilerUsesRound78ABC =
+  Full.officialLiteralClaySolutionCompilerUsesRound78ABCIsTrue
+
+routeSToLiteralYBridgeStillRequired :
+  Full.routeSToLiteralYMassGapIntegrationStillRequired ≡ true
+routeSToLiteralYBridgeStillRequired =
+  Full.routeSToLiteralYMassGapIntegrationStillRequiredIsTrue
+
+round78CNeedsNoSecondStressEndpoint :
+  Full.round78CNeedsSecondStressOPEEndpoint ≡ false
+round78CNeedsNoSecondStressEndpoint =
+  Full.round78CNeedsSecondStressOPEEndpointIsFalse
+
 noUnconditionalClayPromotion :
   Full.unconditionalClayPromotion ≡ false
 noUnconditionalClayPromotion =
