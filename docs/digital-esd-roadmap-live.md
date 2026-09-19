@@ -1028,3 +1028,86 @@ this environment cannot honestly execute the actual screen. The next local
 execution is to run the ledger compiler over the retained exact artifact, then
 apply explicit review decisions as overlays while preserving every excluded and
 unresolved row.
+
+
+## 29. P0-A -> P0-G adaptive screening execution tranche
+
+The earlier adaptive-screening theorem surface is now paired with an executable
+runtime:
+
+`scripts/run_digital_esd_adaptive_screening.py`
+
+and execution parity owners:
+
+```text
+DASHI/Education/DigitalESDAdaptiveScreeningExecutionExact.agda
+DASHI/Education/DigitalESDAdaptiveScreeningExecutionRegression.agda
+```
+
+The executable cut is:
+
+```text
+P0-A exact screening denominator
+  -> P0-B candidate-only assessments
+  -> P0-C study/report-family hypotheses
+  -> P0-D stratified calibration queue
+  -> P0-E diagnostics from explicit reviewed decisions
+  -> P0-F Pareto unresolved-work selection
+  -> P0-G verified full-text handoff for include/probable sources
+```
+
+The controller emits candidate/work-queue artifacts only. It cannot change the
+authoritative screening ledger. Unselected records remain in the denominator;
+missing abstracts remain unresolved rather than excluded; duplicate/report
+family hypotheses do not create same-empirical-study identity.
+
+P0-G additionally has:
+
+`scripts/prepare_digital_esd_fulltext_index.py`
+
+which retains both successful and unavailable full-text attempts. For successful
+retrieval it computes SHA-256 from the retained artifact itself and requires an
+explicit same-object identity review reference before emitting an SLR handoff.
+
+The P0-G handoff still requires:
+
+```text
+canonical SLR evidence
+-> explicit reviewed SLR evidence
+-> Digital-ESD audit projection
+-> independent SourceAuditAdmission
+-> CorpusAuditedSource
+-> source hyperfabric audit
+-> framework challenge/refinement
+```
+
+so screening and SLR remain non-admitting.
+
+### Current execution/certification boundary
+
+Source-written:
+
+```text
+P0-A runtime        YES
+P0-B runtime        YES
+P0-C runtime        YES
+P0-D runtime        YES
+P0-E runtime        YES
+P0-F runtime        YES
+P0-G runtime        YES
+Agda execution ABI  YES
+firewall regression YES
+```
+
+Not yet observed on this branch:
+
+```text
+43,996-row adaptive runtime execution    NO
+reviewed calibration tranche            NO
+full-text retrieval/index population     NO
+P0-G live SLR handoff execution          NO
+fresh Agda kernel receipt for new owners NO
+```
+
+Therefore the architecture/execution path through P0-G is source-written, while
+the empirical review payments remain intentionally open.
