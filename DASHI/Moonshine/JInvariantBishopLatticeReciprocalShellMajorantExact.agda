@@ -19,13 +19,14 @@ module DASHI.Moonshine.JInvariantBishopLatticeReciprocalShellMajorantExact where
 --     <= C_tau * (y^2 r^2)^-1.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Bool.Base using (T)
 
-import Inverse as BishopInverse
 import Real as BishopReal
 import RealProperties as BishopP
 
+import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
 import DASHI.Analysis.BishopComplexReciprocalExact as Reciprocal
 import DASHI.Analysis.BishopPositiveCrossReciprocalUpperExact as Cross
@@ -64,7 +65,7 @@ imagSquarePositive :
   (parameter : Upper.BishopUpperHalfPlanePoint) →
   BishopReal._<_ BishopReal.0ℝ
     (Norm.square
-      (DASHI.Analysis.BishopComplexSeriesConvergenceExact.im
+      (Complex.im
         (Upper.tau parameter)))
 imagSquarePositive parameter =
   squarePositive (Upper.imaginaryPositive parameter)
@@ -76,7 +77,7 @@ weightedRadius :
 weightedRadius parameter inner =
   BishopReal._*_
     (Norm.square
-      (DASHI.Analysis.BishopComplexSeriesConvergenceExact.im
+      (Complex.im
         (Upper.tau parameter)))
     (Radius.radiusSquare inner)
 
@@ -104,7 +105,7 @@ shellCoerciveBound :
 shellCoerciveBound parameter inner point shellProof =
   let
     tau = Upper.tau parameter
-    y = DASHI.Analysis.BishopComplexSeriesConvergenceExact.im tau
+    y = Complex.im tau
 
     radiusBelow =
       Radius.successorSquareShellRadiusSquareLower
@@ -161,16 +162,16 @@ reciprocalNormSquareShellUpper parameter inner index shellProof =
 
 record ReciprocalShellMajorantBoundary : Set where
   field
-    shellCoercivityComposedExact : Agda.Builtin.Bool.Bool
-    reciprocalNormSquareShellUpperExact : Agda.Builtin.Bool.Bool
-    reciprocalPowerComponentMajorantsPaidHere : Agda.Builtin.Bool.Bool
-    finiteShellFoldDominationPaidHere : Agda.Builtin.Bool.Bool
+    shellCoercivityComposedExact : Bool
+    reciprocalNormSquareShellUpperExact : Bool
+    reciprocalPowerComponentMajorantsPaidHere : Bool
+    finiteShellFoldDominationPaidHere : Bool
 
 canonicalReciprocalShellMajorantBoundary :
   ReciprocalShellMajorantBoundary
 canonicalReciprocalShellMajorantBoundary = record
-  { shellCoercivityComposedExact = Agda.Builtin.Bool.true
-  ; reciprocalNormSquareShellUpperExact = Agda.Builtin.Bool.true
-  ; reciprocalPowerComponentMajorantsPaidHere = Agda.Builtin.Bool.false
-  ; finiteShellFoldDominationPaidHere = Agda.Builtin.Bool.false
+  { shellCoercivityComposedExact = true
+  ; reciprocalNormSquareShellUpperExact = true
+  ; reciprocalPowerComponentMajorantsPaidHere = false
+  ; finiteShellFoldDominationPaidHere = false
   }
