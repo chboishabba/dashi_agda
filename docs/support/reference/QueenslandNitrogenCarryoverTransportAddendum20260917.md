@@ -88,6 +88,75 @@ The generic `IntersectionalNonFactorability` and Snowball discovery machinery is
 
 Each coarse observer has a finite non-factorability witness, and each corresponding enriched observer has a finite positive `FactorsThrough` repair. Failed factorisation generates a typed route/timing/water/mineral-N-response axis proposal. These finite worlds and proposals are DASHI synthetic reasoning objects, not empirical source propositions and not evidence that the proposed measurement has been performed.
 
+## Constructive transport / convergence mathematics
+
+The Moonshine convergence work is now imported as application-neutral Analysis infrastructure and reused by agriculture rather than copied semantically.
+
+Ported to this branch:
+
+- `BishopPolynomialSuccessorFactorLimit{Validation,Exact}`
+- `BishopStrictRatioInterpolation{Validation,Exact}`
+- `BishopPolynomialGeometricSeriesConvergence{Validation,Exact}`
+- `PolynomialGeometricTailDomination{Validation,Exact}`
+- `TailModulusCauchyBridge{Validation,Exact}`
+
+New generic owners:
+
+- `DASHI/Analysis/ContractiveCompartmentTail{Validation,Exact}.agda`
+- `DASHI/Analysis/BishopContractiveCompartmentSeries{Validation,Exact}.agda`
+
+The first proves, application-neutrally,
+
+```text
+actual(n) <= majorant(n)
+majorant finite tails vanish
+--------------------------------
+actual finite tails vanish
+```
+
+and exposes a consumer-indexed finite decision horizon:
+
+```text
+precision
+  -> start N
+  -> every finite actual tail beginning at N is SmallAt precision.
+```
+
+When the selected backend supplies the existing tail-to-Cauchy bridge, the same receipt compiles to `IsCauchy`.
+
+The Bishop owner specializes the tractable majorant
+
+```text
+scale * (n+1)^degree * ratio^(n+1),   0 <= ratio < 1
+```
+
+and reuses the constructive arbitrary-degree theorem. It additionally proves that any actual Bishop-real contribution sequence whose absolute terms are pointwise bounded by such a majorant has convergent partial sums and therefore a Cauchy cumulative trajectory.
+
+Agriculture exposes this through:
+
+- `ConstructiveNitrogenTransportKernel{Regression,Exact}.agda`
+
+with literal existing-repository convolution equations
+
+```text
+M_t = sum_{j=0}^t F_j K_M(t-j)
+C_t = sum_{j=0}^t M_j K_C(t-j)
+```
+
+and distinct route coordinates for living below-ground, residue/mineralisation, excreta redistribution and soil-stock release.
+
+This is a mathematical compiler, not a fitted ecological law. None of the Queensland sources is thereby asserted to satisfy a polynomial-geometric kernel. For an empirical application the following remain explicit inputs:
+
+- route identity;
+- time discretisation / time unit;
+- scale;
+- fixed degree;
+- contraction ratio with a same-object proof of `0 <= r < 1`;
+- pointwise bound from observed/modelled contribution to the majorant;
+- consumer-selected smallness semantics where an explicit finite decision horizon is required.
+
+Accordingly, convergence or Cauchy stabilization does not itself imply fertilizer replacement, recovery, deployment authority, or correctness of the selected mechanistic model.
+
 ## Certification boundary
 
 This addendum records source-written implementation only. No CI query or Agda/kernel typecheck is claimed in this connector-only continuation.
