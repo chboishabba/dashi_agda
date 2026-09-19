@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact where
 
-open import Agda.Builtin.List using (List; map)
+open import Agda.Builtin.Bool using (Bool; false)\nopen import Agda.Builtin.List using (List; map)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
 
