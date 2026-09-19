@@ -35,6 +35,9 @@ catchpooleBlair1990ResidueDOI = "10.1071/AR9900539"
 vallis1983DOI : String
 vallis1983DOI = "10.1071/AR9830367"
 
+sierraNygren2006DOI : String
+sierraNygren2006DOI = "10.1016/j.soilbio.2005.12.012"
+
 burleSheltonDalzell2003 : Attribution.AttributedSource
 burleSheltonDalzell2003 = Attribution.mkNoDOISource
   "S. T. M. Burle; H. M. Shelton; S. A. Dalzell"
@@ -106,6 +109,17 @@ vallis1983 = Attribution.mkDOISource
   "South-eastern Queensland field tracer study applying 15N-labelled Siratro and Greenleaf desmodium residues to a Rhodes-grass pasture and following labelled N in grass/soil over one to three years. It is a field residue-transfer receipt, not evidence for contemporaneous living-root or direct below-ground legume-to-grass transfer."
   Attribution.publicAttribution
 
+
+sierraNygren2006 : Attribution.AttributedSource
+sierraNygren2006 = Attribution.mkDOISource
+  "Jorge Sierra; Pekka Nygren"
+  "Transfer of N fixed by a legume tree to the associated grass in a tropical silvopastoral system"
+  "Soil Biology and Biochemistry 38(7):1893-1903"
+  "2006" sierraNygren2006DOI "https://doi.org/10.1016/j.soilbio.2005.12.012"
+  Attribution.academicArticleSource
+  "Guadeloupe field silvopastoral experiment using 15N natural abundance with Gliricidia sepium and Dichanthium aristatum. Above-ground litter/excreta recycling was excluded from the system, atmospheric-origin N in grass was associated with tree fine-root density, and reference-plant selection required explicit treatment because roots invaded neighbouring grass plots and soil isotope baselines differed. Retained as an external field route-discrimination and experimental-design donor, not Queensland or Acacia/Senegalia same-object evidence."
+  Attribution.publicAttribution
+
 data WoodyGrassEvidenceRole : Set where
   shortWindowGrazingNitrogenPool : WoodyGrassEvidenceRole
   longTermSoilCarbonNitrogenStock : WoodyGrassEvidenceRole
@@ -114,6 +128,7 @@ data WoodyGrassEvidenceRole : Set where
   controlledLegumeToGrassTransfer : WoodyGrassEvidenceRole
   residueExcretaNitrogenRelease : WoodyGrassEvidenceRole
   fieldResidueNitrogenTransfer : WoodyGrassEvidenceRole
+  fieldBelowGroundTransferDesign : WoodyGrassEvidenceRole
 
 record WoodyGrassReceipt : Set where
   constructor woody-grass-receipt
@@ -190,6 +205,16 @@ fieldResidueTransferReceipt = woody-grass-receipt
   "field residue-mediated companion-grass capture"
   "residue-mediated transfer is a decomposer/mineralisation route and is not contemporaneous living-legume or direct below-ground transfer"
 
+
+fieldBelowGroundTransferDesignReceipt : WoodyGrassReceipt
+fieldBelowGroundTransferDesignReceipt = woody-grass-receipt
+  sierraNygren2006 fieldBelowGroundTransferDesign
+  "field observation with below-ground-only N recycling plus supporting reference-plant assay"
+  "Guadeloupe Gliricidia-Dichanthium silvopastoral plots; external to Australia"
+  "15N natural-abundance atmospheric-origin signal in grass evaluated against tree-root density and soil isotope baselines"
+  "route-discriminating experimental design"
+  "suggests direct below-ground transfer in its source system while retaining reference-plant, root-invasion and isotope-baseline problems; does not create Queensland or Acacia/Senegalia same-object evidence"
+
 genericFixedNFluxStillOpen : Chemistry.stageClosed Chemistry.bacterialFixedNFlux ≡ false
 genericFixedNFluxStillOpen = refl
 
@@ -208,6 +233,8 @@ record WoodyLegumeGrassBoundary : Set where
     residuePlacementMayBeDroppedFromNitrogenCapture : Bool
     fieldResidueTransferImpliesLivingLegumeTransfer : Bool
     externalTransferDonorCreatesQueenslandSameObjectReceipt : Bool
+    externalFieldBelowGroundTransferCreatesQueenslandSameObjectReceipt : Bool
+    belowGroundTransferReferencePlantProblemMayBeDropped : Bool
     pairedChronosequenceCreatesLongitudinalCausalTrajectory : Bool
     isotopeAtmosphericContributionEqualsDirectBacterialFlux : Bool
     phosphorusSulfurLimitationMayBeDroppedFromFixation : Bool
@@ -219,9 +246,28 @@ record WoodyLegumeGrassBoundary : Set where
 open WoodyLegumeGrassBoundary public
 
 canonicalWoodyLegumeGrassBoundary : WoodyLegumeGrassBoundary
-canonicalWoodyLegumeGrassBoundary = woody-legume-grass-boundary
-  false false false false false false false false false false false false false false false false false
+canonicalWoodyLegumeGrassBoundary = record
+  { woodyLegumeFixedNImpliesCompanionGrassCapture = false
+  ; soilTotalNitrogenIdentifiesLegumeToGrassTransfer = false
+  ; grazingExcretaRedistributionMayBeDropped = false
+  ; consumedPastureNitrogenEqualsAnimalProductExport = false
+  ; controlledTransferImpliesFieldTransfer = false
+  ; leafFaecesUrineTransportRouteMayBeDropped = false
+  ; residuePlacementMayBeDroppedFromNitrogenCapture = false
+  ; fieldResidueTransferImpliesLivingLegumeTransfer = false
+  ; externalTransferDonorCreatesQueenslandSameObjectReceipt = false
+  ; externalFieldBelowGroundTransferCreatesQueenslandSameObjectReceipt = false
+  ; belowGroundTransferReferencePlantProblemMayBeDropped = false
+  ; pairedChronosequenceCreatesLongitudinalCausalTrajectory = false
+  ; isotopeAtmosphericContributionEqualsDirectBacterialFlux = false
+  ; phosphorusSulfurLimitationMayBeDroppedFromFixation = false
+  ; companionGrassCompetitionMayBeDropped = false
+  ; soilStockIncreaseImpliesAvoidedFertilizer = false
+  ; queenslandLeucaenaCreatesAcaciaSameObjectEvidence = false
+  ; queenslandLeucaenaEvidenceClosesAcaciaAvoidedMineralN = false
+  ; woodyLegumeGrassEvidenceCreatesDeploymentAuthority = false
+  }
 
 attributionRule : String
 attributionRule =
-  "Burle, Shelton & Dalzell 2003 (Tropical Grasslands 37:119-128; no DOI recorded by this atlas) owns its south-east Queensland plant/soil/cattle/excreta N-pool observations. Radrizzani et al. 2011 (DOI 10.1071/CP10115) owns its paired Queensland soil OC/TN observations. Conrad et al. 2018 (DOI 10.1016/j.geoderma.2017.10.029) owns its delta-15N source attribution and soil-N turnover observations. Radrizzani, Shelton & Dalzell 2010 (DOI 10.1071/AN10062) owns its Queensland P/S/fixation and grass-competition observations. Catchpoole & Blair 1990-II (DOI 10.1071/AR9900531) owns its controlled split-root labelled-transfer propositions and the reported contrast with the earlier South-Sulawesi field series. Catchpoole & Blair 1990-III (DOI 10.1071/AR9900539) owns its labelled leaf/faeces/urine release and placement propositions. Vallis 1983 (DOI 10.1071/AR9830367) owns its south-eastern Queensland 15N-labelled legume-residue-to-Rhodes-grass/soil field observations. DASHI owns only the typed source/route/redistribution/stock separation and no-promotion boundary. Residue-mediated field capture is not living-root transfer; external transfer donors do not create Queensland same-object transfer; and Leucaena evidence does not create Acacia/Senegalia same-object evidence or close canonical BNF/avoided-mineral-N stages."
+  "Burle, Shelton & Dalzell 2003 (Tropical Grasslands 37:119-128; no DOI recorded by this atlas) owns its south-east Queensland plant/soil/cattle/excreta N-pool observations. Radrizzani et al. 2011 (DOI 10.1071/CP10115) owns its paired Queensland soil OC/TN observations. Conrad et al. 2018 (DOI 10.1016/j.geoderma.2017.10.029) owns its delta-15N source attribution and soil-N turnover observations. Radrizzani, Shelton & Dalzell 2010 (DOI 10.1071/AN10062) owns its Queensland P/S/fixation and grass-competition observations. Catchpoole & Blair 1990-II (DOI 10.1071/AR9900531) owns its controlled split-root labelled-transfer propositions and the reported contrast with the earlier South-Sulawesi field series. Catchpoole & Blair 1990-III (DOI 10.1071/AR9900539) owns its labelled leaf/faeces/urine release and placement propositions. Vallis 1983 (DOI 10.1071/AR9830367) owns its south-eastern Queensland 15N-labelled legume-residue-to-Rhodes-grass/soil field observations. Sierra & Nygren 2006 (DOI 10.1016/j.soilbio.2005.12.012) owns its Guadeloupe below-ground-only silvopastoral 15N transfer design, root-density association and reference-plant limitations. DASHI owns only the typed source/route/redistribution/stock separation and no-promotion boundary. Residue-mediated field capture is not living-root transfer; the external field below-ground donor remains method/route evidence rather than Queensland same-object transfer, and its reference-plant/isotope-baseline constraints remain explicit; and Leucaena evidence does not create Acacia/Senegalia same-object evidence or close canonical BNF/avoided-mineral-N stages."
