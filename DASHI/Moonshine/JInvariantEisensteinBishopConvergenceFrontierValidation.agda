@@ -131,6 +131,11 @@ bishopUpperHalfPlaneQuotientRadiusWeldCompilerIsOwned :
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
 bishopUpperHalfPlaneQuotientRadiusWeldCompilerIsOwned = refl
 
+literalQToBishopRadiusReductionCompilerIsOwned :
+  P.literalQToBishopRadiusReductionCompilerOwned
+    P.canonicalEisensteinBishopConvergenceFrontier ≡ true
+literalQToBishopRadiusReductionCompilerIsOwned = refl
+
 bishopLiteralRadiusMajorantCompilerIsOwned :
   P.bishopLiteralRadiusMajorantCompilerOwned
     P.canonicalEisensteinBishopConvergenceFrontier ≡ true
