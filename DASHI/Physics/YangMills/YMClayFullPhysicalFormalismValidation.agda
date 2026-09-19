@@ -258,6 +258,17 @@ d2StillNeedsR129OperatorAttachment :
 d2StillNeedsR129OperatorAttachment =
   Full.d2R129SameFamilyOperatorAttachmentStillPhysicalIsTrue
 
+
+d3FiniteTimeConservationIsDerived :
+  Full.d3IndependentFiniteTimeConservationRequired ≡ false
+d3FiniteTimeConservationIsDerived =
+  Full.d3IndependentFiniteTimeConservationRequiredIsFalse
+
+d3ConservedChargeCutoffTransportRemains :
+  Full.d3CutoffToContinuumConservedChargeTransportStillPhysical ≡ true
+d3ConservedChargeCutoffTransportRemains =
+  Full.d3CutoffToContinuumConservedChargeTransportStillPhysicalIsTrue
+
 d3StillNeedsPhysicalTransport :
   Full.d3FiniteToContinuumTransportStillPhysical ≡ true
 d3StillNeedsPhysicalTransport =
