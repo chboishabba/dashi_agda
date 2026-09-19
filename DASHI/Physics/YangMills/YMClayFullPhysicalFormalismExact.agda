@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
+import DASHI.Physics.YangMills.YMClayRouteSSelectedLimitClosureExact as RouteSH2c
 import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact as RouteG
 import DASHI.Physics.YangMills.YMClayOSLiteralStressRouteParetoExact as StressPareto
 import DASHI.Physics.YangMills.YMClayLevel2StressOPEMinCutExact as Level2
@@ -151,6 +152,33 @@ routeSStillRequiresOSReconstructionIsTrue :
   routeSStillRequiresOSReconstruction ≡ true
 routeSStillRequiresOSReconstructionIsTrue =
   RouteS.osReconstructionStillRequiredIsTrue
+
+routeSTerminalRequiresSequentialOrderClosureRecord : Bool
+routeSTerminalRequiresSequentialOrderClosureRecord =
+  RouteSH2c.terminalRouteRequiresSequentialOrderClosureRecord
+
+routeSTerminalRequiresSequentialOrderClosureRecordIsFalse :
+  routeSTerminalRequiresSequentialOrderClosureRecord ≡ false
+routeSTerminalRequiresSequentialOrderClosureRecordIsFalse =
+  RouteSH2c.terminalRouteRequiresSequentialOrderClosureRecordIsFalse
+
+routeSTerminalRequiresSameConvergenceWeld : Bool
+routeSTerminalRequiresSameConvergenceWeld =
+  RouteSH2c.terminalRouteRequiresSameConvergenceWeld
+
+routeSTerminalRequiresSameConvergenceWeldIsFalse :
+  routeSTerminalRequiresSameConvergenceWeld ≡ false
+routeSTerminalRequiresSameConvergenceWeldIsFalse =
+  RouteSH2c.terminalRouteRequiresSameConvergenceWeldIsFalse
+
+routeSTerminalRequiresSelectedLimitUpperClosure : Bool
+routeSTerminalRequiresSelectedLimitUpperClosure =
+  RouteSH2c.terminalRouteRequiresSelectedLimitUpperClosure
+
+routeSTerminalRequiresSelectedLimitUpperClosureIsTrue :
+  routeSTerminalRequiresSelectedLimitUpperClosure ≡ true
+routeSTerminalRequiresSelectedLimitUpperClosureIsTrue =
+  RouteSH2c.terminalRouteRequiresSelectedLimitUpperClosureIsTrue
 
 f2PrimitiveResearchPayment : Bool
 f2PrimitiveResearchPayment = RouteG.f2PrimitiveResearchPayment
