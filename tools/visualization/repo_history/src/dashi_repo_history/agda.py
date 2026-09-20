@@ -162,28 +162,59 @@ def _declaration_fingerprint(
     )
 
 
-def _prefix_application_head(node: Any) -> bool:
-    """Conservative prefix-application evidence from Tree-sitter structure.
+def _application_context(
+    source: bytes,
+    node: Any,
+) -> tuple[bool, str | None]:
+    """Return (is-prefix-head, enclosing-prefix-head-name).
 
-    The nearest enclosing expr must have at least two named children, and the
-    reference must occur in the first one. This intentionally does not try to
-    reinterpret Agda mixfix/infix syntax.
+    Only expressions with at least two named children count as application
+    evidence. For an argument reference, the second component names the first
+    syntactic unit's identifier when one exists.
     """
 
     expr = _first_ancestor(node, {"expr"})
     if expr is None:
-        return False
+        return False, None
 
     child = node
     while child.parent is not None and child.parent is not expr:
         child = child.parent
     if child.parent is not expr:
-        return False
+        return False, None
 
     named_children = list(expr.named_children)
     if len(named_children) < 2:
+        return False, None
+
+    first = named_children[0]
+    head_node = _first_descendant(
+        first,
+        {"qid", "id"},
+    )
+    head_value = (
+        _node_text(source, head_node).strip()
+        if head_node is not None
+        else None
+    )
+
+    if first == child:
+        return True, head_value
+    return False, head_value
+
+
+def _prefix_application_head(node: Any) -> bool:
+    # Backward-compatible helper for tests/callers that only need the boolean.
+    expr = _first_ancestor(node, {"expr"})
+    if expr is None:
         return False
-    return named_children[0] == child
+    child = node
+    while child.parent is not None and child.parent is not expr:
+        child = child.parent
+    if child.parent is not expr:
+        return False
+    named_children = list(expr.named_children)
+    return len(named_children) >= 2 and named_children[0] == child
 
 
 def _reference_kind(source: bytes, node: Any) -> str:
@@ -260,6 +291,7 @@ class RawReference:
     kind: str
     scope: str
     prefix_application_head: bool = false
+    application_head: str | None = None
 
 
 @dataclass
@@ -732,13 +764,15 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
             ):
                 continue
 
+        is_head, application_head = _application_context(source, ref)
         owner.references.append(
             RawReference(
                 value=value,
                 span=_span(path, ref),
                 kind=_reference_kind(source, ref),
                 scope=scope,
-                prefix_application_head=_prefix_application_head(ref),
+                prefix_application_head=is_head,
+                application_head=application_head,
             )
         )
 
@@ -905,6 +939,31 @@ def build_semantic_graph(
                     evidence=ref.span,
                 )
                 graph.edges[relation.relation_id] = relation
+
+                if (
+                    ref.kind == "body-depends"
+                    and not ref.prefix_application_head
+                    and ref.application_head
+                ):
+                    head_target = _resolve_reference(
+                        ref=ref.application_head,
+                        owner_module=owner.module,
+                        by_module_label=by_module_label,
+                        open_scopes=open_scopes_by_module.get(
+                            owner.module,
+                            [],
+                        ),
+                    )
+                    if head_target is not None:
+                        argument_relation = Relation(
+                            source=local.symbol_id,
+                            target=head_target.symbol_id,
+                            kind="argument-to",
+                            evidence=ref.span,
+                        )
+                        graph.edges[
+                            argument_relation.relation_id
+                        ] = argument_relation
                 continue
 
             target = _resolve_reference(
@@ -950,6 +1009,34 @@ def build_semantic_graph(
                 evidence=ref.span,
             )
             graph.edges[relation.relation_id] = relation
+
+            if (
+                ref.kind == "body-depends"
+                and not ref.prefix_application_head
+                and ref.application_head
+            ):
+                head_target = _resolve_reference(
+                    ref=ref.application_head,
+                    owner_module=owner.module,
+                    by_module_label=by_module_label,
+                    open_scopes=open_scopes_by_module.get(
+                        owner.module,
+                        [],
+                    ),
+                )
+                if (
+                    head_target is not None
+                    and head_target.symbol_id != target.symbol_id
+                ):
+                    argument_relation = Relation(
+                        source=target.symbol_id,
+                        target=head_target.symbol_id,
+                        kind="argument-to",
+                        evidence=ref.span,
+                    )
+                    graph.edges[
+                        argument_relation.relation_id
+                    ] = argument_relation
 
     return graph
 
