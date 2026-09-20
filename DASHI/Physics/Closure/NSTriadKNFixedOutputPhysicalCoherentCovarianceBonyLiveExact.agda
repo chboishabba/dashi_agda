@@ -102,6 +102,40 @@ pairDifferenceScale scalar multiplier work (head ∷ rest) =
       ∷ Pair.pairDifferenceWorkSum multiplier work rest
       ∷ []))
 
+
+pairAgainstHeadRateTransport :
+  ∀ {A : Set} →
+  (left right work : A → ℚ) →
+  ((x : A) → left x ≡ right x) →
+  (head : A) →
+  (rest : List A) →
+  Pair.pairAgainstHead left work head rest
+  ≡ Pair.pairAgainstHead right work head rest
+pairAgainstHeadRateTransport left right work pointwise head [] = refl
+pairAgainstHeadRateTransport left right work pointwise head (x ∷ xs) =
+  cong₂ _+_
+    (cong
+      (λ selected →
+        selected * (work head - work x))
+      (cong₂ _-_ (pointwise head) (pointwise x)))
+    (pairAgainstHeadRateTransport
+      left right work pointwise head xs)
+
+pairDifferenceRateTransport :
+  ∀ {A : Set} →
+  (left right work : A → ℚ) →
+  ((x : A) → left x ≡ right x) →
+  (items : List A) →
+  Pair.pairDifferenceWorkSum left work items
+  ≡ Pair.pairDifferenceWorkSum right work items
+pairDifferenceRateTransport left right work pointwise [] = refl
+pairDifferenceRateTransport left right work pointwise (head ∷ rest) =
+  cong₂ _+_
+    (pairAgainstHeadRateTransport
+      left right work pointwise head rest)
+    (pairDifferenceRateTransport
+      left right work pointwise rest)
+
 module LiveBony
     (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F)
@@ -141,12 +175,12 @@ module LiveBony
       inputMass (Live.work output) (Live.fibre output)
   pairDifferenceRateIsViscosityInput =
     trans
-      (Pair.pairDifferencePointwiseRateTransport
+      (pairDifferenceRateTransport
         Live.rate
         (λ tau → nu * inputMass tau)
         (Live.work output)
-        (Live.fibre output)
-        rateMeaning)
+        rateMeaning
+        (Live.fibre output))
       (pairDifferenceScale
         nu inputMass (Live.work output) (Live.fibre output))
 
