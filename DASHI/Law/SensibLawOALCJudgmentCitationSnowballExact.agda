@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -11,6 +12,7 @@ import DASHI.Law.SensibLawOALCLegalFollowAttributionSnowballExact as OALC
 import DASHI.Law.SensibLawCitationAuthorityFollowExact as Follow
 import DASHI.Law.SensibLawCitationUsePropositionExact as Use
 import DASHI.Law.SensibLawCitationReviewUnitDecisionGateExact as Review
+import DASHI.Law.SensibLawCullenResidualCitationReviewShortlistExact as Shortlist
 import DASHI.Law.WaltonsEstoppelMaterialisationExact as Waltons
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Attribution
 
@@ -113,6 +115,13 @@ CitationUseBoundary = Use.CitationUseBoundary
 citationUseBoundaryPaid : CitationUseBoundary
 citationUseBoundaryPaid =
   Use.canonicalCitationUseBoundary
+
+ResidualShortlistBoundary : Set
+ResidualShortlistBoundary = Shortlist.CullenResidualCitationReviewShortlistBoundary
+
+residualShortlistBoundaryPaid : ResidualShortlistBoundary
+residualShortlistBoundaryPaid =
+  Shortlist.canonicalCullenResidualCitationReviewShortlistBoundary
 
 CitationReviewBoundary : Set
 CitationReviewBoundary = Review.CitationReviewUnitDecisionBoundary
@@ -230,6 +239,10 @@ record OalcJudgmentCitationSnowballBoundary : Set where
     lexicalResearchMatchPaysLegalElementIsFalse :
       lexicalResearchMatchPaysLegalElement ≡ false
 
+    residualIndexedShortlistReused : Bool
+    residualIndexedShortlistReusedIsTrue :
+      residualIndexedShortlistReused ≡ true
+
     citationOccurrenceMayScheduleExactFollow : Bool
     citationOccurrenceMayScheduleExactFollowIsTrue :
       citationOccurrenceMayScheduleExactFollow ≡ true
@@ -254,6 +267,7 @@ canonicalOalcJudgmentCitationSnowballBoundary =
     true refl
     true refl
     false refl
+    true refl
     true refl
     false refl
     true refl
