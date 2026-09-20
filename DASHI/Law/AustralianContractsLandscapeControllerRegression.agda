@@ -185,3 +185,32 @@ reviewedResidualsRemainPreservedAcrossTrajectory :
 reviewedResidualsRemainPreservedAcrossTrajectory =
   Controller.reviewedResidualsPreservedAcrossTrajectoryIsTrue
     Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+
+waltonsS14SyncStageOrderRemainsCanonical :
+  Controller.stageOrder Controller.canonicalWaltonsS14ReviewedSync
+    ≡ Controller.waltonsS14StageOrder
+waltonsS14SyncStageOrderRemainsCanonical = refl
+
+waltonsS14SyncUsesTypedRustTransport :
+  Controller.typedRustInProcess Controller.canonicalWaltonsS14ReviewedSync
+    ≡ true
+waltonsS14SyncUsesTypedRustTransport =
+  Controller.typedRustInProcessIsTrue
+    Controller.canonicalWaltonsS14ReviewedSync
+
+waltonsS14SyncDoesNotUseJsonAsSemanticTransport :
+  Controller.jsonIsSemanticCommandTransport
+    Controller.canonicalWaltonsS14ReviewedSync
+    ≡ false
+waltonsS14SyncDoesNotUseJsonAsSemanticTransport =
+  Controller.jsonIsSemanticCommandTransportIsFalse
+    Controller.canonicalWaltonsS14ReviewedSync
+
+waltonsS14SyncPreservesReviewedResiduals :
+  Controller.reviewedResidualsPreserved
+    Controller.canonicalWaltonsS14ReviewedSync
+    ≡ true
+waltonsS14SyncPreservesReviewedResiduals =
+  Controller.reviewedResidualsPreservedIsTrue
+    Controller.canonicalWaltonsS14ReviewedSync
