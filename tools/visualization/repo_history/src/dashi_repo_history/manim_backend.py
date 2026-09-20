@@ -81,21 +81,27 @@ def _history_layout(commits: list[dict[str, Any]]) -> dict[str, list[float]]:
     return positions
 
 
+def _visual_edge_projection(
+    graph_data: dict[str, Any],
+) -> tuple[
+    list[tuple[str, str]],
+    dict[tuple[str, str], set[str]],
+]:
+    """Project typed relations to endpoint pairs plus retained kind sets."""
+
+    kinds: dict[tuple[str, str], set[str]] = {}
+    for relation in graph_data["edges"]:
+        source = relation["source"]
+        target = relation["target"]
+        if source == target:
+            continue
+        edge = (source, target)
+        kinds.setdefault(edge, set()).add(relation["kind"])
+    return sorted(kinds), kinds
+
+
 def _visual_edges(graph_data: dict[str, Any]) -> list[tuple[str, str]]:
-    """Project typed semantic relations to Manim's simple DiGraph edge set.
-
-    The semantic JSON retains every relation_id/kind.  Manim DiGraph is simple
-    rather than multi-edge, so only the geometric source/target pair is
-    projected here; no semantic relation is deleted from the authority data.
-    """
-
-    return sorted(
-        {
-            (edge["source"], edge["target"])
-            for edge in graph_data["edges"]
-            if edge["source"] != edge["target"]
-        }
-    )
+    return _visual_edge_projection(graph_data)[0]
 
 
 def _snapshot_maps(data: dict[str, Any]):
@@ -198,6 +204,7 @@ class SemanticGraphView:
         self.graph = DiGraph([], [], layout={})
         self.current_nodes: set[str] = set()
         self.current_edges: set[tuple[str, str]] = set()
+        self.current_edge_kinds: dict[tuple[str, str], set[str]] = {}
         self.current_graph_data: dict[str, Any] = {"nodes": [], "edges": []}
 
     def _viewport_layout(
@@ -217,7 +224,7 @@ class SemanticGraphView:
 
     def build(self, graph_data: dict[str, Any]) -> DiGraph:
         nodes = [n["symbol_id"] for n in graph_data["nodes"]]
-        edges = _visual_edges(graph_data)
+        edges, edge_kinds = _visual_edge_projection(graph_data)
         self.layout.solve(nodes, edges)
         node_data = {
             node["symbol_id"]: node
@@ -235,9 +242,14 @@ class SemanticGraphView:
             edges,
             layout=self._viewport_layout(self.layout.manim_layout()),
             vertex_mobjects=vertex_mobjects,
+            edge_config={
+                edge: self.policy.edges.edge_config(edge_kinds[edge])
+                for edge in edges
+            },
         )
         self.current_nodes = set(nodes)
         self.current_edges = set(edges)
+        self.current_edge_kinds = edge_kinds
         self.current_graph_data = graph_data
         return self.graph
 
@@ -249,7 +261,8 @@ class SemanticGraphView:
         run_time: float = 0.35,
     ) -> None:
         target_nodes = {n["symbol_id"] for n in graph_data["nodes"]}
-        target_edges = set(_visual_edges(graph_data))
+        projected_edges, target_edge_kinds = _visual_edge_projection(graph_data)
+        target_edges = set(projected_edges)
 
         for old_id, new_id in supported_transfers(
             self.current_graph_data,
@@ -306,8 +319,36 @@ class SemanticGraphView:
             scene.play(GrowFromCenter(new_vertices), run_time=run_time)
 
         if added_edges:
-            new_edges = self.graph.add_edges(*added_edges)
+            new_edges = self.graph.add_edges(
+                *added_edges,
+                edge_config={
+                    edge: self.policy.edges.edge_config(
+                        target_edge_kinds[edge]
+                    )
+                    for edge in added_edges
+                },
+            )
             scene.play(Create(new_edges), run_time=run_time)
+
+        restyled_edges = [
+            edge
+            for edge in sorted(self.current_edges & target_edges)
+            if self.current_edge_kinds.get(edge, set())
+            != target_edge_kinds.get(edge, set())
+            and edge in self.graph.edges
+        ]
+        if restyled_edges:
+            scene.play(
+                *[
+                    self.graph.edges[edge].animate.set_stroke(
+                        width=self.policy.edges.stroke_width(
+                            target_edge_kinds[edge]
+                        )
+                    )
+                    for edge in restyled_edges
+                ],
+                run_time=run_time / 2,
+            )
 
         if target_nodes:
             scene.play(
@@ -324,6 +365,7 @@ class SemanticGraphView:
 
         self.current_nodes = target_nodes
         self.current_edges = target_edges
+        self.current_edge_kinds = target_edge_kinds
         self.current_graph_data = graph_data
 
 
