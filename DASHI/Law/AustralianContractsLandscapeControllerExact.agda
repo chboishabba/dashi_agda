@@ -183,6 +183,60 @@ qld2026TemporalAlternativeWork =
     false refl
     false refl
 
+doctrineExpansionWork :
+  String →
+  Contracts.ContractDoctrine →
+  ContractLandscapeWorkItem
+doctrineExpansionWork slug doctrine =
+  contractLandscapeWorkItem
+    slug
+    researchContextExpansion
+    slug
+    (just "landscape:au:contract-law")
+    (just doctrine)
+    "AU"
+    "2026-09-20"
+    Contracts.researchIndex
+    slug
+    nothing
+    nothing
+    true
+    true refl
+    false refl
+    false refl
+
+constructionExpansionWork : ContractLandscapeWorkItem
+constructionExpansionWork =
+  doctrineExpansionWork
+    "doctrine:au:contract:construction"
+    Contracts.construction
+
+unconscionabilityExpansionWork : ContractLandscapeWorkItem
+unconscionabilityExpansionWork =
+  doctrineExpansionWork
+    "doctrine:au:contract:unconscionability"
+    Contracts.unconscionability
+
+penaltiesExpansionWork : ContractLandscapeWorkItem
+penaltiesExpansionWork =
+  doctrineExpansionWork
+    "doctrine:au:contract:penalties"
+    Contracts.penalties
+
+consumerLawExpansionWork : ContractLandscapeWorkItem
+consumerLawExpansionWork =
+  doctrineExpansionWork
+    "doctrine:au:contract:consumer-law"
+    Contracts.consumerLaw
+
+boundedSeedMissingDoctrineFrontier : List ContractLandscapeWorkItem
+boundedSeedMissingDoctrineFrontier =
+  constructionExpansionWork
+    ∷ unconscionabilityExpansionWork
+    ∷ penaltiesExpansionWork
+    ∷ consumerLawExpansionWork
+    ∷ []
+
 qld2026TemporalSliceFixture : AustralianContractsLandscapeWorklist
 qld2026TemporalSliceFixture =
   australianContractsLandscapeWorklist
@@ -322,6 +376,10 @@ record AustralianContractsLandscapeControllerBoundary : Set where
     boundedSeedOnlyIsTrue :
       boundedSeedOnly ≡ true
 
+    missingSeedDoctrinesBecomeContextResiduals : Bool
+    missingSeedDoctrinesBecomeContextResidualsIsTrue :
+      missingSeedDoctrinesBecomeContextResiduals ≡ true
+
     sourceAcquisitionMayLeaveResiduals : Bool
     sourceAcquisitionMayLeaveResidualsIsTrue :
       sourceAcquisitionMayLeaveResiduals ≡ true
@@ -350,6 +408,7 @@ canonicalAustralianContractsLandscapeControllerBoundary :
   AustralianContractsLandscapeControllerBoundary
 canonicalAustralianContractsLandscapeControllerBoundary =
   australianContractsLandscapeControllerBoundary
+    true refl
     true refl
     true refl
     true refl
