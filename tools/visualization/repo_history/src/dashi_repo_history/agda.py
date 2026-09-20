@@ -465,6 +465,43 @@ def _lookup_local(
     return None
 
 
+def _lookup_visible_binder(
+    declaration: RawDeclaration,
+    owner_module: str,
+    scope_chain: tuple[str, ...],
+    leaf: str,
+    binders_by_scope_label: dict[
+        tuple[str, str, str],
+        list[Symbol],
+    ],
+) -> Symbol | None:
+    local = _lookup_local(
+        declaration,
+        scope_chain,
+        leaf,
+    )
+    if local is not None:
+        return local
+
+    for visible_scope in scope_chain:
+        candidates = binders_by_scope_label.get(
+            (
+                owner_module,
+                visible_scope,
+                leaf,
+            ),
+            [],
+        )
+        unique = {
+            candidate.symbol_id: candidate
+            for candidate in candidates
+        }
+        if len(unique) == 1:
+            return next(iter(unique.values()))
+
+    return None
+
+
 def _smallest_owner(
     declarations: list[RawDeclaration],
     start: int,
@@ -1167,35 +1204,23 @@ def build_semantic_graph(
         for ref in declaration.references:
             leaf = ref.value.split(".")[-1]
             scope_chain = ref.scope_chain or (ref.scope,)
-            local = _lookup_local(
+            local = _lookup_visible_binder(
                 declaration,
+                owner.module,
                 scope_chain,
                 leaf,
+                binders_by_scope_label,
             )
-            if local is None:
-                for visible_scope in scope_chain:
-                    candidates = binders_by_scope_label.get(
-                        (
-                            owner.module,
-                            visible_scope,
-                            leaf,
-                        ),
-                        [],
-                    )
-                    unique = {
-                        candidate.symbol_id: candidate
-                        for candidate in candidates
-                    }
-                    if len(unique) == 1:
-                        local = next(iter(unique.values()))
-                        break
 
             if local is not None:
-                relation_kind = (
-                    "value-flows"
-                    if ref.kind == "body-depends"
-                    else ref.kind
-                )
+                if ref.kind == "body-depends":
+                    relation_kind = (
+                        "calls"
+                        if ref.prefix_application_head
+                        else "value-flows"
+                    )
+                else:
+                    relation_kind = ref.kind
                 relation = Relation(
                     source=local.symbol_id,
                     target=owner.symbol_id,
@@ -1209,17 +1234,26 @@ def build_semantic_graph(
                     and not ref.prefix_application_head
                     and ref.application_head
                 ):
-                    head_target = _resolve_reference(
-                        ref=ref.application_head,
-                        owner_module=owner.module,
-                        by_module_label=by_module_label,
-                        by_scoped_label=by_scoped_label,
-                        scope_chain=scope_chain,
-                        open_scopes=open_scopes_by_module.get(
-                            owner.module,
-                            [],
-                        ),
+                    head_leaf = ref.application_head.split(".")[-1]
+                    head_target = _lookup_visible_binder(
+                        declaration,
+                        owner.module,
+                        scope_chain,
+                        head_leaf,
+                        binders_by_scope_label,
                     )
+                    if head_target is None:
+                        head_target = _resolve_reference(
+                            ref=ref.application_head,
+                            owner_module=owner.module,
+                            by_module_label=by_module_label,
+                            by_scoped_label=by_scoped_label,
+                            scope_chain=scope_chain,
+                            open_scopes=open_scopes_by_module.get(
+                                owner.module,
+                                [],
+                            ),
+                        )
                     if head_target is not None:
                         argument_relation = Relation(
                             source=local.symbol_id,
