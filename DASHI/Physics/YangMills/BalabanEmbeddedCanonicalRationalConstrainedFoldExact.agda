@@ -7,7 +7,7 @@ module DASHI.Physics.YangMills.BalabanEmbeddedCanonicalRationalConstrainedFoldEx
 -- No competing scalar ABI is introduced.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
@@ -19,19 +19,17 @@ import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Ex
 import DASHI.Physics.YangMills.BalabanClayP3CanonicalRationalConstrainedSumExact as Canonical
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact as Integral
 
-realSelectedFold :
+realFold :
   ∀ {Fine Coarse}
     (embedding : RingEmbed.RationalRealRingEmbedding)
     (dataSet : Canonical.CanonicalRationalConstrainedSumData Fine Coarse) →
-  List Fine → (Fine → ℚ) → Coarse → ℝ
-realSelectedFold embedding dataSet fields value coarse =
+  List Fine → (Fine → ℚ) → ℝ
+realFold embedding dataSet fields value =
   RingEmbed.realSum fields
     (λ fine →
       AddEmbed.Embed.embed
         (AddEmbed.base (RingEmbed.additive embedding))
-        (Integral.selectedWith
-          (Canonical.canonicalRationalConstrainedSum dataSet)
-          value coarse fine))
+        (value fine))
 
 embeddedFoldSelectedExact :
   ∀ {Fine Coarse}
@@ -44,7 +42,7 @@ embeddedFoldSelectedExact :
       (Canonical.canonicalRationalConstrainedSum dataSet)
       value coarse fields)
   ≡
-  realSelectedFold embedding dataSet fields value coarse
+  realFold embedding dataSet fields value
 embeddedFoldSelectedExact embedding dataSet [] value coarse =
   AddEmbed.Embed.zeroExact
     (AddEmbed.base (RingEmbed.additive embedding))
@@ -64,6 +62,17 @@ embeddedFoldSelectedExact embedding dataSet (fine ∷ fields) value coarse =
       (embeddedFoldSelectedExact
         embedding dataSet fields value coarse))
 
+realConstrainedFold :
+  ∀ {Fine Coarse}
+    (embedding : RingEmbed.RationalRealRingEmbedding)
+    (dataSet : Canonical.CanonicalRationalConstrainedSumData Fine Coarse) →
+  List Fine → (Fine → ℚ) → Coarse → ℝ
+realConstrainedFold embedding dataSet fields weight coarse =
+  realFold embedding dataSet fields
+    (Integral.selectedWith
+      (Canonical.canonicalRationalConstrainedSum dataSet)
+      weight coarse)
+
 embeddedConstrainedIntegralExact :
   ∀ {Fine Coarse}
     (embedding : RingEmbed.RationalRealRingEmbedding)
@@ -75,12 +84,7 @@ embeddedConstrainedIntegralExact :
       (Canonical.canonicalRationalConstrainedSum dataSet)
       fields weight coarse)
   ≡
-  realSelectedFold embedding dataSet
-    fields
-    (Integral.selectedWith
-      (Canonical.canonicalRationalConstrainedSum dataSet)
-      weight coarse)
-    coarse
+  realConstrainedFold embedding dataSet fields weight coarse
 embeddedConstrainedIntegralExact embedding dataSet fields weight coarse =
   embeddedFoldSelectedExact embedding dataSet
     fields
