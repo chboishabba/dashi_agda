@@ -180,3 +180,5 @@ import DASHI.Education.DigitalESDERICStudyInteropExact
 import DASHI.Education.DigitalESDERICStudyInteropRegression
 import DASHI.Education.DigitalESDERICStudyExecutionExact
 import DASHI.Education.DigitalESDERICStudyExecutionRegression
+import DASHI.Education.DigitalESDSelectiveFullTextMaterialisationExact
+import DASHI.Education.DigitalESDSelectiveFullTextMaterialisationRegression
