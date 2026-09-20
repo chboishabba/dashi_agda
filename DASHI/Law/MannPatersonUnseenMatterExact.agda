@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Maybe using (just; nothing)
 
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
 import DASHI.Law.SensibLawProductionLegalRuntimeABIExact as Runtime
@@ -102,10 +103,12 @@ mannTrace =
       "matter:au:hca:2019:32"
       "Mann v Paterson Constructions Pty Ltd"
       Contracts.matterNode
-      Contracts.restitution
+      (just Contracts.restitution)
       "AU"
-      "court:HCA"
-      "2019-10-09"
+      (just "court:HCA")
+      (just "2019-10-09")
+      nothing
+      nothing
       Contracts.primaryCaseLaw
       Contracts.official
       "[2019] HCA 32"
@@ -116,10 +119,12 @@ mannTrace =
       "legislation:vic:domestic-building-contracts-act-1995:s38"
       "Domestic Building Contracts Act 1995 (Vic) s 38"
       Contracts.legislationNode
-      Contracts.restitution
+      (just Contracts.restitution)
       "AU-VIC"
-      "legislature:VIC"
-      "current"
+      nothing
+      nothing
+      nothing
+      nothing
       Contracts.primaryLegislation
       Contracts.official
       "Domestic Building Contracts Act 1995 (Vic) s 38"
