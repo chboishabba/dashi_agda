@@ -62,64 +62,22 @@ parallelogram E I
     by = C3.embedInteger E qy
     bz = C3.embedInteger E qz
   in
-  trans
-    (cong
-      (λ d2 →
-        d2
-        + C3.normSquared I
-            (Z3.addMode (Z3.mode px py pz) (Z3.mode qx qy qz)))
-      (C3.normSquaredMeaning I
-        (differenceMode (Z3.mode px py pz) (Z3.mode qx qy qz))))
-    (let
-      endpoint :
-        ((ax - bx) * (ax - bx)
-          + (ay - by) * (ay - by))
-          + (az - bz) * (az - bz)
-          + C3.normSquared I
-              (Z3.addMode (Z3.mode px py pz) (Z3.mode qx qy qz))
-        ≡
-        two *
-          (C3.normSquared I (Z3.mode px py pz)
-            + C3.normSquared I (Z3.mode qx qy qz))
-      endpoint
-        rewrite C3.normSquaredMeaning I (Z3.mode px py pz)
-              | C3.normSquaredMeaning I (Z3.mode qx qy qz)
-              | C3.normSquaredMeaning I
-                  (Z3.addMode (Z3.mode px py pz) (Z3.mode qx qy qz))
-              | C3.embedAdd E px qx
-              | C3.embedAdd E py qy
-              | C3.embedAdd E pz qz =
-        solve (ax ∷ ay ∷ az ∷ bx ∷ by ∷ bz ∷ [])
-
-      differenceMeaning :
-        C3.normSquared I
-          (differenceMode (Z3.mode px py pz) (Z3.mode qx qy qz))
-        ≡
-        ((ax - bx) * (ax - bx)
-          + (ay - by) * (ay - by))
-          + (az - bz) * (az - bz)
-      differenceMeaning
-        rewrite C3.normSquaredMeaning I
-          (differenceMode (Z3.mode px py pz) (Z3.mode qx qy qz))
-              | C3.embedAdd E px (- qx)
-              | C3.embedAdd E py (- qy)
-              | C3.embedAdd E pz (- qz)
-              | C3.embedNegate E qx
-              | C3.embedNegate E qy
-              | C3.embedNegate E qz =
-        solve (ax ∷ ay ∷ az ∷ bx ∷ by ∷ bz ∷ [])
-    in
-    subst
-      (λ d2 →
-        d2
-          + C3.normSquared I
-              (Z3.addMode (Z3.mode px py pz) (Z3.mode qx qy qz))
-        ≡
-        two *
-          (C3.normSquared I (Z3.mode px py pz)
-            + C3.normSquared I (Z3.mode qx qy qz)))
-      (sym differenceMeaning)
-      endpoint)
+  rewrite C3.normSquaredMeaning I
+            (differenceMode (Z3.mode px py pz) (Z3.mode qx qy qz))
+        | C3.normSquaredMeaning I
+            (Z3.addMode (Z3.mode px py pz) (Z3.mode qx qy qz))
+        | C3.normSquaredMeaning I (Z3.mode px py pz)
+        | C3.normSquaredMeaning I (Z3.mode qx qy qz)
+        | C3.embedAdd E px (- qx)
+        | C3.embedAdd E py (- qy)
+        | C3.embedAdd E pz (- qz)
+        | C3.embedNegate E qx
+        | C3.embedNegate E qy
+        | C3.embedNegate E qz
+        | C3.embedAdd E px qx
+        | C3.embedAdd E py qy
+        | C3.embedAdd E pz qz =
+    solve (ax ∷ ay ∷ az ∷ bx ∷ by ∷ bz ∷ [])
 
 resonantParallelogram :
   (E : C3.IntegerEmbedding F) →
