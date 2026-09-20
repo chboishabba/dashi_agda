@@ -1,7 +1,7 @@
 module DASHI.Law.SensibLawNativeLegalFollowCLIRegression where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawNativeLegalFollowCLIExact as CLI
