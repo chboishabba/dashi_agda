@@ -1,7 +1,9 @@
 module DASHI.Law.AustralianContractsLegalFollowRegression where
 
 open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
 
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
 import DASHI.Law.WaltonsEstoppelMaterialisationExact as Waltons
 import DASHI.Law.MannPatersonUnseenMatterExact as Mann
@@ -25,7 +27,7 @@ mannBoundaryPaid : mannBoundaryExists
 mannBoundaryPaid = Mann.canonicalMannUnseenMatterAcceptanceBoundary
 
 qldAsAtNonFactorabilityExists :
-  Contracts.NF.FactorsThrough
+  NF.FactorsThrough
     Contracts.coarsePrivityProjection
     Contracts.operativePrivityRoute
   → ⊥
