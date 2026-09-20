@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -30,7 +31,7 @@ def parser_record(unit_ref: str, revision_ref: str) -> dict:
         "source_role": "screened-digital-esd-study",
         "language": "en",
         "revision_ref": revision_ref,
-        "manifestation": {"source_text_sha256": "a" * 64},
+        "manifestation": {"source_text_sha256": revision_ref.removeprefix("fulltext-sha256:")},
         "parser_receipt": {
             "document_ref": "document:test",
             "parser_model": "fixture-parser",
@@ -61,13 +62,14 @@ def parser_record(unit_ref: str, revision_ref: str) -> dict:
 def test_retained_fulltext_compiles_to_19_coordinate_candidate_packet(tmp_path: Path) -> None:
     text_path = tmp_path / "paper.txt"
     text_path.write_text("fixture", encoding="utf-8")
+    digest = hashlib.sha256(text_path.read_bytes()).hexdigest()
     fulltext = tmp_path / "fulltext.jsonl"
     write_jsonl(fulltext, [{
         "source_identity_reference": "ERIC:EJ1",
         "screening_decision_reference": "decision:1",
         "screening_decision": "probable",
         "text_path": str(text_path),
-        "full_text_sha256": "c" * 64,
+        "full_text_sha256": digest,
         "full_text_obtained": True,
         "same_object_identity_review_reference": "identity-review:1",
         "language": "en",
@@ -88,7 +90,7 @@ def test_retained_fulltext_compiles_to_19_coordinate_candidate_packet(tmp_path: 
     write_jsonl(manifest, [{
         "source_unit_ref": unit["source_unit_ref"],
         "record_path": str(record_path),
-        "source_text_sha256": "a" * 64,
+        "source_text_sha256": digest,
     }])
     out = tmp_path / "packets"
     subprocess.run(
