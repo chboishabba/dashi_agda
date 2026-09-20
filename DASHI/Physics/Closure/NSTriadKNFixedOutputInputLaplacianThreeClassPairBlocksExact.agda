@@ -17,9 +17,13 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianThreeClassPairBlo
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ; _+_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
 import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianBonyPairBlocksExact as B16
 
 record ThreeClassPairBlocks : Set where
@@ -78,9 +82,9 @@ sixBlockTotalIsSixteenBlockTotal blocks =
     ∷ [])
 
 pairDifferenceIsSixThreeClassBlocks :
-  (rate work : _ → ℚ) →
-  (items : _) →
-  B16.Pair.pairDifferenceWorkSum rate work items
+  (rate work : Physical.PhysicalTriadIncidence → ℚ) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  Pair.pairDifferenceWorkSum rate work items
   ≡ sixBlockTotal (fromSixteen (B16.pairBlocks rate work items))
 pairDifferenceIsSixThreeClassBlocks rate work items =
   let
