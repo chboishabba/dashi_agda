@@ -834,6 +834,27 @@ rvMCountingRemainderNowSoleCollectiveHighDebt :
     R2Horizontal.canonicalNormalizedHorizontalCorrectionBoundary ≡ false
 rvMCountingRemainderNowSoleCollectiveHighDebt = refl
 
+
+normalizedFiniteAbelCompilerNowSourceWritten :
+  R2RvMAbel.NormalizedRvMAbelCompilerBoundary.finiteAbelIdentitySourceWritten
+    R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ true
+normalizedFiniteAbelCompilerNowSourceWritten = refl
+
+normalizedMainRemainderSplitNowSourceWritten :
+  R2RvMAbel.NormalizedRvMAbelCompilerBoundary.exactMainRemainderPairSplitSourceWritten
+    R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ true
+normalizedMainRemainderSplitNowSourceWritten = refl
+
+theoremBearingRvMMainCountStillOpen :
+  R2RvMAbel.NormalizedRvMAbelCompilerBoundary.theoremBearingRvMMainCountRealizationPaid
+    R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ false
+theoremBearingRvMMainCountStillOpen = refl
+
+smoothMainPairFourierCancellationStillOpen :
+  R2RvMAbel.NormalizedRvMAbelCompilerBoundary.smoothMainPairFourierCancellationPaid
+    R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ false
+smoothMainPairFourierCancellationStillOpen = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
