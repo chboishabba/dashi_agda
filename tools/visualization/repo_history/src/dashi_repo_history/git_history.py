@@ -53,6 +53,7 @@ def fetch_seed_commits(
 def read_commit_dag(
     repo: Path,
     seeds: list[str] | None = None,
+    refs: list[str] | None = None,
 ) -> list[CommitRecord]:
     refs = read_refs(repo)
     refs_by_sha: dict[str, list[str]] = {}
@@ -65,8 +66,11 @@ def read_commit_dag(
         "--reverse",
         "--parents",
         "--timestamp",
-        "--all",
     ]
+    if refs:
+        rev_args.extend(refs)
+    else:
+        rev_args.append("--all")
     rev_args.extend(seeds or [])
     raw = _run_text(repo, *rev_args)
     commits: list[CommitRecord] = []
@@ -177,6 +181,7 @@ class HistoryExtractor:
     repo: Path
     path_prefix: str | None = None
     seed_commits: tuple[str, ...] = ()
+    history_refs: tuple[str, ...] = ()
     adapter: LanguageAdapter = field(default_factory=AgdaLanguageAdapter)
 
     def __post_init__(self) -> None:
@@ -219,6 +224,7 @@ class HistoryExtractor:
         all_commits = read_commit_dag(
             self.repo,
             list(self.seed_commits),
+            list(self.history_refs),
         )
         commits = select_commit_window(
             all_commits,
