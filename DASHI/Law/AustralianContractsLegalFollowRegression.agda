@@ -7,6 +7,7 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
 import DASHI.Law.WaltonsEstoppelMaterialisationExact as Waltons
 import DASHI.Law.MannPatersonUnseenMatterExact as Mann
+import DASHI.Law.AustralianContractsLandscapeControllerExact as Landscape
 
 contractsBoundaryExists : Set
 contractsBoundaryExists = Contracts.AustralianContractsFollowBoundary
@@ -33,3 +34,12 @@ qldAsAtNonFactorabilityExists :
   → ⊥
 qldAsAtNonFactorabilityExists =
   Contracts.coarseDoctrineLabelCannotRecoverAsAtRoute
+
+
+landscapeControllerBoundaryExists : Set
+landscapeControllerBoundaryExists =
+  Landscape.AustralianContractsLandscapeControllerBoundary
+
+landscapeControllerBoundaryPaid : landscapeControllerBoundaryExists
+landscapeControllerBoundaryPaid =
+  Landscape.canonicalAustralianContractsLandscapeControllerBoundary
