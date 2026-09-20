@@ -326,6 +326,7 @@ import DASHI.Physics.Closure.NSTriadKNR571HermitianStateDifferenceEnvelopeExact
 -- tranche.  B isolates the single physical M2 payment, A composes the shared
 -- signed core with compensated Lebesgue aggregation, and C/D expose the
 -- canonical native either/or released theorem boundary.
+import DASHI.Physics.Closure.NSTriadKNR571PreferredOneSidedSecondMomentExact
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalWeightedSecondMomentEndgameExact
 import DASHI.Physics.Closure.NSWholeSpaceSignedLebesgueEndgameExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDNativeAnyOneCutExact
