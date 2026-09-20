@@ -324,6 +324,53 @@ record ContractLandscapeExpansionReceipt : Set where
 
 open ContractLandscapeExpansionReceipt public
 
+data WaltonsS14SyncStage : Set where
+  waltonsBootstrapStage : WaltonsS14SyncStage
+  reviewedIdentityStage : WaltonsS14SyncStage
+  reviewedPropositionStage : WaltonsS14SyncStage
+  reviewedTreatmentStage : WaltonsS14SyncStage
+
+waltonsS14StageOrder : List WaltonsS14SyncStage
+waltonsS14StageOrder =
+  waltonsBootstrapStage
+    ∷ reviewedIdentityStage
+    ∷ reviewedPropositionStage
+    ∷ reviewedTreatmentStage
+    ∷ []
+
+record WaltonsS14ReviewedSync : Set where
+  constructor waltonsS14ReviewedSync
+  field
+    stageOrder : List WaltonsS14SyncStage
+    typedRustInProcess : Bool
+    typedRustInProcessIsTrue : typedRustInProcess ≡ true
+    jsonIsSemanticCommandTransport : Bool
+    jsonIsSemanticCommandTransportIsFalse :
+      jsonIsSemanticCommandTransport ≡ false
+    reviewedResidualsPreserved : Bool
+    reviewedResidualsPreservedIsTrue :
+      reviewedResidualsPreserved ≡ true
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+    createsCurrentLawConclusion : Bool
+    createsCurrentLawConclusionIsFalse :
+      createsCurrentLawConclusion ≡ false
+
+open WaltonsS14ReviewedSync public
+
+canonicalWaltonsS14ReviewedSync : WaltonsS14ReviewedSync
+canonicalWaltonsS14ReviewedSync =
+  waltonsS14ReviewedSync
+    waltonsS14StageOrder
+    true refl
+    false refl
+    true refl
+    true refl
+    false refl
+    false refl
+
 record ContractLandscapeAdaptiveTrajectory : Set where
   constructor contractLandscapeAdaptiveTrajectory
   field
