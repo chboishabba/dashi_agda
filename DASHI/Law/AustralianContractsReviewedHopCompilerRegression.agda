@@ -39,3 +39,28 @@ reviewedHopStillFeedsAdaptiveDelta :
 reviewedHopStillFeedsAdaptiveDelta =
   Compiler.reviewedHopFeedsExistingAdaptiveDeltaIsTrue
     Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+
+
+reviewedAliasMayResolveTreatmentIdentity :
+  Compiler.reviewedDocumentAliasMayResolveTreatmentIdentity
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+    ≡ true
+reviewedAliasMayResolveTreatmentIdentity =
+  Compiler.reviewedDocumentAliasMayResolveTreatmentIdentityIsTrue
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+
+rawOalcDocumentStillDoesNotCreateAlias :
+  Compiler.rawOalcDocumentCreatesCanonicalAlias
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+    ≡ false
+rawOalcDocumentStillDoesNotCreateAlias =
+  Compiler.rawOalcDocumentCreatesCanonicalAliasIsFalse
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+
+reviewedAliasStillDoesNotRewriteSourceIdentity :
+  Compiler.reviewedAliasRewritesSourceDocumentIdentity
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+    ≡ false
+reviewedAliasStillDoesNotRewriteSourceIdentity =
+  Compiler.reviewedAliasRewritesSourceDocumentIdentityIsFalse
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
