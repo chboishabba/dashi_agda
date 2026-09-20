@@ -44,10 +44,15 @@ def _render(args: argparse.Namespace) -> None:
         env["DASHI_REPO_EPISODE_INDEX"] = str(args.episode_index)
     if args.target_commit is not None:
         env["DASHI_REPO_TARGET_COMMIT"] = str(args.target_commit)
+    if args.symbol is not None:
+        env["DASHI_REPO_SYMBOL"] = str(args.symbol)
+    env["DASHI_REPO_UPSTREAM_DEPTH"] = str(args.upstream_depth)
+    env["DASHI_REPO_DOWNSTREAM_DEPTH"] = str(args.downstream_depth)
 
     scene_by_mode = {
         "history": "RepositoryHistoryScene",
         "snapshot": "SemanticSnapshotScene",
+        "symbol": "SemanticSymbolScene",
         "semantic-history": "SemanticHistoryScene",
         "episode": "SemanticBranchEpisodeScene",
         "merge": "SemanticMergeScene",
@@ -183,11 +188,17 @@ def build_parser() -> argparse.ArgumentParser:
     )
     render.add_argument(
         "--scene",
-        choices=["history", "snapshot", "semantic-history", "episode", "merge"],
+        choices=["history", "snapshot", "symbol", "semantic-history", "episode", "merge"],
         default="history",
     )
     render.add_argument("--snapshot-index", type=int)
     render.add_argument("--episode-index", type=int)
+    render.add_argument(
+        "--symbol",
+        help="Semantic symbol id or unique label for the rooted symbol scene.",
+    )
+    render.add_argument("--upstream-depth", type=int, default=2)
+    render.add_argument("--downstream-depth", type=int, default=0)
     render.add_argument(
         "--target-commit",
         help="Target commit for the first-parent semantic-history lineage.",
