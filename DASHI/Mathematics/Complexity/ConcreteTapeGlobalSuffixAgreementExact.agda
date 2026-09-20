@@ -19,6 +19,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalSuffixAgreementExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Empty using (⊥-elim)
 import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -52,11 +53,9 @@ plainSuffixAfterHead
     (Local.headed prefixState prefixSymbol ∷ prefix)
     suffix
     (WF.headHere restPlain) =
-  Data.Empty.⊥-elim
+  ⊥-elim
     (Reconstruct.plainCellsCannotContainLaterHead
       prefix suffix restPlain)
-  where
-    open import Data.Empty using ()
 
 afterExtractedSuffixIsPlain :
   ∀ {machine rule before after}
@@ -118,19 +117,33 @@ transportAllToCommonPrefix :
     (Pattern.LegalWindowForRule machine rule)
     (Whole.scanWindowsCells machine
       (Local.append
-        (Center.beforePrefix extracted)
-        (Local.oldLeft (Center.window extracted)
-          ∷ Local.oldCenter (Center.window extracted)
-          ∷ Local.oldRight (Center.window extracted)
-          ∷ Center.beforeSuffix extracted))
+        (Center.beforePrefix
+          (Center.centeredOccurrenceFromGlobalScan scan))
+        (Local.oldLeft
+          (Center.window
+            (Center.centeredOccurrenceFromGlobalScan scan))
+          ∷ Local.oldCenter
+            (Center.window
+              (Center.centeredOccurrenceFromGlobalScan scan))
+          ∷ Local.oldRight
+            (Center.window
+              (Center.centeredOccurrenceFromGlobalScan scan))
+          ∷ Center.beforeSuffix
+            (Center.centeredOccurrenceFromGlobalScan scan)))
       (Local.append
-        (Center.beforePrefix extracted)
-        (Local.newLeft (Center.window extracted)
-          ∷ Local.newCenter (Center.window extracted)
-          ∷ Local.newRight (Center.window extracted)
-          ∷ Center.afterSuffix extracted)))
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
+        (Center.beforePrefix
+          (Center.centeredOccurrenceFromGlobalScan scan))
+        (Local.newLeft
+          (Center.window
+            (Center.centeredOccurrenceFromGlobalScan scan))
+          ∷ Local.newCenter
+            (Center.window
+              (Center.centeredOccurrenceFromGlobalScan scan))
+          ∷ Local.newRight
+            (Center.window
+              (Center.centeredOccurrenceFromGlobalScan scan))
+          ∷ Center.afterSuffix
+            (Center.centeredOccurrenceFromGlobalScan scan))))
 transportAllToCommonPrefix scan refl =
   Prefix.transportAllToDecomposedRows
     (Center.beforeDecomposition extracted)
@@ -167,21 +180,35 @@ decomposedRowLengthsAgree :
     (scan : Whole.GlobalTransitionScan machine rule before after) →
   Coordinate.listLength
     (Local.append
-      (Center.beforePrefix extracted)
-      (Local.oldLeft (Center.window extracted)
-        ∷ Local.oldCenter (Center.window extracted)
-        ∷ Local.oldRight (Center.window extracted)
-        ∷ Center.beforeSuffix extracted))
+      (Center.beforePrefix
+        (Center.centeredOccurrenceFromGlobalScan scan))
+      (Local.oldLeft
+        (Center.window
+          (Center.centeredOccurrenceFromGlobalScan scan))
+        ∷ Local.oldCenter
+          (Center.window
+            (Center.centeredOccurrenceFromGlobalScan scan))
+        ∷ Local.oldRight
+          (Center.window
+            (Center.centeredOccurrenceFromGlobalScan scan))
+        ∷ Center.beforeSuffix
+          (Center.centeredOccurrenceFromGlobalScan scan)))
   ≡
   Coordinate.listLength
     (Local.append
-      (Center.afterPrefix extracted)
-      (Local.newLeft (Center.window extracted)
-        ∷ Local.newCenter (Center.window extracted)
-        ∷ Local.newRight (Center.window extracted)
-        ∷ Center.afterSuffix extracted))
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
+      (Center.afterPrefix
+        (Center.centeredOccurrenceFromGlobalScan scan))
+      (Local.newLeft
+        (Center.window
+          (Center.centeredOccurrenceFromGlobalScan scan))
+        ∷ Local.newCenter
+          (Center.window
+            (Center.centeredOccurrenceFromGlobalScan scan))
+        ∷ Local.newRight
+          (Center.window
+            (Center.centeredOccurrenceFromGlobalScan scan))
+        ∷ Center.afterSuffix
+          (Center.centeredOccurrenceFromGlobalScan scan)))
 decomposedRowLengthsAgree scan =
   trans
     (sym (cong Coordinate.listLength
@@ -219,12 +246,16 @@ suffixLengthsAgree :
   ∀ {machine rule before after}
     (scan : Whole.GlobalTransitionScan machine rule before after) →
   (prefixEquality :
-    Center.beforePrefix extracted
-    ≡ Center.afterPrefix extracted) →
-  Coordinate.listLength (Center.beforeSuffix extracted)
-  ≡ Coordinate.listLength (Center.afterSuffix extracted)
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
+    Center.beforePrefix
+      (Center.centeredOccurrenceFromGlobalScan scan)
+    ≡ Center.afterPrefix
+      (Center.centeredOccurrenceFromGlobalScan scan)) →
+  Coordinate.listLength
+    (Center.beforeSuffix
+      (Center.centeredOccurrenceFromGlobalScan scan))
+  ≡ Coordinate.listLength
+      (Center.afterSuffix
+        (Center.centeredOccurrenceFromGlobalScan scan))
 suffixLengthsAgree scan refl =
   cancelCommonPrefixAndTriple
     (Center.beforePrefix extracted)
@@ -288,12 +319,14 @@ suffixAgreementFromGlobalLegality :
   WF.ExactlyOneHead (Local.cells before) →
   WF.ExactlyOneHead (Local.cells after) →
   (prefixEquality :
-    Center.beforePrefix extracted
-    ≡ Center.afterPrefix extracted) →
-  Center.beforeSuffix extracted
-  ≡ Center.afterSuffix extracted
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
+    Center.beforePrefix
+      (Center.centeredOccurrenceFromGlobalScan scan)
+    ≡ Center.afterPrefix
+      (Center.centeredOccurrenceFromGlobalScan scan)) →
+  Center.beforeSuffix
+    (Center.centeredOccurrenceFromGlobalScan scan)
+  ≡ Center.afterSuffix
+      (Center.centeredOccurrenceFromGlobalScan scan)
 suffixAgreementFromGlobalLegality scan beforeUnique afterUnique prefixEquality
     with Reconstruct.beforeExtractedContextIsPlain scan beforeUnique
        | afterExtractedSuffixIsPlain scan afterUnique
