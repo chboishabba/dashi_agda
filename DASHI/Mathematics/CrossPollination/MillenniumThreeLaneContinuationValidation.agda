@@ -387,3 +387,23 @@ bsdActualEllipticCoefficientMajorantStillOpen :
     BSDBasel.canonicalEllipticDirichletBaselMajorantBoundary
   ≡ false
 bsdActualEllipticCoefficientMajorantStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- EIGHTH CONTINUATION: centered occurrence + common outside context -> actual
+-- well-formed machine step.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalRewriteReconstructionExact as PNPReconstruct
+
+pnpCommonOutsideCompilesToStep :
+  PNPReconstruct.commonOutsideContextToWellFormedStepPaid
+    PNPReconstruct.canonicalConcreteTapeGlobalRewriteReconstructionBoundary
+  ≡ true
+pnpCommonOutsideCompilesToStep = refl
+
+pnpGlobalLegalityOutsideEqualityStillOpen :
+  PNPReconstruct.globalLegalityForcesOutsideAgreementPaid
+    PNPReconstruct.canonicalConcreteTapeGlobalRewriteReconstructionBoundary
+  ≡ false
+pnpGlobalLegalityOutsideEqualityStillOpen = refl
