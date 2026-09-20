@@ -49,6 +49,7 @@ import DASHI.Analysis.RiemannG2CanonicalRadiusZeroPoleSignLeanDonorExact as R2Po
 import DASHI.Analysis.RiemannG2CenteredComplementSignBoundaryLeanDonorExact as R2SignBoundary
 import DASHI.Analysis.RiemannG2CenteredNearCoreSignLeanDonorExact as R2NearSign
 import DASHI.Analysis.RiemannG2CenteredOffExplicitHighLeanDonorExact as R2OffHigh
+import DASHI.Analysis.RiemannG2CenteredComplementCanonicalHighLeanDonorExact as R2CenteredHigh
 import DASHI.Analysis.RiemannG2QuantitativeScaledTaperLeanDonorExact as R2QuantTaper
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
@@ -696,6 +697,22 @@ terminalCompilerOwned :
   Clay.ClayTerminalOneLeafBoundary.theseInputsCompileRiemannHypothesisFor
     Clay.canonicalClayTerminalOneLeafBoundary ≡ true
 terminalCompilerOwned = refl
+
+
+centeredNearIsNoLongerPrimitiveR2AnalyticLeaf :
+  R2CenteredHigh.CenteredComplementCanonicalHighBoundary.independentAdaptiveFiniteNearR2EstimatePrimitive
+    R2CenteredHigh.canonicalCenteredComplementCanonicalHighBoundary ≡ false
+centeredNearIsNoLongerPrimitiveR2AnalyticLeaf = refl
+
+centeredComplementSignReducedToGammaVersusFar :
+  R2CenteredHigh.CenteredComplementCanonicalHighBoundary.centeredComplementSignReducedToGammaVersusFar
+    R2CenteredHigh.canonicalCenteredComplementCanonicalHighBoundary ≡ true
+centeredComplementSignReducedToGammaVersusFar = refl
+
+centeredReductionUsesNoFinalBalance :
+  R2CenteredHigh.CenteredComplementCanonicalHighBoundary.finalBalanceUsedToManufactureAnalyticPayment
+    R2CenteredHigh.canonicalCenteredComplementCanonicalHighBoundary ≡ false
+centeredReductionUsesNoFinalBalance = refl
 
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
