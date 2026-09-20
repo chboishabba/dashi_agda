@@ -22,6 +22,7 @@ import DASHI.Physics.YangMills.BalabanCMP122Equation171TOperationSemanticsExact 
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as RingEmbed
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4ContributionRefinementLimitExact as Limit
+import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4ContributionQuadratureExact as Quad
 
 record CMP119Equation171Gate4ContributionSourceLimit
     {trajectory split}
@@ -47,7 +48,7 @@ record CMP119Equation171Gate4ContributionSourceLimit
   field
     sourceApplicationIsEquation171Mass :
       ∀ cutoff slow →
-      Limit.Quad.embedQ embedding
+      Quad.embedQ embedding
         (Assembly.applyOperationAction semantics
           (R219.operationAt family cutoff)
           (R219.effectiveActionAt family cutoff)
@@ -69,7 +70,7 @@ sourceApplicationIsExecutableGate4Limit :
         {Component = Component} {Functional = Functional}
         semantics sourceT embedding sequenceLimit quadrature)
     cutoff slow →
-  Limit.Quad.embedQ embedding
+  Quad.embedQ embedding
     (Assembly.applyOperationAction semantics
       (R219.operationAt family cutoff)
       (R219.effectiveActionAt family cutoff)
@@ -98,7 +99,7 @@ selectedDensityEvaluationIsExecutableGate4Limit :
         {Component = Component} {Functional = Functional}
         semantics sourceT embedding sequenceLimit quadrature)
     cutoff slow →
-  Limit.Quad.embedQ embedding
+  Quad.embedQ embedding
     (Assembly.evaluateDensity semantics
       (Beta.densityAt source cutoff)
       slow)
@@ -111,7 +112,7 @@ selectedDensityEvaluationIsExecutableGate4Limit
   {semantics = semantics} dataSet cutoff slow =
   trans
     (cong
-      (Limit.Quad.embedQ _)
+      (Quad.embedQ _)
       (Assembly.selectedDensityEvaluationIsAssembledWeight
         semantics cutoff slow))
     (sourceApplicationIsExecutableGate4Limit
