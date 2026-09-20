@@ -18,6 +18,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Relation.Binary.PropositionalEquality using (trans; sym)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeIndexedWindowExact as Indexed
@@ -224,8 +225,8 @@ selectedIndexedWindowRename :
     (ruleOccurrence : Local.RuleOccurs rule (Local.rules machine))
     (windowOccurrence :
       Indexed.IndexedSixCellWindow machine before after) →
-  Data.Fin.Base.Fin (TransitionLocalWidth machine) →
-  Data.Fin.Base.Fin (TransitionGlobalWidth before after)
+  Fin.Fin (TransitionLocalWidth machine) →
+  Fin.Fin (TransitionGlobalWidth before after)
 selectedIndexedWindowRename
     stateCoverage symbolCoverage ruleOccurrence windowOccurrence =
   Placement.rename
