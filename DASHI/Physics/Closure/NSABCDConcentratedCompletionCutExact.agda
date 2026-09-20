@@ -32,6 +32,12 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedCovarianceMovingNativeExact as 
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedOptionCCompactCandidateAdapterExact as CAdapter
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedOptionDPeriodicCandidateAdapterExact as DAdapter
 import DASHI.Physics.Closure.NSConcreteReleasedCandidateAdaptersExact as Candidate
+import DASHI.Physics.Closure.NSTriadKNR567ToLiteralR571M2Exact as BR567
+import DASHI.Physics.Closure.NSWholeSpaceLowHighConvolutionProducerExact as AConv
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedPeriodicCandidateNativeExact as DSelected
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedCompactCandidateFromPeriodicExact as CSelected
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicExclusionNativeExact as DExclude
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedR3FiniteEnergyExclusionNativeExact as CExclude
 
 ------------------------------------------------------------------------
 -- A
@@ -55,6 +61,14 @@ aLowHighIntegrabilityGlueClosed =
 aCompensatedFieldFromLowHighCompilerClosed : Bool
 aCompensatedFieldFromLowHighCompilerClosed =
   AField.lowHighPiecesCompileExactCompensatedField
+
+aLowConvolutionTargetIsolated : Bool
+aLowConvolutionTargetIsolated =
+  AConv.lowCompensatedConvolutionTargetIsolated
+
+aHighInverseSixthTargetIsolated : Bool
+aHighInverseSixthTargetIsolated =
+  AConv.highInverseSixthConvolutionTargetIsolated
 
 aLowPhysicalMajorantProducerClosed : Bool
 aLowPhysicalMajorantProducerClosed = false
@@ -95,6 +109,16 @@ bSamplewiseM2SummationCompilerClosed =
 bM2ToR568CompilerClosed : Bool
 bM2ToR568CompilerClosed =
   BR568.r571PhysicalM2ToR568CompilerClosed
+
+bR567CompleteSquareAggregationClosed : Bool
+bR567CompleteSquareAggregationClosed =
+  BR567.r567CompleteSquareAggregationClosed
+
+bR567CellToR571SampleSameObjectClosed : Bool
+bR567CellToR571SampleSameObjectClosed = false
+
+bR567CellBelowR571PairedMagnitudeClosed : Bool
+bR567CellBelowR571PairedMagnitudeClosed = false
 
 bForcingSquareBelowLiteralM2Closed : Bool
 bForcingSquareBelowLiteralM2Closed = false
@@ -147,6 +171,22 @@ cCandidateFamilyToLiteralCompilerClosed =
 dCandidateFamilyToLiteralCompilerClosed : Bool
 dCandidateFamilyToLiteralCompilerClosed =
   Candidate.dComparatorWrapperRemovedFromFrontier
+
+dSelectedPeriodicCandidateBodyPorted : Bool
+dSelectedPeriodicCandidateBodyPorted =
+  DSelected.selectedPeriodicCandidateBodyPorted
+
+dPeriodicGlobalExclusionBodyPorted : Bool
+dPeriodicGlobalExclusionBodyPorted =
+  DExclude.releasedCandidateExcludesGlobalSolutionBodyPorted
+
+cSelectedCompactCandidateReusesD : Bool
+cSelectedCompactCandidateReusesD =
+  CSelected.cReusesSelectedPeriodicCandidate
+
+cR3FiniteEnergyExclusionBodyPorted : Bool
+cR3FiniteEnergyExclusionBodyPorted =
+  CExclude.releasedR3FiniteEnergyExclusionBodyPorted
 
 cActualCompactCandidateFamilyReconstructed : Bool
 cActualCompactCandidateFamilyReconstructed = false
