@@ -81,6 +81,7 @@ plainContextsAroundCenteredHead
   WF.plainCons prefixPlain , suffixPlain
 
 plainContextsAroundCenteredHead
+    {rightSymbol = rightSymbol}
     (Local.headed prefixState prefixSymbol ∷ prefix)
     suffix
     (WF.headHere restPlain) =
@@ -89,8 +90,6 @@ plainContextsAroundCenteredHead
       prefix
       (Local.plain rightSymbol ∷ suffix)
       restPlain)
-  where
-    rightSymbol = _
 
 record CenteredOutsideAgreement
     {machine : Local.ConcreteTapeMachine}
