@@ -26,6 +26,7 @@ data SymbolKind : Set where
 data EdgeKind : Set where
   containsEdge : EdgeKind
   importsEdge : EdgeKind
+  opensEdge : EdgeKind
   typeDependsEdge : EdgeKind
   bodyDependsEdge : EdgeKind
   callsEdge : EdgeKind
