@@ -140,6 +140,78 @@ selectedSourceEnvelopeBelowExponential
       (selectedWeightIsSourceExponential inputs index)
       (R415.selectedBoundaryBelowSourceDecay (expansion index)))
 
+
+physicalExponentialUpper :
+  ∀ {Domain Term Operator ScaleCarrier Volume Root SourceDirection Index
+      source sourceLeft sourceRight scaleAt volumeAt expReal embedding expansion} →
+  R415ToLiteralRealScaleInputs
+    Domain Term Operator ScaleCarrier Volume Root SourceDirection Index
+    source sourceLeft sourceRight scaleAt volumeAt expReal embedding expansion →
+  Index → ℝ
+physicalExponentialUpper {expReal = expReal} {embedding = embedding} inputs index =
+  physicalAmplitude inputs *ℝ
+    expReal
+      (-ℝ
+        Calibration.embedQ embedding
+          (Scale.physicalMass (scaleData inputs)
+            * physicalDistance inputs index))
+
+selectedSourceEnvelopeBelowPhysicalExponential :
+  ∀ {Domain Term Operator ScaleCarrier Volume Root SourceDirection Index
+      source sourceLeft sourceRight scaleAt volumeAt expReal embedding expansion}
+    (inputs :
+      R415ToLiteralRealScaleInputs
+        Domain Term Operator ScaleCarrier Volume Root SourceDirection Index
+        source sourceLeft sourceRight scaleAt volumeAt expReal embedding expansion)
+    cutoff index →
+  CMP116.sourceEnvelope source
+    (scaleAt cutoff)
+    (volumeAt cutoff)
+    (CMP116.sourceRoot source
+      (scaleAt cutoff) (volumeAt cutoff)
+      (sourceLeft index) (sourceRight index))
+    (CMP116.sourceDistance source
+      (sourceLeft index) (sourceRight index))
+  ≤ℝ
+  physicalExponentialUpper inputs index
+selectedSourceEnvelopeBelowPhysicalExponential
+    {expReal = expReal} {embedding = embedding} {expansion = expansion}
+    inputs cutoff index =
+  let
+    order = exponentialOrder inputs
+    amplitude = R415.sourceAmplitude (expansion index)
+    d = physicalDistance inputs index
+
+    sourceDecay =
+      selectedSourceEnvelopeBelowExponential inputs cutoff index
+
+    exponentOrder =
+      Calibration.embeddedPhysicalExponentBelowLatticeExponent
+        embedding (scaleData inputs) d
+        (physicalDistanceNonnegative inputs index)
+
+    decayOrder =
+      Calibration.negativeExpAntitone order exponentOrder
+
+    sourceAmplitudeDecayOrder =
+      Calibration.leftScaleNonnegative order
+        (sourceAmplitudeNonnegative inputs index)
+        decayOrder
+
+    amplitudeOrder =
+      Calibration.rightScaleNonnegative order
+        (Calibration.expNonnegative order
+          (-ℝ
+            Calibration.embedQ embedding
+              (Scale.physicalMass (scaleData inputs) * d)))
+        (sourceAmplitudeUniform inputs index)
+  in
+  Calibration.transitive order sourceDecay
+    (Calibration.transitive order sourceAmplitudeDecayOrder amplitudeOrder)
+
+r415MarkedExpansionToPhysicalExponentialLevel : ProofLevel
+r415MarkedExpansionToPhysicalExponentialLevel = machineChecked
+
 r415MarkedExpansionToSourceExponentialLevel : ProofLevel
 r415MarkedExpansionToSourceExponentialLevel = machineChecked
 
