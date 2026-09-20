@@ -41,6 +41,7 @@ module DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as Nat
 open import Data.List.Base using (List)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
@@ -137,7 +138,7 @@ record PublishedCMP116Equation126129RateSplit
       ∀ depth → 0ℝ ≤ℝ residualDecayWeight depth
     residualDecayWeightAntitone :
       ∀ {smaller larger} →
-      smaller Data.Nat.Base.≤ larger →
+      Nat._≤_ smaller larger →
       residualDecayWeight larger ≤ℝ residualDecayWeight smaller
 
     entropyAllowance : ℝ
