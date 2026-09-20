@@ -117,3 +117,28 @@ consumerLawIsResearchContextWork :
   Controller.frontierKind Controller.consumerLawExpansionWork
     ≡ Controller.researchContextExpansion
 consumerLawIsResearchContextWork = refl
+
+
+adaptiveExpansionStillRecomputesFrontier :
+  Controller.adaptiveExpansionRecomputesFrontier
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ true
+adaptiveExpansionStillRecomputesFrontier =
+  Controller.adaptiveExpansionRecomputesFrontierIsTrue
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+adaptiveExpansionStillPreservesHistory :
+  Controller.adaptiveExpansionPreservesOldSourceHistory
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ true
+adaptiveExpansionStillPreservesHistory =
+  Controller.adaptiveExpansionPreservesOldSourceHistoryIsTrue
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+adaptiveExpansionStillDoesNotFreezeOldConclusions :
+  Controller.adaptiveExpansionFreezesOldConclusions
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ false
+adaptiveExpansionStillDoesNotFreezeOldConclusions =
+  Controller.adaptiveExpansionFreezesOldConclusionsIsFalse
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
