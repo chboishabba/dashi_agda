@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Maybe using (just; nothing)
 
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
 import DASHI.Law.SensibLawLegalFollowProofSearchBridgeExact as LegalFollow
@@ -114,10 +115,12 @@ waltonsTrace =
       "case:au:hca:1988:7"
       "Waltons Stores (Interstate) Ltd v Maher"
       Contracts.caseAuthorityNode
-      Contracts.estoppel
+      (just Contracts.estoppel)
       "AU"
-      "court:HCA"
-      "1988"
+      (just "court:HCA")
+      (just "1988-02-19")
+      nothing
+      nothing
       Contracts.primaryCaseLaw
       Contracts.official
       "[1988] HCA 7; 164 CLR 387"
