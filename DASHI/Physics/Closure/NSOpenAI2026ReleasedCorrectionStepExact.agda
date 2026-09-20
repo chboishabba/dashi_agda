@@ -146,7 +146,8 @@ compileCorrectionStepEvidence :
 compileCorrectionStepEvidence producer before =
   let S = stages producer before
   in record
-    { Cycle.newAlias = pressureAlias S
+    { Cycle.newTemporalAlias = temporalAlias S
+    ; Cycle.newPressureAlias = pressureAlias S
     ; Cycle.nextLabels = Cycle.labels (afterRank S)
     ; Cycle.nextCarrier = Cycle.carrier (afterRank S)
     ; Cycle.nextRepresentation = Cycle.representation (afterRank S)
