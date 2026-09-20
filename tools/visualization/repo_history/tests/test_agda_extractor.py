@@ -828,3 +828,162 @@ outer x = (\\y -> x) x
         and unresolved["owner"] == owner.symbol_id
         for unresolved in graph.unresolved_references
     )
+
+
+def test_where_helper_is_scoped_and_called_from_outer_function():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+f : Nat -> Nat
+f x = g x
+  where
+    g : Nat -> Nat
+    g y = y
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    f_node = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function"
+        and node.label == "f"
+        and node.scope is None
+    )
+    g_node = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function"
+        and node.label == "g"
+        and node.scope is not None
+    )
+    x = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    )
+    y = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "y"
+    )
+
+    assert g_node.scope is not None
+    assert x.scope != y.scope
+    assert any(
+        edge.source == g_node.symbol_id
+        and edge.target == f_node.symbol_id
+        and edge.kind == "calls"
+        for edge in graph.edges.values()
+    )
+    assert any(
+        edge.source == x.symbol_id
+        and edge.target == g_node.symbol_id
+        and edge.kind == "argument-to"
+        for edge in graph.edges.values()
+    )
+
+
+def test_same_local_helper_name_in_distinct_where_scopes_stays_distinct():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+f : Nat -> Nat
+f x = g x
+  where
+    g : Nat -> Nat
+    g y = y
+
+h : Nat -> Nat
+h x = g x
+  where
+    g : Nat -> Nat
+    g y = y
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    gs = [
+        node for node in graph.nodes.values()
+        if node.kind == "function"
+        and node.label == "g"
+        and node.scope is not None
+    ]
+    assert len(gs) == 2
+    assert gs[0].scope != gs[1].scope
+    assert gs[0].symbol_id != gs[1].symbol_id
+
+
+def test_where_helper_can_capture_outer_pattern_binder():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+f : Nat -> Nat
+f x = g
+  where
+    g : Nat
+    g = x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    g = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function"
+        and node.label == "g"
+        and node.scope is not None
+    )
+    x = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    )
+
+    assert any(
+        edge.source == x.symbol_id
+        and edge.target == g.symbol_id
+        and edge.kind == "value-flows"
+        for edge in graph.edges.values()
+    )
+    assert not any(
+        unresolved["owner"] == g.symbol_id
+        and unresolved["reference"] == "x"
+        for unresolved in graph.unresolved_references
+    )
+
+
+def test_sibling_where_helper_does_not_see_other_helpers_clause_binder():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+f : Nat -> Nat
+f x = h
+  where
+    g : Nat -> Nat
+    g y = y
+
+    h : Nat
+    h = y
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    h = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function"
+        and node.label == "h"
+        and node.scope is not None
+    )
+
+    assert any(
+        unresolved["owner"] == h.symbol_id
+        and unresolved["reference"] == "y"
+        for unresolved in graph.unresolved_references
+    )
