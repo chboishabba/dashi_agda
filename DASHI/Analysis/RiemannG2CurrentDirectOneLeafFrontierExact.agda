@@ -823,6 +823,17 @@ horizontalCorrectionQuantitativeBoundStillOpen :
     R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ false
 horizontalCorrectionQuantitativeBoundStillOpen = refl
 
+
+normalizedHorizontalCorrectionBoundNowSourceWritten :
+  R2Horizontal.NormalizedHorizontalCorrectionBoundary.finiteHorizontalAggregateBoundSourceWritten
+    R2Horizontal.canonicalNormalizedHorizontalCorrectionBoundary ≡ true
+normalizedHorizontalCorrectionBoundNowSourceWritten = refl
+
+rvMCountingRemainderNowSoleCollectiveHighDebt :
+  R2Horizontal.NormalizedHorizontalCorrectionBoundary.rvMCountingRemainderPairBoundPaid
+    R2Horizontal.canonicalNormalizedHorizontalCorrectionBoundary ≡ false
+rvMCountingRemainderNowSoleCollectiveHighDebt = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
