@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Maybe using (Maybe; just; nothing)
 
@@ -11,6 +12,7 @@ import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
 import DASHI.Law.SensibLawNativeLegalFollowCLIExact as CLI
 import DASHI.Law.SensibLawLegalFollowProofSearchBridgeExact as LegalFollow
+import DASHI.Law.SensibLawAdaptiveLegalResearchFeedbackLoopExact as Adaptive
 
 ------------------------------------------------------------------------
 -- AUSTRALIAN CONTRACTS LANDSCAPE CONTROLLER
@@ -99,6 +101,13 @@ NativeCliBoundary = CLI.NativeLegalFollowCliBoundary
 nativeCliBoundaryPaid : NativeCliBoundary
 nativeCliBoundaryPaid =
   CLI.canonicalNativeLegalFollowCliBoundary
+
+AdaptiveResearchBoundary : Set
+AdaptiveResearchBoundary = Adaptive.AdaptiveLegalResearchFeedbackBoundary
+
+adaptiveResearchBoundaryPaid : AdaptiveResearchBoundary
+adaptiveResearchBoundaryPaid =
+  Adaptive.canonicalAdaptiveLegalResearchFeedbackBoundary
 
 ------------------------------------------------------------------------
 -- Concrete Queensland temporal-slice fixture.
@@ -275,6 +284,44 @@ qldTemporalAlternativeMustRemainRepresentable :
 qldTemporalAlternativeMustRemainRepresentable =
   Contracts.coarseDoctrineLabelCannotRecoverAsAtRoute
 
+record ContractLandscapeExpansionDelta : Set where
+  constructor contractLandscapeExpansionDelta
+  field
+    discoveredNodes : List Contracts.ContractTraceNode
+    discoveredEdges : List Contracts.ContractTraceEdge
+    provenanceReference : String
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+
+open ContractLandscapeExpansionDelta public
+
+record ContractLandscapeExpansionReceipt : Set where
+  constructor contractLandscapeExpansionReceipt
+  field
+    expansionProvenanceReference : String
+    addedNodeCount : Nat
+    addedEdgeCount : Nat
+    recomputeFrontierRequired : Bool
+    recomputeFrontierRequiredIsTrue :
+      recomputeFrontierRequired ≡ true
+    oldSourceHistoryPreserved : Bool
+    oldSourceHistoryPreservedIsTrue :
+      oldSourceHistoryPreserved ≡ true
+    oldConclusionsFrozen : Bool
+    oldConclusionsFrozenIsFalse :
+      oldConclusionsFrozen ≡ false
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+    createsCurrentLawConclusion : Bool
+    createsCurrentLawConclusionIsFalse :
+      createsCurrentLawConclusion ≡ false
+
+open ContractLandscapeExpansionReceipt public
+
 data ContractLandscapeAcquisitionOutcome : Set where
   sourceResolved : ContractLandscapeAcquisitionOutcome
   sourceResidual : ContractLandscapeAcquisitionOutcome
@@ -318,6 +365,9 @@ data LandscapeControllerAutomaticallyLegalAuthority : Set where
 data MissingLandscapeSourceAutomaticallyNegativeEvidence : Set where
 data ActAcquisitionAutomaticallyPaysSection : Set where
 data SourceReceiptAutomaticallyPaysTreatmentReview : Set where
+data AdaptiveExpansionMayFreezeOldConclusion : Set where
+data AdaptiveExpansionMayDiscardOldSourceHistory : Set where
+data AdaptiveExpansionMaySkipFrontierRecompute : Set where
 
 sourceAcquisitionDoesNotCreateTreatment :
   SourceAcquisitionAutomaticallyTreatment → ⊥
@@ -358,6 +408,18 @@ actAcquisitionDoesNotPaySection ()
 sourceReceiptDoesNotPayTreatmentReview :
   SourceReceiptAutomaticallyPaysTreatmentReview → ⊥
 sourceReceiptDoesNotPayTreatmentReview ()
+
+adaptiveExpansionDoesNotFreezeOldConclusion :
+  AdaptiveExpansionMayFreezeOldConclusion → ⊥
+adaptiveExpansionDoesNotFreezeOldConclusion ()
+
+adaptiveExpansionDoesNotDiscardOldSourceHistory :
+  AdaptiveExpansionMayDiscardOldSourceHistory → ⊥
+adaptiveExpansionDoesNotDiscardOldSourceHistory ()
+
+adaptiveExpansionDoesNotSkipRecompute :
+  AdaptiveExpansionMaySkipFrontierRecompute → ⊥
+adaptiveExpansionDoesNotSkipRecompute ()
 
 record AustralianContractsLandscapeControllerBoundary : Set where
   constructor australianContractsLandscapeControllerBoundary
@@ -406,6 +468,18 @@ record AustralianContractsLandscapeControllerBoundary : Set where
     sourceAcquisitionPaysTreatmentReviewIsFalse :
       sourceAcquisitionPaysTreatmentReview ≡ false
 
+    adaptiveExpansionRecomputesFrontier : Bool
+    adaptiveExpansionRecomputesFrontierIsTrue :
+      adaptiveExpansionRecomputesFrontier ≡ true
+
+    adaptiveExpansionPreservesOldSourceHistory : Bool
+    adaptiveExpansionPreservesOldSourceHistoryIsTrue :
+      adaptiveExpansionPreservesOldSourceHistory ≡ true
+
+    adaptiveExpansionFreezesOldConclusions : Bool
+    adaptiveExpansionFreezesOldConclusionsIsFalse :
+      adaptiveExpansionFreezesOldConclusions ≡ false
+
     controllerCreatesCurrentLawConclusion : Bool
     controllerCreatesCurrentLawConclusionIsFalse :
       controllerCreatesCurrentLawConclusion ≡ false
@@ -428,6 +502,9 @@ canonicalAustralianContractsLandscapeControllerBoundary =
     true refl
     false refl
     false refl
+    false refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
