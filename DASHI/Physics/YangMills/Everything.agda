@@ -251,3 +251,11 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exa
 import DASHI.Physics.YangMills.BalabanCMP116CauchyWeightedDerivativeRound412Exact
 import DASHI.Physics.YangMills.BalabanCMP99PathDerivativeSourceReplayRound413Exact
 import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact
+
+
+-- A/B/C literal frontier compilers: concrete OS1, selected R410 source decay, pinned C stress/AF.
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CylinderEuclideanCovarianceExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS1SystemExact
+import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StressCommonCoreExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact
