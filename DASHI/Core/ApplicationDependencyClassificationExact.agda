@@ -95,3 +95,30 @@ canonicalApplicationDependencyBoundary =
     false refl
     false refl
     false refl
+
+
+------------------------------------------------------------------------
+-- ARGUMENT-FLOW ADMISSION
+------------------------------------------------------------------------
+
+data ApplicationPosition : Set where
+  applicationHeadPosition : ApplicationPosition
+  applicationArgumentPosition : ApplicationPosition
+  standalonePosition : ApplicationPosition
+
+argumentRelation :
+  ApplicationPosition →
+  EdgeKind
+argumentRelation applicationHeadPosition = bodyDependsEdge
+argumentRelation applicationArgumentPosition = argumentToEdge
+argumentRelation standalonePosition = bodyDependsEdge
+
+argumentPositionAdmitsArgumentEdge :
+  argumentRelation applicationArgumentPosition
+    ≡ argumentToEdge
+argumentPositionAdmitsArgumentEdge = refl
+
+standaloneReferenceIsNotArgumentFlow :
+  argumentRelation standalonePosition
+    ≡ bodyDependsEdge
+standaloneReferenceIsNotArgumentFlow = refl
