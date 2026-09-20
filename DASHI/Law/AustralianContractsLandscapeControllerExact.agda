@@ -5,7 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Maybe using (Maybe)
+open import Data.Maybe using (Maybe; just; nothing)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
@@ -99,6 +99,103 @@ NativeCliBoundary = CLI.NativeLegalFollowCliBoundary
 nativeCliBoundaryPaid : NativeCliBoundary
 nativeCliBoundaryPaid =
   CLI.canonicalNativeLegalFollowCliBoundary
+
+------------------------------------------------------------------------
+-- Concrete Queensland temporal-slice fixture.
+--
+-- This is deliberately a narrow parity fixture, not a complete QLD contract
+-- landscape.  It mirrors the Rust 2026 worklist invariant: successor s 68 is
+-- active source work while predecessor s 55 remains an explicit temporal
+-- alternative.
+------------------------------------------------------------------------
+
+qld1974Section55Node : Contracts.ContractTraceNode
+qld1974Section55Node =
+  Contracts.contractTraceNode
+    "legislation:qld:property-law-act-1974:s55"
+    "Property Law Act 1974 (Qld) s 55"
+    Contracts.legislationNode
+    (just Contracts.privity)
+    "AU-QLD"
+    nothing
+    nothing
+    nothing
+    (just "2025-07-31")
+    Contracts.primaryLegislation
+    Contracts.official
+    "Property Law Act 1974 (Qld) s 55"
+    true refl
+    false refl
+
+qld2023Section68Node : Contracts.ContractTraceNode
+qld2023Section68Node =
+  Contracts.contractTraceNode
+    "legislation:qld:property-law-act-2023:s68"
+    "Property Law Act 2023 (Qld) s 68"
+    Contracts.legislationNode
+    (just Contracts.privity)
+    "AU-QLD"
+    nothing
+    (just "2025-08-01")
+    (just "2025-08-01")
+    nothing
+    Contracts.primaryLegislation
+    Contracts.official
+    "Property Law Act 2023 (Qld) s 68"
+    true refl
+    false refl
+
+qld2026ActiveSourceWork : ContractLandscapeWorkItem
+qld2026ActiveSourceWork =
+  contractLandscapeWorkItem
+    "contracts:landscape:source:legislation:qld:property-law-act-2023:s68"
+    primarySourceAcquisition
+    "legislation:qld:property-law-act-2023:s68"
+    nothing
+    (just Contracts.privity)
+    "AU-QLD"
+    "2026-09-20"
+    Contracts.primaryLegislation
+    "Property Law Act 2023 (Qld) s 68"
+    nothing
+    nothing
+    true
+    true refl
+    false refl
+    false refl
+
+qld2026TemporalAlternativeWork : ContractLandscapeWorkItem
+qld2026TemporalAlternativeWork =
+  contractLandscapeWorkItem
+    "contracts:landscape:temporal:legislation:qld:property-law-act-1974:s55"
+    temporalAlternative
+    "legislation:qld:property-law-act-1974:s55"
+    nothing
+    (just Contracts.privity)
+    "AU-QLD"
+    "2026-09-20"
+    Contracts.primaryLegislation
+    "Property Law Act 1974 (Qld) s 55"
+    nothing
+    nothing
+    false
+    true refl
+    false refl
+    false refl
+
+qld2026TemporalSliceFixture : AustralianContractsLandscapeWorklist
+qld2026TemporalSliceFixture =
+  australianContractsLandscapeWorklist
+    "landscape:au:contract-law"
+    "2026-09-20"
+    (qld2026ActiveSourceWork ∷ [])
+    []
+    []
+    (qld2026TemporalAlternativeWork ∷ [])
+    true refl
+    true refl
+    false refl
+    false refl
 
 ------------------------------------------------------------------------
 -- Queensland temporal non-factorability is a controller invariant, not just a
