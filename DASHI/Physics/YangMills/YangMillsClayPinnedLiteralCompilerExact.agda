@@ -73,6 +73,63 @@ literalClaySolutionFromPinned pinned interacting =
     (Pinned.asLiteralYangMillsConstruction pinned)
     (literalClayEvidenceFromPinned pinned interacting)
 
+
+------------------------------------------------------------------------
+-- Preferred three-theorem endpoint.
+--
+-- Nontriviality is NOT a fourth independent physical input.  Compile it from
+-- the SAME-H physical gap and SAME-family local-QFT data through Round78's
+-- standard Gaussian/free-field consequence.
+------------------------------------------------------------------------
+
+compileInteractingContinuumFromPinnedABC :
+  ∀ {C S}
+    (pinned : Pinned.PinnedYangMillsConstruction {C = C} S) →
+  T78.StandardSameHGaussianNontrivialityConsequence
+    (Pinned.asLiteralYangMillsConstruction pinned) →
+  Five.InteractingContinuumNontriviality
+    (Pinned.asLiteralYangMillsConstruction pinned)
+compileInteractingContinuumFromPinnedABC pinned standard =
+  T78.deriveInteracting standard
+    (Pinned.compilePhysicalMassGap pinned)
+    (Pinned.compileLocalQFT pinned)
+
+literalClayEvidenceFromPinnedABC :
+  ∀ {C S}
+    (pinned : Pinned.PinnedYangMillsConstruction {C = C} S) →
+  T78.StandardSameHGaussianNontrivialityConsequence
+    (Pinned.asLiteralYangMillsConstruction pinned) →
+  Top.LiteralClayEvidence
+    (Pinned.asLiteralYangMillsConstruction pinned)
+literalClayEvidenceFromPinnedABC pinned standard =
+  Five.literalClayEvidenceFromFiveTheorems
+    (Pinned.asLiteralYangMillsConstruction pinned)
+    (Pinned.compileStructuralBase pinned)
+    (Pinned.compileWeakCouplingRG pinned)
+    (Pinned.compilePhysicalMassGap pinned)
+    (Pinned.compileUnifiedContinuum pinned)
+    (Pinned.compileLocalQFT pinned)
+    (compileInteractingContinuumFromPinnedABC pinned standard)
+
+literalClaySolutionFromPinnedABC :
+  ∀ {C S}
+    (pinned : Pinned.PinnedYangMillsConstruction {C = C} S) →
+  T78.StandardSameHGaussianNontrivialityConsequence
+    (Pinned.asLiteralYangMillsConstruction pinned) →
+  Clay.ClayYangMillsSolution
+    (Top.literalClayVocabulary
+      (Pinned.asLiteralYangMillsConstruction pinned))
+literalClaySolutionFromPinnedABC pinned standard =
+  Top.literalTopDownClaySolution
+    (Pinned.asLiteralYangMillsConstruction pinned)
+    (literalClayEvidenceFromPinnedABC pinned standard)
+
+pinnedABCNontrivialityCompilerLevel : ProofLevel
+pinnedABCNontrivialityCompilerLevel = machineChecked
+
+pinnedABCToLiteralClayCompilerLevel : ProofLevel
+pinnedABCToLiteralClayCompilerLevel = machineChecked
+
 ------------------------------------------------------------------------
 -- T78 projections are definitionally the same pinned construction.
 ------------------------------------------------------------------------
