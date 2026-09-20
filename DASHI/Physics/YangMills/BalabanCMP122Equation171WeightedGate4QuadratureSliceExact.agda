@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation171WeightedGate4QuadratureSl
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -124,14 +124,12 @@ sourceTagDensityIsEmbeddedGate4 :
     slow fine
 sourceTagDensityIsEmbeddedGate4 slice cutoff slow fine =
   trans
-    (Relation.Binary.PropositionalEquality.sym
+    (sym
       (sourceTagValueIsEquation171Density
         slice cutoff slow fine))
     (Weighted.sampleIsEmbeddedSelectedOneIntegrand
       (taggedGate4Realization slice cutoff slow)
       fine)
-  where
-  import Relation.Binary.PropositionalEquality
 
 weightedEquation171SliceCompilerLevel : ProofLevel
 weightedEquation171SliceCompilerLevel = machineChecked
