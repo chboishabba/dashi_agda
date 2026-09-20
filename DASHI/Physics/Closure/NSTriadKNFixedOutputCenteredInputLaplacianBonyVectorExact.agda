@@ -59,6 +59,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredMultiplierVectorCovaria
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredInputLaplacianVectorResidualExact as Input
 import DASHI.Physics.Closure.NSTriadKNLiteralFourSignBonyRoutingRound581Exact as R581
 import DASHI.Physics.Closure.NSTriadKNFourHelicityVectorRecombinationRound576Exact as R576
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -294,6 +295,50 @@ module FixedOutputBony
   centeredResidualIsThreeBonyClasses =
     trans centeredResidualIsFourBonyClasses
       fourBonyClassesAreThreeClasses
+
+
+  mixedAggregate : C3.Complex3 F
+  mixedAggregate = R224.foldVector value items
+
+  lowHighWork highLowWork highHighWork comparableWork farLowWork : ℚ
+  lowHighWork = Work.coherentWork mixedAggregate lowHighResidual
+  highLowWork = Work.coherentWork mixedAggregate highLowResidual
+  highHighWork = Work.coherentWork mixedAggregate highHighResidual
+  comparableWork = Work.coherentWork mixedAggregate comparableResidual
+  farLowWork = Work.coherentWork mixedAggregate farLowResidual
+
+  centeredResidualWork : ℚ
+  centeredResidualWork = Work.coherentWork mixedAggregate centeredResidual
+
+  signedCenteredResidualWork : ℚ
+  signedCenteredResidualWork = 0ℚ - centeredResidualWork
+
+  centeredResidualWorkIsThreeClassWork :
+    centeredResidualWork
+    ≡ farLowWork + (highHighWork + comparableWork)
+  centeredResidualWorkIsThreeClassWork =
+    trans
+      (cong (Work.coherentWork mixedAggregate)
+        centeredResidualIsThreeBonyClasses)
+      (trans
+        (Work.workAddRight
+          mixedAggregate farLowResidual
+          (C3.complex3Add highHighResidual comparableResidual))
+        (cong
+          (farLowWork +_)
+          (Work.workAddRight
+            mixedAggregate highHighResidual comparableResidual)))
+
+  signedCenteredResidualWorkIsThreeClassWork :
+    signedCenteredResidualWork
+    ≡
+      (0ℚ - farLowWork)
+      + ((0ℚ - highHighWork) + (0ℚ - comparableWork))
+  signedCenteredResidualWorkIsThreeClassWork =
+    trans
+      (cong (0ℚ -_) centeredResidualWorkIsThreeClassWork)
+      (solve
+        (farLowWork ∷ highHighWork ∷ comparableWork ∷ []))
 
 centeredInputLaplacianFourClassVectorSplitClosed : Bool
 centeredInputLaplacianFourClassVectorSplitClosed = true
