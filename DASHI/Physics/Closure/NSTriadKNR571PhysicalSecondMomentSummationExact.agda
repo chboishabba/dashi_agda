@@ -3,30 +3,21 @@ module DASHI.Physics.Closure.NSTriadKNR571PhysicalSecondMomentSummationExact whe
 ------------------------------------------------------------------------
 -- PERIODIC B / SAMPLEWISE PHYSICAL M2 -> FINITE FAMILY PAYMENT
 --
--- The preferred R571 compiler has already reduced the signed commutator
--- remainder to the literal finite weighted second moment
+-- A pointwise payment on the SAME finite R571 family,
 --
---     M2 = sum_i w_i d_i^2.
---
--- The next analytic statement should therefore be supplied samplewise on the
--- SAME family whenever possible.  This owner proves that a pointwise physical
--- dissipation payment
---
---     w_i d_i^2 <= D_i
+--     w_i d_i^2 <= D_i,
 --
 -- sums with no cardinality factor:
 --
---     M2 <= sum_i D_i.
---
--- No cutoff-uniform estimate is manufactured here.  The theorem is the exact
--- finite aggregation step needed before time integration / R568.
+--     sum_i w_i d_i^2 <= sum_i D_i.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
-open import Data.List.Membership.Propositional using (_∈_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Membership.Propositional using (_∈_; here; there)
 open import Data.Rational.Base using (ℚ; _≤_)
+import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact as Sum
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
@@ -54,34 +45,25 @@ physicalDissipationSum :
 physicalDissipationSum P =
   Sum.sumBy (samples P) (physicalDissipation P)
 
+sumPhysicalPaymentOn :
+  (P : PhysicalSecondMomentFamilyPayment) →
+  (family : List Moment.PairedSecondMomentSample) →
+  ((sample : Moment.PairedSecondMomentSample) →
+    sample ∈ family → sample ∈ samples P) →
+  Sum.sumBy family Moment.weightedSecondMoment
+  ≤ Sum.sumBy family (physicalDissipation P)
+sumPhysicalPaymentOn P [] included = ℚP.≤-refl
+sumPhysicalPaymentOn P (sample ∷ rest) included =
+  ℚP.+-mono-≤
+    (samplePayment P sample (included sample (here refl)))
+    (sumPhysicalPaymentOn P rest
+      (λ other member → included other (there member)))
+
 finitePhysicalSecondMomentPayment :
   (P : PhysicalSecondMomentFamilyPayment) →
   physicalSecondMomentSum P ≤ physicalDissipationSum P
 finitePhysicalSecondMomentPayment P =
-  let
-    go :
-      (family : List Moment.PairedSecondMomentSample) →
-      ((sample : Moment.PairedSecondMomentSample) →
-        sample ∈ family → sample ∈ samples P) →
-      Sum.sumBy family Moment.weightedSecondMoment
-      ≤ Sum.sumBy family (physicalDissipation P)
-    go family included =
-      Sum.sumByMonotone family
-        Moment.weightedSecondMoment
-        (physicalDissipation P)
-        (λ sample → samplePayment P sample (included sample
-          (let open import Data.List.Membership.Propositional using (here)
-           in here refl)))
-  in
-  Sum.sumByMonotone
-    (samples P)
-    Moment.weightedSecondMoment
-    (physicalDissipation P)
-    (λ sample → samplePayment P sample)
-
-------------------------------------------------------------------------
--- Status.
-------------------------------------------------------------------------
+  sumPhysicalPaymentOn P (samples P) (λ sample member → member)
 
 finiteM2AggregationAddsCardinalityLoss : Bool
 finiteM2AggregationAddsCardinalityLoss = false
