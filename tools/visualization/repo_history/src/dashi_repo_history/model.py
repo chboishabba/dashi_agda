@@ -31,6 +31,7 @@ class Symbol:
     label: str
     kind: str
     module: str
+    scope: str | None
     span: SourceSpan
 
     @classmethod
@@ -41,15 +42,19 @@ class Symbol:
         kind: str,
         module: str,
         span: SourceSpan,
+        scope: str | None = None,
     ) -> "Symbol":
+        # Scope participates in semantic identity so local binders with the same
+        # name in different declarations remain distinct nodes.
         symbol_id = stable_hash(
             {
                 "module": module,
                 "label": label,
                 "kind": kind,
+                "scope": scope,
             }
         )
-        return cls(symbol_id, label, kind, module, span)
+        return cls(symbol_id, label, kind, module, scope, span)
 
 
 @dataclass(frozen=True)
