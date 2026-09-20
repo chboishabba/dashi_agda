@@ -368,3 +368,22 @@ hodgeP1GlobalQuotientStillOpen :
     HodgeCharts.canonicalProjectiveLineAffineChartsBoundary
   ≡ false
 hodgeP1GlobalQuotientStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- BSD analytic: literal Basel majorant -> constructive Dirichlet convergence.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Automorphic.EllipticDirichletBaselMajorantExact as BSDBasel
+
+bsdBaselMajorantCompilerPaid :
+  BSDBasel.baselMajorantToDirichletConvergencePaid
+    BSDBasel.canonicalEllipticDirichletBaselMajorantBoundary
+  ≡ true
+bsdBaselMajorantCompilerPaid = refl
+
+bsdActualEllipticCoefficientMajorantStillOpen :
+  BSDBasel.actualEllipticCoefficientMajorantPaid
+    BSDBasel.canonicalEllipticDirichletBaselMajorantBoundary
+  ≡ false
+bsdActualEllipticCoefficientMajorantStillOpen = refl
