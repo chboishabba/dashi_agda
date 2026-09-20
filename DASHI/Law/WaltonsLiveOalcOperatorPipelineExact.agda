@@ -52,6 +52,10 @@ record WaltonsLiveOalcPipelineBoundary : Set where
     paragraphReviewIsAutomaticIsFalse :
       paragraphReviewIsAutomatic ≡ false
 
+    paragraphReviewRequiresExplicitCompletion : Bool
+    paragraphReviewRequiresExplicitCompletionIsTrue :
+      paragraphReviewRequiresExplicitCompletion ≡ true
+
     citedByProviderResultCreatesTreatment : Bool
     citedByProviderResultCreatesTreatmentIsFalse :
       citedByProviderResultCreatesTreatment ≡ false
@@ -68,6 +72,10 @@ record WaltonsLiveOalcPipelineBoundary : Set where
     authorityIdentityRequiresReviewIsTrue :
       authorityIdentityRequiresReview ≡ true
 
+    authorityIdentityReviewRequiresExplicitCompletion : Bool
+    authorityIdentityReviewRequiresExplicitCompletionIsTrue :
+      authorityIdentityReviewRequiresExplicitCompletion ≡ true
+
     citationOccurrenceCreatesTreatment : Bool
     citationOccurrenceCreatesTreatmentIsFalse :
       citationOccurrenceCreatesTreatment ≡ false
@@ -75,6 +83,10 @@ record WaltonsLiveOalcPipelineBoundary : Set where
     treatmentRequiresReview : Bool
     treatmentRequiresReviewIsTrue :
       treatmentRequiresReview ≡ true
+
+    treatmentReviewRequiresExplicitCompletion : Bool
+    treatmentReviewRequiresExplicitCompletionIsTrue :
+      treatmentReviewRequiresExplicitCompletion ≡ true
 
     deterministicStagesResumeWithoutSemanticJson : Bool
     deterministicStagesResumeWithoutSemanticJsonIsTrue :
@@ -99,9 +111,11 @@ canonicalWaltonsLiveOalcPipelineBoundary =
   waltonsLiveOalcPipelineBoundary
     true refl
     false refl
+    true refl
     false refl
     true refl
     false refl
+    true refl
     true refl
     false refl
     true refl
