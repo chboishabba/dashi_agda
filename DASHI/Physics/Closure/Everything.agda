@@ -280,3 +280,5 @@ import DASHI.Physics.Closure.NSWholeSpaceCoherentGramQuadratureLimitExact
 
 import DASHI.Physics.Closure.NSWholeSpaceConvolutionQuadratureCompletionExact
 import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDFrontierReconciliationExact
+import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionQuadratureExact
+import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionToContinuumExact
