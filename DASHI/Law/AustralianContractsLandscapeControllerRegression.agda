@@ -176,3 +176,12 @@ multiHopTrajectoryStillRecomputesEveryHop :
 multiHopTrajectoryStillRecomputesEveryHop =
   Controller.multiHopTrajectoryRecomputesAfterEveryAcceptedHopIsTrue
     Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+
+reviewedResidualsRemainPreservedAcrossTrajectory :
+  Controller.reviewedResidualsPreservedAcrossTrajectory
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ true
+reviewedResidualsRemainPreservedAcrossTrajectory =
+  Controller.reviewedResidualsPreservedAcrossTrajectoryIsTrue
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
