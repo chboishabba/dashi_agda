@@ -15,9 +15,11 @@ open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 record FiniteNumeratorActionInvariant
     {Configuration Action : Set}
@@ -26,8 +28,8 @@ record FiniteNumeratorActionInvariant
       Limit.FinitePhysicalNormalizedFamily
         Configuration {sequenceLimit = sequenceLimit}
         limitLaws quotient division)
-    (act : Action → (Configuration → DASHI.Foundations.RealAnalysisAxioms.ℝ) →
-      Configuration → DASHI.Foundations.RealAnalysisAxioms.ℝ) : Set₁ where
+    (act : Action → (Configuration → ℝ) →
+      Configuration → ℝ) : Set₁ where
   field
     numeratorInvariant :
       ∀ cutoff action observable →
@@ -47,8 +49,8 @@ finiteNormalizedExpectationInvariantFromNumerator :
       Limit.FinitePhysicalNormalizedFamily
         Configuration {sequenceLimit = sequenceLimit}
         limitLaws quotient division)
-    (act : Action → (Configuration → DASHI.Foundations.RealAnalysisAxioms.ℝ) →
-      Configuration → DASHI.Foundations.RealAnalysisAxioms.ℝ)
+    (act : Action → (Configuration → ℝ) →
+      Configuration → ℝ)
     (invariance : FiniteNumeratorActionInvariant family act)
     cutoff action observable →
   Limit.finiteExpectation family cutoff (act action observable)
@@ -59,7 +61,7 @@ finiteNormalizedExpectationInvariantFromNumerator
   cong
     (λ numerator →
       Quotient.divide quotient numerator
-        (DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact.partitionFunction
+        (Physical.partitionFunction
           (Limit.finiteMeasure family cutoff)))
     (numeratorInvariant invariance cutoff action observable)
 
