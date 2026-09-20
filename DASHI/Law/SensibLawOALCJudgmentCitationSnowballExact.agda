@@ -11,6 +11,7 @@ open import Data.Empty using (⊥)
 import DASHI.Law.SensibLawOALCLegalFollowAttributionSnowballExact as OALC
 import DASHI.Law.SensibLawCitationAuthorityFollowExact as Follow
 import DASHI.Law.SensibLawCitationUsePropositionExact as Use
+import DASHI.Law.SensibLawProviderNeutralLegalQueryAlgebraExact as Query
 import DASHI.Law.SensibLawCitationReviewUnitDecisionGateExact as Review
 import DASHI.Law.SensibLawCullenResidualCitationReviewShortlistExact as Shortlist
 import DASHI.Law.WaltonsEstoppelMaterialisationExact as Waltons
@@ -171,6 +172,27 @@ record CitationSnowballDirective : Set where
 open CitationSnowballDirective public
 
 ------------------------------------------------------------------------
+-- Inverse treatment discovery is a distinct graph traversal.  Outbound
+-- citations in Waltons do not answer which later authorities treated Waltons.
+------------------------------------------------------------------------
+
+waltonsCitedByTraversal : Query.CitationTraversal
+waltonsCitedByTraversal =
+  Query.jadeCitedByTraversal "[1988] HCA 7"
+
+waltonsCitedByUsesGraphTraversal :
+  Query.CitationTraversal.operation waltonsCitedByTraversal
+    ≡
+  Query.citedByTraversalOperation
+waltonsCitedByUsesGraphTraversal = refl
+
+waltonsCitedByUsesJadeProvider :
+  Query.CitationTraversal.provider waltonsCitedByTraversal
+    ≡
+  Query.jadeProvider
+waltonsCitedByUsesJadeProvider = refl
+
+------------------------------------------------------------------------
 -- Formal no-collapse laws.
 ------------------------------------------------------------------------
 
@@ -251,6 +273,14 @@ record OalcJudgmentCitationSnowballBoundary : Set where
     citationFollowClassifiesTreatmentIsFalse :
       citationFollowClassifiesTreatment ≡ false
 
+    laterTreatmentUsesInverseCitedByTraversal : Bool
+    laterTreatmentUsesInverseCitedByTraversalIsTrue :
+      laterTreatmentUsesInverseCitedByTraversal ≡ true
+
+    citedByTraversalProvesFollowing : Bool
+    citedByTraversalProvesFollowingIsFalse :
+      citedByTraversalProvesFollowing ≡ false
+
     reviewedCitationUseRemainsCandidateOnly : Bool
     reviewedCitationUseRemainsCandidateOnlyIsTrue :
       reviewedCitationUseRemainsCandidateOnly ≡ true
@@ -268,6 +298,8 @@ canonicalOalcJudgmentCitationSnowballBoundary =
     true refl
     false refl
     true refl
+    true refl
+    false refl
     true refl
     false refl
     true refl
