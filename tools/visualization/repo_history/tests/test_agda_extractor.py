@@ -700,3 +700,47 @@ mk x = box x
         and edge.kind == "argument-to"
         for edge in graph.edges.values()
     )
+
+
+def test_generalized_variables_are_global_nodes_used_by_signatures():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+
+variable
+  A : Set
+  x : A
+
+idA : A -> A
+idA y = y
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    a = next(
+        node for node in graph.nodes.values()
+        if node.kind == "variable" and node.label == "A"
+    )
+    x = next(
+        node for node in graph.nodes.values()
+        if node.kind == "variable" and node.label == "x"
+    )
+    id_a = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "idA"
+    )
+
+    assert a.scope is None
+    assert x.scope is None
+    assert any(
+        edge.source == a.symbol_id
+        and edge.target == id_a.symbol_id
+        and edge.kind == "type-depends"
+        for edge in graph.edges.values()
+    )
+    assert not any(
+        unresolved["reference"] == "A"
+        and unresolved["owner"] == id_a.symbol_id
+        for unresolved in graph.unresolved_references
+    )
