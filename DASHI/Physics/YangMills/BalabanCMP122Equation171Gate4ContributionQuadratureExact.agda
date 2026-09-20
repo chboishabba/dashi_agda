@@ -256,20 +256,22 @@ equation171ToEmbeddedGate4ErrorBound :
   ≤ℝ
   Approx.combinedModulus
     (asContributionApproximation dataSet cutoff slow)
-equation171ToEmbeddedGate4ErrorBound dataSet cutoff slow =
+equation171ToEmbeddedGate4ErrorBound
+  {construction = construction} {embedding = embedding}
+  dataSet cutoff slow =
   subst
     (λ sourceValue →
       absℝ
         (sourceValue
           -ℝ
-          embedQ _
+          embedQ embedding
             (T.localizedTOperation
-              (PhysicalT.canonicalPhysicalTData _)
+              (PhysicalT.canonicalPhysicalTData construction)
               (scaleAt dataSet cutoff)
               (selectedAt dataSet cutoff)
               slow
               (T.oneFunctional
-                (PhysicalT.canonicalPhysicalTData _))))
+                (PhysicalT.canonicalPhysicalTData construction))))
       ≤ℝ
       Approx.combinedModulus
         (asContributionApproximation dataSet cutoff slow))
