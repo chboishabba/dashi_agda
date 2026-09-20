@@ -157,3 +157,35 @@ Manim `DiGraph` geometrically projects parallel typed relations sharing the
 same source/target pair to one visual edge. The JSON retains every typed
 `relation_id`; `DASHI.Visual.SemanticGraphProjectionExact` formalizes that
 this display quotient never becomes the semantic authority graph.
+
+## Rewritten-history archaeology
+
+`git rev-list --all` cannot recover commits made unreachable by a rewritten
+history. Recovered commit ids can therefore be supplied as traversal seeds:
+
+```bash
+dashi-repo-history extract ../../../.. \
+  --seed-commit 9955429d8dbe1aae4bbf3778808993cfdc6172c9 \
+  --fetch-seeds \
+  --first-commits 150 \
+  -o /tmp/dashi-archaeology.json
+```
+
+The seed is data supplied by the operator; no historical SHA is hard-coded
+into the extraction engine.
+
+## Language adapters
+
+`HistoryExtractor` depends on the `LanguageAdapter` protocol rather than Agda
+directly. The current `AgdaLanguageAdapter` supplies `.agda` suffixes,
+Tree-sitter file extraction, and semantic graph assembly. Future Lean/Rust/
+Python frontends can provide the same three operations with their own query
+resources while reusing Git history, identity, layout, merge attribution, and
+Manim scenes unchanged.
+
+## Identity across refactors
+
+Top-level declarations carry a structural fingerprint with their own spelling
+masked. Exact semantic ids remain authoritative. A unique kind+fingerprint
+match can guide visual continuity for a file move or rename; repeated/
+ambiguous fingerprints are left unmatched rather than guessed.
