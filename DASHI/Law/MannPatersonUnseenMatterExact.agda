@@ -101,6 +101,7 @@ mannTrace =
     (Contracts.contractTraceNode
       "matter:au:hca:2019:32"
       "Mann v Paterson Constructions Pty Ltd"
+      Contracts.matterNode
       Contracts.restitution
       "AU"
       "court:HCA"
@@ -114,6 +115,7 @@ mannTrace =
      Contracts.contractTraceNode
       "legislation:vic:domestic-building-contracts-act-1995:s38"
       "Domestic Building Contracts Act 1995 (Vic) s 38"
+      Contracts.legislationNode
       Contracts.restitution
       "AU-VIC"
       "legislature:VIC"
