@@ -110,6 +110,40 @@ pairTermSymmetric rate work left right =
   solve
     ( rate left ∷ rate right ∷ work left ∷ work right ∷ [])
 
+bipartiteConsRight :
+  ∀ {A : Set} →
+  (rate work : A → ℚ) →
+  (left : List A) →
+  (head : A) →
+  (right : List A) →
+  bipartitePairSum rate work left (head ∷ right)
+  ≡
+  bipartiteRow rate work head left
+    + bipartitePairSum rate work left right
+bipartiteConsRight rate work [] head right = refl
+bipartiteConsRight rate work (left ∷ rest) head right =
+  trans
+    (cong₂ _+_
+      (cong₂ _+_
+        (pairTermSymmetric rate work left head)
+        (bipartiteRowTail left rest))
+      (bipartiteConsRight rate work rest head right))
+    (solve
+      ( (rate head - rate left) * (work head - work left)
+      ∷ bipartiteRow rate work head rest
+      ∷ bipartiteRow rate work left right
+      ∷ bipartitePairSum rate work rest right
+      ∷ []))
+  where
+  bipartiteRowTail :
+    (left : A) →
+    (rest : List A) →
+    bipartiteRow rate work left (head ∷ right)
+    ≡
+    (rate left - rate head) * (work left - work head)
+      + bipartiteRow rate work left right
+  bipartiteRowTail left rest = refl
+
 bipartiteSymmetric :
   ∀ {A : Set} →
   (rate work : A → ℚ) →
