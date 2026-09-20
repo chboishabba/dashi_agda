@@ -297,3 +297,7 @@ import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionBoundaryDefectExact
 
 -- Literal A/B/C/D terminal theorem target for native kernel checking.
 import DASHI.Physics.Closure.NSLiteralClayABCDRunTargetExact
+
+import DASHI.Physics.Closure.NSConcreteFeffermanSemanticsExact
+
+import DASHI.Physics.Closure.NSConcreteLiteralClayABCDRunTargetExact
