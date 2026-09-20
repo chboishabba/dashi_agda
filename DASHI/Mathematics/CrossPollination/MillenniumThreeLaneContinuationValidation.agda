@@ -453,3 +453,29 @@ pnpSATWeldStillOpen :
     PNPSuffix.canonicalConcreteTapeGlobalSuffixAgreementBoundary
   ≡ false
 pnpSATWeldStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- ELEVENTH CONTINUATION: centered transition is derived from local legality
+-- at the unique interior head; semantic whole-row locality is now bidirectional.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as PNPIff
+
+pnpCenteredTransitionDerivedFromLegality :
+  PNPIff.centeredTransitionDerivedFromLegalityPaid
+    PNPIff.canonicalConcreteTapeLocalityCharacterizationBoundary
+  ≡ true
+pnpCenteredTransitionDerivedFromLegality = refl
+
+pnpWholeRowLocalityIffPaid :
+  PNPIff.semanticWholeRowLocalityIffPaid
+    PNPIff.canonicalConcreteTapeLocalityCharacterizationBoundary
+  ≡ true
+pnpWholeRowLocalityIffPaid = refl
+
+pnpBooleanRecognizerStillOpen :
+  PNPIff.booleanLocalRecognizerPaid
+    PNPIff.canonicalConcreteTapeLocalityCharacterizationBoundary
+  ≡ false
+pnpBooleanRecognizerStillOpen = refl
