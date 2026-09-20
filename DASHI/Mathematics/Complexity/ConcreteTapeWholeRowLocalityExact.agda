@@ -152,7 +152,8 @@ centerRewriteScanLegal
     (allCons
       Pattern.stay-overlap-plus-one
       (unchangedScanLegal
-        (Local.plain rightSymbol ∷ Local.plain next ∷ rest)))
+        (Local.plain rightSymbol ∷ Local.plain next ∷ rest)
+        (WF.plainCons (WF.plainCons restPlain))))
 
 centerRewriteScanLegal suffix WF.plainNil Local.realizes-right =
   allCons
@@ -180,7 +181,8 @@ centerRewriteScanLegal
       (allCons
         Pattern.right-overlap-plus-two
         (unchangedScanLegal
-          (Local.plain next ∷ Local.plain nextTwo ∷ rest))))
+          (Local.plain next ∷ Local.plain nextTwo ∷ rest)
+          (WF.plainCons (WF.plainCons restPlain)))))
 
 rewriteScanLegal :
   ∀ {machine rule window}
