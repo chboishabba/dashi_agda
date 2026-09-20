@@ -360,3 +360,9 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS1SystemExact
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StressCommonCoreExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact
+
+
+-- ABC literal-inhabitant continuation: OS3, R415->physical-scale, Round109 stress same-object.
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS3SystemExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116MarkedExpansionScaleExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109StressSameObjectExact
