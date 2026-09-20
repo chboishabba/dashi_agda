@@ -134,7 +134,7 @@ encodedTransitionCNFGivesLocality :
     codec rule before after →
   Locality.LocalityCharacterization
     machine rule before after
-encodedTransitionCNFGivesLocality characterization =
+encodedTransitionCNFGivesLocality {codec = codec} characterization =
   record
     { Locality.beforeInterior =
         beforeInterior characterization
@@ -148,7 +148,7 @@ encodedTransitionCNFGivesLocality characterization =
               sameRowLength characterization
           ; Locality.everyWindowLegal =
               cnfAllWindowsToSemantic
-                _
+                codec
                 (allLocalCNFsSatisfied characterization)
           }
     }
