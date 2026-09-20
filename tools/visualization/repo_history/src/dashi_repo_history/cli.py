@@ -29,8 +29,16 @@ def _render(args: argparse.Namespace) -> None:
     env["DASHI_REPO_HISTORY_JSON"] = str(Path(args.input).resolve())
     if args.snapshot_index is not None:
         env["DASHI_REPO_SNAPSHOT_INDEX"] = str(args.snapshot_index)
+    if args.merge_index is not None:
+        env["DASHI_REPO_MERGE_INDEX"] = str(args.merge_index)
 
-    scene = "SemanticSnapshotScene" if args.semantic else "RepositoryHistoryScene"
+    scene_by_mode = {
+        "history": "RepositoryHistoryScene",
+        "snapshot": "SemanticSnapshotScene",
+        "semantic-history": "SemanticHistoryScene",
+        "merge": "SemanticMergeScene",
+    }
+    scene = scene_by_mode[args.scene]
     subprocess.run(
         [
             "python",
@@ -74,8 +82,13 @@ def build_parser() -> argparse.ArgumentParser:
         default="-ql",
         choices=["-ql", "-qm", "-qh", "-qk"],
     )
-    render.add_argument("--semantic", action="store_true")
+    render.add_argument(
+        "--scene",
+        choices=["history", "snapshot", "semantic-history", "merge"],
+        default="history",
+    )
     render.add_argument("--snapshot-index", type=int)
+    render.add_argument("--merge-index", type=int)
     render.set_defaults(func=_render)
 
     return parser
