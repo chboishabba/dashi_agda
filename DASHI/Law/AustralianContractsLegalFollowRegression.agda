@@ -8,6 +8,7 @@ import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
 import DASHI.Law.WaltonsEstoppelMaterialisationExact as Waltons
 import DASHI.Law.MannPatersonUnseenMatterExact as Mann
 import DASHI.Law.AustralianContractsLandscapeControllerExact as Landscape
+import DASHI.Law.AustralianContractsReviewedHopCompilerExact as ReviewedHop
 
 contractsBoundaryExists : Set
 contractsBoundaryExists = Contracts.AustralianContractsFollowBoundary
@@ -43,3 +44,12 @@ landscapeControllerBoundaryExists =
 landscapeControllerBoundaryPaid : landscapeControllerBoundaryExists
 landscapeControllerBoundaryPaid =
   Landscape.canonicalAustralianContractsLandscapeControllerBoundary
+
+
+reviewedHopCompilerBoundaryExists : Set
+reviewedHopCompilerBoundaryExists =
+  ReviewedHop.AustralianContractsReviewedHopCompilerBoundary
+
+reviewedHopCompilerBoundaryPaid : reviewedHopCompilerBoundaryExists
+reviewedHopCompilerBoundaryPaid =
+  ReviewedHop.canonicalAustralianContractsReviewedHopCompilerBoundary
