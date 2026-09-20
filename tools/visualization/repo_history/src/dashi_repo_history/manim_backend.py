@@ -22,6 +22,7 @@ from manim import (
     VGroup,
 )
 
+from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
 
@@ -179,6 +180,7 @@ class SemanticGraphView:
         self.graph = DiGraph([], [], layout={})
         self.current_nodes: set[str] = set()
         self.current_edges: set[tuple[str, str]] = set()
+        self.current_graph_data: dict[str, Any] = {"nodes": [], "edges": []}
 
     def build(self, graph_data: dict[str, Any]) -> DiGraph:
         nodes = [n["symbol_id"] for n in graph_data["nodes"]]
@@ -191,6 +193,7 @@ class SemanticGraphView:
         )
         self.current_nodes = set(nodes)
         self.current_edges = set(edges)
+        self.current_graph_data = graph_data
         return self.graph
 
     def apply_snapshot(
@@ -202,6 +205,12 @@ class SemanticGraphView:
     ) -> None:
         target_nodes = {n["symbol_id"] for n in graph_data["nodes"]}
         target_edges = set(_visual_edges(graph_data))
+
+        for old_id, new_id in supported_transfers(
+            self.current_graph_data,
+            graph_data,
+        ).items():
+            self.layout.transfer_identity(old_id, new_id)
 
         removed_edges = sorted(self.current_edges - target_edges)
         removed_nodes = sorted(self.current_nodes - target_nodes)
@@ -257,6 +266,7 @@ class SemanticGraphView:
 
         self.current_nodes = target_nodes
         self.current_edges = target_edges
+        self.current_graph_data = graph_data
 
 
 def _changed_graph(
