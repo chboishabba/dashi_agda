@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Maybe using (Maybe)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as Admissible
@@ -75,10 +76,12 @@ record ContractTraceNode : Set where
     semanticReference : String
     label : String
     nodeKind : TraceNodeKind
-    doctrine : ContractDoctrine
+    doctrine : Maybe ContractDoctrine
     jurisdictionReference : String
-    courtReference : String
-    temporalReference : String
+    courtReference : Maybe String
+    decisionOrEffectiveDate : Maybe String
+    validFrom : Maybe String
+    validTo : Maybe String
     sourceRole : ContractSourceRole
     authorityLevel : ContractAuthorityLevel
     sourceCitationReference : String
