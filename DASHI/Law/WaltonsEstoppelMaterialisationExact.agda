@@ -113,6 +113,7 @@ waltonsTrace =
     (Contracts.contractTraceNode
       "case:au:hca:1988:7"
       "Waltons Stores (Interstate) Ltd v Maher"
+      Contracts.caseAuthorityNode
       Contracts.estoppel
       "AU"
       "court:HCA"
