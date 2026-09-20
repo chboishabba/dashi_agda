@@ -18,6 +18,7 @@ module DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceLinearCycleClassExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Agda.Builtin.List using ([]; _∷_)
@@ -25,7 +26,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHodgeBasisExact as Basis
 
 record CPnRationalLinearCycle
-    (n : _) (power : Basis.ProjectiveSpaceHodgeBasis n) : Set where
+    (n : Nat) (power : Basis.ProjectiveSpaceHodgeBasis n) : Set where
   constructor linearCycle
   field
     cycleCoefficient : ℚ
@@ -33,7 +34,7 @@ record CPnRationalLinearCycle
 open CPnRationalLinearCycle public
 
 record CPnRationalHodgeClass
-    (n : _) (power : Basis.ProjectiveSpaceHodgeBasis n) : Set where
+    (n : Nat) (power : Basis.ProjectiveSpaceHodgeBasis n) : Set where
   constructor hodgeClass
   field
     hodgeCoefficient : ℚ
@@ -151,14 +152,21 @@ rationalMultipleOfLinearSubspaceRepresents power coefficient =
       left ≡ right
     hodgeClassExt {left = hodgeClass _} {right = hodgeClass _} refl = refl
 
+record AlgebraicRepresentative
+    {n : Nat}
+    (power : Basis.ProjectiveSpaceHodgeBasis n)
+    (h : CPnRationalHodgeClass n power) : Set where
+  field
+    cycle : CPnRationalLinearCycle n power
+    represents : linearCycleClass cycle ≡ h
+
+open AlgebraicRepresentative public
+
 everyFiniteCPnHodgeBasisClassIsAlgebraic :
   ∀ {n} (power : Basis.ProjectiveSpaceHodgeBasis n)
     (h : CPnRationalHodgeClass n power) →
-  ∃ λ where
-    λ : CPnRationalLinearCycle n power
-    proof : linearCycleClass λ ≡ h
-everyFiniteCPnHodgeBasisClassIsAlgebraic power h =
-  record
-    { λ = linearCycleRepresentingClass h
-    ; proof = linearCycleClassSurjective h
-    }
+  AlgebraicRepresentative power h
+everyFiniteCPnHodgeBasisClassIsAlgebraic power h = record
+  { cycle = linearCycleRepresentingClass h
+  ; represents = linearCycleClassSurjective h
+  }
