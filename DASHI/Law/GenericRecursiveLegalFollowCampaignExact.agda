@@ -364,7 +364,8 @@ reviewedTreatmentMustRecomputeOutboundFrontier ()
 -- Sidhu is deliberately not the witness here because the pre-existing Waltons
 -- trace already represented it.  Giumelli is the clean fresh authority exposed
 -- by the retained Doueihi source.  This record is an implementation acceptance
--- contract; it does not claim a live second-hop review receipt has already run.
+-- contract.  The live Giumelli source acquisition and range-index replay are now
+-- observed; reviewed identity/treatment hops remain explicit later gates.
 ------------------------------------------------------------------------
 
 record RecursiveGiumelliCapstoneContract : Set where
@@ -393,9 +394,21 @@ record RecursiveGiumelliCapstoneContract : Set where
     caseSpecificRuntimeAdded : Bool
     caseSpecificRuntimeAddedIsFalse :
       caseSpecificRuntimeAdded ≡ false
-    claimsLiveSecondHopReceiptAlreadyObserved : Bool
-    claimsLiveSecondHopReceiptAlreadyObservedIsFalse :
-      claimsLiveSecondHopReceiptAlreadyObserved ≡ false
+    liveSecondAuthoritySourceReceiptObserved : Bool
+    liveSecondAuthoritySourceReceiptObservedIsTrue :
+      liveSecondAuthoritySourceReceiptObserved ≡ true
+    liveRangeIndexBuildObserved : Bool
+    liveRangeIndexBuildObservedIsTrue :
+      liveRangeIndexBuildObserved ≡ true
+    liveRangeIndexHitObserved : Bool
+    liveRangeIndexHitObservedIsTrue :
+      liveRangeIndexHitObserved ≡ true
+    liveReviewedIdentityHopObserved : Bool
+    liveReviewedIdentityHopObservedIsFalse :
+      liveReviewedIdentityHopObserved ≡ false
+    liveReviewedTreatmentHopObserved : Bool
+    liveReviewedTreatmentHopObservedIsFalse :
+      liveReviewedTreatmentHopObserved ≡ false
 
 open RecursiveGiumelliCapstoneContract public
 
@@ -408,6 +421,10 @@ giumelliRecursiveCapstoneContract =
     false refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
+    false refl
     true refl
     true refl
     true refl
