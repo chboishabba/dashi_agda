@@ -38,6 +38,7 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedPeriodicCandidateNative
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedCompactCandidateFromPeriodicExact as CSelected
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicExclusionNativeExact as DExclude
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedR3FiniteEnergyExclusionNativeExact as CExclude
+import DASHI.Physics.Closure.NSTriadKNR571UnitNormalizedDisplacementWeldExact as BNorm
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFold
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact as DEnergy
@@ -107,6 +108,17 @@ bDiscreteStateVariationClosed =
 bSameDisplacementA2Closed : Bool
 bSameDisplacementA2Closed =
   BEnd.periodicA2UsesSamePhysicalDisplacement
+
+bUnitNormalizedLiveLatticeDisplacementWeldClosed : Bool
+bUnitNormalizedLiveLatticeDisplacementWeldClosed =
+  BNorm.unitNormalizedLiveLatticeDisplacementWeldClosed
+
+bA1A2G2SameDisplacementUnderPhysicalNormalization : Bool
+bA1A2G2SameDisplacementUnderPhysicalNormalization =
+  BNorm.a1A2G2UseOneDisplacementUnderUnitNormalization
+
+bCutoffUniformG1FamilyEnvelopeClosed : Bool
+bCutoffUniformG1FamilyEnvelopeClosed = false
 
 bPreferredDuplicateCurvatureRemoved : Bool
 bPreferredDuplicateCurvatureRemoved =
