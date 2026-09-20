@@ -33,10 +33,10 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceQuantitativeP
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
@@ -160,12 +160,28 @@ negativePairDifferenceWorkSumBelowAbsolute :
   0ℚ - Pair.pairDifferenceWorkSum rate work items
   ≤ absolutePairDifferenceSum rate work items
 negativePairDifferenceWorkSumBelowAbsolute rate work items =
-  ℚP.≤-trans
-    (let x = Pair.pairDifferenceWorkSum rate work items
-     in subst
-       (λ lower → lower ≤ ∣ x ∣)
-       (solve (x ∷ []))
-       (ℚP.p≤∣p∣ (0ℚ - x)))
+  let
+    x = Pair.pairDifferenceWorkSum rate work items
+    raw : 0ℚ - x ≤ ∣ 0ℚ - x ∣
+    raw = ℚP.p≤∣p∣ (0ℚ - x)
+
+    negMeaning : 0ℚ - x ≡ - x
+    negMeaning = solve (x ∷ [])
+
+    absMeaning : ∣ 0ℚ - x ∣ ≡ ∣ x ∣
+    absMeaning =
+      trans
+        (cong ∣_∣ negMeaning)
+        (ℚP.∣-p∣≡∣p∣ x)
+
+    first : 0ℚ - x ≤ ∣ x ∣
+    first =
+      subst
+        (λ upper → 0ℚ - x ≤ upper)
+        absMeaning
+        raw
+  in
+  ℚP.≤-trans first
     (absolutePairDifferenceWorkSumBound rate work items)
 
 ------------------------------------------------------------------------
