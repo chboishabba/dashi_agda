@@ -41,8 +41,9 @@ data ContractDoctrine : Set where
 data ContractSourceRole : Set where
   primaryCaseLaw : ContractSourceRole
   primaryLegislation : ContractSourceRole
+  officialRecord : ContractSourceRole
   researchIndex : ContractSourceRole
-  secondaryContext : ContractSourceRole
+  secondaryAnalysis : ContractSourceRole
 
 data ContractAuthorityLevel : Set where
   official : ContractAuthorityLevel
