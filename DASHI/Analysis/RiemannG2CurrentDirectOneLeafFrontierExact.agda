@@ -765,6 +765,22 @@ oldCurvatureEnvelopeNotCanonicalH2 :
     R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ false
 oldCurvatureEnvelopeNotCanonicalH2 = refl
 
+
+normalizedFixedProfilePerFrequencyDecaySourceWritten :
+  R2NormalizedDecay.NormalizedCenteredOffOscillatoryDecayBoundary.normalizedPerFrequencyInverseSquareDecaySourceWritten
+    R2NormalizedDecay.canonicalNormalizedCenteredOffOscillatoryDecayBoundary ≡ true
+normalizedFixedProfilePerFrequencyDecaySourceWritten = refl
+
+normalizedLiteralPairJacobianTransportSourceWritten :
+  R2NormalizedDecay.NormalizedCenteredOffOscillatoryDecayBoundary.literalPairIntegralTransportWithOneOverTJacobianSourceWritten
+    R2NormalizedDecay.canonicalNormalizedCenteredOffOscillatoryDecayBoundary ≡ true
+normalizedLiteralPairJacobianTransportSourceWritten = refl
+
+normalizedZeroWeightedShellSummationStillOpen :
+  R2NormalizedDecay.NormalizedCenteredOffOscillatoryDecayBoundary.zeroWeightedNormalizedShellSummationPaid
+    R2NormalizedDecay.canonicalNormalizedCenteredOffOscillatoryDecayBoundary ≡ false
+normalizedZeroWeightedShellSummationStillOpen = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
