@@ -2,6 +2,8 @@ from dashi_repo_history.scene_program import (
     compile_branch_episode_program,
     compile_first_parent_program,
     compile_merge_episode_program,
+    compile_symbol_focus_program,
+    compile_temporal_symbol_program,
 )
 
 
@@ -193,3 +195,92 @@ def test_branch_episode_program_walks_both_real_paths_before_merge():
     ]
     assert commands[-2].kind == "converge-parents"
     assert commands[-1].kind == "show-snapshot"
+
+
+def test_symbol_focus_program_reveals_root_before_layers():
+    graph = {
+        "nodes": [
+            {"symbol_id": "x", "label": "x", "module": "M", "kind": "binder"},
+            {"symbol_id": "g", "label": "g", "module": "M", "kind": "function"},
+            {"symbol_id": "f", "label": "f", "module": "M", "kind": "function"},
+        ],
+        "edges": [
+            {
+                "relation_id": "x-g",
+                "source": "x",
+                "target": "g",
+                "kind": "argument-to",
+            },
+            {
+                "relation_id": "g-f",
+                "source": "g",
+                "target": "f",
+                "kind": "calls",
+            },
+        ],
+    }
+    commands = compile_symbol_focus_program(
+        graph,
+        "f",
+        upstream_depth=2,
+    )
+    assert commands[0].kind == "show-focus-root"
+    assert commands[0].payload["node_ids"] == ["f"]
+    assert [command.kind for command in commands[1:-1]] == [
+        "expand-focus-layer",
+        "expand-focus-layer",
+    ]
+    assert commands[-1].kind == "settle-focus"
+
+
+def test_temporal_symbol_program_serializes_identity_evidence():
+    timeline = {
+        "commits": [
+            {"commit": "A", "parents": []},
+            {"commit": "B", "parents": ["A"]},
+        ],
+        "snapshots": [
+            {
+                "commit": "A",
+                "graph": {
+                    "nodes": [
+                        {
+                            "symbol_id": "old",
+                            "label": "before",
+                            "module": "M",
+                            "kind": "function",
+                            "scope": None,
+                            "fingerprint": "fp",
+                        }
+                    ],
+                    "edges": [],
+                },
+                "parent_deltas": {},
+            },
+            {
+                "commit": "B",
+                "graph": {
+                    "nodes": [
+                        {
+                            "symbol_id": "new",
+                            "label": "after",
+                            "module": "M",
+                            "kind": "function",
+                            "scope": None,
+                            "fingerprint": "fp",
+                        }
+                    ],
+                    "edges": [],
+                },
+                "parent_deltas": {},
+            },
+        ],
+    }
+    commands = compile_temporal_symbol_program(timeline, "after")
+    assert [command.kind for command in commands] == [
+        "show-temporal-focus",
+        "advance-temporal-focus",
+    ]
+    assert commands[1].payload["identity_evidence"] == (
+        "unique-structural-fingerprint"
+    )
