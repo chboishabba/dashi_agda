@@ -26,6 +26,10 @@ from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
 from dashi_repo_history.render_policy import ManimRenderPolicy
+from dashi_repo_history.scene_program import (
+    compile_first_parent_program,
+    compile_merge_episode_program,
+)
 
 
 def _history_layout(commits: list[dict[str, Any]]) -> dict[str, list[float]]:
@@ -394,7 +398,7 @@ class SemanticSnapshotScene(MovingCameraScene):
 
 
 class SemanticHistoryScene(MovingCameraScene):
-    """Incrementally animate semantic snapshots with persistent layout."""
+    """Interpret a renderer-neutral first-parent semantic scene program."""
 
     def construct(self) -> None:
         path = os.environ.get("DASHI_REPO_HISTORY_JSON")
@@ -404,14 +408,15 @@ class SemanticHistoryScene(MovingCameraScene):
 
         data = json.loads(Path(path).read_text(encoding="utf-8"))
         target_commit = os.environ.get("DASHI_REPO_TARGET_COMMIT")
-        snapshots = _first_parent_lineage(
+        program = compile_first_parent_program(
             data,
             target_commit=target_commit,
         )
-        if not snapshots:
-            self.add(Text("No semantic lineage", font_size=28))
+        if not program:
+            self.add(Text("No semantic scene program", font_size=28))
             return
 
+        _commits, snapshots = _snapshot_maps(data)
         title = Text(
             "dashi_agda — semantic evolution",
             font_size=30,
@@ -420,30 +425,72 @@ class SemanticHistoryScene(MovingCameraScene):
         self.play(FadeIn(title), FadeIn(stamp))
 
         view = SemanticGraphView()
-        first = snapshots[0]
-        graph = view.build(first["graph"])
+        pending_commit: str | None = None
+        graph_created = False
 
-        first_stamp = Text(
-            first["commit"][:10],
-            font_size=17,
-        ).next_to(title, DOWN, buff=0.12)
-        self.play(ReplacementTransform(stamp, first_stamp), Create(graph), run_time=1.0)
-        stamp = first_stamp
+        for command in program:
+            kind = command.kind
+            payload = command.payload
 
-        for snapshot in snapshots[1:]:
-            new_stamp = Text(
-                snapshot["commit"][:10],
-                font_size=17,
-            ).next_to(title, DOWN, buff=0.12)
-            self.play(ReplacementTransform(stamp, new_stamp), run_time=0.12)
-            stamp = new_stamp
-            view.apply_snapshot(self, snapshot["graph"])
+            if kind == "show-snapshot":
+                commit = payload["commit"]
+                snapshot = snapshots.get(commit)
+                if snapshot is None:
+                    continue
+                graph = view.build(snapshot["graph"])
+                next_stamp = Text(
+                    commit[:10],
+                    font_size=17,
+                ).next_to(title, DOWN, buff=0.12)
+                self.play(
+                    ReplacementTransform(stamp, next_stamp),
+                    Create(graph),
+                    run_time=1.0,
+                )
+                stamp = next_stamp
+                graph_created = True
+                continue
+
+            if kind == "advance-commit":
+                pending_commit = payload["commit"]
+                next_stamp = Text(
+                    pending_commit[:10],
+                    font_size=17,
+                ).next_to(title, DOWN, buff=0.12)
+                self.play(
+                    ReplacementTransform(stamp, next_stamp),
+                    run_time=0.12,
+                )
+                stamp = next_stamp
+                continue
+
+            # add/remove node/edge commands are retained in the program as exact
+            # semantic evidence.  The Manim backend batches them at settle-layout
+            # so related changes animate coherently and layout moves only once.
+            if kind in {
+                "add-node",
+                "remove-node",
+                "add-edge",
+                "remove-edge",
+            }:
+                continue
+
+            if kind == "settle-layout" and pending_commit is not None:
+                snapshot = snapshots.get(pending_commit)
+                if snapshot is not None:
+                    if graph_created:
+                        view.apply_snapshot(self, snapshot["graph"])
+                    else:
+                        graph = view.build(snapshot["graph"])
+                        self.play(Create(graph), run_time=1.0)
+                        graph_created = True
+                pending_commit = None
 
         self.wait(2)
 
 
 class SemanticMergeScene(MovingCameraScene):
-    """Show actual parent semantic contributions converging at a Git merge."""
+    """Interpret an explicit branch-episode convergence scene program."""
 
     def construct(self) -> None:
         path = os.environ.get("DASHI_REPO_HISTORY_JSON")
@@ -453,28 +500,35 @@ class SemanticMergeScene(MovingCameraScene):
             return
 
         data = json.loads(Path(path).read_text(encoding="utf-8"))
-        commits, snapshots = _snapshot_maps(data)
-        episodes = data.get("branch_episodes", [])
-        available_episodes = [
-            episode
-            for episode in episodes
-            if episode.get("merge_commit") in commits
-            and episode.get("merge_commit") in snapshots
-            and episode.get("left_tip") in snapshots
-            and episode.get("right_tip") in snapshots
-        ]
-        if not available_episodes:
-            self.add(Text("No branch episode with semantic snapshots", font_size=26))
+        program = compile_merge_episode_program(
+            data,
+            episode_index=episode_index,
+        )
+        if not program:
+            self.add(Text("No semantic merge scene program", font_size=26))
             return
 
-        episode = available_episodes[episode_index]
-        merge_commit = commits[episode["merge_commit"]]
+        commits, snapshots = _snapshot_maps(data)
+        fork_payload = next(
+            command.payload
+            for command in program
+            if command.kind == "show-fork"
+        )
+        convergence = next(
+            command.payload
+            for command in program
+            if command.kind == "converge-parents"
+        )
+
+        left = convergence["left"]
+        right = convergence["right"]
+        merge_sha = convergence["merge"]
+        merge_commit = commits[merge_sha]
+
         attribution = attribute_merge(
             merge_commit=merge_commit,
             snapshots_by_commit=snapshots,
         )
-        left, right = attribution.parents[:2]
-        merge_sha = attribution.merge_commit
 
         changed_nodes = (
             set(attribution.parent_only_nodes[left])
@@ -491,33 +545,48 @@ class SemanticMergeScene(MovingCameraScene):
             | set(attribution.removed_edges[right])
         )
 
-        left_data = _changed_graph(snapshots[left], changed_nodes, changed_edges)
-        right_data = _changed_graph(snapshots[right], changed_nodes, changed_edges)
-        merge_data = _changed_graph(snapshots[merge_sha], changed_nodes, changed_edges)
+        left_data = _changed_graph(
+            snapshots[left],
+            changed_nodes,
+            changed_edges,
+        )
+        right_data = _changed_graph(
+            snapshots[right],
+            changed_nodes,
+            changed_edges,
+        )
+        merge_data = _changed_graph(
+            snapshots[merge_sha],
+            changed_nodes,
+            changed_edges,
+        )
 
         left_graph = SemanticGraphView().build(left_data)
         right_graph = SemanticGraphView().build(right_data)
         merged_graph = SemanticGraphView().build(merge_data)
 
+        left_path = fork_payload["left_path"]
+        right_path = fork_payload["right_path"]
+
         left_group = VGroup(
             Text(
-                f"parent A · {left[:9]} · {len(episode['left_path']) - 1} steps",
+                f"parent A · {left[:9]} · {max(0, len(left_path) - 1)} steps",
                 font_size=18,
             ),
             left_graph,
         ).arrange(DOWN, buff=0.2)
         right_group = VGroup(
             Text(
-                f"parent B · {right[:9]} · {len(episode['right_path']) - 1} steps",
+                f"parent B · {right[:9]} · {max(0, len(right_path) - 1)} steps",
                 font_size=18,
             ),
             right_graph,
-        ).arrange(UP * -1, buff=0.2)
+        ).arrange(DOWN, buff=0.2)
         parents = VGroup(left_group, right_group).arrange(buff=1.0)
         parents.scale_to_fit_width(12.0)
 
         title = Text(
-            f"semantic merge · {merge_sha[:10]} · fork {episode['fork_base'][:9]}",
+            f"semantic merge · {merge_sha[:10]} · fork {fork_payload['fork_base'][:9]}",
             font_size=30,
         ).to_edge(UP)
         self.play(FadeIn(title), FadeIn(parents), run_time=1.0)
@@ -529,7 +598,7 @@ class SemanticMergeScene(MovingCameraScene):
                 font_size=18,
             ),
             merged_graph,
-        ).arrange(UP * -1, buff=0.2)
+        ).arrange(DOWN, buff=0.2)
         merged_group.scale_to_fit_width(11.0)
 
         self.play(
