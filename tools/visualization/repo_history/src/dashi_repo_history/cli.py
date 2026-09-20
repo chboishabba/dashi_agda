@@ -28,6 +28,7 @@ def _extract(args: argparse.Namespace) -> None:
         max_commits=args.max_commits,
         stride=args.stride,
         semantic=not args.history_only,
+        episode_context=args.episode_context,
     )
     timeline.write_json(args.output)
     print(args.output)
@@ -164,6 +165,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--history-only",
         action="store_true",
         help="Extract only commit/branch/merge topology; skip Tree-sitter semantic snapshots.",
+    )
+    extract.add_argument(
+        "--episode-context",
+        action="store_true",
+        help="For selected merge commits, include the real fork base and both branch paths in the timeline.",
     )
     extract.set_defaults(func=_extract)
 
