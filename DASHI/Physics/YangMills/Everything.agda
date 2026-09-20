@@ -259,3 +259,9 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS1SystemExact
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StressCommonCoreExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact
+
+
+-- ABC continuation: exact same-object welds and duplicate-premise elimination.
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ABSameMeasureExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ApplicationToClusteringExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCTriangleExact
