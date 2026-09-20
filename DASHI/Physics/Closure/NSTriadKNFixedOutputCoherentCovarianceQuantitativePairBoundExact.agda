@@ -113,6 +113,61 @@ pairDifferenceWorkSumBelowAbsolute rate work (x ∷ xs) =
     (pairAgainstHeadBelowAbsolute rate work x xs)
     (pairDifferenceWorkSumBelowAbsolute rate work xs)
 
+
+absolutePairAgainstHeadBound :
+  ∀ {A : Set} →
+  (rate work : A → ℚ) →
+  (head : A) →
+  (rest : List A) →
+  ∣ Pair.pairAgainstHead rate work head rest ∣
+  ≤ absoluteAgainstHead rate work head rest
+absolutePairAgainstHeadBound rate work head [] =
+  ℚP.≤-refl
+absolutePairAgainstHeadBound rate work head (x ∷ xs) =
+  ℚP.≤-trans
+    (ℚP.∣p+q∣≤∣p∣+∣q∣
+      ((rate head - rate x) * (work head - work x))
+      (Pair.pairAgainstHead rate work head xs))
+    (ℚP.+-mono-≤
+      (subst
+        (λ upper →
+          ∣ (rate head - rate x) * (work head - work x) ∣ ≤ upper)
+        (ℚP.∣p*q∣≡∣p∣*∣q∣
+          (rate head - rate x) (work head - work x))
+        ℚP.≤-refl)
+      (absolutePairAgainstHeadBound rate work head xs))
+
+absolutePairDifferenceWorkSumBound :
+  ∀ {A : Set} →
+  (rate work : A → ℚ) →
+  (items : List A) →
+  ∣ Pair.pairDifferenceWorkSum rate work items ∣
+  ≤ absolutePairDifferenceSum rate work items
+absolutePairDifferenceWorkSumBound rate work [] = ℚP.≤-refl
+absolutePairDifferenceWorkSumBound rate work (x ∷ xs) =
+  ℚP.≤-trans
+    (ℚP.∣p+q∣≤∣p∣+∣q∣
+      (Pair.pairAgainstHead rate work x xs)
+      (Pair.pairDifferenceWorkSum rate work xs))
+    (ℚP.+-mono-≤
+      (absolutePairAgainstHeadBound rate work x xs)
+      (absolutePairDifferenceWorkSumBound rate work xs))
+
+negativePairDifferenceWorkSumBelowAbsolute :
+  ∀ {A : Set} →
+  (rate work : A → ℚ) →
+  (items : List A) →
+  0ℚ - Pair.pairDifferenceWorkSum rate work items
+  ≤ absolutePairDifferenceSum rate work items
+negativePairDifferenceWorkSumBelowAbsolute rate work items =
+  ℚP.≤-trans
+    (let x = Pair.pairDifferenceWorkSum rate work items
+     in subst
+       (λ lower → lower ≤ ∣ x ∣)
+       (solve (x ∷ []))
+       (ℚP.p≤∣p∣ (0ℚ - x)))
+    (absolutePairDifferenceWorkSumBound rate work items)
+
 ------------------------------------------------------------------------
 -- Coherent-work specialization: retain the exact pair topology.
 ------------------------------------------------------------------------
@@ -275,12 +330,34 @@ signedCoherentPairDifferenceBelowYoung mixed rate value items =
       rate (λ item → Work.coherentWork mixed (value item)) items)
     (absoluteCoherentPairDifferenceBelowYoung mixed rate value items)
 
+
+negativeCoherentPairDifferenceBelowYoung :
+  ∀ {A : Set} →
+  (mixed : C3.Complex3 F) →
+  (rate : A → ℚ) →
+  (value : A → C3.Complex3 F) →
+  (items : List A) →
+  0ℚ - Pair.pairDifferenceWorkSum
+    rate (λ item → Work.coherentWork mixed (value item)) items
+  ≤ rateWeightedYoungPairSum mixed rate value items
+negativeCoherentPairDifferenceBelowYoung mixed rate value items =
+  ℚP.≤-trans
+    (negativePairDifferenceWorkSumBelowAbsolute
+      rate (λ item → Work.coherentWork mixed (value item)) items)
+    (absoluteCoherentPairDifferenceBelowYoung mixed rate value items)
+
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
 
 signedPairDifferenceAbsoluteSameGraphBoundClosed : Bool
 signedPairDifferenceAbsoluteSameGraphBoundClosed = true
+
+absolutePairDifferenceSameGraphBoundClosed : Bool
+absolutePairDifferenceSameGraphBoundClosed = true
+
+negativePairDifferenceSameGraphBoundClosed : Bool
+negativePairDifferenceSameGraphBoundClosed = true
 
 coherentWorkPairDifferenceYoungBoundClosed : Bool
 coherentWorkPairDifferenceYoungBoundClosed = true
