@@ -9,3 +9,4 @@
 (id) @reference
 (function) @function_clause
 (record_constructor (id) @record_constructor_name)
+(open) @open_decl
