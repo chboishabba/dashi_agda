@@ -75,7 +75,7 @@ literalCoefficientMatchesAF :
 literalCoefficientMatchesAF {Y = Y} {group = group}
     family left right output position
   with attachmentHasRequestedCoordinates family left right output position
-... | leftEq , rightEq , outputEq , positionEq
+... | leftEq , (rightEq , (outputEq , positionEq))
   rewrite leftEq | rightEq | outputEq | positionEq =
   D2c.literalClayCoefficientMatchesProjectedAFAtSelectedDepth
     Y group (attachment family left right output position)
