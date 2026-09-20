@@ -545,3 +545,91 @@ canonicalLegalRuntimeCapabilityReceipt =
     true refl
     true refl
     false refl
+
+
+------------------------------------------------------------------------
+-- Priority 5 / M4.A complete matter + issue workbench surface.
+--
+-- This pins the full product gate from the roadmap: entities, canonical
+-- observations, events, documents, timeline, issues and elements are peer
+-- read-only projections.  None is a new semantic authority.
+------------------------------------------------------------------------
+
+data MatterWorkbenchSurface : Set where
+  entitySurface : MatterWorkbenchSurface
+  observationSurface : MatterWorkbenchSurface
+  eventSurface : MatterWorkbenchSurface
+  documentSurface : MatterWorkbenchSurface
+  timelineSurface : MatterWorkbenchSurface
+  issueSurface : MatterWorkbenchSurface
+  elementSurface : MatterWorkbenchSurface
+
+record Priority5MatterIssueWorkbenchContract : Set where
+  constructor priority5-matter-issue-workbench-contract
+  field
+    entitiesProjected : Bool
+    entitiesProjectedIsTrue : entitiesProjected ≡ true
+
+    canonicalObservationsProjected : Bool
+    canonicalObservationsProjectedIsTrue :
+      canonicalObservationsProjected ≡ true
+
+    eventsProjected : Bool
+    eventsProjectedIsTrue : eventsProjected ≡ true
+
+    documentsProjected : Bool
+    documentsProjectedIsTrue : documentsProjected ≡ true
+
+    timelineProjected : Bool
+    timelineProjectedIsTrue : timelineProjected ≡ true
+
+    issuesProjected : Bool
+    issuesProjectedIsTrue : issuesProjected ≡ true
+
+    elementsProjected : Bool
+    elementsProjectedIsTrue : elementsProjected ≡ true
+
+    exactRevisionAndSpanRetained : Bool
+    exactRevisionAndSpanRetainedIsTrue :
+      exactRevisionAndSpanRetained ≡ true
+
+    eventMayReferenceOnlyProjectedObservation : Bool
+    eventMayReferenceOnlyProjectedObservationIsTrue :
+      eventMayReferenceOnlyProjectedObservation ≡ true
+
+    documentMayReferenceOnlyProjectedObservation : Bool
+    documentMayReferenceOnlyProjectedObservationIsTrue :
+      documentMayReferenceOnlyProjectedObservation ≡ true
+
+    workbenchIsProjectionOnly : Bool
+    workbenchIsProjectionOnlyIsTrue :
+      workbenchIsProjectionOnly ≡ true
+
+    workbenchCreatesSemanticAuthority : Bool
+    workbenchCreatesSemanticAuthorityIsFalse :
+      workbenchCreatesSemanticAuthority ≡ false
+
+open Priority5MatterIssueWorkbenchContract public
+
+canonicalPriority5MatterIssueWorkbenchContract :
+  Priority5MatterIssueWorkbenchContract
+canonicalPriority5MatterIssueWorkbenchContract =
+  priority5-matter-issue-workbench-contract
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
+
+data Priority5WorkbenchCreatesTruth : Set where
+
+priority5WorkbenchDoesNotCreateTruth :
+  Priority5WorkbenchCreatesTruth → ⊥
+priority5WorkbenchDoesNotCreateTruth ()
