@@ -19,8 +19,9 @@ open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _*ℝ_; _-ℝ_; absℝ; _≤ℝ_;
-   ≤ℝ-refl; absMul; mulMonotoneNonnegative; mulSubDistributes)
+  (ℝ; 0ℝ; _+ℝ_; _*ℝ_; _-ℝ_; absℝ; _≤ℝ_;
+   ≤ℝ-refl; ≤ℝ-trans; +-mono-≤; +-identityˡ;
+   absMul; mulMonotoneNonnegative; mulSubDistributes)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian as Hess
 import DASHI.Physics.YangMills.BalabanDifferentiatedMarkedFactorProductExact as Product
@@ -137,11 +138,11 @@ zeroSumNonnegative :
   ∀ {left right : ℝ} →
   0ℝ ≤ℝ left →
   0ℝ ≤ℝ right →
-  0ℝ ≤ℝ left DASHI.Foundations.RealAnalysisAxioms.+ℝ right
+  0ℝ ≤ℝ left +ℝ right
 zeroSumNonnegative leftNN rightNN =
   Hess.replaceLeft≤
-    (DASHI.Foundations.RealAnalysisAxioms.+-identityˡ 0ℝ)
-    (DASHI.Foundations.RealAnalysisAxioms.+-mono-≤ leftNN rightNN)
+    (+-identityˡ 0ℝ)
+    (+-mono-≤ leftNN rightNN)
 
 markedProductMajorantNonnegative :
   ∀ {A : Set}
@@ -461,7 +462,7 @@ factorizedDensityDifferenceBound :
      densityApproximation dataSet scale slow)
   ≤ℝ densityErrorBudget dataSet scale slow
 factorizedDensityDifferenceBound dataSet scale slow =
-  DASHI.Foundations.RealAnalysisAxioms.≤ℝ-trans
+  ≤ℝ-trans
     (SumError.absDifferenceOfRealSumsBelowPointwiseAbs
       (admissibleSequences dataSet scale)
       (λ sequence →
