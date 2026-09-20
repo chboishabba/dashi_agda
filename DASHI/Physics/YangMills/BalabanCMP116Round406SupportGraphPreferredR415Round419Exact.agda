@@ -107,7 +107,7 @@ selectedBoundaryBelowConnectingDecay :
     R414.weight
       (GraphGeometry.decay (supportGraphGeometry source))
       (R411.selectedConnectingDistance
-        (GraphGeometry.geometry
+        (Replay.geometry
           (GraphGeometry.asRound406To415Geometry
             application (supportGraphGeometry source))))
 selectedBoundaryBelowConnectingDecay {application = application} source =
