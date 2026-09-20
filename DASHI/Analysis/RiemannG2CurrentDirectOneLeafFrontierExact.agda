@@ -59,6 +59,8 @@ import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
 import DASHI.Analysis.RiemannG2ExistingScalarDonorInventoryExact as Donor
 import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
 
+import DASHI.Analysis.RiemannG2NormalizedCenteredOffShellLeanDonorExact as R2NormShell
+
 ------------------------------------------------------------------------
 -- CURRENT DIRECT FRONTIER
 --
@@ -741,6 +743,27 @@ quarticRouteStillNeedsIntermediateShell :
   R2GammaIntegrated.GammaIntegratedGapCutoffCompatibilityBoundary.intermediateShellControlStillRequiredForQuarticRoute
     R2GammaIntegrated.canonicalGammaIntegratedGapCutoffCompatibilityBoundary ≡ true
 quarticRouteStillNeedsIntermediateShell = refl
+
+
+normalizedCenteredOffIntegralNowSourceWritten :
+  R2NormShell.NormalizedCenteredOffShellBoundary.exactIntegralNormalizationSourceWritten
+    R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ true
+normalizedCenteredOffIntegralNowSourceWritten = refl
+
+normalizedShellUsesFixedSupport :
+  R2NormShell.NormalizedCenteredOffShellBoundary.canonicalSupportBecomesFixedNormalizedWindow
+    R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ true
+normalizedShellUsesFixedSupport = refl
+
+normalizedIntermediateShellStillActualH2 :
+  R2NormShell.NormalizedCenteredOffShellBoundary.normalizedIntermediateShellEstimatePaid
+    R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ false
+normalizedIntermediateShellStillActualH2 = refl
+
+oldCurvatureEnvelopeNotCanonicalH2 :
+  R2NormShell.NormalizedCenteredOffShellBoundary.oldCurvatureEnvelopeCanonicalForH2
+    R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ false
+oldCurvatureEnvelopeNotCanonicalH2 = refl
 
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
