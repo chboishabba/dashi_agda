@@ -58,6 +58,24 @@ record MillenniumLeanAssistReceipt : Set where
     bsdCMSource :
       String
 
+    hodgeCP1NormalFormSource :
+      String
+
+    hodgeCP1SphereSource :
+      String
+
+    bsdSquareClassQuotientSource :
+      String
+
+    bsdKummerQuotientSource :
+      String
+
+    bsdCMClassificationSource :
+      String
+
+    bsdCMInertCharacterSumSource :
+      String
+
     hodgeCP1QuotientSourcePresent :
       Bool
 
@@ -74,6 +92,24 @@ record MillenniumLeanAssistReceipt : Set where
       Bool
 
     bsdMathlibTwoSquaresReused :
+      Bool
+
+    hodgeCP1NormalFormSourcePresent :
+      Bool
+
+    hodgeCP1SphereHomeomorphismSourcePresent :
+      Bool
+
+    bsdLiteralSquareClassQuotientSourcePresent :
+      Bool
+
+    bsdLiteralKummerQuotientSourcePresent :
+      Bool
+
+    bsdAllPrimeCMCaseSplitSourcePresent :
+      Bool
+
+    bsdInertCharacterSumZeroSourcePresent :
       Bool
 
     sourcesRootedInSynthesis :
@@ -97,12 +133,24 @@ currentMillenniumLeanAssistReceipt =
     "chboishabba/dashi_lean4"
     "agent/millennium-three-lane-lean-assist"
     "#10"
-    "7fe1674fc2ff26471ce1def7c4a91d62d738d683"
+    "efca550504a5c49dfb61efc960fb87e0c3c37be9"
     "leanprover/lean4:v4.28.0"
     "mathlib v4.28.0"
     "Synthesis/MillenniumHodgeCP1Quotient.lean"
     "Synthesis/MillenniumBSDRationalSquareBits.lean"
     "Synthesis/MillenniumBSDCMPrimeWitness.lean"
+    "Synthesis/MillenniumHodgeCP1NormalForm.lean"
+    "Synthesis/MillenniumHodgeCP1TopologicalSphere.lean"
+    "Synthesis/MillenniumBSDRationalSquareClassQuotient.lean"
+    "Synthesis/MillenniumBSDRationalKummerQuotient.lean"
+    "Synthesis/MillenniumBSDCMPrimeClassification.lean"
+    "Synthesis/MillenniumBSDCMInertCharacterSum.lean"
+    true
+    true
+    true
+    true
+    true
+    true
     true
     true
     true
