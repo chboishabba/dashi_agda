@@ -2,9 +2,9 @@
 module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119PreferredR415OrderedRealExact where
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; absℝ; _≤ℝ_)
+  (ℝ; 0ℝ; absℝ; _≤ℝ_; -ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
@@ -64,11 +64,10 @@ record PreferredR415OrderedRealCalibration
           (Preferred.geometry (preferred index)))
       ≤ℝ
       expReal
-        (DASHI.Foundations.RealAnalysisAxioms.-ℝ
+        (-ℝ
           Calibration.embedQ embedding
             (Scale.latticeExponent scaleData
-              Data.Rational.Base.*
-              Scale.latticeDistance scaleData (physicalDistance index)))
+              * Scale.latticeDistance scaleData (physicalDistance index)))
 
 open PreferredR415OrderedRealCalibration public
 
