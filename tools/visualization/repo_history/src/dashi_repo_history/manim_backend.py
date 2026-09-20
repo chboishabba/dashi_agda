@@ -422,7 +422,6 @@ class SemanticHistoryScene(MovingCameraScene):
         view = SemanticGraphView()
         first = snapshots[0]
         graph = view.build(first["graph"])
-        self.add(graph)
 
         first_stamp = Text(
             first["commit"][:10],
