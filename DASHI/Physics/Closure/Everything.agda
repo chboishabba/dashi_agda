@@ -293,3 +293,4 @@ import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionToContinuumExact
 
 import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionSingleLimitExact
 import DASHI.Physics.Closure.NSWholeSpaceCoherentVectorQuadratureCompletionExact
+import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionBoundaryDefectExact
