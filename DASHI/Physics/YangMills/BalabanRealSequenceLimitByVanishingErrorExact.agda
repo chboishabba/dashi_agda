@@ -25,6 +25,11 @@ record RealSequenceLimitByVanishingError : Set₁ where
 
     Vanishes : (Nat → ℝ) → Set
 
+    vanishesCongruent : ∀ left right →
+      (∀ n → left n ≡ right n) →
+      Vanishes left →
+      Vanishes right
+
     limitFromVanishingError :
       ∀ (sequence : Nat → ℝ) (target : ℝ) (error : Nat → ℝ) →
       (∀ n → absℝ (target -ℝ sequence n) ≤ℝ error n) →
