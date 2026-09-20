@@ -27,6 +27,7 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
@@ -77,11 +78,17 @@ module Split
     Inner.fourSignInner tau
     ≡ C3.complex3Add (homochiralInner tau) (heterochiralInner tau)
   fourSignInnerIsHomoPlusHetero tau =
-    R82.complex3Interchange
-      (C.multiplierDifferenceVector tau Helical.plus Helical.plus)
-      (C.multiplierDifferenceVector tau Helical.plus Helical.minus)
-      (C.multiplierDifferenceVector tau Helical.minus Helical.plus)
-      (C.multiplierDifferenceVector tau Helical.minus Helical.minus)
+    let
+      a = C.multiplierDifferenceVector tau Helical.plus Helical.plus
+      b = C.multiplierDifferenceVector tau Helical.plus Helical.minus
+      c = C.multiplierDifferenceVector tau Helical.minus Helical.plus
+      d = C.multiplierDifferenceVector tau Helical.minus Helical.minus
+    in
+    trans
+      (cong
+        (C3.complex3Add (C3.complex3Add a b))
+        (Field.complex3AddCommutative c d))
+      (R82.complex3Interchange a b d c)
 
   homochiralSlot :
     (outer inner : Physical.PhysicalTriadIncidence) →
