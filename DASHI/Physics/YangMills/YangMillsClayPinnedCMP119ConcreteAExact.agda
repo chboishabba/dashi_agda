@@ -220,7 +220,7 @@ finiteReflectionPositive inputs group cutoff testFamily =
   let
     factorization :
       FiniteRP.ReflectionSquareFactorization
-        (Gram.PhysicalOSFiniteTestFamily _ ℝ)
+        (Gram.PhysicalOSFiniteTestFamily (Configuration → ℝ) ℝ)
         (Interface inputs) ℝ realPositiveAdditiveScalar
     factorization = record
       { FiniteRP.ReflectionSquareFactorization.indices =
