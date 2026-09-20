@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 import subprocess
 
-from .agda import FileExtraction, build_semantic_graph, extract_file
+from .agda import AgdaLanguageAdapter
+from .language import LanguageAdapter
 from .model import CommitRecord, GraphDelta, SemanticSnapshot, Timeline
 
 
@@ -86,9 +87,11 @@ def read_commit_dag(
     return commits
 
 
-def agda_tree(
+def source_tree(
     repo: Path,
     commit: str,
+    *,
+    suffixes: tuple[str, ...],
     path_prefix: str | None = None,
 ) -> list[tuple[str, str]]:
     raw = _run_bytes(repo, "ls-tree", "-r", "-z", commit)
@@ -98,7 +101,7 @@ def agda_tree(
             continue
         metadata, path_bytes = record.split(b"\t", 1)
         path = path_bytes.decode("utf-8", "replace")
-        if not path.endswith(".agda"):
+        if not path.endswith(suffixes):
             continue
         if path_prefix and not path.startswith(path_prefix):
             continue
@@ -144,26 +147,32 @@ class HistoryExtractor:
     repo: Path
     path_prefix: str | None = None
     seed_commits: tuple[str, ...] = ()
+    adapter: LanguageAdapter = field(default_factory=AgdaLanguageAdapter)
 
     def __post_init__(self) -> None:
         self.repo = self.repo.resolve()
-        self._blob_cache: dict[tuple[str, str], FileExtraction] = {}
+        self._blob_cache: dict[tuple[str, str], object] = {}
         self._graph_cache = {}
 
     def graph_at(self, commit: str):
         if commit in self._graph_cache:
             return self._graph_cache[commit]
 
-        extractions: list[FileExtraction] = []
-        for path, blob in agda_tree(self.repo, commit, self.path_prefix):
+        extractions: list[object] = []
+        for path, blob in source_tree(
+            self.repo,
+            commit,
+            suffixes=self.adapter.suffixes,
+            path_prefix=self.path_prefix,
+        ):
             key = (path, blob)
             extraction = self._blob_cache.get(key)
             if extraction is None:
-                extraction = extract_file(path, read_blob(self.repo, blob))
+                extraction = self.adapter.extract_file(path, read_blob(self.repo, blob))
                 self._blob_cache[key] = extraction
             extractions.append(extraction)
 
-        graph = build_semantic_graph(extractions)
+        graph = self.adapter.build_graph(extractions)
         self._graph_cache[commit] = graph
         return graph
 
