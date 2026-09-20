@@ -53,6 +53,7 @@ import DASHI.Analysis.RiemannG2CenteredComplementCanonicalHighLeanDonorExact as 
 import DASHI.Analysis.RiemannG2GammaPoleCancellationRatioTransferLeanDonorExact as R2GammaRatio
 import DASHI.Analysis.RiemannG2GammaIntegratedGapAndCutoffCompatibilityLeanDonorExact as R2GammaIntegrated
 import DASHI.Analysis.RiemannG2QuantitativeScaledTaperLeanDonorExact as R2QuantTaper
+import DASHI.Analysis.RiemannG2ProjectiveCenteredGaugeBridgeLeanDonorExact as R2ProjectiveCentered
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -910,6 +911,22 @@ reflectionPairSignedExternalPaymentStillOpen :
   R2ReflectionSigned.ReflectionPairSignedResidualBoundary.signedExternalResidualPaymentPaid
     R2ReflectionSigned.canonicalReflectionPairSignedResidualBoundary ≡ false
 reflectionPairSignedExternalPaymentStillOpen = refl
+
+
+projectiveCenteredGaugeBridgeSourceWritten :
+  R2ProjectiveCentered.ProjectiveCenteredGaugeBridgeBoundary.centeredTwoRadiusReconstructionSourceWritten
+    R2ProjectiveCentered.canonicalProjectiveCenteredGaugeBridgeBoundary ≡ true
+projectiveCenteredGaugeBridgeSourceWritten = refl
+
+oneRadiusCenteredIsNotDefinitionallyProjective :
+  R2ProjectiveCentered.ProjectiveCenteredGaugeBridgeBoundary.oneRadiusCenteredObservableDefinitionallyProjective
+    R2ProjectiveCentered.canonicalProjectiveCenteredGaugeBridgeBoundary ≡ false
+oneRadiusCenteredIsNotDefinitionallyProjective = refl
+
+normalizedRvMProjectiveAttachmentStillOpen :
+  R2ProjectiveCentered.ProjectiveCenteredGaugeBridgeBoundary.normalizedRvMProjectiveConsumerFullyAttached
+    R2ProjectiveCentered.canonicalProjectiveCenteredGaugeBridgeBoundary ≡ false
+normalizedRvMProjectiveAttachmentStillOpen = refl
 
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
