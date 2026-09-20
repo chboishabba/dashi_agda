@@ -27,6 +27,7 @@ open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
+import DASHI.Mathematics.Complexity.ConcreteTapeWindowCodecCNFWeldExact as Window
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 ------------------------------------------------------------------------
@@ -302,7 +303,7 @@ canonicalWindowEncoding_is_sixCellFlattening :
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (window : Local.SixCellWindow machine) →
-  DASHI.Mathematics.Complexity.ConcreteTapeWindowCodecCNFWeldExact.FixedWidthWindowCodec.encode
+  Window.FixedWidthWindowCodec.encode
     (Canonical.canonicalWindowCodec machine stateCoverage symbolCoverage)
     window
   ≡ encodeSixCells stateCoverage symbolCoverage window
