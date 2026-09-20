@@ -427,3 +427,29 @@ pnpGlobalSuffixAgreementStillOpen :
     PNPPrefix.canonicalConcreteTapeGlobalPrefixAgreementBoundary
   ≡ false
 pnpGlobalSuffixAgreementStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- TENTH CONTINUATION: global legality forces suffix agreement and closes the
+-- semantic whole-row step reconstruction.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalSuffixAgreementExact as PNPSuffix
+
+pnpGlobalSuffixAgreementPaid :
+  PNPSuffix.globalLegalityForcesSuffixAgreementPaid
+    PNPSuffix.canonicalConcreteTapeGlobalSuffixAgreementBoundary
+  ≡ true
+pnpGlobalSuffixAgreementPaid = refl
+
+pnpGlobalReverseLocalityPaid :
+  PNPSuffix.globalTransitionScanToWellFormedStepPaid
+    PNPSuffix.canonicalConcreteTapeGlobalSuffixAgreementBoundary
+  ≡ true
+pnpGlobalReverseLocalityPaid = refl
+
+pnpSATWeldStillOpen :
+  PNPSuffix.canonicalSATWeldPaid
+    PNPSuffix.canonicalConcreteTapeGlobalSuffixAgreementBoundary
+  ≡ false
+pnpSATWeldStillOpen = refl
