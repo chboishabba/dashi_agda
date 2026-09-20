@@ -377,3 +377,5 @@ import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact
 import DASHI.Physics.Closure.NSTriadKNR567ForcingCellPhysicalEnvelopeExact
 
 import DASHI.Physics.Closure.NSTriadKNSameOutputIncidenceDisplacementExact
+import DASHI.Physics.Closure.NSTriadKNR573HelicitySplitLowOutputPaymentExact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact
