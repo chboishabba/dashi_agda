@@ -57,6 +57,7 @@ import DASHI.Analysis.RiemannG2ProjectiveCenteredGaugeBridgeLeanDonorExact as R2
 import DASHI.Analysis.RiemannG2ProjectiveTwoRadiusNormalizedLeanDonorExact as R2ProjectiveTwoRadius
 import DASHI.Analysis.RiemannG2ProjectiveOffNormalizedAtomicCarrierLeanDonorExact as R2ProjectiveAtomic
 import DASHI.Analysis.RiemannG2NormalizedProjectiveOffAtomicMeasureLeanDonorExact as R2ProjectiveCombined
+import DASHI.Analysis.RiemannG2ProjectiveBaseProfileQuotientLeanDonorExact as R2ProjectiveBase
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -962,6 +963,22 @@ wholeProjectiveOffTsumAttachmentStillOpen :
   R2ProjectiveCombined.NormalizedProjectiveOffAtomicMeasureBoundary.literalInfiniteProjectiveOffTsumAttachmentPaid
     R2ProjectiveCombined.canonicalNormalizedProjectiveOffAtomicMeasureBoundary ≡ false
 wholeProjectiveOffTsumAttachmentStillOpen = refl
+
+
+projectiveBaseTransformNowSingleGappedProfile :
+  R2ProjectiveBase.ProjectiveBaseProfileQuotientBoundary.threePieceBaseTransformCollapsedToOneProfile
+    R2ProjectiveBase.canonicalProjectiveBaseProfileQuotientBoundary ≡ true
+projectiveBaseTransformNowSingleGappedProfile = refl
+
+projectiveBaseProfileOpenZeroModeGapPaid :
+  R2ProjectiveBase.ProjectiveBaseProfileQuotientBoundary.projectivePhysicalProfileHasOpenZeroModeGap
+    R2ProjectiveBase.canonicalProjectiveBaseProfileQuotientBoundary ≡ true
+projectiveBaseProfileOpenZeroModeGapPaid = refl
+
+projectiveRvMActualCountingAttachmentStillOpen :
+  R2ProjectiveBase.ProjectiveBaseProfileQuotientBoundary.projectiveRvMActualCountingAttachmentPaid
+    R2ProjectiveBase.canonicalProjectiveBaseProfileQuotientBoundary ≡ false
+projectiveRvMActualCountingAttachmentStillOpen = refl
 
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
