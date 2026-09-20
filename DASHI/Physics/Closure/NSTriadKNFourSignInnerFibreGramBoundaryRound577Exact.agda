@@ -43,6 +43,10 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
 import DASHI.Physics.Closure.NSTriadKNFourHelicityVectorRecombinationRound576Exact as R576
+import DASHI.Physics.Closure.NSTriadKNPhysicalResonantEuclideanSquareTriangleRound218Exact as R218
+import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact as R219
+import DASHI.Physics.Closure.NSTriadKNPhysicalOrderedTransferSquaredMajorantRound96Exact as R96
+import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
 F : C3.RealField _
@@ -105,6 +109,138 @@ module PhysicalFibre
       (Cell.fourSignInnerLowOutputBound tau (allNonzero tau))
       (cellMassSumBound rest allNonzero)
 
+
+  seventyTwo : ℚ
+  seventyTwo = R576.thirtySix * R218.two
+
+  modalEnergy : Z3.FourierMode → ℚ
+  modalEnergy mode =
+    L2.complex3NormSquared (Audit.velocity system mode)
+
+  modalDissipation : Z3.FourierMode → ℚ
+  modalDissipation mode =
+    C3.normSquared I mode * modalEnergy mode
+
+  pairEDKernel577 :
+    Physical.PhysicalTriadIncidence → ℚ
+  pairEDKernel577 tau =
+    modalDissipation (Physical.p tau) * modalEnergy (Physical.q tau)
+    + modalEnergy (Physical.p tau) * modalDissipation (Physical.q tau)
+
+  edKernelSum577 :
+    List Physical.PhysicalTriadIncidence → ℚ
+  edKernelSum577 [] = 0ℚ
+  edKernelSum577 (tau ∷ rest) =
+    pairEDKernel577 tau + edKernelSum577 rest
+
+  pointwiseMajorantBelowSeventyTwoEDKernel :
+    (tau : Physical.PhysicalTriadIncidence) →
+    pointwiseMajorant tau ≤ seventyTwo * pairEDKernel577 tau
+  pointwiseMajorantBelowSeventyTwoEDKernel tau =
+    let
+      k2 = C3.normSquared I (Physical.k tau)
+      p2 = C3.normSquared I (Physical.p tau)
+      q2 = C3.normSquared I (Physical.q tau)
+      ep = modalEnergy (Physical.p tau)
+      eq = modalEnergy (Physical.q tau)
+
+      kNN = R219.modeSquareNonnegative E I (Physical.k tau)
+      pNN = R219.modeSquareNonnegative E I (Physical.p tau)
+      qNN = R219.modeSquareNonnegative E I (Physical.q tau)
+      epNN = Separation.complex3NormSquaredNonnegative
+        (Audit.velocity system (Physical.p tau))
+      eqNN = Separation.complex3NormSquaredNonnegative
+        (Audit.velocity system (Physical.q tau))
+
+      pqNN : 0ℚ ≤ p2 + q2
+      pqNN = Rational.addNonnegative pNN qNN
+
+      radialNN : 0ℚ ≤ R218.two * (p2 + q2)
+      radialNN = R96.productNonnegative R218.twoNN pqNN
+
+      triangle :
+        k2 ≤ R218.two * (p2 + q2)
+      triangle =
+        R218.resonantEuclideanSquareTriangle
+          E I (Physical.resonance tau)
+
+      first :
+        k2 * ep ≤ (R218.two * (p2 + q2)) * ep
+      first =
+        Rational.nonnegativeProductMonotone
+          kNN epNN radialNN epNN triangle ℚP.≤-refl
+
+      leftNN = R96.productNonnegative kNN epNN
+      rightNN = R96.productNonnegative radialNN epNN
+
+      second :
+        (k2 * ep) * eq
+        ≤ ((R218.two * (p2 + q2)) * ep) * eq
+      second =
+        Rational.nonnegativeProductMonotone
+          leftNN eqNN rightNN eqNN first ℚP.≤-refl
+
+      leftTripleNN = R96.productNonnegative leftNN eqNN
+      rightTripleNN = R96.productNonnegative rightNN eqNN
+
+      scaled :
+        R576.thirtySix * ((k2 * ep) * eq)
+        ≤ R576.thirtySix *
+            (((R218.two * (p2 + q2)) * ep) * eq)
+      scaled =
+        Rational.nonnegativeProductMonotone
+          R576.thirtySixNN leftTripleNN
+          R576.thirtySixNN rightTripleNN
+          ℚP.≤-refl second
+
+      sourceMeaning :
+        pointwiseMajorant tau
+        ≡ R576.thirtySix * ((k2 * ep) * eq)
+      sourceMeaning = solve
+        (R576.thirtySix ∷ k2 ∷ ep ∷ eq ∷ [])
+
+      targetMeaning :
+        R576.thirtySix *
+          (((R218.two * (p2 + q2)) * ep) * eq)
+        ≡ seventyTwo * pairEDKernel577 tau
+      targetMeaning = solve
+        ( R576.thirtySix ∷ R218.two ∷ p2 ∷ q2 ∷ ep ∷ eq ∷ [])
+    in
+    subst
+      (λ lower → lower ≤ seventyTwo * pairEDKernel577 tau)
+      (sym sourceMeaning)
+      (subst
+        (λ upper →
+          R576.thirtySix * ((k2 * ep) * eq) ≤ upper)
+        targetMeaning
+        scaled)
+
+  majorantSumBelowSeventyTwoEDKernelSum :
+    (items : List Physical.PhysicalTriadIncidence) →
+    majorantSum items ≤ seventyTwo * edKernelSum577 items
+  majorantSumBelowSeventyTwoEDKernelSum [] =
+    subst
+      (0ℚ ≤_)
+      (sym (ℚP.*-zeroʳ seventyTwo))
+      ℚP.≤-refl
+  majorantSumBelowSeventyTwoEDKernelSum (tau ∷ rest) =
+    let
+      added =
+        ℚP.+-mono-≤
+          (pointwiseMajorantBelowSeventyTwoEDKernel tau)
+          (majorantSumBelowSeventyTwoEDKernelSum rest)
+      endpoint :
+        seventyTwo * pairEDKernel577 tau
+          + seventyTwo * edKernelSum577 rest
+        ≡ seventyTwo * edKernelSum577 (tau ∷ rest)
+      endpoint = solve
+        (seventyTwo ∷ pairEDKernel577 tau ∷ edKernelSum577 rest ∷ [])
+    in
+    subst
+      (λ upper → majorantSum (tau ∷ rest) ≤ upper)
+      endpoint
+      added
+
   record QuantitativeFourSignGramPayment577
       (items : List Physical.PhysicalTriadIncidence) : Set where
     constructor quantitative-four-sign-gram-payment-577
@@ -155,6 +291,9 @@ round577R576CellBoundAttachedToExactR180GramLedger = true
 
 round577VariableFibreCellMassMajorantSummedExactly : Bool
 round577VariableFibreCellMassMajorantSummedExactly = true
+
+round577CellMassMajorantPaidByEnergyDissipationKernel : Bool
+round577CellMassMajorantPaidByEnergyDissipationKernel = true
 
 round577WithinFibreGramMustBeNonpositive : Bool
 round577WithinFibreGramMustBeNonpositive = false
