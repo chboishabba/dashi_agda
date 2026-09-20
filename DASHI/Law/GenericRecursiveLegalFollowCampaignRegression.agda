@@ -75,6 +75,21 @@ acquisitionAdvancesReceipt :
 acquisitionAdvancesReceipt =
   Recursive.successfulAcquisitionAdvancesCampaignReceiptIsTrue boundary
 
+acquisitionPreparesIdentity :
+  Recursive.acquisitionPreparesAuthorityIdentityGate boundary ≡ true
+acquisitionPreparesIdentity =
+  Recursive.acquisitionPreparesAuthorityIdentityGateIsTrue boundary
+
+identityPreparesTreatment :
+  Recursive.reviewedIdentityPreparesTreatmentGate boundary ≡ true
+identityPreparesTreatment =
+  Recursive.reviewedIdentityPreparesTreatmentGateIsTrue boundary
+
+treatmentEmitsNextFrontier :
+  Recursive.reviewedTreatmentEmitsNextOutboundFrontier boundary ≡ true
+treatmentEmitsNextFrontier =
+  Recursive.reviewedTreatmentEmitsNextOutboundFrontierIsTrue boundary
+
 acquisitionIsNotLegalHop :
   Recursive.sourceAcquisitionAutomaticallyAddsLegalHop boundary ≡ false
 acquisitionIsNotLegalHop =
