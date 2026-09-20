@@ -54,8 +54,8 @@ def test_temporal_focus_tracks_unique_supported_rename():
 
     frames = track_symbol_history(timeline, "after")
     assert [frame.root_id for frame in frames] == ["old", "new"]
-    assert frames[1].identity_evidence == "selected-target"
-    assert frames[0].identity_evidence == "unique-structural-fingerprint"
+    assert frames[0].identity_evidence == "introduction-or-earliest-match"
+    assert frames[1].identity_evidence == "unique-structural-fingerprint"
 
 
 def test_temporal_focus_stops_at_symbol_introduction():
