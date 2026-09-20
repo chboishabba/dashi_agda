@@ -35,11 +35,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; trans; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -127,12 +128,23 @@ module Payment
         ≡ R178.three * homochiralComponentMass tau
       target = solve
         (L2.complex3NormSquared a ∷ L2.complex3NormSquared b ∷ [])
+      lowerMeaning :
+        C3.complex3Add (C3.complex3Add a b) (C3.complex3Zero F)
+        ≡ Split.homochiralInner tau
+      lowerMeaning = Field.complex3AddZeroRight (C3.complex3Add a b)
     in
     subst
-      (λ upper →
-        L2.complex3NormSquared (Split.homochiralInner tau) ≤ upper)
-      target
-      base
+      (λ lower →
+        L2.complex3NormSquared lower
+        ≤ R178.three * homochiralComponentMass tau)
+      lowerMeaning
+      (subst
+        (λ upper →
+          L2.complex3NormSquared
+            (C3.complex3Add (C3.complex3Add a b) (C3.complex3Zero F))
+          ≤ upper)
+        target
+        base)
 
   heterochiralInnerNormBound :
     (tau : Physical.PhysicalTriadIncidence) →
@@ -151,12 +163,23 @@ module Payment
         ≡ R178.three * heterochiralComponentMass tau
       target = solve
         (L2.complex3NormSquared a ∷ L2.complex3NormSquared b ∷ [])
+      lowerMeaning :
+        C3.complex3Add (C3.complex3Add a b) (C3.complex3Zero F)
+        ≡ Split.heterochiralInner tau
+      lowerMeaning = Field.complex3AddZeroRight (C3.complex3Add a b)
     in
     subst
-      (λ upper →
-        L2.complex3NormSquared (Split.heterochiralInner tau) ≤ upper)
-      target
-      base
+      (λ lower →
+        L2.complex3NormSquared lower
+        ≤ R178.three * heterochiralComponentMass tau)
+      lowerMeaning
+      (subst
+        (λ upper →
+          L2.complex3NormSquared
+            (C3.complex3Add (C3.complex3Add a b) (C3.complex3Zero F))
+          ≤ upper)
+        target
+        base)
 
   homoPlusHeteroLowOutputBound :
     (tau : Physical.PhysicalTriadIncidence) →
@@ -205,7 +228,7 @@ module Payment
                   (Audit.velocity system (Physical.p tau))
               * L2.complex3NormSquared
                   (Audit.velocity system (Physical.q tau)))
-          (splitComponentMassIsFourComponentMass tau)
+          (sym (splitComponentMassIsFourComponentMass tau))
           fourBound
 
       scaled :
