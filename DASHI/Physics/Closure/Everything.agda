@@ -274,3 +274,6 @@ import DASHI.Physics.Closure.NSWholeSpaceBishopCauchyPSDLimitExact
 import DASHI.Physics.Closure.NSWholeSpaceBishopWeightedCauchyQuadraturePSDExact
 import DASHI.Physics.Closure.NSWholeSpaceBishopCauchyQuadratureLimitExact
 import DASHI.Physics.Closure.NSWholeSpaceCoherentSaturationQuadratureExact
+
+import DASHI.Physics.Closure.NSWholeSpaceConvolutionEnergyTonelliExact
+import DASHI.Physics.Closure.NSWholeSpaceCoherentGramQuadratureLimitExact
