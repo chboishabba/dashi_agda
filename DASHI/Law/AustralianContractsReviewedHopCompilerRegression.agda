@@ -3,6 +3,7 @@ module DASHI.Law.AustralianContractsReviewedHopCompilerRegression where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Maybe using (just; nothing)
 
 import DASHI.Law.AustralianContractsReviewedHopCompilerExact as Compiler
 import DASHI.Law.SensibLawCitationUsePropositionExact as CitationUse
