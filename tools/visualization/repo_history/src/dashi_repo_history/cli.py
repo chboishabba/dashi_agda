@@ -72,6 +72,63 @@ def _render(args: argparse.Namespace) -> None:
     )
 
 
+def _symbols(args: argparse.Namespace) -> None:
+    data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+    snapshots = data.get("snapshots", [])
+    if not snapshots:
+        raise SystemExit("No semantic snapshots in input.")
+
+    snapshot = snapshots[args.snapshot_index]
+    query = (args.query or "").lower()
+    rows = []
+    for node in snapshot["graph"].get("nodes", []):
+        qualified = f"{node.get('module')}::{node.get('label')}"
+        haystack = " ".join(
+            [
+                qualified,
+                str(node.get("kind", "")),
+                str(node.get("scope", "")),
+            ]
+        ).lower()
+        if query and query not in haystack:
+            continue
+        rows.append(
+            {
+                "selector": qualified,
+                "symbol_id": node["symbol_id"],
+                "kind": node.get("kind"),
+                "module": node.get("module"),
+                "label": node.get("label"),
+                "scope": node.get("scope"),
+            }
+        )
+
+    rows.sort(
+        key=lambda row: (
+            str(row["module"]),
+            str(row["label"]),
+            str(row["scope"]),
+        )
+    )
+
+    if args.json:
+        print(json.dumps(rows, indent=2))
+        return
+
+    for row in rows[: args.limit]:
+        scope = (
+            f" scope={str(row['scope'])[:16]}"
+            if row["scope"]
+            else ""
+        )
+        print(
+            f"{row['selector']} "
+            f"[{row['kind']}] "
+            f"id={row['symbol_id'][:12]}"
+            f"{scope}"
+        )
+
+
 def _episodes(args: argparse.Namespace) -> None:
     data = json.loads(Path(args.input).read_text(encoding="utf-8"))
     commits = {
@@ -204,6 +261,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="Target commit for the first-parent semantic-history lineage.",
     )
     render.set_defaults(func=_render)
+
+    symbols = sub.add_parser(
+        "symbols",
+        help="List semantic symbols and stable selectors in one snapshot.",
+    )
+    symbols.add_argument("input")
+    symbols.add_argument("--snapshot-index", type=int, default=-1)
+    symbols.add_argument("--query")
+    symbols.add_argument("--limit", type=int, default=100)
+    symbols.add_argument("--json", action="store_true")
+    symbols.set_defaults(func=_symbols)
 
     episodes = sub.add_parser(
         "episodes",
