@@ -319,3 +319,5 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedRankGeometryRefreshExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedDebtSmoothExact
 
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPrimitivePreservationExact
+
+import DASHI.Physics.Closure.NSTriadKNR571HermitianStateDifferenceEnvelopeExact
