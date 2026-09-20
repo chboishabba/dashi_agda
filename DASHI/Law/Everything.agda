@@ -160,3 +160,6 @@ import DASHI.Law.AustralianContractsExternalIdentityParetoRegression
 
 import DASHI.Law.AustralianContractsThreeHopAdaptiveFixtureExact
 import DASHI.Law.AustralianContractsThreeHopAdaptiveFixtureRegression
+
+import DASHI.Law.WaltonsLiveOalcOperatorPipelineExact
+import DASHI.Law.WaltonsLiveOalcOperatorPipelineRegression
