@@ -350,6 +350,7 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicExclusionNativeExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedR3FiniteEnergyExclusionNativeExact
 -- Producer-level reductions below the concentrated ABCD frontier.
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact
+import DASHI.Physics.Closure.NSTriadKNCenteredCovarianceToSecondMomentExact
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact
