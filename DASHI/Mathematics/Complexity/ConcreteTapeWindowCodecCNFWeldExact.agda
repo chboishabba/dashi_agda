@@ -50,9 +50,9 @@ encodedWindowPredicate :
     (Local.Symbol machine) →
   CNF.Bits width →
   Bool
-encodedWindowPredicate codec rule bits =
+encodedWindowPredicate {machine} codec rule bits =
   Reflect.reflectedLegalWindowBool
-    _ rule (decode codec bits)
+    machine rule (decode codec bits)
 
 encodedWindowCNF :
   ∀ {machine width} →
