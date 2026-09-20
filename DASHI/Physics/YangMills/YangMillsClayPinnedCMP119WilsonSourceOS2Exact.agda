@@ -20,10 +20,22 @@ import DASHI.Physics.YangMills.BalabanClayOSWilsonReflectionPositivityExact as W
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
+import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
+import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
+import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
+import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 
 record LiteralCMP119WilsonRPApplication
     (Configuration : Set)
-    {sequenceLimit limitLaws quotient division}
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    {limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit}
+    {quotient :
+      Quotient.RealQuotientConvergenceAuthority
+        (RealLimit.Converges sequenceLimit)}
+    {division :
+      Division.RealDivisionAlgebra
+        (RealLimit.canonicalCylinderAlgebra limitLaws)
+        quotient}
     (family :
       Limit.FinitePhysicalNormalizedFamily
         Configuration limitLaws quotient division)
@@ -78,7 +90,11 @@ singleObservableReflectionPositive :
         (OS2.reflectObservable algebra observable)
         observable)
 singleObservableReflectionPositive application cutoff observable =
-  publishedNonnegativeIsRealOrder application _
+  publishedNonnegativeIsRealOrder application
+    (Limit.finiteExpectation family cutoff
+      (OS2.multiplyObservable algebra
+        (OS2.reflectObservable algebra observable)
+        observable))
     (substExpectation
       (publishedReflectedExpectationIsLiteral application cutoff observable)
       (Wilson.wilsonPositivityAtAnySeparationParity
