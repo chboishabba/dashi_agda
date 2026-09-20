@@ -29,17 +29,22 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBudge
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as Bridge
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceQuantitativePairBoundExact as Quant
@@ -169,6 +174,121 @@ physicalSignedPairBelowCenteredBudget
         alpha beta))
 
 ------------------------------------------------------------------------
+-- Exact finite-family lift on one literal output.
+------------------------------------------------------------------------
+
+physicalCenteredAgainstHead :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  Physical.PhysicalTriadIncidence →
+  List Physical.PhysicalTriadIncidence → ℚ
+physicalCenteredAgainstHead physicalSystem mixed value head [] = 0ℚ
+physicalCenteredAgainstHead physicalSystem mixed value head (x ∷ xs) =
+  physicalCoherentPairBudget physicalSystem mixed value head x
+  + physicalCenteredAgainstHead physicalSystem mixed value head xs
+
+physicalCenteredPairSum :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  List Physical.PhysicalTriadIncidence → ℚ
+physicalCenteredPairSum physicalSystem mixed value [] = 0ℚ
+physicalCenteredPairSum physicalSystem mixed value (x ∷ xs) =
+  physicalCenteredAgainstHead physicalSystem mixed value x xs
+  + physicalCenteredPairSum physicalSystem mixed value xs
+
+physicalAgainstHeadBelowCentered :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (output : Z3.FourierMode) →
+  (head : Physical.PhysicalTriadIncidence) →
+  Physical.k head ≡ output →
+  (rest : List Physical.PhysicalTriadIncidence) →
+  ((tau : Physical.PhysicalTriadIncidence) →
+    tau R396.OccursIn rest → Physical.k tau ≡ output) →
+  Pair.pairAgainstHead
+    (Rate.physicalCellRate physicalSystem)
+    (λ item → Work.coherentWork mixed (value item))
+    head rest
+  ≤ physicalCenteredAgainstHead physicalSystem mixed value head rest
+physicalAgainstHeadBelowCentered
+    physicalSystem mixed value output head headOutput [] allOutput =
+  ℚP.≤-refl
+physicalAgainstHeadBelowCentered
+    physicalSystem mixed value output head headOutput (x ∷ xs) allOutput =
+  ℚP.+-mono-≤
+    (physicalSignedPairBelowCenteredBudget
+      physicalSystem mixed value head x
+      (trans headOutput (sym (allOutput x R396.here))))
+    (physicalAgainstHeadBelowCentered
+      physicalSystem mixed value output head headOutput xs
+      (λ tau member → allOutput tau (R396.there member)))
+
+physicalFixedOutputFamilySignedBound :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (output : Z3.FourierMode) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  ((tau : Physical.PhysicalTriadIncidence) →
+    tau R396.OccursIn items → Physical.k tau ≡ output) →
+  Pair.pairDifferenceWorkSum
+    (Rate.physicalCellRate physicalSystem)
+    (λ item → Work.coherentWork mixed (value item))
+    items
+  ≤ physicalCenteredPairSum physicalSystem mixed value items
+physicalFixedOutputFamilySignedBound
+    physicalSystem mixed value output [] allOutput =
+  ℚP.≤-refl
+physicalFixedOutputFamilySignedBound
+    physicalSystem mixed value output (head ∷ rest) allOutput =
+  ℚP.+-mono-≤
+    (physicalAgainstHeadBelowCentered
+      physicalSystem mixed value output head
+      (allOutput head R396.here)
+      rest
+      (λ tau member → allOutput tau (R396.there member)))
+    (physicalFixedOutputFamilySignedBound
+      physicalSystem mixed value output rest
+      (λ tau member → allOutput tau (R396.there member)))
+
+occursToCube :
+  ∀ {A : Set} {x : A} {xs : List A} →
+  x R396.OccursIn xs → x Cube.∈ xs
+occursToCube R396.here = Cube.here refl
+occursToCube (R396.there member) = Cube.there (occursToCube member)
+
+literalFibreAllHaveOutput :
+  (cutoff : Nat) (output : Z3.FourierMode) →
+  (tau : Physical.PhysicalTriadIncidence) →
+  tau R396.OccursIn Output.physicalOutputFiber cutoff output →
+  Physical.k tau ≡ output
+literalFibreAllHaveOutput cutoff output tau member =
+  Output.physicalOutputFiberSound (occursToCube member)
+
+literalPhysicalOutputFibreSignedBound :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (cutoff : Nat) →
+  (output : Z3.FourierMode) →
+  let items = Output.physicalOutputFiber cutoff output
+  in
+  Pair.pairDifferenceWorkSum
+    (Rate.physicalCellRate physicalSystem)
+    (λ item → Work.coherentWork mixed (value item))
+    items
+  ≤ physicalCenteredPairSum physicalSystem mixed value items
+literalPhysicalOutputFibreSignedBound
+    physicalSystem mixed value cutoff output =
+  physicalFixedOutputFamilySignedBound
+    physicalSystem mixed value output
+    (Output.physicalOutputFiber cutoff output)
+    (literalFibreAllHaveOutput cutoff output)
+
+------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
 
@@ -182,7 +302,7 @@ physicalSignedCoherentPairBudgetIntroducesCardinalityTax : Bool
 physicalSignedCoherentPairBudgetIntroducesCardinalityTax = false
 
 physicalFixedOutputFamilyBudgetSummedHere : Bool
-physicalFixedOutputFamilyBudgetSummedHere = false
+physicalFixedOutputFamilyBudgetSummedHere = true
 
 cutoffUniformIntegratedBudgetClosedHere : Bool
 cutoffUniformIntegratedBudgetClosedHere = false
