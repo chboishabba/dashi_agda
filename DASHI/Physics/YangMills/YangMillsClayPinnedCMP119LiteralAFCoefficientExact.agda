@@ -10,6 +10,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralAFCoefficientExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Product using (_×_; _,_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
