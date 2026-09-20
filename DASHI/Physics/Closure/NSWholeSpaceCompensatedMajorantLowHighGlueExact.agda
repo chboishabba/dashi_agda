@@ -19,6 +19,7 @@ module DASHI.Physics.Closure.NSWholeSpaceCompensatedMajorantLowHighGlueExact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import Real as BishopReal
 
@@ -74,7 +75,7 @@ globalPhysicalMajorantIntegrable :
   Lebesgue.Integrable base (globalMajorant M)
 globalPhysicalMajorantIntegrable authority M =
   integrableRespectsPointwise authority
-    (globalSplitsLowHigh M)
+    (λ I → sym (globalSplitsLowHigh M I))
     (integrableAdd authority
       (lowIntegrable M)
       (highIntegrable M))
