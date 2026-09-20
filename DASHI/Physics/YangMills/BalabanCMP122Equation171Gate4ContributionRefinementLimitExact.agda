@@ -18,6 +18,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as RingEmbed
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact as PhysicalT
+import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact as T
 import DASHI.Physics.YangMills.BalabanCMP122Equation171TOperationSemanticsExact as Eq171
 import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4ContributionQuadratureExact as Quad
 import DASHI.Physics.YangMills.BalabanCompactHaarMassExactContributionApproximationExact as Approx
@@ -64,13 +65,13 @@ embeddedGate4MassAt
   {embedding = embedding}
   dataSet refinement cutoff slow =
   Quad.embedQ embedding
-    (DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact.localizedTOperation
+    (T.localizedTOperation
       (PhysicalT.canonicalPhysicalTData
         (constructionAt dataSet refinement))
       (Quad.scaleAt (quadratureAt dataSet refinement) cutoff)
       (Quad.selectedAt (quadratureAt dataSet refinement) cutoff)
       slow
-      (DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact.oneFunctional
+      (T.oneFunctional
         (PhysicalT.canonicalPhysicalTData
           (constructionAt dataSet refinement))))
 
