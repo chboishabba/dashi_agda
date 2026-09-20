@@ -41,6 +41,9 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Cov
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredCovarianceFactorExact as Centered
 import DASHI.Physics.Closure.NSTriadKNFixedOutputViscousRateDifferenceFactorizationExact as Rate
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredMultiplierVectorCovarianceExact as Vector
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -193,6 +196,70 @@ literalFixedOutputCenteredCovarianceIsTwiceInputMassCovariance
     E I work
     (Output.physicalOutputFiber cutoff output)
     (Centered.literalOutputFibreHomogeneous cutoff output)
+
+inputLaplacianResidual :
+  {E : C3.IntegerEmbedding F} →
+  (I : C3.ModeInverseSquare F E) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  List Physical.PhysicalTriadIncidence →
+  C3.Complex3 F
+inputLaplacianResidual I value items =
+  Vector.centeredMultiplierResidual (inputMass I) value items
+
+literalFixedOutputCenteredResidualWorkIsTwiceInputLaplacianResidualWork :
+  (E : C3.IntegerEmbedding F) →
+  (I : C3.ModeInverseSquare F E) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (cutoff : Nat) →
+  (output : Z3.FourierMode) →
+  let
+    items = Output.physicalOutputFiber cutoff output
+    mixed = R224.foldVector value items
+    centeredResidual =
+      Vector.centeredMultiplierResidual
+        (Vector.centeredFrequencyMultiplier E) value items
+    inputResidual = inputLaplacianResidual I value items
+  in
+  Work.coherentWork mixed centeredResidual
+  ≡ Rate.two * Work.coherentWork mixed inputResidual
+literalFixedOutputCenteredResidualWorkIsTwiceInputLaplacianResidualWork
+    E I value cutoff output =
+  let
+    items = Output.physicalOutputFiber cutoff output
+    mixed = R224.foldVector value items
+    centeredMultiplier = Vector.centeredFrequencyMultiplier E
+    centeredWork = Cov.cellWork mixed value
+    centeredPair =
+      Centered.centeredPairDifferenceWorkSum E centeredWork items
+    inputPair =
+      inputMassPairDifferenceWorkSum I centeredWork items
+
+    centeredMeaning :
+      centeredPair
+      ≡ Work.coherentWork mixed
+          (Vector.centeredMultiplierResidual centeredMultiplier value items)
+    centeredMeaning =
+      Vector.pairDifferenceIsCenteredMultiplierWork
+        centeredMultiplier value items
+
+    inputMeaning :
+      inputPair
+      ≡ Work.coherentWork mixed
+          (inputLaplacianResidual I value items)
+    inputMeaning =
+      Vector.pairDifferenceIsCenteredMultiplierWork
+        (inputMass I) value items
+
+    pairRelation :
+      centeredPair ≡ Rate.two * inputPair
+    pairRelation =
+      literalFixedOutputCenteredCovarianceIsTwiceInputMassCovariance
+        E I centeredWork cutoff output
+  in
+  trans
+    (sym centeredMeaning)
+    (trans pairRelation
+      (cong (Rate.two *_) inputMeaning))
 
 ------------------------------------------------------------------------
 -- Relation to the physical viscous-rate covariance.
