@@ -9,6 +9,7 @@ open import Data.Empty using (⊥)
 import DASHI.Law.AustralianContractsReviewedHopCompilerExact as Reviewed
 import DASHI.Law.AustralianContractsLandscapeControllerExact as Landscape
 import DASHI.Law.SensibLawNativeLegalFollowCLIExact as CLI
+import DASHI.Law.GenericRecursiveLegalFollowCampaignExact as Recursive
 
 ------------------------------------------------------------------------
 -- LIVE WALTONS / OALC OPERATOR PIPELINE
@@ -168,3 +169,14 @@ CliBoundary = CLI.NativeLegalFollowCliBoundary
 
 cliBoundaryPaid : CliBoundary
 cliBoundaryPaid = CLI.canonicalNativeLegalFollowCliBoundary
+
+------------------------------------------------------------------------
+-- Phase-IV handoff: once the Waltons live campaign is complete, continuation
+-- is owned by the generic recursive campaign rather than this case shell.
+------------------------------------------------------------------------
+
+RecursiveBoundary : Set
+RecursiveBoundary = Recursive.GenericRecursiveCampaignBoundary
+
+recursiveBoundaryPaid : RecursiveBoundary
+recursiveBoundaryPaid = Recursive.canonicalGenericRecursiveCampaignBoundary
