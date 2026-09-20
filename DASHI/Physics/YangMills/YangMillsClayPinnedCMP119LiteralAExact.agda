@@ -17,6 +17,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralAExact where
 -- Only semantic/physical theorem predicates on these fixed objects remain.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -135,11 +136,11 @@ compilePinnedFinite :
     {limitLaws = limitLaws} {quotient = quotient} {division = division}
     {S = S} osInputs reconstruction →
   Pinned.PinnedFiniteYMConstruction S
-compilePinnedFinite inputs = record
+compilePinnedFinite {osInputs = osInputs} inputs = record
   { Pinned.PinnedFiniteYMConstruction.finiteMeasure =
       λ G cutoff →
         Limit.finiteMeasure
-          (OSSystem.family _ G)
+          (OSSystem.family osInputs G)
           cutoff
   ; Pinned.PinnedFiniteYMConstruction.finiteVolumeCutoffMeasure =
       finiteVolumeCutoffMeasure inputs
@@ -212,10 +213,10 @@ literalAContinuumMeasureIsConstructedCMP119Limit :
         {S = S} osInputs reconstruction)
     group →
   Pinned.continuumMeasure (compilePinnedContinuum inputs) group
-  Agda.Builtin.Equality.≡
+  _≡_
   OSSystem.constructedMeasure osInputs group
 literalAContinuumMeasureIsConstructedCMP119Limit inputs group =
-  Agda.Builtin.Equality.refl
+  refl
 
 literalASchwingerIsSameConstructedMeasure :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -230,10 +231,10 @@ literalASchwingerIsSameConstructedMeasure :
         {S = S} osInputs reconstruction)
     group →
   Pinned.schwinger (compilePinnedContinuum inputs) group
-  Agda.Builtin.Equality.≡
+  _≡_
   OSSystem.constructedSchwinger osInputs group
 literalASchwingerIsSameConstructedMeasure inputs group =
-  Agda.Builtin.Equality.refl
+  refl
 
 literalAHilbertIsOSReconstructed :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -248,10 +249,10 @@ literalAHilbertIsOSReconstructed :
         {S = S} osInputs reconstruction)
     group →
   Pinned.hilbertSpace (compilePinnedContinuum inputs) group
-  Agda.Builtin.Equality.≡
+  _≡_
   OSR.reconstructedHilbert reconstruction group
 literalAHilbertIsOSReconstructed inputs group =
-  Agda.Builtin.Equality.refl
+  refl
 
 literalAHamiltonianIsOSReconstructed :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -266,10 +267,10 @@ literalAHamiltonianIsOSReconstructed :
         {S = S} osInputs reconstruction)
     group →
   Pinned.hamiltonian (compilePinnedContinuum inputs) group
-  Agda.Builtin.Equality.≡
+  _≡_
   OSR.reconstructedHamiltonian reconstruction group
 literalAHamiltonianIsOSReconstructed inputs group =
-  Agda.Builtin.Equality.refl
+  refl
 
 pinnedCMP119LiteralAFiniteCompilerLevel : ProofLevel
 pinnedCMP119LiteralAFiniteCompilerLevel = machineChecked
