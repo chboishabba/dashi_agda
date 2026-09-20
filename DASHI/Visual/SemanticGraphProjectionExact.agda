@@ -80,6 +80,7 @@ edgeStyleClass opensEdge = structuralStyle
 edgeStyleClass typeDependsEdge = dependencyStyle
 edgeStyleClass bodyDependsEdge = dependencyStyle
 edgeStyleClass valueFlowsEdge = flowStyle
+edgeStyleClass argumentToEdge = flowStyle
 edgeStyleClass callsEdge = applicationStyle
 edgeStyleClass constructsEdge = constructionStyle
 edgeStyleClass fieldOfEdge = structuralStyle
