@@ -76,48 +76,78 @@ def _first_ancestor(node: Any, kinds: set[str]) -> Any | None:
     return None
 
 
-def _first_descendant_name(source: bytes, node: Any) -> str | None:
+def _first_descendant(
+    node: Any,
+    kinds: set[str],
+) -> Any | None:
     stack = [node]
     while stack:
         current = stack.pop()
-        if current.type in {"qid", "id", "field_name", "data_name", "record_name"}:
-            value = _node_text(source, current).strip()
-            if value:
-                return value
+        if current.type in kinds:
+            return current
         stack.extend(reversed(current.children))
     return None
 
 
-def _binding_names(source: bytes, node: Any) -> list[tuple[str, Any]]:
-    """Return all syntactic binder names while excluding the bound type.
+def _first_descendant_name(source: bytes, node: Any) -> str | None:
+    found = _first_descendant(
+        node,
+        {"qid", "id", "field_name", "data_name", "record_name"},
+    )
+    if found is None:
+        return None
+    value = _node_text(source, found).strip()
+    return value or None
 
-    For typed bindings, names occur before the first ':' token.  This handles
-    multi-binders such as (x y : A) without accidentally turning A into a local
-    variable.  Untyped bindings contribute all identifier leaves.
-    """
+
+def _identifier_leaves(
+    source: bytes,
+    node: Any,
+    *,
+    stop_ancestor_types: set[str] | None = None,
+) -> list[tuple[str, Any]]:
+    stop_ancestor_types = stop_ancestor_types or set()
+    out: list[tuple[str, Any]] = []
+    stack = [node]
+
+    while stack:
+        current = stack.pop()
+        if current is not node and current.type in stop_ancestor_types:
+            continue
+        if current.child_count == 0 and current.type in {"qid", "id", "bid"}:
+            value = _node_text(source, current).strip()
+            if value:
+                out.append((value, current))
+            continue
+        stack.extend(reversed(current.children))
+
+    out.sort(key=lambda item: item[1].start_byte)
+    return out
+
+
+def _binding_names(source: bytes, node: Any) -> list[tuple[str, Any]]:
+    """Return binder names while excluding the bound type."""
 
     source_slice = source[node.start_byte : node.end_byte]
     colon = source_slice.find(b":")
     absolute_colon = None if colon < 0 else node.start_byte + colon
 
     out: list[tuple[str, Any]] = []
-    stack = [node]
     seen: set[str] = set()
-    while stack:
-        current = stack.pop()
-        if current.child_count == 0 and current.type in {"qid", "id", "bid"}:
-            if absolute_colon is not None and current.start_byte > absolute_colon:
-                continue
-            value = _node_text(source, current).strip()
-            leaf = value.split(".")[-1]
-            if leaf and leaf != "_" and leaf not in seen:
-                seen.add(leaf)
-                out.append((leaf, current))
-        stack.extend(reversed(current.children))
+    for value, current in _identifier_leaves(source, node):
+        if absolute_colon is not None and current.start_byte > absolute_colon:
+            continue
+        leaf = value.split(".")[-1]
+        if leaf and leaf != "_" and leaf not in seen:
+            seen.add(leaf)
+            out.append((leaf, current))
     return out
 
 
-def _declaration_fingerprint(source: bytes, declaration: "RawDeclaration") -> str:
+def _declaration_fingerprint(
+    source: bytes,
+    declaration: "RawDeclaration",
+) -> str:
     parts: list[str] = []
     for start, end in sorted(declaration.owner_ranges):
         raw = source[start:end].decode("utf-8", "replace")
@@ -151,11 +181,29 @@ def _reference_kind(node: Any) -> str:
 
 
 @dataclass
+class PatternCandidate:
+    value: str
+    span: SourceSpan
+    scope: str
+
+
+@dataclass
+class RawReference:
+    value: str
+    span: SourceSpan
+    kind: str
+    scope: str
+
+
+@dataclass
 class RawDeclaration:
     symbol: Symbol
     owner_ranges: list[tuple[int, int]]
-    binders: dict[str, Symbol] = field(default_factory=dict)
-    references: list[tuple[str, SourceSpan, str]] = field(default_factory=list)
+    binders: dict[tuple[str, str], Symbol] = field(default_factory=dict)
+    pattern_candidates: list[PatternCandidate] = field(default_factory=list)
+    references: list[RawReference] = field(default_factory=list)
+    container_label: str | None = None
+    container_relation: str | None = None
 
 
 @dataclass
@@ -176,6 +224,110 @@ DECLARATION_ANCESTORS = {
     "record",
     "record_signature",
 }
+
+
+def _owner_range(
+    declaration: RawDeclaration,
+    start: int,
+    end: int,
+) -> tuple[int, int] | None:
+    matches = [
+        owner_range
+        for owner_range in declaration.owner_ranges
+        if owner_range[0] <= start and end <= owner_range[1]
+    ]
+    if not matches:
+        return None
+    return min(matches, key=lambda item: item[1] - item[0])
+
+
+def _scope_id(
+    source: bytes,
+    declaration: RawDeclaration,
+    owner_range: tuple[int, int],
+) -> str:
+    start, end = owner_range
+    raw = source[start:end].decode("utf-8", "replace")
+    masked = raw.replace(declaration.symbol.label, "<SELF>")
+    normalized = " ".join(masked.split())
+    return f"{declaration.symbol.symbol_id}:{stable_hash(normalized)[:20]}"
+
+
+def _smallest_owner(
+    declarations: list[RawDeclaration],
+    start: int,
+    end: int,
+) -> RawDeclaration | None:
+    matches: list[tuple[int, RawDeclaration]] = []
+    for declaration in declarations:
+        owner_range = _owner_range(declaration, start, end)
+        if owner_range is not None:
+            matches.append(
+                (owner_range[1] - owner_range[0], declaration)
+            )
+    if not matches:
+        return None
+    return min(matches, key=lambda item: item[0])[1]
+
+
+def _scope_for_node(
+    source: bytes,
+    declaration: RawDeclaration,
+    node: Any,
+) -> str:
+    owner_range = _owner_range(
+        declaration,
+        node.start_byte,
+        node.end_byte,
+    )
+    if owner_range is None:
+        return declaration.symbol.symbol_id
+    return _scope_id(source, declaration, owner_range)
+
+
+def _container_name(
+    source: bytes,
+    node: Any,
+    *,
+    container_type: str,
+    name_type: str,
+) -> str | None:
+    container = _first_ancestor(node, {container_type})
+    if container is None:
+        return None
+    name_node = _first_descendant(container, {name_type})
+    if name_node is None:
+        return None
+    value = _node_text(source, name_node).strip()
+    return value or None
+
+
+def _function_clause_name_and_patterns(
+    source: bytes,
+    function_node: Any,
+) -> tuple[Any | None, list[tuple[str, Any]]]:
+    lhs = _first_descendant(function_node, {"lhs"})
+    if lhs is None:
+        return None, []
+
+    identifiers = _identifier_leaves(
+        source,
+        lhs,
+        stop_ancestor_types={"rewrite_equations", "with_expressions"},
+    )
+    if not identifiers:
+        return None, []
+
+    name_node = identifiers[0][1]
+    patterns = identifiers[1:]
+    return name_node, patterns
+
+
+def _function_is_definition(source: bytes, function_node: Any) -> bool:
+    rhs = _first_descendant(function_node, {"rhs"})
+    if rhs is None:
+        return False
+    return _node_text(source, rhs).lstrip().startswith("=")
 
 
 def extract_file(path: str, source: bytes) -> FileExtraction:
@@ -208,10 +360,19 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
 
     declarations_by_key: dict[tuple[str, str], RawDeclaration] = {}
 
-    def add_decl(label: str, kind: str, owner: Any, name_node: Any) -> None:
+    def add_decl(
+        label: str,
+        kind: str,
+        owner: Any,
+        name_node: Any,
+        *,
+        container_label: str | None = None,
+        container_relation: str | None = None,
+    ) -> RawDeclaration | None:
         label = label.strip()
         if not label:
-            return
+            return None
+
         symbol = Symbol.create(
             label=label,
             kind=kind,
@@ -222,13 +383,24 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         key = (label, kind)
         existing = declarations_by_key.get(key)
         owner_range = (owner.start_byte, owner.end_byte)
+
         if existing is None:
-            declarations_by_key[key] = RawDeclaration(
+            existing = RawDeclaration(
                 symbol=symbol,
                 owner_ranges=[owner_range],
+                container_label=container_label,
+                container_relation=container_relation,
             )
-        elif owner_range not in existing.owner_ranges:
-            existing.owner_ranges.append(owner_range)
+            declarations_by_key[key] = existing
+        else:
+            if owner_range not in existing.owner_ranges:
+                existing.owner_ranges.append(owner_range)
+            if existing.container_label is None:
+                existing.container_label = container_label
+            if existing.container_relation is None:
+                existing.container_relation = container_relation
+
+        return existing
 
     for node in captures.get("data_name", []):
         owner = _first_ancestor(node, {"data", "data_signature"})
@@ -240,18 +412,71 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         if owner is not None:
             add_decl(_node_text(source, node), "record", owner, node)
 
+    for node in captures.get("record_constructor_name", []):
+        owner = _first_ancestor(node, {"record_constructor"})
+        record_label = _container_name(
+            source,
+            node,
+            container_type="record",
+            name_type="record_name",
+        )
+        if owner is not None:
+            add_decl(
+                _node_text(source, node),
+                "constructor",
+                owner,
+                node,
+                container_label=record_label,
+                container_relation="constructor-of",
+            )
+
     for node in captures.get("field_name", []):
-        owner = _first_ancestor(node, DECLARATION_ANCESTORS | {"fields", "postulate"})
+        owner = _first_ancestor(
+            node,
+            DECLARATION_ANCESTORS | {"fields", "postulate"},
+        )
         if owner is None:
             continue
+
         label = _node_text(source, node)
+        data_label = _container_name(
+            source,
+            node,
+            container_type="data",
+            name_type="data_name",
+        )
+        record_label = _container_name(
+            source,
+            node,
+            container_type="record",
+            name_type="record_name",
+        )
+
         if _first_ancestor(node, {"postulate"}) is not None:
             kind = "postulate"
+            container_label = None
+            container_relation = None
+        elif data_label is not None:
+            kind = "constructor"
+            container_label = data_label
+            container_relation = "constructor-of"
         elif _first_ancestor(node, {"fields"}) is not None:
             kind = "field"
+            container_label = record_label
+            container_relation = "field-of"
         else:
             kind = "function"
-        add_decl(label, kind, owner, node)
+            container_label = None
+            container_relation = None
+
+        add_decl(
+            label,
+            kind,
+            owner,
+            node,
+            container_label=container_label,
+            container_relation=container_relation,
+        )
 
     for node in captures.get("function_name", []):
         owner = _first_ancestor(node, {"function"})
@@ -261,28 +486,81 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         if label is not None:
             add_decl(label, "function", owner, node)
 
-    # Same label/kind may have a signature and several equations. Preserve each
-    # source range rather than widening one interval across unrelated declarations.
+    # Function definitions do not carry the function_name alias in the grammar.
+    # Recover the leading LHS identifier and collect the remaining identifiers
+    # as pattern candidates; known constructors are resolved later, everything
+    # else becomes a clause-scoped binder.
+    for function_node in captures.get("function_clause", []):
+        name_node, patterns = _function_clause_name_and_patterns(
+            source,
+            function_node,
+        )
+        if name_node is None:
+            continue
+
+        label = _node_text(source, name_node).strip()
+        declaration = add_decl(
+            label,
+            "function",
+            function_node,
+            name_node,
+        )
+        if declaration is None or not _function_is_definition(
+            source,
+            function_node,
+        ):
+            continue
+
+        scope = _scope_for_node(
+            source,
+            declaration,
+            function_node,
+        )
+        for value, pattern_node in patterns:
+            leaf = value.split(".")[-1]
+            if not leaf or leaf == "_":
+                continue
+            declaration.pattern_candidates.append(
+                PatternCandidate(
+                    value=value,
+                    span=_span(path, pattern_node),
+                    scope=scope,
+                )
+            )
+
     declarations = list(declarations_by_key.values())
 
     for declaration in declarations:
         declaration.symbol = replace(
             declaration.symbol,
-            fingerprint=_declaration_fingerprint(source, declaration),
+            fingerprint=_declaration_fingerprint(
+                source,
+                declaration,
+            ),
         )
 
-    for binding in captures.get("typed_binding", []) + captures.get("untyped_binding", []):
-        owner = _smallest_owner(declarations, binding.start_byte, binding.end_byte)
+    for binding in (
+        captures.get("typed_binding", [])
+        + captures.get("untyped_binding", [])
+    ):
+        owner = _smallest_owner(
+            declarations,
+            binding.start_byte,
+            binding.end_byte,
+        )
         if owner is None:
             continue
+        scope = _scope_for_node(source, owner, binding)
+
         for leaf, name_node in _binding_names(source, binding):
+            key = (scope, leaf)
             owner.binders.setdefault(
-                leaf,
+                key,
                 Symbol.create(
                     label=leaf,
                     kind="binder",
                     module=module,
-                    scope=owner.symbol.symbol_id,
+                    scope=scope,
                     span=_span(path, name_node),
                 ),
             )
@@ -291,13 +569,42 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         value = _node_text(source, ref).strip()
         if not value:
             continue
-        owner = _smallest_owner(declarations, ref.start_byte, ref.end_byte)
+
+        owner = _smallest_owner(
+            declarations,
+            ref.start_byte,
+            ref.end_byte,
+        )
         if owner is None:
             continue
+
+        # Function LHS identifiers are handled as the function name, constructor
+        # patterns, or clause binders above. They are not ordinary dependencies.
+        if _first_ancestor(ref, {"lhs"}) is not None:
+            continue
+
         leaf = value.split(".")[-1]
         if leaf == owner.symbol.label:
             continue
-        owner.references.append((value, _span(path, ref), _reference_kind(ref)))
+
+        scope = _scope_for_node(source, owner, ref)
+        local = owner.binders.get((scope, leaf))
+        if local is not None:
+            span = _span(path, ref)
+            if (
+                span.start_byte == local.span.start_byte
+                and span.end_byte == local.span.end_byte
+            ):
+                continue
+
+        owner.references.append(
+            RawReference(
+                value=value,
+                span=_span(path, ref),
+                kind=_reference_kind(ref),
+                scope=scope,
+            )
+        )
 
     return FileExtraction(
         path=path,
@@ -309,22 +616,9 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
     )
 
 
-def _smallest_owner(
-    declarations: list[RawDeclaration],
-    start: int,
-    end: int,
-) -> RawDeclaration | None:
-    matches: list[tuple[int, RawDeclaration]] = []
-    for declaration in declarations:
-        for owner_start, owner_end in declaration.owner_ranges:
-            if owner_start <= start and end <= owner_end:
-                matches.append((owner_end - owner_start, declaration))
-    if not matches:
-        return None
-    return min(matches, key=lambda item: item[0])[1]
-
-
-def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
+def build_semantic_graph(
+    files: Iterable[FileExtraction],
+) -> SemanticGraph:
     files = list(files)
     graph = SemanticGraph()
 
@@ -349,7 +643,44 @@ def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
         by_module_label[(symbol.module, symbol.label)] = symbol
         by_label.setdefault(symbol.label, []).append(symbol)
 
+    # Resolve clause pattern candidates only after the declaration table exists.
+    # A known constructor is a pattern dependency; otherwise the bare name is a
+    # local binder in that clause scope.
+    for declaration in declarations:
+        for candidate in declaration.pattern_candidates:
+            target = _resolve_reference(
+                ref=candidate.value,
+                owner_module=declaration.symbol.module,
+                by_module_label=by_module_label,
+                by_label=by_label,
+            )
+            if target is not None and target.kind == "constructor":
+                relation = Relation(
+                    source=target.symbol_id,
+                    target=declaration.symbol.symbol_id,
+                    kind="pattern-matches",
+                    evidence=candidate.span,
+                )
+                graph.edges[relation.relation_id] = relation
+                continue
+
+            leaf = candidate.value.split(".")[-1]
+            key = (candidate.scope, leaf)
+            declaration.binders.setdefault(
+                key,
+                Symbol.create(
+                    label=leaf,
+                    kind="binder",
+                    module=declaration.symbol.module,
+                    scope=candidate.scope,
+                    span=candidate.span,
+                ),
+            )
+
+    for declaration in declarations:
+        symbol = declaration.symbol
         module_symbol = modules[symbol.module]
+
         contains = Relation(
             source=module_symbol.symbol_id,
             target=symbol.symbol_id,
@@ -357,6 +688,22 @@ def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
             evidence=symbol.span,
         )
         graph.edges[contains.relation_id] = contains
+
+        if (
+            declaration.container_label is not None
+            and declaration.container_relation is not None
+        ):
+            container = by_module_label.get(
+                (symbol.module, declaration.container_label)
+            )
+            if container is not None:
+                relation = Relation(
+                    source=symbol.symbol_id,
+                    target=container.symbol_id,
+                    kind=declaration.container_relation,
+                    evidence=symbol.span,
+                )
+                graph.edges[relation.relation_id] = relation
 
         for binder in declaration.binders.values():
             graph.nodes[binder.symbol_id] = binder
@@ -384,22 +731,23 @@ def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
 
     for declaration in declarations:
         owner = declaration.symbol
-        for ref, evidence, relation_kind in declaration.references:
-            leaf = ref.split(".")[-1]
 
-            local = declaration.binders.get(leaf)
+        for ref in declaration.references:
+            leaf = ref.value.split(".")[-1]
+            local = declaration.binders.get((ref.scope, leaf))
+
             if local is not None:
                 relation = Relation(
                     source=local.symbol_id,
                     target=owner.symbol_id,
-                    kind=relation_kind,
-                    evidence=evidence,
+                    kind=ref.kind,
+                    evidence=ref.span,
                 )
                 graph.edges[relation.relation_id] = relation
                 continue
 
             target = _resolve_reference(
-                ref=ref,
+                ref=ref.value,
                 owner_module=owner.module,
                 by_module_label=by_module_label,
                 by_label=by_label,
@@ -408,9 +756,10 @@ def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
                 graph.unresolved_references.append(
                     {
                         "owner": owner.symbol_id,
-                        "reference": ref,
-                        "relation_kind": relation_kind,
-                        "evidence": evidence.__dict__,
+                        "reference": ref.value,
+                        "relation_kind": ref.kind,
+                        "scope": ref.scope,
+                        "evidence": ref.span.__dict__,
                     }
                 )
                 continue
@@ -418,8 +767,8 @@ def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
             relation = Relation(
                 source=target.symbol_id,
                 target=owner.symbol_id,
-                kind=relation_kind,
-                evidence=evidence,
+                kind=ref.kind,
+                evidence=ref.span,
             )
             graph.edges[relation.relation_id] = relation
 
@@ -458,8 +807,15 @@ class AgdaLanguageAdapter:
     name = "agda"
     suffixes = (".agda",)
 
-    def extract_file(self, path: str, source: bytes) -> FileExtraction:
+    def extract_file(
+        self,
+        path: str,
+        source: bytes,
+    ) -> FileExtraction:
         return extract_file(path, source)
 
-    def build_graph(self, files: list[FileExtraction]) -> SemanticGraph:
+    def build_graph(
+        self,
+        files: list[FileExtraction],
+    ) -> SemanticGraph:
         return build_semantic_graph(files)
