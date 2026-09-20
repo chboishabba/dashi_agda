@@ -183,7 +183,7 @@ def _prefix_application_head(node: Any) -> bool:
     named_children = list(expr.named_children)
     if len(named_children) < 2:
         return False
-    return named_children[0] is child
+    return named_children[0] == child
 
 
 def _reference_kind(source: bytes, node: Any) -> str:
