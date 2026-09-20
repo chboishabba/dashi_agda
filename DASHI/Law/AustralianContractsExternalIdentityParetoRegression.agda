@@ -38,3 +38,32 @@ supplementalIdentityStillIsNotLegalFrontier :
 supplementalIdentityStillIsNotLegalFrontier =
   Identity.supplementalIdentityIsLegalFrontierIsFalse
     Identity.canonicalAustralianContractsExternalIdentityBoundary
+
+
+verifiedWaltonsQidAttachmentRemainsSupplemental :
+  Identity.supplementalOnly Identity.waltonsVerifiedQidAttachmentFixture
+    ≡ true
+verifiedWaltonsQidAttachmentRemainsSupplemental =
+  Identity.supplementalOnlyIsTrue Identity.waltonsVerifiedQidAttachmentFixture
+
+verifiedWaltonsQidAttachmentCreatesNoAuthority :
+  Identity.createsLegalAuthority Identity.waltonsVerifiedQidAttachmentFixture
+    ≡ false
+verifiedWaltonsQidAttachmentCreatesNoAuthority =
+  Identity.createsLegalAuthorityIsFalse Identity.waltonsVerifiedQidAttachmentFixture
+
+externalIdentityStillRequiresExistingSemanticObject :
+  Identity.externalIdentityAttachmentRequiresExistingSemanticObject
+    Identity.canonicalAustralianContractsExternalIdentityBoundary
+    ≡ true
+externalIdentityStillRequiresExistingSemanticObject =
+  Identity.externalIdentityAttachmentRequiresExistingSemanticObjectIsTrue
+    Identity.canonicalAustralianContractsExternalIdentityBoundary
+
+conflictingIdentityStillBecomesHardResidual :
+  Identity.conflictingExternalIdentityIsHardResidual
+    Identity.canonicalAustralianContractsExternalIdentityBoundary
+    ≡ true
+conflictingIdentityStillBecomesHardResidual =
+  Identity.conflictingExternalIdentityIsHardResidualIsTrue
+    Identity.canonicalAustralianContractsExternalIdentityBoundary
