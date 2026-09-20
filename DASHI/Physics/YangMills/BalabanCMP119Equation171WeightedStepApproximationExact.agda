@@ -18,7 +18,7 @@ module DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedStepApproximation
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; absℝ; _-ℝ_; _≤ℝ_)
@@ -49,11 +49,13 @@ record CMP119Equation171WeightedStepApproximation
       Eq171.CMP122Equation171TOperationSemantics Fine SlowField
 
     quadratureAt :
-      Sequence → Component → Step →
+      (sequence : Sequence) →
+      (component : Component) →
+      (step : Step) →
       Weighted.Equation171WeightedGate4RefinementLimit
         {Scale = Scale} {Fine = Fine} {SlowField = SlowField}
         {Component = Component} {Functional = FunctionalValue}
-        (sourceTAt _ _ _) embedding sequenceLimit
+        (sourceTAt sequence component step) embedding sequenceLimit
 
     sourceStepIsEquation171Mass :
       ∀ scale sequence component step slow →
@@ -187,11 +189,12 @@ sourceStepToWeightedQuadratureError
       ≤ℝ
       markedMajorant
         dataSet refinement scale sequence component step slow)
-    (trans
-      (sourceStepIsEquation171Mass
-        dataSet scale sequence component step slow)
-      (Eq171.equation171DefinesTOperationMass
-        sourceT scale slow))
+    (sym
+      (trans
+        (sourceStepIsEquation171Mass
+          dataSet scale sequence component step slow)
+        (Eq171.equation171DefinesTOperationMass
+          sourceT scale slow)))
     eq171Error
 
 asFactorizedDensityApproximation :
@@ -206,7 +209,8 @@ asFactorizedDensityApproximation :
     embedding sequenceLimit →
   Approx.CMP119FactorizedDensityApproximation
     SlowField Sequence Component Step
-asFactorizedDensityApproximation dataSet = record
+asFactorizedDensityApproximation
+  {factorized = factorized} dataSet = record
   { Approx.CMP119FactorizedDensityApproximation.admissibleSequences =
       Factor.admissibleSequences factorized
   ; Approx.CMP119FactorizedDensityApproximation.componentsAt =
@@ -243,8 +247,6 @@ asFactorizedDensityApproximation dataSet = record
   ; Approx.CMP119FactorizedDensityApproximation.residualBound =
       residualBound dataSet
   }
-  where
-  factorized = _
 
 cmp119Equation171WeightedStepErrorCompilerLevel : ProofLevel
 cmp119Equation171WeightedStepErrorCompilerLevel = machineChecked
