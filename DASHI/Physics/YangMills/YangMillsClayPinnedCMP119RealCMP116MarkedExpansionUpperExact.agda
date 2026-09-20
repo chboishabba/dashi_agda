@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116MarkedExpansio
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; absℝ; _≤ℝ_; _*ℝ_; -ℝ_; ≤ℝ-trans)
@@ -120,7 +121,7 @@ sourceEnvelopeBelowLatticeExponential
     weightValue ≡ exponential →
     left ≤ℝ R415.sourceAmplitude (expansion index) *ℝ weightValue →
     left ≤ℝ R415.sourceAmplitude (expansion index) *ℝ exponential
-  substUpper Agda.Builtin.Equality.refl proof = proof
+  substUpper refl proof = proof
 
 physicalExponentialUpper :
   ∀ {Domain Term Operator ScaleCarrier Volume Root SourceDirection Index
