@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any, Iterable
 
 from tree_sitter import Language, Parser
 import tree_sitter_agda
 
-from .model import Relation, SemanticGraph, SourceSpan, Symbol
+from .model import Relation, SemanticGraph, SourceSpan, Symbol, stable_hash
 
 
 AGDA_LANGUAGE = Language(tree_sitter_agda.language())
@@ -120,6 +120,21 @@ def _binding_names(source: bytes, node: Any) -> list[tuple[str, Any]]:
                 out.append((leaf, current))
         stack.extend(reversed(current.children))
     return out
+
+
+def _declaration_fingerprint(source: bytes, declaration: "RawDeclaration") -> str:
+    parts: list[str] = []
+    for start, end in sorted(declaration.owner_ranges):
+        raw = source[start:end].decode("utf-8", "replace")
+        masked = raw.replace(declaration.symbol.label, "<SELF>")
+        normalized = " ".join(masked.split())
+        parts.append(normalized)
+    return stable_hash(
+        {
+            "kind": declaration.symbol.kind,
+            "parts": parts,
+        }
+    )
 
 
 def _reference_kind(node: Any) -> str:
@@ -254,6 +269,12 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
     # Same label/kind may have a signature and several equations. Preserve each
     # source range rather than widening one interval across unrelated declarations.
     declarations = list(declarations_by_key.values())
+
+    for declaration in declarations:
+        declaration.symbol = replace(
+            declaration.symbol,
+            fingerprint=_declaration_fingerprint(source, declaration),
+        )
 
     for binding in captures.get("typed_binding", []) + captures.get("untyped_binding", []):
         owner = _smallest_owner(declarations, binding.start_byte, binding.end_byte)
