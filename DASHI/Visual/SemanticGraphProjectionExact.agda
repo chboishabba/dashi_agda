@@ -75,6 +75,7 @@ data VisualEdgeStyleClass : Set where
 
 edgeStyleClass : EdgeKind → VisualEdgeStyleClass
 edgeStyleClass containsEdge = structuralStyle
+edgeStyleClass localToEdge = structuralStyle
 edgeStyleClass importsEdge = structuralStyle
 edgeStyleClass opensEdge = structuralStyle
 edgeStyleClass typeDependsEdge = dependencyStyle
