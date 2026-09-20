@@ -12,6 +12,17 @@ open import Data.Maybe using (Maybe; just; nothing)
 import DASHI.Law.AustralianContractsLandscapeControllerExact as Landscape
 import DASHI.Law.AustralianContractsReviewedHopCompilerExact as Reviewed
 import DASHI.Law.SensibLawOALCLegalFollowAttributionSnowballExact as OALC
+import DASHI.Law.SensibLawNativeLegalFollowCLIExact as CLI
+
+recursiveNativeCommandSurface : List CLI.NativeLegalFollowCommand
+recursiveNativeCommandSurface =
+  CLI.discoverRecursiveContractFrontier
+    ∷ CLI.acquireRecursiveContractAuthority
+    ∷ CLI.prepareRecursiveContractIdentityReview
+    ∷ CLI.compileRecursiveContractIdentityReview
+    ∷ CLI.prepareRecursiveContractTreatmentReview
+    ∷ CLI.compileRecursiveContractTreatmentReview
+    ∷ []
 
 ------------------------------------------------------------------------
 -- S14.5 / PHASE IV: GENERIC RECURSIVE LEGALFOLLOW CAMPAIGN
