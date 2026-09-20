@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LocalCExact where
 -- on that exact operator.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
@@ -223,7 +223,7 @@ pinnedLocalHamiltonianIsOSHamiltonian :
   ≡
   OSR.reconstructedHamiltonian reconstruction group
 pinnedLocalHamiltonianIsOSHamiltonian inputs =
-  Agda.Builtin.Equality.refl
+  refl
 
 pinnedCMP119LocalCSameHamiltonianCompilerLevel : ProofLevel
 pinnedCMP119LocalCSameHamiltonianCompilerLevel = machineChecked
