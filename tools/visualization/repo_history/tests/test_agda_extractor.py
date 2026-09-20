@@ -507,3 +507,130 @@ bar = foo
     }
     assert "imports" in kinds
     assert "opens" in kinds
+
+
+def test_prefix_application_promotes_function_reference_to_calls():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+g : Nat -> Nat
+g x = x
+
+f : Nat -> Nat
+f x = g x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+    g = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "g"
+    )
+    f = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "f"
+    )
+    assert any(
+        edge.source == g.symbol_id
+        and edge.target == f.symbol_id
+        and edge.kind == "calls"
+        for edge in graph.edges.values()
+    )
+
+
+def test_bare_function_value_stays_body_dependency_not_call():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+g : Nat -> Nat
+g x = x
+
+use : (Nat -> Nat)
+use = g
+""",
+    )
+    graph = build_semantic_graph([extraction])
+    g = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "g"
+    )
+    use = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "use"
+    )
+    assert any(
+        edge.source == g.symbol_id
+        and edge.target == use.symbol_id
+        and edge.kind == "body-depends"
+        for edge in graph.edges.values()
+    )
+    assert not any(
+        edge.source == g.symbol_id
+        and edge.target == use.symbol_id
+        and edge.kind == "calls"
+        for edge in graph.edges.values()
+    )
+
+
+def test_constructor_use_promotes_to_constructs():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+data Box : Set where
+  box : Nat -> Box
+
+mk : Nat -> Box
+mk x = box x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+    box = next(
+        node for node in graph.nodes.values()
+        if node.kind == "constructor" and node.label == "box"
+    )
+    mk = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "mk"
+    )
+    assert any(
+        edge.source == box.symbol_id
+        and edge.target == mk.symbol_id
+        and edge.kind == "constructs"
+        for edge in graph.edges.values()
+    )
+
+
+def test_rhs_binder_use_is_value_flow():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+idNat : Nat -> Nat
+idNat x = x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+    owner = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "idNat"
+    )
+    binder = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    )
+    assert any(
+        edge.source == binder.symbol_id
+        and edge.target == owner.symbol_id
+        and edge.kind == "value-flows"
+        for edge in graph.edges.values()
+    )
