@@ -366,3 +366,9 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS3SystemExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116MarkedExpansionScaleExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109StressSameObjectExact
+
+
+-- ABC hard-math continuation: R406->R415, CMP119 compactness, Round109->common core.
+import DASHI.Physics.YangMills.BalabanCMP116Round406To415Exact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SelectedProjectiveCompactnessExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109ToCommonCoreExact
