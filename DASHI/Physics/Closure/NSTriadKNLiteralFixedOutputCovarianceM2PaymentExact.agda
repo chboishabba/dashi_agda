@@ -359,6 +359,13 @@ module LiteralFixedOutputCovarianceM2
   covarianceSamples (head ∷ xs) =
     samplesAgainstHead head xs ++ covarianceSamples xs
 
+  budgetAgainstHead :
+    Physical.PhysicalTriadIncidence →
+    List Physical.PhysicalTriadIncidence → ℚ
+  budgetAgainstHead head [] = 0ℚ
+  budgetAgainstHead head (x ∷ xs) =
+    pairBudget head x + budgetAgainstHead head xs
+
   sampleM2AgainstHeadMeaning :
     (head : Physical.PhysicalTriadIncidence) →
     (xs : List Physical.PhysicalTriadIncidence) →
@@ -368,13 +375,6 @@ module LiteralFixedOutputCovarianceM2
   sampleM2AgainstHeadMeaning head (x ∷ xs)
     rewrite covariancePaymentSampleM2Meaning head x
           | sampleM2AgainstHeadMeaning head xs = refl
-
-  budgetAgainstHead :
-    Physical.PhysicalTriadIncidence →
-    List Physical.PhysicalTriadIncidence → ℚ
-  budgetAgainstHead head [] = 0ℚ
-  budgetAgainstHead head (x ∷ xs) =
-    pairBudget head x + budgetAgainstHead head xs
 
   totalM2Budget :
     List Physical.PhysicalTriadIncidence → ℚ
@@ -404,8 +404,10 @@ module LiteralFixedOutputCovarianceM2
         (covarianceSamples xs))
       (trans
         (cong
-          (_+ Sum.sumBy (covarianceSamples xs)
-              Moment.weightedSecondMoment)
+          (λ left →
+            left
+            + Sum.sumBy (covarianceSamples xs)
+                Moment.weightedSecondMoment)
           (sampleM2AgainstHeadMeaning head xs))
         (cong
           (budgetAgainstHead head xs +_)
