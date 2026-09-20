@@ -43,7 +43,7 @@ record OrderedOffDiagonalR571Correspondence (A : Set) : Set₁ where
       Moment.PairedSecondMomentSample
 
     preferredBudget :
-      Moment.PairedSecondMomentBudget
+      Preferred.PreferredOneSidedSecondMomentBudget
 
     pairBelowPairedMagnitude :
       (left right : A) →
