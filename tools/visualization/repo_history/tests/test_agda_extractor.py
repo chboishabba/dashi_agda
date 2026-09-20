@@ -39,3 +39,24 @@ def test_tree_sitter_extracts_functions_binders_and_dependencies():
         for edge in graph.edges.values()
     )
     assert any(edge.kind == "binds" for edge in graph.edges.values())
+
+
+def test_multi_binder_produces_two_scoped_variables_not_the_type():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+pairish : (x y : Nat) -> Nat
+pairish x y = x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+    binders = [
+        node.label
+        for node in graph.nodes.values()
+        if node.kind == "binder"
+    ]
+    assert "x" in binders
+    assert "y" in binders
+    assert "Nat" not in binders
