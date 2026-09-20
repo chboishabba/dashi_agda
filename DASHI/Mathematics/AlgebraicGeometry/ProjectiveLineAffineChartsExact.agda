@@ -13,13 +13,13 @@ module DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineAffineChartsExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using ([]; _∷_)
+open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHomogeneousCoordinatesExact as CP
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHomogeneousPairExact as P1
 
 consCongruence :
-  ∀ {A : Set} {x x' : A} {xs xs' : Agda.Builtin.List.List A} →
+  ∀ {A : Set} {x x' : A} {xs xs' : List A} →
   x ≡ x' →
   xs ≡ xs' →
   x ∷ xs ≡ x' ∷ xs'
