@@ -45,10 +45,10 @@ fullLiteralCMP119ExpectationSequenceConverges :
         OPECoefficient StressTensor Hilbert Hamiltonian Vacuum Action Permutation
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division S}
-    {group : G} →
-  ConcreteAProjectiveInputs a group →
+    {group : G}
+    (inputs : ConcreteAProjectiveInputs a group) →
   Selected.Converges
-    (Compact.convergence (compactness _))
+    (Compact.convergence (compactness inputs))
     (Compact.cmp119ExpectationSequence (A.asPinnedOSAxiomInputs a) group)
     (Compact.cmp119ExpectationTarget (A.asPinnedOSAxiomInputs a) group)
 fullLiteralCMP119ExpectationSequenceConverges inputs =
