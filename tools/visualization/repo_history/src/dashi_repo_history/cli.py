@@ -8,6 +8,7 @@ import subprocess
 
 from .git_history import HistoryExtractor, fetch_seed_commits
 from .merge_attribution import attribute_merge
+from .salience import score_episode
 from .scene_program import (
     compile_branch_episode_program,
     compile_first_parent_program,
@@ -212,8 +213,13 @@ def _episodes(args: argparse.Namespace) -> None:
 
     rows = []
     for index, episode in enumerate(data.get("branch_episodes", [])):
+        salience = score_episode(data, index)
         row = {
             "index": index,
+            "impact_score": salience.score,
+            "branch_node_churn": salience.branch_node_churn,
+            "branch_edge_churn": salience.branch_edge_churn,
+            "branch_steps": salience.branch_steps,
             "fork_base": episode["fork_base"],
             "left_tip": episode["left_tip"],
             "right_tip": episode["right_tip"],
@@ -253,6 +259,14 @@ def _episodes(args: argparse.Namespace) -> None:
             )
         rows.append(row)
 
+    if args.sort == "impact":
+        rows.sort(
+            key=lambda row: (
+                -int(row["impact_score"]),
+                int(row["index"]),
+            )
+        )
+
     if args.json:
         print(json.dumps(rows, indent=2))
         return
@@ -264,6 +278,9 @@ def _episodes(args: argparse.Namespace) -> None:
             f"left={row['left_tip'][:10]}({row['left_steps']}) "
             f"right={row['right_tip'][:10]}({row['right_steps']}) "
             f"merge={row['merge_commit'][:10]} "
+            f"impact={row['impact_score']} "
+            f"node-churn={row['branch_node_churn']} "
+            f"edge-churn={row['branch_edge_churn']} "
             f"merge-only-nodes={row.get('merge_only_nodes', '?')}"
         )
 
@@ -373,6 +390,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="List derived fork/merge episodes and semantic contribution counts.",
     )
     episodes.add_argument("input")
+    episodes.add_argument(
+        "--sort",
+        choices=["history", "impact"],
+        default="history",
+    )
     episodes.add_argument("--json", action="store_true")
     episodes.set_defaults(func=_episodes)
 
