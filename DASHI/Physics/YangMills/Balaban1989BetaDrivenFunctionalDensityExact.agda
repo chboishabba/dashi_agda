@@ -50,7 +50,7 @@ asBetaDrivenCompleteDensityInputs :
     {trajectory = trajectory} {split = split}
 asBetaDrivenCompleteDensityInputs inputs = record
   { Beta.BetaDrivenCompleteDensityInputs.Density =
-      _ → ℝ
+      SlowField → ℝ
   ; Beta.BetaDrivenCompleteDensityInputs.betaHistory =
       betaHistory inputs
   ; Beta.BetaDrivenCompleteDensityInputs.densityAt =
