@@ -188,6 +188,14 @@ record GenericRecursiveCampaignBoundary : Set where
     continuationMayResetBudgetCountersIsFalse :
       continuationMayResetBudgetCounters ≡ false
 
+    continuationPreservesAsAtCoordinate : Bool
+    continuationPreservesAsAtCoordinateIsTrue :
+      continuationPreservesAsAtCoordinate ≡ true
+
+    recursiveAcquisitionMaySilentlyMutateAsAt : Bool
+    recursiveAcquisitionMaySilentlyMutateAsAtIsFalse :
+      recursiveAcquisitionMaySilentlyMutateAsAt ≡ false
+
     governedAcquisitionReservesProviderRequestBound : Bool
     governedAcquisitionReservesProviderRequestBoundIsTrue :
       governedAcquisitionReservesProviderRequestBound ≡ true
@@ -253,6 +261,8 @@ canonicalGenericRecursiveCampaignBoundary =
     true refl
     false refl
     true refl
+    false refl
+    true refl
     true refl
     true refl
     true refl
@@ -277,6 +287,7 @@ data RecursiveControllerMayFreezeOldConclusion : Set where
 data RecursiveControllerMayConsumeFixedQueue : Set where
 data RecursiveNextAuthorityRequiresCaseSpecificRuntime : Set where
 data RecursiveContinuationMayResetBudget : Set where
+data RecursiveContinuationMaySilentlyMutateAsAt : Set where
 data SuccessfulAcquisitionAutomaticallyLegalHop : Set where
 data RecursiveCampaignMayDropParentReceipt : Set where
 data AcquisitionMaySkipIdentityGate : Set where
@@ -322,6 +333,10 @@ recursiveNextAuthorityNeedsNoCaseSpecificRuntime ()
 recursiveContinuationCannotResetBudget :
   RecursiveContinuationMayResetBudget → ⊥
 recursiveContinuationCannotResetBudget ()
+
+recursiveContinuationCannotSilentlyMutateAsAt :
+  RecursiveContinuationMaySilentlyMutateAsAt → ⊥
+recursiveContinuationCannotSilentlyMutateAsAt ()
 
 successfulAcquisitionDoesNotAutomaticallyAddLegalHop :
   SuccessfulAcquisitionAutomaticallyLegalHop → ⊥
