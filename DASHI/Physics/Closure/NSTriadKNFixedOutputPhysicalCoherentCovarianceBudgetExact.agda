@@ -45,6 +45,7 @@ import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as Bridge
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceQuantitativePairBoundExact as Quant
@@ -254,6 +255,58 @@ physicalFixedOutputFamilySignedBound
       physicalSystem mixed value output rest
       (λ tau member → allOutput tau (R396.there member)))
 
+physicalYoungAgainstHeadIsCentered :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (output : Z3.FourierMode) →
+  (head : Physical.PhysicalTriadIncidence) →
+  Physical.k head ≡ output →
+  (rest : List Physical.PhysicalTriadIncidence) →
+  ((tau : Physical.PhysicalTriadIncidence) →
+    tau R396.OccursIn rest → Physical.k tau ≡ output) →
+  Quant.rateWeightedYoungAgainstHead
+    mixed (Rate.physicalCellRate physicalSystem) value head rest
+  ≡ physicalCenteredAgainstHead physicalSystem mixed value head rest
+physicalYoungAgainstHeadIsCentered
+    physicalSystem mixed value output head headOutput [] allOutput =
+  refl
+physicalYoungAgainstHeadIsCentered
+    physicalSystem mixed value output head headOutput (x ∷ xs) allOutput =
+  cong₂ _+_
+    (physicalRateYoungPairIsCenteredBudget
+      physicalSystem mixed value head x
+      (trans headOutput (sym (allOutput x R396.here))))
+    (physicalYoungAgainstHeadIsCentered
+      physicalSystem mixed value output head headOutput xs
+      (λ tau member → allOutput tau (R396.there member)))
+
+physicalYoungPairSumIsCentered :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (output : Z3.FourierMode) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  ((tau : Physical.PhysicalTriadIncidence) →
+    tau R396.OccursIn items → Physical.k tau ≡ output) →
+  Quant.rateWeightedYoungPairSum
+    mixed (Rate.physicalCellRate physicalSystem) value items
+  ≡ physicalCenteredPairSum physicalSystem mixed value items
+physicalYoungPairSumIsCentered
+    physicalSystem mixed value output [] allOutput =
+  refl
+physicalYoungPairSumIsCentered
+    physicalSystem mixed value output (head ∷ rest) allOutput =
+  cong₂ _+_
+    (physicalYoungAgainstHeadIsCentered
+      physicalSystem mixed value output head
+      (allOutput head R396.here)
+      rest
+      (λ tau member → allOutput tau (R396.there member)))
+    (physicalYoungPairSumIsCentered
+      physicalSystem mixed value output rest
+      (λ tau member → allOutput tau (R396.there member)))
+
 occursToCube :
   ∀ {A : Set} {x : A} {xs : List A} →
   x R396.OccursIn xs → x Cube.∈ xs
@@ -287,6 +340,51 @@ literalPhysicalOutputFibreSignedBound
     physicalSystem mixed value output
     (Output.physicalOutputFiber cutoff output)
     (literalFibreAllHaveOutput cutoff output)
+
+
+literalPhysicalOutputFibreNegativeBound :
+  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (cutoff : Nat) →
+  (output : Z3.FourierMode) →
+  let items = Output.physicalOutputFiber cutoff output
+  in
+  0ℚ - Pair.pairDifferenceWorkSum
+    (Rate.physicalCellRate physicalSystem)
+    (λ item → Work.coherentWork mixed (value item))
+    items
+  ≤ physicalCenteredPairSum physicalSystem mixed value items
+literalPhysicalOutputFibreNegativeBound
+    physicalSystem mixed value cutoff output =
+  let
+    items = Output.physicalOutputFiber cutoff output
+
+    generic =
+      Quant.negativeCoherentPairDifferenceBelowYoung
+        mixed
+        (Rate.physicalCellRate physicalSystem)
+        value
+        items
+
+    sameBudget :
+      Quant.rateWeightedYoungPairSum
+        mixed (Rate.physicalCellRate physicalSystem) value items
+      ≡ physicalCenteredPairSum physicalSystem mixed value items
+    sameBudget =
+      physicalYoungPairSumIsCentered
+        physicalSystem mixed value output items
+        (literalFibreAllHaveOutput cutoff output)
+  in
+  subst
+    (λ upper →
+      0ℚ - Pair.pairDifferenceWorkSum
+        (Rate.physicalCellRate physicalSystem)
+        (λ item → Work.coherentWork mixed (value item))
+        items
+      ≤ upper)
+    sameBudget
+    generic
 
 ------------------------------------------------------------------------
 -- Status.
