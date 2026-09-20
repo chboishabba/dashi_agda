@@ -167,3 +167,12 @@ constructionExpansionReceiptDoesNotFreezeConclusion :
 constructionExpansionReceiptDoesNotFreezeConclusion =
   Controller.oldConclusionsFrozenIsFalse
     Controller.constructionExpansionReceiptFixture
+
+
+multiHopTrajectoryStillRecomputesEveryHop :
+  Controller.multiHopTrajectoryRecomputesAfterEveryAcceptedHop
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ true
+multiHopTrajectoryStillRecomputesEveryHop =
+  Controller.multiHopTrajectoryRecomputesAfterEveryAcceptedHopIsTrue
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
