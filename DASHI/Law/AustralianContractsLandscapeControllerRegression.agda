@@ -48,3 +48,36 @@ qldAsAtAxisStillCannotBeFlattened :
   → ⊥
 qldAsAtAxisStillCannotBeFlattened =
   Controller.qldTemporalAlternativeMustRemainRepresentable
+
+
+sourceAcquisitionMayRemainResidual :
+  Controller.sourceAcquisitionMayLeaveResiduals
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ true
+sourceAcquisitionMayRemainResidual =
+  Controller.sourceAcquisitionMayLeaveResidualsIsTrue
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+missingSourceStillIsNotNegativeEvidence :
+  Controller.missingSourceIsNegativeLegalEvidence
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ false
+missingSourceStillIsNotNegativeEvidence =
+  Controller.missingSourceIsNegativeLegalEvidenceIsFalse
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+actAcquisitionStillDoesNotPaySection :
+  Controller.actAcquisitionPaysSectionReceipt
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ false
+actAcquisitionStillDoesNotPaySection =
+  Controller.actAcquisitionPaysSectionReceiptIsFalse
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+sourceAcquisitionStillDoesNotPayTreatment :
+  Controller.sourceAcquisitionPaysTreatmentReview
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ false
+sourceAcquisitionStillDoesNotPayTreatment =
+  Controller.sourceAcquisitionPaysTreatmentReviewIsFalse
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
