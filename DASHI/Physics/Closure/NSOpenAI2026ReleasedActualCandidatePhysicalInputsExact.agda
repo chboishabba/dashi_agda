@@ -184,13 +184,15 @@ record ReleasedNSDimensionAttachment : Set where
       forcingDimension ≡ Units.accelerationDimension
 
     viscousTermDimensionLaw :
-      Units.kinematicViscosityDimension
-        Units.⊗ᴰ Units.laplacianVelocityDimension
+      Units._⊗ᴰ_
+        Units.kinematicViscosityDimension
+        Units.laplacianVelocityDimension
       ≡ Units.accelerationDimension
 
     advectiveTermDimensionLaw :
-      Units.velocityDimension
-        Units.⊗ᴰ Units.velocityGradientDimension
+      Units._⊗ᴰ_
+        Units.velocityDimension
+        Units.velocityGradientDimension
       ≡ Units.accelerationDimension
 
 open ReleasedNSDimensionAttachment public
