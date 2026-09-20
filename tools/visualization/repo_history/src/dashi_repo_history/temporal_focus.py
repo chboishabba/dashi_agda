@@ -90,16 +90,10 @@ def track_symbol_history(
     root = resolve_symbol(target_snapshot["graph"], selector)
     current_id = root["symbol_id"]
 
-    reversed_frames: list[
-        tuple[dict[str, Any], str, str, str]
-    ] = [
-        (
-            target_snapshot,
-            current_id,
-            "selected-target",
-            "exact",
-        )
+    reversed_states: list[tuple[dict[str, Any], str]] = [
+        (target_snapshot, current_id)
     ]
+    transition_evidence: dict[str, tuple[str, str]] = {}
 
     for before, after in zip(
         reversed(lineage[:-1]),
@@ -119,25 +113,33 @@ def track_symbol_history(
             break
 
         match = candidates[0]
-        current_id = match.old_id
-        reversed_frames.append(
-            (
-                before,
-                current_id,
-                match.evidence,
-                match.confidence,
-            )
+        transition_evidence[after["commit"]] = (
+            match.evidence,
+            match.confidence,
         )
+        current_id = match.old_id
+        reversed_states.append((before, current_id))
 
+    states = list(reversed(reversed_states))
     frames: list[TemporalFocusFrame] = []
-    for snapshot, root_id, evidence, confidence in reversed(
-        reversed_frames
-    ):
+
+    for index, (snapshot, root_id) in enumerate(states):
         nodes = {
             node["symbol_id"]: node
             for node in snapshot["graph"].get("nodes", [])
         }
         node = nodes[root_id]
+        if index == 0:
+            evidence, confidence = (
+                "introduction-or-earliest-match",
+                "exact",
+            )
+        else:
+            evidence, confidence = transition_evidence.get(
+                snapshot["commit"],
+                ("exact-semantic-key", "exact"),
+            )
+
         focus = focus_symbol(
             snapshot["graph"],
             root_id,
