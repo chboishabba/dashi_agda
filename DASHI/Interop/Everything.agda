@@ -95,6 +95,8 @@ import DASHI.Interop.DistributedProofProducerABIExact
 import DASHI.Interop.DistributedEpistemicPlaneSeparationExact
 import DASHI.Interop.ITIRFederatedTypedWorldProjectionExact
 import DASHI.Interop.ITIRFederatedTypedWorldProjectionRegression
+import DASHI.Interop.SLRSprint2CanonicalEvidenceConvergenceExact
+import DASHI.Interop.SLRSharedEvidenceReducerExact
 import DASHI.Interop.SLRLegalRuntimeCapstoneExact
 import DASHI.Interop.SLRLegalRuntimeCapstoneRegression
 import DASHI.Interop.SituatedInformationAccessFabricExact
