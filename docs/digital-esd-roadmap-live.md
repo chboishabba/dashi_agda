@@ -1111,3 +1111,80 @@ fresh Agda kernel receipt for new owners NO
 
 Therefore the architecture/execution path through P0-G is source-written, while
 the empirical review payments remain intentionally open.
+
+
+## 29. Actual retained-study parsing interop
+
+The Digital-ESD pipeline now has a thin application wrapper that **actually parses
+verified full-text studies** rather than stopping at full-text indexing.
+
+Runtime directory:
+
+`interop_scripts/digital_esd/`
+
+Pipeline:
+
+```text
+verified full-text index
+-> Digital-ESD source-unit adapter
+-> existing generic SLR source-unit dependency/PNF parser
+-> sentence-bounded provenance-bearing candidate observations
+-> existing 19-coordinate Digital-ESD extraction schema
+-> separate study-claim-ceiling coordinate
+-> PNF / intersectional-absence / material-environmental overlays
+-> explicit review
+-> SourceAuditAdmission
+```
+
+The application does not fork the parser. It invokes:
+
+`tools/slr-discourse-reconstruct/slr_source_unit_pnf_batch.py`
+
+and checks that the parser's `source_text_sha256` is exactly the verified
+full-text revision digest.
+
+New formal owner:
+
+`DASHI/Education/DigitalESDStudyParseInteropExact.agda`
+
+with regression:
+
+`DASHI/Education/DigitalESDStudyParseInteropRegression.agda`.
+
+### Retained versus screening-resolution full text
+
+Two parse lanes remain distinct:
+
+```text
+include / probable
+    -> retained-study parse
+    -> 19-coordinate candidate extraction packet
+
+explicitly reviewed unresolved
+    -> screening-resolution parse
+    -> ambiguity / PNF evidence packet
+    -> still no study-audit packet
+```
+
+A screening-resolution artifact cannot enter the retained-study audit lane until
+a later explicit screening decision becomes `include` or `probable`.
+
+### Automatic parsing authority
+
+Automatic parsing pays only structural receipts:
+
+- exact source-unit identity;
+- exact source revision;
+- source-text SHA-256;
+- parser model/version;
+- sentence/character spans;
+- candidate PNF observations;
+- candidate span relevance to extraction coordinates.
+
+It does **not** pay any extraction coordinate, raise the study claim ceiling,
+infer absent groups from unreported demographics, create a deployment footprint,
+or construct `SourceAuditAdmission`.
+
+The first real parse round is therefore blocked only on the reviewed screening
+overlay / retained full-text artifacts, not on missing parser or extraction
+machinery.
