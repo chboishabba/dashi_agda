@@ -17,6 +17,7 @@ data SymbolKind : Set where
   dataKind : SymbolKind
   constructorKind : SymbolKind
   fieldKind : SymbolKind
+  variableKind : SymbolKind
   functionKind : SymbolKind
   theoremKind : SymbolKind
   postulateKind : SymbolKind
