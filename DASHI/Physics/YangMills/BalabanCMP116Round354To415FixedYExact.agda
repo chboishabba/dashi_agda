@@ -15,19 +15,21 @@ module DASHI.Physics.YangMills.BalabanCMP116Round354To415FixedYExact where
 -- marked charging geometry plus the source CMP116 charged summability.
 ------------------------------------------------------------------------
 
+open import Data.List.Base using (List)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
 import DASHI.Physics.YangMills.BalabanMarkedWalkChargingCutRound354Exact as R354
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact as R415
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Exact as R410
 
 record R415FixedYCharging
     {Domain Term Operator : Set}
-    (termsWithCommonY : Domain → Data.List.Base.List Term)
+    (termsWithCommonY : Domain → List Term)
     (selectedTerm :
       Domain → Term →
-      DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Exact.SelectedCMP116PathMarkedTerm Operator)
+      R410.SelectedCMP116PathMarkedTerm Operator)
     (commonYShell : Domain → ℝ) : Set₁ where
   field
     chargedMajorant : Domain → Term → ℝ
@@ -48,10 +50,10 @@ open R415FixedYCharging public
 
 chargingData :
   ∀ {Domain Term Operator}
-    {termsWithCommonY : Domain → Data.List.Base.List Term}
+    {termsWithCommonY : Domain → List Term}
     {selectedTerm :
       Domain → Term →
-      DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Exact.SelectedCMP116PathMarkedTerm Operator}
+      R410.SelectedCMP116PathMarkedTerm Operator}
     {commonYShell : Domain → ℝ} →
   R415FixedYCharging termsWithCommonY selectedTerm commonYShell →
   ∀ domain →
@@ -75,10 +77,10 @@ chargingData {termsWithCommonY = termsWithCommonY}
 
 selectedR410MajorantsBelowCommonYShell :
   ∀ {Domain Term Operator}
-    {termsWithCommonY : Domain → Data.List.Base.List Term}
+    {termsWithCommonY : Domain → List Term}
     {selectedTerm :
       Domain → Term →
-      DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Exact.SelectedCMP116PathMarkedTerm Operator}
+      R410.SelectedCMP116PathMarkedTerm Operator}
     {commonYShell : Domain → ℝ}
     (dataSet : R415FixedYCharging termsWithCommonY selectedTerm commonYShell) →
   ∀ domain →
