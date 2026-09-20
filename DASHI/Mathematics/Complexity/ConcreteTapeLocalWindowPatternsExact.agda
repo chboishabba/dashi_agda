@@ -155,6 +155,24 @@ legalPlainLeftSymbolAgreement left-overlap-minus-one = refl
 legalPlainLeftSymbolAgreement stay-overlap-minus-one = refl
 legalPlainLeftSymbolAgreement right-overlap-minus-one = refl
 
+
+legalPlainRightSymbolAgreement :
+  ∀ {machine rule oldLeft oldCenter oldSymbol newLeft newCenter newSymbol} →
+  LegalWindowForRule machine rule
+    (Local.six-cell-window
+      oldLeft oldCenter (Local.plain oldSymbol)
+      newLeft newCenter (Local.plain newSymbol)) →
+  oldSymbol ≡ newSymbol
+legalPlainRightSymbolAgreement legal-unchanged = refl
+legalPlainRightSymbolAgreement
+    (legal-centered Local.realizes-left) = refl
+legalPlainRightSymbolAgreement
+    (legal-centered Local.realizes-stay) = refl
+legalPlainRightSymbolAgreement left-overlap-plus-one = refl
+legalPlainRightSymbolAgreement stay-overlap-plus-one = refl
+legalPlainRightSymbolAgreement right-overlap-plus-one = refl
+legalPlainRightSymbolAgreement right-overlap-plus-two = refl
+
 record ConcreteTapeLocalWindowPatternsBoundary : Set where
   constructor concrete-tape-local-window-patterns-boundary
   field
