@@ -323,3 +323,23 @@ hodgeP1ActualQuotientStillOpen :
     HodgeP1Pair.canonicalProjectiveLineHomogeneousPairBoundary
   ≡ false
 hodgeP1ActualQuotientStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- SEVENTH CONTINUATION: extract the global aligned occurrence represented by
+-- a centered window in the recursive whole-row scan.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeCenteredWindowExtractionExact as PNPCenter
+
+pnpCenteredScanExtractionPaid :
+  PNPCenter.centeredScanGlobalExtractionPaid
+    PNPCenter.canonicalConcreteTapeCenteredWindowExtractionBoundary
+  ≡ true
+pnpCenteredScanExtractionPaid = refl
+
+pnpOutsideEqualityStillOpen :
+  PNPCenter.legalContextForcesCommonOutsidePaid
+    PNPCenter.canonicalConcreteTapeCenteredWindowExtractionBoundary
+  ≡ false
+pnpOutsideEqualityStillOpen = refl
