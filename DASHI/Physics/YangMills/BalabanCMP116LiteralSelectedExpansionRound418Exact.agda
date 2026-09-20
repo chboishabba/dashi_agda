@@ -16,7 +16,9 @@ module DASHI.Physics.YangMills.BalabanCMP116LiteralSelectedExpansionRound418Exac
 -- directly by R416, so no extra majorant-equality weld is required.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import Data.Rational.Base as ℚ using (ℚ)
@@ -112,16 +114,16 @@ sumR410TermsIsR406TermSum {application = application} source domain =
     (differentiatedTermIsR410 source domain)
   where
   sumCongruent :
-    ∀ {A : Set} (xs : Data.List.Base.List A)
+    ∀ {A : Set} (xs : List A)
       (left right : A → ℝ) →
     (∀ x → left x ≡ right x) →
     Resum.sumℝ left xs ≡ Resum.sumℝ right xs
-  sumCongruent Data.List.Base.[] left right pointwise =
-    Agda.Builtin.Equality.refl
-  sumCongruent (Data.List.Base._∷_ x xs) left right pointwise
+  sumCongruent [] left right pointwise =
+    refl
+  sumCongruent (_∷_ x xs) left right pointwise
     rewrite pointwise x
           | sumCongruent xs left right pointwise =
-    Agda.Builtin.Equality.refl
+    refl
 
 asPreferredR415Source :
   ∀ {Measure TestObservable dataSet extension base}
@@ -149,7 +151,7 @@ asPreferredR415Source application source = record
       R406.selectedBoundaryIntegrand application
   ; Preferred.PreferredR415Source.commonYBoundaryIsSelectedTermSum =
       λ domain →
-        Relation.Binary.PropositionalEquality.trans
+        trans
           (R406.commonYBoundaryIsTermSum application domain)
           (sumR410TermsIsR406TermSum source domain)
   ; Preferred.PreferredR415Source.selectedBoundaryIsCommonYSum =
