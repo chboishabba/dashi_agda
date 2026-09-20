@@ -151,15 +151,16 @@ class CommitRecord:
 class SemanticSnapshot:
     commit: str
     graph: SemanticGraph
-    base_commit: str | None
-    delta: GraphDelta | None
+    parent_deltas: dict[str, GraphDelta]
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "commit": self.commit,
-            "base_commit": self.base_commit,
             "graph": self.graph.to_dict(),
-            "delta": None if self.delta is None else self.delta.to_dict(),
+            "parent_deltas": {
+                parent: delta.to_dict()
+                for parent, delta in sorted(self.parent_deltas.items())
+            },
         }
 
 
