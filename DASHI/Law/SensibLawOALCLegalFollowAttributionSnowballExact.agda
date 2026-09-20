@@ -174,6 +174,27 @@ researchRequirementQidPriority :
   qidPriority researchRequirement ≡ qidNotApplicable
 researchRequirementQidPriority = refl
 
+data ExternalIdentityStatus : Set where
+  identityCandidate : ExternalIdentityStatus
+  identityVerified : ExternalIdentityStatus
+
+record LegalTraceExternalIdentityAttachment : Set where
+  constructor legalTraceExternalIdentityAttachment
+  field
+    semanticReference : String
+    identityKind : Identity.ExternalIdentityKind
+    identityValue : String
+    status : ExternalIdentityStatus
+    verificationReference : String
+    supplementalOnly : Bool
+    supplementalOnlyIsTrue : supplementalOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+    createsApplicability : Bool
+    createsApplicabilityIsFalse : createsApplicability ≡ false
+
+open LegalTraceExternalIdentityAttachment public
+
 waltonsQidDemand : Identity.ExternalIdentityDemand
 waltonsQidDemand =
   Identity.mkOptionalIdentityDemand
@@ -225,16 +246,6 @@ LegalFollowBoundary = LegalFollow.LegalFollowProofSearchBoundary
 legalFollowBoundaryPaid : LegalFollowBoundary
 legalFollowBoundaryPaid =
   LegalFollow.canonicalLegalFollowProofSearchBoundary
-
-ParetoDirectiveSurface : Set₁
-ParetoDirectiveSurface =
-  ∀ {Requirement : Set}
-    {portfolio : List (Pareto.RequirementCandidate Requirement)}
-    {selected : Pareto.RequirementCandidate Requirement}
-    (promotion : Promotion.FrontierPromotion portfolio selected) →
-  Set
-ParetoDirectiveSurface promotion =
-  ParetoSearch.CertifiedSearchDirective promotion
 
 ------------------------------------------------------------------------
 -- Contract-trace identity priority is supplemental to the typed legal trace.
