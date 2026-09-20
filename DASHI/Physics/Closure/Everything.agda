@@ -365,3 +365,6 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredToInputLaplacianCovaria
 
 -- B: exact cross-gradient normal form for the signed fixed-output covariance.
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCrossGradientCovarianceExact
+
+-- B: unit-normalized live/lattice displacement same-object weld.
+import DASHI.Physics.Closure.NSTriadKNR571UnitNormalizedDisplacementWeldExact
