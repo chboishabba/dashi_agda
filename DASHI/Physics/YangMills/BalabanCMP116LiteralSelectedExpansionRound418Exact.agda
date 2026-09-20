@@ -120,7 +120,7 @@ sumR410TermsIsR406TermSum {application = application} source domain =
     Resum.sumℝ left xs ≡ Resum.sumℝ right xs
   sumCongruent [] left right pointwise =
     refl
-  sumCongruent (_∷_ x xs) left right pointwise
+  sumCongruent (x ∷ xs) left right pointwise
     rewrite pointwise x
           | sumCongruent xs left right pointwise =
     refl
