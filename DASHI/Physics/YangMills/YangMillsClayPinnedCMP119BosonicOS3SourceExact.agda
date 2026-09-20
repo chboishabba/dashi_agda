@@ -16,6 +16,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
+import DASHI.Physics.YangMills.YangMillsFiniteNormalizedExpectationSymmetryExact as Symmetry
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -78,3 +79,37 @@ literalCMP119BosonicObservableAttachmentLevel = conditional
 
 literalCMP119FiniteOS3AdapterLevel : ProofLevel
 literalCMP119FiniteOS3AdapterLevel = machineChecked
+
+
+bosonicFromNumeratorChangeOfVariables :
+  ∀ {Configuration Permutation sequenceLimit limitLaws quotient division}
+    {family :
+      Limit.FinitePhysicalNormalizedFamily
+        Configuration {sequenceLimit = sequenceLimit}
+        limitLaws quotient division}
+    (permute :
+      Permutation → (Configuration → ℝ) → Configuration → ℝ)
+    (GaugeInvariantBosonic : (Configuration → ℝ) → Set)
+    (selected :
+      ∀ observable → GaugeInvariantBosonic observable)
+    (numerator :
+      Symmetry.FiniteNumeratorActionInvariant family permute) →
+  LiteralCMP119BosonicPermutationSymmetry
+    Configuration Permutation family
+bosonicFromNumeratorChangeOfVariables
+    permute GaugeInvariantBosonic selected numerator = record
+  { LiteralCMP119BosonicPermutationSymmetry.permuteObservable =
+      permute
+  ; LiteralCMP119BosonicPermutationSymmetry.GaugeInvariantBosonic =
+      GaugeInvariantBosonic
+  ; LiteralCMP119BosonicPermutationSymmetry.selectedObservablesAreGaugeInvariantBosonic =
+      selected
+  ; LiteralCMP119BosonicPermutationSymmetry.finiteBosonicPermutationSymmetry =
+      λ cutoff permutation observable bosonic →
+        Symmetry.finiteNormalizedExpectationInvariantFromNumerator
+          _ permute numerator cutoff permutation observable
+  }
+
+cmp119NumeratorBosonicAdapterLevel : ProofLevel
+cmp119NumeratorBosonicAdapterLevel =
+  Symmetry.finiteNumeratorToNormalizedSymmetryCompilerLevel
