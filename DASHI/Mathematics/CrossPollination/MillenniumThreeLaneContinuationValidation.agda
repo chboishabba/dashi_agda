@@ -343,3 +343,28 @@ pnpOutsideEqualityStillOpen :
     PNPCenter.canonicalConcreteTapeCenteredWindowExtractionBoundary
   ≡ false
 pnpOutsideEqualityStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- Hodge CP1 affine chart normalization.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineAffineChartsExact as HodgeCharts
+
+hodgeP1FirstChartNormalizationPaid :
+  HodgeCharts.firstAffineChartNormalizationPaid
+    HodgeCharts.canonicalProjectiveLineAffineChartsBoundary
+  ≡ true
+hodgeP1FirstChartNormalizationPaid = refl
+
+hodgeP1SecondChartNormalizationPaid :
+  HodgeCharts.secondAffineChartNormalizationPaid
+    HodgeCharts.canonicalProjectiveLineAffineChartsBoundary
+  ≡ true
+hodgeP1SecondChartNormalizationPaid = refl
+
+hodgeP1GlobalQuotientStillOpen :
+  HodgeCharts.globalProjectiveLineQuotientPaid
+    HodgeCharts.canonicalProjectiveLineAffineChartsBoundary
+  ≡ false
+hodgeP1GlobalQuotientStillOpen = refl
