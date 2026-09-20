@@ -18,9 +18,9 @@ module DASHI.Physics.Closure.NSTriadKNHalfViscosityRetainedPositiveExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; _-_; Positive)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; _-_; _≤_; Positive)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNUniformGalerkinSignedCriticalProductionRound104Exact as R104
 
@@ -30,8 +30,8 @@ two = 1ℚ + 1ℚ
 halfViscositySlice :
   (nu terminal initial dissipation production remainder : ℚ) →
   terminal + (two * nu) * dissipation
-    Data.Rational.Base.≤ initial + production →
-  production Data.Rational.Base.≤ nu * dissipation + remainder →
+    ≤ initial + production →
+  production ≤ nu * dissipation + remainder →
   R104.IntegratedSignedCriticalSlice
 halfViscositySlice
     nu terminal initial dissipation production remainder
@@ -51,9 +51,9 @@ retainedHalfViscosityExact :
   (nu terminal initial dissipation production remainder : ℚ)
   (energy :
     terminal + (two * nu) * dissipation
-      Data.Rational.Base.≤ initial + production)
+      ≤ initial + production)
   (productionBound :
-    production Data.Rational.Base.≤ nu * dissipation + remainder) →
+    production ≤ nu * dissipation + remainder) →
   R104.retainedViscosity
     (halfViscositySlice
       nu terminal initial dissipation production remainder
@@ -68,9 +68,9 @@ halfViscosityRetainedPositive :
   (nuPositive : Positive nu)
   (energy :
     terminal + (two * nu) * dissipation
-      Data.Rational.Base.≤ initial + production)
+      ≤ initial + production)
   (productionBound :
-    production Data.Rational.Base.≤ nu * dissipation + remainder) →
+    production ≤ nu * dissipation + remainder) →
   Positive
     (R104.retainedViscosity
       (halfViscositySlice
@@ -80,11 +80,10 @@ halfViscosityRetainedPositive
     nu terminal initial dissipation production remainder
     nuPositive energy productionBound =
   subst Positive
-    (Data.Rational.Properties.≡⇒≃
-      (Relation.Binary.PropositionalEquality.sym
-        (retainedHalfViscosityExact
-          nu terminal initial dissipation production remainder
-          energy productionBound)))
+    (sym
+      (retainedHalfViscosityExact
+        nu terminal initial dissipation production remainder
+        energy productionBound))
     nuPositive
 
 s4ClosedForHalfViscosityAbsorption : Bool
