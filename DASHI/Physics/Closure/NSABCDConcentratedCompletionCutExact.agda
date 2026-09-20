@@ -40,6 +40,8 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicExclusionNativeExact as
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedR3FiniteEnergyExclusionNativeExact as CExclude
 import DASHI.Physics.Closure.NSTriadKNR571UnitNormalizedDisplacementWeldExact as BNorm
 import DASHI.Physics.Closure.NSTriadKNR573HomochiralHeterochiralSplitExact as B573Split
+import DASHI.Physics.Closure.NSTriadKNR573HelicitySplitLowOutputPaymentExact as B573Pay
+import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact as B587
 import DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact as BHelicity
 import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact as BMidpoint
 import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact as BR540Physical
@@ -131,6 +133,34 @@ bR573LiteralFourChannelHelicitySplitClosed =
 bR567ForcingFullHelicityResolvedClosed : Bool
 bR567ForcingFullHelicityResolvedClosed =
   BHelicity.r567ForcingFullHelicityResolvedExactly
+
+bR573HomochiralPointwiseLowOutputPaymentClosed : Bool
+bR573HomochiralPointwiseLowOutputPaymentClosed =
+  B573Pay.r573HomochiralPointwiseLowOutputPaymentClosed
+
+bR573HeterochiralPointwiseLowOutputPaymentClosed : Bool
+bR573HeterochiralPointwiseLowOutputPaymentClosed =
+  B573Pay.r573HeterochiralPointwiseLowOutputPaymentClosed
+
+bR573HeterochiralPointwisePaymentRequiresHH : Bool
+bR573HeterochiralPointwisePaymentRequiresHH =
+  B573Pay.r573HeterochiralPaymentRequiresHH
+
+bR573HomochiralPointwisePaymentRequiresMidpoint : Bool
+bR573HomochiralPointwisePaymentRequiresMidpoint =
+  B573Pay.r573HomochiralPaymentRequiresMidpoint
+
+bLiveNestedThreeClassCompilerClosed : Bool
+bLiveNestedThreeClassCompilerClosed =
+  B587.round587PreferredLiveInnerClassCountIsThree
+
+bLiveNestedThreeClassNormBudgetsPaid : Bool
+bLiveNestedThreeClassNormBudgetsPaid =
+  B587.round587AnyOfThreeClassNormCoordinatesPaid
+
+bOuterSpectatorWeightedSpacetimePaymentClosed : Bool
+bOuterSpectatorWeightedSpacetimePaymentClosed =
+  B587.round587OuterWeightSpectatorSpacetimeClosed
 
 bOppositeShiftMidpointNecessityClosed : Bool
 bOppositeShiftMidpointNecessityClosed =
