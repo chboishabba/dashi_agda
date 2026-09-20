@@ -322,6 +322,19 @@ record ContractLandscapeExpansionReceipt : Set where
 
 open ContractLandscapeExpansionReceipt public
 
+constructionExpansionReceiptFixture : ContractLandscapeExpansionReceipt
+constructionExpansionReceiptFixture =
+  contractLandscapeExpansionReceipt
+    "reviewed-hop:fixture:construction"
+    1
+    1
+    true refl
+    true refl
+    false refl
+    true refl
+    false refl
+    false refl
+
 data ContractLandscapeAcquisitionOutcome : Set where
   sourceResolved : ContractLandscapeAcquisitionOutcome
   sourceResidual : ContractLandscapeAcquisitionOutcome
