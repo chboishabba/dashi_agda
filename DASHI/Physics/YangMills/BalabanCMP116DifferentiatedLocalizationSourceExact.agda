@@ -41,6 +41,9 @@ module DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using (List)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
+import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -104,6 +107,64 @@ sourceDifferentiatedLocalization :
       (sourceRoot source scale volume left right)
       (sourceDistance source left right))
 sourceDifferentiatedLocalization source = differentiatedLocalization source
+
+------------------------------------------------------------------------
+-- Proof-bearing CMP116 (1.26)--(1.29) fixed-Y/counting theorem shape.
+--
+-- (1.26) is the localization-domain tree-length summability estimate.
+-- (1.28) absorbs the D_0 multiplicity by a polynomial-in-d_k(Y) factor.
+-- (1.29) is the resulting fixed-Y differentiated sum with a still-positive
+-- exp(-kappa_1 d_k(Y)/2) factor.  We expose the mathematically relevant
+-- rate-split consequence rather than OCR-dependent constants.
+------------------------------------------------------------------------
+
+record PublishedCMP116Equation126129RateSplit
+    (Domain : Set) : Set₁ where
+  field
+    localizedDomains : List Domain
+    sourceTreeDistance : Domain → Nat
+
+    sourcePrefactor : ℝ
+    sourcePrefactorNonnegative : 0ℝ ≤ℝ sourcePrefactor
+
+    -- Entropy/counting share of the retained localization decay and the
+    -- residual physical share.  CMP116's displayed 1/2 in (1.29) permits a
+    -- further positive split; the precise numerical split is application data.
+    entropyHalfWeight residualDecayWeight : Nat → ℝ
+    entropyHalfWeightNonnegative :
+      ∀ depth → 0ℝ ≤ℝ entropyHalfWeight depth
+    residualDecayWeightNonnegative :
+      ∀ depth → 0ℝ ≤ℝ residualDecayWeight depth
+    residualDecayWeightAntitone :
+      ∀ {smaller larger} →
+      smaller Data.Nat.Base.≤ larger →
+      residualDecayWeight larger ≤ℝ residualDecayWeight smaller
+
+    entropyAllowance : ℝ
+
+    -- Literal fixed-Y content of (1.29), after the source's counting losses
+    -- (1.26)--(1.28) and a positive decay split.
+    fixedYShell : Domain → ℝ
+    fixedYEquation129RateSplit :
+      ∀ domain →
+      fixedYShell domain
+      ≤ℝ
+      sourcePrefactor *ℝ
+        (entropyHalfWeight (sourceTreeDistance domain)
+         *ℝ residualDecayWeight (sourceTreeDistance domain))
+
+    -- Literal outer tree/fibre content supplied by the (1.26)--(1.28)
+    -- cluster-expansion counting step, on the same localization-domain family.
+    equation126128WeightedFibreBudget :
+      Resum.sumℝ
+        (λ domain → entropyHalfWeight (sourceTreeDistance domain))
+        localizedDomains
+      ≤ℝ entropyAllowance
+
+open PublishedCMP116Equation126129RateSplit public
+
+cmp116Equation126129RateSplitAuthorityLevel : ProofLevel
+cmp116Equation126129RateSplitAuthorityLevel = standardImported
 
 ------------------------------------------------------------------------
 -- Source/status boundary.
