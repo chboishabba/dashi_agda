@@ -558,3 +558,28 @@ pnpCanonicalSATWeldStillNext :
     PNPReflect.canonicalConcreteTapeLegalWindowReflectionBoundary
   ≡ false
 pnpCanonicalSATWeldStillNext = refl
+
+
+------------------------------------------------------------------------
+-- FIFTEENTH CONTINUATION: CP1 atlas gluing relation from literal inversion.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineAtlasGluingExact as HodgeGlue
+
+hodgeP1AtlasGluingPaid :
+  HodgeGlue.literalAtlasGluingRelationPaid
+    HodgeGlue.canonicalProjectiveLineAtlasGluingBoundary
+  ≡ true
+hodgeP1AtlasGluingPaid = refl
+
+hodgeP1OverlapRepresentativesRelated :
+  HodgeGlue.overlapRepresentativesGluePaid
+    HodgeGlue.canonicalProjectiveLineAtlasGluingBoundary
+  ≡ true
+hodgeP1OverlapRepresentativesRelated = refl
+
+hodgeP1QuotientCarrierStillOpen :
+  HodgeGlue.quotientCarrierInhabitedPaid
+    HodgeGlue.canonicalProjectiveLineAtlasGluingBoundary
+  ≡ false
+hodgeP1QuotientCarrierStillOpen = refl
