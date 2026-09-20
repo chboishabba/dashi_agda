@@ -165,3 +165,5 @@ import DASHI.Analysis.RiemannG2ProjectiveCenteredGaugeBridgeLeanDonorExact
 import DASHI.Analysis.RiemannG2ProjectiveTwoRadiusNormalizedLeanDonorExact
 
 import DASHI.Analysis.RiemannG2ProjectiveOffNormalizedAtomicCarrierLeanDonorExact
+
+import DASHI.Analysis.RiemannG2NormalizedProjectiveOffAtomicMeasureLeanDonorExact
