@@ -142,3 +142,28 @@ adaptiveExpansionStillDoesNotFreezeOldConclusions :
 adaptiveExpansionStillDoesNotFreezeOldConclusions =
   Controller.adaptiveExpansionFreezesOldConclusionsIsFalse
     Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+
+constructionExpansionReceiptRecomputesFrontier :
+  Controller.recomputeFrontierRequired
+    Controller.constructionExpansionReceiptFixture
+    ≡ true
+constructionExpansionReceiptRecomputesFrontier =
+  Controller.recomputeFrontierRequiredIsTrue
+    Controller.constructionExpansionReceiptFixture
+
+constructionExpansionReceiptPreservesHistory :
+  Controller.oldSourceHistoryPreserved
+    Controller.constructionExpansionReceiptFixture
+    ≡ true
+constructionExpansionReceiptPreservesHistory =
+  Controller.oldSourceHistoryPreservedIsTrue
+    Controller.constructionExpansionReceiptFixture
+
+constructionExpansionReceiptDoesNotFreezeConclusion :
+  Controller.oldConclusionsFrozen
+    Controller.constructionExpansionReceiptFixture
+    ≡ false
+constructionExpansionReceiptDoesNotFreezeConclusion =
+  Controller.oldConclusionsFrozenIsFalse
+    Controller.constructionExpansionReceiptFixture
