@@ -61,6 +61,7 @@ record AustralianContractsLandscapeWorklist : Set where
   field
     rootReference : String
     asAtReference : String
+    jurisdictionFilter : Maybe String
     sourceFrontier : List ContractLandscapeWorkItem
     treatmentFrontier : List ContractLandscapeWorkItem
     contextFrontier : List ContractLandscapeWorkItem
@@ -261,6 +262,7 @@ qld2026TemporalSliceFixture =
   australianContractsLandscapeWorklist
     "landscape:au:contract-law"
     "2026-09-20"
+    (just "AU-QLD")
     (qld2026ActiveSourceWork ∷ [])
     []
     []
@@ -325,7 +327,9 @@ open ContractLandscapeExpansionReceipt public
 record ContractLandscapeAdaptiveTrajectory : Set where
   constructor contractLandscapeAdaptiveTrajectory
   field
+    hopCount : Nat
     receipts : List ContractLandscapeExpansionReceipt
+    finalRecomputedWorklist : AustralianContractsLandscapeWorklist
     recomputeAfterEveryAcceptedHop : Bool
     recomputeAfterEveryAcceptedHopIsTrue :
       recomputeAfterEveryAcceptedHop ≡ true
