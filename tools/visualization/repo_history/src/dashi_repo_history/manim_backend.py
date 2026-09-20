@@ -30,6 +30,7 @@ from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
 from dashi_repo_history.render_policy import ManimRenderPolicy
+from dashi_repo_history.temporal_focus import track_symbol_history
 from dashi_repo_history.scene_program import (
     compile_branch_episode_program,
     compile_first_parent_program,
@@ -618,6 +619,133 @@ class SemanticSymbolScene(MovingCameraScene):
                 run_time=0.45,
             )
             self.play(FadeOut(depth_label), run_time=0.10)
+
+        if view.graph.width > 0:
+            self.play(
+                self.camera.frame.animate.move_to(view.graph).set(
+                    width=max(8, view.graph.width + 2.0)
+                ),
+                run_time=0.8,
+            )
+        self.wait(2)
+
+
+class SemanticSymbolHistoryScene(MovingCameraScene):
+    """Follow one semantic construction through a real first-parent lineage."""
+
+    def construct(self) -> None:
+        path = os.environ.get("DASHI_REPO_HISTORY_JSON")
+        selector = os.environ.get("DASHI_REPO_SYMBOL")
+        target_commit = os.environ.get("DASHI_REPO_TARGET_COMMIT")
+        upstream_depth = int(
+            os.environ.get("DASHI_REPO_UPSTREAM_DEPTH", "2")
+        )
+        downstream_depth = int(
+            os.environ.get("DASHI_REPO_DOWNSTREAM_DEPTH", "0")
+        )
+
+        if not path:
+            self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
+            return
+        if not selector:
+            self.add(Text("Set DASHI_REPO_SYMBOL", font_size=28))
+            return
+
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        try:
+            frames = track_symbol_history(
+                data,
+                selector,
+                target_commit=target_commit,
+                upstream_depth=upstream_depth,
+                downstream_depth=downstream_depth,
+            )
+        except (KeyError, ValueError) as error:
+            self.add(
+                Text(str(error), font_size=20).scale_to_fit_width(12.0)
+            )
+            return
+
+        if not frames:
+            self.add(Text("No temporal semantic focus frames", font_size=26))
+            return
+
+        snapshots = {
+            snapshot["commit"]: snapshot
+            for snapshot in data.get("snapshots", [])
+        }
+        frame_graphs = [
+            frame.graph(snapshots)
+            for frame in frames
+        ]
+
+        policy = ManimRenderPolicy()
+        legend = _legend(
+            policy,
+            _relation_kinds(*frame_graphs),
+        )
+
+        first = frames[0]
+        title = Text(
+            f"{first.root_label} · {first.root_module}",
+            font_size=28,
+        ).to_edge(UP)
+        stamp = Text(
+            f"{first.commit[:10]} · introduction/earliest matched state",
+            font_size=15,
+        ).next_to(title, DOWN, buff=0.10)
+
+        view = SemanticGraphView(policy)
+        graph = view.build(frame_graphs[0])
+        self.play(
+            FadeIn(title),
+            FadeIn(stamp),
+            FadeIn(legend),
+            Create(graph),
+            run_time=1.0,
+        )
+        if first.root_id in view.graph.vertices:
+            self.play(
+                Indicate(
+                    view.graph.vertices[first.root_id],
+                    scale_factor=1.45,
+                ),
+                run_time=0.30,
+            )
+
+        for frame, graph_data in zip(frames[1:], frame_graphs[1:]):
+            new_title = Text(
+                f"{frame.root_label} · {frame.root_module}",
+                font_size=28,
+            ).to_edge(UP)
+            evidence = frame.identity_evidence.replace("-", " ")
+            new_stamp = Text(
+                f"{frame.commit[:10]} · identity: {evidence}",
+                font_size=15,
+            ).next_to(new_title, DOWN, buff=0.10)
+
+            self.play(
+                ReplacementTransform(title, new_title),
+                ReplacementTransform(stamp, new_stamp),
+                run_time=0.20,
+            )
+            title = new_title
+            stamp = new_stamp
+
+            view.apply_snapshot(
+                self,
+                graph_data,
+                run_time=0.50,
+            )
+
+            if frame.root_id in view.graph.vertices:
+                self.play(
+                    Indicate(
+                        view.graph.vertices[frame.root_id],
+                        scale_factor=1.35,
+                    ),
+                    run_time=0.20,
+                )
 
         if view.graph.width > 0:
             self.play(
