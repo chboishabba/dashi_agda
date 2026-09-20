@@ -32,6 +32,9 @@ data NativeLegalFollowCommand : Set where
   prepareTreatmentReview : NativeLegalFollowCommand
   compileTreatmentReview : NativeLegalFollowCommand
   buildTreatmentGenealogy : NativeLegalFollowCommand
+  acquireCullenLegislation : NativeLegalFollowCommand
+  materialiseCullenSectionSlices : NativeLegalFollowCommand
+  runCullenPnfParser : NativeLegalFollowCommand
 
 data OrchestrationOwner : Set where
   nativeRustCli : OrchestrationOwner
@@ -80,6 +83,32 @@ ReviewBoundary = Review.WaltonsReviewedPropositionPaymentBoundary
 reviewBoundaryPaid : ReviewBoundary
 reviewBoundaryPaid =
   Review.canonicalWaltonsReviewedPropositionPaymentBoundary
+
+------------------------------------------------------------------------
+-- Parser subprocesses may produce observations, but never own legal semantics.
+------------------------------------------------------------------------
+
+data ParserProducerRole : Set where
+  sourceObservationProducer : ParserProducerRole
+
+spacyParserRole : ParserProducerRole
+spacyParserRole = sourceObservationProducer
+
+data SpacyParserAutomaticallyLegalAuthority : Set where
+data SpacyParserAutomaticallyLegalConstruction : Set where
+data SectionSliceAutomaticallyHistoricalLaw : Set where
+
+spacyDoesNotCreateLegalAuthority :
+  SpacyParserAutomaticallyLegalAuthority → ⊥
+spacyDoesNotCreateLegalAuthority ()
+
+spacyDoesNotCreateLegalConstruction :
+  SpacyParserAutomaticallyLegalConstruction → ⊥
+spacyDoesNotCreateLegalConstruction ()
+
+latestKnownSectionDoesNotBecomeHistoricalLaw :
+  SectionSliceAutomaticallyHistoricalLaw → ⊥
+latestKnownSectionDoesNotBecomeHistoricalLaw ()
 
 ------------------------------------------------------------------------
 -- No-collapse laws.
@@ -148,6 +177,14 @@ record NativeLegalFollowCliBoundary : Set where
     nativePinnedOalcStreamExistsIsTrue :
       nativePinnedOalcStreamExists ≡ true
 
+    cullenLegalOrchestrationIsNativeRust : Bool
+    cullenLegalOrchestrationIsNativeRustIsTrue :
+      cullenLegalOrchestrationIsNativeRust ≡ true
+
+    spacyIsParserProducerOnly : Bool
+    spacyIsParserProducerOnlyIsTrue :
+      spacyIsParserProducerOnly ≡ true
+
     nativeCliCreatesLegalAuthority : Bool
     nativeCliCreatesLegalAuthorityIsFalse :
       nativeCliCreatesLegalAuthority ≡ false
@@ -159,6 +196,8 @@ canonicalNativeLegalFollowCliBoundary =
     true refl
     true refl
     false refl
+    true refl
+    true refl
     true refl
     false refl
     true refl
