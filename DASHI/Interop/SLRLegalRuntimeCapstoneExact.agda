@@ -318,6 +318,65 @@ canonicalAdaptiveLegalCampaignContract =
     false refl
     false refl
 
+record AustralianCalibrationSequence : Set where
+  constructor australian-calibration-sequence
+  field
+    calibration : AustralianCalibration
+    firstAction : Maybe RuntimeInformationAction
+    secondAction : Maybe RuntimeInformationAction
+    thirdAction : Maybe RuntimeInformationAction
+    persistedHopCount : Nat
+    diskReplayRequired : Bool
+    diskReplayRequiredIsTrue : diskReplayRequired ≡ true
+    sequenceCreatesAuthority : Bool
+    sequenceCreatesAuthorityIsFalse : sequenceCreatesAuthority ≡ false
+
+open AustralianCalibrationSequence public
+
+maboCalibrationSequence : AustralianCalibrationSequence
+maboCalibrationSequence =
+  australian-calibration-sequence
+    maboCalibration
+    nothing nothing nothing
+    1
+    true refl
+    false refl
+
+pabaiCalibrationSequence : AustralianCalibrationSequence
+pabaiCalibrationSequence =
+  australian-calibration-sequence
+    pabaiCalibration
+    (just lookAction) nothing nothing
+    2
+    true refl
+    false refl
+
+cullenCalibrationSequence : AustralianCalibrationSequence
+cullenCalibrationSequence =
+  australian-calibration-sequence
+    cullenNSWCLACalibration
+    (just reviewAction) nothing nothing
+    2
+    true refl
+    false refl
+
+gljCalibrationSequence : AustralianCalibrationSequence
+gljCalibrationSequence =
+  australian-calibration-sequence
+    gljCalibration
+    (just thinkAction) (just reviewAction) nothing
+    3
+    true refl
+    false refl
+
+canonicalCalibrationSequences : List AustralianCalibrationSequence
+canonicalCalibrationSequences =
+  maboCalibrationSequence
+  ∷ pabaiCalibrationSequence
+  ∷ cullenCalibrationSequence
+  ∷ gljCalibrationSequence
+  ∷ []
+
 ------------------------------------------------------------------------
 -- M4.A: matter / issue surface is projection-only and preserves source identity.
 ------------------------------------------------------------------------
