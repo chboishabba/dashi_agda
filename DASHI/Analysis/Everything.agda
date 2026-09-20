@@ -159,3 +159,5 @@ import DASHI.Analysis.RiemannG2RvMConstantDensityCancellationLeanDonorExact
 import DASHI.Analysis.RiemannG2QuantitativeScaledTaperLeanDonorExact
 
 import DASHI.Analysis.RiemannG2ReflectionPairSignedResidualLeanDonorExact
+
+import DASHI.Analysis.RiemannG2ProjectiveCenteredGaugeBridgeLeanDonorExact
