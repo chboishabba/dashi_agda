@@ -512,3 +512,29 @@ bsdLocalKummerStillOpenAfterDictionary :
     BSDTorsionKummer.canonicalEllipticRationalTwoTorsionKummerBoundary
   ≡ false
 bsdLocalKummerStillOpenAfterDictionary = refl
+
+
+------------------------------------------------------------------------
+-- THIRTEENTH CONTINUATION: total Boolean recognizer over the exact local
+-- grammar; semantic legality reflects forward to Boolean truth.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeLegalWindowBoolExact as PNPBool
+
+pnpLegalWindowBoolTotal :
+  PNPBool.totalBooleanRecognizerPaid
+    PNPBool.canonicalConcreteTapeLegalWindowBoolBoundary
+  ≡ true
+pnpLegalWindowBoolTotal = refl
+
+pnpSemanticToBooleanReflectionPaid :
+  PNPBool.semanticToBooleanReflectionPaid
+    PNPBool.canonicalConcreteTapeLegalWindowBoolBoundary
+  ≡ true
+pnpSemanticToBooleanReflectionPaid = refl
+
+pnpBooleanToSemanticReflectionStillOpen :
+  PNPBool.booleanToSemanticReflectionPaid
+    PNPBool.canonicalConcreteTapeLegalWindowBoolBoundary
+  ≡ false
+pnpBooleanToSemanticReflectionStillOpen = refl
