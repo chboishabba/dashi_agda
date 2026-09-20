@@ -19,13 +19,25 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
+import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
+import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
+import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
+import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 
 ExpectationFunctional : Set → Set
 ExpectationFunctional Configuration = (Configuration → ℝ) → ℝ
 
 record CanonicalCMP119OS05LimitData
     (Configuration : Set)
-    {sequenceLimit limitLaws quotient division}
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    {limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit}
+    {quotient :
+      Quotient.RealQuotientConvergenceAuthority
+        (RealLimit.Converges sequenceLimit)}
+    {division :
+      Division.RealDivisionAlgebra
+        (RealLimit.canonicalCylinderAlgebra limitLaws)
+        quotient}
     (family :
       Limit.FinitePhysicalNormalizedFamily
         Configuration limitLaws quotient division)
