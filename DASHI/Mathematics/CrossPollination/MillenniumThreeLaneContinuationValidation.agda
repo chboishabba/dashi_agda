@@ -274,7 +274,14 @@ pnpMachineStepImpliesWholeRowLegalPaid :
 pnpMachineStepImpliesWholeRowLegalPaid = refl
 
 pnpReverseWholeRowReconstructionStillOpen :
-  PNPWhole.allWindowsToUniqueRewritePaid
+  PNPWhole.globalTransitionScanToUniqueRewritePaid
     PNPWhole.canonicalConcreteTapeWholeRowLocalityBoundary
   ≡ false
 pnpReverseWholeRowReconstructionStillOpen = refl
+
+
+pnpGlobalTransitionForwardPaid :
+  PNPWhole.wellFormedStepImpliesGlobalTransitionScanPaid
+    PNPWhole.canonicalConcreteTapeWholeRowLocalityBoundary
+  ≡ true
+pnpGlobalTransitionForwardPaid = refl
