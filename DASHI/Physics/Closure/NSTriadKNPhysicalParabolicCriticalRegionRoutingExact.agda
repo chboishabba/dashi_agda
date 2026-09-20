@@ -24,6 +24,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat.Base using (_≤_)
 open import Data.Nat.Properties as NatP using (_≤?_)
 open import Relation.Nullary using (¬_; yes; no)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComLiteralBonyOutputFibrePartitionRound63Exact as Bony
