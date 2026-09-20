@@ -603,3 +603,29 @@ pnpCanonicalConcreteCodecStillExternal :
     PNPCNF.canonicalConcreteTapeWindowCodecCNFWeldBoundary
   ≡ false
 pnpCanonicalConcreteCodecStillExternal = refl
+
+
+------------------------------------------------------------------------
+-- SEVENTEENTH CONTINUATION: weld the CP1 atlas overlap back to homogeneous
+-- projective rescaling.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineAtlasHomogeneousWeldExact as HodgeAtlasWeld
+
+hodgeAtlasOverlapRescalingPaid :
+  HodgeAtlasWeld.overlapNormalizedPairsRescalingPaid
+    HodgeAtlasWeld.canonicalProjectiveLineAtlasHomogeneousWeldBoundary
+  ≡ true
+hodgeAtlasOverlapRescalingPaid = refl
+
+hodgeAtlasHomogeneousSameObjectPaid :
+  HodgeAtlasWeld.atlasHomogeneousSameObjectOverlapPaid
+    HodgeAtlasWeld.canonicalProjectiveLineAtlasHomogeneousWeldBoundary
+  ≡ true
+hodgeAtlasHomogeneousSameObjectPaid = refl
+
+hodgeActualQuotientStillOpen :
+  HodgeAtlasWeld.actualProjectiveLineQuotientPaid
+    HodgeAtlasWeld.canonicalProjectiveLineAtlasHomogeneousWeldBoundary
+  ≡ false
+hodgeActualQuotientStillOpen = refl
