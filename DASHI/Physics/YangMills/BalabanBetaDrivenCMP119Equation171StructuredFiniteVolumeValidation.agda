@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeExact as P
+
+round283CompilerOwned :
+  P.betaDrivenStructuredEquation171Round283CompilerLevel ≡ machineChecked
+round283CompilerOwned = refl
+
+selectedProbabilityCompilerOwned :
+  P.betaDrivenStructuredEquation171SelectedProbabilityCompilerLevel ≡ machineChecked
+selectedProbabilityCompilerOwned = refl
+
+t5ExpectationSameObjectRemainsPhysical :
+  P.betaDrivenStructuredEquation171ToT5ExpectationSameObjectLevel ≡ conditional
+t5ExpectationSameObjectRemainsPhysical = refl
