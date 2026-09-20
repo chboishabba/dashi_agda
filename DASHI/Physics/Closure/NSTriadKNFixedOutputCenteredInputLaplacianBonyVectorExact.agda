@@ -287,24 +287,7 @@ module FixedOutputBony
       lowHighResidual highLowResidual
       highHighResidual comparableResidual
     ≡ threeClassResidual
-  fourBonyClassesAreThreeClasses =
-    let
-      lh = lowHighResidual
-      hl = highLowResidual
-      hh = highHighResidual
-      cc = comparableResidual
-    in
-    Algebra.complex3Ext
-      (coordinate lh hl hh cc C3.x)
-      (coordinate lh hl hh cc C3.y)
-      (coordinate lh hl hh cc C3.z)
-    where
-    coordinate :
-      (lh hl hh cc : C3.Complex3 F) →
-      (C3.Complex3 F → C3.Complex F) →
-      C3.Complex F
-      ≡ C3.Complex F
-    coordinate lh hl hh cc projection = refl
+  fourBonyClassesAreThreeClasses = refl
 
   centeredResidualIsThreeBonyClasses :
     centeredResidual ≡ threeClassResidual
