@@ -10,10 +10,17 @@ unresolved only when explicitly marked purpose=screening-resolution.
 """
 
 from __future__ import annotations
-import argparse, json
+import argparse, hashlib, json
 from pathlib import Path
 
 RETAINED={"include","probable"}
+
+def sha256_file(path:Path)->str:
+    h=hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda:f.read(1024*1024),b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 def read_jsonl(path:Path):
     out=[]
@@ -63,6 +70,11 @@ def main()->int:
         p=Path(text_path)
         if not p.is_file():
             raise ValueError(f"{src}: text artifact absent: {p}")
+        observed_digest=sha256_file(p)
+        if observed_digest != digest.removeprefix("sha256:"):
+            raise ValueError(
+                f"{src}: full-text digest mismatch expected={digest} observed={observed_digest}"
+            )
 
         out.append({
             "source_unit_ref":f"digital-esd:{src}:{digest}",
