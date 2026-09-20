@@ -50,6 +50,7 @@ import DASHI.Analysis.RiemannG2CenteredComplementSignBoundaryLeanDonorExact as R
 import DASHI.Analysis.RiemannG2CenteredNearCoreSignLeanDonorExact as R2NearSign
 import DASHI.Analysis.RiemannG2CenteredOffExplicitHighLeanDonorExact as R2OffHigh
 import DASHI.Analysis.RiemannG2CenteredComplementCanonicalHighLeanDonorExact as R2CenteredHigh
+import DASHI.Analysis.RiemannG2GammaPoleCancellationRatioTransferLeanDonorExact as R2GammaRatio
 import DASHI.Analysis.RiemannG2QuantitativeScaledTaperLeanDonorExact as R2QuantTaper
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
@@ -713,6 +714,22 @@ centeredReductionUsesNoFinalBalance :
   R2CenteredHigh.CenteredComplementCanonicalHighBoundary.finalBalanceUsedToManufactureAnalyticPayment
     R2CenteredHigh.canonicalCenteredComplementCanonicalHighBoundary ≡ false
 centeredReductionUsesNoFinalBalance = refl
+
+
+gammaRatioCancellationTransferSourceWritten :
+  R2GammaRatio.GammaPoleCancellationRatioTransferBoundary.poleCancellationToGammaSignAlgebraSourceWritten
+    R2GammaRatio.canonicalGammaPoleCancellationRatioTransferBoundary ≡ true
+gammaRatioCancellationTransferSourceWritten = refl
+
+gammaRatioGapQuantitativeDeficitSourceWritten :
+  R2GammaRatio.GammaPoleCancellationRatioTransferBoundary.quantitativeRatioGapToGammaDeficitSourceWritten
+    R2GammaRatio.canonicalGammaPoleCancellationRatioTransferBoundary ≡ true
+gammaRatioGapQuantitativeDeficitSourceWritten = refl
+
+gammaIntegratedRatioGapStillOpen :
+  R2GammaRatio.GammaPoleCancellationRatioTransferBoundary.concreteRatioGapPaid
+    R2GammaRatio.canonicalGammaPoleCancellationRatioTransferBoundary ≡ false
+gammaIntegratedRatioGapStillOpen = refl
 
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
