@@ -34,3 +34,10 @@ unreportedDemographicsStayUnreported :
   Parse.ParserInfersAbsentGroupFromUnreportedDemographics → ⊥
 unreportedDemographicsStayUnreported =
   Parse.parserDoesNotInferAbsentGroupFromUnreportedDemographics
+
+
+parsedTextMatchesVerifiedFullText :
+  Parse.parserTextDigestMatchesVerifiedFullText
+    Parse.canonicalStudyParseInteropBoundary
+  ≡ true
+parsedTextMatchesVerifiedFullText = refl
