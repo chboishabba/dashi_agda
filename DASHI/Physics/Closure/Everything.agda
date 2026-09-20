@@ -330,3 +330,4 @@ import DASHI.Physics.Closure.NSTriadKNR571PreferredOneSidedSecondMomentExact
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalWeightedSecondMomentEndgameExact
 import DASHI.Physics.Closure.NSWholeSpaceSignedLebesgueEndgameExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDNativeAnyOneCutExact
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact
