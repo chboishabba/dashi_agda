@@ -805,3 +805,17 @@ pnpLiteralEndpointClausesStillCodecBlocked :
     PNPAccept.canonicalConcreteTapeAcceptingRunCNFBoundary
   ≡ false
 pnpLiteralEndpointClausesStillCodecBlocked = refl
+
+
+------------------------------------------------------------------------
+-- CP1 CELLULAR H2: exact two-cell computation and point-generator weld.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCellularH2Exact as HodgeCell
+
+hodgeCellularPointGeneratorWeldPaid :
+  HodgeCell.p1H11ToCellularH2
+    (HodgeCell.P1.p1CycleClass HodgeCell.P1.pointCycle)
+  ≡ HodgeCell.cellularPointGenerator
+hodgeCellularPointGeneratorWeldPaid =
+  HodgeCell.pointCycleClassWeldsToCellularGenerator
