@@ -21,6 +21,8 @@ import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Ex
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCMP122Equation171QuantitativeQuadratureLimitExact as Quant
 import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4RefinementSourceLimitExact as SourceLimit
+import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4QuadratureSliceExact as Slice
+import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4RefinementLimitExact as Limit
 
 record CMP119Equation171QuantitativeSourceLimit
     {trajectory split}
@@ -45,7 +47,7 @@ record CMP119Equation171QuantitativeSourceLimit
   field
     sourceApplicationIsEquation171Mass :
       ∀ cutoff slow →
-      Quant.Finite.embedQ embedding
+      Slice.embedQ embedding
         (Assembly.applyOperationAction semantics
           (R219.operationAt family cutoff)
           (R219.effectiveActionAt family cutoff)
@@ -85,14 +87,14 @@ selectedCMP119DensityIsQuantitativeGate4Limit :
         {Component = Component} {Functional = Functional}
         semantics sourceT embedding sequenceLimit quantitative)
     cutoff slow →
-  SourceLimit.Slice.embedQ embedding
+  Slice.embedQ embedding
     (Assembly.evaluateDensity semantics
       (Beta.densityAt source cutoff)
       slow)
   ≡
   Seq.limit sequenceLimit
     (λ refinement →
-      SourceLimit.Limit.embeddedGate4MassAt
+      Limit.embeddedGate4MassAt
         (Quant.compileEquation171Gate4RefinementLimit quantitative)
         refinement cutoff slow)
 selectedCMP119DensityIsQuantitativeGate4Limit dataSet cutoff slow =
