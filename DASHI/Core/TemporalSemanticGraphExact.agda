@@ -43,6 +43,11 @@ record SymbolNode : Set where
     symbolLabel : String
     symbolKind : SymbolKind
 
+    -- Empty/global scopes and declaration-local scopes are represented by
+    -- stable strings at this abstract layer.  Concrete extractors may use a
+    -- declaration identity here so equal binder spellings remain distinct.
+    symbolScope : String
+
 open SymbolNode public
 
 record SemanticEdge : Set where
