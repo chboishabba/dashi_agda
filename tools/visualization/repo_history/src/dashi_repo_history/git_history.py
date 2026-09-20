@@ -98,6 +98,29 @@ def read_blob(repo: Path, blob: str) -> bytes:
     return _run_bytes(repo, "cat-file", "-p", blob)
 
 
+def select_commit_window(
+    commits: list[CommitRecord],
+    *,
+    first_commits: int | None = None,
+    max_commits: int | None = None,
+    stride: int = 1,
+) -> list[CommitRecord]:
+    if first_commits is not None and max_commits is not None:
+        raise ValueError("first_commits and max_commits are mutually exclusive")
+    selected = commits
+    if first_commits is not None:
+        selected = selected[:first_commits]
+    elif max_commits is not None:
+        selected = selected[-max_commits:]
+
+    if stride > 1:
+        keep = selected[::stride]
+        if selected and (not keep or keep[-1].commit != selected[-1].commit):
+            keep.append(selected[-1])
+        selected = keep
+    return selected
+
+
 @dataclass
 class HistoryExtractor:
     repo: Path
@@ -128,20 +151,25 @@ class HistoryExtractor:
     def timeline(
         self,
         *,
+        first_commits: int | None = None,
         max_commits: int | None = None,
         stride: int = 1,
+        semantic: bool = True,
     ) -> Timeline:
-        all_commits = read_commit_dag(self.repo)
         refs = read_refs(self.repo)
+        commits = select_commit_window(
+            read_commit_dag(self.repo),
+            first_commits=first_commits,
+            max_commits=max_commits,
+            stride=stride,
+        )
 
-        commits = all_commits
-        if max_commits is not None:
-            commits = commits[-max_commits:]
-        if stride > 1:
-            keep = commits[::stride]
-            if commits and (not keep or keep[-1].commit != commits[-1].commit):
-                keep.append(commits[-1])
-            commits = keep
+        if not semantic:
+            return Timeline(
+                commits=commits,
+                snapshots=[],
+                refs=refs,
+            )
 
         snapshots: list[SemanticSnapshot] = []
         previous_commit: str | None = None
