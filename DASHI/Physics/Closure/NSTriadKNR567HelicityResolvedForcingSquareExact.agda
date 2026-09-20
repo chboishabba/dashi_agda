@@ -25,6 +25,8 @@ module DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -171,7 +173,7 @@ module Resolved
   sumHomochiralRows :
     Z3.FourierMode →
     List Physical.PhysicalTriadIncidence → ℚ
-  sumHomochiralRows output [] = Rational.zero
+  sumHomochiralRows output [] = 0ℚ
   sumHomochiralRows output (beta ∷ rest) =
     homochiralForcingRow output beta
       + sumHomochiralRows output rest
@@ -179,7 +181,7 @@ module Resolved
   sumHeterochiralRows :
     Z3.FourierMode →
     List Physical.PhysicalTriadIncidence → ℚ
-  sumHeterochiralRows output [] = Rational.zero
+  sumHeterochiralRows output [] = 0ℚ
   sumHeterochiralRows output (beta ∷ rest) =
     heterochiralForcingRow output beta
       + sumHeterochiralRows output rest
@@ -195,11 +197,12 @@ module Resolved
   allNestedRowsSplit output (beta ∷ rest)
     rewrite nestedForcingRowIsHomoPlusHetero output beta
           | allNestedRowsSplit output rest =
-    Rational.ringFourTerms
-      (homochiralForcingRow output beta)
-      (heterochiralForcingRow output beta)
-      (sumHomochiralRows output rest)
-      (sumHeterochiralRows output rest)
+    solve
+      ( homochiralForcingRow output beta
+      ∷ heterochiralForcingRow output beta
+      ∷ sumHomochiralRows output rest
+      ∷ sumHeterochiralRows output rest
+      ∷ [])
 
   homochiralForcingFull : Z3.FourierMode → ℚ
   homochiralForcingFull output =
