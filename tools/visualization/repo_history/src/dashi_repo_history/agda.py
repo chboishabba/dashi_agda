@@ -290,6 +290,7 @@ class RawReference:
     span: SourceSpan
     kind: str
     scope: str
+    scope_chain: tuple[str, ...] = ()
     prefix_application_head: bool = false
     application_head: str | None = None
 
@@ -353,6 +354,68 @@ def _scope_id(
     return f"{declaration.symbol.symbol_id}:{stable_hash(normalized)[:20]}"
 
 
+LEXICAL_SCOPE_TYPES = {"lambda", "forall"}
+
+
+def _node_scope_id(
+    source: bytes,
+    declaration: RawDeclaration,
+    node: Any,
+) -> str:
+    raw = _node_text(source, node)
+    masked = raw.replace(declaration.symbol.label, "<SELF>")
+    normalized = " ".join(masked.split())
+    return (
+        f"{declaration.symbol.symbol_id}:"
+        f"{node.type}:"
+        f"{stable_hash(normalized)[:20]}"
+    )
+
+
+def _scope_chain_for_node(
+    source: bytes,
+    declaration: RawDeclaration,
+    node: Any,
+) -> tuple[str, ...]:
+    owner_range = _owner_range(
+        declaration,
+        node.start_byte,
+        node.end_byte,
+    )
+    if owner_range is None:
+        return (declaration.symbol.symbol_id,)
+
+    base = _scope_id(source, declaration, owner_range)
+    lexical_nodes: list[Any] = []
+    for ancestor in _ancestors(node):
+        if (
+            ancestor.type in LEXICAL_SCOPE_TYPES
+            and owner_range[0] <= ancestor.start_byte
+            and ancestor.end_byte <= owner_range[1]
+        ):
+            lexical_nodes.append(ancestor)
+
+    # Ancestors arrive inner-to-outer, which is exactly the local lookup order.
+    chain = [
+        _node_scope_id(source, declaration, lexical)
+        for lexical in lexical_nodes
+    ]
+    chain.append(base)
+    return tuple(dict.fromkeys(chain))
+
+
+def _lookup_local(
+    declaration: RawDeclaration,
+    scope_chain: tuple[str, ...],
+    leaf: str,
+) -> Symbol | None:
+    for scope in scope_chain:
+        symbol = declaration.binders.get((scope, leaf))
+        if symbol is not None:
+            return symbol
+    return None
+
+
 def _smallest_owner(
     declarations: list[RawDeclaration],
     start: int,
@@ -375,14 +438,11 @@ def _scope_for_node(
     declaration: RawDeclaration,
     node: Any,
 ) -> str:
-    owner_range = _owner_range(
+    return _scope_chain_for_node(
+        source,
         declaration,
-        node.start_byte,
-        node.end_byte,
-    )
-    if owner_range is None:
-        return declaration.symbol.symbol_id
-    return _scope_id(source, declaration, owner_range)
+        node,
+    )[0]
 
 
 def _descendants(node: Any, kind: str) -> list[Any]:
@@ -758,8 +818,13 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         if leaf == owner.symbol.label:
             continue
 
-        scope = _scope_for_node(source, owner, ref)
-        local = owner.binders.get((scope, leaf))
+        scope_chain = _scope_chain_for_node(
+            source,
+            owner,
+            ref,
+        )
+        scope = scope_chain[0]
+        local = _lookup_local(owner, scope_chain, leaf)
         if local is not None:
             span = _span(path, ref)
             if (
@@ -775,6 +840,7 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
                 span=_span(path, ref),
                 kind=_reference_kind(source, ref),
                 scope=scope,
+                scope_chain=scope_chain,
                 prefix_application_head=is_head,
                 application_head=application_head,
             )
@@ -928,7 +994,11 @@ def build_semantic_graph(
 
         for ref in declaration.references:
             leaf = ref.value.split(".")[-1]
-            local = declaration.binders.get((ref.scope, leaf))
+            local = _lookup_local(
+                declaration,
+                ref.scope_chain or (ref.scope,),
+                leaf,
+            )
 
             if local is not None:
                 relation_kind = (
