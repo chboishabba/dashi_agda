@@ -99,7 +99,7 @@ dashi-repo-history render /tmp/dashi-history.json --quality -qm
 
 ```bash
 dashi-repo-history render /tmp/dashi-arithmetic-history.json \
-  --semantic --snapshot-index -1 --quality -qm
+  --scene snapshot --snapshot-index -1 --quality -qm
 ```
 
 ## Formal/implementation boundary
@@ -110,15 +110,21 @@ dashi-repo-history render /tmp/dashi-arithmetic-history.json \
 - Manim owns only layout, camera movement, and animation realization.
 - Ambiguous references remain explicit unresolved observations.
 
-## Next extensions
+## Implemented evolution semantics
 
-- per-parent semantic deltas for merge commits,
-- stable symbol identity across file moves/renames,
-- expanded binder/application subgraphs,
-- import-aware ambiguous-name resolution,
-- persistent mental-map layout across commits,
-- Casey candidate/workspace/build materializations,
-- cross-repository semantic edges.
+The current pipeline already includes:
+
+- parent-relative semantic deltas for every commit parent,
+- persistent mental-map layout across semantic snapshots,
+- unique structural-fingerprint continuity across supported moves/renames,
+- clause-scoped binders and constructor-pattern relations,
+- explicit fork-to-merge branch episodes,
+- renderer-neutral scene programs,
+- focused merge attribution,
+- simple-visual-graph projection without loss of semantic authority.
+
+Remaining larger extensions are Casey candidate/workspace/build materializations,
+cross-repository semantic edges, and richer expression/application subgraphs.
 
 ## Semantic evolution scene
 
@@ -140,6 +146,39 @@ dashi-repo-history render /tmp/dashi-arithmetic-history.json \
   --quality -qm
 ```
 
+## Full fork → branches → merge scene
+
+For this scene, extract semantic history with episode closure enabled so sampled
+history cannot hide the real fork or intermediate branch commits:
+
+```bash
+dashi-repo-history extract ../../../.. \
+  --path-prefix DASHI/Arithmetic/ \
+  --max-commits 120 \
+  --episode-context \
+  -o /tmp/dashi-arithmetic-episodes.json
+```
+
+Inspect the recovered episodes first:
+
+```bash
+dashi-repo-history episodes /tmp/dashi-arithmetic-episodes.json
+```
+
+Then render one episode:
+
+```bash
+dashi-repo-history render /tmp/dashi-arithmetic-episodes.json \
+  --scene episode \
+  --episode-index 0 \
+  --quality -qm
+```
+
+The episode scene starts from the actual fork semantic graph, splits it into two
+live graph views, advances each side along its parent-evidenced branch path in
+repository order, then converges to the merge graph and highlights merge-only
+symbols.
+
 ## Merge convergence scene
 
 Merge contribution is derived from both actual parent semantic snapshots.
@@ -149,7 +188,7 @@ common, parent-only, removed, and merge-only nodes/relations.
 ```bash
 dashi-repo-history render /tmp/dashi-arithmetic-history.json \
   --scene merge \
-  --merge-index 0 \
+  --episode-index 0 \
   --quality -qm
 ```
 
