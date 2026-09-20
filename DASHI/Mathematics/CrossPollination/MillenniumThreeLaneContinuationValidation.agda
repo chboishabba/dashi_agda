@@ -706,3 +706,30 @@ pnpCanonicalCodecStillOnlyMissingSpecialization :
     PNPRowCNF.canonicalConcreteTapeWholeRowCNFWeldBoundary
   ≡ false
 pnpCanonicalCodecStillOnlyMissingSpecialization = refl
+
+
+------------------------------------------------------------------------
+-- TWENTY-FIRST CONTINUATION: finite concrete tape runs <-> per-edge whole-row
+-- local-CNF characterizations, still parameterized by the eventual canonical
+-- window codec.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as PNPRunCNF
+
+pnpFiniteRunToCNFPathPaid :
+  PNPRunCNF.runToEncodedCNFPathPaid
+    PNPRunCNF.canonicalConcreteTapeRunCNFWeldBoundary
+  ≡ true
+pnpFiniteRunToCNFPathPaid = refl
+
+pnpCNFPathToFiniteRunPaid :
+  PNPRunCNF.encodedCNFPathToRunPaid
+    PNPRunCNF.canonicalConcreteTapeRunCNFWeldBoundary
+  ≡ true
+pnpCNFPathToFiniteRunPaid = refl
+
+pnpFlatAssignmentStillExternal :
+  PNPRunCNF.flatAssignmentPlacementPaid
+    PNPRunCNF.canonicalConcreteTapeRunCNFWeldBoundary
+  ≡ false
+pnpFlatAssignmentStillExternal = refl
