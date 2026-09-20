@@ -377,6 +377,7 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109ToCommonCoreExac
 -- ABC open-frontier continuation: source-native B, one-family A, same-family C.
 import DASHI.Physics.YangMills.BalabanCMP116Round354To415FixedYExact
 import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact
+import DASHI.Physics.YangMills.BalabanCMP116Round406PreferredR415Exact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116MarkedExpansionUpperExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119WilsonSquareOS2Exact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteAExact
