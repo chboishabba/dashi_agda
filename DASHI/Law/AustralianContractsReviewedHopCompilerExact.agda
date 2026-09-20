@@ -61,6 +61,8 @@ record ReviewedDocumentAlias : Set where
   field
     sourceDocumentReference : String
     semanticAuthorityReference : String
+    sourceReceipt : OALC.PinnedOalcSourceReceipt
+    exactSourceDocumentBindingReceipt : Set
     reviewerReference : String
     reviewerEvidenceReferences : List String
     candidateOnly : Bool
@@ -155,6 +157,8 @@ data ReviewedHopCompilerAutomaticallyCurrentLaw : Set where
 data ReviewedHopCompilerAutomaticallyLegalAuthority : Set where
 data RawOalcDocumentAutomaticallyCanonicalTraceAlias : Set where
 data ReviewedAliasMayRewriteSourceDocumentIdentity : Set where
+data RejectedIdentityReviewMayCreateDocumentAlias : Set where
+data ReviewedAliasMayIgnoreExactOalcVersion : Set where
 
 oalcReceiptDoesNotBecomeReviewedIdentity :
   OalcReceiptAutomaticallyReviewedAuthorityIdentity → ⊥
@@ -191,6 +195,14 @@ rawOalcDocumentDoesNotCreateCanonicalAlias ()
 reviewedAliasDoesNotRewriteSourceIdentity :
   ReviewedAliasMayRewriteSourceDocumentIdentity → ⊥
 reviewedAliasDoesNotRewriteSourceIdentity ()
+
+rejectedIdentityReviewDoesNotCreateAlias :
+  RejectedIdentityReviewMayCreateDocumentAlias → ⊥
+rejectedIdentityReviewDoesNotCreateAlias ()
+
+reviewedAliasMustBindExactOalcVersion :
+  ReviewedAliasMayIgnoreExactOalcVersion → ⊥
+reviewedAliasMustBindExactOalcVersion ()
 
 record AustralianContractsReviewedHopCompilerBoundary : Set where
   constructor australianContractsReviewedHopCompilerBoundary
@@ -235,6 +247,14 @@ record AustralianContractsReviewedHopCompilerBoundary : Set where
     reviewedAliasRewritesSourceDocumentIdentityIsFalse :
       reviewedAliasRewritesSourceDocumentIdentity ≡ false
 
+    rejectedIdentityReviewMayCreateDocumentAlias : Bool
+    rejectedIdentityReviewMayCreateDocumentAliasIsFalse :
+      rejectedIdentityReviewMayCreateDocumentAlias ≡ false
+
+    reviewedAliasBindsExactOalcVersion : Bool
+    reviewedAliasBindsExactOalcVersionIsTrue :
+      reviewedAliasBindsExactOalcVersion ≡ true
+
     reviewedHopFeedsExistingAdaptiveDelta : Bool
     reviewedHopFeedsExistingAdaptiveDeltaIsTrue :
       reviewedHopFeedsExistingAdaptiveDelta ≡ true
@@ -261,6 +281,8 @@ canonicalAustralianContractsReviewedHopCompilerBoundary =
     true refl
     false refl
     false refl
+    false refl
+    true refl
     true refl
     false refl
     false refl
