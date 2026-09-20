@@ -65,6 +65,16 @@ continuationCannotResetBudget :
 continuationCannotResetBudget =
   Recursive.continuationMayResetBudgetCountersIsFalse boundary
 
+continuationPreservesAsAt :
+  Recursive.continuationPreservesAsAtCoordinate boundary ≡ true
+continuationPreservesAsAt =
+  Recursive.continuationPreservesAsAtCoordinateIsTrue boundary
+
+acquisitionCannotSilentlyMutateAsAt :
+  Recursive.recursiveAcquisitionMaySilentlyMutateAsAt boundary ≡ false
+acquisitionCannotSilentlyMutateAsAt =
+  Recursive.recursiveAcquisitionMaySilentlyMutateAsAtIsFalse boundary
+
 providerBoundIsReserved :
   Recursive.governedAcquisitionReservesProviderRequestBound boundary ≡ true
 providerBoundIsReserved =
