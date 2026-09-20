@@ -27,10 +27,10 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBri
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
@@ -77,15 +77,21 @@ coherentWorkDifferenceMagnitude :
   two * ∣ R179.realHermitianCross
       mixed (C3.complex3Subtract left right) ∣
 coherentWorkDifferenceMagnitude mixed left right =
+  let
+    cross =
+      R179.realHermitianCross mixed
+        (C3.complex3Subtract left right)
+
+    twoNN : 0ℚ ≤ two
+    twoNN = ℚP.+-mono-≤ ℚP.≤-refl ℚP.≤-refl
+  in
   trans
     (cong ∣_∣
       (coherentWorkDifferenceIsVectorDifference mixed left right))
-    (let
-      cross =
-        R179.realHermitianCross mixed
-          (C3.complex3Subtract left right)
-    in
-    solve (cross ∷ []))
+    (trans
+      (ℚP.∣p*q∣≡∣p∣*∣q∣ two cross)
+      (cong (_* ∣ cross ∣)
+        (ℚP.0≤p⇒∣p∣≡p twoNN)))
 
 coherentWorkDifferenceMagnitudeBound :
   (mixed left right : C3.Complex3 F) →
@@ -102,9 +108,6 @@ coherentWorkDifferenceMagnitudeBound mixed left right =
       ≤ L2.complex3NormSquared mixed + L2.complex3NormSquared difference
     local = R579.rationalRealHermitianYoung mixed difference
 
-    twoNN : 0ℚ ≤ two
-    twoNN = ℚP.+-mono-≤ ℚP.≤-refl ℚP.≤-refl
-
     scaled :
       two * ∣ R179.realHermitianCross mixed difference ∣
       ≤
@@ -113,7 +116,12 @@ coherentWorkDifferenceMagnitudeBound mixed left right =
           + L2.complex3NormSquared difference)
     scaled = ℚP.*-monoˡ-≤-nonNeg two local
   in
-  ℚP.≤-respˡ-≡
+  subst
+    (λ lower →
+      lower
+      ≤ two *
+        (L2.complex3NormSquared mixed
+          + L2.complex3NormSquared difference))
     (sym (coherentWorkDifferenceMagnitude mixed left right))
     scaled
 
