@@ -119,3 +119,41 @@ dashi-repo-history render /tmp/dashi-arithmetic-history.json \
 - persistent mental-map layout across commits,
 - Casey candidate/workspace/build materializations,
 - cross-repository semantic edges.
+
+## Semantic evolution scene
+
+The continuous semantic movie follows a real first-parent lineage; it never
+uses arbitrary topological neighbours as if they were parent/child states.
+
+```bash
+dashi-repo-history render /tmp/dashi-arithmetic-history.json \
+  --scene semantic-history \
+  --quality -qm
+```
+
+Choose a different lineage head explicitly:
+
+```bash
+dashi-repo-history render /tmp/dashi-arithmetic-history.json \
+  --scene semantic-history \
+  --target-commit <sha> \
+  --quality -qm
+```
+
+## Merge convergence scene
+
+Merge contribution is derived from both actual parent semantic snapshots.
+The focused scene restricts the display to the changed subgraph and separates
+common, parent-only, removed, and merge-only nodes/relations.
+
+```bash
+dashi-repo-history render /tmp/dashi-arithmetic-history.json \
+  --scene merge \
+  --merge-index 0 \
+  --quality -qm
+```
+
+Manim `DiGraph` geometrically projects parallel typed relations sharing the
+same source/target pair to one visual edge. The JSON retains every typed
+`relation_id`; `DASHI.Visual.SemanticGraphProjectionExact` formalizes that
+this display quotient never becomes the semantic authority graph.
