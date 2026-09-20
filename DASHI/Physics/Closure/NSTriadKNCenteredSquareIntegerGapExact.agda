@@ -25,8 +25,9 @@ module DASHI.Physics.Closure.NSTriadKNCenteredSquareIntegerGapExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+import Data.Nat.Base as Nat using (_≤_; z≤n; s≤s)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _≤_; ∣_∣)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -54,9 +55,9 @@ natGapPositiveIfUnequal (suc m) (suc n) unequal =
     (λ equality → unequal (cong suc equality))
 
 positiveNatAtLeastOne :
-  ∀ {n} → ModeNorm.PositiveNat n → suc zero Data.Nat.Base.≤ n
+  ∀ {n} → ModeNorm.PositiveNat n → suc zero Nat.≤ n
 positiveNatAtLeastOne (ModeNorm.positive-suc n) =
-  Data.Nat.Base.s≤s Data.Nat.Base.z≤n
+  Nat.s≤s Nat.z≤n
 
 natGapRational :
   Nat → Nat → ℚ
