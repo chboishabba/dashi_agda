@@ -25,16 +25,16 @@ from manim import (
     VGroup,
 )
 
-from dashi_repo_history.focus import focus_symbol, resolve_symbol
 from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
 from dashi_repo_history.render_policy import ManimRenderPolicy
-from dashi_repo_history.temporal_focus import track_symbol_history
 from dashi_repo_history.scene_program import (
     compile_branch_episode_program,
     compile_first_parent_program,
     compile_merge_episode_program,
+    compile_symbol_focus_program,
+    compile_temporal_symbol_program,
 )
 
 
@@ -513,7 +513,7 @@ def _induced_focus_graph(
 
 
 class SemanticSymbolScene(MovingCameraScene):
-    """Grow a rooted semantic construction/dependency neighborhood."""
+    """Interpret a rooted semantic focus scene program."""
 
     def construct(self) -> None:
         path = os.environ.get("DASHI_REPO_HISTORY_JSON")
@@ -543,10 +543,8 @@ class SemanticSymbolScene(MovingCameraScene):
 
         snapshot = snapshots[snapshot_index]
         graph_data = snapshot["graph"]
-
         try:
-            root = resolve_symbol(graph_data, selector)
-            focus = focus_symbol(
+            program = compile_symbol_focus_program(
                 graph_data,
                 selector,
                 upstream_depth=upstream_depth,
@@ -554,15 +552,32 @@ class SemanticSymbolScene(MovingCameraScene):
             )
         except (KeyError, ValueError) as error:
             self.add(
-                Text(
-                    str(error),
-                    font_size=20,
-                ).scale_to_fit_width(12.0)
+                Text(str(error), font_size=20).scale_to_fit_width(12.0)
             )
             return
+        if not program:
+            self.add(Text("No semantic focus program", font_size=26))
+            return
+
+        root_id = program[0].payload["root_id"]
+        nodes_by_id = {
+            node["symbol_id"]: node
+            for node in graph_data.get("nodes", [])
+        }
+        root = nodes_by_id[root_id]
+        settle = next(
+            command.payload
+            for command in reversed(program)
+            if command.kind == "settle-focus"
+        )
+        allowed_edges = set(settle["edge_ids"])
 
         policy = ManimRenderPolicy()
-        full_focus = focus.graph(graph_data)
+        full_focus = _induced_focus_graph(
+            graph_data,
+            set(settle["node_ids"]),
+            allowed_edges,
+        )
         legend = _legend(
             policy,
             _relation_kinds(full_focus),
@@ -582,12 +597,8 @@ class SemanticSymbolScene(MovingCameraScene):
             font_size=16,
         ).next_to(title, DOWN, buff=0.10)
 
-        revealed: set[str] = set()
-        allowed_edges = set(focus.edge_ids)
+        revealed: set[str] = set(program[0].payload["node_ids"])
         view = SemanticGraphView(policy)
-
-        root_layer = set(focus.layers[0]) if focus.layers else {focus.root_id}
-        revealed.update(root_layer)
         current_graph = _induced_focus_graph(
             graph_data,
             revealed,
@@ -603,17 +614,20 @@ class SemanticSymbolScene(MovingCameraScene):
             run_time=1.0,
         )
 
-        if focus.root_id in view.graph.vertices:
+        if root_id in view.graph.vertices:
             self.play(
                 Indicate(
-                    view.graph.vertices[focus.root_id],
+                    view.graph.vertices[root_id],
                     scale_factor=1.45,
                 ),
                 run_time=0.35,
             )
 
-        for layer_spec in focus.layer_specs[1:]:
-            revealed.update(layer_spec.node_ids)
+        for command in program:
+            if command.kind != "expand-focus-layer":
+                continue
+            payload = command.payload
+            revealed.update(payload["node_ids"])
             next_graph = _induced_focus_graph(
                 graph_data,
                 revealed,
@@ -621,11 +635,11 @@ class SemanticSymbolScene(MovingCameraScene):
             )
             direction = (
                 "dependencies"
-                if layer_spec.direction == "upstream"
+                if payload["direction"] == "upstream"
                 else "consumers"
             )
             depth_label = Text(
-                f"{direction} · depth {layer_spec.depth}",
+                f"{direction} · depth {payload['depth']}",
                 font_size=14,
             ).next_to(subtitle, DOWN, buff=0.08)
             self.play(FadeIn(depth_label), run_time=0.10)
@@ -647,7 +661,7 @@ class SemanticSymbolScene(MovingCameraScene):
 
 
 class SemanticSymbolHistoryScene(MovingCameraScene):
-    """Follow one semantic construction through a real first-parent lineage."""
+    """Interpret a temporal rooted semantic focus program."""
 
     def construct(self) -> None:
         path = os.environ.get("DASHI_REPO_HISTORY_JSON")
@@ -669,7 +683,7 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
 
         data = json.loads(Path(path).read_text(encoding="utf-8"))
         try:
-            frames = track_symbol_history(
+            program = compile_temporal_symbol_program(
                 data,
                 selector,
                 target_commit=target_commit,
@@ -682,18 +696,25 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             )
             return
 
-        if not frames:
-            self.add(Text("No temporal semantic focus frames", font_size=26))
+        if not program:
+            self.add(Text("No temporal semantic focus program", font_size=26))
             return
 
         snapshots = {
             snapshot["commit"]: snapshot
             for snapshot in data.get("snapshots", [])
         }
-        frame_graphs = [
-            frame.graph(snapshots)
-            for frame in frames
-        ]
+        frame_graphs: list[dict[str, Any]] = []
+        for command in program:
+            payload = command.payload
+            snapshot = snapshots[payload["commit"]]
+            frame_graphs.append(
+                _induced_focus_graph(
+                    snapshot["graph"],
+                    set(payload["node_ids"]),
+                    set(payload["edge_ids"]),
+                )
+            )
 
         policy = ManimRenderPolicy()
         legend = _legend(
@@ -701,13 +722,13 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             _relation_kinds(*frame_graphs),
         )
 
-        first = frames[0]
+        first = program[0].payload
         title = Text(
-            f"{first.root_label} · {first.root_module}",
+            f"{first['root_label']} · {first['root_module']}",
             font_size=28,
         ).to_edge(UP)
         stamp = Text(
-            f"{first.commit[:10]} · introduction/earliest matched state",
+            f"{first['commit'][:10]} · {first['identity_evidence'].replace('-', ' ')}",
             font_size=15,
         ).next_to(title, DOWN, buff=0.10)
 
@@ -720,23 +741,24 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             Create(graph),
             run_time=1.0,
         )
-        if first.root_id in view.graph.vertices:
+        if first["root_id"] in view.graph.vertices:
             self.play(
                 Indicate(
-                    view.graph.vertices[first.root_id],
+                    view.graph.vertices[first["root_id"]],
                     scale_factor=1.45,
                 ),
                 run_time=0.30,
             )
 
-        for frame, graph_data in zip(frames[1:], frame_graphs[1:]):
+        for command, graph_data in zip(program[1:], frame_graphs[1:]):
+            payload = command.payload
             new_title = Text(
-                f"{frame.root_label} · {frame.root_module}",
+                f"{payload['root_label']} · {payload['root_module']}",
                 font_size=28,
             ).to_edge(UP)
-            evidence = frame.identity_evidence.replace("-", " ")
+            evidence = payload["identity_evidence"].replace("-", " ")
             new_stamp = Text(
-                f"{frame.commit[:10]} · identity: {evidence}",
+                f"{payload['commit'][:10]} · identity: {evidence}",
                 font_size=15,
             ).next_to(new_title, DOWN, buff=0.10)
 
@@ -754,10 +776,10 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
                 run_time=0.50,
             )
 
-            if frame.root_id in view.graph.vertices:
+            if payload["root_id"] in view.graph.vertices:
                 self.play(
                     Indicate(
-                        view.graph.vertices[frame.root_id],
+                        view.graph.vertices[payload["root_id"]],
                         scale_factor=1.35,
                     ),
                     run_time=0.20,
