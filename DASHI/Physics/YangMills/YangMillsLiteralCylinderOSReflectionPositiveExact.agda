@@ -24,6 +24,8 @@ import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Q
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Normalized
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as OS
+import DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact as Limit
+import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 
 record CylinderOSObservableAlgebra (Observable : Set) : Set₁ where
   field
@@ -268,11 +270,11 @@ asOSGramLimitData
           (expectationOperations observableAlgebra)
           measure family
   ; OS.OSGramLimitData.scalarLimit = record
-      { DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact.SequentialLimit.limit =
-          RealLimit.Seq.limit sequenceLimit
-      ; DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact.SequentialLimit.Converges =
+      { Limit.SequentialLimit.limit =
+          Seq.limit sequenceLimit
+      ; Limit.SequentialLimit.Converges =
           RealLimit.Converges sequenceLimit
-      ; DASHI.Physics.YangMills.BalabanClayT5LimitAndNontrivialityExact.SequentialLimit.sequenceConvergesToLimit =
+      ; Limit.SequentialLimit.sequenceConvergesToLimit =
           λ sequence → Agda.Builtin.Equality.refl
       }
   ; OS.OSGramLimitData.Nonnegative =
