@@ -56,6 +56,20 @@ record ReviewedContractAuthorityIdentity : Set₁ where
 
 open ReviewedContractAuthorityIdentity public
 
+record ReviewedDocumentAlias : Set where
+  constructor reviewedDocumentAlias
+  field
+    sourceDocumentReference : String
+    semanticAuthorityReference : String
+    reviewerReference : String
+    reviewerEvidenceReferences : List String
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+
+open ReviewedDocumentAlias public
+
 data ReviewedHopCompilationDisposition : Set where
   appendCandidateDelta : ReviewedHopCompilationDisposition
   retainReviewedResidual : ReviewedHopCompilationDisposition
@@ -139,6 +153,8 @@ data UnsupportedCitationUseAutomaticallyTraceTreatment : Set where
 data MissingIdentityMayBeInventedByCompiler : Set where
 data ReviewedHopCompilerAutomaticallyCurrentLaw : Set where
 data ReviewedHopCompilerAutomaticallyLegalAuthority : Set where
+data RawOalcDocumentAutomaticallyCanonicalTraceAlias : Set where
+data ReviewedAliasMayRewriteSourceDocumentIdentity : Set where
 
 oalcReceiptDoesNotBecomeReviewedIdentity :
   OalcReceiptAutomaticallyReviewedAuthorityIdentity → ⊥
@@ -167,6 +183,14 @@ reviewedHopCompilerDoesNotCreateCurrentLaw ()
 reviewedHopCompilerDoesNotCreateAuthority :
   ReviewedHopCompilerAutomaticallyLegalAuthority → ⊥
 reviewedHopCompilerDoesNotCreateAuthority ()
+
+rawOalcDocumentDoesNotCreateCanonicalAlias :
+  RawOalcDocumentAutomaticallyCanonicalTraceAlias → ⊥
+rawOalcDocumentDoesNotCreateCanonicalAlias ()
+
+reviewedAliasDoesNotRewriteSourceIdentity :
+  ReviewedAliasMayRewriteSourceDocumentIdentity → ⊥
+reviewedAliasDoesNotRewriteSourceIdentity ()
 
 record AustralianContractsReviewedHopCompilerBoundary : Set where
   constructor australianContractsReviewedHopCompilerBoundary
@@ -199,6 +223,18 @@ record AustralianContractsReviewedHopCompilerBoundary : Set where
     missingAuthorityIdentityMayBeInventedIsFalse :
       missingAuthorityIdentityMayBeInvented ≡ false
 
+    reviewedDocumentAliasMayResolveTreatmentIdentity : Bool
+    reviewedDocumentAliasMayResolveTreatmentIdentityIsTrue :
+      reviewedDocumentAliasMayResolveTreatmentIdentity ≡ true
+
+    rawOalcDocumentCreatesCanonicalAlias : Bool
+    rawOalcDocumentCreatesCanonicalAliasIsFalse :
+      rawOalcDocumentCreatesCanonicalAlias ≡ false
+
+    reviewedAliasRewritesSourceDocumentIdentity : Bool
+    reviewedAliasRewritesSourceDocumentIdentityIsFalse :
+      reviewedAliasRewritesSourceDocumentIdentity ≡ false
+
     reviewedHopFeedsExistingAdaptiveDelta : Bool
     reviewedHopFeedsExistingAdaptiveDeltaIsTrue :
       reviewedHopFeedsExistingAdaptiveDelta ≡ true
@@ -221,6 +257,9 @@ canonicalAustralianContractsReviewedHopCompilerBoundary =
     false refl
     false refl
     true refl
+    false refl
+    true refl
+    false refl
     false refl
     true refl
     false refl
