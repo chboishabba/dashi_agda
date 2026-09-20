@@ -216,7 +216,7 @@ taggedQuadratureIsWeightedGate4Quadrature
           (Tagged.asFiniteQuadratureCellError tagged))
       ≡
       weightedGate4Quadrature weighted scale selected slow)
-    (cellsAreFastFibre realization)
+    (sym (cellsAreFastFibre realization))
     (RingEmbed.realSumCong
       (T.fastFibre
         (PhysicalT.canonicalPhysicalTData construction)
