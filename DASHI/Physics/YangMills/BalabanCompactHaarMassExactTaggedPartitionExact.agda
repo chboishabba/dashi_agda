@@ -60,6 +60,7 @@ record MassExactTaggedPartition
 
     sourceCellIntegral : Cell → ℝ
     cellMass : Cell → ℝ
+    cellMassNonnegative : ∀ cell → 0ℝ ≤ℝ cellMass cell
     sampleValue : Cell → ℝ
 
     modulus : ℝ
