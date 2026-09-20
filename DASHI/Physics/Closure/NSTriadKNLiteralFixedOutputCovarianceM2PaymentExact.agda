@@ -28,6 +28,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralFixedOutputCovarianceM2PaymentExact
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (_++_)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Empty as Empty
 open import Data.Nat.Properties as NatP using (_≟_)
@@ -52,6 +53,7 @@ import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact a
 import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredCovarianceSecondMomentExact as PhysicalM2
 import DASHI.Physics.Closure.NSTriadKNCenteredCovarianceToSecondMomentExact as CovM2
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact as Sum
 import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleExact as Scale
 import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeExact as G1
 import DASHI.Physics.Closure.NSTriadKNR571DiscreteG2FromG1Exact as G2
@@ -221,6 +223,91 @@ module LiteralFixedOutputCovarianceM2
       (cong ∣_∣ exact)
       (CovM2.covarianceSampleFirstOrderBound P)
 
+  covariancePaymentSample :
+    Physical.PhysicalTriadIncidence →
+    Physical.PhysicalTriadIncidence →
+    Moment.PairedSecondMomentSample
+  covariancePaymentSample alpha beta
+    with NatP._≟_
+      (PhysicalM2.integerCenteredNorm alpha)
+      (PhysicalM2.integerCenteredNorm beta)
+  ... | yes equalNorms =
+    Moment.paired-second-moment-sample
+      0ℚ 0ℚ
+      0ℚ 0ℚ
+      0ℚ 0ℚ
+      0ℚ 0ℚ
+      ℚP.≤-refl ℚP.≤-refl
+      ℚP.≤-refl ℚP.≤-refl
+      ℚP.≤-refl ℚP.≤-refl
+      ℚP.≤-refl ℚP.≤-refl
+  ... | no unequal =
+    let
+      d = PhysicalM2.integerCenteredGap alpha beta
+      envelope =
+        G1.stateAmplitudeEnvelope
+          (value alpha) (value beta) mixed
+      stateCoefficient = G2.two * envelope
+      stateCoefficientNN =
+        Moment.productNonnegative
+          G2.two envelope
+          (ℚP.+-mono-≤ oneNN oneNN)
+          (G1.stateAmplitudeEnvelopeNonnegative
+            (value alpha) (value beta) mixed)
+      scaledState = Scale.unitSquare E * stateCoefficient
+      scaledStateNN =
+        Moment.productNonnegative
+          (Scale.unitSquare E) stateCoefficient
+          (Scale.unitSquareNonnegative E)
+          stateCoefficientNN
+      paymentWeight = two * scaledState
+      paymentWeightNN =
+        Moment.productNonnegative
+          two scaledState twoNN scaledStateNN
+      dNN =
+        Scale.natAsRationalNonnegative
+          (DASHI.Physics.Closure.NSTriadKNCenteredSquareIntegerGapExact.natGap
+            (PhysicalM2.integerCenteredNorm alpha)
+            (PhysicalM2.integerCenteredNorm beta))
+    in
+    Moment.paired-second-moment-sample
+      paymentWeight d
+      0ℚ 0ℚ
+      0ℚ 0ℚ
+      0ℚ 0ℚ
+      paymentWeightNN dNN
+      ℚP.≤-refl ℚP.≤-refl
+      ℚP.≤-refl ℚP.≤-refl
+      ℚP.≤-refl ℚP.≤-refl
+
+  covariancePaymentSampleM2Meaning :
+    (alpha beta : Physical.PhysicalTriadIncidence) →
+    Moment.weightedSecondMoment
+      (covariancePaymentSample alpha beta)
+    ≡ pairBudget alpha beta
+  covariancePaymentSampleM2Meaning alpha beta
+    with NatP._≟_
+      (PhysicalM2.integerCenteredNorm alpha)
+      (PhysicalM2.integerCenteredNorm beta)
+  ... | yes equalNorms = refl
+  ... | no unequal =
+    let
+      d = PhysicalM2.integerCenteredGap alpha beta
+      envelope =
+        G1.stateAmplitudeEnvelope
+          (value alpha) (value beta) mixed
+      stateCoefficient = G2.two * envelope
+      oldSample =
+        PhysicalM2.physicalCovarianceSecondMomentPair
+          (nonzeroPairData alpha beta unequal)
+    in
+    solve
+      ( two
+      ∷ Scale.unitSquare E
+      ∷ stateCoefficient
+      ∷ d
+      ∷ [])
+
   pairBudget :
     Physical.PhysicalTriadIncidence →
     Physical.PhysicalTriadIncidence → ℚ
@@ -256,6 +343,31 @@ module LiteralFixedOutputCovarianceM2
   ... | no unequal =
     nonzeroPairBound alpha beta unequal
 
+  samplesAgainstHead :
+    Physical.PhysicalTriadIncidence →
+    List Physical.PhysicalTriadIncidence →
+    List Moment.PairedSecondMomentSample
+  samplesAgainstHead head [] = []
+  samplesAgainstHead head (x ∷ xs) =
+    covariancePaymentSample head x ∷ samplesAgainstHead head xs
+
+  covarianceSamples :
+    List Physical.PhysicalTriadIncidence →
+    List Moment.PairedSecondMomentSample
+  covarianceSamples [] = []
+  covarianceSamples (head ∷ xs) =
+    samplesAgainstHead head xs ++ covarianceSamples xs
+
+  sampleM2AgainstHeadMeaning :
+    (head : Physical.PhysicalTriadIncidence) →
+    (xs : List Physical.PhysicalTriadIncidence) →
+    Sum.sumBy (samplesAgainstHead head xs) Moment.weightedSecondMoment
+    ≡ budgetAgainstHead head xs
+  sampleM2AgainstHeadMeaning head [] = refl
+  sampleM2AgainstHeadMeaning head (x ∷ xs)
+    rewrite covariancePaymentSampleM2Meaning head x
+          | sampleM2AgainstHeadMeaning head xs = refl
+
   budgetAgainstHead :
     Physical.PhysicalTriadIncidence →
     List Physical.PhysicalTriadIncidence → ℚ
@@ -268,6 +380,41 @@ module LiteralFixedOutputCovarianceM2
   totalM2Budget [] = 0ℚ
   totalM2Budget (head ∷ xs) =
     budgetAgainstHead head xs + totalM2Budget xs
+
+  sumByAppend :
+    (left right : List Moment.PairedSecondMomentSample) →
+    Sum.sumBy (left ++ right) Moment.weightedSecondMoment
+    ≡
+    Sum.sumBy left Moment.weightedSecondMoment
+      + Sum.sumBy right Moment.weightedSecondMoment
+  sumByAppend [] right = refl
+  sumByAppend (sample ∷ rest) right
+    rewrite sumByAppend rest right = refl
+
+  covarianceSamplesM2Meaning :
+    (xs : List Physical.PhysicalTriadIncidence) →
+    Sum.sumBy (covarianceSamples xs) Moment.weightedSecondMoment
+    ≡ totalM2Budget xs
+  covarianceSamplesM2Meaning [] = refl
+  covarianceSamplesM2Meaning (head ∷ xs) =
+    trans
+      (sumByAppend
+        (samplesAgainstHead head xs)
+        (covarianceSamples xs))
+      (trans
+        (cong
+          (_+ Sum.sumBy (covarianceSamples xs)
+              Moment.weightedSecondMoment)
+          (sampleM2AgainstHeadMeaning head xs))
+        (cong
+          (budgetAgainstHead head xs +_)
+          (covarianceSamplesM2Meaning xs)))
+
+  literalCovarianceSamplesM2Meaning :
+    Sum.sumBy (covarianceSamples items) Moment.weightedSecondMoment
+    ≡ totalM2Budget items
+  literalCovarianceSamplesM2Meaning =
+    covarianceSamplesM2Meaning items
 
   centeredAgainstHeadBelowM2 :
     (head : Physical.PhysicalTriadIncidence) →
