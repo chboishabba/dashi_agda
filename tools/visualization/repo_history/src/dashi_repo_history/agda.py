@@ -187,6 +187,39 @@ class PatternCandidate:
     scope: str
 
 
+@dataclass(frozen=True)
+class OpenScope:
+    module: str
+    using: frozenset[str] | None = None
+    hiding: frozenset[str] = frozenset()
+    renaming: tuple[tuple[str, str], ...] = ()
+
+    def resolve(self, visible_name: str) -> str | None:
+        rename_map = {
+            new: old
+            for new, old in self.renaming
+        }
+        original = rename_map.get(visible_name, visible_name)
+
+        # Renamed source spellings are not re-admitted under the old name.
+        renamed_away = {
+            old
+            for new, old in self.renaming
+            if new != old
+        }
+        if (
+            visible_name == original
+            and visible_name in renamed_away
+        ):
+            return None
+
+        if self.using is not None and visible_name not in self.using:
+            return None
+        if visible_name in self.hiding:
+            return None
+        return original
+
+
 @dataclass
 class RawReference:
     value: str
@@ -213,6 +246,7 @@ class FileExtraction:
     module_symbol: Symbol
     declarations: list[RawDeclaration]
     imports: list[str]
+    open_scopes: list[OpenScope]
     parse_error: bool
 
 
@@ -283,6 +317,64 @@ def _scope_for_node(
     if owner_range is None:
         return declaration.symbol.symbol_id
     return _scope_id(source, declaration, owner_range)
+
+
+def _descendants(node: Any, kind: str) -> list[Any]:
+    out: list[Any] = []
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current is not node and current.type == kind:
+            out.append(current)
+        stack.extend(reversed(current.children))
+    out.sort(key=lambda item: item.start_byte)
+    return out
+
+
+def _open_scope(source: bytes, open_node: Any) -> OpenScope | None:
+    module_node = _first_descendant(open_node, {"module_name"})
+    if module_node is None:
+        return None
+    module = _node_text(source, module_node).strip()
+    if not module:
+        return None
+
+    using: set[str] | None = None
+    hiding: set[str] = set()
+    renaming: list[tuple[str, str]] = []
+
+    for directive in _descendants(open_node, "import_directive"):
+        directive_text = _node_text(source, directive).strip()
+        ids = [
+            _node_text(source, node).strip()
+            for node in _descendants(directive, "id")
+        ]
+        ids = [value for value in ids if value]
+
+        if directive_text.startswith("using"):
+            using = set(ids)
+            continue
+
+        if directive_text.startswith("hiding"):
+            hiding.update(ids)
+            continue
+
+        if directive_text.startswith("renaming"):
+            for rename_node in _descendants(directive, "renaming"):
+                rename_ids = [
+                    _node_text(source, node).strip()
+                    for node in _descendants(rename_node, "id")
+                ]
+                if len(rename_ids) >= 2:
+                    old, new = rename_ids[0], rename_ids[1]
+                    renaming.append((new, old))
+
+    return OpenScope(
+        module=module,
+        using=None if using is None else frozenset(using),
+        hiding=frozenset(hiding),
+        renaming=tuple(renaming),
+    )
 
 
 def _container_name(
@@ -357,6 +449,15 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
     for node in captures.get("module_name", []):
         if _first_ancestor(node, {"import"}) is not None:
             imports.append(_node_text(source, node).strip())
+
+    open_scopes = [
+        scope
+        for scope in (
+            _open_scope(source, node)
+            for node in captures.get("open_decl", [])
+        )
+        if scope is not None
+    ]
 
     declarations_by_key: dict[tuple[str, str], RawDeclaration] = {}
 
@@ -612,6 +713,7 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         module_symbol=module_symbol,
         declarations=declarations,
         imports=sorted(set(imports)),
+        open_scopes=open_scopes,
         parse_error=bool(tree.root_node.has_error),
     )
 
@@ -625,10 +727,12 @@ def build_semantic_graph(
     declarations: list[RawDeclaration] = []
     modules: dict[str, Symbol] = {}
     imports_by_module: dict[str, list[str]] = {}
+    open_scopes_by_module: dict[str, list[OpenScope]] = {}
 
     for file in files:
         modules[file.module] = file.module_symbol
         imports_by_module[file.module] = file.imports
+        open_scopes_by_module[file.module] = file.open_scopes
         graph.nodes[file.module_symbol.symbol_id] = file.module_symbol
         declarations.extend(file.declarations)
         if file.parse_error:
@@ -652,7 +756,10 @@ def build_semantic_graph(
                 ref=candidate.value,
                 owner_module=declaration.symbol.module,
                 by_module_label=by_module_label,
-                by_label=by_label,
+                open_scopes=open_scopes_by_module.get(
+                    declaration.symbol.module,
+                    [],
+                ),
             )
             if target is not None and target.kind == "constructor":
                 relation = Relation(
@@ -750,7 +857,10 @@ def build_semantic_graph(
                 ref=ref.value,
                 owner_module=owner.module,
                 by_module_label=by_module_label,
-                by_label=by_label,
+                open_scopes=open_scopes_by_module.get(
+                    owner.module,
+                    [],
+                ),
             )
             if target is None:
                 graph.unresolved_references.append(
@@ -780,7 +890,7 @@ def _resolve_reference(
     ref: str,
     owner_module: str,
     by_module_label: dict[tuple[str, str], Symbol],
-    by_label: dict[str, list[Symbol]],
+    open_scopes: list[OpenScope],
 ) -> Symbol | None:
     leaf = ref.split(".")[-1]
 
@@ -795,11 +905,27 @@ def _resolve_reference(
             candidate = by_module_label.get((module, leaf))
             if candidate is not None:
                 return candidate
+        return None
 
-    candidates = by_label.get(leaf, [])
-    if len(candidates) == 1:
-        return candidates[0]
+    candidates: list[Symbol] = []
+    for scope in open_scopes:
+        target_label = scope.resolve(leaf)
+        if target_label is None:
+            continue
+        candidate = by_module_label.get(
+            (scope.module, target_label)
+        )
+        if candidate is not None:
+            candidates.append(candidate)
 
+    unique = {
+        candidate.symbol_id: candidate
+        for candidate in candidates
+    }
+    if len(unique) == 1:
+        return next(iter(unique.values()))
+
+    # Fail closed: repo-wide name uniqueness is not scope evidence.
     return None
 
 
