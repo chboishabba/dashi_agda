@@ -359,6 +359,64 @@ def _changed_graph(
     }
 
 
+def _episode_focus(
+    program,
+    snapshots: dict[str, dict[str, Any]],
+) -> tuple[set[str], set[str]]:
+    """Changed semantic objects plus one-hop relation context."""
+
+    node_ids: set[str] = set()
+    edge_ids: set[str] = set()
+    relevant_commits: set[str] = set()
+
+    for command in program:
+        payload = command.payload
+        if command.kind == "show-fork-snapshot":
+            relevant_commits.add(payload["commit"])
+        elif command.kind == "advance-branch":
+            relevant_commits.add(payload["parent"])
+            relevant_commits.add(payload["commit"])
+            delta = payload["delta"]
+            node_ids.update(delta.get("added_nodes", []))
+            node_ids.update(delta.get("removed_nodes", []))
+            edge_ids.update(delta.get("added_edges", []))
+            edge_ids.update(delta.get("removed_edges", []))
+        elif command.kind == "show-parent-delta":
+            relevant_commits.add(payload["parent"])
+            relevant_commits.add(payload["merge"])
+            delta = payload["delta"]
+            node_ids.update(delta.get("added_nodes", []))
+            node_ids.update(delta.get("removed_nodes", []))
+            edge_ids.update(delta.get("added_edges", []))
+            edge_ids.update(delta.get("removed_edges", []))
+        elif command.kind == "show-snapshot":
+            relevant_commits.add(payload["commit"])
+
+    # Edge-only changes pull their endpoints into the focus set.
+    for commit in relevant_commits:
+        snapshot = snapshots.get(commit)
+        if snapshot is None:
+            continue
+        for edge in snapshot["graph"]["edges"]:
+            if edge["relation_id"] in edge_ids:
+                node_ids.add(edge["source"])
+                node_ids.add(edge["target"])
+
+    # One-hop context makes a new theorem/function legible without expanding the
+    # entire repository graph.
+    for commit in relevant_commits:
+        snapshot = snapshots.get(commit)
+        if snapshot is None:
+            continue
+        for edge in snapshot["graph"]["edges"]:
+            if edge["source"] in node_ids or edge["target"] in node_ids:
+                edge_ids.add(edge["relation_id"])
+                node_ids.add(edge["source"])
+                node_ids.add(edge["target"])
+
+    return node_ids, edge_ids
+
+
 class RepositoryHistoryScene(MovingCameraScene):
     """Animate branch/fork/merge topology derived directly from Git parents."""
 
@@ -514,6 +572,189 @@ class SemanticHistoryScene(MovingCameraScene):
                         self.play(Create(graph), run_time=1.0)
                         graph_created = True
                 pending_commit = None
+
+        self.wait(2)
+
+
+class SemanticBranchEpisodeScene(MovingCameraScene):
+    """Animate one real fork -> two semantic branch paths -> merge episode."""
+
+    def construct(self) -> None:
+        path = os.environ.get("DASHI_REPO_HISTORY_JSON")
+        episode_index = int(os.environ.get("DASHI_REPO_EPISODE_INDEX", "0"))
+        if not path:
+            self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
+            return
+
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        program = compile_branch_episode_program(
+            data,
+            episode_index=episode_index,
+        )
+        if not program:
+            self.add(
+                Text(
+                    "No complete semantic branch episode; extract with --episode-context",
+                    font_size=24,
+                )
+            )
+            return
+
+        commits, snapshots = _snapshot_maps(data)
+        fork_command = next(
+            command
+            for command in program
+            if command.kind == "show-fork-snapshot"
+        )
+        convergence = next(
+            command.payload
+            for command in program
+            if command.kind == "converge-parents"
+        )
+
+        fork = fork_command.payload["commit"]
+        left_tip = convergence["left"]
+        right_tip = convergence["right"]
+        merge_sha = convergence["merge"]
+
+        focus_nodes, focus_edges = _episode_focus(
+            program,
+            snapshots,
+        )
+
+        def focused(commit: str) -> dict[str, Any]:
+            return _changed_graph(
+                snapshots[commit],
+                focus_nodes,
+                focus_edges,
+            )
+
+        title = Text(
+            f"semantic branch episode · fork {fork[:9]} → merge {merge_sha[:9]}",
+            font_size=28,
+        ).to_edge(UP)
+        self.play(FadeIn(title))
+
+        fork_view = SemanticGraphView(
+            viewport_scale=0.66,
+            viewport_shift=(0.0, -0.15, 0.0),
+        )
+        fork_graph = fork_view.build(focused(fork))
+        fork_label = Text(
+            f"fork · {fork[:10]}",
+            font_size=18,
+        ).next_to(title, DOWN, buff=0.12)
+        self.play(FadeIn(fork_label), Create(fork_graph), run_time=1.1)
+
+        left_view = SemanticGraphView(
+            viewport_scale=0.40,
+            viewport_shift=(-3.35, -0.25, 0.0),
+        )
+        right_view = SemanticGraphView(
+            viewport_scale=0.40,
+            viewport_shift=(3.35, -0.25, 0.0),
+        )
+        left_graph = left_view.build(focused(fork))
+        right_graph = right_view.build(focused(fork))
+
+        left_label = Text(
+            f"branch A · {fork[:9]}",
+            font_size=16,
+        ).move_to(LEFT * 3.35 + UP * 2.15)
+        right_label = Text(
+            f"branch B · {fork[:9]}",
+            font_size=16,
+        ).move_to(RIGHT * 3.35 + UP * 2.15)
+
+        self.play(
+            TransformFromCopy(fork_graph, left_graph),
+            TransformFromCopy(fork_graph, right_graph),
+            run_time=1.0,
+        )
+        self.play(
+            FadeOut(fork_graph),
+            FadeOut(fork_label),
+            FadeIn(left_label),
+            FadeIn(right_label),
+            run_time=0.35,
+        )
+
+        labels = {
+            "left": left_label,
+            "right": right_label,
+        }
+        views = {
+            "left": left_view,
+            "right": right_view,
+        }
+
+        for command in program:
+            if command.kind != "advance-branch":
+                continue
+
+            side = command.payload["side"]
+            commit = command.payload["commit"]
+            view = views[side]
+            old_label = labels[side]
+            new_label = Text(
+                f"branch {'A' if side == 'left' else 'B'} · {commit[:9]}",
+                font_size=16,
+            ).move_to(
+                (LEFT if side == "left" else RIGHT) * 3.35
+                + UP * 2.15
+            )
+
+            self.play(
+                ReplacementTransform(old_label, new_label),
+                run_time=0.12,
+            )
+            labels[side] = new_label
+            view.apply_snapshot(
+                self,
+                focused(commit),
+                run_time=0.30,
+            )
+
+        merge_commit = commits[merge_sha]
+        attribution = attribute_merge(
+            merge_commit=merge_commit,
+            snapshots_by_commit=snapshots,
+        )
+        merge_view = SemanticGraphView(
+            viewport_scale=0.66,
+            viewport_shift=(0.0, -0.15, 0.0),
+        )
+        merge_graph = merge_view.build(focused(merge_sha))
+        merge_label = Text(
+            f"merge · {merge_sha[:10]}",
+            font_size=18,
+        ).next_to(title, DOWN, buff=0.12)
+
+        parents = VGroup(
+            left_view.graph,
+            right_view.graph,
+        )
+        self.play(
+            FadeOut(labels["left"]),
+            FadeOut(labels["right"]),
+            ReplacementTransform(parents, merge_graph),
+            FadeIn(merge_label),
+            run_time=1.5,
+        )
+
+        merge_only = [
+            node_id
+            for node_id in attribution.introduced_nodes
+            if node_id in merge_view.graph.vertices
+        ]
+        for node_id in merge_only[:16]:
+            self.play(
+                Indicate(
+                    merge_view.graph.vertices[node_id],
+                    scale_factor=1.35,
+                ),
+                run_time=0.10,
+            )
 
         self.wait(2)
 
