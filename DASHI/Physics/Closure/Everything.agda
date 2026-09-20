@@ -373,3 +373,7 @@ import DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact
 import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact
 import DASHI.Physics.Closure.NSTriadKNR540OffDiagonalToLiteralR571M2Exact
 import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact
+
+import DASHI.Physics.Closure.NSTriadKNR567ForcingCellPhysicalEnvelopeExact
+
+import DASHI.Physics.Closure.NSTriadKNSameOutputIncidenceDisplacementExact
