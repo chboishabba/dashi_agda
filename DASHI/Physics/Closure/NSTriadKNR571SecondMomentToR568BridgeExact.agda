@@ -20,7 +20,8 @@ module DASHI.Physics.Closure.NSTriadKNR571SecondMomentToR568BridgeExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; nonNegative)
+import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -29,6 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exac
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
 import DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact as R568
 import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
+import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -92,16 +94,24 @@ module Bridge
                 integrateTo (physicalM2Density P cutoff) terminal
             scaled =
               let
-                open import Data.Rational.Base using (0ℚ; nonNegative)
-                import Data.Rational.Properties as ℚP
+                oneNN : 0ℚ ≤ 1ℚ
+                oneNN = ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ)
+
+                twoNN : 0ℚ ≤ 1ℚ + 1ℚ
+                twoNN = ℚP.+-mono-≤ oneNN oneNN
+
                 fourNN : 0ℚ ≤ R567.four567
-                fourNN = ℚP.<⇒≤ (ℚP.positive⁻¹ R567.four567)
+                fourNN =
+                  Moment.productNonnegative
+                    (1ℚ + 1ℚ)
+                    (1ℚ + 1ℚ)
+                    twoNN twoNN
+
                 instance fourNNI = nonNegative fourNN
               in
               ℚP.*-monoˡ-≤-nonNeg R567.four567 first
           in
-          let import Data.Rational.Properties as ℚP
-          in ℚP.≤-trans scaled
+          ℚP.≤-trans scaled
             (integratedPhysicalM2Bound P cutoff terminal)
       }
 
