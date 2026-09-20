@@ -118,6 +118,19 @@ centeredScanExtract :
   AlignedCenteredOccurrence
     machine rule beforeCells afterCells
 
+centeredScanExtract {beforeCells = []} ()
+centeredScanExtract {beforeCells = _ ∷ []} ()
+centeredScanExtract {beforeCells = _ ∷ _ ∷ []} ()
+centeredScanExtract
+    {beforeCells = _ ∷ _ ∷ _ ∷ _}
+    {afterCells = []} ()
+centeredScanExtract
+    {beforeCells = _ ∷ _ ∷ _ ∷ _}
+    {afterCells = _ ∷ []} ()
+centeredScanExtract
+    {beforeCells = _ ∷ _ ∷ _ ∷ _}
+    {afterCells = _ ∷ _ ∷ []} ()
+
 centeredScanExtract
     {beforeCells =
       oldLeft ∷ oldCenter ∷ oldRight ∷ oldRest}
