@@ -16,6 +16,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalGapAttachmentExact whe
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -61,11 +62,9 @@ literalGapIsPhysicalRate :
     (Pinned.asLiteralYangMillsConstruction pinned)
     G
   ≡
-  Scale.physicalMass
-    (physicalScale
-      {pinned = pinned} {G = G})
+  Scale.physicalMass (physicalScale attachment)
 literalGapIsPhysicalRate attachment =
-  Relation.Binary.PropositionalEquality.sym
+  sym
     (physicalRateIsLiteralGap attachment)
 
 physicalRateIsSIMassMagnitude :
@@ -80,7 +79,7 @@ physicalRateIsSIMassMagnitude :
       (Pinned.pinnedSIMassGap pinned G))
 physicalRateIsSIMassMagnitude
   {pinned = pinned} {G = G} attachment =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (physicalRateIsLiteralGap attachment)
     (Pinned.pinnedLiteralGapIsSIMassMagnitude pinned G)
 
