@@ -855,6 +855,17 @@ smoothMainPairFourierCancellationStillOpen :
     R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ false
 smoothMainPairFourierCancellationStillOpen = refl
 
+
+matchedGammaRelativeGainNowSourceWritten :
+  R2GammaQuant.GammaMatchedQuantitativeGainBoundary.matchedRelativeGain2603Over16100SourceWritten
+    R2GammaQuant.canonicalGammaMatchedQuantitativeGainBoundary ≡ true
+matchedGammaRelativeGainNowSourceWritten = refl
+
+uniformGammaMarginStillNeedsAbsoluteScale :
+  R2GammaQuant.GammaMatchedQuantitativeGainBoundary.explicitUniformGammaMarginLowerBoundPaid
+    R2GammaQuant.canonicalGammaMatchedQuantitativeGainBoundary ≡ false
+uniformGammaMarginStillNeedsAbsoluteScale = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
