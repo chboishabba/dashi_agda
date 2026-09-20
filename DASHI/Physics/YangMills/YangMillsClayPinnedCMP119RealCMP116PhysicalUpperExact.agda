@@ -21,6 +21,9 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ApplicationExa
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ClusteringExact as Cluster
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
+import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -146,7 +149,7 @@ asClusteringInputs
       App.selectedPairAdmissible application
   ; Cluster.LiteralRealCMP116ClusteringInputs.sourceMagnitudeIsFinitePhysicalCovariance =
       App.sourceMagnitudeIsFinitePhysicalCovariance
-        application _
+        application covarianceLaws
   ; Cluster.LiteralRealCMP116ClusteringInputs.physicalUpper =
       physicalUpper inputs
   ; Cluster.LiteralRealCMP116ClusteringInputs.sourceEnvelopeBelowPhysicalUpper =
@@ -172,10 +175,10 @@ continuumPhysicalCovarianceBelowUpper :
     index →
   let clustering = asClusteringInputs inputs
   in
-  DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact.connectedCovarianceMagnitude
+  R278.connectedCovarianceMagnitude
     (Cov.realCovarianceExtension a covarianceLaws group)
-    (DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact.continuumMeasure
-      (DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact.cmp119PhysicalMeasureConvergenceData
+    (Gram.continuumMeasure
+      (Carrier.cmp119PhysicalMeasureConvergenceData
         a group))
     (App.left application index)
     (App.right application index)
