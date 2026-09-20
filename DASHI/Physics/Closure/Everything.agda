@@ -303,3 +303,5 @@ import DASHI.Physics.Closure.NSConcreteFeffermanSemanticsExact
 import DASHI.Physics.Closure.NSConcreteLiteralClayABCDRunTargetExact
 
 import DASHI.Physics.Closure.NSConcreteReleasedCDNativeReconstructionExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedActualCandidatePhysicalInputsExact
