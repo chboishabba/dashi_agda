@@ -82,3 +82,17 @@ def test_focus_layers_reveal_root_then_nearest_upstream_then_downstream():
     assert result.layers[1] == ("g",)
     assert result.layers[2] == ("x",)
     assert result.layers[3] == ("h",)
+
+
+def test_module_qualified_selector_disambiguates_label():
+    graph = _graph()
+    graph["nodes"].append(
+        {
+            "symbol_id": "other-f",
+            "label": "f",
+            "module": "Other",
+            "kind": "function",
+        }
+    )
+    resolved = resolve_symbol(graph, "M::f")
+    assert resolved["symbol_id"] == "f"
