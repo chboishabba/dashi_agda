@@ -134,6 +134,26 @@ class GraphDelta:
 
 
 @dataclass(frozen=True)
+class BranchEpisode:
+    fork_base: str
+    left_tip: str
+    right_tip: str
+    merge_commit: str
+    left_path: tuple[str, ...]
+    right_path: tuple[str, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "fork_base": self.fork_base,
+            "left_tip": self.left_tip,
+            "right_tip": self.right_tip,
+            "merge_commit": self.merge_commit,
+            "left_path": list(self.left_path),
+            "right_path": list(self.right_path),
+        }
+
+
+@dataclass(frozen=True)
 class CommitRecord:
     commit: str
     timestamp: int
@@ -171,12 +191,14 @@ class Timeline:
     commits: list[CommitRecord]
     snapshots: list[SemanticSnapshot]
     refs: dict[str, str]
+    branch_episodes: list[BranchEpisode] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema": "dashi.repo-history.v1",
             "commits": [asdict(c) | {"shape": c.shape} for c in self.commits],
             "refs": dict(sorted(self.refs.items())),
+            "branch_episodes": [episode.to_dict() for episode in self.branch_episodes],
             "snapshots": [s.to_dict() for s in self.snapshots],
         }
 
