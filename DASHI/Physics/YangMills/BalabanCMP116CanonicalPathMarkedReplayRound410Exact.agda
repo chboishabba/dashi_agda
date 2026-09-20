@@ -26,6 +26,7 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Exa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; absℝ; _≤ℝ_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -119,12 +120,12 @@ record SelectedCMP116PathMarkedTerm
     (Operator : Set) : Set₁ where
   field
     replay : CanonicalPathMarkedCMP109Replay Operator
-      DASHI.Foundations.RealAnalysisAxioms.ℝ
+      ℝ
 
-    differentiatedTerm : DASHI.Foundations.RealAnalysisAxioms.ℝ
+    differentiatedTerm : ℝ
 
     differentiatedTermAbsoluteIsCanonicalProductDifferenceNorm :
-      DASHI.Foundations.RealAnalysisAxioms.absℝ differentiatedTerm
+      absℝ differentiatedTerm
       ≡
       Marked.operatorNorm (R408.telescopeAlgebra (stageDifference replay))
         (Marked.difference (R408.telescopeAlgebra (stageDifference replay))
@@ -144,8 +145,8 @@ open SelectedCMP116PathMarkedTerm public
 selectedDifferentiatedTermBelowCanonicalMarkedProduct :
   ∀ {Operator}
     (term : SelectedCMP116PathMarkedTerm Operator) →
-  DASHI.Foundations.RealAnalysisAxioms._≤ℝ_
-    (DASHI.Foundations.RealAnalysisAxioms.absℝ
+  _≤ℝ_
+    (absℝ
       (differentiatedTerm term))
     (Marked.markedProductMajorant
       (R408.telescopeAlgebra (stageDifference (replay term)))
@@ -158,7 +159,7 @@ selectedDifferentiatedTermBelowCanonicalMarkedProduct :
 selectedDifferentiatedTermBelowCanonicalMarkedProduct term =
   subst
     (λ lower →
-      DASHI.Foundations.RealAnalysisAxioms._≤ℝ_ lower
+      _≤ℝ_ lower
         (Marked.markedProductMajorant
           (R408.telescopeAlgebra (stageDifference (replay term)))
           (R407.ordinaryStageMajorant
