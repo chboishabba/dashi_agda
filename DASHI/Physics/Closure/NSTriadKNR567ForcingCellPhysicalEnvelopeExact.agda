@@ -41,6 +41,8 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
+import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Exact as R450
 import DASHI.Physics.Closure.NSTriadKNFactoredFullTransposeSymmetryRound566Exact as R566
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventUnitGapCeilingBidiExact as Ceiling
 import DASHI.Physics.Closure.NSTriadKNRationalHermitianYoungRound579Exact as Young
@@ -52,7 +54,7 @@ module PhysicalEnvelope
     (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F)
     (viscosityPositive : Positive (Field30.viscosity physicalSystem))
-    (unitGap : Ceiling.R450.CanonicalFourierUnitGap physicalSystem) where
+    (unitGap : R450.CanonicalFourierUnitGap physicalSystem) where
 
   module T = R566.PhysicalTranspose physicalSystem S
   module C = Ceiling.SameOutputResolventCeiling
@@ -75,31 +77,6 @@ module PhysicalEnvelope
       (Separation.complex3NormSquaredNonnegative
         (T.Row.doubleCell beta))
 
-  crossBelowAbsolute :
-    (alpha beta : Physical.PhysicalTriadIncidence) →
-    T.Row.Swap.pairResolvent alpha beta
-      * T.Row.R179.realHermitianCross
-          (T.Row.D.doubleForcing alpha)
-          (T.Row.doubleCell beta)
-    ≤
-    T.Row.Swap.pairResolvent alpha beta
-      * ∣ T.Row.R179.realHermitianCross
-          (T.Row.D.doubleForcing alpha)
-          (T.Row.doubleCell beta) ∣
-  crossBelowAbsolute alpha beta =
-    let
-      k = T.Row.Swap.pairResolvent alpha beta
-      c = T.Row.R179.realHermitianCross
-        (T.Row.D.doubleForcing alpha)
-        (T.Row.doubleCell beta)
-      kNN : 0ℚ ≤ k
-      kNN = ℚP.≤-refl
-    in
-    let instance kNNI : NonNegative k
-        kNNI = nonNegative kNN
-    in
-    ℚP.*-monoˡ-≤-nonNeg k (ℚP.p≤∣p∣ c)
-
   forcingCellBelowLocalMass :
     (output : Z3.FourierMode) →
     Z3.NonZeroMode output →
@@ -111,7 +88,7 @@ module PhysicalEnvelope
   forcingCellBelowLocalMass output outputNonzero alpha beta alphaK betaK =
     let
       k = T.Row.Swap.pairResolvent alpha beta
-      c = T.Row.R179.realHermitianCross
+      c = R179.realHermitianCross
         (T.Row.D.doubleForcing alpha)
         (T.Row.doubleCell beta)
       kNN = C.pairResolventNonnegative
