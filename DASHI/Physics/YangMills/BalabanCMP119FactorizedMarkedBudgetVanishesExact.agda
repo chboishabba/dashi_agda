@@ -10,9 +10,10 @@ module DASHI.Physics.YangMills.BalabanCMP119FactorizedMarkedBudgetVanishesExact 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanDifferentiatedMarkedFactorProductExact as Product
+import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian as Hess
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as Sums
 import DASHI.Physics.YangMills.BalabanCMP119FactorizedDensityApproximationExact as Approx
 import DASHI.Physics.YangMills.BalabanCMP119FactorizedDensityConvergenceExact as Convergence
@@ -40,18 +41,18 @@ markedProductVanishes algebra ordinary marked (x ∷ xs) pointwise =
   Vanishing.vanishesAdd algebra
     (λ refinement →
       marked x refinement
-      DASHI.Foundations.RealAnalysisAxioms.*ℝ
-      DASHI.Physics.YangMills.BalabanDecoupledActivityHessian.productℝ
+      *ℝ
+      Hess.productℝ
         ordinary xs)
     (λ refinement →
       ordinary x
-      DASHI.Foundations.RealAnalysisAxioms.*ℝ
+      *ℝ
       Product.markedProductMajorant
         ordinary
         (λ y → marked y refinement)
         xs)
     (Vanishing.vanishesScaleRight algebra
-      (DASHI.Physics.YangMills.BalabanDecoupledActivityHessian.productℝ
+      (Hess.productℝ
         ordinary xs)
       (marked x)
       (pointwise x))
