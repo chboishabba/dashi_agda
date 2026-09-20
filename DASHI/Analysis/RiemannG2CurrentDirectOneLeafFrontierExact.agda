@@ -877,6 +877,22 @@ highAggregateNowReducedToRvMMainAndRemainder :
     R2GammaAbs.canonicalGammaAbsoluteMarginBoundary ≡ false
 highAggregateNowReducedToRvMMainAndRemainder = refl
 
+
+constantRvMDensityNowKilledExactlyAtSource :
+  R2RvMConst.RvMConstantDensityCancellationBoundary.constantDensityPairZeroSourceWritten
+    R2RvMConst.canonicalRvMConstantDensityCancellationBoundary ≡ true
+constantRvMDensityNowKilledExactlyAtSource = refl
+
+qDependentRvMMainResidualStillOpen :
+  R2RvMConst.RvMConstantDensityCancellationBoundary.qDependentSmoothMainResidualPaid
+    R2RvMConst.canonicalRvMConstantDensityCancellationBoundary ≡ false
+qDependentRvMMainResidualStillOpen = refl
+
+cumulativeRvMRemainderStillOpen :
+  R2RvMConst.RvMConstantDensityCancellationBoundary.cumulativeActualMinusMainRemainderPaid
+    R2RvMConst.canonicalRvMConstantDensityCancellationBoundary ≡ false
+cumulativeRvMRemainderStillOpen = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
