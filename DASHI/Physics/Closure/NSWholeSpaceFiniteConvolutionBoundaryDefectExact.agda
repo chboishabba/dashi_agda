@@ -241,37 +241,45 @@ energySquarePlusBoundaryDefectConverges :
   (Q : EuclideanBoundaryDefectConvolutionSequence) →
   BishopSequence._ConvergesTo_
     (energySquarePlusBoundaryDefect Q)
+    (BishopReal._+_
+      (BishopReal._*_
+        (continuumEnergy Q)
+        (continuumEnergy Q))
+      BishopReal.0ℝ)
+energySquarePlusBoundaryDefectConverges Q =
+  BishopSequence.xₙ+yₙ→x₀+y₀
+    ( BishopReal._*_
+        (continuumEnergy Q)
+        (continuumEnergy Q)
+    , BishopSequence.xₙyₙ→x₀y₀
+        (continuumEnergy Q , energyQuadraturesConverge Q)
+        (continuumEnergy Q , energyQuadraturesConverge Q)
+    )
+    (BishopReal.0ℝ , boundaryDefectVanishes Q)
+
+boundaryDefectLimitEquivalentEnergySquare :
+  (Q : EuclideanBoundaryDefectConvolutionSequence) →
+  BishopReal._≃_
+    (BishopReal._+_
+      (BishopReal._*_
+        (continuumEnergy Q)
+        (continuumEnergy Q))
+      BishopReal.0ℝ)
     (BishopReal._*_
       (continuumEnergy Q)
       (continuumEnergy Q))
-energySquarePlusBoundaryDefectConverges Q =
-  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
-    { xs = energySquarePlusBoundaryDefect Q }
-    { ys = energySquarePlusBoundaryDefect Q }
-    (λ n {{_}} → BishopP.≃-refl)
-    ( BishopReal._+_
-        (BishopReal._*_
-          (continuumEnergy Q)
-          (continuumEnergy Q))
-        BishopReal.0ℝ
-    , BishopSequence.xₙ+yₙ→x₀+y₀
-        ( BishopReal._*_
-            (continuumEnergy Q)
-            (continuumEnergy Q)
-        , BishopSequence.xₙyₙ→x₀y₀
-            (continuumEnergy Q , energyQuadraturesConverge Q)
-            (continuumEnergy Q , energyQuadraturesConverge Q)
-        )
-        (BishopReal.0ℝ , boundaryDefectVanishes Q)
-    )
+boundaryDefectLimitEquivalentEnergySquare Q =
+  BishopP.+-identityʳ
 
 convolutionQuadraturesConvergeFromEnergyAndBoundaryDefect :
   (Q : EuclideanBoundaryDefectConvolutionSequence) →
   BishopSequence._ConvergesTo_
     (λ n → convolutionMass (quadrature Q n))
-    (BishopReal._*_
-      (continuumEnergy Q)
-      (continuumEnergy Q))
+    (BishopReal._+_
+      (BishopReal._*_
+        (continuumEnergy Q)
+        (continuumEnergy Q))
+      BishopReal.0ℝ)
 convolutionQuadraturesConvergeFromEnergyAndBoundaryDefect Q =
   BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
     { xs = energySquarePlusBoundaryDefect Q }
@@ -280,9 +288,11 @@ convolutionQuadraturesConvergeFromEnergyAndBoundaryDefect Q =
       BishopP.≃-symm
         (finiteConvolutionFactorisationWithBoundaryDefect
           (quadrature Q n)))
-    ( BishopReal._*_
-        (continuumEnergy Q)
-        (continuumEnergy Q)
+    ( BishopReal._+_
+        (BishopReal._*_
+          (continuumEnergy Q)
+          (continuumEnergy Q))
+        BishopReal.0ℝ
     , energySquarePlusBoundaryDefectConverges Q
     )
 
