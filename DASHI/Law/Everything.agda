@@ -153,3 +153,5 @@ import DASHI.Law.SensibLawNativeLegalFollowCLIExact
 import DASHI.Law.SensibLawNativeLegalFollowCLIRegression
 import DASHI.Law.AustralianContractsLandscapeControllerExact
 import DASHI.Law.AustralianContractsLandscapeControllerRegression
+import DASHI.Law.AustralianContractsReviewedHopCompilerExact
+import DASHI.Law.AustralianContractsReviewedHopCompilerRegression
