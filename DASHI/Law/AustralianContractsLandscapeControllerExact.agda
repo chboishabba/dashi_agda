@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
+open import Data.Maybe using (Maybe)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
@@ -32,12 +33,16 @@ record ContractLandscapeWorkItem : Set where
   constructor contractLandscapeWorkItem
   field
     workReference : String
+    frontierKind : ContractLandscapeFrontierKind
     semanticReference : String
-    relatedReference : String
+    relatedReference : Maybe String
+    doctrine : Maybe Contracts.ContractDoctrine
     jurisdictionReference : String
     asAtReference : String
-    frontierKind : ContractLandscapeFrontierKind
     sourceRole : Contracts.ContractSourceRole
+    sourceCitation : String
+    courtReference : Maybe String
+    treatment : Maybe Contracts.ContractTreatment
     activeAtAsAt : Bool
     candidateOnly : Bool
     candidateOnlyIsTrue : candidateOnly ≡ true
