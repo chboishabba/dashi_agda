@@ -31,6 +31,66 @@ class LabelPolicy:
 
 
 @dataclass(frozen=True)
+class EdgePolicy:
+    """Visual-only priority for semantic relation classes."""
+
+    priority: tuple[str, ...] = (
+        "constructs",
+        "calls",
+        "pattern-matches",
+        "constructor-of",
+        "field-of",
+        "value-flows",
+        "binds",
+        "body-depends",
+        "type-depends",
+        "opens",
+        "imports",
+        "contains",
+        "depends",
+    )
+
+    stroke_widths: tuple[tuple[str, float], ...] = (
+        ("constructs", 4.0),
+        ("calls", 3.2),
+        ("pattern-matches", 2.8),
+        ("constructor-of", 2.6),
+        ("field-of", 2.4),
+        ("value-flows", 2.2),
+        ("binds", 1.9),
+        ("body-depends", 1.7),
+        ("type-depends", 1.25),
+        ("opens", 1.05),
+        ("imports", 0.9),
+        ("contains", 0.75),
+        ("depends", 1.0),
+    )
+
+    def dominant_kind(self, kinds: set[str]) -> str:
+        for kind in self.priority:
+            if kind in kinds:
+                return kind
+        return "depends"
+
+    def stroke_width(self, kinds: set[str]) -> float:
+        dominant = self.dominant_kind(kinds)
+        return dict(self.stroke_widths).get(dominant, 1.0)
+
+    def edge_config(self, kinds: set[str]) -> dict[str, Any]:
+        dominant = self.dominant_kind(kinds)
+        width = self.stroke_width(kinds)
+        tip_length = 0.16
+        if dominant in {"constructs", "calls"}:
+            tip_length = 0.22
+        elif dominant in {"contains", "imports", "opens"}:
+            tip_length = 0.11
+        return {
+            "stroke_width": width,
+            "tip_config": {"tip_length": tip_length},
+        }
+
+
+@dataclass(frozen=True)
 class NodePolicy:
     module_radius: float = 0.085
     binder_radius: float = 0.035
@@ -50,6 +110,7 @@ class ManimRenderPolicy:
     animation: AnimationPolicy = AnimationPolicy()
     labels: LabelPolicy = LabelPolicy()
     nodes: NodePolicy = NodePolicy()
+    edges: EdgePolicy = EdgePolicy()
 
     def vertex_mobject(
         self,
