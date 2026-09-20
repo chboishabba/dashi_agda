@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116MarkedExpansio
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -120,14 +120,14 @@ selectedSourceEnvelopeBelowExponential :
             * Scale.latticeDistance (scaleData inputs)
                 (physicalDistance inputs index)))
 selectedSourceEnvelopeBelowExponential
-    {expansion = expansion} inputs cutoff index =
+    {embedding = embedding} {expansion = expansion} inputs cutoff index =
   subst
     (λ lower →
       lower ≤ℝ
         R415.sourceAmplitude (expansion index) *ℝ
           expReal
             (-ℝ
-              Calibration.embedQ _
+              Calibration.embedQ embedding
                 (Scale.latticeExponent (scaleData inputs)
                   * Scale.latticeDistance (scaleData inputs)
                       (physicalDistance inputs index))))
