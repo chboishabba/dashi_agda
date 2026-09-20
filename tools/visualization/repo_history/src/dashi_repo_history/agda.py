@@ -1134,6 +1134,8 @@ def build_semantic_graph(
                         ref=ref.application_head,
                         owner_module=owner.module,
                         by_module_label=by_module_label,
+                        by_scoped_label=by_scoped_label,
+                        scope_chain=scope_chain,
                         open_scopes=open_scopes_by_module.get(
                             owner.module,
                             [],
