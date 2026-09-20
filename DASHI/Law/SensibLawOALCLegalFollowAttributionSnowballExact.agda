@@ -142,6 +142,35 @@ citationOnlyCannotRecoverPinnedRevision =
 -- role.  Existence and exact identity still require an inspected result.
 ------------------------------------------------------------------------
 
+data LegalFollowWorkClass : Set where
+  livePrimarySourceResidual : LegalFollowWorkClass
+  authorityTreatmentResidual : LegalFollowWorkClass
+  externalIdentityMetadata : LegalFollowWorkClass
+  contextNavigation : LegalFollowWorkClass
+
+record LegalFollowParetoCoordinate : Set where
+  constructor legalFollowParetoCoordinate
+  field
+    workClass : LegalFollowWorkClass
+    closesLiveLegalResidual : Bool
+    preservesExactSourceRevision : Bool
+    enrichesExternalIdentity : Bool
+    scalarRankCreatesTruthRank : Bool
+
+open LegalFollowParetoCoordinate public
+
+primarySourceCoordinate : LegalFollowParetoCoordinate
+primarySourceCoordinate =
+  legalFollowParetoCoordinate
+    livePrimarySourceResidual
+    true true false false
+
+externalIdentityCoordinate : LegalFollowParetoCoordinate
+externalIdentityCoordinate =
+  legalFollowParetoCoordinate
+    externalIdentityMetadata
+    false false true false
+
 data LegalIdentitySubjectKind : Set where
   doctrineConcept : LegalIdentitySubjectKind
   apexCourtCase : LegalIdentitySubjectKind
@@ -336,6 +365,10 @@ record OalcLegalFollowAttributionBoundary : Set where
     qidLookupIsOpportunisticIsTrue :
       qidLookupIsOpportunistic ≡ true
 
+    liveSourceResidualPrecedesOptionalQidCleanup : Bool
+    liveSourceResidualPrecedesOptionalQidCleanupIsTrue :
+      liveSourceResidualPrecedesOptionalQidCleanup ≡ true
+
     qidPriorityClaimsExistence : Bool
     qidPriorityClaimsExistenceIsFalse :
       qidPriorityClaimsExistence ≡ false
@@ -352,6 +385,7 @@ canonicalOalcLegalFollowAttributionBoundary :
   OalcLegalFollowAttributionBoundary
 canonicalOalcLegalFollowAttributionBoundary =
   oalcLegalFollowAttributionBoundary
+    true refl
     true refl
     true refl
     true refl
