@@ -22,6 +22,7 @@ module DASHI.Physics.Closure.NSTriadKNViscousCenteredCovarianceM2PaymentExact wh
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using (length)
 open import Data.Rational.Base as ℚ
   using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; ∣_∣; nonNegative)
 import Data.Rational.Properties as ℚP
@@ -37,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExa
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Cov
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredCovarianceFactorExact as Centered
+import DASHI.Physics.Closure.NSTriadKNFixedOutputViscousRateDifferenceFactorizationExact as Rate
 import DASHI.Physics.Closure.NSTriadKNFixedOutputViscousCenteredCovarianceExact as Viscous
 import DASHI.Physics.Closure.NSTriadKNLiteralFixedOutputCovarianceM2PaymentExact as M2
 
@@ -69,7 +71,7 @@ module PhysicalViscousCovarianceM2
 
   covarianceNumerator : ℚ
   covarianceNumerator =
-    Cov.natAsRational (Data.List.Base.length items)
+    Cov.natAsRational (length items)
       * Work.coherentWork mixed decay
     + Cov.rateSum rate items * Work.coherentWork mixed mixed
 
@@ -78,7 +80,7 @@ module PhysicalViscousCovarianceM2
     Centered.centeredPairDifferenceWorkSum E work items
 
   exactViscousCenteredNormalForm :
-    Centered.Rate.two * covarianceNumerator
+    Rate.two * covarianceNumerator
     ≡ 0ℚ - nu * centeredDefect
   exactViscousCenteredNormalForm =
     Viscous.literalFixedOutputViscousCenteredCovariance
@@ -116,7 +118,7 @@ module PhysicalViscousCovarianceM2
     in ℚP.*-monoˡ-≤-nonNeg nu negativeDefectBelowM2
 
   physicalViscousCovarianceBelowM2 :
-    Centered.Rate.two * covarianceNumerator
+    Rate.two * covarianceNumerator
     ≤ nu * P.totalM2Budget items
   physicalViscousCovarianceBelowM2 =
     let
