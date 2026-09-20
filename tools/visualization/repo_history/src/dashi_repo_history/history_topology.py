@@ -1,29 +1,7 @@
 from __future__ import annotations
 
 from collections import deque
-from dataclasses import dataclass
-
-from .model import CommitRecord
-
-
-@dataclass(frozen=True)
-class BranchEpisode:
-    fork_base: str
-    left_tip: str
-    right_tip: str
-    merge_commit: str
-    left_path: tuple[str, ...]
-    right_path: tuple[str, ...]
-
-    def to_dict(self):
-        return {
-            "fork_base": self.fork_base,
-            "left_tip": self.left_tip,
-            "right_tip": self.right_tip,
-            "merge_commit": self.merge_commit,
-            "left_path": list(self.left_path),
-            "right_path": list(self.right_path),
-        }
+from .model import BranchEpisode, CommitRecord
 
 
 def _ancestor_distances(
