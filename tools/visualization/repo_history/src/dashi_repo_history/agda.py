@@ -162,6 +162,30 @@ def _declaration_fingerprint(
     )
 
 
+def _prefix_application_head(node: Any) -> bool:
+    """Conservative prefix-application evidence from Tree-sitter structure.
+
+    The nearest enclosing expr must have at least two named children, and the
+    reference must occur in the first one. This intentionally does not try to
+    reinterpret Agda mixfix/infix syntax.
+    """
+
+    expr = _first_ancestor(node, {"expr"})
+    if expr is None:
+        return False
+
+    child = node
+    while child.parent is not None and child.parent is not expr:
+        child = child.parent
+    if child.parent is not expr:
+        return False
+
+    named_children = list(expr.named_children)
+    if len(named_children) < 2:
+        return False
+    return named_children[0] is child
+
+
 def _reference_kind(source: bytes, node: Any) -> str:
     for ancestor in _ancestors(node):
         if ancestor.type == "rhs":
@@ -235,6 +259,7 @@ class RawReference:
     span: SourceSpan
     kind: str
     scope: str
+    prefix_application_head: bool = false
 
 
 @dataclass
@@ -713,6 +738,7 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
                 span=_span(path, ref),
                 kind=_reference_kind(source, ref),
                 scope=scope,
+                prefix_application_head=_prefix_application_head(ref),
             )
         )
 
@@ -867,10 +893,15 @@ def build_semantic_graph(
             local = declaration.binders.get((ref.scope, leaf))
 
             if local is not None:
+                relation_kind = (
+                    "value-flows"
+                    if ref.kind == "body-depends"
+                    else ref.kind
+                )
                 relation = Relation(
                     source=local.symbol_id,
                     target=owner.symbol_id,
-                    kind=ref.kind,
+                    kind=relation_kind,
                     evidence=ref.span,
                 )
                 graph.edges[relation.relation_id] = relation
@@ -897,10 +928,25 @@ def build_semantic_graph(
                 )
                 continue
 
+            relation_kind = ref.kind
+            if ref.kind == "body-depends":
+                if target.kind == "constructor":
+                    relation_kind = "constructs"
+                elif (
+                    ref.prefix_application_head
+                    and target.kind in {
+                        "function",
+                        "field",
+                        "postulate",
+                        "theorem",
+                    }
+                ):
+                    relation_kind = "calls"
+
             relation = Relation(
                 source=target.symbol_id,
                 target=owner.symbol_id,
-                kind=ref.kind,
+                kind=relation_kind,
                 evidence=ref.span,
             )
             graph.edges[relation.relation_id] = relation
