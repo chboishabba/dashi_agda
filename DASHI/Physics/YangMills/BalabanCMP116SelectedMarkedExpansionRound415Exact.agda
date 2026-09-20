@@ -21,7 +21,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; absℝ; _≤ℝ_)
+  (ℝ; 0ℝ; _*ℝ_; absℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
@@ -93,14 +93,13 @@ record SelectedCMP116MarkedExpansion
 
     domainAmplitude : Domain → ℝ
     domainAmplitudeNonnegative :
-      ∀ domain → DASHI.Foundations.RealAnalysisAxioms.0ℝ ≤ℝ domainAmplitude domain
+      ∀ domain → 0ℝ ≤ℝ domainAmplitude domain
 
     commonYShellBelowDomainDecay :
       ∀ domain →
       commonYShell domain
       ≤ℝ domainAmplitude domain
-        DASHI.Foundations.RealAnalysisAxioms.*ℝ
-          R414.weight decay (R411.domainTreeDistance geometry domain)
+        *ℝ R414.weight decay (R411.domainTreeDistance geometry domain)
 
     sourceAmplitude : ℝ
 
@@ -175,8 +174,7 @@ outerShellSumBelowSelectedDecay :
   Resum.sumℝ (commonYShell expansion) (localizedDomains expansion)
   ≤ℝ
   sourceAmplitude expansion
-    DASHI.Foundations.RealAnalysisAxioms.*ℝ
-      R414.weight (decay expansion)
+        *ℝ R414.weight (decay expansion)
         (R411.selectedConnectingDistance (geometry expansion))
 outerShellSumBelowSelectedDecay expansion =
   R414.connectingOuterSumBelowSelectedDecay
@@ -188,8 +186,7 @@ selectedBoundaryBelowSourceDecay :
   absℝ (selectedBoundaryIntegrand expansion)
   ≤ℝ
   sourceAmplitude expansion
-    DASHI.Foundations.RealAnalysisAxioms.*ℝ
-      R414.weight (decay expansion)
+        *ℝ R414.weight (decay expansion)
         (R411.selectedConnectingDistance (geometry expansion))
 selectedBoundaryBelowSourceDecay expansion =
   R405.cmp116NestedAbsoluteBoundaryLocalization
@@ -198,8 +195,7 @@ selectedBoundaryBelowSourceDecay expansion =
     (commonYShell expansion)
     (selectedBoundaryIntegrand expansion)
     (sourceAmplitude expansion
-      DASHI.Foundations.RealAnalysisAxioms.*ℝ
-        R414.weight (decay expansion)
+        *ℝ R414.weight (decay expansion)
           (R411.selectedConnectingDistance (geometry expansion)))
     (selectedBoundaryIsCommonYSum expansion)
     (commonYAbsoluteBoundFromR410 expansion)
