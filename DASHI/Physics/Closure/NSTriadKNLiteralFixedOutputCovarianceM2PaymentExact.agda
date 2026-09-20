@@ -31,7 +31,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Empty as Empty
 open import Data.Nat.Properties as NatP using (_≟_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Nullary.Decidable.Core using (yes; no)
@@ -163,6 +163,64 @@ module LiteralFixedOutputCovarianceM2
       (PhysicalM2.physicalSignedCovariancePairBelowM2
         (nonzeroPairData alpha beta unequal))
 
+  nonzeroPairAbsoluteBound :
+    (alpha beta : Physical.PhysicalTriadIncidence) →
+    (unequal :
+      PhysicalM2.integerCenteredNorm alpha
+      ≡ PhysicalM2.integerCenteredNorm beta → Empty.⊥) →
+    ∣ pairTerm alpha beta ∣
+    ≤
+    Moment.weightedSecondMoment
+      (CovM2.covarianceSecondMomentSample
+        (PhysicalM2.physicalCovarianceSecondMomentPair
+          (nonzeroPairData alpha beta unequal)))
+      *
+      ( Scale.unitSquare E
+        * (G2.two
+          * G1.stateAmplitudeEnvelope
+              (value alpha) (value beta) mixed))
+  nonzeroPairAbsoluteBound alpha beta unequal =
+    let
+      P = PhysicalM2.physicalCovarianceSecondMomentPair
+        (nonzeroPairData alpha beta unequal)
+      exact = nonzeroPairSignedCovarianceIsLiteralTerm alpha beta unequal
+      magnitudeExact = CovM2.covarianceSampleMagnitudeMeaning P
+
+      signedAbsToMagnitude :
+        ∣ CovM2.signedCovariancePair P ∣
+        ≡ Moment.pairedMagnitude (CovM2.covarianceSecondMomentSample P)
+      signedAbsToMagnitude =
+        let
+          w = CovM2.weight P
+          dm = CovM2.multiplierDifference P
+          dw = CovM2.workDifference P
+          wNN = CovM2.weightNonnegative P
+          wAbs = ℚP.0≤p⇒∣p∣≡p wNN
+          productAbs =
+            ℚP.∣p*q∣≡∣p∣*∣q∣ dm dw
+          outerAbs =
+            ℚP.∣p*q∣≡∣p∣*∣q∣ w (dm * dw)
+        in
+        trans outerAbs
+          (trans
+            (cong (λ selected → selected * ∣ dm * dw ∣) wAbs)
+            (trans
+              (cong (w *_) productAbs)
+              (sym magnitudeExact)))
+    in
+    subst
+      (λ left →
+        left
+        ≤ Moment.weightedSecondMoment
+            (CovM2.covarianceSecondMomentSample P)
+            *
+            ( Scale.unitSquare E
+              * (G2.two
+                * G1.stateAmplitudeEnvelope
+                    (value alpha) (value beta) mixed)))
+      (cong ∣_∣ exact)
+      (CovM2.covarianceSampleFirstOrderBound P)
+
   pairBudget :
     Physical.PhysicalTriadIncidence →
     Physical.PhysicalTriadIncidence → ℚ
@@ -231,6 +289,96 @@ module LiteralFixedOutputCovarianceM2
     ℚP.+-mono-≤
       (centeredAgainstHeadBelowM2 head xs)
       (centeredPairSumBelowM2 xs)
+
+  absolutePairTermBelowBudget :
+    (alpha beta : Physical.PhysicalTriadIncidence) →
+    ∣ pairTerm alpha beta ∣ ≤ pairBudget alpha beta
+  absolutePairTermBelowBudget alpha beta
+    with NatP._≟_
+      (PhysicalM2.integerCenteredNorm alpha)
+      (PhysicalM2.integerCenteredNorm beta)
+  ... | yes equalNorms
+    rewrite
+      PhysicalM2.equalIntegerCenteredNormsGiveZeroMultiplier
+        E I alpha beta equalNorms
+    =
+      ℚP.≤-refl
+  ... | no unequal =
+    nonzeroPairAbsoluteBound alpha beta unequal
+
+  absoluteAgainstHead :
+    Physical.PhysicalTriadIncidence →
+    List Physical.PhysicalTriadIncidence → ℚ
+  absoluteAgainstHead head [] = 0ℚ
+  absoluteAgainstHead head (x ∷ xs) =
+    ∣ pairTerm head x ∣ + absoluteAgainstHead head xs
+
+  absolutePairSum :
+    List Physical.PhysicalTriadIncidence → ℚ
+  absolutePairSum [] = 0ℚ
+  absolutePairSum (head ∷ xs) =
+    absoluteAgainstHead head xs + absolutePairSum xs
+
+  absoluteAgainstHeadBelowM2 :
+    (head : Physical.PhysicalTriadIncidence) →
+    (xs : List Physical.PhysicalTriadIncidence) →
+    absoluteAgainstHead head xs ≤ budgetAgainstHead head xs
+  absoluteAgainstHeadBelowM2 head [] = ℚP.≤-refl
+  absoluteAgainstHeadBelowM2 head (x ∷ xs) =
+    ℚP.+-mono-≤
+      (absolutePairTermBelowBudget head x)
+      (absoluteAgainstHeadBelowM2 head xs)
+
+  absolutePairSumBelowM2 :
+    (xs : List Physical.PhysicalTriadIncidence) →
+    absolutePairSum xs ≤ totalM2Budget xs
+  absolutePairSumBelowM2 [] = ℚP.≤-refl
+  absolutePairSumBelowM2 (head ∷ xs) =
+    ℚP.+-mono-≤
+      (absoluteAgainstHeadBelowM2 head xs)
+      (absolutePairSumBelowM2 xs)
+
+  signedPairSumBelowAbsolutePairSum :
+    (xs : List Physical.PhysicalTriadIncidence) →
+    ∣ Centered.centeredPairDifferenceWorkSum E work xs ∣
+    ≤ absolutePairSum xs
+  signedPairSumBelowAbsolutePairSum [] = ℚP.≤-refl
+  signedPairSumBelowAbsolutePairSum (head ∷ xs) =
+    let
+      triangle =
+        ℚP.∣p+q∣≤∣p∣+∣q∣
+          (Centered.centeredAgainstHead E work head xs)
+          (Centered.centeredPairDifferenceWorkSum E work xs)
+      headBound :
+        ∣ Centered.centeredAgainstHead E work head xs ∣
+        ≤ absoluteAgainstHead head xs
+      headBound = signedAgainstHeadBelowAbsolute head xs
+      tailBound = signedPairSumBelowAbsolutePairSum xs
+    in
+    ℚP.≤-trans triangle (ℚP.+-mono-≤ headBound tailBound)
+    where
+    signedAgainstHeadBelowAbsolute :
+      (head : Physical.PhysicalTriadIncidence) →
+      (rest : List Physical.PhysicalTriadIncidence) →
+      ∣ Centered.centeredAgainstHead E work head rest ∣
+      ≤ absoluteAgainstHead head rest
+    signedAgainstHeadBelowAbsolute head [] = ℚP.≤-refl
+    signedAgainstHeadBelowAbsolute head (x ∷ rest) =
+      ℚP.≤-trans
+        (ℚP.∣p+q∣≤∣p∣+∣q∣
+          (pairTerm head x)
+          (Centered.centeredAgainstHead E work head rest))
+        (ℚP.+-mono-≤
+          ℚP.≤-refl
+          (signedAgainstHeadBelowAbsolute head rest))
+
+  literalFixedOutputCenteredCovarianceAbsoluteBelowM2 :
+    ∣ Centered.centeredPairDifferenceWorkSum E work items ∣
+    ≤ totalM2Budget items
+  literalFixedOutputCenteredCovarianceAbsoluteBelowM2 =
+    ℚP.≤-trans
+      (signedPairSumBelowAbsolutePairSum items)
+      (absolutePairSumBelowM2 items)
 
   literalFixedOutputCenteredCovarianceBelowM2 :
     Centered.centeredPairDifferenceWorkSum E work items
