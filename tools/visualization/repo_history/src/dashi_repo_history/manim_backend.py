@@ -104,6 +104,25 @@ def _visual_edges(graph_data: dict[str, Any]) -> list[tuple[str, str]]:
     return _visual_edge_projection(graph_data)[0]
 
 
+def _relation_kinds(*graphs: dict[str, Any]) -> set[str]:
+    kinds: set[str] = set()
+    for graph in graphs:
+        for edge in graph.get("edges", []):
+            kinds.add(edge["kind"])
+    return kinds
+
+
+def _legend(
+    policy: ManimRenderPolicy,
+    kinds: set[str],
+):
+    legend = policy.legend_mobject(kinds)
+    if len(legend) > 0:
+        legend.to_corner(DOWN + LEFT, buff=0.18)
+        legend.set_z_index(20)
+    return legend
+
+
 def _snapshot_maps(data: dict[str, Any]):
     snapshots = {
         snapshot["commit"]: snapshot
@@ -510,12 +529,17 @@ class SemanticSnapshotScene(MovingCameraScene):
             return
 
         snapshot = snapshots[snapshot_index]
-        graph = SemanticGraphView().build(snapshot["graph"])
+        policy = ManimRenderPolicy()
+        graph = SemanticGraphView(policy).build(snapshot["graph"])
+        legend = _legend(
+            policy,
+            _relation_kinds(snapshot["graph"]),
+        )
         title = Text(
             f"semantic graph · {snapshot['commit'][:10]}",
             font_size=28,
         ).to_edge(UP)
-        self.play(FadeIn(title), Create(graph), run_time=2.0)
+        self.play(FadeIn(title), Create(graph), FadeIn(legend), run_time=2.0)
         if graph.width > 0:
             self.play(
                 self.camera.frame.animate.move_to(graph).set(
@@ -553,7 +577,14 @@ class SemanticHistoryScene(MovingCameraScene):
         stamp = Text("", font_size=17).next_to(title, DOWN, buff=0.12)
         self.play(FadeIn(title), FadeIn(stamp))
 
-        view = SemanticGraphView()
+        policy = ManimRenderPolicy()
+        view = SemanticGraphView(policy)
+        history_kinds = _relation_kinds(
+            *[snapshot["graph"] for snapshot in snapshots]
+        )
+        legend = _legend(policy, history_kinds)
+        self.play(FadeIn(legend), run_time=0.25)
+
         pending_commit: str | None = None
         graph_created = False
 
@@ -664,6 +695,8 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
             snapshots,
         )
 
+        policy = ManimRenderPolicy()
+
         def focused(commit: str) -> dict[str, Any]:
             return _changed_graph(
                 snapshots[commit],
@@ -677,7 +710,25 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
         ).to_edge(UP)
         self.play(FadeIn(title))
 
+        focused_graphs = [
+            focused(commit)
+            for commit in snapshots
+            if commit == fork
+            or commit == merge_sha
+            or any(
+                command.kind == "advance-branch"
+                and command.payload["commit"] == commit
+                for command in program
+            )
+        ]
+        legend = _legend(
+            policy,
+            _relation_kinds(*focused_graphs),
+        )
+        self.play(FadeIn(legend), run_time=0.25)
+
         fork_view = SemanticGraphView(
+            policy,
             viewport_scale=0.66,
             viewport_shift=(0.0, -0.15, 0.0),
         )
@@ -689,10 +740,12 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
         self.play(FadeIn(fork_label), Create(fork_graph), run_time=1.1)
 
         left_view = SemanticGraphView(
+            policy,
             viewport_scale=0.40,
             viewport_shift=(-3.35, -0.25, 0.0),
         )
         right_view = SemanticGraphView(
+            policy,
             viewport_scale=0.40,
             viewport_shift=(3.35, -0.25, 0.0),
         )
@@ -763,6 +816,7 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
             snapshots_by_commit=snapshots,
         )
         merge_view = SemanticGraphView(
+            policy,
             viewport_scale=0.66,
             viewport_shift=(0.0, -0.15, 0.0),
         )
@@ -873,9 +927,15 @@ class SemanticMergeScene(MovingCameraScene):
             changed_edges,
         )
 
-        left_graph = SemanticGraphView().build(left_data)
-        right_graph = SemanticGraphView().build(right_data)
-        merged_graph = SemanticGraphView().build(merge_data)
+        policy = ManimRenderPolicy()
+        left_graph = SemanticGraphView(policy).build(left_data)
+        right_graph = SemanticGraphView(policy).build(right_data)
+        merged_graph = SemanticGraphView(policy).build(merge_data)
+        legend = _legend(
+            policy,
+            _relation_kinds(left_data, right_data, merge_data),
+        )
+        self.play(FadeIn(legend), run_time=0.25)
 
         left_path = fork_payload["left_path"]
         right_path = fork_payload["right_path"]
