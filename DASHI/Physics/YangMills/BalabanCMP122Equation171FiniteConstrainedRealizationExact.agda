@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation171FiniteConstrainedRealizat
 
 ------------------------------------------------------------------------
 -- CMP122 EQ.(1.71) FINITE-REALIZATION ABI
+-- SPECIAL EXACT-QUADRATURE SHORTCUT (NON-CANONICAL FOR LITERAL HAAR)
 --
 -- Decompose source T-mass -> Gate4 finite T-operation into:
 --
@@ -13,9 +14,12 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation171FiniteConstrainedRealizat
 -- Any Eq.(1.71) normalization/Jacobian/measure factors belong in G3.  The
 -- compiler below then proves the total source-mass = embedded Gate4 mass.
 --
--- G4 is intentionally explicit: if the literal source integral is not
--- definitionally the selected finite quadrature, this is the genuine
--- quadrature/Haar-realization theorem rather than bookkeeping.
+-- IMPORTANT: this file is now retained only for the special case in which the
+-- chosen finite quadrature is independently proved exact for the selected
+-- Eq.(1.71) integrand.  The canonical literal-Haar route is refinement-indexed
+-- and lives in BalabanCMP122Equation171Gate4RefinementLimitExact plus the
+-- quantitative quadrature compiler.  Do not use this file to identify a single
+-- generic finite quadrature with the literal product-Haar integral.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -288,3 +292,7 @@ literalEquation171IntegralIsFiniteSelectedFoldLevel = conditional
 -- Jacobian, determinant, localization or patch factor must be paid inside G3.
 literalEquation171MeasureFactorsAbsorbedInIntegrandLevel : ProofLevel
 literalEquation171MeasureFactorsAbsorbedInIntegrandLevel = conditional
+
+-- Governance label: exact-single-slice G4 is not the default physical route.
+literalSingleSliceExactQuadratureShortcutLevel : ProofLevel
+literalSingleSliceExactQuadratureShortcutLevel = conditional
