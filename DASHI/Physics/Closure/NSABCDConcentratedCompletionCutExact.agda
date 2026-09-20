@@ -75,6 +75,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalParabolicCriticalRegionRoutingExac
 import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionPairBlocksExact as BRegionPairs
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceCriticalRegionLiveExact as BRegionLive
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact as BRegionPay
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionToR432Exact as BRegionR432
 
 ------------------------------------------------------------------------
 -- A
@@ -334,6 +335,15 @@ bD1b2LiveCovarianceLiteralR236SixBlockNormalFormClosed =
 bD1b2LivePhysicalCriticalRegionPaymentCompilerClosed : Bool
 bD1b2LivePhysicalCriticalRegionPaymentCompilerClosed =
   BRegionPay.livePhysicalCriticalRegionPaymentCompilerClosed
+
+
+bD1b2LiveCriticalRegionToR432FixedOutputCompilerClosed : Bool
+bD1b2LiveCriticalRegionToR432FixedOutputCompilerClosed =
+  BRegionR432.liveCriticalRegionToR432FixedOutputCompilerClosed
+
+bD1b2GlobalR406SameObjectWeldFromRegionPaymentsClosed : Bool
+bD1b2GlobalR406SameObjectWeldFromRegionPaymentsClosed =
+  BRegionR432.liveCriticalRegionToR432GlobalR406SameObjectWeldClosedHere
 
 bD1b2DeepOnlySignedRegionPaymentsClosed : Bool
 bD1b2DeepOnlySignedRegionPaymentsClosed = false
