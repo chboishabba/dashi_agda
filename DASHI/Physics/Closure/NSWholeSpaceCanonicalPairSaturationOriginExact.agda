@@ -37,6 +37,7 @@ import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact a
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignedFrequencyCarrierRealizationExact as Euclidean
 import DASHI.Physics.Closure.NSTriadKNEuclideanPhysicalFourierNSExact as Physical
 import DASHI.Physics.Closure.NSTriadKNEuclideanViscousHeatRateExact as Heat
+import DASHI.Physics.Closure.NSTriadKNEuclideanBishopLerayProjectionExact as Leray
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignedGramPairCarrierRealizationExact as PairCarrier
 import DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalProjectedGramPairExact as Pair
 import DASHI.Physics.Closure.NSWholeSpaceProjectedSaturationOriginBoundExact as Origin
@@ -78,8 +79,9 @@ betaInteraction D =
 
 canonicalProjectedPair :
   ∀ {S trajectory fluid} →
-  CanonicalPairSaturationData
-    {S} (trajectory : Physical.EuclideanFourierTrajectory S) fluid →
+  (D :
+    CanonicalPairSaturationData
+      {S} (trajectory : Physical.EuclideanFourierTrajectory S) fluid) →
   Pair.CanonicalProjectedGramPair trajectory (point D)
 canonicalProjectedPair {trajectory = trajectory} D =
   Pair.canonical-projected-gram-pair
@@ -213,7 +215,7 @@ originCell {fluid = fluid} D =
   Origin.whole-space-projected-saturation-cell
     (Heat.viscosity fluid)
     (Heat.viscosityPositive fluid)
-    (Origin.Leray.punctured-frequency
+    (Leray.punctured-frequency
       (Heat.frequency (point D))
       (Heat.normSquaredPositive (point D)))
     (residual D)
