@@ -629,3 +629,29 @@ hodgeActualQuotientStillOpen :
     HodgeAtlasWeld.canonicalProjectiveLineAtlasHomogeneousWeldBoundary
   ≡ false
 hodgeActualQuotientStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- EIGHTEENTH CONTINUATION: Q*/Q*^2 bit invariants descend through the generated
+-- square relation; calibrated pair invariants recover the finite torsion seed.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Arithmetic.RationalSquareClassBitInvariantExact as BSDBitInvariant
+
+bsdSquareInvariantDescentPaid :
+  BSDBitInvariant.squareEquivalentPreservesInvariantPaid
+    BSDBitInvariant.canonicalRationalSquareClassBitInvariantBoundary
+  ≡ true
+bsdSquareInvariantDescentPaid = refl
+
+bsdTorsionInvariantCompilerPaid :
+  BSDBitInvariant.torsionCalibrationGivesFiniteSeedPaid
+    BSDBitInvariant.canonicalRationalSquareClassBitInvariantBoundary
+  ≡ true
+bsdTorsionInvariantCompilerPaid = refl
+
+bsdConcreteSignV2ClassifiersStillOpen :
+  BSDBitInvariant.concreteSignAndV2InvariantsPaid
+    BSDBitInvariant.canonicalRationalSquareClassBitInvariantBoundary
+  ≡ false
+bsdConcreteSignV2ClassifiersStillOpen = refl
