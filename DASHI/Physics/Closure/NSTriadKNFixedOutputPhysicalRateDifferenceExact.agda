@@ -181,10 +181,25 @@ fixedOutputPhysicalRateDifference physicalSystem alpha beta sameOutput =
       R94.physicalDecayRate physicalSystem (Physical.q beta)
       ≡ nu * qb
     decayQBeta = refl
+    rateAlgebra :
+      two *
+        ((nu * pa + nu * qa) - (nu * pb + nu * qb))
+      ≡
+      nu *
+        (two * (pa + qa) - two * (pb + qb))
+    rateAlgebra =
+      solve (nu ∷ pa ∷ qa ∷ pb ∷ qb ∷ [])
+
+    radialAlgebra :
+      nu *
+        (two * (pa + qa) - two * (pb + qb))
+      ≡ nu * (da - db)
+    radialAlgebra
+      rewrite sym paraA | sym paraB | sameK =
+      solve (nu ∷ da ∷ db ∷ kb ∷ [])
   in
-  rewrite decayPAlpha | decayQAlpha | decayPBeta | decayQBeta
-        | sym paraA | sym paraB | sameK =
-    solve (nu ∷ da ∷ db ∷ kb ∷ [])
+  rewrite decayPAlpha | decayQAlpha | decayPBeta | decayQBeta =
+    trans rateAlgebra radialAlgebra
 
 fixedOutputPhysicalRateDifferenceFactored : Bool
 fixedOutputPhysicalRateDifferenceFactored = true
