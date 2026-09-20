@@ -72,7 +72,8 @@ record ReleasedCycleInitialPayload
     carrier : Carrier P
     representation : Representation P
     baseError : BaseError P
-    initialAlias : AliasTerm P
+    initialTemporalAlias : AliasTerm P
+    initialPressureAlias : AliasTerm P
 
 open ReleasedCycleInitialPayload public
 
@@ -89,7 +90,8 @@ record ReleasedCycleState
     carrier : Carrier P
     representation : Representation P
     baseError : BaseError P
-    aliasHistory : List (AliasTerm P)
+    temporalAliasHistory : List (AliasTerm P)
+    currentPressureAlias : AliasTerm P
     residualBand : Nat
     residualBandExact : residualBand ≡ residualBandAt stage
 
@@ -106,7 +108,8 @@ initialState I =
     (ReleasedCycleInitialPayload.carrier I)
     (ReleasedCycleInitialPayload.representation I)
     (ReleasedCycleInitialPayload.baseError I)
-    (ReleasedCycleInitialPayload.initialAlias I ∷ [])
+    (ReleasedCycleInitialPayload.initialTemporalAlias I ∷ [])
+    (ReleasedCycleInitialPayload.initialPressureAlias I)
     (residualBandAt zero)
     refl
 
@@ -119,7 +122,8 @@ record ReleasedCycleStepEvidence
     {P : ReleasedCyclePayloadSurface}
     (state : ReleasedCycleState P) : Set₁ where
   field
-    newAlias : AliasTerm P
+    newTemporalAlias : AliasTerm P
+    newPressureAlias : AliasTerm P
 
     nextLabels : Labels P
     nextCarrier : Carrier P
@@ -145,7 +149,8 @@ stepFromEvidence {state = state} E =
     (nextCarrier E)
     (nextRepresentation E)
     (nextBaseError E)
-    (newAlias E ∷ aliasHistory state)
+    (newTemporalAlias E ∷ temporalAliasHistory state)
+    (newPressureAlias E)
     (residualBandAt (suc (stage state)))
     refl
 
@@ -243,15 +248,23 @@ selectedCycleBaseError K (suc j)
     (stepEvidence K (selectedCycle K j))
   | selectedCycleBaseError K j = refl
 
-selectedCycleAliasStep :
+selectedCycleTemporalAliasStep :
   ∀ {P} →
   (K : ReleasedSelectedCycleKernel P) →
   (j : Nat) →
-  aliasHistory (selectedCycle K (suc j))
+  temporalAliasHistory (selectedCycle K (suc j))
   ≡
-  newAlias (stepEvidence K (selectedCycle K j))
-    ∷ aliasHistory (selectedCycle K j)
-selectedCycleAliasStep K j = refl
+  newTemporalAlias (stepEvidence K (selectedCycle K j))
+    ∷ temporalAliasHistory (selectedCycle K j)
+selectedCycleTemporalAliasStep K j = refl
+
+selectedCyclePressureAliasCurrent :
+  ∀ {P} →
+  (K : ReleasedSelectedCycleKernel P) →
+  (j : Nat) →
+  currentPressureAlias (selectedCycle K (suc j))
+  ≡ newPressureAlias (stepEvidence K (selectedCycle K j))
+selectedCyclePressureAliasCurrent K j = refl
 
 ------------------------------------------------------------------------
 -- 7. Source-fixed selected coordinates are attached to this recurrence.
@@ -284,8 +297,11 @@ selectedRepresentationPreservationPorted = true
 selectedBaseErrorPreservationPorted : Bool
 selectedBaseErrorPreservationPorted = true
 
-selectedAliasAccumulationPorted : Bool
-selectedAliasAccumulationPorted = true
+selectedTemporalAliasAccumulationPorted : Bool
+selectedTemporalAliasAccumulationPorted = true
+
+selectedCurrentPressureAliasPorted : Bool
+selectedCurrentPressureAliasPorted = true
 
 analyticStepEvidencePopulatedHere : Bool
 analyticStepEvidencePopulatedHere = false
