@@ -321,3 +321,11 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedDebtSmoothExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPrimitivePreservationExact
 
 import DASHI.Physics.Closure.NSTriadKNR571HermitianStateDifferenceEnvelopeExact
+
+-- ABCD concentrated endgames after the September-20 portability/reconstruction
+-- tranche.  B isolates the single physical M2 payment, A composes the shared
+-- signed core with compensated Lebesgue aggregation, and C/D expose the
+-- canonical native either/or released theorem boundary.
+import DASHI.Physics.Closure.NSTriadKNR571PhysicalWeightedSecondMomentEndgameExact
+import DASHI.Physics.Closure.NSWholeSpaceSignedLebesgueEndgameExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDNativeAnyOneCutExact
