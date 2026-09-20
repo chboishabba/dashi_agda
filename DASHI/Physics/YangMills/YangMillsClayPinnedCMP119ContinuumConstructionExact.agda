@@ -16,6 +16,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumConstructionExa
 -- exactly the physical continuum/OS/reconstruction theorems on these objects.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -214,10 +215,10 @@ pinnedContinuumMeasureIsCMP119Limit :
     group →
   Pinned.continuumMeasure
     (compilePinnedContinuum inputs) group
-  Agda.Builtin.Equality.≡
+  _≡_
   Limit.continuumMeasure (family inputs group)
 pinnedContinuumMeasureIsCMP119Limit inputs group =
-  Agda.Builtin.Equality.refl
+  refl
 
 pinnedSchwingerIsSameMeasureCorrelation :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -232,12 +233,12 @@ pinnedSchwingerIsSameMeasureCorrelation :
     group →
   Pinned.schwinger
     (compilePinnedContinuum inputs) group
-  Agda.Builtin.Equality.≡
+  _≡_
   Schwinger.schwingerFromMeasure
     (cylinderEncoding inputs)
     (Limit.continuumMeasure (family inputs group))
 pinnedSchwingerIsSameMeasureCorrelation inputs group =
-  Agda.Builtin.Equality.refl
+  refl
 
 pinnedCMP119FiniteCompilerLevel : ProofLevel
 pinnedCMP119FiniteCompilerLevel = machineChecked
