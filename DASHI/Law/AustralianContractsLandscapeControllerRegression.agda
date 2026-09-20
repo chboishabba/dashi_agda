@@ -2,7 +2,7 @@ module DASHI.Law.AustralianContractsLandscapeControllerRegression where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (true; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
@@ -81,3 +81,20 @@ sourceAcquisitionStillDoesNotPayTreatment :
 sourceAcquisitionStillDoesNotPayTreatment =
   Controller.sourceAcquisitionPaysTreatmentReviewIsFalse
     Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+
+qld2026SuccessorIsActiveSourceWork :
+  Controller.activeAtAsAt Controller.qld2026ActiveSourceWork ≡ true
+qld2026SuccessorIsActiveSourceWork = refl
+
+qld2026PredecessorIsTemporalAlternative :
+  Controller.activeAtAsAt Controller.qld2026TemporalAlternativeWork ≡ false
+qld2026PredecessorIsTemporalAlternative = refl
+
+qld2026FixtureStillDoesNotCreateCurrentLaw :
+  Controller.createsCurrentLawConclusion
+    Controller.qld2026TemporalSliceFixture
+    ≡ false
+qld2026FixtureStillDoesNotCreateCurrentLaw =
+  Controller.createsCurrentLawConclusionIsFalse
+    Controller.qld2026TemporalSliceFixture
