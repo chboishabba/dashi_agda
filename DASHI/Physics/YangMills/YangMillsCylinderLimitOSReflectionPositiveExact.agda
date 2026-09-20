@@ -5,6 +5,7 @@ module DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact w
 -- ANY REAL CYLINDER LIMIT + FINITE REFLECTION POSITIVITY -> CONTINUUM OS2
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _+ℝ_; _*ℝ_; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -144,7 +145,7 @@ quadraticFormConverges
     (RealLimit.canonicalGramScalarConvergence limitLaws)
     (Gram.tests family)
     (λ left cutoff →
-      Gram.sumList _ 0ℝ (Gram.tests family)
+      Gram.sumList _+ℝ_ 0ℝ (Gram.tests family)
         (λ right →
           Gram.physicalReflectedGramEntry
             (operations observableAlgebra)
@@ -152,7 +153,7 @@ quadraticFormConverges
               Cylinder.finiteExpectation cylinder cutoff observable)
             left right))
     (λ left →
-      Gram.sumList _ 0ℝ (Gram.tests family)
+      Gram.sumList _+ℝ_ 0ℝ (Gram.tests family)
         (λ right →
           Gram.physicalReflectedGramEntry
             (operations observableAlgebra)
@@ -208,7 +209,7 @@ asOSGramLimitData
       ; Limit.SequentialLimit.Converges =
           RealLimit.Converges sequenceLimit
       ; Limit.SequentialLimit.sequenceConvergesToLimit =
-          λ sequence → Agda.Builtin.Equality.refl
+          λ sequence → refl
       }
   ; OS.OSGramLimitData.Nonnegative =
       λ scalar → 0ℝ ≤ℝ scalar
@@ -226,8 +227,8 @@ asOSGramLimitData
   where
   transportNonnegative :
     ∀ {left right : ℝ} →
-    0ℝ ≤ℝ left → left Agda.Builtin.Equality.≡ right → 0ℝ ≤ℝ right
-  transportNonnegative proof Agda.Builtin.Equality.refl = proof
+    0ℝ ≤ℝ left → left ≡ right → 0ℝ ≤ℝ right
+  transportNonnegative proof refl = proof
 
 continuumReflectionPositive :
   ∀ {Observable sequenceLimit}
