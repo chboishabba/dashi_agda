@@ -22,6 +22,7 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as AddEmbed
+import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as BaseEmbed
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as RingEmbed
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact as Integral
 import DASHI.Physics.YangMills.BalabanClayGate4ComponentClassAndFiniteTOperationExact as T
@@ -32,7 +33,7 @@ import DASHI.Physics.YangMills.BalabanEmbeddedCanonicalRationalConstrainedFoldEx
 embedQ :
   RingEmbed.RationalRealRingEmbedding → ℚ → ℝ
 embedQ embedding =
-  AddEmbed.Embed.embed
+  BaseEmbed.embed
     (AddEmbed.base (RingEmbed.additive embedding))
 
 record Equation171Gate4QuadratureSlice
@@ -146,7 +147,7 @@ sourceSelectedIntegrandIsEmbeddedGate4Selected
   trans
     (sourceSelectedWhenFalse slice cutoff slow fine refl)
     (sym
-      (AddEmbed.Embed.zeroExact
+      (BaseEmbed.zeroExact
         (AddEmbed.base (RingEmbed.additive embedding))))
 
 sourceFiniteFold :
