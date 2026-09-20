@@ -25,6 +25,7 @@ from manim import (
 from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
+from dashi_repo_history.render_policy import ManimRenderPolicy
 
 
 def _history_layout(commits: list[dict[str, Any]]) -> dict[str, list[float]]:
@@ -175,8 +176,9 @@ class HistoryGraphView:
 class SemanticGraphView:
     """Manim adapter for renderer-neutral semantic graphs."""
 
-    def __init__(self) -> None:
+    def __init__(self, policy: ManimRenderPolicy | None = None) -> None:
         self.layout = PersistentLayout()
+        self.policy = policy or ManimRenderPolicy()
         self.graph = DiGraph([], [], layout={})
         self.current_nodes: set[str] = set()
         self.current_edges: set[tuple[str, str]] = set()
@@ -186,10 +188,22 @@ class SemanticGraphView:
         nodes = [n["symbol_id"] for n in graph_data["nodes"]]
         edges = _visual_edges(graph_data)
         self.layout.solve(nodes, edges)
+        node_data = {
+            node["symbol_id"]: node
+            for node in graph_data["nodes"]
+        }
+        vertex_mobjects = {
+            node_id: self.policy.vertex_mobject(
+                node_data[node_id],
+                total_nodes=len(nodes),
+            )
+            for node_id in nodes
+        }
         self.graph = DiGraph(
             nodes,
             edges,
             layout=self.layout.manim_layout(),
+            vertex_mobjects=vertex_mobjects,
         )
         self.current_nodes = set(nodes)
         self.current_edges = set(edges)
@@ -241,9 +255,20 @@ class SemanticGraphView:
         target_layout = self.layout.manim_layout()
 
         if added_nodes:
+            node_data = {
+                node["symbol_id"]: node
+                for node in graph_data["nodes"]
+            }
             new_vertices = self.graph.add_vertices(
                 *added_nodes,
                 positions={node: target_layout[node] for node in added_nodes},
+                vertex_mobjects={
+                    node: self.policy.vertex_mobject(
+                        node_data[node],
+                        total_nodes=len(target_nodes),
+                    )
+                    for node in added_nodes
+                },
             )
             scene.play(GrowFromCenter(new_vertices), run_time=run_time)
 
