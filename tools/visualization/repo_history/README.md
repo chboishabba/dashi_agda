@@ -253,3 +253,34 @@ The symbol selector may be a full semantic id, a unique bare label, or
 `Module.Name::label`. The scene reveals the root first, then increasingly
 distant dependencies and finally downstream consumers. All links come from
 the extracted semantic graph; focus traversal cannot invent dependencies.
+
+## Follow one construction through history
+
+Once a target symbol exists at the lineage head, the temporal focus scene
+walks backward through real first-parent snapshots using exact semantic IDs or
+uniquely supported refactor evidence, stops at the symbol's introduction (or
+earliest safely matched state), then animates the focused neighborhood forward:
+
+```bash
+dashi-repo-history render /tmp/dashi-arithmetic-history.json \
+  --scene symbol-history \
+  --symbol DASHI.Arithmetic.CancellationPressureCore::someDeclaration \
+  --upstream-depth 3 \
+  --downstream-depth 1 \
+  --quality -qm
+```
+
+To follow a historical symbol that no longer exists at the newest snapshot,
+select a lineage head where it still exists:
+
+```bash
+dashi-repo-history render /tmp/dashi-history.json \
+  --scene symbol-history \
+  --target-commit <sha> \
+  --symbol Module.Name::symbol \
+  --quality -qm
+```
+
+Exact semantic identity is preferred. A rename or move is followed only when
+the existing identity layer has unique supported evidence; ambiguous
+similarity terminates the historical focus rather than guessing continuity.
