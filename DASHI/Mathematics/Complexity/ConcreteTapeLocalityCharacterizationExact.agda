@@ -80,31 +80,66 @@ wellFormedStepBeforeInterior :
   InteriorHeadConfiguration machine before
 wellFormedStepBeforeInterior wellFormed
     with Local.ruleIsConfigured (WF.step wellFormed)
-... | Local.realizes-left =
-  build
-... | Local.realizes-stay =
-  build
-... | Local.realizes-right =
-  build
+... | Local.realizes-left
+      {q = q} {a = read}
+      {leftSymbol = left} {rightSymbol = right} =
+  record
+    { prefix = Local.prefix occurrenceWitness
+    ; suffix = Local.suffix occurrenceWitness
+    ; leftSymbol = left
+    ; readSymbol = read
+    ; rightSymbol = right
+    ; headState = q
+    ; prefixPlain =
+        WF.prefixPlain (WF.wellFormedOccurrence wellFormed)
+    ; suffixPlain =
+        WF.suffixPlain (WF.wellFormedOccurrence wellFormed)
+    ; rowShape =
+        Local.beforeShape occurrenceWitness
+    }
   where
     occurrenceWitness =
       WF.occurrence (WF.wellFormedOccurrence wellFormed)
-
-    build : InteriorHeadConfiguration _ _
-    build = record
-      { prefix = Local.prefix occurrenceWitness
-      ; suffix = Local.suffix occurrenceWitness
-      ; leftSymbol = _
-      ; readSymbol = _
-      ; rightSymbol = _
-      ; headState = _
-      ; prefixPlain =
-          WF.prefixPlain (WF.wellFormedOccurrence wellFormed)
-      ; suffixPlain =
-          WF.suffixPlain (WF.wellFormedOccurrence wellFormed)
-      ; rowShape =
-          Local.beforeShape occurrenceWitness
-      }
+... | Local.realizes-stay
+      {q = q} {a = read}
+      {leftSymbol = left} {rightSymbol = right} =
+  record
+    { prefix = Local.prefix occurrenceWitness
+    ; suffix = Local.suffix occurrenceWitness
+    ; leftSymbol = left
+    ; readSymbol = read
+    ; rightSymbol = right
+    ; headState = q
+    ; prefixPlain =
+        WF.prefixPlain (WF.wellFormedOccurrence wellFormed)
+    ; suffixPlain =
+        WF.suffixPlain (WF.wellFormedOccurrence wellFormed)
+    ; rowShape =
+        Local.beforeShape occurrenceWitness
+    }
+  where
+    occurrenceWitness =
+      WF.occurrence (WF.wellFormedOccurrence wellFormed)
+... | Local.realizes-right
+      {q = q} {a = read}
+      {leftSymbol = left} {rightSymbol = right} =
+  record
+    { prefix = Local.prefix occurrenceWitness
+    ; suffix = Local.suffix occurrenceWitness
+    ; leftSymbol = left
+    ; readSymbol = read
+    ; rightSymbol = right
+    ; headState = q
+    ; prefixPlain =
+        WF.prefixPlain (WF.wellFormedOccurrence wellFormed)
+    ; suffixPlain =
+        WF.suffixPlain (WF.wellFormedOccurrence wellFormed)
+    ; rowShape =
+        Local.beforeShape occurrenceWitness
+    }
+  where
+    occurrenceWitness =
+      WF.occurrence (WF.wellFormedOccurrence wellFormed)
 
 record TransitionLocalityScan
     (machine : Local.ConcreteTapeMachine)
@@ -264,13 +299,13 @@ localityScanDerivesCenteredTransition :
   (interior : InteriorHeadConfiguration machine before) →
   Whole.ContainsCenteredRuleWindow machine rule
     (Whole.scanWindows machine before after)
-localityScanDerivesCenteredTransition scan interior
+localityScanDerivesCenteredTransition {after = after} scan interior
     with rowShape interior
 ... | refl =
   findCenteredAtInteriorHead
     (prefix interior)
     (suffix interior)
-    (Local.cells _)
+    (Local.cells after)
     (interiorShapeLengthMatchesAfter scan interior)
     (transportLegalityToInteriorShape scan interior)
 
