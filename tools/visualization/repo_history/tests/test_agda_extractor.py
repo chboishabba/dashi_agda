@@ -634,3 +634,69 @@ idNat x = x
         and edge.kind == "value-flows"
         for edge in graph.edges.values()
     )
+
+
+def test_prefix_application_emits_argument_flow_to_callee():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+g : Nat -> Nat
+g y = y
+
+f : Nat -> Nat
+f x = g x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    g = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "g"
+    )
+    x = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    )
+
+    assert any(
+        edge.source == x.symbol_id
+        and edge.target == g.symbol_id
+        and edge.kind == "argument-to"
+        for edge in graph.edges.values()
+    )
+
+
+def test_constructor_application_emits_argument_flow_to_constructor():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+data Box : Set where
+  box : Nat -> Box
+
+mk : Nat -> Box
+mk x = box x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    box = next(
+        node for node in graph.nodes.values()
+        if node.kind == "constructor" and node.label == "box"
+    )
+    x = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    )
+
+    assert any(
+        edge.source == x.symbol_id
+        and edge.target == box.symbol_id
+        and edge.kind == "argument-to"
+        for edge in graph.edges.values()
+    )
