@@ -48,6 +48,35 @@ record ContractExternalIdentityWorkItem : Set where
 
 open ContractExternalIdentityWorkItem public
 
+record ContractExternalIdentityAttachment : Set where
+  constructor contractExternalIdentityAttachment
+  field
+    semanticReference : String
+    identityKind : Identity.ExternalIdentityKind
+    identityValue : String
+    resolution : Identity.IdentityResolution
+    verificationReference : String
+    supplementalOnly : Bool
+    supplementalOnlyIsTrue : supplementalOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+    createsApplicability : Bool
+    createsApplicabilityIsFalse : createsApplicability ≡ false
+
+open ContractExternalIdentityAttachment public
+
+waltonsVerifiedQidAttachmentFixture : ContractExternalIdentityAttachment
+waltonsVerifiedQidAttachmentFixture =
+  contractExternalIdentityAttachment
+    "case:au:hca:1988:7"
+    Identity.wikidataQid
+    "QID:fixture-not-a-claim"
+    (Identity.verified "QID:fixture-not-a-claim" "wikidata:reviewed:fixture")
+    "wikidata:reviewed:fixture"
+    true refl
+    false refl
+    false refl
+
 waltonsExternalIdentityWork : ContractExternalIdentityWorkItem
 waltonsExternalIdentityWork =
   contractExternalIdentityWorkItem
@@ -84,6 +113,8 @@ data QidCreatesLegalApplicability : Set where
 data QidCreatesLegalAuthority : Set where
 data UnresolvedQidIsNegativeLegalEvidence : Set where
 data SupplementalIdentityBecomesFifthLegalFrontier : Set where
+data ExternalIdentityAttachmentCreatesMissingSemanticIdentity : Set where
+data ConflictingExternalIdentityMayOverwriteSilently : Set where
 
 qidLikelihoodIsNotExistenceClaim :
   QidLikelihoodAutomaticallyMeansEntityExists → ⊥
@@ -108,6 +139,14 @@ unresolvedQidIsNotNegativeLegalEvidence ()
 supplementalIdentityIsNotFifthLegalFrontier :
   SupplementalIdentityBecomesFifthLegalFrontier → ⊥
 supplementalIdentityIsNotFifthLegalFrontier ()
+
+externalIdentityAttachmentCannotCreateMissingSemanticIdentity :
+  ExternalIdentityAttachmentCreatesMissingSemanticIdentity → ⊥
+externalIdentityAttachmentCannotCreateMissingSemanticIdentity ()
+
+conflictingIdentityCannotOverwriteSilently :
+  ConflictingExternalIdentityMayOverwriteSilently → ⊥
+conflictingIdentityCannotOverwriteSilently ()
 
 record AustralianContractsExternalIdentityBoundary : Set where
   constructor australianContractsExternalIdentityBoundary
@@ -139,6 +178,12 @@ record AustralianContractsExternalIdentityBoundary : Set where
     qidCreatesApplicability : Bool
     qidCreatesApplicabilityIsFalse :
       qidCreatesApplicability ≡ false
+    externalIdentityAttachmentRequiresExistingSemanticObject : Bool
+    externalIdentityAttachmentRequiresExistingSemanticObjectIsTrue :
+      externalIdentityAttachmentRequiresExistingSemanticObject ≡ true
+    conflictingExternalIdentityIsHardResidual : Bool
+    conflictingExternalIdentityIsHardResidualIsTrue :
+      conflictingExternalIdentityIsHardResidual ≡ true
 
 canonicalAustralianContractsExternalIdentityBoundary :
   AustralianContractsExternalIdentityBoundary
@@ -153,3 +198,5 @@ canonicalAustralianContractsExternalIdentityBoundary =
     true refl
     false refl
     false refl
+    true refl
+    true refl
