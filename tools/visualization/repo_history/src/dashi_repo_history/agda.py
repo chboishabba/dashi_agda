@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field, replace
+from importlib.resources import files as resource_files
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -12,17 +13,11 @@ from .model import Relation, SemanticGraph, SourceSpan, Symbol, stable_hash
 
 AGDA_LANGUAGE = Language(tree_sitter_agda.language())
 
-CAPTURE_QUERY = r"""
-(module_name) @module_name
-(data_name) @data_name
-(record_name) @record_name
-(field_name) @field_name
-(function_name) @function_name
-(typed_binding) @typed_binding
-(untyped_binding) @untyped_binding
-(qid) @reference
-(id) @reference
-"""
+CAPTURE_QUERY = (
+    resource_files("dashi_repo_history.queries")
+    .joinpath("agda_symbols.scm")
+    .read_text(encoding="utf-8")
+)
 
 
 def _make_parser() -> Parser:
@@ -457,3 +452,14 @@ def _resolve_reference(
         return candidates[0]
 
     return None
+
+
+class AgdaLanguageAdapter:
+    name = "agda"
+    suffixes = (".agda",)
+
+    def extract_file(self, path: str, source: bytes) -> FileExtraction:
+        return extract_file(path, source)
+
+    def build_graph(self, files: list[FileExtraction]) -> SemanticGraph:
+        return build_semantic_graph(files)
