@@ -55,6 +55,31 @@ controllerIsBounded :
 controllerIsBounded =
   Recursive.recursiveLoopIsBudgetBoundedIsTrue boundary
 
+parentReceiptIsPreserved :
+  Recursive.parentCampaignReceiptIsPreserved boundary ≡ true
+parentReceiptIsPreserved =
+  Recursive.parentCampaignReceiptIsPreservedIsTrue boundary
+
+continuationCannotResetBudget :
+  Recursive.continuationMayResetBudgetCounters boundary ≡ false
+continuationCannotResetBudget =
+  Recursive.continuationMayResetBudgetCountersIsFalse boundary
+
+providerBoundIsReserved :
+  Recursive.governedAcquisitionReservesProviderRequestBound boundary ≡ true
+providerBoundIsReserved =
+  Recursive.governedAcquisitionReservesProviderRequestBoundIsTrue boundary
+
+acquisitionAdvancesReceipt :
+  Recursive.successfulAcquisitionAdvancesCampaignReceipt boundary ≡ true
+acquisitionAdvancesReceipt =
+  Recursive.successfulAcquisitionAdvancesCampaignReceiptIsTrue boundary
+
+acquisitionIsNotLegalHop :
+  Recursive.sourceAcquisitionAutomaticallyAddsLegalHop boundary ≡ false
+acquisitionIsNotLegalHop =
+  Recursive.sourceAcquisitionAutomaticallyAddsLegalHopIsFalse boundary
+
 nextAuthorityNeedsNoCaseModule :
   Recursive.caseSpecificCampaignModuleRequiredForNextAuthority boundary ≡ false
 nextAuthorityNeedsNoCaseModule =
