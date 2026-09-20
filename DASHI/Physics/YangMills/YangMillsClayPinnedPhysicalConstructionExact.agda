@@ -17,6 +17,8 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_)
 open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -198,7 +200,7 @@ record PinnedLocalQFTConstruction
     opeRemainder :
       Top.CompactSimpleGroup C →
       Top.LocalOperator C → Top.LocalOperator C →
-      Top.Position C → Agda.Builtin.Nat.Nat → ℚ
+      Top.Position C → Nat → ℚ
 
     stressTensor :
       Top.CompactSimpleGroup C → Top.StressTensor C
