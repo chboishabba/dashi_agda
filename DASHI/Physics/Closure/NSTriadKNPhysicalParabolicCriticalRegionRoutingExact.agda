@@ -25,6 +25,7 @@ open import Data.Nat.Base using (_≤_)
 open import Data.Nat.Properties as NatP using (_≤?_)
 open import Relation.Nullary using (¬_; yes; no)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComLiteralBonyOutputFibrePartitionRound63Exact as Bony
@@ -169,6 +170,71 @@ criticalRegionEvidence tau with Bony.bonyTag tau in tagEq
 ...   | no shoulder = inj₂ (inj₂ (shoulderHH tagEq shoulder))
 ... | Bony.comparableTag =
   inj₂ (inj₂ (comparable tagEq))
+
+deepFarLowTagEvidence :
+  (tau : Physical.PhysicalTriadIncidence) →
+  criticalRegionTag tau ≡ deepFarLowRegion →
+  DeepFarLowEvidence tau
+deepFarLowTagEvidence tau selected with Bony.bonyTag tau in tagEq
+... | Bony.lhTag with NatP._≤?_ (three * pShell tau) (two * qShell tau)
+...   | yes deep = deepLH tagEq deep
+...   | no shoulder with selected
+...     | ()
+... | Bony.hlTag with NatP._≤?_ (three * qShell tau) (two * pShell tau)
+...   | yes deep = deepHL tagEq deep
+...   | no shoulder with selected
+...     | ()
+... | Bony.hhToLowTag
+    with NatP._≤?_ (five * outputShell tau) (four * highInputShell tau)
+...   | yes deep with selected
+...     | ()
+...   | no shoulder with selected
+...     | ()
+... | Bony.comparableTag with selected
+...   | ()
+
+deepHighHighTagEvidence :
+  (tau : Physical.PhysicalTriadIncidence) →
+  criticalRegionTag tau ≡ deepHighHighRegion →
+  DeepHighHighEvidence tau
+deepHighHighTagEvidence tau selected with Bony.bonyTag tau in tagEq
+... | Bony.lhTag with NatP._≤?_ (three * pShell tau) (two * qShell tau)
+...   | yes deep with selected
+...     | ()
+...   | no shoulder with selected
+...     | ()
+... | Bony.hlTag with NatP._≤?_ (three * qShell tau) (two * pShell tau)
+...   | yes deep with selected
+...     | ()
+...   | no shoulder with selected
+...     | ()
+... | Bony.hhToLowTag
+    with NatP._≤?_ (five * outputShell tau) (four * highInputShell tau)
+...   | yes deep = deepHH tagEq deep
+...   | no shoulder with selected
+...     | ()
+... | Bony.comparableTag with selected
+...   | ()
+
+criticalCoreTagEvidence :
+  (tau : Physical.PhysicalTriadIncidence) →
+  criticalRegionTag tau ≡ criticalCoreRegion →
+  CriticalCoreEvidence tau
+criticalCoreTagEvidence tau selected with Bony.bonyTag tau in tagEq
+... | Bony.lhTag with NatP._≤?_ (three * pShell tau) (two * qShell tau)
+...   | yes deep with selected
+...     | ()
+...   | no shoulder = shoulderLH tagEq shoulder
+... | Bony.hlTag with NatP._≤?_ (three * qShell tau) (two * pShell tau)
+...   | yes deep with selected
+...     | ()
+...   | no shoulder = shoulderHL tagEq shoulder
+... | Bony.hhToLowTag
+    with NatP._≤?_ (five * outputShell tau) (four * highInputShell tau)
+...   | yes deep with selected
+...     | ()
+...   | no shoulder = shoulderHH tagEq shoulder
+... | Bony.comparableTag = comparable tagEq
 
 literalR236PhysicalRegionClassifierClosed : Bool
 literalR236PhysicalRegionClassifierClosed = true
