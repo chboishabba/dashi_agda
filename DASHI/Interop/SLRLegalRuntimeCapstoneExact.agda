@@ -3,6 +3,8 @@ module DASHI.Interop.SLRLegalRuntimeCapstoneExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Maybe using (Maybe; just; nothing)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
