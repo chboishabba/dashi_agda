@@ -93,6 +93,35 @@ def _first_descendant_name(source: bytes, node: Any) -> str | None:
     return None
 
 
+def _binding_names(source: bytes, node: Any) -> list[tuple[str, Any]]:
+    """Return all syntactic binder names while excluding the bound type.
+
+    For typed bindings, names occur before the first ':' token.  This handles
+    multi-binders such as (x y : A) without accidentally turning A into a local
+    variable.  Untyped bindings contribute all identifier leaves.
+    """
+
+    source_slice = source[node.start_byte : node.end_byte]
+    colon = source_slice.find(b":")
+    absolute_colon = None if colon < 0 else node.start_byte + colon
+
+    out: list[tuple[str, Any]] = []
+    stack = [node]
+    seen: set[str] = set()
+    while stack:
+        current = stack.pop()
+        if current.child_count == 0 and current.type in {"qid", "id", "bid"}:
+            if absolute_colon is not None and current.start_byte > absolute_colon:
+                continue
+            value = _node_text(source, current).strip()
+            leaf = value.split(".")[-1]
+            if leaf and leaf != "_" and leaf not in seen:
+                seen.add(leaf)
+                out.append((leaf, current))
+        stack.extend(reversed(current.children))
+    return out
+
+
 def _reference_kind(node: Any) -> str:
     for ancestor in _ancestors(node):
         if ancestor.type == "rhs":
@@ -227,23 +256,20 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
     declarations = list(declarations_by_key.values())
 
     for binding in captures.get("typed_binding", []) + captures.get("untyped_binding", []):
-        name = _first_descendant_name(source, binding)
-        if name is None:
-            continue
         owner = _smallest_owner(declarations, binding.start_byte, binding.end_byte)
         if owner is None:
             continue
-        leaf = name.split(".")[-1]
-        owner.binders.setdefault(
-            leaf,
-            Symbol.create(
-                label=leaf,
-                kind="binder",
-                module=module,
-                scope=owner.symbol.symbol_id,
-                span=_span(path, binding),
-            ),
-        )
+        for leaf, name_node in _binding_names(source, binding):
+            owner.binders.setdefault(
+                leaf,
+                Symbol.create(
+                    label=leaf,
+                    kind="binder",
+                    module=module,
+                    scope=owner.symbol.symbol_id,
+                    span=_span(path, name_node),
+                ),
+            )
 
     for ref in captures.get("reference", []):
         value = _node_text(source, ref).strip()
