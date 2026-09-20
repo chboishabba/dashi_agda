@@ -286,6 +286,22 @@ module PhysicalFibre
       (sym ledger)
       combined
 
+  paidVariableFibreBelowEDPlusGram :
+    (items : List Physical.PhysicalTriadIncidence) →
+    ((tau : Physical.PhysicalTriadIncidence) →
+      Z3.NonZeroMode (Physical.k tau)) →
+    (payment : QuantitativeFourSignGramPayment577 items) →
+    L2.complex3NormSquared (R224.foldVector Cell.fourSignInner items)
+    ≤
+    seventyTwo * edKernelSum577 items
+      + gramResidual577 payment
+  paidVariableFibreBelowEDPlusGram items allNonzero payment =
+    ℚP.≤-trans
+      (paidVariableFibreBound items allNonzero payment)
+      (ℚP.+-mono-≤
+        (majorantSumBelowSeventyTwoEDKernelSum items)
+        ℚP.≤-refl)
+
   nonpositiveGramIsOnlySufficientNotNecessary :
     (items : List Physical.PhysicalTriadIncidence) →
     R180.gramDebt (fourSignCells items) ≤ 0ℚ →
@@ -305,6 +321,9 @@ round577VariableFibreCellMassMajorantSummedExactly = true
 
 round577CellMassMajorantPaidByEnergyDissipationKernel : Bool
 round577CellMassMajorantPaidByEnergyDissipationKernel = true
+
+round577VariableFibreReducedToEDPlusOneGramResidual : Bool
+round577VariableFibreReducedToEDPlusOneGramResidual = true
 
 round577WithinFibreGramMustBeNonpositive : Bool
 round577WithinFibreGramMustBeNonpositive = false
