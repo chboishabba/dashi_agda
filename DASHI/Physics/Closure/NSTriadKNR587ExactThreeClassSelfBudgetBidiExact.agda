@@ -22,6 +22,7 @@ module DASHI.Physics.Closure.NSTriadKNR587ExactThreeClassSelfBudgetBidiExact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -35,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNClassNormBudgetToBonyGramPaymentRound582Ex
 import DASHI.Physics.Closure.NSTriadKNExactBonyClassNormSelfBudgetBidiExact as Self
 import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact as R587
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
+import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
 
 F : C3.RealField _
 F = R587.F
@@ -87,17 +89,17 @@ module ExactLiveThreeClass
       (exactComparableBudget outer)
 
   exactFarLowCeiling :
-    Physical.PhysicalTriadIncidence → _
+    Physical.PhysicalTriadIncidence → ℚ
   exactFarLowCeiling outer =
     R582.classNormCeiling582 (exactFarLowBudget outer)
 
   exactHighHighToLowCeiling :
-    Physical.PhysicalTriadIncidence → _
+    Physical.PhysicalTriadIncidence → ℚ
   exactHighHighToLowCeiling outer =
     R582.classNormCeiling582 (exactHighHighToLowBudget outer)
 
   exactComparableCeiling :
-    Physical.PhysicalTriadIncidence → _
+    Physical.PhysicalTriadIncidence → ℚ
   exactComparableCeiling outer =
     R582.classNormCeiling582 (exactComparableBudget outer)
 
@@ -105,8 +107,7 @@ module ExactLiveThreeClass
     (outer : Physical.PhysicalTriadIncidence) →
     exactFarLowCeiling outer
     ≡ L2.complex3NormSquared
-        (DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact.sumCells
-          (R580.lowHigh580 (Live.cells587 outer)))
+        (R180.sumCells (R580.lowHigh580 (Live.cells587 outer)))
   exactFarLowCeilingMeaning outer = refl
 
 r587ThreeDependentClassBudgetRecordsInhabited : Bool
