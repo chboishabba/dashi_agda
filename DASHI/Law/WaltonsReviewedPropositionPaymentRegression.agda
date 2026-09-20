@@ -1,0 +1,31 @@
+module DASHI.Law.WaltonsReviewedPropositionPaymentRegression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Law.WaltonsReviewedPropositionPaymentExact as WaltonsReview
+import DASHI.Interop.SLRReviewedEvidencePaymentExact as ReviewedPayment
+import DASHI.Law.SensibLawRuntimeWrongTypeElementFrontierExact as WrongType
+
+boundaryExists : Set
+boundaryExists = WaltonsReview.WaltonsReviewedPropositionPaymentBoundary
+
+boundaryPaid : boundaryExists
+boundaryPaid = WaltonsReview.canonicalWaltonsReviewedPropositionPaymentBoundary
+
+supportsPaysOnlyEvidenceCoordinate :
+  WaltonsReview.reviewedDispositionState WaltonsReview.supports
+    ≡
+  WaltonsReview.evidenceCoordinateReviewedPaid
+supportsPaysOnlyEvidenceCoordinate =
+  WaltonsReview.supportsPaysEvidenceCoordinate
+
+evidenceReviewStillDoesNotCreateClaimTruth :
+  ReviewedPayment.EvidenceReviewCreatesClaimTruth → ⊥
+evidenceReviewStillDoesNotCreateClaimTruth =
+  ReviewedPayment.evidenceReviewDoesNotCreateClaimTruth
+
+genericEvidencePaymentStillDoesNotCreateTypedWrongTypePayment :
+  WrongType.GenericSatisfiedEvaluationAutomaticallyTypedCausationPayment → ⊥
+genericEvidencePaymentStillDoesNotCreateTypedWrongTypePayment =
+  WrongType.genericSatisfiedDoesNotAutoCreateTypedPayment
