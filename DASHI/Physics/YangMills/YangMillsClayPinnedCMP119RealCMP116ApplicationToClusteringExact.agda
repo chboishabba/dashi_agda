@@ -130,12 +130,12 @@ asClusteringInputs application covarianceLaws calibration = record
   ; Clustering.LiteralRealCMP116ClusteringInputs.sourceLeft =
       λ index →
         Cumulant.sourceDirectionOf
-          (TwoJ.meaning _)
+          (TwoJ.meaning twoJ)
           (Application.left application index)
   ; Clustering.LiteralRealCMP116ClusteringInputs.sourceRight =
       λ index →
         Cumulant.sourceDirectionOf
-          (TwoJ.meaning _)
+          (TwoJ.meaning twoJ)
           (Application.right application index)
   ; Clustering.LiteralRealCMP116ClusteringInputs.scaleAt =
       Application.scaleAt application
