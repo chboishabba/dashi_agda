@@ -29,6 +29,7 @@ data EdgeKind : Set where
   opensEdge : EdgeKind
   typeDependsEdge : EdgeKind
   bodyDependsEdge : EdgeKind
+  valueFlowsEdge : EdgeKind
   callsEdge : EdgeKind
   constructsEdge : EdgeKind
   fieldOfEdge : EdgeKind
