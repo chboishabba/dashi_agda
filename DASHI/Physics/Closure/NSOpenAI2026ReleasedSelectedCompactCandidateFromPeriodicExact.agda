@@ -15,6 +15,8 @@ module DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedCompactCandidateFromPer
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product using (_×_)
 
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedPeriodicCandidateNativeExact as D
 
