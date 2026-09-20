@@ -28,16 +28,14 @@ import DASHI.Education.DigitalESDTitleAbstractScreeningExact as Screen
 ------------------------------------------------------------------------
 
 data UnresolvedReviewState : Set where
-  pendingTitleAbstractReview
-  reviewedStillUnresolved
-  : UnresolvedReviewState
+  pendingTitleAbstractReview : UnresolvedReviewState
+  reviewedStillUnresolved : UnresolvedReviewState
 
 data ResolutionReason : Set where
-  insufficientTitleAbstractEvidence
-  inaccessibleAbstract
-  explicitRequiresFullText
-  otherReviewedAmbiguity
-  : ResolutionReason
+  insufficientTitleAbstractEvidence : ResolutionReason
+  inaccessibleAbstract : ResolutionReason
+  explicitRequiresFullText : ResolutionReason
+  otherReviewedAmbiguity : ResolutionReason
 
 record ReviewedUnresolvedReceipt : Set where
   constructor reviewed-unresolved-receipt
