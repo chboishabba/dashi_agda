@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramLedgerRound180Exact as R180
+import DASHI.Physics.Closure.NSTriadKNRawCurlLowOutputKernelMassRound178Exact as R178
 import DASHI.Physics.Closure.NSTriadKNFourHelicityVectorRecombinationRound576Exact as R576
 import DASHI.Physics.Closure.NSTriadKNPhysicalResonantEuclideanSquareTriangleRound218Exact as R218
 import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact as R219
@@ -110,6 +111,16 @@ module PhysicalFibre
       (cellMassSumBound rest allNonzero)
 
 
+  twoNN577 : 0ℚ ≤ R218.two
+  twoNN577 = Rational.addNonnegative R178.oneNN R178.oneNN
+
+  nineNN577 : 0ℚ ≤ R178.nine
+  nineNN577 = R96.productNonnegative R178.threeNN R178.threeNN
+
+  thirtySixNN577 : 0ℚ ≤ R576.thirtySix
+  thirtySixNN577 =
+    R96.productNonnegative R576.fourNN nineNN577
+
   seventyTwo : ℚ
   seventyTwo = R576.thirtySix * R218.two
 
@@ -156,7 +167,7 @@ module PhysicalFibre
       pqNN = Rational.addNonnegative pNN qNN
 
       radialNN : 0ℚ ≤ R218.two * (p2 + q2)
-      radialNN = R96.productNonnegative R218.twoNN pqNN
+      radialNN = R96.productNonnegative twoNN577 pqNN
 
       triangle :
         k2 ≤ R218.two * (p2 + q2)
@@ -189,8 +200,8 @@ module PhysicalFibre
             (((R218.two * (p2 + q2)) * ep) * eq)
       scaled =
         Rational.nonnegativeProductMonotone
-          R576.thirtySixNN leftTripleNN
-          R576.thirtySixNN rightTripleNN
+          thirtySixNN577 leftTripleNN
+          thirtySixNN577 rightTripleNN
           ℚP.≤-refl second
 
       sourceMeaning :
