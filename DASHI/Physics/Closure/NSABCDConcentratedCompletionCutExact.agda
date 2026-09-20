@@ -58,6 +58,11 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as 
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceQuantitativePairBoundExact as BQuantPair
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBudgetExact as BCoherentBudget
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact as BCoherentLive
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceVectorCenteringExact as BVectorCenter
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceVectorLiveExact as BVectorLive
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceVectorResidualWeldExact as BVectorWeld
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredInputLaplacianVectorResidualExact as BInputVector
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianR440WeldExact as BInputR440
 
 ------------------------------------------------------------------------
 -- A
@@ -225,6 +230,37 @@ bD1b2PhysicalFixedOutputFamilyBudgetSummed =
 bD1b2LivePhysicalCoherentCovarianceReductionClosed : Bool
 bD1b2LivePhysicalCoherentCovarianceReductionClosed =
   BCoherentLive.livePhysicalCoherentCovarianceQuantitativeReductionClosed
+
+bD1b2CompleteGraphComplex3VectorIdentityClosed : Bool
+bD1b2CompleteGraphComplex3VectorIdentityClosed =
+  BVectorCenter.completeGraphVectorCovarianceIdentityClosed
+
+bD1b2LiveCovarianceCollapsedToSingleCenteredVector : Bool
+bD1b2LiveCovarianceCollapsedToSingleCenteredVector =
+  BVectorLive.liveCoherentCovarianceVectorReductionClosed
+
+bD1b2CompleteGraphVectorEqualsCenteredResidual : Bool
+bD1b2CompleteGraphVectorEqualsCenteredResidual =
+  BVectorWeld.completeGraphVectorSameObjectWeldClosed
+
+bD1b2CenteredResidualEqualsTwiceInputLaplacianResidual : Bool
+bD1b2CenteredResidualEqualsTwiceInputLaplacianResidual =
+  BInputVector.centeredInputLaplacianVectorIdentityClosed
+
+bD1b2InputLaplacianWeightIsSwapInvariant : Bool
+bD1b2InputLaplacianWeightIsSwapInvariant =
+  BInputR440.inputLaplacianWeightIsSwapInvariant
+
+bD1b2InputWeightedAmplitudeOnCanonicalR440Carrier : Bool
+bD1b2InputWeightedAmplitudeOnCanonicalR440Carrier =
+  BInputR440.inputWeightedAmplitudeIsLiteralR440Aggregate
+
+bD1b2PairwiseYoungFamilyRequiredForPrimaryRoute : Bool
+bD1b2PairwiseYoungFamilyRequiredForPrimaryRoute =
+  BVectorLive.pairwiseYoungFamilyRequiredForPrimaryD1b2Route
+
+bD1b2QuantitativeR440InputLaplacianCovariancePaymentClosed : Bool
+bD1b2QuantitativeR440InputLaplacianCovariancePaymentClosed = false
 
 bD1b2CenteredPhysicalPairFamilyCutoffUniformPaymentClosed : Bool
 bD1b2CenteredPhysicalPairFamilyCutoffUniformPaymentClosed = false
