@@ -441,23 +441,33 @@ acceptancePlacedPredicate
     (witnessAcceptingPredicate
       stateCoverage symbolCoverage)
 
-acceptanceImplicationPredicates :
+finToSlot :
+  ∀ {n} (i : Fin.Fin n) →
+  Global.Slot (Fin.toℕ i) n
+finToSlot {suc n} Fin.zero =
+  Global.here
+finToSlot {suc n} (Fin.suc i) =
+  Global.there (finToSlot i)
+
+acceptanceImplicationPredicatesFin :
   ∀ {machine steps cols}
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
-  List (Enumerate.SomeSlot cols) →
+  List (Fin.Fin cols) →
   List
     (Placed.PlacedPredicate
       (AcceptanceLocalWidth machine)
       (ExtendedGlobalWidth machine steps cols))
-acceptanceImplicationPredicates stateCoverage symbolCoverage [] = []
-acceptanceImplicationPredicates stateCoverage symbolCoverage
-    (Enumerate.some-slot index slot ∷ rest) =
-  acceptancePlacedPredicate stateCoverage symbolCoverage slot
-  ∷ acceptanceImplicationPredicates
+acceptanceImplicationPredicatesFin stateCoverage symbolCoverage [] = []
+acceptanceImplicationPredicatesFin stateCoverage symbolCoverage
+    (i ∷ rest) =
+  acceptancePlacedPredicate
+    stateCoverage symbolCoverage (finToSlot i)
+  ∷ acceptanceImplicationPredicatesFin
       stateCoverage symbolCoverage rest
+
 
 appendCNF :
   ∀ {n} → CNF.CNF n → CNF.CNF n → CNF.CNF n
@@ -474,9 +484,9 @@ acceptingEndpointCNF stateCoverage symbolCoverage =
   someAcceptanceWitnessClause
   ∷
   Placed.compilePlacedAll
-    (acceptanceImplicationPredicates
+    (acceptanceImplicationPredicatesFin
       stateCoverage symbolCoverage
-      (Enumerate.allSlots _))
+      (finList _))
 
 record EndpointCNFReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
