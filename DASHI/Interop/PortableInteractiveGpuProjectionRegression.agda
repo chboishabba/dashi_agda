@@ -1,5 +1,7 @@
 module DASHI.Interop.PortableInteractiveGpuProjectionRegression where
 
+open import DASHI.Core.Prelude
+
 import DASHI.Interop.PortableInteractiveGpuProjectionExact as Generic
 import DASHI.Interop.DioxusWgpuHyperfabricBridgeExact as Concrete
 import DASHI.Interop.ITIRRibbonProjectionAuthorityBridgeExact as Ribbon
