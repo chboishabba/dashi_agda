@@ -15,6 +15,7 @@ module DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact 
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedPeriodicCandidateNativeExact as D
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedR3FiniteEnergyExclusionNativeExact as CEx
@@ -90,7 +91,7 @@ localizedCandidateExcludesGlobalFiniteEnergySolution :
   (X : CompactCandidateExclusionCompiler L) →
   (p : PeriodicCandidate L) →
   CEx.GlobalFiniteEnergySolution (exclusionSurface X) →
-  Data.Empty.⊥
+  ⊥
 localizedCandidateExcludesGlobalFiniteEnergySolution L X p global =
   CEx.compactCandidateExcludesGlobalSolution
     (exclusionSurface X)
