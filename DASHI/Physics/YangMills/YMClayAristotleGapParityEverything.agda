@@ -417,3 +417,9 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteANumeratorExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119UniformProjectiveCompactnessExact
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StressPointwiseCommonCoreExact
+
+
+-- ABC least-privilege refinements: ordered B, support-graph B, pointwise C.
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119PreferredR415OrderedRealExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119PointwiseStressCoreExact
+import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphGeometryExact
