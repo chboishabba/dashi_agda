@@ -14,7 +14,8 @@ module DASHI.Physics.YangMills.YangMillsStressWardPointwiseCoreGeneratorExact wh
 -- same domain.  This owner uses exactly that form.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; sym; trans)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
