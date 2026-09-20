@@ -35,8 +35,9 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveE
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List)
 open import Data.List.Base using (length)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -69,7 +70,7 @@ module Live
   value : Physical.PhysicalTriadIncidence → C3.Complex3 F
   value = D1a.mixedProductCell S velocity
 
-  fibre : Z3.FourierMode → _
+  fibre : Z3.FourierMode → List Physical.PhysicalTriadIncidence
   fibre output = Output.physicalOutputFiber cutoff output
 
   mixed : Z3.FourierMode → C3.Complex3 F
