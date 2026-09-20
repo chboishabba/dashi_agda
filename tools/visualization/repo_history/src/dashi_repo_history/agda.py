@@ -303,6 +303,8 @@ class RawDeclaration:
     pattern_candidates: list[PatternCandidate] = field(default_factory=list)
     references: list[RawReference] = field(default_factory=list)
     owner_local_scopes: dict[tuple[int, int], str] = field(default_factory=dict)
+    local_parent_label: str | None = None
+    local_parent_scope: str | None = None
     container_label: str | None = None
     container_relation: str | None = None
 
@@ -595,6 +597,38 @@ def _function_is_definition(source: bytes, function_node: Any) -> bool:
     return _node_text(source, rhs).lstrip().startswith("=")
 
 
+def _local_parent_identity(
+    source: bytes,
+    module: str,
+    owner: Any,
+) -> tuple[str | None, str | None]:
+    where_node = _first_ancestor(owner, {"where"})
+    if where_node is None:
+        return None, None
+
+    outer_function = _first_ancestor(where_node, {"function"})
+    if outer_function is None:
+        return None, None
+
+    name_node, _patterns = _function_clause_name_and_patterns(
+        source,
+        outer_function,
+    )
+    if name_node is None:
+        return None, None
+
+    label = _node_text(source, name_node).strip()
+    if not label:
+        return None, None
+
+    parent_scope = _enclosing_declaration_scope(
+        source,
+        module,
+        outer_function,
+    )
+    return label, parent_scope
+
+
 def extract_file(path: str, source: bytes) -> FileExtraction:
     tree = PARSER.parse(source)
     captures = _query_captures(tree.root_node)
@@ -658,6 +692,12 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
                 owner,
             )
 
+        local_parent_label, local_parent_scope = (
+            _local_parent_identity(source, module, owner)
+            if declaration_scope is not None
+            else (None, None)
+        )
+
         symbol = Symbol.create(
             label=label,
             kind=kind,
@@ -673,6 +713,8 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
             existing = RawDeclaration(
                 symbol=symbol,
                 owner_ranges=[owner_range],
+                local_parent_label=local_parent_label,
+                local_parent_scope=local_parent_scope,
                 container_label=container_label,
                 container_relation=container_relation,
             )
@@ -680,6 +722,9 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         else:
             if owner_range not in existing.owner_ranges:
                 existing.owner_ranges.append(owner_range)
+            if existing.local_parent_label is None:
+                existing.local_parent_label = local_parent_label
+                existing.local_parent_scope = local_parent_scope
             if existing.container_label is None:
                 existing.container_label = container_label
             if existing.container_relation is None:
@@ -1008,6 +1053,32 @@ def build_semantic_graph(
             evidence=symbol.span,
         )
         graph.edges[contains.relation_id] = contains
+
+        if declaration.local_parent_label is not None:
+            parent = (
+                by_scoped_label.get(
+                    (
+                        symbol.module,
+                        declaration.local_parent_scope,
+                        declaration.local_parent_label,
+                    )
+                )
+                if declaration.local_parent_scope is not None
+                else by_module_label.get(
+                    (
+                        symbol.module,
+                        declaration.local_parent_label,
+                    )
+                )
+            )
+            if parent is not None:
+                local_to = Relation(
+                    source=symbol.symbol_id,
+                    target=parent.symbol_id,
+                    kind="local-to",
+                    evidence=symbol.span,
+                )
+                graph.edges[local_to.relation_id] = local_to
 
         if (
             declaration.container_label is not None
