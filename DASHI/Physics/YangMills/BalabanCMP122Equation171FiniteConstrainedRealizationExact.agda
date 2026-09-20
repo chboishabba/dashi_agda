@@ -21,8 +21,9 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation171FiniteConstrainedRealizat
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -50,7 +51,7 @@ record CMP122Equation171FiniteConstrainedRealization
     (embedding :
       RingEmbed.RationalRealRingEmbedding) : Set₁ where
   field
-    scaleAt : Agda.Builtin.Nat.Nat → Scale
+    scaleAt : Nat → Scale
 
     selectedAt : ∀ cutoff →
       T.SecondClassComponent
@@ -59,7 +60,7 @@ record CMP122Equation171FiniteConstrainedRealization
 
     -- G1: literal Eq.(1.71) integration variables / fibre.
     sourceFibre :
-      Agda.Builtin.Nat.Nat → SlowField → List Fine
+      Nat → SlowField → List Fine
 
     fibreIsGate4FastFibre :
       ∀ cutoff slow →
@@ -72,7 +73,7 @@ record CMP122Equation171FiniteConstrainedRealization
 
     -- G2: literal source coarse/block constraint.
     sourceCoarseMatches :
-      Agda.Builtin.Nat.Nat → Fine → SlowField → Bool
+      Nat → Fine → SlowField → Bool
 
     sourceCoarseMatchesIsGate4 :
       ∀ cutoff fine slow →
@@ -81,6 +82,22 @@ record CMP122Equation171FiniteConstrainedRealization
       Integral.coarseMatches
         (T.sumData (PhysicalT.canonicalPhysicalTData construction))
         fine slow
+
+    sourceSelectedIntegrand :
+      Nat → SlowField → Fine → ℝ
+
+    sourceSelectedWhenTrue :
+      ∀ cutoff slow fine →
+      sourceCoarseMatches cutoff fine slow ≡ true →
+      sourceSelectedIntegrand cutoff slow fine
+      ≡
+      Eq171.equation171ExponentialDensity source cutoff slow fine
+
+    sourceSelectedWhenFalse :
+      ∀ cutoff slow fine →
+      sourceCoarseMatches cutoff fine slow ≡ false →
+      sourceSelectedIntegrand cutoff slow fine
+      ≡ 0ℝ
 
     -- G3/G5: all pointwise source density, Jacobian, determinant,
     -- localization, patch and functional-one factors are identified here.
@@ -107,16 +124,7 @@ record CMP122Equation171FiniteConstrainedRealization
       ≡
       RingEmbed.realSum
         (sourceFibre cutoff slow)
-        (λ fine →
-          sourceSelectedIntegrand cutoff slow fine)
-
-  sourceSelectedIntegrand :
-    Agda.Builtin.Nat.Nat → SlowField → Fine → ℝ
-  sourceSelectedIntegrand cutoff slow fine
-    with sourceCoarseMatches cutoff fine slow
-  ... | true =
-      Eq171.equation171ExponentialDensity source cutoff slow fine
-  ... | false = 0ℝ
+        (sourceSelectedIntegrand cutoff slow)
 
 open CMP122Equation171FiniteConstrainedRealization public
 
@@ -154,11 +162,16 @@ sourceSelectedIntegrandIsEmbeddedGate4Selected
          fine slow
      | sourceCoarseMatchesIsGate4 realization cutoff fine slow
 ... | true | true | refl =
-  exponentialDensityIsEmbeddedGate4OneIntegrand
-    realization cutoff slow fine
+  trans
+    (sourceSelectedWhenTrue realization cutoff slow fine refl)
+    (exponentialDensityIsEmbeddedGate4OneIntegrand
+      realization cutoff slow fine)
 ... | false | false | refl =
-  AddEmbed.Embed.zeroExact
-    (AddEmbed.base (RingEmbed.additive embedding))
+  trans
+    (sourceSelectedWhenFalse realization cutoff slow fine refl)
+    (sym
+      (AddEmbed.Embed.zeroExact
+        (AddEmbed.base (RingEmbed.additive embedding))))
 
 sourceFiniteFoldIsEmbeddedGate4Fold :
   ∀ {Scale Fine SlowField Component Functional}
@@ -174,7 +187,7 @@ sourceFiniteFoldIsEmbeddedGate4Fold :
     cutoff slow →
   RingEmbed.realSum
     (sourceFibre realization cutoff slow)
-    (λ fine → sourceSelectedIntegrand realization cutoff slow fine)
+    (sourceSelectedIntegrand realization cutoff slow)
   ≡
   embedQ embedding
     (T.localizedTOperation
@@ -186,39 +199,17 @@ sourceFiniteFoldIsEmbeddedGate4Fold :
         (PhysicalT.canonicalPhysicalTData construction)))
 sourceFiniteFoldIsEmbeddedGate4Fold
   {construction = construction} {embedding = embedding}
-  realization cutoff slow =
+  realization cutoff slow
+  rewrite fibreIsGate4FastFibre realization cutoff slow =
   trans
-    (subst
-      (λ fibre →
-        RingEmbed.realSum fibre
-          (λ fine → sourceSelectedIntegrand realization cutoff slow fine)
-        ≡
-        RingEmbed.realSum
-          (T.fastFibre
-            (PhysicalT.canonicalPhysicalTData construction)
-            (scaleAt realization cutoff)
-            (T.component (selectedAt realization cutoff)))
-          (λ fine →
-            embedQ embedding
-              (Integral.selectedWith
-                (T.sumData (PhysicalT.canonicalPhysicalTData construction))
-                (T.localIntegrand
-                  (PhysicalT.canonicalPhysicalTData construction)
-                  (scaleAt realization cutoff)
-                  (T.component (selectedAt realization cutoff))
-                  slow
-                  (T.oneFunctional
-                    (PhysicalT.canonicalPhysicalTData construction)))
-                slow fine)))
-      (fibreIsGate4FastFibre realization cutoff slow)
-      (RingEmbed.realSumCong
-        (T.fastFibre
-          (PhysicalT.canonicalPhysicalTData construction)
-          (scaleAt realization cutoff)
-          (T.component (selectedAt realization cutoff)))
-        (sourceSelectedIntegrandIsEmbeddedGate4Selected
-          realization cutoff slow)))
-    (Relation.Binary.PropositionalEquality.sym
+    (RingEmbed.realSumCong
+      (T.fastFibre
+        (PhysicalT.canonicalPhysicalTData construction)
+        (scaleAt realization cutoff)
+        (T.component (selectedAt realization cutoff)))
+      (sourceSelectedIntegrandIsEmbeddedGate4Selected
+        realization cutoff slow))
+    (sym
       (Embedded.embeddedConstrainedIntegralExact
         embedding
         (PhysicalT.sumCarrier construction)
