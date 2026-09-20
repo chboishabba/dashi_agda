@@ -63,6 +63,10 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceVecto
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceVectorResidualWeldExact as BVectorWeld
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredInputLaplacianVectorResidualExact as BInputVector
 import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianR440WeldExact as BInputR440
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredInputLaplacianBonyVectorExact as BBonyVector
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBonyLiveExact as BBonyLive
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredBonyCovariancePaymentExact as BBonyPay
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCenteredBonyPaymentLiveExact as BBonyLivePay
 
 ------------------------------------------------------------------------
 -- A
@@ -258,6 +262,39 @@ bD1b2InputWeightedAmplitudeOnCanonicalR440Carrier =
 bD1b2PairwiseYoungFamilyRequiredForPrimaryRoute : Bool
 bD1b2PairwiseYoungFamilyRequiredForPrimaryRoute =
   BVectorLive.pairwiseYoungFamilyRequiredForPrimaryD1b2Route
+
+bD1b2CenteredInputLaplacianExactFourClassVectorSplitClosed : Bool
+bD1b2CenteredInputLaplacianExactFourClassVectorSplitClosed =
+  BBonyVector.centeredInputLaplacianFourClassVectorSplitClosed
+
+bD1b2CenteredInputLaplacianExactThreeClassVectorSplitClosed : Bool
+bD1b2CenteredInputLaplacianExactThreeClassVectorSplitClosed =
+  BBonyVector.centeredInputLaplacianThreeClassVectorSplitClosed
+
+bD1b2LiveCovarianceExactThreeCenteredBonyWorkSplitClosed : Bool
+bD1b2LiveCovarianceExactThreeCenteredBonyWorkSplitClosed =
+  BBonyLive.liveD1b2ExactThreeCenteredBonyWorkSplitClosed
+
+bD1b2BonySplitUsesClassLocalCentering : Bool
+bD1b2BonySplitUsesClassLocalCentering =
+  BBonyLive.liveD1b2BonySplitUsesClassLocalCentering
+
+bD1b2CenteredBonyQuantitativeCompilerClosed : Bool
+bD1b2CenteredBonyQuantitativeCompilerClosed =
+  BBonyPay.centeredBonyCovariancePaymentCompilerClosed
+
+bD1b2IndexedPhysicalCenteredBonyPaymentSocketClosed : Bool
+bD1b2IndexedPhysicalCenteredBonyPaymentSocketClosed =
+  BBonyLivePay.liveCenteredBonyPhysicalPaymentCompilerClosed
+
+bD1b2CenteredBonyFarLowSignedProducerClosed : Bool
+bD1b2CenteredBonyFarLowSignedProducerClosed = false
+
+bD1b2CenteredBonyHighHighSignedProducerClosed : Bool
+bD1b2CenteredBonyHighHighSignedProducerClosed = false
+
+bD1b2CenteredBonyCriticalCoreSignedProducerClosed : Bool
+bD1b2CenteredBonyCriticalCoreSignedProducerClosed = false
 
 bD1b2QuantitativeR440InputLaplacianCovariancePaymentClosed : Bool
 bD1b2QuantitativeR440InputLaplacianCovariancePaymentClosed = false
