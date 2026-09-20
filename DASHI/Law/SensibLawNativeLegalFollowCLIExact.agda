@@ -39,6 +39,11 @@ data NativeLegalFollowCommand : Set where
   inspectAustralianContractsLandscape : NativeLegalFollowCommand
   acquireAustralianContractsLandscapeSources : NativeLegalFollowCommand
   expandAustralianContractsLandscape : NativeLegalFollowCommand
+  prepareContractAuthorityIdentityReview : NativeLegalFollowCommand
+  finalizeContractAuthorityIdentityReview : NativeLegalFollowCommand
+  compileContractAuthorityIdentityReview : NativeLegalFollowCommand
+  compileReviewedContractPropositionHops : NativeLegalFollowCommand
+  compileReviewedContractTreatmentHops : NativeLegalFollowCommand
 
 data OrchestrationOwner : Set where
   nativeRustCli : OrchestrationOwner
@@ -189,6 +194,10 @@ record NativeLegalFollowCliBoundary : Set where
     contractsLandscapeOrchestrationIsNativeRustIsTrue :
       contractsLandscapeOrchestrationIsNativeRust ≡ true
 
+    reviewedContractHopCompilationIsNativeRust : Bool
+    reviewedContractHopCompilationIsNativeRustIsTrue :
+      reviewedContractHopCompilationIsNativeRust ≡ true
+
     spacyIsParserProducerOnly : Bool
     spacyIsParserProducerOnlyIsTrue :
       spacyIsParserProducerOnly ≡ true
@@ -206,6 +215,7 @@ canonicalNativeLegalFollowCliBoundary =
     false refl
     true refl
     false refl
+    true refl
     true refl
     true refl
     true refl
