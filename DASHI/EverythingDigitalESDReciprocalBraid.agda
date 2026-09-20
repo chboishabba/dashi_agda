@@ -176,3 +176,5 @@ import DASHI.Education.DigitalESDAdaptiveScreeningProgrammeExact
 import DASHI.Education.DigitalESDAdaptiveScreeningProgrammeRegression
 import DASHI.Education.DigitalESDSLRInteropWrapperExact
 import DASHI.Education.DigitalESDSLRInteropWrapperRegression
+import DASHI.Education.DigitalESDERICStudyInteropExact
+import DASHI.Education.DigitalESDERICStudyInteropRegression
