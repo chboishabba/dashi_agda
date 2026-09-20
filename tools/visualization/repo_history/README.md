@@ -38,8 +38,8 @@ No dependency edge is hand-authored. The Agda frontend:
 2. captures declaration names, binders, and identifier references,
 3. assigns references to the smallest enclosing declaration,
 4. removes local binders and self references,
-5. resolves same-module, qualified, then globally-unique symbols,
-6. leaves ambiguity unresolved rather than manufacturing an edge.
+5. resolves same-module and qualified names directly, then admits unqualified cross-module names only through actual `open`/`open import` scope evidence,
+6. respects `using`, `hiding`, and `renaming`, and leaves all remaining ambiguity unresolved rather than manufacturing an edge.
 
 Git branch/merge topology is likewise extracted from commit parents. A commit
 with two or more parents is a merge node. A parent with multiple children
@@ -65,25 +65,25 @@ python -m pip install -e .
 Fast branch/merge topology only:
 
 ```bash
-dashi-repo-history extract ../../../.. --history-only --max-commits 300 -o /tmp/dashi-history.json
+dashi-repo-history extract ../../.. --history-only --max-commits 300 -o /tmp/dashi-history.json
 ```
 
 Earliest history (useful for the origin movie):
 
 ```bash
-dashi-repo-history extract ../../../.. --history-only --first-commits 150 -o /tmp/dashi-early-history.json
+dashi-repo-history extract ../../.. --history-only --first-commits 150 -o /tmp/dashi-early-history.json
 ```
 
 Full semantic extraction is deliberately bounded first because the graph is large:
 
 ```bash
-dashi-repo-history extract ../../../.. --max-commits 100 -o /tmp/dashi-semantic-history.json
+dashi-repo-history extract ../../.. --max-commits 100 -o /tmp/dashi-semantic-history.json
 ```
 
 A more legible first semantic film:
 
 ```bash
-dashi-repo-history extract ../../../.. \
+dashi-repo-history extract ../../.. \
   --path-prefix DASHI/Arithmetic/ \
   --max-commits 60 \
   -o /tmp/dashi-arithmetic-history.json
@@ -152,7 +152,7 @@ For this scene, extract semantic history with episode closure enabled so sampled
 history cannot hide the real fork or intermediate branch commits:
 
 ```bash
-dashi-repo-history extract ../../../.. \
+dashi-repo-history extract ../../.. \
   --path-prefix DASHI/Arithmetic/ \
   --max-commits 120 \
   --episode-context \
@@ -203,7 +203,7 @@ this display quotient never becomes the semantic authority graph.
 history. Recovered commit ids can therefore be supplied as traversal seeds:
 
 ```bash
-dashi-repo-history extract ../../../.. \
+dashi-repo-history extract ../../.. \
   --seed-commit 9955429d8dbe1aae4bbf3778808993cfdc6172c9 \
   --fetch-seeds \
   --first-commits 150 \
@@ -284,3 +284,20 @@ dashi-repo-history render /tmp/dashi-history.json \
 Exact semantic identity is preferred. A rename or move is followed only when
 the existing identity layer has unique supported evidence; ambiguous
 similarity terminates the historical focus rather than guessing continuity.
+
+## Export the renderer-neutral scene program
+
+The same orchestration consumed by Manim can be serialized independently:
+
+```bash
+dashi-repo-history program /tmp/dashi-arithmetic-history.json \
+  --scene symbol-history \
+  --symbol DASHI.Arithmetic.CancellationPressureCore::someDeclaration \
+  --upstream-depth 3 \
+  --downstream-depth 1 \
+  -o /tmp/cancellation-pressure-scene.json
+```
+
+The output schema is `dashi.scene-program.v1`. This is the intended handoff
+surface for future SVG/WebGPU/ITIR renderers; those backends should interpret
+the program rather than recomputing semantic history or dependency admission.
