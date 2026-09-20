@@ -228,3 +228,28 @@ Top-level declarations carry a structural fingerprint with their own spelling
 masked. Exact semantic ids remain authoritative. A unique kind+fingerprint
 match can guide visual continuity for a file move or rename; repeated/
 ambiguous fingerprints are left unmatched rather than guessed.
+
+## Rooted symbol construction zoom
+
+List stable semantic selectors in a snapshot:
+
+```bash
+dashi-repo-history symbols /tmp/dashi-arithmetic-history.json \
+  --query CancellationPressure
+```
+
+Render one declaration and automatically unfold its semantic neighborhood:
+
+```bash
+dashi-repo-history render /tmp/dashi-arithmetic-history.json \
+  --scene symbol \
+  --symbol DASHI.Arithmetic.CancellationPressureCore::someDeclaration \
+  --upstream-depth 3 \
+  --downstream-depth 1 \
+  --quality -qm
+```
+
+The symbol selector may be a full semantic id, a unique bare label, or
+`Module.Name::label`. The scene reveals the root first, then increasingly
+distant dependencies and finally downstream consumers. All links come from
+the extracted semantic graph; focus traversal cannot invent dependencies.
