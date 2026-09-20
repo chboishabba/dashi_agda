@@ -296,3 +296,5 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109ConcreteLocalCEx
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MarkedCurvatureCompositeExact
 
 import DASHI.Physics.YangMills.YangMillsFiniteNormalizedExpectationSymmetryExact
+
+import DASHI.Physics.YangMills.YangMillsStressWardPointwiseCoreGeneratorExact
