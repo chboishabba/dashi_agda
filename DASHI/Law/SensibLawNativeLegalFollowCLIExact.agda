@@ -38,6 +38,7 @@ data NativeLegalFollowCommand : Set where
   planAustralianContractsLandscape : NativeLegalFollowCommand
   inspectAustralianContractsLandscape : NativeLegalFollowCommand
   acquireAustralianContractsLandscapeSources : NativeLegalFollowCommand
+  expandAustralianContractsLandscape : NativeLegalFollowCommand
 
 data OrchestrationOwner : Set where
   nativeRustCli : OrchestrationOwner
