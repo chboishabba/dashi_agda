@@ -32,6 +32,17 @@ balabanLargeFieldPartII : String
 balabanLargeFieldPartII =
   "Tadeusz Bałaban, Large Field Renormalization. II. Localization, Exponentiation, and Bounds for the R Operation"
 
+tOperationDefinition171 : PrimaryGate4Target
+tOperationDefinition171 = primaryTarget
+  "Tadeusz Bałaban"
+  "Large Field Renormalization. II. Localization, Exponentiation, and Bounds for the R Operation"
+  "Communications in Mathematical Physics 122 (1989), 355--392"
+  "10.1007/BF01238433"
+  "equation (1.71), pp. 378--379"
+  "the new localized T-operation on a component X is defined by the composition of the localized integrations, with exponential density in the finite integration variables"
+  primarySourceVerified
+  "source authority for CMP122Equation171TOperationSemantics; prevents replacing the T-operation by a bare pointwise exp(-A_k) identity"
+
 tOperationEquation189 : PrimaryGate4Target
 tOperationEquation189 = primaryTarget
   "Tadeusz Bałaban"
@@ -112,7 +123,7 @@ convergentLocalizationCandidate = primaryTarget
 primaryGate4Targets : List PrimaryGate4Target
 primaryGate4Targets =
   clusterFamilyCountingCandidate ∷ convergentLocalizationCandidate ∷
-  tOperationEquation189 ∷ rOperationEquation1100 ∷ boundaryEquation169 ∷
+  tOperationDefinition171 ∷ tOperationEquation189 ∷ rOperationEquation1100 ∷ boundaryEquation169 ∷
   p0SectionOneFour ∷ inductiveTheoremOne ∷ []
 
 ------------------------------------------------------------------------
