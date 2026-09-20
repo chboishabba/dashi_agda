@@ -28,7 +28,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_;
-   +-identityʳ; *-distribˡ-+; mulZeroʳ; mulOneʳ)
+   +-identityˡ; +-identityʳ; *-distribˡ-+; mulZeroʳ; mulOneʳ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Mathematics.NumberTheory.FiniteProductEnumerationExact as Product
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as Sums
@@ -41,7 +41,7 @@ realSumAppend :
   ≡
   Sums.realSum left value +ℝ Sums.realSum right value
 realSumAppend [] right value =
-  sym (+-identityʳ (Sums.realSum right value))
+  sym (+-identityˡ (Sums.realSum right value))
 realSumAppend (x ∷ xs) right value =
   cong
     (value x +ℝ_)
@@ -114,8 +114,8 @@ open OneSiteMassExactPartition public
 productCells :
   ∀ {Cell : Set} →
   OneSiteMassExactPartition Cell →
-  Nat →
-  List (Vec.Vec Cell _)
+  (dimension : Nat) →
+  List (Vec.Vec Cell dimension)
 productCells partition dimension =
   Product.vectorPower (cells partition) dimension
 
