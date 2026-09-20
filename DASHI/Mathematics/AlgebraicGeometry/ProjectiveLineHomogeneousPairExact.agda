@@ -12,6 +12,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (zero; suc)
+open import Data.Product using (_×_)
 
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHomogeneousCoordinatesExact as CP
 
@@ -85,8 +86,6 @@ scalePair {field} scalar pair scaledFirst scaledSecond =
   scaledFirst ≡ CP.multiply field scalar (first pair)
   ×
   scaledSecond ≡ CP.multiply field scalar (second pair)
-  where
-    open import Data.Product using (_×_)
 
 record ProjectiveLineHomogeneousPairBoundary : Set where
   constructor projective-line-homogeneous-pair-boundary
