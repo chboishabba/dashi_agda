@@ -12,6 +12,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119WilsonSourceOS2Exact whe
 -- the imported theorem applies.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -92,7 +93,7 @@ singleObservableReflectionPositive application cutoff observable =
     left ≡ right →
     Wilson.Nonnegative (published application) left →
     Wilson.Nonnegative (published application) right
-  substExpectation Agda.Builtin.Equality.refl proof = proof
+  substExpectation refl proof = proof
 
 wilsonPublishedRPAuthorityLevel : ProofLevel
 wilsonPublishedRPAuthorityLevel =
