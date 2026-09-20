@@ -128,16 +128,17 @@ chartOverlapProductIsOne :
   ≡ CP.one field
 chartOverlapProductIsOne {field} laws pair overlap =
   trans
-    (CP.multiplyAssociative (base laws)
-      (CP.inverse field
-        (P1.first pair)
-        (firstNonzero overlap))
-      (P1.second pair)
-      (CP.multiply field
+    (sym
+      (CP.multiplyAssociative (base laws)
         (CP.inverse field
-          (P1.second pair)
-          (secondNonzero overlap))
-        (P1.first pair)))
+          (P1.first pair)
+          (firstNonzero overlap))
+        (P1.second pair)
+        (CP.multiply field
+          (CP.inverse field
+            (P1.second pair)
+            (secondNonzero overlap))
+          (P1.first pair))))
     (trans
       (cong
         (CP.multiply field
@@ -145,13 +146,12 @@ chartOverlapProductIsOne {field} laws pair overlap =
             (P1.first pair)
             (firstNonzero overlap)))
         (trans
-          (sym
-            (CP.multiplyAssociative (base laws)
+          (CP.multiplyAssociative (base laws)
+            (P1.second pair)
+            (CP.inverse field
               (P1.second pair)
-              (CP.inverse field
-                (P1.second pair)
-                (secondNonzero overlap))
-              (P1.first pair)))
+              (secondNonzero overlap))
+            (P1.first pair))
           (trans
             (cong
               (λ coefficient →
