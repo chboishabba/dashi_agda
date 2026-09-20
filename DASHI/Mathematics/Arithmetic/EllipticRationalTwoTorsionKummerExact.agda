@@ -85,12 +85,23 @@ pointMinusOneOpenDomain = record
       ≢-nonZero (λ ())
   }
 
-pointMinusOneOrdinaryKummer :
-  Open.rationalKummerRepresentative
-    Torsion.pointMinusOne
-    pointMinusOneOpenDomain
-  ≡ torsionKummerRepresentative Torsion.pointMinusOneCode
-pointMinusOneOrdinaryKummer = refl
+pointMinusOneOrdinaryKummerFirst :
+  Square.value
+    (Open.first
+      (Open.rationalKummerRepresentative
+        Torsion.pointMinusOne
+        pointMinusOneOpenDomain))
+  ≡ minusOne
+pointMinusOneOrdinaryKummerFirst = refl
+
+pointMinusOneOrdinaryKummerSecond :
+  Square.value
+    (Open.second
+      (Open.rationalKummerRepresentative
+        Torsion.pointMinusOne
+        pointMinusOneOpenDomain))
+  ≡ minusTwo
+pointMinusOneOrdinaryKummerSecond = solve []
 
 record LiteralTorsionKummerDictionaryEntry
     (code : Torsion.TwoTorsionCode) : Set where
