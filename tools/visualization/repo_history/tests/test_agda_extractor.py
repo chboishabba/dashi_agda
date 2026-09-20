@@ -60,3 +60,177 @@ pairish x y = x
     assert "x" in binders
     assert "y" in binders
     assert "Nat" not in binders
+
+
+def test_bare_function_pattern_becomes_clause_scoped_binder():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+idNat : Nat -> Nat
+idNat x = x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    functions = [
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "idNat"
+    ]
+    assert len(functions) == 1
+    owner = functions[0]
+
+    binders = [
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    ]
+    assert len(binders) == 1
+    binder = binders[0]
+
+    assert any(
+        edge.source == binder.symbol_id
+        and edge.target == owner.symbol_id
+        and edge.kind == "binds"
+        for edge in graph.edges.values()
+    )
+    assert any(
+        edge.source == binder.symbol_id
+        and edge.target == owner.symbol_id
+        and edge.kind == "body-depends"
+        for edge in graph.edges.values()
+    )
+    assert not any(
+        unresolved["reference"] == "x"
+        for unresolved in graph.unresolved_references
+    )
+
+
+def test_data_constructor_patterns_are_not_promoted_to_binders():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+
+data Bit : Set where
+  zero : Bit
+  one : Bit
+
+flip : Bit -> Bit
+flip zero = one
+flip one = zero
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    by_label = {}
+    for node in graph.nodes.values():
+        by_label.setdefault(node.label, []).append(node)
+
+    constructors = {
+        node.label: node
+        for label in ("zero", "one")
+        for node in by_label.get(label, [])
+        if node.kind == "constructor"
+    }
+    assert set(constructors) == {"zero", "one"}
+
+    functions = [
+        node for node in by_label.get("flip", [])
+        if node.kind == "function"
+    ]
+    assert len(functions) == 1
+    flip = functions[0]
+
+    assert not any(
+        node.kind == "binder" and node.label in {"zero", "one"}
+        for node in graph.nodes.values()
+    )
+
+    matched = {
+        edge.source
+        for edge in graph.edges.values()
+        if edge.target == flip.symbol_id
+        and edge.kind == "pattern-matches"
+    }
+    assert matched == {
+        constructors["zero"].symbol_id,
+        constructors["one"].symbol_id,
+    }
+
+
+def test_same_pattern_spelling_in_different_clauses_has_distinct_scope():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+
+data Maybe : Set where
+  none : Maybe
+  some : Maybe -> Maybe
+
+pick : Maybe -> Maybe
+pick none = none
+pick (some x) = x
+
+other : Maybe -> Maybe
+other (some x) = x
+other none = none
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    xs = [
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    ]
+    assert len(xs) == 2
+    assert xs[0].symbol_id != xs[1].symbol_id
+    assert xs[0].scope != xs[1].scope
+
+
+def test_record_fields_and_constructor_have_container_relations():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+record Pair : Set where
+  constructor mkPair
+  field
+    left : Nat
+    right : Nat
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    nodes = list(graph.nodes.values())
+    pair = next(
+        node for node in nodes
+        if node.kind == "record" and node.label == "Pair"
+    )
+    constructor = next(
+        node for node in nodes
+        if node.kind == "constructor" and node.label == "mkPair"
+    )
+    fields = {
+        node.label: node
+        for node in nodes
+        if node.kind == "field" and node.label in {"left", "right"}
+    }
+    assert set(fields) == {"left", "right"}
+
+    assert any(
+        edge.source == constructor.symbol_id
+        and edge.target == pair.symbol_id
+        and edge.kind == "constructor-of"
+        for edge in graph.edges.values()
+    )
+    for field in fields.values():
+        assert any(
+            edge.source == field.symbol_id
+            and edge.target == pair.symbol_id
+            and edge.kind == "field-of"
+            for edge in graph.edges.values()
+        )
