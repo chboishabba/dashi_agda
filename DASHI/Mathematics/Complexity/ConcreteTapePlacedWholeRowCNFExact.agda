@@ -350,6 +350,94 @@ allIndexedLegalImpliesWholeRowPlacedCNF
       stateCoverage symbolCoverage
       (scanIndexedWindows _ _ _) legal)
 
+
+placedPredicatesImpliesAllIndexedLegal :
+  ∀ {machine before after rule}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (occurrences :
+      List (Indexed.IndexedSixCellWindow machine before after)) →
+  Placed.AllPlacedPredicatesHold
+    (compile occurrences)
+    (Flat.encodeRowPair stateCoverage symbolCoverage before after) →
+  AllIndexedLegal rule occurrences
+  where
+    compile :
+      List (Indexed.IndexedSixCellWindow machine before after) →
+      List
+        (Placed.PlacedPredicate
+          (Canonical.WindowWidth machine)
+          (Flat.RowPairWidth before after))
+    compile [] = []
+    compile (occurrence ∷ rest) =
+      PlacedWindow.indexedWindowPlacedPredicate
+        stateCoverage symbolCoverage rule occurrence
+      ∷ compile rest
+placedPredicatesImpliesAllIndexedLegal
+    stateCoverage symbolCoverage
+    [] Placed.allPlacedDone =
+  allIndexedNil
+placedPredicatesImpliesAllIndexedLegal
+    stateCoverage symbolCoverage
+    (occurrence ∷ rest)
+    (Placed.allPlacedStep accepted restAccepted) =
+  allIndexedCons
+    (PlacedWindow.placedPredicateImpliesSemanticLegalIndexedWindow
+      stateCoverage symbolCoverage _ occurrence accepted)
+    (placedPredicatesImpliesAllIndexedLegal
+      stateCoverage symbolCoverage rest restAccepted)
+
+wholeRowPlacedCNFImpliesAllIndexedLegal :
+  ∀ {machine before after rule}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
+  CNF.evaluateCNF
+    (wholeRowPlacedCNF
+      stateCoverage symbolCoverage rule before after)
+    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
+  ≡ true →
+  AllIndexedLegal rule
+    (scanIndexedWindows machine before after)
+wholeRowPlacedCNFImpliesAllIndexedLegal
+    stateCoverage symbolCoverage accepted =
+  placedPredicatesImpliesAllIndexedLegal
+    stateCoverage symbolCoverage
+    (scanIndexedWindows _ _ _)
+    (Placed.compilePlacedAllSound
+      (placedPredicatesForIndexedScan
+        stateCoverage symbolCoverage _ _ _)
+      (Flat.encodeRowPair stateCoverage symbolCoverage _ _)
+      accepted)
+
+wholeRowPlacedCNF_iff_allIndexedLegal :
+  ∀ {machine before after rule}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
+  (CNF.evaluateCNF
+    (wholeRowPlacedCNF
+      stateCoverage symbolCoverage rule before after)
+    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
+    ≡ true)
+  ↔
+  AllIndexedLegal rule
+    (scanIndexedWindows machine before after)
+wholeRowPlacedCNF_iff_allIndexedLegal
+    stateCoverage symbolCoverage =
+  record
+    { to =
+        wholeRowPlacedCNFImpliesAllIndexedLegal
+          stateCoverage symbolCoverage
+    ; from =
+        allIndexedLegalImpliesWholeRowPlacedCNF
+          stateCoverage symbolCoverage
+    }
+
 record PlacedWholeRowCNFReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
@@ -385,7 +473,7 @@ canonicalPlacedWholeRowCNFReceipt machine stateCoverage symbolCoverage = record
   ; perWindowPlacementPaid = true
   ; wholeRowPlacedConjunctionPaid = true
   ; legalScanImpliesWholeRowCNFPaid = true
-  ; wholeRowCNFImpliesLegalScanPaid = false
+  ; wholeRowCNFImpliesLegalScanPaid = true
   ; endpointClausePlacementPaid = false
   ; runLevelGlobalOffsetPlacementPaid = false
   ; acceptingRunIffSATPaid = false
