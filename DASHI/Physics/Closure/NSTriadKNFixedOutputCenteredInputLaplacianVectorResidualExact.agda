@@ -162,9 +162,9 @@ pairAgainstHeadCenteredIsTwiceInput E I value head [] homogeneous =
     C3.complex3Zero F ≡ scaleTwo (C3.complex3Zero F)
   zeroScale =
     Algebra.complex3Ext
-      (Algebra.complexExt (solve [ Rate.two ]) (solve [ Rate.two ]))
-      (Algebra.complexExt (solve [ Rate.two ]) (solve [ Rate.two ]))
-      (Algebra.complexExt (solve [ Rate.two ]) (solve [ Rate.two ]))
+      (Algebra.complexExt (solve (Rate.two ∷ [])) (solve (Rate.two ∷ [])))
+      (Algebra.complexExt (solve (Rate.two ∷ [])) (solve (Rate.two ∷ [])))
+      (Algebra.complexExt (solve (Rate.two ∷ [])) (solve (Rate.two ∷ [])))
 pairAgainstHeadCenteredIsTwiceInput
     E I value {output} head (x ∷ xs) homogeneous =
   let
@@ -238,9 +238,9 @@ pairVectorCenteredIsTwiceInput E I value [] homogeneous =
       C3.complex3Zero F ≡ scaleTwo (C3.complex3Zero F)
     zeroScale =
       Algebra.complex3Ext
-        (Algebra.complexExt (solve [ Rate.two ]) (solve [ Rate.two ]))
-        (Algebra.complexExt (solve [ Rate.two ]) (solve [ Rate.two ]))
-        (Algebra.complexExt (solve [ Rate.two ]) (solve [ Rate.two ]))
+        (Algebra.complexExt (solve (Rate.two ∷ [])) (solve (Rate.two ∷ [])))
+        (Algebra.complexExt (solve (Rate.two ∷ [])) (solve (Rate.two ∷ [])))
+        (Algebra.complexExt (solve (Rate.two ∷ [])) (solve (Rate.two ∷ [])))
   in zeroScale
 pairVectorCenteredIsTwiceInput
     E I value {output} (head ∷ xs) homogeneous =
