@@ -11,3 +11,12 @@ literalCompilerOwned = refl
 interactingContinuumRemainsPhysical :
   P.pinnedInteractingContinuumInputLevel ≡ conditional
 interactingContinuumRemainsPhysical = refl
+
+
+pinnedABCNontrivialityCompilerOwned :
+  Compiler.pinnedABCNontrivialityCompilerLevel ≡ machineChecked
+pinnedABCNontrivialityCompilerOwned = refl
+
+pinnedABCToLiteralClayCompilerOwned :
+  Compiler.pinnedABCToLiteralClayCompilerLevel ≡ machineChecked
+pinnedABCToLiteralClayCompilerOwned = refl
