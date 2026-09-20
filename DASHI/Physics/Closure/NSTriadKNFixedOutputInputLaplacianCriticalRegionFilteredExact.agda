@@ -27,6 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionFil
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (length)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
@@ -228,7 +229,7 @@ deepFarLowClosedForm :
   (items : List Physical.PhysicalTriadIncidence) →
   deepFarLowCovariance rate work items
   ≡
-    Pair.natAsRational (Data.List.Base.length (deepFarLowItems items))
+    Pair.natAsRational (length (deepFarLowItems items))
       * Pair.weightedWorkSum rate work (deepFarLowItems items)
     - Pair.rateSum rate (deepFarLowItems items)
       * Pair.workSum work (deepFarLowItems items)
@@ -240,7 +241,7 @@ deepHighHighClosedForm :
   (items : List Physical.PhysicalTriadIncidence) →
   deepHighHighCovariance rate work items
   ≡
-    Pair.natAsRational (Data.List.Base.length (deepHighHighItems items))
+    Pair.natAsRational (length (deepHighHighItems items))
       * Pair.weightedWorkSum rate work (deepHighHighItems items)
     - Pair.rateSum rate (deepHighHighItems items)
       * Pair.workSum work (deepHighHighItems items)
@@ -252,7 +253,7 @@ criticalCoreClosedForm :
   (items : List Physical.PhysicalTriadIncidence) →
   criticalCoreCovariance rate work items
   ≡
-    Pair.natAsRational (Data.List.Base.length (criticalCoreItems items))
+    Pair.natAsRational (length (criticalCoreItems items))
       * Pair.weightedWorkSum rate work (criticalCoreItems items)
     - Pair.rateSum rate (criticalCoreItems items)
       * Pair.workSum work (criticalCoreItems items)
@@ -264,9 +265,51 @@ deepFarLowDeepHighHighClosedForm :
   (items : List Physical.PhysicalTriadIncidence) →
   deepFarLowDeepHighHighCovariance rate work items
   ≡
-    Bip.bipartitePairSum rate work
-      (deepFarLowItems items) (deepHighHighItems items)
-deepFarLowDeepHighHighClosedForm rate work items = refl
+      Pair.natAsRational (length (deepHighHighItems items))
+        * Pair.weightedWorkSum rate work (deepFarLowItems items)
+    + Pair.natAsRational (length (deepFarLowItems items))
+        * Pair.weightedWorkSum rate work (deepHighHighItems items)
+    - Pair.rateSum rate (deepFarLowItems items)
+        * Pair.workSum work (deepHighHighItems items)
+    - Pair.rateSum rate (deepHighHighItems items)
+        * Pair.workSum work (deepFarLowItems items)
+deepFarLowDeepHighHighClosedForm rate work items =
+  Bip.bipartiteClosedForm rate work
+    (deepFarLowItems items) (deepHighHighItems items)
+
+deepFarLowCoreClosedForm :
+  (rate work : Physical.PhysicalTriadIncidence → ℚ) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  deepFarLowCoreCovariance rate work items
+  ≡
+      Pair.natAsRational (length (criticalCoreItems items))
+        * Pair.weightedWorkSum rate work (deepFarLowItems items)
+    + Pair.natAsRational (length (deepFarLowItems items))
+        * Pair.weightedWorkSum rate work (criticalCoreItems items)
+    - Pair.rateSum rate (deepFarLowItems items)
+        * Pair.workSum work (criticalCoreItems items)
+    - Pair.rateSum rate (criticalCoreItems items)
+        * Pair.workSum work (deepFarLowItems items)
+deepFarLowCoreClosedForm rate work items =
+  Bip.bipartiteClosedForm rate work
+    (deepFarLowItems items) (criticalCoreItems items)
+
+deepHighHighCoreClosedForm :
+  (rate work : Physical.PhysicalTriadIncidence → ℚ) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  deepHighHighCoreCovariance rate work items
+  ≡
+      Pair.natAsRational (length (criticalCoreItems items))
+        * Pair.weightedWorkSum rate work (deepHighHighItems items)
+    + Pair.natAsRational (length (deepHighHighItems items))
+        * Pair.weightedWorkSum rate work (criticalCoreItems items)
+    - Pair.rateSum rate (deepHighHighItems items)
+        * Pair.workSum work (criticalCoreItems items)
+    - Pair.rateSum rate (criticalCoreItems items)
+        * Pair.workSum work (deepHighHighItems items)
+deepHighHighCoreClosedForm rate work items =
+  Bip.bipartiteClosedForm rate work
+    (deepHighHighItems items) (criticalCoreItems items)
 
 filteredPhysicalCriticalRegionCovarianceDecompositionClosed : Bool
 filteredPhysicalCriticalRegionCovarianceDecompositionClosed = true
