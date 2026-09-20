@@ -98,3 +98,22 @@ qld2026FixtureStillDoesNotCreateCurrentLaw :
 qld2026FixtureStillDoesNotCreateCurrentLaw =
   Controller.createsCurrentLawConclusionIsFalse
     Controller.qld2026TemporalSliceFixture
+
+
+missingSeedDoctrinesRemainContextResiduals :
+  Controller.missingSeedDoctrinesBecomeContextResiduals
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+    ≡ true
+missingSeedDoctrinesRemainContextResiduals =
+  Controller.missingSeedDoctrinesBecomeContextResidualsIsTrue
+    Controller.canonicalAustralianContractsLandscapeControllerBoundary
+
+constructionIsResearchContextWork :
+  Controller.frontierKind Controller.constructionExpansionWork
+    ≡ Controller.researchContextExpansion
+constructionIsResearchContextWork = refl
+
+consumerLawIsResearchContextWork :
+  Controller.frontierKind Controller.consumerLawExpansionWork
+    ≡ Controller.researchContextExpansion
+consumerLawIsResearchContextWork = refl
