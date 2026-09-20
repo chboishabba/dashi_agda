@@ -62,10 +62,22 @@ python -m pip install -e .
 
 ## Extract
 
-Full repository (use bounded history first; the semantic graph is large):
+Fast branch/merge topology only:
 
 ```bash
-dashi-repo-history extract ../../../.. --max-commits 100 -o /tmp/dashi-history.json
+dashi-repo-history extract ../../../.. --history-only --max-commits 300 -o /tmp/dashi-history.json
+```
+
+Earliest history (useful for the origin movie):
+
+```bash
+dashi-repo-history extract ../../../.. --history-only --first-commits 150 -o /tmp/dashi-early-history.json
+```
+
+Full semantic extraction is deliberately bounded first because the graph is large:
+
+```bash
+dashi-repo-history extract ../../../.. --max-commits 100 -o /tmp/dashi-semantic-history.json
 ```
 
 A more legible first semantic film:
