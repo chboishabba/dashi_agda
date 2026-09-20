@@ -14,7 +14,9 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using
+  (ℝ; 1ℝ; absℝ; _-ℝ_; _*ℝ_; _≤ℝ_)
+import Data.Rational.Base as Rational using (ℚ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as AddEmbed
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as BaseEmbed
@@ -27,12 +29,10 @@ import DASHI.Physics.YangMills.BalabanEmbeddedCanonicalRationalConstrainedFoldEx
 import DASHI.Physics.YangMills.BalabanCompactHaarMassExactContributionApproximationExact as Approx
 
 embedQ :
-  RingEmbed.RationalRealRingEmbedding → Data.Rational.Base.ℚ → ℝ
+  RingEmbed.RationalRealRingEmbedding → ℚ → ℝ
 embedQ embedding =
   BaseEmbed.embed
     (AddEmbed.base (RingEmbed.additive embedding))
-  where
-  import Data.Rational.Base
 
 record Equation171Gate4ContributionQuadrature
     {Scale Fine SlowField Component Functional : Set}
@@ -92,28 +92,28 @@ record Equation171Gate4ContributionQuadrature
         (fieldsAt cutoff slow)
         (sourceCellMass cutoff slow)
       ≡
-      DASHI.Foundations.RealAnalysisAxioms.1ℝ
+      1ℝ
 
     sourceCellOscillationBound :
       ∀ cutoff slow fine →
-      DASHI.Foundations.RealAnalysisAxioms.absℝ
+      absℝ
         (sourceCellIntegral cutoff slow fine
-          DASHI.Foundations.RealAnalysisAxioms.-ℝ
+          -ℝ
           (sourceCellMass cutoff slow fine
-            DASHI.Foundations.RealAnalysisAxioms.*ℝ
+            *ℝ
             sourceSample cutoff slow fine))
-      DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+      ≤ℝ
       (sourceCellMass cutoff slow fine
-        DASHI.Foundations.RealAnalysisAxioms.*ℝ
+        *ℝ
         oscillationModulus cutoff slow)
 
     gate4ContributionApproximationBound :
       ∀ cutoff slow fine →
-      DASHI.Foundations.RealAnalysisAxioms.absℝ
+      absℝ
         ((sourceCellMass cutoff slow fine
-            DASHI.Foundations.RealAnalysisAxioms.*ℝ
+            *ℝ
             sourceSample cutoff slow fine)
-          DASHI.Foundations.RealAnalysisAxioms.-ℝ
+          -ℝ
           embedQ embedding
             (Integral.selectedWith
               (T.sumData (PhysicalT.canonicalPhysicalTData construction))
@@ -125,9 +125,9 @@ record Equation171Gate4ContributionQuadrature
                 (T.oneFunctional
                   (PhysicalT.canonicalPhysicalTData construction)))
               slow fine))
-      DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+      ≤ℝ
       (sourceCellMass cutoff slow fine
-        DASHI.Foundations.RealAnalysisAxioms.*ℝ
+        *ℝ
         contributionApproximationModulus cutoff slow)
 
 open Equation171Gate4ContributionQuadrature public
@@ -241,10 +241,10 @@ equation171ToEmbeddedGate4ErrorBound :
         {Component = Component} {Functional = Functional}
         construction source embedding)
     cutoff slow →
-  DASHI.Foundations.RealAnalysisAxioms.absℝ
+  absℝ
     (Eq171.equation171ConstrainedIntegral source cutoff slow
       (Eq171.equation171ExponentialDensity source cutoff slow)
-      DASHI.Foundations.RealAnalysisAxioms.-ℝ
+      -ℝ
       embedQ embedding
         (T.localizedTOperation
           (PhysicalT.canonicalPhysicalTData construction)
@@ -253,15 +253,15 @@ equation171ToEmbeddedGate4ErrorBound :
           slow
           (T.oneFunctional
             (PhysicalT.canonicalPhysicalTData construction))))
-  DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+  ≤ℝ
   Approx.combinedModulus
     (asContributionApproximation dataSet cutoff slow)
 equation171ToEmbeddedGate4ErrorBound dataSet cutoff slow =
   subst
     (λ sourceValue →
-      DASHI.Foundations.RealAnalysisAxioms.absℝ
+      absℝ
         (sourceValue
-          DASHI.Foundations.RealAnalysisAxioms.-ℝ
+          -ℝ
           embedQ _
             (T.localizedTOperation
               (PhysicalT.canonicalPhysicalTData _)
@@ -270,17 +270,17 @@ equation171ToEmbeddedGate4ErrorBound dataSet cutoff slow =
               slow
               (T.oneFunctional
                 (PhysicalT.canonicalPhysicalTData _))))
-      DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+      ≤ℝ
       Approx.combinedModulus
         (asContributionApproximation dataSet cutoff slow))
     (sourceIntegralIsApproximationSource dataSet cutoff slow)
     (subst
       (λ executableValue →
-        DASHI.Foundations.RealAnalysisAxioms.absℝ
+        absℝ
           (Approx.sourceIntegral
             (asContributionApproximation dataSet cutoff slow)
-            DASHI.Foundations.RealAnalysisAxioms.-ℝ executableValue)
-        DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+            -ℝ executableValue)
+        ≤ℝ
         Approx.combinedModulus
           (asContributionApproximation dataSet cutoff slow))
       (executableSumIsEmbeddedGate4Mass dataSet cutoff slow)
