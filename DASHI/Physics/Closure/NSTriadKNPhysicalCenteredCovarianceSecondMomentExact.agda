@@ -136,7 +136,6 @@ record NonzeroPhysicalCenteredCovariancePair
   field
     weight : ℚ
     weightNonnegative : 0ℚ ≤ weight
-    sameOutput : Physical.k alpha ≡ Physical.k beta
     centeredNormsUnequal :
       integerCenteredNorm alpha ≡ integerCenteredNorm beta → ⊥
 
