@@ -25,11 +25,13 @@ module DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Rou
 --
 --   B1 R406 operator-factor layout = fixed four-stage R410 path replay;
 --   B2 selected surviving-term support membership + metric attachment;
---   B3 literal CMP116 fixed-Y rate split on the exact R406 tree coordinate;
---   B4 same-tree weighted-fibre/counting budget.
+--   B3/B4 SAME-OBJECT attachment of published CMP116 (1.26)--(1.29):
+--         source domain family = R406 localizedDomains,
+--         source d_k(Y) = support-graph tree distance,
+--         source fixed-Y shell = R406 commonYShell.
 --
--- R420 compiles these into A_Y and A_src, so an independent outer-amplitude
--- summability leaf is no longer part of the cut.
+-- R422 transports the published theorem to R420, which compiles A_Y/A_src;
+-- no independent fixed-Y localization or outer-amplitude theorem remains.
 --
 -- Downstream source-envelope / real physical-rate identification remains a
 -- separate same-object application seam and is intentionally not hidden here.
@@ -49,6 +51,7 @@ import DASHI.Physics.YangMills.BalabanCMP116Round406To415Exact as Replay
 import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphGeometryExact as GraphGeometry
 import DASHI.Physics.YangMills.BalabanCMP116Round406SourceRateSplitAmplitudeRound420Exact as RateSplit
 import DASHI.Physics.YangMills.BalabanCMP116Round406ExactR410ReplayRound421Exact as ExactReplay
+import DASHI.Physics.YangMills.BalabanCMP116Equation126129ToRound406Round422Exact as Source126129
 import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact as Preferred
 import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exact as R411
 import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R414
@@ -128,6 +131,37 @@ fromOperatorReplayAndSourceRateSplit {application = application}
   fromSourceRateSplit
     (ExactReplay.compileExactR410Replay application operatorReplay)
     rateSplit
+
+fromOperatorReplayAndPublished126129 :
+  ∀ {Measure TestObservable dataSet extension base}
+    {application : R406.SelectedCMP116TermwiseLocalization base} →
+  ExactReplay.LiteralRound406R410OperatorReplay
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application →
+  Source126129.Equation126129SelectedR406Attachment
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application →
+  LiteralRound406SupportGraphBSource
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application
+fromOperatorReplayAndPublished126129 {application = application}
+    operatorReplay sourceAttachment =
+  fromOperatorReplayAndSourceRateSplit
+    operatorReplay
+    (Source126129.compileLiteralRound406SourceRateSplit
+      application sourceAttachment)
 
 compilePreferredR415 :
   ∀ {Measure TestObservable dataSet extension base}
@@ -222,9 +256,13 @@ literalRound419SourceRateSplitCompilerLevel : ProofLevel
 literalRound419SourceRateSplitCompilerLevel =
   RateSplit.round420RateSplitFiniteSumCompilerLevel
 
+literalRound419Published126129TransportCompilerLevel : ProofLevel
+literalRound419Published126129TransportCompilerLevel =
+  Source126129.round422SourceTheoremTransportCompilerLevel
+
 literalRound419SupportGraphAmplitudeLevel : ProofLevel
 literalRound419SupportGraphAmplitudeLevel =
-  RateSplit.literalR406FixedYRateSplitAndWeightedFibreAttachmentLevel
+  Source126129.literalEquation126129SelectedR406SameObjectAttachmentLevel
 
 clayPromotion : Bool
 clayPromotion = false
