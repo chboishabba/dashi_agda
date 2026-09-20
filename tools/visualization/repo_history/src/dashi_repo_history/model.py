@@ -32,6 +32,7 @@ class Symbol:
     kind: str
     module: str
     scope: str | None
+    fingerprint: str | None
     span: SourceSpan
 
     @classmethod
@@ -43,6 +44,7 @@ class Symbol:
         module: str,
         span: SourceSpan,
         scope: str | None = None,
+        fingerprint: str | None = None,
     ) -> "Symbol":
         # Scope participates in semantic identity so local binders with the same
         # name in different declarations remain distinct nodes.
@@ -54,7 +56,7 @@ class Symbol:
                 "scope": scope,
             }
         )
-        return cls(symbol_id, label, kind, module, scope, span)
+        return cls(symbol_id, label, kind, module, scope, fingerprint, span)
 
 
 @dataclass(frozen=True)
