@@ -368,3 +368,6 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCrossGradientCovarianceExact
 
 -- B: unit-normalized live/lattice displacement same-object weld.
 import DASHI.Physics.Closure.NSTriadKNR571UnitNormalizedDisplacementWeldExact
+import DASHI.Physics.Closure.NSTriadKNR573HomochiralHeterochiralSplitExact
+import DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact
+import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact
