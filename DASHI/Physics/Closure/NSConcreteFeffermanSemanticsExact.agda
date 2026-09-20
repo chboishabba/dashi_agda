@@ -109,6 +109,11 @@ record FeffermanAnalyticKernel : Set₁ where
     SmoothForcingHistory :
       Canonical.ForcingHistory → Set
 
+    initialSpatialDerivative :
+      Axis →
+      Canonical.SpatialVectorField →
+      Canonical.R3Point → Canonical.R3Vector
+
     velocityTimeDerivative :
       Canonical.VelocityHistory →
       Canonical.Time → Canonical.R3Point → Canonical.R3Vector
@@ -260,15 +265,12 @@ DivergenceFreeSpatial K initial =
   BishopReal._≃_
     ( BishopReal._+_
       (axisComponent axisX
-        (velocitySpatialDerivative K axisX
-          (λ t → initial) BishopReal.0ℝ x))
+        (initialSpatialDerivative K axisX initial x))
       (BishopReal._+_
         (axisComponent axisY
-          (velocitySpatialDerivative K axisY
-            (λ t → initial) BishopReal.0ℝ x))
+          (initialSpatialDerivative K axisY initial x))
         (axisComponent axisZ
-          (velocitySpatialDerivative K axisZ
-            (λ t → initial) BishopReal.0ℝ x))))
+          (initialSpatialDerivative K axisZ initial x))))
     BishopReal.0ℝ
 
 DivergenceFreeHistory :
