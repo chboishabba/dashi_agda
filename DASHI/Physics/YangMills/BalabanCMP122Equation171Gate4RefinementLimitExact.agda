@@ -15,6 +15,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as RingEmbed
+import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact as PhysicalT
 import DASHI.Physics.YangMills.BalabanCMP122Equation171TOperationSemanticsExact as Eq171
 import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4QuadratureSliceExact as Slice
 
@@ -27,7 +28,7 @@ record Equation171Gate4RefinementLimit
   field
     constructionAt :
       Nat →
-      DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact.CanonicalRationalPhysicalTConstruction
+      PhysicalT.CanonicalRationalPhysicalTConstruction
         Scale Fine SlowField Component Functional
 
     sliceAt : ∀ refinement →
