@@ -63,6 +63,7 @@ record MassExactTaggedPartition
     sampleValue : Cell → ℝ
 
     modulus : ℝ
+    modulusNonnegative : 0ℝ ≤ℝ modulus
 
     cellOscillationBound : ∀ cell →
       absℝ
