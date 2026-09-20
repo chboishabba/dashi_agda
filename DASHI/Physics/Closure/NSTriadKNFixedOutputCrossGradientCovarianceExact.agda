@@ -123,8 +123,11 @@ incidenceCenteredSquareIsOutputMinusFourCross E I tau =
         (cong
           (λ outputSquare →
             outputSquare - four * crossDot E p q)
-          (trans output resonance))
-        refl))
+          (sym output))
+        (cong
+          (λ outputSquare →
+            outputSquare - four * crossDot E p q)
+          resonance)))
 
 fixedOutputCenteredDifferenceIsNegativeFourCrossDifference :
   (E : C3.IntegerEmbedding F) →
