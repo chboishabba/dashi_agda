@@ -76,6 +76,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionPai
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceCriticalRegionLiveExact as BRegionLive
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact as BRegionPay
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionToR432Exact as BRegionR432
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyExact as BRegionFamily
 
 ------------------------------------------------------------------------
 -- A
@@ -344,6 +345,23 @@ bD1b2LiveCriticalRegionToR432FixedOutputCompilerClosed =
 bD1b2GlobalR406SameObjectWeldFromRegionPaymentsClosed : Bool
 bD1b2GlobalR406SameObjectWeldFromRegionPaymentsClosed =
   BRegionR432.liveCriticalRegionToR432GlobalR406SameObjectWeldClosedHere
+
+
+bD1b2NativeR236UniformOutputFamilySummationClosed : Bool
+bD1b2NativeR236UniformOutputFamilySummationClosed =
+  BRegionFamily.nativeR236UniformFamilySummationClosed
+
+bD1b2NativeR236OutputSummationAddsCardinalityFactor : Bool
+bD1b2NativeR236OutputSummationAddsCardinalityFactor =
+  BRegionFamily.nativeR236OutputSummationAddsCardinalityFactor
+
+bD1b2NativeR236GlobalEDRoutingUsesExistingR469R219 : Bool
+bD1b2NativeR236GlobalEDRoutingUsesExistingR469R219 =
+  BRegionFamily.nativeR236GlobalEDRoutingUsesExistingR469R219
+
+bD1b2NativeR236UniformFamilyProducerInhabited : Bool
+bD1b2NativeR236UniformFamilyProducerInhabited =
+  BRegionFamily.nativeR236UniformFamilyProducerInhabitedHere
 
 bD1b2DeepOnlySignedRegionPaymentsClosed : Bool
 bD1b2DeepOnlySignedRegionPaymentsClosed = false
