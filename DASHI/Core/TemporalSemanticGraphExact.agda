@@ -35,6 +35,7 @@ data EdgeKind : Set where
   bindsEdge : EdgeKind
   instantiatesEdge : EdgeKind
   rewritesWithEdge : EdgeKind
+  patternMatchesEdge : EdgeKind
 
 record SymbolNode : Set where
   constructor symbolNode
