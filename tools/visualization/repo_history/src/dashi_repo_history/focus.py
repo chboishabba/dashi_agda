@@ -151,7 +151,17 @@ def focus_symbol(
         if edge["source"] in node_ids and edge["target"] in node_ids:
             edge_ids.add(edge["relation_id"])
 
-    ordered_depths = sorted(layer_map)
+    ordered_depths = [0]
+    ordered_depths.extend(
+        depth
+        for depth in range(-1, -upstream_depth - 1, -1)
+        if depth in layer_map
+    )
+    ordered_depths.extend(
+        depth
+        for depth in range(1, downstream_depth + 1)
+        if depth in layer_map
+    )
     layers = tuple(
         tuple(sorted(layer_map[depth]))
         for depth in ordered_depths
