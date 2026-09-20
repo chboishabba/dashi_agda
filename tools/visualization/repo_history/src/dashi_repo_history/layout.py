@@ -30,6 +30,12 @@ class PersistentLayout:
         self.config = config or LayoutConfig()
         self.positions: dict[str, Point] = {}
 
+    def transfer_identity(self, old_id: str, new_id: str) -> None:
+        """Seed a supported refactor successor at the predecessor's position."""
+
+        if old_id in self.positions and new_id not in self.positions:
+            self.positions[new_id] = self.positions[old_id]
+
     def solve(
         self,
         nodes: Iterable[str],
