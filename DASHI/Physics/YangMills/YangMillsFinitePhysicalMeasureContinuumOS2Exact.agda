@@ -5,7 +5,7 @@ module DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureContinuumOS2Exact w
 -- FINITE PHYSICAL YM FAMILY -> POSITIVE NORMALIZED CONTINUUM MEASURE + OS2
 ------------------------------------------------------------------------
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
@@ -40,8 +40,7 @@ record FinitePhysicalMeasureContinuumOS2Inputs
       ∀ cutoff
         (testFamily :
           Gram.PhysicalOSFiniteTestFamily (Configuration → ℝ) ℝ) →
-      DASHI.Foundations.RealAnalysisAxioms.0ℝ
-      DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+      0ℝ ≤ℝ
       Gram.physicalReflectedGramQuadraticForm
         (OS2.operations observableAlgebra)
         (λ observable →
