@@ -987,3 +987,79 @@ f x = h
         and unresolved["reference"] == "y"
         for unresolved in graph.unresolved_references
     )
+
+
+def test_higher_order_binder_head_is_call_and_receives_argument_flow():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+apply : (Nat -> Nat) -> Nat -> Nat
+apply g x = g x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    apply_node = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "apply"
+    )
+    g = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "g"
+    )
+    x = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    )
+
+    assert any(
+        edge.source == g.symbol_id
+        and edge.target == apply_node.symbol_id
+        and edge.kind == "calls"
+        for edge in graph.edges.values()
+    )
+    assert any(
+        edge.source == x.symbol_id
+        and edge.target == g.symbol_id
+        and edge.kind == "argument-to"
+        for edge in graph.edges.values()
+    )
+
+
+def test_non_applied_callable_binder_remains_value_flow():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+keep : (Nat -> Nat) -> (Nat -> Nat)
+keep g = g
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    keep = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "keep"
+    )
+    g = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "g"
+    )
+
+    assert any(
+        edge.source == g.symbol_id
+        and edge.target == keep.symbol_id
+        and edge.kind == "value-flows"
+        for edge in graph.edges.values()
+    )
+    assert not any(
+        edge.source == g.symbol_id
+        and edge.target == keep.symbol_id
+        and edge.kind == "calls"
+        for edge in graph.edges.values()
+    )
