@@ -64,3 +64,20 @@ reviewedAliasStillDoesNotRewriteSourceIdentity :
 reviewedAliasStillDoesNotRewriteSourceIdentity =
   Compiler.reviewedAliasRewritesSourceDocumentIdentityIsFalse
     Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+
+
+rejectedIdentityStillCannotCreateAlias :
+  Compiler.rejectedIdentityReviewMayCreateDocumentAlias
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+    ≡ false
+rejectedIdentityStillCannotCreateAlias =
+  Compiler.rejectedIdentityReviewMayCreateDocumentAliasIsFalse
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+
+reviewedAliasStillBindsExactOalcVersion :
+  Compiler.reviewedAliasBindsExactOalcVersion
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+    ≡ true
+reviewedAliasStillBindsExactOalcVersion =
+  Compiler.reviewedAliasBindsExactOalcVersionIsTrue
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
