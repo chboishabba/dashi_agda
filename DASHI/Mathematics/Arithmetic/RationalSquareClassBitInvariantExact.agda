@@ -17,6 +17,7 @@ module DASHI.Mathematics.Arithmetic.RationalSquareClassBitInvariantExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (_*_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Arithmetic.EllipticCurveTwoTorsionAndBadPrimeExact as Torsion
