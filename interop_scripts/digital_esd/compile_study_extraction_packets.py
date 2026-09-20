@@ -136,6 +136,13 @@ def main()->int:
         record=json.loads(record_path.read_text(encoding="utf-8"))
         if record.get("candidate_only") is not True or record.get("semantic_promotion") is not False:
             raise ValueError(f"{unit_ref}: parser authority boundary missing")
+        expected_digest=str(source["revision_ref"]).removeprefix("fulltext-sha256:")
+        observed_digest=str(m.get("source_text_sha256") or "").removeprefix("sha256:")
+        if expected_digest != observed_digest:
+            raise ValueError(
+                f"{unit_ref}: parser text digest does not match verified full-text revision "
+                f"expected={expected_digest} observed={observed_digest}"
+            )
 
         base={
           "source_identity_reference":source["digital_esd_source_identity_reference"],
