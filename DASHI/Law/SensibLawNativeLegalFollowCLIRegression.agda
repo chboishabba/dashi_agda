@@ -51,3 +51,12 @@ jsonSemanticCommandTransportRemainsFalse :
 jsonSemanticCommandTransportRemainsFalse =
   CLI.jsonIsSemanticCommandTransportIsFalse
     CLI.canonicalNativeLegalFollowCliBoundary
+
+
+contractsLandscapeOrchestrationRemainsNative :
+  CLI.contractsLandscapeOrchestrationIsNativeRust
+    CLI.canonicalNativeLegalFollowCliBoundary
+    ≡ true
+contractsLandscapeOrchestrationRemainsNative =
+  CLI.contractsLandscapeOrchestrationIsNativeRustIsTrue
+    CLI.canonicalNativeLegalFollowCliBoundary
