@@ -220,5 +220,107 @@ def compile_merge_episode_program(
     return commands
 
 
+def compile_branch_episode_program(
+    timeline: dict[str, Any],
+    *,
+    episode_index: int,
+) -> list[SceneCommand]:
+    """Compile fork -> two real branch paths -> merge convergence."""
+
+    episodes = timeline.get("branch_episodes", [])
+    if not episodes:
+        return []
+    episode = episodes[episode_index]
+
+    snapshots = {
+        snapshot["commit"]: snapshot
+        for snapshot in timeline.get("snapshots", [])
+    }
+    commit_order = {
+        commit["commit"]: index
+        for index, commit in enumerate(timeline.get("commits", []))
+    }
+
+    fork = episode["fork_base"]
+    merge = episode["merge_commit"]
+    left_path = list(episode["left_path"])
+    right_path = list(episode["right_path"])
+
+    required = set(left_path) | set(right_path) | {fork, merge}
+    if not required.issubset(snapshots):
+        return []
+
+    commands: list[SceneCommand] = [
+        SceneCommand("show-fork-snapshot", {"commit": fork}),
+        SceneCommand(
+            "split-branches",
+            {
+                "fork": fork,
+                "left_tip": episode["left_tip"],
+                "right_tip": episode["right_tip"],
+            },
+        ),
+    ]
+
+    events: list[tuple[int, str, str, str]] = []
+    for side, path in (("left", left_path), ("right", right_path)):
+        for parent, child in zip(path, path[1:]):
+            events.append(
+                (
+                    commit_order.get(child, 10**12),
+                    side,
+                    parent,
+                    child,
+                )
+            )
+    events.sort(key=lambda item: (item[0], item[1], item[3]))
+
+    for _order, side, parent, child in events:
+        delta = snapshots[child].get("parent_deltas", {}).get(parent)
+        if delta is None:
+            return []
+        commands.append(
+            SceneCommand(
+                "advance-branch",
+                {
+                    "side": side,
+                    "parent": parent,
+                    "commit": child,
+                    "delta": delta,
+                },
+            )
+        )
+
+    for parent in (episode["left_tip"], episode["right_tip"]):
+        delta = snapshots[merge].get("parent_deltas", {}).get(parent)
+        if delta is None:
+            return []
+        commands.append(
+            SceneCommand(
+                "show-parent-delta",
+                {
+                    "parent": parent,
+                    "merge": merge,
+                    "delta": delta,
+                },
+            )
+        )
+
+    commands.extend(
+        [
+            SceneCommand(
+                "converge-parents",
+                {
+                    "left": episode["left_tip"],
+                    "right": episode["right_tip"],
+                    "merge": merge,
+                },
+            ),
+            SceneCommand("show-snapshot", {"commit": merge}),
+        ]
+    )
+    return commands
+
+
 def serialize_program(commands: Iterable[SceneCommand]) -> list[dict[str, Any]]:
     return [command.to_dict() for command in commands]
