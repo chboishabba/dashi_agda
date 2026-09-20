@@ -13,6 +13,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalPrefixAgreementExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Empty using (⊥-elim)
+open import Data.Product using (_×_; _,_; proj₁)
 import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -44,11 +46,9 @@ plainPrefixBeforeHead
     (Local.headed prefixState prefixSymbol ∷ prefix)
     suffix
     (WF.headHere restPlain) =
-  Data.Empty.⊥-elim
+  ⊥-elim
     (Reconstruct.plainCellsCannotContainLaterHead
       prefix suffix restPlain)
-  where
-    open import Data.Empty using ()
 
 plainPrefixFromAppend :
   ∀ {State Symbol : Set}
@@ -85,11 +85,11 @@ afterExtractedPrefixIsPlain :
       (Center.centeredOccurrenceFromGlobalScan scan))
 afterExtractedPrefixIsPlain scan afterUnique
     with Center.configured extracted
-... | Local.realizes-left =
+... | Local.realizes-left {b = written} {rightSymbol = rightSymbol} =
   plainPrefixBeforeHead
     (Center.afterPrefix extracted)
-    (Local.plain _
-      ∷ Local.plain _
+    (Local.plain written
+      ∷ Local.plain rightSymbol
       ∷ Center.afterSuffix extracted)
     (transportUnique
       (Center.afterDecomposition extracted)
@@ -97,7 +97,7 @@ afterExtractedPrefixIsPlain scan afterUnique
   where
     extracted = Center.centeredOccurrenceFromGlobalScan scan
 ... | Local.realizes-stay =
-  Data.Product.proj₁
+  proj₁
     (Reconstruct.plainContextsAroundCenteredHead
       (Center.afterPrefix extracted)
       (Center.afterSuffix extracted)
@@ -105,16 +105,15 @@ afterExtractedPrefixIsPlain scan afterUnique
         (Center.afterDecomposition extracted)
         afterUnique))
   where
-    open import Data.Product using ()
     extracted = Center.centeredOccurrenceFromGlobalScan scan
-... | Local.realizes-right =
+... | Local.realizes-right {b = written} {leftSymbol = leftSymbol} =
   plainPrefixFromAppend
     (Center.afterPrefix extracted)
-    (Local.plain _ ∷ Local.plain _ ∷ [])
+    (Local.plain leftSymbol ∷ Local.plain written ∷ [])
     (plainPrefixBeforeHead
       (Local.append
         (Center.afterPrefix extracted)
-        (Local.plain _ ∷ Local.plain _ ∷ []))
+        (Local.plain leftSymbol ∷ Local.plain written ∷ []))
       (Center.afterSuffix extracted)
       (transportUnique
         (Center.afterDecomposition extracted)
@@ -210,7 +209,6 @@ prefixAgreementFromGlobalLegality scan beforeUnique afterUnique
       (Center.afterDecomposition extracted)
       (Whole.everyWindowLegal scan))
   where
-    open import Data.Product using (_,_)
     extracted = Center.centeredOccurrenceFromGlobalScan scan
 
 record ConcreteTapeGlobalPrefixAgreementBoundary : Set where
