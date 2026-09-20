@@ -75,6 +75,23 @@ torsionFiniteProjectionAgreesWithSeed :
   ≡ Seed.finiteKummerMap code
 torsionFiniteProjectionAgreesWithSeed code = refl
 
+
+pointMinusOneOpenDomain :
+  Open.NonexceptionalKummerDomain Torsion.pointMinusOne
+pointMinusOneOpenDomain = record
+  { Open.xNonzero =
+      ≢-nonZero (λ ())
+  ; Open.xMinusOneNonzero =
+      ≢-nonZero (λ ())
+  }
+
+pointMinusOneOrdinaryKummer :
+  Open.rationalKummerRepresentative
+    Torsion.pointMinusOne
+    pointMinusOneOpenDomain
+  ≡ torsionKummerRepresentative Torsion.pointMinusOneCode
+pointMinusOneOrdinaryKummer = refl
+
 record LiteralTorsionKummerDictionaryEntry
     (code : Torsion.TwoTorsionCode) : Set where
   field
@@ -113,6 +130,7 @@ record EllipticRationalTwoTorsionKummerBoundary : Set where
     zeroSpecialValuePaid : Bool
     oneSpecialValuePaid : Bool
     minusOneLiteralValuePaid : Bool
+    minusOneUsesOrdinaryKummerFormulaPaid : Bool
     literalTwoTorsionKummerDictionaryPaid : Bool
     finiteSeedDictionaryCompatibilityPaid : Bool
     squareClassProjectionDerivedArithmeticallyPaid : Bool
@@ -124,4 +142,4 @@ canonicalEllipticRationalTwoTorsionKummerBoundary :
   EllipticRationalTwoTorsionKummerBoundary
 canonicalEllipticRationalTwoTorsionKummerBoundary =
   elliptic-rational-two-torsion-kummer-boundary
-    true true true true true true false false false false
+    true true true true true true true false false false false
