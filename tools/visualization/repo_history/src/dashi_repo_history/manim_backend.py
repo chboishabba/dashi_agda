@@ -100,6 +100,44 @@ def _snapshot_maps(data: dict[str, Any]):
     return commits, snapshots
 
 
+def _first_parent_lineage(
+    data: dict[str, Any],
+    *,
+    target_commit: str | None = None,
+) -> list[dict[str, Any]]:
+    commits, snapshots = _snapshot_maps(data)
+    if not snapshots:
+        return []
+
+    if target_commit is None:
+        ordered = [
+            commit["commit"]
+            for commit in data.get("commits", [])
+            if commit["commit"] in snapshots
+        ]
+        if not ordered:
+            return []
+        target_commit = ordered[-1]
+
+    lineage: list[str] = []
+    seen: set[str] = set()
+    current = target_commit
+    while current in commits and current in snapshots and current not in seen:
+        seen.add(current)
+        lineage.append(current)
+        parents = [
+            parent
+            for parent in commits[current].get("parents", [])
+            if parent in snapshots
+        ]
+        if not parents:
+            break
+        current = parents[0]
+
+    lineage.reverse()
+    return [snapshots[sha] for sha in lineage]
+
+
 class HistoryGraphView:
     def __init__(self, commits: list[dict[str, Any]]) -> None:
         self.commits = commits
@@ -298,9 +336,13 @@ class SemanticSnapshotScene(MovingCameraScene):
             return
 
         data = json.loads(Path(path).read_text(encoding="utf-8"))
-        snapshots = data.get("snapshots", [])
+        target_commit = os.environ.get("DASHI_REPO_TARGET_COMMIT")
+        snapshots = _first_parent_lineage(
+            data,
+            target_commit=target_commit,
+        )
         if not snapshots:
-            self.add(Text("No semantic snapshots", font_size=28))
+            self.add(Text("No semantic lineage", font_size=28))
             return
 
         snapshot = snapshots[snapshot_index]
