@@ -29,7 +29,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _+ℝ_; _*ℝ_; _-ℝ_; absℝ; _≤ℝ_;
-   ≤ℝ-trans; absMul; mulMonotoneNonnegative)
+   ≤ℝ-refl; ≤ℝ-trans; absMul; mulMonotoneNonnegative; subMulDistributes)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCMP119FactorizedDensityApproximationExact as Approx
@@ -107,7 +107,7 @@ expectationDifferencePointwise approximation refinement scale observable slow =
       ≤ℝ
       Approx.densityErrorBudget approximation refinement scale slow
         *ℝ absℝ (observable slow))
-    (DASHI.Foundations.RealAnalysisAxioms.subMulDistributes
+    (subMulDistributes
       (Approx.densitySource approximation scale slow)
       (Approx.densityApproximation approximation refinement scale slow)
       (observable slow))
@@ -122,7 +122,7 @@ expectationDifferencePointwise approximation refinement scale observable slow =
         (Product.absNonnegative densityDifference)
         densityBound
         (Product.absNonnegative (observable slow))
-        (DASHI.Foundations.RealAnalysisAxioms.≤ℝ-refl)))
+        (≤ℝ-refl)))
 
 finiteExpectationDifferenceBound :
   ∀ {SlowField Sequence Component Step}
