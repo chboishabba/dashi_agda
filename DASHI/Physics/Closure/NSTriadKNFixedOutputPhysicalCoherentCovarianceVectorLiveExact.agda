@@ -274,13 +274,14 @@ module LiveVector
     ≡ C3.complex3Negate (D1a.variableDecayCell rho S velocity tau)
   weightedCellIsNegativeDecayCell tau =
     trans
-      (sym
-        (cong C3.complex3Negate
-          (Pair.variableDecayCellAsRealScale rho S velocity tau)))
+      (sym negateInvolutive)
       (trans
         (cong C3.complex3Negate
-          (negativeRealScale (rate tau) (value tau)))
-        negateInvolutive)
+          (sym (negativeRealScale (rate tau) (value tau))))
+        (cong C3.complex3Negate
+          (sym
+            (Pair.variableDecayCellAsRealScale
+              rho S velocity tau))))
     where
     negateInvolutive :
       C3.complex3Negate
