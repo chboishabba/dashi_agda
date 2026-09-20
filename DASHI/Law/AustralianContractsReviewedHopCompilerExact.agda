@@ -11,6 +11,7 @@ open import Data.Maybe using (Maybe; just; nothing)
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
 import DASHI.Law.AustralianContractsLandscapeControllerExact as Landscape
 import DASHI.Law.WaltonsReviewedPropositionPaymentExact as WaltonsReview
+import DASHI.Law.MannPatersonUnseenMatterExact as Mann
 import DASHI.Law.SensibLawCitationUsePropositionExact as CitationUse
 import DASHI.Law.SensibLawOALCLegalFollowAttributionSnowballExact as OALC
 
@@ -72,16 +73,75 @@ record ReviewedDocumentAlias : Set where
 
 open ReviewedDocumentAlias public
 
+data ContractPropositionDisposition : Set where
+  propositionSupports : ContractPropositionDisposition
+  propositionContests : ContractPropositionDisposition
+  propositionContextOnly : ContractPropositionDisposition
+
+record ReviewedContractPropositionReceipt : Set where
+  constructor reviewedContractPropositionReceipt
+  field
+    reviewReference : String
+    authorityReference : String
+    targetReference : String
+    propositionReference : String
+    sourceRevisionReference : String
+    spanReference : String
+    disposition : ContractPropositionDisposition
+    reviewerReference : String
+    reviewerEvidenceReferences : List String
+    evidenceCoordinatePaid : Bool
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+    createsCurrentLawConclusion : Bool
+    createsCurrentLawConclusionIsFalse :
+      createsCurrentLawConclusion ≡ false
+
+open ReviewedContractPropositionReceipt public
+
+waltonsDisposition :
+  WaltonsReview.PropositionEvidenceDisposition →
+  ContractPropositionDisposition
+waltonsDisposition WaltonsReview.supports = propositionSupports
+waltonsDisposition WaltonsReview.contests = propositionContests
+waltonsDisposition WaltonsReview.contextOnly = propositionContextOnly
+
+mannRepudiationReviewedPropositionFixture :
+  ReviewedContractPropositionReceipt
+mannRepudiationReviewedPropositionFixture =
+  reviewedContractPropositionReceipt
+    "review:mann:repudiation"
+    "matter:au:hca:2019:32"
+    "doctrine:au:contract:repudiation-termination"
+    "prop:mann:repudiation-termination"
+    "source:mann:revision"
+    "case:mann#paragraph-1"
+    propositionSupports
+    "reviewer:fixture"
+    ("evidence:mann:fixture" ∷ [])
+    true
+    true refl
+    false refl
+    false refl
+
 data ReviewedHopCompilationDisposition : Set where
   appendCandidateDelta : ReviewedHopCompilationDisposition
   retainReviewedResidual : ReviewedHopCompilationDisposition
 
+contractPropositionDisposition :
+  ContractPropositionDisposition →
+  ReviewedHopCompilationDisposition
+contractPropositionDisposition propositionSupports = appendCandidateDelta
+contractPropositionDisposition propositionContests = retainReviewedResidual
+contractPropositionDisposition propositionContextOnly = retainReviewedResidual
+
 propositionDisposition :
   WaltonsReview.PropositionEvidenceDisposition →
   ReviewedHopCompilationDisposition
-propositionDisposition WaltonsReview.supports = appendCandidateDelta
-propositionDisposition WaltonsReview.contests = retainReviewedResidual
-propositionDisposition WaltonsReview.contextOnly = retainReviewedResidual
+propositionDisposition disposition =
+  contractPropositionDisposition (waltonsDisposition disposition)
 
 supportsMayAppendCandidateDelta :
   propositionDisposition WaltonsReview.supports ≡ appendCandidateDelta
@@ -215,6 +275,14 @@ record AustralianContractsReviewedHopCompilerBoundary : Set where
     rawOalcReceiptMayAppendAuthorityNodeIsFalse :
       rawOalcReceiptMayAppendAuthorityNode ≡ false
 
+    genericReviewedPropositionCompilerIsDoctrineIndependent : Bool
+    genericReviewedPropositionCompilerIsDoctrineIndependentIsTrue :
+      genericReviewedPropositionCompilerIsDoctrineIndependent ≡ true
+
+    waltonsUsesGenericReviewedPropositionCompiler : Bool
+    waltonsUsesGenericReviewedPropositionCompilerIsTrue :
+      waltonsUsesGenericReviewedPropositionCompiler ≡ true
+
     reviewedSupportMayAppendSupportsEdge : Bool
     reviewedSupportMayAppendSupportsEdgeIsTrue :
       reviewedSupportMayAppendSupportsEdge ≡ true
@@ -273,6 +341,8 @@ canonicalAustralianContractsReviewedHopCompilerBoundary =
   australianContractsReviewedHopCompilerBoundary
     true refl
     false refl
+    true refl
+    true refl
     true refl
     false refl
     false refl
