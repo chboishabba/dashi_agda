@@ -24,6 +24,14 @@ import DASHI.Physics.Closure.NSTriadKNR571PreferredOneSidedSecondMomentExact as 
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalWeightedSecondMomentEndgameExact as BEnd
 import DASHI.Physics.Closure.NSWholeSpaceSignedLebesgueEndgameExact as AEnd
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDNativeAnyOneCutExact as CD
+import DASHI.Physics.Closure.NSTriadKNR571PhysicalSecondMomentSummationExact as BSum
+import DASHI.Physics.Closure.NSTriadKNR571SecondMomentToR568BridgeExact as BR568
+import DASHI.Physics.Closure.NSWholeSpaceCompensatedMajorantLowHighGlueExact as AGlue
+import DASHI.Physics.Closure.NSWholeSpacePhysicalCompensatedFieldCompilerExact as AField
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCovarianceMovingNativeExact as Cov
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedOptionCCompactCandidateAdapterExact as CAdapter
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedOptionDPeriodicCandidateAdapterExact as DAdapter
+import DASHI.Physics.Closure.NSConcreteReleasedCandidateAdaptersExact as Candidate
 
 ------------------------------------------------------------------------
 -- A
@@ -39,6 +47,20 @@ aLebesgueSignedAggregationCompilerClosed =
 aLowFrequencyCompensationOrderingClosed : Bool
 aLowFrequencyCompensationOrderingClosed =
   AEnd.wholeSpaceLowFrequencyCompensationBeforeIntegrationClosed
+
+aLowHighIntegrabilityGlueClosed : Bool
+aLowHighIntegrabilityGlueClosed =
+  AGlue.lowHighIntegrabilityGlueClosed
+
+aCompensatedFieldFromLowHighCompilerClosed : Bool
+aCompensatedFieldFromLowHighCompilerClosed =
+  AField.lowHighPiecesCompileExactCompensatedField
+
+aLowPhysicalMajorantProducerClosed : Bool
+aLowPhysicalMajorantProducerClosed = false
+
+aHighPhysicalMajorantProducerClosed : Bool
+aHighPhysicalMajorantProducerClosed = false
 
 aPhysicalCompensatedMajorantProducerClosed : Bool
 aPhysicalCompensatedMajorantProducerClosed = false
@@ -66,6 +88,20 @@ bThreeEnergyCoefficientClosed : Bool
 bThreeEnergyCoefficientClosed =
   BSharp.periodicCoefficientThreeEnergyProved
 
+bSamplewiseM2SummationCompilerClosed : Bool
+bSamplewiseM2SummationCompilerClosed =
+  BSum.samplewisePhysicalM2PaymentSuffices
+
+bM2ToR568CompilerClosed : Bool
+bM2ToR568CompilerClosed =
+  BR568.r571PhysicalM2ToR568CompilerClosed
+
+bForcingSquareBelowLiteralM2Closed : Bool
+bForcingSquareBelowLiteralM2Closed = false
+
+bCutoffUniformIntegratedM2PaymentClosed : Bool
+bCutoffUniformIntegratedM2PaymentClosed = false
+
 bPhysicalWeightedSecondMomentPaymentClosed : Bool
 bPhysicalWeightedSecondMomentPaymentClosed = false
 
@@ -92,6 +128,32 @@ cdEitherNativeTheoremSuffices : Bool
 cdEitherNativeTheoremSuffices =
   CD.eitherReleasedAlternativeSuffices
 
+cdReleasedCovarianceMovingBodyPorted : Bool
+cdReleasedCovarianceMovingBodyPorted =
+  Cov.releasedCovarianceMovingBodyPorted
+
+cCompactCandidateComparatorAdapterClosed : Bool
+cCompactCandidateComparatorAdapterClosed =
+  CAdapter.releasedOptionCCompactCandidateAdapterBodyPorted
+
+dPeriodicCandidateComparatorAdapterClosed : Bool
+dPeriodicCandidateComparatorAdapterClosed =
+  DAdapter.releasedOptionDPeriodicCandidateAdapterBodyPorted
+
+cCandidateFamilyToLiteralCompilerClosed : Bool
+cCandidateFamilyToLiteralCompilerClosed =
+  Candidate.cComparatorWrapperRemovedFromFrontier
+
+dCandidateFamilyToLiteralCompilerClosed : Bool
+dCandidateFamilyToLiteralCompilerClosed =
+  Candidate.dComparatorWrapperRemovedFromFrontier
+
+cActualCompactCandidateFamilyReconstructed : Bool
+cActualCompactCandidateFamilyReconstructed = false
+
+dActualPeriodicCandidateFamilyReconstructed : Bool
+dActualPeriodicCandidateFamilyReconstructed = false
+
 cReleasedAnalyticProofReconstructedInAgda : Bool
 cReleasedAnalyticProofReconstructedInAgda = false
 
@@ -111,9 +173,25 @@ externalReceiptPromotedToAgdaProof = false
 aDerivedFromB : Bool
 aDerivedFromB = false
 
+aLowHighIntegrabilityGlueClosedIsTrue :
+  aLowHighIntegrabilityGlueClosed ≡ true
+aLowHighIntegrabilityGlueClosedIsTrue = refl
+
 bThreeEnergyCoefficientClosedIsTrue :
   bThreeEnergyCoefficientClosed ≡ true
 bThreeEnergyCoefficientClosedIsTrue = refl
+
+bM2ToR568CompilerClosedIsTrue :
+  bM2ToR568CompilerClosed ≡ true
+bM2ToR568CompilerClosedIsTrue = refl
+
+cCompactCandidateComparatorAdapterClosedIsTrue :
+  cCompactCandidateComparatorAdapterClosed ≡ true
+cCompactCandidateComparatorAdapterClosedIsTrue = refl
+
+dPeriodicCandidateComparatorAdapterClosedIsTrue :
+  dPeriodicCandidateComparatorAdapterClosed ≡ true
+dPeriodicCandidateComparatorAdapterClosedIsTrue = refl
 
 cdEitherNativeTheoremSufficesIsTrue :
   cdEitherNativeTheoremSuffices ≡ true
