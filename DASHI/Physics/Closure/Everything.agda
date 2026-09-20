@@ -362,3 +362,6 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact
 
 -- Canonical centered covariance recut: common output Laplacian cancels before observation.
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredToInputLaplacianCovarianceExact
+
+-- B: exact cross-gradient normal form for the signed fixed-output covariance.
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCrossGradientCovarianceExact
