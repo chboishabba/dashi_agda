@@ -294,3 +294,6 @@ import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionToContinuumExact
 import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionSingleLimitExact
 import DASHI.Physics.Closure.NSWholeSpaceCoherentVectorQuadratureCompletionExact
 import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionBoundaryDefectExact
+
+-- Literal A/B/C/D terminal theorem target for native kernel checking.
+import DASHI.Physics.Closure.NSLiteralClayABCDRunTargetExact
