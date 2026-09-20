@@ -24,7 +24,8 @@ module DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Rou
 -- Thus the physical frontier is reduced to:
 --
 --   B1 R406 operator-factor layout = fixed four-stage R410 path replay;
---   B2 selected surviving-term support membership + metric attachment;
+--   B2 each retained common-Y fibre is nonempty; membership is selected-survival;
+--      surviving terms carry both selected marks and the source/support metrics;
 --   B3/B4 SAME-OBJECT attachment of published CMP116 (1.26)--(1.29):
 --         source domain family = R406 localizedDomains,
 --         source d_k(Y) = support-graph tree distance,
@@ -52,6 +53,7 @@ import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphGeometryExact as
 import DASHI.Physics.YangMills.BalabanCMP116Round406SourceRateSplitAmplitudeRound420Exact as RateSplit
 import DASHI.Physics.YangMills.BalabanCMP116Round406ExactR410ReplayRound421Exact as ExactReplay
 import DASHI.Physics.YangMills.BalabanCMP116Equation126129ToRound406Round422Exact as Source126129
+import DASHI.Physics.YangMills.BalabanCMP116Round406NonemptySelectedFibreRound423Exact as NonemptyFibre
 import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact as Preferred
 import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exact as R411
 import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R414
@@ -163,6 +165,36 @@ fromOperatorReplayAndPublished126129 {application = application}
     (Source126129.compileLiteralRound406SourceRateSplit
       application sourceAttachment)
 
+fromOperatorReplayAndPublished126129Nonempty :
+  ∀ {Measure TestObservable dataSet extension base}
+    {application : R406.SelectedCMP116TermwiseLocalization base} →
+  ExactReplay.LiteralRound406R410OperatorReplay
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application →
+  NonemptyFibre.Equation126129SelectedR406NonemptyAttachment
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application →
+  LiteralRound406SupportGraphBSource
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application
+fromOperatorReplayAndPublished126129Nonempty {application = application}
+    operatorReplay attachment =
+  fromOperatorReplayAndPublished126129
+    operatorReplay
+    (NonemptyFibre.asRound422Attachment application attachment)
+
 compilePreferredR415 :
   ∀ {Measure TestObservable dataSet extension base}
     {application : R406.SelectedCMP116TermwiseLocalization base} →
@@ -259,6 +291,10 @@ literalRound419SourceRateSplitCompilerLevel =
 literalRound419Published126129TransportCompilerLevel : ProofLevel
 literalRound419Published126129TransportCompilerLevel =
   Source126129.round422SourceTheoremTransportCompilerLevel
+
+literalRound419RepresentativeChoiceCompilerLevel : ProofLevel
+literalRound419RepresentativeChoiceCompilerLevel =
+  NonemptyFibre.round423RepresentativeChoiceCompilerLevel
 
 literalRound419SupportGraphAmplitudeLevel : ProofLevel
 literalRound419SupportGraphAmplitudeLevel =
