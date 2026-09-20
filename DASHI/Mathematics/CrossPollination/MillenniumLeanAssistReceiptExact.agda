@@ -76,6 +76,9 @@ record MillenniumLeanAssistReceipt : Set where
     bsdCMInertCharacterSumSource :
       String
 
+    bsdLocalSquareClassSource :
+      String
+
     hodgeCP1QuotientSourcePresent :
       Bool
 
@@ -112,6 +115,12 @@ record MillenniumLeanAssistReceipt : Set where
     bsdInertCharacterSumZeroSourcePresent :
       Bool
 
+    bsdLocalQpSquareClassSourcePresent :
+      Bool
+
+    bsdRationalToLocalKummerSourcePresent :
+      Bool
+
     sourcesRootedInSynthesis :
       Bool
 
@@ -133,7 +142,7 @@ currentMillenniumLeanAssistReceipt =
     "chboishabba/dashi_lean4"
     "agent/millennium-three-lane-lean-assist"
     "#10"
-    "efca550504a5c49dfb61efc960fb87e0c3c37be9"
+    "2ab352121559d77f8079bbd168f1fe8f933d96b0"
     "leanprover/lean4:v4.28.0"
     "mathlib v4.28.0"
     "Synthesis/MillenniumHodgeCP1Quotient.lean"
@@ -145,6 +154,9 @@ currentMillenniumLeanAssistReceipt =
     "Synthesis/MillenniumBSDRationalKummerQuotient.lean"
     "Synthesis/MillenniumBSDCMPrimeClassification.lean"
     "Synthesis/MillenniumBSDCMInertCharacterSum.lean"
+    "Synthesis/MillenniumBSDLocalSquareClass.lean"
+    true
+    true
     true
     true
     true
