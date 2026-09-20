@@ -329,6 +329,7 @@ record ContractLandscapeAdaptiveTrajectory : Set where
   field
     hopCount : Nat
     receipts : List ContractLandscapeExpansionReceipt
+    reviewedResidualReferences : List String
     finalRecomputedWorklist : AustralianContractsLandscapeWorklist
     recomputeAfterEveryAcceptedHop : Bool
     recomputeAfterEveryAcceptedHopIsTrue :
@@ -408,6 +409,7 @@ data SourceReceiptAutomaticallyPaysTreatmentReview : Set where
 data AdaptiveExpansionMayFreezeOldConclusion : Set where
 data AdaptiveExpansionMayDiscardOldSourceHistory : Set where
 data AdaptiveExpansionMaySkipFrontierRecompute : Set where
+data ReviewedResidualMayBeDiscardedFromTrajectory : Set where
 
 sourceAcquisitionDoesNotCreateTreatment :
   SourceAcquisitionAutomaticallyTreatment → ⊥
@@ -460,6 +462,10 @@ adaptiveExpansionDoesNotDiscardOldSourceHistory ()
 adaptiveExpansionDoesNotSkipRecompute :
   AdaptiveExpansionMaySkipFrontierRecompute → ⊥
 adaptiveExpansionDoesNotSkipRecompute ()
+
+reviewedResidualCannotBeDiscardedFromTrajectory :
+  ReviewedResidualMayBeDiscardedFromTrajectory → ⊥
+reviewedResidualCannotBeDiscardedFromTrajectory ()
 
 record AustralianContractsLandscapeControllerBoundary : Set where
   constructor australianContractsLandscapeControllerBoundary
@@ -524,6 +530,10 @@ record AustralianContractsLandscapeControllerBoundary : Set where
     multiHopTrajectoryRecomputesAfterEveryAcceptedHopIsTrue :
       multiHopTrajectoryRecomputesAfterEveryAcceptedHop ≡ true
 
+    reviewedResidualsPreservedAcrossTrajectory : Bool
+    reviewedResidualsPreservedAcrossTrajectoryIsTrue :
+      reviewedResidualsPreservedAcrossTrajectory ≡ true
+
     controllerCreatesCurrentLawConclusion : Bool
     controllerCreatesCurrentLawConclusionIsFalse :
       controllerCreatesCurrentLawConclusion ≡ false
@@ -550,6 +560,7 @@ canonicalAustralianContractsLandscapeControllerBoundary =
     true refl
     true refl
     false refl
+    true refl
     true refl
     false refl
     false refl
