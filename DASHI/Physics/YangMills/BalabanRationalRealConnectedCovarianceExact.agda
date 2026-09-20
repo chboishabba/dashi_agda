@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.BalabanRationalRealConnectedCovarianceExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _-_; abs)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _-_; ∣_∣)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -33,7 +33,7 @@ record RationalRealAbsoluteRingEmbedding : Set₁ where
       ≡ embedQ ring left -ℝ embedQ ring right
 
     absoluteExact : ∀ value →
-      embedQ ring (ℚ.abs value)
+      embedQ ring (∣ value ∣)
       ≡ absℝ (embedQ ring value)
 
 open RationalRealAbsoluteRingEmbedding public
@@ -143,9 +143,8 @@ connectedCovarianceMagnitudeEmbeddingExact :
         rationalExpectation realExpectation
         left right) →
   embedQ (ring embedding)
-    (ℚ.abs
-      (rationalConnectedCovariance
-        rationalExpectation multiplyObservable left right))
+    (∣ rationalConnectedCovariance
+        rationalExpectation multiplyObservable left right ∣)
   ≡
   absℝ
     (realConnectedCovariance
