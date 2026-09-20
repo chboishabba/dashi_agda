@@ -21,6 +21,8 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTermwiseLocalizationRound406Exact as R406
 import DASHI.Physics.YangMills.BalabanCMP116Round406To415Exact as R406R415
+import DASHI.Physics.YangMills.BalabanCMP116Round406PreferredR415Exact as Preferred406
+import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact as Preferred
 import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportGraphRound416Exact as Graph
 import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exact as R411
 import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R414
@@ -129,3 +131,25 @@ round406SupportGraphGeometryCompilerLevel = machineChecked
 -- * per-domain shell amplitudes obey the source tree-decay/summability bound.
 literalRound406SupportGraphAndAmplitudeLevel : ProofLevel
 literalRound406SupportGraphAndAmplitudeLevel = conditional
+
+
+compilePreferredFromSupportGraph :
+  ∀ {Measure TestObservable dataSet extension base}
+    (application : R406.SelectedCMP116TermwiseLocalization base)
+    (replay : R406R415.Round406ExactR410Replay application)
+    (geometryData :
+      Round406SupportGraphGeometry
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} {base = base}
+        application) →
+  Preferred.PreferredR415Source
+    (R406.Domain application)
+    (R406.Term application)
+    (R406.Operator application)
+compilePreferredFromSupportGraph application replay geometryData =
+  Preferred406.compilePreferredFromRound406
+    application replay
+    (asRound406To415Geometry application geometryData)
+
+round406SupportGraphToPreferredR415CompilerLevel : ProofLevel
+round406SupportGraphToPreferredR415CompilerLevel = machineChecked
