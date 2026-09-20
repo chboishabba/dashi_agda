@@ -30,9 +30,10 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; refl; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -57,7 +58,7 @@ inputMassAgainstHead :
   (work : Physical.PhysicalTriadIncidence → ℚ) →
   Physical.PhysicalTriadIncidence →
   List Physical.PhysicalTriadIncidence → ℚ
-inputMassAgainstHead I work head [] = 0
+inputMassAgainstHead I work head [] = 0ℚ
 inputMassAgainstHead I work head (x ∷ xs) =
     (inputMass I head - inputMass I x) * (work head - work x)
   + inputMassAgainstHead I work head xs
@@ -67,7 +68,7 @@ inputMassPairDifferenceWorkSum :
   (I : C3.ModeInverseSquare F E) →
   (work : Physical.PhysicalTriadIncidence → ℚ) →
   List Physical.PhysicalTriadIncidence → ℚ
-inputMassPairDifferenceWorkSum I work [] = 0
+inputMassPairDifferenceWorkSum I work [] = 0ℚ
 inputMassPairDifferenceWorkSum I work (x ∷ xs) =
   inputMassAgainstHead I work x xs
   + inputMassPairDifferenceWorkSum I work xs
@@ -96,7 +97,7 @@ centeredPairIsTwiceInputMassPair E I work alpha beta sameOutput =
   in
   trans
     (cong₂ _*_
-      (Relation.Binary.PropositionalEquality.sym base)
+      (sym base)
       refl)
     (solve
       ( inputMass I alpha
@@ -120,17 +121,17 @@ againstHeadCenteredIsTwiceInputMass E I work head [] homogeneous =
 againstHeadCenteredIsTwiceInputMass E I work {output} head (x ∷ xs) homogeneous =
   let
     sameOutput : Physical.k head ≡ Physical.k x
-    sameOutput = Centered.pairSameOutput homogeneous x (Centered.Cube.here refl)
+    sameOutput = Centered.pairSameOutput homogeneous x (Cube.here refl)
 
     headPart =
       centeredPairIsTwiceInputMassPair
         E I work head x sameOutput
 
     tailHom : Centered.OutputHomogeneous output (head ∷ xs)
-    tailHom .head (Centered.Cube.here refl) =
-      homogeneous head (Centered.Cube.here refl)
-    tailHom tau (Centered.Cube.there member) =
-      homogeneous tau (Centered.Cube.there (Centered.Cube.there member))
+    tailHom .head (Cube.here refl) =
+      homogeneous head (Cube.here refl)
+    tailHom tau (Cube.there member) =
+      homogeneous tau (Cube.there (Cube.there member))
 
     tailPart =
       againstHeadCenteredIsTwiceInputMass
