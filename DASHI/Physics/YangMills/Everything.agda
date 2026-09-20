@@ -330,3 +330,5 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119PointwiseStressCoreExact
 import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphGeometryExact
 
 import DASHI.Physics.YangMills.BalabanR144CanonicalMetricTangentAttachmentExact
+
+import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Round419Exact
