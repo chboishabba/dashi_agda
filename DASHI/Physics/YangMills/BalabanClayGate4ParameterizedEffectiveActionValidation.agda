@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanClayGate4ParameterizedEffectiveActionValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayGate4ParameterizedEffectiveActionExact as Generated
+
+parameterizedEffectiveActionCompilerOwned :
+  Generated.parameterizedPhysicalEffectiveActionCompilerLevel ≡ machineChecked
+parameterizedEffectiveActionCompilerOwned = refl
+
+generatedActionDefinesTOperationCompilerOwned :
+  Generated.generatedPhysicalEffectiveActionDefinesTOperationLevel ≡ machineChecked
+generatedActionDefinesTOperationCompilerOwned = refl
+
+negativeLogBackendRemainsPhysical :
+  Generated.physicalNegativeLogExponentialBackendLevel ≡ conditional
+negativeLogBackendRemainsPhysical = refl
