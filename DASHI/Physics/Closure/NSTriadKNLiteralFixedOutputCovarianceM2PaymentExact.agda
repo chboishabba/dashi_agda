@@ -62,8 +62,11 @@ F = Rational.rationalRealField
 two : ℚ
 two = 1ℚ + 1ℚ
 
+oneNN : 0ℚ ≤ 1ℚ
+oneNN = ℚP.<⇒≤ (ℚP.positive⁻¹ 1ℚ)
+
 twoNN : 0ℚ ≤ two
-twoNN = ℚP.+-mono-≤ ℚP.≤-refl ℚP.≤-refl
+twoNN = ℚP.+-mono-≤ oneNN oneNN
 
 module LiteralFixedOutputCovarianceM2
     {E : C3.IntegerEmbedding F}
@@ -120,17 +123,12 @@ module LiteralFixedOutputCovarianceM2
         PhysicalM2.centeredMultiplierDifference E alpha beta
       gA = G0.hermitianScalar (value alpha) mixed
       gB = G0.hermitianScalar (value beta) mixed
-
-      workDifference :
-        work alpha - work beta
-        ≡ two * (gA - gB)
-      workDifference =
-        Scalar.coherentWorkDifferenceIsTwoHermitianDifference
-          mixed (value alpha) (value beta)
     in
-    trans
-      (solve (multiplier ∷ gA ∷ gB ∷ []))
-      (sym (cong (multiplier *_) workDifference))
+    rewrite
+      Scalar.coherentWorkDifferenceIsTwoHermitianDifference
+        mixed (value alpha) (value beta)
+    =
+      solve (multiplier ∷ gA ∷ gB ∷ [])
 
   nonzeroPairBound :
     (alpha beta : Physical.PhysicalTriadIncidence) →
@@ -191,17 +189,11 @@ module LiteralFixedOutputCovarianceM2
     with NatP._≟_
       (PhysicalM2.integerCenteredNorm alpha)
       (PhysicalM2.integerCenteredNorm beta)
-  ... | yes equalNorms =
-    subst
-      (_≤ 0ℚ)
-      (sym
-        (trans
-          (cong
-            (λ multiplier →
-              multiplier * (work alpha - work beta))
-            (PhysicalM2.equalIntegerCenteredNormsGiveZeroMultiplier
-              E I alpha beta equalNorms))
-          (solve (work alpha ∷ work beta ∷ []))))
+  ... | yes equalNorms
+    rewrite
+      PhysicalM2.equalIntegerCenteredNormsGiveZeroMultiplier
+        E I alpha beta equalNorms
+    =
       ℚP.≤-refl
   ... | no unequal =
     nonzeroPairBound alpha beta unequal
