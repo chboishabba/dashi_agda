@@ -56,3 +56,65 @@ canonicalSemanticGraphProjectionBoundary =
   semanticGraphProjectionBoundary
     false refl
     false refl
+
+
+------------------------------------------------------------------------
+-- VISUAL STYLE CLASSIFICATION
+--
+-- Styling is deterministic and renderer-facing only. It never rewrites the
+-- semantic relation kind.
+------------------------------------------------------------------------
+
+data VisualEdgeStyleClass : Set where
+  structuralStyle : VisualEdgeStyleClass
+  dependencyStyle : VisualEdgeStyleClass
+  flowStyle : VisualEdgeStyleClass
+  applicationStyle : VisualEdgeStyleClass
+  constructionStyle : VisualEdgeStyleClass
+  patternStyle : VisualEdgeStyleClass
+
+edgeStyleClass : EdgeKind → VisualEdgeStyleClass
+edgeStyleClass containsEdge = structuralStyle
+edgeStyleClass importsEdge = structuralStyle
+edgeStyleClass opensEdge = structuralStyle
+edgeStyleClass typeDependsEdge = dependencyStyle
+edgeStyleClass bodyDependsEdge = dependencyStyle
+edgeStyleClass valueFlowsEdge = flowStyle
+edgeStyleClass callsEdge = applicationStyle
+edgeStyleClass constructsEdge = constructionStyle
+edgeStyleClass fieldOfEdge = structuralStyle
+edgeStyleClass constructorOfEdge = structuralStyle
+edgeStyleClass bindsEdge = flowStyle
+edgeStyleClass instantiatesEdge = constructionStyle
+edgeStyleClass rewritesWithEdge = dependencyStyle
+edgeStyleClass patternMatchesEdge = patternStyle
+
+callsHaveApplicationStyle :
+  edgeStyleClass callsEdge ≡ applicationStyle
+callsHaveApplicationStyle = refl
+
+constructionHasConstructionStyle :
+  edgeStyleClass constructsEdge ≡ constructionStyle
+constructionHasConstructionStyle = refl
+
+valueFlowHasFlowStyle :
+  edgeStyleClass valueFlowsEdge ≡ flowStyle
+valueFlowHasFlowStyle = refl
+
+record VisualStyleAuthorityBoundary : Set where
+  constructor visualStyleAuthorityBoundary
+  field
+    styleClassDefinesSemanticRelation : Bool
+    styleClassDefinesSemanticRelationIsFalse :
+      styleClassDefinesSemanticRelation ≡ false
+
+    endpointQuotientMayEraseTypedAuthority : Bool
+    endpointQuotientMayEraseTypedAuthorityIsFalse :
+      endpointQuotientMayEraseTypedAuthority ≡ false
+
+canonicalVisualStyleAuthorityBoundary :
+  VisualStyleAuthorityBoundary
+canonicalVisualStyleAuthorityBoundary =
+  visualStyleAuthorityBoundary
+    false refl
+    false refl
