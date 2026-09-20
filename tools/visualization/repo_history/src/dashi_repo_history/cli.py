@@ -8,6 +8,14 @@ import subprocess
 
 from .git_history import HistoryExtractor, fetch_seed_commits
 from .merge_attribution import attribute_merge
+from .scene_program import (
+    compile_branch_episode_program,
+    compile_first_parent_program,
+    compile_merge_episode_program,
+    compile_symbol_focus_program,
+    compile_temporal_symbol_program,
+    serialize_program,
+)
 
 
 def _extract(args: argparse.Namespace) -> None:
@@ -71,6 +79,67 @@ def _render(args: argparse.Namespace) -> None:
         env=env,
         check=True,
     )
+
+
+def _program(args: argparse.Namespace) -> None:
+    data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+
+    if args.scene == "semantic-history":
+        commands = compile_first_parent_program(
+            data,
+            target_commit=args.target_commit,
+        )
+    elif args.scene == "episode":
+        commands = compile_branch_episode_program(
+            data,
+            episode_index=args.episode_index,
+        )
+    elif args.scene == "merge":
+        commands = compile_merge_episode_program(
+            data,
+            episode_index=args.episode_index,
+        )
+    elif args.scene == "symbol":
+        snapshots = data.get("snapshots", [])
+        if not snapshots:
+            raise SystemExit("No semantic snapshots in input.")
+        if not args.symbol:
+            raise SystemExit("--symbol is required for symbol program.")
+        snapshot = snapshots[args.snapshot_index]
+        commands = compile_symbol_focus_program(
+            snapshot["graph"],
+            args.symbol,
+            upstream_depth=args.upstream_depth,
+            downstream_depth=args.downstream_depth,
+        )
+    elif args.scene == "symbol-history":
+        if not args.symbol:
+            raise SystemExit("--symbol is required for symbol-history program.")
+        commands = compile_temporal_symbol_program(
+            data,
+            args.symbol,
+            target_commit=args.target_commit,
+            upstream_depth=args.upstream_depth,
+            downstream_depth=args.downstream_depth,
+        )
+    else:
+        raise SystemExit(f"Unsupported program scene: {args.scene}")
+
+    payload = {
+        "schema": "dashi.scene-program.v1",
+        "scene": args.scene,
+        "commands": serialize_program(commands),
+    }
+    rendered = json.dumps(payload, indent=2)
+
+    if args.output:
+        Path(args.output).write_text(
+            rendered + "\n",
+            encoding="utf-8",
+        )
+        print(args.output)
+    else:
+        print(rendered)
 
 
 def _symbols(args: argparse.Namespace) -> None:
@@ -262,6 +331,31 @@ def build_parser() -> argparse.ArgumentParser:
         help="Target commit for the first-parent semantic-history lineage.",
     )
     render.set_defaults(func=_render)
+
+    program = sub.add_parser(
+        "program",
+        help="Compile a renderer-neutral semantic visualization program.",
+    )
+    program.add_argument("input")
+    program.add_argument(
+        "--scene",
+        required=True,
+        choices=[
+            "semantic-history",
+            "episode",
+            "merge",
+            "symbol",
+            "symbol-history",
+        ],
+    )
+    program.add_argument("-o", "--output")
+    program.add_argument("--snapshot-index", type=int, default=-1)
+    program.add_argument("--episode-index", type=int, default=0)
+    program.add_argument("--symbol")
+    program.add_argument("--target-commit")
+    program.add_argument("--upstream-depth", type=int, default=2)
+    program.add_argument("--downstream-depth", type=int, default=0)
+    program.set_defaults(func=_program)
 
     symbols = sub.add_parser(
         "symbols",
