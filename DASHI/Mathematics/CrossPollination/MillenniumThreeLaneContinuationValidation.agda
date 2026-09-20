@@ -479,3 +479,36 @@ pnpBooleanRecognizerStillOpen :
     PNPIff.canonicalConcreteTapeLocalityCharacterizationBoundary
   ≡ false
 pnpBooleanRecognizerStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- TWELFTH CONTINUATION: literal CP1 overlap inversion + rational two-torsion
+-- Kummer dictionary.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineChartOverlapExact as HodgeOverlap
+import DASHI.Mathematics.Arithmetic.EllipticRationalTwoTorsionKummerExact as BSDTorsionKummer
+
+hodgeP1OverlapInversionPaid :
+  HodgeOverlap.chartOverlapProductIsOnePaid
+    HodgeOverlap.canonicalProjectiveLineChartOverlapBoundary
+  ≡ true
+hodgeP1OverlapInversionPaid = refl
+
+hodgeP1QuotientStillOpenAfterOverlap :
+  HodgeOverlap.globalProjectiveLineQuotientPaid
+    HodgeOverlap.canonicalProjectiveLineChartOverlapBoundary
+  ≡ false
+hodgeP1QuotientStillOpenAfterOverlap = refl
+
+bsdLiteralTwoTorsionKummerDictionaryPaid :
+  BSDTorsionKummer.literalTwoTorsionKummerDictionaryPaid
+    BSDTorsionKummer.canonicalEllipticRationalTwoTorsionKummerBoundary
+  ≡ true
+bsdLiteralTwoTorsionKummerDictionaryPaid = refl
+
+bsdLocalKummerStillOpenAfterDictionary :
+  BSDTorsionKummer.localKummerMapsPaid
+    BSDTorsionKummer.canonicalEllipticRationalTwoTorsionKummerBoundary
+  ≡ false
+bsdLocalKummerStillOpenAfterDictionary = refl
