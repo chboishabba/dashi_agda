@@ -427,3 +427,83 @@ bad = foo
         and unresolved["reference"] == "foo"
         for unresolved in graph.unresolved_references
     )
+
+
+def test_signature_and_definition_references_have_distinct_edge_kinds():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+base : Nat
+base = 0
+use : Nat
+use = base
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    nat_edges = [
+        edge
+        for edge in graph.edges.values()
+        if edge.kind == "type-depends"
+    ]
+    body_edges = [
+        edge
+        for edge in graph.edges.values()
+        if edge.kind == "body-depends"
+    ]
+
+    use = next(
+        node for node in graph.nodes.values()
+        if node.label == "use" and node.kind == "function"
+    )
+    base = next(
+        node for node in graph.nodes.values()
+        if node.label == "base" and node.kind == "function"
+    )
+
+    assert nat_edges
+    assert any(
+        edge.source == base.symbol_id
+        and edge.target == use.symbol_id
+        for edge in body_edges
+    )
+
+
+def test_open_import_emits_import_and_open_module_relations():
+    a = extract_file(
+        "A.agda",
+        b"""
+module A where
+foo : Set
+foo = Set
+""",
+    )
+    b = extract_file(
+        "B.agda",
+        b"""
+module B where
+open import A
+bar : Set
+bar = foo
+""",
+    )
+    graph = build_semantic_graph([a, b])
+
+    module_a = next(
+        node for node in graph.nodes.values()
+        if node.kind == "module" and node.label == "A"
+    )
+    module_b = next(
+        node for node in graph.nodes.values()
+        if node.kind == "module" and node.label == "B"
+    )
+    kinds = {
+        edge.kind
+        for edge in graph.edges.values()
+        if edge.source == module_a.symbol_id
+        and edge.target == module_b.symbol_id
+    }
+    assert "imports" in kinds
+    assert "opens" in kinds
