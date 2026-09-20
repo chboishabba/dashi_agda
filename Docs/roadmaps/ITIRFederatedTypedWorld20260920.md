@@ -111,3 +111,45 @@ source-addressable observations rather than new canonical evidence substrates.
 This roadmap file and the new exact/regression owners are source-written on the
 branch. No Agda kernel execution receipt is claimed until the exact branch head
 is checked with the repository's Agda validation script.
+
+
+## SLR legal-runtime capstone implementation
+
+The production Rust cut is now mirrored by:
+
+- `DASHI/Interop/SLRLegalRuntimeCapstoneExact.agda`
+- `DASHI/Interop/SLRLegalRuntimeCapstoneRegression.agda`
+
+The branch also braids the previously separate Sprint-2 owners
+`SLRSprint2CanonicalEvidenceConvergenceExact` and
+`SLRSharedEvidenceReducerExact` into the same formal stack, so the capstone
+does not depend on a module that exists only on another PR branch.
+
+The formal capstone pins this implementation path:
+
+```text
+M2.5 mixed-family exact replay
+  -> M3.A reviewed world -> existing four-way WrongType element disposition
+  -> M3.B source-conditioned legal evaluator
+  -> M3.C one adaptive/persisted Australian campaign contract
+  -> M4.A source-addressable matter/issue projection
+```
+
+The legal evaluator does not replace the existing algebra. It explicitly
+anchors to the existing source-conditioned applicability/violation owner and
+retains premises, exceptions, defeaters, burdens, jurisdiction/time and
+remedy/liability separation.
+
+The campaign contract reuses the existing legal reopening and sequential
+consumer/experiment-planning semantics: next work may depend on the newly
+observed/reviewed outcome; consumer closure does not require complete world
+identity; persisted hops retain previous-receipt lineage; selected actions do
+not create authority.
+
+The M4.A projection preserves one semantic identity across source/issue/element
+views and remains projection-only.
+
+### Certification boundary
+
+This branch is source-written. The exact-head Agda kernel check is still
+required before the capstone receipt can be marked kernel-observed.
