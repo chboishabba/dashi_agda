@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R109NuclearStressExact w
 -- without another continuum-stress construction.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -66,8 +66,8 @@ r109StressFunctionalIsLiteralSourceDerivative completion =
     ≡
     Marked.sourceDerivative
       (StressMarked.stressData (R109.completedSources completion)) right
-  congDerivative Agda.Builtin.Equality.refl =
-    Agda.Builtin.Equality.refl
+  congDerivative refl =
+    refl
 
 r109StressNuclearCompilerLevel : ProofLevel
 r109StressNuclearCompilerLevel =
