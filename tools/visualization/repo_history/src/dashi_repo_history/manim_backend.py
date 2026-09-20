@@ -11,6 +11,8 @@ from manim import (
     DiGraph,
     Dot,
     DOWN,
+    LEFT,
+    RIGHT,
     FadeIn,
     FadeOut,
     GrowFromCenter,
@@ -18,6 +20,7 @@ from manim import (
     MovingCameraScene,
     ReplacementTransform,
     Text,
+    TransformFromCopy,
     UP,
     VGroup,
 )
@@ -27,6 +30,7 @@ from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
 from dashi_repo_history.render_policy import ManimRenderPolicy
 from dashi_repo_history.scene_program import (
+    compile_branch_episode_program,
     compile_first_parent_program,
     compile_merge_episode_program,
 )
@@ -180,13 +184,36 @@ class HistoryGraphView:
 class SemanticGraphView:
     """Manim adapter for renderer-neutral semantic graphs."""
 
-    def __init__(self, policy: ManimRenderPolicy | None = None) -> None:
+    def __init__(
+        self,
+        policy: ManimRenderPolicy | None = None,
+        *,
+        viewport_scale: float = 1.0,
+        viewport_shift: tuple[float, float, float] = (0.0, 0.0, 0.0),
+    ) -> None:
         self.layout = PersistentLayout()
         self.policy = policy or ManimRenderPolicy()
+        self.viewport_scale = viewport_scale
+        self.viewport_shift = viewport_shift
         self.graph = DiGraph([], [], layout={})
         self.current_nodes: set[str] = set()
         self.current_edges: set[tuple[str, str]] = set()
         self.current_graph_data: dict[str, Any] = {"nodes": [], "edges": []}
+
+    def _viewport_layout(
+        self,
+        layout: dict[str, list[float]],
+    ) -> dict[str, list[float]]:
+        sx, sy, sz = self.viewport_shift
+        scale = self.viewport_scale
+        return {
+            node: [
+                position[0] * scale + sx,
+                position[1] * scale + sy,
+                position[2] * scale + sz,
+            ]
+            for node, position in layout.items()
+        }
 
     def build(self, graph_data: dict[str, Any]) -> DiGraph:
         nodes = [n["symbol_id"] for n in graph_data["nodes"]]
@@ -206,7 +233,7 @@ class SemanticGraphView:
         self.graph = DiGraph(
             nodes,
             edges,
-            layout=self.layout.manim_layout(),
+            layout=self._viewport_layout(self.layout.manim_layout()),
             vertex_mobjects=vertex_mobjects,
         )
         self.current_nodes = set(nodes)
@@ -256,7 +283,9 @@ class SemanticGraphView:
             self.graph.remove_vertices(*removed_nodes)
 
         self.layout.solve(target_nodes, target_edges)
-        target_layout = self.layout.manim_layout()
+        target_layout = self._viewport_layout(
+            self.layout.manim_layout()
+        )
 
         if added_nodes:
             node_data = {
