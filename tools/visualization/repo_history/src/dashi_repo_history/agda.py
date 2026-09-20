@@ -302,6 +302,7 @@ class RawDeclaration:
     binders: dict[tuple[str, str], Symbol] = field(default_factory=dict)
     pattern_candidates: list[PatternCandidate] = field(default_factory=list)
     references: list[RawReference] = field(default_factory=list)
+    owner_local_scopes: dict[tuple[int, int], str] = field(default_factory=dict)
     container_label: str | None = None
     container_relation: str | None = None
 
@@ -325,6 +326,36 @@ DECLARATION_ANCESTORS = {
     "record",
     "record_signature",
 }
+
+
+def _syntactic_scope_id(
+    source: bytes,
+    module: str,
+    node: Any,
+) -> str:
+    normalized = " ".join(_node_text(source, node).split())
+    return (
+        f"{module}:{node.type}:"
+        f"{stable_hash(normalized)[:20]}"
+    )
+
+
+def _enclosing_declaration_scope(
+    source: bytes,
+    module: str,
+    owner: Any,
+) -> str | None:
+    where_node = _first_ancestor(owner, {"where"})
+    if where_node is not None:
+        return _syntactic_scope_id(source, module, where_node)
+    return None
+
+
+def _direct_named_child(node: Any, kind: str) -> Any | None:
+    for child in node.named_children:
+        if child.type == kind:
+            return child
+    return None
 
 
 def _owner_range(
@@ -400,6 +431,14 @@ def _scope_chain_for_node(
         _node_scope_id(source, declaration, lexical)
         for lexical in lexical_nodes
     ]
+
+    owner_local_scope = declaration.owner_local_scopes.get(owner_range)
+    if owner_local_scope is not None:
+        chain.append(owner_local_scope)
+
+    if declaration.symbol.scope is not None:
+        chain.append(declaration.symbol.scope)
+
     chain.append(base)
     return tuple(dict.fromkeys(chain))
 
@@ -585,7 +624,10 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         if scope is not None
     ]
 
-    declarations_by_key: dict[tuple[str, str], RawDeclaration] = {}
+    declarations_by_key: dict[
+        tuple[str | None, str, str],
+        RawDeclaration,
+    ] = {}
 
     def add_decl(
         label: str,
@@ -595,19 +637,27 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         *,
         container_label: str | None = None,
         container_relation: str | None = None,
+        declaration_scope: str | None = None,
     ) -> RawDeclaration | None:
         label = label.strip()
         if not label:
             return None
 
+        if declaration_scope is None:
+            declaration_scope = _enclosing_declaration_scope(
+                source,
+                module,
+                owner,
+            )
+
         symbol = Symbol.create(
             label=label,
             kind=kind,
             module=module,
-            scope=None,
+            scope=declaration_scope,
             span=_span(path, name_node),
         )
-        key = (label, kind)
+        key = (declaration_scope, label, kind)
         existing = declarations_by_key.get(key)
         owner_range = (owner.start_byte, owner.end_byte)
 
@@ -741,6 +791,16 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
             function_node,
         ):
             continue
+
+        where_node = _direct_named_child(function_node, "where")
+        if where_node is not None:
+            owner_range = (
+                function_node.start_byte,
+                function_node.end_byte,
+            )
+            declaration.owner_local_scopes[owner_range] = (
+                _syntactic_scope_id(source, module, where_node)
+            )
 
         scope = _scope_for_node(
             source,
@@ -878,13 +938,17 @@ def build_semantic_graph(
             graph.parse_error_files.append(file.path)
 
     by_module_label: dict[tuple[str, str], Symbol] = {}
-    by_label: dict[str, list[Symbol]] = {}
+    by_scoped_label: dict[tuple[str, str, str], Symbol] = {}
 
     for declaration in declarations:
         symbol = declaration.symbol
         graph.nodes[symbol.symbol_id] = symbol
-        by_module_label[(symbol.module, symbol.label)] = symbol
-        by_label.setdefault(symbol.label, []).append(symbol)
+        if symbol.scope is None:
+            by_module_label[(symbol.module, symbol.label)] = symbol
+        else:
+            by_scoped_label[
+                (symbol.module, symbol.scope, symbol.label)
+            ] = symbol
 
     # Resolve clause pattern candidates only after the declaration table exists.
     # A known constructor is a pattern dependency; otherwise the bare name is a
@@ -895,6 +959,8 @@ def build_semantic_graph(
                 ref=candidate.value,
                 owner_module=declaration.symbol.module,
                 by_module_label=by_module_label,
+                by_scoped_label=by_scoped_label,
+                scope_chain=(candidate.scope,),
                 open_scopes=open_scopes_by_module.get(
                     declaration.symbol.module,
                     [],
@@ -939,8 +1005,18 @@ def build_semantic_graph(
             declaration.container_label is not None
             and declaration.container_relation is not None
         ):
-            container = by_module_label.get(
-                (symbol.module, declaration.container_label)
+            container = (
+                by_scoped_label.get(
+                    (
+                        symbol.module,
+                        symbol.scope,
+                        declaration.container_label,
+                    )
+                )
+                if symbol.scope is not None
+                else by_module_label.get(
+                    (symbol.module, declaration.container_label)
+                )
             )
             if container is not None:
                 relation = Relation(
@@ -960,6 +1036,23 @@ def build_semantic_graph(
                 evidence=binder.span,
             )
             graph.edges[binds.relation_id] = binds
+
+    binders_by_scope_label: dict[
+        tuple[str, str, str],
+        list[Symbol],
+    ] = {}
+    for declaration in declarations:
+        for binder in declaration.binders.values():
+            if binder.scope is None:
+                continue
+            binders_by_scope_label.setdefault(
+                (
+                    declaration.symbol.module,
+                    binder.scope,
+                    binder.label,
+                ),
+                [],
+            ).append(binder)
 
     for module, imported_modules in imports_by_module.items():
         consumer = modules[module]
@@ -994,11 +1087,29 @@ def build_semantic_graph(
 
         for ref in declaration.references:
             leaf = ref.value.split(".")[-1]
+            scope_chain = ref.scope_chain or (ref.scope,)
             local = _lookup_local(
                 declaration,
-                ref.scope_chain or (ref.scope,),
+                scope_chain,
                 leaf,
             )
+            if local is None:
+                for visible_scope in scope_chain:
+                    candidates = binders_by_scope_label.get(
+                        (
+                            owner.module,
+                            visible_scope,
+                            leaf,
+                        ),
+                        [],
+                    )
+                    unique = {
+                        candidate.symbol_id: candidate
+                        for candidate in candidates
+                    }
+                    if len(unique) == 1:
+                        local = next(iter(unique.values()))
+                        break
 
             if local is not None:
                 relation_kind = (
@@ -1044,6 +1155,8 @@ def build_semantic_graph(
                 ref=ref.value,
                 owner_module=owner.module,
                 by_module_label=by_module_label,
+                by_scoped_label=by_scoped_label,
+                scope_chain=scope_chain,
                 open_scopes=open_scopes_by_module.get(
                     owner.module,
                     [],
@@ -1093,6 +1206,8 @@ def build_semantic_graph(
                     ref=ref.application_head,
                     owner_module=owner.module,
                     by_module_label=by_module_label,
+                    by_scoped_label=by_scoped_label,
+                    scope_chain=scope_chain,
                     open_scopes=open_scopes_by_module.get(
                         owner.module,
                         [],
@@ -1120,9 +1235,19 @@ def _resolve_reference(
     ref: str,
     owner_module: str,
     by_module_label: dict[tuple[str, str], Symbol],
+    by_scoped_label: dict[tuple[str, str, str], Symbol],
+    scope_chain: tuple[str, ...],
     open_scopes: list[OpenScope],
 ) -> Symbol | None:
     leaf = ref.split(".")[-1]
+
+    if "." not in ref:
+        for scope in scope_chain:
+            scoped = by_scoped_label.get(
+                (owner_module, scope, leaf)
+            )
+            if scoped is not None:
+                return scoped
 
     same_module = by_module_label.get((owner_module, leaf))
     if same_module is not None:
