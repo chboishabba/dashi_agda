@@ -184,15 +184,6 @@ rankedState {O = O} I =
 -- 6. Native StagePrimitives result.
 ------------------------------------------------------------------------
 
-record ReleasedStagePrimitives
-    {S : ReleasedPrimitiveSurface}
-    {O : ReleasedPrimitiveStageOperations S}
-    (I : ∀ {R} → ReleasedStagePrimitiveInputs S O R)
-    : Set₁ where
-  field
-    particularPrimitive :
-      PrimitiveData S (particularState (I {R = _}))
-
 -- The source result depends on the analytic rules as well, so expose the useful
 -- fully-indexed result separately rather than hiding those dependencies.
 record ReleasedStagePrimitivesFor
