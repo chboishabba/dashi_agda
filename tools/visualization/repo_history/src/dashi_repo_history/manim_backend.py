@@ -25,6 +25,7 @@ from manim import (
     VGroup,
 )
 
+from dashi_repo_history.focus import focus_symbol, resolve_symbol
 from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
@@ -476,6 +477,156 @@ def _episode_focus(
                 node_ids.add(edge["target"])
 
     return node_ids, edge_ids
+
+
+def _induced_focus_graph(
+    graph_data: dict[str, Any],
+    node_ids: set[str],
+    allowed_edge_ids: set[str],
+) -> dict[str, Any]:
+    return {
+        "nodes": [
+            node
+            for node in graph_data.get("nodes", [])
+            if node["symbol_id"] in node_ids
+        ],
+        "edges": [
+            edge
+            for edge in graph_data.get("edges", [])
+            if edge["relation_id"] in allowed_edge_ids
+            and edge["source"] in node_ids
+            and edge["target"] in node_ids
+        ],
+    }
+
+
+class SemanticSymbolScene(MovingCameraScene):
+    """Grow a rooted semantic construction/dependency neighborhood."""
+
+    def construct(self) -> None:
+        path = os.environ.get("DASHI_REPO_HISTORY_JSON")
+        selector = os.environ.get("DASHI_REPO_SYMBOL")
+        snapshot_index = int(
+            os.environ.get("DASHI_REPO_SNAPSHOT_INDEX", "-1")
+        )
+        upstream_depth = int(
+            os.environ.get("DASHI_REPO_UPSTREAM_DEPTH", "2")
+        )
+        downstream_depth = int(
+            os.environ.get("DASHI_REPO_DOWNSTREAM_DEPTH", "0")
+        )
+
+        if not path:
+            self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
+            return
+        if not selector:
+            self.add(Text("Set DASHI_REPO_SYMBOL", font_size=28))
+            return
+
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        snapshots = data.get("snapshots", [])
+        if not snapshots:
+            self.add(Text("No semantic snapshots", font_size=28))
+            return
+
+        snapshot = snapshots[snapshot_index]
+        graph_data = snapshot["graph"]
+
+        try:
+            root = resolve_symbol(graph_data, selector)
+            focus = focus_symbol(
+                graph_data,
+                selector,
+                upstream_depth=upstream_depth,
+                downstream_depth=downstream_depth,
+            )
+        except (KeyError, ValueError) as error:
+            self.add(
+                Text(
+                    str(error),
+                    font_size=20,
+                ).scale_to_fit_width(12.0)
+            )
+            return
+
+        policy = ManimRenderPolicy()
+        full_focus = focus.graph(graph_data)
+        legend = _legend(
+            policy,
+            _relation_kinds(full_focus),
+        )
+
+        scope_suffix = (
+            f" · scope {str(root.get('scope'))[:12]}"
+            if root.get("scope")
+            else ""
+        )
+        title = Text(
+            f"{root.get('label')} · {root.get('module')}{scope_suffix}",
+            font_size=28,
+        ).to_edge(UP)
+        subtitle = Text(
+            f"semantic focus · {snapshot['commit'][:10]}",
+            font_size=16,
+        ).next_to(title, DOWN, buff=0.10)
+
+        revealed: set[str] = set()
+        allowed_edges = set(focus.edge_ids)
+        view = SemanticGraphView(policy)
+
+        root_layer = set(focus.layers[0]) if focus.layers else {focus.root_id}
+        revealed.update(root_layer)
+        current_graph = _induced_focus_graph(
+            graph_data,
+            revealed,
+            allowed_edges,
+        )
+        graph = view.build(current_graph)
+
+        self.play(
+            FadeIn(title),
+            FadeIn(subtitle),
+            FadeIn(legend),
+            Create(graph),
+            run_time=1.0,
+        )
+
+        if focus.root_id in view.graph.vertices:
+            self.play(
+                Indicate(
+                    view.graph.vertices[focus.root_id],
+                    scale_factor=1.45,
+                ),
+                run_time=0.35,
+            )
+
+        for index, layer in enumerate(focus.layers[1:], start=1):
+            revealed.update(layer)
+            next_graph = _induced_focus_graph(
+                graph_data,
+                revealed,
+                allowed_edges,
+            )
+            depth_label = Text(
+                f"expand layer {index}",
+                font_size=14,
+            ).next_to(subtitle, DOWN, buff=0.08)
+            self.play(FadeIn(depth_label), run_time=0.10)
+            view.apply_snapshot(
+                self,
+                next_graph,
+                run_time=0.45,
+            )
+            self.play(FadeOut(depth_label), run_time=0.10)
+
+        if view.graph.width > 0:
+            self.play(
+                self.camera.frame.animate.move_to(view.graph).set(
+                    width=max(8, view.graph.width + 2.0)
+                ),
+                run_time=0.8,
+            )
+        self.wait(2)
 
 
 class RepositoryHistoryScene(MovingCameraScene):
