@@ -285,3 +285,22 @@ pnpGlobalTransitionForwardPaid :
     PNPWhole.canonicalConcreteTapeWholeRowLocalityBoundary
   ≡ true
 pnpGlobalTransitionForwardPaid = refl
+
+
+------------------------------------------------------------------------
+-- BSD rational Kummer map on the nonexceptional affine locus.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Arithmetic.EllipticRationalKummerOpenExact as BSDKummer
+
+bsdNonexceptionalRationalKummerPaid :
+  BSDKummer.nonexceptionalRationalKummerMapPaid
+    BSDKummer.canonicalEllipticRationalKummerOpenBoundary
+  ≡ true
+bsdNonexceptionalRationalKummerPaid = refl
+
+bsdExceptionalTorsionKummerStillOpen :
+  BSDKummer.exceptionalTwoTorsionValuesPaid
+    BSDKummer.canonicalEllipticRationalKummerOpenBoundary
+  ≡ false
+bsdExceptionalTorsionKummerStillOpen = refl
