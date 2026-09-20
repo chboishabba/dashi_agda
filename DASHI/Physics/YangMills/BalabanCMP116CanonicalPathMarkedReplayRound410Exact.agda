@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Exact where
 
 ------------------------------------------------------------------------
