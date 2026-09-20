@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNR571UnitNormalizedDisplacementWeldExact as
 import DASHI.Physics.Closure.NSTriadKNR573HomochiralHeterochiralSplitExact as B573Split
 import DASHI.Physics.Closure.NSTriadKNR573HelicitySplitLowOutputPaymentExact as B573Pay
 import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact as B587
+import DASHI.Physics.Closure.NSTriadKNR587ExactThreeClassSelfBudgetBidiExact as B587Self
 import DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact as BHelicity
 import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact as BMidpoint
 import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact as BR540Physical
@@ -154,9 +155,17 @@ bLiveNestedThreeClassCompilerClosed : Bool
 bLiveNestedThreeClassCompilerClosed =
   B587.round587PreferredLiveInnerClassCountIsThree
 
-bLiveNestedThreeClassNormBudgetsPaid : Bool
-bLiveNestedThreeClassNormBudgetsPaid =
-  B587.round587AnyOfThreeClassNormCoordinatesPaid
+bLiveNestedThreeClassBudgetRecordsInhabited : Bool
+bLiveNestedThreeClassBudgetRecordsInhabited =
+  B587Self.r587ThreeDependentClassBudgetRecordsInhabited
+
+bLiveNestedThreeClassUsefulUniformMajorantsPaid : Bool
+bLiveNestedThreeClassUsefulUniformMajorantsPaid =
+  B587Self.r587ExactSelfBudgetsAreUsefulUniformMajorants
+
+bLiveNestedThreeClassRemainingDebtIsUniformMajorization : Bool
+bLiveNestedThreeClassRemainingDebtIsUniformMajorization =
+  B587Self.r587RemainingDebtIsUniformMajorizationNotRecordConstruction
 
 bOuterSpectatorWeightedSpacetimePaymentClosed : Bool
 bOuterSpectatorWeightedSpacetimePaymentClosed =
