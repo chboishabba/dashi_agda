@@ -112,13 +112,13 @@ centerRewriteScanLegal suffix WF.plainNil Local.realizes-left =
 centerRewriteScanLegal
     (Local.plain next ∷ rest)
     (WF.plainCons restPlain)
-    Local.realizes-left =
+    (Local.realizes-left {rightSymbol = rightSymbol}) =
   allCons
     (Pattern.legal-centered Local.realizes-left)
     (allCons
       Pattern.left-overlap-plus-one
       (unchangedScanLegal
-        (Local.plain _ ∷ Local.plain next ∷ rest)))
+        (Local.plain rightSymbol ∷ Local.plain next ∷ rest)))
 
 centerRewriteScanLegal suffix WF.plainNil Local.realizes-stay =
   allCons
@@ -128,13 +128,13 @@ centerRewriteScanLegal suffix WF.plainNil Local.realizes-stay =
 centerRewriteScanLegal
     (Local.plain next ∷ rest)
     (WF.plainCons restPlain)
-    Local.realizes-stay =
+    (Local.realizes-stay {rightSymbol = rightSymbol}) =
   allCons
     (Pattern.legal-centered Local.realizes-stay)
     (allCons
       Pattern.stay-overlap-plus-one
       (unchangedScanLegal
-        (Local.plain _ ∷ Local.plain next ∷ rest)))
+        (Local.plain rightSymbol ∷ Local.plain next ∷ rest)))
 
 centerRewriteScanLegal suffix WF.plainNil Local.realizes-right =
   allCons
@@ -323,6 +323,115 @@ machineStepImpliesAllWindowsLegal wellFormed =
     occurrenceWitness =
       WF.occurrence wellFormedOccurrenceWitness
 
+
+------------------------------------------------------------------------
+-- A reverse characterization must exclude the degenerate all-unchanged scan.
+-- Therefore global transition locality is "all windows legal" PLUS an actual
+-- centered rule window occurring somewhere in the scan.
+------------------------------------------------------------------------
+
+data ContainsCenteredRuleWindow
+    (machine : Local.ConcreteTapeMachine)
+    (rule : Local.TapeRule
+      (Local.State machine)
+      (Local.Symbol machine)) :
+    List (Local.SixCellWindow machine) → Set where
+
+  centeredHere :
+    ∀ {window rest} →
+    Local.RuleRealizesWindow machine rule window →
+    ContainsCenteredRuleWindow machine rule (window ∷ rest)
+
+  centeredThere :
+    ∀ {window rest} →
+    ContainsCenteredRuleWindow machine rule rest →
+    ContainsCenteredRuleWindow machine rule (window ∷ rest)
+
+centeredWindowOccursInRewriteScan :
+  ∀ {machine rule window}
+    (prefix suffix :
+      List (Local.TapeCell
+        (Local.State machine)
+        (Local.Symbol machine))) →
+  WF.PlainCells prefix →
+  (configured : Local.RuleRealizesWindow machine rule window) →
+  ContainsCenteredRuleWindow machine rule
+    (scanWindowsCells machine
+      (Local.append prefix
+        (Local.oldLeft window
+          ∷ Local.oldCenter window
+          ∷ Local.oldRight window
+          ∷ suffix))
+      (Local.append prefix
+        (Local.newLeft window
+          ∷ Local.newCenter window
+          ∷ Local.newRight window
+          ∷ suffix)))
+centeredWindowOccursInRewriteScan [] suffix WF.plainNil configured =
+  centeredHere configured
+centeredWindowOccursInRewriteScan
+    (Local.plain symbol ∷ prefix)
+    suffix
+    (WF.plainCons prefixPlain)
+    configured =
+  centeredThere
+    (centeredWindowOccursInRewriteScan
+      prefix suffix prefixPlain configured)
+
+record GlobalTransitionScan
+    (machine : Local.ConcreteTapeMachine)
+    (rule : Local.TapeRule
+      (Local.State machine)
+      (Local.Symbol machine))
+    (before after : Local.TapeRow machine) : Set where
+  field
+    everyWindowLegal :
+      AllWindowsLegal machine rule before after
+
+    centeredTransitionOccurs :
+      ContainsCenteredRuleWindow machine rule
+        (scanWindows machine before after)
+
+open GlobalTransitionScan public
+
+transportContainsCentered :
+  ∀ {machine rule before after beforeCells afterCells} →
+  Local.cells before ≡ beforeCells →
+  Local.cells after ≡ afterCells →
+  ContainsCenteredRuleWindow machine rule
+    (scanWindowsCells machine beforeCells afterCells) →
+  ContainsCenteredRuleWindow machine rule
+    (scanWindows machine before after)
+transportContainsCentered refl refl proof = proof
+
+machineStepImpliesGlobalTransitionScan :
+  ∀ {machine before after} →
+  (wellFormed : WF.WellFormedMachineStep machine before after) →
+  GlobalTransitionScan
+    machine
+    (Local.rule (WF.step wellFormed))
+    before
+    after
+machineStepImpliesGlobalTransitionScan wellFormed = record
+  { everyWindowLegal =
+      machineStepImpliesAllWindowsLegal wellFormed
+  ; centeredTransitionOccurs =
+      transportContainsCentered
+        (Local.beforeShape occurrenceWitness)
+        (Local.afterShape occurrenceWitness)
+        (centeredWindowOccursInRewriteScan
+          (Local.prefix occurrenceWitness)
+          (Local.suffix occurrenceWitness)
+          (WF.prefixPlain wellFormedOccurrenceWitness)
+          (Local.ruleIsConfigured (WF.step wellFormed)))
+  }
+  where
+    wellFormedOccurrenceWitness =
+      WF.wellFormedOccurrence wellFormed
+
+    occurrenceWitness =
+      WF.occurrence wellFormedOccurrenceWitness
+
 record ConcreteTapeWholeRowLocalityBoundary : Set where
   constructor concrete-tape-whole-row-locality-boundary
   field
@@ -330,7 +439,9 @@ record ConcreteTapeWholeRowLocalityBoundary : Set where
     unchangedRegionScanPaid : Bool
     directionalOverlapScanPaid : Bool
     wellFormedStepImpliesAllWindowsPaid : Bool
-    allWindowsToUniqueRewritePaid : Bool
+    centeredTransitionOccurrencePaid : Bool
+    wellFormedStepImpliesGlobalTransitionScanPaid : Bool
+    globalTransitionScanToUniqueRewritePaid : Bool
     legalWindowBooleanReflectionPaid : Bool
     canonicalSATWeldPaid : Bool
     runToSATPaid : Bool
@@ -342,4 +453,4 @@ canonicalConcreteTapeWholeRowLocalityBoundary :
   ConcreteTapeWholeRowLocalityBoundary
 canonicalConcreteTapeWholeRowLocalityBoundary =
   concrete-tape-whole-row-locality-boundary
-    true true true true false false false false false false false
+    true true true true true true false false false false false false false
