@@ -51,6 +51,12 @@ data NativeLegalFollowCommand : Set where
   resumeWaltonsWithCitedByProviderResults : NativeLegalFollowCommand
   resumeWaltonsAfterAuthorityIdentityReview : NativeLegalFollowCommand
   resumeWaltonsAfterTreatmentReview : NativeLegalFollowCommand
+  discoverRecursiveContractFrontier : NativeLegalFollowCommand
+  acquireRecursiveContractAuthority : NativeLegalFollowCommand
+  prepareRecursiveContractIdentityReview : NativeLegalFollowCommand
+  compileRecursiveContractIdentityReview : NativeLegalFollowCommand
+  prepareRecursiveContractTreatmentReview : NativeLegalFollowCommand
+  compileRecursiveContractTreatmentReview : NativeLegalFollowCommand
 
 data OrchestrationOwner : Set where
   nativeRustCli : OrchestrationOwner
