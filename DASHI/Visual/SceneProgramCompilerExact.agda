@@ -5,6 +5,8 @@ open import DASHI.Core.TemporalSemanticGraphExact
 open import DASHI.Core.VersionedStateGraphExact
 open import DASHI.Core.SemanticMergeEvolutionExact
 open import DASHI.Visual.SemanticHistoryVisualizationExact
+open import DASHI.Visual.RootedSemanticFocusExact
+open import DASHI.Visual.TemporalRootedFocusExact
 
 ------------------------------------------------------------------------
 -- SCENE PROGRAM COMPILER
@@ -119,6 +121,100 @@ canonicalSceneProgramCompilerBoundary :
   SceneProgramCompilerBoundary
 canonicalSceneProgramCompilerBoundary =
   sceneProgramCompilerBoundary
+    false refl
+    false refl
+    false refl
+
+
+------------------------------------------------------------------------
+-- ROOTED / TEMPORAL FOCUS PROGRAM COMMANDS
+------------------------------------------------------------------------
+
+data FocusSceneCommand : Set where
+  showCompiledFocusRoot :
+    RootedSemanticFocus →
+    FocusSceneCommand
+
+  expandCompiledFocusLayer :
+    Nat →
+    FocusSceneCommand
+
+  settleCompiledFocus :
+    RootedSemanticFocus →
+    FocusSceneCommand
+
+  showCompiledTemporalFocus :
+    TemporalFocusFrame →
+    FocusSceneCommand
+
+  advanceCompiledTemporalFocus :
+    TemporalFocusFrame →
+    FocusSceneCommand
+
+data FocusSceneCommandIntent : Set where
+  compiledFocusRootAppears : FocusSceneCommandIntent
+  compiledFocusLayerExpands : FocusSceneCommandIntent
+  compiledFocusSettles : FocusSceneCommandIntent
+  compiledTemporalFocusAppears : FocusSceneCommandIntent
+  compiledTemporalFocusAdvances : FocusSceneCommandIntent
+
+focusSceneCommandIntent :
+  FocusSceneCommand →
+  FocusSceneCommandIntent
+focusSceneCommandIntent (showCompiledFocusRoot _) =
+  compiledFocusRootAppears
+focusSceneCommandIntent (expandCompiledFocusLayer _) =
+  compiledFocusLayerExpands
+focusSceneCommandIntent (settleCompiledFocus _) =
+  compiledFocusSettles
+focusSceneCommandIntent (showCompiledTemporalFocus _) =
+  compiledTemporalFocusAppears
+focusSceneCommandIntent (advanceCompiledTemporalFocus _) =
+  compiledTemporalFocusAdvances
+
+compileFocusRootCommand :
+  RootedSemanticFocus →
+  FocusSceneCommand
+compileFocusRootCommand = showCompiledFocusRoot
+
+compileFocusRootCommandIntentExact :
+  ∀ focus →
+  focusSceneCommandIntent (compileFocusRootCommand focus)
+    ≡ compiledFocusRootAppears
+compileFocusRootCommandIntentExact _ = refl
+
+compileTemporalFocusAdvanceCommand :
+  TemporalFocusFrame →
+  FocusSceneCommand
+compileTemporalFocusAdvanceCommand =
+  advanceCompiledTemporalFocus
+
+compileTemporalFocusAdvanceCommandIntentExact :
+  ∀ frame →
+  focusSceneCommandIntent
+    (compileTemporalFocusAdvanceCommand frame)
+  ≡ compiledTemporalFocusAdvances
+compileTemporalFocusAdvanceCommandIntentExact _ = refl
+
+record FocusSceneProgramBoundary : Set where
+  constructor focusSceneProgramBoundary
+  field
+    focusProgramMayInventTraversalLayer : Bool
+    focusProgramMayInventTraversalLayerIsFalse :
+      focusProgramMayInventTraversalLayer ≡ false
+
+    temporalProgramMayInventIdentityTransition : Bool
+    temporalProgramMayInventIdentityTransitionIsFalse :
+      temporalProgramMayInventIdentityTransition ≡ false
+
+    backendMayRecomputeDifferentFocusAuthority : Bool
+    backendMayRecomputeDifferentFocusAuthorityIsFalse :
+      backendMayRecomputeDifferentFocusAuthority ≡ false
+
+canonicalFocusSceneProgramBoundary :
+  FocusSceneProgramBoundary
+canonicalFocusSceneProgramBoundary =
+  focusSceneProgramBoundary
     false refl
     false refl
     false refl
