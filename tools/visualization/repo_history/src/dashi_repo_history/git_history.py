@@ -172,26 +172,21 @@ class HistoryExtractor:
             )
 
         snapshots: list[SemanticSnapshot] = []
-        previous_commit: str | None = None
-        previous_graph = None
 
         for record in commits:
             graph = self.graph_at(record.commit)
-            delta = (
-                None
-                if previous_graph is None
-                else GraphDelta.between(previous_graph, graph)
-            )
+            parent_deltas: dict[str, GraphDelta] = {}
+            for parent in record.parents:
+                parent_graph = self.graph_at(parent)
+                parent_deltas[parent] = GraphDelta.between(parent_graph, graph)
+
             snapshots.append(
                 SemanticSnapshot(
                     commit=record.commit,
                     graph=graph,
-                    base_commit=previous_commit,
-                    delta=delta,
+                    parent_deltas=parent_deltas,
                 )
             )
-            previous_commit = record.commit
-            previous_graph = graph
 
         return Timeline(
             commits=commits,
