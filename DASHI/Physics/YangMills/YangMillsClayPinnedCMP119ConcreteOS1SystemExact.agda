@@ -12,6 +12,8 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS1SystemExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -44,7 +46,7 @@ record PinnedCMP119ConcreteOS1Inputs
     (S :
       Top.LiteralYangMillsSemantics
         (Physical.physicalLiteralCarriers
-          CompactSimpleGroup Spacetime Agda.Builtin.Nat.Nat Configuration ℝ
+          CompactSimpleGroup Spacetime Nat Configuration ℝ
           (Configuration → ℝ) Position
           CurvaturePolynomial LocalOperator OPECoefficient StressTensor
           HilbertSpace Hamiltonian VacuumState)) : Set₂ where
