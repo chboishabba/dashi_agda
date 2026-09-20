@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 
 from .agda import AgdaLanguageAdapter
+from .history_topology import derive_branch_episodes
 from .language import LanguageAdapter
 from .model import CommitRecord, GraphDelta, SemanticSnapshot, Timeline
 
@@ -192,11 +193,14 @@ class HistoryExtractor:
             stride=stride,
         )
 
+        branch_episodes = derive_branch_episodes(commits)
+
         if not semantic:
             return Timeline(
                 commits=commits,
                 snapshots=[],
                 refs=refs,
+                branch_episodes=branch_episodes,
             )
 
         snapshots: list[SemanticSnapshot] = []
@@ -220,4 +224,5 @@ class HistoryExtractor:
             commits=commits,
             snapshots=snapshots,
             refs=refs,
+            branch_episodes=branch_episodes,
         )
