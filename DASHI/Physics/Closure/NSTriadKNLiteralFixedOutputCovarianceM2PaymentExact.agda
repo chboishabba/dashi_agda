@@ -48,6 +48,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExa
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredCovarianceFactorExact as Centered
 import DASHI.Physics.Closure.NSTriadKNCoherentWorkHermitianScalarizationExact as Scalar
+import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact as G0
 import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredCovarianceSecondMomentExact as PhysicalM2
 import DASHI.Physics.Closure.NSTriadKNCenteredCovarianceToSecondMomentExact as CovM2
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
@@ -117,8 +118,8 @@ module LiteralFixedOutputCovarianceM2
     let
       multiplier =
         PhysicalM2.centeredMultiplierDifference E alpha beta
-      gA = Scalar.G0.hermitianScalar (value alpha) mixed
-      gB = Scalar.G0.hermitianScalar (value beta) mixed
+      gA = G0.hermitianScalar (value alpha) mixed
+      gB = G0.hermitianScalar (value beta) mixed
 
       workDifference :
         work alpha - work beta
@@ -129,10 +130,7 @@ module LiteralFixedOutputCovarianceM2
     in
     trans
       (solve (multiplier ∷ gA ∷ gB ∷ []))
-      (sym
-        (trans
-          (cong (multiplier *_) workDifference)
-          (solve (multiplier ∷ gA ∷ gB ∷ []))))
+      (sym (cong (multiplier *_) workDifference))
 
   nonzeroPairBound :
     (alpha beta : Physical.PhysicalTriadIncidence) →
