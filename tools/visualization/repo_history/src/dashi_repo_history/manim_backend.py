@@ -448,25 +448,28 @@ class SemanticMergeScene(MovingCameraScene):
 
     def construct(self) -> None:
         path = os.environ.get("DASHI_REPO_HISTORY_JSON")
-        merge_index = int(os.environ.get("DASHI_REPO_MERGE_INDEX", "0"))
+        episode_index = int(os.environ.get("DASHI_REPO_EPISODE_INDEX", "0"))
         if not path:
             self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
             return
 
         data = json.loads(Path(path).read_text(encoding="utf-8"))
         commits, snapshots = _snapshot_maps(data)
-        merge_commits = [
-            commit
-            for commit in data.get("commits", [])
-            if len(commit.get("parents", [])) >= 2
-            and commit["commit"] in snapshots
-            and all(parent in snapshots for parent in commit["parents"][:2])
+        episodes = data.get("branch_episodes", [])
+        available_episodes = [
+            episode
+            for episode in episodes
+            if episode.get("merge_commit") in commits
+            and episode.get("merge_commit") in snapshots
+            and episode.get("left_tip") in snapshots
+            and episode.get("right_tip") in snapshots
         ]
-        if not merge_commits:
-            self.add(Text("No merge with semantic parent snapshots", font_size=26))
+        if not available_episodes:
+            self.add(Text("No branch episode with semantic snapshots", font_size=26))
             return
 
-        merge_commit = merge_commits[merge_index]
+        episode = available_episodes[episode_index]
+        merge_commit = commits[episode["merge_commit"]]
         attribution = attribute_merge(
             merge_commit=merge_commit,
             snapshots_by_commit=snapshots,
@@ -498,18 +501,24 @@ class SemanticMergeScene(MovingCameraScene):
         merged_graph = SemanticGraphView().build(merge_data)
 
         left_group = VGroup(
-            Text(f"parent A · {left[:9]}", font_size=18),
+            Text(
+                f"parent A · {left[:9]} · {len(episode['left_path']) - 1} steps",
+                font_size=18,
+            ),
             left_graph,
         ).arrange(DOWN, buff=0.2)
         right_group = VGroup(
-            Text(f"parent B · {right[:9]}", font_size=18),
+            Text(
+                f"parent B · {right[:9]} · {len(episode['right_path']) - 1} steps",
+                font_size=18,
+            ),
             right_graph,
         ).arrange(UP * -1, buff=0.2)
         parents = VGroup(left_group, right_group).arrange(buff=1.0)
         parents.scale_to_fit_width(12.0)
 
         title = Text(
-            f"semantic merge · {merge_sha[:10]}",
+            f"semantic merge · {merge_sha[:10]} · fork {episode['fork_base'][:9]}",
             font_size=30,
         ).to_edge(UP)
         self.play(FadeIn(title), FadeIn(parents), run_time=1.0)
