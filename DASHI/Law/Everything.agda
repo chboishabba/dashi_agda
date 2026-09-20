@@ -157,3 +157,6 @@ import DASHI.Law.AustralianContractsReviewedHopCompilerExact
 import DASHI.Law.AustralianContractsReviewedHopCompilerRegression
 import DASHI.Law.AustralianContractsExternalIdentityParetoExact
 import DASHI.Law.AustralianContractsExternalIdentityParetoRegression
+
+import DASHI.Law.AustralianContractsThreeHopAdaptiveFixtureExact
+import DASHI.Law.AustralianContractsThreeHopAdaptiveFixtureRegression
