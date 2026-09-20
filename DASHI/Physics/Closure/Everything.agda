@@ -313,3 +313,9 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedCorrectionStepExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedBandGeometryExact
 
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedStagePrimitivesExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedRankGeometryRefreshExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedDebtSmoothExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedPrimitivePreservationExact
