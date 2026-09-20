@@ -29,7 +29,6 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ScaleCalibrati
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _≤ℝ_; _*ℝ_; -ℝ_)
@@ -174,7 +173,7 @@ physicalExponentialUpper :
     ScaleCarrier Volume Root SourceDirection Index
     source sourceLeft sourceRight scaleAt volumeAt expReal embedding →
   Index → ℝ
-physicalExponentialUpper calibration index =
+physicalExponentialUpper {expReal = expReal} {embedding = embedding} calibration index =
   physicalAmplitude calibration *ℝ
     expReal
       (-ℝ
@@ -204,7 +203,7 @@ sourceEnvelopeBelowPhysicalExponentialUpper :
   ≤ℝ
   physicalExponentialUpper calibration index
 sourceEnvelopeBelowPhysicalExponentialUpper
-    {embedding = embedding} calibration cutoff index =
+    {expReal = expReal} {embedding = embedding} calibration cutoff index =
   let
     order = exponentialOrder calibration
     d = physicalDistance calibration index
