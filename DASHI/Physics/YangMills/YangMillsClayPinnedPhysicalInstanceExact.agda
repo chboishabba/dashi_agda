@@ -121,7 +121,7 @@ pinnedPhysicalSchwinger pinned group =
   Physical.schwinger
     (Pinned.schwinger (Pinned.continuum pinned) group)
 
-pinnedPhysicalSIMass :
+pinnedPhysicalSIGap :
   ∀ {G X Cutoff Configuration Observable Position
       CurvaturePolynomial LocalOperator OPECoefficient StressTensor
       HilbertSpace Hamiltonian VacuumState}
@@ -134,10 +134,10 @@ pinnedPhysicalSIMass :
     (pinned :
       Pinned.PinnedYangMillsConstruction S)
     (group : G) →
-  SI.SIIndexedQuantity ℚ SI.SI.Mass
-pinnedPhysicalSIMass pinned group =
-  SI.SIYangMillsMassGap.massGap
-    (Pinned.pinnedSIMassGap pinned group)
+  SI.SIYangMillsMassGap ℚ
+    (Pinned.siScales (Pinned.gap pinned) group)
+pinnedPhysicalSIGap pinned group =
+  Pinned.pinnedSIMassGap pinned group
 
 physicalPinnedProjectionCompilerLevel : ProofLevel
 physicalPinnedProjectionCompilerLevel = machineChecked
