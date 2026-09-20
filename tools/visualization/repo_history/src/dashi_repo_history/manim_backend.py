@@ -359,16 +359,27 @@ class SemanticGraphView:
             and edge in self.graph.edges
         ]
         if restyled_edges:
+            old_mobjects = [
+                self.graph.edges[edge]
+                for edge in restyled_edges
+            ]
             scene.play(
-                *[
-                    self.graph.edges[edge].animate.set_stroke(
-                        width=self.policy.edges.stroke_width(
-                            target_edge_kinds[edge]
-                        )
+                *[FadeOut(mobject) for mobject in old_mobjects],
+                run_time=run_time / 3,
+            )
+            self.graph.remove_edges(*restyled_edges)
+            refreshed = self.graph.add_edges(
+                *restyled_edges,
+                edge_config={
+                    edge: self.policy.edges.edge_config(
+                        target_edge_kinds[edge]
                     )
                     for edge in restyled_edges
-                ],
-                run_time=run_time / 2,
+                },
+            )
+            scene.play(
+                Create(refreshed),
+                run_time=run_time / 3,
             )
 
         if target_nodes:
@@ -601,15 +612,20 @@ class SemanticSymbolScene(MovingCameraScene):
                 run_time=0.35,
             )
 
-        for index, layer in enumerate(focus.layers[1:], start=1):
-            revealed.update(layer)
+        for layer_spec in focus.layer_specs[1:]:
+            revealed.update(layer_spec.node_ids)
             next_graph = _induced_focus_graph(
                 graph_data,
                 revealed,
                 allowed_edges,
             )
+            direction = (
+                "dependencies"
+                if layer_spec.direction == "upstream"
+                else "consumers"
+            )
             depth_label = Text(
-                f"expand layer {index}",
+                f"{direction} · depth {layer_spec.depth}",
                 font_size=14,
             ).next_to(subtitle, DOWN, buff=0.08)
             self.play(FadeIn(depth_label), run_time=0.10)
