@@ -655,3 +655,28 @@ bsdConcreteSignV2ClassifiersStillOpen :
     BSDBitInvariant.canonicalRationalSquareClassBitInvariantBoundary
   ≡ false
 bsdConcreteSignV2ClassifiersStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- NINETEENTH CONTINUATION: CM prime-level coefficient magnitude algebra.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Automorphic.EllipticCMPrimeCoefficientExact as BSDCM
+
+bsdCMSplitPrimeNormIdentityPaid :
+  BSDCM.splitPrimeCoefficientNormIdentityPaid
+    BSDCM.canonicalEllipticCMPrimeCoefficientBoundary
+  ≡ true
+bsdCMSplitPrimeNormIdentityPaid = refl
+
+bsdCMInertPrimeCoefficientPaid :
+  BSDCM.inertPrimeCoefficientZeroPaid
+    BSDCM.canonicalEllipticCMPrimeCoefficientBoundary
+  ≡ true
+bsdCMInertPrimeCoefficientPaid = refl
+
+bsdAllPrimeCMClassificationStillOpen :
+  BSDCM.allGoodPrimeCMClassificationPaid
+    BSDCM.canonicalEllipticCMPrimeCoefficientBoundary
+  ≡ false
+bsdAllPrimeCMClassificationStillOpen = refl
