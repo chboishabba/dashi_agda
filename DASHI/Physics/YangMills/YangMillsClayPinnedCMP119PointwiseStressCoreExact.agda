@@ -83,10 +83,11 @@ asPointwiseCalculus :
     {limitLaws = limitLaws} {quotient = quotient} {division = division}
     {S = S} {osInputs = osInputs} reconstruction group →
   Pointwise.PointwiseCommonCoreClosureCalculus
-asPointwiseCalculus dataSet = record
-  { Pointwise.PointwiseCommonCoreClosureCalculus.Core = _
-  ; Pointwise.PointwiseCommonCoreClosureCalculus.Vector = _
-  ; Pointwise.PointwiseCommonCoreClosureCalculus.Operator = _
+asPointwiseCalculus {Vector = Vector} {Hamiltonian = Hamiltonian} {Core = Core}
+    dataSet = record
+  { Pointwise.PointwiseCommonCoreClosureCalculus.Core = Core
+  ; Pointwise.PointwiseCommonCoreClosureCalculus.Vector = Vector
+  ; Pointwise.PointwiseCommonCoreClosureCalculus.Operator = Hamiltonian
   ; Pointwise.PointwiseCommonCoreClosureCalculus.close =
       closeCoreAction dataSet
   ; Pointwise.PointwiseCommonCoreClosureCalculus.closeRespectsPointwiseEquality =
