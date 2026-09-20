@@ -136,6 +136,7 @@ localizedD1IsCanonicalMetricReadout :
           (R144.globalBackgroundToStressBackground composite background)
           (toMetricPerturbation attachment tangent))))
 localizedD1IsCanonicalMetricReadout
+    {present = present} {laws = laws}
     {composite = composite} {representation = representation}
     {selected = selected} attachment background tangent =
   let
@@ -148,8 +149,8 @@ localizedD1IsCanonicalMetricReadout
     finiteToStress :
       readout
         (D1.finiteLocalizedFirstVariation
-          (Carrier.finiteAction (Present.bc1Carrier _))
-          (R143.asFirstVariationLinearity _)
+          (Carrier.finiteAction (Present.bc1Carrier present))
+          (R143.asFirstVariationLinearity laws)
           background tangent)
       ≡
       readout
