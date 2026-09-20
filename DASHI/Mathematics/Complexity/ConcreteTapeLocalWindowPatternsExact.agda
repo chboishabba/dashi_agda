@@ -11,6 +11,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 
@@ -135,6 +136,24 @@ realizedCentralWindowIsLegal :
   LegalWindowForRule machine rule window
 realizedCentralWindowIsLegal =
   legal-centered
+
+
+legalPlainLeftSymbolAgreement :
+  ∀ {machine rule oldSymbol newSymbol oldCenter oldRight newCenter newRight} →
+  LegalWindowForRule machine rule
+    (Local.six-cell-window
+      (Local.plain oldSymbol) oldCenter oldRight
+      (Local.plain newSymbol) newCenter newRight) →
+  oldSymbol ≡ newSymbol
+legalPlainLeftSymbolAgreement legal-unchanged = refl
+legalPlainLeftSymbolAgreement
+    (legal-centered Local.realizes-stay) = refl
+legalPlainLeftSymbolAgreement
+    (legal-centered Local.realizes-right) = refl
+legalPlainLeftSymbolAgreement left-overlap-minus-two = refl
+legalPlainLeftSymbolAgreement left-overlap-minus-one = refl
+legalPlainLeftSymbolAgreement stay-overlap-minus-one = refl
+legalPlainLeftSymbolAgreement right-overlap-minus-one = refl
 
 record ConcreteTapeLocalWindowPatternsBoundary : Set where
   constructor concrete-tape-local-window-patterns-boundary
