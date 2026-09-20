@@ -120,3 +120,55 @@ capabilitySurfacePinsAllFiveGates :
     Capstone.canonicalLegalRuntimeCapabilityReceipt
   ≡ true
 capabilitySurfacePinsAllFiveGates = refl
+
+
+------------------------------------------------------------------------
+-- Priority 5 / M4.A complete matter-workbench regressions.
+------------------------------------------------------------------------
+
+priority5EntitiesPresent :
+  Capstone.entitiesProjected
+    Capstone.canonicalPriority5MatterIssueWorkbenchContract
+  ≡ true
+priority5EntitiesPresent = refl
+
+priority5ObservationsPresent :
+  Capstone.canonicalObservationsProjected
+    Capstone.canonicalPriority5MatterIssueWorkbenchContract
+  ≡ true
+priority5ObservationsPresent = refl
+
+priority5EventsPresent :
+  Capstone.eventsProjected
+    Capstone.canonicalPriority5MatterIssueWorkbenchContract
+  ≡ true
+priority5EventsPresent = refl
+
+priority5DocumentsPresent :
+  Capstone.documentsProjected
+    Capstone.canonicalPriority5MatterIssueWorkbenchContract
+  ≡ true
+priority5DocumentsPresent = refl
+
+priority5TimelinePresent :
+  Capstone.timelineProjected
+    Capstone.canonicalPriority5MatterIssueWorkbenchContract
+  ≡ true
+priority5TimelinePresent = refl
+
+priority5IssuesAndElementsPresent :
+  Capstone.issuesProjected
+    Capstone.canonicalPriority5MatterIssueWorkbenchContract
+  ≡ true
+priority5IssuesAndElementsPresent = refl
+
+priority5ExactSourceIdentityRetained :
+  Capstone.exactRevisionAndSpanRetained
+    Capstone.canonicalPriority5MatterIssueWorkbenchContract
+  ≡ true
+priority5ExactSourceIdentityRetained = refl
+
+priority5ProjectionCannotCreateTruth :
+  Capstone.Priority5WorkbenchCreatesTruth → ⊥
+priority5ProjectionCannotCreateTruth =
+  Capstone.priority5WorkbenchDoesNotCreateTruth
