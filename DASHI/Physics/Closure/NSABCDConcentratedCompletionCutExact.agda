@@ -46,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNR587ExactThreeClassSelfBudgetBidiExact as 
 import DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact as BHelicity
 import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact as BMidpoint
 import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact as BR540Physical
+import DASHI.Physics.Closure.NSTriadKNFourSignInnerFibreGramBoundaryRound577Exact as BR577
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFold
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact as DEnergy
@@ -189,6 +190,17 @@ bR540PhysicalOutputFibreUniquenessDischarged =
 bLiteralR396RemainderToPreferredM2CompilerClosed : Bool
 bLiteralR396RemainderToPreferredM2CompilerClosed =
   BR540Physical.literalR396RemainderLandsInPreferredM2GivenPairRealization
+
+bR577FourSignCellMassPaidByEnergyDissipationKernel : Bool
+bR577FourSignCellMassPaidByEnergyDissipationKernel =
+  BR577.round577CellMassMajorantPaidByEnergyDissipationKernel
+
+bR577VariableFibreReducedToEDPlusOneGramResidual : Bool
+bR577VariableFibreReducedToEDPlusOneGramResidual =
+  BR577.round577VariableFibreReducedToEDPlusOneGramResidual
+
+bR577SignedGramResidualClosed : Bool
+bR577SignedGramResidualClosed = false
 
 bCutoffUniformG1FamilyEnvelopeClosed : Bool
 bCutoffUniformG1FamilyEnvelopeClosed = false
