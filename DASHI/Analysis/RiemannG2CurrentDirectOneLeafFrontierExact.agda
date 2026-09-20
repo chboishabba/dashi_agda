@@ -797,6 +797,32 @@ normalizedOffAggregateIsRemainingH2e :
     R2GammaLiteral.canonicalQuantitativeCanonicalGammaConeDeficitBoundary ≡ true
 normalizedOffAggregateIsRemainingH2e = refl
 
+
+normalizedLiteralAtomicStieltjesSurfaceSourceWritten :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.literalAggregateEqualsCountingPairPlusHorizontalSourceWritten
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ true
+normalizedLiteralAtomicStieltjesSurfaceSourceWritten = refl
+
+normalizedProfileHasZeroModeGapSourceWritten :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.normalizedProfileSpectralGapSourceWritten
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ true
+normalizedProfileHasZeroModeGapSourceWritten = refl
+
+normalizedAggregateNowSplitsQPairAndHorizontalCorrection :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.horizontalHeightSplitSourceWritten
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ true
+normalizedAggregateNowSplitsQPairAndHorizontalCorrection = refl
+
+rvMCountingRemainderPairStillOpen :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.rvMCountingRemainderPairBoundPaid
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ false
+rvMCountingRemainderPairStillOpen = refl
+
+horizontalCorrectionQuantitativeBoundStillOpen :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.horizontalCorrectionQuantitativeBoundPaid
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ false
+horizontalCorrectionQuantitativeBoundStillOpen = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
