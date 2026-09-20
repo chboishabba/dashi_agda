@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 from pathlib import Path
 import subprocess
 
 from .git_history import HistoryExtractor, fetch_seed_commits
+from .merge_attribution import attribute_merge
 
 
 def _extract(args: argparse.Namespace) -> None:
@@ -37,8 +39,8 @@ def _render(args: argparse.Namespace) -> None:
     env["DASHI_REPO_HISTORY_JSON"] = str(Path(args.input).resolve())
     if args.snapshot_index is not None:
         env["DASHI_REPO_SNAPSHOT_INDEX"] = str(args.snapshot_index)
-    if args.merge_index is not None:
-        env["DASHI_REPO_MERGE_INDEX"] = str(args.merge_index)
+    if args.episode_index is not None:
+        env["DASHI_REPO_EPISODE_INDEX"] = str(args.episode_index)
     if args.target_commit is not None:
         env["DASHI_REPO_TARGET_COMMIT"] = str(args.target_commit)
 
@@ -61,6 +63,75 @@ def _render(args: argparse.Namespace) -> None:
         env=env,
         check=True,
     )
+
+
+def _episodes(args: argparse.Namespace) -> None:
+    data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+    commits = {
+        commit["commit"]: commit
+        for commit in data.get("commits", [])
+    }
+    snapshots = {
+        snapshot["commit"]: snapshot
+        for snapshot in data.get("snapshots", [])
+    }
+
+    rows = []
+    for index, episode in enumerate(data.get("branch_episodes", [])):
+        row = {
+            "index": index,
+            "fork_base": episode["fork_base"],
+            "left_tip": episode["left_tip"],
+            "right_tip": episode["right_tip"],
+            "merge_commit": episode["merge_commit"],
+            "left_steps": max(0, len(episode["left_path"]) - 1),
+            "right_steps": max(0, len(episode["right_path"]) - 1),
+        }
+
+        merge_sha = episode["merge_commit"]
+        if (
+            merge_sha in commits
+            and merge_sha in snapshots
+            and episode["left_tip"] in snapshots
+            and episode["right_tip"] in snapshots
+        ):
+            attribution = attribute_merge(
+                merge_commit=commits[merge_sha],
+                snapshots_by_commit=snapshots,
+            )
+            row.update(
+                {
+                    "merge_only_nodes": len(attribution.introduced_nodes),
+                    "merge_only_edges": len(attribution.introduced_edges),
+                    "left_only_nodes": len(
+                        attribution.parent_only_nodes.get(
+                            episode["left_tip"],
+                            (),
+                        )
+                    ),
+                    "right_only_nodes": len(
+                        attribution.parent_only_nodes.get(
+                            episode["right_tip"],
+                            (),
+                        )
+                    ),
+                }
+            )
+        rows.append(row)
+
+    if args.json:
+        print(json.dumps(rows, indent=2))
+        return
+
+    for row in rows:
+        print(
+            f"[{row['index']}] "
+            f"fork={row['fork_base'][:10]} "
+            f"left={row['left_tip'][:10]}({row['left_steps']}) "
+            f"right={row['right_tip'][:10]}({row['right_steps']}) "
+            f"merge={row['merge_commit'][:10]} "
+            f"merge-only-nodes={row.get('merge_only_nodes', '?')}"
+        )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -109,12 +180,20 @@ def build_parser() -> argparse.ArgumentParser:
         default="history",
     )
     render.add_argument("--snapshot-index", type=int)
-    render.add_argument("--merge-index", type=int)
+    render.add_argument("--episode-index", type=int)
     render.add_argument(
         "--target-commit",
         help="Target commit for the first-parent semantic-history lineage.",
     )
     render.set_defaults(func=_render)
+
+    episodes = sub.add_parser(
+        "episodes",
+        help="List derived fork/merge episodes and semantic contribution counts.",
+    )
+    episodes.add_argument("input")
+    episodes.add_argument("--json", action="store_true")
+    episodes.set_defaults(func=_episodes)
 
     return parser
 
