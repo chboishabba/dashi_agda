@@ -38,6 +38,10 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedPeriodicCandidateNative
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedCompactCandidateFromPeriodicExact as CSelected
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicExclusionNativeExact as DExclude
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedR3FiniteEnergyExclusionNativeExact as CExclude
+import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFold
+import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact as DEnergy
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact as CLocal
 
 ------------------------------------------------------------------------
 -- A
@@ -69,6 +73,16 @@ aLowConvolutionTargetIsolated =
 aHighInverseSixthTargetIsolated : Bool
 aHighInverseSixthTargetIsolated =
   AConv.highInverseSixthConvolutionTargetIsolated
+
+aPhysicalMajorantIntegrabilityReducedToEnvelopeDomination : Bool
+aPhysicalMajorantIntegrabilityReducedToEnvelopeDomination =
+  ADom.physicalMajorantIntegrabilityNoLongerOpaque
+
+aLowConvolutionEnvelopeIntegrableClosed : Bool
+aLowConvolutionEnvelopeIntegrableClosed = false
+
+aHighInverseSixthEnvelopeIntegrableClosed : Bool
+aHighInverseSixthEnvelopeIntegrableClosed = false
 
 aLowPhysicalMajorantProducerClosed : Bool
 aLowPhysicalMajorantProducerClosed = false
@@ -122,6 +136,16 @@ bR567CellBelowR571PairedMagnitudeClosed = false
 
 bForcingSquareBelowLiteralM2Closed : Bool
 bForcingSquareBelowLiteralM2Closed = false
+
+bCardinalityFreeM2DissipationFoldCompilerClosed : Bool
+bCardinalityFreeM2DissipationFoldCompilerClosed =
+  BFold.cardinalityFreeFiniteFoldClosed
+
+bSamplewiseM2DissipationPaymentClosed : Bool
+bSamplewiseM2DissipationPaymentClosed = false
+
+bLiteralM2FoldIntoGalerkinDissipationClosed : Bool
+bLiteralM2FoldIntoGalerkinDissipationClosed = false
 
 bCutoffUniformIntegratedM2PaymentClosed : Bool
 bCutoffUniformIntegratedM2PaymentClosed = false
@@ -180,6 +204,13 @@ dPeriodicGlobalExclusionBodyPorted : Bool
 dPeriodicGlobalExclusionBodyPorted =
   DExclude.releasedCandidateExcludesGlobalSolutionBodyPorted
 
+dPeriodicEnergyUniquenessCompositionClosed : Bool
+dPeriodicEnergyUniquenessCompositionClosed =
+  DEnergy.periodicEnergyUniquenessCompositionClosed
+
+dPeriodicIBPAndGronwallProducersClosed : Bool
+dPeriodicIBPAndGronwallProducersClosed = false
+
 cSelectedCompactCandidateReusesD : Bool
 cSelectedCompactCandidateReusesD =
   CSelected.cReusesSelectedPeriodicCandidate
@@ -187,6 +218,13 @@ cSelectedCompactCandidateReusesD =
 cR3FiniteEnergyExclusionBodyPorted : Bool
 cR3FiniteEnergyExclusionBodyPorted =
   CExclude.releasedR3FiniteEnergyExclusionBodyPorted
+
+cCompactLocalizationAssemblyClosed : Bool
+cCompactLocalizationAssemblyClosed =
+  CLocal.cLocalizationAssemblyClosed
+
+cCompactSupportResidualAndFiniteEnergyComparisonClosed : Bool
+cCompactSupportResidualAndFiniteEnergyComparisonClosed = false
 
 cActualCompactCandidateFamilyReconstructed : Bool
 cActualCompactCandidateFamilyReconstructed = false
