@@ -25,8 +25,11 @@ module DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Rou
 --
 --   B1 exact literal R406 term = exact R410 term/majorant;
 --   B4 selected surviving-term support membership + metric attachment;
---   B6 per-domain shell <= A_Y W(d_Y);
---   B7 sum_Y A_Y <= A_src.
+--   B3 literal CMP116 fixed-Y rate split on the exact R406 tree coordinate;
+--   B4 same-tree weighted-fibre/counting budget.
+--
+-- R420 compiles these into A_Y and A_src, so an independent outer-amplitude
+-- summability leaf is no longer part of the cut.
 --
 -- Downstream source-envelope / real physical-rate identification remains a
 -- separate same-object application seam and is intentionally not hidden here.
@@ -44,6 +47,7 @@ import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Ex
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTermwiseLocalizationRound406Exact as R406
 import DASHI.Physics.YangMills.BalabanCMP116Round406To415Exact as Replay
 import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphGeometryExact as GraphGeometry
+import DASHI.Physics.YangMills.BalabanCMP116Round406SourceRateSplitAmplitudeRound420Exact as RateSplit
 import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact as Preferred
 import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exact as R411
 import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R414
@@ -68,6 +72,31 @@ record LiteralRound406SupportGraphBSource
         application
 
 open LiteralRound406SupportGraphBSource public
+
+
+fromSourceRateSplit :
+  ∀ {Measure TestObservable dataSet extension base}
+    {application : R406.SelectedCMP116TermwiseLocalization base} →
+  Replay.Round406ExactR410Replay application →
+  RateSplit.LiteralRound406SourceRateSplit
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application →
+  LiteralRound406SupportGraphBSource
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application
+fromSourceRateSplit {application = application} replayData source = record
+  { replay = replayData
+  ; supportGraphGeometry =
+      RateSplit.asSupportGraphGeometry application source
+  }
 
 compilePreferredR415 :
   ∀ {Measure TestObservable dataSet extension base}
@@ -139,6 +168,13 @@ round419SeparateSelectedDistanceInequalityLeafRequiredIsFalse :
   round419SeparateSelectedDistanceInequalityLeafRequired ≡ false
 round419SeparateSelectedDistanceInequalityLeafRequiredIsFalse = refl
 
+round419SeparateOuterAmplitudeLeafRequired : Bool
+round419SeparateOuterAmplitudeLeafRequired = false
+
+round419SeparateOuterAmplitudeLeafRequiredIsFalse :
+  round419SeparateOuterAmplitudeLeafRequired ≡ false
+round419SeparateOuterAmplitudeLeafRequiredIsFalse = refl
+
 round419PreferredR415CompilerLevel : ProofLevel
 round419PreferredR415CompilerLevel = machineChecked
 
@@ -147,9 +183,13 @@ literalRound419ExactR406R410ReplayLevel : ProofLevel
 literalRound419ExactR406R410ReplayLevel =
   Replay.literalRound406ExactR410ReplayLevel
 
+literalRound419SourceRateSplitCompilerLevel : ProofLevel
+literalRound419SourceRateSplitCompilerLevel =
+  RateSplit.round420RateSplitFiniteSumCompilerLevel
+
 literalRound419SupportGraphAmplitudeLevel : ProofLevel
 literalRound419SupportGraphAmplitudeLevel =
-  GraphGeometry.literalRound406SupportGraphAndAmplitudeLevel
+  RateSplit.literalR406FixedYRateSplitAndWeightedFibreAttachmentLevel
 
 clayPromotion : Bool
 clayPromotion = false
