@@ -191,7 +191,7 @@ absoluteRadialGapBelowSquaredDisplacement
         scaled = ℚP.*-monoˡ-≤-nonNeg d oneBelowD
       in
       subst
-        (d ≤ d * d)
+        (d ≤_)
         (ℚP.*-identityʳ d)
         scaled
 
