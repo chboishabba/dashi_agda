@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNR571UnitNormalizedDisplacementWeldExact as
 import DASHI.Physics.Closure.NSTriadKNR573HomochiralHeterochiralSplitExact as B573Split
 import DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact as BHelicity
 import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact as BMidpoint
+import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact as BR540Physical
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFold
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact as DEnergy
@@ -134,6 +135,18 @@ bOppositeShiftMidpointNecessityClosed =
 
 bGlobalR567CellToCenteredR571SampleIsValidWithoutMidpoint : Bool
 bGlobalR567CellToCenteredR571SampleIsValidWithoutMidpoint = false
+
+bR540PhysicalOffDiagonalCarrierInstantiated : Bool
+bR540PhysicalOffDiagonalCarrierInstantiated =
+  BR540Physical.physicalR540CarrierInstantiated
+
+bR540PhysicalOutputFibreUniquenessDischarged : Bool
+bR540PhysicalOutputFibreUniquenessDischarged =
+  BR540Physical.physicalOutputFibreUniquenessDischarged
+
+bLiteralR396RemainderToPreferredM2CompilerClosed : Bool
+bLiteralR396RemainderToPreferredM2CompilerClosed =
+  BR540Physical.literalR396RemainderLandsInPreferredM2GivenPairRealization
 
 bCutoffUniformG1FamilyEnvelopeClosed : Bool
 bCutoffUniformG1FamilyEnvelopeClosed = false
