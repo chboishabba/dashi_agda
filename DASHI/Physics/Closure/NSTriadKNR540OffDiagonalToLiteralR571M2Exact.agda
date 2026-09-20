@@ -21,6 +21,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.List.Relation.Unary.All as All
+import Data.List.Relation.Unary.AllPairs.Core as AllPairs
+import Data.List.Relation.Unary.Unique.Propositional as Unique
+open import Relation.Binary.PropositionalEquality using (_≢_; sym)
 
 import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
@@ -43,11 +47,13 @@ record OrderedOffDiagonalR571Correspondence (A : Set) : Set₁ where
 
     pairBelowPairedMagnitude :
       (left right : A) →
+      left ≢ right →
       pairScalar left right
       ≤ Moment.pairedMagnitude (pairToSample left right)
 
     preferredPointwise :
       (left right : A) →
+      left ≢ right →
       Moment.pairedMagnitude (pairToSample left right)
       ≤ Moment.weightedSecondMoment (pairToSample left right)
         * Preferred.preferredCoefficient preferredBudget
@@ -58,13 +64,14 @@ pairBelowPreferredM2 :
   ∀ {A} →
   (C : OrderedOffDiagonalR571Correspondence A) →
   (left right : A) →
+  left ≢ right →
   pairScalar C left right
   ≤ Moment.weightedSecondMoment (pairToSample C left right)
     * Preferred.preferredCoefficient (preferredBudget C)
-pairBelowPreferredM2 C left right =
+pairBelowPreferredM2 C left right distinct =
   ℚP.≤-trans
-    (pairBelowPairedMagnitude C left right)
-    (preferredPointwise C left right)
+    (pairBelowPairedMagnitude C left right distinct)
+    (preferredPointwise C left right distinct)
 
 ------------------------------------------------------------------------
 -- 2. Literal ordered off-diagonal M2 fold with exactly R539's recursion.
@@ -109,40 +116,47 @@ rowBelowM2 :
   (C : OrderedOffDiagonalR571Correspondence A) →
   (left : A) →
   (rest : List A) →
+  All.All (λ right → left ≢ right) rest →
   R539.rowSum (pairScalar C) left rest
   ≤ rowM2 C left rest
-rowBelowM2 C left [] = ℚP.≤-refl
-rowBelowM2 C left (right ∷ rest) =
+rowBelowM2 C left [] All.[] = ℚP.≤-refl
+rowBelowM2 C left (right ∷ rest)
+    (All._∷_ headDistinct tailDistinct) =
   ℚP.+-mono-≤
-    (pairBelowPreferredM2 C left right)
-    (rowBelowM2 C left rest)
+    (pairBelowPreferredM2 C left right headDistinct)
+    (rowBelowM2 C left rest tailDistinct)
 
 columnBelowM2 :
   ∀ {A} →
   (C : OrderedOffDiagonalR571Correspondence A) →
   (rest : List A) →
   (right : A) →
+  All.All (λ left → right ≢ left) rest →
   R539.columnSum (pairScalar C) rest right
   ≤ columnM2 C rest right
-columnBelowM2 C [] right = ℚP.≤-refl
-columnBelowM2 C (left ∷ rest) right =
+columnBelowM2 C [] right All.[] = ℚP.≤-refl
+columnBelowM2 C (left ∷ rest) right
+    (All._∷_ rightDistinctLeft tailDistinct) =
   ℚP.+-mono-≤
-    (pairBelowPreferredM2 C left right)
-    (columnBelowM2 C rest right)
+    (pairBelowPreferredM2 C left right
+      (λ leftEqualsRight → rightDistinctLeft (sym leftEqualsRight)))
+    (columnBelowM2 C rest right tailDistinct)
 
 orderedOffDiagonalBelowM2 :
   ∀ {A} →
   (C : OrderedOffDiagonalR571Correspondence A) →
   (items : List A) →
+  Unique.Unique items →
   R539.orderedOffDiagonalSum (pairScalar C) items
   ≤ orderedOffDiagonalM2 C items
-orderedOffDiagonalBelowM2 C [] = ℚP.≤-refl
-orderedOffDiagonalBelowM2 C (head ∷ rest) =
+orderedOffDiagonalBelowM2 C [] AllPairs.[] = ℚP.≤-refl
+orderedOffDiagonalBelowM2 C (head ∷ rest)
+    (AllPairs._∷_ fresh tailUnique) =
   ℚP.+-mono-≤
     (ℚP.+-mono-≤
-      (rowBelowM2 C head rest)
-      (columnBelowM2 C rest head))
-    (orderedOffDiagonalBelowM2 C rest)
+      (rowBelowM2 C head rest fresh)
+      (columnBelowM2 C rest head fresh))
+    (orderedOffDiagonalBelowM2 C rest tailUnique)
 
 ------------------------------------------------------------------------
 -- 4. Status / corrected trust cut.
