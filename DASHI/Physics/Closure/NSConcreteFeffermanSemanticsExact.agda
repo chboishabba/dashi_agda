@@ -18,6 +18,7 @@ module DASHI.Physics.Closure.NSConcreteFeffermanSemanticsExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_; _,_; ∃)
 
 import Real as BishopReal
 import RealProperties as BishopP
