@@ -35,6 +35,8 @@ data NativeLegalFollowCommand : Set where
   acquireCullenLegislation : NativeLegalFollowCommand
   materialiseCullenSectionSlices : NativeLegalFollowCommand
   runCullenPnfParser : NativeLegalFollowCommand
+  planAustralianContractsLandscape : NativeLegalFollowCommand
+  inspectAustralianContractsLandscape : NativeLegalFollowCommand
 
 data OrchestrationOwner : Set where
   nativeRustCli : OrchestrationOwner
@@ -181,6 +183,10 @@ record NativeLegalFollowCliBoundary : Set where
     cullenLegalOrchestrationIsNativeRustIsTrue :
       cullenLegalOrchestrationIsNativeRust ≡ true
 
+    contractsLandscapeOrchestrationIsNativeRust : Bool
+    contractsLandscapeOrchestrationIsNativeRustIsTrue :
+      contractsLandscapeOrchestrationIsNativeRust ≡ true
+
     spacyIsParserProducerOnly : Bool
     spacyIsParserProducerOnlyIsTrue :
       spacyIsParserProducerOnly ≡ true
@@ -198,6 +204,7 @@ canonicalNativeLegalFollowCliBoundary =
     false refl
     true refl
     false refl
+    true refl
     true refl
     true refl
     true refl
