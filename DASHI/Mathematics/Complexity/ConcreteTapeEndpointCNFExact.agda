@@ -34,6 +34,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canoni
 import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact as Trace
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionConjunctionExact as Enumerate
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalWindowPlacementExact as Placement
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
@@ -268,14 +269,14 @@ acceptanceImplicationPredicates :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
-  List (Global.SomeSlot cols) →
+  List (Enumerate.SomeSlot cols) →
   List
     (Placed.PlacedPredicate
       (AcceptanceLocalWidth machine)
       (ExtendedGlobalWidth machine steps cols))
 acceptanceImplicationPredicates stateCoverage symbolCoverage [] = []
 acceptanceImplicationPredicates stateCoverage symbolCoverage
-    (Global.some-slot index slot ∷ rest) =
+    (Enumerate.some-slot index slot ∷ rest) =
   acceptancePlacedPredicate stateCoverage symbolCoverage slot
   ∷ acceptanceImplicationPredicates
       stateCoverage symbolCoverage rest
@@ -297,7 +298,7 @@ acceptingEndpointCNF stateCoverage symbolCoverage =
   Placed.compilePlacedAll
     (acceptanceImplicationPredicates
       stateCoverage symbolCoverage
-      (Global.allSlots _))
+      (Enumerate.allSlots _))
 
 record EndpointCNFReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
