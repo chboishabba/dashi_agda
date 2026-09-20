@@ -60,3 +60,12 @@ contractsLandscapeOrchestrationRemainsNative :
 contractsLandscapeOrchestrationRemainsNative =
   CLI.contractsLandscapeOrchestrationIsNativeRustIsTrue
     CLI.canonicalNativeLegalFollowCliBoundary
+
+
+reviewedContractHopCompilationRemainsNative :
+  CLI.reviewedContractHopCompilationIsNativeRust
+    CLI.canonicalNativeLegalFollowCliBoundary
+    ≡ true
+reviewedContractHopCompilationRemainsNative =
+  CLI.reviewedContractHopCompilationIsNativeRustIsTrue
+    CLI.canonicalNativeLegalFollowCliBoundary
