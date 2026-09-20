@@ -1,0 +1,477 @@
+#!/usr/bin/env python3
+"""Thin Digital-ESD <-> SLR interoperability wrapper.
+
+This file deliberately does not implement parsing, review, canonical evidence
+semantics, or reduction.  It owns only application-side invocation and
+same-object reconciliation.
+
+Subcommands
+-----------
+prepare
+    Validate a Digital-ESD full-text/canonical-evidence JSONL and emit a stable
+    interop request JSONL.
+
+run
+    Invoke a configured external SLR command.  The command is supplied in a
+    JSON config and may use {input} and {output_dir} placeholders.
+
+verify
+    Reconcile normalized SLR receipt JSONL against the prepared request and
+    emit an application-side invocation receipt.
+
+The normalized SLR receipt contract is intentionally small and canonical:
+    source_identity_reference
+    source_revision_ref
+    content_digest_ref
+    observation_ref
+    candidate_only
+    creates_semantic_authority
+    applicability_promoted
+    claim_truth_promoted
+
+A successful process exit is never treated as evidence payment.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shlex
+import subprocess
+import sys
+from typing import Any
+
+
+WRAPPER_VERSION = "digital-esd-slr-interop-v1"
+
+
+def canonical_json_bytes(value: Any) -> bytes:
+    return (
+        json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        + "\n"
+    ).encode("utf-8")
+
+
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def read_jsonl(path: Path) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    with path.open("r", encoding="utf-8") as handle:
+        for line_no, line in enumerate(handle, start=1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            if not isinstance(row, dict):
+                raise ValueError(f"{path}:{line_no}: expected JSON object")
+            rows.append(row)
+    return rows
+
+
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as handle:
+        for row in rows:
+            handle.write(
+                json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n"
+            )
+
+
+def first_nonempty(row: dict[str, Any], *keys: str) -> str:
+    for key in keys:
+        value = row.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return ""
+
+
+def normalize_digest(value: str) -> str:
+    value = value.strip().lower()
+    if value.startswith("sha256:"):
+        value = value[7:]
+    if len(value) != 64:
+        raise ValueError(f"expected SHA-256 digest, got {value!r}")
+    int(value, 16)
+    return "sha256:" + value
+
+
+def normalize_input_row(row: dict[str, Any], line_no: int) -> dict[str, Any]:
+    source_ref = first_nonempty(
+        row,
+        "source_identity_reference",
+        "source_ref",
+        "attributed_source_reference",
+    )
+    revision_ref = first_nonempty(
+        row,
+        "source_revision_ref",
+        "fullTextRevisionReference",
+        "revision_ref",
+    )
+    digest_raw = first_nonempty(
+        row,
+        "content_digest_ref",
+        "artifact_sha256",
+        "fullTextArtifactSha256",
+        "sha256",
+    )
+    artifact_ref = first_nonempty(
+        row,
+        "artifact_path",
+        "fullTextArtifactReference",
+        "artifact_reference",
+        "text_path",
+    )
+    acquisition_ref = first_nonempty(
+        row,
+        "acquisition_receipt_ref",
+        "retrieval_reference",
+        "retrievalReference",
+    )
+
+    missing = [
+        name
+        for name, value in (
+            ("source identity", source_ref),
+            ("source revision", revision_ref),
+            ("content digest", digest_raw),
+        )
+        if not value
+    ]
+    if missing:
+        raise ValueError(f"input row {line_no}: missing {', '.join(missing)}")
+
+    digest_ref = normalize_digest(digest_raw)
+
+    # Fail closed if the Digital-ESD producer itself claims promotion.
+    for field in (
+        "creates_semantic_authority",
+        "applicability_promoted",
+        "claim_truth_promoted",
+        "creates_source_audit_admission",
+    ):
+        if row.get(field) is True:
+            raise ValueError(
+                f"input row {line_no}: promoted field {field}=true is not admissible"
+            )
+
+    if row.get("candidate_only") is False:
+        raise ValueError(
+            f"input row {line_no}: candidate_only=false is not admissible"
+        )
+
+    request_basis = {
+        "source_identity_reference": source_ref,
+        "source_revision_ref": revision_ref,
+        "content_digest_ref": digest_ref,
+        "artifact_reference": artifact_ref,
+        "acquisition_receipt_ref": acquisition_ref,
+    }
+    request_ref = "digital-esd-slr-request:" + sha256_bytes(
+        canonical_json_bytes(request_basis)
+    )
+
+    return {
+        "schema": "digital-esd-slr-interop-request-v1",
+        "request_reference": request_ref,
+        **request_basis,
+        "candidate_only": True,
+        "creates_semantic_authority": False,
+        "applicability_promoted": False,
+        "claim_truth_promoted": False,
+        "creates_source_audit_admission": False,
+    }
+
+
+def cmd_prepare(args: argparse.Namespace) -> int:
+    rows = read_jsonl(args.input)
+    normalized = [
+        normalize_input_row(row, i)
+        for i, row in enumerate(rows, start=1)
+    ]
+
+    seen: set[tuple[str, str]] = set()
+    for row in normalized:
+        key = (
+            row["source_identity_reference"],
+            row["source_revision_ref"],
+        )
+        if key in seen:
+            raise ValueError(
+                "duplicate source/revision pair in interop input: "
+                f"{key[0]} @ {key[1]}"
+            )
+        seen.add(key)
+
+    write_jsonl(args.output, normalized)
+    manifest = {
+        "schema": "digital-esd-slr-interop-input-manifest-v1",
+        "wrapper_version": WRAPPER_VERSION,
+        "source_input_reference": str(args.input),
+        "source_input_sha256": sha256_file(args.input),
+        "interop_input_reference": str(args.output),
+        "interop_input_sha256": sha256_file(args.output),
+        "record_count": len(normalized),
+        "candidate_only": True,
+        "creates_semantic_authority": False,
+        "applicability_promoted": False,
+        "claim_truth_promoted": False,
+        "creates_source_audit_admission": False,
+    }
+    manifest_path = args.manifest or args.output.with_suffix(".manifest.json")
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(manifest, sort_keys=True))
+    return 0
+
+
+def load_config(path: Path) -> dict[str, Any]:
+    cfg = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(cfg, dict):
+        raise ValueError("interop config must be a JSON object")
+    argv = cfg.get("command")
+    if not isinstance(argv, list) or not argv or not all(
+        isinstance(x, str) and x for x in argv
+    ):
+        raise ValueError("config.command must be a non-empty string array")
+    return cfg
+
+
+def cmd_run(args: argparse.Namespace) -> int:
+    cfg = load_config(args.config)
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+
+    substitutions = {
+        "{input}": str(args.input.resolve()),
+        "{output_dir}": str(args.output_dir.resolve()),
+    }
+    argv: list[str] = []
+    for token in cfg["command"]:
+        for needle, value in substitutions.items():
+            token = token.replace(needle, value)
+        argv.append(token)
+
+    env = os.environ.copy()
+    extra_env = cfg.get("environment", {})
+    if extra_env:
+        if not isinstance(extra_env, dict):
+            raise ValueError("config.environment must be an object")
+        env.update({str(k): str(v) for k, v in extra_env.items()})
+
+    invocation = {
+        "schema": "digital-esd-slr-process-invocation-v1",
+        "wrapper_version": WRAPPER_VERSION,
+        "input_reference": str(args.input),
+        "input_sha256": sha256_file(args.input),
+        "external_tool_reference": str(
+            cfg.get("tool_reference") or argv[0]
+        ),
+        "external_tool_revision_reference": str(
+            cfg.get("tool_revision_reference") or "unrecorded"
+        ),
+        "argv": argv,
+        "process_exit_creates_evidence_payment": False,
+    }
+
+    invocation_path = args.output_dir / "interop-invocation.json"
+    invocation_path.write_text(
+        json.dumps(invocation, indent=2, ensure_ascii=False, sort_keys=True)
+        + "\n",
+        encoding="utf-8",
+    )
+
+    completed = subprocess.run(
+        argv,
+        cwd=str(args.cwd.resolve()) if args.cwd else None,
+        env=env,
+        check=False,
+    )
+    result = {
+        **invocation,
+        "exit_code": completed.returncode,
+        "successful_process_exit_creates_evidence_payment": False,
+    }
+    (args.output_dir / "interop-process-result.json").write_text(
+        json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    if completed.returncode != 0:
+        raise SystemExit(completed.returncode)
+    return 0
+
+
+def normalize_output_row(row: dict[str, Any], line_no: int) -> dict[str, Any]:
+    required = (
+        "source_identity_reference",
+        "source_revision_ref",
+        "content_digest_ref",
+        "observation_ref",
+    )
+    missing = [
+        key
+        for key in required
+        if not isinstance(row.get(key), str) or not row[key].strip()
+    ]
+    if missing:
+        raise ValueError(
+            f"output row {line_no}: missing canonical fields {missing}"
+        )
+
+    if row.get("candidate_only") is not True:
+        raise ValueError(
+            f"output row {line_no}: candidate_only must be true"
+        )
+    for field in (
+        "creates_semantic_authority",
+        "applicability_promoted",
+        "claim_truth_promoted",
+    ):
+        if row.get(field) is not False:
+            raise ValueError(
+                f"output row {line_no}: {field} must be false"
+            )
+
+    out = dict(row)
+    out["content_digest_ref"] = normalize_digest(
+        str(row["content_digest_ref"])
+    )
+    return out
+
+
+def cmd_verify(args: argparse.Namespace) -> int:
+    request_rows = read_jsonl(args.input)
+    output_rows_raw = read_jsonl(args.receipts)
+    output_rows = [
+        normalize_output_row(row, i)
+        for i, row in enumerate(output_rows_raw, start=1)
+    ]
+
+    expected: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in request_rows:
+        key = (
+            str(row["source_identity_reference"]),
+            str(row["source_revision_ref"]),
+        )
+        expected[key] = row
+
+    observed: dict[tuple[str, str], dict[str, Any]] = {}
+    failures: list[str] = []
+    for row in output_rows:
+        key = (
+            str(row["source_identity_reference"]),
+            str(row["source_revision_ref"]),
+        )
+        if key in observed:
+            failures.append(
+                f"duplicate SLR receipt for {key[0]} @ {key[1]}"
+            )
+            continue
+        observed[key] = row
+
+        request = expected.get(key)
+        if request is None:
+            failures.append(
+                "SLR receipt has no Digital-ESD request: "
+                f"{key[0]} @ {key[1]}"
+            )
+            continue
+        if normalize_digest(str(request["content_digest_ref"])) != str(
+            row["content_digest_ref"]
+        ):
+            failures.append(
+                f"digest mismatch for {key[0]} @ {key[1]}"
+            )
+
+    missing = sorted(set(expected) - set(observed))
+    for source_ref, revision_ref in missing:
+        failures.append(
+            f"missing SLR receipt for {source_ref} @ {revision_ref}"
+        )
+
+    if failures:
+        raise RuntimeError(
+            "SLR interop reconciliation failed:\n- "
+            + "\n- ".join(failures[:50])
+        )
+
+    receipt_basis = {
+        "input_reference": str(args.input),
+        "input_sha256": sha256_file(args.input),
+        "output_reference": str(args.receipts),
+        "output_sha256": sha256_file(args.receipts),
+        "record_count": len(output_rows),
+    }
+    receipt = {
+        "schema": "digital-esd-slr-interop-invocation-receipt-v1",
+        "wrapper_version": WRAPPER_VERSION,
+        **receipt_basis,
+        "invocation_reference": "digital-esd-slr-interop:"
+        + sha256_bytes(canonical_json_bytes(receipt_basis)),
+        "source_identity_reconciled": True,
+        "source_revision_reconciled": True,
+        "content_digest_reconciled": True,
+        "candidate_only_verified": True,
+        "creates_semantic_authority": False,
+        "applicability_promoted": False,
+        "claim_truth_promoted": False,
+        "creates_source_audit_admission": False,
+    }
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(
+        json.dumps(receipt, indent=2, ensure_ascii=False, sort_keys=True)
+        + "\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(receipt, sort_keys=True))
+    return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser()
+    sub = parser.add_subparsers(dest="command_name", required=True)
+
+    prepare = sub.add_parser("prepare")
+    prepare.add_argument("--input", required=True, type=Path)
+    prepare.add_argument("--output", required=True, type=Path)
+    prepare.add_argument("--manifest", type=Path)
+    prepare.set_defaults(func=cmd_prepare)
+
+    run = sub.add_parser("run")
+    run.add_argument("--input", required=True, type=Path)
+    run.add_argument("--config", required=True, type=Path)
+    run.add_argument("--output-dir", required=True, type=Path)
+    run.add_argument("--cwd", type=Path)
+    run.set_defaults(func=cmd_run)
+
+    verify = sub.add_parser("verify")
+    verify.add_argument("--input", required=True, type=Path)
+    verify.add_argument("--receipts", required=True, type=Path)
+    verify.add_argument("--output", required=True, type=Path)
+    verify.set_defaults(func=cmd_verify)
+
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+    return int(args.func(args))
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
