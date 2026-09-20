@@ -197,8 +197,8 @@ canonicalNativeLegalFollowCliBoundary =
     true refl
     false refl
     true refl
-    true refl
-    true refl
     false refl
+    true refl
+    true refl
     true refl
     false refl
