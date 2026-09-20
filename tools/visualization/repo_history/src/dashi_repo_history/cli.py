@@ -14,8 +14,10 @@ def _extract(args: argparse.Namespace) -> None:
         path_prefix=args.path_prefix,
     )
     timeline = extractor.timeline(
+        first_commits=args.first_commits,
         max_commits=args.max_commits,
         stride=args.stride,
+        semantic=not args.history_only,
     )
     timeline.write_json(args.output)
     print(args.output)
@@ -54,8 +56,15 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument("repo")
     extract.add_argument("-o", "--output", default="repo-history.json")
     extract.add_argument("--path-prefix")
-    extract.add_argument("--max-commits", type=int)
+    window = extract.add_mutually_exclusive_group()
+    window.add_argument("--first-commits", type=int)
+    window.add_argument("--max-commits", type=int)
     extract.add_argument("--stride", type=int, default=1)
+    extract.add_argument(
+        "--history-only",
+        action="store_true",
+        help="Extract only commit/branch/merge topology; skip Tree-sitter semantic snapshots.",
+    )
     extract.set_defaults(func=_extract)
 
     render = sub.add_parser("render")
