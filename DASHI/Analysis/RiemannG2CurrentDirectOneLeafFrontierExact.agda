@@ -51,6 +51,7 @@ import DASHI.Analysis.RiemannG2CenteredNearCoreSignLeanDonorExact as R2NearSign
 import DASHI.Analysis.RiemannG2CenteredOffExplicitHighLeanDonorExact as R2OffHigh
 import DASHI.Analysis.RiemannG2CenteredComplementCanonicalHighLeanDonorExact as R2CenteredHigh
 import DASHI.Analysis.RiemannG2GammaPoleCancellationRatioTransferLeanDonorExact as R2GammaRatio
+import DASHI.Analysis.RiemannG2GammaIntegratedGapAndCutoffCompatibilityLeanDonorExact as R2GammaIntegrated
 import DASHI.Analysis.RiemannG2QuantitativeScaledTaperLeanDonorExact as R2QuantTaper
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
@@ -726,10 +727,20 @@ gammaRatioGapQuantitativeDeficitSourceWritten :
     R2GammaRatio.canonicalGammaPoleCancellationRatioTransferBoundary ≡ true
 gammaRatioGapQuantitativeDeficitSourceWritten = refl
 
-gammaIntegratedRatioGapStillOpen :
-  R2GammaRatio.GammaPoleCancellationRatioTransferBoundary.concreteRatioGapPaid
-    R2GammaRatio.canonicalGammaPoleCancellationRatioTransferBoundary ≡ false
-gammaIntegratedRatioGapStillOpen = refl
+gammaIntegratedRatioGapNowSourceWritten :
+  R2GammaIntegrated.GammaIntegratedGapCutoffCompatibilityBoundary.h1IntegratedRatioGapPaid
+    R2GammaIntegrated.canonicalGammaIntegratedGapCutoffCompatibilityBoundary ≡ true
+gammaIntegratedRatioGapNowSourceWritten = refl
+
+quarticFarTailCannotReuseSameSignedWindow :
+  R2GammaIntegrated.GammaIntegratedGapCutoffCompatibilityBoundary.quarticFarTailCanBeSubstitutedWithoutIntermediateShell
+    R2GammaIntegrated.canonicalGammaIntegratedGapCutoffCompatibilityBoundary ≡ false
+quarticFarTailCannotReuseSameSignedWindow = refl
+
+quarticRouteStillNeedsIntermediateShell :
+  R2GammaIntegrated.GammaIntegratedGapCutoffCompatibilityBoundary.intermediateShellControlStillRequiredForQuarticRoute
+    R2GammaIntegrated.canonicalGammaIntegratedGapCutoffCompatibilityBoundary ≡ true
+quarticRouteStillNeedsIntermediateShell = refl
 
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
