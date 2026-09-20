@@ -84,11 +84,37 @@ record MergeWitness : Set where
 
 open MergeWitness public
 
+------------------------------------------------------------------------
+-- Parent-evidenced paths.  These are the formal counterpart of the concrete
+-- fork-to-tip commit paths serialized by the Python history extractor.
+------------------------------------------------------------------------
+
+data ParentPath : CommitNode → CommitNode → Set where
+  pathRoot :
+    ∀ commit →
+    ParentPath commit commit
+
+  pathStep :
+    ∀ {base parent child} →
+    commitId parent ∈ commitParents child →
+    ParentPath base parent →
+    ParentPath base child
+
 record BranchMergeEpisode : Set where
   constructor branchMergeEpisode
   field
     fork : ForkWitness
     merge : MergeWitness
+
+    leftBranchPath :
+      ParentPath
+        (forkBase fork)
+        (mergeLeft merge)
+
+    rightBranchPath :
+      ParentPath
+        (forkBase fork)
+        (mergeRight merge)
 
 open BranchMergeEpisode public
 
@@ -210,8 +236,20 @@ canonicalMergeWitness =
     here
     (there here)
 
+canonicalLeftPath :
+  ParentPath canonicalRoot canonicalLeft
+canonicalLeftPath =
+  pathStep here (pathRoot canonicalRoot)
+
+canonicalRightPath :
+  ParentPath canonicalRoot canonicalRight
+canonicalRightPath =
+  pathStep here (pathRoot canonicalRoot)
+
 canonicalBranchMergeEpisode : BranchMergeEpisode
 canonicalBranchMergeEpisode =
   branchMergeEpisode
     canonicalForkWitness
     canonicalMergeWitness
+    canonicalLeftPath
+    canonicalRightPath
