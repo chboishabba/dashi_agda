@@ -38,6 +38,13 @@ data ContractDoctrine : Set where
   privity : ContractDoctrine
   consumerLaw : ContractDoctrine
 
+data TraceNodeKind : Set where
+  doctrineNode : TraceNodeKind
+  caseAuthorityNode : TraceNodeKind
+  legislationNode : TraceNodeKind
+  researchRequirementNode : TraceNodeKind
+  matterNode : TraceNodeKind
+
 data ContractSourceRole : Set where
   primaryCaseLaw : ContractSourceRole
   primaryLegislation : ContractSourceRole
@@ -67,6 +74,7 @@ record ContractTraceNode : Set where
   field
     semanticReference : String
     label : String
+    nodeKind : TraceNodeKind
     doctrine : ContractDoctrine
     jurisdictionReference : String
     courtReference : String
