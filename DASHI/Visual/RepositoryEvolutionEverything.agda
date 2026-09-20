@@ -8,6 +8,7 @@ open import DASHI.Core.SymbolIdentityEvolutionExact
 open import DASHI.Core.PortableInteractiveViewExact
 open import DASHI.Visual.SemanticHistoryVisualizationExact
 open import DASHI.Visual.SemanticGraphProjectionExact
+open import DASHI.Visual.SceneProgramCompilerExact
 
 ------------------------------------------------------------------------
 -- AGGREGATE CONTRACT FOR REPOSITORY-EVOLUTION VISUALIZATION
