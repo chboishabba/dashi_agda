@@ -733,3 +733,36 @@ pnpFlatAssignmentStillExternal :
     PNPRunCNF.canonicalConcreteTapeRunCNFWeldBoundary
   ≡ false
 pnpFlatAssignmentStillExternal = refl
+
+
+------------------------------------------------------------------------
+-- TWENTY-SECOND CONTINUATION: explicit sibling-Lean producer custody.
+-- Source presence is paid; Lean kernel observation and Agda same-object import
+-- remain deliberately false.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as LeanAssist
+
+leanHodgeCP1QuotientSourcePresent :
+  LeanAssist.hodgeCP1QuotientSourcePresent
+    LeanAssist.currentMillenniumLeanAssistReceipt
+  ≡ true
+leanHodgeCP1QuotientSourcePresent = refl
+
+leanBSDRationalSquareBitsSourcePresent :
+  LeanAssist.bsdSquareBitsSourcePresent
+    LeanAssist.currentMillenniumLeanAssistReceipt
+  ≡ true
+leanBSDRationalSquareBitsSourcePresent = refl
+
+leanKernelReceiptStillUnobserved :
+  LeanAssist.leanKernelReceiptObserved
+    LeanAssist.currentMillenniumLeanAssistReceipt
+  ≡ false
+leanKernelReceiptStillUnobserved = refl
+
+agdaLeanSameObjectImportStillOpen :
+  LeanAssist.agdaSameObjectImportPaid
+    LeanAssist.currentMillenniumLeanAssistReceipt
+  ≡ false
+agdaLeanSameObjectImportStillOpen = refl
