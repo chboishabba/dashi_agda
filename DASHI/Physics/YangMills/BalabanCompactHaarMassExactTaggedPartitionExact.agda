@@ -101,11 +101,12 @@ asFiniteQuadratureCellError dataSet = record
       λ cell →
         subst
           (λ difference → absℝ difference ≤ℝ 0ℝ)
-          (subSelf
-            (cellMass dataSet cell *ℝ sampleValue dataSet cell))
+          (sym
+            (subSelf
+              (cellMass dataSet cell *ℝ sampleValue dataSet cell)))
           (subst
             (λ absolute → absolute ≤ℝ 0ℝ)
-            absZero
+            (sym absZero)
             ≤ℝ-refl)
   }
 
@@ -131,15 +132,21 @@ totalBudgetIsModulus :
   ≡ modulus dataSet
 totalBudgetIsModulus dataSet =
   trans
-    (realSumScaleRight
+    (Sums.realSumCong
       (cells dataSet)
-      (cellMass dataSet)
-      (modulus dataSet))
+      (λ cell →
+        +-identityʳ
+          (cellMass dataSet cell *ℝ modulus dataSet)))
     (trans
-      (cong
-        (λ totalMass → totalMass *ℝ modulus dataSet)
-        (massesSumOne dataSet))
-      (oneTimes (modulus dataSet)))
+      (realSumScaleRight
+        (cells dataSet)
+        (cellMass dataSet)
+        (modulus dataSet))
+      (trans
+        (cong
+          (λ totalMass → totalMass *ℝ modulus dataSet)
+          (massesSumOne dataSet))
+        (oneTimes (modulus dataSet))))
 
 massExactTaggedPartitionError :
   ∀ {Cell}
