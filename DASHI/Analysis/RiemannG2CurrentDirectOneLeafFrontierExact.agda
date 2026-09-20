@@ -866,6 +866,17 @@ uniformGammaMarginStillNeedsAbsoluteScale :
     R2GammaQuant.canonicalGammaMatchedQuantitativeGainBoundary ≡ false
 uniformGammaMarginStillNeedsAbsoluteScale = refl
 
+
+gammaAbsoluteScaleProducerNowPaidAtSource :
+  R2GammaAbs.GammaAbsoluteMarginBoundary.gammaAbsoluteScaleProducerPaid
+    R2GammaAbs.canonicalGammaAbsoluteMarginBoundary ≡ true
+gammaAbsoluteScaleProducerNowPaidAtSource = refl
+
+highAggregateNowReducedToRvMMainAndRemainder :
+  R2GammaAbs.GammaAbsoluteMarginBoundary.rvMSmoothMainCancellationPaid
+    R2GammaAbs.canonicalGammaAbsoluteMarginBoundary ≡ false
+highAggregateNowReducedToRvMMainAndRemainder = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
