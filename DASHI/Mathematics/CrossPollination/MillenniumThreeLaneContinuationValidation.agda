@@ -779,3 +779,29 @@ leanBSDMathlibTwoSquaresReused :
     LeanAssist.currentMillenniumLeanAssistReceipt
   ≡ true
 leanBSDMathlibTwoSquaresReused = refl
+
+
+------------------------------------------------------------------------
+-- TWENTY-THIRD CONTINUATION: initial/accepting endpoint semantics lifted over
+-- the finite run <-> local-CNF path equivalence.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as PNPAccept
+
+pnpAcceptingRunToCNFPathPaid :
+  PNPAccept.acceptingRunToEncodedPathPaid
+    PNPAccept.canonicalConcreteTapeAcceptingRunCNFBoundary
+  ≡ true
+pnpAcceptingRunToCNFPathPaid = refl
+
+pnpCNFPathToAcceptingRunPaid :
+  PNPAccept.encodedPathToAcceptingRunPaid
+    PNPAccept.canonicalConcreteTapeAcceptingRunCNFBoundary
+  ≡ true
+pnpCNFPathToAcceptingRunPaid = refl
+
+pnpLiteralEndpointClausesStillCodecBlocked :
+  PNPAccept.literalEndpointCNFPlacementPaid
+    PNPAccept.canonicalConcreteTapeAcceptingRunCNFBoundary
+  ≡ false
+pnpLiteralEndpointClausesStillCodecBlocked = refl
