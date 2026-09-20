@@ -14,6 +14,7 @@ open import DASHI.Visual.SemanticHistoryVisualizationExact
 open import DASHI.Visual.SemanticGraphProjectionExact
 open import DASHI.Visual.SceneProgramCompilerExact
 open import DASHI.Visual.RootedSemanticFocusExact
+open import DASHI.Visual.TemporalRootedFocusExact
 
 ------------------------------------------------------------------------
 -- AGGREGATE CONTRACT FOR REPOSITORY-EVOLUTION VISUALIZATION
