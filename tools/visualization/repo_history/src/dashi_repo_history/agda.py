@@ -619,7 +619,11 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
             name_type="record_name",
         )
 
-        if _first_ancestor(node, {"postulate"}) is not None:
+        if _first_ancestor(node, {"generalize"}) is not None:
+            kind = "variable"
+            container_label = None
+            container_relation = None
+        elif _first_ancestor(node, {"postulate"}) is not None:
             kind = "postulate"
             container_label = None
             container_relation = None
