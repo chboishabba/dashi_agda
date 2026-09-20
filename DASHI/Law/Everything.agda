@@ -140,3 +140,4 @@ import DASHI.Law.SensibLawWoogarooKoalaPopulationConnectivitySnowballExact
 import DASHI.Law.AustralianContractsLegalFollowExact
 import DASHI.Law.WaltonsEstoppelMaterialisationExact
 import DASHI.Law.MannPatersonUnseenMatterExact
+import DASHI.Law.AustralianContractsLegalFollowRegression
