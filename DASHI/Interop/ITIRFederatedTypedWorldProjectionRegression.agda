@@ -2,6 +2,7 @@ module DASHI.Interop.ITIRFederatedTypedWorldProjectionRegression where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (false; true)
+open import Data.Empty using (⊥)
 
 import DASHI.Interop.ITIRFederatedTypedWorldProjectionExact as W
 
