@@ -162,10 +162,15 @@ def _declaration_fingerprint(
     )
 
 
-def _reference_kind(node: Any) -> str:
+def _reference_kind(source: bytes, node: Any) -> str:
     for ancestor in _ancestors(node):
         if ancestor.type == "rhs":
-            return "body-depends"
+            rhs_text = _node_text(source, ancestor).lstrip()
+            if rhs_text.startswith(":"):
+                return "type-depends"
+            if rhs_text.startswith("="):
+                return "body-depends"
+            return "depends"
         if ancestor.type in {
             "type_signature",
             "data_signature",
@@ -706,7 +711,7 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
             RawReference(
                 value=value,
                 span=_span(path, ref),
-                kind=_reference_kind(ref),
+                kind=_reference_kind(source, ref),
                 scope=scope,
             )
         )
