@@ -14,6 +14,8 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MicrocausalChargeExact w
 -- Therefore eventual stabilization is not an additional physical premise.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Nat.Base using (_≤_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsLocalCurrentMicrocausalShellExact as Micro
@@ -46,11 +48,11 @@ microcausalCurrentCutoffChargeActionStable :
   Core.supportRadius
     (microcausalCurrentBuildsLocalCoreCutoffCharge current ward)
     observable
-  Data.Nat.Base.≤ leftCutoff →
+  ≤ leftCutoff →
   Core.supportRadius
     (microcausalCurrentBuildsLocalCoreCutoffCharge current ward)
     observable
-  Data.Nat.Base.≤ rightCutoff →
+  ≤ rightCutoff →
   Core.cutoffChargeAction
     (microcausalCurrentBuildsLocalCoreCutoffCharge current ward)
     leftCutoff observable
