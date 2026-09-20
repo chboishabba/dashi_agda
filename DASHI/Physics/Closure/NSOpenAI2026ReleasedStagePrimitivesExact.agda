@@ -98,10 +98,10 @@ record ReleasedPrimitiveAnalyticRules
       PrimitiveData S (afterTemporal O u)
 
     rankGeometryForState :
-      (u : State S) →
+      (u v : State S) →
       PrimitiveData S u →
-      RankGeometry S u →
-      RankGeometry S (afterTemporal O u)
+      RankGeometry S v →
+      RankGeometry S u
 
     rankStagePrimitive :
       (u : State S) →
@@ -137,10 +137,7 @@ record ReleasedStagePrimitiveInputs
         signedWave
 
     incomingRankGeometry :
-      RankGeometry S
-        (afterSigned O
-          (afterParticular O incomingState particularWave)
-          signedWave)
+      RankGeometry S incomingState
 
 open ReleasedStagePrimitiveInputs public
 
@@ -242,8 +239,9 @@ stagePrimitives {O = O} {R = R} I =
 
     HG =
       rankGeometryForState R
-        (signedState I)
-        H2
+        (temporalState I)
+        (incomingState I)
+        H3
         (incomingRankGeometry I)
 
     H4 =
@@ -283,10 +281,7 @@ record ReleasedStagePrimitiveLeafProducers
       SignedCovariance S (afterParticular O u particular) signed
 
     rankGeometry :
-      RankGeometry S
-        (afterSigned O
-          (afterParticular O u particular)
-          signed)
+      RankGeometry S u
 
 open ReleasedStagePrimitiveLeafProducers public
 
