@@ -8,7 +8,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ABSameMeasureExact where
 -- CMP119 finite family.  B's covariance carrier is only an expectation-level
 -- view of that same family.  These equalities make the identity explicit:
 --
---   A finite expectation = B finite carrier expectation
+--   A normalized finite-family expectation = B finite carrier expectation
 --   A continuum expectation = B continuum carrier expectation
 --
 -- No comparison theorem, weak-limit uniqueness theorem, or post-hoc measure
