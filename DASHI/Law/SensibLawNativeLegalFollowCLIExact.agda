@@ -44,6 +44,7 @@ data NativeLegalFollowCommand : Set where
   compileContractAuthorityIdentityReview : NativeLegalFollowCommand
   compileReviewedContractPropositionHops : NativeLegalFollowCommand
   compileReviewedContractTreatmentHops : NativeLegalFollowCommand
+  syncWaltonsReviewedHopsToS14 : NativeLegalFollowCommand
 
 data OrchestrationOwner : Set where
   nativeRustCli : OrchestrationOwner
@@ -130,6 +131,7 @@ data JsonReviewFileAutomaticallyReviewerDecision : Set where
 data JsonReceiptAutomaticallyClaimTruth : Set where
 data CliSequenceAutomaticallyPaysOpenResidual : Set where
 data PinnedOalcStreamingAutomaticallyLegalTruth : Set where
+data ReviewedHopJsonBecomesCanonicalSemanticTransport : Set where
 
 nativeCliDoesNotCreateAuthority :
   NativeCliAutomaticallyLegalAuthority → ⊥
@@ -158,6 +160,10 @@ cliSequenceDoesNotPayResidual ()
 pinnedStreamDoesNotCreateLegalTruth :
   PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
 pinnedStreamDoesNotCreateLegalTruth ()
+
+reviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
+  ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+reviewedHopJsonDoesNotBecomeCanonicalSemanticTransport ()
 
 record NativeLegalFollowCliBoundary : Set where
   constructor nativeLegalFollowCliBoundary
@@ -198,6 +204,14 @@ record NativeLegalFollowCliBoundary : Set where
     reviewedContractHopCompilationIsNativeRustIsTrue :
       reviewedContractHopCompilationIsNativeRust ≡ true
 
+    reviewedHopTransportIsTypedRust : Bool
+    reviewedHopTransportIsTypedRustIsTrue :
+      reviewedHopTransportIsTypedRust ≡ true
+
+    reviewedHopJsonIsCanonicalSemanticTransport : Bool
+    reviewedHopJsonIsCanonicalSemanticTransportIsFalse :
+      reviewedHopJsonIsCanonicalSemanticTransport ≡ false
+
     spacyIsParserProducerOnly : Bool
     spacyIsParserProducerOnlyIsTrue :
       spacyIsParserProducerOnly ≡ true
@@ -219,5 +233,8 @@ canonicalNativeLegalFollowCliBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    false refl
     true refl
     false refl
