@@ -37,10 +37,12 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNF4GlobalOutputFiberPartitionRound39Exact as R39
 import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDAdapterRound219Exact as R219
+import DASHI.Physics.Closure.NSTriadKNSelectedPairEnergyDissipationProductRound109Exact as R109
 import DASHI.Physics.Closure.NSTriadKNSelectedPairPhysicalTriadRoutingRound469Exact as R469
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact as LiveOwner
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact as RegionPay
@@ -57,8 +59,8 @@ module UniformFamily
   E = Field30.physicalEmbedding physicalSystem
   I = Field30.physicalInverseSquare physicalSystem
   system = Field30.finiteSystem physicalSystem
-  velocity = Field30.Audit.velocity system
-  cutoff = Field30.Audit.cutoff system
+  velocity = Audit.velocity system
+  cutoff = Audit.cutoff system
   nu = Field30.viscosity physicalSystem
 
   module Live = LiveOwner.Live physicalSystem S
@@ -74,6 +76,8 @@ module UniformFamily
       thetaStrictlyBelowOne : theta < 1
 
       coefficientNN : 0ℚ ≤ coefficient
+
+      viscosityNN : 0ℚ ≤ nu
 
       thetaMeaning :
         (output : Z3.FourierMode) →
@@ -295,7 +299,7 @@ module UniformFamily
     (family : UniformPhysicalCriticalRegionFamily) →
     sumLocalED family (Cube.cutoffModes cutoff)
     ≡
-    R469.R109.selectedOrderedPairSum
+    R109.selectedOrderedPairSum
       (R219.physicalModalED E I velocity)
       (R469.outputFilteredSelect cutoff select)
       (Cube.cutoffModes cutoff)
@@ -310,11 +314,11 @@ module UniformFamily
 
   globalEnergyDissipationProduct : ℚ
   globalEnergyDissipationProduct =
-    R469.R109.sumEnergy
+    R109.sumEnergy
       (R219.physicalModalED E I velocity)
       (Cube.cutoffModes cutoff)
     *
-    R469.R109.sumDissipation
+    R109.sumDissipation
       (R219.physicalModalED E I velocity)
       (Cube.cutoffModes cutoff)
 
@@ -345,13 +349,8 @@ module UniformFamily
 
       nuC-NN : 0ℚ ≤ nu * coefficient
       nuC-NN =
-        let
-          output = Z3.zeroMode
-          module P = RegionPay.LiveRegionPayment physicalSystem S output
-          payment = paymentAt family output
-        in
-        ℚP.*-mono-≤
-          (P.viscosityNN payment)
+        Rational.productNonnegative
+          (viscosityNN family)
           (coefficientNN family)
 
       scaledED :
