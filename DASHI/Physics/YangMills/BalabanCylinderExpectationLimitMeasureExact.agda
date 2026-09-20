@@ -194,3 +194,48 @@ limitFunctionalAlgebraLevel = machineChecked
 
 cylinderMeasureRepresentationAuthorityLevel : ProofLevel
 cylinderMeasureRepresentationAuthorityLevel = standardImported
+
+representedMeasureExpectationIsLimit :
+  ∀ {Observable Measure}
+    {dataSet : CylinderExpectationLimitData Observable}
+    (authority : CylinderMeasureRepresentationAuthority Observable Measure)
+    observable →
+  let represented = represent authority dataSet in
+  expectation represented (measure represented) observable
+  ≡ limitExpectation dataSet observable
+representedMeasureExpectationIsLimit authority observable =
+  represented (represent authority _) observable
+
+representedLimitMeasureNormalized :
+  ∀ {Observable Measure}
+    {dataSet : CylinderExpectationLimitData Observable}
+    (authority : CylinderMeasureRepresentationAuthority Observable Measure) →
+  let representedMeasure = represent authority dataSet in
+  expectation representedMeasure
+    (measure representedMeasure)
+    (one dataSet)
+  ≡ 1ℚ
+representedLimitMeasureNormalized {dataSet = dataSet} authority =
+  trans
+    (represented (represent authority dataSet) (one dataSet))
+    (limitOne dataSet)
+
+representedLimitMeasurePositive :
+  ∀ {Observable Measure}
+    {dataSet : CylinderExpectationLimitData Observable}
+    (authority : CylinderMeasureRepresentationAuthority Observable Measure)
+    observable →
+  Nonnegative dataSet observable →
+  0ℚ ≤
+    let representedMeasure = represent authority dataSet in
+    expectation representedMeasure
+      (measure representedMeasure)
+      observable
+representedLimitMeasurePositive {dataSet = dataSet} authority observable nonnegative =
+  subst
+    (λ value → 0ℚ ≤ value)
+    (sym (represented (represent authority dataSet) observable))
+    (limitPositive dataSet observable nonnegative)
+
+representedCylinderMeasureCompilerLevel : ProofLevel
+representedCylinderMeasureCompilerLevel = machineChecked
