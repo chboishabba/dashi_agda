@@ -141,6 +141,32 @@ secondAffineNormalizationRescaling {field} laws pair domain = record
           refl)
   }
 
+data AffineChartChoice
+    {field : CP.ComplexFieldPresentation}
+    (pair : P1.HomogeneousPair field) : Set where
+  firstChart :
+    FirstAffineChartDomain pair →
+    AffineChartChoice pair
+
+  secondChart :
+    SecondAffineChartDomain pair →
+    AffineChartChoice pair
+
+homogeneousPairCoveredByAffineCharts :
+  ∀ {field}
+    (pair : P1.HomogeneousPair field) →
+  AffineChartChoice pair
+homogeneousPairCoveredByAffineCharts
+    (P1.homogeneous-pair first second
+      (CP.hereNonzero firstNonzero)) =
+  firstChart record
+    { firstNonzero = firstNonzero }
+homogeneousPairCoveredByAffineCharts
+    (P1.homogeneous-pair first second
+      (CP.thereNonzero (CP.hereNonzero secondNonzero))) =
+  secondChart record
+    { secondNonzero = secondNonzero }
+
 record ProjectiveLineAffineChartsBoundary : Set where
   constructor projective-line-affine-charts-boundary
   field
@@ -161,4 +187,4 @@ canonicalProjectiveLineAffineChartsBoundary :
   ProjectiveLineAffineChartsBoundary
 canonicalProjectiveLineAffineChartsBoundary =
   projective-line-affine-charts-boundary
-    true true true true true false false false false false false false
+    true true true true true true false false false false false false
