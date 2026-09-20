@@ -680,3 +680,29 @@ bsdAllPrimeCMClassificationStillOpen :
     BSDCM.canonicalEllipticCMPrimeCoefficientBoundary
   ≡ false
 bsdAllPrimeCMClassificationStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- TWENTIETH CONTINUATION: replicate the fixed-width local CNF across the whole
+-- row and recover the semantic machine step generically.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeWholeRowCNFWeldExact as PNPRowCNF
+
+pnpWholeRowCNFForwardPaid :
+  PNPRowCNF.stepToWholeRowCNFPaid
+    PNPRowCNF.canonicalConcreteTapeWholeRowCNFWeldBoundary
+  ≡ true
+pnpWholeRowCNFForwardPaid = refl
+
+pnpWholeRowCNFReversePaid :
+  PNPRowCNF.wholeRowCNFToStepPaid
+    PNPRowCNF.canonicalConcreteTapeWholeRowCNFWeldBoundary
+  ≡ true
+pnpWholeRowCNFReversePaid = refl
+
+pnpCanonicalCodecStillOnlyMissingSpecialization :
+  PNPRowCNF.canonicalConcreteCodecSpecializationPaid
+    PNPRowCNF.canonicalConcreteTapeWholeRowCNFWeldBoundary
+  ≡ false
+pnpCanonicalCodecStillOnlyMissingSpecialization = refl
