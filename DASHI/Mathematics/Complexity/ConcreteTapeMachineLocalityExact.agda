@@ -56,6 +56,19 @@ record TapeRule (State Symbol : Set) : Set where
 
 open TapeRule public
 
+data RuleOccurs {State Symbol : Set} :
+    TapeRule State Symbol →
+    List (TapeRule State Symbol) →
+    Set where
+  ruleHere :
+    ∀ {rule rest} →
+    RuleOccurs rule (rule ∷ rest)
+
+  ruleThere :
+    ∀ {rule other rest} →
+    RuleOccurs rule rest →
+    RuleOccurs rule (other ∷ rest)
+
 record ConcreteTapeMachine : Set₁ where
   field
     State : Set
@@ -157,6 +170,8 @@ record LocalStepWitness
     (before after : TapeRow machine) : Set₁ where
   field
     rule : TapeRule (State machine) (Symbol machine)
+    ruleOccursInMachine :
+      RuleOccurs rule (rules machine)
     window : SixCellWindow machine
     ruleIsConfigured : RuleRealizesWindow machine rule window
     occurrence : WindowRewriteOccurrence machine before after window
@@ -185,6 +200,7 @@ record ConcreteTapeMachineLocalityBoundary : Set where
   constructor concrete-tape-machine-locality-boundary
   field
     finiteMachineCarrierPaid : Bool
+    transitionTableMembershipPaid : Bool
     exactDirectionalWindowRulesPaid : Bool
     contiguousRewriteOccurrencePaid : Bool
     localStepWitnessSemanticsPaid : Bool
@@ -197,4 +213,4 @@ canonicalConcreteTapeMachineLocalityBoundary :
   ConcreteTapeMachineLocalityBoundary
 canonicalConcreteTapeMachineLocalityBoundary =
   concrete-tape-machine-locality-boundary
-    true true true true false false false false
+    true true true true true false false false false
