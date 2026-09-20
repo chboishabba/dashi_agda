@@ -241,3 +241,4 @@ import DASHI.Core.ParityLaneOperatorCore
 import DASHI.Core.ParityLaneEigenOperatorCore
 import DASHI.Core.Prelude
 import DASHI.Visual.ColourPerceptionDASHI
+import DASHI.Visual.RepositoryEvolutionEverything
