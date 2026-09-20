@@ -538,3 +538,23 @@ pnpBooleanToSemanticReflectionStillOpen :
     PNPBool.canonicalConcreteTapeLegalWindowBoolBoundary
   ≡ false
 pnpBooleanToSemanticReflectionStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- FOURTEENTH CONTINUATION: proof-carrying Boolean recognition closes the local
+-- semantic <-> Bool reflection theorem.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeLegalWindowReflectionExact as PNPReflect
+
+pnpFullLegalWindowReflectionPaid :
+  PNPReflect.fullLegalWindowBooleanIffPaid
+    PNPReflect.canonicalConcreteTapeLegalWindowReflectionBoundary
+  ≡ true
+pnpFullLegalWindowReflectionPaid = refl
+
+pnpCanonicalSATWeldStillNext :
+  PNPReflect.canonicalSATWeldPaid
+    PNPReflect.canonicalConcreteTapeLegalWindowReflectionBoundary
+  ≡ false
+pnpCanonicalSATWeldStillNext = refl
