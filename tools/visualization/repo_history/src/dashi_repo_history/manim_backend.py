@@ -336,13 +336,9 @@ class SemanticSnapshotScene(MovingCameraScene):
             return
 
         data = json.loads(Path(path).read_text(encoding="utf-8"))
-        target_commit = os.environ.get("DASHI_REPO_TARGET_COMMIT")
-        snapshots = _first_parent_lineage(
-            data,
-            target_commit=target_commit,
-        )
+        snapshots = data.get("snapshots", [])
         if not snapshots:
-            self.add(Text("No semantic lineage", font_size=28))
+            self.add(Text("No semantic snapshots", font_size=28))
             return
 
         snapshot = snapshots[snapshot_index]
@@ -372,9 +368,13 @@ class SemanticHistoryScene(MovingCameraScene):
             return
 
         data = json.loads(Path(path).read_text(encoding="utf-8"))
-        snapshots = data.get("snapshots", [])
+        target_commit = os.environ.get("DASHI_REPO_TARGET_COMMIT")
+        snapshots = _first_parent_lineage(
+            data,
+            target_commit=target_commit,
+        )
         if not snapshots:
-            self.add(Text("No semantic snapshots", font_size=28))
+            self.add(Text("No semantic lineage", font_size=28))
             return
 
         title = Text(
@@ -400,7 +400,7 @@ class SemanticHistoryScene(MovingCameraScene):
             new_stamp = Text(
                 snapshot["commit"][:10],
                 font_size=17,
-            ).next_to(title, UP * -1, buff=0.12)
+            ).next_to(title, DOWN, buff=0.12)
             self.play(ReplacementTransform(stamp, new_stamp), run_time=0.12)
             stamp = new_stamp
             view.apply_snapshot(self, snapshot["graph"])
