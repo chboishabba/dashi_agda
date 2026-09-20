@@ -59,6 +59,30 @@ def resolve_symbol(
     if selector in by_id:
         return by_id[selector]
 
+    if "::" in selector:
+        module, label = selector.rsplit("::", 1)
+        qualified = [
+            node
+            for node in graph_data.get("nodes", [])
+            if node.get("module") == module
+            and node.get("label") == label
+        ]
+        if len(qualified) == 1:
+            return qualified[0]
+        if not qualified:
+            raise KeyError(
+                f"no semantic symbol matches {selector!r}"
+            )
+        candidates = ", ".join(
+            f"{node.get('module')}::{node.get('label')}"
+            f"[{node.get('symbol_id')[:8]}]"
+            for node in qualified[:12]
+        )
+        raise ValueError(
+            f"ambiguous scoped semantic symbol {selector!r}: "
+            f"{candidates}"
+        )
+
     exact = [
         node
         for node in graph_data.get("nodes", [])
