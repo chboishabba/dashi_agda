@@ -122,27 +122,32 @@ bipartiteConsRight :
     + bipartitePairSum rate work left right
 bipartiteConsRight rate work [] head right = refl
 bipartiteConsRight rate work (left ∷ rest) head right =
-  trans
-    (cong₂ _+_
-      (cong₂ _+_
+  let
+    termLR =
+      (rate left - rate head) * (work left - work head)
+    termHL =
+      (rate head - rate left) * (work head - work left)
+
+    firstRow :
+      bipartiteRow rate work left (head ∷ right)
+      ≡ termHL + bipartiteRow rate work left right
+    firstRow =
+      cong
+        (_+ bipartiteRow rate work left right)
         (pairTermSymmetric rate work left head)
-        (bipartiteRowTail left rest))
-      (bipartiteConsRight rate work rest head right))
+
+    tail =
+      bipartiteConsRight rate work rest head right
+  in
+  trans
+    (cong₂ _+_ firstRow tail)
     (solve
-      ( (rate head - rate left) * (work head - work left)
-      ∷ bipartiteRow rate work head rest
+      ( termHL
       ∷ bipartiteRow rate work left right
+      ∷ bipartiteRow rate work head rest
       ∷ bipartitePairSum rate work rest right
       ∷ []))
-  where
-  bipartiteRowTail :
-    (left : A) →
-    (rest : List A) →
-    bipartiteRow rate work left (head ∷ right)
-    ≡
-    (rate left - rate head) * (work left - work head)
-      + bipartiteRow rate work left right
-  bipartiteRowTail left rest = refl
+
 
 bipartiteSymmetric :
   ∀ {A : Set} →
