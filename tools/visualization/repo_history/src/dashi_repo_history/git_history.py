@@ -143,6 +143,35 @@ def select_commit_window(
     return selected
 
 
+def _episode_context_commits(
+    all_commits: list[CommitRecord],
+    selected: list[CommitRecord],
+) -> tuple[list[CommitRecord], list]:
+    """Close selected merge commits over their actual fork-to-parent paths."""
+
+    all_episodes = derive_branch_episodes(all_commits)
+    selected_ids = {commit.commit for commit in selected}
+    relevant = [
+        episode
+        for episode in all_episodes
+        if episode.merge_commit in selected_ids
+    ]
+
+    context_ids = set(selected_ids)
+    for episode in relevant:
+        context_ids.add(episode.fork_base)
+        context_ids.add(episode.merge_commit)
+        context_ids.update(episode.left_path)
+        context_ids.update(episode.right_path)
+
+    expanded = [
+        commit
+        for commit in all_commits
+        if commit.commit in context_ids
+    ]
+    return expanded, relevant
+
+
 @dataclass
 class HistoryExtractor:
     repo: Path
@@ -184,16 +213,33 @@ class HistoryExtractor:
         max_commits: int | None = None,
         stride: int = 1,
         semantic: bool = True,
+        episode_context: bool = False,
     ) -> Timeline:
         refs = read_refs(self.repo)
+        all_commits = read_commit_dag(
+            self.repo,
+            list(self.seed_commits),
+        )
         commits = select_commit_window(
-            read_commit_dag(self.repo, list(self.seed_commits)),
+            all_commits,
             first_commits=first_commits,
             max_commits=max_commits,
             stride=stride,
         )
 
-        branch_episodes = derive_branch_episodes(commits)
+        all_episodes = derive_branch_episodes(all_commits)
+        selected_ids = {commit.commit for commit in commits}
+        branch_episodes = [
+            episode
+            for episode in all_episodes
+            if episode.merge_commit in selected_ids
+        ]
+
+        if episode_context:
+            commits, branch_episodes = _episode_context_commits(
+                all_commits,
+                commits,
+            )
 
         if not semantic:
             return Timeline(
