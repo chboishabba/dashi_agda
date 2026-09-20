@@ -156,11 +156,12 @@ unitNormalizedPhysicalA2CompilerData :
     E I S sign center displacement
     (Lattice.latticeSquaredDisplacement displacement)
 unitNormalizedPhysicalA2CompilerData
-    {I = I} {displacement = displacement} unit D =
+    {E = E} {I = I} {S = S} {sign = sign}
+    {center = center} {displacement = displacement} unit D =
   subst
     (λ d →
       A2Compiler.A2SameDisplacementData
-        _ I _ _ _ displacement d)
+        E I S sign center displacement d)
     (liveSquaredDisplacementIsLattice unit I displacement)
     (A2.physicalA2CompilerData D)
 
