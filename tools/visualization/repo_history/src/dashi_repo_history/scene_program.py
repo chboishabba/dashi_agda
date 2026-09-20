@@ -3,6 +3,9 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from typing import Any, Iterable
 
+from .focus import focus_symbol
+from .temporal_focus import track_symbol_history
+
 
 @dataclass(frozen=True)
 class SceneCommand:
@@ -319,6 +322,93 @@ def compile_branch_episode_program(
             SceneCommand("show-snapshot", {"commit": merge}),
         ]
     )
+    return commands
+
+
+def compile_symbol_focus_program(
+    graph_data: dict[str, Any],
+    selector: str,
+    *,
+    upstream_depth: int = 2,
+    downstream_depth: int = 0,
+) -> list[SceneCommand]:
+    focus = focus_symbol(
+        graph_data,
+        selector,
+        upstream_depth=upstream_depth,
+        downstream_depth=downstream_depth,
+    )
+    commands = [
+        SceneCommand(
+            "show-focus-root",
+            {
+                "root_id": focus.root_id,
+                "node_ids": list(focus.layer_specs[0].node_ids),
+            },
+        )
+    ]
+    for layer in focus.layer_specs[1:]:
+        commands.append(
+            SceneCommand(
+                "expand-focus-layer",
+                {
+                    "root_id": focus.root_id,
+                    "direction": layer.direction,
+                    "depth": layer.depth,
+                    "node_ids": list(layer.node_ids),
+                },
+            )
+        )
+    commands.append(
+        SceneCommand(
+            "settle-focus",
+            {
+                "root_id": focus.root_id,
+                "node_ids": sorted(focus.node_ids),
+                "edge_ids": sorted(focus.edge_ids),
+            },
+        )
+    )
+    return commands
+
+
+def compile_temporal_symbol_program(
+    timeline: dict[str, Any],
+    selector: str,
+    *,
+    target_commit: str | None = None,
+    upstream_depth: int = 2,
+    downstream_depth: int = 0,
+) -> list[SceneCommand]:
+    frames = track_symbol_history(
+        timeline,
+        selector,
+        target_commit=target_commit,
+        upstream_depth=upstream_depth,
+        downstream_depth=downstream_depth,
+    )
+    if not frames:
+        return []
+
+    commands: list[SceneCommand] = []
+    for index, frame in enumerate(frames):
+        commands.append(
+            SceneCommand(
+                "show-temporal-focus"
+                if index == 0
+                else "advance-temporal-focus",
+                {
+                    "commit": frame.commit,
+                    "root_id": frame.root_id,
+                    "root_label": frame.root_label,
+                    "root_module": frame.root_module,
+                    "identity_evidence": frame.identity_evidence,
+                    "identity_confidence": frame.identity_confidence,
+                    "node_ids": sorted(frame.focus.node_ids),
+                    "edge_ids": sorted(frame.focus.edge_ids),
+                },
+            )
+        )
     return commands
 
 
