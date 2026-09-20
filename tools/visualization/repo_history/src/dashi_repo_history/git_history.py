@@ -34,21 +34,39 @@ def read_refs(repo: Path) -> dict[str, str]:
     return refs
 
 
-def read_commit_dag(repo: Path) -> list[CommitRecord]:
+def fetch_seed_commits(
+    repo: Path,
+    seeds: list[str],
+    *,
+    remote: str = "origin",
+) -> None:
+    for seed in seeds:
+        subprocess.run(
+            ["git", "fetch", "--no-tags", remote, seed],
+            cwd=repo,
+            check=True,
+        )
+
+
+def read_commit_dag(
+    repo: Path,
+    seeds: list[str] | None = None,
+) -> list[CommitRecord]:
     refs = read_refs(repo)
     refs_by_sha: dict[str, list[str]] = {}
     for name, sha in refs.items():
         refs_by_sha.setdefault(sha, []).append(name)
 
-    raw = _run_text(
-        repo,
+    rev_args = [
         "rev-list",
-        "--all",
         "--topo-order",
         "--reverse",
         "--parents",
         "--timestamp",
-    )
+        "--all",
+    ]
+    rev_args.extend(seeds or [])
+    raw = _run_text(repo, *rev_args)
     commits: list[CommitRecord] = []
     for line in raw.splitlines():
         fields = line.split()
@@ -125,6 +143,7 @@ def select_commit_window(
 class HistoryExtractor:
     repo: Path
     path_prefix: str | None = None
+    seed_commits: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         self.repo = self.repo.resolve()
@@ -158,7 +177,7 @@ class HistoryExtractor:
     ) -> Timeline:
         refs = read_refs(self.repo)
         commits = select_commit_window(
-            read_commit_dag(self.repo),
+            read_commit_dag(self.repo, list(self.seed_commits)),
             first_commits=first_commits,
             max_commits=max_commits,
             stride=stride,
