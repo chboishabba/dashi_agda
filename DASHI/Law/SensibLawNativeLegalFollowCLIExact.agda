@@ -37,6 +37,7 @@ data NativeLegalFollowCommand : Set where
   runCullenPnfParser : NativeLegalFollowCommand
   planAustralianContractsLandscape : NativeLegalFollowCommand
   inspectAustralianContractsLandscape : NativeLegalFollowCommand
+  acquireAustralianContractsLandscapeSources : NativeLegalFollowCommand
 
 data OrchestrationOwner : Set where
   nativeRustCli : OrchestrationOwner
