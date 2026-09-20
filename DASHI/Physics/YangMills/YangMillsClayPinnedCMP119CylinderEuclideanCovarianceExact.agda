@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CylinderEuclideanCovaria
 -- finite expectation invariance.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -142,5 +143,5 @@ pinnedCMP119CylinderActionLimitCompilerLevel = machineChecked
 literalCMP119FiniteEuclideanActionInvarianceLevel : ProofLevel
 literalCMP119FiniteEuclideanActionInvarianceLevel = conditional
 
-clayPromotion : Agda.Builtin.Bool.Bool
-clayPromotion = Agda.Builtin.Bool.false
+clayPromotion : Bool
+clayPromotion = false
