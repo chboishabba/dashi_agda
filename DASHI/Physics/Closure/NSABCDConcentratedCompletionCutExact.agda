@@ -67,6 +67,14 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredInputLaplacianBonyVecto
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBonyLiveExact as BBonyLive
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredBonyCovariancePaymentExact as BBonyPay
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCenteredBonyPaymentLiveExact as BBonyLivePay
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianBonyPairBlocksExact as BBonyPairs
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianThreeClassPairBlocksExact as BThreePairs
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceSixBlockLiveExact as BSixLive
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalSixBlockPaymentLiveExact as BSixPay
+import DASHI.Physics.Closure.NSTriadKNPhysicalParabolicCriticalRegionRoutingExact as BRegionRoute
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionPairBlocksExact as BRegionPairs
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceCriticalRegionLiveExact as BRegionLive
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact as BRegionPay
 
 ------------------------------------------------------------------------
 -- A
@@ -295,6 +303,43 @@ bD1b2CenteredBonyHighHighSignedProducerClosed = false
 
 bD1b2CenteredBonyCriticalCoreSignedProducerClosed : Bool
 bD1b2CenteredBonyCriticalCoreSignedProducerClosed = false
+
+
+-- Safer quantitative normal form: retain multiplier differences at pair level
+-- rather than estimating globally-centered class vectors separately.
+bD1b2CompletePairGraphSixBonyBlocksClosed : Bool
+bD1b2CompletePairGraphSixBonyBlocksClosed =
+  BThreePairs.completePairGraphThreeClassSixBlockLedgerClosed
+
+bD1b2LiveCovarianceSixSignedBonyPairBlocksClosed : Bool
+bD1b2LiveCovarianceSixSignedBonyPairBlocksClosed =
+  BSixLive.liveD1b2SixSignedThreeClassPairBlockNormalFormClosed
+
+bD1b2SafeSixBlockPaymentCompilerClosed : Bool
+bD1b2SafeSixBlockPaymentCompilerClosed =
+  BSixPay.liveSixBlockPaymentCompilerClosed
+
+bD1b2LiteralR236PhysicalRegionClassifierClosed : Bool
+bD1b2LiteralR236PhysicalRegionClassifierClosed =
+  BRegionRoute.literalR236PhysicalRegionClassifierClosed
+
+bD1b2LiteralR236RegionPairLedgerClosed : Bool
+bD1b2LiteralR236RegionPairLedgerClosed =
+  BRegionPairs.literalCriticalRegionPairLedgerClosed
+
+bD1b2LiveCovarianceLiteralR236SixBlockNormalFormClosed : Bool
+bD1b2LiveCovarianceLiteralR236SixBlockNormalFormClosed =
+  BRegionLive.liveD1b2PhysicalR236SixBlockNormalFormClosed
+
+bD1b2LivePhysicalCriticalRegionPaymentCompilerClosed : Bool
+bD1b2LivePhysicalCriticalRegionPaymentCompilerClosed =
+  BRegionPay.livePhysicalCriticalRegionPaymentCompilerClosed
+
+bD1b2DeepOnlySignedRegionPaymentsClosed : Bool
+bD1b2DeepOnlySignedRegionPaymentsClosed = false
+
+bD1b2CriticalTouchingRelativeCovarianceClosed : Bool
+bD1b2CriticalTouchingRelativeCovarianceClosed = false
 
 bD1b2QuantitativeR440InputLaplacianCovariancePaymentClosed : Bool
 bD1b2QuantitativeR440InputLaplacianCovariancePaymentClosed = false
