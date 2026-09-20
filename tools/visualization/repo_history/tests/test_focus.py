@@ -69,3 +69,16 @@ def test_resolve_symbol_rejects_ambiguous_labels():
     )
     with pytest.raises(ValueError):
         resolve_symbol(graph, "f")
+
+
+def test_focus_layers_reveal_root_then_nearest_upstream_then_downstream():
+    result = focus_symbol(
+        _graph(),
+        "f",
+        upstream_depth=2,
+        downstream_depth=1,
+    )
+    assert result.layers[0] == ("f",)
+    assert result.layers[1] == ("g",)
+    assert result.layers[2] == ("x",)
+    assert result.layers[3] == ("h",)
