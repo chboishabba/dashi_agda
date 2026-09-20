@@ -583,3 +583,23 @@ hodgeP1QuotientCarrierStillOpen :
     HodgeGlue.canonicalProjectiveLineAtlasGluingBoundary
   ≡ false
 hodgeP1QuotientCarrierStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- SIXTEENTH CONTINUATION: generic fixed-width codec -> reflected local CNF.
+-- This is the exact remote side of the missing canonical Cell/Bits weld.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeWindowCodecCNFWeldExact as PNPCNF
+
+pnpCodecToCNFSemanticEquivalencePaid :
+  PNPCNF.codecCNFSemanticEquivalencePaid
+    PNPCNF.canonicalConcreteTapeWindowCodecCNFWeldBoundary
+  ≡ true
+pnpCodecToCNFSemanticEquivalencePaid = refl
+
+pnpCanonicalConcreteCodecStillExternal :
+  PNPCNF.canonicalConcreteWindowCodecPaid
+    PNPCNF.canonicalConcreteTapeWindowCodecCNFWeldBoundary
+  ≡ false
+pnpCanonicalConcreteCodecStillExternal = refl
