@@ -43,3 +43,28 @@ livePipelineStillDoesNotCreateAuthority :
     ≡ false
 livePipelineStillDoesNotCreateAuthority =
   Live.pipelineCreatesLegalAuthorityIsFalse Live.canonicalWaltonsLiveOalcPipelineBoundary
+
+
+paragraphReviewStillRequiresExplicitCompletion :
+  Live.paragraphReviewRequiresExplicitCompletion
+    Live.canonicalWaltonsLiveOalcPipelineBoundary
+    ≡ true
+paragraphReviewStillRequiresExplicitCompletion =
+  Live.paragraphReviewRequiresExplicitCompletionIsTrue
+    Live.canonicalWaltonsLiveOalcPipelineBoundary
+
+authorityIdentityReviewStillRequiresExplicitCompletion :
+  Live.authorityIdentityReviewRequiresExplicitCompletion
+    Live.canonicalWaltonsLiveOalcPipelineBoundary
+    ≡ true
+authorityIdentityReviewStillRequiresExplicitCompletion =
+  Live.authorityIdentityReviewRequiresExplicitCompletionIsTrue
+    Live.canonicalWaltonsLiveOalcPipelineBoundary
+
+treatmentReviewStillRequiresExplicitCompletion :
+  Live.treatmentReviewRequiresExplicitCompletion
+    Live.canonicalWaltonsLiveOalcPipelineBoundary
+    ≡ true
+treatmentReviewStillRequiresExplicitCompletion =
+  Live.treatmentReviewRequiresExplicitCompletionIsTrue
+    Live.canonicalWaltonsLiveOalcPipelineBoundary
