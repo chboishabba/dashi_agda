@@ -30,6 +30,7 @@ data EdgeKind : Set where
   typeDependsEdge : EdgeKind
   bodyDependsEdge : EdgeKind
   valueFlowsEdge : EdgeKind
+  argumentToEdge : EdgeKind
   callsEdge : EdgeKind
   constructsEdge : EdgeKind
   fieldOfEdge : EdgeKind
