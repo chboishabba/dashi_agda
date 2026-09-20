@@ -188,30 +188,17 @@ hermitianG2SquaredFromVectorEnvelope XPlus XMinus D envelope =
       deltaMass * spectatorMass
       ≤ vectorBudget * spectatorMass
     scaledVectorBudget =
-      Rational.nonnegativeProductMonotone
-        (Separation.complex3NormSquaredNonnegative
-          (stateDifference XPlus XMinus))
-        spectatorNN
-        (Rational.addNonnegative
-          0ℚ≤displacementGradient
-          ℚP.≤-refl)
-        spectatorNN
-        (stateDifferenceBound envelope)
-        ℚP.≤-refl
-      where
-      0ℚ≤displacementGradient :
-        0ℚ ≤ vectorBudget
-      0ℚ≤displacementGradient =
-        let
-          instance dNN =
-            Data.Rational.Base.nonNegative
-              (displacementSquaredNonnegative envelope)
-          instance gNN =
-            Data.Rational.Base.nonNegative
-              (gradientEnergyNonnegative envelope)
-        in
-        ℚP.nonNegative⁻¹
-          (displacementSquared envelope * gradientEnergy envelope)
+      subst
+        (λ inequalityLeft →
+          inequalityLeft ≤ vectorBudget * spectatorMass)
+        (solve (deltaMass ∷ spectatorMass ∷ []))
+        (subst
+          (λ inequalityRight →
+            spectatorMass * deltaMass ≤ inequalityRight)
+          (solve (vectorBudget ∷ spectatorMass ∷ []))
+          (Cauchy.productMonotoneRightNonnegative
+            spectatorNN
+            (stateDifferenceBound envelope)))
 
     base =
       hermitianScalarDifferenceSquaredBelowStateDifferenceMass
