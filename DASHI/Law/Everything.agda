@@ -135,3 +135,8 @@ import DASHI.Law.SolomonIslandsWrongTypeLegalElementDerivationExact
 import DASHI.Law.SolomonIslandsAtomicPremiseRegistryExact
 import DASHI.Law.SensibLawWoogarooEvidenceDependencyMatrixExact
 import DASHI.Law.SensibLawWoogarooKoalaPopulationConnectivitySnowballExact
+
+-- Australian contracts / estoppel / unseen-matter LegalFollow regression.
+import DASHI.Law.AustralianContractsLegalFollowExact
+import DASHI.Law.WaltonsEstoppelMaterialisationExact
+import DASHI.Law.MannPatersonUnseenMatterExact
