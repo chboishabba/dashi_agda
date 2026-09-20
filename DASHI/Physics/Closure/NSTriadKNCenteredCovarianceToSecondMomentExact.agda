@@ -37,6 +37,7 @@ module DASHI.Physics.Closure.NSTriadKNCenteredCovarianceToSecondMomentExact wher
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Rational.Base as ℚ
   using (ℚ; 0ℚ; _+_; _*_; _≤_; ∣_∣; nonNegative)
 import Data.Rational.Properties as ℚP
@@ -231,6 +232,23 @@ sumWeightedCovarianceM2 (P ∷ rest) =
   Moment.weightedSecondMoment (covarianceSecondMomentSample P)
   + sumWeightedCovarianceM2 rest
 
+sumLocalCovarianceM2Budget :
+  List CenteredCovarianceSecondMomentPair → ℚ
+sumLocalCovarianceM2Budget [] = 0ℚ
+sumLocalCovarianceM2Budget (P ∷ rest) =
+  Moment.weightedSecondMoment (covarianceSecondMomentSample P)
+    * (transportGradient P * stateGradient P)
+  + sumLocalCovarianceM2Budget rest
+
+finiteSignedCovarianceBelowLocalM2Budget :
+  (pairs : List CenteredCovarianceSecondMomentPair) →
+  sumSignedCovariance pairs ≤ sumLocalCovarianceM2Budget pairs
+finiteSignedCovarianceBelowLocalM2Budget [] = ℚP.≤-refl
+finiteSignedCovarianceBelowLocalM2Budget (P ∷ rest) =
+  ℚP.+-mono-≤
+    (signedCovariancePairBelowWeightedSecondMoment P)
+    (finiteSignedCovarianceBelowLocalM2Budget rest)
+
 record UniformCenteredCovarianceSecondMomentFamily : Set₁ where
   field
     pairs : List CenteredCovarianceSecondMomentPair
@@ -240,12 +258,12 @@ record UniformCenteredCovarianceSecondMomentFamily : Set₁ where
 
     transportGradientUniform :
       (P : CenteredCovarianceSecondMomentPair) →
-      P Sum.∈ pairs →
+      P ∈ pairs →
       transportGradient P ≤ commonTransportGradient
 
     stateGradientUniform :
       (P : CenteredCovarianceSecondMomentPair) →
-      P Sum.∈ pairs →
+      P ∈ pairs →
       stateGradient P ≤ commonStateGradient
 
 open UniformCenteredCovarianceSecondMomentFamily public
