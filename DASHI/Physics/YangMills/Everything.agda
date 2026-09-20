@@ -320,3 +320,5 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MicrocausalChargeExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteANumeratorExact
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119UniformProjectiveCompactnessExact
+
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StressPointwiseCommonCoreExact
