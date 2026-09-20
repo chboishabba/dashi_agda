@@ -16,6 +16,7 @@ module DASHI.Physics.Closure.NSWholeSpaceBishopFiniteCoherentGramSquareExact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Unnormalised using (_/_; +_; Κ)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -187,55 +188,65 @@ crossScaleRight :
   BishopReal._≃_
     (realHermitianCross a (realScaleComplex3 scalar b))
     (BishopReal._*_ scalar (realHermitianCross a b))
-crossScaleRight scalar a b =
-  let
-    symmetry :
-      BishopReal._≃_
-        (realHermitianCross a (realScaleComplex3 scalar b))
-        (realHermitianCross (realScaleComplex3 scalar b) a)
-    symmetry =
-      let open BishopP.ℝ-Solver
-      in
-      solve 1
-        (λ x → x ⊜ x)
-        BishopP.≃-refl
-        (realHermitianCross a (realScaleComplex3 scalar b))
-  in
-  -- The scalar coordinate formula is symmetric; expose it directly rather than
-  -- adding a separate conjugation abstraction.
-  let
-    scaled = crossScaleLeft scalar b a
-    swapBase :
-      BishopReal._≃_
-        (realHermitianCross b a)
-        (realHermitianCross a b)
-    swapBase =
-      let
-        Physical.bishop-complex3
-          (Physical.bishop-complex arx aix)
-          (Physical.bishop-complex ary aiy)
-          (Physical.bishop-complex arz aiz) = a
-        Physical.bishop-complex3
-          (Physical.bishop-complex brx bix)
-          (Physical.bishop-complex bry biy)
-          (Physical.bishop-complex brz biz) = b
-        open BishopP.ℝ-Solver
-      in solve 12
-        (λ arx' aix' ary' aiy' arz' aiz'
-           brx' bix' bry' biy' brz' biz' →
-          ((brx' ⊗ arx' ⊕ bix' ⊗ aix')
-           ⊕ ((bry' ⊗ ary' ⊕ biy' ⊗ aiy')
-            ⊕ (brz' ⊗ arz' ⊕ biz' ⊗ aiz')))
-          ⊜
-          ((arx' ⊗ brx' ⊕ aix' ⊗ bix')
-           ⊕ ((ary' ⊗ bry' ⊕ aiy' ⊗ biy')
-            ⊕ (arz' ⊗ brz' ⊕ aiz' ⊗ biz'))))
-        BishopP.≃-refl
-        arx aix ary aiy arz aiz brx bix bry biy brz biz
-  in
-  BishopP.≃-trans symmetry
-    (BishopP.≃-trans scaled
-      (BishopP.*-congˡ swapBase))
+crossScaleRight scalar
+    (Physical.bishop-complex3
+      (Physical.bishop-complex arx aix)
+      (Physical.bishop-complex ary aiy)
+      (Physical.bishop-complex arz aiz))
+    (Physical.bishop-complex3
+      (Physical.bishop-complex brx bix)
+      (Physical.bishop-complex bry biy)
+      (Physical.bishop-complex brz biz)) =
+  let open BishopP.ℝ-Solver
+  in solve 13
+    (λ s arx' aix' ary' aiy' arz' aiz'
+       brx' bix' bry' biy' brz' biz' →
+      ((arx' ⊗ (s ⊗ brx') ⊕ aix' ⊗ (s ⊗ bix'))
+       ⊕
+       ((ary' ⊗ (s ⊗ bry') ⊕ aiy' ⊗ (s ⊗ biy'))
+        ⊕
+        (arz' ⊗ (s ⊗ brz') ⊕ aiz' ⊗ (s ⊗ biz'))))
+      ⊜
+      s ⊗
+      ((arx' ⊗ brx' ⊕ aix' ⊗ bix')
+       ⊕
+       ((ary' ⊗ bry' ⊕ aiy' ⊗ biy')
+        ⊕ (arz' ⊗ brz' ⊕ aiz' ⊗ biz'))))
+    BishopP.≃-refl
+    scalar arx aix ary aiy arz aiz
+    brx bix bry biy brz biz
+
+crossZeroRight :
+  (a : Physical.BishopComplex3) →
+  BishopReal._≃_
+    (realHermitianCross a zeroComplex3)
+    BishopReal.0ℝ
+crossZeroRight
+    (Physical.bishop-complex3
+      (Physical.bishop-complex arx aix)
+      (Physical.bishop-complex ary aiy)
+      (Physical.bishop-complex arz aiz)) =
+  let open BishopP.ℝ-Solver
+  in solve 6
+    (λ arx' aix' ary' aiy' arz' aiz' →
+      ((arx' ⊗ Κ (+ 0 / 1) ⊕ aix' ⊗ Κ (+ 0 / 1))
+       ⊕
+       ((ary' ⊗ Κ (+ 0 / 1) ⊕ aiy' ⊗ Κ (+ 0 / 1))
+        ⊕
+        (arz' ⊗ Κ (+ 0 / 1) ⊕ aiz' ⊗ Κ (+ 0 / 1))))
+      ⊜ Κ (+ 0 / 1))
+    BishopP.≃-refl
+    arx aix ary aiy arz aiz
+
+zeroNormSquared :
+  BishopReal._≃_
+    (Leray.complex3NormSquared zeroComplex3)
+    BishopReal.0ℝ
+zeroNormSquared =
+  let open BishopP.ℝ-Solver
+  in solve 0
+    (Κ (+ 0 / 1) ⊜ Κ (+ 0 / 1))
+    BishopP.≃-refl
 
 record WeightedComplex3Cell : Set where
   constructor weighted-complex3-cell
@@ -280,11 +291,7 @@ rowGramIsCrossFold :
     (rowGram head rest)
     (realHermitianCross (weightedValue head) (foldWeighted rest))
 rowGramIsCrossFold head [] =
-  let open BishopP.ℝ-Solver
-  in solve 1
-    (λ z → BishopReal.0ℝ ⊜ z)
-    (BishopP.≃-symm (BishopP.+-identityˡ BishopReal.0ℝ))
-    BishopReal.0ℝ
+  BishopP.≃-symm (crossZeroRight (weightedValue head))
 rowGramIsCrossFold head (cell ∷ rest) =
   BishopP.≃-trans
     (BishopP.+-congˡ
@@ -316,8 +323,8 @@ normAddExpansion
       (Physical.bishop-complex bry biy)
       (Physical.bishop-complex brz biz)) =
   let open BishopP.ℝ-Solver
-  in solve 12
-    (λ arx' aix' ary' aiy' arz' aiz'
+  in solve 13
+    (λ t arx' aix' ary' aiy' arz' aiz'
        brx' bix' bry' biy' brz' biz' →
       (((arx' ⊕ brx') ⊗ (arx' ⊕ brx')
         ⊕ (aix' ⊕ bix') ⊗ (aix' ⊕ bix'))
@@ -332,7 +339,7 @@ normAddExpansion
        ⊕ ((ary' ⊗ ary' ⊕ aiy' ⊗ aiy')
         ⊕ (arz' ⊗ arz' ⊕ aiz' ⊗ aiz')))
       ⊕
-      ((two ⊗
+      ((t ⊗
         ((arx' ⊗ brx' ⊕ aix' ⊗ bix')
          ⊕ ((ary' ⊗ bry' ⊕ aiy' ⊗ biy')
           ⊕ (arz' ⊗ brz' ⊕ aiz' ⊗ biz'))))
@@ -341,7 +348,7 @@ normAddExpansion
         ⊕ ((bry' ⊗ bry' ⊕ biy' ⊗ biy')
          ⊕ (brz' ⊗ brz' ⊕ biz' ⊗ biz')))))
     BishopP.≃-refl
-    arx aix ary aiy arz aiz brx bix bry biy brz biz
+    two arx aix ary aiy arz aiz brx bix bry biy brz biz
 
 completeGramIsFoldNormSquared :
   (cells : List WeightedComplex3Cell) →
@@ -349,7 +356,7 @@ completeGramIsFoldNormSquared :
     (completeGram cells)
     (Leray.complex3NormSquared (foldWeighted cells))
 completeGramIsFoldNormSquared [] =
-  BishopP.≃-refl BishopReal.0ℝ
+  BishopP.≃-symm zeroNormSquared
 completeGramIsFoldNormSquared (head ∷ rest) =
   BishopP.≃-trans
     (BishopP.+-cong
