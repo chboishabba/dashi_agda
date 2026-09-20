@@ -28,13 +28,14 @@ module DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact wher
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as Nat
 open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ ; 0ℝ ; _+ℝ_ ; _*ℝ_ ; _≤ℝ_
   ; ≤ℝ-refl ; ≤ℝ-trans ; +-mono-≤ ; +-identityˡ
-  ; *-distribʳ-+ ; mulMonotoneNonnegative )
+  ; *-distribʳ-+ ; mulMonotoneNonnegative ; mulZeroˡ )
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
@@ -45,7 +46,7 @@ record AntitoneNonnegativeDecayWeight : Set₁ where
     weight : Nat → ℝ
     weightNonnegative : ∀ distance → 0ℝ ≤ℝ weight distance
     weightAntitone : ∀ {near far} →
-      Data.Nat.Base._≤_ near far →
+      Nat._≤_ near far →
       weight far ≤ℝ weight near
 
 open AntitoneNonnegativeDecayWeight public
@@ -56,7 +57,7 @@ sumScaledRight :
   Resum.sumℝ (λ x → values x *ℝ factor) xs
   ≡ Resum.sumℝ values xs *ℝ factor
 sumScaledRight values [] factor = sym
-  (DASHI.Foundations.RealAnalysisAxioms.mulZeroˡ factor)
+  (mulZeroˡ factor)
 sumScaledRight values (x ∷ xs) factor
   rewrite sumScaledRight values xs factor =
   sym (*-distribʳ-+ (values x) (Resum.sumℝ values xs) factor)
