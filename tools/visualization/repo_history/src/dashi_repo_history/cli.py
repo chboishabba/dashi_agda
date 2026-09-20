@@ -31,6 +31,8 @@ def _render(args: argparse.Namespace) -> None:
         env["DASHI_REPO_SNAPSHOT_INDEX"] = str(args.snapshot_index)
     if args.merge_index is not None:
         env["DASHI_REPO_MERGE_INDEX"] = str(args.merge_index)
+    if args.target_commit is not None:
+        env["DASHI_REPO_TARGET_COMMIT"] = str(args.target_commit)
 
     scene_by_mode = {
         "history": "RepositoryHistoryScene",
@@ -89,6 +91,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     render.add_argument("--snapshot-index", type=int)
     render.add_argument("--merge-index", type=int)
+    render.add_argument(
+        "--target-commit",
+        help="Target commit for the first-parent semantic-history lineage.",
+    )
     render.set_defaults(func=_render)
 
     return parser
