@@ -41,7 +41,7 @@ selectedCompactCandidate :
   Σ (D.Force S) λ f → CompactCandidate localize f
 selectedCompactCandidate periodicRules localize a
   with D.selectedPeriodicCandidate periodicRules a
-... | f , candidate , smooth =
+... | f , (candidate , smooth) =
   f , ofLocalizedFields localize f candidate smooth
 
 cReusesSelectedPeriodicCandidate : Bool
