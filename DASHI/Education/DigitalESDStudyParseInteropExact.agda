@@ -170,6 +170,10 @@ record StudyParseInteropBoundary : Set where
     preservesSourceRevisionAndTextHashIsTrue :
       preservesSourceRevisionAndTextHash ≡ true
 
+    parserTextDigestMatchesVerifiedFullText : Bool
+    parserTextDigestMatchesVerifiedFullTextIsTrue :
+      parserTextDigestMatchesVerifiedFullText ≡ true
+
     projectsOntoExistingNineteenCoordinateSchema : Bool
     projectsOntoExistingNineteenCoordinateSchemaIsTrue :
       projectsOntoExistingNineteenCoordinateSchema ≡ true
@@ -201,6 +205,7 @@ canonicalStudyParseInteropBoundary =
   study-parse-interop-boundary
     true refl
     false refl
+    true refl
     true refl
     true refl
     true refl
