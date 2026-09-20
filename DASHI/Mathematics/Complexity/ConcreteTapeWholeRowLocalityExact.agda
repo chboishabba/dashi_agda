@@ -74,16 +74,32 @@ unchangedScanLegal :
       List (Local.TapeCell
         (Local.State machine)
         (Local.Symbol machine))) →
+  WF.PlainCells cells →
   All
     (Pattern.LegalWindowForRule machine rule)
     (scanWindowsCells machine cells cells)
-unchangedScanLegal [] = allNil
-unchangedScanLegal (_ ∷ []) = allNil
-unchangedScanLegal (_ ∷ _ ∷ []) = allNil
-unchangedScanLegal (first ∷ second ∷ third ∷ rest) =
+unchangedScanLegal [] WF.plainNil = allNil
+unchangedScanLegal
+    (Local.plain first ∷ [])
+    (WF.plainCons WF.plainNil) =
+  allNil
+unchangedScanLegal
+    (Local.plain first ∷ Local.plain second ∷ [])
+    (WF.plainCons (WF.plainCons WF.plainNil)) =
+  allNil
+unchangedScanLegal
+    (Local.plain first
+      ∷ Local.plain second
+      ∷ Local.plain third
+      ∷ rest)
+    (WF.plainCons
+      (WF.plainCons
+        (WF.plainCons restPlain))) =
   allCons
     Pattern.legal-unchanged
-    (unchangedScanLegal (second ∷ third ∷ rest))
+    (unchangedScanLegal
+      (Local.plain second ∷ Local.plain third ∷ rest)
+      (WF.plainCons (WF.plainCons restPlain)))
 
 centerRewriteScanLegal :
   ∀ {machine rule window}
@@ -119,7 +135,8 @@ centerRewriteScanLegal
     (allCons
       Pattern.left-overlap-plus-one
       (unchangedScanLegal
-        (Local.plain rightSymbol ∷ Local.plain next ∷ rest)))
+        (Local.plain rightSymbol ∷ Local.plain next ∷ rest)
+        (WF.plainCons (WF.plainCons restPlain))))
 
 centerRewriteScanLegal suffix WF.plainNil Local.realizes-stay =
   allCons
