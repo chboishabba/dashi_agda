@@ -322,6 +322,29 @@ record ContractLandscapeExpansionReceipt : Set where
 
 open ContractLandscapeExpansionReceipt public
 
+record ContractLandscapeAdaptiveTrajectory : Set where
+  constructor contractLandscapeAdaptiveTrajectory
+  field
+    receipts : List ContractLandscapeExpansionReceipt
+    recomputeAfterEveryAcceptedHop : Bool
+    recomputeAfterEveryAcceptedHopIsTrue :
+      recomputeAfterEveryAcceptedHop ≡ true
+    oldSourceHistoryPreservedAcrossTrajectory : Bool
+    oldSourceHistoryPreservedAcrossTrajectoryIsTrue :
+      oldSourceHistoryPreservedAcrossTrajectory ≡ true
+    oldConclusionsFrozenAcrossTrajectory : Bool
+    oldConclusionsFrozenAcrossTrajectoryIsFalse :
+      oldConclusionsFrozenAcrossTrajectory ≡ false
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+    createsCurrentLawConclusion : Bool
+    createsCurrentLawConclusionIsFalse :
+      createsCurrentLawConclusion ≡ false
+
+open ContractLandscapeAdaptiveTrajectory public
+
 constructionExpansionReceiptFixture : ContractLandscapeExpansionReceipt
 constructionExpansionReceiptFixture =
   contractLandscapeExpansionReceipt
@@ -493,6 +516,10 @@ record AustralianContractsLandscapeControllerBoundary : Set where
     adaptiveExpansionFreezesOldConclusionsIsFalse :
       adaptiveExpansionFreezesOldConclusions ≡ false
 
+    multiHopTrajectoryRecomputesAfterEveryAcceptedHop : Bool
+    multiHopTrajectoryRecomputesAfterEveryAcceptedHopIsTrue :
+      multiHopTrajectoryRecomputesAfterEveryAcceptedHop ≡ true
+
     controllerCreatesCurrentLawConclusion : Bool
     controllerCreatesCurrentLawConclusionIsFalse :
       controllerCreatesCurrentLawConclusion ≡ false
@@ -519,5 +546,6 @@ canonicalAustralianContractsLandscapeControllerBoundary =
     true refl
     true refl
     false refl
+    true refl
     false refl
     false refl
