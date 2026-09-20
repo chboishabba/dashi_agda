@@ -23,11 +23,15 @@ data LegalWindowForRule
     Local.SixCellWindow machine → Set where
 
   legal-unchanged :
-    ∀ {first second third} →
+    ∀ {firstSymbol secondSymbol thirdSymbol} →
     LegalWindowForRule machine rule
       (Local.six-cell-window
-        first second third
-        first second third)
+        (Local.plain firstSymbol)
+        (Local.plain secondSymbol)
+        (Local.plain thirdSymbol)
+        (Local.plain firstSymbol)
+        (Local.plain secondSymbol)
+        (Local.plain thirdSymbol))
 
   legal-centered :
     ∀ {window} →
