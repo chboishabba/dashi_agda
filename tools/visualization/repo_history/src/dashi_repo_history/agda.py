@@ -213,9 +213,13 @@ class OpenScope:
         ):
             return None
 
-        if self.using is not None and visible_name not in self.using:
+        if (
+            self.using is not None
+            and visible_name not in self.using
+            and original not in self.using
+        ):
             return None
-        if visible_name in self.hiding:
+        if visible_name in self.hiding or original in self.hiding:
             return None
         return original
 
@@ -832,6 +836,20 @@ def build_semantic_graph(
                 source=producer.symbol_id,
                 target=consumer.symbol_id,
                 kind="imports",
+                evidence=None,
+            )
+            graph.edges[relation.relation_id] = relation
+
+    for module, open_scopes in open_scopes_by_module.items():
+        consumer = modules[module]
+        for scope in open_scopes:
+            producer = modules.get(scope.module)
+            if producer is None:
+                continue
+            relation = Relation(
+                source=producer.symbol_id,
+                target=consumer.symbol_id,
+                kind="opens",
                 evidence=None,
             )
             graph.edges[relation.relation_id] = relation
