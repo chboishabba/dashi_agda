@@ -265,3 +265,9 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ABSameMeasureExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ApplicationToClusteringExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCTriangleExact
+
+
+-- ABC literal-inhabitant continuation: OS3, R415->physical-scale, Round109 stress same-object.
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS3SystemExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116MarkedExpansionScaleExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109StressSameObjectExact
