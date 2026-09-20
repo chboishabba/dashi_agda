@@ -30,6 +30,8 @@ import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact a
 import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeExact as G1
 import DASHI.Physics.Closure.NSTriadKNR571DiscreteG2FromG1Exact as G2
 import DASHI.Physics.Closure.NSTriadKNR571A1SameDisplacementExact as A1
+import DASHI.Physics.Closure.NSTriadKNR571A2PhysicalSampleExact as A2
+import DASHI.Physics.Closure.NSTriadKNR571A2SameDisplacementCompilerExact as A2Compiler
 import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedAntiParallelComplementRound467Exact as R467
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNR571CenteredShiftTriangleExcessExact as Shift
@@ -128,20 +130,39 @@ unitNormalizedPreferredLinearIncrementMagnitudeBound :
         (Shift.minusMode center displacement)) ∣
   ≤ Lattice.latticeSquaredDisplacement displacement
 unitNormalizedPreferredLinearIncrementMagnitudeBound
-    {I = I} {displacement = displacement}
+    {I = I} {S = S} {sign = sign} {center = center}
+    {displacement = displacement}
     unit nonzero D =
   subst
     (λ d →
       ∣ Taylor.linearIncrement
           (GateA.preferredRadialTaylorPair
-            _ _ _
-            (Shift.plusMode _ displacement)
-            (Shift.minusMode _ displacement)) ∣
+            sign S center
+            (Shift.plusMode center displacement)
+            (Shift.minusMode center displacement)) ∣
       ≤ d)
     (liveSquaredDisplacementIsLattice unit I displacement)
     (A1.preferredLinearIncrementMagnitudeBound D
       (nonzeroLiveSquaredDisplacementAtLeastOne
         unit I displacement nonzero))
+
+unitNormalizedPhysicalA2CompilerData :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E}
+    {S sign center displacement} →
+  Unit.UnitPreservingIntegerEmbedding F E →
+  (D : A2.PhysicalA2SampleData E I S sign center displacement) →
+  A2Compiler.A2SameDisplacementData
+    E I S sign center displacement
+    (Lattice.latticeSquaredDisplacement displacement)
+unitNormalizedPhysicalA2CompilerData
+    {I = I} {displacement = displacement} unit D =
+  subst
+    (λ d →
+      A2Compiler.A2SameDisplacementData
+        _ I _ _ _ displacement d)
+    (liveSquaredDisplacementIsLattice unit I displacement)
+    (A2.physicalA2CompilerData D)
 
 unitNormalizedLiveLatticeDisplacementWeldClosed : Bool
 unitNormalizedLiveLatticeDisplacementWeldClosed = true
