@@ -146,7 +146,27 @@ giumelliNeedsNoSpecialRuntime :
 giumelliNeedsNoSpecialRuntime =
   Recursive.caseSpecificRuntimeAddedIsFalse capstone
 
-capstoneDoesNotFakeLiveReceipt :
-  Recursive.claimsLiveSecondHopReceiptAlreadyObserved capstone ≡ false
-capstoneDoesNotFakeLiveReceipt =
-  Recursive.claimsLiveSecondHopReceiptAlreadyObservedIsFalse capstone
+giumelliSourceReceiptObserved :
+  Recursive.liveSecondAuthoritySourceReceiptObserved capstone ≡ true
+giumelliSourceReceiptObserved =
+  Recursive.liveSecondAuthoritySourceReceiptObservedIsTrue capstone
+
+giumelliRangeIndexBuildObserved :
+  Recursive.liveRangeIndexBuildObserved capstone ≡ true
+giumelliRangeIndexBuildObserved =
+  Recursive.liveRangeIndexBuildObservedIsTrue capstone
+
+giumelliRangeIndexHitObserved :
+  Recursive.liveRangeIndexHitObserved capstone ≡ true
+giumelliRangeIndexHitObserved =
+  Recursive.liveRangeIndexHitObservedIsTrue capstone
+
+giumelliReviewedIdentityHopStillOpen :
+  Recursive.liveReviewedIdentityHopObserved capstone ≡ false
+giumelliReviewedIdentityHopStillOpen =
+  Recursive.liveReviewedIdentityHopObservedIsFalse capstone
+
+giumelliReviewedTreatmentHopStillOpen :
+  Recursive.liveReviewedTreatmentHopObserved capstone ≡ false
+giumelliReviewedTreatmentHopStillOpen =
+  Recursive.liveReviewedTreatmentHopObservedIsFalse capstone
