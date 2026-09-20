@@ -893,6 +893,24 @@ cumulativeRvMRemainderStillOpen :
     R2RvMConst.canonicalRvMConstantDensityCancellationBoundary ≡ false
 cumulativeRvMRemainderStillOpen = refl
 
+import DASHI.Analysis.RiemannG2ReflectionPairSignedResidualLeanDonorExact as R2ReflectionSigned
+
+
+reflectionPairRouteNeedsNoSameOrdinateNuisanceSelection :
+  R2ReflectionSigned.ReflectionPairSignedResidualBoundary.nuisanceSelectionPrimitiveOnThisRoute
+    R2ReflectionSigned.canonicalReflectionPairSignedResidualBoundary ≡ false
+reflectionPairRouteNeedsNoSameOrdinateNuisanceSelection = refl
+
+reflectionPairRouteNeedsNoSameOrdinateResidualBudget :
+  R2ReflectionSigned.ReflectionPairSignedResidualBoundary.sameOrdinateResidualBudgetPrimitiveOnThisRoute
+    R2ReflectionSigned.canonicalReflectionPairSignedResidualBoundary ≡ false
+reflectionPairRouteNeedsNoSameOrdinateResidualBudget = refl
+
+reflectionPairSignedExternalPaymentStillOpen :
+  R2ReflectionSigned.ReflectionPairSignedResidualBoundary.signedExternalResidualPaymentPaid
+    R2ReflectionSigned.canonicalReflectionPairSignedResidualBoundary ≡ false
+reflectionPairSignedExternalPaymentStillOpen = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
