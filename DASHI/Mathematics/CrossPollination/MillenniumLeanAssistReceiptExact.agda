@@ -13,6 +13,9 @@ module DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact where
 --   Synthesis/MillenniumBSDRationalSquareBits.lean
 --     rational sign-square invariance + padicValRat v2 parity-square invariance
 --
+--   Synthesis/MillenniumBSDCMPrimeWitness.lean
+--     p = 1 mod 4 prime -> p = u^2 + v^2 via mathlib Nat.Prime.sq_add_sq
+--
 -- The files are rooted in Synthesis.lean on the sibling branch.
 --
 -- IMPORTANT:
@@ -52,6 +55,9 @@ record MillenniumLeanAssistReceipt : Set where
     bsdSource :
       String
 
+    bsdCMSource :
+      String
+
     hodgeCP1QuotientSourcePresent :
       Bool
 
@@ -62,6 +68,12 @@ record MillenniumLeanAssistReceipt : Set where
       Bool
 
     bsdMathlibPadicValRatReused :
+      Bool
+
+    bsdCMSplitPrimeSourcePresent :
+      Bool
+
+    bsdMathlibTwoSquaresReused :
       Bool
 
     sourcesRootedInSynthesis :
@@ -85,11 +97,14 @@ currentMillenniumLeanAssistReceipt =
     "chboishabba/dashi_lean4"
     "agent/millennium-three-lane-lean-assist"
     "#10"
-    "efca6d2e1d6ef5ae88c9b949d8e39d015a72311b"
+    "7fe1674fc2ff26471ce1def7c4a91d62d738d683"
     "leanprover/lean4:v4.28.0"
     "mathlib v4.28.0"
     "Synthesis/MillenniumHodgeCP1Quotient.lean"
     "Synthesis/MillenniumBSDRationalSquareBits.lean"
+    "Synthesis/MillenniumBSDCMPrimeWitness.lean"
+    true
+    true
     true
     true
     true
