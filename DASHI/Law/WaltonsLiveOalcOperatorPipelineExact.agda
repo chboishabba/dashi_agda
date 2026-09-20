@@ -121,6 +121,7 @@ canonicalWaltonsLiveOalcPipelineBoundary =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
 
