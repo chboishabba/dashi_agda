@@ -744,3 +744,87 @@ idA y = y
         and unresolved["owner"] == id_a.symbol_id
         for unresolved in graph.unresolved_references
     )
+
+
+def test_lambda_shadowing_creates_distinct_inner_and_outer_binders():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+outer : Nat -> Nat
+outer x = (\\x -> x) x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    owner = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "outer"
+    )
+    xs = [
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    ]
+    assert len(xs) == 2
+    assert xs[0].scope != xs[1].scope
+    assert xs[0].symbol_id != xs[1].symbol_id
+
+    flowing = {
+        edge.source
+        for edge in graph.edges.values()
+        if edge.target == owner.symbol_id
+        and edge.kind == "value-flows"
+    }
+    assert {node.symbol_id for node in xs}.issubset(flowing)
+    assert not any(
+        unresolved["reference"] == "x"
+        and unresolved["owner"] == owner.symbol_id
+        for unresolved in graph.unresolved_references
+    )
+
+
+def test_lambda_scope_falls_back_to_outer_clause_binder():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat)
+
+outer : Nat -> Nat
+outer x = (\\y -> x) x
+""",
+    )
+    graph = build_semantic_graph([extraction])
+
+    owner = next(
+        node for node in graph.nodes.values()
+        if node.kind == "function" and node.label == "outer"
+    )
+    x = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "x"
+    )
+    y = next(
+        node for node in graph.nodes.values()
+        if node.kind == "binder" and node.label == "y"
+    )
+
+    assert any(
+        edge.source == x.symbol_id
+        and edge.target == owner.symbol_id
+        and edge.kind == "value-flows"
+        for edge in graph.edges.values()
+    )
+    assert not any(
+        edge.source == y.symbol_id
+        and edge.target == owner.symbol_id
+        and edge.kind == "value-flows"
+        for edge in graph.edges.values()
+    )
+    assert not any(
+        unresolved["reference"] == "x"
+        and unresolved["owner"] == owner.symbol_id
+        for unresolved in graph.unresolved_references
+    )
