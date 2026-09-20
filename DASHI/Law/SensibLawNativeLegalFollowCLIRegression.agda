@@ -69,3 +69,20 @@ reviewedContractHopCompilationRemainsNative :
 reviewedContractHopCompilationRemainsNative =
   CLI.reviewedContractHopCompilationIsNativeRustIsTrue
     CLI.canonicalNativeLegalFollowCliBoundary
+
+
+reviewedHopTransportRemainsTypedRust :
+  CLI.reviewedHopTransportIsTypedRust
+    CLI.canonicalNativeLegalFollowCliBoundary
+    ≡ true
+reviewedHopTransportRemainsTypedRust =
+  CLI.reviewedHopTransportIsTypedRustIsTrue
+    CLI.canonicalNativeLegalFollowCliBoundary
+
+reviewedHopJsonRemainsNonCanonicalTransport :
+  CLI.reviewedHopJsonIsCanonicalSemanticTransport
+    CLI.canonicalNativeLegalFollowCliBoundary
+    ≡ false
+reviewedHopJsonRemainsNonCanonicalTransport =
+  CLI.reviewedHopJsonIsCanonicalSemanticTransportIsFalse
+    CLI.canonicalNativeLegalFollowCliBoundary
