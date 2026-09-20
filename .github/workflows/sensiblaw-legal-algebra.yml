@@ -4,6 +4,12 @@ on:
   pull_request:
     paths:
       - 'DASHI/Core/BoundAcquisitionDemandExact.agda'
+      - 'DASHI/Interop/SLRSprint2CanonicalEvidenceConvergenceExact.agda'
+      - 'DASHI/Interop/SLRSharedEvidenceReducerExact.agda'
+      - 'DASHI/Interop/ITIRFederatedTypedWorldProjectionExact.agda'
+      - 'DASHI/Interop/SLRLegalRuntimeCapstoneExact.agda'
+      - 'DASHI/Interop/SLRLegalRuntimeCapstoneRegression.agda'
+      - 'DASHI/Interop/Everything.agda'
       - 'DASHI/Core/Everything.agda'
       - 'DASHI/Cognition/PNF/SensibLawOALCLegislationParserInputContractExact.agda'
       - 'DASHI/Cognition/PNF/SensibLawOALCResolutionCompletenessFallbackExact.agda'
@@ -78,6 +84,15 @@ jobs:
         run: >-
           nix develop .# --command bash scripts/run_agda29_parallel_check.sh
           DASHI/Core/BoundAcquisitionDemandExact.agda
+
+      - name: Type-check SLR evidence-to-legal runtime capstone
+        run: >-
+          nix develop .# --command bash scripts/run_agda29_parallel_check.sh
+          DASHI/Interop/SLRSprint2CanonicalEvidenceConvergenceExact.agda
+          DASHI/Interop/SLRSharedEvidenceReducerExact.agda
+          DASHI/Interop/ITIRFederatedTypedWorldProjectionExact.agda
+          DASHI/Interop/SLRLegalRuntimeCapstoneExact.agda
+          DASHI/Interop/SLRLegalRuntimeCapstoneRegression.agda
 
       - name: Type-check OALC source to PNF admission spine
         run: >-
