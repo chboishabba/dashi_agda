@@ -33,8 +33,9 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceQuantitativeP
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -195,18 +196,39 @@ absoluteCoherentPairBelowYoung mixed rate value left right =
         + L2.complex3NormSquared difference
     innerNN = Rational.addNonnegative mixedNN differenceNN
 
+    oneNN : 0ℚ ≤ 1ℚ
+    oneNN = ℚP.0≤∣p∣ 1ℚ
+
     twoNN : 0ℚ ≤ Bridge.two
-    twoNN = ℚP.+-mono-≤ ℚP.≤-refl ℚP.≤-refl
+    twoNN = Rational.addNonnegative oneNN oneNN
 
     envelopeNN : 0ℚ ≤ envelope
     envelopeNN =
       Rational.nonnegativeProductMonotone
         twoNN innerNN twoNN innerNN
         ℚP.≤-refl ℚP.≤-refl
+    productBound :
+      ∣ rateDiff ∣ * ∣ workDiff ∣
+      ≤ ∣ rateDiff ∣ * envelope
+    productBound =
+      Rational.nonnegativeProductMonotone
+        absRateNN absWorkNN absRateNN envelopeNN
+        ℚP.≤-refl workBound
+
+    targetMeaning :
+      ∣ rateDiff ∣ * envelope
+      ≡ rateWeightedYoungPair mixed rate value left right
+    targetMeaning = solve
+      ( ∣ rateDiff ∣
+      ∷ Bridge.two
+      ∷ L2.complex3NormSquared mixed
+      ∷ L2.complex3NormSquared difference
+      ∷ [])
   in
-  Rational.nonnegativeProductMonotone
-    absRateNN absWorkNN absRateNN envelopeNN
-    ℚP.≤-refl workBound
+  subst
+    (λ upper → ∣ rateDiff ∣ * ∣ workDiff ∣ ≤ upper)
+    targetMeaning
+    productBound
 
 absoluteCoherentAgainstHeadBelowYoung :
   ∀ {A : Set} →
