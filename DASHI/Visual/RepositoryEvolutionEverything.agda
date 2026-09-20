@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import DASHI.Core.TemporalSemanticGraphExact
 open import DASHI.Core.VersionedStateGraphExact
 open import DASHI.Core.SemanticMergeEvolutionExact
+open import DASHI.Core.SymbolIdentityEvolutionExact
 open import DASHI.Core.PortableInteractiveViewExact
 open import DASHI.Visual.SemanticHistoryVisualizationExact
 open import DASHI.Visual.SemanticGraphProjectionExact
