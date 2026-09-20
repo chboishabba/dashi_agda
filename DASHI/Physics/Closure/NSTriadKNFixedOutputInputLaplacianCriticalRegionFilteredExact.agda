@@ -28,9 +28,12 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length)
+open import Data.List.Membership.Propositional using (_∈_)
+open import Data.List.Relation.Unary.Any using (here; there)
+open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
@@ -63,6 +66,69 @@ criticalCoreItems (tau ∷ rest) with Region.criticalRegionTag tau
 ... | Region.deepFarLowRegion = criticalCoreItems rest
 ... | Region.deepHighHighRegion = criticalCoreItems rest
 ... | Region.criticalCoreRegion = tau ∷ criticalCoreItems rest
+
+deepFarLowItemsSound :
+  {tau : Physical.PhysicalTriadIncidence} →
+  (items : List Physical.PhysicalTriadIncidence) →
+  tau ∈ deepFarLowItems items →
+  (tau ∈ items) × Region.DeepFarLowEvidence tau
+deepFarLowItemsSound [] ()
+deepFarLowItemsSound {tau} (head ∷ rest) member
+  with Region.criticalRegionTag head in regionEq
+... | Region.deepFarLowRegion with member
+...   | here refl =
+      here refl , Region.deepFarLowTagEvidence head regionEq
+...   | there tail =
+      let source , evidence = deepFarLowItemsSound rest tail
+      in there source , evidence
+... | Region.deepHighHighRegion =
+      let source , evidence = deepFarLowItemsSound rest member
+      in there source , evidence
+... | Region.criticalCoreRegion =
+      let source , evidence = deepFarLowItemsSound rest member
+      in there source , evidence
+
+deepHighHighItemsSound :
+  {tau : Physical.PhysicalTriadIncidence} →
+  (items : List Physical.PhysicalTriadIncidence) →
+  tau ∈ deepHighHighItems items →
+  (tau ∈ items) × Region.DeepHighHighEvidence tau
+deepHighHighItemsSound [] ()
+deepHighHighItemsSound {tau} (head ∷ rest) member
+  with Region.criticalRegionTag head in regionEq
+... | Region.deepFarLowRegion =
+      let source , evidence = deepHighHighItemsSound rest member
+      in there source , evidence
+... | Region.deepHighHighRegion with member
+...   | here refl =
+      here refl , Region.deepHighHighTagEvidence head regionEq
+...   | there tail =
+      let source , evidence = deepHighHighItemsSound rest tail
+      in there source , evidence
+... | Region.criticalCoreRegion =
+      let source , evidence = deepHighHighItemsSound rest member
+      in there source , evidence
+
+criticalCoreItemsSound :
+  {tau : Physical.PhysicalTriadIncidence} →
+  (items : List Physical.PhysicalTriadIncidence) →
+  tau ∈ criticalCoreItems items →
+  (tau ∈ items) × Region.CriticalCoreEvidence tau
+criticalCoreItemsSound [] ()
+criticalCoreItemsSound {tau} (head ∷ rest) member
+  with Region.criticalRegionTag head in regionEq
+... | Region.deepFarLowRegion =
+      let source , evidence = criticalCoreItemsSound rest member
+      in there source , evidence
+... | Region.deepHighHighRegion =
+      let source , evidence = criticalCoreItemsSound rest member
+      in there source , evidence
+... | Region.criticalCoreRegion with member
+...   | here refl =
+      here refl , Region.criticalCoreTagEvidence head regionEq
+...   | there tail =
+      let source , evidence = criticalCoreItemsSound rest tail
+      in there source , evidence
 
 pairAgainstHeadRegionPartition :
   (rate work : Physical.PhysicalTriadIncidence → ℚ) →
