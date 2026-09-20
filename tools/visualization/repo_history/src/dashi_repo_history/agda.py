@@ -433,13 +433,21 @@ def _scope_chain_for_node(
     ]
 
     owner_local_scope = declaration.owner_local_scopes.get(owner_range)
-    if owner_local_scope is not None:
-        chain.append(owner_local_scope)
 
     if declaration.symbol.scope is not None:
+        # Local declarations own their clause variables before falling back to
+        # the enclosing where scope.
+        if owner_local_scope is not None:
+            chain.append(owner_local_scope)
+        chain.append(base)
         chain.append(declaration.symbol.scope)
+    else:
+        # For an outer function with a where block, pattern variables must be
+        # visible to the local declarations in that shared where scope.
+        if owner_local_scope is not None:
+            chain.append(owner_local_scope)
+        chain.append(base)
 
-    chain.append(base)
     return tuple(dict.fromkeys(chain))
 
 
