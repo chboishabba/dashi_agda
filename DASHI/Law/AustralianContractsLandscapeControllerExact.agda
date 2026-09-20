@@ -185,19 +185,21 @@ qld2026TemporalAlternativeWork =
 
 doctrineExpansionWork :
   String →
+  String →
+  String →
   Contracts.ContractDoctrine →
   ContractLandscapeWorkItem
-doctrineExpansionWork slug doctrine =
+doctrineExpansionWork workRef semanticRef sourceRef doctrine =
   contractLandscapeWorkItem
-    slug
+    workRef
     researchContextExpansion
-    slug
+    semanticRef
     (just "landscape:au:contract-law")
     (just doctrine)
     "AU"
     "2026-09-20"
     Contracts.researchIndex
-    slug
+    sourceRef
     nothing
     nothing
     true
@@ -208,25 +210,33 @@ doctrineExpansionWork slug doctrine =
 constructionExpansionWork : ContractLandscapeWorkItem
 constructionExpansionWork =
   doctrineExpansionWork
+    "contracts:landscape:context:doctrine:construction"
     "doctrine:au:contract:construction"
+    "doctrine-query:construction"
     Contracts.construction
 
 unconscionabilityExpansionWork : ContractLandscapeWorkItem
 unconscionabilityExpansionWork =
   doctrineExpansionWork
+    "contracts:landscape:context:doctrine:unconscionability"
     "doctrine:au:contract:unconscionability"
+    "doctrine-query:unconscionability"
     Contracts.unconscionability
 
 penaltiesExpansionWork : ContractLandscapeWorkItem
 penaltiesExpansionWork =
   doctrineExpansionWork
+    "contracts:landscape:context:doctrine:penalties"
     "doctrine:au:contract:penalties"
+    "doctrine-query:penalties"
     Contracts.penalties
 
 consumerLawExpansionWork : ContractLandscapeWorkItem
 consumerLawExpansionWork =
   doctrineExpansionWork
+    "contracts:landscape:context:doctrine:consumer-law"
     "doctrine:au:contract:consumer-law"
+    "doctrine-query:consumer-law"
     Contracts.consumerLaw
 
 boundedSeedMissingDoctrineFrontier : List ContractLandscapeWorkItem
