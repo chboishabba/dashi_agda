@@ -19,6 +19,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
+import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coordinate
 
 data All {A : Set} (Predicate : A → Set) : List A → Set where
   allNil :
@@ -378,6 +379,33 @@ centeredWindowOccursInRewriteScan
     (centeredWindowOccursInRewriteScan
       prefix suffix prefixPlain configured)
 
+
+rewriteOccurrencePreservesLength :
+  ∀ {machine before after window} →
+  (occurrence : Local.WindowRewriteOccurrence machine before after window) →
+  Coordinate.listLength (Local.cells before)
+  ≡ Coordinate.listLength (Local.cells after)
+rewriteOccurrencePreservesLength occurrence =
+  trans
+    (congLength (Local.beforeShape occurrence))
+    (sym (congLength (Local.afterShape occurrence)))
+  where
+    congLength :
+      ∀ {A : Set} {xs ys : List A} →
+      xs ≡ ys →
+      Coordinate.listLength xs ≡ Coordinate.listLength ys
+    congLength refl = refl
+
+    sym :
+      ∀ {A : Set} {x y : A} →
+      x ≡ y → y ≡ x
+    sym refl = refl
+
+    trans :
+      ∀ {A : Set} {x y z : A} →
+      x ≡ y → y ≡ z → x ≡ z
+    trans refl second = second
+
 record GlobalTransitionScan
     (machine : Local.ConcreteTapeMachine)
     (rule : Local.TapeRule
@@ -387,6 +415,10 @@ record GlobalTransitionScan
   field
     ruleOccursInMachine :
       Local.RuleOccurs rule (Local.rules machine)
+
+    sameRowLength :
+      Coordinate.listLength (Local.cells before)
+      ≡ Coordinate.listLength (Local.cells after)
 
     everyWindowLegal :
       AllWindowsLegal machine rule before after
@@ -418,6 +450,8 @@ machineStepImpliesGlobalTransitionScan :
 machineStepImpliesGlobalTransitionScan wellFormed = record
   { ruleOccursInMachine =
       Local.ruleOccursInMachine (WF.step wellFormed)
+  ; sameRowLength =
+      rewriteOccurrencePreservesLength occurrenceWitness
   ; everyWindowLegal =
       machineStepImpliesAllWindowsLegal wellFormed
   ; centeredTransitionOccurs =
@@ -445,6 +479,7 @@ record ConcreteTapeWholeRowLocalityBoundary : Set where
     directionalOverlapScanPaid : Bool
     wellFormedStepImpliesAllWindowsPaid : Bool
     centeredTransitionOccurrencePaid : Bool
+    equalRowLengthInvariantPaid : Bool
     wellFormedStepImpliesGlobalTransitionScanPaid : Bool
     globalTransitionScanToUniqueRewritePaid : Bool
     legalWindowBooleanReflectionPaid : Bool
@@ -458,4 +493,4 @@ canonicalConcreteTapeWholeRowLocalityBoundary :
   ConcreteTapeWholeRowLocalityBoundary
 canonicalConcreteTapeWholeRowLocalityBoundary =
   concrete-tape-whole-row-locality-boundary
-    true true true true true true false false false false false false false
+    true true true true true true true false false false false false false false
