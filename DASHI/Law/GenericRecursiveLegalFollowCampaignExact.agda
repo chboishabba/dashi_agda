@@ -169,6 +169,26 @@ record GenericRecursiveCampaignBoundary : Set where
     recursiveLoopIsBudgetBoundedIsTrue :
       recursiveLoopIsBudgetBounded ≡ true
 
+    parentCampaignReceiptIsPreserved : Bool
+    parentCampaignReceiptIsPreservedIsTrue :
+      parentCampaignReceiptIsPreserved ≡ true
+
+    continuationMayResetBudgetCounters : Bool
+    continuationMayResetBudgetCountersIsFalse :
+      continuationMayResetBudgetCounters ≡ false
+
+    governedAcquisitionReservesProviderRequestBound : Bool
+    governedAcquisitionReservesProviderRequestBoundIsTrue :
+      governedAcquisitionReservesProviderRequestBound ≡ true
+
+    successfulAcquisitionAdvancesCampaignReceipt : Bool
+    successfulAcquisitionAdvancesCampaignReceiptIsTrue :
+      successfulAcquisitionAdvancesCampaignReceipt ≡ true
+
+    sourceAcquisitionAutomaticallyAddsLegalHop : Bool
+    sourceAcquisitionAutomaticallyAddsLegalHopIsFalse :
+      sourceAcquisitionAutomaticallyAddsLegalHop ≡ false
+
     caseSpecificCampaignModuleRequiredForNextAuthority : Bool
     caseSpecificCampaignModuleRequiredForNextAuthorityIsFalse :
       caseSpecificCampaignModuleRequiredForNextAuthority ≡ false
@@ -207,6 +227,11 @@ canonicalGenericRecursiveCampaignBoundary =
     true refl
     true refl
     true refl
+    true refl
+    false refl
+    true refl
+    true refl
+    false refl
     false refl
     false refl
     false refl
@@ -225,6 +250,9 @@ data RecursiveTreatmentMaySkipReview : Set where
 data RecursiveControllerMayFreezeOldConclusion : Set where
 data RecursiveControllerMayConsumeFixedQueue : Set where
 data RecursiveNextAuthorityRequiresCaseSpecificRuntime : Set where
+data RecursiveContinuationMayResetBudget : Set where
+data SuccessfulAcquisitionAutomaticallyLegalHop : Set where
+data RecursiveCampaignMayDropParentReceipt : Set where
 
 researchPriorityDoesNotBecomeLegalTruth :
   ResearchPriorityAutomaticallyLegalTruth → ⊥
@@ -261,6 +289,18 @@ recursiveControllerDoesNotConsumeFixedQueue ()
 recursiveNextAuthorityNeedsNoCaseSpecificRuntime :
   RecursiveNextAuthorityRequiresCaseSpecificRuntime → ⊥
 recursiveNextAuthorityNeedsNoCaseSpecificRuntime ()
+
+recursiveContinuationCannotResetBudget :
+  RecursiveContinuationMayResetBudget → ⊥
+recursiveContinuationCannotResetBudget ()
+
+successfulAcquisitionDoesNotAutomaticallyAddLegalHop :
+  SuccessfulAcquisitionAutomaticallyLegalHop → ⊥
+successfulAcquisitionDoesNotAutomaticallyAddLegalHop ()
+
+recursiveCampaignCannotDropParentReceipt :
+  RecursiveCampaignMayDropParentReceipt → ⊥
+recursiveCampaignCannotDropParentReceipt ()
 
 ------------------------------------------------------------------------
 -- Phase-IV capstone contract.
