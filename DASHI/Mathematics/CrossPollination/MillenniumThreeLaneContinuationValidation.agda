@@ -766,3 +766,16 @@ agdaLeanSameObjectImportStillOpen :
     LeanAssist.currentMillenniumLeanAssistReceipt
   ≡ false
 agdaLeanSameObjectImportStillOpen = refl
+
+
+leanBSDCMSplitPrimeSourcePresent :
+  LeanAssist.bsdCMSplitPrimeSourcePresent
+    LeanAssist.currentMillenniumLeanAssistReceipt
+  ≡ true
+leanBSDCMSplitPrimeSourcePresent = refl
+
+leanBSDMathlibTwoSquaresReused :
+  LeanAssist.bsdMathlibTwoSquaresReused
+    LeanAssist.currentMillenniumLeanAssistReceipt
+  ≡ true
+leanBSDMathlibTwoSquaresReused = refl
