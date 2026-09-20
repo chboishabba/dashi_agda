@@ -81,3 +81,25 @@ reviewedAliasStillBindsExactOalcVersion :
 reviewedAliasStillBindsExactOalcVersion =
   Compiler.reviewedAliasBindsExactOalcVersionIsTrue
     Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+
+
+genericReviewedPropositionCompilerRemainsDoctrineIndependent :
+  Compiler.genericReviewedPropositionCompilerIsDoctrineIndependent
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+    ≡ true
+genericReviewedPropositionCompilerRemainsDoctrineIndependent =
+  Compiler.genericReviewedPropositionCompilerIsDoctrineIndependentIsTrue
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+
+waltonsStillUsesGenericReviewedPropositionCompiler :
+  Compiler.waltonsUsesGenericReviewedPropositionCompiler
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+    ≡ true
+waltonsStillUsesGenericReviewedPropositionCompiler =
+  Compiler.waltonsUsesGenericReviewedPropositionCompilerIsTrue
+    Compiler.canonicalAustralianContractsReviewedHopCompilerBoundary
+
+mannFixtureIsCandidateOnly :
+  Compiler.candidateOnly Compiler.mannRepudiationReviewedPropositionFixture
+    ≡ true
+mannFixtureIsCandidateOnly = refl
