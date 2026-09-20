@@ -47,6 +47,9 @@ import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFol
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact as DEnergy
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact as CLocal
+import DASHI.Physics.Closure.NSTriadKNR567ForcingCellPhysicalEnvelopeExact as B567Envelope
+import DASHI.Physics.Closure.NSTriadKNSameOutputIncidenceDisplacementExact as BDisplacement
+import DASHI.Physics.Closure.NSTriadKNR540OffDiagonalToLiteralR571M2Exact as BOffdiagM2
 
 ------------------------------------------------------------------------
 -- A
@@ -170,6 +173,34 @@ bM2ToR568CompilerClosed =
 bR567CompleteSquareAggregationClosed : Bool
 bR567CompleteSquareAggregationClosed =
   BR567.r567CompleteSquareAggregationClosed
+
+-- Corrected September-20 cut: the R571 displacement-weighted M2 belongs on
+-- the literal duplicate-free ordered off-diagonal carrier.  The completed
+-- R567 square contains diagonal cells with displacement zero and is therefore
+-- not the canonical pointwise M2 consumer.
+bR567ForcingCellPositivePhysicalEnvelopeClosed : Bool
+bR567ForcingCellPositivePhysicalEnvelopeClosed =
+  B567Envelope.r567LiteralForcingCellPositiveEnvelopeClosed
+
+bSameOutputIncidenceOppositeShiftClosed : Bool
+bSameOutputIncidenceOppositeShiftClosed =
+  BDisplacement.sameOutputIncidenceOppositeShiftClosed
+
+bDistinctOffDiagonalDisplacementNonzeroClosed : Bool
+bDistinctOffDiagonalDisplacementNonzeroClosed =
+  BDisplacement.distinctOffDiagonalDisplacementNonzeroClosed
+
+bR540OrderedOffDiagonalM2CompilerClosed : Bool
+bR540OrderedOffDiagonalM2CompilerClosed =
+  BOffdiagM2.r540OrderedOffDiagonalM2CompilerClosed
+
+bR540OrderedOffDiagonalM2IntroducesCardinalityTax : Bool
+bR540OrderedOffDiagonalM2IntroducesCardinalityTax =
+  BOffdiagM2.r540OrderedOffDiagonalM2IntroducesCardinalityTax
+
+bR567FullSquarePointwiseM2IsCanonicalConsumer : Bool
+bR567FullSquarePointwiseM2IsCanonicalConsumer =
+  BOffdiagM2.r567FullSquarePointwiseM2IsCanonicalConsumer
 
 bR567CellToR571SampleSameObjectClosed : Bool
 bR567CellToR571SampleSameObjectClosed = false
