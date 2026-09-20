@@ -22,6 +22,7 @@ module DASHI.Mathematics.Automorphic.EllipticCMPrimeCoefficientExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≢_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Nat.Primality using (Prime)
 open import Data.Nat.Tactic.RingSolver using (solve)
@@ -101,7 +102,7 @@ record GoodPrimeCMClassification : Set₁ where
     classify :
       (p : Nat) →
       Prime p →
-      p ≡ 2 →
+      p ≢ 2 →
       GoodPrimeCMCase p
 
 open GoodPrimeCMClassification public
