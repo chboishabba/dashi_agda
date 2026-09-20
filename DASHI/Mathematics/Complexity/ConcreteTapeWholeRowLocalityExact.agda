@@ -385,6 +385,9 @@ record GlobalTransitionScan
       (Local.Symbol machine))
     (before after : Local.TapeRow machine) : Set where
   field
+    ruleOccursInMachine :
+      Local.RuleOccurs rule (Local.rules machine)
+
     everyWindowLegal :
       AllWindowsLegal machine rule before after
 
@@ -413,7 +416,9 @@ machineStepImpliesGlobalTransitionScan :
     before
     after
 machineStepImpliesGlobalTransitionScan wellFormed = record
-  { everyWindowLegal =
+  { ruleOccursInMachine =
+      Local.ruleOccursInMachine (WF.step wellFormed)
+  ; everyWindowLegal =
       machineStepImpliesAllWindowsLegal wellFormed
   ; centeredTransitionOccurs =
       transportContainsCentered
