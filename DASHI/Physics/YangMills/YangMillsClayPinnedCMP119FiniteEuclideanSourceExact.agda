@@ -22,6 +22,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
+import DASHI.Physics.YangMills.YangMillsFiniteNormalizedExpectationSymmetryExact as Symmetry
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -79,3 +80,38 @@ literalCMP119WholeLatticeEuclideanAttachmentLevel = conditional
 
 cmp119FiniteEuclideanExpectationAdapterLevel : ProofLevel
 cmp119FiniteEuclideanExpectationAdapterLevel = machineChecked
+
+
+euclideanFromNumeratorChangeOfVariables :
+  ∀ {Configuration EuclideanAction sequenceLimit limitLaws quotient division}
+    {family :
+      Limit.FinitePhysicalNormalizedFamily
+        Configuration {sequenceLimit = sequenceLimit}
+        limitLaws quotient division}
+    (actConfiguration : EuclideanAction → Configuration → Configuration)
+    (actObservable :
+      EuclideanAction → (Configuration → ℝ) → Configuration → ℝ)
+    (pullback :
+      ∀ action observable configuration →
+      actObservable action observable configuration
+      ≡ observable (actConfiguration action configuration))
+    (numerator :
+      Symmetry.FiniteNumeratorActionInvariant family actObservable) →
+  CMP119WholeLatticeEuclideanCovariance
+    Configuration EuclideanAction family
+euclideanFromNumeratorChangeOfVariables
+    actConfiguration actObservable pullback numerator = record
+  { CMP119WholeLatticeEuclideanCovariance.actConfiguration =
+      actConfiguration
+  ; CMP119WholeLatticeEuclideanCovariance.actObservable =
+      actObservable
+  ; CMP119WholeLatticeEuclideanCovariance.observableActionIsPullback =
+      pullback
+  ; CMP119WholeLatticeEuclideanCovariance.finiteNormalizedExpectationEuclideanInvariant =
+      Symmetry.finiteNormalizedExpectationInvariantFromNumerator
+        _ actObservable numerator
+  }
+
+cmp119NumeratorEuclideanAdapterLevel : ProofLevel
+cmp119NumeratorEuclideanAdapterLevel =
+  Symmetry.finiteNumeratorToNormalizedSymmetryCompilerLevel
