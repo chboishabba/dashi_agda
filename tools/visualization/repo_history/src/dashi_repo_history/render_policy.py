@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from manim import DOWN, Dot, Text, VGroup
+from manim import DOWN, LEFT, Dot, Text, VGroup
 
 
 @dataclass(frozen=True)
@@ -78,6 +78,13 @@ class EdgePolicy:
         dominant = self.dominant_kind(kinds)
         return dict(self.stroke_widths).get(dominant, 1.0)
 
+    def legend_entries(self, present_kinds: set[str]) -> list[tuple[str, float]]:
+        entries: list[tuple[str, float]] = []
+        for kind in self.priority:
+            if kind in present_kinds:
+                entries.append((kind, self.stroke_width({kind})))
+        return entries
+
     def edge_config(self, kinds: set[str]) -> dict[str, Any]:
         dominant = self.dominant_kind(kinds)
         width = self.stroke_width(kinds)
@@ -113,6 +120,23 @@ class ManimRenderPolicy:
     labels: LabelPolicy = LabelPolicy()
     nodes: NodePolicy = NodePolicy()
     edges: EdgePolicy = EdgePolicy()
+
+    def legend_mobject(self, present_kinds: set[str]):
+        entries = self.edges.legend_entries(present_kinds)
+        if not entries:
+            return VGroup()
+        rows = [
+            Text(
+                f"{'━' * max(1, round(width))}  {kind}",
+                font_size=11,
+            )
+            for kind, width in entries
+        ]
+        return VGroup(*rows).arrange(
+            DOWN,
+            aligned_edge=LEFT,
+            buff=0.035,
+        )
 
     def vertex_mobject(
         self,
