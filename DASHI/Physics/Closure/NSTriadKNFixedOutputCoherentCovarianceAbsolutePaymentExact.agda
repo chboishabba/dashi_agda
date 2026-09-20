@@ -84,15 +84,12 @@ absProductBound :
   ∣ a * b ∣ ≤ ∣ a ∣ * B
 absProductBound a b B bBound =
   let
-    absA0 : 0ℚ ≤ ∣ a ∣
-    absA0 = ℚP.0≤∣p∣ a
-
     scaled :
       ∣ a ∣ * ∣ b ∣ ≤ ∣ a ∣ * B
     scaled = ℚP.*-monoˡ-≤-nonNeg ∣ a ∣ bBound
   in
   subst
-    (_≤ ∣ a ∣ * B)
+    (λ lower → lower ≤ ∣ a ∣ * B)
     (sym (ℚP.∣p*q∣≡∣p∣*∣q∣ a b))
     scaled
 
@@ -122,8 +119,27 @@ singlePairCovarianceBound rate value mixed left right =
             + L2.complex3NormSquared
                 (C3.complex3Subtract (value left) (value right))))
         local
+    reassociate :
+      ∣ dr ∣ *
+        (two *
+          (L2.complex3NormSquared mixed
+            + L2.complex3NormSquared
+                (C3.complex3Subtract (value left) (value right))))
+      ≡
+      pairAbsoluteMajorant rate value mixed left right
+    reassociate =
+      solve
+        ( ∣ dr ∣
+        ∷ L2.complex3NormSquared mixed
+        ∷ L2.complex3NormSquared
+            (C3.complex3Subtract (value left) (value right))
+        ∷ [])
   in
-  first
+  subst
+    (λ upper →
+      ∣ dr * dw ∣ ≤ upper)
+    reassociate
+    first
 
 absAddBound :
   (x y X Y : ℚ) →
