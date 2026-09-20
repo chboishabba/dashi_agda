@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R129NuclearCompositeExac
 -- theorem output once R129 is inhabited.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
