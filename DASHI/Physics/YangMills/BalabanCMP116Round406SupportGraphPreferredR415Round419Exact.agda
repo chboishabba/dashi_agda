@@ -23,8 +23,8 @@ module DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Rou
 --
 -- Thus the physical frontier is reduced to:
 --
---   B1 exact literal R406 term = exact R410 term/majorant;
---   B4 selected surviving-term support membership + metric attachment;
+--   B1 R406 operator-factor layout = fixed four-stage R410 path replay;
+--   B2 selected surviving-term support membership + metric attachment;
 --   B3 literal CMP116 fixed-Y rate split on the exact R406 tree coordinate;
 --   B4 same-tree weighted-fibre/counting budget.
 --
@@ -48,6 +48,7 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedTermwiseLocalizationRound406
 import DASHI.Physics.YangMills.BalabanCMP116Round406To415Exact as Replay
 import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphGeometryExact as GraphGeometry
 import DASHI.Physics.YangMills.BalabanCMP116Round406SourceRateSplitAmplitudeRound420Exact as RateSplit
+import DASHI.Physics.YangMills.BalabanCMP116Round406ExactR410ReplayRound421Exact as ExactReplay
 import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact as Preferred
 import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exact as R411
 import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R414
@@ -97,6 +98,36 @@ fromSourceRateSplit {application = application} replayData source = record
   ; supportGraphGeometry =
       RateSplit.asSupportGraphGeometry application source
   }
+
+fromOperatorReplayAndSourceRateSplit :
+  ∀ {Measure TestObservable dataSet extension base}
+    {application : R406.SelectedCMP116TermwiseLocalization base} →
+  ExactReplay.LiteralRound406R410OperatorReplay
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application →
+  RateSplit.LiteralRound406SourceRateSplit
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application →
+  LiteralRound406SupportGraphBSource
+    {Measure = Measure}
+    {TestObservable = TestObservable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    application
+fromOperatorReplayAndSourceRateSplit {application = application}
+    operatorReplay rateSplit =
+  fromSourceRateSplit
+    (ExactReplay.compileExactR410Replay application operatorReplay)
+    rateSplit
 
 compilePreferredR415 :
   ∀ {Measure TestObservable dataSet extension base}
@@ -181,7 +212,11 @@ round419PreferredR415CompilerLevel = machineChecked
 -- Genuine remaining source mathematics on this route.
 literalRound419ExactR406R410ReplayLevel : ProofLevel
 literalRound419ExactR406R410ReplayLevel =
-  Replay.literalRound406ExactR410ReplayLevel
+  ExactReplay.literalRound406R410OperatorFactorLayoutAttachmentLevel
+
+literalRound419ScalarTermEqualityCompilerLevel : ProofLevel
+literalRound419ScalarTermEqualityCompilerLevel =
+  ExactReplay.round421ScalarTermEqualityCompilerLevel
 
 literalRound419SourceRateSplitCompilerLevel : ProofLevel
 literalRound419SourceRateSplitCompilerLevel =
