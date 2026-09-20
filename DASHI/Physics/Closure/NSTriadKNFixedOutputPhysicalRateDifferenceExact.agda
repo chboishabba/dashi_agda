@@ -30,10 +30,8 @@ import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
-import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinWaleffeAmplitudeTangentRound94Exact as R94
-import DASHI.Physics.Closure.NSTriadKNLiteralMixedCellGramPairClosedRound382Exact as R382
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -109,16 +107,6 @@ physicalCellRate :
 physicalCellRate physicalSystem tau =
   R94.physicalDecayRate physicalSystem (Physical.p tau)
   + R94.physicalDecayRate physicalSystem (Physical.q tau)
-
-physicalCellRateIsLiteralPairRate :
-  (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
-  (S : Helical.HelicalModeScalars F) →
-  (tau : Physical.PhysicalTriadIncidence) →
-  physicalCellRate physicalSystem tau
-  ≡
-  let module P = R382.ClosedLiteralPair physicalSystem S
-  in P.cellRate tau
-physicalCellRateIsLiteralPairRate physicalSystem S tau = refl
 
 fixedOutputPhysicalRateDifference :
   (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F) →
