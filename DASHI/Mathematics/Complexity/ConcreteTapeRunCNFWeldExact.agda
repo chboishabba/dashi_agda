@@ -16,6 +16,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeWindowCodecCNFWeldExact as Codec
 import DASHI.Mathematics.Complexity.ConcreteTapeWholeRowCNFWeldExact as RowCNF
+import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Locality
+import DASHI.Mathematics.Complexity.ConcreteTapeWholeRowLocalityExact as Whole
 
 data WellFormedTapeRun
     (machine : Local.ConcreteTapeMachine) :
@@ -73,13 +75,13 @@ stepToEncodedCharacterization :
     current next
 stepToEncodedCharacterization codec step = record
   { RowCNF.beforeInterior =
-      DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact.wellFormedStepBeforeInterior step
+      Locality.wellFormedStepBeforeInterior step
   ; RowCNF.afterUnique =
       WF.afterExactlyOneHead step
   ; RowCNF.ruleOccursInMachine =
       Local.ruleOccursInMachine (WF.step step)
   ; RowCNF.sameRowLength =
-      DASHI.Mathematics.Complexity.ConcreteTapeWholeRowLocalityExact.rewriteOccurrencePreservesLength
+      Whole.rewriteOccurrencePreservesLength
         (WF.occurrence (WF.wellFormedOccurrence step))
   ; RowCNF.allLocalCNFsSatisfied =
       RowCNF.stepImpliesWholeRowCNF codec step
