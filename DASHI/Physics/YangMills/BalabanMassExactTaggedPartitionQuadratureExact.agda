@@ -103,8 +103,9 @@ asFiniteQuadratureCellError dataSet = record
       λ cell →
         subst
           (λ difference → absℝ difference ≤ℝ 0ℝ)
-          (subSelf
-            (cellMass dataSet cell *ℝ sampleValue dataSet cell))
+          (sym
+            (subSelf
+              (cellMass dataSet cell *ℝ sampleValue dataSet cell)))
           (subst
             (λ absolute → absolute ≤ℝ 0ℝ)
             (sym absZero)
