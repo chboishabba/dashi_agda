@@ -81,7 +81,19 @@ def sha256_json(value: Any) -> str:
 
 
 def load_records(path: Path) -> list[dict[str, Any]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    text = path.read_text(encoding="utf-8")
+    if path.suffix.lower() == ".jsonl":
+        rows = []
+        for line_no, line in enumerate(text.splitlines(), start=1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            if not isinstance(row, dict):
+                raise ValueError(f"{path}:{line_no}: expected JSON object")
+            rows.append(row)
+        return rows
+
+    payload = json.loads(text)
     if isinstance(payload, list):
         rows = payload
     elif isinstance(payload, dict):
@@ -151,9 +163,13 @@ def title_abstract_snapshot(row: dict[str, Any]) -> dict[str, Any]:
             "Summary",
             "summary",
         ),
-        "subject": row.get("Subject", row.get("subject")),
+        "subject": row.get("Subject", row.get("subject", row.get("subjects"))),
         "publication_type": row.get(
-            "PublicationType", row.get("publication_type", row.get("DocumentType"))
+            "PublicationType",
+            row.get(
+                "publication_type",
+                row.get("publication_types", row.get("DocumentType")),
+            ),
         ),
         "peer_reviewed": row.get("PeerReviewed", row.get("peer_reviewed")),
     }
