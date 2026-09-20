@@ -7,3 +7,5 @@
 (untyped_binding) @untyped_binding
 (qid) @reference
 (id) @reference
+(function) @function_clause
+(record_constructor (id) @record_constructor_name)
