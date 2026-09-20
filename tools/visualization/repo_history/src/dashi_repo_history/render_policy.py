@@ -47,6 +47,7 @@ class EdgePolicy:
         "type-depends",
         "opens",
         "imports",
+        "local-to",
         "contains",
         "depends",
     )
@@ -64,6 +65,7 @@ class EdgePolicy:
         ("type-depends", 1.25),
         ("opens", 1.05),
         ("imports", 0.9),
+        ("local-to", 1.45),
         ("contains", 0.75),
         ("depends", 1.0),
     )
