@@ -77,6 +77,9 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceCriti
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact as BRegionPay
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionToR432Exact as BRegionR432
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyExact as BRegionFamily
+import DASHI.Physics.Closure.NSTriadKNFiniteBipartiteCovarianceExact as BBipartite
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionFilteredExact as BFilteredRegion
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceFilteredRegionLiveExact as BFilteredLive
 
 ------------------------------------------------------------------------
 -- A
@@ -362,6 +365,25 @@ bD1b2NativeR236GlobalEDRoutingUsesExistingR469R219 =
 bD1b2NativeR236UniformFamilyProducerInhabited : Bool
 bD1b2NativeR236UniformFamilyProducerInhabited =
   BRegionFamily.nativeR236UniformFamilyProducerInhabitedHere
+
+
+bD1b2FiniteBipartiteCovarianceClosedFormClosed : Bool
+bD1b2FiniteBipartiteCovarianceClosedFormClosed =
+  BBipartite.finiteBipartiteCovarianceClosedFormClosed
+
+bD1b2FilteredPhysicalR236CovarianceDecompositionClosed : Bool
+bD1b2FilteredPhysicalR236CovarianceDecompositionClosed =
+  BFilteredRegion.filteredPhysicalCriticalRegionCovarianceDecompositionClosed
+
+bD1b2FilteredPhysicalR236RegionMembershipCarriesEvidence : Bool
+bD1b2FilteredPhysicalR236RegionMembershipCarriesEvidence = true
+
+bD1b2LiveCovarianceFilteredPhysicalR236NormalFormClosed : Bool
+bD1b2LiveCovarianceFilteredPhysicalR236NormalFormClosed =
+  BFilteredLive.liveD1b2FilteredPhysicalRegionNormalFormClosed
+
+bD1b2RemainingDeepRegionAnalysisIsFractionalShellDecay : Bool
+bD1b2RemainingDeepRegionAnalysisIsFractionalShellDecay = true
 
 bD1b2DeepOnlySignedRegionPaymentsClosed : Bool
 bD1b2DeepOnlySignedRegionPaymentsClosed = false
