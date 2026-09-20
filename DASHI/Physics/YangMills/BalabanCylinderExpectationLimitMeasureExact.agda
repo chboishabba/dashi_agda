@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.BalabanCylinderExpectationLimitMeasureExact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
