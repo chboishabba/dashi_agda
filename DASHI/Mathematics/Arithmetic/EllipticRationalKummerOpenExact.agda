@@ -17,6 +17,8 @@ module DASHI.Mathematics.Arithmetic.EllipticRationalKummerOpenExact where
 open import Agda.Primitive using (lzero)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Rational.Base as ℚ using (ℚ; 1ℚ; _-_; _+_; _*_; NonZero)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
@@ -112,8 +114,6 @@ curveFactorization point =
   trans
     (Curve.liesOnCurve point)
     (solve (Curve.xCoordinate point ∷ []))
-  where
-    open import Agda.Builtin.List using (_∷_; [])
 
 thirdKummerFactor :
   (point : Curve.RationalAffinePointOnCurve) →
@@ -135,8 +135,6 @@ kummerThreeFactorProductIsSquare :
   ≡ Curve.yCoordinate point * Curve.yCoordinate point
 kummerThreeFactorProductIsSquare point domain =
   sym (curveFactorization point)
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
 
 record EllipticRationalKummerOpenBoundary : Set where
   constructor elliptic-rational-kummer-open-boundary
