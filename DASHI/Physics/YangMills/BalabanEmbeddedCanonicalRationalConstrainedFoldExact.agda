@@ -15,6 +15,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _+ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as AddEmbed
+import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as BaseEmbed
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as RingEmbed
 import DASHI.Physics.YangMills.BalabanClayP3CanonicalRationalConstrainedSumExact as Canonical
 import DASHI.Physics.YangMills.BalabanClayP3FiniteConstrainedIntegralExact as Integral
@@ -27,7 +28,7 @@ realFold :
 realFold embedding dataSet fields value =
   RingEmbed.realSum fields
     (λ fine →
-      AddEmbed.Embed.embed
+      BaseEmbed.embed
         (AddEmbed.base (RingEmbed.additive embedding))
         (value fine))
 
@@ -36,7 +37,7 @@ embeddedFoldSelectedExact :
     (embedding : RingEmbed.RationalRealRingEmbedding)
     (dataSet : Canonical.CanonicalRationalConstrainedSumData Fine Coarse)
     fields value coarse →
-  AddEmbed.Embed.embed
+  BaseEmbed.embed
     (AddEmbed.base (RingEmbed.additive embedding))
     (Integral.foldSelected
       (Canonical.canonicalRationalConstrainedSum dataSet)
@@ -44,7 +45,7 @@ embeddedFoldSelectedExact :
   ≡
   realFold embedding dataSet fields value
 embeddedFoldSelectedExact embedding dataSet [] value coarse =
-  AddEmbed.Embed.zeroExact
+  BaseEmbed.zeroExact
     (AddEmbed.base (RingEmbed.additive embedding))
 embeddedFoldSelectedExact embedding dataSet (fine ∷ fields) value coarse =
   trans
@@ -55,7 +56,7 @@ embeddedFoldSelectedExact embedding dataSet (fine ∷ fields) value coarse =
         value coarse fields))
     (cong
       (λ tail →
-        AddEmbed.Embed.embed
+        BaseEmbed.embed
           (AddEmbed.base (RingEmbed.additive embedding))
           (value fine)
         +ℝ tail)
@@ -78,7 +79,7 @@ embeddedConstrainedIntegralExact :
     (embedding : RingEmbed.RationalRealRingEmbedding)
     (dataSet : Canonical.CanonicalRationalConstrainedSumData Fine Coarse)
     fields weight coarse →
-  AddEmbed.Embed.embed
+  BaseEmbed.embed
     (AddEmbed.base (RingEmbed.additive embedding))
     (Integral.constrainedIntegral
       (Canonical.canonicalRationalConstrainedSum dataSet)
