@@ -1,0 +1,8 @@
+module DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedFactorizedConvergenceValidation where
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedFactorizedConvergenceExact as C
+stepVanishingOwned : C.cmp119Equation171WeightedStepVanishingCompilerLevel ≡ machineChecked
+stepVanishingOwned = refl
+completeDensityConvergenceOwned : C.cmp119Equation171CompleteDensityConvergenceCompilerLevel ≡ machineChecked
+completeDensityConvergenceOwned = refl
