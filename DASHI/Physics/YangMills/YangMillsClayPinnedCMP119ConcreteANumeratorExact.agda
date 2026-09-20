@@ -12,10 +12,12 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteANumeratorExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Base using (List)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.FiniteReflectionPositivity as FiniteRP
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
@@ -99,7 +101,7 @@ record PinnedCMP119ConcreteANumeratorInputs
           Limit.finiteExpectation (family G) cutoff observable)
         testFamily
       ≡
-      DASHI.Physics.YangMills.FiniteReflectionPositivity.sumTerms
+      FiniteRP.sumTerms
         A.realPositiveAdditiveScalar
         (squareTerm G cutoff testFamily)
         (indices G cutoff testFamily)
