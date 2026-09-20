@@ -53,6 +53,7 @@ def _render(args: argparse.Namespace) -> None:
         "history": "RepositoryHistoryScene",
         "snapshot": "SemanticSnapshotScene",
         "symbol": "SemanticSymbolScene",
+        "symbol-history": "SemanticSymbolHistoryScene",
         "semantic-history": "SemanticHistoryScene",
         "episode": "SemanticBranchEpisodeScene",
         "merge": "SemanticMergeScene",
@@ -245,7 +246,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     render.add_argument(
         "--scene",
-        choices=["history", "snapshot", "symbol", "semantic-history", "episode", "merge"],
+        choices=["history", "snapshot", "symbol", "symbol-history", "semantic-history", "episode", "merge"],
         default="history",
     )
     render.add_argument("--snapshot-index", type=int)
