@@ -781,6 +781,22 @@ normalizedZeroWeightedShellSummationStillOpen :
     R2NormalizedDecay.canonicalNormalizedCenteredOffOscillatoryDecayBoundary ≡ false
 normalizedZeroWeightedShellSummationStillOpen = refl
 
+
+literalCanonicalGammaConeDeficitSourceWritten :
+  R2GammaLiteral.QuantitativeCanonicalGammaConeDeficitBoundary.literalCanonicalGammaConeDeficitSourceWritten
+    R2GammaLiteral.canonicalQuantitativeCanonicalGammaConeDeficitBoundary ≡ true
+literalCanonicalGammaConeDeficitSourceWritten = refl
+
+gammaInstantiationNoLongerOpenForH2e :
+  R2GammaLiteral.QuantitativeCanonicalGammaConeDeficitBoundary.gammaSameObjectInstantiationStillOpenForH2e
+    R2GammaLiteral.canonicalQuantitativeCanonicalGammaConeDeficitBoundary ≡ false
+gammaInstantiationNoLongerOpenForH2e = refl
+
+normalizedOffAggregateIsRemainingH2e :
+  R2GammaLiteral.QuantitativeCanonicalGammaConeDeficitBoundary.normalizedOffAggregateBelowGammaDeficitStillRequired
+    R2GammaLiteral.canonicalQuantitativeCanonicalGammaConeDeficitBoundary ≡ true
+normalizedOffAggregateIsRemainingH2e = refl
+
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
   field
