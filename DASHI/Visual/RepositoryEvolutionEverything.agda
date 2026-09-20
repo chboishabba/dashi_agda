@@ -3,7 +3,9 @@ module DASHI.Visual.RepositoryEvolutionEverything where
 open import DASHI.Core.Prelude
 open import DASHI.Core.TemporalSemanticGraphExact
 open import DASHI.Core.VersionedStateGraphExact
+open import DASHI.Core.SemanticMergeEvolutionExact
 open import DASHI.Core.PortableInteractiveViewExact
+open import DASHI.Visual.SemanticHistoryVisualizationExact
 
 ------------------------------------------------------------------------
 -- AGGREGATE CONTRACT FOR REPOSITORY-EVOLUTION VISUALIZATION
