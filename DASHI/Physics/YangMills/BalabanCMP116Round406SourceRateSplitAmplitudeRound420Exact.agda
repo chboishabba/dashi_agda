@@ -189,7 +189,7 @@ commonYShellBelowCompiledDomainDecay :
   domainAmplitude source domain
     *ℝ R414.weight (decay source)
       (Graph.domainTreeDistance (supportGraph source) domain)
-commonYShellBelowCompiledDomainDecay source domain =
+commonYShellBelowCompiledDomainDecay {application = application} source domain =
   subst
     (λ upper → R406.commonYShell application domain ≤ℝ upper)
     (sym
