@@ -163,3 +163,5 @@ import DASHI.Law.AustralianContractsThreeHopAdaptiveFixtureRegression
 
 import DASHI.Law.WaltonsLiveOalcOperatorPipelineExact
 import DASHI.Law.WaltonsLiveOalcOperatorPipelineRegression
+import DASHI.Law.GenericRecursiveLegalFollowCampaignExact
+import DASHI.Law.GenericRecursiveLegalFollowCampaignRegression
