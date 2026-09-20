@@ -426,4 +426,5 @@ import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphGeometryExact
 
 import DASHI.Physics.YangMills.BalabanR144CanonicalMetricTangentAttachmentExact
 
+import DASHI.Physics.YangMills.BalabanCMP116Round406SourceRateSplitAmplitudeRound420Exact
 import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Round419Exact
