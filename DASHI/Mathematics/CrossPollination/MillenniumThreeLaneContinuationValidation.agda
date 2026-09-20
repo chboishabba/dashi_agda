@@ -812,10 +812,11 @@ pnpLiteralEndpointClausesStillCodecBlocked = refl
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCellularH2Exact as HodgeCell
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCycleClassExact as HodgeP1Cell
 
 hodgeCellularPointGeneratorWeldPaid :
   HodgeCell.p1H11ToCellularH2
-    (HodgeCell.P1.p1CycleClass HodgeCell.P1.pointCycle)
+    (HodgeP1Cell.p1CycleClass HodgeP1Cell.pointCycle)
   ≡ HodgeCell.cellularPointGenerator
 hodgeCellularPointGeneratorWeldPaid =
   HodgeCell.pointCycleClassWeldsToCellularGenerator
