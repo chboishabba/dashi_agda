@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact w
 -- on the SAME measure already used by literal A / OS reconstruction.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Unit using (⊤; tt)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _+ℝ_; _*ℝ_)
@@ -112,7 +112,7 @@ cmp119FiniteExpectationMeasureIsLiteralFiniteExpectation :
     (Gram.measureSequence
       (cmp119PhysicalMeasureConvergenceData inputs group) cutoff)
     observable
-  Agda.Builtin.Equality.≡
+  _≡_
   Limit.finiteExpectation (A.family inputs group) cutoff observable
 cmp119FiniteExpectationMeasureIsLiteralFiniteExpectation
   inputs group cutoff observable = refl
@@ -133,7 +133,7 @@ cmp119ContinuumExpectationMeasureIsLiteralALimit :
     (Gram.continuumMeasure
       (cmp119PhysicalMeasureConvergenceData inputs group))
     observable
-  Agda.Builtin.Equality.≡
+  _≡_
   Limit.limitExpectation (A.family inputs group) observable
 cmp119ContinuumExpectationMeasureIsLiteralALimit inputs group observable = refl
 
