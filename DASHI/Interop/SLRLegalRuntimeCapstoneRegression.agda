@@ -2,6 +2,7 @@ module DASHI.Interop.SLRLegalRuntimeCapstoneRegression where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Maybe using (just)
 open import Data.Empty using (⊥)
 
 import DASHI.Interop.SLRLegalRuntimeCapstoneExact as Capstone
@@ -85,6 +86,34 @@ matterProjectionCannotCreateTruth :
   Capstone.MatterIssueProjectionCreatesCanonicalTruth → ⊥
 matterProjectionCannotCreateTruth =
   Capstone.matterIssueProjectionDoesNotCreateCanonicalTruth
+
+pabaiBeginsWithLook :
+  Capstone.firstAction Capstone.pabaiCalibrationSequence
+  ≡ just Capstone.lookAction
+pabaiBeginsWithLook = refl
+
+cullenBeginsWithReview :
+  Capstone.firstAction Capstone.cullenCalibrationSequence
+  ≡ just Capstone.reviewAction
+cullenBeginsWithReview = refl
+
+gljUsesThinkThenReview :
+  Capstone.firstAction Capstone.gljCalibrationSequence
+  ≡ just Capstone.thinkAction
+gljUsesThinkThenReview = refl
+
+gljSecondActionIsReview :
+  Capstone.secondAction Capstone.gljCalibrationSequence
+  ≡ just Capstone.reviewAction
+gljSecondActionIsReview = refl
+
+gljHasThreePersistedHops :
+  Capstone.persistedHopCount Capstone.gljCalibrationSequence ≡ 3
+gljHasThreePersistedHops = refl
+
+diskReplayPinned :
+  Capstone.diskReplayRequired Capstone.gljCalibrationSequence ≡ true
+diskReplayPinned = refl
 
 capabilitySurfacePinsAllFiveGates :
   Capstone.m25MixedFamilyReplayImplemented
