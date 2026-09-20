@@ -23,6 +23,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedSupportGraphRound416Exact wh
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (_≤_)
 open import Data.Product using (_×_; _,_)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
