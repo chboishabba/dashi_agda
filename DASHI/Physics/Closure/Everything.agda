@@ -311,3 +311,5 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedCycleBookkeepingExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCorrectionStepExact
 
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedBandGeometryExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedStagePrimitivesExact
