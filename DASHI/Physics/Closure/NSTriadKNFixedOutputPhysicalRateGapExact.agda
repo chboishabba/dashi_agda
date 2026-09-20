@@ -27,7 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateGapExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using
-  (ℚ; 0ℚ; Positive; _+_; _-_; _*_; _≤_; ∣_∣)
+  (ℚ; 0ℚ; Positive; NonNegative; _+_; _-_; _*_; _≤_; ∣_∣; nonNegative)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -134,8 +134,8 @@ module PhysicalRateGap
   physicalScaleNonnegative =
     let
       instance
-        nuNN = Data.Rational.Base.nonNegative nuNonnegative
-        cNN = Data.Rational.Base.nonNegative embeddingScaleSquareNonnegative
+        nuNN = nonNegative nuNonnegative
+        cNN = nonNegative embeddingScaleSquareNonnegative
     in
     ℚP.nonNegative⁻¹ (nu * embeddingScaleSquare)
 
