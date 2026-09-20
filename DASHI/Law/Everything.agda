@@ -167,3 +167,5 @@ import DASHI.Law.GenericRecursiveLegalFollowCampaignExact
 import DASHI.Law.GenericRecursiveLegalFollowCampaignRegression
 import DASHI.Law.GenericRecursiveOalcPinnedStreamExact
 import DASHI.Law.GenericRecursiveOalcPinnedStreamRegression
+import DASHI.Law.GenericRecursiveOalcRangeIndexExact
+import DASHI.Law.GenericRecursiveOalcRangeIndexRegression
