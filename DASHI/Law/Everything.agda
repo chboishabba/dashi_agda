@@ -169,3 +169,5 @@ import DASHI.Law.GenericRecursiveOalcPinnedStreamExact
 import DASHI.Law.GenericRecursiveOalcPinnedStreamRegression
 import DASHI.Law.GenericRecursiveOalcRangeIndexExact
 import DASHI.Law.GenericRecursiveOalcRangeIndexRegression
+import DASHI.Law.GenericReviewedAuthorityIdentityEnrichmentExact
+import DASHI.Law.GenericReviewedAuthorityIdentityEnrichmentRegression
