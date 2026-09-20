@@ -407,3 +407,23 @@ pnpGlobalLegalityOutsideEqualityStillOpen :
     PNPReconstruct.canonicalConcreteTapeGlobalRewriteReconstructionBoundary
   ≡ false
 pnpGlobalLegalityOutsideEqualityStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- NINTH CONTINUATION: global legal scan forces the entire pre-transition
+-- outside context to agree.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalPrefixAgreementExact as PNPPrefix
+
+pnpGlobalPrefixAgreementPaid :
+  PNPPrefix.globalLegalityForcesPrefixAgreementPaid
+    PNPPrefix.canonicalConcreteTapeGlobalPrefixAgreementBoundary
+  ≡ true
+pnpGlobalPrefixAgreementPaid = refl
+
+pnpGlobalSuffixAgreementStillOpen :
+  PNPPrefix.globalLegalityForcesSuffixAgreementPaid
+    PNPPrefix.canonicalConcreteTapeGlobalPrefixAgreementBoundary
+  ≡ false
+pnpGlobalSuffixAgreementStillOpen = refl
