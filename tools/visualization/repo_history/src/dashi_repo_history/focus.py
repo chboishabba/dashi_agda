@@ -25,11 +25,19 @@ DEFAULT_SEMANTIC_RELATIONS = frozenset(
 
 
 @dataclass(frozen=True)
+class FocusLayer:
+    direction: str
+    depth: int
+    node_ids: tuple[str, ...]
+
+
+@dataclass(frozen=True)
 class FocusResult:
     root_id: str
     node_ids: frozenset[str]
     edge_ids: frozenset[str]
     layers: tuple[tuple[str, ...], ...]
+    layer_specs: tuple[FocusLayer, ...]
 
     def graph(self, graph_data: dict[str, Any]) -> dict[str, Any]:
         return {
@@ -190,10 +198,25 @@ def focus_symbol(
         tuple(sorted(layer_map[depth]))
         for depth in ordered_depths
     )
+    layer_specs = tuple(
+        FocusLayer(
+            direction=(
+                "root"
+                if depth == 0
+                else "upstream"
+                if depth < 0
+                else "downstream"
+            ),
+            depth=abs(depth),
+            node_ids=tuple(sorted(layer_map[depth])),
+        )
+        for depth in ordered_depths
+    )
 
     return FocusResult(
         root_id=root_id,
         node_ids=frozenset(node_ids),
         edge_ids=frozenset(edge_ids),
         layers=layers,
+        layer_specs=layer_specs,
     )
