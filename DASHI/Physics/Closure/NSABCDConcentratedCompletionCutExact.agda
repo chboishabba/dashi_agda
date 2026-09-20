@@ -39,6 +39,9 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedCompactCandidateFromPer
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicExclusionNativeExact as DExclude
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedR3FiniteEnergyExclusionNativeExact as CExclude
 import DASHI.Physics.Closure.NSTriadKNR571UnitNormalizedDisplacementWeldExact as BNorm
+import DASHI.Physics.Closure.NSTriadKNR573HomochiralHeterochiralSplitExact as B573Split
+import DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact as BHelicity
+import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact as BMidpoint
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFold
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact as DEnergy
@@ -116,6 +119,21 @@ bUnitNormalizedLiveLatticeDisplacementWeldClosed =
 bA1A2G2SameDisplacementUnderPhysicalNormalization : Bool
 bA1A2G2SameDisplacementUnderPhysicalNormalization =
   BNorm.a1A2G2UseOneDisplacementUnderUnitNormalization
+
+bR573LiteralFourChannelHelicitySplitClosed : Bool
+bR573LiteralFourChannelHelicitySplitClosed =
+  B573Split.r573LiteralFourSignHelicitySplitClosed
+
+bR567ForcingFullHelicityResolvedClosed : Bool
+bR567ForcingFullHelicityResolvedClosed =
+  BHelicity.r567ForcingFullHelicityResolvedExactly
+
+bOppositeShiftMidpointNecessityClosed : Bool
+bOppositeShiftMidpointNecessityClosed =
+  BMidpoint.oppositeShiftMidpointNecessityClosed
+
+bGlobalR567CellToCenteredR571SampleIsValidWithoutMidpoint : Bool
+bGlobalR567CellToCenteredR571SampleIsValidWithoutMidpoint = false
 
 bCutoffUniformG1FamilyEnvelopeClosed : Bool
 bCutoffUniformG1FamilyEnvelopeClosed = false
