@@ -3,8 +3,9 @@ module DASHI.Mathematics.Arithmetic.EllipticRationalKummerOpenExact where
 ------------------------------------------------------------------------
 -- RATIONAL 2-DESCENT KUMMER COORDINATES ON THE NONEXCEPTIONAL LOCUS
 --
--- For E : y^2 = x^3 - x = x(x-1)(x+1), an affine point away from the three
--- rational 2-torsion roots gives literal nonzero rational coordinates
+-- For E : y^2 = x^3 - x = x(x-1)(x+1), the chosen pair of descent
+-- coordinates [x],[x-1] is defined whenever x and x-1 are nonzero.  In
+-- particular the torsion point x=-1 belongs to this ordinary locus.
 --
 --   [x] , [x-1]
 --
@@ -85,9 +86,6 @@ record NonexceptionalKummerDomain
     xMinusOneNonzero :
       NonZero (Curve.xCoordinate point - 1ℚ)
 
-    xPlusOneNonzero :
-      NonZero (Curve.xCoordinate point + 1ℚ)
-
 open NonexceptionalKummerDomain public
 
 rationalKummerRepresentative :
@@ -115,25 +113,34 @@ curveFactorization point =
     (Curve.liesOnCurve point)
     (solve (Curve.xCoordinate point ∷ []))
 
+record ThirdFactorNonzero
+    (point : Curve.RationalAffinePointOnCurve) : Set where
+  field
+    xPlusOneNonzero :
+      NonZero (Curve.xCoordinate point + 1ℚ)
+
+open ThirdFactorNonzero public
+
 thirdKummerFactor :
   (point : Curve.RationalAffinePointOnCurve) →
-  NonexceptionalKummerDomain point →
+  ThirdFactorNonzero point →
   Square.NonzeroRational
-thirdKummerFactor point domain =
+thirdKummerFactor point third =
   Square.nonzero-rational
     (Curve.xCoordinate point + 1ℚ)
-    (xPlusOneNonzero domain)
+    (xPlusOneNonzero third)
 
 kummerThreeFactorProductIsSquare :
   (point : Curve.RationalAffinePointOnCurve) →
   (domain : NonexceptionalKummerDomain point) →
+  (third : ThirdFactorNonzero point) →
   Square.value
     (first (rationalKummerRepresentative point domain))
   * Square.value
     (second (rationalKummerRepresentative point domain))
-  * Square.value (thirdKummerFactor point domain)
+  * Square.value (thirdKummerFactor point third)
   ≡ Curve.yCoordinate point * Curve.yCoordinate point
-kummerThreeFactorProductIsSquare point domain =
+kummerThreeFactorProductIsSquare point domain third =
   sym (curveFactorization point)
 
 record EllipticRationalKummerOpenBoundary : Set where
