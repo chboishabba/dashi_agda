@@ -54,6 +54,8 @@ import DASHI.Analysis.RiemannG2GammaPoleCancellationRatioTransferLeanDonorExact 
 import DASHI.Analysis.RiemannG2GammaIntegratedGapAndCutoffCompatibilityLeanDonorExact as R2GammaIntegrated
 import DASHI.Analysis.RiemannG2QuantitativeScaledTaperLeanDonorExact as R2QuantTaper
 import DASHI.Analysis.RiemannG2ProjectiveCenteredGaugeBridgeLeanDonorExact as R2ProjectiveCentered
+import DASHI.Analysis.RiemannG2ProjectiveTwoRadiusNormalizedLeanDonorExact as R2ProjectiveTwoRadius
+import DASHI.Analysis.RiemannG2ProjectiveOffNormalizedAtomicCarrierLeanDonorExact as R2ProjectiveAtomic
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
@@ -927,6 +929,22 @@ normalizedRvMProjectiveAttachmentStillOpen :
   R2ProjectiveCentered.ProjectiveCenteredGaugeBridgeBoundary.normalizedRvMProjectiveConsumerFullyAttached
     R2ProjectiveCentered.canonicalProjectiveCenteredGaugeBridgeBoundary ≡ false
 normalizedRvMProjectiveAttachmentStillOpen = refl
+
+
+allFiniteProjectiveOffPiecesNowNormalized :
+  R2ProjectiveAtomic.ProjectiveOffNormalizedAtomicBoundary.radiusZeroNormalizedFiniteCarrierPaid
+    R2ProjectiveAtomic.canonicalProjectiveOffNormalizedAtomicBoundary ≡ true
+allFiniteProjectiveOffPiecesNowNormalized = refl
+
+literalInfiniteProjectiveOffTsumStillOpen :
+  R2ProjectiveAtomic.ProjectiveOffNormalizedAtomicBoundary.literalInfiniteReflectionPairTsumAttachmentPaid
+    R2ProjectiveAtomic.canonicalProjectiveOffNormalizedAtomicBoundary ≡ false
+literalInfiniteProjectiveOffTsumStillOpen = refl
+
+signedProjectiveRvMAttachmentStillOpen :
+  R2ProjectiveAtomic.ProjectiveOffNormalizedAtomicBoundary.signedProjectiveRvMAttachmentPaid
+    R2ProjectiveAtomic.canonicalProjectiveOffNormalizedAtomicBoundary ≡ false
+signedProjectiveRvMAttachmentStillOpen = refl
 
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
