@@ -359,3 +359,6 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFixedOutputCovarianceM2PaymentExact
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact
+
+-- Canonical centered covariance recut: common output Laplacian cancels before observation.
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredToInputLaplacianCovarianceExact
