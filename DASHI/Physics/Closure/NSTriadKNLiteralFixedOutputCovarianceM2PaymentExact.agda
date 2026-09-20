@@ -52,6 +52,7 @@ import DASHI.Physics.Closure.NSTriadKNCoherentWorkHermitianScalarizationExact as
 import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact as G0
 import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredCovarianceSecondMomentExact as PhysicalM2
 import DASHI.Physics.Closure.NSTriadKNCenteredCovarianceToSecondMomentExact as CovM2
+import DASHI.Physics.Closure.NSTriadKNCenteredSquareIntegerGapExact as Gap
 import DASHI.Physics.Closure.NSTriadKNLuoFinitePairedCommutatorSecondMomentBoundExact as Moment
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteCenteredCommutatorBudgetExact as Sum
 import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleExact as Scale
@@ -266,7 +267,7 @@ module LiteralFixedOutputCovarianceM2
           two scaledState twoNN scaledStateNN
       dNN =
         Scale.natAsRationalNonnegative
-          (DASHI.Physics.Closure.NSTriadKNCenteredSquareIntegerGapExact.natGap
+          (Gap.natGap
             (PhysicalM2.integerCenteredNorm alpha)
             (PhysicalM2.integerCenteredNorm beta))
     in
@@ -279,6 +280,25 @@ module LiteralFixedOutputCovarianceM2
       ℚP.≤-refl ℚP.≤-refl
       ℚP.≤-refl ℚP.≤-refl
       ℚP.≤-refl ℚP.≤-refl
+
+  pairBudget :
+    Physical.PhysicalTriadIncidence →
+    Physical.PhysicalTriadIncidence → ℚ
+  pairBudget alpha beta
+    with NatP._≟_
+      (PhysicalM2.integerCenteredNorm alpha)
+      (PhysicalM2.integerCenteredNorm beta)
+  ... | yes equalNorms = 0ℚ
+  ... | no unequal =
+    Moment.weightedSecondMoment
+      (CovM2.covarianceSecondMomentSample
+        (PhysicalM2.physicalCovarianceSecondMomentPair
+          (nonzeroPairData alpha beta unequal)))
+      *
+      ( Scale.unitSquare E
+        * (G2.two
+          * G1.stateAmplitudeEnvelope
+              (value alpha) (value beta) mixed))
 
   covariancePaymentSampleM2Meaning :
     (alpha beta : Physical.PhysicalTriadIncidence) →
@@ -307,25 +327,6 @@ module LiteralFixedOutputCovarianceM2
       ∷ stateCoefficient
       ∷ d
       ∷ [])
-
-  pairBudget :
-    Physical.PhysicalTriadIncidence →
-    Physical.PhysicalTriadIncidence → ℚ
-  pairBudget alpha beta
-    with NatP._≟_
-      (PhysicalM2.integerCenteredNorm alpha)
-      (PhysicalM2.integerCenteredNorm beta)
-  ... | yes equalNorms = 0ℚ
-  ... | no unequal =
-    Moment.weightedSecondMoment
-      (CovM2.covarianceSecondMomentSample
-        (PhysicalM2.physicalCovarianceSecondMomentPair
-          (nonzeroPairData alpha beta unequal)))
-      *
-      ( Scale.unitSquare E
-        * (G2.two
-          * G1.stateAmplitudeEnvelope
-              (value alpha) (value beta) mixed))
 
   literalPairTermBelowBudget :
     (alpha beta : Physical.PhysicalTriadIncidence) →
