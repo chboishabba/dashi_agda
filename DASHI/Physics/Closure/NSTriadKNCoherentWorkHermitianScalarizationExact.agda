@@ -38,7 +38,8 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as 
 import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact as G0
 import DASHI.Physics.Closure.NSTriadKNWaleffeOutputHelicityGramRound287Exact as R287
 
-F = G0.Weld.F
+F : C3.RealField _
+F = Work.F
 
 coherentWorkIsTwoHermitianScalar :
   (mixed value : C3.Complex3 F) →
