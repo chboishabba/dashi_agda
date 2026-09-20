@@ -89,8 +89,8 @@ dominationToLowHighProducer :
 dominationToLowHighProducer P = record
   { Producer.lowPhysicalMajorant = lowPhysicalMajorant P
   ; Producer.highPhysicalMajorant = highPhysicalMajorant P
-  ; Producer.LowConvolutionCurrency = Lebesgue.Integrable _ (lowConvolutionEnvelope P)
-  ; Producer.HighConvolutionCurrency = Lebesgue.Integrable _ (highWeightedConvolutionEnvelope P)
+  ; Producer.LowConvolutionCurrency = Lebesgue.Integrable base (lowConvolutionEnvelope P)
+  ; Producer.HighConvolutionCurrency = Lebesgue.Integrable base (highWeightedConvolutionEnvelope P)
   ; Producer.lowCurrency = lowConvolutionEnvelopeIntegrable P
   ; Producer.highCurrency = highWeightedConvolutionEnvelopeIntegrable P
   ; Producer.lowConvolutionIntegrable =
