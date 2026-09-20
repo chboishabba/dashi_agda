@@ -389,3 +389,5 @@ import DASHI.Physics.YangMills.BalabanR144ToCMP119StressInsertionExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LocalCoreStressExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109ConcreteLocalCExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MarkedCurvatureCompositeExact
+
+import DASHI.Physics.YangMills.YangMillsFiniteNormalizedExpectationSymmetryExact
