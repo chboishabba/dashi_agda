@@ -54,6 +54,10 @@ import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact 
 import DASHI.Physics.Closure.NSTriadKNR567ForcingCellPhysicalEnvelopeExact as B567Envelope
 import DASHI.Physics.Closure.NSTriadKNSameOutputIncidenceDisplacementExact as BDisplacement
 import DASHI.Physics.Closure.NSTriadKNR540OffDiagonalToLiteralR571M2Exact as BOffdiagM2
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as BRateDiff
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceQuantitativePairBoundExact as BQuantPair
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBudgetExact as BCoherentBudget
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact as BCoherentLive
 
 ------------------------------------------------------------------------
 -- A
@@ -201,6 +205,29 @@ bR577VariableFibreReducedToEDPlusOneGramResidual =
 
 bR577SignedGramResidualClosed : Bool
 bR577SignedGramResidualClosed = false
+
+bD1b2PhysicalFixedOutputRateDifferenceFactored : Bool
+bD1b2PhysicalFixedOutputRateDifferenceFactored =
+  BRateDiff.fixedOutputPhysicalRateDifferenceFactored
+
+bD1b2SamePairAbsoluteQuantitativeBoundClosed : Bool
+bD1b2SamePairAbsoluteQuantitativeBoundClosed =
+  BQuantPair.absolutePairDifferenceSameGraphBoundClosed
+
+bD1b2PhysicalSignedPairBudgetClosed : Bool
+bD1b2PhysicalSignedPairBudgetClosed =
+  BCoherentBudget.physicalSignedCoherentPairBudgetClosed
+
+bD1b2PhysicalFixedOutputFamilyBudgetSummed : Bool
+bD1b2PhysicalFixedOutputFamilyBudgetSummed =
+  BCoherentBudget.physicalFixedOutputFamilyBudgetSummedHere
+
+bD1b2LivePhysicalCoherentCovarianceReductionClosed : Bool
+bD1b2LivePhysicalCoherentCovarianceReductionClosed =
+  BCoherentLive.livePhysicalCoherentCovarianceQuantitativeReductionClosed
+
+bD1b2CenteredPhysicalPairFamilyCutoffUniformPaymentClosed : Bool
+bD1b2CenteredPhysicalPairFamilyCutoffUniformPaymentClosed = false
 
 bCutoffUniformG1FamilyEnvelopeClosed : Bool
 bCutoffUniformG1FamilyEnvelopeClosed = false
