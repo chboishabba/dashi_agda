@@ -152,6 +152,183 @@ initialEndpointCNF :
 initialEndpointCNF target =
   unitClausesForTarget initialRowExtendedRename target
 
+
+andTrueLeft :
+  ∀ left right →
+  CNF.andBool left right ≡ true →
+  left ≡ true
+andTrueLeft false right ()
+andTrueLeft true right proof = refl
+
+andTrueRight :
+  ∀ left right →
+  CNF.andBool left right ≡ true →
+  right ≡ true
+andTrueRight false right ()
+andTrueRight true right proof = proof
+
+unitFalseTrueImpliesFalse :
+  ∀ bit →
+  CNF.notBool bit ≡ true →
+  bit ≡ false
+unitFalseTrueImpliesFalse false proof = refl
+unitFalseTrueImpliesFalse true ()
+
+unitClausesForTarget_sound :
+  ∀ {local global}
+    (rename : Fin.Fin local → Fin.Fin global)
+    (target : CNF.Bits local)
+    (assignment : CNF.Bits global) →
+  CNF.evaluateCNF
+    (unitClausesForTarget rename target)
+    assignment
+  ≡ true →
+  Rename.pullbackBits rename assignment ≡ target
+unitClausesForTarget_sound {zero}
+    rename CNF.[]ᵇ assignment accepted =
+  refl
+unitClausesForTarget_sound {suc local}
+    rename (false CNF.∷ᵇ target) assignment accepted =
+  prependFalse
+    headFalse
+    (unitClausesForTarget_sound
+      (λ i → rename (Fin.suc i))
+      target assignment restTrue)
+  where
+    clauseValue =
+      CNF.evaluateClause
+        (unitClauseForBit (rename Fin.zero) false)
+        assignment
+
+    restValue =
+      CNF.evaluateCNF
+        (unitClausesForTarget
+          (λ i → rename (Fin.suc i))
+          target)
+        assignment
+
+    headClauseTrue : clauseValue ≡ true
+    headClauseTrue =
+      andTrueLeft clauseValue restValue accepted
+
+    restTrue : restValue ≡ true
+    restTrue =
+      andTrueRight clauseValue restValue accepted
+
+    headLookup :
+      CNF.lookupBit assignment (rename Fin.zero) ≡ false
+    headLookup =
+      unitFalseTrueImpliesFalse
+        (CNF.lookupBit assignment (rename Fin.zero))
+        headClauseTrue
+
+    headFalse :
+      CNF.lookupBit
+        (Rename.pullbackBits rename assignment)
+        Fin.zero
+      ≡ false
+    headFalse =
+      trans
+        (Rename.pullbackLookup rename assignment Fin.zero)
+        headLookup
+      where
+        trans :
+          ∀ {A : Set} {x y z : A} →
+          x ≡ y → y ≡ z → x ≡ z
+        trans refl refl = refl
+
+    prependFalse :
+      CNF.lookupBit
+        (Rename.pullbackBits rename assignment)
+        Fin.zero
+      ≡ false →
+      Rename.pullbackBits
+        (λ i → rename (Fin.suc i))
+        assignment
+      ≡ target →
+      Rename.pullbackBits rename assignment
+      ≡ false CNF.∷ᵇ target
+    prependFalse refl refl = refl
+
+unitClausesForTarget_sound {suc local}
+    rename (true CNF.∷ᵇ target) assignment accepted =
+  prependTrue
+    headTrue
+    (unitClausesForTarget_sound
+      (λ i → rename (Fin.suc i))
+      target assignment restTrue)
+  where
+    clauseValue =
+      CNF.evaluateClause
+        (unitClauseForBit (rename Fin.zero) true)
+        assignment
+
+    restValue =
+      CNF.evaluateCNF
+        (unitClausesForTarget
+          (λ i → rename (Fin.suc i))
+          target)
+        assignment
+
+    headClauseTrue : clauseValue ≡ true
+    headClauseTrue =
+      andTrueLeft clauseValue restValue accepted
+
+    restTrue : restValue ≡ true
+    restTrue =
+      andTrueRight clauseValue restValue accepted
+
+    headTrue :
+      CNF.lookupBit
+        (Rename.pullbackBits rename assignment)
+        Fin.zero
+      ≡ true
+    headTrue =
+      trans
+        (Rename.pullbackLookup rename assignment Fin.zero)
+        headClauseTrue
+      where
+        trans :
+          ∀ {A : Set} {x y z : A} →
+          x ≡ y → y ≡ z → x ≡ z
+        trans refl refl = refl
+
+    prependTrue :
+      CNF.lookupBit
+        (Rename.pullbackBits rename assignment)
+        Fin.zero
+      ≡ true →
+      Rename.pullbackBits
+        (λ i → rename (Fin.suc i))
+        assignment
+      ≡ target →
+      Rename.pullbackBits rename assignment
+      ≡ true CNF.∷ᵇ target
+    prependTrue refl refl = refl
+
+initialEndpointCNF_iff :
+  ∀ {machine steps cols}
+    (target : CNF.Bits (Decode.RowBitsWidth machine cols))
+    (assignment :
+      CNF.Bits (ExtendedGlobalWidth machine steps cols)) →
+  CNF.evaluateCNF
+    (initialEndpointCNF target)
+    assignment
+  ≡ true
+  ↔
+  Rename.pullbackBits
+    initialRowExtendedRename
+    assignment
+  ≡ target
+initialEndpointCNF_iff target assignment = record
+  { to =
+      unitClausesForTarget_sound
+        initialRowExtendedRename target assignment
+  ; from =
+      unitClausesForTarget_complete
+        initialRowExtendedRename target assignment
+  }
+
 ------------------------------------------------------------------------
 -- Acceptance witness clause
 ------------------------------------------------------------------------
