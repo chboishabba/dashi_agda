@@ -11,7 +11,7 @@ module DASHI.Physics.YangMills.BalabanCMP116Round406To415Exact where
 -- majorant is the canonical R410 marked-product majorant.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -25,6 +25,20 @@ import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact as R415
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
 import Data.Rational.Base as ℚ using (ℚ)
+open import Data.List.Base using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
+
+
+sumCongruent :
+  ∀ {A : Set}
+    (xs : List A)
+    (left right : A → ℝ) →
+  (∀ x → left x ≡ right x) →
+  Resum.sumℝ left xs ≡ Resum.sumℝ right xs
+sumCongruent [] left right pointwise = refl
+sumCongruent (x ∷ xs) left right pointwise
+  rewrite pointwise x
+        | sumCongruent xs left right pointwise = refl
 
 record Round406ExactR410Replay
     {Measure TestObservable : Set}
@@ -116,25 +130,30 @@ compileRound415 application replay geometryData = record
       R406.selectedBoundaryIntegrand application
   ; R415.SelectedCMP116MarkedExpansion.commonYBoundaryIsSelectedTermSum =
       λ domain →
-        let
-          sourceEquality = R406.commonYBoundaryIsTermSum application domain
-        in
-        Resum.sumℝ-cong
-          (R406.termsWithCommonY application domain)
-          (λ term → differentiatedTermIsR410 replay domain term)
-          sourceEquality
+        trans
+          (R406.commonYBoundaryIsTermSum application domain)
+          (sumCongruent
+            (R406.termsWithCommonY application domain)
+            (R406.differentiatedTerm application domain)
+            (λ term →
+              R410.differentiatedTerm
+                (selectedR410Term replay domain term))
+            (differentiatedTermIsR410 replay domain))
   ; R415.SelectedCMP116MarkedExpansion.selectedBoundaryIsCommonYSum =
       R406.selectedBoundaryIsCommonYSum application
   ; R415.SelectedCMP116MarkedExpansion.selectedR410MajorantsBelowCommonYShell =
       λ domain →
-        let
-          sourceBound =
-            R406.differentiatedMajorantsBelowCommonYShell application domain
-        in
-        Resum.sumℝ-congruent-upper
-          (R406.termsWithCommonY application domain)
-          (λ term → differentiatedMajorantIsCanonicalR410 replay domain term)
-          sourceBound
+        subst
+          (λ selectedSum →
+            selectedSum ≤ℝ R406.commonYShell application domain)
+          (sumCongruent
+            (R406.termsWithCommonY application domain)
+            (R406.differentiatedTermMajorant application domain)
+            (λ term →
+              R415.canonicalTermMajorant
+                (selectedR410Term replay domain term))
+            (differentiatedMajorantIsCanonicalR410 replay domain))
+          (R406.differentiatedMajorantsBelowCommonYShell application domain)
   ; R415.SelectedCMP116MarkedExpansion.geometry =
       geometry geometryData
   ; R415.SelectedCMP116MarkedExpansion.decay =
