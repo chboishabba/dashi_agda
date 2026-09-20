@@ -253,3 +253,28 @@ bsdRationalSquareClassQuotientStillOpen :
     BSDSquare.canonicalRationalSquareClassBoundary
   ≡ false
 bsdRationalSquareClassQuotientStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- SIXTH CONTINUATION: recursive whole-row scanner + forward locality theorem.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.ConcreteTapeWholeRowLocalityExact as PNPWhole
+
+pnpRecursiveWholeRowScannerPaid :
+  PNPWhole.recursiveWholeRowScanPaid
+    PNPWhole.canonicalConcreteTapeWholeRowLocalityBoundary
+  ≡ true
+pnpRecursiveWholeRowScannerPaid = refl
+
+pnpMachineStepImpliesWholeRowLegalPaid :
+  PNPWhole.wellFormedStepImpliesAllWindowsPaid
+    PNPWhole.canonicalConcreteTapeWholeRowLocalityBoundary
+  ≡ true
+pnpMachineStepImpliesWholeRowLegalPaid = refl
+
+pnpReverseWholeRowReconstructionStillOpen :
+  PNPWhole.allWindowsToUniqueRewritePaid
+    PNPWhole.canonicalConcreteTapeWholeRowLocalityBoundary
+  ≡ false
+pnpReverseWholeRowReconstructionStillOpen = refl
