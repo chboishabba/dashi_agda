@@ -10,6 +10,7 @@ from manim import (
     Create,
     DiGraph,
     Dot,
+    DOWN,
     FadeIn,
     FadeOut,
     GrowFromCenter,
@@ -21,8 +22,8 @@ from manim import (
     VGroup,
 )
 
-from .layout import PersistentLayout
-from .merge_attribution import attribute_merge
+from dashi_repo_history.layout import PersistentLayout
+from dashi_repo_history.merge_attribution import attribute_merge
 
 
 def _history_layout(commits: list[dict[str, Any]]) -> dict[str, list[float]]:
@@ -338,7 +339,7 @@ class SemanticHistoryScene(MovingCameraScene):
             "dashi_agda — semantic evolution",
             font_size=30,
         ).to_edge(UP)
-        stamp = Text("", font_size=17).next_to(title, UP * -1, buff=0.12)
+        stamp = Text("", font_size=17).next_to(title, DOWN, buff=0.12)
         self.play(FadeIn(title), FadeIn(stamp))
 
         view = SemanticGraphView()
@@ -349,7 +350,7 @@ class SemanticHistoryScene(MovingCameraScene):
         first_stamp = Text(
             first["commit"][:10],
             font_size=17,
-        ).next_to(title, UP * -1, buff=0.12)
+        ).next_to(title, DOWN, buff=0.12)
         self.play(ReplacementTransform(stamp, first_stamp), Create(graph), run_time=1.0)
         stamp = first_stamp
 
@@ -422,7 +423,7 @@ class SemanticMergeScene(MovingCameraScene):
         left_group = VGroup(
             Text(f"parent A · {left[:9]}", font_size=18),
             left_graph,
-        ).arrange(UP * -1, buff=0.2)
+        ).arrange(DOWN, buff=0.2)
         right_group = VGroup(
             Text(f"parent B · {right[:9]}", font_size=18),
             right_graph,
