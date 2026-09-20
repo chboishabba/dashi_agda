@@ -3,22 +3,18 @@ module DASHI.Physics.YangMills.BalabanCMP122Equation171QuantitativeQuadratureLim
 ------------------------------------------------------------------------
 -- QUANTITATIVE PRODUCT-HAAR QUADRATURE COMPILER FOR CMP122 EQ.(1.71)
 --
--- Input:
---   * exact Gate4 quadrature slice at every refinement,
---   * finite cell decomposition for each refinement,
---   * exact identification of the cell source sum with Eq.(1.71),
---   * exact identification of the cell quadrature sum with the slice fold,
---   * vanishing total oscillation+discrepancy budget.
+-- Every finite cell decomposition is indexed by
 --
--- Output:
---   Eq.(1.71) localized integral = limit of Gate4 finite quadratures.
+--   refinement x cutoff x slow field.
 --
--- Thus the opaque G4 equality is replaced by quantitative finite estimates.
+-- This is essential: Eq.(1.71)'s selected domain and density depend on the
+-- physical cutoff/background.  The compiler proves convergence pointwise on
+-- that exact source family.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; absℝ; _-ℝ_; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -48,29 +44,34 @@ record CMP122Equation171QuantitativeQuadratureLimit
       Slice.Equation171Gate4QuadratureSlice
         (constructionAt refinement) source embedding
 
-    Cell : Nat → Set
+    Cell : Nat → Nat → SlowField → Set
 
-    cellErrorAt : ∀ refinement →
-      Error.FiniteQuadratureCellError (Cell refinement)
+    cellErrorAt : ∀ refinement cutoff slow →
+      Error.FiniteQuadratureCellError
+        (Cell refinement cutoff slow)
 
     sourceCellSumIsEquation171Integral :
       ∀ refinement cutoff slow →
-      Error.sourceIntegral (cellErrorAt refinement)
+      Error.sourceIntegral
+        (cellErrorAt refinement cutoff slow)
       ≡
       Eq171.equation171ConstrainedIntegral source cutoff slow
         (Eq171.equation171ExponentialDensity source cutoff slow)
 
     quadratureCellSumIsSliceFold :
       ∀ refinement cutoff slow →
-      Error.quadratureSum (cellErrorAt refinement)
+      Error.quadratureSum
+        (cellErrorAt refinement cutoff slow)
       ≡
       Slice.sourceFiniteFold
         (sliceAt refinement) cutoff slow
 
     errorBudgetVanishes :
+      ∀ cutoff slow →
       Seq.Vanishes sequenceLimit
         (λ refinement →
-          Error.totalErrorBudget (cellErrorAt refinement))
+          Error.totalErrorBudget
+            (cellErrorAt refinement cutoff slow))
 
 open CMP122Equation171QuantitativeQuadratureLimit public
 
@@ -93,7 +94,7 @@ sliceFoldErrorBound :
         (sliceAt dataSet refinement) cutoff slow)
   ≤ℝ
   Error.totalErrorBudget
-    (cellErrorAt dataSet refinement)
+    (cellErrorAt dataSet refinement cutoff slow)
 sliceFoldErrorBound dataSet refinement cutoff slow =
   subst
     (λ sourceValue →
@@ -104,22 +105,22 @@ sliceFoldErrorBound dataSet refinement cutoff slow =
             (sliceAt dataSet refinement) cutoff slow)
       ≤ℝ
       Error.totalErrorBudget
-        (cellErrorAt dataSet refinement))
+        (cellErrorAt dataSet refinement cutoff slow))
     (sourceCellSumIsEquation171Integral
       dataSet refinement cutoff slow)
     (subst
       (λ quadratureValue →
         absℝ
           (Error.sourceIntegral
-            (cellErrorAt dataSet refinement)
+            (cellErrorAt dataSet refinement cutoff slow)
             -ℝ quadratureValue)
         ≤ℝ
         Error.totalErrorBudget
-          (cellErrorAt dataSet refinement))
+          (cellErrorAt dataSet refinement cutoff slow))
       (quadratureCellSumIsSliceFold
         dataSet refinement cutoff slow)
       (Error.finiteQuadratureErrorBound
-        (cellErrorAt dataSet refinement)))
+        (cellErrorAt dataSet refinement cutoff slow)))
 
 equation171IntegralIsFiniteSliceLimit :
   ∀ {Scale Fine SlowField Component Functional}
@@ -150,10 +151,10 @@ equation171IntegralIsFiniteSliceLimit
         (Eq171.equation171ExponentialDensity source cutoff slow))
       (λ refinement →
         Error.totalErrorBudget
-          (cellErrorAt dataSet refinement))
+          (cellErrorAt dataSet refinement cutoff slow))
       (λ refinement →
         sliceFoldErrorBound dataSet refinement cutoff slow)
-      (errorBudgetVanishes dataSet))
+      (errorBudgetVanishes dataSet cutoff slow))
 
 compileEquation171Gate4RefinementLimit :
   ∀ {Scale Fine SlowField Component Functional}
@@ -187,9 +188,6 @@ equation171QuantitativeQuadratureCompilerLevel = machineChecked
 equation171QuantitativeRefinementLimitCompilerLevel : ProofLevel
 equation171QuantitativeRefinementLimitCompilerLevel = machineChecked
 
--- After the finite error theorem, the genuine YM/compact-group work is reduced
--- to constructing the cells/nodes and proving that the explicit error budgets
--- vanish uniformly on the Eq.(1.71) family.
 literalEquation171CellDecompositionLevel : ProofLevel
 literalEquation171CellDecompositionLevel = conditional
 
