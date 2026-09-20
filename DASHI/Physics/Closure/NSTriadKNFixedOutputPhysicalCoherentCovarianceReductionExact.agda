@@ -31,7 +31,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; Positive; _+_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -111,9 +111,6 @@ module PhysicalCoherentCovariance
         (λ rateAbs → two * (rateAbs * state))
         rateGapMag)
       (solve (scale ∷ gap ∷ state ∷ []))
-    where
-    open import Relation.Binary.PropositionalEquality using (cong)
-
   headMajorantNormalized :
     (head : Physical.PhysicalTriadIncidence) →
     (items : List Physical.PhysicalTriadIncidence) →
@@ -124,7 +121,7 @@ module PhysicalCoherentCovariance
     sym (ℚP.*-zeroʳ scale)
   headMajorantNormalized head (x ∷ xs) =
     trans
-      (Relation.Binary.PropositionalEquality.cong₂ _+_
+      (cong₂ _+_
         (pairMajorantNormalized head x)
         (headMajorantNormalized head xs))
       (solve
