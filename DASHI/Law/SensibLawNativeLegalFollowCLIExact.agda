@@ -45,6 +45,7 @@ data NativeLegalFollowCommand : Set where
   compileReviewedContractPropositionHops : NativeLegalFollowCommand
   compileReviewedContractTreatmentHops : NativeLegalFollowCommand
   syncWaltonsReviewedHopsToS14 : NativeLegalFollowCommand
+  runAustralianContractsThreeHopAdaptiveFixture : NativeLegalFollowCommand
 
 data OrchestrationOwner : Set where
   nativeRustCli : OrchestrationOwner
