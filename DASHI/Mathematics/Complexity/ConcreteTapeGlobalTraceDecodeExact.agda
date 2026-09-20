@@ -79,6 +79,48 @@ decodeSelectorsLength nonempty (suc steps) bits
         bits) =
   refl
 
+
+data AllRowsHaveWidth
+    {machine : Local.ConcreteTapeMachine}
+    (cols : Nat) :
+    List (Local.TapeRow machine) → Set where
+  allRowsWidthNil :
+    AllRowsHaveWidth cols []
+  allRowsWidthCons :
+    ∀ {row rows} →
+    Canonical.listLength (Local.cells row) ≡ cols →
+    AllRowsHaveWidth cols rows →
+    AllRowsHaveWidth cols (row ∷ rows)
+
+decodeRowsAllHaveWidth :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (rows cols : Nat)
+    (bits : CNF.Bits (rows * Decode.RowBitsWidth machine cols)) →
+  AllRowsHaveWidth cols
+    (Decode.decodeRows
+      stateCoverage symbolCoverage rows cols bits)
+decodeRowsAllHaveWidth stateCoverage symbolCoverage
+    zero cols CNF.[]ᵇ =
+  allRowsWidthNil
+decodeRowsAllHaveWidth {machine}
+    stateCoverage symbolCoverage
+    (suc rows) cols bits =
+  allRowsWidthCons
+    (Decode.decodeCellsLength
+      stateCoverage symbolCoverage cols
+      (Canonical.takeBits
+        (Decode.RowBitsWidth machine cols)
+        bits))
+    (decodeRowsAllHaveWidth
+      stateCoverage symbolCoverage rows cols
+      (Canonical.dropBits
+        (Decode.RowBitsWidth machine cols)
+        bits))
+
 record DecodedGlobalTrace
     (machine : Local.ConcreteTapeMachine)
     (steps cols : Nat) : Set₁ where
@@ -92,9 +134,8 @@ record DecodedGlobalTrace
     selectorsLength :
       Canonical.listLength selectors ≡ steps
 
-    everyRowWidth :
-      (row : Local.TapeRow machine) →
-      Set
+    allRowsFixedWidth :
+      AllRowsHaveWidth cols rows
 
     everySelectorInsideMachine :
       (choice : Selector.ListedRule (Local.rules machine)) →
@@ -128,9 +169,10 @@ decodeGlobalTrace {machine}
     ; selectorsLength =
         decodeSelectorsLength
           nonempty steps selectorBits
-    ; everyRowWidth =
-        λ row → Decode.RowBitsWidth machine cols ≡
-          Decode.RowBitsWidth machine cols
+    ; allRowsFixedWidth =
+        decodeRowsAllHaveWidth
+          stateCoverage symbolCoverage
+          (suc steps) cols rowsBits
     ; everySelectorInsideMachine =
         Selector.selectedOccurs
     }
