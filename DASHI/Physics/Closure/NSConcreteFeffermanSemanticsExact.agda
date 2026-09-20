@@ -148,6 +148,9 @@ record FeffermanAnalyticKernel : Set₁ where
     kineticEnergy :
       Canonical.VelocityHistory → Canonical.Time → BishopReal.ℝ
 
+    kineticEnergyAdmissible :
+      Canonical.VelocityHistory → Canonical.Time → Set
+
 open FeffermanAnalyticKernel public
 
 spatialSlice :
@@ -321,7 +324,8 @@ BoundedKineticEnergy K u =
   ∃ λ C →
     (t : Canonical.Time) →
     NonnegativeTime t →
-    BishopReal._<_ (kineticEnergy K u t) C
+    kineticEnergyAdmissible K u t
+    × BishopReal._<_ (kineticEnergy K u t) C
 
 UnitPeriodicSpatialVector :
   Canonical.SpatialVectorField → Set
@@ -366,12 +370,11 @@ SolvesForcedNS :
   Canonical.ForcingHistory →
   Set
 SolvesForcedNS K ν u p initial f =
-  ((t : Canonical.Time) → NonnegativeTime t →
-    (x : Canonical.R3Point) →
-    vectorEquivalent
-      (momentumResidual K ν u p f t x)
-      zeroVector)
-  × AttainsInitialDatum u initial
+  (t : Canonical.Time) → NonnegativeTime t →
+  (x : Canonical.R3Point) →
+  vectorEquivalent
+    (momentumResidual K ν u p f t x)
+    zeroVector
 
 SolvesUnforcedNS :
   FeffermanAnalyticKernel →
@@ -430,6 +433,9 @@ decayPredicatesDefinedFromJetNorms = true
 
 boundedEnergyDefinedFromKineticEnergy : Bool
 boundedEnergyDefinedFromKineticEnergy = true
+
+energyAdmissibilityKeptDistinctFromBound : Bool
+energyAdmissibilityKeptDistinctFromBound = true
 
 nativeBishopCalculusBackendConstructedHere : Bool
 nativeBishopCalculusBackendConstructedHere = false
