@@ -304,3 +304,22 @@ bsdExceptionalTorsionKummerStillOpen :
     BSDKummer.canonicalEllipticRationalKummerOpenBoundary
   ≡ false
 bsdExceptionalTorsionKummerStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- Hodge CP1 verticalization: exact homogeneous-vector <-> pair equivalence.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHomogeneousPairExact as HodgeP1Pair
+
+hodgeP1HomogeneousPairEquivalencePaid :
+  HodgeP1Pair.homogeneousVectorPairEquivalencePaid
+    HodgeP1Pair.canonicalProjectiveLineHomogeneousPairBoundary
+  ≡ true
+hodgeP1HomogeneousPairEquivalencePaid = refl
+
+hodgeP1ActualQuotientStillOpen :
+  HodgeP1Pair.projectiveLineQuotientInhabited
+    HodgeP1Pair.canonicalProjectiveLineHomogeneousPairBoundary
+  ≡ false
+hodgeP1ActualQuotientStillOpen = refl
