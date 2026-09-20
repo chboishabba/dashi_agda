@@ -184,3 +184,104 @@ the canonical SLR evidence substrate.
 
 The existing `digital_esd_slr.py` wrapper begins **after** that point. It does
 not parse ERIC metadata and it does not retrieve papers.
+
+
+## Sparse full-text cache
+
+The **43,996 ERIC records are metadata/screening records, not 43,996 local PDFs**.
+
+Digital-ESD uses a sparse full-text working set:
+
+```text
+43,996 metadata rows
+    ↓
+title/abstract assessment + explicit screening
+    ↓
+include / probable only
+    ↓
+small bounded fetch batch
+    ↓
+local working cache
+    ↓
+parse / SLR interop
+    ↓
+optional GC of the working copy after downstream receipt
+```
+
+The cache controller is:
+
+`interop_scripts/digital_esd_fulltext_cache.py`
+
+It does not crawl the corpus or download documents itself.
+
+### Plan a small batch
+
+First generate the retained full-text worklist:
+
+```bash
+python3 scripts/prepare_digital_esd_fulltext_handoff.py \
+  --ledger artifacts/digital-esd/screening/screening-decisions.jsonl \
+  --out-dir artifacts/digital-esd/fulltext
+```
+
+Then select a bounded batch:
+
+```bash
+python3 interop_scripts/digital_esd_fulltext_cache.py plan \
+  --worklist artifacts/digital-esd/fulltext/fulltext-worklist.jsonl \
+  --priority-queue artifacts/digital-esd/screening/adaptive/screening-pareto-queue.jsonl \
+  --cache-dir artifacts/digital-esd/fulltext/cache \
+  --output artifacts/digital-esd/fulltext/fetch-batch.jsonl \
+  --max-items 20 \
+  --max-cache-gib 2 \
+  --reserve-gib 5
+```
+
+The planner inspects actual filesystem free space and selects at most the
+requested item count while respecting both the cache cap and the free-space
+reserve. Unknown paper sizes use the explicit planning assumption
+`--assumed-mib-per-item` (default 10 MiB); the hard byte cap is checked again
+when retrieved files are registered.
+
+### Register only what was actually retrieved
+
+After an external/manual retrieval step emits a JSONL containing
+`source_identity_reference`, `artifact_path`, `sha256`,
+`retrieval_reference` and `retrieval_timestamp`:
+
+```bash
+python3 interop_scripts/digital_esd_fulltext_cache.py register \
+  --plan artifacts/digital-esd/fulltext/fetch-batch.jsonl \
+  --retrieved artifacts/digital-esd/fulltext/retrieved.jsonl \
+  --output-ledger artifacts/digital-esd/fulltext/cache-ledger.jsonl \
+  --max-cache-gib 2
+```
+
+Registration hashes the actual file and fails if it was not in the exact fetch
+plan or would breach the hard cache cap.
+
+### Eviction is receipt-gated
+
+A working copy may be proposed for deletion only after a downstream parse/SLR
+receipt exists and revision identity remains recorded:
+
+```bash
+python3 interop_scripts/digital_esd_fulltext_cache.py gc-plan \
+  --cache-ledger artifacts/digital-esd/fulltext/cache-ledger.jsonl \
+  --downstream-receipts artifacts/digital-esd/slr-interop/verified-receipts.jsonl \
+  --output artifacts/digital-esd/fulltext/gc-plan.jsonl \
+  --target-gib 1
+```
+
+`gc-plan` **does not delete files**. It emits an inspectable deletion plan.
+
+Authority/storage boundaries:
+
+```text
+ERIC metadata says full text available != fetch obligation
+43,996 metadata rows              != 43,996 papers on disk
+include/probable                  != automatic download
+downloaded                        != parsed
+parsed                            != SourceAuditAdmission
+cache eviction                    != loss of revision identity
+```
