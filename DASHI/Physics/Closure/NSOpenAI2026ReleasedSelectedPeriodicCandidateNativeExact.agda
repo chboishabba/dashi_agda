@@ -18,6 +18,8 @@ module DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedPeriodicCandidateNative
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product using (_×_)
 
 record SelectedPeriodicCandidateSurface : Set₁ where
   field
