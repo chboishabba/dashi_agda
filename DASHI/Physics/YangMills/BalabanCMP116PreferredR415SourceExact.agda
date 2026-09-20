@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact where
 ------------------------------------------------------------------------
 
 open import Data.List.Base using (List)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; absℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
@@ -111,7 +111,7 @@ compilePreferredR415 source = record
 preferredR415SelectedBoundaryDecay :
   ∀ {Domain Term Operator}
     (source : PreferredR415Source Domain Term Operator) →
-  DASHI.Foundations.RealAnalysisAxioms.absℝ (selectedBoundaryIntegrand source)
+  absℝ (selectedBoundaryIntegrand source)
   ≤ℝ
   sourceAmplitude source
     *ℝ R414.weight (decay source)
