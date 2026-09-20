@@ -76,7 +76,19 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 
 
 def load_metadata(path: Path) -> list[dict[str, Any]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    text = path.read_text(encoding="utf-8")
+    if path.suffix.lower() == ".jsonl":
+        rows = []
+        for line_no, line in enumerate(text.splitlines(), start=1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            if not isinstance(row, dict):
+                raise ValueError(f"{path}:{line_no}: expected object")
+            rows.append(row)
+        return rows
+
+    payload = json.loads(text)
     if isinstance(payload, list):
         rows = payload
     elif isinstance(payload, dict):
@@ -131,7 +143,14 @@ def first_author(row: dict[str, Any]) -> str:
 
 
 def year_value(row: dict[str, Any]) -> str:
-    text = first_text(row, "PublicationDate", "publication_date", "Year", "year")
+    text = first_text(
+        row,
+        "PublicationDate",
+        "publication_date",
+        "publication_date_year",
+        "Year",
+        "year",
+    )
     m = re.search(r"(19|20)\d{2}", text)
     return m.group(0) if m else ""
 
