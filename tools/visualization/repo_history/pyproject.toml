@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dashi-repo-history"
+version = "0.1.0"
+description = "Temporal repository and semantic-symbol graph extraction for dashi_agda"
+requires-python = ">=3.10"
+dependencies = [
+  "tree-sitter>=0.22,<0.23",
+  "tree-sitter-agda==1.3.3",
+  "networkx>=3.2",
+  "manim>=0.21,<0.22",
+]
+
+[project.scripts]
+dashi-repo-history = "dashi_repo_history.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
