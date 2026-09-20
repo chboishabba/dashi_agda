@@ -166,17 +166,11 @@ record RuleSelectorReceipt
     nonemptyRuleTable : NonemptyRuleTable machine
     fixedWidth : Agda.Builtin.Nat.Nat
     widthExact : fixedWidth ≡ RuleWidth machine
-    everyDecodedRuleOccurs :
-      (bits : CNF.Bits fixedWidth) →
+    everyCanonicalWidthDecodedRuleOccurs :
+      (bits : CNF.Bits (RuleWidth machine)) →
       Local.RuleOccurs
-        (decodeRule nonemptyRuleTable
-          (transportBits widthExact bits))
+        (decodeRule nonemptyRuleTable bits)
         (Local.rules machine)
-
-  transportBits :
-    ∀ {m n : Agda.Builtin.Nat.Nat} →
-    m ≡ n → CNF.Bits m → CNF.Bits n
-  transportBits refl bits = bits
 
 canonicalRuleSelectorReceipt :
   ∀ (machine : Local.ConcreteTapeMachine)
@@ -186,6 +180,6 @@ canonicalRuleSelectorReceipt machine nonempty = record
   { nonemptyRuleTable = nonempty
   ; fixedWidth = RuleWidth machine
   ; widthExact = refl
-  ; everyDecodedRuleOccurs =
+  ; everyCanonicalWidthDecodedRuleOccurs =
       decodeRuleOccurs nonempty
   }
