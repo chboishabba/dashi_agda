@@ -124,6 +124,28 @@ canonicalEuclideanA S = record
   ; Clay.BoundedKineticEnergyAtEveryNonnegativeTime = BoundedKineticEnergy S
   }
 
+
+canonicalPeriodicB :
+  CanonicalNSSemantics →
+  Clay.FeffermanPeriodicClayCarrier
+canonicalPeriodicB S = record
+  { Clay.Viscosity = BishopReal.ℝ
+  ; Clay.PositiveViscosity = PositiveReal S
+  ; Clay.SmoothPeriodicDatum = SpatialVectorField
+  ; Clay.DatumSmoothOnThreeTorus = SmoothSpatialVector S
+  ; Clay.DatumDivergenceFree = DivergenceFreeSpatial S
+  ; Clay.DatumUnitPeriodicInThreeCoordinates = UnitPeriodicSpatialVector S
+  ; Clay.GlobalVelocity = VelocityHistory
+  ; Clay.GlobalPressure = PressureHistory
+  ; Clay.VelocitySmoothOnThreeTorusTimesNonnegativeTime = SmoothVelocityHistory S
+  ; Clay.PressureSmoothOnThreeTorusTimesNonnegativeTime = SmoothPressureHistory S
+  ; Clay.VelocityUnitPeriodicInThreeCoordinates = UnitPeriodicVelocity S
+  ; Clay.PressureUnitPeriodicInThreeCoordinates = UnitPeriodicPressure S
+  ; Clay.SolvesThreeDimensionalMomentumEquationWithZeroForce = SolvesUnforcedNS S
+  ; Clay.IncompressibleAtEveryNonnegativeTime = DivergenceFreeHistory S
+  ; Clay.AttainsInitialDatumAtTimeZero = AttainsInitialDatum S
+  }
+
 canonicalEuclideanC :
   CanonicalNSSemantics →
   Clay.FeffermanEuclideanForcedBreakdownCarrier
@@ -178,6 +200,9 @@ canonicalFieldTypesFixed = true
 
 canonicalAUsesConstructiveR3 : Bool
 canonicalAUsesConstructiveR3 = true
+
+canonicalBUsesPeriodicPredicatesOnSameR3FieldType : Bool
+canonicalBUsesPeriodicPredicatesOnSameR3FieldType = true
 
 canonicalCUsesConstructiveR3 : Bool
 canonicalCUsesConstructiveR3 = true
