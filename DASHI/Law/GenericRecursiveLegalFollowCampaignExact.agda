@@ -185,6 +185,18 @@ record GenericRecursiveCampaignBoundary : Set where
     successfulAcquisitionAdvancesCampaignReceiptIsTrue :
       successfulAcquisitionAdvancesCampaignReceipt ≡ true
 
+    acquisitionPreparesAuthorityIdentityGate : Bool
+    acquisitionPreparesAuthorityIdentityGateIsTrue :
+      acquisitionPreparesAuthorityIdentityGate ≡ true
+
+    reviewedIdentityPreparesTreatmentGate : Bool
+    reviewedIdentityPreparesTreatmentGateIsTrue :
+      reviewedIdentityPreparesTreatmentGate ≡ true
+
+    reviewedTreatmentEmitsNextOutboundFrontier : Bool
+    reviewedTreatmentEmitsNextOutboundFrontierIsTrue :
+      reviewedTreatmentEmitsNextOutboundFrontier ≡ true
+
     sourceAcquisitionAutomaticallyAddsLegalHop : Bool
     sourceAcquisitionAutomaticallyAddsLegalHopIsFalse :
       sourceAcquisitionAutomaticallyAddsLegalHop ≡ false
@@ -231,6 +243,9 @@ canonicalGenericRecursiveCampaignBoundary =
     false refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
@@ -253,6 +268,9 @@ data RecursiveNextAuthorityRequiresCaseSpecificRuntime : Set where
 data RecursiveContinuationMayResetBudget : Set where
 data SuccessfulAcquisitionAutomaticallyLegalHop : Set where
 data RecursiveCampaignMayDropParentReceipt : Set where
+data AcquisitionMaySkipIdentityGate : Set where
+data ReviewedIdentityMaySkipTreatmentGate : Set where
+data ReviewedTreatmentMayFailToRecomputeOutboundFrontier : Set where
 
 researchPriorityDoesNotBecomeLegalTruth :
   ResearchPriorityAutomaticallyLegalTruth → ⊥
@@ -301,6 +319,18 @@ successfulAcquisitionDoesNotAutomaticallyAddLegalHop ()
 recursiveCampaignCannotDropParentReceipt :
   RecursiveCampaignMayDropParentReceipt → ⊥
 recursiveCampaignCannotDropParentReceipt ()
+
+acquisitionCannotSkipIdentityGate :
+  AcquisitionMaySkipIdentityGate → ⊥
+acquisitionCannotSkipIdentityGate ()
+
+reviewedIdentityCannotSkipTreatmentGate :
+  ReviewedIdentityMaySkipTreatmentGate → ⊥
+reviewedIdentityCannotSkipTreatmentGate ()
+
+reviewedTreatmentMustRecomputeOutboundFrontier :
+  ReviewedTreatmentMayFailToRecomputeOutboundFrontier → ⊥
+reviewedTreatmentMustRecomputeOutboundFrontier ()
 
 ------------------------------------------------------------------------
 -- Phase-IV capstone contract.
