@@ -143,7 +143,7 @@ record LiteralRealCMP116ScaleCalibration
     -- Actual source-specific L5 leaf: selected CMP116 envelope and selected
     -- source/tree geometry have the concrete exponential presentation governed
     -- by the SAME lattice exponent and physical spacing data.
-    selectedSourceEnvelopeExponential :
+    selectedSourceEnvelopeBelowExponential :
       ∀ cutoff index →
       CMP116.sourceEnvelope source
         (scaleAt cutoff)
@@ -156,7 +156,7 @@ record LiteralRealCMP116ScaleCalibration
         (CMP116.sourceDistance source
           (sourceLeft index)
           (sourceRight index))
-      ≡
+      ≤ℝ
       sourceAmplitude *ℝ
         expReal
           (-ℝ
@@ -267,11 +267,8 @@ sourceEnvelopeBelowPhysicalExponentialUpper
     composed =
       transitive order sourceAmplitudeDecayOrder amplitudeOrder
   in
-  subst
-    (λ lower →
-      lower ≤ℝ physicalExponentialUpper calibration index)
-    (sym (selectedSourceEnvelopeExponential
-      calibration cutoff index))
+  transitive order
+    (selectedSourceEnvelopeBelowExponential calibration cutoff index)
     composed
 
 ------------------------------------------------------------------------
@@ -331,7 +328,7 @@ realNegativeExponentialOrderLevel : ProofLevel
 realNegativeExponentialOrderLevel = standardImported
 
 -- Remaining literal L5 research leaf after this compiler:
--- identify the selected CMP116 source/tree envelope with the concrete
--- sourceAmplitude * exp(-mu * d_lattice) presentation uniformly in cutoff.
+-- prove the selected CMP116 source/tree envelope is bounded by the concrete
+-- sourceAmplitude * exp(-mu * d_lattice) majorant uniformly in cutoff.
 literalCMP116SelectedEnvelopeExponentialIdentificationLevel : ProofLevel
 literalCMP116SelectedEnvelopeExponentialIdentificationLevel = conditional
