@@ -21,12 +21,14 @@ module DASHI.Physics.YangMills.BalabanCMP116LiteralMarkedChargingRound416Exact w
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Base using (List)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
+open import Data.Sum using (_⊎_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Exact as R410
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact as R415
 import DASHI.Physics.YangMills.BalabanMarkedWalkChargingCutRound354Exact as R354
+import DASHI.Physics.YangMills.BalabanCoefficientCollarChargeRound355Exact as R355
 import DASHI.Physics.YangMills.BalabanCoefficientCollarWeightRound357Exact as R357
 import DASHI.Physics.YangMills.BalabanSourceDecayRateSplitRound359Exact as R359
 import DASHI.Physics.YangMills.BalabanChargeExponentToMajorantRound361Exact as R361
@@ -50,23 +52,20 @@ record LiteralR410MarkedCharging
     -- on the common real metric used by the source charge.
     collarRadius markedDistance treeLength : Term → ℝ
     collarRadiusNonnegative : ∀ term →
-      DASHI.Foundations.RealAnalysisAxioms.0ℝ
-        DASHI.Foundations.RealAnalysisAxioms.≤ℝ collarRadius term
+      0ℝ ≤ℝ collarRadius term
     markedDistanceNonnegative : ∀ term →
-      DASHI.Foundations.RealAnalysisAxioms.0ℝ
-        DASHI.Foundations.RealAnalysisAxioms.≤ℝ markedDistance term
+      0ℝ ≤ℝ markedDistance term
     treeLengthNonnegative : ∀ term →
-      DASHI.Foundations.RealAnalysisAxioms.0ℝ
-        DASHI.Foundations.RealAnalysisAxioms.≤ℝ treeLength term
+      0ℝ ≤ℝ treeLength term
 
     -- Literal CMP99/CMP109 geometry, after the support-graph/tree attachments
     -- have been made.
     collarAlternative : ∀ term →
       (collarRadius term
-        DASHI.Foundations.RealAnalysisAxioms.≤ℝ markedDistance term)
-      Data.Sum.⊎
+        ≤ℝ markedDistance term)
+      ⊎
       (collarRadius term
-        DASHI.Foundations.RealAnalysisAxioms.≤ℝ treeLength term)
+        ≤ℝ treeLength term)
 
     -- Source exponentials on this exact selected term.
     chargedMajorant : Term → ℝ
@@ -113,18 +112,18 @@ record LiteralR410MarkedCharging
   R355Calibration term = R359.asR357Calibration (R355Application term)
 
   R355Geometry : Term →
-    DASHI.Physics.YangMills.BalabanCoefficientCollarChargeRound355Exact.CoefficientCollarChargeGeometry
+    R355.CoefficientCollarChargeGeometry
   R355Geometry term =
     R357.asR355ChargeGeometry (R355Calibration term) (collarAlternative term)
 
   R355CombinedCharge : Term → ℝ
   R355CombinedCharge term =
-    DASHI.Physics.YangMills.BalabanCoefficientCollarChargeRound355Exact.combinedMarkedTreeCharge
+    R355.combinedMarkedTreeCharge
       (R355Geometry term)
 
   R355RequiredCharge : Term → ℝ
   R355RequiredCharge term =
-    DASHI.Physics.YangMills.BalabanCoefficientCollarChargeRound355Exact.requiredCollarResidualCharge
+    R355.requiredCollarResidualCharge
       (R355Geometry term)
 
 open LiteralR410MarkedCharging public
@@ -140,11 +139,11 @@ chargeAttachment dataSet term = record
   ; R361.ChargeExponentMajorantAttachment.combinedCharge =
       R355CombinedCharge dataSet term
   ; R361.ChargeExponentMajorantAttachment.rawMarkedMajorant =
-      R415.canonicalTermMajorant (selectedTerm _)
+      R415.canonicalTermMajorant (selectedTerm term)
   ; R361.ChargeExponentMajorantAttachment.chargedMajorant =
       chargedMajorant dataSet term
   ; R361.ChargeExponentMajorantAttachment.requiredChargeBelowCombinedCharge =
-      DASHI.Physics.YangMills.BalabanCoefficientCollarChargeRound355Exact.coefficientCollarDichotomyPaysLinearCharge
+      R355.coefficientCollarDichotomyPaysLinearCharge
         (R355Geometry dataSet term)
   ; R361.ChargeExponentMajorantAttachment.rawMarkedMajorantIsCombinedExponential =
       canonicalR410MajorantIsRawExponential dataSet term
@@ -167,13 +166,13 @@ summabilityAttachment :
   ∀ {Term Operator terms selectedTerm envelope}
     (dataSet : LiteralR410MarkedCharging Term Operator terms selectedTerm envelope) →
   R362.CMP116ChargedSummabilityAttachment (summabilitySource dataSet)
-summabilityAttachment dataSet = record
+summabilityAttachment {terms = terms} {envelope = envelope} dataSet = record
   { R362.CMP116ChargedSummabilityAttachment.selectedWalks =
-      _
+      terms
   ; R362.CMP116ChargedSummabilityAttachment.selectedChargedMajorant =
       chargedMajorant dataSet
   ; R362.CMP116ChargedSummabilityAttachment.selectedEnvelope =
-      _
+      envelope
   ; R362.CMP116ChargedSummabilityAttachment.selectedWalksAreSourceWalks =
       selectedTermsAreSourceTerms dataSet
   ; R362.CMP116ChargedSummabilityAttachment.selectedChargedMajorantIsSourceMajorant =
