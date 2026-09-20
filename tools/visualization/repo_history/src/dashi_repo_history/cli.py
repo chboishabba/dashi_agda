@@ -5,13 +5,21 @@ import os
 from pathlib import Path
 import subprocess
 
-from .git_history import HistoryExtractor
+from .git_history import HistoryExtractor, fetch_seed_commits
 
 
 def _extract(args: argparse.Namespace) -> None:
+    repo = Path(args.repo)
+    if args.fetch_seeds and args.seed_commit:
+        fetch_seed_commits(
+            repo,
+            list(args.seed_commit),
+            remote=args.remote,
+        )
     extractor = HistoryExtractor(
-        Path(args.repo),
+        repo,
         path_prefix=args.path_prefix,
+        seed_commits=tuple(args.seed_commit or ()),
     )
     timeline = extractor.timeline(
         first_commits=args.first_commits,
@@ -66,6 +74,17 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument("repo")
     extract.add_argument("-o", "--output", default="repo-history.json")
     extract.add_argument("--path-prefix")
+    extract.add_argument(
+        "--seed-commit",
+        action="append",
+        help="Include an explicit historical commit root, including commits no longer reachable from live refs.",
+    )
+    extract.add_argument(
+        "--fetch-seeds",
+        action="store_true",
+        help="Fetch each seed commit from the selected remote before traversal.",
+    )
+    extract.add_argument("--remote", default="origin")
     window = extract.add_mutually_exclusive_group()
     window.add_argument("--first-commits", type=int)
     window.add_argument("--max-commits", type=int)
