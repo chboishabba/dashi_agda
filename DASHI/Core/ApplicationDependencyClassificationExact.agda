@@ -31,7 +31,10 @@ classifyReference :
   ApplicationEvidence →
   EdgeKind
 classifyReference typeReference _ _ = typeDependsEdge
-classifyReference bodyReference localBinderTarget _ = valueFlowsEdge
+classifyReference bodyReference localBinderTarget prefixApplicationEvidence =
+  callsEdge
+classifyReference bodyReference localBinderTarget noApplicationEvidence =
+  valueFlowsEdge
 classifyReference bodyReference constructorTarget _ = constructsEdge
 classifyReference bodyReference callableTarget prefixApplicationEvidence =
   callsEdge
@@ -64,14 +67,21 @@ constructorBodyReferenceConstructs :
   ≡ constructsEdge
 constructorBodyReferenceConstructs _ = refl
 
-localBodyReferenceFlows :
-  ∀ evidence →
+localBareBodyReferenceFlows :
   classifyReference
     bodyReference
     localBinderTarget
-    evidence
+    noApplicationEvidence
   ≡ valueFlowsEdge
-localBodyReferenceFlows _ = refl
+localBareBodyReferenceFlows = refl
+
+localAppliedBinderCalls :
+  classifyReference
+    bodyReference
+    localBinderTarget
+    prefixApplicationEvidence
+  ≡ callsEdge
+localAppliedBinderCalls = refl
 
 record ApplicationDependencyBoundary : Set where
   constructor applicationDependencyBoundary
