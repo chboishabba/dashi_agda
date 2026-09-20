@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalComplex3Separation as Separation
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as Bridge
 
 F : C3.RealField _
@@ -115,12 +116,6 @@ pairDifferenceWorkSumBelowAbsolute rate work (x ∷ xs) =
 -- Coherent-work specialization: retain the exact pair topology.
 ------------------------------------------------------------------------
 
-coherentYoungPair :
-  (mixed : C3.Complex3 F) →
-  (rate : Set → ℚ) →
-  Set → Set → ℚ
-coherentYoungPair mixed rate left right = 0ℚ
-
 rateWeightedYoungPair :
   ∀ {A : Set} →
   C3.Complex3 F →
@@ -164,14 +159,14 @@ absoluteCoherentPairBelowYoung :
   (left right : A) →
   absolutePairTerm
     rate
-    (λ item → Pair.cellWork mixed value item)
+    (λ item → Work.coherentWork mixed (value item))
     left right
   ≤ rateWeightedYoungPair mixed rate value left right
 absoluteCoherentPairBelowYoung mixed rate value left right =
   let
     rateDiff = rate left - rate right
     workDiff =
-      Pair.cellWork mixed value left - Pair.cellWork mixed value right
+      Work.coherentWork mixed (value left) - Work.coherentWork mixed (value right)
     difference = C3.complex3Subtract (value left) (value right)
     envelope =
       Bridge.two *
@@ -220,7 +215,7 @@ absoluteCoherentAgainstHeadBelowYoung :
   (value : A → C3.Complex3 F) →
   (head : A) →
   (rest : List A) →
-  absoluteAgainstHead rate (λ item → Pair.cellWork mixed value item) head rest
+  absoluteAgainstHead rate (λ item → Work.coherentWork mixed (value item)) head rest
   ≤ rateWeightedYoungAgainstHead mixed rate value head rest
 absoluteCoherentAgainstHeadBelowYoung mixed rate value head [] = ℚP.≤-refl
 absoluteCoherentAgainstHeadBelowYoung mixed rate value head (x ∷ xs) =
@@ -235,7 +230,7 @@ absoluteCoherentPairDifferenceBelowYoung :
   (value : A → C3.Complex3 F) →
   (items : List A) →
   absolutePairDifferenceSum
-    rate (λ item → Pair.cellWork mixed value item) items
+    rate (λ item → Work.coherentWork mixed (value item)) items
   ≤ rateWeightedYoungPairSum mixed rate value items
 absoluteCoherentPairDifferenceBelowYoung mixed rate value [] = ℚP.≤-refl
 absoluteCoherentPairDifferenceBelowYoung mixed rate value (x ∷ xs) =
@@ -250,12 +245,12 @@ signedCoherentPairDifferenceBelowYoung :
   (value : A → C3.Complex3 F) →
   (items : List A) →
   Pair.pairDifferenceWorkSum
-    rate (λ item → Pair.cellWork mixed value item) items
+    rate (λ item → Work.coherentWork mixed (value item)) items
   ≤ rateWeightedYoungPairSum mixed rate value items
 signedCoherentPairDifferenceBelowYoung mixed rate value items =
   ℚP.≤-trans
     (pairDifferenceWorkSumBelowAbsolute
-      rate (λ item → Pair.cellWork mixed value item) items)
+      rate (λ item → Work.coherentWork mixed (value item)) items)
     (absoluteCoherentPairDifferenceBelowYoung mixed rate value items)
 
 ------------------------------------------------------------------------
