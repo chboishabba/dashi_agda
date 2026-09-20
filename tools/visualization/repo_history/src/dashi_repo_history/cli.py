@@ -8,7 +8,7 @@ import subprocess
 
 from .git_history import HistoryExtractor, fetch_seed_commits
 from .merge_attribution import attribute_merge
-from .salience import score_episode
+from .salience import rank_episodes, score_episode
 from .scene_program import (
     compile_branch_episode_program,
     compile_first_parent_program,
@@ -49,8 +49,19 @@ def _render(args: argparse.Namespace) -> None:
     env["DASHI_REPO_HISTORY_JSON"] = str(Path(args.input).resolve())
     if args.snapshot_index is not None:
         env["DASHI_REPO_SNAPSHOT_INDEX"] = str(args.snapshot_index)
-    if args.episode_index is not None:
-        env["DASHI_REPO_EPISODE_INDEX"] = str(args.episode_index)
+    episode_index = args.episode_index
+    if args.best_episode:
+        data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+        ranked = rank_episodes(data)
+        if not ranked:
+            raise SystemExit("No branch episodes available.")
+        episode_index = ranked[0].episode_index
+        print(
+            f"selected episode {episode_index} "
+            f"with impact score {ranked[0].score}"
+        )
+    if episode_index is not None:
+        env["DASHI_REPO_EPISODE_INDEX"] = str(episode_index)
     if args.target_commit is not None:
         env["DASHI_REPO_TARGET_COMMIT"] = str(args.target_commit)
     if args.symbol is not None:
@@ -336,7 +347,13 @@ def build_parser() -> argparse.ArgumentParser:
         default="history",
     )
     render.add_argument("--snapshot-index", type=int)
-    render.add_argument("--episode-index", type=int)
+    episode_choice = render.add_mutually_exclusive_group()
+    episode_choice.add_argument("--episode-index", type=int)
+    episode_choice.add_argument(
+        "--best-episode",
+        action="store_true",
+        help="Select the highest transparent semantic-impact episode.",
+    )
     render.add_argument(
         "--symbol",
         help="Semantic symbol id or unique label for the rooted symbol scene.",
