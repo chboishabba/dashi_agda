@@ -28,7 +28,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ScaleCalibrati
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -36,8 +36,6 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanPhysicalClusteringScaleAlgebraExact as Scale
-import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as Ring
-import DASHI.Physics.YangMills.BalabanA2RationalSensitivityToRealContractionRound104Exact as Add
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as A
@@ -53,9 +51,8 @@ import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimi
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 
-embedQ : Ring.RationalRealRingEmbedding → ℚ → ℝ
-embedQ embedding =
-  Embed.embed (Add.base (Ring.additive embedding))
+embedQ : Embed.OrderedRationalRealEmbedding → ℚ → ℝ
+embedQ = Embed.embed
 
 ------------------------------------------------------------------------
 -- Standard ordered-real exponential authority.
@@ -95,7 +92,7 @@ open RealNegativeExponentialOrder public
 ------------------------------------------------------------------------
 
 embeddedPhysicalExponentBelowLatticeExponent :
-  (embedding : Ring.RationalRealRingEmbedding) →
+  (embedding : Embed.OrderedRationalRealEmbedding) →
   (scales : Scale.PhysicalScaleData) →
   (physicalDistance : ℚ) →
   0ℚ ≤ physicalDistance →
@@ -107,8 +104,7 @@ embeddedPhysicalExponentBelowLatticeExponent :
       * Scale.latticeDistance scales physicalDistance)
 embeddedPhysicalExponentBelowLatticeExponent
     embedding scales physicalDistance distanceNN =
-  Embed.orderPreserving
-    (Add.base (Ring.additive embedding))
+  Embed.orderPreserving embedding
     (Scale.physicalExponentDominatedByLatticeExponent
       scales physicalDistance distanceNN)
 
@@ -129,7 +125,7 @@ record LiteralRealCMP116ScaleCalibration
     (scaleAt : Nat → ScaleCarrier)
     (volumeAt : Nat → Volume)
     (expReal : ℝ → ℝ)
-    (embedding : Ring.RationalRealRingEmbedding) : Set₂ where
+    (embedding : Embed.OrderedRationalRealEmbedding) : Set₂ where
   field
     scaleData : Scale.PhysicalScaleData
 
@@ -182,7 +178,7 @@ physicalExponentialUpper calibration index =
   physicalAmplitude calibration *ℝ
     expReal
       (-ℝ
-        embedQ _
+        embedQ embedding
           (Scale.physicalMass (scaleData calibration)
             * physicalDistance calibration index))
 
