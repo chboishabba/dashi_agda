@@ -122,7 +122,10 @@ absolutePairAgainstHeadBound :
   ∣ Pair.pairAgainstHead rate work head rest ∣
   ≤ absoluteAgainstHead rate work head rest
 absolutePairAgainstHeadBound rate work head [] =
-  ℚP.≤-refl
+  subst
+    (λ left → left ≤ 0ℚ)
+    (ℚP.0≤p⇒∣p∣≡p ℚP.≤-refl)
+    ℚP.≤-refl
 absolutePairAgainstHeadBound rate work head (x ∷ xs) =
   ℚP.≤-trans
     (ℚP.∣p+q∣≤∣p∣+∣q∣
@@ -143,7 +146,11 @@ absolutePairDifferenceWorkSumBound :
   (items : List A) →
   ∣ Pair.pairDifferenceWorkSum rate work items ∣
   ≤ absolutePairDifferenceSum rate work items
-absolutePairDifferenceWorkSumBound rate work [] = ℚP.≤-refl
+absolutePairDifferenceWorkSumBound rate work [] =
+  subst
+    (λ left → left ≤ 0ℚ)
+    (ℚP.0≤p⇒∣p∣≡p ℚP.≤-refl)
+    ℚP.≤-refl
 absolutePairDifferenceWorkSumBound rate work (x ∷ xs) =
   ℚP.≤-trans
     (ℚP.∣p+q∣≤∣p∣+∣q∣
