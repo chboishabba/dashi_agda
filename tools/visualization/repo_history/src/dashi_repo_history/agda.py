@@ -93,19 +93,37 @@ def _first_descendant_name(source: bytes, node: Any) -> str | None:
     return None
 
 
+def _reference_kind(node: Any) -> str:
+    for ancestor in _ancestors(node):
+        if ancestor.type == "rhs":
+            return "body-depends"
+        if ancestor.type in {
+            "type_signature",
+            "data_signature",
+            "record_signature",
+            "typed_binding",
+            "fields",
+            "postulate",
+        }:
+            return "type-depends"
+        if ancestor.type in {"function", "data", "record"}:
+            break
+    return "depends"
+
+
 @dataclass
 class RawDeclaration:
     symbol: Symbol
-    owner_start: int
-    owner_end: int
-    local_names: set[str] = field(default_factory=set)
-    references: list[tuple[str, SourceSpan]] = field(default_factory=list)
+    owner_ranges: list[tuple[int, int]]
+    binders: dict[str, Symbol] = field(default_factory=dict)
+    references: list[tuple[str, SourceSpan, str]] = field(default_factory=list)
 
 
 @dataclass
 class FileExtraction:
     path: str
     module: str
+    module_symbol: Symbol
     declarations: list[RawDeclaration]
     imports: list[str]
     parse_error: bool
@@ -126,13 +144,23 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
     captures = _query_captures(tree.root_node)
 
     module = Path(path).with_suffix("").as_posix().replace("/", ".")
+    module_name_node = None
     for node in captures.get("module_name", []):
         ancestor = _first_ancestor(node, {"module"})
         if ancestor is not None:
             value = _node_text(source, node).strip()
             if value:
                 module = value
+                module_name_node = node
                 break
+
+    module_symbol = Symbol.create(
+        label=module,
+        kind="module",
+        module=module,
+        scope=None,
+        span=_span(path, module_name_node or tree.root_node),
+    )
 
     imports: list[str] = []
     for node in captures.get("module_name", []):
@@ -149,20 +177,19 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
             label=label,
             kind=kind,
             module=module,
+            scope=None,
             span=_span(path, name_node),
         )
         key = (label, kind)
         existing = declarations_by_key.get(key)
-        raw = RawDeclaration(
-            symbol=symbol,
-            owner_start=owner.start_byte,
-            owner_end=owner.end_byte,
-        )
+        owner_range = (owner.start_byte, owner.end_byte)
         if existing is None:
-            declarations_by_key[key] = raw
-        else:
-            existing.owner_start = min(existing.owner_start, raw.owner_start)
-            existing.owner_end = max(existing.owner_end, raw.owner_end)
+            declarations_by_key[key] = RawDeclaration(
+                symbol=symbol,
+                owner_ranges=[owner_range],
+            )
+        elif owner_range not in existing.owner_ranges:
+            existing.owner_ranges.append(owner_range)
 
     for node in captures.get("data_name", []):
         owner = _first_ancestor(node, {"data", "data_signature"})
@@ -184,7 +211,7 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         elif _first_ancestor(node, {"fields"}) is not None:
             kind = "field"
         else:
-            kind = "declaration"
+            kind = "function"
         add_decl(label, kind, owner, node)
 
     for node in captures.get("function_name", []):
@@ -195,32 +222,28 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         if label is not None:
             add_decl(label, "function", owner, node)
 
+    # Same label/kind may have a signature and several equations. Preserve each
+    # source range rather than widening one interval across unrelated declarations.
     declarations = list(declarations_by_key.values())
 
-    by_label: dict[str, RawDeclaration] = {}
-    for decl in declarations:
-        prior = by_label.get(decl.symbol.label)
-        if prior is None:
-            by_label[decl.symbol.label] = decl
-            continue
-        if decl.symbol.kind == "function" and prior.symbol.kind == "declaration":
-            decl.owner_start = min(decl.owner_start, prior.owner_start)
-            decl.owner_end = max(decl.owner_end, prior.owner_end)
-            by_label[decl.symbol.label] = decl
-        else:
-            prior.owner_start = min(prior.owner_start, decl.owner_start)
-            prior.owner_end = max(prior.owner_end, decl.owner_end)
-
-    declarations = list(by_label.values())
-
-    binding_nodes = captures.get("typed_binding", []) + captures.get("untyped_binding", [])
-    for binding in binding_nodes:
+    for binding in captures.get("typed_binding", []) + captures.get("untyped_binding", []):
         name = _first_descendant_name(source, binding)
         if name is None:
             continue
         owner = _smallest_owner(declarations, binding.start_byte, binding.end_byte)
-        if owner is not None:
-            owner.local_names.add(name.split(".")[-1])
+        if owner is None:
+            continue
+        leaf = name.split(".")[-1]
+        owner.binders.setdefault(
+            leaf,
+            Symbol.create(
+                label=leaf,
+                kind="binder",
+                module=module,
+                scope=owner.symbol.symbol_id,
+                span=_span(path, binding),
+            ),
+        )
 
     for ref in captures.get("reference", []):
         value = _node_text(source, ref).strip()
@@ -230,13 +253,14 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         if owner is None:
             continue
         leaf = value.split(".")[-1]
-        if leaf == owner.symbol.label or leaf in owner.local_names:
+        if leaf == owner.symbol.label:
             continue
-        owner.references.append((value, _span(path, ref)))
+        owner.references.append((value, _span(path, ref), _reference_kind(ref)))
 
     return FileExtraction(
         path=path,
         module=module,
+        module_symbol=module_symbol,
         declarations=declarations,
         imports=sorted(set(imports)),
         parse_error=bool(tree.root_node.has_error),
@@ -248,14 +272,14 @@ def _smallest_owner(
     start: int,
     end: int,
 ) -> RawDeclaration | None:
-    candidates = [
-        d
-        for d in declarations
-        if d.owner_start <= start and end <= d.owner_end
-    ]
-    if not candidates:
+    matches: list[tuple[int, RawDeclaration]] = []
+    for declaration in declarations:
+        for owner_start, owner_end in declaration.owner_ranges:
+            if owner_start <= start and end <= owner_end:
+                matches.append((owner_end - owner_start, declaration))
+    if not matches:
         return None
-    return min(candidates, key=lambda d: d.owner_end - d.owner_start)
+    return min(matches, key=lambda item: item[0])[1]
 
 
 def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
@@ -263,22 +287,75 @@ def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
     graph = SemanticGraph()
 
     declarations: list[RawDeclaration] = []
+    modules: dict[str, Symbol] = {}
+    imports_by_module: dict[str, list[str]] = {}
+
     for file in files:
+        modules[file.module] = file.module_symbol
+        imports_by_module[file.module] = file.imports
+        graph.nodes[file.module_symbol.symbol_id] = file.module_symbol
         declarations.extend(file.declarations)
         if file.parse_error:
             graph.parse_error_files.append(file.path)
 
     by_module_label: dict[tuple[str, str], Symbol] = {}
     by_label: dict[str, list[Symbol]] = {}
+
     for declaration in declarations:
         symbol = declaration.symbol
         graph.nodes[symbol.symbol_id] = symbol
         by_module_label[(symbol.module, symbol.label)] = symbol
         by_label.setdefault(symbol.label, []).append(symbol)
 
+        module_symbol = modules[symbol.module]
+        contains = Relation(
+            source=module_symbol.symbol_id,
+            target=symbol.symbol_id,
+            kind="contains",
+            evidence=symbol.span,
+        )
+        graph.edges[contains.relation_id] = contains
+
+        for binder in declaration.binders.values():
+            graph.nodes[binder.symbol_id] = binder
+            binds = Relation(
+                source=binder.symbol_id,
+                target=symbol.symbol_id,
+                kind="binds",
+                evidence=binder.span,
+            )
+            graph.edges[binds.relation_id] = binds
+
+    for module, imported_modules in imports_by_module.items():
+        consumer = modules[module]
+        for imported in imported_modules:
+            producer = modules.get(imported)
+            if producer is None:
+                continue
+            relation = Relation(
+                source=producer.symbol_id,
+                target=consumer.symbol_id,
+                kind="imports",
+                evidence=None,
+            )
+            graph.edges[relation.relation_id] = relation
+
     for declaration in declarations:
         owner = declaration.symbol
-        for ref, evidence in declaration.references:
+        for ref, evidence, relation_kind in declaration.references:
+            leaf = ref.split(".")[-1]
+
+            local = declaration.binders.get(leaf)
+            if local is not None:
+                relation = Relation(
+                    source=local.symbol_id,
+                    target=owner.symbol_id,
+                    kind=relation_kind,
+                    evidence=evidence,
+                )
+                graph.edges[relation.relation_id] = relation
+                continue
+
             target = _resolve_reference(
                 ref=ref,
                 owner_module=owner.module,
@@ -290,14 +367,16 @@ def build_semantic_graph(files: Iterable[FileExtraction]) -> SemanticGraph:
                     {
                         "owner": owner.symbol_id,
                         "reference": ref,
+                        "relation_kind": relation_kind,
                         "evidence": evidence.__dict__,
                     }
                 )
                 continue
+
             relation = Relation(
                 source=target.symbol_id,
                 target=owner.symbol_id,
-                kind="depends",
+                kind=relation_kind,
                 evidence=evidence,
             )
             graph.edges[relation.relation_id] = relation
