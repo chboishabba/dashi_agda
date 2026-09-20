@@ -19,11 +19,12 @@ module DASHI.Physics.YangMills.BalabanCMP116Round406PreferredR415Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Data.Rational.Base as ℚ using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; _≤ℝ_; ≤ℝ-refl)
+  (ℝ; absℝ; _*ℝ_; _≤ℝ_; ≤ℝ-refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
@@ -34,6 +35,8 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact
 import DASHI.Physics.YangMills.BalabanCMP116Round354To415FixedYExact as FixedY
 import DASHI.Physics.YangMills.BalabanCMP116Round406To415Exact as R406R415
 import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact as Preferred
+import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exact as R411
+import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact as R414
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
 
 canonicalR410SumIsRound406MajorantSum :
@@ -61,7 +64,7 @@ canonicalR410SumIsRound406MajorantSum application replay domain =
         (R406R415.selectedR410Term replay domain term))
     (R406.differentiatedTermMajorant application domain)
     (λ term →
-      Relation.Binary.PropositionalEquality.sym
+      sym
         (R406R415.differentiatedMajorantIsCanonicalR410
           replay domain term))
 
@@ -88,7 +91,7 @@ round406FixedYCharging application replay = record
         subst
           (λ selectedSum →
             selectedSum ≤ℝ R406.commonYShell application domain)
-          (Relation.Binary.PropositionalEquality.sym
+          (sym
             (canonicalR410SumIsRound406MajorantSum
               application replay domain))
           (R406.differentiatedMajorantsBelowCommonYShell
@@ -122,7 +125,7 @@ compilePreferredFromRound406 application replay geometryData = record
       R406.selectedBoundaryIntegrand application
   ; Preferred.PreferredR415Source.commonYBoundaryIsSelectedTermSum =
       λ domain →
-        Relation.Binary.PropositionalEquality.trans
+        trans
           (R406.commonYBoundaryIsTermSum application domain)
           (R406R415.sumCongruent
             (R406.termsWithCommonY application domain)
@@ -161,14 +164,14 @@ round406PreferredSelectedBoundaryDecay :
     (application : R406.SelectedCMP116TermwiseLocalization base)
     (replay : R406R415.Round406ExactR410Replay application)
     (geometryData : R406R415.Round406To415Geometry application) →
-  DASHI.Foundations.RealAnalysisAxioms.absℝ
+  absℝ
     (R406.selectedBoundaryIntegrand application)
   ≤ℝ
   R406R415.sourceAmplitude geometryData
-    DASHI.Foundations.RealAnalysisAxioms.*ℝ
-    DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact.weight
+    *ℝ
+    R414.weight
       (R406R415.decay geometryData)
-      (DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exact.selectedConnectingDistance
+      (R411.selectedConnectingDistance
         (R406R415.geometry geometryData))
 round406PreferredSelectedBoundaryDecay application replay geometryData =
   Preferred.preferredR415SelectedBoundaryDecay
@@ -179,11 +182,11 @@ round406ToPreferredR415CompilerLevel = machineChecked
 
 -- On the R406 route there is no independent H_charge/H_sum research leaf:
 -- exact R410 replay + existing R406 positive summability pays both.
-round406SeparateMarkedChargingLeafRequired : Agda.Builtin.Bool.Bool
-round406SeparateMarkedChargingLeafRequired = Agda.Builtin.Bool.false
+round406SeparateMarkedChargingLeafRequired : Bool
+round406SeparateMarkedChargingLeafRequired = false
 
 round406SeparateMarkedChargingLeafRequiredIsFalse :
-  round406SeparateMarkedChargingLeafRequired ≡ Agda.Builtin.Bool.false
+  round406SeparateMarkedChargingLeafRequired ≡ false
 round406SeparateMarkedChargingLeafRequiredIsFalse = refl
 
 -- Remaining physical inhabitants on this route:
