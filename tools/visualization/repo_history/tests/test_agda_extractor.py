@@ -234,3 +234,196 @@ record Pair : Set where
             and edge.kind == "field-of"
             for edge in graph.edges.values()
         )
+
+
+def test_open_import_admits_unqualified_dependency():
+    a = extract_file(
+        "A.agda",
+        b"""
+module A where
+foo : Set
+foo = Set
+""",
+    )
+    b = extract_file(
+        "B.agda",
+        b"""
+module B where
+open import A
+bar : Set
+bar = foo
+""",
+    )
+    graph = build_semantic_graph([a, b])
+
+    foo = next(
+        node for node in graph.nodes.values()
+        if node.module == "A" and node.label == "foo"
+    )
+    bar = next(
+        node for node in graph.nodes.values()
+        if node.module == "B" and node.label == "bar"
+    )
+    assert any(
+        edge.source == foo.symbol_id
+        and edge.target == bar.symbol_id
+        and edge.kind == "body-depends"
+        for edge in graph.edges.values()
+    )
+
+
+def test_plain_import_does_not_admit_unqualified_unique_name():
+    a = extract_file(
+        "A.agda",
+        b"""
+module A where
+foo : Set
+foo = Set
+""",
+    )
+    b = extract_file(
+        "B.agda",
+        b"""
+module B where
+import A
+bar : Set
+bar = foo
+""",
+    )
+    graph = build_semantic_graph([a, b])
+
+    bar = next(
+        node for node in graph.nodes.values()
+        if node.module == "B" and node.label == "bar"
+    )
+    assert any(
+        unresolved["owner"] == bar.symbol_id
+        and unresolved["reference"] == "foo"
+        for unresolved in graph.unresolved_references
+    )
+
+
+def test_plain_import_allows_qualified_dependency():
+    a = extract_file(
+        "A.agda",
+        b"""
+module A where
+foo : Set
+foo = Set
+""",
+    )
+    b = extract_file(
+        "B.agda",
+        b"""
+module B where
+import A
+bar : Set
+bar = A.foo
+""",
+    )
+    graph = build_semantic_graph([a, b])
+
+    foo = next(
+        node for node in graph.nodes.values()
+        if node.module == "A" and node.label == "foo"
+    )
+    bar = next(
+        node for node in graph.nodes.values()
+        if node.module == "B" and node.label == "bar"
+    )
+    assert any(
+        edge.source == foo.symbol_id
+        and edge.target == bar.symbol_id
+        for edge in graph.edges.values()
+    )
+
+
+def test_open_import_using_does_not_admit_other_unique_names():
+    a = extract_file(
+        "A.agda",
+        b"""
+module A where
+foo : Set
+foo = Set
+baz : Set
+baz = Set
+""",
+    )
+    b = extract_file(
+        "B.agda",
+        b"""
+module B where
+open import A using (foo)
+bar : Set
+bar = foo
+quux : Set
+quux = baz
+""",
+    )
+    graph = build_semantic_graph([a, b])
+
+    bar = next(
+        node for node in graph.nodes.values()
+        if node.module == "B" and node.label == "bar"
+    )
+    quux = next(
+        node for node in graph.nodes.values()
+        if node.module == "B" and node.label == "quux"
+    )
+    assert not any(
+        unresolved["owner"] == bar.symbol_id
+        and unresolved["reference"] == "foo"
+        for unresolved in graph.unresolved_references
+    )
+    assert any(
+        unresolved["owner"] == quux.symbol_id
+        and unresolved["reference"] == "baz"
+        for unresolved in graph.unresolved_references
+    )
+
+
+def test_open_import_renaming_resolves_visible_alias_only():
+    a = extract_file(
+        "A.agda",
+        b"""
+module A where
+foo : Set
+foo = Set
+""",
+    )
+    b = extract_file(
+        "B.agda",
+        b"""
+module B where
+open import A renaming (foo to qux)
+bar : Set
+bar = qux
+bad : Set
+bad = foo
+""",
+    )
+    graph = build_semantic_graph([a, b])
+
+    foo = next(
+        node for node in graph.nodes.values()
+        if node.module == "A" and node.label == "foo"
+    )
+    bar = next(
+        node for node in graph.nodes.values()
+        if node.module == "B" and node.label == "bar"
+    )
+    bad = next(
+        node for node in graph.nodes.values()
+        if node.module == "B" and node.label == "bad"
+    )
+
+    assert any(
+        edge.source == foo.symbol_id
+        and edge.target == bar.symbol_id
+        for edge in graph.edges.values()
+    )
+    assert any(
+        unresolved["owner"] == bad.symbol_id
+        and unresolved["reference"] == "foo"
+        for unresolved in graph.unresolved_references
+    )
