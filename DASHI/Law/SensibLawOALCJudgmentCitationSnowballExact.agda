@@ -181,13 +181,13 @@ waltonsCitedByTraversal =
   Query.jadeCitedByTraversal "[1988] HCA 7"
 
 waltonsCitedByUsesGraphTraversal :
-  Query.CitationTraversal.operation waltonsCitedByTraversal
+  Query.operation waltonsCitedByTraversal
     ≡
   Query.citedByTraversalOperation
 waltonsCitedByUsesGraphTraversal = refl
 
 waltonsCitedByUsesJadeProvider :
-  Query.CitationTraversal.provider waltonsCitedByTraversal
+  Query.provider waltonsCitedByTraversal
     ≡
   Query.jadeProvider
 waltonsCitedByUsesJadeProvider = refl
