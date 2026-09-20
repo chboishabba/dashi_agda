@@ -49,10 +49,26 @@ record DecodedAcceptingCell
 
 open DecodedAcceptingCell public
 
+data Member {A : Set} (x : A) : List A → Set where
+  here : ∀ {xs} → Member x (x ∷ xs)
+  there : ∀ {y xs} → Member x xs → Member x (y ∷ xs)
+
+record TrueWitnessIn
+    {global n : Agda.Builtin.Nat.Nat}
+    (literalIndex : Fin.Fin n → Fin.Fin global)
+    (indices : List (Fin.Fin n))
+    (assignment : CNF.Bits global) : Set where
+  field
+    index : Fin.Fin n
+    member : Member index indices
+    witnessTrue :
+      CNF.lookupBit assignment (literalIndex index) ≡ true
+
+open TrueWitnessIn public
+
 orPositiveWitness :
-  ∀ {global}
-    (literalIndex : ∀ {n} → Fin.Fin n → Fin.Fin global)
-    {n : Agda.Builtin.Nat.Nat}
+  ∀ {global n}
+    (literalIndex : Fin.Fin n → Fin.Fin global)
     (indices : List (Fin.Fin n))
     (assignment : CNF.Bits global) →
   CNF.evaluateClause
@@ -61,15 +77,21 @@ orPositiveWitness :
       indices)
     assignment
   ≡ true →
-  Σ (Fin.Fin n) (λ i →
-    CNF.lookupBit assignment (literalIndex i) ≡ true)
+  TrueWitnessIn literalIndex indices assignment
 orPositiveWitness literalIndex [] assignment ()
 orPositiveWitness literalIndex (i ∷ rest) assignment accepted
     with CNF.lookupBit assignment (literalIndex i)
 ... | true =
-  i , refl
+  record { index = i ; member = here ; witnessTrue = refl }
 ... | false =
-  orPositiveWitness literalIndex rest assignment accepted
+  let tail =
+        orPositiveWitness literalIndex rest assignment accepted
+  in record
+      { index = index tail
+      ; member = there (member tail)
+      ; witnessTrue = witnessTrue tail
+      }
+
 
 acceptancePredicateTrueWithWitness :
   ∀ {machine steps cols}
@@ -199,34 +221,31 @@ findAcceptingFromWitness :
     {steps cols}
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols))
-    (indices : List (Fin.Fin cols)) →
-  (Σ (Fin.Fin cols) (λ i →
-    CNF.lookupBit assignment (Endpoint.witnessIndex i) ≡ true)) →
+    (indices : List (Fin.Fin cols))
+    (witness :
+      TrueWitnessIn Endpoint.witnessIndex indices assignment) →
   AllAcceptancePredicatesSatisfied
     stateCoverage symbolCoverage assignment indices →
   DecodedAcceptingCell
     stateCoverage symbolCoverage assignment
 findAcceptingFromWitness
     stateCoverage symbolCoverage assignment
-    [] (i , witness) acceptDone =
-  impossible i
-  where
-    impossible : Fin.Fin 0 → _
-    impossible ()
+    [] witness acceptDone
+    with member witness
+... | ()
 findAcceptingFromWitness
     stateCoverage symbolCoverage assignment
-    (i ∷ rest) (chosen , witness)
+    (i ∷ rest) witness
     (acceptStep current remainder)
-    with Fin.decEq chosen i
-... | true
-    with Fin.eq_of_val_eq (Fin.decEq_eq_true_iff.mp refl)
-... | refl
+    with member witness
+... | here
     with acceptancePredicateTrueWithWitness
-      stateCoverage symbolCoverage assignment i witness current
+      stateCoverage symbolCoverage assignment i
+      (witnessTrue witness) current
 ... | symbol , decoded =
   record
     { index = i
-    ; witnessTrue = witness
+    ; witnessTrue = witnessTrue witness
     ; cellBits =
         Canonical.dropBits 1
           (Rename.pullbackBits
@@ -239,10 +258,17 @@ findAcceptingFromWitness
     ; decodedSymbol = symbol
     ; decodedAccepting = decoded
     }
-... | false =
+... | there membership =
   findAcceptingFromWitness
     stateCoverage symbolCoverage assignment
-    rest (chosen , witness) remainder
+    rest
+    (record
+      { index = index witness
+      ; member = membership
+      ; witnessTrue = witnessTrue witness
+      })
+    remainder
+
 
 acceptingEndpointCNF_sound :
   ∀ {machine steps cols}
@@ -287,9 +313,6 @@ acceptingEndpointCNF_sound
     implicationTrue =
       Endpoint.andTrueRight witnessClauseValue implicationValue accepted
 
-    witness :
-      Σ (Fin.Fin _) (λ i →
-        CNF.lookupBit assignment (Endpoint.witnessIndex i) ≡ true)
     witness =
       orPositiveWitness Endpoint.witnessIndex
         (Endpoint.finList _) assignment witnessClauseTrue
