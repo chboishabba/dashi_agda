@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -13,6 +14,8 @@ import DASHI.Wikimedia.SnowballExternalIdentityAvailabilityExact as Identity
 import DASHI.Interop.SLRWikidataTypedTraversalParetoExact as Wikidata
 import DASHI.Law.SensibLawLegalFollowProofSearchBridgeExact as LegalFollow
 import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchBidiExact as ParetoSearch
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact as Pareto
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierProofPromotionExact as Promotion
 import DASHI.Law.AustralianContractsLegalFollowExact as Contracts
 
 ------------------------------------------------------------------------
@@ -226,9 +229,9 @@ legalFollowBoundaryPaid =
 ParetoDirectiveSurface : Set₁
 ParetoDirectiveSurface =
   ∀ {Requirement : Set}
-    {portfolio : List (DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact.RequirementCandidate Requirement)}
-    {selected : DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierExact.RequirementCandidate Requirement}
-    (promotion : DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierProofPromotionExact.FrontierPromotion portfolio selected) →
+    {portfolio : List (Pareto.RequirementCandidate Requirement)}
+    {selected : Pareto.RequirementCandidate Requirement}
+    (promotion : Promotion.FrontierPromotion portfolio selected) →
   Set
 ParetoDirectiveSurface promotion =
   ParetoSearch.CertifiedSearchDirective promotion
