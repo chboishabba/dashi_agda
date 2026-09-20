@@ -32,6 +32,12 @@ record CylinderExpectationLimitData (Observable : Set) : Set₁ where
       ∀ sequence left right →
       Converges sequence left → Converges sequence right → left ≡ right
 
+    convergencePointwiseCongruent :
+      ∀ left right target →
+      (∀ n → left n ≡ right n) →
+      Converges right target →
+      Converges left target
+
     constantConverges : ∀ value →
       Converges (λ _ → value) value
 
@@ -80,15 +86,12 @@ limitZero dataSet =
     (limitExpectation dataSet (zero dataSet))
     0ℚ
     (selectedConverges dataSet (zero dataSet))
-    (transport
-      (λ sequence →
-        Converges dataSet sequence 0ℚ)
-      (funext λ n → finiteZero dataSet n)
+    (convergencePointwiseCongruent dataSet
+      (λ n → finiteExpectation dataSet n (zero dataSet))
+      (λ _ → 0ℚ)
+      0ℚ
+      (finiteZero dataSet)
       (constantConverges dataSet 0ℚ))
-  where
-  postulate
-    funext : ∀ {A B : Set} {f g : A → B} → (∀ x → f x ≡ g x) → f ≡ g
-    transport : ∀ {A : Set} (P : A → Set) {x y} → x ≡ y → P y → P x
 
 limitOne :
   ∀ {Observable} (dataSet : CylinderExpectationLimitData Observable) →
@@ -99,14 +102,12 @@ limitOne dataSet =
     (limitExpectation dataSet (one dataSet))
     1ℚ
     (selectedConverges dataSet (one dataSet))
-    (transport
-      (λ sequence → Converges dataSet sequence 1ℚ)
-      (funext λ n → finiteOne dataSet n)
+    (convergencePointwiseCongruent dataSet
+      (λ n → finiteExpectation dataSet n (one dataSet))
+      (λ _ → 1ℚ)
+      1ℚ
+      (finiteOne dataSet)
       (constantConverges dataSet 1ℚ))
-  where
-  postulate
-    funext : ∀ {A B : Set} {f g : A → B} → (∀ x → f x ≡ g x) → f ≡ g
-    transport : ∀ {A : Set} (P : A → Set) {x y} → x ≡ y → P y → P x
 
 limitAdd :
   ∀ {Observable} (dataSet : CylinderExpectationLimitData Observable)
@@ -119,11 +120,13 @@ limitAdd dataSet left right =
     (limitExpectation dataSet (add dataSet left right))
     (limitExpectation dataSet left + limitExpectation dataSet right)
     (selectedConverges dataSet (add dataSet left right))
-    (transport
-      (λ sequence →
-        Converges dataSet sequence
-          (limitExpectation dataSet left + limitExpectation dataSet right))
-      (funext λ n → finiteAdd dataSet n left right)
+    (convergencePointwiseCongruent dataSet
+      (λ n → finiteExpectation dataSet n (add dataSet left right))
+      (λ n →
+        finiteExpectation dataSet n left
+        + finiteExpectation dataSet n right)
+      (limitExpectation dataSet left + limitExpectation dataSet right)
+      (λ n → finiteAdd dataSet n left right)
       (addConverges dataSet
         (λ n → finiteExpectation dataSet n left)
         (λ n → finiteExpectation dataSet n right)
@@ -131,10 +134,6 @@ limitAdd dataSet left right =
         (limitExpectation dataSet right)
         (selectedConverges dataSet left)
         (selectedConverges dataSet right)))
-  where
-  postulate
-    funext : ∀ {A B : Set} {f g : A → B} → (∀ x → f x ≡ g x) → f ≡ g
-    transport : ∀ {A : Set} (P : A → Set) {x y} → x ≡ y → P y → P x
 
 limitScale :
   ∀ {Observable} (dataSet : CylinderExpectationLimitData Observable)
@@ -147,19 +146,15 @@ limitScale dataSet scalar observable =
     (limitExpectation dataSet (scale dataSet scalar observable))
     (scalar * limitExpectation dataSet observable)
     (selectedConverges dataSet (scale dataSet scalar observable))
-    (transport
-      (λ sequence →
-        Converges dataSet sequence
-          (scalar * limitExpectation dataSet observable))
-      (funext λ n → finiteScale dataSet n scalar observable)
+    (convergencePointwiseCongruent dataSet
+      (λ n → finiteExpectation dataSet n (scale dataSet scalar observable))
+      (λ n → scalar * finiteExpectation dataSet n observable)
+      (scalar * limitExpectation dataSet observable)
+      (λ n → finiteScale dataSet n scalar observable)
       (scaleConverges dataSet scalar
         (λ n → finiteExpectation dataSet n observable)
         (limitExpectation dataSet observable)
         (selectedConverges dataSet observable)))
-  where
-  postulate
-    funext : ∀ {A B : Set} {f g : A → B} → (∀ x → f x ≡ g x) → f ≡ g
-    transport : ∀ {A : Set} (P : A → Set) {x y} → x ≡ y → P y → P x
 
 limitPositive :
   ∀ {Observable} (dataSet : CylinderExpectationLimitData Observable)
