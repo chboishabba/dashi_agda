@@ -114,6 +114,35 @@ qldTemporalAlternativeMustRemainRepresentable :
 qldTemporalAlternativeMustRemainRepresentable =
   Contracts.coarseDoctrineLabelCannotRecoverAsAtRoute
 
+data ContractLandscapeAcquisitionOutcome : Set where
+  sourceResolved : ContractLandscapeAcquisitionOutcome
+  sourceResidual : ContractLandscapeAcquisitionOutcome
+
+record ContractLandscapeAcquisitionReceipt : Set where
+  constructor contractLandscapeAcquisitionReceipt
+  field
+    workReference : String
+    semanticReference : String
+    outcome : ContractLandscapeAcquisitionOutcome
+    sourceRevisionReference : Maybe String
+    sectionReference : Maybe String
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse : createsLegalAuthority ≡ false
+    createsCurrentLawConclusion : Bool
+    createsCurrentLawConclusionIsFalse :
+      createsCurrentLawConclusion ≡ false
+    sectionReceiptPaid : Bool
+    sectionReceiptPaidIsFalse : sectionReceiptPaid ≡ false
+    treatmentReviewPaid : Bool
+    treatmentReviewPaidIsFalse : treatmentReviewPaid ≡ false
+    missingSourceIsNegativeLegalEvidence : Bool
+    missingSourceIsNegativeLegalEvidenceIsFalse :
+      missingSourceIsNegativeLegalEvidence ≡ false
+
+open ContractLandscapeAcquisitionReceipt public
+
 ------------------------------------------------------------------------
 -- No-collapse laws for S14 orchestration.
 ------------------------------------------------------------------------
@@ -125,6 +154,9 @@ data ContextExpansionAutomaticallyPrimaryAuthority : Set where
 data InactiveTemporalAlternativeMayBeDiscarded : Set where
 data BoundedSeedAutomaticallyCompleteLandscape : Set where
 data LandscapeControllerAutomaticallyLegalAuthority : Set where
+data MissingLandscapeSourceAutomaticallyNegativeEvidence : Set where
+data ActAcquisitionAutomaticallyPaysSection : Set where
+data SourceReceiptAutomaticallyPaysTreatmentReview : Set where
 
 sourceAcquisitionDoesNotCreateTreatment :
   SourceAcquisitionAutomaticallyTreatment → ⊥
@@ -154,6 +186,18 @@ landscapeControllerDoesNotCreateAuthority :
   LandscapeControllerAutomaticallyLegalAuthority → ⊥
 landscapeControllerDoesNotCreateAuthority ()
 
+missingLandscapeSourceDoesNotBecomeNegativeEvidence :
+  MissingLandscapeSourceAutomaticallyNegativeEvidence → ⊥
+missingLandscapeSourceDoesNotBecomeNegativeEvidence ()
+
+actAcquisitionDoesNotPaySection :
+  ActAcquisitionAutomaticallyPaysSection → ⊥
+actAcquisitionDoesNotPaySection ()
+
+sourceReceiptDoesNotPayTreatmentReview :
+  SourceReceiptAutomaticallyPaysTreatmentReview → ⊥
+sourceReceiptDoesNotPayTreatmentReview ()
+
 record AustralianContractsLandscapeControllerBoundary : Set where
   constructor australianContractsLandscapeControllerBoundary
   field
@@ -181,6 +225,22 @@ record AustralianContractsLandscapeControllerBoundary : Set where
     boundedSeedOnlyIsTrue :
       boundedSeedOnly ≡ true
 
+    sourceAcquisitionMayLeaveResiduals : Bool
+    sourceAcquisitionMayLeaveResidualsIsTrue :
+      sourceAcquisitionMayLeaveResiduals ≡ true
+
+    missingSourceIsNegativeLegalEvidence : Bool
+    missingSourceIsNegativeLegalEvidenceIsFalse :
+      missingSourceIsNegativeLegalEvidence ≡ false
+
+    actAcquisitionPaysSectionReceipt : Bool
+    actAcquisitionPaysSectionReceiptIsFalse :
+      actAcquisitionPaysSectionReceipt ≡ false
+
+    sourceAcquisitionPaysTreatmentReview : Bool
+    sourceAcquisitionPaysTreatmentReviewIsFalse :
+      sourceAcquisitionPaysTreatmentReview ≡ false
+
     controllerCreatesCurrentLawConclusion : Bool
     controllerCreatesCurrentLawConclusionIsFalse :
       controllerCreatesCurrentLawConclusion ≡ false
@@ -199,5 +259,9 @@ canonicalAustralianContractsLandscapeControllerBoundary =
     true refl
     true refl
     true refl
+    true refl
+    false refl
+    false refl
+    false refl
     false refl
     false refl
