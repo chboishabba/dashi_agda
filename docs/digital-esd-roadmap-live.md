@@ -1169,3 +1169,62 @@ retained/probable decisions and actual full-text retrieval.
 The adaptive-screening branch has not yet received a fresh Agda aggregate
 receipt and the new Python tools have not yet been executed against the real
 corpus in this environment.
+
+
+## 29. ESD-4 scholarly full-text cross-pollination
+
+The current development frontier is no longer ERIC metadata parsing.
+
+```text
+ERIC metadata/title/abstract parsing      paid
+screening/adaptive workflow               architecture paid
+full-text cache/materialisation           machinery paid
+semantic parsing of retained studies      active frontier
+```
+
+P0-A through P0-G completion must not be read as semantic parsing of the
+papers. The real ESD-4 path is:
+
+```text
+retained full-text artifact
+-> exact manifestation/revision/digest weld
+-> generic document structure
+-> exact canonical EvidenceSpan
+-> generic scholarly-study facet candidate
+-> canonical EvidenceObservation
+-> explicit review
+-> Digital-ESD SituatedAuditObservation projection
+-> independent SourceAuditAdmission
+```
+
+New formal owner:
+
+`DASHI/Interop/DigitalESD/ScholarlyFullTextCrossPollinationExact.agda`
+
+with regression and thin-wrapper execution receipt owner under the same
+`DASHI/Interop/DigitalESD/` namespace.
+
+The application-side prototype lives under:
+
+`interop_scripts/digital_esd/`
+
+and intentionally does not define a production SLR semantic ABI.
+
+Current prototype support:
+
+- TXT/Markdown;
+- HTML;
+- DOCX;
+- PDF via pypdf or PyMuPDF;
+- revision-anchored document nodes;
+- candidate Population/Sample/Intervention/Comparator/Outcome/StudyDesign/
+  Setting/TimePeriod/Method/Limitation/Funding/Institution/ParticipantGroup/
+  Measurement observations.
+
+The prototype remains candidate-only.  Its purpose is to create real
+heterogeneous scholarly fixtures and identify generic capabilities that should
+later move into SLR. Digital-ESD retains the review question, screening rubric,
+audit axes, SourceAuditAdmission and framework-challenge semantics.
+
+The immediate execution target is a bounded heterogeneous real-study tranche,
+not all 43,996 ERIC metadata records and not another architecture tranche.
