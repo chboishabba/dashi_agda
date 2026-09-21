@@ -396,3 +396,5 @@ import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact
 import DASHI.Physics.YangMills.BalabanCMP116SourceNativeToDirectUpperRound465Exact
 
 import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedRound467Exact
+
+import DASHI.Physics.YangMills.YangMillsClayGoal1StressSourceRound466Exact
