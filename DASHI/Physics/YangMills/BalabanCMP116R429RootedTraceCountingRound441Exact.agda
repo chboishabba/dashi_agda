@@ -23,8 +23,10 @@ module DASHI.Physics.YangMills.BalabanCMP116R429RootedTraceCountingRound441Exact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_≤_)
 open import Data.List.Base using (List; []; _∷_; _++_; length)
 open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Product using (Σ; _×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
