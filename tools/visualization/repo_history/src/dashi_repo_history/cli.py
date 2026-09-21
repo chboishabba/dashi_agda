@@ -31,6 +31,7 @@ def _extract(args: argparse.Namespace) -> None:
         repo,
         path_prefix=args.path_prefix,
         seed_commits=tuple(args.seed_commit or ()),
+        history_refs=tuple(args.ref or ()),
     )
     timeline = extractor.timeline(
         first_commits=args.first_commits,
@@ -307,6 +308,11 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument("repo")
     extract.add_argument("-o", "--output", default="repo-history.json")
     extract.add_argument("--path-prefix")
+    extract.add_argument(
+        "--ref",
+        action="append",
+        help="Restrict history traversal to one or more explicit Git refs (for example HEAD or a branch). Default: --all.",
+    )
     extract.add_argument(
         "--seed-commit",
         action="append",
