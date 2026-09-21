@@ -454,6 +454,21 @@ interiorCellsFromUniqueMargin
             (shape interior)
         }
 
+interiorExactlyOneHead :
+  ∀ {machine row} →
+  Character.InteriorHeadConfiguration machine row →
+  WF.ExactlyOneHead (Local.cells row)
+interiorExactlyOneHead interior =
+  WF.transportExactlyOneHead
+    (sym (Character.rowShape interior))
+    (WF.prependPlain
+      (Character.prefixPlain interior)
+      (WF.plainBefore
+        (WF.headHere
+          (WF.plainCons
+            (Character.suffixPlain interior)))))
+
+
 interiorFromUniqueMargin :
   ∀ {machine row} →
   WF.ExactlyOneHead (Local.cells row) →
