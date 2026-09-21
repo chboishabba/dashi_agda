@@ -1483,6 +1483,7 @@ class ResearchAtlasGraphView(SemanticGraphView):
                 for region in regions
             }
         )
+        self.label_nodes: set[str] = set()
 
     def build(self, graph_data: dict[str, Any]) -> DiGraph:
         nodes = [node["symbol_id"] for node in graph_data["nodes"]]
@@ -1500,6 +1501,7 @@ class ResearchAtlasGraphView(SemanticGraphView):
                 node_id: self.policy.vertex_mobject(
                     node_data[node_id],
                     total_nodes=len(nodes),
+                    force_label=node_id in self.label_nodes,
                 )
                 for node_id in nodes
             },
@@ -1582,6 +1584,7 @@ class ResearchAtlasGraphView(SemanticGraphView):
                     node: self.policy.vertex_mobject(
                         node_data[node],
                         total_nodes=len(target_nodes),
+                        force_label=node in self.label_nodes,
                     )
                     for node in added_nodes
                 },
@@ -1663,6 +1666,42 @@ class ResearchAtlasGraphView(SemanticGraphView):
         self.current_edges = target_edges
         self.current_edge_kinds = target_edge_kinds
         self.current_graph_data = graph_data
+
+    def update_labels(
+        self,
+        scene: MovingCameraScene,
+        node_ids: set[str],
+        *,
+        run_time: float = 0.16,
+    ) -> None:
+        node_ids = set(node_ids)
+        if node_ids == self.label_nodes:
+            return
+
+        self.label_nodes = node_ids
+        node_data = {
+            node["symbol_id"]: node
+            for node in self.current_graph_data.get("nodes", [])
+        }
+        animations = []
+        replacements = []
+
+        for node_id in sorted(self.current_nodes):
+            if node_id not in self.graph.vertices or node_id not in node_data:
+                continue
+            old = self.graph.vertices[node_id]
+            new = self.policy.vertex_mobject(
+                node_data[node_id],
+                total_nodes=len(self.current_nodes),
+                force_label=node_id in self.label_nodes,
+            ).move_to(old.get_center())
+            animations.append(ReplacementTransform(old, new))
+            replacements.append((node_id, new))
+
+        if animations:
+            scene.play(*animations, run_time=run_time)
+            for node_id, new in replacements:
+                self.graph.vertices[node_id] = new
 
 
 def _research_time_rail(
@@ -2002,6 +2041,11 @@ class ResearchEvolutionScene(MovingCameraScene):
                 visible_nodes,
             )
 
+            changed = set(
+                (beat.payload or {}).get("changed_nodes", [])
+            )
+            view.label_nodes = set(changed)
+
             if not graph_created:
                 graph = view.build(next_graph)
                 self.play(Create(graph), run_time=0.8)
@@ -2010,7 +2054,12 @@ class ResearchEvolutionScene(MovingCameraScene):
                 view.apply_snapshot(
                     self,
                     next_graph,
-                    run_time=max(0.25, beat.duration_seconds * 0.55),
+                    run_time=max(0.35, beat.duration_seconds * 0.48),
+                )
+                view.update_labels(
+                    self,
+                    changed,
+                    run_time=0.16,
                 )
 
             current_commit = beat.commit
@@ -2100,13 +2149,10 @@ class ResearchEvolutionScene(MovingCameraScene):
             if beat.camera is not None:
                 self._focus_camera(
                     view,
-                    set(beat.focus_node_ids),
+                    visible_nodes,
                     beat.camera,
                 )
 
-            changed = set(
-                (beat.payload or {}).get("changed_nodes", [])
-            )
             highlights = [
                 Indicate(
                     view.graph.vertices[node_id],
