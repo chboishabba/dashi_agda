@@ -26,7 +26,7 @@ from manim import (
     VGroup,
 )
 
-from dashi_repo_history.history_axis import temporal_history_layout
+from dashi_repo_history.history_axis import format_timestamp_date, temporal_history_layout
 from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
@@ -112,6 +112,16 @@ def _legend(
         legend.to_corner(DOWN + LEFT, buff=0.18)
         legend.set_z_index(20)
     return legend
+
+
+def _commit_date(
+    commits: dict[str, dict[str, Any]],
+    commit: str,
+) -> str:
+    record = commits.get(commit)
+    if record is None:
+        return "date unknown"
+    return format_timestamp_date(record.get("timestamp"))
 
 
 def _snapshot_maps(data: dict[str, Any]):
@@ -725,6 +735,10 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             snapshot["commit"]: snapshot
             for snapshot in data.get("snapshots", [])
         }
+        commits = {
+            commit["commit"]: commit
+            for commit in data.get("commits", [])
+        }
         frame_graphs: list[dict[str, Any]] = []
         for command in program:
             payload = command.payload
@@ -760,7 +774,8 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             font_size=28,
         ).to_edge(UP)
         stamp = Text(
-            f"{first['commit'][:10]} · {first['identity_evidence'].replace('-', ' ')}",
+            f"{first['commit'][:10]} · {_commit_date(commits, first['commit'])} · "
+            f"{first['identity_evidence'].replace('-', ' ')}",
             font_size=15,
         ).next_to(title, DOWN, buff=0.10)
 
@@ -791,7 +806,9 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             ).to_edge(UP)
             evidence = payload["identity_evidence"].replace("-", " ")
             new_stamp = Text(
-                f"{payload['commit'][:10]} · identity: {evidence}",
+                f"{payload['commit'][:10]} · "
+                f"{_commit_date(commits, payload['commit'])} · "
+                f"identity: {evidence}",
                 font_size=15,
             ).next_to(new_title, DOWN, buff=0.10)
 
@@ -882,6 +899,7 @@ class SemanticSnapshotScene(MovingCameraScene):
             return
 
         snapshot = snapshots[snapshot_index]
+        commits, _snapshot_lookup = _snapshot_maps(data)
         policy = ManimRenderPolicy()
         graph = SemanticGraphView(policy).build(snapshot["graph"])
         legend = _legend(
@@ -889,7 +907,8 @@ class SemanticSnapshotScene(MovingCameraScene):
             _relation_kinds(snapshot["graph"]),
         )
         title = Text(
-            f"semantic graph · {snapshot['commit'][:10]}",
+            f"semantic graph · {snapshot['commit'][:10]} · "
+            f"{_commit_date(commits, snapshot['commit'])}",
             font_size=28,
         ).to_edge(UP)
         self.play(FadeIn(title), Create(graph), FadeIn(legend), run_time=2.0)
@@ -922,7 +941,7 @@ class SemanticHistoryScene(MovingCameraScene):
             self.add(Text("No semantic scene program", font_size=28))
             return
 
-        _commits, snapshots = _snapshot_maps(data)
+        commits, snapshots = _snapshot_maps(data)
         title = Text(
             "dashi_agda — semantic evolution",
             font_size=30,
@@ -952,7 +971,7 @@ class SemanticHistoryScene(MovingCameraScene):
                     continue
                 graph = view.build(snapshot["graph"])
                 next_stamp = Text(
-                    commit[:10],
+                    f"{commit[:10]} · {_commit_date(commits, commit)}",
                     font_size=17,
                 ).next_to(title, DOWN, buff=0.12)
                 self.play(
@@ -967,7 +986,8 @@ class SemanticHistoryScene(MovingCameraScene):
             if kind == "advance-commit":
                 pending_commit = payload["commit"]
                 next_stamp = Text(
-                    pending_commit[:10],
+                    f"{pending_commit[:10]} · "
+                    f"{_commit_date(commits, pending_commit)}",
                     font_size=17,
                 ).next_to(title, DOWN, buff=0.12)
                 self.play(
@@ -1087,7 +1107,7 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
         )
         fork_graph = fork_view.build(focused(fork))
         fork_label = Text(
-            f"fork · {fork[:10]}",
+            f"fork · {fork[:10]} · {_commit_date(commits, fork)}",
             font_size=18,
         ).next_to(title, DOWN, buff=0.12)
         self.play(FadeIn(fork_label), Create(fork_graph), run_time=1.1)
@@ -1106,11 +1126,11 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
         right_graph = right_view.build(focused(fork))
 
         left_label = Text(
-            f"branch A · {fork[:9]}",
+            f"branch A · {fork[:9]} · {_commit_date(commits, fork)}",
             font_size=16,
         ).move_to(LEFT * 3.35 + UP * 2.15)
         right_label = Text(
-            f"branch B · {fork[:9]}",
+            f"branch B · {fork[:9]} · {_commit_date(commits, fork)}",
             font_size=16,
         ).move_to(RIGHT * 3.35 + UP * 2.15)
 
@@ -1145,7 +1165,8 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
             view = views[side]
             old_label = labels[side]
             new_label = Text(
-                f"branch {'A' if side == 'left' else 'B'} · {commit[:9]}",
+                f"branch {'A' if side == 'left' else 'B'} · "
+                f"{commit[:9]} · {_commit_date(commits, commit)}",
                 font_size=16,
             ).move_to(
                 (LEFT if side == "left" else RIGHT) * 3.35
@@ -1175,7 +1196,7 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
         )
         merge_graph = merge_view.build(focused(merge_sha))
         merge_label = Text(
-            f"merge · {merge_sha[:10]}",
+            f"merge · {merge_sha[:10]} · {_commit_date(commits, merge_sha)}",
             font_size=18,
         ).next_to(title, DOWN, buff=0.12)
 
