@@ -404,3 +404,103 @@ branch lanes horizontally. Large gaps in development therefore look large; a
 burst of many commits in one day remains visually compressed in time. Semantic
 single-graph scenes show the exact UTC commit date in their scene stamp instead
 of overloading dependency geometry with a second Y-axis meaning.
+
+
+## Python vs Rust backend decision
+
+The current implementation deliberately keeps Python as the reference backend
+until measured history runs justify moving the deterministic patch core.
+
+This is not because implementation language is irrelevant. It is because the
+largest avoidable costs discovered so far were architectural:
+
+1. global candidate linking,
+2. whole-corpus relinking after local edits,
+3. unbounded traversal/layout,
+4. full graph duplication at every commit,
+5. repeated resolution-impact scans,
+6. recomputing unchanged portions of affected modules.
+
+Items 1-5 now have explicit mitigations in the current branch:
+
+```text
+scope-evidenced resolution
+affected-module patches
+hard focus/layout budgets
+checkpoint + delta history
+persistent resolution-impact index
+```
+
+Item 6 is measured explicitly as physical recomputation inflation.
+
+A profiled extraction can be run with:
+
+```bash
+dashi-repo-history extract ../../.. \
+  --ref HEAD \
+  --max-commits 500 \
+  --compact \
+  --checkpoint-interval 50 \
+  --parity-every 25 \
+  --profile-output /tmp/dashi-profile.json \
+  -o /tmp/dashi-history.json
+
+dashi-repo-history profile /tmp/dashi-profile.json
+```
+
+The backend policy intentionally orders fixes as follows:
+
+```text
+not enough samples
+    -> keep Python reference
+
+affected-module fanout too high
+    -> fix invalidation boundaries
+
+impact planning dominates
+    -> persistent resolution-impact index first
+
+patching dominates but recomputation >> semantic change
+    -> direct-delta affected-module patching first
+
+patching still dominates after those fixes
+    -> Rust semantic core candidate
+```
+
+The default Rust-candidate gate currently requires at least 50 incremental
+samples, patch p95 above 50 ms, and patch work above 35% of measured incremental
+wall time. These are configurable policy thresholds, not semantic constants.
+
+### If Rust is admitted
+
+The intended design follows the useful SensibLaw/SLR split rather than porting
+the visualizer wholesale:
+
+```text
+Python
+  Git traversal
+  tree-sitter observation adapter
+  scene-program orchestration
+  Manim renderer
+        |
+        | changed/deleted observation stream
+        v
+long-lived Rust semantic workspace
+  versioned parent states
+  resolution-impact index
+  deterministic semantic patch compiler
+  patch/parity/performance receipts
+        |
+        v
+Python scene/history layer
+```
+
+A Rust backend should **not** spawn once per commit and should **not** receive
+the whole corpus on each update. It should retain versioned workspace state and
+consume only changed/deleted observations, analogous to SLR's direct-delta
+runtime.
+
+Until the profile gate says otherwise, the recommended implementation remains
+the Python affected-module backend because Tree-sitter parsing is already
+native-backed, the graph sizes presented to Manim are bounded, history storage
+is delta-native, and resolution impact is incrementally indexed.
