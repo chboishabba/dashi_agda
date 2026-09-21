@@ -148,6 +148,61 @@ canonicalSameTargetDifferentContextWitness =
     canonicalPairAdmittedInContext0
     canonicalPairRejectedInContext1
 
+
+------------------------------------------------------------------------
+-- Typed protein-conformation adapter.
+--
+-- A concrete receptor model can now map each actual conformation in an
+-- existing ProteinConformationSystem to its own recognition geometry/region.
+-- This is the intended owner for future HTR2A state-specific calibration.
+------------------------------------------------------------------------
+
+record ConformationIndexedRecognitionSystem
+    (P : Protein.ProteinConformationSystem) : Set₁ where
+  open Protein.ProteinConformationSystem P
+  field
+    geometryAt :
+      Conformation →
+      Geometry.TargetRecognitionGeometry
+
+    regionAt :
+      Conformation →
+      Region.TargetAdmissibleRegion
+
+    geometryTargetMatchesRegion :
+      (state : Conformation) →
+      Geometry.targetReference (geometryAt state)
+      ≡
+      Geometry.targetReference
+        (Region.geometry (regionAt state))
+
+    conformationIndexIsExplicit : Bool
+    conformationIndexIsExplicitIsTrue :
+      conformationIndexIsExplicit ≡ true
+
+    conformationDoesNotDetermineAffinityByDefinition : Bool
+    conformationDoesNotDetermineAffinityByDefinitionIsFalse :
+      conformationDoesNotDetermineAffinityByDefinition ≡ false
+
+open ConformationIndexedRecognitionSystem public
+
+record ConformationIndexedRecognitionObservation
+    {P : Protein.ProteinConformationSystem}
+    (system : ConformationIndexedRecognitionSystem P) : Set₁ where
+  open Protein.ProteinConformationSystem P
+  field
+    conformation : Conformation
+    mismatch : Geometry.RecognitionMismatch
+
+    admitted :
+      Region.AdmittedByRegion
+        (ConformationIndexedRecognitionSystem.regionAt system conformation)
+        mismatch
+
+    observationReference : String
+
+open ConformationIndexedRecognitionObservation public
+
 ------------------------------------------------------------------------
 -- Existing protein-conformation owner is the intended non-toy state carrier.
 ------------------------------------------------------------------------
