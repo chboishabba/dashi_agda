@@ -86,6 +86,7 @@ bundleAssoc :
   bundleCompose f (bundleCompose g h)
 bundleAssoc idTotal idTotal idTotal = refl
 bundleAssoc idBase idBase idBase = refl
+bundleAssoc idBase idBase projectToBase = refl
 bundleAssoc idBase projectToBase idTotal = refl
 bundleAssoc projectToBase idTotal idTotal = refl
 
