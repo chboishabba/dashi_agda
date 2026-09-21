@@ -8,6 +8,7 @@ import DASHI.Biology.AvianCompassExamples as LegacyExamples
 import DASHI.Biology.AvianRFOverlayManipulationReceipt as LegacyRF
 import DASHI.Biology.AvianCryptochromeMagnetoreceptionInhabitant as Cry
 import DASHI.Biology.AvianMagneticFieldPerturbationReceipt as GenericRF
+import DASHI.Biology.MagnetoreceptionSurface as Generic
 
 ------------------------------------------------------------------------
 -- The old RF/retinal overlay formalization remains valid as a
@@ -64,19 +65,19 @@ canonicalCryptochromePerturbationReceipt :
     Cry.cryptochromeGenericSurface
 canonicalCryptochromePerturbationReceipt =
   record
-    { BaseStimulus = DASHI.Biology.MagnetoreceptionSurface.magneticStimulusToken
-    ; PerturbedStimulus = DASHI.Biology.MagnetoreceptionSurface.magneticStimulusToken
-    ; ReceptorContext = DASHI.Biology.MagnetoreceptionSurface.receptorStateToken
-    ; NavigationContext = DASHI.Biology.MagnetoreceptionSurface.navigationContextToken
-    ; NavigationPolicy = DASHI.Biology.MagnetoreceptionSurface.navigationPolicyToken
+    { BaseStimulus = Generic.magneticStimulusToken
+    ; PerturbedStimulus = Generic.magneticStimulusToken
+    ; ReceptorContext = Generic.receptorStateToken
+    ; NavigationContext = Generic.navigationContextToken
+    ; NavigationPolicy = Generic.navigationPolicyToken
     ; mode = GenericRF.oscillatingRFField
     ; geometry = GenericRF.rotatingVectorGeometry
-    ; baseTransduction = DASHI.Biology.MagnetoreceptionSurface.transductionStateToken
-    ; perturbedTransduction = DASHI.Biology.MagnetoreceptionSurface.transductionStateToken
+    ; baseTransduction = Generic.transductionStateToken
+    ; perturbedTransduction = Generic.transductionStateToken
     ; baseTransductionMatches = refl
     ; perturbedTransductionMatches = refl
-    ; baseAfference = DASHI.Biology.MagnetoreceptionSurface.afferentSignalToken
-    ; perturbedAfference = DASHI.Biology.MagnetoreceptionSurface.afferentSignalToken
+    ; baseAfference = Generic.afferentSignalToken
+    ; perturbedAfference = Generic.afferentSignalToken
     ; baseAfferenceMatches = refl
     ; perturbedAfferenceMatches = refl
     ; behavioralEffect = GenericRF.degradedOrientationConfidence
