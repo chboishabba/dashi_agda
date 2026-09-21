@@ -104,6 +104,9 @@ def _render(args: argparse.Namespace) -> None:
     env["DASHI_REPO_DOWNSTREAM_DEPTH"] = str(args.downstream_depth)
     env["DASHI_REPO_MAX_FOCUS_NODES"] = str(args.max_focus_nodes)
     env["DASHI_REPO_MAX_FOCUS_EDGES"] = str(args.max_focus_edges)
+    env["DASHI_FILM_CONTEXT_NODES"] = str(args.film_context_nodes)
+    env["DASHI_FILM_CONTEXT_EDGES"] = str(args.film_context_edges)
+    env["DASHI_FILM_MEMORY_NODES"] = str(args.programme_memory_nodes)
 
     scene_by_mode = {
         "history": "RepositoryHistoryScene",
@@ -599,6 +602,9 @@ def build_parser() -> argparse.ArgumentParser:
     render.add_argument("--downstream-depth", type=int, default=0)
     render.add_argument("--max-focus-nodes", type=int, default=250)
     render.add_argument("--max-focus-edges", type=int, default=800)
+    render.add_argument("--film-context-nodes", type=int, default=40)
+    render.add_argument("--film-context-edges", type=int, default=100)
+    render.add_argument("--programme-memory-nodes", type=int, default=28)
     render.add_argument(
         "--target-commit",
         help="Target commit for the first-parent semantic-history lineage.",
