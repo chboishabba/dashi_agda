@@ -54,6 +54,10 @@ a2ShellToPartialSumCompilerLevel : ProofLevel
 a2ShellToPartialSumCompilerLevel =
   R250.a2ShellIdentityToPartialSumCompilerLevel
 
+a2ShellToCanonicalGammaCompilerLevel : ProofLevel
+a2ShellToCanonicalGammaCompilerLevel =
+  R250.a2ShellIdentityToCanonicalGammaCompilerLevel
+
 a2LiteralResponseProducerFallbackLevel : ProofLevel
 a2LiteralResponseProducerFallbackLevel =
   R121.a2LiteralResponseProducerLevel
