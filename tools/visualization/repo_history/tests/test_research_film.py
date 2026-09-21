@@ -416,3 +416,51 @@ def test_multi_programme_overview_is_renderer_visible():
     assert set(overview.visible_node_ids) == {"ns", "rh"}
     assert overview.camera is not None
     assert overview.camera.mode == "programme-overview"
+
+
+def test_first_snapshot_of_truncated_window_is_baseline_not_mass_creation():
+    old = _node(
+        "old",
+        "ExistingTheorem",
+        "DASHI.Physics.NavierStokes",
+    )
+    new = _node(
+        "new",
+        "NewR571Step",
+        "DASHI.Physics.NavierStokes",
+    )
+    timeline = {
+        "commits": [
+            {
+                "commit": "B",
+                "timestamp": 10,
+                "parents": ["OUTSIDE"],
+            },
+            {
+                "commit": "C",
+                "timestamp": 20,
+                "parents": ["B"],
+            },
+        ],
+        "snapshots": [
+            _snapshot("B", [old]),
+            _snapshot(
+                "C",
+                [old, new],
+                delta={
+                    "added_nodes": ["new"],
+                    "removed_nodes": [],
+                    "added_edges": [],
+                    "removed_edges": [],
+                },
+                parent="B",
+            ),
+        ],
+        "refs": {},
+        "branch_episodes": [],
+    }
+
+    plan = compile_research_film(timeline)
+
+    assert all(item.commit != "B" for item in plan.working_sets)
+    assert any(item.commit == "C" for item in plan.working_sets)
