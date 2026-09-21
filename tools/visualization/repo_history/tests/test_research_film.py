@@ -564,3 +564,48 @@ def test_commit_subject_is_carried_into_semantic_change_payload():
         change.payload["commit_subject"]
         == "Pay R571 fixed-output seam"
     )
+
+
+def test_dense_semantic_change_gets_more_reading_time_than_sparse_change():
+    sparse = _node(
+        "sparse",
+        "SparseLemma",
+        "DASHI.Physics.NavierStokes",
+    )
+    dense_nodes = [
+        _node(
+            f"dense-{index}",
+            f"DenseLemma{index}",
+            "DASHI.Physics.NavierStokes",
+        )
+        for index in range(10)
+    ]
+
+    sparse_timeline = {
+        "commits": [{"commit": "A", "timestamp": 0, "parents": []}],
+        "snapshots": [_snapshot("A", [sparse])],
+        "refs": {},
+        "branch_episodes": [],
+    }
+    dense_timeline = {
+        "commits": [{"commit": "A", "timestamp": 0, "parents": []}],
+        "snapshots": [_snapshot("A", dense_nodes)],
+        "refs": {},
+        "branch_episodes": [],
+    }
+
+    sparse_plan = compile_research_film(sparse_timeline)
+    dense_plan = compile_research_film(dense_timeline)
+
+    sparse_beat = next(
+        beat
+        for beat in sparse_plan.beats
+        if beat.kind == "semantic-change"
+    )
+    dense_beat = next(
+        beat
+        for beat in dense_plan.beats
+        if beat.kind == "semantic-change"
+    )
+
+    assert dense_beat.duration_seconds > sparse_beat.duration_seconds
