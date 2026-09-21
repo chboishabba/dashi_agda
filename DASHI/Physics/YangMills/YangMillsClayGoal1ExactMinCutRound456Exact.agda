@@ -43,6 +43,8 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StandaloneWilsonSquareEx
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119UniformProjectiveCompactnessExact as Projective
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OS05CanonicalLimitExact as OS05
 import DASHI.Physics.YangMills.YangMillsFiniteHaarActionNumeratorInvariantRound431Exact as Haar
+import DASHI.Physics.YangMills.YangMillsClayPublishedWilsonRPRound461Exact as R461
+import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as R462
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralACompletionRound424Exact as A424
 
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
@@ -86,12 +88,20 @@ aOS05LimitClosureCompilerLevel : ProofLevel
 aOS05LimitClosureCompilerLevel =
   OS05.canonicalOS05LimitAssemblyLevel
 
-a1FiniteHaarActionAttachmentLevel : ProofLevel
-a1FiniteHaarActionAttachmentLevel =
+a1PublishedFiniteSymmetryApplicationLevel : ProofLevel
+a1PublishedFiniteSymmetryApplicationLevel =
+  R462.literalRound462PublishedFiniteOSApplicationLevel
+
+a1ConstructiveHaarFallbackLevel : ProofLevel
+a1ConstructiveHaarFallbackLevel =
   Haar.literalRound431FiniteHaarActionAttachmentLevel
 
-a2LiteralWilsonPeterWeylSquareLevel : ProofLevel
-a2LiteralWilsonPeterWeylSquareLevel =
+a2PublishedWilsonSameObjectApplicationLevel : ProofLevel
+a2PublishedWilsonSameObjectApplicationLevel =
+  R461.literalRound461PublishedWilsonSameObjectApplicationLevel
+
+a2ConstructivePeterWeylFallbackLevel : ProofLevel
+a2ConstructivePeterWeylFallbackLevel =
   WilsonRP.literalStandaloneWilsonSquareIdentificationLevel
 
 a3UniformCompactContainmentLevel : ProofLevel
@@ -206,6 +216,9 @@ g2IndependentFourthCumulantMandatory = false
 ------------------------------------------------------------------------
 -- Exact accounting flags used by the manuscript audit.
 ------------------------------------------------------------------------
+
+explicitHaarAndPeterWeylReconstructionMandatoryForGoal1 : Bool
+explicitHaarAndPeterWeylReconstructionMandatoryForGoal1 = false
 
 genericProkhorovTheoryCountedAsPhysicalResearchLeaf : Bool
 genericProkhorovTheoryCountedAsPhysicalResearchLeaf = false
