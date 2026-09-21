@@ -1,6 +1,12 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedBSourceRound435Exact where
 
+-- GOAL-1 NOTE (Round440):
+-- This module is retained as a compatibility/coarse-support route.  Its R416
+-- support metric identifies every domain with the global YM tree-edge count.
+-- The preferred Goal-1 CMP116 (1.26)--(1.29) path is Round440, which carries
+-- the literal variable per-domain d_k(Y) : Domain -> Nat.
+
 ------------------------------------------------------------------------
 -- B / ROUND435: CANONICAL FOUR-STAGE + TWICE-MARKED SUPPORT + CMP116 SOURCE
 --
