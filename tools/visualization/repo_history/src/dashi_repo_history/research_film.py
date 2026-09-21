@@ -250,7 +250,7 @@ def _changed_payload_ids(
     return changed_nodes, changed_edges
 
 
-def _working_set_for_commit(
+def _working_sets_for_commit(
     *,
     commit: dict[str, Any],
     snapshot: dict[str, Any],
@@ -258,57 +258,69 @@ def _working_set_for_commit(
     parent: str | None,
     max_context_nodes: int,
     max_context_edges: int,
-) -> ActiveWorkingSet:
-    nodes, edges = _node_maps(snapshot)
+) -> list[ActiveWorkingSet]:
+    after_nodes, after_edges = _node_maps(snapshot)
+    before_nodes, before_edges = (
+        _node_maps(parent_snapshot)
+        if parent_snapshot is not None
+        else ({}, {})
+    )
     changed_nodes, changed_edges = _changed_payload_ids(
         parent_snapshot,
         snapshot,
         parent,
     )
 
-    # Pull endpoints for relation-only changes.
+    all_nodes = {**before_nodes, **after_nodes}
+    all_edges = {**before_edges, **after_edges}
+
+    # Pull endpoints for relation-only additions/removals.
     for edge_id in list(changed_edges):
-        edge = edges.get(edge_id)
+        edge = all_edges.get(edge_id)
         if edge is None:
             continue
         changed_nodes.update((edge["source"], edge["target"]))
 
-    changed_payloads = [
-        nodes[node_id]
-        for node_id in sorted(changed_nodes)
-        if node_id in nodes
-    ]
-    programme_counts: dict[str, int] = {}
-    for node in changed_payloads:
-        key = programme_key(
+    programme_nodes: dict[str, set[str]] = {}
+    for node_id in sorted(changed_nodes):
+        node = all_nodes.get(node_id)
+        if node is None:
+            continue
+        programme = programme_key(
             str(node.get("module", "")),
             str(node.get("label", "")),
         )
-        programme_counts[key] = programme_counts.get(key, 0) + 1
+        programme_nodes.setdefault(programme, set()).add(node_id)
 
-    if programme_counts:
-        programme = min(
-            programme_counts,
-            key=lambda key: (-programme_counts[key], key),
-        )
-    else:
-        programme = "Unclassified"
+    if not programme_nodes:
+        programme_nodes["Unclassified"] = set(changed_nodes)
 
-    programme_changed = [
-        node
-        for node in changed_payloads
-        if programme_key(
-            str(node.get("module", "")),
-            str(node.get("label", "")),
-        )
-        == programme
-    ]
-    topics = _topic_tokens(programme_changed or changed_payloads)
+    programme_edges: dict[str, set[str]] = {
+        programme: set()
+        for programme in programme_nodes
+    }
+    for edge_id in changed_edges:
+        edge = all_edges.get(edge_id)
+        if edge is None:
+            continue
+        endpoint_programmes = set()
+        for endpoint in (edge["source"], edge["target"]):
+            node = all_nodes.get(endpoint)
+            if node is None:
+                continue
+            endpoint_programmes.add(
+                programme_key(
+                    str(node.get("module", "")),
+                    str(node.get("label", "")),
+                )
+            )
+        for programme in endpoint_programmes or {"Unclassified"}:
+            programme_edges.setdefault(programme, set()).add(edge_id)
+            programme_nodes.setdefault(programme, set())
 
-    context_nodes: set[str] = set()
-    context_edges: set[str] = set()
+    working_sets: list[ActiveWorkingSet] = []
     candidates = sorted(
-        edges.values(),
+        after_edges.values(),
         key=lambda edge: (
             edge.get("kind", ""),
             edge["source"],
@@ -316,46 +328,62 @@ def _working_set_for_commit(
             edge["relation_id"],
         ),
     )
-    for edge in candidates:
-        if (
-            edge["source"] not in changed_nodes
-            and edge["target"] not in changed_nodes
-        ):
-            continue
-        if len(context_edges) >= max_context_edges:
-            break
 
-        endpoints = (edge["source"], edge["target"])
-        additions = {
-            endpoint
-            for endpoint in endpoints
-            if endpoint not in changed_nodes
-            and endpoint not in context_nodes
-        }
-        if len(context_nodes) + len(additions) > max_context_nodes:
-            continue
+    for programme in sorted(programme_nodes):
+        local_changed = programme_nodes[programme]
+        local_edges = programme_edges.get(programme, set())
+        payloads = [
+            all_nodes[node_id]
+            for node_id in sorted(local_changed)
+            if node_id in all_nodes
+        ]
+        topics = _topic_tokens(payloads)
 
-        context_edges.add(edge["relation_id"])
-        context_nodes.update(additions)
+        context_nodes: set[str] = set()
+        context_edges: set[str] = set()
+        for edge in candidates:
+            if (
+                edge["source"] not in local_changed
+                and edge["target"] not in local_changed
+            ):
+                continue
+            if len(context_edges) >= max_context_edges:
+                break
 
-    salience = (
-        6 * len(changed_nodes)
-        + 2 * len(changed_edges)
-        + len(context_nodes)
-    )
-    if len(commit.get("parents", [])) > 1:
-        salience += 20
+            additions = {
+                endpoint
+                for endpoint in (edge["source"], edge["target"])
+                if endpoint not in local_changed
+                and endpoint not in context_nodes
+            }
+            if len(context_nodes) + len(additions) > max_context_nodes:
+                continue
 
-    return ActiveWorkingSet(
-        commit=commit["commit"],
-        programme=programme,
-        topic_tokens=topics,
-        changed_node_ids=tuple(sorted(changed_nodes)),
-        changed_edge_ids=tuple(sorted(changed_edges)),
-        context_node_ids=tuple(sorted(context_nodes)),
-        context_edge_ids=tuple(sorted(context_edges)),
-        salience=salience,
-    )
+            context_edges.add(edge["relation_id"])
+            context_nodes.update(additions)
+
+        salience = (
+            6 * len(local_changed)
+            + 2 * len(local_edges)
+            + len(context_nodes)
+        )
+        if len(commit.get("parents", [])) > 1:
+            salience += 20
+
+        working_sets.append(
+            ActiveWorkingSet(
+                commit=commit["commit"],
+                programme=programme,
+                topic_tokens=topics,
+                changed_node_ids=tuple(sorted(local_changed)),
+                changed_edge_ids=tuple(sorted(local_edges)),
+                context_node_ids=tuple(sorted(context_nodes)),
+                context_edge_ids=tuple(sorted(context_edges)),
+                salience=salience,
+            )
+        )
+
+    return working_sets
 
 
 def derive_working_sets(
@@ -386,8 +414,8 @@ def derive_working_sets(
             None,
         )
         parent_snapshot = snapshots.get(parent) if parent else None
-        working_sets.append(
-            _working_set_for_commit(
+        working_sets.extend(
+            _working_sets_for_commit(
                 commit=commit,
                 snapshot=snapshot,
                 parent_snapshot=parent_snapshot,
@@ -562,6 +590,10 @@ def compile_research_film(
 
     beats: list[FilmBeat] = []
     previous_programme: str | None = None
+    working_by_commit: dict[str, list[ActiveWorkingSet]] = {}
+    for working in working_sets:
+        working_by_commit.setdefault(working.commit, []).append(working)
+    emitted_multi_overviews: set[str] = set()
     prs_by_merge = {
         pr.get("merge_commit"): pr
         for pr in timeline.get("pull_requests", [])
@@ -625,7 +657,59 @@ def compile_research_film(
                 item
                 for item in working_sets
                 if item.commit == commit
+                and item.programme == episode.programme
             )
+
+            simultaneous = working_by_commit.get(commit, [])
+            if (
+                len(simultaneous) > 1
+                and commit not in emitted_multi_overviews
+            ):
+                emitted_multi_overviews.add(commit)
+                overview_nodes = tuple(
+                    dict.fromkeys(
+                        node
+                        for item in simultaneous
+                        for node in item.focus_node_ids
+                    )
+                )
+                overview_edges = tuple(
+                    dict.fromkeys(
+                        edge
+                        for item in simultaneous
+                        for edge in item.focus_edge_ids
+                    )
+                )
+                beats.append(
+                    FilmBeat(
+                        kind="cross-programme-overview",
+                        commit=commit,
+                        programme="Multiple",
+                        topic=" · ".join(
+                            item.programme
+                            for item in simultaneous
+                        ),
+                        duration_seconds=0.65,
+                        focus_node_ids=overview_nodes,
+                        focus_edge_ids=overview_edges,
+                        camera=CameraDirective(
+                            programme="Multiple",
+                            focus_node_ids=overview_nodes,
+                            mode="programme-overview",
+                            padding=1.30,
+                            min_width=10.0,
+                            max_width=36.0,
+                            transition_seconds=0.80,
+                            reason="simultaneous-multi-programme-change",
+                        ),
+                        payload={
+                            "programmes": [
+                                item.programme
+                                for item in simultaneous
+                            ]
+                        },
+                    )
+                )
 
             for branch_episode in forks_by_commit.get(commit, []):
                 beats.append(
