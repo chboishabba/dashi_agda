@@ -1922,6 +1922,9 @@ class ResearchEvolutionScene(MovingCameraScene):
             programme_memory_nodes=int(
                 os.environ.get("DASHI_FILM_MEMORY_NODES", "28")
             ),
+            pace_scale=float(
+                os.environ.get("DASHI_FILM_PACE", "1.0")
+            ),
         )
         if not plan.beats:
             self.add(Text("No semantic research-film beats", font_size=28))
