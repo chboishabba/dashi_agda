@@ -1581,6 +1581,35 @@ class ResearchAtlasGraphView(SemanticGraphView):
 class ResearchEvolutionScene(MovingCameraScene):
     """Directed semantic film of the evolving formal research programme."""
 
+    def _pin_hud(self, mobject, slot: str) -> None:
+        base_frame_width = float(self.camera.frame.width)
+        base_width = max(0.01, float(mobject.width))
+
+        def updater(mob):
+            frame = self.camera.frame
+            scale = float(frame.width) / max(0.01, base_frame_width)
+            mob.scale_to_fit_width(base_width * scale)
+
+            if slot == "title":
+                target = frame.get_top() + DOWN * (0.28 * scale)
+            elif slot == "programme":
+                target = frame.get_top() + DOWN * (0.72 * scale)
+            elif slot == "topic":
+                target = frame.get_top() + DOWN * (1.02 * scale)
+            elif slot == "date":
+                target = (
+                    frame.get_corner(DOWN + RIGHT)
+                    + UP * (0.28 * scale)
+                    + LEFT * (1.25 * scale)
+                )
+            else:
+                target = frame.get_bottom() + UP * (0.62 * scale)
+
+            mob.move_to(target)
+
+        mobject.add_updater(updater)
+        updater(mobject)
+
     def _focus_camera(
         self,
         view: ResearchAtlasGraphView,
@@ -1637,20 +1666,15 @@ class ResearchEvolutionScene(MovingCameraScene):
         policy = ManimRenderPolicy()
         view = ResearchAtlasGraphView(plan.regions, policy)
 
-        title = Text("Dashi formal research evolution", font_size=28).to_edge(UP)
-        programme_label = Text("", font_size=18).next_to(
-            title, DOWN, buff=0.10
-        )
-        topic_label = Text("", font_size=13).next_to(
-            programme_label, DOWN, buff=0.06
-        )
-        date_label = Text("", font_size=12).to_corner(DOWN + RIGHT, buff=0.16)
-        self.add_fixed_in_frame_mobjects(
-            title,
-            programme_label,
-            topic_label,
-            date_label,
-        )
+        title = Text("Dashi formal research evolution", font_size=28)
+        programme_label = Text("", font_size=18)
+        topic_label = Text("", font_size=13)
+        date_label = Text("", font_size=12)
+        self._pin_hud(title, "title")
+        self._pin_hud(programme_label, "programme")
+        self._pin_hud(topic_label, "topic")
+        self._pin_hud(date_label, "date")
+        self.add(title, programme_label, topic_label, date_label)
         self.play(FadeIn(title), run_time=0.35)
 
         admitted_nodes: set[str] = set()
@@ -1662,16 +1686,14 @@ class ResearchEvolutionScene(MovingCameraScene):
                 next_programme = Text(
                     beat.programme or "Unclassified",
                     font_size=18,
-                ).next_to(title, DOWN, buff=0.10)
+                )
                 next_topic = Text(
                     beat.topic or "formal development",
                     font_size=13,
-                ).next_to(next_programme, DOWN, buff=0.06)
-
-                self.add_fixed_in_frame_mobjects(
-                    next_programme,
-                    next_topic,
                 )
+                self._pin_hud(next_programme, "programme")
+                self._pin_hud(next_topic, "topic")
+                self.add(next_programme, next_topic)
                 self.play(
                     ReplacementTransform(
                         programme_label,
@@ -1692,6 +1714,31 @@ class ResearchEvolutionScene(MovingCameraScene):
                         set(beat.focus_node_ids),
                         beat.camera,
                     )
+                continue
+
+            if beat.kind in {
+                "branch-fork",
+                "branch-merge",
+                "pr-merge",
+            }:
+                if beat.camera is not None and graph_created:
+                    self._focus_camera(
+                        view,
+                        set(beat.focus_node_ids),
+                        beat.camera,
+                    )
+
+                event_text = beat.topic or beat.kind.replace("-", " ")
+                banner = Text(
+                    event_text,
+                    font_size=15,
+                )
+                self._pin_hud(banner, "event")
+                self.add(banner)
+                self.play(FadeIn(banner), run_time=0.18)
+                self.wait(max(0.05, beat.duration_seconds - 0.30))
+                self.play(FadeOut(banner), run_time=0.12)
+                self.remove(banner)
                 continue
 
             if beat.kind != "semantic-change" or beat.commit is None:
@@ -1730,8 +1777,9 @@ class ResearchEvolutionScene(MovingCameraScene):
                 f"{_commit_date(commits, current_commit)} · "
                 f"{current_commit[:10]}",
                 font_size=12,
-            ).to_corner(DOWN + RIGHT, buff=0.16)
-            self.add_fixed_in_frame_mobjects(next_date)
+            )
+            self._pin_hud(next_date, "date")
+            self.add(next_date)
             self.play(
                 ReplacementTransform(date_label, next_date),
                 run_time=0.12,
