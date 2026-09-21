@@ -332,9 +332,9 @@ literalFiniteR429EntropyBudget :
   shellEntropyPartial reserve
     (suc (R441.terminalDepth encoding))
   ≤ Geo.twoℚ
-literalFiniteR429EntropyBudget reserve =
+literalFiniteR429EntropyBudget {encoding = encoding} reserve =
   shellEntropyPartialBelowTwo reserve
-    (suc (R441.terminalDepth _))
+    (suc (R441.terminalDepth encoding))
 
 round442FiniteWholeFamilyEntropyBudgetLevel : ProofLevel
 round442FiniteWholeFamilyEntropyBudgetLevel = machineChecked
