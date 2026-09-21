@@ -282,3 +282,5 @@ compactSimpleClassificationEnumerationCountedAsPhysicalResearchLeaf = false
 
 round456ExactMinCutCompilerLevel : ProofLevel
 round456ExactMinCutCompilerLevel = machineChecked
+
+import DASHI.Physics.YangMills.YangMillsClayGoal1ReducedTerminalCompilerRound469Exact
