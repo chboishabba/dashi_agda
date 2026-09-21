@@ -215,6 +215,8 @@ import DASHI.Law.SourceRealisedLegalFollowAdapterExact
 import DASHI.Law.SourceRealisedLegalFollowAdapterRegression
 import DASHI.Law.QueryScopedWorldCoordinateImpactExact
 import DASHI.Law.QueryScopedWorldCoordinateImpactRegression
+import DASHI.Law.QueryWorldCoverageInvalidationExact
+import DASHI.Law.QueryWorldCoverageInvalidationRegression
 import DASHI.Law.MaboHistoricalRevisionShadowExact
 import DASHI.Law.MaboHistoricalRevisionShadowRegression
 import DASHI.Law.RevisionInvalidatedProjectionAdequacyExact
