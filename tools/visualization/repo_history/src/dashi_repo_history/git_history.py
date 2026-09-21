@@ -6,6 +6,7 @@ import subprocess
 
 from .agda import AgdaLanguageAdapter
 from .history_topology import derive_branch_episodes
+from .incremental import patch_semantic_graph, plan_incremental_impact
 from .language import LanguageAdapter
 from .model import CommitRecord, GraphDelta, SemanticSnapshot, Timeline
 
@@ -124,6 +125,35 @@ def read_blob(repo: Path, blob: str) -> bytes:
     return _run_bytes(repo, "cat-file", "-p", blob)
 
 
+def changed_source_paths(
+    repo: Path,
+    parent: str,
+    commit: str,
+    *,
+    suffixes: tuple[str, ...],
+    path_prefix: str | None = None,
+) -> list[str]:
+    raw = _run_bytes(
+        repo,
+        "diff",
+        "--name-only",
+        "-z",
+        parent,
+        commit,
+    )
+    paths: list[str] = []
+    for record in raw.split(b"\0"):
+        if not record:
+            continue
+        path = record.decode("utf-8", "replace")
+        if not path.endswith(suffixes):
+            continue
+        if path_prefix and not path.startswith(path_prefix):
+            continue
+        paths.append(path)
+    return sorted(set(paths))
+
+
 def select_commit_window(
     commits: list[CommitRecord],
     *,
@@ -187,11 +217,14 @@ class HistoryExtractor:
     def __post_init__(self) -> None:
         self.repo = self.repo.resolve()
         self._blob_cache: dict[tuple[str, str], object] = {}
+        self._extractions_cache: dict[str, list[object]] = {}
         self._graph_cache = {}
+        self._incremental_receipts: dict[str, object] = {}
 
-    def graph_at(self, commit: str):
-        if commit in self._graph_cache:
-            return self._graph_cache[commit]
+    def extractions_at(self, commit: str) -> list[object]:
+        cached = self._extractions_cache.get(commit)
+        if cached is not None:
+            return cached
 
         extractions: list[object] = []
         for path, blob in source_tree(
@@ -203,12 +236,61 @@ class HistoryExtractor:
             key = (path, blob)
             extraction = self._blob_cache.get(key)
             if extraction is None:
-                extraction = self.adapter.extract_file(path, read_blob(self.repo, blob))
+                extraction = self.adapter.extract_file(
+                    path,
+                    read_blob(self.repo, blob),
+                )
                 self._blob_cache[key] = extraction
             extractions.append(extraction)
 
-        graph = self.adapter.build_graph(extractions)
+        self._extractions_cache[commit] = extractions
+        return extractions
+
+    def graph_at(self, commit: str):
+        if commit in self._graph_cache:
+            return self._graph_cache[commit]
+
+        graph = self.adapter.build_graph(
+            self.extractions_at(commit)
+        )
         self._graph_cache[commit] = graph
+        return graph
+
+    def graph_from_parent(
+        self,
+        parent: str,
+        commit: str,
+    ):
+        cached = self._graph_cache.get(commit)
+        if cached is not None:
+            return cached
+
+        parent_graph = self._graph_cache.get(parent)
+        if parent_graph is None:
+            return self.graph_at(commit)
+
+        before = self.extractions_at(parent)
+        after = self.extractions_at(commit)
+        changed = changed_source_paths(
+            self.repo,
+            parent,
+            commit,
+            suffixes=self.adapter.suffixes,
+            path_prefix=self.path_prefix,
+        )
+        plan = plan_incremental_impact(
+            before,
+            after,
+            changed,
+        )
+        graph, receipt = patch_semantic_graph(
+            parent_graph,
+            before,
+            after,
+            plan,
+        )
+        self._graph_cache[commit] = graph
+        self._incremental_receipts[commit] = receipt
         return graph
 
     def timeline(
@@ -258,7 +340,22 @@ class HistoryExtractor:
         snapshots: list[SemanticSnapshot] = []
 
         for record in commits:
-            graph = self.graph_at(record.commit)
+            first_parent = (
+                record.parents[0]
+                if record.parents
+                else None
+            )
+            if (
+                first_parent is not None
+                and first_parent in self._graph_cache
+            ):
+                graph = self.graph_from_parent(
+                    first_parent,
+                    record.commit,
+                )
+            else:
+                graph = self.graph_at(record.commit)
+
             parent_deltas: dict[str, GraphDelta] = {}
             for parent in record.parents:
                 parent_graph = self.graph_at(parent)
