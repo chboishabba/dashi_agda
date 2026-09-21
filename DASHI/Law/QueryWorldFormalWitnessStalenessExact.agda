@@ -28,7 +28,7 @@ record CheckedFactorsThroughWitness : Set where
 record CheckedNonFactorabilityWitness : Set where
   constructor checkedNonFactorabilityWitness
   field
-    certifiedDigest : ProjectionDigest
+    negativeCertifiedDigest : ProjectionDigest
 
 open CheckedFactorsThroughWitness public
 open CheckedNonFactorabilityWitness public
