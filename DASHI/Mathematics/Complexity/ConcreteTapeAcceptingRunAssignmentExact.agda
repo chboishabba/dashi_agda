@@ -296,6 +296,134 @@ encodeAcceptingRunAssignment
             (Accepting.run certificate)))
         witnessAtFinishWidth
 
+
+------------------------------------------------------------------------
+-- Exact projections of the final assignment
+------------------------------------------------------------------------
+
+encodeRunBaseTrace_rows :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (run : Run.WellFormedTapeRun machine start rows finish) →
+  Canonical.takeBits
+    (Trace.RowsTraceWidth machine
+      (Run.runLength run)
+      (Canonical.listLength (Local.cells start)))
+    (encodeRunBaseTrace stateCoverage symbolCoverage run)
+  ≡ encodeRunRows stateCoverage symbolCoverage run
+encodeRunBaseTrace_rows stateCoverage symbolCoverage run =
+  Canonical.takeAppendBits
+    (encodeRunRows stateCoverage symbolCoverage run)
+    (encodeRunSelectors run)
+
+encodeRunBaseTrace_selectors :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (run : Run.WellFormedTapeRun machine start rows finish) →
+  Canonical.dropBits
+    (Trace.RowsTraceWidth machine
+      (Run.runLength run)
+      (Canonical.listLength (Local.cells start)))
+    (encodeRunBaseTrace stateCoverage symbolCoverage run)
+  ≡ encodeRunSelectors run
+encodeRunBaseTrace_selectors stateCoverage symbolCoverage run =
+  Canonical.dropAppendBits
+    (encodeRunRows stateCoverage symbolCoverage run)
+    (encodeRunSelectors run)
+
+encodeAcceptingRunAssignment_base :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (certificate :
+      Accepting.AcceptingWellFormedRun
+        machine start rows finish) →
+  Canonical.takeBits
+    (Trace.GlobalTraceWidth machine
+      (Accepting.acceptingRunLength certificate)
+      (Canonical.listLength (Local.cells start)))
+    (encodeAcceptingRunAssignment
+      stateCoverage symbolCoverage certificate)
+  ≡ encodeRunBaseTrace
+      stateCoverage symbolCoverage
+      (Accepting.run certificate)
+encodeAcceptingRunAssignment_base
+    stateCoverage symbolCoverage certificate =
+  Canonical.takeAppendBits
+    (encodeRunBaseTrace
+      stateCoverage symbolCoverage
+      (Accepting.run certificate))
+    _
+
+encodeAcceptingRunAssignment_witness :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (certificate :
+      Accepting.AcceptingWellFormedRun
+        machine start rows finish) →
+  Canonical.dropBits
+    (Trace.GlobalTraceWidth machine
+      (Accepting.acceptingRunLength certificate)
+      (Canonical.listLength (Local.cells start)))
+    (encodeAcceptingRunAssignment
+      stateCoverage symbolCoverage certificate)
+  ≡
+  castBits
+    (sym (runFinishCanonicalLength
+      (Accepting.run certificate)))
+    (acceptingWitnessBits (Accepting.accepting certificate))
+encodeAcceptingRunAssignment_witness
+    stateCoverage symbolCoverage certificate =
+  Canonical.dropAppendBits
+    (encodeRunBaseTrace
+      stateCoverage symbolCoverage
+      (Accepting.run certificate))
+    _
+
+encodeRunSelectors_head :
+  ∀ {machine current next tail finish}
+    (step : WF.WellFormedMachineStep machine current next)
+    (rest : Run.WellFormedTapeRun machine next tail finish) →
+  Canonical.takeBits (Selector.RuleWidth machine)
+    (encodeRunSelectors (Run.runStep step rest))
+  ≡ Selector.encodeRuleOccurs
+      (Local.ruleOccursInMachine (WF.step step))
+encodeRunSelectors_head step rest =
+  Canonical.takeAppendBits
+    (Selector.encodeRuleOccurs
+      (Local.ruleOccursInMachine (WF.step step)))
+    (encodeRunSelectors rest)
+
+encodeRunRows_head :
+  ∀ {machine current next tail finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (step : WF.WellFormedMachineStep machine current next)
+    (rest : Run.WellFormedTapeRun machine next tail finish) →
+  Canonical.takeBits
+    (Canonical.listLength (Local.cells current) *
+      Canonical.CellWidth machine)
+    (encodeRunRows stateCoverage symbolCoverage
+      (Run.runStep step rest))
+  ≡ Flat.encodeRow stateCoverage symbolCoverage current
+encodeRunRows_head stateCoverage symbolCoverage step rest =
+  Canonical.takeAppendBits
+    (Flat.encodeRow stateCoverage symbolCoverage _)
+    _
+
 record AcceptingRunAssignmentReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
