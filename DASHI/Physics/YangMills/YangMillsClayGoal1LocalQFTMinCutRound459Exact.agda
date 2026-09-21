@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact 
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as R123
 import DASHI.Physics.YangMills.BalabanSectorQFTRecoveryExportRound129Exact as R129
 import DASHI.Physics.YangMills.BalabanCommonMetricSectorRecoveryRound131Exact as R131
+import DASHI.Physics.YangMills.YangMillsClayGoal1StressSourceRound466Exact as R466
 
 c1LiteralSameCompletedCurvatureStressLevel : ProofLevel
 c1LiteralSameCompletedCurvatureStressLevel =
@@ -55,8 +56,20 @@ c3AllDepthCoefficientEqualityAfterOneStepLevel : ProofLevel
 c3AllDepthCoefficientEqualityAfterOneStepLevel =
   Recurrence.coefficientRGRecurrenceUniquenessLevel
 
-c4DensityAnchoredLiteralStressLaneLevel : ProofLevel
-c4DensityAnchoredLiteralStressLaneLevel =
+c1c4FiniteSameFamilyStressSourceLevel : ProofLevel
+c1c4FiniteSameFamilyStressSourceLevel =
+  R466.s12DensityAnchoredStressLaneLevel
+
+c1c4LiteralDensityDerivativeLevel : ProofLevel
+c1c4LiteralDensityDerivativeLevel =
+  R466.s2LiteralDensityNumeratorDenominatorDerivativeLevel
+
+c1c4SameFamilyOSRecoveryLevel : ProofLevel
+c1c4SameFamilyOSRecoveryLevel =
+  R466.s3SameFamilyOSStressRecoveryLevel
+
+c4DensityAnchoredLiteralStressLaneFallbackLevel : ProofLevel
+c4DensityAnchoredLiteralStressLaneFallbackLevel =
   R123.literalDensityAnchoredStressLaneInstantiationLevel
 
 c4ContinuumStressRecoveryAfterLaneLevel : ProofLevel
