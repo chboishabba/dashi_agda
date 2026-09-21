@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.YangMillsPhysicalOPERemainderSharedTailRound442Ex
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -20,6 +20,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.YangMillsSharedMarkedCompositeOPERemainderExact as SharedOPE
 import DASHI.Physics.YangMills.YangMillsContinuumLocalOperatorOPEStressTensorExact as Local
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 
 record PhysicalOPERemainderSharedTail
     (Index Scale Volume Root : Set) : Set₁ where
@@ -75,7 +76,7 @@ physicalRemainderMajorant dataSet index =
     ; Local.DyadicOPERemainderMajorant.remainderNonnegative =
         λ depth →
           subst
-            (λ value → _)
+            (λ value → 0ℚ ≤ value)
             (sym (physicalRemainderIsCompositeTail dataSet index depth))
             (Local.remainderNonnegative sourceMajorant depth)
     ; Local.DyadicOPERemainderMajorant.remainderBelowDyadic =
@@ -83,10 +84,10 @@ physicalRemainderMajorant dataSet index =
           subst
             (λ value →
               value
-              Data.Rational.Base.≤
+              ≤
               Local.coefficient sourceMajorant
-                Data.Rational.Base.*
-              DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.halfPower depth)
+                *
+              Geo.halfPower depth)
             (sym (physicalRemainderIsCompositeTail dataSet index depth))
             (Local.remainderBelowDyadic sourceMajorant depth)
     }
@@ -96,10 +97,10 @@ physicalOPERemainderModulus :
     (dataSet : PhysicalOPERemainderSharedTail Index Scale Volume Root)
     index depth →
   physicalRemainderMagnitude dataSet index depth
-  Data.Rational.Base.≤
+  ≤
   Local.coefficient (physicalRemainderMajorant dataSet index)
-    Data.Rational.Base.*
-  DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.halfPower depth
+    *
+  Geo.halfPower depth
 physicalOPERemainderModulus dataSet index =
   Local.explicitOPERemainderModulus
     (physicalRemainderMajorant dataSet index)
