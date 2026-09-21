@@ -19,6 +19,8 @@ files=(
   "DASHI/Biology/IonicMimicryGeometryExact.agda"
   "DASHI/Biology/TargetRelativeRecognitionFibreExact.agda"
   "DASHI/Biology/FiveHT2ACalciumIdentityGeometryBoundaryExact.agda"
+  "DASHI/Biology/TargetIndexedRecognitionGeometryExact.agda"
+  "DASHI/Biology/TargetIndexedRecognitionAdmissibleRegionExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -120,5 +122,19 @@ calcium="$root/DASHI/Biology/FiveHT2ACalciumIdentityGeometryBoundaryExact.agda"
 grep -Fq 'calciumSignalIsNotJustConcentration' "$calcium"
 grep -Fq 'leadMimicryIsNotPsychedelicMechanism' "$calcium"
 grep -Fq 'reporterIntensityDoesNotDetermineBindingGeometry' "$calcium"
+
+geometry="$root/DASHI/Biology/TargetIndexedRecognitionGeometryExact.agda"
+grep -Fq 'canonicalSamePairDifferentTargetWitness' "$geometry"
+grep -Fq 'targetAScoreIsZero' "$geometry"
+grep -Fq 'targetBScoreIsSix' "$geometry"
+grep -Fq 'targetBRejectsPair' "$geometry"
+grep -Fq 'canonicalAnisotropicRecognitionWitness' "$geometry"
+grep -Fq 'arbitraryWeightsDoNotBecomeAffinity' "$geometry"
+
+region="$root/DASHI/Biology/TargetIndexedRecognitionAdmissibleRegionExact.agda"
+grep -Fq 'canonicalSamePairDifferentRegionWitness' "$region"
+grep -Fq 'scalarScoreAcceptsCanonicalPair' "$region"
+grep -Fq 'hardRegionRejectsCanonicalPair' "$region"
+grep -Fq 'scalarAcceptanceDoesNotImplyHardGateAcceptance' "$region"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
