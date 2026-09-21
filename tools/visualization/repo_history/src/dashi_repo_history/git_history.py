@@ -424,9 +424,13 @@ class HistoryExtractor:
             ],
             "backend_decision": decision.to_dict(),
             "parity_receipts": list(self._parity_receipts),
-            "parity_all_passed": all(
-                bool(receipt.get("passed"))
-                for receipt in self._parity_receipts
+            "parity_all_passed": (
+                all(
+                    bool(receipt.get("passed"))
+                    for receipt in self._parity_receipts
+                )
+                if self._parity_receipts
+                else None
             ),
             "backend": getattr(
                 self.patch_backend,
