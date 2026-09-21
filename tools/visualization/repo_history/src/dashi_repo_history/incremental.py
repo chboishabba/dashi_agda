@@ -8,6 +8,161 @@ from .model import SemanticGraph
 
 
 @dataclass(frozen=True)
+class FileResolutionDeps:
+    path: str
+    module: str
+    imports: frozenset[str]
+    opens: frozenset[str]
+    qualified_hints: frozenset[str]
+
+
+def _file_resolution_deps(file: FileExtraction) -> FileResolutionDeps:
+    qualified_hints: set[str] = set()
+    for declaration in file.declarations:
+        for reference in declaration.references:
+            hint = _qualified_module_hint(reference.value)
+            if hint is not None:
+                qualified_hints.add(hint)
+            if reference.application_head:
+                head_hint = _qualified_module_hint(
+                    reference.application_head
+                )
+                if head_hint is not None:
+                    qualified_hints.add(head_hint)
+
+    return FileResolutionDeps(
+        path=file.path,
+        module=file.module,
+        imports=frozenset(file.imports),
+        opens=frozenset(
+            scope.module
+            for scope in file.open_scopes
+        ),
+        qualified_hints=frozenset(qualified_hints),
+    )
+
+
+@dataclass(frozen=True)
+class ResolutionImpactIndex:
+    by_path: dict[str, FileResolutionDeps]
+    importers_by_target: dict[str, frozenset[str]]
+    openers_by_target: dict[str, frozenset[str]]
+    qualified_users_by_target: dict[str, frozenset[str]]
+
+    @classmethod
+    def from_files(
+        cls,
+        files: Iterable[FileExtraction],
+    ) -> "ResolutionImpactIndex":
+        by_path = {
+            file.path: _file_resolution_deps(file)
+            for file in files
+        }
+        return cls._from_path_map(by_path)
+
+    @classmethod
+    def _from_path_map(
+        cls,
+        by_path: dict[str, FileResolutionDeps],
+    ) -> "ResolutionImpactIndex":
+        importers: dict[str, set[str]] = {}
+        openers: dict[str, set[str]] = {}
+        qualified: dict[str, set[str]] = {}
+
+        for deps in by_path.values():
+            for target in deps.imports:
+                importers.setdefault(target, set()).add(deps.module)
+            for target in deps.opens:
+                openers.setdefault(target, set()).add(deps.module)
+            for target in deps.qualified_hints:
+                qualified.setdefault(target, set()).add(deps.module)
+
+        return cls(
+            by_path=dict(by_path),
+            importers_by_target={
+                target: frozenset(users)
+                for target, users in importers.items()
+            },
+            openers_by_target={
+                target: frozenset(users)
+                for target, users in openers.items()
+            },
+            qualified_users_by_target={
+                target: frozenset(users)
+                for target, users in qualified.items()
+            },
+        )
+
+    def fork_apply(
+        self,
+        after_files_by_path: dict[str, FileExtraction],
+        changed_paths: Iterable[str],
+    ) -> "ResolutionImpactIndex":
+        """Copy-on-write update of resolution evidence for changed files only."""
+
+        changed_paths = tuple(sorted(set(changed_paths)))
+        by_path = dict(self.by_path)
+
+        importers = dict(self.importers_by_target)
+        openers = dict(self.openers_by_target)
+        qualified = dict(self.qualified_users_by_target)
+
+        def remove_user(
+            table: dict[str, frozenset[str]],
+            target: str,
+            module: str,
+        ) -> None:
+            current = table.get(target, frozenset())
+            if module not in current:
+                return
+            updated = current - {module}
+            if updated:
+                table[target] = frozenset(updated)
+            else:
+                table.pop(target, None)
+
+        def add_user(
+            table: dict[str, frozenset[str]],
+            target: str,
+            module: str,
+        ) -> None:
+            current = table.get(target, frozenset())
+            if module in current:
+                return
+            table[target] = frozenset((*current, module))
+
+        for path in changed_paths:
+            old = by_path.pop(path, None)
+            if old is not None:
+                for target in old.imports:
+                    remove_user(importers, target, old.module)
+                for target in old.opens:
+                    remove_user(openers, target, old.module)
+                for target in old.qualified_hints:
+                    remove_user(qualified, target, old.module)
+
+            new_file = after_files_by_path.get(path)
+            if new_file is None:
+                continue
+
+            new = _file_resolution_deps(new_file)
+            by_path[path] = new
+            for target in new.imports:
+                add_user(importers, target, new.module)
+            for target in new.opens:
+                add_user(openers, target, new.module)
+            for target in new.qualified_hints:
+                add_user(qualified, target, new.module)
+
+        return ResolutionImpactIndex(
+            by_path=by_path,
+            importers_by_target=importers,
+            openers_by_target=openers,
+            qualified_users_by_target=qualified,
+        )
+
+
+@dataclass(frozen=True)
 class IncrementalImpactPlan:
     changed_paths: tuple[str, ...]
     changed_modules: tuple[str, ...]
@@ -26,6 +181,74 @@ def _qualified_module_hint(reference: str) -> str | None:
     if len(pieces) < 2:
         return None
     return ".".join(pieces[:-1])
+
+
+def plan_incremental_impact_indexed(
+    before_index: ResolutionImpactIndex,
+    after_index: ResolutionImpactIndex,
+    changed_paths: Iterable[str],
+) -> IncrementalImpactPlan:
+    changed_paths = tuple(sorted(set(changed_paths)))
+    changed_modules: set[str] = set()
+
+    for path in changed_paths:
+        old = before_index.by_path.get(path)
+        new = after_index.by_path.get(path)
+        if old is not None:
+            changed_modules.add(old.module)
+        if new is not None:
+            changed_modules.add(new.module)
+
+    affected = set(changed_modules)
+    reasons: set[tuple[str, str]] = {
+        (module, "changed-module")
+        for module in changed_modules
+    }
+
+    for changed_module in sorted(changed_modules):
+        for consumer in after_index.importers_by_target.get(
+            changed_module,
+            frozenset(),
+        ):
+            affected.add(consumer)
+            reasons.add(
+                (
+                    consumer,
+                    f"imports-changed-module:{changed_module}",
+                )
+            )
+
+        for consumer in after_index.openers_by_target.get(
+            changed_module,
+            frozenset(),
+        ):
+            affected.add(consumer)
+            reasons.add(
+                (
+                    consumer,
+                    f"opens-changed-module:{changed_module}",
+                )
+            )
+
+        for consumer in after_index.qualified_users_by_target.get(
+            changed_module,
+            frozenset(),
+        ):
+            affected.add(consumer)
+            reasons.add(
+                (
+                    consumer,
+                    "qualified-reference-to-changed-module:"
+                    f"{changed_module}",
+                )
+            )
+
+    return IncrementalImpactPlan(
+        changed_paths=changed_paths,
+        changed_modules=tuple(sorted(changed_modules)),
+        affected_modules=tuple(sorted(affected)),
+        reasons=tuple(sorted(reasons)),
+    )
 
 
 def plan_incremental_impact(
