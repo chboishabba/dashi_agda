@@ -219,6 +219,11 @@ def main() -> int:
     ap.add_argument("--fulltext-index", type=Path)
     ap.add_argument("--screening-ledger", type=Path)
     ap.add_argument("--output-dir", type=Path)
+    ap.add_argument(
+        "--max-items",
+        type=int,
+        help="parse at most N verified artifacts; omitted means all verified artifacts",
+    )
     ap.add_argument("--allow-partial", action="store_true")
     ap.add_argument("--slr-review-receipts", type=Path)
     ap.add_argument("--source-audit-receipts", type=Path)
@@ -251,9 +256,17 @@ def main() -> int:
         raise FileNotFoundError(fulltext_index)
 
     rows = read_tsv(fulltext_index)
-    verified = [row for row in rows if row.get("status") == "verified"]
-    if not verified:
+    verified_all = [row for row in rows if row.get("status") == "verified"]
+    if not verified_all:
         raise RuntimeError("full-text index contains no verified artifacts")
+
+    verified_all.sort(key=lambda row: str(row.get("source_identity_reference") or ""))
+    if args.max_items is not None:
+        if args.max_items < 1:
+            raise ValueError("--max-items must be >= 1")
+        verified = verified_all[: args.max_items]
+    else:
+        verified = verified_all
 
     materialized_dir = output_dir / "materialized-text"
     materialized_dir.mkdir(parents=True, exist_ok=True)
@@ -463,7 +476,8 @@ def main() -> int:
 
     receipt = {
         "schema": "digital-esd-verified-fulltext-parse-run-v1",
-        "verified_fulltext_input_count": len(verified),
+        "verified_fulltext_total_count": len(verified_all),
+        "selected_for_parse_count": len(verified),
         "materialized_text_count": len(materialization_receipts),
         "materialization_failure_count": len(failures),
         "handed_to_slr_count": len(handoff_receipts),
