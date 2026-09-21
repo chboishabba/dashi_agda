@@ -1,6 +1,7 @@
 module DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact as Sources
