@@ -27,6 +27,7 @@ files=(
   "DASHI/Biology/TargetRecognitionFibrationExact.agda"
   "DASHI/Biology/FiveHT2ARecognitionResidualProjectionExact.agda"
   "DASHI/Biology/FiveHT2AProjectionTowerExact.agda"
+  "DASHI/Biology/TargetRecognitionBundleFibreExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -181,5 +182,12 @@ grep -Fq 'recognitionStatesCollapseAtSignaling' "$tower"
 grep -Fq 'recognitionPerceptComposition' "$tower"
 grep -Fq 'signalingProjectionNotFaithful' "$tower"
 grep -Fq 'perceptDoesNotDetermineLigand' "$tower"
+
+bundle="$root/DASHI/Biology/TargetRecognitionBundleFibreExact.agda"
+grep -Fq 'recognitionProjectionFibre' "$bundle"
+grep -Fq 'permissiveFibrePoint' "$bundle"
+grep -Fq 'strictFibrePoint' "$bundle"
+grep -Fq 'sectionProjectsToBase' "$bundle"
+grep -Fq 'bundlePointsDistinct' "$bundle"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
