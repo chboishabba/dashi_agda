@@ -78,6 +78,8 @@ def track_symbol_history(
     target_commit: str | None = None,
     upstream_depth: int = 2,
     downstream_depth: int = 0,
+    max_nodes: int = 250,
+    max_edges: int = 800,
 ) -> list[TemporalFocusFrame]:
     lineage = first_parent_snapshot_lineage(
         timeline,
@@ -145,6 +147,8 @@ def track_symbol_history(
             root_id,
             upstream_depth=upstream_depth,
             downstream_depth=downstream_depth,
+            max_nodes=max_nodes,
+            max_edges=max_edges,
         )
         frames.append(
             TemporalFocusFrame(
