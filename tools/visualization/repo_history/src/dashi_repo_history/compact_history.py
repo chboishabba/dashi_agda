@@ -194,7 +194,7 @@ def compact_timeline(
 
         materialized[sha] = deepcopy(graph)
 
-    return {
+    result = {
         "schema": COMPACT_SCHEMA,
         "checkpoint_interval": checkpoint_interval,
         "commits": deepcopy(commits),
@@ -202,11 +202,13 @@ def compact_timeline(
         "branch_episodes": deepcopy(
             timeline.get("branch_episodes", [])
         ),
-        "pull_requests": deepcopy(
-            timeline.get("pull_requests", [])
-        ),
         "semantic_states": states,
     }
+    if "pull_requests" in timeline:
+        result["pull_requests"] = deepcopy(
+            timeline.get("pull_requests", [])
+        )
+    return result
 
 
 def expand_timeline(compact: dict[str, Any]) -> dict[str, Any]:
@@ -247,18 +249,20 @@ def expand_timeline(compact: dict[str, Any]) -> dict[str, Any]:
             }
         )
 
-    return {
+    result = {
         "schema": EXPANDED_SCHEMA,
         "commits": deepcopy(compact.get("commits", [])),
         "refs": deepcopy(compact.get("refs", {})),
         "branch_episodes": deepcopy(
             compact.get("branch_episodes", [])
         ),
-        "pull_requests": deepcopy(
-            compact.get("pull_requests", [])
-        ),
         "snapshots": snapshots,
     }
+    if "pull_requests" in compact:
+        result["pull_requests"] = deepcopy(
+            compact.get("pull_requests", [])
+        )
+    return result
 
 
 def load_history_file(path: str | Path) -> dict[str, Any]:
