@@ -1188,3 +1188,93 @@ or construct `SourceAuditAdmission`.
 The first real parse round is therefore blocked only on the reviewed screening
 overlay / retained full-text artifacts, not on missing parser or extraction
 machinery.
+
+
+## 29. First retained study reaches the real P0-G parser lane
+
+A real retained ERIC study has now exercised the concrete Digital-ESD full-text
+study parser rather than only metadata/screening machinery.
+
+Observed source:
+
+`ERIC:EJ1083370`
+
+Observed runtime chain:
+
+```text
+retained ERIC study
+-> PDF fetch/cache
+-> exact source SHA-256
+-> pdftotext-layout materialisation
+-> exact derived-text SHA-256
+-> page/character anchors
+-> scholarly parser
+-> 1298 anchored document nodes
+-> 13 candidate study-facet families
+```
+
+Exact observed coordinates:
+
+```text
+PDF bytes                 931903
+source SHA-256            f48bad56d0874bb6ed2d109e10ebf495d30534e7e5ce74b8e5800541f6619b89
+pages                     30
+characters                110188
+derived-text SHA-256      cc248168e15089e8cb76a6ced160afc70e0ff64f74e01cd9140ae03d2eb679e0
+document nodes            1298
+candidate facet families  13
+```
+
+The 13 candidate facet families are Population, Sample, Intervention, Outcome,
+StudyDesign, Setting, TimePeriod, Method, Limitation, Funding, Institution,
+ParticipantGroup and Measurement.
+
+The observed receipt is formalised in:
+
+`DASHI/Education/DigitalESDFirstRetainedStudyParseExact.agda`
+
+with RED-first regression:
+
+`DASHI/Education/DigitalESDFirstRetainedStudyParseRegression.agda`.
+
+Runtime same-object verification is owned by:
+
+`interop_scripts/digital_esd/verify_observed_study_parse_receipt.py`.
+
+The verifier requires agreement across `requests.jsonl`, `verified.jsonl` and
+`parser-output.jsonl` for source identity, revision, source hash, derived-text
+hash, page/node/facet counts and all candidate/non-promotion flags.
+
+### What this pays
+
+```text
+real retained-paper retrieval              PAID for first study
+real PDF materialisation                   PAID for first study
+exact derived-text identity                PAID for first study
+anchored document-node production          PAID for first study
+candidate study-facet location generation  PAID for first study
+```
+
+### What remains unpaid
+
+```text
+facet candidate -> reviewed study fact             OPEN
+facet candidate -> one of 19 extraction coordinates OPEN
+study claim-ceiling review                         OPEN
+intersectional absence review                      OPEN
+material/environmental study review                OPEN
+SourceAuditAdmission                               OPEN
+CorpusAuditedSource                                OPEN
+framework challenge / corpus revision              OPEN
+full retained-corpus study parse                   OPEN
+```
+
+This is therefore the first concrete P0-G execution witness, not a reviewed
+study and not a complete corpus parse.
+
+The immediate ESD frontier is now to review the anchored candidate facet
+locations for a small retained-study tranche, pay the existing extraction
+coordinates explicitly, and only then feed reviewed source observations into
+the audit/hyperfabric/framework-challenge lane. The generic parser architecture
+should not be reopened unless those real review packets expose a missing
+consumer coordinate.
