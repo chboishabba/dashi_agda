@@ -157,6 +157,10 @@ artifacts/digital-esd/real-eric/slr-parse/
     verified.jsonl
   slr-parse-receipts.jsonl
   study_processing_census_with_parse.json
+  study-processing-ledger.jsonl
+  study-processing-ledger-manifest.json
+  fulltext-retrieval-residual.jsonl
+  fulltext-retrieval-residual-manifest.json
   verified-fulltext-parse-run.json
 ```
 
@@ -182,3 +186,60 @@ For a bounded parser smoke pass add:
 The L1→L5 wrapper delegates L1→L3 entirely to the generic SLR runtime and then
 uses the verified-full-text parse bridge above. It does not copy ERIC parsing,
 screening, full-text indexing, or scholarly parsing semantics into dashi_agda.
+
+
+## Processing denominator and next-retrieval residual
+
+Every verified-full-text parse run now also executes:
+
+`build_processing_ledger.py`
+
+which emits one processing row for every ERIC metadata record. For the current
+corpus that means **43,996 processing rows**, even when only a small number of
+full-text artifacts exist.
+
+Per source the ledger records observed membership in:
+
+```text
+authoritative screening decision
+include/probable retained set
+verified full text
+text materialised
+handed to SLR
+parsed by SLR
+reviewed canonical evidence
+SourceAuditAdmission
+```
+
+Each later stage is accepted only when its earlier-stage receipt is present.
+Later stages are never used to infer missing earlier receipts.
+
+The same run then executes:
+
+`build_fulltext_retrieval_residual.py`
+
+which emits only records that are:
+
+```text
+authoritatively include/probable
+AND
+do not yet have verified full-text bytes
+```
+
+Unreviewed metadata-only records are not counted as retrieval failures and do
+not enter that queue.
+
+The observed EJ1083370 smoke run therefore means exactly:
+
+```text
+metadata denominator              43,996
+verified full-text available           1
+materialised text                      1
+handed to SLR                          1
+parsed by SLR                          1
+reviewed canonical evidence            0
+SourceAuditAdmission                   0
+```
+
+That does not imply the other 43,995 records failed parsing; they have not
+reached that stage.
