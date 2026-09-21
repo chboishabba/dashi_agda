@@ -409,3 +409,5 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1PresentCutRound472Exact
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact
 import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact
+
+import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact
