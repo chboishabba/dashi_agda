@@ -507,3 +507,5 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1StressSourceRound466Exact
 import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1ReducedTerminalCompilerRound469Exact
+
+import DASHI.Physics.YangMills.BalabanLiteralFourReceiptBetaRound471Exact
