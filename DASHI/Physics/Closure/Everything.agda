@@ -440,3 +440,5 @@ import DASHI.Physics.Closure.NSTriadKNLiteralInfinityShellBernsteinPaymentExact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact
 
 import DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact
+
+import DASHI.Physics.Closure.NSClayFacingATwoPhysicalSeamCompilerExact
