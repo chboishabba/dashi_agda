@@ -118,6 +118,17 @@ jurisdictionSemantics :
 jurisdictionSemantics =
   Query.querySemantics jurisdictionAnswer
 
+jurisdictionFactorisation :
+  (world : LegalWorld) →
+  jurisdictionAnswer askQldOutcome world
+  ≡
+  (λ { qldSurface → qldAnswer
+     ; nswSurface → nswAnswer })
+    (jurisdictionProject world)
+jurisdictionFactorisation world with jurisdiction world
+... | qld = refl
+... | nsw = refl
+
 jurisdictionProjectionAdequate :
   Query.AdequateFor
     jurisdictionProject
@@ -127,10 +138,7 @@ jurisdictionProjectionAdequate =
   Query.factorsForQuery
     (λ { qldSurface → qldAnswer
        ; nswSurface → nswAnswer })
-    (λ world →
-      case jurisdiction world of λ where
-        qld → refl
-        nsw → refl)
+    jurisdictionFactorisation
 
 ------------------------------------------------------------------------
 -- Revision change -> exact dependency reopening path.
