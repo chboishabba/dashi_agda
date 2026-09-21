@@ -427,10 +427,7 @@ indexedLegalToRawSemantic
           Indexed.forgetIndex
             (Same.decodedAdjacentWindow
               stateCoverage symbolCoverage timeSlot start globalBits)
-      ; Semantic.ruleExact =
-          sym
-            (WholeDecoded.semanticRule_eq_ruleAtTime
-              fakeSemantic)
+      ; Semantic.ruleExact = ruleExact
       ; Semantic.windowExact =
           sym
             (Same.decodedRawWindowEqualsAdjacentRowsWindow
@@ -439,38 +436,14 @@ indexedLegalToRawSemantic
       ; Semantic.legal = current
       }
       where
-        fakeSemantic :
-          Semantic.RawDecodedWindowSemantic
-            stateCoverage symbolCoverage nonempty
-            timeSlot start globalBits
-        fakeSemantic = record
-          { Semantic.rule =
-              Semantic.decodedSelectedRule nonempty rawBits
-          ; Semantic.window =
-              Semantic.decodedSelectedWindow
-                stateCoverage symbolCoverage rawBits
-          ; Semantic.ruleExact = refl
-          ; Semantic.windowExact = refl
-          ; Semantic.legal =
-              transportLegal current
-          }
-
-        transportLegal :
-          Pattern.LegalWindowForRule machine
-            (WholeDecoded.ruleAtTime nonempty timeSlot globalBits)
-            (Indexed.forgetIndex
-              (Same.decodedAdjacentWindow
-                stateCoverage symbolCoverage timeSlot start globalBits)) →
-          Pattern.LegalWindowForRule machine
-            (Semantic.decodedSelectedRule nonempty rawBits)
-            (Semantic.decodedSelectedWindow
-              stateCoverage symbolCoverage rawBits)
-        transportLegal legal
-          rewrite WholeDecoded.rawRuleEq
-                | Same.decodedRawWindowEqualsAdjacentRowsWindow
-                    stateCoverage symbolCoverage nonempty
-                    timeSlot start globalBits =
-          legal
+        ruleExact :
+          WholeDecoded.ruleAtTime nonempty timeSlot globalBits
+          ≡ Semantic.decodedSelectedRule nonempty rawBits
+        ruleExact =
+          cong (Selector.decodeRule nonempty)
+            (sym
+              (Same.rawSelectedRuleBits_eq_selectorSliceBits
+                timeSlot start globalBits))
 
 ------------------------------------------------------------------------
 -- One encoded run step yields the semantic raw scan at that slot
