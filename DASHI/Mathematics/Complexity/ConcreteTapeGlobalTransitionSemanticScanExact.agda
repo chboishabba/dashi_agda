@@ -8,6 +8,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionSemanticScanExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_; _,_)
@@ -19,8 +21,10 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact as Trace
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.ConcreteTapeRawGlobalWindowCNFExact as Raw
 import DASHI.Mathematics.Complexity.ConcreteTapeArbitrarySelectedWindowSemanticExact as Semantic
+import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionConjunctionExact as Transition
 import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
+import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 ------------------------------------------------------------------------
@@ -271,7 +275,7 @@ oneTimeSemanticToPlaced
       timeSlot rest globalBits remaining)
   where
     decodedLegal :
-      DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact.LegalWindowForRule
+      Pattern.LegalWindowForRule
         machine
         (Semantic.decodedSelectedRule nonempty
           (Raw.rawSelectedWindowBits timeSlot start globalBits))
@@ -287,7 +291,7 @@ oneTimeSemanticToPlaced
       Placed.predicate
         (Raw.rawSelectedWindowPlacedPredicate
           stateCoverage symbolCoverage nonempty timeSlot start)
-        (DASHI.Mathematics.Complexity.CNFVariableRenamingExact.pullbackBits
+        (Rename.pullbackBits
           (Placed.rename
             (Raw.rawSelectedWindowPlacedPredicate
               stateCoverage symbolCoverage nonempty timeSlot start))
