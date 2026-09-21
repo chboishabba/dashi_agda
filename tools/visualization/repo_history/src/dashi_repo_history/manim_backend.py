@@ -1536,7 +1536,11 @@ class ResearchAtlasGraphView(SemanticGraphView):
         }
 
         if added_nodes:
-            new_vertices = self.graph.add_vertices(
+            existing_before_add = (
+                self.current_nodes
+                - set(removed_nodes)
+            )
+            self.graph.add_vertices(
                 *added_nodes,
                 positions={
                     node: target_layout[node]
@@ -1550,10 +1554,59 @@ class ResearchAtlasGraphView(SemanticGraphView):
                     for node in added_nodes
                 },
             )
-            scene.play(
-                GrowFromCenter(new_vertices),
-                run_time=run_time / 2,
+
+            relation_rank = {
+                kind: index
+                for index, kind in enumerate(
+                    self.policy.edges.priority
+                )
+            }
+            relations = sorted(
+                graph_data.get("edges", []),
+                key=lambda edge: (
+                    relation_rank.get(
+                        edge.get("kind", "depends"),
+                        10**6,
+                    ),
+                    edge.get("relation_id", ""),
+                ),
             )
+            reveal_animations = []
+            for node in added_nodes:
+                precursor = None
+                for edge in relations:
+                    if edge["source"] == node:
+                        other = edge["target"]
+                    elif edge["target"] == node:
+                        other = edge["source"]
+                    else:
+                        continue
+                    if (
+                        other in existing_before_add
+                        and other in self.graph.vertices
+                    ):
+                        precursor = other
+                        break
+
+                if precursor is not None:
+                    reveal_animations.append(
+                        TransformFromCopy(
+                            self.graph.vertices[precursor],
+                            self.graph.vertices[node],
+                        )
+                    )
+                else:
+                    reveal_animations.append(
+                        GrowFromCenter(
+                            self.graph.vertices[node]
+                        )
+                    )
+
+            if reveal_animations:
+                scene.play(
+                    *reveal_animations,
+                    run_time=run_time / 2,
+                )
 
         if added_edges:
             new_edges = self.graph.add_edges(
