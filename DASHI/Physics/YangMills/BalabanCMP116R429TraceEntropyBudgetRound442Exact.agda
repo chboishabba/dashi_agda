@@ -255,6 +255,90 @@ shellEntropyPaymentBelowHalfPower {encoding = encoding} reserve depth =
     (eightPowerTimesSixteenthPowerIsHalfPower depth)
     productBound
 
+
+------------------------------------------------------------------------
+-- Finite whole-family entropy budget.
+------------------------------------------------------------------------
+
+shellEntropyPayment :
+  ∀ {Measure TestObservable dataSet extension base fourStage domainTreeDistance}
+    {encoding :
+      R441.R429RootedTraceShellEncoding
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} {base = base}
+        fourStage domainTreeDistance} →
+  R429TraceEntropyReserve encoding →
+  Nat → ℚ
+shellEntropyPayment {encoding = encoding} reserve depth =
+  Shell.natAsRational
+      (List.length (R441.domainsAtDepth encoding depth))
+    * residualEntropyWeight reserve depth
+
+shellEntropyPartial :
+  ∀ {Measure TestObservable dataSet extension base fourStage domainTreeDistance}
+    {encoding :
+      R441.R429RootedTraceShellEncoding
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} {base = base}
+        fourStage domainTreeDistance} →
+  R429TraceEntropyReserve encoding →
+  Nat → ℚ
+shellEntropyPartial reserve zero = 0ℚ
+shellEntropyPartial reserve (suc depth) =
+  shellEntropyPartial reserve depth
+  + shellEntropyPayment reserve depth
+
+shellEntropyPartialBelowTracePartial :
+  ∀ {Measure TestObservable dataSet extension base fourStage domainTreeDistance}
+    {encoding :
+      R441.R429RootedTraceShellEncoding
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} {base = base}
+        fourStage domainTreeDistance}
+    (reserve : R429TraceEntropyReserve encoding)
+    depth →
+  shellEntropyPartial reserve depth
+  ≤ Geo.traceShellPartialSum depth
+shellEntropyPartialBelowTracePartial reserve zero =
+  ℚP.≤-refl
+shellEntropyPartialBelowTracePartial reserve (suc depth) =
+  ℚP.+-mono-≤
+    (shellEntropyPartialBelowTracePartial reserve depth)
+    (shellEntropyPaymentBelowHalfPower reserve depth)
+
+shellEntropyPartialBelowTwo :
+  ∀ {Measure TestObservable dataSet extension base fourStage domainTreeDistance}
+    {encoding :
+      R441.R429RootedTraceShellEncoding
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} {base = base}
+        fourStage domainTreeDistance}
+    (reserve : R429TraceEntropyReserve encoding)
+    depth →
+  shellEntropyPartial reserve depth ≤ Geo.twoℚ
+shellEntropyPartialBelowTwo reserve depth =
+  ℚP.≤-trans
+    (shellEntropyPartialBelowTracePartial reserve depth)
+    (Geo.traceShellPartialSumBelowTwo depth)
+
+literalFiniteR429EntropyBudget :
+  ∀ {Measure TestObservable dataSet extension base fourStage domainTreeDistance}
+    {encoding :
+      R441.R429RootedTraceShellEncoding
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} {base = base}
+        fourStage domainTreeDistance}
+    (reserve : R429TraceEntropyReserve encoding) →
+  shellEntropyPartial reserve
+    (suc (R441.terminalDepth encoding))
+  ≤ Geo.twoℚ
+literalFiniteR429EntropyBudget reserve =
+  shellEntropyPartialBelowTwo reserve
+    (suc (R441.terminalDepth _))
+
+round442FiniteWholeFamilyEntropyBudgetLevel : ProofLevel
+round442FiniteWholeFamilyEntropyBudgetLevel = machineChecked
+
 round442EightOverSixteenArithmeticLevel : ProofLevel
 round442EightOverSixteenArithmeticLevel = machineChecked
 
