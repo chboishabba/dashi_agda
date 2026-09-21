@@ -137,7 +137,12 @@ def _program(args: argparse.Namespace) -> None:
     data = load_history_file(args.input)
 
     if args.scene == "research-film":
-        payload = compile_research_film(data).to_dict()
+        payload = compile_research_film(
+            data,
+            max_context_nodes=args.film_context_nodes,
+            max_context_edges=args.film_context_edges,
+            programme_memory_nodes=args.programme_memory_nodes,
+        ).to_dict()
         rendered = json.dumps(payload, indent=2)
         if args.output:
             Path(args.output).write_text(
@@ -215,6 +220,8 @@ def _film(args: argparse.Namespace) -> None:
     data = load_history_file(args.input)
     plan = compile_research_film(
         data,
+        max_context_nodes=args.film_context_nodes,
+        max_context_edges=args.film_context_edges,
         programme_memory_nodes=args.programme_memory_nodes,
     )
 
@@ -637,6 +644,9 @@ def build_parser() -> argparse.ArgumentParser:
     program.add_argument("--downstream-depth", type=int, default=0)
     program.add_argument("--max-focus-nodes", type=int, default=250)
     program.add_argument("--max-focus-edges", type=int, default=800)
+    program.add_argument("--film-context-nodes", type=int, default=40)
+    program.add_argument("--film-context-edges", type=int, default=100)
+    program.add_argument("--programme-memory-nodes", type=int, default=28)
     program.set_defaults(func=_program)
 
     film = sub.add_parser(
@@ -644,6 +654,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="Inspect the directed research-film plan before rendering.",
     )
     film.add_argument("input")
+    film.add_argument("--film-context-nodes", type=int, default=40)
+    film.add_argument("--film-context-edges", type=int, default=100)
     film.add_argument(
         "--programme-memory-nodes",
         type=int,
