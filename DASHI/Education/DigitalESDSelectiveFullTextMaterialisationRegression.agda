@@ -29,3 +29,19 @@ evictionCannotDestroyUnpaidEvidence :
   Sparse.UnprocessedArtifactMayBeEvictedAsPaid → ⊥
 evictionCannotDestroyUnpaidEvidence =
   Sparse.unprocessedArtifactDoesNotBecomeEvictable
+
+
+metadataOnlyUnreviewedCannotCreateRetrievalResidual :
+  Material.MetadataOnlyUnreviewedCreatesRetrievalResidual → ⊥
+metadataOnlyUnreviewedCannotCreateRetrievalResidual =
+  Material.metadataOnlyUnreviewedDoesNotCreateRetrievalResidual
+
+retrievalResidualCannotCreateSourceTruth :
+  Material.RetrievalResidualCreatesSourceTruth → ⊥
+retrievalResidualCannotCreateSourceTruth =
+  Material.retrievalResidualDoesNotCreateSourceTruth
+
+retrievalResidualCannotCreateReviewedEvidence :
+  Material.RetrievalResidualCreatesReviewedEvidence → ⊥
+retrievalResidualCannotCreateReviewedEvidence =
+  Material.retrievalResidualDoesNotCreateReviewedEvidence
