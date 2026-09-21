@@ -157,6 +157,14 @@ record QueryWorldAutonomousRunControllerBoundary : Set where
     staleNegativeWitnessMayReopenCurrentWorldIsFalse :
       staleNegativeWitnessMayReopenCurrentWorld ≡ false
 
+    runMayStopMeansOperationalFrontierClosed : Bool
+    runMayStopMeansOperationalFrontierClosedIsFalse :
+      runMayStopMeansOperationalFrontierClosed ≡ false
+
+    operationalFrontierClosedMeansConsumerAdequate : Bool
+    operationalFrontierClosedMeansConsumerAdequateIsFalse :
+      operationalFrontierClosedMeansConsumerAdequate ≡ false
+
     controllerCreatesSemanticAuthority : Bool
     controllerCreatesSemanticAuthorityIsFalse :
       controllerCreatesSemanticAuthority ≡ false
@@ -176,6 +184,8 @@ canonicalQueryWorldAutonomousRunControllerBoundary =
     false refl
     true refl
     true refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
