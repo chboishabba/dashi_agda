@@ -156,12 +156,13 @@ selectedPairAdmissible :
       {R318.Scale base} {R318.Volume base} demands)
     (R318.scaleOf base cutoff)
     (R318.volumeOf base cutoff)
-selectedPairAdmissible demands source selected cutoff observable time =
+selectedPairAdmissible {base = base}
+    demands source selected cutoff observable time =
   Common.sourceCoordinateInside
     (R114.canonicalCMP116CommonDomain
-      {R318.Scale _} {R318.Volume _} demands)
-    (R318.scaleOf _ cutoff)
-    (R318.volumeOf _ cutoff)
+      {R318.Scale base} {R318.Volume base} demands)
+    (R318.scaleOf base cutoff)
+    (R318.volumeOf base cutoff)
 
 ------------------------------------------------------------------------
 -- Published CMP116 theorem specialized to the literal selected pair.
