@@ -1579,6 +1579,44 @@ class ResearchAtlasGraphView(SemanticGraphView):
         self.current_graph_data = graph_data
 
 
+def _research_time_rail(
+    commits: dict[str, dict[str, Any]],
+):
+    timestamps = [
+        int(commit.get("timestamp", 0))
+        for commit in commits.values()
+        if commit.get("timestamp") is not None
+    ]
+    if not timestamps:
+        return VGroup(), None, None, None
+
+    minimum = min(timestamps)
+    maximum = max(timestamps)
+    line = Line(
+        [0.0, -2.0, 0.0],
+        [0.0, 2.0, 0.0],
+    )
+    marker = Dot(radius=0.055).move_to(line.get_bottom())
+    oldest = Text(
+        format_timestamp_date(minimum),
+        font_size=8,
+    ).next_to(line, DOWN, buff=0.08)
+    newest = Text(
+        format_timestamp_date(maximum),
+        font_size=8,
+    ).next_to(line, UP, buff=0.08)
+    caption = Text(
+        "time",
+        font_size=8,
+    ).next_to(line, LEFT, buff=0.08)
+    return (
+        VGroup(line, marker, oldest, newest, caption),
+        line,
+        marker,
+        (minimum, maximum),
+    )
+
+
 class ResearchEvolutionScene(MovingCameraScene):
     """Directed semantic film of the evolving formal research programme."""
 
@@ -1604,6 +1642,11 @@ class ResearchEvolutionScene(MovingCameraScene):
                     frame.get_corner(DOWN + RIGHT)
                     + UP * (0.28 * scale)
                     + LEFT * (1.25 * scale)
+                )
+            elif slot == "timeline":
+                target = (
+                    frame.get_right()
+                    + LEFT * (0.48 * scale)
                 )
             else:
                 target = frame.get_bottom() + UP * (0.62 * scale)
@@ -1687,6 +1730,9 @@ class ResearchEvolutionScene(MovingCameraScene):
             snapshot["commit"]: snapshot
             for snapshot in data.get("snapshots", [])
         }
+        time_rail, time_line, time_marker, time_bounds = (
+            _research_time_rail(commits)
+        )
 
         policy = ManimRenderPolicy()
         view = ResearchAtlasGraphView(plan.regions, policy)
@@ -1701,12 +1747,15 @@ class ResearchEvolutionScene(MovingCameraScene):
         self._pin_hud(topic_label, "topic")
         self._pin_hud(work_label, "work")
         self._pin_hud(date_label, "date")
+        if len(time_rail) > 0:
+            self._pin_hud(time_rail, "timeline")
         self.add(
             title,
             programme_label,
             topic_label,
             work_label,
             date_label,
+            time_rail,
         )
 
         region_labels = VGroup(
@@ -1868,6 +1917,27 @@ class ResearchEvolutionScene(MovingCameraScene):
                 run_time=0.12,
             )
             date_label = next_date
+
+            if (
+                time_line is not None
+                and time_marker is not None
+                and time_bounds is not None
+                and commit.get("timestamp") is not None
+            ):
+                minimum, maximum = time_bounds
+                timestamp = int(commit["timestamp"])
+                fraction = (
+                    0.0
+                    if maximum <= minimum
+                    else (timestamp - minimum) / (maximum - minimum)
+                )
+                fraction = min(1.0, max(0.0, fraction))
+                self.play(
+                    time_marker.animate.move_to(
+                        time_line.point_from_proportion(fraction)
+                    ),
+                    run_time=0.10,
+                )
 
             payload = beat.payload or {}
             changed_symbols = payload.get("changed_symbols", [])
