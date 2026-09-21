@@ -142,6 +142,49 @@ realizedCentralWindowIsLegal =
   legal-centered
 
 
+data IsPlainCell {State Symbol : Set} :
+    Local.TapeCell State Symbol → Set where
+  is-plain : ∀ {symbol} → IsPlainCell (Local.plain symbol)
+
+legalOldLeftPlainForcesNewLeftPlain :
+  ∀ {machine rule oldSymbol oldCenter oldRight newLeft newCenter newRight} →
+  LegalWindowForRule machine rule
+    (Local.six-cell-window
+      (Local.plain oldSymbol) oldCenter oldRight
+      newLeft newCenter newRight) →
+  IsPlainCell newLeft
+legalOldLeftPlainForcesNewLeftPlain legal-unchanged = is-plain
+legalOldLeftPlainForcesNewLeftPlain
+    (legal-centered Local.realizes-left) = is-plain
+legalOldLeftPlainForcesNewLeftPlain
+    (legal-centered Local.realizes-stay) = is-plain
+legalOldLeftPlainForcesNewLeftPlain
+    (legal-centered Local.realizes-right) = is-plain
+legalOldLeftPlainForcesNewLeftPlain left-overlap-minus-two = is-plain
+legalOldLeftPlainForcesNewLeftPlain left-overlap-minus-one = is-plain
+legalOldLeftPlainForcesNewLeftPlain stay-overlap-minus-one = is-plain
+legalOldLeftPlainForcesNewLeftPlain right-overlap-minus-one = is-plain
+
+legalOldRightPlainForcesNewRightPlain :
+  ∀ {machine rule oldLeft oldCenter oldSymbol newLeft newCenter newRight} →
+  LegalWindowForRule machine rule
+    (Local.six-cell-window
+      oldLeft oldCenter (Local.plain oldSymbol)
+      newLeft newCenter newRight) →
+  IsPlainCell newRight
+legalOldRightPlainForcesNewRightPlain legal-unchanged = is-plain
+legalOldRightPlainForcesNewRightPlain
+    (legal-centered Local.realizes-left) = is-plain
+legalOldRightPlainForcesNewRightPlain
+    (legal-centered Local.realizes-stay) = is-plain
+legalOldRightPlainForcesNewRightPlain
+    (legal-centered Local.realizes-right) = is-plain
+legalOldRightPlainForcesNewRightPlain left-overlap-plus-one = is-plain
+legalOldRightPlainForcesNewRightPlain stay-overlap-plus-one = is-plain
+legalOldRightPlainForcesNewRightPlain right-overlap-plus-one = is-plain
+legalOldRightPlainForcesNewRightPlain right-overlap-plus-two = is-plain
+
+
 legalPlainLeftSymbolAgreement :
   ∀ {machine rule oldSymbol newSymbol oldCenter oldRight newCenter newRight} →
   LegalWindowForRule machine rule
