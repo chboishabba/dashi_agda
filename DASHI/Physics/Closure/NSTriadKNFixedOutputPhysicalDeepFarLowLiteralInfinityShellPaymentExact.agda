@@ -33,6 +33,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteBernstein as Bernstein
 import DASHI.Physics.Closure.NSTriadKNDeepFarLowCriticalShoulderRound234Exact as R234
 import DASHI.Physics.Closure.NSTriadKNLiteralInfinityShellBernsteinPaymentExact as LiteralShell
+import DASHI.Physics.Closure.NSPeriodicInfinityShellModeCount as ShellCount
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact as Pay
 
 F : C3.RealField _
@@ -44,6 +45,39 @@ module LiteralDeepFarLowPayment
     (output : Z3.FourierMode) where
 
   module P = Pay.LiveRegionPayment physicalSystem S output
+
+  -- The support list itself is no longer a physical obligation.  We may use
+  -- the exact duplicate-free outer cube as the support and encode inactive
+  -- modes by zero coefficients.  Only the coefficient/mass/energy data remain
+  -- source-specific.
+  canonicalLiteralInfinityShellData :
+    (shell : Nat) →
+    (coefficient : Z3.FourierMode → ℚ) →
+    (highEnergy highDerivativeCoefficient productMass : ℚ) →
+    0ℚ ≤ highEnergy →
+    0ℚ ≤ highDerivativeCoefficient →
+    LiteralShell.NatQ.natAsRational (ShellCount.infinityCubeModeCount shell)
+      ≤ highDerivativeCoefficient →
+    productMass
+      ≤
+      let coefficients =
+        LiteralShell.Cube.map coefficient
+          (ShellCount.shellModes (ShellCount.canonicalInfinityShellSupport shell))
+      in
+      Rational.square (Bernstein.coefficientSum coefficients) * highEnergy →
+    LiteralShell.LiteralInfinityShellBernsteinData shell
+  canonicalLiteralInfinityShellData shell coefficient highEnergy highDerivativeCoefficient
+      productMass highEnergyNN highDerivativeCoefficientNN cubePaid massBound = record
+    { LiteralShell.support = ShellCount.canonicalInfinityShellSupport shell
+    ; LiteralShell.coefficient = coefficient
+    ; LiteralShell.highEnergy = highEnergy
+    ; LiteralShell.highDerivativeCoefficient = highDerivativeCoefficient
+    ; LiteralShell.productMass = productMass
+    ; LiteralShell.highEnergyNN = highEnergyNN
+    ; LiteralShell.highDerivativeCoefficientNN = highDerivativeCoefficientNN
+    ; LiteralShell.outerCubeCardinalityPaidByDerivative = cubePaid
+    ; LiteralShell.productMassBelowFiniteBernsteinInput = massBound
+    }
 
   record LiteralShellReceipt : Set₁ where
     constructor literal-shell-receipt
@@ -120,6 +154,13 @@ deepFarLowLiteralInfinityShellFoldUsesR466 = false
 
 deepFarLowLiteralInfinityShellFoldUsesSyntheticEightfoldCarrier : Bool
 deepFarLowLiteralInfinityShellFoldUsesSyntheticEightfoldCarrier = false
+
+deepFarLowLiteralInfinityShellSupportChoiceClosed : Bool
+deepFarLowLiteralInfinityShellSupportChoiceClosed = true
+
+deepFarLowLiteralInfinityShellSupportChoiceClosedIsTrue :
+  deepFarLowLiteralInfinityShellSupportChoiceClosed ≡ true
+deepFarLowLiteralInfinityShellSupportChoiceClosedIsTrue = refl
 
 deepFarLowLiteralInfinityShellPhysicalExtractorInhabitedHere : Bool
 deepFarLowLiteralInfinityShellPhysicalExtractorInhabitedHere = false
