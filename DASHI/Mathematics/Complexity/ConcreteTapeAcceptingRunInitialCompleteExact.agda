@@ -21,6 +21,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalFormulaSemanticsExact as FormulaSem
 import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
+import DASHI.Mathematics.Complexity.ConcreteTapeInitialDecodeSameObjectExact as Initial
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
@@ -129,6 +130,109 @@ encodedAcceptingAssignment_baseTrace
         stateCoverage symbolCoverage
         (Accepting.run certificate))
       _)
+
+
+encodedRunBase_finalRow :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (run : Run.WellFormedTapeRun machine start rows finish) →
+  Global.rowSliceBits
+    (Endpoint.finalRowSlot (Run.runLength run))
+    (Assignment.encodeRunBaseTrace
+      stateCoverage symbolCoverage run)
+  ≡ Flat.encodeRow stateCoverage symbolCoverage finish
+encodedRunBase_finalRow
+    stateCoverage symbolCoverage run
+    rewrite sym (Assignment.finalRunRowSlot_eq_finalRowSlot run) =
+  trans
+    (Slice.rowSliceBits_eq_blockSlice
+      (Assignment.finalRunRowSlot run)
+      (Assignment.encodeRunBaseTrace
+        stateCoverage symbolCoverage run))
+    (trans
+      (cong
+        (Slice.blockSliceBits
+          (Assignment.finalRunRowSlot run))
+        (Assignment.encodeRunBaseTrace_rows
+          stateCoverage symbolCoverage run))
+      (Assignment.encodeRunRows_finalBlock
+        stateCoverage symbolCoverage run))
+
+encodedAcceptingAssignment_finalRow :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (certificate :
+      Accepting.AcceptingWellFormedRun
+        machine start rows finish) →
+  Global.rowSliceBits
+    (Endpoint.finalRowSlot
+      (Accepting.acceptingRunLength certificate))
+    (FormulaSem.baseTraceBits
+      (Assignment.encodeAcceptingRunAssignment
+        stateCoverage symbolCoverage certificate))
+  ≡ Flat.encodeRow stateCoverage symbolCoverage finish
+encodedAcceptingAssignment_finalRow
+    stateCoverage symbolCoverage certificate =
+  trans
+    (cong
+      (Global.rowSliceBits
+        (Endpoint.finalRowSlot
+          (Accepting.acceptingRunLength certificate)))
+      (encodedAcceptingAssignment_baseTrace
+        stateCoverage symbolCoverage certificate))
+    (encodedRunBase_finalRow
+      stateCoverage symbolCoverage
+      (Accepting.run certificate))
+
+decodedAcceptingAssignment_finalRow :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (certificate :
+      Accepting.AcceptingWellFormedRun
+        machine start rows finish) →
+  Decode.decodeRow stateCoverage symbolCoverage
+    (Canonical.listLength (Local.cells start))
+    (Global.rowSliceBits
+      (Endpoint.finalRowSlot
+        (Accepting.acceptingRunLength certificate))
+      (FormulaSem.baseTraceBits
+        (Assignment.encodeAcceptingRunAssignment
+          stateCoverage symbolCoverage certificate)))
+  ≡ finish
+decodedAcceptingAssignment_finalRow
+    stateCoverage symbolCoverage certificate =
+  trans
+    (cong
+      (Decode.decodeRow stateCoverage symbolCoverage _)
+      (encodedAcceptingAssignment_finalRow
+        stateCoverage symbolCoverage certificate))
+    (transportDecode
+      (Assignment.runFinishCanonicalLength
+        (Accepting.run certificate))
+      (Initial.decodeRow_encodeRow
+        stateCoverage symbolCoverage _))
+  where
+    transportDecode :
+      ∀ {machine}
+        {start finish : Local.TapeRow machine}
+        (lengthEq :
+          Canonical.listLength (Local.cells start)
+          ≡ Canonical.listLength (Local.cells finish)) →
+      Decode.decodeRow stateCoverage symbolCoverage
+        (Canonical.listLength (Local.cells start))
+        (Flat.encodeRow stateCoverage symbolCoverage finish)
+      ≡ finish
+    transportDecode refl proof =
+      proof
 
 encodedAcceptingAssignment_initialPullback :
   ∀ {machine start rows finish}
