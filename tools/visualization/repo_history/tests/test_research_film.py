@@ -464,3 +464,103 @@ def test_first_snapshot_of_truncated_window_is_baseline_not_mass_creation():
 
     assert all(item.commit != "B" for item in plan.working_sets)
     assert any(item.commit == "C" for item in plan.working_sets)
+
+
+def test_branch_merge_event_survives_without_merge_semantic_delta():
+    ns = _node(
+        "ns",
+        "R571Bound",
+        "DASHI.Physics.NavierStokes",
+    )
+    timeline = {
+        "commits": [
+            {"commit": "A", "timestamp": 0, "parents": []},
+            {"commit": "L", "timestamp": 10, "parents": ["A"]},
+            {"commit": "R", "timestamp": 11, "parents": ["A"]},
+            {
+                "commit": "M",
+                "timestamp": 20,
+                "parents": ["L", "R"],
+            },
+        ],
+        "snapshots": [
+            _snapshot("A", []),
+            _snapshot(
+                "L",
+                [ns],
+                delta={
+                    "added_nodes": ["ns"],
+                    "removed_nodes": [],
+                    "added_edges": [],
+                    "removed_edges": [],
+                },
+                parent="A",
+            ),
+            _snapshot("R", []),
+            _snapshot(
+                "M",
+                [ns],
+                delta={
+                    "added_nodes": [],
+                    "removed_nodes": [],
+                    "added_edges": [],
+                    "removed_edges": [],
+                },
+                parent="L",
+            ),
+        ],
+        "refs": {},
+        "branch_episodes": [
+            {
+                "fork_base": "A",
+                "left_tip": "L",
+                "right_tip": "R",
+                "merge_commit": "M",
+                "left_path": ["A", "L"],
+                "right_path": ["A", "R"],
+            }
+        ],
+    }
+
+    plan = compile_research_film(timeline)
+    merge = next(
+        beat
+        for beat in plan.beats
+        if beat.kind == "branch-merge"
+        and beat.commit == "M"
+    )
+
+    assert "ns" in merge.focus_node_ids
+    assert merge.camera is not None
+
+
+def test_commit_subject_is_carried_into_semantic_change_payload():
+    node = _node(
+        "ns",
+        "R571Bound",
+        "DASHI.Physics.NavierStokes",
+    )
+    timeline = {
+        "commits": [
+            {
+                "commit": "A",
+                "timestamp": 0,
+                "parents": [],
+                "subject": "Pay R571 fixed-output seam",
+            }
+        ],
+        "snapshots": [_snapshot("A", [node])],
+        "refs": {},
+        "branch_episodes": [],
+    }
+
+    plan = compile_research_film(timeline)
+    change = next(
+        beat
+        for beat in plan.beats
+        if beat.kind == "semantic-change"
+    )
+    assert (
+        change.payload["commit_subject"]
+        == "Pay R571 fixed-output seam"
+    )
