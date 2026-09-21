@@ -23,6 +23,7 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as Cut
 import DASHI.Physics.Closure.NSFirstImplementationPriorityLedgerExact as Priority
 import DASHI.Physics.Closure.NSClayLiteralABCDExact as Literal
+import DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact as ClayFacing
 
 data NSAlternative : Set where
   A-euclidean-unforced-global : NSAlternative
@@ -187,6 +188,36 @@ currentFirstIndependentUnforcedResidual : GlobalNSResidual
 currentFirstIndependentUnforcedResidual = proveUnforcedLeafA
 currentFirstExternalReconstructionResidual : GlobalNSResidual
 currentFirstExternalReconstructionResidual = independentlyReconstructExternalC
+
+------------------------------------------------------------------------
+-- Clay-facing routing after source-exact C/D audit.
+--
+-- C/D independent Agda reconstruction remains available as an optional
+-- verification programme, but it is no longer the first mathematical residual.
+------------------------------------------------------------------------
+
+clayFacingCSourceExact : Bool
+clayFacingCSourceExact = ClayFacing.cReleasedSourceExact
+
+clayFacingDSourceExact : Bool
+clayFacingDSourceExact = ClayFacing.dReleasedSourceExact
+
+clayFacingCDSourceAlignmentClosed : Bool
+clayFacingCDSourceAlignmentClosed =
+  ClayFacing.cdReleasedSourceAlignmentClosed
+
+clayFacingCDRequiresIndependentAgdaReconstruction : Bool
+clayFacingCDRequiresIndependentAgdaReconstruction =
+  ClayFacing.cdIndependentAgdaReconstructionGatesClayFacingAudit
+
+internalResearchPriorityA : ClayFacing.ActiveAction
+internalResearchPriorityA = ClayFacing.proveInternalAnalyticLeaf
+
+internalResearchPriorityB : ClayFacing.ActiveAction
+internalResearchPriorityB = ClayFacing.proveInternalSameObjectLeaf
+
+externalReconstructionIsOptionalVerification : Bool
+externalReconstructionIsOptionalVerification = true
 
 roundGlobalFourAlternativeMissionImplemented : Bool
 roundGlobalFourAlternativeMissionImplemented = true
