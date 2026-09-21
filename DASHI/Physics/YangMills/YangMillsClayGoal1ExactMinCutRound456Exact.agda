@@ -52,6 +52,7 @@ import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceLocalizationRound454Exact as R454
 import DASHI.Physics.YangMills.BalabanCMP116PublishedDomainSelectedLocalizationRound463Exact as R463
+import DASHI.Physics.YangMills.BalabanCMP116SourceNativeToDirectUpperRound465Exact as R465
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceGapRound455Exact as R455
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as R457
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as R458
@@ -150,6 +151,14 @@ bPublishedCommonDomainAuthorityLevel =
 bBetaGammaSelectedLocalizationLevel : ProofLevel
 bBetaGammaSelectedLocalizationLevel =
   R454.literalRound454SelectedTwoSourceLocalizationLevel
+
+bGammaSourceNativeRateSemanticsLevel : ProofLevel
+bGammaSourceNativeRateSemanticsLevel =
+  R465.literalRound465SourceNativePhysicalRateSemanticsLevel
+
+bGammaRateTransportCompilerLevel : ProofLevel
+bGammaRateTransportCompilerLevel =
+  R465.round465SourceNativeRateCompilerLevel
 
 bFiniteCovarianceToPositiveTransferGapCompilerLevel : ProofLevel
 bFiniteCovarianceToPositiveTransferGapCompilerLevel =
