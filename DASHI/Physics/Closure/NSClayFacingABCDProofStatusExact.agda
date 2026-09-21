@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as Four
 import DASHI.Physics.Closure.NSOpenAI2026ComparatorClayCDSourceExactAlignment as CD
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as Cut
 import DASHI.Physics.Closure.NSClayFacingAAnalyticCutExact as ACut
+import DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact as APhysical
 import DASHI.Physics.Closure.NSClayFacingBResearchCutExact as BCut
 import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact as CDAudit
 
@@ -144,6 +145,17 @@ aMoveGenericAnalysisToLeanRequired = false
 
 aRetainPhysicalSameObjectWorkInAgda : Bool
 aRetainPhysicalSameObjectWorkInAgda = true
+
+aNearOriginPhysicalEstimateAlreadyClosed : Bool
+aNearOriginPhysicalEstimateAlreadyClosed =
+  APhysical.aNearOriginAnalyticEstimateClosed
+
+aHighFrequencyCurvatureAlreadyClosed : Bool
+aHighFrequencyCurvatureAlreadyClosed =
+  APhysical.aHighFrequencyCurvatureEstimateClosed
+
+aCurrentPhysicalResidual : APhysical.APhysicalResidual
+aCurrentPhysicalResidual = APhysical.currentAPhysicalResidual
 
 ------------------------------------------------------------------------
 -- B: retain exact Agda same-object lane as the primary active proof.
