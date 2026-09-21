@@ -23,6 +23,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Integer.Base using (+_)
+import Data.List.Base as List using (length)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
@@ -145,7 +146,13 @@ eightPowerTimesSixteenthPowerIsHalfPower (suc depth) =
       (eightPowerTimesSixteenthPowerIsHalfPower depth))
 
 oneSixteenthNonnegative : 0ℚ ≤ oneSixteenth
-oneSixteenthNonnegative = ℚP.nonNegative⁻¹ oneSixteenth
+oneSixteenthNonnegative =
+  let
+    instance
+      oneSixteenthNN : NonNegative oneSixteenth
+      oneSixteenthNN = ℚP.normalize-nonNeg 1 16
+  in
+  ℚP.nonNegative⁻¹ oneSixteenth
 
 oneSixteenthPowerNonnegative : ∀ depth →
   0ℚ ≤ oneSixteenthPower depth
@@ -197,7 +204,7 @@ shellEntropyPaymentBelowHalfPower :
     (reserve : R429TraceEntropyReserve encoding)
     depth →
   Shell.natAsRational
-      (Data.List.Base.length (R441.domainsAtDepth encoding depth))
+      (List.length (R441.domainsAtDepth encoding depth))
     * residualEntropyWeight reserve depth
   ≤ Geo.halfPower depth
 shellEntropyPaymentBelowHalfPower {encoding = encoding} reserve depth =
@@ -207,34 +214,34 @@ shellEntropyPaymentBelowHalfPower {encoding = encoding} reserve depth =
 
     countBound0 :
       Shell.natAsRational
-        (Data.List.Base.length (R441.domainsAtDepth encoding depth))
+        (List.length (R441.domainsAtDepth encoding depth))
       ≤
       Shell.natAsRational (Trace.pow8 depth)
     countBound0 = natAsRationalMonotone countNatBound
 
     countBound :
       Shell.natAsRational
-        (Data.List.Base.length (R441.domainsAtDepth encoding depth))
+        (List.length (R441.domainsAtDepth encoding depth))
       ≤ rationalPower eightQ depth
     countBound =
       subst
         (λ upper →
           Shell.natAsRational
-            (Data.List.Base.length (R441.domainsAtDepth encoding depth))
+            (List.length (R441.domainsAtDepth encoding depth))
           ≤ upper)
         (natAsRationalPow8 depth)
         countBound0
 
     productBound :
       Shell.natAsRational
-          (Data.List.Base.length (R441.domainsAtDepth encoding depth))
+          (List.length (R441.domainsAtDepth encoding depth))
         * residualEntropyWeight reserve depth
       ≤
       rationalPower eightQ depth * oneSixteenthPower depth
     productBound =
       ℚP.*-mono-≤
         (natAsRationalNonnegative
-          (Data.List.Base.length (R441.domainsAtDepth encoding depth)))
+          (List.length (R441.domainsAtDepth encoding depth)))
         countBound
         (residualEntropyWeightNonnegative reserve depth)
         (sourceDecayReservesOneSixteenthPerTraceStep reserve depth)
@@ -242,7 +249,7 @@ shellEntropyPaymentBelowHalfPower {encoding = encoding} reserve depth =
   subst
     (λ upper →
       Shell.natAsRational
-          (Data.List.Base.length (R441.domainsAtDepth encoding depth))
+          (List.length (R441.domainsAtDepth encoding depth))
         * residualEntropyWeight reserve depth
       ≤ upper)
     (eightPowerTimesSixteenthPowerIsHalfPower depth)
