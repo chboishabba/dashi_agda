@@ -96,3 +96,74 @@ def test_module_qualified_selector_disambiguates_label():
     )
     resolved = resolve_symbol(graph, "M::f")
     assert resolved["symbol_id"] == "f"
+
+
+def test_focus_budget_stops_high_fanout_before_graph_explosion():
+    graph = {
+        "nodes": [
+            {"symbol_id": "root", "label": "root", "module": "M", "kind": "function"},
+            *[
+                {
+                    "symbol_id": f"d{i}",
+                    "label": f"d{i}",
+                    "module": "M",
+                    "kind": "function",
+                }
+                for i in range(100)
+            ],
+        ],
+        "edges": [
+            {
+                "relation_id": f"e{i}",
+                "source": f"d{i}",
+                "target": "root",
+                "kind": "calls",
+            }
+            for i in range(100)
+        ],
+    }
+
+    result = focus_symbol(
+        graph,
+        "root",
+        upstream_depth=1,
+        max_nodes=12,
+        max_edges=20,
+    )
+
+    assert len(result.node_ids) <= 12
+    assert len(result.edge_ids) <= 20
+    assert result.truncated is True
+    assert result.omitted_nodes > 0
+
+
+def test_focus_budget_selection_is_deterministic():
+    graph = {
+        "nodes": [
+            {"symbol_id": "root", "label": "root", "module": "M", "kind": "function"},
+            *[
+                {
+                    "symbol_id": name,
+                    "label": name,
+                    "module": "M",
+                    "kind": "function",
+                }
+                for name in ("z", "a", "m", "b")
+            ],
+        ],
+        "edges": [
+            {
+                "relation_id": f"{name}-root",
+                "source": name,
+                "target": "root",
+                "kind": "calls",
+            }
+            for name in ("z", "a", "m", "b")
+        ],
+    }
+
+    left = focus_symbol(graph, "root", upstream_depth=1, max_nodes=3)
+    right = focus_symbol(graph, "root", upstream_depth=1, max_nodes=3)
+
+    assert left.node_ids == right.node_ids
+    assert left.edge_ids == right.edge_ids
