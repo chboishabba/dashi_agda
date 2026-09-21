@@ -27,6 +27,7 @@ import DASHI.Physics.YangMills.YangMillsCompactSimpleParametricPromotionReductio
 import DASHI.Physics.Closure.YMSprint105CompactSimpleGroupCoverageCompletion as Coverage
 import DASHI.Physics.YangMills.YangMillsGaussianWardGapNontrivialityExact as Nontrivial
 import DASHI.Physics.YangMills.YangMillsContinuumOPEStressWardGaussianKernelExact as WardKernel
+import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as R468
 
 g1ClassificationAndPackageCoverageLevel : ProofLevel
 g1ClassificationAndPackageCoverageLevel =
@@ -43,6 +44,10 @@ g2SameFamilyWardKernelLevel =
 g2GaussianToSameHContradictionCompilerLevel : ProofLevel
 g2GaussianToSameHContradictionCompilerLevel =
   Nontrivial.gaussianGapNontrivialityCompilerLevel
+
+g2LiteralClayT5AttachmentLevel : ProofLevel
+g2LiteralClayT5AttachmentLevel =
+  R468.literalRound468SameSystemNontrivialitySemanticsLevel
 
 compactSimpleFamilyEnumerationStillResearchDebt : Bool
 compactSimpleFamilyEnumerationStillResearchDebt = false
