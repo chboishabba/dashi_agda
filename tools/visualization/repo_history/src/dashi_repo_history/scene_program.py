@@ -331,12 +331,16 @@ def compile_symbol_focus_program(
     *,
     upstream_depth: int = 2,
     downstream_depth: int = 0,
+    max_nodes: int = 250,
+    max_edges: int = 800,
 ) -> list[SceneCommand]:
     focus = focus_symbol(
         graph_data,
         selector,
         upstream_depth=upstream_depth,
         downstream_depth=downstream_depth,
+        max_nodes=max_nodes,
+        max_edges=max_edges,
     )
     commands = [
         SceneCommand(
@@ -366,6 +370,9 @@ def compile_symbol_focus_program(
                 "root_id": focus.root_id,
                 "node_ids": sorted(focus.node_ids),
                 "edge_ids": sorted(focus.edge_ids),
+                "truncated": focus.truncated,
+                "omitted_nodes": focus.omitted_nodes,
+                "omitted_edges": focus.omitted_edges,
             },
         )
     )
@@ -379,6 +386,8 @@ def compile_temporal_symbol_program(
     target_commit: str | None = None,
     upstream_depth: int = 2,
     downstream_depth: int = 0,
+    max_nodes: int = 250,
+    max_edges: int = 800,
 ) -> list[SceneCommand]:
     frames = track_symbol_history(
         timeline,
@@ -386,6 +395,8 @@ def compile_temporal_symbol_program(
         target_commit=target_commit,
         upstream_depth=upstream_depth,
         downstream_depth=downstream_depth,
+        max_nodes=max_nodes,
+        max_edges=max_edges,
     )
     if not frames:
         return []
@@ -406,6 +417,9 @@ def compile_temporal_symbol_program(
                     "identity_confidence": frame.identity_confidence,
                     "node_ids": sorted(frame.focus.node_ids),
                     "edge_ids": sorted(frame.focus.edge_ids),
+                    "truncated": frame.focus.truncated,
+                    "omitted_nodes": frame.focus.omitted_nodes,
+                    "omitted_edges": frame.focus.omitted_edges,
                 },
             )
         )
