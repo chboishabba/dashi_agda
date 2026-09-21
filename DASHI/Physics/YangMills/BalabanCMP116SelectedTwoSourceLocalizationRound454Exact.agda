@@ -27,6 +27,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceLocalizationRound45
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -114,6 +115,33 @@ record SelectedTwoSourceLocalization
       R281.clusteringEnvelope spectrumSource observable time
 
 open SelectedTwoSourceLocalization public
+
+------------------------------------------------------------------------
+-- Existing preferred payment surfaces compile directly into R454.
+------------------------------------------------------------------------
+
+fromExistingSameObjectAndEnvelopeCalibration :
+  ∀ {Measure TestObservable SpectralObservable Energy}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    {demands : R104.CMP116FiniteNormalizedAnalyticDemands}
+    {source : R338.CanonicalCommonDomainCMP116Source base demands}
+    {tests : R278.SelectedConnectedCovarianceTests dataSet}
+    {spectrumSource : R281.ContinuumCovarianceSpectrumData
+      {SpectralObservable = SpectralObservable} {Energy = Energy}
+      dataSet extension tests} →
+  R342.SourceResponseSameObjectPayment
+    base demands source tests spectrumSource →
+  R342.SourceEnvelopeCalibration
+    base demands source tests spectrumSource →
+  SelectedTwoSourceLocalization
+    base demands source tests spectrumSource
+fromExistingSameObjectAndEnvelopeCalibration bBeta bGamma = record
+  { sourceMagnitudeIsLiteralMixedLogMagnitude =
+      R342.sourceMagnitudeIsSelectedMixedLogMagnitude bBeta
+  ; sourceEnvelopeBelowPhysicalClusteringEnvelope = bGamma
+  }
 
 ------------------------------------------------------------------------
 -- Bα: applicability is compiler-owned once the finite normalized CMP116
@@ -337,3 +365,13 @@ round454SelectedFiniteCovarianceCompilerLevel = machineChecked
 --      clustering envelope using uniform constants and one-sided geometry.
 literalRound454SelectedTwoSourceLocalizationLevel : ProofLevel
 literalRound454SelectedTwoSourceLocalizationLevel = conditional
+
+------------------------------------------------------------------------
+-- Goal-1 dependency statement.
+------------------------------------------------------------------------
+
+r448InternalRateSplitReconstructionMandatoryForGoal1 : Bool
+r448InternalRateSplitReconstructionMandatoryForGoal1 = false
+
+r444ToR453UsefulAsApplicabilityAudit : Bool
+r444ToR453UsefulAsApplicabilityAudit = true
