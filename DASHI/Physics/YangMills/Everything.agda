@@ -351,3 +351,5 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalFourStageR406Round429Exact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R129PaysContinuumSemanticsRound430Exact
 
 import DASHI.Physics.YangMills.YangMillsFiniteHaarActionNumeratorInvariantRound431Exact
+
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumFromOSRound432Exact
