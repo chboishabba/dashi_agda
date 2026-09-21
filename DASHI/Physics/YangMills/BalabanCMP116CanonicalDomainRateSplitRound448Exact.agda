@@ -19,12 +19,13 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalDomainRateSplitRound448Exac
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Membership.Propositional using (_∈_)
+import Data.Nat.Base as Nat
 open import Data.Product using (Σ; _×_; _,_)
 open import Data.Rational.Base as ℚ using (ℚ)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _*ℝ_; _≤ℝ_; ≤ℝ-refl; mulZeroʳ; mulMonotoneNonnegative)
+  (ℝ; 0ℝ; _*ℝ_; _≤ℝ_; absℝ; ≤ℝ-refl; mulZeroʳ; *-assoc; mulMonotoneNonnegative)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.Closure.YMEffectiveActionSupportInterface as Support
@@ -62,7 +63,7 @@ record CanonicalDomainSpecificRateSplit
     sourceTreeDistanceDominatesSelectedGraphDistance :
       ∀ domain →
       Graph.ymGraphDist (R444.leftMark data) (R444.rightMark data)
-      Data.Nat.Base.≤
+      Nat.≤
       Source.sourceTreeDistance (R444.source data) domain
 
 open CanonicalDomainSpecificRateSplit public
@@ -203,17 +204,33 @@ commonYShellBelowDomainDecay :
     R414.weight (sourceDecay geometry)
       (Source.sourceTreeDistance (R444.source data) domain)
 commonYShellBelowDomainDecay {data = data} geometry domain =
+  let
+    src = R444.source data
+    sourceBound =
+      Source.fixedYEquation129RateSplit src domain
+    leftTransport =
+      subst
+        (λ left →
+          left ≤ℝ
+          Source.sourcePrefactor src *ℝ
+            (Source.entropyHalfWeight src
+              (Source.sourceTreeDistance src domain)
+            *ℝ
+            Source.residualDecayWeight src
+              (Source.sourceTreeDistance src domain)))
+        (R444.sourceFixedYShellIsLiteralCommonYShell data domain)
+        sourceBound
+  in
   subst
-    (λ left →
-      left ≤ℝ
-      Source.sourcePrefactor (R444.source data) *ℝ
-        (Source.entropyHalfWeight (R444.source data)
-          (Source.sourceTreeDistance (R444.source data) domain)
-        *ℝ
-        Source.residualDecayWeight (R444.source data)
-          (Source.sourceTreeDistance (R444.source data) domain)))
-    (R444.sourceFixedYShellIsLiteralCommonYShell data domain)
-    (Source.fixedYEquation129RateSplit (R444.source data) domain)
+    (λ upper → R444.commonYShell data domain ≤ℝ upper)
+    (sym
+      (*-assoc
+        (Source.sourcePrefactor src)
+        (Source.entropyHalfWeight src
+          (Source.sourceTreeDistance src domain))
+        (Source.residualDecayWeight src
+          (Source.sourceTreeDistance src domain))))
+    leftTransport
 
 amplitudeSumBelowSourceAmplitude :
   ∀ {Measure TestObservable dataSet extension base data}
@@ -247,7 +264,9 @@ amplitudeSumBelowSourceAmplitude {data = data} geometry =
       R420.sumNonnegative
         halfWeight
         (R444.localizedDomains data)
-        (Source.entropyHalfWeightNonnegative src)
+        (λ domain →
+          Source.entropyHalfWeightNonnegative src
+            (Source.sourceTreeDistance src domain))
 
     scaledBudget :
       Source.sourcePrefactor src *ℝ
