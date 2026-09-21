@@ -80,7 +80,7 @@ fixedYGeometricHalfReal :
       (shared identification) Shared.hessianMark
       * Geo.halfPower
           (Source.sourceTreeDistance (R444.source data) domain))
-fixedYGeometricHalfReal {embedding = embedding} identification domain =
+fixedYGeometricHalfReal {data = data} {embedding = embedding} identification domain =
   ≤ℝ-trans
     (commonYShellBelowEmbeddedHessianShell identification domain)
     (Embed.orderPreserving embedding
@@ -89,7 +89,7 @@ fixedYGeometricHalfReal {embedding = embedding} identification domain =
         (scaleOf identification domain)
         (volumeOf identification domain)
         (rootOf identification domain)
-        (Source.sourceTreeDistance (R444.source _) domain)))
+        (Source.sourceTreeDistance (R444.source data) domain)))
 
 round449SharedHessianGeometricCompilerLevel : ProofLevel
 round449SharedHessianGeometricCompilerLevel =
