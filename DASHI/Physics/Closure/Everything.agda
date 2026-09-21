@@ -430,3 +430,7 @@ import DASHI.Physics.Closure.NSActualPeriodicToCompactLocalizationExact
 import DASHI.Physics.Closure.NSActualCompactCandidateExclusionExact
 
 import DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact
+
+import DASHI.Physics.Closure.NSClayFacingAAnalyticCutExact
+import DASHI.Physics.Closure.NSClayFacingBResearchCutExact
+import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact
