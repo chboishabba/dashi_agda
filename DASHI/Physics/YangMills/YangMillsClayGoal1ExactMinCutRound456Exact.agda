@@ -47,8 +47,10 @@ import DASHI.Physics.YangMills.YangMillsClayPublishedWilsonRPRound461Exact as R4
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as R462
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralACompletionRound424Exact as A424
 
+import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as R103
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceLocalizationRound454Exact as R454
+import DASHI.Physics.YangMills.BalabanCMP116PublishedDomainSelectedLocalizationRound463Exact as R463
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceGapRound455Exact as R455
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as R457
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as R458
@@ -128,9 +130,17 @@ bCommonRadiusExistenceCompilerLevel : ProofLevel
 bCommonRadiusExistenceCompilerLevel =
   R104.cmp116CanonicalCommonRadiusCompilerLevel
 
-bAlphaFiniteDemandExtractionLevel : ProofLevel
-bAlphaFiniteDemandExtractionLevel =
+bAlphaPublishedCommonDomainApplicationLevel : ProofLevel
+bAlphaPublishedCommonDomainApplicationLevel =
+  R463.literalRound463PublishedDomainSelectedApplicationLevel
+
+bAlphaConstructiveFiniteDemandFallbackLevel : ProofLevel
+bAlphaConstructiveFiniteDemandFallbackLevel =
   R104.literalCMP116FiniteNormalizedDemandExtractionLevel
+
+bPublishedCommonDomainAuthorityLevel : ProofLevel
+bPublishedCommonDomainAuthorityLevel =
+  R103.cmp116CommonAnalyticDomainSourceLevel
 
 bBetaGammaSelectedLocalizationLevel : ProofLevel
 bBetaGammaSelectedLocalizationLevel =
@@ -225,6 +235,9 @@ genericProkhorovTheoryCountedAsPhysicalResearchLeaf = false
 
 canonicalRadiusExistenceCountedAsPhysicalResearchLeaf : Bool
 canonicalRadiusExistenceCountedAsPhysicalResearchLeaf = false
+
+fourDemandExtractionMandatoryForHumanGoal1Proof : Bool
+fourDemandExtractionMandatoryForHumanGoal1Proof = false
 
 continuumOSCompatibilityCountedAgainInsideB : Bool
 continuumOSCompatibilityCountedAgainInsideB = false
