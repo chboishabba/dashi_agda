@@ -18,7 +18,7 @@ module DASHI.Physics.YangMills.BalabanCMP116R429FixedYSharedHessianRound441Exact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; _*_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
@@ -86,18 +86,18 @@ r429FixedYGeometricHalfReal :
   Embed.embed embedding
     (Geom.markedBaseEnergy
       (shared identification) Shared.hessianMark
-      ℚ.* Geo.halfPower Graph.ymTreeEdgeCount)
+      * Geo.halfPower Graph.ymTreeEdgeCount)
 r429FixedYGeometricHalfReal identification domain =
   subst
     (λ lower →
       lower
       ≤ℝ
-      Embed.embed _
+      Embed.embed embedding
         (Geom.markedBaseEnergy
           (shared identification) Shared.hessianMark
-          ℚ.* Geo.halfPower Graph.ymTreeEdgeCount))
+          * Geo.halfPower Graph.ymTreeEdgeCount))
     (sym (commonYShellIsEmbeddedHessianShell identification domain))
-    (Embed.orderPreserving _
+    (Embed.orderPreserving embedding
       (Geom.hessianInfluenceGeometricHalf
         (shared identification)
         (scaleOf identification domain)
