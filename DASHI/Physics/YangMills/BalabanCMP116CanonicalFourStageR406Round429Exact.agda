@@ -129,9 +129,9 @@ canonicalApplication :
     {Measure = Measure} {TestObservable = TestObservable}
     {dataSet = dataSet} {extension = extension} base →
   R406.SelectedCMP116TermwiseLocalization base
-canonicalApplication data = record
+canonicalApplication {base = base} data = record
   { R406.SelectedCMP116TermwiseLocalization.selectedT5RGDensity =
-      R318.SourceDirection _
+      R318.SourceDirection base
   ; R406.SelectedCMP116TermwiseLocalization.selectedT5RGDensityIsBase = refl
   ; R406.SelectedCMP116TermwiseLocalization.leftObservable =
       leftObservable data
