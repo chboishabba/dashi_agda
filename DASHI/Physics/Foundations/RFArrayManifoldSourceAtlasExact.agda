@@ -38,7 +38,7 @@ belloniManifoldSeparation = Source.mkDOISource
 
 electromagneticManifoldPrimary : Source.AttributedSource
 electromagneticManifoldPrimary = Source.mkDOISource
-  "IEEE Transactions on Wireless Communications authors"
+  "Miguel R. Castellanos; Robert W. Heath Jr."
   "Electromagnetic Manifold Characterization of Antenna Arrays"
   "IEEE Transactions on Wireless Communications 24(3), 1772-1785"
   "2025"
