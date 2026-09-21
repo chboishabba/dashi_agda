@@ -1466,6 +1466,12 @@ def _focus_group(view, node_ids: set[str]) -> VGroup:
         for node_id in node_ids
         if node_id in view.graph.vertices
     ]
+    label_map = getattr(view, "active_label_by_node", {})
+    mobjects.extend(
+        label_map[node_id]
+        for node_id in node_ids
+        if node_id in label_map
+    )
     return VGroup(*mobjects)
 
 
@@ -1486,6 +1492,7 @@ class ResearchAtlasGraphView(SemanticGraphView):
         )
         self.label_nodes: set[str] = set()
         self.active_labels = VGroup()
+        self.active_label_by_node: dict[str, Any] = {}
 
     def build(self, graph_data: dict[str, Any]) -> DiGraph:
         nodes = [node["symbol_id"] for node in graph_data["nodes"]]
@@ -1682,6 +1689,25 @@ class ResearchAtlasGraphView(SemanticGraphView):
             if node_id in self.current_nodes
             and node_id in self.graph.vertices
         }
+        node_data = {
+            node["symbol_id"]: node
+            for node in self.current_graph_data.get("nodes", [])
+        }
+        ranked = sorted(
+            node_ids,
+            key=lambda node_id: (
+                0
+                if node_data.get(node_id, {}).get("kind")
+                in {"theorem", "function", "postulate"}
+                else 1,
+                0
+                if node_data.get(node_id, {}).get("scope") is None
+                else 1,
+                str(node_data.get(node_id, {}).get("label", "")),
+                node_id,
+            ),
+        )
+        node_ids = set(ranked[:8])
         if node_ids == self.label_nodes:
             return
 
@@ -1693,30 +1719,38 @@ class ResearchAtlasGraphView(SemanticGraphView):
             self.active_labels.clear()
 
         self.label_nodes = node_ids
-        node_data = {
-            node["symbol_id"]: node
-            for node in self.current_graph_data.get("nodes", [])
-        }
+        self.active_label_by_node = {}
 
         labels = []
-        for node_id in sorted(node_ids):
+        directions = (DOWN, UP, LEFT, RIGHT)
+        for index, node_id in enumerate(ranked[:8]):
             node = node_data.get(node_id)
             if node is None:
                 continue
             label = self.policy.label_mobject(node)
+            direction = directions[index % len(directions)]
             label.next_to(
                 self.graph.vertices[node_id],
-                DOWN,
-                buff=0.045,
+                direction,
+                buff=0.055,
             )
 
-            def follow(mob, nid=node_id):
+            def follow(
+                mob,
+                nid=node_id,
+                placement=direction,
+            ):
                 vertex = self.graph.vertices.get(nid)
                 if vertex is not None:
-                    mob.next_to(vertex, DOWN, buff=0.045)
+                    mob.next_to(
+                        vertex,
+                        placement,
+                        buff=0.055,
+                    )
 
             label.add_updater(follow)
             labels.append(label)
+            self.active_label_by_node[node_id] = label
 
         self.active_labels = VGroup(*labels)
         if len(self.active_labels) > 0:
