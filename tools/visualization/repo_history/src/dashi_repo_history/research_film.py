@@ -942,6 +942,16 @@ def compile_research_film(
                         "modules": list(working.modules),
                         "lane": working.lane,
                         "headline": working.headline,
+                        "commit_subject": str(
+                            next(
+                                (
+                                    item.get("subject", "")
+                                    for item in timeline.get("commits", [])
+                                    if item["commit"] == commit
+                                ),
+                                "",
+                            )
+                        ),
                     },
                 )
             )
