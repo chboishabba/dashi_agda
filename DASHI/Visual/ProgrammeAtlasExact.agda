@@ -26,9 +26,19 @@ record ProgrammeAtlasBoundary : Set where
     atlasPositionDefinesSemanticIdentityIsFalse :
       atlasPositionDefinesSemanticIdentity ≡ false
 
+    dormantNodePositionMayBeForgotten : Bool
+    dormantNodePositionMayBeForgottenIsFalse :
+      dormantNodePositionMayBeForgotten ≡ false
+
+    returningNodeMayReuseArchivedPosition : Bool
+    returningNodeMayReuseArchivedPositionIsTrue :
+      returningNodeMayReuseArchivedPosition ≡ true
+
 canonicalProgrammeAtlasBoundary : ProgrammeAtlasBoundary
 canonicalProgrammeAtlasBoundary =
   programmeAtlasBoundary
     false refl
     true refl
     false refl
+    false refl
+    true refl
