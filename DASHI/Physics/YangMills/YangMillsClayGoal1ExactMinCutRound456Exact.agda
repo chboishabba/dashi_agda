@@ -48,6 +48,8 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralACompletionRound4
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceLocalizationRound454Exact as R454
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceGapRound455Exact as R455
+import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as R457
+import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as R458
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as C437
 import DASHI.Physics.YangMills.YangMillsPhysicalOPERemainderSharedTailRound442Exact as C442
@@ -128,6 +130,14 @@ bFiniteCovarianceToPositiveTransferGapCompilerLevel : ProofLevel
 bFiniteCovarianceToPositiveTransferGapCompilerLevel =
   R455.round455FiniteToContinuumGapCompilerLevel
 
+bLiteralClayT2SemanticAttachmentLevel : ProofLevel
+bLiteralClayT2SemanticAttachmentLevel =
+  R458.literalRound458MassGapSameObjectSemanticsLevel
+
+sourceNativeA3AndSameOSPreferredLevel : ProofLevel
+sourceNativeA3AndSameOSPreferredLevel =
+  R457.literalRound457SourceNativeContinuumOSLevel
+
 bR448InternalClusterReconstructionMandatory : Bool
 bR448InternalClusterReconstructionMandatory = false
 
@@ -205,6 +215,12 @@ canonicalRadiusExistenceCountedAsPhysicalResearchLeaf = false
 
 continuumOSCompatibilityCountedAgainInsideB : Bool
 continuumOSCompatibilityCountedAgainInsideB = false
+
+massGapSemanticAttachmentCountedAsNewSpectralAnalysis : Bool
+massGapSemanticAttachmentCountedAsNewSpectralAnalysis = false
+
+projectiveProkhorovMandatoryWhenSourceNativeContinuumRecoveryAvailable : Bool
+projectiveProkhorovMandatoryWhenSourceNativeContinuumRecoveryAvailable = false
 
 opeAllDepthInductionCountedAsPhysicalResearchLeaf : Bool
 opeAllDepthInductionCountedAsPhysicalResearchLeaf = false
