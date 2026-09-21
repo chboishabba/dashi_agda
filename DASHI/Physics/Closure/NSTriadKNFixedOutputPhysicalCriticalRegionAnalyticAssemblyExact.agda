@@ -18,7 +18,7 @@ import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact as Pay
-import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowFractionalShellPaymentExact as FF
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as FF
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact as FH
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact as HH
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingRelativeCovarianceExact as Core
@@ -32,7 +32,7 @@ module Assemble
     (output : Z3.FourierMode) where
 
   module P = Pay.LiveRegionPayment physicalSystem S output
-  module FFP = FF.DeepFarLowPayment physicalSystem S output
+  module FFP = FF.LiteralDeepFarLowPayment physicalSystem S output
   module FHP = FH.DeepCrossPayment physicalSystem S output
   module HHP = HH.DeepHHPayment physicalSystem S output
   module CP = Core.CriticalTouching physicalSystem S output
@@ -40,7 +40,7 @@ module Assemble
   record FixedOutputAnalyticLeaves : Set₁ where
     constructor fixed-output-analytic-leaves
     field
-      farLow : FFP.PhysicalDeepFarLowFractionalShellData
+      farLow : FFP.PhysicalDeepFarLowLiteralShellData
       farLowHighHigh : FHP.PhysicalDeepFarLowDeepHHFractionalShellData
       highHigh : HHP.PhysicalDeepHHFractionalShellData
       critical : CP.SignedBlockOperatorCertificate
@@ -72,7 +72,7 @@ module Assemble
       ; P.thetaNN = CP.thetaNN cc
       ; P.thetaStrictlyBelowOne = CP.thetaStrictlyBelowOne cc
       ; P.deepFarLowFarLowPaid =
-          FFP.deepFarLowFarLowFractionalShellPayment ff
+          FFP.deepFarLowFarLowLiteralShellPayment ff
       ; P.deepFarLowDeepHighHighPaid =
           FHP.deepFarLowDeepHHFractionalShellPayment fh
       ; P.deepHighHighHighHighPaid =
