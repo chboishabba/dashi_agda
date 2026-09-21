@@ -164,6 +164,12 @@ canonicalFiveHT2ACrossScaleLinks =
 ------------------------------------------------------------------------
 -- Protein-conformation reuse.
 --
+-- Actual owner type, retained without constructing an HTR2A-specific instance.
+proteinConformationSystemType : Set₁
+proteinConformationSystemType =
+  ProteinConformation.ProteinConformationSystem
+
+--
 -- 5-HT2A is treated at this level only as a protein/receptor target context.
 -- The existing ProteinConformationSystem is retained because receptor state is
 -- not definitionally a single static structure.  No concrete HTR2A folding or
