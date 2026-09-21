@@ -508,6 +508,22 @@ def main() -> int:
     print("+", " ".join(processing_cmd), file=sys.stderr)
     subprocess.run(processing_cmd, cwd=Path(__file__).resolve().parents[2], check=True)
 
+    retrieval_residual_builder = HERE / "build_fulltext_retrieval_residual.py"
+    retrieval_residual = output_dir / "fulltext-retrieval-residual.jsonl"
+    retrieval_residual_manifest = output_dir / "fulltext-retrieval-residual-manifest.json"
+    retrieval_cmd = [
+        sys.executable,
+        str(retrieval_residual_builder),
+        "--processing-ledger",
+        str(processing_ledger),
+        "--output",
+        str(retrieval_residual),
+        "--manifest",
+        str(retrieval_residual_manifest),
+    ]
+    print("+", " ".join(retrieval_cmd), file=sys.stderr)
+    subprocess.run(retrieval_cmd, cwd=Path(__file__).resolve().parents[2], check=True)
+
     receipt = {
         "schema": "digital-esd-verified-fulltext-parse-run-v1",
         "verified_fulltext_total_count": len(verified_all),
@@ -530,6 +546,10 @@ def main() -> int:
         "study_processing_ledger_sha256": sha256_file(processing_ledger),
         "study_processing_manifest_reference": str(processing_manifest),
         "study_processing_manifest_sha256": sha256_file(processing_manifest),
+        "fulltext_retrieval_residual_reference": str(retrieval_residual),
+        "fulltext_retrieval_residual_sha256": sha256_file(retrieval_residual),
+        "fulltext_retrieval_residual_manifest_reference": str(retrieval_residual_manifest),
+        "fulltext_retrieval_residual_manifest_sha256": sha256_file(retrieval_residual_manifest),
         "verified_bytes_count_as_parsed": False,
         "parse_creates_reviewed_evidence": False,
         "parse_creates_source_audit_admission": False,
