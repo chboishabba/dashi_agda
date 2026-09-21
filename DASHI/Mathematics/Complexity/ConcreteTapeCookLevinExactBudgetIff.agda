@@ -160,10 +160,9 @@ exactRunToGuardedSAT
         (Assignment.encodeAcceptingRunAssignment
           stateCoverage symbolCoverage (certificate exact))
       ≡ Agda.Builtin.Bool.true
-    targetRewrite proof
-      rewrite Sound.guardedInitialBitsDecode
-        stateCoverage symbolCoverage input steps =
+    targetRewrite proof =
       proof
+
 
 record CookLevinExactBudgetIff
     {machine : Local.ConcreteTapeMachine}
