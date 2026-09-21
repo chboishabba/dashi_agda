@@ -20,6 +20,7 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTermwiseLocalizationRound406Exact as R406
 import DASHI.Physics.YangMills.BalabanCMP116Round406ExactR410ReplayRound421Exact as R421
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalFourStageR406Round429Exact as R429
 import DASHI.Physics.YangMills.BalabanCMP116Round406NonemptySelectedFibreRound423Exact as R423
 import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Round419Exact as R419
 import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact as Preferred
@@ -39,6 +40,20 @@ record LiteralCMP116BCompletion
       R423.Equation126129SelectedR406NonemptyAttachment application
 
 open LiteralCMP116BCompletion public
+
+fromCanonicalFourStage :
+  ∀ {Measure TestObservable dataSet extension base}
+    (data :
+      R429.CanonicalFourStageR406Data
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} base) →
+  R423.Equation126129SelectedR406NonemptyAttachment
+    (R429.canonicalApplication data) →
+  LiteralCMP116BCompletion (R429.canonicalApplication data)
+fromCanonicalFourStage data selected = record
+  { operatorReplay = R429.canonicalOperatorReplay data
+  ; selectedSource = selected
+  }
 
 asRound419Source :
   ∀ {Measure TestObservable dataSet extension base application} →
@@ -68,8 +83,8 @@ preferredR415 completion =
 round425LiteralBCompilerLevel : ProofLevel
 round425LiteralBCompilerLevel = machineChecked
 
--- Exactly the literal source attachments remain:
--- * R406 operator factors are the R410 four-stage replay;
+-- On the preferred R429 constructor the R406/R410 factor-layout payment is gone.
+-- The remaining literal source attachments are:
 -- * retained common-Y fibres are nonempty and selected membership survives;
 -- * survivors carry the two-mark support graph/source metrics;
 -- * CMP116 source domains/tree/shell are the literal R406 coordinates.
