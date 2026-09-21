@@ -205,3 +205,100 @@ parsed study
 != SourceAuditAdmission
 != CorpusAuditedSource
 ```
+
+
+## First observed retained-study execution receipt
+
+The first real retained study has now completed the concrete parse path:
+
+```text
+ERIC:EJ1083370
+  -> PDF retrieval/cache
+  -> source SHA-256
+  -> pdftotext-layout materialisation
+  -> derived-text SHA-256
+  -> anchored document nodes
+  -> candidate study facets
+```
+
+Observed receipt:
+
+```text
+source                    ERIC:EJ1083370
+PDF bytes                 931903
+source SHA-256            f48bad56d0874bb6ed2d109e10ebf495d30534e7e5ce74b8e5800541f6619b89
+materialisation engine    pdftotext-layout
+page count                30
+derived characters        110188
+derived-text SHA-256      cc248168e15089e8cb76a6ced160afc70e0ff64f74e01cd9140ae03d2eb679e0
+anchored document nodes   1298
+candidate facet families  13
+```
+
+The facet families are:
+
+```text
+Population
+Sample
+Intervention
+Outcome
+StudyDesign
+Setting
+TimePeriod
+Method
+Limitation
+Funding
+Institution
+ParticipantGroup
+Measurement
+```
+
+They remain locator candidates only. A matched Population/Outcome/etc span does
+not establish the corresponding study fact and pays no extraction coordinate.
+
+The formal observed receipt is:
+
+`DASHI/Education/DigitalESDFirstRetainedStudyParseExact.agda`
+
+with regression:
+
+`DASHI/Education/DigitalESDFirstRetainedStudyParseRegression.agda`.
+
+For a retained runtime artifact directory containing:
+
+```text
+requests.jsonl
+verified.jsonl
+parser-output.jsonl
+```
+
+verify the same-object execution receipt with:
+
+```bash
+python3 interop_scripts/digital_esd/verify_observed_study_parse_receipt.py \
+  --receipt-dir artifacts/digital-esd/first-reviewed-study/study-facets-v0_2
+```
+
+The verifier checks source identity/revision/hash agreement, materialised-text
+digest agreement, node/facet counts, the exact 13-role facet surface and every
+candidate/non-promotion flag.
+
+This execution receipt pays:
+
+```text
+real retained full text obtained
+real PDF materialised
+real anchored document nodes emitted
+real candidate study-facet locations emitted
+```
+
+It still does not pay:
+
+```text
+reviewed Population/Sample/etc coordinate
+study claim truth
+nineteen-coordinate extraction completion
+SourceAuditAdmission
+CorpusAuditedSource
+framework challenge conclusion
+```
