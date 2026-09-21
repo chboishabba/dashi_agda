@@ -679,12 +679,39 @@ def _episode_duration(episode: SemanticEpisode) -> float:
     return min(3.0, 1.1 + 0.15 * commit_count)
 
 
+def _working_set_duration(
+    working: ActiveWorkingSet,
+    *,
+    pace_scale: float,
+) -> float:
+    """Reading/reveal time for one semantic change.
+
+    Camera travel has its own timing. This duration grows with semantic density
+    so a dense proof-construction cluster is readable instead of flashing by.
+    """
+
+    changed = len(working.changed_node_ids)
+    relations = len(working.changed_edge_ids)
+    context = len(working.context_node_ids)
+    symbols = len(working.changed_symbols)
+
+    seconds = (
+        0.80
+        + 0.16 * min(changed, 12)
+        + 0.035 * min(relations, 30)
+        + 0.025 * min(context, 24)
+        + 0.08 * min(symbols, 6)
+    )
+    return max(0.70, min(4.8, seconds * max(0.25, pace_scale)))
+
+
 def compile_research_film(
     timeline: dict[str, Any],
     *,
     max_context_nodes: int = 40,
     max_context_edges: int = 100,
     programme_memory_nodes: int = 28,
+    pace_scale: float = 1.0,
 ) -> ResearchFilmPlan:
     working_sets = derive_working_sets(
         timeline,
@@ -904,9 +931,12 @@ def compile_research_film(
                     programme=working.programme,
                     topic=" · ".join(working.topic_tokens),
                     duration_seconds=max(
-                        0.35,
                         _episode_duration(episode)
                         / max(1, len(episode.commits)),
+                        _working_set_duration(
+                            working,
+                            pace_scale=pace_scale,
+                        ),
                     ),
                     focus_node_ids=working.focus_node_ids,
                     focus_edge_ids=working.focus_edge_ids,
