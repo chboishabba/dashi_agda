@@ -84,6 +84,33 @@ kimEtAl2020 =
     "Pays direct structural evidence for hallucinogen-activated human 5-HT2A receptor states, including a 5-HT2A/LSD structural result and Gq-coupled receptor-state context; it does not by itself determine systems-level phenomenology."
     Source.publicAttribution
 
+
+wallachEtAl2023 : Source.AttributedSource
+wallachEtAl2023 =
+  Source.mkDOISource
+    "Jason Wallach; John D. McCorvy; Alexander M. Sherwood; Hamilton Morris; and collaborators"
+    "Identification of 5-HT2A receptor signaling pathways associated with psychedelic potential"
+    "Nature Communications 14:8221"
+    "2023"
+    "10.1038/s41467-023-44016-1"
+    "https://doi.org/10.1038/s41467-023-44016-1"
+    Source.academicArticleSource
+    "Reports that, in the tested ligand series and male-mouse head-twitch paradigm, 5-HT2A Gq efficacy and Gq-PLC disruption track psychedelic-like HTR whereas beta-arrestin2 recruitment does not; this is assay/model-conditioned evidence, not a universal human phenomenology theorem."
+    Source.publicAttribution
+
+xuEtAl2026 : Source.AttributedSource
+xuEtAl2026 =
+  Source.mkDOISource
+    "Zheng Xu; Hongshuang Wang; Jingjing Yu; Yue Deng; Xiaowen Tian; and collaborators"
+    "Psychedelics elicit their effects by 5-HT2A receptor-mediated Gi signalling"
+    "Nature 651:829-837"
+    "2026"
+    "10.1038/s41586-025-10061-7"
+    "https://doi.org/10.1038/s41586-025-10061-7"
+    Source.academicArticleSource
+    "Reports non-canonical 5-HT2A-mediated Gi signaling as essential in the authors' hallucinogenic-effect assays and provides five 5-HT2A-Gi/Gq cryo-EM structures; this does not erase Gq/PLC evidence from other assays or establish a single universal human mechanism."
+    Source.publicAttribution
+
 gumpperEtAl2025 : Source.AttributedSource
 gumpperEtAl2025 =
   Source.mkDOISource
@@ -260,6 +287,8 @@ canonicalKluverLogPolar5HT2ASources =
   ∷ pubChemKetanserin
   ∷ wackerEtAl2017
   ∷ kimEtAl2020
+  ∷ wallachEtAl2023
+  ∷ xuEtAl2026
   ∷ gumpperEtAl2025
   ∷ pdb9AS4
   ∷ ermentroutCowan1979
