@@ -16,6 +16,9 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Dec
 import DASHI.Mathematics.Complexity.ConcreteTapeFlatAssignmentExact as Flat
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.ConcreteTapeInputPaddingExact as Padding
+import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
+import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Locality
+import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Accepting
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 decodeCells_encodeCells :
@@ -108,20 +111,17 @@ paddedInitialInterior :
     (input : Input.InputWord machine)
     (cols : Nat)
     (extension : Padding.WidthExtension input cols) →
-  DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact.InitialInteriorRow
+  Accepting.InitialInteriorRow
     machine
     (Padding.paddedInitialRowAtWidth input cols extension)
 paddedInitialInterior {machine} input cols extension =
   record
-    { DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact.interior =
+    { Accepting.interior =
         paddedInterior
-    ; DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact.headIsInitial =
+    ; Accepting.headIsInitial =
         refl
     }
   where
-    open import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
-    open import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Locality
-
     paddedInterior :
       Locality.InteriorHeadConfiguration machine
         (Padding.paddedInitialRowAtWidth input cols extension)
