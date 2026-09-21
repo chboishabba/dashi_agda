@@ -24,6 +24,9 @@ files=(
   "DASHI/Biology/TargetIndexedRecognitionEmpiricalCalibrationExact.agda"
   "DASHI/Biology/ContextIndexedRecognitionGeometryExact.agda"
   "DASHI/Biology/FiveHT2ARecognitionStateSpaceExact.agda"
+  "DASHI/Biology/TargetRecognitionFibrationExact.agda"
+  "DASHI/Biology/FiveHT2ARecognitionResidualProjectionExact.agda"
+  "DASHI/Biology/FiveHT2AProjectionTowerExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -160,5 +163,23 @@ grep -Fq 'sameLigandAcrossFixtureStates' "$statespace"
 grep -Fq 'state0Admitted' "$statespace"
 grep -Fq 'state1Rejected' "$statespace"
 grep -Fq 'moleculeIdentityIsNotFullState' "$statespace"
+
+fibration="$root/DASHI/Biology/TargetRecognitionFibrationExact.agda"
+grep -Fq 'canonicalRecognitionSplitLift' "$fibration"
+grep -Fq 'canonicalRecognitionObservationNaturality' "$fibration"
+grep -Fq 'canonicalAdmissionChangesAcrossContext' "$fibration"
+grep -Fq 'fullGrothendieckEquivalenceClaimedIsFalse' "$fibration"
+
+residual="$root/DASHI/Biology/FiveHT2ARecognitionResidualProjectionExact.agda"
+grep -Fq 'publicLigandCollision' "$residual"
+grep -Fq 'recognitionRecoverableProjection' "$residual"
+grep -Fq 'recognitionCodeSeparating' "$residual"
+grep -Fq 'publicProjectionIsNotInjective' "$residual"
+
+tower="$root/DASHI/Biology/FiveHT2AProjectionTowerExact.agda"
+grep -Fq 'recognitionStatesCollapseAtSignaling' "$tower"
+grep -Fq 'recognitionPerceptComposition' "$tower"
+grep -Fq 'signalingProjectionNotFaithful' "$tower"
+grep -Fq 'perceptDoesNotDetermineLigand' "$tower"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
