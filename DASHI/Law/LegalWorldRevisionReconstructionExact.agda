@@ -58,7 +58,7 @@ successorAuthorityValidity =
   authorityValidity successorAuthority qld false true "oldAuthority"
 
 activeAt : AuthorityValidity → LegalWorld → Bool
-activeAt validity world with AuthorityValidity.jurisdiction validity | LegalWorld.jurisdiction world
+activeAt validity world with AuthorityValidity.jurisdiction validity | LegalWorld.LegalWorld.jurisdiction world
 ... | qld | qld with asAt world
 ...   | t1 = activeAtT1 validity
 ...   | t2 = activeAtT2 validity
@@ -104,12 +104,12 @@ data JurisdictionQuery : Set where askQldOutcome : JurisdictionQuery
 data JurisdictionAnswer : Set where qldAnswer nswAnswer : JurisdictionAnswer
 
 jurisdictionProject : LegalWorld → JurisdictionObservation
-jurisdictionProject world with jurisdiction world
+jurisdictionProject world with LegalWorld.jurisdiction world
 ... | qld = qldSurface
 ... | nsw = nswSurface
 
 jurisdictionAnswer : JurisdictionQuery → LegalWorld → JurisdictionAnswer
-jurisdictionAnswer askQldOutcome world with jurisdiction world
+jurisdictionAnswer askQldOutcome world with LegalWorld.jurisdiction world
 ... | qld = qldAnswer
 ... | nsw = nswAnswer
 
@@ -125,7 +125,7 @@ jurisdictionFactorisation :
   (λ { qldSurface → qldAnswer
      ; nswSurface → nswAnswer })
     (jurisdictionProject world)
-jurisdictionFactorisation world with jurisdiction world
+jurisdictionFactorisation world with LegalWorld.jurisdiction world
 ... | qld = refl
 ... | nsw = refl
 
