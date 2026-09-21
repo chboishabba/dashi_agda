@@ -207,6 +207,8 @@ import DASHI.Law.MaboRevisionReopenExact
 import DASHI.Law.MaboRevisionReopenRegression
 import DASHI.Law.RevisionReReviewPropagationExact
 import DASHI.Law.RevisionReReviewPropagationRegression
+import DASHI.Law.QueryScopedRevisionImpactExact
+import DASHI.Law.QueryScopedRevisionImpactRegression
 import DASHI.Law.MaboHistoricalRevisionShadowExact
 import DASHI.Law.MaboHistoricalRevisionShadowRegression
 import DASHI.Law.RevisionInvalidatedProjectionAdequacyExact
