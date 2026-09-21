@@ -131,13 +131,14 @@ record VersionedStateProvider : Set₁ where
     parentStates : VersionState → List VersionState
     materializations : VersionState → List MaterializedView
 
-open VersionedStateProvider public
-
 record SemanticMaterializer
   (provider : VersionedStateProvider) : Set₁ where
   open VersionedStateProvider provider
   field
     extractSemanticGraph : MaterializedView → SemanticGraph
+
+open VersionedStateProvider public
+open SemanticMaterializer public
 
 ------------------------------------------------------------------------
 -- History events compile to a small renderer-neutral lane vocabulary.

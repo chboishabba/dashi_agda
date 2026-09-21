@@ -41,16 +41,13 @@ identityVisualPrimitive :
   SymbolIdentityEvidence →
   IdentityVisualPrimitive
 identityVisualPrimitive
-  (symbolIdentityEvidence old new exactSemanticKey exactIdentity) =
+  (symbolIdentityEvidence old new _ exactIdentity) =
   preserveNode old
 identityVisualPrimitive
-  (symbolIdentityEvidence old new sourceMoveEvidence supportedIdentity) =
+  (symbolIdentityEvidence old new _ supportedIdentity) =
   morphNodeIdentity old new
 identityVisualPrimitive
-  (symbolIdentityEvidence old new uniqueStructuralFingerprint supportedIdentity) =
-  morphNodeIdentity old new
-identityVisualPrimitive
-  (symbolIdentityEvidence old new heuristicSimilarity heuristicIdentity) =
+  (symbolIdentityEvidence old new _ heuristicIdentity) =
   replaceUncertainNode old new
 
 data IdentityVisualIntent : Set where
