@@ -18,6 +18,7 @@ module DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
