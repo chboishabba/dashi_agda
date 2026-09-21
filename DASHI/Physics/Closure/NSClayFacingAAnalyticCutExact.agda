@@ -27,6 +27,10 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Physics.Closure.NSWholeSpaceProjectedSaturationOriginBoundExact as Origin
+import DASHI.Physics.Closure.NSWholeSpacePhysicalKernelSaturationOriginExact as KernelOrigin
+import DASHI.Physics.Closure.NSTriadKNEuclideanCenteredResolventScaleRelativeExact as HighCurvature
+
 data ObligationKind : Set where
   physicalSameObjectResearch : ObligationKind
   standardCitableAnalysis : ObligationKind
@@ -49,7 +53,7 @@ open AObligation public
 
 lowPhysicalPointwiseDomination : AObligation
 lowPhysicalPointwiseDomination = a-obligation
-  "actual compensated low-frequency NS integrand <= compact-output convolution envelope"
+  "instantiate the physical resolvent kernel as the already-proved projected saturation origin cell and identify its state majorant"
   physicalSameObjectResearch
   openResearch
   false
@@ -63,7 +67,7 @@ lowEnvelopeIntegrability = a-obligation
 
 highPhysicalPointwiseDomination : AObligation
 highPhysicalPointwiseDomination = a-obligation
-  "actual high-frequency NS quantity <= inverse-sixth weighted convolution envelope"
+  "identify the actual high-frequency physical resolvent/state quantity with the already-proved scale-relative curvature envelope"
   physicalSameObjectResearch
   openResearch
   false
@@ -88,6 +92,21 @@ aGenericYoungCauchyIsResearchFrontier = false
 aGenericInverseSixthTailIsResearchFrontier : Bool
 aGenericInverseSixthTailIsResearchFrontier = false
 
+aLocalProjectedOriginCancellationClosed : Bool
+aLocalProjectedOriginCancellationClosed =
+  Origin.wholeSpaceProjectedSaturationOriginBoundClosed
+
+aPhysicalKernelOriginCompilerClosed : Bool
+aPhysicalKernelOriginCompilerClosed =
+  KernelOrigin.lowFrequencyPhysicalKernelSaturationCompilerClosed
+
+aHighFrequencyScaleRelativeCurvatureClosed : Bool
+aHighFrequencyScaleRelativeCurvatureClosed =
+  HighCurvature.euclideanHighFrequencyScaleRelativeCurvatureClosed
+
+aLocalLowFrequencySingularityIsResearchFrontier : Bool
+aLocalLowFrequencySingularityIsResearchFrontier = false
+
 aPhysicalLowSameObjectDominationClosed : Bool
 aPhysicalLowSameObjectDominationClosed = false
 
@@ -104,6 +123,22 @@ aGenericYoungCauchyIsResearchFrontierIsFalse = refl
 aGenericInverseSixthTailIsResearchFrontierIsFalse :
   aGenericInverseSixthTailIsResearchFrontier ≡ false
 aGenericInverseSixthTailIsResearchFrontierIsFalse = refl
+
+aLocalLowFrequencySingularityIsResearchFrontierIsFalse :
+  aLocalLowFrequencySingularityIsResearchFrontier ≡ false
+aLocalLowFrequencySingularityIsResearchFrontierIsFalse = refl
+
+aLocalProjectedOriginCancellationClosedIsTrue :
+  aLocalProjectedOriginCancellationClosed ≡ true
+aLocalProjectedOriginCancellationClosedIsTrue = refl
+
+aPhysicalKernelOriginCompilerClosedIsTrue :
+  aPhysicalKernelOriginCompilerClosed ≡ true
+aPhysicalKernelOriginCompilerClosedIsTrue = refl
+
+aHighFrequencyScaleRelativeCurvatureClosedIsTrue :
+  aHighFrequencyScaleRelativeCurvatureClosed ≡ true
+aHighFrequencyScaleRelativeCurvatureClosedIsTrue = refl
 
 aClayFacingFirstResidualIsPhysicalSameObjectDominationIsTrue :
   aClayFacingFirstResidualIsPhysicalSameObjectDomination ≡ true
