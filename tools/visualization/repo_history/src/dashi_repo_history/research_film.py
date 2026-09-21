@@ -514,6 +514,14 @@ def derive_working_sets(
             None,
         )
         parent_snapshot = snapshots.get(parent) if parent else None
+
+        # A selected history window often begins from a materialized checkpoint
+        # whose real parent lies outside the window. Existing declarations in
+        # that snapshot are baseline context, not thousands of simultaneous
+        # proof-production events.
+        if parent is None and commit.get("parents"):
+            continue
+
         working_sets.extend(
             _working_sets_for_commit(
                 commit=commit,
