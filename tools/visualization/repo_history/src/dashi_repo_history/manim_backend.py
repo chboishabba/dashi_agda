@@ -26,6 +26,7 @@ from manim import (
     VGroup,
 )
 
+from dashi_repo_history.compact_history import load_history_file
 from dashi_repo_history.history_axis import format_timestamp_date, temporal_history_layout
 from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
@@ -578,7 +579,7 @@ class SemanticSymbolScene(MovingCameraScene):
             self.add(Text("Set DASHI_REPO_SYMBOL", font_size=28))
             return
 
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data = load_history_file(path)
         snapshots = data.get("snapshots", [])
         if not snapshots:
             self.add(Text("No semantic snapshots", font_size=28))
@@ -743,7 +744,7 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             self.add(Text("Set DASHI_REPO_SYMBOL", font_size=28))
             return
 
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data = load_history_file(path)
         try:
             program = compile_temporal_symbol_program(
                 data,
@@ -887,7 +888,7 @@ class RepositoryHistoryScene(MovingCameraScene):
             self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
             return
 
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data = load_history_file(path)
         commits = data["commits"]
 
         title = Text(
@@ -925,7 +926,7 @@ class SemanticSnapshotScene(MovingCameraScene):
             self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
             return
 
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data = load_history_file(path)
         snapshots = data.get("snapshots", [])
         if not snapshots:
             self.add(Text("No semantic snapshots", font_size=28))
@@ -964,7 +965,7 @@ class SemanticHistoryScene(MovingCameraScene):
             self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
             return
 
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data = load_history_file(path)
         target_commit = os.environ.get("DASHI_REPO_TARGET_COMMIT")
         program = compile_first_parent_program(
             data,
@@ -1065,7 +1066,7 @@ class SemanticBranchEpisodeScene(MovingCameraScene):
             self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
             return
 
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data = load_history_file(path)
         program = compile_branch_episode_program(
             data,
             episode_index=episode_index,
@@ -1272,7 +1273,7 @@ class SemanticMergeScene(MovingCameraScene):
             self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
             return
 
-        data = json.loads(Path(path).read_text(encoding="utf-8"))
+        data = load_history_file(path)
         program = compile_merge_episode_program(
             data,
             episode_index=episode_index,
