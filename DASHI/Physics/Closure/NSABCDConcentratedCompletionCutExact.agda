@@ -49,6 +49,9 @@ import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact as BR54
 import DASHI.Physics.Closure.NSTriadKNFourSignInnerFibreGramBoundaryRound577Exact as BR577
 import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact as BFold
 import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact as ADom
+import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationProducerExact as ADomProducer
+import DASHI.Physics.Closure.NSWholeSpaceActualPhysicalCompensatedFieldExact as AActualField
+import DASHI.Physics.Closure.NSWholeSpaceActualSignedLebesgueEndgameExact as AActualEnd
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact as DEnergy
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact as CLocal
 import DASHI.Physics.Closure.NSTriadKNR567ForcingCellPhysicalEnvelopeExact as B567Envelope
@@ -121,6 +124,18 @@ aHighInverseSixthTargetIsolated =
 aPhysicalMajorantIntegrabilityReducedToEnvelopeDomination : Bool
 aPhysicalMajorantIntegrabilityReducedToEnvelopeDomination =
   ADom.physicalMajorantIntegrabilityNoLongerOpaque
+
+aPhysicalMajorantDominationProducerCompilerClosed : Bool
+aPhysicalMajorantDominationProducerCompilerClosed =
+  ADomProducer.physicalMajorantDominationProducerCompilerClosed
+
+aActualPhysicalCompensatedFieldCompilerClosed : Bool
+aActualPhysicalCompensatedFieldCompilerClosed =
+  AActualField.actualPhysicalCompensatedFieldCompilerClosed
+
+aActualSignedLebesgueEndgameCompilerClosed : Bool
+aActualSignedLebesgueEndgameCompilerClosed =
+  AActualEnd.actualSignedLebesgueEndgameCompilerClosed
 
 aLowConvolutionEnvelopeIntegrableClosed : Bool
 aLowConvolutionEnvelopeIntegrableClosed = false
