@@ -21,6 +21,7 @@ import DASHI.Biology.FiveHT2ARecognitionStateSpaceExact
 import DASHI.Biology.TargetRecognitionFibrationExact
 import DASHI.Biology.FiveHT2ARecognitionResidualProjectionExact
 import DASHI.Biology.FiveHT2AProjectionTowerExact
+import DASHI.Biology.TargetRecognitionBundleFibreExact
 import DASHI.Biology.FiveHT2ACalciumIdentityGeometryBoundaryExact
 import DASHI.Biology.FiveHT2ASignalingDialecticExact
 import DASHI.Biology.FiveHT2AProtocolIndexedSignalTransportExact
