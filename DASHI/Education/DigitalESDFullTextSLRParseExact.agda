@@ -29,6 +29,51 @@ import DASHI.Education.DigitalESDStudyProcessingCensusExact as Census
 --   reviewed canonical evidence != SourceAuditAdmission
 ------------------------------------------------------------------------
 
+
+------------------------------------------------------------------------
+-- Binary/document artifact -> parser-text materialisation.
+--
+-- PDF/DOCX/HTML bytes and extracted UTF-8 text are distinct revisions.
+-- The parser is forbidden from silently replacing one with the other.
+------------------------------------------------------------------------
+
+record TextMaterialisationReceipt : Set where
+  constructor text-materialisation-receipt
+  field
+    materialisationSourceIdentityReference : String
+
+    parentArtifactRevisionReference : String
+    parentArtifactDigestReference : String
+    parentArtifactReference : String
+
+    materialisedTextRevisionReference : String
+    materialisedTextDigestReference : String
+    materialisedTextReference : String
+    extractionBackendReference : String
+    materialisationReceiptReference : String
+
+    parentArtifactDigestRechecked : Bool
+    parentArtifactDigestRecheckedIsTrue :
+      parentArtifactDigestRechecked ≡ true
+
+    derivedTextRevisionExplicit : Bool
+    derivedTextRevisionExplicitIsTrue :
+      derivedTextRevisionExplicit ≡ true
+
+    materialisationCreatesSemanticAuthority : Bool
+    materialisationCreatesSemanticAuthorityIsFalse :
+      materialisationCreatesSemanticAuthority ≡ false
+
+    materialisationCreatesReviewedEvidence : Bool
+    materialisationCreatesReviewedEvidenceIsFalse :
+      materialisationCreatesReviewedEvidence ≡ false
+
+    materialisationCreatesSourceAuditAdmission : Bool
+    materialisationCreatesSourceAuditAdmissionIsFalse :
+      materialisationCreatesSourceAuditAdmission ≡ false
+
+open TextMaterialisationReceipt public
+
 record SLRParseRequest : Set where
   constructor slr-parse-request
   field
@@ -38,6 +83,20 @@ record SLRParseRequest : Set where
     artifactReference : String
     acquisitionReceiptReference : String
     requestReference : String
+
+    materialisation : TextMaterialisationReceipt
+
+    requestIdentityMatchesMaterialisation :
+      sourceIdentityReference
+      ≡ materialisationSourceIdentityReference materialisation
+
+    requestRevisionMatchesMaterialisedText :
+      sourceRevisionReference
+      ≡ materialisedTextRevisionReference materialisation
+
+    requestDigestMatchesMaterialisedText :
+      contentDigestReference
+      ≡ materialisedTextDigestReference materialisation
 
     candidateOnly : Bool
     candidateOnlyIsTrue : candidateOnly ≡ true
@@ -162,6 +221,9 @@ data ParserMayReplaceSourceRevision : Set where
 data ParserMayReplaceContentDigest : Set where
 data ParserMayReplaceSourceIdentity : Set where
 data MetadataOnlyRowMayEnterParseHandoff : Set where
+data TextMaterialisationCountsAsSLRParse : Set where
+data TextMaterialisationMayEraseParentRevision : Set where
+data ParserMayAnchorTextSpanToParentBinaryRevision : Set where
 
 cacheRegistrationDoesNotCountAsSLRParse :
   CacheRegistrationCountsAsSLRParse → ⊥
@@ -203,6 +265,18 @@ metadataOnlyRowDoesNotEnterParseHandoff :
   MetadataOnlyRowMayEnterParseHandoff → ⊥
 metadataOnlyRowDoesNotEnterParseHandoff ()
 
+textMaterialisationDoesNotCountAsSLRParse :
+  TextMaterialisationCountsAsSLRParse → ⊥
+textMaterialisationDoesNotCountAsSLRParse ()
+
+textMaterialisationDoesNotEraseParentRevision :
+  TextMaterialisationMayEraseParentRevision → ⊥
+textMaterialisationDoesNotEraseParentRevision ()
+
+parserDoesNotAnchorTextSpanToParentBinaryRevision :
+  ParserMayAnchorTextSpanToParentBinaryRevision → ⊥
+parserDoesNotAnchorTextSpanToParentBinaryRevision ()
+
 ------------------------------------------------------------------------
 -- Boundary.
 ------------------------------------------------------------------------
@@ -221,6 +295,18 @@ record FullTextSLRParseBoundary : Set where
     sameObjectIdentityRequired : Bool
     sameObjectIdentityRequiredIsTrue :
       sameObjectIdentityRequired ≡ true
+
+    binaryAndMaterialisedTextRevisionsDistinct : Bool
+    binaryAndMaterialisedTextRevisionsDistinctIsTrue :
+      binaryAndMaterialisedTextRevisionsDistinct ≡ true
+
+    derivedTextRevisionRequiresExplicitReceipt : Bool
+    derivedTextRevisionRequiresExplicitReceiptIsTrue :
+      derivedTextRevisionRequiresExplicitReceipt ≡ true
+
+    parserAnchorsBelongToMaterialisedTextRevision : Bool
+    parserAnchorsBelongToMaterialisedTextRevisionIsTrue :
+      parserAnchorsBelongToMaterialisedTextRevision ≡ true
 
     artifactDigestRecheckedBeforeHandoff : Bool
     artifactDigestRecheckedBeforeHandoffIsTrue :
@@ -258,6 +344,9 @@ canonicalFullTextSLRParseBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
@@ -265,4 +354,4 @@ canonicalFullTextSLRParseBoundary =
 
 fullTextSLRParseReading : String
 fullTextSLRParseReading =
-  "Digital-ESD full-text parsing begins only after an authoritative include/probable decision has led to a materialised cache artifact. The cache ledger is rechecked against the actual artifact digest before parser handoff. The parser request and normalized parsed-bundle receipt must preserve the same source identity, exact full-text revision and content digest. A parsed bundle may contain many anchored document nodes and candidate study facets; it is not itself a reviewed canonical EvidenceObservation. Cache registration is not parsing; a zero process exit is not evidence payment; parser bundles do not create reviewed canonical evidence, source truth or SourceAuditAdmission."
+  "Digital-ESD full-text parsing begins only after an authoritative include/probable decision has led to a materialised cache artifact. The cache ledger is rechecked against the actual artifact digest before parser handoff. Binary/document bytes and their extracted UTF-8 parser text are distinct revisions: an explicit TextMaterialisationReceipt retains the parent artifact revision/digest and the derived text revision/digest. Parser text/span anchors belong to that derived text revision, never silently to the parent PDF/DOCX binary revision. The parser request and normalized parsed-bundle receipt must preserve the same source identity, exact parser-text revision and content digest. A parsed bundle may contain many anchored document nodes and candidate study facets; it is not itself a reviewed canonical EvidenceObservation. Cache registration is not parsing; a zero process exit is not evidence payment; parser bundles do not create reviewed canonical evidence, source truth or SourceAuditAdmission."
