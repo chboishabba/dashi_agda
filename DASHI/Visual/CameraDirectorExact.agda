@@ -31,9 +31,19 @@ record CameraDirectorBoundary : Set where
     cameraShouldFitActiveSemanticSetIsTrue :
       cameraShouldFitActiveSemanticSet ≡ true
 
+    cameraMayUseLayoutMotionAsSemanticEvidence : Bool
+    cameraMayUseLayoutMotionAsSemanticEvidenceIsFalse :
+      cameraMayUseLayoutMotionAsSemanticEvidence ≡ false
+
+    tinyLayoutChangesMustMoveCamera : Bool
+    tinyLayoutChangesMustMoveCameraIsFalse :
+      tinyLayoutChangesMustMoveCamera ≡ false
+
 canonicalCameraDirectorBoundary : CameraDirectorBoundary
 canonicalCameraDirectorBoundary =
   cameraDirectorBoundary
     false refl
     true refl
     true refl
+    false refl
+    false refl
