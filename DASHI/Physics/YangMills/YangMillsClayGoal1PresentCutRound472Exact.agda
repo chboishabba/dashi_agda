@@ -15,7 +15,9 @@ module DASHI.Physics.YangMills.YangMillsClayGoal1PresentCutRound472Exact where
 -- uses the direct selected CMP116 localization -> R454 -> R455 route, so BC2 is
 -- not a prerequisite of the submission mass-gap theorem.
 --
--- The current finite RG/source cut is therefore A1 + A2 + BC1 only.
+-- The current preferred finite RG/source cut is therefore A1 + A2 only.
+-- BC1 is retained below only as an audit/fallback for historical Hessian/Heat
+-- routes; no preferred Goal-1 consumer observes it.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -61,28 +63,23 @@ a2FullPrefixSubunitCompilerLevel =
   R121.a2FullPrefixSubunitCompilerLevel
 
 ------------------------------------------------------------------------
--- BC1: literal differentiated carrier / full physical A=A(B) chain rule.
+-- Historical BC1 audit/fallback only.
 ------------------------------------------------------------------------
 
-bc1LiteralSourceAndDemandInputsLevel : ProofLevel
-bc1LiteralSourceAndDemandInputsLevel =
+bc1LiteralSourceAndDemandFallbackLevel : ProofLevel
+bc1LiteralSourceAndDemandFallbackLevel =
   R121.bc1LiteralSourceAndDemandInputsLevel
 
-bc1LiteralPhysicalCompositeComponentLevel : ProofLevel
-bc1LiteralPhysicalCompositeComponentLevel =
+bc1PhysicalCompositeComponentFallbackLevel : ProofLevel
+bc1PhysicalCompositeComponentFallbackLevel =
   R121.bc1LiteralPhysicalCompositeComponentLevel
-
-bc1CanonicalCarrierCompilerLevel : ProofLevel
-bc1CanonicalCarrierCompilerLevel =
-  R121.bc1CanonicalCarrierCompilerLevel
-
-bc1PhysicalCompositeChainRuleCompilerLevel : ProofLevel
-bc1PhysicalCompositeChainRuleCompilerLevel =
-  R121.bc1PhysicalCompositeChainRuleLevel
 
 ------------------------------------------------------------------------
 -- Goal-1 pruning.
 ------------------------------------------------------------------------
+
+bc1DifferentiatedHessianCarrierRequiredByPreferredGoal1 : Bool
+bc1DifferentiatedHessianCarrierRequiredByPreferredGoal1 = false
 
 bc2HeatDoobRequiredForDirectCMP116Goal1MassGap : Bool
 bc2HeatDoobRequiredForDirectCMP116Goal1MassGap = false
@@ -93,8 +90,8 @@ heatLangevinClusteringRouteMandatory = false
 round472PresentCutCompilerLevel : ProofLevel
 round472PresentCutCompilerLevel = machineChecked
 
--- The remaining physical source wall is exactly A1/A2/BC1 above.  No BC2
--- finite-heat-semigroup or gradient-covariance inhabitant is needed by the
--- preferred Goal-1 mass-gap route.
+-- The remaining preferred finite-RG source wall is exactly A1/A2 above.
+-- Neither the historical BC1 differentiated-Hessian carrier nor BC2 finite
+-- Heat/Doob covariance is consumed by the direct Goal-1 B/C routes.
 literalRound472PresentCutInstantiationLevel : ProofLevel
 literalRound472PresentCutInstantiationLevel = conditional
