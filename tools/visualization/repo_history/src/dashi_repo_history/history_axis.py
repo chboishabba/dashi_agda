@@ -169,3 +169,12 @@ def temporal_history_layout(
         min_timestamp=minimum,
         max_timestamp=maximum,
     )
+
+
+def format_timestamp_date(timestamp: int | None) -> str:
+    if timestamp is None:
+        return "date unknown"
+    return datetime.fromtimestamp(
+        int(timestamp),
+        tz=timezone.utc,
+    ).strftime("%Y-%m-%d")
