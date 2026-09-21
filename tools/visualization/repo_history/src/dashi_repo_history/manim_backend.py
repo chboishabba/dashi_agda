@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from math import hypot
 import os
 from pathlib import Path
 from typing import Any
@@ -1596,6 +1597,8 @@ class ResearchEvolutionScene(MovingCameraScene):
                 target = frame.get_top() + DOWN * (0.72 * scale)
             elif slot == "topic":
                 target = frame.get_top() + DOWN * (1.02 * scale)
+            elif slot == "work":
+                target = frame.get_top() + DOWN * (1.30 * scale)
             elif slot == "date":
                 target = (
                     frame.get_corner(DOWN + RIGHT)
@@ -1637,10 +1640,32 @@ class ResearchEvolutionScene(MovingCameraScene):
                 max_width=directive.max_width,
             )
 
+        previous = getattr(self, "_last_camera_target", None)
+        previous_width = getattr(self, "_last_camera_width", None)
+        if previous is not None and previous_width is not None:
+            distance = hypot(
+                float(target[0]) - float(previous[0]),
+                float(target[1]) - float(previous[1]),
+            )
+            width_change = abs(width - previous_width) / max(
+                0.01,
+                previous_width,
+            )
+            # Camera motion is editorial, not a response to every microscopic
+            # layout movement. Keep the current frame unless the semantic
+            # working set has moved materially.
+            if distance < 0.18 and width_change < 0.06:
+                return
+
         self.play(
             self.camera.frame.animate.move_to(target).set(width=width),
             run_time=directive.transition_seconds,
         )
+        self._last_camera_target = (
+            float(target[0]),
+            float(target[1]),
+        )
+        self._last_camera_width = float(width)
 
     def construct(self) -> None:
         path = os.environ.get("DASHI_REPO_HISTORY_JSON")
@@ -1669,15 +1694,39 @@ class ResearchEvolutionScene(MovingCameraScene):
         title = Text("Dashi formal research evolution", font_size=28)
         programme_label = Text("", font_size=18)
         topic_label = Text("", font_size=13)
+        work_label = Text("", font_size=11)
         date_label = Text("", font_size=12)
         self._pin_hud(title, "title")
         self._pin_hud(programme_label, "programme")
         self._pin_hud(topic_label, "topic")
+        self._pin_hud(work_label, "work")
         self._pin_hud(date_label, "date")
-        self.add(title, programme_label, topic_label, date_label)
-        self.play(FadeIn(title), run_time=0.35)
+        self.add(
+            title,
+            programme_label,
+            topic_label,
+            work_label,
+            date_label,
+        )
 
-        admitted_nodes: set[str] = set()
+        region_labels = VGroup(
+            *[
+                Text(
+                    region.programme,
+                    font_size=20,
+                )
+                .move_to([region.x, region.y + 3.7, 0.0])
+                .set_opacity(0.22)
+                for region in plan.regions
+            ]
+        )
+        self.add(region_labels)
+        self.play(
+            FadeIn(title),
+            FadeIn(region_labels),
+            run_time=0.35,
+        )
+
         graph_created = False
         current_commit: str | None = None
 
@@ -1688,7 +1737,12 @@ class ResearchEvolutionScene(MovingCameraScene):
                     font_size=18,
                 )
                 next_topic = Text(
-                    beat.topic or "formal development",
+                    str(
+                        (beat.payload or {}).get(
+                            "headline",
+                            beat.topic or "formal development",
+                        )
+                    ),
                     font_size=13,
                 )
                 self._pin_hud(next_programme, "programme")
@@ -1722,6 +1776,28 @@ class ResearchEvolutionScene(MovingCameraScene):
                 "pr-merge",
                 "cross-programme-overview",
             }:
+                if (
+                    beat.kind == "cross-programme-overview"
+                    and beat.commit is not None
+                    and beat.visible_node_ids
+                ):
+                    overview_snapshot = snapshots.get(beat.commit)
+                    if overview_snapshot is not None:
+                        overview_graph = _film_graph(
+                            overview_snapshot,
+                            set(beat.visible_node_ids),
+                        )
+                        if graph_created:
+                            view.apply_snapshot(
+                                self,
+                                overview_graph,
+                                run_time=0.35,
+                            )
+                        else:
+                            graph = view.build(overview_graph)
+                            self.play(Create(graph), run_time=0.65)
+                            graph_created = True
+
                 if beat.camera is not None and graph_created:
                     self._focus_camera(
                         view,
@@ -1758,8 +1834,14 @@ class ResearchEvolutionScene(MovingCameraScene):
                     beat.camera,
                 )
 
-            admitted_nodes.update(beat.focus_node_ids)
-            next_graph = _film_graph(snapshot, admitted_nodes)
+            visible_nodes = set(
+                beat.visible_node_ids
+                or beat.focus_node_ids
+            )
+            next_graph = _film_graph(
+                snapshot,
+                visible_nodes,
+            )
 
             if not graph_created:
                 graph = view.build(next_graph)
@@ -1786,6 +1868,38 @@ class ResearchEvolutionScene(MovingCameraScene):
                 run_time=0.12,
             )
             date_label = next_date
+
+            payload = beat.payload or {}
+            changed_symbols = payload.get("changed_symbols", [])
+            lane = payload.get("lane")
+            modules = payload.get("modules", [])
+            symbol_text = " · ".join(
+                str(item.get("label", ""))
+                for item in changed_symbols[:4]
+                if item.get("label")
+            )
+            if len(changed_symbols) > 4:
+                symbol_text += f" +{len(changed_symbols) - 4}"
+            context_bits = []
+            if lane:
+                context_bits.append(f"Lane {lane}")
+            if modules:
+                context_bits.append(
+                    str(modules[0]).replace("DASHI.", "")
+                )
+            if symbol_text:
+                context_bits.append(symbol_text)
+            next_work = Text(
+                "  |  ".join(context_bits),
+                font_size=11,
+            )
+            self._pin_hud(next_work, "work")
+            self.add(next_work)
+            self.play(
+                ReplacementTransform(work_label, next_work),
+                run_time=0.10,
+            )
+            work_label = next_work
 
             if beat.camera is not None:
                 self._focus_camera(
