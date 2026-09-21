@@ -1192,3 +1192,75 @@ passed verified bytes -> text materialisation -> SLR handoff -> scholarly parse,
 with zero reviewed-evidence and admission promotion. Additional study parsing is
 now blocked on obtaining additional authoritatively retained full-text bytes,
 not on parser architecture.
+
+
+## Round-1 title/abstract review execution
+
+The first explicit review tranche has now been recovered from the retained
+50-line review overlay and normalised into the authoritative Digital-ESD
+screening-override schema:
+
+`artifacts/digital-esd/screening/reviewer-decisions-round1.jsonl`
+
+Round-1 denominator:
+
+```text
+reviewed records      50
+exclude               27
+probable              11
+include                4
+unresolved             8
+retained for fulltext 15
+```
+
+The 15 authoritative `include | probable` decisions are separately queued in:
+
+`artifacts/digital-esd/fulltext/fulltext-retrieval-seed-round1.jsonl`
+
+with the retained boundary:
+
+```text
+screening decision -> retrieval queue
+!= source truth
+!= SourceAuditAdmission
+```
+
+The eight unresolved rows remain unresolved and remain in the denominator.
+The 27 exclusions remain ledgered and are not discarded.
+
+### Important fixture boundary
+
+The 43,996-row `fixtures/digital_esd_ledger.tsv` currently present in the SLR
+core repository is an infrastructure/regression fixture with generated
+`digital-education-source-N-...pipeline-validation` content. Its current P0-D
+controller score is derived from a hash of record/run identity.
+
+Therefore:
+
+```text
+SLR synthetic 43,996-row fixture
+!= real ERIC title/abstract corpus
+!= scientific screening evidence
+```
+
+It may test scale, denominator integrity, replay and parser plumbing, but real
+Digital-ESD screening decisions must remain grounded in the actual ERIC
+title/abstract review packets / deduplicated metadata artifact.
+
+### Immediate next execution
+
+```text
+50 reviewed
+-> 15 retained/probable
+-> retrieve exact full-text artifacts
+-> hash + same-object weld
+-> parse canonical document structure / evidence
+-> per-study review/audit
+
+8 unresolved
+-> targeted evidence/title-abstract resolution
+-> explicit review again
+
+remaining ERIC denominator
+-> prepare next adaptive review tranche
+```
