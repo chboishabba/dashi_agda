@@ -9,6 +9,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact
 -- equal bit vectors.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (trans; sym)
@@ -252,23 +253,23 @@ selectorSliceBits_eq_blockSlice {machine} {steps} {cols}
 record GlobalBlockSliceConsistencyReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
-    takeMatchesLeftFinPullbackPaid : Agda.Builtin.Bool.Bool
-    dropMatchesRightFinPullbackPaid : Agda.Builtin.Bool.Bool
-    repeatedBlockPullbackPaid : Agda.Builtin.Bool.Bool
-    rowSliceMatchesDecoderPartitionPaid : Agda.Builtin.Bool.Bool
-    selectorSliceMatchesDecoderPartitionPaid : Agda.Builtin.Bool.Bool
-    rawWindowMatchesDecodedRowsPaid : Agda.Builtin.Bool.Bool
-    semanticScanToStepsPaid : Agda.Builtin.Bool.Bool
+    takeMatchesLeftFinPullbackPaid : Bool
+    dropMatchesRightFinPullbackPaid : Bool
+    repeatedBlockPullbackPaid : Bool
+    rowSliceMatchesDecoderPartitionPaid : Bool
+    selectorSliceMatchesDecoderPartitionPaid : Bool
+    rawWindowMatchesDecodedRowsPaid : Bool
+    semanticScanToStepsPaid : Bool
 
 globalBlockSliceConsistencyReceipt :
   ∀ (machine : Local.ConcreteTapeMachine) →
   GlobalBlockSliceConsistencyReceipt machine
 globalBlockSliceConsistencyReceipt machine = record
-  { takeMatchesLeftFinPullbackPaid = Agda.Builtin.Bool.true
-  ; dropMatchesRightFinPullbackPaid = Agda.Builtin.Bool.true
-  ; repeatedBlockPullbackPaid = Agda.Builtin.Bool.true
-  ; rowSliceMatchesDecoderPartitionPaid = Agda.Builtin.Bool.true
-  ; selectorSliceMatchesDecoderPartitionPaid = Agda.Builtin.Bool.true
+  { takeMatchesLeftFinPullbackPaid = true
+  ; dropMatchesRightFinPullbackPaid = true
+  ; repeatedBlockPullbackPaid = true
+  ; rowSliceMatchesDecoderPartitionPaid = true
+  ; selectorSliceMatchesDecoderPartitionPaid = true
   ; rawWindowMatchesDecodedRowsPaid = Agda.Builtin.Bool.false
   ; semanticScanToStepsPaid = Agda.Builtin.Bool.false
   }
