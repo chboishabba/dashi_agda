@@ -287,3 +287,132 @@ def test_removed_symbol_keeps_parent_programme_identity():
         if item.commit == "B"
     )
     assert b.programme == "NavierStokes"
+
+
+def test_working_set_exposes_exact_changed_symbol_context_and_lane():
+    node = _node(
+        "ns-b1",
+        "R571PreferredFixedOutput",
+        "DASHI.Physics.NavierStokes.LaneB",
+    )
+    timeline = {
+        "commits": [
+            {"commit": "A", "timestamp": 0, "parents": []},
+        ],
+        "snapshots": [
+            _snapshot("A", [node]),
+        ],
+        "refs": {},
+        "branch_episodes": [],
+    }
+
+    plan = compile_research_film(timeline)
+    working = plan.working_sets[0]
+
+    assert working.programme == "NavierStokes"
+    assert working.lane == "B"
+    assert working.modules == (
+        "DASHI.Physics.NavierStokes.LaneB",
+    )
+    assert working.changed_symbols[0][0] == "R571PreferredFixedOutput"
+    assert "R571PreferredFixedOutput" in working.headline
+
+
+def test_semantic_beats_keep_bounded_programme_memory_not_all_history():
+    commits = []
+    snapshots = []
+    previous = None
+    current_nodes = []
+    for index in range(8):
+        sha = f"C{index}"
+        node = _node(
+            f"n{index}",
+            f"R571Step{index}",
+            "DASHI.Physics.NavierStokes",
+        )
+        current_nodes = [*current_nodes, node]
+        commits.append(
+            {
+                "commit": sha,
+                "timestamp": index * 60,
+                "parents": [previous] if previous else [],
+            }
+        )
+        snapshots.append(
+            _snapshot(
+                sha,
+                current_nodes,
+                delta=(
+                    {
+                        "added_nodes": [f"n{index}"],
+                        "removed_nodes": [],
+                        "added_edges": [],
+                        "removed_edges": [],
+                    }
+                    if previous
+                    else None
+                ),
+                parent=previous,
+            )
+        )
+        previous = sha
+
+    plan = compile_research_film(
+        {
+            "commits": commits,
+            "snapshots": snapshots,
+            "refs": {},
+            "branch_episodes": [],
+        },
+        programme_memory_nodes=3,
+    )
+
+    changes = [
+        beat
+        for beat in plan.beats
+        if beat.kind == "semantic-change"
+    ]
+    assert changes
+    assert len(changes[-1].visible_node_ids) <= (
+        3 + len(changes[-1].focus_node_ids)
+    )
+    assert "n0" not in changes[-1].visible_node_ids
+
+
+def test_multi_programme_overview_is_renderer_visible():
+    ns = _node("ns", "R571Bound", "DASHI.Physics.NavierStokes")
+    rh = _node("rh", "GammaDeficit", "DASHI.Math.Riemann")
+
+    timeline = {
+        "commits": [
+            {"commit": "A", "timestamp": 0, "parents": []},
+            {"commit": "B", "timestamp": 10, "parents": ["A"]},
+        ],
+        "snapshots": [
+            _snapshot("A", []),
+            _snapshot(
+                "B",
+                [ns, rh],
+                delta={
+                    "added_nodes": ["ns", "rh"],
+                    "removed_nodes": [],
+                    "added_edges": [],
+                    "removed_edges": [],
+                },
+                parent="A",
+            ),
+        ],
+        "refs": {},
+        "branch_episodes": [],
+    }
+
+    plan = compile_research_film(timeline)
+    overview = next(
+        beat
+        for beat in plan.beats
+        if beat.kind == "cross-programme-overview"
+    )
+
+    assert set(overview.visible_node_ids) == {"ns", "rh"}
+    assert overview.camera is not None
+    assert overview.camera.mode == "programme-overview"
