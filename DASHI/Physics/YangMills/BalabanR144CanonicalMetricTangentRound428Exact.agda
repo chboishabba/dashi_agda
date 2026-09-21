@@ -154,15 +154,21 @@ localizedD1IsCanonicalMetricReadoutFromTangent
 
 fromCanonicalR144MetricDomain :
   ∀ {trajectory split inputs History Cell cutoff present actionWeld laws
-      composite C S Y group Scale Volume
-      metricData representation coordinate}
-    {domain :
-      Domain.CanonicalMetricSourceDomain
-        Scale Volume (R144.stressActivity composite)}
+      composite C S Y group Scale Volume}
+    (metricData :
+      R433.R144CanonicalMetricDomainData
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        {History = History} {Cell = Cell} {cutoff = cutoff}
+        {present = present} {actionWeld = actionWeld} {laws = laws}
+        composite Scale Volume)
+    {representation :
+      StressRep.CanonicalMetricStressRepresentation
+        (R433.asCanonicalMetricSourceDomain composite metricData)}
+    {coordinate : R114.LiteralStressCoordinate Y group}
     {selected :
       R119.CanonicalMetricSelectedStressWeld
-        domain representation coordinate} →
-  domain ≡ R433.asCanonicalMetricSourceDomain composite metricData →
+        (R433.asCanonicalMetricSourceDomain composite metricData)
+        representation coordinate} →
   (finiteD1ToRational : ℝ → ℚ) →
   (finiteD1ToRationalIsMetricReadout :
     ∀ value →
@@ -171,7 +177,9 @@ fromCanonicalR144MetricDomain :
         (StressRep.firstVariationReadout representation value)) →
   (selectedAdmissible :
     ∀ background tangent →
-    Domain.AdmissibleMetricPerturbation domain tangent) →
+    Domain.AdmissibleMetricPerturbation
+      (R433.asCanonicalMetricSourceDomain composite metricData)
+      tangent) →
   R144CanonicalMetricTangentAttachment
     {trajectory = trajectory} {split = split} {inputs = inputs}
     {History = History} {Cell = Cell} {cutoff = cutoff}
@@ -179,11 +187,12 @@ fromCanonicalR144MetricDomain :
     composite
     {C = C} {S = S} {Y = Y} {group = group}
     {Scale = Scale} {Volume = Volume}
-    {domain = domain} {representation = representation}
+    {domain = R433.asCanonicalMetricSourceDomain composite metricData}
+    {representation = representation}
     {coordinate = coordinate} selected
 fromCanonicalR144MetricDomain
-    {domain = domain} {selected = selected}
-    domainIsCanonical finiteD1ToRational convention admissible =
+    {selected = selected}
+    metricData finiteD1ToRational convention admissible =
   record
     { R144CanonicalMetricTangentAttachment.finiteD1ToRational =
         finiteD1ToRational
@@ -195,18 +204,10 @@ fromCanonicalR144MetricDomain
         admissible
     ; R144CanonicalMetricTangentAttachment.metricPerturbationRealizesR144StressTangent =
         λ background tangent →
-          subst
-            (λ selectedDomain →
-              Domain.metricPerturbationToBackgroundTangent
-                selectedDomain
-                (R144.globalBackgroundToStressBackground composite background)
-                tangent
-              ≡ R144.globalTangentToStressTangent composite tangent)
-            (sym domainIsCanonical)
-            (R433.r144MetricPerturbationRealizesStressTangent
-              metricData
-              (R144.globalBackgroundToStressBackground composite background)
-              tangent)
+          R433.r144MetricPerturbationRealizesStressTangent
+            metricData
+            (R144.globalBackgroundToStressBackground composite background)
+            tangent
     }
 
 asOldR144Weld :
