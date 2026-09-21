@@ -38,3 +38,32 @@ parseReceiptRequiresDigestRecheck :
     Parse.canonicalFullTextSLRParseBoundary
   ≡ true
 parseReceiptRequiresDigestRecheck = refl
+
+
+binaryAndTextRevisionsRemainDistinct :
+  Parse.binaryAndMaterialisedTextRevisionsDistinct
+    Parse.canonicalFullTextSLRParseBoundary
+  ≡ true
+binaryAndTextRevisionsRemainDistinct = refl
+
+derivedTextRevisionRequiresReceipt :
+  Parse.derivedTextRevisionRequiresExplicitReceipt
+    Parse.canonicalFullTextSLRParseBoundary
+  ≡ true
+derivedTextRevisionRequiresReceipt = refl
+
+parserAnchorsUseMaterialisedTextRevision :
+  Parse.parserAnchorsBelongToMaterialisedTextRevision
+    Parse.canonicalFullTextSLRParseBoundary
+  ≡ true
+parserAnchorsUseMaterialisedTextRevision = refl
+
+textMaterialisationCannotCountAsParse :
+  Parse.TextMaterialisationCountsAsSLRParse → ⊥
+textMaterialisationCannotCountAsParse =
+  Parse.textMaterialisationDoesNotCountAsSLRParse
+
+parserCannotAnchorTextToParentBinary :
+  Parse.ParserMayAnchorTextSpanToParentBinaryRevision → ⊥
+parserCannotAnchorTextToParentBinary =
+  Parse.parserDoesNotAnchorTextSpanToParentBinaryRevision
