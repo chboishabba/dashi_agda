@@ -32,16 +32,16 @@ evictionCannotDestroyUnpaidEvidence =
 
 
 metadataOnlyUnreviewedCannotCreateRetrievalResidual :
-  Material.MetadataOnlyUnreviewedCreatesRetrievalResidual → ⊥
+  Sparse.MetadataOnlyUnreviewedCreatesRetrievalResidual → ⊥
 metadataOnlyUnreviewedCannotCreateRetrievalResidual =
-  Material.metadataOnlyUnreviewedDoesNotCreateRetrievalResidual
+  Sparse.metadataOnlyUnreviewedDoesNotCreateRetrievalResidual
 
 retrievalResidualCannotCreateSourceTruth :
-  Material.RetrievalResidualCreatesSourceTruth → ⊥
+  Sparse.RetrievalResidualCreatesSourceTruth → ⊥
 retrievalResidualCannotCreateSourceTruth =
-  Material.retrievalResidualDoesNotCreateSourceTruth
+  Sparse.retrievalResidualDoesNotCreateSourceTruth
 
 retrievalResidualCannotCreateReviewedEvidence :
-  Material.RetrievalResidualCreatesReviewedEvidence → ⊥
+  Sparse.RetrievalResidualCreatesReviewedEvidence → ⊥
 retrievalResidualCannotCreateReviewedEvidence =
-  Material.retrievalResidualDoesNotCreateReviewedEvidence
+  Sparse.retrievalResidualDoesNotCreateReviewedEvidence
