@@ -107,9 +107,9 @@ record MaboQueryWorldSnapshotBoundary : Set where
     unresolvedIdentitySnapshotMayPreserveClosureIsFalse :
       unresolvedIdentitySnapshotMayPreserveClosure ≡ false
 
-    unresolvedIdentitySnapshotReopensResearch : Bool
-    unresolvedIdentitySnapshotReopensResearchIsTrue :
-      unresolvedIdentitySnapshotReopensResearch ≡ true
+    snapshotUnresolvedIdentityReopensResearch : Bool
+    snapshotUnresolvedIdentityReopensResearchIsTrue :
+      snapshotUnresolvedIdentityReopensResearch ≡ true
 
     snapshotCreatesSemanticAuthority : Bool
     snapshotCreatesSemanticAuthorityIsFalse :
