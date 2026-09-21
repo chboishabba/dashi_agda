@@ -957,7 +957,7 @@ def compile_research_film(
             )
 
             pr = prs_by_merge.get(commit)
-            if pr is not None:
+            if pr is not None and working.focus_node_ids:
                 beats.append(
                     FilmBeat(
                         kind="pr-merge",
@@ -985,6 +985,8 @@ def compile_research_film(
                 )
 
             for branch_episode in merges_by_commit.get(commit, []):
+                if not working.focus_node_ids:
+                    continue
                 beats.append(
                     FilmBeat(
                         kind="branch-merge",

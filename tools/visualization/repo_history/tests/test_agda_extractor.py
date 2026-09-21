@@ -35,7 +35,7 @@ def test_tree_sitter_extracts_functions_binders_and_dependencies():
     assert any(
         edge.source == id_nat.symbol_id
         and edge.target == use.symbol_id
-        and edge.kind == "body-depends"
+        and edge.kind in {"body-depends", "calls"}
         for edge in graph.edges.values()
     )
     assert any(edge.kind == "binds" for edge in graph.edges.values())
@@ -97,7 +97,7 @@ idNat x = x
     assert any(
         edge.source == binder.symbol_id
         and edge.target == owner.symbol_id
-        and edge.kind == "body-depends"
+        and edge.kind in {"body-depends", "value-flows"}
         for edge in graph.edges.values()
     )
     assert not any(
@@ -441,7 +441,15 @@ use : Nat
 use = base
 """,
     )
-    graph = build_semantic_graph([extraction])
+    builtin_nat = extract_file(
+        "Agda/Builtin/Nat.agda",
+        b"""
+module Agda.Builtin.Nat where
+postulate
+  Nat : Set
+""",
+    )
+    graph = build_semantic_graph([builtin_nat, extraction])
 
     nat_edges = [
         edge

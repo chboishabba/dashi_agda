@@ -76,6 +76,36 @@ def _history_axis_mobject(layout_data):
     return VGroup(*parts)
 
 
+def _add_digraph_edges(
+    graph: DiGraph,
+    *edges: tuple[Any, Any],
+    edge_config: dict[tuple[Any, Any], dict[str, Any]] | None = None,
+) -> Any:
+    line_configs = {}
+    tip_configs = {}
+    if edge_config:
+        for edge, cfg in edge_config.items():
+            c = dict(cfg)
+            tip_length = c.pop("tip_length", None)
+            line_configs[edge] = c
+            if tip_length is not None:
+                tip_configs[edge] = {"tip_length": tip_length}
+            else:
+                tip_configs[edge] = {}
+
+    new_edges = graph.add_edges(*edges, edge_config=line_configs)
+    if isinstance(graph, DiGraph):
+        for edge in edges:
+            tip_cfg = tip_configs.get(edge, {})
+            if hasattr(graph, "_tip_config"):
+                graph._tip_config[edge] = tip_cfg
+            edge_mob = graph.edges.get(edge)
+            if edge_mob is not None:
+                edge_mob.pop_tips()
+                edge_mob.add_tip(**tip_cfg)
+    return new_edges
+
+
 def _visual_edge_projection(
     graph_data: dict[str, Any],
 ) -> tuple[
@@ -205,7 +235,7 @@ class HistoryGraphView:
         for parent in commit["parents"]:
             if parent not in self.graph.vertices:
                 continue
-            edge = self.graph.add_edges((parent, sha))
+            edge = _add_digraph_edges(self.graph, (parent, sha))
             scene.play(Create(edge), run_time=0.08)
 
         if commit.get("refs"):
@@ -348,7 +378,8 @@ class SemanticGraphView:
             scene.play(GrowFromCenter(new_vertices), run_time=run_time)
 
         if added_edges:
-            new_edges = self.graph.add_edges(
+            new_edges = _add_digraph_edges(
+                self.graph,
                 *added_edges,
                 edge_config={
                     edge: self.policy.edges.edge_config(
@@ -376,7 +407,8 @@ class SemanticGraphView:
                 run_time=run_time / 3,
             )
             self.graph.remove_edges(*restyled_edges)
-            refreshed = self.graph.add_edges(
+            refreshed = _add_digraph_edges(
+                self.graph,
                 *restyled_edges,
                 edge_config={
                     edge: self.policy.edges.edge_config(
@@ -1609,7 +1641,8 @@ class ResearchAtlasGraphView(SemanticGraphView):
                 )
 
         if added_edges:
-            new_edges = self.graph.add_edges(
+            new_edges = _add_digraph_edges(
+                self.graph,
                 *added_edges,
                 edge_config={
                     edge: self.policy.edges.edge_config(
