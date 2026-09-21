@@ -334,6 +334,10 @@ class HistoryExtractor:
             added_nodes=result.receipt.added_nodes,
             removed_edges=result.receipt.removed_edges,
             added_edges=result.receipt.added_edges,
+            updated_nodes=result.receipt.updated_nodes,
+            updated_edges=result.receipt.updated_edges,
+            recomputed_nodes=result.receipt.recomputed_nodes,
+            recomputed_edges=result.receipt.recomputed_edges,
         )
 
         graph = result.graph
