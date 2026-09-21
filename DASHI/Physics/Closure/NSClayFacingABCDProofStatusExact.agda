@@ -40,6 +40,8 @@ open import Data.Empty using (⊥)
 import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as Four
 import DASHI.Physics.Closure.NSOpenAI2026ComparatorClayCDSourceExactAlignment as CD
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as Cut
+import DASHI.Physics.Closure.NSClayFacingAAnalyticCutExact as ACut
+import DASHI.Physics.Closure.NSClayFacingBResearchCutExact as BCut
 
 data ProofLane : Set where
   laneA laneB laneC laneD : ProofLane
@@ -117,13 +119,21 @@ statusD = lane-status
 aCarrierAndCompilerArchitectureRetained : Bool
 aCarrierAndCompilerArchitectureRetained = true
 
-aLowYoungCauchyMathematicalLeafClosed : Bool
-aLowYoungCauchyMathematicalLeafClosed =
-  Cut.aLowConvolutionEnvelopeIntegrableClosed
+aLowStandardEnvelopeAnalysisIsResearchFrontier : Bool
+aLowStandardEnvelopeAnalysisIsResearchFrontier =
+  ACut.aGenericYoungCauchyIsResearchFrontier
 
-aInverseSixthMathematicalLeafClosed : Bool
-aInverseSixthMathematicalLeafClosed =
-  Cut.aHighInverseSixthEnvelopeIntegrableClosed
+aHighStandardEnvelopeAnalysisIsResearchFrontier : Bool
+aHighStandardEnvelopeAnalysisIsResearchFrontier =
+  ACut.aGenericInverseSixthTailIsResearchFrontier
+
+aPhysicalLowSameObjectDominationClosed : Bool
+aPhysicalLowSameObjectDominationClosed =
+  ACut.aPhysicalLowSameObjectDominationClosed
+
+aPhysicalHighSameObjectDominationClosed : Bool
+aPhysicalHighSameObjectDominationClosed =
+  ACut.aPhysicalHighSameObjectDominationClosed
 
 aFurtherGenericAgdaAnalysisScaffoldingRequired : Bool
 aFurtherGenericAgdaAnalysisScaffoldingRequired = false
@@ -135,17 +145,25 @@ aFurtherGenericAgdaAnalysisScaffoldingRequired = false
 bRemainInAgda : Bool
 bRemainInAgda = true
 
-bDeepRegionMathematicsClosed : Bool
-bDeepRegionMathematicsClosed =
-  Cut.bD1b2DeepOnlySignedRegionPaymentsClosed
+bDFLPhysicalShellExtractionClosed : Bool
+bDFLPhysicalShellExtractionClosed =
+  BCut.bDFLPhysicalShellExtractionClosed
+
+bDFLDHHPerShellSignedEstimateClosed : Bool
+bDFLDHHPerShellSignedEstimateClosed =
+  BCut.bDFLDHHPerShellSignedEstimateClosed
+
+bDHHIntraShellSignedL2Closed : Bool
+bDHHIntraShellSignedL2Closed =
+  BCut.bDHHIntraShellSignedL2Closed
 
 bCriticalRelativeCovarianceClosed : Bool
 bCriticalRelativeCovarianceClosed =
-  Cut.bD1b2CriticalTouchingRelativeCovarianceClosed
+  BCut.bCriticalStrictSignedOperatorClosed
 
 bLiteralR406SameObjectClosed : Bool
 bLiteralR406SameObjectClosed =
-  Cut.bD1b2LiteralR406SameObjectEqualityInhabited
+  BCut.bLiteralR406SameObjectClosed
 
 bMigrationToLeanRequired : Bool
 bMigrationToLeanRequired = false
