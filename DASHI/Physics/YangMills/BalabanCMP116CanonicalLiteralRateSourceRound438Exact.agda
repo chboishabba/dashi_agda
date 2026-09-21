@@ -15,10 +15,10 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalLiteralRateSourceRound438Ex
 -- the actual fixed-Y rate estimate and weighted-fibre/counting estimate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as Nat
-open import Data.List.Base using (List)
+open import Data.List.Base using (List; _∷_)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Rational.Base as ℚ using (ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _≤ℝ_)
