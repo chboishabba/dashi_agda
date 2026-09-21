@@ -23,6 +23,7 @@ data FilmBeatKind : Set where
   branchForkBeat : FilmBeatKind
   branchMergeBeat : FilmBeatKind
   pullRequestMergeBeat : FilmBeatKind
+  crossProgrammeOverviewBeat : FilmBeatKind
 
 record FilmBeat : Set where
   constructor filmBeat
@@ -31,6 +32,8 @@ record FilmBeat : Set where
     filmBeatCommit : String
     filmBeatProgramme : String
     filmBeatTopic : String
+    filmBeatFocusNodeIds : List String
+    filmBeatVisibleNodeIds : List String
     filmBeatCamera : CameraDirective
 
 open FilmBeat public
@@ -54,6 +57,14 @@ record ResearchFilmDirectorBoundary : Set where
     branchAndPullRequestEventsMayAnnotateSemanticFilmIsTrue :
       branchAndPullRequestEventsMayAnnotateSemanticFilm ≡ true
 
+    boundedProgrammeMemoryMayChangeSemanticHistory : Bool
+    boundedProgrammeMemoryMayChangeSemanticHistoryIsFalse :
+      boundedProgrammeMemoryMayChangeSemanticHistory ≡ false
+
+    dormantContextMayBeHiddenWithoutBeingDeleted : Bool
+    dormantContextMayBeHiddenWithoutBeingDeletedIsTrue :
+      dormantContextMayBeHiddenWithoutBeingDeleted ≡ true
+
 canonicalResearchFilmDirectorBoundary :
   ResearchFilmDirectorBoundary
 canonicalResearchFilmDirectorBoundary =
@@ -61,4 +72,6 @@ canonicalResearchFilmDirectorBoundary =
     false refl
     true refl
     true refl
+    true refl
+    false refl
     true refl
