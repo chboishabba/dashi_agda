@@ -37,6 +37,7 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationR
 import DASHI.Physics.YangMills.BalabanCanonicalMetricSelectedStressRound119Exact as R119
 import DASHI.Physics.YangMills.BalabanLiteralStressCoordinateRound114Exact as R114
 import DASHI.Physics.YangMills.BalabanR144ToCMP119StressInsertionExact as Old
+import DASHI.Physics.YangMills.BalabanR144CanonicalMetricDomainRound433Exact as R433
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
 
 record R144CanonicalMetricTangentAttachment
@@ -150,6 +151,63 @@ localizedD1IsCanonicalMetricReadoutFromTangent
         (sym
           (metricPerturbationRealizesR144StressTangent
             attachment background tangent))))
+
+fromCanonicalR144MetricDomain :
+  ∀ {trajectory split inputs History Cell cutoff present actionWeld laws
+      composite C S Y group Scale Volume
+      metricData representation coordinate}
+    {domain :
+      Domain.CanonicalMetricSourceDomain
+        Scale Volume (R144.stressActivity composite)}
+    {selected :
+      R119.CanonicalMetricSelectedStressWeld
+        domain representation coordinate} →
+  domain ≡ R433.asCanonicalMetricSourceDomain composite metricData →
+  (finiteD1ToRational : ℝ → ℚ) →
+  (finiteD1ToRationalIsMetricReadout :
+    ∀ value →
+    finiteD1ToRational value
+    ≡ R119.readoutToRational selected
+        (StressRep.firstVariationReadout representation value)) →
+  (selectedAdmissible :
+    ∀ background tangent →
+    Domain.AdmissibleMetricPerturbation domain tangent) →
+  R144CanonicalMetricTangentAttachment
+    {trajectory = trajectory} {split = split} {inputs = inputs}
+    {History = History} {Cell = Cell} {cutoff = cutoff}
+    {present = present} {actionWeld = actionWeld} {laws = laws}
+    composite
+    {C = C} {S = S} {Y = Y} {group = group}
+    {Scale = Scale} {Volume = Volume}
+    {domain = domain} {representation = representation}
+    {coordinate = coordinate} selected
+fromCanonicalR144MetricDomain
+    {domain = domain} {selected = selected}
+    domainIsCanonical finiteD1ToRational convention admissible =
+  record
+    { R144CanonicalMetricTangentAttachment.finiteD1ToRational =
+        finiteD1ToRational
+    ; R144CanonicalMetricTangentAttachment.finiteD1ToRationalIsMetricReadout =
+        convention
+    ; R144CanonicalMetricTangentAttachment.toMetricPerturbation =
+        λ tangent → tangent
+    ; R144CanonicalMetricTangentAttachment.selectedMetricPerturbationAdmissible =
+        admissible
+    ; R144CanonicalMetricTangentAttachment.metricPerturbationRealizesR144StressTangent =
+        λ background tangent →
+          subst
+            (λ selectedDomain →
+              Domain.metricPerturbationToBackgroundTangent
+                selectedDomain
+                (R144.globalBackgroundToStressBackground composite background)
+                tangent
+              ≡ R144.globalTangentToStressTangent composite tangent)
+            (sym domainIsCanonical)
+            (R433.r144MetricPerturbationRealizesStressTangent
+              metricData
+              (R144.globalBackgroundToStressBackground composite background)
+              tangent)
+    }
 
 asOldR144Weld :
   ∀ {trajectory split inputs History Cell cutoff present actionWeld laws
