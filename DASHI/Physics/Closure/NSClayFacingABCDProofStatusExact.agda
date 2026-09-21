@@ -83,7 +83,7 @@ statusA = lane-status
   internalResearchOpen
   agdaReconstructionPartial
   true
-  proveInternalAnalyticLeaf
+  proveInternalSameObjectLeaf
   false
 
 statusB : LaneStatus
@@ -138,6 +138,12 @@ aPhysicalHighSameObjectDominationClosed =
 
 aFurtherGenericAgdaAnalysisScaffoldingRequired : Bool
 aFurtherGenericAgdaAnalysisScaffoldingRequired = false
+
+aMoveGenericAnalysisToLeanRequired : Bool
+aMoveGenericAnalysisToLeanRequired = false
+
+aRetainPhysicalSameObjectWorkInAgda : Bool
+aRetainPhysicalSameObjectWorkInAgda = true
 
 ------------------------------------------------------------------------
 -- B: retain exact Agda same-object lane as the primary active proof.
