@@ -18,6 +18,10 @@ class IncrementalStepTiming:
     added_nodes: int
     removed_edges: int
     added_edges: int
+    updated_nodes: int = 0
+    updated_edges: int = 0
+    recomputed_nodes: int = 0
+    recomputed_edges: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
