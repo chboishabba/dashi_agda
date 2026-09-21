@@ -503,3 +503,5 @@ import DASHI.Physics.YangMills.BalabanCMP116SourceNativeToDirectUpperRound465Exa
 import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedRound467Exact
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1StressSourceRound466Exact
+
+import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact
