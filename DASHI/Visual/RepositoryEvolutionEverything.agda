@@ -9,6 +9,7 @@ open import DASHI.Core.NameResolutionAuthorityExact
 open import DASHI.Core.ApplicationDependencyClassificationExact
 open import DASHI.Core.LexicalScopeResolutionExact
 open import DASHI.Core.LocalDeclarationScopeExact
+open import DASHI.Core.IncrementalSemanticRelinkBoundaryExact
 open import DASHI.Core.PortableInteractiveViewExact
 open import DASHI.Visual.SemanticHistoryVisualizationExact
 open import DASHI.Visual.SemanticGraphProjectionExact
@@ -16,6 +17,8 @@ open import DASHI.Visual.SceneProgramCompilerExact
 open import DASHI.Visual.RootedSemanticFocusExact
 open import DASHI.Visual.TemporalRootedFocusExact
 open import DASHI.Visual.EpisodeSalienceExact
+open import DASHI.Visual.TraversalBudgetExact
+open import DASHI.Visual.TemporalAxisExact
 
 ------------------------------------------------------------------------
 -- AGGREGATE CONTRACT FOR REPOSITORY-EVOLUTION VISUALIZATION
