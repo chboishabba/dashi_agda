@@ -17,6 +17,7 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalLiteralRateSourceRound438Ex
 
 open import Agda.Builtin.Equality using (refl)
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as Nat
 open import Data.List.Base using (List)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.Rational.Base as ℚ using (ℚ)
@@ -76,7 +77,7 @@ record CanonicalLiteralCMP116RateSource
       ∀ depth → 0ℝ ≤ℝ residualDecayWeight depth
     residualDecayWeightAntitone :
       ∀ {smaller larger} →
-      Data.Nat.Base._≤_ smaller larger →
+      Nat._≤_ smaller larger →
       residualDecayWeight larger ≤ℝ residualDecayWeight smaller
 
     entropyAllowance : ℝ
