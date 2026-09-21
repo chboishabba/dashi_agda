@@ -464,3 +464,6 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalLiteralRateSourceRound438Ex
 import DASHI.Physics.YangMills.YangMillsClayGoal1SameHNontrivialityRound439Exact
 
 import DASHI.Physics.YangMills.BalabanCMP116R429ConnectedDomainCountingRound440Exact
+
+import DASHI.Physics.YangMills.BalabanCMP116R429FixedYSharedHessianRound441Exact
+import DASHI.Physics.YangMills.YangMillsPhysicalOPERemainderSharedTailRound442Exact
