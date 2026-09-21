@@ -14,6 +14,7 @@ files=(
   "DASHI/Biology/FiveHT2AProtocolIndexedSignalTransportExact.agda"
   "DASHI/Biology/FiveHT2AVisualCortexBioelectricBridgeExact.agda"
   "DASHI/Cognition/FiveHT2AVisualModeObservationBridgeExact.agda"
+  "DASHI/Cognition/AnalyticLogPolarSpiralCompilerExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -94,5 +95,11 @@ mode="$root/DASHI/Cognition/FiveHT2AVisualModeObservationBridgeExact.agda"
 grep -Fq 'temporalDoesNotDetermineSpatial' "$mode"
 grep -Fq 'gainDoesNotDetermineForm' "$mode"
 grep -Fq 'spatialFieldProtocolPresentIsFalse' "$mode"
+
+spiral="$root/DASHI/Cognition/AnalyticLogPolarSpiralCompilerExact.agda"
+grep -Fq 'logRadiusEqualityImpliesExponentialRadius' "$spiral"
+grep -Fq 'analyticSpiralPointHasExponentialRadius' "$spiral"
+grep -Fq 'affineConstantPhaseRearrangementProvedFromCurrentMinimalRealSpineIsFalse' "$spiral"
+grep -Fq 'empiricalV1SpatialModeIdentifiedAsAffineLogPolarPhaseIsFalse' "$spiral"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
