@@ -57,6 +57,43 @@ record SparseFullTextCandidate : Set where
 
 open SparseFullTextCandidate public
 
+
+record FullTextRetrievalResidualReceipt : Set where
+  constructor fulltext-retrieval-residual-receipt
+  field
+    screeningDecision : Screen.ScreeningDecisionReceipt
+    retained :
+      Adaptive.RetainedForFullText
+        (Screen.decision screeningDecision)
+
+    processingLedgerReference : String
+    retrievalResidualReference : String
+    candidateUrlReference : String
+
+    verifiedFullTextObserved : Bool
+    verifiedFullTextObservedIsFalse :
+      verifiedFullTextObserved ≡ false
+
+    requiresRetrievalOrResolution : Bool
+    requiresRetrievalOrResolutionIsTrue :
+      requiresRetrievalOrResolution ≡ true
+
+    candidateOnly : Bool
+    candidateOnlyIsTrue : candidateOnly ≡ true
+
+    createsSourceTruth : Bool
+    createsSourceTruthIsFalse : createsSourceTruth ≡ false
+
+    createsReviewedEvidence : Bool
+    createsReviewedEvidenceIsFalse :
+      createsReviewedEvidence ≡ false
+
+    createsSourceAuditAdmission : Bool
+    createsSourceAuditAdmissionIsFalse :
+      createsSourceAuditAdmission ≡ false
+
+open FullTextRetrievalResidualReceipt public
+
 record FullTextBatchPlan : Set where
   constructor fulltext-batch-plan
   field
@@ -135,6 +172,9 @@ data CacheRegistrationCreatesSourceAuditAdmission : Set where
 data UnprocessedArtifactMayBeEvictedAsPaid : Set where
 data EvictionMayEraseRevisionIdentity : Set where
 data FullTextAvailabilityMetadataCreatesFetchObligation : Set where
+data MetadataOnlyUnreviewedCreatesRetrievalResidual : Set where
+data RetrievalResidualCreatesSourceTruth : Set where
+data RetrievalResidualCreatesReviewedEvidence : Set where
 
 metadataUniverseDoesNotForceFullTextMaterialisation :
   MetadataUniverseForcesFullTextMaterialisation → ⊥
@@ -171,6 +211,18 @@ evictionDoesNotEraseRevisionIdentity ()
 fullTextAvailabilityMetadataDoesNotCreateFetchObligation :
   FullTextAvailabilityMetadataCreatesFetchObligation → ⊥
 fullTextAvailabilityMetadataDoesNotCreateFetchObligation ()
+
+metadataOnlyUnreviewedDoesNotCreateRetrievalResidual :
+  MetadataOnlyUnreviewedCreatesRetrievalResidual → ⊥
+metadataOnlyUnreviewedDoesNotCreateRetrievalResidual ()
+
+retrievalResidualDoesNotCreateSourceTruth :
+  RetrievalResidualCreatesSourceTruth → ⊥
+retrievalResidualDoesNotCreateSourceTruth ()
+
+retrievalResidualDoesNotCreateReviewedEvidence :
+  RetrievalResidualCreatesReviewedEvidence → ⊥
+retrievalResidualDoesNotCreateReviewedEvidence ()
 
 record SparseMaterialisationBoundary : Set where
   constructor sparse-materialisation-boundary
