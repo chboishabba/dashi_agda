@@ -4,8 +4,8 @@ set -euo pipefail
 repo="${1:-.}"
 commits="${DASHI_FILM_COMMITS:-500}"
 quality="${DASHI_FILM_QUALITY:--qm}"
-history="${DASHI_FILM_HISTORY:-/tmp/dashi-research-film-history.json}"
-profile="${DASHI_FILM_PROFILE:-/tmp/dashi-research-film-profile.json}"
+history="${DASHI_FILM_HISTORY:-${TMPDIR:-/tmp}/dashi-research-film-history.json}"
+profile="${DASHI_FILM_PROFILE:-${TMPDIR:-/tmp}/dashi-research-film-profile.json}"
 github_repo="${DASHI_FILM_GITHUB_REPO:-}"
 
 args=(
@@ -43,5 +43,5 @@ dashi-repo-history render "$history" \
 
 echo
 echo "Rendered MP4(s):"
-find tools/visualization/repo_history/media \
+find media tools/visualization/repo_history/media \
   -type f -name '*.mp4' -print 2>/dev/null || true

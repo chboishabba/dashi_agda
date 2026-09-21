@@ -11,7 +11,25 @@ import tree_sitter_agda
 from .model import Relation, SemanticGraph, SourceSpan, Symbol, stable_hash
 
 
-AGDA_LANGUAGE = Language(tree_sitter_agda.language())
+def _load_agda_language() -> Language:
+    raw = tree_sitter_agda.language()
+    if isinstance(raw, int):
+        return Language(raw)
+    try:
+        return Language(raw)
+    except TypeError:
+        import ctypes
+
+        ctypes.pythonapi.PyCapsule_GetPointer.restype = ctypes.c_void_p
+        ctypes.pythonapi.PyCapsule_GetPointer.argtypes = [
+            ctypes.py_object,
+            ctypes.c_char_p,
+        ]
+        ptr = ctypes.pythonapi.PyCapsule_GetPointer(raw, b"tree_sitter.Language")
+        return Language(ptr)
+
+
+AGDA_LANGUAGE = _load_agda_language()
 
 CAPTURE_QUERY = (
     resource_files("dashi_repo_history.queries")
@@ -112,7 +130,7 @@ def _identifier_leaves(
 
     while stack:
         current = stack.pop()
-        if current is not node and current.type in stop_ancestor_types:
+        if current != node and current.type in stop_ancestor_types:
             continue
         if current.child_count == 0 and current.type in {"qid", "id", "bid"}:
             value = _node_text(source, current).strip()
@@ -178,9 +196,9 @@ def _application_context(
         return False, None
 
     child = node
-    while child.parent is not None and child.parent is not expr:
+    while child.parent is not None and child.parent != expr:
         child = child.parent
-    if child.parent is not expr:
+    if child.parent != expr:
         return False, None
 
     named_children = list(expr.named_children)
@@ -209,9 +227,9 @@ def _prefix_application_head(node: Any) -> bool:
     if expr is None:
         return False
     child = node
-    while child.parent is not None and child.parent is not expr:
+    while child.parent is not None and child.parent != expr:
         child = child.parent
-    if child.parent is not expr:
+    if child.parent != expr:
         return False
     named_children = list(expr.named_children)
     return len(named_children) >= 2 and named_children[0] == child
@@ -291,7 +309,7 @@ class RawReference:
     kind: str
     scope: str
     scope_chain: tuple[str, ...] = ()
-    prefix_application_head: bool = false
+    prefix_application_head: bool = False
     application_head: str | None = None
 
 
@@ -342,6 +360,17 @@ def _syntactic_scope_id(
     )
 
 
+def _where_scope_id(
+    source: bytes,
+    module: str,
+    parent_label: str | None,
+    where_node: Any,
+) -> str:
+    prefix = f"{module}:{parent_label}" if parent_label else module
+    normalized = " ".join(_node_text(source, where_node).split())
+    return f"{prefix}:{where_node.type}:{stable_hash(normalized)[:20]}"
+
+
 def _enclosing_declaration_scope(
     source: bytes,
     module: str,
@@ -349,7 +378,16 @@ def _enclosing_declaration_scope(
 ) -> str | None:
     where_node = _first_ancestor(owner, {"where"})
     if where_node is not None:
-        return _syntactic_scope_id(source, module, where_node)
+        parent_label = None
+        outer_function = _first_ancestor(where_node, {"function"})
+        if outer_function is not None:
+            name_node, _ = _function_clause_name_and_patterns(
+                source,
+                outer_function,
+            )
+            if name_node is not None:
+                parent_label = _node_text(source, name_node).strip() or None
+        return _where_scope_id(source, module, parent_label, where_node)
     return None
 
 
@@ -536,7 +574,7 @@ def _descendants(node: Any, kind: str) -> list[Any]:
     stack = [node]
     while stack:
         current = stack.pop()
-        if current is not node and current.type == kind:
+        if current != node and current.type == kind:
             out.append(current)
         stack.extend(reversed(current.children))
     out.sort(key=lambda item: item.start_byte)
@@ -800,7 +838,7 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
     for node in captures.get("field_name", []):
         owner = _first_ancestor(
             node,
-            DECLARATION_ANCESTORS | {"fields", "postulate"},
+            DECLARATION_ANCESTORS | {"fields", "postulate", "generalize", "signature"},
         )
         if owner is None:
             continue
@@ -854,14 +892,65 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
         if owner is None:
             continue
         label = _first_descendant_name(source, node)
-        if label is not None:
-            add_decl(label, "function", owner, node)
+        if label is None:
+            continue
+
+        data_label = _container_name(
+            source,
+            node,
+            container_type="data",
+            name_type="data_name",
+        )
+        record_label = _container_name(
+            source,
+            node,
+            container_type="record",
+            name_type="record_name",
+        )
+
+        if _first_ancestor(node, {"generalize"}) is not None:
+            kind = "variable"
+            container_label = None
+            container_relation = None
+        elif _first_ancestor(node, {"postulate"}) is not None:
+            kind = "postulate"
+            container_label = None
+            container_relation = None
+        elif data_label is not None:
+            kind = "constructor"
+            container_label = data_label
+            container_relation = "constructor-of"
+        elif _first_ancestor(node, {"fields"}) is not None:
+            kind = "field"
+            container_label = record_label
+            container_relation = "field-of"
+        else:
+            kind = "function"
+            container_label = None
+            container_relation = None
+
+        add_decl(
+            label,
+            kind,
+            owner,
+            node,
+            container_label=container_label,
+            container_relation=container_relation,
+        )
 
     # Function definitions do not carry the function_name alias in the grammar.
     # Recover the leading LHS identifier and collect the remaining identifiers
     # as pattern candidates; known constructors are resolved later, everything
     # else becomes a clause-scoped binder.
     for function_node in captures.get("function_clause", []):
+        if (
+            _first_ancestor(
+                function_node,
+                {"data", "record", "generalize", "postulate"},
+            )
+            is not None
+        ):
+            continue
         name_node, patterns = _function_clause_name_and_patterns(
             source,
             function_node,
@@ -889,7 +978,7 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
                 function_node.end_byte,
             )
             declaration.owner_local_scopes[owner_range] = (
-                _syntactic_scope_id(source, module, where_node)
+                _where_scope_id(source, module, label, where_node)
             )
 
         scope = _scope_for_node(

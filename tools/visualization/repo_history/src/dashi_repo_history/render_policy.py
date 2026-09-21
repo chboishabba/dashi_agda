@@ -97,7 +97,7 @@ class EdgePolicy:
             tip_length = 0.11
         return {
             "stroke_width": width,
-            "tip_config": {"tip_length": tip_length},
+            "tip_length": tip_length,
         }
 
 

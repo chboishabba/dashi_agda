@@ -58,15 +58,18 @@ def test_focus_depth_limits_dependency_expansion():
 
 
 def test_resolve_symbol_rejects_ambiguous_labels():
-    graph = _graph()
-    graph["nodes"].append(
-        {
-            "symbol_id": "other-f",
-            "label": "f",
-            "module": "Other",
-            "kind": "function",
-        }
-    )
+    graph = {
+        "nodes": [
+            {"symbol_id": "m-f", "label": "f", "module": "M", "kind": "function"},
+            {
+                "symbol_id": "other-f",
+                "label": "f",
+                "module": "Other",
+                "kind": "function",
+            },
+        ],
+        "edges": [],
+    }
     with pytest.raises(ValueError):
         resolve_symbol(graph, "f")
 

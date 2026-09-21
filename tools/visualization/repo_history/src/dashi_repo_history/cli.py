@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 
 from .compact_history import (
     compact_timeline,
@@ -60,8 +61,7 @@ def _extract(args: argparse.Namespace) -> None:
             checkpoint_interval=args.checkpoint_interval,
         )
     Path(args.output).write_text(
-        json.dumps(history_payload, indent=2) + "
-",
+        json.dumps(history_payload, indent=2) + "\n",
         encoding="utf-8",
     )
     if args.profile_output:
@@ -69,8 +69,7 @@ def _extract(args: argparse.Namespace) -> None:
             json.dumps(
                 extractor.performance_report(),
                 indent=2,
-            ) + "
-",
+            ) + "\n",
             encoding="utf-8",
         )
         print(args.profile_output)
@@ -121,7 +120,7 @@ def _render(args: argparse.Namespace) -> None:
     scene = scene_by_mode[args.scene]
     subprocess.run(
         [
-            "python",
+            sys.executable,
             "-m",
             "manim",
             args.quality,
