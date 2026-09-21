@@ -116,3 +116,99 @@ def test_verify_rejects_digest_drift(tmp_path: Path) -> None:
         assert "digest mismatch" in str(exc)
     else:
         raise AssertionError("digest drift should fail closed")
+
+
+def test_prepare_cache_reverifies_materialised_fulltext(tmp_path: Path) -> None:
+    artifact = tmp_path / "paper.txt"
+    artifact.write_text("full text fixture", encoding="utf-8")
+    digest = interop.sha256_file(artifact)
+
+    cache = tmp_path / "cache-ledger.jsonl"
+    request = tmp_path / "requests.jsonl"
+    manifest = tmp_path / "cache-handoff-manifest.json"
+    write_jsonl(
+        cache,
+        [{
+            "source_identity_reference": "ERIC:EJ2",
+            "source_revision_reference": f"fulltext-sha256:{digest}",
+            "artifact_reference": str(artifact),
+            "artifact_sha256": digest,
+            "cache_state": "materialised",
+            "retrieval_reference": "retrieval:test",
+        }],
+    )
+
+    args = type("Args", (), {
+        "cache_ledger": cache,
+        "output": request,
+        "manifest": manifest,
+        "verify_files": True,
+    })()
+    assert interop.cmd_prepare_cache(args) == 0
+
+    rows = interop.read_jsonl(request)
+    assert len(rows) == 1
+    row = rows[0]
+    assert row["source_identity_reference"] == "ERIC:EJ2"
+    assert row["source_revision_ref"] == f"fulltext-sha256:{digest}"
+    assert row["content_digest_ref"] == f"sha256:{digest}"
+    assert row["cache_registration_counts_as_parse"] is False
+
+    receipt = json.loads(manifest.read_text(encoding="utf-8"))
+    assert receipt["record_count"] == 1
+    assert receipt["files_reverified"] is True
+    assert receipt["cache_registration_counts_as_parse"] is False
+
+
+def test_prepare_cache_rejects_digest_drift(tmp_path: Path) -> None:
+    artifact = tmp_path / "paper.txt"
+    artifact.write_text("observed bytes", encoding="utf-8")
+
+    cache = tmp_path / "cache-ledger.jsonl"
+    write_jsonl(
+        cache,
+        [{
+            "source_identity_reference": "ERIC:EJ3",
+            "source_revision_reference": "fulltext-sha256:" + "a" * 64,
+            "artifact_reference": str(artifact),
+            "artifact_sha256": "a" * 64,
+            "cache_state": "materialised",
+        }],
+    )
+
+    args = type("Args", (), {
+        "cache_ledger": cache,
+        "output": tmp_path / "requests.jsonl",
+        "manifest": tmp_path / "manifest.json",
+        "verify_files": True,
+    })()
+
+    try:
+        interop.cmd_prepare_cache(args)
+    except RuntimeError as exc:
+        assert "digest mismatch" in str(exc)
+    else:
+        raise AssertionError("cache/file digest drift should fail closed")
+
+
+def test_prepare_cache_ignores_metadata_only_rows(tmp_path: Path) -> None:
+    cache = tmp_path / "cache-ledger.jsonl"
+    write_jsonl(
+        cache,
+        [{
+            "source_identity_reference": "ERIC:EJ4",
+            "source_revision_reference": "metadata:rev",
+            "artifact_reference": "/does/not/exist",
+            "artifact_sha256": "b" * 64,
+            "cache_state": "metadataOnly",
+        }],
+    )
+
+    args = type("Args", (), {
+        "cache_ledger": cache,
+        "output": tmp_path / "requests.jsonl",
+        "manifest": tmp_path / "manifest.json",
+        "verify_files": True,
+    })()
+    assert interop.cmd_prepare_cache(args) == 0
+    assert interop.read_jsonl(args.output) == []
