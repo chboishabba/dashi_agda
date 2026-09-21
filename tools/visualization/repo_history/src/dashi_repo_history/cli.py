@@ -106,6 +106,8 @@ def _render(args: argparse.Namespace) -> None:
     env["DASHI_FILM_CONTEXT_NODES"] = str(args.film_context_nodes)
     env["DASHI_FILM_CONTEXT_EDGES"] = str(args.film_context_edges)
     env["DASHI_FILM_MEMORY_NODES"] = str(args.programme_memory_nodes)
+    env["DASHI_FILM_PACE"] = str(args.film_pace)
+    env["DASHI_FILM_FONT"] = str(args.film_font)
 
     scene_by_mode = {
         "history": "RepositoryHistoryScene",
@@ -141,6 +143,7 @@ def _program(args: argparse.Namespace) -> None:
             max_context_nodes=args.film_context_nodes,
             max_context_edges=args.film_context_edges,
             programme_memory_nodes=args.programme_memory_nodes,
+            pace_scale=args.film_pace,
         ).to_dict()
         rendered = json.dumps(payload, indent=2)
         if args.output:
@@ -222,6 +225,7 @@ def _film(args: argparse.Namespace) -> None:
         max_context_nodes=args.film_context_nodes,
         max_context_edges=args.film_context_edges,
         programme_memory_nodes=args.programme_memory_nodes,
+        pace_scale=args.film_pace,
     )
 
     if args.json:
@@ -612,6 +616,17 @@ def build_parser() -> argparse.ArgumentParser:
     render.add_argument("--film-context-edges", type=int, default=100)
     render.add_argument("--programme-memory-nodes", type=int, default=28)
     render.add_argument(
+        "--film-pace",
+        type=float,
+        default=1.0,
+        help="Scale semantic reveal/reading time without changing camera travel speeds.",
+    )
+    render.add_argument(
+        "--film-font",
+        default="DejaVu Sans",
+        help="Pango font family for research-film HUD and semantic labels.",
+    )
+    render.add_argument(
         "--target-commit",
         help="Target commit for the first-parent semantic-history lineage.",
     )
@@ -646,6 +661,7 @@ def build_parser() -> argparse.ArgumentParser:
     program.add_argument("--film-context-nodes", type=int, default=40)
     program.add_argument("--film-context-edges", type=int, default=100)
     program.add_argument("--programme-memory-nodes", type=int, default=28)
+    program.add_argument("--film-pace", type=float, default=1.0)
     program.set_defaults(func=_program)
 
     film = sub.add_parser(
@@ -660,6 +676,12 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=28,
         help="Maximum remembered landmark nodes retained per programme.",
+    )
+    film.add_argument(
+        "--film-pace",
+        type=float,
+        default=1.0,
+        help="Scale semantic reveal/reading time for plan inspection.",
     )
     film.add_argument(
         "--beats",
