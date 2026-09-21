@@ -400,9 +400,19 @@ class HistoryExtractor:
             }
             self._parity_receipts.append(parity_receipt)
             if not passed:
+                differing = {
+                    key: value
+                    for key, value in details.items()
+                    if (
+                        key.startswith("left_only_")
+                        or key.startswith("right_only_")
+                        or key.startswith("changed_")
+                    )
+                    and value
+                }
                 raise RuntimeError(
                     "incremental semantic parity failure at "
-                    f"{commit}"
+                    f"{commit}: {differing}"
                 )
 
         self._graph_cache[commit] = graph
@@ -415,7 +425,7 @@ class HistoryExtractor:
     def _graph_parity(
         left,
         right,
-    ) -> tuple[bool, dict[str, int]]:
+    ) -> tuple[bool, dict[str, object]]:
         left_unresolved = {
             (
                 item.get("owner"),
@@ -435,22 +445,64 @@ class HistoryExtractor:
             for item in right.unresolved_references
         }
 
-        details = {
+        left_node_ids = set(left.nodes)
+        right_node_ids = set(right.nodes)
+        left_edge_ids = set(left.edges)
+        right_edge_ids = set(right.edges)
+
+        changed_node_payloads = sorted(
+            node_id
+            for node_id in left_node_ids & right_node_ids
+            if left.nodes[node_id] != right.nodes[node_id]
+        )
+        changed_edge_payloads = sorted(
+            edge_id
+            for edge_id in left_edge_ids & right_edge_ids
+            if left.edges[edge_id] != right.edges[edge_id]
+        )
+
+        left_parse_errors = set(left.parse_error_files)
+        right_parse_errors = set(right.parse_error_files)
+
+        details: dict[str, object] = {
             "left_nodes": len(left.nodes),
             "right_nodes": len(right.nodes),
             "left_edges": len(left.edges),
             "right_edges": len(right.edges),
             "left_unresolved": len(left_unresolved),
             "right_unresolved": len(right_unresolved),
+            "left_only_nodes": sorted(left_node_ids - right_node_ids)[:12],
+            "right_only_nodes": sorted(right_node_ids - left_node_ids)[:12],
+            "changed_node_payloads": changed_node_payloads[:12],
+            "left_only_edges": sorted(left_edge_ids - right_edge_ids)[:12],
+            "right_only_edges": sorted(right_edge_ids - left_edge_ids)[:12],
+            "changed_edge_payloads": changed_edge_payloads[:12],
+            "left_only_unresolved": sorted(
+                left_unresolved - right_unresolved
+            )[:12],
+            "right_only_unresolved": sorted(
+                right_unresolved - left_unresolved
+            )[:12],
+            "left_only_parse_errors": sorted(
+                left_parse_errors - right_parse_errors
+            )[:12],
+            "right_only_parse_errors": sorted(
+                right_parse_errors - left_parse_errors
+            )[:12],
         }
         equal = (
-            left.nodes == right.nodes
-            and left.edges == right.edges
-            and left_unresolved == right_unresolved
-            and set(left.parse_error_files)
-            == set(right.parse_error_files)
+            not details["left_only_nodes"]
+            and not details["right_only_nodes"]
+            and not details["changed_node_payloads"]
+            and not details["left_only_edges"]
+            and not details["right_only_edges"]
+            and not details["changed_edge_payloads"]
+            and not details["left_only_unresolved"]
+            and not details["right_only_unresolved"]
+            and not details["left_only_parse_errors"]
+            and not details["right_only_parse_errors"]
         )
-        return equal, details
+        return bool(equal), details
 
     def performance_report(self) -> dict[str, object]:
         decision = decide_backend(self._incremental_timings)
