@@ -91,6 +91,8 @@ import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact
 import DASHI.Biology.IonicMimicrySourceAtlasExact
 import DASHI.Biology.IonicMimicryGeometryExact
 import DASHI.Biology.TargetRelativeRecognitionFibreExact
+import DASHI.Biology.TargetIndexedRecognitionGeometryExact
+import DASHI.Biology.TargetIndexedRecognitionAdmissibleRegionExact
 import DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact
 import DASHI.Biology.Kluver5HT2ACrossScaleHyperfibreExact
 import DASHI.Biology.Kluver5HT2AMolecularProteinInstantiationExact
