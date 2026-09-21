@@ -21,14 +21,13 @@ import DASHI.Education.DigitalESDSelectiveFullTextMaterialisationExact as Sparse
 ------------------------------------------------------------------------
 
 data DocumentFormat : Set where
-  plaintext
-  markdown
-  html
-  csv
-  latex
-  docx
-  pdf
-  : DocumentFormat
+  plaintext : DocumentFormat
+  markdown : DocumentFormat
+  html : DocumentFormat
+  csv : DocumentFormat
+  latex : DocumentFormat
+  docx : DocumentFormat
+  pdf : DocumentFormat
 
 record DocumentTextAnchor : Set where
   constructor document-text-anchor
