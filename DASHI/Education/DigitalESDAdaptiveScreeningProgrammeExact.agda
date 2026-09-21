@@ -247,12 +247,11 @@ familySimilarityCannotDetermineSameEmpiricalStudy =
 ------------------------------------------------------------------------
 
 data ScreeningProcessAbsenceProbe : Set where
-  inspectSearchVocabularyExclusion
-  inspectMissingAbstractOrMetadata
-  inspectSystematicDeprioritisation
-  inspectUnderrepresentedSourceTypes
-  inspectTerminologyOutsideFrozenQueries
-  : ScreeningProcessAbsenceProbe
+  inspectSearchVocabularyExclusion : ScreeningProcessAbsenceProbe
+  inspectMissingAbstractOrMetadata : ScreeningProcessAbsenceProbe
+  inspectSystematicDeprioritisation : ScreeningProcessAbsenceProbe
+  inspectUnderrepresentedSourceTypes : ScreeningProcessAbsenceProbe
+  inspectTerminologyOutsideFrozenQueries : ScreeningProcessAbsenceProbe
 
 screeningProcessProbeReading : ScreeningProcessAbsenceProbe → String
 screeningProcessProbeReading inspectSearchVocabularyExclusion =
@@ -318,13 +317,12 @@ open StudyFamilyCandidateFibre public
 ------------------------------------------------------------------------
 
 data CalibrationStratum : Set where
-  obviousIncludeCandidate
-  obviousExcludeCandidate
-  highUncertaintyCandidate
-  highDuplicateAmbiguity
-  rareTerminologyOrSourceType
-  missingAbstractOrMalformedMetadata
-  : CalibrationStratum
+  obviousIncludeCandidate : CalibrationStratum
+  obviousExcludeCandidate : CalibrationStratum
+  highUncertaintyCandidate : CalibrationStratum
+  highDuplicateAmbiguity : CalibrationStratum
+  rareTerminologyOrSourceType : CalibrationStratum
+  missingAbstractOrMalformedMetadata : CalibrationStratum
 
 record CalibrationSelectionReceipt : Set where
   constructor calibration-selection-receipt
@@ -403,12 +401,11 @@ record ScreeningQueueCandidate : Set where
 open ScreeningQueueCandidate public
 
 data ScreeningPriorityAxis : Set where
-  informationGainAxis
-  corpusContractionAxis
-  rareCellCoverageAxis
-  duplicateFamilyPayoffAxis
-  reviewerCostAxis
-  : ScreeningPriorityAxis
+  informationGainAxis : ScreeningPriorityAxis
+  corpusContractionAxis : ScreeningPriorityAxis
+  rareCellCoverageAxis : ScreeningPriorityAxis
+  duplicateFamilyPayoffAxis : ScreeningPriorityAxis
+  reviewerCostAxis : ScreeningPriorityAxis
 
 screeningQueueProblem : Pareto.ConsumerMDLProblem
 screeningQueueProblem =
@@ -519,14 +516,13 @@ record CanonicalFullTextReviewCarrier
 open CanonicalFullTextReviewCarrier public
 
 data FrameworkChallengeDisposition : Set where
-  supportsCandidatePrinciple
-  narrowsCandidatePrinciple
-  splitsCandidatePrinciple
-  mergesCandidatePrinciple
-  defeatsCandidatePrinciple
-  extendsCandidatePrinciple
-  unresolvedFrameworkChallenge
-  : FrameworkChallengeDisposition
+  supportsCandidatePrinciple : FrameworkChallengeDisposition
+  narrowsCandidatePrinciple : FrameworkChallengeDisposition
+  splitsCandidatePrinciple : FrameworkChallengeDisposition
+  mergesCandidatePrinciple : FrameworkChallengeDisposition
+  defeatsCandidatePrinciple : FrameworkChallengeDisposition
+  extendsCandidatePrinciple : FrameworkChallengeDisposition
+  unresolvedFrameworkChallenge : FrameworkChallengeDisposition
 
 record FrameworkChallengeReceipt
     (source : Attr.AttributedSource) : Set where
@@ -667,11 +663,10 @@ corpusFrameworkRevisionDoesNotCreateUniversalTruth ()
 ------------------------------------------------------------------------
 
 data P0StageState : Set where
-  sourceWritten
-  implementedAwaitingRuntime
-  blockedOnReviewedCorpus
-  paid
-  : P0StageState
+  sourceWritten : P0StageState
+  implementedAwaitingRuntime : P0StageState
+  blockedOnReviewedCorpus : P0StageState
+  paid : P0StageState
 
 record AdaptiveScreeningProgrammeState : Set where
   constructor adaptive-screening-programme-state
