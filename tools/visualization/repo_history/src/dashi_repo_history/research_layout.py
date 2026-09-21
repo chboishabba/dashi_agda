@@ -20,6 +20,13 @@ class ResearchAtlasLayout:
         self.local_layouts: dict[str, PersistentLayout] = {}
         self.node_programmes: dict[str, str] = {}
         self.positions: dict[str, Point3] = {}
+        # Positions remain part of the visual atlas even when a node is not
+        # currently rendered. Returning to old work therefore returns to the
+        # same semantic geography instead of re-seeding a fresh layout.
+        self.archived_local_positions: dict[
+            str,
+            dict[str, tuple[float, float]],
+        ] = {}
 
     def _layout_for(self, programme: str) -> PersistentLayout:
         if programme not in self.local_layouts:
@@ -59,7 +66,17 @@ class ResearchAtlasLayout:
                 if edge[0] in node_set and edge[1] in node_set
             ]
             local = self._layout_for(programme)
+            archive = self.archived_local_positions.setdefault(
+                programme,
+                {},
+            )
+            local.positions = {
+                node_id: archive[node_id]
+                for node_id in node_ids
+                if node_id in archive
+            }
             local.solve(node_ids, local_edges)
+            archive.update(local.positions)
             local_positions = local.manim_layout()
 
             region = self.regions.get(programme)
@@ -86,6 +103,14 @@ class ResearchAtlasLayout:
         local = self.local_layouts.get(programme)
         if local is not None:
             local.transfer_identity(old_id, new_id)
+
+        archive = self.archived_local_positions.setdefault(
+            programme,
+            {},
+        )
+        if old_id in archive and new_id not in archive:
+            archive[new_id] = archive[old_id]
+
         if old_id in self.positions and new_id not in self.positions:
             self.positions[new_id] = list(self.positions[old_id])
 
