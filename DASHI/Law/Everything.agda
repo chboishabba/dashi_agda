@@ -193,3 +193,7 @@ import DASHI.Law.ConsumerResearchAdmissibilityStopExact
 import DASHI.Law.ConsumerResearchAdmissibilityStopRegression
 import DASHI.Law.LegalWorldRevisionReconstructionExact
 import DASHI.Law.LegalWorldRevisionReconstructionRegression
+import DASHI.Law.MaboGenericLegalFollowAdapterExact
+import DASHI.Law.MaboGenericLegalFollowAdapterRegression
+import DASHI.Law.ReaderVisualisationPickParityExact
+import DASHI.Law.ReaderVisualisationPickParityRegression
