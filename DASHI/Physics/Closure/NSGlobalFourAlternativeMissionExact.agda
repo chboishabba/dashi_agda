@@ -211,13 +211,40 @@ clayFacingCDRequiresIndependentAgdaReconstruction =
   ClayFacing.cdIndependentAgdaReconstructionGatesClayFacingAudit
 
 internalResearchPriorityA : ClayFacing.ActiveAction
-internalResearchPriorityA = ClayFacing.proveInternalAnalyticLeaf
+internalResearchPriorityA = ClayFacing.proveInternalSameObjectLeaf
 
 internalResearchPriorityB : ClayFacing.ActiveAction
 internalResearchPriorityB = ClayFacing.proveInternalSameObjectLeaf
 
 externalReconstructionIsOptionalVerification : Bool
 externalReconstructionIsOptionalVerification = true
+
+-- Authoritative research scheduler.  The older GlobalNSResidual values are
+-- retained for compatibility with historical dashboards only.
+data ClayFacingResearchResidual : Set where
+  provePeriodicBPhysicalSameObject : ClayFacingResearchResidual
+  proveEuclideanAPhysicalSameObject : ClayFacingResearchResidual
+  optionalReconstructExternalC : ClayFacingResearchResidual
+  optionalReconstructExternalD : ClayFacingResearchResidual
+  noInternalResearchResidual : ClayFacingResearchResidual
+
+currentClayFacingResearchResidual : ClayFacingResearchResidual
+currentClayFacingResearchResidual = provePeriodicBPhysicalSameObject
+
+nextClayFacingResearchResidual : ClayFacingResearchResidual
+nextClayFacingResearchResidual = proveEuclideanAPhysicalSameObject
+
+cIndependentReconstructionResearchPriority : Bool
+cIndependentReconstructionResearchPriority = false
+
+dIndependentReconstructionResearchPriority : Bool
+dIndependentReconstructionResearchPriority = false
+
+bPrimaryActiveResearchLane : Bool
+bPrimaryActiveResearchLane = true
+
+aSecondaryActiveResearchLane : Bool
+aSecondaryActiveResearchLane = true
 
 roundGlobalFourAlternativeMissionImplemented : Bool
 roundGlobalFourAlternativeMissionImplemented = true
