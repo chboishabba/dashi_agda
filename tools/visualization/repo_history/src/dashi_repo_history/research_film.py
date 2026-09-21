@@ -1010,6 +1010,245 @@ def compile_research_film(
 
         previous_programme = episode.programme
 
+    # Branch/PR events are independent timeline evidence. They must not vanish
+    # merely because the exact fork/merge commit introduced no fresh semantic
+    # object in the selected source slice.
+    commit_order = {
+        commit["commit"]: index
+        for index, commit in enumerate(timeline.get("commits", []))
+    }
+
+    def event_context(
+        commit_ids: Iterable[str],
+    ) -> tuple[
+        str,
+        tuple[str, ...],
+        tuple[str, ...],
+    ]:
+        selected = [
+            item
+            for commit_id in commit_ids
+            for item in working_by_commit.get(commit_id, [])
+        ]
+        programmes = tuple(
+            dict.fromkeys(item.programme for item in selected)
+        )
+        programme = (
+            programmes[0]
+            if len(programmes) == 1
+            else "Multiple"
+        )
+        nodes = tuple(
+            dict.fromkeys(
+                node
+                for item in selected
+                for node in item.focus_node_ids
+            )
+        )
+        edges = tuple(
+            dict.fromkeys(
+                edge
+                for item in selected
+                for edge in item.focus_edge_ids
+            )
+        )
+        return programme, nodes, edges
+
+    def event_key(beat: FilmBeat) -> tuple[Any, ...]:
+        payload = beat.payload or {}
+        return (
+            beat.kind,
+            beat.commit,
+            payload.get("number"),
+            payload.get("merge_commit"),
+            payload.get("fork_base"),
+        )
+
+    existing_event_keys = {
+        event_key(beat)
+        for beat in beats
+        if beat.kind in {
+            "branch-fork",
+            "branch-merge",
+            "pr-merge",
+        }
+    }
+
+    def insert_timeline_event(
+        beat: FilmBeat,
+        *,
+        after_semantic: bool,
+    ) -> None:
+        target_order = commit_order.get(beat.commit or "", 10**12)
+        same_commit = [
+            index
+            for index, existing in enumerate(beats)
+            if existing.commit == beat.commit
+        ]
+        if same_commit:
+            if after_semantic:
+                position = max(same_commit) + 1
+            else:
+                semantic_positions = [
+                    index
+                    for index in same_commit
+                    if beats[index].kind == "semantic-change"
+                ]
+                position = (
+                    min(semantic_positions)
+                    if semantic_positions
+                    else max(same_commit) + 1
+                )
+            beats.insert(position, beat)
+            return
+
+        position = len(beats)
+        for index, existing in enumerate(beats):
+            existing_order = commit_order.get(
+                existing.commit or "",
+                10**12,
+            )
+            if existing_order > target_order:
+                position = index
+                break
+        beats.insert(position, beat)
+
+    for branch_episode in timeline.get("branch_episodes", []):
+        fork = branch_episode["fork_base"]
+        left_path = list(branch_episode.get("left_path", []))
+        right_path = list(branch_episode.get("right_path", []))
+        fork_context = [
+            fork,
+            *(left_path[1:2]),
+            *(right_path[1:2]),
+        ]
+        programme, nodes, edges = event_context(fork_context)
+        fork_payload = dict(branch_episode)
+        fork_beat = FilmBeat(
+            kind="branch-fork",
+            commit=fork,
+            programme=programme,
+            topic="branch split",
+            duration_seconds=0.45,
+            focus_node_ids=nodes,
+            focus_edge_ids=edges,
+            visible_node_ids=nodes,
+            visible_edge_ids=edges,
+            camera=(
+                CameraDirective(
+                    programme=programme,
+                    focus_node_ids=nodes,
+                    mode=(
+                        "programme-overview"
+                        if programme == "Multiple"
+                        else "fit-active"
+                    ),
+                    padding=1.25,
+                    min_width=7.0,
+                    max_width=28.0,
+                    transition_seconds=0.55,
+                    reason="branch-fork-context",
+                )
+                if nodes
+                else None
+            ),
+            payload=fork_payload,
+        )
+        if event_key(fork_beat) not in existing_event_keys:
+            insert_timeline_event(
+                fork_beat,
+                after_semantic=False,
+            )
+            existing_event_keys.add(event_key(fork_beat))
+
+        merge = branch_episode["merge_commit"]
+        programme, nodes, edges = event_context(
+            [
+                merge,
+                branch_episode["left_tip"],
+                branch_episode["right_tip"],
+            ]
+        )
+        merge_beat = FilmBeat(
+            kind="branch-merge",
+            commit=merge,
+            programme=programme,
+            topic="branch merge",
+            duration_seconds=0.55,
+            focus_node_ids=nodes,
+            focus_edge_ids=edges,
+            visible_node_ids=nodes,
+            visible_edge_ids=edges,
+            camera=(
+                CameraDirective(
+                    programme=programme,
+                    focus_node_ids=nodes,
+                    mode=(
+                        "programme-overview"
+                        if programme == "Multiple"
+                        else "fit-active"
+                    ),
+                    padding=1.28,
+                    min_width=7.0,
+                    max_width=30.0,
+                    transition_seconds=0.50,
+                    reason="branch-merge-context",
+                )
+                if nodes
+                else None
+            ),
+            payload=dict(branch_episode),
+        )
+        if event_key(merge_beat) not in existing_event_keys:
+            insert_timeline_event(
+                merge_beat,
+                after_semantic=True,
+            )
+            existing_event_keys.add(event_key(merge_beat))
+
+    for pr in timeline.get("pull_requests", []):
+        merge = pr.get("merge_commit")
+        if not merge or merge not in commit_order:
+            continue
+        programme, nodes, edges = event_context([merge])
+        if not nodes:
+            continue
+        pr_beat = FilmBeat(
+            kind="pr-merge",
+            commit=merge,
+            programme=programme,
+            topic=(
+                f"PR #{pr.get('number')} · "
+                f"{pr.get('title', '')}"
+            ),
+            duration_seconds=0.75,
+            focus_node_ids=nodes,
+            focus_edge_ids=edges,
+            visible_node_ids=nodes,
+            visible_edge_ids=edges,
+            camera=CameraDirective(
+                programme=programme,
+                focus_node_ids=nodes,
+                mode=(
+                    "programme-overview"
+                    if programme == "Multiple"
+                    else "fit-active"
+                ),
+                padding=1.22,
+                min_width=7.0,
+                max_width=28.0,
+                transition_seconds=0.40,
+                reason="pull-request-merge",
+            ),
+            payload=dict(pr),
+        )
+        if event_key(pr_beat) not in existing_event_keys:
+            insert_timeline_event(
+                pr_beat,
+                after_semantic=True,
+            )
+            existing_event_keys.add(event_key(pr_beat))
+
     return ResearchFilmPlan(
         regions=regions,
         working_sets=tuple(working_sets),
