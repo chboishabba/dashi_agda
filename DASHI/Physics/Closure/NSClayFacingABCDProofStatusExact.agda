@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSOpenAI2026ComparatorClayCDSourceExactAlignment as
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as Cut
 import DASHI.Physics.Closure.NSClayFacingAAnalyticCutExact as ACut
 import DASHI.Physics.Closure.NSClayFacingBResearchCutExact as BCut
+import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact as CDAudit
 
 data ProofLane : Set where
   laneA laneB laneC laneD : ProofLane
@@ -182,6 +183,12 @@ dReleasedSourceExact = CD.releasedComparatorDExactlyMatchesClayD
 
 cdReleasedSourceAlignmentClosed : Bool
 cdReleasedSourceAlignmentClosed = CD.releasedComparatorCDSourceAlignmentClosed
+
+cOfficialCoordinateAuditClosed : Bool
+cOfficialCoordinateAuditClosed = CDAudit.cOfficialCoordinatesSourceAudited
+
+dOfficialCoordinateAuditClosed : Bool
+dOfficialCoordinateAuditClosed = CDAudit.dOfficialCoordinatesSourceAudited
 
 cdIndependentAgdaReconstructionClosed : Bool
 cdIndependentAgdaReconstructionClosed =
