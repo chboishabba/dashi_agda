@@ -12,6 +12,8 @@ from .compact_history import (
 )
 from .git_history import HistoryExtractor, fetch_seed_commits
 from .merge_attribution import attribute_merge
+from .pr_events import collect_pr_events
+from .research_film import compile_research_film
 from .salience import rank_episodes, score_episode
 from .scene_program import (
     compile_branch_episode_program,
@@ -46,6 +48,11 @@ def _extract(args: argparse.Namespace) -> None:
         episode_context=args.episode_context,
     )
     history_payload = timeline.to_dict()
+    if args.github_prs:
+        history_payload["pull_requests"] = [
+            event.to_dict()
+            for event in collect_pr_events(args.github_prs)
+        ]
     if args.compact:
         history_payload = compact_timeline(
             history_payload,
@@ -105,6 +112,7 @@ def _render(args: argparse.Namespace) -> None:
         "semantic-history": "SemanticHistoryScene",
         "episode": "SemanticBranchEpisodeScene",
         "merge": "SemanticMergeScene",
+        "research-film": "ResearchEvolutionScene",
     }
     scene = scene_by_mode[args.scene]
     subprocess.run(
@@ -123,6 +131,19 @@ def _render(args: argparse.Namespace) -> None:
 
 def _program(args: argparse.Namespace) -> None:
     data = load_history_file(args.input)
+
+    if args.scene == "research-film":
+        payload = compile_research_film(data).to_dict()
+        rendered = json.dumps(payload, indent=2)
+        if args.output:
+            Path(args.output).write_text(
+                rendered + "\n",
+                encoding="utf-8",
+            )
+            print(args.output)
+        else:
+            print(rendered)
+        return
 
     if args.scene == "semantic-history":
         commands = compile_first_parent_program(
@@ -431,6 +452,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Fetch each seed commit from the selected remote before traversal.",
     )
     extract.add_argument("--remote", default="origin")
+    extract.add_argument(
+        "--github-prs",
+        metavar="OWNER/REPO",
+        help="Enrich the timeline with PR metadata from the authenticated gh CLI.",
+    )
     window = extract.add_mutually_exclusive_group()
     window.add_argument("--first-commits", type=int)
     window.add_argument("--max-commits", type=int)
@@ -456,7 +482,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     render.add_argument(
         "--scene",
-        choices=["history", "snapshot", "symbol", "symbol-history", "semantic-history", "episode", "merge"],
+        choices=["history", "snapshot", "symbol", "symbol-history", "semantic-history", "episode", "merge", "research-film"],
         default="history",
     )
     render.add_argument("--snapshot-index", type=int)
@@ -495,6 +521,7 @@ def build_parser() -> argparse.ArgumentParser:
             "merge",
             "symbol",
             "symbol-history",
+            "research-film",
         ],
     )
     program.add_argument("-o", "--output")
