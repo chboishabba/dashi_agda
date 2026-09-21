@@ -209,6 +209,10 @@ import DASHI.Law.RevisionReReviewPropagationExact
 import DASHI.Law.RevisionReReviewPropagationRegression
 import DASHI.Law.QueryScopedRevisionImpactExact
 import DASHI.Law.QueryScopedRevisionImpactRegression
+import DASHI.Law.QueryDependencySliceCompilationExact
+import DASHI.Law.QueryDependencySliceCompilationRegression
+import DASHI.Law.SourceRealisedLegalFollowAdapterExact
+import DASHI.Law.SourceRealisedLegalFollowAdapterRegression
 import DASHI.Law.MaboHistoricalRevisionShadowExact
 import DASHI.Law.MaboHistoricalRevisionShadowRegression
 import DASHI.Law.RevisionInvalidatedProjectionAdequacyExact
