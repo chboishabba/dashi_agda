@@ -97,22 +97,18 @@ encodeRunRows :
       (Canonical.listLength (Local.cells start)))
 encodeRunRows stateCoverage symbolCoverage Run.runDone =
   Flat.encodeRow stateCoverage symbolCoverage _
-encodeRunRows {machine}
+encodeRunRows {machine} {start = current}
     stateCoverage symbolCoverage
-    (Run.runStep step rest) =
+    (Run.runStep {next = next} step rest) =
   Canonical.appendBits
     (Flat.encodeRow stateCoverage symbolCoverage _)
     tail
   where
     beforeCols =
-      Canonical.listLength
-        (Local.cells
-          (Local.before (WF.step step)))
+      Canonical.listLength (Local.cells current)
 
     afterCols =
-      Canonical.listLength
-        (Local.cells
-          (Local.after (WF.step step)))
+      Canonical.listLength (Local.cells next)
 
     tailRaw =
       encodeRunRows stateCoverage symbolCoverage rest
@@ -192,11 +188,23 @@ headAtInterior :
         (Character.headState interior)
         (Character.readSymbol interior))
       (Local.cells row))
-headAtInterior interior =
-  go
-    (Character.prefix interior)
-    (Character.prefixPlain interior)
+headAtInterior interior
+    with go
+      (Character.prefix interior)
+      (Character.prefixPlain interior)
+... | n , occurrence =
+  n ,
+  transportAtList
+    (sym (Character.rowShape interior))
+    occurrence
   where
+    transportAtList :
+      ∀ {A : Set} {k : Nat} {x : A} {left right : List A} →
+      left ≡ right →
+      Indexed.At k x left →
+      Indexed.At k x right
+    transportAtList refl proof = proof
+
     go :
       ∀ prefix →
       WF.PlainCells prefix →
