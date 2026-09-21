@@ -803,6 +803,8 @@ def compile_research_film(
                         duration_seconds=0.65,
                         focus_node_ids=overview_nodes,
                         focus_edge_ids=overview_edges,
+                        visible_node_ids=overview_nodes,
+                        visible_edge_ids=overview_edges,
                         camera=CameraDirective(
                             programme="Multiple",
                             focus_node_ids=overview_nodes,
