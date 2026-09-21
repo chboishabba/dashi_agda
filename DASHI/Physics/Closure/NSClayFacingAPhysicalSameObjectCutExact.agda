@@ -15,6 +15,8 @@ module DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ; _≤_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import Real as BishopReal
 
@@ -23,6 +25,8 @@ import DASHI.Physics.Closure.NSTriadKNEuclideanSignedFrequencyCarrierRealization
 import DASHI.Physics.Closure.NSTriadKNEuclideanPhysicalFourierNSExact as Physical
 import DASHI.Physics.Closure.NSTriadKNEuclideanViscousHeatRateExact as Heat
 import DASHI.Physics.Closure.NSWholeSpacePhysicalKernelSaturationOriginExact as Origin
+import DASHI.Physics.Closure.NSWholeSpaceProjectedSaturationOriginBoundExact as SaturationBound
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondOrderEnvelopeExact as Envelope
 import DASHI.Physics.Closure.NSTriadKNEuclideanCenteredResolventScaleRelativeExact as High
 
 data APhysicalResidual : Set where
@@ -57,9 +61,9 @@ nearOriginPhysicalBound :
   BishopReal._≤_
     (Physical.physicalCenteredResolventCorrection kernel I)
     (BishopReal._*_
-      (DASHI.Physics.Closure.NSWholeSpaceProjectedSaturationOriginBoundExact.viscosityInverse
+      (SaturationBound.viscosityInverse
         (Origin.saturationCell (saturationWeld D I)))
-      (DASHI.Physics.Closure.NSWholeSpaceProjectedSaturationOriginBoundExact.majorant
+      (SaturationBound.majorant
         (Origin.saturationCell (saturationWeld D I))))
 nearOriginPhysicalBound D I =
   Origin.physicalKernelSaturationOriginBound (saturationWeld D I)
@@ -85,7 +89,7 @@ open PhysicalHighFrequencyEnvelopeData public
 
 highFrequencyCurvatureBound :
   (D : PhysicalHighFrequencyEnvelopeData) →
-  DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondOrderEnvelopeExact.resolventTransportCurvature
+  Envelope.resolventTransportCurvature
     (outputHeatRate D)
   ≤ High.scaleRelativeCurvature (shellHeatFloor D)
 highFrequencyCurvatureBound D
