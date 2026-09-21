@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.MagnetoreceptionSurface as Generic
+import DASHI.Biology.AvianMagnetoreceptionSourceRegistry as Sources
 
 ------------------------------------------------------------------------
 -- Lisowski et al. 2026 evidence surface.
@@ -122,6 +123,12 @@ record HepaticMacrophageMagnetoreceptionReceipt : Set₁ where
     boundaries :
       List MacrophageMagnetoreceptionBoundary
 
+    sourceReceipt :
+      Sources.AvianMagnetoreceptionSource
+
+    sourceReceiptIsLisowski2026 :
+      sourceReceipt ≡ Sources.lisowskiEtAl2026
+
     sourceReference :
       String
 
@@ -206,8 +213,10 @@ canonicalHepaticMacrophageMagnetoreceptionReceipt =
     ; layers = canonicalHepaticLayers
     ; evidenceClasses = canonicalMacrophageEvidenceClasses
     ; boundaries = canonicalMacrophageBoundaries
+    ; sourceReceipt = Sources.lisowskiEtAl2026
+    ; sourceReceiptIsLisowski2026 = refl
     ; sourceReference =
-        "Lisowski et al., Science 392(6801):985-991 (2026), DOI 10.1126/science.ady2486, PMID 42207892"
+        Sources.identifier Sources.lisowskiEtAl2026
     ; plainReading =
         "Hepatic superparamagnetic macrophages and the depletion-overcast behavioural effect are promoted as source-attributed evidence; autonomic transduction, central representation, and phenomenal content remain residual."
     }
