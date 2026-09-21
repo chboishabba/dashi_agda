@@ -13,7 +13,11 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralACompletionRound4
 -- the same family and target.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteAFromSourcesExact as SourceA
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119UniformProjectiveCompactnessExact as Projective
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SelectedProjectiveCompactnessExact as Selected
@@ -37,7 +41,13 @@ record LiteralCMP119ACompletion
       Division.RealDivisionAlgebra
         (RealLimit.canonicalCylinderAlgebra limitLaws)
         quotient)
-    (S : _)
+    (S :
+      Top.LiteralYangMillsSemantics
+        (Physical.physicalLiteralCarriers
+          G X Nat Configuration ℝ
+          (Configuration → ℝ) Position
+          CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+          Hilbert Hamiltonian Vacuum))
     : Set₂ where
   field
     source :
