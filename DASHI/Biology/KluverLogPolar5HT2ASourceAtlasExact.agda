@@ -174,7 +174,6 @@ canonicalKluverLogPolar5HT2AAtlas =
     "Source-bounded support for neural-field form constants, log-polar retinotopy, migraine propagation geometry, human 5-HT2A mapping, pharmacological blockade, and ACC/salience context. DASHI composition theorems remain repo-native."
 
 canonicalKluverLogPolar5HT2AAtlasIsNonPromoting :
-  Source.AttributedSourceAtlas.atlasCreatesAuthority
-    canonicalKluverLogPolar5HT2AAtlas
-  ≡ false
-canonicalKluverLogPolar5HT2AAtlasIsNonPromoting = refl
+  Source.atlasCreatesAuthority canonicalKluverLogPolar5HT2AAtlas ≡ false
+canonicalKluverLogPolar5HT2AAtlasIsNonPromoting =
+  Source.atlasCreatesAuthorityIsFalse canonicalKluverLogPolar5HT2AAtlas
