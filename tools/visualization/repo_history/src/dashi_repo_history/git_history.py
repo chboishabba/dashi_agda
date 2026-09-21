@@ -53,11 +53,11 @@ def fetch_seed_commits(
 def read_commit_dag(
     repo: Path,
     seeds: list[str] | None = None,
-    refs: list[str] | None = None,
+    history_refs: list[str] | None = None,
 ) -> list[CommitRecord]:
-    refs = read_refs(repo)
+    live_refs = read_refs(repo)
     refs_by_sha: dict[str, list[str]] = {}
-    for name, sha in refs.items():
+    for name, sha in live_refs.items():
         refs_by_sha.setdefault(sha, []).append(name)
 
     rev_args = [
@@ -67,8 +67,8 @@ def read_commit_dag(
         "--parents",
         "--timestamp",
     ]
-    if refs:
-        rev_args.extend(refs)
+    if history_refs:
+        rev_args.extend(history_refs)
     else:
         rev_args.append("--all")
     rev_args.extend(seeds or [])
