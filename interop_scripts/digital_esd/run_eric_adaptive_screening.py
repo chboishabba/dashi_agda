@@ -298,9 +298,17 @@ def main() -> int:
             "fulltext_retrieval_creates_source_audit_admission": False,
         },
     }
-    execution_manifest["execution_manifest_sha256_without_self_field"] = sha256_file(
-        fulltext_manifest
-    )
+    execution_manifest["execution_manifest_sha256_without_self_field"] = hashlib.sha256(
+        (
+            json.dumps(
+                execution_manifest,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "\n"
+        ).encode("utf-8")
+    ).hexdigest()
     execution_manifest_path = out_root / "adaptive-screening-execution-manifest.json"
     execution_manifest_path.write_text(
         json.dumps(execution_manifest, indent=2, ensure_ascii=False, sort_keys=True)
