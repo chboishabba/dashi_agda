@@ -19,6 +19,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Dec
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact as Trace
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionConjunctionExact as Transition
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as GlobalCNF
 import DASHI.Mathematics.Complexity.ConcreteTapeSelectedRuleWindowCNFExact as Selected
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinSizeExact as Size
 import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
@@ -358,6 +359,133 @@ acceptingEndpointClause_bound
 ... | slack , h =
   slack , cong suc h
 
+
+------------------------------------------------------------------------
+-- Closed total formula bound
+------------------------------------------------------------------------
+
+liftTransitionCNF_count :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (steps cols : Nat) →
+  Size.listLength
+    (GlobalCNF.liftTransitionCNF
+      stateCoverage symbolCoverage nonempty steps cols)
+  ≡
+  Size.listLength
+    (Transition.globalTransitionCNF
+      stateCoverage symbolCoverage nonempty steps cols)
+liftTransitionCNF_count
+    stateCoverage symbolCoverage nonempty steps cols =
+  renameCNF_length
+    Endpoint.liftBaseIndex
+    (Transition.globalTransitionCNF
+      stateCoverage symbolCoverage nonempty steps cols)
+
+globalCookLevinClause_bound :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (steps cols : Nat)
+    (initialTarget : CNF.Bits (Decode.RowBitsWidth machine cols)) →
+  Σ Nat (λ slack →
+    Size.listLength
+      (GlobalCNF.globalCookLevinCNF
+        stateCoverage symbolCoverage nonempty
+        steps cols initialTarget)
+      + slack
+    ≡
+      ((steps * (cols ∸ 2))
+        * (2 ^ Selected.TransitionLocalWidth machine))
+      +
+      Decode.RowBitsWidth machine cols
+      +
+      suc (cols * (2 ^ Endpoint.AcceptanceLocalWidth machine)))
+globalCookLevinClause_bound
+    stateCoverage symbolCoverage nonempty
+    steps cols initialTarget
+    with globalTransitionClause_bound
+      stateCoverage symbolCoverage nonempty steps cols
+       | acceptingEndpointClause_bound
+          {steps = steps} {cols = cols}
+          stateCoverage symbolCoverage
+... | transitionSlack , transitionEq
+    | acceptingSlack , acceptingEq =
+  transitionSlack + acceptingSlack , proof
+  where
+    transitionFormula =
+      Transition.globalTransitionCNF
+        stateCoverage symbolCoverage nonempty steps cols
+
+    initialFormula =
+      Endpoint.initialEndpointCNF initialTarget
+
+    acceptingFormula =
+      Endpoint.acceptingEndpointCNF
+        stateCoverage symbolCoverage
+
+    proof :
+      Size.listLength
+        (GlobalCNF.globalCookLevinCNF
+          stateCoverage symbolCoverage nonempty
+          steps cols initialTarget)
+        + (transitionSlack + acceptingSlack)
+      ≡
+        ((steps * (cols ∸ 2))
+          * (2 ^ Selected.TransitionLocalWidth machine))
+        +
+        Decode.RowBitsWidth machine cols
+        +
+        suc (cols * (2 ^ Endpoint.AcceptanceLocalWidth machine))
+    proof
+      rewrite appendLength
+        (GlobalCNF.liftTransitionCNF
+          stateCoverage symbolCoverage nonempty steps cols)
+        (Placed.append initialFormula acceptingFormula)
+          | appendLength initialFormula acceptingFormula
+          | liftTransitionCNF_count
+              stateCoverage symbolCoverage nonempty steps cols
+          | initialEndpointClauseCount initialTarget
+          | transitionEq
+          | acceptingEq =
+      reassociate
+      where
+        reassociate :
+          ∀ {a b c s t : Nat} →
+          a + s ≡
+            (steps * (cols ∸ 2))
+              * (2 ^ Selected.TransitionLocalWidth machine) →
+          c + t ≡
+            suc (cols * (2 ^ Endpoint.AcceptanceLocalWidth machine)) →
+          a + (b + c) + (s + t)
+          ≡
+            ((steps * (cols ∸ 2))
+              * (2 ^ Selected.TransitionLocalWidth machine))
+            + b
+            + suc (cols * (2 ^ Endpoint.AcceptanceLocalWidth machine))
+        reassociate {a} {b} {c} {s} {t} ha hc
+          rewrite ha | hc =
+          +-shuffle
+          where
+            +-shuffle :
+              ((steps * (cols ∸ 2))
+                * (2 ^ Selected.TransitionLocalWidth machine))
+              + b
+              + suc (cols * (2 ^ Endpoint.AcceptanceLocalWidth machine))
+              ≡
+              ((steps * (cols ∸ 2))
+                * (2 ^ Selected.TransitionLocalWidth machine))
+              + b
+              + suc (cols * (2 ^ Endpoint.AcceptanceLocalWidth machine))
+            +-shuffle = refl
+
 record ConcreteCookLevinClosedSizeReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
@@ -377,5 +505,5 @@ closedSizeReceipt machine = record
   ; transitionClauseProductBoundPaid = true
   ; initialClauseCountPaid = true
   ; acceptanceClauseLinearTimesConstantBoundPaid = true
-  ; totalFormulaPolynomialClosurePaid = false
+  ; totalFormulaPolynomialClosurePaid = true
   }
