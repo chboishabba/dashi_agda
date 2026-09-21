@@ -407,3 +407,7 @@ import DASHI.Physics.Closure.NSTriadKNSameOutputIncidenceDisplacementExact
 import DASHI.Physics.Closure.NSTriadKNR573HelicitySplitLowOutputPaymentExact
 import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact
 import DASHI.Physics.Closure.NSTriadKNR587ExactThreeClassSelfBudgetBidiExact
+
+-- Native R236 critical-region producer/decomposition compilers.
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyProducerExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DecompositionExact
