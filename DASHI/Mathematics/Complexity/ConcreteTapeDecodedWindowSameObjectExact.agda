@@ -4,6 +4,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeDecodedWindowSameObjectExact whe
 -- RAW SIX-CELL SAT SLICE = WINDOW OF THE ACTUAL DECODED ADJACENT ROWS
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
@@ -59,46 +60,11 @@ pullbackFinSumCases :
     (Rename.pullbackBits left bits)
     (Rename.pullbackBits right bits)
 pullbackFinSumCases {m = zero} left right bits =
-  Placement.bitsExt λ i →
-    trans
-      (Rename.pullbackLookup
-        (Placement.finSumCases left right) bits i)
-      (sym
-        (Rename.pullbackLookup right bits i))
-pullbackFinSumCases {m = suc m} left right bits =
-  Placement.bitsExt pointwise
-  where
-    pointwise :
-      ∀ i →
-      CNF.lookupBit
-        (Rename.pullbackBits
-          (Placement.finSumCases left right) bits) i
-      ≡
-      CNF.lookupBit
-        (Canonical.appendBits
-          (Rename.pullbackBits left bits)
-          (Rename.pullbackBits right bits)) i
-    pointwise Fin.zero =
-      trans
-        (Rename.pullbackLookup
-          (Placement.finSumCases left right) bits Fin.zero)
-        (sym
-          (Rename.pullbackLookup left bits Fin.zero))
-    pointwise (Fin.suc i) =
-      trans
-        (Rename.pullbackLookup
-          (Placement.finSumCases left right) bits (Fin.suc i))
-        (sym
-          (Placement.lookupAppendLeft
-            (Rename.pullbackBits
-              (λ j → left (Fin.suc j)) bits)
-            (Rename.pullbackBits right bits)
-            i))
-      where
-        -- the recursive definition of finSumCases peels the left block
-        -- exactly as appendBits peels its head.
-        _ = pullbackFinSumCases
-          (λ j → left (Fin.suc j)) right bits
+  refl
+pullbackFinSumCases {m = suc m} left right bits
+    rewrite pullbackFinSumCases
+      (λ i → left (Fin.suc i)) right bits =
+  refl
 
 ------------------------------------------------------------------------
 -- A decoded cell really occurs at its fixed-width block coordinate
@@ -475,19 +441,19 @@ decodedRawWindowEqualsAdjacentRowsWindow
 record DecodedWindowSameObjectReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
-    repeatedBlockCellOccurrencePaid : Agda.Builtin.Bool.Bool
-    rawCellPullbackEqualsDecodedRowBlockPaid : Agda.Builtin.Bool.Bool
-    rawSixCellDecompositionPaid : Agda.Builtin.Bool.Bool
-    canonicalWindowComponentDecodePaid : Agda.Builtin.Bool.Bool
-    rawWindowEqualsAdjacentDecodedRowsWindowPaid : Agda.Builtin.Bool.Bool
+    repeatedBlockCellOccurrencePaid : Bool
+    rawCellPullbackEqualsDecodedRowBlockPaid : Bool
+    rawSixCellDecompositionPaid : Bool
+    canonicalWindowComponentDecodePaid : Bool
+    rawWindowEqualsAdjacentDecodedRowsWindowPaid : Bool
 
 decodedWindowSameObjectReceipt :
   ∀ (machine : Local.ConcreteTapeMachine) →
   DecodedWindowSameObjectReceipt machine
 decodedWindowSameObjectReceipt machine = record
-  { repeatedBlockCellOccurrencePaid = Agda.Builtin.Bool.true
-  ; rawCellPullbackEqualsDecodedRowBlockPaid = Agda.Builtin.Bool.true
-  ; rawSixCellDecompositionPaid = Agda.Builtin.Bool.true
-  ; canonicalWindowComponentDecodePaid = Agda.Builtin.Bool.true
-  ; rawWindowEqualsAdjacentDecodedRowsWindowPaid = Agda.Builtin.Bool.true
+  { repeatedBlockCellOccurrencePaid = true
+  ; rawCellPullbackEqualsDecodedRowBlockPaid = true
+  ; rawSixCellDecompositionPaid = true
+  ; canonicalWindowComponentDecodePaid = true
+  ; rawWindowEqualsAdjacentDecodedRowsWindowPaid = true
   }
