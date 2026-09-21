@@ -285,3 +285,66 @@ downloaded                        != parsed
 parsed                            != SourceAuditAdmission
 cache eviction                    != loss of revision identity
 ```
+
+
+## Actually parse retained studies
+
+The sparse cache controller only plans and registers full-text artifacts.  A
+registered artifact is **not** a parsed study.
+
+Once include/probable papers have been retrieved and registered in:
+
+```text
+artifacts/digital-esd/fulltext/cache-ledger.jsonl
+```
+
+run the real scholarly parser through the thin Digital-ESD wrapper:
+
+```bash
+python3 interop_scripts/digital_esd_slr.py run-scholarly \
+  --cache-ledger artifacts/digital-esd/fulltext/cache-ledger.jsonl \
+  --slr-root ../slr \
+  --slr-revision-reference "$(git -C ../slr rev-parse HEAD)" \
+  --output-dir artifacts/digital-esd/slr-interop/scholarly
+```
+
+This performs:
+
+```text
+materialised cache artifact
+    ↓ re-open + SHA-256 verification
+same source/revision parser request
+    ↓
+SLR scholarly_parser_prototype.py
+    ↓
+anchored document nodes
+candidate study facets
+    ↓
+same-object parse-bundle reconciliation
+```
+
+The resulting application-side parse receipts are:
+
+```text
+artifacts/digital-esd/slr-interop/scholarly/parse-receipts.jsonl
+```
+
+and may be supplied to the generic study-processing census as
+`--slr-parse-receipts`.
+
+Important authority boundaries:
+
+```text
+cache registration        != parsed study
+parser success            != reviewed canonical evidence
+candidate study facet     != study truth
+parsed study bundle       != SourceAuditAdmission
+```
+
+The live SLR scholarly parser currently produces document-structure nodes and
+candidate study facets such as Population, Sample, Intervention, Comparator,
+Outcome, StudyDesign, Setting, Method, Limitation, Funding, Institution and
+Measurement.
+
+The parser remains a candidate extractor.  Review/payment and Digital-ESD
+source-audit admission are later independent stages.
