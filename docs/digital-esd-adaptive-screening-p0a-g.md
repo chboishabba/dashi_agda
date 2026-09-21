@@ -296,3 +296,37 @@ source challenge != final corpus synthesis
 framework revision != universal truth
 candidate framework before review != final review result
 ~~~
+
+
+## Actual scholarly-paper parsing / processing ledger
+
+P0-G is now connected to the generic SLR scholarly parser through
+`interop_scripts/digital_esd/run_verified_fulltext_parse.py`.
+
+The wrapper emits an exact per-study processing ledger:
+
+```text
+study-processing-ledger.jsonl
+study-processing-ledger-manifest.json
+```
+
+with one row for every metadata record and explicit stage containment. It also
+emits:
+
+```text
+fulltext-retrieval-residual.jsonl
+fulltext-retrieval-residual-manifest.json
+```
+
+containing only authoritatively retained include/probable records that still
+lack verified full-text artifacts.
+
+The current observed smoke specimen is ERIC `EJ1083370`: one verified
+full-text artifact was materialised, handed to the SLR scholarly parser and
+successfully parsed; neither reviewed canonical evidence nor
+`SourceAuditAdmission` was created. The remaining metadata denominator is not
+relabelled as parse failure.
+
+This makes the next operational frontier explicit: retrieve more retained
+full-text artifacts, then rerun the same wrapper. No new Digital-ESD parser
+architecture is required for ordinary PDF/DOCX/HTML/TXT studies.
