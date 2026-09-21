@@ -87,6 +87,8 @@ import DASHI.Biology.MorphogeneticVisualGenerator
 import DASHI.Biology.RecursiveSpherePerforation
 import DASHI.Biology.NestedApertureVisibility
 import DASHI.Biology.LogPolarRetinotopyBridge
+import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact
+import DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact
 import DASHI.Biology.VisualMotifTransitionOperator
 import DASHI.Biology.PostAcuteVisualAdaptation
 import DASHI.Biology.HallOfHallsCoalition
