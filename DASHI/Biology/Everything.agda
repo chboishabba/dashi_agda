@@ -99,6 +99,7 @@ import DASHI.Biology.FiveHT2ARecognitionStateSpaceExact
 import DASHI.Biology.TargetRecognitionFibrationExact
 import DASHI.Biology.FiveHT2ARecognitionResidualProjectionExact
 import DASHI.Biology.FiveHT2AProjectionTowerExact
+import DASHI.Biology.TargetRecognitionBundleFibreExact
 import DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact
 import DASHI.Biology.Kluver5HT2ACrossScaleHyperfibreExact
 import DASHI.Biology.Kluver5HT2AMolecularProteinInstantiationExact
