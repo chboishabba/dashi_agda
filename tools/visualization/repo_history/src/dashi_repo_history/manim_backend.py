@@ -440,6 +440,9 @@ def _changed_graph(
 def _episode_focus(
     program,
     snapshots: dict[str, dict[str, Any]],
+    *,
+    max_context_nodes: int = 320,
+    max_context_edges: int = 1000,
 ) -> tuple[set[str], set[str]]:
     """Changed semantic objects plus one-hop relation context."""
 
@@ -481,16 +484,46 @@ def _episode_focus(
                 node_ids.add(edge["target"])
 
     # One-hop context makes a new theorem/function legible without expanding the
-    # entire repository graph.
-    for commit in relevant_commits:
+    # entire repository graph. Changed objects are mandatory; explanatory halo
+    # edges/nodes are admitted only while deterministic presentation budgets
+    # remain.
+    context_candidates: list[dict[str, Any]] = []
+    for commit in sorted(relevant_commits):
         snapshot = snapshots.get(commit)
         if snapshot is None:
             continue
         for edge in snapshot["graph"]["edges"]:
             if edge["source"] in node_ids or edge["target"] in node_ids:
-                edge_ids.add(edge["relation_id"])
-                node_ids.add(edge["source"])
-                node_ids.add(edge["target"])
+                context_candidates.append(edge)
+
+    for edge in sorted(
+        {
+            edge["relation_id"]: edge
+            for edge in context_candidates
+        }.values(),
+        key=lambda item: (
+            item["kind"],
+            item["source"],
+            item["target"],
+            item["relation_id"],
+        ),
+    ):
+        source = edge["source"]
+        target = edge["target"]
+        new_nodes = {
+            node
+            for node in (source, target)
+            if node not in node_ids
+        }
+
+        if edge["relation_id"] not in edge_ids:
+            if len(edge_ids) >= max_context_edges:
+                continue
+        if len(node_ids) + len(new_nodes) > max_context_nodes:
+            continue
+
+        edge_ids.add(edge["relation_id"])
+        node_ids.update(new_nodes)
 
     return node_ids, edge_ids
 
