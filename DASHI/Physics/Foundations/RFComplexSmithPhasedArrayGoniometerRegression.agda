@@ -1,0 +1,20 @@
+module DASHI.Physics.Foundations.RFComplexSmithPhasedArrayGoniometerRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.RFComplexSmithPhasedArrayGoniometerExact as RF
+
+engineeringJMeaningRequired : RF.EngineeringJReceipt
+engineeringJMeaningRequired = RF.canonicalEngineeringJReceipt
+
+smithChartRoleRequired : RF.SmithChartCoordinateReceipt
+smithChartRoleRequired = RF.canonicalSmithChartCoordinateReceipt
+
+phasedArrayComplexPhaseRequired : RF.PhasorArrayCrossPollinationReceipt
+phasedArrayComplexPhaseRequired = RF.canonicalPhasorArrayCrossPollinationReceipt
+
+goniometerEndpointRequired : RF.GoniometerComplexPhaseEndpointReceipt
+goniometerEndpointRequired = RF.canonicalGoniometerComplexPhaseEndpointReceipt
+
+semanticFirewallRequired : RF.EngineeringJModularJFirewall
+semanticFirewallRequired = RF.canonicalEngineeringJModularJFirewall
