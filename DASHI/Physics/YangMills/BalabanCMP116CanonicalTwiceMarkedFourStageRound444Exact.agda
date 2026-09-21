@@ -161,15 +161,30 @@ record CanonicalTwiceMarkedFourStageData
     sourceDomainsAreLiteralDomains :
       Source.localizedDomains source ≡ localizedDomains
 
-    sourceTreeDistanceIsCanonicalSupportTree :
-      ∀ domain →
-      Source.sourceTreeDistance source domain ≡ Graph.ymTreeEdgeCount
-
     sourceFixedYShellIsLiteralCommonYShell :
       ∀ domain →
       Source.fixedYShell source domain ≡ commonYShell domain
 
 open CanonicalTwiceMarkedFourStageData public
+
+-- Legacy compatibility only.  CMP116 (1.29) uses the domain-dependent d_k(Y),
+-- so the preferred Goal-1 path must not assume this global equality.
+record LegacyGlobalTreeMetricAttachment
+    {Measure TestObservable : Set}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    (data :
+      CanonicalTwiceMarkedFourStageData
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} base)
+    : Set₁ where
+  field
+    sourceTreeDistanceIsGlobalSupportTree :
+      ∀ domain →
+      Source.sourceTreeDistance (source data) domain ≡ Graph.ymTreeEdgeCount
+
+open LegacyGlobalTreeMetricAttachment public
 
 Term :
   ∀ {Measure TestObservable dataSet extension base} →
@@ -242,15 +257,16 @@ asR429 data = record
       commonYShellsBelowSelectedConnectingShell data
   }
 
-asR435 :
+asR435Legacy :
   ∀ {Measure TestObservable dataSet extension}
     {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
     (data :
       CanonicalTwiceMarkedFourStageData
         {Measure = Measure} {TestObservable = TestObservable}
         {dataSet = dataSet} {extension = extension} base) →
+  LegacyGlobalTreeMetricAttachment data →
   R435.CanonicalSelectedBSource (asR429 data)
-asR435 data = record
+asR435Legacy data legacy = record
   { R435.CanonicalSelectedBSource.leftMark = leftMark data
   ; R435.CanonicalSelectedBSource.rightMark = rightMark data
   ; R435.CanonicalSelectedBSource.CarriesLink =
@@ -267,7 +283,7 @@ asR435 data = record
   ; R435.CanonicalSelectedBSource.sourceDomainsAreLiteralDomains =
       sourceDomainsAreLiteralDomains data
   ; R435.CanonicalSelectedBSource.sourceTreeDistanceIsCanonicalSupportTree =
-      sourceTreeDistanceIsCanonicalSupportTree data
+      sourceTreeDistanceIsGlobalSupportTree legacy
   ; R435.CanonicalSelectedBSource.sourceFixedYShellIsLiteralCommonYShell =
       sourceFixedYShellIsLiteralCommonYShell data
   }
@@ -317,15 +333,19 @@ round444NonemptyFibreStructuralLevel = machineChecked
 round444R429CompilerLevel : ProofLevel
 round444R429CompilerLevel = machineChecked
 
-round444R435CompilerLevel : ProofLevel
-round444R435CompilerLevel = machineChecked
+round444R435LegacyAdapterLevel : ProofLevel
+round444R435LegacyAdapterLevel = machineChecked
+
+round444GlobalTreeMetricNotPreferredLevel : ProofLevel
+round444GlobalTreeMetricNotPreferredLevel = conditional
 
 -- B2 is no longer an independent proof obligation on this preferred carrier:
 -- both source marks and retained-fibre nonemptiness are constructor data.
 --
 -- The live B1 theorem is now exactly the source construction of these literal
--- twice-marked raw terms plus canonicalPathReplay/scalarization.  The remaining
--- source rate-split/domain geometry fields are B3/B4 rather than B2.
+-- twice-marked raw terms plus canonicalPathReplay/scalarization.  B3/B4 must
+-- use the domain-dependent Source.sourceTreeDistance.  The old global
+-- ymTreeEdgeCount equality is available only through LegacyGlobalTreeMetricAttachment.
 literalRound444TwiceDifferentiatedTermConstructionAndScalarizationLevel : ProofLevel
 literalRound444TwiceDifferentiatedTermConstructionAndScalarizationLevel =
   conditional
