@@ -22,6 +22,7 @@ module DASHI.Physics.YangMills.YangMillsClayGoal1StressSourceRound466Exact where
 -- first variation and the stress metric pairing are compiler-owned.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanCanonicalMetricToCMP119StressRound118Exact as R118
@@ -76,11 +77,11 @@ continuumStressMetricPairingCompilerLevel =
   R131.commonMetricReadyBalabanSectorCompilerLevel
 
 -- These are deliberately not listed as independent Goal-1 analytic leaves.
-freshFiniteToContinuumWardLimitMandatory : Agda.Builtin.Bool.Bool
-freshFiniteToContinuumWardLimitMandatory = Agda.Builtin.Bool.false
+freshFiniteToContinuumWardLimitMandatory : Bool
+freshFiniteToContinuumWardLimitMandatory = false
 
-freshContinuumStressTensorConstructionMandatory : Agda.Builtin.Bool.Bool
-freshContinuumStressTensorConstructionMandatory = Agda.Builtin.Bool.false
+freshContinuumStressTensorConstructionMandatory : Bool
+freshContinuumStressTensorConstructionMandatory = false
 
 round466StressSourceMinCutCompilerLevel : ProofLevel
 round466StressSourceMinCutCompilerLevel = machineChecked
