@@ -33,6 +33,7 @@ import DASHI.Physics.Closure.NSTriadKNEuclideanLebesgueSignedAggregationExact as
 import DASHI.Physics.Closure.NSTriadKNEuclideanPhysicalFourierNSExact as Physical
 import DASHI.Physics.Closure.NSTriadKNEuclideanViscousHeatRateExact as Heat
 import DASHI.Physics.Closure.NSWholeSpaceProjectedSaturationOriginBoundExact as SaturationBound
+import DASHI.Physics.Closure.NSWholeSpacePhysicalKernelSaturationOriginExact as Origin
 import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondOrderEnvelopeExact as Envelope
 import DASHI.Physics.Closure.NSTriadKNEuclideanCenteredResolventScaleRelativeExact as High
 import DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact as Cut
@@ -81,11 +82,11 @@ nearOriginBoundFromTwoSeams :
     (Physical.physicalCenteredResolventCorrection kernel I)
     (BishopReal._*_
       (SaturationBound.viscosityInverse
-        (Cut.Origin.saturationCell
+        (Origin.saturationCell
           (Cut.saturationWeld
             (nearOrigin (kernelIdentification A)) I)))
       (SaturationBound.majorant
-        (Cut.Origin.saturationCell
+        (Origin.saturationCell
           (Cut.saturationWeld
             (nearOrigin (kernelIdentification A)) I))))
 nearOriginBoundFromTwoSeams A =
