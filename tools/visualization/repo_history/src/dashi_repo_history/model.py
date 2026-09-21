@@ -159,6 +159,7 @@ class CommitRecord:
     timestamp: int
     parents: tuple[str, ...]
     refs: tuple[str, ...] = ()
+    subject: str = ""
 
     @property
     def shape(self) -> str:
