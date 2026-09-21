@@ -15,6 +15,10 @@ files=(
   "DASHI/Biology/FiveHT2AVisualCortexBioelectricBridgeExact.agda"
   "DASHI/Cognition/FiveHT2AVisualModeObservationBridgeExact.agda"
   "DASHI/Cognition/AnalyticLogPolarSpiralCompilerExact.agda"
+  "DASHI/Biology/IonicMimicrySourceAtlasExact.agda"
+  "DASHI/Biology/IonicMimicryGeometryExact.agda"
+  "DASHI/Biology/TargetRelativeRecognitionFibreExact.agda"
+  "DASHI/Biology/FiveHT2ACalciumIdentityGeometryBoundaryExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -101,5 +105,20 @@ grep -Fq 'logRadiusEqualityImpliesExponentialRadius' "$spiral"
 grep -Fq 'analyticSpiralPointHasExponentialRadius' "$spiral"
 grep -Fq 'affineConstantPhaseRearrangementProvedFromCurrentMinimalRealSpineIsFalse' "$spiral"
 grep -Fq 'empiricalV1SpatialModeIdentifiedAsAffineLogPolarPhaseIsFalse' "$spiral"
+
+ionic="$root/DASHI/Biology/IonicMimicryGeometryExact.agda"
+grep -Fq 'sameChargeDoesNotMeanSameAction' "$ionic"
+grep -Fq 'rigidityChangesOutcome' "$ionic"
+grep -Fq 'substitutionDoesNotMeanChemicalIdentity' "$ionic"
+
+recognition="$root/DASHI/Biology/TargetRelativeRecognitionFibreExact.agda"
+grep -Fq 'canonicalPbCaRecognitionFibre' "$recognition"
+grep -Fq 'canonicalSerotoninLSDRecognitionFibre' "$recognition"
+grep -Fq 'recognitionDoesNotMeanSameSignaling' "$recognition"
+
+calcium="$root/DASHI/Biology/FiveHT2ACalciumIdentityGeometryBoundaryExact.agda"
+grep -Fq 'calciumSignalIsNotJustConcentration' "$calcium"
+grep -Fq 'leadMimicryIsNotPsychedelicMechanism' "$calcium"
+grep -Fq 'reporterIntensityDoesNotDetermineBindingGeometry' "$calcium"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
