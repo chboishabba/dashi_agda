@@ -18,6 +18,16 @@ lookupDoesNotReview :
 lookupDoesNotReview =
   Reopen.latestRevisionLookupPaysContextReviewIsFalse boundary
 
+failedLookupIsNotUnchanged :
+  Reopen.latestRevisionLookupFailureMayCountAsUnchanged boundary ≡ false
+failedLookupIsNotUnchanged =
+  Reopen.latestRevisionLookupFailureMayCountAsUnchangedIsFalse boundary
+
+truncatedProbeIsNotClosed :
+  Reopen.truncatedRevisionProbeMayCloseFrontier boundary ≡ false
+truncatedProbeIsNotClosed =
+  Reopen.truncatedRevisionProbeMayCloseFrontierIsFalse boundary
+
 acquisitionDoesNotReview :
   Reopen.exactR1AcquisitionPaysContextReview boundary ≡ false
 acquisitionDoesNotReview =
