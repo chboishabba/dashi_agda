@@ -28,6 +28,7 @@ import DASHI.Physics.Closure.NSWholeSpacePhysicalKernelSaturationOriginExact as 
 import DASHI.Physics.Closure.NSWholeSpaceProjectedSaturationOriginBoundExact as SaturationBound
 import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondOrderEnvelopeExact as Envelope
 import DASHI.Physics.Closure.NSTriadKNEuclideanCenteredResolventScaleRelativeExact as High
+import DASHI.Physics.Closure.NSTriadKNMurrayBishopGalerkinCoordinateSemanticsRound34Exact as BishopQ
 
 data APhysicalResidual : Set where
   identifyKernelProjectedGram : APhysicalResidual
@@ -72,8 +73,16 @@ nearOriginPhysicalBound D I =
 -- High-frequency physical identification.
 ------------------------------------------------------------------------
 
-record PhysicalHighFrequencyEnvelopeData : Set₁ where
+record PhysicalHighFrequencyEnvelopeData
+    (fluid : Heat.PositiveViscosity) : Set₁ where
   field
+    outputInteraction : Euclidean.EuclideanInteraction
+    physicalOutputPoint : Heat.PuncturedEuclideanFrequency
+
+    outputFrequencyIsPhysicalXi :
+      Heat.frequency physicalOutputPoint ≡
+      Euclidean.xi outputInteraction
+
     outputHeatRate : ℚ
     shellHeatFloor : ℚ
 
@@ -85,10 +94,20 @@ record PhysicalHighFrequencyEnvelopeData : Set₁ where
     shellHeatFloorMeaning :
       High.shellHeatFloor scaleFloor ≡ shellHeatFloor
 
+    -- Same-object bridge: the rational curvature parameter is not free.
+    -- Its canonical Bishop embedding is exactly the physical viscous heat
+    -- rate ν|xi|² at the output frequency of the same interaction.
+    physicalOutputHeatRateMeaning :
+      BishopReal._≃_
+        (BishopQ.bishopRationalEmbed outputHeatRate)
+        (Heat.viscousHeatRate fluid
+          (Heat.frequency physicalOutputPoint))
+
 open PhysicalHighFrequencyEnvelopeData public
 
 highFrequencyCurvatureBound :
-  (D : PhysicalHighFrequencyEnvelopeData) →
+  ∀ {fluid} →
+  (D : PhysicalHighFrequencyEnvelopeData fluid) →
   Envelope.resolventTransportCurvature
     (outputHeatRate D)
   ≤ High.scaleRelativeCurvature (shellHeatFloor D)
@@ -106,6 +125,14 @@ aNearOriginAnalyticEstimateClosed = true
 
 aHighFrequencyCurvatureEstimateClosed : Bool
 aHighFrequencyCurvatureEstimateClosed = true
+
+aHighFrequencyPhysicalHeatSameObjectRequired : Bool
+aHighFrequencyPhysicalHeatSameObjectRequired = true
+
+aHighFrequencyPhysicalHeatSameObjectRequiredIsTrue :
+  aHighFrequencyPhysicalHeatSameObjectRequired ≡ true
+aHighFrequencyPhysicalHeatSameObjectRequiredIsTrue = refl
+
 
 aStandardFubiniYoungTailTheoremsAreNovelResearch : Bool
 aStandardFubiniYoungTailTheoremsAreNovelResearch = false
