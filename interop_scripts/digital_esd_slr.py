@@ -236,6 +236,8 @@ def normalize_cache_row(row: dict[str, Any], line_no: int, verify_files: bool) -
         "source_revision_ref": revision_ref,
         "content_digest_ref": digest_ref,
         "artifact_reference": str(artifact),
+        "artifact_path": str(artifact),
+        "content_sha256": digest_ref.removeprefix("sha256:"),
         "acquisition_receipt_ref": first_nonempty(
             row, "retrieval_reference", "materialised_from_plan_reference"
         ),
@@ -422,6 +424,283 @@ def cmd_run(args: argparse.Namespace) -> int:
     return 0
 
 
+def normalize_scholarly_output_row(
+    row: dict[str, Any],
+    line_no: int,
+    request: dict[str, Any],
+) -> dict[str, Any]:
+    source_ref = first_nonempty(row, "source_identity_reference")
+    revision_ref = first_nonempty(row, "source_revision_reference", "source_revision_ref")
+    digest_raw = first_nonempty(row, "content_sha256", "content_digest_ref", "sha256")
+
+    if not source_ref or not revision_ref or not digest_raw:
+        raise ValueError(
+            f"scholarly output row {line_no}: missing source identity/revision/digest"
+        )
+    if source_ref != str(request["source_identity_reference"]):
+        raise ValueError(
+            f"scholarly output row {line_no}: source identity mismatch"
+        )
+    if revision_ref != str(request["source_revision_ref"]):
+        raise ValueError(
+            f"scholarly output row {line_no}: source revision mismatch"
+        )
+
+    digest_ref = normalize_digest(digest_raw)
+    if digest_ref != normalize_digest(str(request["content_digest_ref"])):
+        raise ValueError(
+            f"scholarly output row {line_no}: content digest mismatch"
+        )
+    if row.get("parser_success") is not True:
+        raise ValueError(
+            f"scholarly output row {line_no}: parser_success must be true"
+        )
+    if row.get("candidate_only") is not True:
+        raise ValueError(
+            f"scholarly output row {line_no}: candidate_only must be true"
+        )
+    if row.get("creates_study_truth") is not False:
+        raise ValueError(
+            f"scholarly output row {line_no}: creates_study_truth must be false"
+        )
+    if row.get("creates_source_audit_admission") is not False:
+        raise ValueError(
+            f"scholarly output row {line_no}: creates_source_audit_admission must be false"
+        )
+
+    document_nodes = row.get("document_nodes", [])
+    study_facets = row.get("study_facets", [])
+    if not isinstance(document_nodes, list) or not isinstance(study_facets, list):
+        raise ValueError(
+            f"scholarly output row {line_no}: document_nodes/study_facets must be lists"
+        )
+
+    node_ids = {
+        str(node.get("node_id") or "")
+        for node in document_nodes
+        if isinstance(node, dict)
+    }
+    if "" in node_ids:
+        raise ValueError(
+            f"scholarly output row {line_no}: document node missing node_id"
+        )
+
+    for facet in study_facets:
+        if not isinstance(facet, dict):
+            raise ValueError(
+                f"scholarly output row {line_no}: study facet must be an object"
+            )
+        if facet.get("candidate_only") is not True:
+            raise ValueError(
+                f"scholarly output row {line_no}: study facet must remain candidate-only"
+            )
+        if facet.get("creates_study_truth") is not False:
+            raise ValueError(
+                f"scholarly output row {line_no}: study facet may not create study truth"
+            )
+        if facet.get("creates_source_audit_admission") is not False:
+            raise ValueError(
+                f"scholarly output row {line_no}: study facet may not create admission"
+            )
+
+    bundle_basis = {
+        "source_identity_reference": source_ref,
+        "source_revision_ref": revision_ref,
+        "content_digest_ref": digest_ref,
+        "document_node_ids": sorted(node_ids),
+        "study_facets": [
+            {
+                "facet_role": facet.get("facet_role"),
+                "evidence_refs": facet.get("evidence_refs", []),
+                "matched_terms": facet.get("matched_terms"),
+            }
+            for facet in study_facets
+            if isinstance(facet, dict)
+        ],
+    }
+    parse_bundle_ref = "digital-esd-scholarly-parse:" + sha256_bytes(
+        canonical_json_bytes(bundle_basis)
+    )
+
+    return {
+        "schema": "digital-esd-scholarly-parse-receipt-v1",
+        "source_identity_reference": source_ref,
+        "source_revision_ref": revision_ref,
+        "content_digest_ref": digest_ref,
+        "parse_bundle_reference": parse_bundle_ref,
+        "format_type": row.get("format_type"),
+        "document_node_count": len(document_nodes),
+        "study_facet_count": len(study_facets),
+        "candidate_only": True,
+        "creates_semantic_authority": False,
+        "applicability_promoted": False,
+        "claim_truth_promoted": False,
+        "creates_study_truth": False,
+        "creates_reviewed_canonical_evidence": False,
+        "creates_source_audit_admission": False,
+    }
+
+
+def cmd_verify_scholarly(args: argparse.Namespace) -> int:
+    request_rows = read_jsonl(args.input)
+    parser_rows = read_jsonl(args.parser_output)
+
+    expected = {
+        (
+            str(row["source_identity_reference"]),
+            str(row["source_revision_ref"]),
+        ): row
+        for row in request_rows
+    }
+
+    receipts: list[dict[str, Any]] = []
+    observed: set[tuple[str, str]] = set()
+    failures: list[str] = []
+
+    for line_no, row in enumerate(parser_rows, start=1):
+        key = (
+            first_nonempty(row, "source_identity_reference"),
+            first_nonempty(row, "source_revision_reference", "source_revision_ref"),
+        )
+        request = expected.get(key)
+        if request is None:
+            failures.append(
+                f"parser output has no exact prepared request: {key[0]} @ {key[1]}"
+            )
+            continue
+        if key in observed:
+            failures.append(
+                f"duplicate scholarly parser bundle: {key[0]} @ {key[1]}"
+            )
+            continue
+        try:
+            receipts.append(
+                normalize_scholarly_output_row(row, line_no, request)
+            )
+        except (ValueError, TypeError) as exc:
+            failures.append(str(exc))
+            continue
+        observed.add(key)
+
+    for key in sorted(set(expected) - observed):
+        failures.append(
+            f"missing scholarly parser bundle for {key[0]} @ {key[1]}"
+        )
+
+    if failures:
+        raise RuntimeError(
+            "scholarly parser reconciliation failed:\n- "
+            + "\n- ".join(failures[:50])
+        )
+
+    write_jsonl(args.output, receipts)
+    manifest = {
+        "schema": "digital-esd-scholarly-parse-manifest-v1",
+        "wrapper_version": WRAPPER_VERSION,
+        "request_reference": str(args.input),
+        "request_sha256": sha256_file(args.input),
+        "parser_output_reference": str(args.parser_output),
+        "parser_output_sha256": sha256_file(args.parser_output),
+        "parse_receipt_reference": str(args.output),
+        "parse_receipt_sha256": sha256_file(args.output),
+        "request_count": len(request_rows),
+        "parsed_count": len(receipts),
+        "same_object_reconciled": True,
+        "parser_success_is_review_payment": False,
+        "creates_reviewed_canonical_evidence": False,
+        "creates_source_audit_admission": False,
+    }
+    manifest_path = args.manifest or args.output.with_suffix(".manifest.json")
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(manifest, sort_keys=True))
+    return 0
+
+
+def cmd_run_scholarly(args: argparse.Namespace) -> int:
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+
+    requests = args.output_dir / "requests.jsonl"
+    prepare_args = type("PrepareCacheArgs", (), {
+        "cache_ledger": args.cache_ledger,
+        "output": requests,
+        "manifest": args.output_dir / "requests.manifest.json",
+        "verify_files": True,
+    })()
+    cmd_prepare_cache(prepare_args)
+
+    parser_script = (
+        args.slr_root
+        / "interop_scripts"
+        / "digital_esd"
+        / "scholarly_parser_prototype.py"
+    )
+    if not parser_script.exists():
+        raise FileNotFoundError(
+            f"SLR scholarly parser not found at {parser_script}"
+        )
+
+    parser_config = args.parser_config
+    if parser_config is None:
+        parser_config = (
+            args.slr_root
+            / "interop_scripts"
+            / "digital_esd"
+            / "scholarly_fulltext.prototype.json"
+        )
+    if not parser_config.exists():
+        raise FileNotFoundError(
+            f"SLR scholarly parser config not found at {parser_config}"
+        )
+
+    parser_output = args.output_dir / "parser-output.jsonl"
+    argv = [
+        sys.executable,
+        str(parser_script),
+        "--input",
+        str(requests),
+        "--config",
+        str(parser_config),
+        "--output",
+        str(parser_output),
+    ]
+
+    invocation = {
+        "schema": "digital-esd-scholarly-parser-invocation-v1",
+        "wrapper_version": WRAPPER_VERSION,
+        "slr_root": str(args.slr_root),
+        "slr_revision_reference": args.slr_revision_reference,
+        "parser_script": str(parser_script),
+        "parser_config": str(parser_config),
+        "request_sha256": sha256_file(requests),
+        "argv": argv,
+        "process_exit_creates_evidence_payment": False,
+    }
+    (args.output_dir / "scholarly-parser-invocation.json").write_text(
+        json.dumps(invocation, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    completed = subprocess.run(
+        argv,
+        cwd=str(args.slr_root),
+        check=False,
+    )
+    if completed.returncode != 0:
+        raise SystemExit(completed.returncode)
+
+    receipts = args.output_dir / "parse-receipts.jsonl"
+    verify_args = type("VerifyScholarlyArgs", (), {
+        "input": requests,
+        "parser_output": parser_output,
+        "output": receipts,
+        "manifest": args.output_dir / "parse-receipts.manifest.json",
+    })()
+    return cmd_verify_scholarly(verify_args)
+
+
 def normalize_output_row(row: dict[str, Any], line_no: int) -> dict[str, Any]:
     required = (
         "source_identity_reference",
@@ -571,6 +850,21 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_cache.add_argument("--manifest", type=Path)
     prepare_cache.add_argument("--verify-files", action="store_true")
     prepare_cache.set_defaults(func=cmd_prepare_cache)
+
+    run_scholarly = sub.add_parser("run-scholarly")
+    run_scholarly.add_argument("--cache-ledger", required=True, type=Path)
+    run_scholarly.add_argument("--slr-root", required=True, type=Path)
+    run_scholarly.add_argument("--slr-revision-reference", required=True)
+    run_scholarly.add_argument("--parser-config", type=Path)
+    run_scholarly.add_argument("--output-dir", required=True, type=Path)
+    run_scholarly.set_defaults(func=cmd_run_scholarly)
+
+    verify_scholarly = sub.add_parser("verify-scholarly")
+    verify_scholarly.add_argument("--input", required=True, type=Path)
+    verify_scholarly.add_argument("--parser-output", required=True, type=Path)
+    verify_scholarly.add_argument("--output", required=True, type=Path)
+    verify_scholarly.add_argument("--manifest", type=Path)
+    verify_scholarly.set_defaults(func=cmd_verify_scholarly)
 
     verify = sub.add_parser("verify")
     verify.add_argument("--input", required=True, type=Path)
