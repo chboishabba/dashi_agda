@@ -9,7 +9,9 @@ module DASHI.Physics.YangMills.BalabanCMP116CanonicalB12Round446Exact where
 -- mixed-log magnitude and compiles that to the exact finite connected covariance.
 --
 -- This owner packages those two independent source facts on ONE canonical
--- twice-marked four-stage object.  No new estimate is introduced.
+-- twice-marked four-stage object.  It intentionally does not compile through
+-- legacy R435, whose global tree metric is too coarse for CMP116 d_k(Y).
+-- No new estimate is introduced.
 ------------------------------------------------------------------------
 
 open import Data.Rational.Base as ℚ using (ℚ)
@@ -21,7 +23,6 @@ import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Ex
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalTwiceMarkedFourStageRound444Exact as R444
 import DASHI.Physics.YangMills.BalabanCMP116R429MixedLogResponseRound445Exact as R445
-import DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedBSourceRound435Exact as R435
 
 record CanonicalB12Source
     {Measure TestObservable : Set}
@@ -42,15 +43,6 @@ record CanonicalB12Source
 
 open CanonicalB12Source public
 
-canonicalSelectedSource :
-  ∀ {Measure TestObservable dataSet extension base data embedding} →
-  CanonicalB12Source
-    {Measure = Measure} {TestObservable = TestObservable}
-    {dataSet = dataSet} {extension = extension} {base = base}
-    data embedding →
-  R435.CanonicalSelectedBSource (R444.asR429 data)
-canonicalSelectedSource {data = data} source =
-  R444.asR435 data
 
 round446B1MixedLogResponseLevel : ProofLevel
 round446B1MixedLogResponseLevel = machineChecked
