@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import time
 from typing import Iterable, Protocol
 
 from .agda import FileExtraction
@@ -18,6 +19,8 @@ class SemanticPatchResult:
     graph: SemanticGraph
     plan: IncrementalImpactPlan
     receipt: IncrementalPatchReceipt
+    plan_ns: int
+    patch_ns: int
 
 
 class SemanticPatchBackend(Protocol):
@@ -54,19 +57,27 @@ class PythonAffectedModuleBackend:
     ) -> SemanticPatchResult:
         before = list(before)
         after = list(after)
+        plan_start = time.perf_counter_ns()
         plan = plan_incremental_impact(
             before,
             after,
             changed_paths,
         )
+        plan_ns = time.perf_counter_ns() - plan_start
+
+        patch_start = time.perf_counter_ns()
         graph, receipt = patch_semantic_graph(
             previous,
             before,
             after,
             plan,
         )
+        patch_ns = time.perf_counter_ns() - patch_start
+
         return SemanticPatchResult(
             graph=graph,
             plan=plan,
             receipt=receipt,
+            plan_ns=plan_ns,
+            patch_ns=patch_ns,
         )
