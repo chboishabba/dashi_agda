@@ -38,6 +38,9 @@ class FocusResult:
     edge_ids: frozenset[str]
     layers: tuple[tuple[str, ...], ...]
     layer_specs: tuple[FocusLayer, ...]
+    truncated: bool = False
+    omitted_nodes: int = 0
+    omitted_edges: int = 0
 
     def graph(self, graph_data: dict[str, Any]) -> dict[str, Any]:
         return {
@@ -117,6 +120,8 @@ def focus_symbol(
     upstream_depth: int = 2,
     downstream_depth: int = 0,
     relation_kinds: frozenset[str] = DEFAULT_SEMANTIC_RELATIONS,
+    max_nodes: int = 250,
+    max_edges: int = 800,
 ) -> FocusResult:
     root = resolve_symbol(graph_data, selector)
     root_id = root["symbol_id"]
@@ -135,6 +140,12 @@ def focus_symbol(
     node_ids = {root_id}
     edge_ids: set[str] = set()
     layer_map: dict[int, set[str]] = {0: {root_id}}
+    truncated = False
+    omitted_nodes = 0
+    omitted_edges = 0
+
+    max_nodes = max(1, max_nodes)
+    max_edges = max(0, max_edges)
 
     def walk(
         *,
@@ -143,16 +154,39 @@ def focus_symbol(
         max_depth: int,
         direction_sign: int,
     ) -> None:
+        nonlocal truncated, omitted_nodes, omitted_edges
         frontier = {root_id}
         visited_at: dict[str, int] = {root_id: 0}
 
         for depth in range(1, max_depth + 1):
             next_frontier: set[str] = set()
-            for current in frontier:
-                for edge in adjacency.get(current, []):
+            for current in sorted(frontier):
+                candidates = sorted(
+                    adjacency.get(current, []),
+                    key=lambda edge: (
+                        edge["kind"],
+                        edge["source"],
+                        edge["target"],
+                        edge["relation_id"],
+                    ),
+                )
+                for edge in candidates:
                     other = edge[next_node_key]
-                    edge_ids.add(edge["relation_id"])
-                    node_ids.add(other)
+
+                    if edge["relation_id"] not in edge_ids:
+                        if len(edge_ids) >= max_edges:
+                            truncated = True
+                            omitted_edges += 1
+                            continue
+                        edge_ids.add(edge["relation_id"])
+
+                    if other not in node_ids:
+                        if len(node_ids) >= max_nodes:
+                            truncated = True
+                            omitted_nodes += 1
+                            continue
+                        node_ids.add(other)
+
                     signed_depth = direction_sign * depth
                     layer_map.setdefault(signed_depth, set()).add(other)
 
@@ -179,8 +213,22 @@ def focus_symbol(
 
     # Keep all semantic relations among selected nodes, not only traversal-tree
     # edges. This exposes cross-links without expanding the node set.
-    for edge in edges:
+    for edge in sorted(
+        edges,
+        key=lambda item: (
+            item["kind"],
+            item["source"],
+            item["target"],
+            item["relation_id"],
+        ),
+    ):
         if edge["source"] in node_ids and edge["target"] in node_ids:
+            if edge["relation_id"] in edge_ids:
+                continue
+            if len(edge_ids) >= max_edges:
+                truncated = True
+                omitted_edges += 1
+                continue
             edge_ids.add(edge["relation_id"])
 
     ordered_depths = [0]
@@ -219,4 +267,7 @@ def focus_symbol(
         edge_ids=frozenset(edge_ids),
         layers=layers,
         layer_specs=layer_specs,
+        truncated=truncated,
+        omitted_nodes=omitted_nodes,
+        omitted_edges=omitted_edges,
     )
