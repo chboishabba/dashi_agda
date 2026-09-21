@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact wh
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
