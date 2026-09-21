@@ -80,6 +80,12 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyExact a
 import DASHI.Physics.Closure.NSTriadKNFiniteBipartiteCovarianceExact as BBipartite
 import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionFilteredExact as BFilteredRegion
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceFilteredRegionLiveExact as BFilteredLive
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowFractionalShellPaymentExact as BDeepFL
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact as BDeepCross
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact as BDeepHH
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingRelativeCovarianceExact as BCriticalTouch
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyProducerExact as BUniformProducer
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DecompositionExact as BR406Decomp
 
 ------------------------------------------------------------------------
 -- A
@@ -384,6 +390,38 @@ bD1b2LiveCovarianceFilteredPhysicalR236NormalFormClosed =
 
 bD1b2RemainingDeepRegionAnalysisIsFractionalShellDecay : Bool
 bD1b2RemainingDeepRegionAnalysisIsFractionalShellDecay = true
+
+bD1b2DeepFarLowShellFoldCompilerClosed : Bool
+bD1b2DeepFarLowShellFoldCompilerClosed =
+  BDeepFL.deepFarLowShellFoldCompilerClosed
+
+bD1b2DeepFarLowDeepHHShellFoldCompilerClosed : Bool
+bD1b2DeepFarLowDeepHHShellFoldCompilerClosed =
+  BDeepCross.deepFarLowDeepHHBipartiteShellFoldClosed
+
+bD1b2DeepHHShellFoldCompilerClosed : Bool
+bD1b2DeepHHShellFoldCompilerClosed =
+  BDeepHH.deepHHShellFoldClosed
+
+bD1b2CriticalTouchingSignedOperatorCompilerClosed : Bool
+bD1b2CriticalTouchingSignedOperatorCompilerClosed =
+  BCriticalTouch.criticalTouchingSignedBlockOperatorCompilerClosed
+
+bD1b2NativeR236UniformFamilyCompilerClosed : Bool
+bD1b2NativeR236UniformFamilyCompilerClosed =
+  BUniformProducer.uniformPhysicalCriticalRegionFamilyCompilerClosed
+
+bD1b2NativeR236UniformAnalyticReceiptsInhabited : Bool
+bD1b2NativeR236UniformAnalyticReceiptsInhabited =
+  BUniformProducer.uniformPhysicalCriticalRegionFamilyAnalyticReceiptsInhabitedHere
+
+bD1b2RegionPaymentsToR406DecompositionCompilerClosed : Bool
+bD1b2RegionPaymentsToR406DecompositionCompilerClosed =
+  BR406Decomp.criticalRegionR406DecompositionCompilerClosed
+
+bD1b2LiteralR406SameObjectEqualityInhabited : Bool
+bD1b2LiteralR406SameObjectEqualityInhabited =
+  BR406Decomp.literalR406SameObjectEqualityInhabitedHere
 
 bD1b2DeepOnlySignedRegionPaymentsClosed : Bool
 bD1b2DeepOnlySignedRegionPaymentsClosed = false
