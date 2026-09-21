@@ -26,6 +26,7 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceGapRound455Exact as
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1StressSourceRound466Exact as CStress
+import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as C475
 import DASHI.Physics.YangMills.YangMillsPhysicalOPERemainderSharedTailRound442Exact as COPE
 import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact as CAF
 import DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact as CTop
@@ -109,6 +110,10 @@ cPhysicalOPERemainderIsMarkedTailLevel =
 cOneStepAFRGIdentificationLevel : ProofLevel
 cOneStepAFRGIdentificationLevel =
   CAF.physicalSameFamilyOPECoefficientOneStepAFIdentificationLevel
+
+cExactSameFamilySourceCutLevel : ProofLevel
+cExactSameFamilySourceCutLevel =
+  C475.literalRound475CSourceInstantiationLevel
 
 cTopLevelSameCompletedSourceLevel : ProofLevel
 cTopLevelSameCompletedSourceLevel =
