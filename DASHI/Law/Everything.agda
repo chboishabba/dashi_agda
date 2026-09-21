@@ -201,6 +201,8 @@ import DASHI.Law.LegalWorldBoundMatterRuntimeExact
 import DASHI.Law.LegalWorldBoundMatterRuntimeRegression
 import DASHI.Law.ClosedIsNotAdequateExact
 import DASHI.Law.ClosedIsNotAdequateRegression
+import DASHI.Law.NonFactorabilityRuntimeTheoremBridgeExact
+import DASHI.Law.NonFactorabilityRuntimeTheoremBridgeRegression
 import DASHI.Law.MaboRevisionReopenExact
 import DASHI.Law.MaboRevisionReopenRegression
 import DASHI.Law.RevisionReReviewPropagationExact
