@@ -62,7 +62,9 @@ record NormalizedSLRParseReceipt : Set where
     sourceIdentityReference : String
     sourceRevisionReference : String
     contentDigestReference : String
-    observationReference : String
+    parseBundleReference : String
+    documentNodeCountReference : String
+    studyFacetCountReference : String
     parserReference : String
     parserRevisionReference : String
     receiptReference : String
@@ -117,6 +119,14 @@ record SLRParseReconciliationReceipt : Set where
     parserOutputCandidateOnly : Bool
     parserOutputCandidateOnlyIsTrue :
       parserOutputCandidateOnly ≡ true
+
+    documentStructureObserved : Bool
+    documentStructureObservedIsTrue :
+      documentStructureObserved ≡ true
+
+    studyFacetsRemainCandidateOnly : Bool
+    studyFacetsRemainCandidateOnlyIsTrue :
+      studyFacetsRemainCandidateOnly ≡ true
 
     reconciliationCreatesReview : Bool
     reconciliationCreatesReviewIsFalse :
@@ -246,6 +256,8 @@ canonicalFullTextSLRParseBoundary =
     true refl
     true refl
     true refl
+    true refl
+    true refl
     false refl
     false refl
     false refl
@@ -253,4 +265,4 @@ canonicalFullTextSLRParseBoundary =
 
 fullTextSLRParseReading : String
 fullTextSLRParseReading =
-  "Digital-ESD full-text parsing begins only after an authoritative include/probable decision has led to a materialised cache artifact. The cache ledger is rechecked against the actual artifact digest before parser handoff. The parser request and normalized receipt must preserve the same source identity, exact full-text revision and content digest. Cache registration is not parsing; a zero process exit is not evidence payment; parsed candidate observations are not reviewed canonical evidence and do not create source truth or SourceAuditAdmission."
+  "Digital-ESD full-text parsing begins only after an authoritative include/probable decision has led to a materialised cache artifact. The cache ledger is rechecked against the actual artifact digest before parser handoff. The parser request and normalized parsed-bundle receipt must preserve the same source identity, exact full-text revision and content digest. A parsed bundle may contain many anchored document nodes and candidate study facets; it is not itself a reviewed canonical EvidenceObservation. Cache registration is not parsing; a zero process exit is not evidence payment; parser bundles do not create reviewed canonical evidence, source truth or SourceAuditAdmission."
