@@ -45,6 +45,9 @@ from pathlib import Path
 from typing import Any
 
 
+HERE = Path(__file__).resolve().parent
+
+
 TEXT_EXTENSIONS = {".txt", ".md", ".tex", ".csv", ".tsv", ".json", ".jsonl"}
 HTML_EXTENSIONS = {".html", ".htm"}
 
