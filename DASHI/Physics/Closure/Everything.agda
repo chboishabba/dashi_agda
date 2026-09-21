@@ -428,3 +428,5 @@ import DASHI.Physics.Closure.NSPeriodicDifferenceEnergyProducerExact
 import DASHI.Physics.Closure.NSActualPeriodicCandidateExclusionExact
 import DASHI.Physics.Closure.NSActualPeriodicToCompactLocalizationExact
 import DASHI.Physics.Closure.NSActualCompactCandidateExclusionExact
+
+import DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact
