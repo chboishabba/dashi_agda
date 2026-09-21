@@ -21,6 +21,7 @@ files=(
   "DASHI/Biology/FiveHT2ACalciumIdentityGeometryBoundaryExact.agda"
   "DASHI/Biology/TargetIndexedRecognitionGeometryExact.agda"
   "DASHI/Biology/TargetIndexedRecognitionAdmissibleRegionExact.agda"
+  "DASHI/Biology/TargetIndexedRecognitionEmpiricalCalibrationExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -136,5 +137,12 @@ grep -Fq 'canonicalSamePairDifferentRegionWitness' "$region"
 grep -Fq 'scalarScoreAcceptsCanonicalPair' "$region"
 grep -Fq 'hardRegionRejectsCanonicalPair' "$region"
 grep -Fq 'scalarAcceptanceDoesNotImplyHardGateAcceptance' "$region"
+
+calibration="$root/DASHI/Biology/TargetIndexedRecognitionEmpiricalCalibrationExact.agda"
+grep -Fq 'pbCaCoordinationMeasurement' "$calibration"
+grep -Fq 'lsdFiveHT2AConformationMeasurement' "$calibration"
+grep -Fq 'everyWeightedCoordinateHasMeasurementIsFalse' "$calibration"
+grep -Fq 'heldOutValidationPassedIsFalse' "$calibration"
+grep -Fq 'noEmpiricalPromotionFromCurrentCalibration' "$calibration"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
