@@ -3,7 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable
 
-from .agda import FileExtraction
+from .agda import FileExtraction, build_semantic_graph
+from .model import SemanticGraph
 
 
 @dataclass(frozen=True)
@@ -107,3 +108,127 @@ def plan_incremental_impact(
         affected_modules=tuple(sorted(affected)),
         reasons=tuple(sorted(reasons)),
     )
+
+
+@dataclass(frozen=True)
+class IncrementalPatchReceipt:
+    affected_modules: tuple[str, ...]
+    removed_nodes: int
+    added_nodes: int
+    removed_edges: int
+    added_edges: int
+    unresolved_before: int
+    unresolved_after: int
+    parse_errors_before: int
+    parse_errors_after: int
+
+
+def patch_semantic_graph(
+    previous: SemanticGraph,
+    before: Iterable[FileExtraction],
+    after: Iterable[FileExtraction],
+    plan: IncrementalImpactPlan,
+) -> tuple[SemanticGraph, IncrementalPatchReceipt]:
+    """Replace only the affected semantic fragment.
+
+    The fragment resolver still sees the full current source set, so qualified
+    and open-scope resolution remains global where needed. Only owners in the
+    affected module set emit replacement nodes/relations.
+    """
+
+    before = list(before)
+    after = list(after)
+    affected = set(plan.affected_modules)
+
+    if not affected:
+        clone = SemanticGraph(
+            nodes=dict(previous.nodes),
+            edges=dict(previous.edges),
+            unresolved_references=list(previous.unresolved_references),
+            parse_error_files=list(previous.parse_error_files),
+        )
+        return clone, IncrementalPatchReceipt(
+            affected_modules=(),
+            removed_nodes=0,
+            added_nodes=0,
+            removed_edges=0,
+            added_edges=0,
+            unresolved_before=len(previous.unresolved_references),
+            unresolved_after=len(previous.unresolved_references),
+            parse_errors_before=len(previous.parse_error_files),
+            parse_errors_after=len(previous.parse_error_files),
+        )
+
+    fragment = build_semantic_graph(
+        after,
+        include_modules=affected,
+    )
+
+    removed_node_ids = {
+        symbol_id
+        for symbol_id, symbol in previous.nodes.items()
+        if symbol.module in affected
+    }
+    kept_nodes = {
+        symbol_id: symbol
+        for symbol_id, symbol in previous.nodes.items()
+        if symbol_id not in removed_node_ids
+    }
+    kept_edges = {
+        relation_id: relation
+        for relation_id, relation in previous.edges.items()
+        if relation.source not in removed_node_ids
+        and relation.target not in removed_node_ids
+    }
+
+    before_paths = {
+        file.path
+        for file in before
+        if file.module in affected
+    }
+    after_paths = {
+        file.path
+        for file in after
+        if file.module in affected
+    }
+    affected_paths = before_paths | after_paths
+
+    kept_unresolved = [
+        observation
+        for observation in previous.unresolved_references
+        if observation.get("owner") not in removed_node_ids
+    ]
+    kept_parse_errors = [
+        path
+        for path in previous.parse_error_files
+        if path not in affected_paths
+    ]
+
+    result = SemanticGraph(
+        nodes={**kept_nodes, **fragment.nodes},
+        edges={**kept_edges, **fragment.edges},
+        unresolved_references=(
+            kept_unresolved
+            + list(fragment.unresolved_references)
+        ),
+        parse_error_files=sorted(
+            set(kept_parse_errors)
+            | set(fragment.parse_error_files)
+        ),
+    )
+
+    added_node_ids = set(fragment.nodes)
+    added_edge_ids = set(fragment.edges)
+
+    receipt = IncrementalPatchReceipt(
+        affected_modules=tuple(sorted(affected)),
+        removed_nodes=len(removed_node_ids),
+        added_nodes=len(added_node_ids),
+        removed_edges=len(previous.edges) - len(kept_edges),
+        added_edges=len(added_edge_ids),
+        unresolved_before=len(previous.unresolved_references),
+        unresolved_after=len(result.unresolved_references),
+        parse_errors_before=len(previous.parse_error_files),
+        parse_errors_after=len(result.parse_error_files),
+    )
+    return result, receipt
