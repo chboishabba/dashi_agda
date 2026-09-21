@@ -4,6 +4,8 @@ set -euo pipefail
 repo="${1:-.}"
 commits="${DASHI_FILM_COMMITS:-500}"
 quality="${DASHI_FILM_QUALITY:--qm}"
+pace="${DASHI_FILM_PACE:-1.0}"
+font="${DASHI_FILM_FONT:-DejaVu Sans}"
 history="${DASHI_FILM_HISTORY:-${TMPDIR:-/tmp}/dashi-research-film-history.json}"
 profile="${DASHI_FILM_PROFILE:-${TMPDIR:-/tmp}/dashi-research-film-profile.json}"
 github_repo="${DASHI_FILM_GITHUB_REPO:-}"
@@ -39,6 +41,8 @@ echo
 echo "== render with Manim =="
 dashi-repo-history render "$history" \
   --scene research-film \
+  --film-pace "$pace" \
+  --film-font "$font" \
   --quality "$quality"
 
 echo
