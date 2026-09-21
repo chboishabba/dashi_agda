@@ -11,6 +11,8 @@ open import DASHI.Core.LexicalScopeResolutionExact
 open import DASHI.Core.LocalDeclarationScopeExact
 open import DASHI.Core.IncrementalSemanticRelinkBoundaryExact
 open import DASHI.Core.BackendSelectionPolicyExact
+open import DASHI.Core.StatefulSemanticBackendExact
+open import DASHI.Core.CompactSemanticHistoryExact
 open import DASHI.Core.SemanticPatchBackendExact
 open import DASHI.Core.PortableInteractiveViewExact
 open import DASHI.Visual.SemanticHistoryVisualizationExact
