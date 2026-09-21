@@ -212,3 +212,137 @@ def test_prepare_cache_ignores_metadata_only_rows(tmp_path: Path) -> None:
     })()
     assert interop.cmd_prepare_cache(args) == 0
     assert interop.read_jsonl(args.output) == []
+
+
+def test_verify_scholarly_bundle_is_parse_not_review(tmp_path: Path) -> None:
+    artifact = tmp_path / "paper.md"
+    artifact.write_text("# Methods\nParticipants were 25 students.\n", encoding="utf-8")
+    digest = interop.sha256_file(artifact)
+
+    requests = tmp_path / "requests.jsonl"
+    write_jsonl(
+        requests,
+        [{
+            "source_identity_reference": "ERIC:EJ5",
+            "source_revision_ref": f"fulltext-sha256:{digest}",
+            "content_digest_ref": f"sha256:{digest}",
+            "content_sha256": digest,
+            "artifact_path": str(artifact),
+        }],
+    )
+    parser_output = tmp_path / "parser-output.jsonl"
+    write_jsonl(
+        parser_output,
+        [{
+            "source_identity_reference": "ERIC:EJ5",
+            "source_revision_reference": f"fulltext-sha256:{digest}",
+            "content_sha256": digest,
+            "format_type": "markdown",
+            "document_nodes": [{
+                "node_id": "heading:1",
+                "node_type": "heading",
+                "line": 1,
+                "content_ref": "line:1",
+            }],
+            "study_facets": [{
+                "facet_role": "Population",
+                "candidate_only": True,
+                "creates_study_truth": False,
+                "creates_source_audit_admission": False,
+                "matched_terms": 1,
+                "evidence_refs": ["line:2"],
+            }],
+            "candidate_only": True,
+            "creates_study_truth": False,
+            "creates_source_audit_admission": False,
+            "parser_success": True,
+        }],
+    )
+
+    out = tmp_path / "parse-receipts.jsonl"
+    args = type("Args", (), {
+        "input": requests,
+        "parser_output": parser_output,
+        "output": out,
+        "manifest": tmp_path / "parse-manifest.json",
+    })()
+    assert interop.cmd_verify_scholarly(args) == 0
+
+    rows = interop.read_jsonl(out)
+    assert len(rows) == 1
+    row = rows[0]
+    assert row["document_node_count"] == 1
+    assert row["study_facet_count"] == 1
+    assert row["parse_bundle_reference"].startswith(
+        "digital-esd-scholarly-parse:"
+    )
+    assert row["creates_reviewed_canonical_evidence"] is False
+    assert row["creates_source_audit_admission"] is False
+
+
+def test_run_scholarly_invokes_pinned_external_parser(tmp_path: Path) -> None:
+    artifact = tmp_path / "paper.md"
+    artifact.write_text("# Study\nSample of 12 students.\n", encoding="utf-8")
+    digest = interop.sha256_file(artifact)
+
+    cache = tmp_path / "cache-ledger.jsonl"
+    write_jsonl(
+        cache,
+        [{
+            "source_identity_reference": "ERIC:EJ6",
+            "source_revision_reference": f"fulltext-sha256:{digest}",
+            "artifact_reference": str(artifact),
+            "artifact_sha256": digest,
+            "cache_state": "materialised",
+        }],
+    )
+
+    slr_root = tmp_path / "slr"
+    parser_dir = slr_root / "interop_scripts" / "digital_esd"
+    parser_dir.mkdir(parents=True)
+    config = parser_dir / "scholarly_fulltext.prototype.json"
+    config.write_text("{}", encoding="utf-8")
+    parser_script = parser_dir / "scholarly_parser_prototype.py"
+    parser_script.write_text(
+        """from __future__ import annotations
+import argparse, json
+from pathlib import Path
+p=argparse.ArgumentParser()
+p.add_argument("--input", type=Path, required=True)
+p.add_argument("--config", type=Path, required=True)
+p.add_argument("--output", type=Path, required=True)
+a=p.parse_args()
+rows=[json.loads(x) for x in a.input.read_text().splitlines() if x.strip()]
+with a.output.open("w") as f:
+    for r in rows:
+        out={
+          "source_identity_reference": r["source_identity_reference"],
+          "source_revision_reference": r["source_revision_ref"],
+          "content_sha256": r["content_sha256"],
+          "format_type": "markdown",
+          "document_nodes": [{"node_id":"paragraph:1","node_type":"paragraph"}],
+          "study_facets": [],
+          "candidate_only": True,
+          "creates_study_truth": False,
+          "creates_source_audit_admission": False,
+          "parser_success": True,
+        }
+        f.write(json.dumps(out)+"\\n")
+""",
+        encoding="utf-8",
+    )
+
+    out_dir = tmp_path / "run"
+    args = type("Args", (), {
+        "cache_ledger": cache,
+        "slr_root": slr_root,
+        "slr_revision_reference": "slr:test-revision",
+        "parser_config": None,
+        "output_dir": out_dir,
+    })()
+    assert interop.cmd_run_scholarly(args) == 0
+
+    receipts = interop.read_jsonl(out_dir / "parse-receipts.jsonl")
+    assert len(receipts) == 1
+    assert receipts[0]["source_identity_reference"] == "ERIC:EJ6"
+    assert receipts[0]["creates_reviewed_canonical_evidence"] is False
