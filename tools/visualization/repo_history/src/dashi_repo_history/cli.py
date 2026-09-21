@@ -69,6 +69,8 @@ def _render(args: argparse.Namespace) -> None:
         env["DASHI_REPO_SYMBOL"] = str(args.symbol)
     env["DASHI_REPO_UPSTREAM_DEPTH"] = str(args.upstream_depth)
     env["DASHI_REPO_DOWNSTREAM_DEPTH"] = str(args.downstream_depth)
+    env["DASHI_REPO_MAX_FOCUS_NODES"] = str(args.max_focus_nodes)
+    env["DASHI_REPO_MAX_FOCUS_EDGES"] = str(args.max_focus_edges)
 
     scene_by_mode = {
         "history": "RepositoryHistoryScene",
@@ -124,6 +126,8 @@ def _program(args: argparse.Namespace) -> None:
             args.symbol,
             upstream_depth=args.upstream_depth,
             downstream_depth=args.downstream_depth,
+            max_nodes=args.max_focus_nodes,
+            max_edges=args.max_focus_edges,
         )
     elif args.scene == "symbol-history":
         if not args.symbol:
@@ -366,6 +370,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     render.add_argument("--upstream-depth", type=int, default=2)
     render.add_argument("--downstream-depth", type=int, default=0)
+    render.add_argument("--max-focus-nodes", type=int, default=250)
+    render.add_argument("--max-focus-edges", type=int, default=800)
     render.add_argument(
         "--target-commit",
         help="Target commit for the first-parent semantic-history lineage.",
@@ -395,6 +401,8 @@ def build_parser() -> argparse.ArgumentParser:
     program.add_argument("--target-commit")
     program.add_argument("--upstream-depth", type=int, default=2)
     program.add_argument("--downstream-depth", type=int, default=0)
+    program.add_argument("--max-focus-nodes", type=int, default=250)
+    program.add_argument("--max-focus-edges", type=int, default=800)
     program.set_defaults(func=_program)
 
     symbols = sub.add_parser(
