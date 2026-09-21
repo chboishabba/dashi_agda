@@ -30,7 +30,10 @@ record ScreeningReviewPacket : Set where
 open ScreeningReviewPacket public
 
 data ReviewedDecision : Set where
-  include probable exclude unresolved : ReviewedDecision
+  include : ReviewedDecision
+  probable : ReviewedDecision
+  exclude : ReviewedDecision
+  unresolved : ReviewedDecision
 
 record ExplicitReviewedDecisionOverlay : Set where
   constructor explicit-reviewed-decision-overlay
