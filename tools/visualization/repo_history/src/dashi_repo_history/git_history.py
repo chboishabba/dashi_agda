@@ -222,6 +222,7 @@ class HistoryExtractor:
     patch_backend: SemanticPatchBackend = field(
         default_factory=PythonAffectedModuleBackend
     )
+    parity_every: int = 0
 
     def __post_init__(self) -> None:
         self.repo = self.repo.resolve()
@@ -231,6 +232,8 @@ class HistoryExtractor:
         self._impact_index_cache: dict[str, ResolutionImpactIndex] = {}
         self._incremental_receipts: dict[str, object] = {}
         self._incremental_timings: list[IncrementalStepTiming] = []
+        self._incremental_step_count = 0
+        self._parity_receipts: list[dict[str, object]] = []
 
     def extractions_at(self, commit: str) -> list[object]:
         cached = self._extractions_cache.get(commit)
@@ -334,11 +337,78 @@ class HistoryExtractor:
         )
 
         graph = result.graph
+        self._incremental_step_count += 1
+        if (
+            self.parity_every > 0
+            and self._incremental_step_count % self.parity_every == 0
+        ):
+            full_start = time.perf_counter_ns()
+            full_graph = self.adapter.build_graph(after)
+            full_ns = time.perf_counter_ns() - full_start
+            passed, details = self._graph_parity(
+                graph,
+                full_graph,
+            )
+            parity_receipt = {
+                "commit": commit,
+                "parent": parent,
+                "passed": passed,
+                "full_rebuild_ns": full_ns,
+                **details,
+            }
+            self._parity_receipts.append(parity_receipt)
+            if not passed:
+                raise RuntimeError(
+                    "incremental semantic parity failure at "
+                    f"{commit}"
+                )
+
         self._graph_cache[commit] = graph
         self._impact_index_cache[commit] = after_index
         self._incremental_receipts[commit] = result.receipt
         self._incremental_timings.append(timing)
         return graph
+
+    @staticmethod
+    def _graph_parity(
+        left,
+        right,
+    ) -> tuple[bool, dict[str, int]]:
+        left_unresolved = {
+            (
+                item.get("owner"),
+                item.get("reference"),
+                item.get("relation_kind"),
+                item.get("scope"),
+            )
+            for item in left.unresolved_references
+        }
+        right_unresolved = {
+            (
+                item.get("owner"),
+                item.get("reference"),
+                item.get("relation_kind"),
+                item.get("scope"),
+            )
+            for item in right.unresolved_references
+        }
+
+        details = {
+            "left_nodes": len(left.nodes),
+            "right_nodes": len(right.nodes),
+            "left_edges": len(left.edges),
+            "right_edges": len(right.edges),
+            "left_unresolved": len(left_unresolved),
+            "right_unresolved": len(right_unresolved),
+        }
+        equal = (
+            left.nodes == right.nodes
+            and left.edges == right.edges
+            and left_unresolved == right_unresolved
+            and set(left.parse_error_files)
+            == set(right.parse_error_files)
+        )
+        return equal, details
 
     def performance_report(self) -> dict[str, object]:
         decision = decide_backend(self._incremental_timings)
@@ -349,6 +419,11 @@ class HistoryExtractor:
                 for timing in self._incremental_timings
             ],
             "backend_decision": decision.to_dict(),
+            "parity_receipts": list(self._parity_receipts),
+            "parity_all_passed": all(
+                bool(receipt.get("passed"))
+                for receipt in self._parity_receipts
+            ),
             "backend": getattr(
                 self.patch_backend,
                 "name",
