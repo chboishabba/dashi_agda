@@ -260,8 +260,9 @@ record SourceToBioelectricCoordinate : Set where
   field
     observation : VisualCortexSourceObservation
     coordinate : BioelectricCoordinate
-    mappingStatus : Protocol.CrossProtocolNumericComparisonLicensed
-      → ⊥
+    numericCrossProtocolCalibrationPresent : Bool
+    numericCrossProtocolCalibrationPresentIsFalse :
+      numericCrossProtocolCalibrationPresent ≡ false
     reading : String
 
 open SourceToBioelectricCoordinate public
@@ -274,7 +275,7 @@ barzanCalciumCoordinate =
   sourceToBioelectricCoordinate
     barzanPyramidalCalcium
     calciumStateCoordinate
-    Protocol.crossProtocolNumericComparisonRequiresCalibration
+    false refl
     "PLC-sensitive calcium response is admitted as a calcium-state coordinate; it is not converted into a membrane voltage/current without a same-protocol calibration."
 
 ------------------------------------------------------------------------
