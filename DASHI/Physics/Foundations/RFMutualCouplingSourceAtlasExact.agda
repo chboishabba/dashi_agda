@@ -24,7 +24,7 @@ nalumakkalActiveArrayPrimary = Source.mkDOISource
 
 wangMutualCouplingPrimary : Source.AttributedSource
 wangMutualCouplingPrimary = Source.mkDOISource
-  "Zhi Ning Chen and coauthors"
+  "Min Wang; Wen Wu; Zhongxiang Shen"
   "Bandwidth Enhancement of Antenna Arrays Utilizing Mutual Coupling between Antenna Elements"
   "International Journal of Antennas and Propagation"
   "2010"
