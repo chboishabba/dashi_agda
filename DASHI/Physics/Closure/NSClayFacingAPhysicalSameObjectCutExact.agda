@@ -74,10 +74,21 @@ nearOriginPhysicalBound D I =
 ------------------------------------------------------------------------
 
 record PhysicalHighFrequencyEnvelopeData
+    {S : Canonical.CanonicalNSSemantics}
+    {trajectory : Physical.EuclideanFourierTrajectory S}
+    (kernel : Physical.EuclideanPhysicalResolventKernel trajectory)
     (fluid : Heat.PositiveViscosity) : Set₁ where
   field
     outputInteraction : Euclidean.EuclideanInteraction
     physicalOutputPoint : Heat.PuncturedEuclideanFrequency
+
+    -- The high-frequency estimate is attached to an interaction which is
+    -- literally realized by the same physical kernel.  This prevents a
+    -- scale-floor certificate for an unrelated rational carrier from
+    -- inhabiting the Clay-facing A1 seam.
+    kernelCellUsesOutputInteraction :
+      Physical.interaction (Physical.cell kernel outputInteraction)
+      ≡ outputInteraction
 
     outputFrequencyIsPhysicalXi :
       Heat.frequency physicalOutputPoint ≡
@@ -106,8 +117,9 @@ record PhysicalHighFrequencyEnvelopeData
 open PhysicalHighFrequencyEnvelopeData public
 
 highFrequencyCurvatureBound :
-  ∀ {fluid} →
-  (D : PhysicalHighFrequencyEnvelopeData fluid) →
+  ∀ {S trajectory kernel fluid} →
+  (D : PhysicalHighFrequencyEnvelopeData
+    {S} {trajectory} kernel fluid) →
   Envelope.resolventTransportCurvature
     (outputHeatRate D)
   ≤ High.scaleRelativeCurvature (shellHeatFloor D)
