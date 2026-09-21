@@ -195,6 +195,113 @@ def normalize_input_row(row: dict[str, Any], line_no: int) -> dict[str, Any]:
     }
 
 
+def normalize_cache_row(row: dict[str, Any], line_no: int, verify_files: bool) -> dict[str, Any]:
+    source_ref = first_nonempty(row, "source_identity_reference")
+    revision_ref = first_nonempty(row, "source_revision_reference", "source_revision_ref")
+    digest_raw = first_nonempty(row, "artifact_sha256", "content_digest_ref", "sha256")
+    artifact_ref = first_nonempty(row, "artifact_reference", "artifact_path", "text_path")
+
+    missing = [
+        name
+        for name, value in (
+            ("source identity", source_ref),
+            ("source revision", revision_ref),
+            ("artifact digest", digest_raw),
+            ("artifact reference", artifact_ref),
+        )
+        if not value
+    ]
+    if missing:
+        raise ValueError(f"cache row {line_no}: missing {', '.join(missing)}")
+
+    state = str(row.get("cache_state") or "")
+    if state not in {"materialised", "parsedOrReconciled", "evictable"}:
+        raise ValueError(
+            f"cache row {line_no}: cache_state={state!r} is not a materialised artifact"
+        )
+
+    digest_ref = normalize_digest(digest_raw)
+    artifact = Path(artifact_ref)
+    if verify_files:
+        if not artifact.exists() or not artifact.is_file():
+            raise FileNotFoundError(f"{source_ref}: {artifact}")
+        observed = "sha256:" + sha256_file(artifact)
+        if observed != digest_ref:
+            raise RuntimeError(
+                f"{source_ref}: cache/file digest mismatch expected={digest_ref} observed={observed}"
+            )
+
+    request_basis = {
+        "source_identity_reference": source_ref,
+        "source_revision_ref": revision_ref,
+        "content_digest_ref": digest_ref,
+        "artifact_reference": str(artifact),
+        "acquisition_receipt_ref": first_nonempty(
+            row, "retrieval_reference", "materialised_from_plan_reference"
+        ),
+        "cache_state": state,
+    }
+    request_ref = "digital-esd-slr-request:" + sha256_bytes(
+        canonical_json_bytes(request_basis)
+    )
+    return {
+        "schema": "digital-esd-slr-interop-request-v1",
+        "request_reference": request_ref,
+        **request_basis,
+        "candidate_only": True,
+        "creates_semantic_authority": False,
+        "applicability_promoted": False,
+        "claim_truth_promoted": False,
+        "creates_source_audit_admission": False,
+        "cache_registration_counts_as_parse": False,
+    }
+
+
+def cmd_prepare_cache(args: argparse.Namespace) -> int:
+    rows = read_jsonl(args.cache_ledger)
+    normalized = [
+        normalize_cache_row(row, i, args.verify_files)
+        for i, row in enumerate(rows, start=1)
+        if str(row.get("cache_state") or "") in {"materialised", "parsedOrReconciled", "evictable"}
+    ]
+
+    seen: set[tuple[str, str]] = set()
+    for row in normalized:
+        key = (
+            row["source_identity_reference"],
+            row["source_revision_ref"],
+        )
+        if key in seen:
+            raise ValueError(
+                "duplicate source/revision pair in cache handoff: "
+                f"{key[0]} @ {key[1]}"
+            )
+        seen.add(key)
+
+    write_jsonl(args.output, normalized)
+    manifest = {
+        "schema": "digital-esd-slr-cache-handoff-manifest-v1",
+        "wrapper_version": WRAPPER_VERSION,
+        "cache_ledger_reference": str(args.cache_ledger),
+        "cache_ledger_sha256": sha256_file(args.cache_ledger),
+        "interop_input_reference": str(args.output),
+        "interop_input_sha256": sha256_file(args.output),
+        "record_count": len(normalized),
+        "files_reverified": bool(args.verify_files),
+        "cache_registration_counts_as_parse": False,
+        "candidate_only": True,
+        "creates_semantic_authority": False,
+        "creates_source_audit_admission": False,
+    }
+    manifest_path = args.manifest or args.output.with_suffix(".manifest.json")
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(manifest, sort_keys=True))
+    return 0
+
+
 def cmd_prepare(args: argparse.Namespace) -> int:
     rows = read_jsonl(args.input)
     normalized = [
@@ -457,6 +564,13 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--output-dir", required=True, type=Path)
     run.add_argument("--cwd", type=Path)
     run.set_defaults(func=cmd_run)
+
+    prepare_cache = sub.add_parser("prepare-cache")
+    prepare_cache.add_argument("--cache-ledger", required=True, type=Path)
+    prepare_cache.add_argument("--output", required=True, type=Path)
+    prepare_cache.add_argument("--manifest", type=Path)
+    prepare_cache.add_argument("--verify-files", action="store_true")
+    prepare_cache.set_defaults(func=cmd_prepare_cache)
 
     verify = sub.add_parser("verify")
     verify.add_argument("--input", required=True, type=Path)
