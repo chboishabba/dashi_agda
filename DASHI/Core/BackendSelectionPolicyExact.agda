@@ -9,6 +9,8 @@ open import DASHI.Core.Prelude
 data BackendRecommendation : Set where
   keepPythonReference : BackendRecommendation
   fixInvalidationFirst : BackendRecommendation
+  persistentIndexFirst : BackendRecommendation
+  directDeltaFirst : BackendRecommendation
   rustCoreCandidate : BackendRecommendation
 
 record BackendMeasurement : Set where
@@ -46,6 +48,8 @@ canonicalBackendSelectionThresholds =
 data BackendDecisionReason : Set where
   insufficientEvidence : BackendDecisionReason
   excessiveInvalidationFanout : BackendDecisionReason
+  planningDominates : BackendDecisionReason
+  recomputationDominates : BackendDecisionReason
   measuredPatchHotspot : BackendDecisionReason
   measuredWithinEnvelope : BackendDecisionReason
 
@@ -56,6 +60,10 @@ recommendationForReason insufficientEvidence =
   keepPythonReference
 recommendationForReason excessiveInvalidationFanout =
   fixInvalidationFirst
+recommendationForReason planningDominates =
+  persistentIndexFirst
+recommendationForReason recomputationDominates =
+  directDeltaFirst
 recommendationForReason measuredPatchHotspot =
   rustCoreCandidate
 recommendationForReason measuredWithinEnvelope =
@@ -98,3 +106,14 @@ canonicalBackendSelectionBoundary =
     false refl
     false refl
     false refl
+
+
+planningDominanceIsIndexProblem :
+  recommendationForReason planningDominates
+    ≡ persistentIndexFirst
+planningDominanceIsIndexProblem = refl
+
+recomputationDominanceIsDirectDeltaProblem :
+  recommendationForReason recomputationDominates
+    ≡ directDeltaFirst
+recomputationDominanceIsDirectDeltaProblem = refl
