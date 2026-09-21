@@ -14,7 +14,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapeCookLevinPrizeFacingExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_; _^_)
+open import Data.Nat using (_∸_)
 open import Data.Product using (Σ)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -50,7 +51,7 @@ record PrizeFacingCookLevinCertificate
       Endpoint.ExtendedGlobalWidth
         machine steps (Guard.guardedInitialCols input steps)
       ≡
-      ((Agda.Builtin.Nat.suc steps) *
+      ((suc steps) *
           (Guard.guardedInitialCols input steps *
             Canonical.CellWidth machine))
       +
@@ -68,15 +69,15 @@ record PrizeFacingCookLevinCertificate
               stateCoverage symbolCoverage input steps))
         + slack
         ≡
-          ((steps * (Guard.guardedInitialCols input steps Data.Nat.∸ 2))
-            * (2 Agda.Builtin.Nat.^ Selected.TransitionLocalWidth machine))
+          ((steps * (Guard.guardedInitialCols input steps ∸ 2))
+            * (2 ^ Selected.TransitionLocalWidth machine))
           +
           Decode.RowBitsWidth machine
             (Guard.guardedInitialCols input steps)
           +
-          Agda.Builtin.Nat.suc
+          suc
             (Guard.guardedInitialCols input steps *
-              (2 Agda.Builtin.Nat.^ Endpoint.AcceptanceLocalWidth machine)))
+              (2 ^ Endpoint.AcceptanceLocalWidth machine)))
 
 open PrizeFacingCookLevinCertificate public
 
