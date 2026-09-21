@@ -406,3 +406,48 @@ bar = Set
         "A",
         frozenset(),
     )
+
+
+def test_empty_changed_path_set_is_exact_semantic_noop():
+    files = [
+        _file(
+            "A.agda",
+            """
+module A where
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+
+f : Nat -> Nat
+f zero = zero
+f (suc n) = n
+""",
+        )
+    ]
+
+    previous = build_semantic_graph(files)
+    before_index = ResolutionImpactIndex.from_files(files)
+    after_index = before_index.fork_apply(
+        {file.path: file for file in files},
+        [],
+    )
+    plan = plan_incremental_impact_indexed(
+        before_index,
+        after_index,
+        [],
+    )
+    patched, receipt = patch_semantic_graph(
+        previous,
+        files,
+        files,
+        plan,
+    )
+    rebuilt = build_semantic_graph(files)
+
+    assert plan.is_empty
+    assert receipt.affected_modules == ()
+    assert patched.nodes == previous.nodes == rebuilt.nodes
+    assert patched.edges == previous.edges == rebuilt.edges
+    assert (
+        patched.unresolved_references
+        == previous.unresolved_references
+        == rebuilt.unresolved_references
+    )
