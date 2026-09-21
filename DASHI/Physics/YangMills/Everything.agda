@@ -365,3 +365,5 @@ import DASHI.Physics.YangMills.BalabanCMP116R429RootedTraceCountingRound441Exact
 import DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudgetRound442Exact
 
 import DASHI.Physics.YangMills.YangMillsCMP119WilsonGibbsHaarActionRound443Exact
+
+import DASHI.Physics.YangMills.YangMillsCMP119PeterWeylWilsonSquareRound444Exact
