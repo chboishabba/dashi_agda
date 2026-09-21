@@ -114,6 +114,7 @@ import DASHI.Biology.AvianCompassExamples
 import DASHI.Biology.MagnetoreceptionSurface
 import DASHI.Biology.AvianCryptochromeMagnetoreceptionInhabitant
 import DASHI.Biology.AvianHepaticMacrophageMagnetoreception
+import DASHI.Biology.AvianMagnetoreceptionSourceRegistry
 import DASHI.Biology.AvianMagnetoreceptionCueFusion
 import DASHI.Biology.AvianMagnetoreceptionCrossScaleBridge
 import DASHI.Biology.AvianMagnetoreceptionHardProblemResidualV2
