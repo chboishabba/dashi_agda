@@ -62,9 +62,7 @@ record GenericSLRParseReceipt : Set where
 open GenericSLRParseReceipt public
 
 data ParseLane : Set where
-  retainedStudyAuditLane
-  screeningResolutionLane
-  : ParseLane
+  retainedStudyAuditLane screeningResolutionLane : ParseLane
 
 record ExtractionCoordinateCandidate : Set where
   constructor extraction-coordinate-candidate
