@@ -41,6 +41,16 @@ def _extract(args: argparse.Namespace) -> None:
         episode_context=args.episode_context,
     )
     timeline.write_json(args.output)
+    if args.profile_output:
+        Path(args.profile_output).write_text(
+            json.dumps(
+                extractor.performance_report(),
+                indent=2,
+            ) + "
+",
+            encoding="utf-8",
+        )
+        print(args.profile_output)
     print(args.output)
 
 
@@ -138,6 +148,8 @@ def _program(args: argparse.Namespace) -> None:
             target_commit=args.target_commit,
             upstream_depth=args.upstream_depth,
             downstream_depth=args.downstream_depth,
+            max_nodes=args.max_focus_nodes,
+            max_edges=args.max_focus_edges,
         )
     else:
         raise SystemExit(f"Unsupported program scene: {args.scene}")
@@ -311,6 +323,10 @@ def build_parser() -> argparse.ArgumentParser:
     extract = sub.add_parser("extract")
     extract.add_argument("repo")
     extract.add_argument("-o", "--output", default="repo-history.json")
+    extract.add_argument(
+        "--profile-output",
+        help="Write incremental timing/backend-decision receipts separately from deterministic history JSON.",
+    )
     extract.add_argument("--path-prefix")
     extract.add_argument(
         "--ref",
