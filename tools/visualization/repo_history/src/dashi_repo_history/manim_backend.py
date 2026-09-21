@@ -32,6 +32,8 @@ from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
 from dashi_repo_history.render_policy import ManimRenderPolicy
+from dashi_repo_history.research_film import compile_research_film
+from dashi_repo_history.research_layout import ResearchAtlasLayout
 from dashi_repo_history.scene_program import (
     compile_branch_episode_program,
     compile_first_parent_program,
@@ -1386,3 +1388,386 @@ class SemanticMergeScene(MovingCameraScene):
             run_time=1.6,
         )
         self.wait(2)
+
+
+def _film_graph(
+    snapshot: dict[str, Any],
+    admitted_nodes: set[str],
+) -> dict[str, Any]:
+    graph = snapshot["graph"]
+    nodes = [
+        node
+        for node in graph.get("nodes", [])
+        if node["symbol_id"] in admitted_nodes
+    ]
+    node_ids = {node["symbol_id"] for node in nodes}
+    edges = [
+        edge
+        for edge in graph.get("edges", [])
+        if edge["source"] in node_ids
+        and edge["target"] in node_ids
+    ]
+    return {"nodes": nodes, "edges": edges}
+
+
+def _camera_fit_width(
+    group: VGroup,
+    *,
+    frame_aspect: float,
+    padding: float,
+    min_width: float,
+    max_width: float,
+) -> float:
+    width = max(
+        group.width * padding,
+        group.height * frame_aspect * padding,
+        min_width,
+    )
+    return min(max_width, width)
+
+
+def _focus_group(view, node_ids: set[str]) -> VGroup:
+    mobjects = [
+        view.graph.vertices[node_id]
+        for node_id in node_ids
+        if node_id in view.graph.vertices
+    ]
+    return VGroup(*mobjects)
+
+
+class ResearchAtlasGraphView(SemanticGraphView):
+    """Semantic graph view with persistent programme territories."""
+
+    def __init__(
+        self,
+        regions,
+        policy: ManimRenderPolicy | None = None,
+    ) -> None:
+        super().__init__(policy)
+        self.atlas = ResearchAtlasLayout(
+            {
+                region.programme: region
+                for region in regions
+            }
+        )
+
+    def build(self, graph_data: dict[str, Any]) -> DiGraph:
+        nodes = [node["symbol_id"] for node in graph_data["nodes"]]
+        edges, edge_kinds = _visual_edge_projection(graph_data)
+        target_layout = self.atlas.solve(graph_data)
+        node_data = {
+            node["symbol_id"]: node
+            for node in graph_data["nodes"]
+        }
+        self.graph = DiGraph(
+            nodes,
+            edges,
+            layout=target_layout,
+            vertex_mobjects={
+                node_id: self.policy.vertex_mobject(
+                    node_data[node_id],
+                    total_nodes=len(nodes),
+                )
+                for node_id in nodes
+            },
+            edge_config={
+                edge: self.policy.edges.edge_config(edge_kinds[edge])
+                for edge in edges
+            },
+        )
+        self.current_nodes = set(nodes)
+        self.current_edges = set(edges)
+        self.current_edge_kinds = edge_kinds
+        self.current_graph_data = graph_data
+        return self.graph
+
+    def apply_snapshot(
+        self,
+        scene: MovingCameraScene,
+        graph_data: dict[str, Any],
+        *,
+        run_time: float = 0.35,
+    ) -> None:
+        target_nodes = {
+            node["symbol_id"]
+            for node in graph_data["nodes"]
+        }
+        projected_edges, target_edge_kinds = _visual_edge_projection(
+            graph_data
+        )
+        target_edges = set(projected_edges)
+
+        for old_id, new_id in supported_transfers(
+            self.current_graph_data,
+            graph_data,
+        ).items():
+            self.atlas.transfer_identity(old_id, new_id)
+
+        removed_edges = sorted(self.current_edges - target_edges)
+        removed_nodes = sorted(self.current_nodes - target_nodes)
+        added_nodes = sorted(target_nodes - self.current_nodes)
+        added_edges = sorted(target_edges - self.current_edges)
+
+        edge_fades = [
+            FadeOut(self.graph.edges[edge])
+            for edge in removed_edges
+            if edge in self.graph.edges
+        ]
+        if edge_fades:
+            scene.play(*edge_fades, run_time=run_time / 3)
+        if removed_edges:
+            self.graph.remove_edges(*removed_edges)
+
+        node_fades = [
+            FadeOut(self.graph.vertices[node])
+            for node in removed_nodes
+            if node in self.graph.vertices
+        ]
+        if node_fades:
+            scene.play(*node_fades, run_time=run_time / 3)
+        if removed_nodes:
+            self.graph.remove_vertices(*removed_nodes)
+
+        target_layout = self.atlas.solve(graph_data)
+        node_data = {
+            node["symbol_id"]: node
+            for node in graph_data["nodes"]
+        }
+
+        if added_nodes:
+            new_vertices = self.graph.add_vertices(
+                *added_nodes,
+                positions={
+                    node: target_layout[node]
+                    for node in added_nodes
+                },
+                vertex_mobjects={
+                    node: self.policy.vertex_mobject(
+                        node_data[node],
+                        total_nodes=len(target_nodes),
+                    )
+                    for node in added_nodes
+                },
+            )
+            scene.play(
+                GrowFromCenter(new_vertices),
+                run_time=run_time / 2,
+            )
+
+        if added_edges:
+            new_edges = self.graph.add_edges(
+                *added_edges,
+                edge_config={
+                    edge: self.policy.edges.edge_config(
+                        target_edge_kinds[edge]
+                    )
+                    for edge in added_edges
+                },
+            )
+            scene.play(Create(new_edges), run_time=run_time / 2)
+
+        if target_nodes:
+            scene.play(
+                self.graph.animate.change_layout(target_layout),
+                run_time=run_time,
+            )
+
+        self.current_nodes = target_nodes
+        self.current_edges = target_edges
+        self.current_edge_kinds = target_edge_kinds
+        self.current_graph_data = graph_data
+
+
+class ResearchEvolutionScene(MovingCameraScene):
+    """Directed semantic film of the evolving formal research programme."""
+
+    def _focus_camera(
+        self,
+        view: ResearchAtlasGraphView,
+        node_ids: set[str],
+        directive,
+    ) -> None:
+        focus = _focus_group(view, node_ids)
+        if len(focus) == 0:
+            region = view.atlas.regions.get(directive.programme)
+            if region is None:
+                return
+            target = [region.x, region.y, 0.0]
+            width = directive.min_width
+        else:
+            target = focus.get_center()
+            frame_aspect = (
+                self.camera.frame.width
+                / max(0.01, self.camera.frame.height)
+            )
+            width = _camera_fit_width(
+                focus,
+                frame_aspect=frame_aspect,
+                padding=directive.padding,
+                min_width=directive.min_width,
+                max_width=directive.max_width,
+            )
+
+        self.play(
+            self.camera.frame.animate.move_to(target).set(width=width),
+            run_time=directive.transition_seconds,
+        )
+
+    def construct(self) -> None:
+        path = os.environ.get("DASHI_REPO_HISTORY_JSON")
+        if not path:
+            self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
+            return
+
+        data = load_history_file(path)
+        plan = compile_research_film(data)
+        if not plan.beats:
+            self.add(Text("No semantic research-film beats", font_size=28))
+            return
+
+        commits = {
+            commit["commit"]: commit
+            for commit in data.get("commits", [])
+        }
+        snapshots = {
+            snapshot["commit"]: snapshot
+            for snapshot in data.get("snapshots", [])
+        }
+
+        policy = ManimRenderPolicy()
+        view = ResearchAtlasGraphView(plan.regions, policy)
+
+        title = Text("Dashi formal research evolution", font_size=28).to_edge(UP)
+        programme_label = Text("", font_size=18).next_to(
+            title, DOWN, buff=0.10
+        )
+        topic_label = Text("", font_size=13).next_to(
+            programme_label, DOWN, buff=0.06
+        )
+        date_label = Text("", font_size=12).to_corner(DOWN + RIGHT, buff=0.16)
+        self.add_fixed_in_frame_mobjects(
+            title,
+            programme_label,
+            topic_label,
+            date_label,
+        )
+        self.play(FadeIn(title), run_time=0.35)
+
+        admitted_nodes: set[str] = set()
+        graph_created = False
+        current_commit: str | None = None
+
+        for beat in plan.beats:
+            if beat.kind == "episode-title":
+                next_programme = Text(
+                    beat.programme or "Unclassified",
+                    font_size=18,
+                ).next_to(title, DOWN, buff=0.10)
+                next_topic = Text(
+                    beat.topic or "formal development",
+                    font_size=13,
+                ).next_to(next_programme, DOWN, buff=0.06)
+
+                self.add_fixed_in_frame_mobjects(
+                    next_programme,
+                    next_topic,
+                )
+                self.play(
+                    ReplacementTransform(
+                        programme_label,
+                        next_programme,
+                    ),
+                    ReplacementTransform(
+                        topic_label,
+                        next_topic,
+                    ),
+                    run_time=0.25,
+                )
+                programme_label = next_programme
+                topic_label = next_topic
+
+                if beat.camera is not None and graph_created:
+                    self._focus_camera(
+                        view,
+                        set(beat.focus_node_ids),
+                        beat.camera,
+                    )
+                continue
+
+            if beat.kind != "semantic-change" or beat.commit is None:
+                continue
+
+            snapshot = snapshots.get(beat.commit)
+            if snapshot is None:
+                continue
+
+            # Focus the previous state first so removals happen where the viewer
+            # is already looking rather than disappearing off-screen.
+            if beat.camera is not None and graph_created:
+                self._focus_camera(
+                    view,
+                    set(beat.focus_node_ids),
+                    beat.camera,
+                )
+
+            admitted_nodes.update(beat.focus_node_ids)
+            next_graph = _film_graph(snapshot, admitted_nodes)
+
+            if not graph_created:
+                graph = view.build(next_graph)
+                self.play(Create(graph), run_time=0.8)
+                graph_created = True
+            else:
+                view.apply_snapshot(
+                    self,
+                    next_graph,
+                    run_time=max(0.25, beat.duration_seconds * 0.55),
+                )
+
+            current_commit = beat.commit
+            commit = commits.get(current_commit, {})
+            next_date = Text(
+                f"{_commit_date(commits, current_commit)} · "
+                f"{current_commit[:10]}",
+                font_size=12,
+            ).to_corner(DOWN + RIGHT, buff=0.16)
+            self.add_fixed_in_frame_mobjects(next_date)
+            self.play(
+                ReplacementTransform(date_label, next_date),
+                run_time=0.12,
+            )
+            date_label = next_date
+
+            if beat.camera is not None:
+                self._focus_camera(
+                    view,
+                    set(beat.focus_node_ids),
+                    beat.camera,
+                )
+
+            changed = set(
+                (beat.payload or {}).get("changed_nodes", [])
+            )
+            highlights = [
+                Indicate(
+                    view.graph.vertices[node_id],
+                    scale_factor=1.35,
+                )
+                for node_id in list(changed)[:8]
+                if node_id in view.graph.vertices
+            ]
+            if highlights:
+                self.play(
+                    *highlights,
+                    run_time=min(0.45, beat.duration_seconds * 0.35),
+                )
+
+            hold = max(
+                0.05,
+                beat.duration_seconds
+                - (beat.camera.transition_seconds if beat.camera else 0.0)
+                - 0.20,
+            )
+            self.wait(hold)
+
+        self.wait(1.0)
