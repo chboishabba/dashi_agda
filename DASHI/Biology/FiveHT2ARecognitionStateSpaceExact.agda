@@ -74,11 +74,9 @@ state1Rejected =
 ------------------------------------------------------------------------
 
 sameLigandAcrossFixtureStates :
-  MolecularIdentityReceipt
-    (ligand canonicalLSDState0)
+  ligand canonicalLSDState0
   ≡
-  MolecularIdentityReceipt
-    (ligand canonicalLSDState1)
+  ligand canonicalLSDState1
 sameLigandAcrossFixtureStates = refl
 
 sameMismatchAcrossFixtureStates :
