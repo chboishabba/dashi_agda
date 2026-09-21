@@ -1,7 +1,9 @@
 from dashi_repo_history.agda import build_semantic_graph, extract_file
 from dashi_repo_history.incremental import (
+    ResolutionImpactIndex,
     patch_semantic_graph,
     plan_incremental_impact,
+    plan_incremental_impact_indexed,
 )
 
 
@@ -244,3 +246,163 @@ bar = foo
     assert plan.affected_modules == ("A", "B")
     assert patched.graph_id == rebuilt.graph_id
     assert not any(node.module == "A" for node in patched.nodes.values())
+
+
+def test_indexed_impact_plan_matches_scanning_plan():
+    before = [
+        _file(
+            "A.agda",
+            """
+module A where
+foo : Set
+foo = Set
+""",
+        ),
+        _file(
+            "B.agda",
+            """
+module B where
+open import A
+bar : Set
+bar = foo
+""",
+        ),
+        _file(
+            "C.agda",
+            """
+module C where
+import A
+c : Set
+c = A.foo
+""",
+        ),
+        _file(
+            "D.agda",
+            """
+module D where
+d : Set
+d = Set
+""",
+        ),
+    ]
+    after = [
+        _file(
+            "A.agda",
+            """
+module A where
+foo2 : Set
+foo2 = Set
+""",
+        ),
+        before[1],
+        before[2],
+        before[3],
+    ]
+
+    scanning = plan_incremental_impact(
+        before,
+        after,
+        ["A.agda"],
+    )
+    before_index = ResolutionImpactIndex.from_files(before)
+    after_index = before_index.fork_apply(
+        {file.path: file for file in after},
+        ["A.agda"],
+    )
+    indexed = plan_incremental_impact_indexed(
+        before_index,
+        after_index,
+        ["A.agda"],
+    )
+
+    assert indexed == scanning
+    assert indexed.affected_modules == ("A", "B", "C")
+    assert "D" not in indexed.affected_modules
+
+
+def test_indexed_impact_plan_handles_deleted_module():
+    before = [
+        _file(
+            "A.agda",
+            """
+module A where
+foo : Set
+foo = Set
+""",
+        ),
+        _file(
+            "B.agda",
+            """
+module B where
+open import A
+bar : Set
+bar = foo
+""",
+        ),
+    ]
+    after = [before[1]]
+
+    scanning = plan_incremental_impact(
+        before,
+        after,
+        ["A.agda"],
+    )
+    before_index = ResolutionImpactIndex.from_files(before)
+    after_index = before_index.fork_apply(
+        {file.path: file for file in after},
+        ["A.agda"],
+    )
+    indexed = plan_incremental_impact_indexed(
+        before_index,
+        after_index,
+        ["A.agda"],
+    )
+
+    assert indexed == scanning
+    assert indexed.changed_modules == ("A",)
+    assert indexed.affected_modules == ("A", "B")
+
+
+def test_index_update_removes_stale_reverse_dependencies():
+    before = [
+        _file(
+            "A.agda",
+            """
+module A where
+foo : Set
+foo = Set
+""",
+        ),
+        _file(
+            "B.agda",
+            """
+module B where
+open import A
+bar : Set
+bar = foo
+""",
+        ),
+    ]
+    after = [
+        before[0],
+        _file(
+            "B.agda",
+            """
+module B where
+bar : Set
+bar = Set
+""",
+        ),
+    ]
+
+    before_index = ResolutionImpactIndex.from_files(before)
+    after_index = before_index.fork_apply(
+        {file.path: file for file in after},
+        ["B.agda"],
+    )
+
+    assert "B" in before_index.openers_by_target["A"]
+    assert "B" not in after_index.openers_by_target.get(
+        "A",
+        frozenset(),
+    )
