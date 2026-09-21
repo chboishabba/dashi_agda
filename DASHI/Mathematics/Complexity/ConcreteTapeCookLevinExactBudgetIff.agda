@@ -13,8 +13,10 @@ module DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff where
 -- not attempt to formalize a new general complexity framework.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (trans)
 
@@ -67,7 +69,7 @@ record GuardedCookLevinSAT
           (Sound.guardedInitialBits
             stateCoverage symbolCoverage input steps))
         assignment
-      ≡ Agda.Builtin.Bool.true
+      ≡ true
 
 open GuardedCookLevinSAT public
 
@@ -76,7 +78,7 @@ record ExactBudgetAcceptingRun
     (input : Input.InputWord machine)
     (steps : Nat) : Set₁ where
   field
-    rows : Agda.Builtin.List.List (Local.TapeRow machine)
+    rows : List (Local.TapeRow machine)
     finish : Local.TapeRow machine
     certificate :
       Accepting.AcceptingWellFormedRun
@@ -150,7 +152,7 @@ exactRunToGuardedSAT
             (Guard.guardedInitialRow input steps)))
         (Assignment.encodeAcceptingRunAssignment
           stateCoverage symbolCoverage (certificate exact))
-      ≡ Agda.Builtin.Bool.true →
+      ≡ true →
       CNF.evaluateCNF
         (GlobalCNF.globalCookLevinCNF
           stateCoverage symbolCoverage nonempty
@@ -159,7 +161,7 @@ exactRunToGuardedSAT
             stateCoverage symbolCoverage input steps))
         (Assignment.encodeAcceptingRunAssignment
           stateCoverage symbolCoverage (certificate exact))
-      ≡ Agda.Builtin.Bool.true
+      ≡ true
     targetRewrite proof =
       proof
 
