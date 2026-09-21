@@ -442,3 +442,5 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SameCompletedCompositeSt
 import DASHI.Physics.YangMills.BalabanR144CanonicalMetricTangentRound428Exact
 
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalFourStageR406Round429Exact
+
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R129PaysContinuumSemanticsRound430Exact
