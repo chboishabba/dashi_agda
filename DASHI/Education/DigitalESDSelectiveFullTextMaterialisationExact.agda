@@ -22,12 +22,11 @@ import DASHI.Education.DigitalESDAdaptiveScreeningProgrammeExact as Adaptive
 ------------------------------------------------------------------------
 
 data CacheState : Set where
-  metadataOnly
-  queuedForFetch
-  materialised
-  parsedOrReconciled
-  evictable
-  : CacheState
+  metadataOnly : CacheState
+  queuedForFetch : CacheState
+  materialised : CacheState
+  parsedOrReconciled : CacheState
+  evictable : CacheState
 
 record StorageBudget : Set where
   constructor storage-budget
