@@ -60,6 +60,13 @@ human5HT2AAtlasLayer =
     Sources.beliveauEtAl2017
     "Human in-vivo receptor mapping supports distributed 5-HT2A availability; anatomy alone does not prove psychedelic causal flow."
 
+anteriorCingulate5HT2ALayer : SourcePaidMechanismLayer
+anteriorCingulate5HT2ALayer =
+  sourcePaidMechanismLayer
+    receptorAvailability
+    Sources.vanDyckEtAl2000
+    "Human [18F]altanserin PET provides an anterior-cingulate 5-HT2A binding coordinate; receptor availability alone does not establish psychedelic salience, attention, or meaning."
+
 lsdSubjectiveBlockadeLayer : SourcePaidMechanismLayer
 lsdSubjectiveBlockadeLayer =
   sourcePaidMechanismLayer
@@ -101,6 +108,7 @@ record PsychedelicSalienceComposition : Set where
   constructor psychedelicSalienceComposition
   field
     receptorLayer : SourcePaidMechanismLayer
+    anteriorCingulateReceptorLayer : SourcePaidMechanismLayer
     blockadeLayer : SourcePaidMechanismLayer
     connectivityLayer : SourcePaidMechanismLayer
     salienceLayer : SourcePaidMechanismLayer
@@ -121,6 +129,7 @@ canonicalPsychedelicSalienceComposition :
 canonicalPsychedelicSalienceComposition =
   psychedelicSalienceComposition
     human5HT2AAtlasLayer
+    anteriorCingulate5HT2ALayer
     lsdSubjectiveBlockadeLayer
     lsdConnectivityBlockadeLayer
     daccSalienceLayer
@@ -161,6 +170,10 @@ record Psychedelic5HT2AAttentionBoundary : Set where
     human5HT2AMappingSourceBoundIsTrue :
       human5HT2AMappingSourceBound ≡ true
 
+    anteriorCingulate5HT2ABindingSourceBound : Bool
+    anteriorCingulate5HT2ABindingSourceBoundIsTrue :
+      anteriorCingulate5HT2ABindingSourceBound ≡ true
+
     controlledLSD5HT2ADependenceSourceBound : Bool
     controlledLSD5HT2ADependenceSourceBoundIsTrue :
       controlledLSD5HT2ADependenceSourceBound ≡ true
@@ -195,6 +208,7 @@ canonicalPsychedelic5HT2AAttentionBoundary :
   Psychedelic5HT2AAttentionBoundary
 canonicalPsychedelic5HT2AAttentionBoundary =
   psychedelic5HT2AAttentionBoundary
+    true refl
     true refl
     true refl
     true refl
