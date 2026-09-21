@@ -16,6 +16,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact as Trace
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionConjunctionExact as Transition
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionSemanticScanExact as Scan
+import DASHI.Mathematics.Complexity.ConcreteTapeDecodedTransitionStepExact as Step
+import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 import DASHI.Mathematics.Complexity.ConcreteTapeDecodedRunInductionExact as Induction
 import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
@@ -51,13 +53,13 @@ buildDecodedRunNonempty_length :
     (unique :
       WF.ExactlyOneHead
         (Local.cells
-          (DASHI.Mathematics.Complexity.ConcreteTapeDecodedTransitionStepExact.decodedBeforeRow
+          (Step.decodedBeforeRow
             stateCoverage symbolCoverage
             (Transition.witness first) globalBits)))
     (margin :
       Margin.HeadMargin (suc (Induction.timesLength (first ∷ rest)))
         (Local.cells
-          (DASHI.Mathematics.Complexity.ConcreteTapeDecodedTransitionStepExact.decodedBeforeRow
+          (Step.decodedBeforeRow
             stateCoverage symbolCoverage
             (Transition.witness first) globalBits))) →
   Run.runLength
@@ -94,7 +96,7 @@ buildDecodedRunNonempty_length
         unique (Induction.weakenMarginToOne margin)
 
     step =
-      DASHI.Mathematics.Complexity.ConcreteTapeDecodedTransitionStepExact.decodedAdjacentRowsFormMachineStep
+      Step.decodedAdjacentRowsFormMachineStep
         stateCoverage symbolCoverage nonempty
         (Transition.witness first) globalBits
         interior current
@@ -133,7 +135,7 @@ decodedAllSlotsRun_length :
     (startUnique :
       WF.ExactlyOneHead
         (Local.cells
-          (DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact.decodeRow
+          (Decode.decodeRow
             stateCoverage symbolCoverage cols
             (Global.rowSliceBits
               (Global.here {remaining = steps})
@@ -141,7 +143,7 @@ decodedAllSlotsRun_length :
     (startMargin :
       Margin.HeadMargin (suc steps)
         (Local.cells
-          (DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact.decodeRow
+          (Decode.decodeRow
             stateCoverage symbolCoverage cols
             (Global.rowSliceBits
               (Global.here {remaining = steps})
