@@ -54,6 +54,11 @@ import DASHI.Physics.Closure.NSWholeSpaceActualPhysicalCompensatedFieldExact as 
 import DASHI.Physics.Closure.NSWholeSpaceActualSignedLebesgueEndgameExact as AActualEnd
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact as DEnergy
 import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact as CLocal
+import DASHI.Physics.Closure.NSActualSelectedPeriodicCandidateAssemblyExact as DActualAssembly
+import DASHI.Physics.Closure.NSPeriodicDifferenceEnergyProducerExact as DEnergyProducer
+import DASHI.Physics.Closure.NSActualPeriodicCandidateExclusionExact as DActualExclude
+import DASHI.Physics.Closure.NSActualPeriodicToCompactLocalizationExact as CActualLocal
+import DASHI.Physics.Closure.NSActualCompactCandidateExclusionExact as CActualExclude
 import DASHI.Physics.Closure.NSTriadKNR567ForcingCellPhysicalEnvelopeExact as B567Envelope
 import DASHI.Physics.Closure.NSTriadKNSameOutputIncidenceDisplacementExact as BDisplacement
 import DASHI.Physics.Closure.NSTriadKNR540OffDiagonalToLiteralR571M2Exact as BOffdiagM2
@@ -584,6 +589,18 @@ dPeriodicEnergyUniquenessCompositionClosed =
 dPeriodicIBPAndGronwallProducersClosed : Bool
 dPeriodicIBPAndGronwallProducersClosed = false
 
+dActualSelectedCandidateAssemblyCompilerClosed : Bool
+dActualSelectedCandidateAssemblyCompilerClosed =
+  DActualAssembly.actualSelectedPeriodicCandidateAssemblyCompilerClosed
+
+dPeriodicDifferenceEnergyAssemblyCompilerClosed : Bool
+dPeriodicDifferenceEnergyAssemblyCompilerClosed =
+  DEnergyProducer.periodicDifferenceEnergyProducerCompilerClosed
+
+dActualPeriodicExclusionAssemblyCompilerClosed : Bool
+dActualPeriodicExclusionAssemblyCompilerClosed =
+  DActualExclude.actualPeriodicExclusionCompilerClosed
+
 cSelectedCompactCandidateReusesD : Bool
 cSelectedCompactCandidateReusesD =
   CSelected.cReusesSelectedPeriodicCandidate
@@ -598,6 +615,14 @@ cCompactLocalizationAssemblyClosed =
 
 cCompactSupportResidualAndFiniteEnergyComparisonClosed : Bool
 cCompactSupportResidualAndFiniteEnergyComparisonClosed = false
+
+cActualLocalizationAssemblyCompilerClosed : Bool
+cActualLocalizationAssemblyCompilerClosed =
+  CActualLocal.actualPeriodicToCompactLocalizationCompilerClosed
+
+cActualFiniteEnergyExclusionAssemblyCompilerClosed : Bool
+cActualFiniteEnergyExclusionAssemblyCompilerClosed =
+  CActualExclude.actualCompactCandidateExclusionCompilerClosed
 
 cActualCompactCandidateFamilyReconstructed : Bool
 cActualCompactCandidateFamilyReconstructed = false
