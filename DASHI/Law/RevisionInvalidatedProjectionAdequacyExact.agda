@@ -68,6 +68,9 @@ staleProjectionDefect :
   Query.QueryAdequacyDefect staleProject sourceSemantics sourceSensitiveQuery
 staleProjectionDefect =
   Query.queryAdequacyDefect
+    {project = staleProject}
+    {semantics = sourceSemantics}
+    {query = sourceSensitiveQuery}
     worldR0
     worldR1
     refl
@@ -76,7 +79,11 @@ staleProjectionDefect =
 staleProjectionCannotBeAdequate :
   Query.AdequateFor staleProject sourceSemantics sourceSensitiveQuery → ⊥
 staleProjectionCannotBeAdequate =
-  Query.queryAdequacyDefectBlocksFactorisation staleProjectionDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = staleProject}
+    {semantics = sourceSemantics}
+    {query = sourceSensitiveQuery}
+    staleProjectionDefect
 
 freshDecoder : FreshProjection → SourceAnswer
 freshDecoder freshR0 = r0Answer
@@ -94,6 +101,9 @@ freshProjectionAdequate :
   Query.AdequateFor freshProject sourceSemantics sourceSensitiveQuery
 freshProjectionAdequate =
   Query.factorsForQuery
+    {project = freshProject}
+    {semantics = sourceSemantics}
+    {query = sourceSensitiveQuery}
     freshDecoder
     freshFactorisation
 
