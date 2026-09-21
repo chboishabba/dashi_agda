@@ -262,6 +262,8 @@ class HistoryExtractor:
         commit: str,
     ):
         cached = self._graph_cache.get(commit)
+        if not isinstance(self.adapter, AgdaLanguageAdapter):
+            return self.graph_at(commit)
         if cached is not None:
             return cached
 
