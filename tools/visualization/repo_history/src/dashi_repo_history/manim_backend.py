@@ -1720,6 +1720,7 @@ class ResearchEvolutionScene(MovingCameraScene):
                 "branch-fork",
                 "branch-merge",
                 "pr-merge",
+                "cross-programme-overview",
             }:
                 if beat.camera is not None and graph_created:
                     self._focus_camera(
