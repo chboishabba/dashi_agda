@@ -1,0 +1,14 @@
+module DASHI.Physics.Foundations.RFComplexSmithCabarlahCSICrossPollinationRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.RFComplexSmithCabarlahCSICrossPollinationExact as Bridge
+
+csiComplexPhaseBridgeRequired : Bridge.CSIComplexPhaseBridgeReceipt
+csiComplexPhaseBridgeRequired = Bridge.canonicalCSIComplexPhaseBridgeReceipt
+
+cabarlahObserverBridgeRequired : Bridge.CabarlahComplexRFBridgeReceipt
+cabarlahObserverBridgeRequired = Bridge.canonicalCabarlahComplexRFBridgeReceipt
+
+crossDomainFirewallRequired : Bridge.RFComplexCrossDomainFirewall
+crossDomainFirewallRequired = Bridge.canonicalRFComplexCrossDomainFirewall
