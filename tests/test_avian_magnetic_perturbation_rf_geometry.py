@@ -31,6 +31,33 @@ EXPECTED = {
         "apparatusIdentifiesBiologicalMechanismIsFalse",
         "exactFieldAtReceptorRecoveredIsFalse",
     ),
+    "AvianMagnetoreceptionEMExposureTransportExact.agda": (
+        "commandedApparatusState",
+        "measuredChamberFieldState",
+        "receptorTissueExposureState",
+        "measuredFieldIsReceptorExposureIsFalse",
+        "fieldAtReceptorRecoveredIsFalse",
+    ),
+    "AvianEngels2014EMExposureReceipt.agda": (
+        "groundedScreeningRestoresOrientationIsTrue",
+        "generatedBroadbandNoiseDisruptsOrientationIsTrue",
+        "electricAndMagneticFieldsMeasuredIsTrue",
+        "merrittCoilIsPhasedArrayIsFalse",
+        "microscopicReceptorExposureRecoveredIsFalse",
+    ),
+    "AvianMagnetoreceptionFieldObservationQuotientExact.agda": (
+        "chamberMeasurementDoesNotDetermineExactReceptorExposure",
+        "commandDoesNotDetermineExactGeneratedField",
+        "inverseProblemExplicitIsTrue",
+    ),
+    "AvianMagnetoreceptionRFAngularObservationQuotientExact.agda": (
+        "goniometerNonInjective",
+        "phasedArrayNonInjective",
+        "rfSensingNonInjective",
+        "chamberFieldNonInjective",
+        "commonShapeImpliesSamePhysicsIsFalse",
+        "commonShapeImpliesSameHardwareIsFalse",
+    ),
 }
 
 
