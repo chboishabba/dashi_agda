@@ -14,7 +14,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+import Data.Nat.Base as Nat
+open Nat using (z≤n; s≤s)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -24,13 +25,14 @@ import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSPeriodicInfinityShellModeCount as ShellCount
 import DASHI.Physics.Closure.NSPeriodicInfinityShellSubsetCountExact as SubsetCount
 import DASHI.Physics.Closure.NSTriadKNRationalFiniteBernstein as Bernstein
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNRationalInfinityShellBernsteinRound465Exact as R465
 import DASHI.Physics.Closure.NSTriadKNDeepFarLowCriticalShoulderRound234Exact as R234
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as NatQ
 import DASHI.Physics.Closure.NSTriadKNRationalIntegerEmbeddingModeNormScaleExact as NatOrder
 
 cubeLeToNatLe :
-  ∀ {m n} → m Cube.≤ᴺ n → m ≤ n
+  ∀ {m n} → m Cube.≤ᴺ n → Nat._≤_ m n
 cubeLeToNatLe Cube.z≤n = z≤n
 cubeLeToNatLe (Cube.s≤s proof) = s≤s (cubeLeToNatLe proof)
 
@@ -63,7 +65,7 @@ record LiteralInfinityShellBernsteinData (shell : Nat) : Set₁ where
       ≤
       let coefficients = Cube.map coefficient (ShellCount.shellModes support)
       in
-      DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.square
+      Rational.square
         (Bernstein.coefficientSum coefficients)
         * highEnergy
 
