@@ -1485,6 +1485,7 @@ class ResearchAtlasGraphView(SemanticGraphView):
             }
         )
         self.label_nodes: set[str] = set()
+        self.active_labels = VGroup()
 
     def build(self, graph_data: dict[str, Any]) -> DiGraph:
         nodes = [node["symbol_id"] for node in graph_data["nodes"]]
@@ -1502,7 +1503,7 @@ class ResearchAtlasGraphView(SemanticGraphView):
                 node_id: self.policy.vertex_mobject(
                     node_data[node_id],
                     total_nodes=len(nodes),
-                    force_label=node_id in self.label_nodes,
+                    suppress_label=True,
                 )
                 for node_id in nodes
             },
@@ -1585,7 +1586,7 @@ class ResearchAtlasGraphView(SemanticGraphView):
                     node: self.policy.vertex_mobject(
                         node_data[node],
                         total_nodes=len(target_nodes),
-                        force_label=node in self.label_nodes,
+                        suppress_label=True,
                     )
                     for node in added_nodes
                 },
@@ -1675,66 +1676,55 @@ class ResearchAtlasGraphView(SemanticGraphView):
         *,
         run_time: float = 0.16,
     ) -> None:
-        node_ids = set(node_ids)
+        node_ids = {
+            node_id
+            for node_id in node_ids
+            if node_id in self.current_nodes
+            and node_id in self.graph.vertices
+        }
         if node_ids == self.label_nodes:
             return
+
+        if len(self.active_labels) > 0:
+            scene.play(
+                FadeOut(self.active_labels),
+                run_time=run_time / 2,
+            )
+            self.active_labels.clear()
 
         self.label_nodes = node_ids
         node_data = {
             node["symbol_id"]: node
             for node in self.current_graph_data.get("nodes", [])
         }
-        animations = []
-        replacements = []
 
-        for node_id in sorted(self.current_nodes):
-            if node_id not in self.graph.vertices or node_id not in node_data:
+        labels = []
+        for node_id in sorted(node_ids):
+            node = node_data.get(node_id)
+            if node is None:
                 continue
-            old = self.graph.vertices[node_id]
-            new = self.policy.vertex_mobject(
-                node_data[node_id],
-                total_nodes=len(self.current_nodes),
-                force_label=node_id in self.label_nodes,
-            ).move_to(old.get_center())
-            animations.append(ReplacementTransform(old, new))
-            replacements.append((node_id, new))
+            label = self.policy.label_mobject(node)
+            label.next_to(
+                self.graph.vertices[node_id],
+                DOWN,
+                buff=0.045,
+            )
 
-        if animations:
-            scene.play(*animations, run_time=run_time)
-            for node_id, new in replacements:
-                self.graph.vertices[node_id] = new
+            def follow(mob, nid=node_id):
+                vertex = self.graph.vertices.get(nid)
+                if vertex is not None:
+                    mob.next_to(vertex, DOWN, buff=0.045)
 
+            label.add_updater(follow)
+            labels.append(label)
 
-RESEARCH_FONT = os.environ.get(
-    "DASHI_FILM_FONT",
-    "DejaVu Sans",
-)
-
-
-def _compact_hud_text(value: str, limit: int) -> str:
-    value = " ".join(str(value).split())
-    if len(value) <= limit:
-        return value
-    keep = max(8, (limit - 1) // 2)
-    return f"{value[:keep]}…{value[-keep:]}"
-
-
-def _research_text(
-    value: str,
-    *,
-    font_size: int,
-    max_chars: int = 120,
-    max_width: float | None = None,
-):
-    mob = Text(
-        _compact_hud_text(value, max_chars),
-        font=RESEARCH_FONT,
-        font_size=font_size,
-        disable_ligatures=True,
-    )
-    if max_width is not None and mob.width > max_width:
-        mob.scale_to_fit_width(max_width)
-    return mob
+        self.active_labels = VGroup(*labels)
+        if len(self.active_labels) > 0:
+            scene.add(self.active_labels)
+            scene.play(
+                FadeIn(self.active_labels),
+                run_time=run_time / 2,
+            )
 
 
 def _research_time_rail(
@@ -2101,12 +2091,15 @@ class ResearchEvolutionScene(MovingCameraScene):
             changed = set(
                 (beat.payload or {}).get("changed_nodes", [])
             )
-            view.label_nodes = set(changed)
-
             if not graph_created:
                 graph = view.build(next_graph)
                 self.play(Create(graph), run_time=0.8)
                 graph_created = True
+                view.update_labels(
+                    self,
+                    changed,
+                    run_time=0.16,
+                )
             else:
                 view.apply_snapshot(
                     self,
