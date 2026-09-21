@@ -11,6 +11,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeAfterUniqueFromLocalityExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥-elim)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
@@ -19,6 +20,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Patt
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeWholeRowLocalityExact as Whole
 import DASHI.Mathematics.Complexity.ConcreteTapeCenteredWindowExtractionExact as Center
+import DASHI.Mathematics.Complexity.ConcreteTapeCenteredRewriteReconstructionExact as Reconstruct
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalPrefixAgreementExact as Prefix
 import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coordinate
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
@@ -244,14 +246,14 @@ globalTransitionScanAfterUnique scan interior =
       WF.PlainCells (Center.beforePrefix extracted)
       × WF.PlainCells (Center.beforeSuffix extracted)
     beforeContextPlain =
-      DASHI.Mathematics.Complexity.ConcreteTapeCenteredRewriteReconstructionExact.beforeExtractedContextIsPlain
+      Reconstruct.beforeExtractedContextIsPlain
         scan beforeUnique
 
     beforePrefixPlain =
-      Data.Product.proj₁ beforeContextPlain
+      proj₁ beforeContextPlain
 
     beforeSuffixPlain =
-      Data.Product.proj₂ beforeContextPlain
+      proj₂ beforeContextPlain
 
     decomposedLegal :
       Whole.All
