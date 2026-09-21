@@ -4,6 +4,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunInitialCompleteExact
 -- REVERSE COOK--LEVIN: THE CONSTRUCTED RUN ASSIGNMENT SATISFIES ROW 0
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
@@ -20,6 +21,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalFormulaSemanticsExact as FormulaSem
 import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
+import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 takeBitsAll :
@@ -142,7 +144,7 @@ encodedAcceptingAssignment_initialPullback :
       (Flat.encodeRow stateCoverage symbolCoverage start))
     (Assignment.encodeAcceptingRunAssignment
       stateCoverage symbolCoverage certificate)
-  ≡ Agda.Builtin.Bool.true
+  ≡ true
 encodedAcceptingAssignment_initialPullback
     stateCoverage symbolCoverage certificate =
   (Endpoint.initialEndpointCNF_iff
@@ -156,7 +158,7 @@ encodedAcceptingAssignment_initialPullback
     run = Accepting.run certificate
 
     initialExact :
-      DASHI.Mathematics.Complexity.CNFVariableRenamingExact.pullbackBits
+      Rename.pullbackBits
         Endpoint.initialRowExtendedRename assignment
       ≡
       Flat.encodeRow stateCoverage symbolCoverage _
