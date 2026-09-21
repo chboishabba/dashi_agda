@@ -104,6 +104,79 @@ def _topic_tokens(nodes: Iterable[dict[str, Any]]) -> tuple[str, ...]:
     return tuple(ranked[:4])
 
 
+LANE_RE = re.compile(
+    r"(?:^|[^A-Za-z0-9])(?:lane|route|goal)?[-_ ]*([ABCD])(?:\d+)?(?:$|[^A-Za-z0-9])",
+    re.IGNORECASE,
+)
+
+
+def _lane_hint(nodes: Iterable[dict[str, Any]]) -> str | None:
+    scores: dict[str, int] = {}
+    for node in nodes:
+        haystack = " ".join(
+            [
+                str(node.get("module", "")),
+                str(node.get("label", "")),
+                str(node.get("span", {}).get("path", "")),
+            ]
+        )
+        for match in LANE_RE.finditer(haystack):
+            lane = match.group(1).upper()
+            scores[lane] = scores.get(lane, 0) + 1
+    if not scores:
+        return None
+    return min(
+        scores,
+        key=lambda lane: (-scores[lane], lane),
+    )
+
+
+def _symbol_summary(
+    nodes: Iterable[dict[str, Any]],
+    *,
+    limit: int = 6,
+) -> tuple[tuple[str, str, str], ...]:
+    ranked = sorted(
+        nodes,
+        key=lambda node: (
+            0 if node.get("kind") in {"theorem", "function", "postulate"} else 1,
+            0 if node.get("scope") is None else 1,
+            str(node.get("module", "")),
+            str(node.get("label", "")),
+        ),
+    )
+    return tuple(
+        (
+            str(node.get("label", "")),
+            str(node.get("kind", "")),
+            str(node.get("module", "")),
+        )
+        for node in ranked[:limit]
+    )
+
+
+def _headline(
+    programme: str,
+    symbols: tuple[tuple[str, str, str], ...],
+    topics: tuple[str, ...],
+    lane: str | None,
+) -> str:
+    prefix = programme
+    if lane:
+        prefix += f" · Lane {lane}"
+
+    labels = [label for label, _kind, _module in symbols if label]
+    if labels:
+        shown = " → ".join(labels[:3])
+        if len(labels) > 3:
+            shown += f" +{len(labels) - 3}"
+        return f"{prefix} · {shown}"
+
+    if topics:
+        return f"{prefix} · {' · '.join(topics[:3])}"
+    return f"{prefix} · formal development"
+
+
 @dataclass(frozen=True)
 class ActiveWorkingSet:
     commit: str
@@ -114,6 +187,10 @@ class ActiveWorkingSet:
     context_node_ids: tuple[str, ...]
     context_edge_ids: tuple[str, ...]
     salience: int
+    modules: tuple[str, ...] = ()
+    changed_symbols: tuple[tuple[str, str, str], ...] = ()
+    lane: str | None = None
+    headline: str = ""
 
     @property
     def focus_node_ids(self) -> tuple[str, ...]:
@@ -173,6 +250,8 @@ class FilmBeat:
     duration_seconds: float
     focus_node_ids: tuple[str, ...] = ()
     focus_edge_ids: tuple[str, ...] = ()
+    visible_node_ids: tuple[str, ...] = ()
+    visible_edge_ids: tuple[str, ...] = ()
     camera: CameraDirective | None = None
     payload: dict[str, Any] | None = None
 
@@ -320,7 +399,7 @@ def _working_sets_for_commit(
 
     working_sets: list[ActiveWorkingSet] = []
     candidates = sorted(
-        after_edges.values(),
+        all_edges.values(),
         key=lambda edge: (
             edge.get("kind", ""),
             edge["source"],
@@ -338,6 +417,23 @@ def _working_sets_for_commit(
             if node_id in all_nodes
         ]
         topics = _topic_tokens(payloads)
+        modules = tuple(
+            sorted(
+                {
+                    str(node.get("module", ""))
+                    for node in payloads
+                    if node.get("module")
+                }
+            )
+        )
+        symbols = _symbol_summary(payloads)
+        lane = _lane_hint(payloads)
+        headline = _headline(
+            programme,
+            symbols,
+            topics,
+            lane,
+        )
 
         context_nodes: set[str] = set()
         context_edges: set[str] = set()
@@ -380,6 +476,10 @@ def _working_sets_for_commit(
                 context_node_ids=tuple(sorted(context_nodes)),
                 context_edge_ids=tuple(sorted(context_edges)),
                 salience=salience,
+                modules=modules,
+                changed_symbols=symbols,
+                lane=lane,
+                headline=headline,
             )
         )
 
@@ -576,6 +676,7 @@ def compile_research_film(
     *,
     max_context_nodes: int = 40,
     max_context_edges: int = 100,
+    programme_memory_nodes: int = 28,
 ) -> ResearchFilmPlan:
     working_sets = derive_working_sets(
         timeline,
@@ -590,6 +691,7 @@ def compile_research_film(
 
     beats: list[FilmBeat] = []
     previous_programme: str | None = None
+    programme_memory: dict[str, list[str]] = {}
     working_by_commit: dict[str, list[ActiveWorkingSet]] = {}
     for working in working_sets:
         working_by_commit.setdefault(working.commit, []).append(working)
@@ -648,6 +750,15 @@ def compile_research_film(
                     "commits": list(episode.commits),
                     "return_visit": return_visit,
                     "salience": episode.salience,
+                    "headline": next(
+                        (
+                            item.headline
+                            for item in working_sets
+                            if item.commit == first_commit
+                            and item.programme == episode.programme
+                        ),
+                        topic,
+                    ),
                 },
             )
         )
@@ -735,6 +846,47 @@ def compile_research_film(
                     )
                 )
 
+            memory = programme_memory.setdefault(
+                working.programme,
+                [],
+            )
+            for node_id in (
+                *working.changed_node_ids,
+                *working.context_node_ids,
+            ):
+                if node_id in memory:
+                    memory.remove(node_id)
+                memory.append(node_id)
+            if len(memory) > programme_memory_nodes:
+                del memory[:-programme_memory_nodes]
+
+            visible_nodes = tuple(
+                dict.fromkeys(
+                    (
+                        *memory,
+                        *working.focus_node_ids,
+                    )
+                )
+            )
+
+            visible_node_set = set(visible_nodes)
+            snapshot = next(
+                (
+                    item
+                    for item in timeline.get("snapshots", [])
+                    if item["commit"] == commit
+                ),
+                None,
+            )
+            visible_edges: tuple[str, ...] = ()
+            if snapshot is not None:
+                visible_edges = tuple(
+                    edge["relation_id"]
+                    for edge in snapshot["graph"].get("edges", [])
+                    if edge["source"] in visible_node_set
+                    and edge["target"] in visible_node_set
+                )
+
             beats.append(
                 FilmBeat(
                     kind="semantic-change",
@@ -748,6 +900,8 @@ def compile_research_film(
                     ),
                     focus_node_ids=working.focus_node_ids,
                     focus_edge_ids=working.focus_edge_ids,
+                    visible_node_ids=visible_nodes,
+                    visible_edge_ids=visible_edges,
                     camera=CameraDirective(
                         programme=working.programme,
                         focus_node_ids=working.focus_node_ids,
@@ -766,6 +920,18 @@ def compile_research_film(
                         "changed_edges": list(
                             working.changed_edge_ids
                         ),
+                        "changed_symbols": [
+                            {
+                                "label": label,
+                                "kind": kind,
+                                "module": module,
+                            }
+                            for label, kind, module
+                            in working.changed_symbols
+                        ],
+                        "modules": list(working.modules),
+                        "lane": working.lane,
+                        "headline": working.headline,
                     },
                 )
             )
