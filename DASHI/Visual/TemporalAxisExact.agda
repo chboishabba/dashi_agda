@@ -54,3 +54,27 @@ canonicalTemporalAxisBoundary =
   temporalAxisBoundary
     false refl
     false refl
+
+
+record SemanticFilmTimeRailBoundary : Set where
+  constructor semanticFilmTimeRailBoundary
+  field
+    semanticGraphYAxisMustEncodeTime : Bool
+    semanticGraphYAxisMustEncodeTimeIsFalse :
+      semanticGraphYAxisMustEncodeTime ≡ false
+
+    separateVerticalTimeRailMayShowChronology : Bool
+    separateVerticalTimeRailMayShowChronologyIsTrue :
+      separateVerticalTimeRailMayShowChronology ≡ true
+
+    timeRailMayChangeSemanticLayout : Bool
+    timeRailMayChangeSemanticLayoutIsFalse :
+      timeRailMayChangeSemanticLayout ≡ false
+
+canonicalSemanticFilmTimeRailBoundary :
+  SemanticFilmTimeRailBoundary
+canonicalSemanticFilmTimeRailBoundary =
+  semanticFilmTimeRailBoundary
+    false refl
+    true refl
+    false refl
