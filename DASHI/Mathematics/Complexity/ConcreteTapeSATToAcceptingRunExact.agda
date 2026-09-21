@@ -31,6 +31,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact as Trace
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionSemanticScanExact as Scan
 import DASHI.Mathematics.Complexity.ConcreteTapeDecodedRunInductionExact as RunInduction
+import DASHI.Mathematics.Complexity.ConcreteTapeDecodedRunLengthExact as RunLength
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalFormulaSemanticsExact as FormulaSem
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as GlobalCNF
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
@@ -305,6 +306,9 @@ record SatisfyingAssignmentAcceptingRun
         rows
         finish
 
+    exactLength :
+      Accepting.acceptingRunLength certificate ≡ steps
+
 open SatisfyingAssignmentAcceptingRun public
 
 satisfyingCookLevinAssignmentToAcceptingRun :
@@ -335,14 +339,8 @@ satisfyingCookLevinAssignmentToAcceptingRun
   record
     { rows = RunInduction.rows runResult
     ; finish = RunInduction.finish runResult
-    ; certificate = record
-        { Accepting.initial = guardedInitialIsInitial
-        ; Accepting.run =
-            RunInduction.transportRunStart
-              (sym startEq)
-              (RunInduction.run runResult)
-        ; Accepting.accepting = acceptingFinish
-        }
+    ; certificate = certificateExact
+    ; exactLength = certificateExactLength
     }
   where
     cols = Guard.guardedInitialCols input steps
@@ -447,6 +445,33 @@ satisfyingCookLevinAssignmentToAcceptingRun
       { Accepting.interior = finalInterior
       ; Accepting.headIsAccepting = acceptingStateEq
       }
+
+    certificateExact :
+      Accepting.AcceptingWellFormedRun
+        machine
+        (Guard.guardedInitialRow input steps)
+        (RunInduction.rows runResult)
+        (RunInduction.finish runResult)
+    certificateExact = record
+      { Accepting.initial = guardedInitialIsInitial
+      ; Accepting.run =
+          RunInduction.transportRunStart
+            (sym startEq)
+            (RunInduction.run runResult)
+      ; Accepting.accepting = acceptingFinish
+      }
+
+    certificateExactLength :
+      Accepting.acceptingRunLength certificateExact ≡ steps
+    certificateExactLength =
+      trans
+        (RunLength.transportRunStart_length
+          (sym startEq)
+          (RunInduction.run runResult))
+        (RunLength.decodedAllSlotsRun_length
+          stateCoverage symbolCoverage nonempty
+          steps baseBits allSemantic
+          startUnique startMargin)
 
     guardedInitialIsInitial :
       Accepting.InitialInteriorRow
