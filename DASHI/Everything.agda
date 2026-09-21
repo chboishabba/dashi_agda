@@ -111,6 +111,12 @@ import DASHI.Biology.AnimalSenseObservationThreadDischarge
 import DASHI.Biology.AnimalexicAnimalUtteranceSurface
 import DASHI.Biology.AvianCompassSurface
 import DASHI.Biology.AvianCompassExamples
+import DASHI.Biology.MagnetoreceptionSurface
+import DASHI.Biology.AvianCryptochromeMagnetoreceptionInhabitant
+import DASHI.Biology.AvianHepaticMacrophageMagnetoreception
+import DASHI.Biology.AvianMagnetoreceptionCueFusion
+import DASHI.Biology.AvianMagnetoreceptionCrossScaleBridge
+import DASHI.Biology.AvianMagnetoreceptionHardProblemResidualV2
 import DASHI.Biology.AvianHardProblemResidual
 import DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary
 import DASHI.Biology.AvianRFOverlayManipulationReceipt
