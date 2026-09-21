@@ -133,3 +133,75 @@ new corpus != new parser
 parser observation != reviewed extraction
 reviewed extraction != SourceAuditAdmission
 ```
+
+
+## Corpus-scale execution
+
+The single-run controller above is useful for a smoke test. For the real retained
+study corpus use the resumable sharded runner:
+
+```bash
+python3 interop_scripts/digital_esd/run_study_parse_corpus.py \
+  --repo-root . \
+  --fulltext-index artifacts/digital-esd/fulltext/verified-fulltext-index.jsonl \
+  --out-dir artifacts/digital-esd/study-parse/retained-corpus-v1 \
+  --purpose retained-study \
+  --shard-size 128 \
+  --jobs 1
+```
+
+Before launching the full corpus, run a bounded receipt-producing smoke test:
+
+```bash
+python3 interop_scripts/digital_esd/run_study_parse_corpus.py \
+  --repo-root . \
+  --fulltext-index artifacts/digital-esd/fulltext/verified-fulltext-index.jsonl \
+  --out-dir artifacts/digital-esd/study-parse/smoke \
+  --purpose retained-study \
+  --shard-size 8 \
+  --jobs 1 \
+  --max-source-units 8
+```
+
+The corpus runner sorts source-unit identity deterministically, writes exact
+shard JSONL inputs, executes the existing generic SLR parser independently per
+shard, compiles candidate extraction packets, verifies parser-manifest and
+packet counts, then aggregates the packets.
+
+A shard is considered resumable only when its input hash and all recorded
+output hashes still match its prior shard receipt. Changed or incomplete
+outputs are recomputed.
+
+The top-level receipt is:
+
+`study-parse-corpus-manifest.json`
+
+and records:
+
+```text
+verified full-text index hash
+prepared source-unit hash
+source-unit count
+shard count
+parsed source count
+retained-study packet count
+screening-resolution packet count
+aggregate packet hashes
+all_source_units_parsed_exactly_once
+```
+
+The formal receipt owners are:
+
+```text
+DASHI/Education/DigitalESDStudyParseExecutionExact.agda
+DASHI/Education/DigitalESDStudyParseExecutionRegression.agda
+```
+
+A complete corpus parse is still **not** a reviewed or admitted corpus:
+
+```text
+parsed study
+!= reviewed extraction
+!= SourceAuditAdmission
+!= CorpusAuditedSource
+```
