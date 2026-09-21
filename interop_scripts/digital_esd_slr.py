@@ -655,6 +655,21 @@ def cmd_run_scholarly(args: argparse.Namespace) -> int:
             f"SLR scholarly parser config not found at {parser_config}"
         )
 
+    request_rows = read_jsonl(requests)
+    binary_artifacts = [
+        str(row.get("artifact_path") or row.get("artifact_reference") or "")
+        for row in request_rows
+        if Path(str(row.get("artifact_path") or row.get("artifact_reference") or "")).suffix.lower()
+        in {".pdf", ".docx"}
+    ]
+    if binary_artifacts and not args.allow_binary_prototype:
+        raise RuntimeError(
+            "raw PDF/DOCX scholarly parsing is not yet trusted in the current "
+            "SLR prototype; provide pre-extracted text/HTML or pass "
+            "--allow-binary-prototype explicitly. First examples: "
+            + ", ".join(binary_artifacts[:5])
+        )
+
     parser_output = args.output_dir / "parser-output.jsonl"
     argv = [
         sys.executable,
@@ -856,6 +871,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_scholarly.add_argument("--slr-root", required=True, type=Path)
     run_scholarly.add_argument("--slr-revision-reference", required=True)
     run_scholarly.add_argument("--parser-config", type=Path)
+    run_scholarly.add_argument("--allow-binary-prototype", action="store_true")
     run_scholarly.add_argument("--output-dir", required=True, type=Path)
     run_scholarly.set_defaults(func=cmd_run_scholarly)
 
