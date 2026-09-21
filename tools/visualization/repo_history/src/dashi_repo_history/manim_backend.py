@@ -17,6 +17,7 @@ from manim import (
     FadeOut,
     GrowFromCenter,
     Indicate,
+    Line,
     MovingCameraScene,
     ReplacementTransform,
     Text,
@@ -25,6 +26,7 @@ from manim import (
     VGroup,
 )
 
+from dashi_repo_history.history_axis import temporal_history_layout
 from dashi_repo_history.identity import supported_transfers
 from dashi_repo_history.layout import PersistentLayout
 from dashi_repo_history.merge_attribution import attribute_merge
@@ -38,49 +40,36 @@ from dashi_repo_history.scene_program import (
 )
 
 
-def _history_layout(commits: list[dict[str, Any]]) -> dict[str, list[float]]:
-    """Deterministic left-to-right lane layout preserving forks and merges."""
+def _history_axis_mobject(layout_data):
+    if not layout_data.positions or not layout_data.ticks:
+        return VGroup()
 
-    children: dict[str, list[str]] = {}
-    by_sha = {c["commit"]: c for c in commits}
-    for commit in commits:
-        for parent in commit["parents"]:
-            if parent in by_sha:
-                children.setdefault(parent, []).append(commit["commit"])
+    xs = [position[0] for position in layout_data.positions.values()]
+    axis_x = min(xs) - 1.15
+    ys = [tick.y for tick in layout_data.ticks]
+    axis = Line(
+        [axis_x, min(ys), 0.0],
+        [axis_x, max(ys), 0.0],
+    )
 
-    lane: dict[str, int] = {}
-    next_lane = 1
-    positions: dict[str, list[float]] = {}
+    parts = [axis]
+    for tick in layout_data.ticks:
+        mark = Line(
+            [axis_x - 0.08, tick.y, 0.0],
+            [axis_x + 0.08, tick.y, 0.0],
+        )
+        label = Text(
+            tick.label,
+            font_size=13,
+        ).next_to(mark, LEFT, buff=0.08)
+        parts.extend([mark, label])
 
-    for index, commit in enumerate(commits):
-        sha = commit["commit"]
-        parents = [p for p in commit["parents"] if p in lane]
-        if not parents:
-            current_lane = 0
-        else:
-            primary = parents[0]
-            current_lane = lane[primary]
-
-            siblings = children.get(primary, [])
-            if len(siblings) > 1 and siblings.index(sha) > 0:
-                current_lane = next_lane
-                next_lane += 1
-
-            # Merge nodes return to the first-parent lane.  The other parent
-            # edges visibly converge onto that lane.
-            if len(parents) > 1:
-                current_lane = lane[parents[0]]
-
-        lane[sha] = current_lane
-        positions[sha] = [index * 0.55, -current_lane * 0.75, 0.0]
-
-    if positions:
-        xs = [p[0] for p in positions.values()]
-        centre = (min(xs) + max(xs)) / 2
-        for value in positions.values():
-            value[0] -= centre
-
-    return positions
+    caption = Text(
+        "date (UTC)",
+        font_size=13,
+    ).next_to(axis, UP, buff=0.12)
+    parts.append(caption)
+    return VGroup(*parts)
 
 
 def _visual_edge_projection(
@@ -178,7 +167,12 @@ def _first_parent_lineage(
 class HistoryGraphView:
     def __init__(self, commits: list[dict[str, Any]]) -> None:
         self.commits = commits
-        self.positions = _history_layout(commits)
+        self.temporal_layout = temporal_history_layout(commits)
+        self.positions = {
+            sha: list(position)
+            for sha, position in self.temporal_layout.positions.items()
+        }
+        self.axis = _history_axis_mobject(self.temporal_layout)
         self.graph = DiGraph([], [], layout={})
 
     def add_commit(self, scene: MovingCameraScene, commit: dict[str, Any]) -> None:
@@ -815,14 +809,17 @@ class RepositoryHistoryScene(MovingCameraScene):
 
         history = HistoryGraphView(commits)
         self.add(history.graph)
+        if len(history.axis) > 0:
+            self.play(FadeIn(history.axis), run_time=0.5)
 
         for commit in commits:
             history.add_commit(self, commit)
 
         if commits and history.graph.width > 0:
+            framed = VGroup(history.graph, history.axis)
             self.play(
-                self.camera.frame.animate.move_to(history.graph).set(
-                    width=max(12, history.graph.width + 1.5)
+                self.camera.frame.animate.move_to(framed).set(
+                    width=max(12, framed.width + 1.5)
                 ),
                 run_time=1.0,
             )
