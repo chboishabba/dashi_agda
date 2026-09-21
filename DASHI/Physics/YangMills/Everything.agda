@@ -340,3 +340,5 @@ import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Rou
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralACompletionRound424Exact
 
 import DASHI.Physics.YangMills.BalabanCMP116LiteralBCompletionRound425Exact
+
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralBRealCompletionRound426Exact
