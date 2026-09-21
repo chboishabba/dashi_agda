@@ -504,3 +504,46 @@ Until the profile gate says otherwise, the recommended implementation remains
 the Python affected-module backend because Tree-sitter parsing is already
 native-backed, the graph sizes presented to Manim are bounded, history storage
 is delta-native, and resolution impact is incrementally indexed.
+
+
+## Shortest-path real Manim MP4
+
+For a render that deliberately bypasses Tree-sitter and the semantic extractor
+entirely, use the standalone smoke scene:
+
+```bash
+cd dashi_agda
+
+bash tools/visualization/repo_history/scripts/render_manim_history_smoke.sh \
+  . \
+  /tmp/dashi-history-smoke.json \
+  -ql
+```
+
+That command:
+
+```text
+git first-parent history
+    -> minimal dashi.repo-history.v1 JSON
+    -> examples/manim_history_smoke.py
+    -> python -m manim
+    -> MP4
+```
+
+The smoke scene is intentionally useful even when the semantic extractor is
+under development. It uses actual commit timestamps for vertical position,
+horizontal branch lanes, and a labelled UTC time axis.
+
+For the full semantic renderer use:
+
+```bash
+dashi-repo-history extract . \
+  --ref HEAD \
+  --max-commits 120 \
+  --compact \
+  -o /tmp/dashi-semantic-history.json
+
+dashi-repo-history render /tmp/dashi-semantic-history.json \
+  --scene semantic-history \
+  --quality -ql
+```
