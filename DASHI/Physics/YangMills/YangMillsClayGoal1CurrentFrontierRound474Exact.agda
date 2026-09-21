@@ -54,6 +54,10 @@ a2ShellToEveryPartialSumCompilerLevel : ProofLevel
 a2ShellToEveryPartialSumCompilerLevel =
   A2.a2ShellIdentityToPartialSumCompilerLevel
 
+a2ShellToCanonicalGammaCompilerLevel : ProofLevel
+a2ShellToCanonicalGammaCompilerLevel =
+  A2.a2ShellIdentityToCanonicalGammaCompilerLevel
+
 a3SameFamilyContinuumAndOSLevel : ProofLevel
 a3SameFamilyContinuumAndOSLevel =
   A3.literalRound457SourceNativeContinuumOSLevel
