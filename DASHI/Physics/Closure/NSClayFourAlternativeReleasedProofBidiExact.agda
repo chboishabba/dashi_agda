@@ -226,8 +226,17 @@ data FourAlternativeResidual4 : Set where
   missingUnforcedPeriodicLeafB4 : FourAlternativeResidual4
   missingUnforcedEuclideanLeafA4 : FourAlternativeResidual4
 
+-- Historical reconstruction scheduler retained for compatibility only.
+-- It is not the Clay-facing mathematical frontier once the released C/D
+-- source proof has been audited against the official coordinates.
 firstReleasedIntegrationResidual4 : FourAlternativeResidual4
 firstReleasedIntegrationResidual4 = missingReleasedFieldToDASHIFourier4
+
+releasedIntegrationResidualIsClayFacingResearchPriority4 : Bool
+releasedIntegrationResidualIsClayFacingResearchPriority4 = false
+
+releasedCDIndependentDASHIIntegrationIsOptionalVerification4 : Bool
+releasedCDIndependentDASHIIntegrationIsOptionalVerification4 = true
 
 -- If the goal is independent unforced NS mathematics rather than integrating
 -- the released C/D proof, the old A/B leaves remain separately open.
