@@ -90,6 +90,7 @@ import DASHI.Biology.LogPolarRetinotopyBridge
 import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact
 import DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact
 import DASHI.Biology.Kluver5HT2ACrossScaleHyperfibreExact
+import DASHI.Biology.Kluver5HT2AMolecularProteinInstantiationExact
 import DASHI.Biology.VisualMotifTransitionOperator
 import DASHI.Biology.PostAcuteVisualAdaptation
 import DASHI.Biology.HallOfHallsCoalition
