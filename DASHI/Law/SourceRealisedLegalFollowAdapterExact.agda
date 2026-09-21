@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Maybe using (Maybe; just; nothing)
 
 import DASHI.Law.GenericReviewedDeltaCampaignKernelExact as Kernel
 
