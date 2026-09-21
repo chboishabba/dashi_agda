@@ -547,3 +547,180 @@ dashi-repo-history render /tmp/dashi-semantic-history.json \
   --scene semantic-history \
   --quality -ql
 ```
+
+## Directed research film — YouTube workflow
+
+The release-oriented scene is `research-film`. It is not a Git-dot movie.
+The director combines:
+
+```text
+Git commits / real parent topology / optional PR metadata
+                         +
+Tree-sitter Agda declarations, variables, binders and relations
+                         +
+parent-relative semantic change
+                         |
+                         v
+                 ActiveWorkingSet
+                         |
+           programme / lane / topic
+                         |
+                         v
+                  SemanticEpisode
+                         |
+            bounded programme memory
+                         |
+                         v
+        persistent semantic programme atlas
+                         |
+             camera + editorial beats
+                         |
+                         v
+             ResearchEvolutionScene
+                         |
+                       Manim
+```
+
+### Recommended one-command render
+
+From the repository root, after installing the visualizer package:
+
+```bash
+python -m pip install -e tools/visualization/repo_history
+
+bash tools/visualization/repo_history/scripts/render_research_film.sh .
+```
+
+Defaults:
+
+```text
+history window            500 commits
+history root              HEAD
+branch episode closure    enabled
+compact semantic history  enabled
+parity sample             every 25 incremental steps
+film context              40 nodes / 100 edges per working set
+programme memory          28 remembered landmark nodes
+Manim quality             -qm
+```
+
+Override from the shell, for example:
+
+```bash
+DASHI_FILM_COMMITS=1200 \
+DASHI_FILM_QUALITY=-qh \
+DASHI_FILM_GITHUB_REPO=chboishabba/dashi_agda \
+bash tools/visualization/repo_history/scripts/render_research_film.sh .
+```
+
+`DASHI_FILM_GITHUB_REPO` is optional and uses the authenticated `gh` CLI to
+add PR titles/head/base/merge metadata. PR metadata annotates the film; it never
+changes semantic dependency authority.
+
+### Inspect before spending render time
+
+The render script automatically prints the plan first. It can also be inspected
+independently:
+
+```bash
+dashi-repo-history film /tmp/dashi-research-film-history.json
+```
+
+or including every director/camera beat:
+
+```bash
+dashi-repo-history film /tmp/dashi-research-film-history.json --beats
+```
+
+Typical output is intentionally human-auditable:
+
+```text
+NavierStokes · Lane B RETURN
+  NavierStokes · Lane B · R571PreferredFixedOutput → FixedOutputShellPayment
+  changed: R571PreferredFixedOutput[function], ...
+  camera=return-to-existing-programme
+
+RiemannHypothesis
+  RiemannHypothesis · GammaDeficit → SmoothNormalizedWindow
+  camera=active-semantic-working-set
+```
+
+This is the fastest place to catch a bad programme/topic classification before
+rendering.
+
+### What the release scene does
+
+**Stable research geography.** Programmes occupy persistent atlas regions.
+Local theorem geometry is archived even while a programme is dormant. If later
+commits return to an old theorem or neighbourhood, it reappears in the same
+semantic territory and the camera travels back to it.
+
+**Active-set camera.** Camera bounds are computed from the changed semantic
+objects plus bounded explanatory context, not from the whole repository. It
+automatically pans and zooms to fit the active proof region. Small layout
+changes are suppressed by camera hysteresis.
+
+**Bounded visual memory.** The scene does not monotonically accumulate every
+symbol ever seen. Each programme retains a bounded set of recent/important
+landmarks while the semantic atlas retains hidden historical positions.
+
+**Exact formal context.** The HUD shows programme, inferred lane when present,
+module, changed declarations, commit date/SHA, and commit subject. Nodes are
+real Tree-sitter-derived Agda functions/theorems/variables/binders/etc.; edges
+remain typed semantic relations such as `calls`, `constructs`,
+`type-depends`, `argument-to`, and `binds`.
+
+**Time.** Semantic X/Y coordinates remain semantic geography. Chronology is
+shown on a persistent vertical HUD rail plus the exact commit date, avoiding
+the ambiguous use of one axis for both proof structure and time.
+
+**Cross-programme work.** A commit changing multiple programmes gets a temporary
+overview beat spanning all active regions before the director moves into the
+individual proof neighbourhoods.
+
+**Branches and PRs.** Fork/merge and PR events are timeline annotations. They
+remain visible even when the exact Git event commit has no fresh semantic delta;
+nearby branch-tip semantic working sets supply presentation context without
+inventing graph relations.
+
+### Direct commands
+
+Extract:
+
+```bash
+dashi-repo-history extract . \
+  --ref HEAD \
+  --max-commits 500 \
+  --episode-context \
+  --compact \
+  --checkpoint-interval 50 \
+  --github-prs chboishabba/dashi_agda \
+  -o /tmp/dashi-film.json
+```
+
+Inspect:
+
+```bash
+dashi-repo-history film /tmp/dashi-film.json --beats
+```
+
+Render:
+
+```bash
+dashi-repo-history render /tmp/dashi-film.json \
+  --scene research-film \
+  --film-context-nodes 40 \
+  --film-context-edges 100 \
+  --programme-memory-nodes 28 \
+  --quality -qh
+```
+
+The resulting film is intended to answer, from the animation itself:
+
+1. which research programme is active;
+2. what sub-lane/topic is being worked on;
+3. which exact declarations/variables changed;
+4. what semantic neighbourhood explains the work;
+5. whether this is new work or a return to an older region;
+6. when it happened;
+7. how branch/PR events relate to the formal changes.
