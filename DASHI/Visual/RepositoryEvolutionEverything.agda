@@ -18,6 +18,7 @@ open import DASHI.Visual.RootedSemanticFocusExact
 open import DASHI.Visual.TemporalRootedFocusExact
 open import DASHI.Visual.EpisodeSalienceExact
 open import DASHI.Visual.TraversalBudgetExact
+open import DASHI.Visual.LayoutComplexityBoundaryExact
 open import DASHI.Visual.TemporalAxisExact
 
 ------------------------------------------------------------------------
