@@ -27,6 +27,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coo
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
 import DASHI.Mathematics.Complexity.ConcreteTapeFlatAssignmentExact as Flat
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact as Trace
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact as Slice
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
@@ -124,6 +126,49 @@ encodeRunRows {machine} {start = current}
           (Trace.RowsTraceWidth machine (Run.runLength rest))
           (sym (stepCanonicalLength step)))
         tailRaw
+
+
+finalRunRowSlot :
+  ∀ {machine start rows finish}
+    (run : Run.WellFormedTapeRun machine start rows finish) →
+  Global.Slot (Run.runLength run) (suc (Run.runLength run))
+finalRunRowSlot Run.runDone =
+  Global.here
+finalRunRowSlot (Run.runStep step rest) =
+  Global.there (finalRunRowSlot rest)
+
+encodeRunRows_finalBlock :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (run : Run.WellFormedTapeRun machine start rows finish) →
+  Slice.blockSliceBits
+    (finalRunRowSlot run)
+    (encodeRunRows stateCoverage symbolCoverage run)
+  ≡ Flat.encodeRow stateCoverage symbolCoverage finish
+encodeRunRows_finalBlock
+    stateCoverage symbolCoverage Run.runDone =
+  takeAll
+    (Flat.encodeRow stateCoverage symbolCoverage _)
+  where
+    takeAll :
+      ∀ {n} (bits : CNF.Bits n) →
+      Canonical.takeBits n bits ≡ bits
+    takeAll CNF.[]ᵇ = refl
+    takeAll (bit CNF.∷ᵇ bits)
+      rewrite takeAll bits =
+      refl
+encodeRunRows_finalBlock {machine} {start = current}
+    stateCoverage symbolCoverage
+    (Run.runStep {next = next} step rest)
+    rewrite stepCanonicalLength step
+          | Canonical.dropAppendBits
+              (Flat.encodeRow stateCoverage symbolCoverage current)
+              (encodeRunRows stateCoverage symbolCoverage rest) =
+  encodeRunRows_finalBlock
+    stateCoverage symbolCoverage rest
 
 ------------------------------------------------------------------------
 -- One canonical shared selector per actual transition
