@@ -13,7 +13,7 @@ import DASHI.Education.DigitalESDStudyProcessingCensusExact as Census
 -- VERIFIED FULL TEXT -> SLR PARSER HANDOFF
 --
 -- Runtime owner:
---   interop_scripts/digital_esd_slr.py
+--   interop_scripts/digital_esd/run_verified_fulltext_parse.py
 --
 -- This module does not model the parser's internals.  It formalises only the
 -- application-side same-object boundary:
@@ -337,8 +337,6 @@ open FullTextSLRParseBoundary public
 canonicalFullTextSLRParseBoundary : FullTextSLRParseBoundary
 canonicalFullTextSLRParseBoundary =
   fulltext-slr-parse-boundary
-    true refl
-    true refl
     true refl
     true refl
     true refl
