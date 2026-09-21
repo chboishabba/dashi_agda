@@ -1009,6 +1009,8 @@ def extract_file(path: str, source: bytes) -> FileExtraction:
 
 def build_semantic_graph(
     files: Iterable[FileExtraction],
+    *,
+    include_modules: set[str] | None = None,
 ) -> SemanticGraph:
     files = list(files)
     graph = SemanticGraph()
@@ -1022,9 +1024,16 @@ def build_semantic_graph(
         modules[file.module] = file.module_symbol
         imports_by_module[file.module] = file.imports
         open_scopes_by_module[file.module] = file.open_scopes
-        graph.nodes[file.module_symbol.symbol_id] = file.module_symbol
+        if include_modules is None or file.module in include_modules:
+            graph.nodes[file.module_symbol.symbol_id] = file.module_symbol
         declarations.extend(file.declarations)
-        if file.parse_error:
+        if (
+            file.parse_error
+            and (
+                include_modules is None
+                or file.module in include_modules
+            )
+        ):
             graph.parse_error_files.append(file.path)
 
     by_module_label: dict[tuple[str, str], Symbol] = {}
@@ -1032,7 +1041,11 @@ def build_semantic_graph(
 
     for declaration in declarations:
         symbol = declaration.symbol
-        graph.nodes[symbol.symbol_id] = symbol
+        if (
+            include_modules is None
+            or symbol.module in include_modules
+        ):
+            graph.nodes[symbol.symbol_id] = symbol
         if symbol.scope is None:
             by_module_label[(symbol.module, symbol.label)] = symbol
         else:
@@ -1044,6 +1057,11 @@ def build_semantic_graph(
     # A known constructor is a pattern dependency; otherwise the bare name is a
     # local binder in that clause scope.
     for declaration in declarations:
+        if (
+            include_modules is not None
+            and declaration.symbol.module not in include_modules
+        ):
+            continue
         for candidate in declaration.pattern_candidates:
             target = _resolve_reference(
                 ref=candidate.value,
@@ -1081,6 +1099,11 @@ def build_semantic_graph(
 
     for declaration in declarations:
         symbol = declaration.symbol
+        if (
+            include_modules is not None
+            and symbol.module not in include_modules
+        ):
+            continue
         module_symbol = modules[symbol.module]
 
         contains = Relation(
@@ -1171,6 +1194,8 @@ def build_semantic_graph(
             ).append(binder)
 
     for module, imported_modules in imports_by_module.items():
+        if include_modules is not None and module not in include_modules:
+            continue
         consumer = modules[module]
         for imported in imported_modules:
             producer = modules.get(imported)
@@ -1185,6 +1210,8 @@ def build_semantic_graph(
             graph.edges[relation.relation_id] = relation
 
     for module, open_scopes in open_scopes_by_module.items():
+        if include_modules is not None and module not in include_modules:
+            continue
         consumer = modules[module]
         for scope in open_scopes:
             producer = modules.get(scope.module)
@@ -1200,6 +1227,11 @@ def build_semantic_graph(
 
     for declaration in declarations:
         owner = declaration.symbol
+        if (
+            include_modules is not None
+            and owner.module not in include_modules
+        ):
+            continue
 
         for ref in declaration.references:
             leaf = ref.value.split(".")[-1]
