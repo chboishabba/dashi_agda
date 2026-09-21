@@ -182,3 +182,5 @@ import DASHI.Education.DigitalESDStudyParseInteropExact
 import DASHI.Education.DigitalESDStudyParseInteropRegression
 import DASHI.Education.DigitalESDStudyParseExecutionExact
 import DASHI.Education.DigitalESDStudyParseExecutionRegression
+import DASHI.Education.DigitalESDFirstRetainedStudyParseExact
+import DASHI.Education.DigitalESDFirstRetainedStudyParseRegression
