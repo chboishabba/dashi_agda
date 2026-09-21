@@ -199,3 +199,9 @@ import DASHI.Law.ReaderVisualisationPickParityExact
 import DASHI.Law.ReaderVisualisationPickParityRegression
 import DASHI.Law.LegalWorldBoundMatterRuntimeExact
 import DASHI.Law.LegalWorldBoundMatterRuntimeRegression
+import DASHI.Law.ClosedIsNotAdequateExact
+import DASHI.Law.ClosedIsNotAdequateRegression
+import DASHI.Law.MaboRevisionReopenExact
+import DASHI.Law.MaboRevisionReopenRegression
+import DASHI.Law.RevisionReReviewPropagationExact
+import DASHI.Law.RevisionReReviewPropagationRegression
