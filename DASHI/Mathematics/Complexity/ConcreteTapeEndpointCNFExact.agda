@@ -342,15 +342,17 @@ allWitnessPositiveLiterals literal [] = []
 allWitnessPositiveLiterals literal (i ∷ rest) =
   literal i ∷ allWitnessPositiveLiterals literal rest
 
+mapFinSuc :
+  ∀ {m} → List (Fin.Fin m) → List (Fin.Fin (suc m))
+mapFinSuc [] = []
+mapFinSuc (i ∷ rest) =
+  Fin.suc i ∷ mapFinSuc rest
+
 finList :
   (n : Nat) → List (Fin.Fin n)
 finList zero = []
 finList (suc n) =
-  Fin.zero ∷ mapSuc (finList n)
-  where
-    mapSuc : ∀ {m} → List (Fin.Fin m) → List (Fin.Fin (suc m))
-    mapSuc [] = []
-    mapSuc (i ∷ rest) = Fin.suc i ∷ mapSuc rest
+  Fin.zero ∷ mapFinSuc (finList n)
 
 someAcceptanceWitnessClause :
   ∀ {machine steps cols} →
