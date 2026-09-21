@@ -562,6 +562,20 @@ def compile_research_film(
 
     beats: list[FilmBeat] = []
     previous_programme: str | None = None
+    prs_by_merge = {
+        pr.get("merge_commit"): pr
+        for pr in timeline.get("pull_requests", [])
+        if pr.get("merge_commit")
+    }
+    forks_by_commit: dict[str, list[dict[str, Any]]] = {}
+    merges_by_commit: dict[str, list[dict[str, Any]]] = {}
+    for branch_episode in timeline.get("branch_episodes", []):
+        forks_by_commit.setdefault(
+            branch_episode["fork_base"], []
+        ).append(branch_episode)
+        merges_by_commit.setdefault(
+            branch_episode["merge_commit"], []
+        ).append(branch_episode)
 
     for episode in episodes:
         first_commit = episode.commits[0]
@@ -612,6 +626,31 @@ def compile_research_film(
                 for item in working_sets
                 if item.commit == commit
             )
+
+            for branch_episode in forks_by_commit.get(commit, []):
+                beats.append(
+                    FilmBeat(
+                        kind="branch-fork",
+                        commit=commit,
+                        programme=working.programme,
+                        topic="branch split",
+                        duration_seconds=0.45,
+                        focus_node_ids=working.focus_node_ids,
+                        focus_edge_ids=working.focus_edge_ids,
+                        camera=CameraDirective(
+                            programme=working.programme,
+                            focus_node_ids=working.focus_node_ids,
+                            mode="fit-active",
+                            padding=1.25,
+                            min_width=7.0,
+                            max_width=22.0,
+                            transition_seconds=0.55,
+                            reason="branch-fork-context",
+                        ),
+                        payload=dict(branch_episode),
+                    )
+                )
+
             beats.append(
                 FilmBeat(
                     kind="semantic-change",
@@ -646,6 +685,58 @@ def compile_research_film(
                     },
                 )
             )
+
+            pr = prs_by_merge.get(commit)
+            if pr is not None:
+                beats.append(
+                    FilmBeat(
+                        kind="pr-merge",
+                        commit=commit,
+                        programme=working.programme,
+                        topic=(
+                            f"PR #{pr.get('number')} · "
+                            f"{pr.get('title', '')}"
+                        ),
+                        duration_seconds=0.75,
+                        focus_node_ids=working.focus_node_ids,
+                        focus_edge_ids=working.focus_edge_ids,
+                        camera=CameraDirective(
+                            programme=working.programme,
+                            focus_node_ids=working.focus_node_ids,
+                            mode="fit-active",
+                            padding=1.22,
+                            min_width=7.0,
+                            max_width=22.0,
+                            transition_seconds=0.40,
+                            reason="pull-request-merge",
+                        ),
+                        payload=dict(pr),
+                    )
+                )
+
+            for branch_episode in merges_by_commit.get(commit, []):
+                beats.append(
+                    FilmBeat(
+                        kind="branch-merge",
+                        commit=commit,
+                        programme=working.programme,
+                        topic="branch merge",
+                        duration_seconds=0.55,
+                        focus_node_ids=working.focus_node_ids,
+                        focus_edge_ids=working.focus_edge_ids,
+                        camera=CameraDirective(
+                            programme=working.programme,
+                            focus_node_ids=working.focus_node_ids,
+                            mode="fit-active",
+                            padding=1.28,
+                            min_width=7.0,
+                            max_width=24.0,
+                            transition_seconds=0.50,
+                            reason="branch-merge-context",
+                        ),
+                        payload=dict(branch_episode),
+                    )
+                )
 
         previous_programme = episode.programme
 
