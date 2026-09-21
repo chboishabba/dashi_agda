@@ -396,6 +396,19 @@ The relevant current branches are:
 - \(\texttt{dashi\_agda}\): \(\texttt{agent/ns-clay-b-canonical-critical-endgame}\);
 - \(\texttt{dashi\_lean4}\): \(\texttt{agent/ns-a-euclidean-cubature-boundary-defect}\).
 
+The present proof-critical provenance coordinates are:
+
+- A two-seam compiler: \(\texttt{NSClayFacingATwoPhysicalSeamCompilerExact.agda}\);
+- A physical same-object cut: \(\texttt{NSClayFacingAPhysicalSameObjectCutExact.agda}\);
+- B1 literal shell payment: \(\texttt{NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact.agda}\);
+- B2 DFL--DHH payment: \(\texttt{NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact.agda}\);
+- B3 DHH aggregation: \(\texttt{NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact.agda}\);
+- B4 strict critical operator interface: \(\texttt{NSTriadKNFixedOutputPhysicalCriticalTouchingRelativeCovarianceExact.agda}\);
+- B1--B4 analytic assembly: \(\texttt{NSTriadKNFixedOutputPhysicalCriticalRegionAnalyticAssemblyExact.agda}\);
+- cutoff-uniform family compiler: \(\texttt{NSTriadKNPhysicalCriticalRegionUniformFamilyProducerExact.agda}\);
+- B7 global R406 decomposition: \(\texttt{NSTriadKNPhysicalCriticalRegionR406DecompositionExact.agda}\);
+- C/D independent Clay surface and referee audit: \(\texttt{ExternalClayNS/SubmissionSurface.lean}\), \(\texttt{ExternalClayNS/ProvenanceAudit.lean}\), and \(\texttt{ExternalClayNS/SUBMISSION_AUDIT.md}\).
+
 Submission artifacts should record exact commit hashes and observed build/axiom receipts. Source-written code without a fresh build receipt is not described as freshly kernel-verified.
 
 ## 12. Conclusion
