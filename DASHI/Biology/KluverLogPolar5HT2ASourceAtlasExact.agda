@@ -21,6 +21,95 @@ import DASHI.Core.AttributedSourceCore as Source
 -- not authorize stronger mechanistic or phenomenological claims.
 ------------------------------------------------------------------------
 
+
+pubChemSerotonin : Source.AttributedSource
+pubChemSerotonin =
+  Source.mkNoDOISource
+    "PubChem"
+    "Serotonin"
+    "PubChem CID 5202"
+    "current database record"
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5202"
+    Source.institutionalSource
+    "Pays molecular identity coordinates for serotonin/5-hydroxytryptamine, including CID 5202 and molecular formula C10H12N2O; it does not establish receptor mechanism or psychedelic phenomenology."
+    Source.publicAttribution
+
+pubChemLSD : Source.AttributedSource
+pubChemLSD =
+  Source.mkNoDOISource
+    "PubChem"
+    "Lysergic acid diethylamide"
+    "PubChem CID 5761"
+    "current database record"
+    "https://pubchem.ncbi.nlm.nih.gov/compound/5761"
+    Source.institutionalSource
+    "Pays molecular identity coordinates for LSD/lysergide, including CID 5761 and molecular formula C20H25N3O; it does not establish receptor selectivity, dose-response, or subjective effect."
+    Source.publicAttribution
+
+pubChemKetanserin : Source.AttributedSource
+pubChemKetanserin =
+  Source.mkNoDOISource
+    "PubChem"
+    "Ketanserin"
+    "PubChem CID 3822"
+    "current database record"
+    "https://pubchem.ncbi.nlm.nih.gov/compound/3822"
+    Source.institutionalSource
+    "Pays molecular identity coordinates for ketanserin, including CID 3822 and molecular formula C22H22FN3O3; pharmacological interpretation remains separately source-bound."
+    Source.publicAttribution
+
+wackerEtAl2017 : Source.AttributedSource
+wackerEtAl2017 =
+  Source.mkDOISource
+    "Daniel Wacker; Sheng Wang; John D. McCorvy; Robin M. Betz; A. J. Venkatakrishnan; Anat Levit; Katherine Lansu; Zachary L. Schools; Tao Che; David E. Nichols; Brian K. Shoichet; Ron O. Dror; Bryan L. Roth"
+    "Crystal Structure of an LSD-Bound Human Serotonin Receptor"
+    "Cell 168(3):377-389.e12"
+    "2017"
+    "10.1016/j.cell.2016.12.033"
+    "https://doi.org/10.1016/j.cell.2016.12.033"
+    Source.academicArticleSource
+    "Pays an LSD-bound 5-HT2B crystal structure plus slow LSD dissociation and kinetic/signaling observations involving 5-HT2A; it must not be misattributed as a 5-HT2A crystal structure."
+    Source.publicAttribution
+
+kimEtAl2020 : Source.AttributedSource
+kimEtAl2020 =
+  Source.mkDOISource
+    "Kyungsoo Kim; Tao Che; Ouliana Panova; Jeffrey F. DiBerto; Jiankun Lyu; Brian E. Krumm; Daniel Wacker; Michael J. Robertson; Anne B. Seven; David E. Nichols; Brian K. Shoichet; Georgios Skiniotis; Bryan L. Roth"
+    "Structure of a Hallucinogen-Activated Gq-Coupled 5-HT2A Serotonin Receptor"
+    "Cell 182(6):1574-1588.e19"
+    "2020"
+    "10.1016/j.cell.2020.08.024"
+    "https://doi.org/10.1016/j.cell.2020.08.024"
+    Source.academicArticleSource
+    "Pays direct structural evidence for hallucinogen-activated human 5-HT2A receptor states, including a 5-HT2A/LSD structural result and Gq-coupled receptor-state context; it does not by itself determine systems-level phenomenology."
+    Source.publicAttribution
+
+gumpperEtAl2025 : Source.AttributedSource
+gumpperEtAl2025 =
+  Source.mkDOISource
+    "Ryan H. Gumpper; John F. Fay; Bryan L. Roth; and collaborators"
+    "The structural diversity of psychedelic drug actions revealed"
+    "Nature Communications"
+    "2025"
+    "10.1038/s41467-025-57956-7"
+    "https://doi.org/10.1038/s41467-025-57956-7"
+    Source.academicArticleSource
+    "Pays a comparative active-state 5-HT2A cryo-EM structure set across multiple ligands including 5-HT and LSD, supporting ligand-dependent receptor-state comparison without equating structure with subjective effect."
+    Source.publicAttribution
+
+pdb9AS4 : Source.AttributedSource
+pdb9AS4 =
+  Source.mkDOISource
+    "RCSB Protein Data Bank; deposition authors R. H. Gumpper; J. F. Fay; B. L. Roth"
+    "5-HT2AR bound to LSD in complex with mini-Gq and scFv16, global cryo-EM reconstruction"
+    "RCSB PDB 9AS4"
+    "2025 release"
+    "10.2210/pdb9AS4/pdb"
+    "https://www.rcsb.org/structure/9AS4"
+    Source.institutionalSource
+    "Pays a recoverable experimental structure identifier for an LSD-bound human 5-HT2A receptor complex; the deposited construct and experimental conditions do not imply an in-vivo brain state or percept."
+    Source.publicAttribution
+
 ermentroutCowan1979 : Source.AttributedSource
 ermentroutCowan1979 =
   Source.mkDOISource
@@ -166,7 +255,14 @@ cipolottiEtAl2025 =
 
 canonicalKluverLogPolar5HT2ASources : List Source.AttributedSource
 canonicalKluverLogPolar5HT2ASources =
-  ermentroutCowan1979
+  pubChemSerotonin
+  ∷ pubChemLSD
+  ∷ pubChemKetanserin
+  ∷ wackerEtAl2017
+  ∷ kimEtAl2020
+  ∷ gumpperEtAl2025
+  ∷ pdb9AS4
+  ∷ ermentroutCowan1979
   ∷ schwartz1980
   ∷ grusser1995
   ∷ bressloffEtAl2001
