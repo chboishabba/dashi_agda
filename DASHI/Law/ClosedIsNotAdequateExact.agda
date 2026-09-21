@@ -99,6 +99,9 @@ timeErasureDefect :
     asAtSensitiveQuery
 timeErasureDefect =
   Query.queryAdequacyDefect
+    {project = timeErasedProject}
+    {semantics = timeSemantics}
+    {query = asAtSensitiveQuery}
     worldBefore
     worldAfter
     refl
@@ -110,7 +113,11 @@ timeErasureBlocksAdequacy :
     timeSemantics
     asAtSensitiveQuery → ⊥
 timeErasureBlocksAdequacy =
-  Query.queryAdequacyDefectBlocksFactorisation timeErasureDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = timeErasedProject}
+    {semantics = timeSemantics}
+    {query = asAtSensitiveQuery}
+    timeErasureDefect
 
 closedTimeErasureResidual :
   Residual.ExactConsumerResidual

@@ -81,8 +81,12 @@ checkedNonfactorabilityBlocksFactorsThrough :
   KernelCheckedNonFactorability project semantics query →
   Query.AdequateFor project semantics query →
   ⊥
-checkedNonfactorabilityBlocksFactorsThrough checked =
+checkedNonfactorabilityBlocksFactorsThrough
+  {project = project} {semantics = semantics} {query = query} checked =
   Query.queryAdequacyDefectBlocksFactorisation
+    {project = project}
+    {semantics = semantics}
+    {query = query}
     (checkedNonfactorabilityDefect checked)
 
 demoRuntimeCandidate : RuntimeNonFactorabilityCandidate
