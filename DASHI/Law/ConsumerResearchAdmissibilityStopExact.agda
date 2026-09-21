@@ -41,9 +41,9 @@ paretoResearchMoveIsEligible =
   MDL.selectedEligible
 
 data ConsumerStopKind : Set where
-  theoremBackedConsumerAdequate
-  explicitlyUnresolved
-  budgetExhausted
+  theoremBackedConsumerAdequate : ConsumerStopKind
+  explicitlyUnresolved : ConsumerStopKind
+  budgetExhausted : ConsumerStopKind
   currentFrontierClosedWithoutAdequacy : ConsumerStopKind
 
 record TheoremAdequateStop
