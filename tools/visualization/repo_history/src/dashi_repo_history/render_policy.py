@@ -177,9 +177,10 @@ class ManimRenderPolicy:
         *,
         total_nodes: int,
         force_label: bool = False,
+        suppress_label: bool = False,
     ):
         dot = Dot(radius=self.nodes.radius(node))
-        if not self.labels.show_label(
+        if suppress_label or not self.labels.show_label(
             node,
             total_nodes,
             force=force_label,
@@ -198,3 +199,25 @@ class ManimRenderPolicy:
             disable_ligatures=True,
         ).next_to(dot, DOWN, buff=0.035)
         return VGroup(dot, label)
+
+    def label_mobject(
+        self,
+        node: dict[str, Any],
+        *,
+        font_size: int | None = None,
+    ):
+        size = (
+            font_size
+            if font_size is not None
+            else (
+                self.labels.binder_font_size
+                if node.get("kind") == "binder"
+                else self.labels.font_size
+            )
+        )
+        return Text(
+            self.labels.compact_label(node),
+            font=self.labels.font,
+            font_size=size,
+            disable_ligatures=True,
+        )
