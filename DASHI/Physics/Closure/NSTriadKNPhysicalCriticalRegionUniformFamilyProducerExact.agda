@@ -14,8 +14,6 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyProduce
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _<_; _+_; _*_)
-open import Relation.Binary.PropositionalEquality using (_≡_)
-
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
