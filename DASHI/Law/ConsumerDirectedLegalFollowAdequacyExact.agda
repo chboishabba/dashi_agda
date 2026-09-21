@@ -54,6 +54,9 @@ coarseTreatmentDefect :
     coarseProject semantics treatmentSensitiveQuery
 coarseTreatmentDefect =
   Query.queryAdequacyDefect
+    {project = coarseProject}
+    {semantics = semantics}
+    {query = treatmentSensitiveQuery}
     treatmentMissing
     treatmentPaid
     refl
@@ -63,7 +66,11 @@ coarseProjectionCannotAnswerTreatmentQuery :
   Query.AdequateFor
     coarseProject semantics treatmentSensitiveQuery → ⊥
 coarseProjectionCannotAnswerTreatmentQuery =
-  Query.queryAdequacyDefectBlocksFactorisation coarseTreatmentDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = coarseProject}
+    {semantics = semantics}
+    {query = treatmentSensitiveQuery}
+    coarseTreatmentDefect
 
 decodeRefined : RefinedProjection → DemoAnswer
 decodeRefined missingTreatmentSurface = unresolvedAnswer
@@ -74,6 +81,9 @@ refinedProjectionRepairsTreatmentQuery :
     refinedProject semantics treatmentSensitiveQuery
 refinedProjectionRepairsTreatmentQuery =
   Query.factorsForQuery
+    {project = refinedProject}
+    {semantics = semantics}
+    {query = treatmentSensitiveQuery}
     decodeRefined
     proof
   where

@@ -14,13 +14,25 @@ import DASHI.Law.ConsumerDirectedLegalFollowAdequacyExact as Consumer
 ------------------------------------------------------------------------
 
 data ConsumerAxis : Set where
-  semanticIdentity sourceRevision sourceSpan provenance treatment temporal
-  jurisdiction factualPredicate burdenOrException : ConsumerAxis
+  semanticIdentity : ConsumerAxis
+  sourceRevision : ConsumerAxis
+  sourceSpan : ConsumerAxis
+  provenance : ConsumerAxis
+  treatment : ConsumerAxis
+  temporal : ConsumerAxis
+  jurisdiction : ConsumerAxis
+  factualPredicate : ConsumerAxis
+  burdenOrException : ConsumerAxis
 
 data ResearchKind : Set where
-  acquireSource reviewTreatment resolveTemporal resolveJurisdiction reviewFact
-  reviewBurdenOrException recoverProvenance resolveSemanticIdentity :
-    ResearchKind
+  acquireSource : ResearchKind
+  reviewTreatment : ResearchKind
+  resolveTemporal : ResearchKind
+  resolveJurisdiction : ResearchKind
+  reviewFact : ResearchKind
+  reviewBurdenOrException : ResearchKind
+  recoverProvenance : ResearchKind
+  resolveSemanticIdentity : ResearchKind
 
 researchKind : ConsumerAxis → ResearchKind
 researchKind semanticIdentity = resolveSemanticIdentity
