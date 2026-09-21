@@ -365,7 +365,8 @@ reviewedTreatmentMustRecomputeOutboundFrontier ()
 -- trace already represented it.  Giumelli is the clean fresh authority exposed
 -- by the retained Doueihi source.  This record is an implementation acceptance
 -- contract.  The live Giumelli source acquisition and range-index replay are now
--- observed; reviewed identity/treatment hops remain explicit later gates.
+-- observed; the reviewed identity hop is now live-observed and treatment remains
+-- an explicit later gate.
 ------------------------------------------------------------------------
 
 record RecursiveGiumelliCapstoneContract : Set where
@@ -404,8 +405,8 @@ record RecursiveGiumelliCapstoneContract : Set where
     liveRangeIndexHitObservedIsTrue :
       liveRangeIndexHitObserved ≡ true
     liveReviewedIdentityHopObserved : Bool
-    liveReviewedIdentityHopObservedIsFalse :
-      liveReviewedIdentityHopObserved ≡ false
+    liveReviewedIdentityHopObservedIsTrue :
+      liveReviewedIdentityHopObserved ≡ true
     liveReviewedTreatmentHopObserved : Bool
     liveReviewedTreatmentHopObservedIsFalse :
       liveReviewedTreatmentHopObserved ≡ false
@@ -428,7 +429,7 @@ giumelliRecursiveCapstoneContract =
     true refl
     true refl
     true refl
-    false refl
+    true refl
     false refl
 
 LandscapeBoundary : Set
