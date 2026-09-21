@@ -521,6 +521,12 @@ class SemanticSymbolScene(MovingCameraScene):
         downstream_depth = int(
             os.environ.get("DASHI_REPO_DOWNSTREAM_DEPTH", "0")
         )
+        max_focus_nodes = int(
+            os.environ.get("DASHI_REPO_MAX_FOCUS_NODES", "250")
+        )
+        max_focus_edges = int(
+            os.environ.get("DASHI_REPO_MAX_FOCUS_EDGES", "800")
+        )
 
         if not path:
             self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
@@ -543,6 +549,8 @@ class SemanticSymbolScene(MovingCameraScene):
                 selector,
                 upstream_depth=upstream_depth,
                 downstream_depth=downstream_depth,
+                max_nodes=max_focus_nodes,
+                max_edges=max_focus_edges,
             )
         except (KeyError, ValueError) as error:
             self.add(
@@ -565,6 +573,16 @@ class SemanticSymbolScene(MovingCameraScene):
             if command.kind == "settle-focus"
         )
         allowed_edges = set(settle["edge_ids"])
+
+        truncation_badge = VGroup()
+        if settle.get("truncated"):
+            truncation_badge = Text(
+                "context truncated · "
+                f"-{settle.get('omitted_nodes', 0)} nodes · "
+                f"-{settle.get('omitted_edges', 0)} edges",
+                font_size=13,
+            ).to_corner(DOWN + RIGHT, buff=0.18)
+            truncation_badge.set_z_index(20)
 
         policy = ManimRenderPolicy()
         full_focus = _induced_focus_graph(
@@ -604,6 +622,7 @@ class SemanticSymbolScene(MovingCameraScene):
             FadeIn(title),
             FadeIn(subtitle),
             FadeIn(legend),
+            FadeIn(truncation_badge),
             Create(graph),
             run_time=1.0,
         )
@@ -667,6 +686,12 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
         downstream_depth = int(
             os.environ.get("DASHI_REPO_DOWNSTREAM_DEPTH", "0")
         )
+        max_focus_nodes = int(
+            os.environ.get("DASHI_REPO_MAX_FOCUS_NODES", "250")
+        )
+        max_focus_edges = int(
+            os.environ.get("DASHI_REPO_MAX_FOCUS_EDGES", "800")
+        )
 
         if not path:
             self.add(Text("Set DASHI_REPO_HISTORY_JSON", font_size=28))
@@ -683,6 +708,8 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
                 target_commit=target_commit,
                 upstream_depth=upstream_depth,
                 downstream_depth=downstream_depth,
+                max_nodes=max_focus_nodes,
+                max_edges=max_focus_edges,
             )
         except (KeyError, ValueError) as error:
             self.add(
@@ -711,6 +738,17 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             )
 
         policy = ManimRenderPolicy()
+        first_payload = program[0].payload
+        truncation_badge = VGroup()
+        if first_payload.get("truncated"):
+            truncation_badge = Text(
+                "context truncated · "
+                f"-{first_payload.get('omitted_nodes', 0)} nodes · "
+                f"-{first_payload.get('omitted_edges', 0)} edges",
+                font_size=13,
+            ).to_corner(DOWN + RIGHT, buff=0.18)
+            truncation_badge.set_z_index(20)
+
         legend = _legend(
             policy,
             _relation_kinds(*frame_graphs),
@@ -732,6 +770,7 @@ class SemanticSymbolHistoryScene(MovingCameraScene):
             FadeIn(title),
             FadeIn(stamp),
             FadeIn(legend),
+            FadeIn(truncation_badge),
             Create(graph),
             run_time=1.0,
         )
