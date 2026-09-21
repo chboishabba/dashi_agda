@@ -125,7 +125,7 @@ supportGraph :
   R416.SelectedTwoMarkSupportGraph
     (R429.Domain fourStage)
     (R429.Term fourStage)
-supportGraph selected = record
+supportGraph {fourStage = fourStage} selected = record
   { R416.SelectedTwoMarkSupportGraph.leftMark = leftMark selected
   ; R416.SelectedTwoMarkSupportGraph.rightMark = rightMark selected
   ; R416.SelectedTwoMarkSupportGraph.selectedConnectingDistance =
@@ -140,7 +140,7 @@ supportGraph selected = record
       containsSelectedLink selected
   ; R416.SelectedTwoMarkSupportGraph.selectedDifferentiatedTermSurvives =
       λ domain term →
-        term ∈ R429.termsWithCommonY _ domain
+        term ∈ R429.termsWithCommonY fourStage domain
   ; R416.SelectedTwoMarkSupportGraph.survivingTermContainsLeftMark =
       λ domain term membership →
         term , (membership ,
