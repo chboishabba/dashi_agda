@@ -202,6 +202,9 @@ def compact_timeline(
         "branch_episodes": deepcopy(
             timeline.get("branch_episodes", [])
         ),
+        "pull_requests": deepcopy(
+            timeline.get("pull_requests", [])
+        ),
         "semantic_states": states,
     }
 
@@ -250,6 +253,9 @@ def expand_timeline(compact: dict[str, Any]) -> dict[str, Any]:
         "refs": deepcopy(compact.get("refs", {})),
         "branch_episodes": deepcopy(
             compact.get("branch_episodes", [])
+        ),
+        "pull_requests": deepcopy(
+            compact.get("pull_requests", [])
         ),
         "snapshots": snapshots,
     }
