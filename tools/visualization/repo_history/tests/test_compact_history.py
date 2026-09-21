@@ -198,3 +198,36 @@ def test_periodic_checkpoint_bounds_replay_length():
         "patch",
         "patch",
     ]
+
+
+def test_compact_history_preserves_optional_pr_metadata_exactly():
+    timeline = {
+        "schema": "dashi.repo-history.v1",
+        "commits": [
+            {
+                "commit": "A",
+                "timestamp": 1,
+                "parents": [],
+                "refs": [],
+                "shape": "root",
+            }
+        ],
+        "refs": {},
+        "branch_episodes": [],
+        "pull_requests": [
+            {
+                "number": 7,
+                "title": "Proof episode",
+                "merge_commit": "A",
+            }
+        ],
+        "snapshots": [
+            {
+                "commit": "A",
+                "graph": _graph([_node("a")], graph_id="ga"),
+                "parent_deltas": {},
+            }
+        ],
+    }
+
+    assert expand_timeline(compact_timeline(timeline)) == timeline
