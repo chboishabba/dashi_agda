@@ -281,14 +281,15 @@ whiteEtAl2026 =
     "Reports a psychedelic 5-HT2A agonist-associated change in spontaneous and evoked approximately 5-Hz cortical oscillatory activity including visual cortex; it supplies a circuit-dynamics coordinate, not a Kluever-form identity or human perceptual mechanism."
     Source.publicAttribution
 
-solerEtAl2026 : Source.AttributedSource
-solerEtAl2026 =
-  Source.mkNoDOISource
-    "Systematic-review authors indexed by PubMed PMID 41862146"
+hidalgoJimenezEtAl2026 : Source.AttributedSource
+hidalgoJimenezEtAl2026 =
+  Source.mkDOISource
+    "Javier Hidalgo Jimenez; Karl Kristjan Kaup; Jaan Aru"
     "Electrophysiological mechanisms of psychedelic drugs: A systematic review"
-    "Neuroscience and Biobehavioral Reviews"
+    "Neuroscience and Biobehavioral Reviews 185:106649"
     "2026"
-    "https://pubmed.ncbi.nlm.nih.gov/41862146/"
+    "10.1016/j.neubiorev.2026.106649"
+    "https://doi.org/10.1016/j.neubiorev.2026.106649"
     Source.academicArticleSource
     "Synthesizes heterogeneous in-vitro and in-vivo psychedelic electrophysiology and explicitly cautions against a uniform-excitation account; used only as a review-level heterogeneity boundary, not as primary evidence for any individual current or circuit effect."
     Source.publicAttribution
@@ -341,7 +342,7 @@ canonicalKluverLogPolar5HT2ASources =
   ∷ prellerEtAl2018
   ∷ barzanEtAl2024
   ∷ whiteEtAl2026
-  ∷ solerEtAl2026
+  ∷ hidalgoJimenezEtAl2026
   ∷ hamEtAl2013
   ∷ cipolottiEtAl2025
   ∷ []
