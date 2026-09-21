@@ -10,6 +10,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_; _^_)
 open import Data.Nat using (_∸_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -21,6 +22,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionConjunctionExact
 import DASHI.Mathematics.Complexity.ConcreteTapeSelectedRuleWindowCNFExact as Selected
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinSizeExact as Size
 import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
+import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 ------------------------------------------------------------------------
@@ -88,7 +91,7 @@ predicatesForOneTime_count :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (nonempty : Selector.NonemptyRuleTable machine)
     (timeSlot :
-      DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact.Slot
+      Global.Slot
         timeIndex steps)
     (starts : List (Transition.SomeWindowStart cols)) →
   Size.listLength
@@ -165,10 +168,10 @@ allGlobalTransitionPredicates_count
 
 renameCNF_length :
   ∀ {local global}
-    (rename : Data.Fin.Base.Fin local → Data.Fin.Base.Fin global)
+    (rename : Fin.Fin local → Fin.Fin global)
     (formula : CNF.CNF local) →
   Size.listLength
-    (DASHI.Mathematics.Complexity.CNFVariableRenamingExact.renameCNF
+    (Rename.renameCNF
       rename formula)
   ≡ Size.listLength formula
 renameCNF rename [] = refl
@@ -254,14 +257,14 @@ globalTransitionClause_bound
 
 unitClausesForTarget_count :
   ∀ {local global}
-    (rename : Data.Fin.Base.Fin local → Data.Fin.Base.Fin global)
+    (rename : Fin.Fin local → Fin.Fin global)
     (target : CNF.Bits local) →
   Size.listLength (Endpoint.unitClausesForTarget rename target)
   ≡ local
 unitClausesForTarget_count rename CNF.[]ᵇ = refl
 unitClausesForTarget_count rename (b CNF.∷ᵇ bs)
   rewrite unitClausesForTarget_count
-    (λ i → rename (Data.Fin.Base.Fin.suc i)) bs =
+    (λ i → rename (Fin.suc i)) bs =
   refl
 
 initialEndpointClauseCount :
@@ -272,33 +275,24 @@ initialEndpointClauseCount :
 initialEndpointClauseCount target =
   unitClausesForTarget_count Endpoint.initialRowExtendedRename target
 
+mapFinSuc_count :
+  ∀ {n} (xs : List (Fin.Fin n)) →
+  Size.listLength (Endpoint.mapFinSuc xs)
+  ≡ Size.listLength xs
+mapFinSuc_count [] = refl
+mapFinSuc_count (x ∷ xs)
+  rewrite mapFinSuc_count xs =
+  refl
+
 finList_count :
   (n : Nat) →
   Size.listLength (Endpoint.finList n) ≡ n
 finList_count zero = refl
 finList_count (suc n)
-  rewrite mapSucLength (Endpoint.finList n)
+  rewrite mapFinSuc_count (Endpoint.finList n)
         | finList_count n =
   refl
-  where
-    mapSucLength :
-      ∀ {m}
-        (xs : List (Data.Fin.Base.Fin m)) →
-      Size.listLength
-        (mapSuc xs)
-      ≡ Size.listLength xs
-      where
-        mapSuc :
-          ∀ {m} →
-          List (Data.Fin.Base.Fin m) →
-          List (Data.Fin.Base.Fin (suc m))
-        mapSuc [] = []
-        mapSuc (i ∷ rest) =
-          Data.Fin.Base.Fin.suc i ∷ mapSuc rest
-    mapSucLength [] = refl
-    mapSucLength (x ∷ xs)
-      rewrite mapSucLength xs =
-      refl
+
 
 acceptancePredicate_count :
   ∀ {machine steps cols}
@@ -306,7 +300,7 @@ acceptancePredicate_count :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
-    (indices : List (Data.Fin.Base.Fin cols)) →
+    (indices : List (Fin.Fin cols)) →
   Size.listLength
     (Endpoint.acceptanceImplicationPredicatesFin
       stateCoverage symbolCoverage indices)
