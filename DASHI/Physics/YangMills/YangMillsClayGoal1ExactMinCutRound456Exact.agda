@@ -284,3 +284,6 @@ round456ExactMinCutCompilerLevel : ProofLevel
 round456ExactMinCutCompilerLevel = machineChecked
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1ReducedTerminalCompilerRound469Exact
+
+import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact
+import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact
