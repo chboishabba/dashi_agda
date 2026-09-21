@@ -180,3 +180,5 @@ import DASHI.Education.DigitalESDReviewedUnresolvedRoutingExact
 import DASHI.Education.DigitalESDReviewedUnresolvedRoutingRegression
 import DASHI.Education.DigitalESDStudyParseInteropExact
 import DASHI.Education.DigitalESDStudyParseInteropRegression
+import DASHI.Education.DigitalESDStudyParseExecutionExact
+import DASHI.Education.DigitalESDStudyParseExecutionRegression
