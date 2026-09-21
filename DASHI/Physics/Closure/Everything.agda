@@ -434,3 +434,6 @@ import DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact
 import DASHI.Physics.Closure.NSClayFacingAAnalyticCutExact
 import DASHI.Physics.Closure.NSClayFacingBResearchCutExact
 import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact
+
+import DASHI.Physics.Closure.NSPeriodicInfinityShellSubsetCountExact
+import DASHI.Physics.Closure.NSTriadKNLiteralInfinityShellBernsteinPaymentExact
