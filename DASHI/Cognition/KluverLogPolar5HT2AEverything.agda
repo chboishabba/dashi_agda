@@ -21,3 +21,5 @@ import DASHI.Cognition.LogPolarKluverDerivationExact
 import DASHI.Cognition.Kluver5HT2ACrossPollinationExact
 
 import DASHI.Cognition.FiveHT2AVisualModeObservationBridgeExact
+
+import DASHI.Cognition.AnalyticLogPolarSpiralCompilerExact
