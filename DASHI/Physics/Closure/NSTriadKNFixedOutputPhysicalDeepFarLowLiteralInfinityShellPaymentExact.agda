@@ -34,6 +34,8 @@ import DASHI.Physics.Closure.NSTriadKNRationalFiniteBernstein as Bernstein
 import DASHI.Physics.Closure.NSTriadKNDeepFarLowCriticalShoulderRound234Exact as R234
 import DASHI.Physics.Closure.NSTriadKNLiteralInfinityShellBernsteinPaymentExact as LiteralShell
 import DASHI.Physics.Closure.NSPeriodicInfinityShellModeCount as ShellCount
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
+import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as NatQ
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact as Pay
 
 F : C3.RealField _
@@ -56,12 +58,12 @@ module LiteralDeepFarLowPayment
     (highEnergy highDerivativeCoefficient productMass : ℚ) →
     0ℚ ≤ highEnergy →
     0ℚ ≤ highDerivativeCoefficient →
-    LiteralShell.NatQ.natAsRational (ShellCount.infinityCubeModeCount shell)
+    NatQ.natAsRational (ShellCount.infinityCubeModeCount shell)
       ≤ highDerivativeCoefficient →
     productMass
       ≤
       let coefficients =
-        LiteralShell.Cube.map coefficient
+        Cube.map coefficient
           (ShellCount.shellModes (ShellCount.canonicalInfinityShellSupport shell))
       in
       Rational.square (Bernstein.coefficientSum coefficients) * highEnergy →
