@@ -141,8 +141,8 @@ def focus_symbol(
     edge_ids: set[str] = set()
     layer_map: dict[int, set[str]] = {0: {root_id}}
     truncated = False
-    omitted_nodes = 0
-    omitted_edges = 0
+    omitted_node_ids: set[str] = set()
+    omitted_edge_ids: set[str] = set()
 
     max_nodes = max(1, max_nodes)
     max_edges = max(0, max_edges)
@@ -154,7 +154,7 @@ def focus_symbol(
         max_depth: int,
         direction_sign: int,
     ) -> None:
-        nonlocal truncated, omitted_nodes, omitted_edges
+        nonlocal truncated
         frontier = {root_id}
         visited_at: dict[str, int] = {root_id: 0}
 
@@ -176,14 +176,14 @@ def focus_symbol(
                     if edge["relation_id"] not in edge_ids:
                         if len(edge_ids) >= max_edges:
                             truncated = True
-                            omitted_edges += 1
+                            omitted_edge_ids.add(edge["relation_id"])
                             continue
                         edge_ids.add(edge["relation_id"])
 
                     if other not in node_ids:
                         if len(node_ids) >= max_nodes:
                             truncated = True
-                            omitted_nodes += 1
+                            omitted_node_ids.add(other)
                             continue
                         node_ids.add(other)
 
@@ -227,7 +227,7 @@ def focus_symbol(
                 continue
             if len(edge_ids) >= max_edges:
                 truncated = True
-                omitted_edges += 1
+                omitted_edge_ids.add(edge["relation_id"])
                 continue
             edge_ids.add(edge["relation_id"])
 
@@ -268,6 +268,6 @@ def focus_symbol(
         layers=layers,
         layer_specs=layer_specs,
         truncated=truncated,
-        omitted_nodes=omitted_nodes,
-        omitted_edges=omitted_edges,
+        omitted_nodes=len(omitted_node_ids),
+        omitted_edges=len(omitted_edge_ids),
     )
