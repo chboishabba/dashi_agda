@@ -183,3 +183,5 @@ import DASHI.Law.ConsumerDemandCampaignRoutingExact
 import DASHI.Law.ConsumerDemandCampaignRoutingRegression
 import DASHI.Law.GenericReviewedDeltaCampaignKernelExact
 import DASHI.Law.GenericReviewedDeltaCampaignKernelRegression
+import DASHI.Law.ReviewedWorkFrontierClosureExact
+import DASHI.Law.ReviewedWorkFrontierClosureRegression
