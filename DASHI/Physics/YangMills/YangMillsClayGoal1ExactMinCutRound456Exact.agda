@@ -52,6 +52,7 @@ import DASHI.Physics.YangMills.BalabanCMP116CommonAnalyticRadiusRound103Exact as
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as R104
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceLocalizationRound454Exact as R454
 import DASHI.Physics.YangMills.BalabanCMP116PublishedDomainSelectedLocalizationRound463Exact as R463
+import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedRound467Exact as R467
 import DASHI.Physics.YangMills.BalabanCMP116SourceNativeToDirectUpperRound465Exact as R465
 import DASHI.Physics.YangMills.BalabanCMP116SelectedTwoSourceGapRound455Exact as R455
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as R457
@@ -136,8 +137,12 @@ bCommonRadiusExistenceCompilerLevel : ProofLevel
 bCommonRadiusExistenceCompilerLevel =
   R104.cmp116CanonicalCommonRadiusCompilerLevel
 
-bAlphaPublishedCommonDomainApplicationLevel : ProofLevel
-bAlphaPublishedCommonDomainApplicationLevel =
+bAlphaBetaLiteralPublishedLocalizationLevel : ProofLevel
+bAlphaBetaLiteralPublishedLocalizationLevel =
+  R467.literalRound467PublishedLiteralSelectedLocalizationLevel
+
+bAlphaPublishedCommonDomainFallbackLevel : ProofLevel
+bAlphaPublishedCommonDomainFallbackLevel =
   R463.literalRound463PublishedDomainSelectedApplicationLevel
 
 bAlphaConstructiveFiniteDemandFallbackLevel : ProofLevel
@@ -252,6 +257,9 @@ canonicalRadiusExistenceCountedAsPhysicalResearchLeaf = false
 
 fourDemandExtractionMandatoryForHumanGoal1Proof : Bool
 fourDemandExtractionMandatoryForHumanGoal1Proof = false
+
+postHocSourceMagnitudeEqualityMandatoryForHumanGoal1Proof : Bool
+postHocSourceMagnitudeEqualityMandatoryForHumanGoal1Proof = false
 
 continuumOSCompatibilityCountedAgainInsideB : Bool
 continuumOSCompatibilityCountedAgainInsideB = false
