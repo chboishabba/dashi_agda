@@ -51,7 +51,7 @@ record PhysicalKernelIdentification
       Cut.PhysicalNearOriginSameObjectData kernel fluid
 
     highFrequency :
-      Cut.PhysicalHighFrequencyEnvelopeData fluid
+      Cut.PhysicalHighFrequencyEnvelopeData kernel fluid
 
 open PhysicalKernelIdentification public
 
