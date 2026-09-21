@@ -43,7 +43,7 @@ record DirectSelectedSourceClayInputs
         (R281.asReconstructedClusteringSpectrum spectrumSource)
         (Gap.gapCandidate (R281.asReconstructedClusteringSpectrum spectrumSource))
 
-    commonContinuumOS :
+    cmp116CommonContinuumOS :
       Assembly.CommonContinuumOSRoute
         (Gap.PositiveTransferGapCore
           (R281.asReconstructedClusteringSpectrum spectrumSource))
@@ -96,10 +96,10 @@ record SelectedCMP116LocalizationClayInputs
       R454.SelectedTwoSourceLocalization
         base demands source tests spectrumSource
 
-    selectedLimitClosure :
+    cmp116SelectedLimitClosure :
       R342.SelectedLimitUpperClosure {dataSet = dataSet}
 
-    positiveCandidateGap :
+    cmp116PositiveCandidateGap :
       Gap.PositiveEnergy
         (R281.asReconstructedClusteringSpectrum spectrumSource)
         (Gap.gapCandidate
@@ -133,11 +133,11 @@ selectedCMP116LocalizationBuildsMassGapConclusion :
   Assembly.MassGapConclusion ContinuumHamiltonian Vacuum GapParameter
 selectedCMP116LocalizationBuildsMassGapConclusion inputs =
   Assembly.commonContinuumOSCompiler
-    (commonContinuumOS inputs)
+    (cmp116CommonContinuumOS inputs)
     (R455.selectedTwoSourceLocalizationBuildsPositiveTransferGap
       (selectedLocalization inputs)
-      (selectedLimitClosure inputs)
-      (positiveCandidateGap inputs))
+      (cmp116SelectedLimitClosure inputs)
+      (cmp116PositiveCandidateGap inputs))
 
 record BoundedFormClayInputs
     (Hilbert Scalar ContinuumGap ContinuumHamiltonian Vacuum GapParameter : Set) : Set₂ where
