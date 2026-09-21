@@ -75,13 +75,13 @@ asCanonicalMetricSourceDomain :
   R144CanonicalMetricDomainData composite Scale Volume →
   Domain.CanonicalMetricSourceDomain
     Scale Volume (R144.stressActivity composite)
-asCanonicalMetricSourceDomain composite data = record
+asCanonicalMetricSourceDomain {present = present} composite data = record
   { Domain.CanonicalMetricSourceDomain.demands = demands data
   ; Domain.CanonicalMetricSourceDomain.radiusData = radiusData data
   ; Domain.CanonicalMetricSourceDomain.radiusIsCanonical =
       radiusIsCanonical data
   ; Domain.CanonicalMetricSourceDomain.MetricPerturbation =
-      Source.Tangent (Carrier.source _)
+      Source.Tangent (Carrier.source (Present.bc1Carrier present))
   ; Domain.CanonicalMetricSourceDomain.metricPerturbationNorm =
       metricPerturbationNorm data
   ; Domain.CanonicalMetricSourceDomain.AdmissibleMetricPerturbation =
