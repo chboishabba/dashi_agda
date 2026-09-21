@@ -231,6 +231,27 @@ sixCellRawBits_decompose timeSlot start globalBits
     globalBits
   = refl
 
+rawSelectedRuleBits_eq_selectorSliceBits :
+  ∀ {machine steps cols timeIndex columnIndex}
+    (timeSlot : Global.Slot timeIndex steps)
+    (start : Raw.WindowStart columnIndex cols)
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
+  Canonical.takeBits (Selector.RuleWidth machine)
+    (Raw.rawSelectedWindowBits timeSlot start globalBits)
+  ≡
+  Global.selectorSliceBits timeSlot globalBits
+rawSelectedRuleBits_eq_selectorSliceBits
+    timeSlot start globalBits
+  rewrite pullbackFinSumCases
+    (Global.globalSelectorRename timeSlot)
+    (Raw.sixCellGlobalRename timeSlot start)
+    globalBits
+        | Canonical.takeAppendBits
+            (Global.selectorSliceBits timeSlot globalBits)
+            (sixCellRawBits timeSlot start globalBits)
+  = refl
+
+
 rawSelectedSixBits_eq_sixCellRawBits :
   ∀ {machine steps cols timeIndex columnIndex}
     (timeSlot : Global.Slot timeIndex steps)
