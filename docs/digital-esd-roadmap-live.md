@@ -1169,3 +1169,26 @@ retained/probable decisions and actual full-text retrieval.
 The adaptive-screening branch has not yet received a fresh Agda aggregate
 receipt and the new Python tools have not yet been executed against the real
 corpus in this environment.
+
+
+## Current P0-G scholarly parsing frontier
+
+The Digital-ESD thin wrapper now joins the full 43,996-record metadata
+denominator to observed downstream study-processing receipts after every
+full-text parse run.
+
+Outputs include a per-study processing ledger and a retained/full-text-missing
+retrieval residual. This preserves the distinction:
+
+```text
+metadata-only / unreviewed
+!= full-text retrieval failure
+!= materialisation failure
+!= parse failure
+```
+
+The currently observed full-text specimen, ERIC `EJ1083370`, successfully
+passed verified bytes -> text materialisation -> SLR handoff -> scholarly parse,
+with zero reviewed-evidence and admission promotion. Additional study parsing is
+now blocked on obtaining additional authoritatively retained full-text bytes,
+not on parser architecture.
