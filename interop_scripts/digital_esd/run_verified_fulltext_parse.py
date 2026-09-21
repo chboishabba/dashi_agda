@@ -225,12 +225,20 @@ def main() -> int:
     args = ap.parse_args()
 
     slr_root = resolve_slr_root(args.slr_root)
-    artifact_root = args.artifact_root.resolve()
-    fulltext_index = (
-        args.fulltext_index.resolve()
-        if args.fulltext_index
-        else artifact_root / "fulltext" / "digital_esd_fulltext_index.tsv"
-    )
+    artifact_root = args.artifact_root
+    if not artifact_root.is_absolute():
+        artifact_root = (slr_root / artifact_root).resolve()
+    else:
+        artifact_root = artifact_root.resolve()
+
+    if args.fulltext_index:
+        fulltext_index = args.fulltext_index
+        if not fulltext_index.is_absolute():
+            fulltext_index = (slr_root / fulltext_index).resolve()
+        else:
+            fulltext_index = fulltext_index.resolve()
+    else:
+        fulltext_index = artifact_root / "fulltext" / "digital_esd_fulltext_index.tsv"
     ledger = choose_ledger(artifact_root, args.screening_ledger)
     output_dir = (
         args.output_dir.resolve()
@@ -259,6 +267,13 @@ def main() -> int:
         ref = str(row["source_identity_reference"])
         artifact = Path(str(row.get("artifact_path") or ""))
         if not artifact.is_absolute():
+            candidates = [
+                (slr_root / artifact).resolve(),
+                (artifact_root / artifact).resolve(),
+                artifact.resolve(),
+            ]
+            artifact = next((p for p in candidates if p.exists()), candidates[0])
+        else:
             artifact = artifact.resolve()
 
         original_digest = str(
@@ -372,10 +387,22 @@ def main() -> int:
     if args.allow_partial:
         cmd.append("--allow-partial")
     print("+", " ".join(cmd), file=sys.stderr)
-    subprocess.run(cmd, cwd=slr_root, check=True)
+    env = os.environ.copy()
+    existing_pythonpath = env.get("PYTHONPATH", "")
+    env["PYTHONPATH"] = (
+        str(slr_root)
+        if not existing_pythonpath
+        else str(slr_root) + os.pathsep + existing_pythonpath
+    )
+    subprocess.run(cmd, cwd=slr_root, env=env, check=True)
 
     verified_parse_path = parser_output_dir / "verified.jsonl"
     parsed = read_jsonl(verified_parse_path)
+    if parser_inputs and not parsed and not args.allow_partial:
+        raise RuntimeError(
+            "generic SLR scholarly parser produced zero verified parse rows for "
+            f"{len(parser_inputs)} prepared inputs; refusing silent ImportError/empty parse"
+        )
     parsed_by_ref = {
         str(row.get("source_identity_reference") or ""): row for row in parsed
     }
