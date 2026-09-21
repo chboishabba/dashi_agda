@@ -1,0 +1,657 @@
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass
+from math import ceil, sqrt
+import re
+from typing import Any, Iterable
+
+
+TOKEN_RE = re.compile(r"[A-Z]+(?=[A-Z][a-z]|\d|\b)|[A-Z]?[a-z]+|[A-Z]+|\d+")
+
+GENERIC_MODULE_TOKENS = frozenset(
+    {
+        "DASHI",
+        "Core",
+        "Everything",
+        "Exact",
+        "Synthesis",
+        "Visual",
+        "Formal",
+        "Proof",
+        "Theorem",
+        "Lemma",
+        "Common",
+        "Util",
+        "Utils",
+        "Test",
+        "Tests",
+    }
+)
+
+PROGRAMME_ALIASES = {
+    "NavierStokes": ("navier", "stokes"),
+    "RiemannHypothesis": ("riemann", "zeta"),
+    "YangMills": ("yang", "mills"),
+    "BirchSwinnertonDyer": ("birch", "swinnerton", "dyer", "bsd"),
+    "Poincare": ("poincare",),
+    "Hodge": ("hodge",),
+    "CookLevin": ("cook", "levin"),
+    "Cuisine": ("cuisine", "food", "recipe"),
+    "Antigravity": ("antigravity", "gravity"),
+}
+
+
+def _tokens(value: str) -> tuple[str, ...]:
+    pieces: list[str] = []
+    for part in re.split(r"[./:_\-]+", value):
+        pieces.extend(TOKEN_RE.findall(part))
+    return tuple(piece for piece in pieces if piece)
+
+
+def _normalise(token: str) -> str:
+    return token.casefold()
+
+
+def programme_key(module: str, label: str = "") -> str:
+    """Infer a stable research-programme key from semantic names.
+
+    Aliases only normalise obvious domain spellings. Unknown programmes remain
+    first-class and derive from their earliest informative module segment.
+    """
+
+    tokens = _tokens(f"{module} {label}")
+    lowered = tuple(_normalise(token) for token in tokens)
+
+    for canonical, aliases in PROGRAMME_ALIASES.items():
+        if any(alias in lowered for alias in aliases):
+            return canonical
+
+    module_parts = [
+        part
+        for part in module.split(".")
+        if part and part not in GENERIC_MODULE_TOKENS
+    ]
+    if module_parts:
+        # Prefer the first semantically informative namespace. Physics/Math are
+        # category shelves, so one more segment is usually more explanatory.
+        shelves = {"Physics", "Math", "Mathematics", "Arithmetic", "Research"}
+        first = module_parts[0]
+        if first in shelves and len(module_parts) > 1:
+            return module_parts[1]
+        return first
+
+    informative = [
+        token
+        for token in tokens
+        if token not in GENERIC_MODULE_TOKENS
+    ]
+    return informative[0] if informative else "Unclassified"
+
+
+def _topic_tokens(nodes: Iterable[dict[str, Any]]) -> tuple[str, ...]:
+    counts: dict[str, int] = {}
+    for node in nodes:
+        for token in _tokens(str(node.get("label", ""))):
+            lower = _normalise(token)
+            if len(lower) < 3 or token in GENERIC_MODULE_TOKENS:
+                continue
+            counts[lower] = counts.get(lower, 0) + 1
+
+    ranked = sorted(
+        counts,
+        key=lambda token: (-counts[token], token),
+    )
+    return tuple(ranked[:4])
+
+
+@dataclass(frozen=True)
+class ActiveWorkingSet:
+    commit: str
+    programme: str
+    topic_tokens: tuple[str, ...]
+    changed_node_ids: tuple[str, ...]
+    changed_edge_ids: tuple[str, ...]
+    context_node_ids: tuple[str, ...]
+    context_edge_ids: tuple[str, ...]
+    salience: int
+
+    @property
+    def focus_node_ids(self) -> tuple[str, ...]:
+        return tuple(
+            dict.fromkeys(
+                (*self.changed_node_ids, *self.context_node_ids)
+            )
+        )
+
+    @property
+    def focus_edge_ids(self) -> tuple[str, ...]:
+        return tuple(
+            dict.fromkeys(
+                (*self.changed_edge_ids, *self.context_edge_ids)
+            )
+        )
+
+
+@dataclass(frozen=True)
+class SemanticEpisode:
+    programme: str
+    topic_tokens: tuple[str, ...]
+    commits: tuple[str, ...]
+    started_at: int
+    ended_at: int
+    focus_node_ids: tuple[str, ...]
+    focus_edge_ids: tuple[str, ...]
+    salience: int
+    return_to_existing_region: bool
+
+
+@dataclass(frozen=True)
+class CameraDirective:
+    programme: str
+    focus_node_ids: tuple[str, ...]
+    mode: str
+    padding: float
+    min_width: float
+    max_width: float
+    transition_seconds: float
+    reason: str
+
+
+@dataclass(frozen=True)
+class ProgrammeRegion:
+    programme: str
+    x: float
+    y: float
+
+
+@dataclass(frozen=True)
+class FilmBeat:
+    kind: str
+    commit: str | None
+    programme: str | None
+    topic: str | None
+    duration_seconds: float
+    focus_node_ids: tuple[str, ...] = ()
+    focus_edge_ids: tuple[str, ...] = ()
+    camera: CameraDirective | None = None
+    payload: dict[str, Any] | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        value = asdict(self)
+        if self.camera is not None:
+            value["camera"] = asdict(self.camera)
+        return value
+
+
+@dataclass(frozen=True)
+class ResearchFilmPlan:
+    regions: tuple[ProgrammeRegion, ...]
+    working_sets: tuple[ActiveWorkingSet, ...]
+    episodes: tuple[SemanticEpisode, ...]
+    beats: tuple[FilmBeat, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema": "dashi.research-film.v1",
+            "regions": [asdict(region) for region in self.regions],
+            "working_sets": [asdict(item) for item in self.working_sets],
+            "episodes": [asdict(item) for item in self.episodes],
+            "beats": [beat.to_dict() for beat in self.beats],
+        }
+
+
+def _node_maps(snapshot: dict[str, Any]) -> tuple[
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+]:
+    graph = snapshot["graph"]
+    return (
+        {
+            node["symbol_id"]: node
+            for node in graph.get("nodes", [])
+        },
+        {
+            edge["relation_id"]: edge
+            for edge in graph.get("edges", [])
+        },
+    )
+
+
+def _changed_payload_ids(
+    parent_snapshot: dict[str, Any] | None,
+    snapshot: dict[str, Any],
+    parent: str | None,
+) -> tuple[set[str], set[str]]:
+    changed_nodes: set[str] = set()
+    changed_edges: set[str] = set()
+
+    if parent is not None:
+        delta = snapshot.get("parent_deltas", {}).get(parent, {})
+        changed_nodes.update(delta.get("added_nodes", []))
+        changed_nodes.update(delta.get("removed_nodes", []))
+        changed_edges.update(delta.get("added_edges", []))
+        changed_edges.update(delta.get("removed_edges", []))
+
+    if parent_snapshot is None:
+        nodes, edges = _node_maps(snapshot)
+        return set(nodes), set(edges)
+
+    before_nodes, before_edges = _node_maps(parent_snapshot)
+    after_nodes, after_edges = _node_maps(snapshot)
+
+    # Same semantic identity may still have changed payload/fingerprint/span.
+    for node_id in before_nodes.keys() & after_nodes.keys():
+        if before_nodes[node_id] != after_nodes[node_id]:
+            changed_nodes.add(node_id)
+    for edge_id in before_edges.keys() & after_edges.keys():
+        if before_edges[edge_id] != after_edges[edge_id]:
+            changed_edges.add(edge_id)
+
+    return changed_nodes, changed_edges
+
+
+def _working_set_for_commit(
+    *,
+    commit: dict[str, Any],
+    snapshot: dict[str, Any],
+    parent_snapshot: dict[str, Any] | None,
+    parent: str | None,
+    max_context_nodes: int,
+    max_context_edges: int,
+) -> ActiveWorkingSet:
+    nodes, edges = _node_maps(snapshot)
+    changed_nodes, changed_edges = _changed_payload_ids(
+        parent_snapshot,
+        snapshot,
+        parent,
+    )
+
+    # Pull endpoints for relation-only changes.
+    for edge_id in list(changed_edges):
+        edge = edges.get(edge_id)
+        if edge is None:
+            continue
+        changed_nodes.update((edge["source"], edge["target"]))
+
+    changed_payloads = [
+        nodes[node_id]
+        for node_id in sorted(changed_nodes)
+        if node_id in nodes
+    ]
+    programme_counts: dict[str, int] = {}
+    for node in changed_payloads:
+        key = programme_key(
+            str(node.get("module", "")),
+            str(node.get("label", "")),
+        )
+        programme_counts[key] = programme_counts.get(key, 0) + 1
+
+    if programme_counts:
+        programme = min(
+            programme_counts,
+            key=lambda key: (-programme_counts[key], key),
+        )
+    else:
+        programme = "Unclassified"
+
+    programme_changed = [
+        node
+        for node in changed_payloads
+        if programme_key(
+            str(node.get("module", "")),
+            str(node.get("label", "")),
+        )
+        == programme
+    ]
+    topics = _topic_tokens(programme_changed or changed_payloads)
+
+    context_nodes: set[str] = set()
+    context_edges: set[str] = set()
+    candidates = sorted(
+        edges.values(),
+        key=lambda edge: (
+            edge.get("kind", ""),
+            edge["source"],
+            edge["target"],
+            edge["relation_id"],
+        ),
+    )
+    for edge in candidates:
+        if (
+            edge["source"] not in changed_nodes
+            and edge["target"] not in changed_nodes
+        ):
+            continue
+        if len(context_edges) >= max_context_edges:
+            break
+
+        endpoints = (edge["source"], edge["target"])
+        additions = {
+            endpoint
+            for endpoint in endpoints
+            if endpoint not in changed_nodes
+            and endpoint not in context_nodes
+        }
+        if len(context_nodes) + len(additions) > max_context_nodes:
+            continue
+
+        context_edges.add(edge["relation_id"])
+        context_nodes.update(additions)
+
+    salience = (
+        6 * len(changed_nodes)
+        + 2 * len(changed_edges)
+        + len(context_nodes)
+    )
+    if len(commit.get("parents", [])) > 1:
+        salience += 20
+
+    return ActiveWorkingSet(
+        commit=commit["commit"],
+        programme=programme,
+        topic_tokens=topics,
+        changed_node_ids=tuple(sorted(changed_nodes)),
+        changed_edge_ids=tuple(sorted(changed_edges)),
+        context_node_ids=tuple(sorted(context_nodes)),
+        context_edge_ids=tuple(sorted(context_edges)),
+        salience=salience,
+    )
+
+
+def derive_working_sets(
+    timeline: dict[str, Any],
+    *,
+    max_context_nodes: int = 40,
+    max_context_edges: int = 100,
+) -> list[ActiveWorkingSet]:
+    commits = timeline.get("commits", [])
+    snapshots = {
+        snapshot["commit"]: snapshot
+        for snapshot in timeline.get("snapshots", [])
+    }
+    working_sets: list[ActiveWorkingSet] = []
+
+    for commit in commits:
+        sha = commit["commit"]
+        snapshot = snapshots.get(sha)
+        if snapshot is None:
+            continue
+
+        parent = next(
+            (
+                candidate
+                for candidate in commit.get("parents", [])
+                if candidate in snapshots
+            ),
+            None,
+        )
+        parent_snapshot = snapshots.get(parent) if parent else None
+        working_sets.append(
+            _working_set_for_commit(
+                commit=commit,
+                snapshot=snapshot,
+                parent_snapshot=parent_snapshot,
+                parent=parent,
+                max_context_nodes=max_context_nodes,
+                max_context_edges=max_context_edges,
+            )
+        )
+
+    return working_sets
+
+
+def _topic_similarity(
+    left: tuple[str, ...],
+    right: tuple[str, ...],
+) -> float:
+    a, b = set(left), set(right)
+    if not a and not b:
+        return 1.0
+    if not a or not b:
+        return 0.0
+    return len(a & b) / len(a | b)
+
+
+def derive_episodes(
+    timeline: dict[str, Any],
+    working_sets: list[ActiveWorkingSet],
+    *,
+    max_gap_seconds: int = 6 * 60 * 60,
+    topic_similarity_threshold: float = 0.20,
+) -> list[SemanticEpisode]:
+    commits = {
+        commit["commit"]: commit
+        for commit in timeline.get("commits", [])
+    }
+
+    episodes: list[SemanticEpisode] = []
+    current: list[ActiveWorkingSet] = []
+    seen_programmes: set[str] = set()
+
+    def flush() -> None:
+        nonlocal current
+        if not current:
+            return
+
+        programme = current[0].programme
+        timestamps = [
+            int(commits[item.commit]["timestamp"])
+            for item in current
+        ]
+        topic_counts: dict[str, int] = {}
+        for item in current:
+            for token in item.topic_tokens:
+                topic_counts[token] = topic_counts.get(token, 0) + 1
+        topics = tuple(
+            sorted(
+                topic_counts,
+                key=lambda token: (-topic_counts[token], token),
+            )[:5]
+        )
+        focus_nodes = tuple(
+            dict.fromkeys(
+                node
+                for item in current
+                for node in item.focus_node_ids
+            )
+        )
+        focus_edges = tuple(
+            dict.fromkeys(
+                edge
+                for item in current
+                for edge in item.focus_edge_ids
+            )
+        )
+
+        episodes.append(
+            SemanticEpisode(
+                programme=programme,
+                topic_tokens=topics,
+                commits=tuple(item.commit for item in current),
+                started_at=min(timestamps),
+                ended_at=max(timestamps),
+                focus_node_ids=focus_nodes,
+                focus_edge_ids=focus_edges,
+                salience=sum(item.salience for item in current),
+                return_to_existing_region=programme in seen_programmes,
+            )
+        )
+        seen_programmes.add(programme)
+        current = []
+
+    for working_set in working_sets:
+        if not current:
+            current = [working_set]
+            continue
+
+        previous = current[-1]
+        gap = (
+            int(commits[working_set.commit]["timestamp"])
+            - int(commits[previous.commit]["timestamp"])
+        )
+        compatible = (
+            previous.programme == working_set.programme
+            and gap <= max_gap_seconds
+            and _topic_similarity(
+                previous.topic_tokens,
+                working_set.topic_tokens,
+            )
+            >= topic_similarity_threshold
+        )
+
+        if compatible:
+            current.append(working_set)
+        else:
+            flush()
+            current = [working_set]
+
+    flush()
+    return episodes
+
+
+def programme_regions(
+    programmes: Iterable[str],
+    *,
+    spacing_x: float = 15.0,
+    spacing_y: float = 9.0,
+) -> tuple[ProgrammeRegion, ...]:
+    programmes = sorted(set(programmes))
+    if not programmes:
+        return ()
+
+    columns = max(1, ceil(sqrt(len(programmes))))
+    rows = max(1, ceil(len(programmes) / columns))
+    regions: list[ProgrammeRegion] = []
+
+    for index, programme in enumerate(programmes):
+        col = index % columns
+        row = index // columns
+        x = (col - (columns - 1) / 2) * spacing_x
+        y = ((rows - 1) / 2 - row) * spacing_y
+        regions.append(
+            ProgrammeRegion(programme=programme, x=x, y=y)
+        )
+    return tuple(regions)
+
+
+def _episode_duration(episode: SemanticEpisode) -> float:
+    commit_count = len(episode.commits)
+    if episode.salience >= 120:
+        return min(8.0, 3.0 + 0.30 * commit_count)
+    if episode.salience >= 50:
+        return min(5.0, 2.0 + 0.22 * commit_count)
+    return min(3.0, 1.1 + 0.15 * commit_count)
+
+
+def compile_research_film(
+    timeline: dict[str, Any],
+    *,
+    max_context_nodes: int = 40,
+    max_context_edges: int = 100,
+) -> ResearchFilmPlan:
+    working_sets = derive_working_sets(
+        timeline,
+        max_context_nodes=max_context_nodes,
+        max_context_edges=max_context_edges,
+    )
+    episodes = derive_episodes(timeline, working_sets)
+    regions = programme_regions(
+        episode.programme
+        for episode in episodes
+    )
+
+    beats: list[FilmBeat] = []
+    previous_programme: str | None = None
+
+    for episode in episodes:
+        first_commit = episode.commits[0]
+        topic = " · ".join(episode.topic_tokens) or "formal development"
+        return_visit = (
+            episode.return_to_existing_region
+            and previous_programme != episode.programme
+        )
+
+        camera = CameraDirective(
+            programme=episode.programme,
+            focus_node_ids=episode.focus_node_ids,
+            mode="fit-active",
+            padding=1.18,
+            min_width=6.5,
+            max_width=24.0,
+            transition_seconds=(
+                1.25 if return_visit else 0.85
+            ),
+            reason=(
+                "return-to-existing-programme"
+                if return_visit
+                else "active-semantic-working-set"
+            ),
+        )
+
+        beats.append(
+            FilmBeat(
+                kind="episode-title",
+                commit=first_commit,
+                programme=episode.programme,
+                topic=topic,
+                duration_seconds=0.45,
+                focus_node_ids=episode.focus_node_ids,
+                focus_edge_ids=episode.focus_edge_ids,
+                camera=camera,
+                payload={
+                    "commits": list(episode.commits),
+                    "return_visit": return_visit,
+                    "salience": episode.salience,
+                },
+            )
+        )
+
+        for commit in episode.commits:
+            working = next(
+                item
+                for item in working_sets
+                if item.commit == commit
+            )
+            beats.append(
+                FilmBeat(
+                    kind="semantic-change",
+                    commit=commit,
+                    programme=working.programme,
+                    topic=" · ".join(working.topic_tokens),
+                    duration_seconds=max(
+                        0.35,
+                        _episode_duration(episode)
+                        / max(1, len(episode.commits)),
+                    ),
+                    focus_node_ids=working.focus_node_ids,
+                    focus_edge_ids=working.focus_edge_ids,
+                    camera=CameraDirective(
+                        programme=working.programme,
+                        focus_node_ids=working.focus_node_ids,
+                        mode="fit-active",
+                        padding=1.15,
+                        min_width=5.5,
+                        max_width=20.0,
+                        transition_seconds=0.45,
+                        reason="commit-active-working-set",
+                    ),
+                    payload={
+                        "salience": working.salience,
+                        "changed_nodes": list(
+                            working.changed_node_ids
+                        ),
+                        "changed_edges": list(
+                            working.changed_edge_ids
+                        ),
+                    },
+                )
+            )
+
+        previous_programme = episode.programme
+
+    return ResearchFilmPlan(
+        regions=regions,
+        working_sets=tuple(working_sets),
+        episodes=tuple(episodes),
+        beats=tuple(beats),
+    )
