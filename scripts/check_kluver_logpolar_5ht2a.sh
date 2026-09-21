@@ -10,6 +10,8 @@ files=(
   "DASHI/Cognition/KluverLogPolar5HT2AEverything.agda"
   "DASHI/Biology/Kluver5HT2ACrossScaleHyperfibreExact.agda"
   "DASHI/Biology/Kluver5HT2AMolecularProteinInstantiationExact.agda"
+  "DASHI/Biology/FiveHT2ASignalingDialecticExact.agda"
+  "DASHI/Biology/FiveHT2AProtocolIndexedSignalTransportExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -64,5 +66,18 @@ grep -Fq 'wacker5HT2BNeighborEvidence' "$molecular"
 grep -Fq 'assayBoundAffinityStillMissingIsTrue' "$molecular"
 grep -Fq 'receptorStateToKluverModeTransferStillMissingIsTrue' "$molecular"
 grep -Fq 'ketanserinIdentityAloneDoesNotProveSelective5HT2ABlockade' "$molecular"
+
+signaling="$root/DASHI/Biology/FiveHT2ASignalingDialecticExact.agda"
+grep -Fq 'wallachGqHTR' "$signaling"
+grep -Fq 'xuGiHallucinogenicAssay' "$signaling"
+grep -Fq 'universalGqOnlyMechanismBlocked' "$signaling"
+grep -Fq 'universalGiOnlyMechanismBlocked' "$signaling"
+grep -Fq 'humanPhenomenologyMechanismClosedIsFalse' "$signaling"
+
+transport="$root/DASHI/Biology/FiveHT2AProtocolIndexedSignalTransportExact.agda"
+grep -Fq 'protocolIdentityPreservedIsTrue' "$transport"
+grep -Fq 'signalingModulatorCanChangeOutputAtFixedInput' "$transport"
+grep -Fq 'quantitativeBiophysicalCalibrationPresentIsFalse' "$transport"
+grep -Fq 'receptorSignalDeterminesBrainStateIsFalse' "$transport"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
