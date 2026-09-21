@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.BalabanCMP116R429PhysicalSeparationRound443Exact 
 
 open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as Nat
-open import Data.Rational.Base as ℚ using (_≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -48,7 +48,7 @@ selectedConnectingDistance selected =
 
 record R429SelectedPhysicalSeparation
     {Measure TestObservable : Set}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
     {fourStage :
