@@ -117,3 +117,68 @@ verified full text
     != reviewed canonical evidence
     != SourceAuditAdmission
 ```
+
+
+## Run the already-verified full text now
+
+If the SLR-side P0-G/full-text index is already complete, you do **not** need to
+rerun ERIC acquisition/screening first.
+
+From `dashi_agda`:
+
+```bash
+python3 interop_scripts/digital_esd/run_verified_fulltext_parse.py \
+  --slr-root ../slr \
+  --artifact-root artifacts/digital-esd/real-eric
+```
+
+For a bounded smoke run first:
+
+```bash
+python3 interop_scripts/digital_esd/run_verified_fulltext_parse.py \
+  --slr-root ../slr \
+  --artifact-root artifacts/digital-esd/real-eric \
+  --max-items 20
+```
+
+Omit `--max-items` to parse every verified artifact in the P0-G index.
+
+The wrapper writes under the SLR artifact root by default:
+
+```text
+artifacts/digital-esd/real-eric/slr-parse/
+  materialized-text/
+  materialization-receipts.jsonl
+  scholarly-parser-input.jsonl
+  slr-handoff-receipts.jsonl
+  parser/
+    requests.jsonl
+    parser-output.jsonl
+    verified.jsonl
+  slr-parse-receipts.jsonl
+  study_processing_census_with_parse.json
+  verified-fulltext-parse-run.json
+```
+
+### One-command replay through L5
+
+If you want to rerun from retained ERIC exports through actual paper parsing:
+
+```bash
+python3 interop_scripts/digital_esd/run_l1_l5.py \
+  --slr-root ../slr \
+  --export-root /path/to/retained-eric-exports \
+  --artifact-root artifacts/digital-esd/real-eric \
+  --decision-overlay /path/to/completed-reviewed-decisions.jsonl \
+  --retrieved-manifest /path/to/retrieved-fulltext-manifest.jsonl
+```
+
+For a bounded parser smoke pass add:
+
+```text
+--parse-max-items 20
+```
+
+The L1→L5 wrapper delegates L1→L3 entirely to the generic SLR runtime and then
+uses the verified-full-text parse bridge above. It does not copy ERIC parsing,
+screening, full-text indexing, or scholarly parsing semantics into dashi_agda.
