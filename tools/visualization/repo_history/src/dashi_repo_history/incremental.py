@@ -338,8 +338,12 @@ class IncrementalPatchReceipt:
     affected_modules: tuple[str, ...]
     removed_nodes: int
     added_nodes: int
+    updated_nodes: int
     removed_edges: int
     added_edges: int
+    updated_edges: int
+    recomputed_nodes: int
+    recomputed_edges: int
     unresolved_before: int
     unresolved_after: int
     parse_errors_before: int
@@ -374,8 +378,12 @@ def patch_semantic_graph(
             affected_modules=(),
             removed_nodes=0,
             added_nodes=0,
+            updated_nodes=0,
             removed_edges=0,
             added_edges=0,
+            updated_edges=0,
+            recomputed_nodes=0,
+            recomputed_edges=0,
             unresolved_before=len(previous.unresolved_references),
             unresolved_after=len(previous.unresolved_references),
             parse_errors_before=len(previous.parse_error_files),
@@ -440,15 +448,55 @@ def patch_semantic_graph(
         ),
     )
 
-    added_node_ids = set(fragment.nodes)
-    added_edge_ids = set(fragment.edges)
+    old_affected_nodes = {
+        symbol_id: symbol
+        for symbol_id, symbol in previous.nodes.items()
+        if symbol.module in affected
+    }
+    old_affected_node_ids = set(old_affected_nodes)
+    new_affected_node_ids = set(fragment.nodes)
+
+    old_touching_edges = {
+        relation_id: relation
+        for relation_id, relation in previous.edges.items()
+        if relation.source in old_affected_node_ids
+        or relation.target in old_affected_node_ids
+    }
+    new_touching_edges = dict(fragment.edges)
+
+    semantic_removed_nodes = (
+        old_affected_node_ids - new_affected_node_ids
+    )
+    semantic_added_nodes = (
+        new_affected_node_ids - old_affected_node_ids
+    )
+    semantic_updated_nodes = {
+        node_id
+        for node_id in old_affected_node_ids & new_affected_node_ids
+        if old_affected_nodes[node_id] != fragment.nodes[node_id]
+    }
+
+    old_edge_ids = set(old_touching_edges)
+    new_edge_ids = set(new_touching_edges)
+    semantic_removed_edges = old_edge_ids - new_edge_ids
+    semantic_added_edges = new_edge_ids - old_edge_ids
+    semantic_updated_edges = {
+        edge_id
+        for edge_id in old_edge_ids & new_edge_ids
+        if old_touching_edges[edge_id]
+        != new_touching_edges[edge_id]
+    }
 
     receipt = IncrementalPatchReceipt(
         affected_modules=tuple(sorted(affected)),
-        removed_nodes=len(removed_node_ids),
-        added_nodes=len(added_node_ids),
-        removed_edges=len(previous.edges) - len(kept_edges),
-        added_edges=len(added_edge_ids),
+        removed_nodes=len(semantic_removed_nodes),
+        added_nodes=len(semantic_added_nodes),
+        updated_nodes=len(semantic_updated_nodes),
+        removed_edges=len(semantic_removed_edges),
+        added_edges=len(semantic_added_edges),
+        updated_edges=len(semantic_updated_edges),
+        recomputed_nodes=len(fragment.nodes),
+        recomputed_edges=len(fragment.edges),
         unresolved_before=len(previous.unresolved_references),
         unresolved_after=len(result.unresolved_references),
         parse_errors_before=len(previous.parse_error_files),
