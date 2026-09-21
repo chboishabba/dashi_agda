@@ -40,3 +40,14 @@ laterStageInferenceForbidden :
   Census.allowsLaterStageInference Census.canonicalStudyProcessingCensusBoundary
   ≡ false
 laterStageInferenceForbidden = refl
+
+
+laterStageCannotCreateEarlierReceipt :
+  Census.LaterStageMayCreateEarlierStageWithoutReceipt → ⊥
+laterStageCannotCreateEarlierReceipt =
+  Census.laterStageDoesNotCreateEarlierStageWithoutReceipt
+
+everyMetadataRecordNeedsProcessingRow :
+  Census.MissingProcessingRowMayLeaveDenominator → ⊥
+everyMetadataRecordNeedsProcessingRow =
+  Census.missingProcessingRowDoesNotLeaveDenominator
