@@ -82,6 +82,31 @@ selectedPredicateTrueImpliesDecodedSemanticLegal
     {machine} stateCoverage symbolCoverage nonempty bits accepted =
   Reflect.booleanTrueImpliesSemanticLegal accepted
 
+
+/--
+The converse reflection is equally literal: if the actual decoded rule/window
+pair is semantically legal, the selected Boolean predicate is true even for an
+arbitrary bit vector.
+-/
+decodedSemanticLegalImpliesSelectedPredicateTrue :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (bits : CNF.Bits (Selected.TransitionLocalWidth machine)) →
+  Pattern.LegalWindowForRule
+    machine
+    (decodedSelectedRule nonempty bits)
+    (decodedSelectedWindow stateCoverage symbolCoverage bits) →
+  Selected.selectedRuleWindowPredicateWithCoverage
+    stateCoverage symbolCoverage nonempty bits
+  ≡ true
+decodedSemanticLegalImpliesSelectedPredicateTrue
+    {machine} stateCoverage symbolCoverage nonempty bits legal =
+  Reflect.semanticLegalImpliesReflectedBooleanTrue legal
+
 record RawDecodedWindowSemantic
     {machine : Local.ConcreteTapeMachine}
     {steps cols timeIndex columnIndex : Nat}
