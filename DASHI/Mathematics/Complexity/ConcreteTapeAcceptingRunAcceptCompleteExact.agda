@@ -54,8 +54,8 @@ oneHotTrueImpliesOccurrence Indexed.here Fin.zero accepted =
 oneHotTrueImpliesOccurrence {xs = x ∷ xs}
     Indexed.here (Fin.suc i) accepted
     with zerosLookupFalse (Canonical.listLength xs) i
-... | zeroLookup
-    rewrite zeroLookup in accepted
+... | refl
+    with accepted
 ... | ()
 oneHotTrueImpliesOccurrence
     (Indexed.there occurrence) Fin.zero ()
@@ -387,8 +387,7 @@ acceptingEndpointCNF_complete_for_run
       ≡ true
     localPredicateTrue i
       with CNF.lookupBit witnessBits i
-         | oneHotTrueImpliesOccurrence acceptingOccurrence i
-    ... | false | implication =
+    ... | false =
       witnessPredicateFalse
         stateCoverage symbolCoverage localBits
         headFalse
@@ -407,7 +406,7 @@ acceptingEndpointCNF_complete_for_run
               (witnessLookup
                 stateCoverage symbolCoverage certificate i)
               refl)
-    ... | true | implication =
+    ... | true =
       witnessPredicateTrueAccepting
         stateCoverage symbolCoverage localBits symbol
         headTrue decodedAccepting
@@ -434,7 +433,8 @@ acceptingEndpointCNF_complete_for_run
               (Local.acceptingState machine) symbol)
             (Local.cells finish)
         acceptingAtI =
-          implication refl
+          oneHotTrueImpliesOccurrence
+            acceptingOccurrence i refl
 
         decodedFinalOccurrence =
           Same.decodeCellsAtBlockSlice
