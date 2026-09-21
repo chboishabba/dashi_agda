@@ -86,6 +86,19 @@ hadjikhaniEtAl2001 =
     "Provides human fMRI evidence of a slowly propagating occipital BOLD change congruent with aura retinotopy; it does not prove that psychedelic form constants and migraine aura share one unique mechanism."
     Source.publicAttribution
 
+
+vanDyckEtAl2000 : Source.AttributedSource
+vanDyckEtAl2000 =
+  Source.mkNoDOISource
+    "C. H. van Dyck; P. Z. Tan; R. M. Baldwin; L. A. Amici; P. K. Garg; C. K. Ng; R. Soufer; D. S. Charney; R. B. Innis"
+    "PET quantification of 5-HT2A receptors in the human brain: a constant infusion paradigm with [18F]altanserin"
+    "Journal of Nuclear Medicine 41(2):234-241"
+    "2000"
+    "https://pubmed.ncbi.nlm.nih.gov/10688105/"
+    Source.academicArticleSource
+    "Reports measurable human 5-HT2A binding with an anterior-cingulate region of interest in healthy volunteers; this pays an ACC receptor-availability coordinate only, not a psychedelic attention or meaning mechanism."
+    Source.publicAttribution
+
 beliveauEtAl2017 : Source.AttributedSource
 beliveauEtAl2017 =
   Source.mkDOISource
@@ -158,6 +171,7 @@ canonicalKluverLogPolar5HT2ASources =
   ∷ grusser1995
   ∷ bressloffEtAl2001
   ∷ hadjikhaniEtAl2001
+  ∷ vanDyckEtAl2000
   ∷ beliveauEtAl2017
   ∷ prellerEtAl2017
   ∷ prellerEtAl2018
