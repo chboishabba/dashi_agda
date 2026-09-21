@@ -3,6 +3,7 @@ module DASHI.Biology.Kluver5HT2ACrossScaleHyperfibreExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact as Sources
 import DASHI.Biology.NeurochemicalAtomicChemistryBridge as AtomicChem
 import DASHI.Biology.NeurochemicalProteinTargetBridge as ProteinTarget
@@ -30,7 +31,7 @@ import DASHI.Cognition.Kluver5HT2ACrossPollinationExact as Kluver5HT2A
 -- DASHI extension and must not be attributed back to those source authors.
 ------------------------------------------------------------------------
 
-sourceAtlas : DASHI.Core.AttributedSourceCore.AttributedSourceAtlas
+sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Sources.canonicalKluverLogPolar5HT2AAtlas
 
 ------------------------------------------------------------------------
@@ -169,13 +170,13 @@ canonicalFiveHT2ACrossScaleLinks =
 -- allosteric landscape is manufactured here.
 ------------------------------------------------------------------------
 
-record ReceptorConformationInterface : Set₁ where
+record ReceptorConformationInterface : Set where
   constructor receptorConformationInterface
   field
-    ProteinSystem : Set
-    Conformation : Set
-    Environment : Set
-    LigandContext : Set
+    proteinConformationOwner : String
+    proteinConformationSystemAvailable : Bool
+    proteinConformationSystemAvailableIsTrue :
+      proteinConformationSystemAvailable ≡ true
 
     receptorStateDependsOnConformation : Bool
     receptorStateDependsOnConformationIsTrue :
@@ -196,10 +197,8 @@ record ReceptorConformationInterface : Set₁ where
 canonicalReceptorConformationInterface : ReceptorConformationInterface
 canonicalReceptorConformationInterface =
   receptorConformationInterface
-    ProteinConformation.ProteinConformationSystem
-    ProteinConformation.ProteinConformationSystem
-    ProteinConformation.ProteinConformationSystem
-    String
+    "DASHI.Biology.Protein.ProteinConformationAttractor.ProteinConformationSystem"
+    true refl
     true refl
     false refl
     false refl
