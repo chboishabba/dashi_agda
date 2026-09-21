@@ -21,6 +21,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
+import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Accepting
 import DASHI.Mathematics.Complexity.ConcreteTapeInputPaddingExact as Padding
 import DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact as Margin
 import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coordinate
@@ -88,8 +89,10 @@ guardedInitialCellCount input steps
     arithmetic :
       steps + (Input.initialInputCellCount input + steps)
       ≡ Input.initialInputCellCount input + (2 * steps)
-    arithmetic = NatP.+-assoc steps _ steps
-      |> λ h → trans h (byRearrange steps (Input.initialInputCellCount input))
+    arithmetic =
+      trans
+        (sym (NatP.+-assoc steps (Input.initialInputCellCount input) steps))
+        (byRearrange steps (Input.initialInputCellCount input))
     where
       byRearrange : ∀ a b → a + b + a ≡ b + (2 * a)
       byRearrange zero b
@@ -154,24 +157,10 @@ guardedInitialInterior {machine} input steps =
               (Character.suffix base)
               (Padding.replicateBlank steps))
     guardedShape
-      rewrite Character.rowShape base =
-      appendAssoc
-        (Padding.replicateBlank steps)
-        (Local.plain (Character.leftSymbol base)
-          ∷ Local.headed
-              (Character.headState base)
-              (Character.readSymbol base)
-          ∷ Local.plain (Character.rightSymbol base)
-          ∷ Character.suffix base)
-        (Padding.replicateBlank steps)
-      where
-        appendAssoc :
-          ∀ {A : Set} (xs ys zs : List A) →
-          Local.append xs (Local.append ys zs)
-          ≡ Local.append (Local.append xs ys) zs
-        appendAssoc [] ys zs = refl
-        appendAssoc (x ∷ xs) ys zs
-            rewrite appendAssoc xs ys zs = refl
+      with input
+    ... | [] = refl
+    ... | symbol ∷ [] = refl
+    ... | symbol ∷ next ∷ rest = refl
 
 guardedInitialState :
   ∀ {machine}
@@ -180,7 +169,7 @@ guardedInitialState :
   Character.headState (guardedInitialInterior input steps)
   ≡ Local.initialState machine
 guardedInitialState input steps =
-  Input.Accepting.headIsInitial
+  Accepting.headIsInitial
     (Input.initialInputIsInitialInterior input)
 
 ------------------------------------------------------------------------
