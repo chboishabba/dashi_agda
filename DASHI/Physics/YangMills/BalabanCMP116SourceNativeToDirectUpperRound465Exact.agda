@@ -22,7 +22,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SourceNativeToDirectUpperRound465Exa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -62,7 +62,7 @@ record SourceNativePhysicalRateSemantics
     geometricPhysicalTimeBelowSpectrumEnvelope :
       ∀ observable time →
       R394.fastAmplitude calibration
-        ℚ.* Power.rationalPower (R394.fastRatio calibration) time
+        * Power.rationalPower (R394.fastRatio calibration) time
       ≤
       R281.clusteringEnvelope spectrumSource observable time
 
