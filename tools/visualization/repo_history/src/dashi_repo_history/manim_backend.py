@@ -1450,13 +1450,14 @@ def _camera_fit_width(
     padding: float,
     min_width: float,
     max_width: float,
+    enforce_max: bool = True,
 ) -> float:
     width = max(
         group.width * padding,
         group.height * frame_aspect * padding,
         min_width,
     )
-    return min(max_width, width)
+    return min(max_width, width) if enforce_max else width
 
 
 def _focus_group(view, node_ids: set[str]) -> VGroup:
@@ -1792,6 +1793,8 @@ class ResearchEvolutionScene(MovingCameraScene):
         view: ResearchAtlasGraphView,
         node_ids: set[str],
         directive,
+        *,
+        fit_all: bool = False,
     ) -> None:
         focus = _focus_group(view, node_ids)
         if len(focus) == 0:
@@ -1812,6 +1815,7 @@ class ResearchEvolutionScene(MovingCameraScene):
                 padding=directive.padding,
                 min_width=directive.min_width,
                 max_width=directive.max_width,
+                enforce_max=not fit_all,
             )
 
         previous = getattr(self, "_last_camera_target", None)
@@ -1997,10 +2001,15 @@ class ResearchEvolutionScene(MovingCameraScene):
                             graph_created = True
 
                 if beat.camera is not None and graph_created:
+                    event_nodes = set(
+                        beat.visible_node_ids
+                        or beat.focus_node_ids
+                    )
                     self._focus_camera(
                         view,
-                        set(beat.focus_node_ids),
+                        event_nodes,
                         beat.camera,
+                        fit_all=True,
                     )
 
                 event_text = beat.topic or beat.kind.replace("-", " ")
@@ -2151,6 +2160,7 @@ class ResearchEvolutionScene(MovingCameraScene):
                     view,
                     visible_nodes,
                     beat.camera,
+                    fit_all=True,
                 )
 
             highlights = [
