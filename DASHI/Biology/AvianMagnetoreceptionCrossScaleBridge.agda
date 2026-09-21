@@ -11,6 +11,7 @@ import DASHI.Biology.CellDifferentiationCommunicationBridge as Cell
 import DASHI.Biology.ProteinHormoneChemistryCellBridge as ProteinCell
 import DASHI.Biology.EmbodiedMotorMultisensoryBridge as Embodied
 import DASHI.Biology.NeurochemicalTransmissionBridge as Neuro
+import DASHI.Biology.NeurochemicalAtomicChemistryBridge as Atomic
 import DASHI.Biology.JasonThomasSTINGFerritinophagyMechanismDepthExact as Iron
 import Ontology.Brain.BrainVocabularySurface as Brain
 
@@ -107,6 +108,13 @@ record AvianMagnetoreceptionCrossScaleBridge : Setω where
     hepaticReceiptIsCanonical :
       hepaticReceipt ≡
       Hepatic.canonicalHepaticMacrophageMagnetoreceptionReceipt
+
+    atomicChemistryBridge :
+      Atomic.NeurochemicalAtomicChemistryBridge
+
+    atomicChemistryBridgeIsCanonical :
+      atomicChemistryBridge ≡
+      Atomic.canonicalNeurochemicalAtomicChemistryBridge
 
     ferritinIronLogic :
       Iron.FerritinophagyLogic
@@ -227,6 +235,9 @@ canonicalAvianMagnetoreceptionCrossScaleBridge =
     { hepaticReceipt =
         Hepatic.canonicalHepaticMacrophageMagnetoreceptionReceipt
     ; hepaticReceiptIsCanonical = refl
+    ; atomicChemistryBridge =
+        Atomic.canonicalNeurochemicalAtomicChemistryBridge
+    ; atomicChemistryBridgeIsCanonical = refl
     ; ferritinIronLogic =
         Iron.canonicalFerritinophagyLogic
     ; ferritinIronLogicIsCanonical = refl
