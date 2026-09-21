@@ -166,7 +166,27 @@ giumelliReviewedIdentityHopObserved :
 giumelliReviewedIdentityHopObserved =
   Recursive.liveReviewedIdentityHopObservedIsTrue capstone
 
-giumelliReviewedTreatmentHopStillOpen :
-  Recursive.liveReviewedTreatmentHopObserved capstone ≡ false
-giumelliReviewedTreatmentHopStillOpen =
-  Recursive.liveReviewedTreatmentHopObservedIsFalse capstone
+giumelliReviewedTreatmentHopObserved :
+  Recursive.liveReviewedTreatmentHopObserved capstone ≡ true
+giumelliReviewedTreatmentHopObserved =
+  Recursive.liveReviewedTreatmentHopObservedIsTrue capstone
+
+giumelliPostTreatmentOutboundFrontierEmpty :
+  Recursive.livePostTreatmentOutboundFrontierEmpty capstone ≡ true
+giumelliPostTreatmentOutboundFrontierEmpty =
+  Recursive.livePostTreatmentOutboundFrontierEmptyIsTrue capstone
+
+giumelliDriverFrontierClosed :
+  Recursive.liveDriverCurrentFrontierClosed capstone ≡ true
+giumelliDriverFrontierClosed =
+  Recursive.liveDriverCurrentFrontierClosedIsTrue capstone
+
+giumelliDriverDidNotBypassReview :
+  Recursive.liveDriverReviewGateBypassed capstone ≡ false
+giumelliDriverDidNotBypassReview =
+  Recursive.liveDriverReviewGateBypassedIsFalse capstone
+
+giumelliFrontierClosureIsNotFormalAdequacy :
+  Recursive.frontierClosureFormallyProvesConsumerAdequacy capstone ≡ false
+giumelliFrontierClosureIsNotFormalAdequacy =
+  Recursive.frontierClosureFormallyProvesConsumerAdequacyIsFalse capstone
