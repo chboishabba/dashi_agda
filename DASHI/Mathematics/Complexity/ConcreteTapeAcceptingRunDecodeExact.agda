@@ -4,6 +4,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunDecodeExact where
 -- CANONICAL RUN ENCODING DECODES BACK TO THE LITERAL RUN
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -78,8 +79,6 @@ decodeRunRows_encodeRunRows {machine} {start = current}
           | decodeRunRows_encodeRunRows
               stateCoverage symbolCoverage rest =
   refl
-  where
-    import DASHI.Mathematics.Complexity.ConcreteTapeFlatAssignmentExact as Flat
 
 decodeRuleChoice_encodeRuleOccurs :
   ∀ {machine}
@@ -129,15 +128,15 @@ decodeRunSelectors_encodeRunSelectors
 record AcceptingRunDecodeReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
-    canonicalRowsDecodePaid : Agda.Builtin.Bool.Bool
-    canonicalSelectorsDecodePaid : Agda.Builtin.Bool.Bool
-    decodedTraceMatchesLiteralRunPaid : Agda.Builtin.Bool.Bool
+    canonicalRowsDecodePaid : Bool
+    canonicalSelectorsDecodePaid : Bool
+    decodedTraceMatchesLiteralRunPaid : Bool
 
 acceptingRunDecodeReceipt :
   ∀ (machine : Local.ConcreteTapeMachine) →
   AcceptingRunDecodeReceipt machine
 acceptingRunDecodeReceipt machine = record
-  { canonicalRowsDecodePaid = Agda.Builtin.Bool.true
-  ; canonicalSelectorsDecodePaid = Agda.Builtin.Bool.true
-  ; decodedTraceMatchesLiteralRunPaid = Agda.Builtin.Bool.true
+  { canonicalRowsDecodePaid = true
+  ; canonicalSelectorsDecodePaid = true
+  ; decodedTraceMatchesLiteralRunPaid = true
   }
