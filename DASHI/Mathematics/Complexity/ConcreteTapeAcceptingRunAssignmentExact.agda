@@ -170,6 +170,19 @@ encodeRunRows_finalBlock {machine} {start = current}
   encodeRunRows_finalBlock
     stateCoverage symbolCoverage rest
 
+
+finalRunRowSlot_eq_finalRowSlot :
+  ∀ {machine start rows finish}
+    (run : Run.WellFormedTapeRun machine start rows finish) →
+  finalRunRowSlot run ≡
+    Endpoint.finalRowSlot (Run.runLength run)
+finalRunRowSlot_eq_finalRowSlot Run.runDone =
+  refl
+finalRunRowSlot_eq_finalRowSlot
+    (Run.runStep step rest)
+    rewrite finalRunRowSlot_eq_finalRowSlot rest =
+  refl
+
 ------------------------------------------------------------------------
 -- One canonical shared selector per actual transition
 ------------------------------------------------------------------------
