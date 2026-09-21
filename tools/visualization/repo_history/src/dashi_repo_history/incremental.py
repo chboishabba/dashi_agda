@@ -206,27 +206,30 @@ def plan_incremental_impact_indexed(
     }
 
     for changed_module in sorted(changed_modules):
-        for consumer in after_index.importers_by_target.get(
+        openers = after_index.openers_by_target.get(
             changed_module,
             frozenset(),
-        ):
-            affected.add(consumer)
-            reasons.add(
-                (
-                    consumer,
-                    f"imports-changed-module:{changed_module}",
-                )
-            )
+        )
+        importers = after_index.importers_by_target.get(
+            changed_module,
+            frozenset(),
+        )
 
-        for consumer in after_index.openers_by_target.get(
-            changed_module,
-            frozenset(),
-        ):
+        for consumer in openers:
             affected.add(consumer)
             reasons.add(
                 (
                     consumer,
                     f"opens-changed-module:{changed_module}",
+                )
+            )
+
+        for consumer in importers - openers:
+            affected.add(consumer)
+            reasons.add(
+                (
+                    consumer,
+                    f"imports-changed-module:{changed_module}",
                 )
             )
 
