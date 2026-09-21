@@ -99,6 +99,44 @@ def read_commit_dag(
     return commits
 
 
+def enrich_commit_subjects(
+    repo: Path,
+    commits: list[CommitRecord],
+    *,
+    batch_size: int = 200,
+) -> list[CommitRecord]:
+    if not commits:
+        return []
+
+    subjects: dict[str, str] = {}
+    shas = [commit.commit for commit in commits]
+    for start in range(0, len(shas), batch_size):
+        chunk = shas[start : start + batch_size]
+        raw = _run_text(
+            repo,
+            "show",
+            "-s",
+            "--format=%H%x00%s",
+            *chunk,
+        )
+        for line in raw.splitlines():
+            if "\x00" not in line:
+                continue
+            sha, subject = line.split("\x00", 1)
+            subjects[sha] = subject
+
+    return [
+        CommitRecord(
+            commit=record.commit,
+            timestamp=record.timestamp,
+            parents=record.parents,
+            refs=record.refs,
+            subject=subjects.get(record.commit, record.subject),
+        )
+        for record in commits
+    ]
+
+
 def source_tree(
     repo: Path,
     commit: str,
@@ -479,6 +517,11 @@ class HistoryExtractor:
                 all_commits,
                 commits,
             )
+
+        commits = enrich_commit_subjects(
+            self.repo,
+            commits,
+        )
 
         if not semantic:
             return Timeline(
