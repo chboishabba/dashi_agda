@@ -254,6 +254,45 @@ prellerEtAl2018 =
     "Supports a 5-HT2A-dependent component of LSD-related global/thalamic connectivity changes under ketanserin blockade; it does not make one region or one receptor sufficient for the total experience."
     Source.publicAttribution
 
+
+barzanEtAl2024 : Source.AttributedSource
+barzanEtAl2024 =
+  Source.mkDOISource
+    "Ruxandra Barzan; Beyza Bozkurt; Mohammadreza M. Nejad; Sandra T. Suess; Tatjana Surdin; and collaborators"
+    "Gain control of sensory input across polysynaptic circuitries in mouse visual cortex by a single G protein-coupled receptor type (5-HT2A)"
+    "Nature Communications 15:8078"
+    "2024"
+    "10.1038/s41467-024-51861-1"
+    "https://doi.org/10.1038/s41467-024-51861-1"
+    Source.academicArticleSource
+    "Reports cell-type-specific 5-HT2A-pathway manipulation in mouse V1, calcium/Gq-PLC validation, pyramidal/PV firing effects, and polysynaptic visual-gain modulation; it does not establish psychedelic phenomenology or a direct receptor-to-Kluever-form law."
+    Source.publicAttribution
+
+whiteEtAl2026 : Source.AttributedSource
+whiteEtAl2026 =
+  Source.mkDOISource
+    "Callum M. White; Zohre Azimi; Robert Staadt; Chenchen Song; Thomas Knoepfel; Dirk Jancke"
+    "Psychedelic 5-HT2A agonist increases spontaneous and evoked 5-Hz oscillations in visual and retrosplenial cortex"
+    "Communications Biology 9:216"
+    "2026"
+    "10.1038/s42003-025-09492-9"
+    "https://doi.org/10.1038/s42003-025-09492-9"
+    Source.academicArticleSource
+    "Reports a psychedelic 5-HT2A agonist-associated change in spontaneous and evoked approximately 5-Hz cortical oscillatory activity including visual cortex; it supplies a circuit-dynamics coordinate, not a Kluever-form identity or human perceptual mechanism."
+    Source.publicAttribution
+
+solerEtAl2026 : Source.AttributedSource
+solerEtAl2026 =
+  Source.mkNoDOISource
+    "Systematic-review authors indexed by PubMed PMID 41862146"
+    "Electrophysiological mechanisms of psychedelic drugs: A systematic review"
+    "Neuroscience and Biobehavioral Reviews"
+    "2026"
+    "https://pubmed.ncbi.nlm.nih.gov/41862146/"
+    Source.academicArticleSource
+    "Synthesizes heterogeneous in-vitro and in-vivo psychedelic electrophysiology and explicitly cautions against a uniform-excitation account; used only as a review-level heterogeneity boundary, not as primary evidence for any individual current or circuit effect."
+    Source.publicAttribution
+
 hamEtAl2013 : Source.AttributedSource
 hamEtAl2013 =
   Source.mkDOISource
@@ -300,6 +339,9 @@ canonicalKluverLogPolar5HT2ASources =
   ∷ beliveauEtAl2017
   ∷ prellerEtAl2017
   ∷ prellerEtAl2018
+  ∷ barzanEtAl2024
+  ∷ whiteEtAl2026
+  ∷ solerEtAl2026
   ∷ hamEtAl2013
   ∷ cipolottiEtAl2025
   ∷ []
