@@ -7,6 +7,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
+import DASHI.Law.ConsumerDirectedLegalFollowAdequacyExact as Consumer
 
 ------------------------------------------------------------------------
 -- Exact non-factorability witness -> exact consumer research residual.
@@ -68,23 +69,21 @@ residualRetainsNonFactorability = defect
 
 treatmentDefectCompilesToTreatmentDemand :
   ExactConsumerResidual
-    Consumer.ConsumerDirectedLegalFollowAdequacyExact.coarseProject
-    Consumer.ConsumerDirectedLegalFollowAdequacyExact.semantics
-    Consumer.ConsumerDirectedLegalFollowAdequacyExact.treatmentSensitiveQuery
+    Consumer.coarseProject
+    Consumer.semantics
+    Consumer.treatmentSensitiveQuery
 treatmentDefectCompilesToTreatmentDemand =
   exactConsumerResidual
     treatment
     "case:target"
     "DASHI.Law.ConsumerDirectedLegalFollowAdequacyExact"
     "coarseTreatmentDefect"
-    Consumer.ConsumerDirectedLegalFollowAdequacyExact.coarseTreatmentDefect
+    Consumer.coarseTreatmentDefect
     reviewTreatment
     refl
     true refl
     false refl
     false refl
-  where
-    import DASHI.Law.ConsumerDirectedLegalFollowAdequacyExact as Consumer
 
 treatmentResidualDemandIsExact :
   demandKind treatmentDefectCompilesToTreatmentDemand ≡ reviewTreatment
