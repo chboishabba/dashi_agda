@@ -67,10 +67,6 @@ def main() -> int:
         type=Path,
         default=Path("artifacts/digital-esd/slr-fulltext"),
     )
-    ap.add_argument(
-        "--spacy-model",
-        help="optional spaCy model forwarded to the existing SLR batch if supported",
-    )
     args = ap.parse_args()
 
     repo = args.repo_root.resolve()
@@ -125,9 +121,6 @@ def main() -> int:
         "--summary",
         str(summary),
     ]
-    if args.spacy_model:
-        cmd.extend(["--spacy-model", args.spacy_model])
-
     print("+", " ".join(cmd), flush=True)
     subprocess.run(cmd, cwd=repo, check=True)
 
