@@ -38,7 +38,7 @@ liJointCalibrationPrimary = Source.mkDOISource
 
 singhCouplingReview : Source.AttributedSource
 singhCouplingReview = Source.mkDOISource
-  "Himanshu Singh; Harish Kumar; Ravi Kumar"
+  "Hema Singh; H. L. Sneha; R. M. Jha"
   "Mutual Coupling in Phased Arrays: A Review"
   "International Journal of Antennas and Propagation 2013, 348123"
   "2013"
@@ -50,9 +50,9 @@ singhCouplingReview = Source.mkDOISource
 
 kamodaQuantizationPrimary : Source.AttributedSource
 kamodaQuantizationPrimary = Source.mkDOISource
-  "Hiroyuki Kamoda; Fumiyasu Suginoshita"
+  "Hirokazu Kamoda; Jun Tsumochi; Takao Kuki; Fumiyasu Suginoshita"
   "A study on antenna gain degradation due to digital phase shifter in phased array antennas"
-  "Microwave and Optical Technology Letters"
+  "Microwave and Optical Technology Letters 53(8), 1743-1746"
   "2011"
   "10.1002/mop.26145"
   "https://doi.org/10.1002/mop.26145"
@@ -62,7 +62,7 @@ kamodaQuantizationPrimary = Source.mkDOISource
 
 ieiceQuantizationPrimary : Source.AttributedSource
 ieiceQuantizationPrimary = Source.mkDOISource
-  "IEICE Transactions on Communications authors"
+  "Junlin Tang; Kaida Xu; Yuan Zeng; Guangrong Yue; Shaoqian Li"
   "Effect of Phase Shifter Quantization Error on the Performance of Millimeter Wave Beam Steering"
   "IEICE Transactions on Communications E100.B(10), 1884-1890"
   "2017"
