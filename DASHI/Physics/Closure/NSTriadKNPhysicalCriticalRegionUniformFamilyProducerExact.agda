@@ -139,7 +139,7 @@ module Producer
     { U.paymentAt = λ output → paymentAt output (receiptsAt receipts output)
     ; U.thetaStrictlyBelowOne =
         thetaStrictlyBelowOne (receiptsAt receipts
-          (record { Z3.kx = 0 ; Z3.ky = 0 ; Z3.kz = 0 }))
+          Z3.zeroMode)
     ; U.coefficientNN = coefficientNN receipts
     ; U.viscosityNN = viscosityNN receipts
     ; U.thetaMeaning = λ output → refl
