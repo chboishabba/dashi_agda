@@ -4,6 +4,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeDecodedWholeRowSemanticExact whe
 -- ALL RAW SEMANTIC WINDOWS = ALL WINDOWS OF THE ACTUAL DECODED ROW PAIR
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -65,6 +66,44 @@ decodedWindowsForStarts stateCoverage symbolCoverage
 -- Legality transfers immediately through the P1 same-object equality
 ------------------------------------------------------------------------
 
+ruleAtTime :
+  ∀ {machine steps cols timeIndex}
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (timeSlot : Global.Slot timeIndex steps)
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
+  Local.TapeRule (Local.State machine) (Local.Symbol machine)
+ruleAtTime nonempty timeSlot globalBits =
+  Selector.decodeRule nonempty
+    (Global.selectorSliceBits timeSlot globalBits)
+
+semanticRule_eq_ruleAtTime :
+  ∀ {machine steps cols timeIndex index}
+    {stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine)}
+    {symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine)}
+    {nonempty : Selector.NonemptyRuleTable machine}
+    {timeSlot : Global.Slot timeIndex steps}
+    {start : Raw.WindowStart index cols}
+    {globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)}
+    (semantic :
+      Semantic.RawDecodedWindowSemantic
+        stateCoverage symbolCoverage nonempty
+        timeSlot start globalBits) →
+  Semantic.rule semantic
+  ≡ ruleAtTime nonempty timeSlot globalBits
+semanticRule_eq_ruleAtTime
+    {nonempty = nonempty}
+    {timeSlot = timeSlot}
+    {start = start}
+    {globalBits = globalBits}
+    semantic =
+  trans
+    (Semantic.ruleExact semantic)
+    (cong (Selector.decodeRule nonempty)
+      (Same.rawSelectedRuleBits_eq_selectorSliceBits
+        timeSlot start globalBits))
+
 rawSemanticToDecodedIndexedLegal :
   ∀ {machine steps cols timeIndex}
     (stateCoverage :
@@ -79,25 +118,9 @@ rawSemanticToDecodedIndexedLegal :
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits starts →
   IndexedScan.AllIndexedLegal
-    (Semantic.decodedSelectedRule nonempty
-      (Raw.rawSelectedWindowBits
-        timeSlot
-        firstStart
-        globalBits))
+    (ruleAtTime nonempty timeSlot globalBits)
     (decodedWindowsForStarts
       stateCoverage symbolCoverage timeSlot starts globalBits)
-  where
-    firstStart : Raw.WindowStart zero cols
-    firstStart {cols = suc (suc (suc rest))} = Raw.here
-    firstStart {cols = zero} = impossible
-      where impossible : Raw.WindowStart zero zero
-            impossible = impossible
-    firstStart {cols = suc zero} = impossible
-      where impossible : Raw.WindowStart zero (suc zero)
-            impossible = impossible
-    firstStart {cols = suc (suc zero)} = impossible
-      where impossible : Raw.WindowStart zero (suc (suc zero))
-            impossible = impossible
 rawSemanticToDecodedIndexedLegal
     stateCoverage symbolCoverage nonempty
     timeSlot [] globalBits Scan.semanticWindowsDone =
@@ -109,100 +132,22 @@ rawSemanticToDecodedIndexedLegal
     globalBits
     (Scan.semanticWindowsStep current remaining) =
   IndexedScan.allIndexedCons currentLegal
-    (rawSemanticTailToDecodedIndexedLegal
+    (rawSemanticToDecodedIndexedLegal
       stateCoverage symbolCoverage nonempty
-      timeSlot start rest globalBits current remaining)
+      timeSlot rest globalBits remaining)
   where
     currentLegal :
       Pattern.LegalWindowForRule machine
-        (Semantic.rule current)
+        (ruleAtTime nonempty timeSlot globalBits)
         (Indexed.forgetIndex
           (Same.decodedAdjacentWindow
             stateCoverage symbolCoverage timeSlot start globalBits))
     currentLegal
-      rewrite sym (Semantic.ruleExact current)
+      rewrite sym (semanticRule_eq_ruleAtTime current)
             | sym (Same.decodedRawWindowEqualsAdjacentRowsWindow
                 stateCoverage symbolCoverage nonempty
                 timeSlot start globalBits) =
       Semantic.legal current
-
-    rawSemanticTailToDecodedIndexedLegal :
-      ∀ {machine steps cols timeIndex index}
-        (stateCoverage :
-          Canonical.EnumerationCoverage (Local.finiteState machine))
-        (symbolCoverage :
-          Canonical.EnumerationCoverage (Local.finiteSymbol machine))
-        (nonempty : Selector.NonemptyRuleTable machine)
-        (timeSlot : Global.Slot timeIndex steps)
-        (headStart : Raw.WindowStart index cols)
-        (rest : List (Transition.SomeWindowStart cols))
-        (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
-        (headSemantic :
-          Semantic.RawDecodedWindowSemantic
-            stateCoverage symbolCoverage nonempty
-            timeSlot headStart globalBits) →
-      Scan.AllRawWindowsSemantic
-        stateCoverage symbolCoverage nonempty
-        timeSlot globalBits rest →
-      IndexedScan.AllIndexedLegal
-        (Semantic.rule headSemantic)
-        (decodedWindowsForStarts
-          stateCoverage symbolCoverage timeSlot rest globalBits)
-    rawSemanticTailToDecodedIndexedLegal
-        stateCoverage symbolCoverage nonempty
-        timeSlot headStart [] globalBits headSemantic
-        Scan.semanticWindowsDone =
-      IndexedScan.allIndexedNil
-    rawSemanticTailToDecodedIndexedLegal
-        stateCoverage symbolCoverage nonempty
-        timeSlot headStart
-        (Transition.some-window-start nextIndex nextStart ∷ rest)
-        globalBits headSemantic
-        (Scan.semanticWindowsStep nextSemantic remaining)
-        rewrite semanticRulesSame headSemantic nextSemantic =
-      IndexedScan.allIndexedCons nextLegal
-        (rawSemanticTailToDecodedIndexedLegal
-          stateCoverage symbolCoverage nonempty
-          timeSlot nextStart rest globalBits nextSemantic remaining)
-      where
-        semanticRulesSame :
-          ∀ {machine steps cols timeIndex i j}
-            {stateCoverage :
-              Canonical.EnumerationCoverage (Local.finiteState machine)}
-            {symbolCoverage :
-              Canonical.EnumerationCoverage (Local.finiteSymbol machine)}
-            {nonempty : Selector.NonemptyRuleTable machine}
-            {timeSlot : Global.Slot timeIndex steps}
-            {leftStart : Raw.WindowStart i cols}
-            {rightStart : Raw.WindowStart j cols}
-            {globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)}
-            (left :
-              Semantic.RawDecodedWindowSemantic
-                stateCoverage symbolCoverage nonempty
-                timeSlot leftStart globalBits)
-            (right :
-              Semantic.RawDecodedWindowSemantic
-                stateCoverage symbolCoverage nonempty
-                timeSlot rightStart globalBits) →
-          Semantic.rule left ≡ Semantic.rule right
-        semanticRulesSame left right =
-          trans
-            (Semantic.ruleExact left)
-            (sym (Semantic.ruleExact right))
-
-        nextLegal :
-          Pattern.LegalWindowForRule machine
-            (Semantic.rule nextSemantic)
-            (Indexed.forgetIndex
-              (Same.decodedAdjacentWindow
-                stateCoverage symbolCoverage
-                timeSlot nextStart globalBits))
-        nextLegal
-          rewrite sym (Semantic.ruleExact nextSemantic)
-                | sym (Same.decodedRawWindowEqualsAdjacentRowsWindow
-                    stateCoverage symbolCoverage nonempty
-                    timeSlot nextStart globalBits) =
-          Semantic.legal nextSemantic
 
 ------------------------------------------------------------------------
 -- The only list-level same-object fact required above the local P1 theorem.
@@ -409,19 +354,19 @@ allRawWindowsSemanticToDecodedAllWindowsLegal
 record DecodedWholeRowSemanticReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
-    rawStartsToIndexedDecodedWindowsPaid : Agda.Builtin.Bool.Bool
-    decodedStartsEqualNativeIndexedScanPaid : Agda.Builtin.Bool.Bool
-    rawLegalityTransfersToIndexedScanPaid : Agda.Builtin.Bool.Bool
-    indexedScanForgetsToWholeScanPaid : Agda.Builtin.Bool.Bool
-    rawSemanticToDecodedAllWindowsLegalPaid : Agda.Builtin.Bool.Bool
+    rawStartsToIndexedDecodedWindowsPaid : Bool
+    decodedStartsEqualNativeIndexedScanPaid : Bool
+    rawLegalityTransfersToIndexedScanPaid : Bool
+    indexedScanForgetsToWholeScanPaid : Bool
+    rawSemanticToDecodedAllWindowsLegalPaid : Bool
 
 decodedWholeRowSemanticReceipt :
   ∀ (machine : Local.ConcreteTapeMachine) →
   DecodedWholeRowSemanticReceipt machine
 decodedWholeRowSemanticReceipt machine = record
-  { rawStartsToIndexedDecodedWindowsPaid = Agda.Builtin.Bool.true
-  ; decodedStartsEqualNativeIndexedScanPaid = Agda.Builtin.Bool.true
-  ; rawLegalityTransfersToIndexedScanPaid = Agda.Builtin.Bool.true
-  ; indexedScanForgetsToWholeScanPaid = Agda.Builtin.Bool.true
-  ; rawSemanticToDecodedAllWindowsLegalPaid = Agda.Builtin.Bool.true
+  { rawStartsToIndexedDecodedWindowsPaid = true
+  ; decodedStartsEqualNativeIndexedScanPaid = true
+  ; rawLegalityTransfersToIndexedScanPaid = true
+  ; indexedScanForgetsToWholeScanPaid = true
+  ; rawSemanticToDecodedAllWindowsLegalPaid = true
   }
