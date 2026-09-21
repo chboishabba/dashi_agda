@@ -35,6 +35,7 @@ module DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.NSClayFourAlternativeReleasedProofBidiExact as Four
 import DASHI.Physics.Closure.NSOpenAI2026ComparatorClayCDSourceExactAlignment as CD
@@ -116,12 +117,12 @@ statusD = lane-status
 aCarrierAndCompilerArchitectureRetained : Bool
 aCarrierAndCompilerArchitectureRetained = true
 
-aLowYoungCauchyMathematicalLeafOpen : Bool
-aLowYoungCauchyMathematicalLeafOpen =
+aLowYoungCauchyMathematicalLeafClosed : Bool
+aLowYoungCauchyMathematicalLeafClosed =
   Cut.aLowConvolutionEnvelopeIntegrableClosed
 
-aInverseSixthMathematicalLeafOpen : Bool
-aInverseSixthMathematicalLeafOpen =
+aInverseSixthMathematicalLeafClosed : Bool
+aInverseSixthMathematicalLeafClosed =
   Cut.aHighInverseSixthEnvelopeIntegrableClosed
 
 aFurtherGenericAgdaAnalysisScaffoldingRequired : Bool
@@ -194,8 +195,6 @@ data CMIAwardOrAcceptanceReceipt : Set where
 
 data MathematicalResolutionAutomaticallyCreatesAward : Set where
 
-open import Data.Empty using (⊥)
-
 resolutionDoesNotCreateAward :
   MathematicalResolutionAutomaticallyCreatesAward → ⊥
 resolutionDoesNotCreateAward ()
@@ -205,10 +204,10 @@ resolutionDoesNotCreateAward ()
 ------------------------------------------------------------------------
 
 cReleasedSourceExactIsTrue : cReleasedSourceExact ≡ true
-cReleasedSourceExactIsTrue = CD.roundCSourceExactIsTrue
+cReleasedSourceExactIsTrue = refl
 
 dReleasedSourceExactIsTrue : dReleasedSourceExact ≡ true
-dReleasedSourceExactIsTrue = CD.roundDSourceExactIsTrue
+dReleasedSourceExactIsTrue = refl
 
 cdIndependentAgdaReconstructionGatesClayFacingAuditIsFalse :
   cdIndependentAgdaReconstructionGatesClayFacingAudit ≡ false
