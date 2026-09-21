@@ -25,7 +25,7 @@ open import Data.Rational.Base as ℚ using (ℚ)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _*ℝ_; _≤ℝ_; absℝ; ≤ℝ-refl; mulZeroʳ; *-assoc; mulMonotoneNonnegative)
+  (ℝ; 0ℝ; _*ℝ_; _≤ℝ_; absℝ; ≤ℝ-refl; ≤ℝ-trans; mulZeroʳ; *-assoc; mulMonotoneNonnegative)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.Closure.YMEffectiveActionSupportInterface as Support
@@ -290,6 +290,44 @@ amplitudeSumBelowSourceAmplitude {data = data} geometry =
     (λ left → left ≤ℝ sourceAmplitude geometry)
     factored
     scaledBudget
+
+sourceAmplitudeNonnegative :
+  ∀ {Measure TestObservable dataSet extension base data}
+    (geometry :
+      CanonicalDomainSpecificRateSplit
+        {Measure = Measure} {TestObservable = TestObservable}
+        {dataSet = dataSet} {extension = extension} {base = base}
+        data) →
+  0ℝ ≤ℝ sourceAmplitude geometry
+sourceAmplitudeNonnegative {data = data} geometry =
+  let
+    src = R444.source data
+    halfWeight =
+      λ domain →
+        Source.entropyHalfWeight src (Source.sourceTreeDistance src domain)
+
+    sumNN :
+      0ℝ ≤ℝ Resum.sumℝ halfWeight (Source.localizedDomains src)
+    sumNN =
+      R420.sumNonnegative
+        halfWeight
+        (Source.localizedDomains src)
+        (λ domain →
+          Source.entropyHalfWeightNonnegative src
+            (Source.sourceTreeDistance src domain))
+
+    allowanceNN : 0ℝ ≤ℝ Source.entropyAllowance src
+    allowanceNN =
+      ≤ℝ-trans sumNN (Source.equation126128WeightedFibreBudget src)
+  in
+  subst
+    (λ lower → lower ≤ℝ sourceAmplitude geometry)
+    (mulZeroʳ 0ℝ)
+    (mulMonotoneNonnegative
+      ≤ℝ-refl
+      (Source.sourcePrefactorNonnegative src)
+      ≤ℝ-refl
+      allowanceNN)
 
 asRound406Geometry :
   ∀ {Measure TestObservable dataSet extension base}
