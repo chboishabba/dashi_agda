@@ -23,6 +23,7 @@ files=(
   "DASHI/Biology/TargetIndexedRecognitionAdmissibleRegionExact.agda"
   "DASHI/Biology/TargetIndexedRecognitionEmpiricalCalibrationExact.agda"
   "DASHI/Biology/ContextIndexedRecognitionGeometryExact.agda"
+  "DASHI/Biology/FiveHT2ARecognitionStateSpaceExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -152,5 +153,12 @@ grep -Fq 'canonicalPairAdmittedInContext0' "$context"
 grep -Fq 'canonicalPairRejectedInContext1' "$context"
 grep -Fq 'nominalTargetDoesNotFixGeometry' "$context"
 grep -Fq 'proteinConformationNotErased' "$context"
+
+statespace="$root/DASHI/Biology/FiveHT2ARecognitionStateSpaceExact.agda"
+grep -Fq 'canonicalContextDependentRecognitionWitness' "$statespace"
+grep -Fq 'sameLigandAcrossFixtureStates' "$statespace"
+grep -Fq 'state0Admitted' "$statespace"
+grep -Fq 'state1Rejected' "$statespace"
+grep -Fq 'moleculeIdentityIsNotFullState' "$statespace"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
