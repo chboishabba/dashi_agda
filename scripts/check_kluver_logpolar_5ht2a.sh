@@ -9,6 +9,7 @@ files=(
   "DASHI/Cognition/Kluver5HT2ACrossPollinationExact.agda"
   "DASHI/Cognition/KluverLogPolar5HT2AEverything.agda"
   "DASHI/Biology/Kluver5HT2ACrossScaleHyperfibreExact.agda"
+  "DASHI/Biology/Kluver5HT2AMolecularProteinInstantiationExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -53,5 +54,15 @@ grep -Fq 'ProteinConformationAttractor' "$hyperfibre"
 grep -Fq 'AtomicPeriodicTable369ChemistryHyperfibreBridgeExact' "$hyperfibre"
 grep -Fq 'receptorToCorticalModeTransferIsQuantitativelyClosedIsFalse' "$hyperfibre"
 grep -Fq 'visualPhenomenologyIsRecoveredFromMolecularStateIsFalse' "$hyperfibre"
+
+molecular="$root/DASHI/Biology/Kluver5HT2AMolecularProteinInstantiationExact.agda"
+grep -Fq 'PubChem CID 5202' "$molecular"
+grep -Fq 'PubChem CID 5761' "$molecular"
+grep -Fq 'PubChem CID 3822' "$molecular"
+grep -Fq 'PDB 9AS4' "$molecular"
+grep -Fq 'wacker5HT2BNeighborEvidence' "$molecular"
+grep -Fq 'assayBoundAffinityStillMissingIsTrue' "$molecular"
+grep -Fq 'receptorStateToKluverModeTransferStillMissingIsTrue' "$molecular"
+grep -Fq 'ketanserinIdentityAloneDoesNotProveSelective5HT2ABlockade' "$molecular"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
