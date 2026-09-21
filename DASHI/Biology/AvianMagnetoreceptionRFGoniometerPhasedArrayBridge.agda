@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.AvianMagneticFieldPerturbationReceipt as Bio
 import DASHI.Biology.MagnetoreceptionSurface as Generic
+import DASHI.Biology.AvianMagneticPerturbationSourceRegistry as Sources
 import DASHI.Physics.Foundations.RadioRadarGoniometerDirectionFindingExact as Goniometer
 import DASHI.Physics.Foundations.PhasedArrayDirectionFindingExact as Array
 import DASHI.Physics.Foundations.GoniometerPhasedArrayRFSensingCrossPollinationExact as RFBridge
@@ -73,6 +74,18 @@ record AvianMagnetoreceptionRFGoniometerPhasedArrayBridge : Set where
       Bio.AvianMagneticFieldPerturbationReceipt
         Generic.canonicalMechanismNeutralMagnetoreceptionSurface
 
+    staticFieldSource :
+      Sources.AvianMagneticPerturbationSource
+
+    staticFieldSourceIsWiltschko1972 :
+      staticFieldSource ≡ Sources.wiltschkoWiltschko1972
+
+    broadbandRFSource :
+      Sources.AvianMagneticPerturbationSource
+
+    broadbandRFSourceIsEngels2014 :
+      broadbandRFSource ≡ Sources.engelsEtAl2014
+
     goniometerFirewall :
       Goniometer.GoniometerRoleFirewall
 
@@ -121,6 +134,18 @@ record AvianMagnetoreceptionRFGoniometerPhasedArrayBridge : Set where
     sharedPhaseCoordinateIsTrue :
       sharedPhaseCoordinate ≡ true
 
+    coilSystemIsPhasedArray :
+      Bool
+
+    coilSystemIsPhasedArrayIsFalse :
+      coilSystemIsPhasedArray ≡ false
+
+    goniometerIsBirdExperimentApparatus :
+      Bool
+
+    goniometerIsBirdExperimentApparatusIsFalse :
+      goniometerIsBirdExperimentApparatus ≡ false
+
     apparatusIdentifiesBiologicalMechanism :
       Bool
 
@@ -144,6 +169,10 @@ canonicalAvianMagnetoreceptionRFGoniometerPhasedArrayBridge =
   record
     { perturbationReceipt =
         Bio.canonicalMechanismNeutralPerturbationReceipt
+    ; staticFieldSource = Sources.wiltschkoWiltschko1972
+    ; staticFieldSourceIsWiltschko1972 = refl
+    ; broadbandRFSource = Sources.engelsEtAl2014
+    ; broadbandRFSourceIsEngels2014 = refl
     ; goniometerFirewall =
         Goniometer.canonicalGoniometerRoleFirewall
     ; goniometerFirewallIsCanonical = refl
@@ -164,6 +193,10 @@ canonicalAvianMagnetoreceptionRFGoniometerPhasedArrayBridge =
     ; sharedAngleRoleIsTrue = refl
     ; sharedPhaseCoordinate = true
     ; sharedPhaseCoordinateIsTrue = refl
+    ; coilSystemIsPhasedArray = false
+    ; coilSystemIsPhasedArrayIsFalse = refl
+    ; goniometerIsBirdExperimentApparatus = false
+    ; goniometerIsBirdExperimentApparatusIsFalse = refl
     ; apparatusIdentifiesBiologicalMechanism = false
     ; apparatusIdentifiesBiologicalMechanismIsFalse = refl
     ; exactFieldAtReceptorRecovered = false
