@@ -11,6 +11,7 @@ from .compact_history import (
     load_history_file,
 )
 from .git_history import HistoryExtractor, fetch_seed_commits
+from .history_axis import format_timestamp_date
 from .merge_attribution import attribute_merge
 from .pr_events import collect_pr_events
 from .research_film import compile_research_film
@@ -205,6 +206,103 @@ def _program(args: argparse.Namespace) -> None:
         print(args.output)
     else:
         print(rendered)
+
+
+def _film(args: argparse.Namespace) -> None:
+    data = load_history_file(args.input)
+    plan = compile_research_film(
+        data,
+        programme_memory_nodes=args.programme_memory_nodes,
+    )
+
+    if args.json:
+        print(json.dumps(plan.to_dict(), indent=2))
+        return
+
+    commit_meta = {
+        commit["commit"]: commit
+        for commit in data.get("commits", [])
+    }
+    print(
+        f"programmes={len(plan.regions)} "
+        f"working_sets={len(plan.working_sets)} "
+        f"episodes={len(plan.episodes)} "
+        f"beats={len(plan.beats)}"
+    )
+
+    for index, episode in enumerate(plan.episodes):
+        first = episode.commits[0] if episode.commits else ""
+        last = episode.commits[-1] if episode.commits else ""
+        first_work = next(
+            (
+                item
+                for item in plan.working_sets
+                if item.commit == first
+                and item.programme == episode.programme
+            ),
+            None,
+        )
+        lane = (
+            f" · Lane {first_work.lane}"
+            if first_work is not None and first_work.lane
+            else ""
+        )
+        headline = (
+            first_work.headline
+            if first_work is not None
+            else " · ".join(episode.topic_tokens)
+        )
+        start_date = (
+            format_timestamp_date(
+                commit_meta.get(first, {}).get("timestamp")
+            )
+            if first
+            else "unknown"
+        )
+        end_date = (
+            format_timestamp_date(
+                commit_meta.get(last, {}).get("timestamp")
+            )
+            if last
+            else "unknown"
+        )
+        return_flag = " RETURN" if episode.return_to_existing_region else ""
+        print(
+            f"[{index:03d}] {episode.programme}{lane}{return_flag} "
+            f"{start_date}..{end_date} "
+            f"commits={len(episode.commits)} "
+            f"salience={episode.salience}"
+        )
+        print(f"      {headline}")
+        if first_work is not None and first_work.modules:
+            print(
+                "      modules: "
+                + ", ".join(first_work.modules[:3])
+            )
+        if first_work is not None and first_work.changed_symbols:
+            print(
+                "      changed: "
+                + ", ".join(
+                    f"{label}[{kind}]"
+                    for label, kind, _module
+                    in first_work.changed_symbols[:6]
+                )
+            )
+
+    if args.beats:
+        print("\nbeats:")
+        for index, beat in enumerate(plan.beats):
+            camera = (
+                beat.camera.reason
+                if beat.camera is not None
+                else "-"
+            )
+            print(
+                f"[{index:04d}] {beat.kind:24s} "
+                f"{str(beat.commit or '')[:10]:10s} "
+                f"{str(beat.programme or ''):22s} "
+                f"camera={camera}"
+            )
 
 
 def _profile(args: argparse.Namespace) -> None:
@@ -534,6 +632,25 @@ def build_parser() -> argparse.ArgumentParser:
     program.add_argument("--max-focus-nodes", type=int, default=250)
     program.add_argument("--max-focus-edges", type=int, default=800)
     program.set_defaults(func=_program)
+
+    film = sub.add_parser(
+        "film",
+        help="Inspect the directed research-film plan before rendering.",
+    )
+    film.add_argument("input")
+    film.add_argument(
+        "--programme-memory-nodes",
+        type=int,
+        default=28,
+        help="Maximum remembered landmark nodes retained per programme.",
+    )
+    film.add_argument(
+        "--beats",
+        action="store_true",
+        help="Also print every compiled editorial/camera beat.",
+    )
+    film.add_argument("--json", action="store_true")
+    film.set_defaults(func=_film)
 
     profile = sub.add_parser(
         "profile",
