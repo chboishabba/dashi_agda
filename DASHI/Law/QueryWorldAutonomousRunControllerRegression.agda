@@ -43,3 +43,13 @@ staleNegativeCannotReopen :
   Controller.staleNegativeWitnessMayReopenCurrentWorld boundary ≡ false
 staleNegativeCannotReopen =
   Controller.staleNegativeWitnessMayReopenCurrentWorldIsFalse boundary
+
+runStopIsNotFrontierClosure :
+  Controller.runMayStopMeansOperationalFrontierClosed boundary ≡ false
+runStopIsNotFrontierClosure =
+  Controller.runMayStopMeansOperationalFrontierClosedIsFalse boundary
+
+frontierClosureIsNotAdequacy :
+  Controller.operationalFrontierClosedMeansConsumerAdequate boundary ≡ false
+frontierClosureIsNotAdequacy =
+  Controller.operationalFrontierClosedMeansConsumerAdequateIsFalse boundary
