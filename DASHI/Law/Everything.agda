@@ -181,3 +181,5 @@ import DASHI.Law.GenericLegalFollowCampaignDriveExact
 import DASHI.Law.GenericLegalFollowCampaignDriveRegression
 import DASHI.Law.ConsumerDemandCampaignRoutingExact
 import DASHI.Law.ConsumerDemandCampaignRoutingRegression
+import DASHI.Law.GenericReviewedDeltaCampaignKernelExact
+import DASHI.Law.GenericReviewedDeltaCampaignKernelRegression
