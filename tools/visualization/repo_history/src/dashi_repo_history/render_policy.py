@@ -17,17 +17,48 @@ class AnimationPolicy:
 
 @dataclass(frozen=True)
 class LabelPolicy:
-    label_all_below: int = 70
-    label_top_level_below: int = 220
-    font_size: int = 10
-    binder_font_size: int = 8
+    # Research-film defaults deliberately avoid paragraph-like graph labels.
+    label_all_below: int = 10
+    label_top_level_below: int = 28
+    font_size: int = 9
+    binder_font_size: int = 7
+    max_label_chars: int = 28
+    font: str = "DejaVu Sans"
 
-    def show_label(self, node: dict[str, Any], total_nodes: int) -> bool:
-        if total_nodes <= self.label_all_below:
+    def show_label(
+        self,
+        node: dict[str, Any],
+        total_nodes: int,
+        *,
+        force: bool = False,
+    ) -> bool:
+        if force:
             return True
         if node.get("kind") == "binder":
             return False
-        return total_nodes <= self.label_top_level_below
+        if total_nodes <= self.label_all_below:
+            return True
+        return (
+            total_nodes <= self.label_top_level_below
+            and node.get("scope") is None
+            and node.get("kind") in {
+                "theorem",
+                "function",
+                "postulate",
+                "record",
+                "data",
+            }
+        )
+
+    def compact_label(self, node: dict[str, Any]) -> str:
+        raw = str(node.get("label", ""))
+        if node.get("kind") == "module" and "." in raw:
+            raw = raw.rsplit(".", 1)[-1]
+        if len(raw) <= self.max_label_chars:
+            return raw
+
+        keep = max(6, (self.max_label_chars - 1) // 2)
+        return f"{raw[:keep]}…{raw[-keep:]}"
 
 
 @dataclass(frozen=True)
@@ -145,9 +176,14 @@ class ManimRenderPolicy:
         node: dict[str, Any],
         *,
         total_nodes: int,
+        force_label: bool = False,
     ):
         dot = Dot(radius=self.nodes.radius(node))
-        if not self.labels.show_label(node, total_nodes):
+        if not self.labels.show_label(
+            node,
+            total_nodes,
+            force=force_label,
+        ):
             return dot
 
         font_size = (
@@ -156,7 +192,9 @@ class ManimRenderPolicy:
             else self.labels.font_size
         )
         label = Text(
-            str(node.get("label", "")),
+            self.labels.compact_label(node),
+            font=self.labels.font,
             font_size=font_size,
-        ).next_to(dot, DOWN, buff=0.025)
+            disable_ligatures=True,
+        ).next_to(dot, DOWN, buff=0.035)
         return VGroup(dot, label)
