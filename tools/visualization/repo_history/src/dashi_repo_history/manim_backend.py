@@ -1723,7 +1723,18 @@ class ResearchEvolutionScene(MovingCameraScene):
             return
 
         data = load_history_file(path)
-        plan = compile_research_film(data)
+        plan = compile_research_film(
+            data,
+            max_context_nodes=int(
+                os.environ.get("DASHI_FILM_CONTEXT_NODES", "40")
+            ),
+            max_context_edges=int(
+                os.environ.get("DASHI_FILM_CONTEXT_EDGES", "100")
+            ),
+            programme_memory_nodes=int(
+                os.environ.get("DASHI_FILM_MEMORY_NODES", "28")
+            ),
+        )
         if not plan.beats:
             self.add(Text("No semantic research-film beats", font_size=28))
             return
@@ -1835,7 +1846,11 @@ class ResearchEvolutionScene(MovingCameraScene):
                 "cross-programme-overview",
             }:
                 if (
-                    beat.kind == "cross-programme-overview"
+                    beat.kind in {
+                        "cross-programme-overview",
+                        "branch-merge",
+                        "pr-merge",
+                    }
                     and beat.commit is not None
                     and beat.visible_node_ids
                 ):
