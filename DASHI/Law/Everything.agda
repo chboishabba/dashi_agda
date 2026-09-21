@@ -213,6 +213,8 @@ import DASHI.Law.QueryDependencySliceCompilationExact
 import DASHI.Law.QueryDependencySliceCompilationRegression
 import DASHI.Law.SourceRealisedLegalFollowAdapterExact
 import DASHI.Law.SourceRealisedLegalFollowAdapterRegression
+import DASHI.Law.QueryScopedWorldCoordinateImpactExact
+import DASHI.Law.QueryScopedWorldCoordinateImpactRegression
 import DASHI.Law.MaboHistoricalRevisionShadowExact
 import DASHI.Law.MaboHistoricalRevisionShadowRegression
 import DASHI.Law.RevisionInvalidatedProjectionAdequacyExact
