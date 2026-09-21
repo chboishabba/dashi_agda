@@ -91,6 +91,24 @@ numeratorInvariantFromHaarAndDensity {measure = measure} {laws = laws}
       (λ configuration →
         Physical.density measure configuration *ℝ observable configuration))
 
+numeratorCongruent :
+  ∀ {Configuration measure}
+    (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
+    (left right : Configuration → ℝ) →
+  (∀ configuration → left configuration ≡ right configuration) →
+  Finite.unnormalizedNumerator measure left
+  ≡ Finite.unnormalizedNumerator measure right
+numeratorCongruent {measure = measure} laws left right pointwise =
+  Finite.haarIntegralCongruent laws
+    (λ configuration →
+      Physical.density measure configuration *ℝ left configuration)
+    (λ configuration →
+      Physical.density measure configuration *ℝ right configuration)
+    (λ configuration →
+      cong
+        (λ value → Physical.density measure configuration *ℝ value)
+        (pointwise configuration))
+
 familyNumeratorActionInvariant :
   ∀ {Configuration Action sequenceLimit limitLaws quotient division}
     (family :
@@ -98,21 +116,33 @@ familyNumeratorActionInvariant :
         Configuration
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division)
+    (globalAct :
+      Action → (Configuration → ℝ) → Configuration → ℝ)
     (actionData :
       ∀ cutoff →
       FiniteHaarMeasurePreservingAction
         {Configuration = Configuration} {Action = Action}
         (Limit.finiteMeasure family cutoff)
-        (Limit.integrationLaws family cutoff)) →
-  Sym.FiniteNumeratorActionInvariant family
-    (λ action observable configuration →
-      actObservable (actionData _) action observable configuration)
-familyNumeratorActionInvariant family actionData = record
-  { Sym.FiniteNumeratorActionInvariant.numeratorInvariant =
-      λ cutoff action observable →
-        numeratorInvariantFromHaarAndDensity
-          (actionData cutoff) action observable
-  }
+        (Limit.integrationLaws family cutoff))
+    (localActionIsGlobal :
+      ∀ cutoff action observable configuration →
+      actObservable (actionData cutoff) action observable configuration
+      ≡ globalAct action observable configuration) →
+  Sym.FiniteNumeratorActionInvariant family globalAct
+familyNumeratorActionInvariant family globalAct actionData localActionIsGlobal =
+  record
+    { Sym.FiniteNumeratorActionInvariant.numeratorInvariant =
+        λ cutoff action observable →
+          trans
+            (sym
+              (numeratorCongruent
+                (Limit.integrationLaws family cutoff)
+                (actObservable (actionData cutoff) action observable)
+                (globalAct action observable)
+                (localActionIsGlobal cutoff action observable)))
+            (numeratorInvariantFromHaarAndDensity
+              (actionData cutoff) action observable)
+    }
 
 round431FiniteHaarNumeratorCompilerLevel : ProofLevel
 round431FiniteHaarNumeratorCompilerLevel = machineChecked
