@@ -364,9 +364,10 @@ reviewedTreatmentMustRecomputeOutboundFrontier ()
 -- Sidhu is deliberately not the witness here because the pre-existing Waltons
 -- trace already represented it.  Giumelli is the clean fresh authority exposed
 -- by the retained Doueihi source.  This record is an implementation acceptance
--- contract.  The live Giumelli source acquisition and range-index replay are now
--- observed; the reviewed identity hop is now live-observed and treatment remains
--- an explicit later gate.
+-- contract.  The live Giumelli source acquisition, reviewed identity, reviewed
+-- treatment and post-treatment frontier closure are now observed.  Closure is
+-- operational frontier exhaustion only; it is not a formal consumer-adequacy or
+-- current-law-truth claim.
 ------------------------------------------------------------------------
 
 record RecursiveGiumelliCapstoneContract : Set where
@@ -408,8 +409,20 @@ record RecursiveGiumelliCapstoneContract : Set where
     liveReviewedIdentityHopObservedIsTrue :
       liveReviewedIdentityHopObserved ≡ true
     liveReviewedTreatmentHopObserved : Bool
-    liveReviewedTreatmentHopObservedIsFalse :
-      liveReviewedTreatmentHopObserved ≡ false
+    liveReviewedTreatmentHopObservedIsTrue :
+      liveReviewedTreatmentHopObserved ≡ true
+    livePostTreatmentOutboundFrontierEmpty : Bool
+    livePostTreatmentOutboundFrontierEmptyIsTrue :
+      livePostTreatmentOutboundFrontierEmpty ≡ true
+    liveDriverCurrentFrontierClosed : Bool
+    liveDriverCurrentFrontierClosedIsTrue :
+      liveDriverCurrentFrontierClosed ≡ true
+    liveDriverReviewGateBypassed : Bool
+    liveDriverReviewGateBypassedIsFalse :
+      liveDriverReviewGateBypassed ≡ false
+    frontierClosureFormallyProvesConsumerAdequacy : Bool
+    frontierClosureFormallyProvesConsumerAdequacyIsFalse :
+      frontierClosureFormallyProvesConsumerAdequacy ≡ false
 
 open RecursiveGiumelliCapstoneContract public
 
@@ -425,6 +438,9 @@ giumelliRecursiveCapstoneContract =
     true refl
     true refl
     true refl
+    true refl
+    true refl
+    false refl
     false refl
     true refl
     true refl
