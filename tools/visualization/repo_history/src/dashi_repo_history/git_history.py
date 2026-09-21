@@ -3,8 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 import subprocess
+import time
 
 from .agda import AgdaLanguageAdapter
+from .backend_policy import IncrementalStepTiming, decide_backend
 from .history_topology import derive_branch_episodes
 from .incremental import patch_semantic_graph, plan_incremental_impact
 from .language import LanguageAdapter
@@ -220,6 +222,7 @@ class HistoryExtractor:
         self._extractions_cache: dict[str, list[object]] = {}
         self._graph_cache = {}
         self._incremental_receipts: dict[str, object] = {}
+        self._incremental_timings: list[IncrementalStepTiming] = []
 
     def extractions_at(self, commit: str) -> list[object]:
         cached = self._extractions_cache.get(commit)
@@ -271,6 +274,7 @@ class HistoryExtractor:
         if parent_graph is None:
             return self.graph_at(commit)
 
+        total_start = time.perf_counter_ns()
         before = self.extractions_at(parent)
         after = self.extractions_at(commit)
         changed = changed_source_paths(
@@ -280,20 +284,58 @@ class HistoryExtractor:
             suffixes=self.adapter.suffixes,
             path_prefix=self.path_prefix,
         )
+        plan_start = time.perf_counter_ns()
         plan = plan_incremental_impact(
             before,
             after,
             changed,
         )
+        plan_ns = time.perf_counter_ns() - plan_start
+
+        patch_start = time.perf_counter_ns()
         graph, receipt = patch_semantic_graph(
             parent_graph,
             before,
             after,
             plan,
         )
+        patch_ns = time.perf_counter_ns() - patch_start
+        total_ns = time.perf_counter_ns() - total_start
+
+        timing = IncrementalStepTiming(
+            commit=commit,
+            parent=parent,
+            changed_paths=len(changed),
+            affected_modules=len(plan.affected_modules),
+            plan_ns=plan_ns,
+            patch_ns=patch_ns,
+            total_ns=total_ns,
+            removed_nodes=receipt.removed_nodes,
+            added_nodes=receipt.added_nodes,
+            removed_edges=receipt.removed_edges,
+            added_edges=receipt.added_edges,
+        )
+
         self._graph_cache[commit] = graph
         self._incremental_receipts[commit] = receipt
+        self._incremental_timings.append(timing)
         return graph
+
+    def performance_report(self) -> dict[str, object]:
+        decision = decide_backend(self._incremental_timings)
+        return {
+            "schema": "dashi.repo-history-performance.v1",
+            "incremental_steps": [
+                timing.to_dict()
+                for timing in self._incremental_timings
+            ],
+            "backend_decision": decision.to_dict(),
+            "notes": {
+                "python_is_reference": True,
+                "rust_candidate_requires_gate": True,
+                "high_fanout_means_fix_invalidation_first": True,
+            },
+        }
 
     def timeline(
         self,
