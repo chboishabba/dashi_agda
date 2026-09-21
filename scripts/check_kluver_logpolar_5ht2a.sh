@@ -8,6 +8,7 @@ files=(
   "DASHI/Cognition/LogPolarKluverDerivationExact.agda"
   "DASHI/Cognition/Kluver5HT2ACrossPollinationExact.agda"
   "DASHI/Cognition/KluverLogPolar5HT2AEverything.agda"
+  "DASHI/Biology/Kluver5HT2ACrossScaleHyperfibreExact.agda"
 )
 
 for relative in "${files[@]}"; do
@@ -42,5 +43,15 @@ cross="$root/DASHI/Cognition/Kluver5HT2ACrossPollinationExact.agda"
 grep -Fq 'geometryAndPharmacologyAreSeparateEvidenceLayersIsTrue' "$cross"
 grep -Fq 'jointMechanismEmpiricallyClosedIsFalse' "$cross"
 grep -Fq 'feltImportanceProvesExternalAgencyIsFalse' "$cross"
+
+hyperfibre="$root/DASHI/Biology/Kluver5HT2ACrossScaleHyperfibreExact.agda"
+grep -Fq 'NeurochemicalAtomicChemistryBridge' "$hyperfibre"
+grep -Fq 'NeurochemicalProteinTargetBridge' "$hyperfibre"
+grep -Fq 'NeurochemicalTransmissionBridge' "$hyperfibre"
+grep -Fq 'NeurochemicalBrainCarrierBridge' "$hyperfibre"
+grep -Fq 'ProteinConformationAttractor' "$hyperfibre"
+grep -Fq 'AtomicPeriodicTable369ChemistryHyperfibreBridgeExact' "$hyperfibre"
+grep -Fq 'receptorToCorticalModeTransferIsQuantitativelyClosedIsFalse' "$hyperfibre"
+grep -Fq 'visualPhenomenologyIsRecoveredFromMolecularStateIsFalse' "$hyperfibre"
 
 echo 'Kluver/log-polar/5-HT2A attribution and boundary static contract: OK'
