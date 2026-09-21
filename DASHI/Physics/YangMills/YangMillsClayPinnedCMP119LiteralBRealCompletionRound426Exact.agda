@@ -104,34 +104,21 @@ clusteringInputs :
       OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
       Scale Volume Root SourceDirection Index Domain Term Operator
       sequenceLimit limitLaws quotient division S a group twoJ source
-      application expReal embedding preferred} →
-  LiteralCMP116BRealCompletion
-    {G = G} {X = X} {Configuration = Configuration}
-    {Position = Position} {CurvaturePolynomial = CurvaturePolynomial}
-    {LocalOperator = LocalOperator} {OPECoefficient = OPECoefficient}
-    {StressTensor = StressTensor} {Hilbert = Hilbert}
-    {Hamiltonian = Hamiltonian} {Vacuum = Vacuum}
-    {Scale = Scale} {Volume = Volume} {Root = Root}
-    {SourceDirection = SourceDirection} {Index = Index}
-    {Domain = Domain} {Term = Term} {Operator = Operator}
-    {sequenceLimit = sequenceLimit} {limitLaws = limitLaws}
-    {quotient = quotient} {division = division} {S = S}
-    {a = a} {group = group} {twoJ = twoJ} {source = source}
-    application expReal embedding preferred →
-  (completion :
-    LiteralCMP116BRealCompletion
-      {G = G} {X = X} {Configuration = Configuration}
-      {Position = Position} {CurvaturePolynomial = CurvaturePolynomial}
-      {LocalOperator = LocalOperator} {OPECoefficient = OPECoefficient}
-      {StressTensor = StressTensor} {Hilbert = Hilbert}
-      {Hamiltonian = Hamiltonian} {Vacuum = Vacuum}
-      {Scale = Scale} {Volume = Volume} {Root = Root}
-      {SourceDirection = SourceDirection} {Index = Index}
-      {Domain = Domain} {Term = Term} {Operator = Operator}
-      {sequenceLimit = sequenceLimit} {limitLaws = limitLaws}
-      {quotient = quotient} {division = division} {S = S}
-      {a = a} {group = group} {twoJ = twoJ} {source = source}
-      application expReal embedding preferred) →
+      application expReal embedding preferred}
+    (completion :
+      LiteralCMP116BRealCompletion
+        {G = G} {X = X} {Configuration = Configuration}
+        {Position = Position} {CurvaturePolynomial = CurvaturePolynomial}
+        {LocalOperator = LocalOperator} {OPECoefficient = OPECoefficient}
+        {StressTensor = StressTensor} {Hilbert = Hilbert}
+        {Hamiltonian = Hamiltonian} {Vacuum = Vacuum}
+        {Scale = Scale} {Volume = Volume} {Root = Root}
+        {SourceDirection = SourceDirection} {Index = Index}
+        {Domain = Domain} {Term = Term} {Operator = Operator}
+        {sequenceLimit = sequenceLimit} {limitLaws = limitLaws}
+        {quotient = quotient} {division = division} {S = S}
+        {a = a} {group = group} {twoJ = twoJ} {source = source}
+        application expReal embedding preferred) →
   Clustering.LiteralRealCMP116ClusteringInputs
     G X Configuration Position CurvaturePolynomial LocalOperator
     OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
