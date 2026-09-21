@@ -161,10 +161,10 @@ giumelliRangeIndexHitObserved :
 giumelliRangeIndexHitObserved =
   Recursive.liveRangeIndexHitObservedIsTrue capstone
 
-giumelliReviewedIdentityHopStillOpen :
-  Recursive.liveReviewedIdentityHopObserved capstone ≡ false
-giumelliReviewedIdentityHopStillOpen =
-  Recursive.liveReviewedIdentityHopObservedIsFalse capstone
+giumelliReviewedIdentityHopObserved :
+  Recursive.liveReviewedIdentityHopObserved capstone ≡ true
+giumelliReviewedIdentityHopObserved =
+  Recursive.liveReviewedIdentityHopObservedIsTrue capstone
 
 giumelliReviewedTreatmentHopStillOpen :
   Recursive.liveReviewedTreatmentHopObserved capstone ≡ false
