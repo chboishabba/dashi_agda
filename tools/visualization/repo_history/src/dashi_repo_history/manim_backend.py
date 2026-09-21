@@ -1705,6 +1705,38 @@ class ResearchAtlasGraphView(SemanticGraphView):
                 self.graph.vertices[node_id] = new
 
 
+RESEARCH_FONT = os.environ.get(
+    "DASHI_FILM_FONT",
+    "DejaVu Sans",
+)
+
+
+def _compact_hud_text(value: str, limit: int) -> str:
+    value = " ".join(str(value).split())
+    if len(value) <= limit:
+        return value
+    keep = max(8, (limit - 1) // 2)
+    return f"{value[:keep]}…{value[-keep:]}"
+
+
+def _research_text(
+    value: str,
+    *,
+    font_size: int,
+    max_chars: int = 120,
+    max_width: float | None = None,
+):
+    mob = Text(
+        _compact_hud_text(value, max_chars),
+        font=RESEARCH_FONT,
+        font_size=font_size,
+        disable_ligatures=True,
+    )
+    if max_width is not None and mob.width > max_width:
+        mob.scale_to_fit_width(max_width)
+    return mob
+
+
 def _research_time_rail(
     commits: dict[str, dict[str, Any]],
 ):
@@ -1723,17 +1755,20 @@ def _research_time_rail(
         [0.0, 2.0, 0.0],
     )
     marker = Dot(radius=0.055).move_to(line.get_bottom())
-    oldest = Text(
+    oldest = _research_text(
         format_timestamp_date(minimum),
         font_size=8,
+        max_chars=16,
     ).next_to(line, DOWN, buff=0.08)
-    newest = Text(
+    newest = _research_text(
         format_timestamp_date(maximum),
         font_size=8,
+        max_chars=16,
     ).next_to(line, UP, buff=0.08)
-    caption = Text(
+    caption = _research_text(
         "time",
         font_size=8,
+        max_chars=8,
     ).next_to(line, LEFT, buff=0.08)
     return (
         VGroup(line, marker, oldest, newest, caption),
@@ -1883,12 +1918,17 @@ class ResearchEvolutionScene(MovingCameraScene):
         policy = ManimRenderPolicy()
         view = ResearchAtlasGraphView(plan.regions, policy)
 
-        title = Text("Dashi formal research evolution", font_size=28)
-        programme_label = Text("", font_size=18)
-        topic_label = Text("", font_size=13)
-        work_label = Text("", font_size=11)
-        commit_label = Text("", font_size=10)
-        date_label = Text("", font_size=12)
+        title = _research_text(
+            "Dashi formal research evolution",
+            font_size=28,
+            max_chars=48,
+            max_width=9.5,
+        )
+        programme_label = _research_text("", font_size=18)
+        topic_label = _research_text("", font_size=13)
+        work_label = _research_text("", font_size=11)
+        commit_label = _research_text("", font_size=10)
+        date_label = _research_text("", font_size=12)
         self._pin_hud(title, "title")
         self._pin_hud(programme_label, "programme")
         self._pin_hud(topic_label, "topic")
@@ -1909,9 +1949,11 @@ class ResearchEvolutionScene(MovingCameraScene):
 
         region_labels = VGroup(
             *[
-                Text(
+                _research_text(
                     region.programme,
                     font_size=20,
+                    max_chars=36,
+                    max_width=5.5,
                 )
                 .move_to([region.x, region.y + 3.7, 0.0])
                 .set_opacity(0.22)
@@ -1930,11 +1972,13 @@ class ResearchEvolutionScene(MovingCameraScene):
 
         for beat in plan.beats:
             if beat.kind == "episode-title":
-                next_programme = Text(
+                next_programme = _research_text(
                     beat.programme or "Unclassified",
                     font_size=18,
+                    max_chars=48,
+                    max_width=8.5,
                 )
-                next_topic = Text(
+                next_topic = _research_text(
                     str(
                         (beat.payload or {}).get(
                             "headline",
@@ -1942,6 +1986,8 @@ class ResearchEvolutionScene(MovingCameraScene):
                         )
                     ),
                     font_size=13,
+                    max_chars=92,
+                    max_width=10.8,
                 )
                 self._pin_hud(next_programme, "programme")
                 self._pin_hud(next_topic, "topic")
@@ -2013,9 +2059,11 @@ class ResearchEvolutionScene(MovingCameraScene):
                     )
 
                 event_text = beat.topic or beat.kind.replace("-", " ")
-                banner = Text(
+                banner = _research_text(
                     event_text,
                     font_size=15,
+                    max_chars=90,
+                    max_width=10.5,
                 )
                 self._pin_hud(banner, "event")
                 self.add(banner)
@@ -2073,10 +2121,12 @@ class ResearchEvolutionScene(MovingCameraScene):
 
             current_commit = beat.commit
             commit = commits.get(current_commit, {})
-            next_date = Text(
+            next_date = _research_text(
                 f"{_commit_date(commits, current_commit)} · "
                 f"{current_commit[:10]}",
                 font_size=12,
+                max_chars=32,
+                max_width=4.2,
             )
             self._pin_hud(next_date, "date")
             self.add(next_date)
@@ -2127,9 +2177,11 @@ class ResearchEvolutionScene(MovingCameraScene):
                 )
             if symbol_text:
                 context_bits.append(symbol_text)
-            next_work = Text(
+            next_work = _research_text(
                 "  |  ".join(context_bits),
                 font_size=11,
+                max_chars=120,
+                max_width=11.0,
             )
             self._pin_hud(next_work, "work")
             self.add(next_work)
@@ -2140,9 +2192,11 @@ class ResearchEvolutionScene(MovingCameraScene):
             work_label = next_work
 
             subject = str(payload.get("commit_subject", "")).strip()
-            next_commit_label = Text(
-                subject[:120],
+            next_commit_label = _research_text(
+                subject,
                 font_size=10,
+                max_chars=110,
+                max_width=10.5,
             )
             self._pin_hud(next_commit_label, "commit")
             self.add(next_commit_label)
