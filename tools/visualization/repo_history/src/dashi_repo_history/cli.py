@@ -229,7 +229,9 @@ def _profile(args: argparse.Namespace) -> None:
     )
     print(
         "affected_modules_p95="
-        f"{decision.get('affected_modules_p95', 0)}"
+        f"{decision.get('affected_modules_p95', 0)} "
+        "recomputation_inflation_p95="
+        f"{decision.get('recomputation_inflation_p95', 0.0):.2f}x"
     )
     print(
         "parity_samples="
