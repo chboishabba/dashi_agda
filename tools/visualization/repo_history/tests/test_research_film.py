@@ -147,3 +147,143 @@ def test_low_level_commits_same_topic_coalesce_into_episode():
     plan = compile_research_film(timeline)
     assert len(plan.episodes) == 1
     assert plan.episodes[0].commits == ("A", "B")
+
+
+def test_multi_programme_commit_emits_overview_and_separate_working_sets():
+    ns = _node("ns", "R571Bound", "DASHI.Physics.NavierStokes")
+    rh = _node("rh", "GammaDeficit", "DASHI.Math.Riemann")
+
+    timeline = {
+        "commits": [
+            {"commit": "A", "timestamp": 0, "parents": []},
+            {"commit": "B", "timestamp": 10, "parents": ["A"]},
+        ],
+        "snapshots": [
+            _snapshot("A", []),
+            _snapshot(
+                "B",
+                [ns, rh],
+                delta={
+                    "added_nodes": ["ns", "rh"],
+                    "removed_nodes": [],
+                    "added_edges": [],
+                    "removed_edges": [],
+                },
+                parent="A",
+            ),
+        ],
+        "refs": {},
+        "branch_episodes": [],
+    }
+
+    plan = compile_research_film(timeline)
+    b_sets = [
+        item
+        for item in plan.working_sets
+        if item.commit == "B"
+    ]
+
+    assert {item.programme for item in b_sets} == {
+        "NavierStokes",
+        "RiemannHypothesis",
+    }
+    overview = next(
+        beat
+        for beat in plan.beats
+        if beat.kind == "cross-programme-overview"
+    )
+    assert set(overview.payload["programmes"]) == {
+        "NavierStokes",
+        "RiemannHypothesis",
+    }
+
+
+def test_pr_merge_and_branch_beats_are_narrative_not_semantic_edges():
+    ns = _node("ns", "R571Bound", "DASHI.Physics.NavierStokes")
+    timeline = {
+        "commits": [
+            {"commit": "A", "timestamp": 0, "parents": []},
+            {"commit": "B", "timestamp": 10, "parents": ["A"]},
+        ],
+        "snapshots": [
+            _snapshot("A", []),
+            _snapshot(
+                "B",
+                [ns],
+                delta={
+                    "added_nodes": ["ns"],
+                    "removed_nodes": [],
+                    "added_edges": [],
+                    "removed_edges": [],
+                },
+                parent="A",
+            ),
+        ],
+        "refs": {},
+        "branch_episodes": [
+            {
+                "fork_base": "B",
+                "left_tip": "B",
+                "right_tip": "B",
+                "merge_commit": "B",
+                "left_path": ["B"],
+                "right_path": ["B"],
+            }
+        ],
+        "pull_requests": [
+            {
+                "number": 1004,
+                "title": "NS endgame",
+                "head_ref": "agent/ns",
+                "base_ref": "master",
+                "created_at": 1,
+                "merged_at": 10,
+                "closed_at": 10,
+                "merge_commit": "B",
+                "url": None,
+            }
+        ],
+    }
+
+    plan = compile_research_film(timeline)
+    kinds = [beat.kind for beat in plan.beats]
+
+    assert "branch-fork" in kinds
+    assert "branch-merge" in kinds
+    assert "pr-merge" in kinds
+    pr = next(beat for beat in plan.beats if beat.kind == "pr-merge")
+    assert "PR #1004" in pr.topic
+
+
+def test_removed_symbol_keeps_parent_programme_identity():
+    ns = _node("ns", "OldNSLemma", "DASHI.Physics.NavierStokes")
+    timeline = {
+        "commits": [
+            {"commit": "A", "timestamp": 0, "parents": []},
+            {"commit": "B", "timestamp": 10, "parents": ["A"]},
+        ],
+        "snapshots": [
+            _snapshot("A", [ns]),
+            _snapshot(
+                "B",
+                [],
+                delta={
+                    "added_nodes": [],
+                    "removed_nodes": ["ns"],
+                    "added_edges": [],
+                    "removed_edges": [],
+                },
+                parent="A",
+            ),
+        ],
+        "refs": {},
+        "branch_episodes": [],
+    }
+
+    plan = compile_research_film(timeline)
+    b = next(
+        item
+        for item in plan.working_sets
+        if item.commit == "B"
+    )
+    assert b.programme == "NavierStokes"
