@@ -20,9 +20,9 @@ genericKernelBoundary =
   Kernel.canonicalGenericReviewedDeltaCampaignKernelBoundary
 
 maboProjectionBoundary :
-  Mabo.ProgressiveExplanationProjectionBoundary
+  Mabo.MaboThinProfileBoundary
 maboProjectionBoundary =
-  Mabo.canonicalProgressiveExplanationProjectionBoundary
+  Mabo.canonicalMaboThinProfileBoundary
 
 record MaboGenericLegalFollowAdapterBoundary : Set where
   constructor maboGenericLegalFollowAdapterBoundary
