@@ -14,7 +14,8 @@ module DASHI.Physics.Closure.NSClayFacingBResearchCutExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
-import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowFractionalShellPaymentExact as B1
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowFractionalShellPaymentExact as B1Legacy
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact as B1
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact as B2
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact as B3
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingRelativeCovarianceExact as B4
@@ -52,7 +53,7 @@ bLiteralInfinityShellBernsteinCompilerClosed =
 
 bB1StillRequiresSyntheticEightfoldCarrier : Bool
 bB1StillRequiresSyntheticEightfoldCarrier =
-  LiteralShell.literalInfinityShellUsesSyntheticEightfoldCarrier
+  B1.deepFarLowLiteralInfinityShellFoldUsesSyntheticEightfoldCarrier
 
 bHHGapSummationClosed : Bool
 bHHGapSummationClosed = R136.round136HHGapIndexSummationClosed
@@ -62,7 +63,8 @@ bFourComponentLowOutputBoundClosed =
   R574.round574AllFourPhysicalHelicalComponentsHaveLowOutputBound
 
 bB1ShellFoldCompilerClosed : Bool
-bB1ShellFoldCompilerClosed = B1.deepFarLowShellFoldCompilerClosed
+bB1ShellFoldCompilerClosed =
+  B1.deepFarLowLiteralInfinityShellFoldCompilerClosed
 
 bB2BipartiteFoldCompilerClosed : Bool
 bB2BipartiteFoldCompilerClosed =
@@ -93,7 +95,7 @@ bB7R406DecompositionCompilerClosed =
 
 bDFLPhysicalShellExtractionClosed : Bool
 bDFLPhysicalShellExtractionClosed =
-  B1.deepFarLowLiteralFilteredBlockShellExtractorInhabitedHere
+  B1.deepFarLowLiteralInfinityShellPhysicalExtractorInhabitedHere
 
 bDFLDHHPerShellSignedEstimateClosed : Bool
 bDFLDHHPerShellSignedEstimateClosed =
