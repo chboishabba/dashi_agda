@@ -20,6 +20,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Product using (Σ; _,_)
+import Data.Fin.Base as Fin
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -285,8 +286,7 @@ transportAcceptanceOccurrenceToFinish
     (cong Local.cells (sym finishEq))
     (AcceptFinal.occurs witness)
   where
-    open import Data.Fin.Base as Fin
-
+    open 
 ------------------------------------------------------------------------
 -- P7 capstone
 ------------------------------------------------------------------------
@@ -385,8 +385,6 @@ satisfyingCookLevinAssignmentToAcceptingRun
     literalUnique =
       Margin.interiorExactlyOneHead
         (Guard.guardedInitialInterior input steps)
-      where
-        import DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact as Margin
 
     startUnique :
       WF.ExactlyOneHead (Local.cells start)
@@ -396,7 +394,7 @@ satisfyingCookLevinAssignmentToAcceptingRun
         literalUnique
 
     startMargin :
-      DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact.HeadMargin
+      Margin.HeadMargin
         (suc steps) (Local.cells start)
     startMargin =
       RunInduction.transportMarginRow
