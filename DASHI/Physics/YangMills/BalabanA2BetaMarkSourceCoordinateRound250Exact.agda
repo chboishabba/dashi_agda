@@ -22,6 +22,9 @@ open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _≤_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.BalabanA2SharedMarkedHistoryDerivativeRound116Exact as R116
+import DASHI.Physics.YangMills.BalabanYM4InteractionMixedCouplingDerivativeGateExact as Mixed
+import DASHI.Physics.YangMills.BalabanYM4RowACauchySourceToCanonicalGateExact as Cauchy
+import DASHI.Physics.YangMills.BalabanYM4RowAWardFloorCanonicalGateExact as Ward
 
 record LiteralBetaHistoryShellIdentification : Set₁ where
   field
@@ -91,6 +94,44 @@ literalGeneratedHistoryPartialBound dataSet =
   R116.literalHistoryDerivativePartialBound
     (asRound116MarkedDerivative dataSet)
 
+
+
+rowACauchySourceFromShellIdentity :
+  Mixed.MixedInteractionCauchyData →
+  LiteralBetaHistoryShellIdentification →
+  Cauchy.RowACauchySourceConstants
+rowACauchySourceFromShellIdentity mixed dataSet =
+  R116.rowACauchySourceFromMarkedHistory
+    mixed (asRound116MarkedDerivative dataSet)
+
+canonicalGammaFromShellIdentity :
+  Mixed.MixedInteractionCauchyData →
+  LiteralBetaHistoryShellIdentification → ℚ
+canonicalGammaFromShellIdentity mixed dataSet =
+  R116.markedHistoryCanonicalGamma
+    mixed (asRound116MarkedDerivative dataSet)
+
+canonicalGammaFromShellIdentityPositive :
+  (mixed : Mixed.MixedInteractionCauchyData) →
+  (dataSet : LiteralBetaHistoryShellIdentification) →
+  0ℚ < canonicalGammaFromShellIdentity mixed dataSet
+canonicalGammaFromShellIdentityPositive mixed dataSet =
+  R116.markedHistoryCanonicalGammaPositive
+    mixed (asRound116MarkedDerivative dataSet)
+
+shellIdentityPaysFullRowADerivativeGate :
+  (mixed : Mixed.MixedInteractionCauchyData) →
+  (dataSet : LiteralBetaHistoryShellIdentification) →
+  (Cauchy.sourceInteractionConstant
+      (rowACauchySourceFromShellIdentity mixed dataSet)
+    + Cauchy.sourceDerivativeConstant
+      (rowACauchySourceFromShellIdentity mixed dataSet))
+    * canonicalGammaFromShellIdentity mixed dataSet
+  < Ward.wardGaussianFloor
+shellIdentityPaysFullRowADerivativeGate mixed dataSet =
+  R116.markedHistoryCanonicalGammaPaysFullDerivativeGate
+    mixed (asRound116MarkedDerivative dataSet)
+
 -- The current R116 partial-sum carrier is a downstream summary.  This module
 -- records the strictly earlier same-object coordinate; list/sum transport from
 -- the shell identity is generic compiler work and not a new physical theorem.
@@ -100,6 +141,9 @@ a2BetaMarkSourceCoordinateCompilerBoundaryLevel = machineChecked
 
 a2ShellIdentityToPartialSumCompilerLevel : ProofLevel
 a2ShellIdentityToPartialSumCompilerLevel = machineChecked
+
+a2ShellIdentityToCanonicalGammaCompilerLevel : ProofLevel
+a2ShellIdentityToCanonicalGammaCompilerLevel = machineChecked
 
 -- No concrete constructor of `betaHistoryShell` was found elsewhere in-repo.
 -- This is the current literal CMP116/source-history realization wall.
