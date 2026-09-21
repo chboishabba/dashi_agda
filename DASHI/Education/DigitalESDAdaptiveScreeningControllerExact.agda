@@ -24,21 +24,13 @@ import DASHI.Education.DigitalESDEligibilityFrameExclusionExact as Frame
 ------------------------------------------------------------------------
 
 data CalibrationStratum : Set where
-  obviousRetainedCandidate
-  obviousExclusionCandidate
-  highUncertainty
-  duplicateAmbiguity
-  rareTerminologyOrSourceType
-  missingAbstractOrMalformedMetadata
-  : CalibrationStratum
+  obviousRetainedCandidate obviousExclusionCandidate highUncertainty
+    duplicateAmbiguity rareTerminologyOrSourceType
+    missingAbstractOrMalformedMetadata : CalibrationStratum
 
 data ScreeningPriorityAxis : Set where
-  boundaryInformationGain
-  likelyCorpusContraction
-  rareCellCoverage
-  duplicateFamilyPayoff
-  reviewerCost
-  : ScreeningPriorityAxis
+  boundaryInformationGain likelyCorpusContraction rareCellCoverage
+    duplicateFamilyPayoff reviewerCost : ScreeningPriorityAxis
 
 record ScreeningCandidateAssessment : Set where
   constructor screening-candidate-assessment
