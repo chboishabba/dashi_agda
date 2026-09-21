@@ -474,6 +474,40 @@ def main() -> int:
     print("+", " ".join(census_cmd), file=sys.stderr)
     subprocess.run(census_cmd, cwd=slr_root, check=True)
 
+    processing_ledger_builder = HERE / "build_processing_ledger.py"
+    processing_ledger = output_dir / "study-processing-ledger.jsonl"
+    processing_manifest = output_dir / "study-processing-ledger-manifest.json"
+    processing_cmd = [
+        sys.executable,
+        str(processing_ledger_builder),
+        "--screening-ledger",
+        str(ledger),
+        "--fulltext-index",
+        str(fulltext_index),
+        "--materialization-receipts",
+        str(materialization_path),
+        "--slr-handoff",
+        str(handoff_path),
+        "--slr-parse-receipts",
+        str(parse_receipts_path),
+        "--output-ledger",
+        str(processing_ledger),
+        "--output-manifest",
+        str(processing_manifest),
+    ]
+    if args.slr_review_receipts:
+        processing_cmd.extend([
+            "--slr-review-receipts",
+            str(args.slr_review_receipts.resolve()),
+        ])
+    if args.source_audit_receipts:
+        processing_cmd.extend([
+            "--source-audit-receipts",
+            str(args.source_audit_receipts.resolve()),
+        ])
+    print("+", " ".join(processing_cmd), file=sys.stderr)
+    subprocess.run(processing_cmd, cwd=Path(__file__).resolve().parents[2], check=True)
+
     receipt = {
         "schema": "digital-esd-verified-fulltext-parse-run-v1",
         "verified_fulltext_total_count": len(verified_all),
@@ -492,6 +526,10 @@ def main() -> int:
         "slr_parse_receipts_sha256": sha256_file(parse_receipts_path),
         "census_reference": str(census_output),
         "census_sha256": sha256_file(census_output),
+        "study_processing_ledger_reference": str(processing_ledger),
+        "study_processing_ledger_sha256": sha256_file(processing_ledger),
+        "study_processing_manifest_reference": str(processing_manifest),
+        "study_processing_manifest_sha256": sha256_file(processing_manifest),
         "verified_bytes_count_as_parsed": False,
         "parse_creates_reviewed_evidence": False,
         "parse_creates_source_audit_admission": False,
