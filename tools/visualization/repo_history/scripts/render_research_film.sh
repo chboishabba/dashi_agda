@@ -12,6 +12,7 @@ args=(
   extract "$repo"
   --ref HEAD
   --max-commits "$commits"
+  --episode-context
   --compact
   --checkpoint-interval 50
   --parity-every 25
