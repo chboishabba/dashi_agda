@@ -11,17 +11,17 @@ module DASHI.Physics.YangMills.BalabanCMP116R429FixedYSharedHessianRound441Exact
 --     <= markedBaseEnergy(hessianMark) * (1/2)^d.
 --
 -- Therefore B3 does not need a second geometric-decay proof.  On the Goal-1
--- path the remaining physical/source theorem is the SAME-OBJECT statement that
--- R429.commonYShell for the selected twice-J response is that literal hessian
--- shell at the selected scale/volume/root.  Order-preserving rational-to-real
--- transport then gives the real R429 fixed-Y estimate directly.
+-- path the remaining physical/source theorem is the literal per-domain
+-- domination of R429.commonYShell by that hessian shell at the selected
+-- scale/volume/root.  Equality is neither needed nor asserted.  Ordered
+-- rational-to-real transport then gives the real R429 fixed-Y estimate directly.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _*_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; ≤ℝ-trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -56,12 +56,12 @@ record R429FixedYSharedHessianIdentification
     rootOf : R429.Domain fourStage → Root
 
     -- The genuine B3 source/physics seam:
-    -- the literal R429 common-Y majorant is the physical two-source CMP116
-    -- hessian shell, not merely bounded by an unrelated abstract envelope.
-    commonYShellIsEmbeddedHessianShell :
+    -- each literal R429 fixed-Y majorant is dominated by the physical
+    -- two-source CMP116 hessian shell at its own source coordinates.
+    commonYShellBelowEmbeddedHessianShell :
       ∀ domain →
       R429.commonYShell fourStage domain
-      ≡
+      ≤ℝ
       Embed.embed embedding
         (Shared.hessianInfluenceShell shared
           (scaleOf domain)
@@ -88,15 +88,8 @@ r429FixedYGeometricHalfReal :
       (shared identification) Shared.hessianMark
       * Geo.halfPower Graph.ymTreeEdgeCount)
 r429FixedYGeometricHalfReal identification domain =
-  subst
-    (λ lower →
-      lower
-      ≤ℝ
-      Embed.embed embedding
-        (Geom.markedBaseEnergy
-          (shared identification) Shared.hessianMark
-          * Geo.halfPower Graph.ymTreeEdgeCount))
-    (sym (commonYShellIsEmbeddedHessianShell identification domain))
+  ≤ℝ-trans
+    (commonYShellBelowEmbeddedHessianShell identification domain)
     (Embed.orderPreserving embedding
       (Geom.hessianInfluenceGeometricHalf
         (shared identification)
@@ -112,8 +105,9 @@ round441SharedHessianGeometricDecayReuseLevel =
 round441RationalToRealOrderTransportLevel : ProofLevel
 round441RationalToRealOrderTransportLevel = machineChecked
 
--- B3 has therefore been reduced to one literal same-object source theorem:
--- R429.commonYShell = the physical/shared CMP116 hessian shell.  The geometric
--- fixed-Y decay itself is already compiler-owned once that identity is supplied.
-literalRound441R429CommonYShellIdentificationLevel : ProofLevel
-literalRound441R429CommonYShellIdentificationLevel = conditional
+-- B3 has therefore been reduced to one literal source theorem:
+-- each R429.commonYShell(Y) is below the physical/shared CMP116 hessian shell
+-- at the corresponding source coordinates.  The geometric fixed-Y decay after
+-- that domination is compiler-owned.
+literalRound441R429CommonYShellDominationLevel : ProofLevel
+literalRound441R429CommonYShellDominationLevel = conditional
