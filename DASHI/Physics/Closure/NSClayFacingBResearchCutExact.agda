@@ -24,6 +24,8 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DecompositionExa
 import DASHI.Physics.Closure.NSTriadKNDeepFarLowDyadicBernsteinWeldRound466Exact as R466
 import DASHI.Physics.Closure.NSTriadKNHeterochiralHHGapEnvelopeRound136Exact as R136
 import DASHI.Physics.Closure.NSTriadKNR106ComponentLowOutputBoundRound574Exact as R574
+import DASHI.Physics.Closure.NSPeriodicInfinityShellSubsetCountExact as ShellSubset
+import DASHI.Physics.Closure.NSTriadKNLiteralInfinityShellBernsteinPaymentExact as LiteralShell
 
 data BResidual : Set where
   literalDFLFilteredBlockToShellData : BResidual
@@ -39,6 +41,18 @@ data BResidual : Set where
 
 bR466FiniteBernsteinCompilerClosed : Bool
 bR466FiniteBernsteinCompilerClosed = R466.round466DeepFarLowDyadicCompilerClosed
+
+bLiteralInfinityShellSubsetCountClosed : Bool
+bLiteralInfinityShellSubsetCountClosed =
+  ShellSubset.literalInfinityShellSubsetCountClosed
+
+bLiteralInfinityShellBernsteinCompilerClosed : Bool
+bLiteralInfinityShellBernsteinCompilerClosed =
+  LiteralShell.literalInfinityShellBernsteinCompilerClosed
+
+bB1StillRequiresSyntheticEightfoldCarrier : Bool
+bB1StillRequiresSyntheticEightfoldCarrier =
+  LiteralShell.literalInfinityShellUsesSyntheticEightfoldCarrier
 
 bHHGapSummationClosed : Bool
 bHHGapSummationClosed = R136.round136HHGapIndexSummationClosed
