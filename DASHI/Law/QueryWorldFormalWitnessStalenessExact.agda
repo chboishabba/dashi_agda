@@ -23,7 +23,7 @@ d₀≠d₁ ()
 record CheckedFactorsThroughWitness : Set where
   constructor checkedFactorsThroughWitness
   field
-    certifiedDigest : ProjectionDigest
+    positiveCertifiedDigest : ProjectionDigest
 
 record CheckedNonFactorabilityWitness : Set where
   constructor checkedNonFactorabilityWitness
@@ -37,14 +37,14 @@ data PositiveWitnessUsableAt
     (witness : CheckedFactorsThroughWitness)
     (current : ProjectionDigest) : Set where
   exactPositiveDigest :
-    certifiedDigest witness ≡ current →
+    positiveCertifiedDigest witness ≡ current →
     PositiveWitnessUsableAt witness current
 
 data NegativeWitnessUsableAt
     (witness : CheckedNonFactorabilityWitness)
     (current : ProjectionDigest) : Set where
   exactNegativeDigest :
-    CheckedNonFactorabilityWitness.certifiedDigest witness ≡ current →
+    negativeCertifiedDigest witness ≡ current →
     NegativeWitnessUsableAt witness current
 
 oldPositive : CheckedFactorsThroughWitness
