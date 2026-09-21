@@ -12,6 +12,10 @@ record ActiveWorkingSet : Set where
     changedEdgeIds : List String
     contextNodeIds : List String
     contextEdgeIds : List String
+    activeModules : List String
+    activeChangedSymbolLabels : List String
+    activeLaneHint : String
+    activeHeadline : String
     activeSalience : Nat
 
 open ActiveWorkingSet public
@@ -31,9 +35,19 @@ record ActiveWorkingSetBoundary : Set where
     changedSemanticObjectsRemainPrimaryIsTrue :
       changedSemanticObjectsRemainPrimary ≡ true
 
+    explanatoryMetadataMayCreateSemanticEdges : Bool
+    explanatoryMetadataMayCreateSemanticEdgesIsFalse :
+      explanatoryMetadataMayCreateSemanticEdges ≡ false
+
+    truncatedWindowCheckpointMeansMassCreation : Bool
+    truncatedWindowCheckpointMeansMassCreationIsFalse :
+      truncatedWindowCheckpointMeansMassCreation ≡ false
+
 canonicalActiveWorkingSetBoundary : ActiveWorkingSetBoundary
 canonicalActiveWorkingSetBoundary =
   activeWorkingSetBoundary
     false refl
     false refl
     true refl
+    false refl
+    false refl
