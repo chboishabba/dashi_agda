@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
