@@ -25,7 +25,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _*ℝ_; absℝ; _≤ℝ_; ≤ℝ-trans; mulMonotoneNonnegative)
+  (ℝ; 0ℝ; _*ℝ_; absℝ; _≤ℝ_; ≤ℝ-refl; ≤ℝ-trans; mulMonotoneNonnegative)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YMSupportGraphDistance as Graph
@@ -82,7 +82,7 @@ selectedBoundaryBelowPhysicalEnvelope {data = data} {geometry = geometry}
     scaledCalibration =
       mulMonotoneNonnegative
         (R448.sourceAmplitudeNonnegative geometry)
-        DASHI.Foundations.RealAnalysisAxioms.≤ℝ-refl
+        ≤ℝ-refl
         (R414.weightNonnegative (R448.sourceDecay geometry) selectedDistance)
         (selectedResidualBelowPhysicalEnvelope calibration)
   in
