@@ -90,3 +90,9 @@ CanonicalMergeVisualIntent =
 canonicalMergeVisualIntent :
   CanonicalMergeVisualIntent
 canonicalMergeVisualIntent = refl
+
+open import DASHI.Core.PullRequestTimelineExact
+open import DASHI.Visual.ActiveWorkingSetExact
+open import DASHI.Visual.ProgrammeAtlasExact
+open import DASHI.Visual.CameraDirectorExact
+open import DASHI.Visual.ResearchFilmDirectorExact
