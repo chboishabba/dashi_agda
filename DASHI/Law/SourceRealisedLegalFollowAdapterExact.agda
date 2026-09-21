@@ -7,6 +7,8 @@ open import Data.Empty using (⊥)
 open import Data.Maybe using (Maybe; just; nothing)
 
 import DASHI.Law.GenericReviewedDeltaCampaignKernelExact as Kernel
+import DASHI.Law.LegalWorldRevisionReconstructionExact as World
+import DASHI.Law.QueryWorldAutonomousRunControllerExact as Controller
 
 ------------------------------------------------------------------------
 -- S16: source-realised legal domains reuse the generic LegalFollow recurrence.
@@ -79,6 +81,16 @@ genericKernelBoundary :
 genericKernelBoundary =
   Kernel.canonicalGenericReviewedDeltaCampaignKernelBoundary
 
+worldBoundary :
+  World.LegalWorldRevisionReconstructionBoundary
+worldBoundary =
+  World.canonicalLegalWorldRevisionReconstructionBoundary
+
+controllerBoundary :
+  Controller.QueryWorldAutonomousRunControllerBoundary
+controllerBoundary =
+  Controller.canonicalQueryWorldAutonomousRunControllerBoundary
+
 data RawSourceAutomaticallyReviewedContextDelta : Set where
 data ReviewedDeltaAutomaticallyChangesWorldCoordinate : Set where
 data ReviewedDeltaAutomaticallyCreatesAuthority : Set where
@@ -115,6 +127,14 @@ record SourceRealisedLegalFollowAdapterBoundary : Set where
     reviewedDeltaMustPaySelectedResidualIsTrue :
       reviewedDeltaMustPaySelectedResidual ≡ true
 
+    sourceRealisedDomainMayBindFirstClassLegalWorld : Bool
+    sourceRealisedDomainMayBindFirstClassLegalWorldIsTrue :
+      sourceRealisedDomainMayBindFirstClassLegalWorld ≡ true
+
+    sourceRealisedDomainMayUseCommonQueryWorldController : Bool
+    sourceRealisedDomainMayUseCommonQueryWorldControllerIsTrue :
+      sourceRealisedDomainMayUseCommonQueryWorldController ≡ true
+
     reviewedDeltaMaySilentlyChangeWorldCoordinate : Bool
     reviewedDeltaMaySilentlyChangeWorldCoordinateIsFalse :
       reviewedDeltaMaySilentlyChangeWorldCoordinate ≡ false
@@ -133,6 +153,8 @@ canonicalSourceRealisedLegalFollowAdapterBoundary :
   SourceRealisedLegalFollowAdapterBoundary
 canonicalSourceRealisedLegalFollowAdapterBoundary =
   sourceRealisedLegalFollowAdapterBoundary
+    true refl
+    true refl
     true refl
     true refl
     true refl
