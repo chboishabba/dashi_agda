@@ -42,6 +42,7 @@ class BackendDecisionPolicy:
     # A large affected-module set is a warning that the invalidation model, not
     # Python itself, may be the first thing to improve.
     affected_modules_p95_limit: int = 128
+    recomputation_inflation_limit: float = 12.0
 
     min_samples_for_rust_decision: int = 50
 
@@ -59,6 +60,7 @@ class BackendDecision:
     semantic_core_p95_ns: int
     semantic_core_share: float
     affected_modules_p95: int
+    recomputation_inflation_p95: float
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -92,6 +94,7 @@ def decide_backend(
             semantic_core_p95_ns=0,
             semantic_core_share=0.0,
             affected_modules_p95=0,
+            recomputation_inflation_p95=0.0,
         )
 
     patch = [item.patch_ns for item in timings]
@@ -111,6 +114,30 @@ def decide_backend(
     planning_p95 = _percentile(planning, 0.95)
     core_p95 = _percentile(semantic_core, 0.95)
     affected_p95 = _percentile(affected, 0.95)
+    inflation_values: list[float] = []
+    for item in timings:
+        semantic_changes = (
+            item.removed_nodes
+            + item.added_nodes
+            + item.updated_nodes
+            + item.removed_edges
+            + item.added_edges
+            + item.updated_edges
+        )
+        recomputed = (
+            item.recomputed_nodes
+            + item.recomputed_edges
+        )
+        inflation_values.append(
+            recomputed / max(1, semantic_changes)
+        )
+    inflation_p95 = (
+        sorted(inflation_values)[
+            round((len(inflation_values) - 1) * 0.95)
+        ]
+        if inflation_values
+        else 0.0
+    )
     share = total_patch / max(1, total)
     planning_share = total_planning / max(1, total)
     core_share = total_core / max(1, total)
@@ -139,6 +166,16 @@ def decide_backend(
     elif (
         patch_p95 > policy.patch_p95_ns_limit
         and share > policy.patch_share_limit
+        and inflation_p95 > policy.recomputation_inflation_limit
+    ):
+        recommendation = "direct-delta-first"
+        reason = (
+            "patching is hot but physical recomputation greatly exceeds "
+            "semantic change; reduce unchanged work before changing language"
+        )
+    elif (
+        patch_p95 > policy.patch_p95_ns_limit
+        and share > policy.patch_share_limit
     ):
         recommendation = "rust-core-candidate"
         reason = (
@@ -163,4 +200,5 @@ def decide_backend(
         semantic_core_p95_ns=core_p95,
         semantic_core_share=core_share,
         affected_modules_p95=affected_p95,
+        recomputation_inflation_p95=inflation_p95,
     )
