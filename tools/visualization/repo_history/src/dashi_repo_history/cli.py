@@ -6,6 +6,10 @@ import os
 from pathlib import Path
 import subprocess
 
+from .compact_history import (
+    compact_timeline,
+    load_history_file,
+)
 from .git_history import HistoryExtractor, fetch_seed_commits
 from .merge_attribution import attribute_merge
 from .salience import rank_episodes, score_episode
@@ -40,7 +44,17 @@ def _extract(args: argparse.Namespace) -> None:
         semantic=not args.history_only,
         episode_context=args.episode_context,
     )
-    timeline.write_json(args.output)
+    history_payload = timeline.to_dict()
+    if args.compact:
+        history_payload = compact_timeline(
+            history_payload,
+            checkpoint_interval=args.checkpoint_interval,
+        )
+    Path(args.output).write_text(
+        json.dumps(history_payload, indent=2) + "
+",
+        encoding="utf-8",
+    )
     if args.profile_output:
         Path(args.profile_output).write_text(
             json.dumps(
@@ -62,7 +76,7 @@ def _render(args: argparse.Namespace) -> None:
         env["DASHI_REPO_SNAPSHOT_INDEX"] = str(args.snapshot_index)
     episode_index = args.episode_index
     if args.best_episode:
-        data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+        data = load_history_file(args.input)
         ranked = rank_episodes(data)
         if not ranked:
             raise SystemExit("No branch episodes available.")
@@ -107,7 +121,7 @@ def _render(args: argparse.Namespace) -> None:
 
 
 def _program(args: argparse.Namespace) -> None:
-    data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+    data = load_history_file(args.input)
 
     if args.scene == "semantic-history":
         commands = compile_first_parent_program(
@@ -172,7 +186,7 @@ def _program(args: argparse.Namespace) -> None:
 
 
 def _symbols(args: argparse.Namespace) -> None:
-    data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+    data = load_history_file(args.input)
     snapshots = data.get("snapshots", [])
     if not snapshots:
         raise SystemExit("No semantic snapshots in input.")
@@ -229,7 +243,7 @@ def _symbols(args: argparse.Namespace) -> None:
 
 
 def _episodes(args: argparse.Namespace) -> None:
-    data = json.loads(Path(args.input).read_text(encoding="utf-8"))
+    data = load_history_file(args.input)
     commits = {
         commit["commit"]: commit
         for commit in data.get("commits", [])
@@ -326,6 +340,17 @@ def build_parser() -> argparse.ArgumentParser:
     extract.add_argument(
         "--profile-output",
         help="Write incremental timing/backend-decision receipts separately from deterministic history JSON.",
+    )
+    extract.add_argument(
+        "--compact",
+        action="store_true",
+        help="Write checkpoint+delta dashi.repo-history.v2 instead of duplicated full snapshots.",
+    )
+    extract.add_argument(
+        "--checkpoint-interval",
+        type=int,
+        default=50,
+        help="Maximum number of patch states between full semantic checkpoints in compact history.",
     )
     extract.add_argument("--path-prefix")
     extract.add_argument(
