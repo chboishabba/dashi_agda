@@ -219,6 +219,8 @@ import DASHI.Law.QueryWorldCoverageInvalidationExact
 import DASHI.Law.QueryWorldCoverageInvalidationRegression
 import DASHI.Law.QueryWorldFormalWitnessStalenessExact
 import DASHI.Law.QueryWorldFormalWitnessStalenessRegression
+import DASHI.Law.QueryWorldAutonomousRunControllerExact
+import DASHI.Law.QueryWorldAutonomousRunControllerRegression
 import DASHI.Law.MaboHistoricalRevisionShadowExact
 import DASHI.Law.MaboHistoricalRevisionShadowRegression
 import DASHI.Law.RevisionInvalidatedProjectionAdequacyExact
