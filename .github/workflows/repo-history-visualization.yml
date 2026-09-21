@@ -19,6 +19,12 @@ on:
       - "DASHI/Visual/SceneProgramCompilerExact.agda"
       - "DASHI/Visual/RootedSemanticFocusExact.agda"
       - "DASHI/Visual/TemporalRootedFocusExact.agda"
+      - "DASHI/Core/SemanticPatchBackendExact.agda"
+      - "DASHI/Core/BackendSelectionPolicyExact.agda"
+      - "DASHI/Core/IncrementalSemanticRelinkBoundaryExact.agda"
+      - "DASHI/Visual/TemporalAxisExact.agda"
+      - "DASHI/Visual/TraversalBudgetExact.agda"
+      - "DASHI/Visual/LayoutComplexityBoundaryExact.agda"
       - "DASHI/Visual/RepositoryEvolutionEverything.agda"
       - "tools/visualization/repo_history/**"
       - ".github/workflows/repo-history-visualization.yml"
@@ -37,6 +43,12 @@ on:
       - "DASHI/Visual/SceneProgramCompilerExact.agda"
       - "DASHI/Visual/RootedSemanticFocusExact.agda"
       - "DASHI/Visual/TemporalRootedFocusExact.agda"
+      - "DASHI/Core/SemanticPatchBackendExact.agda"
+      - "DASHI/Core/BackendSelectionPolicyExact.agda"
+      - "DASHI/Core/IncrementalSemanticRelinkBoundaryExact.agda"
+      - "DASHI/Visual/TemporalAxisExact.agda"
+      - "DASHI/Visual/TraversalBudgetExact.agda"
+      - "DASHI/Visual/LayoutComplexityBoundaryExact.agda"
       - "DASHI/Visual/RepositoryEvolutionEverything.agda"
       - "tools/visualization/repo_history/**"
       - ".github/workflows/repo-history-visualization.yml"
@@ -132,8 +144,9 @@ jobs:
       - name: Extract earliest reachable Git history
         run: |
           dashi-repo-history extract ../../.. \
-            --history-only \
-            --first-commits 80 \
+            --ref HEAD \
+            --max-commits 80 \
+            --profile-output /tmp/dashi-history-profile.json \
             -o /tmp/dashi-early-history.json
 
       - name: Render MP4 smoke artifact
@@ -147,4 +160,11 @@ jobs:
         with:
           name: dashi-repository-history-mp4
           path: tools/visualization/repo_history/media/**/*.mp4
+          if-no-files-found: error
+
+      - name: Upload performance profile
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-repository-history-performance
+          path: /tmp/dashi-history-profile.json
           if-no-files-found: error
