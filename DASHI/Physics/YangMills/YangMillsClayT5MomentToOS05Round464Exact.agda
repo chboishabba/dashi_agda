@@ -34,7 +34,7 @@ import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Q
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 
 record QuantitativeMomentOS05Bridge
-    (Configuration Measure Observable Scalar : Set)
+    (Configuration Measure : Set)
     {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
     {limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit}
     {quotient :
@@ -50,7 +50,8 @@ record QuantitativeMomentOS05Bridge
     : Set₂ where
   field
     quantitative :
-      T5.PhysicalExpectationProducerData Measure Observable Scalar
+      T5.PhysicalExpectationProducerData
+        Measure (Configuration → ℝ) ℝ
 
     -- Same-family attachment: the T5 diagonal expectation sequence is the
     -- finite CMP119 expectation sequence used by the pinned OS construction.
@@ -61,8 +62,7 @@ record QuantitativeMomentOS05Bridge
         (T5.diagonalMeasure quantitative cutoff)
         observable
       ≡
-      Limit.finiteExpectation family cutoff
-        (λ configuration → 0ℝ)
+      Limit.finiteExpectation family cutoff observable
 
     -- We intentionally keep the final OS vocabulary explicit.  These predicates
     -- are selected by the human OS theorem, not manufactured by the compiler.
@@ -100,10 +100,10 @@ record QuantitativeMomentOS05Bridge
 open QuantitativeMomentOS05Bridge public
 
 asCanonicalOS05 :
-  ∀ {Configuration Measure Observable Scalar
+  ∀ {Configuration Measure
       sequenceLimit limitLaws quotient division family} →
   QuantitativeMomentOS05Bridge
-    Configuration Measure Observable Scalar
+    Configuration Measure
     {sequenceLimit = sequenceLimit}
     {limitLaws = limitLaws}
     {quotient = quotient}
@@ -136,11 +136,11 @@ asCanonicalOS05 bridge = record
   }
 
 continuumOS0FromQuantitativeMoments :
-  ∀ {Configuration Measure Observable Scalar
+  ∀ {Configuration Measure
       sequenceLimit limitLaws quotient division family}
     (bridge :
       QuantitativeMomentOS05Bridge
-        Configuration Measure Observable Scalar
+        Configuration Measure
         {sequenceLimit = sequenceLimit}
         {limitLaws = limitLaws}
         {quotient = quotient}
@@ -151,11 +151,11 @@ continuumOS0FromQuantitativeMoments bridge =
   OS05.canonicalCMP119OS0 (asCanonicalOS05 bridge)
 
 continuumOS5FromQuantitativeMoments :
-  ∀ {Configuration Measure Observable Scalar
+  ∀ {Configuration Measure
       sequenceLimit limitLaws quotient division family}
     (bridge :
       QuantitativeMomentOS05Bridge
-        Configuration Measure Observable Scalar
+        Configuration Measure
         {sequenceLimit = sequenceLimit}
         {limitLaws = limitLaws}
         {quotient = quotient}
