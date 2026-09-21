@@ -36,6 +36,7 @@ def _extract(args: argparse.Namespace) -> None:
         path_prefix=args.path_prefix,
         seed_commits=tuple(args.seed_commit or ()),
         history_refs=tuple(args.ref or ()),
+        parity_every=max(0, args.parity_every),
     )
     timeline = extractor.timeline(
         first_commits=args.first_commits,
@@ -351,6 +352,12 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=50,
         help="Maximum number of patch states between full semantic checkpoints in compact history.",
+    )
+    extract.add_argument(
+        "--parity-every",
+        type=int,
+        default=0,
+        help="Every N incremental steps, compare against a full semantic rebuild and fail on mismatch. 0 disables.",
     )
     extract.add_argument("--path-prefix")
     extract.add_argument(
