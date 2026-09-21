@@ -18,7 +18,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (cong; subst)
 
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSPeriodicInfinityShellModeCount as ShellCount
@@ -40,10 +40,7 @@ removeMemberLength :
   suc (Cube.length (removeMember x∈xs)) ≡ Cube.length xs
 removeMemberLength {xs = _ ∷ _} (Cube.here refl) = refl
 removeMemberLength {xs = _ ∷ _} (Cube.there x∈xs) =
-  subst
-    (λ n → suc (suc (Cube.length (removeMember x∈xs))) ≡ suc n)
-    (removeMemberLength x∈xs)
-    refl
+  cong suc (removeMemberLength x∈xs)
 
 removeMemberKeepsOther :
   ∀ {A : Set} {x y : A} {xs : List A} →
