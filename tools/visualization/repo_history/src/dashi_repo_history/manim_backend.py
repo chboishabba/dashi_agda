@@ -1637,6 +1637,12 @@ class ResearchEvolutionScene(MovingCameraScene):
                 target = frame.get_top() + DOWN * (1.02 * scale)
             elif slot == "work":
                 target = frame.get_top() + DOWN * (1.30 * scale)
+            elif slot == "commit":
+                target = (
+                    frame.get_corner(DOWN + LEFT)
+                    + UP * (0.28 * scale)
+                    + RIGHT * (2.2 * scale)
+                )
             elif slot == "date":
                 target = (
                     frame.get_corner(DOWN + RIGHT)
@@ -1741,11 +1747,13 @@ class ResearchEvolutionScene(MovingCameraScene):
         programme_label = Text("", font_size=18)
         topic_label = Text("", font_size=13)
         work_label = Text("", font_size=11)
+        commit_label = Text("", font_size=10)
         date_label = Text("", font_size=12)
         self._pin_hud(title, "title")
         self._pin_hud(programme_label, "programme")
         self._pin_hud(topic_label, "topic")
         self._pin_hud(work_label, "work")
+        self._pin_hud(commit_label, "commit")
         self._pin_hud(date_label, "date")
         if len(time_rail) > 0:
             self._pin_hud(time_rail, "timeline")
@@ -1754,6 +1762,7 @@ class ResearchEvolutionScene(MovingCameraScene):
             programme_label,
             topic_label,
             work_label,
+            commit_label,
             date_label,
             time_rail,
         )
@@ -1970,6 +1979,22 @@ class ResearchEvolutionScene(MovingCameraScene):
                 run_time=0.10,
             )
             work_label = next_work
+
+            subject = str(payload.get("commit_subject", "")).strip()
+            next_commit_label = Text(
+                subject[:120],
+                font_size=10,
+            )
+            self._pin_hud(next_commit_label, "commit")
+            self.add(next_commit_label)
+            self.play(
+                ReplacementTransform(
+                    commit_label,
+                    next_commit_label,
+                ),
+                run_time=0.10,
+            )
+            commit_label = next_commit_label
 
             if beat.camera is not None:
                 self._focus_camera(
