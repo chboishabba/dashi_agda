@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Data.Product using (_×_; _,_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
