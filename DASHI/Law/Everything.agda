@@ -177,3 +177,7 @@ import DASHI.Law.ConsumerDirectedLegalFollowAdequacyExact
 import DASHI.Law.ConsumerDirectedLegalFollowAdequacyRegression
 import DASHI.Law.LegalVisualisationIRProjectionBoundaryExact
 import DASHI.Law.LegalVisualisationIRProjectionBoundaryRegression
+import DASHI.Law.GenericLegalFollowCampaignDriveExact
+import DASHI.Law.GenericLegalFollowCampaignDriveRegression
+import DASHI.Law.ConsumerDemandCampaignRoutingExact
+import DASHI.Law.ConsumerDemandCampaignRoutingRegression
