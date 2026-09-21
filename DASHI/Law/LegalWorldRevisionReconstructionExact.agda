@@ -58,15 +58,15 @@ successorAuthorityValidity =
   authorityValidity successorAuthority qld false true "oldAuthority"
 
 activeAt : AuthorityValidity → LegalWorld → Bool
-activeAt validity world with AuthorityValidity.jurisdiction validity | LegalWorld.LegalWorld.jurisdiction world
-... | qld | qld with asAt world
-...   | t1 = activeAtT1 validity
-...   | t2 = activeAtT2 validity
-... | nsw | nsw with asAt world
-...   | t1 = activeAtT1 validity
-...   | t2 = activeAtT2 validity
-... | qld | nsw = false
-... | nsw | qld = false
+activeAt validity world with AuthorityValidity.jurisdiction validity | LegalWorld.jurisdiction world | asAt world
+... | qld | qld | t1 = activeAtT1 validity
+... | qld | qld | t2 = activeAtT2 validity
+... | nsw | nsw | t1 = activeAtT1 validity
+... | nsw | nsw | t2 = activeAtT2 validity
+... | qld | nsw | t1 = false
+... | qld | nsw | t2 = false
+... | nsw | qld | t1 = false
+... | nsw | qld | t2 = false
 
 qldT1World : LegalWorld
 qldT1World =
@@ -118,16 +118,19 @@ jurisdictionSemantics :
 jurisdictionSemantics =
   Query.querySemantics jurisdictionAnswer
 
+jurisdictionDecoder : JurisdictionObservation → JurisdictionAnswer
+jurisdictionDecoder qldSurface = qldAnswer
+jurisdictionDecoder nswSurface = nswAnswer
+
 jurisdictionFactorisation :
   (world : LegalWorld) →
   jurisdictionAnswer askQldOutcome world
   ≡
-  (λ { qldSurface → qldAnswer
-     ; nswSurface → nswAnswer })
-    (jurisdictionProject world)
-jurisdictionFactorisation world with LegalWorld.jurisdiction world
-... | qld = refl
-... | nsw = refl
+  jurisdictionDecoder (jurisdictionProject world)
+jurisdictionFactorisation
+  (legalWorld _ _ qld _ _ _ _ _ _ _ _) = refl
+jurisdictionFactorisation
+  (legalWorld _ _ nsw _ _ _ _ _ _ _ _) = refl
 
 jurisdictionProjectionAdequate :
   Query.AdequateFor
@@ -136,8 +139,10 @@ jurisdictionProjectionAdequate :
     askQldOutcome
 jurisdictionProjectionAdequate =
   Query.factorsForQuery
-    (λ { qldSurface → qldAnswer
-       ; nswSurface → nswAnswer })
+    {project = jurisdictionProject}
+    {semantics = jurisdictionSemantics}
+    {query = askQldOutcome}
+    jurisdictionDecoder
     jurisdictionFactorisation
 
 ------------------------------------------------------------------------
