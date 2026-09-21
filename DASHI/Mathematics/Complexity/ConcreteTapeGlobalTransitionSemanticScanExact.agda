@@ -234,6 +234,145 @@ globalTransitionCNF_to_semanticScan
             steps cols globalBits accepted)
     }
 
+
+------------------------------------------------------------------------
+-- Converse: semantic scan -> placed predicates -> global transition CNF
+------------------------------------------------------------------------
+
+oneTimeSemanticToPlaced :
+  ∀ {machine steps cols timeIndex}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (timeSlot : Global.Slot timeIndex steps)
+    (starts : List (Transition.SomeWindowStart cols))
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
+  AllRawWindowsSemantic
+    stateCoverage symbolCoverage nonempty
+    timeSlot globalBits starts →
+  Placed.AllPlacedSatisfied globalBits
+    (Transition.predicatesForOneTime
+      stateCoverage symbolCoverage nonempty timeSlot starts)
+oneTimeSemanticToPlaced
+    stateCoverage symbolCoverage nonempty
+    timeSlot [] globalBits semanticWindowsDone =
+  Placed.allPlacedDone
+oneTimeSemanticToPlaced
+    stateCoverage symbolCoverage nonempty
+    timeSlot
+    (Transition.some-window-start columnIndex start ∷ rest)
+    globalBits
+    (semanticWindowsStep current remaining) =
+  Placed.allPlacedStep currentTrue
+    (oneTimeSemanticToPlaced
+      stateCoverage symbolCoverage nonempty
+      timeSlot rest globalBits remaining)
+  where
+    decodedLegal :
+      DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact.LegalWindowForRule
+        machine
+        (Semantic.decodedSelectedRule nonempty
+          (Raw.rawSelectedWindowBits timeSlot start globalBits))
+        (Semantic.decodedSelectedWindow
+          stateCoverage symbolCoverage
+          (Raw.rawSelectedWindowBits timeSlot start globalBits))
+    decodedLegal
+      rewrite sym (Semantic.ruleExact current)
+            | sym (Semantic.windowExact current) =
+      Semantic.legal current
+
+    currentTrue :
+      Placed.predicate
+        (Raw.rawSelectedWindowPlacedPredicate
+          stateCoverage symbolCoverage nonempty timeSlot start)
+        (DASHI.Mathematics.Complexity.CNFVariableRenamingExact.pullbackBits
+          (Placed.rename
+            (Raw.rawSelectedWindowPlacedPredicate
+              stateCoverage symbolCoverage nonempty timeSlot start))
+          globalBits)
+      ≡ true
+    currentTrue =
+      Semantic.decodedSemanticLegalImpliesSelectedPredicateTrue
+        stateCoverage symbolCoverage nonempty
+        (Raw.rawSelectedWindowBits timeSlot start globalBits)
+        decodedLegal
+
+allTimesSemanticToPlaced :
+  ∀ {machine steps cols}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (times : List (Transition.SomeSlot steps))
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
+  AllTimesSemantic
+    stateCoverage symbolCoverage nonempty globalBits times →
+  Placed.AllPlacedSatisfied globalBits
+    (Transition.predicatesForAllTimes
+      stateCoverage symbolCoverage nonempty times)
+allTimesSemanticToPlaced
+    stateCoverage symbolCoverage nonempty
+    [] globalBits semanticTimesDone =
+  Placed.allPlacedDone
+allTimesSemanticToPlaced
+    stateCoverage symbolCoverage nonempty
+    (Transition.some-slot timeIndex timeSlot ∷ rest)
+    globalBits
+    (semanticTimesStep current remaining) =
+  merge
+    (oneTimeSemanticToPlaced
+      stateCoverage symbolCoverage nonempty
+      timeSlot (Transition.allWindowStarts _)
+      globalBits current)
+    (allTimesSemanticToPlaced
+      stateCoverage symbolCoverage nonempty
+      rest globalBits remaining)
+  where
+    merge :
+      ∀ {local global}
+        {assignment : CNF.Bits global}
+        {left right : List (Placed.PlacedPredicate local global)} →
+      Placed.AllPlacedSatisfied assignment left →
+      Placed.AllPlacedSatisfied assignment right →
+      Placed.AllPlacedSatisfied assignment
+        (Transition.appendPredicates left right)
+    merge Placed.allPlacedDone rightProof =
+      rightProof
+    merge (Placed.allPlacedStep head tail) rightProof =
+      Placed.allPlacedStep head (merge tail rightProof)
+
+semanticScan_to_globalTransitionCNF :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (steps cols : Nat)
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
+  GlobalTransitionSemanticScan
+    stateCoverage symbolCoverage nonempty
+    steps cols globalBits →
+  CNF.evaluateCNF
+    (Transition.globalTransitionCNF
+      stateCoverage symbolCoverage nonempty steps cols)
+    globalBits
+  ≡ true
+semanticScan_to_globalTransitionCNF
+    stateCoverage symbolCoverage nonempty
+    steps cols globalBits semantic =
+  Transition.globalTransitionCNF_complete
+    stateCoverage symbolCoverage nonempty
+    steps cols globalBits
+    (allTimesSemanticToPlaced
+      stateCoverage symbolCoverage nonempty
+      (Transition.allSlots steps)
+      globalBits
+      (everyTimeEveryWindowSemantic semantic))
+
 record GlobalTransitionSemanticScanReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
