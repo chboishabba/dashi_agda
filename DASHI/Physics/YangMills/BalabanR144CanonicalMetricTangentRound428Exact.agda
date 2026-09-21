@@ -140,18 +140,16 @@ localizedD1IsCanonicalMetricReadoutFromTangent
           (R144.globalBackgroundToStressBackground composite background)
           (R144.globalTangentToStressTangent composite tangent)))
       (cong
-        (R119.readoutToRational selected ∘
-          StressRep.firstVariationReadout _ ∘
-          First.substitutedFirstVariation
-            (R144.stressActivity composite)
-            (R144.globalBackgroundToStressBackground composite background))
+        (λ selectedTangent →
+          R119.readoutToRational selected
+            (StressRep.firstVariationReadout representation
+              (First.substitutedFirstVariation
+                (R144.stressActivity composite)
+                (R144.globalBackgroundToStressBackground composite background)
+                selectedTangent)))
         (sym
           (metricPerturbationRealizesR144StressTangent
             attachment background tangent))))
-  where
-  infixr 9 _∘_
-  _∘_ : ∀ {A B C : Set} → (B → C) → (A → B) → A → C
-  (f ∘ g) x = f (g x)
 
 asOldR144Weld :
   ∀ {trajectory split inputs History Cell cutoff present actionWeld laws
