@@ -8,6 +8,7 @@ import time
 from .agda import AgdaLanguageAdapter
 from .backend_policy import IncrementalStepTiming, decide_backend
 from .history_topology import derive_branch_episodes
+from .incremental import ResolutionImpactIndex
 from .language import LanguageAdapter
 from .semantic_backend import (
     PythonAffectedModuleBackend,
@@ -227,6 +228,7 @@ class HistoryExtractor:
         self._blob_cache: dict[tuple[str, str], object] = {}
         self._extractions_cache: dict[str, list[object]] = {}
         self._graph_cache = {}
+        self._impact_index_cache: dict[str, ResolutionImpactIndex] = {}
         self._incremental_receipts: dict[str, object] = {}
         self._incremental_timings: list[IncrementalStepTiming] = []
 
@@ -259,10 +261,13 @@ class HistoryExtractor:
         if commit in self._graph_cache:
             return self._graph_cache[commit]
 
-        graph = self.adapter.build_graph(
-            self.extractions_at(commit)
-        )
+        extractions = self.extractions_at(commit)
+        graph = self.adapter.build_graph(extractions)
         self._graph_cache[commit] = graph
+        if isinstance(self.adapter, AgdaLanguageAdapter):
+            self._impact_index_cache[commit] = (
+                ResolutionImpactIndex.from_files(extractions)
+            )
         return graph
 
     def graph_from_parent(
@@ -290,11 +295,27 @@ class HistoryExtractor:
             suffixes=self.adapter.suffixes,
             path_prefix=self.path_prefix,
         )
+        before_index = self._impact_index_cache.get(parent)
+        if before_index is None:
+            before_index = ResolutionImpactIndex.from_files(before)
+            self._impact_index_cache[parent] = before_index
+
+        after_by_path = {
+            file.path: file
+            for file in after
+        }
+        after_index = before_index.fork_apply(
+            after_by_path,
+            changed,
+        )
+
         result = self.patch_backend.patch(
             previous=parent_graph,
             before=before,
             after=after,
             changed_paths=changed,
+            before_index=before_index,
+            after_index=after_index,
         )
         total_ns = time.perf_counter_ns() - total_start
 
@@ -314,6 +335,7 @@ class HistoryExtractor:
 
         graph = result.graph
         self._graph_cache[commit] = graph
+        self._impact_index_cache[commit] = after_index
         self._incremental_receipts[commit] = result.receipt
         self._incremental_timings.append(timing)
         return graph
