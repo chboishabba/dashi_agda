@@ -6,6 +6,124 @@ Modern proof-spine migration: `2026-09-13`
 A/B/C/D nomenclature correction: `2026-09-15 09:32 AEST (UTC+10)`  
 Status: live analytic manuscript draft; conditional; non-promoting
 
+## 2026-09-21 Goal-1 submission recut
+
+The submission-facing programme is now split by mathematical role, not by proof
+assistant:
+
+```text
+A  proof-production: two physical same-object seams remain
+B  proof-production: B1/B2/B3/B4/B7 on the literal physical carrier
+C  proof-validation: independently audit the existing whole-space breakdown proof
+D  proof-validation: independently audit the existing periodic breakdown proof
+```
+
+For Goal 1, C/D are not gated on rebuilding generic IBP, Gronwall, restriction,
+smoothness transport, or localization libraries inside DASHI.  Their completion
+criterion is a referee-readable source proof whose hypotheses and conclusion
+match the independently frozen Clay statement clause by clause.
+
+### Exact source spine for D
+
+The pinned source route is:
+
+```text
+NavierStokes.PeriodicPaper.periodic_corollary
+  -> PeriodicPaper.of_compact_candidate
+  -> PeriodicPaper.CandidateProperties.no_global_solution
+  -> PeriodicViscosity.excludes_global_solution
+  -> periodic compact-slab uniqueness
+  -> agreement with the candidate for every T < 1
+  -> SpeedUnboundedAtOne
+  -> no global smooth periodic competitor
+  -> ComparatorBridge.option_D_of_paper_candidate
+  -> independent ClayOptionD
+```
+
+The source theorem `PeriodicPaper.periodic_corollary` produces, for each
+`ν > 0`, one periodic candidate with zero initial velocity, smooth periodic
+forcing of compact future-time support, divergence-free dynamics, the exact
+forced Navier--Stokes equation for `0<t<1`, unbounded speed at time one, and
+no global smooth periodic competitor.  The force-derivative decay theorem
+`CandidateProperties.force_derivative_decay` derives arbitrary polynomial
+decay of every ordinary spacetime derivative from smoothness plus compact
+future-time support.  The official pressure-periodicity erratum is carried by
+the periodic global-solution predicate and by the comparator bridge.
+
+The remaining Goal-1 D work is therefore independent verification of those
+source lemmas and their hypotheses, not invention of a new analytic argument.
+
+### Exact source spine for C
+
+The pinned whole-space route is:
+
+```text
+NavierStokesR3.ActualCandidate.selected_candidate_one_with_initial_rest
+  -> NavierStokesR3.ViscosityScaling.candidate_at_viscosity
+  -> NavierStokesR3.theorem_1_1_with_initial_rest
+  -> NavierStokesR3.theorem_1_1
+  -> R3FiniteEnergyComparison.compact_candidate_excludes_global_solution
+  -> WholeSpaceUniqueness.classical_uniqueness_on_Icc
+  -> agreement with the compact candidate on every T < 1
+  -> terminal obstruction / no global finite-energy solution
+  -> ComparatorBridge.navier_stokes_breakdown_R3
+  -> independent ClayOptionC
+```
+
+The whole-space source proof uses the same compact candidate throughout the
+viscosity scaling and finite-energy comparison.  The comparator adapter
+converts the candidate's compactly supported data to the independently stated
+rapid-decay hypotheses and excludes the exact smooth bounded-energy solution
+class.
+
+The remaining Goal-1 C work is an independent check of candidate identity,
+viscosity scaling, rapid-decay transport, bounded-energy semantics, whole-space
+uniqueness hypotheses, and absence of circular dependence on the claimed
+breakdown theorem.
+
+### Current A cut
+
+The active A compiler is
+`NSClayFacingATwoPhysicalSeamCompilerExact.agda`.  Its downstream analysis is
+already theorem-bearing.  The open mathematical input is exactly:
+
+```text
+A1  actual Euclidean physical resolvent kernel
+    = the projected-Gram / saturation object used by the near-origin theorem,
+    together with the corresponding high-frequency envelope identification;
+
+A2  actual physical state majorants
+    <= the finite-energy low/high convolution envelopes already known integrable.
+```
+
+Supplying those two witnesses yields the existing near-origin bound,
+high-frequency curvature bound, and integrability of the physical low/high
+majorants.
+
+### Current B cut
+
+The authoritative B frontier is
+`NSClayFacingBResearchCutExact.agda`:
+
+```text
+B1  R236-filtered physical DFL block
+    -> literal InfinityShellSupport receipts
+
+B2  DFL x DHH per-shell signed estimate
+
+B3  DHH intra-shell signed l2 aggregation
+
+B4  strict critical signed operator certificate, theta < 1
+
+B7  literal R406 remainder
+    = four times the live fixed-output covariance sum
+```
+
+B1/B7 are exact same-object welds.  B2/B3/B4 are the remaining analytic work.
+The old synthetic R466/eightfold support is no longer on the active B1 route;
+the active fold is the duplicate-free literal infinity-shell Bernstein payment.
+
+
 ## Abstract
 
 This manuscript records the current proof-critical **periodic** Navier–Stokes
