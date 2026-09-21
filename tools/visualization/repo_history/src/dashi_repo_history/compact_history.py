@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import json
+from pathlib import Path
 from typing import Any
 
 
@@ -251,3 +253,16 @@ def expand_timeline(compact: dict[str, Any]) -> dict[str, Any]:
         ),
         "snapshots": snapshots,
     }
+
+
+def load_history_file(path: str | Path) -> dict[str, Any]:
+    data = json.loads(
+        Path(path).read_text(encoding="utf-8")
+    )
+    if data.get("schema") == COMPACT_SCHEMA:
+        return expand_timeline(data)
+    if data.get("schema") == EXPANDED_SCHEMA:
+        return data
+    raise ValueError(
+        f"unsupported history schema: {data.get('schema')!r}"
+    )
