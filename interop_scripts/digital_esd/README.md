@@ -243,3 +243,74 @@ SourceAuditAdmission                   0
 
 That does not imply the other 43,995 records failed parsing; they have not
 reached that stage.
+
+
+## Iterative review → retrieve → parse loop
+
+The one-study smoke run proved the downstream parser path, but it did not make
+the remaining 43,995 unresolved metadata records retrieval failures.  The
+iterative controller now advances the real work queue without auto-promoting
+candidate recommendations.
+
+Prepare the next bounded review batch:
+
+```bash
+python3 interop_scripts/digital_esd/run_screen_review_retrieve_parse_loop.py \
+  prepare-review \
+  --slr-root ../slr \
+  --artifact-root artifacts/digital-esd/real-eric \
+  --max-packets 50
+```
+
+Complete the emitted decision overlay explicitly, then advance one iteration:
+
+```bash
+python3 interop_scripts/digital_esd/run_screen_review_retrieve_parse_loop.py \
+  advance \
+  --slr-root ../slr \
+  --artifact-root artifacts/digital-esd/real-eric \
+  --decisions artifacts/digital-esd/real-eric/review/completed-decisions.jsonl \
+  --max-packets 50 \
+  --fetch-max-items 20 \
+  --parse-verified
+```
+
+That command:
+
+1. applies only explicit `reviewed=true` decisions;
+2. refreshes calibration/Pareto state and prepares the next review batch;
+3. rebuilds the fail-closed full-text index;
+4. rebuilds the exact 43,996-row processing ledger;
+5. emits a retrieval residual containing only reviewed `include|probable`
+   records that still lack verified bytes;
+6. performs a bounded application-side URL retrieval pass;
+7. merges successful downloads into the persistent retrieved-artifact manifest;
+8. rebuilds the digest-verified full-text gate;
+9. parses newly verified artifacts through the existing generic SLR scholarly
+   parser when `--parse-verified` is supplied.
+
+The temporary network transport is:
+
+`interop_scripts/digital_esd/fetch_retrieval_residual.py`
+
+It consumes only the authoritative retrieval residual, follows candidate URLs,
+stores successful responses by SHA-256, and emits the manifest already consumed
+by the existing SLR full-text gate.  It creates no screening decision,
+reviewed evidence, source truth or audit admission.
+
+Therefore the live recurrence is:
+
+```text
+50 review packets
+→ explicit decisions
+→ retained set grows
+→ PDF/document retrieval residual grows
+→ bounded downloads
+→ digest verification
+→ generic scholarly parsing
+→ processing census refresh
+→ next review batch
+```
+
+An unresolved metadata row remains metadata-only until reviewed.  It is never
+counted as a failed download or parse.
