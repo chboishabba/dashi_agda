@@ -1877,6 +1877,20 @@ class ResearchEvolutionScene(MovingCameraScene):
                 enforce_max=not fit_all,
             )
 
+        target = [
+            float(target[0]),
+            float(target[1]),
+            0.0,
+        ]
+        if fit_all:
+            # Reserve unobstructed screen space for the top HUD and right time
+            # rail. The graph still fits completely because the width grows
+            # before the camera centre is biased into the safe viewport.
+            width *= 1.12
+            frame_height = width / max(0.01, frame_aspect)
+            target[1] += 0.075 * frame_height
+            target[0] += 0.035 * width
+
         previous = getattr(self, "_last_camera_target", None)
         previous_width = getattr(self, "_last_camera_width", None)
         if previous is not None and previous_width is not None:
