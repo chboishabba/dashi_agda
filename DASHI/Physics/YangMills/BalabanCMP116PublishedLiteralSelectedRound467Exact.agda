@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedRound467Exac
 -- calibration.  The output is again the terminal R387 finite theorem.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 import Data.Rational.Properties as ℚP
 
@@ -128,10 +129,10 @@ selectedPairInsidePublishedCommonDomain :
   Common.SourceCoordinateInside (commonDomain source)
     (R318.scaleOf base cutoff)
     (R318.volumeOf base cutoff)
-selectedPairInsidePublishedCommonDomain source cutoff =
+selectedPairInsidePublishedCommonDomain {base = base} source cutoff =
   Common.sourceCoordinateInside (commonDomain source)
-    (R318.scaleOf _ cutoff)
-    (R318.volumeOf _ cutoff)
+    (R318.scaleOf base cutoff)
+    (R318.volumeOf base cutoff)
 
 selectedResponseBelowSpectrumEnvelope :
   ∀ {Measure TestObservable SpectralObservable Energy
