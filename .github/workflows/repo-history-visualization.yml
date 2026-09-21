@@ -152,6 +152,7 @@ jobs:
             --max-commits 80 \
             --compact \
             --checkpoint-interval 25 \
+            --parity-every 10 \
             --profile-output /tmp/dashi-history-profile.json \
             -o /tmp/dashi-early-history.json
 
