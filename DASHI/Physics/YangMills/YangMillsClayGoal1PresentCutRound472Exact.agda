@@ -50,6 +50,10 @@ a2LiteralBetaMarkShellIdentificationLevel : ProofLevel
 a2LiteralBetaMarkShellIdentificationLevel =
   R250.literalCMP116BetaMarkIsGeneratedHistoryShellLevel
 
+a2ShellToPartialSumCompilerLevel : ProofLevel
+a2ShellToPartialSumCompilerLevel =
+  R250.a2ShellIdentityToPartialSumCompilerLevel
+
 a2LiteralResponseProducerFallbackLevel : ProofLevel
 a2LiteralResponseProducerFallbackLevel =
   R121.a2LiteralResponseProducerLevel
