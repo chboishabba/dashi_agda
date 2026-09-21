@@ -2,6 +2,7 @@ module DASHI.Cognition.LogPolarKluverDerivationExact where
 
 open import DASHI.Core.Prelude
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Biology.LogPolarRetinotopyBridge as LogPolar
 import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact as Sources
 import DASHI.Cognition.KlueverFormConstantProjection as Kluver
@@ -17,7 +18,7 @@ import DASHI.Cognition.CorticalLogPolarProjectionGeometry as Geometry
 -- Grusser, Ermentrout/Cowan, Bressloff et al., or Hadjikhani et al.
 ------------------------------------------------------------------------
 
-sourceAtlas : DASHI.Core.AttributedSourceCore.AttributedSourceAtlas
+sourceAtlas : Source.AttributedSourceAtlas
 sourceAtlas = Sources.canonicalKluverLogPolar5HT2AAtlas
 
 ------------------------------------------------------------------------
