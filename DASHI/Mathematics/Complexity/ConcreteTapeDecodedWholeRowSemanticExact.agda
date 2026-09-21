@@ -251,41 +251,14 @@ allRawWindowsSemanticToDecodedAllWindowsLegal :
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits
     (Transition.allWindowStarts cols) →
-  ΣRuleResult stateCoverage symbolCoverage nonempty
-    timeSlot globalBits
-  where
-    ΣRuleResult :
-      ∀ {machine steps cols timeIndex}
-        (stateCoverage :
-          Canonical.EnumerationCoverage (Local.finiteState machine))
-        (symbolCoverage :
-          Canonical.EnumerationCoverage (Local.finiteSymbol machine))
-        (nonempty : Selector.NonemptyRuleTable machine)
-        (timeSlot : Global.Slot timeIndex steps)
-        (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
-      Set
-    ΣRuleResult {machine} {cols = zero}
-      stateCoverage symbolCoverage nonempty timeSlot globalBits =
-      Whole.AllWindowsLegal machine
-        (Selector.decodeRule nonempty
-          (Global.selectorSliceBits timeSlot globalBits))
-        (Decode.decodeRow stateCoverage symbolCoverage zero
-          (Global.rowSliceBits
-            (Global.sameSlotInSucc timeSlot) globalBits))
-        (Decode.decodeRow stateCoverage symbolCoverage zero
-          (Global.rowSliceBits
-            (Global.nextSlotInSucc timeSlot) globalBits))
-    ΣRuleResult {machine} {cols = suc cols}
-      stateCoverage symbolCoverage nonempty timeSlot globalBits =
-      Whole.AllWindowsLegal machine
-        (Selector.decodeRule nonempty
-          (Global.selectorSliceBits timeSlot globalBits))
-        (Decode.decodeRow stateCoverage symbolCoverage (suc cols)
-          (Global.rowSliceBits
-            (Global.sameSlotInSucc timeSlot) globalBits))
-        (Decode.decodeRow stateCoverage symbolCoverage (suc cols)
-          (Global.rowSliceBits
-            (Global.nextSlotInSucc timeSlot) globalBits))
+  Whole.AllWindowsLegal machine
+    (ruleAtTime nonempty timeSlot globalBits)
+    (Decode.decodeRow stateCoverage symbolCoverage cols
+      (Global.rowSliceBits
+        (Global.sameSlotInSucc timeSlot) globalBits))
+    (Decode.decodeRow stateCoverage symbolCoverage cols
+      (Global.rowSliceBits
+        (Global.nextSlotInSucc timeSlot) globalBits))
 allRawWindowsSemanticToDecodedAllWindowsLegal
     {cols = zero}
     stateCoverage symbolCoverage nonempty
@@ -302,7 +275,7 @@ allRawWindowsSemanticToDecodedAllWindowsLegal
     timeSlot globalBits Scan.semanticWindowsDone =
   Whole.allNil
 allRawWindowsSemanticToDecodedAllWindowsLegal
-    {machine} {steps} {cols = suc (suc (suc rest))}
+    {machine} {cols = suc (suc (suc rest))}
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits semantics =
   allIndexedLegalToAllWindowsLegal transported
@@ -313,32 +286,13 @@ allRawWindowsSemanticToDecodedAllWindowsLegal
         timeSlot (Transition.allWindowStarts _)
         globalBits semantics
 
-    selectorExact :
-      Semantic.decodedSelectedRule nonempty
-        (Raw.rawSelectedWindowBits
-          timeSlot Raw.here globalBits)
-      ≡
-      Selector.decodeRule nonempty
-        (Global.selectorSliceBits timeSlot globalBits)
-    selectorExact =
-      cong (Selector.decodeRule nonempty)
-        selectorBitsExact
-      where
-        selectorBitsExact :
-          Canonical.takeBits (Selector.RuleWidth machine)
-            (Raw.rawSelectedWindowBits
-              timeSlot Raw.here globalBits)
-          ≡ Global.selectorSliceBits timeSlot globalBits
-        selectorBitsExact = refl
-
     scanExact =
       decodedAllStarts_eq_indexedScan
         stateCoverage symbolCoverage timeSlot globalBits
 
     transported :
       IndexedScan.AllIndexedLegal
-        (Selector.decodeRule nonempty
-          (Global.selectorSliceBits timeSlot globalBits))
+        (ruleAtTime nonempty timeSlot globalBits)
         (IndexedScan.scanIndexedWindows machine
           (Decode.decodeRow stateCoverage symbolCoverage _
             (Global.rowSliceBits
@@ -347,9 +301,9 @@ allRawWindowsSemanticToDecodedAllWindowsLegal
             (Global.rowSliceBits
               (Global.nextSlotInSucc timeSlot) globalBits))
     transported
-      rewrite sym selectorExact
-            | sym scanExact =
+      rewrite sym scanExact =
       rawLegal
+
 
 record DecodedWholeRowSemanticReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
