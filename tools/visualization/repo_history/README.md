@@ -301,3 +301,106 @@ dashi-repo-history program /tmp/dashi-arithmetic-history.json \
 The output schema is `dashi.scene-program.v1`. This is the intended handoff
 surface for future SVG/WebGPU/ITIR renderers; those backends should interpret
 the program rather than recomputing semantic history or dependency admission.
+
+
+## Design archaeology: lessons from the June 2026 repository index
+
+The earlier `scripts/repo_index.py` and `scripts/agda_import_cone.py` are useful
+predecessors. The new visualizer intentionally keeps several good ideas:
+
+- source remains the authority; an index/rendering layer does not promote truth,
+- stable machine-readable symbol identities,
+- explicit unresolved observations rather than silently fabricating certainty,
+- incremental file/blob reuse,
+- bounded human-facing query output,
+- reverse/dependency traversal with visited-node tracking,
+- durable structured output suitable for several frontends.
+
+The old index also exposes scaling patterns that this implementation should not
+repeat.
+
+### 1. Do not generate global candidate references and prune them later
+
+The old index tokenized identifier-looking strings across source/docs and then
+linked mentions against symbols using several corpus-wide predicates. It needed
+protective heuristics such as:
+
+```text
+MIN_BARE_NAME_LENGTH = 4
+MAX_BARE_NAME_FANOUT = 8
+```
+
+That is evidence that bare-name candidate generation itself can become the
+dominant problem.
+
+The Tree-sitter frontend instead admits an unqualified dependency only from
+lexical/module/open-scope evidence. A globally unique spelling is deliberately
+not scope evidence.
+
+### 2. Imports are module relations, not edges to every declaration
+
+The old relinker included a join equivalent to:
+
+```sql
+JOIN symbols s ON s.module = imported_module
+```
+
+which can turn one module import into references to every symbol in the imported
+module. The new graph keeps `imports` / `opens` as module relations and emits
+declaration edges only when syntax plus scope resolution supports them.
+
+### 3. Incremental parsing is not enough if linking is global
+
+The old incremental updater reparsed changed files, but then
+`_relink_all()` deleted/rebuilt the complete reference table. Therefore a
+small source edit could still cause corpus-wide linking work.
+
+The new architecture explicitly forbids "one changed file implies global
+relink" as its default semantic contract. Blob parsing is cached already; the
+next optimization surface is affected-scope invalidation rather than a global
+relink phase.
+
+### 4. Depth is not a resource bound
+
+Both the old recursive graph query and import-cone traversal correctly used
+visited-node sets, but a high-degree graph can still become enormous at shallow
+depth. New rooted focus therefore has independent defaults:
+
+```text
+max focus nodes = 250
+max focus edges = 800
+```
+
+and emits a truncation receipt. Depth describes semantic distance; the budgets
+bound presentation work.
+
+### 5. Do not run force layout on an unexpectedly large graph
+
+Small semantic graphs still use a bounded spring refinement. Above 180 nodes or
+600 projected edges, the renderer switches to deterministic large-graph
+placement: retain existing positions, anchor new nodes near positioned semantic
+neighbours, and grid-place unanchored components. Large graphs never enter the
+iterative force solver.
+
+### 6. Compute only the history actually being narrated
+
+Whole-repository branch topology may use all refs. Semantic movies should
+usually use an explicit lineage root:
+
+```bash
+dashi-repo-history extract ../../.. \
+  --ref HEAD \
+  --max-commits 80 \
+  -o /tmp/dashi-head-semantic.json
+```
+
+This avoids mixing unrelated branch tips into a semantic evolution film merely
+because they are recent in `git rev-list --all`.
+
+### 7. Time is data, not frame number
+
+The Git-history scene uses real commit timestamps on the vertical axis and
+branch lanes horizontally. Large gaps in development therefore look large; a
+burst of many commits in one day remains visually compressed in time. Semantic
+single-graph scenes show the exact UTC commit date in their scene stamp instead
+of overloading dependency geometry with a second Y-axis meaning.
