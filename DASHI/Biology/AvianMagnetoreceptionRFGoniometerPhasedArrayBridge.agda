@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.AvianMagneticFieldPerturbationReceipt as Bio
+import DASHI.Biology.MagnetoreceptionSurface as Generic
 import DASHI.Physics.Foundations.RadioRadarGoniometerDirectionFindingExact as Goniometer
 import DASHI.Physics.Foundations.PhasedArrayDirectionFindingExact as Array
 import DASHI.Physics.Foundations.GoniometerPhasedArrayRFSensingCrossPollinationExact as RFBridge
@@ -70,7 +71,7 @@ record AvianMagnetoreceptionRFGoniometerPhasedArrayBridge : Set where
   field
     perturbationReceipt :
       Bio.AvianMagneticFieldPerturbationReceipt
-        DASHI.Biology.MagnetoreceptionSurface.canonicalMechanismNeutralMagnetoreceptionSurface
+        Generic.canonicalMechanismNeutralMagnetoreceptionSurface
 
     goniometerFirewall :
       Goniometer.GoniometerRoleFirewall
