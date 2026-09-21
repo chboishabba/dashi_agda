@@ -62,6 +62,10 @@ bFourComponentLowOutputBoundClosed : Bool
 bFourComponentLowOutputBoundClosed =
   R574.round574AllFourPhysicalHelicalComponentsHaveLowOutputBound
 
+bB1CanonicalShellSupportClosed : Bool
+bB1CanonicalShellSupportClosed =
+  B1.deepFarLowLiteralInfinityShellSupportChoiceClosed
+
 bB1ShellFoldCompilerClosed : Bool
 bB1ShellFoldCompilerClosed =
   B1.deepFarLowLiteralInfinityShellFoldCompilerClosed
