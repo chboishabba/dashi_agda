@@ -46,6 +46,17 @@ revisionChangeDoesNotDirectlyReopenIdentity :
   revisionChangeFirstReopens revisionChangedR1 ≡ reopenContextSource
 revisionChangeDoesNotDirectlyReopenIdentity = refl
 
+data FailedRevisionLookupAutomaticallyUnchanged : Set where
+data TruncatedRevisionProbeAutomaticallyClosed : Set where
+
+failedLookupCannotBecomeUnchanged :
+  FailedRevisionLookupAutomaticallyUnchanged → ⊥
+failedLookupCannotBecomeUnchanged ()
+
+truncatedProbeCannotBecomeClosed :
+  TruncatedRevisionProbeAutomaticallyClosed → ⊥
+truncatedProbeCannotBecomeClosed ()
+
 data RevisionChangedAutomaticallyIdentityDelta : Set where
 data NewManifestationAutomaticallyReviewed : Set where
 data RecomputedIdentityResidualAutomaticallyReviewed : Set where
@@ -93,6 +104,14 @@ record MaboRevisionReopenBoundary : Set where
     latestRevisionLookupPaysContextReviewIsFalse :
       latestRevisionLookupPaysContextReview ≡ false
 
+    latestRevisionLookupFailureMayCountAsUnchanged : Bool
+    latestRevisionLookupFailureMayCountAsUnchangedIsFalse :
+      latestRevisionLookupFailureMayCountAsUnchanged ≡ false
+
+    truncatedRevisionProbeMayCloseFrontier : Bool
+    truncatedRevisionProbeMayCloseFrontierIsFalse :
+      truncatedRevisionProbeMayCloseFrontier ≡ false
+
     exactR1AcquisitionPaysContextReview : Bool
     exactR1AcquisitionPaysContextReviewIsFalse :
       exactR1AcquisitionPaysContextReview ≡ false
@@ -128,6 +147,8 @@ canonicalMaboRevisionReopenBoundary :
 canonicalMaboRevisionReopenBoundary =
   maboRevisionReopenBoundary
     true refl
+    false refl
+    false refl
     false refl
     false refl
     true refl
