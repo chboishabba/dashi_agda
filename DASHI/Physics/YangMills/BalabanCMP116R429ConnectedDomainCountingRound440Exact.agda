@@ -18,7 +18,7 @@ module DASHI.Physics.YangMills.BalabanCMP116R429ConnectedDomainCountingRound440E
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational using (_≤_; _*_)
+open import Data.Rational using (ℚ; _≤_; _*_)
 open import Relation.Binary.PropositionalEquality using (subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -36,7 +36,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4RCanonicalRepositoryTraceReuseExa
 
 record R429CanonicalConnectedDomainCounting
     {Measure TestObservable : Set}
-    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable Data.Rational.ℚ}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
     {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
     {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
     (fourStage :
