@@ -191,3 +191,5 @@ import DASHI.Law.ExactNonFactorabilityResidualCompilerExact
 import DASHI.Law.ExactNonFactorabilityResidualCompilerRegression
 import DASHI.Law.ConsumerResearchAdmissibilityStopExact
 import DASHI.Law.ConsumerResearchAdmissibilityStopRegression
+import DASHI.Law.LegalWorldRevisionReconstructionExact
+import DASHI.Law.LegalWorldRevisionReconstructionRegression
