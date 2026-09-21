@@ -97,3 +97,12 @@ round470UVContinuumMinCutCompilerLevel : ProofLevel
 round470UVContinuumMinCutCompilerLevel = machineChecked
 
 import DASHI.Physics.YangMills.BalabanLiteralFourReceiptBetaRound471Exact
+
+import DASHI.Physics.YangMills.YangMillsClayGoal1PresentCutRound472Exact as R472
+
+preferredFiniteRGPresentCutLevel : ProofLevel
+preferredFiniteRGPresentCutLevel =
+  R472.literalRound472PresentCutInstantiationLevel
+
+historicalBC1BC2MandatoryForPreferredGoal1 : Bool
+historicalBC1BC2MandatoryForPreferredGoal1 = false
