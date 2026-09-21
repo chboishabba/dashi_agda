@@ -511,3 +511,6 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1ReducedTerminalCompilerRound469
 import DASHI.Physics.YangMills.BalabanLiteralFourReceiptBetaRound471Exact
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1PresentCutRound472Exact
+
+import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact
+import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact
