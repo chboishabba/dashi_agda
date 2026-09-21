@@ -186,6 +186,59 @@ def _program(args: argparse.Namespace) -> None:
         print(rendered)
 
 
+def _profile(args: argparse.Namespace) -> None:
+    data = json.loads(
+        Path(args.input).read_text(encoding="utf-8")
+    )
+    decision = data.get("backend_decision", {})
+    parity = data.get("parity_receipts", [])
+
+    if args.json:
+        print(json.dumps(data, indent=2))
+        return
+
+    print(
+        "backend="
+        f"{data.get('backend', 'unknown')}"
+    )
+    print(
+        "recommendation="
+        f"{decision.get('recommendation', 'unknown')}"
+    )
+    print(
+        "reason="
+        f"{decision.get('reason', 'unknown')}"
+    )
+    print(
+        "samples="
+        f"{decision.get('samples', 0)} "
+        "patch_p50_ms="
+        f"{decision.get('patch_p50_ns', 0) / 1_000_000:.3f} "
+        "patch_p95_ms="
+        f"{decision.get('patch_p95_ns', 0) / 1_000_000:.3f}"
+    )
+    print(
+        "planning_p95_ms="
+        f"{decision.get('planning_p95_ns', 0) / 1_000_000:.3f} "
+        "planning_share="
+        f"{100 * decision.get('planning_share', 0.0):.1f}% "
+        "patch_share="
+        f"{100 * decision.get('patch_share', 0.0):.1f}% "
+        "core_share="
+        f"{100 * decision.get('semantic_core_share', 0.0):.1f}%"
+    )
+    print(
+        "affected_modules_p95="
+        f"{decision.get('affected_modules_p95', 0)}"
+    )
+    print(
+        "parity_samples="
+        f"{len(parity)} "
+        "parity_all_passed="
+        f"{data.get('parity_all_passed', False)}"
+    )
+
+
 def _symbols(args: argparse.Namespace) -> None:
     data = load_history_file(args.input)
     snapshots = data.get("snapshots", [])
@@ -452,6 +505,14 @@ def build_parser() -> argparse.ArgumentParser:
     program.add_argument("--max-focus-nodes", type=int, default=250)
     program.add_argument("--max-focus-edges", type=int, default=800)
     program.set_defaults(func=_program)
+
+    profile = sub.add_parser(
+        "profile",
+        help="Summarize an incremental performance/backend-decision receipt.",
+    )
+    profile.add_argument("input")
+    profile.add_argument("--json", action="store_true")
+    profile.set_defaults(func=_profile)
 
     symbols = sub.add_parser(
         "symbols",
