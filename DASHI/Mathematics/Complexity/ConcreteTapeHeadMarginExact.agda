@@ -202,154 +202,233 @@ wellFormedStepMargin {k = k} step margin
     }
   where
     occ = WF.occurrence (WF.wellFormedOccurrence step)
-    prefixPlain = WF.prefixPlain (WF.wellFormedOccurrence step)
-    suffixPlain = WF.suffixPlain (WF.wellFormedOccurrence step)
+    pp = WF.prefixPlain (WF.wellFormedOccurrence step)
 
-    beforeLeft :
-      leftOfHead (Local.cells _) ≡
-        suc (Coordinate.listLength (Local.prefix occ))
-    beforeLeft
+    hBeforeLeft :
+      leftOfHead (Local.cells before)
+      ≡ suc (Coordinate.listLength (Local.prefix occ))
+    hBeforeLeft
       rewrite Local.beforeShape occ
-            | leftOfHead_appendPlain_head prefixPlain =
-      refl
+            | leftOfHead_appendPlain_head pp = refl
 
-    afterLeft :
-      leftOfHead (Local.cells _) ≡
-        Coordinate.listLength (Local.prefix occ)
-    afterLeft
+    hAfterLeft :
+      leftOfHead (Local.cells after)
+      ≡ Coordinate.listLength (Local.prefix occ)
+    hAfterLeft
       rewrite Local.afterShape occ
-            | leftOfHead_appendPlain_head_left prefixPlain =
-      refl
+            | leftOfHead_appendPlain_head_left pp = refl
 
-    leftBound : k ≤ leftOfHead (Local.cells _)
+    hBeforeRight :
+      rightOfHead (Local.cells before)
+      ≡ suc (Coordinate.listLength (Local.suffix occ))
+    hBeforeRight
+      rewrite Local.beforeShape occ
+            | rightOfHead_appendPlain_head pp = refl
+
+    hAfterRight :
+      rightOfHead (Local.cells after)
+      ≡ suc (suc (Coordinate.listLength (Local.suffix occ)))
+    hAfterRight
+      rewrite Local.afterShape occ
+            | rightOfHead_appendPlain_head_left pp = refl
+
+    leftBound : k ≤ leftOfHead (Local.cells after)
     leftBound
-      rewrite afterLeft =
+      rewrite hAfterLeft =
       NatP.s≤s-injective
-        (NatP.≤-trans
-          (NatP.s≤s (NatP.≤-refl k))
-          (subst≤ beforeLeft (leftMargin margin)))
+        (substRight hBeforeLeft (leftMargin margin))
       where
-        subst≤ :
-          ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
-        subst≤ refl h = h
+        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
+        substRight refl h = h
 
-    rightBound : k ≤ rightOfHead (Local.cells _)
-    rightBound =
+    rightBound : k ≤ rightOfHead (Local.cells after)
+    rightBound
+      rewrite hAfterRight =
       NatP.≤-trans
-        (NatP.n≤1+n k)
         (NatP.≤-trans
-          (NatP.n≤1+n (suc k))
-          (transportRight (rightMargin margin)))
+          (NatP.n≤1+n k)
+          (NatP.s≤s-injective
+            (substRight hBeforeRight (rightMargin margin))))
+        (NatP.n≤1+n _)
       where
-        transportRight :
-          suc k ≤ rightOfHead (Local.cells before) →
-          suc (suc k) ≤ rightOfHead (Local.cells after)
-        transportRight h
-          rewrite Local.beforeShape occ
-                | Local.afterShape occ
-                | rightOfHead_appendPlain_head prefixPlain
-                | rightOfHead_appendPlain_head_left prefixPlain =
-          NatP.s≤s h
+        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
+        substRight refl h = h
 
 ... | Local.realizes-stay =
   record
-    { leftMargin =
-        NatP.≤-trans (NatP.n≤1+n k)
-          (NatP.≤-trans
-            (leftMargin margin)
-            (sameLeft refl))
-    ; rightMargin =
-        NatP.≤-trans (NatP.n≤1+n k)
-          (NatP.≤-trans
-            (rightMargin margin)
-            (sameRight refl))
-    }
-  where
-    occ = WF.occurrence (WF.wellFormedOccurrence step)
-
-    sameLeft :
-      leftOfHead (Local.cells before) ≡
-      leftOfHead (Local.cells after) →
-      leftOfHead (Local.cells before) ≤
-      leftOfHead (Local.cells after)
-    sameLeft refl = NatP.≤-refl _
-
-    sameRight :
-      rightOfHead (Local.cells before) ≡
-      rightOfHead (Local.cells after) →
-      rightOfHead (Local.cells before) ≤
-      rightOfHead (Local.cells after)
-    sameRight refl = NatP.≤-refl _
-
-... | Local.realizes-right =
-  record
-    { leftMargin =
-        NatP.≤-trans
-          (NatP.n≤1+n k)
-          (transportLeft (leftMargin margin))
+    { leftMargin = leftBound
     ; rightMargin = rightBound
     }
   where
     occ = WF.occurrence (WF.wellFormedOccurrence step)
-    prefixPlain = WF.prefixPlain (WF.wellFormedOccurrence step)
+    pp = WF.prefixPlain (WF.wellFormedOccurrence step)
 
-    transportLeft :
-      suc k ≤ leftOfHead (Local.cells before) →
-      suc k ≤ leftOfHead (Local.cells after)
-    transportLeft h
+    hBeforeLeft :
+      leftOfHead (Local.cells before)
+      ≡ suc (Coordinate.listLength (Local.prefix occ))
+    hBeforeLeft
       rewrite Local.beforeShape occ
-            | Local.afterShape occ
-            | leftOfHead_appendPlain_head prefixPlain
-            | leftOfHead_appendPlain_head_right prefixPlain =
-      NatP.≤-trans h (NatP.n≤1+n _)
+            | leftOfHead_appendPlain_head pp = refl
+
+    hAfterLeft :
+      leftOfHead (Local.cells after)
+      ≡ suc (Coordinate.listLength (Local.prefix occ))
+    hAfterLeft
+      rewrite Local.afterShape occ
+            | leftOfHead_appendPlain_head pp = refl
+
+    hBeforeRight :
+      rightOfHead (Local.cells before)
+      ≡ suc (Coordinate.listLength (Local.suffix occ))
+    hBeforeRight
+      rewrite Local.beforeShape occ
+            | rightOfHead_appendPlain_head pp = refl
+
+    hAfterRight :
+      rightOfHead (Local.cells after)
+      ≡ suc (Coordinate.listLength (Local.suffix occ))
+    hAfterRight
+      rewrite Local.afterShape occ
+            | rightOfHead_appendPlain_head pp = refl
+
+    leftBound : k ≤ leftOfHead (Local.cells after)
+    leftBound
+      rewrite hAfterLeft =
+      NatP.≤-trans
+        (NatP.n≤1+n k)
+        (NatP.s≤s-injective
+          (substRight hBeforeLeft (leftMargin margin)))
+      where
+        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
+        substRight refl h = h
 
     rightBound : k ≤ rightOfHead (Local.cells after)
     rightBound
+      rewrite hAfterRight =
+      NatP.≤-trans
+        (NatP.n≤1+n k)
+        (NatP.s≤s-injective
+          (substRight hBeforeRight (rightMargin margin)))
+      where
+        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
+        substRight refl h = h
+
+... | Local.realizes-right =
+  record
+    { leftMargin = leftBound
+    ; rightMargin = rightBound
+    }
+  where
+    occ = WF.occurrence (WF.wellFormedOccurrence step)
+    pp = WF.prefixPlain (WF.wellFormedOccurrence step)
+
+    hBeforeLeft :
+      leftOfHead (Local.cells before)
+      ≡ suc (Coordinate.listLength (Local.prefix occ))
+    hBeforeLeft
       rewrite Local.beforeShape occ
-            | Local.afterShape occ
-            | rightOfHead_appendPlain_head prefixPlain
-            | rightOfHead_appendPlain_head_right prefixPlain =
-      NatP.s≤s-injective (rightMargin margin)
+            | leftOfHead_appendPlain_head pp = refl
+
+    hAfterLeft :
+      leftOfHead (Local.cells after)
+      ≡ suc (suc (Coordinate.listLength (Local.prefix occ)))
+    hAfterLeft
+      rewrite Local.afterShape occ
+            | leftOfHead_appendPlain_head_right pp = refl
+
+    hBeforeRight :
+      rightOfHead (Local.cells before)
+      ≡ suc (Coordinate.listLength (Local.suffix occ))
+    hBeforeRight
+      rewrite Local.beforeShape occ
+            | rightOfHead_appendPlain_head pp = refl
+
+    hAfterRight :
+      rightOfHead (Local.cells after)
+      ≡ Coordinate.listLength (Local.suffix occ)
+    hAfterRight
+      rewrite Local.afterShape occ
+            | rightOfHead_appendPlain_head_right pp = refl
+
+    leftBound : k ≤ leftOfHead (Local.cells after)
+    leftBound
+      rewrite hAfterLeft =
+      NatP.≤-trans
+        (NatP.s≤s-injective
+          (substRight hBeforeLeft (leftMargin margin)))
+        (NatP.≤-trans (NatP.n≤1+n _) (NatP.n≤1+n _))
+      where
+        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
+        substRight refl h = h
+
+    rightBound : k ≤ rightOfHead (Local.cells after)
+    rightBound
+      rewrite hAfterRight =
+      NatP.s≤s-injective
+        (substRight hBeforeRight (rightMargin margin))
+      where
+        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
+        substRight refl h = h
 
 ------------------------------------------------------------------------
 -- Unique head + one cell of margin on each side reconstructs interiority.
 ------------------------------------------------------------------------
 
-interiorFromUniqueMargin :
-  ∀ {machine row} →
-  WF.ExactlyOneHead (Local.cells row) →
-  HeadMargin 1 (Local.cells row) →
-  Character.InteriorHeadConfiguration machine row
-interiorFromUniqueMargin {row = row}
-    (WF.headHere plain) margin =
-  ⊥-elim (NatP.1+n≰n 0 (leftMargin margin))
-interiorFromUniqueMargin {machine} {row}
-    (WF.plainBefore (WF.headHere WF.plainNil)) margin =
-  ⊥-elim (NatP.1+n≰n 0 (rightMargin margin))
-interiorFromUniqueMargin {machine} {row}
-    (WF.plainBefore (WF.headHere (WF.plainCons suffixPlain))) margin =
+record InteriorCells
+    {State Symbol : Set}
+    (cells : List (Local.TapeCell State Symbol)) : Set where
+  field
+    prefix suffix : List (Local.TapeCell State Symbol)
+    leftSymbol readSymbol rightSymbol : Symbol
+    headState : State
+    prefixPlain : WF.PlainCells prefix
+    suffixPlain : WF.PlainCells suffix
+    shape :
+      cells ≡ Local.append prefix
+        (Local.plain leftSymbol
+          ∷ Local.headed headState readSymbol
+          ∷ Local.plain rightSymbol
+          ∷ suffix)
+
+open InteriorCells public
+
+interiorCellsFromUniqueMargin :
+  ∀ {State Symbol : Set}
+    {cells : List (Local.TapeCell State Symbol)} →
+  WF.ExactlyOneHead cells →
+  HeadMargin 1 cells →
+  InteriorCells cells
+interiorCellsFromUniqueMargin
+    (WF.headHere plain) margin
+    with leftMargin margin
+... | ()
+interiorCellsFromUniqueMargin
+    (WF.plainBefore {symbol = left}
+      (WF.headHere WF.plainNil)) margin
+    with rightMargin margin
+... | ()
+interiorCellsFromUniqueMargin
+    (WF.plainBefore {symbol = left}
+      (WF.headHere {state = q} {symbol = read}
+        (WF.plainCons {symbol = right} suffixPlain)))
+    margin =
   record
-    { Character.prefix = []
-    ; Character.suffix = suffix
-    ; Character.leftSymbol = leftSymbol
-    ; Character.readSymbol = readSymbol
-    ; Character.rightSymbol = rightSymbol
-    ; Character.headState = headState
-    ; Character.prefixPlain = WF.plainNil
-    ; Character.suffixPlain = suffixPlain
-    ; Character.rowShape = refl
+    { prefix = []
+    ; suffix = _
+    ; leftSymbol = left
+    ; readSymbol = read
+    ; rightSymbol = right
+    ; headState = q
+    ; prefixPlain = WF.plainNil
+    ; suffixPlain = suffixPlain
+    ; shape = refl
     }
-  where
-    leftSymbol = _
-    readSymbol = _
-    rightSymbol = _
-    headState = _
-    suffix = _
-interiorFromUniqueMargin {machine} {row}
-    (WF.plainBefore
-      (WF.plainBefore unique)) margin =
-  prependInterior
-    (interiorFromUniqueMargin unique tailMargin)
+interiorCellsFromUniqueMargin
+    (WF.plainBefore {symbol = first}
+      (WF.plainBefore unique))
+    margin =
+  prepend first
+    (interiorCellsFromUniqueMargin unique tailMargin)
   where
     tailMargin : HeadMargin 1 _
     tailMargin = record
@@ -357,32 +436,43 @@ interiorFromUniqueMargin {machine} {row}
       ; rightMargin = rightMargin margin
       }
 
-    prependInterior :
-      ∀ {cellsTail}
-        {tailRow : Local.TapeRow machine} →
-      Character.InteriorHeadConfiguration machine tailRow →
-      Character.InteriorHeadConfiguration machine row
-    prependInterior interior =
+    prepend :
+      ∀ firstSymbol →
+      InteriorCells _ →
+      InteriorCells _
+    prepend firstSymbol interior =
       record
-        { Character.prefix =
-            _ ∷ Character.prefix interior
-        ; Character.suffix =
-            Character.suffix interior
-        ; Character.leftSymbol =
-            Character.leftSymbol interior
-        ; Character.readSymbol =
-            Character.readSymbol interior
-        ; Character.rightSymbol =
-            Character.rightSymbol interior
-        ; Character.headState =
-            Character.headState interior
-        ; Character.prefixPlain =
-            WF.plainCons (Character.prefixPlain interior)
-        ; Character.suffixPlain =
-            Character.suffixPlain interior
-        ; Character.rowShape =
-            cong (λ xs → _ ∷ xs) (Character.rowShape interior)
+        { prefix = Local.plain firstSymbol ∷ prefix interior
+        ; suffix = suffix interior
+        ; leftSymbol = leftSymbol interior
+        ; readSymbol = readSymbol interior
+        ; rightSymbol = rightSymbol interior
+        ; headState = headState interior
+        ; prefixPlain = WF.plainCons (prefixPlain interior)
+        ; suffixPlain = suffixPlain interior
+        ; shape = cong (λ xs → Local.plain firstSymbol ∷ xs)
+            (shape interior)
         }
+
+interiorFromUniqueMargin :
+  ∀ {machine row} →
+  WF.ExactlyOneHead (Local.cells row) →
+  HeadMargin 1 (Local.cells row) →
+  Character.InteriorHeadConfiguration machine row
+interiorFromUniqueMargin unique margin
+    with interiorCellsFromUniqueMargin unique margin
+... | interior =
+  record
+    { Character.prefix = prefix interior
+    ; Character.suffix = suffix interior
+    ; Character.leftSymbol = leftSymbol interior
+    ; Character.readSymbol = readSymbol interior
+    ; Character.rightSymbol = rightSymbol interior
+    ; Character.headState = headState interior
+    ; Character.prefixPlain = prefixPlain interior
+    ; Character.suffixPlain = suffixPlain interior
+    ; Character.rowShape = shape interior
+    }
 
 afterInteriorOfMargin :
   ∀ {machine before after} →
@@ -393,4 +483,3 @@ afterInteriorOfMargin step margin =
   interiorFromUniqueMargin
     (WF.afterExactlyOneHead step)
     (wellFormedStepMargin step margin)
-
