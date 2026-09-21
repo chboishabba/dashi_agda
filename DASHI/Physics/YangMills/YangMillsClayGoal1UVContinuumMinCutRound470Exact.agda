@@ -47,18 +47,33 @@ import DASHI.Physics.YangMills.BalabanClayHighestAlphaRound76SixAnalyticCutsetEx
 import DASHI.Physics.YangMills.BalabanSameFamilyOSStressRecoveryRound128Exact as R128
 import DASHI.Physics.YangMills.YangMillsClayPublishedWilsonRPRound461Exact as R461
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as R462
+import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as R473
+import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as R250
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as R464
 
-u1CompactSimpleFiveBlockSourceMapLevel : ProofLevel
-u1CompactSimpleFiveBlockSourceMapLevel =
+preferredA1CurrentStepBetaSourceLevel : ProofLevel
+preferredA1CurrentStepBetaSourceLevel =
+  R473.literalRound473A1SourceInstantiationLevel
+
+preferredA2HistoryShellSameObjectLevel : ProofLevel
+preferredA2HistoryShellSameObjectLevel =
+  R250.literalCMP116BetaMarkIsGeneratedHistoryShellLevel
+
+preferredA2ShellToPartialSumCompilerLevel : ProofLevel
+preferredA2ShellToPartialSumCompilerLevel =
+  R250.a2ShellIdentityToPartialSumCompilerLevel
+
+-- Historical stronger finite-RG/Hessian route retained for audit only.
+u1CompactSimpleFiveBlockSourceMapFallbackLevel : ProofLevel
+u1CompactSimpleFiveBlockSourceMapFallbackLevel =
   G2.physicalGroupParametricFiveBlockSourceMapLevel
 
-u2LiteralWilsonFPHaarOneLoopNormalizationLevel : ProofLevel
-u2LiteralWilsonFPHaarOneLoopNormalizationLevel =
+u2LegacyOneLoopPackageFallbackLevel : ProofLevel
+u2LegacyOneLoopPackageFallbackLevel =
   R73.literalWilsonFPHaarOneLoopRGCoefficientLevel
 
-u3SourceNativeUnifiedOneStepYMEstimateLevel : ProofLevel
-u3SourceNativeUnifiedOneStepYMEstimateLevel =
+u3LegacyUnifiedOneStepYMEstimateFallbackLevel : ProofLevel
+u3LegacyUnifiedOneStepYMEstimateFallbackLevel =
   R73.physicalUnifiedOneStepYMEstimateLevel
 
 u3PublishedFlowEntryAfterSourceNativeEstimateCompilerLevel : ProofLevel
@@ -92,6 +107,9 @@ projectiveProkhorovMandatory = false
 
 standalonePublishedFlowEntryMandatory : Bool
 standalonePublishedFlowEntryMandatory = false
+
+legacyFiveBlockAndUnifiedHessianRouteMandatory : Bool
+legacyFiveBlockAndUnifiedHessianRouteMandatory = false
 
 round470UVContinuumMinCutCompilerLevel : ProofLevel
 round470UVContinuumMinCutCompilerLevel = machineChecked
