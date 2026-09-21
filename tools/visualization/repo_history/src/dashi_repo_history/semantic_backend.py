@@ -8,8 +8,10 @@ from .agda import FileExtraction
 from .incremental import (
     IncrementalImpactPlan,
     IncrementalPatchReceipt,
+    ResolutionImpactIndex,
     patch_semantic_graph,
     plan_incremental_impact,
+    plan_incremental_impact_indexed,
 )
 from .model import SemanticGraph
 
@@ -40,6 +42,8 @@ class SemanticPatchBackend(Protocol):
         before: Iterable[FileExtraction],
         after: Iterable[FileExtraction],
         changed_paths: Iterable[str],
+        before_index: ResolutionImpactIndex | None = None,
+        after_index: ResolutionImpactIndex | None = None,
     ) -> SemanticPatchResult:
         ...
 
@@ -54,15 +58,24 @@ class PythonAffectedModuleBackend:
         before: Iterable[FileExtraction],
         after: Iterable[FileExtraction],
         changed_paths: Iterable[str],
+        before_index: ResolutionImpactIndex | None = None,
+        after_index: ResolutionImpactIndex | None = None,
     ) -> SemanticPatchResult:
         before = list(before)
         after = list(after)
         plan_start = time.perf_counter_ns()
-        plan = plan_incremental_impact(
-            before,
-            after,
-            changed_paths,
-        )
+        if before_index is not None and after_index is not None:
+            plan = plan_incremental_impact_indexed(
+                before_index,
+                after_index,
+                changed_paths,
+            )
+        else:
+            plan = plan_incremental_impact(
+                before,
+                after,
+                changed_paths,
+            )
         plan_ns = time.perf_counter_ns() - plan_start
 
         patch_start = time.perf_counter_ns()
