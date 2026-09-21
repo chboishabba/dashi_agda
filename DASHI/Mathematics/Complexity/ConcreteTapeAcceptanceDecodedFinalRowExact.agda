@@ -15,6 +15,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Dec
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact as Trace
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact as Slice
+import DASHI.Mathematics.Complexity.ConcreteTapeRawGlobalWindowCNFExact as Raw
 import DASHI.Mathematics.Complexity.ConcreteTapeDecodedWindowSameObjectExact as Same
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptanceEndpointSoundExact as Accept
@@ -53,44 +54,18 @@ extendedFinalCellBits_eq_baseCellPullback :
   extendedFinalCellBits i assignment
   ≡
   Rename.pullbackBits
-    (Global.globalCellRename
+    (Raw.globalCellRename
       (Endpoint.finalRowSlot steps)
       (Endpoint.finToSlot i))
     (baseTraceBits assignment)
 extendedFinalCellBits_eq_baseCellPullback
     {steps = steps} i assignment =
   Same.pullbackCompose
-    (Global.blockRename (Endpoint.finToSlot i))
-    (Global.globalRowRename (Endpoint.finalRowSlot steps))
-    (baseTraceBits assignment)
-  |> trans extendedToBase
-  where
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    x |> f = f x
-
-    extendedToBase :
-      Rename.pullbackBits
-        (λ j →
-          Global.globalRowRename
-            (Endpoint.finalRowSlot steps)
-            (Global.blockRename (Endpoint.finToSlot i) j))
-        (baseTraceBits assignment)
-      ≡ extendedFinalCellBits i assignment →
-      extendedFinalCellBits i assignment
-      ≡
-      Rename.pullbackBits
-        (Global.globalCellRename
-          (Endpoint.finalRowSlot steps)
-          (Endpoint.finToSlot i))
-        (baseTraceBits assignment)
-    extendedToBase _ =
-      sym
-        (Same.pullbackCompose
-          (λ j →
-            Global.globalRowRename
-              (Endpoint.finalRowSlot steps)
-              (Global.blockRename (Endpoint.finToSlot i) j))
-          Endpoint.liftBaseIndex assignment)
+    (Raw.globalCellRename
+      (Endpoint.finalRowSlot steps)
+      (Endpoint.finToSlot i))
+    Endpoint.liftBaseIndex
+    assignment
 
 -- The direct lookup proof avoids depending on the presentation chosen above.
 extendedFinalCellBits_eq_finalRowBlock :
@@ -107,37 +82,11 @@ extendedFinalCellBits_eq_finalRowBlock :
 extendedFinalCellBits_eq_finalRowBlock
     {steps = steps} i assignment =
   trans
-    baseEq
+    (extendedFinalCellBits_eq_baseCellPullback i assignment)
     (Same.globalCellBits_eq_rowBlockSlice
       (Endpoint.finalRowSlot steps)
       (Endpoint.finToSlot i)
       (baseTraceBits assignment))
-  where
-    baseEq :
-      extendedFinalCellBits i assignment
-      ≡
-      Rename.pullbackBits
-        (Raw.globalCellRename
-          (Endpoint.finalRowSlot steps)
-          (Endpoint.finToSlot i))
-        (baseTraceBits assignment)
-    baseEq =
-      Same.pullbackCompose
-        (Global.blockRename (Endpoint.finToSlot i))
-        (Global.globalRowRename (Endpoint.finalRowSlot steps))
-        (baseTraceBits assignment)
-      |> λ hbase →
-        trans
-          (sym
-            (Same.pullbackCompose
-              (λ j →
-                Global.globalRowRename
-                  (Endpoint.finalRowSlot steps)
-                  (Global.blockRename (Endpoint.finToSlot i) j))
-              Endpoint.liftBaseIndex assignment))
-          hbase
-    _|>_ : ∀ {A B : Set} → A → (A → B) → B
-    x |> f = f x
 
 record AcceptingCellInDecodedFinalRow
     {machine : Local.ConcreteTapeMachine}
