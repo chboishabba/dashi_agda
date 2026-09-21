@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass, field, replace
 from importlib.resources import files as resource_files
 from pathlib import Path
@@ -1101,7 +1102,12 @@ def build_semantic_graph(
     *,
     include_modules: set[str] | None = None,
 ) -> SemanticGraph:
-    files = list(files)
+    # FileExtraction is an observation/cache object. Graph construction may
+    # derive clause-pattern binders, so work on a private copy rather than
+    # mutating observations shared by multiple commits through the blob cache.
+    # Without this boundary, a later graph build can retroactively alter the
+    # semantic interpretation of an earlier commit.
+    files = deepcopy(list(files))
     graph = SemanticGraph()
 
     declarations: list[RawDeclaration] = []
