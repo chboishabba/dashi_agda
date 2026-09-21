@@ -101,18 +101,19 @@ record CMP119PeterWeylWilsonSquare
 open CMP119PeterWeylWilsonSquare public
 
 squareTerm :
-  ∀ {Configuration sequenceLimit limitLaws quotient division family algebra} →
-  CMP119PeterWeylWilsonSquare
-    Configuration
-    {sequenceLimit = sequenceLimit}
-    {limitLaws = limitLaws}
-    {quotient = quotient}
-    {division = division}
-    family algebra →
+  ∀ {Configuration sequenceLimit limitLaws quotient division family algebra}
+    (dataSet :
+      CMP119PeterWeylWilsonSquare
+        Configuration
+        {sequenceLimit = sequenceLimit}
+        {limitLaws = limitLaws}
+        {quotient = quotient}
+        {division = division}
+        family algebra) →
   ∀ cutoff
     (testFamily :
       Gram.PhysicalOSFiniteTestFamily (Configuration → ℝ) ℝ) →
-  Interface _ → ℝ
+  Interface dataSet → ℝ
 squareTerm dataSet cutoff testFamily index =
   characterCoefficient dataSet cutoff testFamily index *ℝ
     (reflectedAmplitude dataSet cutoff testFamily index *ℝ
