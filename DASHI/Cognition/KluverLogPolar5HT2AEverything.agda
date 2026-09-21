@@ -9,6 +9,7 @@ module DASHI.Cognition.KluverLogPolar5HT2AEverything where
 import DASHI.Biology.LogPolarRetinotopyBridge
 import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact
 import DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact
+import DASHI.Biology.Kluver5HT2ACrossScaleHyperfibreExact
 import DASHI.Biology.KluverFormConstantPsychedelicBoundaryExact
 import DASHI.Cognition.KlueverFormConstantProjection
 import DASHI.Cognition.CorticalLogPolarProjectionGeometry
