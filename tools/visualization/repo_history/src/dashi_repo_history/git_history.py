@@ -8,8 +8,11 @@ import time
 from .agda import AgdaLanguageAdapter
 from .backend_policy import IncrementalStepTiming, decide_backend
 from .history_topology import derive_branch_episodes
-from .incremental import patch_semantic_graph, plan_incremental_impact
 from .language import LanguageAdapter
+from .semantic_backend import (
+    PythonAffectedModuleBackend,
+    SemanticPatchBackend,
+)
 from .model import CommitRecord, GraphDelta, SemanticSnapshot, Timeline
 
 
@@ -215,6 +218,9 @@ class HistoryExtractor:
     seed_commits: tuple[str, ...] = ()
     history_refs: tuple[str, ...] = ()
     adapter: LanguageAdapter = field(default_factory=AgdaLanguageAdapter)
+    patch_backend: SemanticPatchBackend = field(
+        default_factory=PythonAffectedModuleBackend
+    )
 
     def __post_init__(self) -> None:
         self.repo = self.repo.resolve()
@@ -284,40 +290,31 @@ class HistoryExtractor:
             suffixes=self.adapter.suffixes,
             path_prefix=self.path_prefix,
         )
-        plan_start = time.perf_counter_ns()
-        plan = plan_incremental_impact(
-            before,
-            after,
-            changed,
+        result = self.patch_backend.patch(
+            previous=parent_graph,
+            before=before,
+            after=after,
+            changed_paths=changed,
         )
-        plan_ns = time.perf_counter_ns() - plan_start
-
-        patch_start = time.perf_counter_ns()
-        graph, receipt = patch_semantic_graph(
-            parent_graph,
-            before,
-            after,
-            plan,
-        )
-        patch_ns = time.perf_counter_ns() - patch_start
         total_ns = time.perf_counter_ns() - total_start
 
         timing = IncrementalStepTiming(
             commit=commit,
             parent=parent,
             changed_paths=len(changed),
-            affected_modules=len(plan.affected_modules),
-            plan_ns=plan_ns,
-            patch_ns=patch_ns,
+            affected_modules=len(result.plan.affected_modules),
+            plan_ns=result.plan_ns,
+            patch_ns=result.patch_ns,
             total_ns=total_ns,
-            removed_nodes=receipt.removed_nodes,
-            added_nodes=receipt.added_nodes,
-            removed_edges=receipt.removed_edges,
-            added_edges=receipt.added_edges,
+            removed_nodes=result.receipt.removed_nodes,
+            added_nodes=result.receipt.added_nodes,
+            removed_edges=result.receipt.removed_edges,
+            added_edges=result.receipt.added_edges,
         )
 
+        graph = result.graph
         self._graph_cache[commit] = graph
-        self._incremental_receipts[commit] = receipt
+        self._incremental_receipts[commit] = result.receipt
         self._incremental_timings.append(timing)
         return graph
 
@@ -330,6 +327,11 @@ class HistoryExtractor:
                 for timing in self._incremental_timings
             ],
             "backend_decision": decision.to_dict(),
+            "backend": getattr(
+                self.patch_backend,
+                "name",
+                type(self.patch_backend).__name__,
+            ),
             "notes": {
                 "python_is_reference": True,
                 "rust_candidate_requires_gate": True,
