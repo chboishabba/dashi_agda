@@ -16,29 +16,14 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data ScreeningDecision : Set where
-  include
-  probable
-  exclude
-  unresolved
-  : ScreeningDecision
+  include probable exclude unresolved : ScreeningDecision
 
 data ScreeningReasonCode : Set where
-  populationMismatch
-  educationContextMismatch
-  interventionOrTechnologyMismatch
-  sustainabilityQuestionMismatch
-  noEmpiricalStudy
-  noRelevantReviewOrMethodRole
-  insufficientTitleAbstractEvidence
-  inaccessibleAbstract
-  languageOutsideDeclaredScope
-  publicationTypeOutsideDeclaredScope
-  duplicateCandidate
-  awaitingScreeningReview
-  potentiallyRelevant
-  requiresFullText
-  otherScreeningReason
-  : ScreeningReasonCode
+  populationMismatch educationContextMismatch interventionOrTechnologyMismatch
+    sustainabilityQuestionMismatch noEmpiricalStudy noRelevantReviewOrMethodRole
+    insufficientTitleAbstractEvidence inaccessibleAbstract languageOutsideDeclaredScope
+    publicationTypeOutsideDeclaredScope duplicateCandidate awaitingScreeningReview
+    potentiallyRelevant requiresFullText otherScreeningReason : ScreeningReasonCode
 
 data OptionalReference : Set where
   noReference : OptionalReference
@@ -49,11 +34,7 @@ data OptionalReference : Set where
 ------------------------------------------------------------------------
 
 data DuplicateRelationKind : Set where
-  metadataDuplicate
-  publicationDuplicate
-  reportFamilyDuplicate
-  sameEmpiricalStudy
-  : DuplicateRelationKind
+  metadataDuplicate publicationDuplicate reportFamilyDuplicate sameEmpiricalStudy : DuplicateRelationKind
 
 record DuplicateRelationReceipt : Set where
   constructor duplicate-relation-receipt
