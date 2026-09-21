@@ -13,8 +13,8 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DecompositionExa
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -53,7 +53,7 @@ module Decomposition
       ∷ paymentsFor paymentAt rest
 
   sumCovariance : List Z3.FourierMode → ℚ
-  sumCovariance [] = 0
+  sumCovariance [] = 0ℚ
   sumCovariance (output ∷ rest) =
     Live.coherentCovarianceNumerator output + sumCovariance rest
 
@@ -89,12 +89,9 @@ module Decomposition
         trans
           (globalRemainderIsFourCovariances same)
           (cong
-            (R299.four *_)
+            (λ x → R299.four * x)
             (sym (paymentsSignedCrossMeaning paymentAt (outputs same))))
     }
-    where
-    open import Relation.Binary.PropositionalEquality using (sym)
-
 criticalRegionR406DecompositionCompilerClosed : Bool
 criticalRegionR406DecompositionCompilerClosed = true
 
