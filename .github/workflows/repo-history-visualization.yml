@@ -25,6 +25,8 @@ on:
       - "DASHI/Visual/TemporalAxisExact.agda"
       - "DASHI/Visual/TraversalBudgetExact.agda"
       - "DASHI/Visual/LayoutComplexityBoundaryExact.agda"
+      - "DASHI/Core/CompactSemanticHistoryExact.agda"
+      - "DASHI/Core/StatefulSemanticBackendExact.agda"
       - "DASHI/Visual/RepositoryEvolutionEverything.agda"
       - "tools/visualization/repo_history/**"
       - ".github/workflows/repo-history-visualization.yml"
@@ -49,6 +51,8 @@ on:
       - "DASHI/Visual/TemporalAxisExact.agda"
       - "DASHI/Visual/TraversalBudgetExact.agda"
       - "DASHI/Visual/LayoutComplexityBoundaryExact.agda"
+      - "DASHI/Core/CompactSemanticHistoryExact.agda"
+      - "DASHI/Core/StatefulSemanticBackendExact.agda"
       - "DASHI/Visual/RepositoryEvolutionEverything.agda"
       - "tools/visualization/repo_history/**"
       - ".github/workflows/repo-history-visualization.yml"
@@ -146,6 +150,8 @@ jobs:
           dashi-repo-history extract ../../.. \
             --ref HEAD \
             --max-commits 80 \
+            --compact \
+            --checkpoint-interval 25 \
             --profile-output /tmp/dashi-history-profile.json \
             -o /tmp/dashi-early-history.json
 
@@ -167,4 +173,11 @@ jobs:
         with:
           name: dashi-repository-history-performance
           path: /tmp/dashi-history-profile.json
+          if-no-files-found: error
+
+      - name: Upload compact semantic history
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-repository-history-compact
+          path: /tmp/dashi-early-history.json
           if-no-files-found: error
