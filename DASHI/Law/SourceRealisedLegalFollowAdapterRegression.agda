@@ -23,6 +23,16 @@ reviewPaysSelectedResidual :
 reviewPaysSelectedResidual =
   Adapter.reviewedDeltaMustPaySelectedResidualIsTrue boundary
 
+firstClassWorldBinding :
+  Adapter.sourceRealisedDomainMayBindFirstClassLegalWorld boundary ≡ true
+firstClassWorldBinding =
+  Adapter.sourceRealisedDomainMayBindFirstClassLegalWorldIsTrue boundary
+
+commonQueryWorldController :
+  Adapter.sourceRealisedDomainMayUseCommonQueryWorldController boundary ≡ true
+commonQueryWorldController =
+  Adapter.sourceRealisedDomainMayUseCommonQueryWorldControllerIsTrue boundary
+
 noSilentWorldChange :
   Adapter.reviewedDeltaMaySilentlyChangeWorldCoordinate boundary ≡ false
 noSilentWorldChange =
