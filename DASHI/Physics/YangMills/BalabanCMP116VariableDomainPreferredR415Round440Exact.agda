@@ -34,7 +34,7 @@ open import Data.Rational.Base as ℚ using (ℚ)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  ( ℝ ; 0ℝ ; _*ℝ_ ; _≤ℝ_
+  ( ℝ ; 0ℝ ; absℝ ; _*ℝ_ ; _≤ℝ_
   ; ≤ℝ-refl ; *-assoc ; mulZeroʳ ; mulMonotoneNonnegative )
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -348,10 +348,10 @@ commonYShellBelowDomainDecay :
   ≤ℝ
   domainAmplitude source domain
     *ℝ R414.weight (decay source) (domainTreeDistance source domain)
-commonYShellBelowDomainDecay source domain =
+commonYShellBelowDomainDecay {fourStage = fourStage} source domain =
   subst
     (λ upper →
-      R429.commonYShell _ domain ≤ℝ upper)
+      R429.commonYShell fourStage domain ≤ℝ upper)
     (sym
       (*-assoc
         (sourcePrefactor source)
@@ -482,7 +482,7 @@ selectedBoundaryBelowVariableDomainDecay :
         {Measure = Measure} {TestObservable = TestObservable}
         {dataSet = dataSet} {extension = extension} base)
     (source : VariableDomainCMP116Source fourStage) →
-  DASHI.Foundations.RealAnalysisAxioms.absℝ
+  absℝ
     (R429.selectedBoundaryIntegrand fourStage)
   ≤ℝ
   sourceAmplitude source
