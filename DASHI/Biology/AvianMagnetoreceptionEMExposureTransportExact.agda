@@ -6,6 +6,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.AvianMagneticFieldPerturbationReceipt as Perturb
+import DASHI.Biology.MagnetoreceptionSurface as Generic
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 
 ------------------------------------------------------------------------
@@ -172,7 +173,7 @@ record AvianMagnetoreceptionEMExposureTransportReceipt : Set₁ where
 
     perturbationReceipt :
       Perturb.AvianMagneticFieldPerturbationReceipt
-        DASHI.Biology.MagnetoreceptionSurface.canonicalMechanismNeutralMagnetoreceptionSurface
+        Generic.canonicalMechanismNeutralMagnetoreceptionSurface
 
     u1Boundary :
       EM.U1ElectromagneticBoundary
@@ -208,3 +209,26 @@ record AvianMagnetoreceptionEMExposureTransportReceipt : Set₁ where
       String
 
 open AvianMagnetoreceptionEMExposureTransportReceipt public
+
+
+canonicalAvianMagnetoreceptionEMExposureTransportReceipt :
+  AvianMagnetoreceptionEMExposureTransportReceipt
+canonicalAvianMagnetoreceptionEMExposureTransportReceipt =
+  record
+    { exposureSurface = canonicalEMExposureTransportSurface
+    ; exposureSurfaceIsCanonical = refl
+    ; perturbationReceipt =
+        Perturb.canonicalMechanismNeutralPerturbationReceipt
+    ; u1Boundary = EM.canonicalU1ElectromagneticBoundary
+    ; u1BoundaryIsCanonical = refl
+    ; generatedFieldIsValidated = false
+    ; generatedFieldIsValidatedIsFalse = refl
+    ; measuredFieldIsReceptorExposure = false
+    ; measuredFieldIsReceptorExposureIsFalse = refl
+    ; fieldAtReceptorRecovered = false
+    ; fieldAtReceptorRecoveredIsFalse = refl
+    ; receptorMechanismRecovered = false
+    ; receptorMechanismRecoveredIsFalse = refl
+    ; receiptReading =
+        "The EM application socket and perturbation receipt are present, but synthesis, calibration, spatial transport, tissue exposure, and receptor identification remain independent validation obligations."
+    }
