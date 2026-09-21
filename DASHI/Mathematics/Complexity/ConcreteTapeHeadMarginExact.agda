@@ -235,7 +235,7 @@ wellFormedStepMargin {k = k} step margin
     leftBound : k ≤ leftOfHead (Local.cells after)
     leftBound
       rewrite hAfterLeft =
-      NatP.s≤s-injective
+      NatP.≤-pred
         (substRight hBeforeLeft (leftMargin margin))
       where
         substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
@@ -247,7 +247,7 @@ wellFormedStepMargin {k = k} step margin
       NatP.≤-trans
         (NatP.≤-trans
           (NatP.n≤1+n k)
-          (NatP.s≤s-injective
+          (NatP.≤-pred
             (substRight hBeforeRight (rightMargin margin))))
         (NatP.n≤1+n _)
       where
@@ -296,7 +296,7 @@ wellFormedStepMargin {k = k} step margin
       rewrite hAfterLeft =
       NatP.≤-trans
         (NatP.n≤1+n k)
-        (NatP.s≤s-injective
+        (NatP.≤-pred
           (substRight hBeforeLeft (leftMargin margin)))
       where
         substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
@@ -307,7 +307,7 @@ wellFormedStepMargin {k = k} step margin
       rewrite hAfterRight =
       NatP.≤-trans
         (NatP.n≤1+n k)
-        (NatP.s≤s-injective
+        (NatP.≤-pred
           (substRight hBeforeRight (rightMargin margin)))
       where
         substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
@@ -354,7 +354,7 @@ wellFormedStepMargin {k = k} step margin
     leftBound
       rewrite hAfterLeft =
       NatP.≤-trans
-        (NatP.s≤s-injective
+        (NatP.≤-pred
           (substRight hBeforeLeft (leftMargin margin)))
         (NatP.≤-trans (NatP.n≤1+n _) (NatP.n≤1+n _))
       where
@@ -364,7 +364,7 @@ wellFormedStepMargin {k = k} step margin
     rightBound : k ≤ rightOfHead (Local.cells after)
     rightBound
       rewrite hAfterRight =
-      NatP.s≤s-injective
+      NatP.≤-pred
         (substRight hBeforeRight (rightMargin margin))
       where
         substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
@@ -432,7 +432,7 @@ interiorCellsFromUniqueMargin
   where
     tailMargin : HeadMargin 1 _
     tailMargin = record
-      { leftMargin = NatP.s≤s-injective (leftMargin margin)
+      { leftMargin = NatP.≤-pred (leftMargin margin)
       ; rightMargin = rightMargin margin
       }
 
