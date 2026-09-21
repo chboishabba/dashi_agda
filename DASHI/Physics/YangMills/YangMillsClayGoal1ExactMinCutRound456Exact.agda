@@ -42,6 +42,7 @@ import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Finit
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StandaloneWilsonSquareExact as WilsonRP
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119UniformProjectiveCompactnessExact as Projective
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OS05CanonicalLimitExact as OS05
+import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as R464
 import DASHI.Physics.YangMills.YangMillsFiniteHaarActionNumeratorInvariantRound431Exact as Haar
 import DASHI.Physics.YangMills.YangMillsClayPublishedWilsonRPRound461Exact as R461
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as R462
@@ -114,12 +115,16 @@ a3ExtractedClusterCylinderAgreementLevel : ProofLevel
 a3ExtractedClusterCylinderAgreementLevel =
   Projective.literalCMP119ExtractedClusterCylinderAgreementLevel
 
-a4UniformFiniteRegularityLevel : ProofLevel
-a4UniformFiniteRegularityLevel =
+a4a5QuantitativeMomentSemanticBridgeLevel : ProofLevel
+a4a5QuantitativeMomentSemanticBridgeLevel =
+  R464.literalRound464QuantitativeMomentToOS05Level
+
+a4UniformFiniteRegularityFallbackLevel : ProofLevel
+a4UniformFiniteRegularityFallbackLevel =
   OS05.literalCMP119FiniteRegularityLevel
 
-a5UniformFiniteGrowthLevel : ProofLevel
-a5UniformFiniteGrowthLevel =
+a5UniformFiniteGrowthFallbackLevel : ProofLevel
+a5UniformFiniteGrowthFallbackLevel =
   OS05.literalCMP119FiniteGrowthControlLevel
 
 ------------------------------------------------------------------------
@@ -247,6 +252,9 @@ massGapSemanticAttachmentCountedAsNewSpectralAnalysis = false
 
 projectiveProkhorovMandatoryWhenSourceNativeContinuumRecoveryAvailable : Bool
 projectiveProkhorovMandatoryWhenSourceNativeContinuumRecoveryAvailable = false
+
+separateContinuumOS0AndOS5ClosureCountedAsPhysicalLeaves : Bool
+separateContinuumOS0AndOS5ClosureCountedAsPhysicalLeaves = false
 
 opeAllDepthInductionCountedAsPhysicalResearchLeaf : Bool
 opeAllDepthInductionCountedAsPhysicalResearchLeaf = false
