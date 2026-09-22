@@ -32,6 +32,7 @@ import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
 import DASHI.Moonshine.JInvariantConstructedComplexKleinJBackendExact as KleinBackend
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as FiniteEisenstein
 import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as FiniteKlein
+import DASHI.Moonshine.EisensteinTruncationConvergenceCompilerExact as LimitCompiler
 
 ------------------------------------------------------------------------
 -- 1. Explicit bidirectional same-object bridge.
@@ -181,6 +182,7 @@ record DeltaConstructedComplexReflectionCutsetBoundary : Set where
     proofRelevantPrincipalArgumentAlreadyOwned : Bool
     concreteKleinJBackendAlreadyOwned : Bool
     finiteConstructedE4E6DeltaJRouteAlreadyOwned : Bool
+    finiteToInfiniteDeltaLimitCompilerOwned : Bool
     finiteRouteEqualsInfiniteAnalyticRoute : Bool
 
     abstractEisensteinScalarWeldedToConcreteComplex : Bool
@@ -198,6 +200,6 @@ canonicalDeltaConstructedComplexReflectionCutsetBoundary :
 canonicalDeltaConstructedComplexReflectionCutsetBoundary =
   delta-constructed-complex-reflection-cutset-boundary
     true true true true true
-    true false
+    true true false
     false false false false false
-    "the finite constructed E4/E6/Delta/j route already exists; prove its convergence/same-object identification with the infinite all-SL2(Z) EisensteinAnalyticModel, then attach the literal S action, Delta(-conjugate z)=conjugate(Delta z), and unit-circle reciprocal-conjugate fixed-point law"
+    "the finite constructed E4/E6/Delta/j route and the algebraic finite-to-infinite Delta/j limit compiler now exist; prove the two literal q-series convergence leaves E4_N->E4 and E6_N->E6 plus their same-object identification with the all-SL2(Z) EisensteinAnalyticModel, then attach the literal S action, Delta(-conjugate z)=conjugate(Delta z), and unit-circle fixed-point law"
