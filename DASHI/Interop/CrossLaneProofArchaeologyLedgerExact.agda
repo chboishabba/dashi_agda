@@ -1,6 +1,7 @@
 module DASHI.Interop.CrossLaneProofArchaeologyLedgerExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 
