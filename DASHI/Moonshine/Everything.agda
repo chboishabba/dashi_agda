@@ -20,3 +20,4 @@ import DASHI.Foundations.BishopGeometricSeriesConvergenceExact
 import DASHI.Foundations.BishopPolynomialGeometricDominationConvergenceExact
 import DASHI.Moonshine.EisensteinBishopLegacyCoordinateTransportExact
 import DASHI.Moonshine.EisensteinConvergenceEndgameCutsetExact
+import DASHI.Moonshine.EisensteinQExponentCartesianExact
