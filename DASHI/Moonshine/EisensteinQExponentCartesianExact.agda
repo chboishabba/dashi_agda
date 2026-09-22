@@ -68,43 +68,22 @@ imaginaryTimesPi :
   Complex.complex
     (Real.zero (Real.real (Complex.realPackage C)))
     (Complex.pi (Complex.complexExponential C))
-imaginaryTimesPi C ring =
-  let
-    R = Real.real (Complex.realPackage C)
-    p = Complex.pi (Complex.complexExponential C)
-    A = Complex.algebraLaws C
-  in
-  case refl of λ where
-    refl →
-      trans
-        refl
-        (let
-          -- Kept as a rewrite proof so the literal ConcreteComplex formula,
-          -- rather than a second complex multiplication implementation, owns
-          -- the identity.
-          in
-          proof R p A)
-  where
-  proof :
-    (R : Real.ConstructedOrderedCompleteReal) →
-    (p : Real.Real R) →
-    Complex.ComplexAlgebraLaws R →
-    Complex.complex
-      (Real._-_ R
-        (Real._*_ R (Real.zero R) p)
-        (Real._*_ R (Real.one R) (Real.zero R)))
-      (Real._+_ R
-        (Real._*_ R (Real.zero R) (Real.zero R))
-        (Real._*_ R (Real.one R) p))
-    ≡
-    Complex.complex (Real.zero R) p
-  proof R p A
-    rewrite mulZeroLeftFromRing ring p
-          | Ring.mulZeroRightLaw ring (Real.one R)
-          | Real.subSelf R (Real.zero R)
-          | mulZeroLeftFromRing ring (Real.zero R)
-          | Real.mulOneLeft R p
-          | Real.addZeroLeft R p = refl
+imaginaryTimesPi C ring
+  rewrite mulZeroLeftFromRing ring
+            (Complex.pi (Complex.complexExponential C))
+        | Ring.mulZeroRightLaw ring
+            (Real.one (Real.real (Complex.realPackage C)))
+        | Real.subSelf
+            (Real.real (Complex.realPackage C))
+            (Real.zero (Real.real (Complex.realPackage C)))
+        | mulZeroLeftFromRing ring
+            (Real.zero (Real.real (Complex.realPackage C)))
+        | Real.mulOneLeft
+            (Real.real (Complex.realPackage C))
+            (Complex.pi (Complex.complexExponential C))
+        | Real.addZeroLeft
+            (Real.real (Complex.realPackage C))
+            (Complex.pi (Complex.complexExponential C)) = refl
 
 twoPiImaginary :
   (C : Complex.ConstructedComplexPackage) →
