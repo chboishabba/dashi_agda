@@ -29,6 +29,7 @@ import DASHI.Analysis.ConstructiveRealSpine as LegacyReal
 import DASHI.Analysis.ConstructiveSeries as LegacySeries
 import DASHI.Analysis.ConcreteComplex as Complex
 import DASHI.Analysis.BishopConstructiveSeriesAdapterExact as BishopAdapter
+import DASHI.Foundations.BishopEventualAbsoluteComparisonExact as Comparison
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Finite
 import DASHI.Moonshine.EisensteinTruncationSeriesAlignmentExact as Alignment
 import DASHI.Moonshine.EisensteinComponentwiseComplexLimitExact as Component
@@ -199,6 +200,65 @@ transportedTargetLimit {C} {S} {L} {transport} {targetTerm} bridge series =
             (targetTerm (suc n)))
         (partialSumsMatch n))
 
+
+------------------------------------------------------------------------
+-- 3a. Bishop coordinate convergence can itself be compiled from a majorant.
+------------------------------------------------------------------------
+
+record BishopCoordinateMajorantData
+    (target : Nat → BishopReal.ℝ) : Set₁ where
+  field
+    majorant : Nat → BishopReal.ℝ
+
+    eventualAbsoluteMajorant :
+      Comparison.EventualAbsoluteMajorant target majorant
+
+open BishopCoordinateMajorantData public
+
+bishopCoordinateConvergenceFromMajorant :
+  ∀ {target} →
+  BishopCoordinateMajorantData target →
+  BishopSequence._isConvergent
+    (BishopSequence.SeriesOf target)
+bishopCoordinateConvergenceFromMajorant data =
+  Comparison.eventualAbsoluteComparisonConverges
+    (eventualAbsoluteMajorant data)
+
+bishopCoordinateLimitFromMajorant :
+  ∀ {target} →
+  BishopCoordinateMajorantData target →
+  BishopReal.ℝ
+bishopCoordinateLimitFromMajorant data =
+  BishopSequence.lim
+    (bishopCoordinateConvergenceFromMajorant data)
+
+bishopCoordinateConvergesToMajorantLimit :
+  ∀ {target} →
+  (data : BishopCoordinateMajorantData target) →
+  BishopSequence._ConvergesTo_
+    (BishopSequence.SeriesOf target)
+    (bishopCoordinateLimitFromMajorant data)
+bishopCoordinateConvergesToMajorantLimit data =
+  Data.Product.Base.proj₂
+    (bishopCoordinateConvergenceFromMajorant data)
+
+bishopCoordinateSeriesFromMajorant :
+  ∀ {C S transport targetTerm} →
+  (bishopTarget : Nat → BishopReal.ℝ) →
+  (majorant : BishopCoordinateMajorantData bishopTarget) →
+  ((n : Nat) →
+    BishopAdapter.termsToLegacy transport bishopTarget n
+    ≡ targetTerm n) →
+  BishopToLegacyCoordinateSeries C S transport targetTerm
+bishopCoordinateSeriesFromMajorant bishopTarget majorant termMatch =
+  record
+    { bishopTerm = bishopTarget
+    ; bishopLimit = bishopCoordinateLimitFromMajorant majorant
+    ; bishopConverges =
+        bishopCoordinateConvergesToMajorantLimit majorant
+    ; transportedTermMatchesTarget = termMatch
+    }
+
 ------------------------------------------------------------------------
 -- 4. Four coordinate transports for E4/E6.
 ------------------------------------------------------------------------
@@ -308,6 +368,7 @@ record EisensteinBishopLegacyCoordinateBoundary : Set where
     complexFiniteSumProjectionPaid : Bool
     bishopLegacyCarrierIdentificationAvoided : Bool
     ordinaryBishopSeriesConvergenceTransportedExplicitly : Bool
+    bishopCoordinateConvergenceCompilesFromMajorant : Bool
     fourCoordinateTransportCompilesAdditiveLimits : Bool
 
     concreteBishopCoordinateTermIdentificationsInhabited : Bool
@@ -320,5 +381,5 @@ canonicalEisensteinBishopLegacyCoordinateBoundary :
   EisensteinBishopLegacyCoordinateBoundary
 canonicalEisensteinBishopLegacyCoordinateBoundary =
   eisenstein-bishop-legacy-coordinate-boundary
-    true true true true
+    true true true true true
     false false
