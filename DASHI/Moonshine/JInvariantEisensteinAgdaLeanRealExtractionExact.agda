@@ -396,6 +396,28 @@ actualE6TransportFromRealExtraction E kernel terms tau =
   Extraction.mapE6TruncatedCanonicalQ
     (complexExtractionFromReal E) kernel terms tau
 
+actualDiscriminantNumeratorTransportFromRealExtraction :
+  ∀ {C T}
+    (E : RealTranscendentalExtraction C T)
+    (kernel : Q.DivisorPowerKernel)
+    (terms : Nat)
+    (tau :
+      Complex.ComplexPair
+        (Real.real (Complex.realPackage C))) →
+  Extraction.mapC (complexExtractionFromReal E)
+    (Q.discriminantNumeratorTruncated C kernel terms tau)
+  ≡
+  Extraction.targetDiscriminantNumeratorTruncated
+    (cartesianTargetComplexAlgebra T)
+    kernel
+    terms
+    (Extraction.targetQ
+      (cartesianTargetComplexAlgebra T)
+      (mapComplex E tau))
+actualDiscriminantNumeratorTransportFromRealExtraction E kernel terms tau =
+  Extraction.mapDiscriminantNumeratorCanonicalQ
+    (complexExtractionFromReal E) kernel terms tau
+
 ------------------------------------------------------------------------
 -- Frontier.
 ------------------------------------------------------------------------
@@ -409,6 +431,7 @@ record AgdaLeanRealExtractionBoundary : Set where
     actualQTransportDerived : Bool
     actualE4TransportDerived : Bool
     actualE6TransportDerived : Bool
+    actualDiscriminantNumeratorTransportDerived : Bool
 
     faithfulMapToLeanRealInhabited : Bool
     leanSinCosPiExpCompatibilityInhabited : Bool
@@ -418,5 +441,5 @@ canonicalAgdaLeanRealExtractionBoundary :
   AgdaLeanRealExtractionBoundary
 canonicalAgdaLeanRealExtractionBoundary =
   agda-lean-real-extraction-boundary
-    true true true true true true
+    true true true true true true true
     false false false
