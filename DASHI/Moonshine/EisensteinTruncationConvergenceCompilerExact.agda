@@ -213,19 +213,7 @@ record DeltaNormalisationLimitLaw
 
 open DeltaNormalisationLimitLaw public
 
-normalizedDeltaSequence :
-  ∀ {C} →
-  (D : DeltaNormalisationLimitLaw C
-        (record
-          { ConvergesTo = λ _ _ → ⊤
-          ; productLimit = λ _ _ → tt
-          ; differenceLimit = λ _ _ → tt
-          ; constantLimit = λ _ → tt
-          })) →
-  Set
-normalizedDeltaSequence D = ⊤
-
--- The actual compiler is parameterised by one selected limit algebra.
+-- The compiler is parameterised by one selected limit algebra.
 deltaConverges :
   ∀ {C L kernel tau} →
   (D : DeltaNormalisationLimitLaw C L) →
@@ -259,13 +247,13 @@ record ComplexQuotientLimitLaw
       ConvergesTo L numerators numerator →
       ConvergesTo L denominators denominator →
       (denominatorNonzero : Nonzero denominator) →
-      ((n : Nat) → Nonzero (denominators n)) →
+      (denominatorProofs : (n : Nat) → Nonzero (denominators n)) →
       ConvergesTo L
         (λ n →
           quotient
             (numerators n)
             (denominators n)
-            (_))
+            (denominatorProofs n))
         (quotient numerator denominator denominatorNonzero)
 
 open ComplexQuotientLimitLaw public
