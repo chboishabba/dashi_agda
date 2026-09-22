@@ -199,6 +199,10 @@ import DASHI.Law.ReaderVisualisationPickParityExact
 import DASHI.Law.ReaderVisualisationPickParityRegression
 import DASHI.Law.LegalWorldBoundMatterRuntimeExact
 import DASHI.Law.LegalWorldBoundMatterRuntimeRegression
+import DASHI.Law.SensibLawAdversarialProofSearchRuntimeRegression
+import DASHI.Law.SensibLawAdversarialProofSearchRuntimeExact
+import DASHI.Law.SensibLawSharedWorldConsumerJoinRegression
+import DASHI.Law.SensibLawSharedWorldConsumerJoinExact
 import DASHI.Law.ClosedIsNotAdequateExact
 import DASHI.Law.ClosedIsNotAdequateRegression
 import DASHI.Law.NonFactorabilityRuntimeTheoremBridgeExact
