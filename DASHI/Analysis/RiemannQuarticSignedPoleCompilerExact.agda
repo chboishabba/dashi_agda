@@ -34,15 +34,20 @@ record QuarticSignedPoleCompiler {ell : Level} : Set (lsuc ell) where
     BandCoverage : Set ell
     JointSignedCompletedResidual : Set ell
     TargetPairLower : Set ell
+    ExternalStrict : Set ell
 
-    -- G1 consumer: explicit band coverage gives the target-pair lower bound.
+    -- G1 compiler output.
     target-pair-from-band :
       BandCoverage -> TargetPairLower
 
-    -- G3 is already stated on the exact signed completed residual.
+    -- G3 + exact G2 assembly compile to the strict external statement.
+    external-strict-from-joint :
+      JointSignedCompletedResidual -> ExternalStrict
+
+    -- Middle/terminal compiler output.
     close :
-      BandCoverage ->
-      JointSignedCompletedResidual ->
+      TargetPairLower ->
+      ExternalStrict ->
       Contradiction
 
 open QuarticSignedPoleCompiler public
@@ -54,7 +59,9 @@ compileQuarticSignedPoleContradiction :
   JointSignedCompletedResidual C ->
   Contradiction
 compileQuarticSignedPoleContradiction C band joint =
-  close C band joint
+  close C
+    (target-pair-from-band C band)
+    (external-strict-from-joint C joint)
 
 ------------------------------------------------------------------------
 -- Optional proof-search decomposition of G3.
