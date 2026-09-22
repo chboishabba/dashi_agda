@@ -40,3 +40,4 @@ import DASHI.Analysis.RiemannG2FinalCutIntrospectionExact
 
 -- Concrete complex algebra reused by modular/reflection lanes.
 import DASHI.Analysis.ConcreteComplexConjugationProductExact
+import DASHI.Analysis.BishopSetoidComplexExact
