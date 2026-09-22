@@ -349,12 +349,34 @@ mapE6TruncatedCanonicalQ E kernel terms tau
   = refl
 
 ------------------------------------------------------------------------
--- Frontier: the recursion is paid; the concrete Lean Complex extraction is not.
+-- Authoritative Route-B local frontier.
+--
+-- The finite recurrence transport is compiler-owned here.  Lean PR #13 also
+-- owns convergence of the literal Agda-shaped E4_N/E6_N target recurrences to
+-- canonical infinite sums.  What remains is therefore not "infinite
+-- convergence" generically, but:
+--
+--   I_real/complex : selected Agda real/ComplexPair -> Lean Real/Complex,
+--                    preserving 0,1,i,pi,+,-,*,exp;
+--   I_E4,E6        : identify the resulting canonical infinite sums with
+--                    Mathlib's E4/E6 objects;
+--   I_Delta        : pay Delta normalization / eta^24 on the same object.
+--
+-- The legacy coarse infiniteLimitTransportPaid coordinate is retained below
+-- only as a superseded compatibility receipt.  New consumers should use the
+-- split coordinates.
 ------------------------------------------------------------------------
 
 record AgdaLeanEisensteinExtractionBoundary : Set where
   constructor agda-lean-eisenstein-extraction-boundary
   field
+    -- Primitive extraction seam.
+    primitiveComplexExtractionInhabited : Bool
+    agdaConstructedRealToLeanRealPaid : Bool
+    componentwiseComplexPairToLeanComplexPaid : Bool
+    primitiveZeroOneIPiAddSubMulExpPreservationPaid : Bool
+
+    -- Finite algebra: compiler output from the primitive extraction.
     actualQOfTransportCompilerOwned : Bool
     actualE4TruncatedTransportCompilerOwned : Bool
     actualE6TruncatedTransportCompilerOwned : Bool
@@ -362,15 +384,31 @@ record AgdaLeanEisensteinExtractionBoundary : Set where
     transportDerivedFromPrimitiveAlgebraExpLaws : Bool
     canonicalDivisorKernelSharedDefinitionRequired : Bool
 
+    -- Lean-target analytic convergence: already paid on the target side.
+    leanTargetE4TruncatedToAgdaShapedInfinitePaid : Bool
+    leanTargetE6TruncatedToAgdaShapedInfinitePaid : Bool
+
+    -- Canonical same-object identifications still open.
+    agdaShapedE4InfiniteIdentifiedWithMathlibE4 : Bool
+    agdaShapedE6InfiniteIdentifiedWithMathlibE6 : Bool
+    deltaEta24SameObjectNormalizationPaid : Bool
+
+    -- Legacy compatibility coordinates.  These deliberately remain false:
+    -- they bundled several now-distinct claims and must not be read as saying
+    -- Lean-target recurrence convergence is unpaid.
     concreteMapIntoLeanComplexInhabited : Bool
     agdaConstructedRealIdentifiedWithLeanReal : Bool
     agdaComplexExpIdentifiedWithLeanComplexExp : Bool
     infiniteLimitTransportPaid : Bool
+    infiniteLimitTransportPaidIsSupersededCoarseCoordinate : Bool
     deltaNormalizationTransportPaid : Bool
 
 canonicalAgdaLeanEisensteinExtractionBoundary :
   AgdaLeanEisensteinExtractionBoundary
 canonicalAgdaLeanEisensteinExtractionBoundary =
   agda-lean-eisenstein-extraction-boundary
+    false false false false
     true true true true true true
-    false false false false false
+    true true
+    false false false
+    false false false false true false
