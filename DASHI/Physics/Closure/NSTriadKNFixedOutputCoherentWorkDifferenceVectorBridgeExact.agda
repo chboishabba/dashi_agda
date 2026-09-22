@@ -25,9 +25,10 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBri
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -89,12 +90,102 @@ fixedOutputPhysicalWorkDifferenceIsVectorDifferenceWork
     (D1a.mixedProductCell S velocity)
     alpha beta
 
+
+------------------------------------------------------------------------
+-- A1 / aggregate the SAME work-difference bridge through the exact pair sum.
+------------------------------------------------------------------------
+
+pairAgainstHeadVectorWork :
+  (rate : Physical.PhysicalTriadIncidence → ℚ) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  Physical.PhysicalTriadIncidence →
+  List Physical.PhysicalTriadIncidence → ℚ
+pairAgainstHeadVectorWork rate mixed value head [] = 0
+pairAgainstHeadVectorWork rate mixed value head (x ∷ xs) =
+  (rate head - rate x)
+    * Work.coherentWork mixed
+        (C3.complex3Subtract (value head) (value x))
+  + pairAgainstHeadVectorWork rate mixed value head xs
+
+pairDifferenceVectorWorkSum :
+  (rate : Physical.PhysicalTriadIncidence → ℚ) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  List Physical.PhysicalTriadIncidence → ℚ
+pairDifferenceVectorWorkSum rate mixed value [] = 0
+pairDifferenceVectorWorkSum rate mixed value (x ∷ xs) =
+  pairAgainstHeadVectorWork rate mixed value x xs
+  + pairDifferenceVectorWorkSum rate mixed value xs
+
+pairAgainstHeadWorkDifferenceIsVectorDifferenceWork :
+  (rate : Physical.PhysicalTriadIncidence → ℚ) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (head : Physical.PhysicalTriadIncidence) →
+  (xs : List Physical.PhysicalTriadIncidence) →
+  Pair.pairAgainstHead rate (Pair.cellWork mixed value) head xs
+  ≡ pairAgainstHeadVectorWork rate mixed value head xs
+pairAgainstHeadWorkDifferenceIsVectorDifferenceWork rate mixed value head [] = refl
+pairAgainstHeadWorkDifferenceIsVectorDifferenceWork rate mixed value head (x ∷ xs) =
+  cong₂ _+_
+    (cong ((rate head - rate x) *_)
+      (cellWorkDifferenceIsVectorDifferenceWork mixed value head x))
+    (pairAgainstHeadWorkDifferenceIsVectorDifferenceWork
+      rate mixed value head xs)
+
+pairDifferenceWorkSumIsVectorDifferenceWorkSum :
+  (rate : Physical.PhysicalTriadIncidence → ℚ) →
+  (mixed : C3.Complex3 F) →
+  (value : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (xs : List Physical.PhysicalTriadIncidence) →
+  Pair.pairDifferenceWorkSum rate (Pair.cellWork mixed value) xs
+  ≡ pairDifferenceVectorWorkSum rate mixed value xs
+pairDifferenceWorkSumIsVectorDifferenceWorkSum rate mixed value [] = refl
+pairDifferenceWorkSumIsVectorDifferenceWorkSum rate mixed value (x ∷ xs) =
+  cong₂ _+_
+    (pairAgainstHeadWorkDifferenceIsVectorDifferenceWork
+      rate mixed value x xs)
+    (pairDifferenceWorkSumIsVectorDifferenceWorkSum rate mixed value xs)
+
+fixedOutputPhysicalPairDifferenceIsVectorDifferenceWorkSum :
+  ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E} →
+  (rho : Z3.FourierMode → ℚ) →
+  (S : Helical.HelicalModeScalars F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
+  (cutoff : Nat) (output : Z3.FourierMode) →
+  let
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = R224.foldVector value items
+  in
+  Pair.pairDifferenceWorkSum
+    (Pair.cellRate rho) (Pair.cellWork mixed value) items
+  ≡ pairDifferenceVectorWorkSum
+      (Pair.cellRate rho) mixed value items
+fixedOutputPhysicalPairDifferenceIsVectorDifferenceWorkSum
+    rho S velocity cutoff output =
+  pairDifferenceWorkSumIsVectorDifferenceWorkSum
+    (Pair.cellRate rho)
+    (R224.foldVector
+      (D1a.mixedProductCell S velocity)
+      (Output.physicalOutputFiber cutoff output))
+    (D1a.mixedProductCell S velocity)
+    (Output.physicalOutputFiber cutoff output)
+
 ------------------------------------------------------------------------
 -- Trust boundary.
 ------------------------------------------------------------------------
 
 fixedOutputWorkDifferenceVectorBridgeClosed : Bool
 fixedOutputWorkDifferenceVectorBridgeClosed = true
+
+fixedOutputPairDifferenceAggregateVectorBridgeClosed : Bool
+fixedOutputPairDifferenceAggregateVectorBridgeClosed = true
+
+fixedOutputPairDifferenceAggregateVectorBridgeClosedIsTrue :
+  fixedOutputPairDifferenceAggregateVectorBridgeClosed ≡ true
+fixedOutputPairDifferenceAggregateVectorBridgeClosedIsTrue = refl
 
 fixedOutputWorkDifferenceVectorBridgeUsesAbsoluteValue : Bool
 fixedOutputWorkDifferenceVectorBridgeUsesAbsoluteValue = false
