@@ -23,6 +23,9 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as PhysicalField
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExact as D1a
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
@@ -45,28 +48,57 @@ F = Rational.rationalRealField
 -- A3: exact local theorem shape.  This is the genuinely new NS payment.
 ------------------------------------------------------------------------
 
+physicalMixedValue :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  Helical.HelicalModeScalars F →
+  Physical.PhysicalTriadIncidence → C3.Complex3 F
+physicalMixedValue system S =
+  D1a.mixedProductCell S
+    (Audit.velocity (PhysicalField.finiteSystem system))
+
+physicalOutputItems :
+  PhysicalField.PhysicalFiniteComplex3GalerkinSystem F →
+  Z3.FourierMode → List Physical.PhysicalTriadIncidence
+physicalOutputItems system output =
+  Output.physicalOutputFiber
+    (Audit.cutoff (PhysicalField.finiteSystem system)) output
+
+physicalMixedFold :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (S : Helical.HelicalModeScalars F) →
+  Z3.FourierMode → C3.Complex3 F
+physicalMixedFold system S output =
+  R224.foldVector
+    (physicalMixedValue system S)
+    (physicalOutputItems system output)
+
 record FixedOutputSignedRateVectorPayment
     (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F)
-    (mixed : C3.Complex3 F)
-    (value : Physical.PhysicalTriadIncidence → C3.Complex3 F)
-    (items : List Physical.PhysicalTriadIncidence) : Set where
+    (S : Helical.HelicalModeScalars F)
+    (output : Z3.FourierMode) : Set where
   field
     residualBudget : ℚ
     signedRateVectorPayment :
       0ℚ - Vector.pairDifferenceVectorWorkSum
-          (Rate.physicalCellRate system) mixed value items
+          (Rate.physicalCellRate system)
+          (physicalMixedFold system S output)
+          (physicalMixedValue system S)
+          (physicalOutputItems system output)
       ≤ residualBudget
 
 open FixedOutputSignedRateVectorPayment public
 
 a3PaymentToR432 :
-  ∀ {system mixed value items} →
-  FixedOutputSignedRateVectorPayment system mixed value items →
+  ∀ {system S output} →
+  FixedOutputSignedRateVectorPayment system S output →
   R432.FixedOutputSignedCrossPayment
-a3PaymentToR432 {system} {mixed} {value} {items} P =
+a3PaymentToR432 {system} {S} {output} P =
   R432.fixed-output-signed-cross-payment
     (0ℚ - Vector.pairDifferenceVectorWorkSum
-      (Rate.physicalCellRate system) mixed value items)
+      (Rate.physicalCellRate system)
+      (physicalMixedFold system S output)
+      (physicalMixedValue system S)
+      (physicalOutputItems system output))
     (residualBudget P)
     (signedRateVectorPayment P)
 
@@ -195,6 +227,9 @@ module GlobalCompiler
 a3ExactSignedRateVectorPaymentTypeConstructed : Bool
 a3ExactSignedRateVectorPaymentTypeConstructed = true
 
+a3RecordIsLiteralPhysicalFixedOutputFamily : Bool
+a3RecordIsLiteralPhysicalFixedOutputFamily = true
+
 a3QuantitativePhysicalPaymentClosed : Bool
 a3QuantitativePhysicalPaymentClosed = false
 
@@ -216,6 +251,10 @@ a5GlobalPaymentToR503CompilerClosed = true
 a3ExactSignedRateVectorPaymentTypeConstructedIsTrue :
   a3ExactSignedRateVectorPaymentTypeConstructed ≡ true
 a3ExactSignedRateVectorPaymentTypeConstructedIsTrue = refl
+
+a3RecordIsLiteralPhysicalFixedOutputFamilyIsTrue :
+  a3RecordIsLiteralPhysicalFixedOutputFamily ≡ true
+a3RecordIsLiteralPhysicalFixedOutputFamilyIsTrue = refl
 
 a3QuantitativePhysicalPaymentClosedIsFalse :
   a3QuantitativePhysicalPaymentClosed ≡ false
