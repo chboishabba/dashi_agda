@@ -30,6 +30,8 @@ import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstei
 import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Disc
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
 import DASHI.Moonshine.JInvariantConstructedComplexKleinJBackendExact as KleinBackend
+import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as FiniteEisenstein
+import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as FiniteKlein
 
 ------------------------------------------------------------------------
 -- 1. Explicit bidirectional same-object bridge.
@@ -93,13 +95,6 @@ record ConstructedComplexEisensteinSameObject
       (x y : Eisenstein.Scalar M) →
       scalarToConcrete (Eisenstein._*ˢ_ M x y)
       ≡ Complex._*C_ (scalarToConcrete x) (scalarToConcrete y)
-
-    powerSameObject :
-      (x : Eisenstein.Scalar M) →
-      (n : Nat) →
-      scalarToConcrete (Eisenstein.power M x n)
-      ≡
-      scalarToConcrete (Eisenstein.power M x n)
 
     normalizedDeltaSameObject :
       (tau : Eisenstein.Parameter M) →
@@ -185,6 +180,8 @@ record DeltaConstructedComplexReflectionCutsetBoundary : Set where
     conjugationMultiplicativityReducedToExistingRealRingLeaf : Bool
     proofRelevantPrincipalArgumentAlreadyOwned : Bool
     concreteKleinJBackendAlreadyOwned : Bool
+    finiteConstructedE4E6DeltaJRouteAlreadyOwned : Bool
+    finiteRouteEqualsInfiniteAnalyticRoute : Bool
 
     abstractEisensteinScalarWeldedToConcreteComplex : Bool
     abstractEisensteinParameterWeldedToConcreteKleinPoint : Bool
@@ -201,5 +198,6 @@ canonicalDeltaConstructedComplexReflectionCutsetBoundary :
 canonicalDeltaConstructedComplexReflectionCutsetBoundary =
   delta-constructed-complex-reflection-cutset-boundary
     true true true true true
+    true false
     false false false false false
-    "construct one same-object adapter from the all-SL2(Z) EisensteinAnalyticModel to the existing ConcreteComplex/Klein-j backend; then prove Delta(-conjugate z)=conjugate(Delta z) and the unit-circle reciprocal-conjugate fixed-point law on that literal carrier"
+    "the finite constructed E4/E6/Delta/j route already exists; prove its convergence/same-object identification with the infinite all-SL2(Z) EisensteinAnalyticModel, then attach the literal S action, Delta(-conjugate z)=conjugate(Delta z), and unit-circle reciprocal-conjugate fixed-point law"
