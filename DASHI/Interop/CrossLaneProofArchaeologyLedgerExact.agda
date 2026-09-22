@@ -8,8 +8,9 @@ open import Agda.Builtin.List using (List; []; _∷_)
 -- CROSS-LANE PROOF ARCHAEOLOGY LEDGER
 ------------------------------------------------------------------------
 -- Canonical grep-first owner for current proof search.
--- Active lanes: Navier-Stokes + Yang-Mills + Riemann Hypothesis.
--- GR-QFT remains a continuity coordinate only.
+-- Active Clay lanes: Navier-Stokes + Yang-Mills + Riemann Hypothesis.
+-- Moonshine/Route-B is tracked here as cross-prover shared infrastructure,
+-- not as an additional Clay lane. GR-QFT remains a continuity coordinate only.
 --
 -- The current search policy is the repo-native Ibrahim traversal policy:
 -- explicit formulation owner -> typed dependency -> typed generalisation.
@@ -45,6 +46,39 @@ data IdentityStatus : Set where
 
 data PaymentStatus : Set where
   paid conditionalPayment unpaid notApplicable : PaymentStatus
+
+------------------------------------------------------------------------
+-- Shared cross-prover same-object seams.
+--
+-- This is provenance/classification only.  The theorem-facing Route-B owner
+-- remains DASHI.Moonshine.JInvariantEisensteinAgdaLeanExtractionExact.
+------------------------------------------------------------------------
+
+record CrossLaneInteropResidual : Set where
+  constructor cross-lane-interop-residual
+  field
+    interopObject : String
+    primaryRole : HistoricalRole
+    donorRole : HistoricalRole
+    identity : IdentityStatus
+    payment : PaymentStatus
+    interpretation : String
+    downstreamCompilerOwnership : String
+    nextSameObjectPayment : String
+open CrossLaneInteropResidual public
+
+canonicalConstructiveRealComplexInteropResidual :
+  CrossLaneInteropResidual
+canonicalConstructiveRealComplexInteropResidual =
+  cross-lane-interop-residual
+    "selected Agda constructed-real / ComplexPair -> Lean Real / Complex interoperability"
+    representationWeld
+    crossProverDonor
+    unresolvedIdentity
+    unpaid
+    "Shared infrastructure seam. Do not reopen q/E4_N/E6_N recurrence mathematics independently in Moonshine or another lane: once the primitive map preserves 0,1,i,pi,+,-,*,exp, those transports are compiler-owned."
+    "qOf, E4_N, E6_N and finite discriminant-numerator transport are compiler-owned in JInvariantEisensteinAgdaLeanExtractionExact; Lean-target E4_N/E6_N convergence to canonical Agda-shaped infinite sums is already paid on the Lean companion."
+    "Construct the faithful selected-real map into Lean Real, lift it componentwise to ComplexPair -> Lean Complex with primitive-operation/pi/exp preservation, then identify the canonical infinite sums with Mathlib E4/E6 before the separate Delta=eta^24=(E4^3-E6^2)/1728 same-object normalization weld."
 
 data IdentifierStatus : Set where
   verifiedIdentifier unresolvedIdentifier notApplicableIdentifier : IdentifierStatus
