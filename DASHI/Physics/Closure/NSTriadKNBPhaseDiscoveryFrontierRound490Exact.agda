@@ -77,6 +77,10 @@ round490A3RateWorkCorrelationReducedToSeparationGeometry : Bool
 round490A3RateWorkCorrelationReducedToSeparationGeometry =
   SignedPayment.a3RateWorkCorrelationReducedToSeparationGeometry
 
+round490A3SeparationGeometryPaymentCompilerClosed : Bool
+round490A3SeparationGeometryPaymentCompilerClosed =
+  SignedPayment.a3SeparationGeometryPaymentCompilerClosed
+
 round490ExactA3PaymentTypeConstructed : Bool
 round490ExactA3PaymentTypeConstructed =
   SignedPayment.a3ExactSignedRateVectorPaymentTypeConstructed
@@ -150,6 +154,11 @@ round490A3RateWorkCorrelationReducedToSeparationGeometryIsTrue :
   round490A3RateWorkCorrelationReducedToSeparationGeometry ≡ true
 round490A3RateWorkCorrelationReducedToSeparationGeometryIsTrue =
   SignedPayment.a3RateWorkCorrelationReducedToSeparationGeometryIsTrue
+
+round490A3SeparationGeometryPaymentCompilerClosedIsTrue :
+  round490A3SeparationGeometryPaymentCompilerClosed ≡ true
+round490A3SeparationGeometryPaymentCompilerClosedIsTrue =
+  SignedPayment.a3SeparationGeometryPaymentCompilerClosedIsTrue
 
 round490ExactA3PaymentTypeConstructedIsTrue :
   round490ExactA3PaymentTypeConstructed ≡ true
