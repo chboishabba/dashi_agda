@@ -146,25 +146,29 @@ rendererThreePartitionIsThree :
   Rainbow.sectorCount
     (Render.partition3 Render.canonicalJ369RendererFullTurnReceipt)
   ≡ eisensteinPhaseCount
-rendererThreePartitionIsThree = refl
+rendererThreePartitionIsThree =
+  Render.threeCoversFullTurn Render.canonicalJ369RendererFullTurnReceipt
 
 rendererSixPartitionIsSix :
   Rainbow.sectorCount
     (Render.partition6 Render.canonicalJ369RendererFullTurnReceipt)
   ≡ fixedLocusSixfoldCount
-rendererSixPartitionIsSix = refl
+rendererSixPartitionIsSix =
+  Render.sixCoversFullTurn Render.canonicalJ369RendererFullTurnReceipt
 
 rendererNinePartitionIsNine :
   Rainbow.sectorCount
     (Render.partition9 Render.canonicalJ369RendererFullTurnReceipt)
   ≡ nineObserverCount
-rendererNinePartitionIsNine = refl
+rendererNinePartitionIsNine =
+  Render.nineCoversFullTurn Render.canonicalJ369RendererFullTurnReceipt
 
 rendererTwentySevenPartitionIsTwentySeven :
   Rainbow.sectorCount
     (Render.partition27 Render.canonicalJ369RendererFullTurnReceipt)
   ≡ twentySevenObserverCount
-rendererTwentySevenPartitionIsTwentySeven = refl
+rendererTwentySevenPartitionIsTwentySeven =
+  Render.twentySevenCoversFullTurn Render.canonicalJ369RendererFullTurnReceipt
 
 ------------------------------------------------------------------------
 -- 4. Conditional fixed-locus phase interface.
