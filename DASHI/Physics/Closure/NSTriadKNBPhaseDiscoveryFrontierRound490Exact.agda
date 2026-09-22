@@ -82,6 +82,10 @@ round490A4CardinalityFreeLocalToGlobalCompilerClosed : Bool
 round490A4CardinalityFreeLocalToGlobalCompilerClosed =
   SignedPayment.a4CardinalityFreeLocalToGlobalCompilerClosed
 
+round490A4OrderPreservingIntegrationCompilerClosed : Bool
+round490A4OrderPreservingIntegrationCompilerClosed =
+  SignedPayment.a4OrderPreservingIntegrationCompilerClosed
+
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
   SignedPayment.a5GlobalPaymentToR503CompilerClosed
@@ -140,6 +144,11 @@ round490A4CardinalityFreeLocalToGlobalCompilerClosedIsTrue :
   round490A4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
 round490A4CardinalityFreeLocalToGlobalCompilerClosedIsTrue =
   SignedPayment.a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue
+
+round490A4OrderPreservingIntegrationCompilerClosedIsTrue :
+  round490A4OrderPreservingIntegrationCompilerClosed ≡ true
+round490A4OrderPreservingIntegrationCompilerClosedIsTrue =
+  SignedPayment.a4OrderPreservingIntegrationCompilerClosedIsTrue
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
