@@ -46,6 +46,7 @@ record EisensteinConvergenceEndgameCutset : Set where
     componentwiseComplexLimitCompilerOwned : Bool
     bishopLegacyCoordinateTransportCompilerOwned : Bool
     deltaNumeratorLimitCompilerOwned : Bool
+    leanMathlibStandardAnalyticParityRecorded : Bool
 
     selectedConcreteQNormLawsInhabited : Bool
     quarticSexticStepVDominationInhabited : Bool
@@ -64,7 +65,7 @@ canonicalEisensteinConvergenceEndgameCutset :
   EisensteinConvergenceEndgameCutset
 canonicalEisensteinConvergenceEndgameCutset =
   eisenstein-convergence-endgame-cutset
-    true true true true true true true true true true
+    true true true true true true true true true true true
     false false false false false false
     false
-    "instantiate the remaining selected ConcreteComplex q-disk analytic laws (twoPi/order positivity and modulus-of-exp; the Cartesian exponent identity is already ring-derived); construct the Step-V quartic/sextic domination witness; inhabit the explicit BishopLegacySeriesTransport plus Nat-function limit bridge and four pointwise coordinate-term identifications; these compile literal E4_N/E6_N convergence, after which only the same-object weld to the all-SL2(Z) Eisenstein model remains"
+    "Lean/Mathlib v4.28 independently owns the standard q-disk, n^4 q^n/n^6 q^n summability and converged normalized E4/E6 q-expansion facts on ordinary complex numbers, so do not re-prove those analytically in Agda. The remaining Agda work is representation-specific: instantiate or transport the selected ConcreteComplex q-disk laws, inhabit the BishopLegacySeriesTransport/Nat-function bridge and four coordinate-term same-object identifications, and weld the resulting E4/E6 limits to the analytic Eisenstein model. The cross-repo Lean receipt is evidence of theorem parity, not automatic carrier promotion."
