@@ -107,3 +107,14 @@ a3ConsumerAttachmentTypeConstructed :
   A3A5.a3ConsumerAttachmentTypeConstructed ≡ true
 a3ConsumerAttachmentTypeConstructed =
   A3A5.a3ConsumerAttachmentTypeConstructedIsTrue
+
+
+preferredR406BudgetAttachmentTypeConstructed :
+  A3A5.a3PreferredR406BudgetAttachmentTypeConstructed ≡ true
+preferredR406BudgetAttachmentTypeConstructed =
+  A3A5.a3PreferredR406BudgetAttachmentTypeConstructedIsTrue
+
+preferredCompilerDoesNotRequireDirectCovarianceR406Equality :
+  A3A5.a3PreferredCompilerRequiresDirectCovarianceR406Equality ≡ false
+preferredCompilerDoesNotRequireDirectCovarianceR406Equality =
+  A3A5.a3PreferredCompilerRequiresDirectCovarianceR406EqualityIsFalse
