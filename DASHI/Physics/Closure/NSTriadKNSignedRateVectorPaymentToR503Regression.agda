@@ -75,3 +75,8 @@ a3RateWorkCorrelationReducedToSeparationGeometry :
   A3A5.a3RateWorkCorrelationReducedToSeparationGeometry ≡ true
 a3RateWorkCorrelationReducedToSeparationGeometry =
   A3A5.a3RateWorkCorrelationReducedToSeparationGeometryIsTrue
+
+a3SeparationGeometryPaymentCompilerClosed :
+  A3A5.a3SeparationGeometryPaymentCompilerClosed ≡ true
+a3SeparationGeometryPaymentCompilerClosed =
+  A3A5.a3SeparationGeometryPaymentCompilerClosedIsTrue
