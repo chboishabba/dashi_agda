@@ -55,6 +55,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.EisensteinNineRingInterferenceExact as Eisenstein
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
+import DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact as Rainbow
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
 import DASHI.Moonshine.JSameWeightQuotientInvariantExact as JQuotient
 
@@ -142,30 +143,26 @@ repoEisensteinLocalSymmetryIsSix :
 repoEisensteinLocalSymmetryIsSix = Eisenstein.localPhaseSymmetryCountIsSix
 
 rendererThreePartitionIsThree :
-  DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact.sectorCount
-    (Render.J369RendererFullTurnReceipt.partition3
-      Render.canonicalJ369RendererFullTurnReceipt)
+  Rainbow.sectorCount
+    (Render.partition3 Render.canonicalJ369RendererFullTurnReceipt)
   ≡ eisensteinPhaseCount
 rendererThreePartitionIsThree = refl
 
 rendererSixPartitionIsSix :
-  DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact.sectorCount
-    (Render.J369RendererFullTurnReceipt.partition6
-      Render.canonicalJ369RendererFullTurnReceipt)
+  Rainbow.sectorCount
+    (Render.partition6 Render.canonicalJ369RendererFullTurnReceipt)
   ≡ fixedLocusSixfoldCount
 rendererSixPartitionIsSix = refl
 
 rendererNinePartitionIsNine :
-  DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact.sectorCount
-    (Render.J369RendererFullTurnReceipt.partition9
-      Render.canonicalJ369RendererFullTurnReceipt)
+  Rainbow.sectorCount
+    (Render.partition9 Render.canonicalJ369RendererFullTurnReceipt)
   ≡ nineObserverCount
 rendererNinePartitionIsNine = refl
 
 rendererTwentySevenPartitionIsTwentySeven :
-  DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact.sectorCount
-    (Render.J369RendererFullTurnReceipt.partition27
-      Render.canonicalJ369RendererFullTurnReceipt)
+  Rainbow.sectorCount
+    (Render.partition27 Render.canonicalJ369RendererFullTurnReceipt)
   ≡ twentySevenObserverCount
 rendererTwentySevenPartitionIsTwentySeven = refl
 
