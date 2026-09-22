@@ -97,11 +97,11 @@ munkaraDoesNotRecomputeForMabo
 
 yunupinguCoordinateRef : String
 yunupinguCoordinateRef =
-  Y.SharedCoordinate.coordinateRef Y.yunupinguAcquisitionCoordinate
+  Join.SharedCoordinate.coordinateRef Y.yunupinguAcquisitionCoordinate
 
 maboCoordinateRef : String
 maboCoordinateRef =
-  Y.SharedCoordinate.coordinateRef Y.maboAcquisitionDistinctionCoordinate
+  Join.SharedCoordinate.coordinateRef Y.maboAcquisitionDistinctionCoordinate
 
 data AdjacencyCreatesAffectedConsumer : Set where
 data UnreviewedJoinCreatesAffectedConsumer : Set where
