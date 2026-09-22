@@ -27,10 +27,16 @@ data Consumer : Set where
 data Reviewed : Coordinate → Set where
   therapistReviewed : Reviewed therapistNote
 
-data ScopeDecision : Coordinate → Consumer → Set where
-  allow :
+data AllowReceipt : Coordinate → Consumer → Set where
+  allowReceipt :
     ∀ {coordinate consumer} →
     Reviewed coordinate →
+    AllowReceipt coordinate consumer
+
+data ScopeDecision : Coordinate → Consumer → Set where
+  allowedDecision :
+    ∀ {coordinate consumer} →
+    AllowReceipt coordinate consumer →
     ScopeDecision coordinate consumer
   deny :
     ∀ {coordinate consumer} →
@@ -42,17 +48,10 @@ data ScopeDecision : Coordinate → Consumer → Set where
     ∀ {coordinate consumer} →
     ScopeDecision coordinate consumer
 
-data Allowed : Coordinate → Consumer → Set where
-  allowedByReceipt :
-    ∀ {coordinate consumer} →
-    Reviewed coordinate →
-    Allowed coordinate consumer
-
 data Included : Coordinate → Consumer → Set where
   includeAfterAllow :
     ∀ {coordinate consumer} →
-    Reviewed coordinate →
-    Allowed coordinate consumer →
+    AllowReceipt coordinate consumer →
     Included coordinate consumer
 
 ------------------------------------------------------------------------
@@ -70,7 +69,7 @@ journalCannotBeReviewed ()
 clinicCannotBeIncluded :
   Included clinicLetter lawyer → ⊥
 clinicCannotBeIncluded
-  (includeAfterAllow () scope)
+  (includeAfterAllow (allowReceipt ()))
 
 journalCannotBeIncluded :
   Included userJournalAccount lawyer → ⊥
@@ -112,8 +111,13 @@ scopeDoesNotCreateTruth ()
 
 testOnlyTherapistLawyerAllow :
   ScopeDecision therapistNote lawyer
+testOnlyTherapistLawyerAllowReceipt :
+  AllowReceipt therapistNote lawyer
+testOnlyTherapistLawyerAllowReceipt =
+  allowReceipt therapistReviewed
+
 testOnlyTherapistLawyerAllow =
-  allow therapistReviewed
+  allowedDecision testOnlyTherapistLawyerAllowReceipt
 
 testOnlyTherapistDoctorDeny :
   ScopeDecision therapistNote doctor
@@ -122,15 +126,9 @@ testOnlyTherapistDoctorDeny =
 
 testOnlyLawyerInclusion :
   Included therapistNote lawyer
-testOnlyLawyerAllowed :
-  Allowed therapistNote lawyer
-testOnlyLawyerAllowed =
-  allowedByReceipt therapistReviewed
-
 testOnlyLawyerInclusion =
   includeAfterAllow
-    therapistReviewed
-    testOnlyLawyerAllowed
+    testOnlyTherapistLawyerAllowReceipt
 
 data Recompute : Consumer → Coordinate → Set where
   becauseIncluded :
