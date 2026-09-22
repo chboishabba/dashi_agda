@@ -415,6 +415,125 @@ reflect6Involutive Base.hex-4 = refl
 reflect6Involutive Base.hex-5 = refl
 
 ------------------------------------------------------------------------
+-- 6b. Unit-circle reflection is inversion on the modular cusp fibres.
+------------------------------------------------------------------------
+
+observer3ReflectionIsCuspInversion :
+  (x : Kernel.KernelTrit) →
+  observer3ToLevel3 (Kernel.negateTrit x)
+  ≡
+  Arithmetic.negateResidue (observer3ToLevel3 x)
+observer3ReflectionIsCuspInversion Kernel.negativeTrit = refl
+observer3ReflectionIsCuspInversion Kernel.zeroTrit = refl
+observer3ReflectionIsCuspInversion Kernel.positiveTrit = refl
+
+observer9ReflectionIsCuspInversion :
+  (x : Kernel.NineSheet) →
+  observer9ToLevel9 (Kernel.negateNine x)
+  ≡
+  Arithmetic.negateResidue (observer9ToLevel9 x)
+observer9ReflectionIsCuspInversion (Kernel.negativeTrit , Kernel.negativeTrit) = refl
+observer9ReflectionIsCuspInversion (Kernel.negativeTrit , Kernel.zeroTrit) = refl
+observer9ReflectionIsCuspInversion (Kernel.negativeTrit , Kernel.positiveTrit) = refl
+observer9ReflectionIsCuspInversion (Kernel.zeroTrit , Kernel.negativeTrit) = refl
+observer9ReflectionIsCuspInversion (Kernel.zeroTrit , Kernel.zeroTrit) = refl
+observer9ReflectionIsCuspInversion (Kernel.zeroTrit , Kernel.positiveTrit) = refl
+observer9ReflectionIsCuspInversion (Kernel.positiveTrit , Kernel.negativeTrit) = refl
+observer9ReflectionIsCuspInversion (Kernel.positiveTrit , Kernel.zeroTrit) = refl
+observer9ReflectionIsCuspInversion (Kernel.positiveTrit , Kernel.positiveTrit) = refl
+
+negateSSP : SSP.SSPTrit → SSP.SSPTrit
+negateSSP SSP.sspNegOne = SSP.sspPosOne
+negateSSP SSP.sspZero = SSP.sspZero
+negateSSP SSP.sspPosOne = SSP.sspNegOne
+
+reflectObserver27 : Fabric.Ternary27Point → Fabric.Ternary27Point
+reflectObserver27 p =
+  Fabric.ternary27Point
+    (negateSSP (Fabric.x p))
+    (negateSSP (Fabric.y p))
+    (negateSSP (Fabric.z p))
+
+observer27ReflectionIsCuspInversion :
+  (p : Fabric.Ternary27Point) →
+  observer27ToLevel27 (reflectObserver27 p)
+  ≡
+  Arithmetic.negateResidue (observer27ToLevel27 p)
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspNegOne SSP.sspPosOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspZero SSP.sspPosOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspNegOne SSP.sspPosOne SSP.sspPosOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspNegOne SSP.sspPosOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspZero SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspZero SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspZero SSP.sspPosOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspZero SSP.sspPosOne SSP.sspPosOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspNegOne SSP.sspPosOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspPosOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspNegOne) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspZero) = refl
+observer27ReflectionIsCuspInversion
+  (Fabric.ternary27Point SSP.sspPosOne SSP.sspPosOne SSP.sspPosOne) = refl
+
+------------------------------------------------------------------------
+-- Translation + inversion is the finite cusp-dihedral target.  We expose the
+-- exact law as the next reusable group-theoretic payment rather than silently
+-- assuming a full modular deck-group identification.
+------------------------------------------------------------------------
+
+record TriadicCuspDihedralLaw (depth : Nat) : Set where
+  field
+    inversionConjugatesTranslationToInverse :
+      (x : Q.Residue3Pow depth) →
+      Arithmetic.negateResidue
+        (translateTriadic depth (Arithmetic.negateResidue x))
+      ≡
+      Arithmetic.addResidue
+        (Arithmetic.negateResidue (oneResidue depth))
+        x
+
+open TriadicCuspDihedralLaw public
+
+------------------------------------------------------------------------
 -- 7. What it means for the actual j-phase quantisers to be modular-level
 --    observers rather than merely equal-sector partitions.
 ------------------------------------------------------------------------
@@ -522,6 +641,7 @@ record J369ModularLevelBoundary : Set where
     c6CyclicCuspActionOwned : Bool
 
     level27To9To3CoveringMapsTranslationEquivariant : Bool
+    reflectionIdentifiedWithCuspInversionAt3_9_27 : Bool
     fullLevelNDeckGroupClaimedCyclic : Bool
     hypervoxelC3CubedClaimedEqualToCyclicC27AsGroup : Bool
     rendererCuspTranslationIntertwinerInstantiated : Bool
@@ -536,5 +656,5 @@ canonicalJ369ModularLevelBoundary =
   j369-modular-level-boundary
     true true true true true
     true true true true
-    true false false false false
+    true true false false false false
     "instantiate continuous phase translation by 1/N turn from the concrete argument carrier and prove phase3/6/9/27 intertwine it with the canonical cusp-translation actions; separately construct the analytic quotient H/Gamma(N) only if a consumer needs the full modular curve rather than its cyclic cusp fibre"
