@@ -15,7 +15,7 @@ module DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -150,6 +150,70 @@ module LiveA3
     LiveFixedOutputSignedRateVectorPayment T R cutoff time output →
     R432.FixedOutputSignedCrossPayment
   livePaymentToR432Datatype = a3PaymentToR432
+
+  ----------------------------------------------------------------------
+  -- Selected-output A3 family and cardinality-free instantaneous sum.
+  ----------------------------------------------------------------------
+
+  data LivePaymentFamilyOn
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T)
+      (cutoff : Nat) (time : Time) :
+      List Z3.FourierMode → Set where
+    paymentNil : LivePaymentFamilyOn T R cutoff time []
+    paymentCons :
+      ∀ {output outputs} →
+      LiveFixedOutputSignedRateVectorPayment T R cutoff time output →
+      LivePaymentFamilyOn T R cutoff time outputs →
+      LivePaymentFamilyOn T R cutoff time (output ∷ outputs)
+
+  paymentList :
+    ∀ {T R cutoff time outputs} →
+    LivePaymentFamilyOn T R cutoff time outputs →
+    List R432.FixedOutputSignedCrossPayment
+  paymentList paymentNil = []
+  paymentList (paymentCons head tail) =
+    livePaymentToR432Datatype head ∷ paymentList tail
+
+  sumSignedRateVectorPayment :
+    ∀ {T R cutoff time outputs} →
+    LivePaymentFamilyOn T R cutoff time outputs → ℚ
+  sumSignedRateVectorPayment family =
+    R432.sumSignedCross (paymentList family)
+
+  sumResidualBudgets :
+    ∀ {T R cutoff time outputs} →
+    LivePaymentFamilyOn T R cutoff time outputs → ℚ
+  sumResidualBudgets family =
+    R432.sumFibreBudget (paymentList family)
+
+  liveA3FamilySumWithoutOutputCardinalityFactor :
+    ∀ {T R cutoff time outputs} →
+    (family : LivePaymentFamilyOn T R cutoff time outputs) →
+    sumSignedRateVectorPayment family ≤ sumResidualBudgets family
+  liveA3FamilySumWithoutOutputCardinalityFactor family =
+    R432.fixedOutputBudgetsSumWithoutCardinalityFactor
+      (paymentList family)
+
+  ----------------------------------------------------------------------
+  -- Exact same-object attachment still required: the covariance-derived
+  -- selected-output sum must be identified with the literal R406 remainder
+  -- scalar on the SAME live snapshot.  This is representation debt only.
+  ----------------------------------------------------------------------
+
+  record LiveA3ToR406Attachment
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T)
+      (cutoff : Nat) (time : Time)
+      (outputs : List Z3.FourierMode)
+      (family : LivePaymentFamilyOn T R cutoff time outputs) : Set where
+    field
+      literalR406InstantaneousRemainder : ℚ
+      literalR406IsFourSignedRateVectorSum :
+        literalR406InstantaneousRemainder
+        ≡ R299.four * sumSignedRateVectorPayment family
+
+  open LiveA3ToR406Attachment public
 
 ------------------------------------------------------------------------
 -- A4/A5: the cutoff-uniform global theorem is exactly the already-selected
@@ -291,6 +355,12 @@ a3ToR432LiteralR406SameObjectAttachmentClosed = false
 liveA3SnapshotBoundToR240Trajectory : Bool
 liveA3SnapshotBoundToR240Trajectory = true
 
+liveA3SelectedOutputAggregationClosed : Bool
+liveA3SelectedOutputAggregationClosed = true
+
+liveA3ToR406AttachmentTypeConstructed : Bool
+liveA3ToR406AttachmentTypeConstructed = true
+
 a4CardinalityFreeLocalToGlobalCompilerClosed : Bool
 a4CardinalityFreeLocalToGlobalCompilerClosed = true
 
@@ -322,6 +392,14 @@ a3PaymentPackagesInR432FixedOutputPaymentDatatypeIsTrue = refl
 a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
   a3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
 a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse = refl
+
+liveA3SelectedOutputAggregationClosedIsTrue :
+  liveA3SelectedOutputAggregationClosed ≡ true
+liveA3SelectedOutputAggregationClosedIsTrue = refl
+
+liveA3ToR406AttachmentTypeConstructedIsTrue :
+  liveA3ToR406AttachmentTypeConstructed ≡ true
+liveA3ToR406AttachmentTypeConstructedIsTrue = refl
 
 liveA3SnapshotBoundToR240TrajectoryIsTrue :
   liveA3SnapshotBoundToR240Trajectory ≡ true
