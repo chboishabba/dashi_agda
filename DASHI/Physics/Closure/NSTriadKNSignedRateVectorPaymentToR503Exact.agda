@@ -140,6 +140,22 @@ physicalFixedOutputSignedVectorRateToSeparationGeometry system S output =
         (cong (nu *_) geometricStandard)
         (cong (nu *_) separationBridge)))
 
+record FixedOutputSignedRateVectorPayment
+    (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F)
+    (S : Helical.HelicalModeScalars F)
+    (output : Z3.FourierMode) : Set where
+  field
+    residualBudget : ℚ
+    signedRateVectorPayment :
+      0ℚ - Vector.pairDifferenceVectorWorkSum
+          (Rate.physicalCellRate system)
+          (physicalMixedFold system S output)
+          (physicalMixedValue system S)
+          (physicalOutputItems system output)
+      ≤ residualBudget
+
+open FixedOutputSignedRateVectorPayment public
+
 record FixedOutputSeparationGeometryPayment
     (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F)
@@ -211,21 +227,6 @@ separationGeometryPaymentBuildsPhysicalRatePayment
       ℚP.*-cancelˡ-≤-pos Rate.two doubledPhysical
   }
 
-record FixedOutputSignedRateVectorPayment
-    (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F)
-    (S : Helical.HelicalModeScalars F)
-    (output : Z3.FourierMode) : Set where
-  field
-    residualBudget : ℚ
-    signedRateVectorPayment :
-      0ℚ - Vector.pairDifferenceVectorWorkSum
-          (Rate.physicalCellRate system)
-          (physicalMixedFold system S output)
-          (physicalMixedValue system S)
-          (physicalOutputItems system output)
-      ≤ residualBudget
-
-open FixedOutputSignedRateVectorPayment public
 
 a3PaymentToR432 :
   ∀ {system S output} →
