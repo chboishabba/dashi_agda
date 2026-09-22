@@ -22,6 +22,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
+import DASHI.Mathematics.NumberTheory.FiniteDivisorPowerSumBoundExact as DivisorPower
+import DASHI.Moonshine.ClassicalHeckeWeightKSmallWordExact as Hecke
 
 ------------------------------------------------------------------------
 -- Primitive exact finite arithmetic.
@@ -61,6 +63,24 @@ record DivisorPowerKernel : Set where
     sigma5 : Nat → Nat
 
 open DivisorPowerKernel public
+
+canonicalDivisorPowerKernel : DivisorPowerKernel
+canonicalDivisorPowerKernel =
+  divisor-power-kernel
+    DivisorPower.sigma3
+    DivisorPower.sigma5
+
+canonicalSigma3QuarticBound :
+  (n : Nat) →
+  sigma3 canonicalDivisorPowerKernel n
+  ≤ Hecke.powNat n 4
+canonicalSigma3QuarticBound = DivisorPower.sigma3QuarticBound
+
+canonicalSigma5SexticBound :
+  (n : Nat) →
+  sigma5 canonicalDivisorPowerKernel n
+  ≤ Hecke.powNat n 6
+canonicalSigma5SexticBound = DivisorPower.sigma5SexticBound
 
 ------------------------------------------------------------------------
 -- q = exp(2*pi*i*tau) on the same constructed complex package.
@@ -135,10 +155,13 @@ record EisensteinFiniteQSeriesFrontier : Set where
     e6FiniteRecurrenceExecutable : Bool
     discriminantNumeratorExecutable : Bool
     divisorPowerKernelStillExternal : Bool
+    executableSigma3Sigma5Owned : Bool
+    sigma3QuarticGrowthBoundOwned : Bool
+    sigma5SexticGrowthBoundOwned : Bool
     finiteTruncationEqualsInfiniteSeriesProved : Bool
     finiteTruncationIsAnalyticJAutomatically : Bool
 
 canonicalEisensteinFiniteQSeriesFrontier : EisensteinFiniteQSeriesFrontier
 canonicalEisensteinFiniteQSeriesFrontier =
   eisenstein-finite-q-series-frontier
-    true true true true true false false
+    true true true true false true true true false false
