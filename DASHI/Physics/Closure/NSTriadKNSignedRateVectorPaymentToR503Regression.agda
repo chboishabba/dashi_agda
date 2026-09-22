@@ -60,3 +60,8 @@ a4OrderPreservingIntegrationCompilerClosed :
   A3A5.a4OrderPreservingIntegrationCompilerClosed ≡ true
 a4OrderPreservingIntegrationCompilerClosed =
   A3A5.a4OrderPreservingIntegrationCompilerClosedIsTrue
+
+physicalRateDifferenceSameOutputFactorizationClosed :
+  A2.physicalRateDifferenceSameOutputFactorizationClosed ≡ true
+physicalRateDifferenceSameOutputFactorizationClosed =
+  A2.physicalRateDifferenceSameOutputFactorizationClosedIsTrue
