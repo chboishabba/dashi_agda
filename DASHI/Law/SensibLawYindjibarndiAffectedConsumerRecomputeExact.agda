@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawYindjibarndiEmpiricalAuthorityJoinExact as Y
+import DASHI.Law.SensibLawSharedWorldConsumerJoinExact as Join
 
 ------------------------------------------------------------------------
 -- S19.10 EXACT AFFECTED-CONSUMER RECOMPUTATION
