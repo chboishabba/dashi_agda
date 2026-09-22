@@ -19,11 +19,14 @@ module DASHI.Moonshine.EisensteinComponentwiseComplexLimitExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
+import DASHI.Analysis.MarxConstructiveRealRingNormalisation as Ring
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Finite
 import DASHI.Moonshine.EisensteinTruncationConvergenceCompilerExact as Limit
+import DASHI.Moonshine.EisensteinTruncationSeriesAlignmentExact as Alignment
 
 private
   RealCarrier :
@@ -79,6 +82,12 @@ record RealSequentialLimitAlgebra
       ConvergesTo
         (λ n → Real._*_ R (left n) (right n))
         (Real._*_ R x y)
+
+    pointwiseLimitTransport :
+      ∀ {left right x} →
+      (∀ n → left n ≡ right n) →
+      ConvergesTo left x →
+      ConvergesTo right x
 
 open RealSequentialLimitAlgebra public
 
@@ -232,8 +241,159 @@ compileCoordinateLimits coordinates =
         e6ImagConverges coordinates
     }
 
+
 ------------------------------------------------------------------------
--- 5. Frontier.
+-- 5. Additive coordinate-series limits compile to literal E4/E6 truncations.
+------------------------------------------------------------------------
+
+record E4E6AdditiveCoordinateSeriesLimits
+    (C : Complex.ConstructedComplexPackage)
+    (L : RealSequentialLimitAlgebra C)
+    (kernel : Finite.DivisorPowerKernel)
+    (tau : ComplexCarrier C) : Set₁ where
+  constructor e4e6-additive-coordinate-series-limits
+  field
+    e4SeriesLimit e6SeriesLimit : ComplexCarrier C
+
+    e4SeriesRealConverges :
+      ConvergesTo L
+        (λ n →
+          Complex.re
+            (Alignment.complexFiniteSumThrough
+              (Alignment.e4SeriesTerm C kernel tau) n))
+        (Complex.re e4SeriesLimit)
+
+    e4SeriesImagConverges :
+      ConvergesTo L
+        (λ n →
+          Complex.im
+            (Alignment.complexFiniteSumThrough
+              (Alignment.e4SeriesTerm C kernel tau) n))
+        (Complex.im e4SeriesLimit)
+
+    e6SeriesRealConverges :
+      ConvergesTo L
+        (λ n →
+          Complex.re
+            (Alignment.complexFiniteSumThrough
+              (Alignment.e6SeriesTerm C kernel tau) n))
+        (Complex.re e6SeriesLimit)
+
+    e6SeriesImagConverges :
+      ConvergesTo L
+        (λ n →
+          Complex.im
+            (Alignment.complexFiniteSumThrough
+              (Alignment.e6SeriesTerm C kernel tau) n))
+        (Complex.im e6SeriesLimit)
+
+open E4E6AdditiveCoordinateSeriesLimits public
+
+e4TruncationCoordinatesFromAdditiveSeries :
+  ∀ {C L kernel tau} →
+  (series : E4E6AdditiveCoordinateSeriesLimits C L kernel tau) →
+  ConvergesTo L
+    (λ n → Complex.re (Finite.e4Truncated C kernel n tau))
+    (Complex.re (Complex._+C_ Complex.oneC (e4SeriesLimit series)))
+  ×
+  ConvergesTo L
+    (λ n → Complex.im (Finite.e4Truncated C kernel n tau))
+    (Complex.im (Complex._+C_ Complex.oneC (e4SeriesLimit series)))
+e4TruncationCoordinatesFromAdditiveSeries {C} {L} {kernel} {tau} series =
+  pointwiseLimitTransport L
+    (λ n →
+      sym
+        (cong Complex.re
+          (Alignment.e4TruncatedIsConstantPlusSeries
+            C kernel tau n)))
+    (sumLimit L
+      (constantLimit L (Complex.re (Complex.oneC {Real.real (Complex.realPackage C)})))
+      (e4SeriesRealConverges series))
+  ,
+  pointwiseLimitTransport L
+    (λ n →
+      sym
+        (cong Complex.im
+          (Alignment.e4TruncatedIsConstantPlusSeries
+            C kernel tau n)))
+    (sumLimit L
+      (constantLimit L (Complex.im (Complex.oneC {Real.real (Complex.realPackage C)})))
+      (e4SeriesImagConverges series))
+
+e6TruncationCoordinatesFromAdditiveSeries :
+  ∀ {C L kernel tau} →
+  (ring :
+    Ring.ConstructedRealRingNormalisationLaws
+      (Real.real (Complex.realPackage C))) →
+  (series : E4E6AdditiveCoordinateSeriesLimits C L kernel tau) →
+  ConvergesTo L
+    (λ n → Complex.re (Finite.e6Truncated C kernel n tau))
+    (Complex.re (Complex._+C_ Complex.oneC (e6SeriesLimit series)))
+  ×
+  ConvergesTo L
+    (λ n → Complex.im (Finite.e6Truncated C kernel n tau))
+    (Complex.im (Complex._+C_ Complex.oneC (e6SeriesLimit series)))
+e6TruncationCoordinatesFromAdditiveSeries {C} {L} {kernel} {tau} ring series =
+  pointwiseLimitTransport L
+    (λ n →
+      sym
+        (cong Complex.re
+          (Alignment.e6TruncatedIsConstantPlusSeries
+            C ring kernel tau n)))
+    (sumLimit L
+      (constantLimit L (Complex.re (Complex.oneC {Real.real (Complex.realPackage C)})))
+      (e6SeriesRealConverges series))
+  ,
+  pointwiseLimitTransport L
+    (λ n →
+      sym
+        (cong Complex.im
+          (Alignment.e6TruncatedIsConstantPlusSeries
+            C ring kernel tau n)))
+    (sumLimit L
+      (constantLimit L (Complex.im (Complex.oneC {Real.real (Complex.realPackage C)})))
+      (e6SeriesImagConverges series))
+
+compileAdditiveCoordinateSeriesLimits :
+  ∀ {C L kernel tau} →
+  Ring.ConstructedRealRingNormalisationLaws
+    (Real.real (Complex.realPackage C)) →
+  E4E6AdditiveCoordinateSeriesLimits C L kernel tau →
+  E4E6CoordinateLimits C L kernel tau
+compileAdditiveCoordinateSeriesLimits {C} {L} ring series =
+  let
+    e4Coordinates =
+      e4TruncationCoordinatesFromAdditiveSeries series
+    e6Coordinates =
+      e6TruncationCoordinatesFromAdditiveSeries ring series
+  in
+  record
+    { e4Limit =
+        Complex._+C_ Complex.oneC (e4SeriesLimit series)
+    ; e6Limit =
+        Complex._+C_ Complex.oneC (e6SeriesLimit series)
+    ; e4RealConverges = proj₁ e4Coordinates
+    ; e4ImagConverges = proj₂ e4Coordinates
+    ; e6RealConverges = proj₁ e6Coordinates
+    ; e6ImagConverges = proj₂ e6Coordinates
+    }
+
+compileAdditiveSeriesToE4E6TruncationConvergence :
+  ∀ {C L kernel tau} →
+  Ring.ConstructedRealRingNormalisationLaws
+    (Real.real (Complex.realPackage C)) →
+  E4E6AdditiveCoordinateSeriesLimits C L kernel tau →
+  Limit.E4E6TruncationConvergence
+    C
+    (componentwiseComplexLimitAlgebra L)
+    kernel
+    tau
+compileAdditiveSeriesToE4E6TruncationConvergence ring series =
+  compileCoordinateLimits
+    (compileAdditiveCoordinateSeriesLimits ring series)
+
+------------------------------------------------------------------------
+-- 6. Frontier.
 ------------------------------------------------------------------------
 
 record ComponentwiseEisensteinLimitBoundary : Set where
@@ -243,6 +403,7 @@ record ComponentwiseEisensteinLimitBoundary : Set where
     realLimitAlgebraCompilesComplexProduct : Bool
     realLimitAlgebraCompilesComplexDifference : Bool
     fourCoordinateLimitsCompileE4E6Convergence : Bool
+    additiveSeriesLimitsCompileLiteralTruncationLimits : Bool
     coordinateLimitsProvedFromPolynomialGeometricMajorantsHere : Bool
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -252,4 +413,4 @@ canonicalComponentwiseEisensteinLimitBoundary :
   ComponentwiseEisensteinLimitBoundary
 canonicalComponentwiseEisensteinLimitBoundary =
   componentwise-eisenstein-limit-boundary
-    true true true true false
+    true true true true true false
