@@ -140,6 +140,16 @@ def main() -> int:
     ap.add_argument("--cache-dir", type=Path, required=True)
     ap.add_argument("--output-manifest", type=Path, required=True)
     ap.add_argument("--failure-log", type=Path)
+    ap.add_argument(
+        "--prior-failures",
+        type=Path,
+        help="prior failed retrieval attempts to defer unless --retry-failed is set",
+    )
+    ap.add_argument(
+        "--retry-failed",
+        action="store_true",
+        help="retry sources recorded in --prior-failures",
+    )
     ap.add_argument("--max-items", type=int, default=20)
     ap.add_argument("--timeout", type=float, default=30.0)
     ap.add_argument("--max-bytes", type=int, default=100 * 1024 * 1024)
@@ -153,7 +163,22 @@ def main() -> int:
         raise ValueError("--max-bytes must be >= 1")
 
     rows = read_jsonl(args.residual)
-    selected = rows[: args.max_items]
+    prior_failures = read_jsonl(args.prior_failures) if args.prior_failures else []
+    deferred_refs = {
+        str(row.get("source_identity_reference") or "").strip()
+        for row in prior_failures
+        if str(row.get("source_identity_reference") or "").strip()
+    }
+    eligible_rows = (
+        rows
+        if args.retry_failed
+        else [
+            row for row in rows
+            if str(row.get("source_identity_reference") or "").strip()
+            not in deferred_refs
+        ]
+    )
+    selected = eligible_rows[: args.max_items]
     args.cache_dir.mkdir(parents=True, exist_ok=True)
 
     successes: list[dict[str, Any]] = []
@@ -243,6 +268,9 @@ def main() -> int:
     manifest = {
         "schema": "digital-esd-fulltext-retrieval-run-v1",
         "residual_reference": str(args.residual.resolve()),
+        "residual_count": len(rows),
+        "deferred_prior_failure_count": 0 if args.retry_failed else len(rows) - len(eligible_rows),
+        "retry_failed": args.retry_failed,
         "selected_count": len(selected),
         "downloaded_count": len(successes),
         "failed_or_unresolved_count": len(failures),
