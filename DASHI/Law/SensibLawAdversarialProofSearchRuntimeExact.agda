@@ -9,6 +9,9 @@ import DASHI.Law.SensibLawDialecticalProofSearchExact as Dialectic
 import DASHI.Law.SensibLawBidirectionalWorldLawProofSearchExact as Bidi
 import DASHI.Law.SensibLawPabaiDefeaterRefinementRerunExact as Pabai
 import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as MaboPabai
+import DASHI.Cognition.PNF.SensibLawFiniteExecutableLegalSearchExact as Search
+import DASHI.Cognition.PNF.SensibLawFiniteLegalSearchRegressionExact as Regression
+import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact as Negligence
 
 ------------------------------------------------------------------------
 -- S20 ADVERSARIAL LEGAL PROOF SEARCH RUNTIME
@@ -53,28 +56,28 @@ reopenedSearchesDefeaterAgain = refl
 ------------------------------------------------------------------------
 
 pabaiReachableBefore :
-  Pabai.Search.reachable 1
-    Pabai.Regression.pabaiGraph
+  Search.reachable 1
+    Regression.pabaiGraph
     Pabai.pabaiFactsBeforeDefeater
-    Pabai.Negligence.dutyProposition
+    Negligence.dutyProposition
   ≡ true
 pabaiReachableBefore =
   Pabai.pabaiReachableBeforeDefeater
 
 pabaiDefeatedAfterReviewedDefeater :
-  Pabai.Search.reachable 1
-    Pabai.Regression.pabaiGraph
+  Search.reachable 1
+    Regression.pabaiGraph
     Pabai.pabaiFactsAfterDefeater
-    Pabai.Negligence.dutyProposition
+    Negligence.dutyProposition
   ≡ false
 pabaiDefeatedAfterReviewedDefeater =
   Pabai.pabaiUnreachableAfterDefeater
 
 pabaiRepairCandidateExists :
-  Pabai.Search.firstReopeningTransformation 1
-    Pabai.Negligence.dutyProposition
-    (Pabai.Regression.pabaiReformulationCandidate ∷ [])
-  ≡ Pabai.Search.found Pabai.Regression.pabaiReformulationCandidate
+  Search.firstReopeningTransformation 1
+    Negligence.dutyProposition
+    (Regression.pabaiReformulationCandidate ∷ [])
+  ≡ Search.found Regression.pabaiReformulationCandidate
 pabaiRepairCandidateExists =
   Pabai.pabaiExistingRepairCandidateStillReopens
 
