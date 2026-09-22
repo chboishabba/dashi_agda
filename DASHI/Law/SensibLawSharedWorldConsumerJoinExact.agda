@@ -16,8 +16,14 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data JoinBasis : Set where
-  citation treatment sameSource sameSemanticRef sameQid ontologyAdjacency
-  conceptAdjacency explicitDependency : JoinBasis
+  citation : JoinBasis
+  treatment : JoinBasis
+  sameSource : JoinBasis
+  sameSemanticRef : JoinBasis
+  sameQid : JoinBasis
+  ontologyAdjacency : JoinBasis
+  conceptAdjacency : JoinBasis
+  explicitDependency : JoinBasis
 
 record SharedCoordinate : Set where
   constructor sharedCoordinate
