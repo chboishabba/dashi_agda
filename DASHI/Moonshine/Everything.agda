@@ -6,3 +6,5 @@ import DASHI.Moonshine.OggRepresentationReductionEverything
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact
 import DASHI.Moonshine.JSameWeightQuotientInvariantExact
 import DASHI.Moonshine.JMDArchimedesDelta369FixedLocusBridgeExact
+import DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact
+import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact
