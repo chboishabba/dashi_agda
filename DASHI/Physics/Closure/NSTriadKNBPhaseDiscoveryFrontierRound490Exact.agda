@@ -15,6 +15,8 @@ module DASHI.Physics.Closure.NSTriadKNBPhaseDiscoveryFrontierRound490Exact where
 --   * R205/R574 same-object partner-difference adapter;
 --   * quotient-correct slot-kernel difference telescope through amplitude
 --     increments;
+--   * coherent scalar work differences are the coherent work of the SAME
+--     literal vector differences;
 --   * ||B_alpha-B_beta||^2 = 4 ||K_alpha-K_beta||^2;
 --   * R128 polynomial square-gap / Pluecker identity.
 --
@@ -31,6 +33,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as D1b2
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferencePaymentExact as PairPay
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as WorkBridge
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact as Adapter
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact as SlotDefect
 import DASHI.Physics.Closure.NSTriadKNExternalHHSquareGapGramRound128Exact as R128
@@ -51,6 +54,10 @@ round490PairDifferencePaymentCompilerClosed =
 round490R574AggregateUsedByPaymentCompiler : Bool
 round490R574AggregateUsedByPaymentCompiler =
   PairPay.fixedOutputPairDifferencePaymentUsesLiteralR574Aggregate
+
+round490CoherentWorkDifferenceVectorBridgeClosed : Bool
+round490CoherentWorkDifferenceVectorBridgeClosed =
+  WorkBridge.fixedOutputWorkDifferenceVectorBridgeClosed
 
 round490AmplitudeIncrementTelescopeClosed : Bool
 round490AmplitudeIncrementTelescopeClosed =
@@ -115,6 +122,11 @@ round490PairDifferencePaymentCompilerClosedIsTrue :
   round490PairDifferencePaymentCompilerClosed ≡ true
 round490PairDifferencePaymentCompilerClosedIsTrue =
   PairPay.fixedOutputPairDifferencePaymentCompilerClosedIsTrue
+
+round490CoherentWorkDifferenceVectorBridgeClosedIsTrue :
+  round490CoherentWorkDifferenceVectorBridgeClosed ≡ true
+round490CoherentWorkDifferenceVectorBridgeClosedIsTrue =
+  WorkBridge.fixedOutputWorkDifferenceVectorBridgeClosedIsTrue
 
 round490AmplitudeIncrementTelescopeClosedIsTrue :
   round490AmplitudeIncrementTelescopeClosed ≡ true
