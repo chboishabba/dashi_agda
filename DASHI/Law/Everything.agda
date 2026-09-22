@@ -229,3 +229,5 @@ import DASHI.Law.RevisionInvalidatedProjectionAdequacyExact
 import DASHI.Law.RevisionInvalidatedProjectionAdequacyRegression
 import DASHI.Law.RevisionSlicedLatentWorldExact
 import DASHI.Law.RevisionSlicedLatentWorldRegression
+import DASHI.Law.SensibLawSharedWorldAdversarialConsumerExact
+import DASHI.Law.SensibLawSharedWorldAdversarialConsumerRegression
