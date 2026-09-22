@@ -231,3 +231,9 @@ import DASHI.Law.RevisionSlicedLatentWorldExact
 import DASHI.Law.RevisionSlicedLatentWorldRegression
 import DASHI.Law.SensibLawSharedWorldAdversarialConsumerExact
 import DASHI.Law.SensibLawSharedWorldAdversarialConsumerRegression
+import DASHI.Law.SensibLawAdversarialProofSearchRuntimeRegression
+import DASHI.Law.SensibLawLegalCaseBatteryRegression
+import DASHI.Law.SensibLawLegalCaseBatteryExact
+import DASHI.Law.SensibLawAdversarialProofSearchRuntimeExact
+import DASHI.Law.SensibLawSharedWorldConsumerJoinRegression
+import DASHI.Law.SensibLawSharedWorldConsumerJoinExact
