@@ -34,6 +34,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as D1b2
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferencePaymentExact as PairPay
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as WorkBridge
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as Rate
+import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as SignedPayment
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact as Adapter
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact as SlotDefect
 import DASHI.Physics.Closure.NSTriadKNExternalHHSquareGapGramRound128Exact as R128
@@ -57,7 +59,7 @@ round490R574AggregateUsedByPaymentCompiler =
 
 round490AggregateWorkDifferenceVectorBridgeClosed : Bool
 round490AggregateWorkDifferenceVectorBridgeClosed =
-  WorkDiff.fixedOutputPairDifferenceAggregateVectorBridgeClosed
+  WorkBridge.fixedOutputPairDifferenceAggregateVectorBridgeClosed
 
 round490PhysicalRateDifferenceSameObjectWeldClosed : Bool
 round490PhysicalRateDifferenceSameObjectWeldClosed =
@@ -66,6 +68,19 @@ round490PhysicalRateDifferenceSameObjectWeldClosed =
 round490ExactA3PaymentTypeConstructed : Bool
 round490ExactA3PaymentTypeConstructed =
   SignedPayment.a3ExactSignedRateVectorPaymentTypeConstructed
+
+
+round490LiveA3SnapshotBoundToR240Trajectory : Bool
+round490LiveA3SnapshotBoundToR240Trajectory =
+  SignedPayment.liveA3SnapshotBoundToR240Trajectory
+
+round490A3ToR432LiteralR406SameObjectAttachmentClosed : Bool
+round490A3ToR432LiteralR406SameObjectAttachmentClosed =
+  SignedPayment.a3ToR432LiteralR406SameObjectAttachmentClosed
+
+round490A4CardinalityFreeLocalToGlobalCompilerClosed : Bool
+round490A4CardinalityFreeLocalToGlobalCompilerClosed =
+  SignedPayment.a4CardinalityFreeLocalToGlobalCompilerClosed
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -98,7 +113,7 @@ round490ConcreteDistinctIncidenceSlotCollisionConstructed =
 round490AggregateWorkDifferenceVectorBridgeClosedIsTrue :
   round490AggregateWorkDifferenceVectorBridgeClosed ≡ true
 round490AggregateWorkDifferenceVectorBridgeClosedIsTrue =
-  WorkDiff.fixedOutputPairDifferenceAggregateVectorBridgeClosedIsTrue
+  WorkBridge.fixedOutputPairDifferenceAggregateVectorBridgeClosedIsTrue
 
 round490PhysicalRateDifferenceSameObjectWeldClosedIsTrue :
   round490PhysicalRateDifferenceSameObjectWeldClosed ≡ true
@@ -109,6 +124,22 @@ round490ExactA3PaymentTypeConstructedIsTrue :
   round490ExactA3PaymentTypeConstructed ≡ true
 round490ExactA3PaymentTypeConstructedIsTrue =
   SignedPayment.a3ExactSignedRateVectorPaymentTypeConstructedIsTrue
+
+
+round490LiveA3SnapshotBoundToR240TrajectoryIsTrue :
+  round490LiveA3SnapshotBoundToR240Trajectory ≡ true
+round490LiveA3SnapshotBoundToR240TrajectoryIsTrue =
+  SignedPayment.liveA3SnapshotBoundToR240TrajectoryIsTrue
+
+round490A3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
+  round490A3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
+round490A3ToR432LiteralR406SameObjectAttachmentClosedIsFalse =
+  SignedPayment.a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse
+
+round490A4CardinalityFreeLocalToGlobalCompilerClosedIsTrue :
+  round490A4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
+round490A4CardinalityFreeLocalToGlobalCompilerClosedIsTrue =
+  SignedPayment.a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
