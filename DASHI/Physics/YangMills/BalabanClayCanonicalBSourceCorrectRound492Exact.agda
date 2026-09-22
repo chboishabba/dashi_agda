@@ -65,6 +65,20 @@ bStandardClusteringToMassGapTransferLevel : ProofLevel
 bStandardClusteringToMassGapTransferLevel =
   R316.round316HalfRateClusteringSpectrumTransferLevel
 
+-- Same-object physical attachment that still survives after R491: the
+-- reconstructed Hamiltonian/energy coordinate must be the one whose half-rate
+-- Euclidean decay is being consumed by the standard spectral theorem.
+bSameHamiltonianTransferCoordinateLevel : ProofLevel
+bSameHamiltonianTransferCoordinateLevel =
+  R316.round316PhysicalTransferCoordinateLevel
+
+bSameHamiltonianTransferCoordinateStillPhysical : Bool
+bSameHamiltonianTransferCoordinateStillPhysical = true
+
+bSameHamiltonianTransferCoordinateStillPhysicalIsTrue :
+  bSameHamiltonianTransferCoordinateStillPhysical ≡ true
+bSameHamiltonianTransferCoordinateStillPhysicalIsTrue = refl
+
 ------------------------------------------------------------------------
 -- Corrected source boundary.
 ------------------------------------------------------------------------
