@@ -412,3 +412,105 @@ canonicalAgdaLeanEisensteinExtractionBoundary =
     true true
     false false false
     false false false false true false
+
+
+------------------------------------------------------------------------
+-- Query-stable receipts for the authoritative three-seam cut.
+------------------------------------------------------------------------
+
+primitiveComplexExtractionInhabitedIsFalse :
+  primitiveComplexExtractionInhabited
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ false
+primitiveComplexExtractionInhabitedIsFalse = refl
+
+agdaConstructedRealToLeanRealPaidIsFalse :
+  agdaConstructedRealToLeanRealPaid
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ false
+agdaConstructedRealToLeanRealPaidIsFalse = refl
+
+componentwiseComplexPairToLeanComplexPaidIsFalse :
+  componentwiseComplexPairToLeanComplexPaid
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ false
+componentwiseComplexPairToLeanComplexPaidIsFalse = refl
+
+primitivePreservationPaidIsFalse :
+  primitiveZeroOneIPiAddSubMulExpPreservationPaid
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ false
+primitivePreservationPaidIsFalse = refl
+
+actualQOfTransportCompilerOwnedIsTrue :
+  actualQOfTransportCompilerOwned
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ true
+actualQOfTransportCompilerOwnedIsTrue = refl
+
+actualE4TruncatedTransportCompilerOwnedIsTrue :
+  actualE4TruncatedTransportCompilerOwned
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ true
+actualE4TruncatedTransportCompilerOwnedIsTrue = refl
+
+actualE6TruncatedTransportCompilerOwnedIsTrue :
+  actualE6TruncatedTransportCompilerOwned
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ true
+actualE6TruncatedTransportCompilerOwnedIsTrue = refl
+
+finiteDiscriminantTransportCompilerOwnedIsTrue :
+  actualDiscriminantNumeratorTransportCompilerOwned
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ true
+finiteDiscriminantTransportCompilerOwnedIsTrue = refl
+
+leanTargetE4FiniteToInfinitePaidIsTrue :
+  leanTargetE4TruncatedToAgdaShapedInfinitePaid
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ true
+leanTargetE4FiniteToInfinitePaidIsTrue = refl
+
+leanTargetE6FiniteToInfinitePaidIsTrue :
+  leanTargetE6TruncatedToAgdaShapedInfinitePaid
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ true
+leanTargetE6FiniteToInfinitePaidIsTrue = refl
+
+agdaShapedE4InfiniteIdentifiedWithMathlibE4IsFalse :
+  agdaShapedE4InfiniteIdentifiedWithMathlibE4
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ false
+agdaShapedE4InfiniteIdentifiedWithMathlibE4IsFalse = refl
+
+agdaShapedE6InfiniteIdentifiedWithMathlibE6IsFalse :
+  agdaShapedE6InfiniteIdentifiedWithMathlibE6
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ false
+agdaShapedE6InfiniteIdentifiedWithMathlibE6IsFalse = refl
+
+deltaEta24SameObjectNormalizationPaidIsFalse :
+  deltaEta24SameObjectNormalizationPaid
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ false
+deltaEta24SameObjectNormalizationPaidIsFalse = refl
+
+legacyInfiniteLimitTransportCoordinateIsSuperseded :
+  infiniteLimitTransportPaidIsSupersededCoarseCoordinate
+    canonicalAgdaLeanEisensteinExtractionBoundary
+  ≡ true
+legacyInfiniteLimitTransportCoordinateIsSuperseded = refl
+
+data RouteBResidual : Set where
+  constructiveRealComplexExtraction : RouteBResidual
+  canonicalInfiniteEisensteinIdentification : RouteBResidual
+  deltaEta24SameObjectWeld : RouteBResidual
+
+data RouteBResidualStatus : Set where
+  openSameObjectSeam : RouteBResidualStatus
+
+routeBResidualStatus : RouteBResidual -> RouteBResidualStatus
+routeBResidualStatus constructiveRealComplexExtraction = openSameObjectSeam
+routeBResidualStatus canonicalInfiniteEisensteinIdentification = openSameObjectSeam
+routeBResidualStatus deltaEta24SameObjectWeld = openSameObjectSeam
