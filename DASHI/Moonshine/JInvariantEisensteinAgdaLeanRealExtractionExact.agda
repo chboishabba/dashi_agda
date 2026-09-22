@@ -351,6 +351,50 @@ actualQTransportFromRealExtraction :
 actualQTransportFromRealExtraction E tau =
   Extraction.mapQOf (complexExtractionFromReal E) tau
 
+actualE4TransportFromRealExtraction :
+  ∀ {C T}
+    (E : RealTranscendentalExtraction C T)
+    (kernel : Q.DivisorPowerKernel)
+    (terms : Agda.Builtin.Nat.Nat)
+    (tau :
+      Complex.ComplexPair
+        (Real.real (Complex.realPackage C))) →
+  Extraction.mapC (complexExtractionFromReal E)
+    (Q.e4Truncated C kernel terms tau)
+  ≡
+  Extraction.targetE4Truncated
+    (cartesianTargetComplexAlgebra T)
+    kernel
+    terms
+    (Extraction.targetQ
+      (cartesianTargetComplexAlgebra T)
+      (mapComplex E tau))
+actualE4TransportFromRealExtraction E kernel terms tau =
+  Extraction.mapE4TruncatedCanonicalQ
+    (complexExtractionFromReal E) kernel terms tau
+
+actualE6TransportFromRealExtraction :
+  ∀ {C T}
+    (E : RealTranscendentalExtraction C T)
+    (kernel : Q.DivisorPowerKernel)
+    (terms : Agda.Builtin.Nat.Nat)
+    (tau :
+      Complex.ComplexPair
+        (Real.real (Complex.realPackage C))) →
+  Extraction.mapC (complexExtractionFromReal E)
+    (Q.e6Truncated C kernel terms tau)
+  ≡
+  Extraction.targetE6Truncated
+    (cartesianTargetComplexAlgebra T)
+    kernel
+    terms
+    (Extraction.targetQ
+      (cartesianTargetComplexAlgebra T)
+      (mapComplex E tau))
+actualE6TransportFromRealExtraction E kernel terms tau =
+  Extraction.mapE6TruncatedCanonicalQ
+    (complexExtractionFromReal E) kernel terms tau
+
 ------------------------------------------------------------------------
 -- Frontier.
 ------------------------------------------------------------------------
@@ -362,7 +406,8 @@ record AgdaLeanRealExtractionBoundary : Set where
     complexRingPreservationDerivedFromRealLaws : Bool
     complexExpPreservationDerivedFromCartesianLaw : Bool
     actualQTransportDerived : Bool
-    actualE4E6TransportAvailableViaComplexCompiler : Bool
+    actualE4TransportDerived : Bool
+    actualE6TransportDerived : Bool
 
     faithfulMapToLeanRealInhabited : Bool
     leanSinCosPiExpCompatibilityInhabited : Bool
@@ -372,5 +417,5 @@ canonicalAgdaLeanRealExtractionBoundary :
   AgdaLeanRealExtractionBoundary
 canonicalAgdaLeanRealExtractionBoundary =
   agda-lean-real-extraction-boundary
-    true true true true true
+    true true true true true true
     false false false
