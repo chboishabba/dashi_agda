@@ -53,8 +53,9 @@ cubeC :
 cubeC z = Complex._*C_ (squareC z) z
 
 ------------------------------------------------------------------------
--- Divisor-power producer boundary.  Runtime currently comes from the existing
--- sigma_power function in scripts/cm_j_alpha_scan.py.
+-- Divisor-power kernel.  The canonical instance is now repository-native:
+-- positive-divisor enumeration plus exact natural powers.  The Python
+-- sigma_power producer remains only a numerical parity target.
 ------------------------------------------------------------------------
 
 record DivisorPowerKernel : Set where
