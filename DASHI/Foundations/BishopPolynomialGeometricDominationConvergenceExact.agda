@@ -29,6 +29,8 @@ import Sequence as BishopSequence
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricBackendExact as StepV
 import DASHI.Physics.YangMills.BalabanStepVFiniteGeometricInductionExact as GeometricLaws
 import DASHI.Physics.YangMills.BalabanStepVPolynomialWeightedDominationExact as Polynomial
+import DASHI.Physics.YangMills.BalabanStepVPolynomialPrefixTailDominationExact as PrefixTail
+import DASHI.Physics.YangMills.BalabanStepVPolynomialDirectRatioExact as DirectRatio
 import DASHI.Physics.YangMills.BalabanStepVBishopFiniteGeometricExact as BishopStepV
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as BishopGeometric
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -193,8 +195,38 @@ polynomialSeriesConvergentFromDomination inputs =
     scaledGeometricSeriesConvergent majorantInputs
 
 ------------------------------------------------------------------------
--- Direct-ratio / prefix-tail corollaries can now target actual convergence.
+-- Direct-ratio / prefix-tail corollaries now target actual convergence.
 ------------------------------------------------------------------------
+
+polynomialSeriesConvergentFromPrefixTail :
+  ∀ {ratio polynomialDegree} →
+  (inputs :
+    PrefixTail.PolynomialPrefixTailDomination
+      BishopStepV.bishopOrderedSemiringKernel
+      BishopStepV.bishopGeometricSemiringLaws
+      ratio
+      polynomialDegree) →
+  BishopSequence._isConvergent
+    (BishopSequence.SeriesOf
+      (PrefixTail.weightedTerm inputs))
+polynomialSeriesConvergentFromPrefixTail inputs =
+  polynomialSeriesConvergentFromDomination
+    (PrefixTail.polynomialGeometricDominationFromPrefixTail inputs)
+
+polynomialSeriesConvergentFromDirectRatio :
+  ∀ {ratio polynomialDegree} →
+  (inputs :
+    DirectRatio.PolynomialDirectRatioInputs
+      BishopStepV.bishopOrderedSemiringKernel
+      BishopStepV.bishopGeometricSemiringLaws
+      ratio
+      polynomialDegree) →
+  BishopSequence._isConvergent
+    (BishopSequence.SeriesOf
+      (DirectRatio.weightedTerm inputs))
+polynomialSeriesConvergentFromDirectRatio inputs =
+  polynomialSeriesConvergentFromPrefixTail
+    (DirectRatio.polynomialPrefixTailFromDirectRatio inputs)
 
 record BishopPolynomialDominationConvergenceBoundary : Set where
   constructor bishop-polynomial-domination-convergence-boundary
@@ -202,7 +234,9 @@ record BishopPolynomialDominationConvergenceBoundary : Set where
     scaledGeometricConvergencePaid : Bool
     bishopComparisonTheoremReused : Bool
     stepVPointwiseDominationImpliesSeriesConvergence : Bool
-    directPolynomialSuccessorRatioStillRequired : Bool
+    prefixTailDominationImpliesSeriesConvergence : Bool
+    directRatioInputsImpliesSeriesConvergence : Bool
+    directPolynomialSuccessorRatioRequiredByConvergenceCompiler : Bool
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open BishopPolynomialDominationConvergenceBoundary public
@@ -211,7 +245,7 @@ canonicalBishopPolynomialDominationConvergenceBoundary :
   BishopPolynomialDominationConvergenceBoundary
 canonicalBishopPolynomialDominationConvergenceBoundary =
   bishop-polynomial-domination-convergence-boundary
-    true true true false
+    true true true true true false
 
 bishopScaledGeometricConvergenceLevel : ProofLevel
 bishopScaledGeometricConvergenceLevel = machineChecked
