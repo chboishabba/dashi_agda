@@ -36,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNSignedHeatCrossToR410Round415Exact as R415
 import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432Exact as R432
 import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500Exact as R500
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
+import DASHI.Physics.Closure.NSTriadKNPhysicalTrajectoryRetainedGlobalFluxRound403Exact as R403
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
 import DASHI.Physics.Closure.NSTriadKNOrderedOrientedForceToR503BidiExact as OrderedToR503
@@ -101,6 +102,54 @@ a3PaymentToR432 {system} {S} {output} P =
       (physicalOutputItems system output))
     (residualBudget P)
     (signedRateVectorPayment P)
+
+------------------------------------------------------------------------
+-- Live A3 specialization: no caller-selected snapshot.
+------------------------------------------------------------------------
+
+module LiveA3
+    (Time : Set)
+    (initialTime : Time)
+    (integrateTo : (Time → ℚ) → Time → ℚ)
+    (DerivativeOf :
+      (Time → C3.Complex3 F) →
+      (Time → C3.Complex3 F) → Set) where
+
+  module Dyn = R240.PhysicalNSDynamics Time initialTime integrateTo DerivativeOf
+  module Support = R405.LiteralCutoffSupport
+    Time initialTime integrateTo DerivativeOf
+  module Live = R403.LiveTrajectoryFlux
+    Time initialTime integrateTo DerivativeOf
+
+  physicalSystemAt :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Nat → Time → PhysicalField.PhysicalFiniteComplex3GalerkinSystem F
+  physicalSystemAt T R cutoff time =
+    Live.physicalSystemAt T
+      (Support.toRetainedSupportRealization T R)
+      cutoff time
+
+  helicalScalars :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    Helical.HelicalModeScalars F
+  helicalScalars T = Dyn.Base.S (Dyn.forgetDynamics T)
+
+  LiveFixedOutputSignedRateVectorPayment :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Nat → Time → Z3.FourierMode → Set
+  LiveFixedOutputSignedRateVectorPayment T R cutoff time output =
+    FixedOutputSignedRateVectorPayment
+      (physicalSystemAt T R cutoff time)
+      (helicalScalars T)
+      output
+
+  livePaymentToR432Datatype :
+    ∀ {T R cutoff time output} →
+    LiveFixedOutputSignedRateVectorPayment T R cutoff time output →
+    R432.FixedOutputSignedCrossPayment
+  livePaymentToR432Datatype = a3PaymentToR432
 
 ------------------------------------------------------------------------
 -- A4/A5: the cutoff-uniform global theorem is exactly the already-selected
@@ -233,8 +282,14 @@ a3RecordIsLiteralPhysicalFixedOutputFamily = true
 a3QuantitativePhysicalPaymentClosed : Bool
 a3QuantitativePhysicalPaymentClosed = false
 
-a3PaymentConvertsToR432FixedOutputPayment : Bool
-a3PaymentConvertsToR432FixedOutputPayment = true
+a3PaymentPackagesInR432FixedOutputPaymentDatatype : Bool
+a3PaymentPackagesInR432FixedOutputPaymentDatatype = true
+
+a3ToR432LiteralR406SameObjectAttachmentClosed : Bool
+a3ToR432LiteralR406SameObjectAttachmentClosed = false
+
+liveA3SnapshotBoundToR240Trajectory : Bool
+liveA3SnapshotBoundToR240Trajectory = true
 
 a4CardinalityFreeLocalToGlobalCompilerClosed : Bool
 a4CardinalityFreeLocalToGlobalCompilerClosed = true
@@ -260,9 +315,17 @@ a3QuantitativePhysicalPaymentClosedIsFalse :
   a3QuantitativePhysicalPaymentClosed ≡ false
 a3QuantitativePhysicalPaymentClosedIsFalse = refl
 
-a3PaymentConvertsToR432FixedOutputPaymentIsTrue :
-  a3PaymentConvertsToR432FixedOutputPayment ≡ true
-a3PaymentConvertsToR432FixedOutputPaymentIsTrue = refl
+a3PaymentPackagesInR432FixedOutputPaymentDatatypeIsTrue :
+  a3PaymentPackagesInR432FixedOutputPaymentDatatype ≡ true
+a3PaymentPackagesInR432FixedOutputPaymentDatatypeIsTrue = refl
+
+a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
+  a3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
+a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse = refl
+
+liveA3SnapshotBoundToR240TrajectoryIsTrue :
+  liveA3SnapshotBoundToR240Trajectory ≡ true
+liveA3SnapshotBoundToR240TrajectoryIsTrue = refl
 
 a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue :
   a4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
