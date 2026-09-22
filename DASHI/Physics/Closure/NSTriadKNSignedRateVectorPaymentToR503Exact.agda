@@ -16,7 +16,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; nonNegative)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -232,6 +232,27 @@ module LiveA3
   open LiveA3ToR406Attachment public
 
 ------------------------------------------------------------------------
+-- Standard ordered-integration authority.
+--
+-- R495 intentionally records only equality/additivity transport.  A4 needs
+-- the ordinary monotonicity theorem for the concrete temporal integral.
+-- Keeping it separate prevents an abstract integrateTo function from gaining
+-- an order theorem by fiat.
+------------------------------------------------------------------------
+
+record IntegrationOrderAuthority
+    (Time : Set)
+    (integrateTo : (Time → ℚ) → Time → ℚ) : Set₁ where
+  field
+    integrateMonotone :
+      (f g : Time → ℚ) →
+      ((time : Time) → f time ≤ g time) →
+      (terminal : Time) →
+      integrateTo f terminal ≤ integrateTo g terminal
+
+open IntegrationOrderAuthority public
+
+------------------------------------------------------------------------
 -- A4/A5: the cutoff-uniform global theorem is exactly the already-selected
 -- OrderedOrientedSpacetimeBudget; once supplied, R503 is automatic.
 ------------------------------------------------------------------------
@@ -334,6 +355,111 @@ module GlobalCompiler
     }
 
   ----------------------------------------------------------------------
+  -- Live A3 -> A4 compiler using only ordinary integration monotonicity.
+  ----------------------------------------------------------------------
+
+  module Local = LiveA3 Time initialTime integrateTo DerivativeOf
+
+  fourNonnegative : 0ℚ ≤ R299.four
+  fourNonnegative =
+    Rational.addNonnegative
+      (Rational.addNonnegative
+        Rational.oneNonnegative Rational.oneNonnegative)
+      (Rational.addNonnegative
+        Rational.oneNonnegative Rational.oneNonnegative)
+
+  fourTimesMonotone :
+    ∀ {left right : ℚ} → left ≤ right →
+    R299.four * left ≤ R299.four * right
+  fourTimesMonotone lower =
+    let instance fourNN = nonNegative fourNonnegative
+    in ℚP.*-monoˡ-≤-nonNeg R299.four lower
+
+  record LiveA3SpacetimeProducer
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
+    field
+      familyAt :
+        (cutoff : Nat) (time : Time) →
+        Local.CanonicalLivePaymentFamily T R cutoff time
+
+      attachmentAt :
+        (cutoff : Nat) (time : Time) →
+        Local.LiveA3ToR406Attachment
+          T R cutoff time (familyAt cutoff time)
+
+      cutoffIndependentBound : Time → ℚ
+
+      integratedResidualBudgetsPaid :
+        (cutoff : Nat) (terminal : Time) →
+        integrateTo
+          (λ time →
+            R299.four
+              * Local.sumResidualBudgets (familyAt cutoff time))
+          terminal
+        ≤ cutoffIndependentBound terminal
+
+  open LiveA3SpacetimeProducer public
+
+  liveR406PointwiseUpper :
+    ∀ {T R} →
+    (P : LiveA3SpacetimeProducer T R) →
+    (cutoff : Nat) (time : Time) →
+    Local.Direct499.Flux.At.weightedRemainder T R cutoff time
+    ≤ R299.four * Local.sumResidualBudgets (familyAt P cutoff time)
+  liveR406PointwiseUpper P cutoff time =
+    let
+      family = familyAt P cutoff time
+      attached = attachmentAt P cutoff time
+      summed :
+        Local.sumSignedRateVectorPayment family
+        ≤ Local.sumResidualBudgets family
+      summed = Local.liveA3FamilySumWithoutOutputCardinalityFactor family
+      scaled :
+        R299.four * Local.sumSignedRateVectorPayment family
+        ≤ R299.four * Local.sumResidualBudgets family
+      scaled = fourTimesMonotone summed
+    in
+    subst
+      (λ left →
+        left ≤ R299.four * Local.sumResidualBudgets family)
+      (sym (Local.literalR406IsFourSignedRateVectorSum attached))
+      scaled
+
+  liveA3IntegratedRemainderUpper :
+    (orderIntegration : IntegrationOrderAuthority Time integrateTo) →
+    ∀ {T R} →
+    (P : LiveA3SpacetimeProducer T R) →
+    (cutoff : Nat) (terminal : Time) →
+    Heat.literalRemainderIntegral T R cutoff terminal
+    ≤ cutoffIndependentBound P terminal
+  liveA3IntegratedRemainderUpper orderIntegration {T} {R} P cutoff terminal =
+    ℚP.≤-trans
+      (integrateMonotone orderIntegration
+        (λ time → Local.Direct499.Flux.At.weightedRemainder T R cutoff time)
+        (λ time →
+          R299.four
+            * Local.sumResidualBudgets (familyAt P cutoff time))
+        (liveR406PointwiseUpper P cutoff)
+        terminal)
+      (integratedResidualBudgetsPaid P cutoff terminal)
+
+  liveA3SpacetimeBuildsDirectOffDiagonalBudget :
+    (orderIntegration : IntegrationOrderAuthority Time integrateTo) →
+    ∀ {T R} →
+    LiveA3SpacetimeProducer T R →
+    DirectBudget.DirectOffDiagonalBudget T R
+  liveA3SpacetimeBuildsDirectOffDiagonalBudget orderIntegration {T} {R} P = record
+    { DirectBudget.cutoffIndependentBound = cutoffIndependentBound P
+    ; DirectBudget.directOffDiagonalBudget = λ cutoff terminal →
+        subst
+          (λ lhs → lhs ≤ cutoffIndependentBound P terminal)
+          (Direct.literalR406IntegralIsFourIntegratedDirectCompanion
+            T R cutoff terminal)
+          (liveA3IntegratedRemainderUpper
+            orderIntegration P cutoff terminal)
+    }
+  ----------------------------------------------------------------------
   -- Existing ordered-kernel formulation remains a downstream producer
   -- interface when a proof is stated there directly.
   ----------------------------------------------------------------------
@@ -380,6 +506,12 @@ liveA3ToR406AttachmentTypeConstructed = true
 a4CardinalityFreeLocalToGlobalCompilerClosed : Bool
 a4CardinalityFreeLocalToGlobalCompilerClosed = true
 
+a4OrderPreservingIntegrationCompilerClosed : Bool
+a4OrderPreservingIntegrationCompilerClosed = true
+
+a4IntegrationMonotonicityIsStandardAuthority : Bool
+a4IntegrationMonotonicityIsStandardAuthority = true
+
 a4CutoffUniformSumStillAnalyticInput : Bool
 a4CutoffUniformSumStillAnalyticInput = true
 
@@ -424,6 +556,14 @@ liveA3SnapshotBoundToR240TrajectoryIsTrue = refl
 a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue :
   a4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
 a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue = refl
+
+a4OrderPreservingIntegrationCompilerClosedIsTrue :
+  a4OrderPreservingIntegrationCompilerClosed ≡ true
+a4OrderPreservingIntegrationCompilerClosedIsTrue = refl
+
+a4IntegrationMonotonicityIsStandardAuthorityIsTrue :
+  a4IntegrationMonotonicityIsStandardAuthority ≡ true
+a4IntegrationMonotonicityIsStandardAuthorityIsTrue = refl
 
 a4CutoffUniformSumStillAnalyticInputIsTrue :
   a4CutoffUniformSumStillAnalyticInput ≡ true
