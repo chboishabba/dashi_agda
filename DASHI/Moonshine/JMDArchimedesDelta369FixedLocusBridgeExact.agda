@@ -58,6 +58,8 @@ import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantRainbowFullTurnHyperformExact as Rainbow
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
 import DASHI.Moonshine.JSameWeightQuotientInvariantExact as JQuotient
+import DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact as Analytic
+import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Equivariance
 
 ------------------------------------------------------------------------
 -- 1. Typed source attribution.
@@ -191,15 +193,22 @@ open DeltaReflectionFixedLocusPhaseWitness public
 record AnalyticReflectionEvidence : Set where
   constructor analytic-reflection-evidence
   field
-    sourceReflectionIdentityProvedInDASHI : Bool
+    reflectionDerivedFromWeight12AndConjugationInterface : Bool
+    fixedLocusPhaseEquationDerived : Bool
+    sixfoldModuloHalfTurnDerivedConditionally : Bool
+    finiteObserverCommutingSquaresDerivedConditionally : Bool
     concreteComplexConjugationInstantiated : Bool
-    unitCircleArcPhaseTheoremProved : Bool
+    concretePhaseQuotientInstantiated : Bool
+    rendererReflectionIntertwinerInstantiated : Bool
+    unconditionalUnitCircleArcPhaseTheoremProved : Bool
 
 open AnalyticReflectionEvidence public
 
 currentAnalyticReflectionEvidence : AnalyticReflectionEvidence
 currentAnalyticReflectionEvidence =
-  analytic-reflection-evidence false false false
+  analytic-reflection-evidence
+    true true true true
+    false false false false
 
 ------------------------------------------------------------------------
 -- 5. Boundary / non-promotion guards.
@@ -215,7 +224,10 @@ record JMDArchimedesDelta369Boundary : Set where
     existingRendererObserverCountsWelded : Bool
     existingEisensteinThreeSixCountsWelded : Bool
 
-    analyticReflectionIdentityProvedHere : Bool
+    analyticReflectionIdentityDerivedFromExistingWeight12 : Bool
+    fixedLocusSixfoldPhaseInterfaceDerived : Bool
+    reflectionEquivariantObserverSquaresDerived : Bool
+    concreteComplexAnalyticInstantiationClosed : Bool
     base369ConstructsDeltaOrJ : Bool
     finiteObserverEqualsContinuousPhase : Bool
     cyclic27IdentifiedWithTernaryCubeAsGroup : Bool
@@ -226,7 +238,8 @@ canonicalJMDArchimedesDelta369Boundary : JMDArchimedesDelta369Boundary
 canonicalJMDArchimedesDelta369Boundary =
   jmd-archimedes-delta369-boundary
     true true true true true true
-    false false false false
+    true true true false
+    false false false
 
 ------------------------------------------------------------------------
 -- The imported modules above are deliberate dependency witnesses:
@@ -235,7 +248,13 @@ canonicalJMDArchimedesDelta369Boundary =
 -- * JQuotient supplies the existing conditional weight-zero j quotient.
 -- * Render supplies continuous phase + finite observers.
 --
--- Their theorem strength is not recreated or promoted by this arithmetic
--- bridge.  The remaining analytic source-parity debt is still the concrete
--- conjugation/unit-circle reflection and arc-phase theorem.
+-- Analytic now derives the reciprocal-conjugate reflection identity from the
+-- existing weight-12 theorem plus a concrete conjugation/S interface, then
+-- derives the fixed-locus phase equation and a conditional modulo-half-turn
+-- sixfold theorem.  Equivariance derives the C3/C6/C9/C27 commuting squares
+-- from one renderer intertwiner.
+--
+-- The remaining source-parity debt is therefore narrower: instantiate those
+-- interfaces on one concrete complex upper-half-plane/argument carrier and
+-- prove the infinite Delta conjugation + observer-intertwining laws.
 ------------------------------------------------------------------------
