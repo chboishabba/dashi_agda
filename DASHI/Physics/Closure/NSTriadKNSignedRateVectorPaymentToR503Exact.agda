@@ -502,7 +502,8 @@ module LiveA3
               (physicalSystemAt T R cutoff time) output)
 
       consumerSignedCrossBound :
-        literalFixedOutputSignedCross ≤ residualBudget payment
+        literalFixedOutputSignedCross ≤
+        FixedOutputSignedRateVectorPayment.residualBudget payment
 
   open LiveA3ConsumerAttachment public
 
@@ -513,7 +514,7 @@ module LiveA3
   liveA3ConsumerAttachmentBuildsR432Payment {payment = payment} A =
     R432.fixed-output-signed-cross-payment
       (literalFixedOutputSignedCross A)
-      (residualBudget payment)
+      (FixedOutputSignedRateVectorPayment.residualBudget payment)
       (consumerSignedCrossBound A)
 
 
@@ -524,6 +525,32 @@ module LiveA3
     CanonicalLiveSeparationPaymentFamily T R cutoff time → Set
   LiveSeparationA3ToR406Attachment T R cutoff time family =
     LiveA3ToR406Attachment
+      T R cutoff time
+      (canonicalSeparationFamilyToPhysical family)
+
+
+  -- Preferred consumer transport: A4 requires only this inequality.  A proof
+  -- may obtain it from d1b0+d1b1 (endpoint/tangent) plus the A3 covariance
+  -- payment; no direct covariance=R406 identity is requested.
+  record LiveA3R406BudgetAttachment
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T)
+      (cutoff : Nat) (time : Time)
+      (family : CanonicalLivePaymentFamily T R cutoff time) : Set where
+    field
+      literalR406PaidByA3Budgets :
+        Direct499.Flux.At.weightedRemainder T R cutoff time
+        ≤ R299.four * sumResidualBudgets family
+
+  open LiveA3R406BudgetAttachment public
+
+  LiveSeparationA3R406BudgetAttachment :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    (cutoff : Nat) (time : Time) →
+    CanonicalLiveSeparationPaymentFamily T R cutoff time → Set
+  LiveSeparationA3R406BudgetAttachment T R cutoff time family =
+    LiveA3R406BudgetAttachment
       T R cutoff time
       (canonicalSeparationFamilyToPhysical family)
 
@@ -681,7 +708,7 @@ module GlobalCompiler
 
       attachmentAt :
         (cutoff : Nat) (time : Time) →
-        Local.LiveA3ToR406Attachment
+        Local.LiveA3R406BudgetAttachment
           T R cutoff time (familyAt cutoff time)
 
       cutoffIndependentBound : Time → ℚ
@@ -704,23 +731,7 @@ module GlobalCompiler
     Local.Direct499.Flux.At.weightedRemainder T R cutoff time
     ≤ R299.four * Local.sumResidualBudgets (familyAt P cutoff time)
   liveR406PointwiseUpper P cutoff time =
-    let
-      family = familyAt P cutoff time
-      attached = attachmentAt P cutoff time
-      summed :
-        Local.sumSignedRateVectorPayment family
-        ≤ Local.sumResidualBudgets family
-      summed = Local.liveA3FamilySumWithoutOutputCardinalityFactor family
-      scaled :
-        R299.four * Local.sumSignedRateVectorPayment family
-        ≤ R299.four * Local.sumResidualBudgets family
-      scaled = fourTimesMonotone summed
-    in
-    subst
-      (λ left →
-        left ≤ R299.four * Local.sumResidualBudgets family)
-      (sym (Local.literalR406IsFourSignedRateVectorSum attached))
-      scaled
+    Local.literalR406PaidByA3Budgets (attachmentAt P cutoff time)
 
   liveA3IntegratedRemainderUpper :
     (orderIntegration : IntegrationOrderAuthority Time integrateTo) →
@@ -771,7 +782,7 @@ module GlobalCompiler
 
       separationAttachmentAt :
         (cutoff : Nat) (time : Time) →
-        Local.LiveSeparationA3ToR406Attachment
+        Local.LiveSeparationA3R406BudgetAttachment
           T R cutoff time (separationFamilyAt cutoff time)
 
       cutoffIndependentBound : Time → ℚ
@@ -867,6 +878,12 @@ a3ToR432LiteralR406SameObjectAttachmentClosed = false
 a3ConsumerAttachmentTypeConstructed : Bool
 a3ConsumerAttachmentTypeConstructed = true
 
+a3PreferredR406BudgetAttachmentTypeConstructed : Bool
+a3PreferredR406BudgetAttachmentTypeConstructed = true
+
+a3PreferredCompilerRequiresDirectCovarianceR406Equality : Bool
+a3PreferredCompilerRequiresDirectCovarianceR406Equality = false
+
 a3NormalizedQuadraticKernelAggregateBridgeClosed : Bool
 a3NormalizedQuadraticKernelAggregateBridgeClosed = true
 
@@ -947,6 +964,14 @@ a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse = refl
 a3ConsumerAttachmentTypeConstructedIsTrue :
   a3ConsumerAttachmentTypeConstructed ≡ true
 a3ConsumerAttachmentTypeConstructedIsTrue = refl
+
+a3PreferredR406BudgetAttachmentTypeConstructedIsTrue :
+  a3PreferredR406BudgetAttachmentTypeConstructed ≡ true
+a3PreferredR406BudgetAttachmentTypeConstructedIsTrue = refl
+
+a3PreferredCompilerRequiresDirectCovarianceR406EqualityIsFalse :
+  a3PreferredCompilerRequiresDirectCovarianceR406Equality ≡ false
+a3PreferredCompilerRequiresDirectCovarianceR406EqualityIsFalse = refl
 
 a3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue :
   a3NormalizedQuadraticKernelAggregateBridgeClosed ≡ true
