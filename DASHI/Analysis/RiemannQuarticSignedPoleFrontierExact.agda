@@ -80,8 +80,8 @@ quarticFrontierClass explicitQuantitativeTargetRadius = theoremOwned
 
 quarticFrontierClass constructedTargetStrengthFloor = theoremOwned
 quarticFrontierClass combinedProfileSupportPiAddOne = theoremOwned
-quarticFrontierClass combinedProfileUniformL1 = analyticWall
-quarticFrontierClass fourthLipschitzUniformUpper = compilerOutput
+quarticFrontierClass combinedProfileUniformL1 = theoremOwned
+quarticFrontierClass fourthLipschitzUniformUpper = theoremOwned
 quarticFrontierClass uniformBandCoverage = compilerOutput
 
 quarticFrontierClass signedCombinedNMuAssembly = assemblyOwned
@@ -115,7 +115,9 @@ record QuarticSignedPoleFrontierBoundary : Set where
     constructedStrengthFloorSevenPi4Over1600Paid : Bool
     combinedProfileSupportPiAddOnePaid : Bool
     combinedProfileUniformL1Paid : Bool
+    explicitFourthLipschitzK0Paid : Bool
     fourthLipschitzFromSupportMassCompilerOwned : Bool
+    scalarThresholdBelowPlattTrudgianPaid : Bool
     uniformEightOverTBandIsCompilerOutputFromBounds : Bool
 
     oldUniversalAllWitnessStrengthLowerRequired : Bool
@@ -151,10 +153,14 @@ record QuarticSignedPoleFrontierBoundary : Set where
       constructedStrengthFloorSevenPi4Over1600Paid ≡ true
     combinedProfileSupportPiAddOnePaidIsTrue :
       combinedProfileSupportPiAddOnePaid ≡ true
-    combinedProfileUniformL1PaidIsFalse :
-      combinedProfileUniformL1Paid ≡ false
+    combinedProfileUniformL1PaidIsTrue :
+      combinedProfileUniformL1Paid ≡ true
+    explicitFourthLipschitzK0PaidIsTrue :
+      explicitFourthLipschitzK0Paid ≡ true
     fourthLipschitzFromSupportMassCompilerOwnedIsTrue :
       fourthLipschitzFromSupportMassCompilerOwned ≡ true
+    scalarThresholdBelowPlattTrudgianPaidIsFalse :
+      scalarThresholdBelowPlattTrudgianPaid ≡ false
     uniformEightOverTBandIsCompilerOutputFromBoundsIsTrue :
       uniformEightOverTBandIsCompilerOutputFromBounds ≡ true
 
@@ -199,8 +205,10 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true
     true
     true
-    false
     true
+    true
+    true
+    false
     true
     false
     false
@@ -213,15 +221,15 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true
     false
     refl refl refl refl refl refl
-    refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl
     refl refl
     refl refl refl refl
     refl refl refl
     refl
-    "G1 strength is paid existentially: for every t>=200 choose a sufficiently narrow smooth signed-pole witness with S(W_t)>=7*pi^4/1600. Support of the exact combined projective profile is also paid in |u|<pi+1. The remaining G1 source theorem is a uniform L1 bound on that selected combined profile; K<=M*cosh(pi+1)*(pi+1)^5 and the final 8/t threshold are compiler output."
+    "G1 has been reduced to scalar arithmetic. The Lean source now constructs a witness with S(W_t)>=7*pi^4/1600, proves endpoint taper L1<=83/30, compiles this through the exact projective profile, bounds the smooth pole coordinates, obtains an explicit combined-profile L1 bound and hence an explicit K0. It defines T_Q=4*(K0+1)/(7*pi^4/1600). The sole remaining G1 payment is the certified scalar comparison T_Q < the Platt-Trudgian cutoff; numerically the coarse constants give T_Q about 1.041e9 versus T_PT about 3.000e12, but that numerical comparison is not marked paid here."
     "Primitive G3 remains the joint theorem: one half of the signed literal N-mu discrepancy plus the signed horizontal remainder is strictly below twice the reflected combined target contribution. Separate N-mu and horizontal bounds are optional proof-search producers only."
     "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. In particular the old universal lower bound over every arbitrary QuarticFourSignedPolePair is stronger than needed and is retained only as a donor interface."
-    "Authoritative high cut: elementary G1 norm bookkeeping plus G3 joint signed completed residual -> external strictness -> high contradiction. G2 same-object assembly and all middle/terminal arrows are compiler output. RH remains unproved because G3 is open and the final G1 uniform combined-profile L1 estimate has not yet been kernel-paid."
+    "Authoritative high cut: one scalar G1 threshold comparison plus G3 joint signed completed residual -> external strictness -> high contradiction. G2 same-object assembly and all middle/terminal arrows are compiler output. RH remains unproved because G3 is open and the scalar T_Q<T_PT comparison has not yet been kernel-paid."
 
 quarticTerminalCompilerShape :
   {ell : Level} ->
