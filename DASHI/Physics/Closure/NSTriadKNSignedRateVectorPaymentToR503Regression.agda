@@ -65,3 +65,13 @@ physicalRateDifferenceSameOutputFactorizationClosed :
   A2.physicalRateDifferenceSameOutputFactorizationClosed ≡ true
 physicalRateDifferenceSameOutputFactorizationClosed =
   A2.physicalRateDifferenceSameOutputFactorizationClosedIsTrue
+
+physicalOutputFibreSignedRateGeometryFactorizationClosed :
+  A2.physicalOutputFibreSignedRateGeometryFactorizationClosed ≡ true
+physicalOutputFibreSignedRateGeometryFactorizationClosed =
+  A2.physicalOutputFibreSignedRateGeometryFactorizationClosedIsTrue
+
+a3RateWorkCorrelationReducedToSeparationGeometry :
+  A3A5.a3RateWorkCorrelationReducedToSeparationGeometry ≡ true
+a3RateWorkCorrelationReducedToSeparationGeometry =
+  A3A5.a3RateWorkCorrelationReducedToSeparationGeometryIsTrue
