@@ -10,20 +10,20 @@ import DASHI.Analysis.RiemannQuarticSignedPoleCompilerExact as Compiler
 ------------------------------------------------------------------------
 -- Authoritative RH quartic signed-pole frontier
 --
--- Cross-prover provenance:
---   dashi_lean4 exact source base
---     6b5891f3e2f3bafd37a2e1635a4fa2256464309b
+-- Current Clay-facing decomposition:
 --
--- The Lean continuation installs:
---   * explicit quantitative fourth-order target radius;
---   * exact four-window Off+Gamma = 1/2(N-mu)+horizontal assembly;
---   * signed endpoint composition;
---   * final contradiction compiler from the explicit band inequality and the
---     strict signed external residual.
+--   G1 quantitative band
+--   + G3 joint signed completed residual
+--   -> external strictness
+--   -> high contradiction
+--   -> low/high RH compiler.
 --
--- This Agda surface records the new cut and prevents older pole-quotient,
--- Schur, near/far, or positive-pole routes from being mistaken for the current
--- primitive theorem.
+-- G2 same-object assembly and the middle/terminal arrows are compiler-owned.
+--
+-- Historical routes are RETAINED.  They are not deleted and not declared
+-- mathematically useless.  They are classified below as superseded donors:
+-- useful for archaeology, diagnostics, component estimates and alternative
+-- proof search, but no longer primitive members of the preferred min-cut.
 ------------------------------------------------------------------------
 
 data QuarticFrontierCoordinate : Set where
@@ -33,18 +33,34 @@ data QuarticFrontierCoordinate : Set where
   exactPrimeInvisibility : QuarticFrontierCoordinate
   exactSignedPoleCancellation : QuarticFrontierCoordinate
   explicitQuantitativeTargetRadius : QuarticFrontierCoordinate
+
+  targetStrengthUniformLower : QuarticFrontierCoordinate
+  fourthLipschitzUniformUpper : QuarticFrontierCoordinate
   uniformBandCoverage : QuarticFrontierCoordinate
+
   signedCombinedNMuAssembly : QuarticFrontierCoordinate
-  signedNMuDiscrepancyEstimate : QuarticFrontierCoordinate
-  signedHorizontalRemainderEstimate : QuarticFrontierCoordinate
+  jointSignedCompletedResidual : QuarticFrontierCoordinate
+  optionalSignedNMuSplitEstimate : QuarticFrontierCoordinate
+  optionalHorizontalSplitEstimate : QuarticFrontierCoordinate
+  optionalSplitBudgetClosure : QuarticFrontierCoordinate
+
   strictExternalResidual : QuarticFrontierCoordinate
   finalHighContradiction : QuarticFrontierCoordinate
+
+  oldSeparateGammaEstimate : QuarticFrontierCoordinate
+  oldSeparatePolePayment : QuarticFrontierCoordinate
+  oldNearFarPoleQuotientRoute : QuarticFrontierCoordinate
+  oldActualGridZeroModeTransport : QuarticFrontierCoordinate
+  oldIndependentSmoothMainLogTerm : QuarticFrontierCoordinate
+  oldSchurNuisanceSelection : QuarticFrontierCoordinate
 
 data QuarticFrontierClass : Set where
   theoremOwned : QuarticFrontierClass
   assemblyOwned : QuarticFrontierClass
   analyticWall : QuarticFrontierClass
+  optionalProducer : QuarticFrontierClass
   compilerOutput : QuarticFrontierClass
+  supersededDonor : QuarticFrontierClass
 
 quarticFrontierClass :
   QuarticFrontierCoordinate -> QuarticFrontierClass
@@ -54,12 +70,26 @@ quarticFrontierClass fourthMomentNegative = theoremOwned
 quarticFrontierClass exactPrimeInvisibility = theoremOwned
 quarticFrontierClass exactSignedPoleCancellation = theoremOwned
 quarticFrontierClass explicitQuantitativeTargetRadius = theoremOwned
-quarticFrontierClass uniformBandCoverage = analyticWall
+
+quarticFrontierClass targetStrengthUniformLower = analyticWall
+quarticFrontierClass fourthLipschitzUniformUpper = analyticWall
+quarticFrontierClass uniformBandCoverage = compilerOutput
+
 quarticFrontierClass signedCombinedNMuAssembly = assemblyOwned
-quarticFrontierClass signedNMuDiscrepancyEstimate = analyticWall
-quarticFrontierClass signedHorizontalRemainderEstimate = analyticWall
+quarticFrontierClass jointSignedCompletedResidual = analyticWall
+quarticFrontierClass optionalSignedNMuSplitEstimate = optionalProducer
+quarticFrontierClass optionalHorizontalSplitEstimate = optionalProducer
+quarticFrontierClass optionalSplitBudgetClosure = optionalProducer
+
 quarticFrontierClass strictExternalResidual = compilerOutput
 quarticFrontierClass finalHighContradiction = compilerOutput
+
+quarticFrontierClass oldSeparateGammaEstimate = supersededDonor
+quarticFrontierClass oldSeparatePolePayment = supersededDonor
+quarticFrontierClass oldNearFarPoleQuotientRoute = supersededDonor
+quarticFrontierClass oldActualGridZeroModeTransport = supersededDonor
+quarticFrontierClass oldIndependentSmoothMainLogTerm = supersededDonor
+quarticFrontierClass oldSchurNuisanceSelection = supersededDonor
 
 record QuarticSignedPoleFrontierBoundary : Set where
   constructor quartic-signed-pole-frontier-boundary
@@ -92,21 +122,33 @@ record QuarticSignedPoleFrontierBoundary : Set where
     oldExistentialEpsilonRequiredByPreferredConsumerIsFalse :
       oldExistentialEpsilonRequiredByPreferredConsumer ≡ false
 
-    uniformEightOverTBandPaid : Bool
-    uniformEightOverTBandPaidIsFalse :
-      uniformEightOverTBandPaid ≡ false
+    targetStrengthUniformLowerPaid : Bool
+    targetStrengthUniformLowerPaidIsFalse :
+      targetStrengthUniformLowerPaid ≡ false
+
+    fourthLipschitzUniformUpperPaid : Bool
+    fourthLipschitzUniformUpperPaidIsFalse :
+      fourthLipschitzUniformUpperPaid ≡ false
+
+    uniformEightOverTBandIsCompilerOutputFromBounds : Bool
+    uniformEightOverTBandIsCompilerOutputFromBoundsIsTrue :
+      uniformEightOverTBandIsCompilerOutputFromBounds ≡ true
 
     signedCombinedNMuSameObjectAssemblyOwned : Bool
     signedCombinedNMuSameObjectAssemblyOwnedIsTrue :
       signedCombinedNMuSameObjectAssemblyOwned ≡ true
 
-    signedNMuDiscrepancyEstimatePaid : Bool
-    signedNMuDiscrepancyEstimatePaidIsFalse :
-      signedNMuDiscrepancyEstimatePaid ≡ false
+    jointSignedCompletedResidualPaid : Bool
+    jointSignedCompletedResidualPaidIsFalse :
+      jointSignedCompletedResidualPaid ≡ false
 
-    signedHorizontalRemainderEstimatePaid : Bool
-    signedHorizontalRemainderEstimatePaidIsFalse :
-      signedHorizontalRemainderEstimatePaid ≡ false
+    splitNMuAndHorizontalRequiredByClayConsumer : Bool
+    splitNMuAndHorizontalRequiredByClayConsumerIsFalse :
+      splitNMuAndHorizontalRequiredByClayConsumer ≡ false
+
+    splitNMuAndHorizontalRetainedAsOptionalProducer : Bool
+    splitNMuAndHorizontalRetainedAsOptionalProducerIsTrue :
+      splitNMuAndHorizontalRetainedAsOptionalProducer ≡ true
 
     strictExternalCompilerOwned : Bool
     strictExternalCompilerOwnedIsTrue :
@@ -116,19 +158,40 @@ record QuarticSignedPoleFrontierBoundary : Set where
     finalHighContradictionCompilerOwnedIsTrue :
       finalHighContradictionCompilerOwned ≡ true
 
-    oldSchurNuisanceControlRequired : Bool
-    oldSchurNuisanceControlRequiredIsFalse :
-      oldSchurNuisanceControlRequired ≡ false
+    supersededRoutesRetainedInRepository : Bool
+    supersededRoutesRetainedInRepositoryIsTrue :
+      supersededRoutesRetainedInRepository ≡ true
 
-    oldPositivePolePaymentRequired : Bool
-    oldPositivePolePaymentRequiredIsFalse :
-      oldPositivePolePaymentRequired ≡ false
+    oldSeparateGammaEstimateOnPreferredMinCut : Bool
+    oldSeparateGammaEstimateOnPreferredMinCutIsFalse :
+      oldSeparateGammaEstimateOnPreferredMinCut ≡ false
+
+    oldSeparatePolePaymentOnPreferredMinCut : Bool
+    oldSeparatePolePaymentOnPreferredMinCutIsFalse :
+      oldSeparatePolePaymentOnPreferredMinCut ≡ false
+
+    oldNearFarPoleQuotientOnPreferredMinCut : Bool
+    oldNearFarPoleQuotientOnPreferredMinCutIsFalse :
+      oldNearFarPoleQuotientOnPreferredMinCut ≡ false
+
+    oldActualGridZeroModeTransportOnPreferredMinCut : Bool
+    oldActualGridZeroModeTransportOnPreferredMinCutIsFalse :
+      oldActualGridZeroModeTransportOnPreferredMinCut ≡ false
+
+    oldIndependentSmoothMainLogOnPreferredMinCut : Bool
+    oldIndependentSmoothMainLogOnPreferredMinCutIsFalse :
+      oldIndependentSmoothMainLogOnPreferredMinCut ≡ false
+
+    oldSchurNuisanceSelectionOnPreferredMinCut : Bool
+    oldSchurNuisanceSelectionOnPreferredMinCutIsFalse :
+      oldSchurNuisanceSelectionOnPreferredMinCut ≡ false
 
     rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
 
     quantitativeWall : String
     externalWall : String
+    supersessionPolicy : String
     preferredTerminalReading : String
 
 canonicalQuarticSignedPoleFrontierBoundary :
@@ -143,27 +206,31 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true refl
     false refl
     false refl
-    true refl
-    false refl
     false refl
     true refl
     true refl
     false refl
     false refl
+    true refl
+    true refl
+    true refl
     false refl
-    "Prove uniformly on the constructed four-window signed-pole witness that 8/t is below the explicit quantitativeFourthOrderRadius determined by the quartic target margin and compact-cosh fourth-derivative Lipschitz constant."
-    "Prove the strict bound for 1/2 times the signed literal N-mu discrepancy plus the signed horizontal remainder against twice the combined reflected target contribution. The N-mu representation itself is compiler-owned; only the estimate remains analytic."
-    "The preferred high-zero route is now: four-window J2 cancellation -> exact signed pole cancellation -> explicit quantitative target band -> exact signed N-mu plus horizontal representation -> one strict external residual theorem -> contradiction. Schur nuisance selection, the old near/far terminal wall, and positive-pole payment are not primitive requirements."
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    "Preferred G1 proof search: prove a uniform lower bound for signed target strength S(W_t), prove a uniform upper bound for the compact-cosh fourth-derivative Lipschitz constant K(W_t), then use the scalar threshold compiler. For t > 8, 4*(K+1)/t < S is sufficient for 8/t < min(1,2*S/(K+1))."
+    "Primitive G3: prove directly that one half of the signed literal N-mu discrepancy plus the signed horizontal remainder is strictly below twice the reflected combined target contribution. Separate N-mu and horizontal bounds are retained only as an optional producer decomposition."
+    "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. Separate Gamma, separate pole payment, near/far pole-quotient, actual-grid zero-mode transport, independent smooth-main log and Schur nuisance routes remain available as historical/donor machinery and alternative proof-search surfaces."
+    "Authoritative high cut: G1 quantitative band + G3 joint signed completed residual -> external strictness -> high contradiction. G2 same-object assembly and all middle/terminal arrows are compiler output. RH itself remains unproved until G1/G3 plus the low/carrier terminal requirements are discharged."
 
--- The final logical dependency is intentionally generic.  It proves that once
--- the two analytic controls inhabit the compiler selected for the concrete
--- scalar carrier, no further RH-high mathematics is needed.
 quarticTerminalCompilerShape :
   {ell : Level} ->
   (C : Compiler.QuarticSignedPoleCompiler {ell}) ->
   Compiler.BandCoverage C ->
-  Compiler.SignedNMuDiscrepancyControl C ->
-  Compiler.HorizontalRemainderControl C ->
+  Compiler.JointSignedCompletedResidual C ->
   Compiler.Contradiction
 quarticTerminalCompilerShape =
   Compiler.compileQuarticSignedPoleContradiction
