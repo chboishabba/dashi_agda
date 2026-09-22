@@ -3,6 +3,7 @@ module DASHI.Law.SensibLawAdversarialProofSearchRuntimeExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawDialecticalProofSearchExact as Dialectic
