@@ -37,3 +37,6 @@ import DASHI.Analysis.RiemannG2CurrentDirectOneLeafFrontierExact
 import DASHI.Analysis.RiemannG2CurrentGenericHighFrontierRefinementExact
 import DASHI.Analysis.RiemannG2GenericHighCertifiedFollowupReadmeExact
 import DASHI.Analysis.RiemannG2FinalCutIntrospectionExact
+-- Current four-window signed-pole quartic RH frontier.
+import DASHI.Analysis.RiemannQuarticSignedPoleCompilerExact
+import DASHI.Analysis.RiemannQuarticSignedPoleFrontierExact
