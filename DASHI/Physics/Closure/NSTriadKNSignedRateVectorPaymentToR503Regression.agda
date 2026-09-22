@@ -85,3 +85,14 @@ r205RawCurlSameObjectBridgeStillOpen :
   A3A5.a3R205RawCurlPartnerSameObjectBridgeClosed ≡ false
 r205RawCurlSameObjectBridgeStillOpen =
   A3A5.a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse
+
+
+normalizedQuadraticKernelAggregateBridgeClosed :
+  A3A5.a3NormalizedQuadraticKernelAggregateBridgeClosed ≡ true
+normalizedQuadraticKernelAggregateBridgeClosed =
+  A3A5.a3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue
+
+r205PointwiseIdentificationRejected :
+  A3A5.a3R205PointwiseIdentificationAdmissible ≡ false
+r205PointwiseIdentificationRejected =
+  A3A5.a3R205PointwiseIdentificationAdmissibleIsFalse
