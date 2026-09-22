@@ -16,7 +16,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _*_; _≤_; nonNegative)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_; nonNegative)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -139,6 +139,77 @@ physicalFixedOutputSignedVectorRateToSeparationGeometry system S output =
       (trans
         (cong (nu *_) geometricStandard)
         (cong (nu *_) separationBridge)))
+
+record FixedOutputSeparationGeometryPayment
+    (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F)
+    (S : Helical.HelicalModeScalars F)
+    (output : Z3.FourierMode) : Set where
+  field
+    residualBudget : ℚ
+    signedSeparationGeometryPayment :
+      0ℚ -
+        ( PhysicalField.viscosity system
+        * Vector.pairDifferenceVectorWorkSum
+            (Rate.separationNormSquared system)
+            (physicalMixedFold system S output)
+            (physicalMixedValue system S)
+            (physicalOutputItems system output) )
+      ≤ Rate.two * residualBudget
+
+open FixedOutputSeparationGeometryPayment public
+
+separationGeometryPaymentBuildsPhysicalRatePayment :
+  ∀ {system S output} →
+  FixedOutputSeparationGeometryPayment system S output →
+  FixedOutputSignedRateVectorPayment system S output
+separationGeometryPaymentBuildsPhysicalRatePayment
+    {system} {S} {output} P = record
+  { FixedOutputSignedRateVectorPayment.residualBudget =
+      FixedOutputSeparationGeometryPayment.residualBudget P
+  ; FixedOutputSignedRateVectorPayment.signedRateVectorPayment =
+      let
+        rateSum =
+          Vector.pairDifferenceVectorWorkSum
+            (Rate.physicalCellRate system)
+            (physicalMixedFold system S output)
+            (physicalMixedValue system S)
+            (physicalOutputItems system output)
+        geomSum =
+          Vector.pairDifferenceVectorWorkSum
+            (Rate.separationNormSquared system)
+            (physicalMixedFold system S output)
+            (physicalMixedValue system S)
+            (physicalOutputItems system output)
+        nu = PhysicalField.viscosity system
+        budget = FixedOutputSeparationGeometryPayment.residualBudget P
+
+        geometry :
+          Rate.two * rateSum ≡ nu * geomSum
+        geometry =
+          physicalFixedOutputSignedVectorRateToSeparationGeometry
+            system S output
+
+        doubledPhysical :
+          Rate.two * (0ℚ - rateSum)
+          ≤ Rate.two * budget
+        doubledPhysical =
+          subst
+            (λ left → left ≤ Rate.two * budget)
+            (solve (rateSum ∷ nu ∷ geomSum ∷ []))
+            (subst
+              (λ geometric →
+                0ℚ - geometric ≤ Rate.two * budget)
+              (sym geometry)
+              (signedSeparationGeometryPayment P))
+
+        twoPositive : 0ℚ < Rate.two
+        twoPositive =
+          ℚP.+-mono-<-<
+            (ℚP.positive⁻¹ 1ℚ)
+            (ℚP.positive⁻¹ 1ℚ)
+      in
+      ℚP.*-cancelˡ-≤-pos Rate.two doubledPhysical
+  }
 
 record FixedOutputSignedRateVectorPayment
     (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F)
@@ -551,6 +622,9 @@ a3ExactSignedRateVectorPaymentTypeConstructed = true
 a3RateWorkCorrelationReducedToSeparationGeometry : Bool
 a3RateWorkCorrelationReducedToSeparationGeometry = true
 
+a3SeparationGeometryPaymentCompilerClosed : Bool
+a3SeparationGeometryPaymentCompilerClosed = true
+
 a3RecordIsLiteralPhysicalFixedOutputFamily : Bool
 a3RecordIsLiteralPhysicalFixedOutputFamily = true
 
@@ -597,6 +671,10 @@ a3ExactSignedRateVectorPaymentTypeConstructedIsTrue = refl
 a3RateWorkCorrelationReducedToSeparationGeometryIsTrue :
   a3RateWorkCorrelationReducedToSeparationGeometry ≡ true
 a3RateWorkCorrelationReducedToSeparationGeometryIsTrue = refl
+
+a3SeparationGeometryPaymentCompilerClosedIsTrue :
+  a3SeparationGeometryPaymentCompilerClosed ≡ true
+a3SeparationGeometryPaymentCompilerClosedIsTrue = refl
 
 a3RecordIsLiteralPhysicalFixedOutputFamilyIsTrue :
   a3RecordIsLiteralPhysicalFixedOutputFamily ≡ true
