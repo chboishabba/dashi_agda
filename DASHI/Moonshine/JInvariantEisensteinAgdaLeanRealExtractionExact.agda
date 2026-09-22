@@ -26,6 +26,7 @@ module DASHI.Moonshine.JInvariantEisensteinAgdaLeanRealExtractionExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
+open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
@@ -355,7 +356,7 @@ actualE4TransportFromRealExtraction :
   ∀ {C T}
     (E : RealTranscendentalExtraction C T)
     (kernel : Q.DivisorPowerKernel)
-    (terms : Agda.Builtin.Nat.Nat)
+    (terms : Nat)
     (tau :
       Complex.ComplexPair
         (Real.real (Complex.realPackage C))) →
@@ -377,7 +378,7 @@ actualE6TransportFromRealExtraction :
   ∀ {C T}
     (E : RealTranscendentalExtraction C T)
     (kernel : Q.DivisorPowerKernel)
-    (terms : Agda.Builtin.Nat.Nat)
+    (terms : Nat)
     (tau :
       Complex.ComplexPair
         (Real.real (Complex.realPackage C))) →
