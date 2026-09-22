@@ -63,9 +63,9 @@ archimedes369Parity = aristotleMathModuleParity
   "3642fe253921e95da056302654ea76aa6da0564ccfc762897e70ed94f273bc11"
   345
   39
-  unported
-  "none"
-  "requires constructed pi/trigonometric/order/limit substrate; polygon sandwich, doubling ladder, exact rungs, nine-gon cubic/enclosure and limits remain"
+  partial
+  "DASHI.Moonshine.JMDArchimedesDelta369FixedLocusBridgeExact"
+  "JMD-attributed 3/6/9/12 portrait bridge now pays exact 12=2*6, 6=2*3, 9=3*3 and 27=3*9 observer/reflection arithmetic and welds existing Eisenstein/renderer counts; constructed pi/trigonometric/order/limit substrate, polygon sandwich, doubling ladder, exact rungs, nine-gon cubic/enclosure and limits remain"
 
 archimedesNinetySixParity : AristotleMathModuleParity
 archimedesNinetySixParity = aristotleMathModuleParity
