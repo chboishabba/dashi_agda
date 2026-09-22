@@ -10,6 +10,7 @@ open import Agda.Builtin.Equality using (_≡_)
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as A1
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as A2
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as A3A5
+import DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406TransportExact as EndpointAware
 
 aggregateWorkDifferenceBridgeClosed :
   A1.fixedOutputPairDifferenceAggregateVectorBridgeClosed ≡ true
@@ -118,3 +119,34 @@ preferredCompilerDoesNotRequireDirectCovarianceR406Equality :
   A3A5.a3PreferredCompilerRequiresDirectCovarianceR406Equality ≡ false
 preferredCompilerDoesNotRequireDirectCovarianceR406Equality =
   A3A5.a3PreferredCompilerRequiresDirectCovarianceR406EqualityIsFalse
+
+
+endpointAwareConsumerTransportConstructed :
+  EndpointAware.endpointAwareConsumerTransportTypeConstructed ≡ true
+endpointAwareConsumerTransportConstructed =
+  EndpointAware.endpointAwareConsumerTransportTypeConstructedIsTrue
+
+pointwiseR406AttachmentNotRequiredByPreferredTransport :
+  EndpointAware.preferredPointwiseR406AttachmentRequired ≡ false
+pointwiseR406AttachmentNotRequiredByPreferredTransport =
+  EndpointAware.preferredPointwiseR406AttachmentRequiredIsFalse
+
+endpointTermExplicitInPreferredTransport :
+  EndpointAware.endpointTermExplicitInPreferredTransport ≡ true
+endpointTermExplicitInPreferredTransport =
+  EndpointAware.endpointTermExplicitInPreferredTransportIsTrue
+
+consumerTransportIntroducesNoNewNonlinearEstimate :
+  EndpointAware.newNonlinearEstimateIntroducedByConsumerTransport ≡ false
+consumerTransportIntroducesNoNewNonlinearEstimate =
+  EndpointAware.newNonlinearEstimateIntroducedByConsumerTransportIsFalse
+
+d1b0d1b1SameObjectTransportStillProofBearing :
+  EndpointAware.d1b0d1b1SameObjectTransportStillProofBearing ≡ true
+d1b0d1b1SameObjectTransportStillProofBearing =
+  EndpointAware.d1b0d1b1SameObjectTransportStillProofBearingIsTrue
+
+a3QuantitativeSignedPaymentStillProofBearing :
+  EndpointAware.a3QuantitativeSignedPaymentStillProofBearing ≡ true
+a3QuantitativeSignedPaymentStillProofBearing =
+  EndpointAware.a3QuantitativeSignedPaymentStillProofBearingIsTrue
