@@ -237,3 +237,5 @@ import DASHI.Law.SensibLawLegalCaseBatteryExact
 import DASHI.Law.SensibLawAdversarialProofSearchRuntimeExact
 import DASHI.Law.SensibLawSharedWorldConsumerJoinRegression
 import DASHI.Law.SensibLawSharedWorldConsumerJoinExact
+import DASHI.Law.SensibLawYindjibarndiEmpiricalAuthorityJoinExact
+import DASHI.Law.SensibLawYindjibarndiEmpiricalAuthorityJoinRegression
