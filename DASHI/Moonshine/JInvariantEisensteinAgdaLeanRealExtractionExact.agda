@@ -29,6 +29,7 @@ open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
+import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Q
 import DASHI.Moonshine.JInvariantEisensteinAgdaLeanExtractionExact as Extraction
 
 ------------------------------------------------------------------------
@@ -342,7 +343,7 @@ actualQTransportFromRealExtraction :
       Complex.ComplexPair
         (Real.real (Complex.realPackage C))) →
   Extraction.mapC (complexExtractionFromReal E)
-    (DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact.qOf C tau)
+    (Q.qOf C tau)
   ≡
   Extraction.targetQ
     (cartesianTargetComplexAlgebra T)
