@@ -26,6 +26,7 @@ import Sequence as BishopSequence
 import Real as BishopReal
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 round11MachinTranscendentals :
