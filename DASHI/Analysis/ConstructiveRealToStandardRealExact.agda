@@ -14,7 +14,8 @@ module DASHI.Analysis.ConstructiveRealToStandardRealExact where
 -- faithfulness is isolated in a separate record.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Sigma using (Σ)
 
 import DASHI.Analysis.ConstructedRealBackendSpineExact as Spine
@@ -175,7 +176,7 @@ mapComplexEquivalent :
 mapComplexEquivalent I hx hy
   rewrite respectsEquivalent I hx
         | respectsEquivalent I hy =
-  Agda.Builtin.Equality.refl
+  refl
 
 ------------------------------------------------------------------------
 -- Boundary status: this file owns the reusable contract, not its cross-prover
@@ -185,13 +186,11 @@ mapComplexEquivalent I hx hy
 record ConstructiveRealToStandardRealBoundary : Set where
   constructor boundary
   field
-    setoidRespectRequired : Set
-    rawRepresentativeInjectivityRequired : Set
-    faithfulnessSeparatedFromTransport : Set
+    setoidRespectRequired : Bool
+    rawRepresentativeInjectivityRequired : Bool
+    faithfulnessSeparatedFromTransport : Bool
 
 canonicalBoundary : ConstructiveRealToStandardRealBoundary
 canonicalBoundary =
-  boundary
-    (Σ Set (λ X → X))
-    Agda.Builtin.Sigma.Σ
-    (Σ Set (λ X → X))
+  boundary true false true
+
