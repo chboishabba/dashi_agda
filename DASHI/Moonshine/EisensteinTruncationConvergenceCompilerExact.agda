@@ -37,6 +37,9 @@ import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as FiniteKlein
 import DASHI.Moonshine.EisensteinUpperHalfPlaneQDiskExact as QDisk
 import DASHI.Moonshine.EisensteinCoefficientMajorantExact as Majorant
 import DASHI.Foundations.BishopPolynomialGeometricRatioConvergenceExact as PolyGeo
+import DASHI.Foundations.BishopGeometricSeriesConvergenceExact as GeometricConvergence
+import DASHI.Foundations.BishopPolynomialGeometricDominationConvergenceExact as DominationConvergence
+import DASHI.Moonshine.EisensteinTruncationSeriesAlignmentExact as SeriesAlignment
 
 private
   ComplexCarrier :
@@ -362,6 +365,9 @@ record EisensteinTruncationConvergenceBoundary : Set where
     upperHalfPlaneToQDiskCompilerOwned : Bool
     complexTermsReducedToPolynomialGeometricMajorants : Bool
     bishopPolynomialGeometricRatioCompilerOwned : Bool
+    bishopGeometricSeriesConvergenceOwned : Bool
+    bishopPolynomialDominationConvergenceCompilerOwned : Bool
+    truncationAdditiveSeriesAlignmentOwned : Bool
     deltaNumeratorLimitCompiledFromE4E6Limits : Bool
     deltaNormalizationLimitIsolated : Bool
     jQuotientLimitRequiresNonzeroDenominator : Bool
@@ -381,6 +387,7 @@ canonicalEisensteinTruncationConvergenceBoundary :
 canonicalEisensteinTruncationConvergenceBoundary =
   eisenstein-truncation-convergence-boundary
     true true true true true true
+    true true true
     true true true true
     false false false false
-    "remaining analytic leaves are now: instantiate the selected concrete-complex norm/cartesian q laws; prove the eventual successor-ratio inequality for n^4 r^n and n^6 r^n when 0<=r<1 (the Bishop ratio-test compiler is already owned); transport those real majorants to convergence of the literal complex E4/E6 partial sums; then identify the limits with the all-SL2(Z) Eisenstein objects"
+    "remaining analytic leaves are now: instantiate the selected concrete-complex q/norm laws; construct a Step-V pointwise polynomial-geometric domination witness for the quartic/sextic scalar majorants (the domination-to-convergence compiler is already machine-checked, so no separate n^k r^n ratio theorem is required); transport those convergent real majorants to the four real/imaginary coordinate series; use the exact constant-plus-additive truncation alignment; then identify the resulting limits with the all-SL2(Z) Eisenstein objects"
