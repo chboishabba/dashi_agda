@@ -28,6 +28,7 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
+import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 
 ------------------------------------------------------------------------
 -- 1. Concrete finite reflection actions.
@@ -108,10 +109,10 @@ record J369ReflectionEquivariance
   constructor j369-reflection-equivariance
   field
     reflectPoint :
-      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+      Klein.Point
         (Render.klein R)
       →
-      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+      Klein.Point
         (Render.klein R)
 
     reflectPhase :
@@ -119,7 +120,7 @@ record J369ReflectionEquivariance
 
     phaseReflection :
       (z :
-        DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+        Klein.Point
           (Render.klein R)) →
       Render.jPhase R (reflectPoint z)
       ≡
@@ -155,7 +156,7 @@ observer3ReflectionCommutes :
   (R : Render.JPhaseRenderingAlgebra) →
   (E : J369ReflectionEquivariance R) →
   (z :
-    DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+    Klein.Point
       (Render.klein R)) →
   Render.observer3 (Render.renderAt R (reflectPoint E z))
   ≡
@@ -169,7 +170,7 @@ observer6ReflectionCommutes :
   (R : Render.JPhaseRenderingAlgebra) →
   (E : J369ReflectionEquivariance R) →
   (z :
-    DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+    Klein.Point
       (Render.klein R)) →
   Render.observer6 (Render.renderAt R (reflectPoint E z))
   ≡
@@ -183,7 +184,7 @@ observer9ReflectionCommutes :
   (R : Render.JPhaseRenderingAlgebra) →
   (E : J369ReflectionEquivariance R) →
   (z :
-    DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+    Klein.Point
       (Render.klein R)) →
   Render.observer9 (Render.renderAt R (reflectPoint E z))
   ≡
@@ -197,7 +198,7 @@ observer27ReflectionCommutes :
   (R : Render.JPhaseRenderingAlgebra) →
   (E : J369ReflectionEquivariance R) →
   (z :
-    DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+    Klein.Point
       (Render.klein R)) →
   Render.observer27 (Render.renderAt R (reflectPoint E z))
   ≡
