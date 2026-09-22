@@ -33,6 +33,8 @@ import DASHI.Moonshine.JInvariantConstructedComplexKleinJBackendExact as KleinBa
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as FiniteEisenstein
 import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as FiniteKlein
 import DASHI.Moonshine.EisensteinTruncationConvergenceCompilerExact as LimitCompiler
+import DASHI.Moonshine.EisensteinUpperHalfPlaneQDiskExact as QDisk
+import DASHI.Moonshine.EisensteinCoefficientMajorantExact as Majorant
 
 ------------------------------------------------------------------------
 -- 1. Explicit bidirectional same-object bridge.
@@ -183,6 +185,8 @@ record DeltaConstructedComplexReflectionCutsetBoundary : Set where
     concreteKleinJBackendAlreadyOwned : Bool
     finiteConstructedE4E6DeltaJRouteAlreadyOwned : Bool
     finiteToInfiniteDeltaLimitCompilerOwned : Bool
+    sigma3Sigma5GrowthAndQDiskReductionOwned : Bool
+    coefficientMajorantReductionOwned : Bool
     finiteRouteEqualsInfiniteAnalyticRoute : Bool
 
     abstractEisensteinScalarWeldedToConcreteComplex : Bool
@@ -200,6 +204,6 @@ canonicalDeltaConstructedComplexReflectionCutsetBoundary :
 canonicalDeltaConstructedComplexReflectionCutsetBoundary =
   delta-constructed-complex-reflection-cutset-boundary
     true true true true true
-    true true false
+    true true true true false
     false false false false false
-    "the finite constructed E4/E6/Delta/j route and the algebraic finite-to-infinite Delta/j limit compiler now exist; prove the two literal q-series convergence leaves E4_N->E4 and E6_N->E6 plus their same-object identification with the all-SL2(Z) EisensteinAnalyticModel, then attach the literal S action, Delta(-conjugate z)=conjugate(Delta z), and unit-circle fixed-point law"
+    "finite E4/E6, internal sigma3/sigma5 bounds, upper-half-plane q-disk reduction, complex-term polynomial-geometric majorants, and the Delta/j limit compiler now exist. Close the selected backend norm/q laws and the eventual polynomial-geometric successor ratios, transport to literal E4_N/E6_N convergence, then prove the same-object identification with EisensteinAnalyticModel before attaching S/conjugation and the unit-circle fixed-point law"
