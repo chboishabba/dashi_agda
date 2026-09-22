@@ -80,6 +80,26 @@ canonicalConstructiveRealComplexInteropResidual =
     "qOf, E4_N, E6_N and finite discriminant-numerator transport are compiler-owned in JInvariantEisensteinAgdaLeanExtractionExact; Lean-target E4_N/E6_N convergence to canonical Agda-shaped infinite sums is already paid on the Lean companion."
     "Construct the faithful selected-real map into Lean Real, lift it componentwise to ComplexPair -> Lean Complex with primitive-operation/pi/exp preservation, then identify the canonical infinite sums with Mathlib E4/E6 before the separate Delta=eta^24=(E4^3-E6^2)/1728 same-object normalization weld."
 
+constructiveRealComplexInteropIdentityIsUnresolved :
+  identity canonicalConstructiveRealComplexInteropResidual
+  ≡ unresolvedIdentity
+constructiveRealComplexInteropIdentityIsUnresolved = refl
+
+constructiveRealComplexInteropPaymentIsUnpaid :
+  payment canonicalConstructiveRealComplexInteropResidual
+  ≡ unpaid
+constructiveRealComplexInteropPaymentIsUnpaid = refl
+
+constructiveRealComplexInteropPrimaryRoleIsRepresentationWeld :
+  primaryRole canonicalConstructiveRealComplexInteropResidual
+  ≡ representationWeld
+constructiveRealComplexInteropPrimaryRoleIsRepresentationWeld = refl
+
+constructiveRealComplexInteropDonorRoleIsCrossProver :
+  donorRole canonicalConstructiveRealComplexInteropResidual
+  ≡ crossProverDonor
+constructiveRealComplexInteropDonorRoleIsCrossProver = refl
+
 data IdentifierStatus : Set where
   verifiedIdentifier unresolvedIdentifier notApplicableIdentifier : IdentifierStatus
 
