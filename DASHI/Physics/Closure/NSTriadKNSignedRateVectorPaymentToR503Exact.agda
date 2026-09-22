@@ -417,9 +417,19 @@ module LiveA3
       (paymentList family)
 
   ----------------------------------------------------------------------
-  -- Exact same-object attachment still required: the covariance-derived
-  -- selected-output sum must be identified with the literal R406 remainder
-  -- scalar on the SAME live snapshot.  This is representation debt only.
+  -- Consumer attachment boundary.
+  --
+  -- IMPORTANT CORRECTION:
+  -- the signed rate/vector pair sum is the coherent VISCOUS-COVARIANCE
+  -- residual.  R406.weightedRemainder is the resolvent-weighted NONLINEAR
+  -- Gram remainder.  They are connected through the already-proved damped
+  -- tangent / endpoint decomposition; they are not the same scalar by
+  -- definition.  Therefore the old direct-equality receipt below is retained
+  -- only as a legacy over-strong interface and is explicitly non-mandatory.
+  --
+  -- The admissible interface is theorem-bearing: a local A3 payment must be
+  -- transported through the coherent decomposition (including its endpoint
+  -- term) to the actual fixed-output signed-cross consumer.
   ----------------------------------------------------------------------
 
   liveR406Outputs :
@@ -463,6 +473,48 @@ module LiveA3
         ≡ R299.four * sumSignedRateVectorPayment family
 
   open LiveA3ToR406Attachment public
+
+  -- Correct consumer-facing receipt.  This does NOT assert equality between
+  -- covariance and R406.  It records the exact signed cross seen by the
+  -- downstream R432 compiler after the endpoint/covariance decomposition has
+  -- been performed on this same live slice.
+  record LiveA3ConsumerAttachment
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T)
+      (cutoff : Nat) (time : Time)
+      (output : Z3.FourierMode)
+      (payment : LiveFixedOutputSignedRateVectorPayment
+        T R cutoff time output) : Set where
+    field
+      literalFixedOutputSignedCross : ℚ
+
+      a3PaymentIsConsumerSignedCross :
+        literalFixedOutputSignedCross
+        ≡ 0ℚ - Vector.pairDifferenceVectorWorkSum
+            (Rate.physicalCellRate (physicalSystemAt T R cutoff time))
+            (physicalMixedFold
+              (physicalSystemAt T R cutoff time)
+              (helicalScalars T) output)
+            (physicalMixedValue
+              (physicalSystemAt T R cutoff time)
+              (helicalScalars T))
+            (physicalOutputItems
+              (physicalSystemAt T R cutoff time) output)
+
+      consumerSignedCrossBound :
+        literalFixedOutputSignedCross ≤ residualBudget payment
+
+  open LiveA3ConsumerAttachment public
+
+  liveA3ConsumerAttachmentBuildsR432Payment :
+    ∀ {T R cutoff time output payment} →
+    LiveA3ConsumerAttachment T R cutoff time output payment →
+    R432.FixedOutputSignedCrossPayment
+  liveA3ConsumerAttachmentBuildsR432Payment {payment = payment} A =
+    R432.fixed-output-signed-cross-payment
+      (literalFixedOutputSignedCross A)
+      (residualBudget payment)
+      (consumerSignedCrossBound A)
 
 
   LiveSeparationA3ToR406Attachment :
@@ -804,8 +856,16 @@ a3QuantitativePhysicalPaymentClosed = false
 a3PaymentPackagesInR432FixedOutputPaymentDatatype : Bool
 a3PaymentPackagesInR432FixedOutputPaymentDatatype = true
 
+a3DirectCovarianceEqualsR406RemainderAdmissible : Bool
+a3DirectCovarianceEqualsR406RemainderAdmissible = false
+
+-- Legacy direct-equality interface remains uninhabited and is no longer a
+-- mandatory seam.
 a3ToR432LiteralR406SameObjectAttachmentClosed : Bool
 a3ToR432LiteralR406SameObjectAttachmentClosed = false
+
+a3ConsumerAttachmentTypeConstructed : Bool
+a3ConsumerAttachmentTypeConstructed = true
 
 a3NormalizedQuadraticKernelAggregateBridgeClosed : Bool
 a3NormalizedQuadraticKernelAggregateBridgeClosed = true
@@ -876,9 +936,17 @@ a3PaymentPackagesInR432FixedOutputPaymentDatatypeIsTrue :
   a3PaymentPackagesInR432FixedOutputPaymentDatatype ≡ true
 a3PaymentPackagesInR432FixedOutputPaymentDatatypeIsTrue = refl
 
+a3DirectCovarianceEqualsR406RemainderAdmissibleIsFalse :
+  a3DirectCovarianceEqualsR406RemainderAdmissible ≡ false
+a3DirectCovarianceEqualsR406RemainderAdmissibleIsFalse = refl
+
 a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
   a3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
 a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse = refl
+
+a3ConsumerAttachmentTypeConstructedIsTrue :
+  a3ConsumerAttachmentTypeConstructed ≡ true
+a3ConsumerAttachmentTypeConstructedIsTrue = refl
 
 a3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue :
   a3NormalizedQuadraticKernelAggregateBridgeClosed ≡ true
