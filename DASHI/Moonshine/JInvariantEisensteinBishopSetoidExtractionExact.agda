@@ -218,15 +218,15 @@ mapExp :
   mapComplex E (BC.expC source z)
   ≡
   TargetReal.targetExpC (mapComplex E z)
-mapExp E (BC.complex x y)
+mapExp {source = source} E (BC.complex x y)
   rewrite preservesMul E
             (Exp.bishopExp x)
-            (Elementary.bishopCos (BC.dataSet _) y)
+            (Elementary.bishopCos (BC.dataSet source) y)
         | preservesExp E x
         | preservesCos E y
         | preservesMul E
             (Exp.bishopExp x)
-            (Elementary.bishopSin (BC.dataSet _) y)
+            (Elementary.bishopSin (BC.dataSet source) y)
         | preservesExp E x
         | preservesSin E y = refl
 
