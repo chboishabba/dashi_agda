@@ -253,3 +253,5 @@ import DASHI.Law.SensibLawPersonalWorldProfessionalHandoffRegression
 import DASHI.Law.SensibLawWave5ProfessionalHandoffCalibrationExact
 import DASHI.Law.SensibLawWave5ShareScopeReceiptExact
 import DASHI.Law.SensibLawWave5ShareScopeReceiptRegression
+import DASHI.Law.SensibLawUnifiedWorkbenchProjectionExact
+import DASHI.Law.SensibLawUnifiedWorkbenchProjectionRegression
