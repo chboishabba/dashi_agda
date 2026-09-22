@@ -12,20 +12,20 @@ seaCountryContextRemainsRelevant :
   ≡ true
 seaCountryContextRemainsRelevant = refl
 
-seaCountryContextStillCannotPayReg17_6 :
-  M.seaCountryContextPaysReg17_6
+seaCountryContextStillCannotPayRegSeventeenSix :
+  M.seaCountryContextPaysRegSeventeenSix
     M.canonicalMunkaraTipakalippaNonCollapseBoundary
   ≡ false
-seaCountryContextStillCannotPayReg17_6 = refl
+seaCountryContextStillCannotPayRegSeventeenSix = refl
 
-tipakalippaConsultationStillCannotPayReg17_6 :
-  M.tipakalippaConsultationPaysReg17_6
+tipakalippaConsultationStillCannotPayRegSeventeenSix :
+  M.tipakalippaConsultationPaysRegSeventeenSix
     M.canonicalMunkaraTipakalippaNonCollapseBoundary
   ≡ false
-tipakalippaConsultationStillCannotPayReg17_6 = refl
+tipakalippaConsultationStillCannotPayRegSeventeenSix = refl
 
 exactMunkaraCoordinateMayStillPay :
-  M.exactMunkaraReg17_6MayPay
+  M.exactMunkaraRegSeventeenSixMayPay
     M.canonicalMunkaraTipakalippaNonCollapseBoundary
   ≡ true
 exactMunkaraCoordinateMayStillPay = refl
@@ -37,6 +37,6 @@ wrongTypeRemainsMachineVisible :
 wrongTypeRemainsMachineVisible = refl
 
 adjacencyStillCannotPay :
-  M.SeaCountryAdjacencyPaysReg17_6 → ⊥
+  M.SeaCountryAdjacencyPaysRegSeventeenSix → ⊥
 adjacencyStillCannotPay =
-  M.seaCountryAdjacencyCannotPayReg17_6
+  M.seaCountryAdjacencyCannotPayRegSeventeenSix
