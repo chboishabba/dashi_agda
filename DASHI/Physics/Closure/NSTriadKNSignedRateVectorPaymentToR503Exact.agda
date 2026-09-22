@@ -24,6 +24,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as PhysicalField
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -275,6 +276,35 @@ module LiveA3
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
     Helical.HelicalModeScalars F
   helicalScalars T = Dyn.Base.S (Dyn.forgetDynamics T)
+
+  ----------------------------------------------------------------------
+  -- Exact aggregate bridge to the normalized quadratic slot kernel.
+  --
+  -- Important: this is the strongest same-object bridge actually supplied by
+  -- the existing R223/R225 machinery.  It holds after summing the COMPLETE
+  -- fixed-output fibre.  It does not identify one mixed (+,-) incidence with
+  -- one R205 raw-curl partner cell.
+  ----------------------------------------------------------------------
+
+  liveFixedOutputQuadraticKernelIsFourMixed :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    (cutoff : Nat) (time : Time) (output : Z3.FourierMode) →
+    let
+      system = physicalSystemAt T R cutoff time
+      S = helicalScalars T
+      velocity = Audit.velocity (PhysicalField.finiteSystem system)
+    in
+    R224.foldVector (R225.iQuadraticKernelCell S velocity)
+      (physicalOutputItems system output)
+    ≡ R225.fourCopies (physicalMixedFold system S output)
+  liveFixedOutputQuadraticKernelIsFourMixed
+      T R cutoff time output =
+    let
+      module At = Direct499.Flux.At T R cutoff time
+    in
+    R225.fixedOutputQuadraticKernelIsFourMixedHelicityConvolution
+      At.P cutoff output
 
   LiveFixedOutputSignedRateVectorPayment :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
@@ -777,8 +807,19 @@ a3PaymentPackagesInR432FixedOutputPaymentDatatype = true
 a3ToR432LiteralR406SameObjectAttachmentClosed : Bool
 a3ToR432LiteralR406SameObjectAttachmentClosed = false
 
+a3NormalizedQuadraticKernelAggregateBridgeClosed : Bool
+a3NormalizedQuadraticKernelAggregateBridgeClosed = true
+
+-- The stronger pointwise identification
+--   mixedPlusMinus(tau) = R205 compressedPartnerVector(tau)
+-- is not what R223/R225 prove.  R225 supplies only the complete-fibre
+-- normalized-kernel collapse above, while R205 is an unnormalized raw-curl
+-- partner carrier.  Keep this fail-closed.
 a3R205RawCurlPartnerSameObjectBridgeClosed : Bool
 a3R205RawCurlPartnerSameObjectBridgeClosed = false
+
+a3R205PointwiseIdentificationAdmissible : Bool
+a3R205PointwiseIdentificationAdmissible = false
 
 liveA3SnapshotBoundToR240Trajectory : Bool
 liveA3SnapshotBoundToR240Trajectory = true
@@ -839,9 +880,17 @@ a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
   a3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
 a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse = refl
 
+a3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue :
+  a3NormalizedQuadraticKernelAggregateBridgeClosed ≡ true
+a3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue = refl
+
 a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse :
   a3R205RawCurlPartnerSameObjectBridgeClosed ≡ false
 a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse = refl
+
+a3R205PointwiseIdentificationAdmissibleIsFalse :
+  a3R205PointwiseIdentificationAdmissible ≡ false
+a3R205PointwiseIdentificationAdmissibleIsFalse = refl
 
 liveA3SelectedOutputAggregationClosedIsTrue :
   liveA3SelectedOutputAggregationClosed ≡ true
