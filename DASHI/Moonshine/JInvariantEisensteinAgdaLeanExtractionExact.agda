@@ -90,6 +90,27 @@ targetE6Truncated T kernel (suc n) q =
       (504 * Q.sigma5 kernel (suc n))
       (targetPow T q (suc n)))
 
+targetSquare :
+  (T : TargetComplexAlgebra) →
+  Carrier T → Carrier T
+targetSquare T z = mulT T z z
+
+targetCube :
+  (T : TargetComplexAlgebra) →
+  Carrier T → Carrier T
+targetCube T z = mulT T (targetSquare T z) z
+
+targetDiscriminantNumeratorTruncated :
+  (T : TargetComplexAlgebra) →
+  Q.DivisorPowerKernel →
+  Nat →
+  Carrier T →
+  Carrier T
+targetDiscriminantNumeratorTruncated T kernel terms q =
+  subT T
+    (targetCube T (targetE4Truncated T kernel terms q))
+    (targetSquare T (targetE6Truncated T kernel terms q))
+
 ------------------------------------------------------------------------
 -- The load-bearing representation morphism.
 ------------------------------------------------------------------------
@@ -267,6 +288,34 @@ mapE6Truncated {C} {T} E kernel (suc n) tau
         | mapPow E (Q.qOf C tau) (suc n)
   = refl
 
+mapDiscriminantNumeratorTruncated :
+  ∀ {C T}
+    (E : ComplexExtraction C T)
+    (kernel : Q.DivisorPowerKernel)
+    (terms : Nat)
+    (tau : Complex.ComplexPair
+      (Real.real (Complex.realPackage C))) →
+  mapC E (Q.discriminantNumeratorTruncated C kernel terms tau)
+  ≡
+  targetDiscriminantNumeratorTruncated
+    T kernel terms (mapC E (Q.qOf C tau))
+mapDiscriminantNumeratorTruncated E kernel terms tau
+  rewrite preservesSub E
+            (Q.cubeC (Q.e4Truncated _ kernel terms tau))
+            (Q.squareC (Q.e6Truncated _ kernel terms tau))
+        | preservesMul E
+            (Q.squareC (Q.e4Truncated _ kernel terms tau))
+            (Q.e4Truncated _ kernel terms tau)
+        | preservesMul E
+            (Q.e4Truncated _ kernel terms tau)
+            (Q.e4Truncated _ kernel terms tau)
+        | preservesMul E
+            (Q.e6Truncated _ kernel terms tau)
+            (Q.e6Truncated _ kernel terms tau)
+        | mapE4Truncated E kernel terms tau
+        | mapE6Truncated E kernel terms tau
+  = refl
+
 ------------------------------------------------------------------------
 -- Stronger corollaries: replace extracted q by the target's canonical q.
 ------------------------------------------------------------------------
@@ -309,6 +358,7 @@ record AgdaLeanEisensteinExtractionBoundary : Set where
     actualQOfTransportCompilerOwned : Bool
     actualE4TruncatedTransportCompilerOwned : Bool
     actualE6TruncatedTransportCompilerOwned : Bool
+    actualDiscriminantNumeratorTransportCompilerOwned : Bool
     transportDerivedFromPrimitiveAlgebraExpLaws : Bool
     canonicalDivisorKernelSharedDefinitionRequired : Bool
 
@@ -322,5 +372,5 @@ canonicalAgdaLeanEisensteinExtractionBoundary :
   AgdaLeanEisensteinExtractionBoundary
 canonicalAgdaLeanEisensteinExtractionBoundary =
   agda-lean-eisenstein-extraction-boundary
-    true true true true true
+    true true true true true true
     false false false false false
