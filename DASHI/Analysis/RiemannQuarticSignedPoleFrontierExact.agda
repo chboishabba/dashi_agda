@@ -1,6 +1,7 @@
 module DASHI.Analysis.RiemannQuarticSignedPoleFrontierExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Primitive using (Level)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
@@ -158,7 +159,7 @@ canonicalQuarticSignedPoleFrontierBoundary =
 -- the two analytic controls inhabit the compiler selected for the concrete
 -- scalar carrier, no further RH-high mathematics is needed.
 quarticTerminalCompilerShape :
-  {ell : Agda.Primitive.Level} ->
+  {ell : Level} ->
   (C : Compiler.QuarticSignedPoleCompiler {ell}) ->
   Compiler.BandCoverage C ->
   Compiler.SignedNMuDiscrepancyControl C ->
