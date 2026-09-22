@@ -25,13 +25,20 @@ import DASHI.Cognition.PNF.SensibLawNegligenceDutyWrongTypeSpecializationExact a
 ------------------------------------------------------------------------
 
 data RouteState : Set where
-  missingAtoms reachableCandidate contested defeated reopenedCandidate :
-  RouteState
+  missingAtoms : RouteState
+  reachableCandidate : RouteState
+  contested : RouteState
+  defeated : RouteState
+  reopenedCandidate : RouteState
 
 data AdversarialRole : Set where
-  supportSearch defeaterSearch counterDefeaterSearch comparatorSearch
-  contradictionSearch authorityTreatmentSearch wrongTypeDiscriminatorSearch :
-  AdversarialRole
+  supportSearch : AdversarialRole
+  defeaterSearch : AdversarialRole
+  counterDefeaterSearch : AdversarialRole
+  comparatorSearch : AdversarialRole
+  contradictionSearch : AdversarialRole
+  authorityTreatmentSearch : AdversarialRole
+  wrongTypeDiscriminatorSearch : AdversarialRole
 
 nextRole : RouteState → AdversarialRole
 nextRole missingAtoms = supportSearch
@@ -87,11 +94,11 @@ pabaiRepairCandidateExists =
 ------------------------------------------------------------------------
 
 maboAnalogyDoesNotTransferDoctrine :
-  MaboPabai.maboAnalogyAutomaticallyTransfersDoctrine
+  MaboPabai.MaboPabaiSearchBoundary.maboAnalogyAutomaticallyTransfersDoctrine
     MaboPabai.canonicalMaboPabaiSearchBoundary
   ≡ false
 maboAnalogyDoesNotTransferDoctrine =
-  MaboPabai.maboAnalogyAutomaticallyTransfersDoctrineIsFalse
+  MaboPabai.MaboPabaiSearchBoundary.maboAnalogyAutomaticallyTransfersDoctrineIsFalse
     MaboPabai.canonicalMaboPabaiSearchBoundary
 
 dialecticalBoundary :

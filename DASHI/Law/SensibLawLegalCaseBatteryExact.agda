@@ -17,17 +17,17 @@ import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as MaboPabai
 ------------------------------------------------------------------------
 
 data CaseBattery : Set where
-  yindjibarndiYunupingu
-  munkaraTipakalippa
-  pabai
-  murujuga
+  yindjibarndiYunupingu : CaseBattery
+  munkaraTipakalippa : CaseBattery
+  pabai : CaseBattery
+  murujuga : CaseBattery
   colonisation : CaseBattery
 
 data JoinDiscipline : Set where
-  substantiveReuseIfReviewed
-  partialOverlapNoCollapse
-  structuralAnalogyOnly
-  openDiscoveryNoExpectedJoin
+  substantiveReuseIfReviewed : JoinDiscipline
+  partialOverlapNoCollapse : JoinDiscipline
+  structuralAnalogyOnly : JoinDiscipline
+  openDiscoveryNoExpectedJoin : JoinDiscipline
   broadMultiSourceSynthesis : JoinDiscipline
 
 joinDiscipline : CaseBattery → JoinDiscipline
@@ -91,11 +91,11 @@ sharedConceptDoesNotCollapseWrongType ()
 ------------------------------------------------------------------------
 
 pabaiMaboAnalogyStillNonPromoting :
-  MaboPabai.maboAnalogyAutomaticallyTransfersDoctrine
+  MaboPabai.MaboPabaiSearchBoundary.maboAnalogyAutomaticallyTransfersDoctrine
     MaboPabai.canonicalMaboPabaiSearchBoundary
   ≡ false
 pabaiMaboAnalogyStillNonPromoting =
-  MaboPabai.maboAnalogyAutomaticallyTransfersDoctrineIsFalse
+  MaboPabai.MaboPabaiSearchBoundary.maboAnalogyAutomaticallyTransfersDoctrineIsFalse
     MaboPabai.canonicalMaboPabaiSearchBoundary
 
 pabaiFacesDefeaterSearch :

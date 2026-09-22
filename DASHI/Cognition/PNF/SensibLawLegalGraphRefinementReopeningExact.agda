@@ -31,7 +31,7 @@ import DASHI.Core.EpistemicCompressionDeliberativeReopeningBidiExact as CoreReop
 
 record GraphRefinement
   (oldGraph newGraph : Algebra.LegalGraph)
-  : Set where
+  : Set₁ where
   constructor graph-refinement
   field
     oldRulePreserved :
@@ -72,7 +72,7 @@ data RefinementCarrier : Set where
 record LegalRefinementReceipt
   (oldGraph newGraph : Algebra.LegalGraph)
   (oldFacts newFacts : Algebra.FactSet)
-  : Set where
+  : Set₁ where
   constructor legal-refinement-receipt
   field
     graphRefinement : GraphRefinement oldGraph newGraph
@@ -104,7 +104,7 @@ record LegalRerunResult
   (oldGraph newGraph : Algebra.LegalGraph)
   (oldFacts newFacts : Algebra.FactSet)
   (goal : Algebra.LegalProposition)
-  : Set where
+  : Set₁ where
   constructor legal-rerun-result
   field
     disposition : RerunDisposition
