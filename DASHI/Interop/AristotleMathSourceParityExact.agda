@@ -114,8 +114,8 @@ deltaModularParity = aristotleMathModuleParity
   323
   31
   partial
-  "DASHI.Moonshine.EisensteinDiscriminantWeight12Exact;DASHI.Moonshine.ModularCurveJFrickeInterfaceExact"
-  "weight-12 transformation of unnormalised E4^3-E6^2 derived from existing Eisenstein law; true eta^24 Delta, nonvanishing/holomorphy, E2/log-derivative proof, S/T normalization, conjugation/unit-circle reflection and arc phase theorem remain"
+  "DASHI.Moonshine.EisensteinDiscriminantWeight12Exact;DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact;DASHI.Moonshine.ModularCurveJFrickeInterfaceExact"
+  "weight-12 transformation is derived; reciprocal-conjugate reflection is now derived from that theorem plus an explicit conjugation/S interface; fixed-locus phase equation and modulo-half-turn sixfold consequence are theorem surfaces. Concrete complex S semantics, infinite Delta conjugation/eta^24 nonvanishing-holomorphy, E2/log-derivative source route, and concrete argument/arc instantiation remain"
 
 deltaWordGraphsParity : AristotleMathModuleParity
 deltaWordGraphsParity = aristotleMathModuleParity
