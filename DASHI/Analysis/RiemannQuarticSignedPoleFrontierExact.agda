@@ -18,12 +18,16 @@ import DASHI.Analysis.RiemannQuarticSignedPoleCompilerExact as Compiler
 --   -> high contradiction
 --   -> low/high RH compiler.
 --
--- G2 same-object assembly and the middle/terminal arrows are compiler-owned.
+-- G1 has now been recut existentially in the witness.  For every t>=200 the
+-- Lean construction selects one sufficiently narrow witness with
 --
--- Historical routes are RETAINED.  They are not deleted and not declared
--- mathematically useless.  They are classified below as superseded donors:
--- useful for archaeology, diagnostics, component estimates and alternative
--- proof search, but no longer primitive members of the preferred min-cut.
+--   S(W_t) >= 7*pi^4/1600.
+--
+-- Hence target strength is no longer an analytic leaf.  The remaining G1
+-- norm debt is a uniform L1 bound for the exact signed combined profile;
+-- support in |u|<pi+1 and the K-from-support-and-mass compiler are owned.
+--
+-- Historical routes remain retained as superseded donors.
 ------------------------------------------------------------------------
 
 data QuarticFrontierCoordinate : Set where
@@ -34,7 +38,9 @@ data QuarticFrontierCoordinate : Set where
   exactSignedPoleCancellation : QuarticFrontierCoordinate
   explicitQuantitativeTargetRadius : QuarticFrontierCoordinate
 
-  targetStrengthUniformLower : QuarticFrontierCoordinate
+  constructedTargetStrengthFloor : QuarticFrontierCoordinate
+  combinedProfileSupportPiAddOne : QuarticFrontierCoordinate
+  combinedProfileUniformL1 : QuarticFrontierCoordinate
   fourthLipschitzUniformUpper : QuarticFrontierCoordinate
   uniformBandCoverage : QuarticFrontierCoordinate
 
@@ -47,6 +53,7 @@ data QuarticFrontierCoordinate : Set where
   strictExternalResidual : QuarticFrontierCoordinate
   finalHighContradiction : QuarticFrontierCoordinate
 
+  oldUniversalTargetStrengthForEveryWitness : QuarticFrontierCoordinate
   oldSeparateGammaEstimate : QuarticFrontierCoordinate
   oldSeparatePolePayment : QuarticFrontierCoordinate
   oldNearFarPoleQuotientRoute : QuarticFrontierCoordinate
@@ -71,8 +78,10 @@ quarticFrontierClass exactPrimeInvisibility = theoremOwned
 quarticFrontierClass exactSignedPoleCancellation = theoremOwned
 quarticFrontierClass explicitQuantitativeTargetRadius = theoremOwned
 
-quarticFrontierClass targetStrengthUniformLower = analyticWall
-quarticFrontierClass fourthLipschitzUniformUpper = analyticWall
+quarticFrontierClass constructedTargetStrengthFloor = theoremOwned
+quarticFrontierClass combinedProfileSupportPiAddOne = theoremOwned
+quarticFrontierClass combinedProfileUniformL1 = analyticWall
+quarticFrontierClass fourthLipschitzUniformUpper = compilerOutput
 quarticFrontierClass uniformBandCoverage = compilerOutput
 
 quarticFrontierClass signedCombinedNMuAssembly = assemblyOwned
@@ -84,6 +93,7 @@ quarticFrontierClass optionalSplitBudgetClosure = optionalProducer
 quarticFrontierClass strictExternalResidual = compilerOutput
 quarticFrontierClass finalHighContradiction = compilerOutput
 
+quarticFrontierClass oldUniversalTargetStrengthForEveryWitness = supersededDonor
 quarticFrontierClass oldSeparateGammaEstimate = supersededDonor
 quarticFrontierClass oldSeparatePolePayment = supersededDonor
 quarticFrontierClass oldNearFarPoleQuotientRoute = supersededDonor
@@ -95,98 +105,80 @@ record QuarticSignedPoleFrontierBoundary : Set where
   constructor quartic-signed-pole-frontier-boundary
   field
     smoothFourWindowFamilyOwned : Bool
+    exactJ2CancellationOwned : Bool
+    negativeQuarticMomentOwned : Bool
+    shortSupportKillsPrimeChannel : Bool
+    signedPoleCancellationOwned : Bool
+    explicitFourthOrderRadiusCompilerOwned : Bool
+
+    existentialWitnessQuantifierIsAuthoritative : Bool
+    constructedStrengthFloorSevenPi4Over1600Paid : Bool
+    combinedProfileSupportPiAddOnePaid : Bool
+    combinedProfileUniformL1Paid : Bool
+    fourthLipschitzFromSupportMassCompilerOwned : Bool
+    uniformEightOverTBandIsCompilerOutputFromBounds : Bool
+
+    oldUniversalAllWitnessStrengthLowerRequired : Bool
+    oldExistentialEpsilonRequiredByPreferredConsumer : Bool
+
+    signedCombinedNMuSameObjectAssemblyOwned : Bool
+    jointSignedCompletedResidualPaid : Bool
+    splitNMuAndHorizontalRequiredByClayConsumer : Bool
+    splitNMuAndHorizontalRetainedAsOptionalProducer : Bool
+
+    strictExternalCompilerOwned : Bool
+    finalHighContradictionCompilerOwned : Bool
+    supersededRoutesRetainedInRepository : Bool
+
+    rhDerived : Bool
+
     smoothFourWindowFamilyOwnedIsTrue :
       smoothFourWindowFamilyOwned ≡ true
-
-    exactJ2CancellationOwned : Bool
     exactJ2CancellationOwnedIsTrue :
       exactJ2CancellationOwned ≡ true
-
-    negativeQuarticMomentOwned : Bool
     negativeQuarticMomentOwnedIsTrue :
       negativeQuarticMomentOwned ≡ true
-
-    shortSupportKillsPrimeChannel : Bool
     shortSupportKillsPrimeChannelIsTrue :
       shortSupportKillsPrimeChannel ≡ true
-
-    signedPoleCancellationOwned : Bool
     signedPoleCancellationOwnedIsTrue :
       signedPoleCancellationOwned ≡ true
-
-    explicitFourthOrderRadiusCompilerOwned : Bool
     explicitFourthOrderRadiusCompilerOwnedIsTrue :
       explicitFourthOrderRadiusCompilerOwned ≡ true
 
-    oldExistentialEpsilonRequiredByPreferredConsumer : Bool
-    oldExistentialEpsilonRequiredByPreferredConsumerIsFalse :
-      oldExistentialEpsilonRequiredByPreferredConsumer ≡ false
-
-    targetStrengthUniformLowerPaid : Bool
-    targetStrengthUniformLowerPaidIsFalse :
-      targetStrengthUniformLowerPaid ≡ false
-
-    fourthLipschitzUniformUpperPaid : Bool
-    fourthLipschitzUniformUpperPaidIsFalse :
-      fourthLipschitzUniformUpperPaid ≡ false
-
-    uniformEightOverTBandIsCompilerOutputFromBounds : Bool
+    existentialWitnessQuantifierIsAuthoritativeIsTrue :
+      existentialWitnessQuantifierIsAuthoritative ≡ true
+    constructedStrengthFloorSevenPi4Over1600PaidIsTrue :
+      constructedStrengthFloorSevenPi4Over1600Paid ≡ true
+    combinedProfileSupportPiAddOnePaidIsTrue :
+      combinedProfileSupportPiAddOnePaid ≡ true
+    combinedProfileUniformL1PaidIsFalse :
+      combinedProfileUniformL1Paid ≡ false
+    fourthLipschitzFromSupportMassCompilerOwnedIsTrue :
+      fourthLipschitzFromSupportMassCompilerOwned ≡ true
     uniformEightOverTBandIsCompilerOutputFromBoundsIsTrue :
       uniformEightOverTBandIsCompilerOutputFromBounds ≡ true
 
-    signedCombinedNMuSameObjectAssemblyOwned : Bool
+    oldUniversalAllWitnessStrengthLowerRequiredIsFalse :
+      oldUniversalAllWitnessStrengthLowerRequired ≡ false
+    oldExistentialEpsilonRequiredByPreferredConsumerIsFalse :
+      oldExistentialEpsilonRequiredByPreferredConsumer ≡ false
+
     signedCombinedNMuSameObjectAssemblyOwnedIsTrue :
       signedCombinedNMuSameObjectAssemblyOwned ≡ true
-
-    jointSignedCompletedResidualPaid : Bool
     jointSignedCompletedResidualPaidIsFalse :
       jointSignedCompletedResidualPaid ≡ false
-
-    splitNMuAndHorizontalRequiredByClayConsumer : Bool
     splitNMuAndHorizontalRequiredByClayConsumerIsFalse :
       splitNMuAndHorizontalRequiredByClayConsumer ≡ false
-
-    splitNMuAndHorizontalRetainedAsOptionalProducer : Bool
     splitNMuAndHorizontalRetainedAsOptionalProducerIsTrue :
       splitNMuAndHorizontalRetainedAsOptionalProducer ≡ true
 
-    strictExternalCompilerOwned : Bool
     strictExternalCompilerOwnedIsTrue :
       strictExternalCompilerOwned ≡ true
-
-    finalHighContradictionCompilerOwned : Bool
     finalHighContradictionCompilerOwnedIsTrue :
       finalHighContradictionCompilerOwned ≡ true
-
-    supersededRoutesRetainedInRepository : Bool
     supersededRoutesRetainedInRepositoryIsTrue :
       supersededRoutesRetainedInRepository ≡ true
 
-    oldSeparateGammaEstimateOnPreferredMinCut : Bool
-    oldSeparateGammaEstimateOnPreferredMinCutIsFalse :
-      oldSeparateGammaEstimateOnPreferredMinCut ≡ false
-
-    oldSeparatePolePaymentOnPreferredMinCut : Bool
-    oldSeparatePolePaymentOnPreferredMinCutIsFalse :
-      oldSeparatePolePaymentOnPreferredMinCut ≡ false
-
-    oldNearFarPoleQuotientOnPreferredMinCut : Bool
-    oldNearFarPoleQuotientOnPreferredMinCutIsFalse :
-      oldNearFarPoleQuotientOnPreferredMinCut ≡ false
-
-    oldActualGridZeroModeTransportOnPreferredMinCut : Bool
-    oldActualGridZeroModeTransportOnPreferredMinCutIsFalse :
-      oldActualGridZeroModeTransportOnPreferredMinCut ≡ false
-
-    oldIndependentSmoothMainLogOnPreferredMinCut : Bool
-    oldIndependentSmoothMainLogOnPreferredMinCutIsFalse :
-      oldIndependentSmoothMainLogOnPreferredMinCut ≡ false
-
-    oldSchurNuisanceSelectionOnPreferredMinCut : Bool
-    oldSchurNuisanceSelectionOnPreferredMinCutIsFalse :
-      oldSchurNuisanceSelectionOnPreferredMinCut ≡ false
-
-    rhDerived : Bool
     rhDerivedIsFalse : rhDerived ≡ false
 
     quantitativeWall : String
@@ -198,33 +190,38 @@ canonicalQuarticSignedPoleFrontierBoundary :
   QuarticSignedPoleFrontierBoundary
 canonicalQuarticSignedPoleFrontierBoundary =
   quartic-signed-pole-frontier-boundary
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
-    false refl
-    true refl
-    true refl
-    false refl
-    false refl
-    true refl
-    true refl
-    true refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    false refl
-    "Preferred G1 proof search: prove a uniform lower bound for signed target strength S(W_t), prove a uniform upper bound for the compact-cosh fourth-derivative Lipschitz constant K(W_t), then use the scalar threshold compiler. For t > 8, 4*(K+1)/t < S is sufficient for 8/t < min(1,2*S/(K+1))."
-    "Primitive G3: prove directly that one half of the signed literal N-mu discrepancy plus the signed horizontal remainder is strictly below twice the reflected combined target contribution. Separate N-mu and horizontal bounds are retained only as an optional producer decomposition."
-    "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. Separate Gamma, separate pole payment, near/far pole-quotient, actual-grid zero-mode transport, independent smooth-main log and Schur nuisance routes remain available as historical/donor machinery and alternative proof-search surfaces."
-    "Authoritative high cut: G1 quantitative band + G3 joint signed completed residual -> external strictness -> high contradiction. G2 same-object assembly and all middle/terminal arrows are compiler output. RH itself remains unproved until G1/G3 plus the low/carrier terminal requirements are discharged."
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    false
+    true
+    true
+    false
+    false
+    true
+    false
+    false
+    true
+    true
+    true
+    true
+    false
+    refl refl refl refl refl refl
+    refl refl refl refl refl refl
+    refl refl
+    refl refl refl refl
+    refl refl refl
+    refl
+    "G1 strength is paid existentially: for every t>=200 choose a sufficiently narrow smooth signed-pole witness with S(W_t)>=7*pi^4/1600. Support of the exact combined projective profile is also paid in |u|<pi+1. The remaining G1 source theorem is a uniform L1 bound on that selected combined profile; K<=M*cosh(pi+1)*(pi+1)^5 and the final 8/t threshold are compiler output."
+    "Primitive G3 remains the joint theorem: one half of the signed literal N-mu discrepancy plus the signed horizontal remainder is strictly below twice the reflected combined target contribution. Separate N-mu and horizontal bounds are optional proof-search producers only."
+    "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. In particular the old universal lower bound over every arbitrary QuarticFourSignedPolePair is stronger than needed and is retained only as a donor interface."
+    "Authoritative high cut: elementary G1 norm bookkeeping plus G3 joint signed completed residual -> external strictness -> high contradiction. G2 same-object assembly and all middle/terminal arrows are compiler output. RH remains unproved because G3 is open and the final G1 uniform combined-profile L1 estimate has not yet been kernel-paid."
 
 quarticTerminalCompilerShape :
   {ell : Level} ->
