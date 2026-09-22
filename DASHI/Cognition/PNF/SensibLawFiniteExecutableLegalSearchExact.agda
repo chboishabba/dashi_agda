@@ -76,9 +76,9 @@ memberProposition p (q ∷ qs) = sameProposition p q ||ᵇ memberProposition p q
 removeString : String → List String → List String
 removeString x [] = []
 removeString x (y ∷ ys) =
-  ifᵇ primStringEquality x y
+  ifᵇ (primStringEquality x y)
   then removeString x ys
-  else y ∷ removeString x ys
+  else (y ∷ removeString x ys)
 
 ------------------------------------------------------------------------
 -- Bounded executable derivability.
@@ -155,9 +155,9 @@ allActiveIdsKnownIn (key ∷ keys) rules =
 inactiveRuleIds : List Algebra.LegalRule → List String → List String
 inactiveRuleIds [] active = []
 inactiveRuleIds (r ∷ rs) active =
-  ifᵇ memberString (ruleKey r) active
+  ifᵇ (memberString (ruleKey r) active)
   then inactiveRuleIds rs active
-  else ruleKey r ∷ inactiveRuleIds rs active
+  else (ruleKey r ∷ inactiveRuleIds rs active)
 
 record ExecutableIssueProjection
     (graph : Algebra.LegalGraph)
@@ -186,7 +186,7 @@ record IssueProjectionPromotion
     (graph : Algebra.LegalGraph)
     (factSet : Algebra.FactSet)
     (issue : Algebra.LegalIssue)
-    (executable : ExecutableIssueProjection graph issue) : Set where
+    (executable : ExecutableIssueProjection graph issue) : Set₁ where
   constructor issue-projection-promotion
   field
     executableIssueHit :
@@ -340,7 +340,7 @@ record CutPromotion
 
 record DistinguishingPromotion
     (precedent : Precedent.PrecedentProposition)
-    (current : Precedent.CurrentCase) : Set where
+    (current : Precedent.CurrentCase) : Set₁ where
   constructor distinguishing-promotion
   field
     executableFeatureMismatch :
