@@ -219,3 +219,6 @@ import DASHI.Physics.YangMills.BalabanCMP98ClayBoundarySupersessionRound190Exact
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumSources2026Exact
 import DASHI.Physics.YangMills.YMAristotleOperatorReturn2026Exact
 import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact
+
+-- Source-correct Wilson connected-shell producer.
+import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact
