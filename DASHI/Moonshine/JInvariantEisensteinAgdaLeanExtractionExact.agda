@@ -17,6 +17,7 @@ module DASHI.Moonshine.JInvariantEisensteinAgdaLeanExtractionExact where
 -- Complex has already been constructed.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 
@@ -316,8 +317,6 @@ record AgdaLeanEisensteinExtractionBoundary : Set where
     agdaComplexExpIdentifiedWithLeanComplexExp : Bool
     infiniteLimitTransportPaid : Bool
     deltaNormalizationTransportPaid : Bool
-
-open import Agda.Builtin.Bool using (Bool; true; false)
 
 canonicalAgdaLeanEisensteinExtractionBoundary :
   AgdaLeanEisensteinExtractionBoundary
