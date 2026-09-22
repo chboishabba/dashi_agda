@@ -30,6 +30,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanCMP116TwoSourceConnectedClusteringRound274Exact as R274
+import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact as Unified
 import DASHI.Physics.YangMills.BalabanWilsonExpectationSourceBoundaryRound490Exact as R490
 
 record WilsonTwoInsertionConnectedShell
@@ -95,7 +96,7 @@ wilsonCorrelationDecayTrajectory :
   ∀ {Scale Volume Root State Observable} →
   WilsonTwoInsertionConnectedShell
     Scale Volume Root State Observable →
-  DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact.QuantitativeCorrelationDecayTrajectory
+  Unified.QuantitativeCorrelationDecayTrajectory
 wilsonCorrelationDecayTrajectory dataSet =
   R274.asCorrelationDecayTrajectory
     (asR274TwoSourceConnectedRootedShellData dataSet)
