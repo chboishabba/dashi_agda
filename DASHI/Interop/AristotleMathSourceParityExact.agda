@@ -74,8 +74,8 @@ archimedesNinetySixParity = aristotleMathModuleParity
   146
   9
   partial
-  "DASHI.Foundations.BishopMachinPiArchimedesWindowExact"
-  "headline numerical enclosure 223/71 < bishopMachinPi < 22/7 is proved on the actual convergent Bishop Machin real; source 96-gon interval propagation and geometric/trigonometric identification of that real with pi remain"
+  "DASHI.Foundations.BishopMachinPiArchimedesWindowExact;DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact"
+  "headline numerical enclosure 223/71 < bishopMachinPi < 22/7 is proved on the actual convergent Bishop Machin real; dashi_lean4 now source-writes the direct semantic compiler eval(bishopMachinPi)=Real.pi from the two concrete Bishop arctan convergence witnesses plus Mathlib's formal Machin identity. No Lean kernel receipt or serialized Agda->Lean same-object witness is observed yet. Source 96-gon interval propagation remains separate."
 
 archimedesSpinParity : AristotleMathModuleParity
 archimedesSpinParity = aristotleMathModuleParity
