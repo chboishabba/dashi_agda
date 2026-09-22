@@ -181,25 +181,23 @@ transportedTargetLimit {C} {S} {L} {transport} {targetTerm} bridge series =
   partialSumsMatch zero =
     transportedTermMatchesTarget series zero
   partialSumsMatch (suc n) =
-    cong
-      (λ old →
-        LegacyReal._+_
-          (LegacyReal.real (Complex.realPackage C))
-          old
-          (targetTerm (suc n)))
-      (partialSumsMatch n)
-    |> λ prefix →
-      trans
-        (cong
-          (λ newest →
-            LegacyReal._+_
+    trans
+      (cong
+        (λ newest →
+          LegacyReal._+_
+            (LegacyReal.real (Complex.realPackage C))
+            (LegacySeries.partialSumFunction
               (LegacyReal.real (Complex.realPackage C))
-              (LegacySeries.partialSumFunction
-                (LegacyReal.real (Complex.realPackage C))
-                transportedTerm n)
-              newest)
-          (transportedTermMatchesTarget series (suc n)))
-        prefix
+              transportedTerm n)
+            newest)
+        (transportedTermMatchesTarget series (suc n)))
+      (cong
+        (λ old →
+          LegacyReal._+_
+            (LegacyReal.real (Complex.realPackage C))
+            old
+            (targetTerm (suc n)))
+        (partialSumsMatch n))
 
 ------------------------------------------------------------------------
 -- 4. Four coordinate transports for E4/E6.
