@@ -8,3 +8,4 @@ import DASHI.Moonshine.JSameWeightQuotientInvariantExact
 import DASHI.Moonshine.JMDArchimedesDelta369FixedLocusBridgeExact
 import DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact
 import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact
+import DASHI.Moonshine.DeltaConstructedComplexReflectionCutsetExact
