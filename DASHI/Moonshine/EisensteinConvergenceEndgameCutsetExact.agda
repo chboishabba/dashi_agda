@@ -37,6 +37,7 @@ record EisensteinConvergenceEndgameCutset : Set where
   constructor eisenstein-convergence-endgame-cutset
   field
     executableSigma3Sigma5AndGrowthBoundsOwned : Bool
+    qExponentCartesianRingAlgebraOwned : Bool
     upperHalfPlaneToQDiskReductionCompilerOwned : Bool
     complexTermPolynomialGeometricMajorantsOwned : Bool
     bishopGeometricSeriesConvergenceOwned : Bool
@@ -63,7 +64,7 @@ canonicalEisensteinConvergenceEndgameCutset :
   EisensteinConvergenceEndgameCutset
 canonicalEisensteinConvergenceEndgameCutset =
   eisenstein-convergence-endgame-cutset
-    true true true true true true true true true
+    true true true true true true true true true true
     false false false false false false
     false
-    "instantiate the selected ConcreteComplex q/norm laws; construct the Step-V quartic/sextic domination witness; inhabit the explicit BishopLegacySeriesTransport plus Nat-function limit bridge and four pointwise coordinate-term identifications; these compile literal E4_N/E6_N convergence, after which only the same-object weld to the all-SL2(Z) Eisenstein model remains"
+    "instantiate the remaining selected ConcreteComplex q-disk analytic laws (twoPi/order positivity and modulus-of-exp; the Cartesian exponent identity is already ring-derived); construct the Step-V quartic/sextic domination witness; inhabit the explicit BishopLegacySeriesTransport plus Nat-function limit bridge and four pointwise coordinate-term identifications; these compile literal E4_N/E6_N convergence, after which only the same-object weld to the all-SL2(Z) Eisenstein model remains"
