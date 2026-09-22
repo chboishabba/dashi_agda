@@ -534,8 +534,183 @@ record TriadicCuspDihedralLaw (depth : Nat) : Set where
 open TriadicCuspDihedralLaw public
 
 ------------------------------------------------------------------------
--- 7. What it means for the actual j-phase quantisers to be modular-level
---    observers rather than merely equal-sector partitions.
+-- 6c. Level-lifted j points: the cyclic coordinate is a fibre over j.
+--
+-- Since j(tau+1)=j(tau), the modular T action does NOT rotate jPhase.  The
+-- level coordinate is information forgotten by j.  We therefore model the
+-- honest modular object as a point of the base j-domain together with a cusp
+-- fibre coordinate.
+------------------------------------------------------------------------
+
+record CuspLiftedPoint
+    (R : Render.JPhaseRenderingAlgebra)
+    (Fibre : Set) : Set where
+  constructor cusp-lifted-point
+  field
+    basePoint :
+      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+        (Render.klein R)
+    levelCoordinate : Fibre
+
+open CuspLiftedPoint public
+
+forgetLevel :
+  ∀ {R Fibre} →
+  CuspLiftedPoint R Fibre →
+  DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+    (Render.klein R)
+forgetLevel = basePoint
+
+liftedJValue :
+  ∀ {R Fibre} →
+  CuspLiftedPoint R Fibre →
+  DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Value
+    (Render.klein R)
+liftedJValue {R} p = Render.jValue R (basePoint p)
+
+Level3Lift :
+  (R : Render.JPhaseRenderingAlgebra) → Set
+Level3Lift R = CuspLiftedPoint R level3CuspFibre
+
+Level9Lift :
+  (R : Render.JPhaseRenderingAlgebra) → Set
+Level9Lift R = CuspLiftedPoint R level9CuspFibre
+
+Level27Lift :
+  (R : Render.JPhaseRenderingAlgebra) → Set
+Level27Lift R = CuspLiftedPoint R level27CuspFibre
+
+translateLevel3 :
+  ∀ {R} → Level3Lift R → Level3Lift R
+translateLevel3 p =
+  cusp-lifted-point
+    (basePoint p)
+    (translateTriadic Q.one (levelCoordinate p))
+
+translateLevel9 :
+  ∀ {R} → Level9Lift R → Level9Lift R
+translateLevel9 p =
+  cusp-lifted-point
+    (basePoint p)
+    (translateTriadic Q.two (levelCoordinate p))
+
+translateLevel27 :
+  ∀ {R} → Level27Lift R → Level27Lift R
+translateLevel27 p =
+  cusp-lifted-point
+    (basePoint p)
+    (translateTriadic Q.three (levelCoordinate p))
+
+translationForgetsAt3 :
+  ∀ {R} (p : Level3Lift R) →
+  forgetLevel (translateLevel3 p) ≡ forgetLevel p
+translationForgetsAt3 p = refl
+
+translationForgetsAt9 :
+  ∀ {R} (p : Level9Lift R) →
+  forgetLevel (translateLevel9 p) ≡ forgetLevel p
+translationForgetsAt9 p = refl
+
+translationForgetsAt27 :
+  ∀ {R} (p : Level27Lift R) →
+  forgetLevel (translateLevel27 p) ≡ forgetLevel p
+translationForgetsAt27 p = refl
+
+liftedJInvariantAt3 :
+  ∀ {R} (p : Level3Lift R) →
+  liftedJValue (translateLevel3 p) ≡ liftedJValue p
+liftedJInvariantAt3 p = refl
+
+liftedJInvariantAt9 :
+  ∀ {R} (p : Level9Lift R) →
+  liftedJValue (translateLevel9 p) ≡ liftedJValue p
+liftedJInvariantAt9 p = refl
+
+liftedJInvariantAt27 :
+  ∀ {R} (p : Level27Lift R) →
+  liftedJValue (translateLevel27 p) ≡ liftedJValue p
+liftedJInvariantAt27 p = refl
+
+level27LiftTo9 :
+  ∀ {R} → Level27Lift R → Level9Lift R
+level27LiftTo9 p =
+  cusp-lifted-point
+    (basePoint p)
+    (level27To9CoveringProjection (levelCoordinate p))
+
+level9LiftTo3 :
+  ∀ {R} → Level9Lift R → Level3Lift R
+level9LiftTo3 p =
+  cusp-lifted-point
+    (basePoint p)
+    (level9To3CoveringProjection (levelCoordinate p))
+
+level27LiftTo9TranslationCommutes :
+  ∀ {R} (p : Level27Lift R) →
+  level27LiftTo9 (translateLevel27 p)
+  ≡
+  translateLevel9 (level27LiftTo9 p)
+level27LiftTo9TranslationCommutes p
+  rewrite level27To9TranslationEquivariant (levelCoordinate p) = refl
+
+level9LiftTo3TranslationCommutes :
+  ∀ {R} (p : Level9Lift R) →
+  level9LiftTo3 (translateLevel9 p)
+  ≡
+  translateLevel3 (level9LiftTo3 p)
+level9LiftTo3TranslationCommutes p
+  rewrite level9To3TranslationEquivariant (levelCoordinate p) = refl
+
+------------------------------------------------------------------------
+-- Identification with the existing phase quantiser is deliberately a
+-- separate witness.  j alone cannot recover level structure.
+------------------------------------------------------------------------
+
+record RendererLevelFibreIdentification
+    (R : Render.JPhaseRenderingAlgebra) : Set₁ where
+  field
+    level3At :
+      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+        (Render.klein R) →
+      level3CuspFibre
+    level9At :
+      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+        (Render.klein R) →
+      level9CuspFibre
+    level27At :
+      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+        (Render.klein R) →
+      level27CuspFibre
+
+    phase3AgreesWithLevel :
+      (z :
+        DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+          (Render.klein R)) →
+      observer3ToLevel3 (Render.phase3 R (Render.jPhase R z))
+      ≡ level3At z
+
+    phase9AgreesWithLevel :
+      (z :
+        DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+          (Render.klein R)) →
+      observer9ToLevel9 (Render.phase9 R (Render.jPhase R z))
+      ≡ level9At z
+
+    phase27AgreesWithLevel :
+      (z :
+        DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+          (Render.klein R)) →
+      observer27ToLevel27 (Render.phase27 R (Render.jPhase R z))
+      ≡ level27At z
+
+open RendererLevelFibreIdentification public
+
+------------------------------------------------------------------------
+-- 7. Optional phase-sector/fibre intertwiner.
+--
+-- This is stronger than modular invariance and is NOT automatic from j.
+-- It is the additional calibration needed only if the rendered phase sectors
+-- themselves are to be interpreted as the level-fibre coordinate.
 ------------------------------------------------------------------------
 
 record J369ModularCuspObserverStructure
@@ -644,6 +819,9 @@ record J369ModularLevelBoundary : Set where
     reflectionIdentifiedWithCuspInversionAt3_9_27 : Bool
     fullLevelNDeckGroupClaimedCyclic : Bool
     hypervoxelC3CubedClaimedEqualToCyclicC27AsGroup : Bool
+    canonicalLevelLiftedJFibresConstructed : Bool
+    jForgetsCuspTranslationProved : Bool
+    rendererLevelFibreIdentificationInstantiated : Bool
     rendererCuspTranslationIntertwinerInstantiated : Bool
     analyticModularCurveCoverConstructed : Bool
 
@@ -656,5 +834,6 @@ canonicalJ369ModularLevelBoundary =
   j369-modular-level-boundary
     true true true true true
     true true true true
-    true true false false false false
-    "instantiate continuous phase translation by 1/N turn from the concrete argument carrier and prove phase3/6/9/27 intertwine it with the canonical cusp-translation actions; separately construct the analytic quotient H/Gamma(N) only if a consumer needs the full modular curve rather than its cyclic cusp fibre"
+    true true false false
+    true true false false false
+    "the canonical modular object is now a level fibre over a fixed j-value; next either identify the renderer's existing phase3/9/27 sectors with that fibre via an explicit level-structure lift, or keep them distinct. Construct H/Gamma(N) only if a consumer needs the full modular curve."
