@@ -134,6 +134,45 @@ def merge_retrieved_manifests(
     return len(rows)
 
 
+def merge_retrieval_failures(
+    existing: Path | None,
+    new: Path,
+    output: Path,
+) -> int:
+    """Keep one latest failed-attempt receipt per source for normal-lane deferral."""
+    by_ref: dict[str, dict[str, Any]] = {}
+    for source in [existing, new]:
+        for row in read_jsonl(source):
+            ref = str(row.get("source_identity_reference") or "").strip()
+            if not ref:
+                continue
+            by_ref[ref] = row
+    write_jsonl(output, [by_ref[ref] for ref in sorted(by_ref)])
+    return len(by_ref)
+
+
+def write_alternate_resolution_queue(failures: Path, output: Path) -> int:
+    """Expose failed public retrievals without returning them to the main queue."""
+    rows: list[dict[str, Any]] = []
+    for failure in read_jsonl(failures):
+        ref = str(failure.get("source_identity_reference") or "").strip()
+        if not ref:
+            continue
+        rows.append({
+            "schema": "digital-esd-alternate-fulltext-resolution-v1",
+            "source_identity_reference": ref,
+            "last_retrieval_failure": failure,
+            "requires_alternate_same_object_source": True,
+            "candidate_only": True,
+            "creates_screening_decision": False,
+            "creates_source_truth": False,
+            "creates_reviewed_evidence": False,
+            "creates_source_audit_admission": False,
+        })
+    write_jsonl(output, rows)
+    return len(rows)
+
+
 def build_fulltext_index(
     *,
     slr_root: Path,
@@ -296,16 +335,19 @@ def cmd_advance(args: argparse.Namespace) -> int:
     )
 
     retrieval_returncode = None
+    alternate_resolution_queue = artifact_root / "fulltext" / "alternate-resolution.jsonl"
     if args.fetch_max_items > 0:
         new_manifest = artifact_root / "fulltext" / "retrieved-artifacts.new.jsonl"
         failure_log = artifact_root / "fulltext" / "retrieval-failures.jsonl"
+        new_failure_log = artifact_root / "fulltext" / "retrieval-failures.new.jsonl"
         retrieval_returncode = run([
             sys.executable,
             str(HERE / "fetch_retrieval_residual.py"),
             "--residual", str(residual),
             "--cache-dir", str(artifact_root / "fulltext" / "cache"),
             "--output-manifest", str(new_manifest),
-            "--failure-log", str(failure_log),
+            "--failure-log", str(new_failure_log),
+            "--prior-failures", str(failure_log),
             "--max-items", str(args.fetch_max_items),
             "--timeout", str(args.fetch_timeout),
             "--max-bytes", str(args.fetch_max_bytes),
@@ -329,6 +371,15 @@ def cmd_advance(args: argparse.Namespace) -> int:
                 fulltext_index=fulltext_index,
             )
 
+        if new_failure_log.exists():
+            merge_retrieval_failures(
+                failure_log if failure_log.exists() else None,
+                new_failure_log,
+                failure_log,
+            )
+        if failure_log.exists():
+            write_alternate_resolution_queue(failure_log, alternate_resolution_queue)
+
     verified_rows = [
         row for row in read_tsv(fulltext_index)
         if row.get("status") == "verified"
@@ -347,6 +398,7 @@ def cmd_advance(args: argparse.Namespace) -> int:
         "retrieval_residual": str(residual),
         "verified_fulltext_count": len(verified_rows),
         "retrieval_transport_returncode": retrieval_returncode,
+        "alternate_fulltext_resolution_queue": str(alternate_resolution_queue),
         "next_review_packets": str(artifact_root / "review" / "review_packets.jsonl"),
         "candidate_auto_promoted": False,
         "retrieval_creates_screening_decision": False,
