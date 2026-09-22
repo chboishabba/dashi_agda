@@ -74,6 +74,72 @@ physicalMixedFold system S output =
     (physicalMixedValue system S)
     (physicalOutputItems system output)
 
+physicalFixedOutputSignedVectorRateToSeparationGeometry :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (S : Helical.HelicalModeScalars F) →
+  (output : Z3.FourierMode) →
+  let
+    value = physicalMixedValue system S
+    items = physicalOutputItems system output
+    mixed = physicalMixedFold system S output
+  in
+  Rate.two *
+    Vector.pairDifferenceVectorWorkSum
+      (Rate.physicalCellRate system) mixed value items
+  ≡ PhysicalField.viscosity system *
+    Vector.pairDifferenceVectorWorkSum
+      (Rate.separationNormSquared system) mixed value items
+physicalFixedOutputSignedVectorRateToSeparationGeometry system S output =
+  let
+    value = physicalMixedValue system S
+    items = physicalOutputItems system output
+    mixed = physicalMixedFold system S output
+    work = Pair.cellWork mixed value
+    nu = PhysicalField.viscosity system
+
+    physicalBridge :
+      Pair.pairDifferenceWorkSum
+        (Rate.physicalCellRate system) work items
+      ≡ Vector.pairDifferenceVectorWorkSum
+          (Rate.physicalCellRate system) mixed value items
+    physicalBridge =
+      Vector.pairDifferenceWorkSumIsVectorDifferenceWorkSum
+        (Rate.physicalCellRate system) mixed value items
+
+    geometricRate :
+      Rate.two *
+        Pair.pairDifferenceWorkSum
+          (Rate.physicalCellRate system) work items
+      ≡ nu * Rate.pairDifferenceGeometric system work items
+    geometricRate =
+      Rate.physicalOutputFiberPairDifferenceRateToGeometry
+        system output work
+
+    geometricStandard :
+      Rate.pairDifferenceGeometric system work items
+      ≡ Pair.pairDifferenceWorkSum
+          (Rate.separationNormSquared system) work items
+    geometricStandard =
+      Rate.pairDifferenceGeometricIsStandardPairDifference
+        system work items
+
+    separationBridge :
+      Pair.pairDifferenceWorkSum
+        (Rate.separationNormSquared system) work items
+      ≡ Vector.pairDifferenceVectorWorkSum
+          (Rate.separationNormSquared system) mixed value items
+    separationBridge =
+      Vector.pairDifferenceWorkSumIsVectorDifferenceWorkSum
+        (Rate.separationNormSquared system) mixed value items
+  in
+  trans
+    (cong (Rate.two *_) (sym physicalBridge))
+    (trans
+      geometricRate
+      (trans
+        (cong (nu *_) geometricStandard)
+        (cong (nu *_) separationBridge)))
+
 record FixedOutputSignedRateVectorPayment
     (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F)
@@ -482,6 +548,9 @@ module GlobalCompiler
 a3ExactSignedRateVectorPaymentTypeConstructed : Bool
 a3ExactSignedRateVectorPaymentTypeConstructed = true
 
+a3RateWorkCorrelationReducedToSeparationGeometry : Bool
+a3RateWorkCorrelationReducedToSeparationGeometry = true
+
 a3RecordIsLiteralPhysicalFixedOutputFamily : Bool
 a3RecordIsLiteralPhysicalFixedOutputFamily = true
 
@@ -524,6 +593,10 @@ a5GlobalPaymentToR503CompilerClosed = true
 a3ExactSignedRateVectorPaymentTypeConstructedIsTrue :
   a3ExactSignedRateVectorPaymentTypeConstructed ≡ true
 a3ExactSignedRateVectorPaymentTypeConstructedIsTrue = refl
+
+a3RateWorkCorrelationReducedToSeparationGeometryIsTrue :
+  a3RateWorkCorrelationReducedToSeparationGeometry ≡ true
+a3RateWorkCorrelationReducedToSeparationGeometryIsTrue = refl
 
 a3RecordIsLiteralPhysicalFixedOutputFamilyIsTrue :
   a3RecordIsLiteralPhysicalFixedOutputFamily ≡ true
