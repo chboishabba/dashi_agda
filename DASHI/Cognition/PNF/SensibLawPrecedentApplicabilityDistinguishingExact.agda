@@ -100,7 +100,7 @@ open CurrentCase public
 -- promotion surface.
 ------------------------------------------------------------------------
 
-record FeatureMap (p : PrecedentProposition) (c : CurrentCase) : Set where
+record FeatureMap (p : PrecedentProposition) (c : CurrentCase) : Set₁ where
   constructor feature-map
   field
     mapsFeature : Algebra.LegalProposition → Algebra.LegalProposition → Set
@@ -111,7 +111,7 @@ record FeatureMap (p : PrecedentProposition) (c : CurrentCase) : Set where
 
 open FeatureMap public
 
-record PrecedentApplicable (p : PrecedentProposition) (c : CurrentCase) : Set where
+record PrecedentApplicable (p : PrecedentProposition) (c : CurrentCase) : Set₁ where
   constructor precedent-applicable
   field
     jurisdictionCompatible : String
@@ -138,7 +138,7 @@ record MaterialDifference (p : PrecedentProposition) (c : CurrentCase) : Set whe
 
 open MaterialDifference public
 
-record DistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set where
+record DistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set₁ where
   constructor distinguishing-set
   field
     differences : List (MaterialDifference p c)
@@ -147,7 +147,7 @@ record DistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set wher
 
 open DistinguishingSet public
 
-record MinimalDistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set where
+record MinimalDistinguishingSet (p : PrecedentProposition) (c : CurrentCase) : Set₁ where
   constructor minimal-distinguishing-set
   field
     distinguishing : DistinguishingSet p c
@@ -169,7 +169,7 @@ open MinimalDistinguishingSet public
 
 record MaterialCorrespondencePolicy
   (p : PrecedentProposition)
-  (c : CurrentCase) : Set where
+  (c : CurrentCase) : Set₁ where
   constructor material-correspondence-policy
   field
     corresponds : Algebra.LegalProposition → Algebra.LegalProposition → Set
@@ -182,7 +182,7 @@ open MaterialCorrespondencePolicy public
 record PolicyFeatureMap
   {p : PrecedentProposition}
   {c : CurrentCase}
-  (policy : MaterialCorrespondencePolicy p c) : Set where
+  (policy : MaterialCorrespondencePolicy p c) : Set₁ where
   constructor policy-feature-map
   field
     everyMaterialFeatureMappedUnderPolicy :
@@ -196,7 +196,7 @@ open PolicyFeatureMap public
 record PolicyPrecedentApplicable
   {p : PrecedentProposition}
   {c : CurrentCase}
-  (policy : MaterialCorrespondencePolicy p c) : Set where
+  (policy : MaterialCorrespondencePolicy p c) : Set₁ where
   constructor policy-precedent-applicable
   field
     jurisdictionCompatibleUnderPolicy : String
@@ -210,7 +210,7 @@ open PolicyPrecedentApplicable public
 record PolicyMinimalDistinguishingSet
   {p : PrecedentProposition}
   {c : CurrentCase}
-  (policy : MaterialCorrespondencePolicy p c) : Set where
+  (policy : MaterialCorrespondencePolicy p c) : Set₁ where
   constructor policy-minimal-distinguishing-set
   field
     policyDistinguishing : DistinguishingSet p c
