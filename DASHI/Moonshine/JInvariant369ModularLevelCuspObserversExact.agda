@@ -534,6 +534,110 @@ record TriadicCuspDihedralLaw (depth : Nat) : Set where
 
 open TriadicCuspDihedralLaw public
 
+canonicalCuspDihedralAt3 : TriadicCuspDihedralLaw Q.one
+canonicalCuspDihedralAt3 =
+  record
+    { inversionConjugatesTranslationToInverse = proof
+    }
+  where
+  proof :
+    (x : Q.Residue3Pow Q.one) →
+    Arithmetic.negateResidue
+      (translateTriadic Q.one (Arithmetic.negateResidue x))
+    ≡
+    Arithmetic.addResidue
+      (Arithmetic.negateResidue (oneResidue Q.one))
+      x
+  proof (neg ∷ []) = refl
+  proof (zer ∷ []) = refl
+  proof (pos ∷ []) = refl
+
+canonicalCuspDihedralAt9 : TriadicCuspDihedralLaw Q.two
+canonicalCuspDihedralAt9 =
+  record
+    { inversionConjugatesTranslationToInverse = proof
+    }
+  where
+  proof :
+    (x : Q.Residue3Pow Q.two) →
+    Arithmetic.negateResidue
+      (translateTriadic Q.two (Arithmetic.negateResidue x))
+    ≡
+    Arithmetic.addResidue
+      (Arithmetic.negateResidue (oneResidue Q.two))
+      x
+  proof (neg ∷ neg ∷ []) = refl
+  proof (neg ∷ zer ∷ []) = refl
+  proof (neg ∷ pos ∷ []) = refl
+  proof (zer ∷ neg ∷ []) = refl
+  proof (zer ∷ zer ∷ []) = refl
+  proof (zer ∷ pos ∷ []) = refl
+  proof (pos ∷ neg ∷ []) = refl
+  proof (pos ∷ zer ∷ []) = refl
+  proof (pos ∷ pos ∷ []) = refl
+
+canonicalCuspDihedralAt27 : TriadicCuspDihedralLaw Q.three
+canonicalCuspDihedralAt27 =
+  record
+    { inversionConjugatesTranslationToInverse = proof
+    }
+  where
+  proof :
+    (x : Q.Residue3Pow Q.three) →
+    Arithmetic.negateResidue
+      (translateTriadic Q.three (Arithmetic.negateResidue x))
+    ≡
+    Arithmetic.addResidue
+      (Arithmetic.negateResidue (oneResidue Q.three))
+      x
+  proof (neg ∷ neg ∷ neg ∷ []) = refl
+  proof (neg ∷ neg ∷ zer ∷ []) = refl
+  proof (neg ∷ neg ∷ pos ∷ []) = refl
+  proof (neg ∷ zer ∷ neg ∷ []) = refl
+  proof (neg ∷ zer ∷ zer ∷ []) = refl
+  proof (neg ∷ zer ∷ pos ∷ []) = refl
+  proof (neg ∷ pos ∷ neg ∷ []) = refl
+  proof (neg ∷ pos ∷ zer ∷ []) = refl
+  proof (neg ∷ pos ∷ pos ∷ []) = refl
+  proof (zer ∷ neg ∷ neg ∷ []) = refl
+  proof (zer ∷ neg ∷ zer ∷ []) = refl
+  proof (zer ∷ neg ∷ pos ∷ []) = refl
+  proof (zer ∷ zer ∷ neg ∷ []) = refl
+  proof (zer ∷ zer ∷ zer ∷ []) = refl
+  proof (zer ∷ zer ∷ pos ∷ []) = refl
+  proof (zer ∷ pos ∷ neg ∷ []) = refl
+  proof (zer ∷ pos ∷ zer ∷ []) = refl
+  proof (zer ∷ pos ∷ pos ∷ []) = refl
+  proof (pos ∷ neg ∷ neg ∷ []) = refl
+  proof (pos ∷ neg ∷ zer ∷ []) = refl
+  proof (pos ∷ neg ∷ pos ∷ []) = refl
+  proof (pos ∷ zer ∷ neg ∷ []) = refl
+  proof (pos ∷ zer ∷ zer ∷ []) = refl
+  proof (pos ∷ zer ∷ pos ∷ []) = refl
+  proof (pos ∷ pos ∷ neg ∷ []) = refl
+  proof (pos ∷ pos ∷ zer ∷ []) = refl
+  proof (pos ∷ pos ∷ pos ∷ []) = refl
+
+translate6Inverse : Base.HexTruth → Base.HexTruth
+translate6Inverse Base.hex-0 = Base.hex-5
+translate6Inverse Base.hex-1 = Base.hex-0
+translate6Inverse Base.hex-2 = Base.hex-1
+translate6Inverse Base.hex-3 = Base.hex-2
+translate6Inverse Base.hex-4 = Base.hex-3
+translate6Inverse Base.hex-5 = Base.hex-4
+
+level6DihedralLaw :
+  (x : Base.HexTruth) →
+  reflect6 (translate6 (reflect6 x))
+  ≡ translate6Inverse x
+level6DihedralLaw Base.hex-0 = refl
+level6DihedralLaw Base.hex-1 = refl
+level6DihedralLaw Base.hex-2 = refl
+level6DihedralLaw Base.hex-3 = refl
+level6DihedralLaw Base.hex-4 = refl
+level6DihedralLaw Base.hex-5 = refl
+
+
 ------------------------------------------------------------------------
 -- 6c. Level-lifted j points: the cyclic coordinate is a fibre over j.
 --
@@ -818,6 +922,7 @@ record J369ModularLevelBoundary : Set where
 
     level27To9To3CoveringMapsTranslationEquivariant : Bool
     reflectionIdentifiedWithCuspInversionAt3_9_27 : Bool
+    cuspDihedralLawProvedAt3_6_9_27 : Bool
     fullLevelNDeckGroupClaimedCyclic : Bool
     hypervoxelC3CubedClaimedEqualToCyclicC27AsGroup : Bool
     canonicalLevelLiftedJFibresConstructed : Bool
@@ -835,6 +940,6 @@ canonicalJ369ModularLevelBoundary =
   j369-modular-level-boundary
     true true true true true
     true true true true
-    true true false false
+    true true true false false
     true true false false false
     "the canonical modular object is now a level fibre over a fixed j-value; next either identify the renderer's existing phase3/9/27 sectors with that fibre via an explicit level-structure lift, or keep them distinct. Construct H/Gamma(N) only if a consumer needs the full modular curve."
