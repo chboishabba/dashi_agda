@@ -44,6 +44,7 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
+import DASHI.Biology.EisensteinNineRingInterferenceExact as EisensteinPhase
 
 ------------------------------------------------------------------------
 -- 1. Literal translation matrices.
@@ -414,6 +415,82 @@ reflect6Involutive Base.hex-2 = refl
 reflect6Involutive Base.hex-3 = refl
 reflect6Involutive Base.hex-4 = refl
 reflect6Involutive Base.hex-5 = refl
+
+------------------------------------------------------------------------
+-- 6a. CRT decomposition of the level-6 cusp cycle.
+--
+-- C6 ~= C2 x C3 as a finite additive group because gcd(2,3)=1.  We use the
+-- repo's existing PhaseOrientation carrier for the C2 coordinate and the
+-- exact level-3 balanced residue for C3.
+------------------------------------------------------------------------
+
+Cusp6CRTCoordinate : Set
+Cusp6CRTCoordinate =
+  EisensteinPhase.PhaseOrientation × level3CuspFibre
+
+toggleOrientation :
+  EisensteinPhase.PhaseOrientation →
+  EisensteinPhase.PhaseOrientation
+toggleOrientation EisensteinPhase.positive = EisensteinPhase.negative
+toggleOrientation EisensteinPhase.negative = EisensteinPhase.positive
+
+hexToCRT6 : Base.HexTruth → Cusp6CRTCoordinate
+hexToCRT6 Base.hex-0 =
+  EisensteinPhase.positive , (zer ∷ [])
+hexToCRT6 Base.hex-1 =
+  EisensteinPhase.negative , (pos ∷ [])
+hexToCRT6 Base.hex-2 =
+  EisensteinPhase.positive , (neg ∷ [])
+hexToCRT6 Base.hex-3 =
+  EisensteinPhase.negative , (zer ∷ [])
+hexToCRT6 Base.hex-4 =
+  EisensteinPhase.positive , (pos ∷ [])
+hexToCRT6 Base.hex-5 =
+  EisensteinPhase.negative , (neg ∷ [])
+
+crt6ToHex : Cusp6CRTCoordinate → Base.HexTruth
+crt6ToHex (EisensteinPhase.positive , (zer ∷ [])) = Base.hex-0
+crt6ToHex (EisensteinPhase.positive , (pos ∷ [])) = Base.hex-4
+crt6ToHex (EisensteinPhase.positive , (neg ∷ [])) = Base.hex-2
+crt6ToHex (EisensteinPhase.negative , (zer ∷ [])) = Base.hex-3
+crt6ToHex (EisensteinPhase.negative , (pos ∷ [])) = Base.hex-1
+crt6ToHex (EisensteinPhase.negative , (neg ∷ [])) = Base.hex-5
+
+hexCRT6RoundTrip :
+  (x : Base.HexTruth) →
+  crt6ToHex (hexToCRT6 x) ≡ x
+hexCRT6RoundTrip Base.hex-0 = refl
+hexCRT6RoundTrip Base.hex-1 = refl
+hexCRT6RoundTrip Base.hex-2 = refl
+hexCRT6RoundTrip Base.hex-3 = refl
+hexCRT6RoundTrip Base.hex-4 = refl
+hexCRT6RoundTrip Base.hex-5 = refl
+
+crt6HexRoundTrip :
+  (x : Cusp6CRTCoordinate) →
+  hexToCRT6 (crt6ToHex x) ≡ x
+crt6HexRoundTrip (EisensteinPhase.positive , (neg ∷ [])) = refl
+crt6HexRoundTrip (EisensteinPhase.positive , (zer ∷ [])) = refl
+crt6HexRoundTrip (EisensteinPhase.positive , (pos ∷ [])) = refl
+crt6HexRoundTrip (EisensteinPhase.negative , (neg ∷ [])) = refl
+crt6HexRoundTrip (EisensteinPhase.negative , (zer ∷ [])) = refl
+crt6HexRoundTrip (EisensteinPhase.negative , (pos ∷ [])) = refl
+
+translateCRT6 : Cusp6CRTCoordinate → Cusp6CRTCoordinate
+translateCRT6 (orientation , residue) =
+  toggleOrientation orientation ,
+  translateTriadic Q.one residue
+
+level6TranslationIsCRT :
+  (x : Base.HexTruth) →
+  hexToCRT6 (translate6 x)
+  ≡ translateCRT6 (hexToCRT6 x)
+level6TranslationIsCRT Base.hex-0 = refl
+level6TranslationIsCRT Base.hex-1 = refl
+level6TranslationIsCRT Base.hex-2 = refl
+level6TranslationIsCRT Base.hex-3 = refl
+level6TranslationIsCRT Base.hex-4 = refl
+level6TranslationIsCRT Base.hex-5 = refl
 
 ------------------------------------------------------------------------
 -- 6b. Unit-circle reflection is inversion on the modular cusp fibres.
@@ -919,6 +996,8 @@ record J369ModularLevelBoundary : Set where
     c9ObserverCarrierBijectionToLevel9CuspFibre : Bool
     c27ObserverCarrierBijectionToLevel27CuspFibre : Bool
     c6CyclicCuspActionOwned : Bool
+    c6CRTOrientationTimesC3BijectionOwned : Bool
+    c6TranslationAgreesWithCRTAction : Bool
 
     level27To9To3CoveringMapsTranslationEquivariant : Bool
     reflectionIdentifiedWithCuspInversionAt3_9_27 : Bool
@@ -939,7 +1018,7 @@ canonicalJ369ModularLevelBoundary : J369ModularLevelBoundary
 canonicalJ369ModularLevelBoundary =
   j369-modular-level-boundary
     true true true true true
-    true true true true
+    true true true true true true
     true true true false false
     true true false false false
     "the canonical modular object is now a level fibre over a fixed j-value; next either identify the renderer's existing phase3/9/27 sectors with that fibre via an explicit level-structure lift, or keep them distinct. Construct H/Gamma(N) only if a consumer needs the full modular curve."
