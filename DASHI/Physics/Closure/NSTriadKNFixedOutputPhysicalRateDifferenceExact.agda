@@ -18,12 +18,15 @@ module DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -210,6 +213,211 @@ physicalRateDifferenceSameOutputFactorization system alpha beta sameOutput =
   trans doubledRate (cong (nu *_) geometricDifference)
 
 
+
+------------------------------------------------------------------------
+-- Same-output fibre certificate and pair-sum rate factorization.
+------------------------------------------------------------------------
+
+data AllSameOutput
+    (output : Z3.FourierMode) :
+    List Physical.PhysicalTriadIncidence → Set where
+  allSameOutputNil : AllSameOutput output []
+  allSameOutputCons :
+    ∀ {head tail} →
+    Physical.k head ≡ output →
+    AllSameOutput output tail →
+    AllSameOutput output (head ∷ tail)
+
+filterOutputAllSame :
+  (output : Z3.FourierMode) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  AllSameOutput output (Output.filterOutput output items)
+filterOutputAllSame output [] = allSameOutputNil
+filterOutputAllSame output (head ∷ tail)
+  with Output.modeEqual (Physical.k head) output in eq
+... | true =
+  allSameOutputCons
+    (Output.modeEqualSound eq)
+    (filterOutputAllSame output tail)
+... | false = filterOutputAllSame output tail
+
+physicalOutputFiberAllSame :
+  (cutoff : Nat) →
+  (output : Z3.FourierMode) →
+  AllSameOutput output (Output.physicalOutputFiber cutoff output)
+physicalOutputFiberAllSame cutoff output =
+  filterOutputAllSame output (Physical.physicalTriadEnumeration cutoff)
+
+separationNormSquared :
+  PhysicalField.PhysicalFiniteComplex3GalerkinSystem F →
+  Physical.PhysicalTriadIncidence → ℚ
+separationNormSquared system tau =
+  C3.normSquared
+    (PhysicalField.physicalInverseSquare system)
+    (differenceMode (Physical.q tau) (Physical.p tau))
+
+sameOutputRateDifferenceFactorization :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (output : Z3.FourierMode) →
+  (alpha beta : Physical.PhysicalTriadIncidence) →
+  Physical.k alpha ≡ output →
+  Physical.k beta ≡ output →
+  two *
+    ( physicalCellRate system alpha
+    - physicalCellRate system beta )
+  ≡ PhysicalField.viscosity system *
+    ( separationNormSquared system alpha
+    - separationNormSquared system beta )
+sameOutputRateDifferenceFactorization
+    system output alpha beta alphaOutput betaOutput =
+  trans
+    (cong (two *_) (physicalCellRateDifference system alpha beta))
+    (physicalRateDifferenceSameOutputFactorization
+      system alpha beta (trans alphaOutput (sym betaOutput)))
+
+pairAgainstHeadGeometric :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  Physical.PhysicalTriadIncidence →
+  List Physical.PhysicalTriadIncidence → ℚ
+pairAgainstHeadGeometric system work head [] = 0
+pairAgainstHeadGeometric system work head (x ∷ xs) =
+  ( separationNormSquared system head
+  - separationNormSquared system x )
+  * (work head - work x)
+  + pairAgainstHeadGeometric system work head xs
+
+pairDifferenceGeometric :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  List Physical.PhysicalTriadIncidence → ℚ
+pairDifferenceGeometric system work [] = 0
+pairDifferenceGeometric system work (x ∷ xs) =
+  pairAgainstHeadGeometric system work x xs
+  + pairDifferenceGeometric system work xs
+
+pairAgainstHeadRateToGeometry :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (output : Z3.FourierMode) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  (head : Physical.PhysicalTriadIncidence) →
+  (xs : List Physical.PhysicalTriadIncidence) →
+  Physical.k head ≡ output →
+  AllSameOutput output xs →
+  two *
+    Pair.pairAgainstHead
+      (physicalCellRate system) work head xs
+  ≡ PhysicalField.viscosity system
+      * pairAgainstHeadGeometric system work head xs
+pairAgainstHeadRateToGeometry system output work head []
+    headOutput allSameOutputNil =
+  solve (PhysicalField.viscosity system ∷ [])
+pairAgainstHeadRateToGeometry system output work head (x ∷ xs)
+    headOutput (allSameOutputCons xOutput tailOutput) =
+  let
+    rateFactor :
+      two *
+        ( physicalCellRate system head
+        - physicalCellRate system x )
+      ≡ PhysicalField.viscosity system *
+        ( separationNormSquared system head
+        - separationNormSquared system x )
+    rateFactor =
+      sameOutputRateDifferenceFactorization
+        system output head x headOutput xOutput
+
+    tailFactor :
+      two *
+        Pair.pairAgainstHead
+          (physicalCellRate system) work head xs
+      ≡ PhysicalField.viscosity system
+          * pairAgainstHeadGeometric system work head xs
+    tailFactor =
+      pairAgainstHeadRateToGeometry
+        system output work head xs headOutput tailOutput
+  in
+  let
+    dr =
+      physicalCellRate system head - physicalCellRate system x
+    dg =
+      separationNormSquared system head - separationNormSquared system x
+    dw = work head - work x
+    tailR =
+      Pair.pairAgainstHead
+        (physicalCellRate system) work head xs
+    tailG = pairAgainstHeadGeometric system work head xs
+    nu = PhysicalField.viscosity system
+  in
+  trans
+    (solve (dr ∷ dw ∷ tailR ∷ []))
+    (trans
+      (cong₂ _+_
+        (cong (_* dw) rateFactor)
+        tailFactor)
+      (solve (nu ∷ dg ∷ dw ∷ tailG ∷ [])))
+
+pairDifferenceRateToGeometry :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (output : Z3.FourierMode) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  AllSameOutput output items →
+  two *
+    Pair.pairDifferenceWorkSum
+      (physicalCellRate system) work items
+  ≡ PhysicalField.viscosity system
+      * pairDifferenceGeometric system work items
+pairDifferenceRateToGeometry system output work []
+    allSameOutputNil =
+  solve (PhysicalField.viscosity system ∷ [])
+pairDifferenceRateToGeometry system output work (x ∷ xs)
+    (allSameOutputCons xOutput tailOutput) =
+  let
+    headFactor =
+      pairAgainstHeadRateToGeometry
+        system output work x xs xOutput tailOutput
+    tailFactor =
+      pairDifferenceRateToGeometry
+        system output work xs tailOutput
+
+    headR =
+      Pair.pairAgainstHead
+        (physicalCellRate system) work x xs
+    tailR =
+      Pair.pairDifferenceWorkSum
+        (physicalCellRate system) work xs
+    headG = pairAgainstHeadGeometric system work x xs
+    tailG = pairDifferenceGeometric system work xs
+    nu = PhysicalField.viscosity system
+  in
+  trans
+    (solve (headR ∷ tailR ∷ []))
+    (trans
+      (cong₂ _+_ headFactor tailFactor)
+      (solve (nu ∷ headG ∷ tailG ∷ [])))
+
+physicalOutputFiberPairDifferenceRateToGeometry :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (output : Z3.FourierMode) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  two *
+    Pair.pairDifferenceWorkSum
+      (physicalCellRate system) work
+      (Output.physicalOutputFiber
+        (Audit.cutoff (PhysicalField.finiteSystem system)) output)
+  ≡ PhysicalField.viscosity system *
+      pairDifferenceGeometric system work
+        (Output.physicalOutputFiber
+          (Audit.cutoff (PhysicalField.finiteSystem system)) output)
+physicalOutputFiberPairDifferenceRateToGeometry system output work =
+  pairDifferenceRateToGeometry
+    system output work
+    (Output.physicalOutputFiber
+      (Audit.cutoff (PhysicalField.finiteSystem system)) output)
+    (physicalOutputFiberAllSame
+      (Audit.cutoff (PhysicalField.finiteSystem system)) output)
+
+
 ------------------------------------------------------------------------
 -- Trust boundary.
 ------------------------------------------------------------------------
@@ -222,6 +430,9 @@ physicalCellRateDifferenceSameObjectWeldClosed = true
 
 physicalRateDifferenceSameOutputFactorizationClosed : Bool
 physicalRateDifferenceSameOutputFactorizationClosed = true
+
+physicalOutputFibreSignedRateGeometryFactorizationClosed : Bool
+physicalOutputFibreSignedRateGeometryFactorizationClosed = true
 
 physicalCellRateDifferenceAddsSignClaim : Bool
 physicalCellRateDifferenceAddsSignClaim = false
@@ -236,6 +447,10 @@ physicalCellRateDifferenceSameObjectWeldClosedIsTrue = refl
 physicalRateDifferenceSameOutputFactorizationClosedIsTrue :
   physicalRateDifferenceSameOutputFactorizationClosed ≡ true
 physicalRateDifferenceSameOutputFactorizationClosedIsTrue = refl
+
+physicalOutputFibreSignedRateGeometryFactorizationClosedIsTrue :
+  physicalOutputFibreSignedRateGeometryFactorizationClosed ≡ true
+physicalOutputFibreSignedRateGeometryFactorizationClosedIsTrue = refl
 
 physicalCellRateDifferenceAddsSignClaimIsFalse :
   physicalCellRateDifferenceAddsSignClaim ≡ false
