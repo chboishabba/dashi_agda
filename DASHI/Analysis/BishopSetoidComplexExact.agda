@@ -21,6 +21,7 @@ module DASHI.Analysis.BishopSetoidComplexExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 import Real as BishopReal
 import RealProperties as BishopP
