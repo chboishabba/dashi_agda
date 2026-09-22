@@ -4,6 +4,7 @@ module DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Regression wh
 -- Regression pins for the post-R490 A1--A5 reduction.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_)
 
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as A1
