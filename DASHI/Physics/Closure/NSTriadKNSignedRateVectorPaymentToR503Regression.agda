@@ -96,3 +96,14 @@ r205PointwiseIdentificationRejected :
   A3A5.a3R205PointwiseIdentificationAdmissible ≡ false
 r205PointwiseIdentificationRejected =
   A3A5.a3R205PointwiseIdentificationAdmissibleIsFalse
+
+
+directCovarianceEqualsR406Rejected :
+  A3A5.a3DirectCovarianceEqualsR406RemainderAdmissible ≡ false
+directCovarianceEqualsR406Rejected =
+  A3A5.a3DirectCovarianceEqualsR406RemainderAdmissibleIsFalse
+
+a3ConsumerAttachmentTypeConstructed :
+  A3A5.a3ConsumerAttachmentTypeConstructed ≡ true
+a3ConsumerAttachmentTypeConstructed =
+  A3A5.a3ConsumerAttachmentTypeConstructedIsTrue
