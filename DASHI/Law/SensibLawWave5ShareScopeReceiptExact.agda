@@ -74,7 +74,7 @@ clinicCannotBeIncluded
 journalCannotBeIncluded :
   Included userJournalAccount lawyer → ⊥
 journalCannotBeIncluded
-  (includeAfterAllow () scope)
+  (includeAfterAllow (allowReceipt ()))
 
 ------------------------------------------------------------------------
 -- Review alone is insufficient.
