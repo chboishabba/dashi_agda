@@ -25,7 +25,7 @@ module DASHI.Moonshine.EisensteinUpperHalfPlaneQDiskExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
