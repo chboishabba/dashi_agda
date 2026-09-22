@@ -222,3 +222,4 @@ import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact
 
 -- Source-correct Wilson connected-shell producer.
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBSourceCorrectRound492Exact
