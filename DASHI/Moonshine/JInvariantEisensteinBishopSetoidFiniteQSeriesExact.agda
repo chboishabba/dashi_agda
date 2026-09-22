@@ -111,8 +111,8 @@ discriminantNumeratorTruncated T kernel terms tau =
 qOfCongruent :
   (T : C.BishopSetoidComplexTranscendentals) →
   ∀ {left right} →
-  left C.≈C right →
-  qOf T left C.≈C qOf T right
+  C._≈C_ left right →
+  C._≈C_ (qOf T left) (qOf T right)
 qOfCongruent T equivalent =
   C.expCongruent T
     (C.mulCongruent
@@ -126,10 +126,10 @@ e4TruncatedCongruent :
   (kernel : DivisorPowerKernel) →
   (terms : Nat) →
   ∀ {left right} →
-  left C.≈C right →
-  e4Truncated T kernel terms left
-    C.≈C
-  e4Truncated T kernel terms right
+  C._≈C_ left right →
+  C._≈C_
+    (e4Truncated T kernel terms left)
+    (e4Truncated T kernel terms right)
 e4TruncatedCongruent T kernel zero equivalent =
   C.≈C-refl C.oneC
 e4TruncatedCongruent T kernel (suc n) equivalent =
@@ -146,10 +146,10 @@ e6TruncatedCongruent :
   (kernel : DivisorPowerKernel) →
   (terms : Nat) →
   ∀ {left right} →
-  left C.≈C right →
-  e6Truncated T kernel terms left
-    C.≈C
-  e6Truncated T kernel terms right
+  C._≈C_ left right →
+  C._≈C_
+    (e6Truncated T kernel terms left)
+    (e6Truncated T kernel terms right)
 e6TruncatedCongruent T kernel zero equivalent =
   C.≈C-refl C.oneC
 e6TruncatedCongruent T kernel (suc n) equivalent =
@@ -163,15 +163,15 @@ e6TruncatedCongruent T kernel (suc n) equivalent =
 
 squareCongruent :
   ∀ {left right} →
-  left C.≈C right →
-  squareC left C.≈C squareC right
+  C._≈C_ left right →
+  C._≈C_ (squareC left) (squareC right)
 squareCongruent equivalent =
   C.mulCongruent equivalent equivalent
 
 cubeCongruent :
   ∀ {left right} →
-  left C.≈C right →
-  cubeC left C.≈C cubeC right
+  C._≈C_ left right →
+  C._≈C_ (cubeC left) (cubeC right)
 cubeCongruent equivalent =
   C.mulCongruent
     (squareCongruent equivalent)
@@ -182,10 +182,10 @@ discriminantNumeratorTruncatedCongruent :
   (kernel : DivisorPowerKernel) →
   (terms : Nat) →
   ∀ {left right} →
-  left C.≈C right →
-  discriminantNumeratorTruncated T kernel terms left
-    C.≈C
-  discriminantNumeratorTruncated T kernel terms right
+  C._≈C_ left right →
+  C._≈C_
+    (discriminantNumeratorTruncated T kernel terms left)
+    (discriminantNumeratorTruncated T kernel terms right)
 discriminantNumeratorTruncatedCongruent T kernel terms equivalent =
   C.subCongruent
     (cubeCongruent
