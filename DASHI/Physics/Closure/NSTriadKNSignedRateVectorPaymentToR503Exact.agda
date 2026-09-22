@@ -638,6 +638,9 @@ a3PaymentPackagesInR432FixedOutputPaymentDatatype = true
 a3ToR432LiteralR406SameObjectAttachmentClosed : Bool
 a3ToR432LiteralR406SameObjectAttachmentClosed = false
 
+a3R205RawCurlPartnerSameObjectBridgeClosed : Bool
+a3R205RawCurlPartnerSameObjectBridgeClosed = false
+
 liveA3SnapshotBoundToR240Trajectory : Bool
 liveA3SnapshotBoundToR240Trajectory = true
 
@@ -692,6 +695,10 @@ a3PaymentPackagesInR432FixedOutputPaymentDatatypeIsTrue = refl
 a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
   a3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
 a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse = refl
+
+a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse :
+  a3R205RawCurlPartnerSameObjectBridgeClosed ≡ false
+a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse = refl
 
 liveA3SelectedOutputAggregationClosedIsTrue :
   liveA3SelectedOutputAggregationClosed ≡ true
