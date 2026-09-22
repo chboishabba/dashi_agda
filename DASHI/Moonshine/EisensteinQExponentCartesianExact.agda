@@ -22,6 +22,7 @@ import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
 import DASHI.Analysis.MarxConstructiveRealRingNormalisation as Ring
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Q
+import DASHI.Moonshine.EisensteinUpperHalfPlaneQDiskExact as QDisk
 
 private
   RealCarrier :
@@ -152,12 +153,72 @@ qExponentCartesianFromRing C ring (Complex.complex x y)
               (Real.real (Complex.realPackage C))
               (twoPi C) x) = refl
 
+
+------------------------------------------------------------------------
+-- The remaining QDisk laws after Cartesian algebra has been discharged.
+------------------------------------------------------------------------
+
+record QDiskResidualAnalyticLaws
+    (C : Complex.ConstructedComplexPackage) : Set₁ where
+
+  private
+    R = Real.real (Complex.realPackage C)
+    E = Real.exponential (Complex.realPackage C)
+    CE = Complex.complexExponential C
+
+  field
+    twoPiPositive :
+      Real._<_ R (Real.zero R) (twoPi C)
+
+    positiveProduct :
+      ∀ {x y} →
+      Real._<_ R (Real.zero R) x →
+      Real._<_ R (Real.zero R) y →
+      Real._<_ R (Real.zero R) (Real._*_ R x y)
+
+    negativeOfPositiveIsNegative :
+      ∀ {x} →
+      Real._<_ R (Real.zero R) x →
+      Real._<_ R (Real.neg R x) (Real.zero R)
+
+    modulus : ComplexCarrier C → RealCarrier C
+
+    modulusOfComplexExponential :
+      (x y : RealCarrier C) →
+      modulus
+        (Complex.expC CE (Complex.complex x y))
+      ≡ Real.exp E x
+
+open QDiskResidualAnalyticLaws public
+
+qDiskAnalyticLawsFromRingAndResidual :
+  (C : Complex.ConstructedComplexPackage) →
+  Ring.ConstructedRealRingNormalisationLaws
+    (Real.real (Complex.realPackage C)) →
+  QDiskResidualAnalyticLaws C →
+  QDisk.QDiskAnalyticLaws C
+qDiskAnalyticLawsFromRingAndResidual C ring residual =
+  record
+    { QDisk.twoPi = twoPi C
+    ; QDisk.twoPiDefinition = refl
+    ; QDisk.twoPiPositive = twoPiPositive residual
+    ; QDisk.positiveProduct = positiveProduct residual
+    ; QDisk.negativeOfPositiveIsNegative =
+        negativeOfPositiveIsNegative residual
+    ; QDisk.qExponentCartesian =
+        qExponentCartesianFromRing C ring
+    ; QDisk.modulus = modulus residual
+    ; QDisk.modulusOfComplexExponential =
+        modulusOfComplexExponential residual
+    }
+
 record EisensteinQExponentCartesianBoundary : Set where
   constructor eisenstein-q-exponent-cartesian-boundary
   field
     imaginaryTimesPiPaid : Bool
     scaleTwoPiPaid : Bool
     cartesianExponentPaid : Bool
+    fullQDiskLawsCompileFromResidualAnalyticLaws : Bool
     positivityUsed : Bool
     modulusUsed : Bool
 
@@ -168,4 +229,4 @@ canonicalEisensteinQExponentCartesianBoundary :
   EisensteinQExponentCartesianBoundary
 canonicalEisensteinQExponentCartesianBoundary =
   eisenstein-q-exponent-cartesian-boundary
-    true true true false false
+    true true true true false false
