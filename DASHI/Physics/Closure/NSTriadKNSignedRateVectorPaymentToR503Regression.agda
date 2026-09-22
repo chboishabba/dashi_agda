@@ -55,3 +55,8 @@ a5DirectR503CompilerClosed :
   A3A5.a5GlobalPaymentToR503CompilerClosed ≡ true
 a5DirectR503CompilerClosed =
   A3A5.a5GlobalPaymentToR503CompilerClosedIsTrue
+
+a4OrderPreservingIntegrationCompilerClosed :
+  A3A5.a4OrderPreservingIntegrationCompilerClosed ≡ true
+a4OrderPreservingIntegrationCompilerClosed =
+  A3A5.a4OrderPreservingIntegrationCompilerClosedIsTrue
