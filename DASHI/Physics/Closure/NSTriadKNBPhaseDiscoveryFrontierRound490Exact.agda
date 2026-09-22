@@ -94,6 +94,10 @@ round490A3ToR432LiteralR406SameObjectAttachmentClosed : Bool
 round490A3ToR432LiteralR406SameObjectAttachmentClosed =
   SignedPayment.a3ToR432LiteralR406SameObjectAttachmentClosed
 
+round490A3R205RawCurlSameObjectBridgeClosed : Bool
+round490A3R205RawCurlSameObjectBridgeClosed =
+  SignedPayment.a3R205RawCurlPartnerSameObjectBridgeClosed
+
 round490A4CardinalityFreeLocalToGlobalCompilerClosed : Bool
 round490A4CardinalityFreeLocalToGlobalCompilerClosed =
   SignedPayment.a4CardinalityFreeLocalToGlobalCompilerClosed
@@ -175,6 +179,11 @@ round490A3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
   round490A3ToR432LiteralR406SameObjectAttachmentClosed ≡ false
 round490A3ToR432LiteralR406SameObjectAttachmentClosedIsFalse =
   SignedPayment.a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse
+
+round490A3R205RawCurlSameObjectBridgeClosedIsFalse :
+  round490A3R205RawCurlSameObjectBridgeClosed ≡ false
+round490A3R205RawCurlSameObjectBridgeClosedIsFalse =
+  SignedPayment.a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse
 
 round490A4CardinalityFreeLocalToGlobalCompilerClosedIsTrue :
   round490A4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
