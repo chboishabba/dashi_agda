@@ -47,6 +47,9 @@ record EisensteinConvergenceEndgameCutset : Set where
     bishopLegacyCoordinateTransportCompilerOwned : Bool
     deltaNumeratorLimitCompilerOwned : Bool
     leanMathlibStandardAnalyticParityRecorded : Bool
+    agdaActualFiniteRecurrenceExtractionCompilerOwned : Bool
+    leanLiteralFiniteRecurrenceTargetOwned : Bool
+    leanLiteralFiniteRecurrenceConvergenceOwned : Bool
 
     selectedConcreteQNormLawsInhabited : Bool
     quarticSexticStepVDominationInhabited : Bool
@@ -65,7 +68,7 @@ canonicalEisensteinConvergenceEndgameCutset :
   EisensteinConvergenceEndgameCutset
 canonicalEisensteinConvergenceEndgameCutset =
   eisenstein-convergence-endgame-cutset
-    true true true true true true true true true true true
+    true true true true true true true true true true true true true true
     false false false false false false
     false
-    "Lean/Mathlib v4.28 independently owns the standard q-disk, n^4 q^n/n^6 q^n summability and converged normalized E4/E6 q-expansion facts on ordinary complex numbers, so do not re-prove those analytically in Agda. The remaining Agda work is representation-specific: instantiate or transport the selected ConcreteComplex q-disk laws, inhabit the BishopLegacySeriesTransport/Nat-function bridge and four coordinate-term same-object identifications, and weld the resulting E4/E6 limits to the analytic Eisenstein model. The cross-repo Lean receipt is evidence of theorem parity, not automatic carrier promotion."
+    "Route B has now paid more than theorem parity: Agda proves that the actual qOf/e4Truncated/e6Truncated recurrences transport through any primitive ComplexExtraction preserving zero/one/i/pi/+/-/*/exp; Lean owns the matching literal finite recurrences, finite-sum normal forms and their convergence to canonical infinite sums. Do not redo convergence. The first live residual is the faithful primitive representation map from the selected Agda constructed-real/ComplexPair carrier into Lean Real/Complex, including pi and exp compatibility. After that, identify the canonical infinite sums with Mathlib E4/E6 and pay the separate Delta normalization/object weld. Bishop-to-legacy quotient infrastructure is not currently available elsewhere in the repo, so this representation seam is genuine shared infrastructure rather than an Eisenstein estimate."
