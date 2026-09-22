@@ -40,6 +40,7 @@ import DASHI.Analysis.ConcreteComplexConjugationProductExact as ConcreteConjugat
 import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstein
 import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Disc
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
+import DASHI.Interop.LeanMoonshineEisensteinAnalyticParityExact as LeanParity
 
 ------------------------------------------------------------------------
 -- 1. Concrete-complex seam over the existing analytic model.
@@ -283,7 +284,14 @@ record DeltaReflectionPhaseBoundary : Set where
     sixfoldPhaseTheoremConditionalOnPhaseQuotient : Bool
     finiteRealQSeriesConjugationSubstrateAlreadyOwned : Bool
     concreteComplexConjugationProductDerived : Bool
+    leanNormalizedDeltaWeight12SActionOwned : Bool
+    leanNormalizedDeltaConjugationOwned : Bool
+    leanInverseConjugationReflectionOwned : Bool
+    leanUnitNormFixedLocusOwned : Bool
+    leanFixedLocusValueIdentityOwned : Bool
 
+    primitiveAgdaRealToLeanRealExtractionInhabited : Bool
+    normalizedAgdaDeltaSameObjectWithLeanTarget : Bool
     concreteComplexSActionInstantiated : Bool
     infiniteDeltaConjugationProvedHere : Bool
     concreteContinuousPhaseReadoutInstantiated : Bool
@@ -297,8 +305,9 @@ canonicalDeltaReflectionPhaseBoundary : DeltaReflectionPhaseBoundary
 canonicalDeltaReflectionPhaseBoundary =
   delta-reflection-phase-boundary
     true true true true true true
-    false false false false
-    "concrete complex conjugation multiplicativity is now derived; weld the infinite all-SL2(Z) Eisenstein model to the existing constructed-complex finite E4/E6/Delta/j backend, prove the infinite Delta(-conjugate z)=conjugate(Delta z) limit theorem and literal S action, then discharge the ordinary argument modulo-pi quotient law"
+    true true true true true
+    false false false false false false
+    "Lean route B now proves the normalized E4/E6 Delta target is weight-12 modular, has the real-q-series conjugation law, satisfies F(1/conj tau)=conj(tau^12 F(tau)), and on normSq(tau)=1 satisfies the exact fixed-locus value identity consumed by this module. The remaining promotion is representation-only: inhabit the primitive selected-Agda-real -> Lean-Real extraction and prove the Agda normalized Delta is the same object as that normalized E4/E6 target. After that, the reflection/fixed-locus value theorem transports directly; only the already-explicit continuous argument / modulo-pi quotient realization remains for the unconditional sixfold phase statement."
 
 ------------------------------------------------------------------------
 -- FiniteReflection is intentionally imported as provenance/theorem substrate:
