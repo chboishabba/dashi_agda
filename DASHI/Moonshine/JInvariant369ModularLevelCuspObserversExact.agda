@@ -488,8 +488,20 @@ observer27To9TranslationCommutes :
   ≡
   translateObserver9 (observer27ToObserver9ViaLevel p)
 observer27To9TranslationCommutes p =
-  cong level9ToObserver9
-    (level27To9TranslationEquivariant (observer27ToLevel27 p))
+  trans
+    (cong level9ToObserver9
+      (cong level27To9CoveringProjection
+        (level27ObserverRoundTrip
+          (translateTriadic Q.three (observer27ToLevel27 p)))))
+    (trans
+      (cong level9ToObserver9
+        (level27To9TranslationEquivariant (observer27ToLevel27 p)))
+      (cong level9ToObserver9
+        (cong (translateTriadic Q.two)
+          (sym
+            (level9ObserverRoundTrip
+              (level27To9CoveringProjection
+                (observer27ToLevel27 p)))))))
 
 ------------------------------------------------------------------------
 -- 9. Boundary.
