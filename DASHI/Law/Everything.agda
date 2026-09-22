@@ -244,3 +244,5 @@ import DASHI.Law.SensibLawYindjibarndiAdversarialRerunExact
 import DASHI.Law.SensibLawYindjibarndiAdversarialRerunRegression
 import DASHI.Law.SensibLawMunkaraTipakalippaNonCollapseExact
 import DASHI.Law.SensibLawMunkaraTipakalippaNonCollapseRegression
+import DASHI.Law.SensibLawYindjibarndiFiniteCutRecomputeExact
+import DASHI.Law.SensibLawYindjibarndiFiniteCutRecomputeRegression
