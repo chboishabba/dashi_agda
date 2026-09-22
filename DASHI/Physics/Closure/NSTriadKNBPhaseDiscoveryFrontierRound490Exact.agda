@@ -55,6 +55,22 @@ round490R574AggregateUsedByPaymentCompiler : Bool
 round490R574AggregateUsedByPaymentCompiler =
   PairPay.fixedOutputPairDifferencePaymentUsesLiteralR574Aggregate
 
+round490AggregateWorkDifferenceVectorBridgeClosed : Bool
+round490AggregateWorkDifferenceVectorBridgeClosed =
+  WorkDiff.fixedOutputPairDifferenceAggregateVectorBridgeClosed
+
+round490PhysicalRateDifferenceSameObjectWeldClosed : Bool
+round490PhysicalRateDifferenceSameObjectWeldClosed =
+  Rate.physicalCellRateDifferenceSameObjectWeldClosed
+
+round490ExactA3PaymentTypeConstructed : Bool
+round490ExactA3PaymentTypeConstructed =
+  SignedPayment.a3ExactSignedRateVectorPaymentTypeConstructed
+
+round490A5GlobalPaymentToR503CompilerClosed : Bool
+round490A5GlobalPaymentToR503CompilerClosed =
+  SignedPayment.a5GlobalPaymentToR503CompilerClosed
+
 round490CoherentWorkDifferenceVectorBridgeClosed : Bool
 round490CoherentWorkDifferenceVectorBridgeClosed =
   WorkBridge.fixedOutputWorkDifferenceVectorBridgeClosed
@@ -78,6 +94,26 @@ round490ConcreteDistinctIncidenceSlotCollisionConstructed =
 ------------------------------------------------------------------------
 -- Exact unpaid analytic boundary.
 ------------------------------------------------------------------------
+
+round490AggregateWorkDifferenceVectorBridgeClosedIsTrue :
+  round490AggregateWorkDifferenceVectorBridgeClosed ≡ true
+round490AggregateWorkDifferenceVectorBridgeClosedIsTrue =
+  WorkDiff.fixedOutputPairDifferenceAggregateVectorBridgeClosedIsTrue
+
+round490PhysicalRateDifferenceSameObjectWeldClosedIsTrue :
+  round490PhysicalRateDifferenceSameObjectWeldClosed ≡ true
+round490PhysicalRateDifferenceSameObjectWeldClosedIsTrue =
+  Rate.physicalCellRateDifferenceSameObjectWeldClosedIsTrue
+
+round490ExactA3PaymentTypeConstructedIsTrue :
+  round490ExactA3PaymentTypeConstructed ≡ true
+round490ExactA3PaymentTypeConstructedIsTrue =
+  SignedPayment.a3ExactSignedRateVectorPaymentTypeConstructedIsTrue
+
+round490A5GlobalPaymentToR503CompilerClosedIsTrue :
+  round490A5GlobalPaymentToR503CompilerClosed ≡ true
+round490A5GlobalPaymentToR503CompilerClosedIsTrue =
+  SignedPayment.a5GlobalPaymentToR503CompilerClosedIsTrue
 
 round490QuantitativePairDifferencePaymentClosed : Bool
 round490QuantitativePairDifferencePaymentClosed =
