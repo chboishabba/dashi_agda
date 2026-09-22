@@ -80,3 +80,8 @@ a3SeparationGeometryPaymentCompilerClosed :
   A3A5.a3SeparationGeometryPaymentCompilerClosed ≡ true
 a3SeparationGeometryPaymentCompilerClosed =
   A3A5.a3SeparationGeometryPaymentCompilerClosedIsTrue
+
+r205RawCurlSameObjectBridgeStillOpen :
+  A3A5.a3R205RawCurlPartnerSameObjectBridgeClosed ≡ false
+r205RawCurlSameObjectBridgeStillOpen =
+  A3A5.a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse
