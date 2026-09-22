@@ -381,6 +381,6 @@ canonicalEisensteinTruncationConvergenceBoundary :
 canonicalEisensteinTruncationConvergenceBoundary =
   eisenstein-truncation-convergence-boundary
     true true true true true true
-    true true true true true
+    true true true true
     false false false false
     "remaining analytic leaves are now: instantiate the selected concrete-complex norm/cartesian q laws; prove the eventual successor-ratio inequality for n^4 r^n and n^6 r^n when 0<=r<1 (the Bishop ratio-test compiler is already owned); transport those real majorants to convergence of the literal complex E4/E6 partial sums; then identify the limits with the all-SL2(Z) Eisenstein objects"
