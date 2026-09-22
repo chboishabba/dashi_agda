@@ -20,6 +20,7 @@ module DASHI.Moonshine.EisensteinBishopLegacyCoordinateTransportExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product.Base using (proj₂)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
 
 import Real as BishopReal
@@ -239,7 +240,7 @@ bishopCoordinateConvergesToMajorantLimit :
     (BishopSequence.SeriesOf target)
     (bishopCoordinateLimitFromMajorant data)
 bishopCoordinateConvergesToMajorantLimit data =
-  Data.Product.Base.proj₂
+  proj₂
     (bishopCoordinateConvergenceFromMajorant data)
 
 bishopCoordinateSeriesFromMajorant :
