@@ -37,6 +37,9 @@ import DASHI.Moonshine.EisensteinUpperHalfPlaneQDiskExact as QDisk
 import DASHI.Moonshine.EisensteinCoefficientMajorantExact as Majorant
 import DASHI.Moonshine.EisensteinConvergenceEndgameCutsetExact as ConvergenceEndgame
 import DASHI.Moonshine.EisensteinBishopLegacyCoordinateTransportExact as CoordinateTransport
+import DASHI.Moonshine.JInvariantEisensteinAgdaLeanExtractionExact as AgdaLeanExtraction
+import DASHI.Moonshine.JInvariantEisensteinAgdaLeanRealExtractionExact as AgdaLeanRealExtraction
+import DASHI.Interop.LeanMoonshineEisensteinAnalyticParityExact as LeanParity
 
 ------------------------------------------------------------------------
 -- 1. Explicit bidirectional same-object bridge.
@@ -192,7 +195,18 @@ record DeltaConstructedComplexReflectionCutsetBoundary : Set where
     polynomialDominationToConvergenceCompilerOwned : Bool
     additiveSeriesToTruncationLimitCompilerOwned : Bool
     bishopLegacyCoordinateTransportCompilerOwned : Bool
+
+    agdaActualQE4E6ExtractionCompilerOwned : Bool
+    agdaRealLevelExtractionCompilerOwned : Bool
+    agdaDiscriminantNumeratorExtractionCompilerOwned : Bool
+    leanLiteralAgdaRecurrenceConvergesToMathlibE4E6 : Bool
+    leanNormalizedE4E6DeltaLimitCompilerOwned : Bool
+    leanNormalizedDeltaPackagedWeight12 : Bool
+    leanNormalizedDeltaConjugationOwned : Bool
+    leanConcreteInvConjReflectionIdentityOwned : Bool
+
     finiteRouteEqualsInfiniteAnalyticRoute : Bool
+    primitiveAgdaRealToLeanRealExtractionInhabited : Bool
 
     abstractEisensteinScalarWeldedToConcreteComplex : Bool
     abstractEisensteinParameterWeldedToConcreteKleinPoint : Bool
@@ -209,6 +223,8 @@ canonicalDeltaConstructedComplexReflectionCutsetBoundary :
 canonicalDeltaConstructedComplexReflectionCutsetBoundary =
   delta-constructed-complex-reflection-cutset-boundary
     true true true true true
-    true true true true true true true false
+    true true true true true true true
+    true true true true true true true true
+    false false
     false false false false false
-    "finite E4/E6, internal sigma3/sigma5 bounds, q-disk reduction, polynomial-geometric majorants, Bishop geometric/comparison convergence, additive truncation alignment, and the explicit Bishop-to-legacy coordinate compiler now exist. The obsolete direct n^k r^n ratio leaf is gone. Remaining: instantiate the remaining ConcreteComplex q-disk order/modulus laws (the Cartesian q exponent is already ring-derived), construct the quartic/sextic Step-V domination witness, inhabit the explicit BishopLegacySeriesTransport/Nat-function bridge and four coordinate-term identifications, then weld the resulting infinite E4/E6 objects to EisensteinAnalyticModel before S/conjugation and the unit-circle fixed-point law."
+    "Route B has paid the classical analytic side on a canonical Lean target matching the actual Agda finite recurrence: the literal E4/E6 truncations converge to Mathlib E4/E6; their normalized discriminant limit is packaged as a genuine level-one weight-12 modular form; its real-q-series conjugation law and the concrete inverse-conjugation identity F(1/conj tau)=conj(tau^12 F(tau)) are proved. Agda derives q/E4/E6/discriminant transport from a primitive real/transcendental extraction. The first live payment is now only to inhabit that faithful selected-Agda-real -> Lean-Real map with exp/sin/cos/pi compatibility. After that, weld the normalized E4/E6 Delta target to the chosen Agda/eta^24 Delta object and transport the already-proved reflection identity; unit-circle fixed-locus phase then consumes it."
