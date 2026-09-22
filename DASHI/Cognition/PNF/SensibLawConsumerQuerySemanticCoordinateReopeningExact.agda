@@ -12,8 +12,8 @@ import DASHI.Core.AffectedDependencyClosureExact as Closure
 import DASHI.Core.RequiredAxisSupportSquareExact as Support
 
 data SemanticQuery : Set where
-  parseStructureQuery whoSaidWhatQuery provenanceHistoryQuery discourseContextQuery
-  legalDiscourseRoleQuery legalApplicabilityQuery legalLiabilityQuery
+  parseStructureQuery whoSaidWhatQuery provenanceHistoryQuery discourseContextQuery : SemanticQuery
+  legalDiscourseRoleQuery legalApplicabilityQuery legalLiabilityQuery : SemanticQuery
   customQuery : String → SemanticQuery
 
 data SemanticCoordinate : Set where
@@ -99,6 +99,7 @@ mixedCaseDemand = semanticDemand
   "simultaneous general + historical + legal-discourse demand"
 
 data CoordinateEvidenceState : Set where coordinateResolved coordinateMissing coordinateConflicting : CoordinateEvidenceState
+coordinateSupport : CoordinateEvidenceState → Support.SupportSquare
 coordinateSupport coordinateResolved = Support.supportSquare true false
 coordinateSupport coordinateMissing = Support.supportSquare false false
 coordinateSupport coordinateConflicting = Support.supportSquare true true
@@ -141,12 +142,26 @@ data SemanticDepends : SemanticArtifact → SemanticArtifact → Set where
   legalSourceAuthorityFeedsLiability : SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalLiabilityAnswerArtifact
   resolvedJurisdictionFeedsLiability : SemanticDepends (coordinateArtifact resolvedLegalJurisdictionCoordinate) legalLiabilityAnswerArtifact
 
+legalSourceAuthorityChangeReopensApplicability :
+  Closure.ReopeningObligation SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalApplicabilityAnswerArtifact
 legalSourceAuthorityChangeReopensApplicability = Closure.oneEdgeCreatesReopeningObligation legalSourceAuthorityFeedsApplicability
+legalSourceAuthorityChangeReopensLiabilityTransitively :
+  Closure.ReopeningObligation SemanticDepends (coordinateArtifact legalSourceAuthorityCoordinate) legalLiabilityAnswerArtifact
 legalSourceAuthorityChangeReopensLiabilityTransitively = Closure.obligationsCompose legalSourceAuthorityChangeReopensApplicability (Closure.oneEdgeCreatesReopeningObligation applicabilityFeedsLiability)
+resolvedScopeChangeReopensApplicability :
+  Closure.ReopeningObligation SemanticDepends (coordinateArtifact resolvedScopeCoordinate) legalApplicabilityAnswerArtifact
 resolvedScopeChangeReopensApplicability = Closure.oneEdgeCreatesReopeningObligation resolvedScopeFeedsApplicability
+resolvedJurisdictionChangeReopensApplicability :
+  Closure.ReopeningObligation SemanticDepends (coordinateArtifact resolvedLegalJurisdictionCoordinate) legalApplicabilityAnswerArtifact
 resolvedJurisdictionChangeReopensApplicability = Closure.oneEdgeCreatesReopeningObligation resolvedJurisdictionFeedsApplicability
+resolvedEvidenceChangeReopensApplicability :
+  Closure.ReopeningObligation SemanticDepends (coordinateArtifact resolvedLegalEvidenceCoordinate) legalApplicabilityAnswerArtifact
 resolvedEvidenceChangeReopensApplicability = Closure.oneEdgeCreatesReopeningObligation resolvedEvidenceFeedsApplicability
+provenanceChangeReopensHistoricalAnswer :
+  Closure.ReopeningObligation SemanticDepends (coordinateArtifact provenanceCoordinate) historicalAnswerArtifact
 provenanceChangeReopensHistoricalAnswer = Closure.oneEdgeCreatesReopeningObligation provenanceFeedsHistorical
+contextChangeReopensLegalDiscourseAnswer :
+  Closure.ReopeningObligation SemanticDepends (coordinateArtifact documentContextCoordinate) legalDiscourseAnswerArtifact
 contextChangeReopensLegalDiscourseAnswer = Closure.oneEdgeCreatesReopeningObligation contextFeedsLegalDiscourse
 
 data ConsumerKindAloneFixesRequirements : Set where
