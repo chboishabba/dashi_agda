@@ -34,6 +34,9 @@ import DASHI.Analysis.ConcreteComplex as Complex
 import DASHI.Analysis.OrdinaryComplexPolar as Polar
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Finite
 import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as FiniteKlein
+import DASHI.Moonshine.EisensteinUpperHalfPlaneQDiskExact as QDisk
+import DASHI.Moonshine.EisensteinCoefficientMajorantExact as Majorant
+import DASHI.Foundations.BishopPolynomialGeometricRatioConvergenceExact as PolyGeo
 
 private
   ComplexCarrier :
@@ -354,6 +357,11 @@ record EisensteinTruncationConvergenceBoundary : Set where
   constructor eisenstein-truncation-convergence-boundary
   field
     finiteE4E6SequencesAlreadyConcrete : Bool
+    executableSigma3Sigma5Internal : Bool
+    sigma3Sigma5PolynomialBoundsOwned : Bool
+    upperHalfPlaneToQDiskCompilerOwned : Bool
+    complexTermsReducedToPolynomialGeometricMajorants : Bool
+    bishopPolynomialGeometricRatioCompilerOwned : Bool
     deltaNumeratorLimitCompiledFromE4E6Limits : Bool
     deltaNormalizationLimitIsolated : Bool
     jQuotientLimitRequiresNonzeroDenominator : Bool
@@ -372,6 +380,7 @@ canonicalEisensteinTruncationConvergenceBoundary :
   EisensteinTruncationConvergenceBoundary
 canonicalEisensteinTruncationConvergenceBoundary =
   eisenstein-truncation-convergence-boundary
+    true true true true true true
     true true true true true
     false false false false
-    "prove absolute/uniform convergence of the literal E4_N and E6_N q-series on the concrete upper half-plane (using |q|<1 and divisor-power growth), identify their limits with the all-SL2(Z) Eisenstein objects, then instantiate the existing delta/j limit compilers"
+    "remaining analytic leaves are now: instantiate the selected concrete-complex norm/cartesian q laws; prove the eventual successor-ratio inequality for n^4 r^n and n^6 r^n when 0<=r<1 (the Bishop ratio-test compiler is already owned); transport those real majorants to convergence of the literal complex E4/E6 partial sums; then identify the limits with the all-SL2(Z) Eisenstein objects"
