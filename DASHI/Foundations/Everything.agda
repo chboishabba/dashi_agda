@@ -7,3 +7,4 @@ module DASHI.Foundations.Everything where
 import DASHI.Foundations.UBP.Everything
 import DASHI.Foundations.Wette.Everything
 import DASHI.Foundations.CoarseFineRefinementEverything
+import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact
