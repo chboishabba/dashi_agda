@@ -36,6 +36,7 @@ open import Agda.Builtin.String using (String)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Analysis.FiniteRealQSeriesReflectionExact as FiniteReflection
+import DASHI.Analysis.ConcreteComplexConjugationProductExact as ConcreteConjugation
 import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstein
 import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Disc
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
@@ -281,6 +282,7 @@ record DeltaReflectionPhaseBoundary : Set where
     fixedLocusValueIdentityDerived : Bool
     sixfoldPhaseTheoremConditionalOnPhaseQuotient : Bool
     finiteRealQSeriesConjugationSubstrateAlreadyOwned : Bool
+    concreteComplexConjugationProductDerived : Bool
 
     concreteComplexSActionInstantiated : Bool
     infiniteDeltaConjugationProvedHere : Bool
@@ -294,9 +296,9 @@ open DeltaReflectionPhaseBoundary public
 canonicalDeltaReflectionPhaseBoundary : DeltaReflectionPhaseBoundary
 canonicalDeltaReflectionPhaseBoundary =
   delta-reflection-phase-boundary
-    true true true true true
+    true true true true true true
     false false false false
-    "instantiate the existing analytic model on a concrete complex upper-half-plane carrier; prove Delta(-conjugate z)=conjugate(Delta z) from the real q-expansion/eta product and discharge the ordinary argument modulo-pi quotient law"
+    "concrete complex conjugation multiplicativity is now derived; weld the infinite all-SL2(Z) Eisenstein model to the existing constructed-complex finite E4/E6/Delta/j backend, prove the infinite Delta(-conjugate z)=conjugate(Delta z) limit theorem and literal S action, then discharge the ordinary argument modulo-pi quotient law"
 
 ------------------------------------------------------------------------
 -- FiniteReflection is intentionally imported as provenance/theorem substrate:
