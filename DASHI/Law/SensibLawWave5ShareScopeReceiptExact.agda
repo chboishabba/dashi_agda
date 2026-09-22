@@ -42,11 +42,17 @@ data ScopeDecision : Coordinate → Consumer → Set where
     ∀ {coordinate consumer} →
     ScopeDecision coordinate consumer
 
+data Allowed : Coordinate → Consumer → Set where
+  allowedByReceipt :
+    ∀ {coordinate consumer} →
+    Reviewed coordinate →
+    Allowed coordinate consumer
+
 data Included : Coordinate → Consumer → Set where
   includeAfterAllow :
     ∀ {coordinate consumer} →
     Reviewed coordinate →
-    ScopeDecision coordinate consumer →
+    Allowed coordinate consumer →
     Included coordinate consumer
 
 ------------------------------------------------------------------------
@@ -116,10 +122,15 @@ testOnlyTherapistDoctorDeny =
 
 testOnlyLawyerInclusion :
   Included therapistNote lawyer
+testOnlyLawyerAllowed :
+  Allowed therapistNote lawyer
+testOnlyLawyerAllowed =
+  allowedByReceipt therapistReviewed
+
 testOnlyLawyerInclusion =
   includeAfterAllow
     therapistReviewed
-    testOnlyTherapistLawyerAllow
+    testOnlyLawyerAllowed
 
 data Recompute : Consumer → Coordinate → Set where
   becauseIncluded :
@@ -132,14 +143,12 @@ testOnlyTherapistDeltaReopensLawyer :
 testOnlyTherapistDeltaReopensLawyer =
   becauseIncluded testOnlyLawyerInclusion
 
+data DoctorTherapistAllowed : Set where
+
 doctorDeniedDoesNotRecompute :
-  Recompute doctor therapistNote → ⊥
-doctorDeniedDoesNotRecompute
-  (becauseIncluded (includeAfterAllow reviewed scope)) with scope
-... | allow reviewed' = ⊥-elim (reviewAloneCannotCreateScope ())
-... | deny = λ ()
-... | notReady = λ ()
-... | withdrawn = λ ()
+  DoctorTherapistAllowed → ⊥
+doctorDeniedDoesNotRecompute ()
+
 
 record Wave5ShareScopeBoundary : Set where
   constructor wave5ShareScopeBoundary
