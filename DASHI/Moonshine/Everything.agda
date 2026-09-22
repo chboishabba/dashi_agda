@@ -23,3 +23,4 @@ import DASHI.Moonshine.EisensteinConvergenceEndgameCutsetExact
 import DASHI.Moonshine.JInvariantEisensteinAgdaLeanExtractionExact
 import DASHI.Moonshine.JInvariantEisensteinAgdaLeanRealExtractionExact
 import DASHI.Moonshine.EisensteinQExponentCartesianExact
+import DASHI.Moonshine.JInvariantEisensteinBishopSetoidFiniteQSeriesExact
