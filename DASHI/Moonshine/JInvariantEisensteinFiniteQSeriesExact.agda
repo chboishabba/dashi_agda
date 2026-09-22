@@ -19,6 +19,7 @@ module DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Data.Nat.Base using (_≤_)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
 import DASHI.Analysis.ConcreteComplex as Complex
