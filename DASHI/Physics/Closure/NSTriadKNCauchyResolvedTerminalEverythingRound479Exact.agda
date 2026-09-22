@@ -42,3 +42,5 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBri
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact
 
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact
+
+import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Regression
