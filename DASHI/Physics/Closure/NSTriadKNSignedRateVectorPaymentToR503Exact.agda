@@ -16,7 +16,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _-_; _≤_)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -49,7 +49,7 @@ record FixedOutputSignedRateVectorPayment
   field
     residualBudget : ℚ
     signedRateVectorPayment :
-      0 - Vector.pairDifferenceVectorWorkSum
+      0ℚ - Vector.pairDifferenceVectorWorkSum
           (Rate.physicalCellRate system) mixed value items
       ≤ residualBudget
 
