@@ -50,6 +50,9 @@ record EisensteinConvergenceEndgameCutset : Set where
     agdaActualFiniteRecurrenceExtractionCompilerOwned : Bool
     leanLiteralFiniteRecurrenceTargetOwned : Bool
     leanLiteralFiniteRecurrenceConvergenceOwned : Bool
+    leanLiteralLimitsIdentifiedWithMathlibE4E6 : Bool
+    leanNormalizedDeltaLimitCompilerOwned : Bool
+    primitiveRealExtractionCompilerOwnedOnBothSides : Bool
 
     selectedConcreteQNormLawsInhabited : Bool
     quarticSexticStepVDominationInhabited : Bool
@@ -68,7 +71,7 @@ canonicalEisensteinConvergenceEndgameCutset :
   EisensteinConvergenceEndgameCutset
 canonicalEisensteinConvergenceEndgameCutset =
   eisenstein-convergence-endgame-cutset
-    true true true true true true true true true true true true true true
+    true true true true true true true true true true true true true true true true true
     false false false false false false
     false
-    "Route B has now paid more than theorem parity: Agda proves that the actual qOf/e4Truncated/e6Truncated recurrences transport through any primitive ComplexExtraction preserving zero/one/i/pi/+/-/*/exp; Lean owns the matching literal finite recurrences, finite-sum normal forms and their convergence to canonical infinite sums. Do not redo convergence. The first live residual is the faithful primitive representation map from the selected Agda constructed-real/ComplexPair carrier into Lean Real/Complex, including pi and exp compatibility. After that, identify the canonical infinite sums with Mathlib E4/E6 and pay the separate Delta normalization/object weld. Bishop-to-legacy quotient infrastructure is not currently available elsewhere in the repo, so this representation seam is genuine shared infrastructure rather than an Eisenstein estimate."
+    "Route B has now paid more than theorem parity: Agda proves that the actual qOf/e4Truncated/e6Truncated recurrences transport through any primitive ComplexExtraction preserving zero/one/i/pi/+/-/*/exp; Lean owns the matching literal finite recurrences, finite-sum normal forms and their convergence to canonical infinite sums. Do not redo convergence. The first live residual is the faithful primitive representation map from the selected Agda constructed-real/ComplexPair carrier into Lean Real/Complex, including pi and exp compatibility. The canonical Lean infinite sums are now identified with Mathlib E4/E6, and the finite discriminant numerator plus 1/1728-normalized Delta candidate converge to the corresponding E4/E6 expression. The extraction compiler is now lowered on both sides to a primitive real/transcendental morphism preserving 0/1/+/-/*/neg/exp/sin/cos/pi, from which ComplexPair/q/E4/E6/discriminant transport is derived. The first live residual is therefore only the actual faithful selected-Agda-real -> Lean-Real inhabitant. After that, pay the separate same-object identification of normalized (E4^3-E6^2)/1728 with the chosen eta^24/Delta object. Bishop-to-legacy quotient infrastructure is not currently available elsewhere in the repo, so this representation seam is genuine shared infrastructure rather than an Eisenstein estimate."
