@@ -230,6 +230,12 @@ def main() -> int:
     ap.add_argument("--allow-partial", action="store_true")
     ap.add_argument("--slr-review-receipts", type=Path)
     ap.add_argument("--source-audit-receipts", type=Path)
+    ap.add_argument(
+        "--expected-metadata-count",
+        type=int,
+        default=43996,
+        help="denominator for this explicitly scoped screening ledger",
+    )
     args = ap.parse_args()
 
     slr_root = resolve_slr_root(args.slr_root)
@@ -469,6 +475,8 @@ def main() -> int:
         str(parse_receipts_path),
         "--output",
         str(census_output),
+        "--expected-metadata-count",
+        str(args.expected_metadata_count),
     ]
     if args.slr_review_receipts:
         census_cmd.extend(["--slr-review-receipts", str(args.slr_review_receipts.resolve())])
@@ -497,6 +505,8 @@ def main() -> int:
         str(processing_ledger),
         "--output-manifest",
         str(processing_manifest),
+        "--expected-metadata-count",
+        str(args.expected_metadata_count),
     ]
     if args.slr_review_receipts:
         processing_cmd.extend([
@@ -530,6 +540,7 @@ def main() -> int:
     receipt = {
         "schema": "digital-esd-verified-fulltext-parse-run-v1",
         "verified_fulltext_total_count": len(verified_all),
+        "expected_metadata_count": args.expected_metadata_count,
         "selected_for_parse_count": len(verified),
         "materialized_text_count": len(materialization_receipts),
         "materialization_failure_count": len(failures),
