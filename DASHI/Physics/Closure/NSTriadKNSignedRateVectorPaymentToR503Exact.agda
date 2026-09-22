@@ -28,6 +28,10 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExa
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as Vector
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as Rate
+import DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact as R299
+import DASHI.Physics.Closure.NSTriadKNSignedHeatCrossToR410Round415Exact as R415
+import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432Exact as R432
+import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500Exact as R500
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
@@ -55,6 +59,17 @@ record FixedOutputSignedRateVectorPayment
 
 open FixedOutputSignedRateVectorPayment public
 
+a3PaymentToR432 :
+  ∀ {system mixed value items} →
+  FixedOutputSignedRateVectorPayment system mixed value items →
+  R432.FixedOutputSignedCrossPayment
+a3PaymentToR432 {system} {mixed} {value} {items} P =
+  R432.fixed-output-signed-cross-payment
+    (0ℚ - Vector.pairDifferenceVectorWorkSum
+      (Rate.physicalCellRate system) mixed value items)
+    (residualBudget P)
+    (signedRateVectorPayment P)
+
 ------------------------------------------------------------------------
 -- A4/A5: the cutoff-uniform global theorem is exactly the already-selected
 -- OrderedOrientedSpacetimeBudget; once supplied, R503 is automatic.
@@ -69,26 +84,110 @@ module GlobalCompiler
       (Time → C3.Complex3 F) → Set)
     (integration : R495.IntegrationTransportAuthority Time integrateTo) where
 
-  module Ordered = OrderedToR503.OrderedToR503
-    Time initialTime integrateTo DerivativeOf integration
-  module Direct = R503.DirectSignedCross
-    Time initialTime integrateTo DerivativeOf integration
   module Dyn = R240.PhysicalNSDynamics Time initialTime integrateTo DerivativeOf
   module Support = R405.LiteralCutoffSupport
     Time initialTime integrateTo DerivativeOf
+  module Heat = R415.SignedHeatCross
+    Time initialTime integrateTo DerivativeOf
+  module Direct = R500.IntegratedDirect
+    Time initialTime integrateTo DerivativeOf integration
+  module DirectBudget = R503.DirectSignedCross
+    Time initialTime integrateTo DerivativeOf integration
+  module Ordered = OrderedToR503.OrderedToR503
+    Time initialTime integrateTo DerivativeOf integration
+
+  ----------------------------------------------------------------------
+  -- A4, direct fixed-output formulation.
+  --
+  -- decomposition is the theorem-bearing list of local A3 payments after
+  -- conversion to R432. R432 supplies the cardinality-free finite summation.
+  -- The only global analytic field is summedFibreBudgetsPaid.
+  ----------------------------------------------------------------------
+
+  record S2b2LocalToGlobalProducer
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
+    field
+      decomposition :
+        Nat → Time → R432.FixedOutputRemainderDecomposition
+
+      literalRemainderIsDecomposition :
+        (cutoff : Nat) (terminal : Time) →
+        Heat.literalRemainderIntegral T R cutoff terminal
+        ≡ R432.globalWeightedRemainder (decomposition cutoff terminal)
+
+      cutoffIndependentBound : Time → ℚ
+
+      summedFibreBudgetsPaid :
+        (cutoff : Nat) (terminal : Time) →
+        R299.four
+          * R432.sumFibreBudget
+              (R432.payments (decomposition cutoff terminal))
+        ≤ cutoffIndependentBound terminal
+
+  open S2b2LocalToGlobalProducer public
+
+  literalRemainderUpper :
+    ∀ {T R} →
+    (P : S2b2LocalToGlobalProducer T R) →
+    (cutoff : Nat) (terminal : Time) →
+    Heat.literalRemainderIntegral T R cutoff terminal
+    ≤ cutoffIndependentBound P terminal
+  literalRemainderUpper {T} {R} P cutoff terminal =
+    let
+      D = decomposition P cutoff terminal
+
+      localSum :
+        R432.globalWeightedRemainder D
+        ≤ R299.four * R432.sumFibreBudget (R432.payments D)
+      localSum = R432.fixedOutputPaymentsBoundGlobalRemainder D
+
+      physicalSum :
+        Heat.literalRemainderIntegral T R cutoff terminal
+        ≤ R299.four * R432.sumFibreBudget (R432.payments D)
+      physicalSum =
+        subst
+          (λ lower →
+            lower ≤ R299.four * R432.sumFibreBudget (R432.payments D))
+          (sym (literalRemainderIsDecomposition P cutoff terminal))
+          localSum
+    in
+    ℚP.≤-trans physicalSum (summedFibreBudgetsPaid P cutoff terminal)
+
+  ----------------------------------------------------------------------
+  -- A5: direct compiler to the canonical R503 consumer.
+  ----------------------------------------------------------------------
+
+  s2b2LocalPaymentsBuildDirectOffDiagonalBudget :
+    ∀ {T R} →
+    S2b2LocalToGlobalProducer T R →
+    DirectBudget.DirectOffDiagonalBudget T R
+  s2b2LocalPaymentsBuildDirectOffDiagonalBudget {T} {R} P = record
+    { DirectBudget.cutoffIndependentBound = cutoffIndependentBound P
+    ; DirectBudget.directOffDiagonalBudget = λ cutoff terminal →
+        subst
+          (λ lhs → lhs ≤ cutoffIndependentBound P terminal)
+          (Direct.literalR406IntegralIsFourIntegratedDirectCompanion
+            T R cutoff terminal)
+          (literalRemainderUpper P cutoff terminal)
+    }
+
+  ----------------------------------------------------------------------
+  -- Existing ordered-kernel formulation remains a downstream producer
+  -- interface when a proof is stated there directly.
+  ----------------------------------------------------------------------
 
   S2b2GlobalSpacetimePayment :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
     Support.LiteralNonzeroCutoffTrajectory T → Set₁
   S2b2GlobalSpacetimePayment = Ordered.OrderedOrientedSpacetimeBudget
 
-  s2b2PaymentBuildsDirectOffDiagonalBudget :
+  s2b2OrderedPaymentBuildsDirectOffDiagonalBudget :
     ∀ {T R} →
     S2b2GlobalSpacetimePayment T R →
-    Direct.DirectOffDiagonalBudget T R
-  s2b2PaymentBuildsDirectOffDiagonalBudget =
+    DirectBudget.DirectOffDiagonalBudget T R
+  s2b2OrderedPaymentBuildsDirectOffDiagonalBudget =
     Ordered.orderedBudgetBuildsR503
-
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
@@ -98,6 +197,15 @@ a3ExactSignedRateVectorPaymentTypeConstructed = true
 
 a3QuantitativePhysicalPaymentClosed : Bool
 a3QuantitativePhysicalPaymentClosed = false
+
+a3PaymentConvertsToR432FixedOutputPayment : Bool
+a3PaymentConvertsToR432FixedOutputPayment = true
+
+a4CardinalityFreeLocalToGlobalCompilerClosed : Bool
+a4CardinalityFreeLocalToGlobalCompilerClosed = true
+
+a4CutoffUniformSumStillAnalyticInput : Bool
+a4CutoffUniformSumStillAnalyticInput = true
 
 a4GlobalSpacetimePaymentReusesSelectedOrderedBudget : Bool
 a4GlobalSpacetimePaymentReusesSelectedOrderedBudget = true
@@ -112,6 +220,18 @@ a3ExactSignedRateVectorPaymentTypeConstructedIsTrue = refl
 a3QuantitativePhysicalPaymentClosedIsFalse :
   a3QuantitativePhysicalPaymentClosed ≡ false
 a3QuantitativePhysicalPaymentClosedIsFalse = refl
+
+a3PaymentConvertsToR432FixedOutputPaymentIsTrue :
+  a3PaymentConvertsToR432FixedOutputPayment ≡ true
+a3PaymentConvertsToR432FixedOutputPaymentIsTrue = refl
+
+a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue :
+  a4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
+a4CardinalityFreeLocalToGlobalCompilerClosedIsTrue = refl
+
+a4CutoffUniformSumStillAnalyticInputIsTrue :
+  a4CutoffUniformSumStillAnalyticInput ≡ true
+a4CutoffUniformSumStillAnalyticInputIsTrue = refl
 
 a4GlobalSpacetimePaymentReusesSelectedOrderedBudgetIsTrue :
   a4GlobalSpacetimePaymentReusesSelectedOrderedBudget ≡ true
