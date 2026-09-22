@@ -21,8 +21,13 @@ module DASHI.Physics.Closure.NSTriadKNBPhaseDiscoveryFrontierRound490Exact where
 --   * R128 polynomial square-gap / Pluecker identity.
 --
 -- Still genuinely analytic:
---   a theorem-bearing quantitative lower/payment estimate on the actual
---   quotient slot defect / rate-weighted signed pair-difference family.
+--   a theorem-bearing quantitative payment on the actual rate-weighted signed
+--   pair-difference family.
+--
+-- The new live aggregate bridge reaches the normalized quadratic slot kernel
+-- after COMPLETE fixed-output summation.  It does not justify the stronger
+-- pointwise identification with the older unnormalized R205 raw-curl partner
+-- carrier, so that historical route remains fail-closed and non-mandatory.
 --
 -- A concrete distinct-incidence same-slot collision exists, so an
 -- incidence-label-only coercivity theorem is not an admissible substitute.
@@ -94,9 +99,17 @@ round490A3ToR432LiteralR406SameObjectAttachmentClosed : Bool
 round490A3ToR432LiteralR406SameObjectAttachmentClosed =
   SignedPayment.a3ToR432LiteralR406SameObjectAttachmentClosed
 
+round490A3NormalizedQuadraticKernelAggregateBridgeClosed : Bool
+round490A3NormalizedQuadraticKernelAggregateBridgeClosed =
+  SignedPayment.a3NormalizedQuadraticKernelAggregateBridgeClosed
+
 round490A3R205RawCurlSameObjectBridgeClosed : Bool
 round490A3R205RawCurlSameObjectBridgeClosed =
   SignedPayment.a3R205RawCurlPartnerSameObjectBridgeClosed
+
+round490A3R205PointwiseIdentificationAdmissible : Bool
+round490A3R205PointwiseIdentificationAdmissible =
+  SignedPayment.a3R205PointwiseIdentificationAdmissible
 
 round490A4CardinalityFreeLocalToGlobalCompilerClosed : Bool
 round490A4CardinalityFreeLocalToGlobalCompilerClosed =
@@ -180,10 +193,20 @@ round490A3ToR432LiteralR406SameObjectAttachmentClosedIsFalse :
 round490A3ToR432LiteralR406SameObjectAttachmentClosedIsFalse =
   SignedPayment.a3ToR432LiteralR406SameObjectAttachmentClosedIsFalse
 
+round490A3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue :
+  round490A3NormalizedQuadraticKernelAggregateBridgeClosed ≡ true
+round490A3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue =
+  SignedPayment.a3NormalizedQuadraticKernelAggregateBridgeClosedIsTrue
+
 round490A3R205RawCurlSameObjectBridgeClosedIsFalse :
   round490A3R205RawCurlSameObjectBridgeClosed ≡ false
 round490A3R205RawCurlSameObjectBridgeClosedIsFalse =
   SignedPayment.a3R205RawCurlPartnerSameObjectBridgeClosedIsFalse
+
+round490A3R205PointwiseIdentificationAdmissibleIsFalse :
+  round490A3R205PointwiseIdentificationAdmissible ≡ false
+round490A3R205PointwiseIdentificationAdmissibleIsFalse =
+  SignedPayment.a3R205PointwiseIdentificationAdmissibleIsFalse
 
 round490A4CardinalityFreeLocalToGlobalCompilerClosedIsTrue :
   round490A4CardinalityFreeLocalToGlobalCompilerClosed ≡ true
