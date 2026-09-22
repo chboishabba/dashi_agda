@@ -60,6 +60,7 @@ import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
 import DASHI.Moonshine.JSameWeightQuotientInvariantExact as JQuotient
 import DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact as Analytic
 import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Equivariance
+import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as ModularLevel
 
 ------------------------------------------------------------------------
 -- 1. Typed source attribution.
@@ -197,6 +198,9 @@ record AnalyticReflectionEvidence : Set where
     fixedLocusPhaseEquationDerived : Bool
     sixfoldModuloHalfTurnDerivedConditionally : Bool
     finiteObserverCommutingSquaresDerivedConditionally : Bool
+    modularCuspFibresFor3_6_9_27Constructed : Bool
+    reflectionMatchesCuspInversionAt3_9_27 : Bool
+    level27To9To3TranslationCoveringCommutes : Bool
     concreteComplexConjugationInstantiated : Bool
     concretePhaseQuotientInstantiated : Bool
     rendererReflectionIntertwinerInstantiated : Bool
@@ -208,6 +212,7 @@ currentAnalyticReflectionEvidence : AnalyticReflectionEvidence
 currentAnalyticReflectionEvidence =
   analytic-reflection-evidence
     true true true true
+    true true true
     false false false false
 
 ------------------------------------------------------------------------
@@ -227,6 +232,8 @@ record JMDArchimedesDelta369Boundary : Set where
     analyticReflectionIdentityDerivedFromExistingWeight12 : Bool
     fixedLocusSixfoldPhaseInterfaceDerived : Bool
     reflectionEquivariantObserverSquaresDerived : Bool
+    modularLevelCuspObserverTargetsConstructed : Bool
+    fullModularDeckGroupCollapsedToCyclic : Bool
     concreteComplexAnalyticInstantiationClosed : Bool
     base369ConstructsDeltaOrJ : Bool
     finiteObserverEqualsContinuousPhase : Bool
@@ -238,7 +245,7 @@ canonicalJMDArchimedesDelta369Boundary : JMDArchimedesDelta369Boundary
 canonicalJMDArchimedesDelta369Boundary =
   jmd-archimedes-delta369-boundary
     true true true true true true
-    true true true false
+    true true true true false false
     false false false
 
 ------------------------------------------------------------------------
@@ -252,7 +259,10 @@ canonicalJMDArchimedesDelta369Boundary =
 -- existing weight-12 theorem plus a concrete conjugation/S interface, then
 -- derives the fixed-locus phase equation and a conditional modulo-half-turn
 -- sixfold theorem.  Equivariance derives the C3/C6/C9/C27 commuting squares
--- from one renderer intertwiner.
+-- from one renderer intertwiner.  ModularLevel now identifies the finite
+-- 3/9/27 carriers with the canonical cusp-translation fibres Z/3^d Z,
+-- supplies the level-6 cyclic cusp action, proves 27->9->3 translation
+-- compatibility, and identifies reflection with cusp inversion.
 --
 -- The remaining source-parity debt is therefore narrower: instantiate those
 -- interfaces on one concrete complex upper-half-plane/argument carrier and
