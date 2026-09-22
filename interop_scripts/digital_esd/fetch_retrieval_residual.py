@@ -41,6 +41,25 @@ ALLOWED_TYPES = {
 }
 
 
+def official_eric_fulltext_url(source_identity_reference: str) -> str | None:
+    """Return ERIC's canonical public full-text URL when the ID is usable.
+
+    A reviewed retrieval seed can legitimately carry only its stable ERIC
+    identity.  That is enough to nominate ERIC's public file endpoint, but it
+    is not evidence that a file exists there: a 404 remains a recorded
+    retrieval residual.
+    """
+    prefix, separator, identifier = source_identity_reference.partition(":")
+    if prefix != "ERIC" or separator != ":":
+        return None
+    identifier = identifier.strip().upper()
+    if len(identifier) < 3 or identifier[:2] not in {"EJ", "ED"}:
+        return None
+    if not identifier[2:].isdigit():
+        return None
+    return f"https://files.eric.ed.gov/fulltext/{identifier}.pdf"
+
+
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -146,6 +165,9 @@ def main() -> int:
             failures.append({"reason": "blank-source-identity", "row": row})
             continue
         urls = [str(u).strip() for u in row.get("candidate_urls", []) if str(u).strip()]
+        eric_url = official_eric_fulltext_url(ref)
+        if eric_url and eric_url not in urls:
+            urls.append(eric_url)
         if not urls:
             failures.append({
                 "source_identity_reference": ref,
