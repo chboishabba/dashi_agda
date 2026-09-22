@@ -114,12 +114,12 @@ proofRuleHyperfabric :
   (system : RuleProof.RuleApplicationSystem State Rule) →
   Hyper.TypedHyperfabric State (RuleOccurrence system)
 proofRuleHyperfabric system = record
-  { vertexStalk = ruleVertexStalk
-  ; edgeStalk = ruleEdgeStalk
-  ; incidence = RuleIncidence
-  ; restrict = ruleRestrict
-  ; edgeProvenance = ruleEdgeProvenance
-  ; edgeSalience = ruleEdgeSalience
+  { vertexStalk = ruleVertexStalk {system = system}
+  ; edgeStalk = ruleEdgeStalk {system = system}
+  ; incidence = RuleIncidence {system = system}
+  ; restrict = ruleRestrict {system = system}
+  ; edgeProvenance = ruleEdgeProvenance {system = system}
+  ; edgeSalience = ruleEdgeSalience {system = system}
   ; fabricLabel = "proof-carrying textile rule hyperfabric"
   }
 
@@ -224,14 +224,14 @@ motifMismatchObstruction :
   (assignment : MotifAssignment Rule) →
   (bad : MotifMismatch {system = system} assignment) →
   Hyper.HyperfabricObstruction
+    {Residual = MotifMismatch {system = system} assignment}
     (proofRuleHyperfabric system)
-    (MotifMismatch {system = system} assignment)
 motifMismatchObstruction assignment bad = record
-  { Hyper.obstructedEdge = occurrence bad
-  ; Hyper.residual = bad
-  ; Hyper.obstructionProvenance =
+  { obstructedEdge = MotifMismatch.occurrence bad
+  ; residual = bad
+  ; obstructionProvenance =
       "physical proof motif disagrees with the rule assigned to this proof-carrying edge" ∷ []
-  ; Hyper.obstructionReceipt =
+  ; obstructionReceipt =
       "proof-fabric local compatibility failure"
   }
 
@@ -258,7 +258,7 @@ record ProofCarryingTextileBoundary : Set where
     proofDependenciesAreHyperfabricIncidence : Bool
     malformedMotifProducesHyperfabricObstruction : Bool
     everyCertifiedTraceCompilesToCertifiedFabric : Bool
-    wellFormedFabricCarriesCertifiedTrace : Bool
+    wellFormedFabricCarriesCertifiedTraceBoundary : Bool
     motifLabelAloneProvesRule : Bool
     visiblePatternCreatesTheoremTruth : Bool
 
