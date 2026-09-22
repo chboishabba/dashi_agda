@@ -35,6 +35,8 @@ import DASHI.Moonshine.JInvariantEisensteinConstructedKleinJExact as FiniteKlein
 import DASHI.Moonshine.EisensteinTruncationConvergenceCompilerExact as LimitCompiler
 import DASHI.Moonshine.EisensteinUpperHalfPlaneQDiskExact as QDisk
 import DASHI.Moonshine.EisensteinCoefficientMajorantExact as Majorant
+import DASHI.Moonshine.EisensteinConvergenceEndgameCutsetExact as ConvergenceEndgame
+import DASHI.Moonshine.EisensteinBishopLegacyCoordinateTransportExact as CoordinateTransport
 
 ------------------------------------------------------------------------
 -- 1. Explicit bidirectional same-object bridge.
@@ -187,6 +189,9 @@ record DeltaConstructedComplexReflectionCutsetBoundary : Set where
     finiteToInfiniteDeltaLimitCompilerOwned : Bool
     sigma3Sigma5GrowthAndQDiskReductionOwned : Bool
     coefficientMajorantReductionOwned : Bool
+    polynomialDominationToConvergenceCompilerOwned : Bool
+    additiveSeriesToTruncationLimitCompilerOwned : Bool
+    bishopLegacyCoordinateTransportCompilerOwned : Bool
     finiteRouteEqualsInfiniteAnalyticRoute : Bool
 
     abstractEisensteinScalarWeldedToConcreteComplex : Bool
@@ -204,6 +209,6 @@ canonicalDeltaConstructedComplexReflectionCutsetBoundary :
 canonicalDeltaConstructedComplexReflectionCutsetBoundary =
   delta-constructed-complex-reflection-cutset-boundary
     true true true true true
-    true true true true false
+    true true true true true true true false
     false false false false false
-    "finite E4/E6, internal sigma3/sigma5 bounds, upper-half-plane q-disk reduction, complex-term polynomial-geometric majorants, and the Delta/j limit compiler now exist. Close the selected backend norm/q laws and the eventual polynomial-geometric successor ratios, transport to literal E4_N/E6_N convergence, then prove the same-object identification with EisensteinAnalyticModel before attaching S/conjugation and the unit-circle fixed-point law"
+    "finite E4/E6, internal sigma3/sigma5 bounds, q-disk reduction, polynomial-geometric majorants, Bishop geometric/comparison convergence, additive truncation alignment, and the explicit Bishop-to-legacy coordinate compiler now exist. The obsolete direct n^k r^n ratio leaf is gone. Remaining: instantiate the selected ConcreteComplex q/norm laws, construct the quartic/sextic Step-V domination witness, inhabit the explicit BishopLegacySeriesTransport/Nat-function bridge and four coordinate-term identifications, then weld the resulting infinite E4/E6 objects to EisensteinAnalyticModel before S/conjugation and the unit-circle fixed-point law."
