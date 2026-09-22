@@ -23,6 +23,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real
@@ -160,8 +161,8 @@ e4CoefficientBound :
   240 * Q.sigma3 Q.canonicalDivisorPowerKernel n
   ≤ e4PolynomialCoefficient n
 e4CoefficientBound n =
-  Data.Nat.Properties.*-mono-≤
-    Data.Nat.Properties.≤-refl
+  NatP.*-mono
+    NatP.≤-refl
     (Q.canonicalSigma3QuarticBound n)
 
 e6CoefficientBound :
@@ -169,8 +170,8 @@ e6CoefficientBound :
   504 * Q.sigma5 Q.canonicalDivisorPowerKernel n
   ≤ e6PolynomialCoefficient n
 e6CoefficientBound n =
-  Data.Nat.Properties.*-mono-≤
-    Data.Nat.Properties.≤-refl
+  NatP.*-mono
+    NatP.≤-refl
     (Q.canonicalSigma5SexticBound n)
 
 ------------------------------------------------------------------------
@@ -186,14 +187,14 @@ e4TermMajorized :
     (Real.real (Complex.realPackage C))
     (norm laws (e4Term C n tau))
     (e4ScalarMajorant {C} (norm laws (Q.qOf C tau)) n)
-e4TermMajorized laws tau n
+e4TermMajorized {C} laws tau n
   rewrite normNaturalScale laws
     (240 * Q.sigma3 Q.canonicalDivisorPowerKernel n)
-    (Q.powC (Q.qOf _ tau) n)
-  | normPower laws (Q.qOf _ tau) n =
+    (Q.powC (Q.qOf C tau) n)
+  | normPower laws (Q.qOf C tau) n =
   scaleNatMonotoneCoefficient laws
     (e4CoefficientBound n)
-    (powR (norm laws (Q.qOf _ tau)) n)
+    (powR (norm laws (Q.qOf C tau)) n)
 
 e6TermMajorized :
   ∀ {C} →
@@ -204,14 +205,14 @@ e6TermMajorized :
     (Real.real (Complex.realPackage C))
     (norm laws (e6Term C n tau))
     (e6ScalarMajorant {C} (norm laws (Q.qOf C tau)) n)
-e6TermMajorized laws tau n
+e6TermMajorized {C} laws tau n
   rewrite normNaturalScale laws
     (504 * Q.sigma5 Q.canonicalDivisorPowerKernel n)
-    (Q.powC (Q.qOf _ tau) n)
-  | normPower laws (Q.qOf _ tau) n =
+    (Q.powC (Q.qOf C tau) n)
+  | normPower laws (Q.qOf C tau) n =
   scaleNatMonotoneCoefficient laws
     (e6CoefficientBound n)
-    (powR (norm laws (Q.qOf _ tau)) n)
+    (powR (norm laws (Q.qOf C tau)) n)
 
 ------------------------------------------------------------------------
 -- 7. Remaining real theorem interface.
