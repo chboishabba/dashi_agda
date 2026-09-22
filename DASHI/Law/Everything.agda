@@ -200,6 +200,8 @@ import DASHI.Law.ReaderVisualisationPickParityRegression
 import DASHI.Law.LegalWorldBoundMatterRuntimeExact
 import DASHI.Law.LegalWorldBoundMatterRuntimeRegression
 import DASHI.Law.SensibLawAdversarialProofSearchRuntimeRegression
+import DASHI.Law.SensibLawLegalCaseBatteryRegression
+import DASHI.Law.SensibLawLegalCaseBatteryExact
 import DASHI.Law.SensibLawAdversarialProofSearchRuntimeExact
 import DASHI.Law.SensibLawSharedWorldConsumerJoinRegression
 import DASHI.Law.SensibLawSharedWorldConsumerJoinExact
