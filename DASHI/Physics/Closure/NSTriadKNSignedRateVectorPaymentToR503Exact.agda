@@ -34,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as 
 import DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact as R299
 import DASHI.Physics.Closure.NSTriadKNSignedHeatCrossToR410Round415Exact as R415
 import DASHI.Physics.Closure.NSTriadKNFixedOutputSignedCrossAggregationRound432Exact as R432
+import DASHI.Physics.Closure.NSTriadKNDirectResolventTrajectoryCompanionRound499Exact as R499
 import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500Exact as R500
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 import DASHI.Physics.Closure.NSTriadKNPhysicalTrajectoryRetainedGlobalFluxRound403Exact as R403
@@ -120,6 +121,8 @@ module LiveA3
     Time initialTime integrateTo DerivativeOf
   module Live = R403.LiveTrajectoryFlux
     Time initialTime integrateTo DerivativeOf
+  module Direct499 = R499.DirectTrajectory
+    Time initialTime integrateTo DerivativeOf
 
   physicalSystemAt :
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
@@ -201,16 +204,29 @@ module LiveA3
   -- scalar on the SAME live snapshot.  This is representation debt only.
   ----------------------------------------------------------------------
 
+  liveR406Outputs :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Nat → Time → List Z3.FourierMode
+  liveR406Outputs T R cutoff time =
+    Direct499.Flux.At.outputs T R cutoff time
+
+  CanonicalLivePaymentFamily :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Nat → Time → Set
+  CanonicalLivePaymentFamily T R cutoff time =
+    LivePaymentFamilyOn T R cutoff time
+      (liveR406Outputs T R cutoff time)
+
   record LiveA3ToR406Attachment
       (T : Dyn.PhysicalNSGalerkinTrajectory)
       (R : Support.LiteralNonzeroCutoffTrajectory T)
       (cutoff : Nat) (time : Time)
-      (outputs : List Z3.FourierMode)
-      (family : LivePaymentFamilyOn T R cutoff time outputs) : Set where
+      (family : CanonicalLivePaymentFamily T R cutoff time) : Set where
     field
-      literalR406InstantaneousRemainder : ℚ
       literalR406IsFourSignedRateVectorSum :
-        literalR406InstantaneousRemainder
+        Direct499.Flux.At.weightedRemainder T R cutoff time
         ≡ R299.four * sumSignedRateVectorPayment family
 
   open LiveA3ToR406Attachment public
