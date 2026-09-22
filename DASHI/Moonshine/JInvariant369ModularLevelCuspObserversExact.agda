@@ -43,6 +43,7 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Kernel
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
+import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 
 ------------------------------------------------------------------------
 -- 1. Literal translation matrices.
@@ -548,7 +549,7 @@ record CuspLiftedPoint
   constructor cusp-lifted-point
   field
     basePoint :
-      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+      Klein.Point
         (Render.klein R)
     levelCoordinate : Fibre
 
@@ -557,14 +558,14 @@ open CuspLiftedPoint public
 forgetLevel :
   ∀ {R Fibre} →
   CuspLiftedPoint R Fibre →
-  DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+  Klein.Point
     (Render.klein R)
 forgetLevel = basePoint
 
 liftedJValue :
   ∀ {R Fibre} →
   CuspLiftedPoint R Fibre →
-  DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Value
+  Klein.Value
     (Render.klein R)
 liftedJValue {R} p = Render.jValue R (basePoint p)
 
@@ -670,35 +671,35 @@ record RendererLevelFibreIdentification
     (R : Render.JPhaseRenderingAlgebra) : Set₁ where
   field
     level3At :
-      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+      Klein.Point
         (Render.klein R) →
       level3CuspFibre
     level9At :
-      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+      Klein.Point
         (Render.klein R) →
       level9CuspFibre
     level27At :
-      DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+      Klein.Point
         (Render.klein R) →
       level27CuspFibre
 
     phase3AgreesWithLevel :
       (z :
-        DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+        Klein.Point
           (Render.klein R)) →
       observer3ToLevel3 (Render.phase3 R (Render.jPhase R z))
       ≡ level3At z
 
     phase9AgreesWithLevel :
       (z :
-        DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+        Klein.Point
           (Render.klein R)) →
       observer9ToLevel9 (Render.phase9 R (Render.jPhase R z))
       ≡ level9At z
 
     phase27AgreesWithLevel :
       (z :
-        DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact.Point
+        Klein.Point
           (Render.klein R)) →
       observer27ToLevel27 (Render.phase27 R (Render.jPhase R z))
       ≡ level27At z
