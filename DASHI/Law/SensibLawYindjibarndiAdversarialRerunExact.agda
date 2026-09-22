@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 import DASHI.Law.SensibLawAdversarialProofSearchRuntimeExact as Search
 import DASHI.Law.SensibLawReviewedTreatmentProofGraphBridgeExact as Bridge
 import DASHI.Law.SensibLawYindjibarndiEmpiricalAuthorityJoinExact as Y
+import DASHI.Law.SensibLawSharedWorldConsumerJoinExact as Join
 
 ------------------------------------------------------------------------
 -- M8.1 / S20.11 YINDJIBARNDI ADVERSARIAL RERUN
