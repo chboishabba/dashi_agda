@@ -65,6 +65,10 @@ round490PhysicalRateDifferenceSameObjectWeldClosed : Bool
 round490PhysicalRateDifferenceSameObjectWeldClosed =
   Rate.physicalCellRateDifferenceSameObjectWeldClosed
 
+round490PhysicalRateDifferenceSameOutputFactorizationClosed : Bool
+round490PhysicalRateDifferenceSameOutputFactorizationClosed =
+  Rate.physicalRateDifferenceSameOutputFactorizationClosed
+
 round490ExactA3PaymentTypeConstructed : Bool
 round490ExactA3PaymentTypeConstructed =
   SignedPayment.a3ExactSignedRateVectorPaymentTypeConstructed
@@ -123,6 +127,11 @@ round490PhysicalRateDifferenceSameObjectWeldClosedIsTrue :
   round490PhysicalRateDifferenceSameObjectWeldClosed ≡ true
 round490PhysicalRateDifferenceSameObjectWeldClosedIsTrue =
   Rate.physicalCellRateDifferenceSameObjectWeldClosedIsTrue
+
+round490PhysicalRateDifferenceSameOutputFactorizationClosedIsTrue :
+  round490PhysicalRateDifferenceSameOutputFactorizationClosed ≡ true
+round490PhysicalRateDifferenceSameOutputFactorizationClosedIsTrue =
+  Rate.physicalRateDifferenceSameOutputFactorizationClosedIsTrue
 
 round490ExactA3PaymentTypeConstructedIsTrue :
   round490ExactA3PaymentTypeConstructed ≡ true
