@@ -6,7 +6,9 @@ module DASHI.Interop.LeanMoonshineEisensteinAnalyticParityExact where
 -- External formal source:
 --   repository: chboishabba/dashi_lean4
 --   branch: agent/moonshine-eisenstein-analytic-20260922
---   module: Integration.MoonshineEisensteinAnalytic
+--   modules:
+--     Integration.MoonshineEisensteinAnalytic
+--     Integration.MoonshineEisensteinWeld
 --   Mathlib pin: v4.28.0
 --
 -- Source authority in that Lean module is Mathlib:
@@ -49,7 +51,8 @@ record LeanMoonshineEisensteinAnalyticParity : Set where
   field
     leanRepository : String
     leanBranch : String
-    leanModule : String
+    leanAnalyticModule : String
+    leanWeldModule : String
     mathlibPin : String
 
     qCartesianTheoremOwnedInLean : Bool
@@ -60,7 +63,10 @@ record LeanMoonshineEisensteinAnalyticParity : Set where
     e4ConvergedQExpansionOwnedInLean : Bool
     e6ConvergedQExpansionOwnedInLean : Bool
     eta24NonvanishingOwnedInLean : Bool
+    typedQE4E6SameObjectTransportCompilerOwnedInLean : Bool
+    typedDeltaEta24TransportCompilerOwnedInLean : Bool
 
+    extractedAgdaSurfaceInhabitedInLean : Bool
     agdaLeanCarrierSameObjectProved : Bool
     leanTheoremAutomaticallyPromotesAgdaAnalyticLeaf : Bool
     deltaE4E6IdentityAvailableAtPinnedMathlib : Bool
@@ -77,7 +83,8 @@ canonicalLeanMoonshineEisensteinAnalyticParity =
     "chboishabba/dashi_lean4"
     "agent/moonshine-eisenstein-analytic-20260922"
     "Integration.MoonshineEisensteinAnalytic"
+    "Integration.MoonshineEisensteinWeld"
     "v4.28.0"
-    true true true true true true true true
-    false false false false
-    "Lean/Mathlib already machine-formalizes the standard q-disk and Eisenstein convergence facts on ordinary complex numbers. The Agda endgame should therefore target the explicit carrier/same-object weld, the four coordinate term identifications and the selected Delta/Eisenstein object identification rather than reproving classical convergence from scratch."
+    true true true true true true true true true true
+    false false false false false
+    "Lean/Mathlib already machine-formalizes the standard q-disk and Eisenstein convergence facts on ordinary complex numbers. The Lean companion now also owns a typed transport compiler: once an extracted surface supplies exact pointwise q/E4/E6 identities, q-disk, quartic/sextic summability and converged q-expansions transport automatically; eta^24 nonvanishing is similarly gated behind a separate Delta weld. The remaining Agda endgame should therefore target the extracted carrier/same-object weld, the four coordinate term identifications and the Delta normalization/object identification rather than reproving classical convergence from scratch."
