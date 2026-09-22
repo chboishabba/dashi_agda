@@ -82,7 +82,7 @@ conjugateProduct {R} C N M
       (Ring.negAdd N (_*_ R a d) (_*_ R b c))
       (cong₂ (_+_ R)
         (sym (mulNegRightDerived M a d))
-        (sym (Phase.negMulRight M b c))))
+        (Phase.negMulRight M b c)))
 
 ------------------------------------------------------------------------
 -- Boundary: this discharges a complex-algebra seam, not the analytic Delta
