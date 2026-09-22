@@ -286,6 +286,24 @@ module LiveA3
       (helicalScalars T)
       output
 
+
+  LiveFixedOutputSeparationGeometryPayment :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Nat → Time → Z3.FourierMode → Set
+  LiveFixedOutputSeparationGeometryPayment T R cutoff time output =
+    FixedOutputSeparationGeometryPayment
+      (physicalSystemAt T R cutoff time)
+      (helicalScalars T)
+      output
+
+  liveSeparationPaymentBuildsPhysicalRatePayment :
+    ∀ {T R cutoff time output} →
+    LiveFixedOutputSeparationGeometryPayment T R cutoff time output →
+    LiveFixedOutputSignedRateVectorPayment T R cutoff time output
+  liveSeparationPaymentBuildsPhysicalRatePayment =
+    separationGeometryPaymentBuildsPhysicalRatePayment
+
   livePaymentToR432Datatype :
     ∀ {T R cutoff time output} →
     LiveFixedOutputSignedRateVectorPayment T R cutoff time output →
@@ -315,6 +333,38 @@ module LiveA3
   paymentList paymentNil = []
   paymentList (paymentCons head tail) =
     livePaymentToR432Datatype head ∷ paymentList tail
+
+
+  data LiveSeparationPaymentFamilyOn
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T)
+      (cutoff : Nat) (time : Time) :
+      List Z3.FourierMode → Set where
+    separationPaymentNil :
+      LiveSeparationPaymentFamilyOn T R cutoff time []
+    separationPaymentCons :
+      ∀ {output outputs} →
+      LiveFixedOutputSeparationGeometryPayment T R cutoff time output →
+      LiveSeparationPaymentFamilyOn T R cutoff time outputs →
+      LiveSeparationPaymentFamilyOn T R cutoff time (output ∷ outputs)
+
+  separationFamilyToPhysical :
+    ∀ {T R cutoff time outputs} →
+    LiveSeparationPaymentFamilyOn T R cutoff time outputs →
+    LivePaymentFamilyOn T R cutoff time outputs
+  separationFamilyToPhysical separationPaymentNil = paymentNil
+  separationFamilyToPhysical (separationPaymentCons head tail) =
+    paymentCons
+      (liveSeparationPaymentBuildsPhysicalRatePayment head)
+      (separationFamilyToPhysical tail)
+
+  separationPaymentList :
+    ∀ {T R cutoff time outputs} →
+    LiveSeparationPaymentFamilyOn T R cutoff time outputs →
+    List R432.FixedOutputSignedCrossPayment
+  separationPaymentList family =
+    paymentList (separationFamilyToPhysical family)
+
 
   sumSignedRateVectorPayment :
     ∀ {T R cutoff time outputs} →
@@ -357,6 +407,21 @@ module LiveA3
     LivePaymentFamilyOn T R cutoff time
       (liveR406Outputs T R cutoff time)
 
+
+  CanonicalLiveSeparationPaymentFamily :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    Nat → Time → Set
+  CanonicalLiveSeparationPaymentFamily T R cutoff time =
+    LiveSeparationPaymentFamilyOn T R cutoff time
+      (liveR406Outputs T R cutoff time)
+
+  canonicalSeparationFamilyToPhysical :
+    ∀ {T R cutoff time} →
+    CanonicalLiveSeparationPaymentFamily T R cutoff time →
+    CanonicalLivePaymentFamily T R cutoff time
+  canonicalSeparationFamilyToPhysical = separationFamilyToPhysical
+
   record LiveA3ToR406Attachment
       (T : Dyn.PhysicalNSGalerkinTrajectory)
       (R : Support.LiteralNonzeroCutoffTrajectory T)
@@ -368,6 +433,17 @@ module LiveA3
         ≡ R299.four * sumSignedRateVectorPayment family
 
   open LiveA3ToR406Attachment public
+
+
+  LiveSeparationA3ToR406Attachment :
+    (T : Dyn.PhysicalNSGalerkinTrajectory) →
+    (R : Support.LiteralNonzeroCutoffTrajectory T) →
+    (cutoff : Nat) (time : Time) →
+    CanonicalLiveSeparationPaymentFamily T R cutoff time → Set
+  LiveSeparationA3ToR406Attachment T R cutoff time family =
+    LiveA3ToR406Attachment
+      T R cutoff time
+      (canonicalSeparationFamilyToPhysical family)
 
 ------------------------------------------------------------------------
 -- Standard ordered-integration authority.
@@ -597,6 +673,66 @@ module GlobalCompiler
           (liveA3IntegratedRemainderUpper
             orderIntegration P cutoff terminal)
     }
+
+  ----------------------------------------------------------------------
+  -- Preferred geometric A3 producer.  This is the same live compiler, but
+  -- theorem search is stated directly on the squared separation geometry.
+  ----------------------------------------------------------------------
+
+  record LiveSeparationA3SpacetimeProducer
+      (T : Dyn.PhysicalNSGalerkinTrajectory)
+      (R : Support.LiteralNonzeroCutoffTrajectory T) : Set₁ where
+    field
+      separationFamilyAt :
+        (cutoff : Nat) (time : Time) →
+        Local.CanonicalLiveSeparationPaymentFamily T R cutoff time
+
+      separationAttachmentAt :
+        (cutoff : Nat) (time : Time) →
+        Local.LiveSeparationA3ToR406Attachment
+          T R cutoff time (separationFamilyAt cutoff time)
+
+      cutoffIndependentBound : Time → ℚ
+
+      integratedResidualBudgetsPaid :
+        (cutoff : Nat) (terminal : Time) →
+        integrateTo
+          (λ time →
+            R299.four
+              * Local.sumResidualBudgets
+                  (Local.canonicalSeparationFamilyToPhysical
+                    (separationFamilyAt cutoff time)))
+          terminal
+        ≤ cutoffIndependentBound terminal
+
+  open LiveSeparationA3SpacetimeProducer public
+
+  separationProducerToPhysical :
+    ∀ {T R} →
+    LiveSeparationA3SpacetimeProducer T R →
+    LiveA3SpacetimeProducer T R
+  separationProducerToPhysical P = record
+    { familyAt = λ cutoff time →
+        Local.canonicalSeparationFamilyToPhysical
+          (separationFamilyAt P cutoff time)
+    ; attachmentAt = λ cutoff time →
+        separationAttachmentAt P cutoff time
+    ; cutoffIndependentBound =
+        LiveSeparationA3SpacetimeProducer.cutoffIndependentBound P
+    ; integratedResidualBudgetsPaid =
+        LiveSeparationA3SpacetimeProducer.integratedResidualBudgetsPaid P
+    }
+
+  liveSeparationA3SpacetimeBuildsDirectOffDiagonalBudget :
+    (orderIntegration : IntegrationOrderAuthority Time integrateTo) →
+    ∀ {T R} →
+    LiveSeparationA3SpacetimeProducer T R →
+    DirectBudget.DirectOffDiagonalBudget T R
+  liveSeparationA3SpacetimeBuildsDirectOffDiagonalBudget
+      orderIntegration P =
+    liveA3SpacetimeBuildsDirectOffDiagonalBudget
+      orderIntegration (separationProducerToPhysical P)
+
   ----------------------------------------------------------------------
   -- Existing ordered-kernel formulation remains a downstream producer
   -- interface when a proof is stated there directly.
@@ -625,6 +761,9 @@ a3RateWorkCorrelationReducedToSeparationGeometry = true
 
 a3SeparationGeometryPaymentCompilerClosed : Bool
 a3SeparationGeometryPaymentCompilerClosed = true
+
+a3PreferredLiveSeparationGeometryCompilerClosed : Bool
+a3PreferredLiveSeparationGeometryCompilerClosed = true
 
 a3RecordIsLiteralPhysicalFixedOutputFamily : Bool
 a3RecordIsLiteralPhysicalFixedOutputFamily = true
@@ -679,6 +818,10 @@ a3RateWorkCorrelationReducedToSeparationGeometryIsTrue = refl
 a3SeparationGeometryPaymentCompilerClosedIsTrue :
   a3SeparationGeometryPaymentCompilerClosed ≡ true
 a3SeparationGeometryPaymentCompilerClosedIsTrue = refl
+
+a3PreferredLiveSeparationGeometryCompilerClosedIsTrue :
+  a3PreferredLiveSeparationGeometryCompilerClosed ≡ true
+a3PreferredLiveSeparationGeometryCompilerClosedIsTrue = refl
 
 a3RecordIsLiteralPhysicalFixedOutputFamilyIsTrue :
   a3RecordIsLiteralPhysicalFixedOutputFamily ≡ true
