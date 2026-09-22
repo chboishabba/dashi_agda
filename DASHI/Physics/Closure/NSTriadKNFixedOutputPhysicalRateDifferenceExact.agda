@@ -396,6 +396,35 @@ pairDifferenceRateToGeometry system output work (x ∷ xs)
       (cong₂ _+_ headFactor tailFactor)
       (solve (nu ∷ headG ∷ tailG ∷ [])))
 
+pairAgainstHeadGeometricIsStandard :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  (head : Physical.PhysicalTriadIncidence) →
+  (xs : List Physical.PhysicalTriadIncidence) →
+  pairAgainstHeadGeometric system work head xs
+  ≡ Pair.pairAgainstHead
+      (separationNormSquared system) work head xs
+pairAgainstHeadGeometricIsStandard system work head [] = refl
+pairAgainstHeadGeometricIsStandard system work head (x ∷ xs) =
+  cong
+    ( ( separationNormSquared system head
+      - separationNormSquared system x )
+      * (work head - work x) +_)
+    (pairAgainstHeadGeometricIsStandard system work head xs)
+
+pairDifferenceGeometricIsStandardPairDifference :
+  (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
+  (work : Physical.PhysicalTriadIncidence → ℚ) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  pairDifferenceGeometric system work items
+  ≡ Pair.pairDifferenceWorkSum
+      (separationNormSquared system) work items
+pairDifferenceGeometricIsStandardPairDifference system work [] = refl
+pairDifferenceGeometricIsStandardPairDifference system work (x ∷ xs) =
+  cong₂ _+_
+    (pairAgainstHeadGeometricIsStandard system work x xs)
+    (pairDifferenceGeometricIsStandardPairDifference system work xs)
+
 physicalOutputFiberPairDifferenceRateToGeometry :
   (system : PhysicalField.PhysicalFiniteComplex3GalerkinSystem F) →
   (output : Z3.FourierMode) →
