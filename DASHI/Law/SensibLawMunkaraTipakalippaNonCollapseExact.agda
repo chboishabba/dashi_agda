@@ -33,8 +33,8 @@ tipakalippaRelevantPersonCoordinate : String
 tipakalippaRelevantPersonCoordinate =
   "coordinate:legal:tipakalippa:reg11a1d-relevant-person-consultation"
 
-munkaraReg17_6Coordinate : String
-munkaraReg17_6Coordinate =
+munkaraRegSeventeenSixCoordinate : String
+munkaraRegSeventeenSixCoordinate =
   "coordinate:legal:munkara:reg17-6-new-significant-environmental-impact-or-risk"
 
 data CoordinateClass : Set where
@@ -56,9 +56,9 @@ seaCountryContextIsWrongType :
   payMunkaraRequirement sharedContext ≡ wrongType
 seaCountryContextIsWrongType = refl
 
-tipakalippaConsultationDoesNotPayReg17_6 :
+tipakalippaConsultationDoesNotPayRegSeventeenSix :
   payMunkaraRequirement consultationRequirement ≡ unpaid
-tipakalippaConsultationDoesNotPayReg17_6 = refl
+tipakalippaConsultationDoesNotPayRegSeventeenSix = refl
 
 exactMunkaraRequirementPays :
   payMunkaraRequirement revisionRequirement ≡ exactPayment
@@ -68,14 +68,14 @@ exactMunkaraRequirementPays = refl
 -- Anti-collapse propositions.
 ------------------------------------------------------------------------
 
-data SeaCountryAdjacencyPaysReg17_6 : Set where
+data SeaCountryAdjacencyPaysRegSeventeenSix : Set where
 data TipakalippaRuleEqualsMunkaraRule : Set where
 data ContextCreatesLegalApplicability : Set where
 data WrongTypeCreatesClaimTruth : Set where
 
-seaCountryAdjacencyCannotPayReg17_6 :
-  SeaCountryAdjacencyPaysReg17_6 → ⊥
-seaCountryAdjacencyCannotPayReg17_6 ()
+seaCountryAdjacencyCannotPayRegSeventeenSix :
+  SeaCountryAdjacencyPaysRegSeventeenSix → ⊥
+seaCountryAdjacencyCannotPayRegSeventeenSix ()
 
 tipakalippaRuleDoesNotEqualMunkaraRule :
   TipakalippaRuleEqualsMunkaraRule → ⊥
@@ -96,17 +96,17 @@ record MunkaraTipakalippaNonCollapseBoundary : Set where
     seaCountryContextMayBeRelevantIsTrue :
       seaCountryContextMayBeRelevant ≡ true
 
-    seaCountryContextPaysReg17_6 : Bool
-    seaCountryContextPaysReg17_6IsFalse :
-      seaCountryContextPaysReg17_6 ≡ false
+    seaCountryContextPaysRegSeventeenSix : Bool
+    seaCountryContextPaysRegSeventeenSixIsFalse :
+      seaCountryContextPaysRegSeventeenSix ≡ false
 
-    tipakalippaConsultationPaysReg17_6 : Bool
-    tipakalippaConsultationPaysReg17_6IsFalse :
-      tipakalippaConsultationPaysReg17_6 ≡ false
+    tipakalippaConsultationPaysRegSeventeenSix : Bool
+    tipakalippaConsultationPaysRegSeventeenSixIsFalse :
+      tipakalippaConsultationPaysRegSeventeenSix ≡ false
 
-    exactMunkaraReg17_6MayPay : Bool
-    exactMunkaraReg17_6MayPayIsTrue :
-      exactMunkaraReg17_6MayPay ≡ true
+    exactMunkaraRegSeventeenSixMayPay : Bool
+    exactMunkaraRegSeventeenSixMayPayIsTrue :
+      exactMunkaraRegSeventeenSixMayPay ≡ true
 
     wrongTypeIsMachineVisible : Bool
     wrongTypeIsMachineVisibleIsTrue :
