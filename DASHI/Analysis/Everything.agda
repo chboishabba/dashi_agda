@@ -40,3 +40,4 @@ import DASHI.Analysis.RiemannG2FinalCutIntrospectionExact
 -- Current four-window signed-pole quartic RH frontier.
 import DASHI.Analysis.RiemannQuarticSignedPoleCompilerExact
 import DASHI.Analysis.RiemannQuarticSignedPoleFrontierExact
+import DASHI.Analysis.RiemannQuarticSignedPoleLowModeQuotientExact
