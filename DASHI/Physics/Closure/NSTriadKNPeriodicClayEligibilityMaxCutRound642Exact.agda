@@ -82,6 +82,10 @@ round642C4ModeListToModeListedCoherenceStillRequired : Bool
 round642C4ModeListToModeListedCoherenceStillRequired =
   R640.round640ModeListToModeListedCoherenceStillRequired
 
+round642C4CanonicalR34ModeCoherenceCompilerAvailable : Bool
+round642C4CanonicalR34ModeCoherenceCompilerAvailable =
+  R640.round640CanonicalR34ModeListCoherenceCompilerAvailable
+
 round642C4CutoffUniformInitialCeilingStillProofBearing : Bool
 round642C4CutoffUniformInitialCeilingStillProofBearing =
   R640.round640CutoffUniformInitialCeilingStillProofBearing
@@ -200,6 +204,11 @@ round642C4ModeListToModeListedCoherenceStillRequiredIsTrue :
   round642C4ModeListToModeListedCoherenceStillRequired ≡ true
 round642C4ModeListToModeListedCoherenceStillRequiredIsTrue =
   R640.round640ModeListToModeListedCoherenceStillRequiredIsTrue
+
+round642C4CanonicalR34ModeCoherenceCompilerAvailableIsTrue :
+  round642C4CanonicalR34ModeCoherenceCompilerAvailable ≡ true
+round642C4CanonicalR34ModeCoherenceCompilerAvailableIsTrue =
+  R640.round640CanonicalR34ModeListCoherenceCompilerAvailableIsTrue
 
 round642C4CutoffUniformInitialCeilingStillProofBearingIsTrue :
   round642C4CutoffUniformInitialCeilingStillProofBearing ≡ true
