@@ -58,7 +58,6 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBri
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as Rate
 import DASHI.Physics.Closure.NSTriadKNRateWeightedMixedHelicityKernelCollapseExact as RateKernel
 import DASHI.Physics.Closure.NSTriadKNA3CenteredKernelNormalFormExact as Kernel
-import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact as R598
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -144,6 +143,12 @@ module FixedOutput
     R225.fixedOutputQuadraticKernelIsFourMixedHelicityConvolution
       P cutoff output
 
+  coherentWorkSymmetric599 :
+    (left right : C3.Complex3 F) →
+    Work.coherentWork left right ≡ Work.coherentWork right left
+  coherentWorkSymmetric599 left right =
+    cong (Work.two *_) (R287.realHermitianCrossSymmetric left right)
+
   fullGramIsFourSelfKernelWork :
     fullGram ≡ Kernel.four * selfKernelWork
   fullGramIsFourSelfKernelWork =
@@ -165,12 +170,7 @@ module FixedOutput
         Work.coherentWork fourMixed mixed
         ≡ Work.coherentWork mixed fourMixed
       symmetric =
-        R598.FixedOutput.coherentWorkSymmetric
-          physicalSystem S L H P
-          (Data.Rational.Base.positive 1ℚ)
-          output
-          (record {})
-          fourMixed mixed
+        coherentWorkSymmetric599 fourMixed mixed
     in
     trans toFour
       (trans fourRight
@@ -196,16 +196,12 @@ module FixedOutput
           Work.coherentWork fourMixed weightedKernel
           ≡ Work.coherentWork weightedKernel fourMixed
         symmetry =
-          cong (Work.two *_)
-            (DASHI.Physics.Closure.NSTriadKNWaleffeOutputHelicityGramRound287Exact.realHermitianCrossSymmetric
-              fourMixed weightedKernel)
+          coherentWorkSymmetric599 fourMixed weightedKernel
         back :
           Work.coherentWork weightedKernel mixed
           ≡ Work.coherentWork mixed weightedKernel
         back =
-          cong (Work.two *_)
-            (DASHI.Physics.Closure.NSTriadKNWaleffeOutputHelicityGramRound287Exact.realHermitianCrossSymmetric
-              weightedKernel mixed)
+          coherentWorkSymmetric599 weightedKernel mixed
       in
       trans symmetry
         (trans first (cong (Kernel.four *_) back)))
