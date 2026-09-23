@@ -13,6 +13,7 @@ import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500
 import DASHI.Physics.Closure.NSTriadKNComparableOutputGramTelescopeRound209Exact as R209
 import DASHI.Physics.Closure.NSTriadKNComparableOutputResidualPaymentRound211Exact as R211
 import DASHI.Physics.Closure.NSTriadKNComparableConstantBandGramNoGoRound214Exact as R214
+import DASHI.Physics.Closure.NSTriadKNPeriodicClayEligibilityMaxCutRound642Exact as R642
 
 -- Historical/alternative route anchors retained deliberately. They are no
 -- longer the primary paper-facing producer path, but their theorem-bearing
@@ -34,14 +35,24 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 --   C = forced whole-space R^3 breakdown verification/provenance
 --   D = forced periodic T^3 breakdown verification/provenance
 --
--- Active B causal spine:
+-- Current periodic-B Clay max-cut:
 --
---   R571 signed/helical carrier
---     -> centered/Taylor realization                 [OPEN]
---     -> old second moment / six-three transplant   [OPEN]
---     -> R568 CommutatorOnlySpacetimeBudget568      [LIVE PRODUCER]
---     -> R572 DirectLeafAProducer572 compiler        [CONSTRUCTED GIVEN RECEIPTS]
---     -> R503 DirectOffDiagonalBudget/R415 consumer  [CONSTRUCTED COMPILER SURFACE]
+--   NEW / NONSTANDARD
+--     C1  R568 cutoff-uniform signed weighted payment
+--     C2  physical critical signed-production estimate
+--
+--   SAME-OBJECT / PHYSICAL
+--     C3  canonical literal H^(1/2)/H^(3/2)-type R414 slice
+--     C4  common-initial-datum realization + uniform initial ceiling
+--     C5  strictly positive retained viscosity
+--
+--   STANDARD COMPLETION
+--     C6  scalar FTC / integration-linearity / order receipts
+--     C7  periodic Sobolev-Rellich-Simon-weak-* package
+--
+-- R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur and
+-- self/external channel splits are retained as producer strategies and
+-- provenance.  They are not independent terminal Clay obligations.
 --
 -- NOTE: the historical identifier `DirectLeafA...` is an owner name and does
 -- not mean programme Lane A.
@@ -58,7 +69,7 @@ historicalAlternativeRouteStatement =
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. C_direct is constructed modulo explicit standard integration authority; the current B proof search preserves the R571 signed carrier into centered/Taylor and second-moment/six-three machinery before the live R568 cutoff-uniform PDE producer; R572 compiles a paid R568 budget and standard temporal/order receipts into the pre-existing R503 DirectOffDiagonalBudget/R415 consumer. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
+  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is R642: two genuinely new nonlinear estimates (C1 R568 signed payment and C2 phase-sensitive critical production), three physical/same-object obligations (C3 canonical critical slice, C4 common-initial realization plus uniform ceiling, C5 positive retained viscosity), and two standard completion layers (C6 scalar calculus/order receipts and C7 periodic Sobolev-Rellich-Simon-weak-*). R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
 
 record NSPaperTheoremStatus : Setω where
   field
@@ -340,6 +351,63 @@ canonicalNSPaperTheoremStatus =
     ; statement = paperInterfaceStatement
     ; statementIsCanonical = refl
     }
+
+------------------------------------------------------------------------
+-- Modern periodic Clay max-cut aliases (R642).
+------------------------------------------------------------------------
+
+periodicClayMaxCutC1Closed : Bool
+periodicClayMaxCutC1Closed = R642.round642C1R568SignedPaymentClosed
+
+periodicClayMaxCutC2StillProofBearing : Bool
+periodicClayMaxCutC2StillProofBearing =
+  R642.round642C2PhaseSensitiveProductionStillProofBearing
+
+periodicClayMaxCutC3CompilerAvailable : Bool
+periodicClayMaxCutC3CompilerAvailable =
+  R642.round642C3CanonicalPhysicalSliceCompilerAvailable
+
+periodicClayMaxCutC4CompilerAvailable : Bool
+periodicClayMaxCutC4CompilerAvailable =
+  R642.round642C4CommonInitialDatumSameObjectCompilerAvailable
+
+periodicClayMaxCutC5Proved : Bool
+periodicClayMaxCutC5Proved = R642.round642C5RetainedViscosityProved
+
+periodicClayMaxCutC6ScalarFTCInstalled : Bool
+periodicClayMaxCutC6ScalarFTCInstalled =
+  R642.round642C6StandardScalarFTCInstalled
+
+periodicClayMaxCutC7SimonClosed : Bool
+periodicClayMaxCutC7SimonClosed =
+  R642.round642C7PhysicalCriticalSobolevSimonUpgradeClosed
+
+oldPDFB1B2B3B4Mandatory : Bool
+oldPDFB1B2B3B4Mandatory = R642.round642OldPDFB1B2B3B4Mandatory
+
+oldPDFB7DirectCovarianceEqualityMandatory : Bool
+oldPDFB7DirectCovarianceEqualityMandatory =
+  R642.round642OldPDFB7DirectCovarianceEqualityMandatory
+
+periodicClayMaxCutC1ClosedIsFalse :
+  periodicClayMaxCutC1Closed ≡ false
+periodicClayMaxCutC1ClosedIsFalse =
+  R642.round642C1R568SignedPaymentClosedIsFalse
+
+periodicClayMaxCutC2StillProofBearingIsTrue :
+  periodicClayMaxCutC2StillProofBearing ≡ true
+periodicClayMaxCutC2StillProofBearingIsTrue =
+  R642.round642C2PhaseSensitiveProductionStillProofBearingIsTrue
+
+oldPDFB1B2B3B4MandatoryIsFalse :
+  oldPDFB1B2B3B4Mandatory ≡ false
+oldPDFB1B2B3B4MandatoryIsFalse =
+  R642.round642OldPDFB1B2B3B4MandatoryIsFalse
+
+oldPDFB7DirectCovarianceEqualityMandatoryIsFalse :
+  oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+oldPDFB7DirectCovarianceEqualityMandatoryIsFalse =
+  R642.round642OldPDFB7DirectCovarianceEqualityMandatoryIsFalse
 
 ------------------------------------------------------------------------
 -- Legacy publication-readiness anchors.
