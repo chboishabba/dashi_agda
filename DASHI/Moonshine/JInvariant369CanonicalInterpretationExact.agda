@@ -65,6 +65,7 @@ import DASHI.Moonshine.JInvariant369JointFibreBifiltrationExact as JointBif
 import DASHI.Moonshine.JInvariantSmithChartObserverCrossPollinationExact as SmithCross
 import DASHI.Moonshine.JInvariantSmithChartActionSeparationExact as SmithAction
 import DASHI.Moonshine.JInvariantSmithChartMobiusMatrixBridgeExact as SmithMatrix
+import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact as Cross
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -231,7 +232,7 @@ canonicalCanonical369InterpretationBoundary =
     ; sspC3CycleIntertwinesLevelTranslation = true
     ; sspC2AntipodeIntertwinesLevelInversion = true
     ; sspLevel3FiniteDihedralEquivalenceOwned = true
-    ; signedMagnitudeFactorsThroughLevel3 = true
+    ; signedMagnitudeFactorsThroughLevel3 = false
 
     ; jointPhaseLevelSignedFibreConstructed = true
     ; jointFiniteDihedralLawOwned = true
@@ -278,6 +279,12 @@ phaseOnlyC3IsNotPrincipalLevel3 :
   ≡ false
 phaseOnlyC3IsNotPrincipalLevel3 = refl
 
+
+signedMagnitudeDoesNotFactorThroughLevel3 :
+  signedMagnitudeFactorsThroughLevel3
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+signedMagnitudeDoesNotFactorThroughLevel3 = refl
 
 principalLevel3DoesNotDescendThroughJ :
   level3CannotFactorThroughJ
@@ -656,3 +663,31 @@ smithGammaRemainsDistinctFromModularJ :
     canonicalCanonical369InterpretationBoundary
   ≡ false
 smithGammaRemainsDistinctFromModularJ = refl
+
+
+------------------------------------------------------------------------
+-- C6 / ten-state / rank-17 / weight-12 cross-pollination receipt.
+------------------------------------------------------------------------
+
+c6TenRankWeightTwelveBoundary :
+  Cross.C6TenRankWeightTwelveBoundary
+c6TenRankWeightTwelveBoundary =
+  Cross.canonicalC6TenRankWeightTwelveBoundary
+
+smithAndModularReflectionCommuteAtC6 :
+  Cross.smithAndModularReflectionCommuteOnC6
+    c6TenRankWeightTwelveBoundary
+  ≡ true
+smithAndModularReflectionCommuteAtC6 = refl
+
+rank14BalancedCarryIsRetained :
+  Cross.rank14BalancedCarryPaid
+    c6TenRankWeightTwelveBoundary
+  ≡ true
+rank14BalancedCarryIsRetained = refl
+
+weightTwelveDoesNotCollapseToStageTwelve :
+  Cross.equalTwelveNumeralCreatesSemanticIdentity
+    c6TenRankWeightTwelveBoundary
+  ≡ false
+weightTwelveDoesNotCollapseToStageTwelve = refl
