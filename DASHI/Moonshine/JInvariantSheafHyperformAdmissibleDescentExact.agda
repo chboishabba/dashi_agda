@@ -32,6 +32,11 @@ import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact as 
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact as Voxel
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact as Shift
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as Pants
+import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as QSeries
+import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta
+import DASHI.Moonshine.JSameWeightQuotientInvariantExact as JQuotient
+import DASHI.Wikimedia.IbrahimInverseZetaJCoarseFineMonsterDivisorSnowballExact as Zeta
+import DASHI.Wikimedia.DASHIMathOEIS196883AuditRoadmapExact as OEIS
 
 ------------------------------------------------------------------------
 -- 1. Minimal contravariant restriction interface.
@@ -292,6 +297,46 @@ jPantsBoundary :
 jPantsBoundary =
   Pants.canonicalColourWheelNinePantsBoundary
 
+inverseZetaDivisorBoundary :
+  Zeta.InverseZetaDivisorFrontier
+inverseZetaDivisorBoundary =
+  Zeta.currentInverseZetaDivisorFrontier
+
+oeisAuditBoundary :
+  OEIS.DASHIMathOEISAuditBoundary
+oeisAuditBoundary =
+  OEIS.canonicalDASHIMathOEISAuditBoundary
+
+eisensteinQSeriesBoundary :
+  QSeries.EisensteinFiniteQSeriesFrontier
+eisensteinQSeriesBoundary =
+  QSeries.canonicalEisensteinFiniteQSeriesFrontier
+
+deltaWeightTwelveBoundary :
+  Delta.DeltaAnalyticParityBoundary
+deltaWeightTwelveBoundary =
+  Delta.canonicalDeltaAnalyticParityBoundary
+
+jWeightZeroBoundary :
+  JQuotient.JWeightZeroQuotientBoundary
+jWeightZeroBoundary =
+  JQuotient.canonicalJWeightZeroQuotientBoundary
+
+bulkCyclotomicQuotientExact :
+  196830 ≡ 3 * 65610
+bulkCyclotomicQuotientExact =
+  Zeta.bulkOverRegularMultiplicity
+
+monsterBulkResidualExact :
+  196830 + 53 ≡ 196883
+monsterBulkResidualExact =
+  Zeta.monsterIsBulkPlusResidual
+
+moonshineBulkBoundaryExact :
+  196830 + 54 ≡ 196884
+moonshineBulkBoundaryExact =
+  Zeta.moonshineIsBulkPlusFullBoundary
+
 ------------------------------------------------------------------------
 -- 9. Consolidated frontier.
 ------------------------------------------------------------------------
@@ -312,9 +357,17 @@ record JSheafHyperformDescentFrontier : Set where
     literalGrothendieckTopologyConstructed : Bool
     literalAnalyticModularSheafIdentified : Bool
     literalSmoothPantsPushoutConstructed : Bool
+    cyclotomicInverseZetaOwnerLinked : Bool
+    oeisAuditOwnerLinked : Bool
+    finiteEisensteinQSeriesOwnerLinked : Bool
+    deltaWeightTwelveOwnerLinked : Bool
+    jWeightZeroQuotientOwnerLinked : Bool
+    finiteQSeriesAutomaticallyEqualsAnalyticJ : Bool
+    oeisMatchCreatesSemanticIdentity : Bool
 
 canonicalJSheafHyperformDescentFrontier :
   JSheafHyperformDescentFrontier
 canonicalJSheafHyperformDescentFrontier =
   j-sheaf-hyperform-descent-frontier
     true true true true true true true false true true false false false
+    true true true true true false false
