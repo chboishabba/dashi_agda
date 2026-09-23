@@ -38,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNA3CenteredKernelNormalFormExact as Kernel
 import DASHI.Physics.Closure.NSTriadKNA3CenteredKernelPaymentCompilerExact as KernelPay
 import DASHI.Physics.Closure.NSTriadKNR406ExactEndpointNormalFormExact as Endpoint
 import DASHI.Physics.Closure.NSTriadKNA3WeightedR406EndpointCutExact as WeightedCut
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationExact as Cauchy
 
 weightedR406ExactEndpointNormalFormClosedGivenFTC : Bool
 weightedR406ExactEndpointNormalFormClosedGivenFTC =
@@ -55,12 +56,24 @@ a3CenteredKernelPaymentCompilerClosed : Bool
 a3CenteredKernelPaymentCompilerClosed =
   KernelPay.kernelCenteredPaymentCompilerClosed
 
+
+cauchyResolvedFullSquareRateCancellationClosed : Bool
+cauchyResolvedFullSquareRateCancellationClosed =
+  Cauchy.cauchyResolvedFullSquareRateCancellationClosed
+
+literalNonzeroOutputPairResolventRateCancellationClosed : Bool
+literalNonzeroOutputPairResolventRateCancellationClosed =
+  Cauchy.literalNonzeroOutputPairResolventRateCancellationClosed
+
 meanRateSelfWorkNormalizationMustBeRetained : Bool
 meanRateSelfWorkNormalizationMustBeRetained =
   D1b.meanRateSelfWorkTermPresent
 
 factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosed : Bool
 factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosed = false
+
+cauchyRateCancellationAloneClosesCenteredA3ToR568 : Bool
+cauchyRateCancellationAloneClosesCenteredA3ToR568 = false
 
 thisResidualIsAdditionalNonlinearEstimate : Bool
 thisResidualIsAdditionalNonlinearEstimate = false
@@ -92,6 +105,17 @@ a3CenteredKernelPaymentCompilerClosedIsTrue :
 a3CenteredKernelPaymentCompilerClosedIsTrue =
   KernelPay.kernelCenteredPaymentCompilerClosedIsTrue
 
+
+cauchyResolvedFullSquareRateCancellationClosedIsTrue :
+  cauchyResolvedFullSquareRateCancellationClosed ≡ true
+cauchyResolvedFullSquareRateCancellationClosedIsTrue =
+  Cauchy.cauchyResolvedFullSquareRateCancellationClosedIsTrue
+
+literalNonzeroOutputPairResolventRateCancellationClosedIsTrue :
+  literalNonzeroOutputPairResolventRateCancellationClosed ≡ true
+literalNonzeroOutputPairResolventRateCancellationClosedIsTrue =
+  Cauchy.literalNonzeroOutputPairResolventRateCancellationClosedIsTrue
+
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue :
   meanRateSelfWorkNormalizationMustBeRetained ≡ true
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue =
@@ -100,6 +124,11 @@ meanRateSelfWorkNormalizationMustBeRetainedIsTrue =
 factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosedIsFalse :
   factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosed ≡ false
 factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosedIsFalse = refl
+
+
+cauchyRateCancellationAloneClosesCenteredA3ToR568IsFalse :
+  cauchyRateCancellationAloneClosesCenteredA3ToR568 ≡ false
+cauchyRateCancellationAloneClosesCenteredA3ToR568IsFalse = refl
 
 thisResidualIsAdditionalNonlinearEstimateIsFalse :
   thisResidualIsAdditionalNonlinearEstimate ≡ false
