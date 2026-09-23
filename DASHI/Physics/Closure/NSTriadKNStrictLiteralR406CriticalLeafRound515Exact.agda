@@ -29,6 +29,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralR406CriticalProductionProofSearchRo
 import DASHI.Physics.Closure.NSTriadKNInitialCriticalRealizationToR421Round512Exact as R512
 import DASHI.Physics.Closure.NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact as R507
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound637Exact as R637
+import DASHI.Physics.Closure.NSTriadKNLiteralInitialCriticalRealizationRound638Exact as R638
 
 data StrictCriticalResidual : Set where
   missingPhysicalCriticalObservableRealization : StrictCriticalResidual
@@ -163,6 +164,19 @@ round515ConcreteScalarFTCStillRequired : Bool
 round515ConcreteScalarFTCStillRequired =
   R637.round637RequiresConcreteScalarFTC
 
+
+round515CommonInitialDatumSameObjectCompilerAvailable : Bool
+round515CommonInitialDatumSameObjectCompilerAvailable =
+  R638.round638CommonInitialDatumSameObjectCompilerClosed
+
+round515ModeListToModeListedCoherenceStillRequired : Bool
+round515ModeListToModeListedCoherenceStillRequired =
+  R638.round638ModeListToModeListedCoherenceStillRequired
+
+round515CutoffUniformInitialCeilingStillProofBearing : Bool
+round515CutoffUniformInitialCeilingStillProofBearing =
+  R638.round638CutoffUniformInitialCeilingStillProofBearing
+
 round515ClayPromotion : Bool
 round515ClayPromotion = false
 
@@ -205,6 +219,22 @@ round515ConcreteScalarFTCStillRequiredIsTrue :
   round515ConcreteScalarFTCStillRequired ≡ true
 round515ConcreteScalarFTCStillRequiredIsTrue =
   R637.round637RequiresConcreteScalarFTCIsTrue
+
+
+round515CommonInitialDatumSameObjectCompilerAvailableIsTrue :
+  round515CommonInitialDatumSameObjectCompilerAvailable ≡ true
+round515CommonInitialDatumSameObjectCompilerAvailableIsTrue =
+  R638.round638CommonInitialDatumSameObjectCompilerClosedIsTrue
+
+round515ModeListToModeListedCoherenceStillRequiredIsTrue :
+  round515ModeListToModeListedCoherenceStillRequired ≡ true
+round515ModeListToModeListedCoherenceStillRequiredIsTrue =
+  R638.round638ModeListToModeListedCoherenceStillRequiredIsTrue
+
+round515CutoffUniformInitialCeilingStillProofBearingIsTrue :
+  round515CutoffUniformInitialCeilingStillProofBearing ≡ true
+round515CutoffUniformInitialCeilingStillProofBearingIsTrue =
+  R638.round638CutoffUniformInitialCeilingStillProofBearingIsTrue
 
 round515ClayPromotionIsFalse : round515ClayPromotion ≡ false
 round515ClayPromotionIsFalse = refl
