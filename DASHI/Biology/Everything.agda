@@ -226,3 +226,7 @@ import DASHI.Biology.CarbonClimateEcologicalDependencyBidiExact
 import DASHI.Biology.Microbiology.QuorumSensingContextExact
 import DASHI.Biology.Microbiology.BaldEyesalveMechanismBoundaryExact
 import DASHI.Biology.Microbiology.BaldEyesalveQuorumCrossPollinationExact
+
+------------------------------------------------------------------------
+-- World regularity / theory / adaptation hyperfabric cross-pollination.
+import DASHI.Biology.WorldRegularityHyperformalismCrossPollinationExact
