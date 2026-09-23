@@ -8,11 +8,23 @@ module DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406TransportExact where
 -- coherent covariance from the tangent/endpoint contribution, while d1b1
 -- pays that tangent contribution only after time integration by ordinary FTC.
 --
--- Therefore the least-privilege A3 -> R406 interface lives at spacetime level:
+-- A spacetime producer may package a final equality of the schematic form
 --
 --   integral R406
 --     = endpoint contribution
---       + integral (4 * signed coherent covariance family)
+--       + integral (4 * signed A3 family),
+--
+-- but current exact archaeology shows this equality is NOT supplied by
+-- d1b0+d1b1 alone.  The live repo-native normal form is instead
+--
+--   2 * integral R406
+--     = integral FactoredFull - integral SelfGram
+--       - (SelfFlux(T) - SelfFlux(0)).
+--
+-- The A3/d1b centering identity also carries the fibre-cardinality and
+-- mean-rate self-work normalization explicitly.  Consequently the record
+-- below remains a valid conditional consumer interface, but its equality field
+-- is NOT classified as already-derived representation plumbing.
 --
 -- followed by:
 --
@@ -43,6 +55,8 @@ import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact
 import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500Exact as R500
 import DASHI.Physics.Closure.NSTriadKNDirectResolventSignedCrossToR415Round503Exact as R503
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as A3
+import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
+import DASHI.Physics.Closure.NSTriadKNR406ExactEndpointNormalFormExact as R406Endpoint
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -72,11 +86,12 @@ module EndpointAware
     Time initialTime integrateTo DerivativeOf
 
   ----------------------------------------------------------------------
-  -- d1b0+d1b1 consumer boundary.
+  -- Conditional A3 consumer boundary.
   --
   -- endpointContribution is intentionally explicit.  The equality below is
-  -- the SAME-object transport that must be supplied by the coherent-work split
-  -- plus the literal endpoint/FTC compiler; it is not a nonlinear estimate.
+  -- a theorem-bearing producer field.  It may only be inhabited after a
+  -- same-object theorem connects the exact R406 endpoint normal form to the A3
+  -- carrier with the correct sign/cardinality/mean-rate normalization.
   ----------------------------------------------------------------------
 
   record EndpointAwareA3SpacetimeProducer
@@ -259,6 +274,21 @@ newNonlinearEstimateIntroducedByConsumerTransport = false
 d1b0d1b1SameObjectTransportStillProofBearing : Bool
 d1b0d1b1SameObjectTransportStillProofBearing = true
 
+exactR406EndpointNormalFormClosedGivenScalarFTC : Bool
+exactR406EndpointNormalFormClosedGivenScalarFTC =
+  R406Endpoint.r406ExactEndpointNormalFormClosedGivenScalarFTC
+
+divisionFreeD1bA3NormalizationClosed : Bool
+divisionFreeD1bA3NormalizationClosed =
+  A3D1b.divisionFreeD1bA3NormalizationClosed
+
+endpointPlusFourA3EqualityDerivedFromD1b0D1b1 : Bool
+endpointPlusFourA3EqualityDerivedFromD1b0D1b1 = false
+
+factoredFullMinusSelfGramToA3AttachmentClosed : Bool
+factoredFullMinusSelfGramToA3AttachmentClosed =
+  R406Endpoint.factoredFullMinusSelfGramToA3SameObjectAttachmentClosed
+
 a3QuantitativeSignedPaymentStillProofBearing : Bool
 a3QuantitativeSignedPaymentStillProofBearing = true
 
@@ -281,6 +311,25 @@ newNonlinearEstimateIntroducedByConsumerTransportIsFalse = refl
 d1b0d1b1SameObjectTransportStillProofBearingIsTrue :
   d1b0d1b1SameObjectTransportStillProofBearing ≡ true
 d1b0d1b1SameObjectTransportStillProofBearingIsTrue = refl
+
+exactR406EndpointNormalFormClosedGivenScalarFTCIsTrue :
+  exactR406EndpointNormalFormClosedGivenScalarFTC ≡ true
+exactR406EndpointNormalFormClosedGivenScalarFTCIsTrue =
+  R406Endpoint.r406ExactEndpointNormalFormClosedGivenScalarFTCIsTrue
+
+divisionFreeD1bA3NormalizationClosedIsTrue :
+  divisionFreeD1bA3NormalizationClosed ≡ true
+divisionFreeD1bA3NormalizationClosedIsTrue =
+  A3D1b.divisionFreeD1bA3NormalizationClosedIsTrue
+
+endpointPlusFourA3EqualityDerivedFromD1b0D1b1IsFalse :
+  endpointPlusFourA3EqualityDerivedFromD1b0D1b1 ≡ false
+endpointPlusFourA3EqualityDerivedFromD1b0D1b1IsFalse = refl
+
+factoredFullMinusSelfGramToA3AttachmentClosedIsFalse :
+  factoredFullMinusSelfGramToA3AttachmentClosed ≡ false
+factoredFullMinusSelfGramToA3AttachmentClosedIsFalse =
+  R406Endpoint.factoredFullMinusSelfGramToA3SameObjectAttachmentClosedIsFalse
 
 a3QuantitativeSignedPaymentStillProofBearingIsTrue :
   a3QuantitativeSignedPaymentStillProofBearing ≡ true
