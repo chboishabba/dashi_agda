@@ -83,6 +83,8 @@ import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorTotalRound63
 import DASHI.Physics.Closure.NSTriadKNCanonicalExternalTotalCommutatorScalarRound631Exact as R631
 import DASHI.Physics.Closure.NSTriadKNSelfHomochiralHeterochiralSplitRound632Exact as R632
 import DASHI.Physics.Closure.NSTriadKNSpectatorSelfHomochiralHeterochiralRowRound633Exact as R633
+import DASHI.Physics.Closure.NSTriadKNLiveSelfHelicityExternalSpacetimeRound634Exact as R634
+import DASHI.Physics.Closure.NSTriadKNR571HeterochiralRadialSumSpecializationRound635Exact as R635
 import DASHI.Physics.Closure.NSTriadKNExternalForcingTransverseRound626Exact as ExtTrans626
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
@@ -1205,6 +1207,23 @@ round490SelfSpectatorRowHomochiralHeterochiralSplitClosed =
 round490SelfHeterochiralPartStillLiteral : Bool
 round490SelfHeterochiralPartStillLiteral =
   R633.round633HeterochiralPartStillLiteral
+
+
+round490LiveSelfHelicityThreeChannelCompilerClosed : Bool
+round490LiveSelfHelicityThreeChannelCompilerClosed =
+  R634.round634ThreeChannelBudgetsCompileToR568
+
+round490LiveSeparateThreeChannelBudgetsMandatory : Bool
+round490LiveSeparateThreeChannelBudgetsMandatory =
+  R634.round634SeparateThreeChannelBudgetsMandatoryForR568
+
+round490HeterochiralRadialSumCarrierWeldClosed : Bool
+round490HeterochiralRadialSumCarrierWeldClosed =
+  R635.round635R632HeterochiralVectorRadialSumWeldClosed
+
+round490HeterochiralRadialSumIsNullGain : Bool
+round490HeterochiralRadialSumIsNullGain =
+  R635.round635HeterochiralRadialSumIsNullGain
 
 round490ExternalTotalCommutatorZeroPIncluded : Bool
 round490ExternalTotalCommutatorZeroPIncluded =
