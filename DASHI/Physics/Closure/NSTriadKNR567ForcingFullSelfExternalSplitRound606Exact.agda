@@ -43,6 +43,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R2
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedAsSwapPairedPlusMinusRound387Exact as R387
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedPhysicalDampedTangentRound388Exact as R388
+import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
 import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact as R543
 import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
 import DASHI.Physics.Closure.NSTriadKNR230SelfExternalNetworkSplitRound605Exact as R605
@@ -259,9 +260,6 @@ module FixedOutput
       ∷ R543.fullSquareSum externalForcingPair rest
       ∷ [])
     where
-    module R539 =
-      DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact
-
     rowAdd :
       (selected : Physical.PhysicalTriadIncidence) →
       (items : List Physical.PhysicalTriadIncidence) →
