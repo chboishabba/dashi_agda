@@ -43,3 +43,4 @@ import DASHI.Analysis.RiemannQuarticSignedPoleFrontierExact
 import DASHI.Analysis.RiemannQuarticSignedPoleLowModeQuotientExact
 import DASHI.Analysis.RiemannQuarticSignedPoleJointHorizontalJetExact
 import DASHI.Analysis.RiemannQuarticSignedPoleConeDebtExact
+import DASHI.Analysis.RiemannQuarticSignedPoleCompensationExact
