@@ -47,6 +47,7 @@ import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as Level
 import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Balanced
+import DASHI.Core.ThreeChannelC3EquivarianceGateExact as C3
 
 ------------------------------------------------------------------------
 -- 1. The canonical 6 -> 3 quotient is orientation-forgetting.
@@ -91,6 +92,34 @@ translateLevel3ThreeTimes :
 translateLevel3ThreeTimes (Balanced.neg ∷ []) = refl
 translateLevel3ThreeTimes (Balanced.zer ∷ []) = refl
 translateLevel3ThreeTimes (Balanced.pos ∷ []) = refl
+
+level3CyclicAction :
+  C3.OrderThreeAction Level.level3CuspFibre
+level3CyclicAction =
+  record
+    { C3.rotate = translateLevel3Residue
+    ; C3.rotateCubed = translateLevel3ThreeTimes
+    }
+
+level6To3GeneratorIntertwines :
+  (x : Base.HexTruth) →
+  level6To3 (Level.translate6 x)
+  ≡
+  C3.rotate level3CyclicAction (level6To3 x)
+level6To3GeneratorIntertwines =
+  level6To3TranslationCommutes
+
+level6To3ReflectionCommutes :
+  (x : Base.HexTruth) →
+  level6To3 (Level.reflect6 x)
+  ≡
+  Arithmetic.negateResidue (level6To3 x)
+level6To3ReflectionCommutes Base.hex-0 = refl
+level6To3ReflectionCommutes Base.hex-1 = refl
+level6To3ReflectionCommutes Base.hex-2 = refl
+level6To3ReflectionCommutes Base.hex-3 = refl
+level6To3ReflectionCommutes Base.hex-4 = refl
+level6To3ReflectionCommutes Base.hex-5 = refl
 
 ------------------------------------------------------------------------
 -- 3. Orientation fibres of C6 -> C3.
@@ -366,6 +395,127 @@ observer9TranslationCommutes T z =
           (Level.level9ObserverRoundTrip (canonicalLevel9At _ z)))))
 
 ------------------------------------------------------------------------
+-- 9. Reflection-equivariant level lift.
+--
+-- Reflection on the modular cusp coordinate is additive inversion.  One
+-- level-27 reflection law therefore forces compatible laws at levels 9 and 3.
+------------------------------------------------------------------------
+
+reduceNegate :
+  ∀ {depth}
+    (x : Q.Residue3Pow (suc depth)) →
+  Q.reduce (Arithmetic.negateResidue x)
+  ≡
+  Arithmetic.negateResidue (Q.reduce x)
+reduceNegate {zero} (digit Balanced.∷ []) = refl
+reduceNegate {suc depth} (digit Balanced.∷ rest)
+  rewrite reduceNegate rest = refl
+
+record Level27ReflectionLift
+    (R : Render.JPhaseRenderingAlgebra)
+    (L : CanonicalLevel27Lift R) : Set₁ where
+  field
+    reflectPoint :
+      Klein.Point (Render.klein R) →
+      Klein.Point (Render.klein R)
+
+    level27Reflection :
+      (z : Klein.Point (Render.klein R)) →
+      level27At L (reflectPoint z)
+      ≡
+      Arithmetic.negateResidue (level27At L z)
+
+open Level27ReflectionLift public
+
+level9ReflectionDerived :
+  ∀ {R}
+    {L : CanonicalLevel27Lift R} →
+  (S : Level27ReflectionLift R L) →
+  (z : Klein.Point (Render.klein R)) →
+  canonicalLevel9At L (reflectPoint S z)
+  ≡
+  Arithmetic.negateResidue (canonicalLevel9At L z)
+level9ReflectionDerived S z =
+  trans
+    (cong Level.level27To9CoveringProjection
+      (level27Reflection S z))
+    (reduceNegate (level27At _ z))
+
+level3ReflectionDerived :
+  ∀ {R}
+    {L : CanonicalLevel27Lift R} →
+  (S : Level27ReflectionLift R L) →
+  (z : Klein.Point (Render.klein R)) →
+  canonicalLevel3At L (reflectPoint S z)
+  ≡
+  Arithmetic.negateResidue (canonicalLevel3At L z)
+level3ReflectionDerived S z =
+  trans
+    (cong Level.level9To3CoveringProjection
+      (level9ReflectionDerived S z))
+    (reduceNegate (canonicalLevel9At _ z))
+
+canonicalObserver27ReflectionCommutes :
+  ∀ {R}
+    {L : CanonicalLevel27Lift R} →
+  (S : Level27ReflectionLift R L) →
+  (z : Klein.Point (Render.klein R)) →
+  canonicalObserver27At L (reflectPoint S z)
+  ≡
+  Level.reflectObserver27 (canonicalObserver27At L z)
+canonicalObserver27ReflectionCommutes S z =
+  trans
+    (cong Level.level27ToObserver27
+      (level27Reflection S z))
+    (trans
+      (cong Level.level27ToObserver27
+        (sym
+          (Level.observer27ReflectionIsCuspInversion
+            (canonicalObserver27At _ z))))
+      (Level.observer27LevelRoundTrip
+        (Level.reflectObserver27 (canonicalObserver27At _ z))))
+
+canonicalObserver9ReflectionCommutes :
+  ∀ {R}
+    {L : CanonicalLevel27Lift R} →
+  (S : Level27ReflectionLift R L) →
+  (z : Klein.Point (Render.klein R)) →
+  canonicalObserver9At L (reflectPoint S z)
+  ≡
+  Kernel.negateNine (canonicalObserver9At L z)
+canonicalObserver9ReflectionCommutes S z =
+  trans
+    (cong Level.level9ToObserver9
+      (level9ReflectionDerived S z))
+    (trans
+      (cong Level.level9ToObserver9
+        (sym
+          (Level.observer9ReflectionIsCuspInversion
+            (canonicalObserver9At _ z))))
+      (Level.observer9LevelRoundTrip
+        (Kernel.negateNine (canonicalObserver9At _ z))))
+
+canonicalObserver3ReflectionCommutes :
+  ∀ {R}
+    {L : CanonicalLevel27Lift R} →
+  (S : Level27ReflectionLift R L) →
+  (z : Klein.Point (Render.klein R)) →
+  canonicalObserver3At L (reflectPoint S z)
+  ≡
+  Kernel.negateTrit (canonicalObserver3At L z)
+canonicalObserver3ReflectionCommutes S z =
+  trans
+    (cong Level.level3ToObserver3
+      (level3ReflectionDerived S z))
+    (trans
+      (cong Level.level3ToObserver3
+        (sym
+          (Level.observer3ReflectionIsCuspInversion
+            (canonicalObserver3At _ z))))
+      (Level.observer3LevelRoundTrip
+        (Kernel.negateTrit (canonicalObserver3At _ z))))
+
+------------------------------------------------------------------------
 -- 9. Boundary.
 ------------------------------------------------------------------------
 
@@ -385,6 +535,14 @@ record Canonical369LevelObserverBoundary : Set where
     translationAt27ImpliesTranslationAt9And3 : Bool
     observer27TranslationEquivarianceDerived : Bool
     observer9TranslationEquivarianceDerived : Bool
+    level3GenericOrderThreeActionOwned : Bool
+    c6ToC3GeneratorIntertwinerOwned : Bool
+    c6ToC3ReflectionIntertwinerOwned : Bool
+
+    level27ReflectionImpliesLevel9And3 : Bool
+    observer27ReflectionEquivarianceDerived : Bool
+    observer9ReflectionEquivarianceDerived : Bool
+    observer3ReflectionEquivarianceDerived : Bool
 
     legacyPhase3AgreementAutomatic : Bool
     fullModularCurveDeckGroupClaimedCyclic : Bool
@@ -399,4 +557,6 @@ canonicalCanonical369LevelObserverBoundary =
     true true true true
     true true true true
     true true true
+    true true true
+    true true true true
     false false false
