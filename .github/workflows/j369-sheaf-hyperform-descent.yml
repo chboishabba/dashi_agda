@@ -17,10 +17,15 @@ on:
       - '.github/workflows/j369-sheaf-hyperform-descent.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   agda:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: Run focused checker
         run: bash scripts/check_j369_sheaf_hyperform_descent.sh
