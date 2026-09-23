@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CORE="DASHI/Core/WorldRepresentationSeparationExact.agda"
+BRIDGE="DASHI/Biology/WorldRegularityHyperformalismCrossPollinationExact.agda"
+
+for file in "$CORE" "$BRIDGE"; do
+  [[ -f "$file" ]] || { echo "missing world/theory separation source: $file" >&2; exit 1; }
+done
+
+require() {
+  local needle="$1"
+  local file="$2"
+  grep -Fq "$needle" "$file" || {
+    echo "missing required world/theory separation term: $needle ($file)" >&2
+    exit 1
+  }
+}
+
+require "worldRegularityDoesNotRequireRepresentation" "$CORE"
+require "theoryRevisionDoesNotRequireWorldRevision" "$CORE"
+require "gravityObservationNonFactorability" "$CORE"
+require "coarseFallCannotExhaustGravityRegularity" "$CORE"
+require "fallQueryFactorsThroughObservation" "$CORE"
+require "consumerQueryCanFactorWhileWorldRegularityDoesNot" "$CORE"
+require "birdLikeGravityCoupling" "$CORE"
+require "canonicalWorldRepresentationBoundary" "$CORE"
+
+require "WorldTheoryHyperfabricCell" "$BRIDGE"
+require "birdFlightGravityCell" "$BRIDGE"
+require "newtonianGravityCell" "$BRIDGE"
+require "relativisticGravityCellSameWorld" "$BRIDGE"
+require "wrongTypeBoundary" "$BRIDGE"
+require "gravityNonFactorability" "$BRIDGE"
+require "canonicalWorldTheoryHyperfabricBoundary" "$BRIDGE"
+
+echo "world/theory separation cross-pollination static contract: OK"
