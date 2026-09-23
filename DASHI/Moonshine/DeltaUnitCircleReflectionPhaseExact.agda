@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstei
 import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Disc
 import DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact as Delta12
 import DASHI.Interop.LeanMoonshineEisensteinAnalyticParityExact as LeanParity
+import DASHI.Interop.LeanEta24PinnedReflectionParityExact as EtaParity
 
 ------------------------------------------------------------------------
 -- 1. Concrete-complex seam over the existing analytic model.
@@ -294,6 +295,10 @@ record DeltaReflectionPhaseBoundary : Set where
     leanExpSinCosMachinPiSemanticsCompiled : Bool
     leanRound11MachinBindingCompilerOwned : Bool
     leanMappedSourceE4E6ConvergenceOwned : Bool
+    leanEta24Weight12SOwnedAtPinnedMathlib : Bool
+    leanEta24ConjugationOwnedAtPinnedMathlib : Bool
+    leanEta24InverseConjugationOwnedAtPinnedMathlib : Bool
+    leanEta24FixedLocusValueIdentityOwned : Bool
 
     primitiveAgdaRealToLeanRealExtractionInhabited : Bool
     actualAgdaRound11MachinBindingInLean : Bool
@@ -314,8 +319,9 @@ canonicalDeltaReflectionPhaseBoundary =
     true true true true true true
     true true true true true
     true true true true true
+    true true true true
     false false false false false false false false
-    "The reflection/fixed-locus value mathematics is closed on the route-B target and the source lane is now pinned to the actual vendored Bishop setoid carrier, Round11 concrete trig data and bishopMachinPi. Lean proves the Bishop evaluator is faithful, derives exp/sin/cos/Machin-pi semantics from the concrete convergence receipts, and provides a single Round11MachinSourceBinding compiler carrying the mapped source E4_N/E6_N to Mathlib E4/E6. Therefore primitive real/transcendental semantics are no longer the active gap. The active cross-language gate is only to inhabit that exact Lean binding from the Agda Round11Machin receipt; the independent Delta-object gate is the same-object identification of the normalized E4/E6 target with the selected Agda/eta^24 Delta. Once that weld is paid, the already-proved inverse-conjugation and unit-circle fixed-locus value identities transport directly. The remaining mathematical phase leaf is only the explicit continuous argument / modulo-pi quotient realization needed for the unconditional sixfold arc-phase statement."
+    "The reflection/fixed-locus value mathematics is now machine-formalized on two independent pinned Lean targets. The normalized E4/E6 target is a weight-12 modular form with the inverse-conjugation and unit-circle fixed-locus identities; separately, eta^24 itself now has a no-dependency-bump weight-12 S/T theorem, direct q-product conjugation, inverse-conjugation reflection, and the same unit-circle value identity at Mathlib v4.28. Agda is source-pinned to the actual vendored Bishop setoid carrier, Round11 concrete trig data and bishopMachinPi, and Lean compiles one Round11MachinSourceBinding through the normalized source Delta sequence. The active cross-language source gate is only to inhabit that exact Lean binding from the Agda receipt. The eta^24 = normalized(E4^3-E6^2)/1728 equality remains a separate same-object theorem, but it is no longer required to establish the reflection mechanism on either target. The remaining phase mathematics is the explicit continuous argument / modulo-pi quotient realization needed for the unconditional sixfold arc-phase theorem."
 
 ------------------------------------------------------------------------
 -- FiniteReflection is intentionally imported as provenance/theorem substrate:
