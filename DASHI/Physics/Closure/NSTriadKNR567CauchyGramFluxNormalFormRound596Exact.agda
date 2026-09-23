@@ -298,6 +298,22 @@ module FixedOutput
         (_+ R543.fullSquareSum weightedFluxTangentPair fibre)
         fullGramIsCoherentSelfWork)
 
+  fourForcingFullMinusSelfWorkIsFlux :
+    R567.four567
+      * R543.fullSquareSum C.T.forcingPair fibre
+      - Work.coherentWork
+          (R224.foldVector doubleCell fibre)
+          (R224.foldVector doubleCell fibre)
+    ≡ R543.fullSquareSum weightedFluxTangentPair fibre
+  fourForcingFullMinusSelfWorkIsFlux
+    rewrite fourForcingFullIsCoherentSelfWorkPlusFlux =
+    solve
+      ( Work.coherentWork
+          (R224.foldVector doubleCell fibre)
+          (R224.foldVector doubleCell fibre)
+      ∷ R543.fullSquareSum weightedFluxTangentPair fibre
+      ∷ [])
+
 ------------------------------------------------------------------------
 -- Status / trust boundary.
 ------------------------------------------------------------------------
@@ -310,6 +326,9 @@ round596UsesOnlyExistingR290R400R547R567Identities = true
 
 round596FullGramAlignedWithA3CoherentSelfWork : Bool
 round596FullGramAlignedWithA3CoherentSelfWork = true
+
+round596OnlyResidualAfterSelfWorkPeelIsWeightedFluxTangent : Bool
+round596OnlyResidualAfterSelfWorkPeelIsWeightedFluxTangent = true
 
 round596IntroducesNewNSEstimate : Bool
 round596IntroducesNewNSEstimate = false
@@ -327,6 +346,10 @@ round596LiteralR567CauchyGramFluxNormalFormClosedIsTrue = refl
 round596FullGramAlignedWithA3CoherentSelfWorkIsTrue :
   round596FullGramAlignedWithA3CoherentSelfWork ≡ true
 round596FullGramAlignedWithA3CoherentSelfWorkIsTrue = refl
+
+round596OnlyResidualAfterSelfWorkPeelIsWeightedFluxTangentIsTrue :
+  round596OnlyResidualAfterSelfWorkPeelIsWeightedFluxTangent ≡ true
+round596OnlyResidualAfterSelfWorkPeelIsWeightedFluxTangentIsTrue = refl
 
 round596IntroducesNewNSEstimateIsFalse :
   round596IntroducesNewNSEstimate ≡ false
