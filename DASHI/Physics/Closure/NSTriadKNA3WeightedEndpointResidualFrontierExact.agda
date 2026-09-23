@@ -47,6 +47,8 @@ import DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExa
 import DASHI.Physics.Closure.NSTriadKNCauchyR397R406ReconciliationExact as Reconcile
 import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact as A3Mismatch
 import DASHI.Physics.Closure.NSTriadKNA3CenteredFullGramNormalFormRound599Exact as A3FullGram
+import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyPairNormalFormRound600Exact as A3CauchyPair
+import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyNonlinearRemainderRound601Exact as A3CauchyRemainder
 
 weightedR406ExactEndpointNormalFormClosedGivenFTC : Bool
 weightedR406ExactEndpointNormalFormClosedGivenFTC =
@@ -135,9 +137,27 @@ a3AndR596ShareCompleteDoubleMixedGramCarrier : Bool
 a3AndR596ShareCompleteDoubleMixedGramCarrier =
   A3FullGram.round599A3AndR596NowShareCompleteDoubleMixedGramCarrier
 
+
+centeredDynamicCauchyPairNormalFormClosed : Bool
+centeredDynamicCauchyPairNormalFormClosed =
+  A3CauchyPair.round600DynamicCenteredCauchyPairNormalFormClosed
+
+centeredDynamicCauchyNonlinearRemainderNormalFormClosed : Bool
+centeredDynamicCauchyNonlinearRemainderNormalFormClosed =
+  A3CauchyRemainder.round601LiteralR291DynamicRemainderNormalFormClosed
+
+centeredDynamicCauchyRemainderPaid : Bool
+centeredDynamicCauchyRemainderPaid =
+  A3CauchyRemainder.round601CenteredDynamicRemainderPaid
+
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosed : Bool
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosed =
   A3Mismatch.round598FluxTangentToRateWeightedKernelClosed
+
+
+r230ScalarConsumerToConservedCyclicTripleClosed : Bool
+r230ScalarConsumerToConservedCyclicTripleClosed =
+  CyclicExternal.round599R230MixedScalarEqualsModalEnergyTransferClosed
 
 
 meanRateSelfWorkNormalizationMustBeRetained : Bool
@@ -271,6 +291,22 @@ a3AndR596ShareCompleteDoubleMixedGramCarrierIsTrue :
 a3AndR596ShareCompleteDoubleMixedGramCarrierIsTrue =
   A3FullGram.round599A3AndR596NowShareCompleteDoubleMixedGramCarrierIsTrue
 
+
+centeredDynamicCauchyPairNormalFormClosedIsTrue :
+  centeredDynamicCauchyPairNormalFormClosed ≡ true
+centeredDynamicCauchyPairNormalFormClosedIsTrue =
+  A3CauchyPair.round600DynamicCenteredCauchyPairNormalFormClosedIsTrue
+
+centeredDynamicCauchyNonlinearRemainderNormalFormClosedIsTrue :
+  centeredDynamicCauchyNonlinearRemainderNormalFormClosed ≡ true
+centeredDynamicCauchyNonlinearRemainderNormalFormClosedIsTrue =
+  A3CauchyRemainder.round601LiteralR291DynamicRemainderNormalFormClosedIsTrue
+
+centeredDynamicCauchyRemainderPaidIsFalse :
+  centeredDynamicCauchyRemainderPaid ≡ false
+centeredDynamicCauchyRemainderPaidIsFalse =
+  A3CauchyRemainder.round601CenteredDynamicRemainderPaidIsFalse
+
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue :
   meanRateSelfWorkNormalizationMustBeRetained ≡ true
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue =
@@ -293,7 +329,8 @@ weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse =
 
 r230ScalarConsumerToConservedCyclicTripleClosedIsFalse :
   r230ScalarConsumerToConservedCyclicTripleClosed ≡ false
-r230ScalarConsumerToConservedCyclicTripleClosedIsFalse = refl
+r230ScalarConsumerToConservedCyclicTripleClosedIsFalse =
+  CyclicExternal.round599R230MixedScalarEqualsModalEnergyTransferClosedIsFalse
 
 
 cauchyRateCancellationAloneClosesCenteredA3ToR568IsFalse :
