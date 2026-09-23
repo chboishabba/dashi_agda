@@ -32,6 +32,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound639Exact 
 import DASHI.Physics.Closure.NSTriadKNLiteralInitialCriticalRealizationRound640Exact as R640
 import DASHI.Physics.Closure.NSTriadKNSubviscousAbsorptionToRetainedGapRound641Exact as R641
 import DASHI.Physics.Closure.NSTriadKNCanonicalInitialCriticalCeilingRound644Exact as R644
+import DASHI.Physics.Closure.NSTriadKNStrictMarginProductionToPhysicalCriticalGapRound645Exact as R645
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as R104Simon
 import DASHI.Physics.Closure.NSTriadKNCriticalSimonUpgradeFollowsBarrierRound148Exact as R148
 import DASHI.Physics.Closure.NSTriadKNOrderedOrientedSelfExternalSpacetimeRound615Exact as R615
@@ -55,6 +56,14 @@ round642C2PhaseSensitiveProductionStillProofBearing =
 round642C2SecondIndependentRemainderEstimateNeeded : Bool
 round642C2SecondIndependentRemainderEstimateNeeded =
   R414.round414SecondIndependentRemainderEstimateNeeded
+
+round642C2StrictMarginNormalFormAvailable : Bool
+round642C2StrictMarginNormalFormAvailable =
+  R645.round645StrictMarginC2NormalFormTyped
+
+round642C2StrictMarginAlsoPaysC5 : Bool
+round642C2StrictMarginAlsoPaysC5 =
+  R645.round645StrictMarginSimultaneouslyPaysC5
 
 ------------------------------------------------------------------------
 -- C3 / SAME OBJECT: canonical physical critical slice.
@@ -197,6 +206,16 @@ round642C2SecondIndependentRemainderEstimateNeededIsFalse :
   round642C2SecondIndependentRemainderEstimateNeeded ≡ false
 round642C2SecondIndependentRemainderEstimateNeededIsFalse =
   R414.round414SecondIndependentRemainderEstimateNeededIsFalse
+
+round642C2StrictMarginNormalFormAvailableIsTrue :
+  round642C2StrictMarginNormalFormAvailable ≡ true
+round642C2StrictMarginNormalFormAvailableIsTrue =
+  R645.round645StrictMarginC2NormalFormTypedIsTrue
+
+round642C2StrictMarginAlsoPaysC5IsTrue :
+  round642C2StrictMarginAlsoPaysC5 ≡ true
+round642C2StrictMarginAlsoPaysC5IsTrue =
+  R645.round645StrictMarginSimultaneouslyPaysC5IsTrue
 
 round642C3CanonicalPhysicalSliceCompilerAvailableIsTrue :
   round642C3CanonicalPhysicalSliceCompilerAvailable ≡ true
