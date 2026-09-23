@@ -577,7 +577,7 @@ jointFiniteDihedralPhase3 :
   ≡
   finitePhase3 (jointFiniteTInverse s)
 jointFiniteDihedralPhase3 s =
-  Arithmetic.negateInvolutive (finitePhase3 s)
+  Arithmetic.negateResidueInvolutive (finitePhase3 s)
 
 jointFiniteDihedralLevel27 :
   (s : JointFiniteState) →
