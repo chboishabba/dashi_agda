@@ -244,6 +244,8 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ClusteringExac
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116PhysicalUpperExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ScaleCalibrationExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ScaleCalibrationValidation
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealBMinCutExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealBMinCutValidation
 
 
 -- Literal CMP116 differentiated-localization proof producers R411-R414.
