@@ -61,6 +61,8 @@ import DASHI.Moonshine.JSameWeightQuotientInvariantExact as JQuotient
 import DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact as Analytic
 import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Equivariance
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as ModularLevel
+import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as CanonicalLevel
+import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact as PrincipalLevel
 import DASHI.Interop.LeanEta24PinnedReflectionParityExact as LeanEtaReflection
 import DASHI.Interop.LeanEta24SixfoldPhaseParityExact as LeanEtaPhase
 import DASHI.Interop.LeanDeltaFinalMinCutParityExact as LeanFinalMinCut
@@ -204,6 +206,11 @@ record AnalyticReflectionEvidence : Set where
     modularCuspFibresFor3_6_9_27Constructed : Bool
     reflectionMatchesCuspInversionAt3_9_27 : Bool
     level27To9To3TranslationCoveringCommutes : Bool
+    c6ToC3OrientationQuotientCanonical : Bool
+    principalGamma27SubsetGamma9SubsetGamma3 : Bool
+    oneLevel27LiftDeterminesCompatible9And3Observers : Bool
+    canonicalLevelTranslationEquivarianceDerived : Bool
+    canonicalLevelReflectionEquivarianceDerived : Bool
     concreteComplexConjugationInstantiated : Bool
     concretePhaseQuotientInstantiated : Bool
     rendererReflectionIntertwinerInstantiated : Bool
@@ -227,6 +234,7 @@ currentAnalyticReflectionEvidence =
   analytic-reflection-evidence
     true true true true
     true true true
+    true true true true true
     false false false
     true true true true true true
     true true true
@@ -250,6 +258,10 @@ record JMDArchimedesDelta369Boundary : Set where
     fixedLocusSixfoldPhaseInterfaceDerived : Bool
     reflectionEquivariantObserverSquaresDerived : Bool
     modularLevelCuspObserverTargetsConstructed : Bool
+    c6ToC3IsOrientationQuotient : Bool
+    principalLevelInclusions369Proved : Bool
+    level27LiftCanonicallyDetermines9And3 : Bool
+    canonicalTranslationAndReflectionTowerDerived : Bool
     fullModularDeckGroupCollapsedToCyclic : Bool
     concreteComplexAnalyticInstantiationClosed : Bool
     pinnedLeanEta24PhaseTheoremClosed : Bool
@@ -268,7 +280,7 @@ canonicalJMDArchimedesDelta369Boundary : JMDArchimedesDelta369Boundary
 canonicalJMDArchimedesDelta369Boundary =
   jmd-archimedes-delta369-boundary
     true true true true true true
-    true true true true false false
+    true true true true true true true true false false
     true true false
     true false false
     false false false
@@ -288,6 +300,13 @@ canonicalJMDArchimedesDelta369Boundary =
 -- 3/9/27 carriers with the canonical cusp-translation fibres Z/3^d Z,
 -- supplies the level-6 cyclic cusp action, proves 27->9->3 translation
 -- compatibility, and identifies reflection with cusp inversion.
+-- CanonicalLevel strengthens this: C6->C3 is now the explicit orientation-
+-- forgetting quotient of C6 ~= C2 x C3, one level-27 lift determines the
+-- compatible level-9 and level-3 same-point observers, and translation plus
+-- reflection equivariance descend through the tower. PrincipalLevel separately
+-- proves Gamma(27) subset Gamma(9) subset Gamma(3) at the matrix-congruence
+-- level. The full analytic modular curves X(N) and their full deck groups are
+-- still not constructed or collapsed to cyclic groups.
 --
 -- The remaining source-parity debt is therefore narrower than the original
 -- image suggested.  On the pinned Lean/Mathlib v4.28 target, eta^24 now owns
