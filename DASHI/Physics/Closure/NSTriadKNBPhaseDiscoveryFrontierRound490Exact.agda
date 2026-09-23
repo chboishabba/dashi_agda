@@ -49,6 +49,7 @@ import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyNonlinearRemainderRound601
 import DASHI.Physics.Closure.NSTriadKNA3CenteredRemainderReconciliationRound602Exact as R602
 import DASHI.Physics.Closure.NSTriadKNA3CauchyAlgebraVanishingNoGoRound603Exact as R603
 import DASHI.Physics.Closure.NSTriadKNA3CauchyForcingMismatchRound604Exact as R604
+import DASHI.Physics.Closure.NSTriadKNR230SelfExternalNetworkSplitRound605Exact as R605
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -364,6 +365,18 @@ round490CanonicalA3CauchyIdentityIsRateTotalForcingEqualsFourA3 =
 round490CanonicalA3CauchyForcingMismatchClosed : Bool
 round490CanonicalA3CauchyForcingMismatchClosed =
   R604.round604CanonicalPhysicalMismatchClosed
+
+round490R230MixedForcingSelfExternalSplitClosed : Bool
+round490R230MixedForcingSelfExternalSplitClosed =
+  R605.round605R230FullCommutatorSelfExternalSplitClosed
+
+round490R230SelfPartCancelledByCyclicEnergy : Bool
+round490R230SelfPartCancelledByCyclicEnergy =
+  R605.round605SelfPartCancelsByCyclicEnergyConservation
+
+round490R230ExternalNetworkPartPaid : Bool
+round490R230ExternalNetworkPartPaid =
+  R605.round605ExternalNetworkPartPaid
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -745,6 +758,21 @@ round490CanonicalA3CauchyForcingMismatchClosedIsFalse :
   round490CanonicalA3CauchyForcingMismatchClosed ≡ false
 round490CanonicalA3CauchyForcingMismatchClosedIsFalse =
   R604.round604CanonicalPhysicalMismatchClosedIsFalse
+
+round490R230MixedForcingSelfExternalSplitClosedIsTrue :
+  round490R230MixedForcingSelfExternalSplitClosed ≡ true
+round490R230MixedForcingSelfExternalSplitClosedIsTrue =
+  R605.round605R230FullCommutatorSelfExternalSplitClosedIsTrue
+
+round490R230SelfPartCancelledByCyclicEnergyIsFalse :
+  round490R230SelfPartCancelledByCyclicEnergy ≡ false
+round490R230SelfPartCancelledByCyclicEnergyIsFalse =
+  R605.round605SelfPartCancelsByCyclicEnergyConservationIsFalse
+
+round490R230ExternalNetworkPartPaidIsFalse :
+  round490R230ExternalNetworkPartPaid ≡ false
+round490R230ExternalNetworkPartPaidIsFalse =
+  R605.round605ExternalNetworkPartPaidIsFalse
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
