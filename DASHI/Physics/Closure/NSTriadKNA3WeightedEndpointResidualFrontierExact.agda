@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationEx
 import DASHI.Physics.Closure.NSTriadKNR567CauchyGramFluxNormalFormRound596Exact as R596
 import DASHI.Physics.Closure.NSTriadKNFullGramCoherentFoldRound597Exact as R597
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExact as GramTangent
+import DASHI.Physics.Closure.NSTriadKNCauchyR397R406ReconciliationExact as Reconcile
 
 weightedR406ExactEndpointNormalFormClosedGivenFTC : Bool
 weightedR406ExactEndpointNormalFormClosedGivenFTC =
@@ -87,6 +88,14 @@ cauchyResolvedR406DiagonalReducedNormalFormClosed =
 
 cauchyResolvedR406ResidualIsOffdiagGramPlusResolvedTangent : Bool
 cauchyResolvedR406ResidualIsOffdiagGramPlusResolvedTangent = true
+
+cauchyR397R406FiniteReconciliationClosed : Bool
+cauchyR397R406FiniteReconciliationClosed =
+  Reconcile.cauchyR397R406ReconciliationClosed
+
+cauchyResolvedNormalFormCreatesNewA3Identification : Bool
+cauchyResolvedNormalFormCreatesNewA3Identification =
+  Reconcile.reconciliationIdentifiesR406WithA3
 
 meanRateSelfWorkNormalizationMustBeRetained : Bool
 meanRateSelfWorkNormalizationMustBeRetained =
@@ -167,6 +176,16 @@ cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue =
 cauchyResolvedR406ResidualIsOffdiagGramPlusResolvedTangentIsTrue :
   cauchyResolvedR406ResidualIsOffdiagGramPlusResolvedTangent ≡ true
 cauchyResolvedR406ResidualIsOffdiagGramPlusResolvedTangentIsTrue = refl
+
+cauchyR397R406FiniteReconciliationClosedIsTrue :
+  cauchyR397R406FiniteReconciliationClosed ≡ true
+cauchyR397R406FiniteReconciliationClosedIsTrue =
+  Reconcile.cauchyR397R406ReconciliationClosedIsTrue
+
+cauchyResolvedNormalFormCreatesNewA3IdentificationIsFalse :
+  cauchyResolvedNormalFormCreatesNewA3Identification ≡ false
+cauchyResolvedNormalFormCreatesNewA3IdentificationIsFalse =
+  Reconcile.reconciliationIdentifiesR406WithA3IsFalse
 
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue :
   meanRateSelfWorkNormalizationMustBeRetained ≡ true
