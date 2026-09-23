@@ -207,8 +207,8 @@ record QuarticSignedPoleFrontierBoundary : Set where
       explicitFourthLipschitzK0Paid ≡ true
     fourthLipschitzFromSupportMassCompilerOwnedIsTrue :
       fourthLipschitzFromSupportMassCompilerOwned ≡ true
-    scalarThresholdBelowPlattTrudgianPaidIsFalse :
-      scalarThresholdBelowPlattTrudgianPaid ≡ false
+    scalarThresholdBelowPlattTrudgianPaidIsTrue :
+      scalarThresholdBelowPlattTrudgianPaid ≡ true
     uniformEightOverTBandIsCompilerOutputFromBoundsIsTrue :
       uniformEightOverTBandIsCompilerOutputFromBounds ≡ true
 
@@ -288,7 +288,7 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true
     true
     true
-    false
+    true
     true
     false
     false
@@ -324,10 +324,10 @@ canonicalQuarticSignedPoleFrontierBoundary =
     refl refl refl refl refl refl
     refl refl refl
     refl
-    "G1 has been reduced to scalar arithmetic. The Lean source now constructs a witness with S(W_t)>=7*pi^4/1600, proves endpoint taper L1<=83/30, compiles this through the exact projective profile, bounds the smooth pole coordinates, obtains an explicit combined-profile L1 bound and hence an explicit K0. It defines T_Q=4*(K0+1)/(7*pi^4/1600). The sole remaining G1 payment is the certified scalar comparison T_Q < the Platt-Trudgian cutoff; numerically the coarse constants give T_Q about 1.041e9 versus T_PT about 3.000e12, but that numerical comparison is not marked paid here."
+    "G1 is source-written closed. The Lean companion constructs the floor-certified witness, proves the explicit combined L1 and K0 bounds, defines T_Q, and certifies T_Q<T_PT without decimal approximations. The scalar proof uses deliberately coarse theorem-bearing inequalities: cosh(1)<2, cosh(pi+1)<243, pi+1<5 and pi>3, yielding K0<4e9 and T_Q<5e10<3000175332800. Above the Platt-Trudgian cutoff the quantitative-band witness therefore has no remaining G1 hypothesis."
     "G3 representation is now source-written through the preferred symmetric global t-centred Abel consumer. Negative-height transport is endpoint-correct, both boundary terms tend to zero, the literal half-open zero windows are exhausted cofinally on the actual Zeros subtype, the smooth mu windows exhaust the full-line integral, and therefore the finite centred residual tends to global signedNMuPair. The preferred combined Abel partial L_n+R_n then tends to -signedNMuPair directly from the finite Abel identity. Separate one-sided correlation-integral limits remain retained as a strictly stronger optional producer interface rather than Clay-facing debt. Full-line mu-integrability is source-written from Zeta23.EF.integrable_paperFT_mul_mu. The exact completedSignedResidual=combinedCluster identity is paid, and outward-pointing centred discrepancy remains a wrong-sign diagnostic."
     "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. In particular the old universal lower bound over every arbitrary QuarticFourSignedPolePair is stronger than needed and is retained only as a donor interface."
-    "Authoritative high cut: one scalar G1 threshold comparison plus the joint G3 completed-residual inequality. The preferred global symmetric centered-Abel representation is now source-written: finite residual -> global signedNMuPair and combined left+right Abel correlation -> -signedNMuPair. Individual one-sided improper limits remain optional stronger producers only. RH remains unproved because the genuine joint G3 inequality and the scalar T_Q<T_PT certificate are still unpaid, and no exact-head kernel receipt is claimed for this source tranche."
+    "Authoritative high cut: G1 is source-written closed, and the preferred global symmetric centered-Abel representation is source-written. The only Clay-facing high-side analytic wall is now the joint G3 completed-residual inequality W.completedSignedResidual < 2*W.combinedZeroHeightDefect rho. Individual one-sided improper correlation limits remain optional stronger producers only. RH remains unproved because G3 is unpaid, and no exact-head Lean/Agda kernel receipt is claimed for this source tranche."
 
 quarticTerminalCompilerShape :
   {ell : Level} ->
