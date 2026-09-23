@@ -18,3 +18,16 @@ independentPhysicalCoordinateWeldsPruned = refl
 noAdditionalDecayTheorem :
   R421.round421AdditionalDecayTheoremRequired ≡ false
 noAdditionalDecayTheorem = refl
+
+
+outerFiniteSummationCompilerOwned :
+  R421.round421OuterSourceSummabilityLevel ≡ machineChecked
+outerFiniteSummationCompilerOwned = refl
+
+residualCMP116SummabilityRemainsPhysical :
+  R421.round421ResidualCMP116SummabilityLevel ≡ conditional
+residualCMP116SummabilityRemainsPhysical = refl
+
+pointwiseMarkedResidualFactorizationRemainsPhysical :
+  R421.round421PointwiseMarkedResidualFactorizationLevel ≡ conditional
+pointwiseMarkedResidualFactorizationRemainsPhysical = refl
