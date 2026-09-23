@@ -104,8 +104,7 @@ fivePlusTenIsFifteen = refl
 
 fiveTimesTwoIsTen :
   5 * 2 ≡ 10
-fiveTimesTwoIsTen =
-  Completion.tenIsFiveTimesTwo
+fiveTimesTwoIsTen = refl
 
 ------------------------------------------------------------------------
 -- 2. Explicit ten -> nine quotient by duplicated neutral orientation.
