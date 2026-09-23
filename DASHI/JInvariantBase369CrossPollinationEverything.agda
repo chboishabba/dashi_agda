@@ -82,3 +82,5 @@ import DASHI.Moonshine.C3FourierConjugationExact
 import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact
 
 import DASHI.Moonshine.JInvariantSheafHyperformAdmissibleDescentExact
+
+import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact
