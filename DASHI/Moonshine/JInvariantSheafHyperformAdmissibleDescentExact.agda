@@ -20,6 +20,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁; proj₂; Σ)
 
+import Base369 as Base
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
@@ -125,7 +126,7 @@ open AdmissiblePushoutInterface public
 localJRestriction : J.StructuredJField → J.LocalJ27
 localJRestriction = J.localJObserver
 
-chosenLocalValue : J.StructuredJField → Base369.TriTruth
+chosenLocalValue : J.StructuredJField → Base.TriTruth
 chosenLocalValue state = proj₂ (J.localJObserver state)
 
 chosenLocalValueFactorsThroughLocalJ :
