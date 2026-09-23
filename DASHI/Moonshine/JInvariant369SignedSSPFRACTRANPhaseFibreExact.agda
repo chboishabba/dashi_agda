@@ -26,7 +26,6 @@ module DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Data.Empty using (⊥)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Moonshine.JInvariantColourWheelWaveSignedBidiExact as SignedJ
@@ -91,7 +90,7 @@ open SignedPhaseToLevel3Intertwiner public
 
 signedSpectralConjugationCannotEqualLevel3Translation :
   SignedPhaseToLevel3Intertwiner →
-  ⊥
+  Separation.Empty
 signedSpectralConjugationCannotEqualLevel3Translation bridge =
   Separation.level3TranslationNoFixedPoint
     (calibrate bridge Spectral.frequencyZero)
