@@ -175,3 +175,6 @@ import DASHI.Core.PortableInteractiveViewExact
 import DASHI.Core.PortableLoopInterpretationExact
 import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
 import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
+
+-- World/observation/theory/belief type separation and factorisation boundary.
+import DASHI.Core.WorldRepresentationSeparationExact
