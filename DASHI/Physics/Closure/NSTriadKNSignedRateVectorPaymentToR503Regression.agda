@@ -150,3 +150,24 @@ a3QuantitativeSignedPaymentStillProofBearing :
   EndpointAware.a3QuantitativeSignedPaymentStillProofBearing ≡ true
 a3QuantitativeSignedPaymentStillProofBearing =
   EndpointAware.a3QuantitativeSignedPaymentStillProofBearingIsTrue
+
+
+exactR406EndpointNormalFormAvailable :
+  EndpointAware.exactR406EndpointNormalFormClosedGivenScalarFTC ≡ true
+exactR406EndpointNormalFormAvailable =
+  EndpointAware.exactR406EndpointNormalFormClosedGivenScalarFTCIsTrue
+
+divisionFreeD1bA3NormalizationAvailable :
+  EndpointAware.divisionFreeD1bA3NormalizationClosed ≡ true
+divisionFreeD1bA3NormalizationAvailable =
+  EndpointAware.divisionFreeD1bA3NormalizationClosedIsTrue
+
+endpointPlusFourA3NotYetDerivedFromD1b0D1b1 :
+  EndpointAware.endpointPlusFourA3EqualityDerivedFromD1b0D1b1 ≡ false
+endpointPlusFourA3NotYetDerivedFromD1b0D1b1 =
+  EndpointAware.endpointPlusFourA3EqualityDerivedFromD1b0D1b1IsFalse
+
+factoredMinusSelfGramToA3StillOpen :
+  EndpointAware.factoredFullMinusSelfGramToA3AttachmentClosed ≡ false
+factoredMinusSelfGramToA3StillOpen =
+  EndpointAware.factoredFullMinusSelfGramToA3AttachmentClosedIsFalse
