@@ -139,7 +139,7 @@ module InitialCritical
         (Live.initialVelocityAgreement
           (Live.support D) cutoff mode
           (listedFromModeMembership coherence cutoff mode
-            (include mode Cube.here))))
+            (include mode (Cube.here refl)))))
       (cong
         (Fold.dyadicCriticalWeight mode
           * L2.complex3NormSquared
