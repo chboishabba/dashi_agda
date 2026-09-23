@@ -82,14 +82,14 @@ applicantCounterRole = refl
 ------------------------------------------------------------------------
 
 yunupinguExactJoinExists :
-  Y.Join.ReviewedJoinWitness
+  Join.ReviewedJoinWitness
     Y.yunupinguAcquisitionCoordinate
     Y.yindjibarndiEmpiricalSlice
 yunupinguExactJoinExists =
   Y.yunupinguReviewedJoin
 
 maboExactJoinExists :
-  Y.Join.ReviewedJoinWitness
+  Join.ReviewedJoinWitness
     Y.maboAcquisitionDistinctionCoordinate
     Y.yindjibarndiEmpiricalSlice
 maboExactJoinExists =
