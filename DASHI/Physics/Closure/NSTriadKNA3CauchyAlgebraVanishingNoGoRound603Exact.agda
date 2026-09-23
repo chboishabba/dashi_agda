@@ -31,7 +31,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≢_)
+open import Relation.Binary.PropositionalEquality using (_≢_; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyPairNormalFormRound600Exact as R600
 
@@ -103,8 +103,6 @@ dynamicAtStarIsOne603 :
   dynamicPair603 star star ≡ 1ℚ
 dynamicAtStarIsOne603 =
   trans r291CauchyReduction603 remainderAtStarIsOne603
-  where
-  open import Relation.Binary.PropositionalEquality using (trans)
 
 oneNotZero603 : 1ℚ ≢ 0ℚ
 oneNotZero603 ()
@@ -114,16 +112,12 @@ remainderDoesNotVanish603 :
 remainderDoesNotVanish603 equality =
   oneNotZero603
     (trans (sym remainderAtStarIsOne603) equality)
-  where
-  open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 dynamicDoesNotVanish603 :
   dynamicPair603 star star ≢ 0ℚ
 dynamicDoesNotVanish603 equality =
   oneNotZero603
     (trans (sym dynamicAtStarIsOne603) equality)
-  where
-  open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 ------------------------------------------------------------------------
 -- Status / trust boundary.
