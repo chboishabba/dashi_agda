@@ -34,6 +34,7 @@ import DASHI.ComputerScience.WrongTypeAttributionFactorisationPlanningSnowballEx
 import DASHI.Foundations.StageValuationBundleAtlas as Bundle
 import DASHI.Foundations.StageAtlasZeroToTwelve as ExtendedStage
 import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
+import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank
 import DASHI.Wikimedia.IbrahimZeroToThirteenTernaryCarryNDimFibreSnowballExact as Carry
 
@@ -207,7 +208,145 @@ relationDiagonalWrongTypeReceipt =
     true
 
 ------------------------------------------------------------------------
--- 4. Stage-12 semantic extension remains distinct from the twelve-axis base.
+-- 4. Signed SSP/FRACTRAN is a fine stalk over the 144 relation carrier.
+--
+-- The cell address is retained exactly.  The signed multiplicity is finer than
+-- its ternary polarity: positive multiplicities 1 and 2 have the same coarse
+-- sign but different magnitude-sensitive consumer values.  This is the
+-- concrete residual/reopening law connecting the 144 site to signed FRACTRAN.
+------------------------------------------------------------------------
+
+SignedRelationField : Set
+SignedRelationField =
+  StageRelation144 → Signed.SignedMultiplicity
+
+signedMultiplicityToTriTruth :
+  Signed.SignedMultiplicity → Base.TriTruth
+signedMultiplicityToTriTruth (Signed.negativeMultiplicity n) = Base.tri-low
+signedMultiplicityToTriTruth Signed.zeroMultiplicity = Base.tri-mid
+signedMultiplicityToTriTruth (Signed.positiveMultiplicity n) = Base.tri-high
+
+coarseSignedRelationField :
+  SignedRelationField → StageRelationField
+coarseSignedRelationField field cell =
+  signedMultiplicityToTriTruth (field cell)
+
+SignedRelationCellState : Set
+SignedRelationCellState =
+  StageRelation144 × Signed.SignedMultiplicity
+
+signedRelationCellObserver :
+  SignedRelationCellState →
+  StageRelation144 × Base.TriTruth
+signedRelationCellObserver (cell , multiplicity) =
+  cell , signedMultiplicityToTriTruth multiplicity
+
+signedMagnitudeConsumer :
+  SignedRelationCellState → Nat
+signedMagnitudeConsumer (cell , Signed.negativeMultiplicity n) = n
+signedMagnitudeConsumer (cell , Signed.zeroMultiplicity) = 0
+signedMagnitudeConsumer (cell , Signed.positiveMultiplicity n) = n
+
+cell01PositiveOne : SignedRelationCellState
+cell01PositiveOne =
+  (Atlas.atlas-0 , Atlas.atlas-1) , Signed.positiveMultiplicity 1
+
+cell01PositiveTwo : SignedRelationCellState
+cell01PositiveTwo =
+  (Atlas.atlas-0 , Atlas.atlas-1) , Signed.positiveMultiplicity 2
+
+sameCellAndSameCoarsePositiveSign :
+  signedRelationCellObserver cell01PositiveOne
+  ≡ signedRelationCellObserver cell01PositiveTwo
+sameCellAndSameCoarsePositiveSign = refl
+
+differentSignedMagnitudeAtSameCoarseCell :
+  signedMagnitudeConsumer cell01PositiveOne
+  ≡ signedMagnitudeConsumer cell01PositiveTwo →
+  ⊥
+differentSignedMagnitudeAtSameCoarseCell ()
+
+signedMagnitudeNonDescentWitness :
+  Descent.ConsumerNonDescentWitness
+    signedRelationCellObserver
+    signedMagnitudeConsumer
+signedMagnitudeNonDescentWitness =
+  Descent.consumerNonDescentWitness
+    cell01PositiveOne
+    cell01PositiveTwo
+    sameCellAndSameCoarsePositiveSign
+    differentSignedMagnitudeAtSameCoarseCell
+
+ternaryRelationCellCannotAnswerSignedMagnitude :
+  Descent.ConsumerSufficient
+    signedRelationCellObserver
+    signedMagnitudeConsumer →
+  ⊥
+ternaryRelationCellCannotAnswerSignedMagnitude =
+  Descent.nonDescentWitnessBlocksSufficiency
+    signedMagnitudeNonDescentWitness
+
+ternaryRelationCellCannotFactorSignedMagnitude :
+  Descent.FactorsThrough
+    signedRelationCellObserver
+    signedMagnitudeConsumer →
+  ⊥
+ternaryRelationCellCannotFactorSignedMagnitude =
+  Descent.nonDescentWitnessBlocksFactorization
+    signedMagnitudeNonDescentWitness
+
+signedRelationMagnitudeObligation : Wrong.IndexedObligation
+signedRelationMagnitudeObligation =
+  Wrong.indexed-obligation
+    Wrong.consumerFactorisationObligation
+    "Stage12Relation144:signedMagnitude"
+    "StageTwelveGrothendieckRelationHyperformExact.signedMagnitudeConsumer"
+    "relation cell plus coarse ternary SSP sign"
+
+signedRelationCoarseCandidate : Wrong.OfferedCandidate
+signedRelationCoarseCandidate =
+  Wrong.offered-candidate
+    "Stage12 relation cell with coarse SSP sign"
+    "coarse signed-FRACTRAN observer"
+    "StageTwelveGrothendieckRelationHyperformExact.signedRelationCellObserver"
+    true
+
+signedRelationMagnitudeWrongTypeReceipt : Wrong.WrongTypeErrorReceipt
+signedRelationMagnitudeWrongTypeReceipt =
+  Wrong.wrong-type-error-receipt
+    signedRelationMagnitudeObligation
+    signedRelationCoarseCandidate
+    Wrong.nonFactorableRepresentation
+    "same relation cell and positive coarse sign / distinct FRACTRAN multiplicity magnitude"
+    true
+
+SignedRelationCellBundleSheaf : Set₁
+SignedRelationCellBundleSheaf =
+  Bundle.BundleSheaf
+    StageRelation144
+    Signed.SignedMultiplicity
+    SignedRelationField
+
+signedRelationCellBundleSheaf :
+  SignedRelationCellBundleSheaf
+signedRelationCellBundleSheaf = record
+  { restrict = λ field cell → field cell
+  ; compatible = λ locals → ⊤
+  ; glue = λ locals witness → locals
+  ; glueRestricts = λ locals witness cell → refl
+  }
+
+signedRelationCellGlueRestricts :
+  (locals : StageRelation144 → Signed.SignedMultiplicity) →
+  (cell : StageRelation144) →
+  Bundle.BundleSheaf.restrict signedRelationCellBundleSheaf
+    (Bundle.BundleSheaf.glue signedRelationCellBundleSheaf locals tt)
+    cell
+  ≡ locals cell
+signedRelationCellGlueRestricts locals cell = refl
+
+------------------------------------------------------------------------
+-- 5. Stage-12 semantic extension remains distinct from the twelve-axis base.
 ------------------------------------------------------------------------
 
 stage12IndexIsTwelve :
@@ -227,7 +366,7 @@ stage12IsOneCarryPlusTwoLocalUnits =
   ExtendedStage.stage12IsOneJPlusTwo
 
 ------------------------------------------------------------------------
--- 5. Exact 0..13 rank/carry crosswalk.
+-- 6. Exact 0..13 rank/carry crosswalk.
 ------------------------------------------------------------------------
 
 rank12AddressIsThreePlusNine :
@@ -273,7 +412,7 @@ equal531441CountDoesNotIdentifySemanticCarriers :
 equal531441CountDoesNotIdentifySemanticCarriers ()
 
 ------------------------------------------------------------------------
--- 6. Small category interface with laws.
+-- 7. Small category interface with laws.
 ------------------------------------------------------------------------
 
 record SmallCategory : Set₁ where
@@ -300,7 +439,7 @@ record SmallCategory : Set₁ where
 open SmallCategory public
 
 ------------------------------------------------------------------------
--- 7. Sieves and pullback.
+-- 8. Sieves and pullback.
 ------------------------------------------------------------------------
 
 record Sieve (C : SmallCategory) (U : Obj C) : Set₁ where
@@ -348,7 +487,7 @@ pullbackSieve C arrow sieve = record
     substLocal P refl px = px
 
 ------------------------------------------------------------------------
--- 8. Genuine Grothendieck topology axioms.
+-- 9. Genuine Grothendieck topology axioms.
 ------------------------------------------------------------------------
 
 record GrothendieckTopology (C : SmallCategory) : Set₁ where
@@ -383,7 +522,7 @@ record GrothendieckTopology (C : SmallCategory) : Set₁ where
 open GrothendieckTopology public
 
 ------------------------------------------------------------------------
--- 9. Concrete discrete twelve-axis category.
+-- 10. Concrete discrete twelve-axis category.
 ------------------------------------------------------------------------
 
 eqTrans :
@@ -423,7 +562,7 @@ stageDiscreteCategory = record
   }
 
 ------------------------------------------------------------------------
--- 10. Maximal-only coverage is an actual Grothendieck topology.
+-- 11. Maximal-only coverage is an actual Grothendieck topology.
 --
 -- Covering means every arrow into U is already in the sieve.  On the
 -- discrete stage category this is the canonical conservative topology.
@@ -461,7 +600,7 @@ maximalOnlyStageTopology = record
     substLocal P refl px = px
 
 ------------------------------------------------------------------------
--- 11. Reuse the pre-existing BundleSheaf gluing interface.
+-- 12. Reuse the pre-existing BundleSheaf gluing interface.
 ------------------------------------------------------------------------
 
 StageBundleSheaf :
@@ -518,6 +657,10 @@ record StageTwelveSiteSheafReceipt : Set₁ where
     diagonalNonDescentWitnessPaid : Bool
     diagonalFactorsThroughOffDiagonalConsumer : Bool
     diagonalWrongTypeReceiptPaid : Bool
+    signedSSPFineStalkConstructed : Bool
+    signedMagnitudeNonDescentPaid : Bool
+    coarseSignedCellFactorsThroughMagnitude : Bool
+    signedMagnitudeWrongTypeReceiptPaid : Bool
     bundleSheafInterfaceReused : Bool
     relationCellBundleSheafConstructed : Bool
     grothendieckAxiomsConstructed : Bool
@@ -543,6 +686,10 @@ canonicalStageTwelveSiteSheafReceipt = record
   ; diagonalNonDescentWitnessPaid = true
   ; diagonalFactorsThroughOffDiagonalConsumer = false
   ; diagonalWrongTypeReceiptPaid = true
+  ; signedSSPFineStalkConstructed = true
+  ; signedMagnitudeNonDescentPaid = true
+  ; coarseSignedCellFactorsThroughMagnitude = false
+  ; signedMagnitudeWrongTypeReceiptPaid = true
   ; bundleSheafInterfaceReused = true
   ; relationCellBundleSheafConstructed = true
   ; grothendieckAxiomsConstructed = true
