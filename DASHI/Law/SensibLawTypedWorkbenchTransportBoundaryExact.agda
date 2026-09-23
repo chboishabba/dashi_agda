@@ -67,7 +67,9 @@ interactiveBoundary =
   PortableGpu.canonicalPortableInteractiveGpuProjectionBoundary
 
 jsonCommandTransportAlreadyForbidden :
-  PortableGpu.jsonSemanticCommandTransport interactiveBoundary ≡ false
+  PortableGpu.PortableInteractiveGpuProjectionBoundary.jsonSemanticCommandTransport
+    interactiveBoundary
+    ≡ false
 jsonCommandTransportAlreadyForbidden = refl
 
 workbenchBoundary :
@@ -76,11 +78,15 @@ workbenchBoundary =
   WorkbenchGpu.canonicalUnifiedWorkbenchDioxusWgpuBoundary
 
 dioxusStillProjectionNotAuthority :
-  WorkbenchGpu.dioxusIsProjectionNotAuthority workbenchBoundary ≡ true
+  WorkbenchGpu.UnifiedWorkbenchDioxusWgpuBoundary.dioxusIsProjectionNotAuthority
+    workbenchBoundary
+    ≡ true
 dioxusStillProjectionNotAuthority = refl
 
 wgpuStillProjectionNotAuthority :
-  WorkbenchGpu.wgpuIsProjectionNotAuthority workbenchBoundary ≡ true
+  WorkbenchGpu.UnifiedWorkbenchDioxusWgpuBoundary.wgpuIsProjectionNotAuthority
+    workbenchBoundary
+    ≡ true
 wgpuStillProjectionNotAuthority = refl
 
 data JsonReplayIsCanonicalProductionAbi : Set where
