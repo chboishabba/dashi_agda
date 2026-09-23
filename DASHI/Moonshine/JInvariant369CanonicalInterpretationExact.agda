@@ -56,6 +56,7 @@ import DASHI.Moonshine.JInvariant369JointJReflectionWeldExact as JointJReflectio
 import DASHI.Moonshine.JInvariantAnalyticNormalizedKleinAdapterExact as NormalizedKlein
 import DASHI.Moonshine.JInvariant369NormalizedAnalyticRendererExact as NormalizedRenderer
 import DASHI.Moonshine.JInvariant369NormalizedRendererReadoutFactorizationExact as ReadoutFactor
+import DASHI.Moonshine.JInvariant369NormalizedRendererCanonicalReflectionExact as CanonicalReflection
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
 import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact as LegacyBridge
@@ -111,6 +112,9 @@ record Canonical369InterpretationBoundary : Set where
     normalizedRendererContinuousPresentationFactorizationOwned : Bool
     leanConcreteContinuousJReadoutParityRecorded : Bool
     leanContinuousPhaseReflectionOwned : Bool
+    normalizedRendererCanonicalReflectionCompilerOwned : Bool
+    jointReflectionPointAlignmentDefinitional : Bool
+    normalizedRendererReflectionPointAlignmentCompilerDefinitional : Bool
     concreteRendererAnalyticJSameObjectWeldInhabited : Bool
     normalizedRendererReadoutInhabited : Bool
     normalizedRendererReflectionPointAlignmentInhabited : Bool
@@ -205,6 +209,9 @@ canonicalCanonical369InterpretationBoundary =
     ; normalizedRendererContinuousPresentationFactorizationOwned = true
     ; leanConcreteContinuousJReadoutParityRecorded = true
     ; leanContinuousPhaseReflectionOwned = true
+    ; normalizedRendererCanonicalReflectionCompilerOwned = true
+    ; jointReflectionPointAlignmentDefinitional = true
+    ; normalizedRendererReflectionPointAlignmentCompilerDefinitional = true
     ; concreteRendererAnalyticJSameObjectWeldInhabited = false
     ; normalizedRendererReadoutInhabited = false
     ; normalizedRendererReflectionPointAlignmentInhabited = false
@@ -481,6 +488,24 @@ normalizedRendererReadoutFactorizationBoundary :
   ReadoutFactor.NormalizedReadoutFactorizationBoundary
 normalizedRendererReadoutFactorizationBoundary =
   ReadoutFactor.canonicalNormalizedReadoutFactorizationBoundary
+
+
+normalizedRendererCanonicalReflectionBoundary :
+  CanonicalReflection.CanonicalNormalizedReflectionBoundary
+normalizedRendererCanonicalReflectionBoundary =
+  CanonicalReflection.canonicalCanonicalNormalizedReflectionBoundary
+
+normalizedRendererReflectionPointNoLongerIndependent :
+  normalizedRendererReflectionPointAlignmentCompilerDefinitional
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+normalizedRendererReflectionPointNoLongerIndependent = refl
+
+jointReflectionPointNoLongerIndependent :
+  jointReflectionPointAlignmentDefinitional
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+jointReflectionPointNoLongerIndependent = refl
 
 normalizedRendererReadoutIsNowSplitByRole :
   normalizedRendererContinuousPresentationFactorizationOwned
