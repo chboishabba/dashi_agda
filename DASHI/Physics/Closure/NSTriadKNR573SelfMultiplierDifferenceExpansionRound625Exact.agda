@@ -216,6 +216,23 @@ module SelfMultiplierExpansion
     weightedSelfSlotIsFourMultiplierSlots
       tau (pNonzeroFromDecision tau pDecision)
 
+
+  selfNestedMultiplierCompanion :
+    Physical.PhysicalTriadIncidence → C3.Complex3 F
+  selfNestedMultiplierCompanion tau =
+    C3.complex3Add
+      (selfMultiplierExhaustiveCompanion tau)
+      (selfMultiplierExhaustiveCompanion tau)
+
+  selfNestedCompanionMultiplierNormalForm :
+    (tau : Physical.PhysicalTriadIncidence) →
+    Split.selfNestedWeightedCompanionCell tau
+    ≡ selfNestedMultiplierCompanion tau
+  selfNestedCompanionMultiplierNormalForm tau =
+    cong₂ C3.complex3Add
+      (selfExhaustiveCompanionMultiplierNormalForm tau)
+      (selfExhaustiveCompanionMultiplierNormalForm tau)
+
 ------------------------------------------------------------------------
 -- Status / frontier.
 ------------------------------------------------------------------------
@@ -225,6 +242,9 @@ round625SelfForcingPFourHelicityMultiplierDifferencesClosed = true
 
 round625R573SelfSlotFourMultiplierDifferenceNormalFormClosed : Bool
 round625R573SelfSlotFourMultiplierDifferenceNormalFormClosed = true
+
+round625R573SelfNestedFourMultiplierDifferenceNormalFormClosed : Bool
+round625R573SelfNestedFourMultiplierDifferenceNormalFormClosed = true
 
 round625ZeroPBranchPreserved : Bool
 round625ZeroPBranchPreserved = true
@@ -245,6 +265,10 @@ round625SelfForcingPFourHelicityMultiplierDifferencesClosedIsTrue = refl
 round625R573SelfSlotFourMultiplierDifferenceNormalFormClosedIsTrue :
   round625R573SelfSlotFourMultiplierDifferenceNormalFormClosed ≡ true
 round625R573SelfSlotFourMultiplierDifferenceNormalFormClosedIsTrue = refl
+
+round625R573SelfNestedFourMultiplierDifferenceNormalFormClosedIsTrue :
+  round625R573SelfNestedFourMultiplierDifferenceNormalFormClosed ≡ true
+round625R573SelfNestedFourMultiplierDifferenceNormalFormClosedIsTrue = refl
 
 round625IntroducesNormOrAbsoluteValueIsFalse :
   round625IntroducesNormOrAbsoluteValue ≡ false
