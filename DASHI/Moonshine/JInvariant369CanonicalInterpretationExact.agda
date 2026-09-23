@@ -51,6 +51,7 @@ import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Repair
 import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact as SignedSSP
 import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as JointBundle
 import DASHI.Moonshine.JSameWeightQuotientReflectionExact as JReflection
+import DASHI.Moonshine.JInvariant369JointJReflectionWeldExact as JointJReflection
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
 import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact as LegacyBridge
@@ -95,6 +96,9 @@ record Canonical369InterpretationBoundary : Set where
 
     sameWeightJReflectionCompilerOwned : Bool
     fixedLocusJConjugationFixedCompilerOwned : Bool
+    analyticJReflectionCompilesIntoJointBundle : Bool
+    rendererFixedPointCompilesToJointJConjugationFixed : Bool
+    concreteRendererAnalyticJSameObjectWeldInhabited : Bool
     concreteJRealAxisInterpretationTransported : Bool
 
     sspC3CycleIntertwinesLevelTranslation : Bool
@@ -161,6 +165,9 @@ canonicalCanonical369InterpretationBoundary =
 
     ; sameWeightJReflectionCompilerOwned = true
     ; fixedLocusJConjugationFixedCompilerOwned = true
+    ; analyticJReflectionCompilesIntoJointBundle = true
+    ; rendererFixedPointCompilesToJointJConjugationFixed = true
+    ; concreteRendererAnalyticJSameObjectWeldInhabited = false
     ; concreteJRealAxisInterpretationTransported = false
 
     ; sspC3CycleIntertwinesLevelTranslation = true
@@ -219,6 +226,19 @@ jointModularDihedralLawIsOwned :
     canonicalCanonical369InterpretationBoundary
   ≡ true
 jointModularDihedralLawIsOwned = refl
+
+
+analyticJReflectionFeedsJointBundle :
+  analyticJReflectionCompilesIntoJointBundle
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+analyticJReflectionFeedsJointBundle = refl
+
+jointRendererAnalyticJWeldStillOpen :
+  concreteRendererAnalyticJSameObjectWeldInhabited
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+jointRendererAnalyticJWeldStillOpen = refl
 
 fullDeckGroupIsNotCollapsedToCyclic :
   fullDeckGroupsCollapsedToCyclic
@@ -331,6 +351,12 @@ jointPhaseLevelBoundary = JointBundle.canonicalJointPhaseLevelBoundary
 
 jReflectionBoundary : JReflection.JReflectionBoundary
 jReflectionBoundary = JReflection.canonicalJReflectionBoundary
+
+
+jointJReflectionWeldBoundary :
+  JointJReflection.JointJReflectionWeldBoundary
+jointJReflectionWeldBoundary =
+  JointJReflection.canonicalJointJReflectionWeldBoundary
 
 ------------------------------------------------------------------------
 -- Orthogonal composition with the pre-existing SSP/J resolution bifiltration.
