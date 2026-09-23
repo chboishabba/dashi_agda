@@ -46,6 +46,8 @@ data ConeDebtCoordinate : Set where
   exactBaseQuarticLocalBound : ConeDebtCoordinate
   baseQ6RemainderBound : ConeDebtCoordinate
   horizontalAlpha4RemainderBound : ConeDebtCoordinate
+  completeLocalJointRemainderBound : ConeDebtCoordinate
+  coneAutomaticallyInsideCanonicalRadius : ConeDebtCoordinate
   coneContainedInFixedThreeUnitWindow : ConeDebtCoordinate
   fixedConeWindowZeroCountLogBound : ConeDebtCoordinate
 
@@ -68,7 +70,9 @@ coneDebtStatus canonicalLocalRadius = theoremOwned
 coneDebtStatus horizontalQuadraticQ4RemainderBound = theoremOwned
 coneDebtStatus exactBaseQuarticLocalBound = theoremOwned
 coneDebtStatus baseQ6RemainderBound = openAnalyticObstruction
-coneDebtStatus horizontalAlpha4RemainderBound = openAnalyticObstruction
+coneDebtStatus horizontalAlpha4RemainderBound = theoremOwned
+coneDebtStatus completeLocalJointRemainderBound = theoremOwned
+coneDebtStatus coneAutomaticallyInsideCanonicalRadius = theoremOwned
 coneDebtStatus coneContainedInFixedThreeUnitWindow = theoremOwned
 coneDebtStatus fixedConeWindowZeroCountLogBound = theoremOwned
 
@@ -90,6 +94,8 @@ record QuarticSignedPoleConeDebtBoundary : Set where
     exactBaseQuarticLocalBoundPaid : Bool
     baseQ6RemainderBoundPaid : Bool
     horizontalAlpha4RemainderBoundPaid : Bool
+    completeLocalJointRemainderBoundPaid : Bool
+    coneAutomaticallyInsideCanonicalRadiusPaid : Bool
     coneContainedInFixedThreeUnitWindowPaid : Bool
     fixedConeWindowZeroCountLogBoundPaid : Bool
 
@@ -116,8 +122,12 @@ record QuarticSignedPoleConeDebtBoundary : Set where
       exactBaseQuarticLocalBoundPaid ≡ true
     baseQ6RemainderBoundPaidIsFalse :
       baseQ6RemainderBoundPaid ≡ false
-    horizontalAlpha4RemainderBoundPaidIsFalse :
-      horizontalAlpha4RemainderBoundPaid ≡ false
+    horizontalAlpha4RemainderBoundPaidIsTrue :
+      horizontalAlpha4RemainderBoundPaid ≡ true
+    completeLocalJointRemainderBoundPaidIsTrue :
+      completeLocalJointRemainderBoundPaid ≡ true
+    coneAutomaticallyInsideCanonicalRadiusPaidIsTrue :
+      coneAutomaticallyInsideCanonicalRadiusPaid ≡ true
     coneContainedInFixedThreeUnitWindowPaidIsTrue :
       coneContainedInFixedThreeUnitWindowPaid ≡ true
     fixedConeWindowZeroCountLogBoundPaidIsTrue :
@@ -138,13 +148,13 @@ canonicalQuarticSignedPoleConeDebtBoundary :
 canonicalQuarticSignedPoleConeDebtBoundary =
   quartic-signed-pole-cone-debt-boundary
     true true true true true
-    true true true false false true true
+    true true true false true true true true true
     false false false
     refl refl refl refl refl
-    refl refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl refl
     refl refl refl
     "The literal off-ordinate G3 source is now partitioned on finite symmetric zero windows into local cone, local good and far exact lanes.  The Taylor carrier is never globally summed.  ConeDebt is the positive part of the exact literal source on the potentially unfavorable cone, GoodQuarticGain is nonnegative, LocalRemainderDebt is finite-window absolute remainder debt, and FarExact retains the original decaying pair kernel.  The finite source obeys OffOrdExact <= ConeDebt - GoodQuarticGain + LocalRemainderDebt + FarExact."
-    "The canonical local radius eta0=1/(pi+1) is theorem-owned.  On this radius the horizontal quadratic jet error has the explicit bound |R_Q(q)| <= (5/96)|q|^4*M6.  Because M0=M2=0, the exact base cosine channel itself also satisfies |C_P(q)| <= (5/96)|q|^4*M4abs, so a sixth-order base remainder is not required merely to control the local debt.  The mixed cone is contained in the fixed window |gamma-t|<=3/2, and the enclosing three-unit zero multiplicity has an unconditional O(log t) bound from the existing local RvM theorem.  The remaining local analytic estimate needed for a direct debt bound is the hyperbolic alpha^4 remainder.  After that, test whether the weighted cone debt can actually be paid from the fixed-window zero information before adding more formal structure."
+    "The canonical local radius eta0=1/(pi+1) is theorem-owned.  On this radius the horizontal quadratic jet error has the explicit bound |R_Q(q)| <= (5/96)|q|^4*M6.  Because M0=M2=0, the exact base cosine channel itself also satisfies |C_P(q)| <= (5/96)|q|^4*M4abs, so a sixth-order base remainder is not required merely to control the local debt.  The mixed cone is contained in the fixed window |gamma-t|<=3/2, and the enclosing three-unit zero multiplicity has an unconditional O(log t) bound from the existing local RvM theorem.  The hyperbolic alpha^4 remainder is now source-written with the same certified 5/96 fourth-order constant, and the three local pieces compile to one explicit same-object bound for jointQuarticJetRemainder.  For t>=200 every mixed-cone zero is automatically inside the canonical local radius in both normalized coordinates.  Thus local Taylor control is no longer the active debt.  Test whether the resulting weighted cone debt can actually be paid from the fixed-window O(log t) zero information and the good/far/target margin before adding more formal structure."
 
 finiteConeDebtBudgetIsPaid :
   coneDebtStatus finiteConeDebtBudget ≡ theoremOwned
