@@ -8,6 +8,7 @@ on:
     paths:
       - 'DASHI/Moonshine/JInvariant369C6TenRankWeightTwelveCrossPollinationExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalInterpretationExact.agda'
+      - 'DASHI/Moonshine/MonsterAtlas6561X8RecognitionObligationExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalJointReflectionMinimalExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartActionSeparationExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartMobiusMatrixBridgeExact.agda'
