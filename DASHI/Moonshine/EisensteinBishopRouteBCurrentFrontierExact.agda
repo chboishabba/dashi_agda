@@ -42,6 +42,7 @@ import DASHI.Moonshine.JInvariantEisensteinBishopSetoidFiniteQSeriesExact as Bis
 import DASHI.Moonshine.JInvariantEisensteinBishopSetoidExtractionExact as BishopExtraction
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Source
 import DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact as LeanReceipt
+import DASHI.Interop.BishopRound11MachinBindingManifestExact as BindingManifest
 
 record BishopRouteBCurrentFrontier : Set where
   constructor bishop-route-b-current-frontier
@@ -73,8 +74,11 @@ record BishopRouteBCurrentFrontier : Set where
     leanTargetE4E6MathlibIdentificationOwned : Bool
     leanNormalizedDeltaLimitCompilerOwned : Bool
 
+    contentAddressedCrossProverManifestOwned : Bool
+    reciprocalDeclarationBindingTableOwned : Bool
+
     leanKernelReceiptObserved : Bool
-    agdaSourceWitnessesSerializedIntoLeanMirror : Bool
+    generatedCrossProverReplayObserved : Bool
     crossProverSameObjectBindingPaid : Bool
     normalizedDeltaEta24SameObjectPaid : Bool
 
@@ -93,9 +97,10 @@ canonicalBishopRouteBCurrentFrontier =
     true true true true true true
     true true true true true true true
     true true true
+    true true
     false false false false
     true false
-    "Route B's analytic/transcendental representation mathematics is now source-written on both sides. The first live residual is cross-prover same-object binding: serialize or otherwise theorem-bind the actual Agda vendored-Bishop arithmetic/convergence witnesses to the Lean mirror structures, and obtain a Lean kernel receipt for the current dashi_lean4 head. Do not reopen exp/sin/cos/pi mathematics: exp, trig and Machin pi are compiler output from source convergence. Once the binding/replay is paid, consume the already-owned target E4/E6 convergence/Mathlib identification and normalized-Delta compiler. The remaining independent modular seam is normalized (E4^3-E6^2)/1728 = chosen eta^24/Delta on the same analytic object."
+    "Route B's analytic/transcendental representation mathematics is now source-written on both sides, and the exact Agda source blobs/declarations plus vendored Bishop commit are content-addressed reciprocally in Agda and Lean manifests. The first live residual is no longer source/version identification: generate/replay the bound Agda witnesses into the Lean mirror structures and obtain a Lean kernel receipt for the current dashi_lean4 head. Do not reopen exp/sin/cos/pi mathematics: exp, trig and Machin pi are compiler output from source convergence. Once the binding/replay is paid, consume the already-owned target E4/E6 convergence/Mathlib identification and normalized-Delta compiler. The remaining independent modular seam is normalized (E4^3-E6^2)/1728 = chosen eta^24/Delta on the same analytic object."
 
 ------------------------------------------------------------------------
 -- Query-stable reduction receipts.
