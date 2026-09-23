@@ -238,7 +238,7 @@ standardRendererJConjugationFixed :
   JRef.conjugate (Standard.baseReflection AR)
     (Joint.exactJ (Joint.sampleAt L tau))
 standardRendererJConjugationFixed
-    {L = L} {W = W} E tau fixed =
+    {AR = AR} {L = L} {W = W} E tau fixed =
   begin
     Joint.exactJ (Joint.sampleAt L tau)
       ≡⟨ cong
@@ -252,7 +252,7 @@ standardRendererJConjugationFixed
       ≡⟨ Joint.jointRJConjugates
             (jointJConjugationFromNormalizedRenderer E)
             tau ⟩
-    JRef.conjugate (Standard.baseReflection _)
+    JRef.conjugate (Standard.baseReflection AR)
       (Joint.exactJ (Joint.sampleAt L tau))
   ∎
 
