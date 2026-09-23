@@ -44,3 +44,5 @@ import DASHI.Moonshine.JSameWeightQuotientReflectionExact
 import DASHI.Moonshine.JInvariant369JointFibreBifiltrationExact
 \nimport DASHI.Moonshine.JInvariant369ConsolidatedNextStageExact\n\nimport DASHI.Moonshine.JInvariant369ZeroToThirteenTetralemmaQualificationExact\n
 import DASHI.Moonshine.JInvariant369Zeta6561MonsterCrosswalkExact
+
+import DASHI.Moonshine.JInvariant369TenRankSeventeenHyperformalismExact
