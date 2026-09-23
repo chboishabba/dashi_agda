@@ -37,6 +37,82 @@ import DASHI.Foundations.TriadicFiniteQuotient as Q
 -- 1. Generic descent obstruction.
 ------------------------------------------------------------------------
 
+record InvariantBaseTranslationAttempt
+    (Point Base Fibre : Set) : Set₁ where
+  field
+    transform :
+      Point → Point
+
+    baseAt :
+      Point → Base
+
+    baseInvariant :
+      (z : Point) →
+      baseAt (transform z) ≡ baseAt z
+
+    fibreAt :
+      Point → Fibre
+
+    translateFibre :
+      Fibre → Fibre
+
+    translationFixedPointFree :
+      (x : Fibre) →
+      translateFibre x ≡ x →
+      Separation.Empty
+
+    fibreTranslates :
+      (z : Point) →
+      fibreAt (transform z)
+      ≡
+      translateFibre (fibreAt z)
+
+    decodeFromBase :
+      Base → Fibre
+
+    fibreFactorsThroughBase :
+      (z : Point) →
+      fibreAt z
+      ≡
+      decodeFromBase (baseAt z)
+
+open InvariantBaseTranslationAttempt public
+
+invariantBaseFactorizationForcesFixed :
+  ∀ {Point Base Fibre} →
+  (W : InvariantBaseTranslationAttempt Point Base Fibre) →
+  (z : Point) →
+  translateFibre W (fibreAt W z)
+  ≡
+  fibreAt W z
+invariantBaseFactorizationForcesFixed W z =
+  begin
+    translateFibre W (fibreAt W z)
+      ≡⟨ sym (fibreTranslates W z) ⟩
+    fibreAt W (transform W z)
+      ≡⟨ fibreFactorsThroughBase W (transform W z) ⟩
+    decodeFromBase W (baseAt W (transform W z))
+      ≡⟨ cong (decodeFromBase W)
+            (baseInvariant W z) ⟩
+    decodeFromBase W (baseAt W z)
+      ≡⟨ sym (fibreFactorsThroughBase W z) ⟩
+    fibreAt W z
+  ∎
+
+fibreCannotDescendThroughInvariantBase :
+  ∀ {Point Base Fibre} →
+  InvariantBaseTranslationAttempt Point Base Fibre →
+  (z : Point) →
+  Separation.Empty
+fibreCannotDescendThroughInvariantBase W z =
+  translationFixedPointFree W
+    (fibreAt W z)
+    (invariantBaseFactorizationForcesFixed W z)
+
+------------------------------------------------------------------------
+-- 2. j is one invariant-base instance.
+------------------------------------------------------------------------
+
 record JFactorizationTranslationAttempt
     (R : Render.JPhaseRenderingAlgebra)
     (A : Replication.J369ModularAction R)
@@ -101,15 +177,41 @@ factorizationThroughJForcesFixed {R} {A} W z =
     levelAt W z
   ∎
 
+asInvariantBaseAttempt :
+  ∀ {R A Fibre} →
+  JFactorizationTranslationAttempt R A Fibre →
+  InvariantBaseTranslationAttempt
+    (Klein.Point (Render.klein R))
+    (Klein.Value (Render.klein R))
+    Fibre
+asInvariantBaseAttempt {R} {A} W =
+  record
+    { transform =
+        Replication.act A (translationMatrix W)
+    ; baseAt = Render.jValue R
+    ; baseInvariant =
+        Replication.jInvariant A (translationMatrix W)
+    ; fibreAt = levelAt W
+    ; translateFibre =
+        JFactorizationTranslationAttempt.translateFibre W
+    ; translationFixedPointFree =
+        JFactorizationTranslationAttempt.translationFixedPointFree W
+    ; fibreTranslates =
+        JFactorizationTranslationAttempt.levelTranslates W
+    ; decodeFromBase =
+        JFactorizationTranslationAttempt.decodeFromJ W
+    ; fibreFactorsThroughBase =
+        JFactorizationTranslationAttempt.levelFactorsThroughJ W
+    }
+
 levelCannotFactorThroughJ :
   ∀ {R A Fibre} →
   JFactorizationTranslationAttempt R A Fibre →
   (z : Klein.Point (Render.klein R)) →
   Separation.Empty
 levelCannotFactorThroughJ W z =
-  translationFixedPointFree W
-    (levelAt W z)
-    (factorizationThroughJForcesFixed W z)
+  fibreCannotDescendThroughInvariantBase
+    (asInvariantBaseAttempt W) z
 
 ------------------------------------------------------------------------
 -- 2. Canonical level-3 instance.
@@ -292,7 +394,8 @@ level27CannotFactorThroughJ W z =
 record LevelNonDescentThroughJBoundary : Set where
   constructor level-non-descent-through-j-boundary
   field
-    genericTInvariantBaseNoDescentCompilerOwned : Bool
+    genericInvariantBaseNoDescentCompilerOwned : Bool
+    jSpecializationOfGenericNoDescentOwned : Bool
     level3CannotFactorThroughJOwned : Bool
     level9CannotFactorThroughJOwned : Bool
     level27CannotFactorThroughJOwned : Bool
@@ -307,5 +410,5 @@ canonicalLevelNonDescentThroughJBoundary :
   LevelNonDescentThroughJBoundary
 canonicalLevelNonDescentThroughJBoundary =
   level-non-descent-through-j-boundary
-    true true true true
+    true true true true true
     false false false
