@@ -44,7 +44,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; Positive; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -555,6 +555,67 @@ module FixedOutput
           (solve (A3.rateTotal ∷ A3.n ∷ G ∷ Gr ∷ []))
           (cong (R539.two *_) (sym a3Meaning))))
 
+  module Dynamic
+      (viscosityPositive : Positive
+        (Field30.viscosity physicalSystem))
+      (outputNonzero : Z3.NonZeroMode output) where
+
+    module C = R596.FixedOutput
+      physicalSystem S viscosityPositive output outputNonzero
+
+    resolvedFluxTangentPair :
+      Physical.PhysicalTriadIncidence →
+      Physical.PhysicalTriadIncidence → ℚ
+    resolvedFluxTangentPair = C.weightedFluxTangentPair
+
+    centeredDynamicResolvedPair :
+      Physical.PhysicalTriadIncidence →
+      Physical.PhysicalTriadIncidence → ℚ
+    centeredDynamicResolvedPair a b =
+      R539.two * A3.rateTotal * resolvedFluxTangentPair a b
+        + A3.n * pairRateGram rate gram a b
+
+    centeredDynamicResolvedFullSquare :
+      R543.fullSquareSum centeredDynamicResolvedPair fibre
+      ≡
+      R539.two *
+        ( A3.rateTotal
+            * R543.fullSquareSum resolvedFluxTangentPair fibre
+          + A3.n * A3.rightRateWeightedFullGram )
+    centeredDynamicResolvedFullSquare =
+      let
+        expanded =
+          fullSquareLinearCombination
+            (R539.two * A3.rateTotal)
+            A3.n
+            resolvedFluxTangentPair
+            (pairRateGram rate gram)
+            fibre
+
+        pairRateMeaning =
+          fullPairRateGramIsTwoA3WeightedGram
+      in
+      trans expanded
+        (trans
+          (cong₂ _+_
+            refl
+            (cong (A3.n *_) pairRateMeaning))
+          (solve
+            ( A3.rateTotal
+            ∷ A3.n
+            ∷ R543.fullSquareSum resolvedFluxTangentPair fibre
+            ∷ A3.rightRateWeightedFullGram
+            ∷ [])))
+
+    dynamicResidualIsSingleFullSquare :
+      R539.two *
+        ( A3.rateTotal
+            * R543.fullSquareSum resolvedFluxTangentPair fibre
+          + A3.n * A3.rightRateWeightedFullGram )
+      ≡ R543.fullSquareSum centeredDynamicResolvedPair fibre
+    dynamicResidualIsSingleFullSquare =
+      sym centeredDynamicResolvedFullSquare
+
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
@@ -571,8 +632,11 @@ round600A3CenteredStaticFullSquareClosed = true
 round600IntroducesEstimate : Bool
 round600IntroducesEstimate = false
 
-round600DynamicCenteredCauchyPairStillOpen : Bool
-round600DynamicCenteredCauchyPairStillOpen = true
+round600DynamicCenteredCauchyPairNormalFormClosed : Bool
+round600DynamicCenteredCauchyPairNormalFormClosed = true
+
+round600DynamicCenteredCauchyPairVanishingClosed : Bool
+round600DynamicCenteredCauchyPairVanishingClosed = false
 
 round600PairRateFullSquareIdentityClosedIsTrue :
   round600PairRateFullSquareIdentityClosed ≡ true
@@ -590,6 +654,10 @@ round600IntroducesEstimateIsFalse :
   round600IntroducesEstimate ≡ false
 round600IntroducesEstimateIsFalse = refl
 
-round600DynamicCenteredCauchyPairStillOpenIsTrue :
-  round600DynamicCenteredCauchyPairStillOpen ≡ true
-round600DynamicCenteredCauchyPairStillOpenIsTrue = refl
+round600DynamicCenteredCauchyPairNormalFormClosedIsTrue :
+  round600DynamicCenteredCauchyPairNormalFormClosed ≡ true
+round600DynamicCenteredCauchyPairNormalFormClosedIsTrue = refl
+
+round600DynamicCenteredCauchyPairVanishingClosedIsFalse :
+  round600DynamicCenteredCauchyPairVanishingClosed ≡ false
+round600DynamicCenteredCauchyPairVanishingClosedIsFalse = refl
