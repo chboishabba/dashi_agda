@@ -40,6 +40,7 @@ import DASHI.Moonshine.EisensteinBishopLegacyCoordinateTransportExact as Coordin
 import DASHI.Moonshine.JInvariantEisensteinAgdaLeanExtractionExact as AgdaLeanExtraction
 import DASHI.Moonshine.JInvariantEisensteinAgdaLeanRealExtractionExact as AgdaLeanRealExtraction
 import DASHI.Interop.LeanMoonshineEisensteinAnalyticParityExact as LeanParity
+import DASHI.Interop.Round11MachinLeanBindingManifestExact as ReplayManifest
 
 ------------------------------------------------------------------------
 -- 1. Explicit bidirectional same-object bridge.
@@ -211,6 +212,8 @@ record DeltaConstructedComplexReflectionCutsetBoundary : Set where
     leanExpSinCosMachinPiSemanticsCompiled : Bool
     leanRound11MachinBindingCompilerOwned : Bool
     leanMappedSourceE4E6ConvergenceOwned : Bool
+    reciprocalRound11MachinBindingManifestOwned : Bool
+    reciprocalManifestMatchesCurrentSourceBlobs : Bool
 
     finiteRouteEqualsInfiniteAnalyticRoute : Bool
     primitiveAgdaRealToLeanRealExtractionInhabited : Bool
@@ -234,7 +237,7 @@ canonicalDeltaConstructedComplexReflectionCutsetBoundary =
     true true true true true
     true true true true true true true
     true true true true true true true true
-    true true true true true true
+    true true true true true true true true
     false false false true
     false false false false false
-    "Route B now owns both sides of the mathematics. Agda is source-pinned to the vendored Bishop setoid carrier, Round11 concrete trig data and bishopMachinPi, with literal q/E4/E6/discriminant-numerator recurrences. Lean proves the Bishop evaluator is faithful on setoid classes, compiles exp/sin/cos/Machin-pi semantics from the actual convergence receipts, and from one Round11MachinSourceBinding proves the mapped source E4_N/E6_N/discriminant numerator converge to Mathlib E4/E6/the canonical Delta numerator. The normalized E4/E6 Delta target is already a genuine level-one weight-12 form and satisfies the exact inverse-conjugation and unit-circle fixed-locus value identities. The only source-to-target gate left is inhabiting that exact Round11Machin binding from the Agda receipt. The independent analytic same-object gate eta^24 = (E4^3-E6^2)/1728 is now source-written closed in the pinned Lean companion using eta^24 cusp packaging, pin-local weight-zero rigidity and first q-coefficient comparison. Legacy ConstructedComplex/Bishop-to-propositional transport is no longer on the active route-B path."
+    "Route B now owns both sides of the mathematics. Agda is source-pinned to the vendored Bishop setoid carrier, Round11 concrete trig data and bishopMachinPi, with literal q/E4/E6/discriminant-numerator recurrences. Lean proves the Bishop evaluator is faithful on setoid classes, compiles exp/sin/cos/Machin-pi semantics from the actual convergence receipts, and from one Round11MachinSourceBinding proves the mapped source E4_N/E6_N/discriminant numerator converge to Mathlib E4/E6/the canonical Delta numerator. The normalized E4/E6 Delta target is already a genuine level-one weight-12 form and satisfies the exact inverse-conjugation and unit-circle fixed-locus value identities. The reciprocal Agda/Lean manifests now content-address the same seven source blobs and declaration bindings. The only source-to-target gate left is observing/generated-replaying the exact Round11Machin binding from those pinned Agda receipts into Lean. The independent analytic same-object gate eta^24 = (E4^3-E6^2)/1728 is now source-written closed in the pinned Lean companion using eta^24 cusp packaging, pin-local weight-zero rigidity and first q-coefficient comparison. Legacy ConstructedComplex/Bishop-to-propositional transport is no longer on the active route-B path."
