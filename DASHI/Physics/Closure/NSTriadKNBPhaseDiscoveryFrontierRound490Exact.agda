@@ -51,6 +51,7 @@ import DASHI.Physics.Closure.NSTriadKNA3CauchyAlgebraVanishingNoGoRound603Exact 
 import DASHI.Physics.Closure.NSTriadKNA3CauchyForcingMismatchRound604Exact as R604
 import DASHI.Physics.Closure.NSTriadKNR230SelfExternalNetworkSplitRound605Exact as R605
 import DASHI.Physics.Closure.NSTriadKNR567ForcingFullSelfExternalSplitRound606Exact as R606
+import DASHI.Physics.Closure.NSTriadKNA3CauchyMismatchNetworkSplitRound607Exact as R607
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -390,6 +391,22 @@ round490SelectedSelfForcingFullPaysA3 =
 round490ExternalNetworkForcingFullPaid : Bool
 round490ExternalNetworkForcingFullPaid =
   R606.round606ExternalForcingFullPaid
+
+round490CanonicalMismatchSelfExternalSplitClosed : Bool
+round490CanonicalMismatchSelfExternalSplitClosed =
+  R607.round607CanonicalMismatchSelfExternalSplitClosed
+
+round490SelectedSelfMismatchClosed : Bool
+round490SelectedSelfMismatchClosed =
+  R607.round607SelectedSelfMismatchClosed
+
+round490ExternalNetworkContributionClosed : Bool
+round490ExternalNetworkContributionClosed =
+  R607.round607ExternalNetworkContributionClosed
+
+round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatch : Bool
+round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatch =
+  R607.round607CyclicSelfEnergyConservationDirectlyClosesSelfMismatch
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -801,6 +818,26 @@ round490ExternalNetworkForcingFullPaidIsFalse :
   round490ExternalNetworkForcingFullPaid ≡ false
 round490ExternalNetworkForcingFullPaidIsFalse =
   R606.round606ExternalForcingFullPaidIsFalse
+
+round490CanonicalMismatchSelfExternalSplitClosedIsTrue :
+  round490CanonicalMismatchSelfExternalSplitClosed ≡ true
+round490CanonicalMismatchSelfExternalSplitClosedIsTrue =
+  R607.round607CanonicalMismatchSelfExternalSplitClosedIsTrue
+
+round490SelectedSelfMismatchClosedIsFalse :
+  round490SelectedSelfMismatchClosed ≡ false
+round490SelectedSelfMismatchClosedIsFalse =
+  R607.round607SelectedSelfMismatchClosedIsFalse
+
+round490ExternalNetworkContributionClosedIsFalse :
+  round490ExternalNetworkContributionClosed ≡ false
+round490ExternalNetworkContributionClosedIsFalse =
+  R607.round607ExternalNetworkContributionClosedIsFalse
+
+round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatchIsFalse :
+  round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatch ≡ false
+round490CyclicSelfEnergyDirectlyClosesSelectedSelfMismatchIsFalse =
+  R607.round607CyclicSelfEnergyConservationDirectlyClosesSelfMismatchIsFalse
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
