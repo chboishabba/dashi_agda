@@ -61,7 +61,3 @@ pabaiRepairStillNotCurrentLaw :
   ≡ false
 pabaiRepairStillNotCurrentLaw = refl
 
-flatWorldDifferenceStillCannotDetermineAnswer :
-  C.Query.AdequateFor C.flatDifferenceOnly C.demoSemantics C.dutyRouteQuery → ⊥
-flatWorldDifferenceStillCannotDetermineAnswer =
-  C.flatWorldDifferenceDoesNotDetermineAnswer
