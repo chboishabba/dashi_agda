@@ -210,44 +210,44 @@ module InitialCritical
 -- Status / trust boundary.
 ------------------------------------------------------------------------
 
-round638CommonInitialDatumSameObjectCompilerClosed : Bool
-round638CommonInitialDatumSameObjectCompilerClosed = true
+round640CommonInitialDatumSameObjectCompilerClosed : Bool
+round640CommonInitialDatumSameObjectCompilerClosed = true
 
-round638ModeListToModeListedCoherenceStillRequired : Bool
-round638ModeListToModeListedCoherenceStillRequired = true
+round640ModeListToModeListedCoherenceStillRequired : Bool
+round640ModeListToModeListedCoherenceStillRequired = true
 
-round638CutoffUniformInitialCeilingStillProofBearing : Bool
-round638CutoffUniformInitialCeilingStillProofBearing = true
+round640CutoffUniformInitialCeilingStillProofBearing : Bool
+round640CutoffUniformInitialCeilingStillProofBearing = true
 
-round638InitialCriticalAliasFreedomRemoved : Bool
-round638InitialCriticalAliasFreedomRemoved = true
+round640InitialCriticalAliasFreedomRemoved : Bool
+round640InitialCriticalAliasFreedomRemoved = true
 
-round638IntroducesNewNSEstimate : Bool
-round638IntroducesNewNSEstimate = false
+round640IntroducesNewNSEstimate : Bool
+round640IntroducesNewNSEstimate = false
 
-round638ClayPromotion : Bool
-round638ClayPromotion = false
+round640ClayPromotion : Bool
+round640ClayPromotion = false
 
-round638CommonInitialDatumSameObjectCompilerClosedIsTrue :
-  round638CommonInitialDatumSameObjectCompilerClosed ≡ true
-round638CommonInitialDatumSameObjectCompilerClosedIsTrue = refl
+round640CommonInitialDatumSameObjectCompilerClosedIsTrue :
+  round640CommonInitialDatumSameObjectCompilerClosed ≡ true
+round640CommonInitialDatumSameObjectCompilerClosedIsTrue = refl
 
-round638ModeListToModeListedCoherenceStillRequiredIsTrue :
-  round638ModeListToModeListedCoherenceStillRequired ≡ true
-round638ModeListToModeListedCoherenceStillRequiredIsTrue = refl
+round640ModeListToModeListedCoherenceStillRequiredIsTrue :
+  round640ModeListToModeListedCoherenceStillRequired ≡ true
+round640ModeListToModeListedCoherenceStillRequiredIsTrue = refl
 
-round638CutoffUniformInitialCeilingStillProofBearingIsTrue :
-  round638CutoffUniformInitialCeilingStillProofBearing ≡ true
-round638CutoffUniformInitialCeilingStillProofBearingIsTrue = refl
+round640CutoffUniformInitialCeilingStillProofBearingIsTrue :
+  round640CutoffUniformInitialCeilingStillProofBearing ≡ true
+round640CutoffUniformInitialCeilingStillProofBearingIsTrue = refl
 
-round638InitialCriticalAliasFreedomRemovedIsTrue :
-  round638InitialCriticalAliasFreedomRemoved ≡ true
-round638InitialCriticalAliasFreedomRemovedIsTrue = refl
+round640InitialCriticalAliasFreedomRemovedIsTrue :
+  round640InitialCriticalAliasFreedomRemoved ≡ true
+round640InitialCriticalAliasFreedomRemovedIsTrue = refl
 
-round638IntroducesNewNSEstimateIsFalse :
-  round638IntroducesNewNSEstimate ≡ false
-round638IntroducesNewNSEstimateIsFalse = refl
+round640IntroducesNewNSEstimateIsFalse :
+  round640IntroducesNewNSEstimate ≡ false
+round640IntroducesNewNSEstimateIsFalse = refl
 
-round638ClayPromotionIsFalse :
-  round638ClayPromotion ≡ false
-round638ClayPromotionIsFalse = refl
+round640ClayPromotionIsFalse :
+  round640ClayPromotion ≡ false
+round640ClayPromotionIsFalse = refl
