@@ -99,6 +99,10 @@ record Canonical369InterpretationBoundary : Set where
     jointFiniteDihedralLawOwned : Bool
     level27FactorsThroughBaseJSurface : Bool
 
+    jointFibreResolutionProductConstructed : Bool
+    resolutionCoarseningCommutesWithModularActions : Bool
+    oldRelational369EqualsPrincipalLevelTower : Bool
+
 open Canonical369InterpretationBoundary public
 
 canonicalCanonical369InterpretationBoundary :
@@ -204,3 +208,12 @@ jointPhaseLevelBoundary = JointBundle.canonicalJointPhaseLevelBoundary
 
 jReflectionBoundary : JReflection.JReflectionBoundary
 jReflectionBoundary = JReflection.canonicalJReflectionBoundary
+
+------------------------------------------------------------------------
+-- Orthogonal composition with the pre-existing SSP/J resolution bifiltration.
+------------------------------------------------------------------------
+
+jointFibreBifiltrationBoundary :
+  JointBif.JointFibreBifiltrationBoundary
+jointFibreBifiltrationBoundary =
+  JointBif.canonicalJointFibreBifiltrationBoundary
