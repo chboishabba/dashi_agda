@@ -21,11 +21,13 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; cong)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
+import DASHI.Moonshine.JInvariantFormulaic369ModularReplicationExact as Replication
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as Tower
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as Level
 import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as Joint
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as Legacy
+import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Reflection
 
 ------------------------------------------------------------------------
 -- 1. Forgetful finite-fibre bridge from the canonical sample.
@@ -100,6 +102,124 @@ legacyLevel3AgreesAt L z signed =
   ∎
 
 ------------------------------------------------------------------------
+-- 2. The canonical bridge intertwines the NEW modular actions with the
+--    pre-existing finite signed fibre, coordinatewise.
+--
+-- Translation:
+--   * phase6 unchanged;
+--   * level27 translated by +1;
+--   * signed SSP unchanged.
+--
+-- Reflection:
+--   * phase6 reflected;
+--   * level27 inverted;
+--   * signed SSP negated.
+--
+-- These are deliberately coordinatewise theorems rather than a converse
+-- isomorphism: the legacy fibre does not retain the new type-distinct phase-C3.
+------------------------------------------------------------------------
+
+legacyTPhase6AgreesAt :
+  ∀ {R A}
+    {L : Tower.CanonicalLevel27Lift R} →
+  (W : Joint.JointTAction R A L) →
+  (z : Klein.Point (Render.klein R)) →
+  (signed : Signed.SignedMultiplicity) →
+  Legacy.phase6Coordinate
+    (toLegacyFiniteFibreAt L
+      (Replication.act A (Joint.T W) z)
+      signed)
+  ≡
+  Legacy.phase6Coordinate
+    (Legacy.translateJoint
+      (toLegacyFiniteFibreAt L z signed))
+legacyTPhase6AgreesAt W z signed =
+  Joint.jointTPhase6Invariant W z
+
+legacyTLevel27AgreesAt :
+  ∀ {R A}
+    {L : Tower.CanonicalLevel27Lift R} →
+  (W : Joint.JointTAction R A L) →
+  (z : Klein.Point (Render.klein R)) →
+  (signed : Signed.SignedMultiplicity) →
+  Legacy.level27Coordinate
+    (toLegacyFiniteFibreAt L
+      (Replication.act A (Joint.T W) z)
+      signed)
+  ≡
+  Legacy.level27Coordinate
+    (Legacy.translateJoint
+      (toLegacyFiniteFibreAt L z signed))
+legacyTLevel27AgreesAt W z signed =
+  Joint.jointTLevel27Translates W z
+
+legacyTSignedAgreesAt :
+  ∀ {R A}
+    {L : Tower.CanonicalLevel27Lift R} →
+  (W : Joint.JointTAction R A L) →
+  (z : Klein.Point (Render.klein R)) →
+  (signed : Signed.SignedMultiplicity) →
+  Legacy.signedSSPCoordinate
+    (toLegacyFiniteFibreAt L
+      (Replication.act A (Joint.T W) z)
+      signed)
+  ≡
+  Legacy.signedSSPCoordinate
+    (Legacy.translateJoint
+      (toLegacyFiniteFibreAt L z signed))
+legacyTSignedAgreesAt W z signed = refl
+
+legacyRPhase6AgreesAt :
+  ∀ {R}
+    {L : Tower.CanonicalLevel27Lift R} →
+  (W : Joint.JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  (signed : Signed.SignedMultiplicity) →
+  Legacy.phase6Coordinate
+    (toLegacyFiniteFibreAt L
+      (Reflection.reflectPoint (Joint.phaseReflection W) z)
+      (Signed.negateMultiplicity signed))
+  ≡
+  Legacy.phase6Coordinate
+    (Legacy.reflectJoint
+      (toLegacyFiniteFibreAt L z signed))
+legacyRPhase6AgreesAt W z signed =
+  Joint.jointRPhase6Reflects W z
+
+legacyRLevel27AgreesAt :
+  ∀ {R}
+    {L : Tower.CanonicalLevel27Lift R} →
+  (W : Joint.JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  (signed : Signed.SignedMultiplicity) →
+  Legacy.level27Coordinate
+    (toLegacyFiniteFibreAt L
+      (Reflection.reflectPoint (Joint.phaseReflection W) z)
+      (Signed.negateMultiplicity signed))
+  ≡
+  Legacy.level27Coordinate
+    (Legacy.reflectJoint
+      (toLegacyFiniteFibreAt L z signed))
+legacyRLevel27AgreesAt W z signed =
+  Joint.jointRLevel27Reflects W z
+
+legacyRSignedAgreesAt :
+  ∀ {R}
+    {L : Tower.CanonicalLevel27Lift R} →
+  (W : Joint.JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  (signed : Signed.SignedMultiplicity) →
+  Legacy.signedSSPCoordinate
+    (toLegacyFiniteFibreAt L
+      (Reflection.reflectPoint (Joint.phaseReflection W) z)
+      (Signed.negateMultiplicity signed))
+  ≡
+  Legacy.signedSSPCoordinate
+    (Legacy.reflectJoint
+      (toLegacyFiniteFibreAt L z signed))
+legacyRSignedAgreesAt W z signed = refl
+
+------------------------------------------------------------------------
 -- 2. The bridge deliberately has no phase-C3 recovery theorem.
 ------------------------------------------------------------------------
 
@@ -112,6 +232,8 @@ record LegacyBridgeBoundary : Set where
     signedSSPAttached : Bool
     derivedLevel9AgreementOwned : Bool
     derivedLevel3AgreementOwned : Bool
+    translationActionIntertwinedCoordinatewise : Bool
+    reflectionActionIntertwinedCoordinatewise : Bool
 
     phaseC3RecoveredFromLegacyLevel3 : Bool
     phaseC3IdentifiedWithLevelC3 : Bool
@@ -122,5 +244,5 @@ open LegacyBridgeBoundary public
 canonicalLegacyBridgeBoundary : LegacyBridgeBoundary
 canonicalLegacyBridgeBoundary =
   legacy-bridge-boundary
-    true true true true true true
+    true true true true true true true true
     false false false
