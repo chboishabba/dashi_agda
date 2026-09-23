@@ -32,7 +32,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _*ℝ_; absℝ; _≤ℝ_)
+  (ℝ; 0ℝ; _+ℝ_; _*ℝ_; absℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -162,6 +162,158 @@ record PhysicalFactoredR406Inputs
             cutoff))
 
 open PhysicalFactoredR406Inputs public
+
+------------------------------------------------------------------------
+-- Preferred source-charge presentation.
+--
+-- R423 now proves the pointwise product inequality from an additive charge
+-- decomposition.  Therefore the physical caller can expose the source-native
+-- charges directly rather than supplying
+--
+--   commonYShell <= externalMarkedWeight * residualWeight
+--
+-- as an opaque inequality.
+------------------------------------------------------------------------
+
+record PhysicalChargedR406Inputs
+    {Measure TestObservable : Set}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    (application : R406.SelectedCMP116TermwiseLocalization base)
+    (cutoff : Nat)
+    (left right : TestObservable) : Set₂ where
+  field
+    shared :
+      Shared.SharedMarkedAnalyticShellControl
+        (R318.Scale base) (R318.Volume base) (R318.Root base)
+
+    embedding : R208.RationalRealRingEmbedding
+
+    exponential : R423.NegativeExponentialFactorization
+
+    externalCharge : ℝ
+    residualCharge combinedCharge :
+      R406.Domain application → ℝ
+    rawMarkedMajorant :
+      R406.Domain application → ℝ
+
+    commonYShellBelowRawMarked :
+      ∀ domain →
+      R406.commonYShell application domain
+      ≤ℝ rawMarkedMajorant domain
+
+    rawMarkedMajorantIsCombinedExponential :
+      ∀ domain →
+      rawMarkedMajorant domain
+      ≡
+      R423.negativeExp exponential (combinedCharge domain)
+
+    requiredChargeBelowCombinedCharge :
+      ∀ domain →
+      externalCharge +ℝ residualCharge domain
+      ≤ℝ combinedCharge domain
+
+    residualEnvelope : ℝ
+
+    residualSummability :
+      Resum.sumℝ
+        (λ domain →
+          R423.negativeExp exponential (residualCharge domain))
+        (R406.localizedDomains application)
+      ≤ℝ residualEnvelope
+
+    factoredEnvelopeIsPhysicalSharedMarkedShell :
+      R423.negativeExp exponential externalCharge
+        *ℝ residualEnvelope
+      ≡
+      R418.embedQ embedding
+        (Shared.markedAnalyticShell shared Shared.hessianMark
+          (R318.scaleOf base cutoff)
+          (R318.volumeOf base cutoff)
+          (R318.connectingRoot base cutoff left right)
+          (R318.physicalDistance base left right))
+
+    selectedBoundaryMagnitudeIsLiteralMixedLogMagnitude :
+      absℝ
+        (R406.selectedBoundaryIntegrand application)
+      ≡
+      R418.embedQ embedding
+        (R278.magnitude extension
+          (Cumulant.literalMixedSecondLogDerivative
+            (R318.meaning base)
+            (Cumulant.sourceDirectionOf (R318.meaning base) left)
+            (Cumulant.sourceDirectionOf (R318.meaning base) right)
+            cutoff))
+
+open PhysicalChargedR406Inputs public
+
+asChargedPointwiseFactorization :
+  ∀ {Measure TestObservable dataSet extension base application cutoff left right}
+    (inputs :
+      PhysicalChargedR406Inputs
+        {dataSet = dataSet} {extension = extension} {base = base}
+        application cutoff left right) →
+  R423.ChargedPointwiseFactorization
+    (R406.Domain application)
+    (exponential inputs)
+asChargedPointwiseFactorization
+    {application = application} inputs = record
+  { R423.ChargedPointwiseFactorization.commonYShell =
+      R406.commonYShell application
+  ; R423.ChargedPointwiseFactorization.rawMarkedMajorant =
+      rawMarkedMajorant inputs
+  ; R423.ChargedPointwiseFactorization.externalCharge =
+      externalCharge inputs
+  ; R423.ChargedPointwiseFactorization.residualCharge =
+      residualCharge inputs
+  ; R423.ChargedPointwiseFactorization.combinedCharge =
+      combinedCharge inputs
+  ; R423.ChargedPointwiseFactorization.commonYShellBelowRawMarked =
+      commonYShellBelowRawMarked inputs
+  ; R423.ChargedPointwiseFactorization.rawMarkedMajorantIsCombinedExponential =
+      rawMarkedMajorantIsCombinedExponential inputs
+  ; R423.ChargedPointwiseFactorization.requiredChargeBelowCombinedCharge =
+      requiredChargeBelowCombinedCharge inputs
+  }
+
+asPhysicalFactoredR406InputsFromCharged :
+  ∀ {Measure TestObservable dataSet extension base application cutoff left right}
+    (inputs :
+      PhysicalChargedR406Inputs
+        {dataSet = dataSet} {extension = extension} {base = base}
+        application cutoff left right) →
+  PhysicalFactoredR406Inputs
+    {dataSet = dataSet} {extension = extension} {base = base}
+    application cutoff left right
+asPhysicalFactoredR406InputsFromCharged
+    {application = application} inputs = record
+  { PhysicalFactoredR406Inputs.shared =
+      shared inputs
+  ; PhysicalFactoredR406Inputs.embedding =
+      embedding inputs
+  ; PhysicalFactoredR406Inputs.residualWeight =
+      λ domain →
+        R423.negativeExp (exponential inputs) (residualCharge inputs domain)
+  ; PhysicalFactoredR406Inputs.externalMarkedWeight =
+      R423.negativeExp (exponential inputs) (externalCharge inputs)
+  ; PhysicalFactoredR406Inputs.residualEnvelope =
+      residualEnvelope inputs
+  ; PhysicalFactoredR406Inputs.externalMarkedWeightNonnegative =
+      R423.nonnegative (exponential inputs) (externalCharge inputs)
+  ; PhysicalFactoredR406Inputs.residualWeightNonnegative =
+      λ domain →
+        R423.nonnegative (exponential inputs) (residualCharge inputs domain)
+  ; PhysicalFactoredR406Inputs.commonYShellBelowExternalTimesResidual =
+      R423.chargedCommonYShellBelowExternalTimesResidual
+        (asChargedPointwiseFactorization inputs)
+  ; PhysicalFactoredR406Inputs.residualSummability =
+      residualSummability inputs
+  ; PhysicalFactoredR406Inputs.factoredEnvelopeIsPhysicalSharedMarkedShell =
+      factoredEnvelopeIsPhysicalSharedMarkedShell inputs
+  ; PhysicalFactoredR406Inputs.selectedBoundaryMagnitudeIsLiteralMixedLogMagnitude =
+      selectedBoundaryMagnitudeIsLiteralMixedLogMagnitude inputs
+  }
 
 asExternalMarkedResidualSummationData :
   ∀ {Measure TestObservable dataSet extension base application cutoff left right} →
@@ -305,6 +457,27 @@ physicalFiniteSelectedCovarianceFromFactoredSource inputs =
   physicalFiniteSelectedCovarianceBelowSharedMarkedGeometricHalf
     (asPhysicalCanonicalR406InputsFromFactored inputs)
 
+
+physicalFiniteSelectedCovarianceFromChargedSource :
+  ∀ {Measure TestObservable dataSet extension base application cutoff left right}
+    (inputs :
+      PhysicalChargedR406Inputs
+        {dataSet = dataSet} {extension = extension} {base = base}
+        application cutoff left right) →
+  R418.embedQ (embedding inputs)
+    (R278.connectedCovarianceMagnitude extension
+      (Gram.measureSequence dataSet cutoff)
+      left right)
+  ≤ℝ
+  R418.embedQ (embedding inputs)
+    (Geometric.markedBaseEnergy (shared inputs) Shared.hessianMark)
+  *ℝ
+  R418.embedQ (embedding inputs)
+    (Geo.halfPower (R318.physicalDistance base left right))
+physicalFiniteSelectedCovarianceFromChargedSource inputs =
+  physicalFiniteSelectedCovarianceFromFactoredSource
+    (asPhysicalFactoredR406InputsFromCharged inputs)
+
 round421PhysicalCanonicalR406CompilerLevel : ProofLevel
 round421PhysicalCanonicalR406CompilerLevel = machineChecked
 
@@ -323,7 +496,13 @@ round421OuterSourceSummabilityLevel : ProofLevel
 round421OuterSourceSummabilityLevel = machineChecked
 
 round421PointwiseMarkedResidualFactorizationLevel : ProofLevel
-round421PointwiseMarkedResidualFactorizationLevel = conditional
+round421PointwiseMarkedResidualFactorizationLevel = machineChecked
+
+round421LiteralChargeGeometryAttachmentLevel : ProofLevel
+round421LiteralChargeGeometryAttachmentLevel = conditional
+
+round421NegativeExponentialFactorizationLevel : ProofLevel
+round421NegativeExponentialFactorizationLevel = standardImported
 
 round421ResidualCMP116SummabilityLevel : ProofLevel
 round421ResidualCMP116SummabilityLevel = conditional
