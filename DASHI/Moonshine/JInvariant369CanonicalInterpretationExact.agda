@@ -142,6 +142,7 @@ record Canonical369InterpretationBoundary : Set where
     smithHalfTurnDistinctFromModularTOnC6 : Bool
     smithHalfTurnDistinctFromModularReflectionOnC6 : Bool
     c3QuotientCanEraseSmithHalfTurn : Bool
+    c3ObserverDoesNotDetermineUnderlyingC6Action : Bool
     engineeringJIdentifiedWithModularJInvariant : Bool
     smithGammaIdentifiedWithModularJInvariant : Bool
 
@@ -228,6 +229,7 @@ canonicalCanonical369InterpretationBoundary =
     ; smithHalfTurnDistinctFromModularTOnC6 = true
     ; smithHalfTurnDistinctFromModularReflectionOnC6 = true
     ; c3QuotientCanEraseSmithHalfTurn = true
+    ; c3ObserverDoesNotDetermineUnderlyingC6Action = true
     ; engineeringJIdentifiedWithModularJInvariant = false
     ; smithGammaIdentifiedWithModularJInvariant = false
     }
@@ -511,6 +513,13 @@ coarseC3CanHideSmithHalfTurn :
     canonicalCanonical369InterpretationBoundary
   ≡ true
 coarseC3CanHideSmithHalfTurn = refl
+
+
+coarseC3DoesNotDetermineUnderlyingC6Action :
+  c3ObserverDoesNotDetermineUnderlyingC6Action
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+coarseC3DoesNotDetermineUnderlyingC6Action = refl
 
 engineeringJRemainsDistinctFromModularJ :
   engineeringJIdentifiedWithModularJInvariant
