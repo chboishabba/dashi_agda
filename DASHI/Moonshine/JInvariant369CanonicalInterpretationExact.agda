@@ -48,6 +48,8 @@ import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact as Principal
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
 import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Repair
 import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact as SignedSSP
+import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as Joint
+import DASHI.Moonshine.JSameWeightQuotientReflectionExact as JReflection
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as Joint
 
@@ -79,6 +81,15 @@ record Canonical369InterpretationBoundary : Set where
     signedSpectralToLevelTranslationIntertwinerExists : Bool
     signedSSPAutomaticallyIsPrincipalLevel3Fibre : Bool
 
+    jointJPhaseLevelBundleConstructed : Bool
+    phaseAndLevelC3TypeRolesSeparated : Bool
+    tActionFixesJPhaseButTranslatesLevelTower : Bool
+    jointReflectionNegatesPhaseAndLevelCoordinates : Bool
+
+    sameWeightJReflectionCompilerOwned : Bool
+    fixedLocusJConjugationFixedCompilerOwned : Bool
+    concreteJRealAxisInterpretationTransported : Bool
+
     sspC3CycleIntertwinesLevelTranslation : Bool
     sspC2AntipodeIntertwinesLevelInversion : Bool
     sspLevel3FiniteDihedralEquivalenceOwned : Bool
@@ -102,6 +113,8 @@ canonicalCanonical369InterpretationBoundary =
     true true false
     false true
     false false false
+    true true true true
+    true true false
 
 ------------------------------------------------------------------------
 -- Research interpretation:
@@ -147,3 +160,14 @@ joint369FibredObserverBoundary :
   Joint.Joint369FibredObserverBoundary
 joint369FibredObserverBoundary =
   Joint.canonicalJoint369FibredObserverBoundary
+
+
+------------------------------------------------------------------------
+-- Joint bundle / J reflection receipts.
+------------------------------------------------------------------------
+
+jointPhaseLevelBoundary : Joint.JointPhaseLevelBoundary
+jointPhaseLevelBoundary = Joint.canonicalJointPhaseLevelBoundary
+
+jReflectionBoundary : JReflection.JReflectionBoundary
+jReflectionBoundary = JReflection.canonicalJReflectionBoundary
