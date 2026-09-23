@@ -87,6 +87,7 @@ import DASHI.Physics.Closure.NSTriadKNLiveSelfHelicityExternalSpacetimeRound634E
 import DASHI.Physics.Closure.NSTriadKNR571HeterochiralRadialSumSpecializationRound635Exact as R635
 import DASHI.Physics.Closure.NSTriadKNCanonicalExternalHelicityCommutatorRound636Exact as R636
 import DASHI.Physics.Closure.NSTriadKNLiveExternalHelicityCommutatorSpacetimeRound637Exact as R637
+import DASHI.Physics.Closure.NSTriadKNLiveThreeChannelHelicityBudgetRound638Exact as R638
 import DASHI.Physics.Closure.NSTriadKNExternalForcingTransverseRound626Exact as ExtTrans626
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
@@ -1216,6 +1217,27 @@ round490HelicityCommutatorSignedSpacetimePaymentClosed =
   R637.round637HelicityCommutatorSignedSpacetimePaymentClosed
 
 
+round490ResolvedThreeChannelBudgetsCompileToR568 : Bool
+round490ResolvedThreeChannelBudgetsCompileToR568 =
+  R638.round638ThreeResolvedChannelBudgetsCompileToR568
+
+round490ResolvedThreeChannelBudgetsMandatoryForR568 : Bool
+round490ResolvedThreeChannelBudgetsMandatoryForR568 =
+  R638.round638SeparateThreeChannelBudgetsMandatoryForR568
+
+round490ResolvedHomochiralSignedBudgetClosed : Bool
+round490ResolvedHomochiralSignedBudgetClosed =
+  R638.round638HomochiralSignedBudgetClosed
+
+round490ResolvedHeterochiralSignedBudgetClosed : Bool
+round490ResolvedHeterochiralSignedBudgetClosed =
+  R638.round638HeterochiralSignedBudgetClosed
+
+round490ResolvedExternalHelicitySignedBudgetClosed : Bool
+round490ResolvedExternalHelicitySignedBudgetClosed =
+  R638.round638ExternalHelicitySignedBudgetClosed
+
+
 round490SelfHomochiralHeterochiralSplitClosed : Bool
 round490SelfHomochiralHeterochiralSplitClosed =
   R632.round632SelfR573NestedHomochiralHeterochiralSplitClosed
@@ -1567,6 +1589,32 @@ round490HelicityCommutatorSignedSpacetimePaymentClosedIsFalse :
   round490HelicityCommutatorSignedSpacetimePaymentClosed ≡ false
 round490HelicityCommutatorSignedSpacetimePaymentClosedIsFalse =
   R637.round637HelicityCommutatorSignedSpacetimePaymentClosedIsFalse
+
+
+round490ResolvedThreeChannelBudgetsCompileToR568IsTrue :
+  round490ResolvedThreeChannelBudgetsCompileToR568 ≡ true
+round490ResolvedThreeChannelBudgetsCompileToR568IsTrue =
+  R638.round638ThreeResolvedChannelBudgetsCompileToR568IsTrue
+
+round490ResolvedThreeChannelBudgetsMandatoryForR568IsFalse :
+  round490ResolvedThreeChannelBudgetsMandatoryForR568 ≡ false
+round490ResolvedThreeChannelBudgetsMandatoryForR568IsFalse =
+  R638.round638SeparateThreeChannelBudgetsMandatoryForR568IsFalse
+
+round490ResolvedHomochiralSignedBudgetClosedIsFalse :
+  round490ResolvedHomochiralSignedBudgetClosed ≡ false
+round490ResolvedHomochiralSignedBudgetClosedIsFalse =
+  R638.round638HomochiralSignedBudgetClosedIsFalse
+
+round490ResolvedHeterochiralSignedBudgetClosedIsFalse :
+  round490ResolvedHeterochiralSignedBudgetClosed ≡ false
+round490ResolvedHeterochiralSignedBudgetClosedIsFalse =
+  R638.round638HeterochiralSignedBudgetClosedIsFalse
+
+round490ResolvedExternalHelicitySignedBudgetClosedIsFalse :
+  round490ResolvedExternalHelicitySignedBudgetClosed ≡ false
+round490ResolvedExternalHelicitySignedBudgetClosedIsFalse =
+  R638.round638ExternalHelicitySignedBudgetClosedIsFalse
 
 round490ExternalTotalCommutatorZeroPIncludedIsTrue :
   round490ExternalTotalCommutatorZeroPIncluded ≡ true
