@@ -55,7 +55,7 @@ C7  periodic Sobolev-Rellich-Simon-weak-* package
 Only C1 and C2 are counted as genuinely new nonlinear estimates.  R639 now
 constructs the literal R414 critical coordinates and exact energy-identity
 compiler surface; R640 constructs the common-initial-datum same-object compiler
-modulo one mode-list coherence receipt and the actual initial ceiling; R641
+modulo one live-trajectory-to-canonical-R34 coherence receipt and the actual initial ceiling; R641
 provides the optional, non-mandatory implication `a <= nu -> 0 < 2*nu-a`.
 
 ### Optional producer strategies
@@ -127,7 +127,7 @@ configured workflow is not an observed commit-specific kernel receipt.
    producer strategy that preserves the literal carrier;
 3. Lane B C2: prove the physical phase-sensitive critical-production estimate
    with an absorbed coefficient leaving a strictly positive viscous remainder;
-4. discharge C4's concrete mode-list coherence and smooth-data uniform initial
+4. discharge C4's live trajectory-to-canonical-R34 coherence and smooth-data uniform initial
    critical ceiling;
 5. install C6's concrete scalar calculus and C7's periodic
    Sobolev/Rellich/Simon/weak-* source instances;
