@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorRound629Exac
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -108,7 +108,7 @@ module ExternalSlotCommutator629
     in
     cong
       (C3.complex3Scale (R294.weight W tau))
-      (Relation.Binary.PropositionalEquality.sym slotMeaning)
+      (sym slotMeaning)
 
   weightedExternalSlotIsWeightedDoubleExternalCell :
     (tau : Physical.PhysicalTriadIncidence) →
