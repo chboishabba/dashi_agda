@@ -50,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact
 import DASHI.Physics.Closure.NSTriadKNLiveSelfGramAndFluxOrderRound571Exact as O571
 import DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact as C568
 import DASHI.Physics.Closure.NSTriadKNDirectLeafALeastPrivilegeRound591Exact as R591
+import DASHI.Physics.Closure.NSTriadKNDirectLeafACompilerRound572Exact as R572
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as Order
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
@@ -123,6 +124,12 @@ module Compile
   module Comm = C568.LiveCommutatorOnly
     Time initialTime integrateTo VectorDerivativeOf integration
 
+  module Old = R572.Compile
+    Time initialTime integrateTo
+    VectorDerivativeOf ScalarDerivativeOf
+    projectedCrossCalculus vectorAlgebra hermitianCalculus
+    constantCalculus scalarAlgebra integration D R
+
   record DirectLeafAStandardProducer593 : Set₁ where
     field
       scalarFTC593 :
@@ -191,7 +198,7 @@ module Compile
 
   toR572Producer593 :
     DirectLeafAStandardProducer593 →
-    Least.Old.DirectLeafAProducer572
+    Old.DirectLeafAProducer572
   toR572Producer593 P =
     Least.toR572Producer591 (toR591Producer593 P)
 
