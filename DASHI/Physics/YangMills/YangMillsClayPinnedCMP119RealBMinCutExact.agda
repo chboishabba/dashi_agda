@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealBMinCutExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Bool using (Bool; false)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
