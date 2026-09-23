@@ -21,10 +21,11 @@ module DASHI.Physics.YangMills.BalabanCMP116R406ToSelectedMarkedExpansionRound41
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using (List; []; _∷_)
 open import Data.Rational.Base as ℚ using (ℚ)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; absℝ; _≤ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; absℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -129,6 +130,19 @@ canonicalTermMajorantIsR406Majorant :
 canonicalTermMajorantIsR406Majorant refinement domain term =
   sym (r406MajorantIsCanonicalR410Majorant refinement domain term)
 
+-- Tiny finite-sum congruence needed only to transport the already-owned R406
+-- fixed-Y summability theorem onto the definitionally refined R410 majorants.
+sumPointwiseEquality :
+  ∀ {A : Set}
+    (xs : List A)
+    (left right : A → ℝ) →
+  (∀ x → left x ≡ right x) →
+  Resum.sumℝ left xs ≡ Resum.sumℝ right xs
+sumPointwiseEquality [] left right pointwise = refl
+sumPointwiseEquality (x ∷ xs) left right pointwise
+  rewrite pointwise x
+        | sumPointwiseEquality xs left right pointwise = refl
+
 sumCanonicalMajorantsBelowCommonYShell :
   ∀ {Measure TestObservable dataSet extension base}
     {application : R406.SelectedCMP116TermwiseLocalization base}
@@ -158,19 +172,6 @@ sumCanonicalMajorantsBelowCommonYShell
       (canonicalTermMajorantIsR406Majorant refinement domain))
     r406Bound
 
--- Tiny finite-sum congruence needed only to transport the already-owned R406
--- fixed-Y summability theorem onto the definitionally refined R410 majorants.
-sumPointwiseEquality :
-  ∀ {A : Set}
-    (xs : Data.List.Base.List A)
-    (left right : A → ℝ) →
-  (∀ x → left x ≡ right x) →
-  Resum.sumℝ left xs ≡ Resum.sumℝ right xs
-sumPointwiseEquality [] left right pointwise = refl
-sumPointwiseEquality (x Data.List.Base.∷ xs) left right pointwise
-  rewrite pointwise x
-        | sumPointwiseEquality xs left right pointwise = refl
-
 record R406ToR415GeometryAndCounting
     {Measure TestObservable : Set}
     {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
@@ -189,15 +190,13 @@ record R406ToR415GeometryAndCounting
 
     domainAmplitude : R406.Domain application → ℝ
     domainAmplitudeNonnegative :
-      ∀ domain → DASHI.Foundations.RealAnalysisAxioms.0ℝ ≤ℝ domainAmplitude domain
+      ∀ domain → 0ℝ ≤ℝ domainAmplitude domain
 
     commonYShellBelowDomainDecay :
       ∀ domain →
       R406.commonYShell application domain
       ≤ℝ
-      domainAmplitude domain
-        DASHI.Foundations.RealAnalysisAxioms.*ℝ
-        R414.weight decay (R411.domainTreeDistance geometry domain)
+      domainAmplitude domain *ℝ R414.weight decay (R411.domainTreeDistance geometry domain)
 
     sourceAmplitude : ℝ
 
