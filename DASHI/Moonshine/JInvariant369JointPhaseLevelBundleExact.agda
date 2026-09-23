@@ -35,7 +35,9 @@ import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as Tower
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as Level
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
+import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Reflection
 import DASHI.Foundations.TriadicFiniteQuotient as Q
+import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
 
 ------------------------------------------------------------------------
 -- 1. Role wrappers.
@@ -324,6 +326,181 @@ phaseAndLevelC3CannotBeGloballyIdentified {L = L} {W = W} E z =
     ∎
 
 ------------------------------------------------------------------------
+-- 8. Joint reflection action.
+--
+-- The renderer reflection and principal-level reflection must describe the
+-- same reflected analytic point.  Once aligned, the finite action table is
+-- derived rather than postulated.
+------------------------------------------------------------------------
+
+phase3ReflectionCommutesHex :
+  (x : Base.HexTruth) →
+  Tower.level6To3 (Reflection.reflect6 x)
+  ≡
+  Arithmetic.negateResidue (Tower.level6To3 x)
+phase3ReflectionCommutesHex Base.hex-0 = refl
+phase3ReflectionCommutesHex Base.hex-1 = refl
+phase3ReflectionCommutesHex Base.hex-2 = refl
+phase3ReflectionCommutesHex Base.hex-3 = refl
+phase3ReflectionCommutesHex Base.hex-4 = refl
+phase3ReflectionCommutesHex Base.hex-5 = refl
+
+record JointReflectionAction
+    (R : Render.JPhaseRenderingAlgebra)
+    (L : Tower.CanonicalLevel27Lift R) : Set₁ where
+  field
+    phaseReflection : Reflection.J369ReflectionEquivariance R
+    levelReflection : Tower.Level27ReflectionLift R L
+
+    sameReflectedPoint :
+      (z : Klein.Point (Render.klein R)) →
+      Reflection.reflectPoint phaseReflection z
+      ≡
+      Tower.reflectPoint levelReflection z
+
+open JointReflectionAction public
+
+jointRPhase6Reflects :
+  ∀ {R L} →
+  (W : JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  phase6State
+    (sampleAt L
+      (Reflection.reflectPoint (phaseReflection W) z))
+  ≡
+  Reflection.reflect6 (phase6State (sampleAt L z))
+jointRPhase6Reflects {R} W z =
+  Reflection.observer6ReflectionCommutes
+    R (phaseReflection W) z
+
+jointRPhase3Reflects :
+  ∀ {R L} →
+  (W : JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  phaseResidue
+    (phase3State
+      (sampleAt L
+        (Reflection.reflectPoint (phaseReflection W) z)))
+  ≡
+  Arithmetic.negateResidue
+    (phaseResidue (phase3State (sampleAt L z)))
+jointRPhase3Reflects W z =
+  begin
+    phaseResidue
+      (phase3State
+        (sampleAt _
+          (Reflection.reflectPoint (phaseReflection W) z)))
+      ≡⟨ cong Tower.level6To3 (jointRPhase6Reflects W z) ⟩
+    Tower.level6To3
+      (Reflection.reflect6 (phase6State (sampleAt _ z)))
+      ≡⟨ phase3ReflectionCommutesHex
+            (phase6State (sampleAt _ z)) ⟩
+    Arithmetic.negateResidue
+      (phaseResidue (phase3State (sampleAt _ z)))
+  ∎
+
+jointRLevel27Reflects :
+  ∀ {R L} →
+  (W : JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  levelResidue27
+    (level27State
+      (sampleAt L
+        (Reflection.reflectPoint (phaseReflection W) z)))
+  ≡
+  Arithmetic.negateResidue
+    (levelResidue27 (level27State (sampleAt L z)))
+jointRLevel27Reflects {L = L} W z =
+  begin
+    Tower.level27At L
+      (Reflection.reflectPoint (phaseReflection W) z)
+      ≡⟨ cong (Tower.level27At L) (sameReflectedPoint W z) ⟩
+    Tower.level27At L
+      (Tower.reflectPoint (levelReflection W) z)
+      ≡⟨ Tower.level27Reflection (levelReflection W) z ⟩
+    Arithmetic.negateResidue (Tower.level27At L z)
+  ∎
+
+jointRLevel9Reflects :
+  ∀ {R L} →
+  (W : JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  levelResidue9
+    (level9State
+      (sampleAt L
+        (Reflection.reflectPoint (phaseReflection W) z)))
+  ≡
+  Arithmetic.negateResidue
+    (levelResidue9 (level9State (sampleAt L z)))
+jointRLevel9Reflects {L = L} W z =
+  begin
+    Tower.canonicalLevel9At L
+      (Reflection.reflectPoint (phaseReflection W) z)
+      ≡⟨ cong (Tower.canonicalLevel9At L) (sameReflectedPoint W z) ⟩
+    Tower.canonicalLevel9At L
+      (Tower.reflectPoint (levelReflection W) z)
+      ≡⟨ Tower.level9ReflectionDerived (levelReflection W) z ⟩
+    Arithmetic.negateResidue (Tower.canonicalLevel9At L z)
+  ∎
+
+jointRLevel3Reflects :
+  ∀ {R L} →
+  (W : JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  levelResidue3
+    (level3State
+      (sampleAt L
+        (Reflection.reflectPoint (phaseReflection W) z)))
+  ≡
+  Arithmetic.negateResidue
+    (levelResidue3 (level3State (sampleAt L z)))
+jointRLevel3Reflects {L = L} W z =
+  begin
+    Tower.canonicalLevel3At L
+      (Reflection.reflectPoint (phaseReflection W) z)
+      ≡⟨ cong (Tower.canonicalLevel3At L) (sameReflectedPoint W z) ⟩
+    Tower.canonicalLevel3At L
+      (Tower.reflectPoint (levelReflection W) z)
+      ≡⟨ Tower.level3ReflectionDerived (levelReflection W) z ⟩
+    Arithmetic.negateResidue (Tower.canonicalLevel3At L z)
+  ∎
+
+------------------------------------------------------------------------
+-- 9. Exact j-value conjugation is a separate same-object weld.
+------------------------------------------------------------------------
+
+record JointJConjugation
+    {R : Render.JPhaseRenderingAlgebra}
+    {L : Tower.CanonicalLevel27Lift R}
+    (W : JointReflectionAction R L) : Set₁ where
+  field
+    conjugateValue :
+      Klein.Value (Render.klein R) →
+      Klein.Value (Render.klein R)
+
+    jConjugates :
+      (z : Klein.Point (Render.klein R)) →
+      Render.jValue R
+        (Reflection.reflectPoint (phaseReflection W) z)
+      ≡
+      conjugateValue (Render.jValue R z)
+
+open JointJConjugation public
+
+jointRJConjugates :
+  ∀ {R L}
+    {W : JointReflectionAction R L} →
+  (J : JointJConjugation W) →
+  (z : Klein.Point (Render.klein R)) →
+  exactJ
+    (sampleAt L
+      (Reflection.reflectPoint (phaseReflection W) z))
+  ≡
+  conjugateValue J (exactJ (sampleAt L z))
+jointRJConjugates J z =
+  jConjugates J z
+
+------------------------------------------------------------------------
 -- 8. Boundary.
 ------------------------------------------------------------------------
 
@@ -344,6 +521,15 @@ record JointPhaseLevelBoundary : Set where
     tTranslatesLevelC3 : Bool
 
     globalPhaseC3EqualsLevelC3CompatibleWithT : Bool
+
+    jointReflectionActionCompilerOwned : Bool
+    reflectionNegatesPhaseC6 : Bool
+    reflectionNegatesPhaseC3 : Bool
+    reflectionNegatesLevelC27 : Bool
+    reflectionNegatesLevelC9 : Bool
+    reflectionNegatesLevelC3 : Bool
+    exactJConjugationRequiresSameObjectWeld : Bool
+
     fullDeckGroupCollapsedToC27 : Bool
 
 open JointPhaseLevelBoundary public
@@ -354,4 +540,6 @@ canonicalJointPhaseLevelBoundary =
     true true true true
     true true true true
     true true true
-    false false
+    false
+    true true true true true true true
+    false
