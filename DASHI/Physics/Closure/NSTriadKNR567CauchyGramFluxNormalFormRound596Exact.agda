@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
@@ -61,7 +62,6 @@ module FixedOutput
     (physicalSystem : Field30.PhysicalFiniteComplex3GalerkinSystem F)
     (S : Helical.HelicalModeScalars F)
     (viscosityPositive : Positive (Field30.viscosity physicalSystem))
-    (cutoff : Nat)
     (output : Z3.FourierMode)
     (outputNonzero : Z3.NonZeroMode output) where
 
@@ -70,6 +70,9 @@ module FixedOutput
   module Rate = R400.PhysicalRate physicalSystem S viscosityPositive
   module NF = R547.NormalForm physicalSystem S
   module C = R567.CommutatorOnly physicalSystem S
+
+  cutoff : Nat
+  cutoff = Audit.cutoff (Field30.finiteSystem physicalSystem)
 
   fibre : List Physical.PhysicalTriadIncidence
   fibre = Output.physicalOutputFiber cutoff output
@@ -198,30 +201,35 @@ module FixedOutput
     R543.fullSquareSum gramPair items
       + R543.fullSquareSum weightedFluxTangentPair items
   fullSquareNormalForm [] allOutput = refl
-  fullSquareNormalForm (alpha ∷ rest) allOutput =
-    let
-      alphaOutput = allOutput alpha R396.here
-      restOutput =
-        λ beta member → allOutput beta (R396.there member)
-    in
-    trans
-      (cong₂ _+_
-        (pairScalarNormalForm alpha alpha alphaOutput alphaOutput)
-        (cong₂ _+_
-          (rowNormalForm alpha alphaOutput rest restOutput)
-          (cong₂ _+_
-            (columnNormalForm rest restOutput alpha alphaOutput)
-            (fullSquareNormalForm rest restOutput))))
-      (solve
-        ( gramPair alpha alpha
-        ∷ weightedFluxTangentPair alpha alpha
-        ∷ R539.rowSum gramPair alpha rest
-        ∷ R539.rowSum weightedFluxTangentPair alpha rest
-        ∷ R539.columnSum gramPair rest alpha
-        ∷ R539.columnSum weightedFluxTangentPair rest alpha
-        ∷ R543.fullSquareSum gramPair rest
-        ∷ R543.fullSquareSum weightedFluxTangentPair rest
-        ∷ []))
+  fullSquareNormalForm (alpha ∷ rest) allOutput
+    rewrite
+      pairScalarNormalForm
+        alpha alpha
+        (allOutput alpha R396.here)
+        (allOutput alpha R396.here)
+        | rowNormalForm
+            alpha
+            (allOutput alpha R396.here)
+            rest
+            (λ beta member → allOutput beta (R396.there member))
+        | columnNormalForm
+            rest
+            (λ beta member → allOutput beta (R396.there member))
+            alpha
+            (allOutput alpha R396.here)
+        | fullSquareNormalForm
+            rest
+            (λ beta member → allOutput beta (R396.there member)) =
+    solve
+      ( gramPair alpha alpha
+      ∷ weightedFluxTangentPair alpha alpha
+      ∷ R539.rowSum gramPair alpha rest
+      ∷ R539.rowSum weightedFluxTangentPair alpha rest
+      ∷ R539.columnSum gramPair rest alpha
+      ∷ R539.columnSum weightedFluxTangentPair rest alpha
+      ∷ R543.fullSquareSum gramPair rest
+      ∷ R543.fullSquareSum weightedFluxTangentPair rest
+      ∷ [])
 
   literalFullSquareNormalForm :
     R543.fullSquareSum Swap.symmetricWeightedRemainder fibre
