@@ -43,3 +43,4 @@ import DASHI.Moonshine.JSameWeightQuotientReflectionExact
 
 import DASHI.Moonshine.JInvariant369JointFibreBifiltrationExact
 import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact
+import DASHI.Moonshine.JInvariant369JointJReflectionWeldExact
