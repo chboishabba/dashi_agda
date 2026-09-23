@@ -18,7 +18,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_; proj₁; proj₂; Σ)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import Base369 as Base
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
@@ -478,7 +478,35 @@ moonshineBulkBoundaryExact =
   Zeta.moonshineIsBulkPlusFullBoundary
 
 ------------------------------------------------------------------------
--- 11. Consolidated frontier.
+-- 12. Cross-prover mirror receipt.
+--
+-- This is provenance/linkage only: independent compilation of the Lean mirror
+-- is the mechanical receipt.  A matching path/name does not itself prove
+-- theorem equivalence.
+------------------------------------------------------------------------
+
+record LeanMirrorReceipt : Set where
+  constructor lean-mirror-receipt
+  field
+    repository : String
+    integrationModule : String
+    agdaMirrorModule : String
+    agdaOwner : String
+    finiteTheoremSurfaceMirrored : Bool
+    pathEqualityCreatesProofEquivalence : Bool
+
+leanMirrorReceipt : LeanMirrorReceipt
+leanMirrorReceipt =
+  lean-mirror-receipt
+    "chboishabba/dashi_lean4"
+    "Integration/JInvariantSheafDescent.lean"
+    "AgdaMirror/JInvariantSheafDescent.lean"
+    "DASHI/Moonshine/JInvariantSheafHyperformAdmissibleDescentExact.agda"
+    true
+    false
+
+------------------------------------------------------------------------
+-- 13. Consolidated frontier.
 ------------------------------------------------------------------------
 
 record JSheafHyperformDescentFrontier : Set where
@@ -508,6 +536,8 @@ record JSheafHyperformDescentFrontier : Set where
     localShortModelExcludedForQ11 : Bool
     fullFineRepairEligible : Bool
     repairTransitionProofRelevant : Bool
+    leanMirrorReceiptLinked : Bool
+    crossProverPathCreatesProofEquivalence : Bool
 
 canonicalJSheafHyperformDescentFrontier :
   JSheafHyperformDescentFrontier
@@ -516,3 +546,4 @@ canonicalJSheafHyperformDescentFrontier =
     true true true true true true true false true true false false false
     true true true true true false false
     true true true true
+    true false
