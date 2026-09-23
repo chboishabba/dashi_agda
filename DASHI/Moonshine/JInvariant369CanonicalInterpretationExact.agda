@@ -61,6 +61,7 @@ import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact as LegacyB
 import DASHI.Moonshine.JInvariant369JointFibreBifiltrationExact as JointBif
 import DASHI.Moonshine.JInvariantSmithChartObserverCrossPollinationExact as SmithCross
 import DASHI.Moonshine.JInvariantSmithChartActionSeparationExact as SmithAction
+import DASHI.Moonshine.JInvariantSmithChartMobiusMatrixBridgeExact as SmithMatrix
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -143,6 +144,10 @@ record Canonical369InterpretationBoundary : Set where
     smithHalfTurnDistinctFromModularReflectionOnC6 : Bool
     c3QuotientCanEraseSmithHalfTurn : Bool
     c3ObserverDoesNotDetermineUnderlyingC6Action : Bool
+    smithGammaHasExactMobiusMatrixPresentation : Bool
+    smithAdmittanceHasExactMobiusMatrixPresentation : Bool
+    smithMobiusMatrixToC6CompilerOwned : Bool
+    smithMobiusMatrixC3ForgetsHalfTurn : Bool
     engineeringJIdentifiedWithModularJInvariant : Bool
     smithGammaIdentifiedWithModularJInvariant : Bool
 
@@ -230,6 +235,10 @@ canonicalCanonical369InterpretationBoundary =
     ; smithHalfTurnDistinctFromModularReflectionOnC6 = true
     ; c3QuotientCanEraseSmithHalfTurn = true
     ; c3ObserverDoesNotDetermineUnderlyingC6Action = true
+    ; smithGammaHasExactMobiusMatrixPresentation = true
+    ; smithAdmittanceHasExactMobiusMatrixPresentation = true
+    ; smithMobiusMatrixToC6CompilerOwned = true
+    ; smithMobiusMatrixC3ForgetsHalfTurn = true
     ; engineeringJIdentifiedWithModularJInvariant = false
     ; smithGammaIdentifiedWithModularJInvariant = false
     }
@@ -495,6 +504,30 @@ smithActionSeparationBoundary :
   SmithAction.SmithModularActionSeparationBoundary
 smithActionSeparationBoundary =
   SmithAction.canonicalSmithModularActionSeparationBoundary
+
+
+smithMobiusMatrixBridgeBoundary :
+  SmithMatrix.SmithMobiusMatrixBridgeBoundary
+smithMobiusMatrixBridgeBoundary =
+  SmithMatrix.canonicalSmithMobiusMatrixBridgeBoundary
+
+smithGammaIsGenuineFractionalLinearCoordinate :
+  smithGammaHasExactMobiusMatrixPresentation
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+smithGammaIsGenuineFractionalLinearCoordinate = refl
+
+smithAdmittanceMobiusShadowIsObservedAtC6 :
+  smithMobiusMatrixToC6CompilerOwned
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+smithAdmittanceMobiusShadowIsObservedAtC6 = refl
+
+smithAdmittanceHalfTurnCanDisappearAtC3 :
+  smithMobiusMatrixC3ForgetsHalfTurn
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+smithAdmittanceHalfTurnCanDisappearAtC3 = refl
 
 smithHalfTurnIsNotModularT :
   smithHalfTurnDistinctFromModularTOnC6
