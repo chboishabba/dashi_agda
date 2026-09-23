@@ -57,6 +57,7 @@ import DASHI.Physics.Closure.NSTriadKNR567ExternalResidualPairExpansionRound609E
 import DASHI.Physics.Closure.NSTriadKNR609ExternalHelicalQuarticExpansionRound610Exact as R610
 import DASHI.Physics.Closure.NSTriadKNR604AmplitudeHomogeneityNoGoRound611Exact as R611
 import DASHI.Physics.Closure.NSTriadKNA3ToR568HomogeneityBoundaryRound612Exact as R612
+import DASHI.Physics.Closure.NSTriadKNR573SelfExternalNestedCompanionSplitRound613Exact as R613
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -942,6 +943,15 @@ round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzero : Bool
 round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzero =
   R611.r604NoGoClaimsLiteralMismatchAlwaysNonzero
 
+
+round490R573NestedCompanionSelfExternalSplitClosed : Bool
+round490R573NestedCompanionSelfExternalSplitClosed =
+  R613.round613R573NestedWeightedCompanionSelfExternalSplitClosed
+
+round490R573ExternalNestedPaymentClosed : Bool
+round490R573ExternalNestedPaymentClosed =
+  R613.round613ExternalNestedPaymentClosed
+
 round490R604SidesHaveSameAmplitudeDegreeIsFalse :
   round490R604SidesHaveSameAmplitudeDegree ≡ false
 round490R604SidesHaveSameAmplitudeDegreeIsFalse =
@@ -961,6 +971,17 @@ round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzeroIsFalse :
   round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzero ≡ false
 round490R604HomogeneityNoGoClaimsLiteralMismatchAlwaysNonzeroIsFalse =
   R611.r604NoGoClaimsLiteralMismatchAlwaysNonzeroIsFalse
+
+
+round490R573NestedCompanionSelfExternalSplitClosedIsTrue :
+  round490R573NestedCompanionSelfExternalSplitClosed ≡ true
+round490R573NestedCompanionSelfExternalSplitClosedIsTrue =
+  R613.round613R573NestedWeightedCompanionSelfExternalSplitClosedIsTrue
+
+round490R573ExternalNestedPaymentClosedIsFalse :
+  round490R573ExternalNestedPaymentClosed ≡ false
+round490R573ExternalNestedPaymentClosedIsFalse =
+  R613.round613ExternalNestedPaymentClosedIsFalse
 
 round490A3AndR568HaveSameAmplitudeDegree : Bool
 round490A3AndR568HaveSameAmplitudeDegree =
