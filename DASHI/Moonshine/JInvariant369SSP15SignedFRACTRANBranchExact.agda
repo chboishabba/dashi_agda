@@ -25,6 +25,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import Agda.Builtin.List using (List)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
@@ -147,8 +148,12 @@ phaseToUnitMultiplicity Harmonic.positiveTrit =
 unitMultiplicityToPhase :
   Signed.SignedMultiplicity →
   Harmonic.BalancedTrit
-unitMultiplicityToPhase =
-  Signed.coarseMultiplicity
+unitMultiplicityToPhase (Signed.negativeMultiplicity n) =
+  Harmonic.negativeTrit
+unitMultiplicityToPhase Signed.zeroMultiplicity =
+  Harmonic.zeroTrit
+unitMultiplicityToPhase (Signed.positiveMultiplicity n) =
+  Harmonic.positiveTrit
 
 phaseCoarseRoundTrip :
   (phase : Harmonic.BalancedTrit) →
@@ -183,7 +188,7 @@ pointedSignedToCoarseInternal :
 pointedSignedToCoarseInternal state =
   let lane = primeToInternal (selectedPrime state)
   in
-  proj₁ lane , Signed.coarseMultiplicity (signedMultiplicity state)
+  proj₁ lane , unitMultiplicityToPhase (signedMultiplicity state)
 
 internalPointedCoarseRoundTrip :
   (lane : Internal.SSP15InternalLane) →
