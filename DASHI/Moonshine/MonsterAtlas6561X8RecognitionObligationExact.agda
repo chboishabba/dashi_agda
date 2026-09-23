@@ -24,7 +24,7 @@ open import Agda.Builtin.Nat using (Nat; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Moonshine.Base369MonsterThreeLocalEightToSixPlusTwoCarrierBidiExact as X8
 import DASHI.Core.AttributedSourceCore as Attribution
