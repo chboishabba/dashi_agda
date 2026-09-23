@@ -52,6 +52,7 @@ import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as JointBundle
 import DASHI.Moonshine.JSameWeightQuotientReflectionExact as JReflection
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
+import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact as LegacyBridge
 import DASHI.Moonshine.JInvariant369JointFibreBifiltrationExact as JointBif
 
 record Canonical369InterpretationBoundary : Set where
@@ -107,6 +108,13 @@ record Canonical369InterpretationBoundary : Set where
     jointFibreResolutionProductConstructed : Bool
     resolutionCoarseningCommutesWithModularActions : Bool
     oldRelational369EqualsPrincipalLevelTower : Bool
+
+    canonicalSampleToLegacySignedFibreBridgeOwned : Bool
+    legacyBridgeRestrictedToCanonicalSamples : Bool
+    legacyBridgeIntertwinesTranslationCoordinatewise : Bool
+    legacyBridgeIntertwinesReflectionCoordinatewise : Bool
+    legacyBridgeRecoversPhaseC3FromLevelC3 : Bool
+    legacyFibreEquivalentToCanonicalJointBundle : Bool
 
 open Canonical369InterpretationBoundary public
 
@@ -164,6 +172,13 @@ canonicalCanonical369InterpretationBoundary =
     ; jointFibreResolutionProductConstructed = true
     ; resolutionCoarseningCommutesWithModularActions = true
     ; oldRelational369EqualsPrincipalLevelTower = false
+
+    ; canonicalSampleToLegacySignedFibreBridgeOwned = true
+    ; legacyBridgeRestrictedToCanonicalSamples = true
+    ; legacyBridgeIntertwinesTranslationCoordinatewise = true
+    ; legacyBridgeIntertwinesReflectionCoordinatewise = true
+    ; legacyBridgeRecoversPhaseC3FromLevelC3 = false
+    ; legacyFibreEquivalentToCanonicalJointBundle = false
     }
 
 ------------------------------------------------------------------------
@@ -211,6 +226,37 @@ oldRelational369IsNotPrincipalLevelTower :
     canonicalCanonical369InterpretationBoundary
   ≡ false
 oldRelational369IsNotPrincipalLevelTower = refl
+
+
+legacyBridgeIsCanonicalSampleOnly :
+  legacyBridgeRestrictedToCanonicalSamples
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+legacyBridgeIsCanonicalSampleOnly = refl
+
+legacyBridgePreservesModularActions :
+  legacyBridgeIntertwinesTranslationCoordinatewise
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+legacyBridgePreservesModularActions = refl
+
+legacyBridgePreservesReflectionAction :
+  legacyBridgeIntertwinesReflectionCoordinatewise
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+legacyBridgePreservesReflectionAction = refl
+
+legacyBridgeDoesNotRecoverPhaseC3 :
+  legacyBridgeRecoversPhaseC3FromLevelC3
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+legacyBridgeDoesNotRecoverPhaseC3 = refl
+
+legacyFibreIsNotDeclaredEquivalentToCanonicalBundle :
+  legacyFibreEquivalentToCanonicalJointBundle
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+legacyFibreIsNotDeclaredEquivalentToCanonicalBundle = refl
 
 ------------------------------------------------------------------------
 -- Research interpretation:
@@ -276,3 +322,9 @@ jointFibreBifiltrationBoundary :
   JointBif.JointFibreBifiltrationBoundary
 jointFibreBifiltrationBoundary =
   JointBif.canonicalJointFibreBifiltrationBoundary
+
+
+legacyBridgeBoundary :
+  LegacyBridge.LegacyBridgeBoundary
+legacyBridgeBoundary =
+  LegacyBridge.canonicalLegacyBridgeBoundary
