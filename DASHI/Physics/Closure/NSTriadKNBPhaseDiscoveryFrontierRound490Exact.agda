@@ -46,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact a
 import DASHI.Physics.Closure.NSTriadKNA3CenteredFullGramNormalFormRound599Exact as R599
 import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyPairNormalFormRound600Exact as R600
 import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyNonlinearRemainderRound601Exact as R601
+import DASHI.Physics.Closure.NSTriadKNA3CenteredRemainderReconciliationRound602Exact as R602
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -317,6 +318,26 @@ round490CenteredDynamicCauchyNonlinearRemainderNormalFormClosed =
 round490CenteredDynamicCauchyRemainderPaid : Bool
 round490CenteredDynamicCauchyRemainderPaid =
   R601.round601CenteredDynamicRemainderPaid
+
+round490R601ResidualReducesToR538WeightedRemainder : Bool
+round490R601ResidualReducesToR538WeightedRemainder =
+  R602.round602R601ResidualReducesToR538WeightedRemainder
+
+round490R538WeightedRemainderFullIsR567ForcingFull : Bool
+round490R538WeightedRemainderFullIsR567ForcingFull =
+  R602.round602R538WeightedRemainderFullIsR567ForcingFull
+
+round490R601ResidualIsTwiceR598MismatchClosed : Bool
+round490R601ResidualIsTwiceR598MismatchClosed =
+  R602.round602R601ResidualIsTwiceR598Mismatch
+
+round490R601IntroducesIndependentAnalyticLeaf : Bool
+round490R601IntroducesIndependentAnalyticLeaf =
+  R602.round602IntroducesIndependentAnalyticLeaf
+
+round490CanonicalDynamicMismatchPaid : Bool
+round490CanonicalDynamicMismatchPaid =
+  R602.round602R598MismatchPaid
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -643,6 +664,31 @@ round490CenteredDynamicCauchyRemainderPaidIsFalse :
   round490CenteredDynamicCauchyRemainderPaid ≡ false
 round490CenteredDynamicCauchyRemainderPaidIsFalse =
   R601.round601CenteredDynamicRemainderPaidIsFalse
+
+round490R601ResidualReducesToR538WeightedRemainderIsTrue :
+  round490R601ResidualReducesToR538WeightedRemainder ≡ true
+round490R601ResidualReducesToR538WeightedRemainderIsTrue =
+  R602.round602R601ResidualReducesToR538WeightedRemainderIsTrue
+
+round490R538WeightedRemainderFullIsR567ForcingFullIsTrue :
+  round490R538WeightedRemainderFullIsR567ForcingFull ≡ true
+round490R538WeightedRemainderFullIsR567ForcingFullIsTrue =
+  R602.round602R538WeightedRemainderFullIsR567ForcingFullIsTrue
+
+round490R601ResidualIsTwiceR598MismatchClosedIsTrue :
+  round490R601ResidualIsTwiceR598MismatchClosed ≡ true
+round490R601ResidualIsTwiceR598MismatchClosedIsTrue =
+  R602.round602R601ResidualIsTwiceR598MismatchIsTrue
+
+round490R601IntroducesIndependentAnalyticLeafIsFalse :
+  round490R601IntroducesIndependentAnalyticLeaf ≡ false
+round490R601IntroducesIndependentAnalyticLeafIsFalse =
+  R602.round602IntroducesIndependentAnalyticLeafIsFalse
+
+round490CanonicalDynamicMismatchPaidIsFalse :
+  round490CanonicalDynamicMismatchPaid ≡ false
+round490CanonicalDynamicMismatchPaidIsFalse =
+  R602.round602R598MismatchPaidIsFalse
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
