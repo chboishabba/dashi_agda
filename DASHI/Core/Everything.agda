@@ -178,3 +178,6 @@ import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
 
 -- World/observation/theory/belief type separation and factorisation boundary.
 import DASHI.Core.WorldRepresentationSeparationExact
+
+-- Theory underdetermination, epistemic suspension, and discriminating experiments.
+import DASHI.Core.TheoryUnderdeterminationExperimentExact
