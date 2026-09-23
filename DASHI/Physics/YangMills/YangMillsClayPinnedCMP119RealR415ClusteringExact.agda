@@ -22,6 +22,7 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealTwoJSourceExact as T
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ApplicationExact as App
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ClusteringExact as Cluster
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealBMinCutExact as B
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ScaleCalibrationExact as ScaleCal
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionScaleCalibrationRound416Exact as R416
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
@@ -63,7 +64,7 @@ r415SelectedExpansionBuildsContinuumPhysicalClustering :
     (App.left application index)
     (App.right application index)
   ≤ℝ
-  DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ScaleCalibrationExact.physicalExponentialUpper
+  ScaleCal.physicalExponentialUpper
     (R416.asLiteralRealCMP116ScaleCalibration calibration)
     index
 r415SelectedExpansionBuildsContinuumPhysicalClustering
