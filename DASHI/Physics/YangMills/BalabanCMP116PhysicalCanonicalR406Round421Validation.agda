@@ -24,9 +24,13 @@ outerFiniteSummationCompilerOwned :
   R421.round421OuterSourceSummabilityLevel ≡ machineChecked
 outerFiniteSummationCompilerOwned = refl
 
-residualCMP116SummabilityRemainsPhysical :
-  R421.round421ResidualCMP116SummabilityLevel ≡ conditional
-residualCMP116SummabilityRemainsPhysical = refl
+residualCMP116SummabilityCompilerOwned :
+  R421.round421ResidualCMP116SummabilityLevel ≡ machineChecked
+residualCMP116SummabilityCompilerOwned = refl
+
+selectedCMP116ResidualCarrierAttachmentRemainsPhysical :
+  R421.round421SelectedCMP116ResidualCarrierAttachmentLevel ≡ conditional
+selectedCMP116ResidualCarrierAttachmentRemainsPhysical = refl
 
 pointwiseMarkedResidualFactorizationCompilerOwned :
   R421.round421PointwiseMarkedResidualFactorizationLevel ≡ machineChecked
