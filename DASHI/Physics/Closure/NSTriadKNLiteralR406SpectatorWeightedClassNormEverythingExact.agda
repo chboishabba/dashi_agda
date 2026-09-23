@@ -83,6 +83,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCyclicCellRateDefectBidiExact
 import DASHI.Physics.Closure.NSTriadKNCyclicResolventDefectFactorizationBidiExact
 import DASHI.Physics.Closure.NSTriadKNCyclicConservationWeightedDefectBidiExact
 import DASHI.Physics.Closure.NSTriadKNCyclicResolvedTransferRateDefectRound598Exact as R598
+import DASHI.Physics.Closure.NSTriadKNCyclicRouteExternalNetworkDefectRound599Exact as R599
 import DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact
 
 outerSpectatorWeightStructuralWeldClosed : Bool
@@ -147,6 +148,15 @@ cyclicResolvedTransferRateDefectNormalFormClosed : Bool
 cyclicResolvedTransferRateDefectNormalFormClosed =
   R598.round598ResolvedWeightedTransferIsRateDefectFormClosed
 
+
+cyclicFullForcingExternalNetworkDefectExposed : Bool
+cyclicFullForcingExternalNetworkDefectExposed =
+  R599.round599FullThreeLegEnergyEqualsExternalNetworkClosed
+
+cyclicBareFullForcingConservationAvailable : Bool
+cyclicBareFullForcingConservationAvailable =
+  R599.round599BareFullProjectedForcingCyclicConservationAvailable
+
 cyclicOneThirdNormalizationMandatory : Bool
 cyclicOneThirdNormalizationMandatory = false
 
@@ -195,6 +205,17 @@ cyclicResolvedTransferRateDefectNormalFormClosedIsTrue :
   cyclicResolvedTransferRateDefectNormalFormClosed ≡ true
 cyclicResolvedTransferRateDefectNormalFormClosedIsTrue =
   R598.round598ResolvedWeightedTransferIsRateDefectFormClosedIsTrue
+
+
+cyclicFullForcingExternalNetworkDefectExposedIsTrue :
+  cyclicFullForcingExternalNetworkDefectExposed ≡ true
+cyclicFullForcingExternalNetworkDefectExposedIsTrue =
+  R599.round599FullThreeLegEnergyEqualsExternalNetworkClosedIsTrue
+
+cyclicBareFullForcingConservationAvailableIsFalse :
+  cyclicBareFullForcingConservationAvailable ≡ false
+cyclicBareFullForcingConservationAvailableIsFalse =
+  R599.round599BareFullProjectedForcingCyclicConservationAvailableIsFalse
 
 amplitudeHalfIndependentAnalyticLeafIsFalse :
   amplitudeHalfIndependentAnalyticLeaf ≡ false
