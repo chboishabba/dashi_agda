@@ -117,7 +117,7 @@ record Canonical369InterpretationBoundary : Set where
     jointPhaseLevelSignedFibreConstructed : Bool
     jointFiniteDihedralLawOwned : Bool
     level27FactorsThroughBaseJSurface : Bool
-    genericTInvariantBaseNoLevelDescentCompilerOwned : Bool
+    genericInvariantBaseNoLevelDescentCompilerOwned : Bool
     level3CannotFactorThroughJ : Bool
     level9CannotFactorThroughJ : Bool
     level27CannotFactorThroughJ : Bool
@@ -196,7 +196,7 @@ canonicalCanonical369InterpretationBoundary =
     ; jointPhaseLevelSignedFibreConstructed = true
     ; jointFiniteDihedralLawOwned = true
     ; level27FactorsThroughBaseJSurface = false
-    ; genericTInvariantBaseNoLevelDescentCompilerOwned = true
+    ; genericInvariantBaseNoLevelDescentCompilerOwned = true
     ; level3CannotFactorThroughJ = true
     ; level9CannotFactorThroughJ = true
     ; level27CannotFactorThroughJ = true
