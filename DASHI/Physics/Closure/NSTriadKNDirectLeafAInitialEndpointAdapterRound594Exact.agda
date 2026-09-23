@@ -42,10 +42,12 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalFourierUnitGapRateFloorRound450Ex
 import DASHI.Physics.Closure.NSTriadKNNormalizedDoubleMixedCellMassRound452Exact as R452
 import DASHI.Physics.Closure.NSTriadKNPhysicalNormalizedDoubleMixedMassRound456Exact as R456
 import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxEndpointWeldRound568Exact as E568
+import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact as T570
 import DASHI.Physics.Closure.NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact as FTC564
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as Order
 import DASHI.Physics.Closure.NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact as C568
 import DASHI.Physics.Closure.NSTriadKNDirectLeafAStandardReceiptsRound593Exact as R593
+import DASHI.Physics.Closure.NSTriadKNDirectLeafACompilerRound572Exact as R572
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as R504
 
 F : C3.RealField _
@@ -84,6 +86,12 @@ module Compile
 
   module Comm = C568.LiveCommutatorOnly
     Time initialTime integrateTo VectorDerivativeOf integration
+
+  module Old = R572.Compile
+    Time initialTime integrateTo
+    VectorDerivativeOf ScalarDerivativeOf
+    projectedCrossCalculus vectorAlgebra hermitianCalculus
+    constantCalculus scalarAlgebra integration D R
 
   module EndpointAt (cutoff : Nat) = E568.LiveEndpointWeld
     Time initialTime integrateTo
@@ -137,7 +145,7 @@ module Compile
   initialSelfFluxUpper594 :
     (P : DirectLeafAEndpointProducer594) →
     (cutoff : Nat) →
-    let module T = DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact.TangentWeld
+    let module T = T570.TangentWeld
           Time initialTime integrateTo
           VectorDerivativeOf ScalarDerivativeOf
           projectedCrossCalculus vectorAlgebra hermitianCalculus
@@ -168,7 +176,7 @@ module Compile
 
   toR572Producer594 :
     DirectLeafAEndpointProducer594 →
-    Standard.Old.DirectLeafAProducer572
+    Old.DirectLeafAProducer572
   toR572Producer594 P =
     Standard.toR572Producer593 (toR593Producer594 P)
 
