@@ -466,17 +466,21 @@ canonicalObserver27ReflectionCommutes :
   canonicalObserver27At L (reflectPoint S z)
   ≡
   Level.reflectObserver27 (canonicalObserver27At L z)
-canonicalObserver27ReflectionCommutes S z =
+canonicalObserver27ReflectionCommutes {L = L} S z =
   trans
     (cong Level.level27ToObserver27
       (level27Reflection S z))
     (trans
       (cong Level.level27ToObserver27
-        (sym
-          (Level.observer27ReflectionIsCuspInversion
-            (canonicalObserver27At _ z))))
-      (Level.observer27LevelRoundTrip
-        (Level.reflectObserver27 (canonicalObserver27At _ z))))
+        (cong Arithmetic.negateResidue
+          (sym (Level.level27ObserverRoundTrip (level27At L z)))))
+      (trans
+        (cong Level.level27ToObserver27
+          (sym
+            (Level.observer27ReflectionIsCuspInversion
+              (canonicalObserver27At L z))))
+        (Level.observer27LevelRoundTrip
+          (Level.reflectObserver27 (canonicalObserver27At L z)))))
 
 canonicalObserver9ReflectionCommutes :
   ∀ {R}
@@ -486,17 +490,21 @@ canonicalObserver9ReflectionCommutes :
   canonicalObserver9At L (reflectPoint S z)
   ≡
   Kernel.negateNine (canonicalObserver9At L z)
-canonicalObserver9ReflectionCommutes S z =
+canonicalObserver9ReflectionCommutes {L = L} S z =
   trans
     (cong Level.level9ToObserver9
       (level9ReflectionDerived S z))
     (trans
       (cong Level.level9ToObserver9
-        (sym
-          (Level.observer9ReflectionIsCuspInversion
-            (canonicalObserver9At _ z))))
-      (Level.observer9LevelRoundTrip
-        (Kernel.negateNine (canonicalObserver9At _ z))))
+        (cong Arithmetic.negateResidue
+          (sym (Level.level9ObserverRoundTrip (canonicalLevel9At L z)))))
+      (trans
+        (cong Level.level9ToObserver9
+          (sym
+            (Level.observer9ReflectionIsCuspInversion
+              (canonicalObserver9At L z))))
+        (Level.observer9LevelRoundTrip
+          (Kernel.negateNine (canonicalObserver9At L z)))))
 
 canonicalObserver3ReflectionCommutes :
   ∀ {R}
@@ -506,17 +514,21 @@ canonicalObserver3ReflectionCommutes :
   canonicalObserver3At L (reflectPoint S z)
   ≡
   Kernel.negateTrit (canonicalObserver3At L z)
-canonicalObserver3ReflectionCommutes S z =
+canonicalObserver3ReflectionCommutes {L = L} S z =
   trans
     (cong Level.level3ToObserver3
       (level3ReflectionDerived S z))
     (trans
       (cong Level.level3ToObserver3
-        (sym
-          (Level.observer3ReflectionIsCuspInversion
-            (canonicalObserver3At _ z))))
-      (Level.observer3LevelRoundTrip
-        (Kernel.negateTrit (canonicalObserver3At _ z))))
+        (cong Arithmetic.negateResidue
+          (sym (Level.level3ObserverRoundTrip (canonicalLevel3At L z)))))
+      (trans
+        (cong Level.level3ToObserver3
+          (sym
+            (Level.observer3ReflectionIsCuspInversion
+              (canonicalObserver3At L z))))
+        (Level.observer3LevelRoundTrip
+          (Kernel.negateTrit (canonicalObserver3At L z)))))
 
 ------------------------------------------------------------------------
 -- 9. Boundary.
