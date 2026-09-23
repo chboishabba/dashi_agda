@@ -258,7 +258,7 @@ stageDiscreteCategory = record
   ; _∘_ = λ g f → eqTrans f g
   ; idLeft = eqIdLeft
   ; idRight = eqIdRight
-  ; assoc = λ h g f → sym (eqAssoc h g f)
+  ; assoc = eqAssoc
   }
 
 ------------------------------------------------------------------------
