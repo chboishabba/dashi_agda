@@ -29,6 +29,8 @@ open import Data.Product using (_×_; _,_)
 
 import Base369 as Base
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.ComputerScience.WrongTypeAttributionFactorisationPlanningSnowballExact as Wrong
 import DASHI.Foundations.StageValuationBundleAtlas as Bundle
 import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank
@@ -114,7 +116,97 @@ relation144DoesNotCreateAnalyticJSite :
 relation144DoesNotCreateAnalyticJSite ()
 
 ------------------------------------------------------------------------
--- 3. Exact 0..13 rank/carry crosswalk.
+-- 3. Consumer-indexed non-descent on the 144 relation fabric.
+------------------------------------------------------------------------
+
+flatRelation : StageRelationField
+flatRelation cell = Base.tri-mid
+
+offDiagonalRaisedRelation : StageRelationField
+offDiagonalRaisedRelation (Atlas.atlas-0 , Atlas.atlas-1) = Base.tri-high
+offDiagonalRaisedRelation cell = Base.tri-mid
+
+sameDiagonalObservation :
+  (axis : StageAxis12) →
+  diagonalObservation flatRelation axis
+  ≡ diagonalObservation offDiagonalRaisedRelation axis
+sameDiagonalObservation Atlas.atlas-0 = refl
+sameDiagonalObservation Atlas.atlas-1 = refl
+sameDiagonalObservation Atlas.atlas-2 = refl
+sameDiagonalObservation Atlas.atlas-3 = refl
+sameDiagonalObservation Atlas.atlas-4 = refl
+sameDiagonalObservation Atlas.atlas-5 = refl
+sameDiagonalObservation Atlas.atlas-6 = refl
+sameDiagonalObservation Atlas.atlas-7 = refl
+sameDiagonalObservation Atlas.atlas-8 = refl
+sameDiagonalObservation Atlas.atlas-9 = refl
+sameDiagonalObservation Atlas.atlas-10 = refl
+sameDiagonalObservation Atlas.atlas-11 = refl
+
+offDiagonal01 :
+  StageRelationField →
+  Base.TriTruth
+offDiagonal01 field =
+  field (Atlas.atlas-0 , Atlas.atlas-1)
+
+offDiagonal01Differs :
+  offDiagonal01 flatRelation
+  ≡ offDiagonal01 offDiagonalRaisedRelation →
+  ⊥
+offDiagonal01Differs ()
+
+diagonalNonDescentWitness :
+  Descent.ConsumerNonDescentWitness
+    diagonalObservation
+    offDiagonal01
+diagonalNonDescentWitness =
+  Descent.consumerNonDescentWitness
+    flatRelation
+    offDiagonalRaisedRelation
+    sameDiagonalObservation
+    offDiagonal01Differs
+
+diagonalCannotSufficeForOffDiagonal01 :
+  Descent.ConsumerSufficient diagonalObservation offDiagonal01 →
+  ⊥
+diagonalCannotSufficeForOffDiagonal01 =
+  Descent.nonDescentWitnessBlocksSufficiency
+    diagonalNonDescentWitness
+
+diagonalCannotFactorOffDiagonal01 :
+  Descent.FactorsThrough diagonalObservation offDiagonal01 →
+  ⊥
+diagonalCannotFactorOffDiagonal01 =
+  Descent.nonDescentWitnessBlocksFactorization
+    diagonalNonDescentWitness
+
+relationOffDiagonalObligation : Wrong.IndexedObligation
+relationOffDiagonalObligation =
+  Wrong.indexed-obligation
+    Wrong.consumerFactorisationObligation
+    "Stage12Relation144:offDiagonal01"
+    "StageTwelveGrothendieckRelationHyperformExact.offDiagonal01"
+    "12-cell diagonal observation"
+
+relationDiagonalCandidate : Wrong.OfferedCandidate
+relationDiagonalCandidate =
+  Wrong.offered-candidate
+    "Stage12 relation diagonal"
+    "coarse observer"
+    "StageTwelveGrothendieckRelationHyperformExact.diagonalObservation"
+    true
+
+relationDiagonalWrongTypeReceipt : Wrong.WrongTypeErrorReceipt
+relationDiagonalWrongTypeReceipt =
+  Wrong.wrong-type-error-receipt
+    relationOffDiagonalObligation
+    relationDiagonalCandidate
+    Wrong.nonFactorableRepresentation
+    "same 12-cell diagonal / different off-diagonal (0,1) relation witness"
+    true
+
+------------------------------------------------------------------------
+-- 4. Exact 0..13 rank/carry crosswalk.
 ------------------------------------------------------------------------
 
 rank12AddressIsThreePlusNine :
@@ -154,7 +246,7 @@ equal531441CountDoesNotIdentifySemanticCarriers :
 equal531441CountDoesNotIdentifySemanticCarriers ()
 
 ------------------------------------------------------------------------
--- 4. Small category interface with laws.
+-- 5. Small category interface with laws.
 ------------------------------------------------------------------------
 
 record SmallCategory : Set₁ where
@@ -181,7 +273,7 @@ record SmallCategory : Set₁ where
 open SmallCategory public
 
 ------------------------------------------------------------------------
--- 5. Sieves and pullback.
+-- 6. Sieves and pullback.
 ------------------------------------------------------------------------
 
 record Sieve (C : SmallCategory) (U : Obj C) : Set₁ where
@@ -229,7 +321,7 @@ pullbackSieve C arrow sieve = record
     substLocal P refl px = px
 
 ------------------------------------------------------------------------
--- 6. Genuine Grothendieck topology axioms.
+-- 7. Genuine Grothendieck topology axioms.
 ------------------------------------------------------------------------
 
 record GrothendieckTopology (C : SmallCategory) : Set₁ where
@@ -264,7 +356,7 @@ record GrothendieckTopology (C : SmallCategory) : Set₁ where
 open GrothendieckTopology public
 
 ------------------------------------------------------------------------
--- 7. Concrete discrete twelve-axis category.
+-- 8. Concrete discrete twelve-axis category.
 ------------------------------------------------------------------------
 
 eqTrans :
@@ -304,7 +396,7 @@ stageDiscreteCategory = record
   }
 
 ------------------------------------------------------------------------
--- 8. Maximal-only coverage is an actual Grothendieck topology.
+-- 9. Maximal-only coverage is an actual Grothendieck topology.
 --
 -- Covering means every arrow into U is already in the sieve.  On the
 -- discrete stage category this is the canonical conservative topology.
@@ -342,7 +434,7 @@ maximalOnlyStageTopology = record
     substLocal P refl px = px
 
 ------------------------------------------------------------------------
--- 9. Reuse the pre-existing BundleSheaf gluing interface.
+-- 10. Reuse the pre-existing BundleSheaf gluing interface.
 ------------------------------------------------------------------------
 
 StageBundleSheaf :
@@ -368,6 +460,9 @@ record StageTwelveSiteSheafReceipt : Set₁ where
     rank12AddressThreePlusNinePaid : Bool
     rank13AddressOnePlusThreePlusNinePaid : Bool
     equalCountCreatesSameSemanticCarrier : Bool
+    diagonalNonDescentWitnessPaid : Bool
+    diagonalFactorsThroughOffDiagonalConsumer : Bool
+    diagonalWrongTypeReceiptPaid : Bool
     bundleSheafInterfaceReused : Bool
     grothendieckAxiomsConstructed : Bool
     analyticModularSiteIdentified : Bool
@@ -387,6 +482,9 @@ canonicalStageTwelveSiteSheafReceipt = record
   ; rank12AddressThreePlusNinePaid = true
   ; rank13AddressOnePlusThreePlusNinePaid = true
   ; equalCountCreatesSameSemanticCarrier = false
+  ; diagonalNonDescentWitnessPaid = true
+  ; diagonalFactorsThroughOffDiagonalConsumer = false
+  ; diagonalWrongTypeReceiptPaid = true
   ; bundleSheafInterfaceReused = true
   ; grothendieckAxiomsConstructed = true
   ; analyticModularSiteIdentified = false
