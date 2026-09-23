@@ -165,9 +165,9 @@ rateWeightedKernelWorkIsFourWeightedWork :
   ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E}
     {S : Helical.HelicalModeScalars F}
     {L : Helical.PeriodicHelicalProjectorLaws F E I S}
-    {H : R142.HelicalHalfCalibration S} →
-  (P : R225.PhysicalFixedOutputHelicityData E I S L H
-    (velocity : Z3.FourierMode → C3.Complex3 F)) →
+    {H : R142.HelicalHalfCalibration S}
+    {velocity : Z3.FourierMode → C3.Complex3 F} →
+  (P : R225.PhysicalFixedOutputHelicityData E I S L H velocity) →
   (rho : Z3.FourierMode → ℚ) →
   (cutoff : Nat) (output : Z3.FourierMode) →
   let
@@ -216,9 +216,9 @@ kernelWorkIsFourSelfWork :
   ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E}
     {S : Helical.HelicalModeScalars F}
     {L : Helical.PeriodicHelicalProjectorLaws F E I S}
-    {H : R142.HelicalHalfCalibration S} →
-  (P : R225.PhysicalFixedOutputHelicityData E I S L H
-    (velocity : Z3.FourierMode → C3.Complex3 F)) →
+    {H : R142.HelicalHalfCalibration S}
+    {velocity : Z3.FourierMode → C3.Complex3 F} →
+  (P : R225.PhysicalFixedOutputHelicityData E I S L H velocity) →
   (cutoff : Nat) (output : Z3.FourierMode) →
   let
     items = Output.physicalOutputFiber cutoff output
@@ -251,9 +251,9 @@ fixedOutputSignedA3KernelCenteredNormalForm :
   ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E}
     {S : Helical.HelicalModeScalars F}
     {L : Helical.PeriodicHelicalProjectorLaws F E I S}
-    {H : R142.HelicalHalfCalibration S} →
-  (P : R225.PhysicalFixedOutputHelicityData E I S L H
-    (velocity : Z3.FourierMode → C3.Complex3 F)) →
+    {H : R142.HelicalHalfCalibration S}
+    {velocity : Z3.FourierMode → C3.Complex3 F} →
+  (P : R225.PhysicalFixedOutputHelicityData E I S L H velocity) →
   (rho : Z3.FourierMode → ℚ) →
   (cutoff : Nat) (output : Z3.FourierMode) →
   let
@@ -278,98 +278,33 @@ fixedOutputSignedA3KernelCenteredNormalForm :
   n * (0ℚ - Work.coherentWork mixed weightedKernel)
     + rateTotal * Work.coherentWork mixed kernel
 fixedOutputSignedA3KernelCenteredNormalForm
-    {S = S} {velocity = velocity} P rho cutoff output =
+    {S = S} {velocity = velocity} P rho cutoff output
+  rewrite
+    Centered.fixedOutputSignedA3CenteredNormalForm
+      rho S velocity cutoff output
+        | weightedWorkSumAgainstRateWeightedFold
+            (R224.foldVector
+              (D1a.mixedProductCell S velocity)
+              (Output.physicalOutputFiber cutoff output))
+            rho S velocity
+            (Output.physicalOutputFiber cutoff output)
+        | rateWeightedKernelWorkIsFourWeightedWork
+            P rho cutoff output
+        | kernelWorkIsFourSelfWork P cutoff output =
   let
     items = Output.physicalOutputFiber cutoff output
-    value = D1a.mixedProductCell S velocity
-    mixed = R224.foldVector value items
-    rate = Pair.cellRate rho
-    weighted =
-      Pair.weightedWorkSum rate (Pair.cellWork mixed value) items
-    self = Work.coherentWork mixed mixed
-    n = Pair.natAsRational (length items)
-    rateTotal = Pair.rateSum rate items
-    weightedKernel =
+    mixed = R224.foldVector (D1a.mixedProductCell S velocity) items
+    weightedMixed =
       R224.foldVector
-        (RateKernel.weightedIQuadraticKernel
+        (RateKernel.weightedPlusMinus
           (RateKernel.physicalRateWeight rho) S velocity)
         items
-    kernel =
-      R224.foldVector (R225.iQuadraticKernelCell S velocity) items
-
-    centered :
-      0ℚ - Vector.pairDifferenceVectorWorkSum rate mixed value items
-      ≡ n * (0ℚ - weighted) + rateTotal * self
-    centered =
-      Centered.fixedOutputSignedA3CenteredNormalForm
-        rho S velocity cutoff output
-
-    weightedFold :
-      weighted ≡
-      Work.coherentWork mixed
-        (R224.foldVector
-          (RateKernel.weightedPlusMinus
-            (RateKernel.physicalRateWeight rho) S velocity)
-          items)
-    weightedFold =
-      weightedWorkSumAgainstRateWeightedFold
-        mixed rho S velocity items
-
-    weightedKernelWork :
-      Work.coherentWork mixed weightedKernel
-      ≡ four *
-        Work.coherentWork mixed
-          (R224.foldVector
-            (RateKernel.weightedPlusMinus
-              (RateKernel.physicalRateWeight rho) S velocity)
-            items)
-    weightedKernelWork =
-      rateWeightedKernelWorkIsFourWeightedWork
-        P rho cutoff output
-
-    kernelWork :
-      Work.coherentWork mixed kernel
-      ≡ four * self
-    kernelWork =
-      kernelWorkIsFourSelfWork P cutoff output
+    n = Pair.natAsRational (length items)
+    rateTotal = Pair.rateSum (Pair.cellRate rho) items
+    weightedWork = Work.coherentWork mixed weightedMixed
+    selfWork = Work.coherentWork mixed mixed
   in
-  trans
-    (cong (four *_) centered)
-    (trans
-      (cong
-        (λ w →
-          four * (n * (0ℚ - w) + rateTotal * self))
-        weightedFold)
-      (trans
-        (cong
-          (λ kw →
-            four *
-              (n * (0ℚ -
-                Work.coherentWork mixed
-                  (R224.foldVector
-                    (RateKernel.weightedPlusMinus
-                      (RateKernel.physicalRateWeight rho) S velocity)
-                    items))
-                + rateTotal * self))
-          weightedKernelWork)
-        (trans
-          (cong
-            (λ kself →
-              n * (0ℚ - Work.coherentWork mixed weightedKernel)
-                + rateTotal * kself)
-            kernelWork)
-          (solve
-            ( n
-            ∷ rateTotal
-            ∷ Work.coherentWork mixed weightedKernel
-            ∷ Work.coherentWork mixed kernel
-            ∷ Work.coherentWork mixed
-                (R224.foldVector
-                  (RateKernel.weightedPlusMinus
-                    (RateKernel.physicalRateWeight rho) S velocity)
-                  items)
-            ∷ self
-            ∷ [])))))
+  solve (n ∷ rateTotal ∷ weightedWork ∷ selfWork ∷ [])
 
 ------------------------------------------------------------------------
 -- Status.
