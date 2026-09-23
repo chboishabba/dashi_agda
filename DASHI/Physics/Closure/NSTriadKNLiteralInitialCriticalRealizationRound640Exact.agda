@@ -43,6 +43,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact a
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Energy
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound639Exact as R639
 import DASHI.Physics.Closure.NSTriadKNInitialCriticalRealizationToR421Round512Exact as R512
+import DASHI.Physics.Closure.NSTriadKNCanonicalModeListedCoherenceRound643Exact as R643
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -216,6 +217,13 @@ round640CommonInitialDatumSameObjectCompilerClosed = true
 round640ModeListToModeListedCoherenceStillRequired : Bool
 round640ModeListToModeListedCoherenceStillRequired = true
 
+-- For an arbitrary audit trajectory the predicate/list relation remains a
+-- receipt because Audit deliberately keeps them independent.  The actual R34
+-- canonical constructor now has the exact definitional compiler in R643.
+round640CanonicalR34ModeListCoherenceCompilerAvailable : Bool
+round640CanonicalR34ModeListCoherenceCompilerAvailable =
+  R643.canonicalR34PaysR640ModeCoherenceWithoutEstimate
+
 round640CutoffUniformInitialCeilingStillProofBearing : Bool
 round640CutoffUniformInitialCeilingStillProofBearing = true
 
@@ -235,6 +243,11 @@ round640CommonInitialDatumSameObjectCompilerClosedIsTrue = refl
 round640ModeListToModeListedCoherenceStillRequiredIsTrue :
   round640ModeListToModeListedCoherenceStillRequired ≡ true
 round640ModeListToModeListedCoherenceStillRequiredIsTrue = refl
+
+round640CanonicalR34ModeListCoherenceCompilerAvailableIsTrue :
+  round640CanonicalR34ModeListCoherenceCompilerAvailable ≡ true
+round640CanonicalR34ModeListCoherenceCompilerAvailableIsTrue =
+  R643.canonicalR34PaysR640ModeCoherenceWithoutEstimateIsTrue
 
 round640CutoffUniformInitialCeilingStillProofBearingIsTrue :
   round640CutoffUniformInitialCeilingStillProofBearing ≡ true
