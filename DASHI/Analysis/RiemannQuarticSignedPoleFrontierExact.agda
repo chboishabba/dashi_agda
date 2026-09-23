@@ -49,6 +49,11 @@ data QuarticFrontierCoordinate : Set where
   signedPsiCenteredJetAssembly : QuarticFrontierCoordinate
   signedPsiQuantitativeRadialDerivativeSign : QuarticFrontierCoordinate
   signedPsiFiniteWindowAbelAssembly : QuarticFrontierCoordinate
+  signedPsiCenteredFiniteAbelAssembly : QuarticFrontierCoordinate
+  signedPsiGlobalPointwiseNMuWeld : QuarticFrontierCoordinate
+  signedPsiGlobalCenteredAbelExhaustion : QuarticFrontierCoordinate
+  completedResidualEqualsCombinedCluster : QuarticFrontierCoordinate
+  outwardCenteredDiscrepancyNoGo : QuarticFrontierCoordinate
   jointSignedCompletedResidual : QuarticFrontierCoordinate
   optionalSignedNMuSplitEstimate : QuarticFrontierCoordinate
   optionalHorizontalSplitEstimate : QuarticFrontierCoordinate
@@ -93,6 +98,11 @@ quarticFrontierClass signedPsiDerivativeAssembly = assemblyOwned
 quarticFrontierClass signedPsiCenteredJetAssembly = assemblyOwned
 quarticFrontierClass signedPsiQuantitativeRadialDerivativeSign = assemblyOwned
 quarticFrontierClass signedPsiFiniteWindowAbelAssembly = assemblyOwned
+quarticFrontierClass signedPsiCenteredFiniteAbelAssembly = assemblyOwned
+quarticFrontierClass signedPsiGlobalPointwiseNMuWeld = assemblyOwned
+quarticFrontierClass signedPsiGlobalCenteredAbelExhaustion = analyticWall
+quarticFrontierClass completedResidualEqualsCombinedCluster = theoremOwned
+quarticFrontierClass outwardCenteredDiscrepancyNoGo = theoremOwned
 quarticFrontierClass jointSignedCompletedResidual = analyticWall
 quarticFrontierClass optionalSignedNMuSplitEstimate = optionalProducer
 quarticFrontierClass optionalHorizontalSplitEstimate = optionalProducer
@@ -136,6 +146,11 @@ record QuarticSignedPoleFrontierBoundary : Set where
     signedPsiCenteredJetSourceWritten : Bool
     signedPsiQuantitativeRadialDerivativeSignSourceWritten : Bool
     signedPsiFiniteWindowAbelSourceWritten : Bool
+    signedPsiCenteredFiniteAbelSourceWritten : Bool
+    signedPsiGlobalPointwiseNMuWeldSourceWrittenFailClosed : Bool
+    signedPsiGlobalCenteredAbelExhaustionPaid : Bool
+    completedResidualEqualsCombinedClusterPaid : Bool
+    outwardCenteredDiscrepancyNoGoPaid : Bool
     jointSignedCompletedResidualPaid : Bool
     splitNMuAndHorizontalRequiredByClayConsumer : Bool
     splitNMuAndHorizontalRetainedAsOptionalProducer : Bool
@@ -191,6 +206,16 @@ record QuarticSignedPoleFrontierBoundary : Set where
       signedPsiQuantitativeRadialDerivativeSignSourceWritten ≡ true
     signedPsiFiniteWindowAbelSourceWrittenIsTrue :
       signedPsiFiniteWindowAbelSourceWritten ≡ true
+    signedPsiCenteredFiniteAbelSourceWrittenIsTrue :
+      signedPsiCenteredFiniteAbelSourceWritten ≡ true
+    signedPsiGlobalPointwiseNMuWeldSourceWrittenFailClosedIsTrue :
+      signedPsiGlobalPointwiseNMuWeldSourceWrittenFailClosed ≡ true
+    signedPsiGlobalCenteredAbelExhaustionPaidIsFalse :
+      signedPsiGlobalCenteredAbelExhaustionPaid ≡ false
+    completedResidualEqualsCombinedClusterPaidIsTrue :
+      completedResidualEqualsCombinedClusterPaid ≡ true
+    outwardCenteredDiscrepancyNoGoPaidIsTrue :
+      outwardCenteredDiscrepancyNoGoPaid ≡ true
     jointSignedCompletedResidualPaidIsFalse :
       jointSignedCompletedResidualPaid ≡ false
     splitNMuAndHorizontalRequiredByClayConsumerIsFalse :
@@ -237,6 +262,11 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true
     true
     true
+    true
+    true
+    false
+    true
+    true
     false
     false
     true
@@ -248,12 +278,13 @@ canonicalQuarticSignedPoleFrontierBoundary =
     refl refl refl refl refl refl refl refl
     refl refl
     refl refl refl refl refl refl refl refl
+    refl refl refl refl refl refl
     refl refl refl
     refl
     "G1 has been reduced to scalar arithmetic. The Lean source now constructs a witness with S(W_t)>=7*pi^4/1600, proves endpoint taper L1<=83/30, compiles this through the exact projective profile, bounds the smooth pole coordinates, obtains an explicit combined-profile L1 bound and hence an explicit K0. It defines T_Q=4*(K0+1)/(7*pi^4/1600). The sole remaining G1 payment is the certified scalar comparison T_Q < the Platt-Trudgian cutoff; numerically the coarse constants give T_Q about 1.041e9 versus T_PT about 3.000e12, but that numerical comparison is not marked paid here."
-    "G3 representation is now source-written on the exact combined Psi_t object: endpoint derivative transport, signed derivative continuity/integrability, centered 0/1/2/3 jet vanishing, exact fourth derivative -4*S(W)/(t/16)^6<0, finite-window N-mu Abel, and the same-band radial derivative sign (x-t)*Psi_t'(x)<0. These are assembly coordinates, not a payment of the remaining joint completed-residual inequality."
+    "G3 representation is source-written through the exact finite t-centred Abel split. The global signed N-mu storage has a fail-closed pointwise-Psi weld with explicit full-line integrability hypotheses, and a typed centred-Abel exhaustion compiler isolates the remaining tail limits. Right-tail decay is expected from the existing positive-endpoint discrepancy machinery; the far-left tail still requires an explicit negative-height/reflection transport rather than being silently called standard. The exact completedSignedResidual=combinedCluster identity is paid, and outward-pointing centred discrepancy is recorded as a wrong-sign diagnostic."
     "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. In particular the old universal lower bound over every arbitrary QuarticFourSignedPolePair is stronger than needed and is retained only as a donor interface."
-    "Authoritative high cut: one scalar G1 threshold comparison plus the joint G3 completed-residual inequality. The representation layer between Psi_t and the literal finite-window N-mu Abel functional is now source-written. RH remains unproved because G3 is still open and the scalar T_Q<T_PT comparison has not yet been kernel-paid."
+    "Authoritative high cut: one scalar G1 threshold comparison plus the joint G3 completed-residual inequality. Finite and centred finite Abel representation is source-written; one global centred-exhaustion seam remains, specifically including the far-left reflection/negative-height tail. RH remains unproved because that assembly seam, G3 itself, and the scalar T_Q<T_PT certificate are not yet kernel-paid."
 
 quarticTerminalCompilerShape :
   {ell : Level} ->
