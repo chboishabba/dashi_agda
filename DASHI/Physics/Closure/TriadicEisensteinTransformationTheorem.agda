@@ -266,7 +266,7 @@ record EisensteinTraceAgreement
     sector : QS.Sector T
     weight : Nat
     level : Nat
-    coefficientAgreement : (n : Nat) → ⊤
+    coefficientAgreement : (n : Nat) → Set
 
 open EisensteinTraceAgreement public
 
@@ -283,7 +283,7 @@ record CoefficientEisensteinModel
     sector : QS.Sector T
     weight : Nat
     level : Nat
-    coefficientAgreement : (n : Nat) → ⊤
+    coefficientAgreement : (n : Nat) → Set
 
 open CoefficientEisensteinModel public
 
@@ -323,7 +323,7 @@ record AlignedEisensteinModel
     sector : QS.Sector T
     modularWeight : Nat
     modularLevel : Nat
-    coefficientAgreement : (n : Nat) → ⊤
+    coefficientAgreement : (n : Nat) → Set
 
 open AlignedEisensteinModel public
 
