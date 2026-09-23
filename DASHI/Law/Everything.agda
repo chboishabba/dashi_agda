@@ -271,3 +271,4 @@ import DASHI.Law.SensibLawTemporalComparativeWorldRegression
 import DASHI.Law.SensibLawChangeLocusExact
 import DASHI.Law.SensibLawGravityComparativeWorldExact
 import DASHI.Law.SensibLawComparativeCrossDomainBatteryExact
+import DASHI.Law.SensibLawTypedAnswerChangingExplanationExact
