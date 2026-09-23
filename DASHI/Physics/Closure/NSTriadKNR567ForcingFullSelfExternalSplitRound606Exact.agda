@@ -195,7 +195,7 @@ module FixedOutput
     Physical.PhysicalTriadIncidence →
     Physical.PhysicalTriadIncidence → ℚ
   selfForcingPair alpha beta =
-    C.Swap.pairResolvent alpha beta
+    C.T.Swap.pairResolvent alpha beta
       * R179.realHermitianCross
           (selfDoubleForcing alpha)
           (C.Row.doubleCell beta)
@@ -204,7 +204,7 @@ module FixedOutput
     Physical.PhysicalTriadIncidence →
     Physical.PhysicalTriadIncidence → ℚ
   externalForcingPair alpha beta =
-    C.Swap.pairResolvent alpha beta
+    C.T.Swap.pairResolvent alpha beta
       * R179.realHermitianCross
           (externalDoubleForcing alpha)
           (C.Row.doubleCell beta)
@@ -218,7 +218,7 @@ module FixedOutput
       (C.T.forcingPairScalarized alpha beta)
       (trans
         (cong
-          (C.Swap.pairResolvent alpha beta *_)
+          (C.T.Swap.pairResolvent alpha beta *_)
           (trans
             (cong
               (λ selected →
@@ -230,7 +230,7 @@ module FixedOutput
               (externalDoubleForcing alpha)
               (C.Row.doubleCell beta))))
         (solve
-          ( C.Swap.pairResolvent alpha beta
+          ( C.T.Swap.pairResolvent alpha beta
           ∷ R179.realHermitianCross
               (selfDoubleForcing alpha) (C.Row.doubleCell beta)
           ∷ R179.realHermitianCross
