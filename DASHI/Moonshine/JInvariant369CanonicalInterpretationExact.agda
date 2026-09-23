@@ -67,6 +67,7 @@ import DASHI.Moonshine.JInvariantSmithChartActionSeparationExact as SmithAction
 import DASHI.Moonshine.JInvariantSmithChartMobiusMatrixBridgeExact as SmithMatrix
 import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact as Cross
 import DASHI.Moonshine.JInvariant369NeutralCuspRelationCrossPollinationExact as NeutralCusp
+import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SSPF
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -732,3 +733,43 @@ cuspZeroDoesNotCollapseToRelationDiagonal :
     neutralCuspRelationBoundary
   ≡ false
 cuspZeroDoesNotCollapseToRelationDiagonal = refl
+
+
+------------------------------------------------------------------------
+-- SSP15 -> signed multiplicity -> FRACTRAN branch.
+------------------------------------------------------------------------
+
+ssp15SignedFRACTRANBranchBoundary :
+  SSPF.SSP15SignedFRACTRANBranchBoundary
+ssp15SignedFRACTRANBranchBoundary =
+  SSPF.canonicalSSP15SignedFRACTRANBranchBoundary
+
+ssp15ChosenCarrierBijectionIsPaid :
+  SSPF.chosenFifteenToFifteenCarrierBijectionPaid
+    ssp15SignedFRACTRANBranchBoundary
+  ≡ true
+ssp15ChosenCarrierBijectionIsPaid = refl
+
+ssp15ChosenCarrierBijectionIsNotSemanticIdentity :
+  SSPF.chosenBijectionIsCanonicalSemanticIdentity
+    ssp15SignedFRACTRANBranchBoundary
+  ≡ false
+ssp15ChosenCarrierBijectionIsNotSemanticIdentity = refl
+
+ssp15PointedNeutralSupportIsRetained :
+  SSPF.pointedNeutralLaneRetained
+    ssp15SignedFRACTRANBranchBoundary
+  ≡ true
+ssp15PointedNeutralSupportIsRetained = refl
+
+ssp15ValuationAloneDoesNotRecoverNeutralLane :
+  SSPF.valuationAloneRecoversNeutralLane
+    ssp15SignedFRACTRANBranchBoundary
+  ≡ false
+ssp15ValuationAloneDoesNotRecoverNeutralLane = refl
+
+ssp15FRACTRANExecutionHandoffIsPaid :
+  SSPF.seedToExecutionEffectPaid
+    ssp15SignedFRACTRANBranchBoundary
+  ≡ true
+ssp15FRACTRANExecutionHandoffIsPaid = refl
