@@ -39,6 +39,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as A3
+import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
+import DASHI.Physics.Closure.NSTriadKNR406ExactEndpointNormalFormExact as EndpointNF
 import DASHI.Physics.Closure.NSTriadKNLiveIntegratedDiagonalReducedNormalFormRound557Exact as R557
 import DASHI.Physics.Closure.NSTriadKNGlobalSelfFluxEndpointRound558Exact as R558
 import DASHI.Physics.Closure.NSTriadKNSelfFluxTemporalReconciliationRound565Exact as R565
@@ -53,6 +55,19 @@ import DASHI.Physics.Closure.NSTriadKNLiveGlobalSelfFluxTangentWeldRound570Exact
 weightedIntegratedR406NormalFormClosed : Bool
 weightedIntegratedR406NormalFormClosed =
   R557.round557LiveIntegratedNormalFormClosed
+
+
+exactWeightedR406EndpointNormalFormClosedGivenFTC : Bool
+exactWeightedR406EndpointNormalFormClosedGivenFTC =
+  EndpointNF.r406ExactEndpointNormalFormClosedGivenScalarFTC
+
+divisionFreeD1bA3NormalizationClosed : Bool
+divisionFreeD1bA3NormalizationClosed =
+  A3D1b.divisionFreeD1bA3NormalizationClosed
+
+divisionFreeD1bA3MeanRateSelfWorkTermPresent : Bool
+divisionFreeD1bA3MeanRateSelfWorkTermPresent =
+  A3D1b.meanRateSelfWorkTermPresent
 
 weightedSelfFluxNSDerivativeClosed : Bool
 weightedSelfFluxNSDerivativeClosed =
@@ -114,6 +129,22 @@ weightedIntegratedR406NormalFormClosedIsTrue :
   weightedIntegratedR406NormalFormClosed ≡ true
 weightedIntegratedR406NormalFormClosedIsTrue =
   R557.round557LiveIntegratedNormalFormClosedIsTrue
+
+
+exactWeightedR406EndpointNormalFormClosedGivenFTCIsTrue :
+  exactWeightedR406EndpointNormalFormClosedGivenFTC ≡ true
+exactWeightedR406EndpointNormalFormClosedGivenFTCIsTrue =
+  EndpointNF.r406ExactEndpointNormalFormClosedGivenScalarFTCIsTrue
+
+divisionFreeD1bA3NormalizationClosedIsTrue :
+  divisionFreeD1bA3NormalizationClosed ≡ true
+divisionFreeD1bA3NormalizationClosedIsTrue =
+  A3D1b.divisionFreeD1bA3NormalizationClosedIsTrue
+
+divisionFreeD1bA3MeanRateSelfWorkTermPresentIsTrue :
+  divisionFreeD1bA3MeanRateSelfWorkTermPresent ≡ true
+divisionFreeD1bA3MeanRateSelfWorkTermPresentIsTrue =
+  A3D1b.meanRateSelfWorkTermPresentIsTrue
 
 weightedSelfFluxNSDerivativeClosedIsTrue :
   weightedSelfFluxNSDerivativeClosed ≡ true
