@@ -41,6 +41,7 @@ module DASHI.Moonshine.JInvariant369CanonicalInterpretationExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact as Phase
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as LevelTower
