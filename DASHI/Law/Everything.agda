@@ -255,3 +255,5 @@ import DASHI.Law.SensibLawWave5ShareScopeReceiptExact
 import DASHI.Law.SensibLawWave5ShareScopeReceiptRegression
 import DASHI.Law.SensibLawUnifiedWorkbenchProjectionExact
 import DASHI.Law.SensibLawUnifiedWorkbenchProjectionRegression
+import DASHI.Law.SensibLawUnifiedWorkbenchDioxusWgpuBridgeExact
+import DASHI.Law.SensibLawUnifiedWorkbenchDioxusWgpuBridgeRegression
