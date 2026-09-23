@@ -32,3 +32,9 @@ import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact
 import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact
 import DASHI.Moonshine.JInvariant369CanonicalInterpretationExact
+
+import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact
+
+import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact
+
+import DASHI.Moonshine.JInvariant369JointFibredObserverExact
