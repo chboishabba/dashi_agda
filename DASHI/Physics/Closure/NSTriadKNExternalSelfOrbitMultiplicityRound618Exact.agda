@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiberPermutationRound35Exact
 import DASHI.Physics.Closure.NSTriadKNSummedProjectedNonlinearityRealityRound35Exact as Sum
 import DASHI.Physics.Closure.NSTriadKNPhysicalSelectedTriadNetworkSplitRound95Exact as Split
 import DASHI.Physics.Closure.NSTriadKNExternalOutputFibreSelfOrbitRemovalRound111Exact as R111
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 
 ------------------------------------------------------------------------
 -- Fixed-orbit residual carrier.
@@ -191,7 +192,7 @@ orbitResolvedExternalVector :
   C3.Complex3 F
 orbitResolvedExternalVector system tau tauMember (nonfixed different) =
   R111.externalResidualVector system tau tauMember
-    (DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.swapOutputFibreMember tauMember)
+    (R224.swapOutputFibreMember tauMember)
     different
 orbitResolvedExternalVector system tau tauMember (fixed equality) =
   C3.complex3Subtract
@@ -211,7 +212,7 @@ externalForcingKIsOrbitResolved :
 externalForcingKIsOrbitResolved system tau tauMember (nonfixed different) =
   R111.externalForcingKIsSelfOrbitRemovedOutputFibre
     system tau tauMember
-    (DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact.swapOutputFibreMember tauMember)
+    (R224.swapOutputFibreMember tauMember)
     different
 externalForcingKIsOrbitResolved system tau tauMember (fixed equality) =
   externalForcingKAtSwapFixed system tau tauMember equality
