@@ -53,6 +53,8 @@ data ConeDebtCoordinate : Set where
   perConeLiteralSourceEnvelope : ConeDebtCoordinate
   coneMultiplicityBelowFixedWindowCount : ConeDebtCoordinate
   coneDebtLogOverR6Bound : ConeDebtCoordinate
+  stripBoundSuppliesUniformQuarticFloor : ConeDebtCoordinate
+  coneOnlyTargetCoefficientPayment : ConeDebtCoordinate
 
   coneDebtGloballyPayable : ConeDebtCoordinate
   farExactContributionControlled : ConeDebtCoordinate
@@ -81,6 +83,8 @@ coneDebtStatus fixedConeWindowZeroCountLogBound = theoremOwned
 coneDebtStatus perConeLiteralSourceEnvelope = theoremOwned
 coneDebtStatus coneMultiplicityBelowFixedWindowCount = theoremOwned
 coneDebtStatus coneDebtLogOverR6Bound = theoremOwned
+coneDebtStatus stripBoundSuppliesUniformQuarticFloor = openAnalyticObstruction
+coneDebtStatus coneOnlyTargetCoefficientPayment = openAnalyticObstruction
 
 coneDebtStatus coneDebtGloballyPayable = openAnalyticObstruction
 coneDebtStatus farExactContributionControlled = openAnalyticObstruction
@@ -107,6 +111,8 @@ record QuarticSignedPoleConeDebtBoundary : Set where
     perConeLiteralSourceEnvelopePaid : Bool
     coneMultiplicityBelowFixedWindowCountPaid : Bool
     coneDebtLogOverR6BoundPaid : Bool
+    stripBoundSuppliesUniformQuarticFloor : Bool
+    coneOnlyTargetCoefficientPaymentPaid : Bool
 
     coneDebtGloballyPayablePaid : Bool
     farExactContributionControlledPaid : Bool
@@ -147,6 +153,10 @@ record QuarticSignedPoleConeDebtBoundary : Set where
       coneMultiplicityBelowFixedWindowCountPaid ≡ true
     coneDebtLogOverR6BoundPaidIsTrue :
       coneDebtLogOverR6BoundPaid ≡ true
+    stripBoundSuppliesUniformQuarticFloorIsFalse :
+      stripBoundSuppliesUniformQuarticFloor ≡ false
+    coneOnlyTargetCoefficientPaymentPaidIsFalse :
+      coneOnlyTargetCoefficientPaymentPaid ≡ false
 
     coneDebtGloballyPayablePaidIsFalse :
       coneDebtGloballyPayablePaid ≡ false
@@ -165,13 +175,15 @@ canonicalQuarticSignedPoleConeDebtBoundary =
     true true true true true
     true true true false true true true true true
     true true true
+    false false
     false false false
     refl refl refl refl refl
     refl refl refl refl refl refl refl refl refl
     refl refl refl
+    refl refl
     refl refl refl
-    "The literal off-ordinate G3 source is partitioned on finite symmetric zero windows into local cone, local good and far exact lanes.  The Taylor carrier is never globally summed.  ConeDebt is the positive part of the exact literal source on the potentially unfavorable cone, GoodQuarticGain is nonnegative, LocalRemainderDebt is finite-window absolute remainder debt, and FarExact retains the original decaying pair kernel.  The finite source obeys OffOrdExact <= ConeDebt - GoodQuarticGain + LocalRemainderDebt + FarExact.  The new fail-fast compiler also proves the absolute cone contribution has the correct O(log t / t^6) scale."
-    "The canonical local radius eta0=1/(pi+1) is theorem-owned.  On this radius the horizontal quadratic jet error has the explicit bound |R_Q(q)| <= (5/96)|q|^4*M6.  Because M0=M2=0, the exact base cosine channel itself also satisfies |C_P(q)| <= (5/96)|q|^4*M4abs, so a sixth-order base remainder is not required merely to control the local debt.  The mixed cone is contained in the fixed window |gamma-t|<=3/2, and the enclosing three-unit zero multiplicity has an unconditional O(log t) bound from the existing local RvM theorem.  The hyperbolic alpha^4 remainder is source-written with the same certified 5/96 fourth-order constant, and the three local pieces compile to one explicit same-object bound for jointQuarticJetRemainder.  For t>=200 every mixed-cone zero is automatically inside the canonical local radius in both normalized coordinates.  The Lean companion now further derives an explicit witness constant C_cone(W) with max(literal pair source,0) <= m_sigma*C_cone(W)/(t/16)^6 on every cone zero, proves the finite cone multiplicity is bounded by N(t-3/2,t+3/2), and compiles the local RvM theorem to ConeDebt_n <= 3*A0*C_cone(W)*log(t+5)/(t/16)^6.  This pays the absolute cone scaling estimate, but not its comparison with the off-line target as heightOf rho tends to zero."
+    "The literal off-ordinate G3 source is partitioned on finite symmetric zero windows into local cone, local good and far exact lanes.  The Taylor carrier is never globally summed.  ConeDebt is the positive part of the exact literal source on the potentially unfavorable cone, GoodQuarticGain is nonnegative, LocalRemainderDebt is finite-window absolute remainder debt, and FarExact retains the original decaying pair kernel.  The finite source obeys OffOrdExact <= ConeDebt - GoodQuarticGain + LocalRemainderDebt + FarExact.  The fail-fast compiler proves the absolute cone contribution has the correct O(log t / t^6) scale.  It also records that the strip condition 0<|a|<=1/2 by itself supplies no uniform positive quartic floor in a^4; this is a scaling diagnostic, not a claim that zeta zeros realize arbitrary horizontal offsets."
+    "The canonical local radius eta0=1/(pi+1) is theorem-owned.  On this radius the horizontal quadratic jet error has the explicit bound |R_Q(q)| <= (5/96)|q|^4*M6.  Because M0=M2=0, the exact base cosine channel itself also satisfies |C_P(q)| <= (5/96)|q|^4*M4abs, so a sixth-order base remainder is not required merely to control the local debt.  The mixed cone is contained in the fixed window |gamma-t|<=3/2, and the enclosing three-unit zero multiplicity has an unconditional O(log t) bound from the existing local RvM theorem.  The hyperbolic alpha^4 remainder is source-written with the same certified 5/96 fourth-order constant, and the three local pieces compile to one explicit same-object bound for jointQuarticJetRemainder.  For t>=200 every mixed-cone zero is automatically inside the canonical local radius in both normalized coordinates.  The Lean companion further derives an explicit witness constant C_cone(W) with max(literal pair source,0) <= m_sigma*C_cone(W)/(t/16)^6 on every cone zero, proves the finite cone multiplicity is bounded by N(t-3/2,t+3/2), and compiles the local RvM theorem to ConeDebt_n <= 3*A0*C_cone(W)*log(t+5)/(t/16)^6.  A parametric target-payment compiler shows that any future target lower bound c*S(W)*a^4/(t/16)^6 would reduce absolute cone payment to the scalar comparison 3*A0*C_cone(W)*log(t+5) < c*S(W)*a^4.  Since the strip bound alone gives no positive floor for a^4, stop treating absolute cone payment as an independent route: investigate signed GoodGain/FarExact compensation or a modified witness."
 
 finiteConeDebtBudgetIsPaid :
   coneDebtStatus finiteConeDebtBudget ≡ theoremOwned
