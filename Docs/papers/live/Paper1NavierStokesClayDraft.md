@@ -4,6 +4,7 @@ Author: Johl Brown
 Original Paper-1 draft date: `2026-06-09`  
 Modern proof-spine migration: `2026-09-13`  
 A/B/C/D nomenclature correction: `2026-09-15 09:32 AEST (UTC+10)`  
+Clay max-cut reconciliation: `2026-09-23 AEST (UTC+10)`  
 Status: live analytic manuscript draft; conditional; non-promoting
 
 ## Abstract
@@ -19,20 +20,33 @@ Lane C = forced whole-space breakdown
 Lane D = forced periodic breakdown
 ```
 
-The active manuscript construction is **Lane B**. It runs through the literal
-periodic Galerkin carrier, the exact R571 signed helical
-multiplier-difference channels, the older centered/Taylor and second-moment
-machinery, six-three scale arithmetic, the direct companion of the literal
-`R406` remainder, and the cutoff-uniform spacetime interface
-`CommutatorOnlySpacetimeBudget568`.
+The active manuscript construction is **Lane B**. The current canonical
+Clay-facing cut is no longer a list of intermediate producer lemmas.  It is the
+seven-coordinate max-cut recorded by
+`NSTriadKNPeriodicClayEligibilityMaxCutRound642Exact`:
 
-The downstream compiler is already source-written: a paid R568 budget, together
-with the explicitly separated standard temporal/order receipts, is consumed by
-R572 to build the pre-existing R503 direct-off-diagonal/R415 budget surface.
-The direct companion `C_direct` is therefore constructed; what is not yet
-constructed is its required cutoff-uniform analytic payment. The present paper
-is consequently a conditional reduction manuscript, not an unconditional
-Clay/global-regularity claim.
+1. the cutoff-uniform signed R568 payment;
+2. the physical phase-sensitive critical-production estimate;
+3. the literal physical critical-slice realization;
+4. the common-initial-datum realization and cutoff-uniform initial ceiling;
+5. strictly positive retained viscosity;
+6. ordinary scalar FTC/integration/order receipts; and
+7. the periodic Sobolev--Rellich--Simon--weak-* completion package.
+
+Only the first two are classified as genuinely new nonlinear estimates.  The
+R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, radial/
+Pluecker, and self/external channel decompositions remain theorem-bearing proof
+strategies and provenance, but they are not independent Clay obligations.
+
+The downstream weighted compiler is already source-written: a paid R568 budget,
+together with the standard temporal/order receipts, is consumed by R572 to
+build the pre-existing R503 direct-off-diagonal/R415 budget surface.  R639 now
+installs the literal finite critical observables on the R414 slice with viscous
+coefficient `2*nu` and derives the critical-energy inequality from the exact
+energy identity, while R640 binds its initial coordinate to the common R240
+initial datum modulo one mode-list coherence receipt and the actual uniform
+initial ceiling.  The present paper is consequently a conditional reduction
+manuscript, not an unconditional Clay/global-regularity claim.
 
 Lane A remains an independent unforced whole-space obligation. Periodic B proof
 progress does not imply whole-space A proof progress, and A does not imply B,
@@ -79,24 +93,37 @@ uniformly in the cutoff `N`.
 > R415/critical-barrier consumer chain. The theorem does not assert that the
 > R568 producer itself is proved.
 
-The causal status is:
+The current Clay-eligible max-cut is:
 
 ```text
-Lane B R571 signed carrier                     constructed
-Lane B literal centered/Taylor realization     open
-Lane B old second-moment/six-three transplant open on modern carrier
-C_direct                                       constructed
-R568 / CommutatorOnlySpacetimeBudget568        live analytic producer, open
-R572                                           compiler, constructed given receipts
-R503                                           downstream compiler/consumer constructed
-R503 direct off-diagonal payment               open until producer inhabits it
-Lane B periodic/global regularity               not promoted
-Lane A whole-space regularity                   independent / not promoted
-C/D forced-breakdown source integration         verification/provenance only
+NEW / NONSTANDARD
+C1  R568 cutoff-uniform signed weighted payment                     OPEN
+C2  physical phase-sensitive critical-production estimate           OPEN
+
+SAME-OBJECT / PHYSICAL
+C3  literal critical coordinates installed on R414                  COMPILER CLOSED
+    exact critical-energy identity                                  CLOSED GIVEN STANDARD CALCULUS
+C4  common-initial-datum same-object compiler                       CLOSED
+    mode-list -> modeListed coherence                               OPEN RECEIPT
+    cutoff-uniform initial critical ceiling                         OPEN
+C5  positive retained viscosity 0 < 2*nu-a                          OPEN
+    optional a<=nu sufficient compiler                              CLOSED / NOT MANDATORY
+
+STANDARD COMPLETION
+C6  scalar FTC + rational integration linearity/order receipts       OPEN
+C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    OPEN
 ```
 
+The genuinely new nonlinear theorem count is therefore two: C1 and C2.
+Historical PDF-style B1--B4 producer lemmas and the old B7 direct
+`R406 = covariance` equality are **not** part of this terminal cut.  The latter
+is in fact the wrong same-object statement for the live nonseparable
+Cauchy/resolvent R406 carrier.
+
 This distinction is load-bearing. `C_direct` is not the missing object. R572 is
-not a new PDE estimate. R503 is not evidence that R568 has been paid.
+not a new PDE estimate. R503 is not evidence that R568 has been paid, and an
+optional producer decomposition does not become a separate Clay obligation
+merely because it is mathematically interesting.
 
 ## 2. Literal periodic finite-dimensional carrier
 
@@ -129,10 +156,11 @@ These periodic facts are B-specific until an explicit whole-space transfer or
 separate R3 realization is constructed. They are not silently credited to Lane
 A.
 
-## 3. Active Lane-B signed commutator / centered-Taylor route
+## 3. Optional Lane-B signed commutator / centered-Taylor producer route
 
-The cancellation-first route preserves sign and phase before positive
-majorization. R571 expands the raw inner physical interaction into four exact
+This is a theorem-bearing strategy for proving C1/C2, not an independent
+Clay-max-cut requirement.  The cancellation-first route preserves sign and
+phase before positive majorization. R571 expands the raw inner physical interaction into four exact
 helicity channels
 
 ```math
