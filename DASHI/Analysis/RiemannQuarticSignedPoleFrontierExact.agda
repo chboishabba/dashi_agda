@@ -114,7 +114,7 @@ quarticFrontierClass signedPsiLeftBoundaryTendstoZero = assemblyOwned
 quarticFrontierClass signedPsiRightBoundaryTendstoZero = assemblyOwned
 quarticFrontierClass signedPsiCorrelationIntegralExhaustion = analyticWall
 quarticFrontierClass signedPsiFiniteResidualToGlobalNMu = analyticWall
-quarticFrontierClass signedPsiFullLineMuIntegrability = analyticWall
+quarticFrontierClass signedPsiFullLineMuIntegrability = assemblyOwned
 quarticFrontierClass completedResidualEqualsCombinedCluster = theoremOwned
 quarticFrontierClass outwardCenteredDiscrepancyNoGo = theoremOwned
 quarticFrontierClass jointSignedCompletedResidual = analyticWall
@@ -245,8 +245,8 @@ record QuarticSignedPoleFrontierBoundary : Set where
       signedPsiCorrelationIntegralExhaustionPaid ≡ false
     signedPsiFiniteResidualToGlobalNMuPaidIsFalse :
       signedPsiFiniteResidualToGlobalNMuPaid ≡ false
-    signedPsiFullLineMuIntegrabilityPaidIsFalse :
-      signedPsiFullLineMuIntegrabilityPaid ≡ false
+    signedPsiFullLineMuIntegrabilityPaidIsTrue :
+      signedPsiFullLineMuIntegrabilityPaid ≡ true
     completedResidualEqualsCombinedClusterPaidIsTrue :
       completedResidualEqualsCombinedClusterPaid ≡ true
     outwardCenteredDiscrepancyNoGoPaidIsTrue :
@@ -306,7 +306,7 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true
     false
     false
-    false
+    true
     true
     true
     false
@@ -325,9 +325,9 @@ canonicalQuarticSignedPoleFrontierBoundary =
     refl refl refl
     refl
     "G1 has been reduced to scalar arithmetic. The Lean source now constructs a witness with S(W_t)>=7*pi^4/1600, proves endpoint taper L1<=83/30, compiles this through the exact projective profile, bounds the smooth pole coordinates, obtains an explicit combined-profile L1 bound and hence an explicit K0. It defines T_Q=4*(K0+1)/(7*pi^4/1600). The sole remaining G1 payment is the certified scalar comparison T_Q < the Platt-Trudgian cutoff; numerically the coarse constants give T_Q about 1.041e9 versus T_PT about 3.000e12, but that numerical comparison is not marked paid here."
-    "G3 representation is source-written through exact finite t-centred Abel. Negative-height transport is now endpoint-correct: conjugation maps (A,B] to [-B,-A), so the adapter carries explicit ordinate-multiplicity endpoint corrections; mu reflection uses proved evenness. Both left and right centred boundary terms now have source-written O(1/n) exhaustion to zero. The global exhaustion compiler remains only a compiler interface: correlation-integral convergence, finite-centred-residual to global signedNMuPair, and full-line endpoint mu-integrability are still unpaid. The exact completedSignedResidual=combinedCluster identity is paid, and outward-pointing centred discrepancy remains a wrong-sign diagnostic."
+    "G3 representation is source-written through exact finite t-centred Abel. Negative-height transport is now endpoint-correct: conjugation maps (A,B] to [-B,-A), so the adapter carries explicit ordinate-multiplicity endpoint corrections; mu reflection uses proved evenness. Both left and right centred boundary terms now have source-written O(1/n) exhaustion to zero. The global exhaustion compiler remains only a compiler interface: correlation-integral convergence and finite-centred-residual to global signedNMuPair are still unpaid. Full-line endpoint mu-integrability is now source-written from Zeta23.EF.integrable_paperFT_mul_mu through the exact projective normalization. The exact completedSignedResidual=combinedCluster identity is paid, and outward-pointing centred discrepancy remains a wrong-sign diagnostic."
     "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. In particular the old universal lower bound over every arbitrary QuarticFourSignedPolePair is stronger than needed and is retained only as a donor interface."
-    "Authoritative high cut: one scalar G1 threshold comparison plus the joint G3 completed-residual inequality. Negative-height reflection and both boundary Tendsto fields are source-written. The residual global representation debt is now correlation-integral exhaustion, finite residual -> global signedNMuPair, and full-line mu-integrability. RH remains unproved because these assembly seams, G3 itself, and the scalar T_Q<T_PT certificate are not yet kernel-paid."
+    "Authoritative high cut: one scalar G1 threshold comparison plus the joint G3 completed-residual inequality. Negative-height reflection and both boundary Tendsto fields are source-written. The residual global representation debt is now correlation-integral exhaustion and finite residual -> global signedNMuPair. Full-line mu-integrability has been source-written from the imported Zeta23 bridge. RH remains unproved because these assembly seams, G3 itself, and the scalar T_Q<T_PT certificate are not yet kernel-paid."
 
 quarticTerminalCompilerShape :
   {ell : Level} ->
