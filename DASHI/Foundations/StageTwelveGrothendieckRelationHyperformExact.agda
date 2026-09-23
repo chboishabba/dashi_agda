@@ -464,6 +464,32 @@ StageBundleSheaf :
 StageBundleSheaf LocalSection GlobalSection =
   Bundle.BundleSheaf StageAxis12 LocalSection GlobalSection
 
+RelationCellBundleSheaf :
+  Set₁
+RelationCellBundleSheaf =
+  Bundle.BundleSheaf
+    StageRelation144
+    Base.TriTruth
+    StageRelationField
+
+relationCellBundleSheaf :
+  RelationCellBundleSheaf
+relationCellBundleSheaf = record
+  { restrict = λ field cell → field cell
+  ; compatible = λ locals → ⊤
+  ; glue = λ locals witness → locals
+  ; glueRestricts = λ locals witness cell → refl
+  }
+
+relationCellGlueRestricts :
+  (locals : StageRelation144 → Base.TriTruth) →
+  (cell : StageRelation144) →
+  Bundle.BundleSheaf.restrict relationCellBundleSheaf
+    (Bundle.BundleSheaf.glue relationCellBundleSheaf locals tt)
+    cell
+  ≡ locals cell
+relationCellGlueRestricts locals cell = refl
+
 record StageTwelveSiteSheafReceipt : Set₁ where
   field
     topology :
@@ -487,6 +513,7 @@ record StageTwelveSiteSheafReceipt : Set₁ where
     diagonalFactorsThroughOffDiagonalConsumer : Bool
     diagonalWrongTypeReceiptPaid : Bool
     bundleSheafInterfaceReused : Bool
+    relationCellBundleSheafConstructed : Bool
     grothendieckAxiomsConstructed : Bool
     analyticModularSiteIdentified : Bool
     modularWeightTwelveIdentifiedWithAxisTwelve : Bool
@@ -511,6 +538,7 @@ canonicalStageTwelveSiteSheafReceipt = record
   ; diagonalFactorsThroughOffDiagonalConsumer = false
   ; diagonalWrongTypeReceiptPaid = true
   ; bundleSheafInterfaceReused = true
+  ; relationCellBundleSheafConstructed = true
   ; grothendieckAxiomsConstructed = true
   ; analyticModularSiteIdentified = false
   ; modularWeightTwelveIdentifiedWithAxisTwelve = false
