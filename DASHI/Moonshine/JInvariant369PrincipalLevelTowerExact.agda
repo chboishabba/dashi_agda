@@ -27,6 +27,7 @@ module DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl; trans; cong)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer using (ℤ; 0ℤ; 1ℤ; +_; _+_; _*_)
 open import Data.Integer.Solver using (module +-*-Solver)
 open +-*-Solver
@@ -228,8 +229,8 @@ gamma27ToGamma3 :
   ∀ {g} →
   InPrincipalLevel level27Z g →
   InPrincipalLevel level3Z g
-gamma27ToGamma3 =
-  gamma9ToGamma3 ∘ gamma27ToGamma9
+gamma27ToGamma3 h =
+  gamma9ToGamma3 (gamma27ToGamma9 h)
 
 ------------------------------------------------------------------------
 -- 3. The group-level inclusions agree with the cusp covering direction.
