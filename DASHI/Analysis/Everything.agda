@@ -41,3 +41,4 @@ import DASHI.Analysis.RiemannG2FinalCutIntrospectionExact
 import DASHI.Analysis.RiemannQuarticSignedPoleCompilerExact
 import DASHI.Analysis.RiemannQuarticSignedPoleFrontierExact
 import DASHI.Analysis.RiemannQuarticSignedPoleLowModeQuotientExact
+import DASHI.Analysis.RiemannQuarticSignedPoleJointHorizontalJetExact
