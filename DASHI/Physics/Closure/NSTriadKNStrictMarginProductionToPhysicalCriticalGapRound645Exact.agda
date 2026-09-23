@@ -33,7 +33,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using ([]; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _-_; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; _<_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -85,6 +85,8 @@ module StrictMargin
     Time initialTime integrateTo DerivativeOf
   module Modes = ModeCarrier.LiteralModeCarrier
     Time initialTime integrateTo DerivativeOf
+  module Obs = Fold.LiteralCriticalObservables
+    Time initialTime integrateTo DerivativeOf
   module Physical = R639.PhysicalSlice
     Time initialTime integrateTo DerivativeOf ScalarDerivativeOf
     hermitianCalculus constantScaleCalculus scalarDerivativeAlgebra
@@ -105,12 +107,12 @@ module StrictMargin
       retainedMarginPositive : 0ℚ < retainedMargin
 
       strictMarginProductionEstimate :
-        Physical.Obs.integratedCriticalProduction
+        Obs.integratedCriticalProduction
             (Live.literalPhysicalTrajectory D) cutoff terminal
         ≤
           ( (Fold.two * Live.physicalViscosity (Live.support D))
               - retainedMargin)
-            * Physical.Obs.integratedCriticalDissipation
+            * Obs.integratedCriticalDissipation
                 (Live.literalPhysicalTrajectory D) cutoff terminal
           + Unified.literalRemainderIntegral
               (Live.literalPhysicalTrajectory D) R cutoff terminal
