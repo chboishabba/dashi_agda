@@ -31,6 +31,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
+open import Data.Fin using (Fin)
 open import Data.Product using (_×_; _,_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
@@ -390,10 +391,10 @@ record NeutralCuspRelationBoundary : Set where
     duplicatedIdentityOrientationQuotientOwned : Bool
     quotientTenToNineOwned : Bool
 
-    distinguishedNeutralDeletionLeavesFourteen : Bool
-    outerThreeTimesFourteenIsFortyTwo : Bool
-    balancedRankCarryAlsoLandsOnFourteen : Bool
-    atlasExponentDepthAlsoLandsOnFourteen : Bool
+    distinguishedNeutralDeletionLeavesFourteenPaid : Bool
+    outerThreeTimesFourteenIsFortyTwoPaid : Bool
+    balancedRankCarryAlsoLandsOnFourteenPaid : Bool
+    atlasExponentDepthAlsoLandsOnFourteenPaid : Bool
     equalFourteenCreatesSemanticIdentity : Bool
 
     eta24Exponent24Owned : Bool
@@ -402,9 +403,9 @@ record NeutralCuspRelationBoundary : Set where
     eta24FirstQCoefficientOneOwnedInLean : Bool
     eta24NormalizedDeltaSameObjectOwnedInLean : Bool
 
-    twelvePlusTwelveIsTwentyFour : Bool
-    twelveTimesTwelveIs144 : Bool
-    twelveCubedIs1728 : Bool
+    twelvePlusTwelveIsTwentyFourPaid : Bool
+    twelveTimesTwelveIs144Paid : Bool
+    twelveCubedIs1728Paid : Bool
     equalTwelveCreatesSemanticIdentity : Bool
 
     finiteZeroEqualsCuspZero : Bool
