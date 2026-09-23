@@ -55,3 +55,5 @@ import DASHI.Moonshine.JInvariant369NormalizedRendererCanonicalReflectionExact
 import DASHI.Moonshine.JInvariant369CanonicalJointReflectionMinimalExact
 
 import DASHI.Moonshine.JInvariant369NeutralCuspRelationCrossPollinationExact
+
+import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact
