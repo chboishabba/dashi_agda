@@ -223,3 +223,7 @@ import DASHI.Physics.YangMills.YMOperatorDomainContinuumFrontier2026Exact
 -- Source-correct Wilson connected-shell producer.
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact
 import DASHI.Physics.YangMills.BalabanClayCanonicalBSourceCorrectRound492Exact
+
+-- Source-correct B max-cut scheduler and focused validation.
+import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Validation
