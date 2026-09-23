@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationEx
 import DASHI.Physics.Closure.NSTriadKNR567CauchyGramFluxNormalFormRound596Exact as R596
 import DASHI.Physics.Closure.NSTriadKNFullGramCoherentFoldRound597Exact as R597
 import DASHI.Physics.Closure.NSTriadKNCyclicResolvedTransferRateDefectRound598Exact as R598
+import DASHI.Physics.Closure.NSTriadKNCyclicRouteExternalNetworkDefectRound599Exact as R599
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExact as GramTangent
 import DASHI.Physics.Closure.NSTriadKNCauchyR397R406ReconciliationExact as Reconcile
 import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact as R598
@@ -92,6 +93,15 @@ cyclicResolvedTransferRateDefectCompilerClosed =
 cyclicRateDefectNumeratorsExposedInPhysicalModes : Bool
 cyclicRateDefectNumeratorsExposedInPhysicalModes =
   R598.round598RateDefectNumeratorsExposedInPhysicalModes
+
+
+cyclicExternalNetworkDefectExposed : Bool
+cyclicExternalNetworkDefectExposed =
+  R599.round599FullThreeLegEnergyEqualsExternalNetworkClosed
+
+bareFullProjectedForcingCyclicConservationAvailable : Bool
+bareFullProjectedForcingCyclicConservationAvailable =
+  R599.round599BareFullProjectedForcingCyclicConservationAvailable
 
 cauchyResolvedR406DiagonalReducedNormalFormClosed : Bool
 cauchyResolvedR406DiagonalReducedNormalFormClosed =
@@ -201,6 +211,17 @@ cyclicResolvedTransferRateDefectCompilerClosedIsTrue =
 cyclicRateDefectNumeratorsExposedInPhysicalModesIsTrue :
   cyclicRateDefectNumeratorsExposedInPhysicalModes ≡ true
 cyclicRateDefectNumeratorsExposedInPhysicalModesIsTrue = refl
+
+
+cyclicExternalNetworkDefectExposedIsTrue :
+  cyclicExternalNetworkDefectExposed ≡ true
+cyclicExternalNetworkDefectExposedIsTrue =
+  R599.round599FullThreeLegEnergyEqualsExternalNetworkClosedIsTrue
+
+bareFullProjectedForcingCyclicConservationAvailableIsFalse :
+  bareFullProjectedForcingCyclicConservationAvailable ≡ false
+bareFullProjectedForcingCyclicConservationAvailableIsFalse =
+  R599.round599BareFullProjectedForcingCyclicConservationAvailableIsFalse
 
 cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue :
   cauchyResolvedR406DiagonalReducedNormalFormClosed ≡ true
