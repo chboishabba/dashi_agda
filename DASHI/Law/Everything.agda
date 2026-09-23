@@ -284,3 +284,4 @@ import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact
 import DASHI.Law.SensibLawDashiTradeComparativeAdapterRegression
 import DASHI.Law.SensibLawDashiTradeTypedExplanationExact
 import DASHI.Law.SensibLawDashiTradeTypedExplanationRegression
+import DASHI.Law.SensibLawComparativeCrossDomainBatteryRegression
