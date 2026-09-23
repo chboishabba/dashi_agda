@@ -31,6 +31,8 @@ import DASHI.Foundations.Base369CoarseFineFabricAdapterExact as Fabric
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369Ternary27StratumStabiliserFibreAdmissibilityExact as Admissible
 import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact as Stage12Site
+import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel12
+import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank013
 import DASHI.Moonshine.JInvariantRiemannObserverResidualSufficiencyBidiExact as J
 import DASHI.Moonshine.JInvariantFibonacciJCoarseFineVoxelBidiExact as Voxel
 import DASHI.Moonshine.JInvariantJCoarseFineElevenTritChartShiftExact as Shift
@@ -493,14 +495,14 @@ stageTwelveRelationCellsAre144 =
   Stage12Site.stageRelationCellCountIs144
 
 stageTwelveRank12CountCrosswalk :
-  Stage12Site.Rel.completeCycleStateCount
-  ≡ Stage12Site.Rank.fixedTernaryProfileCount Stage12Site.Rank.rank12
+  Rel12.completeCycleStateCount
+  ≡ Rank013.fixedTernaryProfileCount Rank013.rank12
 stageTwelveRank12CountCrosswalk =
   Stage12Site.completeCycleMatchesRank12ProfileCount
 
 stageTwelveRank13CountCrosswalk :
-  Stage12Site.Rel.centralCompletionGroupOrderPattern
-  ≡ Stage12Site.Rank.fixedTernaryProfileCount Stage12Site.Rank.rank13
+  Rel12.centralCompletionGroupOrderPattern
+  ≡ Rank013.fixedTernaryProfileCount Rank013.rank13
 stageTwelveRank13CountCrosswalk =
   Stage12Site.centralCompletionMatchesRank13ProfileCount
 
