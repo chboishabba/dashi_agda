@@ -305,11 +305,9 @@ module LiveSplit
     ∀ {T R} →
     SelfExternalOrderedSpacetimeBudget T R →
     Direct.DirectOffDiagonalBudget T R
-  selfExternalBudgetBuildsR503 =
-    Kernel.orderedBudgetBuildsR503 ∘ selfExternalBudgetBuildsOrderedBudget
-    where
-    _∘_ : ∀ {A B C : Set} → (B → C) → (A → B) → A → C
-    (f ∘ g) x = f (g x)
+  selfExternalBudgetBuildsR503 B =
+    Kernel.orderedBudgetBuildsR503
+      (selfExternalBudgetBuildsOrderedBudget B)
 
 ------------------------------------------------------------------------
 -- Status / frontier.
