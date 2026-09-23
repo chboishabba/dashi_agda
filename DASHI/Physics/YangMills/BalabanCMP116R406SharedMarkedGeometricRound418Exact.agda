@@ -28,7 +28,8 @@ module DASHI.Physics.YangMills.BalabanCMP116R406SharedMarkedGeometricRound418Exa
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base as ℚ using (ℚ; _*_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -64,7 +65,7 @@ record R406SharedMarkedGeometricAttachment
     selectedScale : Scale
     selectedVolume : Volume
     selectedRoot : Root
-    selectedDistance : Agda.Builtin.Nat.Nat
+    selectedDistance : Nat
 
     -- Sole same-object shell attachment at this layer.
     selectedConnectingShellIsSharedMarkedShell :
@@ -119,8 +120,7 @@ embeddedSharedMarkedShellGeometricHalf attachment =
       ≤ℝ
       embedQ embedding
         (Geometric.markedBaseEnergy (shared attachment) Shared.hessianMark
-          ℚ.*
-          Geo.halfPower (selectedDistance attachment))
+          * Geo.halfPower (selectedDistance attachment))
     transported =
       Ord.orderPreserving ordered rationalBound
   in
