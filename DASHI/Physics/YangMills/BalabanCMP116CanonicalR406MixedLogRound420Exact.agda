@@ -121,7 +121,8 @@ finiteSelectedCovarianceMagnitudeBelowSharedMarkedGeometricHalf :
   R418.embedQ (R419.embedding shell)
     (Geo.halfPower (R419.selectedDistance shell))
 finiteSelectedCovarianceMagnitudeBelowSharedMarkedGeometricHalf
-    {base = base} {shell = shell} {cutoff = cutoff}
+    {dataSet = dataSet} {extension = extension} {base = base}
+    {shell = shell} {cutoff = cutoff}
     {left = left} {right = right} attachment =
   let
     mixedBound =
@@ -133,7 +134,7 @@ finiteSelectedCovarianceMagnitudeBelowSharedMarkedGeometricHalf
 
     embeddedEquality :
       R418.embedQ (R419.embedding shell)
-        (R278.magnitude _
+        (R278.magnitude extension
           (Cumulant.literalMixedSecondLogDerivative
             (R318.meaning base)
             (Cumulant.sourceDirectionOf (R318.meaning base) left)
@@ -141,8 +142,8 @@ finiteSelectedCovarianceMagnitudeBelowSharedMarkedGeometricHalf
             cutoff))
       ≡
       R418.embedQ (R419.embedding shell)
-        (R278.connectedCovarianceMagnitude _
-          (Gram.measureSequence _ cutoff) left right)
+        (R278.connectedCovarianceMagnitude extension
+          (Gram.measureSequence dataSet cutoff) left right)
     embeddedEquality =
       cong (R418.embedQ (R419.embedding shell)) mixedEqualsCovariance
   in
