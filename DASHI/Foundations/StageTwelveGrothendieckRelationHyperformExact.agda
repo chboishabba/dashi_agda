@@ -176,13 +176,10 @@ pullbackSieve C arrow sieve = record
   ; closed = λ g witness h →
       subst
         (λ k → Sieve.contains sieve k)
-        (sym (assoc C arrow g h))
+        (assoc C arrow g h)
         (Sieve.closed sieve (_∘_ C arrow g) witness h)
   }
   where
-    sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-    sym refl = refl
-
     subst :
       ∀ {A : Set} (P : A → Set) {x y : A} →
       x ≡ y → P x → P y
