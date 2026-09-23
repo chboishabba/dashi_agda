@@ -64,6 +64,16 @@ discriminantNumeratorTruncated inputs =
   Q.discriminantNumeratorTruncated
     (transcendentals inputs)
 
+normalizedDeltaTruncated :
+  Round11.Round11BishopCutset →
+  Q.DivisorPowerKernel →
+  Nat →
+  Complex.BishopComplex →
+  Complex.BishopComplex
+normalizedDeltaTruncated inputs =
+  Q.normalizedDeltaTruncated
+    (transcendentals inputs)
+
 qCongruent :
   (inputs : Round11.Round11BishopCutset) →
   ∀ {left right} →
@@ -113,6 +123,21 @@ discriminantNumeratorCongruent inputs =
   Q.discriminantNumeratorTruncatedCongruent
     (transcendentals inputs)
 
+normalizedDeltaCongruent :
+  (inputs : Round11.Round11BishopCutset) →
+  (kernel : Q.DivisorPowerKernel) →
+  (terms : Nat) →
+  ∀ {left right} →
+  Complex._≈C_ left right →
+  Complex._≈C_
+    (normalizedDeltaTruncated
+      inputs kernel terms left)
+    (normalizedDeltaTruncated
+      inputs kernel terms right)
+normalizedDeltaCongruent inputs =
+  Q.normalizedDeltaTruncatedCongruent
+    (transcendentals inputs)
+
 record Round11MachinEisensteinSourceReceipt
     (inputs : Round11.Round11BishopCutset) : Set₁ where
   constructor round11-machin-eisenstein-source-receipt
@@ -145,6 +170,12 @@ record Round11MachinEisensteinSourceReceipt
       Complex.BishopComplex →
       Complex.BishopComplex
 
+    normalizedDelta :
+      Q.DivisorPowerKernel →
+      Nat →
+      Complex.BishopComplex →
+      Complex.BishopComplex
+
     qExact :
       q ≡ qOf inputs
 
@@ -157,6 +188,10 @@ record Round11MachinEisensteinSourceReceipt
     deltaNumeratorExact :
       deltaNumerator ≡
         discriminantNumeratorTruncated inputs
+
+    normalizedDeltaExact :
+      normalizedDelta ≡
+        normalizedDeltaTruncated inputs
 
 open Round11MachinEisensteinSourceReceipt public
 
@@ -171,7 +206,8 @@ canonicalRound11MachinEisensteinSourceReceipt inputs =
     (e4Truncated inputs)
     (e6Truncated inputs)
     (discriminantNumeratorTruncated inputs)
-    refl refl refl refl
+    (normalizedDeltaTruncated inputs)
+    refl refl refl refl refl
 
 record Boundary : Set where
   constructor boundary
@@ -183,11 +219,12 @@ record Boundary : Set where
     literalE4Owned : Bool
     literalE6Owned : Bool
     literalDiscriminantNumeratorOwned : Bool
+    literalNormalizedDeltaOwned : Bool
     allFiniteObjectsSetoidCongruent : Bool
     legacyPropositionalQuotientUsed : Bool
 
 canonicalBoundary : Boundary
 canonicalBoundary =
   boundary
-    true true true true true true true true
+    true true true true true true true true true
     false
