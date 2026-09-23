@@ -371,6 +371,10 @@ periodicClayMaxCutC4CompilerAvailable : Bool
 periodicClayMaxCutC4CompilerAvailable =
   R642.round642C4CommonInitialDatumSameObjectCompilerAvailable
 
+periodicClayMaxCutC4CanonicalModeCoherenceCompilerAvailable : Bool
+periodicClayMaxCutC4CanonicalModeCoherenceCompilerAvailable =
+  R642.round642C4CanonicalR34ModeCoherenceCompilerAvailable
+
 periodicClayMaxCutC5Proved : Bool
 periodicClayMaxCutC5Proved = R642.round642C5RetainedViscosityProved
 
