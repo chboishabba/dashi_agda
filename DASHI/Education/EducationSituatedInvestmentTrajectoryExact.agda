@@ -92,9 +92,9 @@ open EconomicReturnObservation public
 record SituatedEducationTrajectory : Set where
   constructor situated-education-trajectory
   field
-    interventionReference : String
-    populationReference : String
-    contextReference : String
+    trajectoryInterventionReference : String
+    trajectoryPopulationReference : String
+    trajectoryContextReference : String
 
     learningReceipt : Learning.LearningReceipt
     autonomyAxes : Autonomy.AutonomyAxes
