@@ -27,6 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalExternalHelicityCommutatorRound63
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -149,7 +150,7 @@ module CanonicalExternalHelicity636
       (totalExternalCommutatorFoldIsHelicityFold output)
 
   totalExternalHelicityScalar :
-    Z3.FourierMode → C3.Complex3 F → C3.Carrier F
+    Z3.FourierMode → C3.Complex3 F → ℚ
   totalExternalHelicityScalar output test =
     R179.realHermitianCross
       (totalExternalHelicityFold output)
