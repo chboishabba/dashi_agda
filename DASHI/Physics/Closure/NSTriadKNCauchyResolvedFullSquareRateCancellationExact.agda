@@ -34,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedGramPairToResolventRound389Exact as R389
+import DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400Exact as R400
 import DASHI.Physics.Closure.NSTriadKNDirectResolventPairSwapSymmetryRound538Exact as R538
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
 
@@ -161,6 +162,37 @@ module PhysicalResolved
       items
       (physicalPairResolventLaw positive)
 
+  module OnNonzeroOutput
+      (viscosityPositive : Positive (Field30.viscosity physicalSystem))
+      (output : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode)
+      (outputNonzero :
+        DASHI.Physics.Closure.NSIntegerFourierLattice.NonZeroMode output) where
+
+    module Rate = R400.PhysicalRate physicalSystem S viscosityPositive
+
+    physicalPairResolventLawOnOutput :
+      (alpha beta : Physical.PhysicalTriadIncidence) →
+      Physical.k alpha ≡ output →
+      Physical.k beta ≡ output →
+      Swap.pairResolvent alpha beta
+        * (cellRate alpha + cellRate beta)
+      ≡ 1ℚ
+    physicalPairResolventLawOnOutput alpha beta alphaOutput betaOutput =
+      let
+        alphaPositive =
+          Rate.cellRatePositiveFromNonzeroOutput
+            output outputNonzero alpha alphaOutput
+        betaPositive =
+          Rate.cellRatePositiveFromNonzeroOutput
+            output outputNonzero beta betaOutput
+        pairPositive =
+          Rate.pairRatePositiveFromCellRates
+            alpha beta alphaPositive betaPositive
+      in
+      Reciprocal.safeRationalReciprocalTimesPositive
+        (R291.pairRate (Swap.Q alpha beta))
+        pairPositive
+
 ------------------------------------------------------------------------
 -- Status / frontier.
 ------------------------------------------------------------------------
@@ -170,6 +202,9 @@ cauchyResolvedFullSquareRateCancellationClosed = true
 
 literalR538PairResolventRateCancellationClosed : Bool
 literalR538PairResolventRateCancellationClosed = true
+
+literalNonzeroOutputPairResolventRateCancellationClosed : Bool
+literalNonzeroOutputPairResolventRateCancellationClosed = true
 
 cauchyCancellationIntroducesEstimate : Bool
 cauchyCancellationIntroducesEstimate = false
@@ -187,6 +222,10 @@ cauchyResolvedFullSquareRateCancellationClosedIsTrue = refl
 literalR538PairResolventRateCancellationClosedIsTrue :
   literalR538PairResolventRateCancellationClosed ≡ true
 literalR538PairResolventRateCancellationClosedIsTrue = refl
+
+literalNonzeroOutputPairResolventRateCancellationClosedIsTrue :
+  literalNonzeroOutputPairResolventRateCancellationClosed ≡ true
+literalNonzeroOutputPairResolventRateCancellationClosedIsTrue = refl
 
 cauchyCancellationIntroducesEstimateIsFalse :
   cauchyCancellationIntroducesEstimate ≡ false
