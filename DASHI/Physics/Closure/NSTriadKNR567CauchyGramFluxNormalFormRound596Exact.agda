@@ -45,6 +45,9 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNWeightedGramFluxCompilerRound290Exact as R290
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedGramPairToResolventRound389Exact as R389
 import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396Exact as R396
@@ -54,6 +57,8 @@ import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact
 import DASHI.Physics.Closure.NSTriadKNDirectResolventPairSwapSymmetryRound538Exact as R538
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CommutatorDiagonalNormalFormRound547Exact as R547
 import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
+import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationExact as R595
+import DASHI.Physics.Closure.NSTriadKNFullGramCoherentFoldRound597Exact as R597
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -77,11 +82,21 @@ module FixedOutput
   fibre : List Physical.PhysicalTriadIncidence
   fibre = Output.physicalOutputFiber cutoff output
 
+  doubleCell :
+    Physical.PhysicalTriadIncidence → C3.Complex3 F
+  doubleCell =
+    R225.doubleMixedCell S Pair.D.Pair.velocity
+
   gramPair :
     Physical.PhysicalTriadIncidence →
     Physical.PhysicalTriadIncidence → ℚ
   gramPair alpha beta =
     R291.gram (Swap.Q alpha beta)
+
+  gramPairIsCoherentWorkPair :
+    (alpha beta : Physical.PhysicalTriadIncidence) →
+    gramPair alpha beta ≡ R597.workPair doubleCell alpha beta
+  gramPairIsCoherentWorkPair alpha beta = refl
 
   weightedFluxTangentPair :
     Physical.PhysicalTriadIncidence →
@@ -254,6 +269,35 @@ module FixedOutput
         (sym (NF.fullSquareIsFactoredFull output))
         literalFullSquareNormalForm)
 
+  fullGramIsCoherentSelfWork :
+    R543.fullSquareSum gramPair fibre
+    ≡ Work.coherentWork
+        (R224.foldVector doubleCell fibre)
+        (R224.foldVector doubleCell fibre)
+  fullGramIsCoherentSelfWork =
+    trans
+      (R595.fullSquareCongruent
+        gramPair
+        (R597.workPair doubleCell)
+        gramPairIsCoherentWorkPair
+        fibre)
+      (R597.fullGramIsCoherentFold doubleCell fibre)
+
+  fourForcingFullIsCoherentSelfWorkPlusFlux :
+    R567.four567
+      * R543.fullSquareSum C.T.forcingPair fibre
+    ≡
+    Work.coherentWork
+      (R224.foldVector doubleCell fibre)
+      (R224.foldVector doubleCell fibre)
+    + R543.fullSquareSum weightedFluxTangentPair fibre
+  fourForcingFullIsCoherentSelfWorkPlusFlux =
+    trans
+      fourForcingFullIsGramPlusFlux
+      (cong
+        (_+ R543.fullSquareSum weightedFluxTangentPair fibre)
+        fullGramIsCoherentSelfWork)
+
 ------------------------------------------------------------------------
 -- Status / trust boundary.
 ------------------------------------------------------------------------
@@ -263,6 +307,9 @@ round596LiteralR567CauchyGramFluxNormalFormClosed = true
 
 round596UsesOnlyExistingR290R400R547R567Identities : Bool
 round596UsesOnlyExistingR290R400R547R567Identities = true
+
+round596FullGramAlignedWithA3CoherentSelfWork : Bool
+round596FullGramAlignedWithA3CoherentSelfWork = true
 
 round596IntroducesNewNSEstimate : Bool
 round596IntroducesNewNSEstimate = false
@@ -276,6 +323,10 @@ round596IdentifiesA3CenteredKernelWithCauchyKernel = false
 round596LiteralR567CauchyGramFluxNormalFormClosedIsTrue :
   round596LiteralR567CauchyGramFluxNormalFormClosed ≡ true
 round596LiteralR567CauchyGramFluxNormalFormClosedIsTrue = refl
+
+round596FullGramAlignedWithA3CoherentSelfWorkIsTrue :
+  round596FullGramAlignedWithA3CoherentSelfWork ≡ true
+round596FullGramAlignedWithA3CoherentSelfWorkIsTrue = refl
 
 round596IntroducesNewNSEstimateIsFalse :
   round596IntroducesNewNSEstimate ≡ false
