@@ -232,8 +232,7 @@ round642C5SubviscousAbsorptionMandatoryIsFalse =
 
 round642C6StandardScalarFTCInstalledIsFalse :
   round642C6StandardScalarFTCInstalled ≡ false
-round642C6StandardScalarFTCInstalledIsFalse =
-  R572.round572StandardScalarFTCInstalledIsFalse
+round642C6StandardScalarFTCInstalledIsFalse = refl
 
 round642C6CriticalIntegrationLinearityInstalledIsFalse :
   round642C6CriticalIntegrationLinearityInstalled ≡ false
