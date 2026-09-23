@@ -17,7 +17,7 @@ module DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; cong)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; cong; trans)
 
 import Base369 as Base
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
