@@ -52,6 +52,8 @@ data QuarticFrontierCoordinate : Set where
   signedPsiCenteredFiniteAbelAssembly : QuarticFrontierCoordinate
   signedPsiGlobalPointwiseNMuWeld : QuarticFrontierCoordinate
   signedPsiGlobalCenteredAbelExhaustion : QuarticFrontierCoordinate
+  signedPsiRightBoundaryDecayEnvelope : QuarticFrontierCoordinate
+  signedPsiFarLeftReflectionExhaustion : QuarticFrontierCoordinate
   completedResidualEqualsCombinedCluster : QuarticFrontierCoordinate
   outwardCenteredDiscrepancyNoGo : QuarticFrontierCoordinate
   jointSignedCompletedResidual : QuarticFrontierCoordinate
@@ -101,6 +103,8 @@ quarticFrontierClass signedPsiFiniteWindowAbelAssembly = assemblyOwned
 quarticFrontierClass signedPsiCenteredFiniteAbelAssembly = assemblyOwned
 quarticFrontierClass signedPsiGlobalPointwiseNMuWeld = assemblyOwned
 quarticFrontierClass signedPsiGlobalCenteredAbelExhaustion = analyticWall
+quarticFrontierClass signedPsiRightBoundaryDecayEnvelope = theoremOwned
+quarticFrontierClass signedPsiFarLeftReflectionExhaustion = analyticWall
 quarticFrontierClass completedResidualEqualsCombinedCluster = theoremOwned
 quarticFrontierClass outwardCenteredDiscrepancyNoGo = theoremOwned
 quarticFrontierClass jointSignedCompletedResidual = analyticWall
@@ -149,6 +153,8 @@ record QuarticSignedPoleFrontierBoundary : Set where
     signedPsiCenteredFiniteAbelSourceWritten : Bool
     signedPsiGlobalPointwiseNMuWeldSourceWrittenFailClosed : Bool
     signedPsiGlobalCenteredAbelExhaustionPaid : Bool
+    signedPsiRightBoundaryDecayEnvelopePaid : Bool
+    signedPsiFarLeftReflectionExhaustionPaid : Bool
     completedResidualEqualsCombinedClusterPaid : Bool
     outwardCenteredDiscrepancyNoGoPaid : Bool
     jointSignedCompletedResidualPaid : Bool
@@ -212,6 +218,10 @@ record QuarticSignedPoleFrontierBoundary : Set where
       signedPsiGlobalPointwiseNMuWeldSourceWrittenFailClosed ≡ true
     signedPsiGlobalCenteredAbelExhaustionPaidIsFalse :
       signedPsiGlobalCenteredAbelExhaustionPaid ≡ false
+    signedPsiRightBoundaryDecayEnvelopePaidIsTrue :
+      signedPsiRightBoundaryDecayEnvelopePaid ≡ true
+    signedPsiFarLeftReflectionExhaustionPaidIsFalse :
+      signedPsiFarLeftReflectionExhaustionPaid ≡ false
     completedResidualEqualsCombinedClusterPaidIsTrue :
       completedResidualEqualsCombinedClusterPaid ≡ true
     outwardCenteredDiscrepancyNoGoPaidIsTrue :
@@ -266,6 +276,8 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true
     false
     true
+    false
+    true
     true
     false
     false
@@ -274,7 +286,7 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true
     true
     false
-    refl refl refl refl refl refl
+    refl refl refl refl refl refl refl refl
     refl refl refl refl refl refl refl refl
     refl refl
     refl refl refl refl refl refl refl refl
@@ -282,7 +294,7 @@ canonicalQuarticSignedPoleFrontierBoundary =
     refl refl refl
     refl
     "G1 has been reduced to scalar arithmetic. The Lean source now constructs a witness with S(W_t)>=7*pi^4/1600, proves endpoint taper L1<=83/30, compiles this through the exact projective profile, bounds the smooth pole coordinates, obtains an explicit combined-profile L1 bound and hence an explicit K0. It defines T_Q=4*(K0+1)/(7*pi^4/1600). The sole remaining G1 payment is the certified scalar comparison T_Q < the Platt-Trudgian cutoff; numerically the coarse constants give T_Q about 1.041e9 versus T_PT about 3.000e12, but that numerical comparison is not marked paid here."
-    "G3 representation is source-written through the exact finite t-centred Abel split. The global signed N-mu storage has a fail-closed pointwise-Psi weld with explicit full-line integrability hypotheses, and a typed centred-Abel exhaustion compiler isolates the remaining tail limits. Right-tail decay is expected from the existing positive-endpoint discrepancy machinery; the far-left tail still requires an explicit negative-height/reflection transport rather than being silently called standard. The exact completedSignedResidual=combinedCluster identity is paid, and outward-pointing centred discrepancy is recorded as a wrong-sign diagnostic."
+    "G3 representation is source-written through the exact finite t-centred Abel split. The global signed N-mu storage has a fail-closed pointwise-Psi weld with explicit full-line integrability hypotheses, and a typed centred-Abel exhaustion compiler isolates the remaining tail limits. The exact right boundary now has a theorem-bearing logarithmic-over-quadratic envelope on the signed Psi test. The far-left tail still requires an explicit negative-height/reflection transport rather than being silently called standard. The exact completedSignedResidual=combinedCluster identity is paid, and outward-pointing centred discrepancy is recorded as a wrong-sign diagnostic."
     "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. In particular the old universal lower bound over every arbitrary QuarticFourSignedPolePair is stronger than needed and is retained only as a donor interface."
     "Authoritative high cut: one scalar G1 threshold comparison plus the joint G3 completed-residual inequality. Finite and centred finite Abel representation is source-written; one global centred-exhaustion seam remains, specifically including the far-left reflection/negative-height tail. RH remains unproved because that assembly seam, G3 itself, and the scalar T_Q<T_PT certificate are not yet kernel-paid."
 
