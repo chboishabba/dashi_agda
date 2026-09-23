@@ -66,7 +66,6 @@ import DASHI.Physics.Closure.NSTriadKNThreeLegResidualNonfixedGeometryRound617Ex
 import DASHI.Physics.Closure.NSTriadKNExternalSelfOrbitMultiplicityRound618Exact as R618
 import DASHI.Physics.Closure.NSTriadKNExternalWaleffeOrbitResolvedRound619Exact as R619
 import DASHI.Physics.Closure.NSTriadKNR573OrbitResolvedExternalNestedRound620Exact as R620
-import DASHI.Physics.Closure.NSTriadKNThreeLegOrbitResolvedExternalRound619Exact as R619
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -991,17 +990,8 @@ round490R112ExceptionalModeDiagonalsProvedAbsent =
   R617.round617ExceptionalLociProvedAbsent
 
 
-round490ThreeLegExternalOrbitResolvedWithoutExcludingFixedCases : Bool
-round490ThreeLegExternalOrbitResolvedWithoutExcludingFixedCases =
-  R619.round619AllThreeExternalLegsOrbitResolved
 
-round490ThreeLegOrbitRepresentationRequiresExceptionalLociAbsent : Bool
-round490ThreeLegOrbitRepresentationRequiresExceptionalLociAbsent =
-  R619.round619RequiresExceptionalLociAbsent
 
-round490ThreeLegFixedOrbitCorrectionRetained : Bool
-round490ThreeLegFixedOrbitCorrectionRetained =
-  R619.round619FixedOrbitCorrectionRetained
 
 round490ExternalForcingFixedOrbitCorrectionClosed : Bool
 round490ExternalForcingFixedOrbitCorrectionClosed =
@@ -1107,20 +1097,8 @@ round490R112ExceptionalModeDiagonalsProvedAbsentIsFalse =
   R617.round617ExceptionalLociProvedAbsentIsFalse
 
 
-round490ThreeLegExternalOrbitResolvedWithoutExcludingFixedCasesIsTrue :
-  round490ThreeLegExternalOrbitResolvedWithoutExcludingFixedCases ≡ true
-round490ThreeLegExternalOrbitResolvedWithoutExcludingFixedCasesIsTrue =
-  R619.round619AllThreeExternalLegsOrbitResolvedIsTrue
 
-round490ThreeLegOrbitRepresentationRequiresExceptionalLociAbsentIsFalse :
-  round490ThreeLegOrbitRepresentationRequiresExceptionalLociAbsent ≡ false
-round490ThreeLegOrbitRepresentationRequiresExceptionalLociAbsentIsFalse =
-  R619.round619RequiresExceptionalLociAbsentIsFalse
 
-round490ThreeLegFixedOrbitCorrectionRetainedIsTrue :
-  round490ThreeLegFixedOrbitCorrectionRetained ≡ true
-round490ThreeLegFixedOrbitCorrectionRetainedIsTrue =
-  R619.round619FixedOrbitCorrectionRetainedIsTrue
 
 round490ExternalForcingFixedOrbitCorrectionClosedIsTrue :
   round490ExternalForcingFixedOrbitCorrectionClosed ≡ true
