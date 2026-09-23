@@ -181,3 +181,6 @@ import DASHI.Core.WorldRepresentationSeparationExact
 
 -- Theory underdetermination, epistemic suspension, and discriminating experiments.
 import DASHI.Core.TheoryUnderdeterminationExperimentExact
+
+-- Law-like invariance under declared counterfactual/control families.
+import DASHI.Core.LawlikeRegularityCounterfactualExact
