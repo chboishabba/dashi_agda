@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBri
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as Rate
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as SignedPayment
 import DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406SameObjectCompilerExact as EndpointCompiler
+import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
 import DASHI.Physics.Closure.NSTriadKNR406ExactEndpointNormalFormExact as R406Endpoint
 import DASHI.Physics.Closure.NSTriadKNA3WeightedR406EndpointCutExact as WeightedEndpoint
@@ -242,6 +243,22 @@ round490A3KernelCenteredNormalFormUsesLowerSeparation =
 round490A3KernelCenteredNormalFormIntroducesEstimate : Bool
 round490A3KernelCenteredNormalFormIntroducesEstimate =
   A3Kernel.a3KernelCenteredNormalFormIntroducesEstimate
+
+round490A3ToLiteralFactoredFullCompilerClosed : Bool
+round490A3ToLiteralFactoredFullCompilerClosed =
+  A3Factored.a3ToFactoredFullCompilerClosed
+
+round490A3ToFactoredFullAddsNewNonlinearEstimate : Bool
+round490A3ToFactoredFullAddsNewNonlinearEstimate =
+  A3Factored.a3ToFactoredFullRequiresNewNonlinearEstimateAfterA3
+
+round490A3ToFactoredFullSameObjectWeldClosed : Bool
+round490A3ToFactoredFullSameObjectWeldClosed =
+  A3Factored.a3ToFactoredFullExactSameObjectWeldClosed
+
+round490PreferredA3ConsumerIsWeightedFactoredFull : Bool
+round490PreferredA3ConsumerIsWeightedFactoredFull =
+  A3Factored.weightedFactoredFullIsPreferredConsumerBridge
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -482,6 +499,26 @@ round490A3KernelCenteredNormalFormIntroducesEstimateIsFalse :
   round490A3KernelCenteredNormalFormIntroducesEstimate ≡ false
 round490A3KernelCenteredNormalFormIntroducesEstimateIsFalse =
   A3Kernel.a3KernelCenteredNormalFormIntroducesEstimateIsFalse
+
+round490A3ToLiteralFactoredFullCompilerClosedIsTrue :
+  round490A3ToLiteralFactoredFullCompilerClosed ≡ true
+round490A3ToLiteralFactoredFullCompilerClosedIsTrue =
+  A3Factored.a3ToFactoredFullCompilerClosedIsTrue
+
+round490A3ToFactoredFullAddsNewNonlinearEstimateIsFalse :
+  round490A3ToFactoredFullAddsNewNonlinearEstimate ≡ false
+round490A3ToFactoredFullAddsNewNonlinearEstimateIsFalse =
+  A3Factored.a3ToFactoredFullRequiresNewNonlinearEstimateAfterA3IsFalse
+
+round490A3ToFactoredFullSameObjectWeldClosedIsFalse :
+  round490A3ToFactoredFullSameObjectWeldClosed ≡ false
+round490A3ToFactoredFullSameObjectWeldClosedIsFalse =
+  A3Factored.a3ToFactoredFullExactSameObjectWeldClosedIsFalse
+
+round490PreferredA3ConsumerIsWeightedFactoredFullIsTrue :
+  round490PreferredA3ConsumerIsWeightedFactoredFull ≡ true
+round490PreferredA3ConsumerIsWeightedFactoredFullIsTrue =
+  A3Factored.weightedFactoredFullIsPreferredConsumerBridgeIsTrue
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
