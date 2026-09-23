@@ -6,6 +6,7 @@ targets=(
   DASHI/Moonshine/JInvariant369CanonicalInterpretationExact.agda
   DASHI/Moonshine/MonsterAtlas6561X8RecognitionObligationExact.agda
   DASHI/Moonshine/JInvariant369NeutralCuspRelationCrossPollinationExact.agda
+  DASHI/Moonshine/JInvariant369SSP15SignedFRACTRANBranchExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -31,3 +32,10 @@ grep -q 'twelvePlusTwelveIsTwentyFour' "${targets[3]}"
 grep -q 'finiteZeroPhaseDoesNotEqualCuspVanishing' "${targets[3]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
+
+grep -q 'chosenOggInternalLaneBijection' "${targets[4]}"
+grep -q 'lanePrimeToSignedPrime' "${targets[4]}"
+grep -q 'internalPointedCoarseRoundTrip' "${targets[4]}"
+grep -q 'neutralValuationIsZeroAt' "${targets[4]}"
+grep -q 'zeroValuationCannotRecoverSelectedNeutralLane' "${targets[4]}"
+grep -q 'executeSeedProgram' "${targets[4]}"
