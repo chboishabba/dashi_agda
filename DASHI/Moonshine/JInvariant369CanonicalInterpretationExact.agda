@@ -113,6 +113,6 @@ signedSSP369FibreBoundary =
 
 signedSSPCannotCollapseSpectralConjugationToLevelTranslation :
   SignedSSP.SignedPhaseToLevel3Intertwiner →
-  ⊥
+  Separation.Empty
 signedSSPCannotCollapseSpectralConjugationToLevelTranslation =
   SignedSSP.signedSpectralConjugationCannotEqualLevel3Translation
