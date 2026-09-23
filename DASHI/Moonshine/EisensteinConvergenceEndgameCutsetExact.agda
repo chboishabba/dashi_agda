@@ -61,6 +61,10 @@ record EisensteinConvergenceEndgameCutset : Set where
     leanExpSinCosMachinSemanticCompilersOwned : Bool
     leanRound11MachinBindingCompilerOwned : Bool
     leanRound11MappedE4E6ConvergenceOwned : Bool
+    agdaLiteralNormalizedSourceDeltaOwned : Bool
+    leanMappedNormalizedSourceDeltaConvergenceOwned : Bool
+    leanEta24PinnedReflectionOwned : Bool
+    leanEta24SixfoldPhaseOwned : Bool
 
     selectedConcreteQNormLawsInhabited : Bool
     quarticSexticStepVDominationInhabited : Bool
@@ -85,7 +89,8 @@ canonicalEisensteinConvergenceEndgameCutset =
   eisenstein-convergence-endgame-cutset
     true true true true true true true true true true true true true true true true true
     true true true true true true true
+    true true true true
     false false false false false false
     false false false
     false
-    "Route B is now source-pinned and setoid-native. Agda owns the actual vendored-Bishop complex carrier, Round11 configured trig package, bishopMachinPi, literal q/E4/E6/discriminant-numerator recurrences and their setoid congruence. Lean owns a faithful evaluator of the vendored Bishop quotient into Real, derives the exact vendored arithmetic semantics including resampled multiplication, derives exp/sin/cos/Machin-pi classical semantics from the concrete source convergence receipts, compiles a single Round11MachinSourceBinding to the primitive extraction, and proves the mapped source E4_N/E6_N and discriminant numerator converge to Mathlib E4/E6 and the canonical Delta numerator. Therefore none of the legacy ConcreteComplex q-norm, Step-V, Bishop-to-legacy, Nat-function, or four-coordinate leaves is required by route B; they remain only as the older route-A/legacy lane. The active residuals are exactly: inhabit the Lean Round11MachinSourceBinding from the actual Agda receipt, and separately prove eta^24 = (E4^3-E6^2)/1728 (or an equivalent normalized-Delta same-object weld) at the pinned Mathlib v4.28.0 boundary."
+    "Route B is source-pinned and setoid-native. Agda owns the actual vendored-Bishop complex carrier, Round11 configured trig package, bishopMachinPi, literal q/E4/E6/discriminant-numerator recurrences, and the normalized finite source Delta defined with the exact Bishop rational embedding 1/1728; all finite objects are setoid-congruent. Lean owns a faithful evaluator of the vendored Bishop quotient into Real, derives the exact resampled arithmetic plus exp/sin/cos/Machin-pi classical semantics from the concrete source convergence receipts, compiles a single Round11MachinSourceBinding to the primitive extraction, and proves mapped source E4_N/E6_N, the discriminant numerator, and the normalized source Delta converge to Mathlib E4/E6 and the canonical normalized Delta target. Independently, eta^24 at the pinned Mathlib v4.28.0 dependency now owns the weight-12 reflection/fixed-locus theorem and the concrete branch-safe sixfold phase theorem arg(eta^24(tau)) + 6 arg(tau) = k*pi on the unit circle. Therefore none of the legacy ConcreteComplex q-norm, Step-V, Bishop-to-legacy, Nat-function, four-coordinate, or phase-quotient leaves is required by route B. The active residuals are exactly: inhabit the Lean Round11MachinSourceBinding from the actual Agda receipt; and, only if the eta^24 and normalized E4/E6 targets must be identified as one function, prove eta^24 = (E4^3-E6^2)/1728 (or an equivalent same-object weld)."
