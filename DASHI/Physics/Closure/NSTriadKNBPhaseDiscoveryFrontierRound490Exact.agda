@@ -47,6 +47,7 @@ import DASHI.Physics.Closure.NSTriadKNR406ExactEndpointNormalFormExact as R406En
 import DASHI.Physics.Closure.NSTriadKNA3WeightedR406EndpointCutExact as WeightedEndpoint
 import DASHI.Physics.Closure.NSTriadKNA3CenteredVectorWorkNormalFormExact as A3Centered
 import DASHI.Physics.Closure.NSTriadKNRateWeightedMixedHelicityKernelCollapseExact as RateKernel
+import DASHI.Physics.Closure.NSTriadKNA3CenteredKernelNormalFormExact as A3Kernel
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact as Adapter
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact as SlotDefect
 import DASHI.Physics.Closure.NSTriadKNExternalHHSquareGapGramRound128Exact as R128
@@ -225,6 +226,22 @@ round490PhysicalRateWeightedR225CollapseClosed =
 round490RateWeightedR225UsesPointwiseSeparation : Bool
 round490RateWeightedR225UsesPointwiseSeparation =
   RateKernel.physicalRateWeightedR225CollapseUsesPointwiseSeparation
+
+round490A3KernelCenteredNormalFormClosed : Bool
+round490A3KernelCenteredNormalFormClosed =
+  A3Kernel.a3KernelCenteredNormalFormClosed
+
+round490A3KernelCenteredNormalFormUsesPointwiseR205 : Bool
+round490A3KernelCenteredNormalFormUsesPointwiseR205 =
+  A3Kernel.a3KernelCenteredNormalFormUsesPointwiseR205
+
+round490A3KernelCenteredNormalFormUsesLowerSeparation : Bool
+round490A3KernelCenteredNormalFormUsesLowerSeparation =
+  A3Kernel.a3KernelCenteredNormalFormUsesLowerSeparation
+
+round490A3KernelCenteredNormalFormIntroducesEstimate : Bool
+round490A3KernelCenteredNormalFormIntroducesEstimate =
+  A3Kernel.a3KernelCenteredNormalFormIntroducesEstimate
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -445,6 +462,26 @@ round490RateWeightedR225UsesPointwiseSeparationIsFalse :
   round490RateWeightedR225UsesPointwiseSeparation ≡ false
 round490RateWeightedR225UsesPointwiseSeparationIsFalse =
   RateKernel.physicalRateWeightedR225CollapseUsesPointwiseSeparationIsFalse
+
+round490A3KernelCenteredNormalFormClosedIsTrue :
+  round490A3KernelCenteredNormalFormClosed ≡ true
+round490A3KernelCenteredNormalFormClosedIsTrue =
+  A3Kernel.a3KernelCenteredNormalFormClosedIsTrue
+
+round490A3KernelCenteredNormalFormUsesPointwiseR205IsFalse :
+  round490A3KernelCenteredNormalFormUsesPointwiseR205 ≡ false
+round490A3KernelCenteredNormalFormUsesPointwiseR205IsFalse =
+  A3Kernel.a3KernelCenteredNormalFormUsesPointwiseR205IsFalse
+
+round490A3KernelCenteredNormalFormUsesLowerSeparationIsFalse :
+  round490A3KernelCenteredNormalFormUsesLowerSeparation ≡ false
+round490A3KernelCenteredNormalFormUsesLowerSeparationIsFalse =
+  A3Kernel.a3KernelCenteredNormalFormUsesLowerSeparationIsFalse
+
+round490A3KernelCenteredNormalFormIntroducesEstimateIsFalse :
+  round490A3KernelCenteredNormalFormIntroducesEstimate ≡ false
+round490A3KernelCenteredNormalFormIntroducesEstimateIsFalse =
+  A3Kernel.a3KernelCenteredNormalFormIntroducesEstimateIsFalse
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
