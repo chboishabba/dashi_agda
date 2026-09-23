@@ -39,6 +39,8 @@ import DASHI.Physics.Closure.NSTriadKNA3CenteredKernelPaymentCompilerExact as Ke
 import DASHI.Physics.Closure.NSTriadKNR406ExactEndpointNormalFormExact as Endpoint
 import DASHI.Physics.Closure.NSTriadKNA3WeightedR406EndpointCutExact as WeightedCut
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationExact as Cauchy
+import DASHI.Physics.Closure.NSTriadKNR567CauchyGramFluxNormalFormRound596Exact as R596
+import DASHI.Physics.Closure.NSTriadKNFullGramCoherentFoldRound597Exact as R597
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExact as GramTangent
 
 weightedR406ExactEndpointNormalFormClosedGivenFTC : Bool
@@ -65,6 +67,19 @@ cauchyResolvedFullSquareRateCancellationClosed =
 literalNonzeroOutputPairResolventRateCancellationClosed : Bool
 literalNonzeroOutputPairResolventRateCancellationClosed =
   Cauchy.literalNonzeroOutputPairResolventRateCancellationClosed
+
+
+r567CauchyGramFluxNormalFormClosed : Bool
+r567CauchyGramFluxNormalFormClosed =
+  R596.round596LiteralR567CauchyGramFluxNormalFormClosed
+
+r567FullGramAlignedWithA3SelfWorkClosed : Bool
+r567FullGramAlignedWithA3SelfWorkClosed =
+  R596.round596FullGramAlignedWithA3CoherentSelfWork
+
+genericFullGramCoherentFoldClosed : Bool
+genericFullGramCoherentFoldClosed =
+  R597.round597FullGramCoherentFoldClosed
 
 cauchyResolvedR406DiagonalReducedNormalFormClosed : Bool
 cauchyResolvedR406DiagonalReducedNormalFormClosed =
@@ -128,6 +143,22 @@ literalNonzeroOutputPairResolventRateCancellationClosedIsTrue :
 literalNonzeroOutputPairResolventRateCancellationClosedIsTrue =
   Cauchy.literalNonzeroOutputPairResolventRateCancellationClosedIsTrue
 
+
+r567CauchyGramFluxNormalFormClosedIsTrue :
+  r567CauchyGramFluxNormalFormClosed ≡ true
+r567CauchyGramFluxNormalFormClosedIsTrue =
+  R596.round596LiteralR567CauchyGramFluxNormalFormClosedIsTrue
+
+r567FullGramAlignedWithA3SelfWorkClosedIsTrue :
+  r567FullGramAlignedWithA3SelfWorkClosed ≡ true
+r567FullGramAlignedWithA3SelfWorkClosedIsTrue =
+  R596.round596FullGramAlignedWithA3CoherentSelfWorkIsTrue
+
+genericFullGramCoherentFoldClosedIsTrue :
+  genericFullGramCoherentFoldClosed ≡ true
+genericFullGramCoherentFoldClosedIsTrue =
+  R597.round597FullGramCoherentFoldClosedIsTrue
+
 cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue :
   cauchyResolvedR406DiagonalReducedNormalFormClosed ≡ true
 cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue =
@@ -149,6 +180,11 @@ offdiagGramPlusResolvedTangentToCenteredA3KernelSameObjectClosedIsFalse = refl
 factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosedIsFalse :
   factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosed ≡ false
 factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosedIsFalse = refl
+
+
+weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse :
+  weightedFluxTangentFullSquareToCenteredA3RateKernelClosed ≡ false
+weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse = refl
 
 
 cauchyRateCancellationAloneClosesCenteredA3ToR568IsFalse :
