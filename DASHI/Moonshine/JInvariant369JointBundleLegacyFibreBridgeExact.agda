@@ -19,6 +19,7 @@ module DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact where
 open import DASHI.Core.Prelude
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; cong)
 
+import Base369 as Base
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantFormulaic369ModularReplicationExact as Replication
@@ -169,6 +170,16 @@ legacyTSignedAgreesAt :
       (toLegacyFiniteFibreAt L z signed))
 legacyTSignedAgreesAt W z signed = refl
 
+reflect6OwnersAgree :
+  (x : Base.HexTruth) →
+  Reflection.reflect6 x ≡ Level.reflect6 x
+reflect6OwnersAgree Base.hex-0 = refl
+reflect6OwnersAgree Base.hex-1 = refl
+reflect6OwnersAgree Base.hex-2 = refl
+reflect6OwnersAgree Base.hex-3 = refl
+reflect6OwnersAgree Base.hex-4 = refl
+reflect6OwnersAgree Base.hex-5 = refl
+
 legacyRPhase6AgreesAt :
   ∀ {R}
     {L : Tower.CanonicalLevel27Lift R} →
@@ -184,7 +195,10 @@ legacyRPhase6AgreesAt :
     (Legacy.reflectJoint
       (toLegacyFiniteFibreAt L z signed))
 legacyRPhase6AgreesAt W z signed =
-  Joint.jointRPhase6Reflects W z
+  trans
+    (Joint.jointRPhase6Reflects W z)
+    (reflect6OwnersAgree
+      (Joint.phase6State (Joint.sampleAt _ z)))
 
 legacyRLevel27AgreesAt :
   ∀ {R}
