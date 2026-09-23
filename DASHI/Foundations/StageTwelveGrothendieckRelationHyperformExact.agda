@@ -30,6 +30,8 @@ open import Data.Product using (_×_; _,_)
 import Base369 as Base
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ConsumerFibreRepairExact as Repair
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.ComputerScience.WrongTypeAttributionFactorisationPlanningSnowballExact as Wrong
 import DASHI.Foundations.StageValuationBundleAtlas as Bundle
 import DASHI.Foundations.StageAtlasZeroToTwelve as ExtendedStage
@@ -319,6 +321,53 @@ signedRelationMagnitudeWrongTypeReceipt =
     Wrong.nonFactorableRepresentation
     "same relation cell and positive coarse sign / distinct FRACTRAN multiplicity magnitude"
     true
+
+signedMagnitudeRepairsCoarseSignedCell :
+  Repair.RefinementRepairs
+    signedRelationCellObserver
+    signedMagnitudeConsumer
+    signedMagnitudeConsumer
+signedMagnitudeRepairsCoarseSignedCell =
+  Observer.pairRefinesRight
+    signedRelationCellObserver
+    signedMagnitudeConsumer
+
+data SignedMultiplicityResidualCode : Set where
+  signed-multiplicity-residual-code :
+    Base.TriTruth →
+    Nat →
+    SignedMultiplicityResidualCode
+
+encodeSignedMultiplicityResidual :
+  Signed.SignedMultiplicity →
+  SignedMultiplicityResidualCode
+encodeSignedMultiplicityResidual multiplicity =
+  signed-multiplicity-residual-code
+    (signedMultiplicityToTriTruth multiplicity)
+    (signedMagnitudeConsumer
+      ((Atlas.atlas-0 , Atlas.atlas-0) , multiplicity))
+
+decodeSignedMultiplicityResidual :
+  SignedMultiplicityResidualCode →
+  Signed.SignedMultiplicity
+decodeSignedMultiplicityResidual
+  (signed-multiplicity-residual-code Base.tri-low n) =
+  Signed.negativeMultiplicity n
+decodeSignedMultiplicityResidual
+  (signed-multiplicity-residual-code Base.tri-mid n) =
+  Signed.zeroMultiplicity
+decodeSignedMultiplicityResidual
+  (signed-multiplicity-residual-code Base.tri-high n) =
+  Signed.positiveMultiplicity n
+
+signedMultiplicityResidualRoundTrip :
+  (multiplicity : Signed.SignedMultiplicity) →
+  decodeSignedMultiplicityResidual
+    (encodeSignedMultiplicityResidual multiplicity)
+  ≡ multiplicity
+signedMultiplicityResidualRoundTrip (Signed.negativeMultiplicity n) = refl
+signedMultiplicityResidualRoundTrip Signed.zeroMultiplicity = refl
+signedMultiplicityResidualRoundTrip (Signed.positiveMultiplicity n) = refl
 
 SignedRelationCellBundleSheaf : Set₁
 SignedRelationCellBundleSheaf =
@@ -661,6 +710,8 @@ record StageTwelveSiteSheafReceipt : Set₁ where
     signedMagnitudeNonDescentPaid : Bool
     coarseSignedCellFactorsThroughMagnitude : Bool
     signedMagnitudeWrongTypeReceiptPaid : Bool
+    signedMagnitudeResidualRepairPaid : Bool
+    signedMultiplicityResidualCodecPaid : Bool
     bundleSheafInterfaceReused : Bool
     relationCellBundleSheafConstructed : Bool
     grothendieckAxiomsConstructed : Bool
@@ -690,6 +741,8 @@ canonicalStageTwelveSiteSheafReceipt = record
   ; signedMagnitudeNonDescentPaid = true
   ; coarseSignedCellFactorsThroughMagnitude = false
   ; signedMagnitudeWrongTypeReceiptPaid = true
+  ; signedMagnitudeResidualRepairPaid = true
+  ; signedMultiplicityResidualCodecPaid = true
   ; bundleSheafInterfaceReused = true
   ; relationCellBundleSheafConstructed = true
   ; grothendieckAxiomsConstructed = true
