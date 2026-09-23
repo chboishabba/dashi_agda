@@ -98,6 +98,15 @@ REQUIRED_CONTROL = [
 
 REQUIRED_ADDENDUM = [
     "Lane A",
+    "R642",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "genuinely new nonlinear",
     "Lane B",
     "Lane C",
     "Lane D",
