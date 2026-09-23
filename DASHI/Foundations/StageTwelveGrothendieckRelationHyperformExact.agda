@@ -21,7 +21,8 @@ module DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _*_; _^_)
+open import Agda.Builtin.Nat using (Nat; _*_)
+open import Data.Nat using (_^_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
