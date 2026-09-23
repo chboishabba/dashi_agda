@@ -205,8 +205,17 @@ record DeltaConstructedComplexReflectionCutsetBoundary : Set where
     leanNormalizedDeltaConjugationOwned : Bool
     leanConcreteInvConjReflectionIdentityOwned : Bool
 
+    agdaBishopSetoidComplexOwned : Bool
+    agdaRound11MachinEisensteinSourceOwned : Bool
+    leanVendoredBishopEvaluatorFaithful : Bool
+    leanExpSinCosMachinPiSemanticsCompiled : Bool
+    leanRound11MachinBindingCompilerOwned : Bool
+    leanMappedSourceE4E6ConvergenceOwned : Bool
+
     finiteRouteEqualsInfiniteAnalyticRoute : Bool
     primitiveAgdaRealToLeanRealExtractionInhabited : Bool
+    actualAgdaRound11MachinBindingInLean : Bool
+    eta24NormalizedDeltaSameObjectWelded : Bool
 
     abstractEisensteinScalarWeldedToConcreteComplex : Bool
     abstractEisensteinParameterWeldedToConcreteKleinPoint : Bool
@@ -225,6 +234,7 @@ canonicalDeltaConstructedComplexReflectionCutsetBoundary =
     true true true true true
     true true true true true true true
     true true true true true true true true
-    false false
+    true true true true true true
+    false false false false
     false false false false false
-    "Route B has paid the classical analytic side on a canonical Lean target matching the actual Agda finite recurrence: the literal E4/E6 truncations converge to Mathlib E4/E6; their normalized discriminant limit is packaged as a genuine level-one weight-12 modular form; its real-q-series conjugation law and the concrete inverse-conjugation identity F(1/conj tau)=conj(tau^12 F(tau)) are proved. Agda derives q/E4/E6/discriminant transport from a primitive real/transcendental extraction. The first live payment is now only to inhabit that faithful selected-Agda-real -> Lean-Real map with exp/sin/cos/pi compatibility. After that, weld the normalized E4/E6 Delta target to the chosen Agda/eta^24 Delta object and transport the already-proved reflection identity; unit-circle fixed-locus phase then consumes it."
+    "Route B now owns both sides of the mathematics. Agda is source-pinned to the vendored Bishop setoid carrier, Round11 concrete trig data and bishopMachinPi, with literal q/E4/E6/discriminant-numerator recurrences. Lean proves the Bishop evaluator is faithful on setoid classes, compiles exp/sin/cos/Machin-pi semantics from the actual convergence receipts, and from one Round11MachinSourceBinding proves the mapped source E4_N/E6_N/discriminant numerator converge to Mathlib E4/E6/the canonical Delta numerator. The normalized E4/E6 Delta target is already a genuine level-one weight-12 form and satisfies the exact inverse-conjugation and unit-circle fixed-locus value identities. The only source-to-target gate left is inhabiting that exact Round11Machin binding from the Agda receipt; the only independent analytic same-object gate left is eta^24 = (E4^3-E6^2)/1728. Legacy ConstructedComplex/Bishop-to-propositional transport is no longer on the active route-B path."
