@@ -11,7 +11,7 @@ module DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact w
 -- A3 carries on that same output a signed pair-difference scalar C_k together
 -- with the genuinely new inequality C_k <= B_k.
 --
--- Therefore the smallest representation weld needed to feed A3 into the
+-- Therefore the a sufficient local representation weld to feed A3 into the
 -- weighted R547/R557/R572 consumer is NOT covariance = R406.  It is:
 --
 --   ForcingFull_k = C_k.
@@ -94,6 +94,9 @@ a3WeightedForcingWeldIsNewNonlinearEstimate = false
 a3WeightedForcingWeldIsRepresentationTheorem : Bool
 a3WeightedForcingWeldIsRepresentationTheorem = true
 
+a3WeightedForcingWeldIsMinimalRequiredBridge : Bool
+a3WeightedForcingWeldIsMinimalRequiredBridge = false
+
 directA3CovarianceEqualsR406Required : Bool
 directA3CovarianceEqualsR406Required = false
 
@@ -108,6 +111,10 @@ a3WeightedForcingSameObjectWeldClosedIsFalse = refl
 a3WeightedForcingWeldIsNewNonlinearEstimateIsFalse :
   a3WeightedForcingWeldIsNewNonlinearEstimate ≡ false
 a3WeightedForcingWeldIsNewNonlinearEstimateIsFalse = refl
+
+a3WeightedForcingWeldIsMinimalRequiredBridgeIsFalse :
+  a3WeightedForcingWeldIsMinimalRequiredBridge ≡ false
+a3WeightedForcingWeldIsMinimalRequiredBridgeIsFalse = refl
 
 a3WeightedForcingWeldIsRepresentationTheoremIsTrue :
   a3WeightedForcingWeldIsRepresentationTheorem ≡ true
