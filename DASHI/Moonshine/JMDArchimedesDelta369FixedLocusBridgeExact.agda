@@ -61,6 +61,8 @@ import DASHI.Moonshine.JSameWeightQuotientInvariantExact as JQuotient
 import DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact as Analytic
 import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Equivariance
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as ModularLevel
+import DASHI.Interop.LeanEta24PinnedReflectionParityExact as LeanEtaReflection
+import DASHI.Interop.LeanEta24SixfoldPhaseParityExact as LeanEtaPhase
 
 ------------------------------------------------------------------------
 -- 1. Typed source attribution.
@@ -204,7 +206,15 @@ record AnalyticReflectionEvidence : Set where
     concreteComplexConjugationInstantiated : Bool
     concretePhaseQuotientInstantiated : Bool
     rendererReflectionIntertwinerInstantiated : Bool
-    unconditionalUnitCircleArcPhaseTheoremProved : Bool
+
+    leanEta24ReflectionIdentityOwned : Bool
+    leanEta24FixedLocusValueIdentityOwned : Bool
+    leanEta24SixfoldPhaseOwned : Bool
+    leanEta24ArgCongruenceOwned : Bool
+    leanEta24ContinuousBranchAvoided : Bool
+    leanNormalizedDeltaSixfoldCompilerConditionalOnNonvanishing : Bool
+
+    unconditionalUnitCircleArcPhaseTheoremProvedInThisAgdaModule : Bool
 
 open AnalyticReflectionEvidence public
 
@@ -213,7 +223,9 @@ currentAnalyticReflectionEvidence =
   analytic-reflection-evidence
     true true true true
     true true true
-    false false false false
+    false false false
+    true true true true true true
+    false
 
 ------------------------------------------------------------------------
 -- 5. Boundary / non-promotion guards.
@@ -235,6 +247,9 @@ record JMDArchimedesDelta369Boundary : Set where
     modularLevelCuspObserverTargetsConstructed : Bool
     fullModularDeckGroupCollapsedToCyclic : Bool
     concreteComplexAnalyticInstantiationClosed : Bool
+    pinnedLeanEta24PhaseTheoremClosed : Bool
+    normalizedLeanDeltaPhaseNeedsOnlyNonvanishing : Bool
+    eta24SameObjectAsNormalizedE4E6Delta : Bool
     base369ConstructsDeltaOrJ : Bool
     finiteObserverEqualsContinuousPhase : Bool
     cyclic27IdentifiedWithTernaryCubeAsGroup : Bool
@@ -246,6 +261,7 @@ canonicalJMDArchimedesDelta369Boundary =
   jmd-archimedes-delta369-boundary
     true true true true true true
     true true true true false false
+    true true false
     false false false
 
 ------------------------------------------------------------------------
@@ -264,7 +280,20 @@ canonicalJMDArchimedesDelta369Boundary =
 -- supplies the level-6 cyclic cusp action, proves 27->9->3 translation
 -- compatibility, and identifies reflection with cusp inversion.
 --
--- The remaining source-parity debt is therefore narrower: instantiate those
--- interfaces on one concrete complex upper-half-plane/argument carrier and
--- prove the infinite Delta conjugation + observer-intertwining laws.
+-- The remaining source-parity debt is therefore narrower than the original
+-- image suggested.  On the pinned Lean/Mathlib v4.28 target, eta^24 now owns
+-- the inverse-conjugation reflection identity, the unit-circle fixed-value
+-- identity, and the exact branch-safe theorem
+--
+--   arg(eta^24(tau)) + 6 arg(tau) = k*pi
+--
+-- for some integer k.  No continuous argument branch is selected.  The
+-- normalized E4/E6 Delta target has the same sixfold compiler conditional only
+-- on nonvanishing.  What remains is cross-language/same-object transport:
+-- inhabit the exact Round11/Machin source binding and, if one wants to identify
+-- the two classical targets rather than use eta^24 directly, prove
+--
+--   eta^24 = (E4^3 - E6^2)/1728.
+--
+-- None of this promotes Base369 into a Delta/j construction.
 ------------------------------------------------------------------------
