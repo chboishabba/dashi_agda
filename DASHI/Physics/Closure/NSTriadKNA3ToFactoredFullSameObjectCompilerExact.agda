@@ -17,7 +17,7 @@ module DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact wh
 --
 --   sum_k C_k <= sum_k B_k.
 --
--- This module isolates the ONLY representation theorem needed to feed A3 into
+-- This module isolates a sufficient but stronger-than-necessary representation theorem to feed A3 into
 -- the existing weighted consumer without pretending that the unweighted
 -- covariance scalar is definitionally the R406 remainder:
 --
@@ -172,7 +172,7 @@ directA3CovarianceEqualsR406StillRequired : Bool
 directA3CovarianceEqualsR406StillRequired = false
 
 weightedFactoredFullIsPreferredConsumerBridge : Bool
-weightedFactoredFullIsPreferredConsumerBridge = true
+weightedFactoredFullIsPreferredConsumerBridge = false
 
 a3ToFactoredFullCompilerClosedIsTrue :
   a3ToFactoredFullCompilerClosed ≡ true
@@ -190,6 +190,6 @@ directA3CovarianceEqualsR406StillRequiredIsFalse :
   directA3CovarianceEqualsR406StillRequired ≡ false
 directA3CovarianceEqualsR406StillRequiredIsFalse = refl
 
-weightedFactoredFullIsPreferredConsumerBridgeIsTrue :
-  weightedFactoredFullIsPreferredConsumerBridge ≡ true
-weightedFactoredFullIsPreferredConsumerBridgeIsTrue = refl
+weightedFactoredFullIsPreferredConsumerBridgeIsFalse :
+  weightedFactoredFullIsPreferredConsumerBridge ≡ false
+weightedFactoredFullIsPreferredConsumerBridgeIsFalse = refl
