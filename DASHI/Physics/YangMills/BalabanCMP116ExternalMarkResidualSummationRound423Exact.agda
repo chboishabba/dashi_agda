@@ -71,6 +71,99 @@ externalTimesSumExact external value (x ∷ xs)
   rewrite *-distribˡ-+ external (value x) (Resum.sumℝ value xs)
         | externalTimesSumExact external value xs = refl
 
+------------------------------------------------------------------------
+-- Charge form -> factorized pointwise majorant.
+------------------------------------------------------------------------
+
+record NegativeExponentialFactorization : Set₁ where
+  field
+    negativeExp : ℝ → ℝ
+
+    antitone :
+      ∀ {small large} →
+      small ≤ℝ large →
+      negativeExp large ≤ℝ negativeExp small
+
+    additiveToMultiplicative :
+      ∀ left right →
+      negativeExp (left +ℝ right)
+      ≡ negativeExp left *ℝ negativeExp right
+
+    nonnegative :
+      ∀ charge → 0ℝ ≤ℝ negativeExp charge
+
+open NegativeExponentialFactorization public
+
+record ChargedPointwiseFactorization
+    (Domain : Set)
+    (exponential : NegativeExponentialFactorization) : Set₁ where
+  field
+    commonYShell rawMarkedMajorant : Domain → ℝ
+
+    externalCharge : ℝ
+    residualCharge combinedCharge : Domain → ℝ
+
+    commonYShellBelowRawMarked :
+      ∀ domain →
+      commonYShell domain ≤ℝ rawMarkedMajorant domain
+
+    rawMarkedMajorantIsCombinedExponential :
+      ∀ domain →
+      rawMarkedMajorant domain
+      ≡ negativeExp exponential (combinedCharge domain)
+
+    requiredChargeBelowCombinedCharge :
+      ∀ domain →
+      externalCharge +ℝ residualCharge domain
+      ≤ℝ combinedCharge domain
+
+open ChargedPointwiseFactorization public
+
+chargedCommonYShellBelowExternalTimesResidual :
+  ∀ {Domain exponential}
+    (dataSet : ChargedPointwiseFactorization Domain exponential)
+    domain →
+  commonYShell dataSet domain
+  ≤ℝ
+  negativeExp exponential (externalCharge dataSet)
+  *ℝ
+  negativeExp exponential (residualCharge dataSet domain)
+chargedCommonYShellBelowExternalTimesResidual
+    {exponential = exponential} dataSet domain =
+  let
+    toCombined :
+      commonYShell dataSet domain
+      ≤ℝ negativeExp exponential (combinedCharge dataSet domain)
+    toCombined =
+      subst
+        (λ upper → commonYShell dataSet domain ≤ℝ upper)
+        (rawMarkedMajorantIsCombinedExponential dataSet domain)
+        (commonYShellBelowRawMarked dataSet domain)
+
+    toRequired :
+      negativeExp exponential (combinedCharge dataSet domain)
+      ≤ℝ
+      negativeExp exponential
+        (externalCharge dataSet +ℝ residualCharge dataSet domain)
+    toRequired =
+      antitone exponential
+        (requiredChargeBelowCombinedCharge dataSet domain)
+
+    toProduct :
+      commonYShell dataSet domain
+      ≤ℝ
+      negativeExp exponential (externalCharge dataSet)
+      *ℝ negativeExp exponential (residualCharge dataSet domain)
+    toProduct =
+      subst
+        (λ upper → commonYShell dataSet domain ≤ℝ upper)
+        (additiveToMultiplicative exponential
+          (externalCharge dataSet)
+          (residualCharge dataSet domain))
+        (≤ℝ-trans toCombined toRequired)
+  in
+  toProduct
+
 record ExternalMarkedResidualSummationData (Domain : Set) : Set₁ where
   field
     domains : List Domain
@@ -160,7 +253,13 @@ round423ExternalMarkResidualSummationCompilerLevel = machineChecked
 
 -- The finite positive sum is now compiler-owned.  These source facts remain:
 round423PointwiseMarkedResidualFactorizationLevel : ProofLevel
-round423PointwiseMarkedResidualFactorizationLevel = conditional
+round423PointwiseMarkedResidualFactorizationLevel = machineChecked
+
+round423LiteralChargeGeometryAttachmentLevel : ProofLevel
+round423LiteralChargeGeometryAttachmentLevel = conditional
+
+round423NegativeExponentialFactorizationLevel : ProofLevel
+round423NegativeExponentialFactorizationLevel = standardImported
 
 round423CMP116ResidualSummabilityInstantiationLevel : ProofLevel
 round423CMP116ResidualSummabilityInstantiationLevel = conditional
