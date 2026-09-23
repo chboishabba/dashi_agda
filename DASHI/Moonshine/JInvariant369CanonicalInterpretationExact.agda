@@ -167,6 +167,52 @@ canonicalCanonical369InterpretationBoundary =
     }
 
 ------------------------------------------------------------------------
+-- Query-stable architecture receipts.
+------------------------------------------------------------------------
+
+phaseOnlyC3IsNotPrincipalLevel3 :
+  phaseOnlyC3EqualsNontrivialLevel3
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+phaseOnlyC3IsNotPrincipalLevel3 = refl
+
+modularTIsTrivialOnPhaseLane :
+  modularTIsIdentityOnPhaseLane
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+modularTIsTrivialOnPhaseLane = refl
+
+modularTTranslatesPrincipalLevelLane :
+  modularTTranslatesLevelLane
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+modularTTranslatesPrincipalLevelLane = refl
+
+phaseInternalCycleIsNotModularT :
+  phaseInternalC3CycleIdentifiedWithModularT
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+phaseInternalCycleIsNotModularT = refl
+
+jointModularDihedralLawIsOwned :
+  jointRTRIsTInverseCoordinatewise
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+jointModularDihedralLawIsOwned = refl
+
+fullDeckGroupIsNotCollapsedToCyclic :
+  fullDeckGroupsCollapsedToCyclic
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+fullDeckGroupIsNotCollapsedToCyclic = refl
+
+oldRelational369IsNotPrincipalLevelTower :
+  oldRelational369EqualsPrincipalLevelTower
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+oldRelational369IsNotPrincipalLevelTower = refl
+
+------------------------------------------------------------------------
 -- Research interpretation:
 --
 -- * 6 is analytically forced by weight 12 plus reciprocal-conjugate reflection.
