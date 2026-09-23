@@ -43,6 +43,7 @@ import DASHI.Physics.Closure.NSTriadKNLuoFiniteDyadicMultiplierTaylorDifferenceE
 import DASHI.Physics.Closure.NSTriadKNR571LeanGateAEnvelopeReceiptExact as LeanReceipt
 import DASHI.Physics.Closure.NSTriadKNR571HermitianScalarizedOppositePairExact as G0
 import DASHI.Physics.Closure.NSTriadKNR571HermitianStateAmplitudeEnvelopeExact as G1Local
+import DASHI.Physics.Closure.NSTriadKNR571HermitianStateDifferenceRound613Exact as G2Local
 
 -- Existing donors.  Importing them here is intentional: this is the typed
 -- archaeology/crosswalk surface for the four Gate-A leaves.
@@ -137,6 +138,14 @@ r571GateAG0HermitianScalarizedPairClosed =
 r571GateAGlobalPhysicalScalarStateRequired : Bool
 r571GateAGlobalPhysicalScalarStateRequired =
   G0.r571GlobalPhysicalScalarStateRequired
+
+r571GateAG2ScalarDifferenceSameObjectClosed : Bool
+r571GateAG2ScalarDifferenceSameObjectClosed =
+  G2Local.round613G2ScalarDifferenceSameObjectClosed
+
+r571GateAG2ReducedToLiteralVectorDifference : Bool
+r571GateAG2ReducedToLiteralVectorDifference =
+  G2Local.round613G2ReducedToLiteralVectorDifference
 
 r571GateAG2FinitePathDonorLocated : Bool
 r571GateAG2FinitePathDonorLocated = true
