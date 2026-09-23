@@ -102,6 +102,16 @@ legacyLevel3AgreesAt L z signed =
       (Joint.level3State (Joint.sampleAt L z))
   ∎
 
+legacyFibreExt :
+  ∀ {phase phase' level level' signed signed'} →
+  phase ≡ phase' →
+  level ≡ level' →
+  signed ≡ signed' →
+  Legacy.joint369FiniteFibre phase level signed
+  ≡
+  Legacy.joint369FiniteFibre phase' level' signed'
+legacyFibreExt refl refl refl = refl
+
 ------------------------------------------------------------------------
 -- 2. The canonical bridge intertwines the NEW modular actions with the
 --    pre-existing finite signed fibre, coordinatewise.
@@ -233,6 +243,42 @@ legacyRSignedAgreesAt :
       (toLegacyFiniteFibreAt L z signed))
 legacyRSignedAgreesAt W z signed = refl
 
+legacyTCommutesAt :
+  ∀ {R A}
+    {L : Tower.CanonicalLevel27Lift R} →
+  (W : Joint.JointTAction R A L) →
+  (z : Klein.Point (Render.klein R)) →
+  (signed : Signed.SignedMultiplicity) →
+  toLegacyFiniteFibreAt L
+    (Replication.act A (Joint.T W) z)
+    signed
+  ≡
+  Legacy.translateJoint
+    (toLegacyFiniteFibreAt L z signed)
+legacyTCommutesAt W z signed =
+  legacyFibreExt
+    (legacyTPhase6AgreesAt W z signed)
+    (legacyTLevel27AgreesAt W z signed)
+    (legacyTSignedAgreesAt W z signed)
+
+legacyRCommutesAt :
+  ∀ {R}
+    {L : Tower.CanonicalLevel27Lift R} →
+  (W : Joint.JointReflectionAction R L) →
+  (z : Klein.Point (Render.klein R)) →
+  (signed : Signed.SignedMultiplicity) →
+  toLegacyFiniteFibreAt L
+    (Reflection.reflectPoint (Joint.phaseReflection W) z)
+    (Signed.negateMultiplicity signed)
+  ≡
+  Legacy.reflectJoint
+    (toLegacyFiniteFibreAt L z signed)
+legacyRCommutesAt W z signed =
+  legacyFibreExt
+    (legacyRPhase6AgreesAt W z signed)
+    (legacyRLevel27AgreesAt W z signed)
+    (legacyRSignedAgreesAt W z signed)
+
 ------------------------------------------------------------------------
 -- 2. The bridge deliberately has no phase-C3 recovery theorem.
 ------------------------------------------------------------------------
@@ -248,6 +294,8 @@ record LegacyBridgeBoundary : Set where
     derivedLevel3AgreementOwned : Bool
     translationActionIntertwinedCoordinatewise : Bool
     reflectionActionIntertwinedCoordinatewise : Bool
+    translationCommutingSquareOwned : Bool
+    reflectionCommutingSquareOwned : Bool
 
     phaseC3RecoveredFromLegacyLevel3 : Bool
     phaseC3IdentifiedWithLevelC3 : Bool
@@ -258,5 +306,5 @@ open LegacyBridgeBoundary public
 canonicalLegacyBridgeBoundary : LegacyBridgeBoundary
 canonicalLegacyBridgeBoundary =
   legacy-bridge-boundary
-    true true true true true true true true
+    true true true true true true true true true true
     false false false
