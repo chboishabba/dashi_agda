@@ -16,8 +16,9 @@ import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as Trade
 ------------------------------------------------------------------------
 -- M11.4 CROSS-DOMAIN COMPARATIVE BATTERY
 --
--- The same comparison discipline must separate six intentionally different
--- forms of change without promoting any comparison result into truth.
+-- The same comparison discipline must separate intentionally different legal,
+-- physical, observational, representational, consumer, temporal and trading
+-- changes without promoting any comparison result into truth.
 ------------------------------------------------------------------------
 
 gravityBoundary : Gravity.GravityComparativeBoundary
