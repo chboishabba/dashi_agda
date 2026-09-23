@@ -173,3 +173,4 @@ import DASHI.Physics.Closure.NSTriadKNA3CenteredVectorWorkNormalFormExact
 import DASHI.Physics.Closure.NSTriadKNRateWeightedMixedHelicityKernelCollapseExact
 import DASHI.Physics.Closure.NSTriadKNA3CenteredKernelNormalFormExact
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact
+import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact
