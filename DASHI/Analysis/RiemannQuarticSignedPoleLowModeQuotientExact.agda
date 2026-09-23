@@ -265,3 +265,81 @@ cubicProfileObstructionRemainsOpen = refl
 poleToProfilePromotionRejected :
   profileObstructionStatus poleDeterminantForcesProfileObstructions ≡ rejectedImplication
 poleToProfilePromotionRejected = refl
+
+
+------------------------------------------------------------------------
+-- ATOMIC QUOTIENT OBSTRUCTION RECEIPT
+--
+-- On the exact J2-null atomic endpoints the Lean companion proves, for every
+-- t>=200,
+--
+--   linearOnLineAtomic(t) < 0
+--   cubicOnLineAtomic(t)  > 0.
+--
+-- Hence the full cubic quotient is not an identity of the present atomic
+-- signed-pole architecture.  This is a structural diagnostic, not an RH
+-- theorem: smoothing/coupling may still introduce different mechanisms.
+------------------------------------------------------------------------
+
+data AtomicQuotientCoordinate : Set where
+  atomicLinearObstructionNegative : AtomicQuotientCoordinate
+  atomicCubicObstructionPositive : AtomicQuotientCoordinate
+  atomicFullCubicQuotientHolds : AtomicQuotientCoordinate
+  paidPoleAndMomentConstraintsImplyAtomicFullCubicQuotient :
+    AtomicQuotientCoordinate
+
+data AtomicQuotientStatus : Set where
+  theoremOwned : AtomicQuotientStatus
+  rejectedIdentity : AtomicQuotientStatus
+  rejectedImplication : AtomicQuotientStatus
+
+atomicQuotientStatus :
+  AtomicQuotientCoordinate -> AtomicQuotientStatus
+atomicQuotientStatus atomicLinearObstructionNegative = theoremOwned
+atomicQuotientStatus atomicCubicObstructionPositive = theoremOwned
+atomicQuotientStatus atomicFullCubicQuotientHolds = rejectedIdentity
+atomicQuotientStatus
+  paidPoleAndMomentConstraintsImplyAtomicFullCubicQuotient =
+  rejectedImplication
+
+record QuarticSignedPoleAtomicQuotientBoundary : Set where
+  constructor quartic-signed-pole-atomic-quotient-boundary
+  field
+    atomicLinearObstructionNegativePaid : Bool
+    atomicCubicObstructionPositivePaid : Bool
+    atomicFullCubicQuotientHolds : Bool
+    paidPoleAndMomentConstraintsImplyAtomicFullCubicQuotient : Bool
+
+    atomicLinearObstructionNegativePaidIsTrue :
+      atomicLinearObstructionNegativePaid ≡ true
+    atomicCubicObstructionPositivePaidIsTrue :
+      atomicCubicObstructionPositivePaid ≡ true
+    atomicFullCubicQuotientHoldsIsFalse :
+      atomicFullCubicQuotientHolds ≡ false
+    paidPoleAndMomentConstraintsImplyAtomicFullCubicQuotientIsFalse :
+      paidPoleAndMomentConstraintsImplyAtomicFullCubicQuotient ≡ false
+
+    interpretation : String
+    nextResearchCut : String
+
+canonicalQuarticSignedPoleAtomicQuotientBoundary :
+  QuarticSignedPoleAtomicQuotientBoundary
+canonicalQuarticSignedPoleAtomicQuotientBoundary =
+  quartic-signed-pole-atomic-quotient-boundary
+    true true false false
+    refl refl refl refl
+    "At the exact atomic J2-null endpoints, the two Fourier-dual odd quotient coordinates are separated from zero with opposite signs throughout t>=200.  Therefore the full centered-cubic quotient is not an identity already encoded by the paid J2/J4/pole constraints."
+    "Transport the sign separation to sufficiently narrow smooth endpoints.  If that survives on the actual G1 witness corridor, retire full cubic factorisation as a proof mechanism for the present signed-pole lane and investigate only genuinely coupled cancellation with the horizontal remainder or a modified witness family."
+
+atomicLinearSignPaid :
+  atomicQuotientStatus atomicLinearObstructionNegative ≡ theoremOwned
+atomicLinearSignPaid = refl
+
+atomicCubicSignPaid :
+  atomicQuotientStatus atomicCubicObstructionPositive ≡ theoremOwned
+atomicCubicSignPaid = refl
+
+atomicFullCubicIdentityRejected :
+  atomicQuotientStatus atomicFullCubicQuotientHolds ≡ rejectedIdentity
+atomicFullCubicIdentityRejected = refl
+
