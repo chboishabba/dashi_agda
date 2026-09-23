@@ -42,6 +42,8 @@ import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as Level
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as Canonical
+import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
+import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as Joint
 import DASHI.Moonshine.JInvariant369JointFibreBifiltrationExact as JointBif
@@ -261,17 +263,17 @@ translationInvisibleToConsolidatedBase :
 translationInvisibleToConsolidatedBase state = refl
 
 separationEmptyElim :
-  Canonical.Separation.Empty → ⊥
+  Separation.Empty → ⊥
 separationEmptyElim ()
 
 level27ChangesUnderTranslation :
   (level : Level.level27CuspFibre) →
-  Level.translateTriadic Canonical.Q.three level
+  Level.translateTriadic Q.three level
   ≡ level →
   ⊥
 level27ChangesUnderTranslation level fixed =
   separationEmptyElim
-    (Canonical.Separation.level27TranslationNoFixedPoint level fixed)
+    (Separation.level27TranslationNoFixedPoint level fixed)
 
 consolidatedLevelNonDescent :
   ∀ {R}
