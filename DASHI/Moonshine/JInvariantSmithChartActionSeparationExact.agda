@@ -68,12 +68,73 @@ c3QuotientCannotSeeSmithHalfTurn :
 c3QuotientCannotSeeSmithHalfTurn =
   HalfTurn.mobiusTransport-preservesTriadicPhase
 
+------------------------------------------------------------------------
+-- Coarse-observer action collision.
+------------------------------------------------------------------------
+
+record ActionCollisionUnderObserver
+    (State Observation : Set)
+    (observe : State → Observation) : Set₁ where
+  field
+    leftAction rightAction : State → State
+    sameObservedAction :
+      (x : State) →
+      observe (leftAction x) ≡ observe (rightAction x)
+    witness : State
+    actionsDifferAtWitness :
+      leftAction witness ≡ rightAction witness → ⊥
+
+open ActionCollisionUnderObserver public
+
+identityHex : Base.HexTruth → Base.HexTruth
+identityHex x = x
+
+identityVsSmithHalfTurnCollideAtC3 :
+  ActionCollisionUnderObserver
+    Base.HexTruth
+    Base.TriTruth
+    HalfTurn.hexTriadicPhase
+identityVsSmithHalfTurnCollideAtC3 = record
+  { leftAction = identityHex
+  ; rightAction = HalfTurn.mobiusTransport
+  ; sameObservedAction =
+      λ x →
+        sym
+          (HalfTurn.mobiusTransport-preservesTriadicPhase x)
+  ; witness = Base.hex-0
+  ; actionsDifferAtWitness =
+      λ same →
+        hex0NotHex3 (sym same)
+  }
+
+C3ObserverDeterminesHexAction : Set
+C3ObserverDeterminesHexAction =
+  (f g : Base.HexTruth → Base.HexTruth) →
+  ((x : Base.HexTruth) →
+    HalfTurn.hexTriadicPhase (f x)
+    ≡ HalfTurn.hexTriadicPhase (g x)) →
+  (x : Base.HexTruth) →
+  f x ≡ g x
+
+c3ObserverDoesNotDetermineUnderlyingHexAction :
+  ¬ C3ObserverDeterminesHexAction
+c3ObserverDoesNotDetermineUnderlyingHexAction exact =
+  actionsDifferAtWitness identityVsSmithHalfTurnCollideAtC3
+    (exact
+      identityHex
+      HalfTurn.mobiusTransport
+      (sameObservedAction
+        identityVsSmithHalfTurnCollideAtC3)
+      Base.hex-0)
+
 record SmithModularActionSeparationBoundary : Set where
   constructor smith-modular-action-separation-boundary
   field
     smithHalfTurnDistinctFromModularTOnC6 : Bool
     smithHalfTurnDistinctFromModularReflectionOnC6 : Bool
     c3QuotientErasesSmithHalfTurn : Bool
+    explicitIdentityHalfTurnActionCollisionAtC3Owned : Bool
+    c3ObserverDoesNotDetermineUnderlyingC6Action : Bool
 
     equalityAtC3ImpliesSameC6Action : Bool
     sameSixStateCardinalityImpliesSameAction : Bool
@@ -83,5 +144,5 @@ canonicalSmithModularActionSeparationBoundary :
   SmithModularActionSeparationBoundary
 canonicalSmithModularActionSeparationBoundary =
   smith-modular-action-separation-boundary
-    true true true
+    true true true true true
     false false false
