@@ -143,6 +143,8 @@ module LiveSplit
     Time initialTime integrateTo DerivativeOf
   module Flux = R406.FixedLiveFlux
     Time initialTime integrateTo DerivativeOf
+  module Instant = Ordered.LiveOrdered
+    Time initialTime integrateTo DerivativeOf
   module Original = Ordered.IntegratedOrdered
     Time initialTime integrateTo DerivativeOf integration
   module Kernel = ToR503.OrderedToR503
@@ -186,8 +188,7 @@ module LiveSplit
     (T : Dyn.PhysicalNSGalerkinTrajectory) →
     (R : Support.LiteralNonzeroCutoffTrajectory T) →
     (cutoff : Nat) (time : Time) →
-    Ordered.LiveOrdered.instantaneousOrderedOrientedForce
-      Time initialTime integrateTo DerivativeOf T R cutoff time
+    Instant.instantaneousOrderedOrientedForce T R cutoff time
     ≡
     instantaneousSelfOrdered T R cutoff time
       + instantaneousExternalOrdered T R cutoff time
@@ -229,8 +230,7 @@ module LiveSplit
   integratedOrderedSplitsSelfExternal T R cutoff terminal =
     let
       original =
-        Ordered.LiveOrdered.instantaneousOrderedOrientedForce
-          Time initialTime integrateTo DerivativeOf T R cutoff
+        Instant.instantaneousOrderedOrientedForce T R cutoff
       self = instantaneousSelfOrdered T R cutoff
       external = instantaneousExternalOrdered T R cutoff
       pointwise =
@@ -322,6 +322,12 @@ round615IntegratedSelfExternalSplitClosed = true
 round615SelfExternalBudgetsCompileToR503 : Bool
 round615SelfExternalBudgetsCompileToR503 = true
 
+round615SeparateSelfExternalBudgetsMandatoryForR503 : Bool
+round615SeparateSelfExternalBudgetsMandatoryForR503 = false
+
+round615CanonicalSingleSignedOrderedBudgetRemainsWeaker : Bool
+round615CanonicalSingleSignedOrderedBudgetRemainsWeaker = true
+
 round615SelfSignedSpacetimeBudgetClosed : Bool
 round615SelfSignedSpacetimeBudgetClosed = false
 
@@ -337,6 +343,14 @@ round615IntroducesEstimate = false
 round615SelfExternalBudgetsCompileToR503IsTrue :
   round615SelfExternalBudgetsCompileToR503 ≡ true
 round615SelfExternalBudgetsCompileToR503IsTrue = refl
+
+round615SeparateSelfExternalBudgetsMandatoryForR503IsFalse :
+  round615SeparateSelfExternalBudgetsMandatoryForR503 ≡ false
+round615SeparateSelfExternalBudgetsMandatoryForR503IsFalse = refl
+
+round615CanonicalSingleSignedOrderedBudgetRemainsWeakerIsTrue :
+  round615CanonicalSingleSignedOrderedBudgetRemainsWeaker ≡ true
+round615CanonicalSingleSignedOrderedBudgetRemainsWeakerIsTrue = refl
 
 round615IntroducesEstimateIsFalse :
   round615IntroducesEstimate ≡ false
