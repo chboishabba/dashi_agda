@@ -113,6 +113,8 @@ record Canonical369InterpretationBoundary : Set where
     legacyBridgeRestrictedToCanonicalSamples : Bool
     legacyBridgeIntertwinesTranslationCoordinatewise : Bool
     legacyBridgeIntertwinesReflectionCoordinatewise : Bool
+    legacyBridgeTranslationCommutingSquareOwned : Bool
+    legacyBridgeReflectionCommutingSquareOwned : Bool
     legacyBridgeRecoversPhaseC3FromLevelC3 : Bool
     legacyFibreEquivalentToCanonicalJointBundle : Bool
 
@@ -177,6 +179,8 @@ canonicalCanonical369InterpretationBoundary =
     ; legacyBridgeRestrictedToCanonicalSamples = true
     ; legacyBridgeIntertwinesTranslationCoordinatewise = true
     ; legacyBridgeIntertwinesReflectionCoordinatewise = true
+    ; legacyBridgeTranslationCommutingSquareOwned = true
+    ; legacyBridgeReflectionCommutingSquareOwned = true
     ; legacyBridgeRecoversPhaseC3FromLevelC3 = false
     ; legacyFibreEquivalentToCanonicalJointBundle = false
     }
@@ -245,6 +249,19 @@ legacyBridgePreservesReflectionAction :
     canonicalCanonical369InterpretationBoundary
   ≡ true
 legacyBridgePreservesReflectionAction = refl
+
+
+legacyBridgeTranslationSquareIsOwned :
+  legacyBridgeTranslationCommutingSquareOwned
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+legacyBridgeTranslationSquareIsOwned = refl
+
+legacyBridgeReflectionSquareIsOwned :
+  legacyBridgeReflectionCommutingSquareOwned
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+legacyBridgeReflectionSquareIsOwned = refl
 
 legacyBridgeDoesNotRecoverPhaseC3 :
   legacyBridgeRecoversPhaseC3FromLevelC3
