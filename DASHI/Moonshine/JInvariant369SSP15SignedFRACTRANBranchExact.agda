@@ -641,7 +641,7 @@ record PointedSignedFRACTRANSeed : Set where
     pointedLane : PointedSignedSSPLane
     valuation : Signed.SSPValuation
     valuationMatchesPointedLane :
-      (prime : Lane.MonsterPrimeLane) →
+      (prime : Signed.SSPPrime) →
       valuation prime ≡ pointedSignedValuation pointedLane prime
     program : List Signed.WeaveInstruction
 
