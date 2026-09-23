@@ -49,6 +49,7 @@ import DASHI.Physics.YangMills.BalabanCMP116R406SharedMarkedGeometricRound418Exa
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalSharedShellR406Round419Exact as R419
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalR406MixedLogRound420Exact as R420
 import DASHI.Physics.YangMills.BalabanCMP116ExternalMarkResidualSummationRound423Exact as R423
+import DASHI.Physics.YangMills.BalabanCMP116SelectedR406ChargedLocalisationRound424Exact as R424
 
 record PhysicalCanonicalR406Inputs
     {Measure TestObservable : Set}
@@ -216,12 +217,16 @@ record PhysicalChargedR406Inputs
 
     residualEnvelope : ℝ
 
-    residualSummability :
-      Resum.sumℝ
-        (λ domain →
-          R423.negativeExp exponential (residualCharge domain))
-        (R406.localizedDomains application)
-      ≤ℝ residualEnvelope
+    -- Literal instantiation of the EXISTING CMP116 charged-localisation
+    -- theorem on this exact selected R406 family.  The preferred route no
+    -- longer accepts the residual sum as a free inequality.
+    SourceDomain Background History : Set
+    resummation :
+      Resum.MarkedLocalisationResummationData SourceDomain Background History
+
+    residualSummabilityAttachment :
+      R424.SelectedR406ChargedLocalisationAttachment
+        application resummation exponential residualCharge residualEnvelope
 
     factoredEnvelopeIsPhysicalSharedMarkedShell :
       R423.negativeExp exponential externalCharge
@@ -308,7 +313,8 @@ asPhysicalFactoredR406InputsFromCharged
       R423.chargedCommonYShellBelowExternalTimesResidual
         (asChargedPointwiseFactorization inputs)
   ; PhysicalFactoredR406Inputs.residualSummability =
-      residualSummability inputs
+      R424.selectedResidualSummabilityFromExistingCMP116
+        (residualSummabilityAttachment inputs)
   ; PhysicalFactoredR406Inputs.factoredEnvelopeIsPhysicalSharedMarkedShell =
       factoredEnvelopeIsPhysicalSharedMarkedShell inputs
   ; PhysicalFactoredR406Inputs.selectedBoundaryMagnitudeIsLiteralMixedLogMagnitude =
@@ -505,7 +511,10 @@ round421NegativeExponentialFactorizationLevel : ProofLevel
 round421NegativeExponentialFactorizationLevel = standardImported
 
 round421ResidualCMP116SummabilityLevel : ProofLevel
-round421ResidualCMP116SummabilityLevel = conditional
+round421ResidualCMP116SummabilityLevel = machineChecked
+
+round421SelectedCMP116ResidualCarrierAttachmentLevel : ProofLevel
+round421SelectedCMP116ResidualCarrierAttachmentLevel = conditional
 
 round421SharedShellFactorizationLevel : ProofLevel
 round421SharedShellFactorizationLevel = conditional
