@@ -39,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Ex
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNR573SelfExternalNestedCompanionSplitRound613Exact as R613
 import DASHI.Physics.Closure.NSTriadKNThreeLegResidualMembershipCompilerRound616Exact as R616
+import DASHI.Physics.Closure.NSTriadKNExternalWaleffeOrbitResolvedRound619Exact as R619
 import DASHI.Physics.Closure.NSTriadKNR573OrbitResolvedExternalNestedRound620Exact as R620
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSelectionRound621Exact as R621
 
@@ -68,7 +69,7 @@ module CanonicalExternalNested
     (output : Z3.FourierMode) →
     (tau : Physical.PhysicalTriadIncidence) →
     tau ∈ fibre output →
-    _
+    R619.ThreeLegOrbitResolvedSelection system tau
   canonicalSelectionFromFibre output tau member =
     R621.canonicalThreeLegOrbitResolvedSelection
       system tau
