@@ -272,3 +272,5 @@ import DASHI.Law.SensibLawChangeLocusExact
 import DASHI.Law.SensibLawGravityComparativeWorldExact
 import DASHI.Law.SensibLawComparativeCrossDomainBatteryExact
 import DASHI.Law.SensibLawTypedAnswerChangingExplanationExact
+import DASHI.Law.SensibLawComparativeChangeAdaptersExact
+import DASHI.Law.SensibLawTypedComparativeReceiptExtensionExact
