@@ -268,3 +268,6 @@ import DASHI.Law.SensibLawPersonalProfessionalComparativeWorldExact
 import DASHI.Law.SensibLawTemporalComparativeWorldExact
 import DASHI.Law.SensibLawYindjibarndiPartyComparativeWorldExact
 import DASHI.Law.SensibLawTemporalComparativeWorldRegression
+import DASHI.Law.SensibLawChangeLocusExact
+import DASHI.Law.SensibLawGravityComparativeWorldExact
+import DASHI.Law.SensibLawComparativeCrossDomainBatteryExact
