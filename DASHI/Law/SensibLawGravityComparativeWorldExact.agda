@@ -110,7 +110,7 @@ stateActuallyChangesUnderDeclaredControl =
 regularityCoordinateRemainsInvariant :
   Experiment.CoordinateInvariantUnder
     Regularity.demoDesign
-    Regularity.regularityCoordinate
+    Regularity.demoRegularityCoordinate
     Regularity.DeclaredDemoControl
 regularityCoordinateRemainsInvariant =
   Regularity.demoRegularityInvariant
