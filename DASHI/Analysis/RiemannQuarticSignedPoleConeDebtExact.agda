@@ -50,6 +50,9 @@ data ConeDebtCoordinate : Set where
   coneAutomaticallyInsideCanonicalRadius : ConeDebtCoordinate
   coneContainedInFixedThreeUnitWindow : ConeDebtCoordinate
   fixedConeWindowZeroCountLogBound : ConeDebtCoordinate
+  perConeLiteralSourceEnvelope : ConeDebtCoordinate
+  coneMultiplicityBelowFixedWindowCount : ConeDebtCoordinate
+  coneDebtLogOverR6Bound : ConeDebtCoordinate
 
   coneDebtGloballyPayable : ConeDebtCoordinate
   farExactContributionControlled : ConeDebtCoordinate
@@ -75,6 +78,9 @@ coneDebtStatus completeLocalJointRemainderBound = theoremOwned
 coneDebtStatus coneAutomaticallyInsideCanonicalRadius = theoremOwned
 coneDebtStatus coneContainedInFixedThreeUnitWindow = theoremOwned
 coneDebtStatus fixedConeWindowZeroCountLogBound = theoremOwned
+coneDebtStatus perConeLiteralSourceEnvelope = theoremOwned
+coneDebtStatus coneMultiplicityBelowFixedWindowCount = theoremOwned
+coneDebtStatus coneDebtLogOverR6Bound = theoremOwned
 
 coneDebtStatus coneDebtGloballyPayable = openAnalyticObstruction
 coneDebtStatus farExactContributionControlled = openAnalyticObstruction
@@ -98,6 +104,9 @@ record QuarticSignedPoleConeDebtBoundary : Set where
     coneAutomaticallyInsideCanonicalRadiusPaid : Bool
     coneContainedInFixedThreeUnitWindowPaid : Bool
     fixedConeWindowZeroCountLogBoundPaid : Bool
+    perConeLiteralSourceEnvelopePaid : Bool
+    coneMultiplicityBelowFixedWindowCountPaid : Bool
+    coneDebtLogOverR6BoundPaid : Bool
 
     coneDebtGloballyPayablePaid : Bool
     farExactContributionControlledPaid : Bool
@@ -132,6 +141,12 @@ record QuarticSignedPoleConeDebtBoundary : Set where
       coneContainedInFixedThreeUnitWindowPaid ≡ true
     fixedConeWindowZeroCountLogBoundPaidIsTrue :
       fixedConeWindowZeroCountLogBoundPaid ≡ true
+    perConeLiteralSourceEnvelopePaidIsTrue :
+      perConeLiteralSourceEnvelopePaid ≡ true
+    coneMultiplicityBelowFixedWindowCountPaidIsTrue :
+      coneMultiplicityBelowFixedWindowCountPaid ≡ true
+    coneDebtLogOverR6BoundPaidIsTrue :
+      coneDebtLogOverR6BoundPaid ≡ true
 
     coneDebtGloballyPayablePaidIsFalse :
       coneDebtGloballyPayablePaid ≡ false
@@ -149,12 +164,14 @@ canonicalQuarticSignedPoleConeDebtBoundary =
   quartic-signed-pole-cone-debt-boundary
     true true true true true
     true true true false true true true true true
+    true true true
     false false false
     refl refl refl refl refl
     refl refl refl refl refl refl refl refl refl
     refl refl refl
-    "The literal off-ordinate G3 source is now partitioned on finite symmetric zero windows into local cone, local good and far exact lanes.  The Taylor carrier is never globally summed.  ConeDebt is the positive part of the exact literal source on the potentially unfavorable cone, GoodQuarticGain is nonnegative, LocalRemainderDebt is finite-window absolute remainder debt, and FarExact retains the original decaying pair kernel.  The finite source obeys OffOrdExact <= ConeDebt - GoodQuarticGain + LocalRemainderDebt + FarExact."
-    "The canonical local radius eta0=1/(pi+1) is theorem-owned.  On this radius the horizontal quadratic jet error has the explicit bound |R_Q(q)| <= (5/96)|q|^4*M6.  Because M0=M2=0, the exact base cosine channel itself also satisfies |C_P(q)| <= (5/96)|q|^4*M4abs, so a sixth-order base remainder is not required merely to control the local debt.  The mixed cone is contained in the fixed window |gamma-t|<=3/2, and the enclosing three-unit zero multiplicity has an unconditional O(log t) bound from the existing local RvM theorem.  The hyperbolic alpha^4 remainder is now source-written with the same certified 5/96 fourth-order constant, and the three local pieces compile to one explicit same-object bound for jointQuarticJetRemainder.  For t>=200 every mixed-cone zero is automatically inside the canonical local radius in both normalized coordinates.  Thus local Taylor control is no longer the active debt.  Test whether the resulting weighted cone debt can actually be paid from the fixed-window O(log t) zero information and the good/far/target margin before adding more formal structure."
+    refl refl refl
+    "The literal off-ordinate G3 source is partitioned on finite symmetric zero windows into local cone, local good and far exact lanes.  The Taylor carrier is never globally summed.  ConeDebt is the positive part of the exact literal source on the potentially unfavorable cone, GoodQuarticGain is nonnegative, LocalRemainderDebt is finite-window absolute remainder debt, and FarExact retains the original decaying pair kernel.  The finite source obeys OffOrdExact <= ConeDebt - GoodQuarticGain + LocalRemainderDebt + FarExact.  The new fail-fast compiler also proves the absolute cone contribution has the correct O(log t / t^6) scale."
+    "The canonical local radius eta0=1/(pi+1) is theorem-owned.  On this radius the horizontal quadratic jet error has the explicit bound |R_Q(q)| <= (5/96)|q|^4*M6.  Because M0=M2=0, the exact base cosine channel itself also satisfies |C_P(q)| <= (5/96)|q|^4*M4abs, so a sixth-order base remainder is not required merely to control the local debt.  The mixed cone is contained in the fixed window |gamma-t|<=3/2, and the enclosing three-unit zero multiplicity has an unconditional O(log t) bound from the existing local RvM theorem.  The hyperbolic alpha^4 remainder is source-written with the same certified 5/96 fourth-order constant, and the three local pieces compile to one explicit same-object bound for jointQuarticJetRemainder.  For t>=200 every mixed-cone zero is automatically inside the canonical local radius in both normalized coordinates.  The Lean companion now further derives an explicit witness constant C_cone(W) with max(literal pair source,0) <= m_sigma*C_cone(W)/(t/16)^6 on every cone zero, proves the finite cone multiplicity is bounded by N(t-3/2,t+3/2), and compiles the local RvM theorem to ConeDebt_n <= 3*A0*C_cone(W)*log(t+5)/(t/16)^6.  This pays the absolute cone scaling estimate, but not its comparison with the off-line target as heightOf rho tends to zero."
 
 finiteConeDebtBudgetIsPaid :
   coneDebtStatus finiteConeDebtBudget ≡ theoremOwned
