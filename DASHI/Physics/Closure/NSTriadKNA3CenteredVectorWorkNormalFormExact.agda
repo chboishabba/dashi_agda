@@ -37,7 +37,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
-open import Data.Rational.Base using (ℚ; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -104,6 +105,41 @@ fixedOutputA3CenteredNormalForm rho S velocity cutoff output =
       (Output.physicalOutputFiber cutoff output))
     (D1a.mixedProductCell S velocity)
     (Output.physicalOutputFiber cutoff output)
+
+
+fixedOutputSignedA3CenteredNormalForm :
+  ∀ {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E} →
+  (rho : Z3.FourierMode → ℚ) →
+  (S : Helical.HelicalModeScalars F) →
+  (velocity : Z3.FourierMode → C3.Complex3 F) →
+  (cutoff : Nat) (output : Z3.FourierMode) →
+  let
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = R224.foldVector value items
+    rate = Pair.cellRate rho
+    weighted =
+      Pair.weightedWorkSum rate (Pair.cellWork mixed value) items
+    rateTotal = Pair.rateSum rate items
+    n = Pair.natAsRational (length items)
+  in
+  0ℚ - Vector.pairDifferenceVectorWorkSum rate mixed value items
+  ≡ n * (0ℚ - weighted)
+      + rateTotal * Work.coherentWork mixed mixed
+fixedOutputSignedA3CenteredNormalForm rho S velocity cutoff output
+  rewrite fixedOutputA3CenteredNormalForm rho S velocity cutoff output =
+  let
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = R224.foldVector value items
+    rate = Pair.cellRate rho
+    weighted =
+      Pair.weightedWorkSum rate (Pair.cellWork mixed value) items
+    rateTotal = Pair.rateSum rate items
+    n = Pair.natAsRational (length items)
+    self = Work.coherentWork mixed mixed
+  in
+  solve (n ∷ weighted ∷ rateTotal ∷ self ∷ [])
 
 ------------------------------------------------------------------------
 -- Status.
