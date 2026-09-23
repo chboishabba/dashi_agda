@@ -35,6 +35,10 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
+import DASHI.Physics.Closure.NSTriadKNFixedOutputFluxFiniteDerivativeCompilerRound412Exact as R412
+import DASHI.Physics.Closure.NSTriadKNR290PairFluxDerivativeCompilerRound416Exact as R416
+import DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Exact as R417
+import DASHI.Physics.Closure.NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact as R564
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Energy
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound637Exact as R637
@@ -62,16 +66,13 @@ module InitialCritical
       (Time → C3.Complex3 F) → Set)
     (ScalarDerivativeOf : (Time → ℚ) → (Time → ℚ) → Set)
     (hermitianCalculus :
-      DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Exact.HermitianDerivativeCalculus
-        Time DerivativeOf ScalarDerivativeOf)
+      R417.HermitianDerivativeCalculus Time DerivativeOf ScalarDerivativeOf)
     (constantScaleCalculus :
-      DASHI.Physics.Closure.NSTriadKNR290PairFluxDerivativeCompilerRound416Exact.ScalarConstantDerivativeCalculus
-        Time ScalarDerivativeOf)
+      R416.ScalarConstantDerivativeCalculus Time ScalarDerivativeOf)
     (scalarDerivativeAlgebra :
-      DASHI.Physics.Closure.NSTriadKNFixedOutputFluxFiniteDerivativeCompilerRound412Exact.ScalarDerivativeAlgebra
-        Time ScalarDerivativeOf)
+      R412.ScalarDerivativeAlgebra Time ScalarDerivativeOf)
     (FTC :
-      DASHI.Physics.Closure.NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact.ScalarFundamentalTheorem564
+      R564.ScalarFundamentalTheorem564
         Time initialTime integrateTo ScalarDerivativeOf)
     (integrationLinearity :
       Energy.ScalarIntegrationLinearity Time integrateTo) where
@@ -81,6 +82,8 @@ module InitialCritical
   module Support = R405.LiteralCutoffSupport
     Time initialTime integrateTo DerivativeOf
   module Modes = ModeCarrier.LiteralModeCarrier
+    Time initialTime integrateTo DerivativeOf
+  module Obs = Fold.LiteralCriticalObservables
     Time initialTime integrateTo DerivativeOf
   module Physical = R637.PhysicalSlice
     Time initialTime integrateTo DerivativeOf ScalarDerivativeOf
@@ -159,7 +162,7 @@ module InitialCritical
     (D : Live.LiteralRHSTrajectoryData) →
     (coherence : ModeListedCoherence D) →
     (cutoff : Nat) →
-    Fold.LiteralCriticalObservables.criticalEnergyAt
+    Obs.criticalEnergyAt
       (Live.literalPhysicalTrajectory D) cutoff initialTime
     ≡ initialDatumCritical D cutoff
   initialCriticalSameObject D coherence cutoff =
