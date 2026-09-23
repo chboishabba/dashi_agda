@@ -59,6 +59,8 @@ import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
 import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact as LegacyBridge
 import DASHI.Moonshine.JInvariant369JointFibreBifiltrationExact as JointBif
+import DASHI.Moonshine.JInvariantSmithChartObserverCrossPollinationExact as SmithCross
+import DASHI.Moonshine.JInvariantSmithChartActionSeparationExact as SmithAction
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -135,6 +137,13 @@ record Canonical369InterpretationBoundary : Set where
     legacyBridgeReflectionCommutingSquareOwned : Bool
     legacyBridgeRecoversPhaseC3FromLevelC3 : Bool
     legacyFibreEquivalentToCanonicalJointBundle : Bool
+
+    smithObserverCrossPollinationOwned : Bool
+    smithHalfTurnDistinctFromModularTOnC6 : Bool
+    smithHalfTurnDistinctFromModularReflectionOnC6 : Bool
+    c3QuotientCanEraseSmithHalfTurn : Bool
+    engineeringJIdentifiedWithModularJInvariant : Bool
+    smithGammaIdentifiedWithModularJInvariant : Bool
 
 open Canonical369InterpretationBoundary public
 
@@ -214,6 +223,13 @@ canonicalCanonical369InterpretationBoundary =
     ; legacyBridgeReflectionCommutingSquareOwned = true
     ; legacyBridgeRecoversPhaseC3FromLevelC3 = false
     ; legacyFibreEquivalentToCanonicalJointBundle = false
+
+    ; smithObserverCrossPollinationOwned = true
+    ; smithHalfTurnDistinctFromModularTOnC6 = true
+    ; smithHalfTurnDistinctFromModularReflectionOnC6 = true
+    ; c3QuotientCanEraseSmithHalfTurn = true
+    ; engineeringJIdentifiedWithModularJInvariant = false
+    ; smithGammaIdentifiedWithModularJInvariant = false
     }
 
 ------------------------------------------------------------------------
@@ -462,3 +478,48 @@ legacyBridgeBoundary :
   LegacyBridge.LegacyBridgeBoundary
 legacyBridgeBoundary =
   LegacyBridge.canonicalLegacyBridgeBoundary
+
+
+------------------------------------------------------------------------
+-- Electrical-engineering / Smith-chart cross-pollination.
+------------------------------------------------------------------------
+
+smithObserverCrossPollinationBoundary :
+  SmithCross.JSmithArrayCrossPollinationBoundary
+smithObserverCrossPollinationBoundary =
+  SmithCross.canonicalJSmithArrayCrossPollinationBoundary
+
+smithActionSeparationBoundary :
+  SmithAction.SmithModularActionSeparationBoundary
+smithActionSeparationBoundary =
+  SmithAction.canonicalSmithModularActionSeparationBoundary
+
+smithHalfTurnIsNotModularT :
+  smithHalfTurnDistinctFromModularTOnC6
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+smithHalfTurnIsNotModularT = refl
+
+smithHalfTurnIsNotModularReflection :
+  smithHalfTurnDistinctFromModularReflectionOnC6
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+smithHalfTurnIsNotModularReflection = refl
+
+coarseC3CanHideSmithHalfTurn :
+  c3QuotientCanEraseSmithHalfTurn
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+coarseC3CanHideSmithHalfTurn = refl
+
+engineeringJRemainsDistinctFromModularJ :
+  engineeringJIdentifiedWithModularJInvariant
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+engineeringJRemainsDistinctFromModularJ = refl
+
+smithGammaRemainsDistinctFromModularJ :
+  smithGammaIdentifiedWithModularJInvariant
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+smithGammaRemainsDistinctFromModularJ = refl
