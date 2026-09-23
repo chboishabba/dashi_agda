@@ -33,6 +33,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNHeatFactorizedPairRemainderRound299Exact as R299
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
@@ -103,10 +105,8 @@ module Live
     (initialTime : Time)
     (integrateTo : (Time → ℚ) → Time → ℚ)
     (DerivativeOf :
-      (Time → DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.Complex3
-        DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.rationalRealField) →
-      (Time → DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.Complex3
-        DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.rationalRealField) →
+      (Time → C3.Complex3 Rational.rationalRealField) →
+      (Time → C3.Complex3 Rational.rationalRealField) →
       Set)
     (integration : R495.IntegrationTransportAuthority Time integrateTo) where
 
