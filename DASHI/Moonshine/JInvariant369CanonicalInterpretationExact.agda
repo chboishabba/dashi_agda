@@ -66,6 +66,7 @@ import DASHI.Moonshine.JInvariantSmithChartObserverCrossPollinationExact as Smit
 import DASHI.Moonshine.JInvariantSmithChartActionSeparationExact as SmithAction
 import DASHI.Moonshine.JInvariantSmithChartMobiusMatrixBridgeExact as SmithMatrix
 import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact as Cross
+import DASHI.Moonshine.JInvariant369NeutralCuspRelationCrossPollinationExact as NeutralCusp
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -691,3 +692,43 @@ weightTwelveDoesNotCollapseToStageTwelve :
     c6TenRankWeightTwelveBoundary
   ≡ false
 weightTwelveDoesNotCollapseToStageTwelve = refl
+
+
+------------------------------------------------------------------------
+-- Neutral/oriented finite phase + eta24 cusp + relation constructor receipt.
+------------------------------------------------------------------------
+
+neutralCuspRelationBoundary :
+  NeutralCusp.NeutralCuspRelationBoundary
+neutralCuspRelationBoundary =
+  NeutralCusp.canonicalNeutralCuspRelationBoundary
+
+phaseFifteenReallySplitsNeutralFivePlusOrientedTen :
+  NeutralCusp.phase15SplitsAsNeutral5PlusOriented10
+    neutralCuspRelationBoundary
+  ≡ true
+phaseFifteenReallySplitsNeutralFivePlusOrientedTen = refl
+
+eta24CuspZeroIsCompilerOwnedInLean :
+  NeutralCusp.eta24CuspZeroOwnedInLean
+    neutralCuspRelationBoundary
+  ≡ true
+eta24CuspZeroIsCompilerOwnedInLean = refl
+
+eta24NormalizedDeltaSameObjectIsCompilerOwnedInLean :
+  NeutralCusp.eta24NormalizedDeltaSameObjectOwnedInLean
+    neutralCuspRelationBoundary
+  ≡ true
+eta24NormalizedDeltaSameObjectIsCompilerOwnedInLean = refl
+
+finiteZeroDoesNotCollapseToCuspZero :
+  NeutralCusp.finiteZeroEqualsCuspZero
+    neutralCuspRelationBoundary
+  ≡ false
+finiteZeroDoesNotCollapseToCuspZero = refl
+
+cuspZeroDoesNotCollapseToRelationDiagonal :
+  NeutralCusp.cuspZeroEqualsRelationDiagonal
+    neutralCuspRelationBoundary
+  ≡ false
+cuspZeroDoesNotCollapseToRelationDiagonal = refl
