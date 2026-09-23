@@ -30,6 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNInitialCriticalRealizationToR421Round512Ex
 import DASHI.Physics.Closure.NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact as R507
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound639Exact as R639
 import DASHI.Physics.Closure.NSTriadKNLiteralInitialCriticalRealizationRound640Exact as R640
+import DASHI.Physics.Closure.NSTriadKNSubviscousAbsorptionToRetainedGapRound641Exact as R641
 
 data StrictCriticalResidual : Set where
   missingPhysicalCriticalObservableRealization : StrictCriticalResidual
@@ -177,6 +178,15 @@ round515CutoffUniformInitialCeilingStillProofBearing : Bool
 round515CutoffUniformInitialCeilingStillProofBearing =
   R640.round640CutoffUniformInitialCeilingStillProofBearing
 
+
+round515SubviscousAbsorptionSufficientForRetainedGap : Bool
+round515SubviscousAbsorptionSufficientForRetainedGap =
+  R641.round641SubviscousAbsorptionCompilerClosed
+
+round515SubviscousAbsorptionMandatory : Bool
+round515SubviscousAbsorptionMandatory =
+  R641.round641SubviscousAbsorptionMandatory
+
 round515ClayPromotion : Bool
 round515ClayPromotion = false
 
@@ -235,6 +245,17 @@ round515CutoffUniformInitialCeilingStillProofBearingIsTrue :
   round515CutoffUniformInitialCeilingStillProofBearing ≡ true
 round515CutoffUniformInitialCeilingStillProofBearingIsTrue =
   R640.round640CutoffUniformInitialCeilingStillProofBearingIsTrue
+
+
+round515SubviscousAbsorptionSufficientForRetainedGapIsTrue :
+  round515SubviscousAbsorptionSufficientForRetainedGap ≡ true
+round515SubviscousAbsorptionSufficientForRetainedGapIsTrue =
+  R641.round641SubviscousAbsorptionCompilerClosedIsTrue
+
+round515SubviscousAbsorptionMandatoryIsFalse :
+  round515SubviscousAbsorptionMandatory ≡ false
+round515SubviscousAbsorptionMandatoryIsFalse =
+  R641.round641SubviscousAbsorptionMandatoryIsFalse
 
 round515ClayPromotionIsFalse : round515ClayPromotion ≡ false
 round515ClayPromotionIsFalse = refl
