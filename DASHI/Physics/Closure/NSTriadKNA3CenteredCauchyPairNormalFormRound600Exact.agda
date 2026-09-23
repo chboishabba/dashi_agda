@@ -524,12 +524,20 @@ module FixedOutput
           - A3.n * R543.fullSquareSum
               (pairRateGram rate gram) fibre
       centeredExpansion =
-        fullSquareLinearCombination
-          (R539.two * A3.rateTotal)
-          (0ℚ - A3.n)
-          gram
-          (pairRateGram rate gram)
-          fibre
+        trans
+          (fullSquareLinearCombination
+            (R539.two * A3.rateTotal)
+            (0ℚ - A3.n)
+            gram
+            (pairRateGram rate gram)
+            fibre)
+          (solve
+            ( A3.n
+            ∷ A3.rateTotal
+            ∷ R543.fullSquareSum gram fibre
+            ∷ R543.fullSquareSum
+                (pairRateGram rate gram) fibre
+            ∷ []))
 
       a3Meaning = A3.centeredFullGramNormalForm
     in
