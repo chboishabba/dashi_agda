@@ -27,6 +27,7 @@ open import Relation.Binary.PropositionalEquality using (cong₂)
 
 import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
 import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact as R543
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -164,9 +165,9 @@ module PhysicalResolved
 
   module OnNonzeroOutput
       (viscosityPositive : Positive (Field30.viscosity physicalSystem))
-      (output : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode)
+      (output : Z3.FourierMode)
       (outputNonzero :
-        DASHI.Physics.Closure.NSIntegerFourierLattice.NonZeroMode output) where
+        Z3.NonZeroMode output) where
 
     module Rate = R400.PhysicalRate physicalSystem S viscosityPositive
 
