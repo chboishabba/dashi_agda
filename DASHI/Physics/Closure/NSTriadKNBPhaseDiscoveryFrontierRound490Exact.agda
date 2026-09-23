@@ -53,6 +53,7 @@ import DASHI.Physics.Closure.NSTriadKNR230SelfExternalNetworkSplitRound605Exact 
 import DASHI.Physics.Closure.NSTriadKNR567ForcingFullSelfExternalSplitRound606Exact as R606
 import DASHI.Physics.Closure.NSTriadKNA3CauchyMismatchNetworkSplitRound607Exact as R607
 import DASHI.Physics.Closure.NSTriadKNR230ExternalResidualCarrierRound608Exact as R608
+import DASHI.Physics.Closure.NSTriadKNR567ExternalResidualPairExpansionRound609Exact as R609
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -421,6 +422,15 @@ round490ExternalVectorResidualCarrierIsScalarPayment =
 round490ExternalNetworkResidualPaymentClosed : Bool
 round490ExternalNetworkResidualPaymentClosed =
   R608.round608ExternalNetworkMismatchPaid
+
+
+round490ExternalCauchyPairExpandedToLiteralResidualPairings : Bool
+round490ExternalCauchyPairExpandedToLiteralResidualPairings =
+  R609.round609R606ExternalPairOnLiteralR112ResidualCarriers
+
+round490ExternalResidualPairingsIdentifiedWithR115Cells : Bool
+round490ExternalResidualPairingsIdentifiedWithR115Cells =
+  R609.round609IdentifiesThesePairingsWithR115WaleffeCells
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -868,6 +878,17 @@ round490ExternalNetworkResidualPaymentClosedIsFalse :
   round490ExternalNetworkResidualPaymentClosed ≡ false
 round490ExternalNetworkResidualPaymentClosedIsFalse =
   R608.round608ExternalNetworkMismatchPaidIsFalse
+
+
+round490ExternalCauchyPairExpandedToLiteralResidualPairingsIsTrue :
+  round490ExternalCauchyPairExpandedToLiteralResidualPairings ≡ true
+round490ExternalCauchyPairExpandedToLiteralResidualPairingsIsTrue =
+  R609.round609R606ExternalPairOnLiteralR112ResidualCarriersIsTrue
+
+round490ExternalResidualPairingsIdentifiedWithR115CellsIsFalse :
+  round490ExternalResidualPairingsIdentifiedWithR115Cells ≡ false
+round490ExternalResidualPairingsIdentifiedWithR115CellsIsFalse =
+  R609.round609IdentifiesThesePairingsWithR115WaleffeCellsIsFalse
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
