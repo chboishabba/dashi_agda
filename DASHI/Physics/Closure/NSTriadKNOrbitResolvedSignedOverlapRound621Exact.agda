@@ -27,6 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNOrbitResolvedSignedOverlapRound621Exact wh
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -96,21 +97,21 @@ module OrbitResolvedSignedOverlap621
   selfSelfOverlap :
     Physical.PhysicalTriadIncidence →
     Physical.PhysicalTriadIncidence →
-    Rational.ℚ
+    ℚ
   selfSelfOverlap left right =
     R179.realHermitianCross (selfCell left) (selfCell right)
 
   selfExternalOverlap :
     (left right : Physical.PhysicalTriadIncidence) →
     R619.ThreeLegOrbitResolvedSelection system right →
-    Rational.ℚ
+    ℚ
   selfExternalOverlap left right rightOrbit =
     R179.realHermitianCross (selfCell left) (externalCell right rightOrbit)
 
   externalSelfOverlap :
     (left right : Physical.PhysicalTriadIncidence) →
     R619.ThreeLegOrbitResolvedSelection system left →
-    Rational.ℚ
+    ℚ
   externalSelfOverlap left right leftOrbit =
     R179.realHermitianCross (externalCell left leftOrbit) (selfCell right)
 
@@ -118,7 +119,7 @@ module OrbitResolvedSignedOverlap621
     (left right : Physical.PhysicalTriadIncidence) →
     R619.ThreeLegOrbitResolvedSelection system left →
     R619.ThreeLegOrbitResolvedSelection system right →
-    Rational.ℚ
+    ℚ
   externalExternalOverlap left right leftOrbit rightOrbit =
     R179.realHermitianCross
       (externalCell left leftOrbit)
