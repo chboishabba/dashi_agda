@@ -253,12 +253,18 @@ rank13FixedProfilesAre1594323 =
 completeCycleMatchesRank12ProfileCount :
   Rel.completeCycleStateCount
   ≡ Rank.fixedTernaryProfileCount Rank.rank12
-completeCycleMatchesRank12ProfileCount = refl
+completeCycleMatchesRank12ProfileCount =
+  trans
+    Rel.completeCycleStateCountIs531441
+    (sym Rank.rank12Profiles)
 
 centralCompletionMatchesRank13ProfileCount :
   Rel.centralCompletionGroupOrderPattern
   ≡ Rank.fixedTernaryProfileCount Rank.rank13
-centralCompletionMatchesRank13ProfileCount = refl
+centralCompletionMatchesRank13ProfileCount =
+  trans
+    Rel.centralCompletionGroupOrderPatternIs1594323
+    (sym Rank.rank13Profiles)
 
 data EqualRankCountCreatesSameSemanticCarrier : Set where
 
