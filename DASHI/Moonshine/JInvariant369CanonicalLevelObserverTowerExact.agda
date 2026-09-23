@@ -33,7 +33,10 @@ module DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (zero; suc)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans; sym)
+open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope
+  using (Trit; neg; zer; pos; []; _∷_)
 open import Data.Product using (proj₂)
 
 import Base369 as Base
@@ -89,9 +92,9 @@ translateLevel3ThreeTimes :
     (translateLevel3Residue
       (translateLevel3Residue x))
   ≡ x
-translateLevel3ThreeTimes (Balanced.neg ∷ []) = refl
-translateLevel3ThreeTimes (Balanced.zer ∷ []) = refl
-translateLevel3ThreeTimes (Balanced.pos ∷ []) = refl
+translateLevel3ThreeTimes (neg ∷ []) = refl
+translateLevel3ThreeTimes (zer ∷ []) = refl
+translateLevel3ThreeTimes (pos ∷ []) = refl
 
 level3CyclicAction :
   C3.OrderThreeAction Level.level3CuspFibre
@@ -407,8 +410,8 @@ reduceNegate :
   Q.reduce (Arithmetic.negateResidue x)
   ≡
   Arithmetic.negateResidue (Q.reduce x)
-reduceNegate {zero} (digit Balanced.∷ []) = refl
-reduceNegate {suc depth} (digit Balanced.∷ rest)
+reduceNegate {zero} (digit ∷ []) = refl
+reduceNegate {suc depth} (digit ∷ rest)
   rewrite reduceNegate rest = refl
 
 record Level27ReflectionLift
