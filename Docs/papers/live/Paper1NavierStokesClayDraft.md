@@ -44,7 +44,7 @@ build the pre-existing R503 direct-off-diagonal/R415 budget surface.  R639 now
 installs the literal finite critical observables on the R414 slice with viscous
 coefficient `2*nu` and derives the critical-energy inequality from the exact
 energy identity, while R640 binds its initial coordinate to the common R240
-initial datum modulo one mode-list coherence receipt and the actual uniform
+initial datum modulo one live-trajectory-to-canonical-R34 coherence receipt and the actual uniform
 initial ceiling.  The present paper is consequently a conditional reduction
 manuscript, not an unconditional Clay/global-regularity claim.
 
@@ -104,7 +104,7 @@ SAME-OBJECT / PHYSICAL
 C3  literal critical coordinates installed on R414                  COMPILER CLOSED
     exact critical-energy identity                                  CLOSED GIVEN STANDARD CALCULUS
 C4  common-initial-datum same-object compiler                       CLOSED
-    mode-list -> modeListed coherence                               OPEN RECEIPT
+    live trajectory -> canonical R34 mode-list/modeListed attachment                               OPEN RECEIPT
     cutoff-uniform initial critical ceiling                         OPEN
 C5  positive retained viscosity 0 < 2*nu-a                          OPEN
     optional a<=nu sufficient compiler                              CLOSED / NOT MANDATORY
