@@ -38,6 +38,7 @@ import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Reflection
 import DASHI.Moonshine.JInvariantSmithChartActionSeparationExact as Separation
 import DASHI.Moonshine.JInvariantSmithChartMobiusMatrixBridgeExact as SmithMatrix
 import DASHI.Moonshine.JInvariant369CanonicalJointReflectionMinimalExact as Minimal
+import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as Joint
 
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Completion
 import DASHI.Biology.D4IrrepFiniteFrickeEquivariantExact as D4Ten
@@ -117,7 +118,7 @@ c3ErasesSmithHalfTurn =
 
 -- Modular reflection DOES descend nontrivially to the phase C3 quotient.
 modularReflectionDescendsToPhaseC3 =
-  DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact.phase3ReflectionCommutesHex
+  Joint.phase3ReflectionCommutesHex
 
 ------------------------------------------------------------------------
 -- 2. Ten is an intrinsic finite carrier, not a decimal-notation theorem.
