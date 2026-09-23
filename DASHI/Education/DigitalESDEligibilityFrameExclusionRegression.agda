@@ -1,0 +1,19 @@
+module DASHI.Education.DigitalESDEligibilityFrameExclusionRegression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDEligibilityFrameExclusionExact as Frame
+
+declaredEligibleCarrierCannotRecoverUpstreamFrame : Frame.EligibilityFrameFactorisation → ⊥
+declaredEligibleCarrierCannotRecoverUpstreamFrame =
+  Frame.eligibilityFrameDoesNotFactorThroughDeclaredEligibleCarrier
+
+eligibleIsNotTargetUniverse : Frame.DeclaredEligibleCreatesTargetUniverse → ⊥
+eligibleIsNotTargetUniverse = Frame.declaredEligibleDoesNotCreateTargetUniverse
+
+samplingFrameIsNotPopulationTruth : Frame.SamplingFrameCreatesPopulationTruth → ⊥
+samplingFrameIsNotPopulationTruth = Frame.samplingFrameDoesNotCreatePopulationTruth
+
+recruitmentFrameIsNotCoverageTruth : Frame.RecruitmentFrameCreatesCoverageTruth → ⊥
+recruitmentFrameIsNotCoverageTruth = Frame.recruitmentFrameDoesNotCreateCoverageTruth

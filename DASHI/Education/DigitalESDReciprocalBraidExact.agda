@@ -11,9 +11,9 @@ import DASHI.Core.IntersectionalNonFactorability as Intersection
 import DASHI.Interop.PNFHyperfabric369 as PNF369
 import DASHI.Cognition.PNF.MemoryFibre as Memory
 import DASHI.Cognition.PNF.LearningAlgebra as Learning
-import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge as Trauma
+import DASHI.Cognition.PNF.TraumaMemoryHypervoxelAuthorityBoundaryExact as Trauma
 import DASHI.Biology.RelationalQiBodyMemoryBridge as PatternMind
-import DASHI.Biology.Agriculture.BNFSevenGenerationPlanningExact as Seven
+import DASHI.Biology.Agriculture.SevenGenerationBNFBoundaryExact as Seven
 import DASHI.Culture.KimmererBraidTransferResidualBoundaryExact as Kimmerer
 import DASHI.Education.AliceBrownDigitalESDEpistemicGovernanceBridgeExact as Alice
 import DASHI.Education.DigitalInnovationESDTransformationExact as Transformation
@@ -149,7 +149,7 @@ canonicalKimmererTransferResidualBoundary =
 canonicalSevenGenerationBoundary : Seven.SevenGenerationBNFBoundary
 canonicalSevenGenerationBoundary = Seven.canonicalSevenGenerationBNFBoundary
 
-record DigitalESDReciprocalBraid : Set where
+record DigitalESDReciprocalBraid : Set₁ where
   constructor digitalESDReciprocalBraid
   field
     directionalObligations : List DirectionalObligation

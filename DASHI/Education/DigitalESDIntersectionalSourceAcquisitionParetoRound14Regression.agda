@@ -1,0 +1,26 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound14Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound14Exact as Round14
+
+candidateStillRequiresCorpusAdmission :
+  Round14.Round14CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round14.round14CandidateDoesNotCreateIncludedStudy
+
+visibilityNotSafety :
+  Round14.MoreIdentityVisibilityCreatesMoreSafety → ⊥
+visibilityNotSafety = Round14.moreIdentityVisibilityDoesNotCreateMoreSafety
+
+preferredFieldNotDownstreamRespect :
+  Round14.PreferredNameFieldCreatesDownstreamNameRespect → ⊥
+preferredFieldNotDownstreamRespect = Round14.preferredNameFieldDoesNotCreateDownstreamNameRespect
+
+legalNameNotSituatedIdentity :
+  Round14.LegalNameCreatesSituatedIdentityTruth → ⊥
+legalNameNotSituatedIdentity = Round14.legalNameDoesNotCreateSituatedIdentityTruth
+
+onlineSettingNotUniversalSafety :
+  Round14.OnlineSettingCreatesUniversalTGDInclusion → ⊥
+onlineSettingNotUniversalSafety = Round14.onlineSettingDoesNotCreateUniversalTGDInclusion

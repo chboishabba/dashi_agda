@@ -104,7 +104,7 @@ record LegalRerunResult
   (oldGraph newGraph : Algebra.LegalGraph)
   (oldFacts newFacts : Algebra.FactSet)
   (goal : Algebra.LegalProposition)
-  : Set where
+  : Set₁ where
   constructor legal-rerun-result
   field
     disposition : RerunDisposition

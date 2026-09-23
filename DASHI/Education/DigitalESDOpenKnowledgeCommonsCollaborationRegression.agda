@@ -1,0 +1,45 @@
+module DASHI.Education.DigitalESDOpenKnowledgeCommonsCollaborationRegression where
+
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDOpenKnowledgeCommonsCollaborationExact as Commons
+
+stakeholderCountRegression : Commons.stakeholderRoleCount ≡ 5
+stakeholderCountRegression = refl
+
+sourceCountRegression : Commons.commonsSourceCount ≡ 4
+sourceCountRegression = refl
+
+publicRepoObservedRegression :
+  Commons.OpenKnowledgeCommonsBoundary.publicRepositoryFixtureObserved Commons.canonicalOpenKnowledgeCommonsBoundary ≡ true
+publicRepoObservedRegression = refl
+
+publicRepoNotLicenseRegression :
+  Commons.OpenKnowledgeCommonsBoundary.publicVisibilityCreatesOpenLicense Commons.canonicalOpenKnowledgeCommonsBoundary ≡ false
+publicRepoNotLicenseRegression = refl
+
+openLicenseNotAccessibilityRegression :
+  Commons.OpenKnowledgeCommonsBoundary.openLicenseCreatesAccessibility Commons.canonicalOpenKnowledgeCommonsBoundary ≡ false
+openLicenseNotAccessibilityRegression = refl
+
+qidNotTruthRegression :
+  Commons.OpenKnowledgeCommonsBoundary.qidLinkCreatesClaimTruth Commons.canonicalOpenKnowledgeCommonsBoundary ≡ false
+qidNotTruthRegression = refl
+
+multimodalNotAccessibleRegression :
+  Commons.OpenKnowledgeCommonsBoundary.multimodalCreatesAccessibility Commons.canonicalOpenKnowledgeCommonsBoundary ≡ false
+multimodalNotAccessibleRegression = refl
+
+globalAvailabilityNotInclusionRegression :
+  Commons.OpenKnowledgeCommonsBoundary.globalAvailabilityCreatesInclusiveParticipation Commons.canonicalOpenKnowledgeCommonsBoundary ≡ false
+globalAvailabilityNotInclusionRegression = refl
+
+openSourceNotEnvironmentalRegression :
+  Commons.OpenKnowledgeCommonsBoundary.openSourceCreatesEnvironmentalSustainability Commons.canonicalOpenKnowledgeCommonsBoundary ≡ false
+openSourceNotEnvironmentalRegression = refl
+
+openInterfaceNotInclusiveParticipationRegression :
+  Commons.OpenContributionInterfaceDeterminesInclusiveParticipation → ⊥
+openInterfaceNotInclusiveParticipationRegression = Commons.openContributionInterfaceDoesNotDetermineInclusiveParticipation

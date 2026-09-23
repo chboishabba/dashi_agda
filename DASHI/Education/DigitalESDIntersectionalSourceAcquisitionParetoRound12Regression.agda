@@ -1,0 +1,27 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound12Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound12Exact as Round12
+
+candidateStillRequiresCorpusAdmission :
+  Round12.Round12CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round12.round12CandidateDoesNotCreateIncludedStudy
+
+nonDisclosureNotAbsenceOfNeed :
+  Round12.NonDisclosureCreatesNoDisabilityOrNeed → ⊥
+nonDisclosureNotAbsenceOfNeed = Round12.nonDisclosureDoesNotCreateNoDisabilityOrNeed
+
+diagnosisNotRealisedAccommodation :
+  Round12.FormalDiagnosisCreatesRealisedAccommodation → ⊥
+diagnosisNotRealisedAccommodation = Round12.formalDiagnosisDoesNotCreateRealisedAccommodation
+
+grantedNotImplemented :
+  Round12.GrantedAccommodationCreatesImplementedAccommodation → ⊥
+grantedNotImplemented = Round12.grantedAccommodationDoesNotCreateImplementedAccommodation
+
+minorityScoreNotIntersectionalCause :
+  Round12.MultipleMinorityIdentityMeasurementCreatesIntersectionalCause → ⊥
+minorityScoreNotIntersectionalCause =
+  Round12.multipleMinorityIdentityMeasurementDoesNotCreateIntersectionalCause

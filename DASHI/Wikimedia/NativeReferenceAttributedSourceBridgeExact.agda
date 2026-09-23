@@ -16,7 +16,7 @@ import DASHI.Wikimedia.NativeReferenceSemanticsExact as Native
 ------------------------------------------------------------------------
 
 record AttributedReferenceSource
-    (candidate : Native.ReferenceSourceCandidate) : Set where
+    (candidate : Native.ReferenceSourceCandidate) : Set₁ where
   constructor attributed-reference-source
   field
     source : Attributed.AttributedSource

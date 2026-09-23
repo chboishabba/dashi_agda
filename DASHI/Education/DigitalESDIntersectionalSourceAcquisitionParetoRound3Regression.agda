@@ -1,0 +1,19 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound3Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound3Exact as Round3
+
+candidateStillRequiresReviewAdmission :
+  Round3.Round3CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresReviewAdmission = Round3.round3CandidateDoesNotCreateIncludedStudy
+
+communityPartnershipNotGenericAuthority :
+  Round3.CommunityPartnershipCreatesUniversalIndigenousAuthority → ⊥
+communityPartnershipNotGenericAuthority =
+  Round3.communityPartnershipDoesNotCreateUniversalIndigenousAuthority
+
+parentFamilyObserverNotStudentVoice :
+  Round3.FamilySurveyCreatesStudentVoice → ⊥
+parentFamilyObserverNotStudentVoice = Round3.familySurveyDoesNotCreateStudentVoice

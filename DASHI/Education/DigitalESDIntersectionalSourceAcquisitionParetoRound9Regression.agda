@@ -1,0 +1,30 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound9Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound9Exact as Round9
+
+candidateStillRequiresCorpusAdmission :
+  Round9.Round9CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round9.round9CandidateDoesNotCreateIncludedStudy
+
+intersectionalFlaggingNotUniversalCheatingFact :
+  Round9.IntersectionalFlagDisparityCreatesCheatingDifference → ⊥
+intersectionalFlaggingNotUniversalCheatingFact =
+  Round9.intersectionalFlagDisparityDoesNotCreateCheatingDifference
+
+disabledStudentConcernNotObservedFormalPenalty :
+  Round9.WrongfulFlagFearCreatesObservedPenalty → ⊥
+disabledStudentConcernNotObservedFormalPenalty =
+  Round9.wrongfulFlagFearDoesNotCreateObservedPenalty
+
+administratorStudyNotStudentDecisionAuthority :
+  Round9.StudentExclusionFromAdoptionCreatesStudentAuthority → ⊥
+administratorStudyNotStudentDecisionAuthority =
+  Round9.studentExclusionDoesNotCreateStudentAuthority
+
+preprintDoesNotCreatePeerReviewedAuthority :
+  Round9.PreprintCreatesPeerReviewedAuthority → ⊥
+preprintDoesNotCreatePeerReviewedAuthority =
+  Round9.preprintDoesNotCreatePeerReviewedAuthority

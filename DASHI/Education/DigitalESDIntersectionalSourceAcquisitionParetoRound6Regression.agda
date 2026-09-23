@@ -1,0 +1,15 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound6Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound6Exact as Round6
+
+candidateStillNotIncluded : Round6.Round6CandidateCreatesIncludedStudy → ⊥
+candidateStillNotIncluded = Round6.round6CandidateDoesNotCreateIncludedStudy
+
+optOutNotNeutral : Round6.OptOutChoiceImpliesRepresentativeSelection → ⊥
+optOutNotNeutral = Round6.optOutChoiceDoesNotImplyRepresentativeSelection
+
+biasReviewNotNamedSystemFinding : Round6.BiasReviewCreatesNamedSystemBiasFinding → ⊥
+biasReviewNotNamedSystemFinding = Round6.biasReviewDoesNotCreateNamedSystemBiasFinding

@@ -1,0 +1,17 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound5Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound5Exact as Round5
+
+candidateNotIncluded : Round5.Round5CandidateCreatesIncludedStudy → ⊥
+candidateNotIncluded = Round5.round5CandidateDoesNotCreateIncludedStudy
+
+foucaultNotEmpiricalOwner : Round5.FoucaultFrameCreatesEmpiricalOwnership → ⊥
+foucaultNotEmpiricalOwner = Round5.foucaultFrameDoesNotCreateEmpiricalOwnership
+
+crossCulturalDifferenceNotUniversalLaw :
+  Round5.CrossCulturalVariationCreatesUniversalPrivacyLaw → ⊥
+crossCulturalDifferenceNotUniversalLaw =
+  Round5.crossCulturalVariationDoesNotCreateUniversalPrivacyLaw

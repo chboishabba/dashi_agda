@@ -44,7 +44,7 @@ data P854InspectionExecutionStatus : Set where
 
 record InspectedP854ExternalSource
     {candidate : Native.ReferenceSourceCandidate}
-    (demand : BoundP854InspectionDemand candidate) : Set where
+    (demand : BoundP854InspectionDemand candidate) : Set₁ where
   constructor inspected-p854-external-source
   field
     attributedSource : Attributed.AttributedReferenceSource candidate
@@ -60,7 +60,7 @@ record InspectedP854ExternalSource
 open InspectedP854ExternalSource public
 
 data P854InspectionResult {candidate : Native.ReferenceSourceCandidate}
-    (demand : BoundP854InspectionDemand candidate) : Set where
+    (demand : BoundP854InspectionDemand candidate) : Set₁ where
   inspected : InspectedP854ExternalSource demand → P854InspectionResult demand
   noMatch : String → String → P854InspectionResult demand
   blocked : String → P854InspectionResult demand

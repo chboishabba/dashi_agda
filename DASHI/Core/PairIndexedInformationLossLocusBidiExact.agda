@@ -33,9 +33,8 @@ collapsedPairStaysCollapsedDownstream :
   (loss : PairLossLocus observe) →
   (downstream : Observed → Output) →
   downstream (observe (left loss)) ≡ downstream (observe (right loss))
-collapsedPairStaysCollapsedDownstream loss downstream
-  with collapsed loss
-... | refl = refl
+collapsedPairStaysCollapsedDownstream loss downstream =
+  cong downstream (collapsed loss)
 
 record DeterministicStack {A B C : Set} : Set₁ where
   constructor deterministic-stack
