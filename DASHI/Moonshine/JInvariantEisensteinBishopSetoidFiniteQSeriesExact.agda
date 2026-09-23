@@ -21,7 +21,10 @@ module DASHI.Moonshine.JInvariantEisensteinBishopSetoidFiniteQSeriesExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
 
+import Real as BishopReal
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Moonshine.JInvariantEisensteinFiniteQSeriesExact as Legacy
 
@@ -103,6 +106,33 @@ discriminantNumeratorTruncated T kernel terms tau =
   C._-C_
     (cubeC (e4Truncated T kernel terms tau))
     (squareC (e6Truncated T kernel terms tau))
+
+------------------------------------------------------------------------
+-- Normalized finite Delta on the actual Bishop carrier.
+------------------------------------------------------------------------
+
+oneOver1728Rational : ℚᵘ
+oneOver1728Rational = + 1 / 1728
+
+oneOver1728Bishop : BishopReal.ℝ
+oneOver1728Bishop =
+  BishopReal._⋆ oneOver1728Rational
+
+oneOver1728Complex : C.BishopComplex
+oneOver1728Complex =
+  C.complex oneOver1728Bishop BishopReal.0ℝ
+
+normalizedDeltaTruncated :
+  C.BishopSetoidComplexTranscendentals →
+  DivisorPowerKernel →
+  Nat →
+  C.BishopComplex →
+  C.BishopComplex
+normalizedDeltaTruncated T kernel terms tau =
+  C._*C_
+    oneOver1728Complex
+    (discriminantNumeratorTruncated
+      T kernel terms tau)
 
 ------------------------------------------------------------------------
 -- The actual finite objects respect Bishop setoid equality.
@@ -193,6 +223,21 @@ discriminantNumeratorTruncatedCongruent T kernel terms equivalent =
     (squareCongruent
       (e6TruncatedCongruent T kernel terms equivalent))
 
+normalizedDeltaTruncatedCongruent :
+  (T : C.BishopSetoidComplexTranscendentals) →
+  (kernel : DivisorPowerKernel) →
+  (terms : Nat) →
+  ∀ {left right} →
+  C._≈C_ left right →
+  C._≈C_
+    (normalizedDeltaTruncated T kernel terms left)
+    (normalizedDeltaTruncated T kernel terms right)
+normalizedDeltaTruncatedCongruent T kernel terms equivalent =
+  C.mulCongruent
+    (C.≈C-refl oneOver1728Complex)
+    (discriminantNumeratorTruncatedCongruent
+      T kernel terms equivalent)
+
 ------------------------------------------------------------------------
 -- Exact recurrence receipt.
 ------------------------------------------------------------------------
@@ -205,11 +250,13 @@ record BishopSetoidEisensteinFiniteBoundary : Set where
     literalE4RecurrenceOwned : Bool
     literalE6RecurrenceOwned : Bool
     finiteDiscriminantNumeratorOwned : Bool
+    finiteNormalizedDeltaOwned : Bool
 
     qSetoidCongruenceOwned : Bool
     e4SetoidCongruenceOwned : Bool
     e6SetoidCongruenceOwned : Bool
     discriminantSetoidCongruenceOwned : Bool
+    normalizedDeltaSetoidCongruenceOwned : Bool
 
     legacyPropositionalRealQuotientUsed : Bool
     bishopPiIdentifiedWithClassicalPi : Bool
@@ -218,6 +265,6 @@ canonicalBishopSetoidEisensteinFiniteBoundary :
   BishopSetoidEisensteinFiniteBoundary
 canonicalBishopSetoidEisensteinFiniteBoundary =
   bishop-setoid-eisenstein-finite-boundary
+    true true true true true true
     true true true true true
-    true true true true
     false false
