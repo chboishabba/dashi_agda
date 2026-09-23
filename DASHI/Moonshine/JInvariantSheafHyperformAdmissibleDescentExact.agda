@@ -492,10 +492,25 @@ stageTwelveRelationCellsAre144 :
 stageTwelveRelationCellsAre144 =
   Stage12Site.stageRelationCellCountIs144
 
-stageTwelveCycleAxisAgreement :
-  Stage12Site.completeRelationalCycleAlsoHas12Axes
-  ≡ Stage12Site.completeRelationalCycleAlsoHas12Axes
-stageTwelveCycleAxisAgreement = refl
+stageTwelveRank12CountCrosswalk :
+  Stage12Site.Rel.completeCycleStateCount
+  ≡ Stage12Site.Rank.fixedTernaryProfileCount Stage12Site.Rank.rank12
+stageTwelveRank12CountCrosswalk =
+  Stage12Site.completeCycleMatchesRank12ProfileCount
+
+stageTwelveRank13CountCrosswalk :
+  Stage12Site.Rel.centralCompletionGroupOrderPattern
+  ≡ Stage12Site.Rank.fixedTernaryProfileCount Stage12Site.Rank.rank13
+stageTwelveRank13CountCrosswalk =
+  Stage12Site.centralCompletionMatchesRank13ProfileCount
+
+stageTwelveDiagonalCannotFactorOffDiagonal :
+  Descent.FactorsThrough
+    Stage12Site.diagonalObservation
+    Stage12Site.offDiagonal01 →
+  ⊥
+stageTwelveDiagonalCannotFactorOffDiagonal =
+  Stage12Site.diagonalCannotFactorOffDiagonal01
 
 ------------------------------------------------------------------------
 -- 13. Cross-prover mirror receipt.
