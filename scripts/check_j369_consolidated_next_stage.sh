@@ -11,8 +11,9 @@ BIF=DASHI/Moonshine/JInvariant369JointFibreBifiltrationExact.agda
 STAGE=DASHI/Foundations/StageTwelveGrothendieckRelationHyperformExact.agda
 QUAL=DASHI/Moonshine/JInvariant369ZeroToThirteenTetralemmaQualificationExact.agda
 ZETA=DASHI/Moonshine/JInvariant369Zeta6561MonsterCrosswalkExact.agda
+TEN17=DASHI/Moonshine/JInvariant369TenRankSeventeenHyperformalismExact.agda
 
-for file in "$OWNER" "$JOINT" "$SSP" "$BIF" "$STAGE" "$QUAL" "$ZETA"; do
+for file in "$OWNER" "$JOINT" "$SSP" "$BIF" "$STAGE" "$QUAL" "$ZETA" "$TEN17"; do
   [[ -f "$file" ]] || { echo "missing required source: $file" >&2; exit 1; }
 done
 
@@ -44,7 +45,17 @@ grep -q 'regularMultiplicityIs65610' "$ZETA"
 grep -q 'monster196883IsThreeTimes65610Plus53' "$ZETA"
 grep -q 'atlasMonster6561Source' "$ZETA"
 grep -q 'cyclotomicZetaDoesNotEqualRiemannZeta' "$ZETA"
+grep -q 'd4FlipIntertwinesMacroComplement' "$TEN17"
+grep -q 'rank14IsFirstAfterThreeBalancedDigitCapacity' "$TEN17"
+grep -q 'rank14BalancedFourDigitWitness' "$TEN17"
+grep -q 'rank17BalancedFourDigitWitness' "$TEN17"
+grep -q 'rankPantsRoundTrip' "$TEN17"
+grep -q 'stageTwelveRelationCountIs144' "$TEN17"
+grep -q 'atlasProperImageDepthIsFourteen' "$TEN17"
+grep -q 'atlasMaximalDepthIsSeventeen' "$TEN17"
+grep -q 'signedMagnitudeStillDoesNotFactorThroughCoarseC3' "$TEN17"
+grep -q 'decimalNotationDoesNotExplainTen' "$TEN17"
 
 echo "J/369 consolidated next-stage static guards passed."
 
-scripts/run_agda29_parallel_check.sh "$OWNER" "$QUAL" "$ZETA"
+scripts/run_agda29_parallel_check.sh "$OWNER" "$QUAL" "$ZETA" "$TEN17"
