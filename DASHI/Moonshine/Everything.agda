@@ -38,3 +38,5 @@ import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact
 
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact
+import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact
+import DASHI.Moonshine.JSameWeightQuotientReflectionExact
