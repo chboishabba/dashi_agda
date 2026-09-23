@@ -14,6 +14,16 @@ module DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact where
 --   JInvariant369CanonicalLevelObserverTowerExact
 --     the principal-level C3 cusp fibre carries fixed-point-free translation.
 --
+-- IMPORTANT REFINEMENT:
+-- This module rules out the mismatched generator identification
+--     spectral conjugation (C2) == level translation (C3).
+-- JInvariant369SSPLevelDihedralIntertwinerExact subsequently proves the
+-- positive generator-matched result:
+--     SSP antipode <-> cusp inversion
+--     SSP C3 cycle <-> cusp translation.
+-- Thus this no-go is retained as an anti-collapse theorem, not as a claim that
+-- the two finite C3 carriers admit no structured equivalence at all.
+--
 -- The important conclusion is typed:
 --
 --   signed SSP/FRACTRAN naturally inhabits the phase/spectral C3 lane.
