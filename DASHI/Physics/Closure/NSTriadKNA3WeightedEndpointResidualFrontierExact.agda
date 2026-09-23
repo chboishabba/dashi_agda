@@ -44,6 +44,7 @@ import DASHI.Physics.Closure.NSTriadKNFullGramCoherentFoldRound597Exact as R597
 import DASHI.Physics.Closure.NSTriadKNCyclicResolvedTransferRateDefectRound598Exact as R598
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExact as GramTangent
 import DASHI.Physics.Closure.NSTriadKNCauchyR397R406ReconciliationExact as Reconcile
+import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact as R598
 
 weightedR406ExactEndpointNormalFormClosedGivenFTC : Bool
 weightedR406ExactEndpointNormalFormClosedGivenFTC =
@@ -106,6 +107,19 @@ cauchyR397R406FiniteReconciliationClosed =
 cauchyResolvedNormalFormCreatesNewA3Identification : Bool
 cauchyResolvedNormalFormCreatesNewA3Identification =
   Reconcile.reconciliationIdentifiesR406WithA3
+
+cauchyA3MismatchNormalFormClosed : Bool
+cauchyA3MismatchNormalFormClosed =
+  R598.round598CauchyA3MismatchNormalFormClosed
+
+a3SelfWorkCoordinateCancelledExactly : Bool
+a3SelfWorkCoordinateCancelledExactly =
+  R598.round598A3SelfWorkCoordinateCancelledExactly
+
+weightedFluxTangentFullSquareToCenteredA3RateKernelClosed : Bool
+weightedFluxTangentFullSquareToCenteredA3RateKernelClosed =
+  R598.round598FluxTangentToRateWeightedKernelClosed
+
 
 meanRateSelfWorkNormalizationMustBeRetained : Bool
 meanRateSelfWorkNormalizationMustBeRetained =
@@ -207,6 +221,16 @@ cauchyResolvedNormalFormCreatesNewA3IdentificationIsFalse :
 cauchyResolvedNormalFormCreatesNewA3IdentificationIsFalse =
   Reconcile.reconciliationIdentifiesR406WithA3IsFalse
 
+cauchyA3MismatchNormalFormClosedIsTrue :
+  cauchyA3MismatchNormalFormClosed ≡ true
+cauchyA3MismatchNormalFormClosedIsTrue =
+  R598.round598CauchyA3MismatchNormalFormClosedIsTrue
+
+a3SelfWorkCoordinateCancelledExactlyIsTrue :
+  a3SelfWorkCoordinateCancelledExactly ≡ true
+a3SelfWorkCoordinateCancelledExactlyIsTrue =
+  R598.round598A3SelfWorkCoordinateCancelledExactlyIsTrue
+
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue :
   meanRateSelfWorkNormalizationMustBeRetained ≡ true
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue =
@@ -223,7 +247,8 @@ factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosedIsFalse = refl
 
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse :
   weightedFluxTangentFullSquareToCenteredA3RateKernelClosed ≡ false
-weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse = refl
+weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse =
+  R598.round598FluxTangentToRateWeightedKernelClosedIsFalse
 
 
 r230ScalarConsumerToConservedCyclicTripleClosedIsFalse :
