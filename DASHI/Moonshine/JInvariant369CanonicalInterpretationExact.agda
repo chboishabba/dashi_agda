@@ -57,6 +57,7 @@ import DASHI.Moonshine.JInvariantAnalyticNormalizedKleinAdapterExact as Normaliz
 import DASHI.Moonshine.JInvariant369NormalizedAnalyticRendererExact as NormalizedRenderer
 import DASHI.Moonshine.JInvariant369NormalizedRendererReadoutFactorizationExact as ReadoutFactor
 import DASHI.Moonshine.JInvariant369NormalizedRendererCanonicalReflectionExact as CanonicalReflection
+import DASHI.Moonshine.JInvariant369CanonicalJointReflectionMinimalExact as MinimalReflection
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
 import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact as LegacyBridge
@@ -115,6 +116,11 @@ record Canonical369InterpretationBoundary : Set where
     normalizedRendererCanonicalReflectionCompilerOwned : Bool
     jointReflectionPointAlignmentDefinitional : Bool
     normalizedRendererReflectionPointAlignmentCompilerDefinitional : Bool
+    canonicalReflectionNeedsPhase9Quantizer : Bool
+    canonicalReflectionNeedsPhase27Quantizer : Bool
+    canonicalReflectionPhaseC3DerivedFromC6 : Bool
+    canonicalReflectionLevel9DerivedFromLevel27 : Bool
+    canonicalReflectionLevel3DerivedFromLevel27 : Bool
     concreteRendererAnalyticJSameObjectWeldInhabited : Bool
     normalizedRendererReadoutInhabited : Bool
     normalizedRendererReflectionPointAlignmentInhabited : Bool
@@ -212,6 +218,11 @@ canonicalCanonical369InterpretationBoundary =
     ; normalizedRendererCanonicalReflectionCompilerOwned = true
     ; jointReflectionPointAlignmentDefinitional = true
     ; normalizedRendererReflectionPointAlignmentCompilerDefinitional = true
+    ; canonicalReflectionNeedsPhase9Quantizer = false
+    ; canonicalReflectionNeedsPhase27Quantizer = false
+    ; canonicalReflectionPhaseC3DerivedFromC6 = true
+    ; canonicalReflectionLevel9DerivedFromLevel27 = true
+    ; canonicalReflectionLevel3DerivedFromLevel27 = true
     ; concreteRendererAnalyticJSameObjectWeldInhabited = false
     ; normalizedRendererReadoutInhabited = false
     ; normalizedRendererReflectionPointAlignmentInhabited = false
@@ -494,6 +505,30 @@ normalizedRendererCanonicalReflectionBoundary :
   CanonicalReflection.CanonicalNormalizedReflectionBoundary
 normalizedRendererCanonicalReflectionBoundary =
   CanonicalReflection.canonicalCanonicalNormalizedReflectionBoundary
+
+
+minimalCanonicalJointReflectionBoundary :
+  MinimalReflection.MinimalCanonicalReflectionBoundary
+minimalCanonicalJointReflectionBoundary =
+  MinimalReflection.canonicalMinimalCanonicalReflectionBoundary
+
+phase9IsNotARequiredCanonicalPhaseReflectionObserver :
+  canonicalReflectionNeedsPhase9Quantizer
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+phase9IsNotARequiredCanonicalPhaseReflectionObserver = refl
+
+phase27IsNotARequiredCanonicalPhaseReflectionObserver :
+  canonicalReflectionNeedsPhase27Quantizer
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+phase27IsNotARequiredCanonicalPhaseReflectionObserver = refl
+
+canonicalPhaseC3ReflectionComesFromC6 :
+  canonicalReflectionPhaseC3DerivedFromC6
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+canonicalPhaseC3ReflectionComesFromC6 = refl
 
 normalizedRendererReflectionPointNoLongerIndependent :
   normalizedRendererReflectionPointAlignmentCompilerDefinitional
