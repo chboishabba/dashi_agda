@@ -68,6 +68,7 @@ import DASHI.Moonshine.JInvariant369CanonicalInterpretationExact as CanonicalInt
 import DASHI.Interop.LeanEta24PinnedReflectionParityExact as LeanEtaReflection
 import DASHI.Interop.LeanEta24SixfoldPhaseParityExact as LeanEtaPhase
 import DASHI.Interop.LeanDeltaFinalMinCutParityExact as LeanFinalMinCut
+import DASHI.Interop.LeanMoonshineDeltaIdentityPinnedReceiptExact as LeanDeltaIdentity
 
 ------------------------------------------------------------------------
 -- 1. Typed source attribution.
@@ -291,7 +292,7 @@ canonicalJMDArchimedesDelta369Boundary =
   jmd-archimedes-delta369-boundary
     true true true true true true
     true true true true true true true true true true false false false
-    true true false
+    true true true
     true false false
     false false false
 
