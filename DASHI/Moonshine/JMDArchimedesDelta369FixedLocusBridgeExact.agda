@@ -63,6 +63,7 @@ import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Equivariance
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as ModularLevel
 import DASHI.Interop.LeanEta24PinnedReflectionParityExact as LeanEtaReflection
 import DASHI.Interop.LeanEta24SixfoldPhaseParityExact as LeanEtaPhase
+import DASHI.Interop.LeanDeltaFinalMinCutParityExact as LeanFinalMinCut
 
 ------------------------------------------------------------------------
 -- 1. Typed source attribution.
@@ -213,6 +214,9 @@ record AnalyticReflectionEvidence : Set where
     leanEta24ArgCongruenceOwned : Bool
     leanEta24ContinuousBranchAvoided : Bool
     leanNormalizedDeltaSixfoldCompilerConditionalOnNonvanishing : Bool
+    leanFinalDeltaOnePropositionMinCutOwned : Bool
+    leanFinalMinCutYieldsNormalizedDeltaNonvanishing : Bool
+    leanFinalMinCutYieldsUnconditionalNormalizedDeltaPhase : Bool
 
     unconditionalUnitCircleArcPhaseTheoremProvedInThisAgdaModule : Bool
 
@@ -225,6 +229,7 @@ currentAnalyticReflectionEvidence =
     true true true
     false false false
     true true true true true true
+    true true true
     false
 
 ------------------------------------------------------------------------
@@ -250,6 +255,9 @@ record JMDArchimedesDelta369Boundary : Set where
     pinnedLeanEta24PhaseTheoremClosed : Bool
     normalizedLeanDeltaPhaseNeedsOnlyNonvanishing : Bool
     eta24SameObjectAsNormalizedE4E6Delta : Bool
+    finalSameObjectIdentityIsSingleLoadBearingLeaf : Bool
+    downstreamNormalizedDeltaNonvanishingSeparatelyOpen : Bool
+    downstreamNormalizedDeltaPhaseSeparatelyOpen : Bool
     base369ConstructsDeltaOrJ : Bool
     finiteObserverEqualsContinuousPhase : Bool
     cyclic27IdentifiedWithTernaryCubeAsGroup : Bool
@@ -262,6 +270,7 @@ canonicalJMDArchimedesDelta369Boundary =
     true true true true true true
     true true true true false false
     true true false
+    true false false
     false false false
 
 ------------------------------------------------------------------------
@@ -289,11 +298,17 @@ canonicalJMDArchimedesDelta369Boundary =
 --
 -- for some integer k.  No continuous argument branch is selected.  The
 -- normalized E4/E6 Delta target has the same sixfold compiler conditional only
--- on nonvanishing.  What remains is cross-language/same-object transport:
--- inhabit the exact Round11/Machin source binding and, if one wants to identify
--- the two classical targets rather than use eta^24 directly, prove
+-- on nonvanishing.  Integration.MoonshineDeltaFinalMinCut sharpens this one
+-- step further: a single pointwise identity
 --
---   eta^24 = (E4^3 - E6^2)/1728.
+--   eta^24 = (E4^3 - E6^2)/1728
+--
+-- automatically supplies normalized-Delta nonvanishing, unconditional
+-- normalized-Delta sixfold phase, and the typed eta24 same-object weld.  Those
+-- consequences are therefore not independent open leaves.  What remains is
+-- cross-language/same-object transport: inhabit the exact Round11/Machin source
+-- binding and, only if the two classical targets must be identified, prove
+-- that single identity.
 --
 -- None of this promotes Base369 into a Delta/j construction.
 ------------------------------------------------------------------------
