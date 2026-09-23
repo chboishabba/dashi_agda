@@ -52,6 +52,7 @@ import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as JointBundle
 import DASHI.Moonshine.JSameWeightQuotientReflectionExact as JReflection
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
+import DASHI.Moonshine.JInvariant369JointFibreBifiltrationExact as JointBif
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -85,6 +86,10 @@ record Canonical369InterpretationBoundary : Set where
     phaseAndLevelC3TypeRolesSeparated : Bool
     tActionFixesJPhaseButTranslatesLevelTower : Bool
     jointReflectionNegatesPhaseAndLevelCoordinates : Bool
+    modularTIsIdentityOnPhaseLane : Bool
+    modularTTranslatesLevelLane : Bool
+    jointRTRIsTInverseCoordinatewise : Bool
+    phaseInternalC3CycleIdentifiedWithModularT : Bool
 
     sameWeightJReflectionCompilerOwned : Bool
     fixedLocusJConjugationFixedCompilerOwned : Bool
@@ -138,6 +143,10 @@ canonicalCanonical369InterpretationBoundary =
     ; phaseAndLevelC3TypeRolesSeparated = true
     ; tActionFixesJPhaseButTranslatesLevelTower = true
     ; jointReflectionNegatesPhaseAndLevelCoordinates = true
+    ; modularTIsIdentityOnPhaseLane = true
+    ; modularTTranslatesLevelLane = true
+    ; jointRTRIsTInverseCoordinatewise = true
+    ; phaseInternalC3CycleIdentifiedWithModularT = false
 
     ; sameWeightJReflectionCompilerOwned = true
     ; fixedLocusJConjugationFixedCompilerOwned = true
@@ -151,6 +160,10 @@ canonicalCanonical369InterpretationBoundary =
     ; jointPhaseLevelSignedFibreConstructed = true
     ; jointFiniteDihedralLawOwned = true
     ; level27FactorsThroughBaseJSurface = false
+
+    ; jointFibreResolutionProductConstructed = true
+    ; resolutionCoarseningCommutesWithModularActions = true
+    ; oldRelational369EqualsPrincipalLevelTower = false
     }
 
 ------------------------------------------------------------------------
