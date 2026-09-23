@@ -52,6 +52,8 @@ import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact as SignedSS
 import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as JointBundle
 import DASHI.Moonshine.JSameWeightQuotientReflectionExact as JReflection
 import DASHI.Moonshine.JInvariant369JointJReflectionWeldExact as JointJReflection
+import DASHI.Moonshine.JInvariantAnalyticNormalizedKleinAdapterExact as NormalizedKlein
+import DASHI.Moonshine.JInvariant369NormalizedAnalyticRendererExact as NormalizedRenderer
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
 import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact as LegacyBridge
@@ -98,7 +100,12 @@ record Canonical369InterpretationBoundary : Set where
     fixedLocusJConjugationFixedCompilerOwned : Bool
     analyticJReflectionCompilesIntoJointBundle : Bool
     rendererFixedPointCompilesToJointJConjugationFixed : Bool
+    normalizedStandardJKleinAdapterOwned : Bool
+    normalizedRendererJDefinitionallyStandardJ : Bool
+    normalizedRendererJointReflectionCompilerOwned : Bool
     concreteRendererAnalyticJSameObjectWeldInhabited : Bool
+    normalizedRendererReadoutInhabited : Bool
+    normalizedRendererReflectionPointAlignmentInhabited : Bool
     concreteJRealAxisInterpretationTransported : Bool
 
     sspC3CycleIntertwinesLevelTranslation : Bool
@@ -167,7 +174,12 @@ canonicalCanonical369InterpretationBoundary =
     ; fixedLocusJConjugationFixedCompilerOwned = true
     ; analyticJReflectionCompilesIntoJointBundle = true
     ; rendererFixedPointCompilesToJointJConjugationFixed = true
+    ; normalizedStandardJKleinAdapterOwned = true
+    ; normalizedRendererJDefinitionallyStandardJ = true
+    ; normalizedRendererJointReflectionCompilerOwned = true
     ; concreteRendererAnalyticJSameObjectWeldInhabited = false
+    ; normalizedRendererReadoutInhabited = false
+    ; normalizedRendererReflectionPointAlignmentInhabited = false
     ; concreteJRealAxisInterpretationTransported = false
 
     ; sspC3CycleIntertwinesLevelTranslation = true
@@ -239,6 +251,31 @@ jointRendererAnalyticJWeldStillOpen :
     canonicalCanonical369InterpretationBoundary
   ≡ false
 jointRendererAnalyticJWeldStillOpen = refl
+
+
+normalizedRendererOwnsStandardJDefinitionally :
+  normalizedRendererJDefinitionallyStandardJ
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+normalizedRendererOwnsStandardJDefinitionally = refl
+
+normalizedRendererReflectionNeedsOnlyAlignment :
+  normalizedRendererJointReflectionCompilerOwned
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+normalizedRendererReflectionNeedsOnlyAlignment = refl
+
+normalizedRendererReadoutStillOpen :
+  normalizedRendererReadoutInhabited
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+normalizedRendererReadoutStillOpen = refl
+
+normalizedRendererReflectionAlignmentStillOpen :
+  normalizedRendererReflectionPointAlignmentInhabited
+    canonicalCanonical369InterpretationBoundary
+  ≡ false
+normalizedRendererReflectionAlignmentStillOpen = refl
 
 fullDeckGroupIsNotCollapsedToCyclic :
   fullDeckGroupsCollapsedToCyclic
@@ -357,6 +394,17 @@ jointJReflectionWeldBoundary :
   JointJReflection.JointJReflectionWeldBoundary
 jointJReflectionWeldBoundary =
   JointJReflection.canonicalJointJReflectionWeldBoundary
+
+
+normalizedKleinBoundary :
+  NormalizedKlein.AnalyticNormalizedKleinBoundary
+normalizedKleinBoundary =
+  NormalizedKlein.canonicalAnalyticNormalizedKleinBoundary
+
+normalizedRendererBoundary :
+  NormalizedRenderer.NormalizedAnalyticRendererBoundary
+normalizedRendererBoundary =
+  NormalizedRenderer.canonicalNormalizedAnalyticRendererBoundary
 
 ------------------------------------------------------------------------
 -- Orthogonal composition with the pre-existing SSP/J resolution bifiltration.
