@@ -106,6 +106,10 @@ shellGpuSelect42TransitionParity :
   step (decodeGpu (gpuPick object42)) initialState
 shellGpuSelect42TransitionParity =
   Interactive.sameDecodedCommandSameTransition
+    {owner = owner}
+    {state = initialState}
+    {shellInput = shellSelect object42}
+    {gpuInput = gpuPick object42}
     shellGpuSelect42CommandParity
 
 selected42AfterShell :
