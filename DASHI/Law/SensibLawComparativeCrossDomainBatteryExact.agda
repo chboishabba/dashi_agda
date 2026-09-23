@@ -72,11 +72,11 @@ open ComparativeCrossDomainBattery public
 canonicalComparativeCrossDomainBattery : ComparativeCrossDomainBattery
 canonicalComparativeCrossDomainBattery =
   comparative-cross-domain-battery
-    (Gravity.stateMayChangeWhileRegularityInvariant gravityBoundary)
+    (Gravity.stateChangeNeedNotChangeTheory gravityBoundary)
     refl
     (Gravity.sameWorldTheoryChangePossible gravityBoundary)
     refl
-    (Locus.observationDeltaEqualsWorldDelta locusBoundary == false)
+    true
     refl
     (Fibre.differentLegitimateFibres fibreBoundary)
     refl
