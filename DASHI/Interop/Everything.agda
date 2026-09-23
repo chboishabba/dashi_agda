@@ -98,3 +98,4 @@ import DASHI.Interop.LeanEta24SixfoldPhaseParityExact
 import DASHI.Interop.LeanDeltaFinalMinCutParityExact
 import DASHI.Interop.BishopRound11MachinBindingManifestExact
 import DASHI.Interop.SmithChartLeanParityExact
+import DASHI.Interop.LeanMoonshineDeltaIdentityPinnedReceiptExact
