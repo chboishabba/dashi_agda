@@ -73,7 +73,7 @@ a3QuantitativePaymentStillOpen =
 
 r568CutoffUniformSignedBudgetStillOpen : Bool
 r568CutoffUniformSignedBudgetStillOpen =
-  not R568.round568CommutatorOnlySpacetimeBudgetClosed
+  not R568.round568LiveCommutatorSpacetimeBudgetClosed
   where
   not : Bool → Bool
   not true = false
