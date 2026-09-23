@@ -41,12 +41,12 @@ import DASHI.Physics.Closure.NSTriadKNA3WeightedR406EndpointCutExact as Weighted
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationExact as Cauchy
 import DASHI.Physics.Closure.NSTriadKNR567CauchyGramFluxNormalFormRound596Exact as R596
 import DASHI.Physics.Closure.NSTriadKNFullGramCoherentFoldRound597Exact as R597
-import DASHI.Physics.Closure.NSTriadKNCyclicResolvedTransferRateDefectRound598Exact as R598
-import DASHI.Physics.Closure.NSTriadKNCyclicRouteExternalNetworkDefectRound599Exact as R599
+import DASHI.Physics.Closure.NSTriadKNCyclicResolvedTransferRateDefectRound598Exact as CyclicResolved
+import DASHI.Physics.Closure.NSTriadKNCyclicRouteExternalNetworkDefectRound599Exact as CyclicExternal
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExact as GramTangent
 import DASHI.Physics.Closure.NSTriadKNCauchyR397R406ReconciliationExact as Reconcile
-import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact as R598
-import DASHI.Physics.Closure.NSTriadKNA3CenteredFullGramNormalFormRound599Exact as R599
+import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact as A3Mismatch
+import DASHI.Physics.Closure.NSTriadKNA3CenteredFullGramNormalFormRound599Exact as A3FullGram
 
 weightedR406ExactEndpointNormalFormClosedGivenFTC : Bool
 weightedR406ExactEndpointNormalFormClosedGivenFTC =
@@ -89,20 +89,20 @@ genericFullGramCoherentFoldClosed =
 
 cyclicResolvedTransferRateDefectCompilerClosed : Bool
 cyclicResolvedTransferRateDefectCompilerClosed =
-  R598.round598ResolvedWeightedTransferIsRateDefectFormClosed
+  CyclicResolved.round598ResolvedWeightedTransferIsRateDefectFormClosed
 
 cyclicRateDefectNumeratorsExposedInPhysicalModes : Bool
 cyclicRateDefectNumeratorsExposedInPhysicalModes =
-  R598.round598RateDefectNumeratorsExposedInPhysicalModes
+  CyclicResolved.round598RateDefectNumeratorsExposedInPhysicalModes
 
 
 cyclicExternalNetworkDefectExposed : Bool
 cyclicExternalNetworkDefectExposed =
-  R599.round599FullThreeLegEnergyEqualsExternalNetworkClosed
+  CyclicExternal.round599FullThreeLegEnergyEqualsExternalNetworkClosed
 
 bareFullProjectedForcingCyclicConservationAvailable : Bool
 bareFullProjectedForcingCyclicConservationAvailable =
-  R599.round599BareFullProjectedForcingCyclicConservationAvailable
+  CyclicExternal.round599BareFullProjectedForcingCyclicConservationAvailable
 
 cauchyResolvedR406DiagonalReducedNormalFormClosed : Bool
 cauchyResolvedR406DiagonalReducedNormalFormClosed =
@@ -121,23 +121,23 @@ cauchyResolvedNormalFormCreatesNewA3Identification =
 
 cauchyA3MismatchNormalFormClosed : Bool
 cauchyA3MismatchNormalFormClosed =
-  R598.round598CauchyA3MismatchNormalFormClosed
+  A3Mismatch.round598CauchyA3MismatchNormalFormClosed
 
 a3SelfWorkCoordinateCancelledExactly : Bool
 a3SelfWorkCoordinateCancelledExactly =
-  R598.round598A3SelfWorkCoordinateCancelledExactly
+  A3Mismatch.round598A3SelfWorkCoordinateCancelledExactly
 
 a3CenteredFullGramNormalFormClosed : Bool
 a3CenteredFullGramNormalFormClosed =
-  R599.round599A3CenteredFullGramNormalFormClosed
+  A3FullGram.round599A3CenteredFullGramNormalFormClosed
 
 a3AndR596ShareCompleteDoubleMixedGramCarrier : Bool
 a3AndR596ShareCompleteDoubleMixedGramCarrier =
-  R599.round599A3AndR596NowShareCompleteDoubleMixedGramCarrier
+  A3FullGram.round599A3AndR596NowShareCompleteDoubleMixedGramCarrier
 
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosed : Bool
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosed =
-  R598.round598FluxTangentToRateWeightedKernelClosed
+  A3Mismatch.round598FluxTangentToRateWeightedKernelClosed
 
 
 meanRateSelfWorkNormalizationMustBeRetained : Bool
@@ -215,7 +215,7 @@ genericFullGramCoherentFoldClosedIsTrue =
 cyclicResolvedTransferRateDefectCompilerClosedIsTrue :
   cyclicResolvedTransferRateDefectCompilerClosed ≡ true
 cyclicResolvedTransferRateDefectCompilerClosedIsTrue =
-  R598.round598ResolvedWeightedTransferIsRateDefectFormClosedIsTrue
+  CyclicResolved.round598ResolvedWeightedTransferIsRateDefectFormClosedIsTrue
 
 cyclicRateDefectNumeratorsExposedInPhysicalModesIsTrue :
   cyclicRateDefectNumeratorsExposedInPhysicalModes ≡ true
@@ -225,12 +225,12 @@ cyclicRateDefectNumeratorsExposedInPhysicalModesIsTrue = refl
 cyclicExternalNetworkDefectExposedIsTrue :
   cyclicExternalNetworkDefectExposed ≡ true
 cyclicExternalNetworkDefectExposedIsTrue =
-  R599.round599FullThreeLegEnergyEqualsExternalNetworkClosedIsTrue
+  CyclicExternal.round599FullThreeLegEnergyEqualsExternalNetworkClosedIsTrue
 
 bareFullProjectedForcingCyclicConservationAvailableIsFalse :
   bareFullProjectedForcingCyclicConservationAvailable ≡ false
 bareFullProjectedForcingCyclicConservationAvailableIsFalse =
-  R599.round599BareFullProjectedForcingCyclicConservationAvailableIsFalse
+  CyclicExternal.round599BareFullProjectedForcingCyclicConservationAvailableIsFalse
 
 cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue :
   cauchyResolvedR406DiagonalReducedNormalFormClosed ≡ true
@@ -254,22 +254,22 @@ cauchyResolvedNormalFormCreatesNewA3IdentificationIsFalse =
 cauchyA3MismatchNormalFormClosedIsTrue :
   cauchyA3MismatchNormalFormClosed ≡ true
 cauchyA3MismatchNormalFormClosedIsTrue =
-  R598.round598CauchyA3MismatchNormalFormClosedIsTrue
+  A3Mismatch.round598CauchyA3MismatchNormalFormClosedIsTrue
 
 a3SelfWorkCoordinateCancelledExactlyIsTrue :
   a3SelfWorkCoordinateCancelledExactly ≡ true
 a3SelfWorkCoordinateCancelledExactlyIsTrue =
-  R598.round598A3SelfWorkCoordinateCancelledExactlyIsTrue
+  A3Mismatch.round598A3SelfWorkCoordinateCancelledExactlyIsTrue
 
 a3CenteredFullGramNormalFormClosedIsTrue :
   a3CenteredFullGramNormalFormClosed ≡ true
 a3CenteredFullGramNormalFormClosedIsTrue =
-  R599.round599A3CenteredFullGramNormalFormClosedIsTrue
+  A3FullGram.round599A3CenteredFullGramNormalFormClosedIsTrue
 
 a3AndR596ShareCompleteDoubleMixedGramCarrierIsTrue :
   a3AndR596ShareCompleteDoubleMixedGramCarrier ≡ true
 a3AndR596ShareCompleteDoubleMixedGramCarrierIsTrue =
-  R599.round599A3AndR596NowShareCompleteDoubleMixedGramCarrierIsTrue
+  A3FullGram.round599A3AndR596NowShareCompleteDoubleMixedGramCarrierIsTrue
 
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue :
   meanRateSelfWorkNormalizationMustBeRetained ≡ true
@@ -288,7 +288,7 @@ factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosedIsFalse = refl
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse :
   weightedFluxTangentFullSquareToCenteredA3RateKernelClosed ≡ false
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse =
-  R598.round598FluxTangentToRateWeightedKernelClosedIsFalse
+  A3Mismatch.round598FluxTangentToRateWeightedKernelClosedIsFalse
 
 
 r230ScalarConsumerToConservedCyclicTripleClosedIsFalse :
