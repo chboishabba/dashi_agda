@@ -198,15 +198,17 @@ module SelfMultiplierExpansion
           (C3.complex3Scale (C3.complexI F))
           (slotOfFourMultiplierVectorsIsFourSlots tau)))
 
+  selfMultiplierExhaustiveCompanion :
+    Physical.PhysicalTriadIncidence → C3.Complex3 F
+  selfMultiplierExhaustiveCompanion tau
+    with Output.modeEqual (Physical.p tau) Z3.zeroMode
+  ... | true = C3.complex3Zero F
+  ... | false = weightedFourMultiplierSlots tau
+
   selfExhaustiveCompanionMultiplierNormalForm :
     (tau : Physical.PhysicalTriadIncidence) →
     Split.selfExhaustiveCompanion tau
-    ≡
-    let pDecision =
-          Output.modeEqual (Physical.p tau) Z3.zeroMode
-    in
-    if pDecision then C3.complex3Zero F
-    else weightedFourMultiplierSlots tau
+    ≡ selfMultiplierExhaustiveCompanion tau
   selfExhaustiveCompanionMultiplierNormalForm tau
     with Output.modeEqual (Physical.p tau) Z3.zeroMode in pDecision
   ... | true = refl
