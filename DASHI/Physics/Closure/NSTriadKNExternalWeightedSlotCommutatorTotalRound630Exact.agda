@@ -37,6 +37,7 @@ import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNR573SelfExternalNestedCompanionSplitRound613Exact as R613
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSelectionRound621Exact as R621
+import DASHI.Physics.Closure.NSTriadKNExternalProductRuleCommutatorRound625Exact as R625
 import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorRound629Exact as R629
 
 module TotalExternalCommutator630
@@ -58,6 +59,9 @@ module TotalExternalCommutator630
   module Comm =
     R629.ExternalSlotCommutator629 W S L H system velocityTransverse
 
+  module Ext =
+    R625.FixedSystem system S
+
   pNonzeroFromFalse :
     (tau : Physical.PhysicalTriadIncidence) →
     Output.modeEqual (Physical.p tau) Z3.zeroMode ≡ false →
@@ -76,8 +80,8 @@ module TotalExternalCommutator630
   ... | false =
     C3.complex3Scale (R294.weight W tau)
       (C3.complex3Add
-        (Comm.Ext.externalCommutatorCell tau)
-        (Comm.Ext.externalCommutatorCell tau))
+        (Ext.externalCommutatorCell tau)
+        (Ext.externalCommutatorCell tau))
 
   externalExhaustiveCompanionIsTotalCommutator :
     (tau : Physical.PhysicalTriadIncidence) →
