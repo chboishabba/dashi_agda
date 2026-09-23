@@ -41,7 +41,8 @@ sameDecodedCommandSameTransition :
   step owner (decodeShell owner shellInput) state
     ≡
   step owner (decodeGpu owner gpuInput) state
-sameDecodedCommandSameTransition refl = refl
+sameDecodedCommandSameTransition {owner} {state} commandParity =
+  cong (λ command → step owner command state) commandParity
 
 ------------------------------------------------------------------------
 -- Consumer-indexed renderer parity is inherited from the existing portable
