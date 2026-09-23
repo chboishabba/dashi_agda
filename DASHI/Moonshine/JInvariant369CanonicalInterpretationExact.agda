@@ -48,10 +48,10 @@ import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact as Principal
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
 import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Repair
 import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact as SignedSSP
-import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as Joint
+import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as JointBundle
 import DASHI.Moonshine.JSameWeightQuotientReflectionExact as JReflection
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
-import DASHI.Moonshine.JInvariant369JointFibredObserverExact as Joint
+import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -104,17 +104,50 @@ open Canonical369InterpretationBoundary public
 canonicalCanonical369InterpretationBoundary :
   Canonical369InterpretationBoundary
 canonicalCanonical369InterpretationBoundary =
-  canonical-369-interpretation-boundary
-    true true
-    true true true true true
-    false false false
-    true true false false
-    true true true false
-    true true false
-    false true
-    false false false
-    true true true true
-    true true false
+  record
+    { deltaWeight12ReflectionOwnsSixfoldPhaseRoute = true
+    ; c6ToC3OrientationQuotientIsCanonical = true
+
+    ; gamma27SubsetGamma9SubsetGamma3Owned = true
+    ; cusp27To9To3TowerOwned = true
+    ; levelTranslationEquivarianceOwned = true
+    ; levelReflectionEquivarianceOwned = true
+    ; samePointNineTwentySevenFibreObserversOwned = true
+
+    ; phaseOnlyC3EqualsNontrivialLevel3 = false
+    ; phaseOnlyC9EqualsNontrivialLevel9 = false
+    ; phaseOnlyC27EqualsNontrivialLevel27 = false
+
+    ; directPhaseC3ToPrincipalLevel9RefinementCanonical = false
+    ; fibredPhaseAndLevelInterpretationRequired = true
+
+    ; fullAnalyticModularCurvesConstructed = false
+    ; fullDeckGroupsCollapsedToCyclic = false
+    ; c27EqualsC3CubedAsGroup = false
+
+    ; signedSSPPhaseObserverOwned = true
+    ; signedSSPNegationSpectralConjugationOwned = true
+    ; signedSpectralToLevelTranslationIntertwinerExists = false
+    ; signedSSPAutomaticallyIsPrincipalLevel3Fibre = false
+
+    ; jointJPhaseLevelBundleConstructed = true
+    ; phaseAndLevelC3TypeRolesSeparated = true
+    ; tActionFixesJPhaseButTranslatesLevelTower = true
+    ; jointReflectionNegatesPhaseAndLevelCoordinates = true
+
+    ; sameWeightJReflectionCompilerOwned = true
+    ; fixedLocusJConjugationFixedCompilerOwned = true
+    ; concreteJRealAxisInterpretationTransported = false
+
+    ; sspC3CycleIntertwinesLevelTranslation = true
+    ; sspC2AntipodeIntertwinesLevelInversion = true
+    ; sspLevel3FiniteDihedralEquivalenceOwned = true
+    ; signedMagnitudeFactorsThroughLevel3 = true
+
+    ; jointPhaseLevelSignedFibreConstructed = true
+    ; jointFiniteDihedralLawOwned = true
+    ; level27FactorsThroughBaseJSurface = false
+    }
 
 ------------------------------------------------------------------------
 -- Research interpretation:
@@ -157,17 +190,17 @@ sspLevel3DihedralBoundary =
 ------------------------------------------------------------------------
 
 joint369FibredObserverBoundary :
-  Joint.Joint369FibredObserverBoundary
+  JointFibred.Joint369FibredObserverBoundary
 joint369FibredObserverBoundary =
-  Joint.canonicalJoint369FibredObserverBoundary
+  JointFibred.canonicalJoint369FibredObserverBoundary
 
 
 ------------------------------------------------------------------------
 -- Joint bundle / J reflection receipts.
 ------------------------------------------------------------------------
 
-jointPhaseLevelBoundary : Joint.JointPhaseLevelBoundary
-jointPhaseLevelBoundary = Joint.canonicalJointPhaseLevelBoundary
+jointPhaseLevelBoundary : JointBundle.JointPhaseLevelBoundary
+jointPhaseLevelBoundary = JointBundle.canonicalJointPhaseLevelBoundary
 
 jReflectionBoundary : JReflection.JReflectionBoundary
 jReflectionBoundary = JReflection.canonicalJReflectionBoundary
