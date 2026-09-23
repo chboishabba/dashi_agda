@@ -175,16 +175,16 @@ pullbackSieve :
 pullbackSieve C arrow sieve = record
   { contains = λ g → Sieve.contains sieve (_∘_ C arrow g)
   ; closed = λ g witness h →
-      subst
+      substLocal
         (λ k → Sieve.contains sieve k)
         (assoc C arrow g h)
         (Sieve.closed sieve (_∘_ C arrow g) witness h)
   }
   where
-    subst :
+    substLocal :
       ∀ {A : Set} (P : A → Set) {x y : A} →
       x ≡ y → P x → P y
-    subst P refl px = px
+    substLocal P refl px = px
 
 ------------------------------------------------------------------------
 -- 5. Genuine Grothendieck topology axioms.
@@ -225,20 +225,40 @@ open GrothendieckTopology public
 -- 6. Concrete discrete twelve-axis category.
 ------------------------------------------------------------------------
 
-trans :
+eqTrans :
   ∀ {A : Set} {x y z : A} →
   x ≡ y → y ≡ z → x ≡ z
-trans refl refl = refl
+eqTrans refl refl = refl
+
+eqIdLeft :
+  ∀ {A : Set} {x y : A} →
+  (f : x ≡ y) →
+  eqTrans f refl ≡ f
+eqIdLeft refl = refl
+
+eqIdRight :
+  ∀ {A : Set} {x y : A} →
+  (f : x ≡ y) →
+  eqTrans refl f ≡ f
+eqIdRight refl = refl
+
+eqAssoc :
+  ∀ {A : Set} {w x y z : A} →
+  (h : y ≡ z) →
+  (g : x ≡ y) →
+  (f : w ≡ x) →
+  eqTrans f (eqTrans g h) ≡ eqTrans (eqTrans f g) h
+eqAssoc refl refl refl = refl
 
 stageDiscreteCategory : SmallCategory
 stageDiscreteCategory = record
   { Obj = StageAxis12
   ; Hom = _≡_
   ; id = λ U → refl
-  ; _∘_ = λ g f → trans f g
-  ; idLeft = λ f → refl
-  ; idRight = λ f → refl
-  ; assoc = λ h g f → refl
+  ; _∘_ = λ g f → eqTrans f g
+  ; idLeft = eqIdLeft
+  ; idRight = eqIdRight
+  ; assoc = λ h g f → sym (eqAssoc h g f)
   }
 
 ------------------------------------------------------------------------
@@ -268,16 +288,16 @@ maximalOnlyStageTopology = record
       let coverAtIdentity =
             localCover f (sieveCover f) (id stageDiscreteCategory _)
       in
-      subst
+      substLocal
         (λ k → Sieve.contains target k)
         (idRight stageDiscreteCategory f)
         coverAtIdentity
   }
   where
-    subst :
+    substLocal :
       ∀ {A : Set} (P : A → Set) {x y : A} →
       x ≡ y → P x → P y
-    subst P refl px = px
+    substLocal P refl px = px
 
 ------------------------------------------------------------------------
 -- 8. Reuse the pre-existing BundleSheaf gluing interface.
