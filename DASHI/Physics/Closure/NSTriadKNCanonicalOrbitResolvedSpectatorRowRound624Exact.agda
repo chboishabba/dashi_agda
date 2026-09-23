@@ -27,6 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSpectatorRowRound624
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (_+_; _*_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
