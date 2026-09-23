@@ -126,6 +126,26 @@ record AdmissiblePushoutInterface
       (fromRight : Right → Target) →
       ((s : Seam) → fromLeft (seamLeft s) ≡ fromRight (seamRight s)) →
       Glued → Target
+    descendLeft :
+      {Target : Set} →
+      (fromLeft : Left → Target) →
+      (fromRight : Right → Target) →
+      (compatibility :
+        (s : Seam) →
+        fromLeft (seamLeft s) ≡ fromRight (seamRight s)) →
+      (left : Left) →
+      descend fromLeft fromRight compatibility (includeLeft left)
+      ≡ fromLeft left
+    descendRight :
+      {Target : Set} →
+      (fromLeft : Left → Target) →
+      (fromRight : Right → Target) →
+      (compatibility :
+        (s : Seam) →
+        fromLeft (seamLeft s) ≡ fromRight (seamRight s)) →
+      (right : Right) →
+      descend fromLeft fromRight compatibility (includeRight right)
+      ≡ fromRight right
 
 open AdmissiblePushoutInterface public
 
