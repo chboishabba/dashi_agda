@@ -534,3 +534,11 @@ canonicalConsolidated369NextStageBoundary =
     true false
     true true
     false false false false
+
+------------------------------------------------------------------------
+-- 11. The broader 0..13 / tetralemma / sixfold layer is owned separately.
+--
+-- Imported by the Moonshine rollup to avoid a cyclic dependency: the
+-- qualification module depends on this consolidated state.  The boundary is
+-- therefore consumed at the rollup level rather than re-imported here.
+------------------------------------------------------------------------
