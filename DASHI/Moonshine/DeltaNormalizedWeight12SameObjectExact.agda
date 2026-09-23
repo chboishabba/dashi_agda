@@ -39,8 +39,16 @@ module DASHI.Moonshine.DeltaNormalizedWeight12SameObjectExact where
 --  * once eta^24 is identified pointwise with that normalized Delta, its full
 --    weight-12 transformation is derived, not accepted independently.
 --
--- Thus the remaining source-parity theorem is sharply the genuine analytic
--- eta^24 / E2 identification route, not S/T modularity again.
+-- Agda-native source reconstruction of the eta^24 / E2 logarithmic-derivative
+-- route remains absent here.  That is no longer the only route to the
+-- same-object theorem, however: the pinned Lean companion independently proves
+--
+--   eta^24 = (E4^3 - E6^2) / 1728
+--
+-- at Mathlib v4.28.0 using eta^24 cusp packaging, pin-local weight-zero
+-- constancy, specialized weight-12 scalar rigidity, and first-q-coefficient
+-- comparison.  This module therefore keeps "constructed here" false while
+-- recording the external formal closure separately.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -49,6 +57,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstein
 import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Disc
+import DASHI.Interop.LeanMoonshineDeltaIdentityPinnedReceiptExact as LeanDelta
 
 record WeightCompatibleNormalization
     (M : Eisenstein.EisensteinAnalyticModel) : Set₁ where
@@ -129,6 +138,8 @@ record DeltaAnalyticParityBoundary : Set where
     eta24ModularityDerivedFromSameObject : Bool
     eta24EqualsNormalizedDiscriminantConstructedHere : Bool
     e2LogDerivativeProofRouteConstructedHere : Bool
+    eta24EqualsNormalizedDiscriminantProvedInPinnedLean : Bool
+    upstreamPinnedMathlibDiscriminantPackageUsed : Bool
 
 canonicalDeltaAnalyticParityBoundary : DeltaAnalyticParityBoundary
 canonicalDeltaAnalyticParityBoundary = record
@@ -137,4 +148,6 @@ canonicalDeltaAnalyticParityBoundary = record
   ; eta24ModularityDerivedFromSameObject = true
   ; eta24EqualsNormalizedDiscriminantConstructedHere = false
   ; e2LogDerivativeProofRouteConstructedHere = false
+  ; eta24EqualsNormalizedDiscriminantProvedInPinnedLean = true
+  ; upstreamPinnedMathlibDiscriminantPackageUsed = false
   }
