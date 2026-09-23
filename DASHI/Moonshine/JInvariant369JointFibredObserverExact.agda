@@ -30,6 +30,7 @@ import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as Level
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as Canonical
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
+import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
 import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
 import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
@@ -257,8 +258,6 @@ translatedLevelDiffers :
   ⊥
 translatedLevelDiffers =
   Separation.level27TranslationNoFixedPoint
-  where
-  import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
 
 jointBaseLevelNonDescent :
   ∀ {R}
