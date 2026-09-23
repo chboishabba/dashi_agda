@@ -1,0 +1,24 @@
+name: J369 sheaf hyperfabric descent
+
+on:
+  push:
+    paths:
+      - 'DASHI/Moonshine/JInvariantSheafHyperformAdmissibleDescentExact.agda'
+      - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
+      - 'scripts/check_j369_sheaf_hyperform_descent.sh'
+      - '.github/workflows/j369-sheaf-hyperform-descent.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Moonshine/JInvariantSheafHyperformAdmissibleDescentExact.agda'
+      - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
+      - 'scripts/check_j369_sheaf_hyperform_descent.sh'
+      - '.github/workflows/j369-sheaf-hyperform-descent.yml'
+  workflow_dispatch:
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Run focused checker
+        run: bash scripts/check_j369_sheaf_hyperform_descent.sh
