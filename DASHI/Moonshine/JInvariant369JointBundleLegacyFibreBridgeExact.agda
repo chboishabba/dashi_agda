@@ -21,12 +21,13 @@ module DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; sym; cong)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as Tower
+import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as Level
 import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as Joint
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as Legacy
 
@@ -67,9 +68,9 @@ legacyLevel3Agrees sample signed =
   begin
     Legacy.jointLevel3 (toLegacyFiniteFibre sample signed)
       ≡⟨ cong
-          DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact.level9To3CoveringProjection
+          Level.level9To3CoveringProjection
           (legacyLevel9Agrees sample signed) ⟩
-    DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact.level9To3CoveringProjection
+    Level.level9To3CoveringProjection
       (Joint.levelResidue9 (Joint.level9State sample))
       ≡⟨ sym (Joint.level9DeterminesLevel3 (Joint.point sample)) ⟩
     Joint.levelResidue3 (Joint.level3State sample)
