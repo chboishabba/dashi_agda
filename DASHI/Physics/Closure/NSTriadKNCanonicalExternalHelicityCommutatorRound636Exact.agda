@@ -38,6 +38,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNRawCurlFibreGramRound179Exact as R179
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNForcingHelicityCommutatorRound306Exact as R306
@@ -45,10 +46,12 @@ import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorRound629Exac
 import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorTotalRound630Exact as R630
 import DASHI.Physics.Closure.NSTriadKNCanonicalExternalTotalCommutatorScalarRound631Exact as R631
 
+F : C3.RealField _
+F = Rational.rationalRealField
+
 module CanonicalExternalHelicity636
-    {r} {F : C3.RealField r}
-    {E : C3.IntegerEmbedding F}
-    {I : C3.ModeInverseSquare F E}
+    (E : C3.IntegerEmbedding F)
+    (I : C3.ModeInverseSquare F E)
     (W : R294.SwapInvariantCellWeight F)
     (S : Helical.HelicalModeScalars F)
     (L : Helical.PeriodicHelicalProjectorLaws F E I S)
@@ -66,7 +69,7 @@ module CanonicalExternalHelicity636
 
   module Canonical =
     R631.CanonicalExternalTotalCommutator631
-      W S L H system velocityTransverse
+      E I W S L H system velocityTransverse
 
   velocity = Audit.velocity system
 
