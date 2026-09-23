@@ -4,6 +4,7 @@ set -euo pipefail
 targets=(
   DASHI/Moonshine/JInvariant369C6TenRankWeightTwelveCrossPollinationExact.agda
   DASHI/Moonshine/JInvariant369CanonicalInterpretationExact.agda
+  DASHI/Moonshine/MonsterAtlas6561X8RecognitionObligationExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -16,5 +17,8 @@ grep -q 'twelveSquaredIs144' "${targets[0]}"
 grep -q 'twelveCubedIs1728' "${targets[0]}"
 grep -q 'signedMagnitudeStillCannotFactorThroughCoarseLevel3' "${targets[0]}"
 grep -q 'signedMagnitudeDoesNotFactorThroughLevel3' "${targets[1]}"
+grep -q 'NineBy729BlockRecognition' "${targets[2]}"
+grep -q 'Atlas6561X8Recognition' "${targets[2]}"
+grep -q 'x8EquivariantRecognitionInhabitedHere' "${targets[2]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
