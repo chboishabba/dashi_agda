@@ -26,7 +26,7 @@ module DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality
-  using (_≡_; refl; cong)
+  using (_≡_; refl; cong; sym)
 
 import Base369 as Base
 import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
