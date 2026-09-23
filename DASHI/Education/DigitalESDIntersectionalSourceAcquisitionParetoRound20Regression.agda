@@ -1,0 +1,34 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound20Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound20Exact as Round20
+
+candidateStillRequiresCorpusAdmission :
+  Round20.Round20CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round20.round20CandidateDoesNotCreateIncludedStudy
+
+usersOnlyNotAllStudents :
+  Round20.UsersOnlySampleCreatesWholeStudentPopulation → ⊥
+usersOnlyNotAllStudents = Round20.usersOnlySampleDoesNotCreateWholeStudentPopulation
+
+priorUseNotAdoptionAccessibility :
+  Round20.PriorUseCreatesAdoptionOrAccessibilityTruth → ⊥
+priorUseNotAdoptionAccessibility = Round20.priorUseDoesNotCreateAdoptionOrAccessibilityTruth
+
+filteredCoursesNotUniversalPortability :
+  Round20.FilteredCourseSetCreatesUniversalCoursePortability → ⊥
+filteredCoursesNotUniversalPortability = Round20.filteredCourseSetDoesNotCreateUniversalCoursePortability
+
+lowActivityExclusionNotNoLearning :
+  Round20.LowLMSActivityCreatesNoLearningOrNeed → ⊥
+lowActivityExclusionNotNoLearning = Round20.lowLMSActivityDoesNotCreateNoLearningOrNeed
+
+participationSelectionCollisionRulesOutFlatRecovery :
+  Round20.ParticipationSelectionFactorisation → ⊥
+participationSelectionCollisionRulesOutFlatRecovery = Round20.participationSelectionDoesNotFactorThroughObservedDigitalUserSurface
+
+courseFilterCollisionRulesOutFlatRecovery :
+  Round20.CourseFilterFactorisation → ⊥
+courseFilterCollisionRulesOutFlatRecovery = Round20.courseFilterDoesNotFactorThroughRetainedCourseSurface

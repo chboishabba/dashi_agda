@@ -81,7 +81,7 @@ attributionSnowballAlreadyRetainsIdentityAxes =
   AttributionSnowball.AttributionSnowballBoundary.attributionInstantiatesPluralLens
     AttributionSnowball.canonicalAttributionSnowballBoundary
 
-record AttributedIdentityBundle (source : Attribution.AttributedSource) : Set where
+record AttributedIdentityBundle (source : Attribution.AttributedSource) : Set₁ where
   constructor attributed-identity-bundle
   field
     sourceRoleReceipt : AttributionSnowball.SourceRoleSnowballReceipt source

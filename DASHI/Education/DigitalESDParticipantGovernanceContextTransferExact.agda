@@ -56,7 +56,7 @@ record ParticipantAuthorityReceipt (targetContext : String) : Set where
 
 open ParticipantAuthorityReceipt public
 
-record ParticipantGovernanceContextTransferAdmission : Set where
+record ParticipantGovernanceContextTransferAdmission : Set₁ where
   constructor participant-governance-context-transfer-admission
   field
     contextGeneralisationReceipt : Learning.ContextGeneralisationReceipt

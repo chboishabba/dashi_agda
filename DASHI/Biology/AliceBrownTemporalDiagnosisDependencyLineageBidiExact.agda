@@ -50,6 +50,7 @@ aliceFrameEliminationEvent =
     (Temporal.debugMoveTrigger Portfolio.frameControl)
     "frame control distinguishes a survey/feedback framing from the current voice/agency audit"
     "Alice Brown methodology x-pollination; not an empirical source-paper event"
+    "Alice Brown methodological provenance"
 
 aliceFrameReactivationEvent : Temporal.DiagnosisEvent Outcome.frameConflict
 aliceFrameReactivationEvent =
@@ -58,6 +59,7 @@ aliceFrameReactivationEvent =
     (Temporal.resultTrigger Outcome.indeterminate)
     "later observer evidence makes the framing distinction relevant again"
     "append-only methodological reactivation; source fibres preserved"
+    "Alice Brown methodological provenance"
 
 aliceFrameEliminationLineage :
   Lineage.DiagnosisLineageEvent AliceDepends Outcome.frameConflict

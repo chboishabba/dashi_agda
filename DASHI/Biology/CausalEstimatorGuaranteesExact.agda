@@ -1,6 +1,6 @@
 module DASHI.Biology.CausalEstimatorGuaranteesExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_+_ ; _*_ ; _≤_)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -22,7 +22,7 @@ import DASHI.Cognition.PNF.GenericExpectedFibreRateExact as Expected
 
 record BiasGuarantee
     {estimand : Estimand.CausalEffectEstimand}
-    (procedure : Statistical.EstimatorProcedure estimand) : Set₁ where
+    (procedure : Statistical.EstimatorProcedure estimand) : Set₂ where
   constructor bias-guarantee
   field
     BiasProperty : Set
@@ -33,7 +33,7 @@ open BiasGuarantee public
 
 record ConsistencyGuarantee
     {estimand : Estimand.CausalEffectEstimand}
-    (procedure : Statistical.EstimatorProcedure estimand) : Set₁ where
+    (procedure : Statistical.EstimatorProcedure estimand) : Set₂ where
   constructor consistency-guarantee
   field
     Index : Set
@@ -46,7 +46,7 @@ open ConsistencyGuarantee public
 
 record DispersionGuarantee
     {estimand : Estimand.CausalEffectEstimand}
-    (procedure : Statistical.EstimatorProcedure estimand) : Set₁ where
+    (procedure : Statistical.EstimatorProcedure estimand) : Set₂ where
   constructor dispersion-guarantee
   field
     Dispersion : Set
@@ -62,7 +62,7 @@ open DispersionGuarantee public
 record CoverageGuarantee
     {estimand : Estimand.CausalEffectEstimand}
     {procedure : Statistical.EstimatorProcedure estimand}
-    (intervalProcedure : Statistical.ConfidenceIntervalEstimatorRealisation procedure) : Set₁ where
+    (intervalProcedure : Statistical.ConfidenceIntervalEstimatorRealisation procedure) : Set₂ where
   constructor coverage-guarantee
   field
     coverageIsSameProcedure :
@@ -75,7 +75,7 @@ open CoverageGuarantee public
 
 record PowerGuarantee
     {estimand : Estimand.CausalEffectEstimand}
-    (procedure : Statistical.EstimatorProcedure estimand) : Set₁ where
+    (procedure : Statistical.EstimatorProcedure estimand) : Set₂ where
   constructor power-guarantee
   field
     Alternative : Set
@@ -120,7 +120,7 @@ finiteSamplingMass (atom ∷ atoms) =
 
 record NormalizedFiniteEstimatorSamplingLaw
     {estimand : Estimand.CausalEffectEstimand}
-    (procedure : Statistical.EstimatorProcedure estimand) : Set₁ where
+    (procedure : Statistical.EstimatorProcedure estimand) : Set₂ where
   constructor normalized-finite-estimator-sampling-law
   field
     atoms : List (WeightedEstimatorSample procedure)
@@ -156,7 +156,7 @@ record FiniteRationalUnbiasedness
     {targetRealisation : FiniteTarget.FiniteRationalEffectAlgebraRealisation scope algebra}
     (target : FiniteTarget.FiniteRationalAveragePopulationEffect ate targetRealisation)
     {genericEstimand : Estimand.CausalEffectEstimand}
-    (procedure : Statistical.EstimatorProcedure genericEstimand) : Set₁ where
+    (procedure : Statistical.EstimatorProcedure genericEstimand) : Set₂ where
   constructor finite-rational-unbiasedness
   field
     law : NormalizedFiniteEstimatorSamplingLaw procedure
@@ -183,7 +183,6 @@ finiteUnbiasedExpectationEqualsFiniteATE :
       (FiniteTarget.atoms (FiniteTarget.law targetRealisation))
 finiteUnbiasedExpectationEqualsFiniteATE
   {target = target}
-  {targetRealisation = targetRealisation}
   U =
   trans
     (expectedEstimatorEqualsTarget U)
