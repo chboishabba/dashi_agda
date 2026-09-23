@@ -28,6 +28,7 @@ import DASHI.Physics.Closure.NSTriadKNRetainedViscosityPositivityNoGoRound514Exa
 import DASHI.Physics.Closure.NSTriadKNLiteralR406CriticalProductionProofSearchRound508Exact as R508
 import DASHI.Physics.Closure.NSTriadKNInitialCriticalRealizationToR421Round512Exact as R512
 import DASHI.Physics.Closure.NSTriadKNRound104ToLiteralR406CriticalSliceRound507Exact as R507
+import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound637Exact as R637
 
 data StrictCriticalResidual : Set where
   missingPhysicalCriticalObservableRealization : StrictCriticalResidual
@@ -141,6 +142,27 @@ round515R508OldFirstMissingWasAnalyticPayment = true
 round515IntrospectionMovesFirstMissingEarlierToPhysicalRealization : Bool
 round515IntrospectionMovesFirstMissingEarlierToPhysicalRealization = true
 
+
+round515CanonicalLiteralPhysicalSliceCompilerAvailable : Bool
+round515CanonicalLiteralPhysicalSliceCompilerAvailable =
+  R637.round637LiteralCriticalCoordinatesInstalledOnR414
+
+round515CriticalEnergyIdentityCompilerAvailableGivenStandardCalculus : Bool
+round515CriticalEnergyIdentityCompilerAvailableGivenStandardCalculus =
+  R637.round637CriticalEnergyInequalityCompiledFromExactIdentity
+
+round515PhaseSensitiveProductionStillProofBearing : Bool
+round515PhaseSensitiveProductionStillProofBearing =
+  R637.round637PhaseSensitiveProductionEstimateStillProofBearing
+
+round515PositiveRetainedViscosityNowTypedButUnproved : Bool
+round515PositiveRetainedViscosityNowTypedButUnproved =
+  R637.round637PositiveRetainedViscosityTyped
+
+round515ConcreteScalarFTCStillRequired : Bool
+round515ConcreteScalarFTCStillRequired =
+  R637.round637RequiresConcreteScalarFTC
+
 round515ClayPromotion : Bool
 round515ClayPromotion = false
 
@@ -157,6 +179,32 @@ round515R514PositiveRetainedViscosityMissingFromOldSliceIsFalse =
 round515IntrospectionMovesFirstMissingEarlierToPhysicalRealizationIsTrue :
   round515IntrospectionMovesFirstMissingEarlierToPhysicalRealization ≡ true
 round515IntrospectionMovesFirstMissingEarlierToPhysicalRealizationIsTrue = refl
+
+
+round515CanonicalLiteralPhysicalSliceCompilerAvailableIsTrue :
+  round515CanonicalLiteralPhysicalSliceCompilerAvailable ≡ true
+round515CanonicalLiteralPhysicalSliceCompilerAvailableIsTrue =
+  R637.round637LiteralCriticalCoordinatesInstalledOnR414IsTrue
+
+round515CriticalEnergyIdentityCompilerAvailableGivenStandardCalculusIsTrue :
+  round515CriticalEnergyIdentityCompilerAvailableGivenStandardCalculus ≡ true
+round515CriticalEnergyIdentityCompilerAvailableGivenStandardCalculusIsTrue =
+  R637.round637CriticalEnergyInequalityCompiledFromExactIdentityIsTrue
+
+round515PhaseSensitiveProductionStillProofBearingIsTrue :
+  round515PhaseSensitiveProductionStillProofBearing ≡ true
+round515PhaseSensitiveProductionStillProofBearingIsTrue =
+  R637.round637PhaseSensitiveProductionEstimateStillProofBearingIsTrue
+
+round515PositiveRetainedViscosityNowTypedButUnprovedIsTrue :
+  round515PositiveRetainedViscosityNowTypedButUnproved ≡ true
+round515PositiveRetainedViscosityNowTypedButUnprovedIsTrue =
+  R637.round637PositiveRetainedViscosityTypedIsTrue
+
+round515ConcreteScalarFTCStillRequiredIsTrue :
+  round515ConcreteScalarFTCStillRequired ≡ true
+round515ConcreteScalarFTCStillRequiredIsTrue =
+  R637.round637RequiresConcreteScalarFTCIsTrue
 
 round515ClayPromotionIsFalse : round515ClayPromotion ≡ false
 round515ClayPromotionIsFalse = refl
