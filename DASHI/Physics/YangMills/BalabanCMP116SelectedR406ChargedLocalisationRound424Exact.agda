@@ -271,11 +271,12 @@ selectedResidualSummabilityFromExistingCMP116
             (history attachment)
             (leftCube attachment)
             (rightCube attachment))
-        (sumPointwiseExact
-          selectedWeight
-          (λ domain → sourceWeight (sourceLocalization attachment domain))
-          (R406.localizedDomains application)
-          (residualExponentialIsSourceChargedMajorant attachment))
+        (sym
+          (sumPointwiseExact
+            selectedWeight
+            (λ domain → sourceWeight (sourceLocalization attachment domain))
+            (R406.localizedDomains application)
+            (residualExponentialIsSourceChargedMajorant attachment)))
         composedBound
   in
   subst
