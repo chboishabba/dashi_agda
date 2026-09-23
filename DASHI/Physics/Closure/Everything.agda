@@ -166,3 +166,5 @@ import DASHI.Physics.Closure.TSFVActionPhaseWeightSeparationExact
 -- into a multiverse or anthropic-selection theorem.
 import DASHI.Physics.Closure.TSFVMultiverseViabilityCrossPollinationExact
 import DASHI.Physics.Closure.MultiverseAttractorDiscriminatorBidiExact
+import DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406TransportExact
+import DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406SameObjectCompilerExact
