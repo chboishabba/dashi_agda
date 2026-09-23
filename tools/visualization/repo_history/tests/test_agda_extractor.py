@@ -1,3 +1,4 @@
+from copy import deepcopy
 from dashi_repo_history.agda import build_semantic_graph, extract_file
 
 
@@ -1071,3 +1072,29 @@ keep g = g
         and edge.kind == "calls"
         for edge in graph.edges.values()
     )
+
+
+def test_build_semantic_graph_does_not_mutate_cached_extraction_observations():
+    extraction = extract_file(
+        "Mini.agda",
+        b"""
+module Mini where
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+
+f : Nat -> Nat
+f zero = zero
+f (suc n) = n
+""",
+    )
+    before = deepcopy(extraction)
+
+    first = build_semantic_graph([extraction])
+    after_first = deepcopy(extraction)
+    second = build_semantic_graph([extraction])
+
+    assert extraction == before
+    assert after_first == before
+    assert first.nodes == second.nodes
+    assert first.edges == second.edges
+    assert first.unresolved_references == second.unresolved_references
+    assert first.parse_error_files == second.parse_error_files
