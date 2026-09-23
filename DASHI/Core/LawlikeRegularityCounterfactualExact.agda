@@ -71,7 +71,7 @@ data DemoDimension : Set where
 
 data DemoCoordinate : Set where
   changingCoordinate : DemoCoordinate
-  regularityCoordinate : DemoCoordinate
+  demoRegularityCoordinate : DemoCoordinate
 
 demoDesign :
   Experiment.ExperimentalCoordinateDesign
@@ -90,17 +90,17 @@ demoDesign =
   where
     role : DemoCoordinate → Experiment.CoordinateRole
     role changingCoordinate = Experiment.controlledInput
-    role regularityCoordinate = Experiment.referenceInvariant
+    role demoRegularityCoordinate = Experiment.referenceInvariant
 
     dimension : DemoCoordinate → DemoDimension
     dimension changingCoordinate = stateDimension
-    dimension regularityCoordinate = regularityDimension
+    dimension demoRegularityCoordinate = regularityDimension
 
     read : DemoCoordinate → DemoWorld → DemoValue
     read changingCoordinate worldLow = lowValue
     read changingCoordinate worldHigh = highValue
-    read regularityCoordinate worldLow = invariantValue
-    read regularityCoordinate worldHigh = invariantValue
+    read demoRegularityCoordinate worldLow = invariantValue
+    read demoRegularityCoordinate worldHigh = invariantValue
 
     apply : DemoControl → DemoWorld → DemoWorld
     apply flipState worldLow = worldHigh
@@ -111,7 +111,7 @@ DeclaredDemoControl flipState = ⊤
 
 demoRegularityInvariant :
   Experiment.CoordinateInvariantUnder
-    demoDesign regularityCoordinate DeclaredDemoControl
+    demoDesign demoRegularityCoordinate DeclaredDemoControl
 demoRegularityInvariant =
   Experiment.coordinateInvariantUnder preserved
   where
@@ -119,9 +119,9 @@ demoRegularityInvariant =
       (control : DemoControl) →
       DeclaredDemoControl control →
       (world : DemoWorld) →
-      Experiment.read demoDesign regularityCoordinate
+      Experiment.read demoDesign demoRegularityCoordinate
         (Experiment.applyControl demoDesign control world)
-      ≡ Experiment.read demoDesign regularityCoordinate world
+      ≡ Experiment.read demoDesign demoRegularityCoordinate world
     preserved flipState tt worldLow = refl
     preserved flipState tt worldHigh = refl
 
@@ -139,7 +139,7 @@ demoStateActuallyChanges =
 demoLawlikeTest : LawlikeRegularityTest demoDesign
 demoLawlikeTest =
   lawlike-regularity-test
-    regularityCoordinate
+    demoRegularityCoordinate
     DeclaredDemoControl
     demoRegularityInvariant
 
