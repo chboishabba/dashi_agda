@@ -501,6 +501,157 @@ jointRJConjugates J z =
   jConjugates J z
 
 ------------------------------------------------------------------------
+-- 10. Joint finite modular action: modular T is trivial on phase, +1 on level.
+--
+-- This is deliberately NOT the internal C3 phase cycle.  The distinction is
+-- exactly what the phase/level no-go theorem requires.
+------------------------------------------------------------------------
+
+record JointFiniteState : Set where
+  constructor joint-finite-state
+  field
+    finitePhase6 : Base.HexTruth
+    finitePhase3 : Level.level3CuspFibre
+    finiteLevel27 : Level.level27CuspFibre
+    finiteLevel9 : Level.level9CuspFibre
+    finiteLevel3 : Level.level3CuspFibre
+
+open JointFiniteState public
+
+jointFiniteT : JointFiniteState → JointFiniteState
+jointFiniteT s =
+  joint-finite-state
+    (finitePhase6 s)
+    (finitePhase3 s)
+    (Level.translateTriadic Q.three (finiteLevel27 s))
+    (Level.translateTriadic Q.two (finiteLevel9 s))
+    (Level.translateTriadic Q.one (finiteLevel3 s))
+
+jointFiniteTInverse : JointFiniteState → JointFiniteState
+jointFiniteTInverse s =
+  joint-finite-state
+    (finitePhase6 s)
+    (finitePhase3 s)
+    (Arithmetic.addResidue
+      (Arithmetic.negateResidue (Level.oneResidue Q.three))
+      (finiteLevel27 s))
+    (Arithmetic.addResidue
+      (Arithmetic.negateResidue (Level.oneResidue Q.two))
+      (finiteLevel9 s))
+    (Arithmetic.addResidue
+      (Arithmetic.negateResidue (Level.oneResidue Q.one))
+      (finiteLevel3 s))
+
+jointFiniteR : JointFiniteState → JointFiniteState
+jointFiniteR s =
+  joint-finite-state
+    (Reflection.reflect6 (finitePhase6 s))
+    (Arithmetic.negateResidue (finitePhase3 s))
+    (Arithmetic.negateResidue (finiteLevel27 s))
+    (Arithmetic.negateResidue (finiteLevel9 s))
+    (Arithmetic.negateResidue (finiteLevel3 s))
+
+phase6ReflectionInvolutive :
+  (x : Base.HexTruth) →
+  Reflection.reflect6 (Reflection.reflect6 x) ≡ x
+phase6ReflectionInvolutive Base.hex-0 = refl
+phase6ReflectionInvolutive Base.hex-1 = refl
+phase6ReflectionInvolutive Base.hex-2 = refl
+phase6ReflectionInvolutive Base.hex-3 = refl
+phase6ReflectionInvolutive Base.hex-4 = refl
+phase6ReflectionInvolutive Base.hex-5 = refl
+
+jointFiniteDihedralPhase6 :
+  (s : JointFiniteState) →
+  finitePhase6
+    (jointFiniteR (jointFiniteT (jointFiniteR s)))
+  ≡
+  finitePhase6 (jointFiniteTInverse s)
+jointFiniteDihedralPhase6 s =
+  phase6ReflectionInvolutive (finitePhase6 s)
+
+jointFiniteDihedralPhase3 :
+  (s : JointFiniteState) →
+  finitePhase3
+    (jointFiniteR (jointFiniteT (jointFiniteR s)))
+  ≡
+  finitePhase3 (jointFiniteTInverse s)
+jointFiniteDihedralPhase3 s =
+  Arithmetic.negateInvolutive (finitePhase3 s)
+
+jointFiniteDihedralLevel27 :
+  (s : JointFiniteState) →
+  finiteLevel27
+    (jointFiniteR (jointFiniteT (jointFiniteR s)))
+  ≡
+  finiteLevel27 (jointFiniteTInverse s)
+jointFiniteDihedralLevel27 s =
+  Level.inversionConjugatesTranslationToInverse
+    Level.canonicalCuspDihedralAt27
+    (finiteLevel27 s)
+
+jointFiniteDihedralLevel9 :
+  (s : JointFiniteState) →
+  finiteLevel9
+    (jointFiniteR (jointFiniteT (jointFiniteR s)))
+  ≡
+  finiteLevel9 (jointFiniteTInverse s)
+jointFiniteDihedralLevel9 s =
+  Level.inversionConjugatesTranslationToInverse
+    Level.canonicalCuspDihedralAt9
+    (finiteLevel9 s)
+
+jointFiniteDihedralLevel3 :
+  (s : JointFiniteState) →
+  finiteLevel3
+    (jointFiniteR (jointFiniteT (jointFiniteR s)))
+  ≡
+  finiteLevel3 (jointFiniteTInverse s)
+jointFiniteDihedralLevel3 s =
+  Level.inversionConjugatesTranslationToInverse
+    Level.canonicalCuspDihedralAt3
+    (finiteLevel3 s)
+
+record JointFiniteDihedralReceipt (s : JointFiniteState) : Set where
+  constructor joint-finite-dihedral-receipt
+  field
+    phase6 :
+      finitePhase6
+        (jointFiniteR (jointFiniteT (jointFiniteR s)))
+      ≡ finitePhase6 (jointFiniteTInverse s)
+
+    phase3 :
+      finitePhase3
+        (jointFiniteR (jointFiniteT (jointFiniteR s)))
+      ≡ finitePhase3 (jointFiniteTInverse s)
+
+    level27 :
+      finiteLevel27
+        (jointFiniteR (jointFiniteT (jointFiniteR s)))
+      ≡ finiteLevel27 (jointFiniteTInverse s)
+
+    level9 :
+      finiteLevel9
+        (jointFiniteR (jointFiniteT (jointFiniteR s)))
+      ≡ finiteLevel9 (jointFiniteTInverse s)
+
+    level3 :
+      finiteLevel3
+        (jointFiniteR (jointFiniteT (jointFiniteR s)))
+      ≡ finiteLevel3 (jointFiniteTInverse s)
+
+canonicalJointFiniteDihedralReceipt :
+  (s : JointFiniteState) →
+  JointFiniteDihedralReceipt s
+canonicalJointFiniteDihedralReceipt s =
+  joint-finite-dihedral-receipt
+    (jointFiniteDihedralPhase6 s)
+    (jointFiniteDihedralPhase3 s)
+    (jointFiniteDihedralLevel27 s)
+    (jointFiniteDihedralLevel9 s)
+    (jointFiniteDihedralLevel3 s)
+
+------------------------------------------------------------------------
 -- 8. Boundary.
 ------------------------------------------------------------------------
 
@@ -530,6 +681,11 @@ record JointPhaseLevelBoundary : Set where
     reflectionNegatesLevelC3 : Bool
     exactJConjugationRequiresSameObjectWeld : Bool
 
+    modularTIsIdentityOnPhaseLane : Bool
+    modularTTranslatesLevelLane : Bool
+    jointFiniteRTRIsTInverseCoordinatewise : Bool
+    phaseInternalC3CycleIdentifiedWithModularT : Bool
+
     fullDeckGroupCollapsedToC27 : Bool
 
 open JointPhaseLevelBoundary public
@@ -542,4 +698,5 @@ canonicalJointPhaseLevelBoundary =
     true true true
     false
     true true true true true true true
+    true true true false
     false
