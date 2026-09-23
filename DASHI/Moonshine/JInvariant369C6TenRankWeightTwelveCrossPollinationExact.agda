@@ -38,6 +38,7 @@ import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Reflection
 import DASHI.Moonshine.JInvariantSmithChartActionSeparationExact as Separation
 import DASHI.Moonshine.JInvariantSmithChartMobiusMatrixBridgeExact as SmithMatrix
 import DASHI.Moonshine.JInvariant369CanonicalJointReflectionMinimalExact as Minimal
+import DASHI.Moonshine.JInvariantColourWheelWaveSignedBidiExact as Wheel
 import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as Joint
 
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Completion
@@ -162,6 +163,124 @@ threePhaseBulkIs196830 :
   Ninety.threePhaseTenByNineBulkDimension ≡ 196830
 threePhaseBulkIs196830 =
   Ninety.threePhaseTenByNineBulkIs196830
+
+
+------------------------------------------------------------------------
+-- 2b. Shared binary-orientation reallocation:
+--
+--     C6 x Mode5  ~=  C3 x Completion10.
+--
+-- This is stronger than 6*5 = 3*10: the same binary orientation coordinate
+-- is moved between the sixfold phase carrier and the ten-state completion
+-- carrier.  It does not identify the C3 phase with the five complement modes.
+------------------------------------------------------------------------
+
+polarityToBinary :
+  SmithHalf.OrientationPolarity → Completion.BinaryPhase
+polarityToBinary SmithHalf.positive = Completion.directPhase
+polarityToBinary SmithHalf.negative = Completion.counterPhase
+
+binaryToPolarity :
+  Completion.BinaryPhase → SmithHalf.OrientationPolarity
+binaryToPolarity Completion.directPhase = SmithHalf.positive
+binaryToPolarity Completion.counterPhase = SmithHalf.negative
+
+C6TimesMode5 : Set
+C6TimesMode5 = Base.HexTruth × Completion.ComplementMode5
+
+C3TimesCompletion10 : Set
+C3TimesCompletion10 = Base.TriTruth × Completion.DecimalCompletionState
+
+reallocateC6ModeToC3Ten :
+  C6TimesMode5 → C3TimesCompletion10
+reallocateC6ModeToC3Ten (hex , mode) =
+  Wheel.phase (Wheel.uncurlSix hex)
+  ,
+  Completion.decodeModePhase
+    (mode , polarityToBinary (Wheel.polarity (Wheel.uncurlSix hex)))
+
+reallocateC3TenToC6Mode :
+  C3TimesCompletion10 → C6TimesMode5
+reallocateC3TenToC6Mode (phase , ten) =
+  Wheel.curlSix
+    (Wheel.uncurledSix
+      phase
+      (binaryToPolarity
+        (proj₂ (Completion.encodeModePhase ten))))
+  ,
+  proj₁ (Completion.encodeModePhase ten)
+
+c6ModeReallocationRoundTrip :
+  (state : C6TimesMode5) →
+  reallocateC3TenToC6Mode (reallocateC6ModeToC3Ten state) ≡ state
+c6ModeReallocationRoundTrip (Base.hex-0 , Completion.mode09) = refl
+c6ModeReallocationRoundTrip (Base.hex-0 , Completion.mode18) = refl
+c6ModeReallocationRoundTrip (Base.hex-0 , Completion.mode27) = refl
+c6ModeReallocationRoundTrip (Base.hex-0 , Completion.mode36) = refl
+c6ModeReallocationRoundTrip (Base.hex-0 , Completion.mode45) = refl
+c6ModeReallocationRoundTrip (Base.hex-1 , Completion.mode09) = refl
+c6ModeReallocationRoundTrip (Base.hex-1 , Completion.mode18) = refl
+c6ModeReallocationRoundTrip (Base.hex-1 , Completion.mode27) = refl
+c6ModeReallocationRoundTrip (Base.hex-1 , Completion.mode36) = refl
+c6ModeReallocationRoundTrip (Base.hex-1 , Completion.mode45) = refl
+c6ModeReallocationRoundTrip (Base.hex-2 , Completion.mode09) = refl
+c6ModeReallocationRoundTrip (Base.hex-2 , Completion.mode18) = refl
+c6ModeReallocationRoundTrip (Base.hex-2 , Completion.mode27) = refl
+c6ModeReallocationRoundTrip (Base.hex-2 , Completion.mode36) = refl
+c6ModeReallocationRoundTrip (Base.hex-2 , Completion.mode45) = refl
+c6ModeReallocationRoundTrip (Base.hex-3 , Completion.mode09) = refl
+c6ModeReallocationRoundTrip (Base.hex-3 , Completion.mode18) = refl
+c6ModeReallocationRoundTrip (Base.hex-3 , Completion.mode27) = refl
+c6ModeReallocationRoundTrip (Base.hex-3 , Completion.mode36) = refl
+c6ModeReallocationRoundTrip (Base.hex-3 , Completion.mode45) = refl
+c6ModeReallocationRoundTrip (Base.hex-4 , Completion.mode09) = refl
+c6ModeReallocationRoundTrip (Base.hex-4 , Completion.mode18) = refl
+c6ModeReallocationRoundTrip (Base.hex-4 , Completion.mode27) = refl
+c6ModeReallocationRoundTrip (Base.hex-4 , Completion.mode36) = refl
+c6ModeReallocationRoundTrip (Base.hex-4 , Completion.mode45) = refl
+c6ModeReallocationRoundTrip (Base.hex-5 , Completion.mode09) = refl
+c6ModeReallocationRoundTrip (Base.hex-5 , Completion.mode18) = refl
+c6ModeReallocationRoundTrip (Base.hex-5 , Completion.mode27) = refl
+c6ModeReallocationRoundTrip (Base.hex-5 , Completion.mode36) = refl
+c6ModeReallocationRoundTrip (Base.hex-5 , Completion.mode45) = refl
+
+c3TenReallocationRoundTrip :
+  (state : C3TimesCompletion10) →
+  reallocateC6ModeToC3Ten (reallocateC3TenToC6Mode state) ≡ state
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d0) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d1) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d2) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d3) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d4) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d5) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d6) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d7) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.d8) = refl
+c3TenReallocationRoundTrip (Base.tri-low , Completion.j9) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d0) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d1) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d2) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d3) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d4) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d5) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d6) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d7) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.d8) = refl
+c3TenReallocationRoundTrip (Base.tri-mid , Completion.j9) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d0) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d1) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d2) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d3) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d4) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d5) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d6) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d7) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.d8) = refl
+c3TenReallocationRoundTrip (Base.tri-high , Completion.j9) = refl
+
+sixTimesFiveEqualsThreeTimesTen : 6 * 5 ≡ 3 * 10
+sixTimesFiveEqualsThreeTimesTen = refl
+
 
 ------------------------------------------------------------------------
 -- 3. 53 -> 54 is an invariant-line completion, not a ternary refinement.
