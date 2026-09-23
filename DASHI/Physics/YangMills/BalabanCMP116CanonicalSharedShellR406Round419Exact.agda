@@ -28,7 +28,7 @@ open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_; absℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -38,6 +38,8 @@ import DASHI.Physics.YangMills.BalabanCMP116SelectedTermwiseLocalizationRound406
 import DASHI.Physics.YangMills.BalabanMarkedPolarisationResummation as Resum
 import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticShellExact as Shared
 import DASHI.Physics.YangMills.BalabanFederbushRationalMatrixRealImageRound208Exact as R208
+import DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact as Geometric
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanCMP116R406SharedMarkedGeometricRound418Exact as R418
 
 record CanonicalSharedShellR406Inputs
@@ -191,15 +193,15 @@ canonicalR406BoundaryBelowSharedMarkedGeometricHalf :
       CanonicalSharedShellR406Inputs
         {dataSet = dataSet} {extension = extension} {base = base}
         application Scale Volume Root) →
-  DASHI.Foundations.RealAnalysisAxioms.absℝ
+  absℝ
     (R406.selectedBoundaryIntegrand (asCanonicalR406 inputs))
   ≤ℝ
   R418.embedQ (embedding inputs)
-    (DASHI.Physics.YangMills.BalabanSharedMarkedAnalyticGeometricShellExact.markedBaseEnergy
+    (Geometric.markedBaseEnergy
       (shared inputs) Shared.hessianMark)
-  DASHI.Foundations.RealAnalysisAxioms.*ℝ
+  *ℝ
   R418.embedQ (embedding inputs)
-    (DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.halfPower
+    (Geo.halfPower
       (selectedDistance inputs))
 canonicalR406BoundaryBelowSharedMarkedGeometricHalf inputs =
   R418.selectedBoundaryBelowSharedMarkedGeometricHalf
