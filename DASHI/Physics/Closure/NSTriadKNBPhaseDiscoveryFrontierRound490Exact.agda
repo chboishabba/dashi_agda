@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputPairDifferencePaymentExact as P
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentWorkDifferenceVectorBridgeExact as WorkBridge
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as Rate
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as SignedPayment
+import DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406SameObjectCompilerExact as EndpointCompiler
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerDifferenceAdapterExact as Adapter
 import DASHI.Physics.Closure.NSTriadKNCenteredPartnerSlotDefectExact as SlotDefect
 import DASHI.Physics.Closure.NSTriadKNExternalHHSquareGapGramRound128Exact as R128
@@ -134,6 +135,26 @@ round490A4CardinalityFreeLocalToGlobalCompilerClosed =
 round490A4OrderPreservingIntegrationCompilerClosed : Bool
 round490A4OrderPreservingIntegrationCompilerClosed =
   SignedPayment.a4OrderPreservingIntegrationCompilerClosed
+
+------------------------------------------------------------------------
+-- Endpoint-aware consumer reduction after d1b0/d1b1 archaeology.
+------------------------------------------------------------------------
+
+round490IntegratedR406EndpointIdentityCompilerClosed : Bool
+round490IntegratedR406EndpointIdentityCompilerClosed =
+  EndpointCompiler.integratedR406EndpointIdentityCompilerClosed
+
+round490ArbitraryIntegratedR406EqualityRequired : Bool
+round490ArbitraryIntegratedR406EqualityRequired =
+  EndpointCompiler.arbitraryIntegratedR406EqualityRequired
+
+round490PointwiseWeightedR406EndpointA3WeldStillProofBearing : Bool
+round490PointwiseWeightedR406EndpointA3WeldStillProofBearing =
+  EndpointCompiler.pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearing
+
+round490EndpointFTCIntroducesNewNonlinearEstimate : Bool
+round490EndpointFTCIntroducesNewNonlinearEstimate =
+  EndpointCompiler.endpointFTCStillSeparateNonlinearEstimate
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -253,6 +274,26 @@ round490A4OrderPreservingIntegrationCompilerClosedIsTrue :
   round490A4OrderPreservingIntegrationCompilerClosed ≡ true
 round490A4OrderPreservingIntegrationCompilerClosedIsTrue =
   SignedPayment.a4OrderPreservingIntegrationCompilerClosedIsTrue
+
+round490IntegratedR406EndpointIdentityCompilerClosedIsTrue :
+  round490IntegratedR406EndpointIdentityCompilerClosed ≡ true
+round490IntegratedR406EndpointIdentityCompilerClosedIsTrue =
+  EndpointCompiler.integratedR406EndpointIdentityCompilerClosedIsTrue
+
+round490ArbitraryIntegratedR406EqualityRequiredIsFalse :
+  round490ArbitraryIntegratedR406EqualityRequired ≡ false
+round490ArbitraryIntegratedR406EqualityRequiredIsFalse =
+  EndpointCompiler.arbitraryIntegratedR406EqualityRequiredIsFalse
+
+round490PointwiseWeightedR406EndpointA3WeldStillProofBearingIsTrue :
+  round490PointwiseWeightedR406EndpointA3WeldStillProofBearing ≡ true
+round490PointwiseWeightedR406EndpointA3WeldStillProofBearingIsTrue =
+  EndpointCompiler.pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearingIsTrue
+
+round490EndpointFTCIntroducesNewNonlinearEstimateIsFalse :
+  round490EndpointFTCIntroducesNewNonlinearEstimate ≡ false
+round490EndpointFTCIntroducesNewNonlinearEstimateIsFalse =
+  EndpointCompiler.endpointFTCStillSeparateNonlinearEstimateIsFalse
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
