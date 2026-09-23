@@ -21,7 +21,7 @@ module DASHI.Moonshine.JInvariantAnalyticNormalizedKleinAdapterExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality
-  using (_≡_; refl; cong; cong₂; trans)
+  using (_≡_; refl; cong; cong₂; trans; sym)
 
 import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstein
 import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Disc
@@ -160,7 +160,7 @@ standardJConjugationFixed :
 standardJConjugationFixed {M} {A} {N} {Q} {R} {tau} F =
   trans
     (cong (standardJ M A N Q)
-      (Relation.Binary.PropositionalEquality.sym (fixed F)))
+      (sym (fixed F)))
     (standardJReflects R tau)
 
 ------------------------------------------------------------------------
