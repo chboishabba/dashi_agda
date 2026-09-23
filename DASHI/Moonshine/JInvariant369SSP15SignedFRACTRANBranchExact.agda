@@ -132,6 +132,89 @@ chosenOggInternalLaneBijection =
     }
 
 ------------------------------------------------------------------------
+-- 1b. Ogg-prime carrier <-> signed-FRACTRAN prime carrier.
+--
+-- These are independent repository datatypes with the same fifteen numerical
+-- prime labels.  Keep the bridge explicit.
+------------------------------------------------------------------------
+
+lanePrimeToSignedPrime :
+  Lane.MonsterPrimeLane →
+  Signed.SSPPrime
+lanePrimeToSignedPrime Lane.p2 = Signed.ssp2
+lanePrimeToSignedPrime Lane.p3 = Signed.ssp3
+lanePrimeToSignedPrime Lane.p5 = Signed.ssp5
+lanePrimeToSignedPrime Lane.p7 = Signed.ssp7
+lanePrimeToSignedPrime Lane.p11 = Signed.ssp11
+lanePrimeToSignedPrime Lane.p13 = Signed.ssp13
+lanePrimeToSignedPrime Lane.p17 = Signed.ssp17
+lanePrimeToSignedPrime Lane.p19 = Signed.ssp19
+lanePrimeToSignedPrime Lane.p23 = Signed.ssp23
+lanePrimeToSignedPrime Lane.p29 = Signed.ssp29
+lanePrimeToSignedPrime Lane.p31 = Signed.ssp31
+lanePrimeToSignedPrime Lane.p41 = Signed.ssp41
+lanePrimeToSignedPrime Lane.p47 = Signed.ssp47
+lanePrimeToSignedPrime Lane.p59 = Signed.ssp59
+lanePrimeToSignedPrime Lane.p71 = Signed.ssp71
+
+signedPrimeToLanePrime :
+  Signed.SSPPrime →
+  Lane.MonsterPrimeLane
+signedPrimeToLanePrime Signed.ssp2 = Lane.p2
+signedPrimeToLanePrime Signed.ssp3 = Lane.p3
+signedPrimeToLanePrime Signed.ssp5 = Lane.p5
+signedPrimeToLanePrime Signed.ssp7 = Lane.p7
+signedPrimeToLanePrime Signed.ssp11 = Lane.p11
+signedPrimeToLanePrime Signed.ssp13 = Lane.p13
+signedPrimeToLanePrime Signed.ssp17 = Lane.p17
+signedPrimeToLanePrime Signed.ssp19 = Lane.p19
+signedPrimeToLanePrime Signed.ssp23 = Lane.p23
+signedPrimeToLanePrime Signed.ssp29 = Lane.p29
+signedPrimeToLanePrime Signed.ssp31 = Lane.p31
+signedPrimeToLanePrime Signed.ssp41 = Lane.p41
+signedPrimeToLanePrime Signed.ssp47 = Lane.p47
+signedPrimeToLanePrime Signed.ssp59 = Lane.p59
+signedPrimeToLanePrime Signed.ssp71 = Lane.p71
+
+laneAfterSignedPrime :
+  (prime : Signed.SSPPrime) →
+  lanePrimeToSignedPrime (signedPrimeToLanePrime prime) ≡ prime
+laneAfterSignedPrime Signed.ssp2 = refl
+laneAfterSignedPrime Signed.ssp3 = refl
+laneAfterSignedPrime Signed.ssp5 = refl
+laneAfterSignedPrime Signed.ssp7 = refl
+laneAfterSignedPrime Signed.ssp11 = refl
+laneAfterSignedPrime Signed.ssp13 = refl
+laneAfterSignedPrime Signed.ssp17 = refl
+laneAfterSignedPrime Signed.ssp19 = refl
+laneAfterSignedPrime Signed.ssp23 = refl
+laneAfterSignedPrime Signed.ssp29 = refl
+laneAfterSignedPrime Signed.ssp31 = refl
+laneAfterSignedPrime Signed.ssp41 = refl
+laneAfterSignedPrime Signed.ssp47 = refl
+laneAfterSignedPrime Signed.ssp59 = refl
+laneAfterSignedPrime Signed.ssp71 = refl
+
+signedAfterLanePrime :
+  (prime : Lane.MonsterPrimeLane) →
+  signedPrimeToLanePrime (lanePrimeToSignedPrime prime) ≡ prime
+signedAfterLanePrime Lane.p2 = refl
+signedAfterLanePrime Lane.p3 = refl
+signedAfterLanePrime Lane.p5 = refl
+signedAfterLanePrime Lane.p7 = refl
+signedAfterLanePrime Lane.p11 = refl
+signedAfterLanePrime Lane.p13 = refl
+signedAfterLanePrime Lane.p17 = refl
+signedAfterLanePrime Lane.p19 = refl
+signedAfterLanePrime Lane.p23 = refl
+signedAfterLanePrime Lane.p29 = refl
+signedAfterLanePrime Lane.p31 = refl
+signedAfterLanePrime Lane.p41 = refl
+signedAfterLanePrime Lane.p47 = refl
+signedAfterLanePrime Lane.p59 = refl
+signedAfterLanePrime Lane.p71 = refl
+
+------------------------------------------------------------------------
 -- 2. Balanced phase -> unit signed multiplicity.
 ------------------------------------------------------------------------
 
@@ -213,38 +296,38 @@ internalPointedCoarseRoundTrip (Completion.mode45 , Harmonic.positiveTrit) = ref
 -- 4. Pointed state -> full SSP valuation.
 ------------------------------------------------------------------------
 
-primeEqual :
-  Lane.MonsterPrimeLane →
-  Lane.MonsterPrimeLane →
+signedPrimeEqual :
+  Signed.SSPPrime →
+  Signed.SSPPrime →
   Bool
-primeEqual Lane.p2 Lane.p2 = true
-primeEqual Lane.p3 Lane.p3 = true
-primeEqual Lane.p5 Lane.p5 = true
-primeEqual Lane.p7 Lane.p7 = true
-primeEqual Lane.p11 Lane.p11 = true
-primeEqual Lane.p13 Lane.p13 = true
-primeEqual Lane.p17 Lane.p17 = true
-primeEqual Lane.p19 Lane.p19 = true
-primeEqual Lane.p23 Lane.p23 = true
-primeEqual Lane.p29 Lane.p29 = true
-primeEqual Lane.p31 Lane.p31 = true
-primeEqual Lane.p41 Lane.p41 = true
-primeEqual Lane.p47 Lane.p47 = true
-primeEqual Lane.p59 Lane.p59 = true
-primeEqual Lane.p71 Lane.p71 = true
-primeEqual left right = false
+signedPrimeEqual Signed.ssp2 Signed.ssp2 = true
+signedPrimeEqual Signed.ssp3 Signed.ssp3 = true
+signedPrimeEqual Signed.ssp5 Signed.ssp5 = true
+signedPrimeEqual Signed.ssp7 Signed.ssp7 = true
+signedPrimeEqual Signed.ssp11 Signed.ssp11 = true
+signedPrimeEqual Signed.ssp13 Signed.ssp13 = true
+signedPrimeEqual Signed.ssp17 Signed.ssp17 = true
+signedPrimeEqual Signed.ssp19 Signed.ssp19 = true
+signedPrimeEqual Signed.ssp23 Signed.ssp23 = true
+signedPrimeEqual Signed.ssp29 Signed.ssp29 = true
+signedPrimeEqual Signed.ssp31 Signed.ssp31 = true
+signedPrimeEqual Signed.ssp41 Signed.ssp41 = true
+signedPrimeEqual Signed.ssp47 Signed.ssp47 = true
+signedPrimeEqual Signed.ssp59 Signed.ssp59 = true
+signedPrimeEqual Signed.ssp71 Signed.ssp71 = true
+signedPrimeEqual left right = false
 
 pointedSignedValuation :
   PointedSignedSSPLane →
   Signed.SSPValuation
 pointedSignedValuation state prime
-  with primeEqual (selectedPrime state) prime
+  with signedPrimeEqual (lanePrimeToSignedPrime (selectedPrime state)) prime
 ... | true = signedMultiplicity state
 ... | false = Signed.zeroMultiplicity
 
 pointedValuationOwnLane :
   (state : PointedSignedSSPLane) →
-  pointedSignedValuation state (selectedPrime state)
+  pointedSignedValuation state (lanePrimeToSignedPrime (selectedPrime state))
   ≡ signedMultiplicity state
 pointedValuationOwnLane
   (pointed-signed-ssp-lane Lane.p2 multiplicity) = refl
@@ -292,24 +375,250 @@ neutralPointed prime =
   pointed-signed-ssp-lane prime Signed.zeroMultiplicity
 
 neutralValuationIsZeroAt :
-  (selected observed : Lane.MonsterPrimeLane) →
+  (selected : Lane.MonsterPrimeLane) →
+  (observed : Signed.SSPPrime) →
   pointedSignedValuation (neutralPointed selected) observed
   ≡ Signed.zeroMultiplicity
-neutralValuationIsZeroAt Lane.p2 observed = refl
-neutralValuationIsZeroAt Lane.p3 observed = refl
-neutralValuationIsZeroAt Lane.p5 observed = refl
-neutralValuationIsZeroAt Lane.p7 observed = refl
-neutralValuationIsZeroAt Lane.p11 observed = refl
-neutralValuationIsZeroAt Lane.p13 observed = refl
-neutralValuationIsZeroAt Lane.p17 observed = refl
-neutralValuationIsZeroAt Lane.p19 observed = refl
-neutralValuationIsZeroAt Lane.p23 observed = refl
-neutralValuationIsZeroAt Lane.p29 observed = refl
-neutralValuationIsZeroAt Lane.p31 observed = refl
-neutralValuationIsZeroAt Lane.p41 observed = refl
-neutralValuationIsZeroAt Lane.p47 observed = refl
-neutralValuationIsZeroAt Lane.p59 observed = refl
-neutralValuationIsZeroAt Lane.p71 observed = refl
+neutralValuationIsZeroAt Lane.p2 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p3 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p5 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p7 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p11 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p13 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p17 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p19 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p23 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p29 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p31 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p41 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p47 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p59 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
+neutralValuationIsZeroAt Lane.p71 observed with observed
+... | Signed.ssp2 = refl
+... | Signed.ssp3 = refl
+... | Signed.ssp5 = refl
+... | Signed.ssp7 = refl
+... | Signed.ssp11 = refl
+... | Signed.ssp13 = refl
+... | Signed.ssp17 = refl
+... | Signed.ssp19 = refl
+... | Signed.ssp23 = refl
+... | Signed.ssp29 = refl
+... | Signed.ssp31 = refl
+... | Signed.ssp41 = refl
+... | Signed.ssp47 = refl
+... | Signed.ssp59 = refl
+... | Signed.ssp71 = refl
 
 data ZeroValuationRecoversSelectedNeutralLane : Set where
 
