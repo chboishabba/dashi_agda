@@ -51,6 +51,7 @@ import DASHI.Moonshine.Base369MonsterThreeLocalEightToSixPlusTwoCarrierBidiExact
 import DASHI.Moonshine.JInvariant369Zeta6561MonsterCrosswalkExact as Zeta
 import DASHI.Moonshine.JInvariant369ZeroToThirteenTetralemmaQualificationExact as Rank013
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
 import DASHI.Foundations.SSPTritCarrier as SSP
@@ -563,7 +564,7 @@ coarseSignedPhase state =
   SSPLevel.signedMultiplicityToSSP (signedPhase state)
 
 signedMagnitudeStillDoesNotFactorThroughCoarseC3 :
-  DASHI.Core.ConsumerDescentMinimalObserverExact.FactorsThrough
+  Descent.FactorsThrough
     SSPLevel.signedMultiplicityLevel3Observer
     SSPLevel.signedMagnitude →
   ⊥
