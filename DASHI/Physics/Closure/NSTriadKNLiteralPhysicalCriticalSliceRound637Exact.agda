@@ -34,7 +34,7 @@ module DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound637Exact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _-_; _≤_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst)
 
@@ -162,9 +162,9 @@ module PhysicalSlice
       (P : PhysicalCriticalSliceData D C R cutoff terminal) : Set where
     field
       retainedViscosityPositive :
-        (Fold.two * Live.physicalViscosity (Live.support D))
-          - absorbedCoefficient P
-        > 0ℚ
+        0ℚ <
+          (Fold.two * Live.physicalViscosity (Live.support D))
+            - absorbedCoefficient P
 
 ------------------------------------------------------------------------
 -- Status / trust boundary.
