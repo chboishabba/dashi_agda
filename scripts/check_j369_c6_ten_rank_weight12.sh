@@ -5,6 +5,7 @@ targets=(
   DASHI/Moonshine/JInvariant369C6TenRankWeightTwelveCrossPollinationExact.agda
   DASHI/Moonshine/JInvariant369CanonicalInterpretationExact.agda
   DASHI/Moonshine/MonsterAtlas6561X8RecognitionObligationExact.agda
+  DASHI/Moonshine/JInvariant369NeutralCuspRelationCrossPollinationExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -20,5 +21,11 @@ grep -q 'signedMagnitudeDoesNotFactorThroughLevel3' "${targets[1]}"
 grep -q 'NineBy729BlockRecognition' "${targets[2]}"
 grep -q 'Atlas6561X8Recognition' "${targets[2]}"
 grep -q 'x8EquivariantRecognitionInhabitedHere' "${targets[2]}"
+grep -q 'joinAfterSplit' "${targets[3]}"
+grep -q 'distinguishedOrientationDuplicationCollapses' "${targets[3]}"
+grep -q 'fourteenIsBalancedRankCarry' "${targets[3]}"
+grep -q 'leanEta24NormalizedDeltaSameObjectSourceWritten' "${targets[3]}"
+grep -q 'twelvePlusTwelveIsTwentyFour' "${targets[3]}"
+grep -q 'finiteZeroPhaseDoesNotEqualCuspVanishing' "${targets[3]}"
 
 scripts/run_agda29_parallel_check.sh "${targets[@]}"
