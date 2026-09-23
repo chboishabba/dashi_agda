@@ -134,8 +134,8 @@ canonicalQuarticSignedPoleLowModeQuotientBoundary =
     false
     false
     true
-    refl refl refl refl
-    refl refl refl refl refl refl
+    refl refl refl refl refl refl refl
+    refl refl
     refl refl refl
     refl refl
     "The preferred symmetric Abel consumer is exactly invariant under adding a constant plus a centered quadratic discrepancy mode.  This is a genuine FactorsThrough result supplied by target-centred parity.  The local vanishing jet of Psi_t at t must not be promoted to invariance under arbitrary centered cubics.  The Lean companion now lifts the smooth bump carrier to C4, proves inverse-fourth decay for the actual Psi_t, makes the weighted cubic Psi moment globally integrable, and proves that the finite odd mode defects converge to concrete global Psi moments.  Their existence is paid; their vanishing is not."
