@@ -30,6 +30,14 @@ open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound639Exact as R639
+import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
+import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
+import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
+import DASHI.Physics.Closure.NSTriadKNFixedOutputFluxFiniteDerivativeCompilerRound412Exact as R412
+import DASHI.Physics.Closure.NSTriadKNR290PairFluxDerivativeCompilerRound416Exact as R416
+import DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Exact as R417
+import DASHI.Physics.Closure.NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact as R564
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Energy
 
 subviscousAbsorptionGivesRetainedGap :
   ∀ {nu absorbed : ℚ} →
@@ -67,11 +75,65 @@ subviscousAbsorptionGivesRetainedGap {nu} {absorbed}
   ℚP.<-≤-trans nuStrict normalized
 
 ------------------------------------------------------------------------
+-- Same-object adapter into the actual R639 retained-viscosity receipt.
+------------------------------------------------------------------------
+
+module TypedReceipt
+    (Time : Set)
+    (initialTime : Time)
+    (integrateTo : (Time → ℚ) → Time → ℚ)
+    (DerivativeOf :
+      (Time → DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.Complex3
+        DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.rationalRealField) →
+      (Time → DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier.Complex3
+        DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2.rationalRealField) → Set)
+    (ScalarDerivativeOf : (Time → ℚ) → (Time → ℚ) → Set)
+    (hermitianCalculus :
+      R417.HermitianDerivativeCalculus Time DerivativeOf ScalarDerivativeOf)
+    (constantScaleCalculus :
+      R416.ScalarConstantDerivativeCalculus Time ScalarDerivativeOf)
+    (scalarDerivativeAlgebra :
+      R412.ScalarDerivativeAlgebra Time ScalarDerivativeOf)
+    (FTC :
+      R564.ScalarFundamentalTheorem564
+        Time initialTime integrateTo ScalarDerivativeOf)
+    (integrationLinearity :
+      Energy.ScalarIntegrationLinearity Time integrateTo) where
+
+  module Live = R408.LiteralDynamics
+    Time initialTime integrateTo DerivativeOf
+  module Support = R405.LiteralCutoffSupport
+    Time initialTime integrateTo DerivativeOf
+  module Modes = ModeCarrier.LiteralModeCarrier
+    Time initialTime integrateTo DerivativeOf
+  module Physical = R639.PhysicalSlice
+    Time initialTime integrateTo DerivativeOf ScalarDerivativeOf
+    hermitianCalculus constantScaleCalculus scalarDerivativeAlgebra
+    FTC integrationLinearity
+
+  subviscousBuildsTypedRetainedViscosity :
+    ∀ {D C R cutoff terminal}
+      (P : Physical.PhysicalCriticalSliceData D C R cutoff terminal) →
+    Physical.absorbedCoefficient P
+      ≤ Live.physicalViscosity (Live.support D) →
+    Physical.PositiveRetainedViscosityReceipt P
+  subviscousBuildsTypedRetainedViscosity {D} {R = R} P absorbedBelowNu =
+    record
+      { Physical.retainedViscosityPositive =
+          subviscousAbsorptionGivesRetainedGap
+            (Support.physicalViscosityPositive R)
+            absorbedBelowNu
+      }
+
+------------------------------------------------------------------------
 -- Status / trust boundary.
 ------------------------------------------------------------------------
 
 round641SubviscousAbsorptionCompilerClosed : Bool
 round641SubviscousAbsorptionCompilerClosed = true
+
+round641TypedR639RetainedViscosityAdapterClosed : Bool
+round641TypedR639RetainedViscosityAdapterClosed = true
 
 round641SubviscousAbsorptionMandatory : Bool
 round641SubviscousAbsorptionMandatory = false
@@ -91,6 +153,10 @@ round641ClayPromotion = false
 round641SubviscousAbsorptionCompilerClosedIsTrue :
   round641SubviscousAbsorptionCompilerClosed ≡ true
 round641SubviscousAbsorptionCompilerClosedIsTrue = refl
+
+round641TypedR639RetainedViscosityAdapterClosedIsTrue :
+  round641TypedR639RetainedViscosityAdapterClosed ≡ true
+round641TypedR639RetainedViscosityAdapterClosedIsTrue = refl
 
 round641SubviscousAbsorptionMandatoryIsFalse :
   round641SubviscousAbsorptionMandatory ≡ false
