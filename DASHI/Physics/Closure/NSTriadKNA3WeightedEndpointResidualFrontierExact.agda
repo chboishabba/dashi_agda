@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNA3WeightedR406EndpointCutExact as Weighted
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationExact as Cauchy
 import DASHI.Physics.Closure.NSTriadKNR567CauchyGramFluxNormalFormRound596Exact as R596
 import DASHI.Physics.Closure.NSTriadKNFullGramCoherentFoldRound597Exact as R597
+import DASHI.Physics.Closure.NSTriadKNCyclicResolvedTransferRateDefectRound598Exact as R598
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExact as GramTangent
 import DASHI.Physics.Closure.NSTriadKNCauchyR397R406ReconciliationExact as Reconcile
 
@@ -81,6 +82,15 @@ r567FullGramAlignedWithA3SelfWorkClosed =
 genericFullGramCoherentFoldClosed : Bool
 genericFullGramCoherentFoldClosed =
   R597.round597FullGramCoherentFoldClosed
+
+
+cyclicResolvedTransferRateDefectCompilerClosed : Bool
+cyclicResolvedTransferRateDefectCompilerClosed =
+  R598.round598ResolvedWeightedTransferIsRateDefectFormClosed
+
+cyclicRateDefectNumeratorsExposedInPhysicalModes : Bool
+cyclicRateDefectNumeratorsExposedInPhysicalModes =
+  R598.round598RateDefectNumeratorsExposedInPhysicalModes
 
 cauchyResolvedR406DiagonalReducedNormalFormClosed : Bool
 cauchyResolvedR406DiagonalReducedNormalFormClosed =
@@ -168,6 +178,16 @@ genericFullGramCoherentFoldClosedIsTrue :
 genericFullGramCoherentFoldClosedIsTrue =
   R597.round597FullGramCoherentFoldClosedIsTrue
 
+
+cyclicResolvedTransferRateDefectCompilerClosedIsTrue :
+  cyclicResolvedTransferRateDefectCompilerClosed ≡ true
+cyclicResolvedTransferRateDefectCompilerClosedIsTrue =
+  R598.round598ResolvedWeightedTransferIsRateDefectFormClosedIsTrue
+
+cyclicRateDefectNumeratorsExposedInPhysicalModesIsTrue :
+  cyclicRateDefectNumeratorsExposedInPhysicalModes ≡ true
+cyclicRateDefectNumeratorsExposedInPhysicalModesIsTrue = refl
+
 cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue :
   cauchyResolvedR406DiagonalReducedNormalFormClosed ≡ true
 cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue =
@@ -204,6 +224,11 @@ factoredFullMinusSelfGramToCenteredA3KernelSameObjectClosedIsFalse = refl
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse :
   weightedFluxTangentFullSquareToCenteredA3RateKernelClosed ≡ false
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosedIsFalse = refl
+
+
+r230ScalarConsumerToConservedCyclicTripleClosedIsFalse :
+  r230ScalarConsumerToConservedCyclicTripleClosed ≡ false
+r230ScalarConsumerToConservedCyclicTripleClosedIsFalse = refl
 
 
 cauchyRateCancellationAloneClosesCenteredA3ToR568IsFalse :
