@@ -39,6 +39,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Completion
 import DASHI.Biology.SSP15ComplementPhaseProjectorExact as SSP15
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact as Phase42
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Reduction
 import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact as Cross
@@ -66,7 +67,7 @@ phasePreservingThreeTimesFiveReductionIsPaid :
 phasePreservingThreeTimesFiveReductionIsPaid = refl
 
 orbitModeRoundTrip :
-  (orbit : DASHI.Biology.TriadicKernelLiftQuotientExact.NineOrbit) →
+  (orbit : Triadic.NineOrbit) →
   Reduction.complementModeToOrbit (Reduction.orbitToComplementMode orbit)
   ≡ orbit
 orbitModeRoundTrip =
