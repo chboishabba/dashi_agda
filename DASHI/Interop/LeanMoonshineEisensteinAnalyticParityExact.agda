@@ -53,6 +53,8 @@ record LeanMoonshineEisensteinAnalyticParity : Set where
     leanBranch : String
     leanAnalyticModule : String
     leanWeldModule : String
+    leanEta24PinnedModule : String
+    leanEta24SixfoldPhaseModule : String
     leanAgdaTargetModule : String
     agdaExtractionModule : String
     mathlibPin : String
@@ -95,6 +97,11 @@ record LeanMoonshineEisensteinAnalyticParity : Set where
     bishopMachinPiSemanticCompilerOwnedInLean : Bool
     round11MachinSourceBindingCompilerOwnedInLean : Bool
     round11RouteBCapstoneOwnedInLean : Bool
+    eta24PinnedWeight12ReflectionOwnedInLean : Bool
+    eta24PinnedFixedLocusOwnedInLean : Bool
+    eta24BranchFreePhaseExponentialOwnedInLean : Bool
+    eta24IntegerPiCongruenceOwnedInLean : Bool
+    eta24ConcreteSixfoldPhaseOwnedInLean : Bool
 
     agdaBishopSetoidComplexOwned : Bool
     agdaBishopSetoidEisensteinRecurrenceOwned : Bool
@@ -120,6 +127,8 @@ canonicalLeanMoonshineEisensteinAnalyticParity =
     "agent/moonshine-eisenstein-analytic-20260922"
     "Integration.MoonshineEisensteinAnalytic"
     "Integration.MoonshineEisensteinWeld"
+    "Integration.MoonshineEta24Pinned"
+    "Integration.MoonshineEta24SixfoldPhase"
     "Integration.MoonshineEisensteinAgdaTarget"
     "DASHI.Moonshine.JInvariantEisensteinAgdaLeanExtractionExact"
     "v4.28.0"
@@ -127,6 +136,7 @@ canonicalLeanMoonshineEisensteinAnalyticParity =
     true true true true true true true true
     true true true true true true true
     true true true true true true true
+    true true true true true
     true true true
     false false false false false false false
-    "Route B is now source-pinned and setoid-native. Lean owns the canonical evaluator for the vendored Bishop regular-rational reals, proves eval x = eval y iff the Bishop setoid relation holds, derives zero/one/add/sub/mul/neg preservation from the actual vendored resampling semantics, and derives Bishop exp/sin/cos/Machin-pi classical semantics from the repository's concrete convergence witnesses plus Mathlib series/Machin theorems. Agda owns the sibling Bishop setoid complex package, the literal sigma3/sigma5 q/E4/E6/discriminant-numerator recurrences on that carrier, and a Round11+Machin source capstone selecting the actual configured trig data and bishopMachinPi. Lean owns a single Round11MachinSourceBinding compiler and an end-to-end capstone sending mapped source E4_N/E6_N to Mathlib E4/E6 and the mapped discriminant numerator to its canonical limit. The only cross-language source gate left is inhabiting that exact Lean binding from the Agda receipt; the remaining independent analytic same-object seam is eta^24 = (E4^3-E6^2)/1728 at the pinned Mathlib v4.28.0 dependency. No dependency bump or automatic theorem promotion is inferred."
+    "Route B is source-pinned and setoid-native. Lean owns the faithful evaluator for the vendored Bishop regular-rational reals, derives the vendored arithmetic operations and Bishop exp/sin/cos/Machin-pi classical semantics from the repository's concrete convergence witnesses, and compiles one Round11MachinSourceBinding through the literal source q/E4/E6/normalized-Delta sequence to Mathlib E4/E6 and the canonical normalized Delta target. Agda owns the sibling Bishop setoid complex package, literal sigma3/sigma5 recurrences, normalized source Delta and the Round11+Machin source capstone. Independently, at the existing Mathlib v4.28.0 pin, Lean now proves eta^24 weight-12 reflection/fixed-locus identities and a branch-safe sixfold phase theorem: on normSq(tau)=1, arg(eta^24(tau)) + 6 arg(tau) = k*pi for some integer k, equivalently arg(eta^24(tau)) = -6 arg(tau) + k*pi. No continuous argument branch is chosen. The cross-language source gate remains inhabiting the exact Lean binding from the Agda receipt. The independent same-object seam eta^24 = normalized(E4^3-E6^2)/1728 remains open; it is no longer required for the eta^24 reflection or phase theorem itself. No dependency bump or automatic theorem promotion is inferred."
