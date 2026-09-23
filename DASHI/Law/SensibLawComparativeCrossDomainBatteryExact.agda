@@ -9,6 +9,7 @@ import DASHI.Law.SensibLawPabaiComparativeWorldExact as Pabai
 import DASHI.Law.SensibLawPersonalProfessionalComparativeWorldExact as Fibre
 import DASHI.Law.SensibLawTemporalComparativeWorldExact as Temporal
 import DASHI.Law.SensibLawChangeLocusExact as Locus
+import DASHI.Law.SensibLawComparativeChangeAdaptersExact as Adapter
 
 ------------------------------------------------------------------------
 -- M11.4 CROSS-DOMAIN COMPARATIVE BATTERY
@@ -32,6 +33,9 @@ temporalBoundary = Temporal.canonicalTemporalComparativeBoundary
 locusBoundary : Locus.ChangeLocusBoundary
 locusBoundary = Locus.canonicalChangeLocusBoundary
 
+adapterBoundary : Adapter.ComparativeChangeAdapterBoundary
+adapterBoundary = Adapter.canonicalComparativeChangeAdapterBoundary
+
 record ComparativeCrossDomainBattery : Set where
   constructor comparative-cross-domain-battery
   field
@@ -51,6 +55,10 @@ record ComparativeCrossDomainBattery : Set where
     consumerProjectionChangesWorldDoesNotIsTrue :
       consumerProjectionChangesWorldDoesNot ≡ true
 
+    consumerProjectionDifferenceIsTyped : Bool
+    consumerProjectionDifferenceIsTypedIsTrue :
+      consumerProjectionDifferenceIsTyped ≡ true
+
     legalDefeaterChangesRoute : Bool
     legalDefeaterChangesRouteIsTrue :
       legalDefeaterChangesRoute ≡ true
@@ -58,6 +66,10 @@ record ComparativeCrossDomainBattery : Set where
     irrelevantTemporalChangeNeedNotChangeAnswer : Bool
     irrelevantTemporalChangeNeedNotChangeAnswerIsTrue :
       irrelevantTemporalChangeNeedNotChangeAnswer ≡ true
+
+    sourceRevisionDifferenceIsTypedWorldEvidence : Bool
+    sourceRevisionDifferenceIsTypedWorldEvidenceIsTrue :
+      sourceRevisionDifferenceIsTypedWorldEvidence ≡ true
 
     comparisonCreatesTruth : Bool
     comparisonCreatesTruthIsFalse :
@@ -80,9 +92,13 @@ canonicalComparativeCrossDomainBattery =
     refl
     (Fibre.differentLegitimateFibres fibreBoundary)
     refl
+    (Adapter.personalProfessionalDependencyDifferenceTyped adapterBoundary)
+    refl
     (Pabai.w1Defeated pabaiBoundary)
     refl
     (Temporal.temporalDeltaRelevanceIsConsumerIndexed temporalBoundary)
+    refl
+    (Adapter.sourceRevisionDifferenceTypedAsWorldEvidence adapterBoundary)
     refl
     false refl
     false refl
