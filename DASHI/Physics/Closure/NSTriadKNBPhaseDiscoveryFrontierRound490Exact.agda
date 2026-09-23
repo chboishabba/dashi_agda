@@ -59,6 +59,7 @@ import DASHI.Physics.Closure.NSTriadKNR604AmplitudeHomogeneityNoGoRound611Exact 
 import DASHI.Physics.Closure.NSTriadKNA3ToR568HomogeneityBoundaryRound612Exact as R612
 import DASHI.Physics.Closure.NSTriadKNR571HermitianStateDifferenceRound613Exact as R613
 import DASHI.Physics.Closure.NSTriadKNR573SelfExternalNestedCompanionSplitRound613Exact as R613
+import DASHI.Physics.Closure.NSTriadKNR573ExternalResidualNestedCarrierRound614Exact as R614
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -953,6 +954,19 @@ round490R573ExternalNestedPaymentClosed : Bool
 round490R573ExternalNestedPaymentClosed =
   R613.round613ExternalNestedPaymentClosed
 
+
+round490R573ExternalNestedOnLiteralR112ResidualClosed : Bool
+round490R573ExternalNestedOnLiteralR112ResidualClosed =
+  R614.round614ExternalNestedCellOnLiteralR112ResidualClosed
+
+round490FixedOutputR573FoldSelfExternalSplitClosed : Bool
+round490FixedOutputR573FoldSelfExternalSplitClosed =
+  R614.round614FixedOutputR573FoldSelfExternalSplitClosed
+
+round490CanonicalR112ResidualWitnessFamilyInstalled : Bool
+round490CanonicalR112ResidualWitnessFamilyInstalled =
+  R614.round614CanonicalResidualWitnessFamilyInstalled
+
 round490R604SidesHaveSameAmplitudeDegreeIsFalse :
   round490R604SidesHaveSameAmplitudeDegree ≡ false
 round490R604SidesHaveSameAmplitudeDegreeIsFalse =
@@ -983,6 +997,22 @@ round490R573ExternalNestedPaymentClosedIsFalse :
   round490R573ExternalNestedPaymentClosed ≡ false
 round490R573ExternalNestedPaymentClosedIsFalse =
   R613.round613ExternalNestedPaymentClosedIsFalse
+
+
+round490R573ExternalNestedOnLiteralR112ResidualClosedIsTrue :
+  round490R573ExternalNestedOnLiteralR112ResidualClosed ≡ true
+round490R573ExternalNestedOnLiteralR112ResidualClosedIsTrue =
+  R614.round614ExternalNestedCellOnLiteralR112ResidualClosedIsTrue
+
+round490FixedOutputR573FoldSelfExternalSplitClosedIsTrue :
+  round490FixedOutputR573FoldSelfExternalSplitClosed ≡ true
+round490FixedOutputR573FoldSelfExternalSplitClosedIsTrue =
+  R614.round614FixedOutputR573FoldSelfExternalSplitClosedIsTrue
+
+round490CanonicalR112ResidualWitnessFamilyInstalledIsFalse :
+  round490CanonicalR112ResidualWitnessFamilyInstalled ≡ false
+round490CanonicalR112ResidualWitnessFamilyInstalledIsFalse =
+  R614.round614CanonicalResidualWitnessFamilyInstalledIsFalse
 
 round490A3AndR568HaveSameAmplitudeDegree : Bool
 round490A3AndR568HaveSameAmplitudeDegree =
