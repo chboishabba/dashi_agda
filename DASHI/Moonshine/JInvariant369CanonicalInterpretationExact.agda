@@ -48,6 +48,8 @@ import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact as Principal
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
 import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Repair
 import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact as SignedSSP
+import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
+import DASHI.Moonshine.JInvariant369JointFibredObserverExact as Joint
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -77,6 +79,15 @@ record Canonical369InterpretationBoundary : Set where
     signedSpectralToLevelTranslationIntertwinerExists : Bool
     signedSSPAutomaticallyIsPrincipalLevel3Fibre : Bool
 
+    sspC3CycleIntertwinesLevelTranslation : Bool
+    sspC2AntipodeIntertwinesLevelInversion : Bool
+    sspLevel3FiniteDihedralEquivalenceOwned : Bool
+    signedMagnitudeFactorsThroughLevel3 : Bool
+
+    jointPhaseLevelSignedFibreConstructed : Bool
+    jointFiniteDihedralLawOwned : Bool
+    level27FactorsThroughBaseJSurface : Bool
+
 open Canonical369InterpretationBoundary public
 
 canonicalCanonical369InterpretationBoundary :
@@ -87,6 +98,8 @@ canonicalCanonical369InterpretationBoundary =
     true true true true true
     false false false
     true true false false
+    true true true false
+    true true false
     false true
     false false false
 
@@ -116,3 +129,21 @@ signedSSPCannotCollapseSpectralConjugationToLevelTranslation :
   Separation.Empty
 signedSSPCannotCollapseSpectralConjugationToLevelTranslation =
   SignedSSP.signedSpectralConjugationCannotEqualLevel3Translation
+
+------------------------------------------------------------------------
+-- Positive generator-matched SSP <-> level-3 finite action bridge.
+------------------------------------------------------------------------
+
+sspLevel3DihedralBoundary :
+  SSPLevel.SSPLevel3DihedralIntertwinerBoundary
+sspLevel3DihedralBoundary =
+  SSPLevel.canonicalSSPLevel3DihedralIntertwinerBoundary
+
+------------------------------------------------------------------------
+-- First-class joint phase/level/signed fibre.
+------------------------------------------------------------------------
+
+joint369FibredObserverBoundary :
+  Joint.Joint369FibredObserverBoundary
+joint369FibredObserverBoundary =
+  Joint.canonicalJoint369FibredObserverBoundary
