@@ -82,6 +82,7 @@ import DASHI.Physics.Closure.NSTriadKNOrderedOrientedForceToR503BidiExact
 import DASHI.Physics.Closure.NSTriadKNPhysicalCyclicCellRateDefectBidiExact
 import DASHI.Physics.Closure.NSTriadKNCyclicResolventDefectFactorizationBidiExact
 import DASHI.Physics.Closure.NSTriadKNCyclicConservationWeightedDefectBidiExact
+import DASHI.Physics.Closure.NSTriadKNCyclicResolvedTransferRateDefectRound598Exact as R598
 import DASHI.Physics.Closure.NSForensicSignedRouteLineageAuditExact
 
 outerSpectatorWeightStructuralWeldClosed : Bool
@@ -141,6 +142,11 @@ cyclicResolventDefectFactoredThroughRateDifference = true
 cyclicConservedWeightedSumReducesToTwoWeightDefects : Bool
 cyclicConservedWeightedSumReducesToTwoWeightDefects = true
 
+
+cyclicResolvedTransferRateDefectNormalFormClosed : Bool
+cyclicResolvedTransferRateDefectNormalFormClosed =
+  R598.round598ResolvedWeightedTransferIsRateDefectFormClosed
+
 cyclicOneThirdNormalizationMandatory : Bool
 cyclicOneThirdNormalizationMandatory = false
 
@@ -183,6 +189,12 @@ selectedNestedOuterDampedPairTangentIsMandatoryFirstResidualIsFalse = refl
 signedNestedForcingPairedBeforeNormIsTrue :
   signedNestedForcingPairedBeforeNorm ≡ true
 signedNestedForcingPairedBeforeNormIsTrue = refl
+
+
+cyclicResolvedTransferRateDefectNormalFormClosedIsTrue :
+  cyclicResolvedTransferRateDefectNormalFormClosed ≡ true
+cyclicResolvedTransferRateDefectNormalFormClosedIsTrue =
+  R598.round598ResolvedWeightedTransferIsRateDefectFormClosedIsTrue
 
 amplitudeHalfIndependentAnalyticLeafIsFalse :
   amplitudeHalfIndependentAnalyticLeaf ≡ false
