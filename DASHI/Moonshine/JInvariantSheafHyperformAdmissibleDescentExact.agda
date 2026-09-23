@@ -22,6 +22,8 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂; Σ)
 
 import Base369 as Base
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
+import DASHI.Core.AdmissibleTransitionHyperfabricExact as Transition
+import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.ComputerScience.WrongTypeAttributionFactorisationPlanningSnowballExact as Wrong
@@ -238,7 +240,145 @@ cardinalityDoesNotCreateAdmissibleGluing :
 cardinalityDoesNotCreateAdmissibleGluing ()
 
 ------------------------------------------------------------------------
--- 7. Existing 11-trit chart shift and pants path are retained as rechartings,
+-- 7. Repo-native admissible-consumer instantiation.
+--
+-- local27 is the shorter description, but it is excluded for the q11
+-- consumer by the already-constructed collision.  The full field is the
+-- explicit refinement repair.  This is the exact MDL/admissibility discipline:
+-- cost is considered only after consumer adequacy.
+------------------------------------------------------------------------
+
+data JObserverModel : Set where
+  local27Model : JObserverModel
+  fullFieldModel : JObserverModel
+
+data JObserverAdmissible : JObserverModel → Set where
+  local27StructurallyAdmissible : JObserverAdmissible local27Model
+  fullFieldStructurallyAdmissible : JObserverAdmissible fullFieldModel
+
+JObserverConsumerAdequate : JObserverModel → Set
+JObserverConsumerAdequate local27Model =
+  Descent.ConsumerSufficient localJRestriction (J.fineFieldAt J.q11)
+JObserverConsumerAdequate fullFieldModel =
+  Descent.ConsumerSufficient J.fullStateObserver (J.fineFieldAt J.q11)
+
+jObserverDescriptionLength : JObserverModel → Nat
+jObserverDescriptionLength local27Model = 3
+jObserverDescriptionLength fullFieldModel = 11
+
+data JObserverRefines : JObserverModel → JObserverModel → Set where
+  localIdentity : JObserverRefines local27Model local27Model
+  fullIdentity : JObserverRefines fullFieldModel fullFieldModel
+  localToFull : JObserverRefines local27Model fullFieldModel
+
+jObserverReference : JObserverModel → String
+jObserverReference local27Model = "J local-27 evaluation observer"
+jObserverReference fullFieldModel = "J full structured coarse/fine field"
+
+jObserverProblem : MDL.ConsumerMDLProblem
+jObserverProblem =
+  MDL.consumerMDLProblem
+    JObserverModel
+    JObserverAdmissible
+    JObserverConsumerAdequate
+    jObserverDescriptionLength
+    JObserverRefines
+    jObserverReference
+    "coordinate-depth proxy only; eligibility gates precede cost"
+    "q11 fine-field consumer"
+
+local27Q11Counterexample :
+  MDL.ConsumerCounterexample jObserverProblem local27Model
+local27Q11Counterexample =
+  MDL.consumerCounterexample
+    JLocalPullback
+    jLocalCollisionInPullback
+    J.localJ27CannotSufficeForQ11Consumer
+    "local evaluation erases the q11 value away from the selected q00 address"
+    "JInvariantRiemannObserverResidualSufficiencyBidiExact.jLocalCollision"
+
+fullFieldQ11Adequate :
+  JObserverConsumerAdequate fullFieldModel
+fullFieldQ11Adequate =
+  J.fullStateSufficientForQ11Consumer
+
+localToFullQ11Repair :
+  MDL.LocalRefinementRepair jObserverProblem local27Model fullFieldModel
+localToFullQ11Repair =
+  MDL.localRefinementRepair
+    local27Q11Counterexample
+    localToFull
+    fullFieldStructurallyAdmissible
+    fullFieldQ11Adequate
+    "reopen the retained jFine residual rather than treating local27 as the whole state"
+
+local27CannotBeEligibleForQ11 :
+  MDL.Eligible jObserverProblem local27Model → ⊥
+local27CannotBeEligibleForQ11 =
+  MDL.counterexampleExcludesEligibility local27Q11Counterexample
+
+fullFieldRepairIsEligible :
+  MDL.Eligible jObserverProblem fullFieldModel
+fullFieldRepairIsEligible =
+  MDL.repairProvidesEligibleRefinement localToFullQ11Repair
+
+------------------------------------------------------------------------
+-- 8. The same repair is a proof-relevantly enabled transition.
+------------------------------------------------------------------------
+
+data JRepairParameter : Set where
+  q11RepairParameter : JRepairParameter
+
+data JRepairMove : Set where
+  reopenFullFine : JRepairMove
+
+data JRepairEnabled : JRepairMove → JRepairParameter → JObserverModel → Set where
+  localNeedsFullFine :
+    JRepairEnabled reopenFullFine q11RepairParameter local27Model
+
+jRepairStep :
+  JRepairMove → JRepairParameter → JObserverModel → JObserverModel
+jRepairStep reopenFullFine q11RepairParameter local27Model = fullFieldModel
+jRepairStep reopenFullFine q11RepairParameter fullFieldModel = fullFieldModel
+
+data JRepairInvariant : JObserverModel → Set where
+  localModelInFabric : JRepairInvariant local27Model
+  fullModelInFabric : JRepairInvariant fullFieldModel
+
+jRepairPreservesInvariant :
+  (move : JRepairMove) →
+  (parameter : JRepairParameter) →
+  (state : JObserverModel) →
+  JRepairEnabled move parameter state →
+  JRepairInvariant state →
+  JRepairInvariant (jRepairStep move parameter state)
+jRepairPreservesInvariant reopenFullFine q11RepairParameter local27Model
+    localNeedsFullFine localModelInFabric =
+  fullModelInFabric
+
+jRepairTransitionSystem : Transition.AdmissibleTransitionSystem
+jRepairTransitionSystem =
+  Transition.admissibleTransitionSystem
+    JObserverModel
+    JRepairParameter
+    JRepairMove
+    JRepairEnabled
+    jRepairStep
+    JRepairInvariant
+    jRepairPreservesInvariant
+    "q11 collision enables reopening of the retained full jFine field"
+
+localToFullIsAdmittedStep :
+  Transition.AdmittedStep
+    jRepairTransitionSystem
+    reopenFullFine
+    q11RepairParameter
+    local27Model
+localToFullIsAdmittedStep =
+  Transition.admittedStep localNeedsFullFine localModelInFabric
+
+------------------------------------------------------------------------
+-- 9. Existing 11-trit chart shift and pants path are retained as rechartings,
 --    not promoted to analytic modular gluing.
 ------------------------------------------------------------------------
 
@@ -264,7 +404,7 @@ literalSmoothPantsPushoutConstructedHere : Bool
 literalSmoothPantsPushoutConstructedHere = false
 
 ------------------------------------------------------------------------
--- 8. Cross-owner receipts expose the existing admissibility/firewall state.
+-- 10. Cross-owner receipts expose the existing admissibility/firewall state.
 ------------------------------------------------------------------------
 
 base369CoarseFineBoundary :
@@ -338,7 +478,7 @@ moonshineBulkBoundaryExact =
   Zeta.moonshineIsBulkPlusFullBoundary
 
 ------------------------------------------------------------------------
--- 9. Consolidated frontier.
+-- 11. Consolidated frontier.
 ------------------------------------------------------------------------
 
 record JSheafHyperformDescentFrontier : Set where
@@ -364,6 +504,10 @@ record JSheafHyperformDescentFrontier : Set where
     jWeightZeroQuotientOwnerLinked : Bool
     finiteQSeriesAutomaticallyEqualsAnalyticJ : Bool
     oeisMatchCreatesSemanticIdentity : Bool
+    admissibleConsumerProblemInstantiated : Bool
+    localShortModelExcludedForQ11 : Bool
+    fullFineRepairEligible : Bool
+    repairTransitionProofRelevant : Bool
 
 canonicalJSheafHyperformDescentFrontier :
   JSheafHyperformDescentFrontier
@@ -371,3 +515,4 @@ canonicalJSheafHyperformDescentFrontier =
   j-sheaf-hyperform-descent-frontier
     true true true true true true true false true true false false false
     true true true true true false false
+    true true true true
