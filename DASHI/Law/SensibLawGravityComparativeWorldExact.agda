@@ -146,6 +146,7 @@ effectiveAgreementDoesNotIdentifyWorld = refl
 data TheoryRevisionChangesWorldByDefinition : Set where
 data ObserverRefinementChangesWorldByDefinition : Set where
 data StateChangeChangesRegularityByDefinition : Set where
+data StateChangeRequiresTheoryChange : Set where
 data NewerTheoryGloballyDeletesOlderTheory : Set where
 data EffectiveRecoveryIdentifiesWorldOntology : Set where
 
@@ -160,6 +161,10 @@ observerRefinementDoesNotChangeWorldByDefinition ()
 stateChangeDoesNotChangeRegularityByDefinition :
   StateChangeChangesRegularityByDefinition → ⊥
 stateChangeDoesNotChangeRegularityByDefinition ()
+
+stateChangeDoesNotRequireTheoryChange :
+  StateChangeRequiresTheoryChange → ⊥
+stateChangeDoesNotRequireTheoryChange ()
 
 newerTheoryDoesNotGloballyDeleteOlderTheory :
   NewerTheoryGloballyDeletesOlderTheory → ⊥
@@ -192,6 +197,10 @@ record GravityComparativeBoundary : Set where
     stateMayChangeWhileRegularityInvariantIsTrue :
       stateMayChangeWhileRegularityInvariant ≡ true
 
+    stateChangeNeedNotChangeTheory : Bool
+    stateChangeNeedNotChangeTheoryIsTrue :
+      stateChangeNeedNotChangeTheory ≡ true
+
     effectiveRecoveryIsBooleanReplacement : Bool
     effectiveRecoveryIsBooleanReplacementIsFalse :
       effectiveRecoveryIsBooleanReplacement ≡ false
@@ -209,6 +218,7 @@ canonicalGravityComparativeBoundary =
     true refl
     true refl
     false refl
+    true refl
     true refl
     false refl
     false refl
