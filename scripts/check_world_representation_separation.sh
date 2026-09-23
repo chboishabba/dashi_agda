@@ -6,8 +6,10 @@ UNDER="DASHI/Core/TheoryUnderdeterminationExperimentExact.agda"
 BRIDGE="DASHI/Biology/WorldRegularityHyperformalismCrossPollinationExact.agda"
 EVO="DASHI/Biology/Evolution/EvolutionaryWorldCouplingTheoryBoundaryExact.agda"
 LAW="DASHI/Physics/Laws/WorldLawStateTheorySeparationExact.agda"
+LAWLIKE="DASHI/Core/LawlikeRegularityCounterfactualExact.agda"
+LINEAGE="DASHI/Physics/Laws/EffectiveTheoryLineageExact.agda"
 
-for file in "$CORE" "$UNDER" "$BRIDGE" "$EVO" "$LAW"; do
+for file in "$CORE" "$UNDER" "$BRIDGE" "$EVO" "$LAW" "$LAWLIKE" "$LINEAGE"; do
   [[ -f "$file" ]] || { echo "missing world/theory separation source: $file" >&2; exit 1; }
 done
 
@@ -53,5 +55,15 @@ require "lawDoesNotDefinitionallyEqualInitialCondition" "$LAW"
 require "stateChangeDoesNotRequireLawChange" "$LAW"
 require "canonicalTheoryRecoveryBoundary" "$LAW"
 require "canonicalGravityPreTheoryBoundary" "$LAW"
+
+require "demoRegularityInvariant" "$LAWLIKE"
+require "demoStateActuallyChanges" "$LAWLIKE"
+require "singleTrajectoryDoesNotEstablishLawlikeRegularity" "$LAWLIKE"
+require "canonicalLawlikeRegularityBoundary" "$LAWLIKE"
+
+require "restrictedAdequacyDoesNotIdentifyTheoriesGlobally" "$LINEAGE"
+require "supersededTheoryNeedNotBeUselessEverywhere" "$LINEAGE"
+require "newtonAsRestrictedEffectiveLineage" "$LINEAGE"
+require "canonicalEffectiveTheoryLineageBoundary" "$LINEAGE"
 
 echo "world/theory separation cross-pollination static contract: OK"
