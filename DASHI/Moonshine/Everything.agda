@@ -46,3 +46,4 @@ import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact
 import DASHI.Moonshine.JInvariant369JointJReflectionWeldExact
 import DASHI.Moonshine.JInvariantAnalyticNormalizedKleinAdapterExact
 import DASHI.Moonshine.JInvariant369NormalizedAnalyticRendererExact
+import DASHI.Moonshine.JInvariant369LevelNonDescentThroughJExact
