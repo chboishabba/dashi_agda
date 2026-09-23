@@ -10,6 +10,8 @@ import DASHI.Law.SensibLawPersonalProfessionalComparativeWorldExact as Fibre
 import DASHI.Law.SensibLawTemporalComparativeWorldExact as Temporal
 import DASHI.Law.SensibLawChangeLocusExact as Locus
 import DASHI.Law.SensibLawComparativeChangeAdaptersExact as Adapter
+import DASHI.Law.SensibLawWorldMonitorComparativeAdapterExact as WorldMonitor
+import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as Trade
 
 ------------------------------------------------------------------------
 -- M11.4 CROSS-DOMAIN COMPARATIVE BATTERY
@@ -35,6 +37,12 @@ locusBoundary = Locus.canonicalChangeLocusBoundary
 
 adapterBoundary : Adapter.ComparativeChangeAdapterBoundary
 adapterBoundary = Adapter.canonicalComparativeChangeAdapterBoundary
+
+worldMonitorBoundary : WorldMonitor.WorldMonitorComparativeBoundary
+worldMonitorBoundary = WorldMonitor.canonicalWorldMonitorComparativeBoundary
+
+tradeBoundary : Trade.DashiTradeComparativeBoundary
+tradeBoundary = Trade.canonicalDashiTradeComparativeBoundary
 
 record ComparativeCrossDomainBattery : Set where
   constructor comparative-cross-domain-battery
@@ -71,6 +79,30 @@ record ComparativeCrossDomainBattery : Set where
     sourceRevisionDifferenceIsTypedWorldEvidenceIsTrue :
       sourceRevisionDifferenceIsTypedWorldEvidence ≡ true
 
+    forecastChangeNeedNotChangeWorld : Bool
+    forecastChangeNeedNotChangeWorldIsTrue :
+      forecastChangeNeedNotChangeWorld ≡ true
+
+    worldMonitorModelAndDashboardStayTyped : Bool
+    worldMonitorModelAndDashboardStayTypedIsTrue :
+      worldMonitorModelAndDashboardStayTyped ≡ true
+
+    quotientMayBeQueryAdequateWithoutRawIdentity : Bool
+    quotientMayBeQueryAdequateWithoutRawIdentityIsTrue :
+      quotientMayBeQueryAdequateWithoutRawIdentity ≡ true
+
+    sameWorldDifferentTradePolicyPossible : Bool
+    sameWorldDifferentTradePolicyPossibleIsTrue :
+      sameWorldDifferentTradePolicyPossible ≡ true
+
+    beliefDeltaIsNotWorldDelta : Bool
+    beliefDeltaIsNotWorldDeltaIsTrue :
+      beliefDeltaIsNotWorldDelta ≡ true
+
+    tradeJustificationDoesNotCreateCausalProof : Bool
+    tradeJustificationDoesNotCreateCausalProofIsTrue :
+      tradeJustificationDoesNotCreateCausalProof ≡ true
+
     comparisonCreatesTruth : Bool
     comparisonCreatesTruthIsFalse :
       comparisonCreatesTruth ≡ false
@@ -100,5 +132,14 @@ canonicalComparativeCrossDomainBattery =
     refl
     (Adapter.sourceRevisionDifferenceTypedAsWorldEvidence adapterBoundary)
     refl
+    true refl
+    true refl
+    (Trade.quotientIsRepresentationNotWorldIdentity tradeBoundary)
+    refl
+    (Trade.sameWorldDifferentPolicyRepresentationPossible tradeBoundary)
+    refl
+    (Trade.beliefIsSeparateChangeLayer tradeBoundary)
+    refl
+    true refl
     false refl
     false refl
