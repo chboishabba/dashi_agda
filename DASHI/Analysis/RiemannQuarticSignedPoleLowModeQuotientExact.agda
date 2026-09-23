@@ -156,3 +156,112 @@ cubicModeRemainsOpen = refl
 localJetToGlobalCubicPromotionRejected :
   lowModeQuotientStatus localJetImpliesGlobalCubicFactorisation ≡ rejectedPromotion
 localJetToGlobalCubicPromotionRejected = refl
+
+
+------------------------------------------------------------------------
+-- FOURIER-DUAL PROFILE OBSTRUCTION OWNER
+--
+-- The Lean companion now identifies the two global odd defects with local
+-- coordinates of the exact signed combined projective profile:
+--
+--   D1∞ = -(2π/(t/16)) * Pcomb(0)
+--   D3∞ =  6π(t/16)   * Pcomb''(0)
+--
+-- Hence the proposed full cubic quotient exists iff both local profile
+-- coordinates vanish.  The first coordinate factors further through a
+-- distinct on-line-response determinant because all off-centre taper windows
+-- vanish at u=0 for R<1.  None of these vanishings is supplied by the paid
+-- pole determinant.
+------------------------------------------------------------------------
+
+data ProfileObstructionCoordinate : Set where
+  linearFourierDualIdentity : ProfileObstructionCoordinate
+  cubicFourierDualIdentity : ProfileObstructionCoordinate
+  fullCubicIffProfileCoordinatesZero : ProfileObstructionCoordinate
+  explicitLinearProfileDeterminant : ProfileObstructionCoordinate
+  explicitCubicProfileDeterminant : ProfileObstructionCoordinate
+  centralWindowLinearFactorisation : ProfileObstructionCoordinate
+  linearOnLineObstructionZero : ProfileObstructionCoordinate
+  cubicProfileObstructionZero : ProfileObstructionCoordinate
+  poleDeterminantForcesProfileObstructions : ProfileObstructionCoordinate
+
+data ProfileObstructionStatus : Set where
+  theoremOwned : ProfileObstructionStatus
+  openAnalyticObstruction : ProfileObstructionStatus
+  rejectedImplication : ProfileObstructionStatus
+
+profileObstructionStatus :
+  ProfileObstructionCoordinate -> ProfileObstructionStatus
+profileObstructionStatus linearFourierDualIdentity = theoremOwned
+profileObstructionStatus cubicFourierDualIdentity = theoremOwned
+profileObstructionStatus fullCubicIffProfileCoordinatesZero = theoremOwned
+profileObstructionStatus explicitLinearProfileDeterminant = theoremOwned
+profileObstructionStatus explicitCubicProfileDeterminant = theoremOwned
+profileObstructionStatus centralWindowLinearFactorisation = theoremOwned
+profileObstructionStatus linearOnLineObstructionZero = openAnalyticObstruction
+profileObstructionStatus cubicProfileObstructionZero = openAnalyticObstruction
+profileObstructionStatus poleDeterminantForcesProfileObstructions = rejectedImplication
+
+record QuarticSignedPoleProfileObstructionBoundary : Set where
+  constructor quartic-signed-pole-profile-obstruction-boundary
+  field
+    linearFourierDualIdentityPaid : Bool
+    cubicFourierDualIdentityPaid : Bool
+    fullCubicIffProfileCoordinatesZeroPaid : Bool
+    explicitLinearProfileDeterminantPaid : Bool
+    explicitCubicProfileDeterminantPaid : Bool
+    centralWindowLinearFactorisationPaid : Bool
+
+    linearOnLineObstructionZeroPaid : Bool
+    cubicProfileObstructionZeroPaid : Bool
+    poleDeterminantAloneForcesBothProfileObstructions : Bool
+
+    linearFourierDualIdentityPaidIsTrue :
+      linearFourierDualIdentityPaid ≡ true
+    cubicFourierDualIdentityPaidIsTrue :
+      cubicFourierDualIdentityPaid ≡ true
+    fullCubicIffProfileCoordinatesZeroPaidIsTrue :
+      fullCubicIffProfileCoordinatesZeroPaid ≡ true
+    explicitLinearProfileDeterminantPaidIsTrue :
+      explicitLinearProfileDeterminantPaid ≡ true
+    explicitCubicProfileDeterminantPaidIsTrue :
+      explicitCubicProfileDeterminantPaid ≡ true
+    centralWindowLinearFactorisationPaidIsTrue :
+      centralWindowLinearFactorisationPaid ≡ true
+
+    linearOnLineObstructionZeroPaidIsFalse :
+      linearOnLineObstructionZeroPaid ≡ false
+    cubicProfileObstructionZeroPaidIsFalse :
+      cubicProfileObstructionZeroPaid ≡ false
+    poleDeterminantAloneForcesBothProfileObstructionsIsFalse :
+      poleDeterminantAloneForcesBothProfileObstructions ≡ false
+
+    interpretation : String
+    nextResearchCut : String
+
+canonicalQuarticSignedPoleProfileObstructionBoundary :
+  QuarticSignedPoleProfileObstructionBoundary
+canonicalQuarticSignedPoleProfileObstructionBoundary =
+  quartic-signed-pole-profile-obstruction-boundary
+    true true true true true true
+    false false false
+    refl refl refl refl refl refl
+    refl refl refl
+    "The global odd quotient defects are now exact Fourier-dual local coordinates of the signed combined profile.  Full cubic factorisation is equivalent to Pcomb(0)=0 and Pcomb''(0)=0.  The linear coordinate factors further through a separate on-line-response determinant because the endpoint tapers share the same positive central-window value for R<1.  The paid pole cancellation is a different determinant and must not be promoted to either profile-coordinate vanishing."
+    "Investigate the two remaining local obstruction determinants themselves, especially the cubic endpoint curvature coordinate, and only then ask whether a coupled completed-residual mechanism can use them.  Do not treat the fourth-order quotient as paid unless both obstruction determinants vanish."
+
+profileObstructionCriterionIsPaid :
+  profileObstructionStatus fullCubicIffProfileCoordinatesZero ≡ theoremOwned
+profileObstructionCriterionIsPaid = refl
+
+linearOnLineObstructionRemainsOpen :
+  profileObstructionStatus linearOnLineObstructionZero ≡ openAnalyticObstruction
+linearOnLineObstructionRemainsOpen = refl
+
+cubicProfileObstructionRemainsOpen :
+  profileObstructionStatus cubicProfileObstructionZero ≡ openAnalyticObstruction
+cubicProfileObstructionRemainsOpen = refl
+
+poleToProfilePromotionRejected :
+  profileObstructionStatus poleDeterminantForcesProfileObstructions ≡ rejectedImplication
+poleToProfilePromotionRejected = refl
