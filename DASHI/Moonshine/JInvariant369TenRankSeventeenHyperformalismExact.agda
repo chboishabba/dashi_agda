@@ -379,6 +379,25 @@ balancedTernaryLabel rank15 = "1--0"
 balancedTernaryLabel rank16 = "1--1"
 balancedTernaryLabel rank17 = "1-0-"
 
+balancedPositiveCapacity : Nat → Nat
+balancedPositiveCapacity zero = 0
+balancedPositiveCapacity (suc n) =
+  balancedPositiveCapacity n + Hyper.powNat 3 n
+
+balancedCapacitySuccessor :
+  (n : Nat) →
+  balancedPositiveCapacity (suc n)
+  ≡ balancedPositiveCapacity n + Hyper.powNat 3 n
+balancedCapacitySuccessor n = refl
+
+balancedCapacityThreeIsThirteen :
+  balancedPositiveCapacity 3 ≡ 13
+balancedCapacityThreeIsThirteen = refl
+
+balancedCapacityFourIsForty :
+  balancedPositiveCapacity 4 ≡ 40
+balancedCapacityFourIsForty = refl
+
 threeBalancedDigitPositiveCapacity : Nat
 threeBalancedDigitPositiveCapacity = 1 + 3 + 9
 
@@ -684,6 +703,7 @@ record TenRankSeventeenHyperformalismBoundary : Set where
     ordinaryTernary14To17Paid : Bool
     balancedTernary13To17Paid : Bool
     rank14BalancedCarryDepthJumpPaid : Bool
+    balancedCapacityGeneratorPaid : Bool
     rank14ProfileCountPaid : Bool
     rank17ProfileCountPaid : Bool
 
@@ -707,7 +727,7 @@ canonicalTenRankSeventeenHyperformalismBoundary :
 canonicalTenRankSeventeenHyperformalismBoundary =
   ten-rank-seventeen-hyperformalism-boundary
     true true true true true false
-    true true true true true true
+    true true true true true true true
     true false true
     true true true false
     true false false
