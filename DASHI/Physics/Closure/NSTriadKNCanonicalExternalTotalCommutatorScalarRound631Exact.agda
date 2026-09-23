@@ -21,6 +21,7 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalExternalTotalCommutatorScalarRoun
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -102,7 +103,7 @@ module CanonicalExternalTotalCommutator631
 
   canonicalExternalScalar :
     Z3.FourierMode →
-    C3.Complex3 F → _
+    C3.Complex3 F → ℚ
   canonicalExternalScalar output test =
     R179.realHermitianCross
       (Canonical.canonicalExternalNestedFold output)
@@ -110,7 +111,7 @@ module CanonicalExternalTotalCommutator631
 
   totalExternalCommutatorScalar :
     Z3.FourierMode →
-    C3.Complex3 F → _
+    C3.Complex3 F → ℚ
   totalExternalCommutatorScalar output test =
     R179.realHermitianCross
       (totalExternalCommutatorFold output)
