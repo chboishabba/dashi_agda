@@ -21,12 +21,16 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Moonshine.JInvariant369ConsolidatedNextStageExact as Consolidated
+import DASHI.Moonshine.JInvariantFormulaic369RendererExact as Render
 import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank
 import DASHI.Wikimedia.IbrahimZeroToThirteenTernaryCarryNDimFibreSnowballExact as Carry
 import DASHI.Foundations.StageAtlasZeroToTwelve as Stage
 import DASHI.Foundations.StageValuationBundleAtlas as LegacyStage
+import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
+import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import DASHI.Foundations.StageTetralemmaArrestBridge as Arrest
 import DASHI.Foundations.DialecticCubieTetralemmaExact as Tetra
 import DASHI.Algebra.SixfoldLogic as Six
@@ -88,14 +92,14 @@ rank13ProfilesAre1594323 =
 rank12MatchesCompleteRelationalCycleCount :
   Rank.fixedTernaryProfileCount Rank.rank12
   ≡
-  Stage12.Rel.completeCycleStateCount
+  Rel.completeCycleStateCount
 rank12MatchesCompleteRelationalCycleCount =
   sym Stage12.completeCycleMatchesRank12ProfileCount
 
 rank13MatchesCentralCompletionCount :
   Rank.fixedTernaryProfileCount Rank.rank13
   ≡
-  Stage12.Rel.centralCompletionGroupOrderPattern
+  Rel.centralCompletionGroupOrderPattern
 rank13MatchesCentralCompletionCount =
   sym Stage12.centralCompletionMatchesRank13ProfileCount
 
@@ -104,17 +108,17 @@ rank13MatchesCentralCompletionCount =
 ------------------------------------------------------------------------
 
 stage4CarriesTetralemmaInterpolationRole :
-  LegacyStage.stageRole LegacyStage.Atlas.atlas-4
+  LegacyStage.stageRole Atlas.atlas-4
   ≡ LegacyStage.tetralemmaInterpolationRole
 stage4CarriesTetralemmaInterpolationRole = refl
 
 stage6CarriesReflexiveClosureRole :
-  LegacyStage.stageRole LegacyStage.Atlas.atlas-6
+  LegacyStage.stageRole Atlas.atlas-6
   ≡ LegacyStage.reflexiveClosureBarrierRole
 stage6CarriesReflexiveClosureRole = refl
 
 stage9CarriesSystemicClosureRole :
-  LegacyStage.stageRole LegacyStage.Atlas.atlas-9
+  LegacyStage.stageRole Atlas.atlas-9
   ≡ LegacyStage.systemicClosureBarrierRole
 stage9CarriesSystemicClosureRole = refl
 
@@ -200,7 +204,7 @@ sixfoldRetainsTetralemmaQualifiedCarrier =
 ------------------------------------------------------------------------
 
 record QualifiedConsolidated369State
-    (R : Consolidated.Render.JPhaseRenderingAlgebra) : Set where
+    (R : Render.JPhaseRenderingAlgebra) : Set where
   constructor qualified-consolidated369-state
   field
     consolidatedState :
