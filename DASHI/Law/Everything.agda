@@ -265,3 +265,4 @@ import DASHI.Law.SensibLawComparativeWorldIRExact
 import DASHI.Law.SensibLawPabaiComparativeWorldExact
 import DASHI.Law.SensibLawComparativeWorldRegression
 import DASHI.Law.SensibLawPersonalProfessionalComparativeWorldExact
+import DASHI.Law.SensibLawTemporalComparativeWorldExact
