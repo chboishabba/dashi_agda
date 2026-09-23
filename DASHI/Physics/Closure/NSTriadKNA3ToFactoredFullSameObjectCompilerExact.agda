@@ -135,10 +135,10 @@ module Compile
     (cutoff : Nat) (terminal : Time) →
     integrateTo (Live.factoredFull T R cutoff) terminal
     ≤ cutoffIndependentBound P terminal
-  integratedFactoredFullUpper P cutoff terminal =
+  integratedFactoredFullUpper {T} {R} P cutoff terminal =
     ℚP.≤-trans
       (A3.integrateMonotone orderIntegration
-        (Live.factoredFull _ _ cutoff)
+        (Live.factoredFull T R cutoff)
         (λ time →
           R299.four
             * Local.sumResidualBudgets (familyAt P cutoff time))
@@ -151,7 +151,7 @@ module Compile
     A3FactoredFullSameObjectProducer T R →
     FactoredBudget.LiteralFactoredFullSpacetimeBudget567 T R
   a3BuildsLiteralFactoredFullBudget P =
-    R567.ExactFactoredBudget.literal-factored-full-spacetime-budget-567
+    FactoredBudget.literal-factored-full-spacetime-budget-567
       (cutoffIndependentBound P)
       (integratedFactoredFullUpper P)
 
