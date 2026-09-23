@@ -47,6 +47,7 @@ import DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact as Phase
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as LevelTower
 import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact as Principal
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
+import DASHI.Moonshine.JInvariant369LevelNonDescentThroughJExact as NonDescent
 import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Repair
 import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact as SignedSSP
 import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as JointBundle
@@ -116,6 +117,11 @@ record Canonical369InterpretationBoundary : Set where
     jointPhaseLevelSignedFibreConstructed : Bool
     jointFiniteDihedralLawOwned : Bool
     level27FactorsThroughBaseJSurface : Bool
+    genericTInvariantBaseNoLevelDescentCompilerOwned : Bool
+    level3CannotFactorThroughJ : Bool
+    level9CannotFactorThroughJ : Bool
+    level27CannotFactorThroughJ : Bool
+    phaseReadoutMayStillFactorThroughJ : Bool
 
     jointFibreResolutionProductConstructed : Bool
     resolutionCoarseningCommutesWithModularActions : Bool
@@ -190,6 +196,11 @@ canonicalCanonical369InterpretationBoundary =
     ; jointPhaseLevelSignedFibreConstructed = true
     ; jointFiniteDihedralLawOwned = true
     ; level27FactorsThroughBaseJSurface = false
+    ; genericTInvariantBaseNoLevelDescentCompilerOwned = true
+    ; level3CannotFactorThroughJ = true
+    ; level9CannotFactorThroughJ = true
+    ; level27CannotFactorThroughJ = true
+    ; phaseReadoutMayStillFactorThroughJ = true
 
     ; jointFibreResolutionProductConstructed = true
     ; resolutionCoarseningCommutesWithModularActions = true
@@ -214,6 +225,31 @@ phaseOnlyC3IsNotPrincipalLevel3 :
     canonicalCanonical369InterpretationBoundary
   ≡ false
 phaseOnlyC3IsNotPrincipalLevel3 = refl
+
+
+principalLevel3DoesNotDescendThroughJ :
+  level3CannotFactorThroughJ
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+principalLevel3DoesNotDescendThroughJ = refl
+
+principalLevel9DoesNotDescendThroughJ :
+  level9CannotFactorThroughJ
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+principalLevel9DoesNotDescendThroughJ = refl
+
+principalLevel27DoesNotDescendThroughJ :
+  level27CannotFactorThroughJ
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+principalLevel27DoesNotDescendThroughJ = refl
+
+phaseReadoutRemainsAFunctionOfJ :
+  phaseReadoutMayStillFactorThroughJ
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+phaseReadoutRemainsAFunctionOfJ = refl
 
 modularTIsTrivialOnPhaseLane :
   modularTIsIdentityOnPhaseLane
@@ -405,6 +441,12 @@ normalizedRendererBoundary :
   NormalizedRenderer.NormalizedAnalyticRendererBoundary
 normalizedRendererBoundary =
   NormalizedRenderer.canonicalNormalizedAnalyticRendererBoundary
+
+
+levelNonDescentThroughJBoundary :
+  NonDescent.LevelNonDescentThroughJBoundary
+levelNonDescentThroughJBoundary =
+  NonDescent.canonicalLevelNonDescentThroughJBoundary
 
 ------------------------------------------------------------------------
 -- Orthogonal composition with the pre-existing SSP/J resolution bifiltration.
