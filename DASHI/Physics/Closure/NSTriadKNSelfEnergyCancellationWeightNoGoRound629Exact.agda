@@ -27,7 +27,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (_≢_; trans)
+open import Relation.Binary.PropositionalEquality using (_≢_; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNCyclicConservationWeightedDefectBidiExact as Weighted
 
