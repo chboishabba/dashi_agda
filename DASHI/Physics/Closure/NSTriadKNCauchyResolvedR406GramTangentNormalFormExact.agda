@@ -23,10 +23,10 @@ module DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; Positive; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -36,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30E
 import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R291
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedGramPairToResolventRound389Exact as R389
 import DASHI.Physics.Closure.NSTriadKNDirectResolventPairSwapSymmetryRound538Exact as R538
+import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
 import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact as R543
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationExact as Cauchy
 
@@ -101,6 +102,115 @@ resolvedRemainderFullSquare kernel rate gram tangent remainder items tangentLaw 
     (resolvedRemainderPointwise
       kernel rate gram tangent remainder tangentLaw inverseLaw)
     items
+
+------------------------------------------------------------------------
+-- Exact full-square linearity and diagonal-reduced normal form.
+------------------------------------------------------------------------
+
+rowAdd :
+  ∀ {A : Set}
+    (F G : A → A → ℚ) →
+    (x : A) (items : List A) →
+  R539.rowSum (λ i j → F i j + G i j) x items
+  ≡ R539.rowSum F x items + R539.rowSum G x items
+rowAdd F G x [] = refl
+rowAdd F G x (y ∷ rest)
+  rewrite rowAdd F G x rest =
+  solve
+    (F x y ∷ G x y
+      ∷ R539.rowSum F x rest
+      ∷ R539.rowSum G x rest ∷ [])
+
+columnAdd :
+  ∀ {A : Set}
+    (F G : A → A → ℚ) →
+    (items : List A) (x : A) →
+  R539.columnSum (λ i j → F i j + G i j) items x
+  ≡ R539.columnSum F items x + R539.columnSum G items x
+columnAdd F G [] x = refl
+columnAdd F G (y ∷ rest) x
+  rewrite columnAdd F G rest x =
+  solve
+    (F y x ∷ G y x
+      ∷ R539.columnSum F rest x
+      ∷ R539.columnSum G rest x ∷ [])
+
+fullSquareAdd :
+  ∀ {A : Set}
+    (F G : A → A → ℚ) →
+    (items : List A) →
+  R543.fullSquareSum (λ i j → F i j + G i j) items
+  ≡ R543.fullSquareSum F items + R543.fullSquareSum G items
+fullSquareAdd F G [] = refl
+fullSquareAdd F G (x ∷ rest)
+  rewrite rowAdd F G x rest
+        | columnAdd F G rest x
+        | fullSquareAdd F G rest =
+  solve
+    (F x x ∷ G x x
+      ∷ R539.rowSum F x rest
+      ∷ R539.rowSum G x rest
+      ∷ R539.columnSum F rest x
+      ∷ R539.columnSum G rest x
+      ∷ R543.fullSquareSum F rest
+      ∷ R543.fullSquareSum G rest ∷ [])
+
+resolvedRemainderFullSquareSplit :
+  ∀ {A : Set}
+    (kernel rate gram tangent remainder : A → A → ℚ)
+    (items : List A) →
+  ((i j : A) →
+    tangent i j ≡ (0ℚ - rate i j) * gram i j + remainder i j) →
+  ((i j : A) → kernel i j * rate i j ≡ 1ℚ) →
+  R543.fullSquareSum (λ i j → kernel i j * remainder i j) items
+  ≡
+  R543.fullSquareSum gram items
+    + R543.fullSquareSum (resolvedTangentAtom kernel tangent) items
+resolvedRemainderFullSquareSplit kernel rate gram tangent remainder items tangentLaw inverseLaw =
+  trans
+    (resolvedRemainderFullSquare
+      kernel rate gram tangent remainder items tangentLaw inverseLaw)
+    (fullSquareAdd gram (resolvedTangentAtom kernel tangent) items)
+
+resolvedRemainderMinusDiagonalGram :
+  ∀ {A : Set}
+    (kernel rate gram tangent remainder : A → A → ℚ)
+    (items : List A) →
+  ((i j : A) →
+    tangent i j ≡ (0ℚ - rate i j) * gram i j + remainder i j) →
+  ((i j : A) → kernel i j * rate i j ≡ 1ℚ) →
+  R543.fullSquareSum (λ i j → kernel i j * remainder i j) items
+    - R543.diagonalSum gram items
+  ≡
+  R539.orderedOffDiagonalSum gram items
+    + R543.fullSquareSum (resolvedTangentAtom kernel tangent) items
+resolvedRemainderMinusDiagonalGram
+    kernel rate gram tangent remainder items tangentLaw inverseLaw =
+  let
+    split =
+      resolvedRemainderFullSquareSplit
+        kernel rate gram tangent remainder items tangentLaw inverseLaw
+
+    gramSplit =
+      R543.fullSquareIsDiagonalPlusOrderedOffDiagonal gram items
+  in
+  trans
+    (cong
+      (λ x → x - R543.diagonalSum gram items)
+      split)
+    (trans
+      (cong
+        (λ x →
+          (x + R543.fullSquareSum
+            (resolvedTangentAtom kernel tangent) items)
+          - R543.diagonalSum gram items)
+        gramSplit)
+      (solve
+        (R543.diagonalSum gram items
+          ∷ R539.orderedOffDiagonalSum gram items
+          ∷ R543.fullSquareSum
+              (resolvedTangentAtom kernel tangent) items
+          ∷ [])))
 
 ------------------------------------------------------------------------
 -- Literal R538 physical specialization.
@@ -177,6 +287,48 @@ module Physical
       (physicalResolvedRemainderPointwise positive)
       items
 
+
+  physicalResolvedFullSquareSplit :
+    (items : List Physical.PhysicalTriadIncidence) →
+    ((alpha beta : Physical.PhysicalTriadIncidence) →
+      Positive (pairRate alpha beta)) →
+    R543.fullSquareSum Swap.symmetricWeightedRemainder items
+    ≡
+    R543.fullSquareSum pairGram items
+      + R543.fullSquareSum
+          (resolvedTangentAtom Swap.pairResolvent pairTangent) items
+  physicalResolvedFullSquareSplit items positive =
+    resolvedRemainderFullSquareSplit
+      Swap.pairResolvent
+      pairRate
+      pairGram
+      pairTangent
+      pairRemainder
+      items
+      physicalPairTangentLaw
+      (λ i j → Resolved.physicalPairResolventLaw positive i j)
+
+  physicalResolvedMinusDiagonalGram :
+    (items : List Physical.PhysicalTriadIncidence) →
+    ((alpha beta : Physical.PhysicalTriadIncidence) →
+      Positive (pairRate alpha beta)) →
+    R543.fullSquareSum Swap.symmetricWeightedRemainder items
+      - R543.diagonalSum pairGram items
+    ≡
+    R539.orderedOffDiagonalSum pairGram items
+      + R543.fullSquareSum
+          (resolvedTangentAtom Swap.pairResolvent pairTangent) items
+  physicalResolvedMinusDiagonalGram items positive =
+    resolvedRemainderMinusDiagonalGram
+      Swap.pairResolvent
+      pairRate
+      pairGram
+      pairTangent
+      pairRemainder
+      items
+      physicalPairTangentLaw
+      (λ i j → Resolved.physicalPairResolventLaw positive i j)
+
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
@@ -186,6 +338,9 @@ cauchyResolvedR406GramTangentPointwiseClosed = true
 
 cauchyResolvedR406GramTangentFullSquareClosed : Bool
 cauchyResolvedR406GramTangentFullSquareClosed = true
+
+cauchyResolvedR406DiagonalReducedNormalFormClosed : Bool
+cauchyResolvedR406DiagonalReducedNormalFormClosed = true
 
 cauchyResolvedR406GramTangentIntroducesEstimate : Bool
 cauchyResolvedR406GramTangentIntroducesEstimate = false
@@ -200,6 +355,10 @@ cauchyResolvedR406GramTangentPointwiseClosedIsTrue = refl
 cauchyResolvedR406GramTangentFullSquareClosedIsTrue :
   cauchyResolvedR406GramTangentFullSquareClosed ≡ true
 cauchyResolvedR406GramTangentFullSquareClosedIsTrue = refl
+
+cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue :
+  cauchyResolvedR406DiagonalReducedNormalFormClosed ≡ true
+cauchyResolvedR406DiagonalReducedNormalFormClosedIsTrue = refl
 
 cauchyResolvedR406GramTangentIntroducesEstimateIsFalse :
   cauchyResolvedR406GramTangentIntroducesEstimate ≡ false
