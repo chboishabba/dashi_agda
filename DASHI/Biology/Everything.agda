@@ -230,3 +230,6 @@ import DASHI.Biology.Microbiology.BaldEyesalveQuorumCrossPollinationExact
 ------------------------------------------------------------------------
 -- World regularity / theory / adaptation hyperfabric cross-pollination.
 import DASHI.Biology.WorldRegularityHyperformalismCrossPollinationExact
+
+-- Evolutionary adaptation as world coupling without propositional theory.
+import DASHI.Biology.Evolution.EvolutionaryWorldCouplingTheoryBoundaryExact
