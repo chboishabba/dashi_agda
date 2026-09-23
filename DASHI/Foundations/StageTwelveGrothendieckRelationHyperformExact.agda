@@ -32,6 +32,7 @@ import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.ComputerScience.WrongTypeAttributionFactorisationPlanningSnowballExact as Wrong
 import DASHI.Foundations.StageValuationBundleAtlas as Bundle
+import DASHI.Foundations.StageAtlasZeroToTwelve as ExtendedStage
 import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import DASHI.Wikimedia.IbrahimEnZeroToThirteenNDimOEISHyperfabricSnowballExact as Rank
 import DASHI.Wikimedia.IbrahimZeroToThirteenTernaryCarryNDimFibreSnowballExact as Carry
@@ -206,7 +207,27 @@ relationDiagonalWrongTypeReceipt =
     true
 
 ------------------------------------------------------------------------
--- 4. Exact 0..13 rank/carry crosswalk.
+-- 4. Stage-12 semantic extension remains distinct from the twelve-axis base.
+------------------------------------------------------------------------
+
+stage12IndexIsTwelve :
+  ExtendedStage.toNat ExtendedStage.stage-12 ≡ 12
+stage12IndexIsTwelve = refl
+
+stage12OpensRelationAtNewScale :
+  ExtendedStage.recursiveRole ExtendedStage.stage-12
+  ≡ ExtendedStage.relationOpenedAtScale
+stage12OpensRelationAtNewScale =
+  ExtendedStage.stage12OpensRelationAtNewScale
+
+stage12IsOneCarryPlusTwoLocalUnits :
+  ExtendedStage.decimalCarryUnit + 2 * ExtendedStage.localJUnit
+  ≡ ExtendedStage.toNat ExtendedStage.stage-12
+stage12IsOneCarryPlusTwoLocalUnits =
+  ExtendedStage.stage12IsOneJPlusTwo
+
+------------------------------------------------------------------------
+-- 5. Exact 0..13 rank/carry crosswalk.
 ------------------------------------------------------------------------
 
 rank12AddressIsThreePlusNine :
@@ -246,7 +267,7 @@ equal531441CountDoesNotIdentifySemanticCarriers :
 equal531441CountDoesNotIdentifySemanticCarriers ()
 
 ------------------------------------------------------------------------
--- 5. Small category interface with laws.
+-- 6. Small category interface with laws.
 ------------------------------------------------------------------------
 
 record SmallCategory : Set₁ where
@@ -273,7 +294,7 @@ record SmallCategory : Set₁ where
 open SmallCategory public
 
 ------------------------------------------------------------------------
--- 6. Sieves and pullback.
+-- 7. Sieves and pullback.
 ------------------------------------------------------------------------
 
 record Sieve (C : SmallCategory) (U : Obj C) : Set₁ where
@@ -321,7 +342,7 @@ pullbackSieve C arrow sieve = record
     substLocal P refl px = px
 
 ------------------------------------------------------------------------
--- 7. Genuine Grothendieck topology axioms.
+-- 8. Genuine Grothendieck topology axioms.
 ------------------------------------------------------------------------
 
 record GrothendieckTopology (C : SmallCategory) : Set₁ where
@@ -356,7 +377,7 @@ record GrothendieckTopology (C : SmallCategory) : Set₁ where
 open GrothendieckTopology public
 
 ------------------------------------------------------------------------
--- 8. Concrete discrete twelve-axis category.
+-- 9. Concrete discrete twelve-axis category.
 ------------------------------------------------------------------------
 
 eqTrans :
@@ -396,7 +417,7 @@ stageDiscreteCategory = record
   }
 
 ------------------------------------------------------------------------
--- 9. Maximal-only coverage is an actual Grothendieck topology.
+-- 10. Maximal-only coverage is an actual Grothendieck topology.
 --
 -- Covering means every arrow into U is already in the sieve.  On the
 -- discrete stage category this is the canonical conservative topology.
@@ -434,7 +455,7 @@ maximalOnlyStageTopology = record
     substLocal P refl px = px
 
 ------------------------------------------------------------------------
--- 10. Reuse the pre-existing BundleSheaf gluing interface.
+-- 11. Reuse the pre-existing BundleSheaf gluing interface.
 ------------------------------------------------------------------------
 
 StageBundleSheaf :
@@ -455,6 +476,8 @@ record StageTwelveSiteSheafReceipt : Set₁ where
       relationCellCount ≡ 144
     completeCycleAxisCountPaid :
       Rel.completeCycleAxisCount ≡ 12
+    stage12RelationAtNewScalePaid : Bool
+    stage12CarryPlusTwoPaid : Bool
     rank12CompleteCycleCountCrosswalkPaid : Bool
     rank13CentralCompletionCountCrosswalkPaid : Bool
     rank12AddressThreePlusNinePaid : Bool
@@ -477,6 +500,8 @@ canonicalStageTwelveSiteSheafReceipt = record
   ; relationCellCount = stageRelationCellCount
   ; relationCellCountPaid = stageRelationCellCountIs144
   ; completeCycleAxisCountPaid = Rel.completeCycleAxisCountIsTwelve
+  ; stage12RelationAtNewScalePaid = true
+  ; stage12CarryPlusTwoPaid = true
   ; rank12CompleteCycleCountCrosswalkPaid = true
   ; rank13CentralCompletionCountCrosswalkPaid = true
   ; rank12AddressThreePlusNinePaid = true
