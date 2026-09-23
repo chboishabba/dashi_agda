@@ -274,3 +274,5 @@ import DASHI.Law.SensibLawComparativeCrossDomainBatteryExact
 import DASHI.Law.SensibLawTypedAnswerChangingExplanationExact
 import DASHI.Law.SensibLawComparativeChangeAdaptersExact
 import DASHI.Law.SensibLawTypedComparativeReceiptExtensionExact
+import DASHI.Law.SensibLawTypedWorkbenchTransportBoundaryExact
+import DASHI.Law.SensibLawTypedWorkbenchTransportBoundaryRegression
