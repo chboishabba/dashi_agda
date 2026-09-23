@@ -32,7 +32,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; _*ℝ_; absℝ; _≤ℝ_)
+  (ℝ; 0ℝ; _*ℝ_; absℝ; _≤ℝ_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -124,11 +124,11 @@ record PhysicalFactoredR406Inputs
     externalMarkedWeight residualEnvelope : ℝ
 
     externalMarkedWeightNonnegative :
-      DASHI.Foundations.RealAnalysisAxioms.0ℝ ≤ℝ externalMarkedWeight
+      0ℝ ≤ℝ externalMarkedWeight
 
     residualWeightNonnegative :
       ∀ domain →
-      DASHI.Foundations.RealAnalysisAxioms.0ℝ ≤ℝ residualWeight domain
+      0ℝ ≤ℝ residualWeight domain
 
     commonYShellBelowExternalTimesResidual :
       ∀ domain →
@@ -222,25 +222,6 @@ asPhysicalCanonicalR406InputsFromFactored
       selectedBoundaryMagnitudeIsLiteralMixedLogMagnitude inputs
   }
 
-physicalFiniteSelectedCovarianceFromFactoredSource :
-  ∀ {Measure TestObservable dataSet extension base application cutoff left right}
-    (inputs :
-      PhysicalFactoredR406Inputs
-        {dataSet = dataSet} {extension = extension} {base = base}
-        application cutoff left right) →
-  R418.embedQ (embedding inputs)
-    (R278.connectedCovarianceMagnitude extension
-      (Gram.measureSequence dataSet cutoff)
-      left right)
-  ≤ℝ
-  R418.embedQ (embedding inputs)
-    (Geometric.markedBaseEnergy (shared inputs) Shared.hessianMark)
-  *ℝ
-  R418.embedQ (embedding inputs)
-    (Geo.halfPower (R318.physicalDistance base left right))
-physicalFiniteSelectedCovarianceFromFactoredSource inputs =
-  physicalFiniteSelectedCovarianceBelowSharedMarkedGeometricHalf
-    (asPhysicalCanonicalR406InputsFromFactored inputs)
 
 asCanonicalSharedShellInputs :
   ∀ {Measure TestObservable dataSet extension base application cutoff left right} →
@@ -303,6 +284,26 @@ physicalFiniteSelectedCovarianceBelowSharedMarkedGeometricHalf :
 physicalFiniteSelectedCovarianceBelowSharedMarkedGeometricHalf inputs =
   R420.finiteSelectedCovarianceMagnitudeBelowSharedMarkedGeometricHalf
     (asCanonicalMixedLogAttachment inputs)
+
+physicalFiniteSelectedCovarianceFromFactoredSource :
+  ∀ {Measure TestObservable dataSet extension base application cutoff left right}
+    (inputs :
+      PhysicalFactoredR406Inputs
+        {dataSet = dataSet} {extension = extension} {base = base}
+        application cutoff left right) →
+  R418.embedQ (embedding inputs)
+    (R278.connectedCovarianceMagnitude extension
+      (Gram.measureSequence dataSet cutoff)
+      left right)
+  ≤ℝ
+  R418.embedQ (embedding inputs)
+    (Geometric.markedBaseEnergy (shared inputs) Shared.hessianMark)
+  *ℝ
+  R418.embedQ (embedding inputs)
+    (Geo.halfPower (R318.physicalDistance base left right))
+physicalFiniteSelectedCovarianceFromFactoredSource inputs =
+  physicalFiniteSelectedCovarianceBelowSharedMarkedGeometricHalf
+    (asPhysicalCanonicalR406InputsFromFactored inputs)
 
 round421PhysicalCanonicalR406CompilerLevel : ProofLevel
 round421PhysicalCanonicalR406CompilerLevel = machineChecked
