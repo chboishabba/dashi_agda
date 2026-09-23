@@ -19,12 +19,22 @@ module DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406SameObjectCompilerExact
 --
 -- compile the integrated equality automatically.
 --
--- Thus the remaining consumer weld is representation-level:
+-- The generic scalar compiler below is valid.  However the live specialization
+-- must NOT be read as proving the pointwise split it accepts.
 --
---   literal R406 weighted density
---     = endpointDensity + 4 * A3 signed density.
+-- Exact current archaeology gives instead:
 --
--- No nonlinear estimate is introduced here.
+--   2 * integral R406
+--     = integral FactoredFull - integral SelfGram
+--       - (SelfFlux(T) - SelfFlux(0)),
+--
+-- and the division-free d1b/A3 theorem carries explicit fibre-cardinality and
+-- mean-rate self-work normalization.  Therefore
+--
+--   literal R406 density = endpointDensity + 4 * A3 density
+--
+-- remains a conditional producer hypothesis, not a closed representation weld.
+-- No nonlinear estimate is introduced by the generic integration compiler.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
@@ -41,6 +51,8 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exac
 import DASHI.Physics.Closure.NSTriadKNIntegrationTransportAuthorityRound495Exact as R495
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as A3
 import DASHI.Physics.Closure.NSTriadKNA3EndpointAwareR406TransportExact as EndpointAware
+import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
+import DASHI.Physics.Closure.NSTriadKNR406ExactEndpointNormalFormExact as R406Endpoint
 
 ------------------------------------------------------------------------
 -- Generic scalar compiler.
@@ -138,8 +150,9 @@ module Live
       endpointContribution :
         Nat → Time → ℚ
 
-      -- This is now the exact same-object representation seam.  It should be
-      -- constructed from the literal R406 weighted normal form plus d1b0.
+      -- Conditional live producer seam.  The exact R406 normal form and d1b
+      -- centering do not presently derive this unit-coefficient pointwise
+      -- equality; sign/cardinality/mean-rate normalization must first be paid.
       literalR406PointwiseIsEndpointPlusA3 :
         (cutoff : Nat) (time : Time) →
         Local.Direct499.Flux.At.weightedRemainder T R cutoff time
@@ -239,6 +252,20 @@ arbitraryIntegratedR406EqualityRequired = false
 pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearing : Bool
 pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearing = true
 
+pointwiseR406EndpointPlusFourA3RepresentationClosed : Bool
+pointwiseR406EndpointPlusFourA3RepresentationClosed = false
+
+exactR406EndpointNormalFormAvailable : Bool
+exactR406EndpointNormalFormAvailable =
+  R406Endpoint.r406ExactEndpointNormalFormClosedGivenScalarFTC
+
+divisionFreeD1bA3NormalizationAvailable : Bool
+divisionFreeD1bA3NormalizationAvailable =
+  A3D1b.divisionFreeD1bA3NormalizationClosed
+
+remainingSameObjectSeamIsFactoredMinusSelfGramToA3 : Bool
+remainingSameObjectSeamIsFactoredMinusSelfGramToA3 = true
+
 endpointFTCStillSeparateNonlinearEstimate : Bool
 endpointFTCStillSeparateNonlinearEstimate = false
 
@@ -256,6 +283,24 @@ arbitraryIntegratedR406EqualityRequiredIsFalse = refl
 pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearingIsTrue :
   pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearing ≡ true
 pointwiseR406WeightedToEndpointPlusA3WeldStillProofBearingIsTrue = refl
+
+pointwiseR406EndpointPlusFourA3RepresentationClosedIsFalse :
+  pointwiseR406EndpointPlusFourA3RepresentationClosed ≡ false
+pointwiseR406EndpointPlusFourA3RepresentationClosedIsFalse = refl
+
+exactR406EndpointNormalFormAvailableIsTrue :
+  exactR406EndpointNormalFormAvailable ≡ true
+exactR406EndpointNormalFormAvailableIsTrue =
+  R406Endpoint.r406ExactEndpointNormalFormClosedGivenScalarFTCIsTrue
+
+divisionFreeD1bA3NormalizationAvailableIsTrue :
+  divisionFreeD1bA3NormalizationAvailable ≡ true
+divisionFreeD1bA3NormalizationAvailableIsTrue =
+  A3D1b.divisionFreeD1bA3NormalizationClosedIsTrue
+
+remainingSameObjectSeamIsFactoredMinusSelfGramToA3IsTrue :
+  remainingSameObjectSeamIsFactoredMinusSelfGramToA3 ≡ true
+remainingSameObjectSeamIsFactoredMinusSelfGramToA3IsTrue = refl
 
 endpointFTCStillSeparateNonlinearEstimateIsFalse :
   endpointFTCStillSeparateNonlinearEstimate ≡ false
