@@ -54,12 +54,24 @@ record EisensteinConvergenceEndgameCutset : Set where
     leanNormalizedDeltaLimitCompilerOwned : Bool
     primitiveRealExtractionCompilerOwnedOnBothSides : Bool
 
+    agdaBishopSetoidComplexOwned : Bool
+    agdaRound11MachinSourceCapstoneOwned : Bool
+    leanVendoredBishopEvaluatorOwned : Bool
+    leanVendoredBishopEvaluatorFaithful : Bool
+    leanExpSinCosMachinSemanticCompilersOwned : Bool
+    leanRound11MachinBindingCompilerOwned : Bool
+    leanRound11MappedE4E6ConvergenceOwned : Bool
+
     selectedConcreteQNormLawsInhabited : Bool
     quarticSexticStepVDominationInhabited : Bool
     bishopLegacySeriesTransportInhabited : Bool
     legacyFunctionSeriesLimitBridgeInhabited : Bool
     fourBishopCoordinateTermIdentificationsInhabited : Bool
     analyticEisensteinSameObjectWeldInhabited : Bool
+
+    actualAgdaRound11MachinBindingInLean : Bool
+    eta24NormalizedDeltaSameObjectWeldInhabited : Bool
+    legacyBishopToPropositionalRouteRequiredByRouteB : Bool
 
     obsoleteDirectPolynomialRatioLeaf : Bool
 
@@ -72,6 +84,8 @@ canonicalEisensteinConvergenceEndgameCutset :
 canonicalEisensteinConvergenceEndgameCutset =
   eisenstein-convergence-endgame-cutset
     true true true true true true true true true true true true true true true true true
+    true true true true true true true
     false false false false false false
+    false false false
     false
-    "Route B has now paid more than theorem parity: Agda proves that the actual qOf/e4Truncated/e6Truncated recurrences transport through any primitive ComplexExtraction preserving zero/one/i/pi/+/-/*/exp; Lean owns the matching literal finite recurrences, finite-sum normal forms and their convergence to canonical infinite sums. Do not redo convergence. The first live residual is the faithful primitive representation map from the selected Agda constructed-real/ComplexPair carrier into Lean Real/Complex, including pi and exp compatibility. The canonical Lean infinite sums are now identified with Mathlib E4/E6, and the finite discriminant numerator plus 1/1728-normalized Delta candidate converge to the corresponding E4/E6 expression. The extraction compiler is now lowered on both sides to a primitive real/transcendental morphism preserving 0/1/+/-/*/neg/exp/sin/cos/pi, from which ComplexPair/q/E4/E6/discriminant transport is derived. The first live residual is therefore only the actual faithful selected-Agda-real -> Lean-Real inhabitant. After that, pay the separate same-object identification of normalized (E4^3-E6^2)/1728 with the chosen eta^24/Delta object. Bishop-to-legacy quotient infrastructure is not currently available elsewhere in the repo, so this representation seam is genuine shared infrastructure rather than an Eisenstein estimate."
+    "Route B is now source-pinned and setoid-native. Agda owns the actual vendored-Bishop complex carrier, Round11 configured trig package, bishopMachinPi, literal q/E4/E6/discriminant-numerator recurrences and their setoid congruence. Lean owns a faithful evaluator of the vendored Bishop quotient into Real, derives the exact vendored arithmetic semantics including resampled multiplication, derives exp/sin/cos/Machin-pi classical semantics from the concrete source convergence receipts, compiles a single Round11MachinSourceBinding to the primitive extraction, and proves the mapped source E4_N/E6_N and discriminant numerator converge to Mathlib E4/E6 and the canonical Delta numerator. Therefore none of the legacy ConcreteComplex q-norm, Step-V, Bishop-to-legacy, Nat-function, or four-coordinate leaves is required by route B; they remain only as the older route-A/legacy lane. The active residuals are exactly: inhabit the Lean Round11MachinSourceBinding from the actual Agda receipt, and separately prove eta^24 = (E4^3-E6^2)/1728 (or an equivalent normalized-Delta same-object weld) at the pinned Mathlib v4.28.0 boundary."
