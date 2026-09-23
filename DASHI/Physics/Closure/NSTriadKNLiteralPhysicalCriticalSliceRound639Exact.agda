@@ -170,72 +170,72 @@ module PhysicalSlice
 -- Status / trust boundary.
 ------------------------------------------------------------------------
 
-round637LiteralCriticalCoordinatesInstalledOnR414 : Bool
-round637LiteralCriticalCoordinatesInstalledOnR414 = true
+round639LiteralCriticalCoordinatesInstalledOnR414 : Bool
+round639LiteralCriticalCoordinatesInstalledOnR414 = true
 
-round637ViscousCoefficientFixedToTwoPhysicalViscosity : Bool
-round637ViscousCoefficientFixedToTwoPhysicalViscosity = true
+round639ViscousCoefficientFixedToTwoPhysicalViscosity : Bool
+round639ViscousCoefficientFixedToTwoPhysicalViscosity = true
 
-round637CriticalEnergyInequalityCompiledFromExactIdentity : Bool
-round637CriticalEnergyInequalityCompiledFromExactIdentity = true
+round639CriticalEnergyInequalityCompiledFromExactIdentity : Bool
+round639CriticalEnergyInequalityCompiledFromExactIdentity = true
 
-round637CallerCanAliasCriticalCoordinatesArbitrarily : Bool
-round637CallerCanAliasCriticalCoordinatesArbitrarily = false
+round639CallerCanAliasCriticalCoordinatesArbitrarily : Bool
+round639CallerCanAliasCriticalCoordinatesArbitrarily = false
 
-round637PhaseSensitiveProductionEstimateStillProofBearing : Bool
-round637PhaseSensitiveProductionEstimateStillProofBearing = true
+round639PhaseSensitiveProductionEstimateStillProofBearing : Bool
+round639PhaseSensitiveProductionEstimateStillProofBearing = true
 
-round637PositiveRetainedViscosityTyped : Bool
-round637PositiveRetainedViscosityTyped = true
+round639PositiveRetainedViscosityTyped : Bool
+round639PositiveRetainedViscosityTyped = true
 
-round637PositiveRetainedViscosityProved : Bool
-round637PositiveRetainedViscosityProved = false
+round639PositiveRetainedViscosityProved : Bool
+round639PositiveRetainedViscosityProved = false
 
-round637RequiresConcreteScalarFTC : Bool
-round637RequiresConcreteScalarFTC = true
+round639RequiresConcreteScalarFTC : Bool
+round639RequiresConcreteScalarFTC = true
 
-round637IntroducesNewNSEstimate : Bool
-round637IntroducesNewNSEstimate = false
+round639IntroducesNewNSEstimate : Bool
+round639IntroducesNewNSEstimate = false
 
-round637ClayPromotion : Bool
-round637ClayPromotion = false
+round639ClayPromotion : Bool
+round639ClayPromotion = false
 
-round637LiteralCriticalCoordinatesInstalledOnR414IsTrue :
-  round637LiteralCriticalCoordinatesInstalledOnR414 ≡ true
-round637LiteralCriticalCoordinatesInstalledOnR414IsTrue = refl
+round639LiteralCriticalCoordinatesInstalledOnR414IsTrue :
+  round639LiteralCriticalCoordinatesInstalledOnR414 ≡ true
+round639LiteralCriticalCoordinatesInstalledOnR414IsTrue = refl
 
-round637ViscousCoefficientFixedToTwoPhysicalViscosityIsTrue :
-  round637ViscousCoefficientFixedToTwoPhysicalViscosity ≡ true
-round637ViscousCoefficientFixedToTwoPhysicalViscosityIsTrue = refl
+round639ViscousCoefficientFixedToTwoPhysicalViscosityIsTrue :
+  round639ViscousCoefficientFixedToTwoPhysicalViscosity ≡ true
+round639ViscousCoefficientFixedToTwoPhysicalViscosityIsTrue = refl
 
-round637CriticalEnergyInequalityCompiledFromExactIdentityIsTrue :
-  round637CriticalEnergyInequalityCompiledFromExactIdentity ≡ true
-round637CriticalEnergyInequalityCompiledFromExactIdentityIsTrue = refl
+round639CriticalEnergyInequalityCompiledFromExactIdentityIsTrue :
+  round639CriticalEnergyInequalityCompiledFromExactIdentity ≡ true
+round639CriticalEnergyInequalityCompiledFromExactIdentityIsTrue = refl
 
-round637CallerCanAliasCriticalCoordinatesArbitrarilyIsFalse :
-  round637CallerCanAliasCriticalCoordinatesArbitrarily ≡ false
-round637CallerCanAliasCriticalCoordinatesArbitrarilyIsFalse = refl
+round639CallerCanAliasCriticalCoordinatesArbitrarilyIsFalse :
+  round639CallerCanAliasCriticalCoordinatesArbitrarily ≡ false
+round639CallerCanAliasCriticalCoordinatesArbitrarilyIsFalse = refl
 
-round637PhaseSensitiveProductionEstimateStillProofBearingIsTrue :
-  round637PhaseSensitiveProductionEstimateStillProofBearing ≡ true
-round637PhaseSensitiveProductionEstimateStillProofBearingIsTrue = refl
+round639PhaseSensitiveProductionEstimateStillProofBearingIsTrue :
+  round639PhaseSensitiveProductionEstimateStillProofBearing ≡ true
+round639PhaseSensitiveProductionEstimateStillProofBearingIsTrue = refl
 
-round637PositiveRetainedViscosityTypedIsTrue :
-  round637PositiveRetainedViscosityTyped ≡ true
-round637PositiveRetainedViscosityTypedIsTrue = refl
+round639PositiveRetainedViscosityTypedIsTrue :
+  round639PositiveRetainedViscosityTyped ≡ true
+round639PositiveRetainedViscosityTypedIsTrue = refl
 
-round637PositiveRetainedViscosityProvedIsFalse :
-  round637PositiveRetainedViscosityProved ≡ false
-round637PositiveRetainedViscosityProvedIsFalse = refl
+round639PositiveRetainedViscosityProvedIsFalse :
+  round639PositiveRetainedViscosityProved ≡ false
+round639PositiveRetainedViscosityProvedIsFalse = refl
 
-round637RequiresConcreteScalarFTCIsTrue :
-  round637RequiresConcreteScalarFTC ≡ true
-round637RequiresConcreteScalarFTCIsTrue = refl
+round639RequiresConcreteScalarFTCIsTrue :
+  round639RequiresConcreteScalarFTC ≡ true
+round639RequiresConcreteScalarFTCIsTrue = refl
 
-round637IntroducesNewNSEstimateIsFalse :
-  round637IntroducesNewNSEstimate ≡ false
-round637IntroducesNewNSEstimateIsFalse = refl
+round639IntroducesNewNSEstimateIsFalse :
+  round639IntroducesNewNSEstimate ≡ false
+round639IntroducesNewNSEstimateIsFalse = refl
 
-round637ClayPromotionIsFalse :
-  round637ClayPromotion ≡ false
-round637ClayPromotionIsFalse = refl
+round639ClayPromotionIsFalse :
+  round639ClayPromotion ≡ false
+round639ClayPromotionIsFalse = refl
