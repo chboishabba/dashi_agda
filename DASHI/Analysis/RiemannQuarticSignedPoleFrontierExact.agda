@@ -107,13 +107,13 @@ quarticFrontierClass signedPsiQuantitativeRadialDerivativeSign = assemblyOwned
 quarticFrontierClass signedPsiFiniteWindowAbelAssembly = assemblyOwned
 quarticFrontierClass signedPsiCenteredFiniteAbelAssembly = assemblyOwned
 quarticFrontierClass signedPsiGlobalPointwiseNMuWeld = assemblyOwned
-quarticFrontierClass signedPsiGlobalCenteredAbelExhaustion = analyticWall
+quarticFrontierClass signedPsiGlobalCenteredAbelExhaustion = theoremOwned
 quarticFrontierClass signedPsiRightBoundaryDecayEnvelope = theoremOwned
 quarticFrontierClass signedPsiFarLeftReflectionExhaustion = assemblyOwned
 quarticFrontierClass signedPsiLeftBoundaryTendstoZero = assemblyOwned
 quarticFrontierClass signedPsiRightBoundaryTendstoZero = assemblyOwned
-quarticFrontierClass signedPsiCorrelationIntegralExhaustion = analyticWall
-quarticFrontierClass signedPsiFiniteResidualToGlobalNMu = analyticWall
+quarticFrontierClass signedPsiCorrelationIntegralExhaustion = optionalProducer
+quarticFrontierClass signedPsiFiniteResidualToGlobalNMu = theoremOwned
 quarticFrontierClass signedPsiFullLineMuIntegrability = assemblyOwned
 quarticFrontierClass completedResidualEqualsCombinedCluster = theoremOwned
 quarticFrontierClass outwardCenteredDiscrepancyNoGo = theoremOwned
@@ -231,8 +231,8 @@ record QuarticSignedPoleFrontierBoundary : Set where
       signedPsiCenteredFiniteAbelSourceWritten ≡ true
     signedPsiGlobalPointwiseNMuWeldSourceWrittenFailClosedIsTrue :
       signedPsiGlobalPointwiseNMuWeldSourceWrittenFailClosed ≡ true
-    signedPsiGlobalCenteredAbelExhaustionPaidIsFalse :
-      signedPsiGlobalCenteredAbelExhaustionPaid ≡ false
+    signedPsiGlobalCenteredAbelExhaustionPaidIsTrue :
+      signedPsiGlobalCenteredAbelExhaustionPaid ≡ true
     signedPsiRightBoundaryDecayEnvelopePaidIsTrue :
       signedPsiRightBoundaryDecayEnvelopePaid ≡ true
     signedPsiFarLeftReflectionExhaustionPaidIsTrue :
@@ -243,8 +243,8 @@ record QuarticSignedPoleFrontierBoundary : Set where
       signedPsiRightBoundaryTendstoZeroSourceWritten ≡ true
     signedPsiCorrelationIntegralExhaustionPaidIsFalse :
       signedPsiCorrelationIntegralExhaustionPaid ≡ false
-    signedPsiFiniteResidualToGlobalNMuPaidIsFalse :
-      signedPsiFiniteResidualToGlobalNMuPaid ≡ false
+    signedPsiFiniteResidualToGlobalNMuPaidIsTrue :
+      signedPsiFiniteResidualToGlobalNMuPaid ≡ true
     signedPsiFullLineMuIntegrabilityPaidIsTrue :
       signedPsiFullLineMuIntegrabilityPaid ≡ true
     completedResidualEqualsCombinedClusterPaidIsTrue :
@@ -299,13 +299,13 @@ canonicalQuarticSignedPoleFrontierBoundary =
     true
     true
     true
+    true
+    true
+    true
+    true
+    true
     false
     true
-    true
-    true
-    true
-    false
-    false
     true
     true
     true
@@ -325,9 +325,9 @@ canonicalQuarticSignedPoleFrontierBoundary =
     refl refl refl
     refl
     "G1 has been reduced to scalar arithmetic. The Lean source now constructs a witness with S(W_t)>=7*pi^4/1600, proves endpoint taper L1<=83/30, compiles this through the exact projective profile, bounds the smooth pole coordinates, obtains an explicit combined-profile L1 bound and hence an explicit K0. It defines T_Q=4*(K0+1)/(7*pi^4/1600). The sole remaining G1 payment is the certified scalar comparison T_Q < the Platt-Trudgian cutoff; numerically the coarse constants give T_Q about 1.041e9 versus T_PT about 3.000e12, but that numerical comparison is not marked paid here."
-    "G3 representation is source-written through exact finite t-centred Abel. Negative-height transport is now endpoint-correct: conjugation maps (A,B] to [-B,-A), so the adapter carries explicit ordinate-multiplicity endpoint corrections; mu reflection uses proved evenness. Both left and right centred boundary terms now have source-written O(1/n) exhaustion to zero. The global exhaustion compiler remains only a compiler interface: correlation-integral convergence and finite-centred-residual to global signedNMuPair are still unpaid. Full-line endpoint mu-integrability is now source-written from Zeta23.EF.integrable_paperFT_mul_mu through the exact projective normalization. The exact completedSignedResidual=combinedCluster identity is paid, and outward-pointing centred discrepancy remains a wrong-sign diagnostic."
+    "G3 representation is now source-written through the preferred symmetric global t-centred Abel consumer. Negative-height transport is endpoint-correct, both boundary terms tend to zero, the literal half-open zero windows are exhausted cofinally on the actual Zeros subtype, the smooth mu windows exhaust the full-line integral, and therefore the finite centred residual tends to global signedNMuPair. The preferred combined Abel partial L_n+R_n then tends to -signedNMuPair directly from the finite Abel identity. Separate one-sided correlation-integral limits remain retained as a strictly stronger optional producer interface rather than Clay-facing debt. Full-line mu-integrability is source-written from Zeta23.EF.integrable_paperFT_mul_mu. The exact completedSignedResidual=combinedCluster identity is paid, and outward-pointing centred discrepancy remains a wrong-sign diagnostic."
     "Superseded means retained and attributable but not on the preferred Clay-facing min-cut. In particular the old universal lower bound over every arbitrary QuarticFourSignedPolePair is stronger than needed and is retained only as a donor interface."
-    "Authoritative high cut: one scalar G1 threshold comparison plus the joint G3 completed-residual inequality. Negative-height reflection and both boundary Tendsto fields are source-written. The residual global representation debt is now correlation-integral exhaustion and finite residual -> global signedNMuPair. Full-line mu-integrability has been source-written from the imported Zeta23 bridge. RH remains unproved because these assembly seams, G3 itself, and the scalar T_Q<T_PT certificate are not yet kernel-paid."
+    "Authoritative high cut: one scalar G1 threshold comparison plus the joint G3 completed-residual inequality. The preferred global symmetric centered-Abel representation is now source-written: finite residual -> global signedNMuPair and combined left+right Abel correlation -> -signedNMuPair. Individual one-sided improper limits remain optional stronger producers only. RH remains unproved because the genuine joint G3 inequality and the scalar T_Q<T_PT certificate are still unpaid, and no exact-head kernel receipt is claimed for this source tranche."
 
 quarticTerminalCompilerShape :
   {ell : Level} ->
