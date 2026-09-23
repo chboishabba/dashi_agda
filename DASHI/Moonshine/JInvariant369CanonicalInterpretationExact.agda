@@ -47,6 +47,7 @@ import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as LevelTow
 import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact as Principal
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
 import DASHI.Moonshine.JInvariantFormulaic369FibreObserverRepairExact as Repair
+import DASHI.Moonshine.JInvariant369SignedSSPFRACTRANPhaseFibreExact as SignedSSP
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -71,6 +72,11 @@ record Canonical369InterpretationBoundary : Set where
     fullDeckGroupsCollapsedToCyclic : Bool
     c27EqualsC3CubedAsGroup : Bool
 
+    signedSSPPhaseObserverOwned : Bool
+    signedSSPNegationSpectralConjugationOwned : Bool
+    signedSpectralToLevelTranslationIntertwinerExists : Bool
+    signedSSPAutomaticallyIsPrincipalLevel3Fibre : Bool
+
 open Canonical369InterpretationBoundary public
 
 canonicalCanonical369InterpretationBoundary :
@@ -80,6 +86,7 @@ canonicalCanonical369InterpretationBoundary =
     true true
     true true true true true
     false false false
+    true true false false
     false true
     false false false
 
@@ -94,3 +101,18 @@ canonicalCanonical369InterpretationBoundary =
 -- * therefore the substantive structure is a phase object fibred together with
 --   principal-level data, not one scalar phase quantized at 3/6/9/27.
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- Signed SSP / FRACTRAN placement.
+------------------------------------------------------------------------
+
+signedSSP369FibreBoundary :
+  SignedSSP.SignedSSP369FibreBoundary
+signedSSP369FibreBoundary =
+  SignedSSP.canonicalSignedSSP369FibreBoundary
+
+signedSSPCannotCollapseSpectralConjugationToLevelTranslation :
+  SignedSSP.SignedPhaseToLevel3Intertwiner →
+  ⊥
+signedSSPCannotCollapseSpectralConjugationToLevelTranslation =
+  SignedSSP.signedSpectralConjugationCannotEqualLevel3Translation
