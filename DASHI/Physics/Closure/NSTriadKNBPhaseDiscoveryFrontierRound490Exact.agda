@@ -78,6 +78,7 @@ import DASHI.Physics.Closure.NSTriadKNSelfEnergyCancellationWeightNoGoRound629Ex
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedExternalScalarRound623Exact as R623
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSpectatorRowRound624Exact as R624
 import DASHI.Physics.Closure.NSTriadKNExternalProductRuleCommutatorRound625Exact as R625
+import DASHI.Physics.Closure.NSTriadKNExternalForcingTransverseRound626Exact as ExtTrans626
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -1157,6 +1158,15 @@ round490ExternalCommutatorAnalyticPaymentClosed : Bool
 round490ExternalCommutatorAnalyticPaymentClosed =
   R625.round625ExternalCommutatorAnalyticPaymentClosed
 
+round490ExternalForcingTransversalityClosed : Bool
+round490ExternalForcingTransversalityClosed =
+  ExtTrans626.round626ExternalPForcingTransverseClosed
+
+round490ExternalR307PairConstructed : Bool
+round490ExternalR307PairConstructed =
+  ExtTrans626.round626ExternalR307PairConstructed
+
+
 
 
 
@@ -1403,6 +1413,16 @@ round490ExternalCommutatorAnalyticPaymentClosedIsFalse :
   round490ExternalCommutatorAnalyticPaymentClosed ≡ false
 round490ExternalCommutatorAnalyticPaymentClosedIsFalse =
   R625.round625ExternalCommutatorAnalyticPaymentClosedIsFalse
+
+round490ExternalForcingTransversalityClosedIsTrue :
+  round490ExternalForcingTransversalityClosed ≡ true
+round490ExternalForcingTransversalityClosedIsTrue =
+  ExtTrans626.round626ExternalPForcingTransverseClosedIsTrue
+
+round490ExternalR307PairConstructedIsTrue :
+  round490ExternalR307PairConstructed ≡ true
+round490ExternalR307PairConstructedIsTrue =
+  ExtTrans626.round626ExternalR307PairConstructedIsTrue
 
 round490CanonicalR112ResidualWitnessFamilyInstalledIsFalse :
   round490CanonicalR112ResidualWitnessFamilyInstalled ≡ false
