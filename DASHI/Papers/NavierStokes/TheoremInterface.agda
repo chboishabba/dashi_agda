@@ -375,6 +375,14 @@ periodicClayMaxCutC4CanonicalModeCoherenceCompilerAvailable : Bool
 periodicClayMaxCutC4CanonicalModeCoherenceCompilerAvailable =
   R642.round642C4CanonicalR34ModeCoherenceCompilerAvailable
 
+periodicClayMaxCutC4CanonicalDyadicCeilingAdapterAvailable : Bool
+periodicClayMaxCutC4CanonicalDyadicCeilingAdapterAvailable =
+  R642.round642C4CanonicalDyadicCeilingAdapterAvailable
+
+periodicClayMaxCutC4StandardSmoothToHOneHalfSourceStillExternal : Bool
+periodicClayMaxCutC4StandardSmoothToHOneHalfSourceStillExternal =
+  R642.round642C4StandardSmoothToHOneHalfSourceStillExternal
+
 periodicClayMaxCutC5Proved : Bool
 periodicClayMaxCutC5Proved = R642.round642C5RetainedViscosityProved
 
