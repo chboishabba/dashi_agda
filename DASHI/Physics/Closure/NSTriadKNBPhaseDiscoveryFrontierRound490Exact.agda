@@ -80,6 +80,7 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSpectatorRowRound624
 import DASHI.Physics.Closure.NSTriadKNExternalProductRuleCommutatorRound625Exact as R625Ext
 import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorRound629Exact as R629Ext
 import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorTotalRound630Exact as R630
+import DASHI.Physics.Closure.NSTriadKNCanonicalExternalTotalCommutatorScalarRound631Exact as R631
 import DASHI.Physics.Closure.NSTriadKNExternalForcingTransverseRound626Exact as ExtTrans626
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
@@ -1177,6 +1178,19 @@ round490ExternalR573NestedCommutatorTotal : Bool
 round490ExternalR573NestedCommutatorTotal =
   R630.round630R573ExternalNestedCommutatorTotal
 
+
+round490CanonicalExternalFoldOnTotalCommutatorClosed : Bool
+round490CanonicalExternalFoldOnTotalCommutatorClosed =
+  R631.round631CanonicalExternalFoldOnTotalCommutatorClosed
+
+round490CanonicalExternalScalarOnTotalCommutatorClosed : Bool
+round490CanonicalExternalScalarOnTotalCommutatorClosed =
+  R631.round631CanonicalExternalScalarOnTotalCommutatorClosed
+
+round490ExternalTotalCommutatorZeroPIncluded : Bool
+round490ExternalTotalCommutatorZeroPIncluded =
+  R631.round631ZeroPBranchIncluded
+
 round490ExternalForcingTransversalityClosed : Bool
 round490ExternalForcingTransversalityClosed =
   ExtTrans626.round626ExternalPForcingTransverseClosed
@@ -1453,6 +1467,22 @@ round490ExternalR573NestedCommutatorTotalIsTrue :
   round490ExternalR573NestedCommutatorTotal ≡ true
 round490ExternalR573NestedCommutatorTotalIsTrue =
   R630.round630R573ExternalNestedCommutatorTotalIsTrue
+
+
+round490CanonicalExternalFoldOnTotalCommutatorClosedIsTrue :
+  round490CanonicalExternalFoldOnTotalCommutatorClosed ≡ true
+round490CanonicalExternalFoldOnTotalCommutatorClosedIsTrue =
+  R631.round631CanonicalExternalFoldOnTotalCommutatorClosedIsTrue
+
+round490CanonicalExternalScalarOnTotalCommutatorClosedIsTrue :
+  round490CanonicalExternalScalarOnTotalCommutatorClosed ≡ true
+round490CanonicalExternalScalarOnTotalCommutatorClosedIsTrue =
+  R631.round631CanonicalExternalScalarOnTotalCommutatorClosedIsTrue
+
+round490ExternalTotalCommutatorZeroPIncludedIsTrue :
+  round490ExternalTotalCommutatorZeroPIncluded ≡ true
+round490ExternalTotalCommutatorZeroPIncludedIsTrue =
+  R631.round631ZeroPBranchIncludedIsTrue
 
 round490ExternalForcingTransversalityClosedIsTrue :
   round490ExternalForcingTransversalityClosed ≡ true
