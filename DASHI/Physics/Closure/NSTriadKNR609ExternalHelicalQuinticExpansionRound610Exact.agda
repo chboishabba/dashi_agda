@@ -209,7 +209,7 @@ round610ExternalPairExpandedToEightHelicalQuinticCells : Bool
 round610ExternalPairExpandedToEightHelicalQuinticCells = true
 
 round610IdentifiesHelicalQuinticCellsWithR115QuarticWaleffeCells : Bool
-round610IdentifiesHelicalQuinticCellsWithR115WaleffeCells = false
+round610IdentifiesHelicalQuinticCellsWithR115QuarticWaleffeCells = false
 
 round610ExternalNetworkPaymentClosed : Bool
 round610ExternalNetworkPaymentClosed = false
@@ -222,7 +222,7 @@ round610ExternalPairExpandedToEightHelicalQuinticCellsIsTrue :
 round610ExternalPairExpandedToEightHelicalQuinticCellsIsTrue = refl
 
 round610IdentifiesHelicalQuinticCellsWithR115QuarticWaleffeCellsIsFalse :
-  round610IdentifiesHelicalQuinticCellsWithR115WaleffeCells ≡ false
+  round610IdentifiesHelicalQuinticCellsWithR115QuarticWaleffeCells ≡ false
 round610IdentifiesHelicalQuinticCellsWithR115QuarticWaleffeCellsIsFalse = refl
 
 round610ExternalNetworkPaymentClosedIsFalse :
