@@ -6,6 +6,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.WorldRepresentationSeparationExact as World
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.ExperimentalCoordinateDesignExact as Experiment
 import DASHI.Core.LawlikeRegularityCounterfactualExact as Regularity
 import DASHI.Physics.Laws.EffectiveTheoryLineageExact as Lineage
 import DASHI.Law.SensibLawChangeLocusExact as Locus
@@ -73,7 +75,7 @@ theoryChangeIsTypedAtTheoryLayer = refl
 ------------------------------------------------------------------------
 
 coarseFallStillCannotExhaustGravityRegularity :
-  World.INF.FactorsThrough
+  INF.FactorsThrough
     World.coarseFallObservation
     World.gravityRegularity
   → ⊥
@@ -83,7 +85,7 @@ coarseFallStillCannotExhaustGravityRegularity =
 rechartingStillCannotRecoverErasedGravityReading :
   ∀ {Recharted : Set} →
   (rechart : World.FallObservation → Recharted) →
-  World.INF.FactorsThrough
+  INF.FactorsThrough
     (λ state → rechart (World.coarseFallObservation state))
     World.gravityRegularity →
   ⊥
@@ -99,14 +101,14 @@ observationChangeIsTypedAtObservationLayer = refl
 ------------------------------------------------------------------------
 
 stateActuallyChangesUnderDeclaredControl :
-  Regularity.Experiment.CoordinateModifiableBy
+  Experiment.CoordinateModifiableBy
     Regularity.demoDesign
     Regularity.changingCoordinate
 stateActuallyChangesUnderDeclaredControl =
   Regularity.demoStateActuallyChanges
 
 regularityCoordinateRemainsInvariant :
-  Regularity.Experiment.CoordinateInvariantUnder
+  Experiment.CoordinateInvariantUnder
     Regularity.demoDesign
     Regularity.regularityCoordinate
     Regularity.DeclaredDemoControl
