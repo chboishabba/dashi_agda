@@ -70,8 +70,8 @@ compensationStatus exactOffOrdZeroExtensionSummable = theoremOwned
 compensationStatus exactOffOrdCofinalLimit = theoremOwned
 compensationStatus eventualCompensationGapGlobalCompiler = theoremOwned
 
-compensationStatus exactOffOrdGlobalEqualsSubtypePairTsum = openAssembly
-compensationStatus eventualCompensationGapPaysCompletedResidual = openAssembly
+compensationStatus exactOffOrdGlobalEqualsSubtypePairTsum = theoremOwned
+compensationStatus eventualCompensationGapPaysCompletedResidual = theoremOwned
 compensationStatus eventualCompensationGapExists = openAnalyticObstruction
 compensationStatus g3StrictTargetBound = openAnalyticObstruction
 
@@ -111,10 +111,10 @@ record QuarticSignedPoleCompensationBoundary : Set where
     eventualCompensationGapGlobalCompilerPaidIsTrue :
       eventualCompensationGapGlobalCompilerPaid ≡ true
 
-    exactOffOrdGlobalEqualsSubtypePairTsumPaidIsFalse :
-      exactOffOrdGlobalEqualsSubtypePairTsumPaid ≡ false
-    eventualCompensationGapPaysCompletedResidualPaidIsFalse :
-      eventualCompensationGapPaysCompletedResidualPaid ≡ false
+    exactOffOrdGlobalEqualsSubtypePairTsumPaidIsTrue :
+      exactOffOrdGlobalEqualsSubtypePairTsumPaid ≡ true
+    eventualCompensationGapPaysCompletedResidualPaidIsTrue :
+      eventualCompensationGapPaysCompletedResidualPaid ≡ true
     eventualCompensationGapExistsPaidIsFalse :
       eventualCompensationGapExistsPaid ≡ false
     g3StrictTargetBoundPaidIsFalse :
@@ -129,20 +129,20 @@ canonicalQuarticSignedPoleCompensationBoundary =
   quartic-signed-pole-compensation-boundary
     true true true true true
     true true true
-    false false false false
+    true true false false
     refl refl refl refl refl
     refl refl refl
     refl refl refl refl
-    "The fail-fast cone estimate has reached its natural absolute-value wall.  The preferred finite G3 budget now preserves signed cancellation: LocalDebt = ConeDebt + LocalRemainderDebt, SignedCompensation = GoodQuarticGain - FarExact, and OffOrdExact <= LocalDebt - SignedCompensation.  A theorem-bearing cofinal compiler shows that an eventual positive compensation gap gives a global upper bound on the exact off-ordinate zero-extended source.  This is strictly stronger research discipline than turning FarExact into another absolute debt coordinate."
-    "First close the small same-object assembly weld between the zero-extended global off-ordinate tsum and the existing subtype signedLiteralPairSourceTerm tsum used by completedSignedResidual_eq_jointPairSource.  Then the only substantive producer question is whether the canonical cofinal exhaustion satisfies an eventual signed-compensation gap large enough to pay the target margin.  Do not split FarExact by absolute value unless a conventional proof forces that loss."
+    "The fail-fast cone estimate has reached its natural absolute-value wall.  The preferred finite G3 budget preserves signed cancellation: LocalDebt = ConeDebt + LocalRemainderDebt, SignedCompensation = GoodQuarticGain - FarExact, and OffOrdExact <= LocalDebt - SignedCompensation.  The zero-extended global exact source is now theorem-welded to the existing subtype signedLiteralPairSourceTerm tsum, and an eventual positive compensation gap compiles through completedSignedResidual_eq_jointPairSource to the actual strict G3 consumer once its scalar target margin is paid.  FarExact is never replaced by an absolute allowance."
+    "The same-object global tsum weld and the completed-residual compiler are now paid/source-written.  The only substantive producer question on this lane is whether the canonical cofinal exhaustion satisfies an eventual signed-compensation gap large enough to beat the exact scalar margin 4*D_comb(rho) + integral Psi_t*mu.  Do not split FarExact by absolute value unless a conventional proof forces that loss."
 
 eventualCompensationGlobalCompilerIsPaid :
   compensationStatus eventualCompensationGapGlobalCompiler ≡ theoremOwned
 eventualCompensationGlobalCompilerIsPaid = refl
 
-globalSubtypeTsumWeldRemainsOpen :
-  compensationStatus exactOffOrdGlobalEqualsSubtypePairTsum ≡ openAssembly
-globalSubtypeTsumWeldRemainsOpen = refl
+globalSubtypeTsumWeldIsPaid :
+  compensationStatus exactOffOrdGlobalEqualsSubtypePairTsum ≡ theoremOwned
+globalSubtypeTsumWeldIsPaid = refl
 
 compensationGapRemainsAnalytic :
   compensationStatus eventualCompensationGapExists ≡ openAnalyticObstruction
