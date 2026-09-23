@@ -50,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNA3CenteredRemainderReconciliationRound602E
 import DASHI.Physics.Closure.NSTriadKNA3CauchyAlgebraVanishingNoGoRound603Exact as R603
 import DASHI.Physics.Closure.NSTriadKNA3CauchyForcingMismatchRound604Exact as R604
 import DASHI.Physics.Closure.NSTriadKNR230SelfExternalNetworkSplitRound605Exact as R605
+import DASHI.Physics.Closure.NSTriadKNR567ForcingFullSelfExternalSplitRound606Exact as R606
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -377,6 +378,18 @@ round490R230SelfPartCancelledByCyclicEnergy =
 round490R230ExternalNetworkPartPaid : Bool
 round490R230ExternalNetworkPartPaid =
   R605.round605ExternalNetworkPartPaid
+
+round490R567ForcingFullSelfExternalSplitClosed : Bool
+round490R567ForcingFullSelfExternalSplitClosed =
+  R606.round606ForcingFullSelfExternalSplitClosed
+
+round490SelectedSelfForcingFullPaysA3 : Bool
+round490SelectedSelfForcingFullPaysA3 =
+  R606.round606SelfForcingFullPaysA3
+
+round490ExternalNetworkForcingFullPaid : Bool
+round490ExternalNetworkForcingFullPaid =
+  R606.round606ExternalForcingFullPaid
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -773,6 +786,21 @@ round490R230ExternalNetworkPartPaidIsFalse :
   round490R230ExternalNetworkPartPaid ≡ false
 round490R230ExternalNetworkPartPaidIsFalse =
   R605.round605ExternalNetworkPartPaidIsFalse
+
+round490R567ForcingFullSelfExternalSplitClosedIsTrue :
+  round490R567ForcingFullSelfExternalSplitClosed ≡ true
+round490R567ForcingFullSelfExternalSplitClosedIsTrue =
+  R606.round606ForcingFullSelfExternalSplitClosedIsTrue
+
+round490SelectedSelfForcingFullPaysA3IsFalse :
+  round490SelectedSelfForcingFullPaysA3 ≡ false
+round490SelectedSelfForcingFullPaysA3IsFalse =
+  R606.round606SelfForcingFullPaysA3IsFalse
+
+round490ExternalNetworkForcingFullPaidIsFalse :
+  round490ExternalNetworkForcingFullPaid ≡ false
+round490ExternalNetworkForcingFullPaidIsFalse =
+  R606.round606ExternalForcingFullPaidIsFalse
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
