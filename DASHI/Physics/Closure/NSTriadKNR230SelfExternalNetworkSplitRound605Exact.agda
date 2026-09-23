@@ -50,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
+import DASHI.Physics.Closure.NSTriadKNHelicalDampedProjectorLinearityRound381Exact as R381
 
 F : C3.RealField _
 F = Rational.rationalRealField
