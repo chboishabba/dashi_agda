@@ -37,6 +37,8 @@ import DASHI.Algebra.SixfoldLogic as Six
 import DASHI.Reasoning.TernarySynthesisLogicQualificationExact as Qualification
 import DASHI.Reasoning.TernaryComparisonSynthesisExact as Synthesis
 import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact as Stage12
+import DASHI.Core.IntersectionalNonFactorability as Intersectional
+import DASHI.Algebra.DisagreementFourViewBoundary as FourView
 
 ------------------------------------------------------------------------
 -- 1. Exact 0..13 ternary address atlas.
@@ -305,7 +307,45 @@ rank13DoesNotInventStage13Semantics :
 rank13DoesNotInventStage13Semantics ()
 
 ------------------------------------------------------------------------
--- 8. Exact boundary receipt.
+-- 8. Intersectional/non-factorability and fourfold-structure firewalls.
+--
+-- The same product-coordinate discipline is already owned generically:
+-- post-composing a lossy single-axis observer cannot recover a situated
+-- phenomenon that distinguished states already collapsed by that observer.
+-- Likewise a tetralemma support square and a 2x2 four-view epistemic matrix
+-- both have four positions but are explicitly different typed structures.
+------------------------------------------------------------------------
+
+intersectionalCanonicalWitness :
+  Intersectional.NonFactorabilityWitness
+    Intersectional.flatProjection
+    Intersectional.relationalOutcome
+intersectionalCanonicalWitness =
+  Intersectional.canonicalIntersectionalNonFactorability
+
+singleAxisRechartCannotRecoverErasedRelation :
+  ∀ {Recharted : Set} →
+  (rechart : Intersectional.FlatSingleAxis → Recharted) →
+  Intersectional.FactorsThrough
+    (λ state → rechart (Intersectional.flatProjection state))
+    Intersectional.relationalOutcome →
+  ⊥
+singleAxisRechartCannotRecoverErasedRelation =
+  Intersectional.canonicalRechartingCannotRepairMissingRelation
+
+separateAxesDoNotAutoCreateIntersectionalSufficiency :
+  Intersectional.SeparateAxisSufficiencyImpliesIntersectionalSufficiencyPermission →
+  ⊥
+separateAxesDoNotAutoCreateIntersectionalSufficiency =
+  Intersectional.separateAxisSufficiencyCannotAutoPromote
+
+fourViewTetralemmaNonIdentificationBoundary :
+  List String
+fourViewTetralemmaNonIdentificationBoundary =
+  FourView.fourfoldNonIdentificationBoundary
+
+------------------------------------------------------------------------
+-- 9. Exact boundary receipt.
 ------------------------------------------------------------------------
 
 record ZeroToThirteenTetralemma369Boundary : Set where
@@ -334,6 +374,11 @@ record ZeroToThirteenTetralemma369Boundary : Set where
     localJ27EqualsSynthesis27 : Bool
     rank13CreatesStage13Semantics : Bool
 
+    intersectionalNonFactorabilityReused : Bool
+    singleAxisRechartRepairsErasedRelation : Bool
+    separateAxesAutoCreateIntersectionalSufficiency : Bool
+    fourViewMatrixEqualsTetralemma : Bool
+
 open ZeroToThirteenTetralemma369Boundary public
 
 canonicalZeroToThirteenTetralemma369Boundary :
@@ -344,3 +389,4 @@ canonicalZeroToThirteenTetralemma369Boundary =
     true true true true true
     true true true true
     false false false false false
+    true false false false
