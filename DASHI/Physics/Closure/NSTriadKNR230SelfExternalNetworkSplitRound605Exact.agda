@@ -138,7 +138,7 @@ module FixedSystem
       (trans
         (cong (C3.complex3Scale h) insertOnes)
         (trans
-          (DASHI.Physics.Closure.NSTriadKNHelicalDampedProjectorLinearityRound381Exact.minusRegroup
+          (R381.minusRegroup
             h one lL cL lR cR)
           (cong₂ C3.complex3Add
             (R106.complex3ScaleOne
