@@ -104,6 +104,9 @@ queryRelevantProjectionAdequate :
   Query.AdequateFor queryProjection demoSemantics dutyRouteQuery
 queryRelevantProjectionAdequate =
   Query.factorsForQuery
+    {project = queryProjection}
+    {semantics = demoSemantics}
+    {query = dutyRouteQuery}
     answerFromSurface
     (λ
       { sameAnswerNoiseLeft → refl
@@ -134,6 +137,9 @@ answerChangingProjectionDefect :
     dutyRouteQuery
 answerChangingProjectionDefect =
   Query.queryAdequacyDefect
+    {project = flatDifferenceOnly}
+    {semantics = demoSemantics}
+    {query = dutyRouteQuery}
     answerChangingLeft
     answerChangingRight
     refl
@@ -143,6 +149,9 @@ flatWorldDifferenceDoesNotDetermineAnswer :
   Query.AdequateFor flatDifferenceOnly demoSemantics dutyRouteQuery → ⊥
 flatWorldDifferenceDoesNotDetermineAnswer =
   Query.queryAdequacyDefectBlocksFactorisation
+    {project = flatDifferenceOnly}
+    {semantics = demoSemantics}
+    {query = dutyRouteQuery}
     answerChangingProjectionDefect
 
 ------------------------------------------------------------------------
