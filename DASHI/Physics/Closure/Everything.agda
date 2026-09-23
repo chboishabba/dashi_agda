@@ -224,3 +224,5 @@ import DASHI.Physics.Closure.NSTriadKNExternalProductRuleCommutatorRound625Exact
 import DASHI.Physics.Closure.NSTriadKNExternalForcingTransverseRound626Exact
 
 import DASHI.Physics.Closure.NSTriadKNCanonicalModeListedCoherenceRound643Exact
+
+import DASHI.Physics.Closure.NSTriadKNCanonicalInitialCriticalCeilingRound644Exact
