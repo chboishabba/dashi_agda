@@ -79,13 +79,17 @@ record ComparativeCrossDomainBattery : Set where
     sourceRevisionDifferenceIsTypedWorldEvidenceIsTrue :
       sourceRevisionDifferenceIsTypedWorldEvidence ≡ true
 
-    forecastChangeNeedNotChangeWorld : Bool
-    forecastChangeNeedNotChangeWorldIsTrue :
-      forecastChangeNeedNotChangeWorld ≡ true
+    forecastAutomaticallyChangesWorld : Bool
+    forecastAutomaticallyChangesWorldIsFalse :
+      forecastAutomaticallyChangesWorld ≡ false
 
-    worldMonitorModelAndDashboardStayTyped : Bool
-    worldMonitorModelAndDashboardStayTypedIsTrue :
-      worldMonitorModelAndDashboardStayTyped ≡ true
+    worldMonitorModelTypedTheory : Bool
+    worldMonitorModelTypedTheoryIsTrue :
+      worldMonitorModelTypedTheory ≡ true
+
+    worldMonitorDashboardTypedConsumerProjection : Bool
+    worldMonitorDashboardTypedConsumerProjectionIsTrue :
+      worldMonitorDashboardTypedConsumerProjection ≡ true
 
     quotientMayBeQueryAdequateWithoutRawIdentity : Bool
     quotientMayBeQueryAdequateWithoutRawIdentityIsTrue :
@@ -99,9 +103,9 @@ record ComparativeCrossDomainBattery : Set where
     beliefDeltaIsNotWorldDeltaIsTrue :
       beliefDeltaIsNotWorldDelta ≡ true
 
-    tradeJustificationDoesNotCreateCausalProof : Bool
-    tradeJustificationDoesNotCreateCausalProofIsTrue :
-      tradeJustificationDoesNotCreateCausalProof ≡ true
+    tradeJustificationCreatesCausalProof : Bool
+    tradeJustificationCreatesCausalProofIsFalse :
+      tradeJustificationCreatesCausalProof ≡ false
 
     comparisonCreatesTruth : Bool
     comparisonCreatesTruthIsFalse :
@@ -132,14 +136,19 @@ canonicalComparativeCrossDomainBattery =
     refl
     (Adapter.sourceRevisionDifferenceTypedAsWorldEvidence adapterBoundary)
     refl
-    true refl
-    true refl
+    (WorldMonitor.forecastChangeAutomaticallyChangesWorld worldMonitorBoundary)
+    refl
+    (WorldMonitor.forecastModelTypedTheory worldMonitorBoundary)
+    refl
+    (WorldMonitor.dashboardTypedConsumerProjection worldMonitorBoundary)
+    refl
     (Trade.quotientIsRepresentationNotWorldIdentity tradeBoundary)
     refl
     (Trade.sameWorldDifferentPolicyRepresentationPossible tradeBoundary)
     refl
     (Trade.beliefIsSeparateChangeLayer tradeBoundary)
     refl
-    true refl
+    (Trade.justificationChainCreatesCausalProof tradeBoundary)
+    refl
     false refl
     false refl
