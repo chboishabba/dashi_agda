@@ -88,10 +88,24 @@ record LeanMoonshineEisensteinAnalyticParity : Set where
     agdaComplexExtractionDerivedFromRealLaws : Bool
     agdaDiscriminantNumeratorTransportDerived : Bool
 
+    bishopVendoredEvaluatorOwnedInLean : Bool
+    bishopEvaluatorFaithfulOnSetoidClasses : Bool
+    bishopExpSemanticCompilerOwnedInLean : Bool
+    bishopSinCosSemanticCompilerOwnedInLean : Bool
+    bishopMachinPiSemanticCompilerOwnedInLean : Bool
+    round11MachinSourceBindingCompilerOwnedInLean : Bool
+    round11RouteBCapstoneOwnedInLean : Bool
+
+    agdaBishopSetoidComplexOwned : Bool
+    agdaBishopSetoidEisensteinRecurrenceOwned : Bool
+    agdaRound11MachinSourceCapstoneOwned : Bool
+
     extractedAgdaSurfaceInhabitedInLean : Bool
+    actualRound11MachinSourceBindingInLean : Bool
     agdaLeanCarrierSameObjectProved : Bool
     leanTheoremAutomaticallyPromotesAgdaAnalyticLeaf : Bool
     deltaE4E6IdentityAvailableAtPinnedMathlib : Bool
+    eta24NormalizedDeltaSameObjectProved : Bool
     mathlibDependencyBumpedByThisReceipt : Bool
 
     remainingAgdaMeaning : String
@@ -112,5 +126,7 @@ canonicalLeanMoonshineEisensteinAnalyticParity =
     true true true true true true true true true true true true true true
     true true true true true true true true
     true true true true true true true
-    false false false false false
-    "Lean/Mathlib already machine-formalizes the standard q-disk and Eisenstein convergence facts on ordinary complex numbers, including literal sigma3/sigma5 q-series summability at the 240/504 coefficient scales used by the Agda finite recurrences. The Lean companion now also owns a typed transport compiler: once an extracted surface supplies exact pointwise q/E4/E6 identities, q-disk, quartic/sextic summability and converged q-expansions transport automatically; eta^24 nonvanishing is similarly gated behind a separate Delta weld. The actual Agda qOf/e4Truncated/e6Truncated definitions now have a generic extraction compiler derived from preservation of zero/one/i/pi/+/-/*/exp, and Lean owns the matching finite recurrence, finite-sum normal forms and finite-to-infinite convergence. The remaining cross-prover work is therefore below Eisenstein analysis: construct the primitive faithful map from the selected Agda real/ComplexPair representation into Lean Real/Complex (including pi and exp compatibility), the literal Lean infinite limits are now identified with Mathlib E4/E6, and the finite discriminant numerator plus its 1/1728 normalization now converge to the corresponding E4/E6 expressions. Agda also lowers the extraction seam to a primitive real/transcendental morphism and derives componentwise ComplexPair, qOf, E4, E6 and discriminant-numerator transport from it. The remaining cross-prover payment is therefore the actual faithful map from the selected Agda real carrier into Lean Real with exp/sin/cos/pi compatibility; after that only the separate identification of the normalized E4/E6 Delta with the chosen eta^24/Delta object remains."
+    true true true true true true true
+    true true true
+    false false false false false false false
+    "Route B is now source-pinned and setoid-native. Lean owns the canonical evaluator for the vendored Bishop regular-rational reals, proves eval x = eval y iff the Bishop setoid relation holds, derives zero/one/add/sub/mul/neg preservation from the actual vendored resampling semantics, and derives Bishop exp/sin/cos/Machin-pi classical semantics from the repository's concrete convergence witnesses plus Mathlib series/Machin theorems. Agda owns the sibling Bishop setoid complex package, the literal sigma3/sigma5 q/E4/E6/discriminant-numerator recurrences on that carrier, and a Round11+Machin source capstone selecting the actual configured trig data and bishopMachinPi. Lean owns a single Round11MachinSourceBinding compiler and an end-to-end capstone sending mapped source E4_N/E6_N to Mathlib E4/E6 and the mapped discriminant numerator to its canonical limit. The only cross-language source gate left is inhabiting that exact Lean binding from the Agda receipt; the remaining independent analytic same-object seam is eta^24 = (E4^3-E6^2)/1728 at the pinned Mathlib v4.28.0 dependency. No dependency bump or automatic theorem promotion is inferred."
