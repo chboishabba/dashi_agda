@@ -23,6 +23,7 @@ module DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionScaleCalibrat
 -- to the continuum covariance.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _*_; _≤_)
