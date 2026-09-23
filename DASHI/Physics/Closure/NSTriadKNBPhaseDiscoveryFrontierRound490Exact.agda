@@ -47,6 +47,7 @@ import DASHI.Physics.Closure.NSTriadKNA3CenteredFullGramNormalFormRound599Exact 
 import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyPairNormalFormRound600Exact as R600
 import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyNonlinearRemainderRound601Exact as R601
 import DASHI.Physics.Closure.NSTriadKNA3CenteredRemainderReconciliationRound602Exact as R602
+import DASHI.Physics.Closure.NSTriadKNA3CauchyAlgebraVanishingNoGoRound603Exact as R603
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -338,6 +339,18 @@ round490R601IntroducesIndependentAnalyticLeaf =
 round490CanonicalDynamicMismatchPaid : Bool
 round490CanonicalDynamicMismatchPaid =
   R602.round602R598MismatchPaid
+
+round490PureR291CauchyAlgebraForcesDynamicMismatchVanishing : Bool
+round490PureR291CauchyAlgebraForcesDynamicMismatchVanishing =
+  R603.round603PureFiniteAlgebraForcesMismatchVanishing
+
+round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimate : Bool
+round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimate =
+  R603.round603AdditionalPhysicalStructureOrEstimateRequired
+
+round490NoGoClaimsLiteralNSMismatchNonzero : Bool
+round490NoGoClaimsLiteralNSMismatchNonzero =
+  R603.round603ClaimsLiteralNSMismatchIsNonzero
 
 round490A5GlobalPaymentToR503CompilerClosed : Bool
 round490A5GlobalPaymentToR503CompilerClosed =
@@ -689,6 +702,21 @@ round490CanonicalDynamicMismatchPaidIsFalse :
   round490CanonicalDynamicMismatchPaid ≡ false
 round490CanonicalDynamicMismatchPaidIsFalse =
   R602.round602R598MismatchPaidIsFalse
+
+round490PureR291CauchyAlgebraForcesDynamicMismatchVanishingIsFalse :
+  round490PureR291CauchyAlgebraForcesDynamicMismatchVanishing ≡ false
+round490PureR291CauchyAlgebraForcesDynamicMismatchVanishingIsFalse =
+  R603.round603PureFiniteAlgebraForcesMismatchVanishingIsFalse
+
+round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimateIsTrue :
+  round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimate ≡ true
+round490DynamicMismatchNeedsAdditionalPhysicalStructureOrEstimateIsTrue =
+  R603.round603AdditionalPhysicalStructureOrEstimateRequiredIsTrue
+
+round490NoGoClaimsLiteralNSMismatchNonzeroIsFalse :
+  round490NoGoClaimsLiteralNSMismatchNonzero ≡ false
+round490NoGoClaimsLiteralNSMismatchNonzeroIsFalse =
+  R603.round603ClaimsLiteralNSMismatchIsNonzeroIsFalse
 
 round490A5GlobalPaymentToR503CompilerClosedIsTrue :
   round490A5GlobalPaymentToR503CompilerClosed ≡ true
