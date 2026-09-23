@@ -363,6 +363,14 @@ periodicClayMaxCutC2StillProofBearing : Bool
 periodicClayMaxCutC2StillProofBearing =
   R642.round642C2PhaseSensitiveProductionStillProofBearing
 
+periodicClayMaxCutC2StrictMarginNormalFormAvailable : Bool
+periodicClayMaxCutC2StrictMarginNormalFormAvailable =
+  R642.round642C2StrictMarginNormalFormAvailable
+
+periodicClayMaxCutC2StrictMarginAlsoPaysC5 : Bool
+periodicClayMaxCutC2StrictMarginAlsoPaysC5 =
+  R642.round642C2StrictMarginAlsoPaysC5
+
 periodicClayMaxCutC3CompilerAvailable : Bool
 periodicClayMaxCutC3CompilerAvailable =
   R642.round642C3CanonicalPhysicalSliceCompilerAvailable
