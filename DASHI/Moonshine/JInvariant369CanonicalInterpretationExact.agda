@@ -55,6 +55,7 @@ import DASHI.Moonshine.JSameWeightQuotientReflectionExact as JReflection
 import DASHI.Moonshine.JInvariant369JointJReflectionWeldExact as JointJReflection
 import DASHI.Moonshine.JInvariantAnalyticNormalizedKleinAdapterExact as NormalizedKlein
 import DASHI.Moonshine.JInvariant369NormalizedAnalyticRendererExact as NormalizedRenderer
+import DASHI.Moonshine.JInvariant369NormalizedRendererReadoutFactorizationExact as ReadoutFactor
 import DASHI.Moonshine.JInvariant369SSPLevelDihedralIntertwinerExact as SSPLevel
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as JointFibred
 import DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact as LegacyBridge
@@ -107,6 +108,9 @@ record Canonical369InterpretationBoundary : Set where
     normalizedStandardJKleinAdapterOwned : Bool
     normalizedRendererJDefinitionallyStandardJ : Bool
     normalizedRendererJointReflectionCompilerOwned : Bool
+    normalizedRendererContinuousPresentationFactorizationOwned : Bool
+    leanConcreteContinuousJReadoutParityRecorded : Bool
+    leanContinuousPhaseReflectionOwned : Bool
     concreteRendererAnalyticJSameObjectWeldInhabited : Bool
     normalizedRendererReadoutInhabited : Bool
     normalizedRendererReflectionPointAlignmentInhabited : Bool
@@ -198,6 +202,9 @@ canonicalCanonical369InterpretationBoundary =
     ; normalizedStandardJKleinAdapterOwned = true
     ; normalizedRendererJDefinitionallyStandardJ = true
     ; normalizedRendererJointReflectionCompilerOwned = true
+    ; normalizedRendererContinuousPresentationFactorizationOwned = true
+    ; leanConcreteContinuousJReadoutParityRecorded = true
+    ; leanContinuousPhaseReflectionOwned = true
     ; concreteRendererAnalyticJSameObjectWeldInhabited = false
     ; normalizedRendererReadoutInhabited = false
     ; normalizedRendererReflectionPointAlignmentInhabited = false
@@ -468,6 +475,30 @@ normalizedRendererBoundary :
   NormalizedRenderer.NormalizedAnalyticRendererBoundary
 normalizedRendererBoundary =
   NormalizedRenderer.canonicalNormalizedAnalyticRendererBoundary
+
+
+normalizedRendererReadoutFactorizationBoundary :
+  ReadoutFactor.NormalizedReadoutFactorizationBoundary
+normalizedRendererReadoutFactorizationBoundary =
+  ReadoutFactor.canonicalNormalizedReadoutFactorizationBoundary
+
+normalizedRendererReadoutIsNowSplitByRole :
+  normalizedRendererContinuousPresentationFactorizationOwned
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+normalizedRendererReadoutIsNowSplitByRole = refl
+
+leanOwnsConcreteContinuousJPhaseReadout :
+  leanConcreteContinuousJReadoutParityRecorded
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+leanOwnsConcreteContinuousJPhaseReadout = refl
+
+leanOwnsContinuousJPhaseReflection :
+  leanContinuousPhaseReflectionOwned
+    canonicalCanonical369InterpretationBoundary
+  ≡ true
+leanOwnsContinuousJPhaseReflection = refl
 
 
 levelNonDescentThroughJBoundary :
