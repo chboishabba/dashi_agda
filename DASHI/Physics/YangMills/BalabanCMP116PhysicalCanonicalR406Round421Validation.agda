@@ -28,6 +28,10 @@ residualCMP116SummabilityRemainsPhysical :
   R421.round421ResidualCMP116SummabilityLevel ≡ conditional
 residualCMP116SummabilityRemainsPhysical = refl
 
-pointwiseMarkedResidualFactorizationRemainsPhysical :
-  R421.round421PointwiseMarkedResidualFactorizationLevel ≡ conditional
-pointwiseMarkedResidualFactorizationRemainsPhysical = refl
+pointwiseMarkedResidualFactorizationCompilerOwned :
+  R421.round421PointwiseMarkedResidualFactorizationLevel ≡ machineChecked
+pointwiseMarkedResidualFactorizationCompilerOwned = refl
+
+literalChargeGeometryRemainsPhysical :
+  R421.round421LiteralChargeGeometryAttachmentLevel ≡ conditional
+literalChargeGeometryRemainsPhysical = refl
