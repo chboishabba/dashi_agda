@@ -147,3 +147,90 @@ globalSubtypeTsumWeldIsPaid = refl
 compensationGapRemainsAnalytic :
   compensationStatus eventualCompensationGapExists ≡ openAnalyticObstruction
 compensationGapRemainsAnalytic = refl
+
+
+------------------------------------------------------------------------
+-- HUMAN-FACING COMPENSATION MIN-CUT
+--
+-- The auxiliary scalar margin used by the Lean compiler is deliberately
+-- hidden from the conventional statement.
+--
+-- Define
+--
+--   T_W(rho)
+--     = 4 * D_comb(rho) + integral Psi_t * mu.
+--
+-- The authoritative analytic hypothesis is:
+--
+--   exists eps > 0, exists N,
+--   forall n >= N,
+--
+--     LocalDebt_n - SignedCompensation_n
+--       <= T_W(rho) - eps.
+--
+-- The Lean companion proves this single hypothesis implies the strict G3
+-- completed-residual inequality by choosing the old auxiliary margin
+-- internally as T_W(rho) - eps/2.
+------------------------------------------------------------------------
+
+data HumanFacingCompensationCoordinate : Set where
+  compensationTargetThresholdDefinition :
+    HumanFacingCompensationCoordinate
+  uniformPositiveCompensationGapStatement :
+    HumanFacingCompensationCoordinate
+  uniformPositiveCompensationGapCompilerToG3 :
+    HumanFacingCompensationCoordinate
+  uniformPositiveCompensationGapProved :
+    HumanFacingCompensationCoordinate
+
+humanFacingCompensationStatus :
+  HumanFacingCompensationCoordinate -> CompensationStatus
+humanFacingCompensationStatus compensationTargetThresholdDefinition =
+  theoremOwned
+humanFacingCompensationStatus uniformPositiveCompensationGapStatement =
+  theoremOwned
+humanFacingCompensationStatus uniformPositiveCompensationGapCompilerToG3 =
+  theoremOwned
+humanFacingCompensationStatus uniformPositiveCompensationGapProved =
+  openAnalyticObstruction
+
+record HumanFacingCompensationBoundary : Set where
+  constructor human-facing-compensation-boundary
+  field
+    targetThresholdDefinitionPaid : Bool
+    uniformGapStatementPaid : Bool
+    uniformGapCompilerToG3Paid : Bool
+    uniformGapProved : Bool
+
+    targetThresholdDefinitionPaidIsTrue :
+      targetThresholdDefinitionPaid ≡ true
+    uniformGapStatementPaidIsTrue :
+      uniformGapStatementPaid ≡ true
+    uniformGapCompilerToG3PaidIsTrue :
+      uniformGapCompilerToG3Paid ≡ true
+    uniformGapProvedIsFalse :
+      uniformGapProved ≡ false
+
+    paperStatement : String
+    researchInstruction : String
+
+canonicalHumanFacingCompensationBoundary :
+  HumanFacingCompensationBoundary
+canonicalHumanFacingCompensationBoundary =
+  human-facing-compensation-boundary
+    true true true false
+    refl refl refl refl
+    "The Clay-facing analytic min-cut is one uniform epsilon gap at the canonical local radius: there exist eps>0 and N such that for every n>=N, LocalDebt_n - SignedCompensation_n <= T_W(rho)-eps, where T_W(rho)=4*D_comb(rho)+integral Psi_t*mu.  The auxiliary compiler scalar M is not part of the human theorem."
+    "Stop formal recutting here.  Prove or falsify the uniform signed-compensation gap using the actual zero distribution while preserving the signed GoodGain/FarExact correlation.  If the gap fails under plausible admissible configurations, redesign the witness rather than adding more compiler layers."
+
+uniformGapCompilerIsPaid :
+  humanFacingCompensationStatus
+    uniformPositiveCompensationGapCompilerToG3
+    ≡ theoremOwned
+uniformGapCompilerIsPaid = refl
+
+uniformGapIsTheAnalyticWall :
+  humanFacingCompensationStatus
+    uniformPositiveCompensationGapProved
+    ≡ openAnalyticObstruction
+uniformGapIsTheAnalyticWall = refl
