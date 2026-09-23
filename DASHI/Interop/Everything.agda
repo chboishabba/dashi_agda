@@ -94,3 +94,4 @@ import DASHI.Law.HerzogAmalekAttributedSourceAtlasExact
 import DASHI.Interop.LeanMoonshineEisensteinAnalyticParityExact
 import DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact
 import DASHI.Interop.LeanEta24PinnedReflectionParityExact
+import DASHI.Interop.LeanEta24SixfoldPhaseParityExact
