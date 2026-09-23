@@ -31,6 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Ener
 import DASHI.Physics.Closure.NSTriadKNLiteralPhysicalCriticalSliceRound639Exact as R639
 import DASHI.Physics.Closure.NSTriadKNLiteralInitialCriticalRealizationRound640Exact as R640
 import DASHI.Physics.Closure.NSTriadKNSubviscousAbsorptionToRetainedGapRound641Exact as R641
+import DASHI.Physics.Closure.NSTriadKNCanonicalInitialCriticalCeilingRound644Exact as R644
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as R104Simon
 import DASHI.Physics.Closure.NSTriadKNCriticalSimonUpgradeFollowsBarrierRound148Exact as R148
 import DASHI.Physics.Closure.NSTriadKNOrderedOrientedSelfExternalSpacetimeRound615Exact as R615
@@ -97,6 +98,14 @@ round642C4CanonicalR34ModeCoherenceCompilerAvailable =
 round642C4CutoffUniformInitialCeilingStillProofBearing : Bool
 round642C4CutoffUniformInitialCeilingStillProofBearing =
   R640.round640CutoffUniformInitialCeilingStillProofBearing
+
+round642C4CanonicalDyadicCeilingAdapterAvailable : Bool
+round642C4CanonicalDyadicCeilingAdapterAvailable =
+  R644.round644CanonicalDyadicReceiptToLiveR640CeilingClosed
+
+round642C4StandardSmoothToHOneHalfSourceStillExternal : Bool
+round642C4StandardSmoothToHOneHalfSourceStillExternal =
+  R644.round644StandardSmoothToHOneHalfSourceStillExternal
 
 round642C4UnconditionallyClosed : Bool
 round642C4UnconditionallyClosed = false
@@ -232,6 +241,16 @@ round642C4CutoffUniformInitialCeilingStillProofBearingIsTrue :
   round642C4CutoffUniformInitialCeilingStillProofBearing ≡ true
 round642C4CutoffUniformInitialCeilingStillProofBearingIsTrue =
   R640.round640CutoffUniformInitialCeilingStillProofBearingIsTrue
+
+round642C4CanonicalDyadicCeilingAdapterAvailableIsTrue :
+  round642C4CanonicalDyadicCeilingAdapterAvailable ≡ true
+round642C4CanonicalDyadicCeilingAdapterAvailableIsTrue =
+  R644.round644CanonicalDyadicReceiptToLiveR640CeilingClosedIsTrue
+
+round642C4StandardSmoothToHOneHalfSourceStillExternalIsTrue :
+  round642C4StandardSmoothToHOneHalfSourceStillExternal ≡ true
+round642C4StandardSmoothToHOneHalfSourceStillExternalIsTrue =
+  R644.round644StandardSmoothToHOneHalfSourceStillExternalIsTrue
 
 round642C4UnconditionallyClosedIsFalse :
   round642C4UnconditionallyClosed ≡ false
