@@ -28,6 +28,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -35,8 +36,11 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Field
+import DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact as Ring
 import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as R73
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputCollapseRound225Exact as R225
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
@@ -199,7 +203,7 @@ weightedIQuadraticKernelIsWeightedDoubleMixed :
     {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E}
     {S : Helical.HelicalModeScalars F}
     {L : Helical.PeriodicHelicalProjectorLaws F E I S}
-    {H : DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact.HelicalHalfCalibration S}
+    {H : R142.HelicalHalfCalibration S}
     {velocity : Z3.FourierMode → C3.Complex3 F}
     (P : R225.PhysicalFixedOutputHelicityData E I S L H velocity)
     (W : R294.SwapInvariantCellWeight F)
@@ -248,10 +252,7 @@ weightedDoubleMixedSumIsFourWeightedPlusMinus {F = F}
         (C3.complex3Subtract A (C3.complex3Negate A))
         (C3.complex3Subtract A (C3.complex3Negate A))
       ≡ R225.fourCopies A
-    endpoint =
-      R225.fixedOutputDoubleMixedSumIsFourPlusMinusSum
-        S velocity cutoff output
-      |> λ _ → additiveFour A
+    endpoint = additiveFour A
   in
   trans first
     (trans
@@ -262,9 +263,6 @@ weightedDoubleMixedSumIsFourWeightedPlusMinus {F = F}
           (cong (C3.complex3Subtract A) Bneg))
         endpoint))
   where
-  _|>_ : ∀ {a b} {A : Set a} {B : Set b} → A → (A → B) → B
-  x |> f = f x
-
   additiveFour :
     (a : C3.Complex3 F) →
     C3.complex3Add
@@ -272,13 +270,13 @@ weightedDoubleMixedSumIsFourWeightedPlusMinus {F = F}
       (C3.complex3Subtract a (C3.complex3Negate a))
     ≡ R225.fourCopies a
   additiveFour (C3.complex3 ax ay az) =
-    DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra.complex3Ext
+    Field.complex3Ext
       (R.solve 1 goal refl ax)
       (R.solve 1 goal refl ay)
       (R.solve 1 goal refl az)
     where
     module R =
-      DASHI.Physics.Closure.NSTriadKNComplexCommutativeRingExact.Solver F
+      Ring.Solver F
     goal = λ x →
       ((x R.⊕ (R.⊝ (R.⊝ x))) R.⊕ (x R.⊕ (R.⊝ (R.⊝ x))))
       R.⊜ ((x R.⊕ x) R.⊕ (x R.⊕ x))
@@ -288,7 +286,7 @@ fixedOutputWeightedQuadraticKernelCollapse :
     {E : C3.IntegerEmbedding F} {I : C3.ModeInverseSquare F E}
     {S : Helical.HelicalModeScalars F}
     {L : Helical.PeriodicHelicalProjectorLaws F E I S}
-    {H : DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact.HelicalHalfCalibration S}
+    {H : R142.HelicalHalfCalibration S}
     {velocity : Z3.FourierMode → C3.Complex3 F}
     (P : R225.PhysicalFixedOutputHelicityData E I S L H velocity)
     (W : R294.SwapInvariantCellWeight F)
@@ -321,7 +319,7 @@ fixedOutputWeightedQuadraticKernelCollapse
 ------------------------------------------------------------------------
 
 physicalRateWeight :
-  (rho : Z3.FourierMode → Data.Rational.Base.ℚ) →
+  (rho : Z3.FourierMode → ℚ) →
   R294.SwapInvariantCellWeight R295.F
 physicalRateWeight rho =
   R295.rateFunctionBuildsR294Weight rho (C3.realEmbed R295.F)
@@ -331,10 +329,10 @@ physicalRateWeightedQuadraticKernelCollapse :
   {I : C3.ModeInverseSquare R295.F E}
   {S : Helical.HelicalModeScalars R295.F}
   {L : Helical.PeriodicHelicalProjectorLaws R295.F E I S}
-  {H : DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact.HelicalHalfCalibration S}
+  {H : R142.HelicalHalfCalibration S}
   {velocity : Z3.FourierMode → C3.Complex3 R295.F} →
   (P : R225.PhysicalFixedOutputHelicityData E I S L H velocity) →
-  (rho : Z3.FourierMode → Data.Rational.Base.ℚ) →
+  (rho : Z3.FourierMode → ℚ) →
   (cutoff : Nat) (output : Z3.FourierMode) →
   R224.foldVector
     (weightedIQuadraticKernel (physicalRateWeight rho) S velocity)
