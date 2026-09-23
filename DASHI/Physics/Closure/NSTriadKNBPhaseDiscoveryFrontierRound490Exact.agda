@@ -72,6 +72,7 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorNestedSelfCanonicalExternalRowRou
 import DASHI.Physics.Closure.NSTriadKNLiveNestedSelfCanonicalExternalSpacetimeRound624Exact as R624
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedExternalScalarRound623Exact as R623
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSpectatorRowRound624Exact as R624
+import DASHI.Physics.Closure.NSTriadKNExternalProductRuleCommutatorRound625Exact as R625
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
 import DASHI.Physics.Closure.NSTriadKNA3D1bDivisionFreeTransportExact as A3D1b
@@ -1105,6 +1106,19 @@ round490R545CanonicalExternalScalarBudgetClosed : Bool
 round490R545CanonicalExternalScalarBudgetClosed =
   R624.round624CanonicalExternalScalarBudgetClosed
 
+round490ExternalProductRuleToCommutatorFoldClosed : Bool
+round490ExternalProductRuleToCommutatorFoldClosed =
+  R625.round625ExternalProductRuleToCommutatorFoldClosed
+
+round490ExternalCommutatorRequiresLegacyR112Family : Bool
+round490ExternalCommutatorRequiresLegacyR112Family =
+  R625.round625RequiresLegacyR112WitnessFamily
+
+round490ExternalCommutatorAnalyticPaymentClosed : Bool
+round490ExternalCommutatorAnalyticPaymentClosed =
+  R625.round625ExternalCommutatorAnalyticPaymentClosed
+
+
 
 
 round490CanonicalR112ResidualWitnessFamilyInstalled : Bool
@@ -1303,6 +1317,21 @@ round490R545CanonicalExternalScalarBudgetClosedIsFalse :
   round490R545CanonicalExternalScalarBudgetClosed ≡ false
 round490R545CanonicalExternalScalarBudgetClosedIsFalse =
   R624.round624CanonicalExternalScalarBudgetClosedIsFalse
+
+round490ExternalProductRuleToCommutatorFoldClosedIsTrue :
+  round490ExternalProductRuleToCommutatorFoldClosed ≡ true
+round490ExternalProductRuleToCommutatorFoldClosedIsTrue =
+  R625.round625ExternalProductRuleToCommutatorFoldClosedIsTrue
+
+round490ExternalCommutatorRequiresLegacyR112FamilyIsFalse :
+  round490ExternalCommutatorRequiresLegacyR112Family ≡ false
+round490ExternalCommutatorRequiresLegacyR112FamilyIsFalse =
+  R625.round625RequiresLegacyR112WitnessFamilyIsFalse
+
+round490ExternalCommutatorAnalyticPaymentClosedIsFalse :
+  round490ExternalCommutatorAnalyticPaymentClosed ≡ false
+round490ExternalCommutatorAnalyticPaymentClosedIsFalse =
+  R625.round625ExternalCommutatorAnalyticPaymentClosedIsFalse
 
 round490CanonicalR112ResidualWitnessFamilyInstalledIsFalse :
   round490CanonicalR112ResidualWitnessFamilyInstalled ≡ false
