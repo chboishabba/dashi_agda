@@ -343,3 +343,84 @@ atomicFullCubicIdentityRejected :
   atomicQuotientStatus atomicFullCubicQuotientHolds ≡ rejectedIdentity
 atomicFullCubicIdentityRejected = refl
 
+
+
+------------------------------------------------------------------------
+-- NARROW SMOOTH CORRIDOR OBSTRUCTION RECEIPT
+--
+-- Lean companion now transports the atomic linear obstruction through:
+--
+--   atomic mu-corridor robustness
+--   + smooth pole localization
+--   + smooth on-line pairing localization.
+--
+-- For every t>=200 there is a radius d(t)>0 such that every sufficiently
+-- narrow endpoint pair in the witness corridors has
+--
+--   linearOnLineObstruction < -1/100.
+--
+-- It then constructs a genuine strength-floor signed-pole witness inside
+-- that radius and proves that witness does not satisfy the full cubic
+-- quotient.
+------------------------------------------------------------------------
+
+data SmoothQuotientDiagnosticCoordinate : Set where
+  atomicLinearSignStableOnMuCorridor : SmoothQuotientDiagnosticCoordinate
+  smoothLinearSignStableForSmallRadius : SmoothQuotientDiagnosticCoordinate
+  strengthFloorWitnessWithLinearObstruction : SmoothQuotientDiagnosticCoordinate
+  strengthFloorWitnessHasFullCubicQuotient : SmoothQuotientDiagnosticCoordinate
+
+data SmoothQuotientDiagnosticStatus : Set where
+  theoremOwned : SmoothQuotientDiagnosticStatus
+  rejectedExistentialIdentity : SmoothQuotientDiagnosticStatus
+
+smoothQuotientDiagnosticStatus :
+  SmoothQuotientDiagnosticCoordinate -> SmoothQuotientDiagnosticStatus
+smoothQuotientDiagnosticStatus atomicLinearSignStableOnMuCorridor =
+  theoremOwned
+smoothQuotientDiagnosticStatus smoothLinearSignStableForSmallRadius =
+  theoremOwned
+smoothQuotientDiagnosticStatus strengthFloorWitnessWithLinearObstruction =
+  theoremOwned
+smoothQuotientDiagnosticStatus strengthFloorWitnessHasFullCubicQuotient =
+  rejectedExistentialIdentity
+
+record QuarticSignedPoleSmoothQuotientDiagnosticBoundary : Set where
+  constructor quartic-signed-pole-smooth-quotient-diagnostic-boundary
+  field
+    atomicLinearSignStableOnMuCorridorPaid : Bool
+    smoothLinearSignStableForSmallRadiusPaid : Bool
+    strengthFloorWitnessWithLinearObstructionPaid : Bool
+    everyStrengthFloorWitnessHasFullCubicQuotient : Bool
+
+    atomicLinearSignStableOnMuCorridorPaidIsTrue :
+      atomicLinearSignStableOnMuCorridorPaid ≡ true
+    smoothLinearSignStableForSmallRadiusPaidIsTrue :
+      smoothLinearSignStableForSmallRadiusPaid ≡ true
+    strengthFloorWitnessWithLinearObstructionPaidIsTrue :
+      strengthFloorWitnessWithLinearObstructionPaid ≡ true
+    everyStrengthFloorWitnessHasFullCubicQuotientIsFalse :
+      everyStrengthFloorWitnessHasFullCubicQuotient ≡ false
+
+    interpretation : String
+    nextResearchCut : String
+
+canonicalQuarticSignedPoleSmoothQuotientDiagnosticBoundary :
+  QuarticSignedPoleSmoothQuotientDiagnosticBoundary
+canonicalQuarticSignedPoleSmoothQuotientDiagnosticBoundary =
+  quartic-signed-pole-smooth-quotient-diagnostic-boundary
+    true true true false
+    refl refl refl refl
+    "The linear odd-mode obstruction is not an artifact of the atomic idealisation.  It remains strictly negative throughout a sufficiently narrow smooth witness corridor, and one can choose a genuine target-strength-floor G1 witness inside that corridor.  That witness provably does not satisfy the proposed full centered-cubic quotient."
+    "Retire full cubic quotient factorisation as an automatic cancellation mechanism for the present narrow signed-pole lane.  Preserve the exact odd obstruction coordinates and investigate whether they participate in a joint cancellation with the horizontal remainder, or whether a modified witness family must impose the two on-line determinant equations as additional design constraints."
+
+smoothLinearObstructionTransportPaid :
+  smoothQuotientDiagnosticStatus smoothLinearSignStableForSmallRadius
+    ≡ theoremOwned
+smoothLinearObstructionTransportPaid = refl
+
+strengthFloorCounterexampleToFullCubicQuotientPaid :
+  smoothQuotientDiagnosticStatus strengthFloorWitnessHasFullCubicQuotient
+    ≡ rejectedExistentialIdentity
+strengthFloorCounterexampleToFullCubicQuotientPaid = refl
+
