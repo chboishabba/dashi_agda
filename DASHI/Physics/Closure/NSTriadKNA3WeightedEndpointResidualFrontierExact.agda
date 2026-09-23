@@ -46,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNCyclicRouteExternalNetworkDefectRound599Ex
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedR406GramTangentNormalFormExact as GramTangent
 import DASHI.Physics.Closure.NSTriadKNCauchyR397R406ReconciliationExact as Reconcile
 import DASHI.Physics.Closure.NSTriadKNA3CauchyFluxTangentMismatchRound598Exact as R598
+import DASHI.Physics.Closure.NSTriadKNA3CenteredFullGramNormalFormRound599Exact as R599
 
 weightedR406ExactEndpointNormalFormClosedGivenFTC : Bool
 weightedR406ExactEndpointNormalFormClosedGivenFTC =
@@ -125,6 +126,14 @@ cauchyA3MismatchNormalFormClosed =
 a3SelfWorkCoordinateCancelledExactly : Bool
 a3SelfWorkCoordinateCancelledExactly =
   R598.round598A3SelfWorkCoordinateCancelledExactly
+
+a3CenteredFullGramNormalFormClosed : Bool
+a3CenteredFullGramNormalFormClosed =
+  R599.round599A3CenteredFullGramNormalFormClosed
+
+a3AndR596ShareCompleteDoubleMixedGramCarrier : Bool
+a3AndR596ShareCompleteDoubleMixedGramCarrier =
+  R599.round599A3AndR596NowShareCompleteDoubleMixedGramCarrier
 
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosed : Bool
 weightedFluxTangentFullSquareToCenteredA3RateKernelClosed =
@@ -251,6 +260,16 @@ a3SelfWorkCoordinateCancelledExactlyIsTrue :
   a3SelfWorkCoordinateCancelledExactly ≡ true
 a3SelfWorkCoordinateCancelledExactlyIsTrue =
   R598.round598A3SelfWorkCoordinateCancelledExactlyIsTrue
+
+a3CenteredFullGramNormalFormClosedIsTrue :
+  a3CenteredFullGramNormalFormClosed ≡ true
+a3CenteredFullGramNormalFormClosedIsTrue =
+  R599.round599A3CenteredFullGramNormalFormClosedIsTrue
+
+a3AndR596ShareCompleteDoubleMixedGramCarrierIsTrue :
+  a3AndR596ShareCompleteDoubleMixedGramCarrier ≡ true
+a3AndR596ShareCompleteDoubleMixedGramCarrierIsTrue =
+  R599.round599A3AndR596NowShareCompleteDoubleMixedGramCarrierIsTrue
 
 meanRateSelfWorkNormalizationMustBeRetainedIsTrue :
   meanRateSelfWorkNormalizationMustBeRetained ≡ true
