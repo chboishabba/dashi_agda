@@ -142,6 +142,46 @@ rechartingFallObservationStillCannotExhaustGravityRegularity rechart =
   INF.rechartingCannotRecoverErasedPhenomenon
     rechart gravityObservationNonFactorability
 
+
+------------------------------------------------------------------------
+-- The same coarse observation can nevertheless be exactly sufficient for a
+-- declared consumer query.  This composes QueryFactorisationSufficiency with
+-- the non-factorability witness above:
+--
+--   query factors through observation
+--   does not imply
+--   world regularity factors through observation.
+------------------------------------------------------------------------
+
+data FallQuery : Set where
+  didItFall : FallQuery
+
+fallQuestions : QFS.InquiryQuestionFamily GravityWorldState FallQuery
+fallQuestions = QFS.inquiryQuestionFamily (λ query → FallObservation) askFall
+  where
+    askFall : (query : FallQuery) → GravityWorldState → FallObservation
+    askFall didItFall state = coarseFallObservation state
+
+fallQueryFactorsThroughObservation :
+  QFS.FactorsThrough fallQuestions coarseFallObservation didItFall
+fallQueryFactorsThroughObservation =
+  QFS.factorsThrough (λ observation → observation) proof
+  where
+    proof :
+      (state : GravityWorldState) →
+      QFS.ask fallQuestions didItFall state
+      ≡ coarseFallObservation state
+    proof lowCurvatureFall = refl
+    proof highCurvatureFall = refl
+
+consumerQueryCanFactorWhileWorldRegularityDoesNot :
+  QFS.FactorsThrough fallQuestions coarseFallObservation didItFall
+  ×
+  (INF.FactorsThrough coarseFallObservation gravityRegularity → ⊥)
+consumerQueryCanFactorWhileWorldRegularityDoesNot =
+  fallQueryFactorsThroughObservation ,
+  coarseFallCannotExhaustGravityRegularity
+
 ------------------------------------------------------------------------
 -- Theory change while the represented world coordinate is held fixed.
 ------------------------------------------------------------------------
