@@ -26,8 +26,8 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSpectatorRowRound624
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -79,6 +79,18 @@ module CanonicalSpectatorRow624
   items output =
     Output.physicalOutputFiber (Audit.cutoff system) output
 
+  foldCongruent :
+    (left right :
+      Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+    ((tau : Physical.PhysicalTriadIncidence) → left tau ≡ right tau) →
+    (xs : List Physical.PhysicalTriadIncidence) →
+    R224.foldVector left xs ≡ R224.foldVector right xs
+  foldCongruent left right pointwise [] = refl
+  foldCongruent left right pointwise (tau ∷ rest) =
+    cong₂ C3.complex3Add
+      (pointwise tau)
+      (foldCongruent left right pointwise rest)
+
   module At
       (beta : Physical.PhysicalTriadIncidence) where
 
@@ -118,7 +130,7 @@ module CanonicalSpectatorRow624
       ≡ C3.complex3Add (selfFold output) (externalFold output)
     nestedFoldSplitsSelfExternal output =
       trans
-        (R230.foldCongruent
+        (foldCongruent
           Nested.nestedWeightedCompanionCell
           (λ tau →
             C3.complex3Add
