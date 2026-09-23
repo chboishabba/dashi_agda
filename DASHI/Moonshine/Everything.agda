@@ -31,3 +31,4 @@ import DASHI.Moonshine.BishopRound11MachinEisensteinRouteBExact
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact
 import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact
+import DASHI.Moonshine.JInvariant369CanonicalInterpretationExact
