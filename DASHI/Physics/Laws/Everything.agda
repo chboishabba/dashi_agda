@@ -15,3 +15,5 @@ import DASHI.Physics.Laws.ExistingPhysicsAdapter
 import DASHI.Physics.Laws.PhysicalLawRecoveryBoundary
 
 import DASHI.Physics.Laws.WorldLawStateTheorySeparationExact
+
+import DASHI.Physics.Laws.EffectiveTheoryLineageExact
