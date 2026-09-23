@@ -48,6 +48,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact as R230
 import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExact as D1a
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
@@ -72,7 +73,7 @@ divisionFreeD1bA3Normalization :
         (D1a.dampedMixedTangentCell rho S velocity forcing) items
     commutator =
       R224.foldVector
-        (DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact.forcingCommutatorCell
+        (R230.forcingCommutatorCell
           S velocity forcing) items
     n = Pair.natAsRational (length items)
   in
@@ -96,7 +97,7 @@ divisionFreeD1bA3Normalization
         (D1a.dampedMixedTangentCell rho S velocity forcing) items
     commutator =
       R224.foldVector
-        (DASHI.Physics.Closure.NSTriadKNMixedHelicityForcingSwapRound230Exact.forcingCommutatorCell
+        (R230.forcingCommutatorCell
           S velocity forcing) items
     n = Pair.natAsRational (length items)
     rateTotal = Pair.rateSum rate items
@@ -118,12 +119,6 @@ divisionFreeD1bA3Normalization
       Pair.fixedOutputCovariancePairDifference
         rho S velocity cutoff output
 
-    scaledDecay :
-      n * decayWork ≡ (0ℚ - pairDiff) - rateTotal * self
-    scaledDecay =
-      trans
-        (solve (n ∷ decayWork ∷ rateTotal ∷ self ∷ []))
-        (cong (λ x → x - rateTotal * self) covarianceMeaning)
   in
   trans
     (cong
@@ -133,10 +128,10 @@ divisionFreeD1bA3Normalization
     (trans
       (cong
         (λ selected →
-          n * (tangentWork - selected) + (0ℚ - pairDiff))
-        scaledDecay)
+          n * (tangentWork - decayWork) + selected)
+        (sym covarianceMeaning))
       (solve
-        (n ∷ tangentWork ∷ pairDiff ∷ rateTotal ∷ self ∷ [])))
+        (n ∷ tangentWork ∷ decayWork ∷ rateTotal ∷ self ∷ [])))
 
 ------------------------------------------------------------------------
 -- Status / trust boundary.
