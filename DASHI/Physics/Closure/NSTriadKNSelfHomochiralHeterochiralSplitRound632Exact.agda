@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
+import DASHI.Physics.Closure.NSTriadKNExternalWaleffeFullSwapAntisymmetryRound119Exact as R119
 import DASHI.Physics.Closure.NSTriadKNCriticalSlotQuadraticKernelRound167Exact as R167
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityDampedProductTangentRound231Exact as R231
 import DASHI.Physics.Closure.NSTriadKNLerayComplexScalarLinearityRound73Exact as R73
@@ -113,7 +114,7 @@ module SelfHelicitySplit632
       reorderSecond =
         cong
           (C3.complex3Add (C3.complex3Add pp pm))
-          (Algebra.complex3AddCommutative mp mm)
+          (R119.complex3AddCommutative mp mm)
 
       regroup :
         C3.complex3Add
