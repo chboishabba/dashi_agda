@@ -1,7 +1,7 @@
 module DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact where
 
 ------------------------------------------------------------------------
--- TYPE-DISTINCT JOINT BUNDLE -> PRE-EXISTING SIGNED JOINT FIBRE
+-- TYPE-DISTINCT CANONICAL JOINT SAMPLE -> PRE-EXISTING SIGNED JOINT FIBRE
 --
 -- New authoritative architecture:
 --   JInvariant369JointPhaseLevelBundleExact
@@ -9,15 +9,11 @@ module DASHI.Moonshine.JInvariant369JointBundleLegacyFibreBridgeExact where
 -- Older finite signed fibre:
 --   JInvariant369JointFibredObserverExact
 --
--- The old fibre remains useful for signed-SSP residual/non-descent machinery,
--- but it does not separately store phase-C3 and level-C3.  This bridge is
--- therefore intentionally forgetful in one direction only:
---
---   (phase6, phaseC3, level27, level9, level3) + signed
---          -> (phase6, level27, signed)
---
--- The derived level-9/level-3 coordinates are proved to agree.  No theorem
--- identifies phase-C3 with level-C3.
+-- The bridge is intentionally defined on the canonical sampleAt L z.
+-- An arbitrary JLevel27Sample record does not itself assert that its stored
+-- level-9/level-3 coordinates are the projections of its stored level-27
+-- coordinate. Restricting this bridge to sampleAt keeps those coherence
+-- equations theorem-backed rather than postulated.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -32,48 +28,75 @@ import DASHI.Moonshine.JInvariant369JointPhaseLevelBundleExact as Joint
 import DASHI.Moonshine.JInvariant369JointFibredObserverExact as Legacy
 
 ------------------------------------------------------------------------
--- 1. Forgetful finite-fibre bridge.
+-- 1. Forgetful finite-fibre bridge from the canonical sample.
 ------------------------------------------------------------------------
 
-toLegacyFiniteFibre :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R} →
-  Joint.JLevel27Sample R L →
+toLegacyFiniteFibreAt :
+  ∀ {R} →
+  (L : Tower.CanonicalLevel27Lift R) →
+  Klein.Point (Render.klein R) →
   Signed.SignedMultiplicity →
   Legacy.Joint369FiniteFibre
-toLegacyFiniteFibre sample signed =
+toLegacyFiniteFibreAt L z signed =
   Legacy.joint369FiniteFibre
-    (Joint.phase6State sample)
-    (Joint.levelResidue27 (Joint.level27State sample))
+    (Joint.phase6State (Joint.sampleAt L z))
+    (Joint.levelResidue27
+      (Joint.level27State (Joint.sampleAt L z)))
     signed
 
-legacyLevel9Agrees :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R}
-    (sample : Joint.JLevel27Sample R L)
+phase6PreservedAt :
+  ∀ {R}
+    (L : Tower.CanonicalLevel27Lift R)
+    (z : Klein.Point (Render.klein R))
     (signed : Signed.SignedMultiplicity) →
-  Legacy.jointLevel9 (toLegacyFiniteFibre sample signed)
+  Legacy.phase6Coordinate (toLegacyFiniteFibreAt L z signed)
   ≡
-  Joint.levelResidue9 (Joint.level9State sample)
-legacyLevel9Agrees sample signed =
-  sym (Joint.level27DeterminesLevel9
-    (Joint.point sample))
+  Joint.phase6State (Joint.sampleAt L z)
+phase6PreservedAt L z signed = refl
 
-legacyLevel3Agrees :
-  ∀ {R} {L : Tower.CanonicalLevel27Lift R}
-    (sample : Joint.JLevel27Sample R L)
+level27PreservedAt :
+  ∀ {R}
+    (L : Tower.CanonicalLevel27Lift R)
+    (z : Klein.Point (Render.klein R))
     (signed : Signed.SignedMultiplicity) →
-  Legacy.jointLevel3 (toLegacyFiniteFibre sample signed)
+  Legacy.level27Coordinate (toLegacyFiniteFibreAt L z signed)
   ≡
-  Joint.levelResidue3 (Joint.level3State sample)
-legacyLevel3Agrees sample signed =
+  Joint.levelResidue27
+    (Joint.level27State (Joint.sampleAt L z))
+level27PreservedAt L z signed = refl
+
+legacyLevel9AgreesAt :
+  ∀ {R}
+    (L : Tower.CanonicalLevel27Lift R)
+    (z : Klein.Point (Render.klein R))
+    (signed : Signed.SignedMultiplicity) →
+  Legacy.jointLevel9 (toLegacyFiniteFibreAt L z signed)
+  ≡
+  Joint.levelResidue9
+    (Joint.level9State (Joint.sampleAt L z))
+legacyLevel9AgreesAt L z signed =
+  sym (Joint.level27DeterminesLevel9 z)
+
+legacyLevel3AgreesAt :
+  ∀ {R}
+    (L : Tower.CanonicalLevel27Lift R)
+    (z : Klein.Point (Render.klein R))
+    (signed : Signed.SignedMultiplicity) →
+  Legacy.jointLevel3 (toLegacyFiniteFibreAt L z signed)
+  ≡
+  Joint.levelResidue3
+    (Joint.level3State (Joint.sampleAt L z))
+legacyLevel3AgreesAt L z signed =
   begin
-    Legacy.jointLevel3 (toLegacyFiniteFibre sample signed)
-      ≡⟨ cong
-          Level.level9To3CoveringProjection
-          (legacyLevel9Agrees sample signed) ⟩
+    Legacy.jointLevel3 (toLegacyFiniteFibreAt L z signed)
+      ≡⟨ cong Level.level9To3CoveringProjection
+          (legacyLevel9AgreesAt L z signed) ⟩
     Level.level9To3CoveringProjection
-      (Joint.levelResidue9 (Joint.level9State sample))
-      ≡⟨ sym (Joint.level9DeterminesLevel3 (Joint.point sample)) ⟩
-    Joint.levelResidue3 (Joint.level3State sample)
+      (Joint.levelResidue9
+        (Joint.level9State (Joint.sampleAt L z)))
+      ≡⟨ sym (Joint.level9DeterminesLevel3 z) ⟩
+    Joint.levelResidue3
+      (Joint.level3State (Joint.sampleAt L z))
   ∎
 
 ------------------------------------------------------------------------
@@ -83,6 +106,7 @@ legacyLevel3Agrees sample signed =
 record LegacyBridgeBoundary : Set where
   constructor legacy-bridge-boundary
   field
+    bridgeRestrictedToCanonicalSamples : Bool
     phase6Preserved : Bool
     level27Preserved : Bool
     signedSSPAttached : Bool
@@ -98,5 +122,5 @@ open LegacyBridgeBoundary public
 canonicalLegacyBridgeBoundary : LegacyBridgeBoundary
 canonicalLegacyBridgeBoundary =
   legacy-bridge-boundary
-    true true true true true
+    true true true true true true
     false false false
