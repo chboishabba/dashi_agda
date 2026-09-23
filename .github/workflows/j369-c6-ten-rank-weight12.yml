@@ -10,6 +10,7 @@ on:
       - 'DASHI/Moonshine/JInvariant369CanonicalInterpretationExact.agda'
       - 'DASHI/Moonshine/MonsterAtlas6561X8RecognitionObligationExact.agda'
       - 'DASHI/Moonshine/JInvariant369NeutralCuspRelationCrossPollinationExact.agda'
+      - 'DASHI/Moonshine/JInvariant369SSP15SignedFRACTRANBranchExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalJointReflectionMinimalExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartActionSeparationExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartMobiusMatrixBridgeExact.agda'
