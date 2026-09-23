@@ -223,7 +223,10 @@ record EisensteinAnalyticModel : Set₁ where
 open EisensteinAnalyticModel public
 
 EisensteinSeries :
-  EisensteinAnalyticModel → Nat → Parameter → Scalar
+  (M : EisensteinAnalyticModel) →
+  Nat →
+  Parameter M →
+  Scalar M
 EisensteinSeries M weight τ =
   eisensteinSum M (λ p → summand M weight p τ)
 
