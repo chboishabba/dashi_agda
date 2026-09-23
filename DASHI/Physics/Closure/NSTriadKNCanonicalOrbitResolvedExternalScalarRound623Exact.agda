@@ -22,6 +22,8 @@ module DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedExternalScalarRound6
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
+open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -61,7 +63,9 @@ module CanonicalExternalScalar623
   module Canonical =
     R622.CanonicalExternalNested W S L H system velocityTransverse
 
-  fibre : Z3.FourierMode → _
+  fibre :
+    Z3.FourierMode →
+    List Physical.PhysicalTriadIncidence
   fibre = Canonical.fibre
 
   externalFold :
@@ -79,14 +83,14 @@ module CanonicalExternalScalar623
   externalScalar :
     Z3.FourierMode →
     C3.Complex3 F →
-    Rational.ℚ
+    ℚ
   externalScalar output test =
     R179.realHermitianCross (externalFold output) test
 
   canonicalExternalScalar :
     Z3.FourierMode →
     C3.Complex3 F →
-    Rational.ℚ
+    ℚ
   canonicalExternalScalar output test =
     R179.realHermitianCross (canonicalExternalFold output) test
 
