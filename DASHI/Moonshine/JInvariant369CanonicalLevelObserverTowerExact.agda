@@ -46,6 +46,7 @@ import DASHI.Moonshine.JInvariantKleinConstructionGluingBidiExact as Klein
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as Level
 import DASHI.Foundations.TriadicFiniteQuotient as Q
 import DASHI.Algebra.TriadicFiniteArithmetic as Arithmetic
+import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Balanced
 
 ------------------------------------------------------------------------
 -- 1. The canonical 6 -> 3 quotient is orientation-forgetting.
@@ -87,9 +88,9 @@ translateLevel3ThreeTimes :
     (translateLevel3Residue
       (translateLevel3Residue x))
   ≡ x
-translateLevel3ThreeTimes (DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope.neg ∷ []) = refl
-translateLevel3ThreeTimes (DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope.zer ∷ []) = refl
-translateLevel3ThreeTimes (DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope.pos ∷ []) = refl
+translateLevel3ThreeTimes (Balanced.neg ∷ []) = refl
+translateLevel3ThreeTimes (Balanced.zer ∷ []) = refl
+translateLevel3ThreeTimes (Balanced.pos ∷ []) = refl
 
 ------------------------------------------------------------------------
 -- 3. Orientation fibres of C6 -> C3.
