@@ -204,16 +204,12 @@ module FixedOutput
     ≡ A3Kernel.four * selfKernelWork + fluxTangentFull
   fourForcingFullIsFourSelfKernelPlusFlux =
     trans
-      (cong (_* forcingFull) four567IsA3Four |>sym)
+      (cong (_* forcingFull) (sym four567IsA3Four))
       (trans
         C.fourForcingFullIsGramPlusFlux
         (cong
           (_+ fluxTangentFull)
           fullGramIsFourSelfKernelWork))
-    where
-    infix 0 _|>sym
-    _|>sym : ∀ {a b : ℚ} → a ≡ b → b ≡ a
-    _|>sym = sym
 
   a3CenteredKernelNormalForm :
     A3Kernel.four * signedA3
