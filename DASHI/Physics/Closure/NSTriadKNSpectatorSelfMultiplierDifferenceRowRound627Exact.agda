@@ -20,6 +20,7 @@ open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -31,6 +32,7 @@ import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedSelfCanonicalExternalRowRound623Exact as R623
 import DASHI.Physics.Closure.NSTriadKNR573SelfMultiplierDifferenceFoldRound626Exact as R626
 
+F : C3.RealField _
 F = Rational.rationalRealField
 
 module SpectatorSelfMultiplierRow
