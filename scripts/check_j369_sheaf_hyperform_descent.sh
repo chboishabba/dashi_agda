@@ -5,17 +5,20 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 OWNER=DASHI/Moonshine/JInvariantSheafHyperformAdmissibleDescentExact.agda
+STAGE12=DASHI/Foundations/StageTwelveGrothendieckRelationHyperformExact.agda
 ROLLUP=DASHI/JInvariantBase369CrossPollinationEverything.agda
 
-for file in "$OWNER" "$ROLLUP"; do
+for file in "$OWNER" "$STAGE12" "$ROLLUP"; do
   [[ -f "$file" ]] || { echo "missing required source: $file" >&2; exit 1; }
 done
 
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
-if grep -nE "$FORBIDDEN_PATTERN" "$OWNER"; then
-  echo "forbidden hole, postulate, placeholder, or unsafe option in $OWNER" >&2
-  exit 1
-fi
+for file in "$OWNER" "$STAGE12"; do
+  if grep -nE "$FORBIDDEN_PATTERN" "$file"; then
+    echo "forbidden hole, postulate, placeholder, or unsafe option in $file" >&2
+    exit 1
+  fi
+done
 
 grep -q 'PresheafInterface' "$OWNER"
 grep -q 'CompatibleOverlap' "$OWNER"
@@ -38,6 +41,10 @@ grep -q 'oeisAuditBoundary' "$OWNER"
 grep -q 'deltaWeightTwelveBoundary' "$OWNER"
 grep -q 'jWeightZeroBoundary' "$OWNER"
 grep -q 'leanMirrorReceipt' "$OWNER"
+grep -q 'stageRelationCellCountIs144' "$STAGE12"
+grep -q 'maximalOnlyStageTopology' "$STAGE12"
+grep -q 'canonicalStageTwelveSiteSheafReceipt' "$STAGE12"
+grep -q 'analyticModularSiteIdentified = false' "$STAGE12"
 grep -q 'JInvariantSheafHyperformAdmissibleDescentExact' "$ROLLUP"
 
 echo "J/369 sheaf-hyperform descent static guards passed."
