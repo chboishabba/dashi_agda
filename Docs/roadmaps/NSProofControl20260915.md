@@ -2,7 +2,7 @@
 
 Status: authoritative live routing/control document; non-promoting.
 
-Current-state date: `2026-09-16 AEST`.
+Current-state date: `2026-09-23 AEST`.
 
 This is the default answer source for current NS proof-search state. Historical
 round/PR detail remains append-only in `CrossLaneProofArchaeologyLedgerExact`.
@@ -417,8 +417,7 @@ estimate. Concrete zero-derivative and FTC inhabitants remain explicitly open.
 The endpoint-aware A3 audit has now separated two carriers that earlier
 bookkeeping risked conflating.
 
-The literal R406/R557 route is resolvent weighted.  The exact live temporal
-identity is now composed theorem-by-theorem in
+The literal R406/R557 route is resolvent weighted.  The exact live temporal identity, **given the scalar FTC authority already isolated by R564/R565**, is now composed theorem-by-theorem in
 `NSTriadKNR406ExactEndpointNormalFormExact`:
 
 ```text
