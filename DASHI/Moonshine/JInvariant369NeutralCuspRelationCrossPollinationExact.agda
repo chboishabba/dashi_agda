@@ -40,8 +40,52 @@ import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Completion
 import DASHI.Biology.SSP15ComplementPhaseProjectorExact as SSP15
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact as Phase42
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Reduction
 import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact as Cross
 import DASHI.Moonshine.DeltaConstructedComplexReflectionCutsetExact as DeltaCut
+
+------------------------------------------------------------------------
+-- 0. The five modes are the exact inner-inversion orbit quotient of T^2.
+------------------------------------------------------------------------
+
+nineSquareInversionOrbitReductionBoundary :
+  Reduction.Ternary27ReductionBoundary
+nineSquareInversionOrbitReductionBoundary =
+  Reduction.currentTernary27ReductionBoundary
+
+innerNineToFiveOrbitQuotientIsPaid :
+  Reduction.innerNineToFiveOrbitQuotientPaid
+    nineSquareInversionOrbitReductionBoundary
+  ≡ true
+innerNineToFiveOrbitQuotientIsPaid = refl
+
+phasePreservingThreeTimesFiveReductionIsPaid :
+  Reduction.phasePreservingThreeTimesFiveReductionPaid
+    nineSquareInversionOrbitReductionBoundary
+  ≡ true
+phasePreservingThreeTimesFiveReductionIsPaid = refl
+
+orbitModeRoundTrip :
+  (orbit : DASHI.Biology.TriadicKernelLiftQuotientExact.NineOrbit) →
+  Reduction.complementModeToOrbit (Reduction.orbitToComplementMode orbit)
+  ≡ orbit
+orbitModeRoundTrip =
+  Reduction.orbitModeRoundTrip
+
+modeOrbitRoundTrip :
+  (mode : Completion.ComplementMode5) →
+  Reduction.orbitToComplementMode (Reduction.complementModeToOrbit mode)
+  ≡ mode
+modeOrbitRoundTrip =
+  Reduction.modeOrbitRoundTrip
+
+nineIsOnePlusFourPairs :
+  9 ≡ 1 + 4 * 2
+nineIsOnePlusFourPairs = refl
+
+fiveOrbitCountIsOnePlusFour :
+  5 ≡ 1 + 4
+fiveOrbitCountIsOnePlusFour = refl
 
 ------------------------------------------------------------------------
 -- 1. Exact 15 = neutral-5 + oriented-10 carrier decomposition.
@@ -384,6 +428,8 @@ relationDiagonalDoesNotEqualFiniteZeroPhase ()
 record NeutralCuspRelationBoundary : Set where
   constructor neutral-cusp-relation-boundary
   field
+    innerNineToFiveOrbitQuotientPaid : Bool
+    phasePreservingTwentySevenToThreeTimesFivePaid : Bool
     phase15SplitsAsNeutral5PlusOriented10 : Bool
     fullNeutralSheetRetained : Bool
     fullNonNeutralOrientedSheetRetained : Bool
@@ -417,6 +463,7 @@ canonicalNeutralCuspRelationBoundary :
   NeutralCuspRelationBoundary
 canonicalNeutralCuspRelationBoundary =
   neutral-cusp-relation-boundary
+    true true
     true true true true true
     true true true true false
     true true true true true
