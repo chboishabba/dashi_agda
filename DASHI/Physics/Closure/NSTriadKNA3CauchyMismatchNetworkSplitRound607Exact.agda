@@ -27,7 +27,7 @@ module DASHI.Physics.Closure.NSTriadKNA3CauchyMismatchNetworkSplitRound607Exact 
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; Positive; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -58,8 +58,7 @@ module FixedOutput
       (Field30.physicalInverseSquare physicalSystem)
       S L H
       (Audit.velocityAt (Field30.finiteSystem physicalSystem)))
-    (viscosityPositive : Data.Rational.Base.Positive
-      (Field30.viscosity physicalSystem))
+    (viscosityPositive : Positive (Field30.viscosity physicalSystem))
     (output : Z3.FourierMode)
     (outputNonzero : Z3.NonZeroMode output) where
 
