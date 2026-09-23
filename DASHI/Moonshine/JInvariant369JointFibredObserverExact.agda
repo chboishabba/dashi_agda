@@ -251,13 +251,18 @@ level27Consumer :
 level27Consumer state =
   level27Coordinate (fibre state)
 
+separationEmptyElim :
+  Separation.Empty → ⊥
+separationEmptyElim ()
+
 translatedLevelDiffers :
   (level : Level.level27CuspFibre) →
   Level.translateTriadic Q.three level
   ≡ level →
   ⊥
-translatedLevelDiffers =
-  Separation.level27TranslationNoFixedPoint
+translatedLevelDiffers level fixed =
+  separationEmptyElim
+    (Separation.level27TranslationNoFixedPoint level fixed)
 
 jointBaseLevelNonDescent :
   ∀ {R}
