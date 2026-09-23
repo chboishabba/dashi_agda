@@ -38,6 +38,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; s
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
+import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -77,7 +78,7 @@ module LiveCanonicalSplit
 
     selfRows :
       Z3.FourierMode →
-      List _ → ℚ
+      List Physical.PhysicalTriadIncidence → ℚ
     selfRows output [] = 0ℚ
     selfRows output (beta ∷ rest) =
       Rows.selfNestedForcingRow output beta
@@ -85,7 +86,7 @@ module LiveCanonicalSplit
 
     canonicalExternalRows :
       Z3.FourierMode →
-      List _ → ℚ
+      List Physical.PhysicalTriadIncidence → ℚ
     canonicalExternalRows output [] = 0ℚ
     canonicalExternalRows output (beta ∷ rest) =
       Rows.canonicalExternalNestedForcingRow output beta
@@ -93,7 +94,7 @@ module LiveCanonicalSplit
 
     allRowsSplit :
       (output : Z3.FourierMode) →
-      (betas : List _) →
+      (betas : List Physical.PhysicalTriadIncidence) →
       B.Weld.allNestedForcingRows output betas
       ≡ selfRows output betas + canonicalExternalRows output betas
     allRowsSplit output [] = refl
