@@ -78,6 +78,8 @@ import DASHI.Physics.Closure.NSTriadKNSelfEnergyCancellationWeightNoGoRound629Ex
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedExternalScalarRound623Exact as R623Scalar
 import DASHI.Physics.Closure.NSTriadKNCanonicalOrbitResolvedSpectatorRowRound624Exact as R624Row
 import DASHI.Physics.Closure.NSTriadKNExternalProductRuleCommutatorRound625Exact as R625Ext
+import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorRound629Exact as R629Ext
+import DASHI.Physics.Closure.NSTriadKNExternalWeightedSlotCommutatorTotalRound630Exact as R630
 import DASHI.Physics.Closure.NSTriadKNExternalForcingTransverseRound626Exact as ExtTrans626
 import DASHI.Physics.Closure.NSTriadKNA3ToFactoredFullSameObjectCompilerExact as A3Factored
 import DASHI.Physics.Closure.NSTriadKNA3WeightedForcingSameObjectFrontierExact as A3Weighted
@@ -1158,6 +1160,23 @@ round490ExternalCommutatorAnalyticPaymentClosed : Bool
 round490ExternalCommutatorAnalyticPaymentClosed =
   R625Ext.round625ExternalCommutatorAnalyticPaymentClosed
 
+
+round490ExternalWeightedSlotCommutatorSameObjectClosed : Bool
+round490ExternalWeightedSlotCommutatorSameObjectClosed =
+  R629Ext.round629ExternalWeightedSlotCommutatorSameObjectClosed
+
+round490ExternalWeightedSlotCommutatorTotal : Bool
+round490ExternalWeightedSlotCommutatorTotal =
+  R630.round630ExternalExhaustiveCommutatorTotal
+
+round490ExternalZeroPBranchClosed : Bool
+round490ExternalZeroPBranchClosed =
+  R630.round630ZeroPBranchClosed
+
+round490ExternalR573NestedCommutatorTotal : Bool
+round490ExternalR573NestedCommutatorTotal =
+  R630.round630R573ExternalNestedCommutatorTotal
+
 round490ExternalForcingTransversalityClosed : Bool
 round490ExternalForcingTransversalityClosed =
   ExtTrans626.round626ExternalPForcingTransverseClosed
@@ -1413,6 +1432,27 @@ round490ExternalCommutatorAnalyticPaymentClosedIsFalse :
   round490ExternalCommutatorAnalyticPaymentClosed ≡ false
 round490ExternalCommutatorAnalyticPaymentClosedIsFalse =
   R625Ext.round625ExternalCommutatorAnalyticPaymentClosedIsFalse
+
+
+round490ExternalWeightedSlotCommutatorSameObjectClosedIsTrue :
+  round490ExternalWeightedSlotCommutatorSameObjectClosed ≡ true
+round490ExternalWeightedSlotCommutatorSameObjectClosedIsTrue =
+  R629Ext.round629ExternalWeightedSlotCommutatorSameObjectClosedIsTrue
+
+round490ExternalWeightedSlotCommutatorTotalIsTrue :
+  round490ExternalWeightedSlotCommutatorTotal ≡ true
+round490ExternalWeightedSlotCommutatorTotalIsTrue =
+  R630.round630ExternalExhaustiveCommutatorTotalIsTrue
+
+round490ExternalZeroPBranchClosedIsTrue :
+  round490ExternalZeroPBranchClosed ≡ true
+round490ExternalZeroPBranchClosedIsTrue =
+  R630.round630ZeroPBranchClosedIsTrue
+
+round490ExternalR573NestedCommutatorTotalIsTrue :
+  round490ExternalR573NestedCommutatorTotal ≡ true
+round490ExternalR573NestedCommutatorTotalIsTrue =
+  R630.round630R573ExternalNestedCommutatorTotalIsTrue
 
 round490ExternalForcingTransversalityClosedIsTrue :
   round490ExternalForcingTransversalityClosed ≡ true
