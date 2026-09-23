@@ -32,6 +32,8 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNOrderedEuclideanL2Carrier as L2
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNConcreteReconstructedPhysicalSelectorRound29Exact as State
+import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical34
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
 import DASHI.Physics.Closure.NSTriadKNLiteralCutoffModeCarrierExact as ModeCarrier
@@ -47,6 +49,15 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalModeListedCoherenceRound643Exact 
 
 F : C3.RealField _
 F = Rational.rationalRealField
+
+canonicalR34ModeListedFromMembership :
+  ∀ {r} {F' : C3.RealField r} {E : C3.IntegerEmbedding F'}
+    {state : State.ReconstructedPhysicalState F' E}
+    (datum : Canonical34.CutoffSameObjectDatum F' E state)
+    (mode : Z3.FourierMode) →
+  mode Cube.∈ Audit.modes (Canonical34.canonicalAuditFiniteSystem datum) →
+  Audit.modeListed (Canonical34.canonicalAuditFiniteSystem datum) mode
+canonicalR34ModeListedFromMembership datum mode member = member
 
 weightedInitialDatumMass :
   (Z3.FourierMode → C3.Complex3 F) →
@@ -214,6 +225,12 @@ module InitialCritical
 round640CommonInitialDatumSameObjectCompilerClosed : Bool
 round640CommonInitialDatumSameObjectCompilerClosed = true
 
+round640CanonicalR34ModeListCoherenceClosed : Bool
+round640CanonicalR34ModeListCoherenceClosed = true
+
+round640LiveTrajectoryToCanonicalR34AttachmentStillRequired : Bool
+round640LiveTrajectoryToCanonicalR34AttachmentStillRequired = true
+
 round640ModeListToModeListedCoherenceStillRequired : Bool
 round640ModeListToModeListedCoherenceStillRequired = true
 
@@ -239,6 +256,14 @@ round640ClayPromotion = false
 round640CommonInitialDatumSameObjectCompilerClosedIsTrue :
   round640CommonInitialDatumSameObjectCompilerClosed ≡ true
 round640CommonInitialDatumSameObjectCompilerClosedIsTrue = refl
+
+round640CanonicalR34ModeListCoherenceClosedIsTrue :
+  round640CanonicalR34ModeListCoherenceClosed ≡ true
+round640CanonicalR34ModeListCoherenceClosedIsTrue = refl
+
+round640LiveTrajectoryToCanonicalR34AttachmentStillRequiredIsTrue :
+  round640LiveTrajectoryToCanonicalR34AttachmentStillRequired ≡ true
+round640LiveTrajectoryToCanonicalR34AttachmentStillRequiredIsTrue = refl
 
 round640ModeListToModeListedCoherenceStillRequiredIsTrue :
   round640ModeListToModeListedCoherenceStillRequired ≡ true
