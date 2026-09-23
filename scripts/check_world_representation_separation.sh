@@ -37,7 +37,6 @@ require "wrongTypeBoundary" "$BRIDGE"
 require "gravityNonFactorability" "$BRIDGE"
 require "canonicalWorldTheoryHyperfabricBoundary" "$BRIDGE"
 
-echo "world/theory separation cross-pollination static contract: OK"
 
 require "sharedRegimeAgreement" "$UNDER"
 require "discriminatingRegimeSeparates" "$UNDER"
@@ -54,3 +53,5 @@ require "lawDoesNotDefinitionallyEqualInitialCondition" "$LAW"
 require "stateChangeDoesNotRequireLawChange" "$LAW"
 require "canonicalTheoryRecoveryBoundary" "$LAW"
 require "canonicalGravityPreTheoryBoundary" "$LAW"
+
+echo "world/theory separation cross-pollination static contract: OK"
