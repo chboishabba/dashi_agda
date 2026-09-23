@@ -63,6 +63,8 @@ import DASHI.Moonshine.JInvariant369ReflectionEquivarianceExact as Equivariance
 import DASHI.Moonshine.JInvariant369ModularLevelCuspObserversExact as ModularLevel
 import DASHI.Moonshine.JInvariant369CanonicalLevelObserverTowerExact as CanonicalLevel
 import DASHI.Moonshine.JInvariant369PrincipalLevelTowerExact as PrincipalLevel
+import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as PhaseLevelSeparation
+import DASHI.Moonshine.JInvariant369CanonicalInterpretationExact as CanonicalInterpretation
 import DASHI.Interop.LeanEta24PinnedReflectionParityExact as LeanEtaReflection
 import DASHI.Interop.LeanEta24SixfoldPhaseParityExact as LeanEtaPhase
 import DASHI.Interop.LeanDeltaFinalMinCutParityExact as LeanFinalMinCut
@@ -211,6 +213,10 @@ record AnalyticReflectionEvidence : Set where
     oneLevel27LiftDeterminesCompatible9And3Observers : Bool
     canonicalLevelTranslationEquivarianceDerived : Bool
     canonicalLevelReflectionEquivarianceDerived : Bool
+    phaseOnlyC3SeparatedFromNontrivialLevel3 : Bool
+    phaseOnlyC9SeparatedFromNontrivialLevel9 : Bool
+    phaseOnlyC27SeparatedFromNontrivialLevel27 : Bool
+    fibredPhaseAndLevelInterpretationRequired : Bool
     concreteComplexConjugationInstantiated : Bool
     concretePhaseQuotientInstantiated : Bool
     rendererReflectionIntertwinerInstantiated : Bool
@@ -235,6 +241,7 @@ currentAnalyticReflectionEvidence =
     true true true true
     true true true
     true true true true true
+    true true true true
     false false false
     true true true true true true
     true true true
@@ -262,6 +269,9 @@ record JMDArchimedesDelta369Boundary : Set where
     principalLevelInclusions369Proved : Bool
     level27LiftCanonicallyDetermines9And3 : Bool
     canonicalTranslationAndReflectionTowerDerived : Bool
+    phaseOnlyLevelIdentificationRuledOutAt3_9_27 : Bool
+    canonical369InterpretationIsFibred : Bool
+    directPhaseC3ToLevel9RefinementClaimed : Bool
     fullModularDeckGroupCollapsedToCyclic : Bool
     concreteComplexAnalyticInstantiationClosed : Bool
     pinnedLeanEta24PhaseTheoremClosed : Bool
@@ -280,7 +290,7 @@ canonicalJMDArchimedesDelta369Boundary : JMDArchimedesDelta369Boundary
 canonicalJMDArchimedesDelta369Boundary =
   jmd-archimedes-delta369-boundary
     true true true true true true
-    true true true true true true true true false false
+    true true true true true true true true true true false false false
     true true false
     true false false
     false false false
@@ -305,8 +315,17 @@ canonicalJMDArchimedesDelta369Boundary =
 -- compatible level-9 and level-3 same-point observers, and translation plus
 -- reflection equivariance descend through the tower. PrincipalLevel separately
 -- proves Gamma(27) subset Gamma(9) subset Gamma(3) at the matrix-congruence
--- level. The full analytic modular curves X(N) and their full deck groups are
--- still not constructed or collapsed to cyclic groups.
+-- level.
+--
+-- PhaseLevelSeparation proves the crucial anti-overclaim theorem: because jPhase
+-- is invariant under any j-preserving modular action while the cusp T-actions
+-- at levels 3, 9 and 27 are fixed-point-free, no globally phase-only C3/C9/C27
+-- renderer observer can be the corresponding nontrivial principal-level cusp
+-- coordinate. CanonicalInterpretation therefore replaces the naive single-chain
+-- reading by a fibred one: reflection gives a phase C6->C3 lane, while a genuine
+-- level lift gives the independent compatible C27->C9->C3 cusp-fibre lane.
+-- The full analytic modular curves X(N) and their full deck groups are still not
+-- constructed or collapsed to cyclic groups.
 --
 -- The remaining source-parity debt is therefore narrower than the original
 -- image suggested.  On the pinned Lean/Mathlib v4.28 target, eta^24 now owns
