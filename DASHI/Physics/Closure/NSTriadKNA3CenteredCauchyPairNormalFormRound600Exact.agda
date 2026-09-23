@@ -160,6 +160,156 @@ fullPairRateGramIsTwoRight rate gram symmetric items =
         (solve
           (R543.fullSquareSum (rightRateGram rate gram) items ∷ []))))
 
+scaledPair :
+  ∀ {A : Set} →
+  ℚ → (A → A → ℚ) → A → A → ℚ
+scaledPair scalar pair a b = scalar * pair a b
+
+rowScale :
+  ∀ {A : Set}
+    (scalar : ℚ)
+    (pair : A → A → ℚ)
+    (a : A) (items : List A) →
+  R539.rowSum (scaledPair scalar pair) a items
+  ≡ scalar * R539.rowSum pair a items
+rowScale scalar pair a [] = solve []
+rowScale scalar pair a (b ∷ rest)
+  rewrite rowScale scalar pair a rest =
+  solve (scalar ∷ pair a b ∷ R539.rowSum pair a rest ∷ [])
+
+columnScale :
+  ∀ {A : Set}
+    (scalar : ℚ)
+    (pair : A → A → ℚ)
+    (items : List A) (b : A) →
+  R539.columnSum (scaledPair scalar pair) items b
+  ≡ scalar * R539.columnSum pair items b
+columnScale scalar pair [] b = solve []
+columnScale scalar pair (a ∷ rest) b
+  rewrite columnScale scalar pair rest b =
+  solve (scalar ∷ pair a b ∷ R539.columnSum pair rest b ∷ [])
+
+fullSquareScale :
+  ∀ {A : Set}
+    (scalar : ℚ)
+    (pair : A → A → ℚ)
+    (items : List A) →
+  R543.fullSquareSum (scaledPair scalar pair) items
+  ≡ scalar * R543.fullSquareSum pair items
+fullSquareScale scalar pair [] = solve []
+fullSquareScale scalar pair (a ∷ rest)
+  rewrite rowScale scalar pair a rest
+        | columnScale scalar pair rest a
+        | fullSquareScale scalar pair rest =
+  solve
+    ( scalar
+    ∷ pair a a
+    ∷ R539.rowSum pair a rest
+    ∷ R539.columnSum pair rest a
+    ∷ R543.fullSquareSum pair rest ∷ [])
+
+fullSquareLinearCombination :
+  ∀ {A : Set}
+    (leftScalar rightScalar : ℚ)
+    (left right : A → A → ℚ)
+    (items : List A) →
+  R543.fullSquareSum
+    (λ a b →
+      leftScalar * left a b + rightScalar * right a b)
+    items
+  ≡ leftScalar * R543.fullSquareSum left items
+      + rightScalar * R543.fullSquareSum right items
+fullSquareLinearCombination leftScalar rightScalar left right items =
+  trans
+    (GramTangent.fullSquareAdd
+      (scaledPair leftScalar left)
+      (scaledPair rightScalar right)
+      items)
+    (cong₂ _+_
+      (fullSquareScale leftScalar left items)
+      (fullSquareScale rightScalar right items))
+
+workPairLR :
+  (Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  Physical.PhysicalTriadIncidence →
+  Physical.PhysicalTriadIncidence → ℚ
+workPairLR left right a b =
+  Work.coherentWork (left a) (right b)
+
+rowWorkLRFactors :
+  (left right : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (a : Physical.PhysicalTriadIncidence) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  R539.rowSum (workPairLR left right) a items
+  ≡ Work.coherentWork (left a) (R224.foldVector right items)
+rowWorkLRFactors left right a [] =
+  sym (R597.workZeroRight (left a))
+rowWorkLRFactors left right a (b ∷ rest) =
+  trans
+    (cong
+      (Work.coherentWork (left a) (right b) +_)
+      (rowWorkLRFactors left right a rest))
+    (sym
+      (Work.workAddRight
+        (left a) (right b) (R224.foldVector right rest)))
+
+columnWorkLRFactors :
+  (left right : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  (b : Physical.PhysicalTriadIncidence) →
+  R539.columnSum (workPairLR left right) items b
+  ≡ Work.coherentWork (R224.foldVector left items) (right b)
+columnWorkLRFactors left right [] b =
+  sym (R597.workZeroLeft (right b))
+columnWorkLRFactors left right (a ∷ rest) b =
+  trans
+    (cong
+      (Work.coherentWork (left a) (right b) +_)
+      (columnWorkLRFactors left right rest b))
+    (sym
+      (R597.workAddLeft
+        (left a) (R224.foldVector left rest) (right b)))
+
+fullWorkLRFactors :
+  (left right : Physical.PhysicalTriadIncidence → C3.Complex3 F) →
+  (items : List Physical.PhysicalTriadIncidence) →
+  R543.fullSquareSum (workPairLR left right) items
+  ≡ Work.coherentWork
+      (R224.foldVector left items)
+      (R224.foldVector right items)
+fullWorkLRFactors left right [] =
+  sym (R597.workZeroLeft (C3.complex3Zero F))
+fullWorkLRFactors left right (a ∷ rest)
+  rewrite rowWorkLRFactors left right a rest
+        | columnWorkLRFactors left right rest a
+        | fullWorkLRFactors left right rest =
+  let
+    la = left a
+    ra = right a
+    L = R224.foldVector left rest
+    R = R224.foldVector right rest
+    expanded =
+      trans
+        (R597.workAddLeft la L (C3.complex3Add ra R))
+        (trans
+          (cong₂ _+_
+            (Work.workAddRight la ra R)
+            (Work.workAddRight L ra R))
+          (solve
+            ( Work.coherentWork la ra
+            ∷ Work.coherentWork la R
+            ∷ Work.coherentWork L ra
+            ∷ Work.coherentWork L R ∷ [])))
+  in
+  trans
+    (solve
+      ( Work.coherentWork la ra
+      ∷ Work.coherentWork la R
+      ∷ Work.coherentWork L ra
+      ∷ Work.coherentWork L R ∷ []))
+    (sym expanded)
+
 centeredStaticPair :
   ∀ {A : Set} →
   ℚ → ℚ →
@@ -261,6 +411,12 @@ module FixedOutput
     RateKernel.weightedIQuadraticKernel
       (RateKernel.physicalRateWeight A3.rho) S velocity
 
+  rateWeightMeaning :
+    (tau : Physical.PhysicalTriadIncidence) →
+    R294.weight (RateKernel.physicalRateWeight A3.rho) tau
+    ≡ C3.realEmbed F (rate tau)
+  rateWeightMeaning tau = refl
+
   weightedKernelCellIsRateScaledDouble :
     (tau : Physical.PhysicalTriadIncidence) →
     weightedKernelCell tau ≡ rateScaledDouble tau
@@ -268,10 +424,14 @@ module FixedOutput
     trans
       (RateKernel.weightedIQuadraticKernelIsWeightedDoubleMixed
         P (RateKernel.physicalRateWeight A3.rho) tau)
-      (sym
-        (RateKernel.weightedDoubleMixedIsScaledDoubleMixed
-          (RateKernel.physicalRateWeight A3.rho)
-          S velocity tau))
+      (trans
+        (sym
+          (RateKernel.weightedDoubleMixedIsScaledDoubleMixed
+            (RateKernel.physicalRateWeight A3.rho)
+            S velocity tau))
+        (cong
+          (λ scalar → C3.complex3Scale scalar (doubleCell tau))
+          (rateWeightMeaning tau)))
 
   weightedKernelFoldIsRateScaledDoubleFold :
     R224.foldVector weightedKernelCell fibre
@@ -294,30 +454,12 @@ module FixedOutput
     Physical.PhysicalTriadIncidence → ℚ
   rightRateGramPair = rightRateGram rate gram
 
-  rightRateGramRowFactors :
-    (alpha : Physical.PhysicalTriadIncidence) →
-    (items : List Physical.PhysicalTriadIncidence) →
-    R539.rowSum rightRateGramPair alpha items
-    ≡ Work.coherentWork
-        (doubleCell alpha)
-        (R224.foldVector rateScaledDouble items)
-  rightRateGramRowFactors alpha [] =
-    sym (R597.workZeroRight (doubleCell alpha))
-  rightRateGramRowFactors alpha (beta ∷ rest) =
-    trans
-      (cong
-        (rightRateGramPair alpha beta +_)
-        (rightRateGramRowFactors alpha rest))
-      (trans
-        (cong₂ _+_
-          (Work.workScaleRight
-            (rate beta) (doubleCell alpha) (doubleCell beta))
-          refl)
-        (sym
-          (Work.workAddRight
-            (doubleCell alpha)
-            (rateScaledDouble beta)
-            (R224.foldVector rateScaledDouble rest))))
+  rightRateGramIsMixedWorkPair :
+    (a b : Physical.PhysicalTriadIncidence) →
+    rightRateGramPair a b
+    ≡ workPairLR doubleCell rateScaledDouble a b
+  rightRateGramIsMixedWorkPair a b =
+    sym (Work.workScaleRight (rate b) (doubleCell a) (doubleCell b))
 
   rightRateGramFullFactors :
     R543.fullSquareSum rightRateGramPair fibre
@@ -325,88 +467,13 @@ module FixedOutput
         (R224.foldVector doubleCell fibre)
         (R224.foldVector rateScaledDouble fibre)
   rightRateGramFullFactors =
-    full fibre
-    where
-    full :
-      (items : List Physical.PhysicalTriadIncidence) →
-      R543.fullSquareSum rightRateGramPair items
-      ≡ Work.coherentWork
-          (R224.foldVector doubleCell items)
-          (R224.foldVector rateScaledDouble items)
-    full [] =
-      sym (R597.workZeroLeft (C3.complex3Zero F))
-    full (alpha ∷ rest)
-      rewrite rightRateGramRowFactors alpha rest
-            | full rest =
-      let
-        a = doubleCell alpha
-        ar = rateScaledDouble alpha
-        d = R224.foldVector doubleCell rest
-        dr = R224.foldVector rateScaledDouble rest
-
-        diag :
-          rightRateGramPair alpha alpha
-          ≡ Work.coherentWork a ar
-        diag =
-          Work.workScaleRight (rate alpha) a a
-
-        col :
-          R539.columnSum rightRateGramPair rest alpha
-          ≡ Work.coherentWork d ar
-        col =
-          trans
-            (column rest)
-            (R597.columnWorkFactors
-              (λ tau → doubleCell tau)
-              rest ar)
-          where
-          column :
-            (xs : List Physical.PhysicalTriadIncidence) →
-            R539.columnSum rightRateGramPair xs alpha
-            ≡ R539.columnSum
-                (λ x _ → Work.coherentWork (doubleCell x) ar)
-                xs alpha
-          column [] = refl
-          column (x ∷ xs) =
-            cong₂ _+_
-              (Work.workScaleRight
-                (rate alpha) (doubleCell x) (doubleCell alpha))
-              (column xs)
-
-        expanded :
-          Work.coherentWork
-            (C3.complex3Add a d)
-            (C3.complex3Add ar dr)
-          ≡ Work.coherentWork a ar
-            + Work.coherentWork a dr
-            + Work.coherentWork d ar
-            + Work.coherentWork d dr
-        expanded =
-          trans
-            (R597.workAddLeft a d (C3.complex3Add ar dr))
-            (trans
-              (cong₂ _+_
-                (Work.workAddRight a ar dr)
-                (Work.workAddRight d ar dr))
-              (solve
-                ( Work.coherentWork a ar
-                ∷ Work.coherentWork a dr
-                ∷ Work.coherentWork d ar
-                ∷ Work.coherentWork d dr ∷ [])))
-      in
-      trans
-        (cong₂ _+_ diag refl)
-        (trans
-          (cong
-            (Work.coherentWork a ar +_)
-            (cong₂ _+_ refl col))
-          (trans
-            (solve
-              ( Work.coherentWork a ar
-              ∷ Work.coherentWork a dr
-              ∷ Work.coherentWork d ar
-              ∷ Work.coherentWork d dr ∷ []))
-            (sym expanded)))
+    trans
+      (Cauchy.fullSquareCongruent
+        rightRateGramPair
+        (workPairLR doubleCell rateScaledDouble)
+        rightRateGramIsMixedWorkPair
+        fibre)
+      (fullWorkLRFactors doubleCell rateScaledDouble fibre)
 
   rightRateGramFullIsA3WeightedGram :
     R543.fullSquareSum rightRateGramPair fibre
@@ -457,7 +524,7 @@ module FixedOutput
           - A3.n * R543.fullSquareSum
               (pairRateGram rate gram) fibre
       centeredExpansion =
-        Cauchy.fullSquareLinearCombination
+        fullSquareLinearCombination
           (R539.two * A3.rateTotal)
           (0ℚ - A3.n)
           gram
