@@ -4,12 +4,14 @@ on:
   push:
     paths:
       - 'DASHI/Moonshine/JInvariantSheafHyperformAdmissibleDescentExact.agda'
+      - 'DASHI/Foundations/StageTwelveGrothendieckRelationHyperformExact.agda'
       - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
       - 'scripts/check_j369_sheaf_hyperform_descent.sh'
       - '.github/workflows/j369-sheaf-hyperform-descent.yml'
   pull_request:
     paths:
       - 'DASHI/Moonshine/JInvariantSheafHyperformAdmissibleDescentExact.agda'
+      - 'DASHI/Foundations/StageTwelveGrothendieckRelationHyperformExact.agda'
       - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
       - 'scripts/check_j369_sheaf_hyperform_descent.sh'
       - '.github/workflows/j369-sheaf-hyperform-descent.yml'
