@@ -14,7 +14,7 @@ activeSectorTotalizationStillOpen :
   M.activePhysicalSectorTotalizationStillRequired
     M.canonicalGRQFTPostMergeMaxCut
   ≡ true
-allSectorAggregationStillOpen = refl
+activeSectorTotalizationStillOpen = refl
 
 terminalStillFalse :
   M.terminalGRQFTPromoted M.canonicalGRQFTPostMergeMaxCut ≡ false

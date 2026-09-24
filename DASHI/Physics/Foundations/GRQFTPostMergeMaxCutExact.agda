@@ -103,4 +103,4 @@ postMergeTerminalPromotionStillFalse = refl
 
 frontierSummary : String
 frontierSummary =
-  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR analytic realization, two same-object attachments, explicit all-sector aggregation/common variation, Einstein/common-metric variation, physical absolute-DY replacement and external authority/empirical validation."
+  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR analytic realization, two same-object attachments, active physical-sector totalization/common variation, Einstein/common-metric variation, physical absolute-DY replacement and external authority/empirical validation."

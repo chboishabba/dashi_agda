@@ -451,3 +451,5 @@ import DASHI.Physics.Closure.ColliderChiSquareScopeMatrixValidation
 
 import DASHI.Physics.Closure.DrellYanRatioCancellationBoundaryExact
 import DASHI.Physics.Closure.ColliderLowChiSquareProvenanceLadderExact
+
+import DASHI.Physics.Closure.W4ProjectionOperatorAblationRequestExact
