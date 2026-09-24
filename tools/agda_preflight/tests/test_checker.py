@@ -451,15 +451,9 @@ def test_shape_preserves_telescope_before_equality_result(tmp_path):
         "EqualityTelescope",
         """module EqualityTelescope where
 
-postulate
-  State : Set → Set
-  ι : {X : Set} → State X → State X
-  apply : {X : Set} → State X → X → X
-
 ι²-id :
   ∀ {X} (s : State X) (x : X) →
   apply (ι (ι s)) x ≡ apply s x
-postulate ι²-id
 """,
     )
     summary = Checker(tmp_path).parse_summary(path)
@@ -478,8 +472,7 @@ def test_grouped_telescope_binders_count_individually(tmp_path):
         "GroupedTelescope",
         """module GroupedTelescope where
 
-postulate
-  f : (A B : Set) → A → B → Set
+f : (A B : Set) → A → B → Set
 """,
     )
     summary = Checker(tmp_path).parse_summary(path)
