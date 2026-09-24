@@ -1,0 +1,42 @@
+module DASHI.Governance.HansonOneNationPoliticalEcologyValidation where
+
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
+import DASHI.Governance.HansonOneNationPoliticalEcologyExact as E
+
+groomHistoryDoesNotCreateVoterEssence :
+  E.groomHistoryCreatesVoterEssence E.canonicalPoliticalEcologyBoundary ≡ false
+groomHistoryDoesNotCreateVoterEssence =
+  E.groomHistoryCreatesVoterEssenceIsFalse E.canonicalPoliticalEcologyBoundary
+
+mediaAmplificationDoesNotProveCausation :
+  E.mediaAmplificationProvesElectoralCausation E.canonicalPoliticalEcologyBoundary ≡ false
+mediaAmplificationDoesNotProveCausation =
+  E.mediaAmplificationProvesElectoralCausationIsFalse E.canonicalPoliticalEcologyBoundary
+
+memberControversyDoesNotDefineWholeParty :
+  E.controversialMemberDefinesWholeParty E.canonicalPoliticalEcologyBoundary ≡ false
+memberControversyDoesNotDefineWholeParty =
+  E.controversialMemberDefinesWholePartyIsFalse E.canonicalPoliticalEcologyBoundary
+
+declaredPolicyDoesNotEqualRealisedEffect :
+  E.declaredPoliciesEqualRealisedEffects E.canonicalPoliticalEcologyBoundary ≡ false
+declaredPolicyDoesNotEqualRealisedEffect =
+  E.declaredPoliciesEqualRealisedEffectsIsFalse E.canonicalPoliticalEcologyBoundary
+
+townsvilleIslandProposalIsNotDataCentreReceipt :
+  E.townsvilleIslandProposalIsDataCentreProposal E.canonicalPoliticalEcologyBoundary ≡ false
+townsvilleIslandProposalIsNotDataCentreReceipt =
+  E.townsvilleIslandProposalIsDataCentreProposalIsFalse E.canonicalPoliticalEcologyBoundary
+
+kathKimAnalogyDoesNotCreateEssence :
+  E.culturalAnalogyCreatesPersonEssence E.canonicalPoliticalEcologyBoundary ≡ false
+kathKimAnalogyDoesNotCreateEssence =
+  E.culturalAnalogyCreatesPersonEssenceIsFalse E.canonicalPoliticalEcologyBoundary
+
+singleAxisDoesNotExplainOneNation :
+  E.SingleAxisExplainsOneNation → ⊥
+singleAxisDoesNotExplainOneNation =
+  E.singleAxisExplanationRejected
