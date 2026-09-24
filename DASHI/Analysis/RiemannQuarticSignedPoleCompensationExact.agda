@@ -556,3 +556,68 @@ zetaFourthAngularBalanceIsTheWall :
   fourthHarmonicBalanceStatus zetaFourthAngularBalance
     ≡ openAnalyticObstruction
 zetaFourthAngularBalanceIsTheWall = refl
+
+
+------------------------------------------------------------------------
+-- SUPPORT AND COUNT-ONLY LIMIT OF ADVERSE FOURTH-HARMONIC MASS
+--
+-- The Lean companion proves that negative physical fourth phase implies:
+--
+--   a != 0,
+--   delta != 0,
+--   a^2 < 6*delta^2,
+--   delta^2 < 6*a^2.
+--
+-- Hence adverse angular mass is supported only on genuinely off-line,
+-- off-ordinate zeros whose horizontal and ordinate offsets are comparable.
+--
+-- Using |a|<=1/2 from the critical strip:
+--
+--   delta^2 < 3/2,
+--
+-- so every adverse zero lies in the fixed three-unit window around t.
+--
+-- The physical adverse phase also satisfies
+--
+--   -Re(a+i*delta)^4 <= 4*a^2*delta^2 < 3/2.
+--
+-- Therefore the existing local RvM count gives
+--
+--   AdverseMass_n <= (9/2)*A0*log(t+5).
+--
+-- This is a fail-fast result: count-only information controls absolute adverse
+-- mass but does not control the signed FavorableMass-AdverseMass balance.
+------------------------------------------------------------------------
+
+data FourthHarmonicSupportCoordinate : Set where
+  adversePhaseRequiresOffline : FourthHarmonicSupportCoordinate
+  adversePhaseRequiresOffOrdinate : FourthHarmonicSupportCoordinate
+  adversePhaseComparableScales : FourthHarmonicSupportCoordinate
+  adversePhaseFixedWindowLocalization : FourthHarmonicSupportCoordinate
+  adversePhasePointwiseEnvelope : FourthHarmonicSupportCoordinate
+  adverseMultiplicityBelowFixedWindowCount :
+    FourthHarmonicSupportCoordinate
+  adverseMassLogBound : FourthHarmonicSupportCoordinate
+  countOnlyForcesSignedAngularBalance : FourthHarmonicSupportCoordinate
+
+fourthHarmonicSupportStatus :
+  FourthHarmonicSupportCoordinate -> CompensationStatus
+fourthHarmonicSupportStatus adversePhaseRequiresOffline = theoremOwned
+fourthHarmonicSupportStatus adversePhaseRequiresOffOrdinate = theoremOwned
+fourthHarmonicSupportStatus adversePhaseComparableScales = theoremOwned
+fourthHarmonicSupportStatus adversePhaseFixedWindowLocalization = theoremOwned
+fourthHarmonicSupportStatus adversePhasePointwiseEnvelope = theoremOwned
+fourthHarmonicSupportStatus adverseMultiplicityBelowFixedWindowCount =
+  theoremOwned
+fourthHarmonicSupportStatus adverseMassLogBound = theoremOwned
+fourthHarmonicSupportStatus countOnlyForcesSignedAngularBalance =
+  openAnalyticObstruction
+
+adverseMassLogBoundIsPaid :
+  fourthHarmonicSupportStatus adverseMassLogBound ≡ theoremOwned
+adverseMassLogBoundIsPaid = refl
+
+countOnlyAngularBalanceRemainsOpen :
+  fourthHarmonicSupportStatus countOnlyForcesSignedAngularBalance
+    ≡ openAnalyticObstruction
+countOnlyAngularBalanceRemainsOpen = refl
