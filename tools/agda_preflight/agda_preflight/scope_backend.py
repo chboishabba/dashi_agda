@@ -161,6 +161,28 @@ class CommandScopeCheckBackend:
         self.attempted = 0
         self.succeeded = 0
         self.failed = 0
+        self.last_checked_modules: Tuple[str, ...] = ()
+        self.last_partial_validated_modules: Tuple[str, ...] = ()
+        self.partial_validated_modules: Set[str] = set()
+
+    @staticmethod
+    def _checked_modules(output: str) -> Tuple[str, ...]:
+        modules = []
+        seen = set()
+        for raw_line in output.splitlines():
+            line = raw_line.strip()
+            if not line.startswith("Checking "):
+                continue
+            if line.startswith("Checking:"):
+                continue
+            rest = line[len("Checking "):]
+            module = rest.split(" (", 1)[0].strip()
+            if not module or " " in module or "/" in module:
+                continue
+            if module not in seen:
+                seen.add(module)
+                modules.append(module)
+        return tuple(modules)
 
     def _argv(self, path: Path) -> List[str]:
         absolute = str(path.resolve())
@@ -170,6 +192,7 @@ class CommandScopeCheckBackend:
 
     def _scope_ok(self, path: Path) -> bool:
         self.attempted += 1
+        output = ""
         try:
             completed = subprocess.run(
                 self._argv(path),
@@ -179,9 +202,19 @@ class CommandScopeCheckBackend:
                 timeout=self.timeout,
                 check=False,
             )
+            output = (completed.stdout or "") + "\n" + (completed.stderr or "")
             ok = completed.returncode == 0
-        except subprocess.TimeoutExpired:
+        except subprocess.TimeoutExpired as exc:
+            stdout = exc.stdout.decode() if isinstance(exc.stdout, bytes) else (exc.stdout or "")
+            stderr = exc.stderr.decode() if isinstance(exc.stderr, bytes) else (exc.stderr or "")
+            output = stdout + "\n" + stderr
             ok = False
+
+        checked = self._checked_modules(output)
+        self.last_checked_modules = checked
+        self.last_partial_validated_modules = checked if ok else checked[:-1]
+        self.partial_validated_modules.update(self.last_partial_validated_modules)
+
         if ok:
             self.succeeded += 1
         else:
@@ -373,6 +406,7 @@ class AgdaAutoRefineBackend:
         self._scope_validated: Set[Path] = set()
         self._scope_failed: Set[Path] = set()
         self._scope_probe_roots: Set[Path] = set()
+        self._scope_candidates: Set[Path] = set()
 
     @staticmethod
     def _key(path: Path) -> Path:
@@ -410,6 +444,9 @@ class AgdaAutoRefineBackend:
             self._scope_validated.add(key)
             self._scope_failed.discard(key)
 
+    def set_scope_candidates(self, paths) -> None:
+        self._scope_candidates = {self._key(path) for path in paths}
+
     @staticmethod
     def _needs(diagnostics: List, level: EvidenceLevel) -> bool:
         return any(
@@ -434,6 +471,10 @@ class AgdaAutoRefineBackend:
                 "validated_modules": len(self._scope_validated),
                 "failed_frontier_modules": len(self._scope_failed),
                 "aggregate_probe_roots": len(self._scope_probe_roots),
+                "candidate_modules": len(self._scope_candidates),
+                "partial_progress_modules": len(
+                    getattr(self.scope, "partial_validated_modules", ())
+                ),
             },
         }
 

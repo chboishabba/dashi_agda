@@ -431,3 +431,42 @@ completeJetDirectG3LeanDonorHead =
 
 completeJetDirectG3TransportedIntoAgdaKernelHere : Bool
 completeJetDirectG3TransportedIntoAgdaKernelHere = false
+
+
+------------------------------------------------------------------------
+-- POST-SIXTH EIGHTH-ORDER SCALAR REMAINDER DONOR
+--
+-- Lean PR #22 certifies the degree-six Taylor remainder at eighth order:
+--
+--   |cos x  - (1 - x^2/2 + x^4/24 - x^6/720)| <= |x|^8 / 35840,
+--   |cosh x - (1 + x^2/2 + x^4/24 + x^6/720)| <= |x|^8 / 35840,
+--
+-- for |x| <= 1.  Mixed joint lifting and literal r^-10 transport remain open.
+------------------------------------------------------------------------
+
+data PostSixthEighthOrderCoordinate : Set where
+  scalarDegreeSixEighthRemainders : PostSixthEighthOrderCoordinate
+  mixedJointDegreeSixEighthMajorant : PostSixthEighthOrderCoordinate
+  literalFiniteBeyondSixthEighthBound : PostSixthEighthOrderCoordinate
+  strictAbsorbAfterEighthSharpening : PostSixthEighthOrderCoordinate
+
+postSixthEighthOrderStatus :
+  PostSixthEighthOrderCoordinate -> BidiMarkedFourthStatus
+postSixthEighthOrderStatus scalarDegreeSixEighthRemainders = theoremOwned
+postSixthEighthOrderStatus mixedJointDegreeSixEighthMajorant =
+  openAnalyticObstruction
+postSixthEighthOrderStatus literalFiniteBeyondSixthEighthBound =
+  openAnalyticObstruction
+postSixthEighthOrderStatus strictAbsorbAfterEighthSharpening =
+  openAnalyticObstruction
+
+scalarEighthOrderTaylorDonorPaid :
+  postSixthEighthOrderStatus scalarDegreeSixEighthRemainders ≡ theoremOwned
+scalarEighthOrderTaylorDonorPaid = refl
+
+postSixthEighthOrderLeanDonorHead : String
+postSixthEighthOrderLeanDonorHead =
+  "c24da874474457a7ac60f0f6df0a7ef1fc10807d"
+
+postSixthEighthOrderTransportedIntoAgdaKernelHere : Bool
+postSixthEighthOrderTransportedIntoAgdaKernelHere = false
