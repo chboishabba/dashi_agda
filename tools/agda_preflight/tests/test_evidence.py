@@ -13,6 +13,7 @@ from agda_preflight.evidence import (
 )
 from agda_preflight.evidence_cli import main as evidence_main
 from agda_preflight.triage_cli import main as triage_main
+from agda_preflight.pytest_plugin import CollectedModule, _prime_scope_closure
 from agda_preflight.scope_backend import (
     AgdaAutoRefineBackend,
     AgdaScopeCheckBackend,
@@ -527,3 +528,134 @@ def test_scope_backend_preserves_configured_agda_extra_args(tmp_path):
         extra_args=("-i", ".", "-l", "standard-library"),
     )
     assert backend.extra_args == ("-i", ".", "-l", "standard-library")
+
+
+
+def test_scope_closure_root_success_uses_one_probe(tmp_path):
+    leaf = write_module(tmp_path, "A.Leaf")
+    middle = write_module(
+        tmp_path,
+        "A.Middle",
+        "\nimport A.Leaf\n",
+    )
+    top = write_module(
+        tmp_path,
+        "A.Top",
+        "\nimport A.Middle\n",
+    )
+
+    backend = AgdaAutoRefineBackend("agda")
+    calls = []
+
+    def probe(path, *, aggregate_root=False):
+        key = Path(path).resolve()
+        calls.append((key, aggregate_root))
+        backend._scope_validated.add(key)
+        if aggregate_root:
+            backend._scope_probe_roots.add(key)
+        return True
+
+    backend.probe_scope = probe
+    checker = Checker(tmp_path, scope_backend=backend)
+    collected = [
+        CollectedModule("A.Leaf", leaf),
+        CollectedModule("A.Middle", middle),
+        CollectedModule("A.Top", top),
+    ]
+
+    _prime_scope_closure(checker, top, collected)
+
+    assert [path for path, _ in calls] == [top.resolve()]
+    assert backend.scope_validated(leaf)
+    assert backend.scope_validated(middle)
+    assert backend.scope_validated(top)
+
+
+def test_scope_closure_descends_only_failed_subtrees(tmp_path):
+    left_leaf = write_module(tmp_path, "A.LeftLeaf")
+    left = write_module(
+        tmp_path,
+        "A.Left",
+        "\nimport A.LeftLeaf\n",
+    )
+    right_leaf = write_module(tmp_path, "A.RightLeaf")
+    right = write_module(
+        tmp_path,
+        "A.Right",
+        "\nimport A.RightLeaf\n",
+    )
+    top = write_module(
+        tmp_path,
+        "A.Top",
+        "\nimport A.Left\nimport A.Right\n",
+    )
+
+    backend = AgdaAutoRefineBackend("agda")
+    outcomes = {
+        top.resolve(): False,
+        left.resolve(): True,
+        right.resolve(): False,
+        right_leaf.resolve(): True,
+    }
+    calls = []
+
+    def probe(path, *, aggregate_root=False):
+        key = Path(path).resolve()
+        calls.append(key)
+        ok = outcomes[key]
+        if ok:
+            backend._scope_validated.add(key)
+        else:
+            backend._scope_failed.add(key)
+        if aggregate_root:
+            backend._scope_probe_roots.add(key)
+        return ok
+
+    backend.probe_scope = probe
+    checker = Checker(tmp_path, scope_backend=backend)
+    collected = [
+        CollectedModule("A.LeftLeaf", left_leaf),
+        CollectedModule("A.Left", left),
+        CollectedModule("A.RightLeaf", right_leaf),
+        CollectedModule("A.Right", right),
+        CollectedModule("A.Top", top),
+    ]
+
+    _prime_scope_closure(checker, top, collected)
+
+    assert calls == [
+        top.resolve(),
+        left.resolve(),
+        right.resolve(),
+        right_leaf.resolve(),
+    ]
+    assert backend.scope_validated(left_leaf)
+    assert backend.scope_validated(left)
+    assert backend.scope_validated(right_leaf)
+    assert backend.scope_failed(right)
+    assert backend.scope_failed(top)
+
+
+def test_failed_scope_frontier_is_not_reprobed_during_refine(tmp_path):
+    path = write_module(tmp_path, "FailedFrontier")
+    backend = AgdaAutoRefineBackend("agda")
+    backend._scope_failed.add(path.resolve())
+
+    def forbidden(_):
+        raise AssertionError("cached failed scope frontier must not be reprobed")
+
+    backend.scope._scope_ok = forbidden
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+    diagnostic = Diagnostic(
+        "TSAGDA113",
+        "scope suspicion",
+        path,
+        2,
+        1,
+        severity="error",
+    )
+
+    [result] = checker._apply_evidence_policy(summary, [diagnostic])
+    assert result.severity == "warning"
+    assert result.evidence_sufficient is False
