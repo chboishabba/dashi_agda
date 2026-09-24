@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.GRQFTSourceNativeNambuBubbleConditionalExact wh
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (_/_)
 
@@ -71,7 +72,7 @@ record SourceNativeNambuBubbleClosure
         WallNoGo.nambuInteriorVacuum
       ≡ WallNoGo.staticVacuumFirstIntegral
         WallNoGo.nambuExteriorVacuum →
-      Data.Empty.⊥
+      ⊥
 
 open SourceNativeNambuBubbleClosure public
 
