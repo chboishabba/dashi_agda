@@ -35,6 +35,7 @@ import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.YangMillsConcreteEndpointSemanticsRound511Exact as R511
 import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as R535
+import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRound538Exact as R538
 import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as R498
 import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.YangMillsClayPublishedWilsonRPRound461Exact as R461
@@ -393,14 +394,14 @@ ConcreteVolumeCutoffCompatibility {endpoint = endpoint} source group =
         R535.projectiveEvents (R511.representationInputs endpoint group)
   in
   ∀ lower upper
-    (restriction : R498.Restricts projective lower upper)
+    (restriction : R538.Restricts projective lower upper)
     event →
   Limit.finiteExpectation (R511.family endpoint group) lower
-    (R498.indicator (R498.events projective)
-      (R498.restrictEvent projective lower upper restriction event))
+    (R498.indicator (R538.events (R538.positiveEvents projective))
+      (R538.restrictEvent projective lower upper restriction event))
   ≡
   Limit.finiteExpectation (R511.family endpoint group) upper
-    (R498.indicator (R498.events projective) event)
+    (R498.indicator (R538.events (R538.positiveEvents projective)) event)
 
 ------------------------------------------------------------------------
 -- Proofs from the source bundle.
@@ -536,7 +537,7 @@ volumeCutoffCompatibility :
     group →
   ConcreteVolumeCutoffCompatibility source group
 volumeCutoffCompatibility {endpoint = endpoint} source group =
-  R498.projectiveEventExpectationConsistency
+  R538.projectiveEventExpectationConsistency
     (R535.projectiveEvents (R511.representationInputs endpoint group))
 
 selectedUVNormalization :
