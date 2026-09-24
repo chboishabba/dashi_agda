@@ -4,7 +4,7 @@ import re
 from typing import Dict, Iterable, List, Optional, Tuple
 
 from .ast_index import significant_tokens, typed_binders, descendants, first_descendant, applications, application_view, clause_explicit_argument_count
-from .shapes import shape_from_node, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads, PiShape, HeadShape
+from .shapes import shape_from_node, shape_from_tokens, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads, split_top_level, PiShape, HeadShape
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
 
@@ -364,14 +364,25 @@ def extended_diagnostics(checker, s, D):
                 if want and got != want:
                     out.append(_diag(D, "TSAGDA064", f"field {name} lambda has {got} binders; target field has {want} explicit arguments", s, assignment.line))
 
-    for dname, decl in data.items():
+    for dname, decl in s.ast.data.items():
         for ctor in decl.constructors.values():
-            terminal = _terminal(ctor.type_text)
-            if terminal and terminal.split(".")[-1] != dname:
-                out.append(_diag(D, "TSAGDA122", f"constructor {ctor.name} of {dname} visibly returns {terminal}", s, ctor.line))
-            for domain in _split_arrows(ctor.type_text)[:-1]:
-                if re.search(rf"\b{re.escape(dname)}\b\s*(?:→|->)", domain):
-                    out.append(_diag(D, "TSAGDA130", f"{dname} occurs negatively in constructor {ctor.name}", s, ctor.line))
+            if ctor.type_node is None:
+                continue
+            ctor_shape = shape_from_node(s.ast.source_bytes, ctor.type_node)
+            result_head = terminal_head(ctor_shape)
+            if result_head and result_head.rsplit(".", 1)[-1] != dname:
+                out.append(_diag(D, "TSAGDA122", f"constructor {ctor.name} of {dname} visibly returns {result_head}", s, ctor.line))
+
+            tokens = significant_tokens(s.ast.source_bytes, ctor.type_node)
+            arrow_parts = split_top_level(tokens, {"→", "->"})
+            for domain_tokens in arrow_parts[:-1]:
+                domain_shape = shape_from_tokens(domain_tokens)
+                if isinstance(domain_shape, PiShape) and domain_shape.domains:
+                    first = domain_shape.domains[0].head
+                    if isinstance(first, HeadShape) and first.head.rsplit(".", 1)[-1] == dname:
+                        out.append(_diag(D, "TSAGDA130", f"{dname} occurs negatively in constructor {ctor.name}", s, ctor.line))
+                        out.append(_diag(D, "TSAGDA131", f"{dname} occurs in an obvious contravariant constructor position", s, ctor.line))
+                        break
 
     # AST-backed constructor patterns, simple finite coverage and recursion.
     for name, clause_items in s.ast.clauses.items():
@@ -759,12 +770,6 @@ def extended_diagnostics(checker, s, D):
             head = _terminal(ctor.type_text)
             if head in known_terms and head not in data:
                 out.append(_diag(D, "TSAGDA121", f"constructor {ctor.name} result resolves to known term {head}", s, ctor.line))
-
-    # TSAGDA131: explicit negative occurrence is the same bounded contravariant test.
-    for dname, decl in data.items():
-        for ctor in decl.constructors.values():
-            if any(re.search(rf"\b{re.escape(dname)}\b\s*(?:→|->)", dom) for dom in _split_arrows(ctor.type_text)[:-1]):
-                out.append(_diag(D, "TSAGDA131", f"{dname} occurs in an obvious contravariant constructor position", s, ctor.line))
 
     # TSAGDA141/142 are advisory structural recursion warnings.
     for name, cs in clauses.items():
@@ -1163,21 +1168,50 @@ def extended_diagnostics(checker, s, D):
 def api_snapshot(checker):
     modules = {}
     for path in checker.root.rglob("*.agda"):
-        try: rel = path.relative_to(checker.root)
-        except ValueError: continue
-        if set(rel.parts) & {".cache", "build", "dist", "vendor", "third_party", "tmp"}: continue
-        try: s = checker.parse_summary(path)
-        except Exception: continue
-        data, ctors = _collect_data(s.source)
+        try:
+            rel = path.relative_to(checker.root)
+        except ValueError:
+            continue
+        if set(rel.parts) & {".cache", "build", "dist", "vendor", "third_party", "tmp"}:
+            continue
+        try:
+            s = checker.parse_summary(path)
+        except Exception:
+            continue
+        constructors = {
+            cname: {
+                "datatype": dname,
+                "arity": (
+                    explicit_arity(shape_from_node(s.ast.source_bytes, ctor.type_node))
+                    if ctor.type_node is not None else 0
+                ),
+            }
+            for dname, decl in s.ast.data.items()
+            for cname, ctor in decl.constructors.items()
+        }
+        signatures = {
+            name: {
+                "text": sig.type_text,
+                "explicit_arity": (
+                    explicit_arity(shape_from_node(s.ast.source_bytes, sig.type_node))
+                    if sig.type_node is not None else 0
+                ),
+                "result_head": (
+                    terminal_head(shape_from_node(s.ast.source_bytes, sig.type_node))
+                    if sig.type_node is not None else None
+                ),
+            }
+            for name, sig in s.ast.signatures.items()
+        }
         modules[s.module_name] = {
             "path": str(rel),
-            "exports": sorted(set(s.signatures) | set(s.records) | set(ctors)),
-            "signatures": {k: re.sub(r"\s+", " ", v.type_text).strip() for k, v in s.signatures.items()},
+            "exports": sorted(set(s.signatures) | set(s.records) | set(constructors)),
+            "signatures": signatures,
             "records": {k: {"fields": sorted(r.fields)} for k, r in s.records.items()},
             "projections": {f: rname for rname, r in s.records.items() for f in r.fields},
-            "constructors": {k: {"datatype": c.datatype, "arity": c.arity} for k, c in ctors.items()},
+            "constructors": constructors,
         }
-    return {"version": 1, "modules": modules}
+    return {"version": 2, "modules": modules}
 
 def api_drift(checker, baseline, D):
     out = []; now = api_snapshot(checker).get("modules", {})
@@ -1198,8 +1232,12 @@ def api_drift(checker, baseline, D):
                 out.append(_diag(D, "TSAGDA182", f"constructor {cn} arity changed {cold.get('arity')} -> {cnew.get('arity')}", s, 1))
         for fn, fold in old.get("signatures", {}).items():
             fnew = cur.get("signatures", {}).get(fn)
-            if fnew and _arity(fold) != _arity(fnew):
-                out.append(_diag(D, "TSAGDA183", f"function {fn} arity changed {_arity(fold)} -> {_arity(fnew)}", s, 1))
+            if not fnew:
+                continue
+            old_arity = fold.get("explicit_arity") if isinstance(fold, dict) else None
+            new_arity = fnew.get("explicit_arity") if isinstance(fnew, dict) else None
+            if old_arity is not None and new_arity is not None and old_arity != new_arity:
+                out.append(_diag(D, "TSAGDA183", f"function {fn} arity changed {old_arity} -> {new_arity}", s, 1))
         for proj, old_owner in old.get("projections", {}).items():
             new_owner = cur.get("projections", {}).get(proj)
             if new_owner and new_owner != old_owner:
