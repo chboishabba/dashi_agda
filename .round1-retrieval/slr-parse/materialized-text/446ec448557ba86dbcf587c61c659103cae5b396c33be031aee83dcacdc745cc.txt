@@ -1,0 +1,977 @@
+[PAGE 1]
+ 
+ 
+  
+ 
+International Journal of Technology in Education (IJTE) is affiliated with 
+International Society for Technology, Education, and Science (ISTES): www.istes.org 
+ 
+www.ijte.net 
+A History of Instructional Media, 
+Instructional Design, and Theories 
+ 
+ 
+Yunjo An  
+University of North Texas, United States 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To cite this article:  
+ 
+An, Y. ( 2021). A h istory of instructional media, instructional design, and theories . 
+International Journal of Technology in Education (IJTE) , 4(1), 1-21. 
+https://doi.org/10.46328/ijte.35 
+ 
+ 
+ 
+ 
+ 
+The International Journal of Technology in Education (IJTE) is a peer -reviewed scholarly online journal. 
+This article may be used for research, teaching, and private study purposes. Authors alone are responsible 
+for the contents of their articles. The journal owns the copyright of the articles. The publisher shall not be 
+liable for any loss, actions, claims, proceedings, demand, or costs or damages whatsoever or howsoever 
+caused arising directly or indirectly in connection with or arising out of the use of the research material. All 
+authors are requested to disclose any actual or potential conflict of interest including any financial, personal 
+or other relationships with other people or organizations regarding the submitted work.  
+ 
+ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. 
+ 
+ 
+ 
+
+[PAGE 2]
+ 
+International Journal of Technology in Education  
+ 2021, Vol. 4, No. 1, 1-21 https://doi.org/10.46328/ijte.35 
+ 
+1 
+A History of Instructional Media, Instructional Design, and Theories 
+ 
+Yunjo An 
+ 
+Article Info  Abstract 
+Article History 
+Received: 
+9 March 2020 
+Accepted: 
+2 July 2020 
+ This paper discusses the history of the instructional design and technology field 
+in four major time periods: (1) 1900s – 1930s, (2) World War II – 1970s, (3) 
+1980s – 1990s, and (4) 21st century. Since the 20th century has been discussed in 
+detail in earlier works, this paper puts more focus on the 21st century section, 
+which includes discussions of social media, online and blended learning, mobile 
+learning, the open educational resource (OER) movement, massive open online 
+courses (MO OCs), virtual reality (VR) and augmented reality (AR), digital 
+game-based learning (DGBL), gamification, the maker movement, new 
+instructional design process models, and instructional -design theory. While 
+previous discussions of the history of the field fo cused on the history of 
+instructional media and instructional design and the evolution of learning 
+theories, this paper includes the discussion of the evolution of instructional -
+design theories and models, which have received relatively less attention. 
+Keywords 
+History 
+Instructional media 
+Instructional design 
+Learning theories 
+Instructional-design theories 
+ 
+ 
+Introduction 
+ 
+Learning history allows us to better understand our current state and provides insights into the future. In order to 
+better understand the current trends and issues in the instructional design and technology field and make 
+informed predictions about its future, it is critical to understand how the field has evolved. Many scholars have 
+discussed the history of instructional design and technology (e.g., Molenda, 2008; Reiser, 2001a, 2001b, 2018; 
+Saettler, 1968, 1990) focusing mainly on the history of the field in the 20th century. In this paper, the history of 
+the field is discussed in four major time periods: (1) 1900s – 1930s, (2) World War II – 1970s, (3) 1980s – 
+1990s, and (4) 21st century. Since the 20th century has been discussed in detail in earlier works, this paper puts 
+more focus on the 21st century section. While previous discussions of the history of instructional design and 
+technology focused on the history of instructional media and instructional design and the evolution of learning 
+theories, this paper includes the discussion of the evolution of instructional-design theories and models, which 
+have received relatively less attention. It should be noted that this paper focuses on major events in the United 
+States. 
+ 
+1900s-1930s 
+The Visual Instruction Movement 
+ 
+In the early part of the twentieth century when school museums, the equivalent of district-wide media center, 
+[PAGE 3]
+An 
+ 
+2 
+came to existence, most of the media housed in school museums were visual media, such as photographs, slides, 
+and films. The increasing interest in using visual media in education was referred to as the visual instruction 
+movement (Reiser, 2018; Saettler, 1990). In 1913, Thomas Edison envisioned that school systems would be 
+completely changed with visual media in the next ten years, proclaiming: ― Books will soon be obsolete in the 
+schools…. It is possible to teach every branch of human knowledge with the motion pictur e‖ (cited in Saettler, 
+1968, p. 98).  
+ 
+Although the revolutionary changes in school systems envisioned by Edison did not happen, the visual 
+instruction movement did grow, resulting in five national professional organizations for visual instruction and a 
+number of courses and textbooks on visual instruction. Despite the growth of the visual instruction movement, 
+teachers and textbooks were still viewed as the primary means of instruction, while the visual materials housed 
+in school museums were viewed as supplementary materials (Reiser, 2018; Saettler, 1990). According to Cuban 
+(1986), the impact of the visual instruction was limited due to a variety of factors, including poor instructional 
+quality of relevant films in many subject areas, the costs associated with purchasing and maintaining films and 
+equipment, the difficulty teachers had in using film equipment, and teacher resistance to change.  
+ 
+The Audiovisual Instruction Movement 
+ 
+As media began incorporating sound in the 1920s, the visual instruction movement was expanded to the 
+audiovisual instruction movement (Finn, 1972; McCluskey, 1981). Radio gained a great deal of attention, but it 
+had very little impact on instructional practices due to various factors including poor equipment, poor reception 
+of radio signals, and teacher resistance to change (Cuban, 1986; Reiser, 2018). The audiovisual instruction 
+movement continued to evolve despite the adverse economic effects of the Great Depression, which began in 
+1929. The Department of Visual Instruction (DVI), which was part of the National Education Association at that 
+time and is now called as Association for Educational Communication and Technology (AECT), was formed in 
+1932 (Saettler, 1990). 
+ 
+Behaviorism 
+ 
+Before World War II, learners were only expected to understand and learn rudimentary skills, such as reading, 
+writing, and arithmetic. During this time period, behaviorism dominated the psychology of learning, and 
+behaviorist theories were used as the basis for designing many of the early audiovisual materials (Edgar, 2012; 
+Ertmer & Newby, 2013). Behaviorism grew with the work by Pavlov, Watson, Thorndike, and Skinner.  
+ 
+Thorndike (1905) formalized the  Law of Effect . Watson (1913) published the article ―Psychology as the 
+Behaviorist Views It ,‖ which is often called ―The Behaviorist Manifesto ,‖ and claimed  that psychology is 
+the science of human behavior, which should be studied under laboratory conditions . B. F. Skinner (1938) 
+believed that classical conditioning was too simplistic to be used to describe complex human behavior and 
+formulated the operant conditioning learning theory.  
+ 
+[PAGE 4]
+International Journal of Technology in Education (IJTE) 
+ 
+3 
+World War II – 1970s 
+Word War II and Instructional Media 
+ 
+The growth of the audiovisual instruction movement slowed in schools during World War II (WWII), but a wide 
+variety of audiovisual materials and equipment, such as training films, film projectors, and overhead projectors, 
+were extensively used to train U.S. military personnel and to prepare U.S. civilians to work in industry (Reiser, 
+2018; Saettler, 1990). During the 1950s, there was an enormous growth in the use of instructional television, but 
+many of the instructional television projects did not last long. The interest in using television for instructional 
+purposes subsided by the mid-1960s (Reiser, 2018). The term multimedia was coined in the 1950s to describe 
+early combinations of various media used to enhance teaching and learning (Heinich, Molenda, Russell, & 
+Smaldino, 1999). 
+ 
+The Behavioral Objectives Movement 
+ 
+The behavioral objectives movement emphasized that learning objectives should be written in observable and 
+measurable terms. In the 1950s, the Taxonomy of Educational Objectives  written by Benjamin Bloom and his 
+colleagues gave another boost to the behavioral objectives movement (Bloom, Engelhart, Furst, Hill, & 
+Krathwohl, 1956). In the early 1960s, Robert Mager (1962) published Preparing Objectives for Programmed 
+Instruction, which described how to write objectives that include learner behaviors, conditions, and standards. 
+The behavioral objectives are still prevalent and advocated by many instructional designers and educators.  
+ 
+Teaching Machines, Programmed Instruction, and Computer-Assisted Instruction  
+ 
+Along with behavioral objectives, teaching machines, programmed instruction, and computer-assisted 
+instruction (CAI) were among the major works influenced by behaviorism (Saettler, 1990). Teaching machines, 
+which were advocated by Skinner (1958), used reinforcement to increase learning. Programmed instruction, 
+which was also advocated by Skinner, ran from the mid-1950s through the mid-1960s. Skinner (1958) stated 
+that programmed instruction should include behavioral objectives, present content in small steps, require active 
+learner response to frequent questions, allow for self-pacing, and provide immediate feedback.  
+ 
+Many of the programmed instructional materials developed during the late 1950s through the 1960s were tested 
+and evaluated while they were being developed. In 1967, Michael Scriven (1967) coined the term formative 
+evaluation and contrasted it with summative evaluation. During the 1960s and early 1970s, CAI systems such a s 
+PLATO and TICCIT, were developed even though much of the early work in CAI was done in the 1950s by 
+researchers at IBM (Lewis & Pask, 1965; Stolorow & Davis, 1965). However, CAI had had very little impact on 
+education by the end of the 1970s (Pagliaro, 1983).  
+ 
+Launch of Sputnik and Shift from Behaviorism to Cognitivism 
+ 
+In 1957, when the Soviet Union launched Sputnik, the first artificial Earth satellite, the space race began. 
+[PAGE 5]
+An 
+ 
+4 
+Realizing that American schools were falling behind, the United States poured millions of dollars into 
+improving math and science education. The training needs of WWII and the launch of Sputnik evoked reflection 
+on educational systems and new questions for learning. There was an apparent need to educate people to think 
+critically, learn complex skills, and solve problems. Behavioral principles could not adequately address the 
+acquisition of higher-level skills, and a new learning theory was needed (Edgar, 2012).  
+ 
+Cognitivism emerged in the 1950s and surfaced as a dominant learning theory in the late 1970s (Edgar, 2012; 
+Ertmer & Newby, 2013; Reiser, 2018). Psychologists and educators began to focus more on complex cognitive 
+processes such as reasoning, information procession, and problem solving and de-emphasize overt and 
+observable behavior (Snelbecker, 1983). For example, Piaget‘s theory of cognitive development proposed four 
+stages of cognitive development, namely sensorimotor, preoperational, concrete operational, and formal 
+operational stage (McLeod, 2018; Woolfolk, 2010).  
+ 
+Instructional Design (ID) 
+ 
+The origin of ID. The origin of the ID process can be traced back to WWII (Dick, 1987). During WWII, a large 
+number of psychologists and educators, including Robert Gagné, Leslie Briggs, and John Flanagan, were called 
+upon to develop training materials for the military services and conduct research. Many of the psychologists 
+continued to work on solving instructional problems after the war, and they started developing a number of 
+innovative analysis, design, and evaluation procedures during the late 1940s and throughout the 1950s (Dick, 
+1987; Saettler, 1990). For example, Robert Miller (1962) developed a detailed task analysis method during this 
+period. 
+ 
+In 1962, Robert Glaser introduced the concept of instructional design (Glaser, 1962). In 1965, Robert Gagné 
+(1965) published the first edition of The Conditions of Learning , in which he identified five major categories of 
+learning: verbal information, intellectual skills, cognitive strategies, motor skills, and attitudes. In the book, 
+Gagné also described nine events of instruction (Gagné, 1965, 1985). His description of the five learning 
+outcomes and the events of instruction became the foundation of ID practices (Reiser, 2018).  
+ 
+The systems approach to ID.  During the 1970s, a number of scholars created new ID models for systematically 
+designing instruction (e.g., Dick & Carey, 1978; Gagne & Briggs, 1974; Gerlach & Ely, 1971; Kemp, 1971). 
+Some of the models developed during the period, such as the Dick and Carey model, became standards in the 
+field and have been frequently taught to graduate students studying ID programs (Johnson, Xin, Mackal, & 
+Reiser, 2012). In addition to ID models, many graduate programs in ID were created during the 1970s (Redfield 
+& Dick, 1984).  
+ 
+Theory of Instruction 
+ 
+Little attention was paid to instructional-design theory since most of the attention in the field of instructional 
+design was on the ID process or ID models (Reigeluth, 1983). However, the advances of instructional media and 
+[PAGE 6]
+International Journal of Technology in Education (IJTE) 
+ 
+5 
+learning theories contributed to the development of the instructional design theories and models. Gagné, 
+Skinner, Bruner, Ausubel, Merrill, and Reigeluth were among the major contributors. Bruner, who developed a 
+model of instruction based on discovery methods, was among the first to talk about developing a ― theory of 
+instruction‖ (Bruner, 1966).  
+ 
+Reigeluth and Merrill (1978, 1979) proposed that there were three major components of a theory of instruction, 
+which included instructional methods, instructional conditions, and instructional outcomes. Further, Reigeluth 
+and Merrill (1979) extended the conditions-methods-outcomes framework in an attempt to identify all of the 
+important kinds of method variables that should be included in a comprehensive model or a theory of 
+instruction. The extended framework included three types of instructional methods: organizational, delivery, and 
+management. 
+ 
+1980s –
+ 1990s 
+Personal Computers, Hypermedia, and Internet 
+ 
+The interest in using computers for instructional purposes increased in the 1980s, even though computers were 
+used in education much earlier (Reiser, 2018). The Center for Social Organization of Schools (1983) reported 
+that computers were being used in over 40 percent of elementary schools and over 75 percent of all secondary 
+schools in the United States by January 1983. Although schools had one computer for every nine students on 
+average by 1995, the impact of computers on instructional practices were minimal. Computers were mainly used 
+for drill and practice or for teaching computer skills (e.g., word processing). Many teachers reported little or no 
+use of computers for instructional purposes (Becker, 1998; Office of Technology Assessment, 1995; Reiser, 
+20
+18).  
+ 
+In the 1980s, the computer began to combine some of the distinct media, such as textbooks, audio, visuals, and 
+motion media (Heinich, Molenda, Russell, & Smaldino, 1999). Hypermedia systems, such as HyperCard, were 
+widely used in schools. Hypermedia refers to ― computer software that uses elements of text, graphics, video, 
+and audio connected in such a way that the user can easily move within the information ‖ (Heinich, Molenda, 
+Russell, & Smaldino, 1999, p. 230). Based on cognitive theories, hypermedia was designed to resemble the way 
+people organize information with concepts and their relationships. In the 1990s, research on the use of 
+hypermedia for learning was active (e.g., Dillan & Gabbard, 1998; Weller, Repman, Lan, & Rooze, 1995). It is 
+worth noting that the terms hypermedia, multimedia, and interactive video were often used interchangeably in 
+the literature (Liao, 1999).  
+ 
+The World Wide Web  became publicly available in 1991.  According to the National Center for Education 
+Statistics, 65 percent of all public schools had access to the Internet in the fall of 1996, and dial -up Internet 
+connections were used by about 74 percent of public schools having Internet access in 1996 (He aviside, 
+Riggins, & Farris, 1997). The Internet changed the ways of teaching and learning by providing learners with 
+immediate access to information. 
+ 
+[PAGE 7]
+An 
+ 
+6 
+Distance Education/Online Education 
+ 
+Although distance education was common in the late 1800s in the form of correspondence education, its rapid 
+growth began in the late 1990s with the advance of online technologies. Shortly after the World Wide Web was 
+unveiled in 1991, universities and colleges began experimenting with online courses (Kentnor, 2015). In 1998, 
+nonprofit institutions sought to increase revenues by entering into the online marketplace. For example, New 
+York University (NYU) created NYU Online in 1998. NYU was the first large nonprofit university to create a 
+for-profit online education subsidiary (Arenson, 1998a). Western Governors University, a nonprofit online 
+university, was founded in the same year in order to make education more accessible. The California Virtual 
+University opened in November of 1998 (Arenson, 1998b). Since its inception in the 1700s, distance education 
+has made education more accessible and attainable for those who are unable to sit in traditional classrooms.  
+ 
+The Clark-Kozma Debate 
+ 
+Most research on instructional media from the 1920s through the 1960s focused on media comparisons. In the 
+1980s, Richard Clark and Robert Kozma started the famous media debate. After reviewing the results of studies 
+and meta-analyses of research comparing the effectiveness of various media, Clark (1983) claimed that "media 
+are mere vehicles that deliver instruction but do not influence student achievement any more than the truck that 
+delivers our groceries causes changes in our nutrition" (p. 445). Kozma (1994) argued that "...Clark's separation 
+of media from method creates an unnecessary and undesirable schism between the two. Medium and method 
+should have a more integral relationship" (p.16). He suggested moving from "Do media influence learning?" to 
+"In what ways can we use the capabilities of media to influence learning for particular students, tasks, and 
+situations?" The debate between Clark and Kozma has instigated much discussion and debate on whether or not 
+media influences learning. 
+ 
+Instructional Design (ID) and Human Performance Improvement 
+ 
+Interest in the ID process continued to grow during the 1980s and remained strong especially in business, 
+industry, and the military. However, ID had minimal impact on instructional practices in K-12 schools and in 
+higher education (Reiser, 2018). In 1986, the International Board of Standards for Training, Performance, and 
+Instruction (ibstpi) published the first set of instructional design competencies. The ibstpi revised the ID 
+competences in the year 2000 and more recently in 2012, in response to changing learning environments and 
+new expectations for instructional designers (Koszalka, Russ-Eft, & Reiser, 2013).   
+ 
+In the 1990s, instructional designers began to take an interest in using computers as tools to improve on-the-job 
+performance as well as to enhance learning. The human performance improvement movement broadened the 
+scope of the ID field and led instructional designers to consider and identify non-instructional interventions 
+(Reiser, 2018). During this decade, an interest in using electronic performance support systems (EPSS) and 
+knowledge management systems to support learning and on-the-job performance began to flourish (Gery, 1991; 
+Schwen, Kalman, Hara, & Kisling, 1998). 
+[PAGE 8]
+International Journal of Technology in Education (IJTE) 
+ 
+7 
+Constructivism and Constructionism 
+ 
+In the 1980s and 1990s, the growing interest in constructivist views of teaching and learning was another major 
+trend in the instructional design field. Constructivists viewed learning as an active process of constructing rather 
+than acquiring knowledge. Therefore, instruction was viewed as a process to support the construction rather than 
+communication of knowledge (Duffy & Cunningham, 1996). Many scholarly works focused on topics related to 
+constructivist learning including cognitive apprenticeship (Collins, Brown, &Newman, 1989), problem-based 
+learning (Savery & Duffy, 1995), problem solving (Jonassen, 1997), cognitive load during problem solving 
+(Sweller, 1988), learning by doing (Schank, 1994), teaching complex cognitive skills (van Merriënboer, 1997), 
+and designing constructivist learning environments (Jonassen, 1999). 
+ 
+In the1980s, Papert (1993a, b) developed constructionism, which suggested that learning is most effective when 
+students are actively engaged in the construction of concrete and meaningful artifacts. In his books, Mindstorms 
+and The Children’s Machine , Papert suggested that the computer should be an ― object to think with, ‖ not a 
+dispenser of information. Like constructivists, he agreed that knowledge is actively constructed by learners 
+rather than transmitted by a teacher. However, Papert believed that the construction of concrete artifacts or 
+products ‗ ‗ in the world‘‘ could support the construction of knowledge ‗ ‗ in the head,‘‘ while Piaget‘s 
+constructivist theory focused on the construction of knowledge in one‘s head (Harel & Papert, 1991). Papert‘s 
+constructionism has recently gained increasing attention through the maker movement, which is discussed in the 
+21st Century section below. 
+ 
+Instructional-Design Theory 
+ 
+In the 1980s and 1990s, the awareness of and interest in instructional-design theories increased with Reigeluth‘s 
+books on instructional-design theories and models. In the early 1980s, Reigeluth (1983) published the first 
+volume, Instructional-Design Theories and Models: An Overview of their Current Status . The main purpose of 
+the first volume was to raise awareness of instructional-design theories, which were largely overlooked in the 
+shadows of ID process models.  
+ 
+Pointing out that instructional design is a prescriptive science, Reigeluth (1983) distinguished instructional-
+design theory from learning theory and instructional development in the first chapter of the first volume. 
+Further, he emphasized that the focus of an instructional-design theory was on methods of facilitating learning 
+rather than on processes of learning within a person‘s head. The first volume summarized some famous models 
+and theories of instruction, including Merrill‘s Component Display Theory (CDT), Reigeluth‘s Elaboration 
+Theory, and Keller‘s Motivational Design Model.  
+ 
+Reigeluth‘s (1999a) second volume, Instructional-Design Theories and Models: A New Paradigm of 
+Instructional Theory , was published in 1999. In the first chapter, Reigeluth (1999b) defined an instructional-
+design theory as ― a theory that offers explicit guidance on how to better help people learn and develop ‖ (p. 5) 
+and described characteristics and components of instructional-design theories in more detail. Emphasizing the 
+[PAGE 9]
+An 
+ 
+8 
+need for a new paradigm of instructional-design theory, the second volume introduced various instructional-
+design theories and models that provided customized and learner-centered learning experiences, including 
+Schank‘s Learning by Doing, Bransford‘s Flexibly Adaptive Instructional Designs, and Jonassen‘s 
+Constructivist Learning Environments (CLE).  
+ 
+Reigeluth‘s work on instructional-design theory has made several contributions to the instructional design and 
+technology field.  First, he increased awareness of instructional-design theory by defining it and distinguishing it 
+from learning theory and instructional development. Second, he encouraged and facilitated the development of 
+instructional-design theory by specifying the components of instructional-design theories, providing a number 
+of examples, and offering guidance for the theory-development process (Reigeluth, 1983, 1999a). Third, he 
+introduced researchers, practitioners, and graduate students to a wide variety of instructional-design theories. 
+Finally, he made a significant impact on the paradigm shift from teacher-centered to learner-centered education 
+by emphasizing the need for this new paradigm of instructional-design theory and demonstrating many different 
+ways to provide customized and learner-centered learning experiences (Reigeluth, 1999).  
+ 
+21st Century 
+Social Media 
+ 
+Today, there are a number of social media sites. Some popular social media, including Facebook, YouTube, and 
+Twitter, were launched in the 2000s (Boyd & Ellison, 2008). Social media refer to Web 2.0 technologies 
+characterized by openness, user participation, user-created content, knowledge sharing, and social interaction 
+(Alexander, 2006; Bingham, & Conner , 2010; Brown & Adler, 2008; Dao, 2015; Downes, 2005; Richardson, 
+2009; Thompson, 2007). While Web 1.0 was read-only, Web 2.0 is read/write and allows users to become active 
+participants and content creators. They not only find information on the Internet, but they also create and 
+publish content online and network with other people from all over the world.  
+ 
+Web 2.0 has ― blurred the line between producers and consumers of content and has shifted attention from access 
+to information toward access to other peop le‖ (Brown & Adler, 2008, p. 18). According to a recent Pew 
+Research Center survey, YouTube (73%) and Facebook (69%) are the most widely used social media sites 
+among adults in the U.S. There are substantial age-related differences in the use of social media platforms. 
+Snapchat and Instagram are the most popular apps among those ages 18 to 24 (Perrin & Anderson, 2019). 
+ 
+Social media has the potential to create learner-centered learning environments by empowering learners to 
+become knowledge creators and producers and providing opportunities for interaction and collaboration 
+(Downes, 2005; Gikas & Grant, 2013; Greenhow, 2011; Richardson, 2009). The use of social media in 
+education is increasing but still limited and restricted (Manca & Ranieri, 2016). Moran, Seaman, and Tinti-Kane 
+(2011) found that over 90% of higher education faculty were using social media in their courses. However, the 
+use of social media was limited primarily to online videos. Research studies show that some educators are 
+hesitant to integrate social media into their teaching practices (Manca & Ranieri, 2016; Zachos, 
+Paraskevopoulou-Kollia, & Anagnostopoulos, 2018). 
+[PAGE 10]
+International Journal of Technology in Education (IJTE) 
+ 
+9 
+Online and Blended Learning 
+ 
+Online learning is one of the fastest growing areas in the ID field. Over the last decade, it has become popular 
+because of its potential to make learning more accessible and flexible. In the fall of 2008, over 4.6 million 
+students – over one quarter of U.S. higher education students – were taking at least one online course (Allen & 
+Seaman, 2010). In the corporate world, about 33% of training was delivered electronically in 2007 (Paradise, 
+2008). Although the adoption of online learning in K-12 settings was slower compared to other settings, online 
+learning in K-12 schools is increasing rapidly. The surveys commissioned by the Sloan Consortium (now known 
+as the Online Learning Consortium) reported that 700,000 K-12 public school students took online courses in 
+2007
+-2008 (Picciano & Seaman, 2007, 2008). The Florida Virtual School, the largest state virtual school, had 
+more than 150,000 course enrollments in 2008-2009 (Watson, Gemin, Ryan & Wicks, 2009). In 2017-18, nearly 
+300,000 students were enrolled in 501 full-time virtual schools (Molnar, 2019). Recently, the COVID-19 
+pandemic has forced K-12 schools and universities to move to online learning. The biggest online learning 
+experiment in history began in the spring of 2020 when 90% of schools worldwide closed (UNESCO, 2020).   
+ 
+Another major trend in the 2000s is the emergence of blended or hybrid learning that combines online and face-
+to-face instruction (Allen & Seaman, 2003; Graham, 2005). In 2003, the American Society for Training and 
+Development identified blended learning as one of the top ten trends to emerge in the knowledge delivery 
+industry (Rooney, 2003). Blended learning has the potential to empower learners by offering them choice and 
+flexibility about when and where they can participate in the online portion of their course (Owston, 2017). 
+Graham, Allen, and Ure (2005) found that blended learning was used mainly for three reasons: (1) improved 
+pedagogy, (2) increased access and flexibility, and (3) increased cost-effectiveness.  
+ 
+Mobile Learning 
+ 
+As mobile technologies and devices advance, mobile learning, which is often called m-learning, is rapidly 
+developing. Crompton (2013) defined m-learning as ― learning across multiple contexts, through social and 
+content interactions, using personal electronic devices. ‖ Today mobile phones have the same capabilities as 
+microcomputers at a small fraction of the size. The portability, mobility, and ubiquity of mobile devices 
+significantly reduce the dependence on fixed locations for learning and work, and they enable students to ―lea rn 
+the right thing at the right time at the right place ‖ (Peng, Su, Chou, & Tsai, 2009, p. 175). Mobile devices also 
+have the potential to provide learner-centered learning experiences that are situated, authentic, and personalized 
+(Traxler, 2011). 
+  
+The Open Educational Resource (OER) Movement 
+ 
+Since the early 2000s, the OER movement has been growing. The term OER was coined at the Forum on the 
+Impact of Open Courseware for Higher Education in Developing Countries in 2002 (UNESCO, 2002). The 
+OER movement has its roots in earlier work around learning objects (Weller, 2014). It is generally agreed that 
+OER are ― teaching, learning, and research resources that reside in the public domain or have been released 
+[PAGE 11]
+An 
+ 
+10 
+under an intellectual property license that permits their free use and repurposing by others ‖ (William and Flora 
+Hewlett Foundation, 2017). The OER Evidence Report 2013- 2014 showed that although awareness of OER and 
+Creative Commons was growing, general knowledge of well- established OER repositories was low. It appeared 
+that 79.5% of educators and 74.9% of informal learners were using OER to get new ideas and learning 
+experience. Videos were the most common type of OER used, and OER repositories were relatively unknown 
+and unused compared with the three major resource sites of YouTube, Khan Academy, and TED (de los Arcos, 
+Farrow, Perryman, Pitt & Weller, 2014).   
+ 
+Massive Open Online Courses (MOOCs) 
+ 
+With the Open Educational Resource (OER) and OpenCourseWare (OCW) movements, MOOCs have rapidly 
+grown since their inception a little over a decade ago. In 2001, MIT announced that it was making its entire 
+curriculum of courses available in a free and open format. Several large-scale MOOC providers, such as 
+Coursera, Udacity, and edX, were founded in 2012, which is called ― the year of the MOOC‖ (Matkin, 2013). In 
+2015, MOOCs and Open Education Around the World  edited by Bonk, Lee, Reeves, and Reynolds (2015) 
+provided a comprehensive account of the range of MOOC initiatives and open education projects around the 
+world. The number of available MOOCs has grown dramatically in the last few years. In 2018, 20 million new 
+learners signed up for at least one MOOC, and over 900 universities around the world announced or launched 
+11,400 MOOCs by the end of 2018 (Shah, 2019).  
+ 
+MOOCs provide flexible learning opportunities to learners around the world for free or at low cost (Kaplan & 
+Haenlein, 2016; Porter, 2017). However, they have been criticized for low levels of learner engagement, high 
+dropout rates, and low completion rates (Hone & El Said, 2016; Jordan, 2014; Xing, Chen, Stein, & 
+Marcinkowski, 2016). Researchers report that the majority of MOOCs present a considerable amount of content 
+mainly via video lecture formats and often fail to help leaners remain focused on learning content (Chang & 
+Wei, 2016; Klemke, Eradze, & Antonaci, 2018). How to better engage and motivate learners in online 
+environments with a large number of participants appears to be a key challenge for MOOCs. 
+ 
+Virtual Reality (VR) and Augmented Reality (AR) 
+ 
+The use of VR and AR in instructional environments is becoming increasingly popular in recent years. VR and 
+AR are not really new technologies though.  The term ―v irtual reality" was coined by Jaron Lanier in the 1980s 
+(Fuchs, Moreau, & Guitton, 2011), and the term ― augmented reality‖ was coined by Thomas Caudell and David 
+Mizell in 1990 (Elmqaddem, 2019). VR and AR have been explored as tools for educat ion and training for the 
+last few decades. Today, VR and AR are hot topics at conferences in the instructional design and technology 
+field. Many researchers are exploring the educational applications of these technologies. Despite the enthusiasm 
+for the te chnologies and research efforts on them, VR and AR have not been widely adopted in educational 
+settings due to several constraints, including accessibility (Elmqaddem, 2019). Efforts are being made to make 
+these technologies more accessible and affordable.  Google was the pioneer in offering inexpensive VR 
+platforms and headsets that started with Google Cardboard in 2014. Other companies have also developed more 
+[PAGE 12]
+International Journal of Technology in Education (IJTE) 
+ 
+11 
+advanced versions of the Cardboard. Researchers note the need for theoretical guidelines or instr uctional 
+principles that could assist teachers and instructors in integrating these technologies into learning environments 
+effectively (Curcio, Dipace, & Norlund, 2016). 
+ 
+Digital Game-Based Learning (DGBL) and Gamification 
+ 
+DGBL has been proposed as one of the ways to meet the needs today‘s learners who are ― accustomed to the 
+twitch-speed, multitasking, random-access, graphics-first, active, connected, fun, fantasy, and quick payoff 
+world of their video games, MTV, and Internet‖ (Prensky, 2007, p. 64). In the 2000s, game researchers designed 
+and developed many educational games or game-based learning environments in an attempt to help students 
+develop important 21st century skills. For example, River City  was designed to help middle school students 
+learn scientific inquiry and 21st-century skills. Crystal Island: Lost Investigation , a science mystery game, was 
+developed to help middle school students learn microbiology concepts and develop literacy skills.  
+ 
+Although these games have not been widely used in schools, they became representative examples of good 
+games that incorporate good learning principles (Gee, 2005). The national survey conducted by the Joan Ganz 
+Cooney Center reported that most game-using teachers were using shorter-form genres, such as drill-and-
+practice, trivia, and puzzle games (Takeuchi & Vaala, 2014). Consequently, many teachers still do not fully 
+understand the educational potential of digital games (Gaudelli & Taylor, 2011; Schrader, Zheng & Young, 
+2006).  
+ 
+Over the past decade, the interest in using gamification for learning has dramatically increased in this field. 
+Gamification refers to the process of using game elements in non-game contexts to motivate and engage people, 
+change behaviors, and solve real-world problems (Deterding, Dixon, Khaled, & Nacke, 2011; Kapp, 2012; 
+Zichermann, 2010). It has been applied in many other fields, including business, training, marketing, fitness, 
+software engineering, and healthcare. Researchers such as Kapp (2012) and Simões, Redondo, and Vilas (2013) 
+argue that gamification is crucial for the development of educational technology, since many elements of 
+gamification are based on research in educational psychology and proven techniques that educators have relied 
+on for years.  
+ 
+The Maker Movement 
+ 
+The maker culture has engaged people in the creative production of artifacts in their daily lives and encouraged 
+them to share their products and processes with others through physical and digital forums (Halverson & 
+Sheridan, 2014). Dale Dougherty (2012) founded Make magazine, which was first released in January 2005. A 
+year after the magazine, Maker Faire, an event created by Make magazine to celebrate innovative and creative 
+projects, started in the Bay Area in 2006. Since the first Maker Faire held in San Mateo, California, Maker 
+Faires and mini-Maker Faires have been held in different cities around North America, including Austin, 
+Detroit, Michigan, and New York City. Mark Hatch (2014), CEO and cofounder of TechShop, proposed a 
+― Maker Movement Manifesto‖ that describes maker‘s activities and mindsets and highlights the importance of 
+[PAGE 13]
+An 
+ 
+12 
+construction of physical objects as a feature of the maker movement. The maker movement has led to an 
+explosion of makerspaces around the United States across different learning environments, including museums, 
+libraries, K-12 schools, afterschool clubs, community colleges, universities, and independent nonprofit and for-
+profit organizations. 
+ 
+New ID Process Models 
+ 
+Practitioners and researchers in the ID field have expressed concerns about traditional ID models developed in 
+the 20th century. Critiques argued that traditional ID models were too linear, too slow, and inflexible (e.g., 
+Zemke & Rossett, 2002). In response to these criticisms, new ID models have been developed. For example, 
+Tripp and Bichelmeyer (1990) proposed rapid prototyping, characterized by the ― parallel processes of design 
+and research, or construction and utilization, ‖ to reduce the time and cost of an ID project, while increasing 
+flexibility and effectiveness (p. 37). As a non-linear, iterative approach, rapid prototyping produces the 
+prototype of a part of the instruction and allows the client to see what the completed instruction will look like 
+early in the process (Piskurich, 2015).  
+ 
+David Merrill (2002a) developed the pebble- in-the-pond model that facilitates the development of problem-
+centered instruction based on the first principles of instruction. Gibbons and Rogers (2009) proposed a layered 
+approach to instructional design, which consists of seven design layers, including content layer, strategy layer, 
+message layer, control layer, representation layer, media-logic layer, and data management layer. Recently, 
+Reigeluth and An ( 2021) developed a new ID model called the Holistic 4D Model, which takes a holistic 
+approach to instructional design. It stands in contrast to the fragmented approach that begins with an exhaustive 
+analysis process. Rather than beginning the design process by breaking the content into small pieces and 
+designing instruction for each of the pieces, the Holistic 4D Model begins the design process by creating a fuzzy 
+vision or top-level design and proceeds to work out progressively more details for each part of it in two more 
+cycles (mid-level and lower-level design).  
+ 
+Instructional-Design Theory 
+ 
+New instructional methods have been continually developed in response to different needs in educational and 
+training environments and advances in information technology, learning science, brain science, and other 
+relevant fields. However, as Reigeluth and Carr-Chellman (2009) pointed out, different instructional theorists 
+and researchers have used the same term to refer to different things and different terms to refer to the same 
+things working in relative isolation from each other. In order to build a common knowledge base about 
+instruction with a consistent terminology, Reigeluth and Carr-Chellman (2009) published Instructional-Design 
+Theories and Models: Building a Common Knowledge Base.  
+ 
+Dav
+id Merrill (2002b, 2007, 2009) identified five prescriptive design principles for problem-centered 
+instruction, which are called ―f irst principles of instruction.‖ The five principles included problem-centeredness, 
+activation, demonstration (show me), application (let me), and integration. More recently, Reigeluth, Beatty, and 
+[PAGE 14]
+International Journal of Technology in Education (IJTE) 
+ 
+13 
+Myers (2017) published Instructional-Design Theories and Models: The Learner-Centered Paradigm of 
+Education. As its subtitle indicates, the fourth volume provides a comprehensive set of guidelines for the 
+learner-centered paradigm of education and training, including for competency-based education, task-centered 
+instruction, personalized instruction, changed roles for teachers and students, and changed curriculum. 
+ 
+Conclusion 
+ 
+The history of instructional media during the 20th century shows a recurrent pattern of enthusiasm and little 
+effects on actual practices. As each new medium entered the world, there was a great deal of initial interest and 
+enthusiasm about its anticipated impact on instructional practices. However, interest and enthusiasm eventually 
+faded, and the medium had a minimal impact on instructional practices due to various factors, such as poor 
+instructional quality, the costs associated with purchasing and maintaining the media and equipment, teacher 
+resistance to change, lack of guidelines for integrating new media into instructional practices, and systemic 
+barriers such as organizational structures (Reigeluth & Karnopp, 2013; Reiser, 2018). With the OER movement, 
+today‘s teachers have access to a variety of instructional media that are free and easy- to-use, but the issue of 
+teacher resistance to change still exists. History teaches us that teacher resistance to change should be addressed 
+first in order to facilitate teacher adoption and integration of instructional media and technology. Teachers 
+should be able to see the value of the technology, feel comfortable and confident using it with their students, and 
+experience positive effects of technology integration.  
+ 
+Learning theories and instructional-design theories have evolved in response to the new needs of society and 
+people. In addition, computers and digital technologies in the 21st century have had a significant impact on the 
+ways we communicate and learn. However, ID models and practices do not show much change. Although 
+researchers in the field have developed new ID models (e.g., Merrill, 2002a; Tripp & Bichelmeyer, 1990), the 
+ADDIE and similar models that were created in the 1960s and 1970s still remain popular and prevalent in ID 
+practices (Reiser, 2018). Contemporary researchers emphasize the need to move from a fragmented to holistic 
+approach to instruction and instructional design (e.g ., Reigeluth & An, 2021
+; Spector, 1995; Spector & 
+Anderson, 2000; van Merriënboer, 2007).  
+ 
+The history of the field in the 21st century reveals that our field has been technology-centered over the last two 
+decades. Bodily, Leary, and West (2019) examined research trends in the field of instructional design and 
+technology through an analysis of the literature published in the Scopus database between 2007 and 2017. Their 
+analysis showed that the scholarship in our field is very technology-centric with a large focus on hard, 
+computer-based technologies and that there is a lack of recent scholarship on learning and instructional theories 
+and design frameworks. As the researchers suggested, our field could benefit from more efforts on theory and 
+design frameworks.  
+ 
+Acknowledgements  
+ 
+I greatly appreciate the thoughtful comments of Dr. Charles M. Reigeluth on an earlier version of this paper. 
+[PAGE 15]
+An 
+ 
+14 
+References 
+ 
+Alexander, B. (2006). Web 2.0: A new wave of innovation for teaching and learning? EDUCAUSE Review, 
+41(2), 32–44.  
+Allen, I. E., & Seaman, J. (2003). Sizing the opportunity: The quality and extent of online education in the 
+United States, 2002 and 2003. Retrieved from 
+http://sloanconsortium.org/publications/survey/sizing_the_opportunity2003 
+Allen, I. E., & Seaman, J. (2010). Learning on demand: Online education in the United States, 2009. Retrieved 
+from http://www.sloanc.org/publications/survey/pdf/learningondemand.pdf 
+Arenson, K. (1998a). N.Y.U sees profits in virtual classes. The New York Times.  Retrieved from 
+http://www.nytimes.com/1998/10/07/nyregion/nyu-sees-profi ts-invirtual-classes.htm  
+Arenson, K. (1998b). More colleges plunging into uncharted waters of on-line courses. The New York Times. 
+Retrieved from https://www.nytimes.com/1998/11/02/us/more-colleges- 
+plunging-into-uncharted-waters-of-on-line-courses.html 
+Becker, H. J. (1998). Running to catch a moving train: Schools and information technologies. Theory into 
+Practice, 37(1), 20-30. 
+Bloom, B. S., Engelhart, M. D., Furst, E. J., Hill, W. H., & Krathwohl, D. R. (1956). Taxonomy of educational 
+objectives: The classification of educational goals. Handbook 1: Cognitive Domain. New York: David 
+McKay. 
+Bingham, T., & Conner, M. (2010). The new social learning: A guide to transforming organizations through 
+social media. San Francisco, CA: Berrett-Koehler Publishers. 
+Bodily, R., Leary, H., & West, R. E. (2019). Research trends in instructional design and technology journals. 
+British Journal of Educational Technology, 50(1), 64-79. 
+Bonk, C. J., Lee, M.  M., Reeves, T. C., & Reynolds, T. H. (2015). MOOCs and open education around the 
+world. New York: Routledge. 
+Boyd, D., & Ellison, N. (2008). Social network sites: Definition, history, and scholarship. Journal of Computer 
+Mediated Communication, 13(1), 210—230.  
+Brown, J. S., & Adler, R. P. (2008). Minds on fire: Open education, the long tail, and learning 2.0. EDUCAUSE 
+Review, 43(1), 17–32. 
+Bruner, J. (1966). Toward a Theory of Instruction. Cambridge, MA: Harvard University Press. 
+Center for Social Organization of Schools (1983). School uses of. Microcomputers: Reports from a national 
+survey (Issue no. 1). Baltimore, MD: Johns Hopkins University, Center for Social Organization of 
+Schools. 
+Chang, J. W., & Wei, H. Y. (2016). Exploring engaging gamification mechanics in massive online open 
+courses. Educational Technology & Society, 19(2), 177-203.  
+Clark, R.E. (1983). Reconsidering research on learning from media. Review of Educational Research, 53 (4), 
+445-459. 
+Collins, A., Brown, J.S., & Newman, S.E. (1989). Cognitive apprenticeship: Teaching the crafts of reading, 
+writing, and mathematics. In L. B. Resnick (Ed.)  Knowing, learning, and instruction: Essays in honor of 
+Robert Glaser (pp. 453-494). Hillsdale, NJ: Lawrence Erlbaum Associates. 
+[PAGE 16]
+International Journal of Technology in Education (IJTE) 
+ 
+15 
+Crompton, H. (2013). A historical overview of mobile learning: Toward learner -centered education. In Z. L. 
+Berge, L. Y. Muilenburg, & J. Crompton (Eds.),  Handbook of mobile learning (pp. 3–14). Florence, KY: 
+Routledge. 
+Cuban, L. (1986). Teachers and machines: The classroom use of technology since 1920 . New York: Teachers 
+College Press. 
+Curcio, I. D. D., Dipace, A., & Norlund, A. (2016). Virtual realities and education. Research on Education and 
+Media, 8(2), 60–68.  
+Dao, D. V. (2015). Social Media Classification Scheme in Online Teaching and Learning Activities: A 
+Consideration for Educators. International Journal of Education and Social Science, 2(4), 85-94.  
+de los Arcos, B., Farrow, R., Perryman, L.-A., Pitt, R., & Weller, M. (2014). OER Evidence Report 2013-2014. 
+OER Research Hub. Retrieved from http://oerresearchhub.org/about-2/reports/ 
+Deterding, S., Dixon, D., Khaled, R., & Nacke, L. (2011). From game design ele ments to gamefulness: Defining 
+―g amification.‖ Proceedings of the 15th International Academic MindTrek Conference  (pp. 9 -15). 
+Tampere, Finland. 
+Dick, W. (1987). A history of instructional design and its impact on educational psychology. In J. Glover & R. 
+Roning (Eds.), Historical foundations of educational psychology. New York: Plenum. 
+Dick, W., & Carey, L. (1978). The systematic design of instruction (1st ed.). Glenview, IL: Scott, Foresman. 
+Dillon, A., & Gabbard, R. (1998). Hypermedia as an educational technology: A review of the quantitative 
+research literature on learner comprehension, control, and style. Review of Educational Research, 68 (3), 
+322-349. 
+Dougherty, D. (2012). The maker movement. Innovations, 7(3), 11-14. 
+Downes, S. (2005). E-learning 2.0. eLearn Magazine. Retrieved from http://www.elearnmag.org/ 
+Duffy, T. M., & Cunningham, D. J. (1996). Constructivism: Implications for the design and delivery of 
+instruction. In D. Jonassen (Ed.), Handbook of research for educational communications and technology . 
+New York: Macmillan. 
+Edgar, D. W. (2012). Learning theories and historical events affecting instructional design in education: 
+Recitation literacy toward extraction literacy practices. SAGE Open, 2, 1-9.  
+Elmqaddem, N. (2019). Augmented reality and virtual reality in education: Myth or reality? International 
+Journal of Emerging Technologies in Learning, 14(3), 234-242. 
+Ertmer, P. A., & Newby, T. J. (2013). Behaviorism, cognitivism, constructivism: Comparing critical features 
+from an instructional design perspective. Performance Improvement Quarterly, 26(2), 43-71. 
+Finn, J. D. (1972). The emerging technology of education. In R. J. McBeath (Ed.), Extending education through 
+technology: Selected writings by James D. Finn . Washington, DC: Association for Educational 
+Communications and Technology. 
+Fuchs, P., Moreau, G., & Guitton, P. (2011). Virtual reality: Concepts and technologies. CRC Press. 
+Gagné, R. M. (1965). The conditions of learning (1st Ed.). New York: Holt, Rinehart & Winston. 
+Gagné, R. M. (1985). The Conditions of Learning (4th Ed.). New York: Holt, Rinehart & Winston. 
+Gagné, R. M., & Briggs, L. J. (1974). Principles of instructional design (1st ed.). New York: Holt, Rinehart, and 
+Winston. 
+Gaudelli, W., & Talyor, A. (2011). Modding the global classroom? Serious video games and teacher reflection. 
+[PAGE 17]
+An 
+ 
+16 
+Contemporary Issues in Technology & Teacher Education, 11(1), 70–91. 
+Gee, J. P. (2005). Good video games and good learning. Phi Kappa Phi Forum, 85(2), 33–37. 
+Gerlach, V. S., & Ely, D. P. (1971). Teaching and media: A systematic approach  (1st ed.). Englewood Cliffs, 
+NJ: Prentice-Hall. 
+Gery, G. J. (1991). Electronic performance support systems: How and why to remake the workplace through the 
+strategic application of technology. Boston, MA: Weingarten Publications. 
+Gibbons, A. S., & Rogers, P. C. (2009). The architecture of instructional theory. In C. Reigeluth and A. Carr-
+Chellman (Eds.), Instructional-design theories and models , Volume III (pp. 305-326). New York: 
+Routledge.  
+Gikas, J., & Grant, M. M. (2013). Mobile computing devices in higher education: Student perspectives on 
+learning with cellphones, smartphones & social media, Internet and Higher Education, 19, 18-26. 
+Glaser, R. (1962). Psychology and instructional technology. In R. Glaser (Ed.), Training research and 
+education. Pittsburgh: University of Pittsburgh Press. 
+Graham, C. R. (2005). Blended learning systems: Definition, current trends, and future directions. In C. J. Bonk 
+& C. R. Graham (Eds.), Handbook of blended learning: Global perspectives, local designs  (pp. 3–21). 
+San Francisco, CA: Pfeiffer. 
+Graham, C. R., Allen, S., & Ure, D. (2005). Benefits and challenges of blended learning environments. In M. 
+Khosrow-Pour (Ed.), Encyclopedia of information science and technology (pp. 253–259). Hershey, PA: 
+Idea Group. 
+Greenhow, C. (2011). Youth, learning, and social media. Journal of Educational Computing Research, 45 (2), 
+139–146. 
+Halverson, E. R., & Sheridan, K. M. (2014). The maker movement in education.  Harvard Education Review, 
+84(4), 495-504. 
+Harel, I., & Papert, S. (1991). Software design as learning environment. In I. Harel & S. Papert (Eds.), Children 
+designers: Interdisciplinary constructions for learning and knowing mathematics in a computer-rich 
+school (pp. 41–85). Noorwood: Ablex. 
+Hatch, M. (2014). The maker movement manifesto. Retrieved from 
+https://www.boerneneshovedstad.dk/media/1332/maker-movement-manifesto-sample-chapter.pdf  
+Heaviside, S., Riggins, T., & Farris, E. (1997). Advanced telecommunications in U.S. public elementary and 
+secondary schools, fall 1996  (NCES 97–944). U.S. Department of Education. Washington, DC: National 
+Center for Education Statistics.  
+Heinich, R., Molenda, M., Russell, J.D., & Smaldino (1999). Instructional media and technologies for learning   
+(6th ed.). Upper Saddle River, NJ: Prentice Hall. 
+Hone, K S, & El Said G. R. (2016). Exploring the factors affecting MOOC retention: A survey study. 
+Computers & Education, 98, 157–168.  
+Johnson, T.  E., Xin, X., Mackal, M., & Reiser, R. A. (2012). Textbooks used in graduate programs in 
+instructional design and technology: Comparisons across time and countries. Educational Technology, 
+52(4), 25-32. 
+Jonassen, D. H. (1997). Instructional design model for well -structured and ill -structured problem -solving 
+learning outcomes. Educational Technology Research and Development 45 (1), 65-95. 
+[PAGE 18]
+International Journal of Technology in Education (IJTE) 
+ 
+17 
+Jonassen, D. H. (1999). Designing constructivist learning environments. In C. M. Reigeluth (Ed.), Instructional 
+design theories and models: A new paradigm of instructional theory  (Vol. II, pp. 215–239). Mahwah, NJ: 
+Lawrence Erlbaum Associates. 
+Jordan, K. (2014). Initial trends in enrolment and completion of massive open online courses Massive Open 
+Online Courses. The International Review of Research in Open and Distributed Learning , 15, 133–160. 
+Kaplan, A. M., & Haenlein, M. (2016). Higher education and the digital revolution: About MOOCs, SPOCs, 
+social media, and the Cookie Monster. Business Horizons, 59(4), 441–450. 
+https://doi.org/10.1016/j.bushor.2016.03.008 
+Kapp, K. M. (2012). The gamification of learning and instruction: game-based methods and strategies for 
+training and education. San Francisco, CA: Pfeiffer. 
+Kemp, J. E. (1971). Instructional design: A plan for unit and course development. Belmont, CA: Fearon. 
+Kentnor, H. E. (2015). Distance education and the evolution of online learning in the United States. Curriculum 
+and Teaching Dialogue, 17(1 & 2), 21–34. 
+Klemke, R., Eradze, M., & Antonaci, A. (2018, February). The flipped MOOC: Using gamification and learning 
+analytics in MOOC design – A conceptual approach. Educational Sciences, 8 (25), 
+doi:10.3390/educsci8010025 
+Koszalka, T., Russ-Eft, D., & Reiser, R. (2013). Instructional design competencies: The standards (4th 
+Ed). Charlotte, NC: Information Age Publishing.  
+Kozma, R.B. (1994). Will media influence learning? Reframing the debate. Journal of Educational Technology 
+Research and Development, 42(2), 7-19. 
+Lewis, B. N., & Pask, G. (1965). The theory and practice of adaptive teaching systems. In R. Glaser (Ed.), 
+Teaching machines and programmed learning II: Data and directions . Washington, DC: National 
+Education Association. 
+Liao, Y. C. (1999). Effects of hypermedia on students‘ achievement: A meta-analysis. Journal of Educational 
+Multimedia and Hypermedia, 8(3), 255-277. 
+Mager, R. F. (1962).  Preparing objectives for programmed instruction. Belmont, CA: Fearon. 
+Manca, S., & Ranieri, M. (2016). Facebook and the others: Potentials and obstacles of social media for teaching 
+in higher education. Computers & Education, 95, 216-230. 
+Matkin, G.W. (2013). Massive open online courses: Looking ahead by looking back. Continuing Higher 
+Education Review, 77, 49-56. 
+McCluskey, F. D. (1981). DVI, DAVI, AECT: A long view. In J.W. Brown & S. N. Brown (Eds.), Educational 
+media yearbook: 1981. Littleton, CO: Libraries Unlimited. 
+McLeod, S. (2018). Jean Piaget‘s theory of cognitive development. Simply Psychology. Retrieved from 
+https://www.simplypsychology.org/piaget.html 
+Merrill, M. D. (2002a). A pebble- in-the-pond model for instructional design. Performance Improvement, 41 (7), 
+39-44. 
+Merrill, M. D. (2002b). First principles of instruction. Educational Technology Research and Development, 
+50(3), 43-59. 
+Merrill, M. D. (2007). First principles of instruction: A synthesis. In R. A. Reiser & J. V. Dempsey (Eds.), 
+Trends and issues in instructional design and technology  (2nd ed., pp. 62-71). Upper Saddle River, NJ: 
+[PAGE 19]
+An 
+ 
+18 
+Merrill/Prentice-Hall.  
+Merrill, M. D. (2009). First principles of instruction. In C. M. Reigeluth & A. A. Carr-Chellman (Eds.), 
+Instructional-design theories and models: Building a common knowledge base  (Vol. III, pp. 41-56). New 
+York: Routledge. 
+Miller, R. B. (1962). Analysis and specification of behavior for training. In R. Glaser (Ed.), Training research 
+and education. Pittsburgh: University of Pittsburgh Press. 
+Molenda, M. (2008).   Historical foundations. In J. M. Specto r, M. D. Merrill, J. V.  Merriënboer, & M. P. 
+Driscoll (Eds.), Handbook of research on educational communications and technology  (3rd ed.) (pp. 3 -
+20). New York: Taylor & Francis Group.  
+Molnar, A. (2019). Virtual schools in the U.S. 2019: Executive summary.  Retrieved from 
+https://nepc.colorado.edu/sites/default/files/publications/RB%20Exec%20Summary%20with%20blurb.p
+df 
+Moran, M., Seaman, J., &, Tinti-Kane, H. (2011). Teaching, learning, and sharing: How today’s higher 
+education faculty use. Social media. Pearson Learning Solutions and Babson Survey Research Group. 
+Office of Technology Assessment. (1995). Teachers & technology: Making the connection . Washington, DC: 
+Office of Technology Assessment. 
+Owston, R. (2017). Empowering learners through blended learning . International Journal on E-Learning, 17 (1), 
+65-83. 
+Pagliaro, L. A. (1983). The history and development of CAI: 1926-1981, an overview. Alberta Journal of 
+Educational Research, 29(1), 75-84. 
+Papert, S. (1993a). Mindstorms: Children, computers, and powerful ideas (2nd ed.). New York:  Basic Books. 
+Papert, S. (1993b). The children’s machine: Rethinking schools in the age of the computer . New York: Basic. 
+Books. 
+Paradise, A. (2008). 2007 State of the industry report . Alexandria, VA: American Society of Training and 
+Development. 
+Peng, H., Su, Y. J., Chou, C., & Tsai, C. C. (2009). Ubiquitous knowledge co nstruction: mobile learning re -
+defined and a conceptual framework. Innovations in Education and Teaching International, 46 (2), 171-
+183. doi:10.1080/14703290902843828 
+Perrin, A., & Anderson, M. (2019). Share of U.S. adults using social media, including Facebook, is mostly 
+unchanged since 2018. Retrieved from https://www.pewresearch.org/fact-tank/2019/04/10/share- of-u-s-
+adults-using-social-media-including- 
+ facebook- is-mostly-unchanged-since-2018/ 
+Picciano, A. G., & Seaman, J. (2007). K–12 online learning: A survey of U.S. school district administrators. 
+Retrieved from http://www.sloan c.org/publications/survey/K-12_06.asp 
+Picciano, A. G., & Seaman, J. (2008). Staying the course: Online education in the United States. Retrieved from 
+http://www.sloanc.org/publications/survey/pdf/staying_the_course.pdf 
+Piskurich, G. M. (2015). Rapid instructional design: Learning ID fast and right  (3rd ed.). Hoboken, NJ: John 
+Wiley & Sons, Inc. 
+Porter, S. (2017). To MOOC or not to MOOC: How can online learning help to build the future of higher 
+education? Oxford, UK: Chandos Publishing.   
+[PAGE 20]
+International Journal of Technology in Education (IJTE) 
+ 
+19 
+Prensky, M. (2007). Digital game-based learning . St. Paul, MN: Paragon House.Redfield, D. D., & Dick, W. 
+(1984). An alumni-practitioner review of doctoral competencies in instructional systems. Journal of 
+Instructional Development, 7(1), 10-13. 
+Reigeluth, C. M. (1983). Instructional-design theories and models: An overview of their current status.  
+Hillsdale, NJ: Lawrence Erlbaum Associates.  
+Reigeluth, C. M. (1999a). Instructional-design theories and models: A new paradigm of instructional theory  
+(Vol. II). Mahwah, N.J.: Lawrence Erlbaum Associates. 
+Reigeluth, C. M. (1999b). What is instructional-design theory and how is it changing? In C. M. Reigeluth (Ed.), 
+Instructional-design theories and models: A new paradigm of instructional theory  (Vol. II, pp. 5-29). 
+Mahwah, NJ: Lawrence Erlbaum Associates. 
+Reigeluth, C. M., & An, Y. (2021). Merging the instructional design process with learner-centered theory: The 
+holistic 4D model. Routledge.   
+Reigeluth, C. M., Beatty, B. J., & Myers, R. D. (2017). Instructional-Design Theories and Models: The 
+Learner-Centered Paradigm of Education (Vol. IV). New York: Routledge. 
+Reigeluth, C. M., & Carr-Chellman, A. A. (Eds.). (2009). Instructional-design theories and models: Building a 
+common knowledge base (Vol. III). New York: Routledge. 
+Reigeluth, C. M., & Karnopp, J. R. (2013). Reinventing school s: It’s time to break the mold . Lanham, MD:  
+Rowman & Littlefield Education. 
+Reigeluth, C. M., & Merrill, M. D. (1978). A knowledge base for improvi ng our methods of instruction. 
+Educational Psychologist , 13, 57–70.  
+Reigeluth, C. M., &. Merrill, M. D. (197 9). Classes of instructional variables. Educational Technology , 19(3), 
+5–24. 
+Reiser, R. A. (2001a). A history of instructional design and technology: Part. I: A history of instructional media. 
+Educational Technology Research and Development, 49(1), 53-63. 
+Reiser, R. A. (2001b). A history of instructional design and technology: Part. II: A history of instructional 
+design. Educational Technology Research and Development, 49(2), 57-67. 
+Reiser, R. A. (2018). A history of instructional design and technology. In R.A. Reiser & J.V. Dempsey (Eds.), 
+Trends and Issues in Instructional Design and Technology (4th ed). New York, NY: Pearson Education.  
+Richardson, W. (2009). Blogs, wikis, podcasts, and other powerful web tools for classrooms (2nd ed.). 
+Thousand Oaks, CA: Corwin Press. 
+Rooney, J. E. (2003). Blending learning opportunities to enhance educational programming and meetings. 
+Association Management, 55(5), 26–32. 
+Saettler, P. (1968). A history of instructional technology. New York: McGraw-Hill. 
+Saettler, P. (1990). The evolution of American educational technology. Englewood, CO: Libraries Unlimited. 
+Savery, J.R., & Duffy, T.M. (1995). Problem-based learning: An instructional model and its constructivist 
+framework. In B. Wilson (Ed.), Constructivist learning environments: Case studies in instructional 
+design (pp. 135-148). Englewood Cliffs, NJ: Educational Technology Publications. 
+Schank, R. (1994). What we learn when we learn by doing. Evanston, IL: Northwestern University Press. 
+Schrader, P. G., Zheng, D., & Young, M. (2006). Teachers‘ perceptions of video games: MMOGs and the future 
+of pre-service teacher education. Innovate: Journal of Online Education, 2(3), 1–10. 
+[PAGE 21]
+An 
+ 
+20 
+Schwen, T. M., Kalman, H. K., Hara, N., & Kisling, E. L. (1998). Potential knowledge management 
+contributions to human performance technology research and practice. Educational Technology Research 
+and Development, 46(4), 73-89. 
+Scriven, M. (1967). The methodology of evaluation. In Perspectives of Curriculum Evaluation  (American 
+Educational Research Association Monograph Series on Curriculum Evaluation, No. 1). Chicago: Rand 
+McNally. 
+Shah, D. (2019, January 6). Year of MOOC-based degrees: A review of MOOC stats and trends in 2018. Class 
+Central. Retrieved from https://www.class-central.com/report/moocs-stats-and-trends-2018 
+Simões, J., Redondo, R. D., & Vilas, A. F. (2013). A social gamification framework for a K-6 learning platform. 
+Computers in Human Behavior, 29(2), 345–353.  
+Skinner, B. F. (1938). The Behavior of organisms: An experimental analysis. New York: Appleton-Century. 
+Skinner, B. F. (1958). Teaching machines. Science, 128 (3330), 969-977.  
+Snelbecker, G. E. (1983). Is ins tructional theory alive and well? In C.M. Reigeluth (Ed.), Instructional design 
+theories and models: An overview of their current status  (pp. 437 –472). Hillsdale, NJ: Lawrence 
+Erlbaum. 
+Spector, J. M. (1995). Integrating and humanizing the process of automating instructional design. In R. D. 
+Tennyson & A. E. Barron (Eds.), Automating instructional design: computer−based development and 
+delivery tools (pp. 523−546). Berlin: Springer−Verlag. 
+Spector, J. M., & Anderson, T. M. (Eds.) (2000). Integrated and holistic perspectives on learning and 
+instruction: Understanding complexity. Dordrecht: Kluwer. 
+Stolorow, L. M., & Davis, D. (1965). Teaching machines and computer-assisted systems. In R. Glaser (Ed.), 
+Teaching machines and programmed learning II: Data and directions.  Washington, DC: National 
+Education Association. 
+Sweller, J. (1988). Cognitive load during problem solving: Effects on learning. Cognitive Science, 12 , 257-285. 
+Takeuchi, L. M., & Vaala, S. (2014). Level up learning: A national survey on teaching with digital 
+games. Retrieved from 
+http://www.joanganzcooneycenter.org/wpcontent/uploads/2014/10/jgcc_leveluplearning_final.pdf  
+Thompson, J. (2007). Is education 1.0 ready for web 2.0 students? Innovate, 3 (4). Retrieved from 
+https://nsuworks.nova.edu/innovate/vol3/iss4/5/ 
+Thorndike, E. L. (1905). The elements of psychology. New York: A. G. Seiler. 
+Traxler, J. (2011). Introduction. In J. Traxler & J. Wishart (Eds.), Making mobile learning work: Case studies of 
+practice (pp. 4-12). Bristol, UK: ESCalate: HEA Subject Centre for Education.  
+Tripp, S., & Bichelmeyer, B. (1990). Rapid prototyping: An alternative instructional design strategy. 
+Educational Technology Research and Development, 38(1), 31-44.   
+UNESCO. (2002). Forum on the impact of Open Courseware for higher education in developing countries: 
+Final report. Paris: Author. Retrieved from http://unesdoc.unesco.org/images/0012/001285/128515e.pdf 
+UNESCO. (2020). Education: From disruption to recovery. Retrieved from 
+https://en.unesco.org/covid19/educationresponse 
+van Merriënboer, J. J. G. (1997). Training complex cognitive skills: A four -component instructional design 
+model for technical training. Englewood Cliffs, NJ: Educational Technology Publications. 
+[PAGE 22]
+International Journal of Technology in Education (IJTE) 
+ 
+21 
+van Merriënboer, J. J. G. (2007). Alternate models of instructional design: Holistic design approaches and 
+complex learning. In R. A. Reiser & J. V. Dempsey (Eds.), Trends and issues in instructional design and 
+technology (pp. 255-284). Upper Saddle River, New Jersey: Merrill/Prentice Hall. 
+Watson, J. B. (1913). Psychology as the behaviorist views it. Psychological Review, 20, 158-177. 
+Watson, J. F., Gemin, B., Ryan, J., & Wicks, M. (2009). Keeping pace with K–12 online learning: A review of 
+state-level policy and practice. Retrieved from http://www.kpk12.com/downloads/KeepingPace09-
+fullreport.pdf 
+Weller, M. (2014). The battle for open how openness won and why it doesn’t feel like victory. London: Ubiquity 
+Press. 
+Weller, H., Repman, J., Lan, W., & Rooze, G. (1995). Improving the effectiveness of learning through 
+hypermedia-based instruction: the importance of learner characteristics. Computers in Human Behavior, 
+11(3-4), 451-465. 
+William and Flora Hewlett Foundation. (2017). Open educational resources. Retrieved from 
+http://www.hewlett.org/strategy/open-educational-resources 
+Woolfolk, A. (2010). Educational psychology (11th ed.). Upper Saddle River, NJ: Merrill. 
+Xing, W., Chen, X., Stein, J., & Marcinkowski, M. (2016). Temporal predication of dropouts in MOOCs:  
+ Reaching the low hanging fruit through stacking generalization. Computers in Human Behavior , 58, 
+119–129. https://doi.org/10.1016/j.chb.2015.12.007 
+Zemke, R., & Rossett, A. (2002). A hard look at ISD. Training, 39(2), 26-34.  
+Zichermann, G. (2010). Fun is the future: Mastering gamification . Retrieved from 
+http://www.youtube.com/watch?v=6O1gNVeaE4g 
+Zachos, G., Paraskevopoulou-Kollia, E-A., & Anagnostopoulos, I. (2018). Social media use in higher education: 
+A review. Education Sciences, 8, 194, doi:10.3390/educsci8040194 
+ 
+Author Information 
+Yunjo An 
+ https://orcid.org/0000-0002-2763-1297 
+University of North Texas 
+United States 
+Contact e-mail: yunjo.an@unt.edu
