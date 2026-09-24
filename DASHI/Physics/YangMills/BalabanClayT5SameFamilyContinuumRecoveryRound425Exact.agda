@@ -163,6 +163,12 @@ boundedExpectationConvergesToSelectedCoreContinuum recovery observable bounded =
 round425SameFamilyContinuumCoreRecoveryCompilerLevel : ProofLevel
 round425SameFamilyContinuumCoreRecoveryCompilerLevel = machineChecked
 
+-- The historical in-repo authority consumes the clustered OS package.
+-- A weaker pre-gap reconstruction theorem must be bound explicitly before this
+-- field can be promoted to standardImported.
+round425CoreOSReconstructionAuthorityLevel : ProofLevel
+round425CoreOSReconstructionAuthorityLevel = conditional
+
 round425CoreRecoveryRequiresClustering : Bool
 round425CoreRecoveryRequiresClustering = false
 
