@@ -21,6 +21,7 @@ import DASHI.Cognition.PNF.SensibLawPdfActiveRequirementPlannerLiveExact as PdfP
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 import DASHI.Cognition.PNF.SensibLawUnifiedPNFIntakeReentrySpineExact as IntakeReentry
 import DASHI.Cognition.PNF.SensibLawPersistentStatementObservationEventSpineExact as PersistentTrace
+import DASHI.Cognition.PNF.SensibLawChronologyContestationSpineExact as ChronologyContestation
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
