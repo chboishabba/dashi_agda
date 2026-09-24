@@ -29,6 +29,7 @@ import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as A3Source
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as Measure
 import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as Premeasure
+import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as PhysicalRep
 import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45Rep
@@ -111,13 +112,13 @@ leafLevel a2BetaMarkGeneratedHistoryShell =
 leafLevel a3SourceNativeSameFamilyContinuumOS =
   A3Source.literalRound457SourceNativeContinuumOSLevel
 leafLevel a3CylinderEventIndicatorSemantics =
-  Premeasure.literalRound498CylinderEventIndicatorSemanticsLevel
+  PhysicalRep.literalRound499CylinderEventIndicatorSemanticsLevel
 leafLevel a3ProjectiveEventExpectationConsistency =
-  Premeasure.literalRound498ProjectiveEventExpectationConsistencyLevel
+  PhysicalRep.literalRound499ProjectiveEventExpectationConsistencyLevel
 leafLevel a3ContinuityAtEmpty =
-  Measure.literalRound495ContinuityAtEmptyLevel
+  PhysicalRep.literalRound499ContinuityAtEmptyLevel
 leafLevel a3CylinderExpectationIntegralIdentification =
-  Measure.literalRound495CylinderExpectationIdentificationLevel
+  PhysicalRep.literalRound499CylinderExpectationIdentificationLevel
 leafLevel a45QuantitativeMomentToFiniteOS05 =
   A45.literalRound464QuantitativeMomentToOS05Level
 leafLevel a45RepresentedOSPredicateExtensionality =
@@ -204,6 +205,10 @@ residualLeafCount = listLength residualLeaves
 finiteProjectivePremeasureAssemblyLevel : ProofLevel
 finiteProjectivePremeasureAssemblyLevel =
   Premeasure.round498ProjectivePremeasureCompilerLevel
+
+physicalRepresentationAssemblyLevel : ProofLevel
+physicalRepresentationAssemblyLevel =
+  PhysicalRep.round499PhysicalRepresentationCompilerLevel
 
 caratheodoryExtensionLevel : ProofLevel
 caratheodoryExtensionLevel =
