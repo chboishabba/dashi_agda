@@ -55,6 +55,21 @@ rules.py
 must not use regular expressions to interpret Agda syntax. A regression test
 enforces that invariant.
 
+The shallow type-shape layer follows two important soundness rules:
+
+- **Function-arrow structure is parsed before equality in the codomain.** A type
+  such as `(x : A) → f x ≡ g x` is represented as a `Pi` whose codomain is an
+  `Equality`, not as an equality whose left endpoint accidentally contains
+  the telescope.
+- **Equality incompatibility requires rigid evidence.** Different arbitrary
+  term/function heads are not treated as different types. Hard equality
+  diagnostics are reserved for cases such as constructors known to belong to
+  different datatypes, or an evident sort-vs-term mismatch.
+
+A single pre-arrow telescope segment may also contain multiple binders, e.g.
+`∀ {X} (s : State X) (x : X) → ...`; these are counted individually for
+arity diagnostics.
+
 The current implementation has structural AST support for:
 
 - modules, imports, opens, aliases and import directives;
