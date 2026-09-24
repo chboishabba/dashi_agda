@@ -7,6 +7,8 @@ on:
       - 'DASHI/Applications/WorldMonitorForecastScorecardExact.agda'
       - 'DASHI/Interop/GodsEyeViewForecastVerificationExact.agda'
       - 'DASHI/Core/ObjectDecompositionResidualRouterExact.agda'
+      - 'DASHI/Core/ProviderNeutralWorldQueryAlgebraExact.agda'
+      - 'DASHI/Chemistry/PetrochemicalForecastObjectResidualAdapterExact.agda'
       - 'DASHI/Reasoning/ForecastWaveHyperfabricCrossPollinationExact.agda'
       - 'DASHI/ForecastVerificationEverything.agda'
       - '.github/workflows/forecast-verification-agda.yml'
