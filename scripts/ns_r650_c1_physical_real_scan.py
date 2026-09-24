@@ -138,6 +138,9 @@ def evaluate_state(
         "offdiagonal_minus_twice_direct_companion": float(
             evaluated["offdiagonal_minus_twice_direct_companion"]
         ),
+        "c1_r406_diagonal_coupling_residual": float(
+            evaluated["c1_r406_diagonal_coupling_residual"]
+        ),
         "r406_weighted_remainder": float(
             evaluated["r406_weighted_remainder"]
         ),
