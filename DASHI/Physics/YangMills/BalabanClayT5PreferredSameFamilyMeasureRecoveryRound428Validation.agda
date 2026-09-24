@@ -18,3 +18,16 @@ gramMeasureWeldCompilerMachineChecked = refl
 independentGramMeasurePaymentPruned :
   R428.round428IndependentGramMeasureSameObjectPaymentRequired ≡ false
 independentGramMeasurePaymentPruned = refl
+
+
+measureConvergenceCompilerMachineChecked :
+  R428.round428MeasureConvergenceLevel ≡ machineChecked
+measureConvergenceCompilerMachineChecked = refl
+
+literalSubsequenceTightnessRemainsPhysical :
+  R428.round428EveryLiteralSubsequenceTightLevel ≡ conditional
+literalSubsequenceTightnessRemainsPhysical = refl
+
+uniqueClusterPointRemainsPhysical :
+  R428.round428EveryExtractedClusterPointIsContinuumLevel ≡ conditional
+uniqueClusterPointRemainsPhysical = refl
