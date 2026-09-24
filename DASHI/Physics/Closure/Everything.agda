@@ -475,3 +475,4 @@ import DASHI.Physics.Closure.NSTriadKNR650WeightedExternalProductRuleCommutatorR
 
 import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact
 import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationZeroBranchRound672Exact
+import DASHI.Physics.Closure.NSTriadKNR650ExternalZeroBranchEliminationRound673Exact
