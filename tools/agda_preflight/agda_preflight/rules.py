@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import re
 from typing import Dict, Iterable, List, Optional, Tuple
 
-from .ast_index import significant_tokens, typed_binders, descendants, first_descendant
+from .ast_index import significant_tokens, typed_binders, descendants, first_descendant, applications, application_view, clause_explicit_argument_count
 from .shapes import shape_from_node, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
@@ -175,7 +175,10 @@ def extended_diagnostics(checker, s, D):
                     datatype=name,
                     type_text=ctor.type_text,
                     line=ctor.line,
-                    arity=_arity(ctor.type_text),
+                    arity=(
+                        explicit_arity(shape_from_node(s.ast.source_bytes, ctor.type_node))
+                        if ctor.type_node is not None else 0
+                    ),
                 )
                 for cname, ctor in decl.constructors.items()
             },
@@ -279,14 +282,24 @@ def extended_diagnostics(checker, s, D):
         if target and name not in target.signatures and name not in target.records and not any(name in r.fields for r in target.records.values()):
             line, col = _line_col(source, m.start()); out.append(_diag(D, "TSAGDA021", f"{alias}.{name} is not exported by {target.module_name}", s, line, col))
 
-    for name, sig in s.signatures.items():
-        want = _arity(sig.type_text)
-        for line, lhs, rhs in clauses.get(name, []):
-            got = _lhs_arity(lhs)
-            if got != want: out.append(_diag(D, "TSAGDA045", f"{name} clause has {got} explicit LHS arguments; signature has {want}", s, line))
-            for nm in re.findall(r"\{\s*([A-Za-z_][A-Za-z0-9_']*)", lhs):
-                if not re.search(rf"\{{\s*{re.escape(nm)}\s*(?::|\}})", sig.type_text):
-                    out.append(_diag(D, "TSAGDA042", f"named implicit argument {nm} is absent from {name}'s telescope", s, line))
+    for name, sig in s.ast.signatures.items():
+        if sig.type_node is None:
+            continue
+        want = explicit_arity(shape_from_node(s.ast.source_bytes, sig.type_node))
+        binder_names = {binder.name for binder in typed_binders(s.ast.source_bytes, sig.type_node)}
+        for clause in s.ast.clauses.get(name, []):
+            got = clause_explicit_argument_count(s.ast.source_bytes, clause.lhs_node)
+            if got is not None and got != want:
+                out.append(_diag(D, "TSAGDA045", f"{name} clause has {got} explicit LHS arguments; signature has {want}", s, clause.line))
+            lhs_tokens = significant_tokens(s.ast.source_bytes, clause.lhs_node)
+            for i, token in enumerate(lhs_tokens):
+                if token.text not in {"{", "{{", "⦃"}:
+                    continue
+                if i + 1 >= len(lhs_tokens):
+                    continue
+                candidate = lhs_tokens[i + 1]
+                if candidate.node_type in {"id", "bid"} and candidate.text != "_" and candidate.text not in binder_names:
+                    out.append(_diag(D, "TSAGDA042", f"named implicit argument {candidate.text} is absent from {name}'s telescope", s, clause.line))
 
     for alias, mod in imported.items():
         for rname, rec in mod.records.items():
@@ -368,10 +381,16 @@ def extended_diagnostics(checker, s, D):
                     out.append(_diag(D, "TSAGDA082", f"constructor pattern {ctor_name} has {len(pm.group(1).split())} arguments; arity is {ctor.arity}", s, line))
             if catch is not None: out.append(_diag(D, "TSAGDA088", f"clause follows visible catch-all at line {catch}", s, line)); break
             if re.fullmatch(rf"{re.escape(name)}(?:\s+_)+", lhs): catch = line
-            rec = re.search(rf"\b{re.escape(name)}\s+(.+)$", rhs)
-            if rec:
-                lhs_args = lhs.split()[1:]; rhs_args = rec.group(1).split()[:len(lhs_args)]
-                if lhs_args and lhs_args == rhs_args: out.append(_diag(D, "TSAGDA140", f"{name} recursively calls itself with identical visible arguments", s, line, severity="warning", confidence="medium"))
+            ast_clause = next((item for item in s.ast.clauses.get(name, []) if item.line == line), None)
+            if ast_clause is not None and ast_clause.rhs_node is not None:
+                lhs_view = application_view(s.ast.source_bytes, ast_clause.lhs_node)
+                lhs_args = tuple(arg.text for arg in lhs_view.explicit_args) if lhs_view is not None else ()
+                for app in applications(s.ast.source_bytes, ast_clause.rhs_node):
+                    if app.head.rsplit(".", 1)[-1] != name:
+                        continue
+                    rhs_args = tuple(arg.text for arg in app.explicit_args[:len(lhs_args)])
+                    if lhs_args and rhs_args == lhs_args:
+                        out.append(_diag(D, "TSAGDA140", f"{name} recursively calls itself with identical visible arguments", s, line, severity="warning", confidence="medium"))
 
     eq_shapes = {}
     for name, signature in s.ast.signatures.items():
@@ -579,18 +598,27 @@ def extended_diagnostics(checker, s, D):
             out.append(_diag(D, "TSAGDA027", f"open imports make {n} ambiguous between {', '.join(sorted(set(mods)))}", s, 1, severity="warning", confidence="medium"))
 
     # TSAGDA040/041/046/047/049: bounded arity checks for simple applications.
-    known_arity = {name: _arity(sig.type_text) for name, sig in s.signatures.items()}
+    known_arity = {
+        name: explicit_arity(shape_from_node(s.ast.source_bytes, sig.type_node))
+        for name, sig in s.ast.signatures.items()
+        if sig.type_node is not None
+    }
     known_arity.update({name: ctor.arity for name, ctor in ctors.items()})
-    for name, want in known_arity.items():
-        if want == 0: continue
-        for m in re.finditer(rf"(?m)(?<![:.\w]){re.escape(name)}((?:\s+[^=\n;,)]+)+)", clean):
-            if m.start() < len(source) and source[max(0, m.start()-16):m.start()].rstrip().endswith(":"):
+    for clause_items in s.ast.clauses.values():
+        for clause in clause_items:
+            if clause.rhs_node is None:
                 continue
-            args = [a for a in m.group(1).strip().split() if not a.startswith("{")]
-            if len(args) > want:
-                line, col = _line_col(source, m.start())
-                code = "TSAGDA046" if name in ctors else "TSAGDA040"
-                out.append(_diag(D, code, f"{name} is visibly over-applied: {len(args)} explicit arguments for arity {want}", s, line, col))
+            for app in applications(s.ast.source_bytes, clause.rhs_node):
+                short_head = app.head.rsplit(".", 1)[-1]
+                want = known_arity.get(short_head)
+                if want is None:
+                    continue
+                got = len(app.explicit_args)
+                if got > want:
+                    line = app.head_node.start_point[0] + 1
+                    col = app.head_node.start_point[1] + 1
+                    code = "TSAGDA046" if short_head in ctors else "TSAGDA040"
+                    out.append(_diag(D, code, f"{app.head} is visibly over-applied: {got} explicit arguments for arity {want}", s, line, col))
 
     # Local record constructors: constructor arity is the number of fields.
     for rname, rec in s.records.items():
@@ -775,12 +803,19 @@ def extended_diagnostics(checker, s, D):
     for name, cs in clauses.items():
         sig = s.signatures.get(name)
         if not sig: continue
-        parts = _split_arrows(sig.type_text); want = _arity(sig.type_text)
+        ast_sig = s.ast.signatures.get(name)
+        parts = _split_arrows(sig.type_text)
+        want = (
+            explicit_arity(shape_from_node(s.ast.source_bytes, ast_sig.type_node))
+            if ast_sig is not None and ast_sig.type_node is not None
+            else _arity(sig.type_text)
+        )
         implicit_names = set(re.findall(rf"\{{\s*({_IDENT})\s*:", sig.type_text))
         explicit_names = set(re.findall(rf"\(\s*({_IDENT})\s*:", sig.type_text))
         for line, lhs, rhs in cs:
-            got = _lhs_arity(lhs)
-            if got != want:
+            ast_clause = next((item for item in s.ast.clauses.get(name, []) if item.line == line), None)
+            got = clause_explicit_argument_count(s.ast.source_bytes, ast_clause.lhs_node) if ast_clause is not None else None
+            if got is not None and got != want:
                 out.append(_diag(D, "TSAGDA110", f"{name} clause binder count {got} does not match explicit telescope arity {want}", s, line))
             for nm in re.findall(r"\{\s*([A-Za-z_][A-Za-z0-9_']*)", lhs):
                 if nm in explicit_names:
