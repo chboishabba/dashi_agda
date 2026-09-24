@@ -38,7 +38,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
-import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as A3
+import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as A3
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
 import DASHI.Physics.YangMills.YangMillsConcreteQuantitativeOS05Round514Exact as Quantitative
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
@@ -108,19 +108,19 @@ familyLevel c4DensityAnchoredStressLane =
 
 a3EventIndicatorLevel : ProofLevel
 a3EventIndicatorLevel =
-  A3.literalRound499CylinderEventIndicatorSemanticsLevel
+  A3.literalRound535CylinderEventIndicatorSemanticsLevel
 
 a3ProjectiveConsistencyLevel : ProofLevel
 a3ProjectiveConsistencyLevel =
-  A3.literalRound499ProjectiveEventExpectationConsistencyLevel
+  A3.literalRound535ProjectiveEventExpectationConsistencyLevel
 
 a3ContinuityAtEmptyLevel : ProofLevel
 a3ContinuityAtEmptyLevel =
-  A3.literalRound499ContinuityAtEmptyLevel
+  A3.literalRound535ProjectiveContinuityAtEmptyLevel
 
 a3ExpectationIntegralIdentificationLevel : ProofLevel
 a3ExpectationIntegralIdentificationLevel =
-  A3.literalRound499CylinderExpectationIdentificationLevel
+  A3.literalRound535CylinderExpectationIntegralIdentificationLevel
 
 wextTwoMarkExpansionLevel : ProofLevel
 wextTwoMarkExpansionLevel =
