@@ -2,7 +2,8 @@
 
 Status: publication-control overlay; historical/provenance preserving; non-promoting.
 
-Timestamp: `2026-09-15 09:32 AEST (UTC+10)`.
+Original timestamp: `2026-09-15 09:32 AEST (UTC+10)`.  
+Clay max-cut reconciliation: `2026-09-23 AEST (UTC+10)`.
 
 This addendum corrects the A/B/C/D nomenclature used by the current Paper-1
 programme without deleting the older `PublicationRoadmap.md`, manuscript
@@ -13,7 +14,7 @@ history, or abandoned proof attempts.
 | lane | problem | current job |
 | --- | --- | --- |
 | **Lane A** | unforced whole-space `R^3` regularity | independent proof obligation; freeze its current producer/compiler/terminal cut before named-field search |
-| **Lane B** | unforced periodic `T^3` regularity | **active construction**: R571 signed carrier -> centered/Taylor -> second moment -> six-three -> R568 -> R572/R503 |
+| **Lane B** | unforced periodic `T^3` regularity | **active construction**: R642 C1–C7 max-cut; C1 R568 signed payment + C2 critical signed-production are the two genuinely new nonlinear estimates; R571/Taylor/six-three and other decompositions are optional producer strategies |
 | **Lane C** | forced whole-space `R^3` breakdown | released-proof BIDI verification, dependency closure, provenance, and same-object integration |
 | **Lane D** | forced periodic `T^3` breakdown | released-proof BIDI verification, dependency closure, provenance, and same-object integration |
 
@@ -32,27 +33,47 @@ forced C/D breakdown results do not settle unforced A or unforced B.
 Any cross-lane promotion requires an explicit typed transfer/same-object theorem
 and a separate authority/certification receipt.
 
-## Periodic B priority
+## Periodic B Clay max-cut
 
-The current primary proof-search route is:
+The canonical terminal cut is the R642 C1--C7 surface:
+
+```text
+NEW / NONSTANDARD
+C1  R568 cutoff-uniform signed weighted payment
+C2  physical phase-sensitive critical-production estimate
+
+SAME-OBJECT / PHYSICAL
+C3  canonical literal critical slice
+C4  common-initial realization + cutoff-uniform initial ceiling
+C5  positive retained viscosity
+
+STANDARD COMPLETION
+C6  scalar FTC / integration-linearity / order receipts
+C7  periodic Sobolev-Rellich-Simon-weak-* package
+```
+
+Only C1 and C2 are counted as genuinely new nonlinear estimates.  R639 now
+constructs the literal R414 critical coordinates and exact energy-identity
+compiler surface; R640 constructs the common-initial-datum same-object compiler
+modulo one live-trajectory-to-canonical-R34 coherence receipt and the actual initial ceiling; R641
+provides the optional, non-mandatory implication `a <= nu -> 0 < 2*nu-a`.
+
+### Optional producer strategies
+
+The signed R571 centered/Taylor -> second-moment -> six-three route remains a
+valuable proof-search strategy for C1/C2:
 
 ```text
 R571 exact signed helical multiplier-difference carrier
-  -> literal y,-y centered/Taylor realization while sign and phase survive
-  -> paired second-order identity
-  -> second-moment payment
-  -> six-three scale arithmetic
-  -> signed inner-fibre payment
-  -> R545/R567 full-square transport
-  -> R568 CommutatorOnlySpacetimeBudget568
-  -> R572
-  -> R503/R415
+  -> centered/Taylor realization
+  -> paired second-order / second-moment machinery
+  -> six-three arithmetic
+  -> R568
 ```
 
-Current open coordinates include the literal modern centered/Taylor realization,
-the old second-moment/six-three transplant on the same periodic carrier, and the
-R568 cutoff-uniform spacetime payment. `C_direct` remains constructed rather
-than missing.
+It is not an independent Clay obligation.  The same applies to Gram/P3,
+Bony/Schur, radial/Pluecker, A3, and separate self/external or helicity-channel
+decompositions.  A direct proof of C1/C2 bypasses them.
 
 ## Historical/provenance status of the Gram/P3 attempt
 
@@ -100,14 +121,16 @@ configured workflow is not an observed commit-specific kernel receipt.
 
 ## Immediate queue
 
-1. keep this four-lane nomenclature synchronized with
-   `DASHI/Papers/NavierStokes/FourLaneProofProgramExact.agda` and
-   `DASHI/Papers/NavierStokes/TheoremInterface.agda`;
-2. Lane B P1: construct the literal R571 centered/Taylor realization;
-3. Lane B P2: drive the old second-moment and six-three theorem chain until the
-   first real same-object or analytic failure;
-4. Lane B P3: propagate to R568, retaining signed structure before positive
-   majorization;
-5. in parallel, freeze Lane A's independent terminal cut;
-6. continue C/D released-proof BIDI verification and exact provenance;
-7. keep certification receipts orthogonal to mathematical and statement status.
+1. keep R642, the live manuscript, theorem interface and this addendum
+   synchronized;
+2. Lane B C1: prove the cutoff-uniform R568 signed weighted payment, using any
+   producer strategy that preserves the literal carrier;
+3. Lane B C2: prove the physical phase-sensitive critical-production estimate
+   with an absorbed coefficient leaving a strictly positive viscous remainder;
+4. discharge C4's live trajectory-to-canonical-R34 coherence and smooth-data uniform initial
+   critical ceiling;
+5. install C6's concrete scalar calculus and C7's periodic
+   Sobolev/Rellich/Simon/weak-* source instances;
+6. in parallel, freeze Lane A's independent terminal cut;
+7. continue C/D released-proof BIDI verification and exact provenance;
+8. keep certification receipts orthogonal to mathematical and statement status.
