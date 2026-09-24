@@ -442,3 +442,5 @@ module DASHI.Physics.Closure.Everything where
 -- equation residual before promotion, preserving explicit calibration scope.
 
 import DASHI.Physics.Closure.NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact
