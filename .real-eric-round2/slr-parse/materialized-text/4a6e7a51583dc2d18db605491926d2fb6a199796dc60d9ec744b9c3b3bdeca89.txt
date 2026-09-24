@@ -1,0 +1,985 @@
+[PAGE 1]
+SD 167 372
+INSTITUTION
+Oreg.
+SPONS AGENCY-National.,Inst. of Educaticn (DREW) ,.Washington,
+D.C.
+.PUB DATESep 75a
+NOTE-29p. t. For related dotume-dtsee SE 026 7327.141;"
+:Contains occasional light type
+AVAILABLE !RCMOffir of Marketing, Northwest Regional. docaticsal
+Lab., 713 S.W."Sectnd Ave., FortlandiOregon,97204..
+($3.25)
+,
+mum ii!senz
+$13.026-739
+d1-
+Computer Oriented" ExercisesonAttitudetand U.S.
+Gasoline COn'sumption,:lttitnde.itod4nt guide.
+Computer 'TechnolOgyiprograw'EnvlionmentalEdncation
+Unite.N7NortbVestlegional Edutational Lab.. , Portland.,
+EDRS PRICE
+. DESCRIPTORS
+IDENTIFIER S
+MF-40.083 HC-$2.06 Plus Postage.
+*Attitudes:.*Computer Assisted InstrUcticr; Energyi.
+*Energy ConservatiOn;.Envircnmental Education; *Fuel
+ConsumptiOn: Migher Education; *Secondary EdUcationt.
+Siaulation4:Sotial Studies
+*Energy Education
+ABSTRACT
+.
+-0.
+This is the student guide in 'a set of five
+computer-oriented environmental/energy education units. Contentsof
+this guide present: (1) the,t.hree gasolineconsumptitn7redgcing
+options for .which attitudes are to be explored;(2) Exercises; and
+(3.)appendices including an energy attitudes survey. (MR).,
+-,
+*****************************************************,****************
+*Reproductions supplied by EDRS are the beet that can bemade
+from the original document.*'
+*******************4141***********44444g**************4*******************##
+
+[PAGE 2]
+0 S Of PAR IME HT OE HEAL TH
+EAT'aRAlELARE
+FrWHAL NS Tr T0TE OF
+; LOU( A Ti0,1
+r Y1 .4,41t 444ot,
+'f r ,
+ift1), .11,1 '41
+1.4
+.^f frr''ftf fL'ff4f-
+fEr1 414 r)4
+F 1.71 '4 f,
+TIONAL
+
+[PAGE 3]
+This work 1.'s submitted to confidence' and has not as yet' beenpublished;
+The recipient receives the workAn confidence and will useuse_.tl^ie sane
+only for the purpose for whiCh itis _tendered.
+This work &presents development effoits to-date and should :not be
+.Considered final/matertal.Therefore, use of this 'Tlateital.sis 1'061 ted'.
+exclusively to those persons and :tgencies cooperating In field, testing
+All rights, including the right to reproduce all 'or part of the 'conten s
+in any form, are reserved by the Northwest Regional'Educational
+LaboratorY..
+-Prospective users of this manual are urged to first run the sample
+simulation n-program provided in order to determine any needed or
+desirable adjustmentS prior° to use.
+
+[PAGE 4]
+TABLE OF CONTENTS
+ORIENTATION TO GAS CONSUMPTION THE ENERGY CRISIS
+AND PUBLIC, ATTITUDES
+Background..I.... ,...
+Reducing the Consumption of Gasoline
+Opt ion 1
+Option 2.
+Option 3..
+Attitudes of the Public.
+EXERCISES.... ......
+APPEND_ IX A--ENERGY ATTITUDES DATA SHEET.
+B--ACTIONS THE GOVERNMENT COULD TAKE, IN
+ORDER TO REDUCE GASOLINE CONSUMPTION.15
+C--QUESTIONNAIRE ON ATTITUDES TOWARD
+METHODS OF REDUCING GASOLINE CONSUMPTION..18
+... ......2
+2
+......3
+
+[PAGE 5]
+ORIENTATION TO GAS CONSUMPTION, THE ENERGY CRISIS
+AND PUBLIC ATTthJDES
+'Background.
+In his 1975 State. ofl the Union Address.; President .Ford.outlined.his plan for
+dealing with the energy. crisis.In this speech, part of which is printed in
+Appendix A, the President appears, to believe that the energy, crisis is a
+serious problem since "the economic disruption we' -and others, are experiencing
+stems In part frothi the fact that the world price of petroleuni has quadrupled
+in the last year." He believes that the cause of this rise:in price is our
+growing dependenceon foreign. oil, which makes us vulnerable to erithatgoes
+and price increases imposed by the Arab oil cartel..'The President.'s goal
+is to reduce our dependence on foreign oil.In order to achieve his goal,
+President Ford .has developed an energy plan that involves achieving two.
+subgOals.A subgoal is a goal that, when: achieired,, helps us achieve another
+'goal, e.g.., earning money is a subgoal to the goal of buying a car--achieving
+the goal. of earning money helps us achieve the goal of buying a car.The
+President's subgoals are (1) increasing our production of domestic fuels and
+(2) reducing our consumption of fuel, especially gasoline.In this unit we will
+concentrate on the second subgoal:reducing our consumption of fuel (gasoline)
+in order to reduce our dependence on foreign oil.
+!
+Reducing the Consumption of Gasoline
+The -most controversial part of the President's plan Es his approach to
+reducing the consumption-of gasoline.Three main approaches or options for
+'reducing our -consumption of gasoline have been suggested.
+O3tion1
+To increase the price of gasoline by tariffs and deregulation.
+ThiS option is the approach favored by the President.It involves imposing
+tariffs or taxes on all crude oil and natural gas and deregulating' the price of
+domestic crude oil and natural gas.The increase pit fuel price produced by
+these measures would first be passed on to the printiary consumers of fuel:-
+to the oil companies, electrical. utilities, and industry.7 The price increases
+would then be passed on to individual citizens in the form of higher prices for
+the products of the p imary consumersgasoline, fuel oil,natural gas,
+electricity, and the go ds and services produced by industry.
+These higher prices would mean a 2% (increase in the inflation rate, as
+estimated by the President's advisors, but higher prices would reduce the
+consumption of gasoline and other fuels, because higherprices,would force
+people ,to buy (and thus consume) less.The higher prices would not be
+deductible from federal income tax.
+
+[PAGE 6]
+Another effect of higher prices. would be increased profits for oil cOmpantes.
+PreSidefit Ford believes. that ,.this will enable the oil companies ,to expand their
+exploration for new oil sources, to expand their fuel Production-Capacity, and
+to develop alternatives, such as geothermal 'energy', 'oil, shale and coal
+gasification.
+Option 2
+Thcrease the price of gasoline by direct gasoline taxes.
+This option was rejected by President Ford, but is fayored by many Democrats
+in Congress.Rather than imposing a -tax on all fuel which is passed on to
+Individual citizens through higher prices for goods and services produced by
+primary consumers, it involves imposing a tak on gasoline which would be
+paid directly by the individual citizen as he or she buys gasoline ina service
+station.
+Since the price increase would be restricted to gasoline tattier than applying
+to all of the goods and services produced by primary consumers, the increase
+in the rate of inflation would be lower than with Option.1.Also, direct
+gasoline_ taxes are deductible from federal iqcome tax.
+In addition, dire& gasoline taxes would hot increase -oil company profits, since
+they taxes would be paid to the federal government.Because of this, there
+would presumably be no incentive for oil companies to prOducemore fuel .by
+increased exploration, expanding production capacity,* or developing new energy
+,ources.Of course, the federal goyernmeht could support these activities,
+but this would mean new taxes or a drastic revision of federal' spending/A
+priorities.
+Option 3.
+Reduce the supply of gasoline by- rationing or allocation.
+This option, which is faiored by some members of the Congress,.
+,reduces the consumption of gasoline by reducing the supply. (you obviously can't
+consume what you don't have).There are two ways to reduce the supply of
+gasoline:by rationing and by:allocation.With rationing,individual, Citizens
+are allowed to purchase a -limited amount of gasoline, say 10' gallons per week.
+The rationing would be administered by the federal government and, accordijg to
+the President's advisors, would require a bureaucracy of 17,000persons and
+$40 billion a. year.With allocation, the ,service ,stationo in each geographical
+area of the country would be supplied with a certain number of gallons of
+gasoline each month.When a station sells its supply,it can sell. no more,
+until the next month.This leads to reducing the number of hours gasoline, a
+Sold each day and the nth-Ober of days gasoline is sold each week. *This in
+t.
+* During the Arab oil embargo of the winter of 19741974,''most common
+method for -restricting gasoline"sales was '!odd-eAn'isatieining,."'With this method,
+people could buy, gasoline only),,odd-nitrtiberedeven- numbered days,
+depending on Whether the last number ontheir,liC'ense platswas odd or even.a. 2
+6
+
+[PAGE 7]
+,
+turn leads to long lines at gasoline stations and an inconvenience for
+'Individual citizens.
+Rationing or allocation would not cause an increase in the profits of oil
+companies.Like Option 2, then, Option 3 would produce no incentive
+for the production, of morqbfuel..
+Attitudes of the Mb lic
+When our Government makes decisions on
+decisions must depend,. to a large extent,
+public.:he' government is acting for the
+out the 'wishes of the people.
+solutions to the energy
+people and must, in geneal, carry"
+those
+on the attitil)ilect of the.Am
+This unit deals with public -attitudetoward _President Ford,e
+)
+energy go*e and,
+.options.As a basis for. your studytheseatatudeS,.we. have 'gathered
+questions' asked of tite public byoAmerica's-for
+researchers, George Gallup and Louis Harris, and categorized
+:
+according
+to their relevance to the various assumptions,.
+.goals, and /opt !.°P24The
+questions and, categories are shown in Table Ion thenext page,
+i Through the exercises in' the next section of this Guide, You will have the
+opportunity to examine and express your own attitudes toward various
+( possible solutions .to our energy problems, to propose your own solutions,
+and to examine the attitudes of your classmates, teachers, parents, neighbors,
+and friends toward the energy crises ,andssiblethat crises.solutions to
+
+[PAGE 8]
+,TABLE 1
+qUESTIONS ON ENERGY -ASSLIA1PTIONS, GOALS AND OPTIONS
+(11Asie.Astil,;$11' rION:Tilt; cup rgy criLiisI:: a serious 1)1.01,1011.)
+QUESTIONS.ON GOAL: REDUCE DEPEi4DENCE ON IMPORTED OIL.
+Pollticti
+Harris.. Question on the basic assumptionThe energy "crisis is a serious problem.,
+HarrisIn the dispUto between Israel and the Arabs, whIN side do you sympathize with more -- Israel or the Arabs?
+HarrisWe need Arab oil for our gasoline here at home, no we had better find ways to getafong with the Arabs
+even if that means supporting Israel less..
+WHarris,If we yield'to Aral; restrictions over oil now, we will soon find the Arabs dictatingomuch of U.S. foreign
+policy, and that is wrong.
+HarrisDo you favor a takeover and internationalization of the Arab oil fields by the oil- consuming nations?
+HarrisDo you favor a cutback in oil imports from abroad, even' if it means going to an-odd -even dayorationing
+,
+of gasollne?
+QUESTIONS ON "SUI3COAL:REDUCE' THE CONSUMPTION 'OF GASOLINE
+Poll.Question
+GallupIf you travel to work, what: means do you use to get to work--car,,traln, bus,' walk, other?
+GallupSuppose you had no automobile, how would you then get to workby train, bus, walk, or how?
+GallupSuppose you had to reduce the number of miles you drive by 1/4.How difficult would It be for you to meet
+this requirelnentvery difficult',.fairlY difficult, or not at all difficult?
+QUESTIONS ON OPTION 1:INCREASE THE PRICE OF'GASOL1NE BY TARIFFS
+Poll
+Gallup
+Gallup
+Harris
+Quest ion
+If th- price of gasoline goes up 314 a gallon, do you believe you will cut down your driving?
+If ycs, will you eut down your driving :t great deal, some or, only ,a little?
+One way to cut oil Imports into this country Is to Increase the tariff, or tax, on all oil broUght into the U.S.
+from foreign sources.This would raise gasoline Prices and discourage people from using as much gasoline.
+Would you favor or, oppose" such an Increase in' the tariff, or tax, on oil imported from abroad?
+QUESTIONS ON OPTION 2:INCREASE THE PRICE Or GASOLINE BY A DIRECT (AT-THE-PUMP) GASOLINE TAX.
+PollQue'stion
+i,:'
+1,*
+'tarnsIn order to conserve oil, would you favor or oppose a 1,4 tax on gasoline, which would be deductible
+from your rederal Income Tax, if this would help us become less ,dependent on Arab -oil?
+HarrisIn order to conserve oil, would "you prefer a 10-argallon increase in, the gasoline tax, which would be
+deductible from your, Federal Income Tax, or an Wra-gallon rise in the cost of gasoline,and.fuel oil as a
+result of the tariff on imported oil from abroad?'- .
+HarrisIn order to conserve oil, would you prefer a 20C-a-gallon Increase in the gasoline tax, which would be,deductible from your Federal Income Tax, or pn W.-a-gallon rise ln the cost of gasoline and fuel oil as a°,
+/result of the tariff on imported oil from abroad?,
+QUESTIONS ON OPTION 3:REDUCE THE SUPPLY OF GASOLINE By RATIONING OR ALLOCATION
+PollQuestion
+Barns
+Gallup
+In order to conserve oil, would you have mandatory gasoline rationing or an odd-even basis with no increase
+in the price of gasoline, or no rationing but an W-a-gallon rise In the price of gasoline and fuel oll'as a
+result of the tariff on imported oil from abroad?,
+President Ford says America.must reduce its use of gasoline.In order to accomplish this, which would you
+preferthe President's plan to impose faxes that would result in higher gas prices, or a nationwide
+rationing program?
+
+[PAGE 9]
+1.
+EXERCISES
+In Appendix Aere is an "Energy Attitudes path." sheet. that includes
+the Emilie (terns as are in, Table 1.Use this "Data Sheet" to record
+your attitude toward each item b3r'marking one of the responses to
+each item:
+.
+There.. are dome questions about driving a car and transportationto
+,wqrk.For those queStions either imagine that you havea car and aaofull-lime job or answer.as you 'think your parents would.
+b.You can now use a computer program to enter,your answerS into the
+memory of the computer.The namb of the program is ATITUD.At
+the beginning the ATITUD program will ask you ifyou want to answer
+questions or retrieve answer's- -like this:
+-.0"%41....00,,0
+tO YOU WANT TO ANSWER OtIESTIONIS 9.1i SEE RESULTS?
+1= ANSWER OtIESTI9NS
+2SEE RESIILTS'
+Respond Eby entering's 1.Then, ATITUD will print out all the same,
+queS,4s as are On theata Sheet,"Enter the answers you -mark
+on thb "Data Sheet. "The computer will save all your: answers and
+thoSe of your' classmatesr.
+2.At this point, the .computer has stored your responses' and-those of
+your classmate- to the attitude questione.The computer also has
+stored responses to those same Questions by a' sample of the American
+public.Those responses were gathered by the Gallup and Harris polls.
+You or your teacher-can now retrieve the responsesofyour class as
+well as the responses of the public) gathered by the Gallup and Harris
+polls.To do that, run program ATITUD again.This time tenter a 2
+when you are asked if you want to answer questionS or see the results.
+The compUter will then print a list of the questions along with the
+responses gathered through the Gallup and Harris polls and/a ummary
+of your class "responses.
+rr
+b.On the printout showing the poll responses and the,responses, of your
+class,. mark ydt.i own responses as shown in the example below where
+the "X" respresents your response.
+
+[PAGE 10]
+THE PIETIST .CRI SIS IS .2 SEROUS PR78LEN.
+f ...
+'HARRI'SHARI11 S, FILE
+JAN 197SJULY 1974DATA,,,
+s\'....____AGREE8467
+RIAGREE OR
+NOT SURE16' 34r
+"4""ftl-
+30 PEOPLE HAVEPD
+73
+27
+Now, lookt, your responses and Compare, them to the poll tespOnses
+and the responof yOur claSsmates (labeled "file data").Pick out
+the items where your response is different jhan. the, majority' of the
+respondents to the polls and/or your classas a wholeFor -those
+items `where your response does not agree with the majority, writea
+statement telling why you.feel. as.you do.
+A f3.a.In this exercise yOu are going to takea poll' of your own. Choose at
+least 1,0 peOpleteachersi friends not taking this dais withyou,,
+parents, relatiires, neighbors', etc. =to participate In.your poll..Ask
+those people the same questions, that you, your clatiismates,.and the".;,
+people who participateain.the Harrip_and Galluppolls responded-Ito.
+Record _their responses,When you. ,finish gathering. tfielr responsed
+cOmpute. the percentage of people that chose eachresponse to each
+question ,(computer 'programmers See. Exerbise 4).Record tholfe
+rcents On the computer printout: from t xereide 2b.
+..
+b.Co pare the responses to your poll with the. responses' is the Hat41,s-,
+andallup polls and 4 e _responses of your classmates. - On what items
+do theople you po ed disagree with'your clai3-stnates and/or the
+Harris and Gallup people?Why. do you suppose they'disagree on those,
+-
+[terns?
+4.(Opt tonal for Programmers),
+Write a computer program which will enableyou to enter the responses
+to your poll and which will then calculate, and print the percentage of
+personb choosing each response.
+In the "Bltkground" section of this Guide, three optiontfor reducing
+the consumption of gasoline w re 'Aged,:
+Option 1:Increase the prfce of gasoline by tariffs and
+deregulation.
+Option 2:Increase, the price of gasoline by direct gasoline
+taxes
+Option 3:Reduce the supply of gasoline by rationingor
+allocation.r
+List the advantages and disadvantages of each0C-those three options.'
+10
+
+[PAGE 11]
+The three options proposed for reducing gasoline consumption Involve
+Major measOes which should have immediate effect on the, consumption.
+' of .gasoline.There are also'in,number of other, things. that could be
+done to reduce gasoline consumption, either imMediatelyor in the long
+:rm. One 'example is the establishment of the nationwide automobile
+speed limit of 55 Inks per hour..
+List 'other things that the government, could do lo reduce the consumption
+.of gasoline.Do not limit the list to things yonqiiink the government
+'should do--that is, the ,things you are in' favor of the government's.doing.
+`Instead, list all the things you can think of that it could do- -that
+all the poseible things that 'could reduce gasoline consinptiOn..
+7.In Appendix" 1is a list of '"Actions the Government Could Take In
+Order to Reduce the Gasoline 'Consumption." Compare. the listyou
+made for Exercise 6 with the list in Appendix B.Check the items
+:in the Appendix B. list tqt' you have also listed.At the end of the
+Appendix B list; unddr "other, " list items that you included in your
+list fOr Ekerctse 6 but which 'are not' includein 'the.Appendix B list.
+In Appendix C is a "Questionnaire on Attitudes Toward Methods of
+7 Reducing- Gasoline 'Consumption." Use this QUestionnaire. form. to record
+:your attitude by marking the response you chose in the first column /
+beside 'each item.Al the end of the list, add your "other" methods f of
+conserving gasoline frOln Exercises 6 and .7.
+9.Different people will have different attitudes toward methods of conserving
+gasoline.For example, a poor person would',probably, favor rationing. gas
+rather than raising prices while a wealthy person might favor raising prices
+rather than rat toning....Four of theo.celumna to the right of the statements
+in Appendixare headed Wealthy, Poor, Auto.. Mata.cturers, Gasoline'
+Companies.Now, for each item listed on the Tiestionnaire mark (in the
+correct column) the, attitude you think each of those groups would have.
+_
+10.POI.- this exercise. pretend thatyou are a member of Congress. and must
+vote for or against various proposals to conserve -gasoline:The methods
+of reducing gasoline consumption' listed in the 'questionnaire in App'eridbc C
+are being proposed in Congress.,a
+.
+a.Before you vote .you want to know.: the attitudes of the. people yourepresen
+toward the various ..gasOline saving Methods: ...Pretend thatyour friends,
+relatives.., and 'neighborsare the people you represent:Poll. at Jess( 10
+of ,thoSe '.people Vbyby having them respond to the [tells on the .questionnaire
+in 'Appendix C.Convert their.eaponses to percents and record those
+percents in the column headed "Poll" on the Appendix C questionnaire.
+.11
+
+[PAGE 12]
+,
+Now, as a member of Congress you Must vote on eiclitmethOd.
+Record your yore in the last column of the Appendbi.0 'questionnaire.
+In casting your vote consider yotir own personal feelings, the feelings
+of the people you represent as 'determined by your poll, and, if you
+'wish, the feelings of the Wealthy, poor,' etc.'as recorded in the other
+columns.
+
+[PAGE 13]
+APPENDIX A
+ENERGY ATTITUDES. DATA SHEET
+13
+
+[PAGE 14]
+ENERGY ATTITUDES DATA SHEET
+A.The Energy Crisis is a serious problem?
+(1)Agree
+1
+(2)Disagree
+(3)Not Sure
+B.In the dispute between Israel and the Arabs, which side do you
+syMpathize with more?
+(1)Israel
+(2)Arabs
+(3)Neither
+(4)Both
+(6)Not Sure
+We need Arab pa for our gasoline here at home, so we had
+better find ways to get along with the Arabs- even if that means
+supporting Israel less.
+(1)Agree
+(2)Disagree
+(3),Not Sure
+D.'If we yield- to Arab restrictions over oil now, we will soon find the
+.Arabs dictating much of U.S. foreign policy, and that Is wrong.
+(1)Agree
+(2)Disagree
+(3)Nol Sure
+14
+
+[PAGE 15]
+E.Do you favor a takeover and internationalization of the ..Arab oil fields
+by the oil-consuming nations?
+(1)Yes
+(2)No
+F.Do you' favor a cutback in' oil Imports from abroad, even if it means
+.going to arOodd-even day rationing of gasoline?
+(1) 'Yes
+(2)No
+(3)Not Sure
+G.If you travel to work, what means do you use to get to work?
+(1)Car
+(2)Bus
+(3)Walk
+(4)Train
+(5)'Other
+H.Suppose you had no automobile, how would you then get to work?
+(1)Bus
+(2)Walk
+(3)Bike
+(4)Train
+(5)Other
+(6)Nothing
+15
+
+[PAGE 16]
+-Suppose you had to reduce t e number of Miles you drive by one-
+fourth.How difficult .would it be for you to meet this requiremdiit?
+(1)Very Difficult
+(2)Vairly Difficult
+(3) ,Not at all Difficult
+(4)pet Sure
+J.If the price of gasoline goes up 114gallon, do you believe you will
+cut down your driving?
+(1)Yes
+(2)No r:
+K.If the price of gasoline goes ,up_ 114, a gallon, and you do believe, you
+will -cut down your driving, will you cutour dri'v'ing down:
+(1)A great deal
+(2)Some
+(3)A little
+L.One way to cut oil imports into this, country is to increase the tariff;
+or tax, on all oil brought into the U.S. from foreign sources.This,
+would raise gasoline prices and discourage people' from using as much
+gasoline.Would you favor or oppose such an increase in the tariff,
+or tax, on oil imported from abroad?
+(1)Favor
+(2)Oppose
+16
+12
+
+[PAGE 17]
+M. In order to conserve oil, would yoU favor or oppose a'1(4 tax on
+gasoline, which would be deduciible from your Federal Income Taxi
+-if this would help us become less dependent on Arab 911?
+(1)Favor
+(2)0ppoSe
+(3)Not Sure
+N.In order to conserve oil, wow, you prefer a 1(4-a-gallon increase [n
+the, gasoline tax, which woulddeductible from your Federal Income
+Tax, or an 14-a-gallon rise in the cost of gasoline and fuel oil as a
+result of the tariff on imported oll frOlii abroad?
+(1)Prefer 104 Tax
+(2)Prefer 'Import Tax
+(3)Not Sure
+0.In order to' conserve oil, would you prefer a 2(4-a-gallon increase
+in the gasoline tax, which would be deductible from your Federal
+Income Tax, or an 11-a-gallbn rise in the cost of gasoline and
+Mel Oil as a result of the tariffon imported oil from abroad?
+P.
+(1)Prefer 204 Tax
+(2)Prefer Import -Tax
+(3)Not Sure
+In order td conserve oil, would you have mandatory gasoline rationing
+on an odd-even basis with no increase in the price of kasoline, or no
+rationing but an 114-a-gallon rise in the price of gasoline and fuel oilas
+a result of the tariff on imported oil from abroad?
+(1)Rationing
+(2)Prefer Import Tax
+(3)Not Sure
+17
+13
+
+[PAGE 18]
+Q.president Ford says America must reduce itsuse of gasoline.In
+order to accomplish this, which -wouldyou prefer--the President'splan to impose taxes tht would result in highergas prices, or anationwide rationing program?
+(I)Taxes
+(2)Rationing
+18
+14
+
+[PAGE 19]
+APPENDIX B-
+ACTIONS THE GOVERNMENT COULD TAB
+IN ORDER TO REDUCE GASOLINE CONSUMPTION
+l9.
+vr
+I
+15
+
+[PAGE 20]
+ACTIONS THE GOVERNMENT COULD TAKE
+IN ORDER. TO REDUCE GASOLINE'. CONSUMPTION
+Increase the price of gasoline by tariffs and deregulation.
+2..Increase the price of gasoline by direct gasoline taxes.
+3.Ration, the amount of gasoline customers can purchase,,
+4.Limit the amount of, gasoline stations can sell.-
+5.\ Put a speed limit on motor vehicles.
+6.'Lift- the automobile pollution standards so that they can operatemore
+efficiently.`
+7.provide, government support for mass transit so that more -ppople
+ride bused and trains rather than automobiles.
+8.Require automobile manufacturers to manufaCture and sell only
+automobiles that. w ill gkt a Certain number of miles per gallon.
+9.Limit the site of cars thatcan be manufactured and' sold..
+'10.Reduce the military use of gasoline.
+11.Place a high taX on large automobiles.
+12.Limit the number of &ars each family can own.
+13.Control the use of automobiles by making driving. for pleasure,
+driving to work with only one person in the car, etc., illegal.
+14.Outlatv automobiles completely.
+15.Stop building new highways.
+16.Support the development, manufacture and sale of automobiles that run
+on electricity or some fuel other than gasoline.
+20
+16
+
+[PAGE 21]
+17.Conduct an intensive advertising campaign urging people to Conserve
+gasoline by purchasing smaller cars and driving les's.
+`
+.
+18.Limit the amount of 'gvbline that Can be used in Motor boats and
+private 'airplanes.
+'19.Prohibit the use of power lawnmowers, chain s ws, and other
+similar tools that run on gasoline.
+20.Prohibit transportation of goods by truck.
+21.Reduce the amount of gasoline available to run tractors 'and other
+farm machinery.
+Others:
+22.
+23.
+24.
+2.5.
+26.
+27.
+28.
+,29.
+30.
+17
+
+[PAGE 22]
+APPENDIX C
+QUESTIONNAIRE ON ATTITUDES TOWARD
+METHODS OF REDUCING GASOLINE CONSUMPTION
+Q
+18
+
+[PAGE 23]
+QUESTIONNAIRE ON ATTITUDES TOWARD
+METHODS OF REDUCING GASOLINE CONSUMPTION
+. .
+,
+. .
+,,,
+I s
+In order to reduce the consumption of
+.
+gasoline the government should:
+..
+0
+>-i
+.
+-. aa-.
+._,...
+-"as
+CI)
+.
+o1"
+0a
+.
+a. as
+0
+..,..,
+C
+,<4
+CI
+' al
+f2....
+1cl
+0
+C...)
+c.)
+.5
+o
+cd
+*c.,D
+.....,
+a0
+c
+as
+Ei
+u]
+0
+u]
+ta
+(51
+u]
+e4
+a)
+r.4
+0
+>-
+1.Increase the price of gasoline by
+tariffs and deregulation.
+Agree
+Disagree
+2.Increase the price of gasoline by
+direct gasoline taxes,
+,
+Agree
+,; Disagree,
+3.Rat ion the amount of gasoline
+customers can purchase.
+,.. Agree
+.
+Disagreet
+.
+,
+4.Limit the amount of gasoline stations
+can sell.
+Agree
+Disagree
+. ,
+.
+\
+\'
+.
+.
+,--
+,
+,
+,
+0
+.
+.
+,
+.
+19
+23
+
+[PAGE 24]
+;.
+,.
+In order to reduce the consumption
+gasoline the government sheuld:
+.
+ao
+AI
+,--4
+c'd
+....cp.
+o
+1.4
+o
+o
+es
+15c
+es
+°S
+PI00
+El
+o0
+a)
+-5
+o
+co
+cd
+.:-.1
+o
+ca
+in
+to
+an0o
+in
+.<
+8>
+1-4
+0
+.
+5.Limit the speed at which vehicles
+can travel.
+Agree
+Disagree
+6.If you agree, that speed should be
+limited, what speed limit would
+you choose?
+35 Mph ,
+,
+45 mph-
+55 mph
+65 mph
+75 mph
+6."ilemovc. the :automobile. pollution
+standards.
+Ag-ree-
+Disagree
+r
+7.Provide government support for
+mass transit, -;
+Agree,,,,',
+Disagree
+'---.N
+>
+I.-,
+.
+'
+_
+i
+._
+to
+24
+T1
+2d-
+
+[PAGE 25]
+In order to reduce th& consumption of
+gasoline the government should:
+00
+E0U
+'a)
+0
+co
+cd
+(.5
+0
+cd
+O
+4
+Require automobile manufacturers to
+manufacture and 'sell only automobiles-N4
+that will get a certain number df
+miles: per gallon.
+,Agree
+Disagree
+If you agree, what would be youn
+choice for the minimum 'miles per
+gallon?
+15
+20
+25
+:15
+9.Lim it the s ize of cars that can be
+manufactured and sold.
+Agree
+Disawree
+21
+25
+
+[PAGE 26]
+j
+In order ro .redtrc-Fi,thes consumption 'of
+gasoline the '-Overnmerit should:
+a
+0
+;1
+00 0
+10. Reduce the military use of gasoline
+Agree .40,
+Disagree
+If you agree, what percent- reduetion4.
+would you favor?
+5%
+10%
+25%
+50%
+1.00%
+11.. Place a high tax,. Oa automobiles.
+'Agree
+Disagree
+12. Lim it the number of cars each family
+can ,oWn\
+Agree
+Disagree..
+26
+22
+
+[PAGE 27]
+a
+I.
+.
+\
+,
+In order to reduce the consumption of
+gasolLne the government shouild:-
+oa.)
+.
+--,,
+ooa.
+2=
+.aoa '
+cd
+cd
+.
+2o<
+,do
+a04
+.00
+o
+.9
+7::
+co
+cd
+ooa
+00
+c..)v
+in
+'44
+o>
+koo
+:).1
+. .
+12. continued
+If you agree,, what would the limit be?
+One
+.
+.. Two
+13-. Control the use of automobiles by
+making driving for pleasure,
+driving to work with only one person
+in the car, etc., illegal:-
+Agree
+Disagree'-"'
+1.Outlaw automobiles completely.,
+, ..,
+Agree.
+Djsagree
+[5. Stop building new ,highways.
+, ,
+q
+.
+Agred
+.
+Disagree
+.
+.
+.
+,
+.
+,
+,
+.
+,
+.
+..
+.,
+-.
+-.e.
+.
+e,.144k
+.
+.
+,
+,
+.
+.
+_
+.
+_
+23
+27-
+
+[PAGE 28]
+.
+In order to reduce the consumption of
+gasoline the government should:,_
+ao
+P,,0.-
+cd
+4
+0
+$.4
+o0
+r:14
+ca
+...
+go,
+0
+a)
+.
+73
+co
+cd
+0p4
+o
+ca
+s
+L.)
+ca
+<4
+0
+o>
+$4
+09
+16. Support the deVelopment, manufacture,
+and sale of automob61 that run on
+electricity,I°I
+Agree
+Disagree
+. ,
+17. Conduct an intensive advertising
+'campaign urging people to conserve
+gasoline by buying smaller cars and
+driving' less:.1
+,,
+Agree
+Disagree
+18. Limit the amount 9f ,gasoline that
+can be used in motor boats and 7
+private planes.
+Agree
+Disagree.
+19. Prohibit the use of gasoline motor
+driven lawnmowers chains saws,
+etc.
+. Agree..,
+. ,
+Disagree
+.
+.
+O
+,
+24
+28
+
+[PAGE 29]
+In order to reduce the consumption of
+gasoline the government should:
+000 0
+20. Prohibit transportation of goods by
+truck.
+Agree
+Disagree
+21.Otber:
+25
+29
