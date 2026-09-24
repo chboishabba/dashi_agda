@@ -66,6 +66,10 @@ data BidiMarkedFourthCoordinate : Set where
     BidiMarkedFourthCoordinate
   evenZeroTwoFourMarkedMomentsSuffice :
     BidiMarkedFourthCoordinate
+  universalZeroTwoFourBidiOperator :
+    BidiMarkedFourthCoordinate
+  smoothMuBackgroundUsesSameBidiOperator :
+    BidiMarkedFourthCoordinate
 
   localizedOneCentreMarkedPairProducer :
     BidiMarkedFourthCoordinate
@@ -87,6 +91,8 @@ bidiMarkedFourthStatus verticalPlusHorizontalCentredSplit = theoremOwned
 bidiMarkedFourthStatus targetReflectionPointwiseFourthReconstruction =
   theoremOwned
 bidiMarkedFourthStatus evenZeroTwoFourMarkedMomentsSuffice = theoremOwned
+bidiMarkedFourthStatus universalZeroTwoFourBidiOperator = theoremOwned
+bidiMarkedFourthStatus smoothMuBackgroundUsesSameBidiOperator = theoremOwned
 
 bidiMarkedFourthStatus localizedOneCentreMarkedPairProducer =
   openAnalyticObstruction
@@ -104,6 +110,8 @@ record BidiMarkedFourthBoundary : Set where
     verticalPlusHorizontalCentredSplitPaid : Bool
     targetReflectionPointwiseFourthReconstructionPaid : Bool
     evenZeroTwoFourMarkedMomentsSufficePaid : Bool
+    universalZeroTwoFourBidiOperatorPaid : Bool
+    smoothMuBackgroundUsesSameBidiOperatorPaid : Bool
 
     localizedOneCentreMarkedPairProducerPaid : Bool
     markedPairPrimeSideSignOrBoundPaid : Bool
@@ -118,6 +126,10 @@ record BidiMarkedFourthBoundary : Set where
       targetReflectionPointwiseFourthReconstructionPaid ≡ true
     evenZeroTwoFourMarkedMomentsSufficePaidIsTrue :
       evenZeroTwoFourMarkedMomentsSufficePaid ≡ true
+    universalZeroTwoFourBidiOperatorPaidIsTrue :
+      universalZeroTwoFourBidiOperatorPaid ≡ true
+    smoothMuBackgroundUsesSameBidiOperatorPaidIsTrue :
+      smoothMuBackgroundUsesSameBidiOperatorPaid ≡ true
 
     localizedOneCentreMarkedPairProducerPaidIsFalse :
       localizedOneCentreMarkedPairProducerPaid ≡ false
@@ -135,11 +147,11 @@ canonicalBidiMarkedFourthBoundary :
   BidiMarkedFourthBoundary
 canonicalBidiMarkedFourthBoundary =
   bidi-marked-fourth-boundary
-    true true true true
+    true true true true true true
     false false false false
+    refl refl refl refl refl refl
     refl refl refl refl
-    refl refl refl refl
-    "The live RH obstruction is now expressed both backward from G3 as a smooth-mu-centred fourth angular statistic and forward toward Montgomery machinery as even target/reflection marked pair moments.  The exact algebraic bridge needs only orders 0, 2 and 4: P4(a,d)=1/2(P4(a-A,d)+P4(a+A,d))-3*A^2(P2(a-A,d)+P2(a+A,d))+5*A^4.  This removes the apparent need for odd marked derivatives and identifies a concrete same-object interface for a localized pair-correlation theorem."
+    "The live RH obstruction is now expressed both backward from G3 as a smooth-mu-centred fourth angular statistic and forward toward Montgomery machinery as even target/reflection marked pair moments.  The exact algebraic bridge needs only orders 0, 2 and 4: P4(a,d)=1/2(P4(a-A,d)+P4(a+A,d))-3*A^2(P2(a-A,d)+P2(a+A,d))+5*A^4.  These moments are consumed by one universal bidi operator D_A(M0,M2,M4)=1/2*M4-3*A^2*M2+5*A^4*M0.  The smooth critical-line mu background obeys the same operator with a=0, so the centred zero-minus-mu statistic has a single marked-transform interface.  Odd marked derivatives are not required."
     "Do not add more compensation bookkeeping.  The next Clay-relevant mathematics is a target-centred localized marked pair producer, together with a prime-side estimate strong enough to control its even 2nd/4th moments uniformly around an arbitrary hypothetical off-line zero.  Preserve FarExact with sign.  If this marked local theorem cannot be obtained, redesign the witness rather than adding representation layers."
 
 targetReflectionBidiBridgeIsPaid :
