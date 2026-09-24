@@ -23,6 +23,9 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
+import DASHI.Physics.YangMills.YangMillsClayTopDownFiveTheoremClosureExact as Five
+
 ------------------------------------------------------------------------
 -- Typed quantifier shapes.
 ------------------------------------------------------------------------
@@ -76,6 +79,35 @@ record ScopedEvidence (Claim : Set) : Set where
     evidence : Claim
 
 open ScopedEvidence public
+
+------------------------------------------------------------------------
+-- Exact adapters from the current Clay endpoint records.  These make the
+-- pointwise-in-G shape kernel-visible rather than merely documentary.
+------------------------------------------------------------------------
+
+strictGapAsPerGroupPayment :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
+  Five.CutoffUniformPhysicalMassGap Y →
+  PerGroupAnalyticPayment
+    (Top.CompactSimpleGroup C)
+    (λ group →
+      Top.IsStrictlyPositiveFiniteMassGap S
+        (Top.hamiltonian Y group)
+        (Top.massGap Y group))
+strictGapAsPerGroupPayment gap = record
+  { pay = Five.strictlyPositiveFiniteMassGap gap }
+
+continuumLimitAsPerGroupPayment :
+  ∀ {C S} {Y : Top.LiteralYangMillsConstruction C S} →
+  Five.UnifiedContinuumYMConstruction Y →
+  PerGroupAnalyticPayment
+    (Top.CompactSimpleGroup C)
+    (λ group →
+      Top.IsContinuumLimitOf S group
+        (Top.finiteMeasure Y group)
+        (Top.continuumMeasure Y group))
+continuumLimitAsPerGroupPayment continuum = record
+  { pay = Five.continuumLimit continuum }
 
 ------------------------------------------------------------------------
 -- Audit receipts.
