@@ -22,7 +22,7 @@ jobs:
           cache: pip
           cache-dependency-path: tools/agda_preflight/pyproject.toml
       - name: Install checker
-        run: python -m pip install -e tools/agda_preflight pytest
+        run: python -m pip install -e 'tools/agda_preflight[test]'
       - name: Python syntax
         run: python -m compileall -q tools/agda_preflight/agda_preflight tools/agda_preflight/tests
       - name: Regression tests
