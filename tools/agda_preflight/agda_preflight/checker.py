@@ -385,6 +385,31 @@ class Checker:
         diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
         diagnostics.extend(self._record_shape_diagnostics(summary))
         diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
+
+        # Some catalogue entries are intentionally more specific views of the
+        # same high-confidence structural event. Emit aliases centrally so the
+        # documented diagnostic surface stays synchronized across rule engines.
+        aliases = {
+            "TSAGDA002": ("TSAGDA171",),
+            "TSAGDA003": ("TSAGDA065", "TSAGDA067"),
+            "TSAGDA012": ("TSAGDA175",),
+            "TSAGDA045": ("TSAGDA110",),
+            "TSAGDA042": ("TSAGDA112",),
+        }
+        for diagnostic in list(diagnostics):
+            for code in aliases.get(diagnostic.code, ()):
+                diagnostics.append(
+                    Diagnostic(
+                        code,
+                        diagnostic.message,
+                        diagnostic.path,
+                        diagnostic.line,
+                        diagnostic.column,
+                        diagnostic.hint,
+                        diagnostic.severity,
+                        diagnostic.confidence,
+                    )
+                )
         # Stable de-duplication.
         seen = set()
         unique = []
