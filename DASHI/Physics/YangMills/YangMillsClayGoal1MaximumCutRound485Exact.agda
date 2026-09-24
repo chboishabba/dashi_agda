@@ -44,6 +44,7 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468
 import DASHI.Physics.YangMills.YangMillsClayNontrivialitySemanticMaxCutRound502Exact as G2Cut
 
 import DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact as Terminal
+import DASHI.Physics.YangMills.YangMillsClayTerminalContractSemanticMaxCutRound506Exact as Contract
 
 ------------------------------------------------------------------------
 -- A / finite RG, continuum, OS.
@@ -263,6 +264,10 @@ independentFourthCumulantMandatory = false
 round485RepresentedTerminalCompilerLevel : ProofLevel
 round485RepresentedTerminalCompilerLevel =
   Terminal.round484RepresentedTerminalCompilerLevel
+
+terminalContractSemanticInventoryLevel : ProofLevel
+terminalContractSemanticInventoryLevel =
+  Contract.round506TerminalSemanticInventoryCompilerLevel
 
 round485MaximumCutCompilerLevel : ProofLevel
 round485MaximumCutCompilerLevel = machineChecked
