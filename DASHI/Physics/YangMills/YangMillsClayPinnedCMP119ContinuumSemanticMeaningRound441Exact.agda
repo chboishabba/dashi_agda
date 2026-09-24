@@ -131,6 +131,23 @@ literalContinuumLimitFromConcreteExpectationLimit meaning =
   R448.literalContinuumLimitFromRepresentation
     (continuumRepresentation meaning)
 
+literalContinuumLimitFromConcreteRepresentation :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      sequenceLimit limitLaws quotient division S group family encoding}
+    (meaning :
+      ConcreteCMP119ContinuumSemanticMeaning
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S group family encoding) →
+  Top.IsContinuumLimitOf S group
+    (Limit.finiteMeasure family)
+    (Limit.continuumMeasure family)
+literalContinuumLimitFromConcreteRepresentation meaning =
+  R448.literalContinuumLimitFromRepresentation
+    (continuumRepresentation meaning)
+
 literalSchwingerBelongsFromConcreteSameMeasure :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
