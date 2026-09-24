@@ -344,10 +344,14 @@ canonicalJMDArchimedesDelta369Boundary =
 --
 -- automatically supplies normalized-Delta nonvanishing, unconditional
 -- normalized-Delta sixfold phase, and the typed eta24 same-object weld.  Those
--- consequences are therefore not independent open leaves.  What remains is
--- cross-language/same-object transport: inhabit the exact Round11/Machin source
--- binding and, only if the two classical targets must be identified, prove
--- that single identity.
+-- consequences are therefore not independent open leaves.  The Lean companion
+-- now also constructs the Bishop completion quotient equivalence, a canonical
+-- Round11/Machin binding, proves every admissible binding setoid-equivalent to
+-- it, and proves mapped q/E4/E6/Delta semantics independent of replay choice.
+-- What remains is therefore provenance/validation only: observe generated
+-- replay of the named Agda declarations into the Lean mirror and obtain
+-- exact-head kernel receipts.  The classical eta^24/normalized-Delta identity
+-- is already closed by the pinned local Lean theorem.
 --
 -- None of this promotes Base369 into a Delta/j construction.
 ------------------------------------------------------------------------
