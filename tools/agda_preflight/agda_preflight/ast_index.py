@@ -153,6 +153,7 @@ class AstIndex:
     mutual_nodes: List[object] = field(default_factory=list)
     where_nodes: List[object] = field(default_factory=list)
     record_expressions: List[AstRecordExpression] = field(default_factory=list)
+    nested_modules: Set[str] = field(default_factory=set)
 
     @property
     def import_map(self) -> Dict[str, str]:
@@ -924,6 +925,14 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
             index.mutual_nodes.append(node)
         elif node.type == "where":
             index.where_nodes.append(node)
+        elif node.type == "module" and node != root:
+            name_node = next(
+                (child for child in node.named_children if child.type == "module_name"),
+                None,
+            )
+            nested_name = _name_from_node(source_bytes, name_node)
+            if nested_name and nested_name != "_":
+                index.nested_modules.add(nested_name.split(".")[-1])
         elif node.type == "record_assignments":
             # Do not double-count the record_assignments alias nested inside a
             # field_assignments node; both expose the same field assignments.
