@@ -107,3 +107,5 @@ import DASHI.Physics.Foundations.CabarlahPalestineBoundary
 import DASHI.Physics.Foundations.CabarlahPalestineRegression
 
 import DASHI.Physics.Foundations.GRLiteralRecoveryRealizationFrontierExact
+
+import DASHI.Physics.Foundations.PinnedYangMillsRecoveredQFTAttachmentExact
