@@ -14,3 +14,16 @@ weakMeasurePropertyCompilerMachineChecked = refl
 independentMeasurePropertyClosuresPruned :
   R437.round437IndependentMeasurePropertyClosureTheoremsRequired ≡ false
 independentMeasurePropertyClosuresPruned = refl
+
+
+preGapContinuumCoreCompilerMachineChecked :
+  R437.round437PreGapContinuumCoreCompilerLevel ≡ machineChecked
+preGapContinuumCoreCompilerMachineChecked = refl
+
+fullMeasureConvergenceCompilerMachineChecked :
+  R437.round437FullMeasureConvergenceLevel ≡ machineChecked
+fullMeasureConvergenceCompilerMachineChecked = refl
+
+clusteringNotRequiredForPreGapCore :
+  R437.round437ClusteringRequiredForPreGapCore ≡ false
+clusteringNotRequiredForPreGapCore = refl
