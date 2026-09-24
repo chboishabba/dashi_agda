@@ -170,6 +170,10 @@ asFiniteOSCompletion base source continuation = record
 round545T1FiniteOSSourceCompilerLevel : ProofLevel
 round545T1FiniteOSSourceCompilerLevel = machineChecked
 
+round545ConcreteT1SourceBundleLevel : ProofLevel
+round545ConcreteT1SourceBundleLevel =
+  T1.literalRound516ConcreteT1SourceBundleLevel
+
 round545BosonicMayUseDifferentFiniteFamily : Bool
 round545BosonicMayUseDifferentFiniteFamily = false
 
