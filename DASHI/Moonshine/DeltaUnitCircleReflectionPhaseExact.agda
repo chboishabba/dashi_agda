@@ -46,6 +46,7 @@ import DASHI.Interop.Round11MachinLeanBindingManifestExact as ReplayManifest
 import DASHI.Interop.LeanEta24PinnedReflectionParityExact as EtaParity
 import DASHI.Interop.LeanEta24SixfoldPhaseParityExact as EtaPhaseParity
 import DASHI.Interop.LeanDeltaFinalMinCutParityExact as FinalMinCutParity
+import DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact as CanonicalRouteReceipt
 
 ------------------------------------------------------------------------
 -- 1. Concrete-complex seam over the existing analytic model.
