@@ -157,22 +157,6 @@ module LiveSingleMismatch
               ∷ signedA3
               ∷ []))))
 
-    fourResidualIsSingleSelfKernelMismatch :
-      Kernel.four * residual
-      ≡ rateTotal * selfKernelWork - Kernel.four * signedA3
-    fourResidualIsSingleSelfKernelMismatch =
-      let
-        four = Kernel.four
-        rhs = rateTotal * selfKernelWork - four * signedA3
-      in
-      -- Keep this division-free: four = 4, so cancellation is ring-normalization
-      -- against the already-proved sixteen-scaled identity.
-      trans
-        (sym
-          (solve (four ∷ residual ∷ rhs ∷ [])))
-        (trans
-          sixteenResidualIsSingleSelfKernelMismatch
-          (solve (four ∷ rhs ∷ [])))
 
 ------------------------------------------------------------------------
 -- Status / preferred local frontier.
