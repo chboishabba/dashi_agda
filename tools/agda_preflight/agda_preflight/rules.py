@@ -365,9 +365,9 @@ def extended_diagnostics(checker, s, D):
 
     eq_shapes = {}
 
-    def equality_endpoints_visibly_incompatible(eq_shape):
-        left_head = terminal_head(eq_shape.lhs)
-        right_head = terminal_head(eq_shape.rhs)
+    def endpoint_shapes_visibly_incompatible(left_shape, right_shape):
+        left_head = terminal_head(left_shape)
+        right_head = terminal_head(right_shape)
         if left_head is None or right_head is None:
             return False
 
@@ -380,9 +380,12 @@ def extended_diagnostics(checker, s, D):
         if left_head in sortish or right_head in sortish:
             return (left_head in sortish) != (right_head in sortish)
 
+        return False
+
+    def equality_endpoints_visibly_incompatible(eq_shape):
         # Arbitrary term/function heads are not type heads. Different names
         # such as f x and g x are not evidence of a type mismatch.
-        return False
+        return endpoint_shapes_visibly_incompatible(eq_shape.lhs, eq_shape.rhs)
 
     for name, signature in s.ast.signatures.items():
         if signature.type_node is None:
@@ -410,8 +413,7 @@ def extended_diagnostics(checker, s, D):
                 continue
             tokens = significant_tokens(s.ast.source_bytes, clause.rhs_node)
             if len(tokens) == 1 and tokens[0].text == "refl" and target_eq is not None:
-                compatible = compatible_rigid_heads(target_eq.lhs, target_eq.rhs)
-                if compatible is False:
+                if equality_endpoints_visibly_incompatible(target_eq):
                     out.append(
                         _diag(
                             D,
@@ -431,8 +433,7 @@ def extended_diagnostics(checker, s, D):
                 right_eq = eq_shapes.get(right_name)
                 if left_eq is None or right_eq is None:
                     continue
-                compatible = compatible_rigid_heads(left_eq.rhs, right_eq.lhs)
-                if compatible is False:
+                if endpoint_shapes_visibly_incompatible(left_eq.rhs, right_eq.lhs):
                     out.append(
                         _diag(
                             D,
@@ -743,9 +744,9 @@ def extended_diagnostics(checker, s, D):
                     proof_name = app.explicit_args[0].text.strip()
                     proof_shape = eq_shapes.get(proof_name)
                     if proof_shape is not None:
-                        left = compatible_rigid_heads(proof_shape.lhs, target_shape.rhs)
-                        right = compatible_rigid_heads(proof_shape.rhs, target_shape.lhs)
-                        if left is False or right is False:
+                        left_bad = endpoint_shapes_visibly_incompatible(proof_shape.lhs, target_shape.rhs)
+                        right_bad = endpoint_shapes_visibly_incompatible(proof_shape.rhs, target_shape.lhs)
+                        if left_bad or right_bad:
                             out.append(_diag(D, "TSAGDA101", f"sym proof endpoint head does not match target equality for {name}", s, clause.line))
                 elif short == "cong" and app.explicit_args:
                     function_name = app.explicit_args[0].text.strip()
