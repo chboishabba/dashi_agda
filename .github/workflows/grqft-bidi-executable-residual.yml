@@ -35,6 +35,8 @@ on:
       - 'scripts/grqft_einstein_physical_coupling_candidate.py'
       - 'scripts/grqft_w4_score_physical_prediction.py'
       - 'outputs/grqft_einstein_physical_coupling_candidate.json'
+      - 'DASHI/Physics/Foundations/PinnedYMGRQFTStressMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/Round131AllSectorAssemblyFrontierExact.agda'
       - '.github/workflows/grqft-bidi-executable-residual.yml'
   workflow_dispatch:
 

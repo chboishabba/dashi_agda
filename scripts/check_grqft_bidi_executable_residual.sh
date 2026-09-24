@@ -23,6 +23,8 @@ files=(
   DASHI/Physics/Closure/W4IndependentPhysicalPredictionRequestExact.agda
   DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda
   DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda
+  DASHI/Physics/Foundations/PinnedYMGRQFTStressMaxCutExact.agda
+  DASHI/Physics/Foundations/Round131AllSectorAssemblyFrontierExact.agda
 )
 
 for file in "${files[@]}"; do test -f "$file"; done
@@ -91,4 +93,6 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/W4IndependentPhysicalPredictionRequestExact.agda \
   DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda \
   DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda \
+  DASHI/Physics/Foundations/PinnedYMGRQFTStressMaxCutExact.agda \
+  DASHI/Physics/Foundations/Round131AllSectorAssemblyFrontierExact.agda \
   DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda
