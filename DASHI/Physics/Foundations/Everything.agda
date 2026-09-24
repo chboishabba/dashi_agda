@@ -176,3 +176,6 @@ import DASHI.Physics.Foundations.CMP119SymmetricStressComponentReductionValidati
 
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationValidation
+
+import DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProvenanceExact
+import DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProvenanceValidation
