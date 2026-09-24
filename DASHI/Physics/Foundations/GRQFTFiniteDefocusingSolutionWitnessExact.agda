@@ -3,10 +3,13 @@ module DASHI.Physics.Foundations.GRQFTFiniteDefocusingSolutionWitnessExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (zero; suc)
+open import Data.Rational.Base using (1ℚ; -[1+_])
 
 import DASHI.Geometry.NonconstantWarpedLorentzianModel as Geometry
 import DASHI.Physics.Closure.DiscreteWarpedEinsteinMatterModel as Model
 import DASHI.Physics.Closure.EinsteinEquationBidiResidualExact as Einstein
+import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Cut
 import DASHI.Physics.Foundations.GRQFTNegativeActiveStressRepulsionRouteExact as Active
 import DASHI.Physics.Foundations.GRQFTTimelikeDefocusingCompilerExact as Defocus
 
@@ -73,18 +76,18 @@ record FiniteDefocusingSolutionWitness : Set where
 
     activeStressNegative :
       Active.finiteGRActiveStressSum
-        ≡ -[1+ Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero ]
+        ≡ -[1+ suc zero ]
 
     timelikeRicciNegative :
       Defocus.ricci00TraceReversed
-        DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact.finiteGRStressRational
+        Cut.finiteGRStressRational
         ≡ Defocus.minusOne
 
     raychaudhuriCurvatureTermPositive :
       Defocus.raychaudhuriCurvatureContribution
         (Defocus.ricci00TraceReversed
-          DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact.finiteGRStressRational)
-        ≡ Data.Rational.Base.1ℚ
+          Cut.finiteGRStressRational)
+        ≡ 1ℚ
 
 open FiniteDefocusingSolutionWitness public
 
