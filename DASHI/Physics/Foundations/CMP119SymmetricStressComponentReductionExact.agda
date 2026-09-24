@@ -4,8 +4,10 @@ module DASHI.Physics.Foundations.CMP119SymmetricStressComponentReductionExact wh
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as Rat using (ℚ; +_; -[1+_]; 0ℚ)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (zero)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
@@ -130,8 +132,8 @@ tenSymmetricComponentsCompileToTensorEquality instance =
   Cut.normalizedSixteenComponentsCompileToTensorEquality
     (tenSymmetricComponentsCompileToSixteen instance)
 
-independentStressComponentPayments : ℚ
-independentStressComponentPayments = + 10
+independentStressComponentPayments : Nat
+independentStressComponentPayments = 10
 
 sixteenIndependentComponentPaymentsRequired : Bool
 sixteenIndependentComponentPaymentsRequired = false
