@@ -37,6 +37,7 @@ import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact as R657
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarFixedOutputCarrierRound658Exact as R658
 import DASHI.Physics.Closure.NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact as R659
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact as R660
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -225,6 +226,18 @@ round650C2ExactlyEquivalentToEnergyGrowthMarginPayment =
 round650C2EnergyGrowthMarginPaymentClosed : Bool
 round650C2EnergyGrowthMarginPaymentClosed =
   R659.round659EnergyGrowthMarginPaymentClosed
+
+round650C2ActualWeightedBadCollarCommutatorPairDifferenceFormClosed : Bool
+round650C2ActualWeightedBadCollarCommutatorPairDifferenceFormClosed =
+  R660.round660ActualWeightedBadCollarCommutatorReducedToPairDifference
+
+round650C2WholeBadCollarFibreIsComparableOnlyP3Carrier : Bool
+round650C2WholeBadCollarFibreIsComparableOnlyP3Carrier =
+  R660.round660WholeBadCollarFibreIsR207ComparableCarrier
+
+round650C2SignedFullFibrePairDifferencePaymentClosed : Bool
+round650C2SignedFullFibrePairDifferencePaymentClosed =
+  R660.round660SignedFullFibrePairDifferencePaymentClosed
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -439,6 +452,21 @@ round650C2EnergyGrowthMarginPaymentClosedIsFalse :
   round650C2EnergyGrowthMarginPaymentClosed ≡ false
 round650C2EnergyGrowthMarginPaymentClosedIsFalse =
   R659.round659EnergyGrowthMarginPaymentClosedIsFalse
+
+round650C2ActualWeightedBadCollarCommutatorPairDifferenceFormClosedIsTrue :
+  round650C2ActualWeightedBadCollarCommutatorPairDifferenceFormClosed ≡ true
+round650C2ActualWeightedBadCollarCommutatorPairDifferenceFormClosedIsTrue =
+  R660.round660ActualWeightedBadCollarCommutatorReducedToPairDifferenceIsTrue
+
+round650C2WholeBadCollarFibreIsComparableOnlyP3CarrierIsFalse :
+  round650C2WholeBadCollarFibreIsComparableOnlyP3Carrier ≡ false
+round650C2WholeBadCollarFibreIsComparableOnlyP3CarrierIsFalse =
+  R660.round660WholeBadCollarFibreIsR207ComparableCarrierIsFalse
+
+round650C2SignedFullFibrePairDifferencePaymentClosedIsFalse :
+  round650C2SignedFullFibrePairDifferencePaymentClosed ≡ false
+round650C2SignedFullFibrePairDifferencePaymentClosedIsFalse =
+  R660.round660SignedFullFibrePairDifferencePaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
