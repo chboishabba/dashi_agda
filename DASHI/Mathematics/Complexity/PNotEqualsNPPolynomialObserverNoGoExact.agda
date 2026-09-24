@@ -1,0 +1,144 @@
+module DASHI.Mathematics.Complexity.PNotEqualsNPPolynomialObserverNoGoExact where
+
+------------------------------------------------------------------------
+-- P != NP OBSERVER/COMPRESSION NO-GO RESULTS
+--
+-- This owner prunes two tempting but invalid lower-bound routes.
+--
+-- 1. "Polynomial-time representation" does NOT imply information loss.
+--    PolynomialCostModel explicitly certifies the identity map as polynomial.
+--
+-- 2. Cook--Levin finite configuration encodings do NOT imply information
+--    loss.  FiniteConfigurationCodec supplies decode(encode(c)) = c, hence
+--    encode is injective.
+--
+-- Therefore neither polynomial representability nor lossless finite tableau
+-- encoding can, by itself, force the SAT/UNSAT collision needed by
+-- PNotEqualsNPDirectSATLowerBoundExact.
+--
+-- Any successful observer route must prove an additional, genuinely
+-- non-injective / SAT-insufficient resource theorem.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact as Finite
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+
+Injective :
+  ∀ {A B : Set} →
+  (A → B) → Set
+Injective map =
+  ∀ {left right} →
+  map left ≡ map right →
+  left ≡ right
+
+identityInjective :
+  ∀ {A : Set} →
+  Injective (λ (value : A) → value)
+identityInjective same = same
+
+------------------------------------------------------------------------
+-- Polynomial-time representation alone cannot force compression.
+------------------------------------------------------------------------
+
+polynomialIdentityRepresentationIsLossless :
+  ∀ {Word : Set}
+    (cost : PR.PolynomialCostModel Word) →
+  PR.polynomialTimeMap cost (λ word → word)
+  × Injective (λ (word : Word) → word)
+polynomialIdentityRepresentationIsLossless cost =
+  PR.identityMapPolynomial cost , identityInjective
+
+------------------------------------------------------------------------
+-- Injective observers cannot carry a consumer non-descent witness.
+------------------------------------------------------------------------
+
+injectiveObserverBlocksConsumerNonDescent :
+  ∀ {State Surface Outcome : Set}
+    {observe : State → Surface}
+    {consumer : State → Outcome} →
+  Injective observe →
+  Descent.ConsumerNonDescentWitness observe consumer →
+  ⊥
+injectiveObserverBlocksConsumerNonDescent injective witness =
+  Descent.differentOutcome witness
+    (cong consumer
+      (injective
+        (Descent.sameSurface witness)))
+
+------------------------------------------------------------------------
+-- Lossless finite configuration codecs are injective.
+------------------------------------------------------------------------
+
+finiteConfigurationEncodingIsInjective :
+  ∀ {Configuration : Set}
+    (codec : Finite.FiniteConfigurationCodec Configuration) →
+  Injective (Finite.encode codec)
+finiteConfigurationEncodingIsInjective codec {left} {right} sameEncoding =
+  trans
+    (sym (Finite.decodeEncode codec left))
+    (trans
+      (cong (Finite.decode codec) sameEncoding)
+      (Finite.decodeEncode codec right))
+
+finiteConfigurationEncodingCannotCauseNonDescent :
+  ∀ {Configuration Outcome : Set}
+    (codec : Finite.FiniteConfigurationCodec Configuration)
+    (consumer : Configuration → Outcome) →
+  Descent.ConsumerNonDescentWitness
+    (Finite.encode codec)
+    consumer →
+  ⊥
+finiteConfigurationEncodingCannotCauseNonDescent codec consumer =
+  injectiveObserverBlocksConsumerNonDescent
+    (finiteConfigurationEncodingIsInjective codec)
+
+------------------------------------------------------------------------
+-- SAT-specific consequence.
+--
+-- An injective formula observer cannot identify a satisfiable formula with an
+-- unsatisfiable formula.  This requires no SAT decider and no excluded middle.
+------------------------------------------------------------------------
+
+injectiveFormulaObserverCannotCollapseSATAndUNSAT :
+  ∀ {Surface : Set}
+    {observe : Cook.BooleanFormula → Surface} →
+  Injective observe →
+  (satisfiableFormula unsatisfiableFormula : Cook.BooleanFormula) →
+  Cook.Satisfiable satisfiableFormula →
+  (Cook.Satisfiable unsatisfiableFormula → ⊥) →
+  observe satisfiableFormula ≡ observe unsatisfiableFormula →
+  ⊥
+injectiveFormulaObserverCannotCollapseSATAndUNSAT
+    injective satisfiableFormula unsatisfiableFormula
+    satisfiableWitness unsatisfiableWitness sameObservation =
+  unsatisfiableWitness
+    (transportSatisfiable
+      (injective sameObservation)
+      satisfiableWitness)
+  where
+    transportSatisfiable :
+      ∀ {left right : Cook.BooleanFormula} →
+      left ≡ right →
+      Cook.Satisfiable left →
+      Cook.Satisfiable right
+    transportSatisfiable refl witness = witness
+
+------------------------------------------------------------------------
+-- Factorization through an injective representation is compatible with
+-- arbitrary consumers, so factorization itself is not a lower bound.
+------------------------------------------------------------------------
+
+identityFactorization :
+  ∀ {Word : Set}
+    (consumer : Word → Bool) →
+  (word : Word) →
+  consumer word ≡ consumer ((λ value → value) word)
+identityFactorization consumer word = refl
