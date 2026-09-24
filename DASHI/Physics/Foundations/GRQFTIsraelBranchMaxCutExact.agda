@@ -3,6 +3,8 @@ module DASHI.Physics.Foundations.GRQFTIsraelBranchMaxCutExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using (_/_)
 
 import DASHI.Physics.Foundations.GRQFTDeSitterKottlerJunctionExact as Matched
 import DASHI.Physics.Foundations.GRQFTIsraelShellEnergyConditionExact as MatchedEC
@@ -62,7 +64,7 @@ record IsraelBranchMaxCut : Set where
         ≡ General.necWecDecCompatibleSecViolated
 
     generalBranchOutward :
-      General.exteriorAcceleration ≡ Data.Integer.Base.+ 3 Data.Rational.Base./ 16
+      General.exteriorAcceleration ≡ Int.+ 3 / 16
 
 open IsraelBranchMaxCut public
 
