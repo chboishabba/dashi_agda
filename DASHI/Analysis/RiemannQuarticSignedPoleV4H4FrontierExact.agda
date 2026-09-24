@@ -605,3 +605,90 @@ signedSixthConeTransportedIntoAgdaKernelHere = false
 signedSixthConeInterpretation : String
 signedSixthConeInterpretation =
   "The signed sixth harmonic no longer needs to be treated on the full canonical local carrier.  Lean factors its literal physical phase and proves that, if the selected signed profile sixth moment is nonnegative, the outer cone 16*a^2<=d^2 contributes nonpositively.  The complementary potentially adverse terms lie in the fixed strip d^2<4.  The next preferred cut is therefore to prove/evaluate the selected witness sign M6_signed(W)>=0 and then pay only the fixed-width central strip, while retaining FarExact signed."
+
+
+------------------------------------------------------------------------
+-- SELECTED-WITNESS SIXTH-SIGN CORRECTION
+--
+-- The previous outer-cone section is a valid conditional donor, but its
+-- hypothesis M6_signed(W) >= 0 is NOT the selected-witness sign.
+--
+-- Lean has now reduced the selected signed sixth moment to the literal
+-- four-window endpoint determinant
+--
+--   M6_signed(W)
+--     = 4 * (poleTwo * J6_half - poleHalf * J6_two).
+--
+-- The exact atomic J2-null endpoint values are
+--
+--   J6_half
+--     = -(2245/101088) * pi^6 < 0,
+--
+--   J6_twoThirds
+--     =  (35/8748) * pi^6 > 0.
+--
+-- Corridor margins plus the existing arbitrary-k smooth/atomic convergence
+-- preserve these endpoint signs for sufficiently narrow smooth windows.
+-- Existing smooth-pole convergence preserves positivity of both endpoint pole
+-- residuals.  Recutting the witness radius through these additional donors
+-- therefore constructs a floor-certified witness with
+--
+--   M6_signed(W) < 0.
+--
+-- Consequently the earlier M6>=0 fixed-strip route remains only a conditional
+-- side lemma.  The preferred selected-witness route must exploit/bound the
+-- actual negative sixth coefficient.  Strict terminal ABSORB remains open.
+------------------------------------------------------------------------
+
+data SelectedSixthSignCoordinate : Set where
+  signedM6EndpointDeterminant : SelectedSixthSignCoordinate
+  genericProjectiveMomentBridge : SelectedSixthSignCoordinate
+  signedM6FourWindowJ6Determinant : SelectedSixthSignCoordinate
+  atomicJ6Formula : SelectedSixthSignCoordinate
+  atomicJ6EndpointSigns : SelectedSixthSignCoordinate
+  smoothJ6EndpointSignPersistence : SelectedSixthSignCoordinate
+  smoothEndpointPolePositivity : SelectedSixthSignCoordinate
+  floorWitnessWithNegativeSignedM6 : SelectedSixthSignCoordinate
+  negativeSignedM6TerminalPayment : SelectedSixthSignCoordinate
+
+selectedSixthSignStatus :
+  SelectedSixthSignCoordinate -> V4H4Status
+selectedSixthSignStatus signedM6EndpointDeterminant =
+  leanSourceWrittenDonor
+selectedSixthSignStatus genericProjectiveMomentBridge =
+  leanSourceWrittenDonor
+selectedSixthSignStatus signedM6FourWindowJ6Determinant =
+  leanSourceWrittenDonor
+selectedSixthSignStatus atomicJ6Formula =
+  leanSourceWrittenDonor
+selectedSixthSignStatus atomicJ6EndpointSigns =
+  leanSourceWrittenDonor
+selectedSixthSignStatus smoothJ6EndpointSignPersistence =
+  leanSourceWrittenDonor
+selectedSixthSignStatus smoothEndpointPolePositivity =
+  leanSourceWrittenDonor
+selectedSixthSignStatus floorWitnessWithNegativeSignedM6 =
+  leanSourceWrittenDonor
+selectedSixthSignStatus negativeSignedM6TerminalPayment =
+  openAnalyticObstruction
+
+selectedWitnessNegativeSignedM6IsSourceWritten :
+  selectedSixthSignStatus floorWitnessWithNegativeSignedM6
+    ≡ leanSourceWrittenDonor
+selectedWitnessNegativeSignedM6IsSourceWritten = refl
+
+negativeSignedM6TerminalPaymentRemainsOpen :
+  selectedSixthSignStatus negativeSignedM6TerminalPayment
+    ≡ openAnalyticObstruction
+negativeSignedM6TerminalPaymentRemainsOpen = refl
+
+selectedSixthSignLeanDonorHead : String
+selectedSixthSignLeanDonorHead =
+  "25f36e53c99b0dd06c493aca3c9f4a8c78dad2c6"
+
+selectedSixthSignTransportedIntoAgdaKernelHere : Bool
+selectedSixthSignTransportedIntoAgdaKernelHere = false
+
+selectedSixthSignInterpretation : String
+selectedSixthSignInterpretation =
+  "The selected floor-certified smooth witness can now be chosen with strictly negative signed sixth profile moment.  Lean obtains this from the exact endpoint J6 determinant, explicit atomic J6 endpoint values, arbitrary-order smooth/atomic J convergence, and positive endpoint pole residuals.  The earlier nonnegative-M6 fixed-strip compiler remains valid only conditionally and is not the preferred selected-witness route.  The next Clay-facing cut is a quantitative terminal payment exploiting the actual negative M6 coefficient together with the existing absolute eighth debt and signed FarExact."
