@@ -36,6 +36,7 @@ import DASHI.Physics.YangMills.BalabanClayT5SameFamilyContinuumRecoveryRound425E
 import DASHI.Physics.YangMills.BalabanClayT5DiagonalCompactUniqueRound427Exact as R427
 import DASHI.Physics.YangMills.BalabanClayT5ClusterPointUniquenessRound430Exact as R430
 import DASHI.Physics.YangMills.BalabanClayT5SelectedDiagonalTightnessRound431Exact as R431
+import DASHI.Physics.YangMills.BalabanClayT5GlobalContainmentCompactnessRound434Exact as R434
 
 record PreferredSameFamilyMeasureInputs
     (Measure Observable Scalar Schwinger : Set) : Set₂ where
@@ -46,9 +47,12 @@ record PreferredSameFamilyMeasureInputs
 
     schwinger : Measure → Schwinger
 
-    compactnessUniqueness :
-      R430.LiteralT5CompactnessUniquenessInputs
+    Epsilon Witness : Set
+
+    globalCompactness :
+      R434.GlobalContainmentCompactnessInputs
         (PreferredGram.expectationData gramInputs)
+        Epsilon Witness
 
     Normalized Positive GaugeInvariant : Measure → Set
 
@@ -68,17 +72,17 @@ record PreferredSameFamilyMeasureInputs
           (PreferredGram.expectationData gramInputs) cutoff)
 
     normalizedClosed : ∀ sequence target →
-      Limit.Converges (R431.convergence (R430.selectedTightness compactnessUniqueness)) sequence target →
+      Limit.Converges (R431.convergence (R430.selectedTightness R434.asR430CompactnessUniqueness globalCompactness)) sequence target →
       (∀ cutoff → Normalized (sequence cutoff)) →
       Normalized target
 
     positiveClosed : ∀ sequence target →
-      Limit.Converges (R431.convergence (R430.selectedTightness compactnessUniqueness)) sequence target →
+      Limit.Converges (R431.convergence (R430.selectedTightness R434.asR430CompactnessUniqueness globalCompactness)) sequence target →
       (∀ cutoff → Positive (sequence cutoff)) →
       Positive target
 
     gaugeInvariantClosed : ∀ sequence target →
-      Limit.Converges (R431.convergence (R430.selectedTightness compactnessUniqueness)) sequence target →
+      Limit.Converges (R431.convergence (R430.selectedTightness R434.asR430CompactnessUniqueness globalCompactness)) sequence target →
       (∀ cutoff → GaugeInvariant (sequence cutoff)) →
       GaugeInvariant target
 
@@ -125,7 +129,7 @@ selectedConvergence :
   Sequential.SequentialConvergence Measure
 selectedConvergence inputs = record
   { Sequential.SequentialConvergence.Converges =
-      Limit.Converges (R431.convergence (R430.selectedTightness (compactnessUniqueness inputs)))
+      Limit.Converges (R431.convergence (R430.selectedTightness (R434.asR430CompactnessUniqueness globalCompactness inputs)))
   }
 
 selectedCore :
@@ -143,7 +147,7 @@ selectedCore inputs = record
   ; Selected.SelectedFiniteToContinuumOSCore.convergenceCore =
       selectedConvergence inputs
   ; Selected.SelectedFiniteToContinuumOSCore.continuumIsSelectedLimitCore =
-      R427.literalDiagonalConvergesToContinuum (R430.asR427CompactUniqueInputs (compactnessUniqueness inputs))
+      R427.literalDiagonalConvergesToContinuum (R430.asR427CompactUniqueInputs (R434.asR430CompactnessUniqueness globalCompactness inputs))
   ; Selected.SelectedFiniteToContinuumOSCore.NormalizedCore =
       Normalized inputs
   ; Selected.SelectedFiniteToContinuumOSCore.PositiveCore =
@@ -171,7 +175,7 @@ selectedCore inputs = record
         (T5.continuumMeasure
           (T5.thermodynamic
             (PreferredGram.expectationData (gramInputs inputs))))
-        (R427.literalDiagonalConvergesToContinuum (R430.asR427CompactUniqueInputs (compactnessUniqueness inputs)))
+        (R427.literalDiagonalConvergesToContinuum (R430.asR427CompactUniqueInputs (R434.asR430CompactnessUniqueness globalCompactness inputs)))
         (finiteNormalized inputs)
   ; Selected.SelectedFiniteToContinuumOSCore.continuumPositiveCore =
       positiveClosed inputs
@@ -180,7 +184,7 @@ selectedCore inputs = record
         (T5.continuumMeasure
           (T5.thermodynamic
             (PreferredGram.expectationData (gramInputs inputs))))
-        (R427.literalDiagonalConvergesToContinuum (R430.asR427CompactUniqueInputs (compactnessUniqueness inputs)))
+        (R427.literalDiagonalConvergesToContinuum (R430.asR427CompactUniqueInputs (R434.asR430CompactnessUniqueness globalCompactness inputs)))
         (finitePositive inputs)
   ; Selected.SelectedFiniteToContinuumOSCore.continuumGaugeInvariantCore =
       gaugeInvariantClosed inputs
@@ -189,7 +193,7 @@ selectedCore inputs = record
         (T5.continuumMeasure
           (T5.thermodynamic
             (PreferredGram.expectationData (gramInputs inputs))))
-        (R427.literalDiagonalConvergesToContinuum (R430.asR427CompactUniqueInputs (compactnessUniqueness inputs)))
+        (R427.literalDiagonalConvergesToContinuum (R430.asR427CompactUniqueInputs (R434.asR430CompactnessUniqueness globalCompactness inputs)))
         (finiteGaugeInvariant inputs)
   ; Selected.SelectedFiniteToContinuumOSCore.continuumReflectionPositiveMeasureCore =
       Gram.physicalContinuumReflectionPositive
@@ -269,7 +273,10 @@ round428EveryLiteralSubsequenceTightLevel : ProofLevel
 round428EveryLiteralSubsequenceTightLevel = machineChecked
 
 round428SelectedDiagonalTightnessLevel : ProofLevel
-round428SelectedDiagonalTightnessLevel = conditional
+round428SelectedDiagonalTightnessLevel = machineChecked
+
+round428GlobalMomentCompactContainmentLevel : ProofLevel
+round428GlobalMomentCompactContainmentLevel = conditional
 
 round428EveryExtractedClusterPointIsContinuumLevel : ProofLevel
 round428EveryExtractedClusterPointIsContinuumLevel = machineChecked
