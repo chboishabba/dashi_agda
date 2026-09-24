@@ -1,55 +1,267 @@
 # DASHI Agda preflight
 
-A deliberately shallow, fast semantic checker for the error classes that are
-expensive to discover only after a deep `DASHI/Everything.agda` traversal.
+A fast, deliberately non-elaborating front-end for Agda. Tree-sitter supplies the
+incremental syntax tree; the preflight layer adds module/name resolution,
+record/data/function summaries, telescopes, shallow type shapes, structural
+proof checks, trust-boundary policy checks, and an import DAG.
 
-It **does not replace Agda**. Tree-sitter provides the incremental syntax tree;
-the preflight layer adds a small symbol/record/type-shape model and an import
-DAG. Agda remains the kernel/typechecker and the final source of truth.
+It **does not replace Agda**. Agda remains the kernel/typechecker and final source
+of truth. The preflight checker should prefer a false negative over pretending
+to solve dependent unification.
 
-The package uses the Tree-sitter 0.25–0.26 runtime line required by
-`tree-sitter-agda` 1.3.3's PyCapsule language binding.
+## Design boundary
 
-## Initial diagnostics
+The checker may do:
 
-- `TSAGDA000`: tree-sitter syntax error / missing node
-- `TSAGDA001`: opened record projection used unapplied where a type is expected
-- `TSAGDA002`: projection receiver written as `_` despite a matching named
-  record binder in scope
-- `TSAGDA003`: simple record-field codomain/kind mismatch (for example
-  `Nat -> Top` supplied to a `Nat -> Set` field)
+```text
+parse
+  -> lexical/module scopes
+  -> import/open/using/hiding/renaming resolution
+  -> exported symbol index
+  -> record/data/constructor/projection index
+  -> telescope reconstruction
+  -> shallow type-shape propagation
+  -> bounded substitution/head comparison
+  -> structural diagnostics
+  -> DASHI trust-boundary diagnostics
+  -> reverse-import compile plan
+```
 
-The first two semantic rules are regression-targeted at failures found in
-`TriadicEisensteinTransformationTheorem.agda` on 2026-09-23.
+The checker must not attempt:
 
-## Install
+- general dependent unification or metavariable solving;
+- arbitrary definitional equality or normalization of recursive functions;
+- instance search;
+- full universe constraint solving;
+- indexed coverage;
+- full positivity or termination;
+- cubical/path elaboration;
+- reflection/macro execution;
+- proof validity.
+
+## Diagnostic catalogue
+
+Diagnostics are grouped by capability. Some families are exact/high-confidence;
+heuristic families are emitted as warnings.
+
+### Syntax / declaration structure
+
+- `TSAGDA000` tree-sitter syntax error / missing node
+- `TSAGDA004` module declaration disagrees with filesystem path
+- `TSAGDA005` duplicate top-level declaration
+- `TSAGDA006` duplicate record field
+- `TSAGDA007` duplicate constructor
+- `TSAGDA008` declaration signature without an evident defining clause
+- `TSAGDA009` defining clause without an evident signature
+- `TSAGDA010` duplicate identical function clause
+- `TSAGDA011` structurally suspicious/dangling block
+- `TSAGDA012` interaction hole `{!! !!}` / `?`
+- `TSAGDA013` explicit underscore in an exported declaration/signature
+
+### Modules / imports / names
+
+- `TSAGDA020` imported repository module does not exist
+- `TSAGDA021` unknown qualified symbol on a known module alias
+- `TSAGDA022` malformed/unknown import alias use
+- `TSAGDA023` unknown symbol in `using (...)`
+- `TSAGDA024` unknown symbol in `hiding (...)`
+- `TSAGDA025` unknown renaming source
+- `TSAGDA026` open/renaming collision
+- `TSAGDA027` ambiguous unqualified exported name from multiple opens
+- `TSAGDA028` conflicting aliases for imports
+- `TSAGDA029` repository import cycle
+- `TSAGDA030` module identity/path collision
+
+### Telescopes / calls / arity
+
+- `TSAGDA040` too many explicit arguments for a statically-known head
+- `TSAGDA041` too few explicit arguments in a syntactically saturated context
+- `TSAGDA042` named implicit argument not present in telescope
+- `TSAGDA043` obvious explicit/implicit visibility mismatch
+- `TSAGDA044` lambda binder count incompatible with expected Pi shape
+- `TSAGDA045` definition-clause argument count disagrees with declaration
+- `TSAGDA046` constructor application arity mismatch
+- `TSAGDA047` record constructor arity mismatch
+- `TSAGDA048` parameterized-module application arity mismatch
+- `TSAGDA049` projection over/under-application
+
+### Projections
+
+- `TSAGDA001` opened type-valued projection used unapplied as a type
+- `TSAGDA002` projection receiver written as `_` despite a matching binder
+- `TSAGDA050` projection receiver has a visibly incompatible record head
+- `TSAGDA051` projection receives a known type where a record value is expected
+- `TSAGDA052` projection receiver is visibly missing
+- `TSAGDA053` projection is visibly over-applied
+- `TSAGDA054` projection does not belong to the inferred receiver record
+- `TSAGDA055` ambiguous opened projection
+- `TSAGDA056` dependent projection is used before required record parameters
+
+### Record construction / adapters
+
+- `TSAGDA060` unknown field in record expression
+- `TSAGDA061` duplicate field assignment
+- `TSAGDA062` statically-known mandatory field missing
+- `TSAGDA063` record expression targets visibly wrong known record
+- `TSAGDA064` record-field lambda/telescope shape mismatch
+- `TSAGDA003` / `TSAGDA065` terminal codomain/kind mismatch
+- `TSAGDA066` record-field result head mismatch
+- `TSAGDA067` source projection incompatible with target field
+- `TSAGDA068` constructor does not construct expected record
+
+### Shallow type shapes
+
+The checker uses a deliberately small outer-shape language:
+`Unknown`, `Meta`, `Sort`, `Head`, `Pi`, `Equality`, and `Literal`.
+Only bounded head comparison/substitution is performed.
+
+- `TSAGDA070` type/sort supplied where a term is structurally required
+- `TSAGDA071` term supplied where a type/sort is structurally required
+- `TSAGDA072` obvious result type-head mismatch
+- `TSAGDA073` obvious argument type-head mismatch
+- `TSAGDA074` literal incompatible with expected outer head
+- `TSAGDA075` datatype constructor belongs to the wrong datatype
+- `TSAGDA076` known function used as a type without enough application
+- `TSAGDA077` known type constructor over/under-applied
+- `TSAGDA078` sort used as an ordinary value
+- `TSAGDA079` known non-function applied as a function
+
+### Patterns / finite coverage
+
+These checks are intentionally restricted to simple non-indexed datatypes.
+
+- `TSAGDA080` unknown constructor in pattern
+- `TSAGDA081` pattern constructor belongs to visibly wrong datatype
+- `TSAGDA082` constructor-pattern arity mismatch
+- `TSAGDA083` repeated binder in a linear pattern
+- `TSAGDA084` suspicious inaccessible/dot-pattern name
+- `TSAGDA085` absurd pattern on a visibly inhabited simple datatype
+- `TSAGDA086` absurd lambda on a visibly inhabited simple datatype
+- `TSAGDA087` trivial missing finite constructor case
+- `TSAGDA088` clause visibly unreachable after catch-all
+- `TSAGDA089` duplicate constructor branch
+
+### Equality combinator structure
+
+These do not prove equality; they only reject statically incompatible endpoint
+shapes.
+
+- `TSAGDA100` `refl` against visibly different rigid heads
+- `TSAGDA101` `sym` endpoint shape mismatch
+- `TSAGDA102` `trans` intermediate endpoint mismatch
+- `TSAGDA103` `cong` structurally incompatible function/result
+- `TSAGDA104` known equality proof supplied to a visibly non-equality consumer
+- `TSAGDA105` equality endpoints have visibly incompatible rigid type heads
+
+### Clause / scope checks
+
+- `TSAGDA110` clause has incompatible LHS binder count
+- `TSAGDA111` obvious visibility mismatch between clause and signature
+- `TSAGDA112` named implicit pattern does not exist in signature
+- `TSAGDA113` RHS uses a visibly unbound local identifier
+- `TSAGDA114` clause name/result head incompatible with declaration
+- `TSAGDA115` multiple incompatible signatures for one declaration
+
+### Universe / declaration sanity
+
+These are bounded structural checks, not universe solving.
+
+- `TSAGDA120` field type resolves to a known term rather than a type head
+- `TSAGDA121` constructor result resolves to a known term rather than datatype
+- `TSAGDA122` constructor visibly returns another datatype
+- `TSAGDA123` Set-valued projection declaration resolves to a term head
+
+### Positivity / termination heuristics
+
+- `TSAGDA130` obvious negative recursive occurrence
+- `TSAGDA131` obvious recursive occurrence under a contravariant arrow
+- `TSAGDA140` recursive call repeats identical arguments
+- `TSAGDA141` obviously increasing recursive argument
+- `TSAGDA142` no visibly smaller recursive argument found
+- `TSAGDA143` proof-critical code uses a termination-bypass pragma
+
+The termination family is warning-only.
+
+### Fixity / syntax declarations
+
+- `TSAGDA150` fixity declaration references an unknown symbol
+- `TSAGDA151` duplicate/conflicting fixity
+- `TSAGDA152` mixfix hole count mismatch
+- `TSAGDA153` syntax declaration references unknown symbol
+- `TSAGDA154` ambiguous opened operator
+
+### Trust-boundary / unsafe escape hatches
+
+These are policy diagnostics rather than Agda errors.
+
+- `TSAGDA160` postulate in a configured proof-critical subtree
+- `TSAGDA161` `TERMINATING`
+- `TSAGDA162` `NON_TERMINATING`
+- `TSAGDA163` `NO_POSITIVITY_CHECK`
+- `TSAGDA164` unsolved-meta allowance or policy violation
+- `TSAGDA165` unsafe/suspicious OPTIONS pragma
+- `TSAGDA166` foreign/compile pragma names an unknown declaration
+
+### Metavariable / hole risk
+
+- `TSAGDA170` `_` in exported result type
+- `TSAGDA171` projection receiver meta despite an available receiver
+- `TSAGDA172` `_` as a record-field value
+- `TSAGDA173` `_` in theorem equality endpoint
+- `TSAGDA174` `_` in a module parameter/application
+- `TSAGDA175` unresolved interaction hole
+
+### Cross-module API drift
+
+The persistent index records exported names, telescopes, fields, constructors and
+fixities by source hash. Comparing an older summary with the live summary can
+report:
+
+- `TSAGDA180` imported/exported name disappeared
+- `TSAGDA181` imported record field disappeared/changed
+- `TSAGDA182` constructor arity changed
+- `TSAGDA183` function telescope changed incompatibly
+- `TSAGDA184` projection receiver record changed
+- `TSAGDA185` public re-export collision
+- `TSAGDA186` stale `using/hiding/renaming` entry
+
+### DASHI-specific trust/architecture rules
+
+- `TSAGDA200` gate/receipt adapter leaves a type where a witness is structurally expected
+- `TSAGDA201` proof-critical record contains a raw metavariable
+- `TSAGDA202` theorem/receipt endpoint is only postulated
+- `TSAGDA203` agreement proposition is visibly weakened to unconstrained `Set`
+- `TSAGDA204` an `Exact` module exports holes/metas/postulates
+- `TSAGDA205` proof-critical closure imports a configured obstruction/assumption module
+- `TSAGDA206` same-carrier adapter visibly switches carrier family
+- `TSAGDA207` bidi source/target outer shapes disagree
+- `TSAGDA208` factor-through/admissibility bridge visibly uses another carrier family
+
+## CLI
+
+Install:
 
 ```bash
 cd tools/agda_preflight
 python -m pip install -e .
 ```
 
-## Usage
-
 Check one module:
 
 ```bash
-dashi-agda-preflight --root ../.. \
-  ../../DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda
+dashi-agda-preflight --root ../.. FILE.agda
 ```
 
-Check the reverse-import closure of a changed module:
+Check the reverse-import closure:
 
 ```bash
-dashi-agda-preflight --root ../.. --closure \
-  ../../DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda
+dashi-agda-preflight --root ../.. --closure FILE.agda
 ```
 
-Print the affected-module compile plan without running the semantic checks:
+Print the affected compile frontier:
 
 ```bash
-dashi-agda-preflight --root ../.. --plan \
-  ../../DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda
+dashi-agda-preflight --root ../.. --plan FILE.agda
 ```
 
 Machine-readable diagnostics:
@@ -58,20 +270,24 @@ Machine-readable diagnostics:
 dashi-agda-preflight --root ../.. --json FILE.agda
 ```
 
-A recommended edit loop is:
+The intended edit loop is:
 
 ```text
 edit
-  -> dashi-agda-preflight FILE
-  -> agda FILE
-  -> dashi-agda-preflight --plan FILE
-  -> compile affected frontier in order
-  -> DASHI/Everything.agda only at the end
+  -> preflight changed files
+  -> fix high-confidence structural failures
+  -> compile the nearest affected Agda frontier
+  -> feed novel Agda failures back as regression fixtures
+  -> run DASHI/Everything.agda only after the frontier is clean
 ```
 
-## Scope
+## Engineering policy
 
-The checker intentionally only reports mismatches it can establish from cheap
-outer type shapes. It should prefer a false negative over a speculative error.
-Novel Agda failures should be added as small regression fixtures before a new
-rule is generalized.
+Every new diagnostic should have:
+
+1. a minimal failing fixture;
+2. a nearby valid fixture;
+3. a confidence classification;
+4. a documented boundary describing what it does not infer.
+
+The preflight checker is an error firewall, not a second theorem prover.
