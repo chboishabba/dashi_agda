@@ -9,6 +9,7 @@ open import Data.Rational.Base using (ℚ; _/_)
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTCMP119DECRepulsiveExteriorCompilerExact as CMP
+import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
 import DASHI.Physics.Foundations.GRQFTGeneralIsraelDECCompatibleShellExact as Shell
 import DASHI.Physics.Foundations.GRQFTRationalSquareIsraelDesignExact as Design
 import DASHI.Physics.Foundations.GRQFTBalancedDECRepulsiveShellFamilyExact as Family
@@ -121,13 +122,13 @@ record DECRepulsiveExteriorMaxCut
     exteriorStressFromSameCMP119Ray :
       (a b : Flat.Axis4) →
       CMP.exteriorStress a b
-        ≡ CMP.Vacuum.scaledCMP119Tensor
+        ≡ Vacuum.scaledCMP119Tensor
             CMP.exteriorAmplitude evaluator cmp119Stress a b
 
     interiorStressFromSameCMP119Ray :
       (a b : Flat.Axis4) →
       CMP.interiorStress a b
-        ≡ CMP.Vacuum.scaledCMP119Tensor
+        ≡ Vacuum.scaledCMP119Tensor
             CMP.interiorAmplitude evaluator cmp119Stress a b
 
     outwardExteriorAcceleration :
@@ -155,11 +156,11 @@ decRepulsiveExteriorMaxCut amplitudes =
   dec-repulsive-exterior-max-cut
     canonicalGeometrySelectedVacuumAmplitudes
     Shell.canonicalGeneralIsraelDECCompatibleShellWitness
-    (CMP.cmp119DECRepulsiveExteriorCompiler _)
+    (CMP.cmp119DECRepulsiveExteriorCompiler normalized)
     (interiorAmplitudeIsSelected amplitudes)
     (exteriorAmplitudeIsSelected amplitudes)
-    (CMP.cmp119CompilesExteriorStress _)
-    (CMP.cmp119CompilesInteriorStress _)
+    (CMP.cmp119CompilesExteriorStress normalized)
+    (CMP.cmp119CompilesInteriorStress normalized)
     Shell.exteriorAccelerationIsThreeSixteenths
     Shell.surfaceNECMarginIsOneTwentyFourth
     Shell.surfaceSECMarginIsMinusOneSixth
