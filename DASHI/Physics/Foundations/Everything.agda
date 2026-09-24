@@ -221,3 +221,9 @@ import DASHI.Physics.Foundations.GRQFTExteriorRepulsionRouteSynthesisExact
 import DASHI.Physics.Foundations.GRQFTDeSitterKottlerJunctionExact
 
 import DASHI.Physics.Foundations.GRQFTJunctionTOVSignConsistencyExact
+
+import DASHI.Physics.Foundations.GRQFTIsraelSurfaceStressMagnitudeExact
+
+import DASHI.Physics.Foundations.GRQFTKottlerRepulsionParameterWindowExact
+
+import DASHI.Physics.Foundations.GRQFTParameterizedRepulsiveJunctionDesignExact
