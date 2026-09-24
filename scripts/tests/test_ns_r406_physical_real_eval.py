@@ -326,6 +326,7 @@ def test_r685_r687_rate_lift_and_dynamic_cancellation_mirrors() -> None:
         abs(8.0 * float(row["global_coherent_commutator_work"])),
     )
     assert abs(float(row["r687_global_rate_lift_residual"])) <= 1.0e-12 * global_scale
+    assert abs(float(row["r688_global_dynamic_cancellation_residual"])) <= 1.0e-12 * global_scale
 
     assert row["output_rows"] is not None
     for output_row in row["output_rows"]:
@@ -337,6 +338,7 @@ def test_r685_r687_rate_lift_and_dynamic_cancellation_mirrors() -> None:
         )
         assert abs(float(output_row["r687_rate_lift_residual"])) <= 1.0e-12 * scale
         assert abs(float(output_row["r685_rate_kernel_residual"])) <= 1.0e-12 * scale
+        assert abs(float(output_row["r688_dynamic_cancellation_residual"])) <= 1.0e-12 * scale
 
 
 def test_r687_rate_lift_is_quintic_but_r665_kernel_is_quartic() -> None:
