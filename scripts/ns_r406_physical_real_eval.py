@@ -332,6 +332,7 @@ def evaluate_r406(
     global_rate_lifted_forcing_full = 0.0
     global_coherent_commutator_work = 0.0
     global_weighted_rate_work = 0.0
+    global_coherent_tangent_work = 0.0
     output_rows: list[dict[str, Any]] = []
     minimum_pair_rate: float | None = None
     evaluated_pairs = 0
@@ -433,6 +434,14 @@ def evaluate_r406(
             fibre_rate_lifted_forcing_full
             - 8.0 * coherent_commutator_work
         )
+        rate_lifted_minus_8_tangent = (
+            fibre_rate_lifted_forcing_full
+            - 8.0 * coherent_tangent_work
+        )
+        r688_residual = (
+            rate_lifted_minus_8_tangent
+            - 8.0 * weighted_rate_work
+        )
 
         evaluated_pairs += fibre_pairs
         global_companion += fibre_companion
@@ -442,6 +451,7 @@ def evaluate_r406(
         global_rate_lifted_forcing_full += fibre_rate_lifted_forcing_full
         global_coherent_commutator_work += coherent_commutator_work
         global_weighted_rate_work += weighted_rate_work
+        global_coherent_tangent_work += coherent_tangent_work
         if include_output_rows:
             output_rows.append(
                 {
@@ -461,6 +471,8 @@ def evaluate_r406(
                     "weighted_rate_work_nonnegative": weighted_rate_work >= -1.0e-12,
                     "r685_rate_kernel_residual": float(r685_residual),
                     "r687_rate_lift_residual": float(r687_residual),
+                    "rate_lifted_minus_8_tangent": float(rate_lifted_minus_8_tangent),
+                    "r688_dynamic_cancellation_residual": float(r688_residual),
                     "offdiagonal_minus_twice_direct_companion": float(
                         fibre_forcing_offdiagonal - 2.0 * fibre_companion
                     ),
@@ -492,6 +504,16 @@ def evaluate_r406(
         "global_rate_lifted_forcing_full": float(global_rate_lifted_forcing_full),
         "global_coherent_commutator_work": float(global_coherent_commutator_work),
         "global_weighted_rate_work": float(global_weighted_rate_work),
+        "global_coherent_tangent_work": float(global_coherent_tangent_work),
+        "global_rate_lifted_minus_8_tangent": float(
+            global_rate_lifted_forcing_full
+            - 8.0 * global_coherent_tangent_work
+        ),
+        "r688_global_dynamic_cancellation_residual": float(
+            global_rate_lifted_forcing_full
+            - 8.0 * global_coherent_tangent_work
+            - 8.0 * global_weighted_rate_work
+        ),
         "r687_global_rate_lift_residual": float(
             global_rate_lifted_forcing_full
             - 8.0 * global_coherent_commutator_work
