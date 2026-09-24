@@ -27,6 +27,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPResidualAggregationTreeExact whe
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPBooleanResidualFingerprintExact as Fingerprint
 
@@ -131,42 +133,16 @@ canonicalTreeNodeCountRecurrence depth =
 leafCountBelowNodeCount :
   ∀ {depth}
     (tree : ResidualAggregateTree depth) →
-  leafCount tree Nat≤ treeNodeCount tree
+  leafCount tree ≤ treeNodeCount tree
 leafCountBelowNodeCount (residualLeaf value) =
-  leRefl
+  NatP.≤-refl
 leafCountBelowNodeCount (residualBranch left right) =
-  leSucc
-    (leAdd
+  NatP.≤-trans
+    (NatP.+-mono-≤
       (leafCountBelowNodeCount left)
       (leafCountBelowNodeCount right))
-  where
-    data _Nat≤_ : Nat → Nat → Set where
-      leZero :
-        ∀ {right} →
-        zero Nat≤ right
-
-      leSucc :
-        ∀ {left right} →
-        left Nat≤ right →
-        suc left Nat≤ suc right
-
-    leRefl :
-      ∀ {value} →
-      value Nat≤ value
-    leRefl {zero} =
-      leZero
-    leRefl {suc value} =
-      leSucc leRefl
-
-    leAdd :
-      ∀ {a b c d} →
-      a Nat≤ b →
-      c Nat≤ d →
-      (a + c) Nat≤ (b + d)
-    leAdd leZero right =
-      right
-    leAdd (leSucc left) right =
-      leSucc (leAdd left right)
+    (NatP.n≤1+n
+      (treeNodeCount left + treeNodeCount right))
 
 ------------------------------------------------------------------------
 -- NOTE
