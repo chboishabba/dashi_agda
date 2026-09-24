@@ -784,6 +784,46 @@ def extended_diagnostics(checker, s, D):
                 if inhabited:
                     out.append(_diag(D, "TSAGDA086", f"absurd lambda used while a visible domain {inhabited.name} is inhabited", s, line, severity="warning", confidence="medium"))
 
+    # TSAGDA071: known term supplied in a type/sort-valued record field.
+    known_term_heads = set(clauses) | set(ctors)
+    for def_name, line, body in _record_blocks(source):
+        sig = s.signatures.get(def_name)
+        if not sig: continue
+        target = _resolve_record(checker, s, sig.type_text)
+        if not target: continue
+        for fname, rhs in _assignments(body):
+            field = target.fields.get(fname)
+            if not field or _terminal(field.type_text) not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}: continue
+            rm = re.fullmatch(rf"({_IDENT})", rhs.strip())
+            if rm and rm.group(1) in known_term_heads and rm.group(1) not in data and rm.group(1) not in s.records:
+                out.append(_diag(D, "TSAGDA071", f"known term {rm.group(1)} is supplied where field {fname} expects a type/sort", s, line))
+
+    # TSAGDA077: visible type-constructor parameter arity.
+    type_params = {}
+    for i, line in enumerate(lines, 1):
+        dm = re.match(rf"^(?:data|record)\s+({_IDENT})\s*(.*?)\s*:\s*", line)
+        if dm:
+            type_params[dm.group(1)] = len(re.findall(r"[\({]\s*[A-Za-z_][A-Za-z0-9_']*\s*:", dm.group(2)))
+    for tname, want in type_params.items():
+        if want == 0: continue
+        for name, sig in s.signatures.items():
+            for m in re.finditer(rf"\b{re.escape(tname)}\b((?:\s+{_IDENT})*)", sig.type_text):
+                got = len(m.group(1).split())
+                if got != want:
+                    out.append(_diag(D, "TSAGDA077", f"type constructor {tname} has {want} visible parameters but use supplies {got}", s, sig.line, severity="warning", confidence="medium"))
+
+    # TSAGDA113: only the high-confidence single-identifier RHS case.
+    global_names = set(s.signatures) | set(s.records) | set(data) | set(ctors) | set(imported)
+    for name, cs in clauses.items():
+        for line, lhs, rhs in cs:
+            rm = re.fullmatch(rf"({_IDENT})", rhs)
+            if not rm: continue
+            ident = rm.group(1)
+            lhs_names = set(re.findall(rf"\b({_IDENT})\b", lhs))
+            if ident not in lhs_names and ident not in global_names and ident not in {"Set","Nat","Bool","String","refl","tt"}:
+                out.append(_diag(D, "TSAGDA113", f"RHS identifier {ident} has no evident local or top-level binding", s, line, severity="warning", confidence="medium"))
+
+
     # TSAGDA104: equality proof used as whole RHS for a non-equality target.
     for name, cs in clauses.items():
         sig = s.signatures.get(name)
