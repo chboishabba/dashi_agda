@@ -97,10 +97,10 @@ mechanismDonorCrossPollinatesTiwi = Traversal.dashi-first-link-edge
 ------------------------------------------------------------------------
 
 data BidiSourceRole : Set where
-  tiwiExperimentalFireMammalResponse
-  tiwiExperimentalWoodyStructureResponse
-  controlledGroundCoverPredationMechanism
-  predatorFireScarMovementMechanism
+  tiwiExperimentalFireMammalResponse : BidiSourceRole
+  tiwiExperimentalWoodyStructureResponse : BidiSourceRole
+  controlledGroundCoverPredationMechanism : BidiSourceRole
+  predatorFireScarMovementMechanism : BidiSourceRole
   longFireExclusionVegetationFaunaComparison : BidiSourceRole
 
 record BidiPrimarySource : Set where

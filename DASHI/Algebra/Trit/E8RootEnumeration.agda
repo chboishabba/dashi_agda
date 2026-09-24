@@ -51,34 +51,22 @@ indexedRootListLength : E8IndexedRootList → Nat
 indexedRootListLength = length
 
 data E8RootEnumerationStatus : Set where
-  blockedOnHalfTritInterface :
-    E8RootEnumerationStatus
-  blockedOnEnumerationCardinalityMachinery :
-    E8RootEnumerationStatus
+  blockedOnHalfTritInterface : E8RootEnumerationStatus
+  blockedOnEnumerationCardinalityMachinery : E8RootEnumerationStatus
 
 data HalfTritIndexedSurfaceStatus : Set where
-  halfTritIndexedSurfaceNotFound :
-    HalfTritIndexedSurfaceStatus
-  halfTritIndexedSurfaceAvailable :
-    HalfTritIndexedSurfaceStatus
+  halfTritIndexedSurfaceNotFound : HalfTritIndexedSurfaceStatus
+  halfTritIndexedSurfaceAvailable : HalfTritIndexedSurfaceStatus
 
 data RequiredHalfTritIndexedField : Set where
-  indexedHalfTritCarrier :
-    RequiredHalfTritIndexedField
-  indexedHalfTritToFin :
-    RequiredHalfTritIndexedField
-  indexedFinToHalfTrit :
-    RequiredHalfTritIndexedField
-  indexedRoundTripLaws :
-    RequiredHalfTritIndexedField
-  indexedHalfTritDecidableEquality :
-    RequiredHalfTritIndexedField
-  indexedAllHalfTritValues :
-    RequiredHalfTritIndexedField
-  indexedAllHalfTritValuesLengthFive :
-    RequiredHalfTritIndexedField
-  indexedAllHalfTritValuesNoDuplicates :
-    RequiredHalfTritIndexedField
+  indexedHalfTritCarrier : RequiredHalfTritIndexedField
+  indexedHalfTritToFin : RequiredHalfTritIndexedField
+  indexedFinToHalfTrit : RequiredHalfTritIndexedField
+  indexedRoundTripLaws : RequiredHalfTritIndexedField
+  indexedHalfTritDecidableEquality : RequiredHalfTritIndexedField
+  indexedAllHalfTritValues : RequiredHalfTritIndexedField
+  indexedAllHalfTritValuesLengthFive : RequiredHalfTritIndexedField
+  indexedAllHalfTritValuesNoDuplicates : RequiredHalfTritIndexedField
 
 canonicalRequiredHalfTritIndexedFields :
   List RequiredHalfTritIndexedField
@@ -94,32 +82,19 @@ canonicalRequiredHalfTritIndexedFields =
   ∷ []
 
 data AvailableHalfTritIndexedField : Set where
-  availableIndexedHalfTritCarrier :
-    AvailableHalfTritIndexedField
-  availableIndexedHalfTritToFin :
-    AvailableHalfTritIndexedField
-  availableIndexedFinToHalfTrit :
-    AvailableHalfTritIndexedField
-  availableIndexedRoundTripLaws :
-    AvailableHalfTritIndexedField
-  availableIndexedHalfTritDecidableEquality :
-    AvailableHalfTritIndexedField
-  availableIndexedAllHalfTritValues :
-    AvailableHalfTritIndexedField
-  availableIndexedAllHalfTritValuesLengthFive :
-    AvailableHalfTritIndexedField
-  availableIndexedAllHalfTritValuesNoDuplicates :
-    AvailableHalfTritIndexedField
-  availableIndexedHalfTritEmbedding :
-    AvailableHalfTritIndexedField
-  availableIndexedHalfTritEmbeddingInjective :
-    AvailableHalfTritIndexedField
-  availableIndexedCoordinateDuplicateFreedomReceipt :
-    AvailableHalfTritIndexedField
-  availableIndexedEightCoordinateCarrier :
-    AvailableHalfTritIndexedField
-  availableIndexedRootListCarrier :
-    AvailableHalfTritIndexedField
+  availableIndexedHalfTritCarrier : AvailableHalfTritIndexedField
+  availableIndexedHalfTritToFin : AvailableHalfTritIndexedField
+  availableIndexedFinToHalfTrit : AvailableHalfTritIndexedField
+  availableIndexedRoundTripLaws : AvailableHalfTritIndexedField
+  availableIndexedHalfTritDecidableEquality : AvailableHalfTritIndexedField
+  availableIndexedAllHalfTritValues : AvailableHalfTritIndexedField
+  availableIndexedAllHalfTritValuesLengthFive : AvailableHalfTritIndexedField
+  availableIndexedAllHalfTritValuesNoDuplicates : AvailableHalfTritIndexedField
+  availableIndexedHalfTritEmbedding : AvailableHalfTritIndexedField
+  availableIndexedHalfTritEmbeddingInjective : AvailableHalfTritIndexedField
+  availableIndexedCoordinateDuplicateFreedomReceipt : AvailableHalfTritIndexedField
+  availableIndexedEightCoordinateCarrier : AvailableHalfTritIndexedField
+  availableIndexedRootListCarrier : AvailableHalfTritIndexedField
 
 canonicalAvailableHalfTritIndexedFields :
   List AvailableHalfTritIndexedField
@@ -140,16 +115,11 @@ canonicalAvailableHalfTritIndexedFields =
   ∷ []
 
 data AvailableCardinalityPrimitive : Set where
-  natPrimitiveAvailable :
-    AvailableCardinalityPrimitive
-  listPrimitiveAvailable :
-    AvailableCardinalityPrimitive
-  listLengthFunctionAvailable :
-    AvailableCardinalityPrimitive
-  vecPrimitiveAvailable :
-    AvailableCardinalityPrimitive
-  vecEightRootCarrierShapeAvailable :
-    AvailableCardinalityPrimitive
+  natPrimitiveAvailable : AvailableCardinalityPrimitive
+  listPrimitiveAvailable : AvailableCardinalityPrimitive
+  listLengthFunctionAvailable : AvailableCardinalityPrimitive
+  vecPrimitiveAvailable : AvailableCardinalityPrimitive
+  vecEightRootCarrierShapeAvailable : AvailableCardinalityPrimitive
 
 canonicalAvailableCardinalityPrimitives :
   List AvailableCardinalityPrimitive
@@ -162,26 +132,16 @@ canonicalAvailableCardinalityPrimitives =
   ∷ []
 
 data ConcreteE8CardinalityWitnessMissing : Set where
-  missingIntegerRootMembershipDecision :
-    ConcreteE8CardinalityWitnessMissing
-  missingIntegerRootNoDuplicates :
-    ConcreteE8CardinalityWitnessMissing
-  missingIntegerRootCompleteness :
-    ConcreteE8CardinalityWitnessMissing
-  missingHalfRootMembershipDecision :
-    ConcreteE8CardinalityWitnessMissing
-  missingHalfRootEvenParityProof :
-    ConcreteE8CardinalityWitnessMissing
-  missingHalfRootNoDuplicates :
-    ConcreteE8CardinalityWitnessMissing
-  missingHalfRootCompleteness :
-    ConcreteE8CardinalityWitnessMissing
-  missingFamilyDisjointness :
-    ConcreteE8CardinalityWitnessMissing
-  missingCombinedRootNoDuplicates :
-    ConcreteE8CardinalityWitnessMissing
-  missingCombinedCompleteness :
-    ConcreteE8CardinalityWitnessMissing
+  missingIntegerRootMembershipDecision : ConcreteE8CardinalityWitnessMissing
+  missingIntegerRootNoDuplicates : ConcreteE8CardinalityWitnessMissing
+  missingIntegerRootCompleteness : ConcreteE8CardinalityWitnessMissing
+  missingHalfRootMembershipDecision : ConcreteE8CardinalityWitnessMissing
+  missingHalfRootEvenParityProof : ConcreteE8CardinalityWitnessMissing
+  missingHalfRootNoDuplicates : ConcreteE8CardinalityWitnessMissing
+  missingHalfRootCompleteness : ConcreteE8CardinalityWitnessMissing
+  missingFamilyDisjointness : ConcreteE8CardinalityWitnessMissing
+  missingCombinedRootNoDuplicates : ConcreteE8CardinalityWitnessMissing
+  missingCombinedCompleteness : ConcreteE8CardinalityWitnessMissing
 
 canonicalConcreteE8CardinalityWitnessMissing :
   List ConcreteE8CardinalityWitnessMissing
@@ -199,24 +159,15 @@ canonicalConcreteE8CardinalityWitnessMissing =
   ∷ []
 
 data AvailableConcreteE8Generator : Set where
-  availableCoordinatePair28List :
-    AvailableConcreteE8Generator
-  availableIntegerIndexedRootGenerator :
-    AvailableConcreteE8Generator
-  availableIntegerIndexedRootList112 :
-    AvailableConcreteE8Generator
-  availableIntegerHalfTritRootList112 :
-    AvailableConcreteE8Generator
-  availableHalfIndexedEvenSignVectorGenerator :
-    AvailableConcreteE8Generator
-  availableHalfIndexedRootList128 :
-    AvailableConcreteE8Generator
-  availableHalfTritRootList128 :
-    AvailableConcreteE8Generator
-  availableCombinedIndexedRootList240 :
-    AvailableConcreteE8Generator
-  availableCombinedHalfTritRootList240 :
-    AvailableConcreteE8Generator
+  availableCoordinatePair28List : AvailableConcreteE8Generator
+  availableIntegerIndexedRootGenerator : AvailableConcreteE8Generator
+  availableIntegerIndexedRootList112 : AvailableConcreteE8Generator
+  availableIntegerHalfTritRootList112 : AvailableConcreteE8Generator
+  availableHalfIndexedEvenSignVectorGenerator : AvailableConcreteE8Generator
+  availableHalfIndexedRootList128 : AvailableConcreteE8Generator
+  availableHalfTritRootList128 : AvailableConcreteE8Generator
+  availableCombinedIndexedRootList240 : AvailableConcreteE8Generator
+  availableCombinedHalfTritRootList240 : AvailableConcreteE8Generator
 
 canonicalAvailableConcreteE8Generators :
   List AvailableConcreteE8Generator
@@ -233,28 +184,17 @@ canonicalAvailableConcreteE8Generators =
   ∷ []
 
 data AvailableConcreteE8ProofLayer : Set where
-  availableIndexedRootDecidableEquality :
-    AvailableConcreteE8ProofLayer
-  availableIndexedRootMembershipCheck :
-    AvailableConcreteE8ProofLayer
-  availableIntegerIndexedRootNoDuplicateCheck :
-    AvailableConcreteE8ProofLayer
-  availableHalfIndexedRootNoDuplicateCheck :
-    AvailableConcreteE8ProofLayer
-  availableIntegerHalfFamilyDisjointCheck :
-    AvailableConcreteE8ProofLayer
-  availableCombinedIndexedRootNoDuplicateCheck :
-    AvailableConcreteE8ProofLayer
-  availableHalfRootEvenParityByConstruction :
-    AvailableConcreteE8ProofLayer
-  availableBooleanBackedIndexedMembershipBridge :
-    AvailableConcreteE8ProofLayer
-  availableBooleanBackedNoDuplicateBridge :
-    AvailableConcreteE8ProofLayer
-  availableBooleanBackedDisjointnessBridge :
-    AvailableConcreteE8ProofLayer
-  availableBooleanBackedHalfParityBridge :
-    AvailableConcreteE8ProofLayer
+  availableIndexedRootDecidableEquality : AvailableConcreteE8ProofLayer
+  availableIndexedRootMembershipCheck : AvailableConcreteE8ProofLayer
+  availableIntegerIndexedRootNoDuplicateCheck : AvailableConcreteE8ProofLayer
+  availableHalfIndexedRootNoDuplicateCheck : AvailableConcreteE8ProofLayer
+  availableIntegerHalfFamilyDisjointCheck : AvailableConcreteE8ProofLayer
+  availableCombinedIndexedRootNoDuplicateCheck : AvailableConcreteE8ProofLayer
+  availableHalfRootEvenParityByConstruction : AvailableConcreteE8ProofLayer
+  availableBooleanBackedIndexedMembershipBridge : AvailableConcreteE8ProofLayer
+  availableBooleanBackedNoDuplicateBridge : AvailableConcreteE8ProofLayer
+  availableBooleanBackedDisjointnessBridge : AvailableConcreteE8ProofLayer
+  availableBooleanBackedHalfParityBridge : AvailableConcreteE8ProofLayer
 
 canonicalAvailableConcreteE8ProofLayer :
   List AvailableConcreteE8ProofLayer
@@ -273,30 +213,18 @@ canonicalAvailableConcreteE8ProofLayer =
   ∷ []
 
 data HalfTritInterfaceMissing : Set where
-  missingHalfTritCarrier :
-    HalfTritInterfaceMissing
-  missingNegativeHalfConstructor :
-    HalfTritInterfaceMissing
-  missingPositiveHalfConstructor :
-    HalfTritInterfaceMissing
-  missingDoubledZeroConstructor :
-    HalfTritInterfaceMissing
-  missingDoubledMinusTwoConstructor :
-    HalfTritInterfaceMissing
-  missingDoubledPlusTwoConstructor :
-    HalfTritInterfaceMissing
-  missingEightCoordinateVectorCarrier :
-    HalfTritInterfaceMissing
-  missingRootEqualityDecision :
-    HalfTritInterfaceMissing
-  missingDuplicateFreedomLemma :
-    HalfTritInterfaceMissing
-  missingCompletenessLemma :
-    HalfTritInterfaceMissing
-  missingVecLengthCardinalityBridge :
-    HalfTritInterfaceMissing
-  missingListNoDuplicateCardinalityBridge :
-    HalfTritInterfaceMissing
+  missingHalfTritCarrier : HalfTritInterfaceMissing
+  missingNegativeHalfConstructor : HalfTritInterfaceMissing
+  missingPositiveHalfConstructor : HalfTritInterfaceMissing
+  missingDoubledZeroConstructor : HalfTritInterfaceMissing
+  missingDoubledMinusTwoConstructor : HalfTritInterfaceMissing
+  missingDoubledPlusTwoConstructor : HalfTritInterfaceMissing
+  missingEightCoordinateVectorCarrier : HalfTritInterfaceMissing
+  missingRootEqualityDecision : HalfTritInterfaceMissing
+  missingDuplicateFreedomLemma : HalfTritInterfaceMissing
+  missingCompletenessLemma : HalfTritInterfaceMissing
+  missingVecLengthCardinalityBridge : HalfTritInterfaceMissing
+  missingListNoDuplicateCardinalityBridge : HalfTritInterfaceMissing
 
 canonicalHalfTritInterfaceMissing :
   List HalfTritInterfaceMissing
@@ -309,10 +237,8 @@ canonicalHalfTritInterfaceMissing =
   ∷ []
 
 data E8DoubledCoordinateFamilyShape : Set where
-  integerTwoSparseShape :
-    E8DoubledCoordinateFamilyShape
-  halfAllSignedOddUnitShape :
-    E8DoubledCoordinateFamilyShape
+  integerTwoSparseShape : E8DoubledCoordinateFamilyShape
+  halfAllSignedOddUnitShape : E8DoubledCoordinateFamilyShape
 
 canonicalE8DoubledCoordinateFamilyShapes :
   List E8DoubledCoordinateFamilyShape
@@ -322,16 +248,11 @@ canonicalE8DoubledCoordinateFamilyShapes =
   ∷ []
 
 data E8IntegerRootShapeField : Set where
-  integerRootUsesEightCoordinates :
-    E8IntegerRootShapeField
-  integerRootHasExactlyTwoNonzeroCoordinates :
-    E8IntegerRootShapeField
-  integerRootNonzeroCoordinatesAreDoubledPlusOrMinusTwo :
-    E8IntegerRootShapeField
-  integerRootRangesOverAllCoordinatePairs :
-    E8IntegerRootShapeField
-  integerRootRangesOverAllFourSignChoices :
-    E8IntegerRootShapeField
+  integerRootUsesEightCoordinates : E8IntegerRootShapeField
+  integerRootHasExactlyTwoNonzeroCoordinates : E8IntegerRootShapeField
+  integerRootNonzeroCoordinatesAreDoubledPlusOrMinusTwo : E8IntegerRootShapeField
+  integerRootRangesOverAllCoordinatePairs : E8IntegerRootShapeField
+  integerRootRangesOverAllFourSignChoices : E8IntegerRootShapeField
 
 canonicalE8IntegerRootShapeFields :
   List E8IntegerRootShapeField
@@ -344,16 +265,11 @@ canonicalE8IntegerRootShapeFields =
   ∷ []
 
 data E8HalfRootShapeField : Set where
-  halfRootUsesEightCoordinates :
-    E8HalfRootShapeField
-  halfRootEveryCoordinateIsDoubledPlusOrMinusOne :
-    E8HalfRootShapeField
-  halfRootHasEvenMinusParity :
-    E8HalfRootShapeField
-  halfRootRangesOverAllEvenParitySignVectors :
-    E8HalfRootShapeField
-  halfRootCountUsesParitySplitOfTwoToTheEight :
-    E8HalfRootShapeField
+  halfRootUsesEightCoordinates : E8HalfRootShapeField
+  halfRootEveryCoordinateIsDoubledPlusOrMinusOne : E8HalfRootShapeField
+  halfRootHasEvenMinusParity : E8HalfRootShapeField
+  halfRootRangesOverAllEvenParitySignVectors : E8HalfRootShapeField
+  halfRootCountUsesParitySplitOfTwoToTheEight : E8HalfRootShapeField
 
 canonicalE8HalfRootShapeFields :
   List E8HalfRootShapeField
@@ -366,22 +282,14 @@ canonicalE8HalfRootShapeFields =
   ∷ []
 
 data E8EnumerationCardinalityMachinery : Set where
-  listLengthFunction :
-    E8EnumerationCardinalityMachinery
-  vecEightCoordinateCarrier :
-    E8EnumerationCardinalityMachinery
-  decidableRootEquality :
-    E8EnumerationCardinalityMachinery
-  noDuplicateListPredicate :
-    E8EnumerationCardinalityMachinery
-  noDuplicateImpliesLengthIsCardinality :
-    E8EnumerationCardinalityMachinery
-  integerPairAndSignCountProof :
-    E8EnumerationCardinalityMachinery
-  halfParitySplitCountProof :
-    E8EnumerationCardinalityMachinery
-  appendDisjointFamilyCountProof :
-    E8EnumerationCardinalityMachinery
+  listLengthFunction : E8EnumerationCardinalityMachinery
+  vecEightCoordinateCarrier : E8EnumerationCardinalityMachinery
+  decidableRootEquality : E8EnumerationCardinalityMachinery
+  noDuplicateListPredicate : E8EnumerationCardinalityMachinery
+  noDuplicateImpliesLengthIsCardinality : E8EnumerationCardinalityMachinery
+  integerPairAndSignCountProof : E8EnumerationCardinalityMachinery
+  halfParitySplitCountProof : E8EnumerationCardinalityMachinery
+  appendDisjointFamilyCountProof : E8EnumerationCardinalityMachinery
 
 canonicalE8EnumerationCardinalityMachinery :
   List E8EnumerationCardinalityMachinery
@@ -397,24 +305,15 @@ canonicalE8EnumerationCardinalityMachinery =
   ∷ []
 
 data E8RootEnumerationObligation : Set where
-  integerFamily112 :
-    E8RootEnumerationObligation
-  halfFamily128 :
-    E8RootEnumerationObligation
-  totalFamily240 :
-    E8RootEnumerationObligation
-  allRootsHaveEightCoordinates :
-    E8RootEnumerationObligation
-  integerRootsArePairwisePlusMinusTwo :
-    E8RootEnumerationObligation
-  halfRootsAreAllPlusMinusOneWithEvenMinusParity :
-    E8RootEnumerationObligation
-  familiesAreDisjoint :
-    E8RootEnumerationObligation
-  noDuplicateRoots :
-    E8RootEnumerationObligation
-  enumerationIsComplete :
-    E8RootEnumerationObligation
+  integerFamily112 : E8RootEnumerationObligation
+  halfFamily128 : E8RootEnumerationObligation
+  totalFamily240 : E8RootEnumerationObligation
+  allRootsHaveEightCoordinates : E8RootEnumerationObligation
+  integerRootsArePairwisePlusMinusTwo : E8RootEnumerationObligation
+  halfRootsAreAllPlusMinusOneWithEvenMinusParity : E8RootEnumerationObligation
+  familiesAreDisjoint : E8RootEnumerationObligation
+  noDuplicateRoots : E8RootEnumerationObligation
+  enumerationIsComplete : E8RootEnumerationObligation
 
 canonicalE8RootEnumerationObligations :
   List E8RootEnumerationObligation
@@ -440,10 +339,8 @@ expectedTotalRootCount : Nat
 expectedTotalRootCount = 240
 
 data E8Sign : Set where
-  negativeSign :
-    E8Sign
-  positiveSign :
-    E8Sign
+  negativeSign : E8Sign
+  positiveSign : E8Sign
 
 _≟E8Sign_ :
   (x y : E8Sign) →
@@ -600,20 +497,13 @@ _∷ᵥ_ =
   Vec.[]
 
 data CoordinatePair8 : Set where
-  pair01 pair02 pair03 pair04 pair05 pair06 pair07 :
-    CoordinatePair8
-  pair12 pair13 pair14 pair15 pair16 pair17 :
-    CoordinatePair8
-  pair23 pair24 pair25 pair26 pair27 :
-    CoordinatePair8
-  pair34 pair35 pair36 pair37 :
-    CoordinatePair8
-  pair45 pair46 pair47 :
-    CoordinatePair8
-  pair56 pair57 :
-    CoordinatePair8
-  pair67 :
-    CoordinatePair8
+  pair01 pair02 pair03 pair04 pair05 pair06 pair07 : CoordinatePair8
+  pair12 pair13 pair14 pair15 pair16 pair17 : CoordinatePair8
+  pair23 pair24 pair25 pair26 pair27 : CoordinatePair8
+  pair34 pair35 pair36 pair37 : CoordinatePair8
+  pair45 pair46 pair47 : CoordinatePair8
+  pair56 pair57 : CoordinatePair8
+  pair67 : CoordinatePair8
 
 allCoordinatePairs8 :
   List CoordinatePair8
@@ -1387,20 +1277,13 @@ halfIndexedRootsParitySoundBridge =
   paritySoundByEvenSignVectorConstruction halfIndexedRootsEvenParityByConstruction
 
 data E8NativePropositionalLiftTarget : Set where
-  liftMemberIndexedRootToNativeRootMembership :
-    E8NativePropositionalLiftTarget
-  liftIndexedRootNoDuplicatesToNativeUnique :
-    E8NativePropositionalLiftTarget
-  liftIndexedRootFamiliesDisjointToNativeDisjoint :
-    E8NativePropositionalLiftTarget
-  liftHalfIndexedRootParitySoundToNativeEvenParity :
-    E8NativePropositionalLiftTarget
-  liftIntegerGeneratorToTwoSparseCompleteness :
-    E8NativePropositionalLiftTarget
-  liftHalfGeneratorToEvenParityCompleteness :
-    E8NativePropositionalLiftTarget
-  liftCombinedGeneratorToE8Completeness :
-    E8NativePropositionalLiftTarget
+  liftMemberIndexedRootToNativeRootMembership : E8NativePropositionalLiftTarget
+  liftIndexedRootNoDuplicatesToNativeUnique : E8NativePropositionalLiftTarget
+  liftIndexedRootFamiliesDisjointToNativeDisjoint : E8NativePropositionalLiftTarget
+  liftHalfIndexedRootParitySoundToNativeEvenParity : E8NativePropositionalLiftTarget
+  liftIntegerGeneratorToTwoSparseCompleteness : E8NativePropositionalLiftTarget
+  liftHalfGeneratorToEvenParityCompleteness : E8NativePropositionalLiftTarget
+  liftCombinedGeneratorToE8Completeness : E8NativePropositionalLiftTarget
 
 canonicalE8NativePropositionalLiftTargets :
   List E8NativePropositionalLiftTarget
@@ -1412,20 +1295,13 @@ canonicalE8NativePropositionalLiftTargets =
   ∷ []
 
 data E8StructuralBridgeResidualObligation : Set where
-  bridgeExecutableMembershipToNativeMembership :
-    E8StructuralBridgeResidualObligation
-  bridgeExecutableNoDuplicatesToNativeNoDuplicates :
-    E8StructuralBridgeResidualObligation
-  bridgeExecutableDisjointnessToNativeDisjointness :
-    E8StructuralBridgeResidualObligation
-  bridgeEvenSignConstructionToNativeParityPredicate :
-    E8StructuralBridgeResidualObligation
-  proveIntegerTwoSparseCompleteness :
-    E8StructuralBridgeResidualObligation
-  proveHalfEvenParityCompleteness :
-    E8StructuralBridgeResidualObligation
-  proveCombinedE8Completeness :
-    E8StructuralBridgeResidualObligation
+  bridgeExecutableMembershipToNativeMembership : E8StructuralBridgeResidualObligation
+  bridgeExecutableNoDuplicatesToNativeNoDuplicates : E8StructuralBridgeResidualObligation
+  bridgeExecutableDisjointnessToNativeDisjointness : E8StructuralBridgeResidualObligation
+  bridgeEvenSignConstructionToNativeParityPredicate : E8StructuralBridgeResidualObligation
+  proveIntegerTwoSparseCompleteness : E8StructuralBridgeResidualObligation
+  proveHalfEvenParityCompleteness : E8StructuralBridgeResidualObligation
+  proveCombinedE8Completeness : E8StructuralBridgeResidualObligation
 
 canonicalE8StructuralBridgeResidualObligations :
   List E8StructuralBridgeResidualObligation
@@ -1502,22 +1378,14 @@ canonicalE8BooleanBackedStructuralBridgeLayer =
     }
 
 data E8RootEnumerationProofObligation : Set where
-  integerIndexedRootsNoDuplicatesObligation :
-    E8RootEnumerationProofObligation
-  integerIndexedRootsCompleteForTwoSparseShapeObligation :
-    E8RootEnumerationProofObligation
-  halfIndexedRootsEvenParitySoundnessObligation :
-    E8RootEnumerationProofObligation
-  halfIndexedRootsNoDuplicatesObligation :
-    E8RootEnumerationProofObligation
-  halfIndexedRootsCompleteForEvenParityShapeObligation :
-    E8RootEnumerationProofObligation
-  integerHalfIndexedRootsDisjointObligation :
-    E8RootEnumerationProofObligation
-  combinedIndexedRootsNoDuplicatesObligation :
-    E8RootEnumerationProofObligation
-  combinedIndexedRootsCompleteForE8ShapeObligation :
-    E8RootEnumerationProofObligation
+  integerIndexedRootsNoDuplicatesObligation : E8RootEnumerationProofObligation
+  integerIndexedRootsCompleteForTwoSparseShapeObligation : E8RootEnumerationProofObligation
+  halfIndexedRootsEvenParitySoundnessObligation : E8RootEnumerationProofObligation
+  halfIndexedRootsNoDuplicatesObligation : E8RootEnumerationProofObligation
+  halfIndexedRootsCompleteForEvenParityShapeObligation : E8RootEnumerationProofObligation
+  integerHalfIndexedRootsDisjointObligation : E8RootEnumerationProofObligation
+  combinedIndexedRootsNoDuplicatesObligation : E8RootEnumerationProofObligation
+  combinedIndexedRootsCompleteForE8ShapeObligation : E8RootEnumerationProofObligation
 
 canonicalE8RootEnumerationProofObligations :
   List E8RootEnumerationProofObligation
@@ -1537,16 +1405,11 @@ e8RootEnumerationCompleteImpossibleHere :
 e8RootEnumerationCompleteImpossibleHere ()
 
 data E8UpstreamPromotionMissingTheoremName : Set where
-  missingIntegerIndexedRootsCompleteForTwoSparseShapeTheorem :
-    E8UpstreamPromotionMissingTheoremName
-  missingHalfIndexedRootsCompleteForEvenParityShapeTheorem :
-    E8UpstreamPromotionMissingTheoremName
-  missingCombinedIndexedRootsCompleteForE8ShapeTheorem :
-    E8UpstreamPromotionMissingTheoremName
-  missingEnumerationIsCompleteTheorem :
-    E8UpstreamPromotionMissingTheoremName
-  missingE8RootEnumerationCompleteConstructorPayload :
-    E8UpstreamPromotionMissingTheoremName
+  missingIntegerIndexedRootsCompleteForTwoSparseShapeTheorem : E8UpstreamPromotionMissingTheoremName
+  missingHalfIndexedRootsCompleteForEvenParityShapeTheorem : E8UpstreamPromotionMissingTheoremName
+  missingCombinedIndexedRootsCompleteForE8ShapeTheorem : E8UpstreamPromotionMissingTheoremName
+  missingEnumerationIsCompleteTheorem : E8UpstreamPromotionMissingTheoremName
+  missingE8RootEnumerationCompleteConstructorPayload : E8UpstreamPromotionMissingTheoremName
 
 canonicalE8UpstreamPromotionMissingTheoremNames :
   List E8UpstreamPromotionMissingTheoremName

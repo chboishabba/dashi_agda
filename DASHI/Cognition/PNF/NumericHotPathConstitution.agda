@@ -28,8 +28,7 @@ open import DASHI.Cognition.PNF.NumericAuthority
 ------------------------------------------------------------------------
 
 data TextBoundaryReason : Set where
-  ingestNormalization rawQuotation externalProtocol userVisibleRendering :
-    TextBoundaryReason
+  ingestNormalization rawQuotation externalProtocol userVisibleRendering : TextBoundaryReason
 
 record TextBoundaryException : Set where
   constructor textBoundaryException

@@ -369,12 +369,10 @@ record SignedResidualLaplacianOperator : Set where
 open SignedResidualLaplacianOperator public
 
 data SpectralCoordinateOperatorScope : Set where
-  operatorRelativeProposalCoordinates :
-    SpectralCoordinateOperatorScope
+  operatorRelativeProposalCoordinates : SpectralCoordinateOperatorScope
 
 data ContradictionFrustrationSemantics : Set where
-  signedFrustrationNotSemanticTruth :
-    ContradictionFrustrationSemantics
+  signedFrustrationNotSemanticTruth : ContradictionFrustrationSemantics
 
 record SpectralCoordinateRow : Set where
   constructor spectralCoordinateRow
@@ -455,23 +453,19 @@ canonicalCheckedSpectralCoordinateRow v =
 -- Canonical finite receipt and promotion boundary.
 
 data PNFSpectralFieldGraphStatus : Set where
-  finiteAddressingProposalOperator_noSemanticPromotion :
-    PNFSpectralFieldGraphStatus
+  finiteAddressingProposalOperator_noSemanticPromotion : PNFSpectralFieldGraphStatus
 
 data PNFSpectralFieldGraphComponent : Set where
   typedResidualEdgeKindsComponent : PNFSpectralFieldGraphComponent
-  typedEdgeOriginSourceClassesComponent :
-    PNFSpectralFieldGraphComponent
+  typedEdgeOriginSourceClassesComponent : PNFSpectralFieldGraphComponent
   structuralWeightClassesComponent : PNFSpectralFieldGraphComponent
   signedContradictionComponent : PNFSpectralFieldGraphComponent
   diagonalDegreeComponent : PNFSpectralFieldGraphComponent
   graphLaplacianComponent : PNFSpectralFieldGraphComponent
   signedResidualLaplacianComponent : PNFSpectralFieldGraphComponent
   finiteSpectralCoordinateRowComponent : PNFSpectralFieldGraphComponent
-  checkedOperatorRelativeCoordinateComponent :
-    PNFSpectralFieldGraphComponent
-  signedFrustrationBoundaryComponent :
-    PNFSpectralFieldGraphComponent
+  checkedOperatorRelativeCoordinateComponent : PNFSpectralFieldGraphComponent
+  signedFrustrationBoundaryComponent : PNFSpectralFieldGraphComponent
   finiteReceiptBoundaryComponent : PNFSpectralFieldGraphComponent
 
 canonicalPNFSpectralFieldGraphComponents :

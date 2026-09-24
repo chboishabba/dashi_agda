@@ -338,8 +338,8 @@ deweyDoesNotCreateSnapshotIdentity ()
 -- source-object archaeology and exact historical corpus identity debt.
 ------------------------------------------------------------------------
 
-firstLinkBoundary : FLN.WikipediaFirstLinkBoundary
-firstLinkBoundary = FLN.canonicalWikipediaFirstLinkBoundary
+firstLinkBoundary : FLN.FirstLinkNetworkBoundary
+firstLinkBoundary = FLN.canonicalFirstLinkNetworkBoundary
 
 record HistoricalSnapshotProvenanceBoundary : Set where
   constructor historical-snapshot-provenance-boundary

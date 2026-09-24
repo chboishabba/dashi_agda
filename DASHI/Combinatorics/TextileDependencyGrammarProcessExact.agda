@@ -138,7 +138,7 @@ open CrochetState public
 data CrochetLocalAction (state : CrochetState) : Set where
   chainFromActive : CrochetLocalAction state
   insertActiveInto :
-    (target : Nat) →
+  (target : Nat) →
     suc target ≤ suc (fabricLoopCount state) →
     CrochetLocalAction state
 

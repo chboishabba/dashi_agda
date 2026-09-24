@@ -19,9 +19,9 @@ import DASHI.Wikimedia.IbrahimSnowballIndigenousPyrodiversityFaunaProductivityCa
 ------------------------------------------------------------------------
 
 data TiwiSameExperimentSourceRole : Set where
-  experimentAndCarbonBaseline
-  vegetationStructureFollowup
-  mammalFireResponseFollowup
+  experimentAndCarbonBaseline : TiwiSameExperimentSourceRole
+  vegetationStructureFollowup : TiwiSameExperimentSourceRole
+  mammalFireResponseFollowup : TiwiSameExperimentSourceRole
   longTermCarbonStockFollowup : TiwiSameExperimentSourceRole
 
 record TiwiSameExperimentPrimarySource : Set where
@@ -102,11 +102,11 @@ ngEtAl2026 = tiwi-same-experiment-primary-source
 ------------------------------------------------------------------------
 
 data SameCarrierStrength : Set where
-  sameProgramme
-  sameExperimentFamily
-  samePlotSet
-  sameExactPlot
-  sameMeasurementWindow
+  sameProgramme : SameCarrierStrength
+  sameExperimentFamily : SameCarrierStrength
+  samePlotSet : SameCarrierStrength
+  sameExactPlot : SameCarrierStrength
+  sameMeasurementWindow : SameCarrierStrength
   sameSample : SameCarrierStrength
 
 record TiwiExperimentFamilyReceipt : Set where
@@ -150,18 +150,18 @@ canonicalTiwiExperimentFamilyReceipt = tiwi-experiment-family-receipt
 ------------------------------------------------------------------------
 
 data TiwiCrossConsumer : Set where
-  fireTreatment
-  woodyVegetationStructure
-  nativeMammalAssemblage
-  aboveGroundBiomassCarbon
-  belowGroundBiomassCarbon
-  standingDeadCarbon
-  coarseWoodyDebrisCarbon
-  litterCarbon
-  wholeEcosystemCarbon
-  soilCarbon
-  grossPrimaryProduction
-  netEcosystemProductivity
+  fireTreatment : TiwiCrossConsumer
+  woodyVegetationStructure : TiwiCrossConsumer
+  nativeMammalAssemblage : TiwiCrossConsumer
+  aboveGroundBiomassCarbon : TiwiCrossConsumer
+  belowGroundBiomassCarbon : TiwiCrossConsumer
+  standingDeadCarbon : TiwiCrossConsumer
+  coarseWoodyDebrisCarbon : TiwiCrossConsumer
+  litterCarbon : TiwiCrossConsumer
+  wholeEcosystemCarbon : TiwiCrossConsumer
+  soilCarbon : TiwiCrossConsumer
+  grossPrimaryProduction : TiwiCrossConsumer
+  netEcosystemProductivity : TiwiCrossConsumer
   netBiomeProductivity : TiwiCrossConsumer
 
 record TiwiCrossConsumerAdmission : Set where

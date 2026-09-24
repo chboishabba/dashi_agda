@@ -21,13 +21,13 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data ResidueRole : Set where
-  fungicide
-  herbicide
-  insecticide
-  acaricide
-  plantGrowthRegulator
-  pesticideSynergist
-  biologicalInsecticideMixture
+  fungicide : ResidueRole
+  herbicide : ResidueRole
+  insecticide : ResidueRole
+  acaricide : ResidueRole
+  plantGrowthRegulator : ResidueRole
+  pesticideSynergist : ResidueRole
+  biologicalInsecticideMixture : ResidueRole
   unresolvedTradeName : ResidueRole
 
 record ResidueRegistry : Set where
@@ -262,12 +262,12 @@ canonicalCommonResiduePanelBoundary =
 ------------------------------------------------------------------------
 
 data ResidueParetoTarget : Set where
-  completeRegistryCoordinates
-  recoverPanelAnalyteLists
-  dedicatedGlyphosateCannabisMethod
-  licensedMarketReplication
-  combustionTransfer
-  vaporisationTransfer
+  completeRegistryCoordinates : ResidueParetoTarget
+  recoverPanelAnalyteLists : ResidueParetoTarget
+  dedicatedGlyphosateCannabisMethod : ResidueParetoTarget
+  licensedMarketReplication : ResidueParetoTarget
+  combustionTransfer : ResidueParetoTarget
+  vaporisationTransfer : ResidueParetoTarget
   routeDoseToxicology : ResidueParetoTarget
 
 record ResidueParetoStep : Set where
@@ -327,15 +327,15 @@ pareto9 = residue-pareto-step
 ------------------------------------------------------------------------
 
 data PanelTime : Set where
-  legacyFinitePanels
-  gagnon2023Expanded327
-  fiering2026BroadSurveillance
+  legacyFinitePanels : PanelTime
+  gagnon2023Expanded327 : PanelTime
+  fiering2026BroadSurveillance : PanelTime
   currentDashi : PanelTime
 
 data PanelInterpretation : Set where
-  finitePanelLeavesBlindSpots
-  commonIllegalResiduesObserved
-  glyphosateCannabisOccurrenceKnown
+  finitePanelLeavesBlindSpots : PanelInterpretation
+  commonIllegalResiduesObserved : PanelInterpretation
+  glyphosateCannabisOccurrenceKnown : PanelInterpretation
   inhaledToxicDoseKnown : PanelInterpretation
 
 data PanelSummary : Set where coverageIsAnalyteIndexed : PanelSummary

@@ -21,25 +21,25 @@ import DASHI.Law.SensibLawWoogarooEPBC43BHistoricalClearingApplicabilityExact as
 ------------------------------------------------------------------------
 
 data WoogarooCarrier : Set where
-  shg2019Ecology
-  shgFederalImpactAssessment
-  epbcReferral2019_8575
-  councilNegotiatedDecision9281
-  approvedPlanA12705838
-  currentExecutionRecords
-  qldKoalaStatusRecord
-  ncaCurrentAct
-  epbcCurrentAct
-  currentEcologicalExpertOpinion
-  historicalAerialSeries
+  shg2019Ecology : WoogarooCarrier
+  shgFederalImpactAssessment : WoogarooCarrier
+  epbcReferral2019_8575 : WoogarooCarrier
+  councilNegotiatedDecision9281 : WoogarooCarrier
+  approvedPlanA12705838 : WoogarooCarrier
+  currentExecutionRecords : WoogarooCarrier
+  qldKoalaStatusRecord : WoogarooCarrier
+  ncaCurrentAct : WoogarooCarrier
+  epbcCurrentAct : WoogarooCarrier
+  currentEcologicalExpertOpinion : WoogarooCarrier
+  historicalAerialSeries : WoogarooCarrier
   viablePopulationStudy : WoogarooCarrier
 
 data DependencyRelation : Set where
-  sameUnderlyingEcology
-  derivesFrom
-  legallyIndependentSource
-  observationallyIndependentSource
-  sameProjectDifferentConsumer
+  sameUnderlyingEcology : DependencyRelation
+  derivesFrom : DependencyRelation
+  legallyIndependentSource : DependencyRelation
+  observationallyIndependentSource : DependencyRelation
+  sameProjectDifferentConsumer : DependencyRelation
   identityUnresolved : DependencyRelation
 
 record DependencyCell : Set where
@@ -121,11 +121,11 @@ historicalS43BUnpaid = dependency-cell
 ------------------------------------------------------------------------
 
 data WoogarooConsumer : Set where
-  threatenedWildlifeStatus
-  projectExposure
-  likelySignificantDetrimentalEffect
-  statutoryEssentiality
-  currentExecutionUrgency
+  threatenedWildlifeStatus : WoogarooConsumer
+  projectExposure : WoogarooConsumer
+  likelySignificantDetrimentalEffect : WoogarooConsumer
+  statutoryEssentiality : WoogarooConsumer
+  currentExecutionUrgency : WoogarooConsumer
   s43BApplicability : WoogarooConsumer
 
 record ConsumerDependencyState : Set where

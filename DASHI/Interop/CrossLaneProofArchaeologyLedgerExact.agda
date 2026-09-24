@@ -33,13 +33,13 @@ data Lane : Set where
   navierStokes yangMills riemannHypothesis grQuantum : Lane
 
 data HistoricalRole : Set where
-  terminalConsumer directProducer producerTactic compiler representationWeld
-  negativeControl diagnostic crossProverDonor sourceFrontier buriedDonor
+  terminalConsumer directProducer producerTactic compiler representationWeld : HistoricalRole
+  negativeControl diagnostic crossProverDonor sourceFrontier buriedDonor : HistoricalRole
   operatorContinuumFrontier liveLevel2Theorem : HistoricalRole
 
 data HistoricalClock : Set where
-  constructionAncestry firstTypedAppearance formalConsolidation
-  consumerRecovery cutsetCompression sourceFrontierCompression
+  constructionAncestry firstTypedAppearance formalConsolidation : HistoricalClock
+  consumerRecovery cutsetCompression sourceFrontierCompression : HistoricalClock
   crossProverSync operatorContinuumAudit buriedPaymentRecovery : HistoricalClock
 
 data IdentityStatus : Set where

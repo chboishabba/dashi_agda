@@ -22,9 +22,9 @@ import DASHI.Wikimedia.IbrahimPesticideExperimentConsumerIndexedParetoExact as I
 ------------------------------------------------------------------------
 
 data CoSmokeDesign : Set where
-  sourceOnlyObservation
-  fixedRatioThreeArm
-  ratioResponseSeries
+  sourceOnlyObservation : CoSmokeDesign
+  fixedRatioThreeArm : CoSmokeDesign
+  ratioResponseSeries : CoSmokeDesign
   deviceFactorialSeries : CoSmokeDesign
 
 record CoSmokeCandidate : Set where
@@ -146,9 +146,9 @@ canonicalCoSmokeParetoReading = co-smoke-pareto-reading
 ------------------------------------------------------------------------
 
 data CoSmokeEscalationTrigger : Set where
-  basicInteractionResolved
-  ratioDependenceUnresolved
-  deviceDependenceUnresolved
+  basicInteractionResolved : CoSmokeEscalationTrigger
+  ratioDependenceUnresolved : CoSmokeEscalationTrigger
+  deviceDependenceUnresolved : CoSmokeEscalationTrigger
   replicateUncertaintyTooLarge : CoSmokeEscalationTrigger
 
 nextDesign : CoSmokeEscalationTrigger → CoSmokeDesign

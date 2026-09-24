@@ -19,13 +19,8 @@ import DASHI.Wikimedia.SensibLawStatementBundleDiagnosisProofSearchExact as Sear
 ------------------------------------------------------------------------
 
 data BundleObligation : Set where
-  sameCarrier
-  sourceSupport
-  qualifierTransport
-  rankTreatment
-  provenanceSupport
-  semanticCorrespondence
-  : BundleObligation
+  sameCarrier sourceSupport qualifierTransport rankTreatment : BundleObligation
+  provenanceSupport semanticCorrespondence : BundleObligation
 
 record BundleObligationStatus : Set where
   constructor bundle-obligation-status
@@ -39,14 +34,9 @@ record BundleObligationStatus : Set where
 open BundleObligationStatus public
 
 data BundlePrerequisiteResidual : Set where
-  missingSameCarrier
-  missingSourceSupport
-  missingQualifierTransport
-  missingRankTreatment
-  missingProvenanceSupport
-  missingSemanticCorrespondence
-  bundlePrerequisitesClosed
-  : BundlePrerequisiteResidual
+  missingSameCarrier missingSourceSupport missingQualifierTransport : BundlePrerequisiteResidual
+  missingRankTreatment missingProvenanceSupport : BundlePrerequisiteResidual
+  missingSemanticCorrespondence bundlePrerequisitesClosed : BundlePrerequisiteResidual
 
 firstMissingPrerequisite : BundleObligationStatus → BundlePrerequisiteResidual
 firstMissingPrerequisite (bundle-obligation-status false s q r p c) = missingSameCarrier
@@ -67,14 +57,9 @@ obligationForResidual missingSemanticCorrespondence = semanticCorrespondence
 obligationForResidual bundlePrerequisitesClosed = semanticCorrespondence
 
 data BundlePrerequisiteProducer : Set where
-  verifySameCarrier
-  acquireSourceSupport
-  proveQualifierTransport
-  reviewRankTreatment
-  acquireProvenanceSupport
-  proveSemanticCorrespondence
-  noPrerequisiteProducer
-  : BundlePrerequisiteProducer
+  verifySameCarrier acquireSourceSupport proveQualifierTransport : BundlePrerequisiteProducer
+  reviewRankTreatment acquireProvenanceSupport : BundlePrerequisiteProducer
+  proveSemanticCorrespondence noPrerequisiteProducer : BundlePrerequisiteProducer
 
 producerForResidual : BundlePrerequisiteResidual → BundlePrerequisiteProducer
 producerForResidual missingSameCarrier = verifySameCarrier

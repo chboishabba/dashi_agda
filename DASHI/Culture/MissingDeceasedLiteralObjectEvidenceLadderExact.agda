@@ -15,12 +15,12 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ObjectEvidenceClass : Set where
-  thematicAdjacency
-  personReference
-  institutionIdentifier
-  programmeObjectIdentifier
-  intermediatedProgrammeChain
-  crossPersonSameProgramme
+  thematicAdjacency : ObjectEvidenceClass
+  personReference : ObjectEvidenceClass
+  institutionIdentifier : ObjectEvidenceClass
+  programmeObjectIdentifier : ObjectEvidenceClass
+  intermediatedProgrammeChain : ObjectEvidenceClass
+  crossPersonSameProgramme : ObjectEvidenceClass
   preEventOperationalLink : ObjectEvidenceClass
 
 record LiteralObjectEvidenceReceipt : Set where

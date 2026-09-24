@@ -22,18 +22,18 @@ import DASHI.Core.ScientificWorkAttributionExact as Attribution
 ------------------------------------------------------------------------
 
 data KrameterhofSourceRole : Set where
-  firstPersonFarmTour
-  officialFarmDescription
+  firstPersonFarmTour : KrameterhofSourceRole
+  officialFarmDescription : KrameterhofSourceRole
   historicalPracticeLineage : KrameterhofSourceRole
 
 data KrameterhofEvidenceRelation : Set where
-  practitionerReportedPractice
-  officialSiteMetadata
+  practitionerReportedPractice : KrameterhofEvidenceRelation
+  officialSiteMetadata : KrameterhofEvidenceRelation
   historicalLineageOnly : KrameterhofEvidenceRelation
 
 data KrameterhofEvidenceForm : Set where
-  suppliedVideoTranscript
-  officialWebsite
+  suppliedVideoTranscript : KrameterhofEvidenceForm
+  officialWebsite : KrameterhofEvidenceForm
   existingTypedLineage : KrameterhofEvidenceForm
 
 record KrameterhofSource : Set where

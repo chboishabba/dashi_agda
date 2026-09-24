@@ -32,46 +32,46 @@ import DASHI.Environment.SustainableAgricultureManagementSourceRegistryExact as 
 ------------------------------------------------------------------------
 
 data TraditionKind : Set where
-  technicalMethod
-  forestryMethod
-  agroforestryMethod
-  soilCarbonMethod
-  movementFramework
-  sovereigntyFramework
-  religiousAgrarianPractice
-  ethicalConstraintFramework
-  certificationTradition
+  technicalMethod : TraditionKind
+  forestryMethod : TraditionKind
+  agroforestryMethod : TraditionKind
+  soilCarbonMethod : TraditionKind
+  movementFramework : TraditionKind
+  sovereigntyFramework : TraditionKind
+  religiousAgrarianPractice : TraditionKind
+  ethicalConstraintFramework : TraditionKind
+  certificationTradition : TraditionKind
   umbrellaManagementFramework : TraditionKind
 
 data AdditionalPracticeFamily : Set where
-  biodynamicAgriculture
-  syntropicAgriculture
-  successionalAgroforestry
-  huegelkultur
-  silviculture
-  closeToNatureForestry
-  coppicePollardManagement
-  assistedNaturalRegeneration
-  regenerativeAgriculture
-  carbonFarming
-  conservationAgriculture
-  naturalFarmingIndia
-  livestockIntegratedNaturalFarming
-  peasantAgroecology
-  foodSovereignty
-  zapatistaAgroecology
-  nativeSeedSovereignty
-  iskconCowProtectedAgriculture
+  biodynamicAgriculture : AdditionalPracticeFamily
+  syntropicAgriculture : AdditionalPracticeFamily
+  successionalAgroforestry : AdditionalPracticeFamily
+  huegelkultur : AdditionalPracticeFamily
+  silviculture : AdditionalPracticeFamily
+  closeToNatureForestry : AdditionalPracticeFamily
+  coppicePollardManagement : AdditionalPracticeFamily
+  assistedNaturalRegeneration : AdditionalPracticeFamily
+  regenerativeAgriculture : AdditionalPracticeFamily
+  carbonFarming : AdditionalPracticeFamily
+  conservationAgriculture : AdditionalPracticeFamily
+  naturalFarmingIndia : AdditionalPracticeFamily
+  livestockIntegratedNaturalFarming : AdditionalPracticeFamily
+  peasantAgroecology : AdditionalPracticeFamily
+  foodSovereignty : AdditionalPracticeFamily
+  zapatistaAgroecology : AdditionalPracticeFamily
+  nativeSeedSovereignty : AdditionalPracticeFamily
+  iskconCowProtectedAgriculture : AdditionalPracticeFamily
   jainAhimsaAgrarianEthics : AdditionalPracticeFamily
 
 data SourceStrength : Set where
-  primaryMovementSource
-  primaryInstitutionalSource
-  primaryStandardsSource
-  officialPracticeSource
-  peerReviewedScholarship
-  universityExtension
-  secondaryScholarlyReconstruction
+  primaryMovementSource : SourceStrength
+  primaryInstitutionalSource : SourceStrength
+  primaryStandardsSource : SourceStrength
+  officialPracticeSource : SourceStrength
+  peerReviewedScholarship : SourceStrength
+  universityExtension : SourceStrength
+  secondaryScholarlyReconstruction : SourceStrength
   unresolvedPrimarySource : SourceStrength
 
 record TraditionSource : Set where

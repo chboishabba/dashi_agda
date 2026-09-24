@@ -105,18 +105,18 @@ memoryBoundary = Memory.canonicalLearningMemoryTraumaReplicationConsensusBoundar
 ------------------------------------------------------------------------
 
 data RepeatedSurfaceCase : Set where
-  repeatedFromMemory
-  repeatedBySocialCopying
-  repeatedByCitationCascade
-  repeatedFromSharedScientificInput
+  repeatedFromMemory : RepeatedSurfaceCase
+  repeatedBySocialCopying : RepeatedSurfaceCase
+  repeatedByCitationCascade : RepeatedSurfaceCase
+  repeatedFromSharedScientificInput : RepeatedSurfaceCase
   repeatedFromIndependentOrigins : RepeatedSurfaceCase
 
 data RepeatedSurface : Set where sameRepeatedClaimSurface : RepeatedSurface
 data GenerationMechanism : Set where
-  memoryRetrieval
-  socialTransmission
-  citationCascade
-  sharedScientificGenealogy
+  memoryRetrieval : GenerationMechanism
+  socialTransmission : GenerationMechanism
+  citationCascade : GenerationMechanism
+  sharedScientificGenealogy : GenerationMechanism
   independentEvidenceGeneration : GenerationMechanism
 
 repeatedSurface : RepeatedSurfaceCase → RepeatedSurface

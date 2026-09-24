@@ -15,10 +15,10 @@ import DASHI.Core.AttributedSourceCore as A
 ------------------------------------------------------------------------
 
 data PromotionState : Set where
-  discoveryOnly
-  boundedSecondary
-  primaryLocatedUninspected
-  primaryInspected
+  discoveryOnly : PromotionState
+  boundedSecondary : PromotionState
+  primaryLocatedUninspected : PromotionState
+  primaryInspected : PromotionState
   pruned : PromotionState
 
 record SourcePromotionRow : Set where

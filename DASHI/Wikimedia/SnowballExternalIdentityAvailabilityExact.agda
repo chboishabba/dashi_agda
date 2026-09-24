@@ -19,8 +19,7 @@ import DASHI.Wikimedia.NativeReferenceAttributedSourceBridgeExact as NativeBridg
 ------------------------------------------------------------------------
 
 data ExternalIdentityKind : Set where
-  wikidataQid canonicalURL doi arxiv officialIdentifier wikimediaReferenceUrl :
-    ExternalIdentityKind
+  wikidataQid canonicalURL doi arxiv officialIdentifier wikimediaReferenceUrl : ExternalIdentityKind
 
 data IdentityResolution : Set where
   notApplicable : String → IdentityResolution

@@ -174,8 +174,8 @@ fullExpandedGateIsPassed :
 fullExpandedGateIsPassed = refl
 
 data ExpandedSemanticCertificationFrontier : Set where
-  boundedExpandedGWBv02CertifiedAwaitingAdmissionAndMultiCorpus
-    : ExpandedSemanticCertificationFrontier
+  boundedExpandedGWBv02CertifiedAwaitingAdmissionAndMultiCorpus : ExpandedSemanticCertificationFrontier
+  : ExpandedSemanticCertificationFrontier
 
 currentExpandedSemanticCertificationFrontier : ExpandedSemanticCertificationFrontier
 currentExpandedSemanticCertificationFrontier =

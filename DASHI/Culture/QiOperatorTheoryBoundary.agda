@@ -24,30 +24,19 @@ import DASHI.Interop.SpectralOperatorShapeCore as SpectralShapeCore
 -- spiritual, or scientific authority without separate validation.
 
 data QiOperatorTheoryBoundaryStatus : Set where
-  qiOperatorTheoryRoleGrammarOnlyNonPromoting :
-    QiOperatorTheoryBoundaryStatus
+  qiOperatorTheoryRoleGrammarOnlyNonPromoting : QiOperatorTheoryBoundaryStatus
 
 data QiRoleCategory : Set where
-  QiStateSpace :
-    QiRoleCategory
-  QiOperator :
-    QiRoleCategory
-  QiObservable :
-    QiRoleCategory
-  QiSpectrumTool :
-    QiRoleCategory
-  QiBoundaryGate :
-    QiRoleCategory
-  QiObstruction :
-    QiRoleCategory
-  QiAlgebra :
-    QiRoleCategory
-  QiProofObligation :
-    QiRoleCategory
-  QiDecomposition :
-    QiRoleCategory
-  HistoricalMetadata :
-    QiRoleCategory
+  QiStateSpace : QiRoleCategory
+  QiOperator : QiRoleCategory
+  QiObservable : QiRoleCategory
+  QiSpectrumTool : QiRoleCategory
+  QiBoundaryGate : QiRoleCategory
+  QiObstruction : QiRoleCategory
+  QiAlgebra : QiRoleCategory
+  QiProofObligation : QiRoleCategory
+  QiDecomposition : QiRoleCategory
+  HistoricalMetadata : QiRoleCategory
 
 canonicalQiRoleCategories :
   List QiRoleCategory
@@ -159,56 +148,31 @@ canonicalQiCoreRoleFamilyExternalAuthorityFalse =
   refl
 
 data OperatorFamily : Set where
-  boundedOperator :
-    OperatorFamily
-  unboundedOperator :
-    OperatorFamily
-  compactOperator :
-    OperatorFamily
-  positiveOperator :
-    OperatorFamily
-  selfAdjointOperator :
-    OperatorFamily
-  unitaryOperator :
-    OperatorFamily
-  contractionOperator :
-    OperatorFamily
-  dissipativeOperator :
-    OperatorFamily
-  VolterraOperator :
-    OperatorFamily
-  transferOperator :
-    OperatorFamily
-  multiplicationOperator :
-    OperatorFamily
-  LaplaceOperator :
-    OperatorFamily
-  FredholmOperator :
-    OperatorFamily
-  projectionOperator :
-    OperatorFamily
-  resolventOperator :
-    OperatorFamily
-  functionalCalculusOperator :
-    OperatorFamily
-  semigroupOperator :
-    OperatorFamily
-  generatorOperator :
-    OperatorFamily
-  integralOperator :
-    OperatorFamily
-  kernelOperator :
-    OperatorFamily
-  traceClassOperator :
-    OperatorFamily
-  spectralMeasureOperator :
-    OperatorFamily
-  ToeplitzOperator :
-    OperatorFamily
-  pseudodifferentialOperator :
-    OperatorFamily
-  boundaryTraceOperator :
-    OperatorFamily
+  boundedOperator : OperatorFamily
+  unboundedOperator : OperatorFamily
+  compactOperator : OperatorFamily
+  positiveOperator : OperatorFamily
+  selfAdjointOperator : OperatorFamily
+  unitaryOperator : OperatorFamily
+  contractionOperator : OperatorFamily
+  dissipativeOperator : OperatorFamily
+  VolterraOperator : OperatorFamily
+  transferOperator : OperatorFamily
+  multiplicationOperator : OperatorFamily
+  LaplaceOperator : OperatorFamily
+  FredholmOperator : OperatorFamily
+  projectionOperator : OperatorFamily
+  resolventOperator : OperatorFamily
+  functionalCalculusOperator : OperatorFamily
+  semigroupOperator : OperatorFamily
+  generatorOperator : OperatorFamily
+  integralOperator : OperatorFamily
+  kernelOperator : OperatorFamily
+  traceClassOperator : OperatorFamily
+  spectralMeasureOperator : OperatorFamily
+  ToeplitzOperator : OperatorFamily
+  pseudodifferentialOperator : OperatorFamily
+  boundaryTraceOperator : OperatorFamily
 
 operatorFamilyQiRole : OperatorFamily → QiRoleCategory
 operatorFamilyQiRole boundedOperator =
@@ -493,20 +457,14 @@ canonicalOperatorFamilyQiRoleRows =
   ∷ []
 
 data QiSpectralTerm : Set where
-  Sheng :
-    QiSpectralTerm
-  Sha :
-    QiSpectralTerm
-  Si :
-    QiSpectralTerm
+  Sheng : QiSpectralTerm
+  Sha : QiSpectralTerm
+  Si : QiSpectralTerm
 
 data QiSpectralInterpretation : Set where
-  generativeBandRole :
-    QiSpectralInterpretation
-  obstructiveBandRole :
-    QiSpectralInterpretation
-  stagnantKernelRole :
-    QiSpectralInterpretation
+  generativeBandRole : QiSpectralInterpretation
+  obstructiveBandRole : QiSpectralInterpretation
+  stagnantKernelRole : QiSpectralInterpretation
 
 spectralTermInterpretation :
   QiSpectralTerm → QiSpectralInterpretation
@@ -582,8 +540,7 @@ canonicalQiSpectralInterpretationRows =
   ∷ []
 
 data ReciprocityGateStatus : Set where
-  sweetgrassReciprocityRequired :
-    ReciprocityGateStatus
+  sweetgrassReciprocityRequired : ReciprocityGateStatus
 
 record SweetgrassReciprocityGate : Set where
   constructor sweetgrassReciprocityGate
@@ -657,20 +614,13 @@ record QiAuthorityBoundary : Set where
 open QiAuthorityBoundary public
 
 data QiBlockedAuthorityKind : Set where
-  empiricalAuthorityKind :
-    QiBlockedAuthorityKind
-  spiritualAuthorityKind :
-    QiBlockedAuthorityKind
-  clinicalAuthorityKind :
-    QiBlockedAuthorityKind
-  environmentalAuthorityKind :
-    QiBlockedAuthorityKind
-  mysticalAuthorityKind :
-    QiBlockedAuthorityKind
-  legalAuthorityKind :
-    QiBlockedAuthorityKind
-  scientificAuthorityKind :
-    QiBlockedAuthorityKind
+  empiricalAuthorityKind : QiBlockedAuthorityKind
+  spiritualAuthorityKind : QiBlockedAuthorityKind
+  clinicalAuthorityKind : QiBlockedAuthorityKind
+  environmentalAuthorityKind : QiBlockedAuthorityKind
+  mysticalAuthorityKind : QiBlockedAuthorityKind
+  legalAuthorityKind : QiBlockedAuthorityKind
+  scientificAuthorityKind : QiBlockedAuthorityKind
 
 canonicalQiBlockedAuthorityKinds :
   List QiBlockedAuthorityKind
@@ -919,20 +869,13 @@ canonicalQiAuthorityBoundaryCoreReceiptsFailClosed =
     canonicalQiAuthorityBoundaryCoreReceipts
 
 data QiReceiptBoundaryRow : Set where
-  rowOperatorTheoryRoleGrammarOnly :
-    QiReceiptBoundaryRow
-  rowQiRoleCategoriesEnumerated :
-    QiReceiptBoundaryRow
-  rowCoreRoleGrammarDelegated :
-    QiReceiptBoundaryRow
-  rowOperatorFamiliesMapped :
-    QiReceiptBoundaryRow
-  rowShengShaSiSpectralInterpretations :
-    QiReceiptBoundaryRow
-  rowSweetgrassReciprocityGate :
-    QiReceiptBoundaryRow
-  rowAuthorityBlockedWithoutValidation :
-    QiReceiptBoundaryRow
+  rowOperatorTheoryRoleGrammarOnly : QiReceiptBoundaryRow
+  rowQiRoleCategoriesEnumerated : QiReceiptBoundaryRow
+  rowCoreRoleGrammarDelegated : QiReceiptBoundaryRow
+  rowOperatorFamiliesMapped : QiReceiptBoundaryRow
+  rowShengShaSiSpectralInterpretations : QiReceiptBoundaryRow
+  rowSweetgrassReciprocityGate : QiReceiptBoundaryRow
+  rowAuthorityBlockedWithoutValidation : QiReceiptBoundaryRow
 
 canonicalQiReceiptBoundaryRows :
   List QiReceiptBoundaryRow
@@ -954,22 +897,14 @@ canonicalQiReceiptBoundaryRows =
 -- and non-authoritative.
 
 data QiFormalLensReading : Set where
-  qiSymbolicRationalReading :
-    QiFormalLensReading
-  qiOperatorReading :
-    QiFormalLensReading
-  qiFunctionalReading :
-    QiFormalLensReading
-  qiHamiltonianReading :
-    QiFormalLensReading
-  qiGradientFlowReading :
-    QiFormalLensReading
-  qiResistiveTransportReading :
-    QiFormalLensReading
-  qiSpectralReading :
-    QiFormalLensReading
-  qiCategoryReading :
-    QiFormalLensReading
+  qiSymbolicRationalReading : QiFormalLensReading
+  qiOperatorReading : QiFormalLensReading
+  qiFunctionalReading : QiFormalLensReading
+  qiHamiltonianReading : QiFormalLensReading
+  qiGradientFlowReading : QiFormalLensReading
+  qiResistiveTransportReading : QiFormalLensReading
+  qiSpectralReading : QiFormalLensReading
+  qiCategoryReading : QiFormalLensReading
 
 QiFormalLensConstructor : Set
 QiFormalLensConstructor =

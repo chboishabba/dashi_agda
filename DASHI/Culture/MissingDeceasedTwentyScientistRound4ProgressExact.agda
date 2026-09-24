@@ -18,7 +18,7 @@ open import Agda.Builtin.String using (String)
 data Round4Side : Set where us china : Round4Side
 
 data Round4ResultKind : Set where
-  primaryPromotion boundedPromotion searchResidual controlStrengthening
+  primaryPromotion boundedPromotion searchResidual controlStrengthening : Round4ResultKind
   staleSurfaceDiscriminator capabilitySuccessionPromotion redundancyBaseline : Round4ResultKind
 
 record Round4Progress : Set where

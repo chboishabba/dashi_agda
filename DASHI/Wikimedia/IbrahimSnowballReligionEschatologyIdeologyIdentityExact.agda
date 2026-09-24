@@ -82,8 +82,7 @@ politicalTheologyQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data ReligionGraphNode : Set where
-  religionNode eschatologyNode apocalypticismNode politicalTheologyNode ideologyNode :
-    ReligionGraphNode
+  religionNode eschatologyNode apocalypticismNode politicalTheologyNode ideologyNode : ReligionGraphNode
 
 record ReligionGraphAudit : Set where
   constructor religion-graph-audit

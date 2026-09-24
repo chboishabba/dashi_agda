@@ -26,11 +26,11 @@ import DASHI.Core.ObserverRefinementLatticeExact as Observer
 ------------------------------------------------------------------------
 
 data OperationalSurfaceKind : Set where
-  declaredPurposeSurface
-  institutionalSelfReportSurface
-  realisedMaterialEffectSurface
-  affectedCommunityOutcomeSurface
-  correctionResponseSurface
+  declaredPurposeSurface : OperationalSurfaceKind
+  institutionalSelfReportSurface : OperationalSurfaceKind
+  realisedMaterialEffectSurface : OperationalSurfaceKind
+  affectedCommunityOutcomeSurface : OperationalSurfaceKind
+  correctionResponseSurface : OperationalSurfaceKind
   : OperationalSurfaceKind
 
 record RealisationDiscrepancyReceipt : Set₁ where
@@ -58,11 +58,11 @@ open RealisationDiscrepancyReceipt public
 ------------------------------------------------------------------------
 
 data DiscrepancyClass : Set where
-  declarationRealisationAligned
-  reportRealisationMismatch
-  reportCommunityMismatch
-  correctionNonResponsive
-  sourceUnresolvedDiscrepancy
+  declarationRealisationAligned : DiscrepancyClass
+  reportRealisationMismatch : DiscrepancyClass
+  reportCommunityMismatch : DiscrepancyClass
+  correctionNonResponsive : DiscrepancyClass
+  sourceUnresolvedDiscrepancy : DiscrepancyClass
   : DiscrepancyClass
 
 classifyDiscrepancy : RealisationDiscrepancyReceipt → DiscrepancyClass
@@ -81,8 +81,8 @@ classifyDiscrepancy receipt with realisedEffectMatchesDeclaredPurpose receipt
 ------------------------------------------------------------------------
 
 data DemoState : Set where
-  sameReportResidualPersists
-  sameReportRelationTransforms
+  sameReportResidualPersists : DemoState
+  sameReportRelationTransforms : DemoState
   : DemoState
 
 data DemoDeclaration : Set where sameDeclaredReform : DemoDeclaration

@@ -38,18 +38,18 @@ data AerationMode : Set where
   passiveAeration manualTurning forcedAeration : AerationMode
 
 data CompostOutcome : Set where
-  temperatureTrajectory
-  oxygenStatus
-  moistureStatus
-  massReduction
-  organicMatterStability
-  maturity
-  pathogenReduction
-  ammoniaLoss
-  methaneEmission
-  nitrousOxideEmission
-  carbonRetention
-  nitrogenRetention
+  temperatureTrajectory : CompostOutcome
+  oxygenStatus : CompostOutcome
+  moistureStatus : CompostOutcome
+  massReduction : CompostOutcome
+  organicMatterStability : CompostOutcome
+  maturity : CompostOutcome
+  pathogenReduction : CompostOutcome
+  ammoniaLoss : CompostOutcome
+  methaneEmission : CompostOutcome
+  nitrousOxideEmission : CompostOutcome
+  carbonRetention : CompostOutcome
+  nitrogenRetention : CompostOutcome
   soilAmendmentResponse : CompostOutcome
 
 data EvidenceStatus : Set where

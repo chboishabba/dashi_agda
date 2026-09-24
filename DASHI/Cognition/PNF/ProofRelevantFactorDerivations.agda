@@ -19,8 +19,7 @@ data DerivationKind : Set where
   factorComposition : DerivationKind
 
 data DerivationState : Set where
-  derivationCandidate derivationAdmitted derivationRejected derivationSuperseded :
-    DerivationState
+  derivationCandidate derivationAdmitted derivationRejected derivationSuperseded : DerivationState
 
 record IdentitySubstitutionProof : Set where
   constructor identitySubstitutionProof

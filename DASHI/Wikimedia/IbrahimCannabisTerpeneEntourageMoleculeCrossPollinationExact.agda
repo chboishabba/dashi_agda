@@ -66,11 +66,11 @@ chemistryOEIS = "not applicable: these are molecular/pharmacological identities,
 ------------------------------------------------------------------------
 
 data TerpeneMolecule : Set where
-  myrcene
-  limonene
-  alphaPinene
-  betaPinene
-  linalool
+  myrcene : TerpeneMolecule
+  limonene : TerpeneMolecule
+  alphaPinene : TerpeneMolecule
+  betaPinene : TerpeneMolecule
+  linalool : TerpeneMolecule
   betaCaryophyllene : TerpeneMolecule
 
 record MoleculeCoordinate : Set where
@@ -147,11 +147,11 @@ betaCaryophylleneCoordinate = molecule-coordinate
 ------------------------------------------------------------------------
 
 data EntourageSourceRole : Set where
-  originalEndocannabinoidPotentiation
-  cannabisTerpenoidSynergyHypothesisReview
-  receptorMechanismNegativeTest
-  betaCaryophylleneCB2Mechanism
-  systematicEvidenceAppraisal
+  originalEndocannabinoidPotentiation : EntourageSourceRole
+  cannabisTerpenoidSynergyHypothesisReview : EntourageSourceRole
+  receptorMechanismNegativeTest : EntourageSourceRole
+  betaCaryophylleneCB2Mechanism : EntourageSourceRole
+  systematicEvidenceAppraisal : EntourageSourceRole
   currentClinicalCaution : EntourageSourceRole
 
 record EntourageSource : Set where
@@ -270,13 +270,13 @@ open CannabisTerpeneAssayReceipt public
 ------------------------------------------------------------------------
 
 data EntourageEvidenceLevel : Set where
-  terminologyOnly
-  moleculeActivityElsewhere
-  cannabisCoOccurrence
-  pairwisePreclinicalInteraction
-  receptorSpecificInteraction
-  humanPKPDInteraction
-  controlledClinicalSynergy
+  terminologyOnly : EntourageEvidenceLevel
+  moleculeActivityElsewhere : EntourageEvidenceLevel
+  cannabisCoOccurrence : EntourageEvidenceLevel
+  pairwisePreclinicalInteraction : EntourageEvidenceLevel
+  receptorSpecificInteraction : EntourageEvidenceLevel
+  humanPKPDInteraction : EntourageEvidenceLevel
+  controlledClinicalSynergy : EntourageEvidenceLevel
   replicatedClinicalSynergy : EntourageEvidenceLevel
 
 record InteractionReceipt : Set where
@@ -302,19 +302,19 @@ open InteractionReceipt public
 ------------------------------------------------------------------------
 
 data EntourageTime : Set where
-  endogenous1998
-  cannabisHypothesis2011
-  cb2Mechanism2008
-  receptorTest2020
-  systematicReview2024
+  endogenous1998 : EntourageTime
+  cannabisHypothesis2011 : EntourageTime
+  cb2Mechanism2008 : EntourageTime
+  receptorTest2020 : EntourageTime
+  systematicReview2024 : EntourageTime
   current2026 : EntourageTime
 
 data EntourageInterpretation : Set where
-  endogenousEntourageObserved
-  phytocannabinoidTerpenoidSynergyCandidate
-  cb1cb2DirectTerpeneMechanismCandidate
-  betaCaryophylleneSpecificCB2Candidate
-  stableClinicalEntourageEstablished
+  endogenousEntourageObserved : EntourageInterpretation
+  phytocannabinoidTerpenoidSynergyCandidate : EntourageInterpretation
+  cb1cb2DirectTerpeneMechanismCandidate : EntourageInterpretation
+  betaCaryophylleneSpecificCB2Candidate : EntourageInterpretation
+  stableClinicalEntourageEstablished : EntourageInterpretation
   umbrellaHypothesisStillOpen : EntourageInterpretation
 
 data EntourageSummary : Set where
@@ -398,10 +398,10 @@ currentDirectCB1CB2TerpeneMechanismNotLive ()
 ------------------------------------------------------------------------
 
 data XLinkRole : Set where
-  repoCandidateToExternalIdentity
-  plantToChemicalClass
-  chemicalClassToMolecule
-  moleculeToMechanismSource
+  repoCandidateToExternalIdentity : XLinkRole
+  plantToChemicalClass : XLinkRole
+  chemicalClassToMolecule : XLinkRole
+  moleculeToMechanismSource : XLinkRole
   mechanismToEvidenceAppraisal : XLinkRole
 
 record IbrahimXLink : Set where
@@ -474,11 +474,11 @@ mechanismToReviewXLink = ibrahim-xlink
 ------------------------------------------------------------------------
 
 data CannabisTerpeneTarget : Set where
-  exactMoleculeIdentity
-  exactSampleComposition
-  mechanismSpecificInteraction
-  humanPKPDInteraction
-  controlledClinicalSynergy
+  exactMoleculeIdentity : CannabisTerpeneTarget
+  exactSampleComposition : CannabisTerpeneTarget
+  mechanismSpecificInteraction : CannabisTerpeneTarget
+  humanPKPDInteraction : CannabisTerpeneTarget
+  controlledClinicalSynergy : CannabisTerpeneTarget
   historicalIbrahimReplay : CannabisTerpeneTarget
 
 record CannabisTerpeneParetoStep : Set where

@@ -180,6 +180,7 @@ record EnergyPublicPosition : Set where
   field
     popularIdentification : Bool
     materialBeneficiary : MarketPosition
+open EnergyPublicPosition public
 
 producerPopulist : EnergyPublicPosition
 producerPopulist = energy-public-position true upstreamProducer

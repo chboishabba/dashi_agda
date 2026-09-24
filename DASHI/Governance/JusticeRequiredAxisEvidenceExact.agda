@@ -204,10 +204,8 @@ rightsViolationEvidenceDoesNotFillMissingMandateEvidence =
 ------------------------------------------------------------------------
 
 data RoutingEvidenceAxis : Set where
-  sufficiencyAxis competenceAxis mandateAxis currentAuthorityAxis :
-    RoutingEvidenceAxis
-  subjectLegibilityAxis safetyAxis reviewabilityAxis repairCapacityAxis :
-    RoutingEvidenceAxis
+  sufficiencyAxis competenceAxis mandateAxis currentAuthorityAxis : RoutingEvidenceAxis
+  subjectLegibilityAxis safetyAxis reviewabilityAxis repairCapacityAxis : RoutingEvidenceAxis
 
 allRoutingAxesRequired : RoutingEvidenceAxis → Set
 allRoutingAxesRequired axis = ⊤

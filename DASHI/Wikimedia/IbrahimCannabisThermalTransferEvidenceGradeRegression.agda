@@ -17,11 +17,11 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 ------------------------------------------------------------------------
 
 data EvidenceGrade : Set where
-  directCannabisSmokeTransfer
-  directCannabisVapeAerosolTransfer
-  cannabisProductOccurrenceOnly
-  nonCannabisThermalTransformation
-  mechanisticPredictionOnly
+  directCannabisSmokeTransfer : EvidenceGrade
+  directCannabisVapeAerosolTransfer : EvidenceGrade
+  cannabisProductOccurrenceOnly : EvidenceGrade
+  nonCannabisThermalTransformation : EvidenceGrade
+  mechanisticPredictionOnly : EvidenceGrade
   unresolved : EvidenceGrade
 
 record RegressionRequirement : Set where

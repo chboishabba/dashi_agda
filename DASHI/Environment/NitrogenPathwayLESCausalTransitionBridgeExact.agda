@@ -19,12 +19,12 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as LES
 ------------------------------------------------------------------------
 
 data NitrogenTransitionCoordinate : Set where
-  deliveredPlantAvailableNitrogen
-  rootZoneAvailableNitrogen
-  plantNitrogenUptake
-  plantNitrogenAllocation
-  vegetativeBiomassOutcome
-  reproductiveOrFruitOutcome
+  deliveredPlantAvailableNitrogen : NitrogenTransitionCoordinate
+  rootZoneAvailableNitrogen : NitrogenTransitionCoordinate
+  plantNitrogenUptake : NitrogenTransitionCoordinate
+  plantNitrogenAllocation : NitrogenTransitionCoordinate
+  vegetativeBiomassOutcome : NitrogenTransitionCoordinate
+  reproductiveOrFruitOutcome : NitrogenTransitionCoordinate
   soilReturnNitrogen : NitrogenTransitionCoordinate
 
 record NitrogenSPACTransitionWeld : Set₁ where

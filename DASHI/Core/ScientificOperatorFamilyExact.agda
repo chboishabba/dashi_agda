@@ -12,11 +12,11 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ScientificOperatorFamily : Set where
-  weakSignalInverseInference
-  resilientSensingControlVerification
-  materialsProcessStructureProperty
-  molecularSpectroscopyChemicalBiology
-  fieldPlasmaPrecisionForceDiscrimination
+  weakSignalInverseInference : ScientificOperatorFamily
+  resilientSensingControlVerification : ScientificOperatorFamily
+  materialsProcessStructureProperty : ScientificOperatorFamily
+  molecularSpectroscopyChemicalBiology : ScientificOperatorFamily
+  fieldPlasmaPrecisionForceDiscrimination : ScientificOperatorFamily
   classificationEvidenceGovernance : ScientificOperatorFamily
 
 record ScientificOperatorShape : Set where
