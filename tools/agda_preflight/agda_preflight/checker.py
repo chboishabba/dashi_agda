@@ -495,6 +495,40 @@ class Checker:
             frontier = nxt
         return order
 
+    def dependency_modules(self, path: Path) -> List[str]:
+        """Return recursive import dependencies in dependency-first order.
+
+        Unlike affected_modules(), which walks reverse imports from a changed
+        leaf to its consumers, this walks the ordinary import graph downward.
+        It is the useful ordering for checking an aggregate such as
+        DASHI.Everything: leaves first, aggregate root last.
+        """
+        summary = self.parse_summary(path)
+        start = summary.module_name
+        graph = self.dependency_graph()
+        order: List[str] = []
+        permanent: Set[str] = set()
+        temporary: Set[str] = set()
+
+        def visit(module: str) -> None:
+            if module in permanent:
+                return
+            if module in temporary:
+                # Import-cycle diagnostics are handled separately. Stop the
+                # ordering recursion here rather than looping forever.
+                return
+            temporary.add(module)
+            for dependency in sorted(graph.get(module, ())):
+                if dependency in graph:
+                    visit(dependency)
+            temporary.remove(module)
+            permanent.add(module)
+            order.append(module)
+
+        visit(start)
+        return order
+
+
     def check_closure(self, path: Path) -> List[Diagnostic]:
         diagnostics: List[Diagnostic] = []
         for module in self.affected_modules(path):
