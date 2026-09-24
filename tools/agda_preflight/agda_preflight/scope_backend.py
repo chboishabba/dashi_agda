@@ -132,3 +132,55 @@ class ExternalScopeBackend:
 
             out.append(diagnostic)
         return out
+
+
+class AgdaScopeCheckBackend:
+    """Use Agda's own --only-scope-checking mode as a negative oracle.
+
+    Success means scope-dependent structural suspicions are false positives for
+    that module and can be removed. Failure does not identify a specific
+    TSAGDA suspicion, so diagnostics remain advisory rather than being promoted.
+    """
+
+    def __init__(
+        self,
+        agda_bin: str = "agda",
+        *,
+        cwd: Path | None = None,
+        timeout: float = 60.0,
+        extra_args: Sequence[str] = (),
+    ):
+        self.agda_bin = agda_bin
+        self.cwd = cwd
+        self.timeout = timeout
+        self.extra_args = tuple(extra_args)
+
+    def _scope_ok(self, path: Path) -> bool:
+        completed = subprocess.run(
+            [
+                self.agda_bin,
+                "--only-scope-checking",
+                *self.extra_args,
+                str(path.resolve()),
+            ],
+            cwd=self.cwd,
+            text=True,
+            capture_output=True,
+            timeout=self.timeout,
+            check=False,
+        )
+        return completed.returncode == 0
+
+    def refine(self, summary, diagnostics: List):
+        if not self._scope_ok(summary.path):
+            return diagnostics
+
+        out = []
+        for diagnostic in diagnostics:
+            policy = policy_for(diagnostic.code)
+            if policy.minimum == EvidenceLevel.AGDA_SCOPE:
+                # Successful Agda scope checking is stronger evidence than our
+                # structural suspicion for scope/name-resolution questions.
+                continue
+            out.append(diagnostic)
+        return out
