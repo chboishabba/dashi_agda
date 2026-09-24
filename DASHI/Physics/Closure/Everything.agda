@@ -244,3 +244,5 @@ import DASHI.Physics.Closure.NSTriadKNR650QuantitativeResearchStrategyRound651Ex
 import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650C2CoupledForcingSandwichRound653Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact
