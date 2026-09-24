@@ -255,6 +255,10 @@ record FixedPointCompatibleCertificateSize
       certificateSize
       ≤ SelfEvaluationCostModel.formulaSize resource formula
 
+    certificateStrictlySmallerThanSelfEvaluation :
+      certificateSize
+      < SelfEvaluationCostModel.selfEvaluationSteps resource formula
+
 open FixedPointCompatibleCertificateSize public
 
 record SelfDiagonalSuccinctCertificate
@@ -282,3 +286,46 @@ succinctSelfDiagonalCertificateGivesFailure :
 succinctSelfDiagonalCertificateGivesFailure certificate =
   selfDiagonalSemanticWitnessGivesFailure
     (semanticWitness certificate)
+
+
+------------------------------------------------------------------------
+-- Universal succinct self-diagonal producer.
+--
+-- This is deliberately stronger than bare SATNotInP: it constructs, for every
+-- polynomial SAT candidate, a same-object self-diagonal formula together with
+-- a certificate which fits inside that formula and is strictly smaller than
+-- the candidate's full self-evaluation trajectory.
+------------------------------------------------------------------------
+
+UniversalSelfDiagonalSuccinctCertificate :
+  (cost : PR.PolynomialCostModel Cook.BooleanFormula) →
+  ((candidate : Direct.PolynomialSATDeciderCandidate cost) →
+    SelfEvaluationCostModel candidate) →
+  Set₁
+UniversalSelfDiagonalSuccinctCertificate cost resourceFor =
+  (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+  SelfDiagonalSuccinctCertificate (resourceFor candidate)
+
+universalSuccinctSelfDiagonalGivesUniversalDecisionFailure :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {resourceFor :
+      (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+      SelfEvaluationCostModel candidate} →
+  UniversalSelfDiagonalSuccinctCertificate cost resourceFor →
+  Direct.UniversalPolynomialSATDecisionFailure cost
+universalSuccinctSelfDiagonalGivesUniversalDecisionFailure
+    universalCertificate candidate =
+  succinctSelfDiagonalCertificateGivesFailure
+    (universalCertificate candidate)
+
+universalSuccinctSelfDiagonalGivesSATLowerBoundProducer :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {resourceFor :
+      (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+      SelfEvaluationCostModel candidate} →
+  UniversalSelfDiagonalSuccinctCertificate cost resourceFor →
+  Clay.SATLowerBoundProducer cost
+universalSuccinctSelfDiagonalGivesSATLowerBoundProducer universalCertificate =
+  Direct.universalDecisionFailureGivesSATLowerBoundProducer
+    (universalSuccinctSelfDiagonalGivesUniversalDecisionFailure
+      universalCertificate)
