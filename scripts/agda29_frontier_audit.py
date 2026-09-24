@@ -65,7 +65,12 @@ def parse_args() -> argparse.Namespace:
         default=[DEFAULT_TARGET],
         help="Agda target paths to check. Defaults to DASHI/Everything.agda.",
     )
-    parser.add_argument("--jobs", type=int, default=8, help="Jobs passed to AGDA_JOBS for the wrapper.")
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=0,
+        help="Jobs passed to AGDA_JOBS for the wrapper (0 auto-detects cores).",
+    )
     parser.add_argument(
         "--batch-size",
         type=int,
@@ -84,8 +89,8 @@ def parse_args() -> argparse.Namespace:
         help="Stop after the first failing batch.",
     )
     args = parser.parse_args()
-    if args.jobs < 1:
-        parser.error("--jobs must be >= 1")
+    if args.jobs < 0:
+        parser.error("--jobs must be >= 0")
     if args.batch_size < 1:
         parser.error("--batch-size must be >= 1")
     return args
