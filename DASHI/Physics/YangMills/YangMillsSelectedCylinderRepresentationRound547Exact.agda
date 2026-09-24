@@ -28,6 +28,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as R534
 import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRound538Exact as R538
+import DASHI.Physics.YangMills.YangMillsCylinderEventBooleanAlgebraRound539Exact as R539
 import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as R498
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as R495
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
