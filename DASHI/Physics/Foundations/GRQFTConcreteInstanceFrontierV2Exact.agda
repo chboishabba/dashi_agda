@@ -16,7 +16,6 @@ data GRQFTConcreteTheoryLeaf : Set where
   attachCMP119StressToLiteralPinnedStress :
     GRQFTConcreteTheoryLeaf
   identifyTenSymmetricSlotsInsideFiniteSourceTangent : GRQFTConcreteTheoryLeaf
-  interpretYMSymmetryAsBasisComponentSymmetry : GRQFTConcreteTheoryLeaf
   evaluateTenIndependentCrossSectorStressComponents : GRQFTConcreteTheoryLeaf
   constructCommonOverlapBackreactionCorrectionEvidence :
     GRQFTConcreteTheoryLeaf
@@ -27,8 +26,7 @@ canonicalGRQFTConcreteTheoryLeaves =
   ∷ attachLiteralNonflatGRToRecoveredGR
   ∷ repairLegacyQFTRecoveryProjectionCompatibility
   ∷ attachCMP119StressToLiteralPinnedStress
-  ∷ identifyTenSymmetricMetricSlotsInsideCMP119Tangent
-  ∷ interpretYMSymmetryAsBasisComponentSymmetry
+  ∷ identifyTenSymmetricSlotsInsideFiniteSourceTangent
   ∷ evaluateTenIndependentCrossSectorStressComponents
   ∷ constructCommonOverlapBackreactionCorrectionEvidence
   ∷ []
@@ -52,9 +50,9 @@ record GRQFTConcreteTheoryFrontier : Set where
     metricBasisInstanceExistsIsFalse :
       metricBasisInstanceExists ≡ false
 
-    symmetrySemanticBridgeInstanceExists : Bool
-    symmetrySemanticBridgeInstanceExistsIsFalse :
-      symmetrySemanticBridgeInstanceExists ≡ false
+    componentSymmetryIsCompilerOwnedOnSymmetricBasis : Bool
+    componentSymmetryIsCompilerOwnedOnSymmetricBasisIsTrue :
+      componentSymmetryIsCompilerOwnedOnSymmetricBasis ≡ true
 
     tenIndependentComponentValuesExist : Bool
     tenIndependentComponentValuesExistIsFalse :
@@ -88,11 +86,11 @@ canonicalGRQFTConcreteTheoryFrontier =
     true refl
     true refl
     false refl
-    false refl
+    true refl
     false refl
     false refl
     false refl
     false refl
     false refl
     canonicalGRQFTConcreteTheoryLeaves
-    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, GR literal/recovered attachment plus QFT source-native/legacy recovery projection compatibility, the existing CMP119 metric-stress pairing evaluated on a 10-slot symmetric finite-source-tangent basis; existing R144 transport compiles it to the CMP119 metric domain and all ordered pairs, one symmetry-semantic bridge instance, ten independent normalized stress components, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
+    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, GR literal/recovered attachment plus QFT source-native/legacy recovery projection compatibility, the existing CMP119 metric-stress pairing evaluated on a 10-slot symmetric finite-source-tangent basis; existing R144 transport compiles it to the CMP119 metric domain and all ordered pairs; component symmetry is then compiler-owned, leaving ten independent normalized stress components, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."

@@ -12,6 +12,11 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Cut
+import DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact as Basis
+import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as MetricBasis
+import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricStressRepresentationRound106Exact as StressRep
 
 ------------------------------------------------------------------------
 -- TEN-COMPONENT SYMMETRIC REDUCTION
@@ -45,6 +50,38 @@ record PairingComponentSymmetry
       ≡ Cut.component evaluator stress b a
 
 open PairingComponentSymmetry public
+
+metricBasisEvaluatorIsComponentSymmetric :
+  ∀ {Scale Volume : Set}
+    {activity : Chain.SubstitutedActivitySecondVariation}
+    {domain : Domain.CanonicalMetricSourceDomain Scale Volume activity}
+    {representation : StressRep.CanonicalMetricStressRepresentation domain}
+    (realization : MetricBasis.SymmetricMetricBasisRealization domain)
+    (readout : Basis.RationalStressPairingReadout representation)
+    (stress : StressRep.StressTensor representation) →
+  PairingComponentSymmetry
+    (Basis.cmp119MetricBasisEvaluator
+      (MetricBasis.compileSymmetricBasis16 realization) readout)
+    stress
+metricBasisEvaluatorIsComponentSymmetric
+    {representation = representation}
+    realization readout stress = record
+  { PairingComponentSymmetry.componentSymmetric =
+      λ a b →
+        cong
+          (λ component →
+            Basis.pairingToRational readout
+              (StressRep.stressMetricPairing representation stress
+                (MetricBasis.componentPerturbation realization component)))
+          (MetricBasis.symmetricSlotOfAxesSwapped a b)
+  }
+
+separateYMSymmetrySemanticBridgeRequiredOnSymmetricBasisRoute : Bool
+separateYMSymmetrySemanticBridgeRequiredOnSymmetricBasisRoute = false
+
+separateYMSymmetrySemanticBridgeRequiredOnSymmetricBasisRouteIsFalse :
+  separateYMSymmetrySemanticBridgeRequiredOnSymmetricBasisRoute ≡ false
+separateYMSymmetrySemanticBridgeRequiredOnSymmetricBasisRouteIsFalse = refl
 
 record NormalizedSymmetricTenComponentInstance
     {StressTensor : Set}

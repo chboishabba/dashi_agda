@@ -39,3 +39,9 @@ w4NotTheoryLeaf :
   F.w4ReplacementIsTheoryCoreLeaf F.canonicalGRQFTConcreteTheoryFrontier
   ≡ false
 w4NotTheoryLeaf = refl
+
+componentSymmetryCompilerOwned :
+  F.componentSymmetryIsCompilerOwnedOnSymmetricBasis
+    F.canonicalGRQFTConcreteTheoryFrontier
+  ≡ true
+componentSymmetryCompilerOwned = refl

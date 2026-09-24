@@ -33,6 +33,26 @@ symmetricSlotOfAxes Flat.zAxis Flat.xAxis = K.component13
 symmetricSlotOfAxes Flat.zAxis Flat.yAxis = K.component23
 symmetricSlotOfAxes Flat.zAxis Flat.zAxis = K.component33
 
+symmetricSlotOfAxesSwapped :
+  ∀ a b →
+  symmetricSlotOfAxes a b ≡ symmetricSlotOfAxes b a
+symmetricSlotOfAxesSwapped Flat.timeAxis Flat.timeAxis = refl
+symmetricSlotOfAxesSwapped Flat.timeAxis Flat.xAxis = refl
+symmetricSlotOfAxesSwapped Flat.timeAxis Flat.yAxis = refl
+symmetricSlotOfAxesSwapped Flat.timeAxis Flat.zAxis = refl
+symmetricSlotOfAxesSwapped Flat.xAxis Flat.timeAxis = refl
+symmetricSlotOfAxesSwapped Flat.xAxis Flat.xAxis = refl
+symmetricSlotOfAxesSwapped Flat.xAxis Flat.yAxis = refl
+symmetricSlotOfAxesSwapped Flat.xAxis Flat.zAxis = refl
+symmetricSlotOfAxesSwapped Flat.yAxis Flat.timeAxis = refl
+symmetricSlotOfAxesSwapped Flat.yAxis Flat.xAxis = refl
+symmetricSlotOfAxesSwapped Flat.yAxis Flat.yAxis = refl
+symmetricSlotOfAxesSwapped Flat.yAxis Flat.zAxis = refl
+symmetricSlotOfAxesSwapped Flat.zAxis Flat.timeAxis = refl
+symmetricSlotOfAxesSwapped Flat.zAxis Flat.xAxis = refl
+symmetricSlotOfAxesSwapped Flat.zAxis Flat.yAxis = refl
+symmetricSlotOfAxesSwapped Flat.zAxis Flat.zAxis = refl
+
 record SymmetricMetricBasisRealization
     {Scale Volume : Set}
     {activity : Chain.SubstitutedActivitySecondVariation}
