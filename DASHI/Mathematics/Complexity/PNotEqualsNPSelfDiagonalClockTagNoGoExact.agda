@@ -24,7 +24,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; sym)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact as Machine
 import DASHI.Mathematics.Complexity.DeterministicMachineToInPExact as ToP
@@ -244,6 +244,82 @@ clockTaggedBoundedAcceptanceProjectsToOriginal
   ; Machine.dFinalAccepting =
       Machine.dFinalAccepting acceptance
   }
+
+------------------------------------------------------------------------
+-- The clock coordinate of every successful tagged run is exact.
+------------------------------------------------------------------------
+
+clockTaggedRunClockExact :
+  ∀ {machine : Machine.DeterministicMachine}
+    (time steps : Nat)
+    (start : Machine.dConfiguration machine)
+    (taggedFinish :
+      Machine.dConfiguration (clockTagMachine machine)) →
+  Machine.iterateDeterministic
+    (clockTagMachine machine)
+    steps
+    (time , start)
+  ≡ just taggedFinish →
+  proj₁ taggedFinish ≡ advanceClock time steps
+clockTaggedRunClockExact
+    {machine} time zero start taggedFinish taggedRun
+    with taggedRun
+... | refl = refl
+clockTaggedRunClockExact
+    {machine} time (suc steps) start taggedFinish taggedRun
+    with Machine.dNext machine start
+... | nothing = impossible taggedRun
+  where
+    impossible :
+      nothing ≡ just taggedFinish →
+      proj₁ taggedFinish ≡ advanceClock time (suc steps)
+    impossible ()
+... | just middle =
+  trans
+    (clockTaggedRunClockExact
+      (suc time)
+      steps
+      middle
+      taggedFinish
+      taggedRun)
+    (advanceClockSucStart time steps)
+
+------------------------------------------------------------------------
+-- Exact endpoint-identical subruns at different step counts are impossible.
+------------------------------------------------------------------------
+
+exactTaggedConfigurationSharingAtDifferentTimesImpossible :
+  ∀ {machine : Machine.DeterministicMachine}
+    (start : Machine.dConfiguration machine)
+    (leftSteps rightSteps : Nat)
+    (sharedFinish :
+      Machine.dConfiguration (clockTagMachine machine)) →
+  leftSteps ≢ rightSteps →
+  Machine.iterateDeterministic
+    (clockTagMachine machine)
+    leftSteps
+    (zero , start)
+  ≡ just sharedFinish →
+  Machine.iterateDeterministic
+    (clockTagMachine machine)
+    rightSteps
+    (zero , start)
+  ≡ just sharedFinish →
+  ⊥
+exactTaggedConfigurationSharingAtDifferentTimesImpossible
+    start leftSteps rightSteps sharedFinish
+    different leftRun rightRun =
+  different
+    (trans
+      (sym (advanceClockZero leftSteps))
+      (trans
+        (sym
+          (clockTaggedRunClockExact
+            zero leftSteps start sharedFinish leftRun))
+        (trans
+          (clockTaggedRunClockExact
+            zero rightSteps start sharedFinish rightRun)
+          (advanceClockZero rightSteps))))
 
 ------------------------------------------------------------------------
 -- Distinct clock values force distinct exact tagged configurations.
