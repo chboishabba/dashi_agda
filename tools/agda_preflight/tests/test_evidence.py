@@ -9,6 +9,7 @@ from agda_preflight.checker import Checker, Diagnostic
 from agda_preflight.evidence import (
     DIAGNOSTIC_POLICIES,
     EvidenceLevel,
+    canonical_code,
     policy_for,
 )
 from agda_preflight.evidence_cli import main as evidence_main
@@ -529,6 +530,12 @@ def test_auto_refine_exposes_oracle_stats(tmp_path):
     }
 
 
+
+
+def test_constructor_result_aliases_collapse_to_one_triage_root_cause():
+    assert canonical_code("TSAGDA072") == "TSAGDA072"
+    assert canonical_code("TSAGDA075") == "TSAGDA072"
+    assert canonical_code("TSAGDA114") == "TSAGDA072"
 
 def test_unfolding_sensitive_checks_require_typechecker_evidence():
     for code in (
