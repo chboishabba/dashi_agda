@@ -172,24 +172,46 @@ def _group_end(tokens: Sequence[AstToken], start: int) -> Optional[int]:
     return None
 
 
-def _binder_multiplicity(tokens: Sequence[AstToken]) -> int:
-    """Count names in a typed binder group such as (A B : Set)."""
+def _binder_multiplicity(
+    tokens: Sequence[AstToken],
+    *,
+    forall_context: bool = False,
+) -> int:
+    """Count binders represented by one syntactic group.
+
+    Typed groups such as (A B : Set) bind two names. Inside an explicit
+    forall telescope, untyped groups such as p q and {m Δ q} also bind
+    each identifier separately. Outside forall an untyped parenthesized
+    group remains an ordinary type expression and contributes one domain.
+    """
     items = _trim_delimiters(tokens)
     colon_parts = split_top_level(items, {":"})
-    if len(colon_parts) != 2:
-        return 1
-    names = [
-        token
-        for token in colon_parts[0]
-        if token.node_type in {"id", "bid", "qid", "field_name"}
-        and token.text not in {"∀", "_"}
-    ]
-    return max(1, len(names))
+    if len(colon_parts) == 2:
+        names = [
+            token
+            for token in colon_parts[0]
+            if token.node_type in {"id", "bid", "qid", "field_name"}
+            and token.text not in {"∀", "_"}
+        ]
+        return max(1, len(names))
+
+    if forall_context:
+        names = [
+            token
+            for token in items
+            if token.node_type in {"id", "bid", "qid", "field_name"}
+            and token.text not in {"∀", "_"}
+        ]
+        if names:
+            return len(names)
+
+    return 1
 
 
 def _domain_shapes_from_segment(tokens: Sequence[AstToken]) -> List[DomainShape]:
     """Expand one arrow-domain segment into its telescope binders."""
     items = list(tokens)
+    forall_context = bool(items and items[0].text == "∀")
     while items and items[0].text in {"∀", ","}:
         items.pop(0)
     if not items:
@@ -219,7 +241,10 @@ def _domain_shapes_from_segment(tokens: Sequence[AstToken]) -> List[DomainShape]
         trimmed = [token for token in group if token.text not in {",", "∀"}]
         if not trimmed:
             continue
-        multiplicity = _binder_multiplicity(trimmed)
+        multiplicity = _binder_multiplicity(
+            trimmed,
+            forall_context=forall_context,
+        )
         domain = DomainShape(_visibility(trimmed), rigid_head_from_tokens(trimmed))
         domains.extend(domain for _ in range(multiplicity))
     return domains
