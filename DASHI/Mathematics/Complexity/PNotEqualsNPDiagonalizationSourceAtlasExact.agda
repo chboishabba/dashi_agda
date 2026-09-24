@@ -22,12 +22,14 @@ data SourceRole : Set where
   computabilitySelfReference : SourceRole
   modernCircuitLowerBoundContext : SourceRole
   metaComplexityContext : SourceRole
+  cardinalityDiagonalization : SourceRole
   diagonalCardinality : SourceRole
 
 data IdentifierStatus : Set where
   verifiedDOI : IdentifierStatus
   stableReportIdentifier : IdentifierStatus
   stableBookBibliography : IdentifierStatus
+  stableHistoricalBibliography : IdentifierStatus
 
 record ComplexitySource : Set where
   constructor complexitySource
