@@ -92,8 +92,11 @@ contextualise {candidate} general profile =
 casualLegalCaseTranscript : Consumer.ConsumerDemandProfile → TextContextProfile
 casualLegalCaseTranscript demand =
   textContextProfile
-    transcript
-    (legalSubject ∷ historicalSubject ∷ culturalSubject ∷ [])
+    (transcript "container evidence: informal/casual transcript")
+    ( legalSubject "discussion concerns a legal case"
+    ∷ historicalSubject "discussion may recount historical context"
+    ∷ culturalSubject "discussion may analyse cultural effects"
+    ∷ [])
     demand
     ("container evidence: informal/casual transcript" ∷ [])
     ( "discussion concerns a legal case"
@@ -105,8 +108,11 @@ casualLegalCaseTranscript demand =
 lawSchoolLecture : Context.DocumentDiscourseFrame → TextContextProfile
 lawSchoolLecture frame =
   textContextProfile
-    educationalLecture
-    (legalSubject ∷ historicalSubject ∷ culturalSubject ∷ [])
+    (educationalLecture "container evidence: teaching/lecture context")
+    ( legalSubject "legal doctrine"
+    ∷ historicalSubject "case history"
+    ∷ culturalSubject "cultural context"
+    ∷ [])
     (Consumer.lawSchoolCaseDemand frame)
     ("container evidence: teaching/lecture context" ∷ [])
     ("legal doctrine" ∷ "case history" ∷ "cultural context" ∷ [])
