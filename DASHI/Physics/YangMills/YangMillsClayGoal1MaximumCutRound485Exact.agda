@@ -27,16 +27,19 @@ import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exa
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45Source
 import DASHI.Physics.YangMills.YangMillsClayMomentOS05MaxCutRound500Exact as A45Cut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45
+import DASHI.Physics.YangMills.YangMillsClayRepresentedOSExtensionalityMaxCutRound501Exact as A45Ext
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
 
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as BWEXT
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
+import DASHI.Physics.YangMills.YangMillsClayMassGapSemanticMaxCutRound503Exact as BSemCut
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as C
 
 import DASHI.Physics.YangMills.BalabanGroupParametricFiveBlockSignedG2Exact as G1
 import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as G2
+import DASHI.Physics.YangMills.YangMillsClayNontrivialitySemanticMaxCutRound502Exact as G2Cut
 
 import DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact as Terminal
 
@@ -113,7 +116,15 @@ a5FiniteGrowthFromQuantitativeBoundsLevel =
 
 a45RepresentedOSPredicateExtensionalityLevel : ProofLevel
 a45RepresentedOSPredicateExtensionalityLevel =
-  A45.literalRound481ExtensionalOSMeaningLevel
+  A45Ext.round501RepresentedOSTransportCompilerLevel
+
+a4RepresentedRegularityExtensionalityLevel : ProofLevel
+a4RepresentedRegularityExtensionalityLevel =
+  A45Ext.literalRound501RegularityExtensionalityLevel
+
+a5RepresentedGrowthExtensionalityLevel : ProofLevel
+a5RepresentedGrowthExtensionalityLevel =
+  A45Ext.literalRound501GrowthExtensionalityLevel
 
 ------------------------------------------------------------------------
 -- B / published literal CMP116 -> same-H positive transfer gap.
