@@ -33,6 +33,7 @@ import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact as
 import DASHI.Physics.Closure.NSTriadKNR650C2CoupledForcingSandwichRound653Exact as R653
 import DASHI.Physics.Closure.NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact as R654
 import DASHI.Physics.Closure.NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact as R655
+import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact as R656
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -165,6 +166,22 @@ round650C2RemoteSpectralCrossDeletedFromRatioHardTerm =
 round650C2RemoteBoundaryFluxStillUnpaid : Bool
 round650C2RemoteBoundaryFluxStillUnpaid =
   R655.round655RemoteBoundaryFluxPaid
+
+round650C2EuclideanCollarRefinementClosed : Bool
+round650C2EuclideanCollarRefinementClosed =
+  R656.round656ExactCollarEuclideanRefinementClosed
+
+round650C2GoodCollarSpectralCrossNonpositive : Bool
+round650C2GoodCollarSpectralCrossNonpositive =
+  R656.round656GoodCollarCrossNonpositive
+
+round650C2FullCrossReducedToBadLowRadiusCollar : Bool
+round650C2FullCrossReducedToBadLowRadiusCollar =
+  R656.round656FullCrossReducedToBadLowRadiusCollar
+
+round650C2BadLowRadiusCollarPaymentClosed : Bool
+round650C2BadLowRadiusCollarPaymentClosed =
+  R656.round656BadCollarPaymentClosed
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -309,6 +326,26 @@ round650C2RemoteBoundaryFluxStillUnpaidIsFalse :
   round650C2RemoteBoundaryFluxStillUnpaid ≡ false
 round650C2RemoteBoundaryFluxStillUnpaidIsFalse =
   R655.round655RemoteBoundaryFluxPaidIsFalse
+
+round650C2EuclideanCollarRefinementClosedIsTrue :
+  round650C2EuclideanCollarRefinementClosed ≡ true
+round650C2EuclideanCollarRefinementClosedIsTrue =
+  R656.round656ExactCollarEuclideanRefinementClosedIsTrue
+
+round650C2GoodCollarSpectralCrossNonpositiveIsTrue :
+  round650C2GoodCollarSpectralCrossNonpositive ≡ true
+round650C2GoodCollarSpectralCrossNonpositiveIsTrue =
+  R656.round656GoodCollarCrossNonpositiveIsTrue
+
+round650C2FullCrossReducedToBadLowRadiusCollarIsTrue :
+  round650C2FullCrossReducedToBadLowRadiusCollar ≡ true
+round650C2FullCrossReducedToBadLowRadiusCollarIsTrue =
+  R656.round656FullCrossReducedToBadLowRadiusCollarIsTrue
+
+round650C2BadLowRadiusCollarPaymentClosedIsFalse :
+  round650C2BadLowRadiusCollarPaymentClosed ≡ false
+round650C2BadLowRadiusCollarPaymentClosedIsFalse =
+  R656.round656BadCollarPaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
