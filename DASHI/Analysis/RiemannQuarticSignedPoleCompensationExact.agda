@@ -234,3 +234,97 @@ uniformGapIsTheAnalyticWall :
     uniformPositiveCompensationGapProved
     ≡ openAnalyticObstruction
 uniformGapIsTheAnalyticWall = refl
+
+
+------------------------------------------------------------------------
+-- SHARPENED COMPENSATION AFTER SAME-ORDINATE SIGN DISCOVERY
+--
+-- The Lean companion proves the exact same-ordinate normalized pair identity
+--
+--   K_W(alpha,0) = -4 * D_W(alpha).
+--
+-- Hence every nonzero alpha in the paid target band has K_W(alpha,0)<0.
+-- A same-object q-Lipschitz theorem then gives a nonempty interval
+--
+--   |q| < q0 <= |alpha|
+--
+-- on which the exact pair kernel remains strictly negative.  This interval
+-- lies inside the nominal mixed cone q^2 < 6 alpha^2.
+--
+-- Therefore the conservative ConeDebt abstraction discards genuine favorable
+-- mass.  The sharpened finite budget splits the exact cone source itself:
+--
+--   ConeExact = ConeDebt - ConeGain,
+--
+-- and uses
+--
+--   SharpenedLocalDebt
+--     = ConeDebt + GoodRemainderDebt
+--
+--   SharpenedSignedCompensation
+--     = ConeGain + GoodGain - FarExact.
+--
+-- The resulting sharpened budget is theorem-proved no larger than the old
+-- conservative joint budget, and every old uniform compensation proof implies
+-- the sharpened one.
+------------------------------------------------------------------------
+
+data SharpenedCompensationCoordinate : Set where
+  sameOrdinatePairKernelEqualsNegFourTarget :
+    SharpenedCompensationCoordinate
+  favorableNegativeConeCoreExists :
+    SharpenedCompensationCoordinate
+  coneGainDefinition :
+    SharpenedCompensationCoordinate
+  coneExactEqualsDebtMinusGain :
+    SharpenedCompensationCoordinate
+  goodOnlyRemainderDebt :
+    SharpenedCompensationCoordinate
+  sharpenedFiniteBudget :
+    SharpenedCompensationCoordinate
+  sharpenedGlobalCompilerToG3 :
+    SharpenedCompensationCoordinate
+  sharpenedBudgetBelowConservativeBudget :
+    SharpenedCompensationCoordinate
+  conservativeGapImpliesSharpenedGap :
+    SharpenedCompensationCoordinate
+  sharpenedUniformGapProved :
+    SharpenedCompensationCoordinate
+
+sharpenedCompensationStatus :
+  SharpenedCompensationCoordinate -> CompensationStatus
+sharpenedCompensationStatus sameOrdinatePairKernelEqualsNegFourTarget =
+  theoremOwned
+sharpenedCompensationStatus favorableNegativeConeCoreExists =
+  theoremOwned
+sharpenedCompensationStatus coneGainDefinition =
+  theoremOwned
+sharpenedCompensationStatus coneExactEqualsDebtMinusGain =
+  theoremOwned
+sharpenedCompensationStatus goodOnlyRemainderDebt =
+  theoremOwned
+sharpenedCompensationStatus sharpenedFiniteBudget =
+  theoremOwned
+sharpenedCompensationStatus sharpenedGlobalCompilerToG3 =
+  theoremOwned
+sharpenedCompensationStatus sharpenedBudgetBelowConservativeBudget =
+  theoremOwned
+sharpenedCompensationStatus conservativeGapImpliesSharpenedGap =
+  theoremOwned
+sharpenedCompensationStatus sharpenedUniformGapProved =
+  openAnalyticObstruction
+
+sameOrdinateKernelSignIsPaid :
+  sharpenedCompensationStatus sameOrdinatePairKernelEqualsNegFourTarget
+    ≡ theoremOwned
+sameOrdinateKernelSignIsPaid = refl
+
+favorableConeCoreIsPaid :
+  sharpenedCompensationStatus favorableNegativeConeCoreExists
+    ≡ theoremOwned
+favorableConeCoreIsPaid = refl
+
+sharpenedGapIsCurrentAnalyticWall :
+  sharpenedCompensationStatus sharpenedUniformGapProved
+    ≡ openAnalyticObstruction
+sharpenedGapIsCurrentAnalyticWall = refl
