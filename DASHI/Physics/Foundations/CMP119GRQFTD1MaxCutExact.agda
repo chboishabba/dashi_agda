@@ -45,17 +45,29 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 -- they are the connectedInsertionNumerator values of R121.densitySource on
 -- densityAt inputs selectedScale and the ten transported metric perturbations.
 --
--- The sole live numerical leaf is therefore to evaluate those ten LITERAL
--- beta-density connected insertion numerators.  No extra same-object bridge to
--- the synthetic candidate is required or claimed.
+-- R124 identifies densityAt scale with the literal finite Clay measure.  New
+-- finite-measure constructors now compile a normalized stress calculus on that
+-- measure into both R121.densitySource and the R122 density anchor.
+--
+-- Therefore the remaining frontier is exactly two source-facing tasks:
+--   (1) inhabit the literal finite-measure N,Z,dN,dZ/connected-numerator
+--       calculus for the selected CMP119 stress insertion;
+--   (2) evaluate that connected numerator on the ten transported metric
+--       perturbations.
+--
+-- No extra D1a/D1b, density callback, tensor bridge, or synthetic normalization
+-- premise is required.
 ------------------------------------------------------------------------
 
 data GRQFTD1Leaf : Set where
-  evaluateTenLiteralDensityConnectedInsertionNumerators : GRQFTD1Leaf
+  realizeFiniteMeasureNormalizedStressSource : GRQFTD1Leaf
+  evaluateTenLiteralFiniteMeasureConnectedNumerators : GRQFTD1Leaf
 
 canonicalGRQFTD1Leaves : List GRQFTD1Leaf
 canonicalGRQFTD1Leaves =
-  evaluateTenLiteralDensityConnectedInsertionNumerators ∷ []
+  realizeFiniteMeasureNormalizedStressSource
+  ∷ evaluateTenLiteralFiniteMeasureConnectedNumerators
+  ∷ []
 
 ordinarySubstitutedFirstVariationChainRuleClosed : Bool
 ordinarySubstitutedFirstVariationChainRuleClosed = true
@@ -131,12 +143,26 @@ actualSelectedCMP119ReadoutToLiteralDensityClosedIsTrue :
   actualSelectedCMP119ReadoutToLiteralDensityClosed ≡ true
 actualSelectedCMP119ReadoutToLiteralDensityClosedIsTrue = refl
 
-tenLiteralDensityConnectedNumeratorEvaluationsStillOpen : Bool
-tenLiteralDensityConnectedNumeratorEvaluationsStillOpen = true
+finiteMeasureStressSourceConstructorAvailable : Bool
+finiteMeasureStressSourceConstructorAvailable = true
 
-tenLiteralDensityConnectedNumeratorEvaluationsStillOpenIsTrue :
-  tenLiteralDensityConnectedNumeratorEvaluationsStillOpen ≡ true
-tenLiteralDensityConnectedNumeratorEvaluationsStillOpenIsTrue = refl
+finiteMeasureStressSourceConstructorAvailableIsTrue :
+  finiteMeasureStressSourceConstructorAvailable ≡ true
+finiteMeasureStressSourceConstructorAvailableIsTrue = refl
+
+literalFiniteMeasureStressCalculusInhabitantStillOpen : Bool
+literalFiniteMeasureStressCalculusInhabitantStillOpen = true
+
+literalFiniteMeasureStressCalculusInhabitantStillOpenIsTrue :
+  literalFiniteMeasureStressCalculusInhabitantStillOpen ≡ true
+literalFiniteMeasureStressCalculusInhabitantStillOpenIsTrue = refl
+
+tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpen : Bool
+tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpen = true
+
+tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpenIsTrue :
+  tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpen ≡ true
+tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpenIsTrue = refl
 
 candidateNormalizationIsProofPremise : Bool
 candidateNormalizationIsProofPremise = false
