@@ -1,9 +1,3 @@
-module DASHI.Interop.Everything where
-
--- Interop domain spine.
--- Prefer existing terminal/aggregate bridge surfaces so leaf ownership stays
--- with the modules that already compose each interoperability family.
-
 import DASHI.Interop.SensibLawOntologyAll
 import DASHI.Interop.ITIRSensiBlawStreamlineArchitecture
 import DASHI.Interop.ITIRSuiteNormalizedCompilerParityExact
@@ -106,3 +100,20 @@ import DASHI.Interop.DigitalESD.ScholarlyFullTextCrossPollinationExact
 import DASHI.Interop.DigitalESD.ScholarlyFullTextCrossPollinationRegression
 import DASHI.Interop.DigitalESD.ScholarlyFullTextInteropExecutionExact
 import DASHI.Interop.DigitalESD.ScholarlyFullTextInteropExecutionRegression
+import DASHI.Interop.LeanMoonshineEisensteinAnalyticParityExact
+import DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact
+import DASHI.Interop.LeanEta24PinnedReflectionParityExact
+import DASHI.Interop.LeanEta24SixfoldPhaseParityExact
+import DASHI.Interop.LeanDeltaFinalMinCutParityExact
+import DASHI.Interop.BishopRound11MachinBindingManifestExact
+import DASHI.Interop.SmithChartLeanParityExact
+import DASHI.Interop.LeanMoonshineDeltaIdentityPinnedReceiptExact
+import DASHI.Interop.Round11MachinLeanBindingManifestExact
+import DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact
+
+module DASHI.Interop.Everything where
+
+-- Interop domain spine.
+-- Prefer existing terminal/aggregate bridge surfaces so leaf ownership stays
+-- with the modules that already compose each interoperability family.
+
