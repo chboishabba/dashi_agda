@@ -112,37 +112,6 @@ record ConcreteEndpointSourceBundle
       OSR.OSReconstructionStandardAuthority
         (reconstruction group)
 
-    gapCertificate :
-      G → OSGap.PhysicalMassGapCertificate Hamiltonian ℚ
-
-    gapHamiltonianIsReconstructed :
-      ∀ group →
-      OSGap.hamiltonian (gapCertificate group)
-      ≡ OSR.reconstructedHamiltonian (reconstruction group)
-
-    gapPositiveRational :
-      ∀ group →
-      0ℚ < OSGap.gap (gapCertificate group)
-
-    cutoffGapData :
-      G →
-      OSR.CutoffSpectralLimitData Nat Hamiltonian ℚ Projection
-
-    cutoffGapHamiltonianIsReconstructed :
-      ∀ group →
-      OSR.continuumHamiltonian (cutoffGapData group)
-      ≡ OSR.reconstructedHamiltonian (reconstruction group)
-
-    cutoffGapValueIsPhysicalGap :
-      ∀ group →
-      OSR.mStar (cutoffGapData group)
-      ≡ OSGap.gap (gapCertificate group)
-
-    noPollutionAuthority :
-      ∀ group →
-      OSR.StrongResolventNoPollutionAuthority
-        (cutoffGapData group)
-
     clusteringData :
       G →
       OSR.UniformConnectedCorrelationDecayData
@@ -159,15 +128,14 @@ record ConcreteEndpointSourceBundle
         (clusteringData group)
         (clusteringTimeAuthority group)
 
-    clusteringHamiltonianIsPhysicalGapHamiltonian :
+    clusteringHamiltonianIsReconstructed :
       ∀ group →
       OSR.hamiltonian (clusteringData group)
-      ≡ OSGap.hamiltonian (gapCertificate group)
+      ≡ OSR.reconstructedHamiltonian (reconstruction group)
 
-    clusteringMassIsPhysicalGap :
+    clusteringMassPositiveRational :
       ∀ group →
-      OSR.mStar (clusteringData group)
-      ≡ OSGap.gap (gapCertificate group)
+      0ℚ < OSR.mStar (clusteringData group)
 
     interactingWitness :
       ∀ group →
@@ -176,6 +144,24 @@ record ConcreteEndpointSourceBundle
         (osSystem group)
 
 open ConcreteEndpointSourceBundle public
+
+gapCertificate :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection sequenceLimit limitLaws quotient division} →
+  (bundle :
+    ConcreteEndpointSourceBundle
+      G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection
+      {sequenceLimit = sequenceLimit}
+      limitLaws quotient division) →
+  G → OSGap.PhysicalMassGapCertificate Hamiltonian ℚ
+gapCertificate bundle group =
+  OSR.exponentialTimeClusteringImpliesSpectrumGap
+    (clusteringData bundle group)
+    (clusteringTimeAuthority bundle group)
+    (clusteringSpectrumAuthority bundle group)
 
 representedFor :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -360,7 +346,7 @@ ConcretePhysicalScaleLowerBound :
         limitLaws quotient division) →
   G → ℚ → Set
 ConcretePhysicalScaleLowerBound bundle group gap =
-  gap ≡ OSR.mStar (cutoffGapData bundle group)
+  gap ≡ OSR.mStar (clusteringData bundle group)
 
 ConcreteNoSpectralPollution :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -375,9 +361,9 @@ ConcreteNoSpectralPollution :
         limitLaws quotient division) →
   G → Hamiltonian → ℚ → Set
 ConcreteNoSpectralPollution bundle group hamiltonian gap =
-  (hamiltonian ≡ OSR.continuumHamiltonian (cutoffGapData bundle group))
+  (hamiltonian ≡ OSR.hamiltonian (clusteringData bundle group))
   ×
-  (gap ≡ OSR.mStar (cutoffGapData bundle group))
+  (gap ≡ OSR.mStar (clusteringData bundle group))
 
 ConcreteGapAndClusteringDerived :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -392,11 +378,8 @@ ConcreteGapAndClusteringDerived :
         limitLaws quotient division) →
   G → Set
 ConcreteGapAndClusteringDerived bundle group =
-  (OSR.hamiltonian (clusteringData bundle group)
-    ≡ OSGap.hamiltonian (gapCertificate bundle group))
-  ×
-  (OSR.mStar (clusteringData bundle group)
-    ≡ OSGap.gap (gapCertificate bundle group))
+  OSR.hamiltonian (clusteringData bundle group)
+  ≡ OSR.reconstructedHamiltonian (reconstruction bundle group)
 
 ConcreteNontrivialYangMills :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -584,7 +567,7 @@ sourceGapIsStrictlyPositiveRational :
     group →
   0ℚ < OSGap.gap (gapCertificate bundle group)
 sourceGapIsStrictlyPositiveRational bundle =
-  gapPositiveRational bundle
+  clusteringMassPositiveRational bundle
 
 sourceNoSpectralPollution :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -598,14 +581,9 @@ sourceNoSpectralPollution :
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division)
     group →
-  OSR.SpectrumSeparatedBy
-    (cutoffGapData bundle group)
-    (OSR.continuumHamiltonian (cutoffGapData bundle group))
-    (OSR.mStar (cutoffGapData bundle group))
+  OSGap.SpectrumAboveVacuumGap (gapCertificate bundle group)
 sourceNoSpectralPollution bundle group =
-  OSR.strongResolventLimitPreservesUniformGap
-    (cutoffGapData bundle group)
-    (noPollutionAuthority bundle group)
+  OSGap.spectrumAboveVacuumGap (gapCertificate bundle group)
 
 round511ConcreteEndpointSemanticsCompilerLevel : ProofLevel
 round511ConcreteEndpointSemanticsCompilerLevel = machineChecked
