@@ -37,6 +37,8 @@ on:
       - 'outputs/grqft_einstein_physical_coupling_candidate.json'
       - 'DASHI/Physics/Foundations/PinnedYMGRQFTStressMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/Round131AllSectorAssemblyFrontierExact.agda'
+      - 'DASHI/Physics/Closure/EinsteinFiniteToPhysicalCalibrationCompilerExact.agda'
+      - 'DASHI/Physics/Closure/EinsteinFiniteToPhysicalCalibrationCompilerValidation.agda'
       - '.github/workflows/grqft-bidi-executable-residual.yml'
   workflow_dispatch:
 

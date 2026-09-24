@@ -20,6 +20,8 @@ files=(
   DASHI/Physics/Closure/W4CalibrationFailureMechanismExact.agda
   DASHI/Physics/Closure/GRQFTSIPhysicalCalibrationBridgeExact.agda
   DASHI/Physics/Closure/EinsteinPhysicalCouplingCalibrationExact.agda
+  DASHI/Physics/Closure/EinsteinFiniteToPhysicalCalibrationCompilerExact.agda
+  DASHI/Physics/Closure/EinsteinFiniteToPhysicalCalibrationCompilerValidation.agda
   DASHI/Physics/Closure/W4IndependentPhysicalPredictionRequestExact.agda
   DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda
   DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda
@@ -90,6 +92,7 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/W4CalibrationFailureMechanismExact.agda \
   DASHI/Physics/Closure/GRQFTSIPhysicalCalibrationBridgeExact.agda \
   DASHI/Physics/Closure/EinsteinPhysicalCouplingCalibrationExact.agda \
+  DASHI/Physics/Closure/EinsteinFiniteToPhysicalCalibrationCompilerValidation.agda \
   DASHI/Physics/Closure/W4IndependentPhysicalPredictionRequestExact.agda \
   DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda \
   DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda \
