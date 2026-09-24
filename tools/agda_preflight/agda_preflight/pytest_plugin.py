@@ -151,6 +151,12 @@ def _checker(config) -> Checker:
                 "--agda-scope-command, --agda-scope-check and "
                 "--agda-typecheck-oracle are mutually exclusive"
             )
+        if auto_refine and any((command, native_scope, typecheck_oracle)):
+            raise pytest.UsageError(
+                "--agda-auto-refine is mutually exclusive with "
+                "--agda-scope-command, --agda-scope-check and "
+                "--agda-typecheck-oracle"
+            )
         if scope_runner and not auto_refine:
             raise pytest.UsageError(
                 "--agda-scope-runner requires --agda-auto-refine"
