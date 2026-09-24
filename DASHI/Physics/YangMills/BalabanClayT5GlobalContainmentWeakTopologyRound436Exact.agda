@@ -51,7 +51,9 @@ record GlobalContainmentWeakTopologyInputs
     weakTopologyMeaning :
       R435.SelectedT5WeakTopologyMeaning
         expectationData
-        selectedPhysicalTightness
+        (R431.asPhysicalSubsequenceTightnessData
+          (R432.momentContainmentToSelectedDiagonalTightness
+            convergence globalContainment))
 
     compactUniqueFullConvergenceAuthority :
       Compact.CompactUniqueFullConvergenceAuthority Measure
