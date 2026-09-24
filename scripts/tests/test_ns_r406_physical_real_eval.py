@@ -294,3 +294,17 @@ def test_c2_collar_flux_refinement_is_exact() -> None:
             abs(float(row["collar_flux_refinement_residual"]))
             <= 1.0e-12 * scale
         )
+
+
+def test_c2_critical_energy_has_expected_quadratic_scaling() -> None:
+    raw = _reality_closed_random_state(12, seed=79)
+    nu = 0.01
+    cutoff = 2
+
+    base = _critical_currency(raw, nu=nu, formal_cutoff=cutoff)
+    doubled = _critical_currency(2.0 * raw, nu=nu, formal_cutoff=cutoff)
+
+    x0 = float(base["critical_energy_X"])
+    x1 = float(doubled["critical_energy_X"])
+    assert x0 > 0.0
+    assert np.isclose(x1, 4.0 * x0, rtol=2.0e-12, atol=1.0e-12)
