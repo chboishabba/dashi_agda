@@ -64,16 +64,16 @@ ricci00TraceReversed tensor =
 
 finiteGRStressTraceIsNegativeFour :
   stressTraceRestFrame Cut.finiteGRStressRational ≡ - (Int.+ 4 / 1)
-finiteGRStressTraceIsNegativeFour = refl
+finiteGRStressTraceIsNegativeFour = solve []
 
 finiteGRRicci00IsNegativeOne :
   ricci00TraceReversed Cut.finiteGRStressRational ≡ minusOne
-finiteGRRicci00IsNegativeOne = refl
+finiteGRRicci00IsNegativeOne = solve []
 
 ricci00EqualsHalfActiveStressOnFiniteTarget :
   ricci00TraceReversed Cut.finiteGRStressRational
     ≡ half * Active.activeStressSum Cut.finiteGRStressRational
-ricci00EqualsHalfActiveStressOnFiniteTarget = refl
+ricci00EqualsHalfActiveStressOnFiniteTarget = solve []
 
 ------------------------------------------------------------------------
 -- RAYCHAUDHURI SIGN COMPILER
@@ -95,7 +95,7 @@ finiteGRCurvatureContributionIsPositiveOne :
   raychaudhuriCurvatureContribution
     (ricci00TraceReversed Cut.finiteGRStressRational)
   ≡ 1ℚ
-finiteGRCurvatureContributionIsPositiveOne = refl
+finiteGRCurvatureContributionIsPositiveOne = solve []
 
 third : ℚ
 third = Int.+ 1 / 3
@@ -115,7 +115,7 @@ finiteGRInitiallyParallelShearFreeIrrotationalRaychaudhuri :
     0ℚ
     (ricci00TraceReversed Cut.finiteGRStressRational)
   ≡ 1ℚ
-finiteGRInitiallyParallelShearFreeIrrotationalRaychaudhuri = refl
+finiteGRInitiallyParallelShearFreeIrrotationalRaychaudhuri = solve []
 
 ------------------------------------------------------------------------
 -- CMP119 TRANSPORT
