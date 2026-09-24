@@ -35,6 +35,7 @@ import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Closure.NSTriadKNS2b2AdjacentShellSpectralGapNoGoExact as Adjacent
+import DASHI.Physics.Closure.NSTriadKNLowCollarRemotePacketSplitExact as Split
 import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact as R656
 
 badCollarWitnessIsSelected :
@@ -42,8 +43,7 @@ badCollarWitnessIsSelected :
 badCollarWitnessIsSelected = refl
 
 lowWitnessStillSelected :
-  DASHI.Physics.Closure.NSTriadKNLowCollarRemotePacketSplitExact.lowPacket 2
-    Adjacent.lowWitness
+  Split.lowPacket 2 Adjacent.lowWitness
   ≡ true
 lowWitnessStillSelected = Adjacent.lowWitnessIsInLowerPacketAtTwo
 
