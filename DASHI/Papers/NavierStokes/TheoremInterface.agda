@@ -461,6 +461,22 @@ periodicClayMaxCutC2RemoteBoundaryFluxStillUnpaid : Bool
 periodicClayMaxCutC2RemoteBoundaryFluxStillUnpaid =
   R650.round650C2RemoteBoundaryFluxStillUnpaid
 
+periodicClayMaxCutC2EuclideanCollarRefinementClosed : Bool
+periodicClayMaxCutC2EuclideanCollarRefinementClosed =
+  R650.round650C2EuclideanCollarRefinementClosed
+
+periodicClayMaxCutC2GoodCollarSpectralCrossNonpositive : Bool
+periodicClayMaxCutC2GoodCollarSpectralCrossNonpositive =
+  R650.round650C2GoodCollarSpectralCrossNonpositive
+
+periodicClayMaxCutC2FullCrossReducedToBadLowRadiusCollar : Bool
+periodicClayMaxCutC2FullCrossReducedToBadLowRadiusCollar =
+  R650.round650C2FullCrossReducedToBadLowRadiusCollar
+
+periodicClayMaxCutC2BadLowRadiusCollarPaymentClosed : Bool
+periodicClayMaxCutC2BadLowRadiusCollarPaymentClosed =
+  R650.round650C2BadLowRadiusCollarPaymentClosed
+
 periodicClayMaxCutC3CompilerAvailable : Bool
 periodicClayMaxCutC3CompilerAvailable =
   R642.round642C3CanonicalPhysicalSliceCompilerAvailable
