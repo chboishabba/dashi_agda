@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as 
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
+import DASHI.Physics.YangMills.YangMillsClayNormalizedExpectationRepresentationFirewallRound448Exact as R448
 
 record ConcreteCMP119ContinuumSemanticMeaning
     (G X Configuration Position CurvaturePolynomial LocalOperator
@@ -63,17 +64,16 @@ record ConcreteCMP119ContinuumSemanticMeaning
         (Configuration → ℝ) Position)
     : Set₂ where
   field
-    -- Literal semantic meaning of the already-constructed all-observable
-    -- expectation limit.  The convergence witness itself is compiler-owned.
-    expectationLimitMeansLiteralContinuum :
-      (∀ observable →
-        Cylinder.Converges
-          (RealLimit.canonicalCylinderAlgebra limitLaws)
-          (λ cutoff → Limit.finiteExpectation family cutoff observable)
-          (Limit.limitExpectation family observable)) →
-      Top.IsContinuumLimitOf S group
-        (Limit.finiteMeasure family)
-        (Limit.continuumMeasure family)
+    -- The selected limit expectation is only an expectation functional.
+    -- Crossing to the literal Clay continuum predicate requires an explicit
+    -- countably-additive representation object; normalized quotient convergence
+    -- alone is not licensed to perform this promotion.
+    continuumRepresentation :
+      R448.ContinuumMeasureRepresentationAuthority
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S group family
 
     -- Literal semantic meaning of the already-constructed Schwinger functional.
     -- Its pointwise same-measure equation is compiler-owned below.
@@ -128,8 +128,8 @@ literalContinuumLimitFromConcreteExpectationLimit :
     (Limit.finiteMeasure family)
     (Limit.continuumMeasure family)
 literalContinuumLimitFromConcreteExpectationLimit meaning =
-  expectationLimitMeansLiteralContinuum meaning
-    (concreteExpectationLimitConverges meaning)
+  R448.literalContinuumLimitFromRepresentation
+    (continuumRepresentation meaning)
 
 literalSchwingerBelongsFromConcreteSameMeasure :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -159,6 +159,9 @@ round441SameMeasureSchwingerCompilerLevel = machineChecked
 
 round441ContinuumSemanticInterpretationLevel : ProofLevel
 round441ContinuumSemanticInterpretationLevel = conditional
+
+round441CountablyAdditiveRepresentationRequired : Bool
+round441CountablyAdditiveRepresentationRequired = true
 
 round441IndependentContinuumExistenceWitnessRequired : Bool
 round441IndependentContinuumExistenceWitnessRequired = false
