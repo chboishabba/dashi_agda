@@ -34,14 +34,20 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 -- D1a/D1b remain open provenance coordinates for interpreting each summand as
 -- an independently reconstructed physical composite derivative; they are not
 -- reopened as stress-equality obligations.
+--
+-- The newer concrete ten-slot candidate now evaluates the normalized cross
+-- numerators exactly.  The minimal stress frontier has therefore collapsed once
+-- more: the only live source theorem is the same-object identification between
+-- the R144/R119 post-sum finite-D1 readout and that literal-density CMP119
+-- normalized source on every symmetric slot.
 ------------------------------------------------------------------------
 
 data GRQFTD1Leaf : Set where
-  evaluateTenNormalizedFiniteD1Readouts : GRQFTD1Leaf
+  identifyConcreteTenSlotSourceWithPublishedCMP119 : GRQFTD1Leaf
 
 canonicalGRQFTD1Leaves : List GRQFTD1Leaf
 canonicalGRQFTD1Leaves =
-  evaluateTenNormalizedFiniteD1Readouts ∷ []
+  identifyConcreteTenSlotSourceWithPublishedCMP119 ∷ []
 
 ordinarySubstitutedFirstVariationChainRuleClosed : Bool
 ordinarySubstitutedFirstVariationChainRuleClosed = true
@@ -89,12 +95,26 @@ d1bRequiredAgainForMinimalStressRouteIsFalse :
   d1bRequiredAgainForMinimalStressRoute ≡ false
 d1bRequiredAgainForMinimalStressRouteIsFalse = refl
 
-tenNormalizedFiniteD1ReadoutsStillOpen : Bool
-tenNormalizedFiniteD1ReadoutsStillOpen = true
+concreteTenSlotCandidateConstructed : Bool
+concreteTenSlotCandidateConstructed = true
 
-tenNormalizedFiniteD1ReadoutsStillOpenIsTrue :
-  tenNormalizedFiniteD1ReadoutsStillOpen ≡ true
-tenNormalizedFiniteD1ReadoutsStillOpenIsTrue = refl
+concreteTenSlotCandidateConstructedIsTrue :
+  concreteTenSlotCandidateConstructed ≡ true
+concreteTenSlotCandidateConstructedIsTrue = refl
+
+candidateTenReadoutsEvaluated : Bool
+candidateTenReadoutsEvaluated = true
+
+candidateTenReadoutsEvaluatedIsTrue :
+  candidateTenReadoutsEvaluated ≡ true
+candidateTenReadoutsEvaluatedIsTrue = refl
+
+publishedCMP119SameObjectIdentificationStillOpen : Bool
+publishedCMP119SameObjectIdentificationStillOpen = true
+
+publishedCMP119SameObjectIdentificationStillOpenIsTrue :
+  publishedCMP119SameObjectIdentificationStillOpen ≡ true
+publishedCMP119SameObjectIdentificationStillOpenIsTrue = refl
 
 -- Preserve the archaeology fact: R228 itself never promoted its broader
 -- per-component physical-derivative closure.
