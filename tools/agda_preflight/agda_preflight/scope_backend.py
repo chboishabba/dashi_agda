@@ -163,6 +163,7 @@ class CommandScopeCheckBackend:
         self.failed = 0
         self.last_checked_modules: Tuple[str, ...] = ()
         self.last_partial_validated_modules: Tuple[str, ...] = ()
+        self.partial_validated_modules: Set[str] = set()
 
     @staticmethod
     def _checked_modules(output: str) -> Tuple[str, ...]:
@@ -212,6 +213,7 @@ class CommandScopeCheckBackend:
         checked = self._checked_modules(output)
         self.last_checked_modules = checked
         self.last_partial_validated_modules = checked if ok else checked[:-1]
+        self.partial_validated_modules.update(self.last_partial_validated_modules)
 
         if ok:
             self.succeeded += 1
