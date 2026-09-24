@@ -1,7 +1,7 @@
 module DASHI.ForecastVerificationEverything where
 
 ------------------------------------------------------------------------
--- FOCUSED FORECAST-VERIFICATION / WORLD-RESEARCH ROLLUP
+-- FOCUSED FORECAST-VERIFICATION / WORLD-RESEARCH ROLLUP (validation root)
 --
 -- New exact kernel:
 --   binary probability/resolution/proper loss
