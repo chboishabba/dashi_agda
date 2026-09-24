@@ -9,6 +9,13 @@ module DASHI.ComputerScience.ComputerScienceQuantumFibreValidationExact where
 
 import DASHI.ComputerScience.FibreProgramComplexityExact
 import DASHI.ComputerScience.QuantumExecutionFibreAdapterExact
+import DASHI.ComputerScience.ShorPowModOracleExecutionFibreExact
+import DASHI.ComputerScience.ShorPowModOracleExecutionFibreRegression
+import DASHI.ComputerScience.ShorCertifiedRunExecutionFibreExact
+import DASHI.ComputerScience.ShorCertifiedRunExecutionFibreRegression
+import DASHI.ComputerScience.FactorProducerReceiptExact
+import DASHI.ComputerScience.ShorQuantumFactorProducerReceiptExact
+import DASHI.ComputerScience.ShorQuantumFactorProducerReceiptRegression
 import DASHI.ComputerScience.ShorClassicalQuantumFibreComparisonExact
 import DASHI.ComputerScience.ShorOrderClassicalQuantumMachineComparisonExact
 import DASHI.ComputerScience.BalancedTernaryQutritBasisBridgeExact
@@ -19,6 +26,20 @@ import DASHI.ComputerScience.CUDAROCmQuantumTernaryCrossPollinationExact
 import DASHI.Algebra.Quantum.FiniteQuantumRegister
 import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
 import DASHI.Algebra.Quantum.GeneralShor
+import DASHI.Algebra.Quantum.ShorReversiblePowModOracleExact
+import DASHI.Algebra.Quantum.ShorReversiblePowModOracleRegression
+import DASHI.Algebra.Quantum.ShorCyclicQFTCarrierTransportExact
+import DASHI.Algebra.Quantum.ShorCyclicQFTCarrierTransportRegression
+import DASHI.Algebra.Quantum.ShorAmplitudeExecutionPrefixExact
+import DASHI.Algebra.Quantum.ShorAmplitudeExecutionPrefixRegression
+import DASHI.Algebra.Quantum.ShorFreeAmplitudePowModOracleExact
+import DASHI.Algebra.Quantum.ShorFreeAmplitudePowModOracleRegression
+import DASHI.Algebra.Quantum.ShorScalarAmplitudeCarrierExact
+import DASHI.Algebra.Quantum.ShorScalarAmplitudeCarrierRegression
+import DASHI.Algebra.Quantum.ShorIndependentTargetAmplitudeOracleExact
+import DASHI.Algebra.Quantum.ShorIndependentTargetAmplitudeOracleRegression
+import DASHI.Algebra.Quantum.ShorPeriodExecutionPipelineExact
+import DASHI.Algebra.Quantum.ShorPeriodExecutionPipelineRegression
 import DASHI.Algebra.Quantum.FiniteQutrit
 import DASHI.Algebra.Quantum.QutritWeyl
 import DASHI.Algebra.Quantum.DASHIQuantumBridge
@@ -26,5 +47,13 @@ import DASHI.Algebra.Quantum.DASHIHybridExecution
 import DASHI.Algebra.Quantum.DASHIShorProductiveJoin
 
 import DASHI.Crypto.ShorOrderFinding
+import DASHI.Crypto.ShorReversiblePowModOracleWeldExact
+import DASHI.Crypto.ShorReversiblePowModOracleWeldRegression
+import DASHI.Crypto.ShorFourierOrderCandidateVerificationExact
+import DASHI.Crypto.ShorFourierOrderCandidateVerificationRegression
+import DASHI.Crypto.ShorCertifiedFourierSamplingExact
+import DASHI.Crypto.ShorCertifiedFourierSamplingRegression
 import DASHI.Crypto.ShorFactoring
+import DASHI.Crypto.ShorQuantumRunFactorTransportExact
+import DASHI.Crypto.ShorQuantumRunFactorTransportRegression
 import DASHI.Crypto.ShorProgram
