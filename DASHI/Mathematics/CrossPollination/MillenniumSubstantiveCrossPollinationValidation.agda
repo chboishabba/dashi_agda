@@ -47,6 +47,7 @@ import DASHI.Moonshine.MonsterGradedVOABridgeExact
 
 import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierValidation
 import DASHI.Mathematics.CrossPollination.MillenniumKnownMathFormalizationValidation
+import DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidation
 
 import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact
 
