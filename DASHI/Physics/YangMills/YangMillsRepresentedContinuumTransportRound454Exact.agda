@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.YangMillsRepresentedContinuumTransportRound454Exa
 -- themselves extensional under pointwise equality of expectation functionals.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
