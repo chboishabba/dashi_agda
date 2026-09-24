@@ -29,22 +29,15 @@ record CoreClusteringAttachment
     clusteringCutset :
       Clustering.ConditionalClusteringAssembly Observable Scalar
 
-    -- This is the P2/same-family meaning theorem: the selected continuum
-    -- Schwinger clustering predicate is inhabited by the literal continuum
-    -- interpretation of the P1 bound.  No independent clustering assumption
-    -- is stored in the core.
-    continuumClusteringFromSelectedBound :
+    Clustered : Schwinger → Set
+
+    -- Exact P2/same-family meaning theorem.  No independent clustering
+    -- assumption is stored in the core.
+    selectedBoundMeansCoreClustered :
       ((left right : Observable) →
         Clustering.LessEqual clusteringCutset
           (Clustering.covariance clusteringCutset left right)
           (Clustering.targetClusteringBound clusteringCutset left right)) →
-      Set
-
-    Clustered : Schwinger → Set
-
-    selectedBoundMeansCoreClustered :
-      continuumClusteringFromSelectedBound
-        (Clustering.conditionalUniformClustering clusteringCutset) →
       Clustered
         (Selected.schwingerCore core
           (Selected.continuumMeasureCore core))
@@ -61,9 +54,8 @@ selectedContinuumClustering attachment = record
       Clustered attachment
   ; Selected.SelectedContinuumClustering.continuumClusteredCore =
       selectedBoundMeansCoreClustered attachment
-        (continuumClusteringFromSelectedBound attachment
-          (Clustering.conditionalUniformClustering
-            (clusteringCutset attachment)))
+        (Clustering.conditionalUniformClustering
+          (clusteringCutset attachment))
   }
 
 fullSelectedOSAfterClustering :
@@ -84,5 +76,5 @@ round429ContinuumClusteringMeaningLevel = conditional
 round429IndependentH2ClusteringInputRequired : Bool
 round429IndependentH2ClusteringInputRequired = false
 
-round429CoreCanExistBeforeClustering : Bool
-round429CoreCanExistBeforeClustering = false
+round429ClusteringRequiredForCoreConstruction : Bool
+round429ClusteringRequiredForCoreConstruction = false
