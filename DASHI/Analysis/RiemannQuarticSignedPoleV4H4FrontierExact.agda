@@ -287,3 +287,94 @@ strictScalarAbsorbRemainsOpen :
   v4h4ScalarizationStatus strictScalarAbsorb
     ≡ openAnalyticObstruction
 strictScalarAbsorbRemainsOpen = refl
+
+
+------------------------------------------------------------------------
+-- SELECTED-WITNESS SIXTH-ORDER SHARPENING DONOR
+--
+-- Lean PR #22 now cross-welds the complete-jet sixth absolute moment to the
+-- same selected-witness G1 constant already used by the quantitative target
+-- band:
+--
+--   M6_abs(W)
+--     = integral |P_W(u)| |u|^6 du
+--     <= integral |P_W(u)| cosh(|u|) |u|^5 du
+--     = K(W).
+--
+-- This removes M6_abs as an independent witness invariant.  The old explicit
+-- G1 K0 is still deliberately coarse and is NOT claimed to close terminal
+-- ABSORB.
+--
+-- Lean also exposes the signed sixth moment
+--
+--   M6_signed(W) = integral P_W(u) u^6 du
+--
+-- and the sixth angular harmonic
+--
+--   M6_signed(W)/720
+--     * (alpha^6 - 15 alpha^4 q^2 + 15 alpha^2 q^4 - q^6)
+--   = M6_signed(W)/720 * Re((alpha + i q)^6).
+--
+-- The kernel is algebraically recut as
+--
+--   complete quartic + signed sixth harmonic + beyond-sixth residual.
+--
+-- IMPORTANT: the beyond-sixth residual has not yet been proved O(8) here or
+-- in the Lean donor.  That analytic estimate/sign exploitation is the new
+-- preferred sharpening frontier.  No Agda-native replay is claimed.
+------------------------------------------------------------------------
+
+data SixthSharpeningCoordinate : Set where
+  absoluteSixthMomentToG1Lipschitz : SixthSharpeningCoordinate
+  terminalBudgetToG1Lipschitz : SixthSharpeningCoordinate
+  signedSixthMomentCarrier : SixthSharpeningCoordinate
+  signedSixthHarmonicCarrier : SixthSharpeningCoordinate
+  quarticPlusSixthAlgebraicRecut : SixthSharpeningCoordinate
+  beyondSixthOrderEightEstimate : SixthSharpeningCoordinate
+  strictScalarAbsorbAfterSixthSharpening : SixthSharpeningCoordinate
+
+sixthSharpeningStatus :
+  SixthSharpeningCoordinate -> V4H4Status
+sixthSharpeningStatus absoluteSixthMomentToG1Lipschitz =
+  leanSourceWrittenDonor
+sixthSharpeningStatus terminalBudgetToG1Lipschitz =
+  leanSourceWrittenDonor
+sixthSharpeningStatus signedSixthMomentCarrier =
+  leanSourceWrittenDonor
+sixthSharpeningStatus signedSixthHarmonicCarrier =
+  leanSourceWrittenDonor
+sixthSharpeningStatus quarticPlusSixthAlgebraicRecut =
+  leanSourceWrittenDonor
+sixthSharpeningStatus beyondSixthOrderEightEstimate =
+  openAnalyticObstruction
+sixthSharpeningStatus strictScalarAbsorbAfterSixthSharpening =
+  openAnalyticObstruction
+
+absoluteSixthMomentToG1LipschitzIsSourceWritten :
+  sixthSharpeningStatus absoluteSixthMomentToG1Lipschitz
+    ≡ leanSourceWrittenDonor
+absoluteSixthMomentToG1LipschitzIsSourceWritten = refl
+
+signedSixthHarmonicCarrierIsSourceWritten :
+  sixthSharpeningStatus signedSixthHarmonicCarrier
+    ≡ leanSourceWrittenDonor
+signedSixthHarmonicCarrierIsSourceWritten = refl
+
+beyondSixthOrderEightEstimateRemainsOpen :
+  sixthSharpeningStatus beyondSixthOrderEightEstimate
+    ≡ openAnalyticObstruction
+beyondSixthOrderEightEstimateRemainsOpen = refl
+
+sixthSharpeningLeanDonorHead : String
+sixthSharpeningLeanDonorHead =
+  "b287761a3fd4eeb03514cfa7d655ff2e19605b67"
+
+sixthSharpeningTransportedIntoAgdaKernelHere : Bool
+sixthSharpeningTransportedIntoAgdaKernelHere = false
+
+coarseExplicitG1K0CertifiedTerminalAbsorbHere : Bool
+coarseExplicitG1K0CertifiedTerminalAbsorbHere = false
+
+sixthSharpeningInterpretation : String
+sixthSharpeningInterpretation =
+  "The generic M6 support/L1 cap is no longer the preferred sixth-order interface. Lean source-writes M6_abs(W)<=K(W), where K(W) is the same selected-witness fourth-Lipschitz constant already used by G1, and exposes the signed sixth harmonic M6_signed(W)/720 * Re((alpha+i*q)^6). The existing explicit G1 K0 remains too coarse for terminal ABSORB, so the preferred next cut is to exploit the signed sixth carrier and prove a genuine beyond-sixth/order-eight estimate, or otherwise sharpen K on the selected witness. Montgomery remains irrelevant to this cut."
