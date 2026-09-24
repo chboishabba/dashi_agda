@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.YangMillsClayExhaustiveResearchQueuesRound508Exac
 -- opaque endpoint predicate without an explicit interpretation theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
@@ -158,7 +158,7 @@ preferredSourceAttackOrder =
   ∷ []
 
 allSixtyEightLeavesStillExplicit : Bool
-allSixtyEightLeavesStillExplicit = false
+allSixtyEightLeavesStillExplicit = true
 
 -- false means: do not treat the 68-item count as "68 independent hard
 -- analytic lemmas"; R508 explicitly decomposes the work by proof shape.
