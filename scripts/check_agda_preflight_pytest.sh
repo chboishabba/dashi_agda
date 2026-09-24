@@ -7,6 +7,7 @@ cd "$ROOT"
 TARGET="${AGDA_PREFLIGHT_TARGET:-DASHI/Everything.agda}"
 REFINE="${AGDA_PREFLIGHT_REFINE:-scope}"
 REPORT="${AGDA_PREFLIGHT_REPORT:-.cache/agda_preflight/report.json}"
+AGDA_REFINE_ARGS="${AGDA_PREFLIGHT_AGDA_ARGS:--i . -i DCHoTT-Agda -i cubical -l standard-library}"
 
 mkdir -p "$(dirname "$REPORT")"
 
@@ -16,6 +17,7 @@ ARGS=(
   --agda-root "$ROOT"
   --agda-compact
   --agda-report-json "$REPORT"
+  --agda-extra-args "$AGDA_REFINE_ARGS"
 )
 
 case "$REFINE" in
