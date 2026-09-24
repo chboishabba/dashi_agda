@@ -1,13 +1,15 @@
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, List, Optional
+import json
 
 import pytest
 
 from .checker import Checker, Diagnostic
-from .scope_backend import AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
+from .scope_backend import AgdaAutoRefineBackend, AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
 
 
 @dataclass(frozen=True)
@@ -67,6 +69,29 @@ def pytest_addoption(parser):
         help="run full Agda checking to suppress false scope/type diagnostics",
     )
     group.addoption(
+        "--agda-auto-refine",
+        nargs="?",
+        const="scope",
+        choices=("scope", "typecheck"),
+        default=None,
+        help=(
+            "run stronger Agda evidence only for modules with deferred findings; "
+            "optional value 'typecheck' escalates typechecker-level findings"
+        ),
+    )
+    group.addoption(
+        "--agda-compact",
+        action="store_true",
+        default=False,
+        help="suppress per-warning spam and compact failed-module diagnostics",
+    )
+    group.addoption(
+        "--agda-report-json",
+        action="store",
+        default=None,
+        help="write complete structured Agda preflight results to this JSON file",
+    )
+    group.addoption(
         "--agda-bin",
         action="store",
         default="agda",
@@ -98,14 +123,15 @@ def _checker(config) -> Checker:
         command = config.getoption("--agda-scope-command")
         native_scope = config.getoption("--agda-scope-check")
         typecheck_oracle = config.getoption("--agda-typecheck-oracle")
+        auto_refine = config.getoption("--agda-auto-refine")
         selected = sum(
             bool(value)
-            for value in (command, native_scope, typecheck_oracle)
+            for value in (command, native_scope, typecheck_oracle, auto_refine)
         )
         if selected > 1:
             raise pytest.UsageError(
-                "--agda-scope-command, --agda-scope-check and "
-                "--agda-typecheck-oracle are mutually exclusive"
+                "--agda-scope-command, --agda-scope-check, "
+                "--agda-typecheck-oracle and --agda-auto-refine are mutually exclusive"
             )
         scope_backend = None
         if command:
@@ -119,6 +145,12 @@ def _checker(config) -> Checker:
             scope_backend = AgdaTypecheckBackend(
                 config.getoption("--agda-bin"),
                 cwd=root,
+            )
+        elif auto_refine:
+            scope_backend = AgdaAutoRefineBackend(
+                config.getoption("--agda-bin"),
+                cwd=root,
+                typecheck=auto_refine == "typecheck",
             )
         cached = Checker(root, scope_backend=scope_backend)
         setattr(config, "_dashi_agda_checker", cached)
@@ -215,7 +247,11 @@ class AgdaModuleItem(pytest.Item):
             diagnostic for diagnostic in diagnostics
             if diagnostic.severity != "error"
         ]
-        if warnings and not self.config.getoption("--agda-errors-only"):
+        if (
+            warnings
+            and not self.config.getoption("--agda-errors-only")
+            and not self.config.getoption("--agda-compact")
+        ):
             for diagnostic in warnings:
                 import warnings as _warnings
                 _warnings.warn(
@@ -232,7 +268,24 @@ class AgdaModuleItem(pytest.Item):
             diagnostics = excinfo.value.diagnostics
             if self.config.getoption("--agda-errors-only"):
                 diagnostics = [d for d in diagnostics if d.severity == "error"]
-            body = "\n\n".join(_format_diagnostic(d) for d in diagnostics)
+            if self.config.getoption("--agda-compact"):
+                errors = [d for d in diagnostics if d.severity == "error"]
+                counts = Counter(d.code for d in errors)
+                lines = [
+                    f"{code}: {count}"
+                    for code, count in counts.most_common(12)
+                ]
+                examples = errors[:5]
+                if examples:
+                    lines.append("")
+                    lines.append("examples:")
+                    lines.extend(
+                        f"  {d.code} {d.path}:{d.line}:{d.column} {d.message}"
+                        for d in examples
+                    )
+                body = "\n".join(lines) if lines else "no hard diagnostics"
+            else:
+                body = "\n\n".join(_format_diagnostic(d) for d in diagnostics)
             return f"Agda preflight failed for {self.module_name}\n\n{body}"
         return super().repr_failure(excinfo, style=style)
 
@@ -270,6 +323,10 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     warning_count = 0
     error_count = 0
     deferred_count = 0
+    code_counts = Counter()
+    error_code_counts = Counter()
+    deferred_code_counts = Counter()
+    report_modules = []
 
     for outcome in ("passed", "failed"):
         for report in terminalreporter.getreports(outcome):
@@ -280,22 +337,30 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
                     break
             if diagnostics is None:
                 continue
+
+            module_entry = {
+                "nodeid": report.nodeid,
+                "outcome": outcome,
+                "diagnostics": diagnostics,
+            }
+            report_modules.append(module_entry)
+
             if outcome == "passed":
                 passed += 1
             else:
                 failed += 1
-            warning_count += sum(
-                1 for diagnostic in diagnostics
-                if diagnostic.get("severity") != "error"
-            )
-            error_count += sum(
-                1 for diagnostic in diagnostics
-                if diagnostic.get("severity") == "error"
-            )
-            deferred_count += sum(
-                1 for diagnostic in diagnostics
-                if not diagnostic.get("evidence_sufficient", True)
-            )
+
+            for diagnostic in diagnostics:
+                code = diagnostic.get("code", "UNKNOWN")
+                code_counts[code] += 1
+                if diagnostic.get("severity") == "error":
+                    error_count += 1
+                    error_code_counts[code] += 1
+                else:
+                    warning_count += 1
+                if not diagnostic.get("evidence_sufficient", True):
+                    deferred_count += 1
+                    deferred_code_counts[code] += 1
 
     terminalreporter.section("Agda preflight")
     terminalreporter.write_line(f"modules passed: {passed}")
@@ -303,4 +368,37 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     terminalreporter.write_line(f"errors: {error_count}")
     terminalreporter.write_line(f"warnings: {warning_count}")
     terminalreporter.write_line(f"deferred for stronger evidence: {deferred_count}")
+
+    if code_counts:
+        terminalreporter.write_line("")
+        terminalreporter.write_line("top diagnostics:")
+        for code, count in code_counts.most_common(12):
+            hard = error_code_counts.get(code, 0)
+            deferred = deferred_code_counts.get(code, 0)
+            terminalreporter.write_line(
+                f"  {code}: {count} total, {hard} hard, {deferred} deferred"
+            )
+
+    report_path = config.getoption("--agda-report-json")
+    if report_path:
+        payload = {
+            "summary": {
+                "modules_passed": passed,
+                "modules_failed": failed,
+                "errors": error_count,
+                "warnings": warning_count,
+                "deferred": deferred_count,
+                "diagnostics_by_code": dict(code_counts),
+                "hard_by_code": dict(error_code_counts),
+                "deferred_by_code": dict(deferred_code_counts),
+            },
+            "modules": report_modules,
+        }
+        output = Path(report_path)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(
+            json.dumps(payload, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        terminalreporter.write_line(f"structured report: {output}")
 
