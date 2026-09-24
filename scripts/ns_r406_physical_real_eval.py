@@ -435,6 +435,13 @@ def evaluate_r406(
         "offdiagonal_minus_twice_direct_companion": float(
             global_forcing_offdiagonal - 2.0 * global_companion
         ),
+        "c1_r406_diagonal_coupling_residual": float(
+            4.0 * global_forcing_full
+            - (
+                2.0 * (4.0 * global_companion)
+                + 4.0 * global_forcing_diagonal
+            )
+        ),
         "output_rows": output_rows if include_output_rows else None,
         "complexity_rows": complexity_rows if include_output_rows else None,
         "interpretation": (
