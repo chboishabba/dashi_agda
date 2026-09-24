@@ -54,9 +54,13 @@ record GRQFTConcreteTheoryFrontier : Set where
     componentSymmetryIsCompilerOwnedOnSymmetricBasisIsTrue :
       componentSymmetryIsCompilerOwnedOnSymmetricBasis ≡ true
 
-    tenIndependentComponentValuesExist : Bool
-    tenIndependentComponentValuesExistIsFalse :
-      tenIndependentComponentValuesExist ≡ false
+    tenRationalStressInsertionTermsDefined : Bool
+    tenRationalStressInsertionTermsDefinedIsTrue :
+      tenRationalStressInsertionTermsDefined ≡ true
+
+    tenNormalizedGRTargetEqualitiesExist : Bool
+    tenNormalizedGRTargetEqualitiesExistIsFalse :
+      tenNormalizedGRTargetEqualitiesExist ≡ false
 
     commonOverlapEvidenceExists : Bool
     commonOverlapEvidenceExistsIsFalse :
@@ -87,10 +91,11 @@ canonicalGRQFTConcreteTheoryFrontier =
     true refl
     true refl
     true refl
+    true refl
     false refl
     false refl
     false refl
     false refl
     false refl
     canonicalGRQFTConcreteTheoryLeaves
-    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, GR literal/recovered attachment plus QFT source-native/legacy recovery projection compatibility, the existing CMP119 metric-stress pairing on an R144-compatible R122 present cut built directly from the functional regular-E source with the 10-slot symmetric tangent carrier; slot-to-finite-tangent transport, canonical metric-basis transport, endpoint-to-metric stress transport, and component symmetry are compiler-owned, leaving the corrected D1 physical-derivative semantics plus ten exact finite localized derivative readouts, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
+    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, GR literal/recovered attachment plus QFT source-native/legacy recovery projection compatibility, the existing CMP119 metric-stress pairing on an R144-compatible R122 present cut built directly from the functional regular-E source with the 10-slot symmetric tangent carrier; slot-to-finite-tangent transport, canonical metric-basis transport, endpoint-to-metric stress transport, and component symmetry are compiler-owned, the ten rational selected-CMP119 insertion terms are now definitionally exposed through R116/R119; the remaining stress payment is the corrected D1 physical-derivative semantics plus ten normalized equalities to the GR target values, alongside common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
