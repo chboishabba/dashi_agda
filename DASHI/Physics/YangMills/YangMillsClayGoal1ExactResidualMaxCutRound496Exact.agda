@@ -27,6 +27,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as A3Source
+import DASHI.Physics.YangMills.YangMillsClaySourceNativeA3MaxCutRound504Exact as A3SourceCut
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as Measure
 import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as Premeasure
 import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as PhysicalRep
@@ -63,7 +64,10 @@ data ResidualLeaf : Set where
   a2BetaMarkGeneratedHistoryShell : ResidualLeaf
 
   -- A3 represented continuum.
-  a3SourceNativeSameFamilyContinuumOS : ResidualLeaf
+  a3StressDensityIsLiteralFiniteMeasure : ResidualLeaf
+  a3FiniteFamilyContinuumLimit : ResidualLeaf
+  a3LiteralSchwingerBelongs : ResidualLeaf
+  a3SourceOSIsLiteralSchwinger : ResidualLeaf
   a3CylinderEventIndicatorSemantics : ResidualLeaf
   a3ProjectiveEventExpectationConsistency : ResidualLeaf
   a3ContinuityAtEmpty : ResidualLeaf
@@ -121,8 +125,14 @@ leafLevel a1FourJointReceiptEvaluation =
 leafLevel a2BetaMarkGeneratedHistoryShell =
   A2.literalCMP116BetaMarkIsGeneratedHistoryShellLevel
 
-leafLevel a3SourceNativeSameFamilyContinuumOS =
-  A3Source.literalRound457SourceNativeContinuumOSLevel
+leafLevel a3StressDensityIsLiteralFiniteMeasure =
+  A3SourceCut.literalRound504StressDensityIsLiteralFiniteMeasureLevel
+leafLevel a3FiniteFamilyContinuumLimit =
+  A3SourceCut.literalRound504FiniteFamilyContinuumLimitLevel
+leafLevel a3LiteralSchwingerBelongs =
+  A3SourceCut.literalRound504LiteralSchwingerBelongsLevel
+leafLevel a3SourceOSIsLiteralSchwinger =
+  A3SourceCut.literalRound504SourceOSIsLiteralSchwingerLevel
 leafLevel a3CylinderEventIndicatorSemantics =
   PhysicalRep.literalRound499CylinderEventIndicatorSemanticsLevel
 leafLevel a3ProjectiveEventExpectationConsistency =
@@ -195,7 +205,10 @@ residualLeaves =
   ∷ a1PhysicalJetFiveChannelSplit
   ∷ a1FourJointReceiptEvaluation
   ∷ a2BetaMarkGeneratedHistoryShell
-  ∷ a3SourceNativeSameFamilyContinuumOS
+  ∷ a3StressDensityIsLiteralFiniteMeasure
+  ∷ a3FiniteFamilyContinuumLimit
+  ∷ a3LiteralSchwingerBelongs
+  ∷ a3SourceOSIsLiteralSchwinger
   ∷ a3CylinderEventIndicatorSemantics
   ∷ a3ProjectiveEventExpectationConsistency
   ∷ a3ContinuityAtEmpty
@@ -289,6 +302,10 @@ terminalRepresentationFirstCompilerLevel =
 representedA3SemanticCompilerLevel : ProofLevel
 representedA3SemanticCompilerLevel =
   A3Direct.round497RepresentedSourceNativeA3CompilerLevel
+
+sourceNativeA3AssemblyLevel : ProofLevel
+sourceNativeA3AssemblyLevel =
+  A3SourceCut.round504SameFamilyRecoveryCompilerLevel
 
 ------------------------------------------------------------------------
 -- Max-cut firewalls.
