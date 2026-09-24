@@ -11,6 +11,7 @@ from agda_preflight.evidence import (
     EvidenceLevel,
     policy_for,
 )
+from agda_preflight.evidence_cli import main as evidence_main
 from agda_preflight.scope_backend import (
     AgdaScopeCheckBackend,
     AgdaTypecheckBackend,
@@ -262,3 +263,12 @@ def test_full_typecheck_failure_does_not_suppress_structural_suspicions(tmp_path
     assert [d.code for d in results] == ["TSAGDA113", "TSAGDA041"]
     assert all(d.severity == "warning" for d in results)
     assert all(d.evidence_sufficient is False for d in results)
+
+
+
+def test_evidence_cli_filters_by_minimum_layer(capsys):
+    assert evidence_main(["--level", "agda-scope"]) == 0
+    output = capsys.readouterr().out
+    assert "agda-scope" in output
+    assert "TSAGDA113" in output
+    assert "TSAGDA041" not in output
