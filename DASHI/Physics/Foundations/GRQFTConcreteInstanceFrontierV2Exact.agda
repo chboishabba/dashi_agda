@@ -7,8 +7,6 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 
 data GRQFTConcreteTheoryLeaf : Set where
-  constructFirstInhabitedUnifiedCandidate :
-    GRQFTConcreteTheoryLeaf
   constructTheoremBearingGRDiscreteToSmoothBundle :
     GRQFTConcreteTheoryLeaf
   attachLiteralNonflatGRToRecoveredGR :
@@ -26,8 +24,7 @@ data GRQFTConcreteTheoryLeaf : Set where
 
 canonicalGRQFTConcreteTheoryLeaves : List GRQFTConcreteTheoryLeaf
 canonicalGRQFTConcreteTheoryLeaves =
-  constructFirstInhabitedUnifiedCandidate
-  ∷ constructTheoremBearingGRDiscreteToSmoothBundle
+constructTheoremBearingGRDiscreteToSmoothBundle
   ∷ attachLiteralNonflatGRToRecoveredGR
   ∷ attachPinnedLiteralYMToRecoveredQFT
   ∷ attachCMP119StressToLiteralPinnedStress
@@ -39,9 +36,9 @@ canonicalGRQFTConcreteTheoryLeaves =
 record GRQFTConcreteTheoryFrontier : Set where
   constructor grqftConcreteTheoryFrontier
   field
-    inhabitedUnifiedCandidateExists : Bool
-    inhabitedUnifiedCandidateExistsIsFalse :
-      inhabitedUnifiedCandidateExists ≡ false
+    unifiedCandidateInhabitationIsAggregateConsequence : Bool
+    unifiedCandidateInhabitationIsAggregateConsequenceIsTrue :
+      unifiedCandidateInhabitationIsAggregateConsequence ≡ true
 
     finiteGRComponentTargetExecutable : Bool
     finiteGRComponentTargetExecutableIsTrue :
@@ -75,7 +72,7 @@ open GRQFTConcreteTheoryFrontier public
 canonicalGRQFTConcreteTheoryFrontier : GRQFTConcreteTheoryFrontier
 canonicalGRQFTConcreteTheoryFrontier =
   grqftConcreteTheoryFrontier
-    false refl
+    true refl
     true refl
     false refl
     false refl
@@ -83,4 +80,4 @@ canonicalGRQFTConcreteTheoryFrontier =
     false refl
     false refl
     canonicalGRQFTConcreteTheoryLeaves
-    "The first executable GRQFT instance now reduces to an inhabited UnifiedCandidate, theorem-bearing GR continuum realization, literal/recovered attachments, a CMP119 stress component evaluator into the normalized 4x4 rational carrier, the resulting sixteen-component stress residual, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
+    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, literal/recovered attachments, a CMP119 stress component evaluator into the normalized 4x4 rational carrier, the resulting sixteen-component stress residual, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
