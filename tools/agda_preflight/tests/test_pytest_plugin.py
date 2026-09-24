@@ -198,3 +198,85 @@ import A.Middle
     top_index = output.find("A.Top")
     assert -1 not in (leaf, middle, top_index)
     assert leaf < middle < top_index
+
+
+
+def test_pytest_compact_mode_writes_structured_report(pytester):
+    broken = write_agda(
+        pytester.path,
+        "CompactBroken",
+        """
+record Model : Set₁ where
+  field
+    Parameter : Set
+    Scalar : Set
+
+open Model public
+
+Series :
+  Model → Parameter → Scalar
+Series M x = x
+""",
+    )
+    report = pytester.path / "agda-report.json"
+
+    result = pytester.runpytest(
+        "-p",
+        "dashi_agda_preflight",
+        "--agda-preflight",
+        "--agda-compact",
+        "--agda-report-json",
+        str(report),
+        "--agda-root",
+        str(pytester.path),
+        str(broken),
+        "-q",
+    )
+
+    result.assert_outcomes(failed=1)
+    assert report.exists()
+
+    import json
+    payload = json.loads(report.read_text(encoding="utf-8"))
+    assert payload["summary"]["modules_failed"] == 1
+    assert payload["summary"]["errors"] >= 1
+    assert "TSAGDA001" in payload["summary"]["diagnostics_by_code"]
+    assert payload["modules"]
+
+
+def test_pytest_compact_summary_ranks_diagnostic_codes(pytester):
+    broken = write_agda(
+        pytester.path,
+        "CompactSummary",
+        """
+record Model : Set₁ where
+  field
+    Parameter : Set
+    Scalar : Set
+
+open Model public
+
+Series :
+  Model → Parameter → Scalar
+Series M x = x
+""",
+    )
+
+    result = pytester.runpytest(
+        "-p",
+        "dashi_agda_preflight",
+        "--agda-preflight",
+        "--agda-compact",
+        "--agda-root",
+        str(pytester.path),
+        str(broken),
+        "-q",
+    )
+
+    result.assert_outcomes(failed=1)
+    result.stdout.fnmatch_lines(
+        [
+            "*top diagnostics:*",
+            "*TSAGDA001:*",
+        ]
+    )
