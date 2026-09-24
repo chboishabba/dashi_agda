@@ -120,3 +120,56 @@ denominatorDerivativeIsLiteralHaarMetricVariation :
   Physical.haarIntegral measure
     (gibbsDenominatorDerivativeIntegrand dataSet perturbation)
 denominatorDerivativeIsLiteralHaarMetricVariation dataSet perturbation = refl
+
+
+------------------------------------------------------------------------
+-- Family adapter: a Gibbs source on every literal finite measure directly
+-- inhabits the N/Z/DN/DZ calculus used by the R121/R122 constructors.
+------------------------------------------------------------------------
+
+module _
+    {G X Cutoff Configuration Observable Position
+     CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+     HilbertSpace Hamiltonian VacuumState MetricPerturbation : Set}
+    where
+
+  C = NZ.C
+    {G = G} {X = X} {Cutoff = Cutoff}
+    {Configuration = Configuration}
+    {Observable = Observable} {Position = Position}
+    {CurvaturePolynomial = CurvaturePolynomial}
+    {LocalOperator = LocalOperator}
+    {OPECoefficient = OPECoefficient}
+    {StressTensor = StressTensor}
+    {HilbertSpace = HilbertSpace}
+    {Hamiltonian = Hamiltonian}
+    {VacuumState = VacuumState}
+
+  record GibbsFiniteMeasureStressFamily : Set₁ where
+    field
+      gibbsDataAt :
+        (measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ) →
+        GibbsMetricInsertionData
+          Configuration MetricPerturbation measure
+
+  open GibbsFiniteMeasureStressFamily public
+
+  asPhysicalRationalFiniteMeasureStressCalculus :
+    GibbsFiniteMeasureStressFamily →
+    NZ.PhysicalRationalFiniteMeasureStressCalculus
+      {G = G} {X = X} {Cutoff = Cutoff}
+      {Configuration = Configuration}
+      {Observable = Observable} {Position = Position}
+      {CurvaturePolynomial = CurvaturePolynomial}
+      {LocalOperator = LocalOperator}
+      {OPECoefficient = OPECoefficient}
+      {StressTensor = StressTensor}
+      {HilbertSpace = HilbertSpace}
+      {Hamiltonian = Hamiltonian}
+      {VacuumState = VacuumState}
+      MetricPerturbation
+  asPhysicalRationalFiniteMeasureStressCalculus family = record
+    { NZ.PhysicalRationalFiniteMeasureStressCalculus.stressDataAt =
+        λ measure →
+          asPhysicalMetricStressData (gibbsDataAt family measure)
+    }
