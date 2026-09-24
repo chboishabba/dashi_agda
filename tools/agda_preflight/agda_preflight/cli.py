@@ -7,7 +7,7 @@ import sys
 
 from .checker import Checker, Diagnostic
 from .rules import api_snapshot, api_drift
-from .scope_backend import ExternalScopeBackend
+from .scope_backend import AgdaScopeCheckBackend, ExternalScopeBackend
 
 
 def _format(diag) -> str:
@@ -45,20 +45,31 @@ def main(argv=None) -> int:
     parser.add_argument("--write-api-snapshot", type=Path, help="write repository API summary JSON and exit")
     parser.add_argument("--api-baseline", type=Path, help="compare current exported API to a prior snapshot")
     parser.add_argument("--cycles", action="store_true", help="report repository import cycles containing FILE")
-    parser.add_argument(
+    scope_group = parser.add_mutually_exclusive_group()
+    scope_group.add_argument(
         "--agda-scope-command",
         help=(
             "optional Agda-aware scope/elaboration command; receives FILE and "
             "returns confirmed/suppressed TSAGDA locations as JSON"
         ),
     )
+    scope_group.add_argument(
+        "--agda-scope-check",
+        action="store_true",
+        help="run Agda --only-scope-checking to suppress false scope diagnostics",
+    )
+    parser.add_argument(
+        "--agda-bin",
+        default="agda",
+        help="Agda executable for --agda-scope-check (default: agda)",
+    )
     args = parser.parse_args(argv)
 
-    scope_backend = (
-        ExternalScopeBackend(args.agda_scope_command, cwd=args.root)
-        if args.agda_scope_command
-        else None
-    )
+    scope_backend = None
+    if args.agda_scope_command:
+        scope_backend = ExternalScopeBackend(args.agda_scope_command, cwd=args.root)
+    elif args.agda_scope_check:
+        scope_backend = AgdaScopeCheckBackend(args.agda_bin, cwd=args.root)
     checker = Checker(args.root, scope_backend=scope_backend)
 
     if args.write_api_snapshot:
