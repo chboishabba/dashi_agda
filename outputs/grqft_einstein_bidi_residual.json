@@ -1,0 +1,15 @@
+{
+  "model": "DASHI finite warped Einstein-matter normalized BIDI fixture",
+  "equation": "G_mu_nu - kappa*T_mu_nu",
+  "normalization": "kappa=1 represents normalized 8*pi*G; this is not SI calibration",
+  "runs": [
+    {"kappa_normalized": -3, "residual": [[4,0,0,0],[0,-4,0,0],[0,0,-4,0],[0,0,0,-4]], "l1": 16, "max_abs": 4, "all_zero": false},
+    {"kappa_normalized": -2, "residual": [[3,0,0,0],[0,-3,0,0],[0,0,-3,0],[0,0,0,-3]], "l1": 12, "max_abs": 3, "all_zero": false},
+    {"kappa_normalized": -1, "residual": [[2,0,0,0],[0,-2,0,0],[0,0,-2,0],[0,0,0,-2]], "l1": 8, "max_abs": 2, "all_zero": false},
+    {"kappa_normalized": 0, "residual": [[1,0,0,0],[0,-1,0,0],[0,0,-1,0],[0,0,0,-1]], "l1": 4, "max_abs": 1, "all_zero": false},
+    {"kappa_normalized": 1, "residual": [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]], "l1": 0, "max_abs": 0, "all_zero": true},
+    {"kappa_normalized": 2, "residual": [[-1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]], "l1": 4, "max_abs": 1, "all_zero": false},
+    {"kappa_normalized": 3, "residual": [[-2,0,0,0],[0,2,0,0],[0,0,2,0],[0,0,0,2]], "l1": 8, "max_abs": 2, "all_zero": false}
+  ],
+  "unique_zero_residual_kappa": [1]
+}
