@@ -61,16 +61,36 @@ open GroupDependentConstantPayment public
 -- Scope/provenance tags for YM analytic receipts.
 ------------------------------------------------------------------------
 
-data YMAnalyticScope : Set where
-  localChart : YMAnalyticScope
-  globalConfiguration : YMAnalyticScope
-  finiteCutoff : YMAnalyticScope
-  cutoffUniform : YMAnalyticScope
-  rationalSource : YMAnalyticScope
-  realExpectation : YMAnalyticScope
-  continuum : YMAnalyticScope
-  perCompactSimpleGroup : YMAnalyticScope
-  uniformAcrossCompactSimpleGroups : YMAnalyticScope
+data GeometryScope : Set where
+  localChart : GeometryScope
+  globalConfiguration : GeometryScope
+
+data CutoffScope : Set where
+  finiteCutoff : CutoffScope
+  cutoffUniform : CutoffScope
+
+data ScalarScope : Set where
+  rationalSource : ScalarScope
+  realExpectation : ScalarScope
+
+data LimitScope : Set where
+  precontinuum : LimitScope
+  continuum : LimitScope
+
+data GroupScope : Set where
+  perCompactSimpleGroup : GroupScope
+  uniformAcrossCompactSimpleGroups : GroupScope
+
+record YMAnalyticScope : Set where
+  constructor analyticScope
+  field
+    geometryScope : GeometryScope
+    cutoffScope : CutoffScope
+    scalarScope : ScalarScope
+    limitScope : LimitScope
+    groupScope : GroupScope
+
+open YMAnalyticScope public
 
 record ScopedEvidence (Claim : Set) : Set where
   constructor scoped
