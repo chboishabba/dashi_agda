@@ -119,3 +119,47 @@ def test_projected_state_uses_requested_formal_cube() -> None:
     assert np.max(np.abs(retained[outside])) <= 1.0e-12
     assert np.max(np.abs(forcing[outside])) <= 1.0e-12
     assert meta["formal_cutoff"] == 1
+
+
+def test_pointwise_c2_strengthening_fails_for_one_sign_at_large_amplitude() -> None:
+    raw = _reality_closed_random_state(6, seed=43)
+    nu = 0.01
+    cutoff = 1
+
+    base_r406 = evaluate_r406(
+        raw,
+        nu=nu,
+        formal_cutoff=cutoff,
+        max_pairs=100_000,
+    )
+    r0 = float(base_r406["r406_weighted_remainder"])
+    assert abs(r0) > 1.0e-18
+
+    # R406 is degree five and odd under common real amplitude scaling.  Choose
+    # the sign making the quintic remainder negative; then search increasing
+    # amplitudes for a failure of the stronger instantaneous inequality
+    #
+    #   P' - 2 nu D' <= R406.
+    #
+    # This is a no-go only for the pointwise strengthening, not for the actual
+    # time-integrated R650 C2 theorem.
+    oriented = raw if r0 < 0.0 else -raw
+    failed = False
+    for amplitude in (1.0, 3.0, 10.0, 30.0, 100.0, 300.0, 1_000.0):
+        state = amplitude * oriented
+        currency = _critical_currency(state, nu=nu, formal_cutoff=cutoff)
+        r406 = evaluate_r406(
+            state,
+            nu=nu,
+            formal_cutoff=cutoff,
+            max_pairs=100_000,
+        )
+        production = float(currency["production_rate_2W"])
+        dissipation = float(currency["critical_dissipation_rate"])
+        remainder = float(r406["r406_weighted_remainder"])
+        strict_surplus_delta_zero = production - 2.0 * nu * dissipation
+        if strict_surplus_delta_zero > remainder:
+            failed = True
+            break
+
+    assert failed
