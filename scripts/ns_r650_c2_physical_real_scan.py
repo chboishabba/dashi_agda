@@ -223,6 +223,17 @@ def _packet_layer_cake_split(
         )
         k_level = max(0, threshold - 1)
         low_ceiling_k2 = float(3 * (2 ** k_level) ** 2)
+        bad_collar_flux = sum(
+            float(row["pairing"])
+            for row in rows
+            if int(row["shell"]) == threshold
+            and float(
+                row["mode"][0] * row["mode"][0]
+                + row["mode"][1] * row["mode"][1]
+                + row["mode"][2] * row["mode"][2]
+            ) < low_ceiling_k2
+        )
+        good_collar_flux = collar_flux - bad_collar_flux
         bad_collar_energy = 0.5 * sum(
             float(row["mass"])
             for row in rows
@@ -305,6 +316,11 @@ def _packet_layer_cake_split(
                 "weight_increment": weight_increment,
                 "low_flux": float(low_flux),
                 "collar_flux": float(collar_flux),
+                "bad_collar_flux": float(bad_collar_flux),
+                "good_collar_flux": float(good_collar_flux),
+                "collar_flux_refinement_residual": float(
+                    collar_flux - bad_collar_flux - good_collar_flux
+                ),
                 "remote_flux": float(remote_flux),
                 "upper_flux": float(upper_flux),
                 "upper_minus_collar_remote": float(
@@ -385,6 +401,10 @@ def _packet_layer_cake_split(
         ),
         "maximum_collar_refinement_residual": max(
             (abs(float(row["collar_refinement_residual"])) for row in interfaces),
+            default=0.0,
+        ),
+        "maximum_collar_flux_refinement_residual": max(
+            (abs(float(row["collar_flux_refinement_residual"])) for row in interfaces),
             default=0.0,
         ),
         "remote_spectral_cross_violation_count": sum(
