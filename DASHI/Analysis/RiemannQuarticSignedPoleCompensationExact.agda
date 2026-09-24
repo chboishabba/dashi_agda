@@ -462,3 +462,97 @@ jointFourthHarmonicControlIsTheWall :
   fourthHarmonicStatus zetaJointFourthHarmonicControl
     ≡ openAnalyticObstruction
 jointFourthHarmonicControlIsTheWall = refl
+
+
+------------------------------------------------------------------------
+-- LOCAL FOURTH-HARMONIC ZERO-CLOUD BALANCE
+--
+-- The Lean companion now packages the local fourth-order term as an actual
+-- statistic of the local zeta-zero cloud.
+--
+-- Define the signed physical phase moment
+--
+--   M4_local
+--     = sum_local,offOrd m_rho * Re(a_rho + i*delta_rho)^4.
+--
+-- Split it into nonnegative angular masses
+--
+--   M4_local = FavorableMass - AdverseMass
+--
+-- where FavorableMass is the positive part of the physical fourth phase and
+-- AdverseMass is the positive part of its negative.
+--
+-- Then
+--
+--   LocalFourthHarmonic
+--     = S(W)/(6*r^6) * (AdverseMass - FavorableMass),
+--
+-- and therefore
+--
+--   OffOrdExact
+--     <= S(W)/(6*r^6) * (AdverseMass - FavorableMass)
+--        + LocalSixthDebt
+--        + FarExact.
+--
+-- This identifies the current zeta-specific local question directly:
+-- prove enough favorable fourth-angular mass, relative to adverse mass,
+-- sixth-order debt and the signed far source, to produce the target gap.
+------------------------------------------------------------------------
+
+data FourthHarmonicBalanceCoordinate : Set where
+  radialMinusMixedFourthPhaseIdentity :
+    FourthHarmonicBalanceCoordinate
+  localFourthPhaseMomentDefinition :
+    FourthHarmonicBalanceCoordinate
+  localFourthFavorableMassDefinition :
+    FourthHarmonicBalanceCoordinate
+  localFourthAdverseMassDefinition :
+    FourthHarmonicBalanceCoordinate
+  localFourthMomentEqualsFavorableMinusAdverse :
+    FourthHarmonicBalanceCoordinate
+  localFourthSourceEqualsScaledAdverseMinusFavorable :
+    FourthHarmonicBalanceCoordinate
+  favorableFourthMassNonnegative :
+    FourthHarmonicBalanceCoordinate
+  adverseFourthMassNonnegative :
+    FourthHarmonicBalanceCoordinate
+  exactSourceBelowAngularBalancePlusSixthDebtPlusFar :
+    FourthHarmonicBalanceCoordinate
+  zetaFourthAngularBalance :
+    FourthHarmonicBalanceCoordinate
+
+fourthHarmonicBalanceStatus :
+  FourthHarmonicBalanceCoordinate -> CompensationStatus
+fourthHarmonicBalanceStatus radialMinusMixedFourthPhaseIdentity =
+  theoremOwned
+fourthHarmonicBalanceStatus localFourthPhaseMomentDefinition =
+  theoremOwned
+fourthHarmonicBalanceStatus localFourthFavorableMassDefinition =
+  theoremOwned
+fourthHarmonicBalanceStatus localFourthAdverseMassDefinition =
+  theoremOwned
+fourthHarmonicBalanceStatus localFourthMomentEqualsFavorableMinusAdverse =
+  theoremOwned
+fourthHarmonicBalanceStatus
+  localFourthSourceEqualsScaledAdverseMinusFavorable =
+  theoremOwned
+fourthHarmonicBalanceStatus favorableFourthMassNonnegative =
+  theoremOwned
+fourthHarmonicBalanceStatus adverseFourthMassNonnegative =
+  theoremOwned
+fourthHarmonicBalanceStatus
+  exactSourceBelowAngularBalancePlusSixthDebtPlusFar =
+  theoremOwned
+fourthHarmonicBalanceStatus zetaFourthAngularBalance =
+  openAnalyticObstruction
+
+angularBalanceBudgetIsPaid :
+  fourthHarmonicBalanceStatus
+    exactSourceBelowAngularBalancePlusSixthDebtPlusFar
+    ≡ theoremOwned
+angularBalanceBudgetIsPaid = refl
+
+zetaFourthAngularBalanceIsTheWall :
+  fourthHarmonicBalanceStatus zetaFourthAngularBalance
+    ≡ openAnalyticObstruction
+zetaFourthAngularBalanceIsTheWall = refl
