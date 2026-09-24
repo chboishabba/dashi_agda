@@ -218,6 +218,10 @@ round650C2EnergyGrowthMarginPaymentCompilesToC2 : Bool
 round650C2EnergyGrowthMarginPaymentCompilesToC2 =
   R659.round659EnergyGrowthMarginPaymentCompilesToC2
 
+round650C2ExactlyEquivalentToEnergyGrowthMarginPayment : Bool
+round650C2ExactlyEquivalentToEnergyGrowthMarginPayment =
+  R659.round659C2ExactlyEquivalentToEnergyGrowthMarginPayment
+
 round650C2EnergyGrowthMarginPaymentClosed : Bool
 round650C2EnergyGrowthMarginPaymentClosed =
   R659.round659EnergyGrowthMarginPaymentClosed
@@ -425,6 +429,11 @@ round650C2EnergyGrowthMarginPaymentCompilesToC2IsTrue :
   round650C2EnergyGrowthMarginPaymentCompilesToC2 ≡ true
 round650C2EnergyGrowthMarginPaymentCompilesToC2IsTrue =
   R659.round659EnergyGrowthMarginPaymentCompilesToC2IsTrue
+
+round650C2ExactlyEquivalentToEnergyGrowthMarginPaymentIsTrue :
+  round650C2ExactlyEquivalentToEnergyGrowthMarginPayment ≡ true
+round650C2ExactlyEquivalentToEnergyGrowthMarginPaymentIsTrue =
+  R659.round659C2ExactlyEquivalentToEnergyGrowthMarginPaymentIsTrue
 
 round650C2EnergyGrowthMarginPaymentClosedIsFalse :
   round650C2EnergyGrowthMarginPaymentClosed ≡ false
