@@ -26,6 +26,7 @@ import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as R498
 import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRound538Exact as R538
 import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as R534
+import DASHI.Physics.YangMills.YangMillsCylinderEventBooleanAlgebraRound539Exact as R539
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as R476
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
@@ -56,6 +57,14 @@ record PhysicalProjectiveCylinderRepresentationInputs
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division family
 
+    eventAlgebraLaws :
+      ∀ cutoff →
+      R539.ProbabilityEventBooleanAlgebraLaws
+        (R538.premeasure
+          (R538.levelProbability
+            (R538.asPositiveProjectiveCylinderProbability projectiveEvents)
+            cutoff))
+
     continuity :
       R534.ProjectiveContinuityAtEmpty
         (R538.asPositiveProjectiveCylinderProbability projectiveEvents)
@@ -78,6 +87,7 @@ record PhysicalProjectiveCylinderRepresentationInputs
       R534.integrate extensionAuthority
         (R534.extendProjective extensionAuthority
           (R538.asPositiveProjectiveCylinderProbability projectiveEvents)
+          eventAlgebraLaws
           continuity)
         observable
 
@@ -95,6 +105,8 @@ asProjectiveRepresentationInputs :
 asProjectiveRepresentationInputs inputs = record
   { R534.ProjectiveCylinderRepresentationInputs.projective =
       R538.asPositiveProjectiveCylinderProbability (projectiveEvents inputs)
+  ; R534.ProjectiveCylinderRepresentationInputs.eventAlgebraLaws =
+      eventAlgebraLaws inputs
   ; R534.ProjectiveCylinderRepresentationInputs.continuity =
       continuity inputs
   ; R534.ProjectiveCylinderRepresentationInputs.extensionAuthority =
@@ -130,6 +142,10 @@ literalRound535CylinderEventIndicatorSemanticsLevel =
 literalRound535ProjectiveEventExpectationConsistencyLevel : ProofLevel
 literalRound535ProjectiveEventExpectationConsistencyLevel =
   R538.literalRound538ProjectiveEventExpectationConsistencyLevel
+
+literalRound535CylinderEventBooleanAlgebraLevel : ProofLevel
+literalRound535CylinderEventBooleanAlgebraLevel =
+  R539.literalRound539CylinderEventBooleanAlgebraLevel
 
 literalRound535ProjectiveContinuityAtEmptyLevel : ProofLevel
 literalRound535ProjectiveContinuityAtEmptyLevel =
