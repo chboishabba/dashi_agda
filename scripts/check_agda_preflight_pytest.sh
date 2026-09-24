@@ -17,7 +17,7 @@ ARGS=(
   --agda-root "$ROOT"
   --agda-compact
   --agda-report-json "$REPORT"
-  --agda-extra-args "$AGDA_REFINE_ARGS"
+  "--agda-extra-args=$AGDA_REFINE_ARGS"
 )
 
 case "$REFINE" in
