@@ -144,6 +144,59 @@ negativeCouplingAttemptFails :
   ≡ nonzeroResidualCounterexample
 negativeCouplingAttemptFails = refl
 
+normalizedCouplingUnique :
+  (coupling : Geometry.UnitCoefficient) →
+  runEinsteinEquationAttempt coupling ≡ exactResidualZero →
+  coupling ≡ normalizedEightPiGCoupling
+normalizedCouplingUnique Geometry.negativeUnit ()
+normalizedCouplingUnique Geometry.zeroUnit ()
+normalizedCouplingUnique Geometry.positiveUnit _ = refl
+
+record FiniteSourcedEinsteinLawReceipt : Set where
+  constructor finiteSourcedEinsteinLawReceipt
+  field
+    selectedCoupling : Geometry.UnitCoefficient
+    selectedCouplingIsNormalized :
+      selectedCoupling ≡ normalizedEightPiGCoupling
+    sourcedEquationResidualZero :
+      (a b : Flat.Axis4) →
+      einsteinEquationResidual selectedCoupling a b ≡ Model.zeroSource
+    normalizedCouplingIsUnique :
+      (other : Geometry.UnitCoefficient) →
+      runEinsteinEquationAttempt other ≡ exactResidualZero →
+      other ≡ selectedCoupling
+    matterSourceIsNonzero :
+      Model.computedMatterStress Flat.timeAxis Flat.timeAxis
+      ≡ Model.positiveSource
+    contractedBianchiResidualZero :
+      Model.continuityBianchiResidual ≡ Model.zeroSource
+    physicalW4CalibrationIdentified : Bool
+    physicalW4CalibrationIdentifiedIsFalse :
+      physicalW4CalibrationIdentified ≡ false
+    continuumEinsteinLawPromoted : Bool
+    continuumEinsteinLawPromotedIsFalse :
+      continuumEinsteinLawPromoted ≡ false
+    grqftPromoted : Bool
+    grqftPromotedIsFalse :
+      grqftPromoted ≡ false
+
+open FiniteSourcedEinsteinLawReceipt public
+
+canonicalFiniteSourcedEinsteinLawReceipt :
+  FiniteSourcedEinsteinLawReceipt
+canonicalFiniteSourcedEinsteinLawReceipt =
+  finiteSourcedEinsteinLawReceipt
+    normalizedEightPiGCoupling
+    refl
+    normalizedEquationResidualPointwise
+    (λ other pass →
+      normalizedCouplingUnique other pass)
+    Model.computedMatterSourceNonzero
+    Model.computedContractedBianchi
+    false refl
+    false refl
+    false refl
+
 record EinsteinEquationBidiReceipt : Set where
   constructor einsteinEquationBidiReceipt
   field
