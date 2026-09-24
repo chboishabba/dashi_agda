@@ -23,7 +23,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSATShannonSemanticAuthorityExact
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Data.Empty using (⊥-elim)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Sum using (inj₁; inj₂)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -168,6 +168,17 @@ fullShannonAuthority oracle {suc variables} formula =
       oracle
       (SAT.restrictHead true formula))
 
+shannonTreeValue :
+  ∀ {depth : Nat} →
+  ShannonAuthorityTree depth →
+  Bool
+shannonTreeValue (shannonLeaf value) =
+  value
+shannonTreeValue (shannonBranch left right) =
+  SAT.orBool
+    (shannonTreeValue left)
+    (shannonTreeValue right)
+
 fullShannonAuthorityLeafCount :
   (oracle : SAT.SATDecisionOracle) →
   ∀ {variables : Nat}
@@ -188,6 +199,54 @@ fullShannonAuthorityLeafCount
         oracle
         (SAT.restrictHead true formula) =
   refl
+
+fullShannonAuthorityComputesRootDecision :
+  (oracle : SAT.SATDecisionOracle) →
+  ∀ {variables : Nat}
+    (formula : SAT.BooleanFormula variables) →
+  shannonTreeValue
+    (fullShannonAuthority oracle formula)
+  ≡
+  Search.decide oracle formula
+fullShannonAuthorityComputesRootDecision
+    oracle {zero} formula =
+  refl
+fullShannonAuthorityComputesRootDecision
+    oracle {suc variables} formula =
+  transitive
+    (congruence
+      (fullShannonAuthorityComputesRootDecision
+        oracle
+        (SAT.restrictHead false formula))
+      (fullShannonAuthorityComputesRootDecision
+        oracle
+        (SAT.restrictHead true formula)))
+    (symmetry
+      (satDecisionShannon oracle formula))
+  where
+    congruence :
+      ∀ {left₁ left₂ right₁ right₂ : Bool} →
+      left₁ ≡ left₂ →
+      right₁ ≡ right₂ →
+      SAT.orBool left₁ right₁
+      ≡ SAT.orBool left₂ right₂
+    congruence refl refl =
+      refl
+
+    symmetry :
+      ∀ {A : Set} {left right : A} →
+      left ≡ right →
+      right ≡ left
+    symmetry refl =
+      refl
+
+    transitive :
+      ∀ {A : Set} {left middle right : A} →
+      left ≡ middle →
+      middle ≡ right →
+      left ≡ right
+    transitive refl refl =
+      refl
 
 ------------------------------------------------------------------------
 -- The root decision is determined by the two child decisions, but recursively
