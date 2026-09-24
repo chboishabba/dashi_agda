@@ -7,6 +7,9 @@ It **does not replace Agda**. Tree-sitter provides the incremental syntax tree;
 the preflight layer adds a small symbol/record/type-shape model and an import
 DAG. Agda remains the kernel/typechecker and the final source of truth.
 
+The package uses the Tree-sitter 0.25–0.26 runtime line required by
+`tree-sitter-agda` 1.3.3's PyCapsule language binding.
+
 ## Initial diagnostics
 
 - `TSAGDA000`: tree-sitter syntax error / missing node
