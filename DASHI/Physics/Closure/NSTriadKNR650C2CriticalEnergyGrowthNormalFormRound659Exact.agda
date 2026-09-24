@@ -233,6 +233,57 @@ module EnergyGrowth
     Radial.radialSurplusPaymentBuildsStrictMarginC2
       (energyGrowthPaymentBuildsRadialSurplusPayment P)
 
+  strictMarginC2BuildsEnergyGrowthPayment :
+    ∀ {D C R cutoff terminal} →
+    Strict.StrictMarginPhysicalProductionData D C R cutoff terminal →
+    CriticalEnergyGrowthMarginPayment D C R cutoff terminal
+  strictMarginC2BuildsEnergyGrowthPayment
+      {D} {C} {R} {cutoff} {terminal} P =
+    record
+      { retainedMargin = Strict.retainedMargin P
+      ; retainedMarginPositive = Strict.retainedMarginPositive P
+      ; criticalEnergyGrowthPaidByLiteralR406 = growthPaid
+      }
+    where
+    T = Live.literalPhysicalTrajectory D
+    margin = Strict.retainedMargin P
+    coeff =
+      (Fold.two * Live.physicalViscosity (Live.support D)) - margin
+    prod = Obs.integratedCriticalProduction T cutoff terminal
+    diss = Obs.integratedCriticalDissipation T cutoff terminal
+    remainder =
+      Unified.literalRemainderIntegral T R cutoff terminal
+
+    shifted :
+      prod + (- (coeff * diss))
+      ≤ (coeff * diss + remainder) + (- (coeff * diss))
+    shifted =
+      Data.Rational.Properties.+-mono-≤
+        (Strict.strictMarginProductionEstimate P)
+        Data.Rational.Properties.≤-refl
+
+    surplusPaid :
+      prod - coeff * diss ≤ remainder
+    surplusPaid =
+      subst
+        (λ left → left ≤ remainder)
+        (solve (prod ∷ coeff ∷ diss ∷ []))
+        (subst
+          (λ right →
+            prod + (- (coeff * diss)) ≤ right)
+          (solve (coeff ∷ diss ∷ remainder ∷ []))
+          shifted)
+
+    growthPaid :
+      criticalEnergyGrowthWithMargin D cutoff margin terminal
+      ≤ remainder
+    growthPaid =
+      subst
+        (λ left → left ≤ remainder)
+        (literalStrictSurplusIsCriticalEnergyGrowthWithMargin
+          D C cutoff margin terminal)
+        surplusPaid
+
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
@@ -245,6 +296,12 @@ round659RadialSurplusEqualsCriticalEnergyGrowthPlusMargin = true
 
 round659EnergyGrowthMarginPaymentCompilesToC2 : Bool
 round659EnergyGrowthMarginPaymentCompilesToC2 = true
+
+round659C2CompilesBackToEnergyGrowthMarginPayment : Bool
+round659C2CompilesBackToEnergyGrowthMarginPayment = true
+
+round659C2ExactlyEquivalentToEnergyGrowthMarginPayment : Bool
+round659C2ExactlyEquivalentToEnergyGrowthMarginPayment = true
 
 round659EnergyGrowthMarginPaymentClosed : Bool
 round659EnergyGrowthMarginPaymentClosed = false
@@ -272,6 +329,14 @@ round659RadialSurplusEqualsCriticalEnergyGrowthPlusMarginIsTrue = refl
 round659EnergyGrowthMarginPaymentCompilesToC2IsTrue :
   round659EnergyGrowthMarginPaymentCompilesToC2 ≡ true
 round659EnergyGrowthMarginPaymentCompilesToC2IsTrue = refl
+
+round659C2CompilesBackToEnergyGrowthMarginPaymentIsTrue :
+  round659C2CompilesBackToEnergyGrowthMarginPayment ≡ true
+round659C2CompilesBackToEnergyGrowthMarginPaymentIsTrue = refl
+
+round659C2ExactlyEquivalentToEnergyGrowthMarginPaymentIsTrue :
+  round659C2ExactlyEquivalentToEnergyGrowthMarginPayment ≡ true
+round659C2ExactlyEquivalentToEnergyGrowthMarginPaymentIsTrue = refl
 
 round659EnergyGrowthMarginPaymentClosedIsFalse :
   round659EnergyGrowthMarginPaymentClosed ≡ false
