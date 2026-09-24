@@ -154,8 +154,12 @@ class AgdaScopeCheckBackend:
         self.cwd = cwd
         self.timeout = timeout
         self.extra_args = tuple(extra_args)
+        self.attempted = 0
+        self.succeeded = 0
+        self.failed = 0
 
     def _scope_ok(self, path: Path) -> bool:
+        self.attempted += 1
         completed = subprocess.run(
             [
                 self.agda_bin,
@@ -169,7 +173,12 @@ class AgdaScopeCheckBackend:
             timeout=self.timeout,
             check=False,
         )
-        return completed.returncode == 0
+        ok = completed.returncode == 0
+        if ok:
+            self.succeeded += 1
+        else:
+            self.failed += 1
+        return ok
 
     def refine(self, summary, diagnostics: List):
         if not self._scope_ok(summary.path):
@@ -207,8 +216,12 @@ class AgdaTypecheckBackend:
         self.cwd = cwd
         self.timeout = timeout
         self.extra_args = tuple(extra_args)
+        self.attempted = 0
+        self.succeeded = 0
+        self.failed = 0
 
     def _typecheck_ok(self, path: Path) -> bool:
+        self.attempted += 1
         completed = subprocess.run(
             [
                 self.agda_bin,
@@ -221,7 +234,12 @@ class AgdaTypecheckBackend:
             timeout=self.timeout,
             check=False,
         )
-        return completed.returncode == 0
+        ok = completed.returncode == 0
+        if ok:
+            self.succeeded += 1
+        else:
+            self.failed += 1
+        return ok
 
     def refine(self, summary, diagnostics: List):
         if not self._typecheck_ok(summary.path):
@@ -282,6 +300,20 @@ class AgdaAutoRefineBackend:
             and policy_for(diagnostic.code).minimum == level
             for diagnostic in diagnostics
         )
+
+    def stats(self):
+        return {
+            "scope": {
+                "attempted": self.scope.attempted,
+                "succeeded": self.scope.succeeded,
+                "failed": self.scope.failed,
+            },
+            "typecheck": {
+                "attempted": self.typecheck.attempted,
+                "succeeded": self.typecheck.succeeded,
+                "failed": self.typecheck.failed,
+            },
+        }
 
     def refine(self, summary, diagnostics: List):
         current = diagnostics
