@@ -802,3 +802,121 @@ def test_auto_refine_can_use_exit_code_scope_runner(tmp_path):
         "--only-scope-checking",
         "{file}",
     )
+
+
+
+def test_command_scope_runner_extracts_agda_checked_modules():
+    output = """Logging Agda output to: /tmp/log
+Checking: DASHI/Everything.agda
+Checking DASHI.Core.Prelude (/shadow/DASHI/Core/Prelude.agda).
+Checking DASHI.Algebra.Foo (/shadow/DASHI/Algebra/Foo.agda).
+Checking DASHI.Biology.Broken (/shadow/DASHI/Biology/Broken.agda).
+"""
+    modules = CommandScopeCheckBackend._checked_modules(output)
+    assert modules == (
+        "DASHI.Core.Prelude",
+        "DASHI.Algebra.Foo",
+        "DASHI.Biology.Broken",
+    )
+
+
+def test_failed_command_scope_probe_excludes_last_checked_module(tmp_path, monkeypatch):
+    path = write_module(tmp_path, "Root")
+    backend = CommandScopeCheckBackend(["shadow-check", "{file}"], cwd=tmp_path)
+
+    class Completed:
+        returncode = 1
+        stdout = (
+            "Checking A.Good (/shadow/A/Good.agda).\n"
+            "Checking A.AlsoGood (/shadow/A/AlsoGood.agda).\n"
+            "Checking A.Broken (/shadow/A/Broken.agda).\n"
+        )
+        stderr = "type mismatch"
+
+    monkeypatch.setattr(
+        "agda_preflight.scope_backend.subprocess.run",
+        lambda *args, **kwargs: Completed(),
+    )
+
+    assert backend._scope_ok(path) is False
+    assert backend.last_checked_modules == (
+        "A.Good",
+        "A.AlsoGood",
+        "A.Broken",
+    )
+    assert backend.last_partial_validated_modules == (
+        "A.Good",
+        "A.AlsoGood",
+    )
+    assert "A.Broken" not in backend.partial_validated_modules
+
+
+def test_timeout_scope_probe_recovers_completed_prefix(tmp_path, monkeypatch):
+    path = write_module(tmp_path, "RootTimeout")
+    backend = CommandScopeCheckBackend(["shadow-check", "{file}"], cwd=tmp_path)
+
+    def timeout(*args, **kwargs):
+        raise __import__("subprocess").TimeoutExpired(
+            cmd=args[0],
+            timeout=kwargs.get("timeout", 1),
+            output=(
+                "Checking A.One (/shadow/A/One.agda).\n"
+                "Checking A.Two (/shadow/A/Two.agda).\n"
+            ),
+            stderr="",
+        )
+
+    monkeypatch.setattr(
+        "agda_preflight.scope_backend.subprocess.run",
+        timeout,
+    )
+
+    assert backend._scope_ok(path) is False
+    assert backend.last_partial_validated_modules == ("A.One",)
+
+
+def test_partial_scope_progress_bulk_certifies_before_fallback(tmp_path):
+    good = write_module(tmp_path, "Q.Good")
+    broken = write_module(tmp_path, "Q.Broken")
+    top = write_module(
+        tmp_path,
+        "Q.Top",
+        "\nimport Q.Good\nimport Q.Broken\n",
+    )
+
+    backend = AgdaAutoRefineBackend(
+        "unused",
+        scope_command="shadow-check {file}",
+    )
+    calls = []
+
+    def probe(path, *, aggregate_root=False):
+        key = Path(path).resolve()
+        calls.append(key)
+        if key == top.resolve():
+            backend._scope_failed.add(key)
+            backend.scope.last_partial_validated_modules = ("Q.Good", "Q.Broken")
+            # Simulate a conservative failing prefix: plugin should map these
+            # names, but the failing module must not appear in real backend
+            # output's partial list. Keep only Good here.
+            backend.scope.last_partial_validated_modules = ("Q.Good",)
+            return False
+        if key == broken.resolve():
+            backend._scope_failed.add(key)
+            backend.scope.last_partial_validated_modules = ()
+            return False
+        raise AssertionError(f"unexpected probe: {key}")
+
+    backend.probe_scope = probe
+    checker = Checker(tmp_path, scope_backend=backend)
+    checker.structural_check = lambda path: _scope_deferred(Path(path))
+    collected = [
+        CollectedModule("Q.Good", good),
+        CollectedModule("Q.Broken", broken),
+        CollectedModule("Q.Top", top),
+    ]
+
+    _prime_scope_closure(checker, top, collected)
+
+    assert backend.scope_validated(good)
+    assert calls == [top.resolve(), broken.resolve()]
