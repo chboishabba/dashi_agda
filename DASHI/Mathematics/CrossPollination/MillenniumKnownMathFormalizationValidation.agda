@@ -9,6 +9,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHodgeReopeningCompilerExact as HodgeCP
+import DASHI.Mathematics.AlgebraicGeometry.HodgeAlgebraicCycleClayCoreExact as HodgeCore
 import DASHI.Mathematics.Arithmetic.EllipticCurveGlobalLocalCoefficientExact as BSDLocal
 import DASHI.Mathematics.Automorphic.TruncatedLFunctionExact as Truncated
 import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationExact as PNP
@@ -80,3 +81,34 @@ goodPrimeRestrictionTheoremAvailable :
   ≡ BSDLocal.localPolynomialValue (BSDLocal.localAtPrime family p) T
 goodPrimeRestrictionTheoremAvailable =
   BSDLocal.restrictedLocalFactorIsGlobal
+
+
+------------------------------------------------------------------------
+-- Hodge Clay freeze receipts: the remaining conjectural endpoint is now
+-- typed on literal RationalAlgebraicCycle, while comparison/cycle-class
+-- construction remains established-background debt.
+------------------------------------------------------------------------
+
+hodgeRationalIntersectionTypedExactly :
+  HodgeCore.rationalIntersectionTypedExactly
+    HodgeCore.canonicalHodgeClayFreezeBoundary
+  ≡ true
+hodgeRationalIntersectionTypedExactly = refl
+
+hodgeLiteralAlgebraicCycleCarrierPaid :
+  HodgeCore.algebraicCycleCarrierTypedLiterally
+    HodgeCore.canonicalHodgeClayFreezeBoundary
+  ≡ true
+hodgeLiteralAlgebraicCycleCarrierPaid = refl
+
+hodgeCycleComparisonRemainsBackground :
+  HodgeCore.cycleComparisonStillBackground
+    HodgeCore.canonicalHodgeClayFreezeBoundary
+  ≡ true
+hodgeCycleComparisonRemainsBackground = refl
+
+hodgeUniversalReopeningStillOpen :
+  HodgeCore.universalAlgebraicReopeningProved
+    HodgeCore.canonicalHodgeClayFreezeBoundary
+  ≡ false
+hodgeUniversalReopeningStillOpen = refl
