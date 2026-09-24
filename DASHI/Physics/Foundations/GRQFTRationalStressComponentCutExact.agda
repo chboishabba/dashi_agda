@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 open import Data.Rational.Base using (ℚ; +_; -[1+_]; 0ℚ; _+_; _-_)
 open import Data.Nat.Base using (zero)
 

@@ -163,3 +163,6 @@ import DASHI.Physics.Foundations.GRQFTTheoryValidationSplitValidation
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact
 import DASHI.Physics.Foundations.GRQFTConcreteInstanceFrontierV2Exact
 import DASHI.Physics.Foundations.GRQFTConcreteInstanceFrontierV2Validation
+
+import DASHI.Physics.Foundations.GRQFTCommonRegimeBidiAttemptExact
+import DASHI.Physics.Foundations.GRQFTCommonRegimeBidiAttemptValidation
