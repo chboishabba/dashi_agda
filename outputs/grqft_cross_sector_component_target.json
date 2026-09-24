@@ -34,6 +34,6 @@
     ]
   ],
   "physical_si_calibration_claimed": false,
-  "required_next_input": "16 CMP119/YM stress components in the same normalized rational carrier",
+  "required_next_input": "metric-basis/symmetry bridge plus ten independent CMP119/YM stress components in the same normalized rational carrier",
   "status": "qft_component_data_missing"
 }
