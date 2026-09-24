@@ -7,7 +7,7 @@ import sys
 
 from .checker import Checker, Diagnostic
 from .rules import api_snapshot, api_drift
-from .scope_backend import AgdaScopeCheckBackend, ExternalScopeBackend
+from .scope_backend import AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
 
 
 def _format(diag) -> str:
@@ -58,6 +58,11 @@ def main(argv=None) -> int:
         action="store_true",
         help="run Agda --only-scope-checking to suppress false scope diagnostics",
     )
+    scope_group.add_argument(
+        "--agda-typecheck-oracle",
+        action="store_true",
+        help="run full Agda checking to suppress false scope/type diagnostics",
+    )
     parser.add_argument(
         "--agda-bin",
         default="agda",
@@ -70,6 +75,8 @@ def main(argv=None) -> int:
         scope_backend = ExternalScopeBackend(args.agda_scope_command, cwd=args.root)
     elif args.agda_scope_check:
         scope_backend = AgdaScopeCheckBackend(args.agda_bin, cwd=args.root)
+    elif args.agda_typecheck_oracle:
+        scope_backend = AgdaTypecheckBackend(args.agda_bin, cwd=args.root)
     checker = Checker(args.root, scope_backend=scope_backend)
 
     if args.write_api_snapshot:
