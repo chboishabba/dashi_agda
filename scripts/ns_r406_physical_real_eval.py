@@ -279,6 +279,11 @@ def projected_state(
     )
     advective, pressure = nonlinear_momentum_components(retained, wave, norm_sq, cube)
     forcing = advective + pressure
+    zero_mode_forcing_residual = float(np.max(np.abs(forcing[0, 0, 0])))
+    # The canonical periodic physical carrier is zero-mean and retains only
+    # nonzero modes.  The continuum identity gives N_0=0; enforce that exact
+    # carrier convention after recording the floating residual.
+    forcing[0, 0, 0] = 0.0
 
     divergence = np.einsum("...i,...i->...", wave, retained)
     return retained, forcing, {
@@ -286,6 +291,8 @@ def projected_state(
         "formal_cutoff": formal_cutoff,
         "alias_safe_cutoff_max": max_alias_free,
         "retained_divergence_max_residual": float(np.max(np.abs(divergence))),
+        "pre_enforcement_zero_mode_forcing_residual": zero_mode_forcing_residual,
+        "zero_mode_forcing_enforced": True,
     }
 
 
