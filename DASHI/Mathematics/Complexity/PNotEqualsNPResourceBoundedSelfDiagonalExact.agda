@@ -45,6 +45,7 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPDiagonalizationSourceAtlasExact as Sources
+import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 
 ------------------------------------------------------------------------
 -- Tiny logical utilities.
@@ -392,6 +393,101 @@ explicitTableauRuleCannotEncodeQuadraticSelfFormula
       formula
       sizeAtLeastTwo
       quadraticLowerBound)
+
+
+------------------------------------------------------------------------
+-- ARBITRARY DEGREE >= 2 MONOMIAL SPECIALIZATION
+--
+-- For n >= 2, every monomial n^(2+r) dominates n^2 and therefore strictly
+-- exceeds n.  This turns any self-runtime lower bound of degree at least two
+-- into the same explicit-tableau contradiction.
+------------------------------------------------------------------------
+
+powAtLeastSquare :
+  (n extraDegree : Nat) →
+  suc zero ≤ n →
+  n * n ≤ ERQ.pow n (suc (suc extraDegree))
+powAtLeastSquare n zero nPositive =
+  NatP.≤-refl
+powAtLeastSquare n (suc extraDegree) nPositive =
+  NatP.≤-trans
+    (powAtLeastSquare n extraDegree nPositive)
+    previousPowerBelowNext
+  where
+    previousPower :
+      Nat
+    previousPower =
+      ERQ.pow n (suc (suc extraDegree))
+
+    previousPowerBelowNext :
+      previousPower
+      ≤ ERQ.pow n (suc (suc (suc extraDegree)))
+    previousPowerBelowNext =
+      NatP.≤-trans
+        (NatP.m≤m*n previousPower n)
+        (NatP.≤-reflexive
+          (NatP.*-comm previousPower n))
+
+monomialRuntimeStrictlyExceedsFormula :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {resource : SelfEvaluationCostModel candidate}
+    (formula : Cook.BooleanFormula)
+    (extraDegree : Nat) →
+  two ≤ SelfEvaluationCostModel.formulaSize resource formula →
+  ERQ.pow
+      (SelfEvaluationCostModel.formulaSize resource formula)
+      (suc (suc extraDegree))
+    ≤ SelfEvaluationCostModel.selfEvaluationSteps resource formula →
+  SuperlinearAtSelfFormula resource formula
+monomialRuntimeStrictlyExceedsFormula
+    {resource = resource}
+    formula extraDegree sizeAtLeastTwo monomialLowerBound =
+  superlinear-at-self-formula
+    (NatP.<-≤-trans
+      (squareStrictlyAboveAtLeastTwo size sizeAtLeastTwo)
+      (NatP.≤-trans
+        (powAtLeastSquare
+          size
+          extraDegree
+          sizePositive)
+        monomialLowerBound))
+  where
+    size :
+      Nat
+    size =
+      SelfEvaluationCostModel.formulaSize resource formula
+
+    sizePositive :
+      suc zero ≤ size
+    sizePositive =
+      NatP.≤-trans
+        (s≤s z≤n)
+        sizeAtLeastTwo
+
+explicitTableauRuleCannotEncodeDegreeAtLeastTwoSelfFormula :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {resource : SelfEvaluationCostModel candidate} →
+  ExplicitTableauEncodingRule resource →
+  (formula : Cook.BooleanFormula)
+  (extraDegree : Nat) →
+  two ≤ SelfEvaluationCostModel.formulaSize resource formula →
+  ERQ.pow
+      (SelfEvaluationCostModel.formulaSize resource formula)
+      (suc (suc extraDegree))
+    ≤ SelfEvaluationCostModel.selfEvaluationSteps resource formula →
+  ⊥
+explicitTableauRuleCannotEncodeDegreeAtLeastTwoSelfFormula
+    rule formula extraDegree sizeAtLeastTwo monomialLowerBound =
+  explicitTableauRuleCannotEncodeSuperlinearSelfFormula
+    rule
+    formula
+    (monomialRuntimeStrictlyExceedsFormula
+      formula
+      extraDegree
+      sizeAtLeastTwo
+      monomialLowerBound)
 
 ------------------------------------------------------------------------
 -- What a successful succinct mechanism has to beat.
