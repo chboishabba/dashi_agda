@@ -146,21 +146,53 @@ All documented `TSAGDA...` codes must be explicitly classified in
 `evidence.py`; an unclassified diagnostic is a programming error.
 
 The current scope-dependent family includes checks whose truth can change after
-Agda resolves opens/renamings, overloaded or mixfix names, partial application,
-implicit insertion, or dependent local scope. Examples include:
+Agda resolves opens/renamings, overloaded or mixfix names, or dependent local
+scope. Examples include:
 
 ```text
 TSAGDA022  unknown/malformed alias use
 TSAGDA024  hiding entry validity across re-export chains
 TSAGDA026  rename/open collision
 TSAGDA027  ambiguous unqualified open
-TSAGDA041  under-application in a saturated context
 TSAGDA055  ambiguous opened projection
-TSAGDA076  function used as a type / partial application
 TSAGDA084  inaccessible-pattern scope
 TSAGDA113  apparently unbound RHS identifier
 TSAGDA154  ambiguous opened operator
 ```
+
+### Native Agda scope oracle
+
+Agda itself exposes `--only-scope-checking`. The preflight checker can use it
+directly:
+
+```bash
+dashi-agda-preflight --agda-scope-check FILE.agda
+```
+
+or through pytest:
+
+```bash
+pytest --agda-preflight --agda-deps --agda-scope-check --agda-root . \
+  DASHI/Everything.agda -vv
+```
+
+Use `--agda-bin /path/to/agda` when Agda is not on `PATH`.
+
+This mode is intentionally a **negative oracle**. If Agda successfully
+scope-checks a module, diagnostics whose minimum evidence is `AGDA_SCOPE` are
+suppressed. If scope checking fails, the backend does not guess which structural
+suspicion caused the failure, so those diagnostics remain advisory.
+
+Some superficially similar checks actually require typechecking, not scope
+checking. In particular:
+
+```text
+TSAGDA041  under-application in a saturated context
+TSAGDA076  function used as a type / partial application
+```
+
+have minimum evidence `AGDA_TYPECHECKER`; successful scope checking cannot
+promote or suppress them.
 
 ### Optional Agda scope refinement
 
