@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 from pathlib import Path
 import sys
 
@@ -78,20 +79,35 @@ def main(argv=None) -> int:
         default="agda",
         help="Agda executable for --agda-scope-check (default: agda)",
     )
+    parser.add_argument(
+        "--agda-extra-args",
+        default="",
+        help="extra arguments passed to Agda scope/typecheck refinement subprocesses",
+    )
     args = parser.parse_args(argv)
 
+    agda_extra_args = tuple(shlex.split(args.agda_extra_args or ""))
     scope_backend = None
     if args.agda_scope_command:
         scope_backend = ExternalScopeBackend(args.agda_scope_command, cwd=args.root)
     elif args.agda_scope_check:
-        scope_backend = AgdaScopeCheckBackend(args.agda_bin, cwd=args.root)
+        scope_backend = AgdaScopeCheckBackend(
+            args.agda_bin,
+            cwd=args.root,
+            extra_args=agda_extra_args,
+        )
     elif args.agda_typecheck_oracle:
-        scope_backend = AgdaTypecheckBackend(args.agda_bin, cwd=args.root)
+        scope_backend = AgdaTypecheckBackend(
+            args.agda_bin,
+            cwd=args.root,
+            extra_args=agda_extra_args,
+        )
     elif args.agda_auto_refine:
         scope_backend = AgdaAutoRefineBackend(
             args.agda_bin,
             cwd=args.root,
             typecheck=args.agda_auto_refine == "typecheck",
+            extra_args=agda_extra_args,
         )
     checker = Checker(args.root, scope_backend=scope_backend)
 
