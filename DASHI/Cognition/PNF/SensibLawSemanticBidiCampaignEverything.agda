@@ -30,6 +30,7 @@ import DASHI.Cognition.PNF.SensibLawConversationalSourceFamilyExact as Conversat
 import DASHI.Cognition.PNF.SensibLawMatterContextProjectionExact as MatterContext
 import DASHI.Cognition.PNF.SensibLawMatterWorkspaceProjectionExact as MatterWorkspace
 import DASHI.Cognition.PNF.SensibLawMinimalMatterHandoffExact as MinimalHandoff
+import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as MatterAcceptance
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
