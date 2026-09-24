@@ -90,6 +90,7 @@ class AstData:
     line: int
     constructors: Dict[str, AstConstructor] = field(default_factory=dict)
     constructor_occurrences: List[AstConstructor] = field(default_factory=list)
+    constructor_node_spans: Set[Tuple[int, int]] = field(default_factory=set)
     node: object | None = None
 
 
@@ -613,24 +614,38 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
     related = [node]
     sibling = node.next_named_sibling
     while sibling is not None:
+        tokens = [token.text for token in significant_tokens(source_bytes, sibling)]
+
+        is_where_wrapper = (
+            sibling.type == "function"
+            and tokens
+            and tokens[0] == "where"
+        )
+        if sibling.start_point[1] <= node.start_point[1] and not is_where_wrapper:
+            break
+
         if sibling.type in {"fields", "record_constructor"}:
             related.append(sibling)
             sibling = sibling.next_named_sibling
             continue
 
-        tokens = [token.text for token in significant_tokens(source_bytes, sibling)]
         if sibling.type == "ERROR":
             if tokens[:1] in (["constructor"], ["field"], ["where"]):
                 related.append(sibling)
                 sibling = sibling.next_named_sibling
                 continue
 
-        # tree-sitter-agda 1.3.3 can emit the record where keyword as a
-        # sibling function wrapper between record_signature and fields.
-        if sibling.type == "function" and tokens and tokens[0] == "where":
-            related.append(sibling)
-            sibling = sibling.next_named_sibling
-            continue
+        if sibling.type == "function" and tokens:
+            if tokens[0] == "where":
+                related.append(sibling)
+                sibling = sibling.next_named_sibling
+                continue
+            if tokens[0] == "constructor":
+                related.append(sibling)
+                if len(tokens) >= 2 and rec.constructor is None:
+                    rec.constructor = tokens[1]
+                sibling = sibling.next_named_sibling
+                continue
         break
 
     for owner in related:
@@ -638,6 +653,10 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
         if ctor is not None and rec.constructor is None:
             ident = first_descendant(ctor, "id")
             rec.constructor = _name_from_node(source_bytes, ident)
+        elif rec.constructor is None and owner.type in {"function", "ERROR"}:
+            tokens = [token.text for token in significant_tokens(source_bytes, owner)]
+            if len(tokens) >= 2 and tokens[0] == "constructor":
+                rec.constructor = tokens[1]
 
         for fields_node in descendants(owner, "fields"):
             for sig in descendants(fields_node, "signature"):
@@ -714,9 +733,19 @@ def _data_from_node(source_bytes: bytes, node) -> Optional[AstData]:
     if not name:
         return None
     decl = AstData(name=name, line=line_of(node), node=node)
-    # Constructor declarations are function signatures nested directly in the
-    # data declaration's where block. Nested records/functions are excluded by
-    # accepting signatures whose closest data ancestor is this node.
+
+    def add_constructor(fn) -> bool:
+        sig = _function_signature(source_bytes, fn)
+        if sig is None:
+            return False
+        cname = sig.names[0]
+        ctor = AstConstructor(cname, sig.type_text, sig.line, name, sig.type_node)
+        decl.constructor_occurrences.append(ctor)
+        decl.constructors[cname] = ctor
+        decl.constructor_node_spans.add((fn.start_byte, fn.end_byte))
+        return True
+
+    # Normal data declarations contain constructor functions as descendants.
     for fn in descendants(node, "function"):
         parent = fn.parent
         closest_data = None
@@ -725,17 +754,27 @@ def _data_from_node(source_bytes: bytes, node) -> Optional[AstData]:
                 closest_data = parent
                 break
             parent = parent.parent
-        if closest_data != node:
-            continue
-        sig = _function_signature(source_bytes, fn)
-        if sig is None:
-            continue
-        cname = sig.names[0]
-        ctor = AstConstructor(cname, sig.type_text, sig.line, name, sig.type_node)
-        decl.constructor_occurrences.append(ctor)
-        decl.constructors[cname] = ctor
-    return decl
+        if closest_data == node:
+            add_constructor(fn)
 
+    # tree-sitter-agda can emit a data signature followed by indented
+    # function siblings for constructors. Recover only that indented run.
+    if node.type == "data_signature":
+        sibling = node.next_named_sibling
+        while sibling is not None:
+            if sibling.start_point[1] <= node.start_point[1]:
+                break
+            tokens = [token.text for token in significant_tokens(source_bytes, sibling)]
+            if sibling.type == "function":
+                if tokens and tokens[0] == "where":
+                    sibling = sibling.next_named_sibling
+                    continue
+                if add_constructor(sibling):
+                    sibling = sibling.next_named_sibling
+                    continue
+            break
+
+    return decl
 
 
 def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpression:
@@ -872,6 +911,7 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
     # work, while summaries below deliberately use only outer/module-level
     # function declarations unless they belong to data/record bodies.
     last_clause_owner: Optional[str] = None
+    recovered_constructor_spans: Set[Tuple[int, int]] = set()
     for node in descendants(root):
         if node.type == "open":
             imp, opened = _parse_open_node(source_bytes, node)
@@ -898,11 +938,20 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
                         existing.constructor = rec.constructor
                     existing.field_occurrences.extend(rec.field_occurrences)
                     existing.fields.update(rec.fields)
-        elif node.type == "data":
+        elif node.type in {"data", "data_signature"}:
             data = _data_from_node(source_bytes, node)
             if data is not None:
-                index.data[data.name] = data
+                existing = index.data.get(data.name)
+                if existing is None:
+                    index.data[data.name] = data
+                else:
+                    existing.constructor_occurrences.extend(data.constructor_occurrences)
+                    existing.constructors.update(data.constructors)
+                    existing.constructor_node_spans.update(data.constructor_node_spans)
+                recovered_constructor_spans.update(data.constructor_node_spans)
         elif node.type == "function":
+            if (node.start_byte, node.end_byte) in recovered_constructor_spans:
+                continue
             # Exclude constructor/record-local function declarations from the
             # module-level signature/definition tables.
             parent = node.parent
