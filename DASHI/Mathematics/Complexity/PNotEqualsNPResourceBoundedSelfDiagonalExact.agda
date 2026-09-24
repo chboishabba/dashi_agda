@@ -36,7 +36,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Empty using (⊥)
-open import Data.Nat.Base using (_≤_; _<_)
+open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
@@ -297,6 +297,101 @@ explicitTableauRuleCannotEncodeSuperlinearSelfFormula
     (NatP.<-≤-trans
       (strict superlinear)
       (explicitTableauLowerBound rule formula))
+
+
+------------------------------------------------------------------------
+-- QUADRATIC SELF-RUNTIME SPECIALIZATION
+--
+-- The abstract no-go above takes a strict self-runtime inequality as input.
+-- The first genuinely superlinear polynomial case can be paid arithmetically:
+--
+--   N >= 2  and  N^2 <= T_D(phi)
+--          =>
+--   N < T_D(phi).
+--
+-- Thus any literal one-formula-unit-per-step tableau is impossible at such a
+-- self-generated formula.  This is the concrete N versus N^2 obstruction
+-- discussed in the diagonal programme; it is repo-native arithmetic, not an
+-- imported complexity theorem.
+------------------------------------------------------------------------
+
+two : Nat
+two = suc (suc zero)
+
+zeroLessThanTwo : zero < two
+zeroLessThanTwo =
+  s≤s z≤n
+
+leftStrictAddPositive :
+  (left right : Nat) →
+  zero < right →
+  left < left + right
+leftStrictAddPositive zero right rightPositive =
+  rightPositive
+leftStrictAddPositive (suc left) right rightPositive =
+  s≤s
+    (leftStrictAddPositive left right rightPositive)
+
+squareStrictlyAboveAtLeastTwo :
+  (n : Nat) →
+  two ≤ n →
+  n < n * n
+squareStrictlyAboveAtLeastTwo n twoLeN =
+  NatP.<-≤-trans
+    nBelowDouble
+    (NatP.*-monoʳ-≤ n twoLeN)
+  where
+    nPositive : zero < n
+    nPositive =
+      NatP.<-≤-trans
+        zeroLessThanTwo
+        twoLeN
+
+    nBelowDouble : n < n * two
+    nBelowDouble =
+      leftStrictAddPositive n n nPositive
+
+quadraticRuntimeStrictlyExceedsFormula :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {resource : SelfEvaluationCostModel candidate}
+    (formula : Cook.BooleanFormula) →
+  two ≤ SelfEvaluationCostModel.formulaSize resource formula →
+  SelfEvaluationCostModel.formulaSize resource formula
+    * SelfEvaluationCostModel.formulaSize resource formula
+    ≤ SelfEvaluationCostModel.selfEvaluationSteps resource formula →
+  SuperlinearAtSelfFormula resource formula
+quadraticRuntimeStrictlyExceedsFormula
+    {resource = resource}
+    formula sizeAtLeastTwo quadraticLowerBound =
+  superlinear-at-self-formula
+    (NatP.<-≤-trans
+      (squareStrictlyAboveAtLeastTwo
+        (SelfEvaluationCostModel.formulaSize resource formula)
+        sizeAtLeastTwo)
+      quadraticLowerBound)
+
+explicitTableauRuleCannotEncodeQuadraticSelfFormula :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    {resource : SelfEvaluationCostModel candidate} →
+  ExplicitTableauEncodingRule resource →
+  (formula : Cook.BooleanFormula) →
+  two ≤ SelfEvaluationCostModel.formulaSize resource formula →
+  SelfEvaluationCostModel.formulaSize resource formula
+    * SelfEvaluationCostModel.formulaSize resource formula
+    ≤ SelfEvaluationCostModel.selfEvaluationSteps resource formula →
+  ⊥
+explicitTableauRuleCannotEncodeQuadraticSelfFormula
+    {resource = resource}
+    rule formula sizeAtLeastTwo quadraticLowerBound =
+  explicitTableauRuleCannotEncodeSuperlinearSelfFormula
+    rule
+    formula
+    (quadraticRuntimeStrictlyExceedsFormula
+      formula
+      sizeAtLeastTwo
+      quadraticLowerBound)
 
 ------------------------------------------------------------------------
 -- What a successful succinct mechanism has to beat.
