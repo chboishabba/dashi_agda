@@ -7,6 +7,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List)
 
 import DASHI.Cognition.PNF.EventAlgebra as PNF
+import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
 
 ------------------------------------------------------------------------
 -- M12 / Mary-rejoin: one semantic membrane for initial intake and
@@ -159,6 +160,49 @@ reviewStatementPNF parsed reviews =
   reviewed-statement-pnf
     reviews
     false refl
+    false refl
+    false refl
+    false refl
+
+------------------------------------------------------------------------
+-- Source-bound semantic admission.
+--
+-- The existing admission owner remains authoritative for candidate admission.
+-- This wrapper only guarantees that the admitted delta stays attached to the
+-- literal statement/revision/span envelope that produced it.
+------------------------------------------------------------------------
+
+record SourceBoundSemanticAdmission
+    (statement : SourceStatementEnvelope)
+    (key : Admission.StableCandidateKey) : Set where
+  constructor source-bound-semantic-admission
+  field
+    admissionReceipt : Admission.SemanticAdmissionReceipt key
+    admittedDelta : Admission.AdmittedLocalNormativeDelta key
+    exactAdmission :
+      admittedDelta ≡ Admission.admitWithReceipt key admissionReceipt
+    statementRelationshipRef : String
+    propositionSupportPaid : Bool
+    propositionSupportDeferred : propositionSupportPaid ≡ false
+    applicabilityPaid : Bool
+    applicabilityDeferred : applicabilityPaid ≡ false
+    claimTruthPaid : Bool
+    claimTruthDeferred : claimTruthPaid ≡ false
+
+open SourceBoundSemanticAdmission public
+
+bindSemanticAdmission :
+  (statement : SourceStatementEnvelope) →
+  (key : Admission.StableCandidateKey) →
+  (receipt : Admission.SemanticAdmissionReceipt key) →
+  String →
+  SourceBoundSemanticAdmission statement key
+bindSemanticAdmission statement key receipt relationship =
+  source-bound-semantic-admission
+    receipt
+    (Admission.admitWithReceipt key receipt)
+    refl
+    relationship
     false refl
     false refl
     false refl
