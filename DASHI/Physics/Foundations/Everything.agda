@@ -166,3 +166,6 @@ import DASHI.Physics.Foundations.GRQFTConcreteInstanceFrontierV2Validation
 
 import DASHI.Physics.Foundations.GRQFTCommonRegimeBidiAttemptExact
 import DASHI.Physics.Foundations.GRQFTCommonRegimeBidiAttemptValidation
+
+import DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact
+import DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerValidation
