@@ -376,7 +376,13 @@ class AgdaModuleFile(pytest.File):
                 setattr(config, "_dashi_agda_scope_primed_roots", primed)
             root_key = path.resolve()
             if root_key not in primed:
-                _prime_scope_closure(checker, path, selected)
+                terminalreporter = config.pluginmanager.getplugin("terminalreporter")
+                _prime_scope_closure(
+                    checker,
+                    path,
+                    selected,
+                    terminalreporter=terminalreporter,
+                )
                 primed.add(root_key)
 
         for collected in selected:
