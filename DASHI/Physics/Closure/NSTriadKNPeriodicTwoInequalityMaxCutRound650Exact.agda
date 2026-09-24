@@ -39,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarFixedOutputCarrierRound658Exa
 import DASHI.Physics.Closure.NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact as R659
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact as R660
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact as R661
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact as R662
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -251,6 +252,26 @@ round650C2BadCollarEndpointTangentRemovedModuloStandardCalculus =
 round650C2BadCollarRateSelfPlusPairDifferencePaymentClosed : Bool
 round650C2BadCollarRateSelfPlusPairDifferencePaymentClosed =
   R661.round661SignedRateSelfPlusPairDifferencePaymentClosed
+
+round650C2FullFibrePairDifferenceM2PaymentClosed : Bool
+round650C2FullFibrePairDifferenceM2PaymentClosed =
+  R662.round662FullFibreSignedPairDifferenceM2PaymentClosed
+
+round650C2PairDifferenceM2AddsCardinalityTax : Bool
+round650C2PairDifferenceM2AddsCardinalityTax =
+  R662.round662PairDifferenceM2AddsCardinalityTax
+
+round650C2BadCollarResidualReducedToSelfRatePlusM2 : Bool
+round650C2BadCollarResidualReducedToSelfRatePlusM2 =
+  R662.round662R661ResidualReducedToSelfRatePlusM2
+
+round650C2BadCollarSelfRatePaymentClosed : Bool
+round650C2BadCollarSelfRatePaymentClosed =
+  R662.round662PaysR661SelfRateTerm
+
+round650C2CutoffUniformM2AggregationClosed : Bool
+round650C2CutoffUniformM2AggregationClosed =
+  R662.round662CutoffUniformM2AggregationClosed
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -495,6 +516,31 @@ round650C2BadCollarRateSelfPlusPairDifferencePaymentClosedIsFalse :
   round650C2BadCollarRateSelfPlusPairDifferencePaymentClosed ≡ false
 round650C2BadCollarRateSelfPlusPairDifferencePaymentClosedIsFalse =
   R661.round661SignedRateSelfPlusPairDifferencePaymentClosedIsFalse
+
+round650C2FullFibrePairDifferenceM2PaymentClosedIsTrue :
+  round650C2FullFibrePairDifferenceM2PaymentClosed ≡ true
+round650C2FullFibrePairDifferenceM2PaymentClosedIsTrue =
+  R662.round662FullFibreSignedPairDifferenceM2PaymentClosedIsTrue
+
+round650C2PairDifferenceM2AddsCardinalityTaxIsFalse :
+  round650C2PairDifferenceM2AddsCardinalityTax ≡ false
+round650C2PairDifferenceM2AddsCardinalityTaxIsFalse =
+  R662.round662PairDifferenceM2AddsCardinalityTaxIsFalse
+
+round650C2BadCollarResidualReducedToSelfRatePlusM2IsTrue :
+  round650C2BadCollarResidualReducedToSelfRatePlusM2 ≡ true
+round650C2BadCollarResidualReducedToSelfRatePlusM2IsTrue =
+  R662.round662R661ResidualReducedToSelfRatePlusM2IsTrue
+
+round650C2BadCollarSelfRatePaymentClosedIsFalse :
+  round650C2BadCollarSelfRatePaymentClosed ≡ false
+round650C2BadCollarSelfRatePaymentClosedIsFalse =
+  R662.round662PaysR661SelfRateTermIsFalse
+
+round650C2CutoffUniformM2AggregationClosedIsFalse :
+  round650C2CutoffUniformM2AggregationClosed ≡ false
+round650C2CutoffUniformM2AggregationClosedIsFalse =
+  R662.round662CutoffUniformM2AggregationClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
