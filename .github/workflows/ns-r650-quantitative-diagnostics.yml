@@ -84,6 +84,7 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650GlobalCommutatorNestedTriadExpansionRound694Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650LiveGlobalCommutatorNestedTriadRound695Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650MaskedCompleteTriadOrbitResidueRound696Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650IntegratedTriadOrbitResidueRound697Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda'
@@ -164,6 +165,7 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650GlobalCommutatorNestedTriadExpansionRound694Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650LiveGlobalCommutatorNestedTriadRound695Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650MaskedCompleteTriadOrbitResidueRound696Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650IntegratedTriadOrbitResidueRound697Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda
