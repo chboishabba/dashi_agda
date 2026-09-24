@@ -449,6 +449,18 @@ periodicClayMaxCutC2SignedCollarPaymentClosed : Bool
 periodicClayMaxCutC2SignedCollarPaymentClosed =
   R650.round650C2SignedCollarPaymentClosed
 
+periodicClayMaxCutC2LowComplementCrossReducedToCollar : Bool
+periodicClayMaxCutC2LowComplementCrossReducedToCollar =
+  R650.round650C2LowComplementCrossReducedToCollar
+
+periodicClayMaxCutC2RemoteSpectralCrossDeletedFromRatioHardTerm : Bool
+periodicClayMaxCutC2RemoteSpectralCrossDeletedFromRatioHardTerm =
+  R650.round650C2RemoteSpectralCrossDeletedFromRatioHardTerm
+
+periodicClayMaxCutC2RemoteBoundaryFluxStillUnpaid : Bool
+periodicClayMaxCutC2RemoteBoundaryFluxStillUnpaid =
+  R650.round650C2RemoteBoundaryFluxStillUnpaid
+
 periodicClayMaxCutC3CompilerAvailable : Bool
 periodicClayMaxCutC3CompilerAvailable =
   R642.round642C3CanonicalPhysicalSliceCompilerAvailable
