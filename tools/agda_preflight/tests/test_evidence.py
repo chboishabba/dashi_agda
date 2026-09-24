@@ -523,6 +523,7 @@ def test_auto_refine_exposes_oracle_stats(tmp_path):
             "validated_modules": 0,
             "failed_frontier_modules": 0,
             "aggregate_probe_roots": 0,
+            "candidate_modules": 0,
         },
     }
 
@@ -535,6 +536,47 @@ def test_scope_backend_preserves_configured_agda_extra_args(tmp_path):
     )
     assert backend.extra_args == ("-i", ".", "-l", "standard-library")
 
+
+
+def _scope_deferred(path: Path):
+    return [
+        Diagnostic(
+            "TSAGDA113",
+            "scope suspicion",
+            path,
+            1,
+            1,
+            severity="warning",
+            confidence="insufficient-evidence",
+            evidence="dashi-index",
+            minimum_evidence="agda-scope",
+            evidence_sufficient=False,
+        )
+    ]
+
+
+def test_scope_closure_without_candidates_uses_zero_probes(tmp_path):
+    leaf = write_module(tmp_path, "Zero.Leaf")
+    top = write_module(tmp_path, "Zero.Top", "\nimport Zero.Leaf\n")
+
+    backend = AgdaAutoRefineBackend("agda")
+    checker = Checker(tmp_path, scope_backend=backend)
+    calls = []
+
+    def forbidden(path, *, aggregate_root=False):
+        calls.append(Path(path).resolve())
+        raise AssertionError("no scope probe expected without candidates")
+
+    backend.probe_scope = forbidden
+    collected = [
+        CollectedModule("Zero.Leaf", leaf),
+        CollectedModule("Zero.Top", top),
+    ]
+
+    _prime_scope_closure(checker, top, collected)
+
+    assert calls == []
+    assert backend.stats()["scope_cache"]["candidate_modules"] == 0
 
 
 def test_scope_closure_root_success_uses_one_probe(tmp_path):
@@ -563,6 +605,7 @@ def test_scope_closure_root_success_uses_one_probe(tmp_path):
 
     backend.probe_scope = probe
     checker = Checker(tmp_path, scope_backend=backend)
+    checker.structural_check = lambda path: _scope_deferred(Path(path))
     collected = [
         CollectedModule("A.Leaf", leaf),
         CollectedModule("A.Middle", middle),
@@ -619,6 +662,12 @@ def test_scope_closure_descends_only_failed_subtrees(tmp_path):
 
     backend.probe_scope = probe
     checker = Checker(tmp_path, scope_backend=backend)
+    candidate_paths = {left_leaf.resolve(), right_leaf.resolve()}
+    checker.structural_check = lambda path: (
+        _scope_deferred(Path(path))
+        if Path(path).resolve() in candidate_paths
+        else []
+    )
     collected = [
         CollectedModule("A.LeftLeaf", left_leaf),
         CollectedModule("A.Left", left),
@@ -640,6 +689,50 @@ def test_scope_closure_descends_only_failed_subtrees(tmp_path):
     assert backend.scope_validated(right_leaf)
     assert backend.scope_failed(right)
     assert backend.scope_failed(top)
+    assert backend.stats()["scope_cache"]["candidate_modules"] == 2
+
+
+def test_scope_closure_skips_irrelevant_failed_subtree(tmp_path):
+    left = write_module(tmp_path, "P.Left")
+    right = write_module(tmp_path, "P.Right")
+    top = write_module(
+        tmp_path,
+        "P.Top",
+        "\nimport P.Left\nimport P.Right\n",
+    )
+
+    backend = AgdaAutoRefineBackend("agda")
+    calls = []
+
+    def probe(path, *, aggregate_root=False):
+        key = Path(path).resolve()
+        calls.append(key)
+        if key == top.resolve():
+            backend._scope_failed.add(key)
+            return False
+        if key == left.resolve():
+            backend._scope_validated.add(key)
+            return True
+        raise AssertionError("irrelevant right subtree must not be probed")
+
+    backend.probe_scope = probe
+    checker = Checker(tmp_path, scope_backend=backend)
+    checker.structural_check = lambda path: (
+        _scope_deferred(Path(path))
+        if Path(path).resolve() == left.resolve()
+        else []
+    )
+    collected = [
+        CollectedModule("P.Left", left),
+        CollectedModule("P.Right", right),
+        CollectedModule("P.Top", top),
+    ]
+
+    _prime_scope_closure(checker, top, collected)
+
+    assert calls == [top.resolve(), left.resolve()]
+    assert backend.scope_validated(left)
+    assert not backend.scope_known(right)
 
 
 def test_failed_scope_frontier_is_not_reprobed_during_refine(tmp_path):
