@@ -33,11 +33,10 @@ import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact as Co
 import DASHI.Physics.YangMills.BalabanClayT5SubsequenceProkhorovExtractionExact as Prokhorov
 
 record LiteralDiagonalCompactUniqueInputs
-    (Measure Observable Scalar : Set) : Set₂ where
+    {Measure Observable Scalar : Set}
+    (expectationData :
+      T5.PhysicalExpectationProducerData Measure Observable Scalar) : Set₂ where
   field
-    expectationData :
-      T5.PhysicalExpectationProducerData Measure Observable Scalar
-
     convergence : Limit.SequentialLimit Measure
 
     TightMeasureSequence : (Nat → Measure) → Set
@@ -94,9 +93,11 @@ record LiteralDiagonalCompactUniqueInputs
 open LiteralDiagonalCompactUniqueInputs public
 
 diagonalCompactUniqueBridge :
-  ∀ {Measure Observable Scalar} →
+  ∀ {Measure Observable Scalar}
+    {expectationData :
+      T5.PhysicalExpectationProducerData Measure Observable Scalar} →
   (inputs :
-    LiteralDiagonalCompactUniqueInputs Measure Observable Scalar) →
+    LiteralDiagonalCompactUniqueInputs expectationData) →
   Prokhorov.PhysicalCompactUniqueBridgeInputs Measure
 diagonalCompactUniqueBridge inputs = record
   { Prokhorov.PhysicalCompactUniqueBridgeInputs.tightness =
@@ -104,7 +105,7 @@ diagonalCompactUniqueBridge inputs = record
   ; Prokhorov.PhysicalCompactUniqueBridgeInputs.target =
       T5.continuumMeasure
         (T5.thermodynamic
-          (expectationData inputs))
+          expectationData)
   ; Prokhorov.PhysicalCompactUniqueBridgeInputs.prokhorovAuthority =
       prokhorovAuthority inputs
   ; Prokhorov.PhysicalCompactUniqueBridgeInputs.everyExtractedClusterPointIsTarget =
@@ -113,15 +114,17 @@ diagonalCompactUniqueBridge inputs = record
 
 literalDiagonalConvergesToContinuum :
   ∀ {Measure Observable Scalar}
+    {expectationData :
+      T5.PhysicalExpectationProducerData Measure Observable Scalar}
     (inputs :
-      LiteralDiagonalCompactUniqueInputs Measure Observable Scalar) →
+      LiteralDiagonalCompactUniqueInputs expectationData) →
   Limit.Converges
     (convergence inputs)
     (T5.diagonalMeasure
-      (expectationData inputs))
+      expectationData)
     (T5.continuumMeasure
       (T5.thermodynamic
-        (expectationData inputs)))
+        expectationData))
 literalDiagonalConvergesToContinuum inputs =
   Compact.fullSequenceConverges
     (compactUniqueFullConvergenceAuthority inputs)
