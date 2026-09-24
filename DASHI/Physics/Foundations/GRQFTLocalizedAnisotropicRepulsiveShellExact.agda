@@ -3,8 +3,9 @@ module DASHI.Physics.Foundations.GRQFTLocalizedAnisotropicRepulsiveShellExact wh
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 import Data.Integer.Base as Int
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _*_; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact as Signed
