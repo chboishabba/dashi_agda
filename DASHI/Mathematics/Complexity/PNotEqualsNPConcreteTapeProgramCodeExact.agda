@@ -626,3 +626,123 @@ decodeStaticProgramRules machine stateCoverage symbolCoverage
         stateCoverage symbolCoverage
         (Local.rules machine) =
   refl
+
+
+------------------------------------------------------------------------
+-- Whole static-program view.
+--
+-- The fieldwise round trips above are now assembled into one same-object
+-- description.  This is the finite syntax object a future universal
+-- interpreter/self-reference theorem may consume.
+------------------------------------------------------------------------
+
+record StaticProgramView
+    (machine : Local.ConcreteTapeMachine) : Set where
+  constructor static-program-view
+  field
+    blankSymbol : Local.Symbol machine
+    initialControl : Local.State machine
+    acceptingControl : Local.State machine
+    transitionRules :
+      List
+        (Local.TapeRule
+          (Local.State machine)
+          (Local.Symbol machine))
+
+open StaticProgramView public
+
+canonicalStaticProgramView :
+  (machine : Local.ConcreteTapeMachine) →
+  StaticProgramView machine
+canonicalStaticProgramView machine =
+  static-program-view
+    (Local.blank machine)
+    (Local.initialState machine)
+    (Local.acceptingState machine)
+    (Local.rules machine)
+
+decodeStaticProgramView :
+  ∀ (machine : Local.ConcreteTapeMachine)
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
+  CNF.Bits (StaticProgramBitsWidth machine) →
+  StaticProgramView machine
+decodeStaticProgramView
+    machine stateCoverage symbolCoverage bits =
+  static-program-view
+    (decodeProgramBlank
+      machine stateCoverage symbolCoverage bits)
+    (decodeProgramInitialState
+      machine stateCoverage symbolCoverage bits)
+    (decodeProgramAcceptingState
+      machine stateCoverage symbolCoverage bits)
+    (decodeProgramRules
+      machine stateCoverage symbolCoverage bits)
+
+decodeEncodeStaticProgramView :
+  ∀ (machine : Local.ConcreteTapeMachine)
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
+  decodeStaticProgramView
+    machine stateCoverage symbolCoverage
+    (encodeStaticProgram
+      machine stateCoverage symbolCoverage)
+  ≡ canonicalStaticProgramView machine
+decodeEncodeStaticProgramView
+    machine stateCoverage symbolCoverage
+    rewrite
+      decodeStaticProgramBlank
+        machine stateCoverage symbolCoverage
+      |
+      decodeStaticProgramInitial
+        machine stateCoverage symbolCoverage
+      |
+      decodeStaticProgramAccepting
+        machine stateCoverage symbolCoverage
+      |
+      decodeStaticProgramRules
+        machine stateCoverage symbolCoverage =
+  refl
+
+record ConcreteTapeProgramDescription
+    (machine : Local.ConcreteTapeMachine) : Set₁ where
+  constructor concrete-tape-program-description
+  field
+    stateCoverage :
+      Canonical.EnumerationCoverage
+        (Local.finiteState machine)
+
+    symbolCoverage :
+      Canonical.EnumerationCoverage
+        (Local.finiteSymbol machine)
+
+    code :
+      CNF.Bits (StaticProgramBitsWidth machine)
+
+    codeIsLiteralMachineProgram :
+      decodeStaticProgramView
+        machine stateCoverage symbolCoverage code
+      ≡ canonicalStaticProgramView machine
+
+open ConcreteTapeProgramDescription public
+
+canonicalConcreteTapeProgramDescription :
+  (machine : Local.ConcreteTapeMachine)
+  (stateCoverage :
+    Canonical.EnumerationCoverage (Local.finiteState machine))
+  (symbolCoverage :
+    Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
+  ConcreteTapeProgramDescription machine
+canonicalConcreteTapeProgramDescription
+    machine stateCoverage symbolCoverage =
+  concrete-tape-program-description
+    stateCoverage
+    symbolCoverage
+    (encodeStaticProgram
+      machine stateCoverage symbolCoverage)
+    (decodeEncodeStaticProgramView
+      machine stateCoverage symbolCoverage)
