@@ -494,6 +494,22 @@ def evaluate_state(
         "unweighted_conservation_residual": abs(float(currency["unweighted_transfer"])),
         "r406_evaluated_pair_count": int(r406["evaluated_pair_count"]),
         "r406_minimum_pair_rate": r406["minimum_pair_rate"],
+        "r687_rate_lifted_forcing_full": float(r406["global_rate_lifted_forcing_full"]),
+        "r685_coherent_commutator_work": float(r406["global_coherent_commutator_work"]),
+        "r685_coherent_tangent_work": float(r406["global_coherent_tangent_work"]),
+        "r665_weighted_rate_work": float(r406["global_weighted_rate_work"]),
+        "r665_weighted_rate_work_nonnegative": (
+            float(r406["global_weighted_rate_work"]) >= -1.0e-12
+        ),
+        "r688_rate_lifted_minus_8_tangent": float(
+            r406["global_rate_lifted_minus_8_tangent"]
+        ),
+        "r687_global_identity_residual": float(
+            r406["r687_global_rate_lift_residual"]
+        ),
+        "r688_global_identity_residual": float(
+            r406["r688_global_dynamic_cancellation_residual"]
+        ),
         "r406_authority": R406_AUTHORITY,
     }
 
@@ -534,6 +550,21 @@ def _trajectory_summary(rows: list[dict[str, Any]], delta: float) -> dict[str, A
     p_int = _trapz(times, [float(row["production_rate_2W"]) for row in ordered])
     d_int = _trapz(times, [float(row["critical_dissipation_rate"]) for row in ordered])
     r_int = _trapz(times, [float(row["r406_weighted_remainder"]) for row in ordered])
+    rate_lifted_int = _trapz(
+        times, [float(row["r687_rate_lifted_forcing_full"]) for row in ordered]
+    )
+    commutator_int = _trapz(
+        times, [float(row["r685_coherent_commutator_work"]) for row in ordered]
+    )
+    tangent_int = _trapz(
+        times, [float(row["r685_coherent_tangent_work"]) for row in ordered]
+    )
+    weighted_rate_int = _trapz(
+        times, [float(row["r665_weighted_rate_work"]) for row in ordered]
+    )
+    dynamic_cancel_int = rate_lifted_int - 8.0 * tangent_int
+    r687_integrated_residual = rate_lifted_int - 8.0 * commutator_int
+    r688_integrated_residual = dynamic_cancel_int - 8.0 * weighted_rate_int
     surplus_int = p_int - (2.0 * nu - delta) * d_int
     x0 = float(ordered[0]["critical_energy_X"])
     xT = float(ordered[-1]["critical_energy_X"])
@@ -557,6 +588,14 @@ def _trajectory_summary(rows: list[dict[str, Any]], delta: float) -> dict[str, A
         "integrated_production_trapezoid": p_int,
         "integrated_dissipation_trapezoid": d_int,
         "integrated_r406_trapezoid": r_int,
+        "integrated_r687_rate_lifted_forcing_full": float(rate_lifted_int),
+        "integrated_r685_coherent_commutator_work": float(commutator_int),
+        "integrated_r685_coherent_tangent_work": float(tangent_int),
+        "integrated_r665_weighted_rate_work": float(weighted_rate_int),
+        "integrated_r688_rate_lifted_minus_8_tangent": float(dynamic_cancel_int),
+        "integrated_r687_identity_residual": float(r687_integrated_residual),
+        "integrated_r688_identity_residual": float(r688_integrated_residual),
+        "integrated_r665_weighted_rate_work_nonnegative": weighted_rate_int >= -1.0e-12,
         "integrated_strict_surplus_trapezoid": float(surplus_int),
         "initial_critical_energy": x0,
         "terminal_critical_energy": xT,
@@ -637,6 +676,20 @@ def scan_manifest(
                 1
                 for run in runs_out
                 if run["trajectory"].get("positive_integrated_margin_available") is True
+            ),
+            "r665_pointwise_negative_state_count": sum(
+                1
+                for run in runs_out
+                for row in run["rows"]
+                if row.get("r665_weighted_rate_work_nonnegative") is False
+            ),
+            "r665_integrated_negative_run_count": sum(
+                1
+                for run in runs_out
+                if run["trajectory"].get("integrated") is True
+                and run["trajectory"].get(
+                    "integrated_r665_weighted_rate_work_nonnegative"
+                ) is False
             ),
             "integrated_diagnostic_failure_count": sum(
                 1
