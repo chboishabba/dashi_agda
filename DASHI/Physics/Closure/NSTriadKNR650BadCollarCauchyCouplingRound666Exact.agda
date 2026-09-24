@@ -43,6 +43,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as R30
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
@@ -110,8 +111,7 @@ module LiveCoupling
       (time : Time)
       (viscosityPositive :
         Positive
-          (DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact.viscosity
-            (End.physicalSystemAt cutoff time)))
+          (R30.viscosity (End.physicalSystemAt cutoff time)))
       (outputNonzero : Z3.NonZeroMode output) where
 
     system =
