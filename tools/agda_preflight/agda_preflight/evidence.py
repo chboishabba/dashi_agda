@@ -69,7 +69,7 @@ _TREE_ONLY = {
 _INDEX_SAFE = {
     "TSAGDA001", "TSAGDA002", "TSAGDA003",
     "TSAGDA008", "TSAGDA009",
-    "TSAGDA020", "TSAGDA021", "TSAGDA023", "TSAGDA025",
+    "TSAGDA020", 
     "TSAGDA028", "TSAGDA029", "TSAGDA030",
     "TSAGDA042", "TSAGDA043", "TSAGDA044", 
     "TSAGDA046", "TSAGDA047", "TSAGDA048", "TSAGDA049",
@@ -100,7 +100,10 @@ _INDEX_SAFE = {
 # Agda-resolved scope/elaboration: opens/renamings, overloading, mixfix, implicit
 # insertion, or local dependent scope can change the interpretation.
 _SCOPE_REQUIRED = {
+    "TSAGDA021",  # qualified export availability is a scope-resolution fact
     "TSAGDA022",  # unknown/malformed alias use
+    "TSAGDA023",  # using(...) export availability is a scope-resolution fact
+    "TSAGDA025",  # renaming source availability is a scope-resolution fact
     "TSAGDA024",  # hiding entry validity through re-export chains
     "TSAGDA026",  # rename/open collision
     "TSAGDA027",  # ambiguous unqualified name from opens
