@@ -52,9 +52,6 @@ record RepresentedContinuumCarrier
     (family :
       Limit.FinitePhysicalNormalizedFamily
         Configuration limitLaws quotient division)
-    (encoding :
-      Schwinger.CylinderSchwingerEncoding
-        (Configuration → ℝ) Position)
     : Set₂ where
   field
     MeasureObject : Set
@@ -78,11 +75,11 @@ open RepresentedContinuumCarrier public
 
 representedContinuumMeasure :
   ∀ {Configuration Position sequenceLimit limitLaws quotient division
-      family encoding} →
+      family} →
   RepresentedContinuumCarrier
     Configuration Position
     {sequenceLimit = sequenceLimit}
-    limitLaws quotient division family encoding →
+    limitLaws quotient division family →
   Physical.PhysicalContinuumYMMeasure (Configuration → ℝ) ℝ
 representedContinuumMeasure carrier =
   Physical.physicalContinuumMeasure
@@ -90,12 +87,12 @@ representedContinuumMeasure carrier =
 
 representedContinuumExpectationIsIntegral :
   ∀ {Configuration Position sequenceLimit limitLaws quotient division
-      family encoding}
+      family}
     (carrier :
       RepresentedContinuumCarrier
         Configuration Position
         {sequenceLimit = sequenceLimit}
-        limitLaws quotient division family encoding)
+        limitLaws quotient division family)
     observable →
   Physical.expectation (representedContinuumMeasure carrier) observable
   ≡ integrate carrier (representedMeasure carrier) observable
@@ -103,47 +100,51 @@ representedContinuumExpectationIsIntegral carrier observable = refl
 
 representedSchwinger :
   ∀ {Configuration Position sequenceLimit limitLaws quotient division
-      family encoding} →
-  (carrier :
-    RepresentedContinuumCarrier
-      Configuration Position
-      {sequenceLimit = sequenceLimit}
-      limitLaws quotient division family encoding) →
+      family} →
+  Schwinger.CylinderSchwingerEncoding
+    (Configuration → ℝ) Position →
+  RepresentedContinuumCarrier
+    Configuration Position
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division family →
   Physical.PhysicalSchwingerFamily (Configuration → ℝ) Position ℝ
-representedSchwinger {encoding = encoding} carrier =
+representedSchwinger encoding carrier =
   Schwinger.schwingerFromMeasure
     encoding
     (representedContinuumMeasure carrier)
 
 representedSchwingerIsSameExpectation :
   ∀ {Configuration Position sequenceLimit limitLaws quotient division
-      family encoding}
+      family}
+    (encoding :
+      Schwinger.CylinderSchwingerEncoding
+        (Configuration → ℝ) Position)
     (carrier :
       RepresentedContinuumCarrier
         Configuration Position
         {sequenceLimit = sequenceLimit}
-        limitLaws quotient division family encoding)
+        limitLaws quotient division family)
     observable left right →
   Physical.schwinger
-    (representedSchwinger carrier)
+    (representedSchwinger encoding carrier)
     observable left right
   ≡
   Physical.expectation
     (representedContinuumMeasure carrier)
     (Schwinger.twoPointCylinder encoding observable left right)
-representedSchwingerIsSameExpectation carrier observable left right = refl
+representedSchwingerIsSameExpectation encoding carrier observable left right = refl
 
 -- The old limit-functional carrier and the representation-first carrier agree
 -- extensionally on every selected observable as a CONSEQUENCE of the one real
 -- representation theorem.  This equality is not an input to the constructor.
 oldLimitExpectationAgreesWithRepresentedCarrier :
   ∀ {Configuration Position sequenceLimit limitLaws quotient division
-      family encoding}
+      family}
     (carrier :
       RepresentedContinuumCarrier
         Configuration Position
         {sequenceLimit = sequenceLimit}
-        limitLaws quotient division family encoding)
+        limitLaws quotient division family)
     observable →
   Physical.expectation
     (Limit.continuumMeasure family)
