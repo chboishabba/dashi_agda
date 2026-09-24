@@ -39,6 +39,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
 import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as A3
+import DASHI.Physics.YangMills.YangMillsCylinderEventBooleanAlgebraRound539Exact as EventAlgebra
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
 import DASHI.Physics.YangMills.YangMillsConcreteQuantitativeOS05Round514Exact as Quantitative
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
@@ -109,6 +110,10 @@ familyLevel c4DensityAnchoredStressLane =
 a3EventIndicatorLevel : ProofLevel
 a3EventIndicatorLevel =
   A3.literalRound535CylinderEventIndicatorSemanticsLevel
+
+a3EventBooleanAlgebraLevel : ProofLevel
+a3EventBooleanAlgebraLevel =
+  A3.literalRound535CylinderEventBooleanAlgebraLevel
 
 a3ProjectiveConsistencyLevel : ProofLevel
 a3ProjectiveConsistencyLevel =
