@@ -27,6 +27,7 @@ data SourceRole : Set where
   probabilisticallyCheckableProofs : SourceRole
   boundedSelfReference : SourceRole
   booleanSwitchingAlgebra : SourceRole
+  orderedDecisionDiagrams : SourceRole
   diagonalCardinality : SourceRole
 
 data IdentifierStatus : Set where
@@ -48,6 +49,18 @@ record ComplexitySource : Set where
     importedBoundary : String
 
 open ComplexitySource public
+
+bryant1986 : ComplexitySource
+bryant1986 =
+  complexitySource
+    "Randal E. Bryant"
+    "Graph-Based Algorithms for Boolean Function Manipulation"
+    1986
+    "IEEE Transactions on Computers 35(8), 677--691"
+    "doi:10.1109/TC.1986.1676819"
+    orderedDecisionDiagrams
+    verifiedDOI
+    "Calibration for ordered decision-diagram / reduced Boolean-function DAG representations and their variable-order sensitivity.  DASHI's equality quotient lower bound and interleaved two-state factorization are proved locally and are not imported from this source."
 
 shannon1938 : ComplexitySource
 shannon1938 =
