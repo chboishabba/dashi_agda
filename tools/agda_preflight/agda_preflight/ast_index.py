@@ -813,6 +813,15 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
         parent_record_start=parent_record_start,
     )
     for assignment in descendants(node, "field_assignment"):
+        ancestor = assignment.parent
+        closest = None
+        while ancestor is not None and ancestor != node.parent:
+            if ancestor.type in {"record_assignments", "field_assignments"}:
+                closest = ancestor
+                break
+            ancestor = ancestor.parent
+        if closest != node:
+            continue
         name_node = first_descendant(assignment, "field_name")
         rhs_node = first_descendant(assignment, "expr")
         name = _name_from_node(source_bytes, name_node)
