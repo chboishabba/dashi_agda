@@ -402,6 +402,11 @@ import DASHI.Physics.YangMills.YangMillsClayExhaustiveResidualClassificationRoun
 import DASHI.Physics.YangMills.YangMillsClayExhaustiveResearchQueuesRound508Exact
 import DASHI.Physics.YangMills.YangMillsClayExhaustiveResearchQueuesRound508Validation
 
+import DASHI.Physics.YangMills.YangMillsRepresentedExpectationConvergenceRound509Exact
+import DASHI.Physics.YangMills.YangMillsRepresentedExpectationConvergenceRound509Validation
+import DASHI.Physics.YangMills.YangMillsClayPostRepresentationResearchQueuesRound510Exact
+import DASHI.Physics.YangMills.YangMillsClayPostRepresentationResearchQueuesRound510Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
