@@ -191,6 +191,8 @@ class CommandScopeCheckBackend:
         seen = set()
         for raw_line in output.splitlines():
             line = raw_line.strip()
+            if line.startswith("(") and ") Checking " in line:
+                line = line.split(") ", 1)[1].strip()
             if not line.startswith("Checking "):
                 continue
             if line.startswith("Checking:"):
