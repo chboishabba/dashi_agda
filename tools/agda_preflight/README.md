@@ -294,6 +294,91 @@ report:
 - `TSAGDA207` bidi source/target outer shapes disagree
 - `TSAGDA208` factor-through/admissibility bridge visibly uses another carrier family
 
+## Pytest integration
+
+The package registers a native pytest plugin through the standard `pytest11`
+entry point. Pytest is only the execution/progress harness; the semantic engine
+remains `Checker`.
+
+Install the test extra:
+
+```bash
+python -m pip install -e 'tools/agda_preflight[test]'
+```
+
+Check one module as one pytest item:
+
+```bash
+pytest --agda-preflight --agda-root . \
+  DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda -vv
+```
+
+Use normal pytest verbosity for detailed progress. Each Agda module is a native
+pytest item, so `-vv` shows the module currently being checked and pytest's
+ordinary completed-item percentage.
+
+For an aggregate such as `DASHI/Everything.agda`, collect its recursive import
+DAG in **dependency-first order**:
+
+```bash
+pytest --agda-preflight --agda-deps --agda-root . \
+  DASHI/Everything.agda -vv
+```
+
+This is the preferred replacement for an opaque one-shot preflight of
+`Everything.agda`: imported leaves are checked first and
+`DASHI.Everything` is checked last.
+
+For the opposite workflow—"this leaf changed; which consumers are affected?"—
+use the reverse-import closure:
+
+```bash
+pytest --agda-preflight --agda-closure --agda-root . \
+  DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda -vv
+```
+
+Both modes can be combined. Duplicate modules are collected only once.
+
+Normal pytest selection works on module item names:
+
+```bash
+pytest --agda-preflight --agda-deps --agda-root . \
+  DASHI/Everything.agda -k Eisenstein -vv
+```
+
+Parallel execution is available through `pytest-xdist`:
+
+```bash
+pytest --agda-preflight --agda-deps --agda-root . \
+  DASHI/Everything.agda -n auto -vv
+```
+
+Warnings remain non-fatal and are surfaced through pytest's warning reporting.
+Use:
+
+```bash
+--agda-errors-only
+```
+
+to suppress advisory warning text while retaining hard structural failures.
+
+Every module report also carries the complete structured diagnostic list in
+pytest `user_properties`, so JUnit/CI integrations can preserve
+`TSAGDA...` diagnostics without scraping terminal text.
+
+The terminal summary adds:
+
+```text
+Agda preflight
+modules passed: ...
+modules failed: ...
+errors: ...
+warnings: ...
+```
+
+No timing/ETA model is maintained; progress is intentionally delegated to
+pytest's normal item collection and reporting.
+
 ## CLI
 
 Install:
