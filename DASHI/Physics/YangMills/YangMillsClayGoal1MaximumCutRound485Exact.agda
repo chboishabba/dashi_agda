@@ -20,6 +20,7 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as A3Source
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as A3Measure
+import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as A3MeasureCut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedA3Round480Exact as A3
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45Source
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45
@@ -62,6 +63,22 @@ a3SourceNativeSameFamilyContinuumOSLevel =
 a3CountablyAdditiveRepresentationLevel : ProofLevel
 a3CountablyAdditiveRepresentationLevel =
   A3Measure.literalRound476CountablyAdditiveRepresentationLevel
+
+a3FiniteProjectiveCylinderPremeasureLevel : ProofLevel
+a3FiniteProjectiveCylinderPremeasureLevel =
+  A3MeasureCut.literalRound495FiniteProjectivePremeasureLevel
+
+a3ContinuityAtEmptyLevel : ProofLevel
+a3ContinuityAtEmptyLevel =
+  A3MeasureCut.literalRound495ContinuityAtEmptyLevel
+
+a3CaratheodoryExtensionLevel : ProofLevel
+a3CaratheodoryExtensionLevel =
+  A3MeasureCut.round495CaratheodoryExtensionAuthorityLevel
+
+a3CylinderExpectationIntegralIdentificationLevel : ProofLevel
+a3CylinderExpectationIntegralIdentificationLevel =
+  A3MeasureCut.literalRound495CylinderExpectationIdentificationLevel
 
 a3RepresentedLiteralSemanticsLevel : ProofLevel
 a3RepresentedLiteralSemanticsLevel =
