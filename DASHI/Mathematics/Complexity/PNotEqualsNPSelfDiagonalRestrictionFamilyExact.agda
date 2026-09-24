@@ -1,0 +1,215 @@
+module DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact where
+
+------------------------------------------------------------------------
+-- THE ACTUAL SELF-DIAGONAL SHANNON RESTRICTION FAMILY
+--
+-- P9 must classify only formulas reachable from ONE self-diagonal root, not
+-- all SAT instances.
+--
+-- This owner constructs that domain exactly.
+--
+-- 1. RestrictionDerivation root current witnesses that current is obtained from
+--    root by repeated head restrictions.
+--
+-- 2. Under an exact SAT oracle, every reachable nonterminal current node obeys
+--    the exact Shannon law.
+--
+-- 3. A SelfDiagonalSemanticWitness supplies an ordinary Clay-critical Cook
+--    formula.  The Cook/indexed bridge gives its finite indexed root, and the
+--    round-trip theorem proves this indexed root is the SAME Cook syntax when
+--    translated back.
+--
+-- No quotient is postulated here.  This file pays the domain on which a future
+-- resource-closing quotient must act.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; suc)
+
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact as Search
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
+import DASHI.Mathematics.Complexity.PNotEqualsNPResourceBoundedSelfDiagonalExact as Self
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
+import DASHI.Mathematics.Complexity.PNotEqualsNPSATShannonSemanticAuthorityExact as Shannon
+
+------------------------------------------------------------------------
+-- Reachability under repeated Shannon restrictions.
+------------------------------------------------------------------------
+
+data RestrictionDerivation
+    {rootVariables : Nat}
+    (root : SAT.BooleanFormula rootVariables) :
+    ∀ {currentVariables : Nat} →
+    SAT.BooleanFormula currentVariables →
+    Set where
+
+  restrictionRoot :
+    RestrictionDerivation
+      root
+      root
+
+  restrictionFalse :
+    ∀ {currentVariables : Nat}
+      {current : SAT.BooleanFormula (suc currentVariables)} →
+    RestrictionDerivation root current →
+    RestrictionDerivation
+      root
+      (SAT.restrictHead false current)
+
+  restrictionTrue :
+    ∀ {currentVariables : Nat}
+      {current : SAT.BooleanFormula (suc currentVariables)} →
+    RestrictionDerivation root current →
+    RestrictionDerivation
+      root
+      (SAT.restrictHead true current)
+
+------------------------------------------------------------------------
+-- A reachable node package.
+------------------------------------------------------------------------
+
+record RestrictionNode
+    {rootVariables : Nat}
+    (root : SAT.BooleanFormula rootVariables) : Set₁ where
+  constructor restriction-node
+  field
+    currentVariables : Nat
+    currentFormula :
+      SAT.BooleanFormula currentVariables
+    derivation :
+      RestrictionDerivation
+        root
+        currentFormula
+
+open RestrictionNode public
+
+rootNode :
+  ∀ {variables : Nat}
+    (root : SAT.BooleanFormula variables) →
+  RestrictionNode root
+rootNode root =
+  restriction-node
+    _
+    root
+    restrictionRoot
+
+falseChild :
+  ∀ {rootVariables currentVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {current : SAT.BooleanFormula (suc currentVariables)} →
+  RestrictionDerivation root current →
+  RestrictionNode root
+falseChild derivation =
+  restriction-node
+    _
+    _
+    (restrictionFalse derivation)
+
+trueChild :
+  ∀ {rootVariables currentVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {current : SAT.BooleanFormula (suc currentVariables)} →
+  RestrictionDerivation root current →
+  RestrictionNode root
+trueChild derivation =
+  restriction-node
+    _
+    _
+    (restrictionTrue derivation)
+
+------------------------------------------------------------------------
+-- Shannon law holds at every reachable nonterminal node.
+------------------------------------------------------------------------
+
+reachableShannonLaw :
+  (oracle : SAT.SATDecisionOracle) →
+  ∀ {rootVariables currentVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {current : SAT.BooleanFormula (suc currentVariables)} →
+  RestrictionDerivation root current →
+  Search.decide oracle current
+  ≡
+  SAT.orBool
+    (Search.decide oracle
+      (SAT.restrictHead false current))
+    (Search.decide oracle
+      (SAT.restrictHead true current))
+reachableShannonLaw oracle derivation =
+  Shannon.satDecisionShannon
+    oracle
+    _
+
+------------------------------------------------------------------------
+-- The actual self-diagonal indexed root.
+------------------------------------------------------------------------
+
+selfDiagonalIndexedRoot :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost} →
+  Self.SelfDiagonalSemanticWitness candidate →
+  SAT.BooleanFormula
+    (Bridge.formulaVariableBound
+      (Self.formula witness))
+selfDiagonalIndexedRoot witness =
+  Bridge.cookToIndexed
+    (Self.formula witness)
+
+selfDiagonalRootRoundTrip :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (witness : Self.SelfDiagonalSemanticWitness candidate) →
+  Bridge.indexedToCook
+    (selfDiagonalIndexedRoot witness)
+  ≡
+  Self.formula witness
+selfDiagonalRootRoundTrip witness =
+  Bridge.indexedAfterCook
+    (Self.formula witness)
+
+selfDiagonalRootNode :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (witness : Self.SelfDiagonalSemanticWitness candidate) →
+  RestrictionNode
+    (selfDiagonalIndexedRoot witness)
+selfDiagonalRootNode witness =
+  rootNode
+    (selfDiagonalIndexedRoot witness)
+
+------------------------------------------------------------------------
+-- Under SAT in P, the same Clay-critical hypothetical decider induces the
+-- exact oracle used at every node of this self-diagonal restriction family.
+------------------------------------------------------------------------
+
+selfDiagonalRestrictionOracle :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  PR.InP cost
+    (importedSATLanguage cost) →
+  SAT.SATDecisionOracle
+selfDiagonalRestrictionOracle {cost} satP =
+  Bridge.indexedOracleFromCookInP satP
+  where
+    importedSATLanguage :
+      PR.PolynomialCostModel Cook.BooleanFormula →
+      PR.Language Cook.BooleanFormula
+    importedSATLanguage ignored =
+      record
+        { PR.accepts = Cook.Satisfiable
+        }
+
+------------------------------------------------------------------------
+-- Research consequence.
+--
+-- P9's domain is now real:
+--
+--   selfDiagonalIndexedRoot witness
+--      -> RestrictionDerivation descendants.
+--
+-- A future quotient must classify ONLY these descendants (or an explicitly
+-- chosen reordering/decomposition of them), and must derive its classes from
+-- code(D)+self-instantiation structure without evaluating their SAT truth.
+------------------------------------------------------------------------
