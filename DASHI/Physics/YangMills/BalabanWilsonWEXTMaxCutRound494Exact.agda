@@ -29,6 +29,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as R491
+import DASHI.Physics.YangMills.BalabanP33FiniteWeightedSchurSquaredExact as Schur
 
 record WilsonTwoMarkWEXTSource
     (Scale Volume Root State Observable Cluster : Set) : Set₁ where
@@ -61,20 +62,6 @@ record WilsonTwoMarkWEXTSource
           (clusterWeight state left right)
           (contributingClusters state left right))
 
-    -- Standard finite triangle transport.  Kept typed separately so it cannot
-    -- be mistaken for the physical Wilson extension theorem.
-    finiteTriangle :
-      ∀ state left right →
-      ∣ TwoMark.sumℚ
-          (TwoMark.map
-            (clusterWeight state left right)
-            (contributingClusters state left right)) ∣
-      ≤
-      TwoMark.sumℚ
-        (TwoMark.map
-          (λ cluster → ∣ clusterWeight state left right cluster ∣)
-          (contributingClusters state left right))
-
     -- Exact physical two-support meaning for the selected connected clusters.
     ConnectingClusterMeetsBothSupports :
       State → Observable → Observable → Set
@@ -94,6 +81,26 @@ record WilsonTwoMarkWEXTSource
         (physicalDistance left right)
 
 open WilsonTwoMarkWEXTSource public
+
+finiteTriangleForWilsonClusterSum :
+  ∀ {Scale Volume Root State Observable Cluster}
+    (source :
+      WilsonTwoMarkWEXTSource
+        Scale Volume Root State Observable Cluster)
+    state left right →
+  ∣ TwoMark.sumℚ
+      (TwoMark.map
+        (clusterWeight source state left right)
+        (contributingClusters source state left right)) ∣
+  ≤
+  TwoMark.sumℚ
+    (TwoMark.map
+      (λ cluster → ∣ clusterWeight source state left right cluster ∣)
+      (contributingClusters source state left right))
+finiteTriangleForWilsonClusterSum source state left right =
+  Schur.sumAbsoluteTriangle
+    (contributingClusters source state left right)
+    (clusterWeight source state left right)
 
 wilsonConnectedCovarianceBelowRootedShell :
   ∀ {Scale Volume Root State Observable Cluster}
@@ -120,7 +127,7 @@ wilsonConnectedCovarianceBelowRootedShell source state left right =
               ∣ clusterWeight source state left right cluster ∣)
             (contributingClusters source state left right)))
       (sym (connectedCovarianceExpansionExact source state left right))
-      (finiteTriangle source state left right))
+      (finiteTriangleForWilsonClusterSum source state left right))
     (absoluteConnectingWeightSumBelowRootedShell
       source state left right)
 
@@ -168,7 +175,7 @@ round494WEXTCompilerLevel : ProofLevel
 round494WEXTCompilerLevel = machineChecked
 
 round494FiniteTriangleLevel : ProofLevel
-round494FiniteTriangleLevel = standardImported
+round494FiniteTriangleLevel = machineChecked
 
 literalRound494WilsonTwoMarkExpansionLevel : ProofLevel
 literalRound494WilsonTwoMarkExpansionLevel = conditional
