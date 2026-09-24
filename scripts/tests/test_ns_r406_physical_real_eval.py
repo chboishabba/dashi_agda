@@ -228,3 +228,26 @@ def test_c2_low_remote_spectral_cross_is_nonpositive_on_literal_split() -> None:
     assert int(split["interface_count"]) > 0
     assert int(split["remote_spectral_cross_violation_count"]) == 0
     assert float(split["maximum_remote_spectral_cross"]) <= 1.0e-10
+
+
+def test_c2_full_off_packet_cross_reduces_to_collar() -> None:
+    raw = _reality_closed_random_state(12, seed=67)
+    split = _packet_layer_cake_split(raw, nu=0.01, formal_cutoff=2)
+
+    assert int(split["interface_count"]) > 0
+    assert float(split["maximum_cross_split_residual"]) <= 1.0e-10
+    assert int(split["remote_spectral_cross_violation_count"]) == 0
+    assert int(split["full_cross_below_collar_violation_count"]) == 0
+
+    for row in split["interfaces"]:
+        scale = max(
+            1.0,
+            abs(float(row["full_low_complement_spectral_cross"])),
+            abs(float(row["collar_spectral_cross"])),
+            abs(float(row["remote_spectral_cross"])),
+        )
+        assert abs(float(row["cross_split_residual"])) <= 1.0e-12 * scale
+        assert (
+            float(row["full_low_complement_spectral_cross"])
+            <= float(row["collar_spectral_cross"]) + 1.0e-12 * scale
+        )
