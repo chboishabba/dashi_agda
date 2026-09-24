@@ -829,6 +829,23 @@ def extended_diagnostics(checker, s, D):
         if d.code == "TSAGDA012":
             out.append(_diag(D, "TSAGDA175", d.message, s, d.line, d.column, d.hint))
 
+    # TSAGDA185: public re-export collision; TSAGDA186: stale import modifiers.
+    public_exports = {}
+    for line, is_open, module, alias, rest in import_lines:
+        if not is_open or "public" not in rest: continue
+        target = imported.get(alias)
+        if not target: continue
+        names = set(target.signatures) | set(target.records) | {f for r in target.records.values() for f in r.fields}
+        for n in names:
+            public_exports.setdefault(n, []).append(module)
+    for n, mods in public_exports.items():
+        if len(set(mods)) > 1:
+            out.append(_diag(D, "TSAGDA185", f"public re-export {n} collides across {', '.join(sorted(set(mods)))}", s, 1, severity="warning", confidence="medium"))
+
+    for d in list(out):
+        if d.code in {"TSAGDA023", "TSAGDA024", "TSAGDA025"}:
+            out.append(_diag(D, "TSAGDA186", f"stale import modifier: {d.message}", s, d.line, d.column, d.hint, severity="warning", confidence="high"))
+
     # TSAGDA207: explicit forward/backward bidi endpoints should reverse.
     if "Bidi" in s.module_name:
         forward = next((sig for n, sig in s.signatures.items() if re.search(r"(forward|toTarget|encode)", n, re.I)), None)
@@ -857,6 +874,7 @@ def api_snapshot(checker):
             "exports": sorted(set(s.signatures) | set(s.records) | set(ctors)),
             "signatures": {k: re.sub(r"\s+", " ", v.type_text).strip() for k, v in s.signatures.items()},
             "records": {k: {"fields": sorted(r.fields)} for k, r in s.records.items()},
+            "projections": {f: rname for rname, r in s.records.items() for f in r.fields},
             "constructors": {k: {"datatype": c.datatype, "arity": c.arity} for k, c in ctors.items()},
         }
     return {"version": 1, "modules": modules}
@@ -882,4 +900,8 @@ def api_drift(checker, baseline, D):
             fnew = cur.get("signatures", {}).get(fn)
             if fnew and _arity(fold) != _arity(fnew):
                 out.append(_diag(D, "TSAGDA183", f"function {fn} arity changed {_arity(fold)} -> {_arity(fnew)}", s, 1))
+        for proj, old_owner in old.get("projections", {}).items():
+            new_owner = cur.get("projections", {}).get(proj)
+            if new_owner and new_owner != old_owner:
+                out.append(_diag(D, "TSAGDA184", f"projection {proj} moved receiver record {old_owner} -> {new_owner}", s, 1))
     return out
