@@ -123,3 +123,5 @@ import DASHI.Physics.Foundations.GRQFTPostMergeMaxCutExact
 
 import DASHI.Physics.Foundations.CMP119PinnedYMGRQFTSectorStressBridgeValidation
 import DASHI.Physics.Foundations.GRQFTPostMergeMaxCutValidation
+
+import DASHI.Physics.Foundations.GRQFTActiveGaugeSectorTotalizationExact
