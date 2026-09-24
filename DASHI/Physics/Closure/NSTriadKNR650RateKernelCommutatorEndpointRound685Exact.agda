@@ -24,6 +24,7 @@ module DASHI.Physics.Closure.NSTriadKNR650RateKernelCommutatorEndpointRound685Ex
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; 0ℚ; _-_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -107,20 +108,24 @@ fixedOutputPhysicalRateKernelIsCommutatorMinusTangent
         rho S velocity forcing cutoff output
     weightedIsNegativeDecay :
       weighted ≡ 0ℚ - Work.coherentWork mixed decay
-    weightedIsNegativeDecay
-      rewrite decayMeaning =
-      solve (weighted ∷ [])
+    weightedIsNegativeDecay =
+      trans
+        (solve (weighted ∷ []))
+        (cong (0ℚ -_) (sym decayMeaning))
 
     commutatorMinusTangentIsNegativeDecay :
       Work.coherentWork mixed commutator
         - Work.coherentWork mixed tangent
       ≡ 0ℚ - Work.coherentWork mixed decay
-    commutatorMinusTangentIsNegativeDecay
-      rewrite commutatorMeaning =
-      solve
-        ( Work.coherentWork mixed tangent
-        ∷ Work.coherentWork mixed decay
-        ∷ [])
+    commutatorMinusTangentIsNegativeDecay =
+      trans
+        (cong
+          (_- Work.coherentWork mixed tangent)
+          commutatorMeaning)
+        (solve
+          ( Work.coherentWork mixed tangent
+          ∷ Work.coherentWork mixed decay
+          ∷ []))
   in
   trans weightedIsNegativeDecay
     (sym commutatorMinusTangentIsNegativeDecay)
