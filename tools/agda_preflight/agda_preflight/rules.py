@@ -190,7 +190,7 @@ def extended_diagnostics(checker, s, D):
         alias_owner[alias] = module
         target = imported.get(alias)
         if target:
-            exports = set(target.signatures) | set(target.records) | {f for r in target.records.values() for f in r.fields}
+            exports = set(target.exported_names)
             for directive in directives:
                 if directive.kind == "using":
                     for n in directive.names:
@@ -568,7 +568,7 @@ def extended_diagnostics(checker, s, D):
         if not is_open: continue
         target = imported.get(alias)
         if not target: continue
-        names = set(target.signatures) | set(target.records) | {f for r in target.records.values() for f in r.fields}
+        names = set(target.exported_names)
         ren = {}
         for directive in directives:
             if directive.kind == "using":
@@ -1171,7 +1171,7 @@ def extended_diagnostics(checker, s, D):
             out.append(_diag(D, "TSAGDA077", f"type constructor {short} has {want} visible parameters but is used bare", s, token.line, token.column, severity="warning", confidence="medium"))
 
     # TSAGDA113: high-confidence single-identifier RHS scope check.
-    global_names = set(s.signatures) | set(s.records) | set(data) | set(ctors) | set(imported)
+    global_names = set(s.exported_names) | set(data) | set(ctors) | set(imported)
     for name, clause_items in s.ast.clauses.items():
         for clause in clause_items:
             if clause.rhs_node is None:
@@ -1247,7 +1247,7 @@ def extended_diagnostics(checker, s, D):
         if not is_open or not any(d.kind == "public" for d in directives): continue
         target = imported.get(alias)
         if not target: continue
-        names = set(target.signatures) | set(target.records) | {f for r in target.records.values() for f in r.fields}
+        names = set(target.exported_names)
         for n in names:
             public_exports.setdefault(n, []).append(module)
     for n, mods in public_exports.items():
@@ -1329,7 +1329,7 @@ def api_snapshot(checker):
         }
         modules[s.module_name] = {
             "path": str(rel),
-            "exports": sorted(set(s.signatures) | set(s.records) | set(constructors)),
+            "exports": sorted(set(s.exported_names) | set(constructors)),
             "signatures": signatures,
             "records": {k: {"fields": sorted(r.fields)} for k, r in s.records.items()},
             "projections": {f: rname for rname, r in s.records.items() for f in r.fields},
