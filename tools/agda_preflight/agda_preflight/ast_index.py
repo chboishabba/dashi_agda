@@ -396,6 +396,76 @@ def clause_explicit_argument_count(source_bytes: bytes, lhs_node) -> Optional[in
         return None
     return len(view.explicit_args)
 
+
+def direct_binding_parameters(source_bytes: bytes, declaration_node) -> List[AstBinder]:
+    """Return only parameters syntactically attached to a declaration header."""
+    out: List[AstBinder] = []
+    for child in declaration_node.named_children:
+        if child.type not in {"typed_binding", "untyped_binding"}:
+            continue
+        tokens = significant_tokens(source_bytes, child)
+        if not tokens:
+            continue
+        visibility = "explicit"
+        if tokens[0].text in {"{{", "⦃"}:
+            visibility = "instance"
+        elif tokens[0].text == "{":
+            visibility = "implicit"
+
+        colon_index = next((i for i, token in enumerate(tokens) if token.text == ":"), None)
+        name_tokens = tokens[:colon_index] if colon_index is not None else tokens
+        type_tokens = tokens[colon_index + 1:] if colon_index is not None else []
+        names = [
+            token for token in name_tokens
+            if token.node_type in {"id", "bid", "field_name", "qid"}
+            and token.text != "_"
+        ]
+        type_text = ""
+        start = end = child.start_byte
+        if type_tokens:
+            start = type_tokens[0].start_byte
+            end = type_tokens[-1].end_byte
+            type_text = source_bytes[start:end].decode("utf-8", "replace").strip()
+        for name in names:
+            out.append(
+                AstBinder(
+                    name=name.text,
+                    type_text=type_text,
+                    visibility=visibility,
+                    line=name.line,
+                    type_start_byte=start,
+                    type_end_byte=end,
+                )
+            )
+    return out
+
+
+def explicit_declaration_parameter_count(source_bytes: bytes, declaration_node) -> int:
+    return sum(
+        1 for binder in direct_binding_parameters(source_bytes, declaration_node)
+        if binder.visibility == "explicit"
+    )
+
+
+def module_application_target_and_args(source_bytes: bytes, macro_node):
+    app = first_descendant(macro_node, "module_application")
+    if app is None:
+        return None, ()
+    module_names = [child for child in descendants(app, "module_name")]
+    if not module_names:
+        return None, ()
+    target = node_text(source_bytes, module_names[0]).strip()
+    atoms = [child for child in app.named_children if child.type == "atom"]
+    args = tuple(
+        AstArgument(
+            text=node_text(source_bytes, atom).strip(),
+            visibility=_argument_visibility(source_bytes, atom),
+            node=atom,
+        )
+        for atom in atoms
+    )
+    return target, args
+
 def _leaf_tokens(source_bytes: bytes, node) -> List[str]:
     out: List[str] = []
     stack = [node]
