@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.BalabanClayT5MarkedPreferredExpectationRound445Ex
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
 
@@ -113,7 +114,7 @@ selectedMomentsAreMarkedMoments :
   T5.moments (compileMarkedPreferredExpectationProducer inputs)
   ≡
   R444.compileExponentialMomentProducer (momentRealization inputs)
-selectedMomentsAreMarkedMoments inputs = Agda.Builtin.Equality.refl
+selectedMomentsAreMarkedMoments inputs = refl
 
 round445MarkedPreferredExpectationCompilerLevel : ProofLevel
 round445MarkedPreferredExpectationCompilerLevel = machineChecked
