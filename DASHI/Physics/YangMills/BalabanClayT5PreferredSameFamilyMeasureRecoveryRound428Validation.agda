@@ -24,9 +24,13 @@ measureConvergenceCompilerMachineChecked :
   R428.round428MeasureConvergenceLevel ≡ machineChecked
 measureConvergenceCompilerMachineChecked = refl
 
-literalSubsequenceTightnessRemainsPhysical :
-  R428.round428EveryLiteralSubsequenceTightLevel ≡ conditional
-literalSubsequenceTightnessRemainsPhysical = refl
+literalSubsequenceTightnessCompilerOwned :
+  R428.round428EveryLiteralSubsequenceTightLevel ≡ machineChecked
+literalSubsequenceTightnessCompilerOwned = refl
+
+selectedDiagonalTightnessRemainsPhysical :
+  R428.round428SelectedDiagonalTightnessLevel ≡ conditional
+selectedDiagonalTightnessRemainsPhysical = refl
 
 uniqueClusterPointCompilerOwned :
   R428.round428EveryExtractedClusterPointIsContinuumLevel ≡ machineChecked
