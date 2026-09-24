@@ -7,7 +7,7 @@ from typing import Iterable, List, Optional
 import pytest
 
 from .checker import Checker, Diagnostic
-from .scope_backend import ExternalScopeBackend
+from .scope_backend import AgdaScopeCheckBackend, ExternalScopeBackend
 
 
 @dataclass(frozen=True)
@@ -54,6 +54,18 @@ def pytest_addoption(parser):
         default=None,
         help="optional Agda-aware command that confirms/suppresses scope diagnostics",
     )
+    group.addoption(
+        "--agda-scope-check",
+        action="store_true",
+        default=False,
+        help="run Agda --only-scope-checking to suppress false scope diagnostics",
+    )
+    group.addoption(
+        "--agda-bin",
+        action="store",
+        default="agda",
+        help="Agda executable for --agda-scope-check",
+    )
 
 
 def pytest_configure(config):
@@ -78,11 +90,19 @@ def _checker(config) -> Checker:
     if cached is None:
         root = _repo_root(config)
         command = config.getoption("--agda-scope-command")
-        scope_backend = (
-            ExternalScopeBackend(command, cwd=root)
-            if command
-            else None
-        )
+        native_scope = config.getoption("--agda-scope-check")
+        if command and native_scope:
+            raise pytest.UsageError(
+                "--agda-scope-command and --agda-scope-check are mutually exclusive"
+            )
+        scope_backend = None
+        if command:
+            scope_backend = ExternalScopeBackend(command, cwd=root)
+        elif native_scope:
+            scope_backend = AgdaScopeCheckBackend(
+                config.getoption("--agda-bin"),
+                cwd=root,
+            )
         cached = Checker(root, scope_backend=scope_backend)
         setattr(config, "_dashi_agda_checker", cached)
     return cached
