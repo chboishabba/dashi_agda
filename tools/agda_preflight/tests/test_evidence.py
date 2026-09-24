@@ -537,6 +537,29 @@ def test_constructor_result_aliases_collapse_to_one_triage_root_cause():
     assert canonical_code("TSAGDA075") == "TSAGDA072"
     assert canonical_code("TSAGDA114") == "TSAGDA072"
 
+
+def test_export_name_checks_require_agda_scope_evidence():
+    for code in ("TSAGDA021", "TSAGDA023", "TSAGDA025"):
+        policy = policy_for(code)
+        assert policy.minimum == EvidenceLevel.AGDA_SCOPE
+        assert policy.hard_error_allowed is True
+
+
+def test_scope_success_suppresses_export_name_suspicions(tmp_path):
+    write_module(tmp_path, "Lib", "module Lib where\n\nx : Set\nx = Set\n")
+    path = write_module(
+        tmp_path,
+        "Use",
+        "module Use where\n\nopen import Lib using (missing)\n",
+    )
+
+    backend = AgdaScopeCheckBackend("agda")
+    backend._scope_ok = lambda _: True
+    checker = Checker(tmp_path, scope_backend=backend)
+
+    hits = checker.check(path)
+    assert not any(d.code == "TSAGDA023" for d in hits)
+
 def test_unfolding_sensitive_checks_require_typechecker_evidence():
     for code in (
         "TSAGDA040",
