@@ -79,9 +79,20 @@ record MatterAcceptanceReceipt : Set where
     eventRefs : List String
     claimRefs : List String
 
+    exactEventRefs : List String
+    approximateEventRefs : List String
+    relativeEventRefs : List String
+    undatedEventRefs : List String
+    unknownDateEventRefs : List String
+
     missingDateEventRefs : List String
     missingActorClaimRefs : List String
     contradictoryRelationRefs : List String
+
+    eventWithoutSourceTraceRefs : List String
+    claimWithoutSourceTraceRefs : List String
+    sourceTraceWithoutDownstreamRefs : List String
+
     noEventRefs : List String
 
     partyAssertionRefs : List String
@@ -135,6 +146,14 @@ canonicalMatterAcceptanceReceiptShape : MatterAcceptanceReceipt
 canonicalMatterAcceptanceReceiptShape =
   matter-acceptance-receipt
     "matter:acceptance-example"
+    []
+    []
+    []
+    []
+    []
+    []
+    []
+    []
     []
     []
     []
@@ -219,6 +238,8 @@ data ContradictionForcesMergedNarrative : Set where
 data AcceptanceRoleCreatesTruth : Set where
 data AcceptanceDiagnosticCreatesNegativeFinding : Set where
 data AcceptanceReceiptMutatesMatter : Set where
+data MissingSourceTraceMeansNoSourceExists : Set where
+data MissingClaimReopenPathMeansClaimUnsupported : Set where
 
 missingDateDoesNotMeanEventDidNotHappen :
   MissingDateMeansEventDidNotHappen → ⊥
@@ -258,3 +279,11 @@ acceptanceDiagnosticDoesNotCreateNegativeFinding ()
 acceptanceReceiptDoesNotMutateMatter :
   AcceptanceReceiptMutatesMatter → ⊥
 acceptanceReceiptDoesNotMutateMatter ()
+
+missingSourceTraceDoesNotMeanNoSourceExists :
+  MissingSourceTraceMeansNoSourceExists → ⊥
+missingSourceTraceDoesNotMeanNoSourceExists ()
+
+missingClaimReopenPathDoesNotMeanClaimUnsupported :
+  MissingClaimReopenPathMeansClaimUnsupported → ⊥
+missingClaimReopenPathDoesNotMeanClaimUnsupported ()
