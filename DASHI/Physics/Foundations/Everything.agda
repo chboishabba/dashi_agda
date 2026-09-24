@@ -211,3 +211,5 @@ import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVSystemExact
 import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVExteriorMassCollisionExact
 
 import DASHI.Physics.Foundations.GRQFTPositiveDensityExteriorRepulsionNoGoExact
+
+import DASHI.Physics.Foundations.GRQFTLocalizedDefocusingExteriorNoGoMaxCutExact
