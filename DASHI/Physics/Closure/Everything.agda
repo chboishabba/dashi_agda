@@ -142,6 +142,99 @@ import DASHI.Physics.Closure.NSTriadKNStrictR423ProofSearchRound493Exact
 -- cone for focused validation.
 import DASHI.Physics.Closure.NSTriadKNLiteralR406DirectTerminalEverythingRound505Exact
 
+-- Post-R505 covariance/resolvent consolidation.  These exact owners put the
+-- physical R229 centered covariance and the R290/R503 resolvent lane on the
+-- same literal double-mixed pair carrier.  The pair-rate weight is retained,
+-- then the fixed-output resolvent is split into one common output heat
+-- resolvent plus a centered-frequency correction.  No analytic payment or
+-- Clay promotion is asserted here.
+import DASHI.Physics.Closure.NSTriadKNFixedOutputRateWeightedGramToR290Exact
+import DASHI.Physics.Closure.NSTriadKNCenteredCovarianceR290DynamicNormalFormExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputResolventCenteredDefectExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputResolventGramFluxSplitExact
+
+-- Portability quotient for the current centered-resolvent frontier.  The first
+-- owner extracts the exact signed split into a domain-independent interaction
+-- carrier plus a separately supplied aggregation law.  The second proves that
+-- the literal periodic R290 positive double-mixed pair is a concrete
+-- realization of that carrier.  A future R^3/Lebesgue realization must inhabit
+-- the same interface; no B->A implication or continuum measure theorem is
+-- asserted here.
+import DASHI.Physics.Closure.NSTriadKNSignedFrequencyCarrierExact
+import DASHI.Physics.Closure.NSTriadKNPeriodicSignedFrequencyCarrierRealizationExact
+
+-- Hard analytic centered-resolvent tranche.  The generic kernel owner proves
+-- the two exact envelopes s/[a(a+s)] <= s/a^2 and <= 1/a.  The physical owner
+-- constructs their hypotheses from positive viscosity/nonzero output and
+-- identifies the literal R290 correction coefficient with that kernel.  The
+-- opposite-shift owner then proves exact first-order cancellation, leaving a
+-- quadratic h^2 resolvent defect before any absolute-value observer.
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventKernelEnvelopeExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredResolventKernelEnvelopeExact
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventOppositeShiftSecondOrderExact
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondMomentAdapterExact
+import DASHI.Physics.Closure.NSTriadKNCenteredResolventSecondOrderEnvelopeExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredResolventUniformCurvatureExact
+
+-- Four-lane continuation after signed-core extraction.
+-- A: independent Bishop-R3 interaction carrier and Lebesgue aggregation compiler.
+-- B: literal Hermitian G2 scalar->vector weld and six-real-coordinate path bound.
+-- C/D: canonical R3 field semantics plus released-proof reconstruction compilers.
+import DASHI.Physics.Closure.NSTriadKNEuclideanSignedFrequencyCarrierRealizationExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanLebesgueSignedAggregationExact
+import DASHI.Physics.Closure.NSTriadKNR290HermitianG2StateDifferenceExact
+import DASHI.Physics.Closure.NSTriadKNR290ComplexPathDifferenceG2Exact
+import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDCanonicalReconstructionExact
+import DASHI.Physics.Closure.NSCanonicalLiteralABCDInstanceExact
+
+-- Four-lane hard continuation.
+-- A: concrete continuous Fourier interaction objects plus high-shell and
+--    low-frequency product-level centered-resolvent mathematics.
+-- B: sharp squared Hermitian G2 path payment.
+-- C/D: released comparator shape/no-global consumer reconstruction and
+--      domain-specific Fourier representation targets.
+import DASHI.Physics.Closure.NSTriadKNEuclideanPhysicalFourierNSExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanCenteredResolventScaleRelativeExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanCenteredResolventLowFrequencyCompensationExact
+import DASHI.Physics.Closure.NSContinuousFrequencyStateVariationExact
+import DASHI.Physics.Closure.NSWholeSpaceLowFrequencyCompensationExact
+import DASHI.Physics.Closure.NSLebesgueSignedSecondMomentAggregationExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanDivergenceFormOutputFactorExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanRawGramOutputQuadraticExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanViscousHeatRateExact
+import DASHI.Physics.Closure.NSWholeSpaceLowFrequencyFactorBudgetExact
+import DASHI.Physics.Closure.NSWholeSpaceCenteredResolventOppositeShiftSecondOrderExact
+import DASHI.Physics.Closure.NSWholeSpaceCenteredResidualLowOutputNoGoExact
+import DASHI.Physics.Closure.NSWholeSpaceCenteredResolventSaturationExact
+import DASHI.Physics.Closure.NSWholeSpaceSaturationOriginCancellationExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanBishopCauchyGramExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanRawGramQuadraticMajorantExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanBishopLerayProjectionExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanProjectedGramQuadraticMajorantExact
+import DASHI.Physics.Closure.NSWholeSpaceProjectedSaturationOriginBoundExact
+import DASHI.Physics.Closure.NSWholeSpaceR3RadialOriginCancellationExact
+import DASHI.Physics.Closure.NSWholeSpaceR3RadialFactorBudgetExact
+import DASHI.Physics.Closure.NSR3RadialLebesgueSignedSecondMomentAggregationExact
+import DASHI.Physics.Closure.NSWholeSpaceR3DirectionalSecondMomentQGainExact
+import DASHI.Physics.Closure.NSWholeSpaceR3CanonicalRadialDataExact
+import DASHI.Physics.Closure.NSWholeSpaceR3PhysicalQBudgetCompilerExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanBishopLerayPythagorasExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalLerayProjectionExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanProjectedCellOutputQExact
+import DASHI.Physics.Closure.NSTriadKNEuclideanProjectedInteractionQWeldExact
+import DASHI.Physics.Closure.NSWholeSpaceR3CanonicalProjectedQBudgetExact
+import DASHI.Physics.Closure.NSTriadKNR290HermitianG2SquaredCauchyExact
+import DASHI.Physics.Closure.NSTriadKNR290CanonicalOneStepG2PathExact
+import DASHI.Physics.Closure.NSTriadKNR571DiscreteG2FromG1Exact
+import DASHI.Physics.Closure.NSTriadKNR571LatticeDisplacementG2Exact
+import DASHI.Physics.Closure.NSTriadKNR571A2SameDisplacementCompilerExact
+import DASHI.Physics.Closure.NSTriadKNR571A2PhysicalSampleExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedComparatorCanonicalShapeExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedComparatorCanonicalWitnessExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicFourierReconstructionExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedEuclideanFourierReconstructionExact
+
 -- TOE integration: native SSP/369 symmetry action, equivariant two-sheet
 -- reduction, residual-bearing 9 -> 6 reopening, and NS 3 x 3 nonary chart.
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
@@ -166,3 +259,186 @@ import DASHI.Physics.Closure.TSFVActionPhaseWeightSeparationExact
 -- into a multiverse or anthropic-selection theorem.
 import DASHI.Physics.Closure.TSFVMultiverseViabilityCrossPollinationExact
 import DASHI.Physics.Closure.MultiverseAttractorDiscriminatorBidiExact
+
+import DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalProjectedInteractionExact
+
+import DASHI.Physics.Closure.NSWholeSpaceR3PhysicalKernelProjectedQWeldExact
+
+import DASHI.Physics.Closure.NSTriadKNEuclideanCanonicalProjectedGramPairExact
+
+import DASHI.Physics.Closure.NSWholeSpacePhysicalKernelSaturationOriginExact
+import DASHI.Physics.Closure.NSWholeSpaceCanonicalPairSaturationOriginExact
+import DASHI.Physics.Closure.NSWholeSpaceCanonicalSignedPairCarrierExact
+
+import DASHI.Physics.Closure.NSTriadKNEuclideanSignedGramPairCarrierRealizationExact
+
+import DASHI.Physics.Closure.NSWholeSpaceCoherentSaturationReductionExact
+
+import DASHI.Physics.Closure.NSWholeSpaceBishopFiniteCauchyPSDExact
+
+import DASHI.Physics.Closure.NSWholeSpaceBishopComplex3CauchyPSDExact
+
+import DASHI.Physics.Closure.NSWholeSpaceBishopCauchyPSDLimitExact
+import DASHI.Physics.Closure.NSWholeSpaceBishopWeightedCauchyQuadraturePSDExact
+import DASHI.Physics.Closure.NSWholeSpaceBishopCauchyQuadratureLimitExact
+import DASHI.Physics.Closure.NSWholeSpaceCoherentSaturationQuadratureExact
+
+import DASHI.Physics.Closure.NSWholeSpaceConvolutionEnergyTonelliExact
+import DASHI.Physics.Closure.NSWholeSpaceCoherentGramQuadratureLimitExact
+
+import DASHI.Physics.Closure.NSWholeSpaceConvolutionQuadratureCompletionExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalRawCurlCellEDFrontierReconciliationExact
+import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionQuadratureExact
+import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionToContinuumExact
+
+import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionSingleLimitExact
+import DASHI.Physics.Closure.NSWholeSpaceCoherentVectorQuadratureCompletionExact
+import DASHI.Physics.Closure.NSWholeSpaceFiniteConvolutionBoundaryDefectExact
+
+-- Literal A/B/C/D terminal theorem target for native kernel checking.
+import DASHI.Physics.Closure.NSLiteralClayABCDRunTargetExact
+
+import DASHI.Physics.Closure.NSConcreteFeffermanSemanticsExact
+
+import DASHI.Physics.Closure.NSConcreteLiteralClayABCDRunTargetExact
+
+import DASHI.Physics.Closure.NSConcreteReleasedCDNativeReconstructionExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedActualCandidatePhysicalInputsExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedCycleBookkeepingExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCorrectionStepExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedBandGeometryExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedStagePrimitivesExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedRankGeometryRefreshExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedDebtSmoothExact
+
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedPrimitivePreservationExact
+
+import DASHI.Physics.Closure.NSTriadKNR571HermitianStateDifferenceEnvelopeExact
+
+-- ABCD concentrated endgames after the September-20 portability/reconstruction
+-- tranche.  B isolates the single physical M2 payment, A composes the shared
+-- signed core with compensated Lebesgue aggregation, and C/D expose the
+-- canonical native either/or released theorem boundary.
+import DASHI.Physics.Closure.NSTriadKNR571PreferredOneSidedSecondMomentExact
+import DASHI.Physics.Closure.NSTriadKNR571PhysicalWeightedSecondMomentEndgameExact
+import DASHI.Physics.Closure.NSWholeSpaceSignedLebesgueEndgameExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCDNativeAnyOneCutExact
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact
+
+-- Post-concentration analytic reductions for all four alternatives.
+import DASHI.Physics.Closure.NSTriadKNR571PhysicalSecondMomentSummationExact
+import DASHI.Physics.Closure.NSTriadKNR571SecondMomentToR568BridgeExact
+import DASHI.Physics.Closure.NSWholeSpaceCompensatedMajorantLowHighGlueExact
+import DASHI.Physics.Closure.NSWholeSpacePhysicalCompensatedFieldCompilerExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCovarianceMovingNativeExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedOptionCCompactCandidateAdapterExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedOptionDPeriodicCandidateAdapterExact
+import DASHI.Physics.Closure.NSConcreteReleasedCandidateAdaptersExact
+import DASHI.Physics.Closure.NSTriadKNR567ToLiteralR571M2Exact
+import DASHI.Physics.Closure.NSTriadKNR573FourSignSecondMomentAggregationExact
+import DASHI.Physics.Closure.NSWholeSpaceLowHighConvolutionProducerExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedPeriodicCandidateNativeExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedSelectedCompactCandidateFromPeriodicExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicExclusionNativeExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedR3FiniteEnergyExclusionNativeExact
+-- Producer-level reductions below the concentrated ABCD frontier.
+import DASHI.Physics.Closure.NSTriadKNR571PhysicalM2DissipationFoldExact
+import DASHI.Physics.Closure.NSTriadKNCenteredCovarianceToSecondMomentExact
+import DASHI.Physics.Closure.NSTriadKNCenteredSquareIntegerScaleExact
+import DASHI.Physics.Closure.NSTriadKNCenteredSquareIntegerGapExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCenteredCovarianceSecondMomentExact
+import DASHI.Physics.Closure.NSTriadKNCoherentWorkHermitianScalarizationExact
+import DASHI.Physics.Closure.NSTriadKNLiteralFixedOutputCovarianceM2PaymentExact
+import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedPeriodicEnergyUniquenessKernelExact
+import DASHI.Physics.Closure.NSOpenAI2026ReleasedCompactLocalizationKernelExact
+
+-- Canonical centered covariance recut: common output Laplacian cancels before observation.
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredToInputLaplacianCovarianceExact
+
+-- B: exact cross-gradient normal form for the signed fixed-output covariance.
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCrossGradientCovarianceExact
+
+-- B: unit-normalized live/lattice displacement same-object weld.
+import DASHI.Physics.Closure.NSTriadKNR571UnitNormalizedDisplacementWeldExact
+import DASHI.Physics.Closure.NSTriadKNR573HomochiralHeterochiralSplitExact
+import DASHI.Physics.Closure.NSTriadKNR567HelicityResolvedForcingSquareExact
+import DASHI.Physics.Closure.NSTriadKNR571OppositeShiftMidpointObstructionExact
+import DASHI.Physics.Closure.NSTriadKNR540OffDiagonalToLiteralR571M2Exact
+import DASHI.Physics.Closure.NSTriadKNR540PhysicalOffDiagonalR571M2Exact
+import DASHI.Physics.Closure.NSTriadKNFourSignInnerFibreGramBoundaryRound577Exact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceQuantitativePairBoundExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBudgetExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceLiveExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceVectorCenteringExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceVectorLiveExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceVectorResidualWeldExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredInputLaplacianVectorResidualExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianR440WeldExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredInputLaplacianBonyVectorExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBonyLiveExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredBonyCovariancePaymentExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCenteredBonyPaymentLiveExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianBonyPairBlocksExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianThreeClassPairBlocksExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceSixBlockLiveExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalSixBlockPaymentLiveExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalParabolicCriticalRegionRoutingExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionPairBlocksExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceCriticalRegionLiveExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionPaymentLiveExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionToR432Exact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyExact
+import DASHI.Physics.Closure.NSTriadKNFiniteBipartiteCovarianceExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputInputLaplacianCriticalRegionFilteredExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceFilteredRegionLiveExact
+
+import DASHI.Physics.Closure.NSTriadKNR567ForcingCellPhysicalEnvelopeExact
+
+import DASHI.Physics.Closure.NSTriadKNSameOutputIncidenceDisplacementExact
+import DASHI.Physics.Closure.NSTriadKNR573HelicitySplitLowOutputPaymentExact
+import DASHI.Physics.Closure.NSTriadKNNestedSlotThreeClassNormCompilerRound587Exact
+import DASHI.Physics.Closure.NSTriadKNR587ExactThreeClassSelfBudgetBidiExact
+
+-- Native R236 critical-region producer/decomposition compilers.
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionUniformFamilyProducerExact
+import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalRegionR406DecompositionExact
+
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowFractionalShellPaymentExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowDeepHHFractionalShellPaymentExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepHHFractionalShellPaymentExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalTouchingRelativeCovarianceExact
+
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCriticalRegionAnalyticAssemblyExact
+
+import DASHI.Physics.Closure.NSWholeSpacePhysicalMajorantDominationProducerExact
+import DASHI.Physics.Closure.NSWholeSpaceActualPhysicalCompensatedFieldExact
+import DASHI.Physics.Closure.NSWholeSpaceActualSignedLebesgueEndgameExact
+
+import DASHI.Physics.Closure.NSActualSelectedPeriodicCandidateAssemblyExact
+import DASHI.Physics.Closure.NSPeriodicDifferenceEnergyProducerExact
+import DASHI.Physics.Closure.NSActualPeriodicCandidateExclusionExact
+import DASHI.Physics.Closure.NSActualPeriodicToCompactLocalizationExact
+import DASHI.Physics.Closure.NSActualCompactCandidateExclusionExact
+
+import DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact
+
+import DASHI.Physics.Closure.NSClayFacingAAnalyticCutExact
+import DASHI.Physics.Closure.NSClayFacingBResearchCutExact
+import DASHI.Physics.Closure.NSClayFacingCDSourceAuditExact
+
+import DASHI.Physics.Closure.NSPeriodicInfinityShellSubsetCountExact
+import DASHI.Physics.Closure.NSTriadKNLiteralInfinityShellBernsteinPaymentExact
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact
+
+import DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact
+
+import DASHI.Physics.Closure.NSClayFacingATwoPhysicalSeamCompilerExact
