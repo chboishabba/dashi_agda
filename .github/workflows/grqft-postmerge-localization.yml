@@ -52,6 +52,8 @@ on:
       - 'DASHI/Physics/Foundations/GRQFTCommonRegimeBidiAttemptValidation.agda'
       - 'scripts/grqft_cross_sector_component_residual.py'
       - 'outputs/grqft_cross_sector_component_target.json'
+      - 'DASHI/Physics/Foundations/CMP119MetricBasisStressComponentCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119MetricBasisStressComponentCompilerValidation.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
