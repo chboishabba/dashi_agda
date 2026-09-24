@@ -169,6 +169,51 @@ TSAGDA113  apparently unbound RHS identifier
 TSAGDA154  ambiguous opened operator
 ```
 
+### Aggregate scope refinement
+
+When pytest is collecting a dependency closure with `--agda-deps` and
+`--agda-auto-refine`, scope refinement is closure-aware rather than strictly
+per-module.
+
+The collector first probes the selected aggregate root. If that scope-check
+succeeds, every module in its collected dependency closure is marked as having
+`AGDA_SCOPE` evidence. If it fails, the collector recursively probes only the
+direct imported subtrees that remain unresolved:
+
+```text
+aggregate root
+  success -> certify whole closure
+  failure
+    -> probe imported subtree roots
+         success -> certify that subtree
+         failure -> descend again
+```
+
+Successful subtrees are cached, shared DAG dependencies are not re-probed, and
+failed frontier modules are cached so individual pytest items do not repeat the
+same failed scope process.
+
+For a shadow-tree or wrapper-based Agda environment, use an exit-code scope
+runner:
+
+```bash
+pytest --agda-preflight --agda-deps \
+  --agda-auto-refine=scope \
+  --agda-scope-runner 'scripts/run-shadow-scope.sh {file}' \
+  --agda-root . DASHI/Everything.agda -vv
+```
+
+The runner command may contain the literal `{file}`; otherwise the absolute
+module path is appended. Exit status 0 certifies scope success. Nonzero status
+leaves the structural scope findings deferred. This protocol is intentionally
+different from `--agda-scope-command`, whose command must emit precise JSON
+confirmation/suppression locations.
+
+This is especially useful when the real Agda environment lives in a reusable
+shadow tree or Nix toolchain. The preflight package remains generic while the
+runner owns synchronization, library/include paths, resource guards and the
+concrete Agda version.
+
 ### Native Agda scope oracle
 
 Agda itself exposes `--only-scope-checking`. The preflight checker can use it
