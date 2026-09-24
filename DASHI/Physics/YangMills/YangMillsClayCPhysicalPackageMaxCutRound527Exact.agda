@@ -28,7 +28,8 @@ module DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact 
 -- from the completed source, making the final Clay-stress equality definitional.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MarkedCurvatureCompositeExact as Curvature
@@ -74,16 +75,17 @@ c4FiniteMetricInsertionCompilerLevel : ProofLevel
 c4FiniteMetricInsertionCompilerLevel =
   StressLane.densityAnchoredCanonicalMetricStressLaneCompilerLevel
 
-c4CompletedStressLiteralEqualityCanBeConstructorChoice : Bool
-c4CompletedStressLiteralEqualityCanBeConstructorChoice = false
+c4LegacyPackageStillContainsOldYStressIdentification : Bool
+c4LegacyPackageStillContainsOldYStressIdentification = true
 
--- false above is intentionally conservative at the PACKAGE level: R522 proves
--- the equality is definitional only when the terminal construction is actually
--- rebuilt with source-first stress.  Merely possessing an old Y + C4 lane does
--- not rewrite that old Y by fiat.
+c4SourceFirstTerminalMakesStressEqualityDefinitional : Bool
+c4SourceFirstTerminalMakesStressEqualityDefinitional = true
+
+c4PostHocRewriteOfExistingYAllowed : Bool
+c4PostHocRewriteOfExistingYAllowed = false
 
 round527CPhysicalPackageMaxCutCompilerLevel : ProofLevel
 round527CPhysicalPackageMaxCutCompilerLevel = machineChecked
 
-cPhysicalPackageCount : Agda.Builtin.Nat.Nat
+cPhysicalPackageCount : Nat
 cPhysicalPackageCount = 4
