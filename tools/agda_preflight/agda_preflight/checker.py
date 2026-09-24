@@ -496,36 +496,44 @@ class Checker:
         return order
 
     def dependency_modules(self, path: Path) -> List[str]:
-        """Return recursive import dependencies in dependency-first order.
+        """Return recursive imports in dependency-first order.
 
-        Unlike affected_modules(), which walks reverse imports from a changed
-        leaf to its consumers, this walks the ordinary import graph downward.
-        It is the useful ordering for checking an aggregate such as
-        DASHI.Everything: leaves first, aggregate root last.
+        This deliberately follows only the target's reachable import cone.
+        Building the repository-wide dependency graph here made aggregate
+        collection parse tens of thousands of unrelated Agda files.
         """
-        summary = self.parse_summary(path)
-        start = summary.module_name
-        graph = self.dependency_graph()
+        start_summary = self.parse_summary(path)
         order: List[str] = []
         permanent: Set[str] = set()
         temporary: Set[str] = set()
 
-        def visit(module: str) -> None:
+        def visit(module: str, summary: Optional[ModuleSummary] = None) -> None:
             if module in permanent:
                 return
             if module in temporary:
-                # Import-cycle diagnostics are handled separately. Stop the
-                # ordering recursion here rather than looping forever.
+                # TSAGDA029 reports the cycle. Collection itself must remain
+                # finite and cheap.
                 return
+
+            module_path = self.module_path(module)
+            if summary is None:
+                if not module_path.exists():
+                    return
+                try:
+                    summary = self.parse_summary(module_path)
+                except (OSError, UnicodeDecodeError):
+                    return
+
             temporary.add(module)
-            for dependency in sorted(graph.get(module, ())):
-                if dependency in graph:
+            for dependency in sorted(set(summary.imports.values())):
+                dependency_path = self.module_path(dependency)
+                if dependency_path.exists():
                     visit(dependency)
             temporary.remove(module)
             permanent.add(module)
             order.append(module)
 
-        visit(start)
+        visit(start_summary.module_name, start_summary)
         return order
 
 
