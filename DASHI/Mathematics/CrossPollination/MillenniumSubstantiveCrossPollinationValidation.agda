@@ -15,6 +15,7 @@ import DASHI.Mathematics.CrossPollination.HurwitzHopfNoetherMillenniumCrossPolli
 import DASHI.Analysis.RiemannMaassMoonshineCrossPollinationExact
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact
+import DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineHodgeDiamondExact
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveLineCycleClassExact
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHodgeReopeningCompilerExact
@@ -29,6 +30,7 @@ import DASHI.Mathematics.Arithmetic.EllipticCurveHodgeFrobeniusCrossPollination
 import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact
 import DASHI.Mathematics.Complexity.PolynomialReductionExact
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary
+import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact
 import DASHI.Mathematics.Complexity.RSAQuantumShorPvsNPCrossPollinationValidation
 
 import DASHI.Mathematics.NumberTheory.RiemannXiSymmetryExact
