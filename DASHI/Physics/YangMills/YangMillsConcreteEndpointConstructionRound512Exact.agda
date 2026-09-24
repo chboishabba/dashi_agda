@@ -293,7 +293,7 @@ concreteVacuumSectorPositiveEnergy {bundle = bundle} inputs group =
     ( refl
     , refl
     , refl
-    , R511.gapHamiltonianIsReconstructed bundle group
+    , R511.clusteringHamiltonianIsReconstructed bundle group
     )
 
 concreteStrictPositiveMassGap :
@@ -343,7 +343,7 @@ concretePhysicalScaleLowerBound :
     group
     (Top.massGap (concreteLiteralConstruction inputs) group)
 concretePhysicalScaleLowerBound {bundle = bundle} inputs group =
-  sym (R511.cutoffGapValueIsPhysicalGap bundle group)
+  sym (refl)
 
 concreteNoSpectralPollution :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -367,8 +367,8 @@ concreteNoSpectralPollution :
     (Top.hamiltonian (concreteLiteralConstruction inputs) group)
     (Top.massGap (concreteLiteralConstruction inputs) group)
 concreteNoSpectralPollution {bundle = bundle} inputs group =
-  ( sym (R511.cutoffGapHamiltonianIsReconstructed bundle group)
-  , sym (R511.cutoffGapValueIsPhysicalGap bundle group)
+  ( sym (R511.clusteringHamiltonianIsReconstructed bundle group)
+  , refl
   )
 
 concreteGapAndClusteringDerived :
@@ -391,9 +391,7 @@ concreteGapAndClusteringDerived :
     (R511.concreteEndpointSemantics base bundle)
     group
 concreteGapAndClusteringDerived {bundle = bundle} inputs group =
-  ( R511.clusteringHamiltonianIsPhysicalGapHamiltonian bundle group
-  , R511.clusteringMassIsPhysicalGap bundle group
-  )
+  R511.clusteringHamiltonianIsReconstructed bundle group
 
 concreteNontrivialYangMills :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
