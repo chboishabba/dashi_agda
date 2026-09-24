@@ -8,6 +8,10 @@ files=(
   DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
   DASHI/Physics/Foundations/GRQFTStressWeldBidiAttemptExact.agda
   DASHI/Physics/Foundations/GRQFTRecoveryBidiAttemptExact.agda
+  DASHI/Physics/Foundations/RecoveredGRAttachmentExact.agda
+  DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierExact.agda
+  DASHI/Physics/Foundations/BalabanRound131RecoveredQFTAttachmentExact.agda
+  DASHI/Physics/Foundations/BalabanRound131RecoveredQFTTransportCompilerExact.agda
   DASHI/Physics/Closure/DiscreteWarpedEinsteinMatterModel.agda
   DASHI/Physics/Closure/EinsteinEquationBidiResidualExact.agda
   DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda
@@ -36,4 +40,8 @@ export DASHI_NO_TMUX="1"
 
 scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Foundations/GRQFTStressWeldBidiAttemptExact.agda \
+  DASHI/Physics/Foundations/GRQFTRecoveryBidiAttemptExact.agda \
+  DASHI/Physics/Foundations/RecoveredGRAttachmentExact.agda \
+  DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierExact.agda \
+  DASHI/Physics/Foundations/BalabanRound131RecoveredQFTAttachmentValidation.agda \
   DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda
