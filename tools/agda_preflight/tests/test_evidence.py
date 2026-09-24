@@ -13,6 +13,7 @@ from agda_preflight.evidence import (
 )
 from agda_preflight.evidence_cli import main as evidence_main
 from agda_preflight.scope_backend import (
+    AgdaAutoRefineBackend,
     AgdaScopeCheckBackend,
     AgdaTypecheckBackend,
     ExternalScopeBackend,
@@ -272,3 +273,111 @@ def test_evidence_cli_filters_by_minimum_layer(capsys):
     assert "agda-scope" in output
     assert "TSAGDA113" in output
     assert "TSAGDA041" not in output
+
+
+
+def test_auto_refine_does_not_run_agda_without_deferred_findings(tmp_path):
+    path = write_module(tmp_path, "AutoNoop")
+    backend = AgdaAutoRefineBackend("agda", typecheck=True)
+
+    def forbidden(_):
+        raise AssertionError("Agda should not run without deferred findings")
+
+    backend.scope._scope_ok = forbidden
+    backend.typecheck._typecheck_ok = forbidden
+
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+    diagnostic = Diagnostic(
+        "TSAGDA204",
+        "trust-policy finding",
+        path,
+        2,
+        1,
+        severity="error",
+    )
+
+    [result] = checker._apply_evidence_policy(summary, [diagnostic])
+    assert result.code == "TSAGDA204"
+
+
+def test_auto_refine_runs_scope_only_when_scope_evidence_is_needed(tmp_path):
+    path = write_module(tmp_path, "AutoScope")
+    backend = AgdaAutoRefineBackend("agda", typecheck=False)
+    calls = {"scope": 0}
+
+    def scope_ok(_):
+        calls["scope"] += 1
+        return True
+
+    backend.scope._scope_ok = scope_ok
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+    diagnostic = Diagnostic(
+        "TSAGDA113",
+        "identifier may be unbound",
+        path,
+        2,
+        1,
+        severity="error",
+    )
+
+    assert checker._apply_evidence_policy(summary, [diagnostic]) == []
+    assert calls == {"scope": 1}
+
+
+def test_auto_refine_scope_failure_skips_full_typecheck(tmp_path):
+    path = write_module(tmp_path, "AutoScopeFail")
+    backend = AgdaAutoRefineBackend("agda", typecheck=True)
+    calls = {"scope": 0, "typecheck": 0}
+
+    def scope_fail(_):
+        calls["scope"] += 1
+        return False
+
+    def typecheck_forbidden(_):
+        calls["typecheck"] += 1
+        raise AssertionError("typecheck should not run after scope failure")
+
+    backend.scope._scope_ok = scope_fail
+    backend.typecheck._typecheck_ok = typecheck_forbidden
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+
+    diagnostics = [
+        Diagnostic("TSAGDA113", "scope suspicion", path, 2, 1, severity="error"),
+        Diagnostic("TSAGDA041", "typing suspicion", path, 3, 1, severity="error"),
+    ]
+    results = checker._apply_evidence_policy(summary, diagnostics)
+
+    assert [d.code for d in results] == ["TSAGDA113", "TSAGDA041"]
+    assert calls == {"scope": 1, "typecheck": 0}
+
+
+def test_auto_refine_typechecks_only_surviving_typechecker_findings(tmp_path):
+    path = write_module(tmp_path, "AutoTypecheck")
+    backend = AgdaAutoRefineBackend("agda", typecheck=True)
+    calls = {"scope": 0, "typecheck": 0}
+
+    def scope_ok(_):
+        calls["scope"] += 1
+        return True
+
+    def typecheck_ok(_):
+        calls["typecheck"] += 1
+        return True
+
+    backend.scope._scope_ok = scope_ok
+    backend.typecheck._typecheck_ok = typecheck_ok
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+
+    diagnostics = [
+        Diagnostic("TSAGDA113", "scope suspicion", path, 2, 1, severity="error"),
+        Diagnostic("TSAGDA041", "typing suspicion", path, 3, 1, severity="error"),
+        Diagnostic("TSAGDA204", "trust-policy finding", path, 4, 1, severity="error"),
+    ]
+    results = checker._apply_evidence_policy(summary, diagnostics)
+
+    assert [d.code for d in results] == ["TSAGDA204"]
+    assert calls == {"scope": 1, "typecheck": 1}
