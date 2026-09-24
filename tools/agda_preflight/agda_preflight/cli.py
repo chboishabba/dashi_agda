@@ -5,7 +5,8 @@ import json
 from pathlib import Path
 import sys
 
-from .checker import Checker
+from .checker import Checker, Diagnostic
+from .rules import api_snapshot, api_drift
 
 
 def _format(diag) -> str:
@@ -36,9 +37,45 @@ def main(argv=None) -> int:
         help="print affected modules in frontier order and exit",
     )
     parser.add_argument("--json", action="store_true", help="emit JSON diagnostics")
+    parser.add_argument("--write-api-snapshot", type=Path, help="write repository API summary JSON and exit")
+    parser.add_argument("--api-baseline", type=Path, help="compare current exported API to a prior snapshot")
+    parser.add_argument("--cycles", action="store_true", help="report repository import cycles containing FILE")
     args = parser.parse_args(argv)
 
     checker = Checker(args.root)
+
+    if args.write_api_snapshot:
+        args.write_api_snapshot.write_text(
+            json.dumps(api_snapshot(checker), indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        print(args.write_api_snapshot)
+        return 0
+
+    if args.cycles:
+        graph = checker.dependency_graph()
+        start = checker.parse_summary(args.file).module_name
+        state = {}
+        stack = []
+        cycles = []
+        def visit(node):
+            state[node] = 1
+            stack.append(node)
+            for dep in graph.get(node, ()):
+                if dep not in graph:
+                    continue
+                if state.get(dep, 0) == 0:
+                    visit(dep)
+                elif state.get(dep) == 1 and dep in stack:
+                    cycle = stack[stack.index(dep):] + [dep]
+                    if cycle not in cycles:
+                        cycles.append(cycle)
+            stack.pop()
+            state[node] = 2
+        visit(start)
+        for cycle in cycles:
+            print(" -> ".join(cycle))
+        return 1 if cycles else 0
 
     if args.plan:
         for module in checker.affected_modules(args.file):
@@ -48,6 +85,9 @@ def main(argv=None) -> int:
     diagnostics = (
         checker.check_closure(args.file) if args.closure else checker.check(args.file)
     )
+    if args.api_baseline:
+        baseline = json.loads(args.api_baseline.read_text(encoding="utf-8"))
+        diagnostics.extend(api_drift(checker, baseline, Diagnostic))
 
     if args.json:
         print(json.dumps([d.as_dict() for d in diagnostics], indent=2))
