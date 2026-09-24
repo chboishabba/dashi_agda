@@ -100,16 +100,6 @@ module RadialSurplus
     hermitianCalculus constantScaleCalculus scalarDerivativeAlgebra
     FTC integrationLinearity
 
-  stateAt :
-    Live.LiteralRHSTrajectoryData →
-    Nat → Time →
-    Audit.FiniteComplex3GalerkinSystem F
-      (Live.Base.E ∘ Live.stateTrajectory ∘ Live.support $ _)
-      _
-  stateAt D cutoff time =
-    Live.Base.systemAt
-      (Live.stateTrajectory (Live.support D)) cutoff time
-
   radialProductionRate :
     Live.LiteralRHSTrajectoryData → Nat → Time → ℚ
   radialProductionRate D cutoff time =
