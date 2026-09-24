@@ -17,19 +17,19 @@ import DASHI.Law.SensibLawProofSearchParetoSaturationExact as Pareto
 ------------------------------------------------------------------------
 
 data ProofSearchTerminalState : Set where
-  proofClosed
-  proofContested
-  proofAuthorityBlocked
-  proofUnderidentified
-  proofSaturated
+  proofClosed : ProofSearchTerminalState
+  proofContested : ProofSearchTerminalState
+  proofAuthorityBlocked : ProofSearchTerminalState
+  proofUnderidentified : ProofSearchTerminalState
+  proofSaturated : ProofSearchTerminalState
   : ProofSearchTerminalState
 
 data ProofSearchProgressState : Set where
-  searchNeedsPlan
-  searchPlanReady
-  searchAcquired
-  searchAssessed
-  searchFrontierUpdated
+  searchNeedsPlan : ProofSearchProgressState
+  searchPlanReady : ProofSearchProgressState
+  searchAcquired : ProofSearchProgressState
+  searchAssessed : ProofSearchProgressState
+  searchFrontierUpdated : ProofSearchProgressState
   : ProofSearchProgressState
 
 record ProofSearchFrontier : Set where

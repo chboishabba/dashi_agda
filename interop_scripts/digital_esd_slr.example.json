@@ -1,0 +1,12 @@
+{
+  "tool_reference": "configured-external-slr",
+  "tool_revision_reference": "PIN-EXACT-SLR-REVISION-HERE",
+  "command": [
+    "slr",
+    "digital-esd-ingest",
+    "--input",
+    "{input}",
+    "--output-dir",
+    "{output_dir}"
+  ]
+}

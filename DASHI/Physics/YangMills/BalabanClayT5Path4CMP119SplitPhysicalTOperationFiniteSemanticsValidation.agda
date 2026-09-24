@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanClayT5Path4CMP119SplitPhysicalTOperationFiniteSemanticsValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119SplitPhysicalTOperationFiniteSemanticsExact as Path4
+
+splitPath4FiniteCompilerOwned :
+  Path4.path4CMP119SplitPhysicalTOperationFiniteSemanticsCompilerLevel ≡ machineChecked
+splitPath4FiniteCompilerOwned = refl
+
+splitPath4ExpectationIntegralCompilerOwned :
+  Path4.path4CMP119SplitPhysicalTOperationExpectationIntegralCompilerLevel ≡ machineChecked
+splitPath4ExpectationIntegralCompilerOwned = refl
+
+splitPath4ObservableEvaluationRemainsPhysical :
+  Path4.path4CMP119SplitPhysicalTOperationObservableEvaluationLevel ≡ conditional
+splitPath4ObservableEvaluationRemainsPhysical = refl

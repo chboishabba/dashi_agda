@@ -20,9 +20,9 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 ------------------------------------------------------------------------
 
 data AuthorityAdmissibility : Set where
-  authorityCandidate
-  authorityAdmittedForConsumer
-  authorityRejectedForConsumer
+  authorityCandidate : AuthorityAdmissibility
+  authorityAdmittedForConsumer : AuthorityAdmissibility
+  authorityRejectedForConsumer : AuthorityAdmissibility
   : AuthorityAdmissibility
 
 record CommunityAuthorityReceiptV02 : Set where

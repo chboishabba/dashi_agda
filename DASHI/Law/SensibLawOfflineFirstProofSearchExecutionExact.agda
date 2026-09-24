@@ -21,10 +21,10 @@ import DASHI.Law.SensibLawGovernedLegalNetworkStrategyExact as Network
 ------------------------------------------------------------------------
 
 data OfflineAuthorityInputKind : Set where
-  savedSearchFixture
-  persistedAuthorityReceipt
-  locallyIngestedPrimaryAuthority
-  localCompiledWorldArtifact
+  savedSearchFixture : OfflineAuthorityInputKind
+  persistedAuthorityReceipt : OfflineAuthorityInputKind
+  locallyIngestedPrimaryAuthority : OfflineAuthorityInputKind
+  localCompiledWorldArtifact : OfflineAuthorityInputKind
   : OfflineAuthorityInputKind
 
 record OfflineAuthorityInput : Set₁ where

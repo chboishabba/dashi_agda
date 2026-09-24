@@ -205,19 +205,5 @@ countryTechnicalBundleStillDoesNotCreateQualifiedUse = Cross.technicalBundleDoes
 researchReplayStillDoesNotRequireAuthority :
   BNF.requiredFor BNF.replayNationalAvoidedUreaExpenditure BNF.authorityAdequacy ≡ false
 researchReplayStillDoesNotRequireAuthority = refl
+open import DASHI.Biology.Agriculture.SevenGenerationBNFBoundaryExact public
 
-record SevenGenerationBNFBoundary : Set where
-  constructor seven-generation-bnf-boundary
-  field
-    presentProfitDeterminesGenerationSevenOptions : Bool
-    presentProfitDeterminesGenerationSevenOptionsIsFalse : presentProfitDeterminesGenerationSevenOptions ≡ false
-    everyIntermediateGenerationMustBeCollapsedIntoTerminalValue : Bool
-    everyIntermediateGenerationMustBeCollapsedIntoTerminalValueIsFalse : everyIntermediateGenerationMustBeCollapsedIntoTerminalValue ≡ false
-    CountryAuthorityIsIndependentLongHorizonCoordinate : Bool
-    CountryAuthorityIsIndependentLongHorizonCoordinateIsTrue : CountryAuthorityIsIndependentLongHorizonCoordinate ≡ true
-    longHorizonProducerSchedulingIsConsumerRelative : Bool
-    longHorizonProducerSchedulingIsConsumerRelativeIsTrue : longHorizonProducerSchedulingIsConsumerRelative ≡ true
-
-canonicalSevenGenerationBNFBoundary : SevenGenerationBNFBoundary
-canonicalSevenGenerationBNFBoundary =
-  seven-generation-bnf-boundary false refl false refl true refl true refl

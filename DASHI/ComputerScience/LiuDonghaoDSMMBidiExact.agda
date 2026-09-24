@@ -19,7 +19,7 @@ data DataLifecycleStage : Set where
   collection transmission storage processing exchange destruction : DataLifecycleStage
 
 data MaturityEvidenceCoordinate : Set where
-  governanceRule implementedControl retainedEvidence repeatableAssessment
+  governanceRule implementedControl retainedEvidence repeatableAssessment : MaturityEvidenceCoordinate
   measuredImprovement lifecycleCoverage : MaturityEvidenceCoordinate
 
 record DSMMModel : Set where
@@ -63,7 +63,7 @@ liuDSMMTransformation = T.application-transformation
   "Operational maturity requires organisation-specific controls, evidence, assessors and remediation history."
 
 data LiuDSMMReverseTarget : Set where
-  acquireAuthoredClause acquireAssessmentRubric acquireScoringSemantics
+  acquireAuthoredClause acquireAssessmentRubric acquireScoringSemantics : LiuDSMMReverseTarget
   acquireValidationCases acquireProjectImplementation acquireGovernanceSuccession : LiuDSMMReverseTarget
 
 DSMMImpliesCryptographicPrimitive : Bool

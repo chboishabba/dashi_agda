@@ -33,6 +33,14 @@ import DASHI.Biology.Protein.TRPA1SituatedProteinWitnessExact
 import DASHI.Biology.Protein.AdenylateKinaseSituatedProteinWitnessExact
 import DASHI.Biology.Protein.ProteinSituatedHyperfabricValidation
 
+-- Bt/pesticide/LES continuation: generic Bt/pesticide naming does not determine
+-- the required assay family, and pesticide identity does not determine the LES
+-- domain socket needed by a declared consumer.  Cry/Vip protein observation is
+-- structurally cross-pollinated with the situated-protein rule only; it does not
+-- transfer TRPA1/AdK mechanism, toxicology, ecological effect or source authority.
+import DASHI.Biology.Protein.ProteinBtPesticideLESSituatedObservationCrossPollinationExact
+import DASHI.Biology.Protein.ProteinBtPesticideLESSituatedObservationCrossPollinationValidation
+
 -- Parent-level temporal continuation: existing translation, conformation,
 -- protein-function, cell-state and open-metabolism owners are composed through
 -- explicit obligations.  No empirical paper is credited with the generic
@@ -46,3 +54,20 @@ import DASHI.Biology.Protein.ProteinTemporalObligationChainValidation
 -- payments do not transfer between protein lanes.
 import DASHI.Biology.Protein.ProteinTemporalObligationProfilesExact
 import DASHI.Biology.Protein.ProteinTemporalObligationProfilesValidation
+
+-- Consumer-projection portfolio and refinement kernel: four query-specific
+-- protein defects (thermal, conformation, rate, thiol modification) now select
+-- the shortest eligible retained-coordinate family only after adequacy.  Feng,
+-- AdK and Allium sources retain ownership only of their source-bounded premises;
+-- the shared selection/minimality theorem is DASHI synthesis.
+import DASHI.Biology.Protein.ProteinConsumerProjectionAdequacyExact
+import DASHI.Biology.Protein.ProteinConsumerProjectionAdequacyValidation
+import DASHI.Biology.Protein.ProteinConsumerFamilyRefinementKernelExact
+import DASHI.Biology.Protein.ProteinConsumerFamilyRefinementKernelValidation
+
+-- Cross-domain architecture check: the independent biocontrol chemistry lane
+-- already uses the same admissibility/consumer-adequacy-before-MDL ordering.
+-- Only the formal selection pattern is cross-pollinated; protein biology,
+-- chemistry/ecology mechanism, source attribution and authority do not transfer.
+import DASHI.Biology.Protein.ProteinConsumerFamilyBiocontrolCrossPollinationExact
+import DASHI.Biology.Protein.ProteinConsumerFamilyBiocontrolCrossPollinationValidation

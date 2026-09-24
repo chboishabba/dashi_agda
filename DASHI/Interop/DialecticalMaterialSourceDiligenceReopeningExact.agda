@@ -21,11 +21,10 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 ------------------------------------------------------------------------
 
 data ReopeningTrigger : Set where
-  materialConditionChanged
-  tensionActivated
-  futureConsumerCollision
-  interpretationReframed
-  : ReopeningTrigger
+  materialConditionChanged : ReopeningTrigger
+  tensionActivated : ReopeningTrigger
+  futureConsumerCollision : ReopeningTrigger
+  interpretationReframed : ReopeningTrigger
 
 record DialecticalSourceReopening : Set where
   constructor dialectical-source-reopening
@@ -132,7 +131,7 @@ dialecticalContradictionDoesNotRefuteSourceByItself ()
 
 materialChangeDoesNotSelectProducerWithoutTypedGap :
   MaterialChangeSelectsProducerWithoutGap → ⊥
-materialChangeDoesNotSelectProducerWithoutGap ()
+materialChangeDoesNotSelectProducerWithoutTypedGap ()
 
 reopeningNeedNotDeletePriorEvidence : ReopeningDeletesPriorEvidence → ⊥
 reopeningNeedNotDeletePriorEvidence ()

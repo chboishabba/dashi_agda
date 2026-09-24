@@ -80,8 +80,8 @@ toyPairNotIndependent independent = independent sharedRoot tt tt
 
 toyVisibleCountDoesNotCloseIndependentAdequacy :
   AdequatePairFor toyPolicy targetConsumer firstReport secondReport → ⊥
-toyVisibleCountDoesNotCloseIndependentAdequacy receipt =
-  toyPairNotIndependent (adequatePairCarriesIndependentSupport receipt)
+toyVisibleCountDoesNotCloseIndependentAdequacy (_ , _ , independent) =
+  toyPairNotIndependent independent
 
 record ProvenanceSensitiveAdequacyBoundary : Set where
   constructor provenance-sensitive-adequacy-boundary

@@ -18,7 +18,7 @@ import DASHI.Culture.MissingDeceasedTwentyScientistRound36HCBContractDerivativeI
 ------------------------------------------------------------------------
 
 data ContractRoleWorld : Set where
-  roleExistsOutsideCurrentDerivatives
+  roleExistsOutsideCurrentDerivatives : ContractRoleWorld
   noSuchRoleInWorld : ContractRoleWorld
 
 data CurrentDerivativeRosterObservation : Set where

@@ -1,0 +1,1432 @@
+{
+  "conflicts": 0,
+  "export_root": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric",
+  "observed_raw_occurrences": 46597,
+  "observed_unique_records": 43996,
+  "page_sha_verified": true,
+  "pages": [
+    {
+      "page_index": 0,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q1/page-000000.json",
+      "query": "Q1",
+      "sha256": "5e92ad5d9057999e6f75cb3ac4e99d48c617aa9377c298835de510c72104c24e"
+    },
+    {
+      "page_index": 1,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q1/page-000001.json",
+      "query": "Q1",
+      "sha256": "f47d9b19148bfde9ea2a1ff7e1f12a78f49a134ac277630ac86b13688655bce1"
+    },
+    {
+      "page_index": 2,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q1/page-000002.json",
+      "query": "Q1",
+      "sha256": "5f3015aca8b2dc61e27f9053c6235af11f2edf4dc8307451749a0c3dc6c0c486"
+    },
+    {
+      "page_index": 3,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q1/page-000003.json",
+      "query": "Q1",
+      "sha256": "8df47615c7134cc95ae42debcdce4ffcd639ebe40a488f4c12a389f6cb4a9aca"
+    },
+    {
+      "page_index": 0,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q2/page-000000.json",
+      "query": "Q2",
+      "sha256": "295e03fa25d65b8a408f7cb42fd0c23065de1d320c74a0ed24dcd611246fe16c"
+    },
+    {
+      "page_index": 1,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q2/page-000001.json",
+      "query": "Q2",
+      "sha256": "9e3a2dd30367352492778fafa56eaf347bbc73101534ec25604462e4b2b5d528"
+    },
+    {
+      "page_index": 0,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q3/page-000000.json",
+      "query": "Q3",
+      "sha256": "4a7e98ae06626d4e7042c97dd7182dcc95e45a7f17f65b5e91c22e1673a61720"
+    },
+    {
+      "page_index": 1,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q3/page-000001.json",
+      "query": "Q3",
+      "sha256": "a685fa8d0b54bb18453d5ec4b81c17303dafe0a7f700577822e887cce4fffe8a"
+    },
+    {
+      "page_index": 2,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q3/page-000002.json",
+      "query": "Q3",
+      "sha256": "bd70570174409e6a3b1f04b14567daa7e420f0efeec51ffdb699fdd431b93c0a"
+    },
+    {
+      "page_index": 3,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q3/page-000003.json",
+      "query": "Q3",
+      "sha256": "032f7bd7e9ee4e9332b479d5bfecd59732d1e92fb55f95a16060f200b1523dcf"
+    },
+    {
+      "page_index": 4,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q3/page-000004.json",
+      "query": "Q3",
+      "sha256": "ae09b0f8365fb656b506a59b635e8dfee6605de8d26006b28636da327d53c655"
+    },
+    {
+      "page_index": 5,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q3/page-000005.json",
+      "query": "Q3",
+      "sha256": "8c6a03a36fae150dd03afdcdc45612b19a7c7d0adaec28649c9ba3002d0e9736"
+    },
+    {
+      "page_index": 6,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q3/page-000006.json",
+      "query": "Q3",
+      "sha256": "3b606f58c42d4adee3b7e5279df8b11994be3c14a6ccf4cd71b730e73604aae5"
+    },
+    {
+      "page_index": 7,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q3/page-000007.json",
+      "query": "Q3",
+      "sha256": "9e0c262a8d32b5d33f418baa0c7324dfe252e326c8c2a31c749471991e1f022b"
+    },
+    {
+      "page_index": 0,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000000.json",
+      "query": "Q4",
+      "sha256": "70899001045df47863ad7726b420f28579893a467d4a546f00916393931a5d43"
+    },
+    {
+      "page_index": 1,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000001.json",
+      "query": "Q4",
+      "sha256": "4fca960b115106a61005607ec9876dbae5a38d0f56771513ebf06a67ddeadf0d"
+    },
+    {
+      "page_index": 2,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000002.json",
+      "query": "Q4",
+      "sha256": "35d6324c0e77484307b00ff86910ca2073d911ad4c5a513576f0a29709ee976f"
+    },
+    {
+      "page_index": 3,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000003.json",
+      "query": "Q4",
+      "sha256": "8c81c95846ba799aee35078adb833aa0f263f508d48cb7a7817252b7c96d6826"
+    },
+    {
+      "page_index": 4,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000004.json",
+      "query": "Q4",
+      "sha256": "de00109b0d82b9085a0c4c0d135a9076f98c3d58f316a31cf1f0d655d7272603"
+    },
+    {
+      "page_index": 5,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000005.json",
+      "query": "Q4",
+      "sha256": "db08fbcbc2cd994ecf73b629d30fcaf20c9c91849d5f7905620ae46cef81b680"
+    },
+    {
+      "page_index": 6,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000006.json",
+      "query": "Q4",
+      "sha256": "abf121f78ad588cad86bc37823978e06bd88a1e691aa904f682e6fc002d5f07e"
+    },
+    {
+      "page_index": 7,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000007.json",
+      "query": "Q4",
+      "sha256": "5c38e04a1e08885e74a921cd4cd62d5ac81e8ae4db2920ed2fcea829661c9302"
+    },
+    {
+      "page_index": 8,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000008.json",
+      "query": "Q4",
+      "sha256": "f09d230be4549e23b1fd5b0b534a825234316b2d9e0030d611acaacb026bb8bf"
+    },
+    {
+      "page_index": 9,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000009.json",
+      "query": "Q4",
+      "sha256": "c0cb162586b1e5a3987b413fe1b3e7f0c11524516faedafef5204ae66fc4d6f2"
+    },
+    {
+      "page_index": 10,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000010.json",
+      "query": "Q4",
+      "sha256": "12963468f448cb7ab7f160d31bc3610fcaf87c4c1172c201ae281f5d7ef9a415"
+    },
+    {
+      "page_index": 11,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000011.json",
+      "query": "Q4",
+      "sha256": "656983201c3c0e206dea6b3629d7004e1016e5fe9229b6bc588fa29f8fdcf489"
+    },
+    {
+      "page_index": 12,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000012.json",
+      "query": "Q4",
+      "sha256": "49cc50aaf2c27711a2d7c906ad427096ed100be9801de03cd496f0e87a32c18b"
+    },
+    {
+      "page_index": 13,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000013.json",
+      "query": "Q4",
+      "sha256": "a9bf6ce10371bd60958e2f6211f037f7d25caaac27f815327c623c666a880027"
+    },
+    {
+      "page_index": 14,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000014.json",
+      "query": "Q4",
+      "sha256": "9034de3c054529a3aac71b277237473ce2319485e9b6115ddf54748f2da15d51"
+    },
+    {
+      "page_index": 15,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000015.json",
+      "query": "Q4",
+      "sha256": "f7550246428fee1a18decf3fc5059115c8ea96aed64d85e7f005ad1ea8500326"
+    },
+    {
+      "page_index": 16,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000016.json",
+      "query": "Q4",
+      "sha256": "3f1b4ce07a99d1c76979732247c61447befe211bd30cad88c2c190d2d150b997"
+    },
+    {
+      "page_index": 17,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000017.json",
+      "query": "Q4",
+      "sha256": "f008e72d4bf52979c11c9f01b65af6b7fcaa8fb2f186d787cce701984a82c706"
+    },
+    {
+      "page_index": 18,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000018.json",
+      "query": "Q4",
+      "sha256": "72d6400e5387ec9ff828b7b34d70565941619a3dec0423f4aab211cacd74ba09"
+    },
+    {
+      "page_index": 19,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000019.json",
+      "query": "Q4",
+      "sha256": "cf88181857b76d6cc7bc02f4808b45a185fece9533c61a8d46cab2b60eced529"
+    },
+    {
+      "page_index": 20,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000020.json",
+      "query": "Q4",
+      "sha256": "8f7ccb43f19ff7120d806037c758537b43600df4e0a2a43657657504f9652a82"
+    },
+    {
+      "page_index": 21,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000021.json",
+      "query": "Q4",
+      "sha256": "12299ed887647821670a8efa3948a1c4e125897c3ba29ce3e5ae36316472c383"
+    },
+    {
+      "page_index": 22,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000022.json",
+      "query": "Q4",
+      "sha256": "8547f29f0c22d223b965998a4dbf226d92231ddf6b1d04e1e3669d753902d977"
+    },
+    {
+      "page_index": 23,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000023.json",
+      "query": "Q4",
+      "sha256": "eb0f06141b4388c92da7cc01b971d3d71a4ec7035beaa634ddf586906983080c"
+    },
+    {
+      "page_index": 24,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000024.json",
+      "query": "Q4",
+      "sha256": "fd3f3b45fb6ef4fc0173bb8445c7cc23b041a10aec28f02cea47ec366dede940"
+    },
+    {
+      "page_index": 25,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000025.json",
+      "query": "Q4",
+      "sha256": "457b3e7a2f7f087f5987a92a438b5b380a59ce01109554ed4c2c9a1d836bfe6b"
+    },
+    {
+      "page_index": 26,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000026.json",
+      "query": "Q4",
+      "sha256": "d88e57c8e3de519cf6682cec40910cbb24fdb68c03b5d01157981dc2d45adb07"
+    },
+    {
+      "page_index": 27,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000027.json",
+      "query": "Q4",
+      "sha256": "86f3b5fbaaddeceabca39990b87428b170ba99138394b06f95d2d194e696aafc"
+    },
+    {
+      "page_index": 28,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000028.json",
+      "query": "Q4",
+      "sha256": "6a6dd725d4d4e6a9f7400aaf5bb43955e9e2962fa6c77b6ab3d4d31bbbb55b50"
+    },
+    {
+      "page_index": 29,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000029.json",
+      "query": "Q4",
+      "sha256": "f93618d85a135d419caacf2f37cd75ae56d9446fedd22049425e66756e97da65"
+    },
+    {
+      "page_index": 30,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000030.json",
+      "query": "Q4",
+      "sha256": "7ea7f300f98dbc75deba48dc75e1bcdfa160a331eeb4c66ab95f6a9dd99be2c4"
+    },
+    {
+      "page_index": 31,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000031.json",
+      "query": "Q4",
+      "sha256": "8d9726818ec9b72729d4e28891c9cb24dd1688fe88328fbf9ad3dfdc311c83ae"
+    },
+    {
+      "page_index": 32,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000032.json",
+      "query": "Q4",
+      "sha256": "223fc1c1bf4fb964f0294f50558eb084567eb90d5e3302a4e750ff7dfcf3639d"
+    },
+    {
+      "page_index": 33,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000033.json",
+      "query": "Q4",
+      "sha256": "ee716f6a085989a63853094d572fc46fe22c09b5ded20e8c12939f91bf1edb7d"
+    },
+    {
+      "page_index": 34,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000034.json",
+      "query": "Q4",
+      "sha256": "3420ae3ff8fcd43daf92d09b6e24861e20b69125811e972aca62cd3269a3bb8d"
+    },
+    {
+      "page_index": 35,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000035.json",
+      "query": "Q4",
+      "sha256": "c26bc421b66327d8c9de9f8bf577eaa317f5072076c4e62a0d6f4541e94ded2a"
+    },
+    {
+      "page_index": 36,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000036.json",
+      "query": "Q4",
+      "sha256": "008ca85a04faac68ad57c3ff4a9f0cddbd95e888ea190fe7791e20acb380deeb"
+    },
+    {
+      "page_index": 37,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000037.json",
+      "query": "Q4",
+      "sha256": "5fbed2f3262744846570ff91b5c2816d6d5f1d24511db431f96780044ed3c08f"
+    },
+    {
+      "page_index": 38,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000038.json",
+      "query": "Q4",
+      "sha256": "6b25cf513690719136a349794b64bb626c1a7d1145c866dc910630da82c4834a"
+    },
+    {
+      "page_index": 39,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000039.json",
+      "query": "Q4",
+      "sha256": "3237154a1c5b70a2d6eff7c5ed546371ccc5697bf52522a82a2aa3b9fea5455e"
+    },
+    {
+      "page_index": 40,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000040.json",
+      "query": "Q4",
+      "sha256": "addf8c9d0d1b7f44e3d4ef9516e5060cc7d0513b2d91dbe8d44e517ef14ebd4c"
+    },
+    {
+      "page_index": 41,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000041.json",
+      "query": "Q4",
+      "sha256": "027a91921d668d10901a4de13b330e3705dcdb12d14570202843e85665cc6a0b"
+    },
+    {
+      "page_index": 42,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000042.json",
+      "query": "Q4",
+      "sha256": "dddd72cc60bd3fde6d25ac6cc28097c748619c53e2410ac85bd7a16d22d15d13"
+    },
+    {
+      "page_index": 43,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000043.json",
+      "query": "Q4",
+      "sha256": "256cbfa180d8164e95a61b93eb584e425e2f07ff481392352d8dfa8f7d17e0b9"
+    },
+    {
+      "page_index": 44,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000044.json",
+      "query": "Q4",
+      "sha256": "7d6bcf89ac8dd6ec304b7442950b79aaee7c2d7f187a9df5b6c3b35b33d33105"
+    },
+    {
+      "page_index": 45,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000045.json",
+      "query": "Q4",
+      "sha256": "50bc8cf91f732b89bebd8587315ad6ee4a398ff2581ea2b84e48735d8c665c67"
+    },
+    {
+      "page_index": 46,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000046.json",
+      "query": "Q4",
+      "sha256": "821fb756c97858a5337ebfb32dadfe3e0c06bca808090edafe4978f7091db6af"
+    },
+    {
+      "page_index": 47,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000047.json",
+      "query": "Q4",
+      "sha256": "e1cc55859d138b5f0c99471b09f23367aeb398b39114c156b3ea474970aca108"
+    },
+    {
+      "page_index": 48,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000048.json",
+      "query": "Q4",
+      "sha256": "7013b19b265ebee995793e2844f3a75115f9900c063465392fd86ed9911c43fe"
+    },
+    {
+      "page_index": 49,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000049.json",
+      "query": "Q4",
+      "sha256": "b5e045c4a7a05bec9e33a316f37df0ee9e1786d81ba80d840b930359268d13d5"
+    },
+    {
+      "page_index": 50,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000050.json",
+      "query": "Q4",
+      "sha256": "59621f5c2f8f1a581319d646d77189d5b498de74dbde7d537c896cc9f9f5ed4c"
+    },
+    {
+      "page_index": 51,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000051.json",
+      "query": "Q4",
+      "sha256": "d9af47a477e0a76e4e5461700d811f573e3f141ffa2ffa358ad041269f09bfa2"
+    },
+    {
+      "page_index": 52,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000052.json",
+      "query": "Q4",
+      "sha256": "fc0a3497d3fcf8fb1dcb8fda511a7cfd5123ac6642135c7f779344ee6ed98291"
+    },
+    {
+      "page_index": 53,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000053.json",
+      "query": "Q4",
+      "sha256": "7b2cff1c8cdec793b42c9d892e5c2db31464068c256b7d15847a12792992bcfc"
+    },
+    {
+      "page_index": 54,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000054.json",
+      "query": "Q4",
+      "sha256": "4db17b705e06503362f043a74584e67f9d2a4a4d6d2f05eeba31c1b628ca1d30"
+    },
+    {
+      "page_index": 55,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000055.json",
+      "query": "Q4",
+      "sha256": "53ff6822449665e5ff8a88fdca27ee88c12a44588332dd0332b2c2c1542259e1"
+    },
+    {
+      "page_index": 56,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000056.json",
+      "query": "Q4",
+      "sha256": "61370c37a55885a1df9d218a428b62ab7a78e398c28eace033d702c240c20043"
+    },
+    {
+      "page_index": 57,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000057.json",
+      "query": "Q4",
+      "sha256": "5779ab5cc220bb627cf0c0d97d14a1b34b75ffc69327898823c811f211dcbed6"
+    },
+    {
+      "page_index": 58,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000058.json",
+      "query": "Q4",
+      "sha256": "836b4f6b1b65673743f6f832aaf15e48df0eb557b9806acabb6dd6ab9709b28e"
+    },
+    {
+      "page_index": 59,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000059.json",
+      "query": "Q4",
+      "sha256": "8f42b8389f15af09844ba26b590a30acb775dfff6fcd3ce9175e07d0a65c1cab"
+    },
+    {
+      "page_index": 60,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000060.json",
+      "query": "Q4",
+      "sha256": "3fdb797fc729b1d7e19b039e1d3d8512b934b5ea235de886542d4ac7a1e989ef"
+    },
+    {
+      "page_index": 61,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000061.json",
+      "query": "Q4",
+      "sha256": "2989c330da6d42a5e809825331522b9def4e0a25c631b791e084e9b850df8b60"
+    },
+    {
+      "page_index": 62,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000062.json",
+      "query": "Q4",
+      "sha256": "fa9d206ae6b0a175779ea79433b93ad8554a2d5a053c8d205ce2ced8b3fc4a26"
+    },
+    {
+      "page_index": 63,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000063.json",
+      "query": "Q4",
+      "sha256": "8e417b65e0a35fc5ee3457fa3526bcb1aefe0fde97fdbc453fe0a0bb9f738032"
+    },
+    {
+      "page_index": 64,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000064.json",
+      "query": "Q4",
+      "sha256": "fdc7f7983eca47f9116ae4e57275168fd5c1f8e70b1bfd189dd5bff53a0c4f55"
+    },
+    {
+      "page_index": 65,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000065.json",
+      "query": "Q4",
+      "sha256": "6551efb3c141cde16462b5381800d2f900f7a3c802f85f659b788bcadf88d894"
+    },
+    {
+      "page_index": 66,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000066.json",
+      "query": "Q4",
+      "sha256": "085aa2119dfdca43a16bd4dbc164a09a3ae623b6dd4b5304bf0444ef8f8093ca"
+    },
+    {
+      "page_index": 67,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000067.json",
+      "query": "Q4",
+      "sha256": "6e84bcec7bf79ce8f55777e293ec751f4ae2a436fd6fe8cd4baea960710022e7"
+    },
+    {
+      "page_index": 68,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000068.json",
+      "query": "Q4",
+      "sha256": "b04dfe72f897cceade90b4977ba8334df42636c34d62b915e26421c09807d1dd"
+    },
+    {
+      "page_index": 69,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000069.json",
+      "query": "Q4",
+      "sha256": "87bcaeb1a11766f6e894d95722c0bf9c972914ac6654992927ff965869dba28d"
+    },
+    {
+      "page_index": 70,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000070.json",
+      "query": "Q4",
+      "sha256": "26967bf53e9e6651841c2c70fe78c166c7cff2112a39c7c3683d5da28a56a6d2"
+    },
+    {
+      "page_index": 71,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000071.json",
+      "query": "Q4",
+      "sha256": "355bb827465d8a87c40813b6459010ef07db8b03f97727599589023249c5687a"
+    },
+    {
+      "page_index": 72,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000072.json",
+      "query": "Q4",
+      "sha256": "cecbdd12d2375adffb2b1dcdead52eea8741d8441b9cb2ab63a73f1e44b9c6cc"
+    },
+    {
+      "page_index": 73,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000073.json",
+      "query": "Q4",
+      "sha256": "ad9d7fa0c4b1b4a364b56f1bb26245499ee09c6381e7a40b7d48f5a6bb10fa84"
+    },
+    {
+      "page_index": 74,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000074.json",
+      "query": "Q4",
+      "sha256": "501387c1c4a74bfd8c30d4648929612c2bef25ddec8d4653b36548b6fb2f69de"
+    },
+    {
+      "page_index": 75,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000075.json",
+      "query": "Q4",
+      "sha256": "a51cc432764ac0deb19155fae1b7a41a7961a1fb43ada34862524ab49ccec310"
+    },
+    {
+      "page_index": 76,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000076.json",
+      "query": "Q4",
+      "sha256": "338952199a90405422cf36f232535c632f886d41e7ad44eead3b3f810ee63cb8"
+    },
+    {
+      "page_index": 77,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000077.json",
+      "query": "Q4",
+      "sha256": "176568947145ed786ac0c21c981a77e6df3aaba2d90da474a7587218863d3d1a"
+    },
+    {
+      "page_index": 78,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000078.json",
+      "query": "Q4",
+      "sha256": "bb5849230d1f51f005904a2d9d68ea1ae36acf084acc29ccc459cdce446f8562"
+    },
+    {
+      "page_index": 79,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000079.json",
+      "query": "Q4",
+      "sha256": "b220887ca72b27a7df830194003a2f20797f942b62a5eef7fe1993d813fb75f4"
+    },
+    {
+      "page_index": 80,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000080.json",
+      "query": "Q4",
+      "sha256": "e823e9af1e3bfa1903cb0d6138431c3c0b26c69006f29f3aa85275719c3e40a6"
+    },
+    {
+      "page_index": 81,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000081.json",
+      "query": "Q4",
+      "sha256": "091ead1969de45cc2e1dc78ce81b0c5e6afaa871378af6b7ab6e954d4ee75cdb"
+    },
+    {
+      "page_index": 82,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000082.json",
+      "query": "Q4",
+      "sha256": "f32b2635036d6c293633e6d6670bbff22e585daaf96ed5ff627c605d0b6f0c62"
+    },
+    {
+      "page_index": 83,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000083.json",
+      "query": "Q4",
+      "sha256": "745b4560fbb17812f09bfc8b3f4dd3b3a015fb428b1f47af451e9beee2b7613e"
+    },
+    {
+      "page_index": 84,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000084.json",
+      "query": "Q4",
+      "sha256": "33f26db42dd9ab80864d8212c9e7c37240101a4d1f102d732269f75bccf326cc"
+    },
+    {
+      "page_index": 85,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000085.json",
+      "query": "Q4",
+      "sha256": "0c70eecf7d71a9c4cef2d5050159b41b68a3467efd8cdb3f4484ba9f453f48f3"
+    },
+    {
+      "page_index": 86,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000086.json",
+      "query": "Q4",
+      "sha256": "53dd3dbbe5af945e2e10a2708accee1e5c031de9434dc1f7b7bc198ca8695e7f"
+    },
+    {
+      "page_index": 87,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000087.json",
+      "query": "Q4",
+      "sha256": "3cae2f6a8ee092c7cd5af7975ac00f5bf1f517566a823351b1d876037e7787b1"
+    },
+    {
+      "page_index": 88,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000088.json",
+      "query": "Q4",
+      "sha256": "a6fe56c75762b9a944b09743dca4794e75c3a3be09770fa997d40e23856c490c"
+    },
+    {
+      "page_index": 89,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000089.json",
+      "query": "Q4",
+      "sha256": "24ae3cd0b5a8f1605b45ef7d0bd06884c530803766ea647774cfe48c6569206d"
+    },
+    {
+      "page_index": 90,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000090.json",
+      "query": "Q4",
+      "sha256": "eebfd855392270a49cbe33a6fe0ea5e941033a1c83be9998459330dfc66fe2f4"
+    },
+    {
+      "page_index": 91,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000091.json",
+      "query": "Q4",
+      "sha256": "4c40b6e40aa922aba522765f5a7c90faaeb76ac9a1743c1cfd94fb2e0b1a6157"
+    },
+    {
+      "page_index": 92,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000092.json",
+      "query": "Q4",
+      "sha256": "890f26a9718a9c6123e3fb42430aa2c82fec0461222fb12e7b5d33e5be2e559b"
+    },
+    {
+      "page_index": 93,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000093.json",
+      "query": "Q4",
+      "sha256": "a8ce81e7a4196ff663e137e9219700e4f644b37ffd8c254dd5ba784ca6634fde"
+    },
+    {
+      "page_index": 94,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000094.json",
+      "query": "Q4",
+      "sha256": "bf060b6da522fbb6c41c23cde0d497c8e4bf0ce85bd121471db6ff732cd10451"
+    },
+    {
+      "page_index": 95,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000095.json",
+      "query": "Q4",
+      "sha256": "c12a5bd9998e3e36fdc11d9f2321602732639a277bf5168338950b6d53ae641b"
+    },
+    {
+      "page_index": 96,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000096.json",
+      "query": "Q4",
+      "sha256": "12908032f9f29c0a184d1550dfb613c3feed28da43ee654c574d50f98236a63d"
+    },
+    {
+      "page_index": 97,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000097.json",
+      "query": "Q4",
+      "sha256": "f1920cb7c167e8af0c40859a5dc166002e1d5190753e4ecd17186b6afc305685"
+    },
+    {
+      "page_index": 98,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000098.json",
+      "query": "Q4",
+      "sha256": "c4f27aa9f3a0e0dfb877782714481951945c6f8c8ea7cca735345120a5c34e39"
+    },
+    {
+      "page_index": 99,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000099.json",
+      "query": "Q4",
+      "sha256": "d62f1c4c8fcf0e724381fb44e963f47fdf34bb0bb7d204c3f1a76f3203217a91"
+    },
+    {
+      "page_index": 100,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000100.json",
+      "query": "Q4",
+      "sha256": "8e638f17d2de5f896f08ea50b9e1d0bf802075127c217a956d4473562030f0a6"
+    },
+    {
+      "page_index": 101,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000101.json",
+      "query": "Q4",
+      "sha256": "4418b2474d270c8d084c40f7979b1265eaf4ed167026082fe2748b38d9629498"
+    },
+    {
+      "page_index": 102,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000102.json",
+      "query": "Q4",
+      "sha256": "cd2e744779a631392a503e97cad74d88528b3faaa5de9fc5d5fa12765565f365"
+    },
+    {
+      "page_index": 103,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000103.json",
+      "query": "Q4",
+      "sha256": "9de8098a4f6652faba1d843e0250b973b5c6aa9d1ea06e7f6d2671d202da5d2a"
+    },
+    {
+      "page_index": 104,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000104.json",
+      "query": "Q4",
+      "sha256": "7120ebcc15469077ffb5de79eed7faec6d9219e8b069cd850f98adee5a6250c2"
+    },
+    {
+      "page_index": 105,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000105.json",
+      "query": "Q4",
+      "sha256": "462836902720985f6f11a8420fe1326f53f198af5857b5f4ba04978ca198fdc0"
+    },
+    {
+      "page_index": 106,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000106.json",
+      "query": "Q4",
+      "sha256": "c0f9e788f39bea09854f7e86756cc47343799d44015b37932b7f8a10c2c85bda"
+    },
+    {
+      "page_index": 107,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000107.json",
+      "query": "Q4",
+      "sha256": "379eab0ac25a1c5383d3128aa1ae0651d9c3587421845f80d5ed7e8e955eec78"
+    },
+    {
+      "page_index": 108,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000108.json",
+      "query": "Q4",
+      "sha256": "623958068f8a5b2f0aa42800b42c08ec9ec57a998095181d96ea22821e7dc13c"
+    },
+    {
+      "page_index": 109,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000109.json",
+      "query": "Q4",
+      "sha256": "1fee6b790e8d9eec41391359099da0a2a27d5fd705a152180c41a406789ccbd7"
+    },
+    {
+      "page_index": 110,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000110.json",
+      "query": "Q4",
+      "sha256": "4a6b876b79a7042ff5e98873f35b2b10a755a5f2ca35c7ab9d61a56f07bcad12"
+    },
+    {
+      "page_index": 111,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000111.json",
+      "query": "Q4",
+      "sha256": "413d8f8b5e23759745f044a0c2e2378c2ae966d044c9b17b80e9070ad809ca0d"
+    },
+    {
+      "page_index": 112,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000112.json",
+      "query": "Q4",
+      "sha256": "11b27a83d00aeeb35f7ef445b5f3765882c94c006b65b30d08494ee8d471c7cf"
+    },
+    {
+      "page_index": 113,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000113.json",
+      "query": "Q4",
+      "sha256": "5be751b7e97e8f925a0689dc334dfcc2aae5ba9fd8017086d221013f5450f46c"
+    },
+    {
+      "page_index": 114,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000114.json",
+      "query": "Q4",
+      "sha256": "2e965617656a1c998f3fef44aa69764958c73b729bb20030fd7350b97c1a8c87"
+    },
+    {
+      "page_index": 115,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000115.json",
+      "query": "Q4",
+      "sha256": "4ef9d58a0a6ea0d72e6c425f3d824731e27e58c0b9d7daf7fce6326fc828ce10"
+    },
+    {
+      "page_index": 116,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000116.json",
+      "query": "Q4",
+      "sha256": "f7bb8f6c1baf2350b573e624ede3783892c19978eba27e54038754e4d0e11d33"
+    },
+    {
+      "page_index": 117,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000117.json",
+      "query": "Q4",
+      "sha256": "f1487dfe8489a3813bcb2b0e28dcd5d5b462e593e17111f4db7ae8445a06dc43"
+    },
+    {
+      "page_index": 118,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000118.json",
+      "query": "Q4",
+      "sha256": "a63424fd2b8d3844b4d41b11be057d5bfb39ca230c310b1bd445dc324db7d9a9"
+    },
+    {
+      "page_index": 119,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000119.json",
+      "query": "Q4",
+      "sha256": "461c580d4904c598bb26221c651b3f882542e35b4a62a7109089f7f58bf18b39"
+    },
+    {
+      "page_index": 120,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000120.json",
+      "query": "Q4",
+      "sha256": "a3248bd2c8b08da76a475f6604022c15d8767bb180ffa71f3efc55f2a7b0c318"
+    },
+    {
+      "page_index": 121,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000121.json",
+      "query": "Q4",
+      "sha256": "7b62c6ae78af05a40cbcb03b29572dbbc041c5a01eefb99fa9ae54ea00be7dab"
+    },
+    {
+      "page_index": 122,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000122.json",
+      "query": "Q4",
+      "sha256": "fb746fb7165b6a796c0c77d0625a20b57e1abaa3d71d16f02f91c2c38d74ab2e"
+    },
+    {
+      "page_index": 123,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000123.json",
+      "query": "Q4",
+      "sha256": "c3d992a88e92512438117735c0130a41bbf0dd3bc7d2eaf8ca20027195137b1e"
+    },
+    {
+      "page_index": 124,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000124.json",
+      "query": "Q4",
+      "sha256": "74ac630414c1a07a41b76cb8baef63606aaa2b8e26c135cd74ce50df013f2a2a"
+    },
+    {
+      "page_index": 125,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000125.json",
+      "query": "Q4",
+      "sha256": "b39fe403aa8f438980f178c6ed907f6dfcfa2c66ea4c89bac41130264e939b02"
+    },
+    {
+      "page_index": 126,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000126.json",
+      "query": "Q4",
+      "sha256": "a463a5264c3666b58bdc8790147733846672908bcd8883f0800bc4edb74a6a8a"
+    },
+    {
+      "page_index": 127,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000127.json",
+      "query": "Q4",
+      "sha256": "7a1084a65c5d78fc89581f2248ff2e15b1aa50fc81d58ac42474a588114c9965"
+    },
+    {
+      "page_index": 128,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000128.json",
+      "query": "Q4",
+      "sha256": "134d57764debd80351543ea1b481085e4eebc9bf89ce1c5231a76ea5710baefd"
+    },
+    {
+      "page_index": 129,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000129.json",
+      "query": "Q4",
+      "sha256": "65e7155bdf3ca3b623bff19503267d0e19709e7a7630153b1aee3162cc160f97"
+    },
+    {
+      "page_index": 130,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000130.json",
+      "query": "Q4",
+      "sha256": "8a692cfe05b67cae8cd32d121099265cd28c46c8a6bf089b6389ff53e0000f60"
+    },
+    {
+      "page_index": 131,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000131.json",
+      "query": "Q4",
+      "sha256": "af2b2daabf5a4f735a1ba3ad294d32e1ac5372efd691d013e92caeca5e823aae"
+    },
+    {
+      "page_index": 132,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000132.json",
+      "query": "Q4",
+      "sha256": "658fa8fbd290c19b92e7c4350b19ac5a7a5a9830a2c7d9c3e29f119217388fce"
+    },
+    {
+      "page_index": 133,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000133.json",
+      "query": "Q4",
+      "sha256": "8f79e482c430c9d6337d8e9016a82f45c5757db16de165458f17842457e8b12d"
+    },
+    {
+      "page_index": 134,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000134.json",
+      "query": "Q4",
+      "sha256": "6dda6df0cfa0bdee4abde51f0ab9512e3f69c7d1635f3051a1e59ee7238320fc"
+    },
+    {
+      "page_index": 135,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000135.json",
+      "query": "Q4",
+      "sha256": "e4a709b079ddf5bebf2e402deeec9d7aa0840f63ab010c67bdc4e23e808d379c"
+    },
+    {
+      "page_index": 136,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000136.json",
+      "query": "Q4",
+      "sha256": "b680b7a51fd83719ccdaf477bfc145faf4875f1e574d4dd6cafb90bab8def7c6"
+    },
+    {
+      "page_index": 137,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000137.json",
+      "query": "Q4",
+      "sha256": "07cf06ae49c4aaa45d731655027b8fcc48ceb580d4f989a346ead81bc1717426"
+    },
+    {
+      "page_index": 138,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000138.json",
+      "query": "Q4",
+      "sha256": "ff23fb15364707184d9ffa34f4307f2721e84dbb024d1df004e7afec68ed121e"
+    },
+    {
+      "page_index": 139,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000139.json",
+      "query": "Q4",
+      "sha256": "02497db2372f60b1d2cebd4a57fd6e6d361a81f59360f39eb316f8a1f3e1d2b2"
+    },
+    {
+      "page_index": 140,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000140.json",
+      "query": "Q4",
+      "sha256": "e25433abc9fe6030ecb470dffedcb390ffa7abfbe1c1455eb2bb13b584363f35"
+    },
+    {
+      "page_index": 141,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000141.json",
+      "query": "Q4",
+      "sha256": "80e7d299176d003f220135fe02143e81cb42ac870b0f6ff35b2ba72051e64659"
+    },
+    {
+      "page_index": 142,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000142.json",
+      "query": "Q4",
+      "sha256": "65433777133442d916372a6f77fcadd3cfbbe6d3384bad2ab120a9e75774632c"
+    },
+    {
+      "page_index": 143,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000143.json",
+      "query": "Q4",
+      "sha256": "e84fa2f166d4d80f06332c279ee239deffcaa1d0b512cfb024b116b8e6df5d12"
+    },
+    {
+      "page_index": 144,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000144.json",
+      "query": "Q4",
+      "sha256": "040770705524d498b38c875bbda8790c0c325b8e404946c16cc0795456dd3133"
+    },
+    {
+      "page_index": 145,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000145.json",
+      "query": "Q4",
+      "sha256": "f5f374a862ef84d0bae572089ebce195fa772378df7771fae6abc9e817703e06"
+    },
+    {
+      "page_index": 146,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000146.json",
+      "query": "Q4",
+      "sha256": "71a63ad7c59110d78cb930cb20c1c6be003765e17744fbcc0ba9071d85df0dab"
+    },
+    {
+      "page_index": 147,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000147.json",
+      "query": "Q4",
+      "sha256": "0af098597be92b1e29f67e6ed12dd7eef78619d578764d5738a9edd804c5dd9c"
+    },
+    {
+      "page_index": 148,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000148.json",
+      "query": "Q4",
+      "sha256": "4eb59d08e00433cf9f6512cb167e2f4f8c1493471c97e2e2a38dd2691b0b81bf"
+    },
+    {
+      "page_index": 149,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000149.json",
+      "query": "Q4",
+      "sha256": "c2cc7636a354f7aaa05f88a89d05bf0445ce44606d2daab0b2bb8172abd78f64"
+    },
+    {
+      "page_index": 150,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000150.json",
+      "query": "Q4",
+      "sha256": "1ee3825a7f81d0c165ebe43536b5a159b4f2fb566ec4d5ccda94d336bb6c8069"
+    },
+    {
+      "page_index": 151,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000151.json",
+      "query": "Q4",
+      "sha256": "a488174a999fbc002060661e5398c015f7eddb09da6da4c3953d408493ba3456"
+    },
+    {
+      "page_index": 152,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000152.json",
+      "query": "Q4",
+      "sha256": "d8e9ae97b70a8c30f578a5bd2e609f3633a69f2ba43a2679621d40a99144c785"
+    },
+    {
+      "page_index": 153,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000153.json",
+      "query": "Q4",
+      "sha256": "f499681b35c4f7e98b22673f597e8fca655fa915d78946c0f7905d4b27b5d087"
+    },
+    {
+      "page_index": 154,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000154.json",
+      "query": "Q4",
+      "sha256": "d1b675ee9533e0f0ae247470540eb35cf1a4506c5ba3c77250b1ddc40a515891"
+    },
+    {
+      "page_index": 155,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000155.json",
+      "query": "Q4",
+      "sha256": "9d435187e4cacdef1c0656507d0780b1d85aad1367924c852b29c2b292c5db48"
+    },
+    {
+      "page_index": 156,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000156.json",
+      "query": "Q4",
+      "sha256": "68e48e7ad8677a22ac3f0d9d311169a199b6476c956a623acb9fd99fa5131c5a"
+    },
+    {
+      "page_index": 157,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000157.json",
+      "query": "Q4",
+      "sha256": "ee3219d3eb63c5918175dbba2fbc491d006f81e81ba197308187d48dde102ebe"
+    },
+    {
+      "page_index": 158,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000158.json",
+      "query": "Q4",
+      "sha256": "527f9719c604d81793e7e441f2ea780890496922e568d8bb94fc56725fb38753"
+    },
+    {
+      "page_index": 159,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000159.json",
+      "query": "Q4",
+      "sha256": "3e9908a391b9b92bdbc64746710189521f3391baf7f72441d72b5d486c3c6461"
+    },
+    {
+      "page_index": 160,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000160.json",
+      "query": "Q4",
+      "sha256": "212de3cd8080f4ed889d0a96d299ce5845b68b2df7ff9f114c01a57eb2824b84"
+    },
+    {
+      "page_index": 161,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000161.json",
+      "query": "Q4",
+      "sha256": "ff9d420362cc17cfe0c923b77355805dd84c49b566bb5bc1ccf6981cdfb1e3da"
+    },
+    {
+      "page_index": 162,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000162.json",
+      "query": "Q4",
+      "sha256": "52e6960701096b7e3401fd28463a429c102f687831206f729dfd131f1ac006bb"
+    },
+    {
+      "page_index": 163,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000163.json",
+      "query": "Q4",
+      "sha256": "aa3b1de15c7500a6a7b3461ba0b18c2a383903567a0985e0f911d49ad3371ff6"
+    },
+    {
+      "page_index": 164,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000164.json",
+      "query": "Q4",
+      "sha256": "d96697a926f288a9164a84866905c9585fec08243790859395dfdf1fb96c5a13"
+    },
+    {
+      "page_index": 165,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000165.json",
+      "query": "Q4",
+      "sha256": "fac0ccf06a3a43347f9538de907570a7b81dc3a625adb7b582ae1fdbd6182faf"
+    },
+    {
+      "page_index": 166,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000166.json",
+      "query": "Q4",
+      "sha256": "c1efb9e924a168d31ce9c1c0245c420cfecf7fc24619b491cf49af52c70020ae"
+    },
+    {
+      "page_index": 167,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000167.json",
+      "query": "Q4",
+      "sha256": "f8d26a797d78ffea90136b9cea208372a8784d732f66ccb3dc056009cb9e65e4"
+    },
+    {
+      "page_index": 168,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000168.json",
+      "query": "Q4",
+      "sha256": "32f0c9f65fbcd56bf1790f44e1b705dc459e8e7f28feaa91ac8bc9ab54e19ac3"
+    },
+    {
+      "page_index": 169,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000169.json",
+      "query": "Q4",
+      "sha256": "dd22478e00bb18d751ca31134a897cd1cc672c532b91b0b9281225d2a29fed6b"
+    },
+    {
+      "page_index": 170,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000170.json",
+      "query": "Q4",
+      "sha256": "00dbd6ae3bba65ab5b586b85fbf1b371b3c91cc0d11790bfc2a1d9444b8c46a1"
+    },
+    {
+      "page_index": 171,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000171.json",
+      "query": "Q4",
+      "sha256": "b717ad0cb1f2251d2fe06a745bf9616b05113089e2b1695166086fe36d5ae8a4"
+    },
+    {
+      "page_index": 172,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000172.json",
+      "query": "Q4",
+      "sha256": "23aecc7bcb71383c0956eacd238124ce681242d227743bcb882ebb5a98700522"
+    },
+    {
+      "page_index": 173,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000173.json",
+      "query": "Q4",
+      "sha256": "bc2cb79bc73f5e31fb82bdf26d562f1a1c88aa1116e4bf6d71e7f10eeaee1a9d"
+    },
+    {
+      "page_index": 174,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000174.json",
+      "query": "Q4",
+      "sha256": "3a44b029f1c1788b10a727814054efa600aab47e37f2781cb565a6728ed6eda7"
+    },
+    {
+      "page_index": 175,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000175.json",
+      "query": "Q4",
+      "sha256": "98048cb96a3d2c3b3e43100a67fe6f6bd203cdd4d23abd772b6ab9d1cfc12ec8"
+    },
+    {
+      "page_index": 176,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000176.json",
+      "query": "Q4",
+      "sha256": "520b5a767af9820cf0c4eafeb58f6fa8949a81521340d8412ca12eca26de6671"
+    },
+    {
+      "page_index": 177,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000177.json",
+      "query": "Q4",
+      "sha256": "20c5eb55a27b64574623445065f124008abedbc377015b61d474272635732f14"
+    },
+    {
+      "page_index": 178,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000178.json",
+      "query": "Q4",
+      "sha256": "506254b634eae897cd1cdf8193eed70d9a976456dc6a86bc38bbfa019d6912c8"
+    },
+    {
+      "page_index": 179,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000179.json",
+      "query": "Q4",
+      "sha256": "8dab61f881b3fa3971640ec7ffa7f0c662e68120acf910aaa96eb244165006ee"
+    },
+    {
+      "page_index": 180,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000180.json",
+      "query": "Q4",
+      "sha256": "809877963b29c7475f06a925f1f011d1c6b56b810d91937bdea89e2874ed3270"
+    },
+    {
+      "page_index": 181,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000181.json",
+      "query": "Q4",
+      "sha256": "ba9d9eec2a13bba6e59679a2359e76f36f5153c511d904afd71d9084db7e6349"
+    },
+    {
+      "page_index": 182,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000182.json",
+      "query": "Q4",
+      "sha256": "663a5f7c37c17c02f1152f4d61ccdf0eb9664b721ee8b11290e8516b41528847"
+    },
+    {
+      "page_index": 183,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000183.json",
+      "query": "Q4",
+      "sha256": "e0571089400b71bbb9c4a134888c80aec6d943af66e1d171d2b8aa43e6553ca3"
+    },
+    {
+      "page_index": 184,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000184.json",
+      "query": "Q4",
+      "sha256": "9e830fcbe89a39d804d639237282f0b1325e3e20000ce79e0c61ecf7cf0797cc"
+    },
+    {
+      "page_index": 185,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000185.json",
+      "query": "Q4",
+      "sha256": "deaa227877a4d577e9fa2a7a1243ba514b54faeba6f634336b7e28dcd9b78a4c"
+    },
+    {
+      "page_index": 186,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000186.json",
+      "query": "Q4",
+      "sha256": "6fdc27e0e42fd315c020162002e877e03b8f97920d4c4434f68ae36003697f4c"
+    },
+    {
+      "page_index": 187,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000187.json",
+      "query": "Q4",
+      "sha256": "07bd68c70f8b9f3caa611e8eb50371aa1c4781f451b174b3313eed53098cd467"
+    },
+    {
+      "page_index": 188,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000188.json",
+      "query": "Q4",
+      "sha256": "f1e97c3a5901f9d31c0b4cd4d5f5fffb09313e3cdca255618d22a5be9c23cdee"
+    },
+    {
+      "page_index": 189,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000189.json",
+      "query": "Q4",
+      "sha256": "7256f22435dc62b5e8cffc95caeb3bc1ff85f277f2b16fc7daadaa6268fd121d"
+    },
+    {
+      "page_index": 190,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000190.json",
+      "query": "Q4",
+      "sha256": "8f4b472ab4f0663f9390914e4bf1ab355aef0705225ca5cead185613f065bd24"
+    },
+    {
+      "page_index": 191,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000191.json",
+      "query": "Q4",
+      "sha256": "9a16db35deb33440181dd5c63859b290d8446ad4c22159505374651cbd2e1d07"
+    },
+    {
+      "page_index": 192,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000192.json",
+      "query": "Q4",
+      "sha256": "c7cfbaa3ce7fe40d0c3de42f2183794bf3c590057ddc974a06521c094d798c51"
+    },
+    {
+      "page_index": 193,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000193.json",
+      "query": "Q4",
+      "sha256": "26ff9b6a5e371c33530d509c632e3a228ef22abae3d91a4374b8e18ef18f0343"
+    },
+    {
+      "page_index": 194,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000194.json",
+      "query": "Q4",
+      "sha256": "94a558359bed270b4392ca20c99b11d8b3e04f640333c39a7ff4f616b1119d19"
+    },
+    {
+      "page_index": 195,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000195.json",
+      "query": "Q4",
+      "sha256": "c1a4002ada197d5d00c4b2af5f7b0970d4a26fa4e77e6a8b9f05724f1e102553"
+    },
+    {
+      "page_index": 196,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000196.json",
+      "query": "Q4",
+      "sha256": "d1aca128b456e089a94f02996780c917f96f02a5ec5a1ca7b9eb20f40e6df361"
+    },
+    {
+      "page_index": 197,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000197.json",
+      "query": "Q4",
+      "sha256": "41d06390fd1b43f1e97859523ffcb38fb079be02b3b8da81646853795fc88440"
+    },
+    {
+      "page_index": 198,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000198.json",
+      "query": "Q4",
+      "sha256": "b26763c05e796b824881f5d2861759db62ddebadbaac8d8817782d8d9673f006"
+    },
+    {
+      "page_index": 199,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000199.json",
+      "query": "Q4",
+      "sha256": "1a217b131fe691be783bd396f1c6b939ad3d834091ef7ebefee611ca24dbe2e5"
+    },
+    {
+      "page_index": 200,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000200.json",
+      "query": "Q4",
+      "sha256": "a9f38bbe28ccd84106921248b9d689f7cbcd269ce207778969c42980b8750925"
+    },
+    {
+      "page_index": 201,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000201.json",
+      "query": "Q4",
+      "sha256": "9e9866644e5ccb4539cb8f1216434778c36d039ff29f30806c3ae28fe66ad4b1"
+    },
+    {
+      "page_index": 202,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000202.json",
+      "query": "Q4",
+      "sha256": "a7b2291bad24bc5adb70cfe9e8d0f984806f57f1aad6582fd29b131d3f8a3763"
+    },
+    {
+      "page_index": 203,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000203.json",
+      "query": "Q4",
+      "sha256": "fe5f5c82614efc707cbfe42333e94a543edbbbd7d2b019a72d39c9d3147245b5"
+    },
+    {
+      "page_index": 204,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000204.json",
+      "query": "Q4",
+      "sha256": "36511cb32c10484dee35a239d3999d6a45794e94e001e53f9c016a044d7d9381"
+    },
+    {
+      "page_index": 205,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000205.json",
+      "query": "Q4",
+      "sha256": "afe8d0f40f98bfc46dc8a7f71130b477f855eebe4562259d6c940097e63317b3"
+    },
+    {
+      "page_index": 206,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000206.json",
+      "query": "Q4",
+      "sha256": "6d6b47ebde9265463df0b665a5b5e057769e507ff74a9935c61bbef26dbbff93"
+    },
+    {
+      "page_index": 207,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000207.json",
+      "query": "Q4",
+      "sha256": "c243cb986d26aea2e01b0661fbb85e7a08fa779073e53abcb618cdf99bd21a04"
+    },
+    {
+      "page_index": 208,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000208.json",
+      "query": "Q4",
+      "sha256": "eee5e86754b755505a7fe5d53c9acd56d087e6dd2fc1bd2666e7fe94915ff526"
+    },
+    {
+      "page_index": 209,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q4/page-000209.json",
+      "query": "Q4",
+      "sha256": "24c020e36485578fa3e7d3a3d6adff84bf658b0119ca09400eb5d8f6d1799431"
+    },
+    {
+      "page_index": 0,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q5/page-000000.json",
+      "query": "Q5",
+      "sha256": "f813004f42427e579917a779d5d40402333ac8434809394b507895c91c0aa546"
+    },
+    {
+      "page_index": 1,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q5/page-000001.json",
+      "query": "Q5",
+      "sha256": "599dc945b448e320d6c0b9ccd4b9b147545442cf3a3364885680cd5d0c67420b"
+    },
+    {
+      "page_index": 0,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q6/page-000000.json",
+      "query": "Q6",
+      "sha256": "5a9f7a1d81d0dca3cc056527ffb805319ea8628d61f6d7add879bb4ac0bb30db"
+    },
+    {
+      "page_index": 1,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q6/page-000001.json",
+      "query": "Q6",
+      "sha256": "8b8c36bc79da418947dd7031c25d247cd85896c681caf029905ddaa4e88d86ab"
+    },
+    {
+      "page_index": 0,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000000.json",
+      "query": "Q7",
+      "sha256": "2559b4d7a1ff678c649eb23eada6b4829ba002801b34336698ccf981b22ba997"
+    },
+    {
+      "page_index": 1,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000001.json",
+      "query": "Q7",
+      "sha256": "c198bde649a617f5c64a75e60d0f1f5ef417cfc3b44db60ee980f46cb061fb9a"
+    },
+    {
+      "page_index": 2,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000002.json",
+      "query": "Q7",
+      "sha256": "7a16f054df09185f7b9aa25e223c13abb9001940f804f1ba33d02c290482ab2a"
+    },
+    {
+      "page_index": 3,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000003.json",
+      "query": "Q7",
+      "sha256": "dce8d8f9961e95c6f3f57d0b18c2a0d0983bbd61d167b8142222901acc41aa1f"
+    },
+    {
+      "page_index": 4,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000004.json",
+      "query": "Q7",
+      "sha256": "f3b53fc515735706fca414a63c5ec589ac145d2f1033f6e2d18f3218f716bfcb"
+    },
+    {
+      "page_index": 5,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000005.json",
+      "query": "Q7",
+      "sha256": "10b363e78adda355f29ab9c01521cb3111910506b595f9b2a99b84c66c32ef21"
+    },
+    {
+      "page_index": 6,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000006.json",
+      "query": "Q7",
+      "sha256": "bffbf14822eb49ea289e7f6d2021a9d6d7e72278c811ed5cbc9ed702b488111c"
+    },
+    {
+      "page_index": 7,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000007.json",
+      "query": "Q7",
+      "sha256": "8ea05d0009b44eef77304b2261119bd176e472c52286aa14af9e45d139ed0f1d"
+    },
+    {
+      "page_index": 8,
+      "path": "/home/c/Documents/code/dashi_digital_esd/artifacts/digital-esd/eric/Q7/page-000008.json",
+      "query": "Q7",
+      "sha256": "1cffcbcf8de9124ca01878d42892378396189a97e7b6afd5ccfd25a1b4667b27"
+    }
+  ],
+  "schema": "sensiblaw.digital-esd-eric-parser-manifest.v0_2"
+}

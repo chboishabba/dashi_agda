@@ -23,8 +23,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ZetaCountAuthority : Set where
-  checkedImportedLeanTheorem unprovedAuthorityReceipt openAgdaTransport
-    : ZetaCountAuthority
+  checkedImportedLeanTheorem unprovedAuthorityReceipt openAgdaTransport : ZetaCountAuthority
+  : ZetaCountAuthority
 
 record ZetaLocalCountLeanReturn : Set where
   constructor zeta-local-count-lean-return

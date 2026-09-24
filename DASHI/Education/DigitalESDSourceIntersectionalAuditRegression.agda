@@ -1,0 +1,26 @@
+module DASHI.Education.DigitalESDSourceIntersectionalAuditRegression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDSourceIntersectionalAuditExact as Intersection
+
+accessAffordabilityPinned : Intersection.IntersectionFamily
+accessAffordabilityPinned = Intersection.disabilityAccessByAffordability
+
+accessDurabilityPinned : Intersection.IntersectionFamily
+accessDurabilityPinned = Intersection.disabilityAccessByMaintenanceDurability
+
+representationAuthorityPinned : Intersection.IntersectionFamily
+representationAuthorityPinned = Intersection.representationByParticipantAuthority
+
+politicalExternalityPinned : Intersection.IntersectionFamily
+politicalExternalityPinned = Intersection.politicalEconomyByExternalityIncidence
+
+processThroughputPinned : Intersection.IntersectionFamily
+processThroughputPinned = Intersection.processEfficiencyByAbsoluteEnvironmentalThroughput
+
+componentScoresInsufficient :
+  Intersection.ComponentScoresDetermineIntersectionCoverage → ⊥
+componentScoresInsufficient =
+  Intersection.componentScoresDoNotDetermineIntersectionCoverage

@@ -187,3 +187,20 @@ technicalClosureDoesNotAutoPromoteToResponsibilityClosure ()
 residualCarriageDoesNotAutoPromoteToResidualResolution :
   ResidualCarriageImpliesResidualResolutionPermission → ⊥
 residualCarriageDoesNotAutoPromoteToResidualResolution ()
+
+record MultiaxialIncidenceFibreBoundary : Set where
+  constructor multiaxialIncidenceFibreBoundary
+  field
+    technicalClosureImpliesPoliticalClosure : Bool
+    technicalClosureImpliesPoliticalClosureIsFalse :
+      technicalClosureImpliesPoliticalClosure ≡ false
+    technicalClosureImpliesResponsibilityClosure : Bool
+    technicalClosureImpliesResponsibilityClosureIsFalse :
+      technicalClosureImpliesResponsibilityClosure ≡ false
+    residualCarriageImpliesResidualResolution : Bool
+    residualCarriageImpliesResidualResolutionIsFalse :
+      residualCarriageImpliesResidualResolution ≡ false
+
+canonicalMultiaxialIncidenceFibreBoundary : MultiaxialIncidenceFibreBoundary
+canonicalMultiaxialIncidenceFibreBoundary =
+  multiaxialIncidenceFibreBoundary false refl false refl false refl

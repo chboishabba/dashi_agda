@@ -41,7 +41,7 @@ AdequateForConsumer system consumer =
   NF.FactorsThrough (observe system) (answer system consumer)
 
 ConsumerAdequacyDefect :
-  (system : ConsumerIndexedFibreSystem) → Consumer system → Set
+  (system : ConsumerIndexedFibreSystem) → Consumer system → Set₁
 ConsumerAdequacyDefect system consumer =
   NF.NonFactorabilityWitness (observe system) (answer system consumer)
 

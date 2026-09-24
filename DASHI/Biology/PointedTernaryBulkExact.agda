@@ -152,17 +152,13 @@ rotateMarkerFour marker =
 rotateMarkerFourReturns :
   (marker : MarkedOrUnmarkedSite) → rotateMarkerFour marker ≡ marker
 rotateMarkerFourReturns (inj₁ tt) = refl
-rotateMarkerFourReturns (inj₂ site)
-  with rotateSiteFourReturns site
-... | refl = refl
+rotateMarkerFourReturns (inj₂ site) = cong inj₂ (rotateSiteFourReturns site)
 
 reflectionMarkerIsInvolutive :
   (marker : MarkedOrUnmarkedSite) →
   reflectMarkerVertical (reflectMarkerVertical marker) ≡ marker
 reflectionMarkerIsInvolutive (inj₁ tt) = refl
-reflectionMarkerIsInvolutive (inj₂ site)
-  with reflectionSiteIsInvolutive site
-... | refl = refl
+reflectionMarkerIsInvolutive (inj₂ site) = cong inj₂ (reflectionSiteIsInvolutive site)
 
 rotatePointedQuarter : PointedTernarySheet → PointedTernarySheet
 rotatePointedQuarter (marker , sheet) =
@@ -181,16 +177,14 @@ rotatePointedFour state =
 
 rotatePointedFourReturns :
   (state : PointedTernarySheet) → rotatePointedFour state ≡ state
-rotatePointedFourReturns (marker , Sheet.sheet3 a b c d e f g h i)
-  with rotateMarkerFourReturns marker
-... | refl = refl
+rotatePointedFourReturns (marker , Sheet.sheet3 a b c d e f g h i) =
+  cong₂ _,_ (rotateMarkerFourReturns marker) refl
 
 reflectionPointedIsInvolutive :
   (state : PointedTernarySheet) →
   reflectPointedVertical (reflectPointedVertical state) ≡ state
-reflectionPointedIsInvolutive (marker , Sheet.sheet3 a b c d e f g h i)
-  with reflectionMarkerIsInvolutive marker
-... | refl = refl
+reflectionPointedIsInvolutive (marker , Sheet.sheet3 a b c d e f g h i) =
+  cong₂ _,_ (reflectionMarkerIsInvolutive marker) refl
 
 ------------------------------------------------------------------------
 -- Representation-dimension bookkeeping.  Adding the fixed unmarked marker

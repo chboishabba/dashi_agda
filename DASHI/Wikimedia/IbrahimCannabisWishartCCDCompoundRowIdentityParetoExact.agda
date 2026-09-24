@@ -125,12 +125,12 @@ tangerineDreamDelta8THCA = ccd-compound-row
 ------------------------------------------------------------------------
 
 data CompoundRowHypothesis : Set where
-  articleProseOrAggregateError
-  ccdCompoundMappingError
-  ccdColumnOrRowShift
-  sourceVersionDifference
-  assaySemanticDifference
-  intendedDistinctAnalytes
+  articleProseOrAggregateError : CompoundRowHypothesis
+  ccdCompoundMappingError : CompoundRowHypothesis
+  ccdColumnOrRowShift : CompoundRowHypothesis
+  sourceVersionDifference : CompoundRowHypothesis
+  assaySemanticDifference : CompoundRowHypothesis
+  intendedDistinctAnalytes : CompoundRowHypothesis
   unresolvedCompoundRowLineage : CompoundRowHypothesis
 
 record CompoundRowHypothesisReceipt : Set where
@@ -215,11 +215,11 @@ registryCIDDoesNotCreateAssayIdentity ()
 ------------------------------------------------------------------------
 
 data CompoundRowParetoTarget : Set where
-  acquireExactTableS5
-  recoverPrepublicationSupportingData
-  mapTableS5RowsToCDBIDs
-  testRowColumnTransforms
-  freezeBifurcatedLineage
+  acquireExactTableS5 : CompoundRowParetoTarget
+  recoverPrepublicationSupportingData : CompoundRowParetoTarget
+  mapTableS5RowsToCDBIDs : CompoundRowParetoTarget
+  testRowColumnTransforms : CompoundRowParetoTarget
+  freezeBifurcatedLineage : CompoundRowParetoTarget
   resumeInteractionTranslation : CompoundRowParetoTarget
 
 record CompoundRowParetoStep : Set where
@@ -279,14 +279,14 @@ pareto9 = compound-row-pareto-step
 ------------------------------------------------------------------------
 
 data RowTime : Set where
-  submittedManuscript2023
-  publishedArticle2024
+  submittedManuscript2023 : RowTime
+  publishedArticle2024 : RowTime
   currentCCD2026 : RowTime
 
 data RowInterpretation : Set where
-  submittedRowSurfaceUnknown
-  publishedAggregateSurfaceKnown
-  ccdCompoundRowsKnown
+  submittedRowSurfaceUnknown : RowInterpretation
+  publishedAggregateSurfaceKnown : RowInterpretation
+  ccdCompoundRowsKnown : RowInterpretation
   exactRowLineageExplained : RowInterpretation
 
 data RowSummary : Set where rowIdentityStillOpen : RowSummary

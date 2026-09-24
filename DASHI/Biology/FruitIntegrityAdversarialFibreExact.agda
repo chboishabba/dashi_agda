@@ -26,9 +26,9 @@ data SeedProtection : Set where
   seedProtected seedCompromised : SeedProtection
 
 data ConsumptionRelation : Set where
-  noConsumption
-  partialConsumptionWithSeedProtection
-  partialConsumptionWithSeedCompromise
+  noConsumption : ConsumptionRelation
+  partialConsumptionWithSeedProtection : ConsumptionRelation
+  partialConsumptionWithSeedCompromise : ConsumptionRelation
   concealedInternalExploit : ConsumptionRelation
 
 record FruitHistory : Set where

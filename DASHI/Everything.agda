@@ -111,6 +111,21 @@ import DASHI.Biology.AnimalSenseObservationThreadDischarge
 import DASHI.Biology.AnimalexicAnimalUtteranceSurface
 import DASHI.Biology.AvianCompassSurface
 import DASHI.Biology.AvianCompassExamples
+import DASHI.Biology.MagnetoreceptionSurface
+import DASHI.Biology.AvianCryptochromeMagnetoreceptionInhabitant
+import DASHI.Biology.AvianHepaticMacrophageMagnetoreception
+import DASHI.Biology.AvianMagnetoreceptionSourceRegistry
+import DASHI.Biology.AvianMagneticFieldPerturbationReceipt
+import DASHI.Biology.AvianMagneticPerturbationSourceRegistry
+import DASHI.Biology.AvianRFOverlayMechanismAdapter
+import DASHI.Biology.AvianMagnetoreceptionRFGoniometerPhasedArrayBridge
+import DASHI.Biology.AvianMagnetoreceptionEMExposureTransportExact
+import DASHI.Biology.AvianEngels2014EMExposureReceipt
+import DASHI.Biology.AvianMagnetoreceptionFieldObservationQuotientExact
+import DASHI.Biology.AvianMagnetoreceptionRFAngularObservationQuotientExact
+import DASHI.Biology.AvianMagnetoreceptionCueFusion
+import DASHI.Biology.AvianMagnetoreceptionCrossScaleBridge
+import DASHI.Biology.AvianMagnetoreceptionHardProblemResidualV2
 import DASHI.Biology.AvianHardProblemResidual
 import DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary
 import DASHI.Biology.AvianRFOverlayManipulationReceipt
@@ -241,3 +256,4 @@ import DASHI.Core.ParityLaneOperatorCore
 import DASHI.Core.ParityLaneEigenOperatorCore
 import DASHI.Core.Prelude
 import DASHI.Visual.ColourPerceptionDASHI
+import DASHI.Visual.RepositoryEvolutionEverything

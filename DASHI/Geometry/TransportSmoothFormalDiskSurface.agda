@@ -25,29 +25,21 @@ import DASHI.Geometry.ProObjectSemantics as Sem
 -- a DCHoTT formal-disk equivalence, or B0.
 
 data TransportSmoothOpenObligation : Set where
-  missingRealAnalyticCompletion :
-    TransportSmoothOpenObligation
+  missingRealAnalyticCompletion : TransportSmoothOpenObligation
 
-  missingFullSheafTheorem :
-    TransportSmoothOpenObligation
+  missingFullSheafTheorem : TransportSmoothOpenObligation
 
-  missingFirstOrderApproximationProof :
-    TransportSmoothOpenObligation
+  missingFirstOrderApproximationProof : TransportSmoothOpenObligation
 
-  missingDualNumbersEquivalence :
-    TransportSmoothOpenObligation
+  missingDualNumbersEquivalence : TransportSmoothOpenObligation
 
-  missingDCHoTTFormalDiskEquivalence :
-    TransportSmoothOpenObligation
+  missingDCHoTTFormalDiskEquivalence : TransportSmoothOpenObligation
 
-  missingUnconditionalReverseLiftFromImportedImReflection :
-    TransportSmoothOpenObligation
+  missingUnconditionalReverseLiftFromImportedImReflection : TransportSmoothOpenObligation
 
-  missingImModalQuotientEqualityReflection :
-    TransportSmoothOpenObligation
+  missingImModalQuotientEqualityReflection : TransportSmoothOpenObligation
 
-  missingImReflectDASHICohesionAuthority :
-    TransportSmoothOpenObligation
+  missingImReflectDASHICohesionAuthority : TransportSmoothOpenObligation
 
 canonicalTransportSmoothOpenObligations :
   List TransportSmoothOpenObligation
@@ -63,8 +55,7 @@ canonicalTransportSmoothOpenObligations =
   ∷ []
 
 data ImReflectDASHIPostulateStatus : Set where
-  safePostulateSurfaceBlockedByCohesion :
-    ImReflectDASHIPostulateStatus
+  safePostulateSurfaceBlockedByCohesion : ImReflectDASHIPostulateStatus
 
 record ImReflectDASHIAuthorityPostulateSurface
     (Carrier : Set)
@@ -246,17 +237,13 @@ canonicalImReflectDASHIAuthorityPostulateSurface =
     }
 
 data TransportSmoothLabel : Set where
-  TS1-clopen-locality :
-    TransportSmoothLabel
+  TS1-clopen-locality : TransportSmoothLabel
 
-  TS2-refinement-naturality :
-    TransportSmoothLabel
+  TS2-refinement-naturality : TransportSmoothLabel
 
-  TS3-formal-disk-stability :
-    TransportSmoothLabel
+  TS3-formal-disk-stability : TransportSmoothLabel
 
-  TS4-transport-compatibility :
-    TransportSmoothLabel
+  TS4-transport-compatibility : TransportSmoothLabel
 
 canonicalTransportSmoothLabels :
   List TransportSmoothLabel

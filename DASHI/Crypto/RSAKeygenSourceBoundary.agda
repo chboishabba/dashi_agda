@@ -37,32 +37,23 @@ listCount (_ ∷ xs) =
 -- Vocabulary.
 
 data RSAKeygenSourceKind : Set where
-  sourceIdKind :
-    RSAKeygenSourceKind
+  sourceIdKind : RSAKeygenSourceKind
 
-  hiddenGeneratorStateKind :
-    RSAKeygenSourceKind
+  hiddenGeneratorStateKind : RSAKeygenSourceKind
 
-  entropyProcessKind :
-    RSAKeygenSourceKind
+  entropyProcessKind : RSAKeygenSourceKind
 
-  candidatePrimeStreamKind :
-    RSAKeygenSourceKind
+  candidatePrimeStreamKind : RSAKeygenSourceKind
 
-  acceptancePredicateKind :
-    RSAKeygenSourceKind
+  acceptancePredicateKind : RSAKeygenSourceKind
 
-  observableTraceKind :
-    RSAKeygenSourceKind
+  observableTraceKind : RSAKeygenSourceKind
 
-  sourceConditionedDatasetKind :
-    RSAKeygenSourceKind
+  sourceConditionedDatasetKind : RSAKeygenSourceKind
 
-  emittedModulusKind :
-    RSAKeygenSourceKind
+  emittedModulusKind : RSAKeygenSourceKind
 
-  keygenSourceFiberKind :
-    RSAKeygenSourceKind
+  keygenSourceFiberKind : RSAKeygenSourceKind
 
   namedRSAKeygenSourceKind :
     String →
@@ -87,20 +78,15 @@ canonicalRSAKeygenSourceKindCount =
   listCount canonicalRSAKeygenSourceKinds
 
 data RSAKeygenSourceAuthorityClaimKind : Set where
-  keygenAuthorityClaim :
-    RSAKeygenSourceAuthorityClaimKind
+  keygenAuthorityClaim : RSAKeygenSourceAuthorityClaimKind
 
-  entropyAuthorityClaim :
-    RSAKeygenSourceAuthorityClaimKind
+  entropyAuthorityClaim : RSAKeygenSourceAuthorityClaimKind
 
-  sourceCompromiseAuthorityClaim :
-    RSAKeygenSourceAuthorityClaimKind
+  sourceCompromiseAuthorityClaim : RSAKeygenSourceAuthorityClaimKind
 
-  productionCryptoSecurityAuthorityClaim :
-    RSAKeygenSourceAuthorityClaimKind
+  productionCryptoSecurityAuthorityClaim : RSAKeygenSourceAuthorityClaimKind
 
-  factorRecoveryAuthorityClaim :
-    RSAKeygenSourceAuthorityClaimKind
+  factorRecoveryAuthorityClaim : RSAKeygenSourceAuthorityClaimKind
 
   namedRSAKeygenSourceAuthorityClaimKind :
     String →
@@ -121,28 +107,22 @@ canonicalRSAKeygenSourceAuthorityClaimCount =
   listCount canonicalRSAKeygenSourceAuthorityClaimKinds
 
 data RSAKeygenSourceAdapterKind : Set where
-  sourceConditionedKeygenAdapterKind :
-    RSAKeygenSourceAdapterKind
+  sourceConditionedKeygenAdapterKind : RSAKeygenSourceAdapterKind
 
-  emittedModulusAdapterKind :
-    RSAKeygenSourceAdapterKind
+  emittedModulusAdapterKind : RSAKeygenSourceAdapterKind
 
-  keygenSourceFiberAdapterKind :
-    RSAKeygenSourceAdapterKind
+  keygenSourceFiberAdapterKind : RSAKeygenSourceAdapterKind
 
   namedRSAKeygenSourceAdapterKind :
     String →
     RSAKeygenSourceAdapterKind
 
 data RSAKeygenSourceAdapterSurface : Set where
-  sourceConditionedKeygenAdapter :
-    RSAKeygenSourceAdapterSurface
+  sourceConditionedKeygenAdapter : RSAKeygenSourceAdapterSurface
 
-  emittedModulusAdapter :
-    RSAKeygenSourceAdapterSurface
+  emittedModulusAdapter : RSAKeygenSourceAdapterSurface
 
-  keygenSourceFiberAdapter :
-    RSAKeygenSourceAdapterSurface
+  keygenSourceFiberAdapter : RSAKeygenSourceAdapterSurface
 
   namedRSAKeygenSourceAdapter :
     String →

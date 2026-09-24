@@ -13,8 +13,9 @@ usage() {
 Usage: scripts/run_agda29_adaptive_repo_check.sh [options]
 
 Plan repository-wide first-party Agda typechecking with the existing canonical
-planner, partition selected live targets by empirical resource class, and run
-each class through the existing Agda 2.9 checker/cache.
+planner, build the first-party import graph, order dependencies before their
+consumers, partition by effective resource class, and run each class through
+the existing Agda 2.9 checker/cache.
 
 Resource classes are operational only:
   ordinary    default scheduling
@@ -23,8 +24,9 @@ Resource classes are operational only:
 
 Resource classes propagate through first-party imports: a target whose import
 closure reaches a memory-risk owner is memory-risk too; long-cpu propagates in
-the same way unless memory-risk dominates.  This changes scheduling only, not
-liveness or proof status.
+the same way unless memory-risk dominates.  Strongly connected components are
+scheduled as one dependency unit, with canonical order retained inside a cycle.
+This changes scheduling only, not liveness or proof status.
 
 Options:
   --include-heavy       include YM/NS/Balaban and their dependency closure
@@ -131,6 +133,7 @@ python3 - \
   "$TARGETS_FILE" "$RUN_TARGETS_FILE" "$PROFILE_FILE" "$REPO_ROOT" \
   "$ORDINARY_FILE" "$LONG_CPU_FILE" "$MEMORY_RISK_FILE" \
   "$RESOURCE_SUMMARY" <<'PY'
+import heapq
 import json
 import re
 import sys
@@ -143,6 +146,8 @@ from pathlib import Path
 root = Path(root_path)
 all_targets = [line.strip() for line in Path(all_targets_path).read_text().splitlines() if line.strip()]
 run_targets = [line.strip() for line in Path(run_targets_path).read_text().splitlines() if line.strip()]
+run_set = set(run_targets)
+canonical_index = {target: index for index, target in enumerate(all_targets)}
 profile = json.loads(Path(profile_path).read_text())
 exact = profile.get("exact", {})
 prefix_rules = profile.get("prefix", [])
@@ -198,32 +203,119 @@ def direct_class(target):
             return candidate, "prefix"
     return "ordinary", "default"
 
-memo = {}
-visiting = set()
+# Tarjan SCC decomposition.  A cycle is one scheduling unit: dependencies can
+# be warmed only to the component boundary, so keep the canonical order inside
+# that component and propagate the strongest resource class to all its members.
+index_counter = 0
+stack = []
+on_stack = set()
+indices = {}
+lowlink = {}
+components = []
+component_of = {}
 
-def effective_class(target):
-    if target in memo:
-        return memo[target]
-    direct, _ = direct_class(target)
-    best = severity[direct]
-    if target in visiting:
-        return direct
-    visiting.add(target)
-    for dep in deps.get(target, ()):
-        best = max(best, severity[effective_class(dep)])
-        if best == severity["memory-risk"]:
-            break
-    visiting.remove(target)
-    memo[target] = by_severity[best]
-    return memo[target]
+sys.setrecursionlimit(max(10000, len(all_targets) * 2 + 100))
+
+def strongconnect(node):
+    global index_counter
+    indices[node] = index_counter
+    lowlink[node] = index_counter
+    index_counter += 1
+    stack.append(node)
+    on_stack.add(node)
+
+    for dep in sorted(deps.get(node, ()), key=canonical_index.__getitem__):
+        if dep not in indices:
+            strongconnect(dep)
+            lowlink[node] = min(lowlink[node], lowlink[dep])
+        elif dep in on_stack:
+            lowlink[node] = min(lowlink[node], indices[dep])
+
+    if lowlink[node] == indices[node]:
+        component = []
+        while True:
+            member = stack.pop()
+            on_stack.remove(member)
+            component_of[member] = len(components)
+            component.append(member)
+            if member == node:
+                break
+        component.sort(key=canonical_index.__getitem__)
+        components.append(component)
+
+for target in all_targets:
+    if target not in indices:
+        strongconnect(target)
+
+component_count = len(components)
+component_key = {
+    cid: min(canonical_index[target] for target in component)
+    for cid, component in enumerate(components)
+}
+successors = {cid: set() for cid in range(component_count)}
+predecessors = {cid: set() for cid in range(component_count)}
+dependency_edges = 0
+for consumer, consumer_deps in deps.items():
+    consumer_cid = component_of[consumer]
+    for dep in consumer_deps:
+        dependency_edges += 1
+        dep_cid = component_of[dep]
+        if dep_cid == consumer_cid:
+            continue
+        successors[dep_cid].add(consumer_cid)
+        predecessors[consumer_cid].add(dep_cid)
+
+# Stable Kahn order over the condensation DAG.  The edge direction is
+# dependency -> consumer, so this is exactly the cache-warming order.
+indegree = {cid: len(predecessors[cid]) for cid in range(component_count)}
+ready = [(component_key[cid], cid) for cid, degree in indegree.items() if degree == 0]
+heapq.heapify(ready)
+component_order = []
+while ready:
+    _, cid = heapq.heappop(ready)
+    component_order.append(cid)
+    for nxt in sorted(successors[cid], key=component_key.__getitem__):
+        indegree[nxt] -= 1
+        if indegree[nxt] == 0:
+            heapq.heappush(ready, (component_key[nxt], nxt))
+
+if len(component_order) != component_count:
+    raise SystemExit("internal error: SCC condensation graph is not acyclic")
+
+# Resource risk flows in the same direction as scheduling: a consumer inherits
+# the strongest class of every first-party dependency.  Cycles already share a
+# component, so this is exact on the condensation DAG.
+component_direct_severity = {}
+for cid, component in enumerate(components):
+    component_direct_severity[cid] = max(
+        severity[direct_class(target)[0]] for target in component
+    )
+component_effective_severity = dict(component_direct_severity)
+for cid in component_order:
+    current = component_effective_severity[cid]
+    for nxt in successors[cid]:
+        component_effective_severity[nxt] = max(
+            component_effective_severity[nxt], current
+        )
+
+effective_class = {
+    target: by_severity[component_effective_severity[component_of[target]]]
+    for target in all_targets
+}
+
+ordered_targets = []
+for cid in component_order:
+    ordered_targets.extend(components[cid])
 
 buckets = {name: [] for name in allowed}
 matched_exact = 0
 matched_prefix = 0
 inherited = 0
-for target in run_targets:
+for target in ordered_targets:
+    if target not in run_set:
+        continue
     direct, source = direct_class(target)
-    effective = effective_class(target)
+    effective = effective_class[target]
     if source == "exact":
         matched_exact += 1
     elif source == "prefix":
@@ -239,8 +331,13 @@ for path, key in [
 ]:
     Path(path).write_text("".join(f"{target}\n" for target in buckets[key]))
 
+cyclic_scc_count = sum(
+    1
+    for component in components
+    if len(component) > 1 or any(node in deps.get(node, ()) for node in component)
+)
 summary = {
-    "schema": "dashi.agda-resource-plan.v2",
+    "schema": "dashi.agda-resource-plan.v3",
     "selected_total": len(run_targets),
     "ordinary": len(buckets["ordinary"]),
     "long_cpu": len(buckets["long-cpu"]),
@@ -251,6 +348,10 @@ summary = {
     "unprofiled_defaulted_to_ordinary_before_dependency_propagation": (
         len(run_targets) - matched_exact - matched_prefix
     ),
+    "dependency_ordered": True,
+    "dependency_edges": dependency_edges,
+    "strongly_connected_components": component_count,
+    "cyclic_strongly_connected_components": cyclic_scc_count,
     "profile_file": str(Path(profile_path).resolve()),
 }
 Path(summary_path).write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")

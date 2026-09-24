@@ -24,46 +24,33 @@ import DASHI.Core.FormalLensQualificationCore as FormalLensCore
 -- observable example.
 
 data BridgeStrength : Set where
-  explicitTransportReceiptStrongest :
-    BridgeStrength
+  explicitTransportReceiptStrongest : BridgeStrength
 
-  wellEstablishedCausalChain :
-    BridgeStrength
+  wellEstablishedCausalChain : BridgeStrength
 
-  backgroundDistributionalAssociation :
-    BridgeStrength
+  backgroundDistributionalAssociation : BridgeStrength
 
-  proofByOmissionGodOfGapsWeakest :
-    BridgeStrength
+  proofByOmissionGodOfGapsWeakest : BridgeStrength
 
 data ResidualName : Set where
-  EXACT :
-    ResidualName
+  EXACT : ResidualName
 
-  PARTIAL :
-    ResidualName
+  PARTIAL : ResidualName
 
-  NO_TYPED_MEET :
-    ResidualName
+  NO_TYPED_MEET : ResidualName
 
-  CONTRADICTION :
-    ResidualName
+  CONTRADICTION : ResidualName
 
 data ObservableName : Set where
-  receiptObservable :
-    ObservableName
+  receiptObservable : ObservableName
 
-  mechanismObservable :
-    ObservableName
+  mechanismObservable : ObservableName
 
-  economyObservable :
-    ObservableName
+  economyObservable : ObservableName
 
-  personBehaviourObservable :
-    ObservableName
+  personBehaviourObservable : ObservableName
 
-  claimNarrativeObservable :
-    ObservableName
+  claimNarrativeObservable : ObservableName
 
 record Falsifier : Set where
   constructor falsifier
@@ -901,17 +888,13 @@ backgroundCandidateToBridge candidate =
     (candidateReceiptNote candidate)
 
 data BackgroundBridgeGateName : Set where
-  noEmpiricalTruthPromotionGate :
-    BackgroundBridgeGateName
+  noEmpiricalTruthPromotionGate : BackgroundBridgeGateName
 
-  noCausationFromBackgroundDistributionGate :
-    BackgroundBridgeGateName
+  noCausationFromBackgroundDistributionGate : BackgroundBridgeGateName
 
-  noPolicyAuthorityPromotionGate :
-    BackgroundBridgeGateName
+  noPolicyAuthorityPromotionGate : BackgroundBridgeGateName
 
-  noPersonBehaviourTruthPromotionGate :
-    BackgroundBridgeGateName
+  noPersonBehaviourTruthPromotionGate : BackgroundBridgeGateName
 
 record BackgroundBridgePromotionGate : Set where
   constructor backgroundBridgePromotionGate

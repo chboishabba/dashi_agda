@@ -22,7 +22,7 @@ record FungalNetworkAgencyBoundary : Set where
   field
     problemSpaceBoundary : Problem.ProblemSpaceAgencyBoundary
     autonomyBoundary : Autonomy.ConstitutiveInteractiveAutonomyBoundary
-    waveBoundaryType : Set
+    waveBoundary : Wave.TravelingWaveBoundary
     fungalSignallingIsBiophysical : Bool
     networkCoordinationMayBeGoalDirectedCandidate : Bool
     electricalSpikesNotNeuralLanguageByDefinition : Bool
@@ -35,7 +35,7 @@ canonicalFungalNetworkAgencyBoundary : FungalNetworkAgencyBoundary
 canonicalFungalNetworkAgencyBoundary = record
   { problemSpaceBoundary = Problem.canonicalProblemSpaceAgencyBoundary
   ; autonomyBoundary = Autonomy.canonicalConstitutiveInteractiveAutonomyBoundary
-  ; waveBoundaryType = Wave.TravelingWaveComputationBoundary
+  ; waveBoundary = Wave.canonicalTravelingWaveBoundary
   ; fungalSignallingIsBiophysical = true
   ; networkCoordinationMayBeGoalDirectedCandidate = true
   ; electricalSpikesNotNeuralLanguageByDefinition = true

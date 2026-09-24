@@ -21,23 +21,23 @@ import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Assessment
 ------------------------------------------------------------------------
 
 data CountryV02Residual : Set where
-  affectedCommunityOutcomeResidualV02
-  communityAuthorityCapacityResidualV02
-  landCountryControlResidualV02
-  independentCorrectionResidualV02
-  recurrencePreventionResidualV02
-  socioEconomicOutcomeResidualV02
-  billyCaseSpecificOddsResidualV02
+  affectedCommunityOutcomeResidualV02 : CountryV02Residual
+  communityAuthorityCapacityResidualV02 : CountryV02Residual
+  landCountryControlResidualV02 : CountryV02Residual
+  independentCorrectionResidualV02 : CountryV02Residual
+  recurrencePreventionResidualV02 : CountryV02Residual
+  socioEconomicOutcomeResidualV02 : CountryV02Residual
+  billyCaseSpecificOddsResidualV02 : CountryV02Residual
   : CountryV02Residual
 
 data CountryV02SourceRole : Set where
-  communityOriginatingOutcomeSource
-  communityAuthorityAndCapacitySource
-  landCountryRealisedControlSource
-  independentCorrectionObservationSource
-  longitudinalRecurrenceObservationSource
-  realisedSocioEconomicOutcomeSource
-  caseSpecificComplianceCalibrationSource
+  communityOriginatingOutcomeSource : CountryV02SourceRole
+  communityAuthorityAndCapacitySource : CountryV02SourceRole
+  landCountryRealisedControlSource : CountryV02SourceRole
+  independentCorrectionObservationSource : CountryV02SourceRole
+  longitudinalRecurrenceObservationSource : CountryV02SourceRole
+  realisedSocioEconomicOutcomeSource : CountryV02SourceRole
+  caseSpecificComplianceCalibrationSource : CountryV02SourceRole
   : CountryV02SourceRole
 
 producerFor : CountryV02Residual → Search.ProducerClass
@@ -161,11 +161,11 @@ currentFirstModeExact = refl
 ------------------------------------------------------------------------
 
 data CountryV02RecomputeAction : Set where
-  continueBoundedSearch
-  recomputeV02Calibration
-  reopenV02Coordinate
-  retainContestedV02State
-  inspectV02Underidentification
+  continueBoundedSearch : CountryV02RecomputeAction
+  recomputeV02Calibration : CountryV02RecomputeAction
+  reopenV02Coordinate : CountryV02RecomputeAction
+  retainContestedV02State : CountryV02RecomputeAction
+  inspectV02Underidentification : CountryV02RecomputeAction
   : CountryV02RecomputeAction
 
 recomputeActionFor : Assessment.FrontierChange → CountryV02RecomputeAction

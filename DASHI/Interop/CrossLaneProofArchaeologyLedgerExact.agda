@@ -1,6 +1,7 @@
 module DASHI.Interop.CrossLaneProofArchaeologyLedgerExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
 
@@ -8,8 +9,9 @@ open import Agda.Builtin.List using (List; []; _∷_)
 -- CROSS-LANE PROOF ARCHAEOLOGY LEDGER
 ------------------------------------------------------------------------
 -- Canonical grep-first owner for current proof search.
--- Active lanes: Navier-Stokes + Yang-Mills + Riemann Hypothesis.
--- GR-QFT remains a continuity coordinate only.
+-- Active Clay lanes: Navier-Stokes + Yang-Mills + Riemann Hypothesis.
+-- Moonshine/Route-B is tracked here as cross-prover shared infrastructure,
+-- not as an additional Clay lane. GR-QFT remains a continuity coordinate only.
 --
 -- The current search policy is the repo-native Ibrahim traversal policy:
 -- explicit formulation owner -> typed dependency -> typed generalisation.
@@ -31,13 +33,13 @@ data Lane : Set where
   navierStokes yangMills riemannHypothesis grQuantum : Lane
 
 data HistoricalRole : Set where
-  terminalConsumer directProducer producerTactic compiler representationWeld
-  negativeControl diagnostic crossProverDonor sourceFrontier buriedDonor
+  terminalConsumer directProducer producerTactic compiler representationWeld : HistoricalRole
+  negativeControl diagnostic crossProverDonor sourceFrontier buriedDonor : HistoricalRole
   operatorContinuumFrontier liveLevel2Theorem : HistoricalRole
 
 data HistoricalClock : Set where
-  constructionAncestry firstTypedAppearance formalConsolidation
-  consumerRecovery cutsetCompression sourceFrontierCompression
+  constructionAncestry firstTypedAppearance formalConsolidation : HistoricalClock
+  consumerRecovery cutsetCompression sourceFrontierCompression : HistoricalClock
   crossProverSync operatorContinuumAudit buriedPaymentRecovery : HistoricalClock
 
 data IdentityStatus : Set where
@@ -45,6 +47,59 @@ data IdentityStatus : Set where
 
 data PaymentStatus : Set where
   paid conditionalPayment unpaid notApplicable : PaymentStatus
+
+------------------------------------------------------------------------
+-- Shared cross-prover same-object seams.
+--
+-- This is provenance/classification only.  The theorem-facing Route-B owner
+-- remains DASHI.Moonshine.JInvariantEisensteinAgdaLeanExtractionExact.
+------------------------------------------------------------------------
+
+record CrossLaneInteropResidual : Set where
+  constructor cross-lane-interop-residual
+  field
+    interopObject : String
+    primaryRole : HistoricalRole
+    donorRole : HistoricalRole
+    identity : IdentityStatus
+    payment : PaymentStatus
+    interpretation : String
+    downstreamCompilerOwnership : String
+    nextSameObjectPayment : String
+open CrossLaneInteropResidual public
+
+canonicalConstructiveRealComplexInteropResidual :
+  CrossLaneInteropResidual
+canonicalConstructiveRealComplexInteropResidual =
+  cross-lane-interop-residual
+    "selected Agda constructed-real / ComplexPair -> Lean Real / Complex interoperability"
+    representationWeld
+    crossProverDonor
+    unresolvedIdentity
+    unpaid
+    "Shared infrastructure seam. Do not reopen q/E4_N/E6_N recurrence mathematics independently in Moonshine or another lane: once the primitive map preserves 0,1,i,pi,+,-,*,exp, those transports are compiler-owned."
+    "qOf, E4_N, E6_N and finite discriminant-numerator transport are compiler-owned in JInvariantEisensteinAgdaLeanExtractionExact; Lean-target E4_N/E6_N convergence to canonical Agda-shaped infinite sums is already paid on the Lean companion."
+    "Construct the faithful selected-real map into Lean Real, lift it componentwise to ComplexPair -> Lean Complex with primitive-operation/pi/exp preservation, then identify the canonical infinite sums with Mathlib E4/E6 before the separate Delta=eta^24=(E4^3-E6^2)/1728 same-object normalization weld."
+
+constructiveRealComplexInteropIdentityIsUnresolved :
+  identity canonicalConstructiveRealComplexInteropResidual
+  ≡ unresolvedIdentity
+constructiveRealComplexInteropIdentityIsUnresolved = refl
+
+constructiveRealComplexInteropPaymentIsUnpaid :
+  payment canonicalConstructiveRealComplexInteropResidual
+  ≡ unpaid
+constructiveRealComplexInteropPaymentIsUnpaid = refl
+
+constructiveRealComplexInteropPrimaryRoleIsRepresentationWeld :
+  primaryRole canonicalConstructiveRealComplexInteropResidual
+  ≡ representationWeld
+constructiveRealComplexInteropPrimaryRoleIsRepresentationWeld = refl
+
+constructiveRealComplexInteropDonorRoleIsCrossProver :
+  donorRole canonicalConstructiveRealComplexInteropResidual
+  ≡ crossProverDonor
+constructiveRealComplexInteropDonorRoleIsCrossProver = refl
 
 data IdentifierStatus : Set where
   verifiedIdentifier unresolvedIdentifier notApplicableIdentifier : IdentifierStatus

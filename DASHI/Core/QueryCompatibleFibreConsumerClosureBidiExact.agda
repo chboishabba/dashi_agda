@@ -54,8 +54,8 @@ pointIdentificationClosesConsumer :
     {query : Query} {state : State} →
   PointIdentifiedAt problem query state →
   ConsumerClosedAt problem query state
-pointIdentificationClosesConsumer {problem = problem} point left right leftLive rightLive =
-  cong (consumer problem _) (point left right leftLive rightLive)
+pointIdentificationClosesConsumer {problem = problem} {query = query} point left right leftLive rightLive =
+  cong (consumer problem query) (point left right leftLive rightLive)
 
 queryResidualFibre :
   ∀ {Query State Hidden Answer : Set} →

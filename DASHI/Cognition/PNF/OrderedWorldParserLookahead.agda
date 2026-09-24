@@ -81,7 +81,7 @@ data SemanticFrontier : Set where
 data LookaheadSlot : Set where
   emptyLookahead : LookaheadSlot
   bufferedLookahead :
-    (source : Document) → ParserLookahead source → LookaheadSlot
+  (source : Document) → ParserLookahead source → LookaheadSlot
 
 record OrderedExecutionState : Set where
   constructor orderedExecutionState

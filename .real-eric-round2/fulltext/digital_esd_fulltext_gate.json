@@ -1,0 +1,13 @@
+{
+  "completed_at": "2026-09-22T04:15:40.788556+00:00",
+  "eligible_for_fulltext": 28,
+  "failed": 0,
+  "fulltext_retrieval_creates_source_audit_admission": false,
+  "fulltext_retrieval_creates_source_truth": false,
+  "index_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/fulltext/digital_esd_fulltext_index.tsv",
+  "input_screening_records": 43996,
+  "pending": 18,
+  "retrieved": 10,
+  "schema": "sensiblaw.digital-esd-fulltext-index.v0_2",
+  "verified": 10
+}

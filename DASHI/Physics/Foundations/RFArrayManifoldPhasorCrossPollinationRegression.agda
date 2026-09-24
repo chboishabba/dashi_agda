@@ -1,0 +1,20 @@
+module DASHI.Physics.Foundations.RFArrayManifoldPhasorCrossPollinationRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.RFArrayManifoldPhasorCrossPollinationExact as M
+
+phasorToSpatialPhaseRequired : M.PhasorSpatialPhaseReceipt
+phasorToSpatialPhaseRequired = M.canonicalPhasorSpatialPhaseReceipt
+
+arrayManifoldRequired : M.ArrayManifoldReceipt
+arrayManifoldRequired = M.canonicalArrayManifoldReceipt
+
+beamformingAndDFRolesRequired : M.ArrayConsumerRoleReceipt
+beamformingAndDFRolesRequired = M.canonicalArrayConsumerRoleReceipt
+
+goniometerEndpointRequired : M.ArrayManifoldGoniometerEndpoint
+goniometerEndpointRequired = M.canonicalArrayManifoldGoniometerEndpoint
+
+smithSiblingFirewallRequired : M.SmithAoAFirewall
+smithSiblingFirewallRequired = M.canonicalSmithAoAFirewall

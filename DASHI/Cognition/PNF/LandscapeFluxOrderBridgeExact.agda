@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.LandscapeFluxOrderBridgeExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)

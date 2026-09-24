@@ -87,6 +87,26 @@ import DASHI.Biology.MorphogeneticVisualGenerator
 import DASHI.Biology.RecursiveSpherePerforation
 import DASHI.Biology.NestedApertureVisibility
 import DASHI.Biology.LogPolarRetinotopyBridge
+import DASHI.Biology.KluverLogPolar5HT2ASourceAtlasExact
+import DASHI.Biology.IonicMimicrySourceAtlasExact
+import DASHI.Biology.IonicMimicryGeometryExact
+import DASHI.Biology.TargetRelativeRecognitionFibreExact
+import DASHI.Biology.TargetIndexedRecognitionGeometryExact
+import DASHI.Biology.TargetIndexedRecognitionAdmissibleRegionExact
+import DASHI.Biology.TargetIndexedRecognitionEmpiricalCalibrationExact
+import DASHI.Biology.ContextIndexedRecognitionGeometryExact
+import DASHI.Biology.FiveHT2ARecognitionStateSpaceExact
+import DASHI.Biology.TargetRecognitionFibrationExact
+import DASHI.Biology.FiveHT2ARecognitionResidualProjectionExact
+import DASHI.Biology.FiveHT2AProjectionTowerExact
+import DASHI.Biology.TargetRecognitionBundleFibreExact
+import DASHI.Biology.Psychedelic5HT2AAttentionBoundaryExact
+import DASHI.Biology.Kluver5HT2ACrossScaleHyperfibreExact
+import DASHI.Biology.Kluver5HT2AMolecularProteinInstantiationExact
+import DASHI.Biology.FiveHT2ASignalingDialecticExact
+import DASHI.Biology.FiveHT2AProtocolIndexedSignalTransportExact
+import DASHI.Biology.FiveHT2AVisualCortexBioelectricBridgeExact
+import DASHI.Biology.FiveHT2ACalciumIdentityGeometryBoundaryExact
 import DASHI.Biology.VisualMotifTransitionOperator
 import DASHI.Biology.PostAcuteVisualAdaptation
 import DASHI.Biology.HallOfHallsCoalition
@@ -226,3 +246,10 @@ import DASHI.Biology.CarbonClimateEcologicalDependencyBidiExact
 import DASHI.Biology.Microbiology.QuorumSensingContextExact
 import DASHI.Biology.Microbiology.BaldEyesalveMechanismBoundaryExact
 import DASHI.Biology.Microbiology.BaldEyesalveQuorumCrossPollinationExact
+
+------------------------------------------------------------------------
+-- World regularity / theory / adaptation hyperfabric cross-pollination.
+import DASHI.Biology.WorldRegularityHyperformalismCrossPollinationExact
+
+-- Evolutionary adaptation as world coupling without propositional theory.
+import DASHI.Biology.Evolution.EvolutionaryWorldCouplingTheoryBoundaryExact

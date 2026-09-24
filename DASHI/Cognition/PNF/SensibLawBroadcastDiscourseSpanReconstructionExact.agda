@@ -238,8 +238,8 @@ comparisonMayNotPromoteWorldClaim ()
 manifoldBoundaryAnchor : Manifold.PNFWorldManifoldBoundary
 manifoldBoundaryAnchor = Manifold.canonicalPNFWorldManifoldBoundary
 
-graphBoundaryAnchor : Graph.BroadcastDiscourseGraphBoundary
-graphBoundaryAnchor = Graph.canonicalBroadcastDiscourseGraphBoundary
+graphBoundaryAnchor : Graph.BroadcastGraphCompilerBoundary
+graphBoundaryAnchor = Graph.canonicalBroadcastGraphCompilerBoundary
 
 roleBoundaryAnchor : Role.RoleTransitionBoundary
 roleBoundaryAnchor = Role.canonicalRoleTransitionBoundary

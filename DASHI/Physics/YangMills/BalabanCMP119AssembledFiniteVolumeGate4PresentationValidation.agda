@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationExact as Presentation
+
+assembledCMP119Round283CompilerOwned :
+  Presentation.cmp119AssembledGate4Round283CompilerLevel ≡ machineChecked
+assembledCMP119Round283CompilerOwned = refl
+
+assembledCMP119SelectedProbabilityCompilerOwned :
+  Presentation.cmp119AssembledGate4SelectedProbabilityCompilerLevel ≡ machineChecked
+assembledCMP119SelectedProbabilityCompilerOwned = refl
+
+assembledCMP119T5ExpectationSameObjectRemainsPhysical :
+  Presentation.cmp119AssembledToT5FiniteExpectationSameObjectLevel ≡ conditional
+assembledCMP119T5ExpectationSameObjectRemainsPhysical = refl

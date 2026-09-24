@@ -271,8 +271,8 @@ fixedOutputCovariancePairDifference rho S velocity cutoff output =
       Work.coherentWork mixed mixed ≡ workSum work items
     selfMeaning = sym (workSumAgainstFold mixed value items)
   in
-  rewrite decayMeaning | selfMeaning
-  = divisionFreePairDifferenceCentering rate work items
+  rewrite decayMeaning | selfMeaning =
+    divisionFreePairDifferenceCentering rate work items
 
 ------------------------------------------------------------------------
 -- Status / trust boundary.

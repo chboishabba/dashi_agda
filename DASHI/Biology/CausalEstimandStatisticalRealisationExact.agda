@@ -21,7 +21,7 @@ import DASHI.Statistics.StandardConfidenceIntervalInterpretationExact as Standar
 ------------------------------------------------------------------------
 
 record EstimatorProcedure
-    (estimand : Estimand.CausalEffectEstimand) : Set₁ where
+    (estimand : Estimand.CausalEffectEstimand) : Set₂ where
   constructor estimator-procedure
   field
     Sample Estimate : Set
@@ -44,7 +44,7 @@ open EstimatorProcedure public
 
 record RealisedEstimate
     {estimand : Estimand.CausalEffectEstimand}
-    (procedure : EstimatorProcedure estimand) : Set₁ where
+    (procedure : EstimatorProcedure estimand) : Set₂ where
   constructor realised-estimate
   field
     sample : Sample procedure
@@ -63,7 +63,7 @@ open RealisedEstimate public
 
 record UncertaintyProcedure
     {estimand : Estimand.CausalEffectEstimand}
-    (procedure : EstimatorProcedure estimand) : Set₁ where
+    (procedure : EstimatorProcedure estimand) : Set₂ where
   constructor uncertainty-procedure
   field
     Uncertainty : Set
@@ -82,7 +82,7 @@ open UncertaintyProcedure public
 record EstimateWithUncertainty
     {estimand : Estimand.CausalEffectEstimand}
     {procedure : EstimatorProcedure estimand}
-    (uncertaintyProcedure : UncertaintyProcedure procedure) : Set₁ where
+    (uncertaintyProcedure : UncertaintyProcedure procedure) : Set₂ where
   constructor estimate-with-uncertainty
   field
     realised : RealisedEstimate procedure
@@ -104,7 +104,7 @@ open EstimateWithUncertainty public
 
 record ConfidenceIntervalEstimatorRealisation
     {estimand : Estimand.CausalEffectEstimand}
-    (procedure : EstimatorProcedure estimand) : Set₁ where
+    (procedure : EstimatorProcedure estimand) : Set₂ where
   constructor confidence-interval-estimator-realisation
   field
     Parameter : Set
@@ -126,7 +126,7 @@ open ConfidenceIntervalEstimatorRealisation public
 record RegionInterpretedEstimate
     {estimand : Estimand.CausalEffectEstimand}
     {procedure : EstimatorProcedure estimand}
-    (intervalProcedure : ConfidenceIntervalEstimatorRealisation procedure) : Set₁ where
+    (intervalProcedure : ConfidenceIntervalEstimatorRealisation procedure) : Set₂ where
   constructor region-interpreted-estimate
   field
     geometry : Region.HypothesisRegionGeometry

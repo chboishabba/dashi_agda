@@ -1,0 +1,34 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound16Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound16Exact as Round16
+
+candidateStillRequiresCorpusAdmission :
+  Round16.Round16CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round16.round16CandidateDoesNotCreateIncludedStudy
+
+affectedPopulationNotSampledPopulation :
+  Round16.AffectedPopulationCreatesSampledPopulationIdentity → ⊥
+affectedPopulationNotSampledPopulation = Round16.affectedPopulationDoesNotCreateSampledPopulationIdentity
+
+adultProxyNotChildAuthority :
+  Round16.AdultInstitutionalObserverCreatesChildParticipantAuthority → ⊥
+adultProxyNotChildAuthority = Round16.adultInstitutionalObserverDoesNotCreateChildParticipantAuthority
+
+sameOnlineSurfaceNotParticipationAdequacy :
+  Round16.OnlineDeliveryCreatesParticipationAdequacy → ⊥
+sameOnlineSurfaceNotParticipationAdequacy = Round16.onlineDeliveryDoesNotCreateParticipationAdequacy
+
+pluralObserverNotDecisionAuthority :
+  Round16.PluralObserverCoverageCreatesDecisionAuthority → ⊥
+pluralObserverNotDecisionAuthority = Round16.pluralObserverCoverageDoesNotCreateDecisionAuthority
+
+designExclusionCollisionRulesOutFlatRecovery :
+  Round16.DesignExclusionFactorisation → ⊥
+designExclusionCollisionRulesOutFlatRecovery = Round16.designExclusionDoesNotFactorThroughDeliverySurface
+
+affectedObserverCollisionRulesOutFlatRecovery :
+  Round16.AffectedObserverFactorisation → ⊥
+affectedObserverCollisionRulesOutFlatRecovery = Round16.affectedObserverDoesNotFactorThroughInstitutionalSurface

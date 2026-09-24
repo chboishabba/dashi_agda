@@ -199,12 +199,12 @@ canadianPanelDoesNotCreateGlobalPrevalence ()
 ------------------------------------------------------------------------
 
 data OccurrenceParetoTarget : Set where
-  exactSocialTranscript
-  productLabelLegality
-  licensedMarketReplication
-  analyteTransferUnderSmoking
-  analyteTransferUnderVaporisation
-  inhalationToxicology
+  exactSocialTranscript : OccurrenceParetoTarget
+  productLabelLegality : OccurrenceParetoTarget
+  licensedMarketReplication : OccurrenceParetoTarget
+  analyteTransferUnderSmoking : OccurrenceParetoTarget
+  analyteTransferUnderVaporisation : OccurrenceParetoTarget
+  inhalationToxicology : OccurrenceParetoTarget
   globalPrevalenceClaim : OccurrenceParetoTarget
 
 record OccurrenceParetoStep : Set where
@@ -271,14 +271,14 @@ pareto99 = occurrence-pareto-step
 ------------------------------------------------------------------------
 
 data OccurrenceTime : Set where
-  source2023
-  attachedSocialSnapshot2026
+  source2023 : OccurrenceTime
+  attachedSocialSnapshot2026 : OccurrenceTime
   currentDashi : OccurrenceTime
 
 data OccurrenceInterpretation : Set where
-  namedChemicalsOccurInSomeCannabis
-  illicitPanelHigherPositiveRate
-  licensedMarketGenerallyContainsNamedChemicals
+  namedChemicalsOccurInSomeCannabis : OccurrenceInterpretation
+  illicitPanelHigherPositiveRate : OccurrenceInterpretation
+  licensedMarketGenerallyContainsNamedChemicals : OccurrenceInterpretation
   occurrenceEqualsPoisoning : OccurrenceInterpretation
 
 data OccurrenceSummary : Set where occurrenceIsSampleAndCohortIndexed : OccurrenceSummary

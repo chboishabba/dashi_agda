@@ -17,26 +17,26 @@ import DASHI.Cognition.PNF.SensibLawDocumentDiscourseContextRefinementExact as C
 ------------------------------------------------------------------------
 
 data TextGenre : Set where
-  casualConversation
-  transcript
-  educationalLecture
-  academicDiscussion
-  newsReport
-  narrativeText
-  institutionalDocument
-  formalLegalDocument
-  unresolvedGenre
+  casualConversation : String → TextGenre
+  transcript : String → TextGenre
+  educationalLecture : String → TextGenre
+  academicDiscussion : String → TextGenre
+  newsReport : String → TextGenre
+  narrativeText : String → TextGenre
+  institutionalDocument : String → TextGenre
+  formalLegalDocument : String → TextGenre
+  unresolvedGenre : String → TextGenre
   customGenre : String → TextGenre
 
 data SubjectMatter : Set where
-  legalSubject
-  historicalSubject
-  culturalSubject
-  politicalSubject
-  scientificSubject
-  personalSubject
-  institutionalSubject
-  generalSubject
+  legalSubject : String → SubjectMatter
+  historicalSubject : String → SubjectMatter
+  culturalSubject : String → SubjectMatter
+  politicalSubject : String → SubjectMatter
+  scientificSubject : String → SubjectMatter
+  personalSubject : String → SubjectMatter
+  institutionalSubject : String → SubjectMatter
+  generalSubject : String → SubjectMatter
   customSubject : String → SubjectMatter
 
 record TextContextProfile : Set where

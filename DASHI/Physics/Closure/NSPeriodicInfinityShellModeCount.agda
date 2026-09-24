@@ -112,3 +112,24 @@ infinityShellModeCountLevel = machineChecked
 
 coarseTwentySevenTimesDyadicCubeBoundLevel : ProofLevel
 coarseTwentySevenTimesDyadicCubeBoundLevel = machineChecked
+
+
+------------------------------------------------------------------------
+-- Canonical support choice.
+--
+-- An analytic shell receipt does not need the *minimal* list of active
+-- coefficients: the literal outer cube itself is a valid duplicate-free
+-- support, with inactive physical coefficients represented by zero.  This
+-- removes a needless deduplication obligation from the physical B1 weld.
+------------------------------------------------------------------------
+
+canonicalInfinityShellSupport : (n : Nat) → InfinityShellSupport n
+canonicalInfinityShellSupport n = record
+  { shellModes = infinityCubeModes n
+  ; shellContainedInOuterCube = λ k member → member
+  ; shellNoDuplicates = literalInfinityCubeNoDuplicates n
+  }
+
+canonicalInfinityShellSupportUsesLiteralOuterCube : ∀ n →
+  shellModes (canonicalInfinityShellSupport n) ≡ infinityCubeModes n
+canonicalInfinityShellSupportUsesLiteralOuterCube n = refl
