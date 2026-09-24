@@ -36,7 +36,7 @@ genericRecoveredGRIsSelectedTarget :
   Weld.GRRecoveryReceipt U →
   ∀ candidate regime →
   Weld.grRegime U regime →
-  literalGR _ ≡ Weld.grTarget U (Weld.coarseGrain U candidate regime)
+  literalGR recovered ≡ Weld.grTarget U (Weld.coarseGrain U candidate regime)
 genericRecoveredGRIsSelectedTarget recovered grReceipt =
   Attach.recoveredAttachmentImpliesSelectedGRTarget
     (attachment recovered)
