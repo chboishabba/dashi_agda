@@ -27,7 +27,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Relation.Binary.PropositionalEquality using (cong₂)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -106,7 +106,7 @@ module GlobalSignedCancellation
       ((output : Z3.FourierMode) →
         output Cube.∈ outputs → Z3.NonZeroMode output) →
       ℚ
-    sumSigned [] allNonzero = 0
+    sumSigned [] allNonzero = 0ℚ
     sumSigned (output ∷ rest) allNonzero =
       signedTerm output (allNonzero output (Cube.here refl))
         +
@@ -119,7 +119,7 @@ module GlobalSignedCancellation
       ((output : Z3.FourierMode) →
         output Cube.∈ outputs → Z3.NonZeroMode output) →
       ℚ
-    sumInputLaplacian [] allNonzero = 0
+    sumInputLaplacian [] allNonzero = 0ℚ
     sumInputLaplacian (output ∷ rest) allNonzero =
       inputLaplacianTerm output (allNonzero output (Cube.here refl))
         +
