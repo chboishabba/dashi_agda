@@ -111,7 +111,7 @@ module Coupling
               value
                 + Reduced.At.liveSelfGram T R cutoff time
                 + Reduced.At.liveSelfFluxTangent T R cutoff time)
-            normal)
+            (sym normal))
     in
     trans (sym factoredToFour) rearranged
 
