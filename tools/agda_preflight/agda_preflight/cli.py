@@ -10,7 +10,7 @@ from .rules import api_snapshot, api_drift
 
 
 def _format(diag) -> str:
-    head = f"{diag.path}:{diag.line}:{diag.column}: {diag.code}: {diag.message}"
+    head = f"{diag.path}:{diag.line}:{diag.column}: {diag.severity}: {diag.code}: {diag.message}"
     return head + (f"\n  hint: {diag.hint}" if diag.hint else "")
 
 
@@ -97,7 +97,7 @@ def main(argv=None) -> int:
         if not diagnostics:
             print("agda-preflight: no high-confidence issues found")
 
-    return 1 if diagnostics else 0
+    return 1 if any(d.severity == "error" for d in diagnostics) else 0
 
 
 if __name__ == "__main__":
