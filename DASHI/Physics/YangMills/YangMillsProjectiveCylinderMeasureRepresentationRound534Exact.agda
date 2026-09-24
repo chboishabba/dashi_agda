@@ -29,6 +29,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as R495
 import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRound538Exact as R538
+import DASHI.Physics.YangMills.YangMillsCylinderEventBooleanAlgebraRound539Exact as R539
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as R476
 
 record ProjectiveContinuityAtEmpty
@@ -70,13 +71,18 @@ record ProjectiveMeasureExtensionAuthority
     extendProjective :
       (projective :
         R538.ProjectivePositiveCylinderProbability Index Event) →
+      (eventAlgebraLaws :
+        ∀ index →
+        R539.ProbabilityEventBooleanAlgebraLaws
+          (R538.premeasure
+            (R538.levelProbability projective index))) →
       ProjectiveContinuityAtEmpty projective →
       SigmaMeasure
 
     extensionCountablyAdditive :
-      ∀ projective continuity →
+      ∀ projective eventAlgebraLaws continuity →
       IsCountablyAdditive
-        (extendProjective projective continuity)
+        (extendProjective projective eventAlgebraLaws continuity)
 
     integrate :
       SigmaMeasure → Observable → Scalar
@@ -86,9 +92,9 @@ record ProjectiveMeasureExtensionAuthority
     massAsScalar : ℝ → Scalar
 
     extensionAgreesWithCylinderMass :
-      ∀ projective continuity index event →
+      ∀ projective eventAlgebraLaws continuity index event →
       integrate
-        (extendProjective projective continuity)
+        (extendProjective projective eventAlgebraLaws continuity)
         (indicatorAt index event)
       ≡
       massAsScalar
@@ -107,6 +113,12 @@ record ProjectiveCylinderRepresentationInputs
     projective :
       R538.ProjectivePositiveCylinderProbability Index Event
 
+    eventAlgebraLaws :
+      ∀ index →
+      R539.ProbabilityEventBooleanAlgebraLaws
+        (R538.premeasure
+          (R538.levelProbability projective index))
+
     continuity :
       ProjectiveContinuityAtEmpty projective
 
@@ -122,7 +134,7 @@ record ProjectiveCylinderRepresentationInputs
       ≡
       integrate extensionAuthority
         (extendProjective extensionAuthority
-          projective continuity)
+          projective eventAlgebraLaws continuity)
         observable
 
 open ProjectiveCylinderRepresentationInputs public
@@ -145,6 +157,7 @@ asSourceLimitRepresentation inputs = record
           extendProjective
             (extensionAuthority inputs)
             (projective inputs)
+            (eventAlgebraLaws inputs)
             (continuity inputs)
       ; R476.RepresentedContinuum.integrate =
           integrate (extensionAuthority inputs)
@@ -152,6 +165,7 @@ asSourceLimitRepresentation inputs = record
           extensionCountablyAdditive
             (extensionAuthority inputs)
             (projective inputs)
+            (eventAlgebraLaws inputs)
             (continuity inputs)
       }
   ; R476.SourceLimitRepresentation.sourceLimitIsIntegral =
