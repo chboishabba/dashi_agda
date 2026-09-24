@@ -373,6 +373,7 @@ class AgdaAutoRefineBackend:
         self._scope_validated: Set[Path] = set()
         self._scope_failed: Set[Path] = set()
         self._scope_probe_roots: Set[Path] = set()
+        self._scope_candidates: Set[Path] = set()
 
     @staticmethod
     def _key(path: Path) -> Path:
@@ -410,6 +411,9 @@ class AgdaAutoRefineBackend:
             self._scope_validated.add(key)
             self._scope_failed.discard(key)
 
+    def set_scope_candidates(self, paths) -> None:
+        self._scope_candidates = {self._key(path) for path in paths}
+
     @staticmethod
     def _needs(diagnostics: List, level: EvidenceLevel) -> bool:
         return any(
@@ -434,6 +438,7 @@ class AgdaAutoRefineBackend:
                 "validated_modules": len(self._scope_validated),
                 "failed_frontier_modules": len(self._scope_failed),
                 "aggregate_probe_roots": len(self._scope_probe_roots),
+                "candidate_modules": len(self._scope_candidates),
             },
         }
 
