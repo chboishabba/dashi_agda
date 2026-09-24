@@ -43,6 +43,7 @@ import DASHI.Moonshine.JInvariantEisensteinBishopSetoidExtractionExact as Bishop
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Source
 import DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact as LeanReceipt
 import DASHI.Interop.BishopRound11MachinBindingManifestExact as BindingManifest
+import DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact as CanonicalReceipt
 
 record BishopRouteBCurrentFrontier : Set where
   constructor bishop-route-b-current-frontier
