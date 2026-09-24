@@ -10,6 +10,8 @@ module DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact 
 --
 -- Preferred C frontier:
 --
+--   C0  one literal gauge-invariant/local Observable family;
+--
 --   C1  one MarkedCurvatureCompositeFamily:
 --       same-family marked source data (including the Hilbert modulus)
 --       + gauge/local semantics of its completed composites;
@@ -38,6 +40,9 @@ import DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact 
 import DASHI.Physics.YangMills.BalabanDensityAnchoredStressLaneRound123Exact as StressLane
 import DASHI.Physics.YangMills.YangMillsSourceFirstStressChoiceRound522Exact as StressChoice
 import DASHI.Physics.YangMills.YangMillsSourceFirstCurvatureChoiceRound523Exact as CurvatureChoice
+
+c0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+c0LiteralGaugeInvariantLocalObservableFamilyLevel = conditional
 
 c1MarkedCurvatureFamilyLevel : ProofLevel
 c1MarkedCurvatureFamilyLevel =
@@ -88,4 +93,4 @@ round527CPhysicalPackageMaxCutCompilerLevel : ProofLevel
 round527CPhysicalPackageMaxCutCompilerLevel = machineChecked
 
 cPhysicalPackageCount : Nat
-cPhysicalPackageCount = 4
+cPhysicalPackageCount = 5
