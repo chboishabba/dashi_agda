@@ -115,11 +115,11 @@ proofRuleHyperfabric :
   Hyper.TypedHyperfabric State (RuleOccurrence system)
 proofRuleHyperfabric system = record
   { vertexStalk = ruleVertexStalk {system = system}
-  ; edgeStalk = ruleEdgeStalk
-  ; incidence = RuleIncidence
-  ; restrict = ruleRestrict
-  ; edgeProvenance = ruleEdgeProvenance
-  ; edgeSalience = ruleEdgeSalience
+  ; edgeStalk = ruleEdgeStalk {system = system}
+  ; incidence = RuleIncidence {system = system}
+  ; restrict = ruleRestrict {system = system}
+  ; edgeProvenance = ruleEdgeProvenance {system = system}
+  ; edgeSalience = ruleEdgeSalience {system = system}
   ; fabricLabel = "proof-carrying textile rule hyperfabric"
   }
 
@@ -196,14 +196,14 @@ certifiedTraceToWellFormedFabric :
 certifiedTraceToWellFormedFabric assignment trace =
   trace , compileCertifiedTrace assignment trace
 
-extractCertifiedTraceFromFabric :
+wellFormedFabricCarriesCertifiedTrace :
   {State Rule : Set}
   {system : RuleProof.RuleApplicationSystem State Rule}
   {assignment : MotifAssignment Rule}
   {state : State} →
   WellFormedProofFabric system assignment state →
   RuleProof.CertifiedRuleTrace system state
-extractCertifiedTraceFromFabric = proj₁
+wellFormedFabricCarriesCertifiedTrace = proj₁
 
 record MotifMismatch
     {State Rule : Set}
@@ -224,9 +224,10 @@ motifMismatchObstruction :
   (assignment : MotifAssignment Rule) →
   (bad : MotifMismatch {system = system} assignment) →
   Hyper.HyperfabricObstruction
+    {Residual = MotifMismatch {system = system} assignment}
     (proofRuleHyperfabric system)
 motifMismatchObstruction assignment bad = record
-  { obstructedEdge = occurrence bad
+  { obstructedEdge = MotifMismatch.occurrence bad
   ; residual = bad
   ; obstructionProvenance =
       "physical proof motif disagrees with the rule assigned to this proof-carrying edge" ∷ []
@@ -257,7 +258,7 @@ record ProofCarryingTextileBoundary : Set where
     proofDependenciesAreHyperfabricIncidence : Bool
     malformedMotifProducesHyperfabricObstruction : Bool
     everyCertifiedTraceCompilesToCertifiedFabric : Bool
-    wellFormedFabricCarriesCertifiedTrace : Bool
+    wellFormedFabricCarriesCertifiedTraceBoundary : Bool
     motifLabelAloneProvesRule : Bool
     visiblePatternCreatesTheoremTruth : Bool
 
