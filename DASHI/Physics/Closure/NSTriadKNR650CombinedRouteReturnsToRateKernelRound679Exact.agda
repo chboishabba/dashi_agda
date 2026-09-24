@@ -109,7 +109,7 @@ module LiveLoop
     module Base = C.At
       cutoff output time viscosityPositive outputNonzero
 
-    M = Base.Base.Base.Base.M
+    module M = Base.Base.Base.Base.Base.M
 
     rateTotal : ℚ
     rateTotal = M.rateTotal
