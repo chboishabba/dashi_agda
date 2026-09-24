@@ -82,6 +82,9 @@ on:
       - 'DASHI/Physics/Foundations/CMP119LiteralFiniteMeasureStressSourceConstructorExact.agda'
       - 'DASHI/Physics/Foundations/CMP119LiteralFiniteMeasureDensityAnchorConstructorExact.agda'
       - 'DASHI/Physics/Foundations/CMP119TenLiteralFiniteMeasureReadoutsExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119PhysicalFiniteMeasureNZDNDZExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GibbsFiniteMeasureNZDNDZReductionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GibbsConnectedNumeratorEvaluationExact.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
