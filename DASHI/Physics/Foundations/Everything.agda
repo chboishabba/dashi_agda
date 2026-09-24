@@ -150,3 +150,7 @@ import DASHI.Physics.Foundations.StressEnergyEqualityCoreValidation
 import DASHI.Physics.Foundations.SingleSectorUnifiedCandidateExact
 import DASHI.Physics.Foundations.SingleSectorRecoveryTransportExact
 import DASHI.Physics.Foundations.SingleSectorUnifiedCandidateValidation
+
+import DASHI.Physics.Foundations.GRHolonomyTaylorRicciEvidenceExact
+import DASHI.Physics.Foundations.GRDiscreteToSmoothMaxCutExact
+import DASHI.Physics.Foundations.GRDiscreteToSmoothMaxCutValidation
