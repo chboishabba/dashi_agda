@@ -2,11 +2,12 @@
 module DASHI.Physics.Foundations.CMP119TenActualSourceReadoutsExact where
 
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; +_; -[1+_]; 0ℚ)\nopen import Agda.Builtin.Nat using (zero)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
+import DASHI.Physics.Foundations.CMP119TenFiniteD1ComponentCompilerExact as Components
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as MetricBasis
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanFunctionalRegularESourceFlowRound242Exact as SourceFlow
@@ -178,3 +179,71 @@ module _
 
   actual33 : ℚ
   actual33 = actualCMP119ReadoutAtAxes Flat.zAxis Flat.zAxis
+
+
+  ------------------------------------------------------------------------
+  -- Numerical payment surface: these are the ACTUAL selected CMP119 source
+  -- numerators, not a synthetic candidate.
+  ------------------------------------------------------------------------
+
+  record NormalizedActualTenCMP119Values : Set where
+    field
+      v00 : actual00 ≡ + 1
+      v01 : actual01 ≡ 0ℚ
+      v02 : actual02 ≡ 0ℚ
+      v03 : actual03 ≡ 0ℚ
+      v11 : actual11 ≡ -[1+ zero ]
+      v12 : actual12 ≡ 0ℚ
+      v13 : actual13 ≡ 0ℚ
+      v22 : actual22 ≡ -[1+ zero ]
+      v23 : actual23 ≡ 0ℚ
+      v33 : actual33 ≡ -[1+ zero ]
+
+  open NormalizedActualTenCMP119Values public
+
+  actualValuesCompileToFiniteD1Values :
+    NormalizedActualTenCMP119Values →
+    Components.NormalizedTenFiniteD1Values
+      presentData attachment background
+  actualValuesCompileToFiniteD1Values values = record
+    { Components.NormalizedTenFiniteD1Values.d100 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.timeAxis Flat.timeAxis)
+          (v00 values)
+    ; Components.NormalizedTenFiniteD1Values.d101 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.timeAxis Flat.xAxis)
+          (v01 values)
+    ; Components.NormalizedTenFiniteD1Values.d102 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.timeAxis Flat.yAxis)
+          (v02 values)
+    ; Components.NormalizedTenFiniteD1Values.d103 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.timeAxis Flat.zAxis)
+          (v03 values)
+    ; Components.NormalizedTenFiniteD1Values.d111 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.xAxis Flat.xAxis)
+          (v11 values)
+    ; Components.NormalizedTenFiniteD1Values.d112 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.xAxis Flat.yAxis)
+          (v12 values)
+    ; Components.NormalizedTenFiniteD1Values.d113 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.xAxis Flat.zAxis)
+          (v13 values)
+    ; Components.NormalizedTenFiniteD1Values.d122 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.yAxis Flat.yAxis)
+          (v22 values)
+    ; Components.NormalizedTenFiniteD1Values.d123 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.yAxis Flat.zAxis)
+          (v23 values)
+    ; Components.NormalizedTenFiniteD1Values.d133 =
+        Relation.Binary.PropositionalEquality.trans
+          (postSumFiniteD1IsActualCMP119Readout Flat.zAxis Flat.zAxis)
+          (v33 values)
+    }
