@@ -237,3 +237,81 @@ class AgdaTypecheckBackend:
                 continue
             out.append(diagnostic)
         return out
+
+
+class AgdaAutoRefineBackend:
+    """Demand-driven evidence refinement.
+
+    Fast structural checking always runs first. Agda scope checking is invoked
+    only when the module actually contains diagnostics whose minimum evidence is
+    AGDA_SCOPE. Optional full typechecking is invoked only when AGDA_TYPECHECKER
+    diagnostics remain after the scope stage.
+
+    This keeps the common path cheap while making large aggregate sweeps
+    self-triaging instead of dumping every deferred suspicion on the user.
+    """
+
+    def __init__(
+        self,
+        agda_bin: str = "agda",
+        *,
+        cwd: Path | None = None,
+        scope_timeout: float = 60.0,
+        typecheck_timeout: float = 300.0,
+        typecheck: bool = False,
+        extra_args: Sequence[str] = (),
+    ):
+        self.scope = AgdaScopeCheckBackend(
+            agda_bin,
+            cwd=cwd,
+            timeout=scope_timeout,
+            extra_args=extra_args,
+        )
+        self.typecheck = AgdaTypecheckBackend(
+            agda_bin,
+            cwd=cwd,
+            timeout=typecheck_timeout,
+            extra_args=extra_args,
+        )
+        self.use_typecheck = typecheck
+
+    @staticmethod
+    def _needs(diagnostics: List, level: EvidenceLevel) -> bool:
+        return any(
+            not diagnostic.evidence_sufficient
+            and policy_for(diagnostic.code).minimum == level
+            for diagnostic in diagnostics
+        )
+
+    def refine(self, summary, diagnostics: List):
+        current = diagnostics
+
+        if self._needs(current, EvidenceLevel.AGDA_SCOPE):
+            scope_ok = self.scope._scope_ok(summary.path)
+            if scope_ok:
+                current = [
+                    diagnostic
+                    for diagnostic in current
+                    if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
+                ]
+            else:
+                # Full typechecking cannot succeed if scope checking already
+                # fails, so do not pay the more expensive oracle cost.
+                return current
+
+        if (
+            self.use_typecheck
+            and self._needs(current, EvidenceLevel.AGDA_TYPECHECKER)
+            and self.typecheck._typecheck_ok(summary.path)
+        ):
+            current = [
+                diagnostic
+                for diagnostic in current
+                if policy_for(diagnostic.code).minimum
+                not in {
+                    EvidenceLevel.AGDA_SCOPE,
+                    EvidenceLevel.AGDA_TYPECHECKER,
+                }
+            ]
+
+        return current
