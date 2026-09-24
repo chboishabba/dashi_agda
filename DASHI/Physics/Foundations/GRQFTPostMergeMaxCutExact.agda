@@ -13,10 +13,10 @@ import DASHI.Physics.Foundations.CMP119PinnedYMGRQFTSectorStressBridgeExact as C
 import DASHI.Physics.Foundations.PinnedYMGRQFTStressMaxCutExact as Stress
 
 data GRQFTPostMergeLeaf : Set where
-  grDiscreteToContinuumRealization : GRQFTPostMergeLeaf
+  grDiscreteToContinuumSameObjectRealization : GRQFTPostMergeLeaf
   cmp119StressToLiteralPinnedStressAttachment : GRQFTPostMergeLeaf
   pinnedLiteralYMToRecoveredQFTAttachment : GRQFTPostMergeLeaf
-  activePhysicalSectorTotalizationAndCommonVariation : GRQFTPostMergeLeaf
+  activePhysicalSectorTotalization : GRQFTPostMergeLeaf
   grAnchoredCMP119CrossSectorStressEquality : GRQFTPostMergeLeaf
   physicalDrellYanAbsoluteProjectionReplacement : GRQFTPostMergeLeaf
   acceptedMeasuredGAndEmpiricalAuthority : GRQFTPostMergeLeaf
@@ -24,10 +24,10 @@ data GRQFTPostMergeLeaf : Set where
 
 canonicalGRQFTPostMergeLeaves : List GRQFTPostMergeLeaf
 canonicalGRQFTPostMergeLeaves =
-  grDiscreteToContinuumRealization
+  grDiscreteToContinuumSameObjectRealization
   ∷ cmp119StressToLiteralPinnedStressAttachment
   ∷ pinnedLiteralYMToRecoveredQFTAttachment
-  ∷ activePhysicalSectorTotalizationAndCommonVariation
+  ∷ activePhysicalSectorTotalization
   ∷ grAnchoredCMP119CrossSectorStressEquality
   ∷ physicalDrellYanAbsoluteProjectionReplacement
   ∷ acceptedMeasuredGAndEmpiricalAuthority
@@ -101,4 +101,4 @@ postMergeTerminalPromotionStillFalse = refl
 
 frontierSummary : String
 frontierSummary =
-  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR analytic realization, two same-object attachments, active physical-sector totalization, GR-anchored CMP119 cross-sector stress equality, physical absolute-DY replacement and external authority/empirical validation."
+  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR discrete-to-continuum same-object realization, two QFT same-object attachments, active physical-sector totalization, GR-anchored CMP119 cross-sector stress equality, physical absolute-DY replacement and external authority/empirical validation."

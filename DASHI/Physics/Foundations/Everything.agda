@@ -135,3 +135,6 @@ import DASHI.Physics.Foundations.CMP119SingleSectorSharedSourceStressWeldValidat
 import DASHI.Physics.Foundations.GRAnchoredSharedEffectiveSourceExact
 import DASHI.Physics.Foundations.CMP119GRAnchoredStressWeldCompilerExact
 import DASHI.Physics.Foundations.CMP119GRAnchoredStressWeldCompilerValidation
+
+import DASHI.Physics.Foundations.GRRecoveryVsSchwarzschildValidationExact
+import DASHI.Physics.Foundations.GRRecoveryVsSchwarzschildValidationValidation
