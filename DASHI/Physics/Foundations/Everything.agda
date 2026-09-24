@@ -159,3 +159,7 @@ import DASHI.Physics.Foundations.RecoveryCommutationCoreExact
 import DASHI.Physics.Foundations.CommonRegimeMathematicalCoreExact
 import DASHI.Physics.Foundations.GRQFTTheoryValidationSplitExact
 import DASHI.Physics.Foundations.GRQFTTheoryValidationSplitValidation
+
+import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact
+import DASHI.Physics.Foundations.GRQFTConcreteInstanceFrontierV2Exact
+import DASHI.Physics.Foundations.GRQFTConcreteInstanceFrontierV2Validation

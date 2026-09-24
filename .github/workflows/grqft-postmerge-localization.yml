@@ -45,6 +45,9 @@ on:
       - 'DASHI/Physics/Foundations/CommonRegimeMathematicalCoreExact.agda'
       - 'DASHI/Physics/Foundations/GRQFTTheoryValidationSplitExact.agda'
       - 'DASHI/Physics/Foundations/GRQFTTheoryValidationSplitValidation.agda'
+      - 'DASHI/Physics/Foundations/GRQFTRationalStressComponentCutExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierV2Exact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierV2Validation.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
