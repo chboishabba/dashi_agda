@@ -105,3 +105,30 @@ def test_reverse_import_frontier(tmp_path):
     )
     plan = Checker(tmp_path).affected_modules(leaf)
     assert plan[:3] == ["A.Leaf", "A.Middle", "A.Top"]
+
+
+def test_known_grammar_gaps_do_not_mask_real_syntax_errors(tmp_path):
+    valid = write_module(
+        tmp_path,
+        "Valid",
+        """module Valid where
+
+import Agda.Builtin.Bool as ℚP
+
+record Receipt : Set where
+  constructor receipt
+  field
+    accepted : ℚP.Bool
+""",
+    )
+    invalid = write_module(
+        tmp_path,
+        "Invalid",
+        """module Invalid where
+
+broken : Set
+broken = {
+""",
+    )
+    assert not any(d.code == "TSAGDA000" for d in Checker(tmp_path).check(valid))
+    assert any(d.code == "TSAGDA000" for d in Checker(tmp_path).check(invalid))

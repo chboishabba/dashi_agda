@@ -77,23 +77,59 @@ def _language() -> Language:
 
 
 def _parser() -> Parser:
-    lang = _language()
-    try:
-        return Parser(lang)
-    except TypeError:
-        parser = Parser()
-        # py-tree-sitter 0.22 compatibility.
-        if hasattr(parser, "set_language"):
-            parser.set_language(lang)
-        else:
-            parser.language = lang
-        return parser
+    return Parser(_language())
 
 
 def walk(node) -> Iterator:
     yield node
     for child in node.children:
         yield from walk(child)
+
+
+def _known_syntax_grammar_gap(node, source: str) -> bool:
+    """Recognize only the known false ERROR nodes from tree-sitter-agda 1.3.3.
+
+    The grammar's treatment of bare imports and standard record declarations
+    yields ERROR nodes for valid Agda.  Filter the narrow artifact shapes, not
+    arbitrary record contents, so TSAGDA000 remains useful for real syntax
+    damage.
+    """
+    lines = source.splitlines()
+    row, column = node.start_point
+    if row >= len(lines):
+        return False
+    line = lines[row]
+    text = source.encode("utf-8")[node.start_byte : node.end_byte].decode(
+        "utf-8", "replace"
+    )
+    parent_type = node.parent.type if node.parent is not None else ""
+
+    if parent_type == "source_file" and re.fullmatch(
+        r"\s*import\s+[A-Za-z][A-Za-z0-9_.']*(?:\s+as\s+\S+)?\s*",
+        line,
+    ):
+        return True
+
+    record_header = re.compile(
+        rf"^\s*record\s+{_IDENT}.*:\s*Set(?:[₀-₉ω]*)?\s+where\s*$"
+    )
+    if parent_type == "source_file" and record_header.match(line) and re.match(
+        r"where\s*\n\s*constructor\b", text
+    ):
+        return True
+    if parent_type == "record_signature" and re.match(
+        r"Set(?:[₀-₉ω]*)?\s+where\s*\n\s*constructor\b", text
+    ):
+        return True
+    if parent_type == "record_declarations_block" and re.fullmatch(
+        r"\s*constructor\s*", text
+    ) and re.match(rf"\s*constructor\s+{_IDENT}\b", line):
+        return True
+    if parent_type == "source_file" and re.fullmatch(r"\s*field\s*", line):
+        previous = lines[row - 1] if row else ""
+        if re.match(rf"\s*constructor\s+{_IDENT}\b", previous):
+            return True
+    return False
 
 
 def terminal_type_head(text: str) -> Optional[str]:
@@ -357,6 +393,8 @@ class Checker:
         result: List[Diagnostic] = []
         for node in walk(tree.root_node):
             if node.type == "ERROR" or getattr(node, "is_missing", False):
+                if node.type == "ERROR" and _known_syntax_grammar_gap(node, summary.source):
+                    continue
                 row, col = node.start_point
                 result.append(
                     Diagnostic(
@@ -425,14 +463,20 @@ class Checker:
         local: Dict[str, RecordInfo],
         imported: Dict[str, Dict[str, RecordInfo]],
     ) -> Optional[RecordInfo]:
+        # A record result is the terminal codomain of a signature.  Resolve
+        # that head first, rather than a record name occurring in an earlier
+        # binder.
+        terminal = terminal_type_head(type_text)
+        if terminal is not None:
+            local_match = local.get(terminal)
+            if local_match is not None:
+                return local_match
+
         # Prefer qualified references.
         for alias, records in imported.items():
             for rname, rec in records.items():
                 if re.search(rf"\b{re.escape(alias)}\.{re.escape(rname)}\b", type_text):
                     return rec
-        for rname, rec in local.items():
-            if re.search(rf"(?<!\.)\b{re.escape(rname)}\b", type_text):
-                return rec
         return None
 
     def _record_shape_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
