@@ -1,6 +1,22 @@
 name: NS R650 quantitative diagnostics
 
 on:
+  push:
+    branches:
+      - 'agent/ns-canonical-leaves-20260922'
+    paths:
+      - 'scripts/ns_r650_quantitative_stress_scan.py'
+      - 'scripts/check_ns_r650_quantitative_stress_scan.py'
+      - 'scripts/ns_r406_physical_real_eval.py'
+      - 'scripts/ns_r650_c2_physical_real_scan.py'
+      - 'scripts/ns_r650_c1_physical_real_scan.py'
+      - 'scripts/check_ns_r406_r650_physical_real.py'
+      - 'scripts/tests/test_ns_r650_quantitative_stress_scan.py'
+      - 'scripts/tests/test_ns_r406_physical_real_eval.py'
+      - 'DASHI/Physics/Closure/NSTriadKNR650QuantitativeResearchStrategyRound651Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C1R406DiagonalCouplingRound652Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C2CoupledForcingSandwichRound653Exact.agda'
+      - '.github/workflows/ns-r650-quantitative-diagnostics.yml'
   pull_request:
     paths:
       - 'scripts/ns_r650_quantitative_stress_scan.py'
