@@ -29,7 +29,7 @@ module DASHI.Physics.Closure.NSTriadKNR650RateLiftedInputLaplacianCancellationRo
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; Positive; _*_)
+open import Data.Rational.Base using (ℚ; Positive; _-_; _*_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
