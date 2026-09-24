@@ -171,6 +171,9 @@ record ReciprocalManifestBoundary : Set where
     leanPinnedDeltaIdentityOwned : Bool
     leanCanonicalBishopCompletionBindingInhabited : Bool
     leanEveryAdmissibleBindingSetoidEquivalentToCanonical : Bool
+    leanBishopQuotientEquivalentToLeanReal : Bool
+    leanBishopCompletionArithmeticCompatibilityOwned : Bool
+    leanBishopOrderReflectionOwned : Bool
     leanHypothesisFreeCanonicalRouteBOwned : Bool
 
     generatedAgdaToLeanReplayObserved : Bool
@@ -184,5 +187,5 @@ canonicalReciprocalManifestBoundary :
 canonicalReciprocalManifestBoundary =
   reciprocal-manifest-boundary
     true true true true true true true
-    true true true
+    true true true true true true
     false false false
