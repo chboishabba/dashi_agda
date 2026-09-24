@@ -161,3 +161,40 @@ def test_pytest_module_item_nodeid_supports_k_filter(pytester):
     )
 
     result.assert_outcomes(passed=1, deselected=1)
+
+
+def test_pytest_dependency_closure_collects_imports_dependency_first(pytester):
+    write_agda(pytester.path, "A.Leaf")
+    write_agda(
+        pytester.path,
+        "A.Middle",
+        """
+import A.Leaf
+""",
+    )
+    top = write_agda(
+        pytester.path,
+        "A.Top",
+        """
+import A.Middle
+""",
+    )
+
+    result = pytester.runpytest(
+        "-p",
+        "agda_preflight.pytest_plugin",
+        "--agda-preflight",
+        "--agda-deps",
+        "--agda-root",
+        str(pytester.path),
+        str(top),
+        "-vv",
+    )
+
+    result.assert_outcomes(passed=3)
+    output = "\n".join(result.outlines)
+    leaf = output.find("A.Leaf")
+    middle = output.find("A.Middle")
+    top_index = output.find("A.Top")
+    assert -1 not in (leaf, middle, top_index)
+    assert leaf < middle < top_index
