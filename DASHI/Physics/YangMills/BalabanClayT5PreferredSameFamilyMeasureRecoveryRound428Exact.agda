@@ -67,17 +67,17 @@ record PreferredSameFamilyMeasureInputs
           (PreferredGram.expectationData gramInputs) cutoff)
 
     normalizedClosed : ∀ sequence target →
-      Limit.Converges (R427.convergence R430.asR427CompactUniqueInputs compactnessUniqueness) sequence target →
+      Limit.Converges (R430.convergence compactnessUniqueness) sequence target →
       (∀ cutoff → Normalized (sequence cutoff)) →
       Normalized target
 
     positiveClosed : ∀ sequence target →
-      Limit.Converges (R427.convergence R430.asR427CompactUniqueInputs compactnessUniqueness) sequence target →
+      Limit.Converges (R430.convergence compactnessUniqueness) sequence target →
       (∀ cutoff → Positive (sequence cutoff)) →
       Positive target
 
     gaugeInvariantClosed : ∀ sequence target →
-      Limit.Converges (R427.convergence R430.asR427CompactUniqueInputs compactnessUniqueness) sequence target →
+      Limit.Converges (R430.convergence compactnessUniqueness) sequence target →
       (∀ cutoff → GaugeInvariant (sequence cutoff)) →
       GaugeInvariant target
 
@@ -124,7 +124,7 @@ selectedConvergence :
   Sequential.SequentialConvergence Measure
 selectedConvergence inputs = record
   { Sequential.SequentialConvergence.Converges =
-      Limit.Converges (R427.convergence (R430.asR427CompactUniqueInputs (compactnessUniqueness inputs)))
+      Limit.Converges (R430.convergence (compactnessUniqueness inputs))
   }
 
 selectedCore :
