@@ -31,6 +31,8 @@ GR = [
 
 
 def parse_fraction(value: Any) -> Fraction:
+    if isinstance(value, Fraction):
+        return value
     if isinstance(value, int):
         return Fraction(value)
     if isinstance(value, str):
