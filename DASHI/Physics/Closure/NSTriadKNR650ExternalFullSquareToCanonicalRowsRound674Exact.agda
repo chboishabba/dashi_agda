@@ -34,6 +34,7 @@ module DASHI.Physics.Closure.NSTriadKNR650ExternalFullSquareToCanonicalRowsRound
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Rational.Base using (ℚ; 0ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -51,6 +52,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalGramPairTangentRound291Exact as R2
 import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventR294WeightRound541Exact as R541
 import DASHI.Physics.Closure.NSTriadKNSpectatorResolventRowFactorizationRound545Exact as R545
+import DASHI.Physics.Closure.NSTriadKNPhysicalHeatDoubleSumFactorizationRound440Exact as R440
 import DASHI.Physics.Closure.NSTriadKNFullSquareAsSpectatorRowsRound546Exact as R546
 import DASHI.Physics.Closure.NSTriadKNR567ForcingFullSelfExternalSplitRound606Exact as R606
 import DASHI.Physics.Closure.NSTriadKNSpectatorNestedSelfCanonicalExternalRowRound623Exact as R623
@@ -145,7 +147,7 @@ module ExternalRows674
         (R224.foldVector weighted items)
         (Row.doubleCell beta)
     go [] =
-      sym (R545.Row.forcingHalfFactors physicalSystem S beta [])
+      sym (R440.crossZeroLeft (Row.doubleCell beta))
     go (alpha ∷ rest) =
       trans
         (cong₂ _+_
