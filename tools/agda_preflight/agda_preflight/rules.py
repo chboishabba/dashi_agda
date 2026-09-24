@@ -514,38 +514,53 @@ def extended_diagnostics(checker, s, D):
             if len(tokens) == 1 and tokens[0].text == "_":
                 out.append(_diag(D, "TSAGDA172", f"record field {assignment.name} is filled with raw underscore", s, assignment.line, severity="warning", confidence="medium"))
 
-    # Repository graph checks: TSAGDA029 import cycles and TSAGDA030 module collisions.
-    graph = checker.dependency_graph()
-    state, stack, cycle_for = {}, [], set()
-    def visit(node):
-        state[node] = 1; stack.append(node)
-        for dep in graph.get(node, ()):
-            if dep not in graph: continue
-            if state.get(dep, 0) == 0: visit(dep)
-            elif state.get(dep) == 1 and dep in stack:
-                cycle_for.update(stack[stack.index(dep):])
-        stack.pop(); state[node] = 2
-    if s.module_name in graph:
-        visit(s.module_name)
-        if s.module_name in cycle_for:
-            out.append(_diag(D, "TSAGDA029", f"module {s.module_name} participates in a repository import cycle", s, 1))
+    # Repository graph checks: stay inside the module's reachable import cone.
+    # Running a repository-wide rglob/dependency_graph here made this O(modules × repo).
+    cycle_found = False
+    permanent = set()
+    temporary = []
 
-    identities = {}
-    for p in checker.root.rglob("*.agda"):
-        try:
-            rel = p.relative_to(checker.root)
-        except ValueError:
-            continue
-        if set(rel.parts) & {".cache", "build", "dist", "vendor", "third_party", "tmp"}:
-            continue
-        try:
-            indexed = checker.parse_summary(p)
-        except (OSError, UnicodeDecodeError):
-            continue
-        identities.setdefault(indexed.module_name, []).append(p)
-    peers = identities.get(s.module_name, [])
-    if len(peers) > 1:
-        out.append(_diag(D, "TSAGDA030", f"module identity {s.module_name} is declared by multiple files", s, 1))
+    def visit_import_cone(summary):
+        nonlocal cycle_found
+        module = summary.module_name
+        if module in permanent or cycle_found:
+            return
+        if module in temporary:
+            cycle_found = True
+            return
+
+        temporary.append(module)
+        for dependency in sorted(set(summary.imports.values())):
+            dependency_path = checker.module_path(dependency)
+            if not dependency_path.exists():
+                continue
+            try:
+                dependency_summary = checker.parse_summary(dependency_path)
+            except (OSError, UnicodeDecodeError):
+                continue
+            visit_import_cone(dependency_summary)
+            if cycle_found:
+                break
+        temporary.pop()
+        permanent.add(module)
+
+    visit_import_cone(s)
+    if cycle_found:
+        out.append(_diag(D, "TSAGDA029", f"module {s.module_name} participates in an import cycle reachable from this module", s, 1))
+
+    # Canonical module identity is path-derived. A second canonical file for the
+    # same declared module is enough evidence for TSAGDA030; do not scan the repo.
+    canonical_path = checker.module_path(s.module_name).resolve()
+    if canonical_path.exists() and canonical_path != s.path.resolve():
+        out.append(
+            _diag(
+                D,
+                "TSAGDA030",
+                f"module identity {s.module_name} also resolves to canonical path {canonical_path}",
+                s,
+                1,
+            )
+        )
 
     # TSAGDA026/027: collisions created by open imports and renamings.
     visible = {}
