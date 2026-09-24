@@ -43,8 +43,8 @@ AcceptingRandomSeed :
   (Proof → Vec Bool randomBits → Bool) →
   Proof →
   Set
-AcceptingRandomSeed verifier proof =
-  Σ (Vec Bool _) λ randomSeed →
+AcceptingRandomSeed {randomBits = randomBits} verifier proof =
+  Σ (Vec Bool randomBits) λ randomSeed →
     verifier proof randomSeed ≡ true
 
 RejectingRandomSeed :
@@ -52,8 +52,8 @@ RejectingRandomSeed :
   (Proof → Vec Bool randomBits → Bool) →
   Proof →
   Set
-RejectingRandomSeed verifier proof =
-  Σ (Vec Bool _) λ randomSeed →
+RejectingRandomSeed {randomBits = randomBits} verifier proof =
+  Σ (Vec Bool randomBits) λ randomSeed →
     verifier proof randomSeed ≡ false
 
 AllRandomSeedsAccept :
@@ -61,8 +61,8 @@ AllRandomSeedsAccept :
   (Proof → Vec Bool randomBits → Bool) →
   Proof →
   Set
-AllRandomSeedsAccept verifier proof =
-  (randomSeed : Vec Bool _) →
+AllRandomSeedsAccept {randomBits = randomBits} verifier proof =
+  (randomSeed : Vec Bool randomBits) →
   verifier proof randomSeed ≡ true
 
 ------------------------------------------------------------------------
