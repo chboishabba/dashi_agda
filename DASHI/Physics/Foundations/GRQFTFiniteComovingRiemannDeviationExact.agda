@@ -49,10 +49,20 @@ sameSpatialAxis ySpatial ySpatial = true
 sameSpatialAxis zSpatial zSpatial = true
 sameSpatialAxis _ _ = false
 
+riemannFromScaleAcceleration :
+  FLRW.ScaleAccelerationOrientation → CurvatureActionOrientation
+riemannFromScaleAcceleration FLRW.contractingAcceleration =
+  positiveCurvatureAction
+riemannFromScaleAcceleration FLRW.zeroScaleAcceleration =
+  zeroCurvatureAction
+riemannFromScaleAcceleration FLRW.expandingAcceleration =
+  negativeCurvatureAction
+
 comovingRiemannTimeTidal :
   SpatialAxis3 → SpatialAxis3 → CurvatureActionOrientation
 comovingRiemannTimeTidal i j with sameSpatialAxis i j
-... | true = negativeCurvatureAction
+... | true =
+  riemannFromScaleAcceleration FLRW.finiteFLRWAccelerationOrientation
 ... | false = zeroCurvatureAction
 
 finiteRiemannXX :
