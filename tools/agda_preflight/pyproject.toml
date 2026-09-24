@@ -16,6 +16,7 @@ dependencies = [
 
 [project.scripts]
 dashi-agda-preflight = "agda_preflight.cli:main"
+dashi-agda-evidence = "agda_preflight.evidence_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
