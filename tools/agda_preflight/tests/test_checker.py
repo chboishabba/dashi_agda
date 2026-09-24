@@ -598,3 +598,27 @@ open import ExportLib using (D; c; R; r; A)
     )
     diagnostics = Checker(tmp_path).check(path)
     assert not any(d.code == "TSAGDA023" for d in diagnostics)
+
+
+
+def test_import_exports_include_nested_modules(tmp_path):
+    write_module(
+        tmp_path,
+        "NestedExport",
+        """module NestedExport where
+
+module SSP where
+  x : Set
+  x = Set
+""",
+    )
+    path = write_module(
+        tmp_path,
+        "NestedUse",
+        """module NestedUse where
+
+open import NestedExport using (SSP)
+""",
+    )
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code == "TSAGDA023" for d in diagnostics)
