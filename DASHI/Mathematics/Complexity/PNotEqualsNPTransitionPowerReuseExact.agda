@@ -122,6 +122,57 @@ transitionPowerRelationSecondHalf F level start =
   refl
 
 ------------------------------------------------------------------------
+-- Repeated squaring DOES give a small shared *definition DAG*.
+--
+-- Level j+1 stores one pointer/reference to the already-defined level-j
+-- authority and the equation "compose it with itself".  The subdefinition is
+-- stored once, not copied twice.
+------------------------------------------------------------------------
+
+data TransitionPowerDefinitionDAG : Nat → Set where
+  primitiveDefinition :
+    TransitionPowerDefinitionDAG zero
+
+  squareSharedDefinition :
+    ∀ {level} →
+    TransitionPowerDefinitionDAG level →
+    TransitionPowerDefinitionDAG (suc level)
+
+canonicalTransitionPowerDefinitionDAG :
+  (level : Nat) →
+  TransitionPowerDefinitionDAG level
+canonicalTransitionPowerDefinitionDAG zero =
+  primitiveDefinition
+canonicalTransitionPowerDefinitionDAG (suc level) =
+  squareSharedDefinition
+    (canonicalTransitionPowerDefinitionDAG level)
+
+definitionDAGNodes :
+  ∀ {level} →
+  TransitionPowerDefinitionDAG level →
+  Nat
+definitionDAGNodes primitiveDefinition =
+  suc zero
+definitionDAGNodes (squareSharedDefinition previous) =
+  suc (definitionDAGNodes previous)
+
+successorCount : Nat → Nat
+successorCount zero = suc zero
+successorCount (suc level) =
+  suc (successorCount level)
+
+canonicalDefinitionDAGNodeCount :
+  (level : Nat) →
+  definitionDAGNodes
+    (canonicalTransitionPowerDefinitionDAG level)
+  ≡ successorCount level
+canonicalDefinitionDAGNodeCount zero =
+  refl
+canonicalDefinitionDAGNodeCount (suc level)
+    rewrite canonicalDefinitionDAGNodeCount level =
+  refl
+
+------------------------------------------------------------------------
 -- Definition sharing versus endpoint-use sharing.
 --
 -- One definition of R_j can be reused at many argument pairs.  But the
