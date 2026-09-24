@@ -181,6 +181,23 @@ fixtureOutwardMargin :
   ≡ Int.+ 5 / 6
 fixtureOutwardMargin = solve []
 
+fixtureLambdaIn :
+  Design.lambdaInFromSquareLapse fixtureRadius x
+    ≡ Int.+ 21 / 64
+fixtureLambdaIn = solve []
+
+fixtureLambdaOut :
+  Design.lambdaOutFromSquareLapse
+    (massAtRadius fixtureRadius) fixtureRadius y
+    ≡ Int.+ 19 / 48
+fixtureLambdaOut = solve []
+
+fixtureRadialAcceleration :
+  ((Int.+ 5 / 12) * fixtureRadius)
+    / (fixtureRadius * fixtureRadius)
+  ≡ Int.+ 5 / 24
+fixtureRadialAcceleration = solve []
+
 record NambuGotoRepulsiveShellFamilyBoundary : Set where
   constructor nambu-goto-repulsive-shell-family-boundary
   field
