@@ -1,6 +1,7 @@
 module DASHI.Physics.ExoticGravity.AntigravityStrongestConditionalTheoremExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Physics.GR.GRWeakFieldPredictionReceipt as Weak
 import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact as Signed
