@@ -25,6 +25,8 @@ import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as LegalAu
 import DASHI.Cognition.PNF.SensibLawResolvedScopePlannerLiveExact as ResolvedScopeLive
 import DASHI.Cognition.PNF.SensibLawPdfActiveRequirementPlannerLiveExact as PdfPlanner
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
+import DASHI.Cognition.PNF.SensibLawUnifiedPNFIntakeReentrySpineExact as IntakeReentry
+import DASHI.Cognition.PNF.SensibLawPersistentStatementObservationEventSpineExact as PersistentTrace
 
 data BidiCampaign : Set where
   attributionPropositionCampaign : BidiCampaign
