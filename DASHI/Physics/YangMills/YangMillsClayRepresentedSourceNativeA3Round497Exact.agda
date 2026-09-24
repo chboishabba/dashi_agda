@@ -19,8 +19,9 @@ module DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exa
 -- Therefore there is no separate "represented A3 semantic weld" theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (proj₁; proj₂)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -88,9 +89,9 @@ representedA3FromSourceNativeRecovery representedYM group sourceNative =
     { R480.RepresentedA3At.represented =
         R483.representedContinuum representedYM group
     ; R480.RepresentedA3At.literalContinuumLimit =
-        Data.Product.proj₁ semantics
+        proj₁ semantics
     ; R480.RepresentedA3At.literalSchwingerBelongs =
-        Data.Product.proj₂ semantics
+        proj₂ semantics
     }
 
 representedA3IndependentSemanticWeldRequired : Bool
