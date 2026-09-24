@@ -128,3 +128,6 @@ import DASHI.Physics.Foundations.GRQFTActiveGaugeSectorTotalizationExact
 
 import DASHI.Physics.Foundations.CMP119SingleActiveSectorSourceFactorisationExact
 import DASHI.Physics.Foundations.CMP119SingleActiveSectorSourceFactorisationValidation
+
+import DASHI.Physics.Foundations.CMP119SingleSectorSharedSourceStressWeldExact
+import DASHI.Physics.Foundations.CMP119SingleSectorSharedSourceStressWeldValidation
