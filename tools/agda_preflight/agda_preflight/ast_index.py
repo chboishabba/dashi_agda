@@ -666,12 +666,12 @@ def _data_from_node(source_bytes: bytes, node) -> Optional[AstData]:
     for fn in descendants(node, "function"):
         parent = fn.parent
         closest_data = None
-        while parent is not None and parent is not node.parent:
+        while parent is not None and parent != node.parent:
             if parent.type == "data":
                 closest_data = parent
                 break
             parent = parent.parent
-        if closest_data is not node:
+        if closest_data != node:
             continue
         sig = _function_signature(source_bytes, fn)
         if sig is None:
@@ -811,7 +811,7 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
             # module-level signature/definition tables.
             parent = node.parent
             nested_owner = None
-            while parent is not None and parent is not root:
+            while parent is not None and parent != root:
                 if parent.type in {"data", "record", "fields"}:
                     nested_owner = parent.type
                     break
