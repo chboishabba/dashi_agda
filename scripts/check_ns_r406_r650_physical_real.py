@@ -66,7 +66,14 @@ def validate_r406(payload: dict[str, Any]) -> list[str]:
     if predicted != evaluated:
         errors.append("r406: pair counts disagree")
 
-    for key in ("global_direct_companion", "r406_weighted_remainder"):
+    for key in (
+        "global_direct_companion",
+        "r406_weighted_remainder",
+        "global_forcing_full",
+        "c1_instantaneous_four_forcing_full",
+        "offdiagonal_minus_twice_direct_companion",
+        "c1_r406_diagonal_coupling_residual",
+    ):
         if not _finite(payload.get(key)):
             errors.append(f"r406: {key} must be finite")
 
@@ -108,6 +115,7 @@ def _validate_c1_row(row: Any, *, label: str, errors: list[str]) -> None:
         "forcing_full_diagonal",
         "forcing_full_offdiagonal",
         "offdiagonal_minus_twice_direct_companion",
+        "c1_r406_diagonal_coupling_residual",
         "r406_weighted_remainder",
     ):
         if not _finite(row.get(key)):
