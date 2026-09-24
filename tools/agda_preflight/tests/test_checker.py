@@ -743,3 +743,70 @@ outer x = helper x
     assert "outer" in summary.ast.clauses
     assert "helper" not in summary.ast.clauses
     assert "helper" not in summary.ast.signatures
+
+
+
+def test_public_reexport_is_visible_to_downstream_using(tmp_path):
+    write_module(
+        tmp_path,
+        "BaseExport",
+        """module BaseExport where
+
+x : Set
+x = Set
+""",
+    )
+    write_module(
+        tmp_path,
+        "MiddleExport",
+        """module MiddleExport where
+
+open import BaseExport public using (x)
+""",
+    )
+    path = write_module(
+        tmp_path,
+        "UseExport",
+        """module UseExport where
+
+open import MiddleExport using (x)
+""",
+    )
+
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code in {"TSAGDA021", "TSAGDA023"} for d in diagnostics)
+
+
+def test_public_reexport_renaming_changes_visible_name(tmp_path):
+    write_module(
+        tmp_path,
+        "RenameBase",
+        """module RenameBase where
+
+x : Set
+x = Set
+""",
+    )
+    write_module(
+        tmp_path,
+        "RenameMiddle",
+        """module RenameMiddle where
+
+open import RenameBase public renaming (x to y)
+""",
+    )
+    path = write_module(
+        tmp_path,
+        "RenameUse",
+        """module RenameUse where
+
+open import RenameMiddle using (y)
+""",
+    )
+
+    checker = Checker(tmp_path)
+    summary = checker.parse_summary(tmp_path / "RenameMiddle.agda")
+    assert "y" in checker.exported_names(summary)
+
+    diagnostics = checker.check(path)
+    assert not any(d.code in {"TSAGDA021", "TSAGDA023"} for d in diagnostics)
