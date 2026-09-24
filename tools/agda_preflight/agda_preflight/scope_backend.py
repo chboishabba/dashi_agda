@@ -134,6 +134,64 @@ class ExternalScopeBackend:
         return out
 
 
+class CommandScopeCheckBackend:
+    """Use an arbitrary exit-code command as the scope-check negative oracle.
+
+    The command receives the absolute module path as its final argument unless
+    the literal placeholder {file} appears in argv. Exit status 0 means the
+    module scope-check succeeded; any nonzero status leaves structural scope
+    suspicions unresolved.
+    """
+
+    def __init__(
+        self,
+        command: Sequence[str] | str,
+        *,
+        cwd: Path | None = None,
+        timeout: float = 300.0,
+    ):
+        if isinstance(command, str):
+            command = shlex.split(command)
+        self.command = tuple(command)
+        self.cwd = cwd
+        self.timeout = timeout
+        self.attempted = 0
+        self.succeeded = 0
+        self.failed = 0
+
+    def _argv(self, path: Path) -> List[str]:
+        absolute = str(path.resolve())
+        if any("{file}" in part for part in self.command):
+            return [part.replace("{file}", absolute) for part in self.command]
+        return [*self.command, absolute]
+
+    def _scope_ok(self, path: Path) -> bool:
+        self.attempted += 1
+        completed = subprocess.run(
+            self._argv(path),
+            cwd=self.cwd,
+            text=True,
+            capture_output=True,
+            timeout=self.timeout,
+            check=False,
+        )
+        ok = completed.returncode == 0
+        if ok:
+            self.succeeded += 1
+        else:
+            self.failed += 1
+        return ok
+
+    def refine(self, summary, diagnostics: List):
+        if not self._scope_ok(summary.path):
+            return diagnostics
+        return [
+            diagnostic
+            for diagnostic in diagnostics
+            if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
+        ]
+
+
 class AgdaScopeCheckBackend:
     """Use Agda's own --only-scope-checking mode as a negative oracle.
 
@@ -278,13 +336,21 @@ class AgdaAutoRefineBackend:
         typecheck_timeout: float = 300.0,
         typecheck: bool = False,
         extra_args: Sequence[str] = (),
+        scope_command: Sequence[str] | str | None = None,
     ):
-        self.scope = AgdaScopeCheckBackend(
-            agda_bin,
-            cwd=cwd,
-            timeout=scope_timeout,
-            extra_args=extra_args,
-        )
+        if scope_command is None:
+            self.scope = AgdaScopeCheckBackend(
+                agda_bin,
+                cwd=cwd,
+                timeout=scope_timeout,
+                extra_args=extra_args,
+            )
+        else:
+            self.scope = CommandScopeCheckBackend(
+                scope_command,
+                cwd=cwd,
+                timeout=scope_timeout,
+            )
         self.typecheck = AgdaTypecheckBackend(
             agda_bin,
             cwd=cwd,
