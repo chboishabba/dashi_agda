@@ -49,6 +49,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarExternalResidualFullSquareRou
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarCanonicalExternalFullSquareRound669Exact as R669
 import DASHI.Physics.Closure.NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact as R670
 import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact as R671
+import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationZeroBranchRound672Exact as R672
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -755,6 +756,22 @@ round650C2ExternalZeroBranchMayBeErasedGlobally : Bool
 round650C2ExternalZeroBranchMayBeErasedGlobally =
   R671.round671R630ZeroBranchMayBeErasedGlobally
 
+round650C2R606ExternalFoldTotalizesThroughR630 : Bool
+round650C2R606ExternalFoldTotalizesThroughR630 =
+  R672.round672R606WeightedExternalFoldTotalizesThroughR630
+
+round650C2ExternalPZeroBranchRetainedExplicitly : Bool
+round650C2ExternalPZeroBranchRetainedExplicitly =
+  R672.round672PZeroBranchRetainedExplicitly
+
+round650C2ExternalPZeroDefectProvedZero : Bool
+round650C2ExternalPZeroDefectProvedZero =
+  R672.round672PZeroDefectProvedZero
+
+round650C2R606ExternalFoldEqualsR630WithoutDefect : Bool
+round650C2R606ExternalFoldEqualsR630WithoutDefect =
+  R672.round672R606ExternalFoldEqualsR630WithoutDefect
+
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue :
   round650C2ExternalNetworkOnLiteralResidualFullSquare ≡ true
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue =
@@ -824,6 +841,26 @@ round650C2ExternalZeroBranchMayBeErasedGloballyIsFalse :
   round650C2ExternalZeroBranchMayBeErasedGlobally ≡ false
 round650C2ExternalZeroBranchMayBeErasedGloballyIsFalse =
   R671.round671R630ZeroBranchMayBeErasedGloballyIsFalse
+
+round650C2R606ExternalFoldTotalizesThroughR630IsTrue :
+  round650C2R606ExternalFoldTotalizesThroughR630 ≡ true
+round650C2R606ExternalFoldTotalizesThroughR630IsTrue =
+  R672.round672R606WeightedExternalFoldTotalizesThroughR630IsTrue
+
+round650C2ExternalPZeroBranchRetainedExplicitlyIsTrue :
+  round650C2ExternalPZeroBranchRetainedExplicitly ≡ true
+round650C2ExternalPZeroBranchRetainedExplicitlyIsTrue =
+  R672.round672PZeroBranchRetainedExplicitlyIsTrue
+
+round650C2ExternalPZeroDefectProvedZeroIsFalse :
+  round650C2ExternalPZeroDefectProvedZero ≡ false
+round650C2ExternalPZeroDefectProvedZeroIsFalse =
+  R672.round672PZeroDefectProvedZeroIsFalse
+
+round650C2R606ExternalFoldEqualsR630WithoutDefectIsFalse :
+  round650C2R606ExternalFoldEqualsR630WithoutDefect ≡ false
+round650C2R606ExternalFoldEqualsR630WithoutDefectIsFalse =
+  R672.round672R606ExternalFoldEqualsR630WithoutDefectIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
