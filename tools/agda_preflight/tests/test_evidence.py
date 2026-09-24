@@ -519,6 +519,11 @@ def test_auto_refine_exposes_oracle_stats(tmp_path):
     assert backend.stats() == {
         "scope": {"attempted": 3, "succeeded": 2, "failed": 1},
         "typecheck": {"attempted": 1, "succeeded": 1, "failed": 0},
+        "scope_cache": {
+            "validated_modules": 0,
+            "failed_frontier_modules": 0,
+            "aggregate_probe_roots": 0,
+        },
     }
 
 
