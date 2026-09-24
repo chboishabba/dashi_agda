@@ -175,14 +175,24 @@ bucket60to70 =
     13
     ((+ 640) / 1000)
     ((+ 462) / 1000)
-    ((+ 0) / 1000)
-    "published bucket Brier retained separately by source adapter; aggregate table is rounded"
+    ((+ 274) / 1000)
+    "13 scored forecasts"
 
 bucket70to80 : Calibration.BucketObservation
 bucket70to80 = Calibration.emptyBucket "70%-80% omitted because no forecasts scored"
 
 bucket80to90 : Calibration.BucketObservation
 bucket80to90 = Calibration.emptyBucket "80%-90% omitted because no forecasts scored"
+
+bucket90to100 : Calibration.CalibrationBucket
+bucket90to100 =
+  Calibration.calibration-bucket
+    "90%-100%"
+    1
+    ((+ 930) / 1000)
+    ((+ 1000) / 1000)
+    ((+ 5) / 1000)
+    "1 scored forecast"
 
 ------------------------------------------------------------------------
 -- Integrity receipt.
