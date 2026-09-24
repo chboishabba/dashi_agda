@@ -4,7 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; _/_)
+open import Data.Rational using (ℚ; _/_; _-_)
 
 import DASHI.Applications.CounterUASWorldMonitorEvidenceHealthBridgeExact as Health
 import DASHI.Statistics.ForecastVerificationKernelExact as Kernel
@@ -39,7 +39,7 @@ marketOverlapMarketBrier : ℚ
 marketOverlapMarketBrier = (+ 72) / 1000
 
 marketOverlapDelta : ℚ
-marketOverlapDelta = (+ -77) / 1000
+marketOverlapDelta = marketOverlapMarketBrier - marketOverlapForecastBrier
 
 headlineCount : Nat
 headlineCount = 200
@@ -191,7 +191,7 @@ bucket80to90 = Calibration.emptyBucket "80%-90% omitted because no forecasts sco
 record WorldMonitorScorecardIntegrityReceipt : Set where
   constructor world-monitor-scorecard-integrity-receipt
   field
-    ledgerPartitionExact : Bool
+    ledgerPartitionCertified : Bool
     cohortPredicateExplicit : Bool
     cohortCountsReconcile : Bool
     scoringRuleDeclared : Bool
