@@ -93,5 +93,6 @@ canonicalGRQFTConcreteTheoryFrontier =
     false refl
     false refl
     false refl
+    false refl
     canonicalGRQFTConcreteTheoryLeaves
     "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, literal/recovered attachments, the existing CMP119 metric-stress pairing evaluated on a 16-vector metric basis (compiler present, basis instance missing), one symmetry-semantic bridge instance, ten independent normalized stress components, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
