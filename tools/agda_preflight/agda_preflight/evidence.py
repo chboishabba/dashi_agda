@@ -71,19 +71,19 @@ _INDEX_SAFE = {
     "TSAGDA008", "TSAGDA009",
     "TSAGDA020", "TSAGDA021", "TSAGDA023", "TSAGDA025",
     "TSAGDA028", "TSAGDA029", "TSAGDA030",
-    "TSAGDA040", "TSAGDA042", "TSAGDA043", "TSAGDA044", "TSAGDA045",
+    "TSAGDA042", "TSAGDA043", "TSAGDA044", 
     "TSAGDA046", "TSAGDA047", "TSAGDA048", "TSAGDA049",
     "TSAGDA050", "TSAGDA051", "TSAGDA052", "TSAGDA053", "TSAGDA054",
     "TSAGDA056",
     "TSAGDA060", "TSAGDA062", "TSAGDA063", "TSAGDA064", "TSAGDA065",
     "TSAGDA066", "TSAGDA067", "TSAGDA068",
-    "TSAGDA070", "TSAGDA071", "TSAGDA072", "TSAGDA073", "TSAGDA074",
-    "TSAGDA075", "TSAGDA077", "TSAGDA078", "TSAGDA079",
+    "TSAGDA070", "TSAGDA071", "TSAGDA073", "TSAGDA074",
+    "TSAGDA077", "TSAGDA078", "TSAGDA079",
     "TSAGDA080", "TSAGDA081", "TSAGDA082", "TSAGDA083", "TSAGDA085",
     "TSAGDA086", "TSAGDA087", "TSAGDA088", "TSAGDA089",
     "TSAGDA100", "TSAGDA101", "TSAGDA102", "TSAGDA103", "TSAGDA104",
     "TSAGDA105",
-    "TSAGDA110", "TSAGDA111", "TSAGDA112", "TSAGDA114", "TSAGDA115",
+    "TSAGDA111", "TSAGDA112", "TSAGDA115",
     "TSAGDA120", "TSAGDA121", "TSAGDA122", "TSAGDA123",
     "TSAGDA130", "TSAGDA131",
     "TSAGDA140", "TSAGDA141", "TSAGDA142", "TSAGDA143",
@@ -113,8 +113,14 @@ _SCOPE_REQUIRED = {
 
 # Kept for future diagnostics whose truth genuinely requires the kernel.
 _TYPECHECK_REQUIRED: Set[str] = {
+    "TSAGDA040",  # over-application can depend on result-type unfolding
     "TSAGDA041",  # under-application / saturation is a typing judgment
+    "TSAGDA045",  # clause/signature arity can depend on pointfree eta/type unfolding
+    "TSAGDA072",  # constructor/result-head comparison can require synonym unfolding
+    "TSAGDA075",  # conservative: shared by rigid and synonym-sensitive ctor checks
     "TSAGDA076",  # partial application vs type use needs elaborated typing
+    "TSAGDA110",  # compatibility alias of TSAGDA045
+    "TSAGDA114",  # clause constructor/result-head comparison needs unfolding
 }
 
 
@@ -122,7 +128,7 @@ DIAGNOSTIC_ALIASES = {
     "TSAGDA002": ("TSAGDA171",),
     "TSAGDA003": ("TSAGDA065", "TSAGDA067"),
     "TSAGDA012": ("TSAGDA175",),
-    "TSAGDA045": ("TSAGDA110",),
+    "TSAGDA045": (),
     "TSAGDA042": ("TSAGDA112",),
 }
 
