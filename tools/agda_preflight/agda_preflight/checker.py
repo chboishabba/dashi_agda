@@ -182,6 +182,7 @@ class Checker:
         self.root = root.resolve()
         self.parser = _parser()
         self._summary_cache: Dict[Path, ModuleSummary] = {}
+        self._export_cache: Dict[Path, Set[str]] = {}
         self.evidence_level = evidence_level
         self.scope_backend = scope_backend
 
@@ -246,6 +247,83 @@ class Checker:
         )
         self._summary_cache[path] = summary
         return summary
+
+    @staticmethod
+    def _apply_export_directives(
+        names: Set[str],
+        directives,
+    ) -> Set[str]:
+        visible = set(names)
+        for directive in directives:
+            if directive.kind == "using":
+                visible.intersection_update(directive.names)
+            elif directive.kind == "hiding":
+                visible.difference_update(directive.names)
+            elif directive.kind == "renaming":
+                for old, new in directive.renamings:
+                    if old in visible:
+                        visible.remove(old)
+                        visible.add(new)
+        return visible
+
+    def exported_names(
+        self,
+        summary: ModuleSummary,
+        _seen: Optional[Set[Path]] = None,
+    ) -> Set[str]:
+        """Return local exports plus conservative public re-exports.
+
+        This models only explicit public opens/imports. It deliberately avoids
+        guessing about private/abstract visibility or unresolved module
+        applications; those remain outside the hard structural contract.
+        """
+        cached = self._export_cache.get(summary.path)
+        if cached is not None:
+            return set(cached)
+
+        seen = set() if _seen is None else set(_seen)
+        path = summary.path.resolve()
+        if path in seen:
+            return set(summary.exported_names)
+        seen.add(path)
+
+        exports = set(summary.exported_names)
+
+        for item in summary.ast.imports:
+            if not (item.opened and item.public):
+                continue
+            target_path = self.module_path(item.module)
+            if not target_path.exists():
+                continue
+            try:
+                target = self.parse_summary(target_path)
+            except (OSError, UnicodeDecodeError):
+                continue
+            remote = self.exported_names(target, seen)
+            exports.update(self._apply_export_directives(remote, item.directives))
+
+        for opened in summary.ast.opens:
+            if not opened.public:
+                continue
+            module = summary.imports.get(opened.target)
+            if module is None:
+                candidate = self.module_path(opened.target)
+                if candidate.exists():
+                    module = opened.target
+            if module is None:
+                continue
+            target_path = self.module_path(module)
+            if not target_path.exists():
+                continue
+            try:
+                target = self.parse_summary(target_path)
+            except (OSError, UnicodeDecodeError):
+                continue
+            remote = self.exported_names(target, seen)
+            exports.update(self._apply_export_directives(remote, opened.directives))
+
+        self._export_cache[path] = set(exports)
+        return exports
 
     def imported_summaries(self, summary: ModuleSummary) -> Dict[str, ModuleSummary]:
         out: Dict[str, ModuleSummary] = {}
