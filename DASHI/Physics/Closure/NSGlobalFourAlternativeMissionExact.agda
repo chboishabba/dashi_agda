@@ -22,6 +22,8 @@ import DASHI.Physics.Closure.NSTriadKNClayForcedBreakdownFormulationRound523Exac
 import DASHI.Physics.Closure.NSTriadKNCanonicalDirectLeafAFrontierRound592Exact as LeafA
 import DASHI.Physics.Closure.NSTriadKNLiteralR406ClayTerminalCutsetRound504Exact as Cut
 import DASHI.Physics.Closure.NSFirstImplementationPriorityLedgerExact as Priority
+import DASHI.Physics.Closure.NSClayLiteralABCDExact as Literal
+import DASHI.Physics.Closure.NSClayFacingABCDProofStatusExact as ClayFacing
 
 data NSAlternative : Set where
   A-euclidean-unforced-global : NSAlternative
@@ -125,6 +127,35 @@ allFourImpliesAtLeastOneClayAlternative :
   GlobalFourAlternativeCompletion → AnyOneClayAlternativePayment
 allFourImpliesAtLeastOneClayAlternative completion = paidA (paymentA completion)
 
+------------------------------------------------------------------------
+-- Canonical proposition-level endpoint.
+--
+-- The legacy PaymentA/B/C/D tokens above remain for compatibility with older
+-- coordinator consumers.  New theorem-facing work should use the literal
+-- Fefferman propositions below: these are the actual A/B/C/D theorem types,
+-- not scheduler tokens.
+------------------------------------------------------------------------
+
+LiteralClayABCDInstance : Set₂
+LiteralClayABCDInstance = Literal.LiteralClayABCDInstance
+
+LiteralGlobalFourAlternativeCompletion :
+  LiteralClayABCDInstance → Set₂
+LiteralGlobalFourAlternativeCompletion =
+  Literal.LiteralFourAlternativeCompletion
+
+LiteralAnyOneClayResolution :
+  LiteralClayABCDInstance → Set₂
+LiteralAnyOneClayResolution =
+  Literal.AnyOneClayResolution
+
+literalGlobalAllFourImpliesAnyOneClayResolution :
+  ∀ {instance} →
+  LiteralGlobalFourAlternativeCompletion instance →
+  LiteralAnyOneClayResolution instance
+literalGlobalAllFourImpliesAnyOneClayResolution =
+  Literal.literalAllFourImpliesAnyOne
+
 data OneAlternativeAutomaticallyPaysAllFour : Set where
 oneAlternativeDoesNotAutomaticallyPayAllFour :
   OneAlternativeAutomaticallyPaysAllFour → ⊥
@@ -157,6 +188,63 @@ currentFirstIndependentUnforcedResidual : GlobalNSResidual
 currentFirstIndependentUnforcedResidual = proveUnforcedLeafA
 currentFirstExternalReconstructionResidual : GlobalNSResidual
 currentFirstExternalReconstructionResidual = independentlyReconstructExternalC
+
+------------------------------------------------------------------------
+-- Clay-facing routing after source-exact C/D audit.
+--
+-- C/D independent Agda reconstruction remains available as an optional
+-- verification programme, but it is no longer the first mathematical residual.
+------------------------------------------------------------------------
+
+clayFacingCSourceExact : Bool
+clayFacingCSourceExact = ClayFacing.cReleasedSourceExact
+
+clayFacingDSourceExact : Bool
+clayFacingDSourceExact = ClayFacing.dReleasedSourceExact
+
+clayFacingCDSourceAlignmentClosed : Bool
+clayFacingCDSourceAlignmentClosed =
+  ClayFacing.cdReleasedSourceAlignmentClosed
+
+clayFacingCDRequiresIndependentAgdaReconstruction : Bool
+clayFacingCDRequiresIndependentAgdaReconstruction =
+  ClayFacing.cdIndependentAgdaReconstructionGatesClayFacingAudit
+
+internalResearchPriorityA : ClayFacing.ActiveAction
+internalResearchPriorityA = ClayFacing.proveInternalSameObjectLeaf
+
+internalResearchPriorityB : ClayFacing.ActiveAction
+internalResearchPriorityB = ClayFacing.proveInternalSameObjectLeaf
+
+externalReconstructionIsOptionalVerification : Bool
+externalReconstructionIsOptionalVerification = true
+
+-- Authoritative research scheduler.  The older GlobalNSResidual values are
+-- retained for compatibility with historical dashboards only.
+data ClayFacingResearchResidual : Set where
+  provePeriodicBPhysicalSameObject : ClayFacingResearchResidual
+  proveEuclideanAPhysicalSameObject : ClayFacingResearchResidual
+  optionalReconstructExternalC : ClayFacingResearchResidual
+  optionalReconstructExternalD : ClayFacingResearchResidual
+  noInternalResearchResidual : ClayFacingResearchResidual
+
+currentClayFacingResearchResidual : ClayFacingResearchResidual
+currentClayFacingResearchResidual = provePeriodicBPhysicalSameObject
+
+nextClayFacingResearchResidual : ClayFacingResearchResidual
+nextClayFacingResearchResidual = proveEuclideanAPhysicalSameObject
+
+cIndependentReconstructionResearchPriority : Bool
+cIndependentReconstructionResearchPriority = false
+
+dIndependentReconstructionResearchPriority : Bool
+dIndependentReconstructionResearchPriority = false
+
+bPrimaryActiveResearchLane : Bool
+bPrimaryActiveResearchLane = true
+
+aSecondaryActiveResearchLane : Bool
+aSecondaryActiveResearchLane = true
 
 roundGlobalFourAlternativeMissionImplemented : Bool
 roundGlobalFourAlternativeMissionImplemented = true
