@@ -7,10 +7,11 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = REPO_ROOT / "scripts" / "monster369_oeis_acquisition_snapshot.py"
+POWER_BRIDGE_SCRIPT = REPO_ROOT / "scripts" / "monster369_42b_power_bridge_snapshot.py"
 
 
-def load_runtime():
-    spec = importlib.util.spec_from_file_location("monster369_oeis_acquisition", SCRIPT)
+def load_module(path: Path, name: str):
+    spec = importlib.util.spec_from_file_location(name, path)
     assert spec is not None
     assert spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -19,10 +20,17 @@ def load_runtime():
     return module
 
 
+def load_runtime():
+    return load_module(SCRIPT, "monster369_oeis_acquisition")
+
+
+def load_power_bridge():
+    return load_module(POWER_BRIDGE_SCRIPT, "monster369_42b_power_bridge")
+
+
 def test_a005052_ladder_snapshot_retains_90_65610_196830():
     runtime = load_runtime()
     node = runtime.SEQUENCES["A005052"]
-
     assert node["formula"] == "10*3^n"
     assert node["selected_terms"] == {2: 90, 8: 65610, 9: 196830}
     assert node["authority"] == "numerical-navigation"
@@ -31,7 +39,6 @@ def test_a005052_ladder_snapshot_retains_90_65610_196830():
 def test_a025616_parent_lattice_contains_90_729_65610_196830():
     runtime = load_runtime()
     node = runtime.SEQUENCES["A025616"]
-
     assert node["formula"] == "3^i*10^j"
     assert node["selected_values"] == {90, 729, 65610, 196830}
     relation = runtime.RELATIONS["a025616-parent-lattice"]
@@ -42,7 +49,6 @@ def test_a025616_parent_lattice_contains_90_729_65610_196830():
 def test_42d_snapshot_retains_17496_eta_product_bridge_candidate():
     runtime = load_runtime()
     node = runtime.SEQUENCES["A058678"]
-
     assert node["class_label"] == "42d"
     assert 17496 in node["selected_values"]
     assert "eta(q^3)" in node["formula"]
@@ -51,9 +57,33 @@ def test_42d_snapshot_retains_17496_eta_product_bridge_candidate():
     assert relation["same_object_paid"] is False
 
 
+def test_oeis_42d_and_atlas_42D_labels_are_not_silently_identified():
+    runtime = load_runtime()
+    relation = runtime.RELATIONS["oeis42d-atlas42D-label-disambiguation"]
+    assert relation["oeis_sequence"] == "A058678"
+    assert relation["oeis_label"] == "42d"
+    assert relation["atlas_label"] == "42D"
+    assert relation["atlas_fourteenth_power_target"] == "3A"
+    assert relation["atlas_direct_power_target_3B"] is False
+    assert relation["same_class_paid"] is False
+
+
+def test_42b_is_the_order_42_power_bridge_to_3b():
+    bridge = load_power_bridge().build_42b_power_bridge_receipt()
+    assert bridge["oeis_sequence"] == "A058676"
+    assert bridge["oeis_label"] == "42b"
+    assert bridge["atlas_label"] == "42B"
+    assert bridge["atlas_fourteenth_power_target"] == "3B"
+    assert bridge["atlas_seventh_power_target"] == "6B"
+    assert bridge["atlas_third_power_target"] == "14C"
+    assert bridge["atlas_second_power_target"] == "21D"
+    assert bridge["direct_power_bridge_to_3B"] is True
+    assert bridge["same_class_paid"] is True
+    assert bridge["creates_n3b_action_weld"] is False
+
+
 def test_42_class_eta_family_retains_native_14_and_42_levels():
     runtime = load_runtime()
-
     assert runtime.SEQUENCES["A058674"]["class_label"] == "42D"
     assert "eta(q^14)" in runtime.SEQUENCES["A058674"]["formula"]
     assert "eta(q^42)" in runtime.SEQUENCES["A058674"]["formula"]
@@ -69,7 +99,6 @@ def test_42_class_eta_family_retains_native_14_and_42_levels():
 def test_ternary27_reduces_as_three_preserved_phases_times_five_inner_orbits():
     runtime = load_runtime()
     probe = runtime.build_ternary27_phase_preserving_reduction_probe()
-
     assert probe["raw_state_count"] == 27
     assert probe["outer_phase_count"] == 3
     assert probe["inner_sheet_state_count"] == 9
@@ -86,7 +115,6 @@ def test_ternary27_reduces_as_three_preserved_phases_times_five_inner_orbits():
 def test_42d_five_mode_phase_probe_realizes_15_14_42_without_authority_promotion():
     runtime = load_runtime()
     probe = runtime.build_42d_five_mode_phase_probe()
-
     assert probe["mode_count"] == 5
     assert probe["phase_count"] == 3
     assert probe["lane_count"] == 15
@@ -103,7 +131,6 @@ def test_42d_five_mode_phase_probe_realizes_15_14_42_without_authority_promotion
 
 def test_6b_normalization_family_retains_q6_32772_across_three_manifests():
     runtime = load_runtime()
-
     family = [runtime.SEQUENCES[key] for key in ("A007255", "A045485", "A121665")]
     assert {node["class_label"] for node in family} == {"6B"}
     assert {node["q0"] for node in family} == {0, 7, 12}
@@ -114,24 +141,20 @@ def test_6b_normalization_family_retains_q6_32772_across_three_manifests():
 
 def test_power_family_trace_nodes_are_acquired_but_not_action_authority():
     runtime = load_runtime()
-
     assert runtime.SEQUENCES["A007244"]["positive_coefficients"][1] == 54
     assert runtime.SEQUENCES["A007246"]["positive_coefficients"][1] == 276
     assert runtime.SEQUENCES["A014708"]["positive_coefficients"][1] == 196884
-    assert all(
-        runtime.SEQUENCES[key]["authority"] == "source-navigation"
-        for key in ("A007244", "A007246", "A014708")
-    )
+    assert all(runtime.SEQUENCES[key]["authority"] == "source-navigation" for key in ("A007244", "A007246", "A014708"))
 
 
 def test_snapshot_keeps_positive_bridge_signal_separate_from_proof_authority():
     runtime = load_runtime()
     report = runtime.build_report()
-
     assert report["positive_bridge_candidates"]["a005052-heisenberg-ladder"] is True
     assert report["positive_bridge_candidates"]["a025616-parent-lattice"] is True
     assert report["positive_bridge_candidates"]["6b-q6-to-c6-spectrum-32772"] is True
     assert report["positive_bridge_candidates"]["17496-42d-to-n3b-restriction"] is True
+    assert load_power_bridge().build_42b_power_bridge_receipt()["direct_power_bridge_to_3B"] is True
     assert report["positive_bridge_candidates"]["42d-five-mode-phase-carrier"] is True
     assert report["positive_bridge_candidates"]["42-class-eta-level-family"] is True
     assert report["positive_bridge_candidates"]["ternary27-phase-preserving-3x5-reduction"] is True
