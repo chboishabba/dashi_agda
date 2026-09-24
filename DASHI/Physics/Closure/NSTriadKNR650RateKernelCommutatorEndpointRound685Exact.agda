@@ -105,28 +105,25 @@ fixedOutputPhysicalRateKernelIsCommutatorMinusTangent
     commutatorMeaning =
       Work.fixedOutputCommutatorWorkIsTangentMinusDecay
         rho S velocity forcing cutoff output
+    weightedIsNegativeDecay :
+      weighted ≡ 0ℚ - Work.coherentWork mixed decay
+    weightedIsNegativeDecay
+      rewrite decayMeaning =
+      solve (weighted ∷ [])
+
+    commutatorMinusTangentIsNegativeDecay :
+      Work.coherentWork mixed commutator
+        - Work.coherentWork mixed tangent
+      ≡ 0ℚ - Work.coherentWork mixed decay
+    commutatorMinusTangentIsNegativeDecay
+      rewrite commutatorMeaning =
+      solve
+        ( Work.coherentWork mixed tangent
+        ∷ Work.coherentWork mixed decay
+        ∷ [])
   in
-  trans
-    (solve
-      ( weighted
-      ∷ Work.coherentWork mixed tangent
-      ∷ Work.coherentWork mixed commutator
-      ∷ Work.coherentWork mixed decay
-      ∷ []))
-    (trans
-      (cong
-        (λ d →
-          Work.coherentWork mixed commutator
-            - Work.coherentWork mixed tangent)
-        (sym decayMeaning))
-      (let
-         c = Work.coherentWork mixed commutator
-         t = Work.coherentWork mixed tangent
-         d = Work.coherentWork mixed decay
-       in
-       trans
-         (cong (λ selected → selected - t) commutatorMeaning)
-         (solve (t ∷ d ∷ []))))
+  trans weightedIsNegativeDecay
+    (sym commutatorMinusTangentIsNegativeDecay)
 
 ------------------------------------------------------------------------
 -- R684 and R685 are the SAME kernel, now in two physical coordinates.
