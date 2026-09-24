@@ -34,7 +34,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPResourceBoundedSelfDiagonalExact
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
@@ -184,18 +184,18 @@ explicitSelfTableauCannotClose attempt =
 ------------------------------------------------------------------------
 
 two : Nat
-two = Agda.Builtin.Nat.suc (Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero)
+two = suc (suc zero)
 
 sizeAtLeastTwoImpliesBelowSquare :
   ∀ {size : Nat} →
   two ≤ size →
   size < size * size
-sizeAtLeastTwoImpliesBelowSquare {Agda.Builtin.Nat.zero} ()
+sizeAtLeastTwoImpliesBelowSquare {zero} ()
 sizeAtLeastTwoImpliesBelowSquare
-    {Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero} ()
+    {suc zero} ()
 sizeAtLeastTwoImpliesBelowSquare
-    {size@(Agda.Builtin.Nat.suc
-      (Agda.Builtin.Nat.suc rest))}
+    {size@(suc
+      (suc rest))}
     two≤size =
   subst
     (λ left → left < size * size)
