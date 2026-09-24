@@ -57,11 +57,13 @@ import DASHI.Physics.Closure.NSTriadKNFibreLocalPositiveR290EnumerationRound396E
 import DASHI.Physics.Closure.NSTriadKNRationalPhysicalPairRatePositivityRound400Exact as R400
 import DASHI.Physics.Closure.NSTriadKNOutputLocalSelectorFixedOutputReductionExact as OutputLocal
 import DASHI.Physics.Closure.NSTriadKNSpectatorDoubleForcingCommutatorFoldRound542Exact as R542
+import DASHI.Physics.Closure.NSTriadKNSymmetricUnorderedOrderedOffDiagonalRound539Exact as R539
 import DASHI.Physics.Closure.NSTriadKNFullSquareDiagonalOffDiagonalRound543Exact as R543
 import DASHI.Physics.Closure.NSTriadKNFactoredFullCommutatorOnlyRound567Exact as R567
 import DASHI.Physics.Closure.NSTriadKNR567CauchyGramFluxNormalFormRound596Exact as R596
 import DASHI.Physics.Closure.NSTriadKNCauchyResolvedFullSquareRateCancellationExact as R595
 import DASHI.Physics.Closure.NSTriadKNA3CenteredCauchyPairNormalFormRound600Exact as R600
+import DASHI.Physics.Closure.NSTriadKNCenteredMultiplierDoubleMixedWeldExact as DoubleWeld
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -282,17 +284,18 @@ module FixedOutput
       (Audit.projectedNonlinearity (Field30.finiteSystem physicalSystem))
       cutoff
 
+  commutator :
+    C3.Complex3 F
+  commutator =
+    Work.fixedOutputCommutator
+      S
+      (Audit.velocityAt (Field30.finiteSystem physicalSystem))
+      (Audit.projectedNonlinearity (Field30.finiteSystem physicalSystem))
+      cutoff output
+
   fourCommutator :
     C3.Complex3 F
-  fourCommutator =
-    let
-      C0 = Work.fixedOutputCommutator
-        S
-        (Audit.velocityAt (Field30.finiteSystem physicalSystem))
-        (Audit.projectedNonlinearity (Field30.finiteSystem physicalSystem))
-        cutoff output
-    in
-    C3.complex3Add (C3.complex3Add C0 C0) (C3.complex3Add C0 C0)
+  fourCommutator = R225.fourCopies commutator
 
   doubleForcingFoldIsFourCommutator :
     R224.foldVector D.doubleForcing fibre ≡ fourCommutator
@@ -325,14 +328,7 @@ module FixedOutput
       (Audit.velocityAt (Field30.finiteSystem physicalSystem))
       cutoff output
 
-  commutator :
-    C3.Complex3 F
-  commutator =
-    Work.fixedOutputCommutator
-      S
-      (Audit.velocityAt (Field30.finiteSystem physicalSystem))
-      (Audit.projectedNonlinearity (Field30.finiteSystem physicalSystem))
-      cutoff output
+  module Four = DoubleWeld.PhysicalCenteredDoubleMixed physicalSystem S
 
   foldedCoherentWorkIsSixteenCommutatorWork :
     Work.coherentWork
@@ -343,9 +339,9 @@ module FixedOutput
   foldedCoherentWorkIsSixteenCommutatorWork
     rewrite doubleForcingFoldIsFourCommutator
           | doubleCellFoldIsFourMixed =
-    solve
-      ( R179.realHermitianCross commutator mixed
-      ∷ [])
+    trans
+      (Four.coherentWorkFourCopies commutator mixed)
+      (solve (Work.coherentWork commutator mixed ∷ []))
 
   liftedForcingFullIsEightCommutatorWork :
     R543.fullSquareSum liftedForcingPair fibre
