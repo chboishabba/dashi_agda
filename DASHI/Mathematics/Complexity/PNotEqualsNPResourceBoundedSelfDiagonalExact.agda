@@ -316,8 +316,6 @@ explicitTableauRuleCannotEncodeSuperlinearSelfFormula
 -- imported complexity theorem.
 ------------------------------------------------------------------------
 
-two : Nat
-two = suc (suc zero)
 
 zeroLessThanTwo : zero < two
 zeroLessThanTwo =
