@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-import re
 from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
 
 from tree_sitter import Language, Parser
@@ -12,8 +11,6 @@ from .rules import extended_diagnostics
 from .ast_index import AstIndex, build_ast_index, significant_tokens, typed_binders
 from .shapes import shape_from_node, terminal_head, explicit_arity
 
-
-_IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
 
 
 @dataclass(frozen=True)
@@ -46,14 +43,11 @@ class FieldInfo:
     type_text: str
     line: int
     type_node: object | None = None
-
-    @property
-    def terminal(self) -> Optional[str]:
-        return terminal_type_head(self.type_text)
+    terminal: Optional[str] = None
 
     @property
     def is_set_valued(self) -> bool:
-        return self.terminal in {"Set", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}
+        return self.terminal in {"Set", "Set₀", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}
 
 
 @dataclass
@@ -98,252 +92,26 @@ def walk(node) -> Iterator:
 
 
 def _known_syntax_grammar_gap(node, source: str) -> bool:
-    """Recognize only the known false ERROR nodes from tree-sitter-agda 1.3.3.
-
-    The grammar's treatment of bare imports and standard record declarations
-    yields ERROR nodes for valid Agda.  Filter the narrow artifact shapes, not
-    arbitrary record contents, so TSAGDA000 remains useful for real syntax
-    damage.
-    """
-    lines = source.splitlines()
-    row, column = node.start_point
-    if row >= len(lines):
-        return False
-    line = lines[row]
-    text = source.encode("utf-8")[node.start_byte : node.end_byte].decode(
-        "utf-8", "replace"
-    )
+    """Recognize only known tree-sitter-agda 1.3.3 grammar artifacts."""
+    source_bytes = source.encode("utf-8")
+    tokens = significant_tokens(source_bytes, node)
+    texts = [token.text for token in tokens]
     parent_type = node.parent.type if node.parent is not None else ""
 
-    if parent_type == "source_file" and re.fullmatch(
-        r"\s*import\s+[A-Za-z][A-Za-z0-9_.']*(?:\s+as\s+\S+)?\s*",
-        line,
-    ):
+    if parent_type == "source_file" and "import" in texts:
         return True
-
-    record_header = re.compile(
-        rf"^\s*record\s+{_IDENT}.*:\s*Set(?:[₀-₉ω]*)?\s+where\s*$"
-    )
-    if parent_type == "source_file" and record_header.match(line) and re.match(
-        r"where\s*\n\s*constructor\b", text
-    ):
-        return True
-    if parent_type == "record_signature" and re.match(
-        r"Set(?:[₀-₉ω]*)?\s+where\s*\n\s*constructor\b", text
-    ):
-        return True
-    if parent_type == "record_declarations_block" and re.fullmatch(
-        rf"\s*constructor\s+{_IDENT}\s*", text
-    ) and re.match(rf"\s*constructor\s+{_IDENT}\b", line):
-        return True
-    if parent_type == "source_file" and re.fullmatch(r"\s*field\s*", line):
-        previous = lines[row - 1] if row else ""
-        if re.match(rf"\s*constructor\s+{_IDENT}\b", previous):
+    if parent_type in {"source_file", "record_signature"}:
+        if "record" in texts and "where" in texts and "constructor" in texts:
             return True
+    if parent_type == "record_declarations_block" and texts[:1] == ["constructor"]:
+        return True
+    if parent_type == "source_file" and texts == ["field"]:
+        previous = node.prev_named_sibling
+        if previous is not None:
+            prev_tokens = [token.text for token in significant_tokens(source_bytes, previous)]
+            if prev_tokens[:1] == ["constructor"]:
+                return True
     return False
-
-
-def terminal_type_head(text: str) -> Optional[str]:
-    """Return only an obvious terminal codomain head.
-
-    This is intentionally conservative.  It understands enough to distinguish
-    things such as '(n : Nat) → Set' from '(n : Nat) → ⊤' without pretending
-    to normalize general dependent Agda types.
-    """
-    s = re.sub(r"--[^\n]*", " ", text)
-    s = re.sub(r"\s+", " ", s).strip()
-    if not s:
-        return None
-    # Strip a few balanced-looking trailing delimiters used around codomains.
-    while len(s) >= 2 and s[0] == "(" and s[-1] == ")":
-        s = s[1:-1].strip()
-    pieces = re.split(r"\s*(?:→|->)\s*", s)
-    tail = pieces[-1].strip()
-    m = re.match(r"([A-Za-z_⊤⊥][A-Za-z0-9_'₀-₉⊤⊥ω]*)", tail)
-    return m.group(1) if m else None
-
-
-def _module_name(source: str, path: Path, root: Path) -> str:
-    m = re.search(r"(?m)^\s*module\s+([A-Za-z0-9_.']+)\s+where\b", source)
-    if m:
-        return m.group(1)
-    try:
-        rel = path.resolve().relative_to(root.resolve())
-        return ".".join(rel.with_suffix("").parts)
-    except ValueError:
-        return path.stem
-
-
-def _imports(source: str) -> Dict[str, str]:
-    out: Dict[str, str] = {}
-    # Covers 'import M as X' and 'open import M ...'.
-    pattern = re.compile(
-        r"(?m)^\s*(?:open\s+)?import\s+([A-Za-z0-9_.']+)"
-        r"(?:\s+as\s+([A-Za-z0-9_.']+))?"
-    )
-    for m in pattern.finditer(source):
-        module = m.group(1)
-        alias = m.group(2) or module.split(".")[-1]
-        out[alias] = module
-    return out
-
-
-def _opens(source: str) -> Set[str]:
-    out: Set[str] = set()
-    for m in re.finditer(r"(?m)^\s*open\s+([A-Za-z0-9_.']+)(?!\s+import\b)", source):
-        out.add(m.group(1).split(".")[-1])
-    return out
-
-
-def _collect_records(source: str) -> Dict[str, RecordInfo]:
-    lines = source.splitlines()
-    records: Dict[str, RecordInfo] = {}
-    i = 0
-    while i < len(lines):
-        m = re.match(rf"^record\s+({_IDENT})\b.*", lines[i])
-        if not m:
-            i += 1
-            continue
-        name = m.group(1)
-        rec = RecordInfo(name=name, line=i + 1)
-        j = i + 1
-        in_field_block = False
-        while j < len(lines):
-            line = lines[j]
-            if line and not line[0].isspace():
-                break
-            if re.match(r"^\s+field\s*$", line):
-                in_field_block = True
-                j += 1
-                continue
-            if in_field_block:
-                fm = re.match(rf"^\s+({_IDENT})\s*:\s*(.*)$", line)
-                if fm:
-                    fname = fm.group(1)
-                    parts = [fm.group(2).strip()]
-                    k = j + 1
-                    # Continuation lines are more deeply indented and are not a
-                    # new field declaration.
-                    while k < len(lines):
-                        nxt = lines[k]
-                        if nxt and not nxt[0].isspace():
-                            break
-                        if re.match(rf"^\s+{_IDENT}\s*:", nxt):
-                            break
-                        if re.match(r"^\s+(?:field|open|constructor)\b", nxt):
-                            break
-                        if nxt.strip():
-                            parts.append(nxt.strip())
-                        k += 1
-                    rec.fields[fname] = FieldInfo(
-                        name=fname,
-                        type_text=" ".join(parts),
-                        line=j + 1,
-                    )
-                    j = k
-                    continue
-            j += 1
-        records[name] = rec
-        i = max(j, i + 1)
-    return records
-
-
-def _collect_signatures(source: str) -> Dict[str, SignatureInfo]:
-    lines = source.splitlines()
-    result: Dict[str, SignatureInfo] = {}
-    i = 0
-    excluded = {"module", "record", "data", "open", "import", "postulate", "private", "abstract"}
-    while i < len(lines):
-        line = lines[i]
-        if line.startswith((" ", "\t")) or line.lstrip().startswith("--"):
-            i += 1
-            continue
-        m = re.match(r"^(.+?)\s*:\s*(.*)$", line)
-        if not m:
-            i += 1
-            continue
-        lhs = m.group(1).strip()
-        first = lhs.split()[0] if lhs.split() else ""
-        if first in excluded:
-            i += 1
-            continue
-        names = tuple(n for n in lhs.split() if re.fullmatch(_IDENT, n))
-        if not names:
-            i += 1
-            continue
-        parts = [m.group(2).strip()]
-        j = i + 1
-        while j < len(lines):
-            nxt = lines[j]
-            if nxt and not nxt[0].isspace():
-                break
-            if nxt.strip() and not nxt.lstrip().startswith("--"):
-                parts.append(nxt.strip())
-            j += 1
-        info = SignatureInfo(names=names, type_text=" ".join(parts), line=i + 1)
-        for name in names:
-            result[name] = info
-        i = max(j, i + 1)
-    return result
-
-
-def _binder_types(type_text: str) -> Dict[str, str]:
-    out: Dict[str, str] = {}
-    # Deliberately shallow: enough for '(A : AlignedModel C T)' binders.
-    for m in re.finditer(rf"\(({_IDENT})\s*:\s*([^()]*)\)", type_text):
-        out[m.group(1)] = m.group(2).strip()
-    return out
-
-
-def _record_blocks(source: str) -> Iterator[Tuple[str, int, str]]:
-    lines = source.splitlines()
-    i = 0
-    while i < len(lines):
-        m = re.match(rf"^({_IDENT})\b[^=]*=\s*(.*)$", lines[i])
-        if not m:
-            i += 1
-            continue
-        name = m.group(1)
-        j = i
-        chunk = [m.group(2)]
-        # Read only this top-level definition.
-        k = i + 1
-        while k < len(lines):
-            if lines[k] and not lines[k][0].isspace():
-                break
-            chunk.append(lines[k])
-            k += 1
-        text = "\n".join(chunk)
-        pos = text.find("record")
-        brace = text.find("{", pos + 6) if pos >= 0 else -1
-        if pos >= 0 and brace >= 0:
-            depth = 0
-            end = None
-            for off, ch in enumerate(text[brace:], start=brace):
-                if ch == "{":
-                    depth += 1
-                elif ch == "}":
-                    depth -= 1
-                    if depth == 0:
-                        end = off
-                        break
-            if end is not None:
-                yield name, i + 1, text[brace + 1 : end]
-        i = max(k, i + 1)
-
-
-def _assignments(body: str) -> Dict[str, str]:
-    # Record syntax in this repository consistently separates fields with ';'.
-    chunks = re.split(r"(?m)^\s*;\s*", body)
-    out: Dict[str, str] = {}
-    for chunk in chunks:
-        chunk = chunk.strip()
-        if not chunk:
-            continue
-        m = re.match(rf"({_IDENT})\s*=\s*(.*)", chunk, flags=re.S)
-        if m:
-            out[m.group(1)] = m.group(2).strip()
-    return out
 
 
 class Checker:
@@ -372,6 +140,11 @@ class Checker:
                         name=field_name,
                         type_text=field.type_text,
                         line=field.line,
+                        type_node=field.type_node,
+                        terminal=(
+                            terminal_head(shape_from_node(ast.source_bytes, field.type_node))
+                            if field.type_node is not None else None
+                        ),
                     )
                     for field_name, field in record.fields.items()
                 },
@@ -575,37 +348,6 @@ class Checker:
                         )
                     )
         return result
-
-    def _known_records(
-        self, summary: ModuleSummary
-    ) -> Tuple[Dict[str, RecordInfo], Dict[str, Dict[str, RecordInfo]]]:
-        local = dict(summary.records)
-        imported: Dict[str, Dict[str, RecordInfo]] = {}
-        for alias, imp in self.imported_summaries(summary).items():
-            imported[alias] = imp.records
-        return local, imported
-
-    def _resolve_record(
-        self,
-        type_text: str,
-        local: Dict[str, RecordInfo],
-        imported: Dict[str, Dict[str, RecordInfo]],
-    ) -> Optional[RecordInfo]:
-        # A record result is the terminal codomain of a signature.  Resolve
-        # that head first, rather than returning the first record name that
-        # happens to occur in a binder earlier in the signature.
-        terminal = terminal_type_head(type_text)
-        if terminal is not None:
-            local_match = local.get(terminal)
-            if local_match is not None:
-                return local_match
-
-        # Prefer qualified references.
-        for alias, records in imported.items():
-            for rname, rec in records.items():
-                if re.search(rf"\b{re.escape(alias)}\.{re.escape(rname)}\b", type_text):
-                    return rec
-        return None
 
     def _record_shape_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
         result: List[Diagnostic] = []
