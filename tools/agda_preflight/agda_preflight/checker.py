@@ -10,6 +10,7 @@ import tree_sitter_agda
 
 from .rules import extended_diagnostics
 from .ast_index import AstIndex, build_ast_index, significant_tokens, typed_binders
+from .shapes import shape_from_node, terminal_head, explicit_arity
 
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
@@ -44,6 +45,7 @@ class FieldInfo:
     name: str
     type_text: str
     line: int
+    type_node: object | None = None
 
     @property
     def terminal(self) -> Optional[str]:
@@ -66,6 +68,7 @@ class SignatureInfo:
     names: Tuple[str, ...]
     type_text: str
     line: int
+    type_node: object | None = None
 
 
 @dataclass
@@ -378,6 +381,7 @@ class Checker:
                 names=signature.names,
                 type_text=signature.type_text,
                 line=signature.line,
+                type_node=signature.type_node,
             )
             for name, signature in ast.signatures.items()
         }
@@ -604,65 +608,102 @@ class Checker:
         return None
 
     def _record_shape_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
-        local, imported = self._known_records(summary)
         result: List[Diagnostic] = []
+        imported = self.imported_summaries(summary)
 
-        for def_name, def_line, body in _record_blocks(summary.source):
-            sig = summary.signatures.get(def_name)
-            if sig is None:
-                continue
-            target = self._resolve_record(sig.type_text, local, imported)
-            if target is None:
-                continue
-            binders = _binder_types(sig.type_text)
-            assigns = _assignments(body)
+        def resolve_record_from_signature(signature):
+            if signature is None or signature.type_node is None:
+                return None
+            head = terminal_head(shape_from_node(summary.ast.source_bytes, signature.type_node))
+            if not head:
+                return None
+            if "." in head:
+                alias, record_name = head.rsplit(".", 1)
+                owner = imported.get(alias)
+                if owner is not None:
+                    record = owner.ast.records.get(record_name)
+                    if record is not None:
+                        return owner, record
+            record = summary.ast.records.get(head)
+            if record is not None:
+                return summary, record
+            return None
 
-            for field_name, rhs in assigns.items():
-                expected = target.fields.get(field_name)
-                if expected is None:
+        def resolve_binder_record(signature, binder_name):
+            if signature is None or signature.type_node is None:
+                return None
+            for binder in typed_binders(summary.ast.source_bytes, signature.type_node):
+                if binder.name != binder_name:
                     continue
-                expected_terminal = expected.terminal
-                if expected_terminal is None:
-                    continue
-
-                # High-confidence pattern:
-                #   field = λ n → projection A n
-                lm = re.match(
-                    rf"λ\s+({_IDENT})\s*→\s*({_IDENT})\s+({_IDENT})\s+\1\b",
-                    re.sub(r"\s+", " ", rhs),
+                words = (
+                    binder.type_text
+                    .replace("(", " ")
+                    .replace(")", " ")
+                    .replace("{", " ")
+                    .replace("}", " ")
+                    .split()
                 )
-                if not lm:
-                    continue
-                projection, record_var = lm.group(2), lm.group(3)
-                binder_type = binders.get(record_var)
-                if binder_type is None:
-                    continue
-                source_record = self._resolve_record(binder_type, local, imported)
-                if source_record is None:
-                    continue
-                actual_field = source_record.fields.get(projection)
-                if actual_field is None:
-                    continue
-                actual_terminal = actual_field.terminal
-                if actual_terminal is None or actual_terminal == expected_terminal:
-                    continue
+                for word in words:
+                    clean = word.strip(",")
+                    if "." in clean:
+                        alias, record_name = clean.rsplit(".", 1)
+                        owner = imported.get(alias)
+                        if owner is not None and record_name in owner.ast.records:
+                            return owner, owner.ast.records[record_name]
+                    if clean in summary.ast.records:
+                        return summary, summary.ast.records[clean]
+            return None
 
-                # Only report terminal heads that clearly denote a sort/type
-                # boundary.  Avoid guessing on arbitrary mathematical carriers.
-                sortish = {"Set", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}
-                if expected_terminal not in sortish and actual_terminal not in sortish:
-                    continue
+        for record_expr in summary.ast.record_expressions:
+            if not record_expr.owner_function:
+                continue
+            signature = summary.ast.signatures.get(record_expr.owner_function)
+            target_ref = resolve_record_from_signature(signature)
+            if target_ref is None:
+                continue
+            target_owner, target = target_ref
+            target_bytes = target_owner.ast.source_bytes
 
+            for assignment in record_expr.assignments:
+                expected = target.fields.get(assignment.name)
+                if expected is None or expected.type_node is None or assignment.expr_node is None:
+                    continue
+                expected_head = terminal_head(shape_from_node(target_bytes, expected.type_node))
+                tokens = significant_tokens(summary.ast.source_bytes, assignment.expr_node)
+
+                # High-confidence structural form:
+                #   λ n → projection A n
+                arrow_positions = [i for i, token in enumerate(tokens) if token.text in {"→", "->"}]
+                body_tokens = tokens[arrow_positions[-1] + 1:] if arrow_positions else tokens
+                if len(body_tokens) < 2:
+                    continue
+                projection = body_tokens[0].text
+                receiver = body_tokens[1].text
+                source_ref = resolve_binder_record(signature, receiver)
+                if source_ref is None:
+                    continue
+                source_owner, source_record = source_ref
+                actual = source_record.fields.get(projection)
+                if actual is None or actual.type_node is None:
+                    continue
+                actual_head = terminal_head(
+                    shape_from_node(source_owner.ast.source_bytes, actual.type_node)
+                )
+                if expected_head is None or actual_head is None or expected_head == actual_head:
+                    continue
+                sortish = {"Set", "Set₀", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}
+                if expected_head not in sortish and actual_head not in sortish:
+                    continue
                 result.append(
                     Diagnostic(
                         "TSAGDA003",
                         (
-                            f"record field {field_name} expects terminal codomain "
-                            f"{expected_terminal}, but {projection} from "
-                            f"{source_record.name} has terminal codomain {actual_terminal}."
+                            f"record field {assignment.name} expects terminal codomain "
+                            f"{expected_head}, but {projection} from "
+                            f"{source_record.name} has terminal codomain {actual_head}."
                         ),
                         summary.path,
-                        def_line,
+                        assignment.line,
                         1,
                         (
                             "Align the source record field kind with the destination "
