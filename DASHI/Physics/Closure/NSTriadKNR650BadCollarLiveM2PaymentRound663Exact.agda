@@ -54,7 +54,14 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenc
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredCovarianceFactorExact as Centered
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBonyLiveExact as Bony
 import DASHI.Physics.Closure.NSTriadKNSelfPairFixedResolventTrajectoryRound561Exact as R561
-import DASHI.Physics.Closure.NSTriadKNLiteralCutoffTrajectorySupportRound405Exact as R405
+import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
+import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
+import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
+import DASHI.Physics.Closure.NSTriadKNR291ActualGramDerivativeCompilerRound417Exact as R417
+import DASHI.Physics.Closure.NSTriadKNR290PairFluxDerivativeCompilerRound416Exact as R416
+import DASHI.Physics.Closure.NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact as R564
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Energy
+import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedEndpointCompilerExact as Endpoint
 import DASHI.Physics.Closure.NSTriadKNSignedRateVectorPaymentToR503Exact as Order
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact as R661
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact as R662
@@ -72,29 +79,36 @@ module LiveM2
     (ScalarDerivativeOf :
       (Time → ℚ) → (Time → ℚ) → Set)
     (projectedCross :
-      R661.R426.ProjectedCrossDerivativeCalculus Time VectorDerivativeOf)
+      R426.ProjectedCrossDerivativeCalculus Time VectorDerivativeOf)
     (vectorAlgebra :
-      R661.R425.VectorDerivativeAlgebra Time VectorDerivativeOf)
+      R425.VectorDerivativeAlgebra Time VectorDerivativeOf)
     (zeroCalculus :
-      R661.R594.VectorZeroDerivative Time VectorDerivativeOf)
+      Endpoint.VectorZeroDerivative Time VectorDerivativeOf)
     (hermitianCalculus :
-      R661.R417.HermitianDerivativeCalculus
+      R417.HermitianDerivativeCalculus
         Time VectorDerivativeOf ScalarDerivativeOf)
     (scalarScaleCalculus :
-      R661.R416.ScalarConstantDerivativeCalculus
+      R416.ScalarConstantDerivativeCalculus
         Time ScalarDerivativeOf)
     (FTC :
-      R661.R564.ScalarFundamentalTheorem564
+      R564.ScalarFundamentalTheorem564
         Time initialTime integrateTo ScalarDerivativeOf)
+    (integrationLinearity :
+      Energy.ScalarIntegrationLinearity Time integrateTo)
     (D :
-      R661.R408.LiteralDynamics.LiteralRHSTrajectoryData
+      R408.LiteralDynamics.LiteralRHSTrajectoryData
         Time initialTime integrateTo VectorDerivativeOf)
-    (R :
-      R405.LiteralCutoffSupport.LiteralNonzeroCutoffTrajectory
-        (R661.R408.LiteralDynamics.literalPhysicalTrajectory
-          Time initialTime integrateTo VectorDerivativeOf D)) where
+    (trajectoryViscosityNonnegative : 0ℚ ≤
+      R561.FixedSelfPair.commonNu
+        Time initialTime integrateTo VectorDerivativeOf D) where
 
-  module Sp = R661.BadCollarSpacetime
+  module Sp = R661.Spacetime
+    Time initialTime integrateTo
+    VectorDerivativeOf ScalarDerivativeOf
+    projectedCross vectorAlgebra zeroCalculus
+    hermitianCalculus scalarScaleCalculus FTC integrationLinearity D
+
+  module End = Endpoint.Endpoint
     Time initialTime integrateTo
     VectorDerivativeOf ScalarDerivativeOf
     projectedCross vectorAlgebra zeroCalculus
@@ -103,22 +117,16 @@ module LiveM2
   module Fixed = R561.FixedSelfPair
     Time initialTime integrateTo VectorDerivativeOf
 
-  module Support = R405.LiteralCutoffSupport
-    Time initialTime integrateTo VectorDerivativeOf
-
   nu : ℚ
   nu = Fixed.commonNu D
 
-  nuPositive : Positive nu
-  nuPositive = Support.physicalViscosityPositive R
-
   nuNonnegative : 0ℚ ≤ nu
-  nuNonnegative = ℚP.<⇒≤ (ℚP.positive⁻¹ nu)
+  nuNonnegative = trajectoryViscosityNonnegative
 
   modalRateAtFixed :
     (cutoff : Nat) (time : Time) (mode : Z3.FourierMode) →
-    Sp.End.rateAt cutoff time mode
-    ≡ Centered.modalViscousRate nu Sp.End.I mode
+    End.rateAt cutoff time mode
+    ≡ Centered.modalViscousRate nu End.I mode
   modalRateAtFixed cutoff time mode =
     trans
       (Fixed.physicalDecayRateFixed561 D cutoff time mode)
@@ -127,9 +135,9 @@ module LiveM2
   cellRateAtFixed :
     (cutoff : Nat) (time : Time)
     (tau : Physical.PhysicalTriadIncidence) →
-    Pair.cellRate (Sp.End.rateAt cutoff time) tau
+    Pair.cellRate (End.rateAt cutoff time) tau
     ≡
-    Pair.cellRate (Centered.modalViscousRate nu Sp.End.I) tau
+    Pair.cellRate (Centered.modalViscousRate nu End.I) tau
   cellRateAtFixed cutoff time tau =
     cong₂ _+_
       (modalRateAtFixed cutoff time (Physical.p tau))
@@ -140,9 +148,9 @@ module LiveM2
       (output : Z3.FourierMode)
       (time : Time) =
     R662.PairDifferenceM2
-      {E = Sp.End.E} {I = Sp.End.I}
-      nu nuNonnegative Sp.End.S
-      (Sp.End.velocityAt cutoff time)
+      {E = End.E} {I = End.I}
+      nu nuNonnegative End.S
+      (End.velocityAt cutoff time)
       cutoff output
 
   pairDifferenceSameObject :
@@ -152,9 +160,9 @@ module LiveM2
   pairDifferenceSameObject cutoff output time =
     trans
       (Bony.pairDifferenceRateTransport
-        (Pair.cellRate (Sp.End.rateAt cutoff time))
-        (Pair.cellRate (Centered.modalViscousRate nu Sp.End.I))
-        (Sp.End.workAt cutoff output time)
+        (Pair.cellRate (End.rateAt cutoff time))
+        (Pair.cellRate (Centered.modalViscousRate nu End.I))
+        (End.workAt cutoff output time)
         (cellRateAtFixed cutoff time)
         (Output.physicalOutputFiber cutoff output))
       refl
