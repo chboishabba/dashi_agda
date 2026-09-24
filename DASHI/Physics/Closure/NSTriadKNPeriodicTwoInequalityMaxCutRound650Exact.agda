@@ -47,6 +47,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarCauchyCouplingRound666Exact a
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact as R667
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarExternalResidualFullSquareRound668Exact as R668
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarCanonicalExternalFullSquareRound669Exact as R669
+import DASHI.Physics.Closure.NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact as R670
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -729,6 +730,18 @@ round650C2CanonicalExternalNetworkPaymentClosed : Bool
 round650C2CanonicalExternalNetworkPaymentClosed =
   R669.round669ExternalNetworkQuantitativePaymentClosed
 
+round650C2WeightedExternalProductRuleCommutatorClosed : Bool
+round650C2WeightedExternalProductRuleCommutatorClosed =
+  R670.round670WeightedExternalProductRuleCommutatorClosed
+
+round650C2WeightedExternalReindexingIntroducesEstimate : Bool
+round650C2WeightedExternalReindexingIntroducesEstimate =
+  R670.round670IntroducesEstimate
+
+round650C2WeightedExternalSignedPaymentClosed : Bool
+round650C2WeightedExternalSignedPaymentClosed =
+  R670.round670ExternalSignedPaymentClosed
+
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue :
   round650C2ExternalNetworkOnLiteralResidualFullSquare ≡ true
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue =
@@ -768,6 +781,21 @@ round650C2CanonicalExternalNetworkPaymentClosedIsFalse :
   round650C2CanonicalExternalNetworkPaymentClosed ≡ false
 round650C2CanonicalExternalNetworkPaymentClosedIsFalse =
   R669.round669ExternalNetworkQuantitativePaymentClosedIsFalse
+
+round650C2WeightedExternalProductRuleCommutatorClosedIsTrue :
+  round650C2WeightedExternalProductRuleCommutatorClosed ≡ true
+round650C2WeightedExternalProductRuleCommutatorClosedIsTrue =
+  R670.round670WeightedExternalProductRuleCommutatorClosedIsTrue
+
+round650C2WeightedExternalReindexingIntroducesEstimateIsFalse :
+  round650C2WeightedExternalReindexingIntroducesEstimate ≡ false
+round650C2WeightedExternalReindexingIntroducesEstimateIsFalse =
+  R670.round670IntroducesEstimateIsFalse
+
+round650C2WeightedExternalSignedPaymentClosedIsFalse :
+  round650C2WeightedExternalSignedPaymentClosed ≡ false
+round650C2WeightedExternalSignedPaymentClosedIsFalse =
+  R670.round670ExternalSignedPaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
