@@ -1293,12 +1293,10 @@ def extended_diagnostics(checker, s, D):
 
 def api_snapshot(checker):
     modules = {}
-    for path in checker.root.rglob("*.agda"):
+    for path in checker.repository_agda_files():
         try:
             rel = path.relative_to(checker.root)
         except ValueError:
-            continue
-        if set(rel.parts) & {".cache", "build", "dist", "vendor", "third_party", "tmp"}:
             continue
         try:
             s = checker.parse_summary(path)
