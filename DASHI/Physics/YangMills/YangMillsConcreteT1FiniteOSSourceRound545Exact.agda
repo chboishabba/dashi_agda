@@ -181,5 +181,9 @@ round545IndependentFiniteWilsonRPApplicationRequired = false
 
 -- Bosonic applicability is still genuine source content, but is no longer an
 -- independently selectable family/weld downstream of T1.
+literalRound545BosonicSameFamilyContentLevel : ProofLevel
+literalRound545BosonicSameFamilyContentLevel =
+  Bosonic.literalCMP119BosonicObservableAttachmentLevel
+
 literalRound545ConcreteT1FiniteOSSourceLevel : ProofLevel
 literalRound545ConcreteT1FiniteOSSourceLevel = conditional
