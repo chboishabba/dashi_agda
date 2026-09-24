@@ -28,8 +28,8 @@ import DASHI.Physics.Foundations.GRQFTBalancedDECRepulsiveShellFamilyExact as Fa
 -- multiplication.  The shell has positive surface energy, tangential tension,
 -- NEC/WEC/DEC compatibility, SEC violation, and outward exterior acceleration.
 --
--- The remaining QFT theorem is scalar-amplitude dynamics/realization, not
--- another tensor-shape identification.
+-- The remaining source-native QFT theorem is to derive this two-level amplitude
+-- structure from the actual CMP119/YM dynamics, not another tensor-shape identification.
 ------------------------------------------------------------------------
 
 record GeometrySelectedVacuumAmplitudes : Set where
@@ -71,8 +71,8 @@ canonicalGeometrySelectedVacuumAmplitudes =
 -- The still-open physical producer is explicitly scalar.
 ------------------------------------------------------------------------
 
-record CMP119VacuumAmplitudeDynamicsReceipt : Set where
-  constructor cmp119-vacuum-amplitude-dynamics-receipt
+record CMP119VacuumAmplitudeModelReceipt : Set where
+  constructor cmp119-vacuum-amplitude-model-receipt
   field
     interiorAmplitudeProduced : ℚ
     exteriorAmplitudeProduced : ℚ
@@ -83,11 +83,11 @@ record CMP119VacuumAmplitudeDynamicsReceipt : Set where
     exteriorAmplitudeIsSelected :
       exteriorAmplitudeProduced ≡ Int.+ 3 / 8
 
-    sameVacuumStressRayDynamicallyAccessible : Set
-    sameVacuumStressRayDynamicallyAccessibleEvidence :
-      sameVacuumStressRayDynamicallyAccessible
+    sameVacuumStressRayHasTwoStableLevels : Set
+    sameVacuumStressRayHasTwoStableLevelsEvidence :
+      sameVacuumStressRayHasTwoStableLevels
 
-open CMP119VacuumAmplitudeDynamicsReceipt public
+open CMP119VacuumAmplitudeModelReceipt public
 
 ------------------------------------------------------------------------
 -- MAX-CUT CONDITIONAL ONLY ON NORMALIZED TENSOR + AMPLITUDE DYNAMICS
@@ -100,7 +100,7 @@ record DECRepulsiveExteriorMaxCut
     (normalized :
       Stress.NormalizedCrossSectorStressInstance
         StressTensor evaluator cmp119Stress)
-    (amplitudes : CMP119VacuumAmplitudeDynamicsReceipt) : Set where
+    (amplitudes : CMP119VacuumAmplitudeModelReceipt) : Set where
   constructor dec-repulsive-exterior-max-cut
   field
     geometryAmplitudes :
@@ -149,7 +149,7 @@ decRepulsiveExteriorMaxCut :
     {normalized :
       Stress.NormalizedCrossSectorStressInstance
         StressTensor evaluator cmp119Stress} →
-  (amplitudes : CMP119VacuumAmplitudeDynamicsReceipt) →
+  (amplitudes : CMP119VacuumAmplitudeModelReceipt) →
   DECRepulsiveExteriorMaxCut
     evaluator cmp119Stress normalized amplitudes
 decRepulsiveExteriorMaxCut amplitudes =
@@ -175,7 +175,7 @@ record DECRepulsiveExteriorMaxCutBoundary : Set where
     negativeMetricMassRequired : Bool
     negativeNewtonGRequired : Bool
     additionalTensorWeldRequired : Bool
-    qftAmplitudeDynamicsStillRequired : Bool
+    sourceNativeQFTAmplitudeDerivationStillRequired : Bool
     SIStressCalibrationStillRequired : Bool
 
 canonicalDECRepulsiveExteriorMaxCutBoundary :
