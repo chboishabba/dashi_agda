@@ -133,7 +133,7 @@ clockTaggedRunFromOriginal {machine} time (suc steps) start finish run
       ≡ just (advanceClock time (suc steps) , finish)
     impossible ()
 ... | just middle
-    rewrite advanceClockSucStart time steps =
+    rewrite sym (advanceClockSucStart time steps) =
   clockTaggedRunFromOriginal
     (suc time)
     steps
