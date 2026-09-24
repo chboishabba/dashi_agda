@@ -49,6 +49,10 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarLiveM2PaymentRound663Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarRateWeightedWorkRound664Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarRateWeightedKernelRound665Exact.agda'
       - '.github/workflows/ns-r650-quantitative-diagnostics.yml'
   workflow_dispatch:
 
@@ -84,7 +88,7 @@ jobs:
       - name: Install Agda semantic preflight
         run: python -m pip install -e tools/agda_preflight
 
-      - name: Preflight R655-R658 analytic frontier
+      - name: Preflight R655-R665 analytic frontier
         run: |
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650EuclideanCollarRefinementRound656Exact.agda
@@ -93,4 +97,8 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarLiveM2PaymentRound663Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarRateWeightedWorkRound664Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarRateWeightedKernelRound665Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact.agda
