@@ -11,6 +11,8 @@ files=(
   DASHI/Physics/Foundations/GRQFTPostMergeMaxCutExact.agda
   DASHI/Physics/Foundations/GRQFTPostMergeMaxCutValidation.agda
   DASHI/Physics/Foundations/GRQFTActiveGaugeSectorTotalizationExact.agda
+  DASHI/Physics/Foundations/CMP119SingleActiveSectorSourceFactorisationExact.agda
+  DASHI/Physics/Foundations/CMP119SingleActiveSectorSourceFactorisationValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda

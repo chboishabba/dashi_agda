@@ -20,6 +20,8 @@ on:
       - 'DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda'
       - 'DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda'
       - 'scripts/grqft_w4_projection_operator_ablation.py'
+      - 'DASHI/Physics/Foundations/CMP119SingleActiveSectorSourceFactorisationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SingleActiveSectorSourceFactorisationValidation.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
