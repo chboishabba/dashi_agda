@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, List, Optional
 import json
+import shlex
 
 import pytest
 
@@ -98,6 +99,12 @@ def pytest_addoption(parser):
         default="agda",
         help="Agda executable for --agda-scope-check",
     )
+    group.addoption(
+        "--agda-extra-args",
+        action="store",
+        default="",
+        help="extra arguments passed to Agda scope/typecheck refinement subprocesses",
+    )
 
 
 def pytest_configure(config):
@@ -134,6 +141,9 @@ def _checker(config) -> Checker:
                 "--agda-scope-command, --agda-scope-check, "
                 "--agda-typecheck-oracle and --agda-auto-refine are mutually exclusive"
             )
+        agda_extra_args = tuple(
+            shlex.split(config.getoption("--agda-extra-args") or "")
+        )
         scope_backend = None
         if command:
             scope_backend = ExternalScopeBackend(command, cwd=root)
@@ -141,17 +151,20 @@ def _checker(config) -> Checker:
             scope_backend = AgdaScopeCheckBackend(
                 config.getoption("--agda-bin"),
                 cwd=root,
+                extra_args=agda_extra_args,
             )
         elif typecheck_oracle:
             scope_backend = AgdaTypecheckBackend(
                 config.getoption("--agda-bin"),
                 cwd=root,
+                extra_args=agda_extra_args,
             )
         elif auto_refine:
             scope_backend = AgdaAutoRefineBackend(
                 config.getoption("--agda-bin"),
                 cwd=root,
                 typecheck=auto_refine == "typecheck",
+                extra_args=agda_extra_args,
             )
         cached = Checker(root, scope_backend=scope_backend)
         setattr(config, "_dashi_agda_checker", cached)
