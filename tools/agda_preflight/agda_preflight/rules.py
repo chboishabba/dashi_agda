@@ -50,78 +50,6 @@ def _split_arrows(text: str) -> List[str]:
     out.append("".join(buf).strip())
     return out
 
-def _arity(text: str) -> int:
-    parts = _split_arrows(text)
-    return sum(1 for d in parts[:-1] if not d.strip().startswith("{"))
-
-def _terminal(text: str) -> Optional[str]:
-    parts = _split_arrows(text)
-    if not parts:
-        return None
-    tail = parts[-1].strip().strip("()")
-    m = re.match(r"([A-Za-z_][A-Za-z0-9_.'₀-₉ω]*|[⊤⊥])", tail)
-    return m.group(1) if m else None
-
-def _collect_data(source: str):
-    lines = source.splitlines()
-    data, ctors = {}, {}
-    i = 0
-    while i < len(lines):
-        m = re.match(rf"^data\s+({_IDENT})\b(.*?)\s*:\s*(.*?)\s+where\s*$", lines[i])
-        if not m:
-            i += 1; continue
-        name, result = m.group(1), m.group(3)
-        d = DataDecl(name, i + 1, {}, "→" in result or "->" in result)
-        j = i + 1
-        while j < len(lines):
-            line = lines[j]
-            if line and not line[0].isspace():
-                break
-            cm = re.match(rf"^\s+({_IDENT})\s*:\s*(.*)$", line)
-            if cm:
-                cname = cm.group(1); parts = [cm.group(2).strip()]; k = j + 1
-                while k < len(lines):
-                    nxt = lines[k]
-                    if nxt and not nxt[0].isspace(): break
-                    if re.match(rf"^\s+{_IDENT}\s*:", nxt): break
-                    if nxt.strip(): parts.append(nxt.strip())
-                    k += 1
-                typ = " ".join(parts)
-                c = Constructor(cname, name, typ, j + 1, _arity(typ))
-                d.constructors[cname] = c; ctors[cname] = c; j = k; continue
-            j += 1
-        data[name] = d; i = max(i + 1, j)
-    return data, ctors
-
-def _lhs_arity(lhs: str) -> int:
-    rest = lhs.split(maxsplit=1)
-    if len(rest) == 1: return 0
-    text = rest[1]; depth = braces = count = 0; token = False
-    for ch in text + " ":
-        if ch == "{": braces += 1
-        elif ch == "}": braces = max(0, braces - 1)
-        elif ch == "(":
-            depth += 1
-            if depth == 1 and braces == 0: count += 1
-        elif ch == ")": depth = max(0, depth - 1)
-        elif ch.isspace() and depth == 0:
-            if token and braces == 0: count += 1
-            token = False
-        elif depth == 0 and braces == 0: token = True
-    return count
-
-def _resolve_record(checker, summary, type_text: str):
-    terminal = _terminal(type_text)
-    if terminal in summary.records: return summary.records[terminal]
-    imported = checker.imported_summaries(summary)
-    if terminal and "." in terminal:
-        alias, name = terminal.rsplit(".", 1); mod = imported.get(alias)
-        if mod and name in mod.records: return mod.records[name]
-    for alias, mod in imported.items():
-        for name, rec in mod.records.items():
-            if re.search(rf"\b{re.escape(alias)}\.{re.escape(name)}\b", type_text): return rec
-    return None
-
 def _diag(D, code, msg, s, line, col=1, hint=None, severity="error", confidence="high"):
     return D(code, msg, s.path, line, col, hint, severity, confidence)
 
@@ -1195,31 +1123,63 @@ def extended_diagnostics(checker, s, D):
             if ident and ident in known_term_heads and ident not in data and ident not in s.records:
                 out.append(_diag(D, "TSAGDA071", f"known term {ident} is supplied where field {fname} expects a type/sort", s, assignment.line))
 
-    # TSAGDA077: visible type-constructor parameter arity.
-    type_params = {}
-    for i, line in enumerate(lines, 1):
-        dm = re.match(rf"^(?:data|record)\s+({_IDENT})\s*(.*?)\s*:\s*", line)
-        if dm:
-            type_params[dm.group(1)] = len(re.findall(r"[\({]\s*[A-Za-z_][A-Za-z0-9_']*\s*:", dm.group(2)))
-    for tname, want in type_params.items():
-        if want == 0: continue
-        for name, sig in s.signatures.items():
-            for m in re.finditer(rf"\b{re.escape(tname)}\b((?:\s+{_IDENT})*)", sig.type_text):
-                got = len(m.group(1).split())
-                if got != want:
-                    out.append(_diag(D, "TSAGDA077", f"type constructor {tname} has {want} visible parameters but use supplies {got}", s, sig.line, severity="warning", confidence="medium"))
+    # TSAGDA077: AST-visible type-constructor parameter arity.
+    type_params = {
+        name: explicit_declaration_parameter_count(s.ast.source_bytes, record.node)
+        for name, record in s.ast.records.items()
+        if record.node is not None
+    }
+    type_params.update(
+        {
+            name: explicit_declaration_parameter_count(s.ast.source_bytes, decl.node)
+            for name, decl in s.ast.data.items()
+            if decl.node is not None
+        }
+    )
+    for name, sig in s.ast.signatures.items():
+        if sig.type_node is None:
+            continue
+        covered_spans = []
+        for app in applications(s.ast.source_bytes, sig.type_node):
+            short = app.head.rsplit(".", 1)[-1]
+            want = type_params.get(short)
+            if want is None:
+                continue
+            covered_spans.append((app.head_node.start_byte, app.head_node.end_byte, short))
+            got = len(app.explicit_args)
+            if got != want:
+                out.append(_diag(D, "TSAGDA077", f"type constructor {short} has {want} visible parameters but use supplies {got}", s, app.head_node.start_point[0] + 1, app.head_node.start_point[1] + 1, severity="warning", confidence="medium"))
+        tokens = significant_tokens(s.ast.source_bytes, sig.type_node)
+        for token in tokens:
+            short = token.text.rsplit(".", 1)[-1]
+            want = type_params.get(short)
+            if not want:
+                continue
+            if any(start <= token.start_byte < end and item == short for start, end, item in covered_spans):
+                continue
+            out.append(_diag(D, "TSAGDA077", f"type constructor {short} has {want} visible parameters but is used bare", s, token.line, token.column, severity="warning", confidence="medium"))
 
-    # TSAGDA113: only the high-confidence single-identifier RHS case.
+    # TSAGDA113: high-confidence single-identifier RHS scope check.
     global_names = set(s.signatures) | set(s.records) | set(data) | set(ctors) | set(imported)
-    for name, cs in clauses.items():
-        for line, lhs, rhs in cs:
-            rm = re.fullmatch(rf"({_IDENT})", rhs)
-            if not rm: continue
-            ident = rm.group(1)
-            lhs_names = set(re.findall(rf"\b({_IDENT})\b", lhs))
+    for name, clause_items in s.ast.clauses.items():
+        for clause in clause_items:
+            if clause.rhs_node is None:
+                continue
+            rhs_tokens = [
+                token for token in significant_tokens(s.ast.source_bytes, clause.rhs_node)
+                if token.node_type in {"qid", "id"}
+            ]
+            all_rhs_tokens = significant_tokens(s.ast.source_bytes, clause.rhs_node)
+            if len(rhs_tokens) != 1 or len(all_rhs_tokens) != 1:
+                continue
+            ident = rhs_tokens[0].text
+            lhs_names = {
+                token.text
+                for token in significant_tokens(s.ast.source_bytes, clause.lhs_node)
+                if token.node_type in {"qid", "id", "bid"}
+            }
             if ident not in lhs_names and ident not in global_names and ident not in {"Set","Nat","Bool","String","refl","tt"}:
-                out.append(_diag(D, "TSAGDA113", f"RHS identifier {ident} has no evident local or top-level binding", s, line, severity="warning", confidence="medium"))
-
+                out.append(_diag(D, "TSAGDA113", f"RHS identifier {ident} has no evident local or top-level binding", s, clause.line, rhs_tokens[0].column, severity="warning", confidence="medium"))
 
     # TSAGDA104: equality proof used as whole RHS for a non-equality target.
     for name, cs in clauses.items():
@@ -1229,30 +1189,34 @@ def extended_diagnostics(checker, s, D):
             if rhs in eq_shapes:
                 out.append(_diag(D, "TSAGDA104", f"equality proof {rhs} is used as the value of non-equality result {name}", s, line))
 
-    # TSAGDA113/114/115: bounded clause/scope/signature checks.
-    sig_occ = {}
-    for i, line in enumerate(lines, 1):
-        m = re.match(rf"^({_IDENT})\s*:\s*(.*)$", line)
-        if m: sig_occ.setdefault(m.group(1), []).append((i, m.group(2).strip()))
-    for name, occ in sig_occ.items():
-        if len({t for _, t in occ}) > 1:
-            out.append(_diag(D, "TSAGDA115", f"{name} has multiple incompatible top-level signatures", s, occ[-1][0]))
-    for name, cs in clauses.items():
-        sig = s.signatures.get(name)
-        if not sig: continue
-        expected = _terminal(sig.type_text)
-        for line, lhs, rhs in cs:
-            rm = re.match(rf"({_IDENT})\b", rhs)
-            if rm and rm.group(1) in ctors and expected and ctors[rm.group(1)].datatype != expected:
-                out.append(_diag(D, "TSAGDA114", f"clause result constructor head disagrees with declared result head {expected}", s, line))
+    # TSAGDA114/115: AST clause result and duplicate signature checks.
+    for name, occurrences in s.ast.signature_occurrences.items():
+        if len(occurrences) <= 1:
+            continue
+        shapes = []
+        for occurrence in occurrences:
+            tokens = tuple(
+                token.text
+                for token in significant_tokens(s.ast.source_bytes, occurrence.type_node)
+            ) if occurrence.type_node is not None else ()
+            shapes.append(tokens)
+        if len(set(shapes)) > 1:
+            out.append(_diag(D, "TSAGDA115", f"{name} has multiple incompatible top-level signatures", s, occurrences[-1].line))
 
-    # TSAGDA123: a Set-valued field whose written codomain is a known term declaration.
-    known_terms = set(clauses) | set(ctors)
-    for rname, rec in s.records.items():
-        for fname, fi in rec.fields.items():
-            head = _terminal(fi.type_text)
-            if head in known_terms and head not in data and head not in s.records:
-                out.append(_diag(D, "TSAGDA123", f"projection {rname}.{fname} has known term {head} in type position", s, fi.line))
+    for name, clause_items in s.ast.clauses.items():
+        sig = s.ast.signatures.get(name)
+        if sig is None or sig.type_node is None:
+            continue
+        expected = terminal_head(shape_from_node(s.ast.source_bytes, sig.type_node))
+        for clause in clause_items:
+            if clause.rhs_node is None:
+                continue
+            view = application_view(s.ast.source_bytes, clause.rhs_node)
+            if view is None:
+                continue
+            ctor = ctors.get(view.head.rsplit(".", 1)[-1])
+            if ctor is not None and expected and ctor.datatype != expected.rsplit(".", 1)[-1]:
+                out.append(_diag(D, "TSAGDA114", f"clause result constructor head disagrees with declared result head {expected}", s, clause.line))
 
     # TSAGDA154: ambiguous opened mixfix/operator.
     for n, mods in visible.items():
@@ -1284,13 +1248,32 @@ def extended_diagnostics(checker, s, D):
             out.append(_diag(D, "TSAGDA186", f"stale import modifier: {d.message}", s, d.line, d.column, d.hint, severity="warning", confidence="high"))
 
     # TSAGDA207: explicit forward/backward bidi endpoints should reverse.
-    if "Bidi" in s.module_name:
-        forward = next((sig for n, sig in s.signatures.items() if re.search(r"(forward|toTarget|encode)", n, re.I)), None)
-        backward = next((sig for n, sig in s.signatures.items() if re.search(r"(backward|toSource|decode|inverse)", n, re.I)), None)
-        if forward and backward:
-            fp = _split_arrows(forward.type_text); bp = _split_arrows(backward.type_text)
-            if len(fp) >= 2 and len(bp) >= 2:
-                fa, fb, ba, bb = _terminal(fp[0]), _terminal(fp[-1]), _terminal(bp[0]), _terminal(bp[-1])
+    if "bidi" in s.module_name.lower():
+        forward = next(
+            (
+                sig for name, sig in s.ast.signatures.items()
+                if any(word in name.lower() for word in ("forward", "totarget", "encode"))
+            ),
+            None,
+        )
+        backward = next(
+            (
+                sig for name, sig in s.ast.signatures.items()
+                if any(word in name.lower() for word in ("backward", "tosource", "decode", "inverse"))
+            ),
+            None,
+        )
+        if (
+            forward is not None and backward is not None
+            and forward.type_node is not None and backward.type_node is not None
+        ):
+            fshape = shape_from_node(s.ast.source_bytes, forward.type_node)
+            bshape = shape_from_node(s.ast.source_bytes, backward.type_node)
+            if isinstance(fshape, PiShape) and isinstance(bshape, PiShape) and fshape.domains and bshape.domains:
+                fa = terminal_head(fshape.domains[0].head)
+                fb = terminal_head(fshape.codomain)
+                ba = terminal_head(bshape.domains[0].head)
+                bb = terminal_head(bshape.codomain)
                 if all((fa, fb, ba, bb)) and (fa != bb or fb != ba):
                     out.append(_diag(D, "TSAGDA207", f"bidi forward/backward outer heads are not reversed: {fa}->{fb} versus {ba}->{bb}", s, min(forward.line, backward.line), severity="warning", confidence="medium"))
 
