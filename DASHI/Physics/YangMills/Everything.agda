@@ -397,6 +397,11 @@ import DASHI.Physics.YangMills.YangMillsClayFixedGroupMaxCutRound477Exact
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Validation
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact
 
+import DASHI.Physics.YangMills.YangMillsClayExhaustiveResidualClassificationRound507Exact
+import DASHI.Physics.YangMills.YangMillsClayExhaustiveResidualClassificationRound507Validation
+import DASHI.Physics.YangMills.YangMillsClayExhaustiveResearchQueuesRound508Exact
+import DASHI.Physics.YangMills.YangMillsClayExhaustiveResearchQueuesRound508Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
