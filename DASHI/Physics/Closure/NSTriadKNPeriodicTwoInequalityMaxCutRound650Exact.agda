@@ -50,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarCanonicalExternalFullSquareRo
 import DASHI.Physics.Closure.NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact as R670
 import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact as R671
 import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationZeroBranchRound672Exact as R672
+import DASHI.Physics.Closure.NSTriadKNR650ExternalZeroBranchEliminationRound673Exact as R673
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -766,11 +767,19 @@ round650C2ExternalPZeroBranchRetainedExplicitly =
 
 round650C2ExternalPZeroDefectProvedZero : Bool
 round650C2ExternalPZeroDefectProvedZero =
-  R672.round672PZeroDefectProvedZero
+  R673.round673PZeroDefectEliminated
 
 round650C2R606ExternalFoldEqualsR630WithoutDefect : Bool
 round650C2R606ExternalFoldEqualsR630WithoutDefect =
-  R672.round672R606ExternalFoldEqualsR630WithoutDefect
+  R673.round673R606ExternalFoldEqualsR630TotalIncludingZeroBranch
+
+round650C2ExternalPZeroForcingEliminated : Bool
+round650C2ExternalPZeroForcingEliminated =
+  R673.round673ExternalPForcingAtZeroClosed
+
+round650C2ExternalSignedPaymentStillOpenAfterTotalization : Bool
+round650C2ExternalSignedPaymentStillOpenAfterTotalization =
+  R673.round673ExternalSignedPaymentClosed
 
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue :
   round650C2ExternalNetworkOnLiteralResidualFullSquare ≡ true
@@ -852,15 +861,25 @@ round650C2ExternalPZeroBranchRetainedExplicitlyIsTrue :
 round650C2ExternalPZeroBranchRetainedExplicitlyIsTrue =
   R672.round672PZeroBranchRetainedExplicitlyIsTrue
 
-round650C2ExternalPZeroDefectProvedZeroIsFalse :
-  round650C2ExternalPZeroDefectProvedZero ≡ false
-round650C2ExternalPZeroDefectProvedZeroIsFalse =
-  R672.round672PZeroDefectProvedZeroIsFalse
+round650C2ExternalPZeroDefectProvedZeroIsTrue :
+  round650C2ExternalPZeroDefectProvedZero ≡ true
+round650C2ExternalPZeroDefectProvedZeroIsTrue =
+  R673.round673PZeroDefectEliminatedIsTrue
 
-round650C2R606ExternalFoldEqualsR630WithoutDefectIsFalse :
-  round650C2R606ExternalFoldEqualsR630WithoutDefect ≡ false
-round650C2R606ExternalFoldEqualsR630WithoutDefectIsFalse =
-  R672.round672R606ExternalFoldEqualsR630WithoutDefectIsFalse
+round650C2R606ExternalFoldEqualsR630WithoutDefectIsTrue :
+  round650C2R606ExternalFoldEqualsR630WithoutDefect ≡ true
+round650C2R606ExternalFoldEqualsR630WithoutDefectIsTrue =
+  R673.round673R606ExternalFoldEqualsR630TotalIncludingZeroBranchIsTrue
+
+round650C2ExternalPZeroForcingEliminatedIsTrue :
+  round650C2ExternalPZeroForcingEliminated ≡ true
+round650C2ExternalPZeroForcingEliminatedIsTrue =
+  R673.round673ExternalPForcingAtZeroClosedIsTrue
+
+round650C2ExternalSignedPaymentStillOpenAfterTotalizationIsFalse :
+  round650C2ExternalSignedPaymentStillOpenAfterTotalization ≡ false
+round650C2ExternalSignedPaymentStillOpenAfterTotalizationIsFalse =
+  R673.round673ExternalSignedPaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
