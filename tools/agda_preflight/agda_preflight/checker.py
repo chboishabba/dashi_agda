@@ -100,17 +100,33 @@ def _known_syntax_grammar_gap(node, source: str) -> bool:
 
     if parent_type == "source_file" and "import" in texts:
         return True
-    if parent_type in {"source_file", "record_signature"}:
-        if "record" in texts and "where" in texts and "constructor" in texts:
-            return True
-    if parent_type == "record_declarations_block" and texts[:1] == ["constructor"]:
-        return True
-    if parent_type == "source_file" and texts == ["field"]:
-        previous = node.prev_named_sibling
-        if previous is not None:
-            prev_tokens = [token.text for token in significant_tokens(source_bytes, previous)]
-            if prev_tokens[:1] == ["constructor"]:
+
+    # tree-sitter-agda 1.3.3 may split valid record layout across ERROR /
+    # sibling nodes: "where", "constructor", and "field" do not necessarily
+    # appear in one ERROR node or next to each other.
+    if parent_type in {"source_file", "record_signature", "record_declarations_block"}:
+        if any(token in texts for token in ("where", "constructor", "field")):
+            previous = node.prev_named_sibling
+            following = node.next_named_sibling
+            nearby_types = {
+                sibling.type
+                for sibling in (previous, following)
+                if sibling is not None
+            }
+            if nearby_types & {
+                "record",
+                "record_signature",
+                "record_constructor",
+                "fields",
+                "function",
+                "ERROR",
+            }:
                 return True
+            if texts[:1] in (["constructor"], ["field"], ["where"]):
+                return True
+
+    if parent_type == "record_declarations_block" and texts[:1] in (["constructor"], ["field"]):
+        return True
     return False
 
 
