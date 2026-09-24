@@ -502,3 +502,5 @@ import DASHI.Physics.Closure.NSTriadKNR650RateKernelCommutatorEndpointRound685Ex
 import DASHI.Physics.Closure.NSTriadKNR650C2CommutatorSpacetimeEndpointRound686Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650RateLiftedDynamicCancellationRound688Exact
