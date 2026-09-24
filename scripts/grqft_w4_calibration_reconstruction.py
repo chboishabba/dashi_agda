@@ -82,6 +82,10 @@ def fit(shape,data,cov):
     }
 
 def main():
+    import argparse
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, default=OUT)
+    args=parser.parse_args()
     data=load_data(); cov=load_cov(data)
     bins=[{"phiStar":d["phi"],"phiStarLow":d["lo"],"phiStarHigh":d["hi"]} for d in data]
     current=importlib.import_module("DASHI.Physics.Prediction.sigma_dashi")
@@ -122,8 +126,8 @@ def main():
       ],
       "promotesW4":False,
     }
-    OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
+    args.output.parent.mkdir(parents=True,exist_ok=True)
+    args.output.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
     print(json.dumps(result,indent=2,sort_keys=True))
 
 if __name__=="__main__": main()

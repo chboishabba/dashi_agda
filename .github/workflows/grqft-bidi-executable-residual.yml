@@ -24,6 +24,11 @@ on:
       - 'outputs/grqft_einstein_bidi_residual.json'
       - 'outputs/grqft_executable_closure_matrix.json'
       - 'logs/research/w4_z_peak_anchor_dirty_run_20260513.json'
+      - 'DASHI/Physics/Closure/W4CalibrationFailureMechanismExact.agda'
+      - 'DASHI/Physics/Closure/GRQFTSIPhysicalCalibrationBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda'
+      - 'scripts/grqft_w4_calibration_reconstruction.py'
+      - 'outputs/grqft_w4_calibration_reconstruction.json'
       - '.github/workflows/grqft-bidi-executable-residual.yml'
   workflow_dispatch:
 
