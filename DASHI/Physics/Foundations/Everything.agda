@@ -120,3 +120,6 @@ module DASHI.Physics.Foundations.Everything where
 import DASHI.Physics.Foundations.CMP119PinnedYMGRQFTSectorStressBridgeExact
 
 import DASHI.Physics.Foundations.GRQFTPostMergeMaxCutExact
+
+import DASHI.Physics.Foundations.CMP119PinnedYMGRQFTSectorStressBridgeValidation
+import DASHI.Physics.Foundations.GRQFTPostMergeMaxCutValidation
