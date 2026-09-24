@@ -34,7 +34,7 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physi
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.YangMillsConcreteEndpointSemanticsRound511Exact as R511
-import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as R499
+import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as R535
 import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as R498
 import DASHI.Physics.YangMills.YangMillsCylinderLimitOSReflectionPositiveExact as OS2
 import DASHI.Physics.YangMills.YangMillsClayPublishedWilsonRPRound461Exact as R461
@@ -390,7 +390,7 @@ ConcreteVolumeCutoffCompatibility :
   G → Set
 ConcreteVolumeCutoffCompatibility {endpoint = endpoint} source group =
   let projective =
-        R499.projectiveEvents (R511.representationInputs endpoint group)
+        R535.projectiveEvents (R511.representationInputs endpoint group)
   in
   ∀ lower upper
     (restriction : R498.Restricts projective lower upper)
@@ -537,7 +537,7 @@ volumeCutoffCompatibility :
   ConcreteVolumeCutoffCompatibility source group
 volumeCutoffCompatibility {endpoint = endpoint} source group =
   R498.projectiveEventExpectationConsistency
-    (R499.projectiveEvents (R511.representationInputs endpoint group))
+    (R535.projectiveEvents (R511.representationInputs endpoint group))
 
 selectedUVNormalization :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
