@@ -169,6 +169,9 @@ record ReciprocalManifestBoundary : Set where
     leanPrimitiveExtractionCompilerOwned : Bool
     leanEndToEndRouteBCompilerOwned : Bool
     leanPinnedDeltaIdentityOwned : Bool
+    leanCanonicalBishopCompletionBindingInhabited : Bool
+    leanEveryAdmissibleBindingSetoidEquivalentToCanonical : Bool
+    leanHypothesisFreeCanonicalRouteBOwned : Bool
 
     generatedAgdaToLeanReplayObserved : Bool
     leanExactHeadKernelReceiptObserved : Bool
@@ -181,4 +184,5 @@ canonicalReciprocalManifestBoundary :
 canonicalReciprocalManifestBoundary =
   reciprocal-manifest-boundary
     true true true true true true true
+    true true true
     false false false
