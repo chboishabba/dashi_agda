@@ -227,3 +227,33 @@ import DASHI.Physics.Foundations.GRQFTIsraelSurfaceStressMagnitudeExact
 import DASHI.Physics.Foundations.GRQFTKottlerRepulsionParameterWindowExact
 
 import DASHI.Physics.Foundations.GRQFTParameterizedRepulsiveJunctionDesignExact
+
+import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact
+
+import DASHI.Physics.Foundations.GRQFTStressDerivedRepulsiveJunctionFamilyExact
+
+import DASHI.Physics.Foundations.GRQFTIsraelShellEnergyConditionExact
+
+import DASHI.Physics.Foundations.GRQFTGeneralIsraelDECCompatibleShellExact
+
+import DASHI.Physics.Foundations.GRQFTRationalSquareIsraelDesignExact
+
+import DASHI.Physics.Foundations.GRQFTCMP119DECRepulsiveExteriorCompilerExact
+
+import DASHI.Physics.Foundations.GRQFTIsraelBranchMaxCutExact
+
+import DASHI.Physics.Foundations.GRQFTBalancedDECRepulsiveShellFamilyExact
+
+import DASHI.Physics.Foundations.GRQFTTwoVacuumAmplitudePotentialExact
+
+import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveShellFamilyExact
+
+import DASHI.Physics.Foundations.GRQFTNambuGotoTwoVacuumPotentialExact
+
+import DASHI.Physics.Foundations.GRQFTCMP119NambuGotoRepulsiveExteriorCompilerExact
+
+import DASHI.Physics.Foundations.GRQFTNambuGotoSurfaceActionExact
+
+import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact
+
+import DASHI.Physics.Foundations.GRQFTDECRepulsiveExteriorMaxCutExact
