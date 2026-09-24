@@ -31,7 +31,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
@@ -50,6 +50,7 @@ import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenc
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as PhysicalRate
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredInputLaplacianVectorResidualExact as Input
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredMultiplierVectorCovarianceExact as Vector
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCrossGradientCovarianceExact as Cross
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelCrossGradientVectorRound683Exact as R683
 
 F : C3.RealField _
@@ -183,7 +184,7 @@ r683OutputHeatCrossGradientIsInputLaplacianWork :
     mixed = R224.foldVector value items
   in
   nu * C3.normSquared I output * Work.coherentWork mixed mixed
-    - (DASHI.Physics.Closure.NSTriadKNFixedOutputCrossGradientCovarianceExact.two * nu)
+    - (Cross.two * nu)
         * Work.coherentWork mixed
             (R683.crossGradientVector E value cutoff output)
   ≡
