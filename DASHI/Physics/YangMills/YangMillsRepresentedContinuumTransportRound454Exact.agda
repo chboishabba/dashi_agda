@@ -80,7 +80,7 @@ transportExpectationPredicate :
   Predicate (representedExpectation carrier)
 transportExpectationPredicate transport carrier oldReceipt =
   respectsPointwiseEquality transport
-    (Limit.limitExpectation _)
+    (Limit.limitExpectation family)
     (representedExpectation carrier)
     (limitExpectationAgreesPointwiseWithRepresented carrier)
     oldReceipt
@@ -92,4 +92,4 @@ round454WholeMeasureRecordEqualityRequired : Bool
 round454WholeMeasureRecordEqualityRequired = false
 
 round454UnaffectedReceiptTransportUsesOnlyPointwiseExpectationEquality : Bool
-round454UnaffectedReceiptTransportUsesOnlyPointwiseExpectationEquality = false
+round454UnaffectedReceiptTransportUsesOnlyPointwiseExpectationEquality = true
