@@ -317,6 +317,34 @@ quotientDynamicTableCellCount
   * Quotient.stateCount quotient
 
 ------------------------------------------------------------------------
+-- Total represented evaluator size: quotient graph + depth/state table.
+------------------------------------------------------------------------
+
+quotientEvaluationCellCount :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  Quotient.RestrictionSemanticQuotient root →
+  Nat
+quotientEvaluationCellCount quotient =
+  Quotient.quotientGraphCellCount quotient
+  +
+  quotientDynamicTableCellCount quotient
+
+record QuotientEvaluationFitsBudget
+    {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (quotient : Quotient.RestrictionSemanticQuotient root)
+    (budget : Nat) : Set where
+  constructor quotient-evaluation-fits-budget
+  field
+    evaluationFits :
+      quotientEvaluationCellCount quotient
+      Data.Nat.Base.≤
+      budget
+
+open QuotientEvaluationFitsBudget public
+
+------------------------------------------------------------------------
 -- Resource interpretation.
 --
 -- A producer with polynomially/sufficiently small stateCount can represent the
