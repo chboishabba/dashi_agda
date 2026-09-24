@@ -214,6 +214,97 @@ f x = x
     assert any(d.code == "TSAGDA045" for d in hits)
 
 
+
+def test_pointfree_definition_does_not_emit_clause_arity_mismatch(tmp_path):
+    path = write_module(
+        tmp_path,
+        "PointfreeArity",
+        """module PointfreeArity where
+
+id₁ : Set → Set
+id₁ = λ x → x
+""",
+    )
+
+    hits = Checker(tmp_path).check(path)
+    assert not any(d.code in {"TSAGDA045", "TSAGDA110"} for d in hits)
+
+
+def test_synonym_sensitive_clause_arity_is_typechecker_deferred(tmp_path):
+    path = write_module(
+        tmp_path,
+        "SynonymArity",
+        """module SynonymArity where
+
+State : Set₁
+State = Set → Set
+
+f : State
+f x = x
+""",
+    )
+
+    hits = Checker(tmp_path).check(path)
+    arity = [d for d in hits if d.code in {"TSAGDA045", "TSAGDA110"}]
+    assert arity
+    assert all(d.severity == "warning" for d in arity)
+    assert all(d.minimum_evidence == "agda-typechecker" for d in arity)
+    assert all(d.evidence_sufficient is False for d in arity)
+
+
+def test_synonym_sensitive_constructor_head_is_typechecker_deferred(tmp_path):
+    path = write_module(
+        tmp_path,
+        "SynonymConstructor",
+        """module SynonymConstructor where
+
+data D : Set where
+  c : D
+
+Alias : Set
+Alias = D
+
+f : Alias
+f = c
+""",
+    )
+
+    hits = Checker(tmp_path).check(path)
+    ctor_hits = [
+        d
+        for d in hits
+        if d.code in {"TSAGDA072", "TSAGDA075", "TSAGDA114"}
+    ]
+    assert ctor_hits
+    assert all(d.severity == "warning" for d in ctor_hits)
+    assert all(d.minimum_evidence == "agda-typechecker" for d in ctor_hits)
+    assert all(d.evidence_sufficient is False for d in ctor_hits)
+
+
+def test_synonym_sensitive_overapplication_is_typechecker_deferred(tmp_path):
+    path = write_module(
+        tmp_path,
+        "SynonymOverapplication",
+        """module SynonymOverapplication where
+
+State : Set₁
+State = Set → Set
+
+g : State
+g = λ x → x
+
+use : Set
+use = g Set
+""",
+    )
+
+    hits = Checker(tmp_path).check(path)
+    over = [d for d in hits if d.code == "TSAGDA040"]
+    assert over
+    assert all(d.severity == "warning" for d in over)
+    assert all(d.minimum_evidence == "agda-typechecker" for d in over)
+    assert all(d.evidence_sufficient is False for d in over)
+
 def test_record_unknown_and_missing_fields_are_reported(tmp_path):
     path = write_module(
         tmp_path,
