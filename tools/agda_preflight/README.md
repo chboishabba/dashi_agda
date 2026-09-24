@@ -111,6 +111,102 @@ analysis:
 - reflection/macro execution;
 - proof validity.
 
+## Evidence provenance
+
+Every diagnostic has an explicit minimum evidence layer:
+
+```text
+TREE_SITTER
+    concrete syntax / source ranges / unambiguous tree structure
+
+DASHI_INDEX
+    tree-sitter + DASHI module/record/data/telescope/shape indexes
+
+AGDA_SCOPE
+    Agda-resolved scope/elaboration facts such as opens, renamings,
+    overloading, mixfix resolution and implicit insertion
+
+AGDA_TYPECHECKER
+    full Agda typechecking / kernel evidence
+```
+
+The evidence policy is executable, not documentation-only. A structural rule
+that requires `AGDA_SCOPE` cannot fail the fast preflight run merely because
+`rules.py` emitted an error-shaped suspicion. Without scope evidence it is
+downgraded to a warning with:
+
+```text
+confidence = insufficient-evidence
+evidence = dashi-index
+minimum_evidence = agda-scope
+evidence_sufficient = false
+```
+
+All documented `TSAGDA...` codes must be explicitly classified in
+`evidence.py`; an unclassified diagnostic is a programming error.
+
+The current scope-dependent family includes checks whose truth can change after
+Agda resolves opens/renamings, overloaded or mixfix names, partial application,
+implicit insertion, or dependent local scope. Examples include:
+
+```text
+TSAGDA022  unknown/malformed alias use
+TSAGDA024  hiding entry validity across re-export chains
+TSAGDA026  rename/open collision
+TSAGDA027  ambiguous unqualified open
+TSAGDA041  under-application in a saturated context
+TSAGDA055  ambiguous opened projection
+TSAGDA076  function used as a type / partial application
+TSAGDA084  inaccessible-pattern scope
+TSAGDA113  apparently unbound RHS identifier
+TSAGDA154  ambiguous opened operator
+```
+
+### Optional Agda scope refinement
+
+Both the CLI and pytest harness accept:
+
+```bash
+--agda-scope-command '<command>'
+```
+
+The external command receives the absolute Agda file path as its final argument,
+unless its argv contains the literal placeholder `{file}`. It returns one JSON
+object describing only refinements of already-emitted structural suspicions:
+
+```json
+{
+  "confirmed": [
+    {"code": "TSAGDA113", "line": 42, "column": 7}
+  ],
+  "suppressed": [
+    {"code": "TSAGDA027", "line": 18, "column": 1}
+  ]
+}
+```
+
+A confirmed location is upgraded to `agda-scope` evidence. If its only reason
+for being a warning was insufficient evidence, it can regain hard-error status.
+A suppressed location is removed. Backend failure, malformed JSON, or missing
+confirmation never manufactures evidence and never creates a new hard error.
+
+This interface is intentionally narrower than an Agda reimplementation: an
+Agda-aware frontend may resolve ambiguous structural suspicions, while the
+actual typechecker remains authoritative for dependent unification,
+definitional equality, universes, instances, coverage, termination, positivity,
+and proof validity.
+
+Pytest reports evidence-deferred findings separately:
+
+```text
+Agda preflight
+modules passed: ...
+modules failed: ...
+errors: ...
+warnings: ...
+deferred for stronger evidence: ...
+```
+
 ## Diagnostic catalogue
 
 Diagnostics are grouped by capability. Some families are exact/high-confidence;
@@ -406,6 +502,14 @@ warnings: ...
 
 No timing/ETA model is maintained; progress is intentionally delegated to
 pytest's normal item collection and reporting.
+
+Scope refinement can be enabled in the same run, for example:
+
+```bash
+pytest --agda-preflight --agda-deps --agda-root . \
+  --agda-scope-command 'my-agda-scope-wrapper {file}' \
+  DASHI/Everything.agda -vv
+```
 
 ## CLI
 
