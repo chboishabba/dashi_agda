@@ -152,3 +152,19 @@ assert p["status"] == "nonzero_residual"
 assert p["l1_residual"] == 1
 assert p["max_abs_residual"] == 1
 PY
+
+
+tmp_d1_candidate="$(mktemp)"
+trap 'rm -f "$tmp_d1_candidate"' EXIT
+python3 scripts/grqft_ten_d1_source_candidate.py --output "$tmp_d1_candidate"
+diff -u outputs/grqft_ten_d1_source_candidate.json "$tmp_d1_candidate"
+python3 - "$tmp_d1_candidate" <<'PY'
+import json,sys
+p=json.load(open(sys.argv[1]))
+assert p["candidate_only"] is True
+assert p["published_cmp119_expectation_identification_claimed"] is False
+assert p["all_cross_numerators_exact"] is True
+assert p["gr_residual_exact_zero"] is True
+assert p["active_stress_is_negative_two"] is True
+assert p["active_stress_rho_plus_px_plus_py_plus_pz"] == -2
+PY
