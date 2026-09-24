@@ -113,7 +113,7 @@ compileExponentialMomentProducer :
     (T5.operations thermodynamic)
     measureSequence
     (T5.RenormalizedObservable thermodynamic)
-compileExponentialMomentProducer realization = record
+compileExponentialMomentProducer {closure = closure} realization = record
   { T5.ExponentialMomentProducer.absoluteObservable =
       absoluteObservable realization
   ; T5.ExponentialMomentProducer.exponentialObservable =
@@ -135,11 +135,11 @@ compileExponentialMomentProducer realization = record
   ; T5.ExponentialMomentProducer.exp =
       exp realization
   ; T5.ExponentialMomentProducer.factorial =
-      Physical.factorial _
+      Physical.factorial closure
   ; T5.ExponentialMomentProducer.LessEqual =
       LessEqual realization
   ; T5.ExponentialMomentProducer.exponentialMomentBound =
-      Physical.uniformMomentBound _
+      Physical.uniformMomentBound closure
   ; T5.ExponentialMomentProducer.exponentialMomentUniformBound =
       uniformExponentialMomentRealized realization
   ; T5.ExponentialMomentProducer.powerBelowFactorialExponential =
