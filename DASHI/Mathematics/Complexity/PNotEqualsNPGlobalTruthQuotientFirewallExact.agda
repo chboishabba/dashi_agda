@@ -24,7 +24,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPGlobalTruthQuotientFirewallExact
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -91,7 +91,7 @@ anchorsCannotShareClass quotient same =
       Cook.Satisfiable Cook.excludedMiddleFormula →
       Cook.Satisfiable Direct.contradictionFormula
     forward =
-      Data.Product.proj₁ equivalence
+      proj₁ equivalence
 
 ------------------------------------------------------------------------
 -- If the satisfiable anchor is class true, Q itself decides SAT exactly.
@@ -104,7 +104,7 @@ trueOrientedSound :
   classify quotient formula ≡ true →
   Cook.Satisfiable formula
 trueOrientedSound quotient anchorTrue formula formulaTrue =
-  Data.Product.proj₁
+  proj₁
     (sameClassImpliesSatisfiabilityEquivalent
       quotient
       Cook.excludedMiddleFormula
@@ -125,7 +125,7 @@ trueOrientedComplete quotient anchorTrue formula satisfiable
 ... | false =
   ⊥-elim
     (Direct.contradictionFormulaIsUnsatisfiable
-      (Data.Product.proj₁
+      (proj₁
         (sameClassImpliesSatisfiabilityEquivalent
           quotient
           formula
@@ -163,7 +163,7 @@ falseOrientedSound :
   classify quotient formula ≡ false →
   Cook.Satisfiable formula
 falseOrientedSound quotient anchorFalse formula formulaFalse =
-  Data.Product.proj₁
+  proj₁
     (sameClassImpliesSatisfiabilityEquivalent
       quotient
       Cook.excludedMiddleFormula
@@ -184,7 +184,7 @@ falseOrientedComplete quotient anchorFalse formula satisfiable
 ... | true =
   ⊥-elim
     (Direct.contradictionFormulaIsUnsatisfiable
-      (Data.Product.proj₁
+      (proj₁
         (sameClassImpliesSatisfiabilityEquivalent
           quotient
           formula
