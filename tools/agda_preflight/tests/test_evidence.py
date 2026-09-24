@@ -529,6 +529,20 @@ def test_auto_refine_exposes_oracle_stats(tmp_path):
     }
 
 
+
+def test_unfolding_sensitive_checks_require_typechecker_evidence():
+    for code in (
+        "TSAGDA040",
+        "TSAGDA045",
+        "TSAGDA072",
+        "TSAGDA075",
+        "TSAGDA110",
+        "TSAGDA114",
+    ):
+        policy = policy_for(code)
+        assert policy.minimum == EvidenceLevel.AGDA_TYPECHECKER
+        assert policy.hard_error_allowed is False
+
 def test_scope_backend_preserves_configured_agda_extra_args(tmp_path):
     backend = AgdaScopeCheckBackend(
         "agda",
