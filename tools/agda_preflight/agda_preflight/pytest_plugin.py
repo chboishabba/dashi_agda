@@ -390,6 +390,24 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     terminalreporter.write_line(f"warnings: {warning_count}")
     terminalreporter.write_line(f"deferred for stronger evidence: {deferred_count}")
 
+    checker = getattr(config, "_dashi_agda_checker", None)
+    backend = getattr(checker, "scope_backend", None) if checker is not None else None
+    stats_fn = getattr(backend, "stats", None)
+    if callable(stats_fn):
+        refinement = stats_fn()
+        scope = refinement.get("scope", {})
+        typecheck = refinement.get("typecheck", {})
+        terminalreporter.write_line(
+            "scope refinement: "
+            f"{scope.get('succeeded', 0)}/{scope.get('attempted', 0)} succeeded, "
+            f"{scope.get('failed', 0)} failed"
+        )
+        terminalreporter.write_line(
+            "typecheck refinement: "
+            f"{typecheck.get('succeeded', 0)}/{typecheck.get('attempted', 0)} succeeded, "
+            f"{typecheck.get('failed', 0)} failed"
+        )
+
     if code_counts:
         terminalreporter.write_line("")
         terminalreporter.write_line("top root-cause diagnostics:")
@@ -418,6 +436,8 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
             },
             "modules": report_modules,
         }
+        if checker is not None and callable(getattr(backend, "stats", None)):
+            payload["summary"]["refinement"] = backend.stats()
         output = Path(report_path)
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(
