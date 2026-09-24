@@ -385,3 +385,80 @@ completeQuarticCompensationRemainsOpen :
   completeQuarticJetStatus completeQuarticGeometryPaysCompensation
     ≡ openAnalyticObstruction
 completeQuarticCompensationRemainsOpen = refl
+
+
+------------------------------------------------------------------------
+-- LOCAL FOURTH-HARMONIC NORMAL FORM
+--
+-- The complete bivariate quartic jet admits the exact phase description
+--
+--   P4(alpha,q)
+--     = -(S(W)/6) * Re (alpha + i q)^4.
+--
+-- On a literal zero, with
+--
+--   a     = beta - 1/2,
+--   delta = gamma - t,
+--   r     = t/16,
+--
+-- the local exact source is theorem-reduced to
+--
+--   LocalFourthHarmonic
+--     + LocalSixthDebt,
+--
+-- where the leading local contribution of sigma is
+--
+--   - m_sigma*S(W)/(6*r^6)
+--       * Re (a_sigma + i delta_sigma)^4
+--
+-- and the complete certified analytic remainder is physical order r^-8.
+--
+-- Hence on the canonical local/far split:
+--
+--   OffOrdExact_n
+--     <= LocalFourthHarmonic_n
+--        + LocalSixthDebt_n
+--        + FarExact_n.
+--
+-- This is now preferred to the older cone/good bookkeeping for ordinary
+-- analysis: the local problem is a signed fourth angular harmonic of the
+-- actual zero cloud.
+------------------------------------------------------------------------
+
+data FourthHarmonicCoordinate : Set where
+  fourthPhaseComplexIdentity : FourthHarmonicCoordinate
+  literalFourthPhaseIdentity : FourthHarmonicCoordinate
+  physicalSixthRemainderRMinusEight : FourthHarmonicCoordinate
+  localExactEqualsFourthHarmonicPlusRemainder :
+    FourthHarmonicCoordinate
+  localRemainderBelowSixthDebt : FourthHarmonicCoordinate
+  finiteFourthHarmonicFarBudget : FourthHarmonicCoordinate
+  zetaJointFourthHarmonicControl : FourthHarmonicCoordinate
+  fourthHarmonicFarBudgetPaysTarget : FourthHarmonicCoordinate
+
+fourthHarmonicStatus :
+  FourthHarmonicCoordinate -> CompensationStatus
+fourthHarmonicStatus fourthPhaseComplexIdentity = theoremOwned
+fourthHarmonicStatus literalFourthPhaseIdentity = theoremOwned
+fourthHarmonicStatus physicalSixthRemainderRMinusEight = theoremOwned
+fourthHarmonicStatus localExactEqualsFourthHarmonicPlusRemainder =
+  theoremOwned
+fourthHarmonicStatus localRemainderBelowSixthDebt = theoremOwned
+fourthHarmonicStatus finiteFourthHarmonicFarBudget = theoremOwned
+fourthHarmonicStatus zetaJointFourthHarmonicControl =
+  openAnalyticObstruction
+fourthHarmonicStatus fourthHarmonicFarBudgetPaysTarget =
+  openAnalyticObstruction
+
+fourthPhaseIdentityIsPaid :
+  fourthHarmonicStatus fourthPhaseComplexIdentity ≡ theoremOwned
+fourthPhaseIdentityIsPaid = refl
+
+physicalSixthRemainderIsPaid :
+  fourthHarmonicStatus physicalSixthRemainderRMinusEight ≡ theoremOwned
+physicalSixthRemainderIsPaid = refl
+
+jointFourthHarmonicControlIsTheWall :
+  fourthHarmonicStatus zetaJointFourthHarmonicControl
+    ≡ openAnalyticObstruction
+jointFourthHarmonicControlIsTheWall = refl
