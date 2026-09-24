@@ -231,3 +231,6 @@ import DASHI.Physics.Foundations.GRQFTParameterizedRepulsiveJunctionDesignExact
 import DASHI.Physics.Foundations.CMP119TenFiniteD1ComponentCompilerExact
 
 import DASHI.Physics.Foundations.CMP119GRQFTD1MaxCutExact
+
+import DASHI.Physics.Foundations.CMP119ConcreteTenSlotCrossNumeratorCandidateExact
+import DASHI.Physics.Foundations.CMP119ConcreteTenSlotD1SourceWeldExact
