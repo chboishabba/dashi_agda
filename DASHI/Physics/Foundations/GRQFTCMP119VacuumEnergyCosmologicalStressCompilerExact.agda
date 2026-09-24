@@ -51,10 +51,10 @@ sourceVacuumStress :
   Source.SourceNativeNambuVacuumAmplitudeReceipt source →
   Nat →
   Stress.RationalTensor4
-sourceVacuumStress receipt scale =
+sourceVacuumStress {source = source} receipt scale =
   Vacuum.vacuumStressAt
     (Source.vacuumToRat (Source.readout receipt)
-      (CMP119.vacuumEnergy _ scale))
+      (CMP119.vacuumEnergy source scale))
 
 sourceInteriorVacuumStress :
   ∀ {Density Background Fluctuation
