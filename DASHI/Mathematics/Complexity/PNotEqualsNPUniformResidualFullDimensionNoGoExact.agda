@@ -40,6 +40,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.Product using (Σ; _,_)
+open import Data.Empty using (⊥)
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
@@ -213,8 +214,8 @@ ResidualWitness :
   Bool →
   Vec Bool depth →
   Set
-ResidualWitness input desired =
-  Σ (Vec Bool _) λ claimedValues →
+ResidualWitness {depth} input desired =
+  Σ (Vec Bool depth) λ claimedValues →
     notChainResiduals input claimedValues
     ≡ desired
 
@@ -277,6 +278,9 @@ unitResidualAtOwnCoordinate fzero =
 unitResidualAtOwnCoordinate (fsuc index) =
   unitResidualAtOwnCoordinate index
 
+falseNotTrue : false ≡ true → ⊥
+falseNotTrue ()
+
 noCoordinateIsUniformlyZero :
   ∀ {depth : Nat}
     (input : Bool)
@@ -285,17 +289,18 @@ noCoordinateIsUniformlyZero :
     coordinate index
       (notChainResiduals input claimedValues)
     ≡ false) →
-  false ≡ true
+  ⊥
 noCoordinateIsUniformlyZero
     input index alwaysZero
     with everyUnitResidualIsRealizable input index
 ... | claimedValues , exact =
-  transitive
-    (symmetry
-      (alwaysZero claimedValues))
+  falseNotTrue
     (transitive
-      (cong (coordinate index) exact)
-      (unitResidualAtOwnCoordinate index))
+      (symmetry
+        (alwaysZero claimedValues))
+      (transitive
+        (cong (coordinate index) exact)
+        (unitResidualAtOwnCoordinate index)))
   where
     symmetry :
       ∀ {A : Set} {left right : A} →
