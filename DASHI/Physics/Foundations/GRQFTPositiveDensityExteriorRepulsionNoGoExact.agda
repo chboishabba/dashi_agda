@@ -24,41 +24,34 @@ import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVExteriorMassCollisionExac
 -- We encode the sign compiler separately from the exact rational fixture.
 ------------------------------------------------------------------------
 
-data MetricMassSign : Set where
-  negativeMetricMass : MetricMassSign
-  zeroMetricMass : MetricMassSign
-  positiveMetricMass : MetricMassSign
+data NonnegativeMetricMassSign : Set where
+  zeroMetricMass : NonnegativeMetricMassSign
+  positiveMetricMass : NonnegativeMetricMassSign
 
 data DensityShellSign : Set where
   zeroDensityShell : DensityShellSign
   positiveDensityShell : DensityShellSign
 
-accumulateShell :
-  MetricMassSign → DensityShellSign → MetricMassSign
-accumulateShell negativeMetricMass zeroDensityShell = negativeMetricMass
-accumulateShell negativeMetricMass positiveDensityShell = negativeMetricMass
-accumulateShell zeroMetricMass zeroDensityShell = zeroMetricMass
-accumulateShell zeroMetricMass positiveDensityShell = positiveMetricMass
-accumulateShell positiveMetricMass shell = positiveMetricMass
+accumulateNonnegativeShell :
+  NonnegativeMetricMassSign → DensityShellSign → NonnegativeMetricMassSign
+accumulateNonnegativeShell zeroMetricMass zeroDensityShell = zeroMetricMass
+accumulateNonnegativeShell zeroMetricMass positiveDensityShell = positiveMetricMass
+accumulateNonnegativeShell positiveMetricMass shell = positiveMetricMass
 
-regularCenterMassSign : MetricMassSign
+regularCenterMassSign : NonnegativeMetricMassSign
 regularCenterMassSign = zeroMetricMass
 
 onePositiveShellFromRegularCenterIsPositive :
-  accumulateShell regularCenterMassSign positiveDensityShell
+  accumulateNonnegativeShell regularCenterMassSign positiveDensityShell
     ≡ positiveMetricMass
 onePositiveShellFromRegularCenterIsPositive = refl
 
 twoPositiveShellsFromRegularCenterArePositive :
-  accumulateShell
-    (accumulateShell regularCenterMassSign positiveDensityShell)
+  accumulateNonnegativeShell
+    (accumulateNonnegativeShell regularCenterMassSign positiveDensityShell)
     positiveDensityShell
   ≡ positiveMetricMass
 twoPositiveShellsFromRegularCenterArePositive = refl
-
-positiveMassCannotBeNegative :
-  positiveMetricMass ≡ negativeMetricMass → ⊥
-positiveMassCannotBeNegative ()
 
 ------------------------------------------------------------------------
 -- EXACT FIXTURE INSTANCE
