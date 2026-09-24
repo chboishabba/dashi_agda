@@ -310,7 +310,7 @@ residualLeaves =
   ∷ t4StressTensorAndOPESemantics
   ∷ t4PhysicalOPECoefficientSemantics
   ∷ t4PhysicalOPERemainderSemantics
-  ∷     aFiniteEuclideanSameObjectAttachment
+  ∷ aFiniteEuclideanSameObjectAttachment
   ∷ aFiniteBosonicSameObjectAttachment
   ∷ aFiniteWilsonRPSameObjectAttachment
   ∷ a1WilsonHessianVariation
