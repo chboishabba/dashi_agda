@@ -90,17 +90,17 @@ noSilentProjectionDischarge ()
 ------------------------------------------------------------------------
 
 blueWaterUnavailable :
-  Temporal.blueWaterHasSuitableNational1992To2015TimeSeries
+  Temporal.FanningTemporalIndicatorBoundary.blueWaterHasSuitableNational1992To2015TimeSeries
     Temporal.canonicalFanningTemporalIndicatorBoundary ≡ false
 blueWaterUnavailable =
-  Temporal.blueWaterHasSuitableNational1992To2015TimeSeriesIsFalse
+  Temporal.FanningTemporalIndicatorBoundary.blueWaterHasSuitableNational1992To2015TimeSeriesIsFalse
     Temporal.canonicalFanningTemporalIndicatorBoundary
 
 historicalNotProjection :
-  Temporal.historicalObservationIsBAUProjection
+  Temporal.FanningTemporalIndicatorBoundary.historicalObservationIsBAUProjection
     Temporal.canonicalFanningTemporalIndicatorBoundary ≡ false
 historicalNotProjection =
-  Temporal.historicalObservationIsBAUProjectionIsFalse
+  Temporal.FanningTemporalIndicatorBoundary.historicalObservationIsBAUProjectionIsFalse
     Temporal.canonicalFanningTemporalIndicatorBoundary
 
 record EpistemicResidualBoundary : Set where
