@@ -1,6 +1,5 @@
 from __future__ import annotations
 from dataclasses import dataclass
-import re
 from typing import Dict, Iterable, List, Optional, Tuple
 
 from .ast_index import significant_tokens, typed_binders, descendants, first_descendant, applications, application_view, clause_explicit_argument_count, direct_binding_parameters, explicit_declaration_parameter_count, module_application_target_and_args
@@ -27,9 +26,6 @@ def _line_col(source: str, offset: int) -> Tuple[int, int]:
     line = source.count("\n", 0, offset) + 1
     prev = source.rfind("\n", 0, offset)
     return line, offset - prev
-
-def _strip_comments(source: str) -> str:
-    return re.sub(r"--[^\n]*", "", source)
 
 def _split_arrows(text: str) -> List[str]:
     out, buf, depth = [], [], 0
@@ -92,7 +88,7 @@ def _single_identifier(source_bytes, expr_node):
     return names[0] if len(names) == 1 and not punctuation else None
 
 def extended_diagnostics(checker, s, D):
-    source = s.source; clean = _strip_comments(source); out = []
+    source = s.source; out = []
     data = {
         name: DataDecl(
             name=name,
