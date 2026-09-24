@@ -12,8 +12,8 @@ residualBoardCompilerMachineChecked :
   R496.round496ResidualMaxCutCompilerLevel ≡ machineChecked
 residualBoardCompilerMachineChecked = refl
 
-residualLeafCountIsThirtyTwo :
-  R496.residualLeafCount ≡ 32
+residualLeafCountIsThirtyEight :
+  R496.residualLeafCount ≡ 38
 residualLeafCountIsThirty = refl
 
 constructorEqualitiesPruned :
