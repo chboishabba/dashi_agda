@@ -446,6 +446,13 @@ import DASHI.Physics.YangMills.YangMillsActualGroupQuantitativeAlignmentRound541
 import DASHI.Physics.YangMills.YangMillsClayActualGroupAlignedResidualRound542Exact
 import DASHI.Physics.YangMills.YangMillsClayActualGroupAlignedResidualRound542Validation
 
+import DASHI.Physics.YangMills.YangMillsActualGroupCompleteSourceRound543Exact
+import DASHI.Physics.YangMills.YangMillsActualGroupCompleteSourceRound543Validation
+import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound544Exact
+import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound544Validation
+import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Exact
+import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
