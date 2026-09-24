@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact w
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base as Rat using (ℚ)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Cut
@@ -45,7 +46,7 @@ record RationalStressPairingReadout
   field
     pairingToRational :
       StressRep.PairingScalar representation →
-      Data.Rational.Base.ℚ
+      ℚ
 
 open RationalStressPairingReadout public
 
@@ -57,7 +58,7 @@ cmp119MetricBasisComponent :
   RationalStressPairingReadout representation →
   StressRep.StressTensor representation →
   Flat.Axis4 → Flat.Axis4 →
-  Data.Rational.Base.ℚ
+  ℚ
 cmp119MetricBasisComponent basis readout stress a b =
   pairingToRational readout
     (StressRep.stressMetricPairing representation stress
@@ -121,10 +122,12 @@ r119BasisComponentIsSelectedCMP119Insertion :
     (StressRep.stressMetricPairing representation
       (StressRep.stressTensor representation)
       (basisPerturbation basis a b))
-r119BasisComponentIsSelectedCMP119Insertion weld a b =
+r119BasisComponentIsSelectedCMP119Insertion
+    {representation = representation} {basis = basis} weld a b =
   pairingReadoutIsR119Readout weld
-    (StressRep.stressMetricPairing _
-      (StressRep.stressTensor _) (basisPerturbation _ a b))
+    (StressRep.stressMetricPairing representation
+      (StressRep.stressTensor representation)
+      (basisPerturbation basis a b))
 
 secondStressRepresentationNeededForComponents : Bool
 secondStressRepresentationNeededForComponents = false
