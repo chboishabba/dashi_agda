@@ -131,16 +131,23 @@ module FixedOutput
     Physical.k alpha ≡ output →
     Physical.k beta ≡ output →
     liftedForcingPair alpha beta ≡ rawCrossPair alpha beta
-  liftedPointwiseOnOutput alpha beta alphaOutput betaOutput
-    rewrite T.forcingPairScalarized alpha beta
-          | OnOutput.physicalPairResolventLawOnOutput
-              alpha beta alphaOutput betaOutput =
-    solve
-      ( rate alpha
-      ∷ rate beta
-      ∷ T.Swap.pairResolvent alpha beta
-      ∷ rawCrossPair alpha beta
-      ∷ [])
+  liftedPointwiseOnOutput alpha beta alphaOutput betaOutput =
+    let
+      scalarized = T.forcingPairScalarized alpha beta
+      inverseLaw =
+        OnOutput.physicalPairResolventLawOnOutput
+          alpha beta alphaOutput betaOutput
+      rates = rate alpha + rate beta
+      kernel = T.Swap.pairResolvent alpha beta
+      raw = rawCrossPair alpha beta
+    in
+    trans
+      (cong (rates *_) scalarized)
+      (trans
+        (solve (rates ∷ kernel ∷ raw ∷ []))
+        (trans
+          (cong (_* raw) inverseLaw)
+          (solve (raw ∷ []))))
 
   rowCongruentOnOutput :
     (alpha : Physical.PhysicalTriadIncidence) →
