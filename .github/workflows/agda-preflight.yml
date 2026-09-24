@@ -1,0 +1,29 @@
+name: Agda preflight
+
+on:
+  push:
+    paths:
+      - "tools/agda_preflight/**"
+      - ".github/workflows/agda-preflight.yml"
+  pull_request:
+    paths:
+      - "tools/agda_preflight/**"
+      - ".github/workflows/agda-preflight.yml"
+
+jobs:
+  preflight-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: tools/agda_preflight/pyproject.toml
+      - name: Install checker
+        run: python -m pip install -e tools/agda_preflight pytest
+      - name: Python syntax
+        run: python -m compileall -q tools/agda_preflight/agda_preflight tools/agda_preflight/tests
+      - name: Regression tests
+        run: pytest -q tools/agda_preflight/tests
