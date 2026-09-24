@@ -1,0 +1,51 @@
+{
+  "active_stress_is_negative_two": true,
+  "active_stress_rho_plus_px_plus_py_plus_pz": -2,
+  "all_cross_numerators_exact": true,
+  "candidate_only": true,
+  "contract": "grqft_ten_d1_source_candidate",
+  "gr_residual_by_independent_slot": {
+    "00": 0,
+    "01": 0,
+    "02": 0,
+    "03": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "22": 0,
+    "23": 0,
+    "33": 0
+  },
+  "gr_residual_exact_zero": true,
+  "normalization": {
+    "N": 0,
+    "Z": 1,
+    "dZ": 0
+  },
+  "published_cmp119_expectation_identification_claimed": false,
+  "remaining_source_weld": "identify the R144/R119 post-sum finite-D1 readout with this literal-density normalized cross numerator on every symmetric slot",
+  "slots": {
+    "00": {"N": 0, "Z": 1, "cross_numerator": 1, "dN": 1, "dZ": 0, "exact": true, "target": 1},
+    "01": {"N": 0, "Z": 1, "cross_numerator": 0, "dN": 0, "dZ": 0, "exact": true, "target": 0},
+    "02": {"N": 0, "Z": 1, "cross_numerator": 0, "dN": 0, "dZ": 0, "exact": true, "target": 0},
+    "03": {"N": 0, "Z": 1, "cross_numerator": 0, "dN": 0, "dZ": 0, "exact": true, "target": 0},
+    "11": {"N": 0, "Z": 1, "cross_numerator": -1, "dN": -1, "dZ": 0, "exact": true, "target": -1},
+    "12": {"N": 0, "Z": 1, "cross_numerator": 0, "dN": 0, "dZ": 0, "exact": true, "target": 0},
+    "13": {"N": 0, "Z": 1, "cross_numerator": 0, "dN": 0, "dZ": 0, "exact": true, "target": 0},
+    "22": {"N": 0, "Z": 1, "cross_numerator": -1, "dN": -1, "dZ": 0, "exact": true, "target": -1},
+    "23": {"N": 0, "Z": 1, "cross_numerator": 0, "dN": 0, "dZ": 0, "exact": true, "target": 0},
+    "33": {"N": 0, "Z": 1, "cross_numerator": -1, "dN": -1, "dZ": 0, "exact": true, "target": -1}
+  },
+  "ten_post_sum_d1_readouts": {
+    "00": 1,
+    "01": 0,
+    "02": 0,
+    "03": 0,
+    "11": -1,
+    "12": 0,
+    "13": 0,
+    "22": -1,
+    "23": 0,
+    "33": -1
+  }
+}
