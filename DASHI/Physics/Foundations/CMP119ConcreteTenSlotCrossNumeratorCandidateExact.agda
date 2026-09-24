@@ -2,9 +2,9 @@
 module DASHI.Physics.Foundations.CMP119ConcreteTenSlotCrossNumeratorCandidateExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; +_; -[1+_]; 0ℚ; _+_)
-open import Data.Rational.Tactic.RingSolver as ℚRing
+open import Data.Rational.Tactic.RingSolver as ℚRing\nopen import Data.Product using (_×_; _,_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
@@ -71,7 +71,7 @@ crossDataAt :
   ∀ {trajectory split}
     (inputs : Beta.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}) →
-  (scale : Agda.Builtin.Nat.Nat) →
+  (scale : Nat) →
   K.SymmetricTensorComponent4 →
   R116.NormalizedSourceDerivativeCrossData
 crossDataAt inputs scale component =
@@ -81,7 +81,7 @@ crossNumeratorAt :
   ∀ {trajectory split}
     (inputs : Beta.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}) →
-  Agda.Builtin.Nat.Nat →
+  Nat →
   K.SymmetricTensorComponent4 →
   ℚ
 crossNumeratorAt inputs scale component =
