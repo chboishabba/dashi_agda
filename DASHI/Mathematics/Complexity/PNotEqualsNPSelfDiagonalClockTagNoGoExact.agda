@@ -90,21 +90,22 @@ clockTaggedTransitionProjects {machine} {time} {configuration} {successor}
 advanceClock : Nat → Nat → Nat
 advanceClock time zero = time
 advanceClock time (suc steps) =
+  suc (advanceClock time steps)
+
+advanceClockSucStart :
+  (time steps : Nat) →
   advanceClock (suc time) steps
+  ≡ suc (advanceClock time steps)
+advanceClockSucStart time zero = refl
+advanceClockSucStart time (suc steps)
+    rewrite advanceClockSucStart time steps =
+  refl
 
 advanceClockZero : (steps : Nat) → advanceClock zero steps ≡ steps
 advanceClockZero zero = refl
 advanceClockZero (suc steps)
-    rewrite advanceClockZeroFromOne steps =
+    rewrite advanceClockZero steps =
   refl
-  where
-    advanceClockZeroFromOne :
-      (rest : Nat) →
-      advanceClock (suc zero) rest ≡ suc rest
-    advanceClockZeroFromOne zero = refl
-    advanceClockZeroFromOne (suc rest)
-      rewrite advanceClockZeroFromOne rest =
-      refl
 
 clockTaggedRunFromOriginal :
   ∀ {machine : Machine.DeterministicMachine}
@@ -131,7 +132,8 @@ clockTaggedRunFromOriginal {machine} time (suc steps) start finish run
         (time , start)
       ≡ just (advanceClock time (suc steps) , finish)
     impossible ()
-... | just middle =
+... | just middle
+    rewrite advanceClockSucStart time steps =
   clockTaggedRunFromOriginal
     (suc time)
     steps
