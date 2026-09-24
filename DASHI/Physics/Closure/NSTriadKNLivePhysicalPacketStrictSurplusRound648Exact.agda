@@ -20,8 +20,8 @@ module DASHI.Physics.Closure.NSTriadKNLivePhysicalPacketStrictSurplusRound648Exa
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_; _*_; _-_; _≤_; _<_)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; _-_; _≤_; _<_)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -38,6 +38,8 @@ import DASHI.Physics.Closure.NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact as 
 import DASHI.Physics.Closure.NSTriadKNLiteralFiniteCriticalObservableFoldExact as Fold
 import DASHI.Physics.Closure.NSTriadKNLiteralCriticalEnergyCalculusExact as Energy
 import DASHI.Physics.Closure.NSTriadKNR104GlobalLayerCakePhysicalPacketWeldExact as Packet
+import DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104Exact as LayerCake
+import DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderExact as RadialOrder
 import DASHI.Physics.Closure.NSTriadKNLiteralUpperShellCanonicalSuffixExact as Canonical
 import DASHI.Physics.Closure.NSTriadKNRadialConservationToPhysicalLayerCakeRound647Exact as R647
 import DASHI.Physics.Closure.NSTriadKNLiteralStrictMarginRadialSurplusRound646Exact as R646
@@ -137,8 +139,8 @@ module LivePacketSurplus
     LivePhysicalPacketStructure D C cutoff →
     (time : Time) →
     Fold.two *
-      DASHI.Physics.Closure.NSTriadKNCriticalProductionPacketLayerCakeRound104Exact.weightedTransfer
-        (DASHI.Physics.Closure.NSTriadKNLiteralCriticalProductionRadialOrderExact.radialBandTransfers
+      LayerCake.weightedTransfer
+        (RadialOrder.radialBandTransfers
           (systemAt D cutoff time)
           (Audit.modes (systemAt D cutoff time)))
     ≡ Fold.two * physicalPacketLayerCakeRate D cutoff time
