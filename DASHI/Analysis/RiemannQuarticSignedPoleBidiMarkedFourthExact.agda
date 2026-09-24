@@ -294,3 +294,84 @@ actualMarkedPoleBandRemainsOpen :
   bidiMarkedPoleCurvatureStatus exactMarkedPolePositivePuncturedBand
     ≡ openAnalyticObstruction
 actualMarkedPoleBandRemainsOpen = refl
+
+
+------------------------------------------------------------------------
+-- COMPLETE-JET STRICT-ABSORB RECUT (Lean donor)
+--
+-- Lean PR #22 moved the preferred terminal finite source bound from the older
+-- joint-quartic remainder surface onto the already-owned COMPLETE quartic jet.
+--
+-- The leading local term is now literally
+--
+--   - S(W)/(6*(t/16)^6) * A4_local
+--
+-- and the residual debt is sixth order.  Consequently the obsolete positive
+-- a^4 mass charge disappears from the preferred corrected-polarity budget.
+--
+-- The sixth debt is also scalarized against the same expanded literal zero
+-- count used by H4, leaving the finite test in the form
+--
+--   scaled[
+--     EV
+--       + (3/2) r^2 N_expanded
+--       - (2/5) r^5 muLower
+--   ]
+--   + sixthCoeff * N_expanded
+--   + FarExact.
+--
+-- FarExact remains signed.  The only unpaid preferred item is the strict
+-- comparison of that explicit scalar budget with compensationTargetThreshold.
+--
+-- This section is a donor/status receipt.  It does NOT claim an independent
+-- Agda-native proof of the Lean analytic inequalities.
+------------------------------------------------------------------------
+
+data CompleteJetAbsorbCoordinate : Set where
+  completeQuarticJetLeadingAngularIdentity : CompleteJetAbsorbCoordinate
+  completeJetCorrectPolaritySourceBound : CompleteJetAbsorbCoordinate
+  sixthDebtScalarEnvelope : CompleteJetAbsorbCoordinate
+  sixthDebtExpandedWindowCountWeld : CompleteJetAbsorbCoordinate
+  completeFiniteAbsorbBudget : CompleteJetAbsorbCoordinate
+  strictCompleteScalarAbsorb : CompleteJetAbsorbCoordinate
+
+completeJetAbsorbStatus :
+  CompleteJetAbsorbCoordinate -> BidiMarkedFourthStatus
+completeJetAbsorbStatus completeQuarticJetLeadingAngularIdentity =
+  theoremOwned
+completeJetAbsorbStatus completeJetCorrectPolaritySourceBound =
+  theoremOwned
+completeJetAbsorbStatus sixthDebtScalarEnvelope =
+  theoremOwned
+completeJetAbsorbStatus sixthDebtExpandedWindowCountWeld =
+  theoremOwned
+completeJetAbsorbStatus completeFiniteAbsorbBudget =
+  theoremOwned
+completeJetAbsorbStatus strictCompleteScalarAbsorb =
+  openAnalyticObstruction
+
+completeJetLeadingAngularIdentityPaid :
+  completeJetAbsorbStatus completeQuarticJetLeadingAngularIdentity
+    ≡ theoremOwned
+completeJetLeadingAngularIdentityPaid = refl
+
+completeJetSixthDebtScalarizationPaid :
+  completeJetAbsorbStatus sixthDebtExpandedWindowCountWeld
+    ≡ theoremOwned
+completeJetSixthDebtScalarizationPaid = refl
+
+strictCompleteScalarAbsorbRemainsOpen :
+  completeJetAbsorbStatus strictCompleteScalarAbsorb
+    ≡ openAnalyticObstruction
+strictCompleteScalarAbsorbRemainsOpen = refl
+
+completeJetAbsorbLeanDonorHead : String
+completeJetAbsorbLeanDonorHead =
+  "b4e13a85bdc71f217fd7648f238a08694849aedb"
+
+completeJetAbsorbTransportedIntoAgdaKernelHere : Bool
+completeJetAbsorbTransportedIntoAgdaKernelHere = false
+
+completeJetAbsorbInterpretation : String
+completeJetAbsorbInterpretation =
+  "Preferred Clay-facing route: use the complete quartic jet, not the older wrong-polarity/fail-closed ABSORB candidate.  V4/H4 carrier work, explicit mu floor, complete-jet source orientation, and sixth-debt scalarization are Lean source-written donors.  The remaining preferred analytic wall is one strict scalar inequality comparing the exposed completeV4H4AbsorbBudgetAt against compensationTargetThreshold while retaining FarExact with sign."
