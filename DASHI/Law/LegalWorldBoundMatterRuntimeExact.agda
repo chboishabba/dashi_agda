@@ -13,16 +13,8 @@ import DASHI.Law.LegalWorldRevisionReconstructionExact as World
 ------------------------------------------------------------------------
 
 data MatterCommandKind : Set where
-  selectObject : MatterCommandKind
-  followTarget : MatterCommandKind
-  focusProvenance : MatterCommandKind
-  openSource : MatterCommandKind
-  explain : MatterCommandKind
-  expandExplanation : MatterCommandKind
-  setProjection : MatterCommandKind
-  setRange : MatterCommandKind
-  setJurisdiction : MatterCommandKind
-  back : MatterCommandKind
+  selectObject followTarget focusProvenance openSource explain expandExplanation
+  setProjection setRange setJurisdiction back : MatterCommandKind
 
 data BoundDispatchDisposition : Set where
   executeInBoundWorld : BoundDispatchDisposition
