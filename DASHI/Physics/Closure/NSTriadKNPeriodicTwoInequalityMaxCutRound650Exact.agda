@@ -172,6 +172,10 @@ round650C2EuclideanCollarRefinementClosed : Bool
 round650C2EuclideanCollarRefinementClosed =
   R656.round656ExactCollarEuclideanRefinementClosed
 
+round650C2PhysicalBoundaryFluxCollarRefinementClosed : Bool
+round650C2PhysicalBoundaryFluxCollarRefinementClosed =
+  R656.round656PhysicalBoundaryFluxCollarRefinementClosed
+
 round650C2GoodCollarSpectralCrossNonpositive : Bool
 round650C2GoodCollarSpectralCrossNonpositive =
   R656.round656GoodCollarCrossNonpositive
@@ -340,6 +344,11 @@ round650C2EuclideanCollarRefinementClosedIsTrue :
   round650C2EuclideanCollarRefinementClosed ≡ true
 round650C2EuclideanCollarRefinementClosedIsTrue =
   R656.round656ExactCollarEuclideanRefinementClosedIsTrue
+
+round650C2PhysicalBoundaryFluxCollarRefinementClosedIsTrue :
+  round650C2PhysicalBoundaryFluxCollarRefinementClosed ≡ true
+round650C2PhysicalBoundaryFluxCollarRefinementClosedIsTrue =
+  R656.round656PhysicalBoundaryFluxCollarRefinementClosedIsTrue
 
 round650C2GoodCollarSpectralCrossNonpositiveIsTrue :
   round650C2GoodCollarSpectralCrossNonpositive ≡ true
