@@ -113,6 +113,23 @@ class AstClause:
     node: object
 
 
+@dataclass(frozen=True)
+class AstFieldAssignment:
+    name: str
+    expr_text: str
+    line: int
+    expr_node: object | None
+    node: object
+
+
+@dataclass
+class AstRecordExpression:
+    line: int
+    node: object
+    owner_function: Optional[str]
+    assignments: List[AstFieldAssignment] = field(default_factory=list)
+
+
 @dataclass
 class AstIndex:
     path: Path
@@ -132,6 +149,7 @@ class AstIndex:
     syntax_nodes: List[object] = field(default_factory=list)
     postulate_nodes: List[object] = field(default_factory=list)
     pattern_nodes: List[object] = field(default_factory=list)
+    record_expressions: List[AstRecordExpression] = field(default_factory=list)
 
     @property
     def import_map(self) -> Dict[str, str]:
@@ -485,6 +503,39 @@ def _data_from_node(source_bytes: bytes, node) -> Optional[AstData]:
     return decl
 
 
+
+def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpression:
+    owner_function = None
+    parent = node.parent
+    while parent is not None:
+        if parent.type == "function":
+            clause = _function_clause(source_bytes, parent)
+            signature = _function_signature(source_bytes, parent)
+            if clause is not None:
+                owner_function = clause.name
+            elif signature is not None:
+                owner_function = signature.names[0]
+            break
+        parent = parent.parent
+
+    expr = AstRecordExpression(line=line_of(node), node=node, owner_function=owner_function)
+    for assignment in descendants(node, "field_assignment"):
+        name_node = first_descendant(assignment, "field_name")
+        rhs_node = first_descendant(assignment, "expr")
+        name = _name_from_node(source_bytes, name_node)
+        if not name:
+            continue
+        expr.assignments.append(
+            AstFieldAssignment(
+                name=name,
+                expr_text=node_text(source_bytes, rhs_node).strip() if rhs_node is not None else "",
+                line=line_of(assignment),
+                expr_node=rhs_node,
+                node=assignment,
+            )
+        )
+    return expr
+
 def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstIndex:
     source_bytes = source.encode("utf-8")
     tree = parser.parse(source_bytes)
@@ -550,4 +601,9 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
             index.postulate_nodes.append(node)
         elif node.type == "pattern":
             index.pattern_nodes.append(node)
+        elif node.type == "record_assignments":
+            # Do not double-count the record_assignments alias nested inside a
+            # field_assignments node; both expose the same field assignments.
+            if node.parent is None or node.parent.type != "field_assignments":
+                index.record_expressions.append(_record_expression_from_node(source_bytes, node))
     return index
