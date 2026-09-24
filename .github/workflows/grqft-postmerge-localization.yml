@@ -15,6 +15,11 @@ on:
       - 'scripts/grqft_collider_chi2_scope_matrix.py'
       - 'outputs/grqft_dy_ratio_absolute_localization.json'
       - 'outputs/grqft_collider_chi2_scope_matrix.json'
+      - 'DASHI/Physics/Foundations/GRQFTActiveGaugeSectorTotalizationExact.agda'
+      - 'DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda'
+      - 'DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda'
+      - 'DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda'
+      - 'scripts/grqft_w4_projection_operator_ablation.py'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 

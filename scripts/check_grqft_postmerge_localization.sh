@@ -10,6 +10,10 @@ files=(
   DASHI/Physics/Foundations/CMP119PinnedYMGRQFTSectorStressBridgeValidation.agda
   DASHI/Physics/Foundations/GRQFTPostMergeMaxCutExact.agda
   DASHI/Physics/Foundations/GRQFTPostMergeMaxCutValidation.agda
+  DASHI/Physics/Foundations/GRQFTActiveGaugeSectorTotalizationExact.agda
+  DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
+  DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
+  DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda
 )
 
 for f in "${files[@]}"; do
@@ -33,3 +37,21 @@ if command -v dashi-agda-preflight >/dev/null 2>&1; then
     dashi-agda-preflight "$f"
   done
 fi
+
+# The W4 operator ablation is executed as a diagnostic but is not diffed against
+# a committed numeric artifact: its purpose is to discover which branch of the
+# next proof/search cut is live on this exact head.
+ablation_json="$(mktemp)"
+trap 'rm -f "$tmp1" "$tmp2" "$ablation_json"' EXIT
+python3 scripts/grqft_w4_projection_operator_ablation.py --output "$ablation_json"
+python3 - "$ablation_json" <<'PY'
+import json,sys
+p=json.load(open(sys.argv[1]))
+assert p["promotesW4"] is False
+assert p["sharedWindowGeV"] == [76,106]
+for k in ("currentW4SigmaDashiShape","ratioPathFivePointDenominatorDensity"):
+    assert p[k]["dof"] == 17
+    assert p[k]["chi2PerDof"] >= 0
+print("projection-ablation:", p["currentW4SigmaDashiShape"]["chi2PerDof"],
+      "->", p["ratioPathFivePointDenominatorDensity"]["chi2PerDof"])
+PY
