@@ -182,3 +182,6 @@ import DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProvenanceValidatio
 
 import DASHI.Physics.Foundations.GRQFTR457SourceNativeRecoveryBindingExact
 import DASHI.Physics.Foundations.GRQFTR457SourceNativeRecoveryBindingValidation
+
+import DASHI.Physics.Foundations.CMP119SymmetricFiniteTangentBasisCompilerExact
+import DASHI.Physics.Foundations.CMP119SymmetricFiniteTangentBasisCompilerValidation
