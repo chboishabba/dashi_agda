@@ -28,11 +28,12 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as R495
+import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRound538Exact as R538
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as R476
 
 record ProjectiveContinuityAtEmpty
     {Index Event Mass : Set}
-    (projective : R495.ProjectiveCylinderProbability Index Event Mass)
+    (projective : R538.ProjectivePositiveCylinderProbability Index Event)
     : Set₂ where
   field
     CylinderSequence : Set
@@ -53,7 +54,8 @@ record ProjectiveContinuityAtEmpty
       ConvergesMass
         (λ n →
           R495.mass
-            (R495.levelPremeasure projective (indexAt sequence n))
+            (R538.premeasure
+              (R538.levelProbability projective (indexAt sequence n)))
             (eventAt sequence n))
         zero
 
@@ -67,7 +69,7 @@ record ProjectiveMeasureExtensionAuthority
 
     extendProjective :
       (projective :
-        R495.ProjectiveCylinderProbability Index Event Mass) →
+        R538.ProjectivePositiveCylinderProbability Index Event) →
       ProjectiveContinuityAtEmpty projective →
       SigmaMeasure
 
@@ -91,7 +93,8 @@ record ProjectiveMeasureExtensionAuthority
       ≡
       massAsScalar
         (R495.mass
-          (R495.levelPremeasure projective index)
+          (R538.premeasure
+            (R538.levelProbability projective index))
           event)
 
 open ProjectiveMeasureExtensionAuthority public
@@ -102,7 +105,7 @@ record ProjectiveCylinderRepresentationInputs
     : Set₂ where
   field
     projective :
-      R495.ProjectiveCylinderProbability Index Event Mass
+      R538.ProjectivePositiveCylinderProbability Index Event
 
     continuity :
       ProjectiveContinuityAtEmpty projective
