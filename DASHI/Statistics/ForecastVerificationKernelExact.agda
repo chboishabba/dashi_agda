@@ -50,7 +50,7 @@ brierLoss p = brierLossValue (value p)
 
 halfBaselineNo :
   brierLossValue ½ no ≡ ½ * ½
-halfBaselineNo = refl
+halfBaselineNo = ℚRing.solve-∀
 
 halfBaselineYes :
   brierLossValue ½ yes ≡ ½ * ½
@@ -62,6 +62,107 @@ halfBaseline :
   brierLossValue ½ outcome ≡ ½ * ½
 halfBaseline no = halfBaselineNo
 halfBaseline yes = halfBaselineYes
+
+------------------------------------------------------------------------
+-- Exact Brier range.
+------------------------------------------------------------------------
+
+oneNonnegative : 0ℚ ≤ 1ℚ
+oneNonnegative = ℚP.nonNegative⁻¹ 1ℚ
+
+subtractNonnegativeBelow :
+  (value loss : ℚ) →
+  0ℚ ≤ loss →
+  value - loss ≤ value
+subtractNonnegativeBelow value loss lossNonnegative =
+  subst
+    (λ upper → value + (- loss) ≤ upper)
+    (ℚRing.solve-∀ value)
+    (ℚP.+-mono-≤
+      ℚP.≤-refl
+      (subst
+        (λ upper → - loss ≤ upper)
+        (ℚRing.solve [])
+        (ℚP.neg-mono-≤ lossNonnegative)))
+
+unitSquareBound :
+  (x : ℚ) →
+  0ℚ ≤ x →
+  x ≤ 1ℚ →
+  x * x ≤ 1ℚ
+unitSquareBound x xNonnegative xBelowOne =
+  subst
+    (λ upper → x * x ≤ upper)
+    ℚRing.solve-∀
+    (Order.nonnegativeProductMonotone
+      xNonnegative xNonnegative
+      oneNonnegative oneNonnegative
+      xBelowOne xBelowOne)
+
+brierLossNonnegative :
+  (p : Probability) →
+  (outcome : BinaryOutcome) →
+  0ℚ ≤ brierLoss p outcome
+brierLossNonnegative p outcome =
+  Order.squareNonnegative
+    (value p - outcomeValue outcome)
+
+brierLossAtMostOne :
+  (p : Probability) →
+  (outcome : BinaryOutcome) →
+  brierLoss p outcome ≤ 1ℚ
+brierLossAtMostOne p no =
+  let
+    raw : value p * value p ≤ 1ℚ
+    raw = unitSquareBound (value p) (lower p) (upper p)
+
+    normal :
+      value p * value p ≡ brierLoss p no
+    normal = ℚRing.solve-∀ (value p)
+  in
+  subst (λ left → left ≤ 1ℚ) normal raw
+
+brierLossAtMostOne p yes =
+  let
+    complement = 1ℚ - value p
+
+    complementNonnegative : 0ℚ ≤ complement
+    complementNonnegative =
+      ℚP.p≤q⇒0≤q-p (upper p)
+
+    complementBelowOne : complement ≤ 1ℚ
+    complementBelowOne =
+      subtractNonnegativeBelow 1ℚ (value p) (lower p)
+
+    raw : complement * complement ≤ 1ℚ
+    raw =
+      unitSquareBound
+        complement
+        complementNonnegative
+        complementBelowOne
+
+    normal :
+      complement * complement ≡ brierLoss p yes
+    normal = ℚRing.solve-∀ (value p)
+  in
+  subst (λ left → left ≤ 1ℚ) normal raw
+
+record BrierRangeReceipt
+    (p : Probability)
+    (outcome : BinaryOutcome) : Set where
+  constructor brier-range-receipt
+  field
+    nonnegative : 0ℚ ≤ brierLoss p outcome
+    atMostOne : brierLoss p outcome ≤ 1ℚ
+
+canonicalBrierRangeReceipt :
+  (p : Probability) →
+  (outcome : BinaryOutcome) →
+  BrierRangeReceipt p outcome
+canonicalBrierRangeReceipt p outcome =
+  brier-range-receipt
+    (brierLossNonnegative p outcome)
+    (brierLossAtMostOne p outcome)
 
 ------------------------------------------------------------------------
 -- Log-score seam.
