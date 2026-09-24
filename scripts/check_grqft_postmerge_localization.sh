@@ -32,6 +32,10 @@ files=(
   DASHI/Physics/Foundations/GRHolonomyTaylorRicciEvidenceExact.agda
   DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutExact.agda
   DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutValidation.agda
+  DASHI/Physics/Foundations/RecoveryCommutationCoreExact.agda
+  DASHI/Physics/Foundations/CommonRegimeMathematicalCoreExact.agda
+  DASHI/Physics/Foundations/GRQFTTheoryValidationSplitExact.agda
+  DASHI/Physics/Foundations/GRQFTTheoryValidationSplitValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda
