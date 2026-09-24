@@ -367,7 +367,7 @@ beyondSixthOrderEightEstimateRemainsOpen = refl
 
 sixthSharpeningLeanDonorHead : String
 sixthSharpeningLeanDonorHead =
-  "b287761a3fd4eeb03514cfa7d655ff2e19605b67"
+  "d7b71b0dac1ab836b0ea407571235a86d28222bd"
 
 sixthSharpeningTransportedIntoAgdaKernelHere : Bool
 sixthSharpeningTransportedIntoAgdaKernelHere = false
@@ -378,3 +378,46 @@ coarseExplicitG1K0CertifiedTerminalAbsorbHere = false
 sixthSharpeningInterpretation : String
 sixthSharpeningInterpretation =
   "The generic M6 support/L1 cap is no longer the preferred sixth-order interface. Lean source-writes M6_abs(W)<=K(W), where K(W) is the same selected-witness fourth-Lipschitz constant already used by G1, and exposes the signed sixth harmonic M6_signed(W)/720 * Re((alpha+i*q)^6). The existing explicit G1 K0 remains too coarse for terminal ABSORB, so the preferred next cut is to exploit the signed sixth carrier and prove a genuine beyond-sixth/order-eight estimate, or otherwise sharpen K on the selected witness. Montgomery remains irrelevant to this cut."
+
+
+------------------------------------------------------------------------
+-- LITERAL FINITE SIGNED-SIXTH TRANSPORT
+--
+-- Lean now transports the normalized signed sixth harmonic through the exact
+-- physical r^-2 normalization and literal zero multiplicity, then sums it on
+-- the same finite local centeredZeroFinset carrier:
+--
+--   localCompleteRemainder_n
+--     = localSignedSixthHarmonic_n
+--       + localBeyondSixthRemainder_n.
+--
+-- This is an exact finite same-object decomposition.  It is not an O(8)
+-- theorem and does not itself pay strict scalar ABSORB.
+------------------------------------------------------------------------
+
+data LiteralSixthTransportCoordinate : Set where
+  perZeroSignedSixthPhysicalTransport : LiteralSixthTransportCoordinate
+  perZeroBeyondSixthPhysicalTransport : LiteralSixthTransportCoordinate
+  finiteLocalSignedSixthSplit : LiteralSixthTransportCoordinate
+  finiteLocalBeyondSixthBound : LiteralSixthTransportCoordinate
+
+literalSixthTransportStatus :
+  LiteralSixthTransportCoordinate -> V4H4Status
+literalSixthTransportStatus perZeroSignedSixthPhysicalTransport =
+  leanSourceWrittenDonor
+literalSixthTransportStatus perZeroBeyondSixthPhysicalTransport =
+  leanSourceWrittenDonor
+literalSixthTransportStatus finiteLocalSignedSixthSplit =
+  leanSourceWrittenDonor
+literalSixthTransportStatus finiteLocalBeyondSixthBound =
+  openAnalyticObstruction
+
+finiteLocalSignedSixthSplitIsSourceWritten :
+  literalSixthTransportStatus finiteLocalSignedSixthSplit
+    ≡ leanSourceWrittenDonor
+finiteLocalSignedSixthSplitIsSourceWritten = refl
+
+finiteLocalBeyondSixthBoundRemainsOpen :
+  literalSixthTransportStatus finiteLocalBeyondSixthBound
+    ≡ openAnalyticObstruction
+finiteLocalBeyondSixthBoundRemainsOpen = refl
