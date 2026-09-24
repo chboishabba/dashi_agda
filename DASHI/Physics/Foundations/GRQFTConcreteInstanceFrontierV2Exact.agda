@@ -15,7 +15,7 @@ data GRQFTConcreteTheoryLeaf : Set where
     GRQFTConcreteTheoryLeaf
   attachCMP119StressToLiteralPinnedStress :
     GRQFTConcreteTheoryLeaf
-  evaluateTenIndependentCrossSectorStressComponents : GRQFTConcreteTheoryLeaf
+  evaluateTenFiniteLocalizedD1Readouts : GRQFTConcreteTheoryLeaf
   constructCommonOverlapBackreactionCorrectionEvidence :
     GRQFTConcreteTheoryLeaf
 
@@ -52,9 +52,9 @@ record GRQFTConcreteTheoryFrontier : Set where
     componentSymmetryIsCompilerOwnedOnSymmetricBasisIsTrue :
       componentSymmetryIsCompilerOwnedOnSymmetricBasis ≡ true
 
-    tenIndependentComponentValuesExist : Bool
-    tenIndependentComponentValuesExistIsFalse :
-      tenIndependentComponentValuesExist ≡ false
+    tenFiniteLocalizedD1ReadoutsExist : Bool
+    tenFiniteLocalizedD1ReadoutsExistIsFalse :
+      tenFiniteLocalizedD1ReadoutsExist ≡ false
 
     commonOverlapEvidenceExists : Bool
     commonOverlapEvidenceExistsIsFalse :
@@ -91,4 +91,4 @@ canonicalGRQFTConcreteTheoryFrontier =
     false refl
     false refl
     canonicalGRQFTConcreteTheoryLeaves
-    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, GR literal/recovered attachment plus QFT source-native/legacy recovery projection compatibility, the existing CMP119 metric-stress pairing on an R144-compatible R122 present cut built directly from the functional regular-E source with the 10-slot symmetric tangent carrier; slot-to-finite-tangent transport, canonical metric-basis transport, endpoint-to-metric stress transport, and component symmetry are compiler-owned, leaving only ten independent normalized stress readouts, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
+    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, GR literal/recovered attachment plus QFT source-native/legacy recovery projection compatibility, the existing CMP119 metric-stress pairing on an R144-compatible R122 present cut built directly from the functional regular-E source with the 10-slot symmetric tangent carrier; slot-to-finite-tangent transport, canonical metric-basis transport, endpoint-to-metric stress transport, and component symmetry are compiler-owned, leaving only ten finite localized D1 evaluations whose R119 rational readouts compile to the normalized stress components, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."

@@ -58,6 +58,7 @@ files=(
   DASHI/Physics/Foundations/CMP119ActiveRawSymmetricTangentSpecializationValidation.agda
   DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerExact.agda
   DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerValidation.agda
+  DASHI/Physics/Foundations/CMP119TenFiniteD1ComponentCompilerExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda

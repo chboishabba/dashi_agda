@@ -26,10 +26,10 @@ r144CompatiblePresentCutCompilerClosed :
   ≡ true
 r144CompatiblePresentCutCompilerClosed = refl
 
-tenValuesStillMissing :
-  F.tenIndependentComponentValuesExist F.canonicalGRQFTConcreteTheoryFrontier
+tenFiniteD1ReadoutsStillMissing :
+  F.tenFiniteLocalizedD1ReadoutsExist F.canonicalGRQFTConcreteTheoryFrontier
   ≡ false
-tenValuesStillMissing = refl
+tenFiniteD1ReadoutsStillMissing = refl
 
 w4NotTheoryLeaf :
   F.w4ReplacementIsTheoryCoreLeaf F.canonicalGRQFTConcreteTheoryFrontier
