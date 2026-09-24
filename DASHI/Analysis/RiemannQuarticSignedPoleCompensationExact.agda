@@ -328,3 +328,60 @@ sharpenedGapIsCurrentAnalyticWall :
   sharpenedCompensationStatus sharpenedUniformGapProved
     ≡ openAnalyticObstruction
 sharpenedGapIsCurrentAnalyticWall = refl
+
+
+------------------------------------------------------------------------
+-- COMPLETE BIVARIATE QUARTIC JET
+--
+-- The earlier mixed polynomial alpha^2*q^2-q^4/6 left the pure alpha^4
+-- coefficient inside the horizontal remainder.  The exact same-ordinate
+-- identity identifies that coefficient and the Lean companion now proves
+--
+--   K_W(alpha,q)
+--     =
+--   S(W) * (alpha^2*q^2 - (alpha^4+q^4)/6)
+--     + R6_W(alpha,q)
+--
+-- with the certified local bound
+--
+--   |R6_W(alpha,q)|
+--     <= M6(W) * [
+--          7/4320 * (|q|^6+|alpha|^6)
+--        + 5/192  * alpha^2 * |q|^4
+--        + 1/48   * |alpha|^4 * |q|^2 ].
+--
+-- This is the actual homogeneous fourth-order geometry.  In particular the
+-- leading form is negative on the same-ordinate line and on the critical-line
+-- ordinate axis; positivity can occur only in an intermediate ratio band.
+------------------------------------------------------------------------
+
+data CompleteQuarticJetCoordinate : Set where
+  completeHomogeneousQuarticPolynomial : CompleteQuarticJetCoordinate
+  exactCompleteQuarticJetIdentity : CompleteQuarticJetCoordinate
+  baseQ6Remainder : CompleteQuarticJetCoordinate
+  centeredHyperbolicQ6Remainder : CompleteQuarticJetCoordinate
+  completeQ6RemainderBound : CompleteQuarticJetCoordinate
+  completeQuarticGeometryPaysCompensation : CompleteQuarticJetCoordinate
+
+completeQuarticJetStatus :
+  CompleteQuarticJetCoordinate -> CompensationStatus
+completeQuarticJetStatus completeHomogeneousQuarticPolynomial = theoremOwned
+completeQuarticJetStatus exactCompleteQuarticJetIdentity = theoremOwned
+completeQuarticJetStatus baseQ6Remainder = theoremOwned
+completeQuarticJetStatus centeredHyperbolicQ6Remainder = theoremOwned
+completeQuarticJetStatus completeQ6RemainderBound = theoremOwned
+completeQuarticJetStatus completeQuarticGeometryPaysCompensation =
+  openAnalyticObstruction
+
+completeQuarticJetIsPaid :
+  completeQuarticJetStatus exactCompleteQuarticJetIdentity ≡ theoremOwned
+completeQuarticJetIsPaid = refl
+
+completeQ6BoundIsPaid :
+  completeQuarticJetStatus completeQ6RemainderBound ≡ theoremOwned
+completeQ6BoundIsPaid = refl
+
+completeQuarticCompensationRemainsOpen :
+  completeQuarticJetStatus completeQuarticGeometryPaysCompensation
+    ≡ openAnalyticObstruction
+completeQuarticCompensationRemainsOpen = refl
