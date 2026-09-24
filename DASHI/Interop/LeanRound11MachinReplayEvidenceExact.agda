@@ -10,7 +10,7 @@ module DASHI.Interop.LeanRound11MachinReplayEvidenceExact where
 --   agent/moonshine-round11-route-b-replay-20260924
 --
 -- Exact head at this snapshot:
---   1aeafa66a09285d13412a58199cd5c0ba6d99533
+--   bcdbf33e88f2b202bc02e4b7dea5430b80f7fc54
 --
 -- This module separates:
 --
@@ -67,7 +67,7 @@ canonicalLeanRound11MachinReplayEvidence =
     "chboishabba/dashi_lean4"
     "#24"
     "agent/moonshine-round11-route-b-replay-20260924"
-    "1aeafa66a09285d13412a58199cd5c0ba6d99533"
+    "bcdbf33e88f2b202bc02e4b7dea5430b80f7fc54"
 
     "scripts/verify_round11_machin_route_b.py"
     "Generated/BishopRound11MachinReplayCertificate.lean"
