@@ -72,6 +72,7 @@ on:
       - 'DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerExact.agda'
       - 'DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerValidation.agda'
       - 'DASHI/Physics/Foundations/CMP119TenFiniteD1ComponentCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GRQFTD1MaxCutExact.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
