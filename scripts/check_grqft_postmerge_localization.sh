@@ -85,3 +85,8 @@ for k in ("currentW4SigmaDashiShape","ratioPathFivePointDenominatorDensity"):
 print("projection-ablation:", p["currentW4SigmaDashiShape"]["chi2PerDof"],
       "->", p["ratioPathFivePointDenominatorDensity"]["chi2PerDof"])
 PY
+
+tmp_component_json="$(mktemp)"
+trap 'rm -f "$tmp_component_json"' EXIT
+python3 scripts/grqft_cross_sector_component_residual.py --output "$tmp_component_json"
+diff -u outputs/grqft_cross_sector_component_target.json "$tmp_component_json"
