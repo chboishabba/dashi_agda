@@ -87,7 +87,7 @@ literalContinuumLimit :
     (Limit.finiteMeasure (family core group))
     (Limit.continuumMeasure (family core group))
 literalContinuumLimit core group =
-  R441.literalContinuumLimitFromConcreteExpectationLimit
+  R441.literalContinuumLimitFromConcreteRepresentation
     (continuumMeaning core group)
 
 literalSchwingerBelongsToContinuumMeasure :
@@ -115,6 +115,9 @@ round442ConcreteContinuumSemanticCoreCompilerLevel = machineChecked
 
 round442SourceNativeA3SemanticMeaningLevel : ProofLevel
 round442SourceNativeA3SemanticMeaningLevel = conditional
+
+round442CountablyAdditiveContinuumRepresentationLevel : ProofLevel
+round442CountablyAdditiveContinuumRepresentationLevel = conditional
 
 round442IndependentContinuumLimitWitnessRequired : Bool
 round442IndependentContinuumLimitWitnessRequired = false
