@@ -199,3 +199,6 @@ import DASHI.Physics.Foundations.CMP119PinnedStressMetricRepresentationBridgeVal
 
 import DASHI.Physics.Foundations.CMP119ActiveRawSymmetricTangentSpecializationExact
 import DASHI.Physics.Foundations.CMP119ActiveRawSymmetricTangentSpecializationValidation
+
+import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact
+import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerValidation
