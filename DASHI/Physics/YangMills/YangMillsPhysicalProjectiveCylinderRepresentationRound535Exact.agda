@@ -24,6 +24,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as R498
+import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRound538Exact as R538
 import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as R534
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as R476
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
@@ -50,25 +51,25 @@ record PhysicalProjectiveCylinderRepresentationInputs
     : Set₂ where
   field
     projectiveEvents :
-      R498.ProjectiveCylinderEventInputs
+      R538.PhysicalPositiveProjectiveCylinderInputs
         Configuration Event
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division family
 
     continuity :
       R534.ProjectiveContinuityAtEmpty
-        (R498.asProjectiveCylinderProbability projectiveEvents)
+        (R538.asPositiveProjectiveCylinderProbability projectiveEvents)
 
     extensionAuthority :
       R534.ProjectiveMeasureExtensionAuthority
-        Nat Event ℝ (Configuration → ℝ) ℝ
+        Nat Event (Configuration → ℝ) ℝ
 
     -- Ensure the standard extension theorem's cylinder indicators are the SAME
     -- literal event indicators used to define finite YM probabilities.
     extensionIndicatorIsLiteralIndicator :
       ∀ cutoff event →
       R534.indicatorAt extensionAuthority cutoff event
-      ≡ R498.indicator (R498.events projectiveEvents) event
+      ≡ R498.indicator (R538.events (R538.positiveEvents projectiveEvents)) event
 
     sourceExpectationIsExtendedIntegral :
       ∀ observable →
@@ -76,7 +77,7 @@ record PhysicalProjectiveCylinderRepresentationInputs
       ≡
       R534.integrate extensionAuthority
         (R534.extendProjective extensionAuthority
-          (R498.asProjectiveCylinderProbability projectiveEvents)
+          (R538.asPositiveProjectiveCylinderProbability projectiveEvents)
           continuity)
         observable
 
@@ -89,11 +90,11 @@ asProjectiveRepresentationInputs :
     {sequenceLimit = sequenceLimit}
     limitLaws quotient division family →
   R534.ProjectiveCylinderRepresentationInputs
-    Nat Event ℝ (Configuration → ℝ) ℝ
+    Nat Event (Configuration → ℝ) ℝ
     (Limit.limitExpectation family)
 asProjectiveRepresentationInputs inputs = record
   { R534.ProjectiveCylinderRepresentationInputs.projective =
-      R498.asProjectiveCylinderProbability (projectiveEvents inputs)
+      R538.asPositiveProjectiveCylinderProbability (projectiveEvents inputs)
   ; R534.ProjectiveCylinderRepresentationInputs.continuity =
       continuity inputs
   ; R534.ProjectiveCylinderRepresentationInputs.extensionAuthority =
@@ -120,15 +121,15 @@ round535PhysicalProjectiveRepresentationCompilerLevel = machineChecked
 
 round535FiniteProjectivePremeasureCompilerLevel : ProofLevel
 round535FiniteProjectivePremeasureCompilerLevel =
-  R498.round498ProjectivePremeasureCompilerLevel
+  R538.round538PositiveProjectiveAssemblyCompilerLevel
 
 literalRound535CylinderEventIndicatorSemanticsLevel : ProofLevel
 literalRound535CylinderEventIndicatorSemanticsLevel =
-  R498.literalRound498CylinderEventIndicatorSemanticsLevel
+  R538.literalRound538PositiveCylinderEventSemanticsLevel
 
 literalRound535ProjectiveEventExpectationConsistencyLevel : ProofLevel
 literalRound535ProjectiveEventExpectationConsistencyLevel =
-  R498.literalRound498ProjectiveEventExpectationConsistencyLevel
+  R538.literalRound538ProjectiveEventExpectationConsistencyLevel
 
 literalRound535ProjectiveContinuityAtEmptyLevel : ProofLevel
 literalRound535ProjectiveContinuityAtEmptyLevel =
