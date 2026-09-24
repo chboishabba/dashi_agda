@@ -35,6 +35,7 @@ import DASHI.Physics.Closure.NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654
 import DASHI.Physics.Closure.NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact as R655
 import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact as R656
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact as R657
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarFixedOutputCarrierRound658Exact as R658
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -195,6 +196,18 @@ round650C2BadCollarPureSpectralOrderingAdmissible =
 round650C2BadCollarNeedsSignedNonlinearOrStateDependentInput : Bool
 round650C2BadCollarNeedsSignedNonlinearOrStateDependentInput =
   R657.round657BadCollarNeedsSignedNonlinearOrStateDependentInput
+
+round650C2BadCollarUsesSameHeatNestedR98OuterCarrier : Bool
+round650C2BadCollarUsesSameHeatNestedR98OuterCarrier =
+  R658.round658BadCollarUsesSameR98HeatNestedOuterCarrier
+
+round650C2BadCollarActiveFibreIsUnweightedCommutator : Bool
+round650C2BadCollarActiveFibreIsUnweightedCommutator =
+  R658.round658BadCollarActiveFibreIsUnweightedCommutator
+
+round650C2BadCollarQuantitativeFixedOutputPaymentClosed : Bool
+round650C2BadCollarQuantitativeFixedOutputPaymentClosed =
+  R658.round658QuantitativeBadCollarPaymentClosed
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -374,6 +387,21 @@ round650C2BadCollarNeedsSignedNonlinearOrStateDependentInputIsTrue :
   round650C2BadCollarNeedsSignedNonlinearOrStateDependentInput ≡ true
 round650C2BadCollarNeedsSignedNonlinearOrStateDependentInputIsTrue =
   R657.round657BadCollarNeedsSignedNonlinearOrStateDependentInputIsTrue
+
+round650C2BadCollarUsesSameHeatNestedR98OuterCarrierIsTrue :
+  round650C2BadCollarUsesSameHeatNestedR98OuterCarrier ≡ true
+round650C2BadCollarUsesSameHeatNestedR98OuterCarrierIsTrue =
+  R658.round658BadCollarUsesSameR98HeatNestedOuterCarrierIsTrue
+
+round650C2BadCollarActiveFibreIsUnweightedCommutatorIsTrue :
+  round650C2BadCollarActiveFibreIsUnweightedCommutator ≡ true
+round650C2BadCollarActiveFibreIsUnweightedCommutatorIsTrue =
+  R658.round658BadCollarActiveFibreIsUnweightedCommutatorIsTrue
+
+round650C2BadCollarQuantitativeFixedOutputPaymentClosedIsFalse :
+  round650C2BadCollarQuantitativeFixedOutputPaymentClosed ≡ false
+round650C2BadCollarQuantitativeFixedOutputPaymentClosedIsFalse =
+  R658.round658QuantitativeBadCollarPaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
