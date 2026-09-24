@@ -133,7 +133,7 @@ for code in _INDEX_SAFE:
 for code in _SCOPE_REQUIRED:
     DIAGNOSTIC_POLICIES[code] = _policy(
         EvidenceLevel.AGDA_SCOPE,
-        False,
+        True,
         "requires Agda-resolved scope/elaboration for a hard conclusion",
     )
 for code in _TYPECHECK_REQUIRED:
