@@ -52,6 +52,8 @@ files=(
   DASHI/Physics/Foundations/GRQFTSourceNativeQFTRecoveryProvenanceValidation.agda
   DASHI/Physics/Foundations/GRQFTR457SourceNativeRecoveryBindingExact.agda
   DASHI/Physics/Foundations/GRQFTR457SourceNativeRecoveryBindingValidation.agda
+  DASHI/Physics/Foundations/CMP119SymmetricFiniteTangentBasisCompilerExact.agda
+  DASHI/Physics/Foundations/CMP119SymmetricFiniteTangentBasisCompilerValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda
