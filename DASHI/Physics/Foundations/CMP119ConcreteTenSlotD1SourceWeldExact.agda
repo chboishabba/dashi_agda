@@ -2,8 +2,8 @@
 module DASHI.Physics.Foundations.CMP119ConcreteTenSlotD1SourceWeldExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Product using (proj₁; proj₂)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product using (proj₁; proj₂)\nopen import Data.Rational.Base using (-[1+_])
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
@@ -238,7 +238,7 @@ module _
     Negative.cmp119ActiveStressSum
       evaluator
       (StressRep.stressTensor representation)
-    ≡ Data.Rational.Base.-[1+ Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero ]
+    ≡ -[1+ suc zero ]
   activeStressIsNegativeTwo weld =
     Negative.tenComponentsCompileToNegativeActiveStress
       (normalizedMetricTenComponentInstance weld)
