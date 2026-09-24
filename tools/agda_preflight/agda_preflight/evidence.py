@@ -145,7 +145,18 @@ for code in _TYPECHECK_REQUIRED:
 
 
 def policy_for(code: str) -> DiagnosticPolicy:
-    return DIAGNOSTIC_POLICIES.get(code, _DEFAULT_POLICY)
+    """Return the explicit evidence contract for CODE.
+
+    New diagnostics must be classified deliberately. Falling back silently is
+    exactly how an unsafe structural heuristic can accidentally become a hard
+    error, so an unclassified code is a programming error.
+    """
+    try:
+        return DIAGNOSTIC_POLICIES[code]
+    except KeyError as exc:
+        raise KeyError(
+            f"diagnostic {code} has no evidence policy; classify it before emitting"
+        ) from exc
 
 
 def classify_codes(codes: Iterable[str]) -> Mapping[EvidenceLevel, Set[str]]:
