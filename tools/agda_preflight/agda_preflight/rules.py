@@ -1009,6 +1009,8 @@ def extended_diagnostics(checker, s, D):
     for token in root_tokens:
         if token.node_type != "qid" or "." not in token.text:
             continue
+        if token.text == s.module_name or token.text in s.imports.values():
+            continue
         alias = token.text.split(".", 1)[0]
         if alias not in known_aliases and alias not in local_prefixes and alias[:1].isupper():
             out.append(_diag(D, "TSAGDA022", f"qualified prefix {alias} is not a known import alias or local namespace", s, token.line, token.column, severity="warning", confidence="medium"))
