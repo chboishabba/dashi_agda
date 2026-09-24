@@ -1,9 +1,3 @@
-module DASHI.Physics.YangMills.YMClayAristotleGapParityEverything where
-
--- Focused rollup for the post-#987 Aristotle donor reconciliation. This is
--- intentionally separate from the historical global Yang-Mills rollup so the
--- cross-prover authority boundary remains inspectable.
-
 import DASHI.Physics.YangMills.YMClayAristotleDonorAtlasExact
 import DASHI.Physics.YangMills.YMClayVacuumSectorSpectralGapParityExact
 import DASHI.Physics.YangMills.YMClayLiteralSU2LatticeDonorExact
@@ -77,73 +71,55 @@ import DASHI.Physics.YangMills.YMClayOutstandingPhysicalFrontierExact
 import DASHI.Physics.YangMills.YMClayCanonicalMassGapConclusionExact
 import DASHI.Physics.YangMills.YMClayTrancheProofLevelAuditValidation
 import DASHI.Physics.YangMills.YMClayAristotleGapParityValidation
-
 import DASHI.Physics.YangMills.YMClayAristotleRouteSLiteralWilsonDonorExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonRouteSThreeInputBoundaryValidation
 import DASHI.Physics.YangMills.YMClayLiteralLocalFieldsClosureExact
 import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureExact
 import DASHI.Physics.YangMills.YMClayLiteralTopDownRouteSClosureValidation
-
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP1FiniteClusteringExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP2ExpectationConvergenceExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP3SameOSCorrelationExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP123ReductionValidation
 import DASHI.Physics.YangMills.YMClayLevel2D2TransportGeneratedRecurrenceExact
 import DASHI.Physics.YangMills.YMClayLevel2D2TransportGeneratedRecurrenceValidation
-
 import DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeExact
 import DASHI.Physics.YangMills.YMClayLevel2D3ConservedWardChargeValidation
-
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2CanonicalProductPresentationValidation
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundValidation
-
 import DASHI.Physics.YangMills.YMClayLevel2CompositeTransportABIInsufficiencyExact
-
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundExact
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonTraceBoundValidation
 import DASHI.Physics.YangMills.YMClayLevel2D2R129CompositeConvergenceExact
-
 import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeExact
 import DASHI.Physics.YangMills.YMClayContinuumConstructionSameObjectBridgeValidation
-
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelCauchyQuotientMajorantExact
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureExact
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureValidation
-
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationExact
 import DASHI.Physics.YangMills.BalabanClayT5ConfiguredDyadicTailSummationValidation
-
 import DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyExact
 import DASHI.Physics.YangMills.BalabanClayT5TypedContinuumDefectCauchyValidation
-
 import DASHI.Physics.YangMills.BalabanClayT5MarkovToProkhorovTightnessExact
 import DASHI.Physics.YangMills.BalabanClayT5MarkovToProkhorovTightnessValidation
-
 import DASHI.Physics.YangMills.BalabanClayT5Path4MarkovProkhorovExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4MarkovProkhorovValidation
-
 import DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsExact
 import DASHI.Physics.YangMills.BalabanFiniteRGProbabilityExpectationSemanticsValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4FiniteProbabilitySemanticsValidation
-
 import DASHI.Physics.YangMills.YMClayLiteralVocabularyNonPinningExact
-
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityExact
 import DASHI.Physics.YangMills.BalabanClayGate4ReferenceToFiniteRGProbabilityValidation
 import DASHI.Physics.YangMills.BalabanClayP3CanonicalRationalConstrainedSumExact
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTExact
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalPhysicalTValidation
-
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalReferenceAlgebraExact
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalRationalReferenceAlgebraValidation
 import DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationExact
 import DASHI.Physics.YangMills.BalabanClayGate4PreferredRationalReferenceNormalizationValidation
-
-
 import DASHI.Physics.YangMills.BalabanFiniteProbabilityPartitionDisintegrationExact
 import DASHI.Physics.YangMills.BalabanFiniteProbabilityPartitionDisintegrationValidation
 import DASHI.Physics.YangMills.BalabanClayGate4ConstrainedReferenceKernelExact
@@ -157,7 +133,6 @@ import DASHI.Physics.YangMills.BalabanFiniteVolumeConditionalGate4PresentationVa
 import DASHI.Physics.YangMills.BalabanClayT5Path4ConditionalGate4FiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4ConditionalGate4FiniteSemanticsValidation
 import DASHI.Physics.YangMills.BalabanClayGate4ProbabilitySemanticCorrectionExact
-
 import DASHI.Physics.YangMills.BalabanFinitePositiveWeightNormalizationExact
 import DASHI.Physics.YangMills.BalabanFinitePositiveWeightNormalizationValidation
 import DASHI.Physics.YangMills.BalabanClayGate4RawSlowDensityToProbabilityExact
@@ -170,21 +145,18 @@ import DASHI.Physics.YangMills.BalabanCMP119FiniteVolumeGate4PresentationExact
 import DASHI.Physics.YangMills.BalabanCMP119FiniteVolumeGate4PresentationValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119FiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119FiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteSlowDensityExact
 import DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteSlowDensityValidation
 import DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationExact
 import DASHI.Physics.YangMills.BalabanCMP119AssembledFiniteVolumeGate4PresentationValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119AssembledFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119AssembledFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassWeldExact
 import DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassWeldValidation
 import DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationExact
 import DASHI.Physics.YangMills.BalabanCMP119Gate4ConstrainedMassFiniteVolumePresentationValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119ConstrainedMassFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119ConstrainedMassFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalPhysicalTOperationRationalNonnegativeExact
 import DASHI.Physics.YangMills.BalabanClayGate4CanonicalPhysicalTOperationRationalNonnegativeValidation
 import DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationWeldExact
@@ -193,7 +165,6 @@ import DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationFiniteVolumePresen
 import DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationFiniteVolumePresentationValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119PhysicalTOperationFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119PhysicalTOperationFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanCMP119FiniteDensityAssemblySemanticsExact
 import DASHI.Physics.YangMills.BalabanCMP119FiniteDensityAssemblySemanticsValidation
 import DASHI.Physics.YangMills.BalabanCMP119PhysicalTOperationAssemblyRealizationExact
@@ -202,7 +173,6 @@ import DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumeP
 import DASHI.Physics.YangMills.BalabanCMP119SplitPhysicalTOperationFiniteVolumePresentationValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119SplitPhysicalTOperationFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4CMP119SplitPhysicalTOperationFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanCMP119Section2FiniteDensityEvaluationExact
 import DASHI.Physics.YangMills.BalabanCMP119Section2FiniteDensityEvaluationValidation
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119FiniteDensityEvaluationExact
@@ -211,7 +181,6 @@ import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PhysicalTOperationFiniteVo
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119PhysicalTOperationFiniteVolumeValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119PhysicalTOperationFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119PhysicalTOperationFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanClayGate4ParameterizedEffectiveActionExact
 import DASHI.Physics.YangMills.BalabanClayGate4ParameterizedEffectiveActionValidation
 import DASHI.Physics.YangMills.BalabanCMP119PhysicalEffectiveActionRealizationExact
@@ -220,7 +189,6 @@ import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119GeneratedActionFiniteVolum
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119GeneratedActionFiniteVolumeValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119GeneratedActionFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119GeneratedActionFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214ActionEvaluationExact
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214ActionEvaluationValidation
 import DASHI.Physics.YangMills.BalabanCMP119Round214BackedPhysicalEffectiveActionExact
@@ -229,14 +197,12 @@ import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214GeneratedActionFin
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214GeneratedActionFiniteVolumeValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Round214GeneratedActionFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Round214GeneratedActionFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanCMP119Round214ExponentialPhysicalTBridgeExact
 import DASHI.Physics.YangMills.BalabanCMP119Round214ExponentialPhysicalTBridgeValidation
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214ExponentialFiniteVolumeExact
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Round214ExponentialFiniteVolumeValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Round214ExponentialFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Round214ExponentialFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanCMP122Equation171TOperationSemanticsExact
 import DASHI.Physics.YangMills.BalabanCMP122Equation171TOperationSemanticsValidation
 import DASHI.Physics.YangMills.BalabanCMP119Equation171PhysicalTOperationRealizationExact
@@ -245,7 +211,6 @@ import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171FiniteVolumeExa
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171FiniteVolumeValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171FiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171FiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanEmbeddedCanonicalRationalConstrainedFoldExact
 import DASHI.Physics.YangMills.BalabanEmbeddedCanonicalRationalConstrainedFoldValidation
 import DASHI.Physics.YangMills.BalabanCMP122Equation171FiniteConstrainedRealizationExact
@@ -256,7 +221,6 @@ import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFinit
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119Equation171StructuredFiniteVolumeValidation
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171StructuredFiniteSemanticsExact
 import DASHI.Physics.YangMills.BalabanClayT5Path4BetaDrivenCMP119Equation171StructuredFiniteSemanticsValidation
-
 import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4QuadratureSliceExact
 import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4QuadratureSliceValidation
 import DASHI.Physics.YangMills.BalabanCMP122Equation171Gate4RefinementLimitExact
@@ -265,7 +229,6 @@ import DASHI.Physics.YangMills.BalabanCMP119Equation171Gate4RefinementSourceLimi
 import DASHI.Physics.YangMills.BalabanCMP119Equation171Gate4RefinementSourceLimitValidation
 import DASHI.Physics.YangMills.BalabanCompactHaarFiniteQuadratureErrorExact
 import DASHI.Physics.YangMills.BalabanCompactHaarFiniteQuadratureErrorValidation
-
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorValidation
 import DASHI.Physics.YangMills.BalabanCMP122Equation171QuantitativeQuadratureLimitExact
@@ -274,7 +237,6 @@ import DASHI.Physics.YangMills.BalabanCMP119Equation171QuantitativeSourceLimitEx
 import DASHI.Physics.YangMills.BalabanCMP119Equation171QuantitativeSourceLimitValidation
 import DASHI.Physics.YangMills.BalabanClayT5QuadratureStagedDiagonalTailExact
 import DASHI.Physics.YangMills.BalabanClayT5QuadratureStagedDiagonalTailValidation
-
 import DASHI.Physics.YangMills.BalabanFiniteProductMassExactPartitionExact
 import DASHI.Physics.YangMills.BalabanFiniteProductMassExactPartitionValidation
 import DASHI.Physics.YangMills.BalabanClayGate4EmbeddedWeightedQuadratureExact
@@ -285,7 +247,6 @@ import DASHI.Physics.YangMills.BalabanCMP122Equation171WeightedGate4RefinementLi
 import DASHI.Physics.YangMills.BalabanCMP122Equation171WeightedGate4RefinementLimitValidation
 import DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedGate4SourceLimitExact
 import DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedGate4SourceLimitValidation
-
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenFunctionalDensityExact
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenFunctionalDensityValidation
 import DASHI.Physics.YangMills.BalabanBetaDrivenCMP119FunctionalOperatorExact
@@ -304,10 +265,8 @@ import DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedStepApproximation
 import DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedStepApproximationValidation
 import DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedFactorizedConvergenceExact
 import DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedFactorizedConvergenceValidation
-
 import DASHI.Physics.YangMills.BalabanCMP119FiniteObservableExpectationConvergenceExact
 import DASHI.Physics.YangMills.BalabanCMP119FiniteObservableExpectationConvergenceValidation
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersValidation
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact
@@ -318,22 +277,16 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedLiteralCompilerExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedLiteralCompilerValidation
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalInstanceExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalInstanceValidation
-
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Exact
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalPathMarkedReplayRound410Validation
-
 import DASHI.Physics.YangMills.BalabanCylinderExpectationLimitMeasureExact
 import DASHI.Physics.YangMills.BalabanCylinderExpectationLimitMeasureValidation
 import DASHI.Physics.YangMills.BalabanCMP116PublishedSelectedGapProducerExact
 import DASHI.Physics.YangMills.BalabanCMP116PublishedSelectedGapProducerValidation
 import DASHI.Physics.YangMills.BalabanSameFamilyCompositeOPEStressCompilerExact
 import DASHI.Physics.YangMills.BalabanSameFamilyCompositeOPEStressCompilerValidation
-
 import DASHI.Physics.YangMills.YangMillsABCConstructiveCoreExact
 import DASHI.Physics.YangMills.YangMillsABCConstructiveCoreValidation
-
-
--- Preferred literal real CMP119/CMP116 same-carrier route.
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumConstructionExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSReconstructionExact
@@ -345,36 +298,21 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ClusteringExac
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116PhysicalUpperExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ScaleCalibrationExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116ScaleCalibrationValidation
-
-
--- Literal CMP116 differentiated-localization proof producers R411-R414.
 import DASHI.Physics.YangMills.BalabanCMP116SelectedSupportConnectionRound411Exact
 import DASHI.Physics.YangMills.BalabanCMP116CauchyWeightedDerivativeRound412Exact
 import DASHI.Physics.YangMills.BalabanCMP99PathDerivativeSourceReplayRound413Exact
 import DASHI.Physics.YangMills.BalabanCMP116ConnectingOuterSumRound414Exact
-
-
--- A/B/C literal frontier compilers: concrete OS1, selected R410 source decay, pinned C stress/AF.
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CylinderEuclideanCovarianceExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS1SystemExact
 import DASHI.Physics.YangMills.BalabanCMP116SelectedMarkedExpansionRound415Exact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StressCommonCoreExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact
-
-
--- ABC literal-inhabitant continuation: OS3, R415->physical-scale, Round109 stress same-object.
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteOS3SystemExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119RealCMP116MarkedExpansionScaleExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109StressSameObjectExact
-
-
--- ABC hard-math continuation: R406->R415, CMP119 compactness, Round109->common core.
 import DASHI.Physics.YangMills.BalabanCMP116Round406To415Exact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SelectedProjectiveCompactnessExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109ToCommonCoreExact
-
-
--- ABC open-frontier continuation: source-native B, one-family A, same-family C.
 import DASHI.Physics.YangMills.BalabanCMP116Round354To415FixedYExact
 import DASHI.Physics.YangMills.BalabanCMP116PreferredR415SourceExact
 import DASHI.Physics.YangMills.BalabanCMP116Round406PreferredR415Exact
@@ -389,13 +327,8 @@ import DASHI.Physics.YangMills.BalabanR144ToCMP119StressInsertionExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LocalCoreStressExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119Round109ConcreteLocalCExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MarkedCurvatureCompositeExact
-
 import DASHI.Physics.YangMills.YangMillsFiniteNormalizedExpectationSymmetryExact
-
 import DASHI.Physics.YangMills.YangMillsStressWardPointwiseCoreGeneratorExact
-
-
--- ABC literal-inhabitant continuation: source-fed A, integrated B, completed C.
 import DASHI.Physics.YangMills.BalabanCMP116LiteralMarkedChargingRound416Exact
 import DASHI.Physics.YangMills.BalabanCMP116LiteralMarkedChargingToR415Exact
 import DASHI.Physics.YangMills.BalabanCMP116LiteralSelectedExpansionRound418Exact
@@ -411,54 +344,122 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R129CompositeHubExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R129NuclearCompositeExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R109NuclearStressExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119MicrocausalChargeExact
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteANumeratorExact
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119UniformProjectiveCompactnessExact
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119StressPointwiseCommonCoreExact
-
-
--- ABC least-privilege refinements: ordered B, support-graph B, pointwise C.
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119PreferredR415OrderedRealExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119PointwiseStressCoreExact
 import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphGeometryExact
-
 import DASHI.Physics.YangMills.BalabanR144CanonicalMetricTangentAttachmentExact
-
 import DASHI.Physics.YangMills.BalabanCMP116Round406SourceRateSplitAmplitudeRound420Exact
 import DASHI.Physics.YangMills.BalabanCMP116Round406ExactR410ReplayRound421Exact
 import DASHI.Physics.YangMills.BalabanCMP116Equation126129ToRound406Round422Exact
 import DASHI.Physics.YangMills.BalabanCMP116Round406NonemptySelectedFibreRound423Exact
 import DASHI.Physics.YangMills.BalabanCMP116Round406SupportGraphPreferredR415Round419Exact
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralACompletionRound424Exact
-
 import DASHI.Physics.YangMills.BalabanCMP116LiteralBCompletionRound425Exact
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralBRealCompletionRound426Exact
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119SameCompletedCompositeStressRound427Exact
 import DASHI.Physics.YangMills.BalabanR144CanonicalMetricTangentRound428Exact
-
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalFourStageR406Round429Exact
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119R129PaysContinuumSemanticsRound430Exact
-
 import DASHI.Physics.YangMills.YangMillsFiniteHaarActionNumeratorInvariantRound431Exact
-
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumFromOSRound432Exact
-
 import DASHI.Physics.YangMills.BalabanR144CanonicalMetricDomainRound433Exact
-
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalTwiceMarkedSupportRound434Exact
-\nimport DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedBSourceRound435Exact\n\nimport DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CanonicalASourceRound436Exact\n\nimport DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact\n\nimport DASHI.Physics.YangMills.BalabanCMP116CanonicalLiteralRateSourceRound438Exact\n\nimport DASHI.Physics.YangMills.YangMillsClayGoal1SameHNontrivialityRound439Exact\n
 import DASHI.Physics.YangMills.BalabanCMP116VariableDomainPreferredR415Round440Exact
-
 import DASHI.Physics.YangMills.BalabanCMP116R429RootedTraceCountingRound441Exact
-
 import DASHI.Physics.YangMills.BalabanCMP116R429TraceEntropyBudgetRound442Exact
-
 import DASHI.Physics.YangMills.YangMillsCMP119WilsonGibbsHaarActionRound443Exact
-
 import DASHI.Physics.YangMills.YangMillsCMP119PeterWeylWilsonSquareRound444Exact
+
+module DASHI.Physics.YangMills.YMClayAristotleGapParityEverything where
+
+-- Focused rollup for the post-#987 Aristotle donor reconciliation. This is
+-- intentionally separate from the historical global Yang-Mills rollup so the
+-- cross-prover authority boundary remains inspectable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Preferred literal real CMP119/CMP116 same-carrier route.
+
+
+-- Literal CMP116 differentiated-localization proof producers R411-R414.
+
+
+-- A/B/C literal frontier compilers: concrete OS1, selected R410 source decay, pinned C stress/AF.
+
+
+-- ABC literal-inhabitant continuation: OS3, R415->physical-scale, Round109 stress same-object.
+
+
+-- ABC hard-math continuation: R406->R415, CMP119 compactness, Round109->common core.
+
+
+-- ABC open-frontier continuation: source-native B, one-family A, same-family C.
+
+
+
+
+-- ABC literal-inhabitant continuation: source-fed A, integrated B, completed C.
+
+
+
+
+
+-- ABC least-privilege refinements: ordered B, support-graph B, pointwise C.
+
+
+
+
+
+
+
+
+
+
+
+
+\nimport DASHI.Physics.YangMills.BalabanCMP116CanonicalSelectedBSourceRound435Exact\n\nimport DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CanonicalASourceRound436Exact\n\nimport DASHI.Physics.YangMills.YangMillsClayGoal1CanonicalCSourceRound437Exact\n\nimport DASHI.Physics.YangMills.BalabanCMP116CanonicalLiteralRateSourceRound438Exact\n\nimport DASHI.Physics.YangMills.YangMillsClayGoal1SameHNontrivialityRound439Exact\n
+
+
+
+
