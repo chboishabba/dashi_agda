@@ -49,24 +49,29 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 -- finite-measure constructors now compile a normalized stress calculus on that
 -- measure into both R121.densitySource and the R122 density anchor.
 --
--- Therefore the remaining frontier is exactly two source-facing tasks:
---   (1) inhabit the literal finite-measure N,Z,dN,dZ/connected-numerator
---       calculus for the selected CMP119 stress insertion;
---   (2) evaluate that connected numerator on the ten transported metric
---       perturbations.
+-- The physical rational finite-measure layer now constructs the literal
+-- N,Z,DN,DZ formulas and the Gibbs reduction D rho[h] = -rho DS[h].  Thus the
+-- remaining source work is smaller still:
+--   (1) identify the selected CMP119 base insertion observable O;
+--   (2) identify the metric action variation DS[h] and insertion variation
+--       DO[h] on the same finite configuration carrier;
+--   (3) evaluate the ten literal Haar-integral combinations
+--         C_h = B_h Z - A D_h.
 --
--- No extra D1a/D1b, density callback, tensor bridge, or synthetic normalization
--- premise is required.
+-- No extra D1a/D1b, density callback, quotient algebra, tensor bridge, or
+-- synthetic normalization premise is required.
 ------------------------------------------------------------------------
 
 data GRQFTD1Leaf : Set where
-  realizeFiniteMeasureNormalizedStressSource : GRQFTD1Leaf
-  evaluateTenLiteralFiniteMeasureConnectedNumerators : GRQFTD1Leaf
+  identifySelectedCMP119BaseInsertionObservable : GRQFTD1Leaf
+  identifyMetricActionAndInsertionVariations : GRQFTD1Leaf
+  evaluateTenLiteralGibbsABDZReadouts : GRQFTD1Leaf
 
 canonicalGRQFTD1Leaves : List GRQFTD1Leaf
 canonicalGRQFTD1Leaves =
-  realizeFiniteMeasureNormalizedStressSource
-  ∷ evaluateTenLiteralFiniteMeasureConnectedNumerators
+  identifySelectedCMP119BaseInsertionObservable
+  ∷ identifyMetricActionAndInsertionVariations
+  ∷ evaluateTenLiteralGibbsABDZReadouts
   ∷ []
 
 ordinarySubstitutedFirstVariationChainRuleClosed : Bool
@@ -150,19 +155,40 @@ finiteMeasureStressSourceConstructorAvailableIsTrue :
   finiteMeasureStressSourceConstructorAvailable ≡ true
 finiteMeasureStressSourceConstructorAvailableIsTrue = refl
 
-literalFiniteMeasureStressCalculusInhabitantStillOpen : Bool
-literalFiniteMeasureStressCalculusInhabitantStillOpen = true
+finiteMeasureNZDNDZFormulaConstructed : Bool
+finiteMeasureNZDNDZFormulaConstructed = true
 
-literalFiniteMeasureStressCalculusInhabitantStillOpenIsTrue :
-  literalFiniteMeasureStressCalculusInhabitantStillOpen ≡ true
-literalFiniteMeasureStressCalculusInhabitantStillOpenIsTrue = refl
+finiteMeasureNZDNDZFormulaConstructedIsTrue :
+  finiteMeasureNZDNDZFormulaConstructed ≡ true
+finiteMeasureNZDNDZFormulaConstructedIsTrue = refl
 
-tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpen : Bool
-tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpen = true
+gibbsDensityDerivativeReductionConstructed : Bool
+gibbsDensityDerivativeReductionConstructed = true
 
-tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpenIsTrue :
-  tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpen ≡ true
-tenLiteralFiniteMeasureConnectedNumeratorEvaluationsStillOpenIsTrue = refl
+gibbsDensityDerivativeReductionConstructedIsTrue :
+  gibbsDensityDerivativeReductionConstructed ≡ true
+gibbsDensityDerivativeReductionConstructedIsTrue = refl
+
+selectedBaseInsertionObservableStillOpen : Bool
+selectedBaseInsertionObservableStillOpen = true
+
+selectedBaseInsertionObservableStillOpenIsTrue :
+  selectedBaseInsertionObservableStillOpen ≡ true
+selectedBaseInsertionObservableStillOpenIsTrue = refl
+
+selectedMetricActionAndInsertionVariationsStillOpen : Bool
+selectedMetricActionAndInsertionVariationsStillOpen = true
+
+selectedMetricActionAndInsertionVariationsStillOpenIsTrue :
+  selectedMetricActionAndInsertionVariationsStillOpen ≡ true
+selectedMetricActionAndInsertionVariationsStillOpenIsTrue = refl
+
+tenLiteralGibbsABDZEvaluationsStillOpen : Bool
+tenLiteralGibbsABDZEvaluationsStillOpen = true
+
+tenLiteralGibbsABDZEvaluationsStillOpenIsTrue :
+  tenLiteralGibbsABDZEvaluationsStillOpen ≡ true
+tenLiteralGibbsABDZEvaluationsStillOpenIsTrue = refl
 
 candidateNormalizationIsProofPremise : Bool
 candidateNormalizationIsProofPremise = false
