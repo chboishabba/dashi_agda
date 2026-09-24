@@ -2,7 +2,7 @@
 module DASHI.Physics.Foundations.CMP119LiteralFiniteMeasureStressSourceConstructorExact where
 
 open import Data.Rational.Base as ℚ using (ℚ)
-open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationCrossNumeratorExact as Cross
@@ -118,4 +118,4 @@ connectedNumeratorAtBetaScaleIsFiniteMeasureNumerator :
 connectedNumeratorAtBetaScaleIsFiniteMeasureNumerator
     {measureWeld = measureWeld} calculus scale perturbation
     rewrite R124.densityAtScaleIsLiteralFiniteMeasure measureWeld scale =
-  Relation.Binary.PropositionalEquality.refl
+  refl
