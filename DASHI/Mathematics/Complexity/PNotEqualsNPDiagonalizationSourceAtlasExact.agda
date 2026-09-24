@@ -23,6 +23,7 @@ data SourceRole : Set where
   modernCircuitLowerBoundContext : SourceRole
   metaComplexityContext : SourceRole
   cardinalityDiagonalization : SourceRole
+  sharedConstraintEncoding : SourceRole
   diagonalCardinality : SourceRole
 
 data IdentifierStatus : Set where
@@ -129,6 +130,18 @@ goldbergJuvekarKabanets2026 =
     stableReportIdentifier
     "Context only: meta-complexity / description-complexity motivation.  No self-diagonal SAT certificate or P != NP theorem is imported."
 
+
+tseitin1968 : ComplexitySource
+tseitin1968 =
+  complexitySource
+    "Grigori S. Tseitin"
+    "On the complexity of derivations in propositional calculus"
+    1968
+    "Studies in Constructive Mathematics and Mathematical Logic, Part II, 115--125"
+    "historical-bibliography:Tseitin-1968-115-125"
+    sharedConstraintEncoding
+    stableHistoricalBibliography
+    "Calibrates the auxiliary-variable/shared-constraint tradition used by the circuit DAG lane.  No DOI is asserted for the 1968 source, and no P-versus-NP lower bound is imported."
 
 cantor1891 : ComplexitySource
 cantor1891 =
