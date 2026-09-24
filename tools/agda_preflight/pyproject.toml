@@ -23,3 +23,13 @@ include = ["agda_preflight*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8,<10",
+  "pytest-xdist>=3,<4",
+]
+
+[project.entry-points.pytest11]
+dashi_agda_preflight = "agda_preflight.pytest_plugin"
