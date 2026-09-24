@@ -292,6 +292,45 @@ class AgdaAutoRefineBackend:
             extra_args=extra_args,
         )
         self.use_typecheck = typecheck
+        self._scope_validated: Set[Path] = set()
+        self._scope_failed: Set[Path] = set()
+        self._scope_probe_roots: Set[Path] = set()
+
+    @staticmethod
+    def _key(path: Path) -> Path:
+        return path.resolve()
+
+    def scope_known(self, path: Path) -> bool:
+        key = self._key(path)
+        return key in self._scope_validated or key in self._scope_failed
+
+    def scope_validated(self, path: Path) -> bool:
+        return self._key(path) in self._scope_validated
+
+    def scope_failed(self, path: Path) -> bool:
+        return self._key(path) in self._scope_failed
+
+    def probe_scope(self, path: Path, *, aggregate_root: bool = False) -> bool:
+        """Run at most one scope probe for PATH and cache the result."""
+        key = self._key(path)
+        if key in self._scope_validated:
+            return True
+        if key in self._scope_failed:
+            return False
+        ok = self.scope._scope_ok(key)
+        if aggregate_root:
+            self._scope_probe_roots.add(key)
+        if ok:
+            self._scope_validated.add(key)
+        else:
+            self._scope_failed.add(key)
+        return ok
+
+    def mark_scope_validated(self, paths) -> None:
+        for path in paths:
+            key = self._key(path)
+            self._scope_validated.add(key)
+            self._scope_failed.discard(key)
 
     @staticmethod
     def _needs(diagnostics: List, level: EvidenceLevel) -> bool:
@@ -313,23 +352,41 @@ class AgdaAutoRefineBackend:
                 "succeeded": self.typecheck.succeeded,
                 "failed": self.typecheck.failed,
             },
+            "scope_cache": {
+                "validated_modules": len(self._scope_validated),
+                "failed_frontier_modules": len(self._scope_failed),
+                "aggregate_probe_roots": len(self._scope_probe_roots),
+            },
         }
 
     def refine(self, summary, diagnostics: List):
         current = diagnostics
 
         if self._needs(current, EvidenceLevel.AGDA_SCOPE):
-            scope_ok = self.scope._scope_ok(summary.path)
-            if scope_ok:
+            path = summary.path.resolve()
+            if self.scope_validated(path):
                 current = [
                     diagnostic
                     for diagnostic in current
                     if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
                 ]
-            else:
-                # Full typechecking cannot succeed if scope checking already
-                # fails, so do not pay the more expensive oracle cost.
+            elif self.scope_failed(path):
+                # A closure prepass already established that this module is on
+                # the unresolved scope frontier. Do not launch the same failed
+                # process again during the pytest item.
                 return current
+            else:
+                scope_ok = self.probe_scope(path)
+                if scope_ok:
+                    current = [
+                        diagnostic
+                        for diagnostic in current
+                        if policy_for(diagnostic.code).minimum != EvidenceLevel.AGDA_SCOPE
+                    ]
+                else:
+                    # Full typechecking cannot succeed if scope checking already
+                    # fails, so do not pay the more expensive oracle cost.
+                    return current
 
         if (
             self.use_typecheck
