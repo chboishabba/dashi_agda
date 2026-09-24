@@ -10,7 +10,7 @@ import tree_sitter_agda
 from .rules import extended_diagnostics
 from .ast_index import AstIndex, build_ast_index, significant_tokens, typed_binders
 from .shapes import shape_from_node, terminal_head, explicit_arity
-from .evidence import EvidenceLevel, evidence_name, policy_for
+from .evidence import DIAGNOSTIC_ALIASES, EvidenceLevel, evidence_name, policy_for
 
 
 
@@ -269,15 +269,8 @@ class Checker:
         # Some catalogue entries are intentionally more specific views of the
         # same high-confidence structural event. Emit aliases centrally so the
         # documented diagnostic surface stays synchronized across rule engines.
-        aliases = {
-            "TSAGDA002": ("TSAGDA171",),
-            "TSAGDA003": ("TSAGDA065", "TSAGDA067"),
-            "TSAGDA012": ("TSAGDA175",),
-            "TSAGDA045": ("TSAGDA110",),
-            "TSAGDA042": ("TSAGDA112",),
-        }
         for diagnostic in list(diagnostics):
-            for code in aliases.get(diagnostic.code, ()):
+            for code in DIAGNOSTIC_ALIASES.get(diagnostic.code, ()):
                 diagnostics.append(
                     Diagnostic(
                         code,
