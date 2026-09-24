@@ -39,6 +39,8 @@ files=(
   DASHI/Physics/Foundations/GRQFTRationalStressComponentCutExact.agda
   DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierV2Exact.agda
   DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierV2Validation.agda
+  DASHI/Physics/Foundations/GRQFTCommonRegimeBidiAttemptExact.agda
+  DASHI/Physics/Foundations/GRQFTCommonRegimeBidiAttemptValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda
