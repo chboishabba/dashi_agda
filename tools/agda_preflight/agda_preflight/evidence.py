@@ -118,6 +118,25 @@ _TYPECHECK_REQUIRED: Set[str] = {
 }
 
 
+DIAGNOSTIC_ALIASES = {
+    "TSAGDA002": ("TSAGDA171",),
+    "TSAGDA003": ("TSAGDA065", "TSAGDA067"),
+    "TSAGDA012": ("TSAGDA175",),
+    "TSAGDA045": ("TSAGDA110",),
+    "TSAGDA042": ("TSAGDA112",),
+}
+
+_ALIAS_TO_CANONICAL = {
+    alias: canonical
+    for canonical, aliases in DIAGNOSTIC_ALIASES.items()
+    for alias in aliases
+}
+
+
+def canonical_code(code: str) -> str:
+    return _ALIAS_TO_CANONICAL.get(code, code)
+
+
 DIAGNOSTIC_POLICIES: Dict[str, DiagnosticPolicy] = {}
 for code in _TREE_ONLY:
     DIAGNOSTIC_POLICIES[code] = _policy(
