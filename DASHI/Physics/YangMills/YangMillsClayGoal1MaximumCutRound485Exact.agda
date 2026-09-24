@@ -22,6 +22,7 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Ex
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as A3Measure
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as A3MeasureCut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedA3Round480Exact as A3
+import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45Source
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
@@ -82,7 +83,7 @@ a3CylinderExpectationIntegralIdentificationLevel =
 
 a3RepresentedLiteralSemanticsLevel : ProofLevel
 a3RepresentedLiteralSemanticsLevel =
-  A3.literalRound480RepresentedContinuumSemanticsLevel
+  A3Direct.round497RepresentedSourceNativeA3CompilerLevel
 
 a45QuantitativeMomentToFiniteOS05Level : ProofLevel
 a45QuantitativeMomentToFiniteOS05Level =
