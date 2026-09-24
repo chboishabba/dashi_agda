@@ -145,6 +145,62 @@ record NormalizedCrossSectorStressInstance
 
 open NormalizedCrossSectorStressInstance public
 
+cmp119RationalTensor :
+  ∀ {StressTensor : Set} →
+  CMP119RationalStressComponentEvaluator StressTensor →
+  StressTensor →
+  RationalTensor4
+cmp119RationalTensor evaluator stress a b =
+  component evaluator stress a b
+
+normalizedSixteenComponentsCompileToTensorEquality :
+  ∀ {StressTensor : Set}
+    {evaluator : CMP119RationalStressComponentEvaluator StressTensor}
+    {cmp119Stress : StressTensor} →
+  NormalizedCrossSectorStressInstance StressTensor evaluator cmp119Stress →
+  (a b : Flat.Axis4) →
+  finiteGRStressRational a b
+  ≡ cmp119RationalTensor evaluator cmp119Stress a b
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.timeAxis Flat.timeAxis =
+  sym (qft00 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.timeAxis Flat.xAxis =
+  sym (qft01 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.timeAxis Flat.yAxis =
+  sym (qft02 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.timeAxis Flat.zAxis =
+  sym (qft03 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.xAxis Flat.timeAxis =
+  sym (qft10 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.xAxis Flat.xAxis =
+  sym (qft11 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.xAxis Flat.yAxis =
+  sym (qft12 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.xAxis Flat.zAxis =
+  sym (qft13 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.yAxis Flat.timeAxis =
+  sym (qft20 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.yAxis Flat.xAxis =
+  sym (qft21 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.yAxis Flat.yAxis =
+  sym (qft22 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.yAxis Flat.zAxis =
+  sym (qft23 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.zAxis Flat.timeAxis =
+  sym (qft30 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.zAxis Flat.xAxis =
+  sym (qft31 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.zAxis Flat.yAxis =
+  sym (qft32 instance)
+normalizedSixteenComponentsCompileToTensorEquality instance Flat.zAxis Flat.zAxis =
+  sym (qft33 instance)
+
+secondTensorEqualityTheoremAfterSixteenComponentsRequired : Bool
+secondTensorEqualityTheoremAfterSixteenComponentsRequired = false
+
+secondTensorEqualityTheoremAfterSixteenComponentsRequiredIsFalse :
+  secondTensorEqualityTheoremAfterSixteenComponentsRequired ≡ false
+secondTensorEqualityTheoremAfterSixteenComponentsRequiredIsFalse = refl
+
 normalizedCMP119ComponentEvaluatorStillRequired : Bool
 normalizedCMP119ComponentEvaluatorStillRequired = true
 

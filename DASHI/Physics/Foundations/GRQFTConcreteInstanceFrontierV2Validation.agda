@@ -5,10 +5,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Foundations.GRQFTConcreteInstanceFrontierV2Exact as F
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as C
 
-noUnifiedCandidateYet :
-  F.inhabitedUnifiedCandidateExists F.canonicalGRQFTConcreteTheoryFrontier
-  ≡ false
-noUnifiedCandidateYet = refl
+unifiedCandidateIsAggregateConstruction :
+  F.unifiedCandidateInhabitationIsAggregateConsequence
+    F.canonicalGRQFTConcreteTheoryFrontier
+  ≡ true
+unifiedCandidateIsAggregateConstruction = refl
 
 finiteGRTargetRunnable :
   C.finiteGRComponentTargetAlreadyExecutable ≡ true
