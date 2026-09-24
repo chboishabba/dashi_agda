@@ -180,6 +180,72 @@ clockTaggedRunProjectsToOriginalRun
     taggedRun
 
 ------------------------------------------------------------------------
+-- Bounded acceptance is preserved in both directions.
+------------------------------------------------------------------------
+
+originalBoundedAcceptanceGivesClockTaggedAcceptance :
+  ∀ {machine : Machine.DeterministicMachine}
+    (input : Machine.dInput machine)
+    (bound : Nat) →
+  Machine.DeterministicAcceptsWithin machine input bound →
+  Machine.DeterministicAcceptsWithin
+    (clockTagMachine machine)
+    input
+    bound
+originalBoundedAcceptanceGivesClockTaggedAcceptance
+    {machine} input bound acceptance = record
+  { Machine.dSteps =
+      Machine.dSteps acceptance
+  ; Machine.dWithinBound =
+      Machine.dWithinBound acceptance
+  ; Machine.dFinalConfiguration =
+      advanceClock zero (Machine.dSteps acceptance)
+      ,
+      Machine.dFinalConfiguration acceptance
+  ; Machine.dRunResult =
+      clockTaggedRunFromOriginal
+        zero
+        (Machine.dSteps acceptance)
+        (Machine.dInitial machine input)
+        (Machine.dFinalConfiguration acceptance)
+        (Machine.dRunResult acceptance)
+  ; Machine.dFinalAccepting =
+      Machine.dFinalAccepting acceptance
+  }
+
+clockTaggedBoundedAcceptanceProjectsToOriginal :
+  ∀ {machine : Machine.DeterministicMachine}
+    (input : Machine.dInput machine)
+    (bound : Nat) →
+  Machine.DeterministicAcceptsWithin
+    (clockTagMachine machine)
+    input
+    bound →
+  Machine.DeterministicAcceptsWithin
+    machine
+    input
+    bound
+clockTaggedBoundedAcceptanceProjectsToOriginal
+    {machine} input bound acceptance = record
+  { Machine.dSteps =
+      Machine.dSteps acceptance
+  ; Machine.dWithinBound =
+      Machine.dWithinBound acceptance
+  ; Machine.dFinalConfiguration =
+      projectTaggedConfiguration
+        (Machine.dFinalConfiguration acceptance)
+  ; Machine.dRunResult =
+      clockTaggedRunProjectsToOriginalRun
+        zero
+        (Machine.dSteps acceptance)
+        (Machine.dInitial machine input)
+        (Machine.dFinalConfiguration acceptance)
+        (Machine.dRunResult acceptance)
+  ; Machine.dFinalAccepting =
+      Machine.dFinalAccepting acceptance
+  }
+
+------------------------------------------------------------------------
 -- Distinct clock values force distinct exact tagged configurations.
 ------------------------------------------------------------------------
 
