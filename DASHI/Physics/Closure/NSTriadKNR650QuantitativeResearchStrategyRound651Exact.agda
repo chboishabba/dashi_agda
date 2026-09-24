@@ -48,6 +48,9 @@ r406PhysicalRealEvalPath = "scripts/ns_r406_physical_real_eval.py"
 r650DirectC2PhysicalRealScanPath : String
 r650DirectC2PhysicalRealScanPath = "scripts/ns_r650_c2_physical_real_scan.py"
 
+r650DirectC1PhysicalRealScanPath : String
+r650DirectC1PhysicalRealScanPath = "scripts/ns_r650_c1_physical_real_scan.py"
+
 r406R650PhysicalRealCheckPath : String
 r406R650PhysicalRealCheckPath = "scripts/check_ns_r406_r650_physical_real.py"
 
@@ -92,6 +95,9 @@ round651PhysicalRealR406DirectCompanionEvaluatorInstalled = true
 
 round651DirectPhysicalRealC2TrajectoryScanInstalled : Bool
 round651DirectPhysicalRealC2TrajectoryScanInstalled = true
+
+round651DirectPhysicalRealC1CutoffScanInstalled : Bool
+round651DirectPhysicalRealC1CutoffScanInstalled = true
 
 round651FormalRationalHelicalNumericalSameObjectInstalled : Bool
 round651FormalRationalHelicalNumericalSameObjectInstalled = false
@@ -151,6 +157,10 @@ round651PhysicalRealR406DirectCompanionEvaluatorInstalledIsTrue = refl
 round651DirectPhysicalRealC2TrajectoryScanInstalledIsTrue :
   round651DirectPhysicalRealC2TrajectoryScanInstalled ≡ true
 round651DirectPhysicalRealC2TrajectoryScanInstalledIsTrue = refl
+
+round651DirectPhysicalRealC1CutoffScanInstalledIsTrue :
+  round651DirectPhysicalRealC1CutoffScanInstalled ≡ true
+round651DirectPhysicalRealC1CutoffScanInstalledIsTrue = refl
 
 round651FormalRationalHelicalNumericalSameObjectInstalledIsFalse :
   round651FormalRationalHelicalNumericalSameObjectInstalled ≡ false
