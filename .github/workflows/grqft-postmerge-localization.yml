@@ -79,6 +79,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119ConcreteTenSlotD1SourceWeldExact.agda'
       - 'DASHI/Physics/Foundations/CMP119TenActualSourceReadoutsExact.agda'
       - 'DASHI/Physics/Foundations/CMP119TenLiteralDensitySourceReadoutsExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119LiteralFiniteMeasureStressSourceConstructorExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119LiteralFiniteMeasureDensityAnchorConstructorExact.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
