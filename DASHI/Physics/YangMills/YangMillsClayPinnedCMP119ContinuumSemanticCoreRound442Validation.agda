@@ -22,3 +22,7 @@ independentSchwingerWitnessPruned = refl
 countablyAdditiveRepresentationRemainsPhysical :
   R442.round442CountablyAdditiveContinuumRepresentationLevel ≡ conditional
 countablyAdditiveRepresentationRemainsPhysical = refl
+
+postHocOldNewCarrierEqualityPruned :
+  R442.round442PostHocOldNewContinuumCarrierEqualityRequired ≡ false
+postHocOldNewCarrierEqualityPruned = refl
