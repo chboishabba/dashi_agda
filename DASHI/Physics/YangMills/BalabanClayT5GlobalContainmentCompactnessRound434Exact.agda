@@ -54,7 +54,8 @@ record GlobalContainmentCompactnessInputs
       R430.DeterminingExpectationUniquenessAuthority
         expectationData
         (R431.asPhysicalSubsequenceTightnessData
-          selectedTightness)
+          (R432.momentContainmentToSelectedDiagonalTightness
+            convergence globalContainment))
         prokhorovAuthority
 
     compactUniqueFullConvergenceAuthority :
