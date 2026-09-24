@@ -534,3 +534,67 @@ record R : Set₁ where
     assert not any(d.code == "TSAGDA000" for d in diagnostics)
     summary = Checker(tmp_path).parse_summary(path)
     assert set(summary.ast.records["R"].fields) == {"A", "x"}
+
+
+
+def test_arbitrary_function_heads_do_not_make_equality_type_mismatch(tmp_path):
+    path = write_module(
+        tmp_path,
+        "EqualityHeads",
+        """module EqualityHeads where
+
+theorem :
+  (x : X) →
+  f x ≡ g x
+theorem x = refl
+""",
+    )
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code in {"TSAGDA100", "TSAGDA105"} for d in diagnostics)
+
+
+def test_constructor_heads_from_different_datatypes_are_rigidly_incompatible(tmp_path):
+    path = write_module(
+        tmp_path,
+        "RigidEquality",
+        """module RigidEquality where
+
+data A : Set where
+  a : A
+
+data B : Set where
+  b : B
+
+bad : a ≡ b
+bad = refl
+""",
+    )
+    diagnostics = Checker(tmp_path).check(path)
+    assert any(d.code in {"TSAGDA075", "TSAGDA100", "TSAGDA105"} for d in diagnostics)
+
+
+def test_import_exports_include_data_and_constructors(tmp_path):
+    write_module(
+        tmp_path,
+        "ExportLib",
+        """module ExportLib where
+
+data D : Set where
+  c : D
+
+record R : Set where
+  constructor r
+  field
+    A : Set
+""",
+    )
+    path = write_module(
+        tmp_path,
+        "ExportUse",
+        """module ExportUse where
+
+open import ExportLib using (D; c; R; r; A)
+""",
+    )
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code == "TSAGDA023" for d in diagnostics)
