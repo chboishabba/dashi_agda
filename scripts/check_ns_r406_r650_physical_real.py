@@ -10,6 +10,7 @@ from typing import Any
 
 R406_CONTRACT = "ns_r406_physical_real_eval"
 C2_CONTRACT = "ns_r650_c2_physical_real_scan"
+C1_CONTRACT = "ns_r650_c1_physical_real_scan"
 CHECK_CONTRACT = "check_ns_r406_r650_physical_real"
 
 
@@ -97,6 +98,75 @@ def _validate_c2_row(row: Any, *, label: str, errors: list[str]) -> None:
         errors.append(f"{label}: r406_evaluated_pair_count must be integer")
 
 
+def _validate_c1_row(row: Any, *, label: str, errors: list[str]) -> None:
+    if not isinstance(row, dict):
+        errors.append(f"{label}: row must be object")
+        return
+    for key in (
+        "global_forcing_full",
+        "c1_integrand_four_forcing_full",
+        "forcing_full_diagonal",
+        "forcing_full_offdiagonal",
+        "offdiagonal_minus_twice_direct_companion",
+        "r406_weighted_remainder",
+    ):
+        if not _finite(row.get(key)):
+            errors.append(f"{label}: {key} must be finite")
+    minimum_rate = row.get("minimum_pair_rate")
+    if minimum_rate is not None and (
+        not _finite(minimum_rate) or float(minimum_rate) <= 0.0
+    ):
+        errors.append(f"{label}: minimum_pair_rate must be positive when present")
+
+
+def validate_c1(payload: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    if payload.get("contract") != C1_CONTRACT:
+        errors.append("unexpected C1 contract")
+    authority = payload.get("authority")
+    _check_authority(authority, prefix="c1", errors=errors)
+    if isinstance(authority, dict):
+        if authority.get("cutoff_uniform_bound_proved") is not False:
+            errors.append("c1: cutoff_uniform_bound_proved must remain false")
+        if authority.get("finite_cutoff_comparison_only") is not True:
+            errors.append("c1: finite_cutoff_comparison_only must be true")
+
+    status = payload.get("formal_theorem_status")
+    if status != "not-proved-finite-cutoff-physical-real-diagnostic-only":
+        errors.append("c1: formal theorem status must remain fail-closed")
+
+    if "row" in payload:
+        _validate_c1_row(payload.get("row"), label="c1.row", errors=errors)
+
+    runs = payload.get("runs")
+    if runs is not None:
+        if not isinstance(runs, list):
+            errors.append("c1: runs must be list")
+        else:
+            for ri, run in enumerate(runs):
+                if not isinstance(run, dict):
+                    errors.append(f"c1.run[{ri}] must be object")
+                    continue
+                rows = run.get("rows")
+                if not isinstance(rows, list):
+                    errors.append(f"c1.run[{ri}].rows must be list")
+                    continue
+                for si, row in enumerate(rows):
+                    _validate_c1_row(
+                        row,
+                        label=f"c1.run[{ri}].row[{si}]",
+                        errors=errors,
+                    )
+
+    comparison = payload.get("cutoff_comparison")
+    if comparison is not None:
+        if not isinstance(comparison, dict):
+            errors.append("c1: cutoff_comparison must be object")
+        elif comparison.get("finite_sample_supports_uniform_bound_theorem") is not False:
+            errors.append("c1: finite sample must not claim a uniform theorem")
+    return errors
+
+
 def validate_c2(payload: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     if payload.get("contract") != C2_CONTRACT:
@@ -155,6 +225,8 @@ def main() -> int:
         errors = validate_r406(payload)
     elif contract == C2_CONTRACT:
         errors = validate_c2(payload)
+    elif contract == C1_CONTRACT:
+        errors = validate_c1(payload)
     else:
         errors = [f"unsupported contract {contract!r}"]
 
