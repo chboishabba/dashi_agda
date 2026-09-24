@@ -245,7 +245,12 @@ def _domain_shapes_from_segment(tokens: Sequence[AstToken]) -> List[DomainShape]
             trimmed,
             forall_context=forall_context,
         )
-        domain = DomainShape(_visibility(trimmed), rigid_head_from_tokens(trimmed))
+        colon_parts = split_top_level(_trim_delimiters(trimmed), {":"})
+        if forall_context and len(colon_parts) != 2:
+            head = UnknownShape()
+        else:
+            head = rigid_head_from_tokens(trimmed)
+        domain = DomainShape(_visibility(trimmed), head)
         domains.extend(domain for _ in range(multiplicity))
     return domains
 
