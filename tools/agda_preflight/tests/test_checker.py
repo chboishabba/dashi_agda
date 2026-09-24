@@ -810,3 +810,68 @@ open import RenameMiddle using (y)
 
     diagnostics = checker.check(path)
     assert not any(d.code in {"TSAGDA021", "TSAGDA023"} for d in diagnostics)
+
+
+
+def test_nested_record_literal_uses_parent_field_record_type(tmp_path):
+    path = write_module(
+        tmp_path,
+        "NestedRecordTarget",
+        """module NestedRecordTarget where
+
+record Inner : Set where
+  field
+    innerA : Set
+    innerB : Set
+
+record Outer : Set where
+  field
+    outerA : Set
+    inner : Inner
+
+mk : Outer
+mk =
+  record
+    { outerA = Set
+    ; inner =
+        record
+          { innerA = Set
+          ; innerB = Set
+          }
+    }
+""",
+    )
+
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code in {"TSAGDA060", "TSAGDA062"} for d in diagnostics)
+
+
+def test_nested_record_literal_unknown_parent_type_is_not_guessed(tmp_path):
+    path = write_module(
+        tmp_path,
+        "NestedRecordUnknown",
+        """module NestedRecordUnknown where
+
+record Outer : Set₁ where
+  field
+    Payload : Set
+    payload : Payload
+
+mk : Outer
+mk =
+  record
+    { Payload = Set
+    ; payload =
+        record
+          { arbitraryField = Set
+          }
+    }
+""",
+    )
+
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(
+        d.code in {"TSAGDA060", "TSAGDA062"}
+        and d.line >= 12
+        for d in diagnostics
+    )
