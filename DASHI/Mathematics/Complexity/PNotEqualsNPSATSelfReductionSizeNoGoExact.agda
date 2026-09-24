@@ -21,9 +21,10 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSATSelfReductionSizeNoGoExact wh
 -- resource-bounded diagonal recurrence.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Fin.Base as Fin using (Fin; zero; suc)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -37,7 +38,7 @@ formulaNodeCount :
   SAT.BooleanFormula variables →
   Nat
 formulaNodeCount (SAT.variable index) =
-  suc 0
+  suc zero
 formulaNodeCount (SAT.constant value) =
   suc 0
 formulaNodeCount (SAT.negate formula) =
@@ -61,9 +62,9 @@ restrictHeadPreservesNodeCount :
   formulaNodeCount formula
 restrictHeadPreservesNodeCount bit (SAT.variable index)
     with index
-... | SAT.Fin.zero =
+... | Fin.zero =
   refl
-... | SAT.Fin.suc rest =
+... | Fin.suc rest =
   refl
 restrictHeadPreservesNodeCount bit (SAT.constant value) =
   refl
