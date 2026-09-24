@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.YangMillsRepresentedPublishedOSAssemblyRound526Ex
 -- estimate remain.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Product using (_×_; Σ; _,_)
 
@@ -38,6 +39,7 @@ import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as GramOS
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as R476
 import DASHI.Physics.YangMills.YangMillsExtensionalizedRepresentedOS05Round520Exact as R520
 import DASHI.Physics.YangMills.YangMillsRepresentedOSSystemRound524Exact as R524
+import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -283,7 +285,8 @@ representedOSSystem :
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division source)
     group →
-  _
+  OS.ContinuumSchwingerSystem
+    (Configuration → ℝ) Position ℝ
 representedOSSystem represented group =
   R524.representedOSSystem
     (asRepresentedOSAxiomInputs represented group)
@@ -291,8 +294,8 @@ representedOSSystem represented group =
 round526RepresentedPublishedOSAssemblyLevel : ProofLevel
 round526RepresentedPublishedOSAssemblyLevel = machineChecked
 
-round526SourceOSLiteralSchwingerWeldRequired : Agda.Builtin.Bool.Bool
-round526SourceOSLiteralSchwingerWeldRequired = Agda.Builtin.Bool.false
+round526SourceOSLiteralSchwingerWeldRequired : Bool
+round526SourceOSLiteralSchwingerWeldRequired = false
 
 -- No new OS estimate is introduced.  Physical payments are exactly the source
 -- applicability already carried by R462 plus the selected OS4 clustering input.
