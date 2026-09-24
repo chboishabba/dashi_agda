@@ -9,7 +9,7 @@ from tree_sitter import Language, Parser
 import tree_sitter_agda
 
 from .rules import extended_diagnostics
-from .ast_index import AstIndex, build_ast_index
+from .ast_index import AstIndex, build_ast_index, significant_tokens, typed_binders
 
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
@@ -481,28 +481,31 @@ class Checker:
                 if finfo.is_set_valued:
                     set_fields[fname] = (rname, finfo)
 
-        for sig in summary.signatures.values():
-            for field_name, (record_name, _) in set_fields.items():
-                # A bare projection immediately before an arrow/end/delimiter is
-                # being used as the type itself.  'Parameter M' does not match.
-                pat = re.compile(
-                    rf"(?<![.A-Za-z0-9_'])\b{re.escape(field_name)}\b"
-                    rf"\s*(?=(?:→|->|$|\)|\}}|\]))"
-                )
-                m = pat.search(sig.type_text)
-                if not m:
+        for name, ast_sig in summary.ast.signatures.items():
+            if ast_sig.type_node is None:
+                continue
+            tokens = significant_tokens(summary.ast.source_bytes, ast_sig.type_node)
+            for index, token in enumerate(tokens):
+                entry = set_fields.get(token.text)
+                if entry is None:
+                    continue
+                record_name, _ = entry
+                following = tokens[index + 1] if index + 1 < len(tokens) else None
+                # A type-valued projection is suspicious only when it terminates
+                # a type atom instead of receiving its record value.
+                if following is not None and following.text not in {"→", "->", ")", "}", "}}", "⦄", "]"}:
                     continue
                 result.append(
                     Diagnostic(
                         "TSAGDA001",
                         (
-                            f"{field_name} is a projection of {record_name}, so its "
+                            f"{token.text} is a projection of {record_name}, so its "
                             f"outer shape is {record_name} → Set; it is used here unapplied."
                         ),
                         summary.path,
-                        sig.line,
-                        1,
-                        f"Apply the projection to the model, e.g. {field_name} M.",
+                        token.line,
+                        token.column,
+                        f"Apply the projection to the model, e.g. {token.text} M.",
                     )
                 )
         return result
@@ -510,72 +513,63 @@ class Checker:
     def _implicit_projection_receiver_diagnostics(
         self, summary: ModuleSummary
     ) -> List[Diagnostic]:
-        """Find a projection receiver written as ``_`` despite a matching binder.
-
-        Agda can often infer a projection receiver, so this rule reports only
-        when the containing signature has a named binder whose record exposes
-        that same projection.  This catches the common ``Alias.field _`` form
-        that leaves an otherwise available record receiver as a metavariable.
-        """
+        """Find a projection receiver written as '_' despite a matching binder."""
         imported = self.imported_summaries(summary)
-        signatures = sorted(
-            {info.line: info for info in summary.signatures.values()}.values(),
-            key=lambda info: info.line,
-        )
         result: List[Diagnostic] = []
-        call = re.compile(rf"\b({_IDENT})\.({_IDENT})\s+_")
-        binder = re.compile(rf"[({{]\s*({_IDENT})\s*:\s*([^(){{}}]*)[)}}]")
 
-        for line_number, line in enumerate(summary.source.splitlines(), start=1):
-            signature = None
-            for candidate in signatures:
-                if candidate.line <= line_number:
-                    signature = candidate
-                else:
-                    break
-            if signature is None:
+        for function_name, clauses in summary.ast.clauses.items():
+            signature = summary.ast.signatures.get(function_name)
+            if signature is None or signature.type_node is None:
+                continue
+            binders = typed_binders(summary.ast.source_bytes, signature.type_node)
+            if not binders:
                 continue
 
-            for match in call.finditer(line):
-                alias, field_name = match.groups()
-                imported_summary = imported.get(alias)
-                if imported_summary is None:
+            for clause in clauses:
+                if clause.rhs_node is None:
                     continue
-                for binder_match in binder.finditer(signature.type_text):
-                    binder_name, binder_type = binder_match.groups()
-                    matching_record = next(
-                        (
-                            record
-                            for record_name, record in imported_summary.records.items()
-                            if field_name in record.fields
-                            and re.search(
-                                rf"\b{re.escape(alias)}\.{re.escape(record_name)}\b",
-                                binder_type,
-                            )
-                        ),
-                        None,
-                    )
-                    if matching_record is None:
+                tokens = significant_tokens(summary.ast.source_bytes, clause.rhs_node)
+                for i, token in enumerate(tokens[:-1]):
+                    if "." not in token.text or tokens[i + 1].text != "_":
+                        continue
+                    alias, field_name = token.text.rsplit(".", 1)
+                    imported_summary = imported.get(alias)
+                    if imported_summary is None:
+                        continue
+                    matching_record = None
+                    matching_binder = None
+                    for record_name, record in imported_summary.records.items():
+                        if field_name not in record.fields:
+                            continue
+                        qualified = f"{alias}.{record_name}"
+                        for binder in binders:
+                            words = binder.type_text.replace("(", " ").replace(")", " ").split()
+                            if qualified in words or record_name in words:
+                                matching_record = record
+                                matching_binder = binder
+                                break
+                        if matching_binder is not None:
+                            break
+                    if matching_record is None or matching_binder is None:
                         continue
                     result.append(
                         Diagnostic(
                             "TSAGDA002",
                             (
-                                f"{alias}.{field_name} uses `_` for its "
+                                f"{alias}.{field_name} uses '_' for its "
                                 f"{matching_record.name} receiver, although "
-                                f"{binder_name} is a matching binder in scope; "
+                                f"{matching_binder.name} is a matching binder in scope; "
                                 "this leaves a projection receiver metavariable."
                             ),
                             summary.path,
-                            line_number,
-                            match.start() + 1,
+                            token.line,
+                            token.column,
                             (
                                 f"Pass the receiver explicitly, e.g. "
-                                f"{alias}.{field_name} {binder_name} … ."
+                                f"{alias}.{field_name} {matching_binder.name} … ."
                             ),
                         )
                     )
-                    break
         return result
 
     def _known_records(
