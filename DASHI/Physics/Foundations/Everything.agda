@@ -131,3 +131,7 @@ import DASHI.Physics.Foundations.CMP119SingleActiveSectorSourceFactorisationVali
 
 import DASHI.Physics.Foundations.CMP119SingleSectorSharedSourceStressWeldExact
 import DASHI.Physics.Foundations.CMP119SingleSectorSharedSourceStressWeldValidation
+
+import DASHI.Physics.Foundations.GRAnchoredSharedEffectiveSourceExact
+import DASHI.Physics.Foundations.CMP119GRAnchoredStressWeldCompilerExact
+import DASHI.Physics.Foundations.CMP119GRAnchoredStressWeldCompilerValidation

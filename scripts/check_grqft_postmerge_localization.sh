@@ -15,6 +15,9 @@ files=(
   DASHI/Physics/Foundations/CMP119SingleActiveSectorSourceFactorisationValidation.agda
   DASHI/Physics/Foundations/CMP119SingleSectorSharedSourceStressWeldExact.agda
   DASHI/Physics/Foundations/CMP119SingleSectorSharedSourceStressWeldValidation.agda
+  DASHI/Physics/Foundations/GRAnchoredSharedEffectiveSourceExact.agda
+  DASHI/Physics/Foundations/CMP119GRAnchoredStressWeldCompilerExact.agda
+  DASHI/Physics/Foundations/CMP119GRAnchoredStressWeldCompilerValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda
