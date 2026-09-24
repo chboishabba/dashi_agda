@@ -105,12 +105,24 @@ def _validate_c2_row(row: Any, *, label: str, errors: list[str]) -> None:
         "strict_surplus_rate",
         "r406_minus_strict_surplus",
         "unweighted_conservation_residual",
+        "r687_rate_lifted_forcing_full",
+        "r685_coherent_commutator_work",
+        "r685_coherent_tangent_work",
+        "r665_weighted_rate_work",
+        "r688_rate_lifted_minus_8_tangent",
+        "r687_global_identity_residual",
+        "r688_global_identity_residual",
     ):
         if not _finite(row.get(key)):
             errors.append(f"{label}: {key} must be finite")
 
     if not isinstance(row.get("r406_evaluated_pair_count"), int):
         errors.append(f"{label}: r406_evaluated_pair_count must be integer")
+
+    if not isinstance(row.get("r665_weighted_rate_work_nonnegative"), bool):
+        errors.append(
+            f"{label}: r665_weighted_rate_work_nonnegative must be boolean"
+        )
 
     packet_split = row.get("packet_split")
     if packet_split is not None:
