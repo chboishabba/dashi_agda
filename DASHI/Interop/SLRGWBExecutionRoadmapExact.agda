@@ -15,8 +15,12 @@ import DASHI.Interop.SLRGWBCandidateWorldProjectionExact as GWB
 -- CandidateWorldModel ABI, replayable Wikimedia graph, identity/source-role
 -- contraction, multilingual parser/PNF compatibility, SimpleWiki peer surface,
 -- semantic closure, joined tranche iteration, and first bounded growth round
--- are paid.  The live refinement is Pareto frontier choice + explicit gap-flow
--- accounting before further bounded recursion.
+-- are paid.  Since then SLR has also demonstrated restart-safe residual-driven
+-- recurrent world expansion, reviewed atomic hop commits, post-hop
+-- re-diagnosis, supervised bounded P31/P279 closure, producer-family switching
+-- and advisory external-ontology fallback.  The current transport min-cut is
+-- physical-object-bounded Zelph/HF acquisition; after that the roadmap moves
+-- upward to generic producer scheduling and world-to-law composition.
 ------------------------------------------------------------------------
 
 data GWBStageState : Set where
@@ -95,6 +99,24 @@ gwbSLRRoadmap =
   ∷ gwbRoadmapCoordinate "advisory external ontology fallback" next
     "Wikidata primary; DBpedia/YAGO/WordNet/Schema.org/Umbel demand-driven via SLRExternalOntologyEnrichmentRouterExact"
     "invoke only for declared residuals that Wikimedia/source-role evidence cannot pay"
+  ∷ gwbRoadmapCoordinate "restart-safe adaptive residual-driven recurrent controller" paid
+    "SLR durable hop ledger: reviewed hop commit -> fresh residual diagnosis -> next producer selection"
+    "review remains the only semantic payment boundary; recurrence itself creates no truth"
+  ∷ gwbRoadmapCoordinate "supervised bounded P31/P279 classification closure" paid
+    "TypeClosureNodeProvider: bounded P31/P279 closure; retrieval/provider gap -> truncated abstention"
+    "candidate classification evidence remains review-pending and cannot pay type-class by acquisition alone"
+  ∷ gwbRoadmapCoordinate "snapshot-first P31/P279 provider seam + governed live fallback" implementedAwaitingRuntime
+    "SLR PR #28: TieredTypeClosureProvider; explicit immutable snapshot reference; paced/retried revision-pinned live fallback"
+    "runtime verification plus physically bounded HF selection remain before transport closure"
+  ∷ gwbRoadmapCoordinate "physical-object-bounded HF classification fast path" implementedAwaitingRuntime
+    "Sprint 1 physical plan/transport ABI: specialised P31/P279 slice -> route-aware general snapshot -> physical-object dedupe/coalescing -> at most five distinct cold objects per batch -> deterministic transport receipt"
+    "exact runtime receipt still required; logical QID concurrency is not the bound and transport remains semantically non-authoritative"
+  ∷ gwbRoadmapCoordinate "generic residual-family -> producer-plan scheduler convergence" implementedAwaitingRuntime
+    "Sprint1ProducerController reuses existing ProducerFamily and fail-closed candidate evidence across classification, identity/source and authority/source"
+    "exact runtime campaign must demonstrate the three families through one controller/review boundary before certification"
+  ∷ gwbRoadmapCoordinate "reviewed world-state -> typed legal-issue projection" next
+    "ReviewedObservation -> EventCandidate -> reviewed Event -> ClaimEvent/element evidence; pinned source -> Provision -> WrongElementRequirement"
+    "event/harm/ontology class/source presence cannot create wrong, legal category, applicability or satisfied element"
   ∷ gwbRoadmapCoordinate "canonical GWB claim/evidence projection" next
     "requires source-paid claim extraction beyond entity/link closure"
     "semantic context and adjacency alone cannot manufacture canonical claims"
