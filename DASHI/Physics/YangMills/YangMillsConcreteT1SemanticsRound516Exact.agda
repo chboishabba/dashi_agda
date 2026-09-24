@@ -21,7 +21,7 @@ module DASHI.Physics.YangMills.YangMillsConcreteT1SemanticsRound516Exact where
 -- predicates do not pretend to contain Set1 theorem packages.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base as ℚ using (ℚ; _*_; _-_; _≤_)
@@ -239,7 +239,7 @@ ConcreteAsymptoticallyFreeTrajectory {endpoint = endpoint} source group finite =
   ×
   (∀ depth →
     (Sums.natAsRational depth
-      ℚ._*_ Flow.betaLower (betaEnclosure source group)
+      * Flow.betaLower (betaEnclosure source group)
       ℚ._≤_
       Flow.inverseCoupling (trajectory source group) 0
         ℚ._-_
@@ -250,7 +250,7 @@ ConcreteAsymptoticallyFreeTrajectory {endpoint = endpoint} source group finite =
         Flow.inverseCoupling (trajectory source group) depth
       ℚ._≤_
       Sums.natAsRational depth
-        ℚ._*_ Flow.betaUpper (betaEnclosure source group)))
+        * Flow.betaUpper (betaEnclosure source group)))
 
 ConcreteGaugePreserved :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -559,7 +559,7 @@ selectedUVNormalization :
   ConcreteUVNormalization source group
     (λ cutoff → Limit.finiteMeasure (R511.family endpoint group) cutoff)
 selectedUVNormalization {endpoint = endpoint} source group =
-  ( (λ cutoff → Agda.Builtin.Equality.refl)
+  ( (λ cutoff → refl)
   , ( Limit.finiteExpectationOne (R511.family endpoint group)
     , Flow.sourceRecurrence (trajectory source group)
     )
@@ -585,7 +585,7 @@ selectedAsymptoticallyFreeTrajectory :
   ConcreteAsymptoticallyFreeTrajectory source group
     (λ cutoff → Limit.finiteMeasure (R511.family endpoint group) cutoff)
 selectedAsymptoticallyFreeTrajectory source group =
-  ( (λ cutoff → Agda.Builtin.Equality.refl)
+  ( (λ cutoff → refl)
   , Flow.sourceNormalizedTwoSidedUVTube (betaEnclosure source group)
   )
 
