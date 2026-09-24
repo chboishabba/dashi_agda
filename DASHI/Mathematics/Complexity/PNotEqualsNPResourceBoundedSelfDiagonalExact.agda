@@ -229,7 +229,7 @@ explicitTableauRuleCannotEncodeSuperlinearSelfFormula :
 explicitTableauRuleCannotEncodeSuperlinearSelfFormula
     rule formula superlinear =
   NatP.<-irrefl
-    (SelfEvaluationCostModel.formulaSize _ formula)
+    (SelfEvaluationCostModel.formulaSize resource formula)
     (NatP.<-≤-trans
       (strict superlinear)
       (explicitTableauLowerBound rule formula))
