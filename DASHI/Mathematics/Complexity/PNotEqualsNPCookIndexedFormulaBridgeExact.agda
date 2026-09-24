@@ -26,7 +26,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact wh
 -- No SAT theorem or complexity assumption is used.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Fin.Base as Fin using (Fin; fromℕ<; toℕ)
@@ -289,6 +289,30 @@ indexedAfterCook formula =
     (canonicalVariablesBelow formula)
 
 ------------------------------------------------------------------------
+-- The two formula modules expose extensionally identical Boolean operations.
+------------------------------------------------------------------------
+
+notBoolAgreement :
+  (value : Bool) →
+  SAT.notBool value ≡ Cook.notBool value
+notBoolAgreement false = refl
+notBoolAgreement true = refl
+
+andBoolAgreement :
+  (left right : Bool) →
+  SAT.andBool left right
+  ≡ Cook.andBool left right
+andBoolAgreement false right = refl
+andBoolAgreement true right = refl
+
+orBoolAgreement :
+  (left right : Bool) →
+  SAT.orBool left right
+  ≡ Cook.orBool left right
+orBoolAgreement false right = refl
+orBoolAgreement true right = refl
+
+------------------------------------------------------------------------
 -- Evaluation preservation from any Cook assignment.
 ------------------------------------------------------------------------
 
@@ -324,30 +348,41 @@ cookToIndexedEvaluation
     (Cook.negate formula)
     (negateBelow below)
     assignment =
-  cong
-    SAT.notBool
-    (cookToIndexedEvaluation
-      formula below assignment)
+  trans
+    (cong
+      SAT.notBool
+      (cookToIndexedEvaluation
+        formula below assignment))
+    (notBoolAgreement
+      (Cook.evaluate formula assignment))
 cookToIndexedEvaluation
     (Cook.conjunction left right)
     (conjunctionBelow leftBelow rightBelow)
     assignment =
-  cong₂
-    SAT.andBool
-    (cookToIndexedEvaluation
-      left leftBelow assignment)
-    (cookToIndexedEvaluation
-      right rightBelow assignment)
+  trans
+    (cong₂
+      SAT.andBool
+      (cookToIndexedEvaluation
+        left leftBelow assignment)
+      (cookToIndexedEvaluation
+        right rightBelow assignment))
+    (andBoolAgreement
+      (Cook.evaluate left assignment)
+      (Cook.evaluate right assignment))
 cookToIndexedEvaluation
     (Cook.disjunction left right)
     (disjunctionBelow leftBelow rightBelow)
     assignment =
-  cong₂
-    SAT.orBool
-    (cookToIndexedEvaluation
-      left leftBelow assignment)
-    (cookToIndexedEvaluation
-      right rightBelow assignment)
+  trans
+    (cong₂
+      SAT.orBool
+      (cookToIndexedEvaluation
+        left leftBelow assignment)
+      (cookToIndexedEvaluation
+        right rightBelow assignment))
+    (orBoolAgreement
+      (Cook.evaluate left assignment)
+      (Cook.evaluate right assignment))
 
 cookToIndexedEvaluationCanonical :
   (formula : Cook.BooleanFormula)
