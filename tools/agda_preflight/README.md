@@ -325,6 +325,19 @@ pytest --agda-preflight --agda-deps --agda-root . \
   DASHI/Everything.agda -vv
 ```
 
+From the repository root, the equivalent convenience runner is:
+
+```bash
+scripts/check_agda_preflight_pytest.sh
+```
+
+Override the aggregate root with `AGDA_PREFLIGHT_TARGET`, and pass any extra pytest arguments through directly, for example:
+
+```bash
+AGDA_PREFLIGHT_TARGET=DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda \
+  scripts/check_agda_preflight_pytest.sh -k Eisenstein -n auto
+```
+
 This is the preferred replacement for an opaque one-shot preflight of
 `Everything.agda`: imported leaves are checked first and
 `DASHI.Everything` is checked last.
