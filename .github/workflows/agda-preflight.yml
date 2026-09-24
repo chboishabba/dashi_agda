@@ -25,5 +25,7 @@ jobs:
         run: python -m pip install -e 'tools/agda_preflight[test]'
       - name: Python syntax
         run: python -m compileall -q tools/agda_preflight/agda_preflight tools/agda_preflight/tests
+      - name: Shell syntax
+        run: bash -n scripts/check_agda_preflight_pytest.sh
       - name: Regression tests
         run: pytest -q tools/agda_preflight/tests
