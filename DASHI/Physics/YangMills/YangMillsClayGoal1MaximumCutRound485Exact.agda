@@ -26,6 +26,7 @@ import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
 
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
+import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as BWEXT
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as C
@@ -81,6 +82,19 @@ a45RepresentedOSPredicateExtensionalityLevel =
 bWilsonTwoInsertionConnectedShellLevel : ProofLevel
 bWilsonTwoInsertionConnectedShellLevel =
   B.bWEXTLevel
+
+-- R494 exposes the actual theorem-bearing subcut beneath WEXT.
+bWilsonTwoMarkExpansionLevel : ProofLevel
+bWilsonTwoMarkExpansionLevel =
+  BWEXT.literalRound494WilsonTwoMarkExpansionLevel
+
+bWilsonConnectingWeightTailLevel : ProofLevel
+bWilsonConnectingWeightTailLevel =
+  BWEXT.literalRound494WilsonConnectingWeightTailLevel
+
+bWilsonWEXTAssemblyCompilerLevel : ProofLevel
+bWilsonWEXTAssemblyCompilerLevel =
+  BWEXT.round494WEXTCompilerLevel
 
 bSameHamiltonianTransferCoordinateLevel : ProofLevel
 bSameHamiltonianTransferCoordinateLevel =
