@@ -30,6 +30,7 @@ import DASHI.Physics.Closure.NSTriadKNLivePhysicalPacketStrictSurplusRound648Exa
 import DASHI.Physics.Closure.NSTriadKNPeriodicStandardCompletionSourcesRound649Exact as R649
 import DASHI.Physics.Closure.NSTriadKNR650QuantitativeResearchStrategyRound651Exact as R651
 import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact as R652
+import DASHI.Physics.Closure.NSTriadKNR650C2CoupledForcingSandwichRound653Exact as R653
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -115,6 +116,18 @@ round650C1AndC2ShareLiteralR406Currency : Bool
 round650C1AndC2ShareLiteralR406Currency =
   R652.round652C1AndC2ShareLiteralR406Currency
 
+round650C2CoupledSandwichEquivalent : Bool
+round650C2CoupledSandwichEquivalent =
+  R653.round653CoupledSandwichExactlyEquivalentToC2
+
+round650C1AndC2SearchableAsLiteralSandwich : Bool
+round650C1AndC2SearchableAsLiteralSandwich =
+  R653.round653C1AndC2CanBeSearchedAsLiteralSandwich
+
+round650ThirdAnalyticLeafIntroducedBySandwich : Bool
+round650ThirdAnalyticLeafIntroducedBySandwich =
+  R653.round653IntroducesThirdAnalyticLeaf
+
 round650ClayPromotion : Bool
 round650ClayPromotion = false
 
@@ -198,6 +211,21 @@ round650C1AndC2ShareLiteralR406CurrencyIsTrue :
   round650C1AndC2ShareLiteralR406Currency ≡ true
 round650C1AndC2ShareLiteralR406CurrencyIsTrue =
   R652.round652C1AndC2ShareLiteralR406CurrencyIsTrue
+
+round650C2CoupledSandwichEquivalentIsTrue :
+  round650C2CoupledSandwichEquivalent ≡ true
+round650C2CoupledSandwichEquivalentIsTrue =
+  R653.round653CoupledSandwichExactlyEquivalentToC2IsTrue
+
+round650C1AndC2SearchableAsLiteralSandwichIsTrue :
+  round650C1AndC2SearchableAsLiteralSandwich ≡ true
+round650C1AndC2SearchableAsLiteralSandwichIsTrue =
+  R653.round653C1AndC2CanBeSearchedAsLiteralSandwichIsTrue
+
+round650ThirdAnalyticLeafIntroducedBySandwichIsFalse :
+  round650ThirdAnalyticLeafIntroducedBySandwich ≡ false
+round650ThirdAnalyticLeafIntroducedBySandwichIsFalse =
+  R653.round653IntroducesThirdAnalyticLeafIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
