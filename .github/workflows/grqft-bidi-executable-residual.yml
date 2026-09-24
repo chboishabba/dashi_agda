@@ -27,6 +27,7 @@ on:
       - 'DASHI/Physics/Closure/W4CalibrationFailureMechanismExact.agda'
       - 'DASHI/Physics/Closure/GRQFTSIPhysicalCalibrationBridgeExact.agda'
       - 'DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda'
+      - 'DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda'
       - 'scripts/grqft_w4_calibration_reconstruction.py'
       - 'outputs/grqft_w4_calibration_reconstruction.json'
       - '.github/workflows/grqft-bidi-executable-residual.yml'

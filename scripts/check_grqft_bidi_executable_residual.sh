@@ -20,6 +20,7 @@ files=(
   DASHI/Physics/Closure/W4CalibrationFailureMechanismExact.agda
   DASHI/Physics/Closure/GRQFTSIPhysicalCalibrationBridgeExact.agda
   DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda
+  DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda
 )
 
 for file in "${files[@]}"; do test -f "$file"; done
@@ -73,4 +74,5 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/W4CalibrationFailureMechanismExact.agda \
   DASHI/Physics/Closure/GRQFTSIPhysicalCalibrationBridgeExact.agda \
   DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda \
+  DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda \
   DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda
