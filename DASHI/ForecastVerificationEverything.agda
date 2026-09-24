@@ -37,6 +37,7 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact
 import DASHI.Core.FutureObservationLanguageQuotientExact
 import DASHI.Core.ObjectDecompositionResidualRouterExact
 import DASHI.Core.ProviderNeutralWorldQueryAlgebraExact
+import DASHI.Chemistry.PetrochemicalForecastObjectResidualAdapterExact
 
 import DASHI.Statistics.ConfidenceIntervalRegionEvidenceExact
 import DASHI.Statistics.HypothesisRegionGeometryExact
