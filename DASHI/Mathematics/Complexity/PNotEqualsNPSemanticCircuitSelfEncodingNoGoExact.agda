@@ -26,7 +26,7 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
-open import Data.Nat.Base using (_<_)
+open import Data.Nat.Base using (_≤_; _<_)
 open import Data.Vec.Base using (Vec)
 import Data.Nat.Properties as NatP
 
@@ -63,20 +63,20 @@ semanticCircuitLowerBoundBlocksStandardSharedSelfEncoding
   where
     lowerBelowCircuit :
       semanticLowerBound
-      NatP.≤ Circuit.circuitSize circuit
+      ≤ Circuit.circuitSize circuit
     lowerBelowCircuit =
       lower circuit computes
 
     circuitBelowTarget :
       Circuit.circuitSize circuit
-      NatP.≤ targetSize
+      ≤ targetSize
     circuitBelowTarget =
       NatP.≤-trans
         (SharedCompiler.circuitGateCountBelowSharedConstraintNodeCount circuit)
         (NatP.≤-reflexive sizeExact)
 
     lowerBelowTarget :
-      semanticLowerBound NatP.≤ targetSize
+      semanticLowerBound ≤ targetSize
     lowerBelowTarget =
       NatP.≤-trans
         lowerBelowCircuit
