@@ -114,11 +114,11 @@ module LiveSelfCollapse
 
     selfKernelWork : ℚ
     selfKernelWork =
-      Base.Base.M.selfKernelWork
+      Base.Base.Base.M.selfKernelWork
 
     fluxTangentFull : ℚ
     fluxTangentFull =
-      Base.Base.M.fluxTangentFull
+      Base.Base.Base.M.fluxTangentFull
 
     externalHelicityRows : ℚ
     externalHelicityRows =
@@ -138,7 +138,7 @@ module LiveSelfCollapse
       Kernel.four * forcingFull
       ≡ Kernel.four * selfKernelWork + fluxTangentFull
     fourForcingIsSelfKernelPlusTangent =
-      Base.Base.M.fourForcingFullIsFourSelfKernelPlusFlux
+      Base.Base.Base.M.fourForcingFullIsFourSelfKernelPlusFlux
 
     combinedHelicityTangentIsSelfDiscrepancy :
       Kernel.four * externalHelicityRows - fluxTangentFull
