@@ -524,6 +524,7 @@ def test_auto_refine_exposes_oracle_stats(tmp_path):
             "failed_frontier_modules": 0,
             "aggregate_probe_roots": 0,
             "candidate_modules": 0,
+            "partial_progress_modules": 0,
         },
     }
 
