@@ -76,10 +76,13 @@ record BishopRouteBCurrentFrontier : Set where
 
     contentAddressedCrossProverManifestOwned : Bool
     reciprocalDeclarationBindingTableOwned : Bool
+    leanCanonicalBindingInhabited : Bool
+    leanBindingUniqueUpToBishopSetoid : Bool
+    leanCanonicalRouteBHypothesisFree : Bool
 
     leanKernelReceiptObserved : Bool
     generatedCrossProverReplayObserved : Bool
-    crossProverSameObjectBindingPaid : Bool
+    crossProverReplayProvenancePaid : Bool
     normalizedDeltaEta24SameObjectPaid : Bool
 
     legacyFaithfulMapResidualSuperseded : Bool
@@ -98,9 +101,10 @@ canonicalBishopRouteBCurrentFrontier =
     true true true true true true true
     true true true
     true true
-    false false false false
+    true true true
+    false false false true
     true false
-    "Route B's analytic/transcendental representation mathematics is now source-written on both sides, and the exact Agda source blobs/declarations plus vendored Bishop commit are content-addressed reciprocally in Agda and Lean manifests. The first live residual is no longer source/version identification: generate/replay the bound Agda witnesses into the Lean mirror structures and obtain a Lean kernel receipt for the current dashi_lean4 head. Do not reopen exp/sin/cos/pi mathematics: exp, trig and Machin pi are compiler output from source convergence. Once the binding/replay is paid, consume the already-owned target E4/E6 convergence/Mathlib identification and normalized-Delta compiler. The remaining independent modular seam is normalized (E4^3-E6^2)/1728 = chosen eta^24/Delta on the same analytic object."
+    "Route B's mathematics is now closed at the Bishop-setoid level on the Lean companion: the vendored arithmetic mirror is concrete; Lean Real is shown equivalent to the Bishop regular-real completion up to the exact Bishop setoid; a canonical Round11/Machin binding is inhabited; every admissible binding is Bishop-equivalent to it; the q/E4/E6/normalized-Delta route is hypothesis-free; and the local pinned Lean theorem owns normalized (E4^3-E6^2)/1728 = eta^24. No analytic or transcendental theorem remains open. The only live residuals are provenance/validation: observe generated replay of the named Agda declarations into the Lean mirror structures and obtain exact-head Lean/Agda kernel receipts. Do not flip replay provenance merely because the canonical setoid-equivalent reconstruction exists."
 
 ------------------------------------------------------------------------
 -- Query-stable reduction receipts.
@@ -118,14 +122,14 @@ transcendentalSemanticLeafStillOpenIsFalse :
   ≡ false
 transcendentalSemanticLeafStillOpenIsFalse = refl
 
-crossProverSameObjectBindingPaidIsFalse :
-  crossProverSameObjectBindingPaid
+crossProverReplayProvenancePaidIsFalse :
+  crossProverReplayProvenancePaid
     canonicalBishopRouteBCurrentFrontier
   ≡ false
-crossProverSameObjectBindingPaidIsFalse = refl
+crossProverReplayProvenancePaidIsFalse = refl
 
-normalizedDeltaEta24SameObjectPaidIsFalse :
+normalizedDeltaEta24SameObjectPaidIsTrue :
   normalizedDeltaEta24SameObjectPaid
     canonicalBishopRouteBCurrentFrontier
-  ≡ false
-normalizedDeltaEta24SameObjectPaidIsFalse = refl
+  ≡ true
+normalizedDeltaEta24SameObjectPaidIsTrue = refl
