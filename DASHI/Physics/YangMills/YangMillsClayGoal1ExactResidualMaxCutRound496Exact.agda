@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Ex
 import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayMomentOS05MaxCutRound500Exact as A45Cut
+import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMaxCutRound505Exact as FiniteOSCut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45Rep
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOSExtensionalityMaxCutRound501Exact as A45Ext
 
@@ -51,6 +52,11 @@ import DASHI.Physics.YangMills.YangMillsClayNontrivialitySemanticMaxCutRound502E
 import DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact as Terminal
 
 data ResidualLeaf : Set where
+  -- Published finite OS same-object attachments.
+  aFiniteEuclideanSameObjectAttachment : ResidualLeaf
+  aFiniteBosonicSameObjectAttachment : ResidualLeaf
+  aFiniteWilsonRPSameObjectAttachment : ResidualLeaf
+
   -- A1 current-step beta source.
   a1WilsonHessianVariation : ResidualLeaf
   a1AveragingConstraintVariation : ResidualLeaf
@@ -107,6 +113,13 @@ data ResidualLeaf : Set where
   g2WitnessPreservedInLiteralLimit : ResidualLeaf
 
 leafLevel : ResidualLeaf → ProofLevel
+leafLevel aFiniteEuclideanSameObjectAttachment =
+  FiniteOSCut.literalRound505EuclideanSameObjectAttachmentLevel
+leafLevel aFiniteBosonicSameObjectAttachment =
+  FiniteOSCut.literalRound505BosonicSameObjectAttachmentLevel
+leafLevel aFiniteWilsonRPSameObjectAttachment =
+  FiniteOSCut.literalRound505WilsonRPSameObjectAttachmentLevel
+
 leafLevel a1WilsonHessianVariation =
   A1.a1aLiteralWilsonHessianVariationLevel
 leafLevel a1AveragingConstraintVariation =
@@ -197,7 +210,10 @@ leafLevel g2WitnessPreservedInLiteralLimit =
 
 residualLeaves : List ResidualLeaf
 residualLeaves =
-    a1WilsonHessianVariation
+    aFiniteEuclideanSameObjectAttachment
+  ∷ aFiniteBosonicSameObjectAttachment
+  ∷ aFiniteWilsonRPSameObjectAttachment
+  ∷ a1WilsonHessianVariation
   ∷ a1AveragingConstraintVariation
   ∷ a1GaugeProjectionVariation
   ∷ a1WQRAssembly
@@ -262,6 +278,10 @@ physicalRepresentationAssemblyLevel =
 finiteOS05AssemblyLevel : ProofLevel
 finiteOS05AssemblyLevel =
   A45Cut.round500OS05CompilerLevel
+
+publishedFiniteOSAssemblyLevel : ProofLevel
+publishedFiniteOSAssemblyLevel =
+  FiniteOSCut.round505FiniteOSAssemblyCompilerLevel
 
 representedOSExtensionalityCompilerLevel : ProofLevel
 representedOSExtensionalityCompilerLevel =
