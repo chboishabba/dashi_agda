@@ -18,6 +18,7 @@ from agda_preflight.scope_backend import (
     AgdaAutoRefineBackend,
     AgdaScopeCheckBackend,
     AgdaTypecheckBackend,
+    CommandScopeCheckBackend,
     ExternalScopeBackend,
     ScopeRefinement,
     diagnostic_key,
@@ -659,3 +660,47 @@ def test_failed_scope_frontier_is_not_reprobed_during_refine(tmp_path):
     [result] = checker._apply_evidence_policy(summary, [diagnostic])
     assert result.severity == "warning"
     assert result.evidence_sufficient is False
+
+
+
+def test_command_scope_runner_substitutes_file_placeholder(tmp_path):
+    path = write_module(tmp_path, "Runner.Placeholder")
+    backend = CommandScopeCheckBackend(
+        ["shadow-check", "--only-scope-checking", "{file}"],
+        cwd=tmp_path,
+    )
+
+    assert backend._argv(path) == [
+        "shadow-check",
+        "--only-scope-checking",
+        str(path.resolve()),
+    ]
+
+
+def test_command_scope_runner_appends_file_without_placeholder(tmp_path):
+    path = write_module(tmp_path, "Runner.Append")
+    backend = CommandScopeCheckBackend(
+        ["shadow-check", "--only-scope-checking"],
+        cwd=tmp_path,
+    )
+
+    assert backend._argv(path) == [
+        "shadow-check",
+        "--only-scope-checking",
+        str(path.resolve()),
+    ]
+
+
+def test_auto_refine_can_use_exit_code_scope_runner(tmp_path):
+    backend = AgdaAutoRefineBackend(
+        "unused-agda",
+        cwd=tmp_path,
+        scope_command="shadow-check --only-scope-checking {file}",
+    )
+
+    assert isinstance(backend.scope, CommandScopeCheckBackend)
+    assert backend.scope.command == (
+        "shadow-check",
+        "--only-scope-checking",
+        "{file}",
+    )
