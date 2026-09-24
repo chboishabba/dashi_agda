@@ -17,7 +17,7 @@ def test_pytest_collects_passing_agda_module(pytester):
 
     result = pytester.runpytest(
         "-p",
-        "agda_preflight.pytest_plugin",
+        "dashi_agda_preflight",
         "--agda-preflight",
         "--agda-root",
         str(pytester.path),
@@ -55,7 +55,7 @@ Series M x = x
 
     result = pytester.runpytest(
         "-p",
-        "agda_preflight.pytest_plugin",
+        "dashi_agda_preflight",
         "--agda-preflight",
         "--agda-root",
         str(pytester.path),
@@ -92,7 +92,7 @@ import A.Middle
 
     result = pytester.runpytest(
         "-p",
-        "agda_preflight.pytest_plugin",
+        "dashi_agda_preflight",
         "--agda-preflight",
         "--agda-closure",
         "--agda-root",
@@ -130,7 +130,7 @@ broken M x = x
 
     result = pytester.runpytest(
         "-p",
-        "agda_preflight.pytest_plugin",
+        "dashi_agda_preflight",
         "--agda-preflight",
         "--agda-errors-only",
         "--agda-root",
@@ -149,7 +149,7 @@ def test_pytest_module_item_nodeid_supports_k_filter(pytester):
 
     result = pytester.runpytest(
         "-p",
-        "agda_preflight.pytest_plugin",
+        "dashi_agda_preflight",
         "--agda-preflight",
         "--agda-root",
         str(pytester.path),
@@ -182,7 +182,7 @@ import A.Middle
 
     result = pytester.runpytest(
         "-p",
-        "agda_preflight.pytest_plugin",
+        "dashi_agda_preflight",
         "--agda-preflight",
         "--agda-deps",
         "--agda-root",
