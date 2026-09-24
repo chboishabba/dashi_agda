@@ -39,6 +39,7 @@ import DASHI.Physics.YangMills.BalabanClayT5CompactUniqueFullSequenceExact as Co
 import DASHI.Physics.YangMills.BalabanClayT5SubsequenceProkhorovExtractionExact as Prokhorov
 import DASHI.Physics.YangMills.BalabanClayT5DirectExpectationPropertyClosureExact as Direct
 import DASHI.Physics.YangMills.BalabanClayT5DiagonalCompactUniqueRound427Exact as R427
+import DASHI.Physics.YangMills.BalabanClayT5SelectedDiagonalTightnessRound431Exact as R431
 
 record DeterminingExpectationUniquenessAuthority
     {Measure Observable Scalar : Set}
@@ -199,35 +200,16 @@ record LiteralT5CompactnessUniquenessInputs
     (expectationData :
       T5.PhysicalExpectationProducerData Measure Observable Scalar) : Set₂ where
   field
-    convergence : Limit.SequentialLimit Measure
-
-    TightMeasureSequence : (Nat → Measure) → Set
-
-    everyLiteralDiagonalSubsequenceTight :
-      (subsequence :
-        Compact.SubsequenceWitness
-          (T5.diagonalMeasure expectationData)) →
-      TightMeasureSequence (Compact.values subsequence)
+    selectedTightness :
+      R431.SelectedDiagonalTightnessInputs expectationData
 
     prokhorovAuthority :
       Prokhorov.ProkhorovSubsequenceExtractionAuthority Measure
 
     determiningUniqueness :
-      let selectedTightness : Prokhorov.PhysicalSubsequenceTightnessData Measure
-          selectedTightness = record
-            { Prokhorov.PhysicalSubsequenceTightnessData.convergence =
-                convergence
-            ; Prokhorov.PhysicalSubsequenceTightnessData.sequence =
-                T5.diagonalMeasure expectationData
-            ; Prokhorov.PhysicalSubsequenceTightnessData.TightMeasureSequence =
-                TightMeasureSequence
-            ; Prokhorov.PhysicalSubsequenceTightnessData.everyLiteralSubsequenceTight =
-                everyLiteralDiagonalSubsequenceTight
-            }
-      in
       DeterminingExpectationUniquenessAuthority
         expectationData
-        selectedTightness
+        (R431.asPhysicalSubsequenceTightnessData selectedTightness)
         prokhorovAuthority
 
     compactUniqueFullConvergenceAuthority :
@@ -235,15 +217,8 @@ record LiteralT5CompactnessUniquenessInputs
 
   literalTightness :
     Prokhorov.PhysicalSubsequenceTightnessData Measure
-  literalTightness = record
-    { Prokhorov.PhysicalSubsequenceTightnessData.convergence = convergence
-    ; Prokhorov.PhysicalSubsequenceTightnessData.sequence =
-        T5.diagonalMeasure expectationData
-    ; Prokhorov.PhysicalSubsequenceTightnessData.TightMeasureSequence =
-        TightMeasureSequence
-    ; Prokhorov.PhysicalSubsequenceTightnessData.everyLiteralSubsequenceTight =
-        everyLiteralDiagonalSubsequenceTight
-    }
+  literalTightness =
+    R431.asPhysicalSubsequenceTightnessData selectedTightness
 
 open LiteralT5CompactnessUniquenessInputs public
 
@@ -255,11 +230,11 @@ asR427CompactUniqueInputs :
   R427.LiteralDiagonalCompactUniqueInputs expectationData
 asR427CompactUniqueInputs {expectationData = expectationData} inputs = record
   { R427.LiteralDiagonalCompactUniqueInputs.convergence =
-      convergence inputs
+      R431.convergence (selectedTightness inputs)
   ; R427.LiteralDiagonalCompactUniqueInputs.TightMeasureSequence =
-      TightMeasureSequence inputs
+      R431.TightMeasureSequence (selectedTightness inputs)
   ; R427.LiteralDiagonalCompactUniqueInputs.everyLiteralDiagonalSubsequenceTight =
-      everyLiteralDiagonalSubsequenceTight inputs
+      R431.everyLiteralDiagonalSubsequenceTight (selectedTightness inputs)
   ; R427.LiteralDiagonalCompactUniqueInputs.prokhorovAuthority =
       prokhorovAuthority inputs
   ; R427.LiteralDiagonalCompactUniqueInputs.everyExtractedDiagonalClusterPointIsContinuum =
@@ -290,7 +265,10 @@ round430DeterminingClassPhysicalMeaningLevel : ProofLevel
 round430DeterminingClassPhysicalMeaningLevel = conditional
 
 round430EveryLiteralSubsequenceTightLevel : ProofLevel
-round430EveryLiteralSubsequenceTightLevel = conditional
+round430EveryLiteralSubsequenceTightLevel = machineChecked
+
+round430SelectedDiagonalTightnessLevel : ProofLevel
+round430SelectedDiagonalTightnessLevel = conditional
 
 round430IndependentClusterPointEqualityInputRequired : Bool
 round430IndependentClusterPointEqualityInputRequired = false
