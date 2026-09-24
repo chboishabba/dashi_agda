@@ -671,16 +671,29 @@ def _function_signature(source_bytes: bytes, node) -> Optional[AstSignature]:
     return AstSignature((name,), node_text(source_bytes, expr).strip(), line_of(node), expr, node)
 
 
-def _function_clause(source_bytes: bytes, node) -> Optional[AstClause]:
+def _function_clause(
+    source_bytes: bytes,
+    node,
+    *,
+    continuation_owner: Optional[str] = None,
+) -> Optional[AstClause]:
     lhs = next((x for x in node.named_children if x.type == "lhs"), None)
     rhs = next((x for x in node.named_children if x.type == "rhs"), None)
     if lhs is None:
         return None
     if first_descendant(lhs, "function_name") is not None:
         return None
-    # The first qualified/id atom on a definition LHS is the defined function.
-    name_node = first_descendant(lhs, "qid", "id")
-    name = _name_from_node(source_bytes, name_node)
+
+    lhs_tokens = significant_tokens(source_bytes, lhs)
+    is_ellipsis = bool(lhs_tokens and lhs_tokens[0].text in {"...", "…"})
+    if is_ellipsis:
+        name = continuation_owner
+    else:
+        # Ordinary definition clauses carry the defined function as the first
+        # qualified/id atom. Ellipsis with-clauses deliberately do not.
+        name_node = first_descendant(lhs, "qid", "id")
+        name = _name_from_node(source_bytes, name_node)
+
     if not _valid_function_name(name):
         return None
     rhs_expr = first_descendant(rhs, "expr") if rhs is not None else None
@@ -858,6 +871,7 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
     # Walk declarations once. Nested declarations are retained for later scope
     # work, while summaries below deliberately use only outer/module-level
     # function declarations unless they belong to data/record bodies.
+    last_clause_owner: Optional[str] = None
     for node in descendants(root):
         if node.type == "open":
             imp, opened = _parse_open_node(source_bytes, node)
@@ -894,7 +908,7 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
             parent = node.parent
             nested_owner = None
             while parent is not None and parent != root:
-                if parent.type in {"data", "record", "fields"}:
+                if parent.type in {"data", "record", "fields", "where"}:
                     nested_owner = parent.type
                     break
                 parent = parent.parent
@@ -906,9 +920,23 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
                     index.signature_occurrences.setdefault(name, []).append(sig)
                     index.signatures[name] = sig
                 continue
-            clause = _function_clause(source_bytes, node)
+            lhs = next(
+                (child for child in node.named_children if child.type == "lhs"),
+                None,
+            )
+            lhs_tokens = significant_tokens(source_bytes, lhs) if lhs is not None else []
+            is_ellipsis = bool(
+                lhs_tokens and lhs_tokens[0].text in {"...", "…"}
+            )
+            clause = _function_clause(
+                source_bytes,
+                node,
+                continuation_owner=last_clause_owner,
+            )
             if clause is not None:
                 index.clauses.setdefault(clause.name, []).append(clause)
+                if not is_ellipsis:
+                    last_clause_owner = clause.name
         elif node.type == "pragma":
             index.pragmas.append(node)
         elif node.type == "infix":
