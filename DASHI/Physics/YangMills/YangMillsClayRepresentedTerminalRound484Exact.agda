@@ -12,6 +12,9 @@ module DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Nat using (Nat)
+
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -27,9 +30,8 @@ record RepresentedTerminalInputs
     (S :
       Top.LiteralYangMillsSemantics
         (Physical.physicalLiteralCarriers
-          G X Agda.Builtin.Nat.Nat Configuration
-          DASHI.Foundations.RealAnalysisAxioms.ℝ
-          (Configuration → DASHI.Foundations.RealAnalysisAxioms.ℝ)
+          G X Nat Configuration ℝ
+          (Configuration → ℝ)
           Position CurvaturePolynomial LocalOperator OPECoefficient StressTensor
           Hilbert Hamiltonian Vacuum))
     : Set₂ where
