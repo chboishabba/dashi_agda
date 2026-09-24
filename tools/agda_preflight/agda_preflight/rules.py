@@ -233,7 +233,13 @@ def extended_diagnostics(checker, s, D):
         binder_names = {binder.name for binder in typed_binders(s.ast.source_bytes, sig.type_node)}
         for clause in s.ast.clauses.get(name, []):
             got = clause_explicit_argument_count(s.ast.source_bytes, clause.lhs_node)
-            if got is not None and got != want:
+            # Zero visible LHS arguments can be a valid pointfree/eta-style
+            # definition even when the declared type is a function. Do not
+            # manufacture an arity mismatch from syntax alone. Nonzero
+            # disagreements remain useful suspicions, but TSAGDA045 requires
+            # AGDA_TYPECHECKER evidence because result aliases may unfold to
+            # additional arrows.
+            if got is not None and got > 0 and got != want:
                 out.append(_diag(D, "TSAGDA045", f"{name} clause has {got} explicit LHS arguments; signature has {want}", s, clause.line))
             lhs_tokens = significant_tokens(s.ast.source_bytes, clause.lhs_node)
             for i, token in enumerate(lhs_tokens):
