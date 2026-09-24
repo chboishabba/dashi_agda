@@ -28,6 +28,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin.Base using (Fin)
 open import Data.Nat.Base using (_<_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -100,8 +101,8 @@ strictRepresentativeTerminalLabels
             {left right : A} →
           left ≡ right →
           right ≡ left
-        symmetry equality =
-          Relation.Binary.PropositionalEquality.sym equality
+        symmetry =
+          sym
 
 ------------------------------------------------------------------------
 -- Root decision from the finite state DP.
