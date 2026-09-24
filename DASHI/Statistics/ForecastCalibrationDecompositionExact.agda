@@ -3,7 +3,7 @@ module DASHI.Statistics.ForecastCalibrationDecompositionExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; _<_)
 
 import DASHI.Statistics.ForecastVerificationKernelExact as Kernel
 import DASHI.Statistics.ForecastResolutionSelectionExact as Lifecycle
@@ -89,7 +89,14 @@ record ForecastSkillAgainstReference : Set where
   field
     forecastScore : ℚ
     reference : ReferenceForecastReceipt
+    referenceScorePositive : 0ℚ < score reference
     skillCoordinate : ℚ
+
+    -- Division-free form of skill = 1 - forecast/reference:
+    -- (1 - skill) * reference = forecast.
+    skillReconstructs :
+      (1ℚ - skillCoordinate) * score reference ≡ forecastScore
+
     skillFormulaReference : String
     betterThanReferenceCreatesAbsoluteQuality : Bool
     betterThanReferenceCreatesAbsoluteQualityIsFalse :
