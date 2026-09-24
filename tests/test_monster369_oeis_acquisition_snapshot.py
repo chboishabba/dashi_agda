@@ -85,6 +85,7 @@ def test_42b_is_the_order_42_power_bridge_to_3b():
 def test_42_class_eta_family_retains_native_14_and_42_levels():
     runtime = load_runtime()
     assert runtime.SEQUENCES["A058674"]["class_label"] == "42D"
+    assert runtime.SEQUENCES["A058674"]["positive_coefficients"] == {1: 1, 2: 3, 3: 3}
     assert "eta(q^14)" in runtime.SEQUENCES["A058674"]["formula"]
     assert "eta(q^42)" in runtime.SEQUENCES["A058674"]["formula"]
     assert runtime.SEQUENCES["A058676"]["class_label"] == "42b"
@@ -129,6 +130,20 @@ def test_42d_five_mode_phase_probe_realizes_15_14_42_without_authority_promotion
     assert probe["forty_two_carrier_is_monster_class_42d_paid"] is False
 
 
+def test_five_orbit_d4_character_is_retained_as_typed_bridge_not_oeis_authority():
+    runtime = load_runtime()
+    probe = runtime.build_five_orbit_d4_oeis_bridge_probe()
+
+    assert probe["permutation_character"] == [5, 5, 1, 3, 3]
+    assert probe["irrep_multiplicities"] == {"A1": 3, "A2": 0, "B1": 1, "B2": 1, "E": 0}
+    assert probe["raw_nine_irrep_multiplicities"] == {"A1": 3, "A2": 0, "B1": 1, "B2": 1, "E": 2}
+    assert probe["removed_irrep_content"] == {"E": 2}
+    assert probe["removed_dimension"] == 4
+    assert probe["n3b_same_object_character_paid"] is False
+    assert probe["oeis_42d_tail_echo"] == [1, 3, 3]
+    assert probe["oeis_tail_echo_creates_character_identity"] is False
+
+
 def test_6b_normalization_family_retains_q6_32772_across_three_manifests():
     runtime = load_runtime()
     family = [runtime.SEQUENCES[key] for key in ("A007255", "A045485", "A121665")]
@@ -158,6 +173,7 @@ def test_snapshot_keeps_positive_bridge_signal_separate_from_proof_authority():
     assert report["positive_bridge_candidates"]["42d-five-mode-phase-carrier"] is True
     assert report["positive_bridge_candidates"]["42-class-eta-level-family"] is True
     assert report["positive_bridge_candidates"]["ternary27-phase-preserving-3x5-reduction"] is True
+    assert report["positive_bridge_candidates"]["five-orbit-d4-to-n3b-character"] is True
     assert report["authority"]["oeis_snapshot_creates_same_object"] is False
     assert report["authority"]["oeis_snapshot_creates_monster_action"] is False
     assert report["authority"]["positive_bridge_signal_creates_theorem"] is False
