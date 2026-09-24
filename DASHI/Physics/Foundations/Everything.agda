@@ -27,6 +27,10 @@ import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryValidation
+import DASHI.Physics.Foundations.GRQFTStressWeldBidiAttemptExact
+import DASHI.Physics.Foundations.GRQFTRecoveryBidiAttemptExact
+import DASHI.Physics.Foundations.RecoveredGRAttachmentExact
+import DASHI.Physics.Foundations.GRQFTConcreteInstanceFrontierExact
 import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryExact
 import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryValidation
 import DASHI.Physics.Foundations.CommonEffectiveActionVariationExact
