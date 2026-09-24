@@ -7,6 +7,7 @@ import sys
 
 from .checker import Checker, Diagnostic
 from .rules import api_snapshot, api_drift
+from .scope_backend import ExternalScopeBackend
 
 
 def _format(diag) -> str:
@@ -40,9 +41,21 @@ def main(argv=None) -> int:
     parser.add_argument("--write-api-snapshot", type=Path, help="write repository API summary JSON and exit")
     parser.add_argument("--api-baseline", type=Path, help="compare current exported API to a prior snapshot")
     parser.add_argument("--cycles", action="store_true", help="report repository import cycles containing FILE")
+    parser.add_argument(
+        "--agda-scope-command",
+        help=(
+            "optional Agda-aware scope/elaboration command; receives FILE and "
+            "returns confirmed/suppressed TSAGDA locations as JSON"
+        ),
+    )
     args = parser.parse_args(argv)
 
-    checker = Checker(args.root)
+    scope_backend = (
+        ExternalScopeBackend(args.agda_scope_command, cwd=args.root)
+        if args.agda_scope_command
+        else None
+    )
+    checker = Checker(args.root, scope_backend=scope_backend)
 
     if args.write_api_snapshot:
         args.write_api_snapshot.write_text(
