@@ -25,6 +25,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarLiveM2PaymentRound663Exact.agda'
       - '.github/workflows/ns-r650-quantitative-diagnostics.yml'
   pull_request:
     paths:
