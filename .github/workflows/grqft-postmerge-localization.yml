@@ -29,6 +29,9 @@ on:
       - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressWeldCompilerValidation.agda'
       - 'DASHI/Physics/Foundations/GRRecoveryVsSchwarzschildValidationExact.agda'
       - 'DASHI/Physics/Foundations/GRRecoveryVsSchwarzschildValidationValidation.agda'
+      - 'DASHI/Physics/Foundations/StressEnergyWeldMathematicalCoreExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressMathematicalCoreExact.agda'
+      - 'DASHI/Physics/Foundations/StressEnergyWeldMathematicalCoreValidation.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
