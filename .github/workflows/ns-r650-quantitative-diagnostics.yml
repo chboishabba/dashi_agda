@@ -60,6 +60,7 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650ExternalTotalizationZeroBranchRound672Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650ExternalZeroBranchEliminationRound673Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda'
@@ -98,7 +99,7 @@ jobs:
       - name: Install Agda semantic preflight
         run: python -m pip install -e tools/agda_preflight
 
-      - name: Preflight R655-R672 analytic frontier
+      - name: Preflight R655-R673 analytic frontier
         run: |
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650EuclideanCollarRefinementRound656Exact.agda
@@ -116,6 +117,7 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalTotalizationZeroBranchRound672Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalZeroBranchEliminationRound673Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda
