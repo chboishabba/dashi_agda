@@ -97,7 +97,7 @@ def main() -> None:
             "status": "qft_component_data_missing",
             "comparison_executed": False,
             "required_next_input":
-                "metric-basis/symmetry bridge plus ten independent CMP119/YM stress components in the same normalized rational carrier",
+                "ten independent CMP119/YM rational stress readouts in symmetric slots 00,01,02,03,11,12,13,22,23,33",
         })
     else:
         raw = json.loads(args.qft_json.read_text())
