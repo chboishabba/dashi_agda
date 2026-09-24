@@ -169,6 +169,11 @@ surfaceDECMargin8Pi : ℚ
 surfaceDECMargin8Pi =
   surfaceSigma8Pi - (Int.+ 5 / 24)
 
+surfaceSECMargin8Pi : ℚ
+surfaceSECMargin8Pi =
+  surfaceSigma8Pi
+  + (Int.+ 2 / 1) * surfacePressure8Pi
+
 surfaceNECMarginIsOneTwentyFourth :
   surfaceNECMargin8Pi ≡ Int.+ 1 / 24
 surfaceNECMarginIsOneTwentyFourth = solve []
@@ -177,11 +182,15 @@ surfaceDECMarginIsOneTwentyFourth :
   surfaceDECMargin8Pi ≡ Int.+ 1 / 24
 surfaceDECMarginIsOneTwentyFourth = solve []
 
+surfaceSECMarginIsMinusOneSixth :
+  surfaceSECMargin8Pi ≡ - (Int.+ 1 / 6)
+surfaceSECMarginIsMinusOneSixth = solve []
+
 data EnergyConditionStatus : Set where
-  necWecDecCompatible : EnergyConditionStatus
+  necWecDecCompatibleSecViolated : EnergyConditionStatus
 
 fixtureEnergyConditionStatus : EnergyConditionStatus
-fixtureEnergyConditionStatus = necWecDecCompatible
+fixtureEnergyConditionStatus = necWecDecCompatibleSecViolated
 
 record GeneralIsraelDECCompatibleShellWitness : Set where
   constructor general-israel-dec-compatible-shell-witness
@@ -207,6 +216,9 @@ record GeneralIsraelDECCompatibleShellWitness : Set where
     decMargin :
       surfaceDECMargin8Pi ≡ Int.+ 1 / 24
 
+    secMargin :
+      surfaceSECMargin8Pi ≡ - (Int.+ 1 / 6)
+
     energyConditionStatus :
       EnergyConditionStatus
 
@@ -223,7 +235,8 @@ canonicalGeneralIsraelDECCompatibleShellWitness =
     surfacePressure8PiIsMinusFiveTwentyFourths
     surfaceNECMarginIsOneTwentyFourth
     surfaceDECMarginIsOneTwentyFourth
-    necWecDecCompatible
+    surfaceSECMarginIsMinusOneSixth
+    necWecDecCompatibleSecViolated
 
 record GeneralIsraelDECCompatibleShellBoundary : Set where
   constructor general-israel-dec-compatible-shell-boundary
@@ -235,6 +248,7 @@ record GeneralIsraelDECCompatibleShellBoundary : Set where
     nullEnergyConditionCompatible : Bool
     weakEnergyConditionCompatible : Bool
     dominantEnergyConditionCompatible : Bool
+    strongEnergyConditionCompatible : Bool
     negativeSurfaceEnergyRequired : Bool
     matchedLapseZeroSigmaBranchIsOnlyPossibleBranch : Bool
 
@@ -242,4 +256,4 @@ canonicalGeneralIsraelDECCompatibleShellBoundary :
   GeneralIsraelDECCompatibleShellBoundary
 canonicalGeneralIsraelDECCompatibleShellBoundary =
   general-israel-dec-compatible-shell-boundary
-    false true true true true true true false false
+    false true true true true true true false false false
