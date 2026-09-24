@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.YangMillsExtensionalizedRepresentedOS05Round520Ex
 -- is introduced.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Product using (_×_; Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (trans)
@@ -51,8 +52,8 @@ ExtensionalClosure :
   (ExpectationFunctional Configuration → Set) →
   ExpectationFunctional Configuration →
   Set
-ExtensionalClosure Predicate target =
-  Σ (ExpectationFunctional _)
+ExtensionalClosure {Configuration} Predicate target =
+  Σ (ExpectationFunctional Configuration)
     (λ source →
       Predicate source
       × PointwiseEqual source target)
@@ -140,8 +141,8 @@ round520RepresentedRegularityTransportLevel = machineChecked
 round520RepresentedGrowthTransportLevel : ProofLevel
 round520RepresentedGrowthTransportLevel = machineChecked
 
-literalRound520RegularityExtensionalityAssumptionRequired : Agda.Builtin.Bool.Bool
-literalRound520RegularityExtensionalityAssumptionRequired = Agda.Builtin.Bool.false
+literalRound520RegularityExtensionalityAssumptionRequired : Bool
+literalRound520RegularityExtensionalityAssumptionRequired = false
 
-literalRound520GrowthExtensionalityAssumptionRequired : Agda.Builtin.Bool.Bool
-literalRound520GrowthExtensionalityAssumptionRequired = Agda.Builtin.Bool.false
+literalRound520GrowthExtensionalityAssumptionRequired : Bool
+literalRound520GrowthExtensionalityAssumptionRequired = false
