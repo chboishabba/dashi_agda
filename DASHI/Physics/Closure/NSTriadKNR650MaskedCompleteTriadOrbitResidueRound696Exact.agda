@@ -303,6 +303,17 @@ module MaskedOrbit
           (trans (sym qMeaning) (sym selectedMasked)))
         (solve (selected ∷ [])))
 
+  completeTriadOrbitResidueIsThreeCoherentCommutator :
+    R38.foldPower triadOrbitResidue
+      (Physical.physicalTriadEnumeration E.cutoff)
+    ≡ three * E.nonzeroGlobalCommutatorWork
+  completeTriadOrbitResidueIsThreeCoherentCommutator =
+    trans
+      completeTriadOrbitResidueIsThreeSelectedCommutator
+      (cong
+        (three *_)
+        (sym E.nonzeroGlobalCommutatorIsLiteralPairIncidenceSum))
+
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
@@ -322,8 +333,11 @@ round696MaskedFullFoldEqualsR692NonzeroGlobalCommutator = true
 round696ThreeLegOrbitResidueMultiplicityExact : Bool
 round696ThreeLegOrbitResidueMultiplicityExact = true
 
-round696OrbitResiduePointwiseZero : Bool
-round696OrbitResiduePointwiseZero = false
+round696OrbitResidueEqualsThreeCoherentCommutator : Bool
+round696OrbitResidueEqualsThreeCoherentCommutator = true
+
+round696OrbitResiduePointwiseZeroClosed : Bool
+round696OrbitResiduePointwiseZeroClosed = false
 
 round696OrbitResidueSignedUniformPaymentClosed : Bool
 round696OrbitResidueSignedUniformPaymentClosed = false
@@ -354,9 +368,13 @@ round696ThreeLegOrbitResidueMultiplicityExactIsTrue :
   round696ThreeLegOrbitResidueMultiplicityExact ≡ true
 round696ThreeLegOrbitResidueMultiplicityExactIsTrue = refl
 
-round696OrbitResiduePointwiseZeroIsFalse :
-  round696OrbitResiduePointwiseZero ≡ false
-round696OrbitResiduePointwiseZeroIsFalse = refl
+round696OrbitResidueEqualsThreeCoherentCommutatorIsTrue :
+  round696OrbitResidueEqualsThreeCoherentCommutator ≡ true
+round696OrbitResidueEqualsThreeCoherentCommutatorIsTrue = refl
+
+round696OrbitResiduePointwiseZeroClosedIsFalse :
+  round696OrbitResiduePointwiseZeroClosed ≡ false
+round696OrbitResiduePointwiseZeroClosedIsFalse = refl
 
 round696OrbitResidueSignedUniformPaymentClosedIsFalse :
   round696OrbitResidueSignedUniformPaymentClosed ≡ false
