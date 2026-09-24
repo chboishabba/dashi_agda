@@ -174,7 +174,7 @@ def extended_diagnostics(checker, s, D):
             rhs_tokens = tuple(token.text for token in significant_tokens(s.ast.source_bytes, clause.rhs_node)) if clause.rhs_node is not None else ()
             key = (lhs_tokens, rhs_tokens)
             if key in seen:
-                out.append(_diag(D, "TSAGDA010", f"duplicate identical clause for {name}", s, clause.line))
+                out.append(_diag(D, "TSAGDA010", f"duplicate identical clause for {name}", s, clause.line, severity="warning", confidence="high"))
             seen.add(key)
 
     root_tokens = significant_tokens(s.ast.source_bytes, s.ast.tree.root_node)
@@ -377,7 +377,7 @@ def extended_diagnostics(checker, s, D):
 
             # Catch-all after the function head: every visible explicit arg is _.
             if catch_line is not None:
-                out.append(_diag(D, "TSAGDA088", f"clause follows visible catch-all at line {catch_line}", s, clause.line))
+                out.append(_diag(D, "TSAGDA088", f"clause follows visible catch-all at line {catch_line}", s, clause.line, severity="warning", confidence="high"))
                 break
             if lhs_view is not None and lhs_view.explicit_args and all(arg.text.strip() == "_" for arg in lhs_view.explicit_args):
                 catch_line = clause.line
@@ -407,7 +407,7 @@ def extended_diagnostics(checker, s, D):
                 if missing and catch_line is None:
                     out.append(_diag(D, "TSAGDA087", f"simple finite coverage for {name} misses constructors: {', '.join(missing)}", s, clause_items[0].line))
             if len(used_constructors) != len(set(used_constructors)):
-                out.append(_diag(D, "TSAGDA089", f"{name} has duplicate constructor branches in simple finite coverage", s, clause_items[0].line))
+                out.append(_diag(D, "TSAGDA089", f"{name} has duplicate constructor branches in simple finite coverage", s, clause_items[0].line, severity="warning", confidence="high"))
 
     eq_shapes = {}
 
