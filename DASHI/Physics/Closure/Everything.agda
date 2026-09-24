@@ -240,3 +240,5 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicStandardCompletionSourcesRound649E
 import DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650QuantitativeResearchStrategyRound651Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact
