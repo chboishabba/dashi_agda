@@ -488,3 +488,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarSingleSelfMismatchRound678Exa
 import DASHI.Physics.Closure.NSTriadKNR650CombinedRouteReturnsToRateKernelRound679Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelPositiveRateNoGoRound680Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650LiveRateKernelCrossGradientRound682Exact
