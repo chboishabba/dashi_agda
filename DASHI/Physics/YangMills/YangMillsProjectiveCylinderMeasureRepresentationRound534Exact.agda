@@ -21,7 +21,10 @@ module DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationR
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as R495
@@ -123,10 +126,10 @@ open ProjectiveCylinderRepresentationInputs public
 
 asSourceLimitRepresentation :
   ∀ {Index Event Mass Observable}
-    {sourceExpectation : Observable → DASHI.Foundations.RealAnalysisAxioms.ℝ} →
+    {sourceExpectation : Observable → ℝ} →
   ProjectiveCylinderRepresentationInputs
     Index Event Mass Observable
-    DASHI.Foundations.RealAnalysisAxioms.ℝ
+    ℝ
     sourceExpectation →
   R476.SourceLimitRepresentation Observable sourceExpectation
 asSourceLimitRepresentation inputs = record
