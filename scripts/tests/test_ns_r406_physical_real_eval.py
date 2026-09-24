@@ -16,7 +16,10 @@ from ns_r406_physical_real_eval import (  # noqa: E402
     output_fibre,
     projected_state,
 )
-from ns_r650_c2_physical_real_scan import _critical_currency  # noqa: E402
+from ns_r650_c2_physical_real_scan import (  # noqa: E402
+    _critical_currency,
+    _packet_layer_cake_split,
+)
 
 
 def _reality_closed_random_state(n: int, seed: int = 23) -> np.ndarray:
@@ -201,3 +204,27 @@ def test_c1_forcing_full_has_expected_quintic_amplitude_degree() -> None:
     c1 = float(doubled["c1_instantaneous_four_forcing_full"])
     assert abs(c0) > 1.0e-18
     assert np.isclose(c1, 32.0 * c0, rtol=5.0e-10, atol=1.0e-14)
+
+
+def test_c2_packet_layer_cake_collar_remote_split_is_exact() -> None:
+    raw = _reality_closed_random_state(12, seed=59)
+    split = _packet_layer_cake_split(raw, nu=0.01, formal_cutoff=2)
+
+    scale = max(
+        1.0,
+        abs(float(split["physical_upper_layer_cake"])),
+        abs(float(split["collar_layer_cake"])),
+        abs(float(split["remote_layer_cake"])),
+    )
+    assert abs(float(split["upper_minus_collar_remote_layer_cake"])) <= 1.0e-12 * scale
+    assert abs(float(split["abel_reconstruction_residual"])) <= 1.0e-12 * scale
+    assert float(split["maximum_upper_split_residual"]) <= 1.0e-12 * scale
+
+
+def test_c2_low_remote_spectral_cross_is_nonpositive_on_literal_split() -> None:
+    raw = _reality_closed_random_state(12, seed=61)
+    split = _packet_layer_cake_split(raw, nu=0.01, formal_cutoff=2)
+
+    assert int(split["interface_count"]) > 0
+    assert int(split["remote_spectral_cross_violation_count"]) == 0
+    assert float(split["maximum_remote_spectral_cross"]) <= 1.0e-10
