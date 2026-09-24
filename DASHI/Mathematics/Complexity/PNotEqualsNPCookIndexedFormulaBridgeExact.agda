@@ -37,6 +37,9 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact as Search
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 
 ------------------------------------------------------------------------
 -- Finite variable bound.
@@ -430,3 +433,242 @@ cookSatisfiableGivesIndexedSatisfying
 -- resource-bounded self-reference.  This bridge pays only the syntax mismatch;
 -- it does not manufacture the missing fixed point.
 ------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+-- Extend a finite assignment to the total Nat-indexed Cook assignment.
+------------------------------------------------------------------------
+
+cookAssignmentFromFinite :
+  ∀ {variables : Nat} →
+  SAT.Assignment variables →
+  Cook.Assignment
+cookAssignmentFromFinite {zero} assignment index =
+  false
+cookAssignmentFromFinite {suc variables} assignment zero =
+  assignment Fin.zero
+cookAssignmentFromFinite {suc variables} assignment (suc index) =
+  cookAssignmentFromFinite
+    (λ inner → assignment (Fin.suc inner))
+    index
+
+cookAssignmentFromFiniteAgrees :
+  ∀ {variables : Nat}
+    (assignment : SAT.Assignment variables)
+    (index : Fin variables) →
+  cookAssignmentFromFinite assignment (Fin.toℕ index)
+  ≡ assignment index
+cookAssignmentFromFiniteAgrees
+    {suc variables}
+    assignment
+    Fin.zero =
+  refl
+cookAssignmentFromFiniteAgrees
+    {suc variables}
+    assignment
+    (Fin.suc index) =
+  cookAssignmentFromFiniteAgrees
+    (λ inner → assignment (Fin.suc inner))
+    index
+
+------------------------------------------------------------------------
+-- Indexed -> Cook evaluation agreement.
+------------------------------------------------------------------------
+
+indexedToCookEvaluation :
+  ∀ {variables : Nat}
+    (formula : SAT.BooleanFormula variables)
+    (assignment : SAT.Assignment variables) →
+  Cook.evaluate
+    (indexedToCook formula)
+    (cookAssignmentFromFinite assignment)
+  ≡
+  SAT.evaluate formula assignment
+indexedToCookEvaluation
+    (SAT.variable index)
+    assignment =
+  cookAssignmentFromFiniteAgrees
+    assignment
+    index
+indexedToCookEvaluation
+    (SAT.constant value)
+    assignment =
+  refl
+indexedToCookEvaluation
+    (SAT.negate formula)
+    assignment =
+  trans
+    (cong
+      Cook.notBool
+      (indexedToCookEvaluation
+        formula assignment))
+    (sym
+      (notBoolAgreement
+        (SAT.evaluate formula assignment)))
+indexedToCookEvaluation
+    (SAT.conjunction left right)
+    assignment =
+  trans
+    (cong₂
+      Cook.andBool
+      (indexedToCookEvaluation
+        left assignment)
+      (indexedToCookEvaluation
+        right assignment))
+    (sym
+      (andBoolAgreement
+        (SAT.evaluate left assignment)
+        (SAT.evaluate right assignment)))
+indexedToCookEvaluation
+    (SAT.disjunction left right)
+    assignment =
+  trans
+    (cong₂
+      Cook.orBool
+      (indexedToCookEvaluation
+        left assignment)
+      (indexedToCookEvaluation
+        right assignment))
+    (sym
+      (orBoolAgreement
+        (SAT.evaluate left assignment)
+        (SAT.evaluate right assignment)))
+
+------------------------------------------------------------------------
+-- Satisfiability equivalence for every indexed formula.
+------------------------------------------------------------------------
+
+indexedSatisfyingGivesCookSatisfiable :
+  ∀ {variables : Nat}
+    (formula : SAT.BooleanFormula variables) →
+  SAT.Satisfying formula →
+  Cook.Satisfiable
+    (indexedToCook formula)
+indexedSatisfyingGivesCookSatisfiable
+    formula
+    (SAT.satisfying assignment evaluatesTrue) =
+  Cook.satisfyingAssignment
+    (cookAssignmentFromFinite assignment)
+    (trans
+      (indexedToCookEvaluation
+        formula assignment)
+      evaluatesTrue)
+
+cookSatisfiableIndexedFormulaGivesIndexedSatisfying :
+  ∀ {variables : Nat}
+    (formula : SAT.BooleanFormula variables) →
+  Cook.Satisfiable
+    (indexedToCook formula) →
+  SAT.Satisfying formula
+cookSatisfiableIndexedFormulaGivesIndexedSatisfying
+    formula
+    (Cook.satisfyingAssignment
+      assignment evaluatesTrue) =
+  SAT.satisfying
+    (finiteAssignmentFromCook assignment)
+    evaluatesIndexed
+  where
+    evaluatesIndexed :
+      SAT.evaluate
+        formula
+        (finiteAssignmentFromCook assignment)
+      ≡ true
+    evaluatesIndexed =
+      indexedEvaluationFromCook formula assignment evaluatesTrue
+
+    indexedEvaluationFromCook :
+      ∀ {n : Nat}
+        (inner : SAT.BooleanFormula n)
+        (cookAssignment : Cook.Assignment) →
+      Cook.evaluate
+        (indexedToCook inner)
+        cookAssignment
+      ≡ true →
+      SAT.evaluate
+        inner
+        (finiteAssignmentFromCook cookAssignment)
+      ≡ true
+    indexedEvaluationFromCook
+        (SAT.variable index)
+        cookAssignment result
+        rewrite FinP.toℕ-fromℕ<
+          (FinP.toℕ<n index) =
+      result
+    indexedEvaluationFromCook
+        (SAT.constant value)
+        cookAssignment result =
+      result
+    indexedEvaluationFromCook
+        (SAT.negate inner)
+        cookAssignment result
+        with SAT.evaluate inner
+          (finiteAssignmentFromCook cookAssignment)
+... | false = refl
+... | true = result
+    indexedEvaluationFromCook
+        (SAT.conjunction left right)
+        cookAssignment result
+        with SAT.evaluate left
+          (finiteAssignmentFromCook cookAssignment)
+           | SAT.evaluate right
+          (finiteAssignmentFromCook cookAssignment)
+... | false | false = result
+... | false | true = result
+... | true | false = result
+... | true | true = refl
+    indexedEvaluationFromCook
+        (SAT.disjunction left right)
+        cookAssignment result
+        with SAT.evaluate left
+          (finiteAssignmentFromCook cookAssignment)
+           | SAT.evaluate right
+          (finiteAssignmentFromCook cookAssignment)
+... | false | false = result
+... | false | true = refl
+... | true | false = refl
+... | true | true = refl
+
+------------------------------------------------------------------------
+-- Under SAT in P on the Clay-critical Cook carrier, obtain an exact decision
+-- oracle on every finite indexed formula.
+------------------------------------------------------------------------
+
+indexedOracleFromCookInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  PR.InP cost Clay.SATLanguage →
+  Search.ExactDecisionOracle
+    SAT.booleanSATSelfReduction
+indexedOracleFromCookInP satP = record
+  { Search.decide =
+      λ formula →
+        PR.decide satP
+          (indexedToCook formula)
+  ; Search.sound =
+      λ formula decidedTrue →
+        cookSatisfiableIndexedFormulaGivesIndexedSatisfying
+          formula
+          (PR.sound satP
+            (indexedToCook formula)
+            decidedTrue)
+  ; Search.complete =
+      λ formula satisfiable →
+        PR.complete satP
+          (indexedToCook formula)
+          (indexedSatisfyingGivesCookSatisfiable
+            formula satisfiable)
+  }
+
+------------------------------------------------------------------------
+-- Actual Cook formula -> indexed formula -> exact Shannon oracle lineage.
+------------------------------------------------------------------------
+
+cookFormulaIndexedView :
+  Cook.BooleanFormula →
+  Σ Nat
+    (λ variables →
+      SAT.BooleanFormula variables)
+cookFormulaIndexedView formula =
+  formulaVariableBound formula
+  ,
+  cookToIndexed formula
+
