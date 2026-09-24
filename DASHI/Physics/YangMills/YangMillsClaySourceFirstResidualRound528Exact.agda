@@ -24,9 +24,9 @@ module DASHI.Physics.YangMills.YangMillsClaySourceFirstResidualRound528Exact whe
 --    7 source<->literal applicability attachments
 --    2 rich structural/T1 source bundles
 --    1 density->finite-measure source map
---    4 C physical source packages
+--    5 C physical source packages
 --   -----------------------------------
---   27 preferred residual theorem/source packages
+--   28 preferred residual theorem/source packages
 --
 -- No opaque endpoint semantic leaf remains.
 ------------------------------------------------------------------------
@@ -104,12 +104,15 @@ densityMeasureLeaves : List DensityMeasureLeaf
 densityMeasureLeaves = literalDensityToFiniteMeasureMap ∷ []
 
 data CPackage : Set where
+  c0LiteralLocalObservableFamily : CPackage
   c1MarkedCurvatureFamily : CPackage
   c2PhysicalRemainderTail : CPackage
   c3OneStepAFRecurrence : CPackage
   c4DensityAnchoredStressLane : CPackage
 
 cPackageLevel : CPackage → ProofLevel
+cPackageLevel c0LiteralLocalObservableFamily =
+  R527.c0LiteralGaugeInvariantLocalObservableFamilyLevel
 cPackageLevel c1MarkedCurvatureFamily =
   R527.c1MarkedCurvatureFamilyLevel
 cPackageLevel c2PhysicalRemainderTail =
@@ -121,7 +124,8 @@ cPackageLevel c4DensityAnchoredStressLane =
 
 cPackages : List CPackage
 cPackages =
-    c1MarkedCurvatureFamily
+    c0LiteralLocalObservableFamily
+  ∷ c1MarkedCurvatureFamily
   ∷ c2PhysicalRemainderTail
   ∷ c3OneStepAFRecurrence
   ∷ c4DensityAnchoredStressLane
