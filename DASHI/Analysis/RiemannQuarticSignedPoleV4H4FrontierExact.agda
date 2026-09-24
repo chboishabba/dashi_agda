@@ -77,6 +77,9 @@ data V4H4Coordinate : Set where
 
   localizedMontgomeryProducer : V4H4Coordinate
   finiteV4CarrierWeld : V4H4Coordinate
+  explicitLeftEndpointAtom : V4H4Coordinate
+  explicitV4H4AbsorbBudgetSurface : V4H4Coordinate
+  v4h4BudgetToLiteralG3Weld : V4H4Coordinate
   finalSignedAbsorption : V4H4Coordinate
   terminalG3Compiler : V4H4Coordinate
 
@@ -109,7 +112,10 @@ v4h4Status horizontalFiniteLocalCountBound =
   leanSourceWrittenDonor
 
 v4h4Status localizedMontgomeryProducer = optionalAlternative
-v4h4Status finiteV4CarrierWeld = openAssembly
+v4h4Status finiteV4CarrierWeld = leanSourceWrittenDonor
+v4h4Status explicitLeftEndpointAtom = leanSourceWrittenDonor
+v4h4Status explicitV4H4AbsorbBudgetSurface = leanSourceWrittenDonor
+v4h4Status v4h4BudgetToLiteralG3Weld = openAssembly
 v4h4Status finalSignedAbsorption = openAnalyticObstruction
 v4h4Status terminalG3Compiler = compilerOwned
 
@@ -129,7 +135,10 @@ record V4H4Boundary : Set where
     horizontalFiniteLocalCountBoundSourceWritten : Bool
 
     localizedMontgomeryRequired : Bool
-    finiteV4CarrierWeldPaid : Bool
+    finiteV4CarrierWeldSourceWritten : Bool
+    explicitLeftEndpointAtomSourceWritten : Bool
+    explicitV4H4AbsorbBudgetSurfaceSourceWritten : Bool
+    v4h4BudgetToLiteralG3WeldPaid : Bool
     finalSignedAbsorptionPaid : Bool
     terminalG3CompilerPaid : Bool
 
@@ -156,8 +165,14 @@ record V4H4Boundary : Set where
 
     localizedMontgomeryRequiredIsFalse :
       localizedMontgomeryRequired ≡ false
-    finiteV4CarrierWeldPaidIsFalse :
-      finiteV4CarrierWeldPaid ≡ false
+    finiteV4CarrierWeldSourceWrittenIsTrue :
+      finiteV4CarrierWeldSourceWritten ≡ true
+    explicitLeftEndpointAtomSourceWrittenIsTrue :
+      explicitLeftEndpointAtomSourceWritten ≡ true
+    explicitV4H4AbsorbBudgetSurfaceSourceWrittenIsTrue :
+      explicitV4H4AbsorbBudgetSurfaceSourceWritten ≡ true
+    v4h4BudgetToLiteralG3WeldPaidIsFalse :
+      v4h4BudgetToLiteralG3WeldPaid ≡ false
     finalSignedAbsorptionPaidIsFalse :
       finalSignedAbsorptionPaid ≡ false
     terminalG3CompilerPaidIsTrue :
@@ -173,14 +188,18 @@ canonicalV4H4Boundary =
     true
     true true true
     true true true true true
-    false false false true
+    false
+    true true true
+    false false true
     refl
     refl refl refl
     refl refl refl refl refl
-    refl refl refl refl
-    "The preferred Clay-facing local fourth-angular route is now V4 plus H4, not a mandatory localized Montgomery theorem. V4 is an ordinary literal N-mu/RvM Abel specialization with a source-written 9*r^4*E compiler. H4 preserves sign: only 6*delta^2<a^2 can contribute positively, and that adverse cone is paid above by an a^4 envelope plus the existing fixed-window local zero-count theorem. The old marked 0/2/4 producer remains available only as an optional alternative."
-    "First weld the literal finite centred vertical fourth carrier used by the angular obstruction to the theorem-bearing Zeta23 window V4 object (or prove the exact eventual/cofinal equality already implicit in the finite exhaustion). Then perform the final signed absorption with the existing sixth-order debt and FarExact kept signed. Do not reintroduce Montgomery as a required hypothesis."
-    "V4 and the new adverse-cone H4 estimates are Lean source-written donors only. This owner is an Agda programme/status theorem and does not claim independent Agda-kernel replay of those analytic Lean proofs."
+    refl
+    refl refl refl
+    refl refl refl
+    "The preferred Clay-facing local fourth-angular route is V4 plus H4, not a mandatory localized Montgomery theorem. V4 is an ordinary literal N-mu/RvM Abel specialization with a source-written 9*r^4*E compiler. H4 preserves sign: only 6*delta^2<a^2 can contribute positively, and that adverse cone is paid above by an a^4 envelope plus the existing fixed-window local zero-count theorem. Lean now also source-writes the exact finite carrier convention weld: the closed local vertical fourth carrier equals the literal half-open Zeta23 V4 carrier plus one explicit left-endpoint atom; SameOrd(t) contributes zero because the fourth weight vanishes there. No generic-position radius choice is used. The old marked 0/2/4 producer remains an optional alternative."
+    "The remaining formal seam is now narrower than the old finite-V4 weld: prove that the exposed V4 plus endpoint atom plus H4 plus existing local remainder plus signed FarExact budget actually upper-bounds the literal finite G3 source in the compensation compiler coordinates. After that, the only Clay-facing analytic test is the explicit strict scalar absorption inequality against compensationTargetThreshold. Keep FarExact signed and do not replace this missing weld or inequality by a renamed hypothesis."
+    "V4, H4, the endpoint carrier weld, and the explicit absorption-budget surface are Lean source-written donors only. The budget-to-literal-G3 weld and the strict scalar absorption inequality remain unpaid. This owner is an Agda programme/status theorem and does not claim independent Agda-kernel replay or an exact-head Lean kernel receipt for those source tranches."
 
 montgomeryProducerIsOptional :
   v4h4Status localizedMontgomeryProducer ≡ optionalAlternative
@@ -194,9 +213,17 @@ h4SourceWrittenNotAgdaNative :
   v4h4Status horizontalFiniteLocalCountBound ≡ leanSourceWrittenDonor
 h4SourceWrittenNotAgdaNative = refl
 
-finiteVerticalCarrierWeldStillOpen :
-  v4h4Status finiteV4CarrierWeld ≡ openAssembly
-finiteVerticalCarrierWeldStillOpen = refl
+finiteVerticalCarrierWeldIsSourceWritten :
+  v4h4Status finiteV4CarrierWeld ≡ leanSourceWrittenDonor
+finiteVerticalCarrierWeldIsSourceWritten = refl
+
+leftEndpointAtomIsExplicit :
+  v4h4Status explicitLeftEndpointAtom ≡ leanSourceWrittenDonor
+leftEndpointAtomIsExplicit = refl
+
+budgetToLiteralG3WeldStillOpen :
+  v4h4Status v4h4BudgetToLiteralG3Weld ≡ openAssembly
+budgetToLiteralG3WeldStillOpen = refl
 
 absorptionRemainsTheAnalyticCut :
   v4h4Status finalSignedAbsorption ≡ openAnalyticObstruction
