@@ -218,19 +218,19 @@ open ProgramAssignmentRealizes public
 wireFormulaCorrect :
   ∀ {inputs gates : Nat}
     {program : Circuit.GateProgram inputs gates}
-    {assignment : Cook.Assignment} →
-  ProgramAssignmentRealizes program assignment →
-  (wire : Circuit.WireRef inputs gates) →
+    {assignment : Cook.Assignment}
+    (realization : ProgramAssignmentRealizes program assignment)
+    (wire : Circuit.WireRef inputs gates) →
   Cook.evaluate
     (Compiler.wireVariableFormula wire)
     assignment
   ≡
   Circuit.evaluateWire
     wire
-    (inputValues _)
+    (inputValues realization)
     (Circuit.evaluateProgram
       program
-      (inputValues _))
+      (inputValues realization))
 wireFormulaCorrect realization (Circuit.inputWire index) =
   inputVariablesCorrect realization index
 wireFormulaCorrect realization (Circuit.gateWire index) =
@@ -295,8 +295,15 @@ previousRealization realization =
     previousGateCorrect
   where
     previousGateCorrect :
-      (index : Fin _) →
-      _
+      (index : Fin gates) →
+      assignment
+        (Compiler.gateVariableIndex inputs index)
+      ≡
+      Circuit.lookupVec
+        index
+        (Circuit.evaluateProgram
+          previous
+          (inputValues realization))
     previousGateCorrect index =
       gateVariablesCorrect
         realization
