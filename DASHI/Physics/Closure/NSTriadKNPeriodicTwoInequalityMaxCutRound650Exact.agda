@@ -34,6 +34,7 @@ import DASHI.Physics.Closure.NSTriadKNR650C2CoupledForcingSandwichRound653Exact 
 import DASHI.Physics.Closure.NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact as R654
 import DASHI.Physics.Closure.NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact as R655
 import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact as R656
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact as R657
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -182,6 +183,14 @@ round650C2FullCrossReducedToBadLowRadiusCollar =
 round650C2BadLowRadiusCollarPaymentClosed : Bool
 round650C2BadLowRadiusCollarPaymentClosed =
   R656.round656BadCollarPaymentClosed
+
+round650C2BadCollarPureSpectralOrderingAdmissible : Bool
+round650C2BadCollarPureSpectralOrderingAdmissible =
+  R657.round657PureFrequencyOrderingPaysBadCollarCross
+
+round650C2BadCollarNeedsSignedNonlinearOrStateDependentInput : Bool
+round650C2BadCollarNeedsSignedNonlinearOrStateDependentInput =
+  R657.round657BadCollarNeedsSignedNonlinearOrStateDependentInput
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -346,6 +355,16 @@ round650C2BadLowRadiusCollarPaymentClosedIsFalse :
   round650C2BadLowRadiusCollarPaymentClosed ≡ false
 round650C2BadLowRadiusCollarPaymentClosedIsFalse =
   R656.round656BadCollarPaymentClosedIsFalse
+
+round650C2BadCollarPureSpectralOrderingAdmissibleIsFalse :
+  round650C2BadCollarPureSpectralOrderingAdmissible ≡ false
+round650C2BadCollarPureSpectralOrderingAdmissibleIsFalse =
+  R657.round657PureFrequencyOrderingPaysBadCollarCrossIsFalse
+
+round650C2BadCollarNeedsSignedNonlinearOrStateDependentInputIsTrue :
+  round650C2BadCollarNeedsSignedNonlinearOrStateDependentInput ≡ true
+round650C2BadCollarNeedsSignedNonlinearOrStateDependentInputIsTrue =
+  R657.round657BadCollarNeedsSignedNonlinearOrStateDependentInputIsTrue
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
