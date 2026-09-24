@@ -1,0 +1,22 @@
+{
+  "census_reference": "/home/c/Documents/code/dashi_agda-esd-parse-check/.parse-smoke-իտir/study_processing_census_with_parse.json",
+  "census_sha256": "43283f7338b22958360574a8fb3cf4780cc898fd25a41d44a75a390f715f1b34",
+  "fulltext_index_reference": "/home/c/Documents/code/slr/artifacts/digital-esd/first-reviewed-study/fulltext/digital_esd_fulltext_index.tsv",
+  "fulltext_index_sha256": "5ca8a3a52ac25eef2f86109b224a3ac2d3c16173d0673655f3fe3997a1c5c1a9",
+  "handed_to_slr_count": 1,
+  "materialization_failure_count": 0,
+  "materialization_receipts_reference": "/home/c/Documents/code/dashi_agda-esd-parse-check/.parse-smoke-իտir/materialization-receipts.jsonl",
+  "materialization_receipts_sha256": "dfaddffda9e78e406178050141399ec4ebf7275917990b2e14060b3fd33ed38d",
+  "materialized_text_count": 1,
+  "parse_creates_reviewed_evidence": false,
+  "parse_creates_source_audit_admission": false,
+  "schema": "digital-esd-verified-fulltext-parse-run-v1",
+  "selected_for_parse_count": 1,
+  "slr_handoff_reference": "/home/c/Documents/code/dashi_agda-esd-parse-check/.parse-smoke-իտir/slr-handoff-receipts.jsonl",
+  "slr_handoff_sha256": "f21e4924f6ecb8cd54f33bf19646235158719915560e4beecdd3ae08ca512b3f",
+  "slr_parse_receipts_reference": "/home/c/Documents/code/dashi_agda-esd-parse-check/.parse-smoke-իտir/slr-parse-receipts.jsonl",
+  "slr_parse_receipts_sha256": "0778b01a001b1793b16b90f8639213dc2f50f0db32a23330c38efd2304523d6d",
+  "successfully_parsed_by_slr_count": 1,
+  "verified_bytes_count_as_parsed": false,
+  "verified_fulltext_total_count": 1
+}
