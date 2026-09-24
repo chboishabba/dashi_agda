@@ -28,6 +28,8 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physi
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsContinuumSchwingerFromMeasureExact as Schwinger
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumSemanticMeaningRound441Exact as R441
+import DASHI.Physics.YangMills.YangMillsClayNormalizedExpectationRepresentationFirewallRound448Exact as R448
+import DASHI.Physics.YangMills.YangMillsRepresentedContinuumCarrierRound450Exact as R450
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -72,6 +74,25 @@ record PinnedCMP119ContinuumSemanticCore
 
 open PinnedCMP119ContinuumSemanticCore public
 
+representedCarrierFor :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      sequenceLimit limitLaws quotient division S}
+    (core :
+      PinnedCMP119ContinuumSemanticCore
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division S)
+    group →
+  R450.RepresentedContinuumCarrier
+    Configuration Position
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division (family core group)
+representedCarrierFor core group =
+  R448.representedCarrier
+    (R441.continuumRepresentation (continuumMeaning core group))
+
 literalContinuumLimit :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
       OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
@@ -85,7 +106,8 @@ literalContinuumLimit :
     group →
   Top.IsContinuumLimitOf S group
     (Limit.finiteMeasure (family core group))
-    (Limit.continuumMeasure (family core group))
+    (R450.representedContinuumMeasure
+      (representedCarrierFor core group))
 literalContinuumLimit core group =
   R441.literalContinuumLimitFromConcreteRepresentation
     (continuumMeaning core group)
@@ -102,10 +124,11 @@ literalSchwingerBelongsToContinuumMeasure :
         limitLaws quotient division S)
     group →
   Top.SchwingerBelongsToMeasure S
-    (Limit.continuumMeasure (family core group))
-    (Schwinger.schwingerFromMeasure
+    (R450.representedContinuumMeasure
+      (representedCarrierFor core group))
+    (R450.representedSchwinger
       (cylinderEncoding core)
-      (Limit.continuumMeasure (family core group)))
+      (representedCarrierFor core group))
 literalSchwingerBelongsToContinuumMeasure core group =
   R441.literalSchwingerBelongsFromConcreteSameMeasure
     (continuumMeaning core group)
@@ -124,3 +147,6 @@ round442IndependentContinuumLimitWitnessRequired = false
 
 round442IndependentSchwingerBelongingWitnessRequired : Bool
 round442IndependentSchwingerBelongingWitnessRequired = false
+
+round442PostHocOldNewContinuumCarrierEqualityRequired : Bool
+round442PostHocOldNewContinuumCarrierEqualityRequired = false
