@@ -20,10 +20,11 @@ qftEvaluatorCompilerPresent :
   ≡ true
 qftEvaluatorCompilerPresent = refl
 
-metricBasisInstanceStillMissing :
-  F.metricBasisInstanceExists F.canonicalGRQFTConcreteTheoryFrontier
-  ≡ false
-metricBasisInstanceStillMissing = refl
+tenSlotTangentSpecializationClosed :
+  F.tenSlotFiniteTangentSpecializationCompilerExists
+    F.canonicalGRQFTConcreteTheoryFrontier
+  ≡ true
+tenSlotTangentSpecializationClosed = refl
 
 tenValuesStillMissing :
   F.tenIndependentComponentValuesExist F.canonicalGRQFTConcreteTheoryFrontier
