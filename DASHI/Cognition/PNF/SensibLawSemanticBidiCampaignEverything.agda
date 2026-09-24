@@ -31,6 +31,7 @@ import DASHI.Cognition.PNF.SensibLawMatterContextProjectionExact as MatterContex
 import DASHI.Cognition.PNF.SensibLawMatterWorkspaceProjectionExact as MatterWorkspace
 import DASHI.Cognition.PNF.SensibLawMinimalMatterHandoffExact as MinimalHandoff
 import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as MatterAcceptance
+import DASHI.Cognition.PNF.SensibLawWorkProductCoverageExact as WorkProductCoverage
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -246,3 +247,32 @@ typeOwnersDoNotResolveCorpus : TypeOwnerPresenceMeansCorpusResolved → ⊥
 typeOwnersDoNotResolveCorpus ()
 aggregateImportDoesNotClaimKernelValidation : AggregateImportMeansKernelValidated → ⊥
 aggregateImportDoesNotClaimKernelValidation ()
+
+------------------------------------------------------------------------
+-- M14.A Work Product Coverage remains a Matter projection.
+------------------------------------------------------------------------
+
+workProductCoveragePreservesMatter :
+  WorkProductCoverage.CoverageJudgmentMutatesMatter → ⊥
+workProductCoveragePreservesMatter =
+  WorkProductCoverage.coverageJudgmentDoesNotMutateMatter
+
+workProductCoverageDoesNotCreateTruth :
+  WorkProductCoverage.WorkProductWordingIsSemanticAuthority → ⊥
+workProductCoverageDoesNotCreateTruth =
+  WorkProductCoverage.workProductWordingDoesNotCreateSemanticAuthority
+
+unsupportedWorkProductCoverageDoesNotMeanFalse :
+  WorkProductCoverage.UnsupportedCoverageMeansFalse → ⊥
+unsupportedWorkProductCoverageDoesNotMeanFalse =
+  WorkProductCoverage.unsupportedCoverageDoesNotMeanFalse
+
+possiblyOmittedDoesNotBecomeDraftingDuty :
+  WorkProductCoverage.PossiblyOmittedMeansShouldInclude → ⊥
+possiblyOmittedDoesNotBecomeDraftingDuty =
+  WorkProductCoverage.possiblyOmittedDoesNotMeanShouldInclude
+
+forwardCoverageRemainsDistinctFromOmission :
+  WorkProductCoverage.ForwardCoverageIsReverseOmission → ⊥
+forwardCoverageRemainsDistinctFromOmission =
+  WorkProductCoverage.forwardCoverageIsNotReverseOmission
