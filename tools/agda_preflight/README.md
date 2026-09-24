@@ -145,6 +145,15 @@ evidence_sufficient = false
 All documented `TSAGDA...` codes must be explicitly classified in
 `evidence.py`; an unclassified diagnostic is a programming error.
 
+
+Inspect the live policy matrix without reading source:
+
+```bash
+dashi-agda-evidence
+dashi-agda-evidence --level agda-scope
+dashi-agda-evidence --level agda-typechecker --json
+```
+
 The current scope-dependent family includes checks whose truth can change after
 Agda resolves opens/renamings, overloaded or mixfix names, or dependent local
 scope. Examples include:
