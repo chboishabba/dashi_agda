@@ -1,24 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-JOBS="${AGDA_JOBS:-8}"
-AGDA_FLAKE="${AGDA_FLAKE:-/home/c/Documents/code/agda#debug.bin}"
-REPO_ROOT="${DASHI_REPO_ROOT:-/home/c/Documents/code/dashi_agda}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$SCRIPT_DIR/.." && pwd)}"
+JOBS="${AGDA_JOBS:-0}"
+AGDA_FLAKE="${AGDA_FLAKE:-.#agda29-parallel}"
 STDLIB_SRC="${AGDA_STDLIB_SRC_29:-${AGDA_STDLIB_SRC:-}}"
 STDLIB_REPO="${AGDA_STDLIB_REPO:-https://github.com/agda/agda-stdlib.git}"
-STDLIB_REF="${AGDA_STDLIB_REF:-experimental}"
+STDLIB_REF="${AGDA_STDLIB_REF:-008f12c2908479567a3ae3c873f9cf0b8fe5987e}"
 DASHI_CACHE_HOME="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29}"
 DASHI_EPHEMERAL="${DASHI_AGDA29_EPHEMERAL:-0}"
 DASHI_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
 STDLIB_UPDATE="${AGDA_STDLIB_UPDATE:-0}"
-AGDA_LOG_PATH="${AGDA_LOG_PATH:-/home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check.log}"
+AGDA_LOG_PATH="${AGDA_LOG_PATH:-$DASHI_CACHE_HOME/agda29-parallel-check.log}"
 AGDA_LOG_KEEP_COUNT="${AGDA_LOG_KEEP_COUNT:-10}"
 AGDA_LOG_BASE_PATH="$AGDA_LOG_PATH"
 
-if [ -z "${XDG_CACHE_HOME:-}" ]; then
-  export XDG_CACHE_HOME="$REPO_ROOT/.cache"
-  mkdir -p "$XDG_CACHE_HOME"
-fi
+case "$JOBS" in
+  ''|*[!0-9]*)
+    echo "AGDA_JOBS must be a non-negative integer (0 enables Agda auto-detection)." >&2
+    exit 2
+    ;;
+esac
 
 if [ "$#" -eq 0 ]; then
   TARGETS=("DASHI/Everything.agda")
@@ -85,10 +88,11 @@ prune_old_logs() {
   done
 }
 
-AGDA_BIN="${AGDA_BIN:-$(nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda}"
+AGDA_BIN="${AGDA_BIN:-$(cd "$REPO_ROOT" && nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda}"
 if [ "$DASHI_EPHEMERAL" = "1" ]; then
   DASHI_WORK="$(mktemp -d /tmp/dashi-agda29-shadow.XXXXXX)"
-  STDLIB_WORK="$(mktemp -d /tmp/agda-stdlib-experimental.XXXXXX)"
+  STDLIB_WORK="$(mktemp -d /tmp/agda-stdlib-interfaces.XXXXXX)"
+  STDLIB_SOURCE_WORK="$(mktemp -d /tmp/agda-stdlib-source.XXXXXX)"
 else
   if [ "$DASHI_CLEAN" = "1" ]; then
     rm -rf "$DASHI_CACHE_HOME"
@@ -102,10 +106,11 @@ else
   fi
 
   DASHI_WORK="$DASHI_CACHE_HOME/dashi-shadow"
-  STDLIB_WORK="$DASHI_CACHE_HOME/agda-stdlib-${STDLIB_REF}"
-  mkdir -p "$DASHI_WORK" "$STDLIB_WORK"
+  STDLIB_WORK="$DASHI_CACHE_HOME/agda-stdlib-interfaces"
+  STDLIB_SOURCE_WORK="$DASHI_CACHE_HOME/agda-stdlib-source"
+  mkdir -p "$DASHI_WORK" "$STDLIB_WORK" "$STDLIB_SOURCE_WORK"
 fi
-STDLIB_INCLUDE="$STDLIB_WORK/src"
+STDLIB_INCLUDE=""
 STD_LIB_RESOLVED_SRC=""
 
 resolve_stdlib_src() {
@@ -132,36 +137,45 @@ fi
 
 if [ "$DASHI_EPHEMERAL" = "1" ]; then
   cleanup() {
-    rm -rf "$DASHI_WORK" "$STDLIB_WORK"
+    rm -rf "$DASHI_WORK" "$STDLIB_WORK" "$STDLIB_SOURCE_WORK"
   }
   trap cleanup EXIT
 fi
 
-# Keep the shadow tree path stable so Agda can reuse .agdai interfaces across
-# runs. Excluded receiver files, including .agdai caches, are protected because
-# we intentionally do not use --delete-excluded.
-rsync -a --delete --prune-empty-dirs \
-  --include='*/' \
-  --include='*.agda' \
-  --include='*.lagda' \
-  --include='*.lagda.md' \
-  --include='*.lagda.rst' \
-  --include='*.lagda.tex' \
-  --exclude='*' \
-  "$REPO_ROOT/" "$DASHI_WORK/"
+sync_agda_sources() {
+  local source_root="$1"
+  local destination_root="$2"
+
+  # Interface files restored from cache are excluded on both sides and survive
+  # the source refresh. Agda validates their source hashes before using them.
+  rsync -a --delete --prune-empty-dirs \
+    --include='*/' \
+    --include='*.agda' \
+    --include='*.lagda' \
+    --include='*.lagda.md' \
+    --include='*.lagda.rst' \
+    --include='*.lagda.tex' \
+    --exclude='*' \
+    "$source_root/" "$destination_root/"
+}
+
+sync_agda_sources "$REPO_ROOT" "$DASHI_WORK"
 
 if [ -n "$STD_LIB_RESOLVED_SRC" ]; then
-  rsync -a --delete --exclude='*.agdai' "$STD_LIB_RESOLVED_SRC/" "$STDLIB_WORK/"
+  sync_agda_sources "$STD_LIB_RESOLVED_SRC" "$STDLIB_WORK"
   STDLIB_INCLUDE="$STDLIB_WORK"
 else
-  if [ ! -d "$STDLIB_WORK/.git" ]; then
-    rm -rf "$STDLIB_WORK"
-    git clone --depth=1 --branch "$STDLIB_REF" "$STDLIB_REPO" "$STDLIB_WORK"
-  elif [ "$STDLIB_UPDATE" = "1" ]; then
-    git -C "$STDLIB_WORK" fetch --depth=1 origin "$STDLIB_REF"
-    git -C "$STDLIB_WORK" checkout -q "$STDLIB_REF"
-    git -C "$STDLIB_WORK" reset --hard -q "origin/$STDLIB_REF"
+  if [ ! -d "$STDLIB_SOURCE_WORK/.git" ]; then
+    rm -rf "$STDLIB_SOURCE_WORK"
+    git init -q "$STDLIB_SOURCE_WORK"
+    git -C "$STDLIB_SOURCE_WORK" remote add origin "$STDLIB_REPO"
+    STDLIB_UPDATE=1
   fi
+  if [ "$STDLIB_UPDATE" = "1" ]; then
+    git -C "$STDLIB_SOURCE_WORK" fetch -q --depth=1 origin "$STDLIB_REF"
+    git -C "$STDLIB_SOURCE_WORK" checkout -q --detach FETCH_HEAD
+  fi
+  sync_agda_sources "$STDLIB_SOURCE_WORK" "$STDLIB_WORK"
   STDLIB_INCLUDE="$STDLIB_WORK/src"
 fi
 chmod -R u+w "$STDLIB_WORK"
