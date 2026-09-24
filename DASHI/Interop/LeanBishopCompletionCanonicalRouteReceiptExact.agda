@@ -73,6 +73,10 @@ record LeanBishopCompletionCanonicalRouteReceipt : Set where
     targetInverseConjugationReflectionOwned : Bool
     targetUnitCircleFixedLocusOwned : Bool
 
+    leanReplaySyntaxProbeSourceOwned : Bool
+    leanRecursiveReplayClosureGeneratorSourceOwned : Bool
+    leanReplayKernelElaborationWorkflowStepOwned : Bool
+
     generatedAgdaReplayObserved : Bool
     leanExactHeadKernelReceiptObserved : Bool
     agdaExactHeadKernelReceiptObserved : Bool
@@ -98,6 +102,8 @@ canonicalLeanBishopCompletionCanonicalRouteReceipt =
     true true
 
     true true true true
+
+    true true true
 
     true true true
 
