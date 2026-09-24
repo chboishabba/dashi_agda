@@ -2,6 +2,7 @@
 module DASHI.Physics.Foundations.CMP119SingleActiveSectorSourceFactorisationExact where
 
 open import DASHI.Core.Prelude
+open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
