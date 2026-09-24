@@ -25,6 +25,7 @@ import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakExpectationClosureExact 
 import DASHI.Physics.YangMills.BalabanClayT5SelectedWeakTopologyMeaningRound435Exact as R435
 import DASHI.Physics.YangMills.BalabanClayT5GlobalContainmentWeakTopologyRound436Exact as R436
 import DASHI.Physics.YangMills.BalabanClayT5PreferredSameFamilyMeasureRecoveryRound428Exact as R428
+import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSExact as Selected
 
 record WeakMeasureSemanticsInputs
     (Measure Observable Scalar Schwinger : Set) : Set₂ where
@@ -172,3 +173,36 @@ round437FiniteWeakTestClassPhysicalMeaningLevel = conditional
 
 round437IndependentMeasurePropertyClosureTheoremsRequired : Bool
 round437IndependentMeasurePropertyClosureTheoremsRequired = false
+
+
+selectedPreGapContinuumCore :
+  ∀ {Measure Observable Scalar Schwinger}
+    (inputs :
+      WeakMeasureSemanticsInputs Measure Observable Scalar Schwinger) →
+  Selected.SelectedFiniteToContinuumOSCore Measure Schwinger
+selectedPreGapContinuumCore inputs =
+  R428.selectedCore (asR428PreferredSameFamilyInputs inputs)
+
+round437GlobalMomentCompactContainmentLevel : ProofLevel
+round437GlobalMomentCompactContainmentLevel = conditional
+
+round437SelectedWeakTopologyMeaningLevel : ProofLevel
+round437SelectedWeakTopologyMeaningLevel = conditional
+
+round437DeterminingClassUniquenessLevel : ProofLevel
+round437DeterminingClassUniquenessLevel = machineChecked
+
+round437FullMeasureConvergenceLevel : ProofLevel
+round437FullMeasureConvergenceLevel = machineChecked
+
+round437PreGapContinuumCoreCompilerLevel : ProofLevel
+round437PreGapContinuumCoreCompilerLevel = machineChecked
+
+round437ContinuumSchwingerCoreAnalyticInputsLevel : ProofLevel
+round437ContinuumSchwingerCoreAnalyticInputsLevel = conditional
+
+round437GramToSchwingerReflectionMeaningLevel : ProofLevel
+round437GramToSchwingerReflectionMeaningLevel = conditional
+
+round437ClusteringRequiredForPreGapCore : Bool
+round437ClusteringRequiredForPreGapCore = false
