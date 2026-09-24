@@ -33,6 +33,7 @@ open import Data.Fin.Base as Fin using (Fin; fromℕ<; toℕ)
 import Data.Fin.Properties as FinP
 open import Data.Nat.Base using (_≤_; _<_; _⊔_)
 import Data.Nat.Properties as NatP
+open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -590,9 +591,7 @@ cookSatisfiableIndexedFormulaGivesIndexedSatisfying
       ≡ true
     indexedEvaluationFromCook
         (SAT.variable index)
-        cookAssignment result
-        rewrite FinP.toℕ-fromℕ<
-          (FinP.toℕ<n index) =
+        cookAssignment result =
       result
     indexedEvaluationFromCook
         (SAT.constant value)
