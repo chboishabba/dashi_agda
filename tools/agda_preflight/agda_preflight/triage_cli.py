@@ -5,6 +5,8 @@ from collections import Counter
 import json
 from pathlib import Path
 
+from .evidence import canonical_code
+
 
 def _load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -26,7 +28,12 @@ def main(argv=None) -> int:
         default=Path(".cache/agda_preflight/report.json"),
     )
     parser.add_argument("--top", type=int, default=15)
-    parser.add_argument("--code", help="show only one TSAGDA code")
+    parser.add_argument("--code", help="show only one TSAGDA code/root cause")
+    parser.add_argument(
+        "--raw-codes",
+        action="store_true",
+        help="do not collapse compatibility alias diagnostics",
+    )
     parser.add_argument(
         "--deferred",
         action="store_true",
@@ -40,11 +47,19 @@ def main(argv=None) -> int:
     for module in payload.get("modules", []):
         name = _module_name(module.get("nodeid", ""))
         for diagnostic in module.get("diagnostics", []):
-            code = diagnostic.get("code", "UNKNOWN")
-            if args.code and code != args.code:
+            raw_code = diagnostic.get("code", "UNKNOWN")
+            code = raw_code if args.raw_codes else canonical_code(raw_code)
+            requested = (
+                args.code
+                if args.raw_codes or not args.code
+                else canonical_code(args.code)
+            )
+            if requested and code != requested:
                 continue
             deferred = not diagnostic.get("evidence_sufficient", True)
             hard = diagnostic.get("severity") == "error"
+            diagnostic = dict(diagnostic)
+            diagnostic["triage_code"] = code
             if args.deferred:
                 if not deferred:
                     continue
@@ -52,7 +67,7 @@ def main(argv=None) -> int:
                 continue
             rows.append((name, diagnostic))
 
-    by_code = Counter(diagnostic.get("code", "UNKNOWN") for _, diagnostic in rows)
+    by_code = Counter(diagnostic.get("triage_code", diagnostic.get("code", "UNKNOWN")) for _, diagnostic in rows)
     by_module = Counter(name for name, _ in rows)
 
     if args.json:
@@ -82,7 +97,7 @@ def main(argv=None) -> int:
         print("\nfirst examples:")
         for module, diagnostic in rows[: min(args.top, len(rows))]:
             print(
-                f"  {diagnostic.get('code')} {module}:"
+                f"  {diagnostic.get('triage_code', diagnostic.get('code'))} {module}:"
                 f"{diagnostic.get('line', 1)}:{diagnostic.get('column', 1)} "
                 f"{diagnostic.get('message', '')}"
             )
