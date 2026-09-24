@@ -19,6 +19,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedCompilerExa
 -- satisfiable shared encoding on the repeated-fanout family.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Empty using (⊥)
@@ -91,7 +92,7 @@ programSharedConstraints :
   Circuit.GateProgram inputs gates →
   Cook.BooleanFormula
 programSharedConstraints Circuit.noGates =
-  Cook.constant Cook.true
+  Cook.constant true
 programSharedConstraints (Circuit.appendGate previous gate) =
   Cook.conjunction
     (programSharedConstraints previous)
