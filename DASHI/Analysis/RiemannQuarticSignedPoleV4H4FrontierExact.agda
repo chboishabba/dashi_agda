@@ -346,7 +346,7 @@ sixthSharpeningStatus signedSixthHarmonicCarrier =
 sixthSharpeningStatus quarticPlusSixthAlgebraicRecut =
   leanSourceWrittenDonor
 sixthSharpeningStatus beyondSixthOrderEightEstimate =
-  openAnalyticObstruction
+  leanSourceWrittenDonor
 sixthSharpeningStatus strictScalarAbsorbAfterSixthSharpening =
   openAnalyticObstruction
 
@@ -360,14 +360,14 @@ signedSixthHarmonicCarrierIsSourceWritten :
     ≡ leanSourceWrittenDonor
 signedSixthHarmonicCarrierIsSourceWritten = refl
 
-beyondSixthOrderEightEstimateRemainsOpen :
+beyondSixthOrderEightEstimateIsSourceWritten :
   sixthSharpeningStatus beyondSixthOrderEightEstimate
-    ≡ openAnalyticObstruction
-beyondSixthOrderEightEstimateRemainsOpen = refl
+    ≡ leanSourceWrittenDonor
+beyondSixthOrderEightEstimateIsSourceWritten = refl
 
 sixthSharpeningLeanDonorHead : String
 sixthSharpeningLeanDonorHead =
-  "d7b71b0dac1ab836b0ea407571235a86d28222bd"
+  "9e9efb151febe48144e889fb7571f20c93027d2c"
 
 sixthSharpeningTransportedIntoAgdaKernelHere : Bool
 sixthSharpeningTransportedIntoAgdaKernelHere = false
@@ -377,7 +377,7 @@ coarseExplicitG1K0CertifiedTerminalAbsorbHere = false
 
 sixthSharpeningInterpretation : String
 sixthSharpeningInterpretation =
-  "The generic M6 support/L1 cap is no longer the preferred sixth-order interface. Lean source-writes M6_abs(W)<=K(W), where K(W) is the same selected-witness fourth-Lipschitz constant already used by G1, and exposes the signed sixth harmonic M6_signed(W)/720 * Re((alpha+i*q)^6). The existing explicit G1 K0 remains too coarse for terminal ABSORB, so the preferred next cut is to exploit the signed sixth carrier and prove a genuine beyond-sixth/order-eight estimate, or otherwise sharpen K on the selected witness. Montgomery remains irrelevant to this cut."
+  "The generic M6 support/L1 cap is no longer the preferred sixth-order interface. Lean source-writes M6_abs(W)<=K(W), exposes the signed sixth harmonic M6_signed(W)/720 * Re((alpha+i*q)^6), proves a mixed total-degree-eight majorant for the post-sixth residual from separate real cos/cosh unit-ball Taylor theorems, and cross-welds M8_abs(W)<=(pi+1)^2*K(W). The literal physical residual is transported at r^-10 and summed on the same finite local carrier. The existing explicit G1 K0 remains too coarse to declare terminal ABSORB closed; the remaining preferred cut is the signed-sixth scalar contribution plus the now count-paid eighth debt and signed FarExact. Montgomery remains irrelevant to this cut."
 
 
 ------------------------------------------------------------------------
@@ -410,14 +410,106 @@ literalSixthTransportStatus perZeroBeyondSixthPhysicalTransport =
 literalSixthTransportStatus finiteLocalSignedSixthSplit =
   leanSourceWrittenDonor
 literalSixthTransportStatus finiteLocalBeyondSixthBound =
-  openAnalyticObstruction
+  leanSourceWrittenDonor
 
 finiteLocalSignedSixthSplitIsSourceWritten :
   literalSixthTransportStatus finiteLocalSignedSixthSplit
     ≡ leanSourceWrittenDonor
 finiteLocalSignedSixthSplitIsSourceWritten = refl
 
-finiteLocalBeyondSixthBoundRemainsOpen :
+finiteLocalBeyondSixthBoundIsSourceWritten :
   literalSixthTransportStatus finiteLocalBeyondSixthBound
+    ≡ leanSourceWrittenDonor
+finiteLocalBeyondSixthBoundIsSourceWritten = refl
+
+
+------------------------------------------------------------------------
+-- MIXED EIGHTH-ORDER / POST-SIXTH TERMINAL DONOR
+--
+-- Lean PR #22 now pays the two items that were previously left open after
+-- the scalar degree-six Taylor facts:
+--
+--  * a mixed real-product theorem for cosh(alpha*u) cos(q*u), retaining the
+--    complete total-degree-six Taylor polynomial and majorizing only degree
+--    eight and above;
+--  * literal physical and finite transport of that beyond-sixth residual at
+--    r^-10.
+--
+-- The mixed proof deliberately does NOT apply the unit-ball complex
+-- exponential theorem to (q+i*alpha)u.  It combines the separately-certified
+-- real cos/cosh unit-ball remainders.
+--
+-- The selected-profile eighth absolute moment is not a new witness invariant:
+--
+--   M8_abs(W) <= (pi+1)^2 M6_abs(W) <= (pi+1)^2 K(W).
+--
+-- A downstream source compiler now has the form
+--
+--   quartic corrected main
+--     + localSignedSixthHarmonic
+--     + localEighthDebt
+--     + FarExact,
+--
+-- and the eighth debt is bounded by the same expanded literal zero count.
+-- The signed sixth harmonic and FarExact remain signed.
+--
+-- Strict scalar ABSORB itself is still open.  These are Lean source-written
+-- donors only; no Agda-native analytic replay is claimed.
+------------------------------------------------------------------------
+
+data PostSixthCoordinate : Set where
+  mixedCoshCosDegreeEightMajorant : PostSixthCoordinate
+  selectedM8ToM6ToG1Weld : PostSixthCoordinate
+  normalizedBeyondSixthIntegralIdentity : PostSixthCoordinate
+  normalizedBeyondSixthM8Bound : PostSixthCoordinate
+  literalPhysicalRMinusTenTransport : PostSixthCoordinate
+  finiteLocalEighthDebt : PostSixthCoordinate
+  finiteLocalEighthCountPayment : PostSixthCoordinate
+  signedSixthEighthFarTerminalBudget : PostSixthCoordinate
+  strictPostSixthScalarAbsorb : PostSixthCoordinate
+
+postSixthStatus : PostSixthCoordinate -> V4H4Status
+postSixthStatus mixedCoshCosDegreeEightMajorant =
+  leanSourceWrittenDonor
+postSixthStatus selectedM8ToM6ToG1Weld =
+  leanSourceWrittenDonor
+postSixthStatus normalizedBeyondSixthIntegralIdentity =
+  leanSourceWrittenDonor
+postSixthStatus normalizedBeyondSixthM8Bound =
+  leanSourceWrittenDonor
+postSixthStatus literalPhysicalRMinusTenTransport =
+  leanSourceWrittenDonor
+postSixthStatus finiteLocalEighthDebt =
+  leanSourceWrittenDonor
+postSixthStatus finiteLocalEighthCountPayment =
+  leanSourceWrittenDonor
+postSixthStatus signedSixthEighthFarTerminalBudget =
+  leanSourceWrittenDonor
+postSixthStatus strictPostSixthScalarAbsorb =
+  openAnalyticObstruction
+
+mixedEighthMajorantIsSourceWritten :
+  postSixthStatus mixedCoshCosDegreeEightMajorant
+    ≡ leanSourceWrittenDonor
+mixedEighthMajorantIsSourceWritten = refl
+
+literalRMinusTenTransportIsSourceWritten :
+  postSixthStatus literalPhysicalRMinusTenTransport
+    ≡ leanSourceWrittenDonor
+literalRMinusTenTransportIsSourceWritten = refl
+
+strictPostSixthScalarAbsorbRemainsOpen :
+  postSixthStatus strictPostSixthScalarAbsorb
     ≡ openAnalyticObstruction
-finiteLocalBeyondSixthBoundRemainsOpen = refl
+strictPostSixthScalarAbsorbRemainsOpen = refl
+
+postSixthLeanDonorHead : String
+postSixthLeanDonorHead =
+  "9e9efb151febe48144e889fb7571f20c93027d2c"
+
+postSixthTransportedIntoAgdaKernelHere : Bool
+postSixthTransportedIntoAgdaKernelHere = false
+
+postSixthInterpretation : String
+postSixthInterpretation =
+  "The absolute M6 bottleneck is no longer present on the preferred terminal source surface. Lean retains the signed sixth harmonic, proves and transports only the beyond-sixth residual with a total-degree-eight envelope, pays its finite local multiplicity through the existing expanded Zeta23 count, and bounds M8 through the same selected-witness G1 constant K(W). The remaining Clay-facing analytic test is the strict scalar inequality for quartic main + signed sixth + eighth debt + signed FarExact against the literal target threshold."
