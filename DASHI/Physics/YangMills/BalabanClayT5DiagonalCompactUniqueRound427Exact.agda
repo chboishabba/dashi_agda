@@ -53,12 +53,24 @@ record LiteralDiagonalCompactUniqueInputs
       Prokhorov.ProkhorovSubsequenceExtractionAuthority Measure
 
     everyExtractedDiagonalClusterPointIsContinuum :
+      let selectedTightness : Prokhorov.PhysicalSubsequenceTightnessData Measure
+          selectedTightness = record
+            { Prokhorov.PhysicalSubsequenceTightnessData.convergence =
+                convergence
+            ; Prokhorov.PhysicalSubsequenceTightnessData.sequence =
+                T5.diagonalMeasure (Quant.expectationData quantitative)
+            ; Prokhorov.PhysicalSubsequenceTightnessData.TightMeasureSequence =
+                TightMeasureSequence
+            ; Prokhorov.PhysicalSubsequenceTightnessData.everyLiteralSubsequenceTight =
+                everyLiteralDiagonalSubsequenceTight
+            }
+      in
       (subsequence :
         Compact.SubsequenceWitness
           (T5.diagonalMeasure (Quant.expectationData quantitative))) →
       Prokhorov.extractedClusterLimit
         prokhorovAuthority
-        diagonalTightness
+        selectedTightness
         subsequence
       ≡
       T5.continuumMeasure
@@ -110,7 +122,7 @@ literalDiagonalConvergesToContinuum :
       (Quant.expectationData (quantitative inputs)))
     (T5.continuumMeasure
       (T5.thermodynamic
-        (Quant.expectationData (quantitative inputs)))
+        (Quant.expectationData (quantitative inputs))))
 literalDiagonalConvergesToContinuum inputs =
   Compact.fullSequenceConverges
     (compactUniqueFullConvergenceAuthority inputs)
