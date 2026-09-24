@@ -109,23 +109,10 @@ canonicalTreeNodes depth =
   refl
 
 ------------------------------------------------------------------------
--- Sharing boundary.
+-- Consequence for the research route.
 --
--- A DAG implementation may be smaller only when it proves that multiple tree
--- obligations can reuse one certified subclaim.  The syntax below deliberately
--- does NOT assert such identifications.  A future theorem has to construct
--- them from the special self-generated computation, rather than from recursive
--- bisection alone.
+-- Any actual DAG improvement must therefore prove a separate identification
+-- theorem showing that multiple primitive/tree subclaims are the SAME
+-- certifiable computation fact and may soundly share one node.  No such
+-- identification follows from recursive bisection itself.
 ------------------------------------------------------------------------
-
-record SharedCheckpointCertificate (depth : Nat) : Set₁ where
-  field
-    sharedNodeCount : Nat
-
-    -- The sharing implementation must separately justify coverage of the
-    -- primitive transition obligations.  No generic "DAG is smaller" axiom is
-    -- supplied here.
-    coversCanonicalSplit :
-      Set
-
-open SharedCheckpointCertificate public
