@@ -429,6 +429,26 @@ periodicClayMaxCutThirdAnalyticLeafIntroducedBySandwich : Bool
 periodicClayMaxCutThirdAnalyticLeafIntroducedBySandwich =
   R650.round650ThirdAnalyticLeafIntroducedBySandwich
 
+periodicClayMaxCutC2UpperCollarRemoteSplitClosed : Bool
+periodicClayMaxCutC2UpperCollarRemoteSplitClosed =
+  R650.round650C2UpperCollarRemoteSplitClosed
+
+periodicClayMaxCutC2LowRemoteSpectralDatumConstructed : Bool
+periodicClayMaxCutC2LowRemoteSpectralDatumConstructed =
+  R650.round650C2LowRemoteSpectralDatumConstructed
+
+periodicClayMaxCutC2RemoteSpectralCrossCoercivityConstructed : Bool
+periodicClayMaxCutC2RemoteSpectralCrossCoercivityConstructed =
+  R650.round650C2RemoteSpectralCrossCoercivityConstructed
+
+periodicClayMaxCutC2RemoteCoercivityPaysRemoteBoundaryFlux : Bool
+periodicClayMaxCutC2RemoteCoercivityPaysRemoteBoundaryFlux =
+  R650.round650C2RemoteCoercivityPaysRemoteBoundaryFlux
+
+periodicClayMaxCutC2SignedCollarPaymentClosed : Bool
+periodicClayMaxCutC2SignedCollarPaymentClosed =
+  R650.round650C2SignedCollarPaymentClosed
+
 periodicClayMaxCutC3CompilerAvailable : Bool
 periodicClayMaxCutC3CompilerAvailable =
   R642.round642C3CanonicalPhysicalSliceCompilerAvailable
