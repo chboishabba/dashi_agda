@@ -9,6 +9,8 @@ open import Data.Rational.Base using (ℚ; _/_)
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTCMP119NambuGotoRepulsiveExteriorCompilerExact as CMP
+import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
+import DASHI.Physics.Foundations.GRQFTRationalSquareIsraelDesignExact as Design
 import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveShellFamilyExact as Shell
 import DASHI.Physics.Foundations.GRQFTNambuGotoTwoVacuumPotentialExact as Potential
 import DASHI.Physics.Foundations.GRQFTNambuGotoSurfaceActionExact as Surface
@@ -76,11 +78,11 @@ record NambuGotoRepulsiveBubbleCandidate
       Shell.massAtRadius fixtureRadius ≡ fixtureMass
 
     interiorLambdaValue :
-      Shell.Design.lambdaInFromSquareLapse fixtureRadius Shell.x
+      Design.lambdaInFromSquareLapse fixtureRadius Shell.x
         ≡ fixtureInteriorLambda
 
     exteriorLambdaValue :
-      Shell.Design.lambdaOutFromSquareLapse
+      Design.lambdaOutFromSquareLapse
         (Shell.massAtRadius fixtureRadius) fixtureRadius Shell.y
         ≡ fixtureExteriorLambda
 
@@ -108,13 +110,13 @@ record NambuGotoRepulsiveBubbleCandidate
     interiorStressTransport :
       (a b : Flat.Axis4) →
       CMP.interiorStress a b
-        ≡ CMP.Vacuum.scaledCMP119Tensor
+        ≡ Vacuum.scaledCMP119Tensor
             CMP.interiorAmplitude evaluator cmp119Stress a b
 
     exteriorStressTransport :
       (a b : Flat.Axis4) →
       CMP.exteriorStress a b
-        ≡ CMP.Vacuum.scaledCMP119Tensor
+        ≡ Vacuum.scaledCMP119Tensor
             CMP.exteriorAmplitude evaluator cmp119Stress a b
 
 open NambuGotoRepulsiveBubbleCandidate public
