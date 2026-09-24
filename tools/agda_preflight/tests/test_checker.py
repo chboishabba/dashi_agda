@@ -697,3 +697,49 @@ triXor-assoc tri-low tri-low tri-low = refl
 
     diagnostics = Checker(tmp_path).check(path)
     assert not any(d.code in {"TSAGDA045", "TSAGDA110"} for d in diagnostics)
+
+
+
+def test_with_continuation_clauses_inherit_owning_function(tmp_path):
+    path = write_module(
+        tmp_path,
+        "WithOwner",
+        """module WithOwner where
+
+gcdTable : A → A → Nat
+gcdTable p q with p ≟ q
+... | yes _ = one
+... | no _  = zero
+""",
+    )
+
+    summary = Checker(tmp_path).parse_summary(path)
+
+    assert "gcdTable" in summary.ast.clauses
+    assert len(summary.ast.clauses["gcdTable"]) == 3
+    assert "yes" not in summary.ast.clauses
+    assert "no" not in summary.ast.clauses
+
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code == "TSAGDA010" for d in diagnostics)
+
+
+def test_where_local_helpers_do_not_enter_top_level_clause_table(tmp_path):
+    path = write_module(
+        tmp_path,
+        "WhereLocal",
+        """module WhereLocal where
+
+outer : A → A
+outer x = helper x
+  where
+    helper : A → A
+    helper y = y
+""",
+    )
+
+    summary = Checker(tmp_path).parse_summary(path)
+
+    assert "outer" in summary.ast.clauses
+    assert "helper" not in summary.ast.clauses
+    assert "helper" not in summary.ast.signatures
