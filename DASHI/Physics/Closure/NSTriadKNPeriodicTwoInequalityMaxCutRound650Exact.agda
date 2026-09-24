@@ -46,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedKernelRound665Exa
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarCauchyCouplingRound666Exact as R666
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact as R667
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarExternalResidualFullSquareRound668Exact as R668
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarCanonicalExternalFullSquareRound669Exact as R669
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -706,6 +707,28 @@ round650C2ExternalNetworkResidualFullSquarePaymentClosed : Bool
 round650C2ExternalNetworkResidualFullSquarePaymentClosed =
   R668.round668ExternalNetworkQuantitativePaymentClosed
 
+-- R669 is the canonical total carrier.  R668 remains an exact nonfixed-only
+-- intermediate and is not a live hypothesis of C2.
+round650C2CanonicalExternalNetworkFullSquareClosed : Bool
+round650C2CanonicalExternalNetworkFullSquareClosed =
+  R669.round669CanonicalOrbitResolvedExternalFullSquareClosed
+
+round650C2CanonicalExternalNetworkRequiresLegacyR112WitnessFamily : Bool
+round650C2CanonicalExternalNetworkRequiresLegacyR112WitnessFamily =
+  R669.round669RequiresLegacyR112WitnessFamily
+
+round650C2CanonicalExternalNetworkRequiresGlobalNonfixedness : Bool
+round650C2CanonicalExternalNetworkRequiresGlobalNonfixedness =
+  R669.round669RequiresGlobalNonfixedness
+
+round650C2CanonicalExternalNetworkPreservesFixedOrbitCorrection : Bool
+round650C2CanonicalExternalNetworkPreservesFixedOrbitCorrection =
+  R669.round669PreservesFixedOrbitMultiplicityCorrection
+
+round650C2CanonicalExternalNetworkPaymentClosed : Bool
+round650C2CanonicalExternalNetworkPaymentClosed =
+  R669.round669ExternalNetworkQuantitativePaymentClosed
+
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue :
   round650C2ExternalNetworkOnLiteralResidualFullSquare ≡ true
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue =
@@ -720,6 +743,31 @@ round650C2ExternalNetworkResidualFullSquarePaymentClosedIsFalse :
   round650C2ExternalNetworkResidualFullSquarePaymentClosed ≡ false
 round650C2ExternalNetworkResidualFullSquarePaymentClosedIsFalse =
   R668.round668ExternalNetworkQuantitativePaymentClosedIsFalse
+
+round650C2CanonicalExternalNetworkFullSquareClosedIsTrue :
+  round650C2CanonicalExternalNetworkFullSquareClosed ≡ true
+round650C2CanonicalExternalNetworkFullSquareClosedIsTrue =
+  R669.round669CanonicalOrbitResolvedExternalFullSquareClosedIsTrue
+
+round650C2CanonicalExternalNetworkRequiresLegacyR112WitnessFamilyIsFalse :
+  round650C2CanonicalExternalNetworkRequiresLegacyR112WitnessFamily ≡ false
+round650C2CanonicalExternalNetworkRequiresLegacyR112WitnessFamilyIsFalse =
+  R669.round669RequiresLegacyR112WitnessFamilyIsFalse
+
+round650C2CanonicalExternalNetworkRequiresGlobalNonfixednessIsFalse :
+  round650C2CanonicalExternalNetworkRequiresGlobalNonfixedness ≡ false
+round650C2CanonicalExternalNetworkRequiresGlobalNonfixednessIsFalse =
+  R669.round669RequiresGlobalNonfixednessIsFalse
+
+round650C2CanonicalExternalNetworkPreservesFixedOrbitCorrectionIsTrue :
+  round650C2CanonicalExternalNetworkPreservesFixedOrbitCorrection ≡ true
+round650C2CanonicalExternalNetworkPreservesFixedOrbitCorrectionIsTrue =
+  R669.round669PreservesFixedOrbitMultiplicityCorrectionIsTrue
+
+round650C2CanonicalExternalNetworkPaymentClosedIsFalse :
+  round650C2CanonicalExternalNetworkPaymentClosed ≡ false
+round650C2CanonicalExternalNetworkPaymentClosedIsFalse =
+  R669.round669ExternalNetworkQuantitativePaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
