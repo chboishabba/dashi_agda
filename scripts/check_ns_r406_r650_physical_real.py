@@ -120,6 +120,7 @@ def _validate_c2_row(row: Any, *, label: str, errors: list[str]) -> None:
                 "maximum_remote_spectral_cross",
                 "maximum_cross_split_residual",
                 "maximum_collar_refinement_residual",
+                "maximum_collar_flux_refinement_residual",
             ):
                 if not _finite(packet_split.get(key)):
                     errors.append(f"{label}: packet_split.{key} must be finite")
