@@ -140,14 +140,14 @@ record ReviewedStatementPNF
   constructor reviewed-statement-pnf
   field
     reviews : List (StatementParseReview parsed)
-    semanticAdmissionPaid : Bool
-    semanticAdmissionDeferred : semanticAdmissionPaid ≡ false
-    propositionSupportPaid : Bool
-    propositionSupportDeferred : propositionSupportPaid ≡ false
-    applicabilityPaid : Bool
-    applicabilityDeferred : applicabilityPaid ≡ false
-    claimTruthPaid : Bool
-    claimTruthDeferred : claimTruthPaid ≡ false
+    reviewedSemanticAdmissionPaid : Bool
+    reviewedSemanticAdmissionDeferred : reviewedSemanticAdmissionPaid ≡ false
+    reviewedPropositionSupportPaid : Bool
+    reviewedPropositionSupportDeferred : reviewedPropositionSupportPaid ≡ false
+    reviewedApplicabilityPaid : Bool
+    reviewedApplicabilityDeferred : reviewedApplicabilityPaid ≡ false
+    reviewedClaimTruthPaid : Bool
+    reviewedClaimTruthDeferred : reviewedClaimTruthPaid ≡ false
 
 open ReviewedStatementPNF public
 
@@ -182,12 +182,12 @@ record SourceBoundSemanticAdmission
     exactAdmission :
       admittedDelta ≡ Admission.admitWithReceipt key admissionReceipt
     statementRelationshipRef : String
-    propositionSupportPaid : Bool
-    propositionSupportDeferred : propositionSupportPaid ≡ false
-    applicabilityPaid : Bool
-    applicabilityDeferred : applicabilityPaid ≡ false
-    claimTruthPaid : Bool
-    claimTruthDeferred : claimTruthPaid ≡ false
+    boundPropositionSupportPaid : Bool
+    boundPropositionSupportDeferred : boundPropositionSupportPaid ≡ false
+    boundApplicabilityPaid : Bool
+    boundApplicabilityDeferred : boundApplicabilityPaid ≡ false
+    boundClaimTruthPaid : Bool
+    boundClaimTruthDeferred : boundClaimTruthPaid ≡ false
 
 open SourceBoundSemanticAdmission public
 
