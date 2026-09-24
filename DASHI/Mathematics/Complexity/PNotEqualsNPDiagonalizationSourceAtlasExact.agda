@@ -22,6 +22,7 @@ data SourceRole : Set where
   computabilitySelfReference : SourceRole
   modernCircuitLowerBoundContext : SourceRole
   metaComplexityContext : SourceRole
+  diagonalCardinality : SourceRole
 
 data IdentifierStatus : Set where
   verifiedDOI : IdentifierStatus
@@ -125,6 +126,19 @@ goldbergJuvekarKabanets2026 =
     metaComplexityContext
     stableReportIdentifier
     "Context only: meta-complexity / description-complexity motivation.  No self-diagonal SAT certificate or P != NP theorem is imported."
+
+
+cantor1891 : ComplexitySource
+cantor1891 =
+  complexitySource
+    "Georg Cantor"
+    "Über eine elementare Frage der Mannigfaltigkeitslehre"
+    1891
+    "Jahresbericht der Deutschen Mathematiker-Vereinigung 1, 75--78"
+    "bibliographic:Cantor-1891-JDMV-1-75-78"
+    diagonalCardinality
+    stableBookBibliography
+    "Calibrates diagonal non-enumerability only.  DASHI's Boolean-function quotation no-go is a local constructive specialization and does not by itself constrain the countable polynomial-time machine class."
 
 record DiagonalizationSourceBoundary : Set where
   constructor diagonalization-source-boundary
