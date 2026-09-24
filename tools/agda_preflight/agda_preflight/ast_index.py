@@ -149,6 +149,9 @@ class AstIndex:
     syntax_nodes: List[object] = field(default_factory=list)
     postulate_nodes: List[object] = field(default_factory=list)
     pattern_nodes: List[object] = field(default_factory=list)
+    module_macro_nodes: List[object] = field(default_factory=list)
+    mutual_nodes: List[object] = field(default_factory=list)
+    where_nodes: List[object] = field(default_factory=list)
     record_expressions: List[AstRecordExpression] = field(default_factory=list)
 
     @property
@@ -764,6 +767,12 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
             index.postulate_nodes.append(node)
         elif node.type == "pattern":
             index.pattern_nodes.append(node)
+        elif node.type == "module_macro":
+            index.module_macro_nodes.append(node)
+        elif node.type == "mutual":
+            index.mutual_nodes.append(node)
+        elif node.type == "where":
+            index.where_nodes.append(node)
         elif node.type == "record_assignments":
             # Do not double-count the record_assignments alias nested inside a
             # field_assignments node; both expose the same field assignments.
