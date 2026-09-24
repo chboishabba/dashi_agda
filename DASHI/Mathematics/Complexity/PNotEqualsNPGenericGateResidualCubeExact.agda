@@ -126,7 +126,7 @@ realizeProgramResiduals
   ∷
   claimedPrevious
   where
-    claimedPrevious : Vec Bool _
+    claimedPrevious : Vec Bool gates
     claimedPrevious =
       realizeProgramResiduals
         previous
@@ -193,8 +193,8 @@ ProgramResidualWitness :
   Vec Bool inputs →
   Vec Bool gates →
   Set
-ProgramResidualWitness program inputValues desired =
-  Σ (Vec Bool _) λ claimedValues →
+ProgramResidualWitness {gates = gates} program inputValues desired =
+  Σ (Vec Bool gates) λ claimedValues →
     programResiduals
       program
       inputValues
