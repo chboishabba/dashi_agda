@@ -169,3 +169,7 @@ import DASHI.Physics.Foundations.GRQFTCommonRegimeBidiAttemptValidation
 
 import DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact
 import DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerValidation
+
+import DASHI.Physics.Foundations.CMP119SymmetricStressComponentReductionExact
+import DASHI.Physics.Foundations.CMP119SymmetrySemanticBridgeExact
+import DASHI.Physics.Foundations.CMP119SymmetricStressComponentReductionValidation
