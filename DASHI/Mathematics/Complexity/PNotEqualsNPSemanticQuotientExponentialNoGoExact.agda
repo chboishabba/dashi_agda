@@ -256,18 +256,19 @@ indexedResidualFunctionInjective :
     ≡ indexedResidualFunction right input) →
   left ≡ right
 indexedResidualFunctionInjective
+    {width = width}
     {left = left} {right = right}
     sameFunction =
   prefixAtIndexInjective
     prefixEqual
   where
     leftPrefix :
-      Vec Bool _
+      Vec Bool width
     leftPrefix =
       prefixAtIndex left
 
     rightPrefix :
-      Vec Bool _
+      Vec Bool width
     rightPrefix =
       prefixAtIndex right
 
@@ -289,10 +290,11 @@ indexedResidualFunctionInjective
     prefixEqual :
       leftPrefix ≡ rightPrefix
     prefixEqual =
-      vecEqTrueImpliesEqual
-        rightPrefix
-        leftPrefix
-        rightAccepted
+      sym
+        (vecEqTrueImpliesEqual
+          rightPrefix
+          leftPrefix
+          rightAccepted)
 
     vecEqTrueImpliesEqual :
       ∀ {n : Nat}
