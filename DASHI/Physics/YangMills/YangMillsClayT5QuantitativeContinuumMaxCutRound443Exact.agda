@@ -16,12 +16,14 @@ module DASHI.Physics.YangMills.YangMillsClayT5QuantitativeContinuumMaxCutRound44
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanClayT5SelectedMomentCompactContainmentExact as Containment
 import DASHI.Physics.YangMills.BalabanClayT5BoundedWeakCompactnessRound439Exact as R439
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as R464
@@ -46,33 +48,18 @@ record QuantitativeContinuumMaxCut
         Configuration limitLaws quotient division)
     : Set₂ where
   field
-    quantitative :
-      T5.PhysicalExpectationProducerData
-        Measure (Configuration → ℝ) ℝ
-
-    -- One same-family attachment for BOTH continuum consumers.
-    finiteExpectationIsCMP119 :
-      ∀ cutoff observable →
-      DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact.expectation
-        (T5.operations (T5.thermodynamic quantitative))
-        (T5.diagonalMeasure quantitative cutoff)
-        observable
-      ≡
-      Limit.finiteExpectation family cutoff observable
-
-    -- H2 existence fallback: the actual global compact-containment theorem.
-    globalContainment :
-      Containment.SelectedMomentCompactContainmentInputs
-        Measure (Configuration → ℝ) ℝ Epsilon Witness quantitative
-
-    -- A4/A5: the SAME quantitative producer pays the selected finite
-    -- regularity/growth predicates.
+    -- A4/A5 owns the quantitative producer and its literal CMP119
+    -- finite-expectation attachment.
     os05 :
       R464.QuantitativeMomentOS05Bridge
         Configuration Measure family
 
-    os05UsesSameQuantitativeProducer :
-      R464.quantitative os05 ≡ quantitative
+    -- H2 existence fallback consumes THAT SAME producer by type.  No
+    -- post-hoc equality of function-valued producer records is required.
+    globalContainment :
+      Containment.SelectedMomentCompactContainmentInputs
+        Measure (Configuration → ℝ) ℝ Epsilon Witness
+        (R464.quantitative os05)
 
 open QuantitativeContinuumMaxCut public
 
