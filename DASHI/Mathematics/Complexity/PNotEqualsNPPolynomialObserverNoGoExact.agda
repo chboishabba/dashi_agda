@@ -31,6 +31,8 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact as Finite
+import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
+import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact as Factor
 import DASHI.Mathematics.Complexity.PolynomialClassicalObserverExact as PolyObserver
@@ -283,3 +285,86 @@ identityPolynomialClassicalObserverCannotCollapseSATAndUNSAT
     unsatisfiableFormula
     satisfiableWitness
     unsatisfiableWitness
+
+
+------------------------------------------------------------------------
+-- The canonical concrete Cook--Levin finite-value codecs are also lossless.
+------------------------------------------------------------------------
+
+fixedBitsCodecEncodingIsInjective :
+  ∀ {A : Set} {width : Nat}
+    (codec : Canonical.FixedBitsCodec A width) →
+  Injective (Canonical.encode codec)
+fixedBitsCodecEncodingIsInjective codec {left} {right} sameEncoding =
+  trans
+    (sym (Canonical.decodeEncode codec left))
+    (trans
+      (cong (Canonical.decode codec) sameEncoding)
+      (Canonical.decodeEncode codec right))
+
+canonicalStateEncodingIsInjective :
+  ∀ (machine : Local.ConcreteTapeMachine)
+    (coverage :
+      Canonical.EnumerationCoverage
+        (Local.finiteState machine)) →
+  Injective
+    (Canonical.encode
+      (Canonical.canonicalStateCodec machine coverage))
+canonicalStateEncodingIsInjective machine coverage =
+  fixedBitsCodecEncodingIsInjective
+    (Canonical.canonicalStateCodec machine coverage)
+
+canonicalSymbolEncodingIsInjective :
+  ∀ (machine : Local.ConcreteTapeMachine)
+    (coverage :
+      Canonical.EnumerationCoverage
+        (Local.finiteSymbol machine)) →
+  Injective
+    (Canonical.encode
+      (Canonical.canonicalSymbolCodec machine coverage))
+canonicalSymbolEncodingIsInjective machine coverage =
+  fixedBitsCodecEncodingIsInjective
+    (Canonical.canonicalSymbolCodec machine coverage)
+
+canonicalCellEncodingIsInjective :
+  ∀ (machine : Local.ConcreteTapeMachine)
+    (stateCoverage :
+      Canonical.EnumerationCoverage
+        (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage
+        (Local.finiteSymbol machine)) →
+  Injective
+    (Canonical.encode
+      (Canonical.canonicalCellCodec
+        machine stateCoverage symbolCoverage))
+canonicalCellEncodingIsInjective
+    machine stateCoverage symbolCoverage =
+  fixedBitsCodecEncodingIsInjective
+    (Canonical.canonicalCellCodec
+      machine stateCoverage symbolCoverage)
+
+canonicalCellEncodingCannotCauseNonDescent :
+  ∀ (machine : Local.ConcreteTapeMachine)
+    (stateCoverage :
+      Canonical.EnumerationCoverage
+        (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage
+        (Local.finiteSymbol machine))
+    (consumer :
+      Local.TapeCell
+        (Local.State machine)
+        (Local.Symbol machine) →
+      Bool) →
+  Descent.ConsumerNonDescentWitness
+    (Canonical.encode
+      (Canonical.canonicalCellCodec
+        machine stateCoverage symbolCoverage))
+    consumer →
+  ⊥
+canonicalCellEncodingCannotCauseNonDescent
+    machine stateCoverage symbolCoverage consumer =
+  injectiveObserverBlocksConsumerNonDescent
+    (canonicalCellEncodingIsInjective
+      machine stateCoverage symbolCoverage)
