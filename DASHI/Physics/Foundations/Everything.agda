@@ -227,3 +227,5 @@ import DASHI.Physics.Foundations.GRQFTIsraelSurfaceStressMagnitudeExact
 import DASHI.Physics.Foundations.GRQFTKottlerRepulsionParameterWindowExact
 
 import DASHI.Physics.Foundations.GRQFTParameterizedRepulsiveJunctionDesignExact
+
+import DASHI.Physics.Foundations.CMP119TenFiniteD1ComponentCompilerExact
