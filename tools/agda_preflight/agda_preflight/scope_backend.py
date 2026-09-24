@@ -184,3 +184,56 @@ class AgdaScopeCheckBackend:
                 continue
             out.append(diagnostic)
         return out
+
+
+class AgdaTypecheckBackend:
+    """Use a successful full Agda check as a negative oracle.
+
+    If Agda accepts the module, structural suspicions that require AGDA_SCOPE
+    or AGDA_TYPECHECKER evidence are necessarily false positives. Policy/trust
+    diagnostics and syntax/index facts remain visible because Agda acceptance
+    does not invalidate those architectural constraints.
+    """
+
+    def __init__(
+        self,
+        agda_bin: str = "agda",
+        *,
+        cwd: Path | None = None,
+        timeout: float = 300.0,
+        extra_args: Sequence[str] = (),
+    ):
+        self.agda_bin = agda_bin
+        self.cwd = cwd
+        self.timeout = timeout
+        self.extra_args = tuple(extra_args)
+
+    def _typecheck_ok(self, path: Path) -> bool:
+        completed = subprocess.run(
+            [
+                self.agda_bin,
+                *self.extra_args,
+                str(path.resolve()),
+            ],
+            cwd=self.cwd,
+            text=True,
+            capture_output=True,
+            timeout=self.timeout,
+            check=False,
+        )
+        return completed.returncode == 0
+
+    def refine(self, summary, diagnostics: List):
+        if not self._typecheck_ok(summary.path):
+            return diagnostics
+
+        out = []
+        for diagnostic in diagnostics:
+            policy = policy_for(diagnostic.code)
+            if policy.minimum in {
+                EvidenceLevel.AGDA_SCOPE,
+                EvidenceLevel.AGDA_TYPECHECKER,
+            }:
+                continue
+            out.append(diagnostic)
+        return out
