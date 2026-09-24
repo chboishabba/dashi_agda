@@ -472,6 +472,9 @@ class AgdaAutoRefineBackend:
                 "failed_frontier_modules": len(self._scope_failed),
                 "aggregate_probe_roots": len(self._scope_probe_roots),
                 "candidate_modules": len(self._scope_candidates),
+                "partial_progress_modules": len(
+                    getattr(self.scope, "partial_validated_modules", ())
+                ),
             },
         }
 
