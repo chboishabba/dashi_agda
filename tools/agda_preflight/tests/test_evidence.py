@@ -12,6 +12,7 @@ from agda_preflight.evidence import (
     policy_for,
 )
 from agda_preflight.scope_backend import (
+    AgdaScopeCheckBackend,
     ExternalScopeBackend,
     ScopeRefinement,
     diagnostic_key,
@@ -126,3 +127,64 @@ def test_tree_only_error_remains_hard_without_scope_backend(tmp_path):
     assert result.evidence == "tree-sitter"
     assert result.minimum_evidence == "tree-sitter"
     assert result.evidence_sufficient is True
+
+
+
+def test_native_scope_success_suppresses_scope_only_diagnostics(tmp_path):
+    path = write_module(tmp_path, "NativeScope")
+    backend = AgdaScopeCheckBackend("agda")
+    backend._scope_ok = lambda _: True
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+
+    scope_diag = Diagnostic(
+        "TSAGDA113",
+        "identifier may be unbound",
+        path,
+        2,
+        1,
+        severity="error",
+    )
+    typing_diag = Diagnostic(
+        "TSAGDA041",
+        "function may be under-applied",
+        path,
+        3,
+        1,
+        severity="error",
+    )
+
+    results = checker._apply_evidence_policy(summary, [scope_diag, typing_diag])
+
+    assert [d.code for d in results] == ["TSAGDA041"]
+    assert results[0].severity == "warning"
+    assert results[0].minimum_evidence == "agda-typechecker"
+    assert results[0].evidence_sufficient is False
+
+
+def test_native_scope_failure_does_not_confirm_any_suspicion(tmp_path):
+    path = write_module(tmp_path, "NativeScopeFailure")
+    backend = AgdaScopeCheckBackend("agda")
+    backend._scope_ok = lambda _: False
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+
+    diagnostic = Diagnostic(
+        "TSAGDA113",
+        "identifier may be unbound",
+        path,
+        2,
+        1,
+        severity="error",
+    )
+
+    [result] = checker._apply_evidence_policy(summary, [diagnostic])
+
+    assert result.severity == "warning"
+    assert result.confidence == "insufficient-evidence"
+    assert result.evidence_sufficient is False
+
+
+def test_typing_dependent_rules_require_typechecker_evidence():
+    assert policy_for("TSAGDA041").minimum == EvidenceLevel.AGDA_TYPECHECKER
+    assert policy_for("TSAGDA076").minimum == EvidenceLevel.AGDA_TYPECHECKER
