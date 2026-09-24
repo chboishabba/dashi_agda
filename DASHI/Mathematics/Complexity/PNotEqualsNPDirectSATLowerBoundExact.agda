@@ -22,7 +22,6 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact where
 -- No inhabitant of UniversalPolynomialSATDecisionFailure is manufactured.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Set₁)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Empty using (⊥)
@@ -121,6 +120,78 @@ UniversalPolynomialSATDecisionFailure :
 UniversalPolynomialSATDecisionFailure cost =
   (candidate : PolynomialSATDeciderCandidate cost) →
   SATDecisionFailure candidate
+
+
+------------------------------------------------------------------------
+-- Collision mechanism.
+--
+-- This is the repository's non-descent idea specialized all the way down to
+-- the actual SAT decision bit.  If a candidate returns the same bit on one
+-- satisfiable formula and one unsatisfiable formula, it must be wrong on one
+-- of them.  No observer or intermediate quotient is mentioned here.
+------------------------------------------------------------------------
+
+record SATDecisionCollision
+    {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : PolynomialSATDeciderCandidate cost) : Set₁ where
+  constructor sat-decision-collision
+  field
+    satisfiableFormula : Cook.BooleanFormula
+    unsatisfiableFormula : Cook.BooleanFormula
+    satisfiableWitness :
+      Cook.Satisfiable satisfiableFormula
+    unsatisfiableWitness :
+      Cook.Satisfiable unsatisfiableFormula → ⊥
+    sameDecision :
+      decide candidate satisfiableFormula
+      ≡ decide candidate unsatisfiableFormula
+
+open SATDecisionCollision public
+
+collisionGivesDecisionFailure :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : PolynomialSATDeciderCandidate cost} →
+  SATDecisionCollision candidate →
+  SATDecisionFailure candidate
+collisionGivesDecisionFailure {candidate = candidate} collision
+    with decide candidate (satisfiableFormula collision)
+       | decide candidate (unsatisfiableFormula collision)
+       | sameDecision collision
+... | true | true | _ =
+  falsePositive
+    (unsatisfiableFormula collision)
+    refl
+    (unsatisfiableWitness collision)
+... | true | false | ()
+... | false | true | ()
+... | false | false | _ =
+  falseNegative
+    (satisfiableFormula collision)
+    (satisfiableWitness collision)
+    refl
+
+UniversalPolynomialSATDecisionCollision :
+  (cost : PR.PolynomialCostModel Cook.BooleanFormula) →
+  Set₁
+UniversalPolynomialSATDecisionCollision cost =
+  (candidate : PolynomialSATDeciderCandidate cost) →
+  SATDecisionCollision candidate
+
+universalCollisionGivesUniversalDecisionFailure :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  UniversalPolynomialSATDecisionCollision cost →
+  UniversalPolynomialSATDecisionFailure cost
+universalCollisionGivesUniversalDecisionFailure universalCollision candidate =
+  collisionGivesDecisionFailure
+    (universalCollision candidate)
+
+universalCollisionGivesSATLowerBoundProducer :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
+  UniversalPolynomialSATDecisionCollision cost →
+  Clay.SATLowerBoundProducer cost
+universalCollisionGivesSATLowerBoundProducer universalCollision =
+  universalDecisionFailureGivesSATLowerBoundProducer
+    (universalCollisionGivesUniversalDecisionFailure universalCollision)
 
 ------------------------------------------------------------------------
 -- Clay-core compiler.
