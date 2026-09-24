@@ -31,10 +31,24 @@ def build(einstein: dict, w4: dict) -> dict:
             "projectionDigest": w4["projectionDigest"],
             "replacementRequired": True,
         },
-        "sameCandidateGRRecovery": {"status": "concrete_instance_missing"},
+        "sameCandidateGRRecovery": {
+            "status": "analytic_realization_missing",
+            "firstMissing": "missingDiscreteToSmoothCurvatureConvergence",
+            "weakFieldFirstMissing": "missingRadialValuation",
+        },
         "sameCandidateQFTRecovery": {"status": "concrete_instance_missing"},
         "sameCarrierStressWeld": {"status": "concrete_instance_missing"},
-        "physicalUnitCalibration": {"status": "external_information_required"},
+        "physicalUnitCalibration": {
+            "status": "local_adapter_present_external_acceptance_required",
+            "localCoverage": [
+                "physicalUnitCarrier",
+                "physicalDimensionVector",
+                "natToUnitCalibrationMap",
+                "calibratedQuotientScaleMap",
+                "factorization",
+                "dimensionalPreservation",
+            ],
+        },
         "empiricalGRQFTValidation": {"status": "external_information_required"},
         "terminalPromotion": False,
     }
