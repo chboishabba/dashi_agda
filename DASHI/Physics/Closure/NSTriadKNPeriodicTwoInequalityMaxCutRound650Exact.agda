@@ -68,6 +68,7 @@ import DASHI.Physics.Closure.NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Ex
 import DASHI.Physics.Closure.NSTriadKNR650RateLiftedDynamicCancellationRound688Exact as R688
 import DASHI.Physics.Closure.NSTriadKNR650RateLiftedInputLaplacianCancellationRound689Exact as R689
 import DASHI.Physics.Closure.NSTriadKNR650GlobalSignedRateLiftInputLaplacianRound690Exact as R690
+import DASHI.Physics.Closure.NSTriadKNR650GlobalMixedEnergyBalanceRound691Exact as R691
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -949,6 +950,22 @@ round650SignedRateLiftIntegratedOnlyAfterGlobalOutputSum =
 round650GlobalInputLaplacianSpacetimePaymentClosed : Bool
 round650GlobalInputLaplacianSpacetimePaymentClosed =
   R690.round690GlobalInputLaplacianSpacetimePaymentClosed
+
+round650GlobalMixedEnergyBalanceClosed : Bool
+round650GlobalMixedEnergyBalanceClosed =
+  R691.round691GlobalRateWorkIsCommutatorMinusMixedEnergyEndpoint
+
+round650GlobalInputLaplacianPureDissipationByAlgebra : Bool
+round650GlobalInputLaplacianPureDissipationByAlgebra =
+  R691.round691GlobalInputLaplacianIsPureSignedDissipationByAlgebra
+
+round650GlobalCommutatorCancellationClosed : Bool
+round650GlobalCommutatorCancellationClosed =
+  R691.round691GlobalCommutatorCancellationClosed
+
+round650GlobalCommutatorCutoffUniformPaymentClosed : Bool
+round650GlobalCommutatorCutoffUniformPaymentClosed =
+  R691.round691GlobalCommutatorCutoffUniformPaymentClosed
 
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 : Bool
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 =
