@@ -282,29 +282,3 @@ succinctSelfDiagonalCertificateGivesFailure :
 succinctSelfDiagonalCertificateGivesFailure certificate =
   selfDiagonalSemanticWitnessGivesFailure
     (semanticWitness certificate)
-
-------------------------------------------------------------------------
--- Boundary theorem:
---
--- Size succinctness without the semantic fixed point proves no SAT error.
--- Conversely, semantic self-reference alone gives the error but says nothing
--- about whether the proposed construction can be generated within its own
--- size/resource budget.  Keeping these orthogonal is the key research cut.
-------------------------------------------------------------------------
-
-record ResourceBoundedSelfDiagonalResearchCut : Set where
-  constructor resource-bounded-self-diagonal-research-cut
-  field
-    semanticFixedPointIsClayDecisive : Bool
-    explicitSelfTableauBlockedByStrictSelfRuntime : Bool
-    succinctSizeAloneImpliesSelfDiagonalSemantics : Bool
-    classicalComputabilityFixedPointPaysPolynomialSizeClosure : Bool
-
-canonicalResourceBoundedSelfDiagonalResearchCut :
-  ResourceBoundedSelfDiagonalResearchCut
-canonicalResourceBoundedSelfDiagonalResearchCut =
-  resource-bounded-self-diagonal-research-cut
-    true
-    true
-    false
-    false
