@@ -444,3 +444,5 @@ module DASHI.Physics.Closure.Everything where
 import DASHI.Physics.Closure.NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact
