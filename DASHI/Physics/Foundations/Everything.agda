@@ -185,3 +185,6 @@ import DASHI.Physics.Foundations.GRQFTR457SourceNativeRecoveryBindingValidation
 
 import DASHI.Physics.Foundations.CMP119SymmetricFiniteTangentBasisCompilerExact
 import DASHI.Physics.Foundations.CMP119SymmetricFiniteTangentBasisCompilerValidation
+
+import DASHI.Physics.Foundations.CMP119PinnedStressMetricRepresentationBridgeExact
+import DASHI.Physics.Foundations.CMP119PinnedStressMetricRepresentationBridgeValidation
