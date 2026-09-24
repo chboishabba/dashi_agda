@@ -252,19 +252,24 @@ finiteIntegratedActiveMassIsNegativeElevenTwelfths :
 finiteIntegratedActiveMassIsNegativeElevenTwelfths = solve []
 
 ------------------------------------------------------------------------
--- EXTERIOR RESPONSE UNDER POSITIVE G
+-- ACTIVE-STRESS RESPONSE DIAGNOSTIC
+--
+-- This uses the earlier pressure-weighted active-source adapter only as a
+-- diagnostic.  The literal TOV mass function below has m(R)=+1/4, so a
+-- standard vacuum Schwarzschild exterior is NOT proved repulsive by this
+-- diagnostic.  See GRQFTFiniteRationalTOVExteriorMassCollisionExact.
 ------------------------------------------------------------------------
 
-finiteExteriorResponse :
+finiteActiveStressResponseDiagnostic :
   Local.ExteriorRadialResponse
-finiteExteriorResponse =
+finiteActiveStressResponseDiagnostic =
   Local.exteriorResponse
     Signed.positiveCoupling
     Local.negativeActiveMass
 
-finiteExteriorResponseIsOutward :
-  finiteExteriorResponse ≡ Local.outwardExteriorAcceleration
-finiteExteriorResponseIsOutward = refl
+finiteActiveStressResponseDiagnosticIsOutward :
+  finiteActiveStressResponseDiagnostic ≡ Local.outwardExteriorAcceleration
+finiteActiveStressResponseDiagnosticIsOutward = refl
 
 ------------------------------------------------------------------------
 -- WITNESS
@@ -308,10 +313,10 @@ record FiniteRationalTOVRepulsiveWitness : Set where
     couplingPositive :
       coupling ≡ Signed.positiveCoupling
 
-    exteriorResponse :
+    activeStressResponseDiagnostic :
       Local.ExteriorRadialResponse
-    exteriorResponseOutward :
-      exteriorResponse ≡ Local.outwardExteriorAcceleration
+    activeStressResponseDiagnosticOutward :
+      activeStressResponseDiagnostic ≡ Local.outwardExteriorAcceleration
 
 open FiniteRationalTOVRepulsiveWitness public
 
@@ -347,7 +352,9 @@ record FiniteRationalTOVBoundary : Set where
     surfaceRadialPressureZero : Bool
     tangentialPressureSolvedFromTOV : Bool
     netActiveMassNegative : Bool
-    positiveGExteriorRepulsionCriterion : Bool
+    positiveGActiveStressDiagnosticOutward : Bool
+    standardVacuumExteriorRepulsionProved : Bool
+    surfaceMetricMassPositive : Bool
     negativeGRequired : Bool
     negativeInertialMassRequired : Bool
     continuumODEExistenceSolved : Bool
@@ -358,4 +365,4 @@ canonicalFiniteRationalTOVBoundary :
   FiniteRationalTOVBoundary
 canonicalFiniteRationalTOVBoundary =
   finite-rational-tov-boundary
-    true true true true true true true false false false false false
+    true true true true true true true false true false false false false false
