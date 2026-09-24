@@ -104,6 +104,33 @@ def _validate_c2_row(row: Any, *, label: str, errors: list[str]) -> None:
     if not isinstance(row.get("r406_evaluated_pair_count"), int):
         errors.append(f"{label}: r406_evaluated_pair_count must be integer")
 
+    packet_split = row.get("packet_split")
+    if packet_split is not None:
+        if not isinstance(packet_split, dict):
+            errors.append(f"{label}: packet_split must be object")
+        else:
+            for key in (
+                "collar_layer_cake",
+                "remote_layer_cake",
+                "physical_upper_layer_cake",
+                "upper_minus_collar_remote_layer_cake",
+                "abel_reconstruction_residual",
+                "maximum_three_region_flux_residual",
+                "maximum_upper_split_residual",
+                "maximum_remote_spectral_cross",
+            ):
+                if not _finite(packet_split.get(key)):
+                    errors.append(f"{label}: packet_split.{key} must be finite")
+            if not isinstance(packet_split.get("remote_spectral_cross_violation_count"), int):
+                errors.append(
+                    f"{label}: packet_split.remote_spectral_cross_violation_count "
+                    "must be integer"
+                )
+            if packet_split.get("authority") != (
+                "finite-floating-packet-decomposition-diagnostic-only"
+            ):
+                errors.append(f"{label}: packet_split authority must remain diagnostic")
+
 
 def _validate_c1_row(row: Any, *, label: str, errors: list[str]) -> None:
     if not isinstance(row, dict):
