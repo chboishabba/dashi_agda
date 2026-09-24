@@ -190,7 +190,7 @@ def extended_diagnostics(checker, s, D):
         alias_owner[alias] = module
         target = imported.get(alias)
         if target:
-            exports = set(target.exported_names)
+            exports = set(checker.exported_names(target))
             for directive in directives:
                 if directive.kind == "using":
                     for n in directive.names:
@@ -210,7 +210,7 @@ def extended_diagnostics(checker, s, D):
             continue
         alias, name = token.text.rsplit(".", 1)
         target = imported.get(alias)
-        if target and name not in target.exported_names:
+        if target and name not in checker.exported_names(target):
             out.append(_diag(D, "TSAGDA021", f"{alias}.{name} is not exported by {target.module_name}", s, token.line, token.column))
 
     for name, sig in s.ast.signatures.items():
@@ -588,7 +588,7 @@ def extended_diagnostics(checker, s, D):
         if not is_open: continue
         target = imported.get(alias)
         if not target: continue
-        names = set(target.exported_names)
+        names = set(checker.exported_names(target))
         ren = {}
         for directive in directives:
             if directive.kind == "using":
@@ -1191,7 +1191,7 @@ def extended_diagnostics(checker, s, D):
             out.append(_diag(D, "TSAGDA077", f"type constructor {short} has {want} visible parameters but is used bare", s, token.line, token.column, severity="warning", confidence="medium"))
 
     # TSAGDA113: high-confidence single-identifier RHS scope check.
-    global_names = set(s.exported_names) | set(data) | set(ctors) | set(imported)
+    global_names = set(checker.exported_names(s)) | set(data) | set(ctors) | set(imported)
     for name, clause_items in s.ast.clauses.items():
         for clause in clause_items:
             if clause.rhs_node is None:
@@ -1267,7 +1267,7 @@ def extended_diagnostics(checker, s, D):
         if not is_open or not any(d.kind == "public" for d in directives): continue
         target = imported.get(alias)
         if not target: continue
-        names = set(target.exported_names)
+        names = set(checker.exported_names(target))
         for n in names:
             public_exports.setdefault(n, []).append(module)
     for n, mods in public_exports.items():
@@ -1349,7 +1349,7 @@ def api_snapshot(checker):
         }
         modules[s.module_name] = {
             "path": str(rel),
-            "exports": sorted(set(s.exported_names) | set(constructors)),
+            "exports": sorted(set(checker.exported_names(s)) | set(constructors)),
             "signatures": signatures,
             "records": {k: {"fields": sorted(r.fields)} for k, r in s.records.items()},
             "projections": {f: rname for rname, r in s.records.items() for f in r.fields},
