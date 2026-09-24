@@ -32,6 +32,7 @@ import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact as Search
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
+import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceBoundedSelfDiagonalExact as Self
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPSATShannonSemanticAuthorityExact as Shannon
@@ -91,9 +92,9 @@ rootNode :
   ∀ {variables : Nat}
     (root : SAT.BooleanFormula variables) →
   RestrictionNode root
-rootNode root =
+rootNode {variables} root =
   restriction-node
-    _
+    variables
     root
     restrictionRoot
 
@@ -103,10 +104,13 @@ falseChild :
     {current : SAT.BooleanFormula (suc currentVariables)} →
   RestrictionDerivation root current →
   RestrictionNode root
-falseChild derivation =
+falseChild
+    {currentVariables = currentVariables}
+    {current = current}
+    derivation =
   restriction-node
-    _
-    _
+    currentVariables
+    (SAT.restrictHead false current)
     (restrictionFalse derivation)
 
 trueChild :
@@ -115,10 +119,13 @@ trueChild :
     {current : SAT.BooleanFormula (suc currentVariables)} →
   RestrictionDerivation root current →
   RestrictionNode root
-trueChild derivation =
+trueChild
+    {currentVariables = currentVariables}
+    {current = current}
+    derivation =
   restriction-node
-    _
-    _
+    currentVariables
+    (SAT.restrictHead true current)
     (restrictionTrue derivation)
 
 ------------------------------------------------------------------------
@@ -138,10 +145,13 @@ reachableShannonLaw :
       (SAT.restrictHead false current))
     (Search.decide oracle
       (SAT.restrictHead true current))
-reachableShannonLaw oracle derivation =
+reachableShannonLaw
+    oracle
+    {current = current}
+    derivation =
   Shannon.satDecisionShannon
     oracle
-    _
+    current
 
 ------------------------------------------------------------------------
 -- The actual self-diagonal indexed root.
@@ -149,8 +159,8 @@ reachableShannonLaw oracle derivation =
 
 selfDiagonalIndexedRoot :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
-    {candidate : Direct.PolynomialSATDeciderCandidate cost} →
-  Self.SelfDiagonalSemanticWitness candidate →
+    {candidate : Direct.PolynomialSATDeciderCandidate cost}
+    (witness : Self.SelfDiagonalSemanticWitness candidate) →
   SAT.BooleanFormula
     (Bridge.formulaVariableBound
       (Self.formula witness))
@@ -187,19 +197,10 @@ selfDiagonalRootNode witness =
 
 selfDiagonalRestrictionOracle :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
-  PR.InP cost
-    (importedSATLanguage cost) →
+  PR.InP cost Clay.SATLanguage →
   SAT.SATDecisionOracle
-selfDiagonalRestrictionOracle {cost} satP =
+selfDiagonalRestrictionOracle satP =
   Bridge.indexedOracleFromCookInP satP
-  where
-    importedSATLanguage :
-      PR.PolynomialCostModel Cook.BooleanFormula →
-      PR.Language Cook.BooleanFormula
-    importedSATLanguage ignored =
-      record
-        { PR.accepts = Cook.Satisfiable
-        }
 
 ------------------------------------------------------------------------
 -- Research consequence.
