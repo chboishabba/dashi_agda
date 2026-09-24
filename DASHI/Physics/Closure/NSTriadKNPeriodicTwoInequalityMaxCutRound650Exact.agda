@@ -29,6 +29,7 @@ import DASHI.Physics.Closure.NSTriadKNRadialConservationToPhysicalLayerCakeRound
 import DASHI.Physics.Closure.NSTriadKNLivePhysicalPacketStrictSurplusRound648Exact as R648
 import DASHI.Physics.Closure.NSTriadKNPeriodicStandardCompletionSourcesRound649Exact as R649
 import DASHI.Physics.Closure.NSTriadKNR650QuantitativeResearchStrategyRound651Exact as R651
+import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact as R652
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -102,6 +103,18 @@ round650QuantitativeStressHarnessInstalled : Bool
 round650QuantitativeStressHarnessInstalled =
   R651.round651FiniteGalerkinStressHarnessInstalled
 
+round650C1R406PointwiseCouplingClosed : Bool
+round650C1R406PointwiseCouplingClosed =
+  R652.round652PointwiseC1R406DiagonalCouplingClosed
+
+round650C1R406IntegratedCouplingClosed : Bool
+round650C1R406IntegratedCouplingClosed =
+  R652.round652IntegratedC1R406DiagonalCouplingClosed
+
+round650C1AndC2ShareLiteralR406Currency : Bool
+round650C1AndC2ShareLiteralR406Currency =
+  R652.round652C1AndC2ShareLiteralR406Currency
+
 round650ClayPromotion : Bool
 round650ClayPromotion = false
 
@@ -170,6 +183,21 @@ round650QuantitativeStressHarnessInstalledIsTrue :
   round650QuantitativeStressHarnessInstalled ≡ true
 round650QuantitativeStressHarnessInstalledIsTrue =
   R651.round651FiniteGalerkinStressHarnessInstalledIsTrue
+
+round650C1R406PointwiseCouplingClosedIsTrue :
+  round650C1R406PointwiseCouplingClosed ≡ true
+round650C1R406PointwiseCouplingClosedIsTrue =
+  R652.round652PointwiseC1R406DiagonalCouplingClosedIsTrue
+
+round650C1R406IntegratedCouplingClosedIsTrue :
+  round650C1R406IntegratedCouplingClosed ≡ true
+round650C1R406IntegratedCouplingClosedIsTrue =
+  R652.round652IntegratedC1R406DiagonalCouplingClosedIsTrue
+
+round650C1AndC2ShareLiteralR406CurrencyIsTrue :
+  round650C1AndC2ShareLiteralR406Currency ≡ true
+round650C1AndC2ShareLiteralR406CurrencyIsTrue =
+  R652.round652C1AndC2ShareLiteralR406CurrencyIsTrue
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
