@@ -29,3 +29,11 @@ representationRequiresCountableAdditivity = refl
 representationRequiresExpectationIdentification :
   R448.continuumRepresentationRequiresExpectationIdentification ≡ true
 representationRequiresExpectationIdentification = refl
+
+representedExpectationNotIndependentlyChosen :
+  R448.representedExpectationChosenIndependentlyFromMeasure ≡ false
+representedExpectationNotIndependentlyChosen = refl
+
+representedExpectationByIntegrationDefinitional :
+  R448.representedExpectationByIntegrationIsDefinitional ≡ true
+representedExpectationByIntegrationDefinitional = refl
