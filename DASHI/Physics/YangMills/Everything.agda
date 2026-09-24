@@ -441,6 +441,11 @@ import DASHI.Physics.YangMills.YangMillsCylinderEventBooleanAlgebraRound539Valid
 import DASHI.Physics.YangMills.YangMillsClayMeasureCompleteResidualRound540Exact
 import DASHI.Physics.YangMills.YangMillsClayMeasureCompleteResidualRound540Validation
 
+import DASHI.Physics.YangMills.YangMillsActualGroupQuantitativeAlignmentRound541Exact
+import DASHI.Physics.YangMills.YangMillsActualGroupQuantitativeAlignmentRound541Validation
+import DASHI.Physics.YangMills.YangMillsClayActualGroupAlignedResidualRound542Exact
+import DASHI.Physics.YangMills.YangMillsClayActualGroupAlignedResidualRound542Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
