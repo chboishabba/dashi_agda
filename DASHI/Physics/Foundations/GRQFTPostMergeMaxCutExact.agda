@@ -17,8 +17,7 @@ data GRQFTPostMergeLeaf : Set where
   cmp119StressToLiteralPinnedStressAttachment : GRQFTPostMergeLeaf
   pinnedLiteralYMToRecoveredQFTAttachment : GRQFTPostMergeLeaf
   activePhysicalSectorTotalizationAndCommonVariation : GRQFTPostMergeLeaf
-  einsteinCommonMetricVariation : GRQFTPostMergeLeaf
-  commonMetricProducerLanguage : GRQFTPostMergeLeaf
+  directGRSharedSourceFactorisation : GRQFTPostMergeLeaf
   physicalDrellYanAbsoluteProjectionReplacement : GRQFTPostMergeLeaf
   acceptedMeasuredGAndEmpiricalAuthority : GRQFTPostMergeLeaf
   empiricalGRQFTDiscriminator : GRQFTPostMergeLeaf
@@ -29,8 +28,7 @@ canonicalGRQFTPostMergeLeaves =
   ∷ cmp119StressToLiteralPinnedStressAttachment
   ∷ pinnedLiteralYMToRecoveredQFTAttachment
   ∷ activePhysicalSectorTotalizationAndCommonVariation
-  ∷ einsteinCommonMetricVariation
-  ∷ commonMetricProducerLanguage
+  ∷ directGRSharedSourceFactorisation
   ∷ physicalDrellYanAbsoluteProjectionReplacement
   ∷ acceptedMeasuredGAndEmpiricalAuthority
   ∷ empiricalGRQFTDiscriminator
@@ -103,4 +101,4 @@ postMergeTerminalPromotionStillFalse = refl
 
 frontierSummary : String
 frontierSummary =
-  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR analytic realization, two same-object attachments, active physical-sector totalization/common variation, Einstein/common-metric variation, physical absolute-DY replacement and external authority/empirical validation."
+  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR analytic realization, two same-object attachments, active physical-sector totalization, direct GR shared-source factorisation, physical absolute-DY replacement and external authority/empirical validation."
