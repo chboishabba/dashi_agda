@@ -111,3 +111,42 @@ tmp_component_json="$(mktemp)"
 trap 'rm -f "$tmp_component_json"' EXIT
 python3 scripts/grqft_cross_sector_component_residual.py --output "$tmp_component_json"
 diff -u outputs/grqft_cross_sector_component_target.json "$tmp_component_json"
+
+
+# Exact finite-D1 summation path: exercise both an exact-zero target fixture and
+# a one-component nonzero control.  These are harness regressions only; they do
+# not claim the target numbers were derived from CMP119 source data.
+tmp_d1_in="$(mktemp)"
+tmp_d1_out="$(mktemp)"
+tmp_d1_bad_in="$(mktemp)"
+tmp_d1_bad_out="$(mktemp)"
+trap 'rm -f "$tmp_component_json" "$tmp_d1_in" "$tmp_d1_out" "$tmp_d1_bad_in" "$tmp_d1_bad_out"' EXIT
+cat >"$tmp_d1_in" <<'JSON'
+{"qft_finite_d1_terms":{"00":[1],"01":[0],"02":[0],"03":[0],"11":[-1],"12":[0],"13":[0],"22":[-1],"23":[0],"33":[-1]}}
+JSON
+python3 scripts/grqft_cross_sector_component_residual.py --qft-json "$tmp_d1_in" --output "$tmp_d1_out"
+python3 - "$tmp_d1_out" <<'PY'
+import json,sys
+p=json.load(open(sys.argv[1]))
+assert p["input_form"] == "ten finite localized D1 component sums"
+assert p["status"] == "exact_zero"
+assert p["l1_residual"] == 0
+assert p["max_abs_residual"] == 0
+assert p["finite_d1_sums"] == {
+    "00": 1, "01": 0, "02": 0, "03": 0,
+    "11": -1, "12": 0, "13": 0,
+    "22": -1, "23": 0, "33": -1,
+}
+PY
+
+cat >"$tmp_d1_bad_in" <<'JSON'
+{"qft_finite_d1_terms":{"00":[1],"01":[0],"02":[0],"03":[0],"11":[-1],"12":[0],"13":[0],"22":[-1],"23":[0],"33":[0]}}
+JSON
+python3 scripts/grqft_cross_sector_component_residual.py --qft-json "$tmp_d1_bad_in" --output "$tmp_d1_bad_out"
+python3 - "$tmp_d1_bad_out" <<'PY'
+import json,sys
+p=json.load(open(sys.argv[1]))
+assert p["status"] == "nonzero_residual"
+assert p["l1_residual"] == 1
+assert p["max_abs_residual"] == 1
+PY
