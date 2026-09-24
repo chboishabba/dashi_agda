@@ -25,9 +25,9 @@ canonicalGRQFTConcreteTheoryLeaves : List GRQFTConcreteTheoryLeaf
 canonicalGRQFTConcreteTheoryLeaves =
   constructTheoremBearingGRDiscreteToSmoothBundle
   ∷ attachLiteralNonflatGRToRecoveredGR
-  ∷ attachPinnedLiteralYMToRecoveredQFT
+  ∷ repairLegacyQFTRecoveryProjectionCompatibility
   ∷ attachCMP119StressToLiteralPinnedStress
-  ∷ identifyMetricBasis16InsideCMP119Tangent
+  ∷ identifyTenSymmetricMetricSlotsInsideCMP119Tangent
   ∷ interpretYMSymmetryAsBasisComponentSymmetry
   ∷ evaluateTenIndependentCrossSectorStressComponents
   ∷ constructCommonOverlapBackreactionCorrectionEvidence
