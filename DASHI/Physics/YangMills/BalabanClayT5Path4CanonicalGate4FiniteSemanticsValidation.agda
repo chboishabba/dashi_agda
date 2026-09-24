@@ -1,0 +1,17 @@
+module DASHI.Physics.YangMills.BalabanClayT5Path4CanonicalGate4FiniteSemanticsValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanClayT5Path4CanonicalGate4FiniteSemanticsExact as Canonical
+
+path4CanonicalFiniteSemanticsClosed :
+  Canonical.path4CanonicalGate4FiniteSemanticsCompilerLevel ≡ machineChecked
+path4CanonicalFiniteSemanticsClosed = refl
+
+path4CanonicalExpectationIntegralClosed :
+  Canonical.path4CanonicalGate4ExpectationIntegralCompilerLevel ≡ machineChecked
+path4CanonicalExpectationIntegralClosed = refl
+
+path4ObservableEvaluationRemainsPhysical :
+  Canonical.path4CanonicalObservableEvaluationLevel ≡ conditional
+path4ObservableEvaluationRemainsPhysical = refl
