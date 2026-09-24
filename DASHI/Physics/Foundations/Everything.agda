@@ -154,3 +154,8 @@ import DASHI.Physics.Foundations.SingleSectorUnifiedCandidateValidation
 import DASHI.Physics.Foundations.GRHolonomyTaylorRicciEvidenceExact
 import DASHI.Physics.Foundations.GRDiscreteToSmoothMaxCutExact
 import DASHI.Physics.Foundations.GRDiscreteToSmoothMaxCutValidation
+
+import DASHI.Physics.Foundations.RecoveryCommutationCoreExact
+import DASHI.Physics.Foundations.CommonRegimeMathematicalCoreExact
+import DASHI.Physics.Foundations.GRQFTTheoryValidationSplitExact
+import DASHI.Physics.Foundations.GRQFTTheoryValidationSplitValidation

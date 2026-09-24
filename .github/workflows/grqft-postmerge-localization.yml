@@ -41,7 +41,8 @@ on:
       - 'DASHI/Physics/Foundations/GRHolonomyTaylorRicciEvidenceExact.agda'
       - 'DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutValidation.agda'
-      - 'scripts/check_grqft_postmerge_localization.sh'
+      - 'DASHI/Physics/Foundations/RecoveryCommutationCoreExact.agda'
+      - 'scripts/check_grqft_postmerge-localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
 jobs:
