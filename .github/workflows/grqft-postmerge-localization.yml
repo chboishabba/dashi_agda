@@ -32,6 +32,9 @@ on:
       - 'DASHI/Physics/Foundations/StressEnergyWeldMathematicalCoreExact.agda'
       - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressMathematicalCoreExact.agda'
       - 'DASHI/Physics/Foundations/StressEnergyWeldMathematicalCoreValidation.agda'
+      - 'DASHI/Physics/Foundations/StressEnergyEqualityCoreExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressEqualityCoreExact.agda'
+      - 'DASHI/Physics/Foundations/StressEnergyEqualityCoreValidation.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 

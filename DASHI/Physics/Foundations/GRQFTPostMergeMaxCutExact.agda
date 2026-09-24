@@ -16,7 +16,7 @@ data GRQFTPostMergeLeaf : Set where
   grDiscreteToContinuumSameObjectRealization : GRQFTPostMergeLeaf
   cmp119StressToLiteralPinnedStressAttachment : GRQFTPostMergeLeaf
   pinnedLiteralYMToRecoveredQFTAttachment : GRQFTPostMergeLeaf
-  activePhysicalSectorTotalization : GRQFTPostMergeLeaf
+  selectedPhysicalSectorEqualsDeclaredQFTTotal : GRQFTPostMergeLeaf
   grAnchoredCMP119CrossSectorStressEquality : GRQFTPostMergeLeaf
   physicalDrellYanAbsoluteProjectionReplacement : GRQFTPostMergeLeaf
   acceptedMeasuredGAndEmpiricalAuthority : GRQFTPostMergeLeaf
@@ -27,7 +27,7 @@ canonicalGRQFTPostMergeLeaves =
   grDiscreteToContinuumSameObjectRealization
   ∷ cmp119StressToLiteralPinnedStressAttachment
   ∷ pinnedLiteralYMToRecoveredQFTAttachment
-  ∷ activePhysicalSectorTotalization
+  ∷ selectedPhysicalSectorEqualsDeclaredQFTTotal
   ∷ grAnchoredCMP119CrossSectorStressEquality
   ∷ physicalDrellYanAbsoluteProjectionReplacement
   ∷ acceptedMeasuredGAndEmpiricalAuthority
@@ -61,9 +61,9 @@ record GRQFTPostMergeMaxCut : Set where
     secondQFTStressTheoremRequiredIsFalse :
       secondQFTStressTheoremRequired ≡ false
 
-    activePhysicalSectorTotalizationStillRequired : Bool
-    activePhysicalSectorTotalizationStillRequiredIsTrue :
-      activePhysicalSectorTotalizationStillRequired ≡ true
+    selectedPhysicalSectorTotalEqualityStillRequired : Bool
+    selectedPhysicalSectorTotalEqualityStillRequiredIsTrue :
+      selectedPhysicalSectorTotalEqualityStillRequired ≡ true
 
     terminalGRQFTPromoted : Bool
     terminalGRQFTPromotedIsFalse :
@@ -101,4 +101,4 @@ postMergeTerminalPromotionStillFalse = refl
 
 frontierSummary : String
 frontierSummary =
-  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR discrete-to-continuum same-object realization, two QFT same-object attachments, active physical-sector totalization, GR-anchored CMP119 cross-sector stress equality, physical absolute-DY replacement and external authority/empirical validation."
+  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR discrete-to-continuum same-object realization, two QFT same-object attachments, selected-sector=declared-total equality, GR-anchored CMP119 cross-sector stress equality, physical absolute-DY replacement and external authority/empirical validation."
