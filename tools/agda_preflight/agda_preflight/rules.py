@@ -93,25 +93,6 @@ def _collect_data(source: str):
         data[name] = d; i = max(i + 1, j)
     return data, ctors
 
-def _collect_top_decls(source: str):
-    out = {}
-    for i, line in enumerate(source.splitlines(), 1):
-        if line.startswith((" ", "\t")) or line.lstrip().startswith("--"): continue
-        for pat in (rf"^(?:record|data)\s+({_IDENT})\b", rf"^({_IDENT})(?:\s+{_IDENT})*\s*:"):
-            m = re.match(pat, line)
-            if m:
-                out.setdefault(m.group(1), []).append(i); break
-    return out
-
-def _collect_clauses(source: str):
-    out = {}
-    for i, line in enumerate(source.splitlines(), 1):
-        if line.startswith((" ", "\t")) or line.lstrip().startswith("--"): continue
-        m = re.match(rf"^({_IDENT})\b(.*?)=\s*(.*)$", line)
-        if m:
-            out.setdefault(m.group(1), []).append((i, (m.group(1) + m.group(2)).strip(), m.group(3).strip()))
-    return out
-
 def _lhs_arity(lhs: str) -> int:
     rest = lhs.split(maxsplit=1)
     if len(rest) == 1: return 0
@@ -128,35 +109,6 @@ def _lhs_arity(lhs: str) -> int:
             token = False
         elif depth == 0 and braces == 0: token = True
     return count
-
-def _record_blocks(source: str):
-    lines = source.splitlines(); i = 0
-    while i < len(lines):
-        m = re.match(rf"^({_IDENT})\b[^=]*=\s*(.*)$", lines[i])
-        if not m:
-            i += 1; continue
-        name = m.group(1); chunk = [m.group(2)]; k = i + 1
-        while k < len(lines):
-            if lines[k] and not lines[k][0].isspace(): break
-            chunk.append(lines[k]); k += 1
-        text = "\n".join(chunk); pos = text.find("record")
-        brace = text.find("{", pos + 6) if pos >= 0 else -1
-        if brace >= 0:
-            depth = 0
-            for off, ch in enumerate(text[brace:], brace):
-                if ch == "{": depth += 1
-                elif ch == "}":
-                    depth -= 1
-                    if depth == 0:
-                        yield name, i + 1, text[brace + 1:off]; break
-        i = max(i + 1, k)
-
-def _assignments(body: str):
-    out = []
-    for chunk in re.split(r"(?m)^\s*;\s*", body):
-        m = re.match(rf"\s*({_IDENT})\s*=\s*(.*)", chunk, re.S)
-        if m: out.append((m.group(1), m.group(2).strip()))
-    return out
 
 def _resolve_record(checker, summary, type_text: str):
     terminal = _terminal(type_text)
@@ -416,22 +368,66 @@ def extended_diagnostics(checker, s, D):
                 lhs_args = lhs.split()[1:]; rhs_args = rec.group(1).split()[:len(lhs_args)]
                 if lhs_args and lhs_args == rhs_args: out.append(_diag(D, "TSAGDA140", f"{name} recursively calls itself with identical visible arguments", s, line, severity="warning", confidence="medium"))
 
-    eq = {}
-    for name, sig in s.signatures.items():
-        parts = re.split(r"\s*≡\s*", sig.type_text)
-        if len(parts) == 2: eq[name] = (parts[0].strip(), parts[1].strip())
-    for name, cs in clauses.items():
-        for line, lhs, rhs in cs:
-            if rhs == "refl" and name in eq:
-                ha, hb = _terminal(eq[name][0]), _terminal(eq[name][1])
-                if ha and hb and ha != hb and ha in data and hb in data:
-                    out.append(_diag(D, "TSAGDA100", f"refl endpoints have incompatible datatype heads {ha} and {hb}", s, line))
-            tm = re.search(rf"\btrans\s+({_IDENT})\s+({_IDENT})", rhs)
-            if tm and tm.group(1) in eq and tm.group(2) in eq:
-                ha, hb = _terminal(eq[tm.group(1)][1]), _terminal(eq[tm.group(2)][0])
-                if ha and hb and ha != hb and ha in data and hb in data:
-                    out.append(_diag(D, "TSAGDA102", f"trans intermediate endpoints have incompatible heads {ha} and {hb}", s, line))
+    eq_shapes = {}
+    for name, signature in s.ast.signatures.items():
+        if signature.type_node is None:
+            continue
+        eq_shape = equality_shape(
+            shape_from_node(s.ast.source_bytes, signature.type_node)
+        )
+        if eq_shape is not None:
+            eq_shapes[name] = eq_shape
+            compatible = compatible_rigid_heads(eq_shape.lhs, eq_shape.rhs)
+            if compatible is False:
+                out.append(
+                    _diag(
+                        D,
+                        "TSAGDA105",
+                        f"equality {name} has visibly incompatible rigid endpoint heads",
+                        s,
+                        signature.line,
+                    )
+                )
 
+    for name, clause_items in s.ast.clauses.items():
+        target_eq = eq_shapes.get(name)
+        for clause in clause_items:
+            if clause.rhs_node is None:
+                continue
+            tokens = significant_tokens(s.ast.source_bytes, clause.rhs_node)
+            if len(tokens) == 1 and tokens[0].text == "refl" and target_eq is not None:
+                compatible = compatible_rigid_heads(target_eq.lhs, target_eq.rhs)
+                if compatible is False:
+                    out.append(
+                        _diag(
+                            D,
+                            "TSAGDA100",
+                            "refl is used for equality endpoints with incompatible rigid heads",
+                            s,
+                            clause.line,
+                        )
+                    )
+
+            for i, token in enumerate(tokens):
+                if token.text != "trans" or i + 2 >= len(tokens):
+                    continue
+                left_name = tokens[i + 1].text
+                right_name = tokens[i + 2].text
+                left_eq = eq_shapes.get(left_name)
+                right_eq = eq_shapes.get(right_name)
+                if left_eq is None or right_eq is None:
+                    continue
+                compatible = compatible_rigid_heads(left_eq.rhs, right_eq.lhs)
+                if compatible is False:
+                    out.append(
+                        _diag(
+                            D,
+                            "TSAGDA102",
+                            f"trans intermediate endpoints {left_name}/{right_name} have incompatible rigid heads",
+                            s,
+                            clause.line,
+                        )
+                    )
     known = set(s.signatures) | set(data) | set(ctors)
     fix = {}
     postulates = []; in_post = False
@@ -625,8 +621,9 @@ def extended_diagnostics(checker, s, D):
     for name, cs in clauses.items():
         for line, lhs, rhs in cs:
             sm = re.search(rf"\bsym\s+({_IDENT})", rhs)
-            if sm and sm.group(1) in eq and name in eq:
-                pa, pb = eq[sm.group(1)]; ta, tb = eq[name]
+            if sm and sm.group(1) in eq_shapes and name in eq_shapes:
+                pa_shape = eq_shapes[sm.group(1)]; target_shape = eq_shapes[name]
+                pa, pb = terminal_head(pa_shape.lhs), terminal_head(pa_shape.rhs); ta, tb = terminal_head(target_shape.lhs), terminal_head(target_shape.rhs)
                 if _terminal(pa) and _terminal(tb) and _terminal(pa) != _terminal(tb):
                     out.append(_diag(D, "TSAGDA101", f"sym proof endpoint head does not match target equality for {name}", s, line))
             cm = re.search(rf"\bcong\s+({_IDENT})\s+({_IDENT})", rhs)
@@ -939,7 +936,7 @@ def extended_diagnostics(checker, s, D):
         sig = s.signatures.get(name)
         if not sig or "≡" in sig.type_text: continue
         for line, lhs, rhs in cs:
-            if rhs in eq:
+            if rhs in eq_shapes:
                 out.append(_diag(D, "TSAGDA104", f"equality proof {rhs} is used as the value of non-equality result {name}", s, line))
 
     # TSAGDA113/114/115: bounded clause/scope/signature checks.
