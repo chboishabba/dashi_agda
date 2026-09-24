@@ -123,6 +123,13 @@ import DASHI.Interop.SmithChartLeanParityExact
 import DASHI.Interop.LeanMoonshineDeltaIdentityPinnedReceiptExact
 import DASHI.Interop.Round11MachinLeanBindingManifestExact
 import DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact
+import DASHI.Interop.SLRProductionRoadmapParityExact
+import DASHI.Interop.SLRGWBPhysicalObjectAcquisitionPolicyExact
+import DASHI.Interop.SLRSprint1AcquisitionMachineExact
+import DASHI.Interop.SLRSharedEvidenceReducerRegression
+import DASHI.Interop.SLRProviderNormalisationRegression
+import DASHI.Interop.SLRProviderNormalisationExact
+
 
 module DASHI.Interop.Everything where
 
