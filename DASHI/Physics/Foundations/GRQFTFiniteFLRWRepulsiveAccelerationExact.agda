@@ -32,24 +32,18 @@ data ScaleAccelerationOrientation : Set where
   zeroScaleAcceleration : ScaleAccelerationOrientation
   expandingAcceleration : ScaleAccelerationOrientation
 
-flrwAccelerationOrientation :
-  Geometry.UnitCoefficient →
+zeroHdotFLRWAccelerationOrientation :
   Geometry.CurvatureCoefficient →
   ScaleAccelerationOrientation
-flrwAccelerationOrientation Geometry.negativeUnit curvature =
-  contractingAcceleration
-flrwAccelerationOrientation Geometry.zeroUnit Geometry.zeroCurvature =
+zeroHdotFLRWAccelerationOrientation Geometry.zeroCurvature =
   zeroScaleAcceleration
-flrwAccelerationOrientation Geometry.zeroUnit Geometry.positiveCurvature =
-  expandingAcceleration
-flrwAccelerationOrientation Geometry.positiveUnit curvature =
+zeroHdotFLRWAccelerationOrientation Geometry.positiveCurvature =
   expandingAcceleration
 
 finiteFLRWAccelerationOrientation :
   ScaleAccelerationOrientation
 finiteFLRWAccelerationOrientation =
-  flrwAccelerationOrientation
-    Geometry.hubbleDerivative
+  zeroHdotFLRWAccelerationOrientation
     Geometry.warpedSectionalCurvature
 
 finiteFLRWAccelerationIsExpanding :
