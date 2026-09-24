@@ -51,6 +51,24 @@ def parse_matrix(value: Any) -> list[list[Fraction]]:
     return rows
 
 
+SYMMETRIC_KEYS = ("00","01","02","03","11","12","13","22","23","33")
+
+
+def expand_symmetric_components(value: Any) -> list[list[Fraction]]:
+    if not isinstance(value, dict):
+        raise ValueError("qft_symmetric_components must be an object")
+    missing = [k for k in SYMMETRIC_KEYS if k not in value]
+    if missing:
+        raise ValueError(f"missing symmetric components: {missing}")
+    c = {k: parse_fraction(value[k]) for k in SYMMETRIC_KEYS}
+    return [
+        [c["00"], c["01"], c["02"], c["03"]],
+        [c["01"], c["11"], c["12"], c["13"]],
+        [c["02"], c["12"], c["22"], c["23"]],
+        [c["03"], c["13"], c["23"], c["33"]],
+    ]
+
+
 def encoded(x: Fraction) -> int | str:
     if x.denominator == 1:
         return x.numerator
@@ -79,11 +97,16 @@ def main() -> None:
             "status": "qft_component_data_missing",
             "comparison_executed": False,
             "required_next_input":
-                "16 CMP119/YM stress components in the same normalized rational carrier",
+                "metric-basis/symmetry bridge plus ten independent CMP119/YM stress components in the same normalized rational carrier",
         })
     else:
         raw = json.loads(args.qft_json.read_text())
-        qft = parse_matrix(raw["qft_stress"])
+        if "qft_symmetric_components" in raw:
+            qft = expand_symmetric_components(raw["qft_symmetric_components"])
+            input_form = "ten symmetric components"
+        else:
+            qft = parse_matrix(raw["qft_stress"])
+            input_form = "full 4x4 matrix"
         residual = [
             [GR[i][j] - qft[i][j] for j in range(4)]
             for i in range(4)
@@ -93,6 +116,7 @@ def main() -> None:
             "status": "exact_zero" if all(x == 0 for x in flat) else "nonzero_residual",
             "comparison_executed": True,
             "qft_stress": encode_matrix(qft),
+            "input_form": input_form,
             "residual_gr_minus_qft": encode_matrix(residual),
             "l1_residual": encoded(sum(flat, Fraction(0))),
             "max_abs_residual": encoded(max(flat, default=Fraction(0))),

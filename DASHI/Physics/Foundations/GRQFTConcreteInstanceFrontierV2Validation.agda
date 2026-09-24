@@ -15,10 +15,25 @@ finiteGRTargetRunnable :
   C.finiteGRComponentTargetAlreadyExecutable ≡ true
 finiteGRTargetRunnable = refl
 
-qftEvaluatorStillMissing :
-  F.qftComponentEvaluatorExists F.canonicalGRQFTConcreteTheoryFrontier
+qftEvaluatorCompilerPresent :
+  F.qftComponentEvaluatorCompilerExists F.canonicalGRQFTConcreteTheoryFrontier
+  ≡ true
+qftEvaluatorCompilerPresent = refl
+
+metricBasisInstanceStillMissing :
+  F.metricBasisInstanceExists F.canonicalGRQFTConcreteTheoryFrontier
   ≡ false
-qftEvaluatorStillMissing = refl
+metricBasisInstanceStillMissing = refl
+
+symmetryMeaningStillMissing :
+  F.symmetrySemanticBridgeInstanceExists F.canonicalGRQFTConcreteTheoryFrontier
+  ≡ false
+symmetryMeaningStillMissing = refl
+
+tenValuesStillMissing :
+  F.tenIndependentComponentValuesExist F.canonicalGRQFTConcreteTheoryFrontier
+  ≡ false
+tenValuesStillMissing = refl
 
 w4NotTheoryLeaf :
   F.w4ReplacementIsTheoryCoreLeaf F.canonicalGRQFTConcreteTheoryFrontier
