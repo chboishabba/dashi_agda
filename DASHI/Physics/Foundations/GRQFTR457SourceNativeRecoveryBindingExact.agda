@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact as Weld
+import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary as Effective
 import DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProvenanceExact as Recovery
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
@@ -41,15 +42,15 @@ r457RecoveryState :
       {Y = Y} {group = group}
       domain representation} →
   R457.SourceNativeContinuumAndOS stressLane →
-  DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary.JointMicroscopicState →
+  Effective.JointMicroscopicState →
   Recovery.SourceNativeQFTRecoveryState U
-r457RecoveryState {Y = Y} sourceNative joint = record
+r457RecoveryState {Y = Y} {stressLane = stressLane} sourceNative joint = record
   { Recovery.SourceNativeQFTRecoveryState.jointState =
       joint
   ; Recovery.SourceNativeQFTRecoveryState.recoveredConstruction =
       Y
   ; Recovery.SourceNativeQFTRecoveryState.SourceNativeProvenance =
-      R457.SourceNativeContinuumAndOS _
+      R457.SourceNativeContinuumAndOS stressLane
   ; Recovery.SourceNativeQFTRecoveryState.sourceNativeProvenance =
       sourceNative
   }
