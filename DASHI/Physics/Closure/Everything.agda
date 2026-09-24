@@ -181,3 +181,6 @@ import DASHI.Physics.Closure.GRQFTSIPhysicalCalibrationBridgeExact
 
 import DASHI.Physics.Closure.EinsteinPhysicalCouplingCalibrationExact
 import DASHI.Physics.Closure.W4IndependentPhysicalPredictionRequestExact
+
+import DASHI.Physics.Closure.EinsteinFiniteToPhysicalCalibrationCompilerExact
+import DASHI.Physics.Closure.EinsteinFiniteToPhysicalCalibrationCompilerValidation
