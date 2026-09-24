@@ -38,6 +38,22 @@ def test_five_inversion_orbit_permutation_character_decomposes_without_a2_or_e()
     assert probe["monster_42d_action_paid"] is False
 
 
+def test_signed_weighted_inner_product_splits_match_kernel_arithmetic():
+    probe = load_probe().build_report()
+
+    assert probe["weighted_inner_product_splits"] == {
+        "A1": {"positive": 24, "negative": 0, "multiplicity": 3},
+        "A2": {"positive": 12, "negative": 12, "multiplicity": 0},
+        "B1": {"positive": 16, "negative": 8, "multiplicity": 1},
+        "B2": {"positive": 16, "negative": 8, "multiplicity": 1},
+        "E": {"positive": 10, "negative": 10, "multiplicity": 0},
+    }
+    assert all(
+        split["positive"] == 8 * split["multiplicity"] + split["negative"]
+        for split in probe["weighted_inner_product_splits"].values()
+    )
+
+
 def test_quotient_character_is_raw_nine_character_with_two_e_copies_removed():
     probe = load_probe().build_report()
 
