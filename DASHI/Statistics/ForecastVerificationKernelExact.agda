@@ -3,8 +3,12 @@ module DASHI.Statistics.ForecastVerificationKernelExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; ½; _+_; _-_; _*_; _≤_)
-open import Data.Rational.Tactic.RingSolver using (solve-∀)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; ½; _+_; _-_; _*_; -_; _≤_)
+import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst)
+
+import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Order
 
 ------------------------------------------------------------------------
 -- EXACT FINITE BINARY FORECAST VERIFICATION KERNEL
@@ -55,7 +59,7 @@ halfBaselineNo = ℚRing.solve-∀
 halfBaselineYes :
   brierLossValue ½ yes ≡ ½ * ½
 halfBaselineYes =
-  solve-∀
+  ℚRing.solve-∀
 
 halfBaseline :
   (outcome : BinaryOutcome) →
