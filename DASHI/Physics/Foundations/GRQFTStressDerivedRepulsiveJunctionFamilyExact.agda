@@ -9,6 +9,7 @@ open import Data.Rational.Base using (ℚ; _/_; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
+import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTKottlerRepulsionParameterWindowExact as Window
 import DASHI.Physics.Foundations.GRQFTParameterizedRepulsiveJunctionDesignExact as Design
 
@@ -75,13 +76,13 @@ junctionAmplitudeJumpNumerator mass radius =
 
 exteriorStressFromGeometry :
   (mass radius : ℚ) →
-  Vacuum.Stress.RationalTensor4
+  Stress.RationalTensor4
 exteriorStressFromGeometry mass radius =
   Vacuum.vacuumStressAt (exteriorStressAmplitude mass radius)
 
 interiorStressFromGeometry :
   (mass radius : ℚ) →
-  Vacuum.Stress.RationalTensor4
+  Stress.RationalTensor4
 interiorStressFromGeometry mass radius =
   Vacuum.vacuumStressAt (interiorStressAmplitude mass radius)
 
