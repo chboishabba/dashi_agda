@@ -48,6 +48,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarMismatchNetworkSplitRound667E
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarExternalResidualFullSquareRound668Exact as R668
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarCanonicalExternalFullSquareRound669Exact as R669
 import DASHI.Physics.Closure.NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact as R670
+import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact as R671
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -742,6 +743,18 @@ round650C2WeightedExternalSignedPaymentClosed : Bool
 round650C2WeightedExternalSignedPaymentClosed =
   R670.round670ExternalSignedPaymentClosed
 
+round650C2RawTotalExternalWeldOnPNonzeroClosed : Bool
+round650C2RawTotalExternalWeldOnPNonzeroClosed =
+  R671.round671RawTotalExternalWeldOnPNonzeroClosed
+
+round650C2RawTotalNestedWeldOnPNonzeroClosed : Bool
+round650C2RawTotalNestedWeldOnPNonzeroClosed =
+  R671.round671RawTotalNestedWeldOnPNonzeroClosed
+
+round650C2ExternalZeroBranchMayBeErasedGlobally : Bool
+round650C2ExternalZeroBranchMayBeErasedGlobally =
+  R671.round671R630ZeroBranchMayBeErasedGlobally
+
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue :
   round650C2ExternalNetworkOnLiteralResidualFullSquare ≡ true
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue =
@@ -796,6 +809,21 @@ round650C2WeightedExternalSignedPaymentClosedIsFalse :
   round650C2WeightedExternalSignedPaymentClosed ≡ false
 round650C2WeightedExternalSignedPaymentClosedIsFalse =
   R670.round670ExternalSignedPaymentClosedIsFalse
+
+round650C2RawTotalExternalWeldOnPNonzeroClosedIsTrue :
+  round650C2RawTotalExternalWeldOnPNonzeroClosed ≡ true
+round650C2RawTotalExternalWeldOnPNonzeroClosedIsTrue =
+  R671.round671RawTotalExternalWeldOnPNonzeroClosedIsTrue
+
+round650C2RawTotalNestedWeldOnPNonzeroClosedIsTrue :
+  round650C2RawTotalNestedWeldOnPNonzeroClosed ≡ true
+round650C2RawTotalNestedWeldOnPNonzeroClosedIsTrue =
+  R671.round671RawTotalNestedWeldOnPNonzeroClosedIsTrue
+
+round650C2ExternalZeroBranchMayBeErasedGloballyIsFalse :
+  round650C2ExternalZeroBranchMayBeErasedGlobally ≡ false
+round650C2ExternalZeroBranchMayBeErasedGloballyIsFalse =
+  R671.round671R630ZeroBranchMayBeErasedGloballyIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
