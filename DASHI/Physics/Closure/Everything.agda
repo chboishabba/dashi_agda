@@ -486,3 +486,5 @@ import DASHI.Physics.Closure.NSTriadKNR650HelicityTangentSelfCollapseRound677Exa
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSingleSelfMismatchRound678Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650CombinedRouteReturnsToRateKernelRound679Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650RateKernelPositiveRateNoGoRound680Exact
