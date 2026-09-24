@@ -28,6 +28,7 @@ import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as Operatio
 import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as LiveReviewMutation
 import DASHI.Cognition.PNF.SensibLawConversationalSourceFamilyExact as ConversationalSource
 import DASHI.Cognition.PNF.SensibLawMatterContextProjectionExact as MatterContext
+import DASHI.Cognition.PNF.SensibLawMatterWorkspaceProjectionExact as MatterWorkspace
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
