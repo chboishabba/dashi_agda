@@ -217,3 +217,7 @@ import DASHI.Physics.Foundations.GRQFTLocalizedDefocusingExteriorNoGoMaxCutExact
 import DASHI.Physics.Foundations.GRQFTSchwarzschildDeSitterExteriorEscapeExact
 
 import DASHI.Physics.Foundations.GRQFTExteriorRepulsionRouteSynthesisExact
+
+import DASHI.Physics.Foundations.GRQFTDeSitterKottlerJunctionExact
+
+import DASHI.Physics.Foundations.GRQFTJunctionTOVSignConsistencyExact
