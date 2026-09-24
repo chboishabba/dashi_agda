@@ -55,6 +55,9 @@ import DASHI.Physics.Closure.NSPeriodicConcreteIntegerModeNorm as ModeNorm
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Reality
+import DASHI.Physics.Closure.NSTriadKNSelectedPacketProjectedPairingRound98Exact as Selected
+import DASHI.Physics.Closure.NSTriadKNPacketBoundaryFluxNormalizationRound98Exact as Norm
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNF4ProjectedOutputPairingRound39Exact as Pairing
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as R30
@@ -170,6 +173,115 @@ literalDissipationCollarRefinement physical K =
     modes = Cube.cutoffModes (Audit.cutoff system)
   in
   sumSelectedPairingCollarRefinement K velocity viscous modes
+
+------------------------------------------------------------------------
+-- Same-object physical boundary-flux refinement.
+------------------------------------------------------------------------
+
+selectedProjectedOutputPowerCollarRefinement :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  (system : Audit.FiniteComplex3GalerkinSystem F E I) →
+  (K : Nat) →
+  (output : Z3.FourierMode) →
+  Selected.selectedProjectedOutputPower
+      system (Split.collarPacket (suc K)) output
+  ≡
+  Selected.selectedProjectedOutputPower
+      system (badCollarPacket K) output
+    + Selected.selectedProjectedOutputPower
+      system (goodCollarPacket K) output
+selectedProjectedOutputPowerCollarRefinement system K output
+  with Split.collarPacket (suc K) output
+     | lowCeilingNat K ≤? ModeNorm.modeNatNormSquared output
+... | false | yes _ = refl
+... | false | no _ = refl
+... | true | yes _ =
+  solve
+    (Pairing.realHermitianPower
+      (Audit.velocity system output)
+      (Audit.projectedNonlinearity system output) ∷ [])
+... | true | no _ =
+  solve
+    (Pairing.realHermitianPower
+      (Audit.velocity system output)
+      (Audit.projectedNonlinearity system output) ∷ [])
+
+sumSelectedProjectedPairingsCollarRefinement :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  (system : Audit.FiniteComplex3GalerkinSystem F E I) →
+  (K : Nat) →
+  (outputs : List Z3.FourierMode) →
+  Selected.sumSelectedProjectedPairings
+      system (Split.collarPacket (suc K)) outputs
+  ≡
+  Selected.sumSelectedProjectedPairings
+      system (badCollarPacket K) outputs
+    + Selected.sumSelectedProjectedPairings
+      system (goodCollarPacket K) outputs
+sumSelectedProjectedPairingsCollarRefinement system K [] = refl
+sumSelectedProjectedPairingsCollarRefinement system K (output ∷ rest)
+  rewrite selectedProjectedOutputPowerCollarRefinement system K output
+        | sumSelectedProjectedPairingsCollarRefinement system K rest =
+  solve
+    ( Selected.selectedProjectedOutputPower system (badCollarPacket K) output
+    ∷ Selected.selectedProjectedOutputPower system (goodCollarPacket K) output
+    ∷ Selected.sumSelectedProjectedPairings system (badCollarPacket K) rest
+    ∷ Selected.sumSelectedProjectedPairings system (goodCollarPacket K) rest
+    ∷ [])
+
+literalSelectedProjectedPairingCollarRefinement :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  (system : Audit.FiniteComplex3GalerkinSystem F E I) →
+  (K : Nat) →
+  Selected.literalSelectedProjectedPairing
+      system (Split.collarPacket (suc K))
+  ≡
+  Selected.literalSelectedProjectedPairing
+      system (badCollarPacket K)
+    + Selected.literalSelectedProjectedPairing
+      system (goodCollarPacket K)
+literalSelectedProjectedPairingCollarRefinement system K =
+  sumSelectedProjectedPairingsCollarRefinement
+    system K (Cube.cutoffModes (Audit.cutoff system))
+
+normalizedBoundaryFluxCollarRefinement :
+  ∀ {E : C3.IntegerEmbedding F}
+    {I : C3.ModeInverseSquare F E} →
+  (system : Audit.FiniteComplex3GalerkinSystem F E I) →
+  (K : Nat) →
+  Reality.RealityCondition (Audit.velocity system) →
+  Reality.DivergenceFreeCondition E (Audit.velocity system) →
+  Norm.normalizedBoundaryTransfer
+      E I (Split.collarPacket (suc K))
+      (Audit.velocity system) (Audit.cutoff system)
+  ≡
+  Norm.normalizedBoundaryTransfer
+      E I (badCollarPacket K)
+      (Audit.velocity system) (Audit.cutoff system)
+    + Norm.normalizedBoundaryTransfer
+      E I (goodCollarPacket K)
+      (Audit.velocity system) (Audit.cutoff system)
+normalizedBoundaryFluxCollarRefinement {E} {I}
+    system K reality divergenceFree =
+  let
+    collar =
+      Selected.literalSelectedProjectedPairingIsNormalizedBoundaryFlux
+        system (Split.collarPacket (suc K)) reality divergenceFree
+    bad =
+      Selected.literalSelectedProjectedPairingIsNormalizedBoundaryFlux
+        system (badCollarPacket K) reality divergenceFree
+    good =
+      Selected.literalSelectedProjectedPairingIsNormalizedBoundaryFlux
+        system (goodCollarPacket K) reality divergenceFree
+    split = literalSelectedProjectedPairingCollarRefinement system K
+  in
+  trans
+    (sym collar)
+    (trans split
+      (cong₂ _+_ bad good))
 
 ------------------------------------------------------------------------
 -- Good collar has the low-ceiling Euclidean floor on the SAME live norm.
@@ -355,6 +467,9 @@ fullCrossBelowBadCollar physical K nuNN =
 round656ExactCollarEuclideanRefinementClosed : Bool
 round656ExactCollarEuclideanRefinementClosed = true
 
+round656PhysicalBoundaryFluxCollarRefinementClosed : Bool
+round656PhysicalBoundaryFluxCollarRefinementClosed = true
+
 round656GoodCollarSpectralDatumConstructed : Bool
 round656GoodCollarSpectralDatumConstructed = true
 
@@ -382,6 +497,10 @@ round656ClayPromotion = false
 round656ExactCollarEuclideanRefinementClosedIsTrue :
   round656ExactCollarEuclideanRefinementClosed ≡ true
 round656ExactCollarEuclideanRefinementClosedIsTrue = refl
+
+round656PhysicalBoundaryFluxCollarRefinementClosedIsTrue :
+  round656PhysicalBoundaryFluxCollarRefinementClosed ≡ true
+round656PhysicalBoundaryFluxCollarRefinementClosedIsTrue = refl
 
 round656GoodCollarSpectralDatumConstructedIsTrue :
   round656GoodCollarSpectralDatumConstructed ≡ true
