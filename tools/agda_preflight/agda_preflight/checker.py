@@ -8,6 +8,8 @@ from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tupl
 from tree_sitter import Language, Parser
 import tree_sitter_agda
 
+from .rules import extended_diagnostics
+
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
 
@@ -378,6 +380,7 @@ class Checker:
         diagnostics.extend(self._projection_sort_diagnostics(summary))
         diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
         diagnostics.extend(self._record_shape_diagnostics(summary))
+        diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
         # Stable de-duplication.
         seen = set()
         unique = []
