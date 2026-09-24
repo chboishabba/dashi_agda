@@ -26,3 +26,7 @@ independentSchwingerWitnessPruned = refl
 countablyAdditiveRepresentationRequired :
   R441.round441CountablyAdditiveRepresentationRequired ≡ true
 countablyAdditiveRepresentationRequired = refl
+
+schwingerExpectationEqualityPremisePruned :
+  R441.round441SchwingerExpectationEqualityRequiredAsPremise ≡ false
+schwingerExpectationEqualityPremisePruned = refl
