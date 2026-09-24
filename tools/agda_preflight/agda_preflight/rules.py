@@ -3,6 +3,9 @@ from dataclasses import dataclass
 import re
 from typing import Dict, Iterable, List, Optional, Tuple
 
+from .ast_index import significant_tokens, typed_binders
+from .shapes import shape_from_node, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads
+
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
 
 @dataclass
@@ -170,6 +173,44 @@ def _resolve_record(checker, summary, type_text: str):
 def _diag(D, code, msg, s, line, col=1, hint=None, severity="error", confidence="high"):
     return D(code, msg, s.path, line, col, hint, severity, confidence)
 
+
+def _resolve_record_ast(checker, summary, signature):
+    if signature is None or signature.type_node is None:
+        return None
+    imported = checker.imported_summaries(summary)
+    head = terminal_head(shape_from_node(summary.ast.source_bytes, signature.type_node))
+    if not head:
+        return None
+    if "." in head:
+        alias, name = head.rsplit(".", 1)
+        owner = imported.get(alias)
+        if owner is not None and name in owner.ast.records:
+            return owner, owner.ast.records[name]
+    if head in summary.ast.records:
+        return summary, summary.ast.records[head]
+    return None
+
+
+def _assignment_map(record_expr):
+    return [(assignment.name, assignment) for assignment in record_expr.assignments]
+
+
+def _single_identifier(source_bytes, expr_node):
+    if expr_node is None:
+        return None
+    tokens = significant_tokens(source_bytes, expr_node)
+    names = [
+        token.text
+        for token in tokens
+        if token.node_type in {"qid", "id", "field_name"}
+    ]
+    punctuation = {
+        token.text
+        for token in tokens
+        if token.text.strip() and token.node_type not in {"qid", "id", "field_name"}
+    }
+    return names[0] if len(names) == 1 and not punctuation else None
+
 def extended_diagnostics(checker, s, D):
     source = s.source; clean = _strip_comments(source); out = []
     data = {
@@ -311,25 +352,44 @@ def extended_diagnostics(checker, s, D):
     for f, owners in opened.items():
         if len(owners) > 1: out.append(_diag(D, "TSAGDA055", f"opened projection {f} is ambiguous across {', '.join(owners)}", s, 1, severity="warning", confidence="medium"))
 
-    for def_name, line, body in _record_blocks(source):
-        sig = s.signatures.get(def_name)
-        if not sig: continue
-        target = _resolve_record(checker, s, sig.type_text)
-        if not target: continue
-        ass = _assignments(body); names = [n for n, _ in ass]
-        for n in names:
-            if n not in target.fields: out.append(_diag(D, "TSAGDA060", f"{n} is not a field of record {target.name}", s, line))
-        for n in set(names):
-            if names.count(n) > 1: out.append(_diag(D, "TSAGDA061", f"field {n} is assigned more than once", s, line))
-        missing = [n for n in target.fields if n not in names]
-        if missing: out.append(_diag(D, "TSAGDA062", f"record {target.name} is missing fields: {', '.join(missing)}", s, line))
-        for n, rhs in ass:
-            field = target.fields.get(n)
-            if not field: continue
-            lm = re.match(r"λ\s+(.+?)\s*→", re.sub(r"\s+", " ", rhs))
-            if lm:
-                got = len(lm.group(1).split()); want = _arity(field.type_text)
-                if want and got != want: out.append(_diag(D, "TSAGDA064", f"field {n} lambda has {got} binders; target field has {want} explicit arguments", s, line))
+    for record_expr in s.ast.record_expressions:
+        owner = record_expr.owner_function
+        if not owner:
+            continue
+        sig = s.ast.signatures.get(owner)
+        target_ref = _resolve_record_ast(checker, s, sig)
+        if target_ref is None:
+            continue
+        target_owner, target = target_ref
+        assignments = _assignment_map(record_expr)
+        names = [name for name, _ in assignments]
+        for name, assignment in assignments:
+            if name not in target.fields:
+                out.append(_diag(D, "TSAGDA060", f"{name} is not a field of record {target.name}", s, assignment.line))
+        for name in set(names):
+            if names.count(name) > 1:
+                duplicate = next(a for n, a in assignments if n == name)
+                out.append(_diag(D, "TSAGDA061", f"field {name} is assigned more than once", s, duplicate.line))
+        missing = [name for name in target.fields if name not in names]
+        if missing:
+            out.append(_diag(D, "TSAGDA062", f"record {target.name} is missing fields: {', '.join(missing)}", s, record_expr.line))
+        for name, assignment in assignments:
+            field = target.fields.get(name)
+            if field is None or field.type_node is None or assignment.expr_node is None:
+                continue
+            lambda_node = next((n for n in assignment.expr_node.named_children if n.type == "lambda"), None)
+            if lambda_node is None:
+                lambda_node = next((n for n in assignment.expr_node.named_children if n.type == "lambda_clause"), None)
+            if lambda_node is not None:
+                tokens = significant_tokens(s.ast.source_bytes, lambda_node)
+                arrows = [i for i, token in enumerate(tokens) if token.text in {"→", "->"}]
+                got = 0
+                if arrows:
+                    before = tokens[:arrows[0]]
+                    got = sum(1 for token in before if token.node_type in {"id", "bid"} and token.text not in {"λ"})
+                want = explicit_arity(shape_from_node(target_owner.ast.source_bytes, field.type_node))
+                if want and got != want:
+                    out.append(_diag(D, "TSAGDA064", f"field {name} lambda has {got} binders; target field has {want} explicit arguments", s, assignment.line))
 
     for dname, decl in data.items():
         for ctor in decl.constructors.values():
@@ -419,9 +479,13 @@ def extended_diagnostics(checker, s, D):
         if re.search(r"(?<![A-Za-z0-9_'])_(?![A-Za-z0-9_'])", sig.type_text):
             code = "TSAGDA173" if "≡" in sig.type_text else "TSAGDA170"
             out.append(_diag(D, code, f"signature {name} contains explicit underscore", s, sig.line))
-    for _, line, body in _record_blocks(source):
-        for fname, rhs in _assignments(body):
-            if rhs.strip() == "_": out.append(_diag(D, "TSAGDA172", f"record field {fname} is filled with raw underscore", s, line, severity="warning", confidence="medium"))
+    for record_expr in s.ast.record_expressions:
+        for assignment in record_expr.assignments:
+            if assignment.expr_node is None:
+                continue
+            tokens = significant_tokens(s.ast.source_bytes, assignment.expr_node)
+            if len(tokens) == 1 and tokens[0].text == "_":
+                out.append(_diag(D, "TSAGDA172", f"record field {assignment.name} is filled with raw underscore", s, assignment.line, severity="warning", confidence="medium"))
 
     # Repository graph checks: TSAGDA029 import cycles and TSAGDA030 module collisions.
     graph = checker.dependency_graph()
@@ -622,10 +686,13 @@ def extended_diagnostics(checker, s, D):
 
     # TSAGDA200/201/203/206/208: DASHI-specific structural policy.
     if critical:
-        for _, line, body in _record_blocks(source):
-            for fname, rhs in _assignments(body):
-                if rhs.strip() == "_":
-                    out.append(_diag(D, "TSAGDA201", f"proof-critical record field {fname} contains raw metavariable", s, line))
+        for record_expr in s.ast.record_expressions:
+            for assignment in record_expr.assignments:
+                if assignment.expr_node is None:
+                    continue
+                tokens = significant_tokens(s.ast.source_bytes, assignment.expr_node)
+                if len(tokens) == 1 and tokens[0].text == "_":
+                    out.append(_diag(D, "TSAGDA201", f"proof-critical record field {assignment.name} contains raw metavariable", s, assignment.line))
         for rname, rec in s.records.items():
             for fname, fi in rec.fields.items():
                 if re.search(r"(agreement|proof|witness|receipt)", fname, re.I) and _terminal(fi.type_text) == "Set":
@@ -735,39 +802,35 @@ def extended_diagnostics(checker, s, D):
                     if re.search(rf"(?<!\.)\b{re.escape(f)}\b(?!\s+{_IDENT})", sig.type_text):
                         out.append(_diag(D, "TSAGDA056", f"dependent projection {f} is used without an evident {rname} receiver", s, sig.line, severity="warning", confidence="medium"))
 
-    # TSAGDA063/065/066/067/068 and TSAGDA200: record target/value shape refinements.
-    record_ctor_owner = {}
-    for rname, rec in s.records.items():
-        block = lines[rec.line:rec.line + 12]
-        for x in block:
-            cm = re.match(rf"^\s+constructor\s+({_IDENT})", x)
-            if cm: record_ctor_owner[cm.group(1)] = rname
-    for def_name, line, body in _record_blocks(source):
-        sig = s.signatures.get(def_name)
-        if not sig: continue
-        target = _resolve_record(checker, s, sig.type_text)
-        if not target and _terminal(sig.type_text) in data:
-            out.append(_diag(D, "TSAGDA063", f"record expression is used where datatype {_terminal(sig.type_text)} is the declared result", s, line))
-        if not target: continue
-        for fname, rhs in _assignments(body):
+    # TSAGDA063/065/066/067/068 and TSAGDA200: AST-backed record refinements.
+    record_ctor_owner = {
+        record.constructor: name
+        for name, record in s.ast.records.items()
+        if record.constructor
+    }
+    for record_expr in s.ast.record_expressions:
+        owner = record_expr.owner_function
+        if not owner:
+            continue
+        sig = s.ast.signatures.get(owner)
+        target_ref = _resolve_record_ast(checker, s, sig)
+        sig_head = terminal_head(shape_from_node(s.ast.source_bytes, sig.type_node)) if sig and sig.type_node is not None else None
+        if target_ref is None:
+            if sig_head in data:
+                out.append(_diag(D, "TSAGDA063", f"record expression is used where datatype {sig_head} is the declared result", s, record_expr.line))
+            continue
+        target_owner, target = target_ref
+        for fname, assignment in _assignment_map(record_expr):
             field = target.fields.get(fname)
-            if not field: continue
-            if rhs == "Set" and _terminal(field.type_text) not in {"Set", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}:
-                out.append(_diag(D, "TSAGDA200", f"adapter field {fname} supplies Set where target expects witness/result {_terminal(field.type_text)}", s, line))
-            rm = re.match(rf"({_IDENT})\b", rhs)
-            if rm and rm.group(1) in record_ctor_owner and record_ctor_owner[rm.group(1)] != target.name:
-                out.append(_diag(D, "TSAGDA068", f"constructor {rm.group(1)} constructs {record_ctor_owner[rm.group(1)]}, not target record {target.name}", s, line))
-            pm = re.match(rf"({_IDENT})\s+({_IDENT})", rhs)
-            if pm:
-                proj, recv = pm.groups()
-                sig_b = re.search(rf"[({{]\s*{re.escape(recv)}\s*:\s*({_IDENT})", sig.type_text)
-                if sig_b and sig_b.group(1) in s.records and proj in s.records[sig_b.group(1)].fields:
-                    actual = s.records[sig_b.group(1)].fields[proj]
-                    et, at = _terminal(field.type_text), _terminal(actual.type_text)
-                    if et and at and et != at:
-                        code = "TSAGDA065" if et in {"Set","Set₁","Set₂","Setω","Prop","Prop₁"} or at in {"Set","Set₁","Set₂","Setω","Prop","Prop₁"} else "TSAGDA066"
-                        out.append(_diag(D, code, f"field {fname} expects {et}, source projection {proj} returns {at}", s, line))
-                        out.append(_diag(D, "TSAGDA067", f"source projection {proj} is structurally incompatible with target field {fname}", s, line))
+            if field is None or field.type_node is None or assignment.expr_node is None:
+                continue
+            field_head = terminal_head(shape_from_node(target_owner.ast.source_bytes, field.type_node))
+            tokens = significant_tokens(s.ast.source_bytes, assignment.expr_node)
+            if len(tokens) == 1 and tokens[0].text == "Set" and field_head not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}:
+                out.append(_diag(D, "TSAGDA200", f"adapter field {fname} supplies Set where target expects witness/result {field_head}", s, assignment.line))
+            ident = _single_identifier(s.ast.source_bytes, assignment.expr_node)
+            if ident in record_ctor_owner and record_ctor_owner[ident] != target.name:
+                out.append(_diag(D, "TSAGDA068", f"constructor {ident} constructs {record_ctor_owner[ident]}, not target record {target.name}", s, assignment.line))
 
     # TSAGDA070-079 shallow head checks on simple RHSs/applications.
     for name, cs in clauses.items():
@@ -826,17 +889,24 @@ def extended_diagnostics(checker, s, D):
 
     # TSAGDA071: known term supplied in a type/sort-valued record field.
     known_term_heads = set(clauses) | set(ctors)
-    for def_name, line, body in _record_blocks(source):
-        sig = s.signatures.get(def_name)
-        if not sig: continue
-        target = _resolve_record(checker, s, sig.type_text)
-        if not target: continue
-        for fname, rhs in _assignments(body):
+    for record_expr in s.ast.record_expressions:
+        owner = record_expr.owner_function
+        if not owner:
+            continue
+        target_ref = _resolve_record_ast(checker, s, s.ast.signatures.get(owner))
+        if target_ref is None:
+            continue
+        target_owner, target = target_ref
+        for fname, assignment in _assignment_map(record_expr):
             field = target.fields.get(fname)
-            if not field or _terminal(field.type_text) not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}: continue
-            rm = re.fullmatch(rf"({_IDENT})", rhs.strip())
-            if rm and rm.group(1) in known_term_heads and rm.group(1) not in data and rm.group(1) not in s.records:
-                out.append(_diag(D, "TSAGDA071", f"known term {rm.group(1)} is supplied where field {fname} expects a type/sort", s, line))
+            if field is None or field.type_node is None or assignment.expr_node is None:
+                continue
+            field_head = terminal_head(shape_from_node(target_owner.ast.source_bytes, field.type_node))
+            if field_head not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}:
+                continue
+            ident = _single_identifier(s.ast.source_bytes, assignment.expr_node)
+            if ident and ident in known_term_heads and ident not in data and ident not in s.records:
+                out.append(_diag(D, "TSAGDA071", f"known term {ident} is supplied where field {fname} expects a type/sort", s, assignment.line))
 
     # TSAGDA077: visible type-constructor parameter arity.
     type_params = {}
