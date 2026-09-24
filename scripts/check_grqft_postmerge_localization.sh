@@ -62,6 +62,7 @@ files=(
   DASHI/Physics/Foundations/CMP119GRQFTD1MaxCutExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotCrossNumeratorCandidateExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotD1SourceWeldExact.agda
+  DASHI/Physics/Foundations/CMP119TenActualSourceReadoutsExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
