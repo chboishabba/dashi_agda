@@ -348,11 +348,11 @@ heuristic families are emitted as warnings.
 ### Modules / imports / names
 
 - `TSAGDA020` imported repository module does not exist
-- `TSAGDA021` unknown qualified symbol on a known module alias
+- `TSAGDA021` qualified symbol not exported by the apparent module; requires `AGDA_SCOPE` for a hard conclusion
 - `TSAGDA022` malformed/unknown import alias use
-- `TSAGDA023` unknown symbol in `using (...)`
+- `TSAGDA023` apparent unknown symbol in `using (...)`; requires `AGDA_SCOPE`
 - `TSAGDA024` unknown symbol in `hiding (...)`
-- `TSAGDA025` unknown renaming source
+- `TSAGDA025` apparent unknown renaming source; requires `AGDA_SCOPE`
 - `TSAGDA026` open/renaming collision
 - `TSAGDA027` ambiguous unqualified exported name from multiple opens
 - `TSAGDA028` conflicting aliases for imports
