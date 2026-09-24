@@ -105,10 +105,9 @@ cookDecisionShannonWithPositiveBound
     satP formula below =
   trans
     (congruenceRoot
-      (sym
-        (Bridge.indexedAfterCookWithBound
-          formula
-          below)))
+      (Bridge.indexedAfterCookWithBound
+        formula
+        below))
     (cookDecisionShannonOnIndexed
       satP
       (Bridge.cookToIndexedWithBound
