@@ -1,9 +1,3 @@
-module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
-
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
-
 import DASHI.Cognition.PNF.SensibLawSpacyCompositionOnlySemanticConstitutionExact as Constitution
 import DASHI.Cognition.PNF.SensibLawSemanticStatusProductExact as Status
 import DASHI.Cognition.PNF.SensibLawSemanticStatusCrossPollinationExact as Cross
@@ -26,6 +20,14 @@ import DASHI.Cognition.PNF.SensibLawResolvedScopePlannerLiveExact as ResolvedSco
 import DASHI.Cognition.PNF.SensibLawPdfActiveRequirementPlannerLiveExact as PdfPlanner
 import DASHI.Cognition.PNF.SensibLawSemanticLiveVerticalEverything as Live
 import DASHI.Cognition.PNF.SensibLawUnifiedPNFIntakeReentrySpineExact as IntakeReentry
+import DASHI.Cognition.PNF.SensibLawPersistentStatementObservationEventSpineExact as PersistentTrace
+
+module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+
 
 data BidiCampaign : Set where
   attributionPropositionCampaign : BidiCampaign
