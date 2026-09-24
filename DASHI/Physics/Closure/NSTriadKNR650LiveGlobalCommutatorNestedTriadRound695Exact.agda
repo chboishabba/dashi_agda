@@ -21,7 +21,12 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ; _*_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact as R240
 import DASHI.Physics.Closure.NSTriadKNPhysicalTrajectoryRetainedGlobalFluxRound403Exact as R403
@@ -62,8 +67,12 @@ module LiveNested
     H = Dyn.Base.H (Dyn.forgetDynamics T)
 
     allModeTransverse :
-      (mode : _) →
-      _
+      (mode : Z3.FourierMode) →
+      Helical.Transverse
+        (Field30.physicalEmbedding physicalSystem)
+        mode
+        (Audit.velocity
+          (Field30.finiteSystem physicalSystem) mode)
     allModeTransverse mode =
       Dyn.Base.velocityTransverse
         (Dyn.forgetDynamics T) cutoff time mode
@@ -78,7 +87,7 @@ module LiveNested
     liveNestedNonzeroSum : ℚ
     liveNestedNonzeroSum =
       Nested.sumOutputNestedPairs
-        (DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.nonzeroCutoffModes cutoff)
+        (Canonical.nonzeroCutoffModes cutoff)
 
     livePairCommutatorNonzeroSum : ℚ
     livePairCommutatorNonzeroSum =
@@ -93,7 +102,7 @@ module LiveNested
       ≡ R694.four * livePairCommutatorNonzeroSum
     nestedIsFourPairCommutator =
       Nested.globalNestedPairsAreFourCommutatorPairs
-        (DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.nonzeroCutoffModes cutoff)
+        (Canonical.nonzeroCutoffModes cutoff)
 
     nestedIsFourCoherentCommutator :
       liveNestedNonzeroSum
