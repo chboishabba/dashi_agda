@@ -92,6 +92,7 @@ def _validate_c2_row(row: Any, *, label: str, errors: list[str]) -> None:
 
     for key in (
         "production_rate_2W",
+        "critical_energy_X",
         "critical_dissipation_rate",
         "r406_weighted_remainder",
         "strict_surplus_rate",
