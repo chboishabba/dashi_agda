@@ -35,6 +35,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PreferredOSGramFromExpectationExact 
 import DASHI.Physics.YangMills.BalabanClayT5SameFamilyContinuumRecoveryRound425Exact as R425
 import DASHI.Physics.YangMills.BalabanClayT5DiagonalCompactUniqueRound427Exact as R427
 import DASHI.Physics.YangMills.BalabanClayT5ClusterPointUniquenessRound430Exact as R430
+import DASHI.Physics.YangMills.BalabanClayT5SelectedDiagonalTightnessRound431Exact as R431
 
 record PreferredSameFamilyMeasureInputs
     (Measure Observable Scalar Schwinger : Set) : Set₂ where
@@ -67,17 +68,17 @@ record PreferredSameFamilyMeasureInputs
           (PreferredGram.expectationData gramInputs) cutoff)
 
     normalizedClosed : ∀ sequence target →
-      Limit.Converges (R430.convergence compactnessUniqueness) sequence target →
+      Limit.Converges (R431.convergence (R430.selectedTightness compactnessUniqueness)) sequence target →
       (∀ cutoff → Normalized (sequence cutoff)) →
       Normalized target
 
     positiveClosed : ∀ sequence target →
-      Limit.Converges (R430.convergence compactnessUniqueness) sequence target →
+      Limit.Converges (R431.convergence (R430.selectedTightness compactnessUniqueness)) sequence target →
       (∀ cutoff → Positive (sequence cutoff)) →
       Positive target
 
     gaugeInvariantClosed : ∀ sequence target →
-      Limit.Converges (R430.convergence compactnessUniqueness) sequence target →
+      Limit.Converges (R431.convergence (R430.selectedTightness compactnessUniqueness)) sequence target →
       (∀ cutoff → GaugeInvariant (sequence cutoff)) →
       GaugeInvariant target
 
@@ -124,7 +125,7 @@ selectedConvergence :
   Sequential.SequentialConvergence Measure
 selectedConvergence inputs = record
   { Sequential.SequentialConvergence.Converges =
-      Limit.Converges (R430.convergence (compactnessUniqueness inputs))
+      Limit.Converges (R431.convergence (R430.selectedTightness (compactnessUniqueness inputs)))
   }
 
 selectedCore :
@@ -265,7 +266,10 @@ round428MeasureConvergenceLevel : ProofLevel
 round428MeasureConvergenceLevel = machineChecked
 
 round428EveryLiteralSubsequenceTightLevel : ProofLevel
-round428EveryLiteralSubsequenceTightLevel = conditional
+round428EveryLiteralSubsequenceTightLevel = machineChecked
+
+round428SelectedDiagonalTightnessLevel : ProofLevel
+round428SelectedDiagonalTightnessLevel = conditional
 
 round428EveryExtractedClusterPointIsContinuumLevel : ProofLevel
 round428EveryExtractedClusterPointIsContinuumLevel = machineChecked
