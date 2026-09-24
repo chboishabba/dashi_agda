@@ -118,6 +118,53 @@ canonicalStatiBakerActivityEventBoundary =
     false false false
 
 ------------------------------------------------------------------------
+-- Operational carryover / interruption / unresolved state.
+--
+-- These are producer-observed work-state coordinates only.  They do not
+-- create an S29 pending item, a semantic unresolved coordinate, or user
+-- priority merely by existing.
+------------------------------------------------------------------------
+
+data OperationalOutstandingKind : Set where
+  carryover interruptedThread operationalUnresolved :
+    OperationalOutstandingKind
+
+record OperationalOutstandingState : Set where
+  constructor operational-outstanding-state
+  field
+    operationalStateRef : String
+    stateDate : String
+    subjectRef : String
+    label : String
+    provenanceRefs : List String
+    kind : OperationalOutstandingKind
+    producerObserved : Bool
+    producerObservedIsTrue : producerObserved ≡ true
+    createsReviewPending : Bool
+    createsReviewPendingIsFalse : createsReviewPending ≡ false
+    createsSemanticUnresolved : Bool
+    createsSemanticUnresolvedIsFalse :
+      createsSemanticUnresolved ≡ false
+    createsUserPriority : Bool
+    createsUserPriorityIsFalse : createsUserPriority ≡ false
+
+open OperationalOutstandingState public
+
+canonicalOperationalOutstandingState : OperationalOutstandingState
+canonicalOperationalOutstandingState =
+  operational-outstanding-state
+    "operational-state:example"
+    "2026-09-24"
+    "authority-follow:example"
+    "authority follow remained unresolved"
+    []
+    operationalUnresolved
+    true refl
+    false refl
+    false refl
+    false refl
+
+------------------------------------------------------------------------
 -- Golden distinctions.
 ------------------------------------------------------------------------
 
@@ -143,6 +190,9 @@ canonicalOperationalSemanticGoldenBoundary =
 -- Firewalls.
 ------------------------------------------------------------------------
 
+data OperationalUnresolvedIsReviewPending : Set where
+data OperationalUnresolvedIsSemanticUnresolved : Set where
+data OperationalUnresolvedIsUserPriority : Set where
 data OperationalEventIsWorldEvent : Set where
 data TaskCompletionCreatesTruth : Set where
 data SessionContinuityCreatesIdentity : Set where
@@ -183,3 +233,16 @@ statibakerTimeMayNotBeResegmentedDownstream ()
 operationalLinkDoesNotCreateSemanticIdentity :
   OperationalLinkCreatesSemanticIdentity → ⊥
 operationalLinkDoesNotCreateSemanticIdentity ()
+
+operationalUnresolvedDoesNotCreateReviewPending :
+  OperationalUnresolvedIsReviewPending → ⊥
+operationalUnresolvedDoesNotCreateReviewPending ()
+
+operationalUnresolvedDoesNotCreateSemanticUnresolved :
+  OperationalUnresolvedIsSemanticUnresolved → ⊥
+operationalUnresolvedDoesNotCreateSemanticUnresolved ()
+
+operationalUnresolvedDoesNotCreateUserPriority :
+  OperationalUnresolvedIsUserPriority → ⊥
+operationalUnresolvedDoesNotCreateUserPriority ()
+
