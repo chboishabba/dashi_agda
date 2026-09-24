@@ -448,3 +448,5 @@ import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarFixedOutputCarrierRound658Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact
