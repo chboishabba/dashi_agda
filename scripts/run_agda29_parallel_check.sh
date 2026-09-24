@@ -15,7 +15,7 @@ STATUS_DIR="${DASHI_STATUS_DIR:-${XDG_CACHE_HOME:-/home/c/.cache}/dashi-agda29/s
 mkdir -p "$STATUS_DIR"
 STATUS_FILE="$(mktemp "$STATUS_DIR/status_XXXXXX.txt")"
 
-if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && command -v tmux >/dev/null 2>&1; then
+if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && [ -t 0 ] && command -v tmux >/dev/null 2>&1; then
   rm -f "$STATUS_FILE"
   tmux kill-session -t "${SESSION_NAME}" 2>/dev/null || true
 
@@ -32,6 +32,8 @@ if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && command -v tmux >/d
               AGDA_RTS_STATS=\"${AGDA_RTS_STATS:-0}\" \
               AGDA_TARGETS_FILE=\"${AGDA_TARGETS_FILE:-}\" \
               DASHI_AGDA_RSS_LIMIT_MB=\"${DASHI_AGDA_RSS_LIMIT_MB}\" \
+              DASHI_SKIP_RSYNC=\"${DASHI_SKIP_RSYNC:-0}\" \
+              DASHI_SYNC_ONLY=\"${DASHI_SYNC_ONLY:-0}\" \
               \"$0\" ${@+\"$@\"}
       rc=\$?
       printf \"%s\\n\" \"\$rc\" > \"$STATUS_FILE\"
@@ -97,12 +99,45 @@ if [ -z "${XDG_CACHE_HOME:-}" ]; then
   mkdir -p "$XDG_CACHE_HOME"
 fi
 
+CLI_AGDA_ARGS=()
+RAW_TARGETS=()
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --)
+      shift
+      while [ "$#" -gt 0 ]; do
+        RAW_TARGETS+=("$1")
+        shift
+      done
+      break
+      ;;
+    -i|--include-path|-l|--library|--library-file|--compile-dir)
+      if [ "$#" -ge 2 ]; then
+        CLI_AGDA_ARGS+=("$1" "$2")
+        shift 2
+      else
+        CLI_AGDA_ARGS+=("$1")
+        shift
+      fi
+      ;;
+    -*)
+      CLI_AGDA_ARGS+=("$1")
+      shift
+      ;;
+    *)
+      RAW_TARGETS+=("$1")
+      shift
+      ;;
+  esac
+done
+
 if [ -n "${AGDA_TARGETS_FILE:-}" ] && [ -f "$AGDA_TARGETS_FILE" ]; then
   mapfile -t TARGETS < "$AGDA_TARGETS_FILE"
-elif [ "$#" -eq 0 ]; then
+elif [ "${#RAW_TARGETS[@]}" -eq 0 ]; then
   TARGETS=("DASHI/Everything.agda")
 else
-  TARGETS=("$@")
+  TARGETS=("${RAW_TARGETS[@]}")
 fi
 
 log_target_slug() {
@@ -219,15 +254,28 @@ fi
 # Keep the shadow tree path stable so Agda can reuse .agdai interfaces across
 # runs. Excluded receiver files, including .agdai caches, are protected because
 # we intentionally do not use --delete-excluded.
-rsync -a --delete --prune-empty-dirs \
-  --include='*/' \
-  --include='*.agda' \
-  --include='*.lagda' \
-  --include='*.lagda.md' \
-  --include='*.lagda.rst' \
-  --include='*.lagda.tex' \
-  --exclude='*' \
-  "$REPO_ROOT/" "$DASHI_WORK/"
+if [ "${DASHI_SKIP_RSYNC:-0}" = "1" ]; then
+  for target in "${TARGETS[@]}"; do
+    normalized="$target"
+    if [[ "$normalized" == "$REPO_ROOT/"* ]]; then
+      normalized="${normalized#$REPO_ROOT/}"
+    fi
+    if [ -f "$REPO_ROOT/$normalized" ]; then
+      mkdir -p "$DASHI_WORK/$(dirname "$normalized")"
+      cp -p "$REPO_ROOT/$normalized" "$DASHI_WORK/$normalized"
+    fi
+  done
+else
+  rsync -a --delete --prune-empty-dirs \
+    --include='*/' \
+    --include='*.agda' \
+    --include='*.lagda' \
+    --include='*.lagda.md' \
+    --include='*.lagda.rst' \
+    --include='*.lagda.tex' \
+    --exclude='*' \
+    "$REPO_ROOT/" "$DASHI_WORK/"
+fi
 
 if [ -n "$STD_LIB_RESOLVED_SRC" ]; then
   rsync -a --delete --exclude='*.agdai' "$STD_LIB_RESOLVED_SRC/" "$STDLIB_WORK/"
@@ -244,6 +292,23 @@ else
   STDLIB_INCLUDE="$STDLIB_WORK/src"
 fi
 chmod -R u+w "$STDLIB_WORK"
+
+if [ "${DASHI_SYNC_ONLY:-0}" = "1" ]; then
+  echo "Shadow tree synchronized: $DASHI_WORK"
+  exit 0
+fi
+
+NORMALIZED_TARGETS=()
+for target in "${TARGETS[@]}"; do
+  if [[ "$target" == "$REPO_ROOT/"* ]]; then
+    NORMALIZED_TARGETS+=("${target#$REPO_ROOT/}")
+  elif [[ "$target" == "$DASHI_WORK/"* ]]; then
+    NORMALIZED_TARGETS+=("${target#$DASHI_WORK/}")
+  else
+    NORMALIZED_TARGETS+=("$target")
+  fi
+done
+TARGETS=("${NORMALIZED_TARGETS[@]}")
 
 cd "$DASHI_WORK"
 mkdir -p "$(dirname "$AGDA_LOG_PATH")"
@@ -290,7 +355,8 @@ AGDA_RUN=("$AGDA_BIN" "${AGDA_RTS_ARGS[@]}" \
   "-j$JOBS" \
   -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -i "$STDLIB_INCLUDE" \
   -WnoUnsupportedIndexedMatch \
-  "${AGDA_PROFILE_ARGS[@]}")
+  "${AGDA_PROFILE_ARGS[@]}" \
+  "${CLI_AGDA_ARGS[@]}")
 
 if command -v stdbuf >/dev/null 2>&1; then
   AGDA_RUN=(stdbuf -oL -eL "${AGDA_RUN[@]}")

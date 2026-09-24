@@ -12,10 +12,14 @@ fi
 REFINE="${AGDA_PREFLIGHT_REFINE:-scope}"
 REPORT="${AGDA_PREFLIGHT_REPORT:-.cache/agda_preflight/report.json}"
 AGDA_REFINE_ARGS="${AGDA_PREFLIGHT_AGDA_ARGS:--i . -i DCHoTT-Agda -i cubical -l standard-library}"
-SCOPE_RUNNER="${AGDA_PREFLIGHT_SCOPE_RUNNER:-}"
-TYPECHECK_RUNNER="${AGDA_PREFLIGHT_TYPECHECK_RUNNER:-}"
+SCOPE_RUNNER="${AGDA_PREFLIGHT_SCOPE_RUNNER:-$ROOT/scripts/run_agda29_parallel_check.sh --only-scope-checking {file}}"
+TYPECHECK_RUNNER="${AGDA_PREFLIGHT_TYPECHECK_RUNNER:-$ROOT/scripts/run_agda29_parallel_check.sh {file}}"
 
 mkdir -p "$(dirname "$REPORT")"
+
+DASHI_NO_TMUX=1 DASHI_SYNC_ONLY=1 "$ROOT/scripts/run_agda29_parallel_check.sh"
+export DASHI_NO_TMUX=1
+export DASHI_SKIP_RSYNC=1
 
 ARGS=(
   --agda-preflight
@@ -23,7 +27,6 @@ ARGS=(
   --agda-root "$ROOT"
   --agda-compact
   --agda-report-json "$REPORT"
-  "--agda-extra-args=$AGDA_REFINE_ARGS"
 )
 
 case "$REFINE" in
@@ -50,7 +53,12 @@ case "$REFINE" in
     ;;
 esac
 
-exec python -m pytest \
+PYTHON="${PYTHON:-python}"
+if [ -x "$ROOT/.venv/bin/python" ] && [ "${PYTHON}" = "python" ]; then
+  PYTHON="$ROOT/.venv/bin/python"
+fi
+
+exec "$PYTHON" -m pytest \
   "${ARGS[@]}" \
   "$TARGET" \
   -vv \
