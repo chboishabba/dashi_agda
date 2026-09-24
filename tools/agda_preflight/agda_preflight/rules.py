@@ -50,13 +50,10 @@ def _diag(D, code, msg, s, line, col=1, hint=None, severity="error", confidence=
     return D(code, msg, s.path, line, col, hint, severity, confidence)
 
 
-def _resolve_record_ast(checker, summary, signature):
-    if signature is None or signature.type_node is None:
-        return None
-    imported = checker.imported_summaries(summary)
-    head = terminal_head(shape_from_node(summary.ast.source_bytes, signature.type_node))
+def _resolve_record_head(checker, summary, head):
     if not head:
         return None
+    imported = checker.imported_summaries(summary)
     if "." in head:
         alias, name = head.rsplit(".", 1)
         owner = imported.get(alias)
@@ -65,6 +62,22 @@ def _resolve_record_ast(checker, summary, signature):
     if head in summary.ast.records:
         return summary, summary.ast.records[head]
     return None
+
+
+def _resolve_record_ast(checker, summary, signature):
+    if signature is None or signature.type_node is None:
+        return None
+    head = terminal_head(shape_from_node(summary.ast.source_bytes, signature.type_node))
+    return _resolve_record_head(checker, summary, head)
+
+
+def _resolve_field_record_ast(checker, owner_summary, field):
+    if field is None or field.type_node is None:
+        return None
+    head = terminal_head(
+        shape_from_node(owner_summary.ast.source_bytes, field.type_node)
+    )
+    return _resolve_record_head(checker, owner_summary, head)
 
 
 def _assignment_map(record_expr):
@@ -239,12 +252,45 @@ def extended_diagnostics(checker, s, D):
     for f, owners in opened.items():
         if len(owners) > 1: out.append(_diag(D, "TSAGDA055", f"opened projection {f} is ambiguous across {', '.join(owners)}", s, 1, severity="warning", confidence="medium"))
 
-    for record_expr in s.ast.record_expressions:
+    record_expr_by_start = {
+        expr.node.start_byte: expr
+        for expr in s.ast.record_expressions
+    }
+    record_target_cache = {}
+
+    def resolve_record_expression_target(record_expr, visiting=None):
+        key = record_expr.node.start_byte
+        if key in record_target_cache:
+            return record_target_cache[key]
+
+        active = set() if visiting is None else set(visiting)
+        if key in active:
+            return None
+        active.add(key)
+
+        if record_expr.parent_field and record_expr.parent_record_start is not None:
+            parent_expr = record_expr_by_start.get(record_expr.parent_record_start)
+            if parent_expr is None:
+                return None
+            parent_target = resolve_record_expression_target(parent_expr, active)
+            if parent_target is None:
+                return None
+            parent_owner, parent_record = parent_target
+            field = parent_record.fields.get(record_expr.parent_field)
+            target = _resolve_field_record_ast(checker, parent_owner, field)
+            record_target_cache[key] = target
+            return target
+
         owner = record_expr.owner_function
         if not owner:
-            continue
+            return None
         sig = s.ast.signatures.get(owner)
-        target_ref = _resolve_record_ast(checker, s, sig)
+        target = _resolve_record_ast(checker, s, sig)
+        record_target_cache[key] = target
+        return target
+
+    for record_expr in s.ast.record_expressions:
+        target_ref = resolve_record_expression_target(record_expr)
         if target_ref is None:
             continue
         target_owner, target = target_ref
