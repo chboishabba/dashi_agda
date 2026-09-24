@@ -7,7 +7,7 @@ import sys
 
 from .checker import Checker, Diagnostic
 from .rules import api_snapshot, api_drift
-from .scope_backend import AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
+from .scope_backend import AgdaAutoRefineBackend, AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
 
 
 def _format(diag) -> str:
@@ -63,6 +63,16 @@ def main(argv=None) -> int:
         action="store_true",
         help="run full Agda checking to suppress false scope/type diagnostics",
     )
+    scope_group.add_argument(
+        "--agda-auto-refine",
+        nargs="?",
+        const="scope",
+        choices=("scope", "typecheck"),
+        help=(
+            "refine only modules that actually need stronger evidence; "
+            "optional value 'typecheck' also escalates typechecker-level findings"
+        ),
+    )
     parser.add_argument(
         "--agda-bin",
         default="agda",
@@ -77,6 +87,12 @@ def main(argv=None) -> int:
         scope_backend = AgdaScopeCheckBackend(args.agda_bin, cwd=args.root)
     elif args.agda_typecheck_oracle:
         scope_backend = AgdaTypecheckBackend(args.agda_bin, cwd=args.root)
+    elif args.agda_auto_refine:
+        scope_backend = AgdaAutoRefineBackend(
+            args.agda_bin,
+            cwd=args.root,
+            typecheck=args.agda_auto_refine == "typecheck",
+        )
     checker = Checker(args.root, scope_backend=scope_backend)
 
     if args.write_api_snapshot:
