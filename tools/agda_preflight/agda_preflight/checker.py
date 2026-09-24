@@ -77,17 +77,7 @@ def _language() -> Language:
 
 
 def _parser() -> Parser:
-    lang = _language()
-    try:
-        return Parser(lang)
-    except TypeError:
-        parser = Parser()
-        # py-tree-sitter 0.22 compatibility.
-        if hasattr(parser, "set_language"):
-            parser.set_language(lang)
-        else:
-            parser.language = lang
-        return parser
+    return Parser(_language())
 
 
 def walk(node) -> Iterator:
@@ -425,14 +415,20 @@ class Checker:
         local: Dict[str, RecordInfo],
         imported: Dict[str, Dict[str, RecordInfo]],
     ) -> Optional[RecordInfo]:
+        # A record result is the terminal codomain of a signature.  Resolve
+        # that head first, rather than returning the first record name that
+        # happens to occur in a binder earlier in the signature.
+        terminal = terminal_type_head(type_text)
+        if terminal is not None:
+            local_match = local.get(terminal)
+            if local_match is not None:
+                return local_match
+
         # Prefer qualified references.
         for alias, records in imported.items():
             for rname, rec in records.items():
                 if re.search(rf"\b{re.escape(alias)}\.{re.escape(rname)}\b", type_text):
                     return rec
-        for rname, rec in local.items():
-            if re.search(rf"(?<!\.)\b{re.escape(rname)}\b", type_text):
-                return rec
         return None
 
     def _record_shape_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:

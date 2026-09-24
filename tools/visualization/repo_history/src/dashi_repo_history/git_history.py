@@ -227,13 +227,11 @@ def _episode_context_commits(
 ) -> tuple[list[CommitRecord], list]:
     """Close selected merge commits over their actual fork-to-parent paths."""
 
-    all_episodes = derive_branch_episodes(all_commits)
     selected_ids = {commit.commit for commit in selected}
-    relevant = [
-        episode
-        for episode in all_episodes
-        if episode.merge_commit in selected_ids
-    ]
+    relevant = derive_branch_episodes(
+        all_commits,
+        merge_commits=selected_ids,
+    )
 
     context_ids = set(selected_ids)
     for episode in relevant:
@@ -556,13 +554,11 @@ class HistoryExtractor:
             stride=stride,
         )
 
-        all_episodes = derive_branch_episodes(all_commits)
         selected_ids = {commit.commit for commit in commits}
-        branch_episodes = [
-            episode
-            for episode in all_episodes
-            if episode.merge_commit in selected_ids
-        ]
+        branch_episodes = derive_branch_episodes(
+            all_commits,
+            merge_commits=selected_ids,
+        )
 
         if episode_context:
             commits, branch_episodes = _episode_context_commits(

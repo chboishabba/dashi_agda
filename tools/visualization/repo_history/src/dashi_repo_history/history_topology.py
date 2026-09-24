@@ -64,7 +64,16 @@ def _shortest_parent_path(
 
 def derive_branch_episodes(
     commits: list[CommitRecord],
+    *,
+    merge_commits: set[str] | None = None,
 ) -> list[BranchEpisode]:
+    """Recover branch episodes, optionally only for named merge commits.
+
+    ``commits`` must still contain the complete DAG needed to trace each
+    requested merge's parents back to its fork base.  Limiting the merge set is
+    important for timeline windows: a short recent window should not calculate
+    ancestry paths for every historical merge in the repository.
+    """
     parents = {
         commit.commit: commit.parents
         for commit in commits
@@ -73,6 +82,8 @@ def derive_branch_episodes(
     episodes: list[BranchEpisode] = []
 
     for commit in commits:
+        if merge_commits is not None and commit.commit not in merge_commits:
+            continue
         merge_parents = [
             parent
             for parent in commit.parents
