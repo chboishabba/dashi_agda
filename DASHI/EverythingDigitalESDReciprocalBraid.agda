@@ -195,6 +195,11 @@ import DASHI.Interop.DigitalESD.ScholarlyFullTextInteropExecutionExact
 import DASHI.Interop.DigitalESD.ScholarlyFullTextInteropExecutionRegression
 import DASHI.Education.DigitalESDDocumentTextMaterialisationExact
 import DASHI.Education.DigitalESDDocumentTextMaterialisationRegression
+import DASHI.Education.DigitalESDStudyParseExecutionExact
+import DASHI.Education.DigitalESDStudyParseExecutionRegression
+import DASHI.Education.DigitalESDFirstRetainedStudyParseExact
+import DASHI.Education.DigitalESDFirstRetainedStudyParseRegression
+
 
 
 module DASHI.EverythingDigitalESDReciprocalBraid where
