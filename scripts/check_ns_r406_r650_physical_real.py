@@ -119,6 +119,7 @@ def _validate_c2_row(row: Any, *, label: str, errors: list[str]) -> None:
                 "maximum_upper_split_residual",
                 "maximum_remote_spectral_cross",
                 "maximum_cross_split_residual",
+                "maximum_collar_refinement_residual",
             ):
                 if not _finite(packet_split.get(key)):
                     errors.append(f"{label}: packet_split.{key} must be finite")
@@ -130,6 +131,16 @@ def _validate_c2_row(row: Any, *, label: str, errors: list[str]) -> None:
             if not isinstance(packet_split.get("full_cross_below_collar_violation_count"), int):
                 errors.append(
                     f"{label}: packet_split.full_cross_below_collar_violation_count "
+                    "must be integer"
+                )
+            if not isinstance(packet_split.get("good_collar_spectral_cross_violation_count"), int):
+                errors.append(
+                    f"{label}: packet_split.good_collar_spectral_cross_violation_count "
+                    "must be integer"
+                )
+            if not isinstance(packet_split.get("full_cross_below_bad_collar_violation_count"), int):
+                errors.append(
+                    f"{label}: packet_split.full_cross_below_bad_collar_violation_count "
                     "must be integer"
                 )
             if packet_split.get("authority") != (
