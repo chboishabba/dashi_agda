@@ -67,7 +67,7 @@ stressWeldResidualAt :
   ∀ {U : Weld.UnifiedCandidate} →
   SharedStressResidualProbe U →
   Weld.Candidate U →
-  SharedStressResidualProbe.Residual
+  SharedStressResidualProbe.Residual probe
 stressWeldResidualAt {U} probe candidate =
   residual probe
     (grSharedStressAt U candidate)
