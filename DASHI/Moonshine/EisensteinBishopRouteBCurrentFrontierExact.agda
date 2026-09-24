@@ -132,6 +132,30 @@ transcendentalSemanticLeafStillOpenIsFalse :
   ≡ false
 transcendentalSemanticLeafStillOpenIsFalse = refl
 
+leanReplaySyntaxProbeSourceOwnedIsTrue :
+  leanReplaySyntaxProbeSourceOwned
+    canonicalBishopRouteBCurrentFrontier
+  ≡ true
+leanReplaySyntaxProbeSourceOwnedIsTrue = refl
+
+leanRecursiveReplayClosureGeneratorSourceOwnedIsTrue :
+  leanRecursiveReplayClosureGeneratorSourceOwned
+    canonicalBishopRouteBCurrentFrontier
+  ≡ true
+leanRecursiveReplayClosureGeneratorSourceOwnedIsTrue = refl
+
+leanReplayKernelElaborationWorkflowStepOwnedIsTrue :
+  leanReplayKernelElaborationWorkflowStepOwned
+    canonicalBishopRouteBCurrentFrontier
+  ≡ true
+leanReplayKernelElaborationWorkflowStepOwnedIsTrue = refl
+
+agdaFocusedKernelWorkflowSourceOwnedIsTrue :
+  agdaFocusedKernelWorkflowSourceOwned
+    canonicalBishopRouteBCurrentFrontier
+  ≡ true
+agdaFocusedKernelWorkflowSourceOwnedIsTrue = refl
+
 crossProverReplayProvenancePaidIsFalse :
   crossProverReplayProvenancePaid
     canonicalBishopRouteBCurrentFrontier
