@@ -25,7 +25,9 @@
     "replacementRequired": true
   },
   "sameCandidateGRRecovery": {
-    "status": "concrete_instance_missing"
+    "status": "analytic_realization_missing",
+    "firstMissing": "missingDiscreteToSmoothCurvatureConvergence",
+    "weakFieldFirstMissing": "missingRadialValuation"
   },
   "sameCandidateQFTRecovery": {
     "status": "concrete_instance_missing"
@@ -34,7 +36,15 @@
     "status": "concrete_instance_missing"
   },
   "physicalUnitCalibration": {
-    "status": "external_information_required"
+    "status": "local_adapter_present_external_acceptance_required",
+    "localCoverage": [
+      "physicalUnitCarrier",
+      "physicalDimensionVector",
+      "natToUnitCalibrationMap",
+      "calibratedQuotientScaleMap",
+      "factorization",
+      "dimensionalPreservation"
+    ]
   },
   "empiricalGRQFTValidation": {
     "status": "external_information_required"

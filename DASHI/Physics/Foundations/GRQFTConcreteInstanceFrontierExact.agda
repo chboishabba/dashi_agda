@@ -14,7 +14,7 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 
 data GRQFTConcreteInstanceLeaf : Set where
-  attachLiteralRound131YMToRecoveredQFT :
+  attachPinnedLiteralYMToRecoveredQFT :
     GRQFTConcreteInstanceLeaf
   attachLiteralNonflatGRToRecoveredGR :
     GRQFTConcreteInstanceLeaf
@@ -32,7 +32,7 @@ data GRQFTConcreteInstanceLeaf : Set where
 canonicalConcreteInstanceLeaves :
   List GRQFTConcreteInstanceLeaf
 canonicalConcreteInstanceLeaves =
-  attachLiteralRound131YMToRecoveredQFT
+  attachPinnedLiteralYMToRecoveredQFT
   ∷ attachLiteralNonflatGRToRecoveredGR
   ∷ instantiateCommonEinsteinMetricVariation
   ∷ instantiateCommonBalabanAllSectorProducer
@@ -74,4 +74,4 @@ canonicalGRQFTConcreteInstanceFrontier =
     false refl
     false refl
     canonicalConcreteInstanceLeaves
-    "All currently identified transport/normalization debt is paid. Remaining local GR/QFT work is same-object and shared-metric concrete instantiation plus replacement of the numerically rejected W4 calibration candidate."
+    "Pinned YM stress is definitionally literal YM stress; one pinned-literal=recovered-QFT seam transports it to the selected target. Remaining local work is that same-object attachment, GR analytic realization, total-sector aggregation/shared stress, and replacement of the rejected W4 calibration candidate."

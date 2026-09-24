@@ -341,6 +341,13 @@ import DASHI.Physics.Closure.NSTriadKNLiteralInfinityShellBernsteinPaymentExact
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalDeepFarLowLiteralInfinityShellPaymentExact
 import DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact
 import DASHI.Physics.Closure.NSClayFacingATwoPhysicalSeamCompilerExact
+import DASHI.Physics.Closure.W4CalibrationFailureMechanismExact
+import DASHI.Physics.Closure.GRQFTSIPhysicalCalibrationBridgeExact
+import DASHI.Physics.Closure.EinsteinPhysicalCouplingCalibrationExact
+import DASHI.Physics.Closure.W4IndependentPhysicalPredictionRequestExact
+import DASHI.Physics.Closure.EinsteinFiniteToPhysicalCalibrationCompilerExact
+import DASHI.Physics.Closure.EinsteinFiniteToPhysicalCalibrationCompilerValidation
+
 
 
 module DASHI.Physics.Closure.Everything where

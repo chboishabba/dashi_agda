@@ -106,6 +106,11 @@ import DASHI.Physics.Foundations.SmithChartComplexReflectionExact
 import DASHI.Physics.Foundations.SmithChartHexPhaseObserverExact
 import DASHI.Physics.Foundations.SmithChartMobiusMatrixExact
 import DASHI.Physics.Foundations.ResonantHumanPoweredFlightEverything
+import DASHI.Physics.Foundations.GRLiteralRecoveryRealizationFrontierExact
+import DASHI.Physics.Foundations.PinnedYangMillsRecoveredQFTAttachmentExact
+import DASHI.Physics.Foundations.PinnedYMGRQFTStressMaxCutExact
+import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact
+
 
 module DASHI.Physics.Foundations.Everything where
 
