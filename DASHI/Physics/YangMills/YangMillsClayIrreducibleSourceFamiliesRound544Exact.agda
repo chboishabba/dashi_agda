@@ -8,7 +8,7 @@ module DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound544Exa
 --
 -- Every historical constructor/equality/opaque-endpoint debt has already been
 -- compiled away on the preferred source-first + represented route.  The
--- remaining work is organized into FIFTEEN proof-bearing source families.
+-- remaining work is organized into FOURTEEN proof-bearing source families.
 --
 -- This is a scheduling quotient, NOT a claim that each family is one atomic
 -- lemma.  Each family keeps its internal logical subclaims visible through the
@@ -32,7 +32,6 @@ import DASHI.Physics.YangMills.YangMillsConcreteT1SemanticsRound516Exact as T1
 import DASHI.Physics.YangMills.YangMillsSourceFirstFiniteMeasureFromDensityRound525Exact as Density
 import DASHI.Physics.YangMills.YangMillsWilsonLocalObservableFromStructuralRound530Exact as C0
 import DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact as C
-import DASHI.Physics.YangMills.YangMillsCylinderEventBooleanAlgebraRound539Exact as EventAlgebra
 
 data SourceFamily : Set where
   a1CurrentStepVariation : SourceFamily
@@ -49,7 +48,6 @@ data SourceFamily : Set where
   c2PhysicalRemainderTail : SourceFamily
   c3AFRecurrence : SourceFamily
   c4DensityAnchoredStress : SourceFamily
-  cylinderEventBooleanRealization : SourceFamily
 
 familyLevel : SourceFamily → ProofLevel
 familyLevel a1CurrentStepVariation =
@@ -80,17 +78,19 @@ familyLevel c3AFRecurrence =
   C.c3OneStepAFRecurrenceIdentificationLevel
 familyLevel c4DensityAnchoredStress =
   C.c4DensityAnchoredStressLaneLevel
-familyLevel cylinderEventBooleanRealization =
-  EventAlgebra.literalRound539CylinderEventBooleanAlgebraLevel
 
 ------------------------------------------------------------------------
 -- Internal subcuts that MUST remain visible.
 ------------------------------------------------------------------------
 
--- A3 representation subclaims.
+-- A3 representation subclaims, including the event Boolean algebra.
 a3PositiveEventSemanticsLevel : ProofLevel
 a3PositiveEventSemanticsLevel =
   A3.literalRound535CylinderEventIndicatorSemanticsLevel
+
+a3EventBooleanAlgebraLevel : ProofLevel
+a3EventBooleanAlgebraLevel =
+  A3.literalRound535CylinderEventBooleanAlgebraLevel
 
 a3ProjectiveConsistencyLevel : ProofLevel
 a3ProjectiveConsistencyLevel =
@@ -124,7 +124,7 @@ wextConnectingWeightTailLevel =
 ------------------------------------------------------------------------
 
 preferredSourceFamilyCount : Nat
-preferredSourceFamilyCount = 15
+preferredSourceFamilyCount = 14
 
 opaqueEndpointPredicatesRemaining : Bool
 opaqueEndpointPredicatesRemaining = false
