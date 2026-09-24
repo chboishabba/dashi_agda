@@ -39,11 +39,32 @@ import DASHI.Analysis.RiemannG2BaselineExcessR2TargetExact as R2Baseline
 import DASHI.Analysis.RiemannG2DisplacementAdaptiveFarShellLeanDonorExact as R2FarAdaptive
 import DASHI.Analysis.RiemannG2AdaptiveCutoffCrossingCompatibilityLeanDonorExact as R2CutoffCompat
 import DASHI.Analysis.RiemannG2AdaptiveBaselineExcessAcquisitionExact as R2Adaptive
+import DASHI.Analysis.RiemannG2ProjectiveJointComplementQuadraticLeanDonorExact as R2Projective
+import DASHI.Analysis.RiemannG2FinalEvenConeNearFarLeanDonorExact as R2FinalNearFar
+import DASHI.Analysis.RiemannG2CenteredGammaQuadraticLeanDonorExact as R2CenteredGamma
+import DASHI.Analysis.RiemannG2SignedCenteredLiteralComplementLeanDonorExact as R2SignedCentered
+import DASHI.Analysis.RiemannG2FinalLiteralComplementCenteredExactLeanDonor as R2CenteredExact
+import DASHI.Analysis.RiemannG2QuadraticMarginUniformityNoGoLeanDonor as R2UniformNoGo
+import DASHI.Analysis.RiemannG2CanonicalRadiusZeroPoleSignLeanDonorExact as R2PoleSign
+import DASHI.Analysis.RiemannG2CenteredComplementSignBoundaryLeanDonorExact as R2SignBoundary
+import DASHI.Analysis.RiemannG2CenteredNearCoreSignLeanDonorExact as R2NearSign
+import DASHI.Analysis.RiemannG2CenteredOffExplicitHighLeanDonorExact as R2OffHigh
+import DASHI.Analysis.RiemannG2CenteredComplementCanonicalHighLeanDonorExact as R2CenteredHigh
+import DASHI.Analysis.RiemannG2GammaPoleCancellationRatioTransferLeanDonorExact as R2GammaRatio
+import DASHI.Analysis.RiemannG2GammaIntegratedGapAndCutoffCompatibilityLeanDonorExact as R2GammaIntegrated
+import DASHI.Analysis.RiemannG2QuantitativeScaledTaperLeanDonorExact as R2QuantTaper
+import DASHI.Analysis.RiemannG2ProjectiveCenteredGaugeBridgeLeanDonorExact as R2ProjectiveCentered
+import DASHI.Analysis.RiemannG2ProjectiveTwoRadiusNormalizedLeanDonorExact as R2ProjectiveTwoRadius
+import DASHI.Analysis.RiemannG2ProjectiveOffNormalizedAtomicCarrierLeanDonorExact as R2ProjectiveAtomic
+import DASHI.Analysis.RiemannG2NormalizedProjectiveOffAtomicMeasureLeanDonorExact as R2ProjectiveCombined
+import DASHI.Analysis.RiemannG2ProjectiveBaseProfileQuotientLeanDonorExact as R2ProjectiveBase
 import DASHI.Analysis.RiemannPlattTrudgianCanonicalLowRegionExact as Low
 import DASHI.Analysis.RiemannG2ConstructiveNegativeRHCompletionExact as Negative
 import DASHI.Analysis.RiemannG2ClayTerminalOneLeafCutExact as Clay
 import DASHI.Analysis.RiemannG2ExistingScalarDonorInventoryExact as Donor
 import DASHI.Analysis.RiemannG2CutoffGrowthBidiExact as Growth
+
+import DASHI.Analysis.RiemannG2NormalizedCenteredOffShellLeanDonorExact as R2NormShell
 
 ------------------------------------------------------------------------
 -- CURRENT DIRECT FRONTIER
@@ -481,6 +502,201 @@ remainingGammaLeafIsSharpSameTaperRepair :
     R2Adaptive.canonicalAdaptiveBaselineExcessBoundary ≡ true
 remainingGammaLeafIsSharpSameTaperRepair = refl
 
+projectiveJointComplementQuadraticDonorSourceWritten :
+  R2Projective.ProjectiveJointQuadraticBoundary.jointProjectiveQuadraticCompositionSourceWritten
+    R2Projective.canonicalProjectiveJointQuadraticBoundary ≡ true
+projectiveJointComplementQuadraticDonorSourceWritten = refl
+
+projectiveJointDonorNeedsFullResponseAndBalanceBridge :
+  R2Projective.ProjectiveJointQuadraticBoundary.explicitResponseAndBalanceTransportRequiredForFinalReuse
+    R2Projective.canonicalProjectiveJointQuadraticBoundary ≡ true
+projectiveJointDonorNeedsFullResponseAndBalanceBridge = refl
+
+projectiveTaperEqualityAloneIsInsufficient :
+  R2Projective.ProjectiveJointQuadraticBoundary.taperEqualityAloneSufficesForFinalReuse
+    R2Projective.canonicalProjectiveJointQuadraticBoundary ≡ false
+projectiveTaperEqualityAloneIsInsufficient = refl
+
+projectiveJointDonorDoesNotAlreadyPayFinalR2 :
+  R2Projective.ProjectiveJointQuadraticBoundary.jointDonorAlreadyPaysFinalR2
+    R2Projective.canonicalProjectiveJointQuadraticBoundary ≡ false
+projectiveJointDonorDoesNotAlreadyPayFinalR2 = refl
+
+finalEvenConeNearFarSplitSourceWritten :
+  R2FinalNearFar.FinalEvenConeNearFarDonorBoundary.theoremSourceWritten
+    R2FinalNearFar.canonicalFinalEvenConeNearFarDonorBoundary ≡ true
+finalEvenConeNearFarSplitSourceWritten = refl
+
+finalEvenConeNearFarUsesFinalConsumer :
+  R2FinalNearFar.FinalEvenConeNearFarDonorBoundary.finalUniversalEvenConeConsumerUsed
+    R2FinalNearFar.canonicalFinalEvenConeNearFarDonorBoundary ≡ true
+finalEvenConeNearFarUsesFinalConsumer = refl
+
+finalNearCoreRemainsSigned :
+  R2FinalNearFar.FinalEvenConeNearFarDonorBoundary.finiteNearCoreRemainsSigned
+    R2FinalNearFar.canonicalFinalEvenConeNearFarDonorBoundary ≡ true
+finalNearCoreRemainsSigned = refl
+
+finalNearFarDoesNotYetPayR1 :
+  R2FinalNearFar.FinalEvenConeNearFarDonorBoundary.exactR1NearObserverEqualityPaid
+    R2FinalNearFar.canonicalFinalEvenConeNearFarDonorBoundary ≡ false
+finalNearFarDoesNotYetPayR1 = refl
+
+centeredGammaStripQuadraticSourceWritten :
+  R2CenteredGamma.CenteredGammaQuadraticDonorBoundary.centeredStripConstantQuadraticSourceWritten
+    R2CenteredGamma.canonicalCenteredGammaQuadraticDonorBoundary ≡ true
+centeredGammaStripQuadraticSourceWritten = refl
+
+centeredFinalComplementQuadraticSourceWritten :
+  R2CenteredGamma.CenteredGammaQuadraticDonorBoundary.finalJointOffGammaCorrectionQuadraticSourceWritten
+    R2CenteredGamma.canonicalCenteredGammaQuadraticDonorBoundary ≡ true
+centeredFinalComplementQuadraticSourceWritten = refl
+
+rawGammaSecondDerivativePenaltyNotIntrinsicToCenteredCorrection :
+  R2CenteredGamma.CenteredGammaQuadraticDonorBoundary.rawShrinkingSupportSecondDerivativePenaltyIntrinsicToCorrection
+    R2CenteredGamma.canonicalCenteredGammaQuadraticDonorBoundary ≡ false
+rawGammaSecondDerivativePenaltyNotIntrinsicToCenteredCorrection = refl
+
+radiusZeroJointBaselineStillOpen :
+  R2CenteredGamma.CenteredGammaQuadraticDonorBoundary.radiusZeroJointBaselineStillRequiresIdentification
+    R2CenteredGamma.canonicalCenteredGammaQuadraticDonorBoundary ≡ true
+radiusZeroJointBaselineStillOpen = refl
+
+finalAbsoluteComplementBudgetReducedToRadiusZeroPlusQuadraticExcess :
+  R2CenteredGamma.CenteredGammaQuadraticDonorBoundary.finalAbsoluteBudgetReducedToRadiusZeroPlusQuadraticExcess
+    R2CenteredGamma.canonicalCenteredGammaQuadraticDonorBoundary ≡ true
+finalAbsoluteComplementBudgetReducedToRadiusZeroPlusQuadraticExcess = refl
+
+radiusZeroAbsoluteComplementBudgetIsSingleExplicitSeam :
+  R2CenteredGamma.CenteredGammaQuadraticDonorBoundary.radiusZeroAbsoluteBudgetIsNowExplicitSingleSeam
+    R2CenteredGamma.canonicalCenteredGammaQuadraticDonorBoundary ≡ true
+radiusZeroAbsoluteComplementBudgetIsSingleExplicitSeam = refl
+
+literalSignedComplementCenteredQuadraticSourceWritten :
+  R2SignedCentered.SignedCenteredLiteralComplementBoundary.literalFinalComplementDifferenceQuadraticSourceWritten
+    R2SignedCentered.canonicalSignedCenteredLiteralComplementBoundary ≡ true
+literalSignedComplementCenteredQuadraticSourceWritten = refl
+
+literalSignedComplementOneSidedUpperSourceWritten :
+  R2SignedCentered.SignedCenteredLiteralComplementBoundary.literalFinalComplementOneSidedUpperSourceWritten
+    R2SignedCentered.canonicalSignedCenteredLiteralComplementBoundary ≡ true
+literalSignedComplementOneSidedUpperSourceWritten = refl
+
+absoluteBaselineRouteIsNotCanonicalAfterSignedAudit :
+  R2SignedCentered.SignedCenteredLiteralComplementBoundary.absoluteBaselineRouteCanonical
+    R2SignedCentered.canonicalSignedCenteredLiteralComplementBoundary ≡ false
+absoluteBaselineRouteIsNotCanonicalAfterSignedAudit = refl
+
+radiusZeroPoleIsNotKilledAutomatically :
+  R2SignedCentered.SignedCenteredLiteralComplementBoundary.radiusZeroPoleChannelAutomaticallyKilled
+    R2SignedCentered.canonicalSignedCenteredLiteralComplementBoundary ≡ false
+radiusZeroPoleIsNotKilledAutomatically = refl
+
+pinnedComplementDoesNotDirectlyPayRadiusZeroBaseline :
+  R2SignedCentered.SignedCenteredLiteralComplementBoundary.complementChannelsPinnedDirectlyProvesRadiusZeroBaseline
+    R2SignedCentered.canonicalSignedCenteredLiteralComplementBoundary ≡ false
+pinnedComplementDoesNotDirectlyPayRadiusZeroBaseline = refl
+
+signedBaselineIdentificationStillOpen :
+  R2SignedCentered.SignedCenteredLiteralComplementBoundary.signedBaselineIdentificationStillRequiredForBranchA
+    R2SignedCentered.canonicalSignedCenteredLiteralComplementBoundary ≡ true
+signedBaselineIdentificationStillOpen = refl
+
+adaptiveNearMayBeRepresentationDebt :
+  R2SignedCentered.SignedCenteredLiteralComplementBoundary.adaptiveNearMayRemainRepresentationTransportDebt
+    R2SignedCentered.canonicalSignedCenteredLiteralComplementBoundary ≡ true
+adaptiveNearMayBeRepresentationDebt = refl
+
+exactLiteralComplementCenteringSourceWritten :
+  R2CenteredExact.FinalLiteralComplementCenteredExactBoundary.exactCenteredIdentitySourceWritten
+    R2CenteredExact.canonicalFinalLiteralComplementCenteredExactBoundary ≡ true
+exactLiteralComplementCenteringSourceWritten = refl
+
+centeredSignStillRequired :
+  R2CenteredExact.FinalLiteralComplementCenteredExactBoundary.centeredSignOrExactCancellationStillRequired
+    R2CenteredExact.canonicalFinalLiteralComplementCenteredExactBoundary ≡ true
+centeredSignStillRequired = refl
+
+positiveEnvelopeAloneNotPrizeFacingClosure :
+  R2CenteredExact.FinalLiteralComplementCenteredExactBoundary.positiveEnvelopeAloneIsPrizeFacingClosure
+    R2CenteredExact.canonicalFinalLiteralComplementCenteredExactBoundary ≡ false
+positiveEnvelopeAloneNotPrizeFacingClosure = refl
+
+fixedPositiveErrorCannotFitUniformASquaredMargin :
+  R2UniformNoGo.QuadraticMarginUniformityNoGoBoundary.fixedPositiveErrorCannotFitUniformQuadraticMarginSourceWritten
+    R2UniformNoGo.canonicalQuadraticMarginUniformityNoGoBoundary ≡ true
+fixedPositiveErrorCannotFitUniformASquaredMargin = refl
+
+positiveAIndependentEnvelopeCannotCloseUniformR2 :
+  R2UniformNoGo.QuadraticMarginUniformityNoGoBoundary.positiveAIndependentEnvelopeCanCloseUniformR2
+    R2UniformNoGo.canonicalQuadraticMarginUniformityNoGoBoundary ≡ false
+positiveAIndependentEnvelopeCannotCloseUniformR2 = refl
+
+canonicalRadiusZeroPoleSignSourceWritten :
+  R2PoleSign.CanonicalRadiusZeroPoleSignBoundary.radiusZeroPoleResponsePositive
+    R2PoleSign.canonicalRadiusZeroPoleSignBoundary ≡ true
+canonicalRadiusZeroPoleSignSourceWritten = refl
+
+canonicalRadiusZeroFinalPoleCorrectionNegative :
+  R2PoleSign.CanonicalRadiusZeroPoleSignBoundary.radiusZeroFinalPoleCorrectionNegative
+    R2PoleSign.canonicalRadiusZeroPoleSignBoundary ≡ true
+canonicalRadiusZeroFinalPoleCorrectionNegative = refl
+
+poleSignDoesNotUseFinalBalance :
+  R2PoleSign.CanonicalRadiusZeroPoleSignBoundary.usesFinalBalanceToDerivePoleSign
+    R2PoleSign.canonicalRadiusZeroPoleSignBoundary ≡ false
+poleSignDoesNotUseFinalBalance = refl
+
+pointwiseTaperSignDoesNotFixOffPairSign :
+  R2SignBoundary.CenteredComplementSignBoundary.pointwiseOffPairSignFollowsFromTaperSign
+    R2SignBoundary.canonicalCenteredComplementSignBoundary ≡ false
+pointwiseTaperSignDoesNotFixOffPairSign = refl
+
+centeredSignIsStillGlobalAnalysis :
+  R2SignBoundary.CenteredComplementSignBoundary.centeredComplementSignStillGlobalAnalyticTheorem
+    R2SignBoundary.canonicalCenteredComplementSignBoundary ≡ true
+centeredSignIsStillGlobalAnalysis = refl
+
+centeredFiniteNearCoreNonpositiveSourceWritten :
+  R2NearSign.CenteredNearCoreSignBoundary.finalFiniteNearCoreNonpositiveSourceWritten
+    R2NearSign.canonicalCenteredNearCoreSignBoundary ≡ true
+centeredFiniteNearCoreNonpositiveSourceWritten = refl
+
+centeredOffReducedToFarRemainderSourceWritten :
+  R2NearSign.CenteredNearCoreSignBoundary.centeredOffReducedToFarRemainderSourceWritten
+    R2NearSign.canonicalCenteredNearCoreSignBoundary ≡ true
+centeredOffReducedToFarRemainderSourceWritten = refl
+
+independentNearCancellationNoLongerRequiredInsideWindow :
+  R2NearSign.CenteredNearCoreSignBoundary.independentNearCancellationEstimateStillRequiredInsideWindow
+    R2NearSign.canonicalCenteredNearCoreSignBoundary ≡ false
+independentNearCancellationNoLongerRequiredInsideWindow = refl
+
+explicitCenteredCurvatureSourceWritten :
+  R2OffHigh.CenteredOffExplicitHighBoundary.explicitCenteredCurvatureSourceWritten
+    R2OffHigh.canonicalCenteredOffExplicitHighBoundary ≡ true
+explicitCenteredCurvatureSourceWritten = refl
+
+naturalSignedWindowCutoffSourceWritten :
+  R2OffHigh.CenteredOffExplicitHighBoundary.naturalSignedWindowCutoffSourceWritten
+    R2OffHigh.canonicalCenteredOffExplicitHighBoundary ≡ true
+naturalSignedWindowCutoffSourceWritten = refl
+
+quantitativeCanonicalTaperSourceWritten :
+  R2QuantTaper.QuantitativeScaledTaperBoundary.quantitativeCanonicalTaperConstructed
+    R2QuantTaper.canonicalQuantitativeScaledTaperBoundary ≡ true
+quantitativeCanonicalTaperSourceWritten = refl
+
+quantitativeTaperFinalAttachmentStillOpen :
+  R2QuantTaper.QuantitativeScaledTaperBoundary.quantitativeCanonicalTaperAttachedToFinalLane
+    R2QuantTaper.canonicalQuantitativeScaledTaperBoundary ≡ false
+quantitativeTaperFinalAttachmentStillOpen = refl
+
+quantitativeMagnitudeScaleNotPrizeClosed :
+  R2QuantTaper.QuantitativeScaledTaperBoundary.centeredOffEnvelopeAsymptoticScaleClosed
+    R2QuantTaper.canonicalQuantitativeScaledTaperBoundary ≡ false
+quantitativeMagnitudeScaleNotPrizeClosed = refl
+
 noConcreteExactScalarDonorFound :
   Donor.ExistingScalarDonorInventoryBoundary.currentInventoryHasConcreteExactDonor
     Donor.canonicalExistingScalarDonorInventoryBoundary ≡ false
@@ -490,6 +706,279 @@ terminalCompilerOwned :
   Clay.ClayTerminalOneLeafBoundary.theseInputsCompileRiemannHypothesisFor
     Clay.canonicalClayTerminalOneLeafBoundary ≡ true
 terminalCompilerOwned = refl
+
+
+centeredNearIsNoLongerPrimitiveR2AnalyticLeaf :
+  R2CenteredHigh.CenteredComplementCanonicalHighBoundary.independentAdaptiveFiniteNearR2EstimatePrimitive
+    R2CenteredHigh.canonicalCenteredComplementCanonicalHighBoundary ≡ false
+centeredNearIsNoLongerPrimitiveR2AnalyticLeaf = refl
+
+centeredComplementSignReducedToGammaVersusFar :
+  R2CenteredHigh.CenteredComplementCanonicalHighBoundary.centeredComplementSignReducedToGammaVersusFar
+    R2CenteredHigh.canonicalCenteredComplementCanonicalHighBoundary ≡ true
+centeredComplementSignReducedToGammaVersusFar = refl
+
+centeredReductionUsesNoFinalBalance :
+  R2CenteredHigh.CenteredComplementCanonicalHighBoundary.finalBalanceUsedToManufactureAnalyticPayment
+    R2CenteredHigh.canonicalCenteredComplementCanonicalHighBoundary ≡ false
+centeredReductionUsesNoFinalBalance = refl
+
+
+gammaRatioCancellationTransferSourceWritten :
+  R2GammaRatio.GammaPoleCancellationRatioTransferBoundary.poleCancellationToGammaSignAlgebraSourceWritten
+    R2GammaRatio.canonicalGammaPoleCancellationRatioTransferBoundary ≡ true
+gammaRatioCancellationTransferSourceWritten = refl
+
+gammaRatioGapQuantitativeDeficitSourceWritten :
+  R2GammaRatio.GammaPoleCancellationRatioTransferBoundary.quantitativeRatioGapToGammaDeficitSourceWritten
+    R2GammaRatio.canonicalGammaPoleCancellationRatioTransferBoundary ≡ true
+gammaRatioGapQuantitativeDeficitSourceWritten = refl
+
+gammaIntegratedRatioGapNowSourceWritten :
+  R2GammaIntegrated.GammaIntegratedGapCutoffCompatibilityBoundary.h1IntegratedRatioGapPaid
+    R2GammaIntegrated.canonicalGammaIntegratedGapCutoffCompatibilityBoundary ≡ true
+gammaIntegratedRatioGapNowSourceWritten = refl
+
+quarticFarTailCannotReuseSameSignedWindow :
+  R2GammaIntegrated.GammaIntegratedGapCutoffCompatibilityBoundary.quarticFarTailCanBeSubstitutedWithoutIntermediateShell
+    R2GammaIntegrated.canonicalGammaIntegratedGapCutoffCompatibilityBoundary ≡ false
+quarticFarTailCannotReuseSameSignedWindow = refl
+
+quarticRouteStillNeedsIntermediateShell :
+  R2GammaIntegrated.GammaIntegratedGapCutoffCompatibilityBoundary.intermediateShellControlStillRequiredForQuarticRoute
+    R2GammaIntegrated.canonicalGammaIntegratedGapCutoffCompatibilityBoundary ≡ true
+quarticRouteStillNeedsIntermediateShell = refl
+
+
+normalizedCenteredOffIntegralNowSourceWritten :
+  R2NormShell.NormalizedCenteredOffShellBoundary.exactIntegralNormalizationSourceWritten
+    R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ true
+normalizedCenteredOffIntegralNowSourceWritten = refl
+
+normalizedShellUsesFixedSupport :
+  R2NormShell.NormalizedCenteredOffShellBoundary.canonicalSupportBecomesFixedNormalizedWindow
+    R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ true
+normalizedShellUsesFixedSupport = refl
+
+normalizedIntermediateShellStillActualH2 :
+  R2NormShell.NormalizedCenteredOffShellBoundary.normalizedIntermediateShellEstimatePaid
+    R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ false
+normalizedIntermediateShellStillActualH2 = refl
+
+oldCurvatureEnvelopeNotCanonicalH2 :
+  R2NormShell.NormalizedCenteredOffShellBoundary.oldCurvatureEnvelopeCanonicalForH2
+    R2NormShell.canonicalNormalizedCenteredOffShellBoundary ≡ false
+oldCurvatureEnvelopeNotCanonicalH2 = refl
+
+
+normalizedFixedProfilePerFrequencyDecaySourceWritten :
+  R2NormalizedDecay.NormalizedCenteredOffOscillatoryDecayBoundary.normalizedPerFrequencyInverseSquareDecaySourceWritten
+    R2NormalizedDecay.canonicalNormalizedCenteredOffOscillatoryDecayBoundary ≡ true
+normalizedFixedProfilePerFrequencyDecaySourceWritten = refl
+
+normalizedLiteralPairJacobianTransportSourceWritten :
+  R2NormalizedDecay.NormalizedCenteredOffOscillatoryDecayBoundary.literalPairIntegralTransportWithOneOverTJacobianSourceWritten
+    R2NormalizedDecay.canonicalNormalizedCenteredOffOscillatoryDecayBoundary ≡ true
+normalizedLiteralPairJacobianTransportSourceWritten = refl
+
+normalizedZeroWeightedShellSummationStillOpen :
+  R2NormalizedDecay.NormalizedCenteredOffOscillatoryDecayBoundary.zeroWeightedNormalizedShellSummationPaid
+    R2NormalizedDecay.canonicalNormalizedCenteredOffOscillatoryDecayBoundary ≡ false
+normalizedZeroWeightedShellSummationStillOpen = refl
+
+
+literalCanonicalGammaConeDeficitSourceWritten :
+  R2GammaLiteral.QuantitativeCanonicalGammaConeDeficitBoundary.literalCanonicalGammaConeDeficitSourceWritten
+    R2GammaLiteral.canonicalQuantitativeCanonicalGammaConeDeficitBoundary ≡ true
+literalCanonicalGammaConeDeficitSourceWritten = refl
+
+gammaInstantiationNoLongerOpenForH2e :
+  R2GammaLiteral.QuantitativeCanonicalGammaConeDeficitBoundary.gammaSameObjectInstantiationStillOpenForH2e
+    R2GammaLiteral.canonicalQuantitativeCanonicalGammaConeDeficitBoundary ≡ false
+gammaInstantiationNoLongerOpenForH2e = refl
+
+normalizedOffAggregateIsRemainingH2e :
+  R2GammaLiteral.QuantitativeCanonicalGammaConeDeficitBoundary.normalizedOffAggregateBelowGammaDeficitStillRequired
+    R2GammaLiteral.canonicalQuantitativeCanonicalGammaConeDeficitBoundary ≡ true
+normalizedOffAggregateIsRemainingH2e = refl
+
+
+normalizedLiteralAtomicStieltjesSurfaceSourceWritten :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.literalAggregateEqualsCountingPairPlusHorizontalSourceWritten
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ true
+normalizedLiteralAtomicStieltjesSurfaceSourceWritten = refl
+
+normalizedProfileHasZeroModeGapSourceWritten :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.normalizedProfileSpectralGapSourceWritten
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ true
+normalizedProfileHasZeroModeGapSourceWritten = refl
+
+normalizedAggregateNowSplitsQPairAndHorizontalCorrection :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.horizontalHeightSplitSourceWritten
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ true
+normalizedAggregateNowSplitsQPairAndHorizontalCorrection = refl
+
+rvMCountingRemainderPairStillOpen :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.rvMCountingRemainderPairBoundPaid
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ false
+rvMCountingRemainderPairStillOpen = refl
+
+horizontalCorrectionQuantitativeBoundStillOpen :
+  R2Stieltjes.NormalizedZeroMeasureStieltjesBoundary.horizontalCorrectionQuantitativeBoundPaid
+    R2Stieltjes.canonicalNormalizedZeroMeasureStieltjesBoundary ≡ false
+horizontalCorrectionQuantitativeBoundStillOpen = refl
+
+
+normalizedHorizontalCorrectionBoundNowSourceWritten :
+  R2Horizontal.NormalizedHorizontalCorrectionBoundary.finiteHorizontalAggregateBoundSourceWritten
+    R2Horizontal.canonicalNormalizedHorizontalCorrectionBoundary ≡ true
+normalizedHorizontalCorrectionBoundNowSourceWritten = refl
+
+rvMCountingRemainderNowSoleCollectiveHighDebt :
+  R2Horizontal.NormalizedHorizontalCorrectionBoundary.rvMCountingRemainderPairBoundPaid
+    R2Horizontal.canonicalNormalizedHorizontalCorrectionBoundary ≡ false
+rvMCountingRemainderNowSoleCollectiveHighDebt = refl
+
+
+normalizedFiniteAbelCompilerNowSourceWritten :
+  R2RvMAbel.NormalizedRvMAbelCompilerBoundary.finiteAbelIdentitySourceWritten
+    R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ true
+normalizedFiniteAbelCompilerNowSourceWritten = refl
+
+normalizedMainRemainderSplitNowSourceWritten :
+  R2RvMAbel.NormalizedRvMAbelCompilerBoundary.exactMainRemainderPairSplitSourceWritten
+    R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ true
+normalizedMainRemainderSplitNowSourceWritten = refl
+
+theoremBearingRvMMainCountStillOpen :
+  R2RvMAbel.NormalizedRvMAbelCompilerBoundary.theoremBearingRvMMainCountRealizationPaid
+    R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ false
+theoremBearingRvMMainCountStillOpen = refl
+
+smoothMainPairFourierCancellationStillOpen :
+  R2RvMAbel.NormalizedRvMAbelCompilerBoundary.smoothMainPairFourierCancellationPaid
+    R2RvMAbel.canonicalNormalizedRvMAbelCompilerBoundary ≡ false
+smoothMainPairFourierCancellationStillOpen = refl
+
+
+matchedGammaRelativeGainNowSourceWritten :
+  R2GammaQuant.GammaMatchedQuantitativeGainBoundary.matchedRelativeGain2603Over16100SourceWritten
+    R2GammaQuant.canonicalGammaMatchedQuantitativeGainBoundary ≡ true
+matchedGammaRelativeGainNowSourceWritten = refl
+
+uniformGammaMarginStillNeedsAbsoluteScale :
+  R2GammaQuant.GammaMatchedQuantitativeGainBoundary.explicitUniformGammaMarginLowerBoundPaid
+    R2GammaQuant.canonicalGammaMatchedQuantitativeGainBoundary ≡ false
+uniformGammaMarginStillNeedsAbsoluteScale = refl
+
+
+gammaAbsoluteScaleProducerNowPaidAtSource :
+  R2GammaAbs.GammaAbsoluteMarginBoundary.gammaAbsoluteScaleProducerPaid
+    R2GammaAbs.canonicalGammaAbsoluteMarginBoundary ≡ true
+gammaAbsoluteScaleProducerNowPaidAtSource = refl
+
+highAggregateNowReducedToRvMMainAndRemainder :
+  R2GammaAbs.GammaAbsoluteMarginBoundary.rvMSmoothMainCancellationPaid
+    R2GammaAbs.canonicalGammaAbsoluteMarginBoundary ≡ false
+highAggregateNowReducedToRvMMainAndRemainder = refl
+
+
+constantRvMDensityNowKilledExactlyAtSource :
+  R2RvMConst.RvMConstantDensityCancellationBoundary.constantDensityPairZeroSourceWritten
+    R2RvMConst.canonicalRvMConstantDensityCancellationBoundary ≡ true
+constantRvMDensityNowKilledExactlyAtSource = refl
+
+qDependentRvMMainResidualStillOpen :
+  R2RvMConst.RvMConstantDensityCancellationBoundary.qDependentSmoothMainResidualPaid
+    R2RvMConst.canonicalRvMConstantDensityCancellationBoundary ≡ false
+qDependentRvMMainResidualStillOpen = refl
+
+cumulativeRvMRemainderStillOpen :
+  R2RvMConst.RvMConstantDensityCancellationBoundary.cumulativeActualMinusMainRemainderPaid
+    R2RvMConst.canonicalRvMConstantDensityCancellationBoundary ≡ false
+cumulativeRvMRemainderStillOpen = refl
+
+import DASHI.Analysis.RiemannG2ReflectionPairSignedResidualLeanDonorExact as R2ReflectionSigned
+
+
+reflectionPairRouteNeedsNoSameOrdinateNuisanceSelection :
+  R2ReflectionSigned.ReflectionPairSignedResidualBoundary.nuisanceSelectionPrimitiveOnThisRoute
+    R2ReflectionSigned.canonicalReflectionPairSignedResidualBoundary ≡ false
+reflectionPairRouteNeedsNoSameOrdinateNuisanceSelection = refl
+
+reflectionPairRouteNeedsNoSameOrdinateResidualBudget :
+  R2ReflectionSigned.ReflectionPairSignedResidualBoundary.sameOrdinateResidualBudgetPrimitiveOnThisRoute
+    R2ReflectionSigned.canonicalReflectionPairSignedResidualBoundary ≡ false
+reflectionPairRouteNeedsNoSameOrdinateResidualBudget = refl
+
+reflectionPairSignedExternalPaymentStillOpen :
+  R2ReflectionSigned.ReflectionPairSignedResidualBoundary.signedExternalResidualPaymentPaid
+    R2ReflectionSigned.canonicalReflectionPairSignedResidualBoundary ≡ false
+reflectionPairSignedExternalPaymentStillOpen = refl
+
+
+projectiveCenteredGaugeBridgeSourceWritten :
+  R2ProjectiveCentered.ProjectiveCenteredGaugeBridgeBoundary.centeredTwoRadiusReconstructionSourceWritten
+    R2ProjectiveCentered.canonicalProjectiveCenteredGaugeBridgeBoundary ≡ true
+projectiveCenteredGaugeBridgeSourceWritten = refl
+
+oneRadiusCenteredIsNotDefinitionallyProjective :
+  R2ProjectiveCentered.ProjectiveCenteredGaugeBridgeBoundary.oneRadiusCenteredObservableDefinitionallyProjective
+    R2ProjectiveCentered.canonicalProjectiveCenteredGaugeBridgeBoundary ≡ false
+oneRadiusCenteredIsNotDefinitionallyProjective = refl
+
+normalizedRvMProjectiveAttachmentStillOpen :
+  R2ProjectiveCentered.ProjectiveCenteredGaugeBridgeBoundary.normalizedRvMProjectiveConsumerFullyAttached
+    R2ProjectiveCentered.canonicalProjectiveCenteredGaugeBridgeBoundary ≡ false
+normalizedRvMProjectiveAttachmentStillOpen = refl
+
+
+allFiniteProjectiveOffPiecesNowNormalized :
+  R2ProjectiveAtomic.ProjectiveOffNormalizedAtomicBoundary.radiusZeroNormalizedFiniteCarrierPaid
+    R2ProjectiveAtomic.canonicalProjectiveOffNormalizedAtomicBoundary ≡ true
+allFiniteProjectiveOffPiecesNowNormalized = refl
+
+literalInfiniteProjectiveOffTsumStillOpen :
+  R2ProjectiveAtomic.ProjectiveOffNormalizedAtomicBoundary.literalInfiniteReflectionPairTsumAttachmentPaid
+    R2ProjectiveAtomic.canonicalProjectiveOffNormalizedAtomicBoundary ≡ false
+literalInfiniteProjectiveOffTsumStillOpen = refl
+
+signedProjectiveRvMAttachmentStillOpen :
+  R2ProjectiveAtomic.ProjectiveOffNormalizedAtomicBoundary.signedProjectiveRvMAttachmentPaid
+    R2ProjectiveAtomic.canonicalProjectiveOffNormalizedAtomicBoundary ≡ false
+signedProjectiveRvMAttachmentStillOpen = refl
+
+
+perPairProjectiveOffNowSingleNormalizedObject :
+  R2ProjectiveCombined.NormalizedProjectiveOffAtomicMeasureBoundary.exactPerPairProjectiveNormalizationSourceWritten
+    R2ProjectiveCombined.canonicalNormalizedProjectiveOffAtomicMeasureBoundary ≡ true
+perPairProjectiveOffNowSingleNormalizedObject = refl
+
+finiteProjectiveOffSumNowSingleNormalizedObject :
+  R2ProjectiveCombined.NormalizedProjectiveOffAtomicMeasureBoundary.exactFiniteProjectiveSumNormalizationSourceWritten
+    R2ProjectiveCombined.canonicalNormalizedProjectiveOffAtomicMeasureBoundary ≡ true
+finiteProjectiveOffSumNowSingleNormalizedObject = refl
+
+wholeProjectiveOffTsumAttachmentStillOpen :
+  R2ProjectiveCombined.NormalizedProjectiveOffAtomicMeasureBoundary.literalInfiniteProjectiveOffTsumAttachmentPaid
+    R2ProjectiveCombined.canonicalNormalizedProjectiveOffAtomicMeasureBoundary ≡ false
+wholeProjectiveOffTsumAttachmentStillOpen = refl
+
+
+projectiveBaseTransformNowSingleGappedProfile :
+  R2ProjectiveBase.ProjectiveBaseProfileQuotientBoundary.threePieceBaseTransformCollapsedToOneProfile
+    R2ProjectiveBase.canonicalProjectiveBaseProfileQuotientBoundary ≡ true
+projectiveBaseTransformNowSingleGappedProfile = refl
+
+projectiveBaseProfileOpenZeroModeGapPaid :
+  R2ProjectiveBase.ProjectiveBaseProfileQuotientBoundary.projectivePhysicalProfileHasOpenZeroModeGap
+    R2ProjectiveBase.canonicalProjectiveBaseProfileQuotientBoundary ≡ true
+projectiveBaseProfileOpenZeroModeGapPaid = refl
+
+projectiveRvMActualCountingAttachmentStillOpen :
+  R2ProjectiveBase.ProjectiveBaseProfileQuotientBoundary.projectiveRvMActualCountingAttachmentPaid
+    R2ProjectiveBase.canonicalProjectiveBaseProfileQuotientBoundary ≡ false
+projectiveRvMActualCountingAttachmentStillOpen = refl
 
 record CurrentDirectOneLeafFrontierBoundary : Set where
   constructor current-direct-one-leaf-frontier-boundary
@@ -578,4 +1067,4 @@ canonicalCurrentDirectOneLeafFrontierBoundary =
     "Realize the exact universal pole-quotient finite kernel and prove nearResponseAt(chosen crossing J) = finiteNearSum(cellResponse). The checked Lean status owner does not transport this equality into Agda."
     "After a proof-carrying upper certificate nearResponseAt(J) <= U, independently prove cast(U + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
     "Alternatively prove directly cast(literalFiniteNearValue + B_far(J)) + cast(D_Gamma(g_pole)) < cast(ClusterResponse(g_pole))."
-    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the same-object equality is supplied, and the optional certificate bridge now reuses the literal-kernel equality plus one literal-fold/certified-fold weld rather than demanding a second nearResponse representation. R3 is one shared realPart observer. The exact-complement Dec(V) route and the full ConstructiveCompleteRealPackage located route remain compatibility paths, but neither is preferred. The minimal route now reconstructs the exact rational window X/2 < T_PT with X=6000000185827 and T_PT=3000175332800, transports that inequality concretely to the pinned Murray--Bishop real carrier, and inhabits a minimal LocatedHeightCarrier using Bishop's fast-corollary-2-17. The terminal RH split therefore needs only abs, strict order, the two concrete thresholds, and locatedness: no reciprocal, rational density, Archimedean ceiling, Cauchy package, exact threshold decision, or arbitrary cover. The preferred low-side route is now Bishop-native. A concrete Bishop complex analytic carrier makes conjugation ordinary and Real definitionally Bishop.ℝ; one whole selected-carrier same-object equality compiles the minimal height attachment. Agda record equality is explicitly rejected as real equality. The refined critical predicate is Bishop setoid equality realPart ~= 1/2, and its double-negation stability is now proved constructively from the decidable rational bounds defining Bishop equality, so the former opaque stability field is paid. The remaining low-side semantic seams are now decomposed further. The whole selected AnalyticSubstrate carrier identity and criticalLine iff Bishop-realPart ~= 1/2 remain same-object/predicate welds. For Platt--Trudgian, the positive-height published theorem is separated from the symmetric absolute-height compiler: Bishop sign apartness and abs/neg order geometry are constructive, so no classical sign decision is needed; the actual analytic debts are (a) prove selected nontrivial zeros have nonzero signed ordinate, and (b) prove the selected completed-zeta nontrivial-zero predicate is preserved by conjugation. The current AnalyticSubstrate cannot derive (b) because its abstract isZero predicate lacks equality transport/conjugate-zero laws; the older CompletedZetaData package owns those laws but requires a same-object bridge before reuse. The high branch is handed directly to the implementation-neutral high producer. The companion dashi_lean4 repository now vendors the exact 8889 theorem bytes. Their natural R2 scale is baseline-relative and vanishes quadratically with horizontal displacement a=Re(rho)-1/2: clusterValue_ge_baseline_add_margin gives baselineCluster + (sqrt(2)/2)*a^2*secondMoment(g) <= actual ClusterResponse. Therefore the earlier absolute cCluster/t^2 acquisition cut is only a coarse sufficient compatibility surface, not canonical. The uniform producer should prove complementBudget <= baselineCluster + E and E < clusterMargin. Fixed J=t^4 gives a far error 144*A/t^2 and is not uniformly sufficient as a->0; companion Lean now proves the adaptive real schedule J=(t/alpha)^4 gives 144*A*alpha^2/t^2. Vendored PoleQuotientGammaBudget.lean also proves the historical epsGamma/gammaConeEnvelope lineage is the exact 8889 Gamma producer and locates its precision loss at stripConst's second-derivative L1 term. Thus current R2 work is: attach/replay the vendored cluster lower theorem; choose an admissible natural displacement-adaptive cutoff and preserve crossing; sharply control the finite near plus Gamma excess on the same baseline scale; repair or bypass the stripConst Gamma envelope; then replay the already-written baseline-excess arithmetic. Exact-head Agda validation is not claimed, and RH is not derived."
+    "The preferred direct route has one exact fold-level representation seam followed by one strict high analytic family. The observer-descent crosswalk proves that the actual Off budget consumer factors through the embedded certified fold once the same-object equality is supplied, and the optional certificate bridge now reuses the literal-kernel equality plus one literal-fold/certified-fold weld rather than demanding a second nearResponse representation. R3 is one shared realPart observer. The exact-complement Dec(V) route and the full ConstructiveCompleteRealPackage located route remain compatibility paths, but neither is preferred. The minimal route now reconstructs the exact rational window X/2 < T_PT with X=6000000185827 and T_PT=3000175332800, transports that inequality concretely to the pinned Murray--Bishop real carrier, and inhabits a minimal LocatedHeightCarrier using Bishop's fast-corollary-2-17. The terminal RH split therefore needs only abs, strict order, the two concrete thresholds, and locatedness: no reciprocal, rational density, Archimedean ceiling, Cauchy package, exact threshold decision, or arbitrary cover. The preferred low-side route is now Bishop-native. A concrete Bishop complex analytic carrier makes conjugation ordinary and Real definitionally Bishop.ℝ; one whole selected-carrier same-object equality compiles the minimal height attachment. Agda record equality is explicitly rejected as real equality. The refined critical predicate is Bishop setoid equality realPart ~= 1/2, and its double-negation stability is now proved constructively from the decidable rational bounds defining Bishop equality, so the former opaque stability field is paid. The remaining low-side semantic seams are now decomposed further. The whole selected AnalyticSubstrate carrier identity and criticalLine iff Bishop-realPart ~= 1/2 remain same-object/predicate welds. For Platt--Trudgian, the positive-height published theorem is separated from the symmetric absolute-height compiler: Bishop sign apartness and abs/neg order geometry are constructive, so no classical sign decision is needed; the actual analytic debts are (a) prove selected nontrivial zeros have nonzero signed ordinate, and (b) prove the selected completed-zeta nontrivial-zero predicate is preserved by conjugation. The current AnalyticSubstrate cannot derive (b) because its abstract isZero predicate lacks equality transport/conjugate-zero laws; the older CompletedZetaData package owns those laws but requires a same-object bridge before reuse. The high branch is handed directly to the implementation-neutral high producer. The companion dashi_lean4 repository now vendors the exact 8889 theorem bytes. Their natural R2 scale is baseline-relative and vanishes quadratically with horizontal displacement a=Re(rho)-1/2: clusterValue_ge_baseline_add_margin gives baselineCluster + (sqrt(2)/2)*a^2*secondMoment(g) <= actual ClusterResponse. Therefore the earlier absolute cCluster/t^2 acquisition cut is only a coarse sufficient compatibility surface, not canonical. The uniform producer should prove complementBudget <= baselineCluster + E and E < clusterMargin. Fixed J=t^4 gives a far error 144*A/t^2 and is not uniformly sufficient as a->0; companion Lean now proves the adaptive real schedule J=(t/alpha)^4 gives 144*A*alpha^2/t^2. Vendored PoleQuotientGammaBudget.lean also proves the historical epsGamma/gammaConeEnvelope lineage is the exact 8889 Gamma producer and locates its precision loss at stripConst's second-derivative L1 term. Thus current R2 work is now sharper again. Companion Lean source directly decomposes the final universal even-cone Off response into a finite signed near core plus an explicit far remainder tending to zero, without using the projective carrier. Separately, exact centering of the literal Gamma samples with h_r=g(cos(ru)-1), together with new pointwise derivative and L1 estimates, proves stripConst(sampleTest h_r t 0) <= r^2*C_center and hence an O(r^2) centered Gamma correction. The same centering is proved on the final Off response and yields a joint final-carrier Off+Gamma radius correction of O(r^2). Therefore the raw shrinking-support ||k''||_1 loss is not intrinsic to the centered correction. The signed-consumer audit and exact-centering tranche supersede the previous coefficient-envelope reading. The terminal Agda consumer is order-valued; separate absolute channel budgets are not primitive. Companion Lean proves the actual literal signed complement S=Off+Q_Gamma satisfies the exact identity S_g(r)-S_g(0)=S_{h_r}(0) with h_r=g(cos(ru)-1)<=0 for nonnegative g, plus the earlier |S(r)-S(0)|<=r^2*E_center magnitude envelope. A generic theorem proves that any fixed positive error E independent of horizontal displacement a cannot satisfy E<c*a^2 for every nonzero arbitrarily small a. The canonical taper constructor has now also been strengthened analytically: it owns poleEvenResp(g,t,r)=0 and 0<poleEvenResp(g,t,0), hence the final radius-zero pole coordinate is strictly negative. This pole sign is obtained from the two-window de-weighting construction without using the final balance. However taper sign alone still does not pay the centered complement sign: the off-ordinate reflection-pair kernel contains cos(delta u), and companion source gives an explicit pointwise sign-reversal witness. Therefore the live high analytic leaf is genuinely global signed/oscillatory analysis of S_{h_r}(0), or alternatively a proof that the surviving correction carries its own a^2 factor. Radius zero remains nontrivial as a complement baseline because using the explicit-formula balance to convert the favourable pole sign into a complement payment would violate the balance-free trust boundary. B0_abs remains only a fallback. The finite centered near core is now source-proved nonpositive whenever J*Lambda<=pi/2 on the exact final near finset, so inside the canonical cosine window an independent near-cancellation estimate is no longer required: positive Off risk is reduced to the far remainder. Companion Lean also owns an explicit centered pair-curvature coefficient, the natural cutoff J=floor(|t|/9), and a fully explicit high-ordinate centered-Off upper. A new fixed-template quantitative taper is source-written with exact affine bump scaling M0~R, M1~1, M2~R^-1 and a uniformly bounded pole-cancelling mixing coefficient. This makes the diagnostic scale transparent, but it does not close R2: with R~1/t the current two-integration-by-parts curvature route is too coarse to be the uniform a^2 terminal argument. The live prize-facing theorem therefore remains global signed analysis of the centered whole complement/Gamma channel, while finite-near work is demoted to representation and the far magnitude route is diagnostic. The exact R1 nearResponse equality and Lean-to-Agda theorem transport remain separate. An alternate donor now composes the vendored determinant-level Off and Gamma projective defects into one O(r^2) joint complement theorem, but it remains strictly donor-only because the rank-two/projective taper is not definitionally the final universal pole-quotient taper; a taper-only equality is insufficient: any competitive reuse must transport the projective response and its balance semantics into the changed final pole-quotient comparison object. The rank-two balanced strict consumer is itself a checked no-go, while the pole-quotient lane is the admissible changed comparison. Exact-head Agda validation is not claimed, and RH is not derived."

@@ -369,6 +369,25 @@ Replay    transport theorem-bearing Lean producers into the selected Agda order
 
 Do not force these back into independent absolute `cNear/t^2`, `cGamma/t^2`, `cCluster/t^2` coefficients unless a particular producer benefits from that stronger sufficient form.  The prize-facing consumer remains the actual `ClusterResponse`.
 
+Alternate determinant/projective donor — retained, not promoted:
+
+Vendored Lean already proves the off-ordinate and Gamma **projective defects** are individually `O(r^2)` on the same projective taper. Companion source now composes them into
+
+```text
+|D_off^proj(r) + D_Gamma^proj(r)|
+  <= r^2 * (C_off(g,Lambda,t) + C_Gamma(g,Lambda,t)).
+```
+
+This is a theorem-bearing cancellation-preserving donor, but a taper equality alone would not suffice. The rank-two lane's own projective balance makes its strict balanced consumer inadmissible, whereas the final universal pole-quotient lane deliberately changes the comparison object and retains Gamma. Reuse therefore requires proof-relevant transport of the taper, signed response, and balance/comparison semantics into the final consumer. That full bridge is currently absent. Therefore:
+
+```text
+joint projective O(r^2) mathematics      source-written
+projective -> final pole response/balance transport  open / WrongType firewall
+final R2 payment from this donor          not claimed
+```
+
+Do not use similarity of reflection-paired cosine formulas as that bridge.
+
 
 ## 8. Firewalls
 
@@ -411,3 +430,380 @@ rational certificate carrier -> exact analytic finite-fold identity by coercion.
 - #953: least-privilege Round131 common-metric/unification transport merged and remains downstream.
 
 Exact-head status is queried directly from GitHub and is not inferred from these round labels.
+
+
+### RH R2 final-carrier centered-complement advance — 2026-09-20
+
+NEW THEOREM-SOURCE ANALYTICS:
+
+Companion Lean source now works directly on the final universal even-cone consumer, without importing the rank-two/projective balance semantics.
+
+1. Final Off near/far split:
+
+```text
+D_off^final(g,t,s)
+  = 1/2 * finiteSignedNear(g,t,s,J) + R_J
+
+|R_J| <= 1/2 * C_s * farShellBound A |t| J
+R_J -> 0.
+```
+
+The finite core remains signed.  Therefore the live near theorem is no longer acquisition of a final-carrier finite split; it is quantitative signed control of the adaptively expanding finite core plus same-object replay into the Agda near observer.
+
+2. Centered Gamma:
+
+```text
+h_r(u) = g(u)(cos(ru)-1)
+
+Gamma_g(t,r)+Gamma_g(t,-r)-2 Gamma_g(t,0)
+  = 2 Gamma_{h_r}(t,0).
+```
+
+Lean source proves the pointwise derivative bounds
+
+```text
+|h_r|   <= r^2 (Lambda^2/2) |g|
+|h_r'|  <= r^2 ((Lambda^2/2)|g'| + Lambda|g|)
+|h_r''| <= r^2 ((Lambda^2/2)|g''| + 2 Lambda|g'| + |g|)
+```
+
+and consequently
+
+```text
+stripConst(sampleTest h_r t 0, Lambda)
+  <= r^2 * gammaCenteredStripCoeff(g,Lambda,t).
+```
+
+Thus the raw shrinking-support ||g''||_1 loss of the old radiuswise Gamma envelope is not intrinsic to the centered radius correction.
+
+3. Final joint correction:
+
+The same centering identity is proved for the actual final Off response.  Companion source then gives a same-carrier estimate of the form
+
+```text
+|(D_off(r)-D_off(0))
+  + ((Gamma(r)+Gamma(-r))-2 Gamma(0))|
+ <= r^2 * C_joint(g,Lambda,t).
+```
+
+This does NOT close R2.  It shifts the remaining hard baseline question to the radius-zero joint complement and the a^2-vanishing cluster surplus.
+
+LIVE CANONICAL HIGH CUT:
+
+```text
+cluster source/replay                         source theorem exists; transport open
+adaptive final far tail                       source-written
+final signed near/far decomposition           source-written
+adaptive finite signed near-core cancellation OPEN
+centered Gamma radius correction O(r^2)       source-written
+centered final Off+Gamma correction O(r^2)    source-written
+radius-zero joint complement vs baseline B0   OPEN
+joint excess < a^2 cluster margin             OPEN
+```
+
+Do not promote the centered O(r^2) result to a full Gamma budget: the potentially large radius-zero Gamma/Off baseline remains and must be handled jointly.
+
+
+Centered absolute-budget reduction now source-written:
+
+```text
+B_comp(r)
+  := |Off(r)| + |GammaCone(r)|
+
+B_comp(0)
+  := |Off(0)| + 2 |GammaResp(t,0)|
+
+B_comp(r)
+  <= B_comp(0) + r^2 * E_center(g,Lambda,t).
+```
+
+So the old live label “repair Gamma until it is absolutely small” is too coarse.  The radius-dependent Gamma and Off corrections are now theorem-source controlled on the final universal consumer.  The precise remaining baseline leaf is:
+
+```text
+B0-ABS:
+  compare/control |Off(0)| + 2|GammaResp(t,0)|
+  against baselineCluster(g,t,r)
+```
+
+together with the signed finite-near adaptive control and the final strict inequality against the off-line (a^2) cluster margin.  No claim is made that B0-ABS is already true; it is now simply the exact scalar obstruction exposed by the centered reduction.
+
+
+### Signed-consumer audit after centered complement — 2026-09-20
+
+The absolute radius-zero budget is no longer canonical.
+
+The final Agda contradiction consumer is signed/order-valued: its primitive scalar object is the surviving complement response, and the direct Gamma target may use the literal response as its own budget by source-order reflexivity.  Therefore separate absolute Off/Gamma budgets are only a sufficient factorization.
+
+Companion Lean source now proves for the actual literal final complement
+
+```text
+S(g,t,r) := Off(g,t,r) + Q_Gamma(g,t,r)
+
+|S(g,t,r) - S(g,t,0)| <= r^2 E_center(g,Lambda,t)
+
+S(g,t,r) <= S(g,t,0) + r^2 E_center(g,Lambda,t).
+```
+
+This corrects an earlier sign ambiguity: the previously written combination using the unswitched GammaResp correction is not itself the literal (Off+Q_Gamma) difference because (Q_Gamma=-(GammaResp(r)+GammaResp(-r))).
+
+However the hoped-for immediate baseline theorem
+
+```text
+S(g,t,0) <= B0
+```
+
+is NOT supplied by the existing pinned-complement theorem.
+
+Reason:
+
+* the explicit positive taper kills the pole response at the selected positive radius (r=t/16), not at radius zero;
+* complementChannels_pinned is stated at that selected pole-killing radius and is derived from the downstream three-channel balance;
+* at radius zero, even when the prime term vanishes, companion source gives
+
+```text
+-S(g,t,0) = Cluster(g,t,0) + Pole(g,t,0).
+```
+
+So using complementChannels_pinned to manufacture the analytic strict payment would violate the existing balance-free trust boundary, and radius zero has an additional pole contribution anyway.
+
+PROVISIONAL CANONICAL CUT:
+
+```text
+SIGNED-CENTERED WHOLE RESPONSE
+  literal |S(r)-S(0)| <= r^2 E_center         SOURCE WRITTEN
+  literal S(r) <= S(0)+r^2 E_center           SOURCE WRITTEN
+
+SIGNED BASELINE
+  independent sign-normalized S0 vs B0 theorem OPEN
+  must not be manufactured from final balance
+  must account for radius-zero pole/sign convention
+
+STRICT EXCESS
+  centered excess < off-line cluster surplus   OPEN after baseline alignment
+
+REPRESENTATION
+  exact final-near same-object weld             OPEN
+  sign-normalized Lean -> Agda complement weld  OPEN
+```
+
+The absolute route
+
+```text
+|Off(0)| + 2|GammaResp(t,0)|
+```
+
+is retained only as an auxiliary fallback.  It should not be treated as the preferred theorem unless the signed baseline route is shown impossible.
+
+The expanding finite-near estimate is also no longer automatically a primitive R2 leaf.  The whole infinite final Off response already has a centered quadratic theorem.  If the signed whole-response route attaches directly to the final consumer, the finite-near work may remain primarily R1 / cross-prover representation debt.
+
+
+### Exact centered sign cut — 2026-09-20
+
+The centered-complement work has now been sharpened from a magnitude estimate to an exact same-consumer identity:
+
+```text
+S_g(t,r) := Off_g(t,r) + Q_Gamma,g(t,r)
+
+h_r(u) := g(u)(cos(r u)-1)
+
+S_g(t,r) - S_g(t,0)
+  = S_{h_r}(t,0).
+```
+
+For the positive taper, (h_rle0) pointwise.
+
+The previously obtained estimate
+
+```text
+|S_g(t,r)-S_g(t,0)| <= r^2 E_center(g,Lambda,t)
+```
+
+is therefore only a magnitude envelope around one explicit centered response.
+
+A new theorem-source no-go also records the uniformity obstruction:
+
+```text
+E>0, c>=0
+  -> exists a != 0 with c*a^2 < E.
+```
+
+Hence no fixed positive (a)-independent error can satisfy
+
+```text
+E < c*a^2
+```
+
+for every nonzero horizontal displacement arbitrarily close to the critical line.
+
+CANONICAL ANALYTIC CONSEQUENCE:
+
+```text
+do not spend the next tranche merely shrinking E_center.
+
+The prize-facing centered leaf must instead be one of:
+
+  S_{h_r}(t,0) <= 0
+  S_{h_r}(t,0) = 0
+  |S_{h_r}(t,0)| <= a^2 * E_a
+  or an equivalent favourable signed theorem.
+```
+
+The radius-zero baseline remains nontrivial because the pole channel survives there.  The absolute baseline route remains a fallback only.
+
+Additional pole-sign work has started:
+
+```text
+ell(Q_pole(0)) = -4 * poleEvenResp(g,t,0)
+```
+
+and the two-window taper construction has been decomposed into a de-weighting mechanism showing how the selected-radius pole cancellation can force a signed unweighted residue once the localized integral hypotheses are attached.
+
+
+### Canonical taper radius-zero pole sign — 2026-09-20
+
+The two-window de-weighting mechanism has now been pushed through the actual positive-taper constructor rather than left as an abstract donor.
+
+The strengthened Lean constructor owns, for the same canonical taper,
+
+```text
+poleEvenResp(g,t,r) = 0
+0 < poleEvenResp(g,t,0)
+```
+
+and the public historical constructor API is retained as a backward-compatible wrapper.
+
+Therefore the actual final even-cone pole coordinate satisfies
+
+```text
+ell(Q_pole(0)) = -4 * poleEvenResp(g,t,0) < 0.
+```
+
+This sign is obtained from the taper construction itself, not from the downstream explicit-formula balance.
+
+The analytic mechanism is:
+
+```text
+outer positive window:  tu ~ 2pi
+inner negative window:  tu ~ pi
+r = t/16
+
+cos(r u) is strictly smaller on the outer window
+than on the inner window.
+
+selected-radius weighted pole cancellation
+        =>
+positive unweighted radius-zero pole residue.
+```
+
+However this does NOT yet imply the desired centered whole-complement sign.
+
+For the centered taper
+
+```text
+h_r = g (cos(r u)-1) <= 0
+```
+
+the off-ordinate reflection-pair kernel remains
+
+```text
+4 h_r(u) cosh(a u) cos(delta u),
+```
+
+and companion Lean source now contains an explicit sign-reversal witness showing that a negative taper value can yield a positive pair kernel when the oscillatory cosine is negative.
+
+So the current high-analysis leaf is genuinely global:
+
+```text
+S_{h_r}(t,0) <= 0           OPEN
+or
+S_{h_r}(t,0) = 0            OPEN
+or
+S_{h_r}(t,0) carries a^2    OPEN
+```
+
+The existing oscillatory/curvature/far-shell machinery gives magnitude decay and summability, not this sign.
+
+Do not use the explicit-formula balance to turn the favourable pole sign into the strict payment; that would cross the balance-free firewall.
+
+### Centered near sign + quantitative taper — 2026-09-20
+
+The centered Off lane is now substantially sharper.
+
+On the exact final near carrier, companion Lean source proves:
+
+```text
+h_r(u)=g(u)(cos(r u)-1) <= 0
+
+|delta| Lambda <= pi/2
+  -> reflectionPairResponse(h_r,delta) <= 0
+
+J Lambda <= pi/2
+  -> finiteNearCore(h_r,J) <= 0.
+```
+
+Therefore the finite signed near core is not a positive analytic risk inside the cosine window. Combining with the final near/far theorem gives:
+
+```text
+Off_{h_r}(t,0)
+  <= explicit far remainder.
+```
+
+The pair curvature is now explicit:
+
+```text
+C_pair(g,Lambda,r)
+ = 4 cosh(Lambda/2) r^2 *
+   [ (Lambda^2/2) M2
+     + (2 Lambda + Lambda^2/2) M1
+     + (1 + Lambda + Lambda^2/2) M0 ].
+```
+
+For |t|>=18 and canonical support, the natural cutoff
+
+```text
+J=floor(|t|/9)
+```
+
+satisfies
+
+```text
+1<=J
+J Lambda<=pi/2
+|t|/18<=J
+```
+
+and yields an explicit far-shell upper.
+
+A fixed-template quantitative taper has also been source-written. It replaces the opaque variable-radius bump norms by exact affine scaling:
+
+```text
+M0(scaled bump) = R M0*
+M1(scaled bump) = M1*
+M2(scaled bump) = R^-1 M2*
+```
+
+with factor-two symmetrisation bounds. The canonical two-window quantitative taper uses one common template, has a positive uniformly bounded pole-cancelling mixing coefficient, kills the selected-radius pole, and owns explicit M0/M1/M2 upper bounds.
+
+DIAGNOSTIC CONSEQUENCE:
+
+```text
+R ~ 1/t
+M0 ~ 1/t
+M1 ~ 1
+M2 ~ t
+```
+
+so the current two-integration-by-parts absolute curvature route is not, by itself, the uniform a^2 prize-facing closure. This reinforces the signed/global route rather than invalidating the centered work.
+
+Current analytic classification:
+
+```text
+finite centered near core              one-sided / source-written
+centered Off far-only reduction        source-written
+explicit curvature and cutoff          source-written
+quantitative canonical taper           source-written
+absolute far magnitude                 diagnostic
+global centered complement sign        OPEN
+Gamma centered sign / cancellation     OPEN
+own-a^2 correction alternative         OPEN
+```
