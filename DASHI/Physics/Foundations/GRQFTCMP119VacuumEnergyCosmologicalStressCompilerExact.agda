@@ -3,6 +3,7 @@ module DASHI.Physics.Foundations.GRQFTCMP119VacuumEnergyCosmologicalStressCompil
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_)
@@ -12,6 +13,7 @@ import DASHI.Physics.Closure.SymbolicEinsteinHilbertModel as EH
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Stress
 import DASHI.Physics.Foundations.GRQFTVacuumStressLambdaCompilerExact as Vacuum
 import DASHI.Physics.Foundations.GRQFTCMP119SourceNativeVacuumAmplitudeBidiExact as Source
+import DASHI.Physics.YangMills.BalabanCMP119Section2SourceNativeStateExact as CMP119
 
 ------------------------------------------------------------------------
 -- SOURCE-NATIVE VACUUM ENERGY -> COSMOLOGICAL STRESS COMPILER
@@ -43,22 +45,22 @@ sourceVacuumStress :
   ∀ {Density Background Fluctuation
       Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier : Set}
     {source :
-      Source.CMP119.CMP119Section2SourceNativeState
+      CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier} →
   Source.SourceNativeNambuVacuumAmplitudeReceipt source →
-  Agda.Builtin.Nat.Nat →
+  Nat →
   Stress.RationalTensor4
 sourceVacuumStress receipt scale =
   Vacuum.vacuumStressAt
     (Source.vacuumToRat (Source.readout receipt)
-      (Source.CMP119.vacuumEnergy _ scale))
+      (CMP119.vacuumEnergy _ scale))
 
 sourceInteriorVacuumStress :
   ∀ {Density Background Fluctuation
       Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier : Set}
     {source :
-      Source.CMP119.CMP119Section2SourceNativeState
+      CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier} →
   Source.SourceNativeNambuVacuumAmplitudeReceipt source →
@@ -70,7 +72,7 @@ sourceExteriorVacuumStress :
   ∀ {Density Background Fluctuation
       Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier : Set}
     {source :
-      Source.CMP119.CMP119Section2SourceNativeState
+      CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier} →
   Source.SourceNativeNambuVacuumAmplitudeReceipt source →
@@ -82,7 +84,7 @@ sourceInteriorStressIsSelectedAmplitude :
   ∀ {Density Background Fluctuation
       Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier : Set}
     {source :
-      Source.CMP119.CMP119Section2SourceNativeState
+      CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier}
     (receipt : Source.SourceNativeNambuVacuumAmplitudeReceipt source) →
@@ -98,7 +100,7 @@ sourceExteriorStressIsSelectedAmplitude :
   ∀ {Density Background Fluctuation
       Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier : Set}
     {source :
-      Source.CMP119.CMP119Section2SourceNativeState
+      CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier}
     (receipt : Source.SourceNativeNambuVacuumAmplitudeReceipt source) →
@@ -114,7 +116,7 @@ record SourceNativeVacuumCosmologicalStressCompiler
     {Density Background Fluctuation
       Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier : Set}
     {source :
-      Source.CMP119.CMP119Section2SourceNativeState
+      CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier}
     (receipt : Source.SourceNativeNambuVacuumAmplitudeReceipt source) : Set where
@@ -139,7 +141,7 @@ sourceNativeVacuumCosmologicalStressCompiler :
   ∀ {Density Background Fluctuation
       Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier : Set}
     {source :
-      Source.CMP119.CMP119Section2SourceNativeState
+      CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm VacuumCarrier} →
   (receipt : Source.SourceNativeNambuVacuumAmplitudeReceipt source) →
