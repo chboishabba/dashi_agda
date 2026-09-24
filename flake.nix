@@ -14,9 +14,10 @@
       url = "github:agda/cubical/d0b9c7b0e9e4f816422c3447d7983b03274dd829";
       flake = false;
     };
+    agda29.url = "github:chboishabba/agda/86a1179c1f886da773dc53be920bcca5d876884e";
   };
 
-  outputs = { self, nixpkgs, flake-utils, zkperf, dchottSrc, cubicalSrc }:
+  outputs = { self, nixpkgs, flake-utils, zkperf, dchottSrc, cubicalSrc, agda29 }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -256,6 +257,7 @@
           dchott-agda = dchottAgda;
           cubical = cubicalLocal;
           agda-with-dashi-deps = agdaWithDashiDeps;
+          agda29-parallel = agda29.packages.${system}.debug.bin;
           check = authoritativeCheck;
           zeta-check = zetaCheck;
           merge-smoke = mergeSmokeCheck;
