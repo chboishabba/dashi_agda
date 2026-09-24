@@ -71,27 +71,6 @@ def expand_symmetric_components(value: Any) -> list[list[Fraction]]:
     ]
 
 
-def sum_finite_d1_terms(value: Any) -> dict[str, Fraction]:
-    """Sum the literal finite localized D1 contributions in each symmetric slot.
-
-    This is the executable counterpart of the R142/R144 finite-sum carrier.
-    It intentionally performs only exact rational summation; it does not
-    manufacture the source terms or identify them with CMP116 derivatives.
-    """
-    if not isinstance(value, dict):
-        raise ValueError("qft_finite_d1_terms must be an object")
-    missing = [k for k in SYMMETRIC_KEYS if k not in value]
-    if missing:
-        raise ValueError(f"missing finite D1 slots: {missing}")
-    sums: dict[str, Fraction] = {}
-    for key in SYMMETRIC_KEYS:
-        terms = value[key]
-        if not isinstance(terms, list):
-            raise ValueError(f"finite D1 slot {key} must be a list of rational terms")
-        sums[key] = sum((parse_fraction(term) for term in terms), Fraction(0))
-    return sums
-
-
 def encoded(x: Fraction) -> int | str:
     if x.denominator == 1:
         return x.numerator
@@ -120,15 +99,23 @@ def main() -> None:
             "status": "qft_component_data_missing",
             "comparison_executed": False,
             "required_next_input":
-                "ten CMP119/YM finite localized D1 sums (or their rational readouts) in symmetric slots 00,01,02,03,11,12,13,22,23,33",
+                "ten post-sum CMP119/YM finite localized D1 rational readouts in symmetric slots 00,01,02,03,11,12,13,22,23,33",
         })
     else:
         raw = json.loads(args.qft_json.read_text())
-        finite_d1_sums: dict[str, Fraction] | None = None
-        if "qft_finite_d1_terms" in raw:
-            finite_d1_sums = sum_finite_d1_terms(raw["qft_finite_d1_terms"])
-            qft = expand_symmetric_components(finite_d1_sums)
-            input_form = "ten finite localized D1 component sums"
+        finite_d1_readouts: dict[str, Fraction] | None = None
+        if "qft_finite_d1_readouts" in raw:
+            value = raw["qft_finite_d1_readouts"]
+            if not isinstance(value, dict):
+                raise ValueError("qft_finite_d1_readouts must be an object")
+            missing = [k for k in SYMMETRIC_KEYS if k not in value]
+            if missing:
+                raise ValueError(f"missing finite D1 readout slots: {missing}")
+            finite_d1_readouts = {
+                key: parse_fraction(value[key]) for key in SYMMETRIC_KEYS
+            }
+            qft = expand_symmetric_components(finite_d1_readouts)
+            input_form = "ten post-sum finite localized D1 rational readouts"
         elif "qft_symmetric_components" in raw:
             qft = expand_symmetric_components(raw["qft_symmetric_components"])
             input_form = "ten symmetric components"
@@ -149,9 +136,9 @@ def main() -> None:
             "l1_residual": encoded(sum(flat, Fraction(0))),
             "max_abs_residual": encoded(max(flat, default=Fraction(0))),
         })
-        if finite_d1_sums is not None:
-            payload["finite_d1_sums"] = {
-                key: encoded(finite_d1_sums[key]) for key in SYMMETRIC_KEYS
+        if finite_d1_readouts is not None:
+            payload["finite_d1_readouts"] = {
+                key: encoded(finite_d1_readouts[key]) for key in SYMMETRIC_KEYS
             }
 
     rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
