@@ -115,10 +115,39 @@ def _known_syntax_grammar_gap(node, source: str) -> bool:
 
 
 class Checker:
+    _REPOSITORY_SCAN_EXCLUDES = {
+        ".cache",
+        ".git",
+        ".github",
+        ".venv",
+        "build",
+        "dist",
+        "vendor",
+        "third_party",
+        "tmp",
+        "agda-toolchain",
+        "cubical",
+        "temp-DOWNLOADED",
+        ".parse-smoke",
+        ".real-eric-round2",
+        ".autonomous-orchestrator",
+    }
+
     def __init__(self, root: Path):
         self.root = root.resolve()
         self.parser = _parser()
         self._summary_cache: Dict[Path, ModuleSummary] = {}
+
+    def repository_agda_files(self) -> Iterator[Path]:
+        """Yield source Agda files while excluding generated/vendor/toolchain trees."""
+        for path in self.root.rglob("*.agda"):
+            try:
+                parts = set(path.relative_to(self.root).parts)
+            except ValueError:
+                continue
+            if parts & self._REPOSITORY_SCAN_EXCLUDES:
+                continue
+            yield path
 
     def module_path(self, module: str) -> Path:
         return self.root.joinpath(*module.split(".")).with_suffix(".agda")
@@ -458,11 +487,7 @@ class Checker:
     def dependency_graph(self) -> Dict[str, Set[str]]:
         """Return module -> direct imported modules for repository Agda files."""
         graph: Dict[str, Set[str]] = {}
-        for path in self.root.rglob("*.agda"):
-            # Skip generated/cache/vendor trees when possible.
-            parts = set(path.relative_to(self.root).parts)
-            if parts & {".cache", "build", "dist", "vendor", "third_party", "tmp"}:
-                continue
+        for path in self.repository_agda_files():
             try:
                 summary = self.parse_summary(path)
             except (UnicodeDecodeError, OSError):
