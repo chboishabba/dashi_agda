@@ -572,6 +572,13 @@ def _parse_open_node(source_bytes: bytes, node) -> Tuple[Optional[ImportDecl], O
 
 _RESERVED_FUNCTION_NAMES = {"where", "as", "constructor", "field", "record", "data", "open", "import", "module"}
 
+def _is_layout_divider_name(name: str) -> bool:
+    stripped = name.strip()
+    return bool(stripped) and all(ch in "-=_~" for ch in stripped)
+
+def _valid_function_name(name: Optional[str]) -> bool:
+    return bool(name) and name not in _RESERVED_FUNCTION_NAMES and not _is_layout_divider_name(name)
+
 def _signature_parts(source_bytes: bytes, node) -> Tuple[Tuple[str, ...], Optional[object]]:
     names = tuple(
         node_text(source_bytes, child).strip()
@@ -609,12 +616,20 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
             related.append(sibling)
             sibling = sibling.next_named_sibling
             continue
+
+        tokens = [token.text for token in significant_tokens(source_bytes, sibling)]
         if sibling.type == "ERROR":
-            tokens = [token.text for token in significant_tokens(source_bytes, sibling)]
-            if tokens[:1] in (["constructor"], ["field"]):
+            if tokens[:1] in (["constructor"], ["field"], ["where"]):
                 related.append(sibling)
                 sibling = sibling.next_named_sibling
                 continue
+
+        # tree-sitter-agda 1.3.3 can emit the record where keyword as a
+        # sibling function wrapper between record_signature and fields.
+        if sibling.type == "function" and tokens and tokens[0] == "where":
+            related.append(sibling)
+            sibling = sibling.next_named_sibling
+            continue
         break
 
     for owner in related:
@@ -649,7 +664,7 @@ def _function_signature(source_bytes: bytes, node) -> Optional[AstSignature]:
     name_node = first_descendant(fname, "qid", "id")
     name = _name_from_node(source_bytes, name_node or fname)
     expr = first_descendant(rhs, "expr")
-    if not name or name in _RESERVED_FUNCTION_NAMES or expr is None:
+    if not _valid_function_name(name) or expr is None:
         return None
     # A declaration's RHS begins with ':'; definitions have no function_name.
     return AstSignature((name,), node_text(source_bytes, expr).strip(), line_of(node), expr, node)
@@ -665,7 +680,7 @@ def _function_clause(source_bytes: bytes, node) -> Optional[AstClause]:
     # The first qualified/id atom on a definition LHS is the defined function.
     name_node = first_descendant(lhs, "qid", "id")
     name = _name_from_node(source_bytes, name_node)
-    if not name or name in _RESERVED_FUNCTION_NAMES:
+    if not _valid_function_name(name):
         return None
     rhs_expr = first_descendant(rhs, "expr") if rhs is not None else None
     return AstClause(
@@ -767,23 +782,44 @@ def _recover_import_from_error(source_bytes: bytes, node) -> Optional[ImportDecl
         return None
     module = module_token.text
     alias = module.split(".")[-1]
+
+    sibling = node.next_named_sibling
+    sibling_all = significant_tokens(source_bytes, sibling) if sibling is not None else []
+    sibling_texts = [token.text for token in sibling_all]
+
     if "as" in texts:
         alias_index = texts.index("as")
         if alias_index + 1 < len(tokens):
             alias = tokens[alias_index + 1].text
         else:
-            # tree-sitter-agda 1.3.3 may terminate the ERROR node at the
-            # alias keyword and emit the alias as the next named sibling.
-            # Recover only one adjacent identifier token.
-            sibling = node.next_named_sibling
-            if sibling is not None:
-                sibling_tokens = [
-                    token for token in significant_tokens(source_bytes, sibling)
+            if "as" in sibling_texts:
+                as_index = sibling_texts.index("as")
+                candidates = [
+                    token.text
+                    for token in sibling_all[as_index + 1:]
                     if token.node_type in {"qid", "id"}
-                    and token.text not in _RESERVED_FUNCTION_NAMES
+                    and _valid_function_name(token.text)
                 ]
-                if len(sibling_tokens) == 1:
-                    alias = sibling_tokens[0].text
+            else:
+                candidates = [
+                    token.text
+                    for token in sibling_all
+                    if token.node_type in {"qid", "id"}
+                    and _valid_function_name(token.text)
+                ]
+            if len(candidates) == 1:
+                alias = candidates[0]
+    elif "as" in sibling_texts:
+        as_index = sibling_texts.index("as")
+        candidates = [
+            token.text
+            for token in sibling_all[as_index + 1:]
+            if token.node_type in {"qid", "id"}
+            and _valid_function_name(token.text)
+        ]
+        if len(candidates) == 1:
+            alias = candidates[0]
+
     opened = "open" in texts[:import_index]
     return ImportDecl(
         module=module,
