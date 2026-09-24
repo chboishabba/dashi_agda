@@ -59,6 +59,15 @@ def pytest_addoption(parser):
         help="optional Agda-aware command that confirms/suppresses scope diagnostics",
     )
     group.addoption(
+        "--agda-scope-runner",
+        action="store",
+        default=None,
+        help=(
+            "exit-code-only scope checker command; supports {file} placeholder "
+            "and participates in aggregate auto-refinement"
+        ),
+    )
+    group.addoption(
         "--agda-scope-check",
         action="store_true",
         default=False,
@@ -129,17 +138,22 @@ def _checker(config) -> Checker:
     if cached is None:
         root = _repo_root(config)
         command = config.getoption("--agda-scope-command")
+        scope_runner = config.getoption("--agda-scope-runner")
         native_scope = config.getoption("--agda-scope-check")
         typecheck_oracle = config.getoption("--agda-typecheck-oracle")
         auto_refine = config.getoption("--agda-auto-refine")
         selected = sum(
             bool(value)
-            for value in (command, native_scope, typecheck_oracle, auto_refine)
+            for value in (command, native_scope, typecheck_oracle)
         )
         if selected > 1:
             raise pytest.UsageError(
-                "--agda-scope-command, --agda-scope-check, "
-                "--agda-typecheck-oracle and --agda-auto-refine are mutually exclusive"
+                "--agda-scope-command, --agda-scope-check and "
+                "--agda-typecheck-oracle are mutually exclusive"
+            )
+        if scope_runner and not auto_refine:
+            raise pytest.UsageError(
+                "--agda-scope-runner requires --agda-auto-refine"
             )
         agda_extra_args = tuple(
             shlex.split(config.getoption("--agda-extra-args") or "")
@@ -165,6 +179,7 @@ def _checker(config) -> Checker:
                 cwd=root,
                 typecheck=auto_refine == "typecheck",
                 extra_args=agda_extra_args,
+                scope_command=scope_runner,
             )
         cached = Checker(root, scope_backend=scope_backend)
         setattr(config, "_dashi_agda_checker", cached)
