@@ -59,15 +59,18 @@ class ExternalScopeBackend:
         return [*self.command, absolute]
 
     def _run(self, path: Path) -> ScopeRefinement:
-        completed = subprocess.run(
-            self._argv(path),
-            cwd=self.cwd,
-            text=True,
-            capture_output=True,
-            timeout=self.timeout,
-            check=False,
-        )
-        if completed.returncode != 0:
+        try:
+            completed = subprocess.run(
+                self._argv(path),
+                cwd=self.cwd,
+                text=True,
+                capture_output=True,
+                timeout=self.timeout,
+                check=False,
+            )
+            if completed.returncode != 0:
+                return ScopeRefinement(set(), set())
+        except subprocess.TimeoutExpired:
             return ScopeRefinement(set(), set())
 
         try:
@@ -167,15 +170,18 @@ class CommandScopeCheckBackend:
 
     def _scope_ok(self, path: Path) -> bool:
         self.attempted += 1
-        completed = subprocess.run(
-            self._argv(path),
-            cwd=self.cwd,
-            text=True,
-            capture_output=True,
-            timeout=self.timeout,
-            check=False,
-        )
-        ok = completed.returncode == 0
+        try:
+            completed = subprocess.run(
+                self._argv(path),
+                cwd=self.cwd,
+                text=True,
+                capture_output=True,
+                timeout=self.timeout,
+                check=False,
+            )
+            ok = completed.returncode == 0
+        except subprocess.TimeoutExpired:
+            ok = False
         if ok:
             self.succeeded += 1
         else:
@@ -218,20 +224,23 @@ class AgdaScopeCheckBackend:
 
     def _scope_ok(self, path: Path) -> bool:
         self.attempted += 1
-        completed = subprocess.run(
-            [
-                self.agda_bin,
-                "--only-scope-checking",
-                *self.extra_args,
-                str(path.resolve()),
-            ],
-            cwd=self.cwd,
-            text=True,
-            capture_output=True,
-            timeout=self.timeout,
-            check=False,
-        )
-        ok = completed.returncode == 0
+        try:
+            completed = subprocess.run(
+                [
+                    self.agda_bin,
+                    "--only-scope-checking",
+                    *self.extra_args,
+                    str(path.resolve()),
+                ],
+                cwd=self.cwd,
+                text=True,
+                capture_output=True,
+                timeout=self.timeout,
+                check=False,
+            )
+            ok = completed.returncode == 0
+        except subprocess.TimeoutExpired:
+            ok = False
         if ok:
             self.succeeded += 1
         else:
@@ -280,19 +289,22 @@ class AgdaTypecheckBackend:
 
     def _typecheck_ok(self, path: Path) -> bool:
         self.attempted += 1
-        completed = subprocess.run(
-            [
-                self.agda_bin,
-                *self.extra_args,
-                str(path.resolve()),
-            ],
-            cwd=self.cwd,
-            text=True,
-            capture_output=True,
-            timeout=self.timeout,
-            check=False,
-        )
-        ok = completed.returncode == 0
+        try:
+            completed = subprocess.run(
+                [
+                    self.agda_bin,
+                    *self.extra_args,
+                    str(path.resolve()),
+                ],
+                cwd=self.cwd,
+                text=True,
+                capture_output=True,
+                timeout=self.timeout,
+                check=False,
+            )
+            ok = completed.returncode == 0
+        except subprocess.TimeoutExpired:
+            ok = False
         if ok:
             self.succeeded += 1
         else:
@@ -332,7 +344,7 @@ class AgdaAutoRefineBackend:
         agda_bin: str = "agda",
         *,
         cwd: Path | None = None,
-        scope_timeout: float = 60.0,
+        scope_timeout: float = 300.0,
         typecheck_timeout: float = 300.0,
         typecheck: bool = False,
         extra_args: Sequence[str] = (),
