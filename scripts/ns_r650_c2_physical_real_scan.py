@@ -141,6 +141,181 @@ def _critical_currency(
     }
 
 
+
+def _packet_layer_cake_split(
+    raw_hat: np.ndarray,
+    *,
+    nu: float,
+    formal_cutoff: int,
+) -> dict[str, Any]:
+    """Literal max-norm-shell upper/collar/remote telemetry for R648/R654.
+
+    This mirrors only finite packet currencies:
+      upper_j = collar_j + remote_j,
+      low_j + collar_j + remote_j = total transfer,
+    and the R98 low/remote spectral-cross scalar
+      E_remote D_low - D_remote E_low.
+
+    The returned signs are diagnostics, not theorem authority.
+    """
+    retained_raw, forcing_raw, _meta = projected_state(raw_hat, formal_cutoff)
+    n = int(raw_hat.shape[0])
+    scale = float(n ** 3)
+    velocity = retained_raw / scale
+    forcing = forcing_raw / scale
+
+    modes = nonzero_cutoff_modes(formal_cutoff)
+    rows: list[dict[str, Any]] = []
+    for mode in modes:
+        u = _mode_value(velocity, mode)
+        f = _mode_value(forcing, mode)
+        shell = _shell_index_mode(mode)
+        pairing = float(np.real(np.vdot(u, f)))
+        mass = float(np.real(np.vdot(u, u)))
+        k2 = float(mode[0] * mode[0] + mode[1] * mode[1] + mode[2] * mode[2])
+        rows.append(
+            {
+                "mode": mode,
+                "shell": shell,
+                "pairing": pairing,
+                "mass": mass,
+                "viscous": float(nu * k2 * mass),
+            }
+        )
+
+    active_shells = sorted({int(row["shell"]) for row in rows})
+    collar_layer_cake = 0.0
+    remote_layer_cake = 0.0
+    upper_layer_cake = 0.0
+    interfaces: list[dict[str, Any]] = []
+
+    for index in range(1, len(active_shells)):
+        left_shell = active_shells[index - 1]
+        threshold = active_shells[index]
+        weight_increment = float((2 ** threshold) - (2 ** left_shell))
+
+        collar_flux = sum(
+            float(row["pairing"])
+            for row in rows
+            if int(row["shell"]) == threshold
+        )
+        remote_flux = sum(
+            float(row["pairing"])
+            for row in rows
+            if int(row["shell"]) >= threshold + 1
+        )
+        upper_flux = collar_flux + remote_flux
+        low_flux = sum(
+            float(row["pairing"])
+            for row in rows
+            if int(row["shell"]) < threshold
+        )
+
+        low_energy = 0.5 * sum(
+            float(row["mass"])
+            for row in rows
+            if int(row["shell"]) < threshold
+        )
+        remote_energy = 0.5 * sum(
+            float(row["mass"])
+            for row in rows
+            if int(row["shell"]) >= threshold + 1
+        )
+        low_dissipation = sum(
+            float(row["viscous"])
+            for row in rows
+            if int(row["shell"]) < threshold
+        )
+        remote_dissipation = sum(
+            float(row["viscous"])
+            for row in rows
+            if int(row["shell"]) >= threshold + 1
+        )
+        spectral_cross = (
+            remote_energy * low_dissipation
+            - remote_dissipation * low_energy
+        )
+
+        collar_contribution = weight_increment * collar_flux
+        remote_contribution = weight_increment * remote_flux
+        upper_contribution = weight_increment * upper_flux
+
+        collar_layer_cake += collar_contribution
+        remote_layer_cake += remote_contribution
+        upper_layer_cake += upper_contribution
+
+        interfaces.append(
+            {
+                "left_active_shell": left_shell,
+                "threshold_shell": threshold,
+                "weight_increment": weight_increment,
+                "low_flux": float(low_flux),
+                "collar_flux": float(collar_flux),
+                "remote_flux": float(remote_flux),
+                "upper_flux": float(upper_flux),
+                "upper_minus_collar_remote": float(
+                    upper_flux - collar_flux - remote_flux
+                ),
+                "three_region_flux_sum": float(
+                    low_flux + collar_flux + remote_flux
+                ),
+                "low_energy_half_mass": float(low_energy),
+                "remote_energy_half_mass": float(remote_energy),
+                "low_viscous_dissipation": float(low_dissipation),
+                "remote_viscous_dissipation": float(remote_dissipation),
+                "remote_spectral_cross": float(spectral_cross),
+                "remote_spectral_cross_nonpositive": spectral_cross <= 1.0e-12,
+                "collar_layer_cake_contribution": float(collar_contribution),
+                "remote_layer_cake_contribution": float(remote_contribution),
+                "upper_layer_cake_contribution": float(upper_contribution),
+            }
+        )
+
+    total_transfer = sum(float(row["pairing"]) for row in rows)
+    direct_weighted_transfer = sum(
+        float(2 ** int(row["shell"])) * float(row["pairing"])
+        for row in rows
+    )
+    base_weight = float(2 ** active_shells[0]) if active_shells else 0.0
+    abel_reconstruction = base_weight * total_transfer + upper_layer_cake
+
+    return {
+        "active_shells": active_shells,
+        "interface_count": len(interfaces),
+        "interfaces": interfaces,
+        "collar_layer_cake": float(collar_layer_cake),
+        "remote_layer_cake": float(remote_layer_cake),
+        "physical_upper_layer_cake": float(upper_layer_cake),
+        "upper_minus_collar_remote_layer_cake": float(
+            upper_layer_cake - collar_layer_cake - remote_layer_cake
+        ),
+        "total_unweighted_transfer": float(total_transfer),
+        "direct_weighted_transfer": float(direct_weighted_transfer),
+        "abel_reconstruction": float(abel_reconstruction),
+        "abel_reconstruction_residual": float(
+            direct_weighted_transfer - abel_reconstruction
+        ),
+        "maximum_three_region_flux_residual": max(
+            (abs(float(row["three_region_flux_sum"])) for row in interfaces),
+            default=0.0,
+        ),
+        "maximum_upper_split_residual": max(
+            (abs(float(row["upper_minus_collar_remote"])) for row in interfaces),
+            default=0.0,
+        ),
+        "maximum_remote_spectral_cross": max(
+            (float(row["remote_spectral_cross"]) for row in interfaces),
+            default=0.0,
+        ),
+        "remote_spectral_cross_violation_count": sum(
+            1
+            for row in interfaces
+            if not bool(row["remote_spectral_cross_nonpositive"])
+        ),
+        "authority": "finite-floating-packet-decomposition-diagnostic-only",
+    }
+
+
 def evaluate_state(
     path: Path,
     *,
@@ -153,6 +328,11 @@ def evaluate_state(
     selected_cutoff = grid_n // 3 if formal_cutoff is None else int(formal_cutoff)
 
     currency = _critical_currency(raw, nu=nu, formal_cutoff=selected_cutoff)
+    packet_split = _packet_layer_cake_split(
+        raw,
+        nu=nu,
+        formal_cutoff=selected_cutoff,
+    )
     r406 = evaluate_r406(
         raw,
         nu=nu,
@@ -181,6 +361,7 @@ def evaluate_state(
         "viscosity": float(nu),
         "tested_delta": float(delta),
         **currency,
+        "packet_split": packet_split,
         "r406_weighted_remainder": remainder,
         "strict_surplus_rate": float(strict_surplus),
         "r406_minus_strict_surplus": float(gap),

@@ -347,6 +347,9 @@ import DASHI.Physics.Closure.EinsteinPhysicalCouplingCalibrationExact
 import DASHI.Physics.Closure.W4IndependentPhysicalPredictionRequestExact
 import DASHI.Physics.Closure.EinsteinFiniteToPhysicalCalibrationCompilerExact
 import DASHI.Physics.Closure.EinsteinFiniteToPhysicalCalibrationCompilerValidation
+import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact
+import DASHI.Physics.Closure.NSTriadKNR650C2CoupledForcingSandwichRound653Exact
+
 
 
 

@@ -405,6 +405,30 @@ periodicClayMaxCutQuantitativeStressHarnessInstalled : Bool
 periodicClayMaxCutQuantitativeStressHarnessInstalled =
   R650.round650QuantitativeStressHarnessInstalled
 
+periodicClayMaxCutC1R406PointwiseCouplingClosed : Bool
+periodicClayMaxCutC1R406PointwiseCouplingClosed =
+  R650.round650C1R406PointwiseCouplingClosed
+
+periodicClayMaxCutC1R406IntegratedCouplingClosed : Bool
+periodicClayMaxCutC1R406IntegratedCouplingClosed =
+  R650.round650C1R406IntegratedCouplingClosed
+
+periodicClayMaxCutC1AndC2ShareLiteralR406Currency : Bool
+periodicClayMaxCutC1AndC2ShareLiteralR406Currency =
+  R650.round650C1AndC2ShareLiteralR406Currency
+
+periodicClayMaxCutC2CoupledSandwichEquivalent : Bool
+periodicClayMaxCutC2CoupledSandwichEquivalent =
+  R650.round650C2CoupledSandwichEquivalent
+
+periodicClayMaxCutC1AndC2SearchableAsLiteralSandwich : Bool
+periodicClayMaxCutC1AndC2SearchableAsLiteralSandwich =
+  R650.round650C1AndC2SearchableAsLiteralSandwich
+
+periodicClayMaxCutThirdAnalyticLeafIntroducedBySandwich : Bool
+periodicClayMaxCutThirdAnalyticLeafIntroducedBySandwich =
+  R650.round650ThirdAnalyticLeafIntroducedBySandwich
+
 periodicClayMaxCutC3CompilerAvailable : Bool
 periodicClayMaxCutC3CompilerAvailable =
   R642.round642C3CanonicalPhysicalSliceCompilerAvailable
