@@ -213,3 +213,7 @@ import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVExteriorMassCollisionExac
 import DASHI.Physics.Foundations.GRQFTPositiveDensityExteriorRepulsionNoGoExact
 
 import DASHI.Physics.Foundations.GRQFTLocalizedDefocusingExteriorNoGoMaxCutExact
+
+import DASHI.Physics.Foundations.GRQFTSchwarzschildDeSitterExteriorEscapeExact
+
+import DASHI.Physics.Foundations.GRQFTExteriorRepulsionRouteSynthesisExact
