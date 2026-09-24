@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import re
 from typing import Dict, Iterable, List, Optional, Tuple
 
-from .ast_index import significant_tokens, typed_binders, descendants, first_descendant, applications, application_view, clause_explicit_argument_count
+from .ast_index import significant_tokens, typed_binders, descendants, first_descendant, applications, application_view, clause_explicit_argument_count, direct_binding_parameters, explicit_declaration_parameter_count, module_application_target_and_args
 from .shapes import shape_from_node, shape_from_tokens, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads, split_top_level, PiShape, HeadShape
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
@@ -931,81 +931,102 @@ def extended_diagnostics(checker, s, D):
                 if new in s.signatures or new in s.records:
                     out.append(_diag(D, "TSAGDA026", f"renaming {old} to {new} collides with a local declaration", s, line))
 
-    # TSAGDA041/043/044/110/111: simple telescope and lambda visibility.
-    for name, cs in clauses.items():
-        sig = s.signatures.get(name)
-        if not sig: continue
-        ast_sig = s.ast.signatures.get(name)
-        parts = _split_arrows(sig.type_text)
-        want = (
-            explicit_arity(shape_from_node(s.ast.source_bytes, ast_sig.type_node))
-            if ast_sig is not None and ast_sig.type_node is not None
-            else _arity(sig.type_text)
-        )
-        implicit_names = set(re.findall(rf"\{{\s*({_IDENT})\s*:", sig.type_text))
-        explicit_names = set(re.findall(rf"\(\s*({_IDENT})\s*:", sig.type_text))
-        for line, lhs, rhs in cs:
-            ast_clause = next((item for item in s.ast.clauses.get(name, []) if item.line == line), None)
-            got = clause_explicit_argument_count(s.ast.source_bytes, ast_clause.lhs_node) if ast_clause is not None else None
-            if got is not None and got != want:
-                out.append(_diag(D, "TSAGDA110", f"{name} clause binder count {got} does not match explicit telescope arity {want}", s, line))
-            for nm in re.findall(r"\{\s*([A-Za-z_][A-Za-z0-9_']*)", lhs):
-                if nm in explicit_names:
-                    out.append(_diag(D, "TSAGDA043", f"explicit binder {nm} is matched with implicit visibility", s, line))
-                    out.append(_diag(D, "TSAGDA111", f"clause visibility for {nm} disagrees with signature", s, line))
-            lm = re.fullmatch(r"λ\s+(.+?)\s*→\s*.+", rhs)
-            if lm and want:
-                lam = len([x for x in lm.group(1).split() if not x.startswith("{")])
-                if lam != max(0, want - got):
-                    out.append(_diag(D, "TSAGDA044", f"RHS lambda exposes {lam} binders but {max(0, want-got)} explicit binders remain", s, line, severity="warning", confidence="medium"))
-            if rhs in s.signatures and _arity(s.signatures[rhs].type_text) > 0 and _terminal(sig.type_text) not in {None, "Set", "Set₁", "Set₂"}:
-                out.append(_diag(D, "TSAGDA041", f"RHS {rhs} is a known function left unapplied in a saturated result position", s, line, severity="warning", confidence="medium"))
+    # TSAGDA041/043/044/110/111: AST telescope and lambda visibility.
+    for name, clause_items in s.ast.clauses.items():
+        sig = s.ast.signatures.get(name)
+        if sig is None or sig.type_node is None:
+            continue
+        signature_shape = shape_from_node(s.ast.source_bytes, sig.type_node)
+        want = explicit_arity(signature_shape)
+        binders = typed_binders(s.ast.source_bytes, sig.type_node)
+        binder_visibility = {binder.name: binder.visibility for binder in binders}
 
-    # TSAGDA048: parameterized module application arity.
+        for clause in clause_items:
+            got = clause_explicit_argument_count(s.ast.source_bytes, clause.lhs_node)
+            if got is not None and got != want:
+                out.append(_diag(D, "TSAGDA110", f"{name} clause binder count {got} does not match explicit telescope arity {want}", s, clause.line))
+
+            lhs_tokens = significant_tokens(s.ast.source_bytes, clause.lhs_node)
+            for i, token in enumerate(lhs_tokens[:-1]):
+                if token.text not in {"{", "{{", "⦃"}:
+                    continue
+                candidate = lhs_tokens[i + 1]
+                expected_visibility = binder_visibility.get(candidate.text)
+                actual_visibility = "instance" if token.text in {"{{", "⦃"} else "implicit"
+                if expected_visibility == "explicit":
+                    out.append(_diag(D, "TSAGDA043", f"explicit binder {candidate.text} is matched with {actual_visibility} visibility", s, clause.line))
+                    out.append(_diag(D, "TSAGDA111", f"clause visibility for {candidate.text} disagrees with signature", s, clause.line))
+
+            if clause.rhs_node is None:
+                continue
+            lambda_node = first_descendant(clause.rhs_node, "lambda")
+            if lambda_node is not None:
+                tokens = significant_tokens(s.ast.source_bytes, lambda_node)
+                arrow = next((i for i, token in enumerate(tokens) if token.text in {"→", "->"}), None)
+                if arrow is not None:
+                    lambda_binders = [
+                        token for token in tokens[:arrow]
+                        if token.node_type in {"id", "bid"} and token.text not in {"λ", "_"}
+                    ]
+                    remaining = max(0, want - (got or 0))
+                    if remaining and len(lambda_binders) != remaining:
+                        out.append(_diag(D, "TSAGDA044", f"RHS lambda exposes {len(lambda_binders)} binders but {remaining} explicit binders remain", s, clause.line, severity="warning", confidence="medium"))
+
+            rhs_view = application_view(s.ast.source_bytes, clause.rhs_node)
+            if rhs_view is not None and not rhs_view.args:
+                target_sig = s.ast.signatures.get(rhs_view.head.rsplit(".", 1)[-1])
+                if target_sig is not None and target_sig.type_node is not None:
+                    target_arity = explicit_arity(shape_from_node(s.ast.source_bytes, target_sig.type_node))
+                    result_head = terminal_head(signature_shape)
+                    if target_arity > 0 and result_head not in {None, "Set", "Set₀", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}:
+                        out.append(_diag(D, "TSAGDA041", f"RHS {rhs_view.head} is a known function left unapplied in a saturated result position", s, clause.line, severity="warning", confidence="medium"))
+
+    # TSAGDA048: AST parameterized module application arity.
     module_params = {}
     for alias, mod in imported.items():
-        first = mod.source.splitlines()[0] if mod.source.splitlines() else ""
-        mm = re.match(rf"^\s*module\s+[A-Za-z0-9_.']+\s*(.*?)\s+where\s*$", first)
-        if mm:
-            module_params[alias] = len(re.findall(r"[\({]\s*[A-Za-z_][A-Za-z0-9_']*\s*:", mm.group(1)))
-    for i, line in enumerate(lines, 1):
-        mm = re.match(rf"^\s*module\s+{_IDENT}\s*=\s*({_IDENT})(?:\.{_IDENT})*\s*(.*)$", line)
-        if mm and mm.group(1) in module_params:
-            got = len([x for x in mm.group(2).split() if x and x != "_"])
-            want = module_params[mm.group(1)]
-            if got != want:
-                out.append(_diag(D, "TSAGDA048", f"module application supplies {got} visible arguments; imported module expects {want}", s, i))
+        outer_module = next((node for node in mod.ast.tree.root_node.named_children if node.type == "module"), None)
+        if outer_module is not None:
+            module_params[alias] = explicit_declaration_parameter_count(mod.ast.source_bytes, outer_module)
 
-    # TSAGDA049/051/054: projection receiver/arity refinements.
-    for alias, mod in imported.items():
-        field_owner = {f: rn for rn, rec in mod.records.items() for f in rec.fields}
-        for fname, owner in field_owner.items():
-            for m in re.finditer(rf"\b{re.escape(alias)}\.{re.escape(fname)}\s+({_IDENT})", clean):
-                receiver = m.group(1); line, col = _line_col(source, m.start())
-                if receiver in mod.records or receiver in mod.signatures:
-                    out.append(_diag(D, "TSAGDA051", f"{alias}.{fname} receives known declaration/type name {receiver} where a {owner} value is expected", s, line, col, severity="warning", confidence="medium"))
-                sigs = [x for x in s.signatures.values() if x.line <= line]
-                if sigs:
-                    sig = max(sigs, key=lambda x: x.line)
-                    bm = re.search(rf"[({{]\s*{re.escape(receiver)}\s*:\s*(?:{re.escape(alias)}\.)?({_IDENT})", sig.type_text)
-                    if bm and bm.group(1) in mod.records and bm.group(1) != owner:
-                        out.append(_diag(D, "TSAGDA054", f"projection {fname} belongs to {owner}, but receiver {receiver} is declared as {bm.group(1)}", s, line, col))
-            # Existing 052/053 evidence is also the generic projection arity diagnostic.
-            for m in re.finditer(rf"\b{re.escape(alias)}\.{re.escape(fname)}\b", clean):
-                tail = clean[m.end():].split("\n", 1)[0]
-                if re.match(r"\s*(?:$|[=;,)→])", tail):
-                    line, col = _line_col(source, m.start())
-                    out.append(_diag(D, "TSAGDA049", f"projection {alias}.{fname} is under-applied", s, line, col))
+    for macro in s.ast.module_macro_nodes:
+        target, args = module_application_target_and_args(s.ast.source_bytes, macro)
+        if not target:
+            continue
+        alias = target.split(".", 1)[0]
+        want = module_params.get(alias)
+        if want is None:
+            continue
+        got = sum(1 for arg in args if arg.visibility == "explicit" and arg.text != "_")
+        if got != want:
+            out.append(_diag(D, "TSAGDA048", f"module application supplies {got} visible arguments; imported module expects {want}", s, macro.start_point[0] + 1))
 
-    # TSAGDA056: dependent field projection used bare in a signature despite a matching record binder.
-    for rname, rec in s.records.items():
-        dependent = {f for f, fi in rec.fields.items() if any(re.search(rf"\b{re.escape(other)}\b", fi.type_text) for other in rec.fields if other != f)}
-        if not dependent: continue
-        for name, sig in s.signatures.items():
-            if re.search(rf"\(\s*({_IDENT})\s*:\s*{re.escape(rname)}\b", sig.type_text):
-                for f in dependent:
-                    if re.search(rf"(?<!\.)\b{re.escape(f)}\b(?!\s+{_IDENT})", sig.type_text):
-                        out.append(_diag(D, "TSAGDA056", f"dependent projection {f} is used without an evident {rname} receiver", s, sig.line, severity="warning", confidence="medium"))
+    # TSAGDA056: dependent field projection used bare despite a record binder.
+    for rname, record in s.ast.records.items():
+        field_names = set(record.fields)
+        dependent = set()
+        for fname, field in record.fields.items():
+            if field.type_node is None:
+                continue
+            tokens = significant_tokens(s.ast.source_bytes, field.type_node)
+            referenced = {token.text for token in tokens if token.text in field_names and token.text != fname}
+            if referenced:
+                dependent.add(fname)
+        if not dependent:
+            continue
+
+        for name, sig in s.ast.signatures.items():
+            if sig.type_node is None:
+                continue
+            binders = typed_binders(s.ast.source_bytes, sig.type_node)
+            if not any(rname in binder.type_text.replace("(", " ").replace(")", " ").split() for binder in binders):
+                continue
+            tokens = significant_tokens(s.ast.source_bytes, sig.type_node)
+            for i, token in enumerate(tokens):
+                if token.text not in dependent:
+                    continue
+                following = tokens[i + 1] if i + 1 < len(tokens) else None
+                if following is None or following.text in {"→", "->", ")", "}", "}}", "⦄", "]"}:
+                    out.append(_diag(D, "TSAGDA056", f"dependent projection {token.text} is used without an evident {rname} receiver", s, token.line, token.column, severity="warning", confidence="medium"))
 
     # TSAGDA063/065/066/067/068 and TSAGDA200: AST-backed record refinements.
     record_ctor_owner = {
@@ -1037,37 +1058,68 @@ def extended_diagnostics(checker, s, D):
             if ident in record_ctor_owner and record_ctor_owner[ident] != target.name:
                 out.append(_diag(D, "TSAGDA068", f"constructor {ident} constructs {record_ctor_owner[ident]}, not target record {target.name}", s, assignment.line))
 
-    # TSAGDA070-079 shallow head checks on simple RHSs/applications.
-    for name, cs in clauses.items():
-        sig = s.signatures.get(name)
-        if not sig: continue
-        expected = _terminal(sig.type_text)
-        for line, lhs, rhs in cs:
-            if rhs in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"} and expected not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}:
-                out.append(_diag(D, "TSAGDA078", f"sort {rhs} is used as the value of {name}, whose rigid result head is {expected}", s, line))
-                out.append(_diag(D, "TSAGDA070", f"type/sort supplied where a term of head {expected} is expected", s, line))
-            rm = re.fullmatch(rf"({_IDENT})(?:\s+.*)?", rhs)
-            if rm and rm.group(1) in ctors and expected and ctors[rm.group(1)].datatype != expected:
-                out.append(_diag(D, "TSAGDA072", f"{name} returns constructor {rm.group(1)} of {ctors[rm.group(1)].datatype}, not declared head {expected}", s, line))
-                out.append(_diag(D, "TSAGDA075", f"constructor {rm.group(1)} belongs to wrong datatype for {name}", s, line))
-            call = re.match(rf"({_IDENT})\s+({_IDENT})$", rhs)
-            if call and call.group(1) in s.signatures and call.group(2) in ctors:
-                fdom = _split_arrows(s.signatures[call.group(1)].type_text)[0]
-                expected_dt = next((d for d in data if re.search(rf"\b{re.escape(d)}\b", fdom)), None)
-                actual_dt = ctors[call.group(2)].datatype
-                if expected_dt and expected_dt != actual_dt:
-                    out.append(_diag(D, "TSAGDA073", f"argument {call.group(2)} has datatype {actual_dt}, but {call.group(1)} expects {expected_dt}", s, line))
-            if re.match(r"^\d+$", rhs) and expected in {"Bool","String","Char"}:
-                out.append(_diag(D, "TSAGDA074", f"numeric literal is incompatible with rigid result head {expected}", s, line))
-            call0 = re.match(rf"({_IDENT})\s+.+", rhs)
-            if call0 and call0.group(1) in s.signatures and _arity(s.signatures[call0.group(1)].type_text) == 0:
-                out.append(_diag(D, "TSAGDA079", f"known non-function {call0.group(1)} is applied as a function", s, line))
-    # Known functions occurring as bare type heads.
-    for name, sig in s.signatures.items():
-        for fn, fsig in s.signatures.items():
-            if fn == name or _arity(fsig.type_text) == 0: continue
-            if re.search(rf"(?:^|→|\()\s*{re.escape(fn)}\s*(?:→|\)|$)", sig.type_text):
-                out.append(_diag(D, "TSAGDA076", f"known function {fn} is used as a type without enough application", s, sig.line, severity="warning", confidence="medium"))
+    # TSAGDA070-079 AST-backed shallow head checks.
+    for name, clause_items in s.ast.clauses.items():
+        sig = s.ast.signatures.get(name)
+        if sig is None or sig.type_node is None:
+            continue
+        signature_shape = shape_from_node(s.ast.source_bytes, sig.type_node)
+        expected = terminal_head(signature_shape)
+        for clause in clause_items:
+            if clause.rhs_node is None:
+                continue
+            rhs_tokens = significant_tokens(s.ast.source_bytes, clause.rhs_node)
+            rhs_shape = shape_from_node(s.ast.source_bytes, clause.rhs_node)
+
+            if len(rhs_tokens) == 1 and rhs_tokens[0].text in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"} and expected not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}:
+                out.append(_diag(D, "TSAGDA078", f"sort {rhs_tokens[0].text} is used as the value of {name}, whose rigid result head is {expected}", s, clause.line))
+                out.append(_diag(D, "TSAGDA070", f"type/sort supplied where a term of head {expected} is expected", s, clause.line))
+
+            rhs_view = application_view(s.ast.source_bytes, clause.rhs_node)
+            if rhs_view is not None:
+                short = rhs_view.head.rsplit(".", 1)[-1]
+                ctor = ctors.get(short)
+                if ctor is not None and expected and ctor.datatype != expected.rsplit(".", 1)[-1]:
+                    out.append(_diag(D, "TSAGDA072", f"{name} returns constructor {short} of {ctor.datatype}, not declared head {expected}", s, clause.line))
+                    out.append(_diag(D, "TSAGDA075", f"constructor {short} belongs to wrong datatype for {name}", s, clause.line))
+
+                function_sig = s.ast.signatures.get(short)
+                if function_sig is not None and function_sig.type_node is not None:
+                    function_shape = shape_from_node(s.ast.source_bytes, function_sig.type_node)
+                    if isinstance(function_shape, PiShape) and rhs_view.explicit_args:
+                        first_expected = function_shape.domains[0].head if function_shape.domains else None
+                        arg_ident = rhs_view.explicit_args[0].text.strip()
+                        arg_ctor = ctors.get(arg_ident.rsplit(".", 1)[-1])
+                        if isinstance(first_expected, HeadShape) and arg_ctor is not None:
+                            expected_dt = first_expected.head.rsplit(".", 1)[-1]
+                            if expected_dt != arg_ctor.datatype:
+                                out.append(_diag(D, "TSAGDA073", f"argument {arg_ident} has datatype {arg_ctor.datatype}, but {rhs_view.head} expects {expected_dt}", s, clause.line))
+                    if explicit_arity(function_shape) == 0 and rhs_view.args:
+                        out.append(_diag(D, "TSAGDA079", f"known non-function {rhs_view.head} is applied as a function", s, clause.line))
+
+            if len(rhs_tokens) == 1 and rhs_tokens[0].node_type == "literal":
+                text_value = rhs_tokens[0].text
+                numeric = text_value and text_value[0].isdigit()
+                if numeric and expected in {"Bool", "String", "Char"}:
+                    out.append(_diag(D, "TSAGDA074", f"numeric literal is incompatible with rigid result head {expected}", s, clause.line))
+
+    # Known functions occurring bare in type positions.
+    function_arities = {
+        fn: explicit_arity(shape_from_node(s.ast.source_bytes, fsig.type_node))
+        for fn, fsig in s.ast.signatures.items()
+        if fsig.type_node is not None
+    }
+    for name, sig in s.ast.signatures.items():
+        if sig.type_node is None:
+            continue
+        tokens = significant_tokens(s.ast.source_bytes, sig.type_node)
+        for i, token in enumerate(tokens):
+            arity = function_arities.get(token.text)
+            if not arity or token.text == name:
+                continue
+            following = tokens[i + 1] if i + 1 < len(tokens) else None
+            if following is None or following.text in {"→", "->", ")", "}", "}}", "⦄", "]"}:
+                out.append(_diag(D, "TSAGDA076", f"known function {token.text} is used as a type without enough application", s, token.line, token.column, severity="warning", confidence="medium"))
 
     # TSAGDA080/083/084/086: bounded AST pattern hygiene.
     global_pattern_names = set(ctors) | set(data) | set(s.records)
