@@ -50,6 +50,8 @@ on:
       - 'DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierV2Validation.agda'
       - 'DASHI/Physics/Foundations/GRQFTCommonRegimeBidiAttemptExact.agda'
       - 'DASHI/Physics/Foundations/GRQFTCommonRegimeBidiAttemptValidation.agda'
+      - 'scripts/grqft_cross_sector_component_residual.py'
+      - 'outputs/grqft_cross_sector_component_target.json'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 

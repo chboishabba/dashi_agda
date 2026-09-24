@@ -24,7 +24,7 @@ data GRQFTConcreteTheoryLeaf : Set where
 
 canonicalGRQFTConcreteTheoryLeaves : List GRQFTConcreteTheoryLeaf
 canonicalGRQFTConcreteTheoryLeaves =
-constructTheoremBearingGRDiscreteToSmoothBundle
+  constructTheoremBearingGRDiscreteToSmoothBundle
   ∷ attachLiteralNonflatGRToRecoveredGR
   ∷ attachPinnedLiteralYMToRecoveredQFT
   ∷ attachCMP119StressToLiteralPinnedStress

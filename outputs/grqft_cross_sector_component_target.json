@@ -1,0 +1,39 @@
+{
+  "axes": [
+    "t",
+    "x",
+    "y",
+    "z"
+  ],
+  "carrier": "normalized rational 4x4 stress components",
+  "comparison_executed": false,
+  "gr_target": [
+    [
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      -1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      -1
+    ]
+  ],
+  "physical_si_calibration_claimed": false,
+  "required_next_input": "16 CMP119/YM stress components in the same normalized rational carrier",
+  "status": "qft_component_data_missing"
+}
