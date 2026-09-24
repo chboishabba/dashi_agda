@@ -43,6 +43,8 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarPairDifferenceM2PaymentRound6
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarLiveM2PaymentRound663Exact as R663
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedWorkRound664Exact as R664
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedKernelRound665Exact as R665
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarCauchyCouplingRound666Exact as R666
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact as R667
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666
 
 data PeriodicNewNSAnalyticLeaf : Set where
