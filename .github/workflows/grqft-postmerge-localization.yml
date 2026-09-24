@@ -69,6 +69,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeValidation.agda'
       - 'DASHI/Physics/Foundations/CMP119ActiveRawSymmetricTangentSpecializationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119ActiveRawSymmetricTangentSpecializationValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerValidation.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
