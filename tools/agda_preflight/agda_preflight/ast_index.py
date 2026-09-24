@@ -536,6 +536,58 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
         )
     return expr
 
+
+def _recover_import_from_error(source_bytes: bytes, node) -> Optional[ImportDecl]:
+    """Recover the known tree-sitter-agda import-alias grammar gap.
+
+    Recovery consumes the ERROR node's concrete tree leaves rather than
+    reparsing source text. If the token sequence is not unambiguous, return
+    None and let TSAGDA000 report the grammar/error node.
+    """
+    tokens = significant_tokens(source_bytes, node)
+    texts = [token.text for token in tokens]
+    if "import" not in texts:
+        return None
+    import_index = texts.index("import")
+    module_token = next(
+        (
+            token
+            for token in tokens[import_index + 1:]
+            if token.node_type in {"module_name", "qid", "id"}
+            and token.text not in {"as", "public", "using", "hiding", "renaming"}
+        ),
+        None,
+    )
+    if module_token is None:
+        return None
+    module = module_token.text
+    alias = module.split(".")[-1]
+    if "as" in texts:
+        alias_index = texts.index("as")
+        if alias_index + 1 < len(tokens):
+            alias = tokens[alias_index + 1].text
+    opened = "open" in texts[:import_index]
+    return ImportDecl(
+        module=module,
+        alias=alias,
+        line=line_of(node),
+        opened=opened,
+        public="public" in texts,
+        directives=(),
+        node_type="ERROR_import_alias",
+    )
+
+
+def _append_import(index: AstIndex, item: ImportDecl) -> None:
+    key = (item.module, item.alias, item.line, item.opened)
+    if any((x.module, x.alias, x.line, x.opened) == key for x in index.imports):
+        return
+    index.imports.append(item)
+    if item.opened:
+        index.opens.append(
+            OpenDecl(item.alias, item.line, item.public, item.directives)
+        )
+
 def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstIndex:
     source_bytes = source.encode("utf-8")
     tree = parser.parse(source_bytes)
@@ -555,13 +607,17 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
         if node.type == "open":
             imp, opened = _parse_open_node(source_bytes, node)
             if imp is not None:
-                index.imports.append(imp)
-            if opened is not None:
+                _append_import(index, imp)
+            if opened is not None and imp is None:
                 index.opens.append(opened)
         elif node.type == "import" and (node.parent is None or node.parent.type != "open"):
             imp = _parse_import_node(source_bytes, node)
             if imp is not None:
-                index.imports.append(imp)
+                _append_import(index, imp)
+        elif node.type == "ERROR":
+            recovered = _recover_import_from_error(source_bytes, node)
+            if recovered is not None:
+                _append_import(index, recovered)
         elif node.type == "record":
             rec = _record_from_node(source_bytes, node)
             if rec is not None:
