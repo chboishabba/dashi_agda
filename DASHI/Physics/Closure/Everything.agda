@@ -228,3 +228,5 @@ import DASHI.Physics.Closure.NSTriadKNCanonicalModeListedCoherenceRound643Exact
 import DASHI.Physics.Closure.NSTriadKNCanonicalInitialCriticalCeilingRound644Exact
 
 import DASHI.Physics.Closure.NSTriadKNStrictMarginProductionToPhysicalCriticalGapRound645Exact
+
+import DASHI.Physics.Closure.NSTriadKNLiteralStrictMarginRadialSurplusRound646Exact
