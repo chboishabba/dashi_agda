@@ -34,15 +34,18 @@ import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exa
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayMomentOS05MaxCutRound500Exact as A45Cut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45Rep
+import DASHI.Physics.YangMills.YangMillsClayRepresentedOSExtensionalityMaxCutRound501Exact as A45Ext
 
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
+import DASHI.Physics.YangMills.YangMillsClayMassGapSemanticMaxCutRound503Exact as BSemCut
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as C
 
 import DASHI.Physics.YangMills.BalabanGroupParametricFiveBlockSignedG2Exact as G1
 import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468Exact as G2
+import DASHI.Physics.YangMills.YangMillsClayNontrivialitySemanticMaxCutRound502Exact as G2Cut
 
 import DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact as Terminal
 
@@ -70,13 +73,18 @@ data ResidualLeaf : Set where
   a45QuantitativeFiniteExpectationAttachment : ResidualLeaf
   a4FiniteRegularityFromQuantitativeBounds : ResidualLeaf
   a5FiniteGrowthFromQuantitativeBounds : ResidualLeaf
-  a45RepresentedOSPredicateExtensionality : ResidualLeaf
+  a4RepresentedRegularityExtensionality : ResidualLeaf
+  a5RepresentedGrowthExtensionality : ResidualLeaf
 
   -- B source-correct Wilson + same-H.
   bWilsonTwoMarkExpansion : ResidualLeaf
   bWilsonConnectingWeightTail : ResidualLeaf
   bSameHamiltonianTransferCoordinate : ResidualLeaf
-  bLiteralMassGapSameObjectSemantics : ResidualLeaf
+  bVacuumSectorPositiveEnergySemantics : ResidualLeaf
+  bStrictPositiveMassGapSemantics : ResidualLeaf
+  bPhysicalScaleLowerBoundSemantics : ResidualLeaf
+  bNoSpectralPollutionSemantics : ResidualLeaf
+  bGapAndClusteringDerivedSemantics : ResidualLeaf
 
   -- C local QFT.
   c1MarkedSourceHilbertModulus : ResidualLeaf
@@ -91,7 +99,8 @@ data ResidualLeaf : Set where
 
   -- G / all groups + same-system nontriviality.
   g1ArbitraryCompactSimpleSourceMap : ResidualLeaf
-  g2SameSystemNontrivialitySemantics : ResidualLeaf
+  g2WitnessIsLiteralNontriviality : ResidualLeaf
+  g2WitnessPreservedInLiteralLimit : ResidualLeaf
 
 leafLevel : ResidualLeaf → ProofLevel
 leafLevel a1WilsonHessianVariation =
@@ -128,8 +137,10 @@ leafLevel a4FiniteRegularityFromQuantitativeBounds =
   A45Cut.literalRound500FiniteRegularityFromQuantitativeBoundsLevel
 leafLevel a5FiniteGrowthFromQuantitativeBounds =
   A45Cut.literalRound500FiniteGrowthFromQuantitativeBoundsLevel
-leafLevel a45RepresentedOSPredicateExtensionality =
-  A45Rep.literalRound481ExtensionalOSMeaningLevel
+leafLevel a4RepresentedRegularityExtensionality =
+  A45Ext.literalRound501RegularityExtensionalityLevel
+leafLevel a5RepresentedGrowthExtensionality =
+  A45Ext.literalRound501GrowthExtensionalityLevel
 
 leafLevel bWilsonTwoMarkExpansion =
   WEXT.literalRound494WilsonTwoMarkExpansionLevel
@@ -137,8 +148,16 @@ leafLevel bWilsonConnectingWeightTail =
   WEXT.literalRound494WilsonConnectingWeightTailLevel
 leafLevel bSameHamiltonianTransferCoordinate =
   B.bSameHamiltonianLevel
-leafLevel bLiteralMassGapSameObjectSemantics =
-  BSem.literalRound458MassGapSameObjectSemanticsLevel
+leafLevel bVacuumSectorPositiveEnergySemantics =
+  BSemCut.literalRound503VacuumSectorPositiveEnergySemanticsLevel
+leafLevel bStrictPositiveMassGapSemantics =
+  BSemCut.literalRound503StrictPositiveMassGapSemanticsLevel
+leafLevel bPhysicalScaleLowerBoundSemantics =
+  BSemCut.literalRound503PhysicalScaleLowerBoundSemanticsLevel
+leafLevel bNoSpectralPollutionSemantics =
+  BSemCut.literalRound503NoSpectralPollutionSemanticsLevel
+leafLevel bGapAndClusteringDerivedSemantics =
+  BSemCut.literalRound503GapAndClusteringDerivedSemanticsLevel
 
 leafLevel c1MarkedSourceHilbertModulus =
   C.c1MarkedSourceHilbertModulusLevel
@@ -161,8 +180,10 @@ leafLevel c4DensityAnchoredLaneInstantiation =
 
 leafLevel g1ArbitraryCompactSimpleSourceMap =
   G1.physicalGroupParametricFiveBlockSourceMapLevel
-leafLevel g2SameSystemNontrivialitySemantics =
-  G2.literalRound468SameSystemNontrivialitySemanticsLevel
+leafLevel g2WitnessIsLiteralNontriviality =
+  G2Cut.literalRound502WitnessIsLiteralNontrivialityLevel
+leafLevel g2WitnessPreservedInLiteralLimit =
+  G2Cut.literalRound502WitnessPreservedInLiteralLimitLevel
 
 residualLeaves : List ResidualLeaf
 residualLeaves =
@@ -182,11 +203,16 @@ residualLeaves =
   ∷ a45QuantitativeFiniteExpectationAttachment
   ∷ a4FiniteRegularityFromQuantitativeBounds
   ∷ a5FiniteGrowthFromQuantitativeBounds
-  ∷ a45RepresentedOSPredicateExtensionality
+  ∷ a4RepresentedRegularityExtensionality
+  ∷ a5RepresentedGrowthExtensionality
   ∷ bWilsonTwoMarkExpansion
   ∷ bWilsonConnectingWeightTail
   ∷ bSameHamiltonianTransferCoordinate
-  ∷ bLiteralMassGapSameObjectSemantics
+  ∷ bVacuumSectorPositiveEnergySemantics
+  ∷ bStrictPositiveMassGapSemantics
+  ∷ bPhysicalScaleLowerBoundSemantics
+  ∷ bNoSpectralPollutionSemantics
+  ∷ bGapAndClusteringDerivedSemantics
   ∷ c1MarkedSourceHilbertModulus
   ∷ c1CurvatureGaugeLocalSemantics
   ∷ c2PhysicalRemainderIsCompositeTail
@@ -197,7 +223,8 @@ residualLeaves =
   ∷ c4LiteralDensityMetricDerivative
   ∷ c4DensityAnchoredLaneInstantiation
   ∷ g1ArbitraryCompactSimpleSourceMap
-  ∷ g2SameSystemNontrivialitySemantics
+  ∷ g2WitnessIsLiteralNontriviality
+  ∷ g2WitnessPreservedInLiteralLimit
   ∷ []
 
 listLength : ∀ {A : Set} → List A → Nat
@@ -222,6 +249,18 @@ physicalRepresentationAssemblyLevel =
 finiteOS05AssemblyLevel : ProofLevel
 finiteOS05AssemblyLevel =
   A45Cut.round500OS05CompilerLevel
+
+representedOSExtensionalityCompilerLevel : ProofLevel
+representedOSExtensionalityCompilerLevel =
+  A45Ext.round501RepresentedOSTransportCompilerLevel
+
+massGapSemanticAssemblyLevel : ProofLevel
+massGapSemanticAssemblyLevel =
+  BSemCut.round503T2SemanticCompilerLevel
+
+nontrivialitySemanticAssemblyLevel : ProofLevel
+nontrivialitySemanticAssemblyLevel =
+  G2Cut.round502GaussianWardGapCompilerLevel
 
 caratheodoryExtensionLevel : ProofLevel
 caratheodoryExtensionLevel =
