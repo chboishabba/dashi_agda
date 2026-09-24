@@ -172,3 +172,6 @@ import DASHI.Physics.Closure.MultiverseAttractorDiscriminatorBidiExact
 -- equation residual before promotion, preserving explicit calibration scope.
 import DASHI.Physics.Closure.EinsteinEquationBidiResidualExact
 import DASHI.Physics.Closure.EinsteinEquationBidiResidualValidation
+
+import DASHI.Physics.Closure.W4CalibrationBidiAttemptExact
+import DASHI.Physics.Closure.GRQFTExecutableClosureMatrixExact
