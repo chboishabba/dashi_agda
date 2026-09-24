@@ -20,6 +20,9 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import Data.Rational.Base as ℚ
+import DASHI.Physics.YangMills.CompactLieGroupCore as Core
+import DASHI.Physics.YangMills.CompactSimpleQuantitativeCoverage as Quant
 import DASHI.Physics.YangMills.YangMillsConcreteStructuralSemanticsRound517Exact as Structural
 import DASHI.Physics.YangMills.YangMillsActualGroupQuantitativeAlignmentRound541Exact as Alignment
 import DASHI.Physics.YangMills.BalabanGroupParametricFiveBlockSignedG2Exact as G1
@@ -44,7 +47,7 @@ actualCompactSimple :
   ∀ {GaugeIndex X}
     (source : ActualGroupCompleteSource GaugeIndex X)
     group →
-  DASHI.Physics.YangMills.CompactLieGroupCore.CompactSimpleLieGroup
+  Core.CompactSimpleLieGroup
     (Structural.GroupCarrier (structural source) group)
     (Structural.LieCarrier (structural source) group)
 actualCompactSimple source =
@@ -54,8 +57,8 @@ alignedQuantitative :
   ∀ {GaugeIndex X}
     (source : ActualGroupCompleteSource GaugeIndex X)
     group →
-  DASHI.Physics.YangMills.CompactSimpleQuantitativeCoverage.QuantitativeCompactLiePackage
-    Data.Rational.Base.ℚ
+  Quant.QuantitativeCompactLiePackage
+    ℚ.ℚ
     (Structural.LieCarrier (structural source) group)
     (Structural.GroupCarrier (structural source) group)
     (Alignment.classification (alignment source) group)
