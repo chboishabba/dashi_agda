@@ -78,7 +78,12 @@ class ModuleSummary:
 
     @property
     def exported_names(self) -> Set[str]:
-        names: Set[str] = set(self.signatures) | set(self.records) | set(self.ast.data)
+        names: Set[str] = (
+            set(self.signatures)
+            | set(self.records)
+            | set(self.ast.data)
+            | set(self.ast.nested_modules)
+        )
         for record in self.ast.records.values():
             names.update(record.fields)
             if record.constructor:
