@@ -1,5 +1,3 @@
-module DASHI.Physics.Foundations.Everything where
-
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact
@@ -64,11 +62,9 @@ import DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExact
 import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact
 import DASHI.Physics.Foundations.GRQFTDiscriminatorSynthesisExact
 import DASHI.Physics.Foundations.GRQFTSequentialExperimentPlannerExact
-
 import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.RelationalObserverGainExact
-
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact
 import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact
 import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact
@@ -109,3 +105,9 @@ import DASHI.Physics.Foundations.SmithChartSourceAtlasExact
 import DASHI.Physics.Foundations.SmithChartComplexReflectionExact
 import DASHI.Physics.Foundations.SmithChartHexPhaseObserverExact
 import DASHI.Physics.Foundations.SmithChartMobiusMatrixExact
+import DASHI.Physics.Foundations.ResonantHumanPoweredFlightEverything
+
+module DASHI.Physics.Foundations.Everything where
+
+
+
