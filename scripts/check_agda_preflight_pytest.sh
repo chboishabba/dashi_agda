@@ -22,10 +22,10 @@ case "$REFINE" in
   none)
     ;;
   scope)
-    ARGS+=(--agda-auto-refine)
+    ARGS+=(--agda-auto-refine=scope)
     ;;
   typecheck)
-    ARGS+=(--agda-auto-refine typecheck)
+    ARGS+=(--agda-auto-refine=typecheck)
     ;;
   *)
     echo "AGDA_PREFLIGHT_REFINE must be one of: none, scope, typecheck" >&2
