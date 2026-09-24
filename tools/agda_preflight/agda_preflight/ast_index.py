@@ -286,6 +286,113 @@ def typed_binders(source_bytes: bytes, expr_node) -> List[AstBinder]:
         i = j + 1
     return out
 
+
+@dataclass(frozen=True)
+class AstArgument:
+    text: str
+    visibility: str
+    node: object
+
+
+@dataclass(frozen=True)
+class AstApplication:
+    head: str
+    head_node: object
+    args: Tuple[AstArgument, ...]
+    node: object
+
+    @property
+    def explicit_args(self) -> Tuple[AstArgument, ...]:
+        return tuple(arg for arg in self.args if arg.visibility == "explicit")
+
+
+def _transparent_application_children(node) -> List:
+    """Return the outer application atoms exposed through hidden grammar rules.
+
+    Hidden tree-sitter rules are flattened. We recurse only through known
+    transparent wrappers and stop at semantic constructs (lambda/let/do/etc.).
+    """
+    semantic_stops = {
+        "lambda", "let", "do", "forall", "record_assignments",
+        "field_assignments", "typed_binding", "where",
+    }
+    atoms = [child for child in node.named_children if child.type == "atom"]
+    if atoms:
+        return atoms
+    result = []
+    for child in node.named_children:
+        if child.type in semantic_stops:
+            continue
+        if child.type in {"expr", "lhs", "rhs", "function_name", "stmt"}:
+            nested = _transparent_application_children(child)
+            if nested:
+                result.extend(nested)
+    return result
+
+
+def _argument_visibility(source_bytes: bytes, atom) -> str:
+    tokens = significant_tokens(source_bytes, atom)
+    if not tokens:
+        return "explicit"
+    if tokens[0].text in {"{{", "⦃"}:
+        return "instance"
+    if tokens[0].text == "{":
+        return "implicit"
+    return "explicit"
+
+
+def application_view(source_bytes: bytes, node) -> Optional[AstApplication]:
+    atoms = _transparent_application_children(node)
+    if not atoms:
+        # A single qid/id expression is a zero-argument application head.
+        names = [
+            token for token in significant_tokens(source_bytes, node)
+            if token.node_type in {"qid", "id"}
+        ]
+        if len(names) == 1:
+            return AstApplication(names[0].text, names[0], (), node)
+        return None
+
+    head_atom = atoms[0]
+    head_names = [
+        token for token in significant_tokens(source_bytes, head_atom)
+        if token.node_type in {"qid", "id"}
+    ]
+    if not head_names:
+        return None
+    head_token = head_names[0]
+    args = tuple(
+        AstArgument(
+            text=node_text(source_bytes, atom).strip(),
+            visibility=_argument_visibility(source_bytes, atom),
+            node=atom,
+        )
+        for atom in atoms[1:]
+    )
+    return AstApplication(head_token.text, head_atom, args, node)
+
+
+def applications(source_bytes: bytes, node) -> Iterator[AstApplication]:
+    """Yield maximal application views under NODE without duplicate nesting."""
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        view = application_view(source_bytes, current)
+        if view is not None and view.args:
+            yield view
+            # Its atoms may contain nested applications in parenthesized args.
+            for arg in reversed(view.args):
+                stack.extend(reversed(arg.node.named_children))
+            continue
+        stack.extend(reversed(current.named_children))
+
+
+def clause_explicit_argument_count(source_bytes: bytes, lhs_node) -> Optional[int]:
+    view = application_view(source_bytes, lhs_node)
+    if view is None:
+        return None
+    return len(view.explicit_args)
+
 def _leaf_tokens(source_bytes: bytes, node) -> List[str]:
     out: List[str] = []
     stack = [node]
