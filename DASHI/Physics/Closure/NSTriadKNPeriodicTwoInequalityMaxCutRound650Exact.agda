@@ -32,6 +32,7 @@ import DASHI.Physics.Closure.NSTriadKNR650QuantitativeResearchStrategyRound651Ex
 import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact as R652
 import DASHI.Physics.Closure.NSTriadKNR650C2CoupledForcingSandwichRound653Exact as R653
 import DASHI.Physics.Closure.NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact as R654
+import DASHI.Physics.Closure.NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact as R655
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -152,6 +153,18 @@ round650C2SignedCollarPaymentClosed =
 round650C2CollarRemoteTelemetryInstalled : Bool
 round650C2CollarRemoteTelemetryInstalled =
   R654.round654C2CollarRemoteTelemetryInstalled
+
+round650C2LowComplementCrossReducedToCollar : Bool
+round650C2LowComplementCrossReducedToCollar =
+  R655.round655FullOffPacketCrossReducedToCollar
+
+round650C2RemoteSpectralCrossDeletedFromRatioHardTerm : Bool
+round650C2RemoteSpectralCrossDeletedFromRatioHardTerm =
+  R655.round655RemoteCrossDeletedBySpectralCoercivity
+
+round650C2RemoteBoundaryFluxStillUnpaid : Bool
+round650C2RemoteBoundaryFluxStillUnpaid =
+  R655.round655RemoteBoundaryFluxPaid
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -281,6 +294,21 @@ round650C2CollarRemoteTelemetryInstalledIsTrue :
   round650C2CollarRemoteTelemetryInstalled ≡ true
 round650C2CollarRemoteTelemetryInstalledIsTrue =
   R654.round654C2CollarRemoteTelemetryInstalledIsTrue
+
+round650C2LowComplementCrossReducedToCollarIsTrue :
+  round650C2LowComplementCrossReducedToCollar ≡ true
+round650C2LowComplementCrossReducedToCollarIsTrue =
+  R655.round655FullOffPacketCrossReducedToCollarIsTrue
+
+round650C2RemoteSpectralCrossDeletedFromRatioHardTermIsTrue :
+  round650C2RemoteSpectralCrossDeletedFromRatioHardTerm ≡ true
+round650C2RemoteSpectralCrossDeletedFromRatioHardTermIsTrue =
+  R655.round655RemoteCrossDeletedBySpectralCoercivityIsTrue
+
+round650C2RemoteBoundaryFluxStillUnpaidIsFalse :
+  round650C2RemoteBoundaryFluxStillUnpaid ≡ false
+round650C2RemoteBoundaryFluxStillUnpaidIsFalse =
+  R655.round655RemoteBoundaryFluxPaidIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
