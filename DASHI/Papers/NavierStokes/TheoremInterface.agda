@@ -14,6 +14,7 @@ import DASHI.Physics.Closure.NSTriadKNComparableOutputGramTelescopeRound209Exact
 import DASHI.Physics.Closure.NSTriadKNComparableOutputResidualPaymentRound211Exact as R211
 import DASHI.Physics.Closure.NSTriadKNComparableConstantBandGramNoGoRound214Exact as R214
 import DASHI.Physics.Closure.NSTriadKNPeriodicClayEligibilityMaxCutRound642Exact as R642
+import DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact as R650
 
 -- Historical/alternative route anchors retained deliberately. They are no
 -- longer the primary paper-facing producer path, but their theorem-bearing
@@ -37,16 +38,17 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 --
 -- Current periodic-B Clay max-cut:
 --
---   NEW / NONSTANDARD
---     C1  R568 cutoff-uniform signed weighted payment
---     C2  physical critical signed-production estimate
+--   NEW / NONSTANDARD -- EXACTLY TWO
+--     C1  R568 cutoff-uniform live signed-commutator spacetime payment
+--     C2  physical R98 packet strict-surplus payment by literal R406,
+--         with positive retained margin delta
 --
---   SAME-OBJECT / PHYSICAL
+--   COMPILED / SAME-OBJECT
 --     C3  canonical literal H^(1/2)/H^(3/2)-type R414 slice
---     C4  common-initial-datum realization + uniform initial ceiling
---     C5  strictly positive retained viscosity
+--     C5  retained viscosity is derived from C2's positive margin
 --
---   STANDARD COMPLETION
+--   STANDARD SOURCE INSTANTIATION
+--     C4  smooth/common initial datum -> canonical dyadic critical ceiling
 --     C6  scalar FTC / integration-linearity / order receipts
 --     C7  periodic Sobolev-Rellich-Simon-weak-* package
 --
@@ -69,7 +71,7 @@ historicalAlternativeRouteStatement =
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is R642: two genuinely new nonlinear estimates (C1 R568 signed payment and C2 phase-sensitive critical production), three physical/same-object obligations (C3 canonical critical slice, C4 common-initial realization plus uniform ceiling, C5 positive retained viscosity), and two standard completion layers (C6 scalar calculus/order receipts and C7 periodic Sobolev-Rellich-Simon-weak-*). R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
+  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is the R650 two-inequality cut: C1 is the live R568 cutoff-uniform signed-commutator spacetime payment; C2 is the live physical R98 packet strict-surplus payment by literal R406 with a positive retained margin. R645 derives retained viscosity from that C2 margin, so C5 is not an independent theorem. C3 is compiled same-object structure; C4/C6/C7 are standard source-instantiation layers with typed consumer boundaries. R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, DFL/DHH/core, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
 
 record NSPaperTheoremStatus : Setω where
   field
@@ -379,6 +381,18 @@ periodicClayMaxCutC2RemainingLeafCanBeOneRadialSurplusPayment : Bool
 periodicClayMaxCutC2RemainingLeafCanBeOneRadialSurplusPayment =
   R642.round642C2RemainingLeafCanBeOneRadialSurplusPayment
 
+periodicClayMaxCutC2PhysicalPacketSurplusCompilerAvailable : Bool
+periodicClayMaxCutC2PhysicalPacketSurplusCompilerAvailable =
+  R642.round642C2PhysicalPacketSurplusCompilerAvailable
+
+periodicClayMaxCutC2RemainingLeafCanBePhysicalPacketR406Payment : Bool
+periodicClayMaxCutC2RemainingLeafCanBePhysicalPacketR406Payment =
+  R642.round642C2RemainingLeafCanBePhysicalPacketR406Payment
+
+periodicClayMaxCutExactlyTwoNewNSAnalyticLeaves : Bool
+periodicClayMaxCutExactlyTwoNewNSAnalyticLeaves =
+  R650.round650ExactlyTwoNewNSAnalyticLeaves
+
 periodicClayMaxCutC3CompilerAvailable : Bool
 periodicClayMaxCutC3CompilerAvailable =
   R642.round642C3CanonicalPhysicalSliceCompilerAvailable
@@ -402,6 +416,14 @@ periodicClayMaxCutC4StandardSmoothToHOneHalfSourceStillExternal =
 periodicClayMaxCutC5Proved : Bool
 periodicClayMaxCutC5Proved = R642.round642C5RetainedViscosityProved
 
+periodicClayMaxCutC5IndependentIfC2UsesPositiveMargin : Bool
+periodicClayMaxCutC5IndependentIfC2UsesPositiveMargin =
+  R642.round642C5IndependentIfC2UsesPositiveMargin
+
+periodicClayMaxCutC4StandardSourceBoundaryAvailable : Bool
+periodicClayMaxCutC4StandardSourceBoundaryAvailable =
+  R642.round642C4TypedStandardSourceBoundaryAvailable
+
 periodicClayMaxCutC6ScalarFTCInstalled : Bool
 periodicClayMaxCutC6ScalarFTCInstalled =
   R642.round642C6StandardScalarFTCInstalled
@@ -409,6 +431,14 @@ periodicClayMaxCutC6ScalarFTCInstalled =
 periodicClayMaxCutC7SimonClosed : Bool
 periodicClayMaxCutC7SimonClosed =
   R642.round642C7PhysicalCriticalSobolevSimonUpgradeClosed
+
+periodicClayMaxCutC6StandardSourceBoundaryAvailable : Bool
+periodicClayMaxCutC6StandardSourceBoundaryAvailable =
+  R642.round642C6TypedStandardSourceBoundaryAvailable
+
+periodicClayMaxCutC7StandardSourceBoundaryAvailable : Bool
+periodicClayMaxCutC7StandardSourceBoundaryAvailable =
+  R642.round642C7TypedStandardSourceBoundaryAvailable
 
 oldPDFB1B2B3B4Mandatory : Bool
 oldPDFB1B2B3B4Mandatory = R642.round642OldPDFB1B2B3B4Mandatory
