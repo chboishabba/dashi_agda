@@ -108,7 +108,7 @@ a3ExpectationIntegralIdentificationLevel =
 -- only independent same-family finite-OS source seam.
 finiteOSBosonicAttachmentLevel : ProofLevel
 finiteOSBosonicAttachmentLevel =
-  FiniteOS.literalRound545ConcreteT1FiniteOSSourceLevel
+  FiniteOS.literalRound545BosonicSameFamilyContentLevel
 
 -- WEXT remains two genuine Wilson source statements.
 wextTwoMarkExpansionLevel : ProofLevel
