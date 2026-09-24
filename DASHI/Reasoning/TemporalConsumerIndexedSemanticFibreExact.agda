@@ -122,10 +122,12 @@ producerRefinementPreservesClosure :
   ProducerRefinement before after →
   ConsumerClosed before →
   ConsumerClosed after
-producerRefinementPreservesClosure refinement closed left right leftLive rightLive =
-  closed left right
-    (fibreRefines refinement left leftLive)
-    (fibreRefines refinement right rightLive)
+producerRefinementPreservesClosure refinement closed
+  rewrite consumerUnchanged refinement =
+  λ left right leftLive rightLive →
+    closed left right
+      (fibreRefines refinement left leftLive)
+      (fibreRefines refinement right rightLive)
 
 ------------------------------------------------------------------------
 -- Same semantic fibre, revised consumer: closure must be re-evaluated.
