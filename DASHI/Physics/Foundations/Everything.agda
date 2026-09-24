@@ -241,3 +241,5 @@ import DASHI.Physics.Foundations.CMP119TenLiteralDensitySourceReadoutsExact
 
 import DASHI.Physics.Foundations.CMP119LiteralFiniteMeasureStressSourceConstructorExact
 import DASHI.Physics.Foundations.CMP119LiteralFiniteMeasureDensityAnchorConstructorExact
+
+import DASHI.Physics.Foundations.CMP119TenLiteralFiniteMeasureReadoutsExact
