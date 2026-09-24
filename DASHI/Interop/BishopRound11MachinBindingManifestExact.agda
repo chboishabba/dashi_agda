@@ -158,6 +158,9 @@ record BindingManifestBoundary : Set where
     loadBearingAgdaBlobsPinned : Bool
     declarationBindingTableOwned : Bool
     reciprocalLeanManifestSourceWritten : Bool
+    leanCanonicalBindingInhabited : Bool
+    leanBindingUniqueUpToBishopSetoid : Bool
+    leanCanonicalRouteBHypothesisFree : Bool
 
     generatedCrossProverReplayObserved : Bool
     leanKernelReceiptObserved : Bool
@@ -169,4 +172,5 @@ canonicalBindingManifestBoundary : BindingManifestBoundary
 canonicalBindingManifestBoundary =
   binding-manifest-boundary
     true true true true
+    true true true
     false false false
