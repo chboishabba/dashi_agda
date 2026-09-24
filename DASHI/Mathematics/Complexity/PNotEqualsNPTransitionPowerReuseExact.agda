@@ -175,29 +175,46 @@ canonicalTransitionPowerUseCount (suc level)
   refl
 
 ------------------------------------------------------------------------
--- One-time reusable-authority cost can grow slowly while per-endpoint use
--- still doubles.  This simple accounting theorem keeps those quantities
--- separate.
+-- One-time authority definition cost, direct per-use cost, and recursively
+-- expanded endpoint cost are separate quantities.  A genuine breakthrough
+-- would supply a sound direct level-j verifier whose directAuthorityUseCost
+-- grows much more slowly than the 2^j naive expansion.
 ------------------------------------------------------------------------
 
 record TransitionPowerCostSchedule : Set where
   field
+    -- Paid once to describe/construct the reusable level-j authority.
     authorityDefinitionCost : Nat → Nat
-    oneRelationUseCost : Nat → Nat
+
+    -- Cost of applying an already-constructed level-j authority to ONE
+    -- concrete endpoint pair, if such a direct verifier exists.
+    directAuthorityUseCost : Nat → Nat
+
+    -- Cost of composing two lower-level endpoint certificates.
     compositionOverhead : Nat → Nat
 
 open TransitionPowerCostSchedule public
 
-naiveEndpointVerificationCost :
+-- Cost of *using* a genuinely reusable level-j authority directly.
+directReusableEndpointVerificationCost :
   TransitionPowerCostSchedule →
   Nat →
   Nat
-naiveEndpointVerificationCost schedule zero =
-  oneRelationUseCost schedule zero
-naiveEndpointVerificationCost schedule (suc level) =
-  naiveEndpointVerificationCost schedule level
+directReusableEndpointVerificationCost schedule level =
+  directAuthorityUseCost schedule level
+
+-- Cost of refusing the direct level-j authority and recursively expanding the
+-- endpoint claim into two level-(j-1) claims.
+naiveExpandedEndpointVerificationCost :
+  TransitionPowerCostSchedule →
+  Nat →
+  Nat
+naiveExpandedEndpointVerificationCost schedule zero =
+  directAuthorityUseCost schedule zero
+naiveExpandedEndpointVerificationCost schedule (suc level) =
+  naiveExpandedEndpointVerificationCost schedule level
   +
-  naiveEndpointVerificationCost schedule level
+  naiveExpandedEndpointVerificationCost schedule level
   +
   compositionOverhead schedule level
 
@@ -205,26 +222,35 @@ zeroOverheadUnitUseSchedule :
   TransitionPowerCostSchedule
 zeroOverheadUnitUseSchedule = record
   { authorityDefinitionCost = λ level → suc zero
-  ; oneRelationUseCost = λ level → suc zero
+  ; directAuthorityUseCost = λ level → suc zero
   ; compositionOverhead = λ level → zero
   }
 
-naiveUnitUseEndpointCostIsPow2 :
+directUnitAuthorityUseCostIsOne :
   (level : Nat) →
-  naiveEndpointVerificationCost
+  directReusableEndpointVerificationCost
+    zeroOverheadUnitUseSchedule level
+  ≡ suc zero
+directUnitAuthorityUseCostIsOne level =
+  refl
+
+naiveExpandedUnitUseCostIsPow2 :
+  (level : Nat) →
+  naiveExpandedEndpointVerificationCost
     zeroOverheadUnitUseSchedule level
   ≡ pow2 level
-naiveUnitUseEndpointCostIsPow2 zero =
+naiveExpandedUnitUseCostIsPow2 zero =
   refl
-naiveUnitUseEndpointCostIsPow2 (suc level)
-    rewrite naiveUnitUseEndpointCostIsPow2 level =
+naiveExpandedUnitUseCostIsPow2 (suc level)
+    rewrite naiveExpandedUnitUseCostIsPow2 level =
   refl
 
 ------------------------------------------------------------------------
 -- Consequence:
 --
 -- Reusing the *definition* of F^(2^j) is not yet a succinct certificate for
--- F^(2^j)(x)=y on concrete endpoints.  To beat the 2^j use count, a future
--- theorem must amortize or batch distinct relation applications, or provide a
--- proof object whose verification cost is sublinear in the represented run.
+-- F^(2^j)(x)=y on concrete endpoints.  The arithmetic above makes the target
+-- explicit: construct a SOUND direct level-j authority whose per-use
+-- verification cost is sub-2^j.  Merely defining the operator recursively and
+-- then expanding each concrete use still pays exactly 2^j primitive uses.
 ------------------------------------------------------------------------
