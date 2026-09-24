@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.YangMillsClayT5CoerciveQuantitativeMaxCutRound447
 -- tightness / compact-containment theorem remains after these inputs.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -141,8 +142,8 @@ continuumOS5 inputs =
 round447QuantitativeMaxCutCompilerLevel : ProofLevel
 round447QuantitativeMaxCutCompilerLevel = machineChecked
 
-round447IndependentTightnessTheoremRequired : Agda.Builtin.Bool.Bool
-round447IndependentTightnessTheoremRequired = Agda.Builtin.Bool.false
+round447IndependentTightnessTheoremRequired : Bool
+round447IndependentTightnessTheoremRequired = false
 
 round447MarkedActivitySourceRealizationLevel : ProofLevel
 round447MarkedActivitySourceRealizationLevel = conditional
