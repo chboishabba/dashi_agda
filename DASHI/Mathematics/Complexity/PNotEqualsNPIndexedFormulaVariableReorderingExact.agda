@@ -25,6 +25,8 @@ open import Data.Fin.Base using (Fin)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
+import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
 
 ------------------------------------------------------------------------
 -- Generic variable renaming.
@@ -243,6 +245,63 @@ reorderingPreservesSAT permutation formula =
     (permutationPreservesSatisfiabilityBackward
       permutation
       formula)
+
+------------------------------------------------------------------------
+-- Reordering changes variable names only, not ordinary Cook syntax-node count.
+------------------------------------------------------------------------
+
+reorderingPreservesCookNodeCount :
+  ∀ {variables : Nat}
+    (permutation : VariablePermutation variables)
+    (formula : SAT.BooleanFormula variables) →
+  Size.formulaNodeCount
+    (Bridge.indexedToCook
+      (renameByPermutation
+        permutation
+        formula))
+  ≡
+  Size.formulaNodeCount
+    (Bridge.indexedToCook formula)
+reorderingPreservesCookNodeCount
+    permutation
+    (SAT.variable index) =
+  refl
+reorderingPreservesCookNodeCount
+    permutation
+    (SAT.constant value) =
+  refl
+reorderingPreservesCookNodeCount
+    permutation
+    (SAT.negate formula)
+    rewrite
+      reorderingPreservesCookNodeCount
+        permutation
+        formula =
+  refl
+reorderingPreservesCookNodeCount
+    permutation
+    (SAT.conjunction left right)
+    rewrite
+      reorderingPreservesCookNodeCount
+        permutation
+        left
+      |
+      reorderingPreservesCookNodeCount
+        permutation
+        right =
+  refl
+reorderingPreservesCookNodeCount
+    permutation
+    (SAT.disjunction left right)
+    rewrite
+      reorderingPreservesCookNodeCount
+        permutation
+        left
+      |
+      reorderingPreservesCookNodeCount
+        permutation
+        right =
+  refl
 
 ------------------------------------------------------------------------
 -- Research consequence.
