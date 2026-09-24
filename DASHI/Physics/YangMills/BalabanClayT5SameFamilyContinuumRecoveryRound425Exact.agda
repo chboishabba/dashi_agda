@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.BalabanClayT5SameFamilyContinuumRecoveryRound425E
 -- eventual same-Hamiltonian, local-family and nontriviality lanes.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ)
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -185,11 +186,11 @@ round425SelectedOSReconstructionAuthorityLevel : ProofLevel
 round425SelectedOSReconstructionAuthorityLevel = standardImported
 
 -- P2 no longer needs a separate continuum target once this owner is inhabited.
-round425SeparateP2ContinuumMeasureRequired : Agda.Builtin.Bool.Bool
-round425SeparateP2ContinuumMeasureRequired = Agda.Builtin.Bool.false
+round425SeparateP2ContinuumMeasureRequired : Bool
+round425SeparateP2ContinuumMeasureRequired = false
 
 -- The reconstruction is definitionally produced from the same selected OS
 -- object, so a later same-H proof need only identify the physical Hamiltonian
 -- with this reconstructed theory's generator; it need not re-prove provenance.
-round425IndependentOSFamilyForP3Required : Agda.Builtin.Bool.Bool
-round425IndependentOSFamilyForP3Required = Agda.Builtin.Bool.false
+round425IndependentOSFamilyForP3Required : Bool
+round425IndependentOSFamilyForP3Required = false
