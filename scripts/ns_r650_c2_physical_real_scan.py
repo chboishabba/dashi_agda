@@ -120,6 +120,7 @@ def _critical_currency(
     forcing = forcing_raw / scale
 
     weighted_transfer = 0.0
+    critical_energy = 0.0
     dissipation = 0.0
     unweighted_transfer = 0.0
     for mode in nonzero_cutoff_modes(formal_cutoff):
@@ -128,13 +129,16 @@ def _critical_currency(
         pairing = float(np.real(np.vdot(u, f)))
         weight = float(2 ** _shell_index_mode(mode))
         k2 = float(mode[0] * mode[0] + mode[1] * mode[1] + mode[2] * mode[2])
+        mass = float(np.real(np.vdot(u, u)))
         unweighted_transfer += pairing
         weighted_transfer += weight * pairing
-        dissipation += weight * k2 * float(np.real(np.vdot(u, u)))
+        critical_energy += weight * mass
+        dissipation += weight * k2 * mass
 
     return {
         "unweighted_transfer": float(unweighted_transfer),
         "weighted_transfer_W": float(weighted_transfer),
+        "critical_energy_X": float(critical_energy),
         "production_rate_2W": float(2.0 * weighted_transfer),
         "critical_dissipation_rate": float(dissipation),
         "viscosity": float(nu),
@@ -531,6 +535,10 @@ def _trajectory_summary(rows: list[dict[str, Any]], delta: float) -> dict[str, A
     d_int = _trapz(times, [float(row["critical_dissipation_rate"]) for row in ordered])
     r_int = _trapz(times, [float(row["r406_weighted_remainder"]) for row in ordered])
     surplus_int = p_int - (2.0 * nu - delta) * d_int
+    x0 = float(ordered[0]["critical_energy_X"])
+    xT = float(ordered[-1]["critical_energy_X"])
+    endpoint_margin = xT - x0 + delta * d_int
+    endpoint_margin_residual = surplus_int - endpoint_margin
     gap_int = r_int - surplus_int
 
     if d_int > 1.0e-30:
@@ -550,6 +558,10 @@ def _trajectory_summary(rows: list[dict[str, Any]], delta: float) -> dict[str, A
         "integrated_dissipation_trapezoid": d_int,
         "integrated_r406_trapezoid": r_int,
         "integrated_strict_surplus_trapezoid": float(surplus_int),
+        "initial_critical_energy": x0,
+        "terminal_critical_energy": xT,
+        "critical_energy_growth_plus_margin": float(endpoint_margin),
+        "sampled_energy_identity_residual": float(endpoint_margin_residual),
         "integrated_r406_minus_surplus_trapezoid": float(gap_int),
         "tested_delta_integrated_c2_diagnostic_holds": gap_int >= 0.0,
         "integrated_margin_capacity": (
