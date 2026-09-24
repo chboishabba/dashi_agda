@@ -104,9 +104,7 @@ _SCOPE_REQUIRED = {
     "TSAGDA024",  # hiding entry validity through re-export chains
     "TSAGDA026",  # rename/open collision
     "TSAGDA027",  # ambiguous unqualified name from opens
-    "TSAGDA041",  # under-application in saturated context
     "TSAGDA055",  # ambiguous opened projection
-    "TSAGDA076",  # function used as type / partial application
     "TSAGDA084",  # inaccessible pattern scope
     "TSAGDA113",  # visibly unbound RHS identifier
     "TSAGDA154",  # ambiguous opened operator
@@ -114,7 +112,10 @@ _SCOPE_REQUIRED = {
 
 
 # Kept for future diagnostics whose truth genuinely requires the kernel.
-_TYPECHECK_REQUIRED: Set[str] = set()
+_TYPECHECK_REQUIRED: Set[str] = {
+    "TSAGDA041",  # under-application / saturation is a typing judgment
+    "TSAGDA076",  # partial application vs type use needs elaborated typing
+}
 
 
 DIAGNOSTIC_POLICIES: Dict[str, DiagnosticPolicy] = {}
