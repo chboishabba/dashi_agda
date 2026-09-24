@@ -453,6 +453,9 @@ import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound544Val
 import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Exact
 import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Validation
 
+import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact
+import DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
