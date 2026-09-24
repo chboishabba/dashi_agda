@@ -172,7 +172,36 @@ def _diag(D, code, msg, s, line, col=1, hint=None, severity="error", confidence=
 
 def extended_diagnostics(checker, s, D):
     source = s.source; clean = _strip_comments(source); out = []
-    data, ctors = _collect_data(source); clauses = _collect_clauses(source)
+    data = {
+        name: DataDecl(
+            name=name,
+            line=decl.line,
+            constructors={
+                cname: Constructor(
+                    name=cname,
+                    datatype=name,
+                    type_text=ctor.type_text,
+                    line=ctor.line,
+                    arity=_arity(ctor.type_text),
+                )
+                for cname, ctor in decl.constructors.items()
+            },
+            indexed=False,
+        )
+        for name, decl in s.ast.data.items()
+    }
+    ctors = {
+        cname: ctor
+        for decl in data.values()
+        for cname, ctor in decl.constructors.items()
+    }
+    clauses = {
+        name: [
+            (clause.line, clause.lhs_text, clause.rhs_text)
+            for clause in items
+        ]
+        for name, items in s.ast.clauses.items()
+    }
     imported = checker.imported_summaries(s)
 
     try:
@@ -181,19 +210,24 @@ def extended_diagnostics(checker, s, D):
             out.append(_diag(D, "TSAGDA004", f"module declares {s.module_name}, but path denotes {expected}", s, 1))
     except ValueError: pass
 
-    for name, lines in _collect_top_decls(source).items():
-        if len(set(lines)) > 1:
-            out.append(_diag(D, "TSAGDA005", f"duplicate top-level declaration {name}", s, sorted(set(lines))[1]))
+    for name, occurrences in s.ast.signature_occurrences.items():
+        if len(occurrences) > 1:
+            out.append(_diag(D, "TSAGDA005", f"duplicate top-level signature {name}", s, occurrences[1].line))
 
-    for rname, rec in s.records.items():
-        names = []
-        for off, line in enumerate(source.splitlines()[rec.line:], rec.line + 1):
-            if line and not line[0].isspace(): break
-            m = re.match(rf"^\s+({_IDENT})\s*:", line)
-            if m:
-                if m.group(1) in names:
-                    out.append(_diag(D, "TSAGDA006", f"duplicate field {m.group(1)} in record {rname}", s, off))
-                names.append(m.group(1))
+    for rname, rec in s.ast.records.items():
+        seen_fields = set()
+        for field in rec.field_occurrences:
+            if field.name in seen_fields:
+                out.append(_diag(D, "TSAGDA006", f"duplicate field {field.name} in record {rname}", s, field.line))
+            seen_fields.add(field.name)
+
+    constructor_owner = {}
+    for dname, decl in s.ast.data.items():
+        for ctor in decl.constructor_occurrences:
+            previous = constructor_owner.get(ctor.name)
+            if previous is not None:
+                out.append(_diag(D, "TSAGDA007", f"duplicate constructor {ctor.name}", s, ctor.line))
+            constructor_owner[ctor.name] = dname
 
     for name, sig in s.signatures.items():
         if name not in clauses and not re.search(rf"(?m)^\s+{re.escape(name)}\s*:", source):
@@ -213,12 +247,12 @@ def extended_diagnostics(checker, s, D):
         if re.search(r"(?<![A-Za-z0-9_'])_(?![A-Za-z0-9_'])", sig.type_text):
             out.append(_diag(D, "TSAGDA013", f"exported signature {name} contains explicit underscore metavariable", s, sig.line))
 
-    import_lines = []
-    for i, line in enumerate(source.splitlines(), 1):
-        m = re.match(r"^\s*(open\s+)?import\s+([A-Za-z0-9_.']+)(?:\s+as\s+([A-Za-z0-9_.']+))?(.*)$", line)
-        if m: import_lines.append((i, bool(m.group(1)), m.group(2), m.group(3) or m.group(2).split(".")[-1], m.group(4)))
+    import_lines = [
+        (item.line, item.opened, item.module, item.alias, item.directives)
+        for item in s.ast.imports
+    ]
     alias_owner = {}
-    for line, is_open, module, alias, rest in import_lines:
+    for line, is_open, module, alias, directives in import_lines:
         p = checker.module_path(module); top = module.split(".")[0]
         if not p.exists() and ((checker.root / top).exists() or (checker.root / (top + ".agda")).exists() or top == "DASHI"):
             out.append(_diag(D, "TSAGDA020", f"imported repository module {module} does not exist", s, line))
@@ -228,16 +262,19 @@ def extended_diagnostics(checker, s, D):
         target = imported.get(alias)
         if target:
             exports = set(target.signatures) | set(target.records) | {f for r in target.records.values() for f in r.fields}
-            um = re.search(r"using\s*\((.*?)\)", rest); hm = re.search(r"hiding\s*\((.*?)\)", rest); rm = re.search(r"renaming\s*\((.*?)\)", rest)
-            if um:
-                for n in re.findall(_IDENT, um.group(1)):
-                    if n not in exports: out.append(_diag(D, "TSAGDA023", f"{n} in using(...) is not exported by {module}", s, line))
-            if hm:
-                for n in re.findall(_IDENT, hm.group(1)):
-                    if n not in exports: out.append(_diag(D, "TSAGDA024", f"{n} in hiding(...) is not exported by {module}", s, line, severity="warning", confidence="medium"))
-            if rm:
-                for old in re.findall(rf"({_IDENT})\s+to\s+{_IDENT}", rm.group(1)):
-                    if old not in exports: out.append(_diag(D, "TSAGDA025", f"renaming source {old} is not exported by {module}", s, line))
+            for directive in directives:
+                if directive.kind == "using":
+                    for n in directive.names:
+                        if n not in exports:
+                            out.append(_diag(D, "TSAGDA023", f"{n} in using(...) is not exported by {module}", s, line))
+                elif directive.kind == "hiding":
+                    for n in directive.names:
+                        if n not in exports:
+                            out.append(_diag(D, "TSAGDA024", f"{n} in hiding(...) is not exported by {module}", s, line, severity="warning", confidence="medium"))
+                elif directive.kind == "renaming":
+                    for old, new in directive.renamings:
+                        if old not in exports:
+                            out.append(_diag(D, "TSAGDA025", f"renaming source {old} is not exported by {module}", s, line))
 
     for m in re.finditer(rf"\b({_IDENT})\.({_IDENT})\b", clean):
         alias, name = m.groups(); target = imported.get(alias)
@@ -421,17 +458,19 @@ def extended_diagnostics(checker, s, D):
 
     # TSAGDA026/027: collisions created by open imports and renamings.
     visible = {}
-    for line, is_open, module, alias, rest in import_lines:
+    for line, is_open, module, alias, directives in import_lines:
         if not is_open: continue
         target = imported.get(alias)
         if not target: continue
         names = set(target.signatures) | set(target.records) | {f for r in target.records.values() for f in r.fields}
-        um = re.search(r"using\s*\((.*?)\)", rest)
-        hm = re.search(r"hiding\s*\((.*?)\)", rest)
-        rm = re.search(r"renaming\s*\((.*?)\)", rest)
-        if um: names &= set(re.findall(_IDENT, um.group(1)))
-        if hm: names -= set(re.findall(_IDENT, hm.group(1)))
-        ren = dict(re.findall(rf"({_IDENT})\s+to\s+({_IDENT})", rm.group(1))) if rm else {}
+        ren = {}
+        for directive in directives:
+            if directive.kind == "using":
+                names &= set(directive.names)
+            elif directive.kind == "hiding":
+                names -= set(directive.names)
+            elif directive.kind == "renaming":
+                ren.update(dict(directive.renamings))
         for n in names:
             vn = ren.get(n, n); visible.setdefault(vn, []).append(module)
     for n, mods in visible.items():
@@ -619,10 +658,11 @@ def extended_diagnostics(checker, s, D):
         if alias not in known_aliases and alias not in local_prefixes and alias[:1].isupper():
             line, col = _line_col(source, m.start())
             out.append(_diag(D, "TSAGDA022", f"qualified prefix {alias} is not a known import alias or local namespace", s, line, col, severity="warning", confidence="medium"))
-    for line, is_open, module, alias, rest in import_lines:
-        rm = re.search(r"renaming\s*\((.*?)\)", rest)
-        if rm:
-            for old, new in re.findall(rf"({_IDENT})\s+to\s+({_IDENT})", rm.group(1)):
+    for line, is_open, module, alias, directives in import_lines:
+        for directive in directives:
+            if directive.kind != "renaming":
+                continue
+            for old, new in directive.renamings:
                 if new in s.signatures or new in s.records:
                     out.append(_diag(D, "TSAGDA026", f"renaming {old} to {new} collides with a local declaration", s, line))
 
@@ -871,8 +911,8 @@ def extended_diagnostics(checker, s, D):
 
     # TSAGDA185: public re-export collision; TSAGDA186: stale import modifiers.
     public_exports = {}
-    for line, is_open, module, alias, rest in import_lines:
-        if not is_open or "public" not in rest: continue
+    for line, is_open, module, alias, directives in import_lines:
+        if not is_open or not any(d.kind == "public" for d in directives): continue
         target = imported.get(alias)
         if not target: continue
         names = set(target.signatures) | set(target.records) | {f for r in target.records.values() for f in r.fields}
