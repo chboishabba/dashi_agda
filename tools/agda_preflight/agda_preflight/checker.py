@@ -22,6 +22,8 @@ class Diagnostic:
     line: int
     column: int = 1
     hint: Optional[str] = None
+    severity: str = "error"
+    confidence: str = "high"
 
     def as_dict(self) -> dict:
         return {
@@ -31,6 +33,8 @@ class Diagnostic:
             "line": self.line,
             "column": self.column,
             "hint": self.hint,
+            "severity": self.severity,
+            "confidence": self.confidence,
         }
 
 
