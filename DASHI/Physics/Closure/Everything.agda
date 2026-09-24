@@ -446,3 +446,5 @@ import DASHI.Physics.Closure.NSTriadKNR650LowCollarRemoteCrossReductionRound655E
 import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarFixedOutputCarrierRound658Exact
