@@ -465,6 +465,10 @@ periodicClayMaxCutC2EuclideanCollarRefinementClosed : Bool
 periodicClayMaxCutC2EuclideanCollarRefinementClosed =
   R650.round650C2EuclideanCollarRefinementClosed
 
+periodicClayMaxCutC2PhysicalBoundaryFluxCollarRefinementClosed : Bool
+periodicClayMaxCutC2PhysicalBoundaryFluxCollarRefinementClosed =
+  R650.round650C2PhysicalBoundaryFluxCollarRefinementClosed
+
 periodicClayMaxCutC2GoodCollarSpectralCrossNonpositive : Bool
 periodicClayMaxCutC2GoodCollarSpectralCrossNonpositive =
   R650.round650C2GoodCollarSpectralCrossNonpositive
