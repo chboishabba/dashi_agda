@@ -282,7 +282,10 @@ def extended_diagnostics(checker, s, D):
             if parent_target is None:
                 return None
             parent_owner, parent_record = parent_target
-            field = parent_record.fields.get(record_expr.parent_field)
+            parent_field_name = record_expr.parent_field
+            field = parent_record.fields.get(parent_field_name)
+            if field is None and parent_field_name:
+                field = parent_record.fields.get(parent_field_name.rsplit(".", 1)[-1])
             target = _resolve_field_record_ast(checker, parent_owner, field)
             record_target_cache[key] = target
             return target
@@ -301,19 +304,34 @@ def extended_diagnostics(checker, s, D):
             continue
         target_owner, target = target_ref
         assignments = _assignment_map(record_expr)
-        names = [name for name, _ in assignments]
-        for name, assignment in assignments:
-            if name not in target.fields:
-                out.append(_diag(D, "TSAGDA060", f"{name} is not a field of record {target.name}", s, assignment.line))
+
+        def target_field_name(name):
+            if name in target.fields:
+                return name
+            short = name.rsplit(".", 1)[-1]
+            if short in target.fields:
+                return short
+            return None
+
+        normalized = [
+            (target_field_name(name), name, assignment)
+            for name, assignment in assignments
+        ]
+        names = [resolved for resolved, _, _ in normalized if resolved is not None]
+
+        for resolved, original, assignment in normalized:
+            if resolved is None:
+                out.append(_diag(D, "TSAGDA060", f"{original} is not a field of record {target.name}", s, assignment.line))
         for name in set(names):
             if names.count(name) > 1:
-                duplicate = next(a for n, a in assignments if n == name)
+                duplicate = next(a for resolved, _, a in normalized if resolved == name)
                 out.append(_diag(D, "TSAGDA061", f"field {name} is assigned more than once", s, duplicate.line))
         missing = [name for name in target.fields if name not in names]
         if missing:
             out.append(_diag(D, "TSAGDA062", f"record {target.name} is missing fields: {', '.join(missing)}", s, record_expr.line))
-        for name, assignment in assignments:
-            field = target.fields.get(name)
+        for resolved, original, assignment in normalized:
+            field = target.fields.get(resolved) if resolved is not None else None
+            name = resolved or original
             if field is None or field.type_node is None or assignment.expr_node is None:
                 continue
             lambda_node = next((n for n in assignment.expr_node.named_children if n.type == "lambda"), None)
