@@ -492,3 +492,5 @@ import DASHI.Physics.Closure.NSTriadKNR650RateKernelPositiveRateNoGoRound680Exac
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650LiveRateKernelCrossGradientRound682Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650RateKernelCrossGradientVectorRound683Exact
