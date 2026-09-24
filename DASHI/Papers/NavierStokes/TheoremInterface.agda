@@ -393,6 +393,18 @@ periodicClayMaxCutExactlyTwoNewNSAnalyticLeaves : Bool
 periodicClayMaxCutExactlyTwoNewNSAnalyticLeaves =
   R650.round650ExactlyTwoNewNSAnalyticLeaves
 
+periodicClayMaxCutUniversalViscosityOnlyC2ShortcutAdmissible : Bool
+periodicClayMaxCutUniversalViscosityOnlyC2ShortcutAdmissible =
+  R650.round650UniversalViscosityOnlyC2ShortcutAdmissible
+
+periodicClayMaxCutC2MustRetainScaleChangingMechanism : Bool
+periodicClayMaxCutC2MustRetainScaleChangingMechanism =
+  R650.round650C2MustRetainScaleChangingMechanism
+
+periodicClayMaxCutQuantitativeStressHarnessInstalled : Bool
+periodicClayMaxCutQuantitativeStressHarnessInstalled =
+  R650.round650QuantitativeStressHarnessInstalled
+
 periodicClayMaxCutC3CompilerAvailable : Bool
 periodicClayMaxCutC3CompilerAvailable =
   R642.round642C3CanonicalPhysicalSliceCompilerAvailable
