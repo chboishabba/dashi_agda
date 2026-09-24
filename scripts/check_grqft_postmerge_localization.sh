@@ -54,6 +54,8 @@ files=(
   DASHI/Physics/Foundations/GRQFTR457SourceNativeRecoveryBindingValidation.agda
   DASHI/Physics/Foundations/CMP119SymmetricFiniteTangentBasisCompilerExact.agda
   DASHI/Physics/Foundations/CMP119SymmetricFiniteTangentBasisCompilerValidation.agda
+  DASHI/Physics/Foundations/CMP119ActiveRawSymmetricTangentSpecializationExact.agda
+  DASHI/Physics/Foundations/CMP119ActiveRawSymmetricTangentSpecializationValidation.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
