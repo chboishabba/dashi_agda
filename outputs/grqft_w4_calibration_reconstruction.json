@@ -1,0 +1,60 @@
+{
+  "artifactSchema": "dashi-grqft-w4-calibration-reconstruction-v1",
+  "dataEndpointRatio": 980.3474210907259,
+  "currentCommittedRun": {
+    "chi2": 5080.386831006523,
+    "chi2PerDof": 298.8462841768543,
+    "scale": 230534508.31238452
+  },
+  "currentShapeRefit": {
+    "scale": 230534508.31238452,
+    "chi2": 5080.386831006523,
+    "dof": 17,
+    "chi2PerDof": 298.8462841768543,
+    "firstPrediction": 1.4582278402600855,
+    "lastPrediction": 0.021713210718195118,
+    "firstPull": -67.35457265472463,
+    "lastPull": -51.62836040061707,
+    "endpointShapeRatio": 67.15857949369088
+  },
+  "binWidthReinterpretation": {
+    "scale": 3025522.2839779085,
+    "chi2": 5051.811001263341,
+    "dof": 17,
+    "chi2PerDof": 297.1653530154906,
+    "firstPrediction": 4.78442561389285,
+    "lastPrediction": 0.00013416336648960892,
+    "firstPull": -67.3186065081161,
+    "lastPull": -51.80425966290158,
+    "endpointShapeRatio": 35661.80526163408
+  },
+  "massGeneralFreshCandidate": {
+    "scale": -11.122653052012883,
+    "chi2": 5076.844088081072,
+    "dof": 17,
+    "chi2PerDof": 298.6378875341807,
+    "firstPrediction": -0.17899545947617093,
+    "lastPrediction": -0.08825441128943154,
+    "firstPull": -67.37227593553854,
+    "lastPull": -52.52474953545971,
+    "endpointShapeRatio": 2.0281757802355385
+  },
+  "residualMechanism": {
+    "logLinearCoverage": 0.9687052128530348,
+    "logLinearResidualChi2PerDof": 111.96455543013676,
+    "logCubicCoverage": 0.9955888208070182,
+    "logCubicResidualChi2PerDof": 18.036622062708705,
+    "cssProxyCoverage": 0.8472242628449239,
+    "cssProxyResidualChi2PerDof": 583.0310302095853,
+    "transition1PhiStar": 0.1395,
+    "transition2PhiStar": 0.8385
+  },
+  "diagnosis": [
+    "current finite-carrier W4 shape is much too flat across phi-star",
+    "naive bin-width reinterpretation does not repair the covariance-weighted failure",
+    "fresh mass-general candidate is even flatter and is not a viable replacement",
+    "dominant discrepancy is smooth shape structure, not one missing global normalization",
+    "next physical candidate must add genuine low-phi resummation/nonperturbative structure, fiducial acceptance, and fixed-order tail before authority/promotion"
+  ],
+  "promotesW4": false
+}

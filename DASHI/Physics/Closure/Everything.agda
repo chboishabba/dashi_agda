@@ -175,3 +175,6 @@ import DASHI.Physics.Closure.EinsteinEquationBidiResidualValidation
 
 import DASHI.Physics.Closure.W4CalibrationBidiAttemptExact
 import DASHI.Physics.Closure.GRQFTExecutableClosureMatrixExact
+
+import DASHI.Physics.Closure.W4CalibrationFailureMechanismExact
+import DASHI.Physics.Closure.GRQFTSIPhysicalCalibrationBridgeExact
