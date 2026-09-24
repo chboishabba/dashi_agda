@@ -25,6 +25,7 @@ data SourceRole : Set where
   cardinalityDiagonalization : SourceRole
   sharedConstraintEncoding : SourceRole
   probabilisticallyCheckableProofs : SourceRole
+  boundedSelfReference : SourceRole
   diagonalCardinality : SourceRole
 
 data IdentifierStatus : Set where
@@ -131,6 +132,18 @@ goldbergJuvekarKabanets2026 =
     stableReportIdentifier
     "Context only: meta-complexity / description-complexity motivation.  No self-diagonal SAT certificate or P != NP theorem is imported."
 
+
+critch2019 : ComplexitySource
+critch2019 =
+  complexitySource
+    "Andrew Critch"
+    "A parametric, resource-bounded generalization of Löb's theorem, and a robust cooperation criterion for open-source game theory"
+    2019
+    "Journal of Symbolic Logic 84(4), 1368--1381"
+    "doi:10.1017/JSL.2017.42"
+    boundedSelfReference
+    verifiedDOI
+    "Calibration for proof-length-bounded self-reference/reflection only.  It does not provide a SAT self-diagonal formula, a sub-circuit semantic evaluator, or a P-versus-NP lower bound."
 
 aroraSafra1998 : ComplexitySource
 aroraSafra1998 =
