@@ -9,6 +9,7 @@ from tree_sitter import Language, Parser
 import tree_sitter_agda
 
 from .rules import extended_diagnostics
+from .ast_index import AstIndex, build_ast_index
 
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
@@ -76,6 +77,7 @@ class ModuleSummary:
     records: Dict[str, RecordInfo]
     signatures: Dict[str, SignatureInfo]
     source: str
+    ast: AstIndex
 
 
 def _language() -> Language:
@@ -356,14 +358,38 @@ class Checker:
         if cached is not None:
             return cached
         source = path.read_text(encoding="utf-8")
+        ast = build_ast_index(self.parser, path, self.root, source)
+        records: Dict[str, RecordInfo] = {}
+        for name, record in ast.records.items():
+            records[name] = RecordInfo(
+                name=name,
+                line=record.line,
+                fields={
+                    field_name: FieldInfo(
+                        name=field_name,
+                        type_text=field.type_text,
+                        line=field.line,
+                    )
+                    for field_name, field in record.fields.items()
+                },
+            )
+        signatures: Dict[str, SignatureInfo] = {
+            name: SignatureInfo(
+                names=signature.names,
+                type_text=signature.type_text,
+                line=signature.line,
+            )
+            for name, signature in ast.signatures.items()
+        }
         summary = ModuleSummary(
             path=path,
-            module_name=_module_name(source, path, self.root),
-            imports=_imports(source),
-            opens=_opens(source),
-            records=_collect_records(source),
-            signatures=_collect_signatures(source),
+            module_name=ast.module_name,
+            imports=ast.import_map,
+            opens=ast.opened_namespaces,
+            records=records,
+            signatures=signatures,
             source=source,
+            ast=ast,
         )
         self._summary_cache[path] = summary
         return summary
@@ -661,11 +687,10 @@ class Checker:
             if parts & {".cache", "build", "dist", "vendor", "third_party", "tmp"}:
                 continue
             try:
-                source = path.read_text(encoding="utf-8")
+                summary = self.parse_summary(path)
             except (UnicodeDecodeError, OSError):
                 continue
-            module = _module_name(source, path, self.root)
-            graph[module] = set(_imports(source).values())
+            graph[summary.module_name] = set(summary.imports.values())
         return graph
 
     def affected_modules(self, path: Path) -> List[str]:
