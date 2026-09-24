@@ -10,6 +10,7 @@ import tree_sitter_agda
 from .rules import extended_diagnostics
 from .ast_index import AstIndex, build_ast_index, significant_tokens, typed_binders
 from .shapes import shape_from_node, terminal_head, explicit_arity
+from .evidence import EvidenceLevel, evidence_name, policy_for
 
 
 
@@ -23,6 +24,9 @@ class Diagnostic:
     hint: Optional[str] = None
     severity: str = "error"
     confidence: str = "high"
+    evidence: str = "dashi-index"
+    minimum_evidence: str = "dashi-index"
+    evidence_sufficient: bool = True
 
     def as_dict(self) -> dict:
         return {
@@ -34,6 +38,9 @@ class Diagnostic:
             "hint": self.hint,
             "severity": self.severity,
             "confidence": self.confidence,
+            "evidence": self.evidence,
+            "minimum_evidence": self.minimum_evidence,
+            "evidence_sufficient": self.evidence_sufficient,
         }
 
 
@@ -165,10 +172,18 @@ class Checker:
         ".autonomous-orchestrator",
     }
 
-    def __init__(self, root: Path):
+    def __init__(
+        self,
+        root: Path,
+        *,
+        evidence_level: EvidenceLevel = EvidenceLevel.DASHI_INDEX,
+        scope_backend=None,
+    ):
         self.root = root.resolve()
         self.parser = _parser()
         self._summary_cache: Dict[Path, ModuleSummary] = {}
+        self.evidence_level = evidence_level
+        self.scope_backend = scope_backend
 
     def repository_agda_files(self) -> Iterator[Path]:
         """Yield source Agda files while excluding generated/vendor/toolchain trees."""
@@ -249,6 +264,7 @@ class Checker:
         diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
         diagnostics.extend(self._record_shape_diagnostics(summary))
         diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
+        diagnostics = self._apply_evidence_policy(summary, diagnostics)
 
         # Some catalogue entries are intentionally more specific views of the
         # same high-confidence structural event. Emit aliases centrally so the
@@ -272,6 +288,9 @@ class Checker:
                         diagnostic.hint,
                         diagnostic.severity,
                         diagnostic.confidence,
+                        diagnostic.evidence,
+                        diagnostic.minimum_evidence,
+                        diagnostic.evidence_sufficient,
                     )
                 )
         # Stable de-duplication.
@@ -283,6 +302,63 @@ class Checker:
                 seen.add(key)
                 unique.append(d)
         return sorted(unique, key=lambda d: (d.line, d.column, d.code))
+
+    def _apply_evidence_policy(
+        self,
+        summary: ModuleSummary,
+        diagnostics: List[Diagnostic],
+    ) -> List[Diagnostic]:
+        """Attach provenance and prevent unsupported hard conclusions.
+
+        Structural rules currently run with at most DASHI_INDEX evidence.
+        Scope-dependent diagnostics therefore remain warnings unless an optional
+        backend explicitly refines/validates them at AGDA_SCOPE or stronger.
+        """
+        structural_level = min(self.evidence_level, EvidenceLevel.DASHI_INDEX)
+        normalized: List[Diagnostic] = []
+
+        for diagnostic in diagnostics:
+            policy = policy_for(diagnostic.code)
+            actual = (
+                EvidenceLevel.TREE_SITTER
+                if policy.minimum == EvidenceLevel.TREE_SITTER
+                else structural_level
+            )
+            sufficient = actual >= policy.minimum
+            severity = diagnostic.severity
+            confidence = diagnostic.confidence
+            hint = diagnostic.hint
+
+            if not sufficient and severity == "error":
+                severity = "warning"
+                confidence = "insufficient-evidence"
+                requirement = evidence_name(policy.minimum)
+                extra = (
+                    f"Hard conclusion deferred: {diagnostic.code} requires "
+                    f"{requirement} evidence."
+                )
+                hint = f"{hint} {extra}".strip() if hint else extra
+
+            normalized.append(
+                Diagnostic(
+                    diagnostic.code,
+                    diagnostic.message,
+                    diagnostic.path,
+                    diagnostic.line,
+                    diagnostic.column,
+                    hint,
+                    severity,
+                    confidence,
+                    evidence_name(actual),
+                    evidence_name(policy.minimum),
+                    sufficient,
+                )
+            )
+
+        if self.scope_backend is not None:
+            normalized = self.scope_backend.refine(summary, normalized)
+
+        return normalized
 
     def _syntax_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
         data = summary.source.encode("utf-8")
