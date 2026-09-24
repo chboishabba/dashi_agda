@@ -8,6 +8,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_)
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as MetricBasis
+import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as BetaDensity
 import DASHI.Physics.YangMills.BalabanFunctionalRegularESourceFlowRound242Exact as SourceFlow
 import DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact as Local
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
@@ -46,7 +47,9 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 
 module _
     {History Cell : Set} {cutoff : Nat}
-    {trajectory split inputs}
+    {trajectory split}
+    {inputs : BetaDensity.BetaDrivenCompleteDensityInputs
+      {trajectory = trajectory} {split = split}}
     {source : SourceFlow.FunctionalRegularESourceFlowInputs
       {trajectory = trajectory} {split = split} inputs}
     {localization : Local.CMP119RegularELocalizationCarrier source}
