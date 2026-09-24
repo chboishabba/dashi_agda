@@ -5,6 +5,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_; -[1+_])
+open import Data.Rational.Tactic.RingSolver using (solve)
 open import Agda.Builtin.Nat using (zero; suc)
 
 import DASHI.Physics.Foundations.GRQFTRationalStressComponentCutExact as Cut
@@ -59,7 +60,7 @@ localizedActiveMass tensor =
 finiteGRLocalizedActiveMassIsNegativeTwo :
   localizedActiveMass Cut.finiteGRStressRational
     ≡ -[1+ suc zero ]
-finiteGRLocalizedActiveMassIsNegativeTwo = refl
+finiteGRLocalizedActiveMassIsNegativeTwo = solve []
 
 data ActiveMassSign : Set where
   positiveActiveMass : ActiveMassSign
