@@ -30,6 +30,7 @@ import DASHI.Physics.YangMills.YangMillsClayMomentOS05MaxCutRound500Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOSExtensionalityMaxCutRound501Exact as A45Ext
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
+import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSMaxCutRound505Exact as FiniteOSCut
 
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as BWEXT
@@ -50,7 +51,19 @@ import DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact as 
 
 aFiniteSymmetryAndRPSourceLevel : ProofLevel
 aFiniteSymmetryAndRPSourceLevel =
-  FiniteOS.literalRound462PublishedFiniteOSApplicationLevel
+  FiniteOSCut.round505FiniteOSAssemblyCompilerLevel
+
+aFiniteEuclideanSameObjectAttachmentLevel : ProofLevel
+aFiniteEuclideanSameObjectAttachmentLevel =
+  FiniteOSCut.literalRound505EuclideanSameObjectAttachmentLevel
+
+aFiniteBosonicSameObjectAttachmentLevel : ProofLevel
+aFiniteBosonicSameObjectAttachmentLevel =
+  FiniteOSCut.literalRound505BosonicSameObjectAttachmentLevel
+
+aFiniteWilsonRPSameObjectAttachmentLevel : ProofLevel
+aFiniteWilsonRPSameObjectAttachmentLevel =
+  FiniteOSCut.literalRound505WilsonRPSameObjectAttachmentLevel
 
 a1CurrentStepBetaSourceLevel : ProofLevel
 a1CurrentStepBetaSourceLevel =
