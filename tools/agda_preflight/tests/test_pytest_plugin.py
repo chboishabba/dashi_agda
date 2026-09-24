@@ -276,7 +276,7 @@ Series M x = x
     result.assert_outcomes(failed=1)
     result.stdout.fnmatch_lines(
         [
-            "*top diagnostics:*",
+            "*top root-cause diagnostics:*",
             "*TSAGDA001:*",
         ]
     )
