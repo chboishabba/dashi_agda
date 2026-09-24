@@ -20,11 +20,11 @@ qftEvaluatorCompilerPresent :
   ≡ true
 qftEvaluatorCompilerPresent = refl
 
-tenSlotTangentSpecializationClosed :
-  F.tenSlotFiniteTangentSpecializationCompilerExists
+r144CompatiblePresentCutCompilerClosed :
+  F.r144CompatibleTenSlotPresentCutCompilerExists
     F.canonicalGRQFTConcreteTheoryFrontier
   ≡ true
-tenSlotTangentSpecializationClosed = refl
+r144CompatiblePresentCutCompilerClosed = refl
 
 tenValuesStillMissing :
   F.tenIndependentComponentValuesExist F.canonicalGRQFTConcreteTheoryFrontier
