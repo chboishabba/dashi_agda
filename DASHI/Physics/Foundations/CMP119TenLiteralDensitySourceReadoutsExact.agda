@@ -13,6 +13,7 @@ import DASHI.Physics.YangMills.BalabanFunctionalRegularESourceFlowRound242Exact 
 import DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact as Local
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
+import DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact as Finite
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
 import DASHI.Physics.YangMills.BalabanBC2FiniteLocalizedFirstVariationRound143Exact as R143
 import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact as R144
@@ -98,7 +99,7 @@ module _
 
   tangentAtAxes :
     Flat.Axis4 → Flat.Axis4 →
-    DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact.Tangent
+    Finite.Tangent
       (Carrier.finiteAction
         (Present.bc1Carrier
           (Present10.asPresentCutPhysicalSourceInputs presentData)))
