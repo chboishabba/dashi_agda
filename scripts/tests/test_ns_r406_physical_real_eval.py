@@ -163,3 +163,41 @@ def test_pointwise_c2_strengthening_fails_for_one_sign_at_large_amplitude() -> N
             break
 
     assert failed
+
+
+def test_r652_c1_r406_diagonal_coupling_numeric_residual() -> None:
+    raw = _reality_closed_random_state(6, seed=47)
+    row = evaluate_r406(
+        raw,
+        nu=0.01,
+        formal_cutoff=1,
+        max_pairs=100_000,
+    )
+    scale = max(
+        1.0,
+        abs(float(row["c1_instantaneous_four_forcing_full"])),
+        abs(2.0 * float(row["r406_weighted_remainder"])),
+        abs(4.0 * float(row["global_forcing_full_diagonal"])),
+    )
+    assert abs(float(row["offdiagonal_minus_twice_direct_companion"])) <= 1.0e-12 * scale
+    assert abs(float(row["c1_r406_diagonal_coupling_residual"])) <= 1.0e-12 * scale
+
+
+def test_c1_forcing_full_has_expected_quintic_amplitude_degree() -> None:
+    raw = _reality_closed_random_state(6, seed=53)
+    base = evaluate_r406(
+        raw,
+        nu=0.01,
+        formal_cutoff=1,
+        max_pairs=100_000,
+    )
+    doubled = evaluate_r406(
+        2.0 * raw,
+        nu=0.01,
+        formal_cutoff=1,
+        max_pairs=100_000,
+    )
+    c0 = float(base["c1_instantaneous_four_forcing_full"])
+    c1 = float(doubled["c1_instantaneous_four_forcing_full"])
+    assert abs(c0) > 1.0e-18
+    assert np.isclose(c1, 32.0 * c0, rtol=5.0e-10, atol=1.0e-14)
