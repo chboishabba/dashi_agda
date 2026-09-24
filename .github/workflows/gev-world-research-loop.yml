@@ -10,6 +10,8 @@ on:
       - 'DASHI/Statistics/Forecast*.agda'
       - 'DASHI/Applications/WorldMonitorForecastScorecardExact.agda'
       - 'DASHI/Core/ObjectDecompositionResidualRouterExact.agda'
+      - 'DASHI/Core/ProviderNeutralWorldQueryAlgebraExact.agda'
+      - 'DASHI/Chemistry/PetrochemicalForecastObjectResidualAdapterExact.agda'
       - 'DASHI/Reasoning/ForecastWaveHyperfabricCrossPollinationExact.agda'
       - 'DASHI/ForecastVerificationEverything.agda'
       - 'DASHI/Interop/GodsEyeViewAcquisitionResultAssessmentBridgeExact.agda'
