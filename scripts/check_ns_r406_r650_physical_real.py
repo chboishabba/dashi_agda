@@ -73,6 +73,10 @@ def validate_r406(payload: dict[str, Any]) -> list[str]:
         "c1_instantaneous_four_forcing_full",
         "offdiagonal_minus_twice_direct_companion",
         "c1_r406_diagonal_coupling_residual",
+        "global_rate_lifted_forcing_full",
+        "global_coherent_commutator_work",
+        "global_weighted_rate_work",
+        "r687_global_rate_lift_residual",
     ):
         if not _finite(payload.get(key)):
             errors.append(f"r406: {key} must be finite")
@@ -163,9 +167,19 @@ def _validate_c1_row(row: Any, *, label: str, errors: list[str]) -> None:
         "offdiagonal_minus_twice_direct_companion",
         "c1_r406_diagonal_coupling_residual",
         "r406_weighted_remainder",
+        "rate_lifted_forcing_full",
+        "coherent_commutator_work",
+        "coherent_tangent_work",
+        "weighted_rate_work",
+        "r685_rate_kernel_residual",
+        "r687_rate_lift_residual",
     ):
         if not _finite(row.get(key)):
             errors.append(f"{label}: {key} must be finite")
+    if "weighted_rate_work_nonnegative" in row and not isinstance(
+        row.get("weighted_rate_work_nonnegative"), bool
+    ):
+        errors.append(f"{label}: weighted_rate_work_nonnegative must be boolean")
     minimum_rate = row.get("minimum_pair_rate")
     if minimum_rate is not None and (
         not _finite(minimum_rate) or float(minimum_rate) <= 0.0
