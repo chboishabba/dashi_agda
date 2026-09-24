@@ -109,9 +109,15 @@ round256SequentialTangentCompositionIsCompilerOwned :
     ≡ R256.round256TangentFibreCorrectionCompilerLevel
 round256SequentialTangentCompositionIsCompilerOwned = refl
 
--- Importing R144 here is intentional: this max-cut is scoped to the route whose
--- selected stress input is already R144.CompositeStressFirstVariationInputs.
--- No inhabitant is manufactured in this file.
-r144SelectedStressInputType :
-  Set₁ → Set₁
-r144SelectedStressInputType X = X
+-- Machine-visible scope witness: this max-cut is specifically downstream of
+-- an actual R144 selected-stress receipt.  The function does not manufacture
+-- the receipt; it only records that once such a receipt is present, D1a/D1b are
+-- not charged a second time by this route.
+r144SelectedStressRouteCarriesFiniteD1Identification :
+  ∀ {trajectory split inputs History Cell cutoff present actionWeld laws} →
+  R144.CompositeStressFirstVariationInputs
+    {trajectory = trajectory} {split = split} {inputs = inputs}
+    {History = History} {Cell = Cell} {cutoff = cutoff}
+    {present = present} actionWeld laws →
+  Bool
+r144SelectedStressRouteCarriesFiniteD1Identification _ = true
