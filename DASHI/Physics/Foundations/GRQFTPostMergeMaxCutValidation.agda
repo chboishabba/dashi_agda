@@ -10,8 +10,8 @@ cmp119SectorCompilerClosed :
   ≡ true
 cmp119SectorCompilerClosed = refl
 
-allSectorAggregationStillOpen :
-  M.allSectorAggregationStillRequired
+activeSectorTotalizationStillOpen :
+  M.activePhysicalSectorTotalizationStillRequired
     M.canonicalGRQFTPostMergeMaxCut
   ≡ true
 allSectorAggregationStillOpen = refl

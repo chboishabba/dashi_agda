@@ -448,3 +448,6 @@ import DASHI.Physics.Closure.ColliderChiSquareScopeMatrixExact
 
 import DASHI.Physics.Closure.DrellYanRatioAbsoluteDefectLocalizationValidation
 import DASHI.Physics.Closure.ColliderChiSquareScopeMatrixValidation
+
+import DASHI.Physics.Closure.DrellYanRatioCancellationBoundaryExact
+import DASHI.Physics.Closure.ColliderLowChiSquareProvenanceLadderExact

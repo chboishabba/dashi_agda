@@ -16,7 +16,7 @@ data GRQFTPostMergeLeaf : Set where
   grDiscreteToContinuumRealization : GRQFTPostMergeLeaf
   cmp119StressToLiteralPinnedStressAttachment : GRQFTPostMergeLeaf
   pinnedLiteralYMToRecoveredQFTAttachment : GRQFTPostMergeLeaf
-  allSectorQFTAggregationAndCommonVariation : GRQFTPostMergeLeaf
+  activePhysicalSectorTotalizationAndCommonVariation : GRQFTPostMergeLeaf
   einsteinCommonMetricVariation : GRQFTPostMergeLeaf
   commonMetricProducerLanguage : GRQFTPostMergeLeaf
   physicalDrellYanAbsoluteProjectionReplacement : GRQFTPostMergeLeaf
@@ -28,7 +28,7 @@ canonicalGRQFTPostMergeLeaves =
   grDiscreteToContinuumRealization
   ∷ cmp119StressToLiteralPinnedStressAttachment
   ∷ pinnedLiteralYMToRecoveredQFTAttachment
-  ∷ allSectorQFTAggregationAndCommonVariation
+  ∷ activePhysicalSectorTotalizationAndCommonVariation
   ∷ einsteinCommonMetricVariation
   ∷ commonMetricProducerLanguage
   ∷ physicalDrellYanAbsoluteProjectionReplacement
@@ -63,9 +63,9 @@ record GRQFTPostMergeMaxCut : Set where
     secondQFTStressTheoremRequiredIsFalse :
       secondQFTStressTheoremRequired ≡ false
 
-    allSectorAggregationStillRequired : Bool
-    allSectorAggregationStillRequiredIsTrue :
-      allSectorAggregationStillRequired ≡ true
+    activePhysicalSectorTotalizationStillRequired : Bool
+    activePhysicalSectorTotalizationStillRequiredIsTrue :
+      activePhysicalSectorTotalizationStillRequired ≡ true
 
     terminalGRQFTPromoted : Bool
     terminalGRQFTPromotedIsFalse :
