@@ -50,11 +50,7 @@ record MarkedMomentTypedRealization
 
     zero one lambda : ℚ
     add multiply divide exp : ℚ → ℚ → ℚ
-    factorial : Nat → ℚ
     LessEqual : ℚ → ℚ → Set
-
-    -- Same quantitative bound selected by the existing marked closure.
-    exponentialMomentBound : Observable → ℚ
 
     -- Typed realization of the mature uniform exponential-moment theorem.
     uniformExponentialMomentRealized :
@@ -65,7 +61,7 @@ record MarkedMomentTypedRealization
         (Gram.expectation (T5.operations thermodynamic)
           (measureSequence cutoff)
           (exponentialObservable lambda (absoluteObservable observable)))
-        (exponentialMomentBound observable)
+        (Physical.uniformMomentBound closure observable)
 
     -- Typed realization of the already-owned polynomial-from-exponential step.
     powerBelowFactorialExponentialRealized :
@@ -79,8 +75,8 @@ record MarkedMomentTypedRealization
         (Gram.expectation (T5.operations thermodynamic)
           (measureSequence cutoff)
           (powerObservable degree (absoluteObservable observable)))
-        (multiply (factorial degree)
-          (divide (exponentialMomentBound observable) lambda))
+        (multiply (Physical.factorial closure degree)
+          (divide (Physical.uniformMomentBound closure observable) lambda))
 
     reflectedProductYoungRealized :
       ∀ left right → Set
@@ -139,11 +135,11 @@ compileExponentialMomentProducer realization = record
   ; T5.ExponentialMomentProducer.exp =
       exp realization
   ; T5.ExponentialMomentProducer.factorial =
-      factorial realization
+      Physical.factorial _
   ; T5.ExponentialMomentProducer.LessEqual =
       LessEqual realization
   ; T5.ExponentialMomentProducer.exponentialMomentBound =
-      exponentialMomentBound realization
+      Physical.uniformMomentBound _
   ; T5.ExponentialMomentProducer.exponentialMomentUniformBound =
       uniformExponentialMomentRealized realization
   ; T5.ExponentialMomentProducer.powerBelowFactorialExponential =
