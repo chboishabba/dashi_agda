@@ -569,6 +569,9 @@ def _parse_open_node(source_bytes: bytes, node) -> Tuple[Optional[ImportDecl], O
     return None, None
 
 
+
+_RESERVED_FUNCTION_NAMES = {"where", "as", "constructor", "field", "record", "data", "open", "import", "module"}
+
 def _signature_parts(source_bytes: bytes, node) -> Tuple[Tuple[str, ...], Optional[object]]:
     names = tuple(
         node_text(source_bytes, child).strip()
@@ -595,21 +598,43 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
     if not name:
         return None
     rec = AstRecord(name=name, line=line_of(node), node=node)
-    ctor = first_descendant(node, "record_constructor")
-    if ctor is not None:
-        ident = first_descendant(ctor, "id")
-        rec.constructor = _name_from_node(source_bytes, ident)
-    # Only signatures nested under a 'fields' declaration are projections.
-    for fields_node in descendants(node, "fields"):
-        for sig in descendants(fields_node, "signature"):
-            names, type_node = _signature_parts(source_bytes, sig)
-            if type_node is None:
+
+    # tree-sitter-agda may emit the record header/signature separately from
+    # adjacent constructor/fields nodes. Treat only those immediate structural
+    # siblings as part of the same record; stop before unrelated declarations.
+    related = [node]
+    sibling = node.next_named_sibling
+    while sibling is not None:
+        if sibling.type in {"fields", "record_constructor"}:
+            related.append(sibling)
+            sibling = sibling.next_named_sibling
+            continue
+        if sibling.type == "ERROR":
+            tokens = [token.text for token in significant_tokens(source_bytes, sibling)]
+            if tokens[:1] in (["constructor"], ["field"]):
+                related.append(sibling)
+                sibling = sibling.next_named_sibling
                 continue
-            typ = node_text(source_bytes, type_node).strip()
-            for field_name in names:
-                item = AstField(field_name, typ, line_of(sig), type_node)
-                rec.field_occurrences.append(item)
-                rec.fields[field_name] = item
+        break
+
+    for owner in related:
+        ctor = first_descendant(owner, "record_constructor")
+        if ctor is not None and rec.constructor is None:
+            ident = first_descendant(ctor, "id")
+            rec.constructor = _name_from_node(source_bytes, ident)
+
+        for fields_node in descendants(owner, "fields"):
+            for sig in descendants(fields_node, "signature"):
+                names, type_node = _signature_parts(source_bytes, sig)
+                if type_node is None:
+                    continue
+                typ = node_text(source_bytes, type_node).strip()
+                for field_name in names:
+                    if field_name in _RESERVED_FUNCTION_NAMES:
+                        continue
+                    item = AstField(field_name, typ, line_of(sig), type_node)
+                    rec.field_occurrences.append(item)
+                    rec.fields[field_name] = item
     return rec
 
 
@@ -624,7 +649,7 @@ def _function_signature(source_bytes: bytes, node) -> Optional[AstSignature]:
     name_node = first_descendant(fname, "qid", "id")
     name = _name_from_node(source_bytes, name_node or fname)
     expr = first_descendant(rhs, "expr")
-    if not name or expr is None:
+    if not name or name in _RESERVED_FUNCTION_NAMES or expr is None:
         return None
     # A declaration's RHS begins with ':'; definitions have no function_name.
     return AstSignature((name,), node_text(source_bytes, expr).strip(), line_of(node), expr, node)
@@ -640,7 +665,7 @@ def _function_clause(source_bytes: bytes, node) -> Optional[AstClause]:
     # The first qualified/id atom on a definition LHS is the defined function.
     name_node = first_descendant(lhs, "qid", "id")
     name = _name_from_node(source_bytes, name_node)
-    if not name:
+    if not name or name in _RESERVED_FUNCTION_NAMES:
         return None
     rhs_expr = first_descendant(rhs, "expr") if rhs is not None else None
     return AstClause(
@@ -798,10 +823,17 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
             recovered = _recover_import_from_error(source_bytes, node)
             if recovered is not None:
                 _append_import(index, recovered)
-        elif node.type == "record":
+        elif node.type in {"record", "record_signature"}:
             rec = _record_from_node(source_bytes, node)
             if rec is not None:
-                index.records[rec.name] = rec
+                existing = index.records.get(rec.name)
+                if existing is None:
+                    index.records[rec.name] = rec
+                else:
+                    if existing.constructor is None and rec.constructor is not None:
+                        existing.constructor = rec.constructor
+                    existing.field_occurrences.extend(rec.field_occurrences)
+                    existing.fields.update(rec.fields)
         elif node.type == "data":
             data = _data_from_node(source_bytes, node)
             if data is not None:
