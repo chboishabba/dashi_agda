@@ -5,24 +5,25 @@ open import DASHI.Core.Prelude
 import DASHI.ComputerScience.FibreProgramComplexityExact as ClassicalComplexity
 import DASHI.ComputerScience.QuantumExecutionFibreAdapterExact as QuantumComplexity
 import DASHI.Crypto.ShorFactoring as Shor
+import DASHI.Crypto.ShorQuantumRunFactorTransportExact as QuantumFactor
 import DASHI.Crypto.FiniteFactorArithmetic as Factor
 
 ------------------------------------------------------------------------
 -- SAME ARITHMETIC CONSUMER, DIFFERENT EXECUTION FIBRES
 --
--- The existing Shor owner deliberately separates the quantum order-finding
--- run from the certified classical factor extraction.  Once a successful
--- quantum run recovers the exact split order, both routes expose the same
--- certified arithmetic factor.  This does not identify their execution paths
--- or cost coordinates.
+-- The certified quantum order-finding run now feeds factor extraction through
+-- an equality transport from the recovered order to the existing certified
+-- split order.  The common factor result is therefore a theorem about those
+-- two routes, not a definitional consequence of discarding the quantum run.
 ------------------------------------------------------------------------
 
 sameCertifiedFactor :
   ∀ {N : Nat}
     (P : Shor.ShorFactoringProblem N)
     (R : Shor.QuantumShorFactoringRun P) →
-  Shor.quantumShorFactor P R ≡ Shor.classicalShorFactor P
-sameCertifiedFactor P R = refl
+  QuantumFactor.quantumShorFactorFromRecoveredOrder P R
+  ≡ Shor.classicalShorFactor P
+sameCertifiedFactor = QuantumFactor.quantumRecoveredOrderFactorAgreesWithClassical
 
 quantumRecoveredOrderExact :
   ∀ {N : Nat}
@@ -38,7 +39,8 @@ record ClassicalQuantumFactorComparison
   constructor classicalQuantumFactorComparison
   field
     sameFactorCertificate :
-      Shor.quantumShorFactor P R ≡ Shor.classicalShorFactor P
+      QuantumFactor.quantumShorFactorFromRecoveredOrder P R
+      ≡ Shor.classicalShorFactor P
 
     classicalCostProfile : ClassicalComplexity.ComplexityProfile
     quantumCostProfile : QuantumComplexity.QuantumCostProfile
@@ -59,7 +61,7 @@ mkComparison :
   ClassicalQuantumFactorComparison P R
 mkComparison P R classicalCost quantumCost =
   classicalQuantumFactorComparison
-    refl
+    (QuantumFactor.quantumRecoveredOrderFactorAgreesWithClassical P R)
     classicalCost
     quantumCost
     false
