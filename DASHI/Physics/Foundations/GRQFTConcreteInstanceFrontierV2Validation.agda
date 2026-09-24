@@ -26,10 +26,17 @@ r144CompatiblePresentCutCompilerClosed :
   ≡ true
 r144CompatiblePresentCutCompilerClosed = refl
 
-tenValuesStillMissing :
-  F.tenIndependentComponentValuesExist F.canonicalGRQFTConcreteTheoryFrontier
+tenRationalTermsNowDefined :
+  F.tenRationalStressInsertionTermsDefined
+    F.canonicalGRQFTConcreteTheoryFrontier
+  ≡ true
+tenRationalTermsNowDefined = refl
+
+tenTargetEqualitiesStillMissing :
+  F.tenNormalizedGRTargetEqualitiesExist
+    F.canonicalGRQFTConcreteTheoryFrontier
   ≡ false
-tenValuesStillMissing = refl
+tenTargetEqualitiesStillMissing = refl
 
 w4NotTheoryLeaf :
   F.w4ReplacementIsTheoryCoreLeaf F.canonicalGRQFTConcreteTheoryFrontier
