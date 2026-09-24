@@ -32,6 +32,7 @@ import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationR
 import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as PhysicalRep
 import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45
+import DASHI.Physics.YangMills.YangMillsClayMomentOS05MaxCutRound500Exact as A45Cut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45Rep
 
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
@@ -66,7 +67,9 @@ data ResidualLeaf : Set where
   a3CylinderExpectationIntegralIdentification : ResidualLeaf
 
   -- A4/A5.
-  a45QuantitativeMomentToFiniteOS05 : ResidualLeaf
+  a45QuantitativeFiniteExpectationAttachment : ResidualLeaf
+  a4FiniteRegularityFromQuantitativeBounds : ResidualLeaf
+  a5FiniteGrowthFromQuantitativeBounds : ResidualLeaf
   a45RepresentedOSPredicateExtensionality : ResidualLeaf
 
   -- B source-correct Wilson + same-H.
@@ -119,8 +122,12 @@ leafLevel a3ContinuityAtEmpty =
   PhysicalRep.literalRound499ContinuityAtEmptyLevel
 leafLevel a3CylinderExpectationIntegralIdentification =
   PhysicalRep.literalRound499CylinderExpectationIdentificationLevel
-leafLevel a45QuantitativeMomentToFiniteOS05 =
-  A45.literalRound464QuantitativeMomentToOS05Level
+leafLevel a45QuantitativeFiniteExpectationAttachment =
+  A45Cut.literalRound500QuantitativeFiniteExpectationAttachmentLevel
+leafLevel a4FiniteRegularityFromQuantitativeBounds =
+  A45Cut.literalRound500FiniteRegularityFromQuantitativeBoundsLevel
+leafLevel a5FiniteGrowthFromQuantitativeBounds =
+  A45Cut.literalRound500FiniteGrowthFromQuantitativeBoundsLevel
 leafLevel a45RepresentedOSPredicateExtensionality =
   A45Rep.literalRound481ExtensionalOSMeaningLevel
 
@@ -172,7 +179,9 @@ residualLeaves =
   ∷ a3ProjectiveEventExpectationConsistency
   ∷ a3ContinuityAtEmpty
   ∷ a3CylinderExpectationIntegralIdentification
-  ∷ a45QuantitativeMomentToFiniteOS05
+  ∷ a45QuantitativeFiniteExpectationAttachment
+  ∷ a4FiniteRegularityFromQuantitativeBounds
+  ∷ a5FiniteGrowthFromQuantitativeBounds
   ∷ a45RepresentedOSPredicateExtensionality
   ∷ bWilsonTwoMarkExpansion
   ∷ bWilsonConnectingWeightTail
@@ -209,6 +218,10 @@ finiteProjectivePremeasureAssemblyLevel =
 physicalRepresentationAssemblyLevel : ProofLevel
 physicalRepresentationAssemblyLevel =
   PhysicalRep.round499PhysicalRepresentationCompilerLevel
+
+finiteOS05AssemblyLevel : ProofLevel
+finiteOS05AssemblyLevel =
+  A45Cut.round500OS05CompilerLevel
 
 caratheodoryExtensionLevel : ProofLevel
 caratheodoryExtensionLevel =
