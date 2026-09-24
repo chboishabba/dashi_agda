@@ -293,3 +293,60 @@ data D : Set where
     checker = Checker(tmp_path)
     hits = api_drift(checker, baseline, Diagnostic)
     assert any(d.code == "TSAGDA182" for d in hits)
+
+
+def test_core_frontend_does_not_use_regex_as_parser():
+    package = Path(__file__).parents[1] / "agda_preflight"
+    for name in ("checker.py", "rules.py", "ast_index.py", "shapes.py"):
+        source = (package / name).read_text(encoding="utf-8")
+        assert "import re" not in source
+        assert "from re import" not in source
+
+
+def test_ast_index_recovers_import_alias_and_record_fields(tmp_path):
+    write_module(
+        tmp_path,
+        "Lib",
+        """module Lib where
+
+record R : Set₁ where
+  field
+    A : Set
+    x : A
+""",
+    )
+    path = write_module(
+        tmp_path,
+        "Use",
+        """module Use where
+
+import Lib as L
+
+open L.R public
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    assert summary.imports["L"] == "Lib"
+
+
+def test_ast_record_expression_index(tmp_path):
+    path = write_module(
+        tmp_path,
+        "RecordExpr",
+        """module RecordExpr where
+
+record R : Set₁ where
+  field
+    A : Set
+    B : Set
+
+mk : R
+mk = record
+  { A = Set
+  ; B = Set
+  }
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    assert summary.ast.record_expressions
+    assert {a.name for a in summary.ast.record_expressions[0].assignments} == {"A", "B"}
