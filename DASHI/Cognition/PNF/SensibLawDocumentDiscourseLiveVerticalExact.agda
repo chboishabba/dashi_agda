@@ -1,6 +1,7 @@
 module DASHI.Cognition.PNF.SensibLawDocumentDiscourseLiveVerticalExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
 

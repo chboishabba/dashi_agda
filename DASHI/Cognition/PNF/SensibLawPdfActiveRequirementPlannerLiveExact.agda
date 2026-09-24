@@ -37,6 +37,8 @@ contextualLegalStatus = Document.ContextualLegalDiscourseProjection.legalStatus 
 pdfPlannerState : Status.SemanticCommitmentState
 pdfPlannerState = Status.semanticCommitmentState pdfConstitutionFibre [] (Reporting.sourceEventStatus ∷ []) (Reporting.sourceProposition ∷ contextualProposition ∷ []) (contextualLegalStatus ∷ []) true false
 
+attributionActive propositionActive occurrenceActive documentContextActive : Demand.ActiveRequirement
+resolvedEvidenceActive legalSourceAuthorityActive resolvedScopeActive resolvedJurisdictionActive : Demand.ActiveRequirement
 attributionActive = Demand.activeRequirement Consumer.generalSemanticConsumer Demand.whoSaidWhatQuery Demand.attributionCoordinate Demand.whoNeedsAttribution "PDF general who-said-what attribution"
 propositionActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.propositionStatusCoordinate Demand.legalApplicabilityNeedsProposition "PDF applicability needs proposition status"
 occurrenceActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.occurrenceCoordinate Demand.legalApplicabilityNeedsOccurrence "PDF applicability needs occurrence status"
@@ -46,19 +48,31 @@ legalSourceAuthorityActive = Demand.activeRequirement Consumer.legalConsumer Dem
 resolvedScopeActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedScopeCoordinate Demand.legalApplicabilityNeedsResolvedScope "PDF applicability still requires resolved same-object scope"
 resolvedJurisdictionActive = Demand.activeRequirement Consumer.legalConsumer Demand.legalApplicabilityQuery Demand.resolvedLegalJurisdictionCoordinate Demand.legalApplicabilityNeedsResolvedJurisdiction "PDF applicability still requires resolved legal jurisdiction"
 
+ownedProposition : Bridge.PropositionReceiptInState pdfPlannerState
 ownedProposition = Bridge.propositionReceiptInState Reporting.propositionReceipt Bridge.here "PDF PropositionResolutionReceipt is the first proposition in planner state"
+ownedOccurrence : Bridge.OccurrenceReceiptInState pdfPlannerState
 ownedOccurrence = Bridge.occurrenceReceiptInState Reporting.occurrenceReceipt Bridge.here "PDF OccurrenceResolutionReceipt is the first event in planner state"
+ownedAttribution : Bridge.AttributionReceiptInState pdfPlannerState
 ownedAttribution = Bridge.attributionReceiptInState Reporting.propositionReceipt Bridge.here Bridge.propositionSourceResolved "PDF source proposition carries resolved proposition-source attribution"
+ownedDocumentContext : Bridge.DocumentContextReceiptInState pdfPlannerState
 ownedDocumentContext = Bridge.documentContextReceiptInState PdfDocument.applicantSubmissionFrame contextualProposition (Bridge.there Bridge.here) "PDF applicant-submission frame refines the second proposition in planner state"
 
+attributionEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState attributionActive
 attributionEvidence = Bridge.attributionReceiptPaysActiveCoordinate refl ownedAttribution
+propositionEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState propositionActive
 propositionEvidence = Bridge.propositionReceiptPaysActiveCoordinate refl ownedProposition
+occurrenceEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState occurrenceActive
 occurrenceEvidence = Bridge.occurrenceReceiptPaysActiveCoordinate refl ownedOccurrence
+documentContextEvidence : Planner.CoordinateEvidenceReceipt pdfPlannerState documentContextActive
 documentContextEvidence = Bridge.documentContextReceiptPaysActiveCoordinate refl ownedDocumentContext
 
+attributionPlan : Planner.RequirementPlan pdfPlannerState attributionActive
 attributionPlan = Planner.planRequirement attributionEvidence "reuse live PDF attribution"
+propositionPlan : Planner.RequirementPlan pdfPlannerState propositionActive
 propositionPlan = Planner.planRequirement propositionEvidence "reuse live PDF proposition status"
+occurrencePlan : Planner.RequirementPlan pdfPlannerState occurrenceActive
 occurrencePlan = Planner.planRequirement occurrenceEvidence "reuse live PDF occurrence status"
+documentContextPlan : Planner.RequirementPlan pdfPlannerState documentContextActive
 documentContextPlan = Planner.planRequirement documentContextEvidence "reuse live PDF document context"
 
 attributionReusesExisting : Planner.action attributionPlan ≡ Planner.reuseExisting
@@ -70,33 +84,49 @@ occurrenceReusesExisting = refl
 documentContextReusesExisting : Planner.action documentContextPlan ≡ Planner.reuseExisting
 documentContextReusesExisting = refl
 
+attributionWork : Routing.RoutedWork attributionPlan
 attributionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "attribution receipt already live"
+propositionWork : Routing.RoutedWork propositionPlan
 propositionWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "proposition receipt already live"
+occurrenceWork : Routing.RoutedWork occurrencePlan
 occurrenceWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "occurrence receipt already live"
+documentContextWork : Routing.RoutedWork documentContextPlan
 documentContextWork = Routing.routedWork Routing.noProducerInvocation refl Routing.reuseWithoutProducer "document context receipt already live"
 
+resolvedEvidenceUnassessed : Planner.CoordinateEvidenceReceipt pdfPlannerState resolvedEvidenceActive
 resolvedEvidenceUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "source/proposition metadata is present, but no exact EvidenceItem/EventEvidenceLink legal-use evidence receipt has yet been produced for this PDF proposition/event" true refl true refl
+resolvedEvidencePlan : Planner.RequirementPlan pdfPlannerState resolvedEvidenceActive
 resolvedEvidencePlan = Planner.planRequirement resolvedEvidenceUnassessed "inspect same-object legal-use evidence before applicability"
 resolvedEvidenceNeedsInspection : Planner.action resolvedEvidencePlan ≡ Planner.inspectForEvidence
 resolvedEvidenceNeedsInspection = refl
+resolvedEvidenceWork : Routing.RoutedWork resolvedEvidencePlan
 resolvedEvidenceWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.resolvedLegalEvidenceRoute) "inspect exact EvidenceItem/EventEvidenceLink/provenance receipt; do not promote parser or source evidence candidate"
 
+legalSourceAuthorityUnassessed : Planner.CoordinateEvidenceReceipt pdfPlannerState legalSourceAuthorityActive
 legalSourceAuthorityUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "no legal-source authority search/verification receipt has yet been run for this PDF requirement" true refl true refl
+legalSourceAuthorityPlan : Planner.RequirementPlan pdfPlannerState legalSourceAuthorityActive
 legalSourceAuthorityPlan = Planner.planRequirement legalSourceAuthorityUnassessed "inspect legal-source authority before any missing classification"
 legalSourceAuthorityNeedsInspection : Planner.action legalSourceAuthorityPlan ≡ Planner.inspectForEvidence
 legalSourceAuthorityNeedsInspection = refl
+legalSourceAuthorityWork : Routing.RoutedWork legalSourceAuthorityPlan
 legalSourceAuthorityWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.legalSourceAuthorityRoute) "inspect LegalSource/system/validity authority evidence"
 
+resolvedScopeUnassessed : Planner.CoordinateEvidenceReceipt pdfPlannerState resolvedScopeActive
 resolvedScopeUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "no same-object joint ScopeCompositionReceipt has yet been produced for the PDF proposition/event" true refl true refl
+resolvedScopePlan : Planner.RequirementPlan pdfPlannerState resolvedScopeActive
 resolvedScopePlan = Planner.planRequirement resolvedScopeUnassessed "inspect/resolve joint proposition scope before applicability"
 resolvedScopeNeedsInspection : Planner.action resolvedScopePlan ≡ Planner.inspectForEvidence
 resolvedScopeNeedsInspection = refl
+resolvedScopeWork : Routing.RoutedWork resolvedScopePlan
 resolvedScopeWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.resolvedScopeRoute) "inspect same-object joint scope resolution; do not route to parser scope candidate"
 
+resolvedJurisdictionUnassessed : Planner.CoordinateEvidenceReceipt pdfPlannerState resolvedJurisdictionActive
 resolvedJurisdictionUnassessed = Planner.coordinateEvidenceReceipt Planner.currentUnassessed [] "document context does not itself establish the legal-system jurisdiction required for applicability" true refl true refl
+resolvedJurisdictionPlan : Planner.RequirementPlan pdfPlannerState resolvedJurisdictionActive
 resolvedJurisdictionPlan = Planner.planRequirement resolvedJurisdictionUnassessed "inspect CaseFrame/LegalSystem/resolved-jurisdiction evidence"
 resolvedJurisdictionNeedsInspection : Planner.action resolvedJurisdictionPlan ≡ Planner.inspectForEvidence
 resolvedJurisdictionNeedsInspection = refl
+resolvedJurisdictionWork : Routing.RoutedWork resolvedJurisdictionPlan
 resolvedJurisdictionWork = Routing.routedWork Routing.producerInvocationRequired refl (Routing.invokeProducer Routing.resolvedLegalJurisdictionRoute) "inspect exact legal-system jurisdiction weld; do not promote geographic/document candidate"
 
 data PdfParserReceiptPaysLegalSourceAuthorityRequirement : Set where

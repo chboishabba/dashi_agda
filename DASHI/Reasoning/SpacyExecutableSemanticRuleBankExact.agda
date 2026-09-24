@@ -117,6 +117,21 @@ modalQualificationRule witness admission modalReading eventName =
     (ruleVersionReference admission)
     true refl
 
+temporalQualificationRule :
+  (witness : DependencyWitness) →
+  ShapeAdmission witness temporalModifier →
+  String → String → CandidateSemanticFragment
+temporalQualificationRule witness admission eventName temporalReading =
+  candidateSemanticFragment
+    "rulebank-temporal-qualification"
+    temporalFragment
+    (atom "TemporalQualification"
+      (Candidate.eventTerm eventName ∷ Candidate.literalTerm temporalReading ∷ []))
+    witness
+    "temporal modifier proposes a temporal qualification; relation and scope remain evidential interpretation obligations"
+    (ruleVersionReference admission)
+    true refl
+
 
 ------------------------------------------------------------------------
 -- Domain-neutral clausal rules.

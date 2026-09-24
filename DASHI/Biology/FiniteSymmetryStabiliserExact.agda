@@ -67,21 +67,21 @@ Pattern2 : Set
 Pattern2 = Site2 → KernelTrit
 
 actPattern : Reflection2 → Pattern2 → Pattern2
-actPattern g pattern x = pattern (actSite g x)
+actPattern g configuration x = configuration (actSite g x)
 
 patternActionComposition :
-  (g h : Reflection2) (pattern : Pattern2) (x : Site2) →
-  actPattern (composeReflection g h) pattern x
+  (g h : Reflection2) (configuration : Pattern2) (x : Site2) →
+  actPattern (composeReflection g h) configuration x
   ≡
-  actPattern g (actPattern h pattern) x
-patternActionComposition identityReflection identityReflection pattern leftSite = refl
-patternActionComposition identityReflection identityReflection pattern rightSite = refl
-patternActionComposition identityReflection swapReflection pattern leftSite = refl
-patternActionComposition identityReflection swapReflection pattern rightSite = refl
-patternActionComposition swapReflection identityReflection pattern leftSite = refl
-patternActionComposition swapReflection identityReflection pattern rightSite = refl
-patternActionComposition swapReflection swapReflection pattern leftSite = refl
-patternActionComposition swapReflection swapReflection pattern rightSite = refl
+  actPattern g (actPattern h configuration) x
+patternActionComposition identityReflection identityReflection configuration leftSite = refl
+patternActionComposition identityReflection identityReflection configuration rightSite = refl
+patternActionComposition identityReflection swapReflection configuration leftSite = refl
+patternActionComposition identityReflection swapReflection configuration rightSite = refl
+patternActionComposition swapReflection identityReflection configuration leftSite = refl
+patternActionComposition swapReflection identityReflection configuration rightSite = refl
+patternActionComposition swapReflection swapReflection configuration leftSite = refl
+patternActionComposition swapReflection swapReflection configuration rightSite = refl
 
 constantPattern : Pattern2
 constantPattern leftSite = positiveTrit
@@ -102,20 +102,20 @@ andBool true true = true
 andBool _ _ = false
 
 fixedBy : Reflection2 → Pattern2 → Bool
-fixedBy g pattern =
+fixedBy g configuration =
   andBool
-    (sameTrit (actPattern g pattern leftSite) (pattern leftSite))
-    (sameTrit (actPattern g pattern rightSite) (pattern rightSite))
+    (sameTrit (actPattern g configuration leftSite) (configuration leftSite))
+    (sameTrit (actPattern g configuration rightSite) (configuration rightSite))
 
 boolToNat : Bool → Nat
 boolToNat false = 0
 boolToNat true = 1
 
 stabiliserSize : Pattern2 → Nat
-stabiliserSize pattern =
-  boolToNat (fixedBy identityReflection pattern)
+stabiliserSize configuration =
+  boolToNat (fixedBy identityReflection configuration)
   +
-  boolToNat (fixedBy swapReflection pattern)
+  boolToNat (fixedBy swapReflection configuration)
 
 constantPatternHasFullStabiliser : stabiliserSize constantPattern ≡ 2
 constantPatternHasFullStabiliser = refl
@@ -160,7 +160,7 @@ constantPatternFromOneDatum leftSite = refl
 constantPatternFromOneDatum rightSite = refl
 
 independentSiteCount : Pattern2 → Nat
-independentSiteCount pattern with fixedBy swapReflection pattern
+independentSiteCount configuration with fixedBy swapReflection configuration
 ... | true = 1
 ... | false = 2
 

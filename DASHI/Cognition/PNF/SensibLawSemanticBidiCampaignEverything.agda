@@ -212,9 +212,9 @@ pdfPlannerInspectsResolvedJurisdiction = PdfPlanner.resolvedJurisdictionNeedsIns
 pdfPaidPrefixDoesNotCloseApplicability : PdfPlanner.PaidPrefixMeansApplicabilityFullyResolved → ⊥
 pdfPaidPrefixDoesNotCloseApplicability = PdfPlanner.paidPrefixDoesNotMeanFullApplicability
 
-regexStillForbidden : Constitution.regexMayProduceSemanticEvidence Constitution.canonicalCompositionOnlyBoundary ≡ false
+regexStillForbidden : Constitution.CompositionOnlyBoundary.regexMayProduceSemanticEvidence Constitution.canonicalCompositionOnlyBoundary ≡ false
 regexStillForbidden = refl
-candidateStillNeedsContext : Constitution.semanticResolutionRequiresContextReceipt Constitution.canonicalCompositionOnlyBoundary ≡ true
+candidateStillNeedsContext : Constitution.CompositionOnlyBoundary.semanticResolutionRequiresContextReceipt Constitution.canonicalCompositionOnlyBoundary ≡ true
 candidateStillNeedsContext = refl
 assertionStillNotTruth : Status.AssertionDeterminesTruth → ⊥
 assertionStillNotTruth = Status.assertionDoesNotDetermineTruth

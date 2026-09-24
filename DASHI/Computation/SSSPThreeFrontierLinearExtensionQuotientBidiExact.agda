@@ -175,7 +175,7 @@ acbBC = refl
 fullSheetStillSeparatesTailOrder :
   relationSheet abc ≡ relationSheet acb →
   neg ≡ pos
-fullSheetStillSeparatesTailOrder refl = refl
+fullSheetStillSeparatesTailOrder ()
 
 neg≠pos : ¬ (neg ≡ pos)
 neg≠pos ()
