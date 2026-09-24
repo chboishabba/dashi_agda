@@ -63,6 +63,10 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650ExternalZeroBranchEliminationRound673Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650ExternalFullSquareToCanonicalRowsRound674Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650ExternalNetworkToHelicityRowsRound675Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarHelicityTangentCombinationRound676Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650HelicityTangentSelfCollapseRound677Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarSingleSelfMismatchRound678Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CombinedRouteReturnsToRateKernelRound679Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda'
@@ -101,7 +105,7 @@ jobs:
       - name: Install Agda semantic preflight
         run: python -m pip install -e tools/agda_preflight
 
-      - name: Preflight R655-R675 analytic frontier
+      - name: Preflight R655-R679 analytic frontier
         run: |
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650LowCollarRemoteCrossReductionRound655Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650EuclideanCollarRefinementRound656Exact.agda
@@ -122,6 +126,10 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalZeroBranchEliminationRound673Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalFullSquareToCanonicalRowsRound674Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650ExternalNetworkToHelicityRowsRound675Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarHelicityTangentCombinationRound676Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650HelicityTangentSelfCollapseRound677Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarSingleSelfMismatchRound678Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedRouteReturnsToRateKernelRound679Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda
