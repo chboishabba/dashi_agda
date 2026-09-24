@@ -89,11 +89,11 @@ representedContinuumOS0 :
   RepresentedOS05TransportInputs os05 carrier →
   R446.ContinuumRegularity os05
     (R454.representedExpectation carrier)
-representedContinuumOS0 inputs =
+representedContinuumOS0 {os05 = os05} {carrier = carrier} inputs =
   R454.transportExpectationPredicate
     (regularityExtensional inputs)
-    _
-    (R446.continuumOS0FromMarkedMoments _)
+    carrier
+    (R446.continuumOS0FromMarkedMoments os05)
 
 representedContinuumOS5 :
   ∀ {Configuration Position Polymer Observable
@@ -114,11 +114,11 @@ representedContinuumOS5 :
   RepresentedOS05TransportInputs os05 carrier →
   R446.ContinuumGrowthControl os05
     (R454.representedExpectation carrier)
-representedContinuumOS5 inputs =
+representedContinuumOS5 {os05 = os05} {carrier = carrier} inputs =
   R454.transportExpectationPredicate
     (growthExtensional inputs)
-    _
-    (R446.continuumOS5FromMarkedMoments _)
+    carrier
+    (R446.continuumOS5FromMarkedMoments os05)
 
 round455RepresentedOS05TransportCompilerLevel : ProofLevel
 round455RepresentedOS05TransportCompilerLevel = machineChecked
