@@ -17,6 +17,7 @@ module DASHI.Physics.YangMills.YangMillsActualGroupCompleteSourceRound543Exact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
