@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.YangMillsWilsonLocalObservableFromStructuralRound
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.CompactLieGroupCore
+import DASHI.Physics.YangMills.CompactLieGroupCore as Core
 
 import DASHI.Physics.YangMills.CompactLieLatticeGauge as Lattice
 import DASHI.Physics.YangMills.YangMillsConcreteStructuralSemanticsRound517Exact as R517
@@ -51,10 +51,10 @@ record StructuralWilsonLocalData
       R517.GroupCarrier structural group → ℝ
 
     classFunction :
-      ∀ group →
+      ∀ groupIndex →
       Lattice.ClassFunction
-        (group (R517.compactSimple structural group))
-        (classValue group)
+        (Core.group (R517.compactSimple structural groupIndex))
+        (classValue groupIndex)
 
 open StructuralWilsonLocalData public
 
@@ -73,7 +73,7 @@ asWilsonLocalObservableFamily {structural = structural} dataSet = record
       Edge dataSet
   ; R529.WilsonLocalObservableFamily.groupStructure =
       λ groupIndex →
-        group (R517.compactSimple structural groupIndex)
+        Core.group (R517.compactSimple structural groupIndex)
   ; R529.WilsonLocalObservableFamily.source =
       λ groupIndex → record
         { R529.WilsonLocalObservableAt.decode =
