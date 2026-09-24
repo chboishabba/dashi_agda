@@ -168,3 +168,129 @@ localizedMarkedPairProducerRemainsOpen :
   bidiMarkedFourthStatus localizedOneCentreMarkedPairProducer
     ≡ openAnalyticObstruction
 localizedMarkedPairProducerRemainsOpen = refl
+
+
+------------------------------------------------------------------------
+-- SHORT-SUPPORT BIDI MARKED-POLE CURVATURE FRONTIER
+--
+-- The live Lean programme has moved beyond the earlier Montgomery-style
+-- producer hypothesis.
+--
+-- Horizontal cosh marking of the ACTUAL four-window detector preserves its
+-- support below log 2.  Hence the literal Weil prime projective channel
+-- remains exactly zero for every mark parameter A.
+--
+-- The first nontrivial marked information is therefore the pole/archimedean
+-- channel.  After v=(t/16)u normalization the physical mark is
+--
+--   cosh((16*A/t) v).
+--
+-- Its quadratic carrier at an endpoint is the derivative determinant
+-- obtained by inserting v^2 once in each of the two determinant columns.
+--
+-- Lean now proves:
+--
+-- * atomic endpoint signs on the exact J2-null roots:
+--
+--     Q_half > 0,
+--     Q_twoThird < 0;
+--
+-- * those signs persist uniformly on the FULL existing mu corridor;
+--
+-- * sufficiently narrow smooth windows preserve those two endpoint signs;
+--
+-- * individual smooth pole coordinates are positive on a common radius;
+--
+-- * there exists a strengthened ordinary QuarticFourSignedPolePair W with
+--   the old 7*pi^4/1600 target-strength floor AND
+--
+--     D_twoThird * Q_half - D_half * Q_twoThird > 0;
+--
+-- * the literal physical marked pole channel is exactly
+--
+--     4*(16/t)^2 * normalizedMarkedPoleDeterminant;
+--
+-- * replacing each cosh(Bv) by 1+B^2 v^2/2 gives the exact determinant
+--   truncation
+--
+--     D_trunc(B)
+--       = D0 + (B^2/2) Q + (B^4/4) D2;
+--
+--   after the signed endpoint combination the D0 term cancels exactly.
+--
+-- The remaining small assembly theorem is a certified O(B^4) comparison
+-- between the ACTUAL marked determinant and this truncation.  Once paid, the
+-- positive Q coefficient yields a nonempty punctured A-interval on which the
+-- exact signed marked pole channel is strictly positive.
+------------------------------------------------------------------------
+
+data BidiMarkedPoleCurvatureCoordinate : Set where
+  coshMarkedPrimeChannelZero :
+    BidiMarkedPoleCurvatureCoordinate
+  atomicMarkedPoleQuadraticEndpointSigns :
+    BidiMarkedPoleCurvatureCoordinate
+  atomicMarkedPoleQuadraticCorridorSigns :
+    BidiMarkedPoleCurvatureCoordinate
+  smoothMarkedPoleQuadraticEndpointSigns :
+    BidiMarkedPoleCurvatureCoordinate
+  strengthenedSmoothWitnessPositiveQuadraticCarrier :
+    BidiMarkedPoleCurvatureCoordinate
+  physicalMarkedPoleEqualsNormalizedDeterminant :
+    BidiMarkedPoleCurvatureCoordinate
+  exactQuadraticDeterminantTruncation :
+    BidiMarkedPoleCurvatureCoordinate
+  markedPairingFourthOrderRemainderBound :
+    BidiMarkedPoleCurvatureCoordinate
+  actualMarkedDeterminantFourthOrderRemainderBound :
+    BidiMarkedPoleCurvatureCoordinate
+  exactMarkedPolePositivePuncturedBand :
+    BidiMarkedPoleCurvatureCoordinate
+  markedPoleBiasCouplesToFourthAngularG3 :
+    BidiMarkedPoleCurvatureCoordinate
+
+bidiMarkedPoleCurvatureStatus :
+  BidiMarkedPoleCurvatureCoordinate -> BidiMarkedFourthStatus
+bidiMarkedPoleCurvatureStatus coshMarkedPrimeChannelZero = theoremOwned
+bidiMarkedPoleCurvatureStatus atomicMarkedPoleQuadraticEndpointSigns =
+  theoremOwned
+bidiMarkedPoleCurvatureStatus atomicMarkedPoleQuadraticCorridorSigns =
+  theoremOwned
+bidiMarkedPoleCurvatureStatus smoothMarkedPoleQuadraticEndpointSigns =
+  theoremOwned
+bidiMarkedPoleCurvatureStatus
+  strengthenedSmoothWitnessPositiveQuadraticCarrier =
+  theoremOwned
+bidiMarkedPoleCurvatureStatus physicalMarkedPoleEqualsNormalizedDeterminant =
+  theoremOwned
+bidiMarkedPoleCurvatureStatus exactQuadraticDeterminantTruncation =
+  theoremOwned
+bidiMarkedPoleCurvatureStatus markedPairingFourthOrderRemainderBound =
+  theoremOwned
+bidiMarkedPoleCurvatureStatus
+  actualMarkedDeterminantFourthOrderRemainderBound =
+  openAnalyticObstruction
+bidiMarkedPoleCurvatureStatus exactMarkedPolePositivePuncturedBand =
+  openAnalyticObstruction
+bidiMarkedPoleCurvatureStatus markedPoleBiasCouplesToFourthAngularG3 =
+  openAnalyticObstruction
+
+markedPrimeChannelIsExactlyZero :
+  bidiMarkedPoleCurvatureStatus coshMarkedPrimeChannelZero
+    ≡ theoremOwned
+markedPrimeChannelIsExactlyZero = refl
+
+smoothMarkedPoleQuadraticSignalIsPaid :
+  bidiMarkedPoleCurvatureStatus
+    strengthenedSmoothWitnessPositiveQuadraticCarrier
+    ≡ theoremOwned
+smoothMarkedPoleQuadraticSignalIsPaid = refl
+
+markedPairingRemainderIsPaid :
+  bidiMarkedPoleCurvatureStatus markedPairingFourthOrderRemainderBound
+    ≡ theoremOwned
+markedPairingRemainderIsPaid = refl
+
+actualMarkedPoleBandRemainsOpen :
+  bidiMarkedPoleCurvatureStatus exactMarkedPolePositivePuncturedBand
+    ≡ openAnalyticObstruction
+actualMarkedPoleBandRemainsOpen = refl
