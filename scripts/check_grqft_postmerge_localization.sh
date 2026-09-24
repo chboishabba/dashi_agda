@@ -43,6 +43,9 @@ files=(
   DASHI/Physics/Foundations/GRQFTCommonRegimeBidiAttemptValidation.agda
   DASHI/Physics/Foundations/CMP119MetricBasisStressComponentCompilerExact.agda
   DASHI/Physics/Foundations/CMP119MetricBasisStressComponentCompilerValidation.agda
+  DASHI/Physics/Foundations/CMP119SymmetricStressComponentReductionExact.agda
+  DASHI/Physics/Foundations/CMP119SymmetrySemanticBridgeExact.agda
+  DASHI/Physics/Foundations/CMP119SymmetricStressComponentReductionValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda

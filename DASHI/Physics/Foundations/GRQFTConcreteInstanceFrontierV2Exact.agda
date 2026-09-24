@@ -15,10 +15,9 @@ data GRQFTConcreteTheoryLeaf : Set where
     GRQFTConcreteTheoryLeaf
   attachCMP119StressToLiteralPinnedStress :
     GRQFTConcreteTheoryLeaf
-  constructCMP119RationalStressComponentEvaluator :
-    GRQFTConcreteTheoryLeaf
-  evaluateSixteenComponentCrossSectorStressResidual :
-    GRQFTConcreteTheoryLeaf
+  identifyMetricBasis16InsideCMP119Tangent : GRQFTConcreteTheoryLeaf
+  interpretYMSymmetryAsBasisComponentSymmetry : GRQFTConcreteTheoryLeaf
+  evaluateTenIndependentCrossSectorStressComponents : GRQFTConcreteTheoryLeaf
   constructCommonOverlapBackreactionCorrectionEvidence :
     GRQFTConcreteTheoryLeaf
 
@@ -28,8 +27,9 @@ canonicalGRQFTConcreteTheoryLeaves =
   ∷ attachLiteralNonflatGRToRecoveredGR
   ∷ attachPinnedLiteralYMToRecoveredQFT
   ∷ attachCMP119StressToLiteralPinnedStress
-  ∷ constructCMP119RationalStressComponentEvaluator
-  ∷ evaluateSixteenComponentCrossSectorStressResidual
+  ∷ identifyMetricBasis16InsideCMP119Tangent
+  ∷ interpretYMSymmetryAsBasisComponentSymmetry
+  ∷ evaluateTenIndependentCrossSectorStressComponents
   ∷ constructCommonOverlapBackreactionCorrectionEvidence
   ∷ []
 
@@ -80,4 +80,4 @@ canonicalGRQFTConcreteTheoryFrontier =
     false refl
     false refl
     canonicalGRQFTConcreteTheoryLeaves
-    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, literal/recovered attachments, a CMP119 stress component evaluator into the normalized 4x4 rational carrier, the resulting sixteen-component stress residual, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
+    "UnifiedCandidate inhabitation is not an extra theorem leaf: it is the aggregate construction once the real fields are supplied. The first executable GRQFT instance reduces to theorem-bearing GR continuum realization, literal/recovered attachments, the existing CMP119 metric-stress pairing evaluated on a 16-vector metric basis, one symmetry-semantic bridge, ten independent normalized stress components, and common overlap/backreaction/correction evidence. W4 and legacy common-metric/all-sector routes are outside this minimal theory cut."
