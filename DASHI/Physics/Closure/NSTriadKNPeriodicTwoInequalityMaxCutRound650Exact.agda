@@ -43,6 +43,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarPairDifferenceM2PaymentRound6
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarLiveM2PaymentRound663Exact as R663
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedWorkRound664Exact as R664
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedKernelRound665Exact as R665
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -319,6 +320,26 @@ round650C2BadCollarSpacetimeRateWeightedKernelIdentityClosed =
 round650C2BadCollarRateWeightedKernelPaymentClosed : Bool
 round650C2BadCollarRateWeightedKernelPaymentClosed =
   R665.round665RateWeightedKernelQuantitativePaymentClosed
+
+round650C2BadCollarResidualA3ComplementIdentityClosed : Bool
+round650C2BadCollarResidualA3ComplementIdentityClosed =
+  R666.round666LiveResidualA3ComplementIdentityClosed
+
+round650C2BadCollarSpacetimeResidualA3ComplementIdentityClosed : Bool
+round650C2BadCollarSpacetimeResidualA3ComplementIdentityClosed =
+  R666.round666SpacetimeResidualA3ComplementIdentityClosed
+
+round650C2A3UpperPaymentDirectlyPaysBadCollarResidual : Bool
+round650C2A3UpperPaymentDirectlyPaysBadCollarResidual =
+  R666.round666A3UpperPaymentDirectlyPaysResidual
+
+round650C2BadCollarSignedA3LowerPaymentClosed : Bool
+round650C2BadCollarSignedA3LowerPaymentClosed =
+  R666.round666SignedA3LowerPaymentClosed
+
+round650C2BadCollarRateSelfComplementPaymentClosed : Bool
+round650C2BadCollarRateSelfComplementPaymentClosed =
+  R666.round666RateSelfComplementPaymentClosed
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -643,6 +664,31 @@ round650C2BadCollarRateWeightedKernelPaymentClosedIsFalse :
   round650C2BadCollarRateWeightedKernelPaymentClosed ≡ false
 round650C2BadCollarRateWeightedKernelPaymentClosedIsFalse =
   R665.round665RateWeightedKernelQuantitativePaymentClosedIsFalse
+
+round650C2BadCollarResidualA3ComplementIdentityClosedIsTrue :
+  round650C2BadCollarResidualA3ComplementIdentityClosed ≡ true
+round650C2BadCollarResidualA3ComplementIdentityClosedIsTrue =
+  R666.round666LiveResidualA3ComplementIdentityClosedIsTrue
+
+round650C2BadCollarSpacetimeResidualA3ComplementIdentityClosedIsTrue :
+  round650C2BadCollarSpacetimeResidualA3ComplementIdentityClosed ≡ true
+round650C2BadCollarSpacetimeResidualA3ComplementIdentityClosedIsTrue =
+  R666.round666SpacetimeResidualA3ComplementIdentityClosedIsTrue
+
+round650C2A3UpperPaymentDirectlyPaysBadCollarResidualIsFalse :
+  round650C2A3UpperPaymentDirectlyPaysBadCollarResidual ≡ false
+round650C2A3UpperPaymentDirectlyPaysBadCollarResidualIsFalse =
+  R666.round666A3UpperPaymentDirectlyPaysResidualIsFalse
+
+round650C2BadCollarSignedA3LowerPaymentClosedIsFalse :
+  round650C2BadCollarSignedA3LowerPaymentClosed ≡ false
+round650C2BadCollarSignedA3LowerPaymentClosedIsFalse =
+  R666.round666SignedA3LowerPaymentClosedIsFalse
+
+round650C2BadCollarRateSelfComplementPaymentClosedIsFalse :
+  round650C2BadCollarRateSelfComplementPaymentClosed ≡ false
+round650C2BadCollarRateSelfComplementPaymentClosedIsFalse =
+  R666.round666RateSelfComplementPaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
