@@ -1,12 +1,3 @@
-module DASHI.EverythingDigitalESDReciprocalBraid where
-
-------------------------------------------------------------------------
--- Thin aggregate for the digital-ESD research-call tranche.
---
--- Import-only by design: the substantive owners retain their own provenance,
--- authority and non-promotion boundaries.
-------------------------------------------------------------------------
-
 import DASHI.Education.DigitalInnovationESDSourceAtlas
 import DASHI.Education.DigitalInnovationESDTransformationExact
 import DASHI.Education.MDPISpecialIssueResearchGovernanceExact
@@ -160,12 +151,10 @@ import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound8Regr
 import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRounds9To20Everything
 import DASHI.Education.DigitalESDCanonicalOwnerRegression
 import DASHI.Education.DigitalInnovationESDRegression
-
 import DASHI.Education.DigitalESDEligibilityFrameExclusionExact
 import DASHI.Education.DigitalESDEligibilityFrameExclusionRegression
 import DASHI.Education.DigitalESDEligibilityFrameAcquisitionExact
 import DASHI.Education.DigitalESDEligibilityFrameAcquisitionRegression
-
 import DASHI.Education.DigitalESDSearchToSourceAuditAdmissionExact
 import DASHI.Education.DigitalESDSearchToSourceAuditAdmissionRegression
 import DASHI.Education.DigitalESDDatabaseExecutionStructuredSearchBridgeExact
@@ -194,3 +183,21 @@ import DASHI.Education.DigitalESDFullTextSLRParseExact
 import DASHI.Education.DigitalESDFullTextSLRParseRegression
 import DASHI.Education.DigitalESDAdaptiveScreeningExecutionExact
 import DASHI.Education.DigitalESDAdaptiveScreeningExecutionRegression
+import DASHI.Education.DigitalESDAdaptiveScreeningControllerExact
+import DASHI.Education.DigitalESDAdaptiveScreeningControllerRegression
+import DASHI.Education.DigitalESDReviewedUnresolvedRoutingExact
+import DASHI.Education.DigitalESDReviewedUnresolvedRoutingRegression
+import DASHI.Education.DigitalESDStudyParseInteropExact
+import DASHI.Education.DigitalESDStudyParseInteropRegression
+
+module DASHI.EverythingDigitalESDReciprocalBraid where
+
+------------------------------------------------------------------------
+-- Thin aggregate for the digital-ESD research-call tranche.
+--
+-- Import-only by design: the substantive owners retain their own provenance,
+-- authority and non-promotion boundaries.
+------------------------------------------------------------------------
+
+
+
