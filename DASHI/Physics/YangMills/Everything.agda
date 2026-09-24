@@ -310,3 +310,6 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119GRQFTStressExportExact
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119GRQFTStressExportValidation
+
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralStressAttachmentExact
+import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119LiteralStressAttachmentValidation
