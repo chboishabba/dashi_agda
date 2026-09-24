@@ -211,6 +211,69 @@ def _format_diagnostic(diagnostic: Diagnostic) -> str:
         return f"{head}\n  hint: {diagnostic.hint}"
     return head
 
+def _prime_scope_closure(
+    checker: Checker,
+    root_path: Path,
+    collected: List[CollectedModule],
+) -> None:
+    """Recursively certify successful import subtrees with one scope probe each.
+
+    If the aggregate root succeeds, its entire collected dependency closure is
+    marked scope-valid. If it fails, descend only through direct imported
+    subtrees that are still unresolved. This isolates a small failing frontier
+    without paying one Agda process per module.
+    """
+    backend = checker.scope_backend
+    if not isinstance(backend, AgdaAutoRefineBackend):
+        return
+    if len(collected) <= 1:
+        return
+
+    selected = {item.path.resolve() for item in collected}
+    visiting = set()
+
+    def closure_paths(path: Path) -> List[Path]:
+        return [
+            checker.module_path(module).resolve()
+            for module in checker.dependency_modules(path)
+            if checker.module_path(module).resolve() in selected
+        ]
+
+    def visit(path: Path, *, aggregate_root: bool = False) -> None:
+        key = path.resolve()
+        if key not in selected:
+            return
+        if backend.scope_known(key):
+            return
+        if key in visiting:
+            return
+
+        visiting.add(key)
+        try:
+            if backend.probe_scope(key, aggregate_root=aggregate_root):
+                backend.mark_scope_validated(closure_paths(key))
+                return
+
+            try:
+                summary = checker.parse_summary(key)
+            except (OSError, UnicodeDecodeError):
+                return
+
+            direct_children = []
+            for module in sorted(set(summary.imports.values())):
+                child = checker.module_path(module).resolve()
+                if child in selected:
+                    direct_children.append(child)
+
+            for child in direct_children:
+                if not backend.scope_known(child):
+                    visit(child, aggregate_root=True)
+        finally:
+            visiting.remove(key)
+
+    visit(root_path.resolve(), aggregate_root=True)
+
+
 
 class AgdaModuleFile(pytest.File):
     def collect(self):
@@ -225,7 +288,19 @@ class AgdaModuleFile(pytest.File):
             seen = set()
             setattr(config, "_dashi_agda_collected_modules", seen)
 
-        for collected in _selected_modules(checker, path, closure, dependencies):
+        selected = _selected_modules(checker, path, closure, dependencies)
+
+        if dependencies and config.getoption("--agda-auto-refine"):
+            primed = getattr(config, "_dashi_agda_scope_primed_roots", None)
+            if primed is None:
+                primed = set()
+                setattr(config, "_dashi_agda_scope_primed_roots", primed)
+            root_key = path.resolve()
+            if root_key not in primed:
+                _prime_scope_closure(checker, path, selected)
+                primed.add(root_key)
+
+        for collected in selected:
             if collected.module in seen:
                 continue
             seen.add(collected.module)
