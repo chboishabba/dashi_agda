@@ -21,9 +21,11 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPPolynomialObserverNoGoExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
+open import Data.Nat.Base using (z≤n)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
@@ -31,6 +33,8 @@ import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact as Finite
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact as Factor
+import DASHI.Mathematics.Complexity.PolynomialClassicalObserverExact as PolyObserver
+import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 
 Injective :
@@ -194,6 +198,87 @@ identityFactorisationCannotProvideSATRelevantLoss
     satisfiableWitness unsatisfiableWitness =
   injectiveFormulaObserverCannotCollapseSATAndUNSAT
     (identityFactorisationObserverIsInjective candidate)
+    satisfiableFormula
+    unsatisfiableFormula
+    satisfiableWitness
+    unsatisfiableWitness
+
+
+------------------------------------------------------------------------
+-- The full PolynomialClassicalObserver carrier is also permissive enough to
+-- admit a lossless identity observer with zero-valued supplied measurements.
+--
+-- This is an important modelling result: the observer record's polynomial
+-- envelopes do not, by themselves, prove that representationSize,
+-- constructionCost, or recoveryCost are faithful operational measurements.
+------------------------------------------------------------------------
+
+zeroPolynomialBound :
+  ERQ.PolynomialBound (λ n → zero)
+zeroPolynomialBound =
+  ERQ.polynomialBound zero zero (λ n → z≤n)
+
+zeroLengthIndexedEnvelope :
+  ∀ {Word : Set}
+    {inputLength : Word → Nat} →
+  PolyObserver.LengthIndexedEnvelope
+    inputLength
+    (λ word → zero)
+zeroLengthIndexedEnvelope = record
+  { PolyObserver.envelope = λ n → zero
+  ; PolyObserver.dominates = λ word → z≤n
+  ; PolyObserver.polynomial = zeroPolynomialBound
+  }
+
+identityPolynomialClassicalObserver :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+  PolyObserver.PolynomialClassicalObserver
+    cost
+    (Direct.decide candidate)
+identityPolynomialClassicalObserver {cost = cost} candidate = record
+  { PolyObserver.inputLength = λ formula → zero
+  ; PolyObserver.representation = λ formula → formula
+  ; PolyObserver.representationSize = λ formula → zero
+  ; PolyObserver.constructionCost = λ formula → zero
+  ; PolyObserver.recoverDecision = Direct.decide candidate
+  ; PolyObserver.recoveryCost = λ formula → zero
+  ; PolyObserver.representationSizeBound = zeroLengthIndexedEnvelope
+  ; PolyObserver.constructionCostBound = zeroLengthIndexedEnvelope
+  ; PolyObserver.recoveryCostBound = zeroLengthIndexedEnvelope
+  ; PolyObserver.representationPolynomial = PR.identityMapPolynomial cost
+  ; PolyObserver.recoveryPolynomial = Direct.polynomialDecision candidate
+  ; PolyObserver.consumerFactors = λ formula → refl
+  }
+
+identityPolynomialClassicalObserverIsInjective :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+  Injective
+    (PolyObserver.representation
+      (identityPolynomialClassicalObserver candidate))
+identityPolynomialClassicalObserverIsInjective candidate =
+  identityInjective
+
+identityPolynomialClassicalObserverCannotCollapseSATAndUNSAT :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+  (satisfiableFormula unsatisfiableFormula : Cook.BooleanFormula) →
+  Cook.Satisfiable satisfiableFormula →
+  (Cook.Satisfiable unsatisfiableFormula → ⊥) →
+  PolyObserver.representation
+      (identityPolynomialClassicalObserver candidate)
+      satisfiableFormula
+    ≡
+  PolyObserver.representation
+      (identityPolynomialClassicalObserver candidate)
+      unsatisfiableFormula →
+  ⊥
+identityPolynomialClassicalObserverCannotCollapseSATAndUNSAT
+    candidate satisfiableFormula unsatisfiableFormula
+    satisfiableWitness unsatisfiableWitness =
+  injectiveFormulaObserverCannotCollapseSATAndUNSAT
+    (identityPolynomialClassicalObserverIsInjective candidate)
     satisfiableFormula
     unsatisfiableFormula
     satisfiableWitness
