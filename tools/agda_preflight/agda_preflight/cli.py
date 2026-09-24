@@ -11,7 +11,11 @@ from .scope_backend import ExternalScopeBackend
 
 
 def _format(diag) -> str:
-    head = f"{diag.path}:{diag.line}:{diag.column}: {diag.severity}: {diag.code}: {diag.message}"
+    head = (
+        f"{diag.path}:{diag.line}:{diag.column}: {diag.severity}: "
+        f"{diag.code}: {diag.message} "
+        f"[evidence={diag.evidence}; requires={diag.minimum_evidence}]"
+    )
     return head + (f"\n  hint: {diag.hint}" if diag.hint else "")
 
 
