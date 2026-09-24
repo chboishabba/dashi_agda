@@ -147,10 +147,11 @@ fullyRestrictedSignaturePreservesNodeCount :
   ≡
   Size.formulaNodeCount
     (signatureFormula variables)
-fullyRestrictedSignaturePreservesNodeCount bits =
+fullyRestrictedSignaturePreservesNodeCount
+    {variables} bits =
   Terminal.fullyRestrictPreservesNodeCount
     bits
-    (signatureFormula _)
+    (signatureFormula variables)
 
 ------------------------------------------------------------------------
 -- Research consequence.
