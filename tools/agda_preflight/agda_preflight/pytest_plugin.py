@@ -9,6 +9,7 @@ import json
 import pytest
 
 from .checker import Checker, Diagnostic
+from .evidence import canonical_code
 from .scope_backend import AgdaAutoRefineBackend, AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
 
 
@@ -326,6 +327,9 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     code_counts = Counter()
     error_code_counts = Counter()
     deferred_code_counts = Counter()
+    canonical_counts = Counter()
+    canonical_error_counts = Counter()
+    canonical_deferred_counts = Counter()
     report_modules = []
 
     for outcome in ("passed", "failed"):
@@ -352,15 +356,19 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
             for diagnostic in diagnostics:
                 code = diagnostic.get("code", "UNKNOWN")
+                root_code = canonical_code(code)
                 code_counts[code] += 1
+                canonical_counts[root_code] += 1
                 if diagnostic.get("severity") == "error":
                     error_count += 1
                     error_code_counts[code] += 1
+                    canonical_error_counts[root_code] += 1
                 else:
                     warning_count += 1
                 if not diagnostic.get("evidence_sufficient", True):
                     deferred_count += 1
                     deferred_code_counts[code] += 1
+                    canonical_deferred_counts[root_code] += 1
 
     terminalreporter.section("Agda preflight")
     terminalreporter.write_line(f"modules passed: {passed}")
@@ -371,10 +379,10 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
     if code_counts:
         terminalreporter.write_line("")
-        terminalreporter.write_line("top diagnostics:")
-        for code, count in code_counts.most_common(12):
-            hard = error_code_counts.get(code, 0)
-            deferred = deferred_code_counts.get(code, 0)
+        terminalreporter.write_line("top root-cause diagnostics:")
+        for code, count in canonical_counts.most_common(12):
+            hard = canonical_error_counts.get(code, 0)
+            deferred = canonical_deferred_counts.get(code, 0)
             terminalreporter.write_line(
                 f"  {code}: {count} total, {hard} hard, {deferred} deferred"
             )
@@ -391,6 +399,9 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
                 "diagnostics_by_code": dict(code_counts),
                 "hard_by_code": dict(error_code_counts),
                 "deferred_by_code": dict(deferred_code_counts),
+                "canonical_diagnostics_by_code": dict(canonical_counts),
+                "canonical_hard_by_code": dict(canonical_error_counts),
+                "canonical_deferred_by_code": dict(canonical_deferred_counts),
             },
             "modules": report_modules,
         }
