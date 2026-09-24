@@ -82,6 +82,7 @@ record BishopRouteBCurrentFrontier : Set where
     leanBishopArithmeticCompatibilityOwned : Bool
     leanBishopOrderReflectionOwned : Bool
     leanCanonicalRouteBHypothesisFree : Bool
+    leanMappedRouteReplayIrrelevanceOwned : Bool
 
     leanKernelReceiptObserved : Bool
     generatedCrossProverReplayObserved : Bool
@@ -104,10 +105,10 @@ canonicalBishopRouteBCurrentFrontier =
     true true true true true true true
     true true true
     true true
-    true true true true true true
+    true true true true true true true
     false false false true
     true false
-    "Route B's mathematics is now closed at the Bishop-setoid completion level on the Lean companion: the vendored arithmetic mirror is concrete; the Bishop quotient is explicitly equivalent to Lean Real; zero/one/neg/add/sub/mul and order are transported/reflected through that equivalence; a canonical Round11/Machin binding is inhabited; every admissible binding is Bishop-equivalent to it; the q/E4/E6/normalized-Delta route is hypothesis-free; and the local pinned Lean theorem owns normalized (E4^3-E6^2)/1728 = eta^24. No analytic, transcendental, carrier, arithmetic or order theorem remains open. The only live residuals are provenance/validation: observe generated replay of the named Agda declarations into the Lean mirror structures and obtain exact-head Lean/Agda kernel receipts. Do not flip replay provenance merely because the canonical setoid-equivalent reconstruction exists."
+    "Route B's mathematics is now closed at the Bishop-setoid completion level on the Lean companion: the vendored arithmetic mirror is concrete; the Bishop quotient is explicitly equivalent to Lean Real; zero/one/neg/add/sub/mul and order are transported/reflected through that equivalence; a canonical Round11/Machin binding is inhabited; every admissible binding is Bishop-equivalent to it; the q/E4/E6/normalized-Delta route is hypothesis-free; mapped q/E4/E6/Delta values are proved independent of which admissible replay binding is supplied; and the local pinned Lean theorem owns normalized (E4^3-E6^2)/1728 = eta^24. No analytic, transcendental, carrier, arithmetic, order, binding-choice or replay-semantics theorem remains open. The only live residuals are provenance/validation: observe generated replay of the named Agda declarations into the Lean mirror structures and obtain exact-head Lean/Agda kernel receipts. Generated replay may establish attribution/provenance, but it cannot change the mapped mathematics."
 
 ------------------------------------------------------------------------
 -- Query-stable reduction receipts.
