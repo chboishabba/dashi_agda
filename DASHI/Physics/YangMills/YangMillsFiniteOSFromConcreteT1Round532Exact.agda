@@ -20,6 +20,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsConcreteT1SemanticsRound516Exact as T1
 import DASHI.Physics.YangMills.YangMillsConcreteEndpointSemanticsRound511Exact as Endpoint
+import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
+open import Agda.Builtin.Nat using (Nat)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as R462
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119BosonicOS3SourceExact as Bosonic
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OS05CanonicalLimitExact as OS05
@@ -43,6 +47,12 @@ record FiniteOSCompletion
       Division.RealDivisionAlgebra
         (RealLimit.canonicalCylinderAlgebra limitLaws)
         quotient)
+    (base :
+      Top.LiteralYangMillsSemantics
+        (Physical.physicalLiteralCarriers
+          G X Nat Configuration ℝ (Configuration → ℝ) Position
+          CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+          Hilbert Hamiltonian Vacuum))
     (endpoint :
       Endpoint.ConcreteEndpointSourceBundle
         G X Configuration Position CurvaturePolynomial LocalOperator
@@ -84,7 +94,7 @@ compilePublishedFiniteOSSource :
       Algebra Event Projection EuclideanAction Permutation
       Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
       SmallFieldScale BlockRadius AnalyticRadius Decay
-      sequenceLimit limitLaws quotient division endpoint t1} →
+      sequenceLimit limitLaws quotient division base endpoint t1} →
   FiniteOSCompletion
     G X Configuration Position CurvaturePolynomial LocalOperator
     OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
@@ -92,14 +102,14 @@ compilePublishedFiniteOSSource :
     Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
     SmallFieldScale BlockRadius AnalyticRadius Decay
     {sequenceLimit = sequenceLimit}
-    limitLaws quotient division endpoint t1 →
+    limitLaws quotient division base endpoint t1 →
   R462.PublishedFiniteOSSource
     G X Configuration Position CurvaturePolynomial LocalOperator
     OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
     EuclideanAction Permutation
     {sequenceLimit = sequenceLimit}
     limitLaws quotient division
-    (Endpoint.concreteEndpointSemantics endpoint)
+    (Endpoint.concreteEndpointSemantics base endpoint)
 compilePublishedFiniteOSSource
     {endpoint = endpoint} {t1 = t1} completion = record
   { R462.PublishedFiniteOSSource.family =
