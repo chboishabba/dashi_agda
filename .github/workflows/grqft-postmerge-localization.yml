@@ -1,0 +1,34 @@
+name: GRQFT post-merge localization
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/DrellYanRatioAbsoluteDefectLocalizationExact.agda'
+      - 'DASHI/Physics/Closure/DrellYanRatioAbsoluteDefectLocalizationValidation.agda'
+      - 'DASHI/Physics/Closure/ColliderChiSquareScopeMatrixExact.agda'
+      - 'DASHI/Physics/Closure/ColliderChiSquareScopeMatrixValidation.agda'
+      - 'DASHI/Physics/Foundations/CMP119PinnedYMGRQFTSectorStressBridgeExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119PinnedYMGRQFTSectorStressBridgeValidation.agda'
+      - 'DASHI/Physics/Foundations/GRQFTPostMergeMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTPostMergeMaxCutValidation.agda'
+      - 'scripts/grqft_dy_ratio_absolute_localization.py'
+      - 'scripts/grqft_collider_chi2_scope_matrix.py'
+      - 'outputs/grqft_dy_ratio_absolute_localization.json'
+      - 'outputs/grqft_collider_chi2_scope_matrix.json'
+      - 'scripts/check_grqft_postmerge_localization.sh'
+      - '.github/workflows/grqft-postmerge-localization.yml'
+
+jobs:
+  replay-and-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Agda semantic preflight
+        run: python3 -m pip install -e tools/agda_preflight
+      - name: Replay diagnostics and run semantic preflight
+        run: bash scripts/check_grqft_postmerge_localization.sh

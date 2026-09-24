@@ -445,3 +445,6 @@ module DASHI.Physics.Closure.Everything where
 import DASHI.Physics.Closure.DrellYanRatioAbsoluteDefectLocalizationExact
 
 import DASHI.Physics.Closure.ColliderChiSquareScopeMatrixExact
+
+import DASHI.Physics.Closure.DrellYanRatioAbsoluteDefectLocalizationValidation
+import DASHI.Physics.Closure.ColliderChiSquareScopeMatrixValidation
