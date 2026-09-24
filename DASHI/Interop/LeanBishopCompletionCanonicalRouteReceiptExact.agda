@@ -31,6 +31,7 @@ module DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 record LeanBishopCompletionCanonicalRouteReceipt : Set where
