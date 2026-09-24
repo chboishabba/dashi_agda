@@ -334,10 +334,30 @@ def _prime_scope_closure(
                 )
                 return
 
-            log(
-                f"  [scope-probe] {module} ✗ unresolved; "
-                "descending into relevant imports"
+            partial_modules = getattr(
+                backend.scope,
+                "last_partial_validated_modules",
+                (),
             )
+            partial_paths = {
+                checker.module_path(module_name).resolve()
+                for module_name in partial_modules
+                if checker.module_path(module_name).resolve() in selected
+            }
+            if partial_paths:
+                backend.mark_scope_validated(partial_paths)
+                scope_candidates.difference_update(partial_paths)
+                log(
+                    f"  [scope-probe] {module} ✗ unresolved, but Agda "
+                    f"partially certified {len(partial_paths)} modules; "
+                    "descending into remaining candidates"
+                )
+            else:
+                log(
+                    f"  [scope-probe] {module} ✗ unresolved; "
+                    "descending into relevant imports"
+                )
+
             for child in children.get(key, ()):
                 if descendants_including(child) & scope_candidates:
                     visit(child, aggregate_root=True)
