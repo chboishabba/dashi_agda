@@ -2,7 +2,7 @@
 module DASHI.Physics.Foundations.CMP119ClassicalWilsonDiagonalMetricVariationExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; -_)
+open import Data.Integer.Base using (+_)\nopen import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; -_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 ------------------------------------------------------------------------
@@ -72,7 +72,7 @@ classicalDiagonalMetricTrace e =
   dS00 e + dS11 e + dS22 e + dS33 e
 
 classicalDiagonalMetricTraceIsZero :
-  ∀ e → classicalDiagonalMetricTrace e ≡ + 0 / 1
+  ∀ e → classicalDiagonalMetricTrace e ≡ 0ℚ
 classicalDiagonalMetricTraceIsZero e =
   ℚRing.solve-∀
     (e01 e) (e02 e) (e03 e)
@@ -121,7 +121,7 @@ classicalActionVariationTraceZero :
   + classicalActionVariation11 family configuration
   + classicalActionVariation22 family configuration
   + classicalActionVariation33 family configuration
-  ≡ + 0 / 1
+  ≡ 0ℚ
 classicalActionVariationTraceZero family configuration =
   classicalDiagonalMetricTraceIsZero
     (orientationEnergies family configuration)
