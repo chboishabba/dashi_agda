@@ -22,6 +22,34 @@ def _finite(value: Any) -> bool:
     )
 
 
+
+def _check_identity_residual(
+    row: dict[str, Any],
+    *,
+    residual_key: str,
+    term_keys: tuple[str, ...],
+    label: str,
+    errors: list[str],
+    rtol: float = 1.0e-12,
+) -> None:
+    residual = row.get(residual_key)
+    if not _finite(residual):
+        errors.append(f"{label}: {residual_key} must be finite")
+        return
+    terms: list[float] = []
+    for key in term_keys:
+        value = row.get(key)
+        if not _finite(value):
+            return
+        terms.append(abs(float(value)))
+    scale = max(1.0, *terms)
+    if abs(float(residual)) > rtol * scale:
+        errors.append(
+            f"{label}: {residual_key} exceeds identity tolerance "
+            f"({abs(float(residual))} > {rtol * scale})"
+        )
+
+
 def _check_authority(authority: Any, *, prefix: str, errors: list[str]) -> None:
     if not isinstance(authority, dict):
         errors.append(f"{prefix}: missing authority object")
@@ -84,6 +112,21 @@ def validate_r406(payload: dict[str, Any]) -> list[str]:
         if not _finite(payload.get(key)):
             errors.append(f"r406: {key} must be finite")
 
+    _check_identity_residual(
+        payload,
+        residual_key="r687_global_rate_lift_residual",
+        term_keys=("global_rate_lifted_forcing_full", "global_coherent_commutator_work"),
+        label="r406",
+        errors=errors,
+    )
+    _check_identity_residual(
+        payload,
+        residual_key="r688_global_dynamic_cancellation_residual",
+        term_keys=("global_rate_lifted_minus_8_tangent", "global_weighted_rate_work"),
+        label="r406",
+        errors=errors,
+    )
+
     minimum_rate = payload.get("minimum_pair_rate")
     if minimum_rate is not None and (not _finite(minimum_rate) or float(minimum_rate) <= 0.0):
         errors.append("r406: minimum_pair_rate must be positive when present")
@@ -115,6 +158,21 @@ def _validate_c2_row(row: Any, *, label: str, errors: list[str]) -> None:
     ):
         if not _finite(row.get(key)):
             errors.append(f"{label}: {key} must be finite")
+
+    _check_identity_residual(
+        row,
+        residual_key="r687_global_identity_residual",
+        term_keys=("r687_rate_lifted_forcing_full", "r685_coherent_commutator_work"),
+        label=label,
+        errors=errors,
+    )
+    _check_identity_residual(
+        row,
+        residual_key="r688_global_identity_residual",
+        term_keys=("r688_rate_lifted_minus_8_tangent", "r665_weighted_rate_work"),
+        label=label,
+        errors=errors,
+    )
 
     if not isinstance(row.get("r406_evaluated_pair_count"), int):
         errors.append(f"{label}: r406_evaluated_pair_count must be integer")
@@ -193,6 +251,28 @@ def _validate_c1_row(row: Any, *, label: str, errors: list[str]) -> None:
     ):
         if not _finite(row.get(key)):
             errors.append(f"{label}: {key} must be finite")
+    _check_identity_residual(
+        row,
+        residual_key="r685_rate_kernel_residual",
+        term_keys=("weighted_rate_work", "coherent_commutator_work", "coherent_tangent_work"),
+        label=label,
+        errors=errors,
+    )
+    _check_identity_residual(
+        row,
+        residual_key="r687_rate_lift_residual",
+        term_keys=("rate_lifted_forcing_full", "coherent_commutator_work"),
+        label=label,
+        errors=errors,
+    )
+    _check_identity_residual(
+        row,
+        residual_key="r688_dynamic_cancellation_residual",
+        term_keys=("rate_lifted_minus_8_tangent", "weighted_rate_work"),
+        label=label,
+        errors=errors,
+    )
+
     if "weighted_rate_work_nonnegative" in row and not isinstance(
         row.get("weighted_rate_work_nonnegative"), bool
     ):
