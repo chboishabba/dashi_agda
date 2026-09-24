@@ -31,6 +31,141 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact a
 import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as OS
 import DASHI.Physics.YangMills.BalabanClayT5SelectedContinuumOSExact as Selected
 
+record SameFamilyContinuumCoreRecovery
+    (Measure Observable Schwinger Scalar Reconstructed : Set) : Set₁ where
+  field
+    physicalGramDataCore :
+      Physical.PhysicalMeasureToOSGramData Measure Observable Scalar
+
+    selectedCore :
+      Selected.SelectedFiniteToContinuumOSCore Measure Schwinger
+
+    physicalMeasureSequenceAgreesCore :
+      ∀ cutoff →
+      Physical.measureSequence
+        (Physical.convergenceData physicalGramDataCore) cutoff
+      ≡
+      Selected.finiteMeasuresCore selectedCore cutoff
+
+    physicalContinuumMeasureAgreesCore :
+      Physical.continuumMeasure
+        (Physical.convergenceData physicalGramDataCore)
+      ≡
+      Selected.continuumMeasureCore selectedCore
+
+    gramReflectionImpliesSelectedReflectionCore :
+      OS.GramReflectionPositive
+        (Physical.physicalMeasureTopologyControlsOSGram physicalGramDataCore)
+        (Selected.continuumMeasureCore selectedCore) →
+      Selected.ReflectionPositiveCore selectedCore
+        (Selected.schwingerCore selectedCore
+          (Selected.continuumMeasureCore selectedCore))
+
+    reconstructFromSelectedOSCore :
+      Selected.SelectedContinuumOSCoreAxioms selectedCore →
+      Reconstructed
+
+open SameFamilyContinuumCoreRecovery public
+
+selectedPhysicalGramReflectionPositiveCore :
+  ∀ {Measure Observable Schwinger Scalar Reconstructed}
+    (recovery :
+      SameFamilyContinuumCoreRecovery
+        Measure Observable Schwinger Scalar Reconstructed) →
+  OS.GramReflectionPositive
+    (Physical.physicalMeasureTopologyControlsOSGram
+      (physicalGramDataCore recovery))
+    (Selected.continuumMeasureCore (selectedCore recovery))
+selectedPhysicalGramReflectionPositiveCore recovery =
+  subst
+    (OS.GramReflectionPositive
+      (Physical.physicalMeasureTopologyControlsOSGram
+        (physicalGramDataCore recovery)))
+    (physicalContinuumMeasureAgreesCore recovery)
+    (Physical.physicalContinuumReflectionPositive
+      (physicalGramDataCore recovery))
+
+selectedPhysicalReflectionPositiveCore :
+  ∀ {Measure Observable Schwinger Scalar Reconstructed}
+    (recovery :
+      SameFamilyContinuumCoreRecovery
+        Measure Observable Schwinger Scalar Reconstructed) →
+  Selected.ReflectionPositiveCore (selectedCore recovery)
+    (Selected.schwingerCore (selectedCore recovery)
+      (Selected.continuumMeasureCore (selectedCore recovery)))
+selectedPhysicalReflectionPositiveCore recovery =
+  gramReflectionImpliesSelectedReflectionCore recovery
+    (selectedPhysicalGramReflectionPositiveCore recovery)
+
+selectedOSCoreAxioms :
+  ∀ {Measure Observable Schwinger Scalar Reconstructed}
+    (recovery :
+      SameFamilyContinuumCoreRecovery
+        Measure Observable Schwinger Scalar Reconstructed) →
+  Selected.SelectedContinuumOSCoreAxioms (selectedCore recovery)
+selectedOSCoreAxioms recovery =
+  Selected.assembleSelectedContinuumOSCoreAxioms (selectedCore recovery)
+
+selectedCoreReconstructedTheory :
+  ∀ {Measure Observable Schwinger Scalar Reconstructed}
+    (recovery :
+      SameFamilyContinuumCoreRecovery
+        Measure Observable Schwinger Scalar Reconstructed) →
+  Reconstructed
+selectedCoreReconstructedTheory recovery =
+  reconstructFromSelectedOSCore recovery (selectedOSCoreAxioms recovery)
+
+boundedExpectationConvergesToSelectedCoreContinuum :
+  ∀ {Measure Observable Schwinger Scalar Reconstructed}
+    (recovery :
+      SameFamilyContinuumCoreRecovery
+        Measure Observable Schwinger Scalar Reconstructed)
+    observable →
+  Physical.BoundedObservable
+    (Physical.convergenceData (physicalGramDataCore recovery)) observable →
+  Physical.Converges
+    (Physical.scalarConvergence
+      (Physical.convergenceData (physicalGramDataCore recovery)))
+    (λ cutoff →
+      Physical.expectation
+        (Physical.operations
+          (Physical.convergenceData (physicalGramDataCore recovery)))
+        (Physical.measureSequence
+          (Physical.convergenceData (physicalGramDataCore recovery)) cutoff)
+        observable)
+    (Physical.expectation
+      (Physical.operations
+        (Physical.convergenceData (physicalGramDataCore recovery)))
+      (Selected.continuumMeasureCore (selectedCore recovery))
+      observable)
+boundedExpectationConvergesToSelectedCoreContinuum recovery observable bounded =
+  subst
+    (λ target →
+      Physical.Converges
+        (Physical.scalarConvergence
+          (Physical.convergenceData (physicalGramDataCore recovery)))
+        (λ cutoff →
+          Physical.expectation
+            (Physical.operations
+              (Physical.convergenceData (physicalGramDataCore recovery)))
+            (Physical.measureSequence
+              (Physical.convergenceData (physicalGramDataCore recovery)) cutoff)
+            observable)
+        (Physical.expectation
+          (Physical.operations
+            (Physical.convergenceData (physicalGramDataCore recovery)))
+          target observable))
+    (physicalContinuumMeasureAgreesCore recovery)
+    (Physical.boundedWeakConvergenceImpliesExpectationConvergence
+      (Physical.convergenceData (physicalGramDataCore recovery))
+      observable bounded)
+
+round425SameFamilyContinuumCoreRecoveryCompilerLevel : ProofLevel
+round425SameFamilyContinuumCoreRecoveryCompilerLevel = machineChecked
+
+round425CoreRecoveryRequiresClustering : Bool
+round425CoreRecoveryRequiresClustering = false
+
 record SameFamilyContinuumRecovery
     (Measure Observable Schwinger Scalar Reconstructed : Set) : Set₁ where
   field
