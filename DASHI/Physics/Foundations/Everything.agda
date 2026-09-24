@@ -236,3 +236,5 @@ import DASHI.Physics.Foundations.CMP119ConcreteTenSlotCrossNumeratorCandidateExa
 import DASHI.Physics.Foundations.CMP119ConcreteTenSlotD1SourceWeldExact
 
 import DASHI.Physics.Foundations.CMP119TenActualSourceReadoutsExact
+
+import DASHI.Physics.Foundations.CMP119TenLiteralDensitySourceReadoutsExact
