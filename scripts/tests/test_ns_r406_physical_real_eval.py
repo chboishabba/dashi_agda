@@ -251,3 +251,27 @@ def test_c2_full_off_packet_cross_reduces_to_collar() -> None:
             float(row["full_low_complement_spectral_cross"])
             <= float(row["collar_spectral_cross"]) + 1.0e-12 * scale
         )
+
+
+def test_c2_euclidean_collar_refinement_reduces_cross_to_bad_cap() -> None:
+    raw = _reality_closed_random_state(12, seed=71)
+    split = _packet_layer_cake_split(raw, nu=0.01, formal_cutoff=2)
+
+    assert int(split["interface_count"]) > 0
+    assert float(split["maximum_collar_refinement_residual"]) <= 1.0e-10
+    assert int(split["good_collar_spectral_cross_violation_count"]) == 0
+    assert int(split["full_cross_below_bad_collar_violation_count"]) == 0
+
+    for row in split["interfaces"]:
+        scale = max(
+            1.0,
+            abs(float(row["collar_spectral_cross"])),
+            abs(float(row["bad_collar_spectral_cross"])),
+            abs(float(row["good_collar_spectral_cross"])),
+        )
+        assert abs(float(row["collar_refinement_residual"])) <= 1.0e-12 * scale
+        assert float(row["good_collar_spectral_cross"]) <= 1.0e-12 * scale
+        assert (
+            float(row["full_low_complement_spectral_cross"])
+            <= float(row["bad_collar_spectral_cross"]) + 1.0e-12 * scale
+        )
