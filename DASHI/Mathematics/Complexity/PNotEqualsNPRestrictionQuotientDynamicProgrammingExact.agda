@@ -130,6 +130,7 @@ quotientTruthComputesReachableDecision
     labels
     derivation
 quotientTruthComputesReachableDecision
+    {root = root}
     quotient
     oracle
     labels
@@ -145,14 +146,14 @@ quotientTruthComputesReachableDecision
   where
     falseDerivation :
       Family.RestrictionDerivation
-        _
+        root
         (SAT.restrictHead false current)
     falseDerivation =
       Family.restrictionFalse derivation
 
     trueDerivation :
       Family.RestrictionDerivation
-        _
+        root
         (SAT.restrictHead true current)
     trueDerivation =
       Family.restrictionTrue derivation
@@ -307,7 +308,7 @@ quotientTruthComputesRootDecision
 quotientDynamicTableCellCount :
   ∀ {rootVariables : Nat}
     {root : SAT.BooleanFormula rootVariables} →
-  RestrictionSemanticQuotient root →
+  Quotient.RestrictionSemanticQuotient root →
   Nat
 quotientDynamicTableCellCount
     {rootVariables}
