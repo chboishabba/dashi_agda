@@ -196,3 +196,6 @@ import DASHI.Physics.Foundations.GRQFTLocalizedRepulsiveSourceCriterionExact
 import DASHI.Physics.Foundations.GRQFTLocalizedAntigravityMaxCutExact
 
 import DASHI.Physics.Foundations.CMP119PinnedStressMetricRepresentationBridgeValidation
+
+import DASHI.Physics.Foundations.CMP119ActiveRawSymmetricTangentSpecializationExact
+import DASHI.Physics.Foundations.CMP119ActiveRawSymmetricTangentSpecializationValidation
