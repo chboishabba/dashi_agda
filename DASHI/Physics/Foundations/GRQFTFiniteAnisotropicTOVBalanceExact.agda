@@ -58,6 +58,50 @@ originalBoundaryDoesNotMatchDesiredPressureStep :
   ⊥
 originalBoundaryDoesNotMatchDesiredPressureStep ()
 
+
+------------------------------------------------------------------------
+-- CONSTRUCTIVE UNIT-RADIUS DESIGN EQUATION
+--
+-- For the normalized unit-radius equation
+--
+--   p_r' = -q (rho+p_r) + 2 (p_t-p_r),
+--
+-- solve explicitly:
+--
+--   p_t = p_r + (1/2) [ p_r' + q (rho+p_r) ].
+--
+-- Therefore tangential stress is not a free mystery coordinate once the
+-- desired radial-pressure profile and gravitational pull are selected.
+------------------------------------------------------------------------
+
+requiredTangentialPressure :
+  (rho pR pRPrime gravityFactor : ℚ) → ℚ
+requiredTangentialPressure rho pR pRPrime gravityFactor =
+  pR
+  + (Int.+ 1 / 2)
+      * (pRPrime + gravityFactor * (rho + pR))
+
+normalizedTOVRHSFromCoordinates :
+  (rho pR pT gravityFactor : ℚ) → ℚ
+normalizedTOVRHSFromCoordinates rho pR pT gravityFactor =
+  - (gravityFactor * (rho + pR))
+  + (Int.+ 2 / 1) * (pT - pR)
+
+requiredTangentialPressureClosesNormalizedTOV :
+  (rho pR pRPrime gravityFactor : ℚ) →
+  normalizedTOVRHSFromCoordinates
+    rho
+    pR
+    (requiredTangentialPressure rho pR pRPrime gravityFactor)
+    gravityFactor
+  ≡ pRPrime
+requiredTangentialPressureClosesNormalizedTOV rho pR pRPrime gravityFactor =
+  solve (rho ∷ pR ∷ pRPrime ∷ gravityFactor ∷ [])
+
+balancedTransitionTangentialPressureIsForcedToOne :
+  requiredTangentialPressure 1ℚ 0ℚ 1ℚ 1ℚ ≡ 1ℚ
+balancedTransitionTangentialPressureIsForcedToOne = solve []
+
 ------------------------------------------------------------------------
 -- BALANCED THIN TRANSITION LAYER
 --
