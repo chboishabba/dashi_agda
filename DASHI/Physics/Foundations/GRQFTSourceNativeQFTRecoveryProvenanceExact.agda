@@ -27,7 +27,7 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalConstructionExact as P
 ------------------------------------------------------------------------
 
 record SourceNativeQFTRecoveryState
-    (U : Weld.UnifiedCandidate) : Set₁ where
+    (U : Weld.UnifiedCandidate) : Set₂ where
   constructor sourceNativeQFTRecoveryState
   field
     jointState :
@@ -38,7 +38,7 @@ record SourceNativeQFTRecoveryState
         (Weld.qftCarriers U) (Weld.qftSemantics U)
 
     SourceNativeProvenance :
-      Set
+      Set₁
 
     sourceNativeProvenance :
       SourceNativeProvenance
@@ -75,7 +75,7 @@ forgetSourceNativeQFTRecoveryState =
 ------------------------------------------------------------------------
 
 record LegacyQFTRecoveryProjectionCompatibility
-    (U : Weld.UnifiedCandidate) : Set₁ where
+    (U : Weld.UnifiedCandidate) : Set₂ where
   field
     enrich :
       Effective.JointMicroscopicState →
@@ -116,7 +116,7 @@ record PinnedSourceNativeRecoverySelection
       Pinned.PinnedYangMillsConstruction
         {C = Weld.qftCarriers U}
         (Weld.qftSemantics U))
-    (compatibility : LegacyQFTRecoveryProjectionCompatibility U) : Set₁ where
+    (compatibility : LegacyQFTRecoveryProjectionCompatibility U) : Set₂ where
   field
     enrichedMicroscopicStateIsPinned :
       ∀ candidate regime →
