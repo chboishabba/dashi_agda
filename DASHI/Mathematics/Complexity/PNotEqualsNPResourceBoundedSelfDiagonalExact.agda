@@ -38,7 +38,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -174,6 +174,70 @@ explicitSelfTableauCannotClose attempt =
     (NatP.<-≤-trans
       (selfRuntimeStrictlyExceedsFormula attempt)
       (explicitTableauNeedsEachStep attempt))
+
+------------------------------------------------------------------------
+-- Quadratic specialization of the size obstruction.
+--
+-- Once the self-generated formula has size N >= 2, N < N^2.  Hence any
+-- candidate whose self-evaluation takes at least N^2 steps cannot be encoded by
+-- a literal one-formula-unit-per-step tableau inside that same N-size formula.
+------------------------------------------------------------------------
+
+two : Nat
+two = Agda.Builtin.Nat.suc (Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero)
+
+sizeAtLeastTwoImpliesBelowSquare :
+  ∀ {size : Nat} →
+  two ≤ size →
+  size < size * size
+sizeAtLeastTwoImpliesBelowSquare {Agda.Builtin.Nat.zero} ()
+sizeAtLeastTwoImpliesBelowSquare
+    {Agda.Builtin.Nat.suc Agda.Builtin.Nat.zero} ()
+sizeAtLeastTwoImpliesBelowSquare
+    {size@(Agda.Builtin.Nat.suc
+      (Agda.Builtin.Nat.suc rest))}
+    two≤size =
+  subst
+    (λ left → left < size * size)
+    (NatP.*-identityˡ size)
+    (NatP.*-monoˡ-< size two≤size)
+
+record QuadraticExplicitSelfTableauAttempt
+    {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost) : Set₁ where
+  constructor quadratic-explicit-self-tableau-attempt
+  field
+    formula : Cook.BooleanFormula
+    formulaSize : Nat
+    selfEvaluationSteps : Nat
+
+    formulaHasNontrivialSize :
+      two ≤ formulaSize
+
+    quadraticSelfRuntimeLowerBound :
+      formulaSize * formulaSize
+      ≤ selfEvaluationSteps
+
+    explicitTableauNeedsEachStep :
+      selfEvaluationSteps ≤ formulaSize
+
+open QuadraticExplicitSelfTableauAttempt public
+
+quadraticExplicitSelfTableauCannotClose :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    {candidate : Direct.PolynomialSATDeciderCandidate cost} →
+  QuadraticExplicitSelfTableauAttempt candidate →
+  ⊥
+quadraticExplicitSelfTableauCannotClose attempt =
+  NatP.<-irrefl
+    (QuadraticExplicitSelfTableauAttempt.formulaSize attempt)
+    (NatP.<-≤-trans
+      (NatP.<-≤-trans
+        (sizeAtLeastTwoImpliesBelowSquare
+          (formulaHasNontrivialSize attempt))
+        (quadraticSelfRuntimeLowerBound attempt))
+      (QuadraticExplicitSelfTableauAttempt.explicitTableauNeedsEachStep
+        attempt))
 
 ------------------------------------------------------------------------
 -- Abstract runtime/encoding functions expose the fixed-point-compatible seam.
