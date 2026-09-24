@@ -47,6 +47,9 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExact as D1a
+import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNResolventWeightedMixedCommutatorRound294Exact as R294
+import DASHI.Physics.Closure.NSTriadKNOutputLocalSelectorFixedOutputReductionExact as OutputLocal
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
 import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact as R656
@@ -166,6 +169,72 @@ activeBadCollarDivisionFreeCommutatorPairDifference
   fixedOutputDivisionFreeCommutatorPairDifference
     rho S velocity forcing cutoff output
 
+activeBadCollarWeightedCommutatorPairDifference :
+  (K : Nat) →
+  (output : Z3.FourierMode) →
+  (active : R656.badCollarPacket K output ≡ true) →
+  (rho : Z3.FourierMode → ℚ) →
+  (S : Helical.HelicalModeScalars F) →
+  (velocity forcing : Z3.FourierMode → C3.Complex3 F) →
+  (cutoff : Nat) →
+  let
+    items = Output.physicalOutputFiber cutoff output
+    value = D1a.mixedProductCell S velocity
+    mixed = Work.fixedOutputMixedProduct S velocity cutoff output
+    tangent = Work.fixedOutputDampedTangent rho S velocity forcing cutoff output
+    rate = Pair.cellRate rho
+    work = Pair.cellWork mixed value
+    n = Pair.natAsRational (length items)
+    weightedCommutator =
+      R224.foldVector
+        (R294.weightedCommutatorCell
+          (OutputLocal.outputLocalSwapInvariantWeight
+            F (R656.badCollarPacket K))
+          S velocity forcing)
+        items
+  in
+  n * Work.coherentWork mixed weightedCommutator
+  ≡
+  n * Work.coherentWork mixed tangent
+    + Pair.rateSum rate items * Work.coherentWork mixed mixed
+    + Pair.pairDifferenceWorkSum rate work items
+activeBadCollarWeightedCommutatorPairDifference
+    K output active rho S velocity forcing cutoff =
+  let
+    items = Output.physicalOutputFiber cutoff output
+    mixed = Work.fixedOutputMixedProduct S velocity cutoff output
+    weightedCommutator =
+      R224.foldVector
+        (R294.weightedCommutatorCell
+          (OutputLocal.outputLocalSwapInvariantWeight
+            F (R656.badCollarPacket K))
+          S velocity forcing)
+        items
+    unweightedCommutator =
+      Work.fixedOutputCommutator S velocity forcing cutoff output
+    n = Pair.natAsRational (length items)
+
+    carrierWeld :
+      weightedCommutator ≡ unweightedCommutator
+    carrierWeld =
+      R658.badCollarActiveFixedOutputReduction
+        K output active S velocity forcing cutoff
+
+    workWeld :
+      Work.coherentWork mixed weightedCommutator
+      ≡ Work.coherentWork mixed unweightedCommutator
+    workWeld = cong (Work.coherentWork mixed) carrierWeld
+
+    scaledWeld :
+      n * Work.coherentWork mixed weightedCommutator
+      ≡ n * Work.coherentWork mixed unweightedCommutator
+    scaledWeld = cong (n *_) workWeld
+  in
+  trans
+    scaledWeld
+    (fixedOutputDivisionFreeCommutatorPairDifference
+      rho S velocity forcing cutoff output)
+
 ------------------------------------------------------------------------
 -- Status / carrier firewall.
 ------------------------------------------------------------------------
@@ -175,6 +244,9 @@ round660FullPhysicalFibreDivisionFreePairDifferenceClosed = true
 
 round660ActiveBadCollarInheritsFullFibrePairDifferenceNormalForm : Bool
 round660ActiveBadCollarInheritsFullFibrePairDifferenceNormalForm = true
+
+round660ActualWeightedBadCollarCommutatorReducedToPairDifference : Bool
+round660ActualWeightedBadCollarCommutatorReducedToPairDifference = true
 
 -- R207/P3 is a comparable-only localized partner carrier.  It is a donor for
 -- the comparable class, not definitionally the full R658 physical output fibre.
@@ -203,6 +275,10 @@ round660FullPhysicalFibreDivisionFreePairDifferenceClosedIsTrue = refl
 round660ActiveBadCollarInheritsFullFibrePairDifferenceNormalFormIsTrue :
   round660ActiveBadCollarInheritsFullFibrePairDifferenceNormalForm ≡ true
 round660ActiveBadCollarInheritsFullFibrePairDifferenceNormalFormIsTrue = refl
+
+round660ActualWeightedBadCollarCommutatorReducedToPairDifferenceIsTrue :
+  round660ActualWeightedBadCollarCommutatorReducedToPairDifference ≡ true
+round660ActualWeightedBadCollarCommutatorReducedToPairDifferenceIsTrue = refl
 
 round660WholeBadCollarFibreIsR207ComparableCarrierIsFalse :
   round660WholeBadCollarFibreIsR207ComparableCarrier ≡ false
