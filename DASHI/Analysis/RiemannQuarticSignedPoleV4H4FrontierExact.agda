@@ -513,3 +513,95 @@ postSixthTransportedIntoAgdaKernelHere = false
 postSixthInterpretation : String
 postSixthInterpretation =
   "The absolute M6 bottleneck is no longer present on the preferred terminal source surface. Lean retains the signed sixth harmonic, proves and transports only the beyond-sixth residual with a total-degree-eight envelope, pays its finite local multiplicity through the existing expanded Zeta23 count, and bounds M8 through the same selected-witness G1 constant K(W). The remaining Clay-facing analytic test is the strict scalar inequality for quartic main + signed sixth + eighth debt + signed FarExact against the literal target threshold."
+
+
+------------------------------------------------------------------------
+-- SIGNED-SIXTH OUTER-CONE REDUCTION DONOR
+--
+-- Lean PR #22 now factors the literal physical sixth angular carrier exactly:
+--
+--   a^6 - 15 a^4 d^2 + 15 a^2 d^4 - d^6
+--     = (a^2 - d^2) (a^4 - 14 a^2 d^2 + d^4).
+--
+-- On the outer cone
+--
+--   16 a^2 <= d^2,
+--
+-- the physical phase is nonpositive.  Therefore, under the explicit remaining
+-- witness-sign hypothesis
+--
+--   0 <= M6_signed(W),
+--
+-- the entire outer-cone finite signed-sixth sum is nonpositive and can be
+-- discarded in an upper source bound without taking absolute values.
+--
+-- The complementary potentially adverse carrier satisfies
+--
+--   d^2 < 16 a^2.
+--
+-- Since every literal zeta zero on this carrier has |a| <= 1/2, Lean further
+-- proves
+--
+--   d^2 < 4.
+--
+-- Thus the preferred sixth-order payment is reduced from the full canonical
+-- local window to a fixed physical strip |d| < 2, conditional only on the sign
+-- of the selected signed sixth moment.  The sign of M6_signed(W) itself has
+-- NOT been proved by this donor and remains the immediate analytic/witness
+-- frontier.  No Agda-native replay is claimed here.
+------------------------------------------------------------------------
+
+data SignedSixthConeCoordinate : Set where
+  physicalSixthFactorization : SignedSixthConeCoordinate
+  outerConePhaseNonpositive : SignedSixthConeCoordinate
+  exactPhysicalSixthTransport : SignedSixthConeCoordinate
+  finiteOuterCentralSixthSplit : SignedSixthConeCoordinate
+  outerSixthNonpositiveOfM6Nonnegative : SignedSixthConeCoordinate
+  centralSixthFixedStrip : SignedSixthConeCoordinate
+  selectedSignedM6Nonnegative : SignedSixthConeCoordinate
+  fixedStripSixthCountPayment : SignedSixthConeCoordinate
+
+signedSixthConeStatus :
+  SignedSixthConeCoordinate -> V4H4Status
+signedSixthConeStatus physicalSixthFactorization =
+  leanSourceWrittenDonor
+signedSixthConeStatus outerConePhaseNonpositive =
+  leanSourceWrittenDonor
+signedSixthConeStatus exactPhysicalSixthTransport =
+  leanSourceWrittenDonor
+signedSixthConeStatus finiteOuterCentralSixthSplit =
+  leanSourceWrittenDonor
+signedSixthConeStatus outerSixthNonpositiveOfM6Nonnegative =
+  leanSourceWrittenDonor
+signedSixthConeStatus centralSixthFixedStrip =
+  leanSourceWrittenDonor
+signedSixthConeStatus selectedSignedM6Nonnegative =
+  openAnalyticObstruction
+signedSixthConeStatus fixedStripSixthCountPayment =
+  openAnalyticObstruction
+
+outerSixthConeReductionIsSourceWritten :
+  signedSixthConeStatus outerSixthNonpositiveOfM6Nonnegative
+    ≡ leanSourceWrittenDonor
+outerSixthConeReductionIsSourceWritten = refl
+
+centralSixthFixedStripIsSourceWritten :
+  signedSixthConeStatus centralSixthFixedStrip
+    ≡ leanSourceWrittenDonor
+centralSixthFixedStripIsSourceWritten = refl
+
+selectedSignedM6SignRemainsOpen :
+  signedSixthConeStatus selectedSignedM6Nonnegative
+    ≡ openAnalyticObstruction
+selectedSignedM6SignRemainsOpen = refl
+
+signedSixthConeLeanDonorHead : String
+signedSixthConeLeanDonorHead =
+  "bb33220b76eb563d781cff573b8dc7102676e1fe"
+
+signedSixthConeTransportedIntoAgdaKernelHere : Bool
+signedSixthConeTransportedIntoAgdaKernelHere = false
+
+signedSixthConeInterpretation : String
+signedSixthConeInterpretation =
+  "The signed sixth harmonic no longer needs to be treated on the full canonical local carrier.  Lean factors its literal physical phase and proves that, if the selected signed profile sixth moment is nonnegative, the outer cone 16*a^2<=d^2 contributes nonpositively.  The complementary potentially adverse terms lie in the fixed strip d^2<4.  The next preferred cut is therefore to prove/evaluate the selected witness sign M6_signed(W)>=0 and then pay only the fixed-width central strip, while retaining FarExact signed."
