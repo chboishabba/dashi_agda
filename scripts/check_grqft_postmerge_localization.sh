@@ -64,6 +64,8 @@ files=(
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotD1SourceWeldExact.agda
   DASHI/Physics/Foundations/CMP119TenActualSourceReadoutsExact.agda
   DASHI/Physics/Foundations/CMP119TenLiteralDensitySourceReadoutsExact.agda
+  DASHI/Physics/Foundations/CMP119LiteralFiniteMeasureStressSourceConstructorExact.agda
+  DASHI/Physics/Foundations/CMP119LiteralFiniteMeasureDensityAnchorConstructorExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
