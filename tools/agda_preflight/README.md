@@ -194,6 +194,39 @@ TSAGDA076  function used as a type / partial application
 have minimum evidence `AGDA_TYPECHECKER`; successful scope checking cannot
 promote or suppress them.
 
+### Optional full Agda typecheck oracle
+
+For focused or CI runs where the expense is acceptable, the preflight harness
+can use ordinary Agda checking as the strongest negative oracle:
+
+```bash
+dashi-agda-preflight --agda-typecheck-oracle FILE.agda
+```
+
+or:
+
+```bash
+pytest --agda-preflight --agda-typecheck-oracle --agda-root . \
+  DASHI/Physics/Closure/Foo.agda -vv
+```
+
+A successful full Agda check suppresses structural suspicions whose minimum
+evidence is either `AGDA_SCOPE` or `AGDA_TYPECHECKER`. It does **not** suppress
+DASHI trust/policy diagnostics such as forbidden postulates, raw proof
+placeholders, or architectural gate violations: Agda acceptance does not make
+those policy constraints false.
+
+A failed typecheck is not reverse-engineered into TSAGDA conclusions; the
+structural findings remain advisory unless independently confirmed.
+
+The three refinement modes are mutually exclusive:
+
+```text
+--agda-scope-command      external precise confirmation/suppression
+--agda-scope-check        Agda --only-scope-checking negative oracle
+--agda-typecheck-oracle   full Agda negative oracle
+```
+
 ### Optional Agda scope refinement
 
 Both the CLI and pytest harness accept:
