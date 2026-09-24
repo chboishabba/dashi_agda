@@ -122,7 +122,7 @@ def _known_syntax_grammar_gap(node, source: str) -> bool:
     ):
         return True
     if parent_type == "record_declarations_block" and re.fullmatch(
-        r"\s*constructor\s*", text
+        rf"\s*constructor\s+{_IDENT}\s*", text
     ) and re.match(rf"\s*constructor\s+{_IDENT}\b", line):
         return True
     if parent_type == "source_file" and re.fullmatch(r"\s*field\s*", line):
@@ -376,6 +376,7 @@ class Checker:
         diagnostics: List[Diagnostic] = []
         diagnostics.extend(self._syntax_diagnostics(summary))
         diagnostics.extend(self._projection_sort_diagnostics(summary))
+        diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
         diagnostics.extend(self._record_shape_diagnostics(summary))
         # Stable de-duplication.
         seen = set()
@@ -446,6 +447,77 @@ class Checker:
                         f"Apply the projection to the model, e.g. {field_name} M.",
                     )
                 )
+        return result
+
+    def _implicit_projection_receiver_diagnostics(
+        self, summary: ModuleSummary
+    ) -> List[Diagnostic]:
+        """Find a projection receiver written as ``_`` despite a matching binder.
+
+        Agda can often infer a projection receiver, so this rule reports only
+        when the containing signature has a named binder whose record exposes
+        that same projection.  This catches the common ``Alias.field _`` form
+        that leaves an otherwise available record receiver as a metavariable.
+        """
+        imported = self.imported_summaries(summary)
+        signatures = sorted(
+            {info.line: info for info in summary.signatures.values()}.values(),
+            key=lambda info: info.line,
+        )
+        result: List[Diagnostic] = []
+        call = re.compile(rf"\b({_IDENT})\.({_IDENT})\s+_")
+        binder = re.compile(rf"[({{]\s*({_IDENT})\s*:\s*([^(){{}}]*)[)}}]")
+
+        for line_number, line in enumerate(summary.source.splitlines(), start=1):
+            signature = None
+            for candidate in signatures:
+                if candidate.line <= line_number:
+                    signature = candidate
+                else:
+                    break
+            if signature is None:
+                continue
+
+            for match in call.finditer(line):
+                alias, field_name = match.groups()
+                imported_summary = imported.get(alias)
+                if imported_summary is None:
+                    continue
+                for binder_match in binder.finditer(signature.type_text):
+                    binder_name, binder_type = binder_match.groups()
+                    matching_record = next(
+                        (
+                            record
+                            for record_name, record in imported_summary.records.items()
+                            if field_name in record.fields
+                            and re.search(
+                                rf"\b{re.escape(alias)}\.{re.escape(record_name)}\b",
+                                binder_type,
+                            )
+                        ),
+                        None,
+                    )
+                    if matching_record is None:
+                        continue
+                    result.append(
+                        Diagnostic(
+                            "TSAGDA002",
+                            (
+                                f"{alias}.{field_name} uses `_` for its "
+                                f"{matching_record.name} receiver, although "
+                                f"{binder_name} is a matching binder in scope; "
+                                "this leaves a projection receiver metavariable."
+                            ),
+                            summary.path,
+                            line_number,
+                            match.start() + 1,
+                            (
+                                f"Pass the receiver explicitly, e.g. "
+                                f"{alias}.{field_name} {binder_name} … ."
+                            ),
+                        )
+                    )
+                    break
         return result
 
     def _known_records(

@@ -16,6 +16,8 @@ the checker filters only those known artifact shapes.
 
 - `TSAGDA000`: tree-sitter syntax error / missing node
 - `TSAGDA001`: opened record projection used unapplied where a type is expected
+- `TSAGDA002`: projection receiver written as `_` despite a matching named
+  record binder in scope
 - `TSAGDA003`: simple record-field codomain/kind mismatch (for example
   `Nat -> Top` supplied to a `Nat -> Set` field)
 

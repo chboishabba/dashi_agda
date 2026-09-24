@@ -91,6 +91,50 @@ adapt A =
     assert "⊤" in hits[0].message
 
 
+def test_unresolved_projection_receiver_is_reported(tmp_path):
+    write_module(
+        tmp_path,
+        "Pareto",
+        """module Pareto where
+
+record Costs : Set₁ where
+  field
+    Axis : Set
+    cost : Axis → Nat → Nat
+""",
+    )
+    broken = write_module(
+        tmp_path,
+        "Broken",
+        """module Broken where
+
+import Pareto as Pareto
+
+projected :
+  {costs : Pareto.Costs} →
+  Pareto.Axis costs → Nat → Nat
+projected axis value = Pareto.cost _ axis value
+""",
+    )
+    good = write_module(
+        tmp_path,
+        "GoodReceiver",
+        """module GoodReceiver where
+
+import Pareto as Pareto
+
+projected :
+  {costs : Pareto.Costs} →
+  Pareto.Axis costs → Nat → Nat
+projected {costs} axis value = Pareto.cost costs axis value
+""",
+    )
+    broken_hits = [d for d in Checker(tmp_path).check(broken) if d.code == "TSAGDA002"]
+    assert broken_hits
+    assert "costs" in broken_hits[0].hint
+    assert not any(d.code == "TSAGDA002" for d in Checker(tmp_path).check(good))
+
+
 def test_reverse_import_frontier(tmp_path):
     leaf = write_module(tmp_path, "A.Leaf", "module A.Leaf where\n")
     write_module(
@@ -119,6 +163,11 @@ record Receipt : Set where
   constructor receipt
   field
     accepted : ℚP.Bool
+
+record ParameterizedReceipt (n : Nat) : Set where
+  constructor parameterized-receipt
+  field
+    acceptedAgain : ℚP.Bool
 """,
     )
     invalid = write_module(
