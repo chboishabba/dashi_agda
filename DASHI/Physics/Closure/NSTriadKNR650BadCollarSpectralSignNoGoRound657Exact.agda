@@ -33,6 +33,7 @@ open import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _/_; _-_; _*_; _<_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Closure.NSTriadKNS2b2AdjacentShellSpectralGapNoGoExact as Adjacent
 import DASHI.Physics.Closure.NSTriadKNLowCollarRemotePacketSplitExact as Split
@@ -60,10 +61,16 @@ normalizedBadCollarSpectralCrossIsThree :
   normalizedBadCollarSpectralCross ≡ three
 normalizedBadCollarSpectralCrossIsThree = solve []
 
+threePositive : 0ℚ < three
+threePositive = ℚP.positive⁻¹ three
+
 normalizedBadCollarSpectralCrossPositive :
   0ℚ < normalizedBadCollarSpectralCross
 normalizedBadCollarSpectralCrossPositive =
-  ℚP.positive⁻¹ normalizedBadCollarSpectralCross
+  subst
+    (0ℚ <_)
+    (sym normalizedBadCollarSpectralCrossIsThree)
+    threePositive
 
 round657ConcreteBadCollarFrequencyInversionWitness : Bool
 round657ConcreteBadCollarFrequencyInversionWitness = true
