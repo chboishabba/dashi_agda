@@ -418,6 +418,10 @@ import DASHI.Physics.YangMills.YangMillsConcreteQuantitativeOS05Round514Validati
 import DASHI.Physics.YangMills.YangMillsClayPostQuantitativeResidualRound515Exact
 import DASHI.Physics.YangMills.YangMillsClayPostQuantitativeResidualRound515Validation
 
+import DASHI.Physics.YangMills.YangMillsWilsonLocalObservableFromStructuralRound530Exact
+import DASHI.Physics.YangMills.YangMillsClayPreferredTheoremFamilyCutRound531Exact
+import DASHI.Physics.YangMills.YangMillsClayPreferredTheoremFamilyCutRound531Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
