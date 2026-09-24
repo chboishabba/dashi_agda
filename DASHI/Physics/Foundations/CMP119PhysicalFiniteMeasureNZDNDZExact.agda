@@ -42,9 +42,8 @@ weightedInsertionIntegrand :
   PhysicalRationalMetricStressData Configuration MetricPerturbation measure →
   Configuration → ℚ
 weightedInsertionIntegrand {measure = measure} dataSet configuration =
-  Physical.multiply measure
-    (Physical.density measure configuration)
-    (insertionObservable dataSet configuration)
+  Physical.density measure configuration
+    * insertionObservable dataSet configuration
 
 numerator :
   ∀ {Configuration MetricPerturbation}
