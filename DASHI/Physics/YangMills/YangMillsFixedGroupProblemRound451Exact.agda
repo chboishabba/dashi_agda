@@ -14,7 +14,9 @@ module DASHI.Physics.YangMills.YangMillsFixedGroupProblemRound451Exact where
 -- downstream consumer genuinely asks for uniformity across groups.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -50,7 +52,7 @@ record YMProblemAt
       Top.VacuumState C
 
     massGapAt :
-      Data.Rational.Base.ℚ
+      ℚ
 
     continuumLimitAt :
       Top.IsContinuumLimitOf S group
@@ -135,8 +137,8 @@ fixedGapIsPinnedProjection pinned group = refl
 round451FixedGroupSpecializationCompilerLevel : ProofLevel
 round451FixedGroupSpecializationCompilerLevel = machineChecked
 
-round451PostHocSameGroupEqualityRequired : Agda.Builtin.Bool.Bool
-round451PostHocSameGroupEqualityRequired = Agda.Builtin.Bool.false
+round451PostHocSameGroupEqualityRequired : Bool
+round451PostHocSameGroupEqualityRequired = false
 
-round451UniformAcrossGroupsConstantRequiredBySpecialization : Agda.Builtin.Bool.Bool
-round451UniformAcrossGroupsConstantRequiredBySpecialization = Agda.Builtin.Bool.false
+round451UniformAcrossGroupsConstantRequiredBySpecialization : Bool
+round451UniformAcrossGroupsConstantRequiredBySpecialization = false
