@@ -1,7 +1,3 @@
-module DASHI.Culture.Everything where
-
--- Culture domain rollup.
-
 import DASHI.Culture.Cuisine.Everything
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact
 import DASHI.Culture.KimmererNarrativeMetaphorCalibrationExact
@@ -123,3 +119,8 @@ import DASHI.Culture.BlochfieldCrossPlatformIdentityConvergenceExact
 import DASHI.Culture.BlochfieldHistoricalWalletReviewCandidateExact
 import DASHI.Culture.BlochfieldMediumSavedReadingSnowballExact
 import DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact
+
+module DASHI.Culture.Everything where
+
+-- Culture domain rollup.
+
