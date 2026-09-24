@@ -24,7 +24,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 
 import DASHI.Mathematics.Complexity.DeterministicNondeterministicMachineExact as Machine
 import DASHI.Mathematics.Complexity.DeterministicMachineToInPExact as ToP
