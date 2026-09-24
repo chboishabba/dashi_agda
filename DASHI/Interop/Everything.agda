@@ -50,6 +50,7 @@ import DASHI.Interop.SLRClaimFragmentProjectionExact
 import DASHI.Interop.SLRClaimFragmentResidualInheritanceExact
 import DASHI.Interop.SLRFragmentEvidenceContractionExact
 import DASHI.Interop.SLRGWBCandidateWorldProjectionExact
+import DASHI.Interop.SLRGWBHeterogeneousChronologyCapstoneExact
 import DASHI.Interop.SLRGWBExecutionRoadmapExact
 import DASHI.Interop.SLRGWBAmbiguityDirected100HopExact
 import DASHI.Interop.SLRGWBAmbiguityDirected100HopValidation
