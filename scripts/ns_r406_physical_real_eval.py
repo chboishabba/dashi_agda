@@ -326,6 +326,9 @@ def evaluate_r406(
     forcing_hat = forcing_hat_raw / fourier_scale
 
     global_companion = 0.0
+    global_forcing_full = 0.0
+    global_forcing_diagonal = 0.0
+    global_forcing_offdiagonal = 0.0
     output_rows: list[dict[str, Any]] = []
     minimum_pair_rate: float | None = None
     evaluated_pairs = 0
@@ -347,27 +350,48 @@ def evaluate_r406(
             rates.append(rate)
 
         fibre_companion = 0.0
+        fibre_forcing_diagonal = 0.0
+        fibre_forcing_offdiagonal = 0.0
         fibre_pairs = 0
         for i in range(len(incidences)):
             d_i = cells[i]
             g_i = forces[i]
             lambda_i = rates[i]
+
+            diagonal_pair_rate = 2.0 * lambda_i
+            if not (diagonal_pair_rate > 0.0):
+                raise RuntimeError("nonpositive diagonal R290 pair rate")
+            if minimum_pair_rate is None or diagonal_pair_rate < minimum_pair_rate:
+                minimum_pair_rate = diagonal_pair_rate
+            fibre_forcing_diagonal += (
+                _real_hermitian_cross(g_i, d_i) / diagonal_pair_rate
+            )
+
             for j in range(i + 1, len(incidences)):
                 pair_rate = lambda_i + rates[j]
                 if not (pair_rate > 0.0):
                     raise RuntimeError("nonpositive R290 pair rate")
                 if minimum_pair_rate is None or pair_rate < minimum_pair_rate:
                     minimum_pair_rate = pair_rate
-                bracket = (
-                    _real_hermitian_cross(g_i, cells[j])
-                    + _real_hermitian_cross(d_i, forces[j])
-                )
-                companion = 0.5 * bracket / pair_rate
+
+                forcing_ij = _real_hermitian_cross(g_i, cells[j]) / pair_rate
+                forcing_ji = _real_hermitian_cross(forces[j], d_i) / pair_rate
+                ordered_offdiagonal = forcing_ij + forcing_ji
+                fibre_forcing_offdiagonal += ordered_offdiagonal
+
+                # R496 direct companion is exactly one half of the ordered
+                # oriented off-diagonal transpose completion.
+                companion = 0.5 * ordered_offdiagonal
                 fibre_companion += companion
                 fibre_pairs += 1
 
+        fibre_forcing_full = fibre_forcing_diagonal + fibre_forcing_offdiagonal
+
         evaluated_pairs += fibre_pairs
         global_companion += fibre_companion
+        global_forcing_diagonal += fibre_forcing_diagonal
+        global_forcing_offdiagonal += fibre_forcing_offdiagonal
+        global_forcing_full += fibre_forcing_full
         if include_output_rows:
             output_rows.append(
                 {
@@ -376,6 +400,13 @@ def evaluate_r406(
                     "unordered_pair_count": fibre_pairs,
                     "direct_companion": float(fibre_companion),
                     "r406_weighted_remainder": float(4.0 * fibre_companion),
+                    "forcing_full_diagonal": float(fibre_forcing_diagonal),
+                    "forcing_full_offdiagonal": float(fibre_forcing_offdiagonal),
+                    "forcing_full": float(fibre_forcing_full),
+                    "four_times_forcing_full": float(4.0 * fibre_forcing_full),
+                    "offdiagonal_minus_twice_direct_companion": float(
+                        fibre_forcing_offdiagonal - 2.0 * fibre_companion
+                    ),
                 }
             )
 
@@ -397,6 +428,13 @@ def evaluate_r406(
         "minimum_pair_rate": minimum_pair_rate,
         "global_direct_companion": float(global_companion),
         "r406_weighted_remainder": float(4.0 * global_companion),
+        "global_forcing_full_diagonal": float(global_forcing_diagonal),
+        "global_forcing_full_offdiagonal": float(global_forcing_offdiagonal),
+        "global_forcing_full": float(global_forcing_full),
+        "c1_instantaneous_four_forcing_full": float(4.0 * global_forcing_full),
+        "offdiagonal_minus_twice_direct_companion": float(
+            global_forcing_offdiagonal - 2.0 * global_companion
+        ),
         "output_rows": output_rows if include_output_rows else None,
         "complexity_rows": complexity_rows if include_output_rows else None,
         "interpretation": (
@@ -442,6 +480,10 @@ def main() -> int:
                 "formal_cutoff": payload["state"]["formal_cutoff"],
                 "evaluated_pair_count": payload["evaluated_pair_count"],
                 "r406_weighted_remainder": payload["r406_weighted_remainder"],
+                "global_forcing_full": payload["global_forcing_full"],
+                "c1_instantaneous_four_forcing_full": payload[
+                    "c1_instantaneous_four_forcing_full"
+                ],
                 "formal_rational_helical_same_object": False,
             },
             sort_keys=True,
