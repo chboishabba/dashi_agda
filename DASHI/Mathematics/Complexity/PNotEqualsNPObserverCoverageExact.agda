@@ -140,52 +140,42 @@ satRelevantCollisionForcesRepresentationNonInjective collision injective =
     (unsatisfiableWitness collision)
     (sameRepresentation collision)
 
+
 ------------------------------------------------------------------------
--- Honest universal observer-route target.
+-- Structural-mechanism compiler.
 --
--- We do not package the collision as an unexplained field of a generic
--- "solution" record.  The theorem family below spells out what a proposed
--- structural mechanism must actually construct for each candidate:
---
---   an existing cost-aware observer + a SAT-relevant collision in THAT
---   observer's representation.
+-- A proposed lower-bound mechanism may choose its observer as a function of
+-- the candidate.  To count as progress it must then DERIVE the SAT-relevant
+-- collision for that chosen observer.  The compiler below is intentionally
+-- neutral about how the observer is chosen; no collision field is hidden in a
+-- generic status record.
 ------------------------------------------------------------------------
 
-UniversalPolynomialObserverSATLoss :
-  (cost : PR.PolynomialCostModel Cook.BooleanFormula) →
-  Set₁
-UniversalPolynomialObserverSATLoss cost =
-  (anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost) →
-  (observer :
-    PolyObserver.PolynomialClassicalObserver
-      cost
-      (Direct.decide (Direct.candidate anchored))) →
-  SATRelevantRepresentationCollision observer
-
-universalObserverSATLossGivesAnchoredCollision :
-  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
-  UniversalPolynomialObserverSATLoss cost →
-  (observerFor :
-    (anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost) →
-    PolyObserver.PolynomialClassicalObserver
-      cost
-      (Direct.decide (Direct.candidate anchored))) →
+observerMechanismGivesAnchoredCollision :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (observerFor :
+      (anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost) →
+      PolyObserver.PolynomialClassicalObserver
+        cost
+        (Direct.decide (Direct.candidate anchored))) →
+    ((anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost) →
+      SATRelevantRepresentationCollision (observerFor anchored)) →
   Direct.UniversalAnchoredPolynomialSATDecisionCollision cost
-universalObserverSATLossGivesAnchoredCollision universalLoss observerFor anchored =
+observerMechanismGivesAnchoredCollision observerFor collisionFor anchored =
   observerCollisionGivesDirectSATCollision
     (observerFor anchored)
-    (universalLoss anchored (observerFor anchored))
+    (collisionFor anchored)
 
-universalObserverSATLossGivesSATLowerBoundProducer :
-  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
-  UniversalPolynomialObserverSATLoss cost →
-  (observerFor :
-    (anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost) →
-    PolyObserver.PolynomialClassicalObserver
-      cost
-      (Direct.decide (Direct.candidate anchored))) →
+observerMechanismGivesSATLowerBoundProducer :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (observerFor :
+      (anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost) →
+      PolyObserver.PolynomialClassicalObserver
+        cost
+        (Direct.decide (Direct.candidate anchored))) →
+    ((anchored : Direct.AnchoredPolynomialSATDeciderCandidate cost) →
+      SATRelevantRepresentationCollision (observerFor anchored)) →
   Clay.SATLowerBoundProducer cost
-universalObserverSATLossGivesSATLowerBoundProducer universalLoss observerFor =
+observerMechanismGivesSATLowerBoundProducer observerFor collisionFor =
   Direct.universalAnchoredCollisionGivesSATLowerBoundProducer
-    (universalObserverSATLossGivesAnchoredCollision
-      universalLoss observerFor)
+    (observerMechanismGivesAnchoredCollision observerFor collisionFor)
