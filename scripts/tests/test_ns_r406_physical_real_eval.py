@@ -308,3 +308,58 @@ def test_c2_critical_energy_has_expected_quadratic_scaling() -> None:
     x1 = float(doubled["critical_energy_X"])
     assert x0 > 0.0
     assert np.isclose(x1, 4.0 * x0, rtol=2.0e-12, atol=1.0e-12)
+
+
+def test_r685_r687_rate_lift_and_dynamic_cancellation_mirrors() -> None:
+    raw = _reality_closed_random_state(6, seed=83)
+    row = evaluate_r406(
+        raw,
+        nu=0.01,
+        formal_cutoff=1,
+        max_pairs=100_000,
+        include_output_rows=True,
+    )
+
+    global_scale = max(
+        1.0,
+        abs(float(row["global_rate_lifted_forcing_full"])),
+        abs(8.0 * float(row["global_coherent_commutator_work"])),
+    )
+    assert abs(float(row["r687_global_rate_lift_residual"])) <= 1.0e-12 * global_scale
+
+    assert row["output_rows"] is not None
+    for output_row in row["output_rows"]:
+        scale = max(
+            1.0,
+            abs(float(output_row["rate_lifted_forcing_full"])),
+            abs(8.0 * float(output_row["coherent_commutator_work"])),
+            abs(float(output_row["weighted_rate_work"])),
+        )
+        assert abs(float(output_row["r687_rate_lift_residual"])) <= 1.0e-12 * scale
+        assert abs(float(output_row["r685_rate_kernel_residual"])) <= 1.0e-12 * scale
+
+
+def test_r687_rate_lift_is_quintic_but_r665_kernel_is_quartic() -> None:
+    raw = _reality_closed_random_state(6, seed=89)
+    kwargs = dict(
+        nu=0.01,
+        formal_cutoff=1,
+        max_pairs=100_000,
+    )
+    base = evaluate_r406(raw, **kwargs)
+    doubled = evaluate_r406(2.0 * raw, **kwargs)
+
+    lifted0 = float(base["global_rate_lifted_forcing_full"])
+    lifted1 = float(doubled["global_rate_lifted_forcing_full"])
+    comm0 = float(base["global_coherent_commutator_work"])
+    comm1 = float(doubled["global_coherent_commutator_work"])
+    kernel0 = float(base["global_weighted_rate_work"])
+    kernel1 = float(doubled["global_weighted_rate_work"])
+
+    assert abs(lifted0) > 1.0e-18
+    assert abs(comm0) > 1.0e-18
+    assert abs(kernel0) > 1.0e-18
+
+    assert np.isclose(lifted1, 32.0 * lifted0, rtol=5.0e-10, atol=1.0e-14)
+    assert np.isclose(comm1, 32.0 * comm0, rtol=5.0e-10, atol=1.0e-14)
+    assert np.isclose(kernel1, 16.0 * kernel0, rtol=5.0e-10, atol=1.0e-14)
