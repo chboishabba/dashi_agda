@@ -234,3 +234,5 @@ import DASHI.Physics.Foundations.CMP119GRQFTD1MaxCutExact
 
 import DASHI.Physics.Foundations.CMP119ConcreteTenSlotCrossNumeratorCandidateExact
 import DASHI.Physics.Foundations.CMP119ConcreteTenSlotD1SourceWeldExact
+
+import DASHI.Physics.Foundations.CMP119TenActualSourceReadoutsExact
