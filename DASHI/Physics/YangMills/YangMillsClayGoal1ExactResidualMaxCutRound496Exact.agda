@@ -28,6 +28,7 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as A3Source
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as Measure
+import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as Premeasure
 import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45Rep
@@ -58,7 +59,8 @@ data ResidualLeaf : Set where
 
   -- A3 represented continuum.
   a3SourceNativeSameFamilyContinuumOS : ResidualLeaf
-  a3FiniteProjectiveCylinderPremeasure : ResidualLeaf
+  a3CylinderEventIndicatorSemantics : ResidualLeaf
+  a3ProjectiveEventExpectationConsistency : ResidualLeaf
   a3ContinuityAtEmpty : ResidualLeaf
   a3CylinderExpectationIntegralIdentification : ResidualLeaf
 
@@ -108,8 +110,10 @@ leafLevel a2BetaMarkGeneratedHistoryShell =
 
 leafLevel a3SourceNativeSameFamilyContinuumOS =
   A3Source.literalRound457SourceNativeContinuumOSLevel
-leafLevel a3FiniteProjectiveCylinderPremeasure =
-  Measure.literalRound495FiniteProjectivePremeasureLevel
+leafLevel a3CylinderEventIndicatorSemantics =
+  Premeasure.literalRound498CylinderEventIndicatorSemanticsLevel
+leafLevel a3ProjectiveEventExpectationConsistency =
+  Premeasure.literalRound498ProjectiveEventExpectationConsistencyLevel
 leafLevel a3ContinuityAtEmpty =
   Measure.literalRound495ContinuityAtEmptyLevel
 leafLevel a3CylinderExpectationIntegralIdentification =
@@ -163,7 +167,8 @@ residualLeaves =
   ∷ a1FourJointReceiptEvaluation
   ∷ a2BetaMarkGeneratedHistoryShell
   ∷ a3SourceNativeSameFamilyContinuumOS
-  ∷ a3FiniteProjectiveCylinderPremeasure
+  ∷ a3CylinderEventIndicatorSemantics
+  ∷ a3ProjectiveEventExpectationConsistency
   ∷ a3ContinuityAtEmpty
   ∷ a3CylinderExpectationIntegralIdentification
   ∷ a45QuantitativeMomentToFiniteOS05
@@ -195,6 +200,10 @@ residualLeafCount = listLength residualLeaves
 ------------------------------------------------------------------------
 -- Compiler/non-research payments deliberately excluded from the live leaves.
 ------------------------------------------------------------------------
+
+finiteProjectivePremeasureAssemblyLevel : ProofLevel
+finiteProjectivePremeasureAssemblyLevel =
+  Premeasure.round498ProjectivePremeasureCompilerLevel
 
 caratheodoryExtensionLevel : ProofLevel
 caratheodoryExtensionLevel =
