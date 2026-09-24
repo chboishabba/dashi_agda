@@ -77,7 +77,7 @@ asPreferredDiagonalExpectationInputs inputs = record
       R444.compileExponentialMomentProducer
         (momentRealization inputs)
   ; Preferred.PreferredDiagonalExpectationProducerInputs.UniformlyIntegrable =
-      T5.UniformIntegrabilityWitness _ _
+      λ sequence → T5.UniformIntegrabilityWitness _ _ sequence
   ; Preferred.PreferredDiagonalExpectationProducerInputs.witnessImpliesUniformlyIntegrable =
       λ witness → witness
   ; Preferred.PreferredDiagonalExpectationProducerInputs.boundedObservableTail =
