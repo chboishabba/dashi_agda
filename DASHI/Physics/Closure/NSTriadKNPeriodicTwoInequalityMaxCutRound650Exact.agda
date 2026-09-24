@@ -64,6 +64,7 @@ import DASHI.Physics.Closure.NSTriadKNR650RateKernelCrossGradientVectorRound683E
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelInputLaplacianCollapseRound684Exact as R684
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelCommutatorEndpointRound685Exact as R685
 import DASHI.Physics.Closure.NSTriadKNR650C2CommutatorSpacetimeEndpointRound686Exact as R686
+import DASHI.Physics.Closure.NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Exact as R687
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -897,6 +898,18 @@ round650C2LocalNonlinearCurrencyMatchesCommutatorLane =
 round650C1ResolventWeightedSquareAlreadyControlsC2Commutator : Bool
 round650C1ResolventWeightedSquareAlreadyControlsC2Commutator =
   R686.round686R568ResolventWeightedSquareControlsThisCommutator
+
+round650C1C2RateLiftedForcingBridgeClosed : Bool
+round650C1C2RateLiftedForcingBridgeClosed =
+  R687.round687RateLiftedR568ForcingFullIsEightC2CommutatorWork
+
+round650C1UnliftedBudgetControlsRateLiftedFull : Bool
+round650C1UnliftedBudgetControlsRateLiftedFull =
+  R687.round687UnliftedR568BudgetControlsRateLiftedFull
+
+round650C2CommutatorIsOneEighthRateLiftedR568 : Bool
+round650C2CommutatorIsOneEighthRateLiftedR568 =
+  R687.round687RateLiftedR568ForcingFullIsEightC2CommutatorWork
 
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 : Bool
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 =
