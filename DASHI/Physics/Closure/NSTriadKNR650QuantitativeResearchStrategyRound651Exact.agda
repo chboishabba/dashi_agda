@@ -42,6 +42,15 @@ r650StressScanPath = "scripts/ns_r650_quantitative_stress_scan.py"
 r650StressScanCheckPath : String
 r650StressScanCheckPath = "scripts/check_ns_r650_quantitative_stress_scan.py"
 
+r406PhysicalRealEvalPath : String
+r406PhysicalRealEvalPath = "scripts/ns_r406_physical_real_eval.py"
+
+r650DirectC2PhysicalRealScanPath : String
+r650DirectC2PhysicalRealScanPath = "scripts/ns_r650_c2_physical_real_scan.py"
+
+r406R650PhysicalRealCheckPath : String
+r406R650PhysicalRealCheckPath = "scripts/check_ns_r406_r650_physical_real.py"
+
 round651CriticalProductionCubicScalingAvailable : Bool
 round651CriticalProductionCubicScalingAvailable =
   R43.literalProductionAmplitudeDegree
@@ -77,6 +86,18 @@ round651FiniteGalerkinStressHarnessInstalled = true
 
 round651StressHarnessHasTheoremAuthority : Bool
 round651StressHarnessHasTheoremAuthority = false
+
+round651PhysicalRealR406DirectCompanionEvaluatorInstalled : Bool
+round651PhysicalRealR406DirectCompanionEvaluatorInstalled = true
+
+round651DirectPhysicalRealC2TrajectoryScanInstalled : Bool
+round651DirectPhysicalRealC2TrajectoryScanInstalled = true
+
+round651FormalRationalHelicalNumericalSameObjectInstalled : Bool
+round651FormalRationalHelicalNumericalSameObjectInstalled = false
+
+round651NumericalDirectC2ScanClosesFormalC2 : Bool
+round651NumericalDirectC2ScanClosesFormalC2 = false
 
 round651IntroducesNewNSEstimate : Bool
 round651IntroducesNewNSEstimate = false
@@ -122,6 +143,22 @@ round651FiniteGalerkinStressHarnessInstalledIsTrue = refl
 round651StressHarnessHasTheoremAuthorityIsFalse :
   round651StressHarnessHasTheoremAuthority ≡ false
 round651StressHarnessHasTheoremAuthorityIsFalse = refl
+
+round651PhysicalRealR406DirectCompanionEvaluatorInstalledIsTrue :
+  round651PhysicalRealR406DirectCompanionEvaluatorInstalled ≡ true
+round651PhysicalRealR406DirectCompanionEvaluatorInstalledIsTrue = refl
+
+round651DirectPhysicalRealC2TrajectoryScanInstalledIsTrue :
+  round651DirectPhysicalRealC2TrajectoryScanInstalled ≡ true
+round651DirectPhysicalRealC2TrajectoryScanInstalledIsTrue = refl
+
+round651FormalRationalHelicalNumericalSameObjectInstalledIsFalse :
+  round651FormalRationalHelicalNumericalSameObjectInstalled ≡ false
+round651FormalRationalHelicalNumericalSameObjectInstalledIsFalse = refl
+
+round651NumericalDirectC2ScanClosesFormalC2IsFalse :
+  round651NumericalDirectC2ScanClosesFormalC2 ≡ false
+round651NumericalDirectC2ScanClosesFormalC2IsFalse = refl
 
 round651IntroducesNewNSEstimateIsFalse :
   round651IntroducesNewNSEstimate ≡ false
