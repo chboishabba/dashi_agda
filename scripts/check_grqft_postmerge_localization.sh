@@ -63,6 +63,14 @@ files=(
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda
+  DASHI/Physics/Foundations/GRQFTCMP119CorrectedD1MaxCutExact.agda
+  DASHI/Physics/Foundations/CMP119TenFinitePhysicalCompositeDerivativeExact.agda
+  DASHI/Physics/Foundations/CMP119TenFinitePhysicalCompositeDerivativeValidation.agda
+  DASHI/Physics/Foundations/CMP119TenPhysicalCompositeDerivativeSemanticsExact.agda
+  DASHI/Physics/Foundations/CMP119TenNormalizedStressInsertionNumeratorsExact.agda
+  DASHI/Physics/Foundations/CMP119TenNormalizedStressInsertionNumeratorsValidation.agda
+  DASHI/Physics/Foundations/CMP119TenNormalizedTargetEqualityExact.agda
+  DASHI/Physics/Foundations/CMP119TenNormalizedTargetEqualityValidation.agda
 )
 
 for f in "${files[@]}"; do

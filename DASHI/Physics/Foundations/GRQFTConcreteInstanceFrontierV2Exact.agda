@@ -16,7 +16,7 @@ data GRQFTConcreteTheoryLeaf : Set where
   attachCMP119StressToLiteralPinnedStress :
     GRQFTConcreteTheoryLeaf
   payCorrectedPhysicalCompositeD1Semantics : GRQFTConcreteTheoryLeaf
-  evaluateTenFinitePhysicalCompositeDerivativeReadouts : GRQFTConcreteTheoryLeaf
+  proveTenNormalizedR116StressNumeratorsEqualGRTarget : GRQFTConcreteTheoryLeaf
   constructCommonOverlapBackreactionCorrectionEvidence :
     GRQFTConcreteTheoryLeaf
 
@@ -27,7 +27,7 @@ canonicalGRQFTConcreteTheoryLeaves =
   ∷ repairLegacyQFTRecoveryProjectionCompatibility
   ∷ attachCMP119StressToLiteralPinnedStress
   ∷ payCorrectedPhysicalCompositeD1Semantics
-  ∷ evaluateTenFinitePhysicalCompositeDerivativeReadouts
+  ∷ proveTenNormalizedR116StressNumeratorsEqualGRTarget
   ∷ constructCommonOverlapBackreactionCorrectionEvidence
   ∷ []
 
