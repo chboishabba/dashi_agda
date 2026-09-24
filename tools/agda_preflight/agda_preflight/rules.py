@@ -210,7 +210,7 @@ def extended_diagnostics(checker, s, D):
             continue
         alias, name = token.text.rsplit(".", 1)
         target = imported.get(alias)
-        if target and name not in target.signatures and name not in target.records and not any(name in r.fields for r in target.records.values()):
+        if target and name not in target.exported_names:
             out.append(_diag(D, "TSAGDA021", f"{alias}.{name} is not exported by {target.module_name}", s, token.line, token.column))
 
     for name, sig in s.ast.signatures.items():
@@ -364,6 +364,26 @@ def extended_diagnostics(checker, s, D):
                 out.append(_diag(D, "TSAGDA089", f"{name} has duplicate constructor branches in simple finite coverage", s, clause_items[0].line))
 
     eq_shapes = {}
+
+    def equality_endpoints_visibly_incompatible(eq_shape):
+        left_head = terminal_head(eq_shape.lhs)
+        right_head = terminal_head(eq_shape.rhs)
+        if left_head is None or right_head is None:
+            return False
+
+        left_ctor = ctors.get(left_head.rsplit(".", 1)[-1])
+        right_ctor = ctors.get(right_head.rsplit(".", 1)[-1])
+        if left_ctor is not None and right_ctor is not None:
+            return left_ctor.datatype != right_ctor.datatype
+
+        sortish = {"Set", "Set₀", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}
+        if left_head in sortish or right_head in sortish:
+            return (left_head in sortish) != (right_head in sortish)
+
+        # Arbitrary term/function heads are not type heads. Different names
+        # such as f x and g x are not evidence of a type mismatch.
+        return False
+
     for name, signature in s.ast.signatures.items():
         if signature.type_node is None:
             continue
@@ -372,8 +392,7 @@ def extended_diagnostics(checker, s, D):
         )
         if eq_shape is not None:
             eq_shapes[name] = eq_shape
-            compatible = compatible_rigid_heads(eq_shape.lhs, eq_shape.rhs)
-            if compatible is False:
+            if equality_endpoints_visibly_incompatible(eq_shape):
                 out.append(
                     _diag(
                         D,
