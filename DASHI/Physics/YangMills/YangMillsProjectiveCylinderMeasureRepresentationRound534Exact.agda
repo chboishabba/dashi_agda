@@ -32,7 +32,7 @@ import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRou
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as R476
 
 record ProjectiveContinuityAtEmpty
-    {Index Event Mass : Set}
+    {Index Event : Set}
     (projective : R538.ProjectivePositiveCylinderProbability Index Event)
     : Set₂ where
   field
@@ -43,9 +43,9 @@ record ProjectiveContinuityAtEmpty
     Decreasing : CylinderSequence → Set
     HasEmptyIntersection : CylinderSequence → Set
 
-    ConvergesMass : (Nat → Mass) → Mass → Set
+    ConvergesMass : (Nat → ℝ) → ℝ → Set
 
-    zero : Mass
+    zero : ℝ
 
     decreasingEmptyMassVanishes :
       ∀ sequence →
@@ -62,7 +62,7 @@ record ProjectiveContinuityAtEmpty
 open ProjectiveContinuityAtEmpty public
 
 record ProjectiveMeasureExtensionAuthority
-    (Index Event Mass Observable Scalar : Set) : Set₂ where
+    (Index Event Observable Scalar : Set) : Set₂ where
   field
     SigmaMeasure : Set
     IsCountablyAdditive : SigmaMeasure → Set
@@ -83,7 +83,7 @@ record ProjectiveMeasureExtensionAuthority
 
     -- Standard extension compatibility with every finite cylinder level.
     indicatorAt : Index → Event → Observable
-    massAsScalar : Mass → Scalar
+    massAsScalar : ℝ → Scalar
 
     extensionAgreesWithCylinderMass :
       ∀ projective continuity index event →
@@ -100,7 +100,7 @@ record ProjectiveMeasureExtensionAuthority
 open ProjectiveMeasureExtensionAuthority public
 
 record ProjectiveCylinderRepresentationInputs
-    (Index Event Mass Observable Scalar : Set)
+    (Index Event Observable Scalar : Set)
     (sourceExpectation : Observable → Scalar)
     : Set₂ where
   field
@@ -112,7 +112,7 @@ record ProjectiveCylinderRepresentationInputs
 
     extensionAuthority :
       ProjectiveMeasureExtensionAuthority
-        Index Event Mass Observable Scalar
+        Index Event Observable Scalar
 
     -- Genuine YM/source identification on the observable class consumed by
     -- the Clay construction.
@@ -128,10 +128,10 @@ record ProjectiveCylinderRepresentationInputs
 open ProjectiveCylinderRepresentationInputs public
 
 asSourceLimitRepresentation :
-  ∀ {Index Event Mass Observable}
+  ∀ {Index Event Observable}
     {sourceExpectation : Observable → ℝ} →
   ProjectiveCylinderRepresentationInputs
-    Index Event Mass Observable
+    Index Event Observable
     ℝ
     sourceExpectation →
   R476.SourceLimitRepresentation Observable sourceExpectation
