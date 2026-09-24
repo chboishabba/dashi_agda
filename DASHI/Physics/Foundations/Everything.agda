@@ -109,3 +109,6 @@ import DASHI.Physics.Foundations.CabarlahPalestineRegression
 import DASHI.Physics.Foundations.GRLiteralRecoveryRealizationFrontierExact
 
 import DASHI.Physics.Foundations.PinnedYangMillsRecoveredQFTAttachmentExact
+
+import DASHI.Physics.Foundations.PinnedYMGRQFTStressMaxCutExact
+import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact
