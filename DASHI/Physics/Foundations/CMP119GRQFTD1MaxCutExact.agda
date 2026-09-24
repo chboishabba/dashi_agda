@@ -50,12 +50,18 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 -- measure into both R121.densitySource and the R122 density anchor.
 --
 -- The physical rational finite-measure layer now constructs the literal
--- N,Z,DN,DZ formulas and the Gibbs reduction D rho[h] = -rho DS[h].  Thus the
--- remaining source work is smaller still:
+-- N,Z,DN,DZ formulas and the Gibbs reduction D rho[h] = -rho DS[h].
+-- The classical d=4 Wilson metric variation is also constructed for the four
+-- diagonal directions from the six plaquette-orientation energies:
+--
+--   DS_00 + DS_11 + DS_22 + DS_33 = 0
+--
+-- pointwise.  Thus the remaining source work is smaller still:
 --   (1) identify the selected CMP119 base insertion observable O;
---   (2) identify the metric action variation DS[h] and insertion variation
---       DO[h] on the same finite configuration carrier;
---   (3) evaluate the ten literal Haar-integral combinations
+--   (2) attach the six literal plaquette-orientation energies;
+--   (3) construct the six mixed/off-diagonal metric action variations;
+--   (4) identify the ten insertion variations DO[h];
+--   (5) evaluate the ten literal Haar-integral combinations
 --         C_h = B_h Z - A D_h.
 --
 -- No extra D1a/D1b, density callback, quotient algebra, tensor bridge, or
@@ -64,13 +70,17 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 
 data GRQFTD1Leaf : Set where
   identifySelectedCMP119BaseInsertionObservable : GRQFTD1Leaf
-  identifyMetricActionAndInsertionVariations : GRQFTD1Leaf
+  identifySixPlaquetteOrientationEnergies : GRQFTD1Leaf
+  identifySixMixedMetricActionVariations : GRQFTD1Leaf
+  identifyTenInsertionVariations : GRQFTD1Leaf
   evaluateTenLiteralGibbsABDZReadouts : GRQFTD1Leaf
 
 canonicalGRQFTD1Leaves : List GRQFTD1Leaf
 canonicalGRQFTD1Leaves =
   identifySelectedCMP119BaseInsertionObservable
-  ∷ identifyMetricActionAndInsertionVariations
+  ∷ identifySixPlaquetteOrientationEnergies
+  ∷ identifySixMixedMetricActionVariations
+  ∷ identifyTenInsertionVariations
   ∷ evaluateTenLiteralGibbsABDZReadouts
   ∷ []
 
@@ -176,12 +186,40 @@ selectedBaseInsertionObservableStillOpenIsTrue :
   selectedBaseInsertionObservableStillOpen ≡ true
 selectedBaseInsertionObservableStillOpenIsTrue = refl
 
-selectedMetricActionAndInsertionVariationsStillOpen : Bool
-selectedMetricActionAndInsertionVariationsStillOpen = true
+classicalDiagonalMetricActionVariationConstructed : Bool
+classicalDiagonalMetricActionVariationConstructed = true
 
-selectedMetricActionAndInsertionVariationsStillOpenIsTrue :
-  selectedMetricActionAndInsertionVariationsStillOpen ≡ true
-selectedMetricActionAndInsertionVariationsStillOpenIsTrue = refl
+classicalDiagonalMetricActionVariationConstructedIsTrue :
+  classicalDiagonalMetricActionVariationConstructed ≡ true
+classicalDiagonalMetricActionVariationConstructedIsTrue = refl
+
+classicalDiagonalActionTraceZero : Bool
+classicalDiagonalActionTraceZero = true
+
+classicalDiagonalActionTraceZeroIsTrue :
+  classicalDiagonalActionTraceZero ≡ true
+classicalDiagonalActionTraceZeroIsTrue = refl
+
+sixPlaquetteOrientationEnergyIdentificationStillOpen : Bool
+sixPlaquetteOrientationEnergyIdentificationStillOpen = true
+
+sixPlaquetteOrientationEnergyIdentificationStillOpenIsTrue :
+  sixPlaquetteOrientationEnergyIdentificationStillOpen ≡ true
+sixPlaquetteOrientationEnergyIdentificationStillOpenIsTrue = refl
+
+sixMixedMetricActionVariationsStillOpen : Bool
+sixMixedMetricActionVariationsStillOpen = true
+
+sixMixedMetricActionVariationsStillOpenIsTrue :
+  sixMixedMetricActionVariationsStillOpen ≡ true
+sixMixedMetricActionVariationsStillOpenIsTrue = refl
+
+tenInsertionVariationsStillOpen : Bool
+tenInsertionVariationsStillOpen = true
+
+tenInsertionVariationsStillOpenIsTrue :
+  tenInsertionVariationsStillOpen ≡ true
+tenInsertionVariationsStillOpenIsTrue = refl
 
 tenLiteralGibbsABDZEvaluationsStillOpen : Bool
 tenLiteralGibbsABDZEvaluationsStillOpen = true
