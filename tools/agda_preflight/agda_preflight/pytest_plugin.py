@@ -7,7 +7,7 @@ from typing import Iterable, List, Optional
 import pytest
 
 from .checker import Checker, Diagnostic
-from .scope_backend import AgdaScopeCheckBackend, ExternalScopeBackend
+from .scope_backend import AgdaScopeCheckBackend, AgdaTypecheckBackend, ExternalScopeBackend
 
 
 @dataclass(frozen=True)
@@ -61,6 +61,12 @@ def pytest_addoption(parser):
         help="run Agda --only-scope-checking to suppress false scope diagnostics",
     )
     group.addoption(
+        "--agda-typecheck-oracle",
+        action="store_true",
+        default=False,
+        help="run full Agda checking to suppress false scope/type diagnostics",
+    )
+    group.addoption(
         "--agda-bin",
         action="store",
         default="agda",
@@ -91,15 +97,26 @@ def _checker(config) -> Checker:
         root = _repo_root(config)
         command = config.getoption("--agda-scope-command")
         native_scope = config.getoption("--agda-scope-check")
-        if command and native_scope:
+        typecheck_oracle = config.getoption("--agda-typecheck-oracle")
+        selected = sum(
+            bool(value)
+            for value in (command, native_scope, typecheck_oracle)
+        )
+        if selected > 1:
             raise pytest.UsageError(
-                "--agda-scope-command and --agda-scope-check are mutually exclusive"
+                "--agda-scope-command, --agda-scope-check and "
+                "--agda-typecheck-oracle are mutually exclusive"
             )
         scope_backend = None
         if command:
             scope_backend = ExternalScopeBackend(command, cwd=root)
         elif native_scope:
             scope_backend = AgdaScopeCheckBackend(
+                config.getoption("--agda-bin"),
+                cwd=root,
+            )
+        elif typecheck_oracle:
+            scope_backend = AgdaTypecheckBackend(
                 config.getoption("--agda-bin"),
                 cwd=root,
             )
