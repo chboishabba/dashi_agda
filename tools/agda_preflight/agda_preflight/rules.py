@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import re
 from typing import Dict, Iterable, List, Optional, Tuple
 
-from .ast_index import significant_tokens, typed_binders
+from .ast_index import significant_tokens, typed_binders, descendants, first_descendant
 from .shapes import shape_from_node, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
@@ -234,10 +234,15 @@ def extended_diagnostics(checker, s, D):
             if key in seen: out.append(_diag(D, "TSAGDA010", f"duplicate identical clause for {name}", s, line))
             seen.add(key)
 
-    for m in re.finditer(r"\{\!.*?\!\}|\?", clean, re.S):
-        line, col = _line_col(source, m.start()); out.append(_diag(D, "TSAGDA012", "unresolved interaction hole", s, line, col))
-    for name, sig in s.signatures.items():
-        if re.search(r"(?<![A-Za-z0-9_'])_(?![A-Za-z0-9_'])", sig.type_text):
+    root_tokens = significant_tokens(s.ast.source_bytes, s.ast.tree.root_node)
+    for token in root_tokens:
+        if token.text == "?" or "{!" in token.text or "!}" in token.text:
+            out.append(_diag(D, "TSAGDA012", "unresolved interaction hole", s, token.line, token.column))
+    for name, sig in s.ast.signatures.items():
+        if sig.type_node is None:
+            continue
+        tokens = significant_tokens(s.ast.source_bytes, sig.type_node)
+        if any(token.text == "_" for token in tokens):
             out.append(_diag(D, "TSAGDA013", f"exported signature {name} contains explicit underscore metavariable", s, sig.line))
 
     import_lines = [
@@ -430,50 +435,86 @@ def extended_diagnostics(checker, s, D):
                     )
     known = set(s.signatures) | set(data) | set(ctors)
     fix = {}
-    postulates = []; in_post = False
+    postulates = []
     critical = any(x in str(s.path) for x in ("/Closure/", "/Millennium/", "Exact.agda", "Receipt", "Theorem"))
-    for i, line in enumerate(source.splitlines(), 1):
-        fm = re.match(r"^\s*(infix|infixl|infixr)\s*(\d+)?\s+(.+)$", line)
-        if fm:
-            for sym in fm.group(3).split():
-                shape = (fm.group(1), fm.group(2))
-                if sym not in known: out.append(_diag(D, "TSAGDA150", f"fixity declaration references unknown symbol {sym}", s, i, severity="warning", confidence="medium"))
-                if sym in fix and fix[sym] != shape: out.append(_diag(D, "TSAGDA151", f"conflicting fixity declarations for {sym}", s, i))
-                fix[sym] = shape
-        sm = re.match(rf"^\s*syntax\s+({_IDENT})\b", line)
-        if sm and sm.group(1) not in known: out.append(_diag(D, "TSAGDA153", f"syntax declaration references unknown symbol {sm.group(1)}", s, i, severity="warning", confidence="medium"))
-        if re.match(r"^\s*postulate\s*$", line): in_post = True; continue
-        if in_post:
-            if line and not line[0].isspace(): in_post = False
-            else:
-                pm = re.match(rf"^\s+({_IDENT})\s*:", line)
-                if pm: postulates.append((pm.group(1), i))
-        if "{-# TERMINATING #-}" in line: out.append(_diag(D, "TSAGDA161", "TERMINATING pragma bypasses termination checking", s, i, severity="warning", confidence="medium"))
-        if "{-# NON_TERMINATING #-}" in line: out.append(_diag(D, "TSAGDA162", "NON_TERMINATING pragma weakens termination guarantees", s, i, severity="warning", confidence="medium"))
-        if "NO_POSITIVITY_CHECK" in line: out.append(_diag(D, "TSAGDA163", "NO_POSITIVITY_CHECK disables positivity checking", s, i, severity="warning", confidence="medium"))
-        if "allow-unsolved-metas" in line.lower(): out.append(_diag(D, "TSAGDA164", "allow-unsolved-metas weakens the trust boundary", s, i, severity="warning", confidence="medium"))
-        if re.match(r"^\s*\{-#\s*OPTIONS", line) and any(x in line for x in ("--type-in-type", "--no-positivity-check", "--no-termination-check")):
-            out.append(_diag(D, "TSAGDA165", "unsafe OPTIONS pragma in proof source", s, i, severity="warning", confidence="medium"))
-        cm = re.match(rf"^\s*\{{-#\s*(?:COMPILE|FOREIGN)\s+({_IDENT})", line)
-        if cm and cm.group(1) not in known: out.append(_diag(D, "TSAGDA166", f"foreign/compile pragma names unknown declaration {cm.group(1)}", s, i))
+
+    for node in s.ast.infix_nodes:
+        tokens = significant_tokens(s.ast.source_bytes, node)
+        if len(tokens) < 3:
+            continue
+        kind = tokens[0].text
+        precedence = tokens[1].text
+        for token in tokens[2:]:
+            sym = token.text
+            shape = (kind, precedence)
+            if sym not in known:
+                out.append(_diag(D, "TSAGDA150", f"fixity declaration references unknown symbol {sym}", s, token.line, severity="warning", confidence="medium"))
+            if sym in fix and fix[sym] != shape:
+                out.append(_diag(D, "TSAGDA151", f"conflicting fixity declarations for {sym}", s, token.line))
+            fix[sym] = shape
+
+    for node in s.ast.syntax_nodes:
+        tokens = significant_tokens(s.ast.source_bytes, node)
+        identifiers = [token for token in tokens if token.node_type == "id"]
+        if identifiers:
+            target = identifiers[0]
+            if target.text not in known:
+                out.append(_diag(D, "TSAGDA153", f"syntax declaration references unknown symbol {target.text}", s, target.line, severity="warning", confidence="medium"))
+
+    for node in s.ast.postulate_nodes:
+        for fn in descendants(node, "function"):
+            sig_node = first_descendant(fn, "function_name")
+            if sig_node is None:
+                continue
+            names = [token for token in significant_tokens(s.ast.source_bytes, sig_node) if token.node_type in {"qid", "id"}]
+            if names:
+                postulates.append((names[0].text, names[0].line))
+
+    for node in s.ast.pragmas:
+        text_value = s.ast.source_bytes[node.start_byte:node.end_byte].decode("utf-8", "replace")
+        upper = text_value.upper()
+        line = node.start_point[0] + 1
+        if "NON_TERMINATING" in upper:
+            out.append(_diag(D, "TSAGDA162", "NON_TERMINATING pragma weakens termination guarantees", s, line, severity="warning", confidence="medium"))
+        elif "TERMINATING" in upper:
+            out.append(_diag(D, "TSAGDA161", "TERMINATING pragma bypasses termination checking", s, line, severity="warning", confidence="medium"))
+        if "NO_POSITIVITY_CHECK" in upper:
+            out.append(_diag(D, "TSAGDA163", "NO_POSITIVITY_CHECK disables positivity checking", s, line, severity="warning", confidence="medium"))
+        if "ALLOW-UNSOLVED-METAS" in upper:
+            out.append(_diag(D, "TSAGDA164", "allow-unsolved-metas weakens the trust boundary", s, line, severity="warning", confidence="medium"))
+        if any(flag in upper for flag in ("--TYPE-IN-TYPE", "--NO-POSITIVITY-CHECK", "--NO-TERMINATION-CHECK")):
+            out.append(_diag(D, "TSAGDA165", "unsafe OPTIONS pragma in proof source", s, line, severity="warning", confidence="medium"))
+        words = text_value.replace("{-#", " ").replace("#-}", " ").split()
+        if words and words[0].upper() in {"COMPILE", "FOREIGN"} and len(words) > 1:
+            target = words[1]
+            if target not in known:
+                out.append(_diag(D, "TSAGDA166", f"foreign/compile pragma names unknown declaration {target}", s, line))
 
     if critical:
         for n, line in postulates: out.append(_diag(D, "TSAGDA160", f"postulate {n} occurs in proof-critical source", s, line))
         if s.module_name.endswith("Exact"):
-            for m in re.finditer(r"\{\!.*?\!\}|(?<![A-Za-z0-9_'])_(?![A-Za-z0-9_'])", clean, re.S):
-                line, col = _line_col(source, m.start()); out.append(_diag(D, "TSAGDA204", "Exact module contains unresolved proof placeholder", s, line, col))
-            for n, line in postulates: out.append(_diag(D, "TSAGDA204", f"Exact module postulates {n}", s, line))
+            for token in root_tokens:
+                if token.text in {"_", "?"} or "{!" in token.text or "!}" in token.text:
+                    out.append(_diag(D, "TSAGDA204", "Exact module contains unresolved proof placeholder", s, token.line, token.column))
+            for n, line in postulates:
+                out.append(_diag(D, "TSAGDA204", f"Exact module postulates {n}", s, line))
         for n, line in postulates:
-            if re.search(r"(theorem|receipt|exact|closure|gate)", n, re.I):
+            lowered = n.lower()
+            if any(word in lowered for word in ("theorem", "receipt", "exact", "closure", "gate")):
                 out.append(_diag(D, "TSAGDA202", f"proof endpoint {n} is only postulated", s, line))
         if "/Closure/" in str(s.path):
             for line, _, module, _, _ in import_lines:
-                if re.search(r"(Obstruction|Assumption|Postulate|Placeholder)", module, re.I):
+                lowered = module.lower()
+                if any(word in lowered for word in ("obstruction", "assumption", "postulate", "placeholder")):
                     out.append(_diag(D, "TSAGDA205", f"closure imports assumption/obstruction module {module}", s, line, severity="warning", confidence="medium"))
 
-    for name, sig in s.signatures.items():
-        if re.search(r"(?<![A-Za-z0-9_'])_(?![A-Za-z0-9_'])", sig.type_text):
-            code = "TSAGDA173" if "≡" in sig.type_text else "TSAGDA170"
+    for name, sig in s.ast.signatures.items():
+        if sig.type_node is None:
+            continue
+        tokens = significant_tokens(s.ast.source_bytes, sig.type_node)
+        if any(token.text == "_" for token in tokens):
+            shape = equality_shape(shape_from_node(s.ast.source_bytes, sig.type_node))
+            code = "TSAGDA173" if shape is not None else "TSAGDA170"
             out.append(_diag(D, code, f"signature {name} contains explicit underscore", s, sig.line))
     for record_expr in s.ast.record_expressions:
         for assignment in record_expr.assignments:
@@ -505,13 +546,13 @@ def extended_diagnostics(checker, s, D):
             rel = p.relative_to(checker.root)
         except ValueError:
             continue
-        if set(rel.parts) & {".cache", "build", "dist", "vendor", "third_party", "tmp"}: continue
+        if set(rel.parts) & {".cache", "build", "dist", "vendor", "third_party", "tmp"}:
+            continue
         try:
-            head = p.read_text(encoding="utf-8")[:4096]
+            indexed = checker.parse_summary(p)
         except (OSError, UnicodeDecodeError):
             continue
-        mm = re.search(r"(?m)^\s*module\s+([A-Za-z0-9_.']+).*?\s+where\b", head)
-        if mm: identities.setdefault(mm.group(1), []).append(p)
+        identities.setdefault(indexed.module_name, []).append(p)
     peers = identities.get(s.module_name, [])
     if len(peers) > 1:
         out.append(_diag(D, "TSAGDA030", f"module identity {s.module_name} is declared by multiple files", s, 1))
