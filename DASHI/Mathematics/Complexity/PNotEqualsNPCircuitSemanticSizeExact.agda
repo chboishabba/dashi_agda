@@ -37,8 +37,8 @@ SameCircuitFunction :
   Circuit.ConcreteBooleanCircuit inputs →
   Circuit.ConcreteBooleanCircuit inputs →
   Set
-SameCircuitFunction left right =
-  (inputValues : Vec Bool _) →
+SameCircuitFunction {inputs} left right =
+  (inputValues : Vec Bool inputs) →
   Circuit.evaluateCircuit left inputValues
   ≡ Circuit.evaluateCircuit right inputValues
 
@@ -83,8 +83,8 @@ CircuitFunctionSizeAtLeast :
   Circuit.ConcreteBooleanCircuit inputs →
   Nat →
   Set₁
-CircuitFunctionSizeAtLeast representative bound =
-  (candidate : Circuit.ConcreteBooleanCircuit _) →
+CircuitFunctionSizeAtLeast {inputs} representative bound =
+  (candidate : Circuit.ConcreteBooleanCircuit inputs) →
   SameCircuitFunction candidate representative →
   bound ≤ Circuit.circuitSize candidate
 
@@ -97,9 +97,9 @@ FunctionCircuitSizeAtLeast :
   (Vec Bool inputs → Bool) →
   Nat →
   Set₁
-FunctionCircuitSizeAtLeast function bound =
-  (candidate : Circuit.ConcreteBooleanCircuit _) →
-  ((inputValues : Vec Bool _) →
+FunctionCircuitSizeAtLeast {inputs} function bound =
+  (candidate : Circuit.ConcreteBooleanCircuit inputs) →
+  ((inputValues : Vec Bool inputs) →
     Circuit.evaluateCircuit candidate inputValues
     ≡ function inputValues) →
   bound ≤ Circuit.circuitSize candidate
