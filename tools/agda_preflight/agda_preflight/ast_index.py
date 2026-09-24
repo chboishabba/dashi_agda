@@ -128,6 +128,8 @@ class AstRecordExpression:
     line: int
     node: object
     owner_function: Optional[str]
+    parent_field: Optional[str] = None
+    parent_record_start: Optional[int] = None
     assignments: List[AstFieldAssignment] = field(default_factory=list)
 
 
@@ -779,8 +781,20 @@ def _data_from_node(source_bytes: bytes, node) -> Optional[AstData]:
 
 def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpression:
     owner_function = None
+    parent_field = None
+    parent_record_start = None
+
     parent = node.parent
     while parent is not None:
+        if parent.type == "field_assignment" and parent_field is None:
+            name_node = first_descendant(parent, "field_name")
+            parent_field = _name_from_node(source_bytes, name_node)
+            ancestor = parent.parent
+            while ancestor is not None:
+                if ancestor.type in {"record_assignments", "field_assignments"}:
+                    parent_record_start = ancestor.start_byte
+                    break
+                ancestor = ancestor.parent
         if parent.type == "function":
             clause = _function_clause(source_bytes, parent)
             signature = _function_signature(source_bytes, parent)
@@ -791,7 +805,13 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
             break
         parent = parent.parent
 
-    expr = AstRecordExpression(line=line_of(node), node=node, owner_function=owner_function)
+    expr = AstRecordExpression(
+        line=line_of(node),
+        node=node,
+        owner_function=owner_function,
+        parent_field=parent_field,
+        parent_record_start=parent_record_start,
+    )
     for assignment in descendants(node, "field_assignment"):
         name_node = first_descendant(assignment, "field_name")
         rhs_node = first_descendant(assignment, "expr")
