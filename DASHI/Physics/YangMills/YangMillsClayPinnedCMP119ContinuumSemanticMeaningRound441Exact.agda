@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumSemanticMeaning
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
