@@ -77,6 +77,9 @@ def validate_r406(payload: dict[str, Any]) -> list[str]:
         "global_coherent_commutator_work",
         "global_weighted_rate_work",
         "r687_global_rate_lift_residual",
+        "global_coherent_tangent_work",
+        "global_rate_lifted_minus_8_tangent",
+        "r688_global_dynamic_cancellation_residual",
     ):
         if not _finite(payload.get(key)):
             errors.append(f"r406: {key} must be finite")
@@ -173,6 +176,8 @@ def _validate_c1_row(row: Any, *, label: str, errors: list[str]) -> None:
         "weighted_rate_work",
         "r685_rate_kernel_residual",
         "r687_rate_lift_residual",
+        "rate_lifted_minus_8_tangent",
+        "r688_dynamic_cancellation_residual",
     ):
         if not _finite(row.get(key)):
             errors.append(f"{label}: {key} must be finite")
