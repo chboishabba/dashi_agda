@@ -535,6 +535,75 @@ indexedToCookEvaluation
         (SAT.evaluate left assignment)
         (SAT.evaluate right assignment)))
 
+indexedToCookEvaluationFromCook :
+  ∀ {variables : Nat}
+    (formula : SAT.BooleanFormula variables)
+    (assignment : Cook.Assignment) →
+  Cook.evaluate
+    (indexedToCook formula)
+    assignment
+  ≡
+  SAT.evaluate
+    formula
+    (finiteAssignmentFromCook assignment)
+indexedToCookEvaluationFromCook
+    (SAT.variable index)
+    assignment =
+  refl
+indexedToCookEvaluationFromCook
+    (SAT.constant value)
+    assignment =
+  refl
+indexedToCookEvaluationFromCook
+    (SAT.negate formula)
+    assignment =
+  trans
+    (cong
+      Cook.notBool
+      (indexedToCookEvaluationFromCook
+        formula assignment))
+    (sym
+      (notBoolAgreement
+        (SAT.evaluate
+          formula
+          (finiteAssignmentFromCook assignment))))
+indexedToCookEvaluationFromCook
+    (SAT.conjunction left right)
+    assignment =
+  trans
+    (cong₂
+      Cook.andBool
+      (indexedToCookEvaluationFromCook
+        left assignment)
+      (indexedToCookEvaluationFromCook
+        right assignment))
+    (sym
+      (andBoolAgreement
+        (SAT.evaluate
+          left
+          (finiteAssignmentFromCook assignment))
+        (SAT.evaluate
+          right
+          (finiteAssignmentFromCook assignment))))
+indexedToCookEvaluationFromCook
+    (SAT.disjunction left right)
+    assignment =
+  trans
+    (cong₂
+      Cook.orBool
+      (indexedToCookEvaluationFromCook
+        left assignment)
+      (indexedToCookEvaluationFromCook
+        right assignment))
+    (sym
+      (orBoolAgreement
+        (SAT.evaluate
+          left
+          (finiteAssignmentFromCook assignment))
+        (SAT.evaluate
+          right
+          (finiteAssignmentFromCook assignment))))
+
 ------------------------------------------------------------------------
 -- Satisfiability equivalence for every indexed formula.
 ------------------------------------------------------------------------
@@ -567,65 +636,12 @@ cookSatisfiableIndexedFormulaGivesIndexedSatisfying
       assignment evaluatesTrue) =
   SAT.satisfying
     (finiteAssignmentFromCook assignment)
-    evaluatesIndexed
-  where
-    evaluatesIndexed :
-      SAT.evaluate
-        formula
-        (finiteAssignmentFromCook assignment)
-      ≡ true
-    evaluatesIndexed =
-      indexedEvaluationFromCook formula assignment evaluatesTrue
-
-    indexedEvaluationFromCook :
-      ∀ {n : Nat}
-        (inner : SAT.BooleanFormula n)
-        (cookAssignment : Cook.Assignment) →
-      Cook.evaluate
-        (indexedToCook inner)
-        cookAssignment
-      ≡ true →
-      SAT.evaluate
-        inner
-        (finiteAssignmentFromCook cookAssignment)
-      ≡ true
-    indexedEvaluationFromCook
-        (SAT.variable index)
-        cookAssignment result =
-      result
-    indexedEvaluationFromCook
-        (SAT.constant value)
-        cookAssignment result =
-      result
-    indexedEvaluationFromCook
-        (SAT.negate inner)
-        cookAssignment result
-        with SAT.evaluate inner
-          (finiteAssignmentFromCook cookAssignment)
-... | false = refl
-... | true = result
-    indexedEvaluationFromCook
-        (SAT.conjunction left right)
-        cookAssignment result
-        with SAT.evaluate left
-          (finiteAssignmentFromCook cookAssignment)
-           | SAT.evaluate right
-          (finiteAssignmentFromCook cookAssignment)
-... | false | false = result
-... | false | true = result
-... | true | false = result
-... | true | true = refl
-    indexedEvaluationFromCook
-        (SAT.disjunction left right)
-        cookAssignment result
-        with SAT.evaluate left
-          (finiteAssignmentFromCook cookAssignment)
-           | SAT.evaluate right
-          (finiteAssignmentFromCook cookAssignment)
-... | false | false = result
-... | false | true = refl
-... | true | false = refl
-... | true | true = refl
+    (trans
+      (sym
+        (indexedToCookEvaluationFromCook
+          formula
+          assignment))
+      evaluatesTrue)
 
 ------------------------------------------------------------------------
 -- Under SAT in P on the Clay-critical Cook carrier, obtain an exact decision
