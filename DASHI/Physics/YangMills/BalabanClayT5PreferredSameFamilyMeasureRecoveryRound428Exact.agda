@@ -80,7 +80,7 @@ record PreferredSameFamilyMeasureInputs
       (∀ cutoff → GaugeInvariant (sequence cutoff)) →
       GaugeInvariant target
 
-    EuclideanCovariant ReflectionPositive Symmetric Tempered Regular Clustered :
+    EuclideanCovariant ReflectionPositive Symmetric Tempered Regular :
       Schwinger → Set
 
     continuumEuclideanCovariant :
@@ -107,12 +107,6 @@ record PreferredSameFamilyMeasureInputs
           (T5.continuumMeasure
             (T5.thermodynamic (PreferredGram.expectationData gramInputs))))
 
-    continuumClustered :
-      Clustered
-        (schwinger
-          (T5.continuumMeasure
-            (T5.thermodynamic (PreferredGram.expectationData gramInputs))))
-
     gramReflectionImpliesSchwingerReflection : ∀ measure →
       OS.GramReflectionPositive
         (Gram.physicalMeasureTopologyControlsOSGram
@@ -132,45 +126,45 @@ selectedConvergence inputs = record
       Limit.Converges (R427.convergence (compactUnique inputs))
   }
 
-selectedClosure :
+selectedCore :
   ∀ {Measure Observable Scalar Schwinger} →
   PreferredSameFamilyMeasureInputs Measure Observable Scalar Schwinger →
-  Selected.SelectedFiniteToContinuumOS Measure Schwinger
-selectedClosure inputs = record
-  { Selected.SelectedFiniteToContinuumOS.finiteMeasures =
+  Selected.SelectedFiniteToContinuumOSCore Measure Schwinger
+selectedCore inputs = record
+  { Selected.SelectedFiniteToContinuumOSCore.finiteMeasuresCore =
       T5.diagonalMeasure (PreferredGram.expectationData (gramInputs inputs))
-  ; Selected.SelectedFiniteToContinuumOS.continuumMeasure =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumMeasureCore =
       T5.continuumMeasure
         (T5.thermodynamic (PreferredGram.expectationData (gramInputs inputs)))
-  ; Selected.SelectedFiniteToContinuumOS.schwinger =
+  ; Selected.SelectedFiniteToContinuumOSCore.schwingerCore =
       schwinger inputs
-  ; Selected.SelectedFiniteToContinuumOS.convergence =
+  ; Selected.SelectedFiniteToContinuumOSCore.convergenceCore =
       selectedConvergence inputs
-  ; Selected.SelectedFiniteToContinuumOS.continuumIsSelectedLimit =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumIsSelectedLimitCore =
       R427.literalDiagonalConvergesToContinuum (compactUnique inputs)
-  ; Selected.SelectedFiniteToContinuumOS.Normalized =
+  ; Selected.SelectedFiniteToContinuumOSCore.NormalizedCore =
       Normalized inputs
-  ; Selected.SelectedFiniteToContinuumOS.Positive =
+  ; Selected.SelectedFiniteToContinuumOSCore.PositiveCore =
       Positive inputs
-  ; Selected.SelectedFiniteToContinuumOS.GaugeInvariant =
+  ; Selected.SelectedFiniteToContinuumOSCore.GaugeInvariantCore =
       GaugeInvariant inputs
-  ; Selected.SelectedFiniteToContinuumOS.ReflectionPositiveMeasure =
+  ; Selected.SelectedFiniteToContinuumOSCore.ReflectionPositiveMeasureCore =
       OS.GramReflectionPositive
         (Gram.physicalMeasureTopologyControlsOSGram
           (PreferredGram.compilePhysicalMeasureToOSGramData (gramInputs inputs)))
-  ; Selected.SelectedFiniteToContinuumOS.EuclideanCovariant =
+  ; Selected.SelectedFiniteToContinuumOSCore.EuclideanCovariantCore =
       EuclideanCovariant inputs
-  ; Selected.SelectedFiniteToContinuumOS.ReflectionPositive =
+  ; Selected.SelectedFiniteToContinuumOSCore.ReflectionPositiveCore =
       ReflectionPositive inputs
-  ; Selected.SelectedFiniteToContinuumOS.Symmetric =
+  ; Selected.SelectedFiniteToContinuumOSCore.SymmetricCore =
       Symmetric inputs
-  ; Selected.SelectedFiniteToContinuumOS.Tempered =
+  ; Selected.SelectedFiniteToContinuumOSCore.TemperedCore =
       Tempered inputs
-  ; Selected.SelectedFiniteToContinuumOS.Regular =
+  ; Selected.SelectedFiniteToContinuumOSCore.RegularCore =
       Regular inputs
   ; Selected.SelectedFiniteToContinuumOS.Clustered =
       Clustered inputs
-  ; Selected.SelectedFiniteToContinuumOS.continuumNormalized =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumNormalizedCore =
       normalizedClosed inputs
         (T5.diagonalMeasure
           (PreferredGram.expectationData (gramInputs inputs)))
@@ -179,7 +173,7 @@ selectedClosure inputs = record
             (PreferredGram.expectationData (gramInputs inputs))))
         (R427.literalDiagonalConvergesToContinuum (compactUnique inputs))
         (finiteNormalized inputs)
-  ; Selected.SelectedFiniteToContinuumOS.continuumPositive =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumPositiveCore =
       positiveClosed inputs
         (T5.diagonalMeasure
           (PreferredGram.expectationData (gramInputs inputs)))
@@ -188,7 +182,7 @@ selectedClosure inputs = record
             (PreferredGram.expectationData (gramInputs inputs))))
         (R427.literalDiagonalConvergesToContinuum (compactUnique inputs))
         (finitePositive inputs)
-  ; Selected.SelectedFiniteToContinuumOS.continuumGaugeInvariant =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumGaugeInvariantCore =
       gaugeInvariantClosed inputs
         (T5.diagonalMeasure
           (PreferredGram.expectationData (gramInputs inputs)))
@@ -197,26 +191,24 @@ selectedClosure inputs = record
             (PreferredGram.expectationData (gramInputs inputs))))
         (R427.literalDiagonalConvergesToContinuum (compactUnique inputs))
         (finiteGaugeInvariant inputs)
-  ; Selected.SelectedFiniteToContinuumOS.continuumReflectionPositiveMeasure =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumReflectionPositiveMeasureCore =
       Gram.physicalContinuumReflectionPositive
         (PreferredGram.compilePhysicalMeasureToOSGramData (gramInputs inputs))
-  ; Selected.SelectedFiniteToContinuumOS.continuumEuclideanCovariant =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumEuclideanCovariantCore =
       continuumEuclideanCovariant inputs
-  ; Selected.SelectedFiniteToContinuumOS.continuumReflectionPositive =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumReflectionPositiveCore =
       gramReflectionImpliesSchwingerReflection inputs
         (T5.continuumMeasure
           (T5.thermodynamic
             (PreferredGram.expectationData (gramInputs inputs))))
         (Gram.physicalContinuumReflectionPositive
           (PreferredGram.compilePhysicalMeasureToOSGramData (gramInputs inputs)))
-  ; Selected.SelectedFiniteToContinuumOS.continuumSymmetric =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumSymmetricCore =
       continuumSymmetric inputs
-  ; Selected.SelectedFiniteToContinuumOS.continuumTempered =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumTemperedCore =
       continuumTempered inputs
-  ; Selected.SelectedFiniteToContinuumOS.continuumRegular =
+  ; Selected.SelectedFiniteToContinuumOSCore.continuumRegularCore =
       continuumRegular inputs
-  ; Selected.SelectedFiniteToContinuumOS.continuumClustered =
-      continuumClustered inputs
   }
 
 record ReconstructionAuthority
@@ -226,38 +218,38 @@ record ReconstructionAuthority
     (Reconstructed : Set) : Set₁ where
   field
     reconstruct :
-      Selected.SelectedContinuumOSAxioms (selectedClosure inputs) →
+      Selected.SelectedContinuumOSCoreAxioms (selectedCore inputs) →
       Reconstructed
 
 open ReconstructionAuthority public
 
-sameFamilyRecovery :
+sameFamilyCoreRecovery :
   ∀ {Measure Observable Scalar Schwinger Reconstructed}
     (inputs :
       PreferredSameFamilyMeasureInputs Measure Observable Scalar Schwinger) →
   ReconstructionAuthority inputs Reconstructed →
-  R425.SameFamilyContinuumRecovery
+  R425.SameFamilyContinuumCoreRecovery
     Measure Observable Schwinger Scalar Reconstructed
-sameFamilyRecovery inputs authority = record
-  { R425.SameFamilyContinuumRecovery.physicalGramData =
+sameFamilyCoreRecovery inputs authority = record
+  { R425.SameFamilyContinuumCoreRecovery.physicalGramDataCore =
       PreferredGram.compilePhysicalMeasureToOSGramData (gramInputs inputs)
-  ; R425.SameFamilyContinuumRecovery.selectedClosure =
-      selectedClosure inputs
-  ; R425.SameFamilyContinuumRecovery.physicalMeasureSequenceAgrees =
+  ; R425.SameFamilyContinuumCoreRecovery.selectedCore =
+      selectedCore inputs
+  ; R425.SameFamilyContinuumCoreRecovery.physicalMeasureSequenceAgreesCore =
       λ cutoff →
         PreferredGram.compiledGramFiniteMeasureIsDiagonal
           (gramInputs inputs) cutoff
-  ; R425.SameFamilyContinuumRecovery.physicalContinuumMeasureAgrees =
+  ; R425.SameFamilyContinuumCoreRecovery.physicalContinuumMeasureAgreesCore =
       PreferredGram.compiledGramContinuumMeasureIsExpectationContinuum
         (gramInputs inputs)
-  ; R425.SameFamilyContinuumRecovery.gramReflectionImpliesSelectedReflection =
+  ; R425.SameFamilyContinuumCoreRecovery.gramReflectionImpliesSelectedReflectionCore =
       λ gramPositive →
         gramReflectionImpliesSchwingerReflection inputs
           (T5.continuumMeasure
             (T5.thermodynamic
               (PreferredGram.expectationData (gramInputs inputs))))
           gramPositive
-  ; R425.SameFamilyContinuumRecovery.reconstructFromSelectedOSAxioms =
+  ; R425.SameFamilyContinuumCoreRecovery.reconstructFromSelectedOSCore =
       reconstruct authority
   }
 
@@ -282,11 +274,15 @@ round428EveryExtractedClusterPointIsContinuumLevel = conditional
 round428MeasurePropertyClosureLevel : ProofLevel
 round428MeasurePropertyClosureLevel = conditional
 
-round428ContinuumSchwingerAxiomInputsLevel : ProofLevel
-round428ContinuumSchwingerAxiomInputsLevel = conditional
+round428ContinuumSchwingerCoreInputsLevel : ProofLevel
+round428ContinuumSchwingerCoreInputsLevel = conditional
 
 round428GramToSchwingerReflectionMeaningLevel : ProofLevel
 round428GramToSchwingerReflectionMeaningLevel = conditional
 
 round428IndependentGramMeasureSameObjectPaymentRequired : Bool
 round428IndependentGramMeasureSameObjectPaymentRequired = false
+
+
+round428ClusteringRequiredForCoreRecovery : Bool
+round428ClusteringRequiredForCoreRecovery = false
