@@ -36,6 +36,7 @@ import DASHI.Physics.Closure.NSTriadKNR650LowCollarRemoteCrossReductionRound655E
 import DASHI.Physics.Closure.NSTriadKNR650EuclideanCollarRefinementRound656Exact as R656
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpectralSignNoGoRound657Exact as R657
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarFixedOutputCarrierRound658Exact as R658
+import DASHI.Physics.Closure.NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound659Exact as R659
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -208,6 +209,18 @@ round650C2BadCollarActiveFibreIsUnweightedCommutator =
 round650C2BadCollarQuantitativeFixedOutputPaymentClosed : Bool
 round650C2BadCollarQuantitativeFixedOutputPaymentClosed =
   R658.round658QuantitativeBadCollarPaymentClosed
+
+round650C2CriticalEnergyGrowthNormalFormAvailable : Bool
+round650C2CriticalEnergyGrowthNormalFormAvailable =
+  R659.round659C2StrictSurplusEqualsCriticalEnergyGrowthPlusMargin
+
+round650C2EnergyGrowthMarginPaymentCompilesToC2 : Bool
+round650C2EnergyGrowthMarginPaymentCompilesToC2 =
+  R659.round659EnergyGrowthMarginPaymentCompilesToC2
+
+round650C2EnergyGrowthMarginPaymentClosed : Bool
+round650C2EnergyGrowthMarginPaymentClosed =
+  R659.round659EnergyGrowthMarginPaymentClosed
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -402,6 +415,21 @@ round650C2BadCollarQuantitativeFixedOutputPaymentClosedIsFalse :
   round650C2BadCollarQuantitativeFixedOutputPaymentClosed ≡ false
 round650C2BadCollarQuantitativeFixedOutputPaymentClosedIsFalse =
   R658.round658QuantitativeBadCollarPaymentClosedIsFalse
+
+round650C2CriticalEnergyGrowthNormalFormAvailableIsTrue :
+  round650C2CriticalEnergyGrowthNormalFormAvailable ≡ true
+round650C2CriticalEnergyGrowthNormalFormAvailableIsTrue =
+  R659.round659C2StrictSurplusEqualsCriticalEnergyGrowthPlusMarginIsTrue
+
+round650C2EnergyGrowthMarginPaymentCompilesToC2IsTrue :
+  round650C2EnergyGrowthMarginPaymentCompilesToC2 ≡ true
+round650C2EnergyGrowthMarginPaymentCompilesToC2IsTrue =
+  R659.round659EnergyGrowthMarginPaymentCompilesToC2IsTrue
+
+round650C2EnergyGrowthMarginPaymentClosedIsFalse :
+  round650C2EnergyGrowthMarginPaymentClosed ≡ false
+round650C2EnergyGrowthMarginPaymentClosedIsFalse =
+  R659.round659EnergyGrowthMarginPaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
