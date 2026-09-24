@@ -7,6 +7,7 @@ from typing import Iterable, List, Optional
 import pytest
 
 from .checker import Checker, Diagnostic
+from .scope_backend import ExternalScopeBackend
 
 
 @dataclass(frozen=True)
@@ -47,6 +48,12 @@ def pytest_addoption(parser):
         default=False,
         help="suppress warning diagnostics in per-module reports",
     )
+    group.addoption(
+        "--agda-scope-command",
+        action="store",
+        default=None,
+        help="optional Agda-aware command that confirms/suppresses scope diagnostics",
+    )
 
 
 def pytest_configure(config):
@@ -69,7 +76,14 @@ def _repo_root(config) -> Path:
 def _checker(config) -> Checker:
     cached = getattr(config, "_dashi_agda_checker", None)
     if cached is None:
-        cached = Checker(_repo_root(config))
+        root = _repo_root(config)
+        command = config.getoption("--agda-scope-command")
+        scope_backend = (
+            ExternalScopeBackend(command, cwd=root)
+            if command
+            else None
+        )
+        cached = Checker(root, scope_backend=scope_backend)
         setattr(config, "_dashi_agda_checker", cached)
     return cached
 
@@ -107,7 +121,8 @@ def _selected_modules(
 def _format_diagnostic(diagnostic: Diagnostic) -> str:
     head = (
         f"{diagnostic.path}:{diagnostic.line}:{diagnostic.column}: "
-        f"{diagnostic.severity}: {diagnostic.code}: {diagnostic.message}"
+        f"{diagnostic.severity}: {diagnostic.code}: {diagnostic.message} "
+        f"[evidence={diagnostic.evidence}; requires={diagnostic.minimum_evidence}]"
     )
     if diagnostic.hint:
         return f"{head}\n  hint: {diagnostic.hint}"
