@@ -1,0 +1,32 @@
+{
+  "artifactSchema": "dashi-grqft-einstein-physical-coupling-candidate-v1",
+  "source": {
+    "path": "data/authority/si_metrology_20260615/nist_constants_allascii_2022.txt",
+    "sha256": "77fb90e66c40db3e6eb16630bc9c88e4c7c8beddbe5e71be406f2f26e3f67e67",
+    "row": "Newtonian constant of gravitation                           6.674 30 e-11            0.000 15 e-11            m^3 kg^-1 s^-2"
+  },
+  "convention": "energy-density: G_mu_nu = (8*pi*G/c^4) T_mu_nu",
+  "G": {
+    "value": 6.6743e-11,
+    "standardUncertainty": 1.5e-15,
+    "unit": "m^3 kg^-1 s^-2",
+    "relativeStandardUncertainty": 0.000022474266964325848
+  },
+  "c": {
+    "value": 299792458,
+    "unit": "m s^-1",
+    "exact": true
+  },
+  "eightPiG": {
+    "value": 1.6774345478283484e-9,
+    "standardUncertainty": 3.769911184307751e-14
+  },
+  "eightPiGOverC4": {
+    "value": 2.0766474428449717e-43,
+    "standardUncertainty": 4.667112902128249e-48,
+    "unit": "m J^-1"
+  },
+  "typedAcceptedGAuthorityTokenPresent": false,
+  "typedGNumericValueLoaded": false,
+  "physicalCouplingPromoted": false
+}

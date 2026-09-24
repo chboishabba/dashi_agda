@@ -30,6 +30,11 @@ on:
       - 'DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda'
       - 'scripts/grqft_w4_calibration_reconstruction.py'
       - 'outputs/grqft_w4_calibration_reconstruction.json'
+      - 'DASHI/Physics/Closure/EinsteinPhysicalCouplingCalibrationExact.agda'
+      - 'DASHI/Physics/Closure/W4IndependentPhysicalPredictionRequestExact.agda'
+      - 'scripts/grqft_einstein_physical_coupling_candidate.py'
+      - 'scripts/grqft_w4_score_physical_prediction.py'
+      - 'outputs/grqft_einstein_physical_coupling_candidate.json'
       - '.github/workflows/grqft-bidi-executable-residual.yml'
   workflow_dispatch:
 

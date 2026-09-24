@@ -178,3 +178,6 @@ import DASHI.Physics.Closure.GRQFTExecutableClosureMatrixExact
 
 import DASHI.Physics.Closure.W4CalibrationFailureMechanismExact
 import DASHI.Physics.Closure.GRQFTSIPhysicalCalibrationBridgeExact
+
+import DASHI.Physics.Closure.EinsteinPhysicalCouplingCalibrationExact
+import DASHI.Physics.Closure.W4IndependentPhysicalPredictionRequestExact
