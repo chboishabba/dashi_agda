@@ -350,3 +350,88 @@ mk = record
     summary = Checker(tmp_path).parse_summary(path)
     assert summary.ast.record_expressions
     assert {a.name for a in summary.ast.record_expressions[0].assignments} == {"A", "B"}
+
+
+
+def test_dependency_modules_does_not_build_global_graph(tmp_path):
+    leaf = write_module(tmp_path, "A.Leaf", "module A.Leaf where\n")
+    top = write_module(
+        tmp_path,
+        "A.Top",
+        "module A.Top where\n\nimport A.Leaf\n",
+    )
+    checker = Checker(tmp_path)
+
+    def forbidden():
+        raise AssertionError("dependency_modules must not build the repository-wide graph")
+
+    checker.dependency_graph = forbidden
+    assert checker.dependency_modules(top) == ["A.Leaf", "A.Top"]
+
+
+def test_per_module_check_does_not_build_global_graph(tmp_path):
+    leaf = write_module(tmp_path, "A.Leaf", "module A.Leaf where\n")
+    top = write_module(
+        tmp_path,
+        "A.Top",
+        "module A.Top where\n\nimport A.Leaf\n",
+    )
+    checker = Checker(tmp_path)
+
+    def forbidden():
+        raise AssertionError("per-module diagnostics must stay inside the import cone")
+
+    checker.dependency_graph = forbidden
+    checker.check(top)
+
+
+def test_data_constructor_index_uses_node_equality(tmp_path):
+    path = write_module(
+        tmp_path,
+        "DataIndex",
+        """module DataIndex where
+
+data D : Set where
+  c : Set → D
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    assert "D" in summary.ast.data
+    assert "c" in summary.ast.data["D"].constructors
+
+
+def test_record_fields_are_recovered_from_tree_sitter_siblings(tmp_path):
+    path = write_module(
+        tmp_path,
+        "SiblingRecord",
+        """module SiblingRecord where
+
+record R : Set₁ where
+  constructor r
+  field
+    A : Set
+    x : A
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    assert "R" in summary.ast.records
+    record = summary.ast.records["R"]
+    assert record.constructor == "r"
+    assert set(record.fields) == {"A", "x"}
+
+
+def test_reserved_keywords_are_not_function_clause_names(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Keywords",
+        """module Keywords where
+
+record R : Set where
+  constructor r
+  field
+    A : Set
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    assert not ({"where", "as", "constructor", "field"} & set(summary.ast.clauses))
+    assert not ({"where", "as", "constructor", "field"} & set(summary.ast.signatures))
