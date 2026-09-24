@@ -30,6 +30,8 @@ import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact as Finite
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.PolynomialFactorisationCostExact as Factor
+import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 
 Injective :
   ∀ {A B : Set} →
@@ -142,3 +144,57 @@ identityFactorization :
   (word : Word) →
   consumer word ≡ consumer ((λ value → value) word)
 identityFactorization consumer word = refl
+
+
+------------------------------------------------------------------------
+-- Coverage alone is vacuous: every polynomial candidate factors through the
+-- identity observer with polynomial observer and downstream costs.
+------------------------------------------------------------------------
+
+identityCostAwareFactorisation :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+  Factor.CostAwareDecisionFactorisation
+    cost
+    (Direct.decide candidate)
+identityCostAwareFactorisation {cost = cost} candidate = record
+  { Factor.observe = λ formula → formula
+  ; Factor.consumeObserved = Direct.decide candidate
+  ; Factor.factorisationCorrect = λ formula → refl
+  ; Factor.observerPolynomial = PR.identityMapPolynomial cost
+  ; Factor.observedConsumerPolynomial =
+      Direct.polynomialDecision candidate
+  }
+
+identityFactorisationObserverIsInjective :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+  Injective
+    (Factor.observe
+      (identityCostAwareFactorisation candidate))
+identityFactorisationObserverIsInjective candidate =
+  identityInjective
+
+identityFactorisationCannotProvideSATRelevantLoss :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : Direct.PolynomialSATDeciderCandidate cost) →
+  (satisfiableFormula unsatisfiableFormula : Cook.BooleanFormula) →
+  Cook.Satisfiable satisfiableFormula →
+  (Cook.Satisfiable unsatisfiableFormula → ⊥) →
+  Factor.observe
+      (identityCostAwareFactorisation candidate)
+      satisfiableFormula
+    ≡
+  Factor.observe
+      (identityCostAwareFactorisation candidate)
+      unsatisfiableFormula →
+  ⊥
+identityFactorisationCannotProvideSATRelevantLoss
+    candidate satisfiableFormula unsatisfiableFormula
+    satisfiableWitness unsatisfiableWitness =
+  injectiveFormulaObserverCannotCollapseSATAndUNSAT
+    (identityFactorisationObserverIsInjective candidate)
+    satisfiableFormula
+    unsatisfiableFormula
+    satisfiableWitness
+    unsatisfiableWitness
