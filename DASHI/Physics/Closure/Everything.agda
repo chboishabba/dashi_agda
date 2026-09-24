@@ -472,3 +472,5 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarExternalResidualFullSquareRou
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarCanonicalExternalFullSquareRound669Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650WeightedExternalProductRuleCommutatorRound670Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact
