@@ -1,0 +1,53 @@
+name: Forecast verification Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Statistics/Forecast*.agda'
+      - 'DASHI/Applications/WorldMonitorForecastScorecardExact.agda'
+      - 'DASHI/Interop/GodsEyeViewForecastVerificationExact.agda'
+      - 'DASHI/Core/ObjectDecompositionResidualRouterExact.agda'
+      - 'DASHI/Reasoning/ForecastWaveHyperfabricCrossPollinationExact.agda'
+      - 'DASHI/ForecastVerificationEverything.agda'
+      - '.github/workflows/forecast-verification-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: forecast-verification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preflight-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Install Agda semantic preflight
+        run: python3 -m pip install -e tools/agda_preflight
+
+      - name: Fast tree-sitter / shallow semantic preflight
+        run: |
+          files=(
+            DASHI/Statistics/ForecastVerificationKernelExact.agda
+            DASHI/Statistics/ForecastResolutionSelectionExact.agda
+            DASHI/Statistics/ForecastCalibrationDecompositionExact.agda
+            DASHI/Applications/WorldMonitorForecastScorecardExact.agda
+            DASHI/Interop/GodsEyeViewForecastVerificationExact.agda
+            DASHI/Core/ObjectDecompositionResidualRouterExact.agda
+            DASHI/Reasoning/ForecastWaveHyperfabricCrossPollinationExact.agda
+            DASHI/ForecastVerificationEverything.agda
+          )
+          for f in "${files[@]}"; do
+            dashi-agda-preflight --root . "$f"
+          done
+
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+
+      - uses: cachix/install-nix-action@630ae543ea3a38bd42886f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Typecheck focused forecast verification root
+        run: nix develop .# --command agda -i . DASHI/ForecastVerificationEverything.agda
