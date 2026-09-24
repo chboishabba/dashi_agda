@@ -51,6 +51,7 @@ import DASHI.Physics.Closure.NSTriadKNR650WeightedExternalProductRuleCommutatorR
 import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationNonzeroWeldRound671Exact as R671
 import DASHI.Physics.Closure.NSTriadKNR650ExternalTotalizationZeroBranchRound672Exact as R672
 import DASHI.Physics.Closure.NSTriadKNR650ExternalZeroBranchEliminationRound673Exact as R673
+import DASHI.Physics.Closure.NSTriadKNR650ExternalFullSquareToCanonicalRowsRound674Exact as R674
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -781,6 +782,18 @@ round650C2ExternalSignedPaymentStillOpenAfterTotalization : Bool
 round650C2ExternalSignedPaymentStillOpenAfterTotalization =
   R673.round673ExternalSignedPaymentClosed
 
+round650C2R606ExternalSpectatorRowToR631Closed : Bool
+round650C2R606ExternalSpectatorRowToR631Closed =
+  R674.round674R606ExternalSpectatorRowToR631Closed
+
+round650C2R606ExternalFullSquareToCanonicalRowsClosed : Bool
+round650C2R606ExternalFullSquareToCanonicalRowsClosed =
+  R674.round674R606ExternalFullSquareToCanonicalRowsClosed
+
+round650C2ExternalFullSquareSignedPaymentClosed : Bool
+round650C2ExternalFullSquareSignedPaymentClosed =
+  R674.round674ExternalSignedPaymentClosed
+
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue :
   round650C2ExternalNetworkOnLiteralResidualFullSquare ≡ true
 round650C2ExternalNetworkOnLiteralResidualFullSquareIsTrue =
@@ -880,6 +893,21 @@ round650C2ExternalSignedPaymentStillOpenAfterTotalizationIsFalse :
   round650C2ExternalSignedPaymentStillOpenAfterTotalization ≡ false
 round650C2ExternalSignedPaymentStillOpenAfterTotalizationIsFalse =
   R673.round673ExternalSignedPaymentClosedIsFalse
+
+round650C2R606ExternalSpectatorRowToR631ClosedIsTrue :
+  round650C2R606ExternalSpectatorRowToR631Closed ≡ true
+round650C2R606ExternalSpectatorRowToR631ClosedIsTrue =
+  R674.round674R606ExternalSpectatorRowToR631ClosedIsTrue
+
+round650C2R606ExternalFullSquareToCanonicalRowsClosedIsTrue :
+  round650C2R606ExternalFullSquareToCanonicalRowsClosed ≡ true
+round650C2R606ExternalFullSquareToCanonicalRowsClosedIsTrue =
+  R674.round674R606ExternalFullSquareToCanonicalRowsClosedIsTrue
+
+round650C2ExternalFullSquareSignedPaymentClosedIsFalse :
+  round650C2ExternalFullSquareSignedPaymentClosed ≡ false
+round650C2ExternalFullSquareSignedPaymentClosedIsFalse =
+  R674.round674ExternalSignedPaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
