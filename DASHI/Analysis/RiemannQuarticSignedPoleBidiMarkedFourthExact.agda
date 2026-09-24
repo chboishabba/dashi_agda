@@ -375,3 +375,59 @@ completeJetAbsorbTransportedIntoAgdaKernelHere = false
 completeJetAbsorbInterpretation : String
 completeJetAbsorbInterpretation =
   "Preferred Clay-facing route: use the complete quartic jet, not the older wrong-polarity/fail-closed ABSORB candidate.  V4/H4 carrier work, explicit mu floor, complete-jet source orientation, and sixth-debt scalarization are Lean source-written donors.  The remaining preferred analytic wall is one strict scalar inequality comparing the exposed completeV4H4AbsorbBudgetAt against compensationTargetThreshold while retaining FarExact with sign."
+
+
+------------------------------------------------------------------------
+-- DIRECT STRICT-ABSORB -> G3 COMPILER DONOR
+--
+-- Lean PR #22 now compiles the preferred complete-jet scalar budget directly
+-- through the already-owned cofinal exact-source limit and same-object tsum
+-- weld into the literal completed G3 inequality.
+--
+-- Consequently there is no remaining preferred API/assembly seam between the
+-- strict scalar test and G3.  The only open preferred proposition is the
+-- eventual strict inequality
+--
+--   completeV4H4AbsorbBudgetAt EV n
+--     <= compensationTargetThreshold rho - eps.
+--
+-- This remains a Lean donor/status receipt, not an Agda-native analytic proof.
+------------------------------------------------------------------------
+
+data CompleteJetAbsorbCompilerCoordinate : Set where
+  completeStrictAbsorbFiniteSourceCompiler :
+    CompleteJetAbsorbCompilerCoordinate
+  completeStrictAbsorbCofinalGlobalCompiler :
+    CompleteJetAbsorbCompilerCoordinate
+  completeStrictAbsorbDirectG3Compiler :
+    CompleteJetAbsorbCompilerCoordinate
+  completeStrictScalarInequality :
+    CompleteJetAbsorbCompilerCoordinate
+
+completeJetAbsorbCompilerStatus :
+  CompleteJetAbsorbCompilerCoordinate -> BidiMarkedFourthStatus
+completeJetAbsorbCompilerStatus completeStrictAbsorbFiniteSourceCompiler =
+  theoremOwned
+completeJetAbsorbCompilerStatus completeStrictAbsorbCofinalGlobalCompiler =
+  theoremOwned
+completeJetAbsorbCompilerStatus completeStrictAbsorbDirectG3Compiler =
+  theoremOwned
+completeJetAbsorbCompilerStatus completeStrictScalarInequality =
+  openAnalyticObstruction
+
+completeStrictAbsorbDirectG3CompilerPaid :
+  completeJetAbsorbCompilerStatus completeStrictAbsorbDirectG3Compiler
+    ≡ theoremOwned
+completeStrictAbsorbDirectG3CompilerPaid = refl
+
+completeStrictScalarInequalityRemainsOpen :
+  completeJetAbsorbCompilerStatus completeStrictScalarInequality
+    ≡ openAnalyticObstruction
+completeStrictScalarInequalityRemainsOpen = refl
+
+completeJetDirectG3LeanDonorHead : String
+completeJetDirectG3LeanDonorHead =
+  "22dd5b83c5556cd11f28335a3477af49dd646e71"
+
+completeJetDirectG3TransportedIntoAgdaKernelHere : Bool
+completeJetDirectG3TransportedIntoAgdaKernelHere = false
