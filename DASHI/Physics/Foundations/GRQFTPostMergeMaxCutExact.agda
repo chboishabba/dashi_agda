@@ -16,7 +16,6 @@ data GRQFTPostMergeLeaf : Set where
   grDiscreteToContinuumSameObjectRealization : GRQFTPostMergeLeaf
   cmp119StressToLiteralPinnedStressAttachment : GRQFTPostMergeLeaf
   pinnedLiteralYMToRecoveredQFTAttachment : GRQFTPostMergeLeaf
-  selectedPhysicalSectorEqualsDeclaredQFTTotal : GRQFTPostMergeLeaf
   grAnchoredCMP119CrossSectorStressEquality : GRQFTPostMergeLeaf
   physicalDrellYanAbsoluteProjectionReplacement : GRQFTPostMergeLeaf
   acceptedMeasuredGAndEmpiricalAuthority : GRQFTPostMergeLeaf
@@ -27,7 +26,6 @@ canonicalGRQFTPostMergeLeaves =
   grDiscreteToContinuumSameObjectRealization
   ∷ cmp119StressToLiteralPinnedStressAttachment
   ∷ pinnedLiteralYMToRecoveredQFTAttachment
-  ∷ selectedPhysicalSectorEqualsDeclaredQFTTotal
   ∷ grAnchoredCMP119CrossSectorStressEquality
   ∷ physicalDrellYanAbsoluteProjectionReplacement
   ∷ acceptedMeasuredGAndEmpiricalAuthority
@@ -61,9 +59,9 @@ record GRQFTPostMergeMaxCut : Set where
     secondQFTStressTheoremRequiredIsFalse :
       secondQFTStressTheoremRequired ≡ false
 
-    selectedPhysicalSectorTotalEqualityStillRequired : Bool
-    selectedPhysicalSectorTotalEqualityStillRequiredIsTrue :
-      selectedPhysicalSectorTotalEqualityStillRequired ≡ true
+    singleSectorTotalizationDefinitional : Bool
+    singleSectorTotalizationDefinitionalIsTrue :
+      singleSectorTotalizationDefinitional ≡ true
 
     terminalGRQFTPromoted : Bool
     terminalGRQFTPromotedIsFalse :
@@ -101,4 +99,4 @@ postMergeTerminalPromotionStillFalse = refl
 
 frontierSummary : String
 frontierSummary =
-  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR discrete-to-continuum same-object realization, two QFT same-object attachments, selected-sector=declared-total equality, GR-anchored CMP119 cross-sector stress equality, physical absolute-DY replacement and external authority/empirical validation."
+  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR discrete-to-continuum same-object realization, two QFT same-object attachments, single-sector totalization is definitional; GR-anchored CMP119 cross-sector stress equality, physical absolute-DY replacement and external authority/empirical validation."

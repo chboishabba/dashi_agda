@@ -26,6 +26,9 @@ files=(
   DASHI/Physics/Foundations/StressEnergyEqualityCoreExact.agda
   DASHI/Physics/Foundations/CMP119GRAnchoredStressEqualityCoreExact.agda
   DASHI/Physics/Foundations/StressEnergyEqualityCoreValidation.agda
+  DASHI/Physics/Foundations/SingleSectorUnifiedCandidateExact.agda
+  DASHI/Physics/Foundations/SingleSectorRecoveryTransportExact.agda
+  DASHI/Physics/Foundations/SingleSectorUnifiedCandidateValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda
