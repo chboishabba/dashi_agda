@@ -19,6 +19,8 @@ files=(
   DASHI/Physics/Closure/GRQFTExecutableClosureMatrixExact.agda
   DASHI/Physics/Closure/W4CalibrationFailureMechanismExact.agda
   DASHI/Physics/Closure/GRQFTSIPhysicalCalibrationBridgeExact.agda
+  DASHI/Physics/Closure/EinsteinPhysicalCouplingCalibrationExact.agda
+  DASHI/Physics/Closure/W4IndependentPhysicalPredictionRequestExact.agda
   DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda
   DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda
 )
@@ -54,6 +56,18 @@ assert p["residualMechanism"]["logLinearCoverage"] > 0.95
 assert p["promotesW4"] is False
 PY
 
+coupling_json="$(mktemp)"
+trap 'rm -f "$tmp_json" "$matrix_json" "$w4_reconstruction_json" "$coupling_json"' EXIT
+python3 scripts/grqft_einstein_physical_coupling_candidate.py --output "$coupling_json" >/dev/null
+python3 - "$coupling_json" <<'PY'
+import json,sys
+p=json.load(open(sys.argv[1]))
+assert p["G"]["value"] == 6.67430e-11
+assert p["c"]["exact"] is True
+assert p["typedAcceptedGAuthorityTokenPresent"] is False
+assert p["physicalCouplingPromoted"] is False
+PY
+
 cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-grqft-bidi}"
 export DASHI_AGDA29_CACHE_ROOT="$cache_root"
 export DASHI_STATUS_DIR="${DASHI_STATUS_DIR:-$cache_root/status}"
@@ -73,6 +87,8 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Closure/GRQFTExecutableClosureMatrixExact.agda \
   DASHI/Physics/Closure/W4CalibrationFailureMechanismExact.agda \
   DASHI/Physics/Closure/GRQFTSIPhysicalCalibrationBridgeExact.agda \
+  DASHI/Physics/Closure/EinsteinPhysicalCouplingCalibrationExact.agda \
+  DASHI/Physics/Closure/W4IndependentPhysicalPredictionRequestExact.agda \
   DASHI/Physics/Foundations/GRLiteralRecoveryRealizationFrontierExact.agda \
   DASHI/Physics/Foundations/PinnedYangMillsRecoveredQFTAttachmentExact.agda \
   DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda
