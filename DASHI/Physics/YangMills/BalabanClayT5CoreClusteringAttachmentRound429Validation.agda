@@ -14,3 +14,8 @@ clusteringAttachmentCompilerMachineChecked = refl
 independentH2ClusteringPruned :
   R429.round429IndependentH2ClusteringInputRequired ≡ false
 independentH2ClusteringPruned = refl
+
+
+coreConstructionDoesNotRequireClustering :
+  R429.round429ClusteringRequiredForCoreConstruction ≡ false
+coreConstructionDoesNotRequireClustering = refl
