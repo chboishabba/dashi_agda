@@ -28,6 +28,10 @@ literalSubsequenceTightnessRemainsPhysical :
   R428.round428EveryLiteralSubsequenceTightLevel ≡ conditional
 literalSubsequenceTightnessRemainsPhysical = refl
 
-uniqueClusterPointRemainsPhysical :
-  R428.round428EveryExtractedClusterPointIsContinuumLevel ≡ conditional
-uniqueClusterPointRemainsPhysical = refl
+uniqueClusterPointCompilerOwned :
+  R428.round428EveryExtractedClusterPointIsContinuumLevel ≡ machineChecked
+uniqueClusterPointCompilerOwned = refl
+
+clusteringNotRequiredForCoreRecovery :
+  R428.round428ClusteringRequiredForCoreRecovery ≡ false
+clusteringNotRequiredForCoreRecovery = refl
