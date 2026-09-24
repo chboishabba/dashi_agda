@@ -142,3 +142,37 @@ decideFiniteSATBoolComplete formula witness
 
     caseImpossible : ⊥ → false ≡ true
     caseImpossible ()
+
+
+------------------------------------------------------------------------
+-- Computability-level self-diagonal no-go.
+--
+-- A correct total SAT decider cannot admit a formula satisfying
+--
+--   SAT(phi) <-> decider(phi) = false.
+--
+-- This is the exact reason the proposed Clay route must exploit the
+-- POLYNOMIAL resource restriction rather than a bare recursion theorem.
+------------------------------------------------------------------------
+
+correctFiniteSATDeciderBlocksSelfDiagonal :
+  ∀ {variables}
+    (formula : SAT.BooleanFormula variables) →
+  (decideFiniteSATBool formula ≡ false →
+    SAT.Satisfying formula) →
+  (SAT.Satisfying formula →
+    decideFiniteSATBool formula ≡ false) →
+  ⊥
+correctFiniteSATDeciderBlocksSelfDiagonal
+    formula satisfiableIfRejects rejectsIfSatisfiable
+    with decideFiniteSATBool formula
+... | true =
+  falseNotTrue
+    (rejectsIfSatisfiable
+      (decideFiniteSATBoolSound formula refl))
+... | false =
+  falseNotTrue
+    (sym
+      (decideFiniteSATBoolComplete
+        formula
+        (satisfiableIfRejects refl)))
