@@ -1,0 +1,45 @@
+module DASHI.Culture.CohnInstitutionalFeministTwoEyedCrossPollinationRegression where
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (true; false)
+
+import DASHI.Culture.CohnInstitutionalFeministTwoEyedCrossPollinationExact as Bridge
+import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LI
+import DASHI.Core.RepresentationSubjectPositionNonfactorabilityExact as Subject
+import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
+
+sameCarrierStillNotSameGrammar :
+  LI.irigarayIsPermutationOfLacanGraph LI.canonicalLacanIrigarayGrammarBoundary ≡ false
+sameCarrierStillNotSameGrammar = refl
+
+representationStillNotOriginatingAuthority :
+  Subject.exchangeVisibilityImpliesOriginatingAuthority Subject.canonicalRepresentationSubjectPositionBoundary ≡ false
+representationStillNotOriginatingAuthority = refl
+
+sharedObservationStillNotSameHistory :
+  TwoEyed.sharedObservationMeansSameEpistemicHistory TwoEyed.canonicalKimmererTwoEyedSeeingBoundary ≡ false
+sharedObservationStillNotSameHistory = refl
+
+existingTheoryPaysErasedRelationGrammar :
+  Bridge.existingTheoryPaysErasedRelationGrammar Bridge.canonicalCrossPollinationBoundary ≡ true
+existingTheoryPaysErasedRelationGrammar = refl
+
+existingTheoryPaysSubjectAuthoritySeparation :
+  Bridge.existingTheoryPaysSubjectAuthoritySeparation Bridge.canonicalCrossPollinationBoundary ≡ true
+existingTheoryPaysSubjectAuthoritySeparation = refl
+
+existingTheoryPaysProvenanceNonFusion :
+  Bridge.existingTheoryPaysProvenanceNonFusion Bridge.canonicalCrossPollinationBoundary ≡ true
+existingTheoryPaysProvenanceNonFusion = refl
+
+constructedIgnoranceAlreadyPaidByIntersectionality :
+  Bridge.constructedIgnoranceAlreadyPaidByIntersectionality Bridge.canonicalCrossPollinationBoundary ≡ false
+constructedIgnoranceAlreadyPaidByIntersectionality = refl
+
+hermeneuticalRefusalAlreadyPaidByTwoEyedSeeing :
+  Bridge.hermeneuticalRefusalAlreadyPaidByTwoEyedSeeing Bridge.canonicalCrossPollinationBoundary ≡ false
+hermeneuticalRefusalAlreadyPaidByTwoEyedSeeing = refl
+
+newSourcesCollapseIntoExistingTheory :
+  Bridge.newSourcesCollapseIntoExistingTheory Bridge.canonicalCrossPollinationBoundary ≡ false
+newSourcesCollapseIntoExistingTheory = refl
