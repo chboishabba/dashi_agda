@@ -23,7 +23,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
 import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as A3
-import DASHI.Physics.YangMills.YangMillsFiniteOSFromConcreteT1Round532Exact as FiniteOS
+import DASHI.Physics.YangMills.YangMillsConcreteT1FiniteOSSourceRound545Exact as FiniteOS
 import DASHI.Physics.YangMills.YangMillsConcreteQuantitativeOS05Round514Exact as Quantitative
 import DASHI.Physics.YangMills.BalabanWilsonWEXTMaxCutRound494Exact as WEXT
 import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
@@ -59,7 +59,7 @@ familyLevel a2HistoryCoordinate =
 familyLevel a3ProjectiveRepresentation =
   conditional
 familyLevel finiteT1AndPublishedOS =
-  conditional
+  FiniteOS.literalRound545ConcreteT1FiniteOSSourceLevel
 familyLevel quantitativeT5CMP119Alignment =
   Quantitative.literalRound514SameFiniteExpectationAttachmentLevel
 familyLevel bWilsonWEXT =
@@ -108,7 +108,7 @@ a3ExpectationIntegralIdentificationLevel =
 -- only independent same-family finite-OS source seam.
 finiteOSBosonicAttachmentLevel : ProofLevel
 finiteOSBosonicAttachmentLevel =
-  FiniteOS.literalRound532BosonicSameFamilyAttachmentLevel
+  FiniteOS.literalRound545ConcreteT1FiniteOSSourceLevel
 
 -- WEXT remains two genuine Wilson source statements.
 wextTwoMarkExpansionLevel : ProofLevel
