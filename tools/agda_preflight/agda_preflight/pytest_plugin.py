@@ -36,6 +36,12 @@ def pytest_addoption(parser):
         help="for selected .agda roots, also collect reverse-import consumers",
     )
     group.addoption(
+        "--agda-deps",
+        action="store_true",
+        default=False,
+        help="for selected .agda roots, collect recursive imports in dependency-first order",
+    )
+    group.addoption(
         "--agda-errors-only",
         action="store_true",
         default=False,
@@ -72,11 +78,19 @@ def _module_path(checker: Checker, module: str) -> Path:
     return checker.module_path(module)
 
 
-def _selected_modules(checker: Checker, path: Path, closure: bool) -> List[CollectedModule]:
+def _selected_modules(
+    checker: Checker,
+    path: Path,
+    closure: bool,
+    dependencies: bool,
+) -> List[CollectedModule]:
     summary = checker.parse_summary(path)
     modules = [summary.module_name]
+    if dependencies:
+        modules = checker.dependency_modules(path)
     if closure:
-        modules = checker.affected_modules(path)
+        affected = checker.affected_modules(path)
+        modules = list(dict.fromkeys([*modules, *affected]))
 
     result: List[CollectedModule] = []
     seen = set()
@@ -106,13 +120,14 @@ class AgdaModuleFile(pytest.File):
         checker = _checker(config)
         path = Path(str(self.path)).resolve()
         closure = config.getoption("--agda-closure")
+        dependencies = config.getoption("--agda-deps")
 
         seen = getattr(config, "_dashi_agda_collected_modules", None)
         if seen is None:
             seen = set()
             setattr(config, "_dashi_agda_collected_modules", seen)
 
-        for collected in _selected_modules(checker, path, closure):
+        for collected in _selected_modules(checker, path, closure, dependencies):
             if collected.module in seen:
                 continue
             seen.add(collected.module)
