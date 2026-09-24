@@ -718,88 +718,104 @@ def extended_diagnostics(checker, s, D):
                     line, col = _line_col(source, m.start())
                     out.append(_diag(D, "TSAGDA075", f"equality compares constructors from different datatypes: {other.group(1)} vs {cname}", s, line, col))
 
-    # TSAGDA080/081/085/086/087/089: simple non-indexed pattern facts.
-    for name, cs in clauses.items():
-        sig = s.signatures.get(name)
-        if not sig: continue
-        first_domain = _split_arrows(sig.type_text)[0].strip() if _split_arrows(sig.type_text) else ""
-        dtype = next((d for d in data.values() if re.search(rf"\b{re.escape(d.name)}\b", first_domain)), None)
-        if dtype and not dtype.indexed:
-            used = []
-            absurd = []
-            for line, lhs, rhs in cs:
-                if "()" in lhs: absurd.append(line)
-                heads = [cn for cn in dtype.constructors if re.search(rf"\b{re.escape(cn)}\b", lhs)]
-                used.extend(heads)
-                for tok in re.findall(rf"\b({_IDENT})\b", lhs):
-                    if tok in ctors and ctors[tok].datatype != dtype.name:
-                        out.append(_diag(D, "TSAGDA081", f"pattern constructor {tok} belongs to {ctors[tok].datatype}, expected {dtype.name}", s, line))
-            if absurd and dtype.constructors:
-                for line in absurd:
-                    out.append(_diag(D, "TSAGDA085", f"absurd pattern used for visibly inhabited datatype {dtype.name}", s, line))
-            if dtype.constructors and used and set(used) != set(dtype.constructors) and not any(re.fullmatch(rf"{re.escape(name)}\s+_", lhs) for _, lhs, _ in cs):
-                missing = sorted(set(dtype.constructors) - set(used))
-                if missing: out.append(_diag(D, "TSAGDA087", f"simple finite coverage for {name} misses constructors: {', '.join(missing)}", s, cs[0][0]))
-            if len(used) != len(set(used)):
-                out.append(_diag(D, "TSAGDA089", f"{name} has duplicate constructor branches in simple finite coverage", s, cs[0][0]))
+    # TSAGDA101/103/104: AST-backed equality combinator outer-shape checks.
+    for name, clause_items in s.ast.clauses.items():
+        target_shape = eq_shapes.get(name)
+        for clause in clause_items:
+            if clause.rhs_node is None:
+                continue
+            tokens = significant_tokens(s.ast.source_bytes, clause.rhs_node)
+            for app in applications(s.ast.source_bytes, clause.rhs_node):
+                short = app.head.rsplit(".", 1)[-1]
+                if short == "sym" and app.explicit_args and target_shape is not None:
+                    proof_name = app.explicit_args[0].text.strip()
+                    proof_shape = eq_shapes.get(proof_name)
+                    if proof_shape is not None:
+                        left = compatible_rigid_heads(proof_shape.lhs, target_shape.rhs)
+                        right = compatible_rigid_heads(proof_shape.rhs, target_shape.lhs)
+                        if left is False or right is False:
+                            out.append(_diag(D, "TSAGDA101", f"sym proof endpoint head does not match target equality for {name}", s, clause.line))
+                elif short == "cong" and app.explicit_args:
+                    function_name = app.explicit_args[0].text.strip()
+                    function_sig = s.ast.signatures.get(function_name)
+                    if function_sig is not None and function_sig.type_node is not None:
+                        arity = explicit_arity(shape_from_node(s.ast.source_bytes, function_sig.type_node))
+                        if arity == 0:
+                            out.append(_diag(D, "TSAGDA103", f"cong function {function_name} has no visible function argument", s, clause.line))
+            if target_shape is None:
+                for token in tokens:
+                    if token.text in eq_shapes:
+                        out.append(_diag(D, "TSAGDA104", f"equality proof {token.text} is used as the value of non-equality result {name}", s, clause.line))
+                        break
 
-    # TSAGDA101/103/104: equality combinator outer-shape checks.
-    for name, cs in clauses.items():
-        for line, lhs, rhs in cs:
-            sm = re.search(rf"\bsym\s+({_IDENT})", rhs)
-            if sm and sm.group(1) in eq_shapes and name in eq_shapes:
-                pa_shape = eq_shapes[sm.group(1)]; target_shape = eq_shapes[name]
-                pa, pb = terminal_head(pa_shape.lhs), terminal_head(pa_shape.rhs); ta, tb = terminal_head(target_shape.lhs), terminal_head(target_shape.rhs)
-                if _terminal(pa) and _terminal(tb) and _terminal(pa) != _terminal(tb):
-                    out.append(_diag(D, "TSAGDA101", f"sym proof endpoint head does not match target equality for {name}", s, line))
-            cm = re.search(rf"\bcong\s+({_IDENT})\s+({_IDENT})", rhs)
-            if cm and cm.group(2) in eq and cm.group(1) in s.signatures:
-                fun = s.signatures[cm.group(1)]
-                if _arity(fun.type_text) == 0:
-                    out.append(_diag(D, "TSAGDA103", f"cong function {cm.group(1)} has no visible function argument", s, line))
-
-    # TSAGDA120/121/123: rigid declaration sanity.
-    known_terms = set(clauses) | set(ctors)
-    for rname, rec in s.records.items():
-        for fname, fi in rec.fields.items():
-            head = _terminal(fi.type_text)
-            if head in known_terms and head not in data and head not in s.records:
-                out.append(_diag(D, "TSAGDA120", f"field {rname}.{fname} has known term {head} in type-head position", s, fi.line))
-    for dname, decl in data.items():
+    # TSAGDA120/121/123: AST-backed rigid declaration sanity.
+    known_terms = set(s.ast.clauses) | set(ctors)
+    for rname, rec in s.ast.records.items():
+        for fname, field in rec.fields.items():
+            if field.type_node is None:
+                continue
+            head = terminal_head(shape_from_node(s.ast.source_bytes, field.type_node))
+            if head in known_terms and head not in data and head not in s.ast.records:
+                out.append(_diag(D, "TSAGDA120", f"field {rname}.{fname} has known term {head} in type-head position", s, field.line))
+                out.append(_diag(D, "TSAGDA123", f"projection {rname}.{fname} has known term {head} in type position", s, field.line))
+    for dname, decl in s.ast.data.items():
         for ctor in decl.constructors.values():
-            head = _terminal(ctor.type_text)
+            if ctor.type_node is None:
+                continue
+            head = terminal_head(shape_from_node(s.ast.source_bytes, ctor.type_node))
             if head in known_terms and head not in data:
                 out.append(_diag(D, "TSAGDA121", f"constructor {ctor.name} result resolves to known term {head}", s, ctor.line))
 
-    # TSAGDA141/142 are advisory structural recursion warnings.
-    for name, cs in clauses.items():
-        recursive = [(line, lhs, rhs) for line, lhs, rhs in cs if re.search(rf"\b{re.escape(name)}\b", rhs)]
-        for line, lhs, rhs in recursive:
-            args = lhs.split()[1:]
-            call = re.search(rf"\b{re.escape(name)}\s+(.+)$", rhs)
-            if call and args:
-                rhs_args = call.group(1).split()[:len(args)]
-                if any(a.isdigit() and b.isdigit() and int(b) > int(a) for a, b in zip(args, rhs_args)):
-                    out.append(_diag(D, "TSAGDA141", f"{name} has an obviously increasing numeric recursive argument", s, line, severity="warning", confidence="medium"))
-                if rhs_args and not any((a.startswith("(") and b in a) or b in {"pred", "tail"} for a, b in zip(args, rhs_args)):
-                    out.append(_diag(D, "TSAGDA142", f"{name} recursive call has no syntactically obvious smaller argument", s, line, severity="warning", confidence="medium"))
+    # TSAGDA141/142 are advisory AST structural recursion warnings.
+    for name, clause_items in s.ast.clauses.items():
+        for clause in clause_items:
+            if clause.rhs_node is None:
+                continue
+            lhs_view = application_view(s.ast.source_bytes, clause.lhs_node)
+            lhs_args = tuple(arg.text for arg in lhs_view.explicit_args) if lhs_view is not None else ()
+            for app in applications(s.ast.source_bytes, clause.rhs_node):
+                if app.head.rsplit(".", 1)[-1] != name:
+                    continue
+                rhs_args = tuple(arg.text for arg in app.explicit_args[:len(lhs_args)])
+                if lhs_args and rhs_args:
+                    numeric_increase = False
+                    for left, right in zip(lhs_args, rhs_args):
+                        if left.isdigit() and right.isdigit() and int(right) > int(left):
+                            numeric_increase = True
+                    if numeric_increase:
+                        out.append(_diag(D, "TSAGDA141", f"{name} has an obviously increasing numeric recursive argument", s, clause.line, severity="warning", confidence="medium"))
+                    obvious_smaller = any(
+                        right in {"pred", "tail"} or (left.startswith("(") and right in left)
+                        for left, right in zip(lhs_args, rhs_args)
+                    )
+                    if not obvious_smaller:
+                        out.append(_diag(D, "TSAGDA142", f"{name} recursive call has no syntactically obvious smaller argument", s, clause.line, severity="warning", confidence="medium"))
 
     # TSAGDA143: termination bypass in proof-critical code.
-    if critical and ("{-# TERMINATING #-}" in source or "{-# NON_TERMINATING #-}" in source):
-        line = next((i for i, x in enumerate(source.splitlines(), 1) if "TERMINATING" in x), 1)
-        out.append(_diag(D, "TSAGDA143", "proof-critical code uses a termination-bypass pragma", s, line))
+    if critical:
+        for node in s.ast.pragmas:
+            text_value = s.ast.source_bytes[node.start_byte:node.end_byte].decode("utf-8", "replace").upper()
+            if "TERMINATING" in text_value:
+                out.append(_diag(D, "TSAGDA143", "proof-critical code uses a termination-bypass pragma", s, node.start_point[0] + 1))
 
     # TSAGDA152: mixfix holes versus visible arity.
     for sym, shape in fix.items():
         if "_" in sym and sym in s.signatures:
-            holes = sym.count("_"); want = _arity(s.signatures[sym].type_text)
+            holes = sym.count("_")
+            ast_sig = s.ast.signatures.get(sym)
+            want = (
+                explicit_arity(shape_from_node(s.ast.source_bytes, ast_sig.type_node))
+                if ast_sig is not None and ast_sig.type_node is not None else 0
+            )
             if holes != want:
                 out.append(_diag(D, "TSAGDA152", f"mixfix {sym} has {holes} holes but signature has {want} explicit arguments", s, s.signatures[sym].line, severity="warning", confidence="medium"))
 
-    # TSAGDA174: raw metas in module application/import-like syntax.
-    for m in re.finditer(rf"\bmodule\s+{_IDENT}\s*=\s*{_IDENT}(?:\.{_IDENT})*\s+_", clean):
-        line, col = _line_col(source, m.start())
-        out.append(_diag(D, "TSAGDA174", "module application contains raw underscore metavariable", s, line, col, severity="warning", confidence="medium"))
+    # TSAGDA174: raw metas in module applications.
+    for node in s.ast.module_macro_nodes:
+        tokens = significant_tokens(s.ast.source_bytes, node)
+        if any(token.text == "_" for token in tokens):
+            first = tokens[0] if tokens else None
+            out.append(_diag(D, "TSAGDA174", "module application contains raw underscore metavariable", s, first.line if first else node.start_point[0] + 1, first.column if first else 1, severity="warning", confidence="medium"))
 
     # TSAGDA200/201/203/206/208: DASHI-specific structural policy.
     if critical:
@@ -810,15 +826,26 @@ def extended_diagnostics(checker, s, D):
                 tokens = significant_tokens(s.ast.source_bytes, assignment.expr_node)
                 if len(tokens) == 1 and tokens[0].text == "_":
                     out.append(_diag(D, "TSAGDA201", f"proof-critical record field {assignment.name} contains raw metavariable", s, assignment.line))
-        for rname, rec in s.records.items():
-            for fname, fi in rec.fields.items():
-                if re.search(r"(agreement|proof|witness|receipt)", fname, re.I) and _terminal(fi.type_text) == "Set":
-                    out.append(_diag(D, "TSAGDA203", f"proof-like field {rname}.{fname} is unconstrained Set rather than an evident proposition/witness", s, fi.line, severity="warning", confidence="medium"))
-        if re.search(r"(FactorThrough|Admissib|Bidi)", s.module_name, re.I):
-            heads = [_terminal(sig.type_text) for sig in s.signatures.values()]
+        for rname, rec in s.ast.records.items():
+            for fname, field in rec.fields.items():
+                lowered = fname.lower()
+                if not any(word in lowered for word in ("agreement", "proof", "witness", "receipt")):
+                    continue
+                if field.type_node is None:
+                    continue
+                head = terminal_head(shape_from_node(s.ast.source_bytes, field.type_node))
+                if head == "Set":
+                    out.append(_diag(D, "TSAGDA203", f"proof-like field {rname}.{fname} is unconstrained Set rather than an evident proposition/witness", s, field.line, severity="warning", confidence="medium"))
+        module_lower = s.module_name.lower()
+        if any(word in module_lower for word in ("factorthrough", "admissib", "bidi")):
+            heads = [
+                terminal_head(shape_from_node(s.ast.source_bytes, sig.type_node))
+                for sig in s.ast.signatures.values()
+                if sig.type_node is not None
+            ]
             rigid = sorted(set(h for h in heads if h and "." in h))
             if len(rigid) > 1:
-                code = "TSAGDA208" if re.search(r"(FactorThrough|Admissib)", s.module_name, re.I) else "TSAGDA206"
+                code = "TSAGDA208" if any(word in module_lower for word in ("factorthrough", "admissib")) else "TSAGDA206"
                 out.append(_diag(D, code, f"bridge module exposes multiple qualified carrier/result families: {', '.join(rigid[:6])}", s, 1))
 
 
