@@ -117,7 +117,7 @@ v4h4Status finiteV4CarrierWeld = leanSourceWrittenDonor
 v4h4Status explicitLeftEndpointAtom = leanSourceWrittenDonor
 v4h4Status explicitV4H4AbsorbBudgetSurface = leanSourceWrittenDonor
 v4h4Status fourthAngularToG3OrientationFirewall = leanSourceWrittenDonor
-v4h4Status v4h4BudgetToLiteralG3Weld = openAnalyticObstruction
+v4h4Status v4h4BudgetToLiteralG3Weld = leanSourceWrittenDonor
 v4h4Status finalSignedAbsorption = openAnalyticObstruction
 v4h4Status terminalG3Compiler = compilerOwned
 
@@ -141,7 +141,7 @@ record V4H4Boundary : Set where
     explicitLeftEndpointAtomSourceWritten : Bool
     explicitV4H4AbsorbBudgetSurfaceSourceWritten : Bool
     fourthAngularToG3OrientationFirewallSourceWritten : Bool
-    v4h4BudgetToLiteralG3WeldPaid : Bool
+    v4h4BudgetToLiteralG3WeldSourceWritten : Bool
     finalSignedAbsorptionPaid : Bool
     terminalG3CompilerPaid : Bool
 
@@ -176,8 +176,8 @@ record V4H4Boundary : Set where
       explicitV4H4AbsorbBudgetSurfaceSourceWritten ≡ true
     fourthAngularToG3OrientationFirewallSourceWrittenIsTrue :
       fourthAngularToG3OrientationFirewallSourceWritten ≡ true
-    v4h4BudgetToLiteralG3WeldPaidIsFalse :
-      v4h4BudgetToLiteralG3WeldPaid ≡ false
+    v4h4BudgetToLiteralG3WeldSourceWrittenIsTrue :
+      v4h4BudgetToLiteralG3WeldSourceWritten ≡ true
     finalSignedAbsorptionPaidIsFalse :
       finalSignedAbsorptionPaid ≡ false
     terminalG3CompilerPaidIsTrue :
@@ -195,16 +195,16 @@ canonicalV4H4Boundary =
     true true true true true
     false
     true true true true
-    false false true
+    true false true
     refl
     refl refl refl refl
     refl refl refl refl refl
     refl
     refl refl refl refl
     refl refl refl
-    "The preferred Clay-facing local fourth-angular route is V4 plus H4, not a mandatory localized Montgomery theorem. V4 is an ordinary literal N-mu/RvM Abel specialization with a source-written 9*r^4*E compiler. H4 preserves sign: only 6*delta^2<a^2 can contribute positively, and that adverse cone is paid above by an a^4 envelope plus the existing fixed-window local zero-count theorem. Lean now also source-writes the exact finite carrier convention weld: the closed local vertical fourth carrier equals the literal half-open Zeta23 V4 carrier plus one explicit left-endpoint atom; SameOrd(t) contributes zero because the fourth weight vanishes there. The endpoint atom is bounded by the literal one-unit zero count rather than a generic-position choice. A new orientation firewall proves P_G3(rho)=m*S/(6*r^6)*(a^4-fourthAngular(rho)); therefore an upper bound on V4+H4 naturally gives a lower bound on the leading G3 quartic polynomial, not the upper source bound needed by the old compensation compiler. The old marked 0/2/4 producer remains an optional alternative."
-    "Do not call the V4/H4-to-G3 step mere plumbing: the source-written orientation identity shows the naive upper-bound ABSORB direction is wrong. The next Clay-relevant task is to find a same-object route that pays the required upper G3 source bound: for example a sufficiently sharp lower fourth-angular estimate, an exact cancellation with the a^4 carrier, or a different signed normal form. Only after that orientation problem is paid does the explicit strict scalar absorption inequality against compensationTargetThreshold become the terminal analytic test. Keep FarExact signed and do not replace this missing mathematics by a renamed hypothesis."
-    "V4, H4, the endpoint carrier weld, and the explicit absorption-budget surface are Lean source-written donors only. The budget-to-literal-G3 weld and the strict scalar absorption inequality remain unpaid. This owner is an Agda programme/status theorem and does not claim independent Agda-kernel replay or an exact-head Lean kernel receipt for those source tranches."
+    "The preferred Clay-facing local fourth-angular route is V4 plus H4, not a mandatory localized Montgomery theorem. V4 is an ordinary literal N-mu/RvM Abel specialization with a source-written 9*r^4*E compiler. H4 preserves sign: only 6*delta^2<a^2 can contribute positively, and that adverse cone is paid above by an a^4 envelope plus the existing fixed-window local zero-count theorem. Lean now also source-writes the exact finite carrier convention weld: the closed local vertical fourth carrier equals the literal half-open Zeta23 V4 carrier plus one explicit left-endpoint atom; SameOrd(t) contributes zero because the fourth weight vanishes there. The endpoint atom is bounded by the literal one-unit zero count rather than a generic-position choice. A new orientation firewall proves P_G3(rho)=m*S/(6*r^6)*(a^4-fourthAngular(rho)); therefore an upper bound on V4+H4 naturally gives a lower bound on the leading G3 quartic polynomial. Lean then pays the correct polarity instead: |V4| supplies a lower V4 bound, H4 has the unconditional lower envelope H4>=-(3/2)r^2 times local multiplicity, the local a^4 mass is at most 1/16 times that multiplicity, and the multiplicity is theorem-welded to the literal expanded Zeta23 count N(t-r-1,t+r]. This yields a source-written upper bound for literalOffOrdExactAt with the smooth mu fourth moment and FarExact still signed. The old marked 0/2/4 producer remains an optional alternative."
+    "The orientation problem is now paid source-written by the lower-fourth-angular route. The remaining Clay-facing analytic task is the literal strict scalar absorption inequality for the corrected budget: targetStrength/(6*(t/16)^6) times [EV + (1/16 + (3/2)r^2)*N(t-r-1,t+r] - localMuFourth] plus local remainder debt plus signed FarExact must lie below compensationTargetThreshold by a positive margin. Inspect and sharpen the dominating paid term if this fails; do not introduce a new abstract hypothesis or absolute-value FarExact."
+    "V4, H4, the endpoint carrier weld, the orientation firewall, and the corrected budget-to-literal-G3 upper weld are Lean source-written donors only. The strict scalar absorption inequality remains unpaid. This owner is an Agda programme/status theorem and does not claim independent Agda-kernel replay or an exact-head Lean kernel receipt for those source tranches."
 
 montgomeryProducerIsOptional :
   v4h4Status localizedMontgomeryProducer ≡ optionalAlternative
@@ -230,9 +230,9 @@ fourthAngularOrientationFirewallIsSourceWritten :
   v4h4Status fourthAngularToG3OrientationFirewall ≡ leanSourceWrittenDonor
 fourthAngularOrientationFirewallIsSourceWritten = refl
 
-budgetToLiteralG3WeldStillOpen :
-  v4h4Status v4h4BudgetToLiteralG3Weld ≡ openAnalyticObstruction
-budgetToLiteralG3WeldStillOpen = refl
+budgetToLiteralG3WeldIsSourceWritten :
+  v4h4Status v4h4BudgetToLiteralG3Weld ≡ leanSourceWrittenDonor
+budgetToLiteralG3WeldIsSourceWritten = refl
 
 absorptionRemainsTheAnalyticCut :
   v4h4Status finalSignedAbsorption ≡ openAnalyticObstruction
