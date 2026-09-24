@@ -53,13 +53,13 @@ projectsNeedNotOverlapToCompeteForElectricity :
   (SpatiallyOverlaps housingProject aiDataCentre → ⊥) ×
   CompetesFor housingProject aiDataCentre electricity
 projectsNeedNotOverlapToCompeteForElectricity =
-  (λ overlap → overlap) , (tt , tt)
+  (λ ()) , (tt , tt)
 
 noSpatialOverlapDoesNotImplyNoPlanningConflict :
   (SpatiallyOverlaps housingProject aiDataCentre → ⊥) ×
   CompetesFor housingProject aiDataCentre infrastructure
 noSpatialOverlapDoesNotImplyNoPlanningConflict =
-  (λ overlap → overlap) , (tt , tt)
+  (λ ()) , (tt , tt)
 
 ------------------------------------------------------------------------
 -- Observer/authority projections remain distinct while resource coupling may

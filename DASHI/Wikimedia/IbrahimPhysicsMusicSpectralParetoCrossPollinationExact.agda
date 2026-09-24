@@ -64,10 +64,10 @@ nsBahouriCheminDanchinDOI = "10.1007/978-3-642-16830-7"
 ------------------------------------------------------------------------
 
 data RepresentationStanding : Set where
-  noRepresentation
-  representationDeclared
-  transformPairPaid
-  structuralInvariantPaid
+  noRepresentation : RepresentationStanding
+  representationDeclared : RepresentationStanding
+  transformPairPaid : RepresentationStanding
+  structuralInvariantPaid : RepresentationStanding
   empiricalMusicInterpretationPaid : RepresentationStanding
 
 record MusicalSignalRepresentation : Set where
@@ -141,10 +141,10 @@ nsFourierInteractionReference =
 ------------------------------------------------------------------------
 
 data ParetoTarget : Set where
-  payMusicalRepresentation
-  payTransformPair
-  compareStructuralInvariants
-  testModeInteractionAnalogy
+  payMusicalRepresentation : ParetoTarget
+  payTransformPair : ParetoTarget
+  compareStructuralInvariants : ParetoTarget
+  testModeInteractionAnalogy : ParetoTarget
   importDomainSemantics : ParetoTarget
 
 record ParetoStep : Set where
@@ -224,15 +224,15 @@ currentSpectralTransportCandidate = spectral-transport-receipt
 ------------------------------------------------------------------------
 
 data SpectralTime : Set where
-  ibrahimSourceTime
-  musicObjectAcquiredTime
-  representationPaidTime
+  ibrahimSourceTime : SpectralTime
+  musicObjectAcquiredTime : SpectralTime
+  representationPaidTime : SpectralTime
   spectralTransportPaidTime : SpectralTime
 
 data SpectralInterpretation : Set where
-  navigationEdgeOnly
-  musicObjectOnly
-  spectralBridgeCandidate
+  navigationEdgeOnly : SpectralInterpretation
+  musicObjectOnly : SpectralInterpretation
+  spectralBridgeCandidate : SpectralInterpretation
   spectralBridgePaid : SpectralInterpretation
 
 data SpectralSummary : Set where

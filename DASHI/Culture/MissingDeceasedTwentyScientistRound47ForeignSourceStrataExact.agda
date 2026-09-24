@@ -15,8 +15,8 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data ForeignSourceRole : Set where
-  chinaDomesticPrimaryLike
-  hongKongIndependentReporting
+  chinaDomesticPrimaryLike : ForeignSourceRole
+  hongKongIndependentReporting : ForeignSourceRole
   nonUSCrossNationalComparison : ForeignSourceRole
 
 record ForeignSourceReceipt : Set where

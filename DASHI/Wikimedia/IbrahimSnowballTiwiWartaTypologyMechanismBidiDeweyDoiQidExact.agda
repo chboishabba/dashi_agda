@@ -101,7 +101,7 @@ youngEtAl2025 = warta-primary-source
 ------------------------------------------------------------------------
 
 data WartaSubtype : Set where
-  eucalyptOpenForestSavanna
+  eucalyptOpenForestSavanna : WartaSubtype
   eucalyptMixedSpeciesSavanna : WartaSubtype
 
 genericSavannaQidOf : WartaSubtype → String

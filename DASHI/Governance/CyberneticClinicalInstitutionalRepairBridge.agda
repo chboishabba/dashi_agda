@@ -27,20 +27,15 @@ listCount (_ ∷ xs) =
 -- Governance domains.
 
 data GovernanceDomain : Set where
-  cybersynSystemFiveDomain :
-    GovernanceDomain
+  cybersynSystemFiveDomain : GovernanceDomain
 
-  educationFeedbackDomain :
-    GovernanceDomain
+  educationFeedbackDomain : GovernanceDomain
 
-  transHealthcareGateDomain :
-    GovernanceDomain
+  transHealthcareGateDomain : GovernanceDomain
 
-  medicalCannabisDrivingDomain :
-    GovernanceDomain
+  medicalCannabisDrivingDomain : GovernanceDomain
 
-  institutionalRepairDomain :
-    GovernanceDomain
+  institutionalRepairDomain : GovernanceDomain
 
 canonicalGovernanceDomains :
   List GovernanceDomain

@@ -19,35 +19,25 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- authority.
 
 data DomainLabel : Set where
-  qiDomain :
-    DomainLabel
+  qiDomain : DomainLabel
 
-  donkeyDomain :
-    DomainLabel
+  donkeyDomain : DomainLabel
 
-  lawDomain :
-    DomainLabel
+  lawDomain : DomainLabel
 
-  traumaDomain :
-    DomainLabel
+  traumaDomain : DomainLabel
 
-  urbanDesignDomain :
-    DomainLabel
+  urbanDesignDomain : DomainLabel
 
-  sweetgrassDomain :
-    DomainLabel
+  sweetgrassDomain : DomainLabel
 
-  economyDomain :
-    DomainLabel
+  economyDomain : DomainLabel
 
-  personBehaviourDomain :
-    DomainLabel
+  personBehaviourDomain : DomainLabel
 
-  physicsDomain :
-    DomainLabel
+  physicsDomain : DomainLabel
 
-  genericDomain :
-    DomainLabel
+  genericDomain : DomainLabel
 
   namedDomain :
     String →
@@ -92,65 +82,45 @@ canonicalDomainLabels =
   ∷ []
 
 data FormalRole : Set where
-  carrierSpaceRole :
-    FormalRole
+  carrierSpaceRole : FormalRole
 
-  stateRole :
-    FormalRole
+  stateRole : FormalRole
 
-  operatorRole :
-    FormalRole
+  operatorRole : FormalRole
 
-  observableRole :
-    FormalRole
+  observableRole : FormalRole
 
-  spectrumToolRole :
-    FormalRole
+  spectrumToolRole : FormalRole
 
-  boundaryGateRole :
-    FormalRole
+  boundaryGateRole : FormalRole
 
-  obstructionRole :
-    FormalRole
+  obstructionRole : FormalRole
 
-  algebraRole :
-    FormalRole
+  algebraRole : FormalRole
 
-  proofObligationRole :
-    FormalRole
+  proofObligationRole : FormalRole
 
-  decompositionRole :
-    FormalRole
+  decompositionRole : FormalRole
 
-  hamiltonianRole :
-    FormalRole
+  hamiltonianRole : FormalRole
 
-  metricRole :
-    FormalRole
+  metricRole : FormalRole
 
-  projectionRole :
-    FormalRole
+  projectionRole : FormalRole
 
-  residualRole :
-    FormalRole
+  residualRole : FormalRole
 
-  evidenceRole :
-    FormalRole
+  evidenceRole : FormalRole
 
-  metaphorRole :
-    FormalRole
+  metaphorRole : FormalRole
 
-  giftRelationRole :
-    FormalRole
+  giftRelationRole : FormalRole
 
-  typedMeetRole :
-    FormalRole
+  typedMeetRole : FormalRole
 
-  bridgeReceiptRole :
-    FormalRole
+  bridgeReceiptRole : FormalRole
 
-  authorityBoundaryRole :
-    FormalRole
+  authorityBoundaryRole : FormalRole
 
   namedFormalRole :
     String →
@@ -249,11 +219,9 @@ canonicalFormalRoles =
 -- Typed status, authority classes, and bridge admission.
 
 data TypedStatus : Set where
-  candidateStatus :
-    TypedStatus
+  candidateStatus : TypedStatus
 
-  committedStatus :
-    TypedStatus
+  committedStatus : TypedStatus
 
 statusLabel : TypedStatus → String
 statusLabel candidateStatus =
@@ -262,20 +230,15 @@ statusLabel committedStatus =
   "Committed"
 
 data AuthorityClass : Set where
-  noAuthorityClass :
-    AuthorityClass
+  noAuthorityClass : AuthorityClass
 
-  candidateOnlyClass :
-    AuthorityClass
+  candidateOnlyClass : AuthorityClass
 
-  localCommitClass :
-    AuthorityClass
+  localCommitClass : AuthorityClass
 
-  bridgeReceiptClass :
-    AuthorityClass
+  bridgeReceiptClass : AuthorityClass
 
-  externalAuthorityRequiredClass :
-    AuthorityClass
+  externalAuthorityRequiredClass : AuthorityClass
 
 authorityClassLabel : AuthorityClass → String
 authorityClassLabel noAuthorityClass =
@@ -290,17 +253,13 @@ authorityClassLabel externalAuthorityRequiredClass =
   "ExternalAuthorityRequired"
 
 data BridgeStrength : Set where
-  noBridge :
-    BridgeStrength
+  noBridge : BridgeStrength
 
-  weakBridge :
-    BridgeStrength
+  weakBridge : BridgeStrength
 
-  partialBridge :
-    BridgeStrength
+  partialBridge : BridgeStrength
 
-  exactBridge :
-    BridgeStrength
+  exactBridge : BridgeStrength
 
 bridgeStrengthLabel : BridgeStrength → String
 bridgeStrengthLabel noBridge =
@@ -313,17 +272,13 @@ bridgeStrengthLabel exactBridge =
   "ExactBridge"
 
 data AdmissionStatus : Set where
-  candidateAdmission :
-    AdmissionStatus
+  candidateAdmission : AdmissionStatus
 
-  committedAdmission :
-    AdmissionStatus
+  committedAdmission : AdmissionStatus
 
-  blockedPendingBridgeAdmission :
-    AdmissionStatus
+  blockedPendingBridgeAdmission : AdmissionStatus
 
-  rejectedAdmission :
-    AdmissionStatus
+  rejectedAdmission : AdmissionStatus
 
 admissionStatusLabel : AdmissionStatus → String
 admissionStatusLabel candidateAdmission =

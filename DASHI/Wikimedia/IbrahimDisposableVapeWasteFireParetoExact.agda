@@ -20,21 +20,21 @@ import DASHI.Wikimedia.IbrahimDisposableVapeBatteryWasteFireExternalityExact as 
 ------------------------------------------------------------------------
 
 data WasteFireConsumer : Set where
-  mixedWasteFirePrevention
+  mixedWasteFirePrevention : WasteFireConsumer
   vapeSpecificFireAttribution : WasteFireConsumer
 
 data PreventionCandidate : Set where
-  informationOnly
-  councilHazardousWasteDropOff
-  pointOfSaleTakeBack
-  producerResponsibilityEmbeddedBatteryCollection
+  informationOnly : PreventionCandidate
+  councilHazardousWasteDropOff : PreventionCandidate
+  pointOfSaleTakeBack : PreventionCandidate
+  producerResponsibilityEmbeddedBatteryCollection : PreventionCandidate
   designForRecoverableBattery : PreventionCandidate
 
 data AttributionCandidate : Set where
-  genericBatteryFireCoding
-  embeddedDeviceCategoryCoding
-  vapeSpecificIncidentCoding
-  incidentPlusRecoveredObjectForensics
+  genericBatteryFireCoding : AttributionCandidate
+  embeddedDeviceCategoryCoding : AttributionCandidate
+  vapeSpecificIncidentCoding : AttributionCandidate
+  incidentPlusRecoveredObjectForensics : AttributionCandidate
   incidentPlusWasteStreamDenominator : AttributionCandidate
 
 ------------------------------------------------------------------------

@@ -15,16 +15,16 @@ import DASHI.Culture.MissingDeceasedInvestigativeAttributedSourceAtlasExact as S
 ------------------------------------------------------------------------
 
 data AnomalySourceClass : Set where
-  primaryEventCarrier
-  boundedSecondaryReport
-  familyReportedViaNews
-  discoveryCommunityOnly
+  primaryEventCarrier : AnomalySourceClass
+  boundedSecondaryReport : AnomalySourceClass
+  familyReportedViaNews : AnomalySourceClass
+  discoveryCommunityOnly : AnomalySourceClass
   unresolvedLocator : AnomalySourceClass
 
 data AnomalyPaymentState : Set where
-  primaryPaid
-  boundedReportPaid
-  discoveryOnly
+  primaryPaid : AnomalyPaymentState
+  boundedReportPaid : AnomalyPaymentState
+  discoveryOnly : AnomalyPaymentState
   unpaid : AnomalyPaymentState
 
 record ReportedAnomaly : Set where

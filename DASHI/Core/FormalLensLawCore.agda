@@ -34,23 +34,17 @@ listCount (_ ∷ xs) =
 -- Compatibility styles.
 
 data FormalLensLawStyle : Set where
-  statisticalStyle :
-    FormalLensLawStyle
+  statisticalStyle : FormalLensLawStyle
 
-  projectionFingerprintHiddenLiftStyle :
-    FormalLensLawStyle
+  projectionFingerprintHiddenLiftStyle : FormalLensLawStyle
 
-  cryptographicStyle :
-    FormalLensLawStyle
+  cryptographicStyle : FormalLensLawStyle
 
-  numberResidueStyle :
-    FormalLensLawStyle
+  numberResidueStyle : FormalLensLawStyle
 
-  graphStyle :
-    FormalLensLawStyle
+  graphStyle : FormalLensLawStyle
 
-  productVectorStyle :
-    FormalLensLawStyle
+  productVectorStyle : FormalLensLawStyle
 
   namedFormalLensLawStyle :
     String →

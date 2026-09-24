@@ -53,8 +53,8 @@ canonicalModularFormAxes = modular-form-observation-axes
 ------------------------------------------------------------------------
 
 data ModularConsumer : Set where
-  exactCoefficientAtIndex fullCoefficientStream modularIdentity
-  transformationBehaviour heckeEigenBehaviour moonshineFirstCoefficient
+  exactCoefficientAtIndex fullCoefficientStream modularIdentity : ModularConsumer
+  transformationBehaviour heckeEigenBehaviour moonshineFirstCoefficient : ModularConsumer
   fullModularObject : ModularConsumer
 
 record CoefficientFactorsThroughCandidate : Set where
@@ -150,8 +150,8 @@ firstCoefficientArithmetic = JCoeff.firstCoefficientArithmetic
 ------------------------------------------------------------------------
 
 data PromotionStage : Set where
-  externalSequenceIdentity exactCoefficientAgreement qSeriesCandidate
-  modularTransformationPaid eisensteinBasisPaid heckeEigenPaid
+  externalSequenceIdentity exactCoefficientAgreement qSeriesCandidate : PromotionStage
+  modularTransformationPaid eisensteinBasisPaid heckeEigenPaid : PromotionStage
   gradedVOAPaid moonshineModularityPaid genusZeroPaid : PromotionStage
 
 record PromotionEdge : Set where

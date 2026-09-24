@@ -52,9 +52,9 @@ yibarbukArticleQid = Prior.yibarbukArticleQid
 ------------------------------------------------------------------------
 
 data PyrodiversitySourceRole : Set where
-  fineScaleMosaicFieldModelStudy
-  indigenousPlantDiversityFieldStudy
-  fireSensitiveConiferManagementComparison
+  fineScaleMosaicFieldModelStudy : PyrodiversitySourceRole
+  indigenousPlantDiversityFieldStudy : PyrodiversitySourceRole
+  fireSensitiveConiferManagementComparison : PyrodiversitySourceRole
   tiwiLandscapeCarbonBiodiversityExperiment : PyrodiversitySourceRole
 
 record PyrodiversityPrimarySource : Set where
@@ -130,19 +130,19 @@ richardsTiwi2012 = pyrodiversity-primary-source
 ------------------------------------------------------------------------
 
 data IndigenousPyroConsumer : Set where
-  timeSinceFireDiversity
-  fireFrequencyDiversity
-  maximumLandscapeBurnFraction
-  longUnburntPatchAvailability
-  fireSensitiveVegetationCondition
-  plantSpeciesRichness
-  plantSpeciesComposition
-  ediblePlantDiversity
-  faunaOccurrence
-  grossPrimaryProduction
-  netEcosystemProductivity
-  vegetationCarbonStock
-  soilCarbonStock
+  timeSinceFireDiversity : IndigenousPyroConsumer
+  fireFrequencyDiversity : IndigenousPyroConsumer
+  maximumLandscapeBurnFraction : IndigenousPyroConsumer
+  longUnburntPatchAvailability : IndigenousPyroConsumer
+  fireSensitiveVegetationCondition : IndigenousPyroConsumer
+  plantSpeciesRichness : IndigenousPyroConsumer
+  plantSpeciesComposition : IndigenousPyroConsumer
+  ediblePlantDiversity : IndigenousPyroConsumer
+  faunaOccurrence : IndigenousPyroConsumer
+  grossPrimaryProduction : IndigenousPyroConsumer
+  netEcosystemProductivity : IndigenousPyroConsumer
+  vegetationCarbonStock : IndigenousPyroConsumer
+  soilCarbonStock : IndigenousPyroConsumer
   accountableFireGHG : IndigenousPyroConsumer
 
 record IndigenousPyroSourceAdmission : Set where

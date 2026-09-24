@@ -19,27 +19,20 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 -- admissibility, and no live political/economic actor classification is made.
 
 data PNFVoidScopeBoundaryStatus : Set where
-  comparedInFibre_noTypedMeet :
-    PNFVoidScopeBoundaryStatus
+  comparedInFibre_noTypedMeet : PNFVoidScopeBoundaryStatus
 
-  outsideComparison_scopeExceeded :
-    PNFVoidScopeBoundaryStatus
+  outsideComparison_scopeExceeded : PNFVoidScopeBoundaryStatus
 
-  fibreCollapse_scopeExceeded :
-    PNFVoidScopeBoundaryStatus
+  fibreCollapse_scopeExceeded : PNFVoidScopeBoundaryStatus
 
 data PNFVoidScopeBoundaryComponent : Set where
-  sameFibreNoTypedMeetComponent :
-    PNFVoidScopeBoundaryComponent
+  sameFibreNoTypedMeetComponent : PNFVoidScopeBoundaryComponent
 
-  outsideComparisonScopeExceededComponent :
-    PNFVoidScopeBoundaryComponent
+  outsideComparisonScopeExceededComponent : PNFVoidScopeBoundaryComponent
 
-  fibreCollapseScopeExceededComponent :
-    PNFVoidScopeBoundaryComponent
+  fibreCollapseScopeExceededComponent : PNFVoidScopeBoundaryComponent
 
-  noTruthSupportAdmissibilityPromotionComponent :
-    PNFVoidScopeBoundaryComponent
+  noTruthSupportAdmissibilityPromotionComponent : PNFVoidScopeBoundaryComponent
 
 canonicalPNFVoidScopeBoundaryComponents :
   List PNFVoidScopeBoundaryComponent

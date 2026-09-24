@@ -19,7 +19,7 @@ import DASHI.Core.ApplicationTransformationCapabilityBidiExact as T
 ------------------------------------------------------------------------
 
 data VerificationStage : Set where
-  graphSpecification stimulusConstruction simulationExecution
+  graphSpecification stimulusConstruction simulationExecution : VerificationStage
   observationExtraction specificationComparison residualClassification : VerificationStage
 
 record GraphHardwareVerificationModel : Set where
@@ -63,7 +63,7 @@ chenVerificationTransformation = T.application-transformation
   "General method to validated processor verification requires target-specific graph semantics, tests, coverage and signoff evidence."
 
 data ChenVerificationReverseTarget : Set where
-  acquireGraphSemantics acquireStimulusCorpus acquireCoverageMetric
+  acquireGraphSemantics acquireStimulusCorpus acquireCoverageMetric : ChenVerificationReverseTarget
   acquireMismatchOracle acquireProcessorSameObjectReceipt acquireQualificationEvidence : ChenVerificationReverseTarget
 
 chenVerificationReverseTargets : List ChenVerificationReverseTarget

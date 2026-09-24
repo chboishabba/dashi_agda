@@ -26,23 +26,23 @@ import DASHI.Governance.SteffensenCulturalFireAuthorityExact as CulturalFire
 ------------------------------------------------------------------------
 
 data FireGrazingLineage : Set where
-  pyricHerbivoryResearch
-  patchBurnGrazingManagement
-  genericPrescribedMosaicFire
+  pyricHerbivoryResearch : FireGrazingLineage
+  patchBurnGrazingManagement : FireGrazingLineage
+  genericPrescribedMosaicFire : FireGrazingLineage
   IndigenousCulturalBurningLineage : FireGrazingLineage
 
 data EvidenceRelation : Set where
-  conceptualMechanismSource
-  directPatchBurnFieldStudy
-  directPyricHerbivoryFieldStudy
-  economicManagementStudy
-  livestockSpeciesResponseStudy
+  conceptualMechanismSource : EvidenceRelation
+  directPatchBurnFieldStudy : EvidenceRelation
+  directPyricHerbivoryFieldStudy : EvidenceRelation
+  economicManagementStudy : EvidenceRelation
+  livestockSpeciesResponseStudy : EvidenceRelation
   culturalAuthoritySourceOnly : EvidenceRelation
 
 data PublicationForm : Set where
-  peerReviewedArticle
-  primaryFieldStudy
-  economicAnalysis
+  peerReviewedArticle : PublicationForm
+  primaryFieldStudy : PublicationForm
+  economicAnalysis : PublicationForm
   existingTypedAuthorityOwner : PublicationForm
 
 record FireGrazingSource : Set where

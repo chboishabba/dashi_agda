@@ -23,28 +23,28 @@ import DASHI.Core.AppendOnlyEvidenceResidualRevisionExact as Revision
 ------------------------------------------------------------------------
 
 data OperationalResidual : Set where
-  realisedEffectResidual
-  communityOutcomeResidual
-  communityAuthorityResidual
-  monitoringResidual
-  correctionResponseResidual
-  recurrencePreventionResidual
+  realisedEffectResidual : OperationalResidual
+  communityOutcomeResidual : OperationalResidual
+  communityAuthorityResidual : OperationalResidual
+  monitoringResidual : OperationalResidual
+  correctionResponseResidual : OperationalResidual
+  recurrencePreventionResidual : OperationalResidual
   : OperationalResidual
 
 data OperationalAction : Set where
-  obtainAffectedCommunityOutcome
-  obtainAuthorityBearingCommunityReceipt
-  obtainIndependentMonitoring
-  testCorrectionResponsiveness
-  observeRecurrencePrevention
-  holdAndReassess
+  obtainAffectedCommunityOutcome : OperationalAction
+  obtainAuthorityBearingCommunityReceipt : OperationalAction
+  obtainIndependentMonitoring : OperationalAction
+  testCorrectionResponsiveness : OperationalAction
+  observeRecurrencePrevention : OperationalAction
+  holdAndReassess : OperationalAction
   : OperationalAction
 
 data OperationalActionAuthority : Set where
-  communityAuthorized
-  independentMonitorAuthorized
-  institutionalActionAuthorized
-  authorityUnresolved
+  communityAuthorized : OperationalActionAuthority
+  independentMonitorAuthorized : OperationalActionAuthority
+  institutionalActionAuthorized : OperationalActionAuthority
+  authorityUnresolved : OperationalActionAuthority
   : OperationalActionAuthority
 
 residualFor : Operational.OperationalClosureCoordinate → OperationalResidual
@@ -208,13 +208,13 @@ paymentDoesNotTransferAuthority = refl
 ------------------------------------------------------------------------
 
 data OperationalNextStep : Set where
-  noFurtherActionForThisConsumer
-  actOnRealisedEffect
-  actOnCommunityOutcome
-  actOnCommunityAuthority
-  actOnMonitoring
-  actOnCorrection
-  actOnPrevention
+  noFurtherActionForThisConsumer : OperationalNextStep
+  actOnRealisedEffect : OperationalNextStep
+  actOnCommunityOutcome : OperationalNextStep
+  actOnCommunityAuthority : OperationalNextStep
+  actOnMonitoring : OperationalNextStep
+  actOnCorrection : OperationalNextStep
+  actOnPrevention : OperationalNextStep
   : OperationalNextStep
 
 firstOpen : Operational.OperationalClosureSnapshot → OperationalNextStep

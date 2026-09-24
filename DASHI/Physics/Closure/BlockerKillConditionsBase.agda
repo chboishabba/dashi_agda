@@ -64,6 +64,101 @@ record KillCondition : Set where
     noBypassLaw :
       List NoBypassLaw
 
+------------------------------------------------------------------------
+-- Kill-condition rows.
+
+w1KillCondition : KillCondition
+w1KillCondition =
+  record
+    { lane = W1MdlCr
+    ; currentState = unblocked
+    ; noBypassLaw =
+        noCarrierMergeByAssumption
+        ∷ noProsePromotion
+        ∷ []
+    }
+
+w2KillCondition : KillCondition
+w2KillCondition =
+  record
+    { lane = W2NaturalP2Convergence
+    ; currentState = blocked
+    ; noBypassLaw =
+        noCarrierMergeByAssumption
+        ∷ noProsePromotion
+        ∷ []
+    }
+
+w3KillCondition : KillCondition
+w3KillCondition =
+  record
+    { lane = W3Empirical
+    ; currentState = blocked
+    ; noBypassLaw =
+        noConstructorlessTokenBypass
+        ∷ noLocalSurrogatePromotion
+        ∷ noEmpiricalByInspection
+        ∷ []
+    }
+
+w4KillCondition : KillCondition
+w4KillCondition =
+  record
+    { lane = W4Chemistry
+    ; currentState = blocked
+    ; noBypassLaw =
+        noConstructorlessTokenBypass
+        ∷ noPhysicalCalibrationByNatSurrogate
+        ∷ noLocalSurrogatePromotion
+        ∷ []
+    }
+
+w5KillCondition : KillCondition
+w5KillCondition =
+  record
+    { lane = W5GRQFT
+    ; currentState = blocked
+    ; noBypassLaw =
+        noConstructorlessTokenBypass
+        ∷ noEmpiricalByInspection
+        ∷ noProsePromotion
+        ∷ []
+    }
+
+w6KillCondition : KillCondition
+w6KillCondition =
+  record
+    { lane = W6ITIRPNF
+    ; currentState = blocked
+    ; noBypassLaw =
+        noRuntimeReceiptByInspection
+        ∷ noProsePromotion
+        ∷ []
+    }
+
+w8KillCondition : KillCondition
+w8KillCondition =
+  record
+    { lane = W8Origin
+    ; currentState = blocked
+    ; noBypassLaw =
+        noEmpiricalByInspection
+        ∷ noLocalSurrogatePromotion
+        ∷ noProsePromotion
+        ∷ []
+    }
+
+w9KillCondition : KillCondition
+w9KillCondition =
+  record
+    { lane = W9Cancellation
+    ; currentState = unblocked
+    ; noBypassLaw =
+        noPressureWitnessByNaming
+        ∷ noProsePromotion
+        ∷ []
+    }
+
 data W9KillRouteChangeStatus : Set where
   acceptedRouteChangeNeeded :
     W9KillRouteChangeStatus

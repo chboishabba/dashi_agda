@@ -74,7 +74,7 @@ dedekindEtaWikipedia = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data EdgeRole : Set where
-  currentFirstBody secondaryDefinition secondaryTheoremStatement wikidataRelation
+  currentFirstBody secondaryDefinition secondaryTheoremStatement wikidataRelation : EdgeRole
   wikipediaRedirect sourceBibliography repositoryTheorem : EdgeRole
 
 record TypedEdge : Set where

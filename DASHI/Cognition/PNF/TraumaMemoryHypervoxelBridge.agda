@@ -205,13 +205,14 @@ record PriorTraumaMemoryArchitectureCrossPollination : Setω where
   field
     traumaBodyMemoryFacade : TraumaBody.TraumaBodyMemoryCandidateBridge
     traumaBodyMemoryFacadeIsCanonical :
-      traumaBodyMemoryFacade ≡ TraumaBody.canonicalTraumaBodyMemoryCandidateBridge
+      TraumaBody.candidateOnly traumaBodyMemoryFacade ≡ true
 
     genomeEpigenomeConnectomeBodyMemory :
       GenomeBody.GenomeEpigenomeConnectomeBodyMemoryBridge
     genomeEpigenomeConnectomeBodyMemoryIsCanonical :
-      genomeEpigenomeConnectomeBodyMemory
-      ≡ GenomeBody.canonicalGenomeEpigenomeConnectomeBodyMemoryBridge
+      GenomeBody.GenomeEpigenomeConnectomeBodyMemoryBridge.route
+        genomeEpigenomeConnectomeBodyMemory
+      ≡ GenomeBody.candidateOnlyBridgeRoute
 
     psychologicalClopenSupervoxel : ClopenPsych.ZeroSupervoxel
     psychologicalClopenSupervoxelIsCanonical :

@@ -95,7 +95,7 @@ savannaEcologyToManagement = Traversal.dashi-first-link-edge
 ------------------------------------------------------------------------
 
 data EcosystemTypologySourceRole : Set where
-  primaryCollaborativeEcosystemClassificationStudy
+  primaryCollaborativeEcosystemClassificationStudy : EcosystemTypologySourceRole
   primaryInstitutionalManagementSource : EcosystemTypologySourceRole
 
 record EcosystemTypologyAttributedSource : Set where
@@ -146,19 +146,19 @@ tiwiManagementPlan = ecosystem-typology-attributed-source
 ------------------------------------------------------------------------
 
 data TiwiEcosystemType : Set where
-  wartaEucalyptOpenForestSavanna
-  wartaEucalyptMixedSpeciesSavanna
-  muriyiniTreelessPlains
-  yawurlamaWetRainforest
-  yawurlamaDryRainforest
-  punkaringaMelaleucaSavanna
-  turringiyaGrasslandSedgelandWetland
-  mirriparingaPamparingaMangrove
-  yartiCoastalSaltmarsh
-  kurlimipitiPungamparnaSandDunes
-  tingataSandyShoreline
-  tingataRockyShoreline
-  urbanModified
+  wartaEucalyptOpenForestSavanna : TiwiEcosystemType
+  wartaEucalyptMixedSpeciesSavanna : TiwiEcosystemType
+  muriyiniTreelessPlains : TiwiEcosystemType
+  yawurlamaWetRainforest : TiwiEcosystemType
+  yawurlamaDryRainforest : TiwiEcosystemType
+  punkaringaMelaleucaSavanna : TiwiEcosystemType
+  turringiyaGrasslandSedgelandWetland : TiwiEcosystemType
+  mirriparingaPamparingaMangrove : TiwiEcosystemType
+  yartiCoastalSaltmarsh : TiwiEcosystemType
+  kurlimipitiPungamparnaSandDunes : TiwiEcosystemType
+  tingataSandyShoreline : TiwiEcosystemType
+  tingataRockyShoreline : TiwiEcosystemType
+  urbanModified : TiwiEcosystemType
   plantation : TiwiEcosystemType
 
 record LocalGlobalEcosystemAlignment : Set where

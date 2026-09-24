@@ -132,8 +132,7 @@ decimalDigitSumInvariant digits =
 ------------------------------------------------------------------------
 
 data PositiveDigitalRoot9 : Set where
-  root1 root2 root3 root4 root5 root6 root7 root8 root9 :
-    PositiveDigitalRoot9
+  root1 root2 root3 root4 root5 root6 root7 root8 root9 : PositiveDigitalRoot9
 
 rootResidue9 : PositiveDigitalRoot9 → Ring.NonaryTruth
 rootResidue9 root1 = Ring.non-1

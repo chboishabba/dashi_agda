@@ -164,11 +164,11 @@ loureiroStudentContinuation2026 =
 ------------------------------------------------------------------------
 
 data SourceAuthorityClass : Set where
-  primaryPeerReviewedPublication
-  primaryInstitutionalRecord
-  primaryGovernmentRecord
-  primaryPatentRecord
-  primaryConferenceRecord
+  primaryPeerReviewedPublication : SourceAuthorityClass
+  primaryInstitutionalRecord : SourceAuthorityClass
+  primaryGovernmentRecord : SourceAuthorityClass
+  primaryPatentRecord : SourceAuthorityClass
+  primaryConferenceRecord : SourceAuthorityClass
   secondaryReportingLead : SourceAuthorityClass
 
 record SnowballSourceCoordinate : Set where

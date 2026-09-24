@@ -24,8 +24,7 @@ import DASHI.Interop.MeditationQiBridge as Meditation
 -- it only records a reusable interpretive receipt.
 
 data TaoMeditationQiBridgeStatus : Set where
-  taoMeditationQiBridge_candidateOnly :
-    TaoMeditationQiBridgeStatus
+  taoMeditationQiBridge_candidateOnly : TaoMeditationQiBridgeStatus
 
 data TaoMeditationQiPromotion : Set where
 

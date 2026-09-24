@@ -100,11 +100,11 @@ daviesEtAl2018Decline = same-88-site-primary-source
 ------------------------------------------------------------------------
 
 data CarrierLevel : Set where
-  sameIsland
-  sameSurveyNetwork
-  sameSiteSet
-  sameExactSite
-  sameObservationWindow
+  sameIsland : CarrierLevel
+  sameSurveyNetwork : CarrierLevel
+  sameSiteSet : CarrierLevel
+  sameExactSite : CarrierLevel
+  sameObservationWindow : CarrierLevel
   sameSample : CarrierLevel
 
 record Same88SiteCrossStudyReceipt : Set where
@@ -132,16 +132,16 @@ canonicalSame88SiteCrossStudyReceipt = same-88-site-cross-study-receipt
 ------------------------------------------------------------------------
 
 data DisturbanceDriver : Set where
-  severeFireFrequency
-  feralHerbivoreActivity
-  shrubUnderstoreyState
+  severeFireFrequency : DisturbanceDriver
+  feralHerbivoreActivity : DisturbanceDriver
+  shrubUnderstoreyState : DisturbanceDriver
   gameTrailNetwork : DisturbanceDriver
 
 data ResponseConsumer : Set where
-  catActivity
-  catAbundance
-  rabbitRatOccupancy
-  rabbitRatLocalExtinction
+  catActivity : ResponseConsumer
+  catAbundance : ResponseConsumer
+  rabbitRatOccupancy : ResponseConsumer
+  rabbitRatLocalExtinction : ResponseConsumer
   multiTaxonAbundance : ResponseConsumer
 
 record MultiDriverSame88BidiFrontier : Set where

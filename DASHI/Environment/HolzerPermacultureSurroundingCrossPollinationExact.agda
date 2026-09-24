@@ -30,36 +30,36 @@ import DASHI.Governance.PermacultureEvolution as PermacultureGovernance
 ------------------------------------------------------------------------
 
 data SharedLandscapeMechanism : Set where
-  surfaceWaterStorage
-  gravityWaterRedistribution
-  openChannelGasExchange
-  plantedWaterTreatmentZone
-  terraceRunoffInterception
-  terraceSoilWaterRetention
-  treeSlopeStabilisation
-  treeLivestockSpatialCoupling
-  biomassNutrientReturn
-  passiveGroundThermalStorage
-  altitudeSeasonExtension
+  surfaceWaterStorage : SharedLandscapeMechanism
+  gravityWaterRedistribution : SharedLandscapeMechanism
+  openChannelGasExchange : SharedLandscapeMechanism
+  plantedWaterTreatmentZone : SharedLandscapeMechanism
+  terraceRunoffInterception : SharedLandscapeMechanism
+  terraceSoilWaterRetention : SharedLandscapeMechanism
+  treeSlopeStabilisation : SharedLandscapeMechanism
+  treeLivestockSpatialCoupling : SharedLandscapeMechanism
+  biomassNutrientReturn : SharedLandscapeMechanism
+  passiveGroundThermalStorage : SharedLandscapeMechanism
+  altitudeSeasonExtension : SharedLandscapeMechanism
   multifunctionalLandUse : SharedLandscapeMechanism
 
 data CrossPollinationAxis : Set where
-  hydrologyAxis
-  aquaticTreatmentAxis
-  agroforestryAxis
-  livestockAxis
-  soilCarbonAxis
-  embodiedEnergyAxis
-  passiveInfrastructureAxis
-  governanceLineageAxis
+  hydrologyAxis : CrossPollinationAxis
+  aquaticTreatmentAxis : CrossPollinationAxis
+  agroforestryAxis : CrossPollinationAxis
+  livestockAxis : CrossPollinationAxis
+  soilCarbonAxis : CrossPollinationAxis
+  embodiedEnergyAxis : CrossPollinationAxis
+  passiveInfrastructureAxis : CrossPollinationAxis
+  governanceLineageAxis : CrossPollinationAxis
   causalExperimentAxis : CrossPollinationAxis
 
 data EvidenceAdmissionState : Set where
-  practitionerOnly
-  mechanismAdjacentLiterature
-  matchedExternalStudy
-  siteMeasured
-  causallyEstimated
+  practitionerOnly : EvidenceAdmissionState
+  mechanismAdjacentLiterature : EvidenceAdmissionState
+  matchedExternalStudy : EvidenceAdmissionState
+  siteMeasured : EvidenceAdmissionState
+  causallyEstimated : EvidenceAdmissionState
   replicatedOrHeldOut : EvidenceAdmissionState
 
 ------------------------------------------------------------------------

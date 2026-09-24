@@ -161,6 +161,8 @@ record FirstLinkNetworkBoundary : Set where
     universalPhilosophyClaim : Bool
     semanticTruthPromotion : Bool
 
+open FirstLinkNetworkBoundary public
+
 canonicalFirstLinkNetworkBoundary : FirstLinkNetworkBoundary
 canonicalFirstLinkNetworkBoundary =
   first-link-network-boundary true true true true false false

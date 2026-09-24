@@ -64,10 +64,10 @@ zeroDayPHIDoesNotCreateZeroBtBurden ()
 ------------------------------------------------------------------------
 
 data BtResidueParetoTarget : Set where
-  targetedCannabisFieldStudy
-  archivedRegulatoryResidueStudy
-  strainSpecificQPCR
-  cryProteinImmunoassay
+  targetedCannabisFieldStudy : BtResidueParetoTarget
+  archivedRegulatoryResidueStudy : BtResidueParetoTarget
+  strainSpecificQPCR : BtResidueParetoTarget
+  cryProteinImmunoassay : BtResidueParetoTarget
   routeFate : BtResidueParetoTarget
 
 record BtResidueParetoStep : Set where

@@ -13,12 +13,12 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 import DASHI.Papers.CoreTheoremInterfaces as Core
 
 data CrossPollinationLane : Set where
-  observationEvidenceLane grTheoryLane navierStokesConfounderLane
-    yangMillsSourceLane riemannMethodLane unificationConsumerLane : CrossPollinationLane
+  observationEvidenceLane grTheoryLane navierStokesConfounderLane : CrossPollinationLane
+  yangMillsSourceLane riemannMethodLane unificationConsumerLane : CrossPollinationLane
 
 data CrossPollinationRole : Set where
-  acquireEvidence compareGravityTheory closeOrdinaryMomentum constrainGaugeSource
-    borrowProofDisciplineOnly registerCrossSectorResidual : CrossPollinationRole
+  acquireEvidence compareGravityTheory closeOrdinaryMomentum constrainGaugeSource : CrossPollinationRole
+  borrowProofDisciplineOnly registerCrossSectorResidual : CrossPollinationRole
 
 roleForLane : CrossPollinationLane → CrossPollinationRole
 roleForLane observationEvidenceLane = acquireEvidence

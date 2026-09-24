@@ -23,21 +23,21 @@ import DASHI.Physics.Plasma.PlasmaActivatedWaterAgricultureSourceRegistryExact a
 ------------------------------------------------------------------------
 
 data PlasmaWaterProductionMode : Set where
-  directLiquidExposure
-  plasmaEffluentExposure
+  directLiquidExposure : PlasmaWaterProductionMode
+  plasmaEffluentExposure : PlasmaWaterProductionMode
   gasPhaseDischargeOverLiquid : PlasmaWaterProductionMode
 
 data ReactiveSpeciesCoordinate : Set where
-  nitrate
-  nitrite
-  hydrogenPeroxide
+  nitrate : ReactiveSpeciesCoordinate
+  nitrite : ReactiveSpeciesCoordinate
+  hydrogenPeroxide : ReactiveSpeciesCoordinate
   otherReactiveOxygenNitrogenSpecies : ReactiveSpeciesCoordinate
 
 data ApplicationRoute : Set where
-  hydroponicNutrientSolution
-  aquaponicSupplement
-  soilIrrigation
-  seedTreatment
+  hydroponicNutrientSolution : ApplicationRoute
+  aquaponicSupplement : ApplicationRoute
+  soilIrrigation : ApplicationRoute
+  seedTreatment : ApplicationRoute
   foliarApplication : ApplicationRoute
 
 record PlasmaWaterProductionIdentity : Set where

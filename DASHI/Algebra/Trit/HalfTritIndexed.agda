@@ -21,16 +21,11 @@ import DASHI.Algebra.Trit.HalfTrit as Half
 -- enumeration or a no-duplicates proof for a concrete 240-root list.
 
 data HalfTritIndexed : Set where
-  indexedNegOne :
-    HalfTritIndexed
-  indexedNegHalf :
-    HalfTritIndexed
-  indexedZero :
-    HalfTritIndexed
-  indexedPosHalf :
-    HalfTritIndexed
-  indexedPosOne :
-    HalfTritIndexed
+  indexedNegOne : HalfTritIndexed
+  indexedNegHalf : HalfTritIndexed
+  indexedZero : HalfTritIndexed
+  indexedPosHalf : HalfTritIndexed
+  indexedPosOne : HalfTritIndexed
 
 HalfTritIndexedIndex : Set
 HalfTritIndexedIndex = Fin 5
@@ -269,20 +264,14 @@ indexedSeparatesPosHalfPosOne =
   embedIndexed-injective Half.posHalf Half.posOne
 
 data HalfTritIndexedDuplicateFreedomStatus : Set where
-  coordinateDuplicateFreedomEstablished :
-    HalfTritIndexedDuplicateFreedomStatus
-  e8RootDuplicateFreedomStillRequiresEnumerator :
-    HalfTritIndexedDuplicateFreedomStatus
+  coordinateDuplicateFreedomEstablished : HalfTritIndexedDuplicateFreedomStatus
+  e8RootDuplicateFreedomStillRequiresEnumerator : HalfTritIndexedDuplicateFreedomStatus
 
 data HalfTritIndexedResidualObligation : Set where
-  e8EightCoordinateIndexedCarrierStillMissing :
-    HalfTritIndexedResidualObligation
-  e8RootListEnumeratorStillMissing :
-    HalfTritIndexedResidualObligation
-  e8RootListNoDuplicatesStillMissing :
-    HalfTritIndexedResidualObligation
-  e8RootCompletenessStillMissing :
-    HalfTritIndexedResidualObligation
+  e8EightCoordinateIndexedCarrierStillMissing : HalfTritIndexedResidualObligation
+  e8RootListEnumeratorStillMissing : HalfTritIndexedResidualObligation
+  e8RootListNoDuplicatesStillMissing : HalfTritIndexedResidualObligation
+  e8RootCompletenessStillMissing : HalfTritIndexedResidualObligation
 
 canonicalHalfTritIndexedResidualObligations :
   List HalfTritIndexedResidualObligation

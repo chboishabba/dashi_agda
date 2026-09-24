@@ -20,24 +20,24 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as LES
 ------------------------------------------------------------------------
 
 data KeylineElement : Set where
-  topographicSurvey
-  keyPointKeylineGeometry
-  offContourCultivation
-  farmDamStorage
-  diversionOrIrrigationChannel
-  gravityIrrigation
-  treeOrShelterLayout
-  roadAndAccessLayout
+  topographicSurvey : KeylineElement
+  keyPointKeylineGeometry : KeylineElement
+  offContourCultivation : KeylineElement
+  farmDamStorage : KeylineElement
+  diversionOrIrrigationChannel : KeylineElement
+  gravityIrrigation : KeylineElement
+  treeOrShelterLayout : KeylineElement
+  roadAndAccessLayout : KeylineElement
   soilDevelopmentManagement : KeylineElement
 
 data HydrologicConsumerCoordinate : Set where
-  rainfallInput
-  surfaceRouting
-  infiltration
-  rootZoneStorage
-  damStorage
-  irrigationDelivery
-  runoffExport
+  rainfallInput : HydrologicConsumerCoordinate
+  surfaceRouting : HydrologicConsumerCoordinate
+  infiltration : HydrologicConsumerCoordinate
+  rootZoneStorage : HydrologicConsumerCoordinate
+  damStorage : HydrologicConsumerCoordinate
+  irrigationDelivery : HydrologicConsumerCoordinate
+  runoffExport : HydrologicConsumerCoordinate
   sedimentExport : HydrologicConsumerCoordinate
 
 record KeylineLandscapeIntervention : Set where

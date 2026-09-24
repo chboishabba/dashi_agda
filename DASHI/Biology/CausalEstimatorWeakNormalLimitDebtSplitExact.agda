@@ -21,8 +21,8 @@ import DASHI.Biology.CausalEstimatorFiniteTestDistributionConvergenceExact as Fi
 ------------------------------------------------------------------------
 
 data StandardAsymptoticTheoremFamily : Set where
-  determiningClassWeakConvergence
-  classicalCentralLimit
+  determiningClassWeakConvergence : StandardAsymptoticTheoremFamily
+  classicalCentralLimit : StandardAsymptoticTheoremFamily
   limitingStandardErrorCalibration : StandardAsymptoticTheoremFamily
 
 standardTheoremRoute : StandardAsymptoticTheoremFamily → Debt.ProofDebtRoutingReceipt

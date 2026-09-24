@@ -191,10 +191,10 @@ coordinateRoute exactHeadAgdaValidation =
 ------------------------------------------------------------------------
 
 data CanonicalCutClass : Set where
-  mathematicallyOpen
-  sourceAlignmentOpen
-  externalCertificationOpen
-  localAgdaCertificationOpen
+  mathematicallyOpen : CanonicalCutClass
+  sourceAlignmentOpen : CanonicalCutClass
+  externalCertificationOpen : CanonicalCutClass
+  localAgdaCertificationOpen : CanonicalCutClass
   closed : CanonicalCutClass
 
 cutClass : ClayCoordinate → CanonicalCutClass

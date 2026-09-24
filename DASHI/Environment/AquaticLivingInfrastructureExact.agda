@@ -18,69 +18,69 @@ import DASHI.Environment.AquaticLivingInfrastructureSourceRegistryExact as Sourc
 ------------------------------------------------------------------------
 
 data WaterRegime : Set where
-  freshwater
-  brackish
+  freshwater : WaterRegime
+  brackish : WaterRegime
   marine : WaterRegime
 
 data SystemMode : Set where
-  freshwaterAquarium
-  brackishAquarium
-  reefAquarium
-  recirculatingAquaculture
-  hydroponicSystem
-  aquaponicSystem
+  freshwaterAquarium : SystemMode
+  brackishAquarium : SystemMode
+  reefAquarium : SystemMode
+  recirculatingAquaculture : SystemMode
+  hydroponicSystem : SystemMode
+  aquaponicSystem : SystemMode
   salineAquaponicSystem : SystemMode
 
 data HydroponicMode : Set where
-  mediaBedEbbFlow
-  nutrientFilmTechnique
-  deepWaterCulture
+  mediaBedEbbFlow : HydroponicMode
+  nutrientFilmTechnique : HydroponicMode
+  deepWaterCulture : HydroponicMode
   dripSubstrate : HydroponicMode
 
 data HydraulicRole : Set where
-  vessel
-  sump
-  pipe
-  valve
-  drain
-  overflow
-  circulationPump
-  returnPump
+  vessel : HydraulicRole
+  sump : HydraulicRole
+  pipe : HydraulicRole
+  valve : HydraulicRole
+  drain : HydraulicRole
+  overflow : HydraulicRole
+  circulationPump : HydraulicRole
+  returnPump : HydraulicRole
   bellSiphon : HydraulicRole
 
 data TreatmentRole : Set where
-  mechanicalSolidsSeparation
-  biologicalFiltration
-  foamFractionation
-  aeration
-  oxygenInjection
-  degassing
-  plantNutrientRecovery
+  mechanicalSolidsSeparation : TreatmentRole
+  biologicalFiltration : TreatmentRole
+  foamFractionation : TreatmentRole
+  aeration : TreatmentRole
+  oxygenInjection : TreatmentRole
+  degassing : TreatmentRole
+  plantNutrientRecovery : TreatmentRole
   microbialMineralisation : TreatmentRole
 
 data MediaRole : Set where
-  rootSupportMedia
-  attachedGrowthBiofilterMedia
-  mechanicalFilterMedia
+  rootSupportMedia : MediaRole
+  attachedGrowthBiofilterMedia : MediaRole
+  mechanicalFilterMedia : MediaRole
   habitatSubstrate : MediaRole
 
 data CriticalLoad : Set where
-  circulationLoad
-  aerationLoad
-  oxygenationLoad
-  heatingCoolingLoad
-  controlSensorLoad
+  circulationLoad : CriticalLoad
+  aerationLoad : CriticalLoad
+  oxygenationLoad : CriticalLoad
+  heatingCoolingLoad : CriticalLoad
+  controlSensorLoad : CriticalLoad
   lightingLoad : CriticalLoad
 
 data WaterQualityCoordinate : Set where
-  temperature
-  dissolvedOxygen
-  pH
-  salinityOrConductivity
-  ammoniaTAN
-  nitrite
-  nitrate
-  alkalinity
+  temperature : WaterQualityCoordinate
+  dissolvedOxygen : WaterQualityCoordinate
+  pH : WaterQualityCoordinate
+  salinityOrConductivity : WaterQualityCoordinate
+  ammoniaTAN : WaterQualityCoordinate
+  nitrite : WaterQualityCoordinate
+  nitrate : WaterQualityCoordinate
+  alkalinity : WaterQualityCoordinate
   suspendedSolids : WaterQualityCoordinate
 
 ------------------------------------------------------------------------

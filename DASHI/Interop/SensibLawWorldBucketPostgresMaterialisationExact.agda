@@ -23,12 +23,12 @@ data MaterialisationState : Set where
   skeleton referenceOnly fullLocal coldLocal federatedOnly : MaterialisationState
 
 data WorldBucketTableFamily : Set where
-  bucketTable
-  bucketNodeTable
-  growthReceiptTable
-  projectionTable
-  projectionMemberTable
-  projectionParentTable
+  bucketTable : WorldBucketTableFamily
+  bucketNodeTable : WorldBucketTableFamily
+  growthReceiptTable : WorldBucketTableFamily
+  projectionTable : WorldBucketTableFamily
+  projectionMemberTable : WorldBucketTableFamily
+  projectionParentTable : WorldBucketTableFamily
   materialisationReceiptTable : WorldBucketTableFamily
 
 worldBucketTableFamilyCount : Nat

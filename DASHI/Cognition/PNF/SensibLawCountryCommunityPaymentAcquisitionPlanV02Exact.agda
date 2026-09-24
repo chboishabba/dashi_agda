@@ -23,11 +23,11 @@ import DASHI.Law.SensibLawCorpusProducerRoutingExact as Routing
 ------------------------------------------------------------------------
 
 data PaymentCoordinate : Set where
-  communityOutcomeStatementCoordinate
-  consumerOutcomeCorrespondenceCoordinate
-  communityMandateScopeCoordinate
-  mandateTemporalValidityCoordinate
-  authorityRoleCorrespondenceCoordinate
+  communityOutcomeStatementCoordinate : PaymentCoordinate
+  consumerOutcomeCorrespondenceCoordinate : PaymentCoordinate
+  communityMandateScopeCoordinate : PaymentCoordinate
+  mandateTemporalValidityCoordinate : PaymentCoordinate
+  authorityRoleCorrespondenceCoordinate : PaymentCoordinate
   : PaymentCoordinate
 
 producerForPaymentCoordinate : PaymentCoordinate → Search.ProducerClass

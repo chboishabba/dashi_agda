@@ -19,8 +19,8 @@ import DASHI.Wikimedia.WikipediaAllPairsPrunedMergeSnowballExact as AllPairs
 ------------------------------------------------------------------------
 
 data PropositionRole : Set where
-  exactArithmetic theoremOrProof oeisSequenceIdentity formalCarrierMorphism
-  empiricalObservation historicalAttribution culturalMotif numerologicalClaim
+  exactArithmetic theoremOrProof oeisSequenceIdentity formalCarrierMorphism : PropositionRole
+  empiricalObservation historicalAttribution culturalMotif numerologicalClaim : PropositionRole
   unresolvedRole : PropositionRole
 
 record TypedNumericProposition : Set where

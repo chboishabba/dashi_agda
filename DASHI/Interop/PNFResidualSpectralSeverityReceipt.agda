@@ -21,24 +21,18 @@ import UFTC_Lattice as UFTC
 -- continuum spectral theorem.
 
 data PNFResidualSpectralSeverityStatus : Set where
-  finiteDiagonalSeveritySpectrum_noRuntimePNFPromotion :
-    PNFResidualSpectralSeverityStatus
+  finiteDiagonalSeveritySpectrum_noRuntimePNFPromotion : PNFResidualSpectralSeverityStatus
 
 data PNFResidualSpectralComponent : Set where
-  fourLevelResidualSeverityOperator :
-    PNFResidualSpectralComponent
+  fourLevelResidualSeverityOperator : PNFResidualSpectralComponent
 
-  sixLevelResidualSeverityOperator :
-    PNFResidualSpectralComponent
+  sixLevelResidualSeverityOperator : PNFResidualSpectralComponent
 
-  exactPartialFiniteGap :
-    PNFResidualSpectralComponent
+  exactPartialFiniteGap : PNFResidualSpectralComponent
 
-  joinAsSpectralMaximum :
-    PNFResidualSpectralComponent
+  joinAsSpectralMaximum : PNFResidualSpectralComponent
 
-  receiptOnlyNoRuntimeEvidence :
-    PNFResidualSpectralComponent
+  receiptOnlyNoRuntimeEvidence : PNFResidualSpectralComponent
 
 canonicalPNFResidualSpectralComponents :
   List PNFResidualSpectralComponent
