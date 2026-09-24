@@ -3,9 +3,12 @@ module DASHI.Interop.LeanRound11MachinCanonicalRouteBParityExact where
 ------------------------------------------------------------------------
 -- LEAN ROUND11 / MACHIN CANONICAL ROUTE-B PARITY CAPSTONE
 --
--- Lean source lane:
---   chboishabba/dashi_lean4
---   branch: agent/moonshine-eisenstein-analytic-20260922
+-- Lean mathematical owner:
+--   chboishabba/dashi_lean4 main
+--
+-- Focused replay verification lane:
+--   chboishabba/dashi_lean4#24
+--   branch: agent/moonshine-round11-route-b-replay-20260924
 --
 -- This receipt records the current cross-prover state after the vendored
 -- Bishop route was completed on the Lean side.
@@ -27,7 +30,9 @@ record LeanRound11MachinCanonicalRouteBParity : Set where
   constructor lean-round11-machin-canonical-route-b-parity
   field
     leanRepository : String
-    leanBranch : String
+    leanMathematicalOwner : String
+    leanVerificationBranch : String
+    leanVerificationPullRequest : String
     mathlibPin : String
 
     bishopSubmoduleCommitPinned : Bool
@@ -82,7 +87,9 @@ canonicalLeanRound11MachinCanonicalRouteBParity :
 canonicalLeanRound11MachinCanonicalRouteBParity =
   lean-round11-machin-canonical-route-b-parity
     "chboishabba/dashi_lean4"
-    "agent/moonshine-eisenstein-analytic-20260922"
+    "main"
+    "agent/moonshine-round11-route-b-replay-20260924"
+    "#24"
     "v4.28.0"
 
     true true true true true true true
@@ -94,4 +101,4 @@ canonicalLeanRound11MachinCanonicalRouteBParity =
 
     false false
 
-    "The mathematical route-B seam is closed on the Lean side: vendored Bishop regular reals are completion-equivalent to Lean Real; the source arithmetic and exp/sin/cos/Machin-pi semantics compile; the canonical Round11 binding is inhabited and unique up to Bishop equivalence; literal source q/E4/E6/Delta truncations map to the Mathlib targets; eta^24 equals the normalized E4/E6 Delta at the pinned Mathlib version; inverse-conjugation, fixed-locus, nonvanishing and sixfold phase are theorem-owned. Remaining evidence is operational provenance only: run the content-addressed Agda replay verifier and focused Lean kernel/axiom workflow at an exact head, then record those observed receipts. No generated replay or exact-head kernel receipt is inferred from source presence alone."
+    "The mathematical route-B seam is closed on the Lean side: vendored Bishop regular reals are completion-equivalent to Lean Real; the source arithmetic and exp/sin/cos/Machin-pi semantics compile; the canonical Round11 binding is inhabited and unique up to Bishop equivalence; literal source q/E4/E6/Delta truncations map to the Mathlib targets; eta^24 equals the normalized E4/E6 Delta at the pinned Mathlib version; inverse-conjugation, fixed-locus, nonvanishing and sixfold phase are theorem-owned. Remaining evidence is operational provenance only: PR #24 contains the content-addressed Agda replay verifier plus focused Lean kernel/axiom workflow; record the generated replay and exact-head receipts only after an actual run is observed. No generated replay or exact-head kernel receipt is inferred from source presence alone."
