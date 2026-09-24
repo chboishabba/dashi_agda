@@ -25,11 +25,6 @@ metricBasisInstanceStillMissing :
   ≡ false
 metricBasisInstanceStillMissing = refl
 
-symmetryMeaningStillMissing :
-  F.symmetrySemanticBridgeInstanceExists F.canonicalGRQFTConcreteTheoryFrontier
-  ≡ false
-symmetryMeaningStillMissing = refl
-
 tenValuesStillMissing :
   F.tenIndependentComponentValuesExist F.canonicalGRQFTConcreteTheoryFrontier
   ≡ false
