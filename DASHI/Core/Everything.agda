@@ -175,3 +175,12 @@ import DASHI.Core.PortableInteractiveViewExact
 import DASHI.Core.PortableLoopInterpretationExact
 import DASHI.Core.PortableSemanticConsumerAdequacyBridgeExact
 import DASHI.Core.PortableSemanticTranslationRealisationBridgeExact
+
+-- World/observation/theory/belief type separation and factorisation boundary.
+import DASHI.Core.WorldRepresentationSeparationExact
+
+-- Theory underdetermination, epistemic suspension, and discriminating experiments.
+import DASHI.Core.TheoryUnderdeterminationExperimentExact
+
+-- Law-like invariance under declared counterfactual/control families.
+import DASHI.Core.LawlikeRegularityCounterfactualExact
