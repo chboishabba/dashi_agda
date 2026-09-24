@@ -116,10 +116,10 @@ leafState supplyZetaLongWindowLowerDensity = diagnostic
 
 leafState searchForAnyGammaBound = pruned
 leafState guessGammaLossWithoutSource = pruned
-leafState recoverExactGammaProducerArtifact = live
-leafState recoverExactGammaProducerDecomposition = live
-leafState localizeGammaPrecisionLossOnRecoveredProducer = downstream
-leafState repairGammaToSharpWindow = downstream
+leafState recoverExactGammaProducerArtifact = owned
+leafState recoverExactGammaProducerDecomposition = owned
+leafState localizeGammaPrecisionLossOnRecoveredProducer = owned
+leafState repairGammaToSharpWindow = live
 leafState attachOwnedClusterMargin = downstream
 leafState combineFinalIndependentBudgets = conditional
 
@@ -224,10 +224,10 @@ guessGammaDigammaLossNoLongerLive :
   GammaSource.SearchRelevant GammaSource.guessDigammaLossWithoutProducer -> ⊥
 guessGammaDigammaLossNoLongerLive = GammaSource.guessDigammaLossWithoutProducerPruned
 
-gammaSourceRecoveryStageIsFinalProducerIdentityRequired :
+gammaSourceRecoveryStageIsPrecisionLossLocalized :
   GammaSource.currentGammaProducerRecoveryStage ≡
-  GammaSource.finalProducerIdentityRequired
-gammaSourceRecoveryStageIsFinalProducerIdentityRequired = refl
+  GammaSource.precisionLossLocalized
+gammaSourceRecoveryStageIsPrecisionLossLocalized = refl
 
 adaptiveInverseWidthStillLogicallyOpen :
   Gap.densityCutRefutesEveryAdaptiveInverseWidthRoute
@@ -287,8 +287,8 @@ record HighestAlphaAfter8894Boundary : Set where
       targetLocalSecondMomentIsForwardRHPayment ≡ false
 
     exactGammaProducerArtifactRecoveryLive : Bool
-    exactGammaProducerArtifactRecoveryLiveIsTrue :
-      exactGammaProducerArtifactRecoveryLive ≡ true
+    exactGammaProducerArtifactRecoveryLiveIsFalse :
+      exactGammaProducerArtifactRecoveryLive ≡ false
 
     sourceFreeGammaLossGuessAdmissible : Bool
     sourceFreeGammaLossGuessAdmissibleIsFalse :
@@ -317,8 +317,8 @@ canonicalHighestAlphaAfter8894Boundary =
     false refl
     true refl
     false refl
-    true refl
     false refl
     false refl
     false refl
-    "Historical post-8894 compatibility scheduler. Its determinant DirectSignedConsumerPayment lane remains diagnostic/intermediate relative to the newer universal pole-quotient final-carrier scheduler. Gamma generic source discovery is no longer live: a concrete candidate family is recovered and the current source stage is finalProducerIdentityRequired. The authoritative terminal high-ordinate leaves are now the pole-quotient Off and Gamma assigned-allowance payments; see RiemannAristotleRHFinalAllowanceLeafSchedulerExact. RH remains open."
+    false refl
+    "Historical post-8894 compatibility scheduler. Its determinant DirectSignedConsumerPayment lane remains diagnostic/intermediate relative to the newer universal pole-quotient final-carrier scheduler. Gamma generic source discovery, exact producer identity and first precision-loss localization are now owned from the vendored theorem bytes; the live historical Gamma move is repairGammaToSharpWindow at the stripConst/C2 taper-norm step. The authoritative terminal high-ordinate leaves remain the pole-quotient Off and sharp Gamma/baseline-excess payments; see RiemannAristotleRHFinalAllowanceLeafSchedulerExact. RH remains open."
