@@ -13,6 +13,7 @@ from agda_preflight.evidence import (
 )
 from agda_preflight.scope_backend import (
     AgdaScopeCheckBackend,
+    AgdaTypecheckBackend,
     ExternalScopeBackend,
     ScopeRefinement,
     diagnostic_key,
@@ -188,3 +189,76 @@ def test_native_scope_failure_does_not_confirm_any_suspicion(tmp_path):
 def test_typing_dependent_rules_require_typechecker_evidence():
     assert policy_for("TSAGDA041").minimum == EvidenceLevel.AGDA_TYPECHECKER
     assert policy_for("TSAGDA076").minimum == EvidenceLevel.AGDA_TYPECHECKER
+
+
+
+def test_full_typecheck_success_suppresses_scope_and_typing_suspicions(tmp_path):
+    path = write_module(tmp_path, "TypecheckOracle")
+    backend = AgdaTypecheckBackend("agda")
+    backend._typecheck_ok = lambda _: True
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+
+    diagnostics = [
+        Diagnostic(
+            "TSAGDA113",
+            "identifier may be unbound",
+            path,
+            2,
+            1,
+            severity="error",
+        ),
+        Diagnostic(
+            "TSAGDA041",
+            "function may be under-applied",
+            path,
+            3,
+            1,
+            severity="error",
+        ),
+        Diagnostic(
+            "TSAGDA204",
+            "Exact module contains a proof placeholder",
+            path,
+            4,
+            1,
+            severity="error",
+        ),
+    ]
+
+    results = checker._apply_evidence_policy(summary, diagnostics)
+
+    assert [d.code for d in results] == ["TSAGDA204"]
+
+
+def test_full_typecheck_failure_does_not_suppress_structural_suspicions(tmp_path):
+    path = write_module(tmp_path, "TypecheckOracleFailure")
+    backend = AgdaTypecheckBackend("agda")
+    backend._typecheck_ok = lambda _: False
+    checker = Checker(tmp_path, scope_backend=backend)
+    summary = checker.parse_summary(path)
+
+    diagnostics = [
+        Diagnostic(
+            "TSAGDA113",
+            "identifier may be unbound",
+            path,
+            2,
+            1,
+            severity="error",
+        ),
+        Diagnostic(
+            "TSAGDA041",
+            "function may be under-applied",
+            path,
+            3,
+            1,
+            severity="error",
+        ),
+    ]
+
+    results = checker._apply_evidence_policy(summary, diagnostics)
+
+    assert [d.code for d in results] == ["TSAGDA113", "TSAGDA041"]
+    assert all(d.severity == "warning" for d in results)
+    assert all(d.evidence_sufficient is False for d in results)
