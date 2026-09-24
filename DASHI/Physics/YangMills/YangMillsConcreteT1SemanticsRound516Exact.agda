@@ -240,15 +240,15 @@ ConcreteAsymptoticallyFreeTrajectory {endpoint = endpoint} source group finite =
   (∀ depth →
     (Sums.natAsRational depth
       * Flow.betaLower (betaEnclosure source group)
-      ℚ._≤_
+      ≤
       Flow.inverseCoupling (trajectory source group) 0
-        ℚ._-_
+        -
         Flow.inverseCoupling (trajectory source group) depth)
     ×
     (Flow.inverseCoupling (trajectory source group) 0
-        ℚ._-_
+        -
         Flow.inverseCoupling (trajectory source group) depth
-      ℚ._≤_
+      ≤
       Sums.natAsRational depth
         * Flow.betaUpper (betaEnclosure source group)))
 
@@ -609,6 +609,169 @@ reflectionPositivityPreserved :
   ConcreteReflectionPositivityPreserved source group
 reflectionPositivityPreserved source group =
   finiteReflectionPositive source group
+
+selectedFiniteVolumeCutoffMeasure :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group cutoff →
+  ConcreteFiniteVolumeCutoffMeasure source group cutoff
+    (Limit.finiteMeasure (R511.family endpoint group) cutoff)
+selectedFiniteVolumeCutoffMeasure source group cutoff = refl
+
+selectedReflectionPositiveRegularization :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group cutoff →
+  ConcreteReflectionPositiveRegularization source group cutoff
+    (Limit.finiteMeasure (R511.family endpoint group) cutoff)
+selectedReflectionPositiveRegularization source group cutoff =
+  refl , finiteReflectionPositive source group cutoff
+
+selectedGaugePreserved :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcreteGaugePreserved source group
+selectedGaugePreserved = gaugePreserved
+
+selectedLocalityPreserved :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcreteLocalityPreserved source group
+selectedLocalityPreserved = localityPreserved
+
+selectedEuclideanCovariancePreserved :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcreteEuclideanCovariancePreserved source group
+selectedEuclideanCovariancePreserved = euclideanCovariancePreserved
+
+selectedReflectionPositivityPreserved :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcreteReflectionPositivityPreserved source group
+selectedReflectionPositivityPreserved = reflectionPositivityPreserved
+
+selectedPositivityNormalizationPreserved :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcretePositivityNormalizationPreserved source group
+selectedPositivityNormalizationPreserved = positivityNormalizationPreserved
+
+selectedVolumeCutoffCompatibility :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcreteVolumeCutoffCompatibility source group
+selectedVolumeCutoffCompatibility = volumeCutoffCompatibility
 
 ------------------------------------------------------------------------
 -- Semantics overlay: non-T1 meanings are inherited from R511.
