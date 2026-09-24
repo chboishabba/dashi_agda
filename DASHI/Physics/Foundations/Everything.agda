@@ -138,3 +138,7 @@ import DASHI.Physics.Foundations.CMP119GRAnchoredStressWeldCompilerValidation
 
 import DASHI.Physics.Foundations.GRRecoveryVsSchwarzschildValidationExact
 import DASHI.Physics.Foundations.GRRecoveryVsSchwarzschildValidationValidation
+
+import DASHI.Physics.Foundations.StressEnergyWeldMathematicalCoreExact
+import DASHI.Physics.Foundations.CMP119GRAnchoredStressMathematicalCoreExact
+import DASHI.Physics.Foundations.StressEnergyWeldMathematicalCoreValidation
