@@ -33,49 +33,49 @@ import DASHI.Environment.EcologicalEvidenceGates as Evidence
 ------------------------------------------------------------------------
 
 data BiologicalAgentClass : Set where
-  lactobacillaceae
-  bacillusGroup
-  yeastGroup
-  mixedProbiotic
-  definedLacticAcidBacteria
+  lactobacillaceae : BiologicalAgentClass
+  bacillusGroup : BiologicalAgentClass
+  yeastGroup : BiologicalAgentClass
+  mixedProbiotic : BiologicalAgentClass
+  definedLacticAcidBacteria : BiologicalAgentClass
   undefinedMicrobialConsortium : BiologicalAgentClass
 
 data AdministrationRoute : Set where
-  feedRoute
-  drinkingWaterRoute
-  gavageRoute
-  respiratoryOrNasalRoute
-  litterOrBeddingInoculation
-  environmentalSurfaceApplication
-  fermentedFeedRoute
+  feedRoute : AdministrationRoute
+  drinkingWaterRoute : AdministrationRoute
+  gavageRoute : AdministrationRoute
+  respiratoryOrNasalRoute : AdministrationRoute
+  litterOrBeddingInoculation : AdministrationRoute
+  environmentalSurfaceApplication : AdministrationRoute
+  fermentedFeedRoute : AdministrationRoute
   manureOrCompostTreatment : AdministrationRoute
 
 data PoultryOutcome : Set where
-  bodyWeightGain
-  feedConversionRatio
-  gutMicrobiome
-  pathogenCarriage
-  immuneOrBarrierResponse
-  litterPH
-  litterMoisture
-  litterMicrobiome
-  ammoniaConcentration
-  ammoniaEmission
-  odourOrVOC
-  mortality
-  footpadOrWelfare
-  manureNitrogenRetention
-  antimicrobialUse
+  bodyWeightGain : PoultryOutcome
+  feedConversionRatio : PoultryOutcome
+  gutMicrobiome : PoultryOutcome
+  pathogenCarriage : PoultryOutcome
+  immuneOrBarrierResponse : PoultryOutcome
+  litterPH : PoultryOutcome
+  litterMoisture : PoultryOutcome
+  litterMicrobiome : PoultryOutcome
+  ammoniaConcentration : PoultryOutcome
+  ammoniaEmission : PoultryOutcome
+  odourOrVOC : PoultryOutcome
+  mortality : PoultryOutcome
+  footpadOrWelfare : PoultryOutcome
+  manureNitrogenRetention : PoultryOutcome
+  antimicrobialUse : PoultryOutcome
   antimicrobialResistance : PoultryOutcome
 
 data PoultryEvidenceState : Set where
-  practiceDescription
-  inVitroEvidence
-  controlledBirdTrial
-  flockFieldTrial
-  systematicReview
-  metaAnalysis
-  causalEstimate
+  practiceDescription : PoultryEvidenceState
+  inVitroEvidence : PoultryEvidenceState
+  controlledBirdTrial : PoultryEvidenceState
+  flockFieldTrial : PoultryEvidenceState
+  systematicReview : PoultryEvidenceState
+  metaAnalysis : PoultryEvidenceState
+  causalEstimate : PoultryEvidenceState
   recommendationAdmitted : PoultryEvidenceState
 
 record BiologicalIntervention : Set where

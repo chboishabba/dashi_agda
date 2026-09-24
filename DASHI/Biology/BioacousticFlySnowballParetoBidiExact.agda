@@ -224,7 +224,7 @@ snowballDependencyGraph = Graph.typedDependencyGraph
 ------------------------------------------------------------------------
 
 data FrontierAxis : Set where
-  sameObjectDebt temporalAlignmentDebt provenanceDebt opportunityLoss
+  sameObjectDebt temporalAlignmentDebt provenanceDebt opportunityLoss : FrontierAxis
   identityRisk implementationCost : FrontierAxis
 
 axisReference : FrontierAxis → String

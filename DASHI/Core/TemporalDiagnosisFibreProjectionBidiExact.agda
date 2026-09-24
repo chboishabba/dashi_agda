@@ -30,14 +30,14 @@ liveProjection bundle diagnosis =
 modelActivated : Temporal.DiagnosisEvent Outcome.modelConflict
 modelActivated =
   Temporal.diagnosis-event Temporal.activated 1
-    "initial result" "none"
+    (Temporal.resultTrigger Outcome.adverse) "none"
     "model conflict remains live"
     "model diagnosis provenance"
 
 premiseActivated : Temporal.DiagnosisEvent Outcome.premiseConflict
 premiseActivated =
   Temporal.diagnosis-event Temporal.activated 1
-    "initial result" "none"
+    (Temporal.resultTrigger Outcome.adverse) "none"
     "premise conflict remains live"
     "premise diagnosis provenance"
 

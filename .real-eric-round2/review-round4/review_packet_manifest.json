@@ -1,0 +1,15 @@
+{
+  "all_packets_unresolved_before_review": true,
+  "candidate_auto_promoted": false,
+  "ledger_record_count": 43996,
+  "max_packets": 50,
+  "overlay_rows_reviewed": 0,
+  "overlay_rows_with_authoritative_decision": 0,
+  "overlay_template_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/review-round4/screening_decision_overlay_template.jsonl",
+  "overlay_template_sha256": "41735db22497f80aa8d4c4394fe6222f706b71c1aa2f50da7eb58ad67e8799b8",
+  "packet_count": 50,
+  "packet_reference": "/home/c/Documents/code/dashi_agda-esd-ledger-check/.real-eric-round2/review-round4/review_packets.jsonl",
+  "packet_sha256": "71b2e342b664429b03369b395b7ac2ee301a2f7d61112cad3394d0bc9a501a01",
+  "schema": "sensiblaw.digital-esd-screening-review-packet-manifest.v0_1",
+  "selection": "calibration-first"
+}

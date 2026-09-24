@@ -37,7 +37,7 @@ data PopulationNexusStatus : Set where
   essentialityOpen : PopulationNexusStatus
 
 data ClusterLabel : Set where
-  seq03
+  seq03 : ClusterLabel
   seqWest : ClusterLabel
 
 koalaQid : Id.ItemId

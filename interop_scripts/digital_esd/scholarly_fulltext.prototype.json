@@ -1,0 +1,12 @@
+{
+  "tool_reference": "digital-esd-scholarly-parser-prototype",
+  "tool_revision_reference": "application-prototype-v1",
+  "command": [
+    "python3",
+    "interop_scripts/digital_esd/scholarly_parser_prototype.py",
+    "--input",
+    "{input}",
+    "--output",
+    "{output_dir}/parser-output.jsonl"
+  ]
+}

@@ -89,7 +89,7 @@ open ResidualPath public
 record ResidualDischarge
     (carrier : RegularResidualCarrier)
     (State : Set)
-    (state : State) : Set where
+    (state : State) : Set₁ where
   constructor residual-discharge
   field
     residualWasLive : Set

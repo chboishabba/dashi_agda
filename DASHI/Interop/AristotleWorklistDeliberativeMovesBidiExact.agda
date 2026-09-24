@@ -10,10 +10,10 @@ import DASHI.Core.AskListenObservationProducerBidiExact as AskListen
 
 -- Archive donors: RequestProject.Worklist / Reports / repair staging.
 data AristotleWorkState : Set where
-  coverageMissing
-  interpretationAmbiguous
-  repairCandidate
-  reviewedRepair
+  coverageMissing : AristotleWorkState
+  interpretationAmbiguous : AristotleWorkState
+  repairCandidate : AristotleWorkState
+  reviewedRepair : AristotleWorkState
   executableRepair : AristotleWorkState
 
 data AristotleDeliberativeRoute : Set where

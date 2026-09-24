@@ -1,0 +1,10 @@
+module DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedGate4SourceLimitValidation where
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119Equation171WeightedGate4SourceLimitExact as L
+applicationLimitCompilerOwned : L.cmp119WeightedSourceApplicationLimitCompilerLevel ≡ machineChecked
+applicationLimitCompilerOwned = refl
+densityLimitCompilerOwned : L.cmp119WeightedSelectedDensityLimitCompilerLevel ≡ machineChecked
+densityLimitCompilerOwned = refl
+sourceMeaningStillPhysical : L.literalCMP119ApplicationEquation171MeaningWeightedLevel ≡ conditional
+sourceMeaningStillPhysical = refl

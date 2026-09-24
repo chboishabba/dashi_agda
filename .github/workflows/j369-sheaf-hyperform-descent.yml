@@ -1,0 +1,35 @@
+name: J369 sheaf hyperfabric descent
+
+on:
+  push:
+    paths:
+      - 'DASHI/Moonshine/JInvariantSheafHyperformAdmissibleDescentExact.agda'
+      - 'DASHI/Foundations/StageTwelveGrothendieckRelationHyperformExact.agda'
+      - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
+      - 'scripts/check_j369_sheaf_hyperform_descent.sh'
+      - 'scripts/check_j369_consolidated_next_stage.sh'
+      - '.github/workflows/j369-sheaf-hyperform-descent.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Moonshine/JInvariantSheafHyperformAdmissibleDescentExact.agda'
+      - 'DASHI/Foundations/StageTwelveGrothendieckRelationHyperformExact.agda'
+      - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
+      - 'scripts/check_j369_sheaf_hyperform_descent.sh'
+      - 'scripts/check_j369_consolidated_next_stage.sh'
+      - '.github/workflows/j369-sheaf-hyperform-descent.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Run sheaf/Stage12 checker
+        run: bash scripts/check_j369_sheaf_hyperform_descent.sh
+      - name: Run consolidated next-stage checker
+        run: bash scripts/check_j369_consolidated_next_stage.sh

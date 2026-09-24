@@ -17,29 +17,21 @@ import DASHI.Core.CandidateOnlyCore as CandidateOnly
 -- clinical authority.
 
 data BodyKeepsScoreResidualFibre : Set where
-  breathResidualFibre :
-    BodyKeepsScoreResidualFibre
+  breathResidualFibre : BodyKeepsScoreResidualFibre
 
-  postureResidualFibre :
-    BodyKeepsScoreResidualFibre
+  postureResidualFibre : BodyKeepsScoreResidualFibre
 
-  arousalResidualFibre :
-    BodyKeepsScoreResidualFibre
+  arousalResidualFibre : BodyKeepsScoreResidualFibre
 
-  sensoryResidualFibre :
-    BodyKeepsScoreResidualFibre
+  sensoryResidualFibre : BodyKeepsScoreResidualFibre
 
-  memoryResidualFibre :
-    BodyKeepsScoreResidualFibre
+  memoryResidualFibre : BodyKeepsScoreResidualFibre
 
-  relationResidualFibre :
-    BodyKeepsScoreResidualFibre
+  relationResidualFibre : BodyKeepsScoreResidualFibre
 
-  agencyResidualFibre :
-    BodyKeepsScoreResidualFibre
+  agencyResidualFibre : BodyKeepsScoreResidualFibre
 
-  plusOneSafetySeedIdentityHandleFibre :
-    BodyKeepsScoreResidualFibre
+  plusOneSafetySeedIdentityHandleFibre : BodyKeepsScoreResidualFibre
 
 canonicalBodyKeepsScoreResidualFibres :
   List BodyKeepsScoreResidualFibre

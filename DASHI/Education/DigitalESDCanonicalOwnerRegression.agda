@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
 import DASHI.Interop.PNFHyperfabric369 as PNF369
-import DASHI.Cognition.PNF.TraumaMemoryHypervoxelBridge as Trauma
+import DASHI.Cognition.PNF.TraumaMemoryHypervoxelAuthorityBoundaryExact as Trauma
 import DASHI.Education.DigitalESDCrossRoundAttributionBoundaryExact as CrossRound
 import DASHI.Education.DigitalESDReciprocalBraidExact as Braid
 

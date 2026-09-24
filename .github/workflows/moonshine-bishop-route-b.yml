@@ -1,0 +1,54 @@
+name: Moonshine Bishop Route B
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/jmd-archimedes-delta-369-bridge-20260922
+    paths:
+      - "DASHI/Analysis/BishopSetoidComplexExact.agda"
+      - "DASHI/Foundations/Bishop*Exact.agda"
+      - "DASHI/Moonshine/BishopRound11Machin*.agda"
+      - "DASHI/Moonshine/JInvariantEisensteinBishopSetoid*.agda"
+      - "DASHI/Moonshine/EisensteinBishopRouteBCurrentFrontierExact.agda"
+      - "DASHI/Moonshine/DeltaUnitCircleReflectionPhaseExact.agda"
+      - "DASHI/Moonshine/JMDArchimedesDelta369FixedLocusBridgeExact.agda"
+      - "DASHI/Interop/*Round11Machin*BindingManifestExact.agda"
+      - "DASHI/Interop/LeanBishopCompletionCanonicalRouteReceiptExact.agda"
+      - "scripts/check_moonshine_bishop_route_b.sh"
+      - ".github/workflows/moonshine-bishop-route-b.yml"
+  pull_request:
+    paths:
+      - "DASHI/Analysis/BishopSetoidComplexExact.agda"
+      - "DASHI/Foundations/Bishop*Exact.agda"
+      - "DASHI/Moonshine/BishopRound11Machin*.agda"
+      - "DASHI/Moonshine/JInvariantEisensteinBishopSetoid*.agda"
+      - "DASHI/Moonshine/EisensteinBishopRouteBCurrentFrontierExact.agda"
+      - "DASHI/Moonshine/DeltaUnitCircleReflectionPhaseExact.agda"
+      - "DASHI/Moonshine/JMDArchimedesDelta369FixedLocusBridgeExact.agda"
+      - "DASHI/Interop/*Round11Machin*BindingManifestExact.agda"
+      - "DASHI/Interop/LeanBishopCompletionCanonicalRouteReceiptExact.agda"
+      - "scripts/check_moonshine_bishop_route_b.sh"
+      - ".github/workflows/moonshine-bishop-route-b.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Check Bishop canonical route B
+        shell: bash
+        run: |
+          nix develop --accept-flake-config --command bash -lc '
+            set -euo pipefail
+            export AGDA_BIN="$(command -v agda)"
+            export AGDA_ARGS="-i . -i DCHoTT-Agda -i vendor/bishop -i cubical -l standard-library"
+            bash scripts/check_moonshine_bishop_route_b.sh
+          '

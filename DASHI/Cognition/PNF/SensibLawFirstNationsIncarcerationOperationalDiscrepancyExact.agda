@@ -25,10 +25,10 @@ import DASHI.Cognition.PNF.SensibLawFirstNationsIncarcerationSourceAtlasExact as
 ------------------------------------------------------------------------
 
 data ObservationRole : Set where
-  officialAdministrativeStatistic
-  officialTargetAssessment
-  officialHealthSynthesis
-  officialYouthJusticeStatistic
+  officialAdministrativeStatistic : ObservationRole
+  officialTargetAssessment : ObservationRole
+  officialHealthSynthesis : ObservationRole
+  officialYouthJusticeStatistic : ObservationRole
   : ObservationRole
 
 record SourceReportedObservation : Set where

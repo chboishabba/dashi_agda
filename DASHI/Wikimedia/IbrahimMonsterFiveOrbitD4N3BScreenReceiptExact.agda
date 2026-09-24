@@ -19,20 +19,22 @@ import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BCharacterAcquisitionExact as 
 --
 --        theta = (5,5,1,3,3) = 3 A1 + B1 + B2;
 --
+--      every compatible fusion is now retained literally, including its
+--      five-entry D4 -> MN3B fusion, induced D4 -> Monster class positions,
+--      canonical pulled values, D4 multiplicities, and the central r^2 image
+--      labelled through the stored MN3B -> Monster fusion and Monster ATLAS
+--      class names;
+--
 --   2. construct the existing AtlasRep MN3B group, find a concrete D8 inside
 --      a Sylow-2 subgroup, transport the canonical D4 classes through an
 --      explicit group isomorphism, and identify the resulting MN3B class
 --      fusion by ambient order/class-size invariants.
 --
--- The runtime schema is fail-locating: AtlasRep group realization, D8 subgroup
--- discovery, canonical isomorphism, unique ambient class identification,
--- character-table admissibility and character compatibility remain separate
--- observations. Source for both stages is written. The dedicated shell checker,
--- the existing GAP/CTblLib/AtlasRep workflow wiring, a direct push trigger for
--- the isolated execution branch, the raw JSON artifact, and the derived
--- fail-locating summary artifact are all source-written. These execution-
--- enablement receipts remain strictly weaker than observing a GAP runtime
--- result on this revision.
+-- The Python residual scheduler now has a literal-row loader for the same raw
+-- JSON artifact. It refuses count-only receipts and keeps the literal MN3B and
+-- Monster fusion lists separate. This is source/interface payment only: the
+-- updated GAP producer has not been rerun on this revision here, so neither the
+-- literal 17-row artifact nor its 2A/2B split is promoted to a runtime receipt.
 ------------------------------------------------------------------------
 
 kernelBoundary : Kernel.FiveOrbitD4KernelCharacterBoundary
@@ -49,6 +51,9 @@ data SourceScriptCreatesRuntimeReceipt : Set where
 data PossibleFusionCreatesActualD4Subgroup : Set where
 data CharacterContainmentCreatesSelectedActionWeld : Set where
 data ExecutionWiringCreatesRuntimeVerdict : Set where
+data LiteralRowsSourceCreatesObservedRows : Set where
+
+data CentralClassDerivationSourceCreatesObservedSplit : Set where
 
 sourceScriptDoesNotCreateRuntimeReceipt :
   SourceScriptCreatesRuntimeReceipt → ⊥
@@ -66,6 +71,14 @@ executionWiringDoesNotCreateRuntimeVerdict :
   ExecutionWiringCreatesRuntimeVerdict → ⊥
 executionWiringDoesNotCreateRuntimeVerdict ()
 
+literalRowsSourceDoesNotCreateObservedRows :
+  LiteralRowsSourceCreatesObservedRows → ⊥
+literalRowsSourceDoesNotCreateObservedRows ()
+
+centralClassDerivationSourceDoesNotCreateObservedSplit :
+  CentralClassDerivationSourceCreatesObservedSplit → ⊥
+centralClassDerivationSourceDoesNotCreateObservedSplit ()
+
 ------------------------------------------------------------------------
 -- Runtime boundary.
 ------------------------------------------------------------------------
@@ -76,6 +89,9 @@ record FiveOrbitD4N3BScreenReceipt : Set where
     targetCharacterSourceWritten : Bool
     targetCharacterIsThreeA1B1B2 : Bool
     characterTableFusionScreenSourceWritten : Bool
+    literalCharacterCompatibleFusionRowsSourceWritten : Bool
+    centralMonsterClassLabelDerivedFromFusionSourceWritten : Bool
+    literalFusionSchedulerLoaderSourceWritten : Bool
     actualD4RealizationSourceWritten : Bool
     canonicalClassTransportUsedForActualFusion : Bool
     failLocatingRuntimeReceiptSourceWritten : Bool
@@ -87,6 +103,8 @@ record FiveOrbitD4N3BScreenReceipt : Set where
     summaryArtifactUploadWired : Bool
     possibleFusionCountObserved : Bool
     characterCompatibleFusionCountObserved : Bool
+    literalFusionRowsRuntimeObserved : Bool
+    central2A2BSplitRuntimeObserved : Bool
     actualD4SubgroupRuntimeObserved : Bool
     actualD4CharacterCompatibilityObserved : Bool
     gapRuntimeReceiptObserved : Bool
@@ -99,8 +117,10 @@ open FiveOrbitD4N3BScreenReceipt public
 currentFiveOrbitD4N3BScreenReceipt : FiveOrbitD4N3BScreenReceipt
 currentFiveOrbitD4N3BScreenReceipt =
   five-orbit-d4-n3b-screen-receipt
-    true true true true true
+    true true true
+    true true true
+    true true
     true true true true true true true
-    false false false false false
+    false false false false false false false
     false false false
-    "The producer, fail-locating raw JSON schema, dedicated checker, established GAP/CTblLib/AtlasRep workflow hook, direct execution-branch push trigger, fail-locating summary classifier, and both raw/summary JSON artifact upload paths are source-written. No current workflow run has been observed on this revision, so every runtime observation remains false. When execution becomes available, first consume build/monster_3b_five_orbit_d4_n3b_screen.json and build/monster_3b_five_orbit_d4_n3b_summary.json. A zero character-compatible fusion count falsifies the current five-orbit D4 route. Otherwise follow the realization ladder AtlasRep group -> D8 subgroup -> canonical D4 isomorphism -> unique ambient class fusion -> table-admissible realized fusion -> character-compatible realized fusion. Even a positive realized compatible subgroup remains weaker than Selected3BNormalizerMonsterActionWeld: the actual selected Monster carrier/action intertwiner must still be paid independently."
+    "The producer now source-writes every compatible D4 -> MN3B fusion row into build/monster_3b_five_orbit_d4_n3b_screen.json, retains the induced D4 -> Monster class positions, derives the central r^2 ATLAS label from the actual stored fusion maps, and exposes a Python scheduler loader that rejects count-only receipts. The updated producer has not been rerun on this revision here, so the literal row artifact, its expected 17-world cardinality, and the 9x2A/8x2B central split remain unobserved runtime coordinates. The next payment is a real GAP rerun followed by exact pytest over the regenerated artifact. If the 17 literal rows and 9/8 split reproduce, schedule on the real fusion rows and derive induced Monster-profile collisions before opening any matrix route. Even a positive realized compatible subgroup remains weaker than Selected3BNormalizerMonsterActionWeld: the actual selected Monster carrier/action intertwiner must still be paid independently."

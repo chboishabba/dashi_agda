@@ -1,0 +1,430 @@
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass
+from typing import Any, Iterable
+
+from .focus import focus_symbol
+from .temporal_focus import track_symbol_history
+
+
+@dataclass(frozen=True)
+class SceneCommand:
+    kind: str
+    payload: dict[str, Any]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "kind": self.kind,
+            "payload": self.payload,
+        }
+
+
+def _delta_commands(
+    *,
+    parent: str,
+    commit: str,
+    delta: dict[str, Any],
+) -> list[SceneCommand]:
+    commands: list[SceneCommand] = []
+    for node in delta.get("removed_nodes", []):
+        commands.append(
+            SceneCommand(
+                "remove-node",
+                {"parent": parent, "commit": commit, "node": node},
+            )
+        )
+    for edge in delta.get("removed_edges", []):
+        commands.append(
+            SceneCommand(
+                "remove-edge",
+                {"parent": parent, "commit": commit, "edge": edge},
+            )
+        )
+    for node in delta.get("added_nodes", []):
+        commands.append(
+            SceneCommand(
+                "add-node",
+                {"parent": parent, "commit": commit, "node": node},
+            )
+        )
+    for edge in delta.get("added_edges", []):
+        commands.append(
+            SceneCommand(
+                "add-edge",
+                {"parent": parent, "commit": commit, "edge": edge},
+            )
+        )
+    return commands
+
+
+def compile_first_parent_program(
+    timeline: dict[str, Any],
+    *,
+    target_commit: str | None = None,
+) -> list[SceneCommand]:
+    commits = {
+        commit["commit"]: commit
+        for commit in timeline.get("commits", [])
+    }
+    snapshots = {
+        snapshot["commit"]: snapshot
+        for snapshot in timeline.get("snapshots", [])
+    }
+    if not snapshots:
+        return []
+
+    if target_commit is None:
+        for commit in reversed(timeline.get("commits", [])):
+            if commit["commit"] in snapshots:
+                target_commit = commit["commit"]
+                break
+    if target_commit is None or target_commit not in snapshots:
+        return []
+
+    lineage: list[str] = []
+    seen: set[str] = set()
+    current = target_commit
+    while current in snapshots and current not in seen:
+        seen.add(current)
+        lineage.append(current)
+        record = commits.get(current)
+        if record is None:
+            break
+        parents = [
+            parent
+            for parent in record.get("parents", [])
+            if parent in snapshots
+        ]
+        if not parents:
+            break
+        current = parents[0]
+    lineage.reverse()
+
+    commands: list[SceneCommand] = []
+    if lineage:
+        commands.append(
+            SceneCommand(
+                "show-snapshot",
+                {"commit": lineage[0]},
+            )
+        )
+
+    for commit in lineage[1:]:
+        record = commits[commit]
+        parent = next(
+            (
+                candidate
+                for candidate in record.get("parents", [])
+                if candidate in snapshots
+            ),
+            None,
+        )
+        if parent is None:
+            commands.append(
+                SceneCommand(
+                    "show-snapshot",
+                    {"commit": commit},
+                )
+            )
+            continue
+
+        delta = snapshots[commit].get("parent_deltas", {}).get(parent, {})
+        commands.append(
+            SceneCommand(
+                "advance-commit",
+                {"parent": parent, "commit": commit},
+            )
+        )
+        commands.extend(
+            _delta_commands(
+                parent=parent,
+                commit=commit,
+                delta=delta,
+            )
+        )
+        commands.append(
+            SceneCommand(
+                "settle-layout",
+                {"commit": commit},
+            )
+        )
+
+    return commands
+
+
+def compile_merge_episode_program(
+    timeline: dict[str, Any],
+    *,
+    episode_index: int,
+) -> list[SceneCommand]:
+    episodes = timeline.get("branch_episodes", [])
+    if not episodes:
+        return []
+    episode = episodes[episode_index]
+
+    left = episode["left_tip"]
+    right = episode["right_tip"]
+    merge = episode["merge_commit"]
+    snapshots = {
+        snapshot["commit"]: snapshot
+        for snapshot in timeline.get("snapshots", [])
+    }
+    if merge not in snapshots or left not in snapshots or right not in snapshots:
+        return []
+
+    commands = [
+        SceneCommand(
+            "show-fork",
+            {
+                "fork_base": episode["fork_base"],
+                "left_path": list(episode["left_path"]),
+                "right_path": list(episode["right_path"]),
+            },
+        ),
+        SceneCommand(
+            "show-parent-snapshot",
+            {"side": "left", "commit": left},
+        ),
+        SceneCommand(
+            "show-parent-snapshot",
+            {"side": "right", "commit": right},
+        ),
+    ]
+
+    for parent in (left, right):
+        delta = snapshots[merge].get("parent_deltas", {}).get(parent, {})
+        commands.append(
+            SceneCommand(
+                "show-parent-delta",
+                {
+                    "parent": parent,
+                    "merge": merge,
+                    "delta": delta,
+                },
+            )
+        )
+
+    commands.append(
+        SceneCommand(
+            "converge-parents",
+            {
+                "left": left,
+                "right": right,
+                "merge": merge,
+            },
+        )
+    )
+    commands.append(
+        SceneCommand(
+            "show-snapshot",
+            {"commit": merge},
+        )
+    )
+    return commands
+
+
+def compile_branch_episode_program(
+    timeline: dict[str, Any],
+    *,
+    episode_index: int,
+) -> list[SceneCommand]:
+    """Compile fork -> two real branch paths -> merge convergence."""
+
+    episodes = timeline.get("branch_episodes", [])
+    if not episodes:
+        return []
+    episode = episodes[episode_index]
+
+    snapshots = {
+        snapshot["commit"]: snapshot
+        for snapshot in timeline.get("snapshots", [])
+    }
+    commit_order = {
+        commit["commit"]: index
+        for index, commit in enumerate(timeline.get("commits", []))
+    }
+
+    fork = episode["fork_base"]
+    merge = episode["merge_commit"]
+    left_path = list(episode["left_path"])
+    right_path = list(episode["right_path"])
+
+    required = set(left_path) | set(right_path) | {fork, merge}
+    if not required.issubset(snapshots):
+        return []
+
+    commands: list[SceneCommand] = [
+        SceneCommand("show-fork-snapshot", {"commit": fork}),
+        SceneCommand(
+            "split-branches",
+            {
+                "fork": fork,
+                "left_tip": episode["left_tip"],
+                "right_tip": episode["right_tip"],
+            },
+        ),
+    ]
+
+    events: list[tuple[int, str, str, str]] = []
+    for side, path in (("left", left_path), ("right", right_path)):
+        for parent, child in zip(path, path[1:]):
+            events.append(
+                (
+                    commit_order.get(child, 10**12),
+                    side,
+                    parent,
+                    child,
+                )
+            )
+    events.sort(key=lambda item: (item[0], item[1], item[3]))
+
+    for _order, side, parent, child in events:
+        delta = snapshots[child].get("parent_deltas", {}).get(parent)
+        if delta is None:
+            return []
+        commands.append(
+            SceneCommand(
+                "advance-branch",
+                {
+                    "side": side,
+                    "parent": parent,
+                    "commit": child,
+                    "delta": delta,
+                },
+            )
+        )
+
+    for parent in (episode["left_tip"], episode["right_tip"]):
+        delta = snapshots[merge].get("parent_deltas", {}).get(parent)
+        if delta is None:
+            return []
+        commands.append(
+            SceneCommand(
+                "show-parent-delta",
+                {
+                    "parent": parent,
+                    "merge": merge,
+                    "delta": delta,
+                },
+            )
+        )
+
+    commands.extend(
+        [
+            SceneCommand(
+                "converge-parents",
+                {
+                    "left": episode["left_tip"],
+                    "right": episode["right_tip"],
+                    "merge": merge,
+                },
+            ),
+            SceneCommand("show-snapshot", {"commit": merge}),
+        ]
+    )
+    return commands
+
+
+def compile_symbol_focus_program(
+    graph_data: dict[str, Any],
+    selector: str,
+    *,
+    upstream_depth: int = 2,
+    downstream_depth: int = 0,
+    max_nodes: int = 250,
+    max_edges: int = 800,
+) -> list[SceneCommand]:
+    focus = focus_symbol(
+        graph_data,
+        selector,
+        upstream_depth=upstream_depth,
+        downstream_depth=downstream_depth,
+        max_nodes=max_nodes,
+        max_edges=max_edges,
+    )
+    commands = [
+        SceneCommand(
+            "show-focus-root",
+            {
+                "root_id": focus.root_id,
+                "node_ids": list(focus.layer_specs[0].node_ids),
+            },
+        )
+    ]
+    for layer in focus.layer_specs[1:]:
+        commands.append(
+            SceneCommand(
+                "expand-focus-layer",
+                {
+                    "root_id": focus.root_id,
+                    "direction": layer.direction,
+                    "depth": layer.depth,
+                    "node_ids": list(layer.node_ids),
+                },
+            )
+        )
+    commands.append(
+        SceneCommand(
+            "settle-focus",
+            {
+                "root_id": focus.root_id,
+                "node_ids": sorted(focus.node_ids),
+                "edge_ids": sorted(focus.edge_ids),
+                "truncated": focus.truncated,
+                "omitted_nodes": focus.omitted_nodes,
+                "omitted_edges": focus.omitted_edges,
+            },
+        )
+    )
+    return commands
+
+
+def compile_temporal_symbol_program(
+    timeline: dict[str, Any],
+    selector: str,
+    *,
+    target_commit: str | None = None,
+    upstream_depth: int = 2,
+    downstream_depth: int = 0,
+    max_nodes: int = 250,
+    max_edges: int = 800,
+) -> list[SceneCommand]:
+    frames = track_symbol_history(
+        timeline,
+        selector,
+        target_commit=target_commit,
+        upstream_depth=upstream_depth,
+        downstream_depth=downstream_depth,
+        max_nodes=max_nodes,
+        max_edges=max_edges,
+    )
+    if not frames:
+        return []
+
+    commands: list[SceneCommand] = []
+    for index, frame in enumerate(frames):
+        commands.append(
+            SceneCommand(
+                "show-temporal-focus"
+                if index == 0
+                else "advance-temporal-focus",
+                {
+                    "commit": frame.commit,
+                    "root_id": frame.root_id,
+                    "root_label": frame.root_label,
+                    "root_module": frame.root_module,
+                    "identity_evidence": frame.identity_evidence,
+                    "identity_confidence": frame.identity_confidence,
+                    "node_ids": sorted(frame.focus.node_ids),
+                    "edge_ids": sorted(frame.focus.edge_ids),
+                    "truncated": frame.focus.truncated,
+                    "omitted_nodes": frame.focus.omitted_nodes,
+                    "omitted_edges": frame.focus.omitted_edges,
+                },
+            )
+        )
+    return commands
+
+
+def serialize_program(commands: Iterable[SceneCommand]) -> list[dict[str, Any]]:
+    return [command.to_dict() for command in commands]

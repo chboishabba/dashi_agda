@@ -27,32 +27,23 @@ listCount (_ ∷ xs) =
 -- Vocabulary.
 
 data RSAKeygenTraceCoreKind : Set where
-  generatorStateKind :
-    RSAKeygenTraceCoreKind
+  generatorStateKind : RSAKeygenTraceCoreKind
 
-  candidateDrawKind :
-    RSAKeygenTraceCoreKind
+  candidateDrawKind : RSAKeygenTraceCoreKind
 
-  candidateAtKind :
-    RSAKeygenTraceCoreKind
+  candidateAtKind : RSAKeygenTraceCoreKind
 
-  acceptsPrimeKind :
-    RSAKeygenTraceCoreKind
+  acceptsPrimeKind : RSAKeygenTraceCoreKind
 
-  observedIterationCountKind :
-    RSAKeygenTraceCoreKind
+  observedIterationCountKind : RSAKeygenTraceCoreKind
 
-  privateFiberKind :
-    RSAKeygenTraceCoreKind
+  privateFiberKind : RSAKeygenTraceCoreKind
 
-  privateFiberWithTraceKind :
-    RSAKeygenTraceCoreKind
+  privateFiberWithTraceKind : RSAKeygenTraceCoreKind
 
-  traceShrinksFiberKind :
-    RSAKeygenTraceCoreKind
+  traceShrinksFiberKind : RSAKeygenTraceCoreKind
 
-  traceEvidenceProjectsToFiberKind :
-    RSAKeygenTraceCoreKind
+  traceEvidenceProjectsToFiberKind : RSAKeygenTraceCoreKind
 
   namedRSAKeygenTraceCoreKind :
     String →

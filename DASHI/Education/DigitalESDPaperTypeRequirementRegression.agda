@@ -2,6 +2,7 @@ module DASHI.Education.DigitalESDPaperTypeRequirementRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (_,_)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.RequirementProducerSchedulerExact as Scheduler

@@ -126,7 +126,7 @@ canonicalStructureProjectionAudit = structure-projection-audit
 ------------------------------------------------------------------------
 
 data EdgeRole : Set where
-  currentFirstBody wikidataStudyRelation wikidataUnderlyingData
+  currentFirstBody wikidataStudyRelation wikidataUnderlyingData : EdgeRole
   repositoryFactorisationBridge symmetricGroupSpecialization : EdgeRole
 
 record TypedEdge : Set where

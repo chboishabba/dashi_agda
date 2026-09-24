@@ -1,0 +1,176 @@
+name: Repository history visualization
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/temporal-repo-graph-visualization
+    paths:
+      - "DASHI/Core/TemporalSemanticGraphExact.agda"
+      - "DASHI/Core/VersionedStateGraphExact.agda"
+      - "DASHI/Core/SemanticMergeEvolutionExact.agda"
+      - "DASHI/Core/SymbolIdentityEvolutionExact.agda"
+      - "DASHI/Core/NameResolutionAuthorityExact.agda"
+      - "DASHI/Core/ApplicationDependencyClassificationExact.agda"
+      - "DASHI/Core/LexicalScopeResolutionExact.agda"
+      - "DASHI/Core/LocalDeclarationScopeExact.agda"
+      - "DASHI/Core/IncrementalSemanticRelinkBoundaryExact.agda"
+      - "DASHI/Core/BackendSelectionPolicyExact.agda"
+      - "DASHI/Core/StatefulSemanticBackendExact.agda"
+      - "DASHI/Core/IncrementalSemanticParityExact.agda"
+      - "DASHI/Core/ResolutionImpactIndexExact.agda"
+      - "DASHI/Core/CompactSemanticHistoryExact.agda"
+      - "DASHI/Core/SemanticPatchBackendExact.agda"
+      - "DASHI/Core/PortableInteractiveViewExact.agda"
+      - "DASHI/Core/PullRequestTimelineExact.agda"
+      - "DASHI/Visual/**"
+      - "tools/visualization/repo_history/**"
+      - ".github/workflows/repo-history-visualization.yml"
+  pull_request:
+    paths:
+      - "DASHI/Core/TemporalSemanticGraphExact.agda"
+      - "DASHI/Core/VersionedStateGraphExact.agda"
+      - "DASHI/Core/SemanticMergeEvolutionExact.agda"
+      - "DASHI/Core/SymbolIdentityEvolutionExact.agda"
+      - "DASHI/Core/NameResolutionAuthorityExact.agda"
+      - "DASHI/Core/ApplicationDependencyClassificationExact.agda"
+      - "DASHI/Core/LexicalScopeResolutionExact.agda"
+      - "DASHI/Core/LocalDeclarationScopeExact.agda"
+      - "DASHI/Core/IncrementalSemanticRelinkBoundaryExact.agda"
+      - "DASHI/Core/BackendSelectionPolicyExact.agda"
+      - "DASHI/Core/StatefulSemanticBackendExact.agda"
+      - "DASHI/Core/IncrementalSemanticParityExact.agda"
+      - "DASHI/Core/ResolutionImpactIndexExact.agda"
+      - "DASHI/Core/CompactSemanticHistoryExact.agda"
+      - "DASHI/Core/SemanticPatchBackendExact.agda"
+      - "DASHI/Core/PortableInteractiveViewExact.agda"
+      - "DASHI/Core/PullRequestTimelineExact.agda"
+      - "DASHI/Visual/**"
+      - "tools/visualization/repo_history/**"
+      - ".github/workflows/repo-history-visualization.yml"
+
+concurrency:
+  group: repo-history-viz-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: tools/visualization/repo_history
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install extractor test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install \
+            "tree-sitter>=0.22,<0.23" \
+            "tree-sitter-agda==1.3.3" \
+            "networkx>=3.2" \
+            "pytest>=8"
+
+      - name: Run semantic graph tests
+        env:
+          PYTHONPATH: src
+        run: pytest -q
+
+      - name: Manim import smoke
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libcairo2-dev libpango1.0-dev pkg-config
+          python -m pip install "manim>=0.21,<0.22"
+          PYTHONPATH=src python -c "import dashi_repo_history.manim_backend"
+
+  agda:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v31
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+
+      - name: Typecheck repository-evolution formal surface
+        run: |
+          nix develop -c agda \
+            -i . \
+            -l standard-library \
+            DASHI/Visual/RepositoryEvolutionEverything.agda
+
+  render-smoke:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: tools/visualization/repo_history
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Manim system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            ffmpeg \
+            libcairo2-dev \
+            libpango1.0-dev \
+            pkg-config
+
+      - name: Install repository-history renderer
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Extract earliest reachable Git history
+        run: |
+          dashi-repo-history extract ../../.. \
+            --ref HEAD \
+            --max-commits 80 \
+            --compact \
+            --checkpoint-interval 25 \
+            --parity-every 10 \
+            --profile-output /tmp/dashi-history-profile.json \
+            -o /tmp/dashi-early-history.json
+
+      - name: Render MP4 smoke artifact
+        run: |
+          dashi-repo-history render /tmp/dashi-early-history.json \
+            --scene history \
+            --quality -qm
+
+      - name: Upload rendered MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-repository-history-mp4
+          path: tools/visualization/repo_history/media/**/*.mp4
+          if-no-files-found: error
+
+      - name: Upload performance profile
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-repository-history-performance
+          path: /tmp/dashi-history-profile.json
+          if-no-files-found: error
+
+      - name: Upload compact semantic history
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-repository-history-compact
+          path: /tmp/dashi-early-history.json
+          if-no-files-found: error

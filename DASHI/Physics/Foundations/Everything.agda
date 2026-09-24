@@ -1,5 +1,3 @@
-module DASHI.Physics.Foundations.Everything where
-
 import DASHI.Physics.Foundations.ParameterScaleTaxonomyExact
 import DASHI.Physics.Foundations.ParameterInformationGeometryExact
 import DASHI.Physics.Foundations.ScaleInvariantTheorySelectionExact
@@ -27,6 +25,10 @@ import DASHI.Physics.Foundations.PR399FoundationsCrossPollinationExact
 import DASHI.Physics.Foundations.UnifiedEffectiveActionBoundary
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryExact
 import DASHI.Physics.Foundations.SameCandidateQFTGRRecoveryValidation
+import DASHI.Physics.Foundations.GRQFTStressWeldBidiAttemptExact
+import DASHI.Physics.Foundations.GRQFTRecoveryBidiAttemptExact
+import DASHI.Physics.Foundations.RecoveredGRAttachmentExact
+import DASHI.Physics.Foundations.GRQFTConcreteInstanceFrontierExact
 import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryExact
 import DASHI.Physics.Foundations.SharedEffectiveSourceRecoveryValidation
 import DASHI.Physics.Foundations.CommonEffectiveActionVariationExact
@@ -60,11 +62,9 @@ import DASHI.Physics.Foundations.PhysicalTheoryExperimentDiscriminationExact
 import DASHI.Physics.Foundations.GRQFTExperimentDesignCrossPollinationExact
 import DASHI.Physics.Foundations.GRQFTDiscriminatorSynthesisExact
 import DASHI.Physics.Foundations.GRQFTSequentialExperimentPlannerExact
-
 import DASHI.Core.HistoryConditionedChoiceExact
 import DASHI.Core.RelationalTensionCompressionExact
 import DASHI.Core.RelationalObserverGainExact
-
 import DASHI.Physics.Foundations.FormalReceiptBoundaryExact
 import DASHI.Physics.Foundations.FiniteResidueCycleReachabilityExact
 import DASHI.Physics.Foundations.FiniteWeightedTernaryKernelExact
@@ -101,3 +101,18 @@ import DASHI.Physics.Foundations.FrontierEnemyPersistenceExact
 import DASHI.Physics.Foundations.CabarlahPalestineSourceAtlas
 import DASHI.Physics.Foundations.CabarlahPalestineBoundary
 import DASHI.Physics.Foundations.CabarlahPalestineRegression
+import DASHI.Physics.Foundations.SmithChartSourceAtlasExact
+import DASHI.Physics.Foundations.SmithChartComplexReflectionExact
+import DASHI.Physics.Foundations.SmithChartHexPhaseObserverExact
+import DASHI.Physics.Foundations.SmithChartMobiusMatrixExact
+import DASHI.Physics.Foundations.ResonantHumanPoweredFlightEverything
+import DASHI.Physics.Foundations.GRLiteralRecoveryRealizationFrontierExact
+import DASHI.Physics.Foundations.PinnedYangMillsRecoveredQFTAttachmentExact
+import DASHI.Physics.Foundations.PinnedYMGRQFTStressMaxCutExact
+import DASHI.Physics.Foundations.Round131AllSectorAssemblyFrontierExact
+
+
+module DASHI.Physics.Foundations.Everything where
+
+
+

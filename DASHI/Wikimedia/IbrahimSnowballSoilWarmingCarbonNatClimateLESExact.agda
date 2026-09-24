@@ -56,8 +56,8 @@ greenhouseGasEmissionsQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data SoilClimateSourceRole : Set where
-  decadeSoilWarmingExperiment
-  longTermSoilWarmingExperiment
+  decadeSoilWarmingExperiment : SoilClimateSourceRole
+  longTermSoilWarmingExperiment : SoilClimateSourceRole
   deepSoilWarmingExperiment : SoilClimateSourceRole
 
 record SoilClimatePrimarySource : Set where
@@ -135,13 +135,13 @@ open SoilClimateSourceAdmission public
 ------------------------------------------------------------------------
 
 data SoilClimateConsumer : Set where
-  localSoilCO2Flux
-  soilCarbonStock
-  mineralNitrogenAvailability
-  microbialCommunityResponse
-  ecosystemCarbonBalance
-  carbonFootprintAccounting
-  annualEntityGHGEmissions
+  localSoilCO2Flux : SoilClimateConsumer
+  soilCarbonStock : SoilClimateConsumer
+  mineralNitrogenAvailability : SoilClimateConsumer
+  microbialCommunityResponse : SoilClimateConsumer
+  ecosystemCarbonBalance : SoilClimateConsumer
+  carbonFootprintAccounting : SoilClimateConsumer
+  annualEntityGHGEmissions : SoilClimateConsumer
   climateChangeAttribution : SoilClimateConsumer
 
 record SoilClimateConsumerBoundary : Set where

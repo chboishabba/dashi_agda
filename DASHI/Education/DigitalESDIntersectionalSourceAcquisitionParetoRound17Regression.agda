@@ -1,0 +1,34 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound17Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound17Exact as Round17
+
+candidateStillRequiresCorpusAdmission :
+  Round17.Round17CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round17.round17CandidateDoesNotCreateIncludedStudy
+
+analyticExclusionNotPopulationAbsence :
+  Round17.AnalyticExclusionCreatesPopulationAbsence → ⊥
+analyticExclusionNotPopulationAbsence = Round17.analyticExclusionDoesNotCreatePopulationAbsence
+
+lackOfWebcamNotLackOfEngagement :
+  Round17.NoWebcamCreatesNoEngagement → ⊥
+lackOfWebcamNotLackOfEngagement = Round17.noWebcamDoesNotCreateNoEngagement
+
+procurementInterviewNotStudentAuthority :
+  Round17.ProcurementProfessionalEvidenceCreatesStudentAuthority → ⊥
+procurementInterviewNotStudentAuthority = Round17.procurementProfessionalEvidenceDoesNotCreateStudentAuthority
+
+thesisNotPeerReviewedArticle :
+  Round17.ThesisCreatesPeerReviewedArticleAuthority → ⊥
+thesisNotPeerReviewedArticle = Round17.thesisDoesNotCreatePeerReviewedArticleAuthority
+
+excludedCarrierCollisionRulesOutFlatRecovery :
+  Round17.ExcludedCarrierFactorisation → ⊥
+excludedCarrierCollisionRulesOutFlatRecovery = Round17.excludedCarrierDoesNotFactorThroughAnalyticSample
+
+decisionCarrierCollisionRulesOutFlatRecovery :
+  Round17.DecisionCarrierFactorisation → ⊥
+decisionCarrierCollisionRulesOutFlatRecovery = Round17.decisionCarrierDoesNotFactorThroughProcurementSurface

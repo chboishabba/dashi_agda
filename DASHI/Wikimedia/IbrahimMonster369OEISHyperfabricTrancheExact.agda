@@ -8,13 +8,15 @@ module DASHI.Wikimedia.IbrahimMonster369OEISHyperfabricTrancheExact where
 -- 6B/32772 positive bridge frontiers, the exact phase-preserving
 -- T^3 -> T x (T^2/inner inversion) = 3 x 5 = 15 reduction, the D4 character
 -- probe and kernel-side action on the five inner inversion orbits, the
--- D4->N(3B) character-fusion/runtime screen boundary, the downstream
--- 15 -> 14 -> 42 carrier candidate, the neighboring Monster class-42 eta-level
--- family, typed 54/729 carrier chart, source-paid C6 weight-two spectrum,
--- separating hypergraph, Python runtime receipts, literal same-integer collision
--- portfolio, positive-correlation receipts, and WrongType regressions visible
--- together without turning OEIS identity, runtime search, or quotient character
--- arithmetic into representation/action authority.
+-- D4->N(3B) character-fusion/runtime screen boundary, the admissible/OOM-safe
+-- query-factorisation route over the current 17-world collision fibre, the
+-- downstream 15 -> 14 -> 42 carrier candidate, the neighboring Monster
+-- class-42 eta-level family, the cultural/QID 42 provenance firewall, typed
+-- 54/729 carrier chart, source-paid C6 weight-two spectrum, separating
+-- hypergraph, Python runtime receipts, literal same-integer collision portfolio,
+-- positive-correlation receipts, and WrongType regressions visible together
+-- without turning OEIS identity, runtime search, cultural coincidence, or
+-- quotient character arithmetic into representation/action authority.
 ------------------------------------------------------------------------
 
 import DASHI.Wikimedia.DASHIMathOEIS196883AuditRoadmapExact
@@ -39,10 +41,14 @@ import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BCharacterAcquisitionExact
 import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BCharacterAcquisitionValidation
 import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BScreenReceiptExact
 import DASHI.Wikimedia.IbrahimMonsterFiveOrbitD4N3BScreenReceiptValidation
+import DASHI.Wikimedia.IbrahimMonsterN3BAdmissibleOOMConsumerRouteExact
+import DASHI.Wikimedia.IbrahimMonsterN3BAdmissibleOOMConsumerRouteValidation
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierExact
 import DASHI.Wikimedia.IbrahimMonster42dFifteenFourteenPhaseCarrierValidation
 import DASHI.Wikimedia.IbrahimMonster42ClassEtaFamilyOEISAcquisitionExact
 import DASHI.Wikimedia.IbrahimMonster42ClassEtaFamilyOEISAcquisitionValidation
+import DASHI.Wikimedia.IbrahimMonster42CulturalQIDProvenanceExact
+import DASHI.Wikimedia.IbrahimMonster42CulturalQIDProvenanceValidation
 import DASHI.Moonshine.Base369ZetaHeisenbergFiftyFourCarrierExact
 import DASHI.Wikimedia.IbrahimMonster369A005052HeisenbergLadderPositiveExact
 import DASHI.Wikimedia.IbrahimMonster369A005052HeisenbergLadderPositiveValidation

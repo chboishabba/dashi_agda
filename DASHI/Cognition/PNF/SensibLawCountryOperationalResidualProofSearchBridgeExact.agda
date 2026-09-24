@@ -22,12 +22,12 @@ import DASHI.Law.SensibLawProofSearchResultAssessmentExact as Assessment
 ------------------------------------------------------------------------
 
 data OperationalSourceRole : Set where
-  affectedCommunityOriginatingSource
-  affectedCommunityAuthorityBearingSource
-  realisedMaterialEffectSource
-  independentMonitoringSource
-  institutionalCorrectionOperationSource
-  longitudinalRecurrenceSource
+  affectedCommunityOriginatingSource : OperationalSourceRole
+  affectedCommunityAuthorityBearingSource : OperationalSourceRole
+  realisedMaterialEffectSource : OperationalSourceRole
+  independentMonitoringSource : OperationalSourceRole
+  institutionalCorrectionOperationSource : OperationalSourceRole
+  longitudinalRecurrenceSource : OperationalSourceRole
   : OperationalSourceRole
 
 producerForOperationalResidual : Adaptive.OperationalResidual → Search.ProducerClass
@@ -174,11 +174,11 @@ currentSnapshotFirstStepExact = refl
 ------------------------------------------------------------------------
 
 data OperationalRecomputeAction : Set where
-  keepSearchingSameResidual
-  recomputeOperationalSnapshot
-  reopenOperationalCoordinate
-  inspectUnderidentification
-  retainContestedState
+  keepSearchingSameResidual : OperationalRecomputeAction
+  recomputeOperationalSnapshot : OperationalRecomputeAction
+  reopenOperationalCoordinate : OperationalRecomputeAction
+  inspectUnderidentification : OperationalRecomputeAction
+  retainContestedState : OperationalRecomputeAction
   : OperationalRecomputeAction
 
 recomputeActionFor : Assessment.FrontierChange → OperationalRecomputeAction

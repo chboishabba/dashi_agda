@@ -11,20 +11,20 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data T4ObservedCoordinate : Set where
-  t4Term
-  t4Formula
-  t4DerivIndexedByFormula
-  t4NotFreeF
-  t4MetaSubstF
-  t4ObjectSubstitutionSbf
-  t4CodeFormula
-  t4CodeFormulaNat
-  t4Num
-  t4Sub
-  t4SubEquation
-  t4ProvabilityVerifierThmT
-  t4DiagonalInfrastructure
-  t4LobTheorem
+  t4Term : T4ObservedCoordinate
+  t4Formula : T4ObservedCoordinate
+  t4DerivIndexedByFormula : T4ObservedCoordinate
+  t4NotFreeF : T4ObservedCoordinate
+  t4MetaSubstF : T4ObservedCoordinate
+  t4ObjectSubstitutionSbf : T4ObservedCoordinate
+  t4CodeFormula : T4ObservedCoordinate
+  t4CodeFormulaNat : T4ObservedCoordinate
+  t4Num : T4ObservedCoordinate
+  t4Sub : T4ObservedCoordinate
+  t4SubEquation : T4ObservedCoordinate
+  t4ProvabilityVerifierThmT : T4ObservedCoordinate
+  t4DiagonalInfrastructure : T4ObservedCoordinate
+  t4LobTheorem : T4ObservedCoordinate
   t4GodelIITheorem : T4ObservedCoordinate
 
 observedT4Coordinates : List T4ObservedCoordinate
@@ -40,10 +40,10 @@ observedT4Coordinates =
 ------------------------------------------------------------------------
 
 data T4AdapterResidual : Set where
-  arithmeticSourcePayment
-  arithmetisedSubstitutionPayment
-  finishedDiagonalPayment
-  provabilityResultPayment
+  arithmeticSourcePayment : T4AdapterResidual
+  arithmetisedSubstitutionPayment : T4AdapterResidual
+  finishedDiagonalPayment : T4AdapterResidual
+  provabilityResultPayment : T4AdapterResidual
   localKernelReplayReceipt : T4AdapterResidual
 
 canonicalT4AdapterResiduals : List T4AdapterResidual

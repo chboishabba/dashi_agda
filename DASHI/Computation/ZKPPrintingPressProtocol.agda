@@ -271,8 +271,8 @@ macroTransmutation m =
 -- Closed-family regime taxonomy from the established witness family.
 
 data ClosedFamilyMember : Set where
-  physics1 physics3 physics15 physics19 physics20 physics21 physics22
-    : ClosedFamilyMember
+  physics1 physics3 physics15 physics19 physics20 physics21 physics22 : ClosedFamilyMember
+  : ClosedFamilyMember
 
 data Regime : Set where
   conservativeRegime : Regime

@@ -143,42 +143,42 @@ softRepairSemanticAdequacy :
 softRepairSemanticAdequacy = softOverlapReceiptSound (proj₂ softRepairIsEligible)
 
 repairRemainsConsumerIndexed :
-  Repair.repairIsConsumerIndexed Repair.canonicalConsumerFibreRepairBoundary ≡ true
+  Repair.ConsumerFibreRepairBoundary.repairIsConsumerIndexed Repair.canonicalConsumerFibreRepairBoundary ≡ true
 repairRemainsConsumerIndexed = refl
 
 repairOneWitnessDoesNotProveGlobalSufficiency :
-  Repair.separatingOneWitnessAloneProvesGlobalSufficiency Repair.canonicalConsumerFibreRepairBoundary ≡ false
+  Repair.ConsumerFibreRepairBoundary.separatingOneWitnessAloneProvesGlobalSufficiency Repair.canonicalConsumerFibreRepairBoundary ≡ false
 repairOneWitnessDoesNotProveGlobalSufficiency = refl
 
 adicRefinementNeedsTypedSourceTarget :
-  Adic.refinementNeedsTypedSourceTarget Adic.canonicalAdicArgumentTransportBoundary ≡ true
+  Adic.AdicArgumentTransportBoundary.refinementNeedsTypedSourceTarget Adic.canonicalAdicArgumentTransportBoundary ≡ true
 adicRefinementNeedsTypedSourceTarget = refl
 
 adicProjectedShadowIsNotDefinitionalIdentity :
-  Adic.projectedShadowEqualsDefinitionalIdentity Adic.canonicalAdicArgumentTransportBoundary ≡ false
+  Adic.AdicArgumentTransportBoundary.projectedShadowEqualsDefinitionalIdentity Adic.canonicalAdicArgumentTransportBoundary ≡ false
 adicProjectedShadowIsNotDefinitionalIdentity = refl
 
 recursiveAddressDoesNotCreatePAdicPhysics :
-  Admissible.recursiveAddressAutomaticallyMeansPAdicPhysics
+  Admissible.AdmissibleConsumerMDLBoundary.recursiveAddressAutomaticallyMeansPAdicPhysics
     Admissible.canonicalAdmissibleConsumerMDLBoundary ≡ false
 recursiveAddressDoesNotCreatePAdicPhysics =
-  Admissible.recursiveAddressAutomaticallyMeansPAdicPhysicsIsFalse
+  Admissible.AdmissibleConsumerMDLBoundary.recursiveAddressAutomaticallyMeansPAdicPhysicsIsFalse
     Admissible.canonicalAdmissibleConsumerMDLBoundary
 
 qidProjectionIsIntentionallyLossy :
-  QID.projectionRetainsWholeNativeStatementLanguage QID.canonicalNativeConcreteProjectionBoundary ≡ false
+  QID.NativeConcreteProjectionBoundary.projectionRetainsWholeNativeStatementLanguage QID.canonicalNativeConcreteProjectionBoundary ≡ false
 qidProjectionIsIntentionallyLossy = refl
 
 qidProjectionDoesNotAdmitArbitraryProperties :
-  QID.arbitraryPropertiesProjectToKernel QID.canonicalNativeConcreteProjectionBoundary ≡ false
+  QID.NativeConcreteProjectionBoundary.arbitraryPropertiesProjectToKernel QID.canonicalNativeConcreteProjectionBoundary ≡ false
 qidProjectionDoesNotAdmitArbitraryProperties = refl
 
 nineObserverMayNeedSamePointContext :
-  Fibre369.c9MayDependOnSamePointContext Fibre369.canonicalFibreObserverRepairBoundary ≡ true
+  Fibre369.FibreObserverRepairBoundary.c9MayDependOnSamePointContext Fibre369.canonicalFibreObserverRepairBoundary ≡ true
 nineObserverMayNeedSamePointContext = refl
 
 legacyPhaseOnlyAgreementIsNotAutomatic :
-  Fibre369.legacyPhaseOnlyAgreementAutomatic Fibre369.canonicalFibreObserverRepairBoundary ≡ false
+  Fibre369.FibreObserverRepairBoundary.legacyPhaseOnlyAgreementAutomatic Fibre369.canonicalFibreObserverRepairBoundary ≡ false
 legacyPhaseOnlyAgreementIsNotAutomatic = refl
 
 record ProjectionRepairCrossPollinationBoundary : Set where

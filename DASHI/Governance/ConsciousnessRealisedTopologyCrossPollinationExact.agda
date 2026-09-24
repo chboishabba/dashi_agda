@@ -9,6 +9,7 @@ import DASHI.Core.SharedStateCoalitionReachableEffectExact as Shared
 import DASHI.Governance.ConsciousnessAbstractionInstantiationBoundaryExact as Consciousness
 import DASHI.Governance.Lerchner2026AbstractionFallacySourceBridgeExact as Lerchner
 import DASHI.Biology.ConsciousAccessNetworkRegression as Access
+import DASHI.Biology.ConsciousAccessCoalition as Coalition
 
 ------------------------------------------------------------------------
 -- CONSCIOUSNESS / REALISED-TOPOLOGY CROSS-POLLINATION
@@ -72,8 +73,9 @@ sharedStateBoundary = Shared.canonicalSharedStateCoalitionBoundary
 ------------------------------------------------------------------------
 
 noPhenomenalIdentityFromAccessNetwork :
-  Access.noPhenomenalIdentityPromotion consciousAccessRegression ≡ false
-noPhenomenalIdentityFromAccessNetwork = refl
+  Coalition.phenomenalIdentityPromoted Coalition.canonicalConsciousAccessCoalition ≡ false
+noPhenomenalIdentityFromAccessNetwork =
+  Access.noPhenomenalIdentityPromotion consciousAccessRegression
 
 runtimeTopologyNotFixedByDeclaredInterface :
   Runtime.declaredInterfaceDeterminesRealisedTopology runtimeBoundary ≡ false

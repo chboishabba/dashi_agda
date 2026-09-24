@@ -1,0 +1,537 @@
+[PAGE 1]
+International Review of Research in Open and Distributed Learning 
+Volume 18, Number 7                   
+                                     
+November – 2017 
+Special Report on the Role of Open Educational 
+Resources in Supporting the Sustainable Development 
+Goal 4: Quality Education Challenges and Opportunities 
+ 
+Dr Rory McGreal 
+UNESCO/COL/ICDE Chair in OER 
+Athabasca University 
+ 
+ 
+Quality Education: Role/Contribution of OER 
+Open Educational Resources ( OER) and their offspring, Massive Open Online Courses (MO OCs), are 
+becoming important factors in achieving the Sustainable Development Goal 4: Quality Education 
+(SDG4). This was recognised early on by UNESCO in 2004 when they first coined the term “Open 
+Educational Resources” and in 2012 with the OER Paris Decla ration. UNESCO is continuing its support of 
+OER with the 2 nd OER Summit in September 2017. There is recognition that OER and MOOCs, while not 
+being the solution to the world's educational crises, will play an important, if not essential, role. The OER 
+movement is less than 15 years old and is growing rapidly as more and more nations and institutions 
+adopt the view that publicly -funded research and educational content belongs to the people and should 
+therefore be open and accessible to them. Canada can play an important role in supporting SDG4 by 
+increasing its support for OER and open education in general, both in Canada and abroad.  
+It is reasonable to argue that OER can greatly benefit developing countries, even more so than those that 
+are considered develo ped. As such, they can play an important transformative role in supporting the 
+SDG4 goal. OER can be used to increase access to learning for those living in unfavourable circumstances, 
+and can also be used to address issues of cost, quality, and equity. Th ey are free of licensing restrictions 
+that inhibit quality improvements and because they are openly available, OER can facilitate both internal 
+and external collaborations among instructors and institutions, both locally and internationally, while 
+ensuring equitable access to knowledge and learning. OER are presently being actively used in all sectors 
+of education including literacy, vocational, and adult education, as well as with immigrants and refugees 
+(with prior learning assessment and recognition). OE R can be instrumental in improving the quality of 
+[PAGE 2]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+293 
+ 
+education through open curriculum development. And, most importantly, OER are digital; the world 
+economy is digital and students must learn how to work (and play) in digital environments.  
+Because OER can be reproduced at virtually no cost, they can be effectively used to reach vast numbers of 
+learners, while supporting quality enhancements. As well, since they can be reused, revised, remixed, 
+redistributed, and retained, OER can be adapted to different learn ing environments (Wiley, 2014). It was 
+UNESCO that first used the term open educational resources , defining them as “ teaching, learning or 
+research materials that are in the public domain or released with an intellectual property license that 
+allows for fr ee use, adaptation, and distribution ” (UNESCO, 2002, par. 2).  The UNESCO Paris 
+Declaration of 2012 followed, supporting OER for development and recommending that educational 
+materials developed with public funds be made available under open licenses (UNE SCO, 2012). 
+Additionally, because OER are open, they can be translated into different languages and localised to meet 
+the needs of different countries, regions, institutions, and learners (Butcher, Kanwar, & Uvalic -Trubic, 
+2015). 
+OER, as content, are free of cost to learners and teachers. However, there are other costs that must be 
+taken into account, including the salaries and time of the OER creators/adapters/assemblers. These costs 
+can be significantly reduced by sharing OER with other institutions. For example, an institution, rather 
+than creating its own course material, can choose to make use of OER that have been created by others, 
+thus saving the cost of content creation; however, there still may be costs for searching/finding, 
+assembling, and adapting the content. In addition, an appropriate technological infrastructure needs to be 
+in place with access to adequate bandwidth and wifi, as well as trained support staff. (Please note that 
+these costs are the same when using commercial content.) Furthermo re, the cost of commercial textbooks 
+is becoming a greater problem as the prices are all too often increasing beyond the ability of students to 
+pay for them. As a result, there has been rapid growth in the number of learners internationally, who 
+cannot aff ord the high cost of textbooks. The advantage of OER is that they are cost -free and can be 
+adapted freely. The ability to adapt and modify content is an important advantage, especially when 
+targeting specific populations such as those with disabilities or special needs.  
+ 
+Indigenous Knowledge 
+OER can also be used to preserve and distribute Indigenous knowledge, which is being supported now in 
+many countries. OER can be used to support the “participatory principle” that is common in many 
+Indigenous communiti es, as well as preserving and distributing Indigenous knowledge that has 
+traditionally been open. Indigenous knowledge is seen as belonging to the community as a whole and like 
+OER, it can be continually enhanced and expressed in many forms such as in stor ies, dance, songs, and 
+through the wisdom of elders. Sharing is conducted through personal interactions among the 
+community/kinship or religious groups (Bertini, 2010). 
+Maskwacis First Nation Cultural College 
+As a Canadian example, in Alberta, the Chair has worked with this college to introduce them to OER. They 
+received funding from the Ministry of Advanced Education for the development of Indigenous content 
+[PAGE 3]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+294 
+ 
+aimed at driving “stronger Indigenous perspectives in Alberta post -secondary learning.”  The projec t was 
+designed to support the need for Indigenous students to learn in new technological environments and 
+become digital citizens, while maintaining their Indigenous perspectives.  They have implemented several 
+courses in OER and even translated the Creative Commons licences into the Cree language.    
+Indo-Educa 
+This is a community -based OER project building a repository for Indigenous content in both Portuguese 
+and different Indigenous languages. The organisers believed that OER was a concept “fundamentall y in 
+sync” with the Indigenous way of knowing. The aim was also to preserve traditional knowledge, while 
+linking Indigenous communities with the wider society. Indigenous university students were enlisted to 
+prepare relevant and appropriate OER for use in schools. The OER preserve and open access to more than 
+200 traditional stories, rituals, beliefs, and other cultural artefacts (Rossini & Castro, 2016).  
+AgShare II 
+This is a collaborative project in OER of three universities: Haramaya (Ethiopia), Makerere  (Uganda), and 
+Mekelle (Ethiopia). Its aim was to investigate the forms of Agricultural Indigenous Knowledge used by 
+different groups of farmers for managing soil fertility and preparation, pest control, and diseases, weed 
+control, planting, harvesting and  storage of Indigenous root crops and animals (AgShare II, 2015,). This 
+research project sponsored by the Bill and Melinda Gates Foundation  has determined good strategies for 
+documenting and disseminating Indigenous knowledge as OER, which is contributin g to both sustainable 
+food security efforts and educational for all. 
+Considered very important by many are the affordances available with OER that support innovation in 
+teaching and learning. The training of faculty in the use of educational technology is a major task. Faculty 
+must not only master the technology, but also be skilled in its pedagogical uses to improve learning 
+outcomes. OER, because of the flexibility and openness, can enable the best teaching practices and 
+increase student achievement levels both for knowledge and skills.  The open licences used by OER, unlike 
+commercial content, allow users to localise content to meet the special conditions of learners, teachers, 
+institutions, and nations. For example, OER can be designed to meet the accred itation requirements of 
+schools and agencies, or they can be translated to local languages or adapted to respect the exigencies of a 
+particular culture. They can also be used to support active learning by students. OER can be manipulated 
+and altered to sup port this and other constructivist approaches to learning; students can work with 
+instructors in creating more effective learning environments (Butcher & Hoosen, 2012).  
+OER can be used to create alternate or complementary pathways to education. It is estim ated that there 
+will be a need for more than 80 million places for additional students internationally by 2025 (Daniel, 
+2012). OER can be used to create additional places using access to credentials as, for example, the case of 
+the OERu, which is a consort ium of plus 30 institutions on five continents, creating OER pathways to 
+degrees from credible public universities (Mackintosh, McGreal, & Taylor, 2011).  
+MOOCs grew out of the open education movement and, as such, represent an important part of the OER 
+landscape. Yuan and Powell (2013) have described how MOOCs developed out of the OER, open 
+education, open source, and open access movements, although there are also commercially licensed 
+[PAGE 4]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+295 
+ 
+versions of MOOCs now in operation, such as Udacity and Coursera. Weller  (2014) has described MOOCs 
+(at least the non -commercial ones) “as part of a continuum” that has proceeded from open source 
+computing, to open access, OER, and open education.  
+Commercial etextbooks and other content come with Digital Rights Management (DR M) otherwise 
+known as Technological Protection Measures (TPM) or colloquially as “digital locks.” These “locks” on 
+materials restrict students from making effective use of the content. They cannot copy, paste, highlight, 
+print out, change devices, etc. In addition, there are legal restrictions that prevent users from breaking 
+locks or making use of the content as they would like. For example, they are legally prohibited from 
+showing their etextbook content to anyone else. The publishers own all the data cre ated, and they 
+control how the textbook is used. Because of these restrictions, it is essential for educators to use OER, 
+which can be used freely without locks or legal restrictions. 
+Canada: An International Leader in OER 
+Canada has important areas of exp ertise in OER at the post -secondary level. Although there is no federal 
+government strategy specifically supporting OER or other forms of open education, there has been activity 
+at the provincial level in Western Canada, and more recently in Ontario with t he creation of eCampus 
+Ontario. For the most part, OER development and open initiatives in Canada have focused at the level of 
+individual institutions and on access and availability issues as opposed to practice and policy and/or 
+initiatives to encourage openness (McGreal, Anderson, & Conrad, 2015).  
+Canada is unique in the world in that it is the only country whose national government has no authority in 
+education; in Canada, education is exclusively a provincial responsibility. In large and complex 
+countries with diverse educational institutions, especially in a Confederation such as Canada, 
+where each province has total autonomy in education, it is difficult to be aware of the many 
+varied practices and policies that are emerging. While other countries can  develop national 
+policies, it is only possible in Canada to develop trans -Canadian provincial partnerships in 
+education, but these partnerships operate without national government involvement. 
+Nevertheless, there are several national open access initiativ es, including the federal government's Open 
+Data pilot project, which enables access to content that can be used to support OER development. In 
+addition, the Tri-Council funding agencies—Canadian Institutes of Health Research  (CIHR), the Natural 
+Sciences and Engineering Research Council of Canada  (NSERC), and the Social Sciences and 
+Humanities Research Council  (SSHRC)—have all agreed on a Tri-Agency Open Access Policy , 
+supporting open access publishing of all federally -funded research. While, this federal policy focuses on 
+research publications, many of these, when used for teaching, can be considered to be OER. The re is 
+confusion between OER and open access, along with the concept of openness in general; there is a large 
+grey area between open access and OER, in addition to openness. Even so, the federal government 
+policies support the principle that all publicly-funded content should be openly accessible and reusable. 
+Nationally, the Council of Ministers of Education, Canada  (CMEC) has supported the UNESCO OER 
+[PAGE 5]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+296 
+ 
+Paris Declaration, reaffirming “their commitment to open access to knowledge and education and to the 
+need to adapt teaching and learning practices to the new realities of the information age" (Council of 
+Ministers of Education Canada, 2012, p.15).  The Vancouver -based Commonwealth of Learning was a co-
+partner with UNESCO in initiating the first UNESCO conferen ce in 2012; and they are continuing this 
+partnership in supporting the 2017 UNESCO summit in Slovenia.  
+Canada is perceived as a world leader in OER, primarily because of the initiatives in British Columbia and 
+Alberta. B.C. was the first province to initia te an OER project where BCcampus has created and populated 
+a repository of more than 150 open textbooks. Alberta followed with a $2 million project to support the 
+creation, assembly, and adaptation of OER. Regionally, the three Western provinces of British  Columbia, 
+Alberta, and Saskatchewan have signed a Memorandum of Understanding  agreeing to cooperate on the 
+development of common OER (Memorandum of Understanding, 2014). Alberta, Campus Manitoba and 
+eCampus Ontario have partnered with BCcampus in using th e Open Textbook repository. In 2016, 
+eCampus Ontario sponsored an OER Request for Proposals available to Ontario post -secondary 
+institutions.  
+Canadian leadership has been recognised by the Open Educati on Consortium: Alberta hosted the 2015 
+international conference in Banff Athabasca University received an Award of Excellence for the OER 
+Knowledge Cloud, a repository of more than 1600 scholarly articles and reports related to OER; the 
+UNESCO/COL/ICDE Cha ir at Athabasca University received a Lifetime Achievement Award; and 
+BCcampus has also received an Open Education Consortium Award of Excellence in Education.  
+The reality in Canada is that, although there are significant initiatives in OER at the post -secondary level, 
+there is little if any activity in the primary and secondary levels (K12) other than ad hoc implementations 
+by individual teachers. (Unlike the USA, where there are now more than 25 states supporting OER in K12 
+schools, and South Africa with Siyavula's open textbooks for primary and secondary schools).  
+The creation and use of OER benefits from the development and use of Creative Commons licences, which 
+provide the legal framework to share these resources. Creative Commons (CC) Canada, an affil iate of the 
+larger international body,  is an organization b orn of the global open education movement. The author of 
+this paper and UNESCO Chair is the board member of CC Canada, and Canadian -born Ryan Merkley is 
+now the CEO of Creative Commons worldwide. M ost recently, in May 2017, the CC international Summit 
+meeting was held in Toronto. 
+OER universitas (OERu) offers free online university courses in collaboration with Canadian partners so 
+that learners can gain formal credentials from the partner instituti ons. As has been previously noted, 
+OERu is a consortium of more than 30 institutions and several organizations on five continents. It is 
+dedicated to widening access and reducing the cost of post -secondary education for learners 
+internationally by providin g OER pathways to achieve formal and recognized credentials (McGreal, 
+Mackintosh, & Taylor, 2013). There are seven members of the OERu located in Canada: three universities 
+(Athabasca, Thompson Rivers, and Kwantlen Polytechnic); one community college (Port age College in 
+Alberta); and three organizations (BCcampus, eCampus Alberta, and Contact North in Ontario). Two 
+Canadians sit on the OERu Board of Directors: Dr. David Porter, CEO of eCampus Ontario, and Prof. Rory 
+McGreal, UNESCO/COL/ICDE Chair in OER. 
+[PAGE 6]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+297 
+ 
+Following a recommendation by the Organisation Internationale de la Francophonie , whose 
+conference was hosted in February 2013 in Moncton, NB, there has been renewed interest in Québec in 
+the promotion of des ressources éducatives libres (REL). The Ministère de l'Éducation, du Loisir et du 
+Sport du Québec is financing the website BRER (banques de ressources éducatives en réseau), which 
+hosts French language OER as well as other content. Thot Cursus is another Québec organization that 
+has implemented a repository that includes OER. These are rather limited initiatives, in comparison with 
+the Western Canadian initiatives and with France, which is strongly committed to REL. Sophie Touzé, 
+who serves as an expert in Digital Education and Pedagogy for the French Ministry of Higher Education 
+and Research, has been elected president of the international Open Education Consortium.  
+It is not well known that MOOCs are Canadian in origin. The name da tes to an experimental course led by 
+George Siemens at the University of Manitoba and Stephen Downes at the National Research Council in 
+2008 (Tamburri, 2014). They taught a MOOC titled, Connectivism and Connective Knowledge (Downes 
+& Siemens, 2008) with more than 2,200 learners online. 
+The Canada -based Commonwealth of Learning (COL) is charged with promoting open education 
+throughout the 53 countries of the Commonwealth. They have been supporting OER and delivering 
+MOOCs to Commonwealth citizens since 2013 . In 2017, in collaboration with Athabasca University, they 
+are delivering a MOOC entitled, Introduction to Technology Enabled Learning, which is accessible 
+globally. Several of Canada's larger universities have been delivering MOOCs as part of the Courser a or 
+EdX consortia based in the USA. As an example, The University of Alberta delivered one of the first such 
+MOOCs in Canada on Dinosaur Paleobiology in 2013.  
+The International Development Research Centre continues to be very active in supporting OER res earch. 
+They are the donor (C$2.8 million) for The Researching Open Educational Resources for Development 
+(ROER4D) project, which is a South -South research network on OER and development. This network, 
+with participants in South America, Asia, and Africa is  charged with analysing and producing knowledge 
+on the impact of OER in higher education. A previous project in Asia has led to major OER initiatives in 
+several countries (International Development Research Centre [IDRC], 2017) 
+Open Access (OA) to scholarl y research is related to OER. Open Access supports open licensing for 
+research rather than education. Nevertheless, OA can be used as OER, if the open content is used in a 
+teaching/learning context. The three Canadian research funding agencies —CIHR, NSERC, and SSHRC—
+have agreed on a policy supporting open access in scholarly publications.  OA initiatives also include 
+support for OA Journals. The SSHRC and UNESCO supported International Review of Research in Open 
+and Distributed Learning (IRRODL)  was one of the first open journals worldwide. There is also support 
+for open university presses such as AUPress at Athabasca University and limited open titles from the 
+University of Ottawa Press  and others. Universities are also promoting openness through the use of  
+Creative Commons (CC) licences.  
+To move forward as international leaders, Canadian OER supporters must continue to increase awareness 
+of OER among learners, teachers, administrators, and most importantly, among provincial education 
+officials who are in a  position to support open policies including those responsible for the CMEC. 
+Specifically, provinces should be encouraged to build on the Tri -Council decision to support open access 
+[PAGE 7]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+298 
+ 
+for research and extend it to OER in both higher education and in the scho ols. The experience of Alberta 
+shows that students, concerned about the increasing price of textbooks, can have a significant impact on 
+government policies regarding OER. Leadership is enjoyed by those who are actually implementing OER 
+initiatives. The imp lementation of open education in Canada remains in its early stages. However, the 
+growing interest in MOOCs, the recent OER initiatives, and the inter -provincial partnership MOU in 
+Western Canada, could well be harbingers of future cooperative and/or colla borative developments in 
+Canada, placing it as a leading nation on a fast track to national and international collaborations, policy, 
+and standards in open education. 
+ 
+OER: Opportunities and Challenges 
+Perhaps the most important opportunity for OER is in t he global free exchange of knowledge. OER render 
+this knowledge not only accessible but also reusable by learners and teachers in a variety of formats; 
+anyone can access information on the Web, but if it is restrictively licensed, it cannot be downloaded o r 
+reused, whereas OER does allow this. In addition (as previously noted), OER are very much “in sync” with 
+the “participatory principle” noted in diverse Indigenous communities and so can provide Indigenous 
+organisations with an opportunity to support the distribution and preservation of their cultures and 
+Indigenous knowledge (Bertini, 2010). OER have also made possible a move towards South -South 
+exchanges, whereas previously knowledge flowed uni -directionally from the North to the South. For 
+example, luso phone learners in Brazil are accessing Portuguese language OER created by the African 
+Virtual University (Diallo, 2011). 
+Any implementation of OER becomes an opportunity that presents challenges. OER can save time and 
+money, but as has been noted above, th e implementation does not come without costs both one -time and 
+recurring. One -time costs include those of searching, transferring, adapting, assembling, etc., while the 
+recurring costs are for the infrastructure and updating. Note, that there are similar c osts when 
+implementing commercial content. Many teachers and learners still do not understand the difference 
+between freely accessible content on the internet and OER, believing that all web resources are OER 
+(Chen & Panda, 2013). 
+However, most available O ER are in English. This can be seen as both an opportunity and a challenge as 
+the English language is widespread as a first or second language in most countries, counting hundreds of 
+millions of speakers, but it is still not understood by the vast majority  of the world's people. Another 
+major challenge for OER advocates is to overcome what has been seen as a unilingual and one -directional 
+flow of knowledge and resources from the global North to the South (Glennie, Harley, Burcher, & van 
+Wyk, 2012), often referred to as “cultural imperialism,” based on an unequal distribution of power.   
+A most serious challenge for the global South, and in underserved remote regions in the global North is 
+the lack of infrastructure. This includes not only available devices b ut also access to high bandwidth either 
+by wire or wireless. Nevertheless, more than 90% of the world's population is within range of effective 
+wireless signals, which raises opportunities for learning using mobile device (M -learning). The demand 
+for a mob ile learning can be used to convince governments of the importance of providing an adequate, 
+[PAGE 8]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+299 
+ 
+reasonably priced infrastructure to elevate the educational level of citizens.  
+The increasing volume of OER that are becoming available represents an opportunity for teachers and 
+learners everywhere. On the other hand, this increasing volume has created a serious challenge in the 
+effort that is often required to find and evaluate relevant OER (Chen & Panda). However, this is becoming 
+less of a barrier in the first year of higher education, as more robust and capable search engines and OER 
+repositories are becoming available for searching out content in the major subject areas. In less popular 
+subjects and in the upper levels of university, finding relevant OER still  remains problematic. 
+OER can also be used to raise the quality of education, not only of the teaching content but also of the 
+teaching itself by supporting the transformation of the educator’s learning environment. Nevertheless, 
+quality issues have been r aised regarding the use of OER. Criticisms include not just subject matter 
+quality, but quality in relation to the local environment, culture, and pedagogy. However, unlike 
+commercial content that must remain static and untouched, OER can be localised and customised to the 
+specific environment and to different approaches to learning. They can also be formatted for delivery in a 
+variety of ways including print form, when needed. In India, the National Knowledge Commission (NKC) 
+has recognized that OER can be  used to address the poor quality of teachers, poor infrastructure, poor 
+libraries, and poor educational resources. They recommend that OER can be very effective in reducing 
+these problems and improving the quality of education while increasing accessibili ty (Dutta, 2016)  
+There are an increasing number of OER and MOOC initiatives being implemented internationally. To 
+date, most projects have been in North America and Europe; however, important exceptions include 
+Siyavula and the African Virtual University (AVU) in South Africa, the Indian NKC OER initiative, and 
+several universities in Asia. There is research on several of these initiatives, their impact on th e demand 
+for OER, and on their reuse. Lessons can be learned from these and also from research on activities in the 
+more developed countries (Das, 2011; Dhanarajan & Porter 2013; Dutta, 2016).  
+ 
+MOOCs (Massive Open Online Courses) 
+There are huge educational  benefits becoming available through MOOCs. These are not limited to 
+significant cost savings, which can be substantial, because they can also provide worldwide access to high -
+quality learning content with at least vicarious interactions with experienced i nstructors. This combined 
+with anytime, anywhere learning, make MOOCs, combined with OER, a valuable and significant factor in 
+meeting the United Nations and UNESCO's educational goal. While providing access to learning for large 
+numbers of learners, MOOCs  have become instrumental in the transformation by institutions to more 
+technologically enhanced learning, improving the quality of both online and blended learning. On the 
+other hand, MOOCs have been criticised for the quality of their pedagogy, relying o n traditional video 
+lecture formats; their low completion rates; and a failure to deliver on inclusive and equitable quality 
+education (Darco, Rosewell, & Kear, 2016) 
+MOOCs represent a major opportunity for meeting the Quality Education goal. However, they  also 
+present serious challenges. MOOCs cannot be seen as a solution for all (like classroom -based teaching, 
+[PAGE 9]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+300 
+ 
+which is not for all and has its own challenges). MOOCs are being used by many institutions solely as a 
+marketing tool. Moreover, to date, MOOCs ar e mostly being accessed by those with higher levels of 
+education rather than the masses of learners who lack access to traditional education (Rohs & Ganz, 
+2015). It is argued that MOOCs are simply extending the digital divide by expanding inequalities of 
+opportunity. In addition, other barriers can be insurmountable for many learners. These include 
+information overload, lack of local language support, and access to well -trained teaching professionals. 
+Educators must find new strategies for addressing the ne eds of these non -traditional learners.  
+Nevertheless, MOOCs can be used to improve educational quality while massifying the educational 
+market. Haber (2014) cautions that just because they are not a cure -all does not mean that MOOCs are 
+not important in promoting quality education – despite their limitations. 
+The future of MOOCs will depend on approaches taken to accreditation. Students not only want to learn 
+but also want their learning recognized officially. The OERu is attempting to remedy this with their  OER 
+courses and testing by the participating universities (for a fee) for students who want a credential. Several 
+MOOCs now offer certificates while others offer badges. Automated testing and prior learning assessment 
+will play a key role in supporting credentialing as MOOCs become more popular. 
+MOOCs have the potential to open up education to many more students at substantially lower costs. 
+Scholarships can be awarded to students who monitor other students in MOOCs. The world economy is 
+digital and students can learn to help each other online and become proficient digital citizens. MOOCs are 
+capable of being used to reach large numbers of teachers anywhere at any time and are in fact benefiting 
+from this now.  For example, The Commonwealth of Learning and Athabasca University are delivering 
+Technology Enabled Learning training via a MOOC to large numbers of learners, many of whom are in the 
+least developed countries or on small island states. 
+ 
+UNESCO/COL Chair in OER and Awareness Training 
+The full potential of OER and their MOOC offspring can be realised with executive commitments and the 
+approval of strong open education policies, along with the implementation of appropriate technologies 
+(Miao, Mishra, & McGreal, 2016). These measures should be combined with training for knowledge about 
+OER and the skills to effectively use them. These include expanding awareness of OER and MOOCs; the 
+integration of OER into institutional administrative frameworks; and developing and applying sustainable 
+OER business models, including faculty incentives (Cox & Trotter, 2016).  
+The role of the UNESCO/COL/ICDE Chair in OER is to continue lobbying for OER initiativ es and policies 
+among the relevant constituencies (School Boards, Higher Educational Institutions, Ministries of 
+Education and Advance Education, faculty, students, etc.) in Canada and internationally, particularly in 
+the global South, in order to expand p articipation and extend access. The Chair must lead by example by 
+collaborating on OER projects with other Canadian and international educators and researchers, as well 
+as those in his home institution. He has a role also in advising administrators and gov ernment officials in 
+how best to implement OER initiatives, including quality assurance and issues of privacy and ethics 
+[PAGE 10]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+301 
+ 
+(Ferguson, Scanlon, & Harris, 2016, p.21). The creation of templates, standards, and guidelines for OER 
+implementations and use are also important activities that are being undertaken. 
+Success builds on success. The Chair in OER has been instrumental in supporting BC's initial leap into 
+OER; was heavily involved with students in the lobbying of the Alberta government to support OER, 
+resulting in a $2 million grant; and was named co -Chair of the Alberta OER initiative. His efforts have 
+had some (if limited) influence in Ontario where he has advised Ministry and eCampus Ontario officials 
+on OER. Internationally, universities in Malaysia, Pak istan, India, the Philippines, South Africa, Uruguay, 
+Bahrain, and other countries, have all benefitted from OER consultations with the Chair, resulting in 
+many responding with significant OER initiatives. The role of the Chair, then is to support OER 
+implementations wherever possible. 
+ 
+OER: Advancing Sustainable Development Goal 4? 
+Ensure Inclusive and Equitable Quality Education and Promote Lifelong Learning 
+Opportunities for All 
+As I have represented above, OER can be a significant aid in ensuring inclus ive and equitable quality 
+education and can promote lifelong learning opportunities for all. OER, by their very nature as freely 
+available and usable learning resources, can be considered important, if not essential, for supporting the 
+expressed goals in a ll areas of education.  From pre -kindergarten to lifelong learning, including technical 
+and vocational training, OER can have significant impact.  
+Governments can better support free K12 education financially because the OER are available at no cost. 
+They can be taken “as is” or modified and they can be made available to all. This includes all levels from 
+early childhood to secondary school. Affordable education for vocational and technical education as well 
+as university is also made more affordable with O ER. MOOCs with their ability to serve large numbers of 
+users can be used to increase the number of youth and adults with relevant skills. Gender disparities can 
+be diminished when both men and women have equal access to the free content. People with disabi lities 
+will benefit, because the OER can be adapted and reformatted to meet their individual needs. And, OER 
+fit very well with the community-sharing culture of many Indigenous communities. 
+One of the biggest boosts to literacy is the open availability of OER. They not only assist in promoting 
+literacy education, they actually can serve as an incentive. With the world's knowledge freely available and 
+re-usable, this provides a reason for people to become literate and numerate, not to mention technology 
+literate. 
+OER can be used to help ensure that all learners acquire the knowledge and skills needed to promote 
+sustainable development, including, among others, through education for sustainable development and 
+sustainable lifestyles, human rights, gender equal ity, promotion of a culture of peace and non -violence, 
+global citizenship and appreciation of cultural diversity, and of culture’s contribution to sustainable 
+development. OER can be child, disability, and gender sensitive, and provide safe, nonviolent, in clusive, 
+[PAGE 11]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+302 
+ 
+and effective learning environments for all, including diverse Indigenous communities. And if not, OER 
+can be altered and or modified to be so. 
+ 
+Acknowledgments 
+This paper was made possible by a grant from the Canadian Commission for UNESCO. 
+ 
+  
+ 
+References 
+AgShare II. (2015). Agshare II OER.  Retrieved from http://oerafrica.org/agshare/ 
+Bertini, G. (2010, November 16). What can the Open Educational Resources movement learn from 
+Indigenous Knowledge Systems? [Blog post].   Retrieved from 
+https://gfbertini.wordpress.com/2010/11/16/what-can-the-open-educational-resources-
+movement-learn-from-indigenous-knowledge-systems/ 
+Butcher, N., Kanwar, A., & Uvalic-Trumbic, S. (2015). A basic guide to open educational resources (OER) 
+[eBook].  Retrieved from http://www.unesco.org/new/en/communication-and-
+information/resources/publications-and-communication-materials/publications/full-list/a-
+basic-guide-to-open-educational-resources-oer/  
+Butcher, N., & Hoosen, S. (2012). Exploring the business case for Open Educational Resources. Retrieved 
+from http://www.col.org/resources/publications/Pages/detail.aspx?PID=421   
+Chen, Q., & Panda, S. (2013). Needs for and utilisation of OER in distance education: A Chinese survey. 
+Education Media Internationl, 50(2). Retrieved from 
+http://www.tandfonline.com/doi/abs/10.1080/09523987.2013.795324  
+Council of Ministers of Education Canada. (2012, July 6). Ministers of Education mark a milestone in 
+education cooperation [Blog post].   Retrieved from http://www.cmec.ca/278/Press-
+Releases/Press-Releases-Detail/Ministers-of-Education-Mark-a-Milestone-in-Education-
+Cooperation-.html?id_article=508 
+[PAGE 12]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+303 
+ 
+Cox, G., & Trotter, H. (2016). Institutional culture and OER policy: How structure, culture, and agency 
+mediate OER policy potential in South African universities. IRRODL, 17(5). Retrieved from 
+http://www.irrodl.org/index.php/irrodl/article/view/2523 
+Daniel, J. (2012, February 1). Invest in clicks not bricks5th eLEX Conference. Hamdan Bin -Mohamed 
+eUniversity: Commonwealth of Learning [PDF]. Retrieved from 
+http://oasis.col.org/bitstream/handle/11599/1096/2012_Daniel_Clicks_Bricks_Transcript.pdf?
+sequence=1&isAllowed=y  
+Darco, J., Rosewell, J., & Kear, K. (2016, August 12). Quality frameworks for MOOCs. In M. Jemni, 
+Kinshuk, & M. K. Khribi (Eds.), Open education from OER to MOOCs. Springer. Retrieved from 
+http://link.springer.com/chapter/10.1007%2F978-3-662-52925-6_14  
+Das, A. K. (2011). Emergence of open educational resources (OER) in India and its impact on lifelong 
+learning. Library Hi Tech News. Retrieved from 
+http://www.emeraldinsight.com/doi/abs/10.1108/07419051111163848  
+Dhanarajan, G., & Porter, D. (Eds.). (2013). Open educational resources: An Asian perspective: 
+Commonwealth of Learning. Retrieved from http://oasis.col.org/handle/11599/23  
+Diallo, B. (2011, May 4). Emerging open courseware projects: AVU Teacher Education Program 
+[SlideShare presentation].   Retrieved from 
+https://www.slideshare.net/OCWConsortium/emerging-open-courseware-projects-bakary-
+diallo-avu  
+Dutta, I. (2016). Open Educational Resources (OER): Opportunities and challenges for Indian higher 
+education. Turkish Journal of Distance Education, 17(2). 
+doi:http://dx.doi.org/10.17718/tojde.34669  
+Downes, S., & Siemens, G. (2008). Connectivism and connective knowledge [Blog post]. The Daily 
+Archives. Retrieved from http://connect.downes.ca/archive/08/09_15_thedaily.htm  
+Ferguson, R., Scanlon, E., & Harris, L. (2016). Developing a strategic approach to MOOCs. Journal of 
+Interactive Media in Education.(1). Retrieved from http://doi.org/10.5334/jime.439  
+Glennie, J., Harley, K., Butcher, N., & van Wyk, T. (2012). Open educational resources and change in 
+higher education: Reflections from practice [eBook]. Retrieved from 
+http://oasis.col.org/handle/11599/80  
+Government of Canada. (2016, December 21). Tri-agency open access policy on publications [Blog post].  
+Retrieved from 
+http://www.science.gc.ca/eic/site/063.nsf/eng/h_F6765465.html?OpenDocument   
+Haber, J. (2014). MOOCs. Cambridge, MA: MIT Press. 
+[PAGE 13]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+304 
+ 
+International Development Research Centre (IDRC). (2017). Open educational  resources. Retrieved from 
+https://www.idrc.ca/en/search/gss/open%20educational%20resources   
+Mackintosh, W., McGreal, R., & Taylor, J. (2011). Open education resources (OER) for assessment and 
+credit for students project: Towards a logic model and plan for action [PDF] .  Retrieved from 
+http://hdl.handle.net/2149/3039  
+McGreal, R., Anderson, T., & Conrad, D. (2015). Open educational resources in Canada 2015. 
+International Review of Research in Open and Distributed Learning, 16 (5). Retrieved from 
+http://www.irrodl.org/index.php/irrodl/article/view/2404  
+McGreal, R., Mackintosh, W., & Taylor, J. (2013). Open educational resources university: An assessment 
+and credit for students initiative In R. McGreal, W. Kinutha, & S. Marshall (Eds.), Open 
+educational resources: Innovation research and practice. Vancouver: Commonwealth of 
+Learning. Retrieved from http://www.col.org/PublicationDocuments/pub_PS_OER-
+IRP_web.pdf  
+Memorandum of Understanding Open Educational Resources. (2014, March 13).   Retr ieved from 
+http://www.gov.sk.ca/adx/aspx/adxGetMedia.aspx?mediaId=f3d342c4-ab61-44a4-9f96-
+71ceb7810a5d&PN=Shared  
+Miao, F., Mishra, S., & McGreal, R. (2016). Open educational resources: Policy, costs and transformation  
+[eBook].  Retrieved from http://unesdoc.unesco.org/images/0024/002443/244365e.pdf  
+Rohs, M., & Ganz, M. (2015). MOOCs and the claim for education for all: A disillusion by empirical data. . 
+International Review of Research in Open and Distributed Learning, 16 (6). Retrieved from 
+http://www.irrodl.org/index.php/irrodl/article/view/2033  
+Rossini, C., & Castro, O. (2016). The state of open educational resources in Brazil: Policies and realities. In 
+F. Miao, S. Mishra & R. McGreal (Eds.), Open educational resources: Policy, costs and 
+transformation. Vancouver: Commonwealth of Learning/UNESCO. Retrieved from 
+http://unesdoc.unesco.org/images/0024/002443/244365e.pdf  
+Tamburri, R. (2014, February 12). An interview with Canadian MOOC pioneer George Siemens. 
+University Affairs. Retrieved from http://www.universityaffairs.ca/features/feature-article/an-
+interview-with-canadian-mooc-pioneer-george-siemens/ 
+UNESCO. (2002). Forum on the Impact of Open Courseware for Higher Educatio n in Developing 
+Countries: Final Report. Retrieved from 
+http://unesdoc.unesco.org/images/0012/001285/128515e.pdf  
+ UNESCO. (2012). UNESCO Paris Declaration on Open Educational Resources [PDF].  Retrieved from 
+http://www.unesco.org/new/fileadmin/MULTIMEDIA/HQ/CI/CI/pdf/Events/Paris%20OER%2
+0Declaration_01.pdf  
+[PAGE 14]
+Special Report on the Role of Open Educational Resources in Supporting the Sustainable Development Goal 4 
+McGreal 
+305 
+ 
+Weller, M. (2014). The battle for open: How openness won and why it doesn’t feel like victory. London: 
+Ubiquity Press. DOI: https://doi.org/10.5334/bam 
+Wiley, D. (2014, March 5). The access compromise and the 5th R [Blog post].   Retrieved from 
+https://opencontent.org/blog/archives/3221  
+Yuan, L., & Powell, S. (2013, March). MOOCs and open education: Implications for higher education 
+[Blog post].  Retrieved from http://publications.cetis.org.uk/2013/667

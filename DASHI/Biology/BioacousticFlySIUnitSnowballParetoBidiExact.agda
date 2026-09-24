@@ -124,7 +124,7 @@ embeddingCoordinatesDimensionless = true
 ------------------------------------------------------------------------
 
 data SIExtendedFrontierAxis : Set where
-  sameObjectDebt temporalAlignmentDebt provenanceDebt opportunityLoss
+  sameObjectDebt temporalAlignmentDebt provenanceDebt opportunityLoss : SIExtendedFrontierAxis
   identityRisk implementationCost unitSemanticsDebt : SIExtendedFrontierAxis
 
 axisReference : SIExtendedFrontierAxis → String

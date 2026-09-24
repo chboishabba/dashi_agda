@@ -1,0 +1,23 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound11Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound11Exact as Round11
+
+candidateStillRequiresCorpusAdmission :
+  Round11.Round11CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round11.round11CandidateDoesNotCreateIncludedStudy
+
+activityThresholdNotPopulationAdequacy :
+  Round11.ActiveLearnerSelectionCreatesTargetPopulationAdequacy → ⊥
+activityThresholdNotPopulationAdequacy =
+  Round11.activeLearnerSelectionDoesNotCreateTargetPopulationAdequacy
+
+nonresponseNotObservedAccessCause :
+  Round11.NonresponsePossibilityCreatesObservedAccessCause → ⊥
+nonresponseNotObservedAccessCause = Round11.nonresponseDoesNotCreateObservedAccessCause
+
+mobileWorkaroundNotInfrastructureAdequacy :
+  Round11.MobileWorkaroundCreatesInfrastructureAdequacy → ⊥
+mobileWorkaroundNotInfrastructureAdequacy = Round11.mobileWorkaroundDoesNotCreateInfrastructureAdequacy

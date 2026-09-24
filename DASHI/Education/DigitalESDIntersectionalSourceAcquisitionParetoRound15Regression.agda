@@ -1,0 +1,30 @@
+module DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound15Regression where
+
+open import DASHI.Core.Prelude
+open import Data.Empty using (⊥)
+
+import DASHI.Education.DigitalESDIntersectionalSourceAcquisitionParetoRound15Exact as Round15
+
+candidateStillRequiresCorpusAdmission :
+  Round15.Round15CandidateCreatesIncludedStudy → ⊥
+candidateStillRequiresCorpusAdmission = Round15.round15CandidateDoesNotCreateIncludedStudy
+
+realisedCarrierNotEligiblePopulation :
+  Round15.RealisedCarrierCreatesEligiblePopulationState → ⊥
+realisedCarrierNotEligiblePopulation = Round15.realisedCarrierDoesNotCreateEligiblePopulationState
+
+disclosureRateNotEligiblePopulation :
+  Round15.DisclosureRateCreatesEligiblePopulationTruth → ⊥
+disclosureRateNotEligiblePopulation = Round15.disclosureRateDoesNotCreateEligiblePopulationTruth
+
+sameProgrammeNotSameMeasurementObject :
+  Round15.SameProgrammeCreatesSameMeasurementObject → ⊥
+sameProgrammeNotSameMeasurementObject = Round15.sameProgrammeDoesNotCreateSameMeasurementObject
+
+institutionalVisibilityNotPopulationTruth :
+  Round15.InstitutionalVisibilityCreatesPopulationTruth → ⊥
+institutionalVisibilityNotPopulationTruth = Round15.institutionalVisibilityDoesNotCreatePopulationTruth
+
+hiddenPopulationCollisionRulesOutFlatRecovery :
+  Round15.HiddenPopulationFactorisation → ⊥
+hiddenPopulationCollisionRulesOutFlatRecovery = Round15.hiddenPopulationDoesNotFactorThroughRealisedCarrier

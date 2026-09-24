@@ -22,10 +22,10 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data ContaminantClass : Set where
-  pesticideResidue
-  toxicMetalOrTraceElement
-  microbialOrMycotoxin
-  processingOrCombustionProduct
+  pesticideResidue : ContaminantClass
+  toxicMetalOrTraceElement : ContaminantClass
+  microbialOrMycotoxin : ContaminantClass
+  processingOrCombustionProduct : ContaminantClass
   unknownExogenous : ContaminantClass
 
 record AnalyticalUncertaintyReceipt : Set where
@@ -208,12 +208,12 @@ handleDoesNotCreateSamePersonAcrossPlatforms ()
 ------------------------------------------------------------------------
 
 data ContaminantParetoTarget : Set where
-  acquireWishartTableS7
-  acquireWishartTableS9Validation
-  bindContaminantPubChemIdentity
-  recoverFadedFarmerExactPost
-  comparePublicClaimToPrimaryEvidence
-  routeSpecificExposure
+  acquireWishartTableS7 : ContaminantParetoTarget
+  acquireWishartTableS9Validation : ContaminantParetoTarget
+  bindContaminantPubChemIdentity : ContaminantParetoTarget
+  recoverFadedFarmerExactPost : ContaminantParetoTarget
+  comparePublicClaimToPrimaryEvidence : ContaminantParetoTarget
+  routeSpecificExposure : ContaminantParetoTarget
   clinicalToxicity : ContaminantParetoTarget
 
 record ContaminantParetoStep : Set where
@@ -280,14 +280,14 @@ pareto9 = contaminant-pareto-step
 ------------------------------------------------------------------------
 
 data ContaminantTime : Set where
-  wishartPublication2024
-  userRecalledSocialLane
+  wishartPublication2024 : ContaminantTime
+  userRecalledSocialLane : ContaminantTime
   currentDashi : ContaminantTime
 
 data ContaminantInterpretation : Set where
-  contaminantsDetectedInCommercialSamples
-  methodUncertaintyMustTravel
-  fadedFarmerExactClaimAcquired
+  contaminantsDetectedInCommercialSamples : ContaminantInterpretation
+  methodUncertaintyMustTravel : ContaminantInterpretation
+  fadedFarmerExactClaimAcquired : ContaminantInterpretation
   measuredResidueEqualsPoisoning : ContaminantInterpretation
 
 data ContaminantSummary : Set where contaminantEvidenceIsRouteIndexed : ContaminantSummary

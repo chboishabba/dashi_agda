@@ -17,30 +17,22 @@ import DASHI.Geometry.MobiusOrientationGate as MOG
 -- collapse as explicit false gates, and does not manufacture promotion.
 
 data KleinClosureReceiptStatus : Set where
-  kleinClosureTargetsOnlyNoPromotion :
-    KleinClosureReceiptStatus
+  kleinClosureTargetsOnlyNoPromotion : KleinClosureReceiptStatus
 
 data KleinClosureOpenObligation : Set where
-  missingFirstMobiusBandCarrier :
-    KleinClosureOpenObligation
+  missingFirstMobiusBandCarrier : KleinClosureOpenObligation
 
-  missingSecondMobiusBandCarrier :
-    KleinClosureOpenObligation
+  missingSecondMobiusBandCarrier : KleinClosureOpenObligation
 
-  missingClosureGluingSeam :
-    KleinClosureOpenObligation
+  missingClosureGluingSeam : KleinClosureOpenObligation
 
-  missingClosedSurfaceCarrier :
-    KleinClosureOpenObligation
+  missingClosedSurfaceCarrier : KleinClosureOpenObligation
 
-  missingNonOrientabilityGate :
-    KleinClosureOpenObligation
+  missingNonOrientabilityGate : KleinClosureOpenObligation
 
-  missingInsideOutsideDistinctionGate :
-    KleinClosureOpenObligation
+  missingInsideOutsideDistinctionGate : KleinClosureOpenObligation
 
-  missingPromotionAuthorityBoundary :
-    KleinClosureOpenObligation
+  missingPromotionAuthorityBoundary : KleinClosureOpenObligation
 
 canonicalKleinClosureOpenObligations :
   List KleinClosureOpenObligation
@@ -55,14 +47,11 @@ canonicalKleinClosureOpenObligations =
   ∷ []
 
 data KleinClosureTarget : Set where
-  twoMobiusBandsClosedTarget :
-    KleinClosureTarget
+  twoMobiusBandsClosedTarget : KleinClosureTarget
 
-  closedNonOrientableSurfaceTarget :
-    KleinClosureTarget
+  closedNonOrientableSurfaceTarget : KleinClosureTarget
 
-  noGlobalInsideOutsideTarget :
-    KleinClosureTarget
+  noGlobalInsideOutsideTarget : KleinClosureTarget
 
 canonicalKleinClosureTargets :
   List KleinClosureTarget

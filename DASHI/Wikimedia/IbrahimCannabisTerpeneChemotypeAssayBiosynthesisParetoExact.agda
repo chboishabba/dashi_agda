@@ -19,8 +19,8 @@ import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Temporal
 ------------------------------------------------------------------------
 
 data CompositionSourceRole : Set where
-  longitudinalChemotypeAssay
-  cannabisTerpeneSynthasePrimary
+  longitudinalChemotypeAssay : CompositionSourceRole
+  cannabisTerpeneSynthasePrimary : CompositionSourceRole
   terpeneVariationPrimary : CompositionSourceRole
 
 record CompositionSource : Set where
@@ -127,10 +127,10 @@ open TerpeneSynthaseReceipt public
 ------------------------------------------------------------------------
 
 data CannabisCompositionXLinkRole : Set where
-  plantToAssay
-  assayToMolecule
-  plantToTrichomeBiosynthesis
-  biosynthesisToMolecule
+  plantToAssay : CannabisCompositionXLinkRole
+  assayToMolecule : CannabisCompositionXLinkRole
+  plantToTrichomeBiosynthesis : CannabisCompositionXLinkRole
+  biosynthesisToMolecule : CannabisCompositionXLinkRole
   moleculeToEntourageTest : CannabisCompositionXLinkRole
 
 record CannabisCompositionXLink : Set where
@@ -196,11 +196,11 @@ moleculeToEntourageTestXLink = cannabis-composition-xlink
 ------------------------------------------------------------------------
 
 data CompositionTarget : Set where
-  exactBatchAssay
-  stereochemicalClosure
-  synthaseProductClosure
-  longitudinalTrajectory
-  pairwiseInteraction
+  exactBatchAssay : CompositionTarget
+  stereochemicalClosure : CompositionTarget
+  synthaseProductClosure : CompositionTarget
+  longitudinalTrajectory : CompositionTarget
+  pairwiseInteraction : CompositionTarget
   historicalWikipediaReplay : CompositionTarget
 
 record CompositionParetoStep : Set where
@@ -260,15 +260,15 @@ historicalCompositionTarget = composition-pareto-step
 ------------------------------------------------------------------------
 
 data CompositionTime : Set where
-  source2016
-  synthase2017
-  variation2020
+  source2016 : CompositionTime
+  synthase2017 : CompositionTime
+  variation2020 : CompositionTime
   currentDashi : CompositionTime
 
 data CompositionInterpretation : Set where
-  terpeneProfilesVaryWithChemotypeAndGrowth
-  synthaseIdentityCanConstrainProductCandidate
-  cultivarNameDeterminesExactProfile
+  terpeneProfilesVaryWithChemotypeAndGrowth : CompositionInterpretation
+  synthaseIdentityCanConstrainProductCandidate : CompositionInterpretation
+  cultivarNameDeterminesExactProfile : CompositionInterpretation
   exactBatchStillNeedsAssay : CompositionInterpretation
 
 data CompositionSummary : Set where

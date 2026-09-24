@@ -172,8 +172,8 @@ data UnitResidue9 : Nat → Set where
   unit8 : UnitResidue9 8
 
 data OggPrimeAboveThree : Set where
-  above5 above7 above11 above13 above17 above19 above23
-    above29 above31 above41 above47 above59 above71 : OggPrimeAboveThree
+  above5 above7 above11 above13 above17 above19 above23 : OggPrimeAboveThree
+  above29 above31 above41 above47 above59 above71 : OggPrimeAboveThree
 
 toPrime : OggPrimeAboveThree → Lane.MonsterPrimeLane
 toPrime above5 = Lane.p5
@@ -509,12 +509,10 @@ seventyOneDeficitMatchesUnnormalizedSevenAConstant = refl
 ------------------------------------------------------------------------
 
 data MirrorA7Lane : Set where
-  mirrorA2 mirrorA3 mirrorA5 mirrorA7 mirrorA11 mirrorA13 mirrorA17 :
-    MirrorA7Lane
+  mirrorA2 mirrorA3 mirrorA5 mirrorA7 mirrorA11 mirrorA13 mirrorA17 : MirrorA7Lane
 
 data MirrorB7Lane : Set where
-  mirrorB19 mirrorB23 mirrorB29 mirrorB31 mirrorB41 mirrorB47 mirrorB59 :
-    MirrorB7Lane
+  mirrorB19 mirrorB23 mirrorB29 mirrorB31 mirrorB41 mirrorB47 mirrorB59 : MirrorB7Lane
 
 data Sign1Lane : Set where
   sign71 : Sign1Lane

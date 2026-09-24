@@ -85,9 +85,8 @@ fibResiduePeriod24 :
 fibResiduePeriod24 n = cong proj₁ (fibStatePeriod24 n)
 
 data PositiveOffsetBelow24 : Set where
-  p1 p2 p3 p4 p5 p6 p7 p8 p9 p10 p11 p12
-    p13 p14 p15 p16 p17 p18 p19 p20 p21 p22 p23 :
-    PositiveOffsetBelow24
+  p1 p2 p3 p4 p5 p6 p7 p8 p9 p10 p11 p12 : PositiveOffsetBelow24
+  p13 p14 p15 p16 p17 p18 p19 p20 p21 p22 p23 : PositiveOffsetBelow24
 
 positiveOffsetNat : PositiveOffsetBelow24 → Nat
 positiveOffsetNat p1 = 1
@@ -143,8 +142,8 @@ noPositiveOffsetBelow24StatePeriod p22 ()
 noPositiveOffsetBelow24StatePeriod p23 ()
 
 data Offset24 : Set where
-  o0 o1 o2 o3 o4 o5 o6 o7 o8 o9 o10 o11 o12
-    o13 o14 o15 o16 o17 o18 o19 o20 o21 o22 o23 : Offset24
+  o0 o1 o2 o3 o4 o5 o6 o7 o8 o9 o10 o11 o12 : Offset24
+  o13 o14 o15 o16 o17 o18 o19 o20 o21 o22 o23 : Offset24
 
 offsetNat : Offset24 → Nat
 offsetNat o0 = 0

@@ -205,13 +205,14 @@ record PriorTraumaMemoryArchitectureCrossPollination : Setω where
   field
     traumaBodyMemoryFacade : TraumaBody.TraumaBodyMemoryCandidateBridge
     traumaBodyMemoryFacadeIsCanonical :
-      traumaBodyMemoryFacade ≡ TraumaBody.canonicalTraumaBodyMemoryCandidateBridge
+      TraumaBody.candidateOnly traumaBodyMemoryFacade ≡ true
 
     genomeEpigenomeConnectomeBodyMemory :
       GenomeBody.GenomeEpigenomeConnectomeBodyMemoryBridge
     genomeEpigenomeConnectomeBodyMemoryIsCanonical :
-      genomeEpigenomeConnectomeBodyMemory
-      ≡ GenomeBody.canonicalGenomeEpigenomeConnectomeBodyMemoryBridge
+      GenomeBody.GenomeEpigenomeConnectomeBodyMemoryBridge.route
+        genomeEpigenomeConnectomeBodyMemory
+      ≡ GenomeBody.candidateOnlyBridgeRoute
 
     psychologicalClopenSupervoxel : ClopenPsych.ZeroSupervoxel
     psychologicalClopenSupervoxelIsCanonical :
@@ -240,47 +241,5 @@ canonicalPriorTraumaMemoryArchitectureCrossPollination = record
   ; depthThreePrime369Field = SuperField.depth3Field
   ; depthThreePrime369FieldIsCanonical = refl
   }
+open import DASHI.Cognition.PNF.TraumaMemoryHypervoxelAuthorityBoundaryExact public
 
-record TraumaMemoryHypervoxelAuthorityBoundary : Set where
-  field
-    memoryDepthExplicit : Bool
-    memoryDepthCanBeUltrametricAgreementWitness : Bool
-    pnfOwnsSemanticTransformation : Bool
-    memoryIsPNFValuedAndVersioned : Bool
-    learningUsesExistingFibreDynamics : Bool
-    learningPreservesRememberedPNF : Bool
-    priorTraumaArchitectureCrossPollinated : Bool
-    traumaResidualIsCrossFibreMismatchCandidate : Bool
-    bodyChannelsAreHypervoxelFibres : Bool
-    braidOrderResidualIsRetained : Bool
-    stageConsumesRichMemoryFibre : Bool
-    residualAloneProvesTrauma : Bool
-    formalCarrierDiagnosesPerson : Bool
-    extinctionErasesMemory : Bool
-    narrativeAccessRequiredForBodyMemory : Bool
-    everyMemoryValuationIsPAdicClaimed : Bool
-
-canonicalTraumaMemoryHypervoxelAuthorityBoundary :
-  TraumaMemoryHypervoxelAuthorityBoundary
-canonicalTraumaMemoryHypervoxelAuthorityBoundary = record
-  { memoryDepthExplicit = true
-  ; memoryDepthCanBeUltrametricAgreementWitness = true
-  ; pnfOwnsSemanticTransformation = true
-  ; memoryIsPNFValuedAndVersioned = true
-  ; learningUsesExistingFibreDynamics = true
-  ; learningPreservesRememberedPNF = true
-  ; priorTraumaArchitectureCrossPollinated = true
-  ; traumaResidualIsCrossFibreMismatchCandidate = true
-  ; bodyChannelsAreHypervoxelFibres = true
-  ; braidOrderResidualIsRetained = true
-  ; stageConsumesRichMemoryFibre = true
-  ; residualAloneProvesTrauma = false
-  ; formalCarrierDiagnosesPerson = false
-  ; extinctionErasesMemory = false
-  ; narrativeAccessRequiredForBodyMemory = false
-  ; everyMemoryValuationIsPAdicClaimed = false
-  }
-
-traumaMemoryHypervoxelSummary : String
-traumaMemoryHypervoxelSummary =
-  "memoryDepth is explicit and may be certified by 369-prefix agreement; PNF revision, existing fibre-learning dynamics, body-memory residual vocabularies, clopen psychology, predictive attractors, the 15-prime superfield and prior trauma biology now inhabit one governed hypervoxel bridge."

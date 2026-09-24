@@ -205,8 +205,8 @@ mediaConsumptionCannotFactorIdeology =
 -- Existing graph owners reused.
 ------------------------------------------------------------------------
 
-onlineBoundary : Online.ManosphereIDWOnlineInfluenceBoundary
-onlineBoundary = Online.canonicalManosphereIDWOnlineInfluenceBoundary
+onlineBoundary : Online.ManosphereIDWOnlineInfluenceBidiBoundary
+onlineBoundary = Online.canonicalManosphereIDWOnlineInfluenceBidiBoundary
 
 priorBoundary : Prior.ManosphereReligionNationalismClimateBoundary
 priorBoundary = Prior.canonicalManosphereReligionNationalismClimateBoundary

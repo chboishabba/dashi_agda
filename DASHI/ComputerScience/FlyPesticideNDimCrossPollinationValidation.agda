@@ -1,0 +1,22 @@
+module DASHI.ComputerScience.FlyPesticideNDimCrossPollinationValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.ComputerScience.FlyPesticideNDimCrossPollinationExact as Bridge
+
+boundary : Bridge.FlyPesticideNDimCrossPollinationBoundary
+boundary = Bridge.canonicalFlyPesticideNDimCrossPollinationBoundary
+
+structuralAndToxicologyCoordinatesIndependent : Bool
+structuralAndToxicologyCoordinatesIndependent =
+  Bridge.structuralAndToxicologyCoordinatesIndependent boundary
+
+toxicologyDoesNotCreateWiringMechanism : Bool
+toxicologyDoesNotCreateWiringMechanism =
+  Bridge.toxicologyEndpointCreatesPairSpecificWiringMechanism boundary
+
+connectomeDoesNotCreatePesticideEffect : Bool
+connectomeDoesNotCreatePesticideEffect =
+  Bridge.connectomeFibreCreatesPesticideEffect boundary
+
+heldOutRoleRetained : Bool
+heldOutRoleRetained = Bridge.trainingHeldOutRoleRetained boundary

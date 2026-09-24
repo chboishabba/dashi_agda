@@ -74,8 +74,7 @@ communityQid = Identity.mkOptionalIdentityDemand
 ------------------------------------------------------------------------
 
 data RitualMythGraphNode : Set where
-  ritualNode mythNode mythologyNode communityNode institutionNode politicalMovementNode :
-    RitualMythGraphNode
+  ritualNode mythNode mythologyNode communityNode institutionNode politicalMovementNode : RitualMythGraphNode
 
 record RitualMythNodeAudit : Set where
   constructor ritual-myth-node-audit
@@ -294,8 +293,8 @@ mythLabelDoesNotCreateEmpiricalFalsehood ()
 mythDoesNotCreateHistoricalFact : MythCreatesHistoricalFact → ⊥
 mythDoesNotCreateHistoricalFact ()
 
-institutionDoesNotCreateCommunityAuthority : InstitutionCreatesCommunityAuthority → ⊥
-institutionDoesNotCreateCommunityAuthority ()
+institutionCannotCreateCommunityAuthority : InstitutionCreatesCommunityAuthority → ⊥
+institutionCannotCreateCommunityAuthority ()
 
 religiousInstitutionDoesNotDefineEveryMember : ReligiousInstitutionDefinesEveryMember → ⊥
 religiousInstitutionDoesNotDefineEveryMember ()

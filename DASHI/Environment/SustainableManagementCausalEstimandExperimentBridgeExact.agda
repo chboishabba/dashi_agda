@@ -37,8 +37,8 @@ import DASHI.Environment.LESSituatedObservationInteractionExact as LES
 ------------------------------------------------------------------------
 
 data InterventionFamily : Set where
-  landManagementPractice
-  rapidCompostProcess
+  landManagementPractice : InterventionFamily
+  rapidCompostProcess : InterventionFamily
   poultryBiologicalIntervention : InterventionFamily
 
 record SituatedInterventionIdentity : Set where

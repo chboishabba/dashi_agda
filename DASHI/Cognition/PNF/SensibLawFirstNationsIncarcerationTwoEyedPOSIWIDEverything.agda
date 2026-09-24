@@ -115,12 +115,12 @@ youthObservationDoesNotClaimCommunityMeaning = refl
 ------------------------------------------------------------------------
 
 data IncarcerationOperationalResidual : Set where
-  affectedCommunityOutcomeResidual
-  communityAuthorityResidual
-  causalMechanismResidual
-  correctionResponseResidual
-  materialEffectResidual
-  recurrencePreventionResidual
+  affectedCommunityOutcomeResidual : IncarcerationOperationalResidual
+  communityAuthorityResidual : IncarcerationOperationalResidual
+  causalMechanismResidual : IncarcerationOperationalResidual
+  correctionResponseResidual : IncarcerationOperationalResidual
+  materialEffectResidual : IncarcerationOperationalResidual
+  recurrencePreventionResidual : IncarcerationOperationalResidual
   : IncarcerationOperationalResidual
 
 record IncarcerationOperationalFrontier : Set where

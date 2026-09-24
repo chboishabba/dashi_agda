@@ -250,12 +250,10 @@ record PrimeLatticeCoefficientLaw (Coeff : Set) : Set₁ where
 -- Non-promoting G2 prerequisite receipt.
 
 data PrimeLatticeGeometryStatus : Set where
-  standalonePrimeLatticeGeometryOnly :
-    PrimeLatticeGeometryStatus
+  standalonePrimeLatticeGeometryOnly : PrimeLatticeGeometryStatus
 
 data PrimeLatticeG2Boundary : Set where
-  noDiscreteCurvatureCarrierInhabitedHere :
-    PrimeLatticeG2Boundary
+  noDiscreteCurvatureCarrierInhabitedHere : PrimeLatticeG2Boundary
 
 record PrimeLatticeD2Surface : Set₁ where
   field

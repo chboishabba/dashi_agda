@@ -18,27 +18,27 @@ import DASHI.Law.SensibLawCitationUsePropositionExact as Citation
 ------------------------------------------------------------------------
 
 data ReasoningRole : Set where
-  premiseRole
-  ruleRole
-  exceptionRole
-  analogyRole
-  distinctionRole
-  policyRole
-  factualFindingRole
-  burdenRole
-  remedyRole
-  reasoningRoleUnresolved
+  premiseRole : ReasoningRole
+  ruleRole : ReasoningRole
+  exceptionRole : ReasoningRole
+  analogyRole : ReasoningRole
+  distinctionRole : ReasoningRole
+  policyRole : ReasoningRole
+  factualFindingRole : ReasoningRole
+  burdenRole : ReasoningRole
+  remedyRole : ReasoningRole
+  reasoningRoleUnresolved : ReasoningRole
   : ReasoningRole
 
 data ConditionKind : Set where
-  factualCondition
-  legalCondition
-  jurisdictionCondition
-  temporalCondition
-  proceduralCondition
-  evidentialCondition
-  exceptionCondition
-  conditionUnresolved
+  factualCondition : ConditionKind
+  legalCondition : ConditionKind
+  jurisdictionCondition : ConditionKind
+  temporalCondition : ConditionKind
+  proceduralCondition : ConditionKind
+  evidentialCondition : ConditionKind
+  exceptionCondition : ConditionKind
+  conditionUnresolved : ConditionKind
   : ConditionKind
 
 record ConditionCoordinate : Set where
@@ -53,12 +53,12 @@ record ConditionCoordinate : Set where
 open ConditionCoordinate public
 
 data OutcomeKind : Set where
-  applicantSuccess
-  respondentSuccess
-  mixedOutcome
-  remittedOutcome
-  dismissedOutcome
-  outcomeUnresolved
+  applicantSuccess : OutcomeKind
+  respondentSuccess : OutcomeKind
+  mixedOutcome : OutcomeKind
+  remittedOutcome : OutcomeKind
+  dismissedOutcome : OutcomeKind
+  outcomeUnresolved : OutcomeKind
   : OutcomeKind
 
 record ParsedAuthorityReasoningDelta : Set₁ where

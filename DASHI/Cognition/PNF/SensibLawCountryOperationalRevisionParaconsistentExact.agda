@@ -24,23 +24,23 @@ import DASHI.Cognition.PNF.SensibLawCountrySystemRealisedJusticeBidiExact as Cou
 ------------------------------------------------------------------------
 
 data CountryEvidence : Set where
-  maboDoctrinalCorrectionEvidence
-  stateImplementationActivityEvidence
-  communityMaterialResidualEvidence
-  communityAuthorityResidualEvidence
-  correctionLoopResidualEvidence
+  maboDoctrinalCorrectionEvidence : CountryEvidence
+  stateImplementationActivityEvidence : CountryEvidence
+  communityMaterialResidualEvidence : CountryEvidence
+  communityAuthorityResidualEvidence : CountryEvidence
+  correctionLoopResidualEvidence : CountryEvidence
   : CountryEvidence
 
 data CountryHistory : Set where
-  doctrinalCorrectionHistory
-  correctionPlusImplementationHistory
-  correctionPlusImplementationAndMaterialResidualHistory
+  doctrinalCorrectionHistory : CountryHistory
+  correctionPlusImplementationHistory : CountryHistory
+  correctionPlusImplementationAndMaterialResidualHistory : CountryHistory
   : CountryHistory
 
 data CountryOperationalConclusion : Set where
-  doctrinalCorrectionRecognised
-  partialOperationalCorrectionRecognised
-  materialClosureReopened
+  doctrinalCorrectionRecognised : CountryOperationalConclusion
+  partialOperationalCorrectionRecognised : CountryOperationalConclusion
+  materialClosureReopened : CountryOperationalConclusion
   : CountryOperationalConclusion
 
 data CountryContains : CountryEvidence → CountryHistory → Set where

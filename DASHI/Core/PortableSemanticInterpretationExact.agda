@@ -43,15 +43,15 @@ open SemanticInterpretationProblem public
 record SemanticRefinement
     (problem : SemanticInterpretationProblem)
     (backend : Backend problem)
-    (syntax : Syntax problem)
+    (syn : Syntax problem)
     (query : Query problem) : Set where
   constructor semanticRefinement
   field
     preservesObservation :
       observeImplementation problem backend query
-        (interpret problem backend syntax)
+        (interpret problem backend syn)
       ≡
-      observeMeaning problem query (meaning problem syntax)
+      observeMeaning problem query (meaning problem syn)
 
 open SemanticRefinement public
 
@@ -62,18 +62,18 @@ BackendEquivalentFor :
   Backend problem →
   Backend problem →
   Set
-BackendEquivalentFor problem syntax query left right =
+BackendEquivalentFor problem syn query left right =
   observeImplementation problem left query
-      (interpret problem left syntax)
+      (interpret problem left syn)
   ≡
   observeImplementation problem right query
-      (interpret problem right syntax)
+      (interpret problem right syn)
 
 twoRefinementsGiveConsumerEquivalence :
-  ∀ {problem syntax query left right} →
-  SemanticRefinement problem left syntax query →
-  SemanticRefinement problem right syntax query →
-  BackendEquivalentFor problem syntax query left right
+  ∀ {problem syn query left right} →
+  SemanticRefinement problem left syn query →
+  SemanticRefinement problem right syn query →
+  BackendEquivalentFor problem syn query left right
 twoRefinementsGiveConsumerEquivalence leftReceipt rightReceipt =
   trans
     (preservesObservation leftReceipt)

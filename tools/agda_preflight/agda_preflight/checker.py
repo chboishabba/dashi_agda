@@ -536,8 +536,8 @@ class Checker:
         imported: Dict[str, Dict[str, RecordInfo]],
     ) -> Optional[RecordInfo]:
         # A record result is the terminal codomain of a signature.  Resolve
-        # that head first, rather than a record name occurring in an earlier
-        # binder.
+        # that head first, rather than returning the first record name that
+        # happens to occur in a binder earlier in the signature.
         terminal = terminal_type_head(type_text)
         if terminal is not None:
             local_match = local.get(terminal)

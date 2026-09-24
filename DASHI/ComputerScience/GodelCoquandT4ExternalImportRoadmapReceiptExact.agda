@@ -13,12 +13,12 @@ open import DASHI.Core.Prelude
 ------------------------------------------------------------------------
 
 data T4ImportStatus : Set where
-  externalSourceVerified
-  revisionPinned
-  licenseIntakeOpen
-  localDependencyPresent
-  adapterTypechecked
-  theoremPaymentsTypechecked
+  externalSourceVerified : T4ImportStatus
+  revisionPinned : T4ImportStatus
+  licenseIntakeOpen : T4ImportStatus
+  localDependencyPresent : T4ImportStatus
+  adapterTypechecked : T4ImportStatus
+  theoremPaymentsTypechecked : T4ImportStatus
   importedAndKernelChecked : T4ImportStatus
 
 record CoquandT4ExternalImportReceipt : Set where

@@ -14,7 +14,7 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data AttributionCarrierKind : Set where
-  authorManuscript publisherSupportingInformation publisherRenderedPage
+  authorManuscript publisherSupportingInformation publisherRenderedPage : AttributionCarrierKind
   bibliographicIndex conferenceProgramme nasaNTRSChorusManifestation : AttributionCarrierKind
 
 record ManifestationAttributionCarrier : Set where

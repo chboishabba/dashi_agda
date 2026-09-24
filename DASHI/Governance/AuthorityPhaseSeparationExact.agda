@@ -22,8 +22,7 @@ import DASHI.Governance.LocalGlobalCouncilGluing as Council
 ------------------------------------------------------------------------
 
 data InterventionPhase : Set where
-  responsePhase adjudicationPhase sentencingPhase repairPhase :
-    InterventionPhase
+  responsePhase adjudicationPhase sentencingPhase repairPhase : InterventionPhase
 
 data PhaseAuthorityRole : Set where
   responseAuthorityRole : PhaseAuthorityRole

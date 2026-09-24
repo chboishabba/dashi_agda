@@ -31,17 +31,17 @@ import DASHI.Environment.KNFSituatedSiteResponseFibreExact as Situated
 ------------------------------------------------------------------------
 
 data KNFClaimStage : Set where
-  externalSourceClaim
-  dashiFormalReconstruction
-  dashiCrossSourceInference
-  dashiExtensionTheorem
+  externalSourceClaim : KNFClaimStage
+  dashiFormalReconstruction : KNFClaimStage
+  dashiCrossSourceInference : KNFClaimStage
+  dashiExtensionTheorem : KNFClaimStage
   promotionOrExternalAdjudication : KNFClaimStage
 
 data KNFSourceRole : Set where
-  practiceLineageSource
-  extensionPracticeSource
-  permacultureDesignCalibration
-  empiricalOutcomeSource
+  practiceLineageSource : KNFSourceRole
+  extensionPracticeSource : KNFSourceRole
+  permacultureDesignCalibration : KNFSourceRole
+  empiricalOutcomeSource : KNFSourceRole
   repositoryTypedOwner : KNFSourceRole
 
 record KNFClaimAttribution : Set where

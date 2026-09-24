@@ -1,0 +1,20 @@
+module DASHI.ComputerScience.FlyChlorpyrifosMultigenerationSourceValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.ComputerScience.FlyChlorpyrifosMultigenerationSourceExact as CP
+
+boundary : CP.FlyChlorpyrifosMultigenerationBoundary
+boundary = CP.canonicalFlyChlorpyrifosMultigenerationBoundary
+
+oralExposurePaid : Bool
+oralExposurePaid = CP.oralExposurePaid boundary
+
+multigenerationRoleRetained : Bool
+multigenerationRoleRetained = CP.multigenerationRoleRetained boundary
+
+neuralReproductiveLifeHistoryCoordinatesSeparated : Bool
+neuralReproductiveLifeHistoryCoordinatesSeparated =
+  CP.neuralReproductiveLifeHistoryCoordinatesSeparated boundary
+
+adaptationEqualsNoToxicity : Bool
+adaptationEqualsNoToxicity = CP.adaptationEqualsNoToxicity boundary

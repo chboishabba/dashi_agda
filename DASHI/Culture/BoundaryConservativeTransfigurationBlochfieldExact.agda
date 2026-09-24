@@ -193,8 +193,8 @@ appendOnlyRevisionBoundary = Revision.canonicalAppendOnlyEvidenceRevisionBoundar
 ------------------------------------------------------------------------
 
 data BlochfieldSnowballLeaf : Set where
-  publicationEventIdentity suppliedImageIdentity nativeXBodyIdentity
-    creatorLongFormIdentity externalSameObjectTheoryLineage technicalClaimPayment : BlochfieldSnowballLeaf
+  publicationEventIdentity suppliedImageIdentity nativeXBodyIdentity : BlochfieldSnowballLeaf
+  creatorLongFormIdentity externalSameObjectTheoryLineage technicalClaimPayment : BlochfieldSnowballLeaf
 
 data LeafStanding : Set where paid unpaid : LeafStanding
 

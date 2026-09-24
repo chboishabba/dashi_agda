@@ -14,32 +14,32 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 
 data ChemicalStatus : Set where
-  declared
-  confirmedTarget
-  confirmedNonTarget
-  tentativeLibraryMatch
-  reactionProduct
-  deviceDerived
+  declared : ChemicalStatus
+  confirmedTarget : ChemicalStatus
+  confirmedNonTarget : ChemicalStatus
+  tentativeLibraryMatch : ChemicalStatus
+  reactionProduct : ChemicalStatus
+  deviceDerived : ChemicalStatus
   unresolvedFeature : ChemicalStatus
 
 data CarrierStage : Set where
-  packageLabel
-  virginLiquid
-  agedLiquid
-  deviceMaterial
-  emittedParticlePhase
+  packageLabel : CarrierStage
+  virginLiquid : CarrierStage
+  agedLiquid : CarrierStage
+  deviceMaterial : CarrierStage
+  emittedParticlePhase : CarrierStage
   emittedGasPhase : CarrierStage
 
 data ChemicalRole : Set where
-  carrierSolvent
-  nicotineOrSaltAcid
-  flavourant
-  coolant
-  sweetener
-  prohibitedIngredient
-  extractableLeachable
-  thermalOrStorageProduct
-  metalOrMetalloid
+  carrierSolvent : ChemicalRole
+  nicotineOrSaltAcid : ChemicalRole
+  flavourant : ChemicalRole
+  coolant : ChemicalRole
+  sweetener : ChemicalRole
+  prohibitedIngredient : ChemicalRole
+  extractableLeachable : ChemicalRole
+  thermalOrStorageProduct : ChemicalRole
+  metalOrMetalloid : ChemicalRole
   unknownRole : ChemicalRole
 
 record ChemicalFeature : Set where

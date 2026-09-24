@@ -21,8 +21,7 @@ import DASHI.Cognition.PNF.ContinuousOscillatorSyntheticReceipt as Synthetic
 ------------------------------------------------------------------------
 
 data OscillatorIdentifiabilityQuery : Set where
-  waveformQuery frequencyQuery amplitudeQuery phaseQuery hiddenStateQuery :
-    OscillatorIdentifiabilityQuery
+  waveformQuery frequencyQuery amplitudeQuery phaseQuery hiddenStateQuery : OscillatorIdentifiabilityQuery
 
 queryIndexedAdequacySurface :
   ∀ {State Observation Answer} →

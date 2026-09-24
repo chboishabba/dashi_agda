@@ -21,9 +21,9 @@ data PrimeLaneStage12ActionAdapterRegistryBoundary : Set where
 
 data PrimeLaneStage12ActionAdapterRegistryEntry : Set where
   canonicalAdapterEntry :
-    String →
-    Adapter.PrimeLaneStage12ActionAdapter →
-    PrimeLaneStage12ActionAdapterRegistryEntry
+  String → :
+  Adapter.PrimeLaneStage12ActionAdapter → :
+  PrimeLaneStage12ActionAdapterRegistryEntry :
   reservedAdapterEntry :
     String →
     List String →

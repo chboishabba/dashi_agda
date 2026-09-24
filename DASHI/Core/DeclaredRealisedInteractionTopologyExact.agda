@@ -125,6 +125,8 @@ record DeclaredRealisedInteractionBoundary : Set where
       runtimeReachableEffectAuditMustIncludeEmergentChannels ≡ true
     reading : String
 
+open DeclaredRealisedInteractionBoundary public
+
 canonicalDeclaredRealisedInteractionBoundary : DeclaredRealisedInteractionBoundary
 canonicalDeclaredRealisedInteractionBoundary =
   declared-realised-interaction-boundary

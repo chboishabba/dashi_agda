@@ -12,7 +12,7 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 
 data IbrahimSourceRole : Set where
-  methodPreprint methodAuthorDraft methodJournalVersion
+  methodPreprint methodAuthorDraft methodJournalVersion : IbrahimSourceRole
   authorHostedCodeData currentWikipediaConsumerSnapshot : IbrahimSourceRole
 
 record IbrahimSourceManifestation : Set where

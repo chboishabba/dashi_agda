@@ -17,13 +17,13 @@ import DASHI.Wikimedia.IbrahimDisposableVapeUnknownFeatureLedgerExact as Ledger
 ------------------------------------------------------------------------
 
 data ObserverModality : Set where
-  labelAudit
-  targetedGCMS
-  targetedLCMS
-  nonTargetGCHRMS
-  nonTargetLCHRMS
-  carbonylAssay
-  elementalICPMS
+  labelAudit : ObserverModality
+  targetedGCMS : ObserverModality
+  targetedLCMS : ObserverModality
+  nonTargetGCHRMS : ObserverModality
+  nonTargetLCHRMS : ObserverModality
+  carbonylAssay : ObserverModality
+  elementalICPMS : ObserverModality
   deviceMaterialAnalysis : ObserverModality
 
 record ObserverCapability : Set where

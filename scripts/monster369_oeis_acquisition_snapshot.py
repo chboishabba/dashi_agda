@@ -85,6 +85,7 @@ SEQUENCES: dict[str, dict[str, object]] = {
         "A058674",
         title="McKay-Thompson series of class 42D for Monster",
         class_label="42D",
+        positive_coefficients={1: 1, 2: 3, 3: 3},
         formula=(
             "-1+eta(q^2)*eta(q^6)*eta(q^7)*eta(q^21)/"
             "(eta(q)*eta(q^3)*eta(q^14)*eta(q^42))"
@@ -92,8 +93,10 @@ SEQUENCES: dict[str, dict[str, object]] = {
         authority="source-navigation",
         url="https://oeis.org/A058674",
         notes=(
-            "Neighboring Monster class-42 series. Its eta quotient explicitly contains "
-            "levels 14 and 42, useful as source-native coordinates for the 42-family search."
+            "Neighboring Monster class-42 series. OEIS offset -1 gives q^1,q^2,q^3 = "
+            "1,3,3 after the displayed 1/q and q^0 terms. Its eta quotient explicitly "
+            "contains levels 14 and 42. The 1,3,3 tail is retained only as a search echo "
+            "against the D4 quotient character tail, not as character identity."
         ),
     ),
     "A058676": _node(
@@ -247,6 +250,18 @@ RELATIONS: dict[str, dict[str, object]] = {
         "fifteen_minus_one_explanation_paid": False,
         "same_object_paid": False,
     },
+    "five-orbit-d4-to-n3b-character": {
+        "sources": ["A058674", "A058678"],
+        "observed": (
+            "the theorem-shaped five-orbit D4 quotient has character (5,5,1,3,3) = "
+            "3*A1+B1+B2; A058674 independently exposes q^1,q^2,q^3 = 1,3,3 after "
+            "respecting its OEIS offset -1. Retain this only as a weak search echo while "
+            "the actual D4 -> N(3B) same-action restriction remains unpaid."
+        ),
+        "paid": True,
+        "n3b_same_object_character_paid": False,
+        "oeis_tail_echo_creates_character_identity": False,
+    },
     "42d-17496-to-n3b-restriction": {
         "sources": ["A058678"],
         "observed": (
@@ -255,6 +270,19 @@ RELATIONS: dict[str, dict[str, object]] = {
         ),
         "paid": True,
         "same_object_paid": False,
+    },
+    "oeis42d-atlas42D-label-disambiguation": {
+        "oeis_sequence": "A058678",
+        "oeis_label": "42d",
+        "atlas_label": "42D",
+        "atlas_fourteenth_power_target": "3A",
+        "atlas_direct_power_target_3B": False,
+        "same_class_paid": False,
+        "observed": (
+            "Retain the case-sensitive OEIS/ATLAS nomenclature boundary. The ATLAS 42D "
+            "power family may guide search, but it is not transferred to OEIS A058678 "
+            "until an explicit same-class source receipt is acquired."
+        ),
     },
     "42d-five-mode-phase-carrier": {
         "sources": ["A058678"],
@@ -313,10 +341,7 @@ def build_ternary27_phase_preserving_reduction_probe() -> dict[str, object]:
     for size in fiber_sizes.values():
         fiber_size_histogram[size] = fiber_size_histogram.get(size, 0) + 1
 
-    full_global_orbits = {
-        min(state, _negate_state(state))
-        for state in raw_states
-    }
+    full_global_orbits = {min(state, _negate_state(state)) for state in raw_states}
 
     return {
         "raw_state_count": len(raw_states),
@@ -361,9 +386,22 @@ def build_42d_five_mode_phase_probe() -> dict[str, object]:
     }
 
 
+def build_five_orbit_d4_oeis_bridge_probe() -> dict[str, object]:
+    return {
+        "permutation_character": [5, 5, 1, 3, 3],
+        "irrep_multiplicities": {"A1": 3, "A2": 0, "B1": 1, "B2": 1, "E": 0},
+        "raw_nine_irrep_multiplicities": {"A1": 3, "A2": 0, "B1": 1, "B2": 1, "E": 2},
+        "removed_irrep_content": {"E": 2},
+        "removed_dimension": 4,
+        "n3b_same_object_character_paid": False,
+        "oeis_42d_tail_echo": [1, 3, 3],
+        "oeis_tail_echo_creates_character_identity": False,
+    }
+
+
 def build_report() -> dict[str, object]:
     return {
-        "schema": "monster369-oeis-acquisition-snapshot-v6",
+        "schema": "monster369-oeis-acquisition-snapshot-v7",
         "retrieved": RETRIEVED,
         "sequence_count": len(SEQUENCES),
         "sequences": SEQUENCES,
@@ -371,6 +409,7 @@ def build_report() -> dict[str, object]:
         "carrier_probes": {
             "ternary27_phase_preserving_3x5": build_ternary27_phase_preserving_reduction_probe(),
             "42d_five_mode_phase": build_42d_five_mode_phase_probe(),
+            "five_orbit_d4_oeis_bridge": build_five_orbit_d4_oeis_bridge_probe(),
         },
         "positive_bridge_candidates": {
             "a005052-heisenberg-ladder": True,
@@ -380,6 +419,7 @@ def build_report() -> dict[str, object]:
             "42d-five-mode-phase-carrier": True,
             "42-class-eta-level-family": True,
             "ternary27-phase-preserving-3x5-reduction": True,
+            "five-orbit-d4-to-n3b-character": True,
         },
         "authority": {
             "oeis_snapshot_creates_same_object": False,

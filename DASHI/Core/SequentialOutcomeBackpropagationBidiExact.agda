@@ -42,7 +42,7 @@ revisionFor Backprop.reopenConsumer = reformulateConsumer
 revisionFor Backprop.reopenProvenance = acquireIndependentProvenance
 revisionFor Backprop.reopenAuthorityBoundary = seekAuthorityReceipt
 
-record SequentialBackpropagationStep : Set where
+record SequentialBackpropagationStep : Set₁ where
   constructor sequential-backpropagation-step
   field
     result : Closure.ResultAssessment

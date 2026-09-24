@@ -9,6 +9,16 @@ CONTROL = ROOT / "Docs/roadmaps/NSProofControl20260915.md"
 ADDENDUM = ROOT / "Docs/papers/NSFourLanePublicationAddendum20260915.md"
 
 REQUIRED_PAPER = [
+    "NSTriadKNPeriodicClayEligibilityMaxCutRound642Exact",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "two",
+    "genuinely new nonlinear",
     "CommutatorOnlySpacetimeBudget568",
     "R568",
     "R572",
@@ -26,6 +36,16 @@ REQUIRED_PAPER = [
 
 REQUIRED_INTERFACE = [
     "FourLaneProofProgramExact",
+    "NSTriadKNPeriodicClayEligibilityMaxCutRound642Exact",
+    "periodicClayMaxCutC1Closed",
+    "periodicClayMaxCutC2StillProofBearing",
+    "periodicClayMaxCutC3CompilerAvailable",
+    "periodicClayMaxCutC4CompilerAvailable",
+    "periodicClayMaxCutC5Proved",
+    "periodicClayMaxCutC6ScalarFTCInstalled",
+    "periodicClayMaxCutC7SimonClosed",
+    "oldPDFB1B2B3B4Mandatory",
+    "oldPDFB7DirectCovarianceEqualityMandatory",
     "CommutatorOnlySpacetimeBudget568",
     "directCompanionConstructed",
     "commutatorOnlySpacetimeProducerClosed",
@@ -78,6 +98,15 @@ REQUIRED_CONTROL = [
 
 REQUIRED_ADDENDUM = [
     "Lane A",
+    "R642",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "genuinely new nonlinear",
     "Lane B",
     "Lane C",
     "Lane D",
@@ -111,6 +140,8 @@ REQUIRED_CONSTRUCTED_PROOFS = [
 
 FORBIDDEN_PRIMARY_PAPER_PHRASES = [
     "Its live frontiers are the quantitative `A1/A3`",
+    "Lane B literal centered/Taylor realization     open",
+    "Lane B old second-moment/six-three transplant open on modern carrier",
     "The current Clay-blocking frontier is also sharp. The coupled `A1/A3` problem",
 ]
 
