@@ -24,6 +24,7 @@ data SourceRole : Set where
   metaComplexityContext : SourceRole
   cardinalityDiagonalization : SourceRole
   sharedConstraintEncoding : SourceRole
+  probabilisticallyCheckableProofs : SourceRole
   diagonalCardinality : SourceRole
 
 data IdentifierStatus : Set where
@@ -130,6 +131,30 @@ goldbergJuvekarKabanets2026 =
     stableReportIdentifier
     "Context only: meta-complexity / description-complexity motivation.  No self-diagonal SAT certificate or P != NP theorem is imported."
 
+
+aroraSafra1998 : ComplexitySource
+aroraSafra1998 =
+  complexitySource
+    "Sanjeev Arora; Shmuel Safra"
+    "Probabilistic checking of proofs: A new characterization of NP"
+    1998
+    "Journal of the ACM 45(1), 70--122"
+    "doi:10.1145/273865.273901"
+    probabilisticallyCheckableProofs
+    verifiedDOI
+    "Calibration for genuinely nonlocal/randomized proof verification.  The current DASHI self-diagonal lane does not import PCP soundness as a deterministic sub-|C| self-evaluation theorem."
+
+aroraLundMotwaniSudanSzegedy1998 : ComplexitySource
+aroraLundMotwaniSudanSzegedy1998 =
+  complexitySource
+    "Sanjeev Arora; Carsten Lund; Rajeev Motwani; Madhu Sudan; Mario Szegedy"
+    "Proof Verification and the Hardness of Approximation Problems"
+    1998
+    "Journal of the ACM 45(3), 501--555"
+    "doi:10.1145/278298.278306"
+    probabilisticallyCheckableProofs
+    verifiedDOI
+    "Calibration for PCP/nonlocal verification and hardness-of-approximation techniques only.  No exact deterministic SAT self-evaluation certificate is imported."
 
 tseitin1968 : ComplexitySource
 tseitin1968 =
