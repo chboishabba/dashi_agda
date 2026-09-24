@@ -28,6 +28,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as R499
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as R476
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.BalabanScalarCylinderExpectationLimitExact as Cylinder
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
@@ -80,7 +81,7 @@ representedPhysicalExpectationConverges :
     (RealLimit.canonicalCylinderAlgebra limitLaws)
     (λ cutoff →
       Limit.finiteExpectation family cutoff observable)
-    (DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact.expectation
+    (Physical.expectation
       (R476.asPhysicalContinuum
         (R476.represented (R499.asSourceLimitRepresentation inputs)))
       observable)
