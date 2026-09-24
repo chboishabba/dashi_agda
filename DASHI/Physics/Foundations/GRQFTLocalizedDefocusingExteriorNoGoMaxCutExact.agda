@@ -3,6 +3,9 @@ module DASHI.Physics.Foundations.GRQFTLocalizedDefocusingExteriorNoGoMaxCutExact
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
+import Data.Integer.Base as Int
+open import Data.Rational.Base using (_/_)
 
 import DASHI.Physics.Foundations.GRQFTFiniteDefocusingSolutionWitnessExact as Defocus
 import DASHI.Physics.Foundations.GRQFTFiniteComovingRiemannDeviationExact as Riemann
@@ -46,11 +49,11 @@ record LocalizedDefocusingExteriorNoGoMaxCut : Set where
 
     pressureWeightedActiveDiagnosticNegative :
       TOV.finiteIntegratedActiveMass
-        ≡ - (Data.Integer.Base.+ 11 Data.Rational.Base./ 12)
+        ≡ - (Int.+ 11 / 12)
 
     surfaceMetricMassPositive :
       Collision.surfaceMetricMass
-        ≡ Data.Integer.Base.+ 1 Data.Rational.Base./ 4
+        ≡ Int.+ 1 / 4
 
     twoMassNotionsDistinct :
       Collision.surfaceMetricMass
