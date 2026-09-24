@@ -3,9 +3,11 @@ module DASHI.Physics.Foundations.GRQFTUnequalVacuumStaticWallNoGoExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Empty using (⊥)
 import Data.Integer.Base as Int
 open import Data.Rational.Base using (ℚ; _/_; _-_; -_)
+import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Foundations.GRQFTNambuGotoTwoVacuumPotentialExact as Potential
 
@@ -37,7 +39,11 @@ stationaryEndpointFirstIntegralEqualityForcesEqualVacua :
     ≡ staticVacuumFirstIntegral rightVacuum →
   leftVacuum ≡ rightVacuum
 stationaryEndpointFirstIntegralEqualityForcesEqualVacua left right equality =
-  Data.Rational.Properties.neg-injective equality
+  trans
+    (sym (ℚP.neg-involutive left))
+    (trans
+      (cong -_ equality)
+      (ℚP.neg-involutive right))
 
 ------------------------------------------------------------------------
 -- NAMBU VACUA ARE UNEQUAL
