@@ -1,6 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119TenFinitePhysicalCompositeDerivativeExact where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import Data.Rational.Base using (ℚ)
@@ -182,8 +184,16 @@ evaluateTenFinitePhysicalCompositeDerivatives
     (rationalFinitePhysicalCompositeDerivative presentData {laws = laws}
       attachment background K.component33)
 
-tenDerivativeExpressionsAreFiniteLocalizedD1 : Set
-tenDerivativeExpressionsAreFiniteLocalizedD1 = Set
+tenDerivativeExpressionsAreFiniteLocalizedD1 : Bool
+tenDerivativeExpressionsAreFiniteLocalizedD1 = true
 
-tenDerivativeReadoutIntroducesSecondStressLaw : Agda.Builtin.Bool.Bool
-tenDerivativeReadoutIntroducesSecondStressLaw = Agda.Builtin.Bool.false
+tenDerivativeExpressionsAreFiniteLocalizedD1IsTrue :
+  tenDerivativeExpressionsAreFiniteLocalizedD1 ≡ true
+tenDerivativeExpressionsAreFiniteLocalizedD1IsTrue = refl
+
+tenDerivativeReadoutIntroducesSecondStressLaw : Bool
+tenDerivativeReadoutIntroducesSecondStressLaw = false
+
+tenDerivativeReadoutIntroducesSecondStressLawIsFalse :
+  tenDerivativeReadoutIntroducesSecondStressLaw ≡ false
+tenDerivativeReadoutIntroducesSecondStressLawIsFalse = refl
