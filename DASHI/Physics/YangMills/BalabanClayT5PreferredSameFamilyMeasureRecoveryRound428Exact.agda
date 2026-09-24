@@ -33,6 +33,7 @@ import DASHI.Physics.YangMills.BalabanClayT5OSGramTopologyExact as OS
 import DASHI.Physics.YangMills.BalabanClayT5ThermodynamicUniformIntegrabilityExact as T5
 import DASHI.Physics.YangMills.BalabanClayT5PreferredOSGramFromExpectationExact as PreferredGram
 import DASHI.Physics.YangMills.BalabanClayT5SameFamilyContinuumRecoveryRound425Exact as R425
+import DASHI.Physics.YangMills.BalabanClayT5DiagonalCompactUniqueRound427Exact as R427
 
 record PreferredSameFamilyMeasureInputs
     (Measure Observable Scalar Schwinger : Set) : Set₂ where
@@ -43,13 +44,9 @@ record PreferredSameFamilyMeasureInputs
 
     schwinger : Measure → Schwinger
 
-    measureLimit : Limit.SequentialLimit Measure
-
-    diagonalConvergesToContinuum :
-      Limit.Converges measureLimit
-        (T5.diagonalMeasure (PreferredGram.expectationData gramInputs))
-        (T5.continuumMeasure
-          (T5.thermodynamic (PreferredGram.expectationData gramInputs)))
+    compactUnique :
+      R427.LiteralDiagonalCompactUniqueInputs
+        (PreferredGram.expectationData gramInputs)
 
     Normalized Positive GaugeInvariant : Measure → Set
 
@@ -69,17 +66,17 @@ record PreferredSameFamilyMeasureInputs
           (PreferredGram.expectationData gramInputs) cutoff)
 
     normalizedClosed : ∀ sequence target →
-      Limit.Converges measureLimit sequence target →
+      Limit.Converges (R427.convergence compactUnique) sequence target →
       (∀ cutoff → Normalized (sequence cutoff)) →
       Normalized target
 
     positiveClosed : ∀ sequence target →
-      Limit.Converges measureLimit sequence target →
+      Limit.Converges (R427.convergence compactUnique) sequence target →
       (∀ cutoff → Positive (sequence cutoff)) →
       Positive target
 
     gaugeInvariantClosed : ∀ sequence target →
-      Limit.Converges measureLimit sequence target →
+      Limit.Converges (R427.convergence compactUnique) sequence target →
       (∀ cutoff → GaugeInvariant (sequence cutoff)) →
       GaugeInvariant target
 
@@ -132,7 +129,7 @@ selectedConvergence :
   Sequential.SequentialConvergence Measure
 selectedConvergence inputs = record
   { Sequential.SequentialConvergence.Converges =
-      Limit.Converges (measureLimit inputs)
+      Limit.Converges (R427.convergence (compactUnique inputs))
   }
 
 selectedClosure :
@@ -150,7 +147,7 @@ selectedClosure inputs = record
   ; Selected.SelectedFiniteToContinuumOS.convergence =
       selectedConvergence inputs
   ; Selected.SelectedFiniteToContinuumOS.continuumIsSelectedLimit =
-      diagonalConvergesToContinuum inputs
+      R427.literalDiagonalConvergesToContinuum (compactUnique inputs)
   ; Selected.SelectedFiniteToContinuumOS.Normalized =
       Normalized inputs
   ; Selected.SelectedFiniteToContinuumOS.Positive =
@@ -180,7 +177,7 @@ selectedClosure inputs = record
         (T5.continuumMeasure
           (T5.thermodynamic
             (PreferredGram.expectationData (gramInputs inputs))))
-        (diagonalConvergesToContinuum inputs)
+        (R427.literalDiagonalConvergesToContinuum (compactUnique inputs))
         (finiteNormalized inputs)
   ; Selected.SelectedFiniteToContinuumOS.continuumPositive =
       positiveClosed inputs
@@ -189,7 +186,7 @@ selectedClosure inputs = record
         (T5.continuumMeasure
           (T5.thermodynamic
             (PreferredGram.expectationData (gramInputs inputs))))
-        (diagonalConvergesToContinuum inputs)
+        (R427.literalDiagonalConvergesToContinuum (compactUnique inputs))
         (finitePositive inputs)
   ; Selected.SelectedFiniteToContinuumOS.continuumGaugeInvariant =
       gaugeInvariantClosed inputs
@@ -198,7 +195,7 @@ selectedClosure inputs = record
         (T5.continuumMeasure
           (T5.thermodynamic
             (PreferredGram.expectationData (gramInputs inputs))))
-        (diagonalConvergesToContinuum inputs)
+        (R427.literalDiagonalConvergesToContinuum (compactUnique inputs))
         (finiteGaugeInvariant inputs)
   ; Selected.SelectedFiniteToContinuumOS.continuumReflectionPositiveMeasure =
       Gram.physicalContinuumReflectionPositive
@@ -274,7 +271,13 @@ round428OSReconstructionAuthorityLevel : ProofLevel
 round428OSReconstructionAuthorityLevel = standardImported
 
 round428MeasureConvergenceLevel : ProofLevel
-round428MeasureConvergenceLevel = conditional
+round428MeasureConvergenceLevel = machineChecked
+
+round428EveryLiteralSubsequenceTightLevel : ProofLevel
+round428EveryLiteralSubsequenceTightLevel = conditional
+
+round428EveryExtractedClusterPointIsContinuumLevel : ProofLevel
+round428EveryExtractedClusterPointIsContinuumLevel = conditional
 
 round428MeasurePropertyClosureLevel : ProofLevel
 round428MeasurePropertyClosureLevel = conditional
