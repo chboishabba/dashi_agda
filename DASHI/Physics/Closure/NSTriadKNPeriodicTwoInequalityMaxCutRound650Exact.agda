@@ -28,6 +28,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralStrictMarginRadialSurplusRound646Ex
 import DASHI.Physics.Closure.NSTriadKNRadialConservationToPhysicalLayerCakeRound647Exact as R647
 import DASHI.Physics.Closure.NSTriadKNLivePhysicalPacketStrictSurplusRound648Exact as R648
 import DASHI.Physics.Closure.NSTriadKNPeriodicStandardCompletionSourcesRound649Exact as R649
+import DASHI.Physics.Closure.NSTriadKNR650QuantitativeResearchStrategyRound651Exact as R651
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -89,6 +90,18 @@ round650ExactlyTwoNewNSAnalyticLeaves = true
 round650AllRepresentationCompilersAroundC2Installed : Bool
 round650AllRepresentationCompilersAroundC2Installed = true
 
+round650UniversalViscosityOnlyC2ShortcutAdmissible : Bool
+round650UniversalViscosityOnlyC2ShortcutAdmissible =
+  R651.round651UniversalViscosityOnlyC2ShortcutAdmissible
+
+round650C2MustRetainScaleChangingMechanism : Bool
+round650C2MustRetainScaleChangingMechanism =
+  R651.round651ActualC2MustRetainScaleChangingMechanism
+
+round650QuantitativeStressHarnessInstalled : Bool
+round650QuantitativeStressHarnessInstalled =
+  R651.round651FiniteGalerkinStressHarnessInstalled
+
 round650ClayPromotion : Bool
 round650ClayPromotion = false
 
@@ -142,6 +155,21 @@ round650ExactlyTwoNewNSAnalyticLeavesIsTrue = refl
 round650AllRepresentationCompilersAroundC2InstalledIsTrue :
   round650AllRepresentationCompilersAroundC2Installed ≡ true
 round650AllRepresentationCompilersAroundC2InstalledIsTrue = refl
+
+round650UniversalViscosityOnlyC2ShortcutAdmissibleIsFalse :
+  round650UniversalViscosityOnlyC2ShortcutAdmissible ≡ false
+round650UniversalViscosityOnlyC2ShortcutAdmissibleIsFalse =
+  R651.round651UniversalViscosityOnlyC2ShortcutAdmissibleIsFalse
+
+round650C2MustRetainScaleChangingMechanismIsTrue :
+  round650C2MustRetainScaleChangingMechanism ≡ true
+round650C2MustRetainScaleChangingMechanismIsTrue =
+  R651.round651ActualC2MustRetainScaleChangingMechanismIsTrue
+
+round650QuantitativeStressHarnessInstalledIsTrue :
+  round650QuantitativeStressHarnessInstalled ≡ true
+round650QuantitativeStressHarnessInstalledIsTrue =
+  R651.round651FiniteGalerkinStressHarnessInstalledIsTrue
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
