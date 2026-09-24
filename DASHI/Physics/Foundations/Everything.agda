@@ -146,3 +146,7 @@ import DASHI.Physics.Foundations.StressEnergyWeldMathematicalCoreValidation
 import DASHI.Physics.Foundations.StressEnergyEqualityCoreExact
 import DASHI.Physics.Foundations.CMP119GRAnchoredStressEqualityCoreExact
 import DASHI.Physics.Foundations.StressEnergyEqualityCoreValidation
+
+import DASHI.Physics.Foundations.SingleSectorUnifiedCandidateExact
+import DASHI.Physics.Foundations.SingleSectorRecoveryTransportExact
+import DASHI.Physics.Foundations.SingleSectorUnifiedCandidateValidation

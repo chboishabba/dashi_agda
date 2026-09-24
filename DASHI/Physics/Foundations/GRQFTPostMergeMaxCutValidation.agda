@@ -10,11 +10,11 @@ cmp119SectorCompilerClosed :
   ≡ true
 cmp119SectorCompilerClosed = refl
 
-selectedSectorTotalEqualityStillOpen :
-  M.selectedPhysicalSectorTotalEqualityStillRequired
+singleSectorTotalizationClosedByConstruction :
+  M.singleSectorTotalizationDefinitional
     M.canonicalGRQFTPostMergeMaxCut
   ≡ true
-selectedSectorTotalEqualityStillOpen = refl
+singleSectorTotalizationClosedByConstruction = refl
 
 terminalStillFalse :
   M.terminalGRQFTPromoted M.canonicalGRQFTPostMergeMaxCut ≡ false

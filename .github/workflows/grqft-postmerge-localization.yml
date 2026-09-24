@@ -35,6 +35,9 @@ on:
       - 'DASHI/Physics/Foundations/StressEnergyEqualityCoreExact.agda'
       - 'DASHI/Physics/Foundations/CMP119GRAnchoredStressEqualityCoreExact.agda'
       - 'DASHI/Physics/Foundations/StressEnergyEqualityCoreValidation.agda'
+      - 'DASHI/Physics/Foundations/SingleSectorUnifiedCandidateExact.agda'
+      - 'DASHI/Physics/Foundations/SingleSectorRecoveryTransportExact.agda'
+      - 'DASHI/Physics/Foundations/SingleSectorUnifiedCandidateValidation.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
