@@ -232,6 +232,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     failed = 0
     warning_count = 0
     error_count = 0
+    deferred_count = 0
 
     for outcome in ("passed", "failed"):
         for report in terminalreporter.getreports(outcome):
@@ -254,10 +255,15 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
                 1 for diagnostic in diagnostics
                 if diagnostic.get("severity") == "error"
             )
+            deferred_count += sum(
+                1 for diagnostic in diagnostics
+                if not diagnostic.get("evidence_sufficient", True)
+            )
 
     terminalreporter.section("Agda preflight")
     terminalreporter.write_line(f"modules passed: {passed}")
     terminalreporter.write_line(f"modules failed: {failed}")
     terminalreporter.write_line(f"errors: {error_count}")
     terminalreporter.write_line(f"warnings: {warning_count}")
+    terminalreporter.write_line(f"deferred for stronger evidence: {deferred_count}")
 
