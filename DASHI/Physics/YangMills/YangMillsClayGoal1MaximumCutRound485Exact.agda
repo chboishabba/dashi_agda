@@ -19,6 +19,7 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact as
 import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as A3Source
+import DASHI.Physics.YangMills.YangMillsClaySourceNativeA3MaxCutRound504Exact as A3SourceCut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as A3Measure
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as A3MeasureCut
 import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as A3PhysicalRep
@@ -61,7 +62,23 @@ a2GeneratedHistoryShellIsCMP116BetaMarkLevel =
 
 a3SourceNativeSameFamilyContinuumOSLevel : ProofLevel
 a3SourceNativeSameFamilyContinuumOSLevel =
-  A3Source.literalRound457SourceNativeContinuumOSLevel
+  A3SourceCut.round504SameFamilyRecoveryCompilerLevel
+
+a3StressDensityIsLiteralFiniteMeasureLevel : ProofLevel
+a3StressDensityIsLiteralFiniteMeasureLevel =
+  A3SourceCut.literalRound504StressDensityIsLiteralFiniteMeasureLevel
+
+a3FiniteFamilyContinuumLimitLevel : ProofLevel
+a3FiniteFamilyContinuumLimitLevel =
+  A3SourceCut.literalRound504FiniteFamilyContinuumLimitLevel
+
+a3LiteralSchwingerBelongsLevel : ProofLevel
+a3LiteralSchwingerBelongsLevel =
+  A3SourceCut.literalRound504LiteralSchwingerBelongsLevel
+
+a3SourceOSIsLiteralSchwingerLevel : ProofLevel
+a3SourceOSIsLiteralSchwingerLevel =
+  A3SourceCut.literalRound504SourceOSIsLiteralSchwingerLevel
 
 -- Representation safety is an additional genuine requirement for the physical
 -- expectation-functional carrier: construct an actual countably-additive
