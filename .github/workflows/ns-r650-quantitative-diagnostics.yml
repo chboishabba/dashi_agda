@@ -16,6 +16,7 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650QuantitativeResearchStrategyRound651Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650C1R406DiagonalCouplingRound652Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650C2CoupledForcingSandwichRound653Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact.agda'
       - '.github/workflows/ns-r650-quantitative-diagnostics.yml'
   pull_request:
     paths:
@@ -29,6 +30,8 @@ on:
       - 'scripts/tests/test_ns_r406_physical_real_eval.py'
       - 'DASHI/Physics/Closure/NSTriadKNR650QuantitativeResearchStrategyRound651Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650C1R406DiagonalCouplingRound652Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C2CoupledForcingSandwichRound653Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact.agda'
       - '.github/workflows/ns-r650-quantitative-diagnostics.yml'
   workflow_dispatch:
 
