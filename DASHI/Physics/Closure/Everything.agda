@@ -460,3 +460,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarLiveM2PaymentRound663Exact
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedWorkRound664Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedKernelRound665Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarCauchyCouplingRound666Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact
