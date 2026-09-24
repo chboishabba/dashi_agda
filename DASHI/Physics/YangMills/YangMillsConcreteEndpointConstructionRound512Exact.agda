@@ -318,7 +318,7 @@ concreteStrictPositiveMassGap :
     (Top.massGap (concreteLiteralConstruction inputs) group)
 concreteStrictPositiveMassGap {bundle = bundle} inputs group =
   group ,
-    ( sym (R511.gapHamiltonianIsReconstructed bundle group)
+    ( sym (R511.clusteringHamiltonianIsReconstructed bundle group)
     , refl
     )
 
@@ -343,7 +343,7 @@ concretePhysicalScaleLowerBound :
     group
     (Top.massGap (concreteLiteralConstruction inputs) group)
 concretePhysicalScaleLowerBound {bundle = bundle} inputs group =
-  sym (refl)
+  refl
 
 concreteNoSpectralPollution :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
