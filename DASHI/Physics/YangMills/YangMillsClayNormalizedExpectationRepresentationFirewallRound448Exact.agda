@@ -38,6 +38,7 @@ import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as 
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
+import DASHI.Physics.YangMills.YangMillsRepresentedContinuumCarrierRound450Exact as R450
 
 record ContinuumMeasureRepresentationAuthority
     (G X Configuration Position CurvaturePolynomial LocalOperator
@@ -64,33 +65,20 @@ record ContinuumMeasureRepresentationAuthority
         Configuration limitLaws quotient division)
     : Set₂ where
   field
-    CountablyAdditiveMeasure : Set
-    IsCountablyAdditive : CountablyAdditiveMeasure → Set
+    -- Representation-first specialization.  The physical expectation carrier is
+    -- constructed from this object; there is no independently chosen continuum
+    -- expectation waiting to be welded afterward.
+    representedCarrier :
+      R450.RepresentedContinuumCarrier
+        Configuration Position
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family
 
-    representedMeasure : CountablyAdditiveMeasure
-    integrate :
-      CountablyAdditiveMeasure →
-      (Configuration → ℝ) → ℝ
-
-    representedMeasureCountablyAdditive :
-      IsCountablyAdditive representedMeasure
-
-    representedExpectation :
-      ∀ observable →
-      integrate representedMeasure observable
-      ≡ Limit.limitExpectation family observable
-
-    -- This is the genuine semantic/representation theorem.  It is intentionally
-    -- downstream of countable additivity + expectation representation, not
-    -- merely of convergence of normalized quotients.
-    representedMeasureMeansLiteralContinuum :
-      IsCountablyAdditive representedMeasure →
-      (∀ observable →
-        integrate representedMeasure observable
-        ≡ Limit.limitExpectation family observable) →
+    -- Genuine semantic theorem on the represented carrier itself.
+    representedCarrierMeansLiteralContinuum :
       Top.IsContinuumLimitOf S group
         (Limit.finiteMeasure family)
-        (Limit.continuumMeasure family)
+        (R450.representedContinuumMeasure representedCarrier)
 
 open ContinuumMeasureRepresentationAuthority public
 
@@ -106,11 +94,9 @@ literalContinuumLimitFromRepresentation :
         limitLaws quotient division S group family) →
   Top.IsContinuumLimitOf S group
     (Limit.finiteMeasure family)
-    (Limit.continuumMeasure family)
+    (R450.representedContinuumMeasure (representedCarrier authority))
 literalContinuumLimitFromRepresentation authority =
-  representedMeasureMeansLiteralContinuum authority
-    (representedMeasureCountablyAdditive authority)
-    (representedExpectation authority)
+  representedCarrierMeansLiteralContinuum authority
 
 ------------------------------------------------------------------------
 -- Explicit non-implication / provenance boundary.
@@ -137,6 +123,12 @@ continuumRepresentationRequiresCountableAdditivity = true
 
 continuumRepresentationRequiresExpectationIdentification : Bool
 continuumRepresentationRequiresExpectationIdentification = true
+
+representedExpectationChosenIndependentlyFromMeasure : Bool
+representedExpectationChosenIndependentlyFromMeasure = false
+
+representedExpectationByIntegrationIsDefinitional : Bool
+representedExpectationByIntegrationIsDefinitional = true
 
 round448RepresentationCompilerLevel : ProofLevel
 round448RepresentationCompilerLevel = machineChecked
