@@ -50,13 +50,8 @@ data StandardVacuumExteriorOrientation : Set where
   zeroMassFlatExterior : StandardVacuumExteriorOrientation
   negativeMassRepulsiveExterior : StandardVacuumExteriorOrientation
 
-standardVacuumExteriorOrientation :
-  ℚ → StandardVacuumExteriorOrientation
-standardVacuumExteriorOrientation mass with mass
-... | _ = positiveMassAttractiveExterior
-
--- Specialized exact fixture statement.  We deliberately avoid pretending the
--- generic rational sign classifier above has been implemented.
+-- Specialized exact fixture statement.  We deliberately avoid pretending a
+-- generic ordered-rational exterior classifier has been implemented here.
 finiteTOVStandardVacuumExteriorOrientation :
   StandardVacuumExteriorOrientation
 finiteTOVStandardVacuumExteriorOrientation =
