@@ -386,6 +386,219 @@ def extended_diagnostics(checker, s, D):
         for fname, rhs in _assignments(body):
             if rhs.strip() == "_": out.append(_diag(D, "TSAGDA172", f"record field {fname} is filled with raw underscore", s, line))
 
+    # Repository graph checks: TSAGDA029 import cycles and TSAGDA030 module collisions.
+    graph = checker.dependency_graph()
+    state, stack, cycle_for = {}, [], set()
+    def visit(node):
+        state[node] = 1; stack.append(node)
+        for dep in graph.get(node, ()):
+            if dep not in graph: continue
+            if state.get(dep, 0) == 0: visit(dep)
+            elif state.get(dep) == 1 and dep in stack:
+                cycle_for.update(stack[stack.index(dep):])
+        stack.pop(); state[node] = 2
+    if s.module_name in graph:
+        visit(s.module_name)
+        if s.module_name in cycle_for:
+            out.append(_diag(D, "TSAGDA029", f"module {s.module_name} participates in a repository import cycle", s, 1))
+
+    identities = {}
+    for p in checker.root.rglob("*.agda"):
+        try:
+            rel = p.relative_to(checker.root)
+        except ValueError:
+            continue
+        if set(rel.parts) & {".cache", "build", "dist", "vendor", "third_party", "tmp"}: continue
+        try:
+            head = p.read_text(encoding="utf-8")[:4096]
+        except (OSError, UnicodeDecodeError):
+            continue
+        mm = re.search(r"(?m)^\s*module\s+([A-Za-z0-9_.']+).*?\s+where\b", head)
+        if mm: identities.setdefault(mm.group(1), []).append(p)
+    peers = identities.get(s.module_name, [])
+    if len(peers) > 1:
+        out.append(_diag(D, "TSAGDA030", f"module identity {s.module_name} is declared by multiple files", s, 1))
+
+    # TSAGDA026/027: collisions created by open imports and renamings.
+    visible = {}
+    for line, is_open, module, alias, rest in import_lines:
+        if not is_open: continue
+        target = imported.get(alias)
+        if not target: continue
+        names = set(target.signatures) | set(target.records) | {f for r in target.records.values() for f in r.fields}
+        um = re.search(r"using\s*\((.*?)\)", rest)
+        hm = re.search(r"hiding\s*\((.*?)\)", rest)
+        rm = re.search(r"renaming\s*\((.*?)\)", rest)
+        if um: names &= set(re.findall(_IDENT, um.group(1)))
+        if hm: names -= set(re.findall(_IDENT, hm.group(1)))
+        ren = dict(re.findall(rf"({_IDENT})\s+to\s+({_IDENT})", rm.group(1))) if rm else {}
+        for n in names:
+            vn = ren.get(n, n); visible.setdefault(vn, []).append(module)
+    for n, mods in visible.items():
+        if len(set(mods)) > 1 and n not in s.signatures and n not in s.records:
+            out.append(_diag(D, "TSAGDA027", f"open imports make {n} ambiguous between {', '.join(sorted(set(mods)))}", s, 1))
+
+    # TSAGDA040/041/046/047/049: bounded arity checks for simple applications.
+    known_arity = {name: _arity(sig.type_text) for name, sig in s.signatures.items()}
+    known_arity.update({name: ctor.arity for name, ctor in ctors.items()})
+    for name, want in known_arity.items():
+        if want == 0: continue
+        for m in re.finditer(rf"(?m)(?<![:.\w]){re.escape(name)}((?:\s+[^=\n;,)]+)+)", clean):
+            if m.start() < len(source) and source[max(0, m.start()-16):m.start()].rstrip().endswith(":"):
+                continue
+            args = [a for a in m.group(1).strip().split() if not a.startswith("{")]
+            if len(args) > want:
+                line, col = _line_col(source, m.start())
+                code = "TSAGDA046" if name in ctors else "TSAGDA040"
+                out.append(_diag(D, code, f"{name} is visibly over-applied: {len(args)} explicit arguments for arity {want}", s, line, col))
+
+    # Local record constructors: constructor arity is the number of fields.
+    for rname, rec in s.records.items():
+        lines = source.splitlines(); block = lines[rec.line:rec.line + 12]
+        cm = next((re.match(rf"^\s+constructor\s+({_IDENT})", x) for x in block if re.match(rf"^\s+constructor\s+({_IDENT})", x)), None)
+        if cm:
+            cname = cm.group(1); want = len(rec.fields)
+            for m in re.finditer(rf"\b{re.escape(cname)}\b([^\n=;]*)", clean):
+                args = m.group(1).strip().split()
+                if args and len(args) > want:
+                    line, col = _line_col(source, m.start())
+                    out.append(_diag(D, "TSAGDA047", f"record constructor {cname} is visibly over-applied ({len(args)}>{want})", s, line, col))
+
+    # TSAGDA052/053: qualified projections with no/too many visible receiver arguments.
+    for alias, mod in imported.items():
+        for rname, rec in mod.records.items():
+            for fname, fi in rec.fields.items():
+                pat = rf"\b{re.escape(alias)}\.{re.escape(fname)}\b"
+                for m in re.finditer(pat, clean):
+                    tail = clean[m.end():].split("\n", 1)[0]
+                    if re.match(r"\s*(?:$|[=;,)→])", tail):
+                        line, col = _line_col(source, m.start())
+                        out.append(_diag(D, "TSAGDA052", f"{alias}.{fname} is used without a visible {rname} receiver", s, line, col))
+                    else:
+                        args = re.match(r"\s+([^=;,)→]+)", tail)
+                        if args:
+                            got = len(args.group(1).split())
+                            want = 1 + _arity(fi.type_text)
+                            if got > want:
+                                line, col = _line_col(source, m.start())
+                                out.append(_diag(D, "TSAGDA053", f"{alias}.{fname} is visibly over-applied ({got}>{want})", s, line, col))
+
+    # TSAGDA074/075/079: only rigid literals/constructors/non-functions.
+    for cname, ctor in ctors.items():
+        for m in re.finditer(rf"\b{re.escape(cname)}\b", clean):
+            before = clean[max(0, m.start()-80):m.start()]
+            if re.search(r"≡\s*$", before):
+                other = re.search(r"([A-Za-z_][A-Za-z0-9_']*)\s*≡\s*$", before)
+                if other and other.group(1) in ctors and ctors[other.group(1)].datatype != ctor.datatype:
+                    line, col = _line_col(source, m.start())
+                    out.append(_diag(D, "TSAGDA075", f"equality compares constructors from different datatypes: {other.group(1)} vs {cname}", s, line, col))
+
+    # TSAGDA080/081/085/086/087/089: simple non-indexed pattern facts.
+    for name, cs in clauses.items():
+        sig = s.signatures.get(name)
+        if not sig: continue
+        first_domain = _split_arrows(sig.type_text)[0].strip() if _split_arrows(sig.type_text) else ""
+        dtype = next((d for d in data.values() if re.search(rf"\b{re.escape(d.name)}\b", first_domain)), None)
+        if dtype and not dtype.indexed:
+            used = []
+            absurd = []
+            for line, lhs, rhs in cs:
+                if "()" in lhs: absurd.append(line)
+                heads = [cn for cn in dtype.constructors if re.search(rf"\b{re.escape(cn)}\b", lhs)]
+                used.extend(heads)
+                for tok in re.findall(rf"\b({_IDENT})\b", lhs):
+                    if tok in ctors and ctors[tok].datatype != dtype.name:
+                        out.append(_diag(D, "TSAGDA081", f"pattern constructor {tok} belongs to {ctors[tok].datatype}, expected {dtype.name}", s, line))
+            if absurd and dtype.constructors:
+                for line in absurd:
+                    out.append(_diag(D, "TSAGDA085", f"absurd pattern used for visibly inhabited datatype {dtype.name}", s, line))
+            if dtype.constructors and used and set(used) != set(dtype.constructors) and not any(re.fullmatch(rf"{re.escape(name)}\s+_", lhs) for _, lhs, _ in cs):
+                missing = sorted(set(dtype.constructors) - set(used))
+                if missing: out.append(_diag(D, "TSAGDA087", f"simple finite coverage for {name} misses constructors: {', '.join(missing)}", s, cs[0][0]))
+            if len(used) != len(set(used)):
+                out.append(_diag(D, "TSAGDA089", f"{name} has duplicate constructor branches in simple finite coverage", s, cs[0][0]))
+
+    # TSAGDA101/103/104: equality combinator outer-shape checks.
+    for name, cs in clauses.items():
+        for line, lhs, rhs in cs:
+            sm = re.search(rf"\bsym\s+({_IDENT})", rhs)
+            if sm and sm.group(1) in eq and name in eq:
+                pa, pb = eq[sm.group(1)]; ta, tb = eq[name]
+                if _terminal(pa) and _terminal(tb) and _terminal(pa) != _terminal(tb):
+                    out.append(_diag(D, "TSAGDA101", f"sym proof endpoint head does not match target equality for {name}", s, line))
+            cm = re.search(rf"\bcong\s+({_IDENT})\s+({_IDENT})", rhs)
+            if cm and cm.group(2) in eq and cm.group(1) in s.signatures:
+                fun = s.signatures[cm.group(1)]
+                if _arity(fun.type_text) == 0:
+                    out.append(_diag(D, "TSAGDA103", f"cong function {cm.group(1)} has no visible function argument", s, line))
+
+    # TSAGDA120/121/123: rigid declaration sanity.
+    known_terms = set(clauses) | set(ctors)
+    for rname, rec in s.records.items():
+        for fname, fi in rec.fields.items():
+            head = _terminal(fi.type_text)
+            if head in known_terms and head not in data and head not in s.records:
+                out.append(_diag(D, "TSAGDA120", f"field {rname}.{fname} has known term {head} in type-head position", s, fi.line))
+    for dname, decl in data.items():
+        for ctor in decl.constructors.values():
+            head = _terminal(ctor.type_text)
+            if head in known_terms and head not in data:
+                out.append(_diag(D, "TSAGDA121", f"constructor {ctor.name} result resolves to known term {head}", s, ctor.line))
+
+    # TSAGDA131: explicit negative occurrence is the same bounded contravariant test.
+    for dname, decl in data.items():
+        for ctor in decl.constructors.values():
+            if any(re.search(rf"\b{re.escape(dname)}\b\s*(?:→|->)", dom) for dom in _split_arrows(ctor.type_text)[:-1]):
+                out.append(_diag(D, "TSAGDA131", f"{dname} occurs in an obvious contravariant constructor position", s, ctor.line))
+
+    # TSAGDA141/142 are advisory structural recursion warnings.
+    for name, cs in clauses.items():
+        recursive = [(line, lhs, rhs) for line, lhs, rhs in cs if re.search(rf"\b{re.escape(name)}\b", rhs)]
+        for line, lhs, rhs in recursive:
+            args = lhs.split()[1:]
+            call = re.search(rf"\b{re.escape(name)}\s+(.+)$", rhs)
+            if call and args:
+                rhs_args = call.group(1).split()[:len(args)]
+                if any(a.isdigit() and b.isdigit() and int(b) > int(a) for a, b in zip(args, rhs_args)):
+                    out.append(_diag(D, "TSAGDA141", f"{name} has an obviously increasing numeric recursive argument", s, line))
+                if rhs_args and not any((a.startswith("(") and b in a) or b in {"pred", "tail"} for a, b in zip(args, rhs_args)):
+                    out.append(_diag(D, "TSAGDA142", f"{name} recursive call has no syntactically obvious smaller argument", s, line))
+
+    # TSAGDA143: termination bypass in proof-critical code.
+    if critical and ("{-# TERMINATING #-}" in source or "{-# NON_TERMINATING #-}" in source):
+        line = next((i for i, x in enumerate(source.splitlines(), 1) if "TERMINATING" in x), 1)
+        out.append(_diag(D, "TSAGDA143", "proof-critical code uses a termination-bypass pragma", s, line))
+
+    # TSAGDA152: mixfix holes versus visible arity.
+    for sym, shape in fix.items():
+        if "_" in sym and sym in s.signatures:
+            holes = sym.count("_"); want = _arity(s.signatures[sym].type_text)
+            if holes != want:
+                out.append(_diag(D, "TSAGDA152", f"mixfix {sym} has {holes} holes but signature has {want} explicit arguments", s, s.signatures[sym].line))
+
+    # TSAGDA174: raw metas in module application/import-like syntax.
+    for m in re.finditer(rf"\bmodule\s+{_IDENT}\s*=\s*{_IDENT}(?:\.{_IDENT})*\s+_", clean):
+        line, col = _line_col(source, m.start())
+        out.append(_diag(D, "TSAGDA174", "module application contains raw underscore metavariable", s, line, col))
+
+    # TSAGDA200/201/203/206/208: DASHI-specific structural policy.
+    if critical:
+        for _, line, body in _record_blocks(source):
+            for fname, rhs in _assignments(body):
+                if rhs.strip() == "_":
+                    out.append(_diag(D, "TSAGDA201", f"proof-critical record field {fname} contains raw metavariable", s, line))
+        for rname, rec in s.records.items():
+            for fname, fi in rec.fields.items():
+                if re.search(r"(agreement|proof|witness|receipt)", fname, re.I) and _terminal(fi.type_text) == "Set":
+                    out.append(_diag(D, "TSAGDA203", f"proof-like field {rname}.{fname} is unconstrained Set rather than an evident proposition/witness", s, fi.line))
+        if re.search(r"(FactorThrough|Admissib|Bidi)", s.module_name, re.I):
+            heads = [_terminal(sig.type_text) for sig in s.signatures.values()]
+            rigid = sorted(set(h for h in heads if h and "." in h))
+            if len(rigid) > 1:
+                code = "TSAGDA208" if re.search(r"(FactorThrough|Admissib)", s.module_name, re.I) else "TSAGDA206"
+                out.append(_diag(D, code, f"bridge module exposes multiple qualified carrier/result families: {', '.join(rigid[:6])}", s, 1))
+
+
     return out
 
 def api_snapshot(checker):
