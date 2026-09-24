@@ -19,6 +19,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero)
 open import Data.Empty using (⊥)
+open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -128,6 +129,50 @@ data SATDecisionFailure
     Cook.Satisfiable formula →
     decide candidate formula ≡ false →
     SATDecisionFailure candidate
+
+
+------------------------------------------------------------------------
+-- Anchoring is without loss for proof search.
+--
+-- Every polynomial candidate is constructively either:
+--
+--   * already wrong on one of the two fixed anchor formulas; or
+--   * correctly oriented on both anchors.
+--
+-- Thus the hard theorem may restrict to anchored candidates without assuming
+-- any unproved global SAT correctness.
+------------------------------------------------------------------------
+
+candidateIsAnchoredOrAlreadyFails :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (candidate : PolynomialSATDeciderCandidate cost) →
+  AnchoredPolynomialSATDeciderCandidate cost
+  ⊎ SATDecisionFailure candidate
+candidateIsAnchoredOrAlreadyFails candidate
+    with decide candidate Cook.excludedMiddleFormula
+       | decide candidate contradictionFormula
+... | true | false =
+  inj₁
+    (anchored-polynomial-sat-decider-candidate
+      candidate refl refl)
+... | true | true =
+  inj₂
+    (falsePositive
+      contradictionFormula
+      refl
+      contradictionFormulaIsUnsatisfiable)
+... | false | false =
+  inj₂
+    (falseNegative
+      Cook.excludedMiddleFormula
+      Cook.excludedMiddleFormulaIsSatisfiable
+      refl)
+... | false | true =
+  inj₂
+    (falseNegative
+      Cook.excludedMiddleFormula
+      Cook.excludedMiddleFormulaIsSatisfiable
+      refl)
 
 failureContradictsCorrectSATDecision :
   ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
