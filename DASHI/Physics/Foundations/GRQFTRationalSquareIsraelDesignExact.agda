@@ -173,7 +173,7 @@ fixtureOutwardAccelerationScaled = solve []
 fixturePressureTensionMargin :
   pressureTensionMarginCleared
     fixtureMass fixtureRadius fixtureX fixtureY
-  ≡ Int.+ 21 / 64
+  ≡ Int.+ 5 / 16
 fixturePressureTensionMargin = solve []
 
 fixtureNECDECMargin :
@@ -185,7 +185,7 @@ fixtureNECDECMargin = solve []
 fixtureSECViolationMargin :
   secViolationMarginCleared
     fixtureMass fixtureRadius fixtureX fixtureY
-  ≡ Int.+ 1 / 4
+  ≡ Int.+ 1 / 8
 fixtureSECViolationMargin = solve []
 
 record RationalSquareIsraelDesignBoundary : Set where
