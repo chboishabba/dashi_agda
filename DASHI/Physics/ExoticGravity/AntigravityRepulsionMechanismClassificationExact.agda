@@ -179,8 +179,9 @@ standardPositiveSourceProductCannotInternallyGenerateRepulsion :
     ≡ Source.negativeEffectiveSource →
   ⊥
 standardPositiveSourceProductCannotInternallyGenerateRepulsion
-  (standard-positive-source-product-closed .Signed.positiveCoupling refl
-                                           .Source.positiveSource refl) ()
+  (standard-positive-source-product-closed
+    Signed.positiveCoupling refl
+    Source.positiveSource refl) ()
 
 record RepulsionMechanismClassificationBoundary : Set where
   constructor repulsion-mechanism-classification-boundary
