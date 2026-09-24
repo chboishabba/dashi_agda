@@ -38,6 +38,7 @@ record CylinderEventAlgebra
     (Configuration Event : Set) : Set₁ where
   field
     empty whole : Event
+    complement : Event → Event
     union : Event → Event → Event
     Disjoint : Event → Event → Set
 
@@ -73,7 +74,7 @@ finiteEventProbability family events cutoff = record
   ; R495.CylinderProbabilityPremeasure.whole =
       whole events
   ; R495.CylinderProbabilityPremeasure.complement =
-      λ event → event
+      complement events
   ; R495.CylinderProbabilityPremeasure.union =
       union events
   ; R495.CylinderProbabilityPremeasure.Disjoint =
@@ -160,7 +161,7 @@ asProjectiveCylinderProbability inputs = record
   { R495.ProjectiveCylinderProbability.levelPremeasure =
       λ cutoff →
         finiteEventProbability
-          _ (events inputs) cutoff
+          family (events inputs) cutoff
   ; R495.ProjectiveCylinderProbability.Restricts =
       Restricts inputs
   ; R495.ProjectiveCylinderProbability.restrictEvent =
