@@ -1,9 +1,12 @@
 module DASHI.Cognition.PNF.FiniteVariationalFreeEnergyExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
-open import Data.Rational.Tactic.RingSolver using (solve-∀)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_)
+import Data.Rational.Tactic.RingSolver as ℚRing
+import Data.Rational.Properties as ℚP
+open import Relation.Binary.PropositionalEquality using
+  (cong; cong₂; sym; trans; module ≡-Reasoning)
 
 ------------------------------------------------------------------------
 -- FINITE VARIATIONAL FREE ENERGY ON A TWO-STATE FIBRE
@@ -64,29 +67,121 @@ klDivergence law = crossEntropy law - entropy law
 variationalFreeEnergy : TwoStateVariationalLaw → ℚ
 variationalFreeEnergy law = expectedEnergy law - entropy law
 
+weightedEnergyExpansion :
+  (q₁ q₂ energy₁ energy₂ partition : ℚ) →
+  q₁ * (energy₁ + partition) + q₂ * (energy₂ + partition)
+    ≡ (q₁ * energy₁ + q₂ * energy₂) + (q₁ + q₂) * partition
+weightedEnergyExpansion q₁ q₂ energy₁ energy₂ partition =
+  begin
+    q₁ * (energy₁ + partition) + q₂ * (energy₂ + partition)
+  ≡⟨ cong₂ _+_
+      (ℚP.*-distribˡ-+ q₁ energy₁ partition)
+      (ℚP.*-distribˡ-+ q₂ energy₂ partition) ⟩
+    (q₁ * energy₁ + q₁ * partition) + (q₂ * energy₂ + q₂ * partition)
+  ≡⟨ ℚP.+-assoc (q₁ * energy₁) (q₁ * partition)
+             (q₂ * energy₂ + q₂ * partition) ⟩
+    q₁ * energy₁ +
+      (q₁ * partition + (q₂ * energy₂ + q₂ * partition))
+  ≡⟨ cong (λ tail → q₁ * energy₁ + tail)
+      (trans
+        (sym (ℚP.+-assoc (q₁ * partition) (q₂ * energy₂) (q₂ * partition)))
+        (cong (λ head → head + q₂ * partition)
+          (ℚP.+-comm (q₁ * partition) (q₂ * energy₂)))) ⟩
+    q₁ * energy₁ +
+      ((q₂ * energy₂ + q₁ * partition) + q₂ * partition)
+  ≡⟨ cong (λ tail → q₁ * energy₁ + tail)
+      (ℚP.+-assoc (q₂ * energy₂) (q₁ * partition) (q₂ * partition)) ⟩
+    q₁ * energy₁ +
+      (q₂ * energy₂ + (q₁ * partition + q₂ * partition))
+  ≡⟨ sym (ℚP.+-assoc (q₁ * energy₁) (q₂ * energy₂)
+      (q₁ * partition + q₂ * partition)) ⟩
+    (q₁ * energy₁ + q₂ * energy₂) +
+      (q₁ * partition + q₂ * partition)
+  ≡⟨ cong (λ tail → (q₁ * energy₁ + q₂ * energy₂) + tail)
+      (sym (ℚP.*-distribʳ-+ partition q₁ q₂)) ⟩
+    (q₁ * energy₁ + q₂ * energy₂) + (q₁ + q₂) * partition
+  ∎
+  where open ≡-Reasoning
+
+weightedEnergyPartition :
+  (q₁ q₂ energy₁ energy₂ partition : ℚ) →
+  q₁ + q₂ ≡ 1ℚ →
+  q₁ * (energy₁ + partition) + q₂ * (energy₂ + partition)
+    ≡ q₁ * energy₁ + q₂ * energy₂ + partition
+weightedEnergyPartition q₁ q₂ energy₁ energy₂ partition normalized =
+  trans (weightedEnergyExpansion q₁ q₂ energy₁ energy₂ partition) (trans
+    (cong (λ weight → (q₁ * energy₁ + q₂ * energy₂) + weight * partition) normalized)
+    (cong (λ term → q₁ * energy₁ + q₂ * energy₂ + term)
+      (ℚP.*-identityˡ partition)))
+
+addSubtractReassociate :
+  (left right subtrahend : ℚ) →
+  (left + right) - subtrahend ≡ (left - subtrahend) + right
+addSubtractReassociate left right subtrahend =
+  begin
+    (left + right) - subtrahend
+  ≡⟨ refl ⟩
+    (left + right) + (- subtrahend)
+  ≡⟨ ℚP.+-assoc left right (- subtrahend) ⟩
+    left + (right + (- subtrahend))
+  ≡⟨ cong (λ tail → left + tail) (ℚP.+-comm right (- subtrahend)) ⟩
+    left + ((- subtrahend) + right)
+  ≡⟨ sym (ℚP.+-assoc left (- subtrahend) right) ⟩
+    (left + (- subtrahend)) + right
+  ≡⟨ refl ⟩
+    (left - subtrahend) + right
+  ∎
+  where open ≡-Reasoning
+
+addThenSubtractSelf :
+  (value offset : ℚ) →
+  (value + offset) - offset ≡ value
+addThenSubtractSelf value offset =
+  begin
+    (value + offset) - offset
+  ≡⟨ refl ⟩
+    (value + offset) + (- offset)
+  ≡⟨ ℚP.+-assoc value offset (- offset) ⟩
+    value + (offset + (- offset))
+  ≡⟨ cong (λ tail → value + tail) (ℚP.+-inverseʳ offset) ⟩
+    value + 0ℚ
+  ≡⟨ ℚP.+-identityʳ value ⟩
+    value
+  ∎
+  where open ≡-Reasoning
+
 crossEntropyIsEnergyPlusLogPartition :
   (law : TwoStateVariationalLaw) →
   crossEntropy law ≡ expectedEnergy law + logPartition law
 crossEntropyIsEnergyPlusLogPartition law
   rewrite priorBoltzmann₁ law
-        | priorBoltzmann₂ law
-        | normalizedQ law = solve-∀
+        | priorBoltzmann₂ law =
+  weightedEnergyPartition
+    (q₁ law) (q₂ law) (energy₁ law) (energy₂ law) (logPartition law)
+    (normalizedQ law)
 
 klEqualsFreeEnergyPlusLogPartition :
   (law : TwoStateVariationalLaw) →
   klDivergence law ≡ variationalFreeEnergy law + logPartition law
 klEqualsFreeEnergyPlusLogPartition law
   rewrite priorBoltzmann₁ law
-        | priorBoltzmann₂ law
-        | normalizedQ law = solve-∀
+        | priorBoltzmann₂ law =
+  trans
+    (cong (λ value → value - entropy law)
+      (weightedEnergyPartition
+        (q₁ law) (q₂ law) (energy₁ law) (energy₂ law) (logPartition law)
+        (normalizedQ law)))
+    (addSubtractReassociate
+      (expectedEnergy law) (logPartition law) (entropy law))
 
 freeEnergyEqualsKLMinusLogPartition :
   (law : TwoStateVariationalLaw) →
   variationalFreeEnergy law ≡ klDivergence law - logPartition law
-freeEnergyEqualsKLMinusLogPartition law
-  rewrite priorBoltzmann₁ law
-        | priorBoltzmann₂ law
-        | normalizedQ law = solve-∀
+freeEnergyEqualsKLMinusLogPartition law =
+  trans (sym (addThenSubtractSelf
+    (variationalFreeEnergy law) (logPartition law)))
+    (cong (λ value → value - logPartition law)
+      (sym (klEqualsFreeEnergyPlusLogPartition law)))
 
 record FiniteVariationalFreeEnergyBoundary : Set where
   constructor finiteVariationalFreeEnergyBoundary
