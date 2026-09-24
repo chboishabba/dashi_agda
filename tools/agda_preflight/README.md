@@ -361,12 +361,19 @@ heuristic families are emitted as warnings.
 
 ### Telescopes / calls / arity
 
-- `TSAGDA040` too many explicit arguments for a statically-known head
+Pointfree definitions such as `fst = proj₁` are never rejected merely because
+their LHS has zero visible arguments while the declared type is functional.
+Likewise, apparent over-application or clause/signature arity disagreement can
+depend on definitional unfolding of result type synonyms. Those diagnostics are
+therefore retained as useful suspicions but require `AGDA_TYPECHECKER` evidence
+for a hard conclusion.
+
+- `TSAGDA040` apparent over-application; typechecker evidence required because result aliases may unfold to functions
 - `TSAGDA041` too few explicit arguments in a syntactically saturated context
 - `TSAGDA042` named implicit argument not present in telescope
 - `TSAGDA043` obvious explicit/implicit visibility mismatch
 - `TSAGDA044` lambda binder count incompatible with expected Pi shape
-- `TSAGDA045` definition-clause argument count disagrees with declaration
+- `TSAGDA045` non-pointfree clause/declaration arity disagreement; typechecker evidence required because eta/type aliases can change visible arity
 - `TSAGDA046` constructor application arity mismatch
 - `TSAGDA047` record constructor arity mismatch
 - `TSAGDA048` parameterized-module application arity mismatch
@@ -404,10 +411,10 @@ Only bounded head comparison/substitution is performed.
 
 - `TSAGDA070` type/sort supplied where a term is structurally required
 - `TSAGDA071` term supplied where a type/sort is structurally required
-- `TSAGDA072` obvious result type-head mismatch
+- `TSAGDA072` apparent constructor/result type-head mismatch; typechecker evidence required when declared heads may unfold through synonyms
 - `TSAGDA073` obvious argument type-head mismatch
 - `TSAGDA074` literal incompatible with expected outer head
-- `TSAGDA075` datatype constructor belongs to the wrong datatype
+- `TSAGDA075` constructor/datatype disagreement; conservatively typechecker-gated because the code is shared by rigid and synonym-sensitive checks
 - `TSAGDA076` known function used as a type without enough application
 - `TSAGDA077` known type constructor over/under-applied
 - `TSAGDA078` sort used as an ordinary value
@@ -442,11 +449,11 @@ shapes.
 
 ### Clause / scope checks
 
-- `TSAGDA110` clause has incompatible LHS binder count
+- `TSAGDA110` compatibility alias of typechecker-gated `TSAGDA045`
 - `TSAGDA111` obvious visibility mismatch between clause and signature
 - `TSAGDA112` named implicit pattern does not exist in signature
 - `TSAGDA113` RHS uses a visibly unbound local identifier
-- `TSAGDA114` clause name/result head incompatible with declaration
+- `TSAGDA114` apparent clause constructor/result-head disagreement; typechecker evidence required for synonym unfolding
 - `TSAGDA115` multiple incompatible signatures for one declaration
 
 ### Universe / declaration sanity
