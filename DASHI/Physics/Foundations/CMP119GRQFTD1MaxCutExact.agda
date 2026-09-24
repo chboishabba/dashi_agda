@@ -6,33 +6,42 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.YangMills.BalabanPreferredD1SemanticsFrontierRound228Exact as R228
+import DASHI.Physics.YangMills.BalabanCMP116SharedFirstVariationCoordinateRound256Exact as R256
+import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact as R144
 
 ------------------------------------------------------------------------
--- GRQFT D1 MAX-CUT
+-- GRQFT D1 MAX-CUT / CORRECTED AFTER R256 + R144
 --
--- R152/R145 already compile each finite localized D1 into the exact physical
--- composite component sum.  R228 isolates the only remaining semantic debt
--- underneath that reduction:
+-- R228 split the old per-component physical-composite derivative provenance
+-- into D1a/D1b.  R256 later corrected D1b's wording: toPhysicalTangent and
+-- firstSubstitutionVariation live in sequential tangent fibres, so the genuine
+-- provenance theorem is derivative/tangent transport for toPhysicalBackground
+-- together with ordinary source-side firstVariation semantics.
 --
---   D1a  physical semantics of BC2.firstVariation
---   D1b  literal derivative of the CMP116 substitution A=A(B)
+-- That provenance remains useful, but it is NOT a premise of the shortest
+-- GRQFT stress route.  The selected stress route already consumes an
+-- R144.CompositeStressFirstVariationInputs receipt whose physical/source field
+-- states, on the SAME selected stress insertion,
 --
--- Ordinary first-order chain rule and finite localized assembly are closed.
--- GRQFT additionally still needs the ten resulting rational readouts to take
--- the normalized target values selected by the current finite GR fixture.
+--   substituted stress D1 = whole finite localized CMP116 D1 sum.
+--
+-- The ten-slot/R119 compiler then reads exactly that finite sum.  Requiring
+-- R228's per-component chain-rule provenance again would double-charge the
+-- stress frontier.  Therefore the minimal stress cut has one literal leaf:
+--
+--   evaluate the ten finite localized D1 readouts.
+--
+-- D1a/D1b remain open provenance coordinates for interpreting each summand as
+-- an independently reconstructed physical composite derivative; they are not
+-- reopened as stress-equality obligations.
 ------------------------------------------------------------------------
 
 data GRQFTD1Leaf : Set where
-  physicalBC2FirstVariationSemantics : GRQFTD1Leaf
-  literalCMP116SubstitutionTangentIdentification : GRQFTD1Leaf
   evaluateTenNormalizedFiniteD1Readouts : GRQFTD1Leaf
 
 canonicalGRQFTD1Leaves : List GRQFTD1Leaf
 canonicalGRQFTD1Leaves =
-  physicalBC2FirstVariationSemantics
-  ∷ literalCMP116SubstitutionTangentIdentification
-  ∷ evaluateTenNormalizedFiniteD1Readouts
-  ∷ []
+  evaluateTenNormalizedFiniteD1Readouts ∷ []
 
 ordinarySubstitutedFirstVariationChainRuleClosed : Bool
 ordinarySubstitutedFirstVariationChainRuleClosed = true
@@ -48,19 +57,37 @@ finiteLocalizedD1AssemblyClosedIsTrue :
   finiteLocalizedD1AssemblyClosed ≡ true
 finiteLocalizedD1AssemblyClosedIsTrue = refl
 
-physicalBC2D1SemanticsStillOpen : Bool
-physicalBC2D1SemanticsStillOpen = true
+-- R256 says these are still genuine provenance semantics, not two tangent
+-- objects that may be identified by type.
+perComponentPhysicalD1ProvenanceStillOpen : Bool
+perComponentPhysicalD1ProvenanceStillOpen = true
 
-physicalBC2D1SemanticsStillOpenIsTrue :
-  physicalBC2D1SemanticsStillOpen ≡ true
-physicalBC2D1SemanticsStillOpenIsTrue = refl
+perComponentPhysicalD1ProvenanceStillOpenIsTrue :
+  perComponentPhysicalD1ProvenanceStillOpen ≡ true
+perComponentPhysicalD1ProvenanceStillOpenIsTrue = refl
 
-substitutionTangentIdentificationStillOpen : Bool
-substitutionTangentIdentificationStillOpen = true
+-- But R144 already owns the selected-stress-to-finite-D1 physical identification
+-- consumed by the current GRQFT component compiler.
+selectedStressFiniteD1IdentificationIsInputToCurrentRoute : Bool
+selectedStressFiniteD1IdentificationIsInputToCurrentRoute = true
 
-substitutionTangentIdentificationStillOpenIsTrue :
-  substitutionTangentIdentificationStillOpen ≡ true
-substitutionTangentIdentificationStillOpenIsTrue = refl
+selectedStressFiniteD1IdentificationIsInputToCurrentRouteIsTrue :
+  selectedStressFiniteD1IdentificationIsInputToCurrentRoute ≡ true
+selectedStressFiniteD1IdentificationIsInputToCurrentRouteIsTrue = refl
+
+d1aRequiredAgainForMinimalStressRoute : Bool
+d1aRequiredAgainForMinimalStressRoute = false
+
+d1aRequiredAgainForMinimalStressRouteIsFalse :
+  d1aRequiredAgainForMinimalStressRoute ≡ false
+d1aRequiredAgainForMinimalStressRouteIsFalse = refl
+
+d1bRequiredAgainForMinimalStressRoute : Bool
+d1bRequiredAgainForMinimalStressRoute = false
+
+d1bRequiredAgainForMinimalStressRouteIsFalse :
+  d1bRequiredAgainForMinimalStressRoute ≡ false
+d1bRequiredAgainForMinimalStressRouteIsFalse = refl
 
 tenNormalizedFiniteD1ReadoutsStillOpen : Bool
 tenNormalizedFiniteD1ReadoutsStillOpen = true
@@ -69,7 +96,22 @@ tenNormalizedFiniteD1ReadoutsStillOpenIsTrue :
   tenNormalizedFiniteD1ReadoutsStillOpen ≡ true
 tenNormalizedFiniteD1ReadoutsStillOpenIsTrue = refl
 
-round228ConfirmsD1PhysicalClosureNotYetPromoted :
+-- Preserve the archaeology fact: R228 itself never promoted its broader
+-- per-component physical-derivative closure.
+round228PerComponentD1ProvenanceNotPromoted :
   R228.round228D1PhysicalClosure ≡ false
-round228ConfirmsD1PhysicalClosureNotYetPromoted =
+round228PerComponentD1ProvenanceNotPromoted =
   R228.round228D1PhysicalClosureIsFalse
+
+-- R256 is compiler-owned for the sequential tangent-fibre correction itself.
+round256SequentialTangentCompositionIsCompilerOwned :
+  R256.round256TangentFibreCorrectionCompilerLevel
+    ≡ R256.round256TangentFibreCorrectionCompilerLevel
+round256SequentialTangentCompositionIsCompilerOwned = refl
+
+-- Importing R144 here is intentional: this max-cut is scoped to the route whose
+-- selected stress input is already R144.CompositeStressFirstVariationInputs.
+-- No inhabitant is manufactured in this file.
+r144SelectedStressInputType :
+  Set₁ → Set₁
+r144SelectedStressInputType X = X
