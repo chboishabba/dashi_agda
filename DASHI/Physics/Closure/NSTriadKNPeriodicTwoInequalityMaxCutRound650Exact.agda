@@ -60,6 +60,7 @@ import DASHI.Physics.Closure.NSTriadKNR650CombinedRouteReturnsToRateKernelRound6
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelPositiveRateNoGoRound680Exact as R680
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact as R681
 import DASHI.Physics.Closure.NSTriadKNR650LiveRateKernelCrossGradientRound682Exact as R682
+import DASHI.Physics.Closure.NSTriadKNR650RateKernelCrossGradientVectorRound683Exact as R683
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -861,6 +862,18 @@ round650C2RemainingCoordinateUsesLiteralPDotQ =
 round650C2CrossGradientQuantitativePaymentClosed : Bool
 round650C2CrossGradientQuantitativePaymentClosed =
   R682.round682CrossGradientQuantitativePaymentClosed
+
+round650C2PhysicalRateKernelVectorNormalFormClosed : Bool
+round650C2PhysicalRateKernelVectorNormalFormClosed =
+  R683.round683PhysicalRateKernelVectorNormalFormClosed
+
+round650C2CrossGradientVectorUsesAbsoluteValue : Bool
+round650C2CrossGradientVectorUsesAbsoluteValue =
+  R683.round683VectorNormalFormUsesAbsoluteValue
+
+round650C2HelicalCrossGradientPaymentClosed : Bool
+round650C2HelicalCrossGradientPaymentClosed =
+  R683.round683HelicalCrossGradientPaymentClosed
 
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 : Bool
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 =
