@@ -8,9 +8,14 @@ import DASHI.Physics.YangMills.YangMillsClayT5QuantitativeContinuumMaxCutRound44
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 sameQuantitativeFamilyCompilerMachineChecked :
-  R443.round443SameQuantitativeFamilyCompilerLevel ≡ machineChecked
+  R443.round443SameMarkedMomentSourceCompilerLevel ≡ machineChecked
 sameQuantitativeFamilyCompilerMachineChecked = refl
 
 separateMomentPackagesPruned :
   R443.round443SeparateMomentPackagesForCompactnessAndOS05Required ≡ false
 separateMomentPackagesPruned = refl
+
+
+realMomentProducerPruned :
+  R443.round443RealT5MomentProducerRequired ≡ false
+realMomentProducerPruned = refl
