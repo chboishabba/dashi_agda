@@ -464,3 +464,7 @@ import DASHI.Physics.Closure.NSTriadKNR650BadCollarRateWeightedKernelRound665Exa
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarCauchyCouplingRound666Exact
 
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact
+
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarExternalResidualFullSquareRound668Exact
