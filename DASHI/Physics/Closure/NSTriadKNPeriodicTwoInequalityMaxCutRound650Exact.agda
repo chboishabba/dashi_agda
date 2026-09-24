@@ -40,6 +40,7 @@ import DASHI.Physics.Closure.NSTriadKNR650C2CriticalEnergyGrowthNormalFormRound6
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarDivisionFreePairDifferenceRound660Exact as R660
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarSpacetimePairDifferenceRound661Exact as R661
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarPairDifferenceM2PaymentRound662Exact as R662
+import DASHI.Physics.Closure.NSTriadKNR650BadCollarLiveM2PaymentRound663Exact as R663
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -272,6 +273,22 @@ round650C2BadCollarSelfRatePaymentClosed =
 round650C2CutoffUniformM2AggregationClosed : Bool
 round650C2CutoffUniformM2AggregationClosed =
   R662.round662CutoffUniformM2AggregationClosed
+
+round650C2LivePairDifferenceM2PaymentClosed : Bool
+round650C2LivePairDifferenceM2PaymentClosed =
+  R663.round663LivePairDifferenceM2PaymentClosed
+
+round650C2LiveBadCollarResidualReducedToSelfRatePlusM2 : Bool
+round650C2LiveBadCollarResidualReducedToSelfRatePlusM2 =
+  R663.round663LiveResidualReducedToSelfRatePlusM2
+
+round650C2LiveSpacetimeM2ReductionGivenIntegrationOrder : Bool
+round650C2LiveSpacetimeM2ReductionGivenIntegrationOrder =
+  R663.round663SpacetimeReductionClosedGivenIntegrationOrder
+
+round650C2SelfRatePlusM2CutoffUniformPaymentClosed : Bool
+round650C2SelfRatePlusM2CutoffUniformPaymentClosed =
+  R663.round663SelfRatePlusM2CutoffUniformPaymentClosed
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -541,6 +558,26 @@ round650C2CutoffUniformM2AggregationClosedIsFalse :
   round650C2CutoffUniformM2AggregationClosed ≡ false
 round650C2CutoffUniformM2AggregationClosedIsFalse =
   R662.round662CutoffUniformM2AggregationClosedIsFalse
+
+round650C2LivePairDifferenceM2PaymentClosedIsTrue :
+  round650C2LivePairDifferenceM2PaymentClosed ≡ true
+round650C2LivePairDifferenceM2PaymentClosedIsTrue =
+  R663.round663LivePairDifferenceM2PaymentClosedIsTrue
+
+round650C2LiveBadCollarResidualReducedToSelfRatePlusM2IsTrue :
+  round650C2LiveBadCollarResidualReducedToSelfRatePlusM2 ≡ true
+round650C2LiveBadCollarResidualReducedToSelfRatePlusM2IsTrue =
+  R663.round663LiveResidualReducedToSelfRatePlusM2IsTrue
+
+round650C2LiveSpacetimeM2ReductionGivenIntegrationOrderIsTrue :
+  round650C2LiveSpacetimeM2ReductionGivenIntegrationOrder ≡ true
+round650C2LiveSpacetimeM2ReductionGivenIntegrationOrderIsTrue =
+  R663.round663SpacetimeReductionClosedGivenIntegrationOrderIsTrue
+
+round650C2SelfRatePlusM2CutoffUniformPaymentClosedIsFalse :
+  round650C2SelfRatePlusM2CutoffUniformPaymentClosed ≡ false
+round650C2SelfRatePlusM2CutoffUniformPaymentClosedIsFalse =
+  R663.round663SelfRatePlusM2CutoffUniformPaymentClosedIsFalse
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
