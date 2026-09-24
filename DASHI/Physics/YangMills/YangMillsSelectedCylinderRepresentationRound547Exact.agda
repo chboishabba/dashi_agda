@@ -26,7 +26,6 @@ open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
-import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as R535
 import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as R534
 import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRound538Exact as R538
 import DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationRound498Exact as R498
@@ -63,11 +62,35 @@ record SelectedCylinderRepresentationInputs
         limitLaws quotient division)
     : Set₂ where
   field
-    representation :
-      R535.PhysicalProjectiveCylinderRepresentationInputs
+    projectiveEvents :
+      R538.PhysicalPositiveProjectiveCylinderInputs
         Configuration Event
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division family
+
+    eventAlgebraLaws :
+      ∀ cutoff →
+      R539.ProbabilityEventBooleanAlgebraLaws
+        (R538.premeasure
+          (R538.levelProbability
+            (R538.asPositiveProjectiveCylinderProbability projectiveEvents)
+            cutoff))
+
+    continuity :
+      R534.ProjectiveContinuityAtEmpty
+        (R538.asPositiveProjectiveCylinderProbability projectiveEvents)
+
+    extensionAuthority :
+      R534.ProjectiveMeasureExtensionAuthority
+        Nat Event (Configuration → ℝ) ℝ
+
+    extensionIndicatorIsLiteralIndicator :
+      ∀ cutoff event →
+      R534.indicatorAt extensionAuthority cutoff event
+      ≡
+      R498.indicator
+        (R538.events (R538.positiveEvents projectiveEvents))
+        event
 
     selectedClass :
       SelectedCylinderObservableClass Configuration Event
@@ -77,9 +100,7 @@ record SelectedCylinderRepresentationInputs
       asObservable selectedClass (cylinderIndicator selectedClass event)
       ≡
       R498.indicator
-        (R538.events
-          (R538.positiveEvents
-            (R535.projectiveEvents representation)))
+        (R538.events (R538.positiveEvents projectiveEvents))
         event
 
 open SelectedCylinderRepresentationInputs public
@@ -92,14 +113,14 @@ representedMeasure :
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division family) →
   R534.SigmaMeasure
-    (R535.extensionAuthority (representation inputs))
+    (extensionAuthority inputs)
 representedMeasure inputs =
   R534.extendProjective
-    (R535.extensionAuthority (representation inputs))
+    (extensionAuthority inputs)
     (R538.asPositiveProjectiveCylinderProbability
-      (R535.projectiveEvents (representation inputs)))
-    (R535.eventAlgebraLaws (representation inputs))
-    (R535.continuity (representation inputs))
+      (projectiveEvents inputs))
+    (eventAlgebraLaws inputs)
+    (continuity inputs)
 
 cylinderGeneratorIntegralIsProjectiveMass :
   ∀ {Configuration Event sequenceLimit limitLaws quotient division family}
@@ -110,31 +131,30 @@ cylinderGeneratorIntegralIsProjectiveMass :
         limitLaws quotient division family)
     cutoff event →
   R534.integrate
-    (R535.extensionAuthority (representation inputs))
+    (extensionAuthority inputs)
     (representedMeasure inputs)
     (asObservable
       (selectedClass inputs)
       (cylinderIndicator (selectedClass inputs) event))
   ≡
   R534.massAsScalar
-    (R535.extensionAuthority (representation inputs))
+    (extensionAuthority inputs)
     (R495.mass
       (R538.premeasure
         (R538.levelProbability
           (R538.asPositiveProjectiveCylinderProbability
-            (R535.projectiveEvents (representation inputs)))
+            (projectiveEvents inputs))
           cutoff))
       event)
 cylinderGeneratorIntegralIsProjectiveMass inputs cutoff event
   rewrite selectedCylinderIsLiteralIndicator inputs event
-        | R535.extensionIndicatorIsLiteralIndicator
-            (representation inputs) cutoff event =
+        | extensionIndicatorIsLiteralIndicator inputs cutoff event =
   R534.extensionAgreesWithCylinderMass
-    (R535.extensionAuthority (representation inputs))
+    (extensionAuthority inputs)
     (R538.asPositiveProjectiveCylinderProbability
-      (R535.projectiveEvents (representation inputs)))
-    (R535.eventAlgebraLaws (representation inputs))
-    (R535.continuity (representation inputs))
+      (projectiveEvents inputs))
+    (eventAlgebraLaws inputs)
+    (continuity inputs)
     cutoff event
 
 round547CylinderGeneratorRepresentationCompilerLevel : ProofLevel
