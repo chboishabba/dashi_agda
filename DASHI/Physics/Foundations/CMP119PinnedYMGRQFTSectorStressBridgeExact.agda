@@ -155,7 +155,7 @@ cmp119StressChargeGeneratesSelectedQFTHamiltonian
     (CMP.cmp119StressChargeGeneratesLiteralHamiltonian
       (cmp119LiteralAttachment bridge))
     (cong
-      (λ construction → Top.hamiltonian construction _)
+      (λ construction → Top.hamiltonian construction group)
       (Recover.pinnedConstructionIsSelectedQFTTarget
         (pinnedRecoveredAttachment bridge)
         (qftRecovery bridge)
