@@ -225,19 +225,23 @@ def extended_diagnostics(checker, s, D):
                 out.append(_diag(D, "TSAGDA007", f"duplicate constructor {ctor.name}", s, ctor.line))
             constructor_owner[ctor.name] = dname
 
-    for name, sig in s.signatures.items():
-        if name not in clauses and not re.search(rf"(?m)^\s+{re.escape(name)}\s*:", source):
+    for name, sig in s.ast.signatures.items():
+        if name not in s.ast.clauses:
             out.append(_diag(D, "TSAGDA008", f"{name} has a signature but no evident defining clause", s, sig.line, severity="warning", confidence="medium"))
     for name, cs in clauses.items():
         if name not in s.signatures:
             out.append(_diag(D, "TSAGDA009", f"{name} has defining clause(s) but no evident top-level signature", s, cs[0][0], severity="warning", confidence="medium"))
         seen = set()
-        for line, lhs, rhs in cs:
-            key = re.sub(r"\s+", " ", lhs + "=" + rhs)
-            if key in seen: out.append(_diag(D, "TSAGDA010", f"duplicate identical clause for {name}", s, line))
+        for clause in s.ast.clauses.get(name, []):
+            lhs_tokens = tuple(token.text for token in significant_tokens(s.ast.source_bytes, clause.lhs_node))
+            rhs_tokens = tuple(token.text for token in significant_tokens(s.ast.source_bytes, clause.rhs_node)) if clause.rhs_node is not None else ()
+            key = (lhs_tokens, rhs_tokens)
+            if key in seen:
+                out.append(_diag(D, "TSAGDA010", f"duplicate identical clause for {name}", s, clause.line))
             seen.add(key)
 
     root_tokens = significant_tokens(s.ast.source_bytes, s.ast.tree.root_node)
+    root_apps = list(applications(s.ast.source_bytes, s.ast.tree.root_node))
     for token in root_tokens:
         if token.text == "?" or "{!" in token.text or "!}" in token.text:
             out.append(_diag(D, "TSAGDA012", "unresolved interaction hole", s, token.line, token.column))
@@ -303,20 +307,6 @@ def extended_diagnostics(checker, s, D):
                 candidate = lhs_tokens[i + 1]
                 if candidate.node_type in {"id", "bid"} and candidate.text != "_" and candidate.text not in binder_names:
                     out.append(_diag(D, "TSAGDA042", f"named implicit argument {candidate.text} is absent from {name}'s telescope", s, clause.line))
-
-    for alias, mod in imported.items():
-        for rname, rec in mod.records.items():
-            for fname in rec.fields:
-                for m in re.finditer(rf"\b{re.escape(alias)}\.{re.escape(fname)}\s+({_IDENT})", clean):
-                    receiver = m.group(1)
-                    if receiver == "_": continue
-                    line, col = _line_col(source, m.start())
-                    sigs = [x for x in s.signatures.values() if x.line <= line]
-                    if sigs:
-                        sig = max(sigs, key=lambda x: x.line)
-                        bm = re.search(rf"[({{]\s*{re.escape(receiver)}\s*:\s*([^(){{}}]+)", sig.type_text)
-                        if bm and not re.search(rf"\b{re.escape(alias)}\.{re.escape(rname)}\b|\b{re.escape(rname)}\b", bm.group(1)):
-                            out.append(_diag(D, "TSAGDA050", f"{alias}.{fname} expects {rname}; receiver {receiver} has visibly different declared head", s, line, col))
 
     opened = {}
     for rname, rec in s.records.items():
@@ -677,46 +667,110 @@ def extended_diagnostics(checker, s, D):
                     code = "TSAGDA046" if short_head in ctors else "TSAGDA040"
                     out.append(_diag(D, code, f"{app.head} is visibly over-applied: {got} explicit arguments for arity {want}", s, line, col))
 
-    # Local record constructors: constructor arity is the number of fields.
-    for rname, rec in s.records.items():
-        lines = source.splitlines(); block = lines[rec.line:rec.line + 12]
-        cm = next((re.match(rf"^\s+constructor\s+({_IDENT})", x) for x in block if re.match(rf"^\s+constructor\s+({_IDENT})", x)), None)
-        if cm:
-            cname = cm.group(1); want = len(rec.fields)
-            for m in re.finditer(rf"\b{re.escape(cname)}\b([^\n=;]*)", clean):
-                args = m.group(1).strip().split()
-                if args and len(args) > want:
-                    line, col = _line_col(source, m.start())
-                    out.append(_diag(D, "TSAGDA047", f"record constructor {cname} is visibly over-applied ({len(args)}>{want})", s, line, col))
+    # AST-backed local record constructors and imported projections.
+    local_record_constructor_arity = {
+        record.constructor: len(record.fields)
+        for record in s.ast.records.values()
+        if record.constructor
+    }
+    for app in root_apps:
+        short = app.head.rsplit(".", 1)[-1]
+        want = local_record_constructor_arity.get(short)
+        if want is not None and len(app.explicit_args) > want:
+            out.append(
+                _diag(
+                    D,
+                    "TSAGDA047",
+                    f"record constructor {app.head} is visibly over-applied ({len(app.explicit_args)}>{want})",
+                    s,
+                    app.head_node.start_point[0] + 1,
+                    app.head_node.start_point[1] + 1,
+                )
+            )
 
-    # TSAGDA052/053: qualified projections with no/too many visible receiver arguments.
+    imported_projection_specs = {}
     for alias, mod in imported.items():
-        for rname, rec in mod.records.items():
-            for fname, fi in rec.fields.items():
-                pat = rf"\b{re.escape(alias)}\.{re.escape(fname)}\b"
-                for m in re.finditer(pat, clean):
-                    tail = clean[m.end():].split("\n", 1)[0]
-                    if re.match(r"\s*(?:$|[=;,)→])", tail):
-                        line, col = _line_col(source, m.start())
-                        out.append(_diag(D, "TSAGDA052", f"{alias}.{fname} is used without a visible {rname} receiver", s, line, col))
-                    else:
-                        args = re.match(r"\s+([^=;,)→]+)", tail)
-                        if args:
-                            got = len(args.group(1).split())
-                            want = 1 + _arity(fi.type_text)
-                            if got > want:
-                                line, col = _line_col(source, m.start())
-                                out.append(_diag(D, "TSAGDA053", f"{alias}.{fname} is visibly over-applied ({got}>{want})", s, line, col))
+        for rname, record in mod.ast.records.items():
+            for fname, field in record.fields.items():
+                arity = (
+                    explicit_arity(shape_from_node(mod.ast.source_bytes, field.type_node))
+                    if field.type_node is not None else 0
+                )
+                imported_projection_specs[f"{alias}.{fname}"] = (mod, rname, field, 1 + arity)
 
-    # TSAGDA074/075/079: only rigid literals/constructors/non-functions.
-    for cname, ctor in ctors.items():
-        for m in re.finditer(rf"\b{re.escape(cname)}\b", clean):
-            before = clean[max(0, m.start()-80):m.start()]
-            if re.search(r"≡\s*$", before):
-                other = re.search(r"([A-Za-z_][A-Za-z0-9_']*)\s*≡\s*$", before)
-                if other and other.group(1) in ctors and ctors[other.group(1)].datatype != ctor.datatype:
-                    line, col = _line_col(source, m.start())
-                    out.append(_diag(D, "TSAGDA075", f"equality compares constructors from different datatypes: {other.group(1)} vs {cname}", s, line, col))
+    app_head_spans = []
+    for app in root_apps:
+        app_head_spans.append((app.head, app.head_node.start_byte, app.head_node.end_byte))
+        spec = imported_projection_specs.get(app.head)
+        if spec is None:
+            continue
+        mod, owner, field, want = spec
+        got = len(app.explicit_args)
+        line = app.head_node.start_point[0] + 1
+        col = app.head_node.start_point[1] + 1
+        if got == 0:
+            out.append(_diag(D, "TSAGDA052", f"{app.head} is used without a visible {owner} receiver", s, line, col))
+            out.append(_diag(D, "TSAGDA049", f"projection {app.head} is under-applied", s, line, col))
+            continue
+        if got > want:
+            out.append(_diag(D, "TSAGDA053", f"{app.head} is visibly over-applied ({got}>{want})", s, line, col))
+
+        receiver = app.explicit_args[0].text.strip()
+        if receiver in mod.ast.records or receiver in mod.ast.signatures:
+            out.append(_diag(D, "TSAGDA051", f"{app.head} receives known declaration/type name {receiver} where a {owner} value is expected", s, line, col, severity="warning", confidence="medium"))
+
+        containing = None
+        for function_name, clause_items in s.ast.clauses.items():
+            for clause in clause_items:
+                if clause.node.start_byte <= app.head_node.start_byte < clause.node.end_byte:
+                    containing = function_name
+                    break
+            if containing is not None:
+                break
+        if containing is not None:
+            signature = s.ast.signatures.get(containing)
+            if signature is not None and signature.type_node is not None:
+                binder = next(
+                    (
+                        item for item in typed_binders(s.ast.source_bytes, signature.type_node)
+                        if item.name == receiver
+                    ),
+                    None,
+                )
+                if binder is not None:
+                    words = (
+                        binder.type_text
+                        .replace("(", " ").replace(")", " ")
+                        .replace("{", " ").replace("}", " ")
+                        .replace(",", " ").split()
+                    )
+                    record_heads = {word.rsplit(".", 1)[-1] for word in words}
+                    imported_records = set(mod.ast.records)
+                    mismatched = sorted((record_heads & imported_records) - {owner})
+                    if mismatched:
+                        out.append(_diag(D, "TSAGDA054", f"projection {app.head} belongs to {owner}, but receiver {receiver} is declared as {mismatched[0]}", s, line, col))
+                        out.append(_diag(D, "TSAGDA050", f"{app.head} expects {owner}; receiver {receiver} has visibly different declared head", s, line, col))
+
+    # Zero-argument qualified projections are not yielded by applications().
+    for token in root_tokens:
+        if token.node_type != "qid" or token.text not in imported_projection_specs:
+            continue
+        covered = any(
+            head == token.text and start <= token.start_byte < end
+            for head, start, end in app_head_spans
+        )
+        if not covered:
+            _, owner, _, _ = imported_projection_specs[token.text]
+            out.append(_diag(D, "TSAGDA052", f"{token.text} is used without a visible {owner} receiver", s, token.line, token.column))
+            out.append(_diag(D, "TSAGDA049", f"projection {token.text} is under-applied", s, token.line, token.column))
+
+    # Constructor equalities with visibly different datatype owners.
+    for i in range(len(root_tokens) - 2):
+        left, op, right = root_tokens[i:i + 3]
+        lctor = ctors.get(left.text.rsplit(".", 1)[-1])
+        rctor = ctors.get(right.text.rsplit(".", 1)[-1])
+        if op.text == "≡" and lctor is not None and rctor is not None and lctor.datatype != rctor.datatype:
+            out.append(_diag(D, "TSAGDA075", f"equality compares constructors from different datatypes: {left.text} vs {right.text}", s, right.line, right.column))
 
     # TSAGDA101/103/104: AST-backed equality combinator outer-shape checks.
     for name, clause_items in s.ast.clauses.items():
@@ -851,15 +905,14 @@ def extended_diagnostics(checker, s, D):
 
     # Remaining bounded structural diagnostics and specific aliases.
 
-    # TSAGDA011: empty where/mutual blocks.
-    lines = source.splitlines()
-    for i, line in enumerate(lines, 1):
-        if re.match(r"^\s*(where|mutual)\s*$", line):
-            indent = len(line) - len(line.lstrip())
-            following = lines[i:i + 8]
-            has_child = any(x.strip() and (len(x) - len(x.lstrip())) > indent for x in following)
-            if not has_child:
-                out.append(_diag(D, "TSAGDA011", f"{line.strip()} block has no evident indented declaration", s, i))
+    # TSAGDA011: empty where/mutual blocks from AST.
+    for node in list(s.ast.where_nodes) + list(s.ast.mutual_nodes):
+        semantic_children = [
+            child for child in node.named_children
+            if child.type not in {"module_name", "bid"}
+        ]
+        if not semantic_children:
+            out.append(_diag(D, "TSAGDA011", f"{node.type} block has no evident declaration", s, node.start_point[0] + 1))
 
     # TSAGDA022/026: qualified alias mistakes and rename collisions.
     known_aliases = set(imported)
