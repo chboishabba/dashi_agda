@@ -39,8 +39,8 @@ import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physi
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
 import DASHI.Physics.YangMills.YangMillsContinuumSchwingerFromMeasureExact as Schwinger
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as R476
-import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as R499
-import DASHI.Physics.YangMills.YangMillsRepresentedExpectationConvergenceRound509Exact as R509
+import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as R535
+import DASHI.Physics.YangMills.YangMillsProjectiveRepresentedExpectationConvergenceRound536Exact as R536
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OSGap
 import DASHI.Physics.YangMills.BalabanOSReconstructionMassGapProduction as OSR
 import DASHI.Physics.YangMills.BalabanScalarCylinderExpectationLimitExact as Cylinder
@@ -73,7 +73,7 @@ record ConcreteEndpointSourceBundle
 
     representationInputs :
       ∀ group →
-      R499.PhysicalCylinderRepresentationInputs
+      R535.PhysicalProjectiveCylinderRepresentationInputs
         Configuration Event
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division (family group)
@@ -96,7 +96,7 @@ record ConcreteEndpointSourceBundle
         (R476.representedSchwinger
           cylinderEncoding
           (R476.represented
-            (R499.asSourceLimitRepresentation
+            (R535.asSourceLimitRepresentation
               (representationInputs group))))
         observable left right
 
@@ -176,7 +176,7 @@ representedFor :
   G → R476.RepresentedContinuum (Configuration → ℝ)
 representedFor bundle group =
   R476.represented
-    (R499.asSourceLimitRepresentation
+    (R535.asSourceLimitRepresentation
       (representationInputs bundle group))
 
 ------------------------------------------------------------------------
@@ -549,7 +549,7 @@ representedFiniteExpectationsConverge :
       (R476.asPhysicalContinuum (representedFor bundle group))
       observable)
 representedFiniteExpectationsConverge bundle group observable =
-  R509.representedPhysicalExpectationConverges
+  R536.projectiveRepresentedPhysicalExpectationConverges
     (representationInputs bundle group)
     observable
 
