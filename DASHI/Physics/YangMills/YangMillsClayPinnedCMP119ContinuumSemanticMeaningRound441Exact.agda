@@ -35,6 +35,7 @@ import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimi
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
 import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 import DASHI.Physics.YangMills.YangMillsClayNormalizedExpectationRepresentationFirewallRound448Exact as R448
+import DASHI.Physics.YangMills.YangMillsRepresentedContinuumCarrierRound450Exact as R450
 
 record ConcreteCMP119ContinuumSemanticMeaning
     (G X Configuration Position CurvaturePolynomial LocalOperator
@@ -75,22 +76,15 @@ record ConcreteCMP119ContinuumSemanticMeaning
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division S group family
 
-    -- Literal semantic meaning of the already-constructed Schwinger functional.
-    -- Its pointwise same-measure equation is compiler-owned below.
-    sameMeasureSchwingerMeansLiteralBelonging :
-      (∀ observable left right →
-        Physical.schwinger
-          (Schwinger.schwingerFromMeasure
-            encoding (Limit.continuumMeasure family))
-          observable left right
-        ≡
-        Physical.expectation
-          (Limit.continuumMeasure family)
-          (Schwinger.twoPointCylinder encoding observable left right)) →
+    -- Schwinger is constructed from the represented carrier itself.  The
+    -- same-expectation equation is definitional in R450, so no equality premise
+    -- is accepted here.
+    representedSchwingerMeansLiteralBelonging :
       Top.SchwingerBelongsToMeasure S
-        (Limit.continuumMeasure family)
-        (Schwinger.schwingerFromMeasure
-          encoding (Limit.continuumMeasure family))
+        (R450.representedContinuumMeasure
+          (R448.representedCarrier continuumRepresentation))
+        (R450.representedSchwinger encoding
+          (R448.representedCarrier continuumRepresentation))
 
 open ConcreteCMP119ContinuumSemanticMeaning public
 
@@ -126,7 +120,8 @@ literalContinuumLimitFromConcreteExpectationLimit :
         limitLaws quotient division S group family encoding) →
   Top.IsContinuumLimitOf S group
     (Limit.finiteMeasure family)
-    (Limit.continuumMeasure family)
+    (R450.representedContinuumMeasure
+      (R448.representedCarrier (continuumRepresentation meaning)))
 literalContinuumLimitFromConcreteExpectationLimit meaning =
   R448.literalContinuumLimitFromRepresentation
     (continuumRepresentation meaning)
@@ -143,7 +138,8 @@ literalContinuumLimitFromConcreteRepresentation :
         limitLaws quotient division S group family encoding) →
   Top.IsContinuumLimitOf S group
     (Limit.finiteMeasure family)
-    (Limit.continuumMeasure family)
+    (R450.representedContinuumMeasure
+      (R448.representedCarrier (continuumRepresentation meaning)))
 literalContinuumLimitFromConcreteRepresentation meaning =
   R448.literalContinuumLimitFromRepresentation
     (continuumRepresentation meaning)
@@ -159,20 +155,21 @@ literalSchwingerBelongsFromConcreteSameMeasure :
         {sequenceLimit = sequenceLimit}
         limitLaws quotient division S group family encoding) →
   Top.SchwingerBelongsToMeasure S
-    (Limit.continuumMeasure family)
-    (Schwinger.schwingerFromMeasure
-      encoding (Limit.continuumMeasure family))
-literalSchwingerBelongsFromConcreteSameMeasure
-    {family = family} {encoding = encoding} meaning =
-  sameMeasureSchwingerMeansLiteralBelonging meaning
-    (Schwinger.schwingerValueIsMeasureExpectation
-      encoding (Limit.continuumMeasure family))
+    (R450.representedContinuumMeasure
+      (R448.representedCarrier (continuumRepresentation meaning)))
+    (R450.representedSchwinger encoding
+      (R448.representedCarrier (continuumRepresentation meaning)))
+literalSchwingerBelongsFromConcreteSameMeasure meaning =
+  representedSchwingerMeansLiteralBelonging meaning
 
 round441ConcreteExpectationLimitCompilerLevel : ProofLevel
 round441ConcreteExpectationLimitCompilerLevel = machineChecked
 
 round441SameMeasureSchwingerCompilerLevel : ProofLevel
 round441SameMeasureSchwingerCompilerLevel = machineChecked
+
+round441SchwingerExpectationEqualityRequiredAsPremise : Bool
+round441SchwingerExpectationEqualityRequiredAsPremise = false
 
 round441ContinuumSemanticInterpretationLevel : ProofLevel
 round441ContinuumSemanticInterpretationLevel = conditional
