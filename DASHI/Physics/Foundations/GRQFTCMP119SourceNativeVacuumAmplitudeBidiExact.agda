@@ -71,16 +71,16 @@ interiorEffectiveActionEquation223 :
       CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm Vacuum} →
-  SourceNativeNambuVacuumAmplitudeReceipt source →
+  (receipt : SourceNativeNambuVacuumAmplitudeReceipt source) →
   CMP119.effectiveAction source
-    (interiorScale _)
+    (interiorScale receipt)
   ≡ CMP119.assemble (CMP119.actionAlgebra source)
-      (CMP119.wilsonCoefficient source (interiorScale _))
-      (CMP119.wilsonActionTerm source (interiorScale _))
-      (CMP119.regularSmallFieldTerm source (interiorScale _))
-      (CMP119.rOperationTerm source (interiorScale _))
-      (CMP119.boundaryTerm source (interiorScale _))
-      (CMP119.vacuumEnergy source (interiorScale _))
+      (CMP119.wilsonCoefficient source (interiorScale receipt))
+      (CMP119.wilsonActionTerm source (interiorScale receipt))
+      (CMP119.regularSmallFieldTerm source (interiorScale receipt))
+      (CMP119.rOperationTerm source (interiorScale receipt))
+      (CMP119.boundaryTerm source (interiorScale receipt))
+      (CMP119.vacuumEnergy source (interiorScale receipt))
 interiorEffectiveActionEquation223 {source = source} receipt =
   CMP119.equation223 source (interiorScale receipt)
 
@@ -91,16 +91,16 @@ exteriorEffectiveActionEquation223 :
       CMP119.CMP119Section2SourceNativeState
         Density Background Fluctuation
         Action WilsonTerm SmallFieldTerm RTerm BoundaryTerm Vacuum} →
-  SourceNativeNambuVacuumAmplitudeReceipt source →
+  (receipt : SourceNativeNambuVacuumAmplitudeReceipt source) →
   CMP119.effectiveAction source
-    (exteriorScale _)
+    (exteriorScale receipt)
   ≡ CMP119.assemble (CMP119.actionAlgebra source)
-      (CMP119.wilsonCoefficient source (exteriorScale _))
-      (CMP119.wilsonActionTerm source (exteriorScale _))
-      (CMP119.regularSmallFieldTerm source (exteriorScale _))
-      (CMP119.rOperationTerm source (exteriorScale _))
-      (CMP119.boundaryTerm source (exteriorScale _))
-      (CMP119.vacuumEnergy source (exteriorScale _))
+      (CMP119.wilsonCoefficient source (exteriorScale receipt))
+      (CMP119.wilsonActionTerm source (exteriorScale receipt))
+      (CMP119.regularSmallFieldTerm source (exteriorScale receipt))
+      (CMP119.rOperationTerm source (exteriorScale receipt))
+      (CMP119.boundaryTerm source (exteriorScale receipt))
+      (CMP119.vacuumEnergy source (exteriorScale receipt))
 exteriorEffectiveActionEquation223 {source = source} receipt =
   CMP119.equation223 source (exteriorScale receipt)
 
