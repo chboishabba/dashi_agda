@@ -12,6 +12,7 @@ from agda_preflight.evidence import (
     policy_for,
 )
 from agda_preflight.evidence_cli import main as evidence_main
+from agda_preflight.triage_cli import main as triage_main
 from agda_preflight.scope_backend import (
     AgdaAutoRefineBackend,
     AgdaScopeCheckBackend,
@@ -381,3 +382,68 @@ def test_auto_refine_typechecks_only_surviving_typechecker_findings(tmp_path):
 
     assert [d.code for d in results] == ["TSAGDA204"]
     assert calls == {"scope": 1, "typecheck": 1}
+
+
+
+def test_triage_cli_summarizes_hard_and_deferred_findings(tmp_path, capsys):
+    import json
+
+    report = tmp_path / "report.json"
+    report.write_text(
+        json.dumps(
+            {
+                "summary": {},
+                "modules": [
+                    {
+                        "nodeid": "A.agda::A",
+                        "outcome": "failed",
+                        "diagnostics": [
+                            {
+                                "code": "TSAGDA060",
+                                "severity": "error",
+                                "evidence_sufficient": True,
+                                "line": 10,
+                                "column": 2,
+                                "message": "unknown field",
+                            },
+                            {
+                                "code": "TSAGDA113",
+                                "severity": "warning",
+                                "evidence_sufficient": False,
+                                "line": 11,
+                                "column": 3,
+                                "message": "scope suspicion",
+                            },
+                        ],
+                    },
+                    {
+                        "nodeid": "B.agda::B",
+                        "outcome": "failed",
+                        "diagnostics": [
+                            {
+                                "code": "TSAGDA060",
+                                "severity": "error",
+                                "evidence_sufficient": True,
+                                "line": 4,
+                                "column": 1,
+                                "message": "unknown field",
+                            }
+                        ],
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert triage_main([str(report), "--top", "5"]) == 0
+    hard_output = capsys.readouterr().out
+    assert "TSAGDA060" in hard_output
+    assert "2" in hard_output
+    assert "A" in hard_output
+    assert "B" in hard_output
+
+    assert triage_main([str(report), "--deferred"]) == 0
+    deferred_output = capsys.readouterr().out
+    assert "TSAGDA113" in deferred_output
+    assert "scope suspicion" in deferred_output
