@@ -45,7 +45,7 @@ sufficientObserverPreservationImpliesConsumerInvariance :
   Descent.ConsumerSufficient observe consumer ->
   PreservesObserver observe act ->
   ConsumerInvariantUnder consumer act
-sufficientObserverPreservationImpliesConsumerInvariance sufficient preserves x =
+sufficientObserverPreservationImpliesConsumerInvariance {act = act} sufficient preserves x =
   sufficient (act x) x (preserves x)
 
 record SymmetryRelevanceWitness

@@ -129,6 +129,9 @@ import DASHI.Interop.SLRSprint1AcquisitionMachineExact
 import DASHI.Interop.SLRSharedEvidenceReducerRegression
 import DASHI.Interop.SLRProviderNormalisationRegression
 import DASHI.Interop.SLRProviderNormalisationExact
+import DASHI.Interop.SharedUserWorldConsumerRuntimeExact
+import DASHI.Interop.SharedUserWorldConsumerRuntimeRegression
+
 
 
 module DASHI.Interop.Everything where
