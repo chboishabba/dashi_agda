@@ -111,6 +111,40 @@ module PairDifferenceM2
       (sym exactPhysicalFactor)
       scaledCenteredDefectBelowM2
 
+  selfRateWork : ℚ
+  selfRateWork =
+    Pair.rateSum rate items * Work.coherentWork mixed mixed
+
+  rateSelfPlusPairDifference : ℚ
+  rateSelfPlusPairDifference =
+    selfRateWork + pairDifference
+
+  doubledResidualBelowSelfPlusM2 :
+    Rate.two * rateSelfPlusPairDifference
+    ≤ Rate.two * selfRateWork + nu * P.totalM2Budget items
+  doubledResidualBelowSelfPlusM2 =
+    let
+      expanded :
+        Rate.two * rateSelfPlusPairDifference
+        ≡ Rate.two * selfRateWork + Rate.two * pairDifference
+      expanded =
+        solve
+          ( selfRateWork
+          ∷ pairDifference
+          ∷ [])
+
+      bounded :
+        Rate.two * selfRateWork + Rate.two * pairDifference
+        ≤ Rate.two * selfRateWork + nu * P.totalM2Budget items
+      bounded =
+        ℚP.+-mono-≤ ℚP.≤-refl signedPairDifferenceBelowPhysicalM2
+    in
+    subst
+      (λ left →
+        left ≤ Rate.two * selfRateWork + nu * P.totalM2Budget items)
+      (sym expanded)
+      bounded
+
 ------------------------------------------------------------------------
 -- Status.
 ------------------------------------------------------------------------
@@ -126,6 +160,9 @@ round662PairDifferenceM2AddsCardinalityTax = false
 
 round662RequiresComparableOnlyP3Carrier : Bool
 round662RequiresComparableOnlyP3Carrier = false
+
+round662R661ResidualReducedToSelfRatePlusM2 : Bool
+round662R661ResidualReducedToSelfRatePlusM2 = true
 
 round662PaysR661SelfRateTerm : Bool
 round662PaysR661SelfRateTerm = false
@@ -157,6 +194,10 @@ round662PairDifferenceM2AddsCardinalityTaxIsFalse = refl
 round662RequiresComparableOnlyP3CarrierIsFalse :
   round662RequiresComparableOnlyP3Carrier ≡ false
 round662RequiresComparableOnlyP3CarrierIsFalse = refl
+
+round662R661ResidualReducedToSelfRatePlusM2IsTrue :
+  round662R661ResidualReducedToSelfRatePlusM2 ≡ true
+round662R661ResidualReducedToSelfRatePlusM2IsTrue = refl
 
 round662PaysR661SelfRateTermIsFalse :
   round662PaysR661SelfRateTerm ≡ false
