@@ -31,6 +31,7 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicStandardCompletionSourcesRound649E
 import DASHI.Physics.Closure.NSTriadKNR650QuantitativeResearchStrategyRound651Exact as R651
 import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact as R652
 import DASHI.Physics.Closure.NSTriadKNR650C2CoupledForcingSandwichRound653Exact as R653
+import DASHI.Physics.Closure.NSTriadKNR650C2CollarRemoteCoerciveFrontierRound654Exact as R654
 
 data PeriodicNewNSAnalyticLeaf : Set where
   c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
@@ -127,6 +128,30 @@ round650C1AndC2SearchableAsLiteralSandwich =
 round650ThirdAnalyticLeafIntroducedBySandwich : Bool
 round650ThirdAnalyticLeafIntroducedBySandwich =
   R653.round653IntroducesThirdAnalyticLeaf
+
+round650C2UpperCollarRemoteSplitClosed : Bool
+round650C2UpperCollarRemoteSplitClosed =
+  R654.round654UpperCollarRemoteBoundaryFluxSplitClosed
+
+round650C2LowRemoteSpectralDatumConstructed : Bool
+round650C2LowRemoteSpectralDatumConstructed =
+  R654.round654LiteralLowRemoteSpectralDatumConstructed
+
+round650C2RemoteSpectralCrossCoercivityConstructed : Bool
+round650C2RemoteSpectralCrossCoercivityConstructed =
+  R654.round654RemoteSpectralCrossCoercivityConstructed
+
+round650C2RemoteCoercivityPaysRemoteBoundaryFlux : Bool
+round650C2RemoteCoercivityPaysRemoteBoundaryFlux =
+  R654.round654RemoteSpectralCoercivityPaysRemoteBoundaryFlux
+
+round650C2SignedCollarPaymentClosed : Bool
+round650C2SignedCollarPaymentClosed =
+  R654.round654SignedCollarPaymentClosed
+
+round650C2CollarRemoteTelemetryInstalled : Bool
+round650C2CollarRemoteTelemetryInstalled =
+  R654.round654C2CollarRemoteTelemetryInstalled
 
 round650ClayPromotion : Bool
 round650ClayPromotion = false
@@ -226,6 +251,36 @@ round650ThirdAnalyticLeafIntroducedBySandwichIsFalse :
   round650ThirdAnalyticLeafIntroducedBySandwich ≡ false
 round650ThirdAnalyticLeafIntroducedBySandwichIsFalse =
   R653.round653IntroducesThirdAnalyticLeafIsFalse
+
+round650C2UpperCollarRemoteSplitClosedIsTrue :
+  round650C2UpperCollarRemoteSplitClosed ≡ true
+round650C2UpperCollarRemoteSplitClosedIsTrue =
+  R654.round654UpperCollarRemoteBoundaryFluxSplitClosedIsTrue
+
+round650C2LowRemoteSpectralDatumConstructedIsTrue :
+  round650C2LowRemoteSpectralDatumConstructed ≡ true
+round650C2LowRemoteSpectralDatumConstructedIsTrue =
+  R654.round654LiteralLowRemoteSpectralDatumConstructedIsTrue
+
+round650C2RemoteSpectralCrossCoercivityConstructedIsTrue :
+  round650C2RemoteSpectralCrossCoercivityConstructed ≡ true
+round650C2RemoteSpectralCrossCoercivityConstructedIsTrue =
+  R654.round654RemoteSpectralCrossCoercivityConstructedIsTrue
+
+round650C2RemoteCoercivityPaysRemoteBoundaryFluxIsFalse :
+  round650C2RemoteCoercivityPaysRemoteBoundaryFlux ≡ false
+round650C2RemoteCoercivityPaysRemoteBoundaryFluxIsFalse =
+  R654.round654RemoteSpectralCoercivityPaysRemoteBoundaryFluxIsFalse
+
+round650C2SignedCollarPaymentClosedIsFalse :
+  round650C2SignedCollarPaymentClosed ≡ false
+round650C2SignedCollarPaymentClosedIsFalse =
+  R654.round654SignedCollarPaymentClosedIsFalse
+
+round650C2CollarRemoteTelemetryInstalledIsTrue :
+  round650C2CollarRemoteTelemetryInstalled ≡ true
+round650C2CollarRemoteTelemetryInstalledIsTrue =
+  R654.round654C2CollarRemoteTelemetryInstalledIsTrue
 
 round650ClayPromotionIsFalse :
   round650ClayPromotion ≡ false
