@@ -136,14 +136,10 @@ module WeightedExternal
       opposite = Ext.externalMinusForcePlusVelocity tau
     in
     trans
+      (R73.complex3ScaleSubtract w first opposite)
       (cong
-        (C3.complex3Scale w)
-        refl)
-      (trans
-        (R73.complex3ScaleSubtract w first opposite)
-        (cong
-          (C3.complex3Add (weightedFirst tau))
-          refl))
+        (C3.complex3Add (weightedFirst tau))
+        (sym (R73.complex3ScaleNegate w opposite)))
 
   foldCongruent :
     (left right :
