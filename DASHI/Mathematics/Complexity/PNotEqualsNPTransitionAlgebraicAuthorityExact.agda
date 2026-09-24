@@ -73,8 +73,8 @@ Involutive :
   ∀ {State : Set} →
   (State → State) →
   Set
-Involutive step =
-  (state : _) →
+Involutive {State} step =
+  (state : State) →
   step (step state) ≡ state
 
 iterateTwoIsIdentity :
@@ -151,7 +151,7 @@ authorityClosesEveryPowerOfTwoExecution :
 authorityClosesEveryPowerOfTwoExecution
     authority depth state =
   powerOfTwoIterateIdentity
-    _
+    step
     (involutionLaw authority)
     depth
     state
