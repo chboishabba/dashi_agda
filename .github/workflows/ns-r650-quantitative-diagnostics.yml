@@ -1,0 +1,46 @@
+name: NS R650 quantitative diagnostics
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/ns_r650_quantitative_stress_scan.py'
+      - 'scripts/check_ns_r650_quantitative_stress_scan.py'
+      - 'scripts/ns_r406_physical_real_eval.py'
+      - 'scripts/ns_r650_c2_physical_real_scan.py'
+      - 'scripts/ns_r650_c1_physical_real_scan.py'
+      - 'scripts/check_ns_r406_r650_physical_real.py'
+      - 'scripts/tests/test_ns_r650_quantitative_stress_scan.py'
+      - 'scripts/tests/test_ns_r406_physical_real_eval.py'
+      - 'DASHI/Physics/Closure/NSTriadKNR650QuantitativeResearchStrategyRound651Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650C1R406DiagonalCouplingRound652Exact.agda'
+      - '.github/workflows/ns-r650-quantitative-diagnostics.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-mode-diagnostics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install diagnostic dependencies
+        run: python -m pip install --disable-pip-version-check numpy pytest
+
+      - name: Compile quantitative scripts
+        run: |
+          python -m py_compile             scripts/ns_r650_quantitative_stress_scan.py             scripts/check_ns_r650_quantitative_stress_scan.py             scripts/ns_r406_physical_real_eval.py             scripts/ns_r650_c2_physical_real_scan.py             scripts/ns_r650_c1_physical_real_scan.py             scripts/check_ns_r406_r650_physical_real.py
+
+      - name: Run deterministic R650 diagnostics
+        run: |
+          python -m pytest -q             scripts/tests/test_ns_r650_quantitative_stress_scan.py             scripts/tests/test_ns_r406_physical_real_eval.py
