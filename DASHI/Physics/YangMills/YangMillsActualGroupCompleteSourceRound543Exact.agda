@@ -90,6 +90,18 @@ fiveBlockUsesActualAlignedQuantitative source =
 round543ActualGroupCompleteSourceCompilerLevel : ProofLevel
 round543ActualGroupCompleteSourceCompilerLevel = machineChecked
 
+round543StructuralWitnessLevel : ProofLevel
+round543StructuralWitnessLevel =
+  Structural.literalRound517AllGroupCompactSimpleSourceLevel
+
+round543ActualGroupAlignmentLevel : ProofLevel
+round543ActualGroupAlignmentLevel =
+  Alignment.literalRound541ActualGroupQuantitativeAlignmentLevel
+
+round543FiveBlockSourceMapLevel : ProofLevel
+round543FiveBlockSourceMapLevel =
+  Alignment.literalRound541AlignedFiveBlockSourceLevel
+
 round543IndependentStructuralAndQuantitativeSelectionsAllowed : Bool
 round543IndependentStructuralAndQuantitativeSelectionsAllowed = false
 
