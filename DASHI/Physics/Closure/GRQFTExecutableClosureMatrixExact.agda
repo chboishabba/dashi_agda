@@ -13,6 +13,10 @@ data ExecutableGapStatus : Set where
     ExecutableGapStatus
   executableInterfaceReadyConcreteInstanceMissing :
     ExecutableGapStatus
+  analyticRealizationMissing :
+    ExecutableGapStatus
+  localAdapterPresentExternalAcceptanceRequired :
+    ExecutableGapStatus
   externalInformationRequired :
     ExecutableGapStatus
 
@@ -50,18 +54,20 @@ canonicalGRQFTExecutableClosureMatrix =
     locallyClosed
     locallyClosed
     locallyRejected
+    analyticRealizationMissing
     executableInterfaceReadyConcreteInstanceMissing
     executableInterfaceReadyConcreteInstanceMissing
-    executableInterfaceReadyConcreteInstanceMissing
-    externalInformationRequired
-    executableInterfaceReadyConcreteInstanceMissing
+    localAdapterPresentExternalAcceptanceRequired
+    analyticRealizationMissing
     externalInformationRequired
     false refl
     ( "Finite nonconstant sourced Einstein equation closes exactly at normalized kappa=1."
     ∷ "Within the three-valued normalized coupling carrier, kappa=1 is uniquely selected by zero tensor residual."
     ∷ "The current W4 dirty Z-peak calibration is executed and rejected: chi2/dof 298.8462841768543."
-    ∷ "GR recovery, QFT recovery, and same-carrier stress weld now have executable residual interfaces but still need concrete full candidate instances."
-    ∷ "Physical units and empirical GRQFT validation require external information rather than another local placeholder theorem."
+    ∷ "GR recovery is narrowed to analytic realization: curvature/Ricci/stress convergence plus radial weak-field identification."
+    ∷ "QFT recovery and same-carrier stress weld have executable interfaces but still need concrete unified-candidate adapters."
+    ∷ "SI unit/dimension/Candidate256 adapter fields are locally present; exact authority/acceptance remains external."
+    ∷ "Empirical GRQFT validation remains external."
     ∷ "Terminal promotion remains false."
     ∷ [] )
 

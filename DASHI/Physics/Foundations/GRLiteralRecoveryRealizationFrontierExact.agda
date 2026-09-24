@@ -20,8 +20,15 @@ record GRLiteralRecoveryRealizationFrontier : Set where
     finiteSourcedEinsteinLawClosed : Bool
     finiteSourcedEinsteinLawClosedIsTrue :
       finiteSourcedEinsteinLawClosed ≡ true
-    discreteToSmoothFirstMissing : String
-    schwarzschildFirstMissing : String
+    discreteToSmoothFirstMissing :
+      Smooth.DiscreteToSmoothEinsteinLimitFirstMissing
+    discreteToSmoothFirstMissingIsCurvatureConvergence :
+      discreteToSmoothFirstMissing
+      ≡ Smooth.missingDiscreteToSmoothCurvatureConvergence
+    schwarzschildFirstMissing :
+      Schwarz.SchwarzschildLimitFirstMissingPrimitive
+    schwarzschildFirstMissingIsRadialValuation :
+      schwarzschildFirstMissing ≡ Schwarz.missingRadialValuation
     literalGRRecoveredEqualityConstructed : Bool
     literalGRRecoveredEqualityConstructedIsFalse :
       literalGRRecoveredEqualityConstructed ≡ false
@@ -35,8 +42,13 @@ canonicalGRLiteralRecoveryRealizationFrontier =
   grLiteralRecoveryRealizationFrontier
     finiteSourcedLawClosedContinuumRealizationOpen
     true refl
-    "missingDiscreteToSmoothCurvatureConvergence"
-    "missingRadialValuation"
+    Smooth.DiscreteToSmoothEinsteinLimitReceipt.firstMissing
+      Smooth.canonicalDiscreteToSmoothEinsteinLimitReceipt
+    (Smooth.DiscreteToSmoothEinsteinLimitReceipt.firstMissingIsCurvatureConvergence
+      Smooth.canonicalDiscreteToSmoothEinsteinLimitReceipt)
+    Schwarz.SchwarzschildLimitCandidateDiagnostic.firstMissing
+      Schwarz.canonicalSchwarzschildLimitCandidateDiagnostic
+    refl
     false refl
     ( "prove discrete curvature convergence on the literal non-flat family"
     ∷ "identify the continuum Ricci/Einstein contractions with that same limit"
