@@ -196,6 +196,78 @@ def qualified_name_tokens(source_bytes: bytes, node) -> List[AstToken]:
         if token.node_type in {"qid", "id", "field_name", "function_name"}
     ]
 
+
+@dataclass(frozen=True)
+class AstBinder:
+    name: str
+    type_text: str
+    visibility: str
+    line: int
+    type_start_byte: int
+    type_end_byte: int
+
+
+def typed_binders(source_bytes: bytes, expr_node) -> List[AstBinder]:
+    """Extract explicit/implicit/instance typed binders from an expr token tree.
+
+    Agda's grammar intentionally hides several binding helper rules. Walking
+    concrete tree tokens keeps delimiter/colon structure without reparsing the
+    original source with regex.
+    """
+    tokens = significant_tokens(source_bytes, expr_node)
+    out: List[AstBinder] = []
+    open_to_close = {"(": ")", "{": "}", "{{": "}}", "⦃": "⦄"}
+    visibility = {"(": "explicit", "{": "implicit", "{{": "instance", "⦃": "instance"}
+    i = 0
+    while i < len(tokens):
+        opener = tokens[i].text
+        if opener not in open_to_close:
+            i += 1
+            continue
+        closer = open_to_close[opener]
+        depth = 1
+        j = i + 1
+        colon = None
+        while j < len(tokens):
+            text = tokens[j].text
+            if text == opener:
+                depth += 1
+            elif text == closer:
+                depth -= 1
+                if depth == 0:
+                    break
+            elif text == ":" and depth == 1 and colon is None:
+                colon = j
+            j += 1
+        if j >= len(tokens):
+            i += 1
+            continue
+        if colon is not None and colon > i + 1 and colon + 1 < j:
+            names = [
+                token for token in tokens[i + 1:colon]
+                if token.node_type in {"id", "bid", "field_name", "qid"}
+                and token.text not in {".", ".."}
+            ]
+            type_tokens = tokens[colon + 1:j]
+            if names and type_tokens:
+                start = type_tokens[0].start_byte
+                end = type_tokens[-1].end_byte
+                typ = source_bytes[start:end].decode("utf-8", "replace").strip()
+                for name in names:
+                    if name.text != "_":
+                        out.append(
+                            AstBinder(
+                                name=name.text,
+                                type_text=typ,
+                                visibility=visibility[opener],
+                                line=name.line,
+                                type_start_byte=start,
+                                type_end_byte=end,
+                            )
+                        )
+        i = j + 1
+    return out
+
 def _leaf_tokens(source_bytes: bytes, node) -> List[str]:
     out: List[str] = []
     stack = [node]
