@@ -154,10 +154,89 @@ def rigid_head_from_tokens(tokens: Sequence[AstToken]) -> Shape:
     return HeadShape(names[0], tuple(names[1:]))
 
 
+def _group_end(tokens: Sequence[AstToken], start: int) -> Optional[int]:
+    opener = tokens[start].text
+    closer = _OPEN.get(opener)
+    if closer is None:
+        return None
+    stack = [opener]
+    for index in range(start + 1, len(tokens)):
+        text = tokens[index].text
+        if text in _OPEN:
+            stack.append(text)
+            continue
+        if text in _CLOSE and stack and _CLOSE[text] == stack[-1]:
+            stack.pop()
+            if not stack:
+                return index
+    return None
+
+
+def _binder_multiplicity(tokens: Sequence[AstToken]) -> int:
+    """Count names in a typed binder group such as (A B : Set)."""
+    items = _trim_delimiters(tokens)
+    colon_parts = split_top_level(items, {":"})
+    if len(colon_parts) != 2:
+        return 1
+    names = [
+        token
+        for token in colon_parts[0]
+        if token.node_type in {"id", "bid", "qid", "field_name"}
+        and token.text not in {"∀", "_"}
+    ]
+    return max(1, len(names))
+
+
+def _domain_shapes_from_segment(tokens: Sequence[AstToken]) -> List[DomainShape]:
+    """Expand one arrow-domain segment into its telescope binders."""
+    items = list(tokens)
+    while items and items[0].text in {"∀", ","}:
+        items.pop(0)
+    if not items:
+        return []
+
+    groups: List[List[AstToken]] = []
+    residual: List[AstToken] = []
+    index = 0
+    while index < len(items):
+        token = items[index]
+        if token.text in _OPEN:
+            end = _group_end(items, index)
+            if end is not None:
+                if residual:
+                    groups.append(residual)
+                    residual = []
+                groups.append(items[index:end + 1])
+                index = end + 1
+                continue
+        residual.append(token)
+        index += 1
+    if residual:
+        groups.append(residual)
+
+    domains: List[DomainShape] = []
+    for group in groups:
+        trimmed = [token for token in group if token.text not in {",", "∀"}]
+        if not trimmed:
+            continue
+        multiplicity = _binder_multiplicity(trimmed)
+        domain = DomainShape(_visibility(trimmed), rigid_head_from_tokens(trimmed))
+        domains.extend(domain for _ in range(multiplicity))
+    return domains
+
 def shape_from_tokens(tokens: Sequence[AstToken]) -> Shape:
     items = _trim_delimiters(tokens)
     if not items:
         return UnknownShape()
+
+    # Parse top-level function arrows before interpreting equality in the
+    # codomain. This preserves the Agda telescope/result structure.
+    arrows = split_top_level(items, {"→", "->"})
+    if len(arrows) > 1:
+        domains: List[DomainShape] = []
+        for segment in arrows[:-1]:
+            domains.extend(_domain_shapes_from_segment(segment))
+        return PiShape(tuple(domains), shape_from_tokens(arrows[-1]))
 
     eq_parts = split_top_level(items, {"≡"})
     if len(eq_parts) == 2:
@@ -165,14 +244,6 @@ def shape_from_tokens(tokens: Sequence[AstToken]) -> Shape:
             rigid_head_from_tokens(eq_parts[0]),
             rigid_head_from_tokens(eq_parts[1]),
         )
-
-    arrows = split_top_level(items, {"→", "->"})
-    if len(arrows) > 1:
-        domains = tuple(
-            DomainShape(_visibility(part), rigid_head_from_tokens(part))
-            for part in arrows[:-1]
-        )
-        return PiShape(domains, shape_from_tokens(arrows[-1]))
 
     return rigid_head_from_tokens(items)
 
