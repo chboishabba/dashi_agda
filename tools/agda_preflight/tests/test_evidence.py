@@ -496,3 +496,34 @@ def test_triage_collapses_alias_codes_by_default(tmp_path, capsys):
     raw_output = capsys.readouterr().out
     assert "TSAGDA045" in raw_output
     assert "TSAGDA110" in raw_output
+
+
+
+def test_auto_refine_exposes_oracle_stats(tmp_path):
+    path = write_module(tmp_path, "Stats")
+    backend = AgdaAutoRefineBackend("agda", typecheck=True)
+    backend.scope._scope_ok = lambda _: True
+    backend.typecheck._typecheck_ok = lambda _: True
+
+    # Monkeypatched calls bypass subprocess counters, so set representative
+    # values directly and assert the public stats contract.
+    backend.scope.attempted = 3
+    backend.scope.succeeded = 2
+    backend.scope.failed = 1
+    backend.typecheck.attempted = 1
+    backend.typecheck.succeeded = 1
+    backend.typecheck.failed = 0
+
+    assert backend.stats() == {
+        "scope": {"attempted": 3, "succeeded": 2, "failed": 1},
+        "typecheck": {"attempted": 1, "succeeded": 1, "failed": 0},
+    }
+
+
+def test_scope_backend_preserves_configured_agda_extra_args(tmp_path):
+    backend = AgdaScopeCheckBackend(
+        "agda",
+        cwd=tmp_path,
+        extra_args=("-i", ".", "-l", "standard-library"),
+    )
+    assert backend.extra_args == ("-i", ".", "-l", "standard-library")
