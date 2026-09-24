@@ -79,14 +79,14 @@ cmp119GRAnchoredCrossSectorBuildsStressEqualityCore :
         {S = S} osInputs reconstruction group} →
   CMP119GRAnchoredCrossSectorEquality U pinned group inputs →
   Equality.StressEnergyEqualityCore U
-cmp119GRAnchoredCrossSectorBuildsStressEqualityCore equality = record
+cmp119GRAnchoredCrossSectorBuildsStressEqualityCore {U = U} equality = record
   { Equality.StressEnergyEqualityCore.sameStressEnergyOnOverlap =
       λ candidate regime grAtRegime qftAtRegime →
         trans
           (cmp119SharedStressEqualsGRSource
             equality candidate regime grAtRegime qftAtRegime)
           (selectedSectorIsDeclaredQFTTotal
-            equality (Weld.coarseGrain _ candidate regime))
+            equality (Weld.coarseGrain U candidate regime))
   }
 
 legacyQFTAggregationNeededForPhysicalStressEquality : Bool
