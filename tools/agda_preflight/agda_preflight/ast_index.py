@@ -142,6 +142,60 @@ class AstIndex:
         return {item.target.split(".")[-1] for item in self.opens}
 
 
+
+@dataclass(frozen=True)
+class AstToken:
+    text: str
+    node_type: str
+    start_byte: int
+    end_byte: int
+    line: int
+    column: int
+    named: bool
+
+
+def leaf_tokens(source_bytes: bytes, node) -> List[AstToken]:
+    """Return ordered concrete leaf tokens under NODE.
+
+    This is deliberately syntax-tree tokenization, not source-text parsing:
+    anonymous grammar tokens such as arrows/braces and named qid/id leaves are
+    preserved with exact source ranges.
+    """
+    out: List[AstToken] = []
+    stack = [node]
+    while stack:
+        current = stack.pop()
+        if current.child_count == 0:
+            text = node_text(source_bytes, current)
+            if text:
+                out.append(
+                    AstToken(
+                        text=text,
+                        node_type=current.type,
+                        start_byte=current.start_byte,
+                        end_byte=current.end_byte,
+                        line=current.start_point[0] + 1,
+                        column=current.start_point[1] + 1,
+                        named=current.is_named,
+                    )
+                )
+            continue
+        stack.extend(reversed(current.children))
+    out.sort(key=lambda token: token.start_byte)
+    return out
+
+
+def significant_tokens(source_bytes: bytes, node) -> List[AstToken]:
+    return [token for token in leaf_tokens(source_bytes, node) if token.text.strip()]
+
+
+def qualified_name_tokens(source_bytes: bytes, node) -> List[AstToken]:
+    return [
+        token
+        for token in significant_tokens(source_bytes, node)
+        if token.node_type in {"qid", "id", "field_name", "function_name"}
+    ]
+
 def _leaf_tokens(source_bytes: bytes, node) -> List[str]:
     out: List[str] = []
     stack = [node]
