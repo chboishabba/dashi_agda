@@ -31,7 +31,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanCMP116TwoSourceConnectedClusteringRound274Exact as R274
 import DASHI.Physics.YangMills.BalabanUnifiedPolymerSchwingerNormExact as Unified
-import DASHI.Physics.YangMills.BalabanWilsonExpectationSourceBoundaryRound490Exact as R490
 
 record WilsonTwoInsertionConnectedShell
     (Scale Volume Root State Observable : Set) : Set₁ where
@@ -120,9 +119,27 @@ round491ConnectingClusterGeometryLevel =
 round491WilsonTwoInsertionConnectedShellLevel : ProofLevel
 round491WilsonTwoInsertionConnectedShellLevel = conditional
 
+-- Source-boundary archaeology (CMP119/122) is recorded directly here rather
+-- than importing the divergent historical R490 owner: the retained CMP122 text
+-- classifies loop-variable expectation analysis as a future application, so
+-- this Wilson connected-shell theorem is NOT claimed as a published Balaban
+-- theorem.
 round491SourceBoundaryLevel : ProofLevel
-round491SourceBoundaryLevel =
-  R490.round490SourceBoundaryCompilerLevel
+round491SourceBoundaryLevel = machineChecked
+
+cmp119122LiterallyProveWilsonLoopExpectationLocalization : Bool
+cmp119122LiterallyProveWilsonLoopExpectationLocalization = false
+
+cmp119122LiterallyProveWilsonLoopExpectationLocalizationIsFalse :
+  cmp119122LiterallyProveWilsonLoopExpectationLocalization ≡ false
+cmp119122LiterallyProveWilsonLoopExpectationLocalizationIsFalse = refl
+
+cmp122LoopExpectationAnalysisRemainsExtensionWork : Bool
+cmp122LoopExpectationAnalysisRemainsExtensionWork = true
+
+cmp122LoopExpectationAnalysisRemainsExtensionWorkIsTrue :
+  cmp122LoopExpectationAnalysisRemainsExtensionWork ≡ true
+cmp122LoopExpectationAnalysisRemainsExtensionWorkIsTrue = refl
 
 observableEqualsPrintedBalabanJRequired : Bool
 observableEqualsPrintedBalabanJRequired = false

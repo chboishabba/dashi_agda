@@ -337,6 +337,11 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1PresentCutRound472Exact
 import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact
 import DASHI.Physics.YangMills.YangMillsClayGoal1CurrentFrontierRound474Exact
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact
+import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBSourceCorrectRound492Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact
+import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Validation
+
 
 module DASHI.Physics.YangMills.Everything where
 
