@@ -1,0 +1,655 @@
+[PAGE 1]
+233
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+This is an open access article under the 
+Creative Commons Attribution 4.0 
+International License
+Locatelli, S. W., & Davidowitz, B. (2021). Using metavisualization to 
+revise an explanatory model regarding a chemical reaction between 
+ions. Chemistry Education Research and Practice , 22(2), 382-395.  
+ https://doi.org/10.1039/D0RP00339E
+Michalisková, R., &  Prokša, M. (2018). The level of mastery of the concept of chemical 
+reaction rate by 9th-grade students. Chemistry-Didactics-Ecology-Metrology , 23, 81-
+95. https://doi.org/10.1515/cdem-2018-0005
+Minayo, M. C. S. (1993). Trabalho de campo: Contexto de observação, interação e descobert a 
+(30th ed.) [Fieldwork: Context of observation, interaction and discovery]. In: MINAYO, 
+Maria Cecília de Souza (Org.), Pesquisa social: Teoria, método e criatividade (pp. 61-77). 
+Editora V ozes. 
+Nyutu, E. N., Cobern, W. W., & Pleasants, B. A-S. (2021). Correlational study of student 
+perceptions of their undergraduate laboratory environment with respect to gender and 
+major. International Journal of Education in Mathematics, Science, and Technology, 9(1), 
+83-102. https://doi.org/10.46328/ijemst.1182
+Quadros, A. L., Silva, A. S. F., & Mortimer, E. F. (2018). Relações pedagógicas em aulas de 
+ciências da educação superior [Pedagogical relations in higher education science classes]. 
+Química Nova, 41(2), 227-235.  https://doi.org/10.21577/0100-4042.20170178
+Schnetzler, R. P. (2002). A pesquisa em ensino de química no Brasil: Conquistas e perspectivas 
+[Research in teaching chemistry in Brazil: Achievements and Perspectives]. Química 
+nova, 25, 14–24. http://dx.doi.org/10.1590/S0100- 40422002000800004
+Schraw G. (1998). Promoting general metacognitive awareness. Instructional Science, 26, 113-
+125. https://doi.org/10.1023/A:1003044231033
+Silva, F. C., Silva, E. P. C., Duarte, D. M., & Dias, F. D. S. (2021). Relação entre as 
+dificuldades e a percepção que os estudantes do ensino médio possuem sobre a 
+função das representações visuais no ensino de química [Relationship between the 
+difficulties and the perception that high school students have about the function 
+of visual representations in chemistry teaching]. Ciência & Educação (Bauru) , 27, 
+1-21. https://doi.org/10.1590/1516-731320210061
+Stake R. E. (2010). Qualitative research: Studying how things work. (First ed). Guilford Press. 
+Zômpero, A. F., & Laburú, C. E. (2011). Atividades investigativas no ensino de ciências: Aspectos 
+históricos e diferentes abordagens [Exploratives activities in science education: Historical 
+aspects and different approaches]. Ensaio: Pesquisa em Educação em Ciências , 13(3), 
+67-80. 
+Received: April 04, 2023 Accepted: May 17, 2023
+Cite as: Shimada, M. S., & Locatelli, S. W. (2023). Students' perception of an 
+inquiry-based metavisual activity about concepts of chemical kinetics . In V . 
+Lamanauskas (Ed.), Science and technology education: New developments and 
+Innovations. Proceedings of the 5th I nternational Baltic Symposium on Science 
+and Technology Education (BalticSTE2023) (pp. 223-232). Scientia Socialis 
+Press. https://doi.org/10.33225/BalticSTE/2023.223  
+THE INFLUENCE OF A PROJECT-BASED 
+CLUB PROGRAM ON MIDDLE SCHOOL 
+STUDENTS’ ACTION COMPETENCY IN 
+RESPONDING TO CLIMATE CHANGE
+Young-Joon Shin 
+Gyeongin National University of Education, Republic of Korea
+E-mail: yjshin@ginue.ac.kr 
+Hyunju Park 
+The War Memorial of Korea, Republic of Korea
+E-mail: libraphj@naver.com
+Hae-Ae Seo 
+Pusan National University, Republic of Korea
+E-mail: haseo@pusan.ac.kr 
+Abstract 
+Incorporating climate change into education is critical for building a sustainable future and 
+empowering the next generation to take action. This study aims to explore how a project-based 
+club program influences middle school students’ action competency in responding to climate 
+change. For this aim, ten students who participated in a project-based club program in a boys’ 
+middle school were selected. A pre-test on relevant knowledge was surveyed, students’ behaviors 
+during the program were observed, and in-depth interviews were conducted after the program. 
+The results revealed that students showed a better understanding of climate change and carbon 
+neutrality concepts, increased sensitivities to climate change, deepened reflections on climate 
+change activities, improved communication and decision-making abilities, and improved 
+willingness to take action in climate change mitigation activities. It was concluded that the 
+project-based club program has positively influenced students’ action competency in responding 
+to climate change.
+Keywords: action competency, climate change, middle school students, project-based club 
+program
+Introduction
+Climate change has been recognized as a significant social problem worldwide 
+and now emerged as a newly rising social problem in our lives closely related to local 
+communities. Climate change is no longer a problem that only happens in other countries. 
+To solve such a climate change problem, the international community is responding 
+by organizing the Intergovernmental Council on Climate Change ( IPCC). The IPCC 
+recommended that carbon neutrality (net-zero), in which the amount of greenhouse gases 
+https://doi.org/10.33225/BalticSTE/2023.233
+[PAGE 2]
+234
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+caused by human activities is reduced to zero through carbon dioxide emissions and 
+absorption, should be achieved in order to prevent ecosystem destruction and respond to 
+the crisis facing humanity (IPCC, 2022).
+Korea also actively responds to climate change issues by announcing the Korean 
+version of the Green New Deal policy. This newly developed policy declared carbon 
+neutrality by 2050 and established a presidential carbon neutrality committee for the 
+greenhouse gas reduction goals (Kim, 2021). In the field of education, in order to better 
+prepare for future uncertainties such as the climate crisis, climate change education in 
+schools becomes strengthened with the goal of cultivating competencies necessary for 
+the future society (Ministry of Education, 2022). 
+Students are going to be the most significant stakeholder in climate change of 
+future society. They will take the role of a main agent of problem-solving and become 
+a citizen of decision-making and a leader of society in the future, for future generations 
+to deal with the climate crisis, climate change education needs to be strengthened. It is 
+necessary to involve youth in efforts to solve problems such as climate change (Stephens 
+& Ballard, 2021). It is an important task of the education system to ensure that young 
+people are learning the right facts about the causes, societal impacts, and potential 
+solutions of climate change, and to promote critical and ethical views on this complex 
+issue (Kronlid, 2009; Ojala, 2012; Shin, 2023). 
+For this reason, students need to learn at school about how to participate in social 
+problems and how to prepare for their roles. Recently, climate change education has 
+stressed developing students’ practical capabilities in daily life so that they can deal 
+properly with climate change (Busch et al., 2019; Vaughter, 2016). Due to the urgency 
+of climate change issues, climate change education emphasizes the importance of action 
+competency in everyday life and opportunities for participation so that young people can 
+play a promising role as ecological citizens. 
+Action competency refers to taking action voluntarily for solving problems and 
+having competency as democratic citizens (Jensen & Schnack, 1997). In other words, 
+action competency means the ability to act in order to solve issues and to become active 
+citizens in a democratic society (Sass et al., 2020). Since action competency has been 
+introduced in the field of environmental and sustainable development education, how 
+to effectively develop students’ action competency should have been more importantly 
+recognized in schools (Baek et al., 2021).
+In fact, environmental education has been implemented in schools for several 
+decades in Korea. However, the school curriculum has not allocated a reasonable amount 
+for climate change-related content, and its achievement standard remains at the level of 
+knowledge acquisition and not focusing on action competency (Shin, 2017; Shin, 2023). 
+On the other side, there have been relatively few studies conducted on the development 
+of action competency (Baek et al., 2021).  Even further, effective teaching methods to 
+develop action competency in climate change have not been specifically introduced and 
+examined.
+The project-based learning can be considered as an effective educational method 
+to develop students’ action competency in climate change. It is well acknowledged that 
+climate change is not just a scientific phenomenon but also involves a complex socio-
+scientific issue. It is necessary for climate change education that students are encouraged 
+to find complex and uncertain problems occurring in the real world, define what the 
+[PAGE 3]
+235
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+problem is, understand the problem from the perspective of various interest groups, seek 
+solutions based on cause analysis, and find the optimal solution (Blumenfeld et al., 1991; 
+Lee & Hwang, 2019). In this context, project-based learning seems to be suitable for 
+climate change education as it includes a variety of complex activities, such as finding a 
+solution and finding possible alternatives to act (Jonassen, 1997). However, research on 
+how the project-based club program influences on developing students’ capability to deal 
+with climate change, has not been conducted extensively in Korea.
+Research Problem
+The study paid considerable attention to the project-based club program about 
+climate change. The school club programs are part of the creative experiential activities 
+to help students perform practical and voluntary activities, cultivate a healthy mind and 
+body, and develop their abilities of inquiry and problem-solving (Ministry of Education, 
+2015). The realization of action competency on global issues of climate change can be 
+accessed through the project-based club program. In this study, a project-based club 
+program is developed and applied to middle school students with the goal of cultivating 
+action competency to deal with climate change as being ecological citizenship. 
+Therefore, the research question in this study includes what kind of changes in middle 
+school students’ action competency related to climate change occurred after participation 
+in the project-based club program.
+Research Methodology
+General Background
+The aim of this study was to explore how the project-based club program 
+influenced middle school students’ action competency related to climate change. To 
+accomplish the aim, a qualitative research design was chosen in taking advantages 
+to reveal students’ changes in depth from various aspects. This study was conducted 
+with ten students who participated in a climate change club program at a boys’ middle 
+school located in a city with about 30,000 people. The city seems to be characterized by 
+facing unfavorable circumstances of the deepened educational gap between urban and 
+rural areas, poor rural economy, population decline due to low birth rate and intensified 
+decrease in the number of incoming new students. In order to solve these problems, 
+various strategies such as the school’s development of a specialized curriculum suitable 
+for local communities are required. In addition, as there are many students from broken 
+families such as single fathers, single mothers, and grandparents’ families, scholarship 
+benefits and administrative and financial resources are needed foremost.
+Sample
+The students in the study participated voluntarily in a climate change club 
+named ‘NT2050 Green Center’ on the theme of climate change education, ecological 
+transformation education and civic education. These students showed high interest and 
+preference in hands-on activities such as field trips, experiments, and practical training, 
+[PAGE 4]
+236
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+as well as science, arts and physical education subjects. The participants in this club were 
+ten male students, and the data collection was conducted with them under the students’ 
+and their parents’ agreements at the beginning. The ten students consisted of two 7 th 
+graders, four 8th graders and four 9th graders.
+Development of the Project-Based Club Program of Climate Change
+Teacher K, who voluntarily took charge of the climate change club, was an English 
+teacher with six years of teaching experience and has implemented several STEAM 
+projects for various subject matters. The topic of climate change was kind of new to 
+Teacher K. Teacher K studied about climate change on his own to provide students with 
+various experiences. In fact, Teacher K was running a carbon-neutral challenge program 
+for the whole school. Teacher K discussed about the contents and teaching methods for the 
+club with the researcher in advance. The program was developed with STEAM contents 
+by adopting the PDIE (Preparation-Development-Implementation-Evaluation) model 
+(Kim, 2012; see Table 1). After the development of the project-based club program, the 
+team of the researcher and Teacher K reviewed it thoroughly and revised it when needed. 
+The project-based club program was developed as a creative experiential activity 
+program centered on carbon neutrality to cultivate middle school students’ action 
+competency. In particular, the program was developed with an emphasis on practical 
+actions to change individual behaviors in order to develop action competency related 
+to climate change and ecological citizenship. Through this program, first, participating 
+middle school students are able to find examples of practical uses in real life and develop 
+action competency in climate change in daily lives. Second, the students are able to 
+integrate knowledge from various subject matters such as social studies, Korean language, 
+and English as well as science into the program. Third, the program will allow students 
+to participate in activities on their own initiative and to develop action competency to 
+deal with climate change and ecological citizenship through cooperation with members.
+Table 1
+Procedures to Develop the Project-Based Club Program by Adopting the PDIE Model
+Phase Procedures Contents
+Preparation 1 Needs assessment – literature review
+2 Analyze STEAM curriculum – analyze 2015 and 2022 revised curricula 
+3 Select learning standard – problem contexts, creative design, emotional 
+experiences
+4 Select integrated topic – topic-centered, integrated with two or more subjects
+Development 5 Select activity topics – climate change (carbon neutrality)
+6 Set learning objectives – action competency to deal with climate change
+7 Clarify performance expectation – varied strategies to improve students’ action 
+competency
+8 Set contents of the topics
+– ACT NOW! Campaign, choose one rule to follow 
+daily
+  carbon neutrality, the definition of climate change, 
+and more
+9 Organize contents – Introduction - Development - Summary
+10 Select STEAM contents – NT2050 Green Center ACT NOW!
+Implementation 11 Implement the STEAM program – Implement a total of 8 class periods
+Evaluation 12 Evaluate the STEAM program – Administer tests and in-depth interview
+13 Revise and finalize the program – Revise and improve the program
+[PAGE 5]
+237
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+Table 2
+Overview of the Project-Based Club Program in Climate Change to Develop Action 
+Competency
+Step Topics Activities of Teaching and Learning
+Introduction 
+to Problem 
+Contexts
+1 Understand climate 
+change 
+– Discuss examples of climate change experienced near
+– Changes in suitable areas for apple cultivation
+– Examine concepts and causes of climate change
+2 Understand carbon 
+neutrality
+– Investigate NET ZERO carbon neutrality
+– Do the board game of carbon footprint, 
+– Share opinions about carbon neutrality
+Creative 
+Design
+3 Global efforts on 
+climate change
+– Investigate global efforts on climate change
+– Share opinions about individual efforts on climate change
+– Make a picket to promote actions to deal with climate change 
+4
+Individual efforts 
+and actions on 
+climate change
+– Introduce ACT NOW! by UN
+– Interpret 10 living rules in English into Korean
+– Each student selects one rule out of 10 living rules
+– Plan how to act accordingly, and take into action 
+5 Practice ACT 
+NOW!
+– ACT NOW! Among the rules, practice SPEAK UP! 
+– Explain climate change and picket at the Apple Festival
+– Summarize results of participation in the Apple Festival
+Emotional 
+Experiences
+6 Find ACT NOW 
+from neighborhood
+– Understand the elements of producing a newspaper in English
+– Introduce a project to make ECO-TIMES newspaper in English 
+– Group as teams to play different roles
+7 The ACT NOW  
+what I found
+– Present and share what each team developed 
+– Design the layout of articles and photos 
+– Produce articles in English
+8 Produce 
+ECO-TIMES
+– Finalize and present the ECO-TIMES newspapers
+– Publicize the newspapers within and out of schools via SNS
+– Write the report about the program
+The project-based club program consists of three steps (see Table 2). The first step 
+is about introduction to the contextual background of problem situations and the causes 
+and effects of climate change are presented with two lesson themes. The second step is 
+about creative design to explore climate change problem situations. In the second step, 
+three themes are presented. The third step includes the development of action plans to 
+implement solutions. It is structured so that people can plan and participate in social 
+practices to deal with climate change issues through emotional experiences.
+This project-based club program maintains the overall framework according 
+to teaching and learning directions for the school club programs recommended by 
+the Ministry of Education (2022) but allows students to choose on the operation and 
+direction of detailed activities.
+[PAGE 6]
+238
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+Data Collection and Analysis
+ 
+ Data were collected in three ways. First, Teacher K administered the pre and post-
+tests about students’ understanding of knowledge of climate change. The data provided 
+changes before and after the program. Second, Teacher K took the observation journal 
+during the program. Teacher K observed each student’s distinct behaviors, participation, 
+and interaction among peers and recorded them in the observation journal. Through the 
+observation journal, individual students’ thoughts and conceptual changes for each class 
+activity were examined, and how and how much they contributed to the production of 
+activity outputs were confirmed. 
+After all activities were completed, the researcher conducted in-depth interviews 
+with participants about climate change focusing on seven perspectives, 1) climate 
+change-related issues, 2) timeliness of climate change, 3) ability to reflect, 4) integrated 
+thinking, 5) communication ability, 6) decision-making ability, and 7) willingness to take 
+into action. In-depth interviews were conducted about 20-30 minutes individually with 
+seven out of ten students who participated in all activities of the program. Seven students 
+interviewed are four 8th graders (A3, A4, A5, and A6) and three 9th graders (A7, A8, 
+and A10). While participating in all processes of the project activities, these students are 
+well aware of the intentions and themes of each stage of the program. Their thoughts and 
+opinions were well reflected in their project outputs.
+The entire process of the interview was recorded, and it was converted into text 
+using a recording management service, using artificial intelligence voice recognition 
+technology, and errors were corrected by confirming it with the actual voice. In-depth 
+data were analyzed in relation to how the project-based club program influenced students’ 
+changes to deal with climate change and the results were drawn.
+Research Results
+Knowledge Related to Climate Change
+Knowledge related to climate change is about climate change itself, such as 
+the main causes of climate change (natural and artificial) and various consequences of 
+climate change (social, environmental, economic, etc.), and knowledge of how to deal 
+with climate change. Students answered about what climate change is before starting the 
+project-based club program as a pre-test. Most students did not recognize what climate 
+change meant as they described it vaguely. They answered the question with short 
+answers such as garbage, air conditioners, global warming, storms, showers, and so on. 
+The results from interviews after the program with students are as follows.
+Teacher K: Did you learn anything new about climate change or carbon neutrality through the 
+club activities?
+Student 7: Before the club activities, I did not take climate change seriously, but after the club 
+activities, I became to know that climate change is serious.
+Student 4: While studying and working on climate change and carbon neutrality, I realized that 
+climate change requires more attention from us than I originally knew and that we can 
+solve it only when we take action.
+[PAGE 7]
+239
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+Student 8: Originally, I did not know about carbon neutrality, but through this club activity, I 
+learned about carbon neutrality itself, and now I know that carbon neutrality is important 
+for us to prevent climate change.
+After the program, students were able to elaborate on their knowledge about 
+climate change. Student A7 replied that he learned how serious climate change can be 
+while participating in club activities. Student A4 also replied that the climate change 
+problem could be solved when the members of society showed concern and willingness 
+to take action. Through these answers, it was confirmed that their prior knowledge was 
+improved. In addition, student A8 said that he was able to obtain a clear concept of 
+carbon neutrality, which was very vaguely conceptualized before the program. 
+Sensitivities to Climate Change
+Sensitivity to climate change implies that individuals recognize the values of the 
+natural environment and the earth system, respond sensitively to climate change, and 
+have a concern about targets (people, environment, and society) damaged by climate 
+change. It also implies that individuals understand targets and feel empathy for them. 
+When students were asked about how climate change affects them, their answers 
+appeared as ‘food becomes scarce, ‘arctic glaciers are melting’, and ‘four seasons are 
+disappearing.’ It was revealed that students perceive climate change as a problem in 
+general but not directly influencing on their daily lives. Some students’ sensitivities 
+about climate change drawn from interviews are as follows.
+Teacher K: How did you feel when you discussed and predicted drastic changes in locations 
+suitable for growing apples? 
+Student A7: I felt sad when I predicted that my parents are no longer able to grow apples after just 
+a few years. The sad feelings remain in my mind. 
+Student A4: Looking at the map to show suitable locations for growing six major fruits, there 
+are fruits that I can’t eat any more after a little while. Now that I feel that these things 
+are no one else's business, they are coming soon to me as well. I have been able to act 
+with awareness as much as possible, and I have tried to make people aware of this fact by 
+addressing people at the Apple Festival. I tried to tell the truth.
+Student A6: It helped me to know how much damage climate change is doing to our daily lives. I 
+think these activities have helped raise awareness about climate change.
+Shin and Shin (2021) argue that developing sensitivity to the environment is the 
+beginning of change, and the first step in environmental education is to start by knowing 
+that one is related to the environment. For this, it was said that it was necessary to enhance 
+the sensitivity to accept the change in the environment as one’s own. When environmental 
+ecological sensitivity is the basis, we can respond sensitively to changes in the natural 
+environment, and we can think about the seriousness of climate and environmental 
+problems. The increase in sensitivity to climate change through this process would have 
+been the basic driving force to lead the cultivation of action competency in dealing with 
+climate change.
+[PAGE 8]
+240
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+Reflections on Climate Change Activities
+Reflecting on climate change can be an important first step towards taking 
+action to address the issues. Reflection is a process of thinking about and evaluating 
+experiences, events, or information in order to gain a deeper understanding or insight. 
+For the question, ‘Have you ever done anything that worsens climate change and what 
+have you done?’ in the pre-test, students answered ‘no’ or with simple words such as ‘just 
+throwing garbage,’ or ‘leaving food behind.’ However, their levels of ability to reflect on 
+climate change after the program became articulated. Students’ changes in reflections on 
+climate change drawn from the interview after the program are as follows.  
+Teacher K: You said that you learned about environmental activist Greta Thunberg through the 
+club activities. What kind of person do you think this person is?
+Student A5: I think it’s great that Greta Thunberg walked the path of an environmental activist at 
+such a young age. And if I get a chance, I want to be an environmental activist like Greta 
+Thunberg.
+Teacher K: What kind of behavior did you change through the campaign and if you do another 
+campaign, what kind of campaign would you like to try?
+Student A8: I learned about various alternative energies to reduce energy. I want to do a picketing 
+activity with the theme of using alternative energies in the city. I will do this at the busiest 
+spots where many people come and go.
+It was confirmed that student A5 learned about behaviors of teenagers in responding 
+to climate change through the case of environmental activist Greta Thunberg. Even 
+further he explored careers related to the environment. He seemed to be motivated by 
+knowing an example of the participation of the peer group in climate change activities. In 
+the case of student A8, he responded that he was able to change individual behaviors by 
+conducting a climate change campaign. Through this, it was possible to see that students 
+were exploring their own ways for a sustainable future while looking back and observing 
+individual behaviors through club activities. 
+Communication Abilities
+In resolving climate change, communication ability is necessary to respect and 
+accept the opinions of various topics in society and to effectively communicate one’s 
+own and others' thoughts and feelings. Students’ changes in reflections on climate 
+change drawn from the interview after the program are as follows. From the pre-test data 
+in relation to this communication ability, most students were exposed to news related to 
+climate change mainly through media such as news (broadcasting, articles), YouTube, 
+and SNS. It was difficult to see cases where topics such as climate change were discussed 
+in everyday life outside of the media. After the program, students’ changes in climate 
+change at interviews were revealed as follows.
+Teacher K: It was said that taking into action in a group had a greater influence on climate change 
+than acting alone. What part do you think had an impact?
+Student A6: If I had done it alone, I wouldn't have actually practiced it, and even if I had done it, 
+I wouldn't have done it properly. But since I did it with my friends and high graders, I 
+[PAGE 9]
+241
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+became more confident and the range of activities I could do broadened and grew. I was 
+able to realize it better and I think it helped me when I decided to act on climate change.
+Teacher K: Did you meet people who are interested in the environment at the Apple Festival and 
+have your thoughts changed? Please tell me if there is.
+Student A6: At the apple festival, a grandmother came, and we were explaining about climate 
+change. Because I thought people were only thinking about it and not many people were 
+actually interested in it, but I was very surprised that there were people like that, contrary 
+to what I thought.
+At the interview, student A6 replied that he was able to gain confidence while 
+communicating with seniors and classmates, which he could not have done alone. It was 
+also confirmed that the scope of activities was expanded than he thought in the process 
+of collaboration. In particular, students carried out the project output to perfection while 
+actively sharing and communicating with each other through activities such as data 
+research, article coverage, and article composition for the production of ECO-TIMES. In 
+addition, through conversations with people who expressed interest in the environment 
+at the Apple Festival during the SPEAK UP activity, students improved their degree of 
+interest in climate change and were determined to change their behaviors. They improved 
+action competency with such thoughts.
+Decision-Making Abilities
+Decision-making ability refers to the ability to the skill of evaluating options and 
+selecting the best way to achieve a specific goal to adapt and mitigate climate change. 
+In this regard, the data from the pre-test, students responded that it was possible to solve 
+climate change, particularly, students mainly answered that ‘it can be solved in the 
+direction of changing individual behavior.’ After the participation in the club program, 
+students’ responses at the interview are as follows.
+Teacher K: You said that the climate change problem should be solved globally, is there a reason 
+you think so? Then, please tell us what efforts can be made to solve this problem globally.
+Student A3: Since climate change is now a global issue, not just one region or one country, I 
+think we should do it together globally. In addition, in these days, the Internet media is 
+well developed, so it would be good to publicize it through the Internet media and act as a 
+stimulus to inform the seriousness of climate change.
+Teacher K: Shall we talk about how to promote carbon neutrality to those who have not yet 
+practiced it?
+Student A4: I would like to show people who are not practicing carbon neutrality a climate crisis-
+related video about what happens if they do not practice carbon neutrality, so that they 
+realize its seriousness.
+Student A3: I think I can play a role in promoting and informing people about ACT NOW’s living 
+rules on saving energy at home by writing an article or something like that on the Internet.
+Student A6: First of all, I think we should convey exactly what kind of damage has occurred due 
+to climate change. Because, honestly, I didn't think there would be such a big damage, 
+and thanks to the NT2050 activity. I have an idea to practice more carbon neutrality. In 
+particular, it would be nice to approach the younger generation through SNS.
+[PAGE 10]
+242
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+In the case of Student A3, it can be confirmed that he recognizes the climate 
+change problem as a global problem as well as an individual one. In order to solve this 
+problem, a decision should be made to use the Internet as a medium to share and inform 
+the seriousness of the climate change problem. It was also confirmed that the problem 
+of climate change is thought to be a problem that can be overcome with global efforts. 
+For the case of Student A4, he suggested using climate crisis-related videos as a way 
+to promote carbon neutrality. Moreover, Student A6 also suggested that clear facts be 
+conveyed about the damage caused by climate change. He was convinced that the cases 
+of damage caused by climate change are bigger than he thought, and he learned about 
+this information through club activities and developed a willingness to share it with 
+teenagers of his age through SNS.
+Willingness to Act Climate Change Mitigation Activities
+The willingness to take action refers to a person investing time, money, and energy 
+in individual and social practices to solve climate change problems with critical thinking 
+about climate change. For the pre-test data in relation to this willingness to practice 
+mitigation activities, students were able to identify responses that actions were mostly 
+temporary, non-continuous, and cost-free. Their willingness to deal with climate change 
+problems was not so great before the program. After the program, students’ changes in 
+terms of willingness at the interview are as follows.
+Teacher K: Do you think individual action is important to respond to climate change? If so, can 
+you explain why?
+Student A4: The reason why I thought that individual action is important to respond to climate 
+change is that each of us must take action to change, not just one person acting. It’s not just 
+me, I think everyone should practice individually now.
+Student A5: In order to respond to climate change, I think it is important that if we start as 
+individuals, we can become the whole. What I did at school lunches was to eat but nothing 
+left or eat more vegetables to reduce the use of food resources. And what I felt through 
+what I practiced was that I felt proud that I had contributed a little more to this carbon-
+neutral challenge.
+Student A8: I think individual practice is important. The reason is that individual actions can save 
+the earth, and individuals can come together to change the world.
+Students responded positively that climate change can be solved through practice 
+in club activities. In particular, in the way that A4, A5, and A8 students all answered 
+that the theme of solving climate change is not only the individual but also the world, 
+it was confirmed that the scope of the theme to solve the problem of climate change is 
+expanding. Through this, it was confirmed that the club activities are effective for middle 
+school students in having the perception of building governance as an action competency 
+to solve the climate change problem.
+[PAGE 11]
+243
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+Discussion
+This study is to explore how a project-based club program influences middle 
+school students’ action competency in responding to climate change. For this purpose, 
+changes in students’ thoughts on action competency were analyzed through a pre-test 
+on their prior knowledge, a teacher’s observation journal recorded and collected during 
+teaching and learning activities, project outputs, and in-depth interviews at the end of the 
+project-based club program. The main research results in this study are summarised and 
+discussed as follows.
+Most students in this study were able to articulate concepts and knowledge 
+about climate change and carbon neutrality after participating in club activities. Their 
+sensitivity to climate change was improved and in turn, led to nurturing their action 
+competency to respond to climate change. Further, students were able to search for 
+their own way while observing and reflecting on individual behaviors. Students also 
+gained confidence by communicating with their seniors and classmates. The process 
+of these project-based club activities played a positive role in respecting and accepting 
+various opinions and effectively communicating thoughts and feelings with others in 
+resolving climate change. Such results were in line with the previous research in Korea 
+that students’ changes in awareness, sensitivity, and involvement in environmental issues 
+resulted from project-based environmental education (Hwang et al., 2014). 
+Students recognized the climate change problem not only as an individual but also 
+as a local and global problem. This was helpful in improving decision-making ability on 
+how our society should act in terms of adapting and mitigating climate change. Students 
+represented a willingness to accept that climate change can be solved through practice 
+through club activities. They further explained that it was not only individuals but also 
+the world that must solve the climate change problems. Similar results and discussions 
+about changes in behaviors also appeared in a study of community-based SSI programs 
+in domestic (Kim & Lee, 2017) and in a study about everyday activities abroad (Gould 
+et al., 2019).
+Conclusions and Implications
+This study attempts to approach the issue of climate change in an educational 
+way. It is necessary for students as future citizens to feel personal awareness of global 
+environmental issues and responsibility as global citizens. Action competency in climate 
+change implies an individual or organization’s ability to effectively take action to mitigate 
+the impacts of climate change. It involves not only having the knowledge and awareness 
+of the issue, but also the skills and resources necessary to create and implement solutions. 
+The study with the goal to nurture middle school students’ action competency in climate 
+change developed a project-based club program and implemented it for ten middle 
+school students. The students in this study were able effectively to make changes with 
+better understandings of knowledge in climate change and carbon neutrality, improved 
+sensitivities to climate changes, enhanced reflection, communication, and decision-
+making abilities and a strong willingness to take into action for solving climate change 
+problems. 
+[PAGE 12]
+244
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+Although the project-based club program in climate change developed in this 
+study could not be a model that represents all the project-based programs, but it can be a 
+guide for student-directed project programs, especially for developing action competency 
+in climate change. In order to promote project-based educational activities in climate 
+change education, teacher education and training programs should be continuously 
+provided. Furthermore, other effective teaching approaches in climate change education 
+should be developed and diffused.
+Declaration of Interest
+The authors declare no competing interest.
+References
+Baek, S., Shin, H., & Kim, C-J. (2021). A theoretical inquiry on the environmental 
+action competence. Korean Journal of Environmental Education, 34 (2), 136-
+150. https://doi.org/10.17965/kjee.2021.34.2.136  
+Blumenfeld, P. C., Soloway, E., Marx, R. W., Krajcik, J. S., Guzdial, M., & Palincsar, A. (1991). 
+Motivating project- based learning: Sustaining the doing, supporting the learning. Educational 
+Psychologist, 26(3 & 4), 369-398. https://doi.org/10.1080/00461520.1991.9653139 
+Busch, J., Engelmann, J., Cook-Patton, S., Griscom, B., Kroeger, T., Possingham, H., & 
+Shyamsundar, P. (2019). Potential for low-cost carbon dioxide removal through tropical 
+reforestation. Nature Climate Change, 9 , 463–466. https://www.nature.com/articles/
+s41558-019-0485-x 
+Gould, R. K., Ardoin, N. M., Thomsen, J. M., & Wyman, R. N. (2019). Exploring 
+connections between environmental learning and behavior through four 
+everyday-life case studies. Environmental Education Research, 25 (3), 314-340. 
+https://doi.org/10.1080/13504622.2018.1510903  
+Hwang, Y ., Choi, D-H., & Kim, C. (2014). The changes in high school students' creativity 
+through environmental project-based learning activities. Korean Journal of Environmental 
+Education, 27(4), 534- 548.
+IPCC. (2022). Climate change 2022: Mitigation of climate change. Working Group III Contribution 
+to the Sixth Assessment Report of the Intergovernmental Panel on Climate Change. https://
+www.ipcc.ch/report/ar6/wg3/downloads/report/IPCC_AR6_WGIII_FullReport.pdf 
+Jensen, B. B., & Schnack, K. (1997). The action competence approach in 
+environmental education. Environmental Education Research, 3 (2), 163-178. 
+https://doi.org/10.1080/1350462970030205  
+Jonassen, D. H. (1997). Instructional design models for well-structured and ill-structured problem-
+solving learning outcomes. Educational Technology Research and Development, 45 (1), 
+65-94. https://link.springer.com/content/pdf/10.1007/BF02299613.pdf 
+Kim, G., & Lee, H. (2017). Effects of community-based SSI programs on promoting middle 
+school students’ understanding of issues and character and values as citizens: Focused on 
+fine dust issues. Journal of the Korean Association for Science Education, 37(6), 911-920. 
+http://dx.doi.org/10.14697/jkase.2017.37.6.911 
+Kim, H-W. (2021). What the 2050 carbon neutrality scenario should contain. Labor N Issue, No. 
+2021-05. Korea Trade Union Central Research Institute.
+Kim, J-S. (2012). Theory in STEAM education. Yangseowon Publishing.
+Kronlid, D. (2009). Sigtuna think piece 2. Climate capabilities and climate change 
+education research. Southern  African Journal of Environmental Education, 26 , 
+27-37. https://www.ajol.info/index.php/sajee/article/view/122788  
+[PAGE 13]
+245
+Proceedings of the 5th International Baltic Symposium on Science and Technology Education, BalticSTE2023
+https://doi.org/10.33225/BalticSTE/2023.233
+Lee, Y-H., & Hwang, Y . (2019). Suggestion of RI (IR) - DCA project model and investigation about 
+teachers’ awareness about activating the student-centered project. Journal of Education & 
+Culture, 25(2), 175-202. https://doi.org/10.24159/joec.2019.25.2.175 
+Ministry of Education. (2015). General overview of the 2015 revised curriculum . Ministry of 
+Education Notice No. 2017-74 [Annex 1].
+Ministry of Education. (2022). General overview of the 2022 revised curriculum . Ministry of 
+Education Notice No. 2022-33 [Annex 1].
+Ojala, M. (2012). Regulating worry, promoting hope: How do children, adolescents, and young 
+adults cope with climate change? International Journal of Environmental and Science 
+Education, 7(4), 537-561. https://files.eric.ed.gov/fulltext/EJ997146.pdf 
+Sass, W., Boeve-de Pauw, J., Olsson, D., Gericke, N., De Maeyer, S., & Van Petegem, P. (2020). 
+Redefining action competence: The case of sustainable development. The Journal of 
+Environmental Education, 51(4), 292-305. https://doi.org/10.1080/00958964.2020.1765132 
+Shin, W., & Shin, D. (2021). A study on climate change attitudes, inquiry, and knowledge of 
+elementary and middle school students. Journal of Energy and Climate Change Education, 
+11(2), 95-107. https://doi.org/10.22368/ksecce.2021.11.2.95 
+Shin, Y-J. (2017). Analysis on contents related to appropriate technology, sustainable development, 
+climate change and energy of the 2015 revised national curriculum. Journal of Energy and 
+Climate Change Education, 7(1), 15-23. https://doi.org/10.22368/ksecce.2017.7.1.15 
+Shin, Y-J. (2023). Contents analysis of the 2022 revised curriculum related to the climate 
+change education. Journal of Energy and Climate Change Education, 13 (1), 23-34. 
+https://doi.org/10.22368/ksecce.2023.13.1.23  
+Stephens, A. K., & Ballard, H. L. (2021). Developing environmental action competence 
+in an urban high school agriculture and environmental program. In Research 
+approaches in urban agriculture and community contexts  (pp. 117-142). Springer. 
+https://doi.org/10.1007/978-3-030-70030-0_7  
+Vaughter, P. (2016). Climate change education: From critical thinking to critical action. Policy 
+Brief, 4, 1-4. http://collections.unu.edu/eserv/UNU:3372/UNUIAS_PB_4.pdf 
+Received: April 12, 2023 Accepted: May 16, 2023
+Cite as: Shin, Y .-J., Park, H., & Seo, H.-A. (2023). The influence of a project-
+based club program on middle school students’ action competency in responding to 
+climate change. In V . Lamanauskas (Ed.), Science and technology education: New 
+developments and Innovations. Proceedings of the 5th International Baltic Symposium 
+on Science and Technology Education (BalticSTE2023) (pp. 233-245). Scientia 
+Socialis Press. https://doi.org/10.33225/BalticSTE/2023.233

@@ -1,0 +1,19 @@
+{
+  "automatic_screening_decisions_created": false,
+  "calibration_selection_count": 125,
+  "candidate_false_negative_proxy": 0.03571428571428571,
+  "candidate_review_disagreement_rate": 0.535,
+  "decision_counts": {
+    "exclude": 164,
+    "include": 13,
+    "probable": 15,
+    "unresolved": 43804
+  },
+  "ledger_modified": false,
+  "pareto_front_count": 19786,
+  "reviewed_pair_count": 200,
+  "reviewed_unresolved_count": 8,
+  "schema": "sensiblaw.digital-esd-adaptive-refresh.v0_1",
+  "screening_record_count": 43996,
+  "unresolved_queue_count": 43796
+}
