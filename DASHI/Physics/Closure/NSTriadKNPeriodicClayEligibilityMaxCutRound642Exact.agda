@@ -34,6 +34,9 @@ import DASHI.Physics.Closure.NSTriadKNSubviscousAbsorptionToRetainedGapRound641E
 import DASHI.Physics.Closure.NSTriadKNCanonicalInitialCriticalCeilingRound644Exact as R644
 import DASHI.Physics.Closure.NSTriadKNStrictMarginProductionToPhysicalCriticalGapRound645Exact as R645
 import DASHI.Physics.Closure.NSTriadKNLiteralStrictMarginRadialSurplusRound646Exact as R646
+import DASHI.Physics.Closure.NSTriadKNRadialConservationToPhysicalLayerCakeRound647Exact as R647
+import DASHI.Physics.Closure.NSTriadKNLivePhysicalPacketStrictSurplusRound648Exact as R648
+import DASHI.Physics.Closure.NSTriadKNPeriodicStandardCompletionSourcesRound649Exact as R649
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as R104Simon
 import DASHI.Physics.Closure.NSTriadKNCriticalSimonUpgradeFollowsBarrierRound148Exact as R148
 import DASHI.Physics.Closure.NSTriadKNOrderedOrientedSelfExternalSpacetimeRound615Exact as R615
@@ -73,6 +76,18 @@ round642C2LiteralRadialSurplusNormalizationClosed =
 round642C2RemainingLeafCanBeOneRadialSurplusPayment : Bool
 round642C2RemainingLeafCanBeOneRadialSurplusPayment =
   R646.round646RemainingNonlinearLeafIsRadialSurplusPayment
+
+round642C2ConservationToPhysicalLayerCakeCompilerAvailable : Bool
+round642C2ConservationToPhysicalLayerCakeCompilerAvailable =
+  R647.round647CanonicalRadialTransferToPhysicalPacketLayerCakeClosed
+
+round642C2PhysicalPacketSurplusCompilerAvailable : Bool
+round642C2PhysicalPacketSurplusCompilerAvailable =
+  R648.round648PhysicalPacketPaymentCompilesToStrictMarginC2
+
+round642C2RemainingLeafCanBePhysicalPacketR406Payment : Bool
+round642C2RemainingLeafCanBePhysicalPacketR406Payment =
+  R648.round648RemainingQuantitativeLeafIsPacketSurplusR406
 
 ------------------------------------------------------------------------
 -- C3 / SAME OBJECT: canonical physical critical slice.
@@ -148,6 +163,10 @@ round642C5SubviscousAbsorptionMandatory : Bool
 round642C5SubviscousAbsorptionMandatory =
   R641.round641SubviscousAbsorptionMandatory
 
+round642C5IndependentIfC2UsesPositiveMargin : Bool
+round642C5IndependentIfC2UsesPositiveMargin =
+  R645.round645C5IndependentWhenC2ProvedWithPositiveMargin
+
 ------------------------------------------------------------------------
 -- C6 / ORDINARY TEMPORAL + ORDER RECEIPTS.
 ------------------------------------------------------------------------
@@ -160,6 +179,10 @@ round642C6CriticalIntegrationLinearityInstalled : Bool
 round642C6CriticalIntegrationLinearityInstalled =
   Energy.concreteIntegrationLinearityInstalled
 
+round642C6TypedStandardSourceBoundaryAvailable : Bool
+round642C6TypedStandardSourceBoundaryAvailable =
+  R649.round649C6StandardSourceInterfaceComplete
+
 ------------------------------------------------------------------------
 -- C7 / PERIODIC SOBOLEV-RELLICH-SIMON-WEAK-* COMPLETION.
 ------------------------------------------------------------------------
@@ -171,6 +194,14 @@ round642C7PhysicalCriticalSobolevSimonUpgradeClosed =
 round642C7AgdaAnalyticSourceInstancesInstalled : Bool
 round642C7AgdaAnalyticSourceInstancesInstalled =
   R148.round148AgdaAnalyticSourceInstancesInstalled
+
+round642C7TypedStandardSourceBoundaryAvailable : Bool
+round642C7TypedStandardSourceBoundaryAvailable =
+  R649.round649C7StandardSourceInterfaceComplete
+
+round642C4TypedStandardSourceBoundaryAvailable : Bool
+round642C4TypedStandardSourceBoundaryAvailable =
+  R649.round649C4StandardSourceInterfaceComplete
 
 ------------------------------------------------------------------------
 -- Canonical obligation count / producer demotion.
@@ -235,6 +266,21 @@ round642C2RemainingLeafCanBeOneRadialSurplusPaymentIsTrue :
   round642C2RemainingLeafCanBeOneRadialSurplusPayment ≡ true
 round642C2RemainingLeafCanBeOneRadialSurplusPaymentIsTrue =
   R646.round646RemainingNonlinearLeafIsRadialSurplusPaymentIsTrue
+
+round642C2ConservationToPhysicalLayerCakeCompilerAvailableIsTrue :
+  round642C2ConservationToPhysicalLayerCakeCompilerAvailable ≡ true
+round642C2ConservationToPhysicalLayerCakeCompilerAvailableIsTrue =
+  R647.round647CanonicalRadialTransferToPhysicalPacketLayerCakeClosedIsTrue
+
+round642C2PhysicalPacketSurplusCompilerAvailableIsTrue :
+  round642C2PhysicalPacketSurplusCompilerAvailable ≡ true
+round642C2PhysicalPacketSurplusCompilerAvailableIsTrue =
+  R648.round648PhysicalPacketPaymentCompilesToStrictMarginC2IsTrue
+
+round642C2RemainingLeafCanBePhysicalPacketR406PaymentIsTrue :
+  round642C2RemainingLeafCanBePhysicalPacketR406Payment ≡ true
+round642C2RemainingLeafCanBePhysicalPacketR406PaymentIsTrue =
+  R648.round648RemainingQuantitativeLeafIsPacketSurplusR406IsTrue
 
 round642C3CanonicalPhysicalSliceCompilerAvailableIsTrue :
   round642C3CanonicalPhysicalSliceCompilerAvailable ≡ true
@@ -314,6 +360,11 @@ round642C5SubviscousAbsorptionMandatoryIsFalse :
 round642C5SubviscousAbsorptionMandatoryIsFalse =
   R641.round641SubviscousAbsorptionMandatoryIsFalse
 
+round642C5IndependentIfC2UsesPositiveMarginIsFalse :
+  round642C5IndependentIfC2UsesPositiveMargin ≡ false
+round642C5IndependentIfC2UsesPositiveMarginIsFalse =
+  R645.round645C5IndependentWhenC2ProvedWithPositiveMarginIsFalse
+
 round642C6StandardScalarFTCInstalledIsFalse :
   round642C6StandardScalarFTCInstalled ≡ false
 round642C6StandardScalarFTCInstalledIsFalse = refl
@@ -323,6 +374,11 @@ round642C6CriticalIntegrationLinearityInstalledIsFalse :
 round642C6CriticalIntegrationLinearityInstalledIsFalse =
   Energy.concreteIntegrationLinearityInstalledIsFalse
 
+round642C6TypedStandardSourceBoundaryAvailableIsTrue :
+  round642C6TypedStandardSourceBoundaryAvailable ≡ true
+round642C6TypedStandardSourceBoundaryAvailableIsTrue =
+  R649.round649C6StandardSourceInterfaceCompleteIsTrue
+
 round642C7PhysicalCriticalSobolevSimonUpgradeClosedIsFalse :
   round642C7PhysicalCriticalSobolevSimonUpgradeClosed ≡ false
 round642C7PhysicalCriticalSobolevSimonUpgradeClosedIsFalse = refl
@@ -330,6 +386,16 @@ round642C7PhysicalCriticalSobolevSimonUpgradeClosedIsFalse = refl
 round642C7AgdaAnalyticSourceInstancesInstalledIsFalse :
   round642C7AgdaAnalyticSourceInstancesInstalled ≡ false
 round642C7AgdaAnalyticSourceInstancesInstalledIsFalse = refl
+
+round642C7TypedStandardSourceBoundaryAvailableIsTrue :
+  round642C7TypedStandardSourceBoundaryAvailable ≡ true
+round642C7TypedStandardSourceBoundaryAvailableIsTrue =
+  R649.round649C7StandardSourceInterfaceCompleteIsTrue
+
+round642C4TypedStandardSourceBoundaryAvailableIsTrue :
+  round642C4TypedStandardSourceBoundaryAvailable ≡ true
+round642C4TypedStandardSourceBoundaryAvailableIsTrue =
+  R649.round649C4StandardSourceInterfaceCompleteIsTrue
 
 round642OldPDFB1B2B3B4MandatoryIsFalse :
   round642OldPDFB1B2B3B4Mandatory ≡ false
