@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.BalabanClayT5PreferredSameFamilyMeasureRecoveryRo
 --
 --   * convergence of the selected diagonal measures to the selected target;
 --   * sequential closure of normalization/positivity/gauge invariance;
---   * continuum Euclidean/symmetry/tempered/regular/cluster properties;
+--   * continuum Euclidean/symmetry/tempered/regular properties;
 --   * meaning of reflected-Gram positivity as Schwinger reflection positivity.
 --
 -- P2 bounded expectation convergence and complete Gram convergence are already
@@ -162,8 +162,6 @@ selectedCore inputs = record
       Tempered inputs
   ; Selected.SelectedFiniteToContinuumOSCore.RegularCore =
       Regular inputs
-  ; Selected.SelectedFiniteToContinuumOS.Clustered =
-      Clustered inputs
   ; Selected.SelectedFiniteToContinuumOSCore.continuumNormalizedCore =
       normalizedClosed inputs
         (T5.diagonalMeasure
