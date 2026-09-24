@@ -154,7 +154,45 @@ reachableShannonLaw
     current
 
 ------------------------------------------------------------------------
--- The actual self-diagonal indexed root.
+-- Pre-fixed-point Cook root.
+--
+-- This requires ONLY an ordinary Cook formula.  A future intensional
+-- self-reference constructor may produce such a formula before its diagonal
+-- semantics are established.
+------------------------------------------------------------------------
+
+cookIndexedRestrictionRoot :
+  (formula : Cook.BooleanFormula) →
+  SAT.BooleanFormula
+    (Bridge.formulaVariableBound formula)
+cookIndexedRestrictionRoot =
+  Bridge.cookToIndexed
+
+cookRestrictionRootRoundTrip :
+  (formula : Cook.BooleanFormula) →
+  Bridge.indexedToCook
+    (cookIndexedRestrictionRoot formula)
+  ≡ formula
+cookRestrictionRootRoundTrip =
+  Bridge.indexedAfterCook
+
+cookRestrictionRootNode :
+  (formula : Cook.BooleanFormula) →
+  RestrictionNode
+    (cookIndexedRestrictionRoot formula)
+cookRestrictionRootNode formula =
+  rootNode
+    (cookIndexedRestrictionRoot formula)
+
+------------------------------------------------------------------------
+-- Post-fixed-point specialization.
+--
+-- IMPORTANT DEPENDENCY BOUNDARY:
+-- SelfDiagonalSemanticWitness already contains the decisive diagonal semantic
+-- equivalence and therefore already yields SATDecisionFailure.  The functions
+-- below are useful for diagnostics/transport after such a witness exists, but
+-- they MUST NOT be used as the input premise for constructing the P9 quotient.
+-- The live pre-fixed-point domain is cookIndexedRestrictionRoot above.
 ------------------------------------------------------------------------
 
 selfDiagonalIndexedRoot :
@@ -205,12 +243,14 @@ selfDiagonalRestrictionOracle satP =
 ------------------------------------------------------------------------
 -- Research consequence.
 --
--- P9's domain is now real:
+-- P9's restriction domain is now real WITHOUT assuming the fixed point:
 --
---   selfDiagonalIndexedRoot witness
+--   candidate Cook formula
+--      -> cookIndexedRestrictionRoot
 --      -> RestrictionDerivation descendants.
 --
--- A future quotient must classify ONLY these descendants (or an explicitly
--- chosen reordering/decomposition of them), and must derive its classes from
--- code(D)+self-instantiation structure without evaluating their SAT truth.
+-- A future quotient must classify only descendants of the formula produced by
+-- a genuine pre-fixed-point intensional constructor.  The specialization from
+-- SelfDiagonalSemanticWitness is downstream/diagnostic because that witness
+-- already proves a SAT decision failure.
 ------------------------------------------------------------------------
