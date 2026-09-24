@@ -329,6 +329,28 @@ mk =
     assert any(d.code == "TSAGDA062" for d in hits)
 
 
+
+def test_qualified_record_field_assignment_matches_local_field_name(tmp_path):
+    path = write_module(
+        tmp_path,
+        "QualifiedRecordField",
+        """module QualifiedRecordField where
+
+record R : Set₁ where
+  field
+    A : Set
+
+mk : R
+mk =
+  record
+    { R.A = Set
+    }
+""",
+    )
+
+    hits = Checker(tmp_path).check(path)
+    assert not any(d.code in {"TSAGDA060", "TSAGDA062"} for d in hits)
+
 def test_obvious_negative_occurrence_is_reported(tmp_path):
     path = write_module(
         tmp_path,
