@@ -107,14 +107,14 @@ initialCompilerCandidateIsInput :
   StatementCandidatePNF.candidate
     (compileInitialIntake statement originProof candidate parserReceipt)
   ≡ candidate
-initialCompilerCandidateIsInput = refl
+initialCompilerCandidateIsInput {originProof = refl} = refl
 
 reentryCompilerCandidateIsInput :
   ∀ {statement originProof candidate parserReceipt} →
   StatementCandidatePNF.candidate
     (compileResearchReentry statement originProof candidate parserReceipt)
   ≡ candidate
-reentryCompilerCandidateIsInput = refl
+reentryCompilerCandidateIsInput {originProof = refl} = refl
 
 data ParseReviewDisposition : Set where
   acceptedForAdmissionReview rejected abstained qualified :
