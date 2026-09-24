@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Dict, Iterable, List, Optional, Tuple
 
 from .ast_index import significant_tokens, typed_binders, descendants, first_descendant, applications, application_view, clause_explicit_argument_count, direct_binding_parameters, explicit_declaration_parameter_count, module_application_target_and_args
-from .shapes import shape_from_node, shape_from_tokens, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads, split_top_level, PiShape, HeadShape
+from .shapes import shape_from_node, shape_from_tokens, terminal_head, explicit_arity, equality_shape, split_top_level, PiShape, HeadShape
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
 
