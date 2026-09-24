@@ -599,6 +599,248 @@ def extended_diagnostics(checker, s, D):
                 out.append(_diag(D, code, f"bridge module exposes multiple qualified carrier/result families: {', '.join(rigid[:6])}", s, 1))
 
 
+    # Remaining bounded structural diagnostics and specific aliases.
+
+    # TSAGDA011: empty where/mutual blocks.
+    lines = source.splitlines()
+    for i, line in enumerate(lines, 1):
+        if re.match(r"^\s*(where|mutual)\s*$", line):
+            indent = len(line) - len(line.lstrip())
+            following = lines[i:i + 8]
+            has_child = any(x.strip() and (len(x) - len(x.lstrip())) > indent for x in following)
+            if not has_child:
+                out.append(_diag(D, "TSAGDA011", f"{line.strip()} block has no evident indented declaration", s, i))
+
+    # TSAGDA022/026: qualified alias mistakes and rename collisions.
+    known_aliases = set(imported)
+    local_prefixes = set(s.records) | set(data)
+    for m in re.finditer(rf"\b({_IDENT})\.({_IDENT})\b", clean):
+        alias, name = m.groups()
+        if alias not in known_aliases and alias not in local_prefixes and alias[:1].isupper():
+            line, col = _line_col(source, m.start())
+            out.append(_diag(D, "TSAGDA022", f"qualified prefix {alias} is not a known import alias or local namespace", s, line, col, severity="warning", confidence="medium"))
+    for line, is_open, module, alias, rest in import_lines:
+        rm = re.search(r"renaming\s*\((.*?)\)", rest)
+        if rm:
+            for old, new in re.findall(rf"({_IDENT})\s+to\s+({_IDENT})", rm.group(1)):
+                if new in s.signatures or new in s.records:
+                    out.append(_diag(D, "TSAGDA026", f"renaming {old} to {new} collides with a local declaration", s, line))
+
+    # TSAGDA041/043/044/110/111: simple telescope and lambda visibility.
+    for name, cs in clauses.items():
+        sig = s.signatures.get(name)
+        if not sig: continue
+        parts = _split_arrows(sig.type_text); want = _arity(sig.type_text)
+        implicit_names = set(re.findall(rf"\{{\s*({_IDENT})\s*:", sig.type_text))
+        explicit_names = set(re.findall(rf"\(\s*({_IDENT})\s*:", sig.type_text))
+        for line, lhs, rhs in cs:
+            got = _lhs_arity(lhs)
+            if got != want:
+                out.append(_diag(D, "TSAGDA110", f"{name} clause binder count {got} does not match explicit telescope arity {want}", s, line))
+            for nm in re.findall(r"\{\s*([A-Za-z_][A-Za-z0-9_']*)", lhs):
+                if nm in explicit_names:
+                    out.append(_diag(D, "TSAGDA043", f"explicit binder {nm} is matched with implicit visibility", s, line))
+                    out.append(_diag(D, "TSAGDA111", f"clause visibility for {nm} disagrees with signature", s, line))
+            lm = re.fullmatch(r"λ\s+(.+?)\s*→\s*.+", rhs)
+            if lm and want:
+                lam = len([x for x in lm.group(1).split() if not x.startswith("{")])
+                if lam != max(0, want - got):
+                    out.append(_diag(D, "TSAGDA044", f"RHS lambda exposes {lam} binders but {max(0, want-got)} explicit binders remain", s, line, severity="warning", confidence="medium"))
+            if rhs in s.signatures and _arity(s.signatures[rhs].type_text) > 0 and _terminal(sig.type_text) not in {None, "Set", "Set₁", "Set₂"}:
+                out.append(_diag(D, "TSAGDA041", f"RHS {rhs} is a known function left unapplied in a saturated result position", s, line, severity="warning", confidence="medium"))
+
+    # TSAGDA048: parameterized module application arity.
+    module_params = {}
+    for alias, mod in imported.items():
+        first = mod.source.splitlines()[0] if mod.source.splitlines() else ""
+        mm = re.match(rf"^\s*module\s+[A-Za-z0-9_.']+\s*(.*?)\s+where\s*$", first)
+        if mm:
+            module_params[alias] = len(re.findall(r"[\({]\s*[A-Za-z_][A-Za-z0-9_']*\s*:", mm.group(1)))
+    for i, line in enumerate(lines, 1):
+        mm = re.match(rf"^\s*module\s+{_IDENT}\s*=\s*({_IDENT})(?:\.{_IDENT})*\s*(.*)$", line)
+        if mm and mm.group(1) in module_params:
+            got = len([x for x in mm.group(2).split() if x and x != "_"])
+            want = module_params[mm.group(1)]
+            if got != want:
+                out.append(_diag(D, "TSAGDA048", f"module application supplies {got} visible arguments; imported module expects {want}", s, i))
+
+    # TSAGDA049/051/054: projection receiver/arity refinements.
+    for alias, mod in imported.items():
+        field_owner = {f: rn for rn, rec in mod.records.items() for f in rec.fields}
+        for fname, owner in field_owner.items():
+            for m in re.finditer(rf"\b{re.escape(alias)}\.{re.escape(fname)}\s+({_IDENT})", clean):
+                receiver = m.group(1); line, col = _line_col(source, m.start())
+                if receiver in mod.records or receiver in mod.signatures:
+                    out.append(_diag(D, "TSAGDA051", f"{alias}.{fname} receives known declaration/type name {receiver} where a {owner} value is expected", s, line, col, severity="warning", confidence="medium"))
+                sigs = [x for x in s.signatures.values() if x.line <= line]
+                if sigs:
+                    sig = max(sigs, key=lambda x: x.line)
+                    bm = re.search(rf"[({{]\s*{re.escape(receiver)}\s*:\s*(?:{re.escape(alias)}\.)?({_IDENT})", sig.type_text)
+                    if bm and bm.group(1) in mod.records and bm.group(1) != owner:
+                        out.append(_diag(D, "TSAGDA054", f"projection {fname} belongs to {owner}, but receiver {receiver} is declared as {bm.group(1)}", s, line, col))
+            # Existing 052/053 evidence is also the generic projection arity diagnostic.
+            for m in re.finditer(rf"\b{re.escape(alias)}\.{re.escape(fname)}\b", clean):
+                tail = clean[m.end():].split("\n", 1)[0]
+                if re.match(r"\s*(?:$|[=;,)→])", tail):
+                    line, col = _line_col(source, m.start())
+                    out.append(_diag(D, "TSAGDA049", f"projection {alias}.{fname} is under-applied", s, line, col))
+
+    # TSAGDA056: dependent field projection used bare in a signature despite a matching record binder.
+    for rname, rec in s.records.items():
+        dependent = {f for f, fi in rec.fields.items() if any(re.search(rf"\b{re.escape(other)}\b", fi.type_text) for other in rec.fields if other != f)}
+        if not dependent: continue
+        for name, sig in s.signatures.items():
+            if re.search(rf"\(\s*({_IDENT})\s*:\s*{re.escape(rname)}\b", sig.type_text):
+                for f in dependent:
+                    if re.search(rf"(?<!\.)\b{re.escape(f)}\b(?!\s+{_IDENT})", sig.type_text):
+                        out.append(_diag(D, "TSAGDA056", f"dependent projection {f} is used without an evident {rname} receiver", s, sig.line, severity="warning", confidence="medium"))
+
+    # TSAGDA063/065/066/067/068 and TSAGDA200: record target/value shape refinements.
+    record_ctor_owner = {}
+    for rname, rec in s.records.items():
+        block = lines[rec.line:rec.line + 12]
+        for x in block:
+            cm = re.match(rf"^\s+constructor\s+({_IDENT})", x)
+            if cm: record_ctor_owner[cm.group(1)] = rname
+    for def_name, line, body in _record_blocks(source):
+        sig = s.signatures.get(def_name)
+        if not sig: continue
+        target = _resolve_record(checker, s, sig.type_text)
+        if not target and _terminal(sig.type_text) in data:
+            out.append(_diag(D, "TSAGDA063", f"record expression is used where datatype {_terminal(sig.type_text)} is the declared result", s, line))
+        if not target: continue
+        for fname, rhs in _assignments(body):
+            field = target.fields.get(fname)
+            if not field: continue
+            if rhs == "Set" and _terminal(field.type_text) not in {"Set", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}:
+                out.append(_diag(D, "TSAGDA200", f"adapter field {fname} supplies Set where target expects witness/result {_terminal(field.type_text)}", s, line))
+            rm = re.match(rf"({_IDENT})\b", rhs)
+            if rm and rm.group(1) in record_ctor_owner and record_ctor_owner[rm.group(1)] != target.name:
+                out.append(_diag(D, "TSAGDA068", f"constructor {rm.group(1)} constructs {record_ctor_owner[rm.group(1)]}, not target record {target.name}", s, line))
+            pm = re.match(rf"({_IDENT})\s+({_IDENT})", rhs)
+            if pm:
+                proj, recv = pm.groups()
+                sig_b = re.search(rf"[({{]\s*{re.escape(recv)}\s*:\s*({_IDENT})", sig.type_text)
+                if sig_b and sig_b.group(1) in s.records and proj in s.records[sig_b.group(1)].fields:
+                    actual = s.records[sig_b.group(1)].fields[proj]
+                    et, at = _terminal(field.type_text), _terminal(actual.type_text)
+                    if et and at and et != at:
+                        code = "TSAGDA065" if et in {"Set","Set₁","Set₂","Setω","Prop","Prop₁"} or at in {"Set","Set₁","Set₂","Setω","Prop","Prop₁"} else "TSAGDA066"
+                        out.append(_diag(D, code, f"field {fname} expects {et}, source projection {proj} returns {at}", s, line))
+                        out.append(_diag(D, "TSAGDA067", f"source projection {proj} is structurally incompatible with target field {fname}", s, line))
+
+    # TSAGDA070-079 shallow head checks on simple RHSs/applications.
+    for name, cs in clauses.items():
+        sig = s.signatures.get(name)
+        if not sig: continue
+        expected = _terminal(sig.type_text)
+        for line, lhs, rhs in cs:
+            if rhs in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"} and expected not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}:
+                out.append(_diag(D, "TSAGDA078", f"sort {rhs} is used as the value of {name}, whose rigid result head is {expected}", s, line))
+                out.append(_diag(D, "TSAGDA070", f"type/sort supplied where a term of head {expected} is expected", s, line))
+            rm = re.fullmatch(rf"({_IDENT})(?:\s+.*)?", rhs)
+            if rm and rm.group(1) in ctors and expected and ctors[rm.group(1)].datatype != expected:
+                out.append(_diag(D, "TSAGDA072", f"{name} returns constructor {rm.group(1)} of {ctors[rm.group(1)].datatype}, not declared head {expected}", s, line))
+                out.append(_diag(D, "TSAGDA075", f"constructor {rm.group(1)} belongs to wrong datatype for {name}", s, line))
+            call = re.match(rf"({_IDENT})\s+({_IDENT})$", rhs)
+            if call and call.group(1) in s.signatures and call.group(2) in ctors:
+                fdom = _split_arrows(s.signatures[call.group(1)].type_text)[0]
+                expected_dt = next((d for d in data if re.search(rf"\b{re.escape(d)}\b", fdom)), None)
+                actual_dt = ctors[call.group(2)].datatype
+                if expected_dt and expected_dt != actual_dt:
+                    out.append(_diag(D, "TSAGDA073", f"argument {call.group(2)} has datatype {actual_dt}, but {call.group(1)} expects {expected_dt}", s, line))
+            if re.match(r"^\d+$", rhs) and expected in {"Bool","String","Char"}:
+                out.append(_diag(D, "TSAGDA074", f"numeric literal is incompatible with rigid result head {expected}", s, line))
+            call0 = re.match(rf"({_IDENT})\s+.+", rhs)
+            if call0 and call0.group(1) in s.signatures and _arity(s.signatures[call0.group(1)].type_text) == 0:
+                out.append(_diag(D, "TSAGDA079", f"known non-function {call0.group(1)} is applied as a function", s, line))
+    # Known functions occurring as bare type heads.
+    for name, sig in s.signatures.items():
+        for fn, fsig in s.signatures.items():
+            if fn == name or _arity(fsig.type_text) == 0: continue
+            if re.search(rf"(?:^|→|\()\s*{re.escape(fn)}\s*(?:→|\)|$)", sig.type_text):
+                out.append(_diag(D, "TSAGDA076", f"known function {fn} is used as a type without enough application", s, sig.line, severity="warning", confidence="medium"))
+
+    # TSAGDA080/083/084/086: bounded pattern hygiene.
+    for name, cs in clauses.items():
+        sig = s.signatures.get(name)
+        for line, lhs, rhs in cs:
+            for pm in re.finditer(r"\(\s*([A-Z][A-Za-z0-9_']*)", lhs):
+                token = pm.group(1)
+                if token not in ctors and token not in data and token not in s.records:
+                    out.append(_diag(D, "TSAGDA080", f"pattern references unknown constructor-like name {token}", s, line, severity="warning", confidence="medium"))
+            toks = re.findall(rf"\b({_IDENT})\b", lhs)
+            simple = [x for x in toks if x != name and x not in ctors and x not in data and x not in s.records]
+            for b in set(simple):
+                if simple.count(b) > 1:
+                    out.append(_diag(D, "TSAGDA083", f"linear pattern binder {b} appears more than once", s, line, severity="warning", confidence="medium"))
+            for dm in re.finditer(rf"\.({_IDENT})", lhs):
+                nm = dm.group(1)
+                if nm not in toks:
+                    out.append(_diag(D, "TSAGDA084", f"inaccessible pattern .{nm} has no evident local binder", s, line, severity="warning", confidence="medium"))
+            if "λ ()" in rhs and sig:
+                domains = _split_arrows(sig.type_text)
+                inhabited = next((d for d in data.values() if d.constructors and any(re.search(rf"\b{re.escape(d.name)}\b", dom) for dom in domains[:-1])), None)
+                if inhabited:
+                    out.append(_diag(D, "TSAGDA086", f"absurd lambda used while a visible domain {inhabited.name} is inhabited", s, line, severity="warning", confidence="medium"))
+
+    # TSAGDA104: equality proof used as whole RHS for a non-equality target.
+    for name, cs in clauses.items():
+        sig = s.signatures.get(name)
+        if not sig or "≡" in sig.type_text: continue
+        for line, lhs, rhs in cs:
+            if rhs in eq:
+                out.append(_diag(D, "TSAGDA104", f"equality proof {rhs} is used as the value of non-equality result {name}", s, line))
+
+    # TSAGDA113/114/115: bounded clause/scope/signature checks.
+    sig_occ = {}
+    for i, line in enumerate(lines, 1):
+        m = re.match(rf"^({_IDENT})\s*:\s*(.*)$", line)
+        if m: sig_occ.setdefault(m.group(1), []).append((i, m.group(2).strip()))
+    for name, occ in sig_occ.items():
+        if len({t for _, t in occ}) > 1:
+            out.append(_diag(D, "TSAGDA115", f"{name} has multiple incompatible top-level signatures", s, occ[-1][0]))
+    for name, cs in clauses.items():
+        sig = s.signatures.get(name)
+        if not sig: continue
+        expected = _terminal(sig.type_text)
+        for line, lhs, rhs in cs:
+            rm = re.match(rf"({_IDENT})\b", rhs)
+            if rm and rm.group(1) in ctors and expected and ctors[rm.group(1)].datatype != expected:
+                out.append(_diag(D, "TSAGDA114", f"clause result constructor head disagrees with declared result head {expected}", s, line))
+
+    # TSAGDA123: a Set-valued field whose written codomain is a known term declaration.
+    known_terms = set(clauses) | set(ctors)
+    for rname, rec in s.records.items():
+        for fname, fi in rec.fields.items():
+            head = _terminal(fi.type_text)
+            if head in known_terms and head not in data and head not in s.records:
+                out.append(_diag(D, "TSAGDA123", f"projection {rname}.{fname} has known term {head} in type position", s, fi.line))
+
+    # TSAGDA154: ambiguous opened mixfix/operator.
+    for n, mods in visible.items():
+        if "_" in n and len(set(mods)) > 1:
+            out.append(_diag(D, "TSAGDA154", f"operator {n} is provided by multiple open imports", s, 1, severity="warning", confidence="medium"))
+
+    # TSAGDA171/175 aliases for high-value metavariable classes.
+    for d in list(out):
+        if d.code == "TSAGDA002":
+            out.append(_diag(D, "TSAGDA171", d.message, s, d.line, d.column, d.hint))
+        if d.code == "TSAGDA012":
+            out.append(_diag(D, "TSAGDA175", d.message, s, d.line, d.column, d.hint))
+
+    # TSAGDA207: explicit forward/backward bidi endpoints should reverse.
+    if "Bidi" in s.module_name:
+        forward = next((sig for n, sig in s.signatures.items() if re.search(r"(forward|toTarget|encode)", n, re.I)), None)
+        backward = next((sig for n, sig in s.signatures.items() if re.search(r"(backward|toSource|decode|inverse)", n, re.I)), None)
+        if forward and backward:
+            fp = _split_arrows(forward.type_text); bp = _split_arrows(backward.type_text)
+            if len(fp) >= 2 and len(bp) >= 2:
+                fa, fb, ba, bb = _terminal(fp[0]), _terminal(fp[-1]), _terminal(bp[0]), _terminal(bp[-1])
+                if all((fa, fb, ba, bb)) and (fa != bb or fb != ba):
+                    out.append(_diag(D, "TSAGDA207", f"bidi forward/backward outer heads are not reversed: {fa}->{fb} versus {ba}->{bb}", s, min(forward.line, backward.line), severity="warning", confidence="medium"))
+
+
     return out
 
 def api_snapshot(checker):
