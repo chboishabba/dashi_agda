@@ -65,6 +65,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanYM4FiniteModeBetaLowerRemainderExact as Beta
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelQuarticBetaAdapterExact as Five
 import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCancellationToFourthOrderExact as Taylor
+import DASHI.Physics.YangMills.BalabanYM4FiveChannelTaylorCauchyClosureExact as TaylorCauchy
+import DASHI.Physics.YangMills.BalabanYM4FiveChannelFourthOrderFactorizationExact as Fourth
 import DASHI.Physics.YangMills.BalabanBetaHistoryLocalizedInfluenceExact as History
 import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.BalabanCMP109ReducedMarginSourceCutsetExact as Reduced
@@ -83,6 +85,24 @@ record A1FiveChannelQuarticProducer (Cell : Set) : Set₁ where
     couplingBelowGamma : Five.coupling dataSet ≤ gamma
 
 open A1FiveChannelQuarticProducer public
+
+a1FiveChannelFromTaylorCauchy :
+  ∀ {Cell} →
+  (source : TaylorCauchy.FiveChannelTaylorCauchyData Cell) →
+  (gamma : ℚ) →
+  0ℚ ≤ Taylor.coupling (TaylorCauchy.taylor source) →
+  0ℚ ≤ gamma →
+  Taylor.coupling (TaylorCauchy.taylor source) ≤ gamma →
+  A1FiveChannelQuarticProducer Cell
+a1FiveChannelFromTaylorCauchy source gamma couplingNN gammaNN couplingBelow = record
+  { A1FiveChannelQuarticProducer.dataSet =
+      Fourth.asFiveChannelQuarticBetaData
+        (TaylorCauchy.asFourthOrderFactorizedFiveChannelData source)
+  ; A1FiveChannelQuarticProducer.gamma = gamma
+  ; A1FiveChannelQuarticProducer.couplingNonnegative = couplingNN
+  ; A1FiveChannelQuarticProducer.gammaNonnegative = gammaNN
+  ; A1FiveChannelQuarticProducer.couplingBelowGamma = couplingBelow
+  }
 
 fiveChannelInteractionCoefficient :
   ∀ {Cell} → A1FiveChannelQuarticProducer Cell → ℚ
@@ -166,9 +186,25 @@ cmp109LiteralFiveChannelTaylorInstantiationLevel : ProofLevel
 cmp109LiteralFiveChannelTaylorInstantiationLevel =
   Taylor.physicalFiveChannelTaylorExpansionLevel
 
-cmp109LiteralFiveChannelQuotientMajorantLevel : ProofLevel
-cmp109LiteralFiveChannelQuotientMajorantLevel =
-  Taylor.physicalFiveChannelFourthOrderQuotientMajorantLevel
+-- The direct quotient-majorant leaf has been discharged by the Taylor+Cauchy
+-- theorem.  Physical work now stops at the source Cauchy coefficient estimate,
+-- literal series representation/convergence, and the already-named Taylor
+-- expansion/cancellation data.
+cmp109FiveChannelDirectQuotientMajorantCompilerLevel : ProofLevel
+cmp109FiveChannelDirectQuotientMajorantCompilerLevel =
+  TaylorCauchy.fiveChannelTaylorCauchyClosureLevel
+
+cmp109LiteralFiveChannelCauchyCoefficientEstimateLevel : ProofLevel
+cmp109LiteralFiveChannelCauchyCoefficientEstimateLevel =
+  TaylorCauchy.literalFiveChannelCauchyCoefficientEstimateLevel
+
+cmp109LiteralFiveChannelSeriesRepresentationLevel : ProofLevel
+cmp109LiteralFiveChannelSeriesRepresentationLevel =
+  TaylorCauchy.literalFiveChannelTaylorSeriesRepresentationLevel
+
+cmp109LiteralFiveChannelSeriesConvergenceLevel : ProofLevel
+cmp109LiteralFiveChannelSeriesConvergenceLevel =
+  TaylorCauchy.literalFiveChannelSeriesConvergenceLevel
 
 cmp109LiteralIrrelevantMemoryInfluenceLevel : ProofLevel
 cmp109LiteralIrrelevantMemoryInfluenceLevel =

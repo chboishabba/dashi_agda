@@ -1,0 +1,33 @@
+module DASHI.Physics.YangMills.BalabanCMP119Round214BackedPhysicalEffectiveActionValidation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP119Round214BackedPhysicalEffectiveActionExact as R
+
+round214BackedActionEvaluationCompilerOwned :
+  R.round214BackedActionEvaluationCompilerLevel ≡ machineChecked
+round214BackedActionEvaluationCompilerOwned = refl
+
+round214BackedGeneratedActionCompilerOwned :
+  R.round214BackedPhysicalEffectiveActionCompilerLevel ≡ machineChecked
+round214BackedGeneratedActionCompilerOwned = refl
+
+selectedRound214ActionGeneratedRemainsPhysical :
+  R.literalRound214SelectedActionIsGeneratedPhysicalActionLevel ≡ conditional
+selectedRound214ActionGeneratedRemainsPhysical = refl
+
+operationActionRound214ExponentialRemainsPhysical :
+  R.literalOperationActionUsesRound214ExponentialLevel ≡ conditional
+operationActionRound214ExponentialRemainsPhysical = refl
+
+slowFieldBackgroundAdapterRemainsPhysical :
+  R.slowFieldToRound214BackgroundLevel ≡ conditional
+slowFieldBackgroundAdapterRemainsPhysical = refl
+
+realNegativeLogBackendRemainsPhysical :
+  R.physicalRealNegativeLogExponentialBackendLevel ≡ conditional
+realNegativeLogBackendRemainsPhysical = refl
+
+positiveSupportRemainsPhysical :
+  R.literalRound214BackedPositiveSupportLevel ≡ conditional
+positiveSupportRemainsPhysical = refl
