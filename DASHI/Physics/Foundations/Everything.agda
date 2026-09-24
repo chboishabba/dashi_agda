@@ -205,3 +205,9 @@ import DASHI.Physics.Foundations.CMP119ActiveRawSymmetricTangentSpecializationVa
 
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerValidation
+
+import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVSystemExact
+
+import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVExteriorMassCollisionExact
+
+import DASHI.Physics.Foundations.GRQFTPositiveDensityExteriorRepulsionNoGoExact
