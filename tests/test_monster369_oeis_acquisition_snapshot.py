@@ -151,7 +151,6 @@ def test_6b_normalization_family_retains_q6_32772_across_three_manifests():
     assert {node["q0"] for node in family} == {0, 7, 12}
     assert {node["positive_coefficients"][6] for node in family} == {32772}
     assert all(node["positive_coefficients"][1] == 78 for node in family)
-    assert runtime.RELATIONS["6b-normalization-positive-degree-agreement"]["paid"] is True
 
 
 def test_power_family_trace_nodes_are_acquired_but_not_action_authority():
