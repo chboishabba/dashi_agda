@@ -161,7 +161,7 @@ articleQidDoesNotPayPropertyWeld : ArticleQidPaysPropertyWeld → ⊥
 articleQidDoesNotPayPropertyWeld ()
 
 articleTextDoesNotRewriteOtherLanguage : ArticleTextMayRewriteOtherLanguageManifestation → ⊥
-articleTextDoesNotRewriteOtherLanguageManifestation ()
+articleTextDoesNotRewriteOtherLanguage ()
 
 natParsingDoesNotApproveMigration : NatParsedSourceUnitMeansMigrationApproved → ⊥
 natParsingDoesNotApproveMigration ()
