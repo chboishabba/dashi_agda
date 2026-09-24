@@ -26,6 +26,7 @@ data SourceRole : Set where
   sharedConstraintEncoding : SourceRole
   probabilisticallyCheckableProofs : SourceRole
   boundedSelfReference : SourceRole
+  booleanSwitchingAlgebra : SourceRole
   diagonalCardinality : SourceRole
 
 data IdentifierStatus : Set where
@@ -47,6 +48,18 @@ record ComplexitySource : Set where
     importedBoundary : String
 
 open ComplexitySource public
+
+shannon1938 : ComplexitySource
+shannon1938 =
+  complexitySource
+    "Claude E. Shannon"
+    "A Symbolic Analysis of Relay and Switching Circuits"
+    1938
+    "Transactions of the American Institute of Electrical Engineers 57(12), 713--723"
+    "doi:10.1109/T-AIEE.1938.5057767"
+    booleanSwitchingAlgebra
+    verifiedDOI
+    "Calibrates Boolean switching-function decomposition and equivalent-circuit reasoning only.  The DASHI SAT Shannon-consistency theorem additionally uses exact SAT restriction semantics; no complexity lower bound is imported."
 
 cook1971 : ComplexitySource
 cook1971 =
