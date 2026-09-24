@@ -4,7 +4,7 @@ import re
 from typing import Dict, Iterable, List, Optional, Tuple
 
 from .ast_index import significant_tokens, typed_binders, descendants, first_descendant, applications, application_view, clause_explicit_argument_count
-from .shapes import shape_from_node, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads
+from .shapes import shape_from_node, terminal_head, explicit_arity, equality_shape, compatible_rigid_heads, PiShape, HeadShape
 
 _IDENT = r"[A-Za-z_][A-Za-z0-9_'\u2080-\u2089]*"
 
@@ -277,10 +277,13 @@ def extended_diagnostics(checker, s, D):
                         if old not in exports:
                             out.append(_diag(D, "TSAGDA025", f"renaming source {old} is not exported by {module}", s, line))
 
-    for m in re.finditer(rf"\b({_IDENT})\.({_IDENT})\b", clean):
-        alias, name = m.groups(); target = imported.get(alias)
+    for token in root_tokens:
+        if token.node_type != "qid" or "." not in token.text:
+            continue
+        alias, name = token.text.rsplit(".", 1)
+        target = imported.get(alias)
         if target and name not in target.signatures and name not in target.records and not any(name in r.fields for r in target.records.values()):
-            line, col = _line_col(source, m.start()); out.append(_diag(D, "TSAGDA021", f"{alias}.{name} is not exported by {target.module_name}", s, line, col))
+            out.append(_diag(D, "TSAGDA021", f"{alias}.{name} is not exported by {target.module_name}", s, token.line, token.column))
 
     for name, sig in s.ast.signatures.items():
         if sig.type_node is None:
@@ -370,27 +373,70 @@ def extended_diagnostics(checker, s, D):
                 if re.search(rf"\b{re.escape(dname)}\b\s*(?:→|->)", domain):
                     out.append(_diag(D, "TSAGDA130", f"{dname} occurs negatively in constructor {ctor.name}", s, ctor.line))
 
-    for name, cs in clauses.items():
-        sig = s.signatures.get(name)
-        if not sig: continue
-        catch = None
-        for line, lhs, rhs in cs:
-            for ctor_name, ctor in ctors.items():
-                pm = re.search(rf"\(\s*{re.escape(ctor_name)}\s+([^)]*)\)", lhs)
-                if pm and len(pm.group(1).split()) != ctor.arity:
-                    out.append(_diag(D, "TSAGDA082", f"constructor pattern {ctor_name} has {len(pm.group(1).split())} arguments; arity is {ctor.arity}", s, line))
-            if catch is not None: out.append(_diag(D, "TSAGDA088", f"clause follows visible catch-all at line {catch}", s, line)); break
-            if re.fullmatch(rf"{re.escape(name)}(?:\s+_)+", lhs): catch = line
-            ast_clause = next((item for item in s.ast.clauses.get(name, []) if item.line == line), None)
-            if ast_clause is not None and ast_clause.rhs_node is not None:
-                lhs_view = application_view(s.ast.source_bytes, ast_clause.lhs_node)
-                lhs_args = tuple(arg.text for arg in lhs_view.explicit_args) if lhs_view is not None else ()
-                for app in applications(s.ast.source_bytes, ast_clause.rhs_node):
+    # AST-backed constructor patterns, simple finite coverage and recursion.
+    for name, clause_items in s.ast.clauses.items():
+        signature = s.ast.signatures.get(name)
+        if signature is None or signature.type_node is None:
+            continue
+        signature_shape = shape_from_node(s.ast.source_bytes, signature.type_node)
+        expected_dtype = None
+        if isinstance(signature_shape, PiShape) and signature_shape.domains:
+            first_domain = signature_shape.domains[0].head
+            if isinstance(first_domain, HeadShape):
+                expected_dtype = first_domain.head.rsplit(".", 1)[-1]
+
+        catch_line = None
+        used_constructors = []
+        for clause in clause_items:
+            lhs_tokens = significant_tokens(s.ast.source_bytes, clause.lhs_node)
+            lhs_view = application_view(s.ast.source_bytes, clause.lhs_node)
+
+            # Constructor applications nested in patterns.
+            for app in applications(s.ast.source_bytes, clause.lhs_node):
+                ctor_name = app.head.rsplit(".", 1)[-1]
+                ctor = ctors.get(ctor_name)
+                if ctor is None:
+                    continue
+                used_constructors.append(ctor_name)
+                got = len(app.explicit_args)
+                if got != ctor.arity:
+                    out.append(_diag(D, "TSAGDA082", f"constructor pattern {ctor_name} has {got} arguments; arity is {ctor.arity}", s, clause.line))
+                if expected_dtype and ctor.datatype != expected_dtype:
+                    out.append(_diag(D, "TSAGDA081", f"pattern constructor {ctor_name} belongs to {ctor.datatype}, expected {expected_dtype}", s, clause.line))
+
+            # Catch-all after the function head: every visible explicit arg is _.
+            if catch_line is not None:
+                out.append(_diag(D, "TSAGDA088", f"clause follows visible catch-all at line {catch_line}", s, clause.line))
+                break
+            if lhs_view is not None and lhs_view.explicit_args and all(arg.text.strip() == "_" for arg in lhs_view.explicit_args):
+                catch_line = clause.line
+
+            # Obvious absurd pattern "()".
+            token_texts = [token.text for token in lhs_tokens]
+            if expected_dtype in data and data[expected_dtype].constructors:
+                for i in range(len(token_texts) - 1):
+                    if token_texts[i] == "(" and token_texts[i + 1] == ")":
+                        out.append(_diag(D, "TSAGDA085", f"absurd pattern used for visibly inhabited datatype {expected_dtype}", s, clause.line))
+                        break
+
+            # Direct identical recursive call.
+            if clause.rhs_node is not None and lhs_view is not None:
+                lhs_args = tuple(arg.text for arg in lhs_view.explicit_args)
+                for app in applications(s.ast.source_bytes, clause.rhs_node):
                     if app.head.rsplit(".", 1)[-1] != name:
                         continue
                     rhs_args = tuple(arg.text for arg in app.explicit_args[:len(lhs_args)])
                     if lhs_args and rhs_args == lhs_args:
-                        out.append(_diag(D, "TSAGDA140", f"{name} recursively calls itself with identical visible arguments", s, line, severity="warning", confidence="medium"))
+                        out.append(_diag(D, "TSAGDA140", f"{name} recursively calls itself with identical visible arguments", s, clause.line, severity="warning", confidence="medium"))
+
+        if expected_dtype in data:
+            dtype = data[expected_dtype]
+            if dtype.constructors and used_constructors and set(used_constructors) != set(dtype.constructors):
+                missing = sorted(set(dtype.constructors) - set(used_constructors))
+                if missing and catch_line is None:
+                    out.append(_diag(D, "TSAGDA087", f"simple finite coverage for {name} misses constructors: {', '.join(missing)}", s, clause_items[0].line))
+            if len(used_constructors) != len(set(used_constructors)):
+                out.append(_diag(D, "TSAGDA089", f"{name} has duplicate constructor branches in simple finite coverage", s, clause_items[0].line))
 
     eq_shapes = {}
     for name, signature in s.ast.signatures.items():
@@ -786,11 +832,12 @@ def extended_diagnostics(checker, s, D):
     # TSAGDA022/026: qualified alias mistakes and rename collisions.
     known_aliases = set(imported)
     local_prefixes = set(s.records) | set(data)
-    for m in re.finditer(rf"\b({_IDENT})\.({_IDENT})\b", clean):
-        alias, name = m.groups()
+    for token in root_tokens:
+        if token.node_type != "qid" or "." not in token.text:
+            continue
+        alias = token.text.split(".", 1)[0]
         if alias not in known_aliases and alias not in local_prefixes and alias[:1].isupper():
-            line, col = _line_col(source, m.start())
-            out.append(_diag(D, "TSAGDA022", f"qualified prefix {alias} is not a known import alias or local namespace", s, line, col, severity="warning", confidence="medium"))
+            out.append(_diag(D, "TSAGDA022", f"qualified prefix {alias} is not a known import alias or local namespace", s, token.line, token.column, severity="warning", confidence="medium"))
     for line, is_open, module, alias, directives in import_lines:
         for directive in directives:
             if directive.kind != "renaming":
@@ -937,28 +984,58 @@ def extended_diagnostics(checker, s, D):
             if re.search(rf"(?:^|→|\()\s*{re.escape(fn)}\s*(?:→|\)|$)", sig.type_text):
                 out.append(_diag(D, "TSAGDA076", f"known function {fn} is used as a type without enough application", s, sig.line, severity="warning", confidence="medium"))
 
-    # TSAGDA080/083/084/086: bounded pattern hygiene.
-    for name, cs in clauses.items():
-        sig = s.signatures.get(name)
-        for line, lhs, rhs in cs:
-            for pm in re.finditer(r"\(\s*([A-Z][A-Za-z0-9_']*)", lhs):
-                token = pm.group(1)
-                if token not in ctors and token not in data and token not in s.records:
-                    out.append(_diag(D, "TSAGDA080", f"pattern references unknown constructor-like name {token}", s, line, severity="warning", confidence="medium"))
-            toks = re.findall(rf"\b({_IDENT})\b", lhs)
-            simple = [x for x in toks if x != name and x not in ctors and x not in data and x not in s.records]
-            for b in set(simple):
-                if simple.count(b) > 1:
-                    out.append(_diag(D, "TSAGDA083", f"linear pattern binder {b} appears more than once", s, line, severity="warning", confidence="medium"))
-            for dm in re.finditer(rf"\.({_IDENT})", lhs):
-                nm = dm.group(1)
-                if nm not in toks:
-                    out.append(_diag(D, "TSAGDA084", f"inaccessible pattern .{nm} has no evident local binder", s, line, severity="warning", confidence="medium"))
-            if "λ ()" in rhs and sig:
-                domains = _split_arrows(sig.type_text)
-                inhabited = next((d for d in data.values() if d.constructors and any(re.search(rf"\b{re.escape(d.name)}\b", dom) for dom in domains[:-1])), None)
-                if inhabited:
-                    out.append(_diag(D, "TSAGDA086", f"absurd lambda used while a visible domain {inhabited.name} is inhabited", s, line, severity="warning", confidence="medium"))
+    # TSAGDA080/083/084/086: bounded AST pattern hygiene.
+    global_pattern_names = set(ctors) | set(data) | set(s.records)
+    for name, clause_items in s.ast.clauses.items():
+        signature = s.ast.signatures.get(name)
+        for clause in clause_items:
+            tokens = significant_tokens(s.ast.source_bytes, clause.lhs_node)
+            token_texts = [token.text for token in tokens]
+
+            # Unknown constructor-like qualified/unqualified heads in nested apps.
+            for app in applications(s.ast.source_bytes, clause.lhs_node):
+                short = app.head.rsplit(".", 1)[-1]
+                if short and short[:1].isupper() and short not in global_pattern_names:
+                    line = app.head_node.start_point[0] + 1
+                    col = app.head_node.start_point[1] + 1
+                    out.append(_diag(D, "TSAGDA080", f"pattern references unknown constructor-like name {app.head}", s, line, col, severity="warning", confidence="medium"))
+
+            # Inaccessible pattern token '.' followed by an identifier with no
+            # other occurrence in the same LHS is suspicious.
+            for i, token in enumerate(tokens[:-1]):
+                if token.text != ".":
+                    continue
+                target = tokens[i + 1]
+                occurrences = sum(1 for candidate in tokens if candidate.text == target.text)
+                if target.node_type in {"id", "qid"} and occurrences == 1:
+                    out.append(_diag(D, "TSAGDA084", f"inaccessible pattern .{target.text} has no evident local binder", s, target.line, target.column, severity="warning", confidence="medium"))
+
+            # Absurd lambda in RHS when any explicit signature domain has a
+            # locally known inhabited datatype head.
+            if clause.rhs_node is not None and signature is not None and signature.type_node is not None:
+                rhs_tokens = significant_tokens(s.ast.source_bytes, clause.rhs_node)
+                has_absurd_lambda = any(
+                    rhs_tokens[i].text in {"λ", "\\"}
+                    and i + 2 < len(rhs_tokens)
+                    and rhs_tokens[i + 1].text == "("
+                    and rhs_tokens[i + 2].text == ")"
+                    for i in range(len(rhs_tokens))
+                )
+                if has_absurd_lambda:
+                    shape = shape_from_node(s.ast.source_bytes, signature.type_node)
+                    if isinstance(shape, PiShape):
+                        inhabited = next(
+                            (
+                                domain.head.head.rsplit(".", 1)[-1]
+                                for domain in shape.domains
+                                if isinstance(domain.head, HeadShape)
+                                and domain.head.head.rsplit(".", 1)[-1] in data
+                                and data[domain.head.head.rsplit(".", 1)[-1]].constructors
+                            ),
+                            None,
+                        )
+                        if inhabited:
+                            out.append(_diag(D, "TSAGDA086", f"absurd lambda used while visible domain {inhabited} is inhabited", s, clause.line, severity="warning", confidence="medium"))
 
     # TSAGDA071: known term supplied in a type/sort-valued record field.
     known_term_heads = set(clauses) | set(ctors)
