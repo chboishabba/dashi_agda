@@ -34,6 +34,7 @@ open import Agda.Builtin.List using (List; []; _∷_; map)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -71,7 +72,7 @@ module Regrouping
     R38.foldPower globalOuterRow
 
   rowAtListedOutputIsGlobal :
-    (output : _) →
+    (output : Z3.FourierMode) →
     (beta : Physical.PhysicalTriadIncidence) →
     beta Cube.∈ E.fibre output →
     R546.spectatorRow E.commutatorPair beta (E.fibre output)
@@ -84,7 +85,7 @@ module Regrouping
         (Output.physicalOutputFiberSound member))
 
   allRowsAtOutputAreGlobalFold :
-    (output : _) →
+    (output : Z3.FourierMode) →
     (items : List Physical.PhysicalTriadIncidence) →
     ((beta : Physical.PhysicalTriadIncidence) →
       beta Cube.∈ items → beta Cube.∈ E.fibre output) →
@@ -100,7 +101,7 @@ module Regrouping
         (λ selected member → included selected (Cube.there member)))
 
   outputPairSumIsGlobalRowFold :
-    (output : _) →
+    (output : Z3.FourierMode) →
     E.outputPairIncidenceSum output
     ≡ foldGlobalOuterRows (E.fibre output)
   outputPairSumIsGlobalRowFold output =
@@ -112,7 +113,7 @@ module Regrouping
         (λ beta member → member))
 
   sumOutputPairsIsConcatGlobalRows :
-    (outputs : List _) →
+    (outputs : List Z3.FourierMode) →
     E.sumOutputPairIncidences outputs
     ≡ foldGlobalOuterRows
         (R39.concatOutputFibers E.cutoff outputs)
