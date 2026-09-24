@@ -28,7 +28,7 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1A1SourceCutRound473Exact as A1
 import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as A2
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as A3Source
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as Measure
-import DASHI.Physics.YangMills.YangMillsClayRepresentedA3Round480Exact as A3
+import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45Rep
 
@@ -61,7 +61,6 @@ data ResidualLeaf : Set where
   a3FiniteProjectiveCylinderPremeasure : ResidualLeaf
   a3ContinuityAtEmpty : ResidualLeaf
   a3CylinderExpectationIntegralIdentification : ResidualLeaf
-  a3RepresentedLiteralSemantics : ResidualLeaf
 
   -- A4/A5.
   a45QuantitativeMomentToFiniteOS05 : ResidualLeaf
@@ -115,9 +114,6 @@ leafLevel a3ContinuityAtEmpty =
   Measure.literalRound495ContinuityAtEmptyLevel
 leafLevel a3CylinderExpectationIntegralIdentification =
   Measure.literalRound495CylinderExpectationIdentificationLevel
-leafLevel a3RepresentedLiteralSemantics =
-  A3.literalRound480RepresentedContinuumSemanticsLevel
-
 leafLevel a45QuantitativeMomentToFiniteOS05 =
   A45.literalRound464QuantitativeMomentToOS05Level
 leafLevel a45RepresentedOSPredicateExtensionality =
@@ -170,7 +166,6 @@ residualLeaves =
   ∷ a3FiniteProjectiveCylinderPremeasure
   ∷ a3ContinuityAtEmpty
   ∷ a3CylinderExpectationIntegralIdentification
-  ∷ a3RepresentedLiteralSemantics
   ∷ a45QuantitativeMomentToFiniteOS05
   ∷ a45RepresentedOSPredicateExtensionality
   ∷ bWilsonTwoMarkExpansion
@@ -224,6 +219,10 @@ bSpectralTransferLevel =
 terminalRepresentationFirstCompilerLevel : ProofLevel
 terminalRepresentationFirstCompilerLevel =
   Terminal.round484RepresentedTerminalCompilerLevel
+
+representedA3SemanticCompilerLevel : ProofLevel
+representedA3SemanticCompilerLevel =
+  A3Direct.round497RepresentedSourceNativeA3CompilerLevel
 
 ------------------------------------------------------------------------
 -- Max-cut firewalls.
