@@ -52,6 +52,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredCovarianceFactorExact as Centered
+import DASHI.Physics.Closure.NSTriadKNFixedOutputViscousRateDifferenceFactorizationExact as Rate
 import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalCoherentCovarianceBonyLiveExact as Bony
 import DASHI.Physics.Closure.NSTriadKNSelfPairFixedResolventTrajectoryRound561Exact as R561
 import DASHI.Physics.Closure.NSTriadKNLiteralRHSPhysicalTrajectoryRound408Exact as R408
@@ -175,12 +176,12 @@ module LiveM2
 
   livePairDifferenceBelowM2 :
     (cutoff : Nat) (output : Z3.FourierMode) (time : Time) →
-    Pair.two * Sp.pairDifferenceWorkAt cutoff output time
+    Rate.two * Sp.pairDifferenceWorkAt cutoff output time
     ≤ nu * m2BudgetAt cutoff output time
   livePairDifferenceBelowM2 cutoff output time =
     subst
       (λ left →
-        Pair.two * left
+        Rate.two * left
         ≤ nu * m2BudgetAt cutoff output time)
       (sym (pairDifferenceSameObject cutoff output time))
       (PayAt.signedPairDifferenceBelowPhysicalM2 cutoff output time)
@@ -188,14 +189,14 @@ module LiveM2
   doubledResidualAt :
     Nat → Z3.FourierMode → Time → ℚ
   doubledResidualAt cutoff output time =
-    Pair.two *
+    Rate.two *
       ( Sp.rateSelfWorkAt cutoff output time
       + Sp.pairDifferenceWorkAt cutoff output time )
 
   selfRatePlusM2At :
     Nat → Z3.FourierMode → Time → ℚ
   selfRatePlusM2At cutoff output time =
-    Pair.two * Sp.rateSelfWorkAt cutoff output time
+    Rate.two * Sp.rateSelfWorkAt cutoff output time
       + nu * m2BudgetAt cutoff output time
 
   liveResidualBelowSelfRatePlusM2 :
@@ -207,8 +208,8 @@ module LiveM2
       expanded :
         doubledResidualAt cutoff output time
         ≡
-        Pair.two * Sp.rateSelfWorkAt cutoff output time
-          + Pair.two * Sp.pairDifferenceWorkAt cutoff output time
+        Rate.two * Sp.rateSelfWorkAt cutoff output time
+          + Rate.two * Sp.pairDifferenceWorkAt cutoff output time
       expanded =
         solve
           ( Sp.rateSelfWorkAt cutoff output time
@@ -216,8 +217,8 @@ module LiveM2
           ∷ [])
 
       bounded :
-        Pair.two * Sp.rateSelfWorkAt cutoff output time
-          + Pair.two * Sp.pairDifferenceWorkAt cutoff output time
+        Rate.two * Sp.rateSelfWorkAt cutoff output time
+          + Rate.two * Sp.pairDifferenceWorkAt cutoff output time
         ≤ selfRatePlusM2At cutoff output time
       bounded =
         ℚP.+-mono-≤
