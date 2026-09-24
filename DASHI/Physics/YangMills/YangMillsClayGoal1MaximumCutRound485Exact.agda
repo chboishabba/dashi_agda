@@ -21,6 +21,7 @@ import DASHI.Physics.YangMills.BalabanA2BetaMarkSourceCoordinateRound250Exact as
 import DASHI.Physics.YangMills.YangMillsClayGoal1SourceNativeContinuumRound457Exact as A3Source
 import DASHI.Physics.YangMills.YangMillsClayRepresentedContinuumRound476Exact as A3Measure
 import DASHI.Physics.YangMills.YangMillsCylinderMeasureRepresentationMaxCutRound495Exact as A3MeasureCut
+import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Exact as A3PhysicalRep
 import DASHI.Physics.YangMills.YangMillsClayRepresentedA3Round480Exact as A3
 import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45Source
@@ -67,7 +68,15 @@ a3CountablyAdditiveRepresentationLevel =
 
 a3FiniteProjectiveCylinderPremeasureLevel : ProofLevel
 a3FiniteProjectiveCylinderPremeasureLevel =
-  A3MeasureCut.literalRound495FiniteProjectivePremeasureLevel
+  A3PhysicalRep.round499ProjectivePremeasureAssemblyLevel
+
+a3CylinderEventIndicatorSemanticsLevel : ProofLevel
+a3CylinderEventIndicatorSemanticsLevel =
+  A3PhysicalRep.literalRound499CylinderEventIndicatorSemanticsLevel
+
+a3ProjectiveEventExpectationConsistencyLevel : ProofLevel
+a3ProjectiveEventExpectationConsistencyLevel =
+  A3PhysicalRep.literalRound499ProjectiveEventExpectationConsistencyLevel
 
 a3ContinuityAtEmptyLevel : ProofLevel
 a3ContinuityAtEmptyLevel =
