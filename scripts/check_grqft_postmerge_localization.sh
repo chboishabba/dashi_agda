@@ -29,6 +29,9 @@ files=(
   DASHI/Physics/Foundations/SingleSectorUnifiedCandidateExact.agda
   DASHI/Physics/Foundations/SingleSectorRecoveryTransportExact.agda
   DASHI/Physics/Foundations/SingleSectorUnifiedCandidateValidation.agda
+  DASHI/Physics/Foundations/GRHolonomyTaylorRicciEvidenceExact.agda
+  DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutExact.agda
+  DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda

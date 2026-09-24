@@ -38,6 +38,9 @@ on:
       - 'DASHI/Physics/Foundations/SingleSectorUnifiedCandidateExact.agda'
       - 'DASHI/Physics/Foundations/SingleSectorRecoveryTransportExact.agda'
       - 'DASHI/Physics/Foundations/SingleSectorUnifiedCandidateValidation.agda'
+      - 'DASHI/Physics/Foundations/GRHolonomyTaylorRicciEvidenceExact.agda'
+      - 'DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutValidation.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 

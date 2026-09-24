@@ -13,7 +13,7 @@ import DASHI.Physics.Foundations.CMP119PinnedYMGRQFTSectorStressBridgeExact as C
 import DASHI.Physics.Foundations.PinnedYMGRQFTStressMaxCutExact as Stress
 
 data GRQFTPostMergeLeaf : Set where
-  grDiscreteToContinuumSameObjectRealization : GRQFTPostMergeLeaf
+  grTheoremBearingDiscreteToSmoothAnalyticBundle : GRQFTPostMergeLeaf
   cmp119StressToLiteralPinnedStressAttachment : GRQFTPostMergeLeaf
   pinnedLiteralYMToRecoveredQFTAttachment : GRQFTPostMergeLeaf
   grAnchoredCMP119CrossSectorStressEquality : GRQFTPostMergeLeaf
@@ -23,7 +23,7 @@ data GRQFTPostMergeLeaf : Set where
 
 canonicalGRQFTPostMergeLeaves : List GRQFTPostMergeLeaf
 canonicalGRQFTPostMergeLeaves =
-  grDiscreteToContinuumSameObjectRealization
+  grTheoremBearingDiscreteToSmoothAnalyticBundle
   ∷ cmp119StressToLiteralPinnedStressAttachment
   ∷ pinnedLiteralYMToRecoveredQFTAttachment
   ∷ grAnchoredCMP119CrossSectorStressEquality
@@ -99,4 +99,4 @@ postMergeTerminalPromotionStillFalse = refl
 
 frontierSummary : String
 frontierSummary =
-  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are GR discrete-to-continuum same-object realization, two QFT same-object attachments, single-sector totalization is definitional; GR-anchored CMP119 cross-sector stress equality, physical absolute-DY replacement and external authority/empirical validation."
+  "After the merge, finite Einstein algebra and CMP119-to-selected-sector stress transport are compiler-owned. The local walls are theorem-bearing GR discrete-to-smooth analytic bundle, two QFT same-object attachments, single-sector totalization is definitional; GR-anchored CMP119 cross-sector stress equality, physical absolute-DY replacement and external authority/empirical validation."
