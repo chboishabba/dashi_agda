@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumSemanticMeaningRound441Validation where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ContinuumSemanticMeaningRound441Exact as R441
@@ -22,3 +22,7 @@ independentContinuumWitnessPruned = refl
 independentSchwingerWitnessPruned :
   R441.round441IndependentSchwingerBelongingWitnessRequired ≡ false
 independentSchwingerWitnessPruned = refl
+
+countablyAdditiveRepresentationRequired :
+  R441.round441CountablyAdditiveRepresentationRequired ≡ true
+countablyAdditiveRepresentationRequired = refl
