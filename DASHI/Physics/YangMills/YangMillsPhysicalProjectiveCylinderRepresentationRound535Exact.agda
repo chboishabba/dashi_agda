@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentation
 -- There is no selected finite cutoff in this preferred constructor.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 
@@ -137,5 +138,5 @@ literalRound535CylinderExpectationIntegralIdentificationLevel : ProofLevel
 literalRound535CylinderExpectationIntegralIdentificationLevel =
   R534.literalRound534SourceExpectationIntegralIdentificationLevel
 
-selectedIndexRepresentationStillPreferred : Agda.Builtin.Bool.Bool
-selectedIndexRepresentationStillPreferred = Agda.Builtin.Bool.false
+selectedIndexRepresentationStillPreferred : Bool
+selectedIndexRepresentationStillPreferred = false
