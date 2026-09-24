@@ -479,6 +479,80 @@ report:
 - `TSAGDA207` bidi source/target outer shapes disagree
 - `TSAGDA208` factor-through/admissibility bridge visibly uses another carrier family
 
+## One-command triage workflow
+
+For the common repository-wide case, use:
+
+```bash
+scripts/check_agda_preflight_pytest.sh
+```
+
+The wrapper now defaults to:
+
+```text
+target              DASHI/Everything.agda
+collection          dependency-first
+output              compact pytest diagnostics
+scope refinement    demand-driven only
+structured report   .cache/agda_preflight/report.json
+```
+
+Demand-driven refinement means Agda scope checking runs **only** for modules that
+actually contain `AGDA_SCOPE`-deferred findings. Modules with no such findings
+stay on the cheap tree/index path.
+
+Control escalation with:
+
+```bash
+AGDA_PREFLIGHT_REFINE=none      scripts/check_agda_preflight_pytest.sh
+AGDA_PREFLIGHT_REFINE=scope     scripts/check_agda_preflight_pytest.sh
+AGDA_PREFLIGHT_REFINE=typecheck scripts/check_agda_preflight_pytest.sh
+```
+
+`scope` is the default. `typecheck` additionally runs full Agda checking only
+for modules that still contain `AGDA_TYPECHECKER`-level findings after the
+scope stage. A failed scope check prevents pointless full-typecheck escalation.
+
+Override the report location or aggregate root with:
+
+```bash
+AGDA_PREFLIGHT_REPORT=/tmp/agda-report.json \
+AGDA_PREFLIGHT_TARGET=DASHI/Physics/Closure/Foo.agda \
+  scripts/check_agda_preflight_pytest.sh
+```
+
+The terminal summary ranks the most frequent diagnostic codes and separates
+hard from deferred counts. Complete per-location diagnostics remain in the JSON
+report.
+
+After the run, triage without grepping pytest logs:
+
+```bash
+# Highest-volume hard structural failures
+dashi-agda-triage
+
+# Findings waiting for stronger semantic evidence
+dashi-agda-triage --deferred
+
+# Concentrate on one diagnostic family
+dashi-agda-triage --code TSAGDA060
+dashi-agda-triage --deferred --code TSAGDA113
+
+# Machine-readable triage summary
+dashi-agda-triage --json
+```
+
+This deliberately separates three jobs:
+
+```text
+run       -> pytest + optional demand-driven Agda refinement
+store     -> complete JSON evidence/diagnostic corpus
+triage    -> ranked hard/deferred frontier
+```
+
+so large sweeps do not require manually reading tens of thousands of warning
+lines.
+
 ## Pytest integration
 
 The package registers a native pytest plugin through the standard `pytest11`
