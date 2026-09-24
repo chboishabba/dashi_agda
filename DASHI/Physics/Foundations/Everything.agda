@@ -193,5 +193,6 @@ import DASHI.Physics.Foundations.GRQFTFiniteDefocusingSolutionWitnessExact
 import DASHI.Physics.Foundations.GRQFTFiniteFLRWRepulsiveAccelerationExact
 import DASHI.Physics.Foundations.GRQFTFiniteComovingRiemannDeviationExact
 import DASHI.Physics.Foundations.GRQFTLocalizedRepulsiveSourceCriterionExact
+import DASHI.Physics.Foundations.GRQFTLocalizedAntigravityMaxCutExact
 
 import DASHI.Physics.Foundations.CMP119PinnedStressMetricRepresentationBridgeValidation
