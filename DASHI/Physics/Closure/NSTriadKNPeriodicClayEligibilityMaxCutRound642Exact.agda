@@ -33,6 +33,7 @@ import DASHI.Physics.Closure.NSTriadKNLiteralInitialCriticalRealizationRound640E
 import DASHI.Physics.Closure.NSTriadKNSubviscousAbsorptionToRetainedGapRound641Exact as R641
 import DASHI.Physics.Closure.NSTriadKNCanonicalInitialCriticalCeilingRound644Exact as R644
 import DASHI.Physics.Closure.NSTriadKNStrictMarginProductionToPhysicalCriticalGapRound645Exact as R645
+import DASHI.Physics.Closure.NSTriadKNLiteralStrictMarginRadialSurplusRound646Exact as R646
 import DASHI.Physics.Closure.NSTriadKNPhysicalCriticalGalerkinSimonWeldRound104Exact as R104Simon
 import DASHI.Physics.Closure.NSTriadKNCriticalSimonUpgradeFollowsBarrierRound148Exact as R148
 import DASHI.Physics.Closure.NSTriadKNOrderedOrientedSelfExternalSpacetimeRound615Exact as R615
@@ -64,6 +65,14 @@ round642C2StrictMarginNormalFormAvailable =
 round642C2StrictMarginAlsoPaysC5 : Bool
 round642C2StrictMarginAlsoPaysC5 =
   R645.round645StrictMarginSimultaneouslyPaysC5
+
+round642C2LiteralRadialSurplusNormalizationClosed : Bool
+round642C2LiteralRadialSurplusNormalizationClosed =
+  R646.round646IntegratedStrictSurplusSameObjectClosed
+
+round642C2RemainingLeafCanBeOneRadialSurplusPayment : Bool
+round642C2RemainingLeafCanBeOneRadialSurplusPayment =
+  R646.round646RemainingNonlinearLeafIsRadialSurplusPayment
 
 ------------------------------------------------------------------------
 -- C3 / SAME OBJECT: canonical physical critical slice.
@@ -216,6 +225,16 @@ round642C2StrictMarginAlsoPaysC5IsTrue :
   round642C2StrictMarginAlsoPaysC5 ≡ true
 round642C2StrictMarginAlsoPaysC5IsTrue =
   R645.round645StrictMarginSimultaneouslyPaysC5IsTrue
+
+round642C2LiteralRadialSurplusNormalizationClosedIsTrue :
+  round642C2LiteralRadialSurplusNormalizationClosed ≡ true
+round642C2LiteralRadialSurplusNormalizationClosedIsTrue =
+  R646.round646IntegratedStrictSurplusSameObjectClosedIsTrue
+
+round642C2RemainingLeafCanBeOneRadialSurplusPaymentIsTrue :
+  round642C2RemainingLeafCanBeOneRadialSurplusPayment ≡ true
+round642C2RemainingLeafCanBeOneRadialSurplusPaymentIsTrue =
+  R646.round646RemainingNonlinearLeafIsRadialSurplusPaymentIsTrue
 
 round642C3CanonicalPhysicalSliceCompilerAvailableIsTrue :
   round642C3CanonicalPhysicalSliceCompilerAvailable ≡ true
