@@ -39,6 +39,63 @@ The checker must not attempt:
 - reflection/macro execution;
 - proof validity.
 
+## Current implementation status
+
+The frontend is now **tree-sitter-first and regex-free for Agda syntax parsing**.
+
+The core modules:
+
+```text
+checker.py
+ast_index.py
+shapes.py
+rules.py
+```
+
+must not use regular expressions to interpret Agda syntax. A regression test
+enforces that invariant.
+
+The current implementation has structural AST support for:
+
+- modules, imports, opens, aliases and import directives;
+- records, fields, record constructors and record expressions;
+- data declarations and constructors;
+- signatures, function clauses, telescopes and binder visibility;
+- applications with explicit/implicit/instance arguments;
+- patterns and simple finite coverage;
+- pragmas, fixity declarations and syntax declarations;
+- shallow type shapes (`Sort`, `Head`, `Pi`, `Equality`, `Meta`,
+  `Literal`, `Unknown`);
+- reverse import graphs and semantic API snapshots.
+
+The original motivating failures are now detected structurally:
+
+- unapplied dependent projections such as `Parameter` instead of
+  `Parameter M`;
+- explicit projection receiver holes such as `Pareto.cost _` when a matching
+  record binder is in scope;
+- record-adapter kind mismatches such as `Nat → ⊤` being supplied to a
+  `Nat → Set` field.
+
+Any future syntax-sensitive diagnostic should extend `ast_index.py` or
+`shapes.py`; it should not add source-text parsing to `rules.py`.
+
+### Still intentionally delegated to Agda
+
+The following remain outside the preflight implementation boundary because they
+require real elaboration/kernel reasoning rather than shallow structural
+analysis:
+
+- dependent unification and metavariable solving;
+- arbitrary definitional equality and normalization;
+- instance search;
+- universe-constraint solving;
+- indexed datatype coverage;
+- full positivity and termination checking;
+- cubical/path elaboration;
+- reflection/macro execution;
+- proof validity.
+
 ## Diagnostic catalogue
 
 Diagnostics are grouped by capability. Some families are exact/high-confidence;
