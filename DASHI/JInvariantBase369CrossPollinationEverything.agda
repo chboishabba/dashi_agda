@@ -1,5 +1,3 @@
-module DASHI.JInvariantBase369CrossPollinationEverything where
-
 import DASHI.Moonshine.JInvariantSourceAtlasExact
 import DASHI.Moonshine.JInvariantImageFractalSourceAtlasExact
 import DASHI.Moonshine.JInvariantHomannMathematicaSourceCalibrationExact
@@ -150,7 +148,6 @@ import DASHI.Moonshine.JInvariantAnalyticHyperformConsumerAdequacyValidation
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact
 import DASHI.Moonshine.C3FourierConjugationExact
 import DASHI.Moonshine.MonsterC3CyclotomicEvaluationExact
-
 import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldExact
 import DASHI.Moonshine.JInvariantEisensteinBishopRadiusWeldValidation
 import DASHI.Moonshine.JInvariantBishopUpperHalfPlaneRadiusExact
@@ -188,3 +185,7 @@ import DASHI.Moonshine.JInvariantQBishopExponentTransportCompilerExact
 import DASHI.Moonshine.JInvariantQBishopExponentTransportCompilerValidation
 import DASHI.Moonshine.JInvariantQBishopMagnitudeCoordinateTransportExact
 import DASHI.Moonshine.JInvariantQBishopMagnitudeCoordinateTransportValidation
+
+module DASHI.JInvariantBase369CrossPollinationEverything where
+
+
