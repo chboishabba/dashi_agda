@@ -25,7 +25,7 @@ import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45So
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
 
-import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralRateToGapRound482Exact as B
+import DASHI.Physics.YangMills.BalabanClayCanonicalBMaxCutRound493Exact as B
 import DASHI.Physics.YangMills.YangMillsClayGoal1MassGapSemanticAttachmentRound458Exact as BSem
 
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as C
@@ -78,13 +78,21 @@ a45RepresentedOSPredicateExtensionalityLevel =
 -- B / published literal CMP116 -> same-H positive transfer gap.
 ------------------------------------------------------------------------
 
-bPublishedLiteralCMP116LocalizationLevel : ProofLevel
-bPublishedLiteralCMP116LocalizationLevel =
-  B.literalRound482PublishedCMP116SourceLevel
+bWilsonTwoInsertionConnectedShellLevel : ProofLevel
+bWilsonTwoInsertionConnectedShellLevel =
+  B.bWEXTLevel
 
-bLocalEnergyDecaySemanticsLevel : ProofLevel
-bLocalEnergyDecaySemanticsLevel =
-  B.literalRound482LocalEnergyRateSemanticsLevel
+bSameHamiltonianTransferCoordinateLevel : ProofLevel
+bSameHamiltonianTransferCoordinateLevel =
+  B.bSameHamiltonianLevel
+
+bGeometricDecayCompilerLevel : ProofLevel
+bGeometricDecayCompilerLevel =
+  B.bGeometricDecayCompilerLevel
+
+bStandardSpectralTransferLevel : ProofLevel
+bStandardSpectralTransferLevel =
+  B.bStandardSpectralTransferLevel
 
 bLiteralHamiltonianGapSemanticsLevel : ProofLevel
 bLiteralHamiltonianGapSemanticsLevel =
@@ -126,6 +134,9 @@ postHocContinuumMeasureFunctionalWeldMandatory = false
 postHocSchwingerEqualityMandatory : Bool
 postHocSchwingerEqualityMandatory = false
 
+historicalSelectedJMinCutMandatory : Bool
+historicalSelectedJMinCutMandatory = false
+
 r454R455CompatibilityBRouteMandatory : Bool
 r454R455CompatibilityBRouteMandatory = false
 
@@ -134,6 +145,9 @@ arbitraryPositiveGapTokenMandatory = false
 
 cmp109PolarizationDetourMandatory : Bool
 cmp109PolarizationDetourMandatory = false
+
+printedBalabanJEqualsWilsonObservableMandatory : Bool
+printedBalabanJEqualsWilsonObservableMandatory = false
 
 su2ValidationMandatoryForGenericG : Bool
 su2ValidationMandatoryForGenericG = false
