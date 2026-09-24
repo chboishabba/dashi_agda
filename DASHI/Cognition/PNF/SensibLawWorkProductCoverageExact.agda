@@ -52,6 +52,7 @@ record WorkProductPropositionOccurrence : Set where
     statementRef : String
     sourceRevisionRef : String
     exactSpanRef : String
+    candidatePNFRef : String
     productPropositionRef : String
     candidateSearchReceiptRef : String
 
