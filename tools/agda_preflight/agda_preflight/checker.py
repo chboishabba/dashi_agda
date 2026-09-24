@@ -76,6 +76,17 @@ class ModuleSummary:
     source: str
     ast: AstIndex
 
+    @property
+    def exported_names(self) -> Set[str]:
+        names: Set[str] = set(self.signatures) | set(self.records) | set(self.ast.data)
+        for record in self.ast.records.values():
+            names.update(record.fields)
+            if record.constructor:
+                names.add(record.constructor)
+        for data in self.ast.data.values():
+            names.update(data.constructors)
+        return names
+
 
 def _language() -> Language:
     return Language(tree_sitter_agda.language())
