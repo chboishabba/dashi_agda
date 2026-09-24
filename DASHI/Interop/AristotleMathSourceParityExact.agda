@@ -63,9 +63,9 @@ archimedes369Parity = aristotleMathModuleParity
   "3642fe253921e95da056302654ea76aa6da0564ccfc762897e70ed94f273bc11"
   345
   39
-  unported
-  "none"
-  "requires constructed pi/trigonometric/order/limit substrate; polygon sandwich, doubling ladder, exact rungs, nine-gon cubic/enclosure and limits remain"
+  partial
+  "DASHI.Moonshine.JMDArchimedesDelta369FixedLocusBridgeExact"
+  "JMD-attributed 3/6/9/12 portrait bridge now pays exact 12=2*6, 6=2*3, 9=3*3 and 27=3*9 observer/reflection arithmetic and welds existing Eisenstein/renderer counts; constructed pi/trigonometric/order/limit substrate, polygon sandwich, doubling ladder, exact rungs, nine-gon cubic/enclosure and limits remain"
 
 archimedesNinetySixParity : AristotleMathModuleParity
 archimedesNinetySixParity = aristotleMathModuleParity
@@ -74,8 +74,8 @@ archimedesNinetySixParity = aristotleMathModuleParity
   146
   9
   partial
-  "DASHI.Foundations.BishopMachinPiArchimedesWindowExact"
-  "headline numerical enclosure 223/71 < bishopMachinPi < 22/7 is proved on the actual convergent Bishop Machin real; source 96-gon interval propagation and geometric/trigonometric identification of that real with pi remain"
+  "DASHI.Foundations.BishopMachinPiArchimedesWindowExact;DASHI.Interop.BishopMachinPiLeanSemanticReceiptExact"
+  "headline numerical enclosure 223/71 < bishopMachinPi < 22/7 is proved on the actual convergent Bishop Machin real; dashi_lean4 now source-writes the direct semantic compiler eval(bishopMachinPi)=Real.pi from the two concrete Bishop arctan convergence witnesses plus Mathlib's formal Machin identity. No Lean kernel receipt or serialized Agda->Lean same-object witness is observed yet. Source 96-gon interval propagation remains separate."
 
 archimedesSpinParity : AristotleMathModuleParity
 archimedesSpinParity = aristotleMathModuleParity
@@ -114,8 +114,8 @@ deltaModularParity = aristotleMathModuleParity
   323
   31
   partial
-  "DASHI.Moonshine.EisensteinDiscriminantWeight12Exact;DASHI.Moonshine.ModularCurveJFrickeInterfaceExact"
-  "weight-12 transformation of unnormalised E4^3-E6^2 derived from existing Eisenstein law; true eta^24 Delta, nonvanishing/holomorphy, E2/log-derivative proof, S/T normalization, conjugation/unit-circle reflection and arc phase theorem remain"
+  "DASHI.Moonshine.EisensteinDiscriminantWeight12Exact;DASHI.Moonshine.DeltaUnitCircleReflectionPhaseExact;DASHI.Moonshine.ModularCurveJFrickeInterfaceExact"
+  "weight-12 transformation is derived; reciprocal-conjugate reflection is now derived from that theorem plus an explicit conjugation/S interface; fixed-locus phase equation and modulo-half-turn sixfold consequence are theorem surfaces. Concrete complex S semantics, infinite Delta conjugation/eta^24 nonvanishing-holomorphy, E2/log-derivative source route, and concrete argument/arc instantiation remain"
 
 deltaWordGraphsParity : AristotleMathModuleParity
 deltaWordGraphsParity = aristotleMathModuleParity

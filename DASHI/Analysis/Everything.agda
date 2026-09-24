@@ -60,3 +60,7 @@ import DASHI.Analysis.RiemannG2CurrentDirectOneLeafFrontierExact
 import DASHI.Analysis.RiemannG2CurrentGenericHighFrontierRefinementExact
 import DASHI.Analysis.RiemannG2GenericHighCertifiedFollowupReadmeExact
 import DASHI.Analysis.RiemannG2FinalCutIntrospectionExact
+
+-- Concrete complex algebra reused by modular/reflection lanes.
+import DASHI.Analysis.ConcreteComplexConjugationProductExact
+import DASHI.Analysis.BishopSetoidComplexExact
