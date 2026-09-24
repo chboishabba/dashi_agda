@@ -15,6 +15,8 @@ files=(
   DASHI/Physics/Closure/DiscreteWarpedEinsteinMatterModel.agda
   DASHI/Physics/Closure/EinsteinEquationBidiResidualExact.agda
   DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda
+  DASHI/Physics/Closure/W4CalibrationBidiAttemptExact.agda
+  DASHI/Physics/Closure/GRQFTExecutableClosureMatrixExact.agda
 )
 
 for file in "${files[@]}"; do test -f "$file"; done
@@ -28,6 +30,11 @@ tmp_json="$(mktemp)"
 trap 'rm -f "$tmp_json"' EXIT
 python3 scripts/grqft_einstein_bidi_harness.py --output "$tmp_json" >/dev/null
 diff -u outputs/grqft_einstein_bidi_residual.json "$tmp_json"
+
+matrix_json="$(mktemp)"
+trap 'rm -f "$tmp_json" "$matrix_json"' EXIT
+python3 scripts/grqft_executable_closure_harness.py --output "$matrix_json" >/dev/null
+diff -u outputs/grqft_executable_closure_matrix.json "$matrix_json"
 
 cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-grqft-bidi}"
 export DASHI_AGDA29_CACHE_ROOT="$cache_root"
@@ -44,4 +51,6 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Foundations/RecoveredGRAttachmentExact.agda \
   DASHI/Physics/Foundations/GRQFTConcreteInstanceFrontierExact.agda \
   DASHI/Physics/Foundations/BalabanRound131RecoveredQFTAttachmentValidation.agda \
+  DASHI/Physics/Closure/W4CalibrationBidiAttemptExact.agda \
+  DASHI/Physics/Closure/GRQFTExecutableClosureMatrixExact.agda \
   DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda

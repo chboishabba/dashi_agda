@@ -1,0 +1,43 @@
+{
+  "artifactSchema": "dashi-grqft-executable-closure-matrix-v1",
+  "finiteEinstein": {
+    "status": "locally_closed",
+    "uniqueNormalizedKappa": 1,
+    "testedKappas": [
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "w4Calibration": {
+    "status": "locally_rejected",
+    "scale": 230534508.31238452,
+    "chi2": 5080.386831006523,
+    "dof": 17,
+    "chi2PerDof": 298.8462841768543,
+    "firstBinPull": -67.35457265472463,
+    "lastBinPull": -51.62836040061707,
+    "projectionDigest": "7fa002539fef1dc9bd51b22c1d512b4ed7be85417a3afb6f1e9992bbdc3dbdc1",
+    "replacementRequired": true
+  },
+  "sameCandidateGRRecovery": {
+    "status": "concrete_instance_missing"
+  },
+  "sameCandidateQFTRecovery": {
+    "status": "concrete_instance_missing"
+  },
+  "sameCarrierStressWeld": {
+    "status": "concrete_instance_missing"
+  },
+  "physicalUnitCalibration": {
+    "status": "external_information_required"
+  },
+  "empiricalGRQFTValidation": {
+    "status": "external_information_required"
+  },
+  "terminalPromotion": false
+}

@@ -15,10 +15,15 @@ on:
       - 'DASHI/Physics/Closure/DiscreteWarpedEinsteinMatterModel.agda'
       - 'DASHI/Physics/Closure/EinsteinEquationBidiResidualExact.agda'
       - 'DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda'
+      - 'DASHI/Physics/Closure/W4CalibrationBidiAttemptExact.agda'
+      - 'DASHI/Physics/Closure/GRQFTExecutableClosureMatrixExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - 'scripts/grqft_einstein_bidi_harness.py'
+      - 'scripts/grqft_executable_closure_harness.py'
       - 'scripts/check_grqft_bidi_executable_residual.sh'
       - 'outputs/grqft_einstein_bidi_residual.json'
+      - 'outputs/grqft_executable_closure_matrix.json'
+      - 'logs/research/w4_z_peak_anchor_dirty_run_20260513.json'
       - '.github/workflows/grqft-bidi-executable-residual.yml'
   workflow_dispatch:
 
