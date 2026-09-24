@@ -435,3 +435,109 @@ record R : Set where
     summary = Checker(tmp_path).parse_summary(path)
     assert not ({"where", "as", "constructor", "field"} & set(summary.ast.clauses))
     assert not ({"where", "as", "constructor", "field"} & set(summary.ast.signatures))
+
+
+
+def test_shape_preserves_telescope_before_equality_result(tmp_path):
+    from agda_preflight.shapes import (
+        PiShape,
+        equality_shape,
+        explicit_arity,
+        shape_from_node,
+    )
+
+    path = write_module(
+        tmp_path,
+        "EqualityTelescope",
+        """module EqualityTelescope where
+
+postulate
+  State : Set → Set
+  ι : {X : Set} → State X → State X
+  apply : {X : Set} → State X → X → X
+
+ι²-id :
+  ∀ {X} (s : State X) (x : X) →
+  apply (ι (ι s)) x ≡ apply s x
+postulate ι²-id
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    signature = summary.ast.signatures["ι²-id"]
+    shape = shape_from_node(summary.ast.source_bytes, signature.type_node)
+    assert isinstance(shape, PiShape)
+    assert explicit_arity(shape) == 2
+    assert equality_shape(shape) is not None
+
+
+def test_grouped_telescope_binders_count_individually(tmp_path):
+    from agda_preflight.shapes import explicit_arity, shape_from_node
+
+    path = write_module(
+        tmp_path,
+        "GroupedTelescope",
+        """module GroupedTelescope where
+
+postulate
+  f : (A B : Set) → A → B → Set
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    signature = summary.ast.signatures["f"]
+    shape = shape_from_node(summary.ast.source_bytes, signature.type_node)
+    assert explicit_arity(shape) == 4
+
+
+def test_horizontal_dividers_are_not_function_clauses(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Dividers",
+        """module Dividers where
+
+------------------------------------------------------------------------
+-- Section
+
+x : Set
+x = Set
+------------------------------------------------------------------------
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    assert set(summary.ast.clauses) == {"x"}
+    assert not any(
+        name and all(ch in "-=_~" for ch in name)
+        for name in summary.ast.clauses
+    )
+
+
+def test_split_import_alias_recovery(tmp_path):
+    write_module(tmp_path, "Lib", "module Lib where\n")
+    path = write_module(
+        tmp_path,
+        "SplitAlias",
+        """module SplitAlias where
+
+import Lib as L
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    assert summary.imports.get("L") == "Lib"
+
+
+def test_record_where_layout_has_no_syntax_false_positive(tmp_path):
+    path = write_module(
+        tmp_path,
+        "RecordWhere",
+        """module RecordWhere where
+
+record R : Set₁ where
+  constructor r
+  field
+    A : Set
+    x : A
+""",
+    )
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code == "TSAGDA000" for d in diagnostics)
+    summary = Checker(tmp_path).parse_summary(path)
+    assert set(summary.ast.records["R"].fields) == {"A", "x"}
