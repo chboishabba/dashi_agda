@@ -34,7 +34,6 @@ record GRRecoveryResidualProbe (U : Weld.UnifiedCandidate) : Set₁ where
       Residual
     residualIsZero : Residual → Bool
 
-open GRRecoveryResidualProbe public
 
 grRecoveredAfterCoarseGraining :
   (U : Weld.UnifiedCandidate) →
@@ -58,9 +57,9 @@ grRecoveryResidualAt :
   GRRecoveryResidualProbe U →
   Weld.Candidate U →
   Weld.Regime U →
-  GRRecoveryResidualProbe.Residual
+  GRRecoveryResidualProbe.Residual probe
 grRecoveryResidualAt {U} probe candidate regime =
-  residual probe
+  GRRecoveryResidualProbe.residual probe
     (grRecoveredAfterCoarseGraining U candidate regime)
     (grSelectedTargetAfterCoarseGraining U candidate regime)
 
@@ -72,7 +71,8 @@ runGRRecoveryAttempt :
   RecoveryAttemptOutcome
 runGRRecoveryAttempt probe candidate regime =
   classifyRecoveryBool
-    (residualIsZero probe (grRecoveryResidualAt probe candidate regime))
+    (GRRecoveryResidualProbe.residualIsZero probe
+      (grRecoveryResidualAt probe candidate regime))
 
 record QFTRecoveryResidualProbe (U : Weld.UnifiedCandidate) : Set₁ where
   field
@@ -85,7 +85,6 @@ record QFTRecoveryResidualProbe (U : Weld.UnifiedCandidate) : Set₁ where
       Residual
     residualIsZero : Residual → Bool
 
-open QFTRecoveryResidualProbe public
 
 qftRecoveredAfterCoarseGraining :
   (U : Weld.UnifiedCandidate) →
@@ -111,9 +110,9 @@ qftRecoveryResidualAt :
   QFTRecoveryResidualProbe U →
   Weld.Candidate U →
   Weld.Regime U →
-  QFTRecoveryResidualProbe.Residual
+  QFTRecoveryResidualProbe.Residual probe
 qftRecoveryResidualAt {U} probe candidate regime =
-  residual probe
+  QFTRecoveryResidualProbe.residual probe
     (qftRecoveredAfterCoarseGraining U candidate regime)
     (qftSelectedTargetAfterCoarseGraining U candidate regime)
 
@@ -125,7 +124,8 @@ runQFTRecoveryAttempt :
   RecoveryAttemptOutcome
 runQFTRecoveryAttempt probe candidate regime =
   classifyRecoveryBool
-    (residualIsZero probe (qftRecoveryResidualAt probe candidate regime))
+    (QFTRecoveryResidualProbe.residualIsZero probe
+      (qftRecoveryResidualAt probe candidate regime))
 
 recoveryAttemptsDoNotRequirePromotionTokens : Bool
 recoveryAttemptsDoNotRequirePromotionTokens = true
