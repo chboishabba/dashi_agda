@@ -216,6 +216,11 @@ def _packet_layer_cake_split(
             for row in rows
             if int(row["shell"]) < threshold
         )
+        collar_energy = 0.5 * sum(
+            float(row["mass"])
+            for row in rows
+            if int(row["shell"]) == threshold
+        )
         remote_energy = 0.5 * sum(
             float(row["mass"])
             for row in rows
@@ -226,6 +231,11 @@ def _packet_layer_cake_split(
             for row in rows
             if int(row["shell"]) < threshold
         )
+        collar_dissipation = sum(
+            float(row["viscous"])
+            for row in rows
+            if int(row["shell"]) == threshold
+        )
         remote_dissipation = sum(
             float(row["viscous"])
             for row in rows
@@ -235,6 +245,15 @@ def _packet_layer_cake_split(
             remote_energy * low_dissipation
             - remote_dissipation * low_energy
         )
+        collar_cross = (
+            collar_energy * low_dissipation
+            - collar_dissipation * low_energy
+        )
+        full_off_cross = (
+            (collar_energy + remote_energy) * low_dissipation
+            - (collar_dissipation + remote_dissipation) * low_energy
+        )
+        cross_split_residual = full_off_cross - collar_cross - spectral_cross
 
         collar_contribution = weight_increment * collar_flux
         remote_contribution = weight_increment * remote_flux
@@ -260,11 +279,17 @@ def _packet_layer_cake_split(
                     low_flux + collar_flux + remote_flux
                 ),
                 "low_energy_half_mass": float(low_energy),
+                "collar_energy_half_mass": float(collar_energy),
                 "remote_energy_half_mass": float(remote_energy),
                 "low_viscous_dissipation": float(low_dissipation),
+                "collar_viscous_dissipation": float(collar_dissipation),
                 "remote_viscous_dissipation": float(remote_dissipation),
+                "collar_spectral_cross": float(collar_cross),
                 "remote_spectral_cross": float(spectral_cross),
+                "full_low_complement_spectral_cross": float(full_off_cross),
+                "cross_split_residual": float(cross_split_residual),
                 "remote_spectral_cross_nonpositive": spectral_cross <= 1.0e-12,
+                "full_cross_below_collar_cross": full_off_cross <= collar_cross + 1.0e-12,
                 "collar_layer_cake_contribution": float(collar_contribution),
                 "remote_layer_cake_contribution": float(remote_contribution),
                 "upper_layer_cake_contribution": float(upper_contribution),
@@ -307,10 +332,19 @@ def _packet_layer_cake_split(
             (float(row["remote_spectral_cross"]) for row in interfaces),
             default=0.0,
         ),
+        "maximum_cross_split_residual": max(
+            (abs(float(row["cross_split_residual"])) for row in interfaces),
+            default=0.0,
+        ),
         "remote_spectral_cross_violation_count": sum(
             1
             for row in interfaces
             if not bool(row["remote_spectral_cross_nonpositive"])
+        ),
+        "full_cross_below_collar_violation_count": sum(
+            1
+            for row in interfaces
+            if not bool(row["full_cross_below_collar_cross"])
         ),
         "authority": "finite-floating-packet-decomposition-diagnostic-only",
     }
