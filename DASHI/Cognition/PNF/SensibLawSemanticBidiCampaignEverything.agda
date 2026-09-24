@@ -23,6 +23,13 @@ import DASHI.Cognition.PNF.SensibLawUnifiedPNFIntakeReentrySpineExact as IntakeR
 import DASHI.Cognition.PNF.SensibLawPersistentStatementObservationEventSpineExact as PersistentTrace
 import DASHI.Cognition.PNF.SensibLawChronologyContestationSpineExact as ChronologyContestation
 import DASHI.Cognition.PNF.SensibLawReviewWorkstationExact as ReviewWorkstation
+import DASHI.Cognition.PNF.SensibLawCandidateEventDiscoveryExact as EventDiscovery
+import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as OperationalBoundary
+import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as LiveReviewMutation
+import DASHI.Cognition.PNF.SensibLawConversationalSourceFamilyExact as ConversationalSource
+import DASHI.Cognition.PNF.SensibLawMatterContextProjectionExact as MatterContext
+import DASHI.Cognition.PNF.SensibLawMatterWorkspaceProjectionExact as MatterWorkspace
+import DASHI.Cognition.PNF.SensibLawMinimalMatterHandoffExact as MinimalHandoff
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
