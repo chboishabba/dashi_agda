@@ -4,108 +4,75 @@ module DASHI.Physics.Foundations.GRQFTIsraelShellEnergyConditionExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Rational.Base using (0ℚ)
 
 import DASHI.Physics.Foundations.GRQFTDeSitterKottlerJunctionExact as Junction
 import DASHI.Physics.Foundations.GRQFTIsraelSurfaceStressMagnitudeExact as Israel
 
 ------------------------------------------------------------------------
--- SURFACE STRESS ENERGY-CONDITION FINGERPRINT
+-- EXACT SHELL ENERGY-CONDITION FINGERPRINT
 --
--- For the matched static shell:
+-- For the matched static shell already derived:
 --
 --   sigma = 0
 --   P > 0.
 --
--- In an orthonormal 2+1 shell frame this means:
+-- Therefore in the orthonormal 2+1 shell frame:
 --
---   NEC: sigma + P > 0              passes
---   WEC: sigma >= 0 and NEC         passes
---   SEC: sigma + 2P > 0 and NEC     passes
---   DEC: sigma >= |P|               fails because 0 < P.
+--   NEC: sigma + P = P > 0                  passes
+--   WEC: sigma = 0 and NEC                  passes
+--   SEC: sigma + 2P = 2P > 0 and NEC        passes
+--   DEC: sigma >= |P| becomes 0 >= P         fails.
 --
--- We encode the exact sign logic rather than importing an analytic absolute
--- value theory merely to restate these finite signs.
+-- This module deliberately classifies only THIS exact sign/magnitude regime.
+-- It does not pretend signs alone classify arbitrary shells.
 ------------------------------------------------------------------------
 
-data SurfaceEnergyDensitySign : Set where
-  negativeSigma : SurfaceEnergyDensitySign
-  zeroSigma : SurfaceEnergyDensitySign
-  positiveSigma : SurfaceEnergyDensitySign
-
-data SurfacePressureSign : Set where
-  negativePressure : SurfacePressureSign
-  zeroPressure : SurfacePressureSign
-  positivePressure : SurfacePressureSign
-
-fixtureSigmaSign : SurfaceEnergyDensitySign
-fixtureSigmaSign = zeroSigma
-
-fixturePressureSign : SurfacePressureSign
-fixturePressureSign = positivePressure
+data ExactShellClass : Set where
+  zeroSigmaPositivePressureShell : ExactShellClass
 
 data EnergyConditionVerdict : Set where
   conditionPasses : EnergyConditionVerdict
   conditionFails : EnergyConditionVerdict
 
-surfaceNEC :
-  SurfaceEnergyDensitySign →
-  SurfacePressureSign →
-  EnergyConditionVerdict
-surfaceNEC negativeSigma pressure = conditionFails
-surfaceNEC zeroSigma negativePressure = conditionFails
-surfaceNEC zeroSigma zeroPressure = conditionPasses
-surfaceNEC zeroSigma positivePressure = conditionPasses
-surfaceNEC positiveSigma pressure = conditionPasses
+shellNEC :
+  ExactShellClass → EnergyConditionVerdict
+shellNEC zeroSigmaPositivePressureShell = conditionPasses
 
-surfaceWEC :
-  SurfaceEnergyDensitySign →
-  SurfacePressureSign →
-  EnergyConditionVerdict
-surfaceWEC negativeSigma pressure = conditionFails
-surfaceWEC zeroSigma negativePressure = conditionFails
-surfaceWEC zeroSigma zeroPressure = conditionPasses
-surfaceWEC zeroSigma positivePressure = conditionPasses
-surfaceWEC positiveSigma pressure = conditionPasses
+shellWEC :
+  ExactShellClass → EnergyConditionVerdict
+shellWEC zeroSigmaPositivePressureShell = conditionPasses
 
-surfaceSEC :
-  SurfaceEnergyDensitySign →
-  SurfacePressureSign →
-  EnergyConditionVerdict
-surfaceSEC negativeSigma pressure = conditionFails
-surfaceSEC zeroSigma negativePressure = conditionFails
-surfaceSEC zeroSigma zeroPressure = conditionPasses
-surfaceSEC zeroSigma positivePressure = conditionPasses
-surfaceSEC positiveSigma pressure = conditionPasses
+shellSEC :
+  ExactShellClass → EnergyConditionVerdict
+shellSEC zeroSigmaPositivePressureShell = conditionPasses
 
-surfaceDEC :
-  SurfaceEnergyDensitySign →
-  SurfacePressureSign →
-  EnergyConditionVerdict
-surfaceDEC negativeSigma pressure = conditionFails
-surfaceDEC zeroSigma negativePressure = conditionFails
-surfaceDEC zeroSigma zeroPressure = conditionPasses
-surfaceDEC zeroSigma positivePressure = conditionFails
-surfaceDEC positiveSigma pressure = conditionPasses
+shellDEC :
+  ExactShellClass → EnergyConditionVerdict
+shellDEC zeroSigmaPositivePressureShell = conditionFails
+
+fixtureShellClass : ExactShellClass
+fixtureShellClass = zeroSigmaPositivePressureShell
 
 fixtureNECPasses :
-  surfaceNEC fixtureSigmaSign fixturePressureSign ≡ conditionPasses
+  shellNEC fixtureShellClass ≡ conditionPasses
 fixtureNECPasses = refl
 
 fixtureWECPasses :
-  surfaceWEC fixtureSigmaSign fixturePressureSign ≡ conditionPasses
+  shellWEC fixtureShellClass ≡ conditionPasses
 fixtureWECPasses = refl
 
 fixtureSECPasses :
-  surfaceSEC fixtureSigmaSign fixturePressureSign ≡ conditionPasses
+  shellSEC fixtureShellClass ≡ conditionPasses
 fixtureSECPasses = refl
 
 fixtureDECFails :
-  surfaceDEC fixtureSigmaSign fixturePressureSign ≡ conditionFails
+  shellDEC fixtureShellClass ≡ conditionFails
 fixtureDECFails = refl
 
-positivePressureWithZeroSigmaCannotPassDEC :
-  surfaceDEC zeroSigma positivePressure ≡ conditionPasses → ⊥
-positivePressureWithZeroSigmaCannotPassDEC ()
+fixtureDECCannotPass :
+  shellDEC fixtureShellClass ≡ conditionPasses → ⊥
+fixtureDECCannotPass ()
 
 ------------------------------------------------------------------------
 -- SAME SHELL AS THE JUNCTION CALCULATION
@@ -117,34 +84,26 @@ junctionPressureOrientationIsPositive :
 junctionPressureOrientationIsPositive = refl
 
 junctionSurfaceEnergyDensityNumeratorIsZero :
-  Israel.surfaceEnergyDensityJumpNumerator
-    ≡ Data.Rational.Base.0ℚ
+  Israel.surfaceEnergyDensityJumpNumerator ≡ 0ℚ
 junctionSurfaceEnergyDensityNumeratorIsZero =
   Israel.surfaceEnergyDensityIsZero
 
 record IsraelShellEnergyConditionWitness : Set where
   constructor israel-shell-energy-condition-witness
   field
-    sigmaSign : SurfaceEnergyDensitySign
-    pressureSign : SurfacePressureSign
-
-    sigmaIsZero :
-      sigmaSign ≡ zeroSigma
-
-    pressureIsPositive :
-      pressureSign ≡ positivePressure
+    shellClass : ExactShellClass
 
     nullEnergyCondition :
-      surfaceNEC sigmaSign pressureSign ≡ conditionPasses
+      shellNEC shellClass ≡ conditionPasses
 
     weakEnergyCondition :
-      surfaceWEC sigmaSign pressureSign ≡ conditionPasses
+      shellWEC shellClass ≡ conditionPasses
 
     strongEnergyCondition :
-      surfaceSEC sigmaSign pressureSign ≡ conditionPasses
+      shellSEC shellClass ≡ conditionPasses
 
     dominantEnergyCondition :
-      surfaceDEC sigmaSign pressureSign ≡ conditionFails
+      shellDEC shellClass ≡ conditionFails
 
 open IsraelShellEnergyConditionWitness public
 
@@ -152,10 +111,7 @@ canonicalIsraelShellEnergyConditionWitness :
   IsraelShellEnergyConditionWitness
 canonicalIsraelShellEnergyConditionWitness =
   israel-shell-energy-condition-witness
-    zeroSigma
-    positivePressure
-    refl
-    refl
+    zeroSigmaPositivePressureShell
     refl
     refl
     refl
@@ -171,9 +127,10 @@ record IsraelShellEnergyConditionBoundary : Set where
     shellRequiresDominantEnergyViolation : Bool
     shellHasNegativeSurfaceEnergyDensity : Bool
     shellHasPositiveTangentialPressure : Bool
+    genericSignOnlyEnergyConditionClassifierClaimed : Bool
 
 canonicalIsraelShellEnergyConditionBoundary :
   IsraelShellEnergyConditionBoundary
 canonicalIsraelShellEnergyConditionBoundary =
   israel-shell-energy-condition-boundary
-    true true true false true false true
+    true true true false true false true false
