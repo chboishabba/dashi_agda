@@ -138,6 +138,14 @@ _ALIAS_TO_CANONICAL = {
     for alias in aliases
 }
 
+# Some independently emitted diagnostics describe the same root cause but are
+# retained as separate compatibility/reporting codes. Canonicalize them only
+# for triage; do not synthesize extra emitted diagnostics.
+_ALIAS_TO_CANONICAL.update({
+    "TSAGDA075": "TSAGDA072",
+    "TSAGDA114": "TSAGDA072",
+})
+
 
 def canonical_code(code: str) -> str:
     return _ALIAS_TO_CANONICAL.get(code, code)
