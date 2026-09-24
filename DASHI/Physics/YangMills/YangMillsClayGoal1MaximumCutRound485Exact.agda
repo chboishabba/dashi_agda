@@ -25,6 +25,7 @@ import DASHI.Physics.YangMills.YangMillsPhysicalCylinderRepresentationRound499Ex
 import DASHI.Physics.YangMills.YangMillsClayRepresentedA3Round480Exact as A3
 import DASHI.Physics.YangMills.YangMillsClayRepresentedSourceNativeA3Round497Exact as A3Direct
 import DASHI.Physics.YangMills.YangMillsClayT5MomentToOS05Round464Exact as A45Source
+import DASHI.Physics.YangMills.YangMillsClayMomentOS05MaxCutRound500Exact as A45Cut
 import DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact as A45
 import DASHI.Physics.YangMills.YangMillsClayPublishedFiniteOSSourceRound462Exact as FiniteOS
 
@@ -96,7 +97,19 @@ a3RepresentedLiteralSemanticsLevel =
 
 a45QuantitativeMomentToFiniteOS05Level : ProofLevel
 a45QuantitativeMomentToFiniteOS05Level =
-  A45Source.literalRound464QuantitativeMomentToOS05Level
+  A45Cut.round500OS05CompilerLevel
+
+a45QuantitativeFiniteExpectationAttachmentLevel : ProofLevel
+a45QuantitativeFiniteExpectationAttachmentLevel =
+  A45Cut.literalRound500QuantitativeFiniteExpectationAttachmentLevel
+
+a4FiniteRegularityFromQuantitativeBoundsLevel : ProofLevel
+a4FiniteRegularityFromQuantitativeBoundsLevel =
+  A45Cut.literalRound500FiniteRegularityFromQuantitativeBoundsLevel
+
+a5FiniteGrowthFromQuantitativeBoundsLevel : ProofLevel
+a5FiniteGrowthFromQuantitativeBoundsLevel =
+  A45Cut.literalRound500FiniteGrowthFromQuantitativeBoundsLevel
 
 a45RepresentedOSPredicateExtensionalityLevel : ProofLevel
 a45RepresentedOSPredicateExtensionalityLevel =
