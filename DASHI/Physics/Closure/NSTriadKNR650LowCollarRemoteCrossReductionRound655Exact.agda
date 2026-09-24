@@ -43,6 +43,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Empty using (⊥-elim)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -53,6 +54,8 @@ import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
+import DASHI.Physics.Closure.NSTriadKNF4ProjectedOutputPairingRound39Exact as Pairing
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as R30
 import DASHI.Physics.Closure.NSTriadKNCanonicalLiteralProjectedODERound407Exact as R407
 import DASHI.Physics.Closure.NSTriadKNPhysicalPacketBoundaryFluxLogReserveRound98Exact as Packet
@@ -83,16 +86,17 @@ selectedPairingThreeRegion threshold test value mode
      | Upper.upperShellPacket (suc threshold) mode in successor
 ... | false | false = refl
 ... | true | false = solve
-  (DASHI.Physics.Closure.NSTriadKNF4ProjectedOutputPairingRound39Exact.realHermitianPower
+  (Pairing.realHermitianPower
     (test mode) (value mode) ∷ [])
 ... | true | true = solve
-  (DASHI.Physics.Closure.NSTriadKNF4ProjectedOutputPairingRound39Exact.realHermitianPower
+  (Pairing.realHermitianPower
     (test mode) (value mode) ∷ [])
 ... | false | true =
-  let impossible =
-        Collar.upperSuccessorTrueImpliesUpperTrue threshold mode successor
-  in
-  subst (λ value → value ≡ true) (sym current) impossible
+  ⊥-elim
+    (Output.falseNotTrue
+      (trans (sym current)
+        (Collar.upperSuccessorTrueImpliesUpperTrue
+          threshold mode successor)))
 
 sumSelectedPairingThreeRegion :
   (threshold : Nat) →
