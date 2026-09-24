@@ -771,6 +771,19 @@ def _recover_import_from_error(source_bytes: bytes, node) -> Optional[ImportDecl
         alias_index = texts.index("as")
         if alias_index + 1 < len(tokens):
             alias = tokens[alias_index + 1].text
+        else:
+            # tree-sitter-agda 1.3.3 may terminate the ERROR node at the
+            # alias keyword and emit the alias as the next named sibling.
+            # Recover only one adjacent identifier token.
+            sibling = node.next_named_sibling
+            if sibling is not None:
+                sibling_tokens = [
+                    token for token in significant_tokens(source_bytes, sibling)
+                    if token.node_type in {"qid", "id"}
+                    and token.text not in _RESERVED_FUNCTION_NAMES
+                ]
+                if len(sibling_tokens) == 1:
+                    alias = sibling_tokens[0].text
     opened = "open" in texts[:import_index]
     return ImportDecl(
         module=module,
