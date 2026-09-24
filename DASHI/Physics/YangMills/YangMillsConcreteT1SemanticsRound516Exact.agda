@@ -22,10 +22,10 @@ module DASHI.Physics.YangMills.YangMillsConcreteT1SemanticsRound516Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product using (_×_; _,_)
-open import Data.Rational.Base using (ℚ)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _≤ℝ_)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _-_; _≤_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; 1ℝ; _≤ℝ_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -41,6 +41,7 @@ import DASHI.Physics.YangMills.YangMillsClayPublishedWilsonRPRound461Exact as R4
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119FiniteEuclideanSourceExact as Euclidean
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanYM4SourceNormalizedCouplingRecurrenceExact as Flow
+import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
 import DASHI.Physics.YangMills.BalabanCMP119Section2CompleteDensityDictionaryExact as CMP119
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
@@ -207,13 +208,13 @@ ConcreteUVNormalization {endpoint = endpoint} source group finite =
       (R511.family endpoint group)
       cutoff Finite.oneObservable
     ≡
-    DASHI.Foundations.RealAnalysisAxioms.1ℝ)
+    1ℝ)
   ×
   (∀ depth →
     Flow.inverseCoupling (trajectory source group) depth
     ≡
-    Flow.inverseCoupling (trajectory source group) (Agda.Builtin.Nat.suc depth)
-      + Flow.beta (trajectory source group) (Agda.Builtin.Nat.suc depth))
+    Flow.inverseCoupling (trajectory source group) (suc depth)
+      + Flow.beta (trajectory source group) (suc depth))
 
 ConcreteAsymptoticallyFreeTrajectory :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -237,11 +238,19 @@ ConcreteAsymptoticallyFreeTrajectory {endpoint = endpoint} source group finite =
     finite cutoff ≡ Limit.finiteMeasure (R511.family endpoint group) cutoff)
   ×
   (∀ depth →
-    Flow.sourceNormalizedTwoSidedUVTube
-      (betaEnclosure source group) depth
-    ≡
-    Flow.sourceNormalizedTwoSidedUVTube
-      (betaEnclosure source group) depth)
+    (Sums.natAsRational depth
+      ℚ._*_ Flow.betaLower (betaEnclosure source group)
+      ℚ._≤_
+      Flow.inverseCoupling (trajectory source group) 0
+        ℚ._-_
+        Flow.inverseCoupling (trajectory source group) depth)
+    ×
+    (Flow.inverseCoupling (trajectory source group) 0
+        ℚ._-_
+        Flow.inverseCoupling (trajectory source group) depth
+      ℚ._≤_
+      Sums.natAsRational depth
+        ℚ._*_ Flow.betaUpper (betaEnclosure source group)))
 
 ConcreteGaugePreserved :
   ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
@@ -354,7 +363,7 @@ ConcretePositivityNormalizationPreserved {endpoint = endpoint} source group =
   (∀ cutoff →
     Limit.finiteExpectation (R511.family endpoint group)
       cutoff Finite.oneObservable
-    ≡ DASHI.Foundations.RealAnalysisAxioms.1ℝ)
+    ≡ 1ℝ)
   ×
   (∀ cutoff observable →
     Finite.PointwiseNonnegative observable →
@@ -529,6 +538,77 @@ volumeCutoffCompatibility :
 volumeCutoffCompatibility {endpoint = endpoint} source group =
   R498.projectiveEventExpectationConsistency
     (R499.projectiveEvents (R511.representationInputs endpoint group))
+
+selectedUVNormalization :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcreteUVNormalization source group
+    (λ cutoff → Limit.finiteMeasure (R511.family endpoint group) cutoff)
+selectedUVNormalization {endpoint = endpoint} source group =
+  ( (λ cutoff → Agda.Builtin.Equality.refl)
+  , ( Limit.finiteExpectationOne (R511.family endpoint group)
+    , Flow.sourceRecurrence (trajectory source group)
+    )
+  )
+
+selectedAsymptoticallyFreeTrajectory :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcreteAsymptoticallyFreeTrajectory source group
+    (λ cutoff → Limit.finiteMeasure (R511.family endpoint group) cutoff)
+selectedAsymptoticallyFreeTrajectory source group =
+  ( (λ cutoff → Agda.Builtin.Equality.refl)
+  , Flow.sourceNormalizedTwoSidedUVTube (betaEnclosure source group)
+  )
+
+reflectionPositivityPreserved :
+  ∀ {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+      Algebra Event Projection EuclideanAction
+      Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+      SmallFieldScale BlockRadius AnalyticRadius Decay
+      sequenceLimit limitLaws quotient division endpoint}
+    (source :
+      ConcreteT1SourceBundle
+        G X Configuration Position CurvaturePolynomial LocalOperator
+        OPECoefficient StressTensor Hilbert Hamiltonian Vacuum
+        Algebra Event Projection EuclideanAction
+        Density Operation Action Field RegularTerm RTerm BoundaryTerm VacuumTerm
+        SmallFieldScale BlockRadius AnalyticRadius Decay
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division endpoint)
+    group →
+  ConcreteReflectionPositivityPreserved source group
+reflectionPositivityPreserved source group =
+  finiteReflectionPositive source group
 
 ------------------------------------------------------------------------
 -- Semantics overlay: non-T1 meanings are inherited from R511.
