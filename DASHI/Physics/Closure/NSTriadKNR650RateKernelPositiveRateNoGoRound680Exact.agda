@@ -82,7 +82,7 @@ cardinalityWeightedWorkIsMinusSixtyEight :
 cardinalityWeightedWorkIsMinusSixtyEight = refl
 
 pairDifferenceValue :
-  Pair.pairDifferenceWorkSum rate work items ≡ 63
+  Pair.pairDifferenceWorkSum rate work items ≡ 0ℚ - 90
 pairDifferenceValue = refl
 
 rateSelfPlusPairDifferenceValue :
