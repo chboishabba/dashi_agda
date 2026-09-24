@@ -161,6 +161,27 @@ class CommandScopeCheckBackend:
         self.attempted = 0
         self.succeeded = 0
         self.failed = 0
+        self.last_checked_modules: Tuple[str, ...] = ()
+        self.last_partial_validated_modules: Tuple[str, ...] = ()
+
+    @staticmethod
+    def _checked_modules(output: str) -> Tuple[str, ...]:
+        modules = []
+        seen = set()
+        for raw_line in output.splitlines():
+            line = raw_line.strip()
+            if not line.startswith("Checking "):
+                continue
+            if line.startswith("Checking:"):
+                continue
+            rest = line[len("Checking "):]
+            module = rest.split(" (", 1)[0].strip()
+            if not module or " " in module or "/" in module:
+                continue
+            if module not in seen:
+                seen.add(module)
+                modules.append(module)
+        return tuple(modules)
 
     def _argv(self, path: Path) -> List[str]:
         absolute = str(path.resolve())
@@ -170,6 +191,7 @@ class CommandScopeCheckBackend:
 
     def _scope_ok(self, path: Path) -> bool:
         self.attempted += 1
+        output = ""
         try:
             completed = subprocess.run(
                 self._argv(path),
@@ -179,9 +201,18 @@ class CommandScopeCheckBackend:
                 timeout=self.timeout,
                 check=False,
             )
+            output = (completed.stdout or "") + "\n" + (completed.stderr or "")
             ok = completed.returncode == 0
-        except subprocess.TimeoutExpired:
+        except subprocess.TimeoutExpired as exc:
+            stdout = exc.stdout.decode() if isinstance(exc.stdout, bytes) else (exc.stdout or "")
+            stderr = exc.stderr.decode() if isinstance(exc.stderr, bytes) else (exc.stderr or "")
+            output = stdout + "\n" + stderr
             ok = False
+
+        checked = self._checked_modules(output)
+        self.last_checked_modules = checked
+        self.last_partial_validated_modules = checked if ok else checked[:-1]
+
         if ok:
             self.succeeded += 1
         else:
