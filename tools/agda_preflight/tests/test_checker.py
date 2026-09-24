@@ -181,3 +181,115 @@ broken = {
     )
     assert not any(d.code == "TSAGDA000" for d in Checker(tmp_path).check(valid))
     assert any(d.code == "TSAGDA000" for d in Checker(tmp_path).check(invalid))
+
+
+def test_module_path_mismatch(tmp_path):
+    path = write_module(tmp_path, "Right.Name", "module Wrong.Name where\n")
+    hits = Checker(tmp_path).check(path)
+    assert any(d.code == "TSAGDA004" for d in hits)
+
+
+def test_unknown_using_name_is_reported(tmp_path):
+    write_module(tmp_path, "Lib", "module Lib where\n\nx : Set\nx = Set\n")
+    path = write_module(
+        tmp_path,
+        "Use",
+        "module Use where\n\nopen import Lib using (missing)\n",
+    )
+    hits = Checker(tmp_path).check(path)
+    assert any(d.code == "TSAGDA023" for d in hits)
+
+
+def test_clause_arity_mismatch_is_reported(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Arity",
+        """module Arity where
+
+f : Set → Set → Set
+f x = x
+""",
+    )
+    hits = Checker(tmp_path).check(path)
+    assert any(d.code == "TSAGDA045" for d in hits)
+
+
+def test_record_unknown_and_missing_fields_are_reported(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Records",
+        """module Records where
+
+record R : Set₁ where
+  field
+    A : Set
+    B : Set
+
+mk : R
+mk =
+  record
+    { A = Set
+    ; C = Set
+    }
+""",
+    )
+    hits = Checker(tmp_path).check(path)
+    assert any(d.code == "TSAGDA060" for d in hits)
+    assert any(d.code == "TSAGDA062" for d in hits)
+
+
+def test_obvious_negative_occurrence_is_reported(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Negative",
+        """module Negative where
+
+data Bad : Set where
+  bad : (Bad → Set) → Bad
+""",
+    )
+    hits = Checker(tmp_path).check(path)
+    assert any(d.code in {"TSAGDA130", "TSAGDA131"} for d in hits)
+
+
+def test_unsafe_pragmas_are_reported(tmp_path):
+    path = write_module(
+        tmp_path,
+        "UnsafeExact",
+        """module UnsafeExact where
+
+{-# TERMINATING #-}
+loop : Set
+loop = loop
+""",
+    )
+    hits = Checker(tmp_path).check(path)
+    assert any(d.code == "TSAGDA161" for d in hits)
+
+
+def test_api_snapshot_detects_constructor_arity_drift(tmp_path):
+    from agda_preflight.rules import api_snapshot, api_drift
+    from agda_preflight.checker import Diagnostic
+
+    path = write_module(
+        tmp_path,
+        "Api",
+        """module Api where
+
+data D : Set where
+  c : Set → D
+""",
+    )
+    checker = Checker(tmp_path)
+    baseline = api_snapshot(checker)
+    path.write_text(
+        """module Api where
+
+data D : Set where
+  c : Set → Set → D
+""",
+        encoding="utf-8",
+    )
+    checker = Checker(tmp_path)
+    hits = api_drift(checker, baseline, Diagnostic)
+    assert any(d.code == "TSAGDA182" for d in hits)
