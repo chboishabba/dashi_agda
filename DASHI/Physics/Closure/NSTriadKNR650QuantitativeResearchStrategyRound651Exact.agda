@@ -35,7 +35,6 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Closure.NSTriadKNHHBadAmplitudeHomogeneityRound43Exact as R43
 import DASHI.Physics.Closure.NSTriadKNUniformGalerkinSignedCriticalProductionRound104Exact as R104
-import DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact as R650
 
 r650StressScanPath : String
 r650StressScanPath = "scripts/ns_r650_quantitative_stress_scan.py"
@@ -78,10 +77,6 @@ round651FiniteGalerkinStressHarnessInstalled = true
 
 round651StressHarnessHasTheoremAuthority : Bool
 round651StressHarnessHasTheoremAuthority = false
-
-round651ExactlyTwoNewNSLeavesStillAuthoritative : Bool
-round651ExactlyTwoNewNSLeavesStillAuthoritative =
-  R650.round650ExactlyTwoNewNSAnalyticLeaves
 
 round651IntroducesNewNSEstimate : Bool
 round651IntroducesNewNSEstimate = false
@@ -127,11 +122,6 @@ round651FiniteGalerkinStressHarnessInstalledIsTrue = refl
 round651StressHarnessHasTheoremAuthorityIsFalse :
   round651StressHarnessHasTheoremAuthority ≡ false
 round651StressHarnessHasTheoremAuthorityIsFalse = refl
-
-round651ExactlyTwoNewNSLeavesStillAuthoritativeIsTrue :
-  round651ExactlyTwoNewNSLeavesStillAuthoritative ≡ true
-round651ExactlyTwoNewNSLeavesStillAuthoritativeIsTrue =
-  R650.round650ExactlyTwoNewNSAnalyticLeavesIsTrue
 
 round651IntroducesNewNSEstimateIsFalse :
   round651IntroducesNewNSEstimate ≡ false
