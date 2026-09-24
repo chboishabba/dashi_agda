@@ -622,3 +622,78 @@ open import NestedExport using (SSP)
     )
     diagnostics = Checker(tmp_path).check(path)
     assert not any(d.code == "TSAGDA023" for d in diagnostics)
+
+
+
+def test_untyped_forall_binders_count_individually(tmp_path):
+    from agda_preflight.shapes import (
+        PiShape,
+        UnknownShape,
+        explicit_arity,
+        shape_from_node,
+    )
+
+    path = write_module(
+        tmp_path,
+        "UntypedForall",
+        """module UntypedForall where
+
+f :
+  ∀ p q →
+  p ≢ q →
+  Result p q
+f p q neq = rhs
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    signature = summary.ast.signatures["f"]
+    shape = shape_from_node(summary.ast.source_bytes, signature.type_node)
+
+    assert isinstance(shape, PiShape)
+    assert explicit_arity(shape) == 3
+    assert isinstance(shape.domains[0].head, UnknownShape)
+    assert isinstance(shape.domains[1].head, UnknownShape)
+
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code in {"TSAGDA045", "TSAGDA110"} for d in diagnostics)
+
+
+def test_untyped_implicit_forall_group_counts_each_binder(tmp_path):
+    from agda_preflight.shapes import PiShape, all_arity, explicit_arity, shape_from_node
+
+    path = write_module(
+        tmp_path,
+        "ImplicitForall",
+        """module ImplicitForall where
+
+f :
+  ∀ {m Δ q} →
+  (x : X m Δ q) →
+  Result x
+f {m} {Δ} {q} x = rhs
+""",
+    )
+    summary = Checker(tmp_path).parse_summary(path)
+    signature = summary.ast.signatures["f"]
+    shape = shape_from_node(summary.ast.source_bytes, signature.type_node)
+
+    assert isinstance(shape, PiShape)
+    assert all_arity(shape) == 4
+    assert explicit_arity(shape) == 1
+
+
+def test_base369_style_forall_clause_arity_is_not_flagged(tmp_path):
+    path = write_module(
+        tmp_path,
+        "Base369Style",
+        """module Base369Style where
+
+triXor-assoc :
+  ∀ a b c →
+  triXor a (triXor b c) ≡ triXor (triXor a b) c
+triXor-assoc tri-low tri-low tri-low = refl
+""",
+    )
+
+    diagnostics = Checker(tmp_path).check(path)
+    assert not any(d.code in {"TSAGDA045", "TSAGDA110"} for d in diagnostics)
