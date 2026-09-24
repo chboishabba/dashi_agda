@@ -21,6 +21,7 @@ open import Data.Maybe.Base using (nothing)
 open import Level using (0ℓ)
 
 import Tactic.RingSolver.Core.AlmostCommutativeRing as ACR
+import Algebra.Properties.Ring as RingProperties
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
@@ -70,10 +71,23 @@ module RealRingLaws = CommutativeRing realCommutativeRing
 open RealRingLaws public using
   ( *-identityˡ
   ; *-identityʳ
+  ; -‿inverseʳ
   ; +-identityˡ
   ; +-identityʳ
+  ; +-assoc
+  ; +-comm
   ; zeroˡ
   ; zeroʳ
+  )
+
+module RealRingProperties = RingProperties RealRingLaws.ring
+
+open RealRingProperties public using
+  ( -0#≈0#
+  ; -‿involutive
+  ; -‿distribˡ-*
+  ; -‿distribʳ-*
+  ; [-x][-y]≈xy
   )
 
 private

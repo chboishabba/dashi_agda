@@ -21,6 +21,12 @@ open import Relation.Binary.PropositionalEquality using (sym)
 
 import Tactic.RingSolver as Solver
 
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
+  ( +-assoc
+  ; +-identityˡ
+  ; +-identityʳ
+  )
+
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanLatticeAdjointCovariantDerivative using
   ( AdjointAdditiveModule )
@@ -47,7 +53,17 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ; su2Identity
   ; su2Multiply
   ; su2QuaternionGroup
+  ; q0Multiply
+  ; q1Multiply
+  ; q2Multiply
+  ; q3Multiply
+  ; q0Conjugate
+  ; q1Conjugate
+  ; q2Conjugate
+  ; q3Conjugate
   )
+open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
+  ( quaternionPureImaginaryConjugation0Polynomial )
 
 record SU2LieAlgebra : Set where
   constructor su2Lie
@@ -100,23 +116,23 @@ lieAddAssociative
   (su2Lie x₂ y₂ z₂)
   (su2Lie x₃ y₃ z₃) =
   su2LieExt
-    (Solver.solve (x₁ ∷ x₂ ∷ x₃ ∷ []) realSolverRing)
-    (Solver.solve (y₁ ∷ y₂ ∷ y₃ ∷ []) realSolverRing)
-    (Solver.solve (z₁ ∷ z₂ ∷ z₃ ∷ []) realSolverRing)
+    (+-assoc x₁ x₂ x₃)
+    (+-assoc y₁ y₂ y₃)
+    (+-assoc z₁ z₂ z₃)
 
 lieZeroLeft : ∀ X → lieAdd lieZero X ≡ X
 lieZeroLeft (su2Lie x y z) =
   su2LieExt
-    (Solver.solve (x ∷ []) realSolverRing)
-    (Solver.solve (y ∷ []) realSolverRing)
-    (Solver.solve (z ∷ []) realSolverRing)
+    (+-identityˡ x)
+    (+-identityˡ y)
+    (+-identityˡ z)
 
 lieZeroRight : ∀ X → lieAdd X lieZero ≡ X
 lieZeroRight (su2Lie x y z) =
   su2LieExt
-    (Solver.solve (x ∷ []) realSolverRing)
-    (Solver.solve (y ∷ []) realSolverRing)
-    (Solver.solve (z ∷ []) realSolverRing)
+    (+-identityʳ x)
+    (+-identityʳ y)
+    (+-identityʳ z)
 
 adjointQuaternion :
   SU2Quaternion → SU2LieAlgebra → Quaternion
@@ -132,9 +148,15 @@ adjointQuaternionPureImaginary :
 adjointQuaternionPureImaginary
   (su2q (quat a₀ a₁ a₂ a₃) a-unit)
   (su2Lie x y z) =
-  Solver.solve
-    (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x ∷ y ∷ z ∷ [])
-    realSolverRing
+  rewrite q0Multiply (quat a₀ a₁ a₂ a₃) (lieQuaternion (su2Lie x y z))
+        | q1Multiply (quat a₀ a₁ a₂ a₃) (lieQuaternion (su2Lie x y z))
+        | q2Multiply (quat a₀ a₁ a₂ a₃) (lieQuaternion (su2Lie x y z))
+        | q3Multiply (quat a₀ a₁ a₂ a₃) (lieQuaternion (su2Lie x y z))
+        | q0Conjugate (quat a₀ a₁ a₂ a₃)
+        | q1Conjugate (quat a₀ a₁ a₂ a₃)
+        | q2Conjugate (quat a₀ a₁ a₂ a₃)
+        | q3Conjugate (quat a₀ a₁ a₂ a₃) =
+  quaternionPureImaginaryConjugation0Polynomial a₀ a₁ a₂ a₃ x y z
 
 lieQuaternionAdjoint :
   ∀ u X → lieQuaternion (su2Adjoint u X) ≡ adjointQuaternion u X
