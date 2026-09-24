@@ -41,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact 
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact as Pair
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredMultiplierVectorCovarianceExact as Vector
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact as PhysicalRate
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCrossGradientCovarianceExact as Cross
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact as R681
 
@@ -98,8 +99,7 @@ fixedOutputPhysicalRateKernelVectorNormalForm :
     mixed = R224.foldVector value items
     work = Pair.cellWork mixed value
     rate = Pair.cellRate
-      (DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalRateDifferenceExact.physicalModalRate
-        physicalSystem)
+      (PhysicalRate.physicalModalRate physicalSystem)
   in
   Pair.weightedWorkSum rate work items
   ≡
