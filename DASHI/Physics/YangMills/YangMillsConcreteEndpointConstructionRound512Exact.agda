@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.YangMillsConcreteEndpointConstructionRound512Exac
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_; _,_)
+open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
@@ -82,7 +83,7 @@ record ConcreteEndpointConstructionInputs
     opeRemainder :
       G →
       LocalOperator → LocalOperator →
-      Position → Nat → Data.Rational.Base.ℚ
+      Position → Nat → ℚ
 
     stressTensor :
       G → StressTensor
