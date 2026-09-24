@@ -236,13 +236,14 @@ def _prime_scope_closure(
     checker: Checker,
     root_path: Path,
     collected: List[CollectedModule],
+    terminalreporter=None,
 ) -> None:
-    """Recursively certify successful import subtrees with one scope probe each.
+    """Certify only dependency subtrees that contain deferred scope findings.
 
-    If the aggregate root succeeds, its entire collected dependency closure is
-    marked scope-valid. If it fails, descend only through direct imported
-    subtrees that are still unresolved. This isolates a small failing frontier
-    without paying one Agda process per module.
+    A cheap structural pass over the collected closure identifies modules whose
+    diagnostics actually require AGDA_SCOPE evidence. The expensive oracle then
+    probes only aggregate nodes whose selected dependency subtree intersects
+    that candidate set.
     """
     backend = checker.scope_backend
     if not isinstance(backend, AgdaAutoRefineBackend):
@@ -251,48 +252,142 @@ def _prime_scope_closure(
         return
 
     selected = {item.path.resolve() for item in collected}
-    visiting = set()
+    path_to_module = {item.path.resolve(): item.module for item in collected}
 
-    def closure_paths(path: Path) -> List[Path]:
-        return [
-            checker.module_path(module).resolve()
-            for module in checker.dependency_modules(path)
-            if checker.module_path(module).resolve() in selected
-        ]
+    def log(message: str) -> None:
+        if terminalreporter is not None:
+            terminalreporter.write_line(message)
+            flush = getattr(terminalreporter, "_tw", None)
+            if flush is not None:
+                try:
+                    flush.flush()
+                except Exception:
+                    pass
+
+    log(
+        f"Scanning {len(collected)} modules for deferred Agda-scope candidates..."
+    )
+    scope_candidates = set()
+    for index, item in enumerate(collected, 1):
+        diagnostics = checker.structural_check(item.path)
+        if any(
+            (not diagnostic.evidence_sufficient)
+            and diagnostic.minimum_evidence == "agda-scope"
+            for diagnostic in diagnostics
+        ):
+            scope_candidates.add(item.path.resolve())
+        if index % 100 == 0 or index == len(collected):
+            log(
+                f"  [structural-prepass] {index}/{len(collected)} modules; "
+                f"{len(scope_candidates)} scope candidates"
+            )
+
+    backend.set_scope_candidates(scope_candidates)
+    if not scope_candidates:
+        return
+
+    # Build the selected import DAG once. Shared dependencies and subtree
+    # intersections are memoized instead of repeatedly recomputing closures.
+    children = {}
+    for item in collected:
+        summary = checker.parse_summary(item.path)
+        deps = []
+        for module in sorted(set(summary.imports.values())):
+            child = checker.module_path(module).resolve()
+            if child in selected:
+                deps.append(child)
+        children[item.path.resolve()] = tuple(deps)
+
+    descendant_cache = {}
+    descendant_active = set()
+
+    def descendants_including(path: Path):
+        key = path.resolve()
+        cached = descendant_cache.get(key)
+        if cached is not None:
+            return cached
+        if key in descendant_active:
+            # Import-cycle diagnostics are handled elsewhere. For pruning,
+            # conservatively stop recursion at the repeated node.
+            return {key}
+        descendant_active.add(key)
+        try:
+            result = {key}
+            for child in children.get(key, ()):
+                result.update(descendants_including(child))
+            descendant_cache[key] = result
+            return result
+        finally:
+            descendant_active.remove(key)
+
+    visiting = set()
 
     def visit(path: Path, *, aggregate_root: bool = False) -> None:
         key = path.resolve()
-        if key not in selected:
+        if key not in selected or key in visiting:
             return
         if backend.scope_known(key):
             return
-        if key in visiting:
+
+        subtree = descendants_including(key)
+        relevant = subtree & scope_candidates
+        if not relevant:
             return
+
+        module = path_to_module.get(key, str(key))
+        log(
+            f"  [scope-probe] {module} "
+            f"({len(relevant)} deferred candidate"
+            f"{'s' if len(relevant) != 1 else ''})..."
+        )
 
         visiting.add(key)
         try:
             if backend.probe_scope(key, aggregate_root=aggregate_root):
-                backend.mark_scope_validated(closure_paths(key))
+                backend.mark_scope_validated(subtree)
+                log(
+                    f"  [scope-probe] {module} ✓ certified "
+                    f"{len(subtree)} modules / {len(relevant)} candidates"
+                )
                 return
 
-            try:
-                summary = checker.parse_summary(key)
-            except (OSError, UnicodeDecodeError):
-                return
+            partial_modules = getattr(
+                backend.scope,
+                "last_partial_validated_modules",
+                (),
+            )
+            partial_paths = {
+                checker.module_path(module_name).resolve()
+                for module_name in partial_modules
+                if checker.module_path(module_name).resolve() in selected
+            }
+            if partial_paths:
+                backend.mark_scope_validated(partial_paths)
+                scope_candidates.difference_update(partial_paths)
+                log(
+                    f"  [scope-probe] {module} ✗ unresolved, but Agda "
+                    f"partially certified {len(partial_paths)} modules; "
+                    "descending into remaining candidates"
+                )
+            else:
+                log(
+                    f"  [scope-probe] {module} ✗ unresolved; "
+                    "descending into relevant imports"
+                )
 
-            direct_children = []
-            for module in sorted(set(summary.imports.values())):
-                child = checker.module_path(module).resolve()
-                if child in selected:
-                    direct_children.append(child)
-
-            for child in direct_children:
-                if not backend.scope_known(child):
+            for child in children.get(key, ()):
+                if descendants_including(child) & scope_candidates:
                     visit(child, aggregate_root=True)
         finally:
             visiting.remove(key)
 
-    visit(root_path.resolve(), aggregate_root=True)
+    root = root_path.resolve()
+    log(
+        f"Priming Agda scope closure for "
+        f"{path_to_module.get(root, str(root))} "
+        f"({len(collected)} modules, {len(scope_candidates)} scope candidates)..."
+    )
+    visit(root, aggregate_root=True)
 
 
 
@@ -318,7 +413,13 @@ class AgdaModuleFile(pytest.File):
                 setattr(config, "_dashi_agda_scope_primed_roots", primed)
             root_key = path.resolve()
             if root_key not in primed:
-                _prime_scope_closure(checker, path, selected)
+                terminalreporter = config.pluginmanager.getplugin("terminalreporter")
+                _prime_scope_closure(
+                    checker,
+                    path,
+                    selected,
+                    terminalreporter=terminalreporter,
+                )
                 primed.add(root_key)
 
         for collected in selected:

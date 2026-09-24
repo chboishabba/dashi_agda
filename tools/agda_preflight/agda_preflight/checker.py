@@ -183,6 +183,7 @@ class Checker:
         self.parser = _parser()
         self._summary_cache: Dict[Path, ModuleSummary] = {}
         self._export_cache: Dict[Path, Set[str]] = {}
+        self._diagnostic_cache: Dict[Path, List[Diagnostic]] = {}
         self.evidence_level = evidence_level
         self.scope_backend = scope_backend
 
@@ -333,8 +334,13 @@ class Checker:
                 out[alias] = self.parse_summary(path)
         return out
 
-    def check(self, path: Path) -> List[Diagnostic]:
+    def structural_check(self, path: Path) -> List[Diagnostic]:
+        """Run and cache the cheap tree/index pass without external refinement."""
         path = path.resolve()
+        cached = self._diagnostic_cache.get(path)
+        if cached is not None:
+            return list(cached)
+
         summary = self.parse_summary(path)
         diagnostics: List[Diagnostic] = []
         diagnostics.extend(self._syntax_diagnostics(summary))
@@ -342,11 +348,15 @@ class Checker:
         diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
         diagnostics.extend(self._record_shape_diagnostics(summary))
         diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
-        diagnostics = self._apply_evidence_policy(summary, diagnostics)
 
-        # Some catalogue entries are intentionally more specific views of the
-        # same high-confidence structural event. Emit aliases centrally so the
-        # documented diagnostic surface stays synchronized across rule engines.
+        # Apply evidence provenance without invoking an external backend.
+        backend = self.scope_backend
+        self.scope_backend = None
+        try:
+            diagnostics = self._apply_evidence_policy(summary, diagnostics)
+        finally:
+            self.scope_backend = backend
+
         for diagnostic in list(diagnostics):
             for code in DIAGNOSTIC_ALIASES.get(diagnostic.code, ()):
                 diagnostics.append(
@@ -364,7 +374,7 @@ class Checker:
                         diagnostic.evidence_sufficient,
                     )
                 )
-        # Stable de-duplication.
+
         seen = set()
         unique = []
         for d in diagnostics:
@@ -372,7 +382,17 @@ class Checker:
             if key not in seen:
                 seen.add(key)
                 unique.append(d)
-        return sorted(unique, key=lambda d: (d.line, d.column, d.code))
+        result = sorted(unique, key=lambda d: (d.line, d.column, d.code))
+        self._diagnostic_cache[path] = list(result)
+        return result
+
+    def check(self, path: Path) -> List[Diagnostic]:
+        path = path.resolve()
+        diagnostics = self.structural_check(path)
+        if self.scope_backend is None:
+            return diagnostics
+        summary = self.parse_summary(path)
+        return self.scope_backend.refine(summary, list(diagnostics))
 
     def _apply_evidence_policy(
         self,
