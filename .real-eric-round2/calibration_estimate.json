@@ -1,0 +1,22 @@
+{
+  "candidate_false_negative_proxy": 0.03571428571428571,
+  "candidate_false_negative_proxy_n": 1,
+  "candidate_review_disagreement_n": 107,
+  "candidate_review_disagreement_rate": 0.535,
+  "confusion_counts": {
+    "exclude->exclude": 88,
+    "exclude->unresolved": 76,
+    "include->unresolved": 13,
+    "probable->exclude": 1,
+    "probable->unresolved": 14,
+    "unresolved->exclude": 3,
+    "unresolved->unresolved": 5
+  },
+  "estimate_creates_automatic_decision": false,
+  "estimate_creates_population_truth": false,
+  "estimate_creates_source_truth": false,
+  "estimate_scope_reference": "explicitly reviewed screening subset only",
+  "reviewed_pair_count": 200,
+  "reviewed_positive_count": 28,
+  "schema": "digital-esd-screening-calibration-estimate-v0_2"
+}
