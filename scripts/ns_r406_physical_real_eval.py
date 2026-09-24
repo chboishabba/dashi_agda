@@ -329,17 +329,22 @@ def evaluate_r406(
     global_forcing_full = 0.0
     global_forcing_diagonal = 0.0
     global_forcing_offdiagonal = 0.0
+    global_rate_lifted_forcing_full = 0.0
+    global_coherent_commutator_work = 0.0
+    global_weighted_rate_work = 0.0
     output_rows: list[dict[str, Any]] = []
     minimum_pair_rate: float | None = None
     evaluated_pairs = 0
 
     for output in nonzero_cutoff_modes(formal_cutoff):
         incidences = output_fibre(formal_cutoff, output)
+        mixed_cells: list[np.ndarray] = []
         cells: list[np.ndarray] = []
         forces: list[np.ndarray] = []
         rates: list[float] = []
 
         for p, q in incidences:
+            mixed_cells.append(_mixed_plus_minus(p, q, velocity_hat))
             cells.append(_double_cell(p, q, velocity_hat))
             forces.append(_double_forcing(p, q, velocity_hat, forcing_hat))
             rate = _cell_rate(p, q, nu)
@@ -352,6 +357,7 @@ def evaluate_r406(
         fibre_companion = 0.0
         fibre_forcing_diagonal = 0.0
         fibre_forcing_offdiagonal = 0.0
+        fibre_rate_lifted_forcing_full = 0.0
         fibre_pairs = 0
         for i in range(len(incidences)):
             d_i = cells[i]
@@ -363,9 +369,9 @@ def evaluate_r406(
                 raise RuntimeError("nonpositive diagonal R290 pair rate")
             if minimum_pair_rate is None or diagonal_pair_rate < minimum_pair_rate:
                 minimum_pair_rate = diagonal_pair_rate
-            fibre_forcing_diagonal += (
-                _real_hermitian_cross(g_i, d_i) / diagonal_pair_rate
-            )
+            diagonal_cross = _real_hermitian_cross(g_i, d_i)
+            fibre_forcing_diagonal += diagonal_cross / diagonal_pair_rate
+            fibre_rate_lifted_forcing_full += diagonal_cross
 
             for j in range(i + 1, len(incidences)):
                 pair_rate = lambda_i + rates[j]
@@ -378,6 +384,10 @@ def evaluate_r406(
                 forcing_ji = _real_hermitian_cross(forces[j], d_i) / pair_rate
                 ordered_offdiagonal = forcing_ij + forcing_ji
                 fibre_forcing_offdiagonal += ordered_offdiagonal
+                fibre_rate_lifted_forcing_full += (
+                    _real_hermitian_cross(g_i, cells[j])
+                    + _real_hermitian_cross(forces[j], d_i)
+                )
 
                 # R496 direct companion is exactly one half of the ordered
                 # oriented off-diagonal transpose completion.
@@ -387,11 +397,51 @@ def evaluate_r406(
 
         fibre_forcing_full = fibre_forcing_diagonal + fibre_forcing_offdiagonal
 
+        mixed = (
+            np.sum(np.asarray(mixed_cells), axis=0)
+            if mixed_cells
+            else np.zeros(3, dtype=np.complex128)
+        )
+        commutator = (
+            0.25 * np.sum(np.asarray(forces), axis=0)
+            if forces
+            else np.zeros(3, dtype=np.complex128)
+        )
+        coherent_commutator_work = 2.0 * _real_hermitian_cross(mixed, commutator)
+        weighted_decay_vector = (
+            -np.sum(
+                np.asarray([
+                    rates[i] * mixed_cells[i]
+                    for i in range(len(mixed_cells))
+                ]),
+                axis=0,
+            )
+            if mixed_cells
+            else np.zeros(3, dtype=np.complex128)
+        )
+        tangent = weighted_decay_vector + commutator
+        coherent_tangent_work = 2.0 * _real_hermitian_cross(mixed, tangent)
+        weighted_rate_work = sum(
+            rates[i] * 2.0 * _real_hermitian_cross(mixed, mixed_cells[i])
+            for i in range(len(mixed_cells))
+        )
+        r685_residual = (
+            weighted_rate_work
+            - (coherent_commutator_work - coherent_tangent_work)
+        )
+        r687_residual = (
+            fibre_rate_lifted_forcing_full
+            - 8.0 * coherent_commutator_work
+        )
+
         evaluated_pairs += fibre_pairs
         global_companion += fibre_companion
         global_forcing_diagonal += fibre_forcing_diagonal
         global_forcing_offdiagonal += fibre_forcing_offdiagonal
         global_forcing_full += fibre_forcing_full
+        global_rate_lifted_forcing_full += fibre_rate_lifted_forcing_full
+        global_coherent_commutator_work += coherent_commutator_work
+        global_weighted_rate_work += weighted_rate_work
         if include_output_rows:
             output_rows.append(
                 {
@@ -404,6 +454,13 @@ def evaluate_r406(
                     "forcing_full_offdiagonal": float(fibre_forcing_offdiagonal),
                     "forcing_full": float(fibre_forcing_full),
                     "four_times_forcing_full": float(4.0 * fibre_forcing_full),
+                    "rate_lifted_forcing_full": float(fibre_rate_lifted_forcing_full),
+                    "coherent_commutator_work": float(coherent_commutator_work),
+                    "coherent_tangent_work": float(coherent_tangent_work),
+                    "weighted_rate_work": float(weighted_rate_work),
+                    "weighted_rate_work_nonnegative": weighted_rate_work >= -1.0e-12,
+                    "r685_rate_kernel_residual": float(r685_residual),
+                    "r687_rate_lift_residual": float(r687_residual),
                     "offdiagonal_minus_twice_direct_companion": float(
                         fibre_forcing_offdiagonal - 2.0 * fibre_companion
                     ),
@@ -432,6 +489,13 @@ def evaluate_r406(
         "global_forcing_full_offdiagonal": float(global_forcing_offdiagonal),
         "global_forcing_full": float(global_forcing_full),
         "c1_instantaneous_four_forcing_full": float(4.0 * global_forcing_full),
+        "global_rate_lifted_forcing_full": float(global_rate_lifted_forcing_full),
+        "global_coherent_commutator_work": float(global_coherent_commutator_work),
+        "global_weighted_rate_work": float(global_weighted_rate_work),
+        "r687_global_rate_lift_residual": float(
+            global_rate_lifted_forcing_full
+            - 8.0 * global_coherent_commutator_work
+        ),
         "offdiagonal_minus_twice_direct_companion": float(
             global_forcing_offdiagonal - 2.0 * global_companion
         ),
