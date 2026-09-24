@@ -6,7 +6,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.GodsEyeViewExecutableWorldResearchLoopExact as WorldLoop
 import DASHI.Core.ActionabilityCostedExperimentChoiceExact as Choice
-import DASHI.Core.ProofSearchExperimentalParetoCrossPollinationExact as ProofExperiment
+import DASHI.Core.ProofSearchExperimentalParetoCrossPollinationExact as ProofExperiment\nimport DASHI.Core.ProviderNeutralWorldQueryAlgebraExact as Query
 import DASHI.Statistics.ForecastVerificationKernelExact as Kernel
 import DASHI.Statistics.ForecastResolutionSelectionExact as Lifecycle
 import DASHI.Statistics.ForecastCalibrationDecompositionExact as Calibration
@@ -72,11 +72,8 @@ record ForecastResidualAcquisitionPlan
   field
     route : ForecastAcquisitionRoute
     proofSearchHypothesisReference : String
-    supportProbeReference : String
-    defeaterProbeReference : String
-    comparatorProbeReference : String
-    contradictionProbeReference : String
-    providerNeutralQueryReference : String
+    hypothesisFamily : Query.WorldSearchHypothesisFamily
+    compiledQuery : Query.WorldProviderCompiledQuery
     selectedInformationMove : Choice.InformationMove
     expectedFibreRefinementReference : String
     admissibilityReference : String
@@ -134,6 +131,11 @@ proofExperimentBoundary :
   ProofExperiment.ProofSearchExperimentalParetoBoundary
 proofExperimentBoundary =
   ProofExperiment.canonicalProofSearchExperimentalParetoBoundary
+
+worldQueryBoundary :
+  Query.ProviderNeutralWorldQueryBoundary
+worldQueryBoundary =
+  Query.canonicalProviderNeutralWorldQueryBoundary
 
 forecastKernelBoundary :
   Kernel.ForecastVerificationKernelBoundary
