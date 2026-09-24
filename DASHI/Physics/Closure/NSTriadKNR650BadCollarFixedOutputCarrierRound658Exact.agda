@@ -35,6 +35,7 @@ open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -118,12 +119,12 @@ badCollarActiveFixedOutputReduction :
     (R294.weightedCommutatorCell
       (OutputLocal.outputLocalSwapInvariantWeight F (R656.badCollarPacket K))
       S velocity forcing)
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+    (Output.physicalOutputFiber
       cutoff output)
   ≡
   R224.foldVector
     (OutputLocal.unweightedCommutatorCell S velocity forcing)
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+    (Output.physicalOutputFiber
       cutoff output)
 badCollarActiveFixedOutputReduction K output active =
   OutputLocal.outputLocalActiveFixedOutputReduction
@@ -142,7 +143,7 @@ badCollarInactiveFixedOutputReduction :
     (R294.weightedCommutatorCell
       (OutputLocal.outputLocalSwapInvariantWeight F (R656.badCollarPacket K))
       S velocity forcing)
-    (DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber.physicalOutputFiber
+    (Output.physicalOutputFiber
       cutoff output)
   ≡ C3.complex3Zero F
 badCollarInactiveFixedOutputReduction K output inactive =
