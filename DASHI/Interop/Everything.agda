@@ -102,3 +102,4 @@ import DASHI.Interop.LeanMoonshineDeltaIdentityPinnedReceiptExact
 import DASHI.Interop.Round11MachinLeanBindingManifestExact
 import DASHI.Interop.LeanBishopCompletionCanonicalRouteReceiptExact
 import DASHI.Interop.LeanRound11MachinCanonicalRouteBParityExact
+import DASHI.Interop.LeanRound11MachinReplayEvidenceExact
