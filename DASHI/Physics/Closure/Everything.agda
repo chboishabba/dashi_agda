@@ -441,3 +441,5 @@ module DASHI.Physics.Closure.Everything where
 -- GR/QFT executable-candidate discipline: run the finite sourced Einstein
 -- equation residual before promotion, preserving explicit calibration scope.
 
+
+import DASHI.Physics.Closure.DrellYanRatioAbsoluteDefectLocalizationExact
