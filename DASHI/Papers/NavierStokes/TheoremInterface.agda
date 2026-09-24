@@ -371,6 +371,14 @@ periodicClayMaxCutC2StrictMarginAlsoPaysC5 : Bool
 periodicClayMaxCutC2StrictMarginAlsoPaysC5 =
   R642.round642C2StrictMarginAlsoPaysC5
 
+periodicClayMaxCutC2LiteralRadialSurplusNormalizationClosed : Bool
+periodicClayMaxCutC2LiteralRadialSurplusNormalizationClosed =
+  R642.round642C2LiteralRadialSurplusNormalizationClosed
+
+periodicClayMaxCutC2RemainingLeafCanBeOneRadialSurplusPayment : Bool
+periodicClayMaxCutC2RemainingLeafCanBeOneRadialSurplusPayment =
+  R642.round642C2RemainingLeafCanBeOneRadialSurplusPayment
+
 periodicClayMaxCutC3CompilerAvailable : Bool
 periodicClayMaxCutC3CompilerAvailable =
   R642.round642C3CanonicalPhysicalSliceCompilerAvailable
