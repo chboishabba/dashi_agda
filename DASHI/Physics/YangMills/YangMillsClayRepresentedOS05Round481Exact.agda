@@ -13,6 +13,7 @@ module DASHI.Physics.YangMills.YangMillsClayRepresentedOS05Round481Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
