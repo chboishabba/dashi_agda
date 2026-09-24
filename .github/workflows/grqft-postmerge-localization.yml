@@ -42,7 +42,10 @@ on:
       - 'DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutExact.agda'
       - 'DASHI/Physics/Foundations/GRDiscreteToSmoothMaxCutValidation.agda'
       - 'DASHI/Physics/Foundations/RecoveryCommutationCoreExact.agda'
-      - 'scripts/check_grqft_postmerge-localization.sh'
+      - 'DASHI/Physics/Foundations/CommonRegimeMathematicalCoreExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTTheoryValidationSplitExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTTheoryValidationSplitValidation.agda'
+      - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
 jobs:
