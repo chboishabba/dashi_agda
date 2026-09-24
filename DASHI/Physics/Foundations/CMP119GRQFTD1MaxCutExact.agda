@@ -41,17 +41,21 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 -- source-native scalar.  Therefore the candidate N=0,Z=1 representative is not
 -- part of the proof cut: it remains only an executable target fixture.
 --
--- The sole live numerical leaf is now to evaluate the ten ACTUAL selected
--- CMP119 insertion numerators.  No extra same-object bridge to the synthetic
--- candidate is required or claimed.
+-- R122 pushes those exact selected insertion numerators one layer deeper:
+-- they are the connectedInsertionNumerator values of R121.densitySource on
+-- densityAt inputs selectedScale and the ten transported metric perturbations.
+--
+-- The sole live numerical leaf is therefore to evaluate those ten LITERAL
+-- beta-density connected insertion numerators.  No extra same-object bridge to
+-- the synthetic candidate is required or claimed.
 ------------------------------------------------------------------------
 
 data GRQFTD1Leaf : Set where
-  evaluateTenActualSelectedCMP119InsertionNumerators : GRQFTD1Leaf
+  evaluateTenLiteralDensityConnectedInsertionNumerators : GRQFTD1Leaf
 
 canonicalGRQFTD1Leaves : List GRQFTD1Leaf
 canonicalGRQFTD1Leaves =
-  evaluateTenActualSelectedCMP119InsertionNumerators ∷ []
+  evaluateTenLiteralDensityConnectedInsertionNumerators ∷ []
 
 ordinarySubstitutedFirstVariationChainRuleClosed : Bool
 ordinarySubstitutedFirstVariationChainRuleClosed = true
@@ -120,12 +124,19 @@ r144FiniteD1ToActualSelectedCMP119ReadoutClosedIsTrue :
   r144FiniteD1ToActualSelectedCMP119ReadoutClosed ≡ true
 r144FiniteD1ToActualSelectedCMP119ReadoutClosedIsTrue = refl
 
-tenActualSelectedCMP119NumericalEvaluationsStillOpen : Bool
-tenActualSelectedCMP119NumericalEvaluationsStillOpen = true
+actualSelectedCMP119ReadoutToLiteralDensityClosed : Bool
+actualSelectedCMP119ReadoutToLiteralDensityClosed = true
 
-tenActualSelectedCMP119NumericalEvaluationsStillOpenIsTrue :
-  tenActualSelectedCMP119NumericalEvaluationsStillOpen ≡ true
-tenActualSelectedCMP119NumericalEvaluationsStillOpenIsTrue = refl
+actualSelectedCMP119ReadoutToLiteralDensityClosedIsTrue :
+  actualSelectedCMP119ReadoutToLiteralDensityClosed ≡ true
+actualSelectedCMP119ReadoutToLiteralDensityClosedIsTrue = refl
+
+tenLiteralDensityConnectedNumeratorEvaluationsStillOpen : Bool
+tenLiteralDensityConnectedNumeratorEvaluationsStillOpen = true
+
+tenLiteralDensityConnectedNumeratorEvaluationsStillOpenIsTrue :
+  tenLiteralDensityConnectedNumeratorEvaluationsStillOpen ≡ true
+tenLiteralDensityConnectedNumeratorEvaluationsStillOpenIsTrue = refl
 
 candidateNormalizationIsProofPremise : Bool
 candidateNormalizationIsProofPremise = false
