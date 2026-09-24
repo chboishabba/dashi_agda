@@ -154,34 +154,3 @@ universalDecisionFailureClosesPNotEqualsNP background universalFailure =
   Clay.satLowerBoundProducerClosesClayCore
     background
     (universalDecisionFailureGivesSATLowerBoundProducer universalFailure)
-
-------------------------------------------------------------------------
--- Max-cut receipt.
---
--- The only novel theorem still missing in this file is an inhabitant of
--- UniversalPolynomialSATDecisionFailure for the standard cost model.
-------------------------------------------------------------------------
-
-record DirectSATLowerBoundResearchCut
-    (cost : PR.PolynomialCostModel Cook.BooleanFormula) : Set₁ where
-  field
-    candidateCarrier :
-      Set₁
-    candidateCarrierIsPolynomialSATDeciders :
-      candidateCarrier ≡ PolynomialSATDeciderCandidate cost
-    failureType :
-      PolynomialSATDeciderCandidate cost → Set₁
-    failureTypeIsConcreteSATDecisionFailure :
-      failureType ≡ SATDecisionFailure
-    universalFailure :
-      UniversalPolynomialSATDecisionFailure cost
-
-open DirectSATLowerBoundResearchCut public
-
-directResearchCutGivesSATLowerBoundProducer :
-  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula} →
-  DirectSATLowerBoundResearchCut cost →
-  Clay.SATLowerBoundProducer cost
-directResearchCutGivesSATLowerBoundProducer cut =
-  universalDecisionFailureGivesSATLowerBoundProducer
-    (universalFailure cut)
