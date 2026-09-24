@@ -2,7 +2,7 @@
 
 Status: authoritative live routing/control document; non-promoting.
 
-Current-state date: `2026-09-16 AEST`.
+Current-state date: `2026-09-23 AEST`.
 
 This is the default answer source for current NS proof-search state. Historical
 round/PR detail remains append-only in `CrossLaneProofArchaeologyLedgerExact`.
@@ -411,6 +411,72 @@ integral W(M,T) dt
 
 Thus the endpoint term is infrastructure/certification debt, not a new NS
 estimate. Concrete zero-derivative and FTC inhabitants remain explicitly open.
+
+### 2026-09-23 H2 weighted-carrier correction
+
+The endpoint-aware A3 audit has now separated two carriers that earlier
+bookkeeping risked conflating.
+
+The literal R406/R557 route is resolvent weighted.  The exact live temporal identity, **given the scalar FTC authority already isolated by R564/R565**, is now composed theorem-by-theorem in
+`NSTriadKNR406ExactEndpointNormalFormExact`:
+
+```text
+2 * integral R406
+  = integral FactoredFull
+    - integral SelfGram
+    - (SelfFlux(T) - SelfFlux(0)).
+```
+
+This uses R557 plus the same-object R570 self-flux tangent/FTC weld and
+introduces no new Navier--Stokes estimate.
+
+Separately, `NSTriadKNA3D1bDivisionFreeTransportExact` composes d1b0 with the
+existing covariance-centering identity.  On one fixed-output fibre it proves
+the division-free normalization
+
+```text
+n * W(M,commutator) + A3SignedPairDifference
+  = n * W(M,tangent) + (sum rates) * W(M,M).
+```
+
+Thus the current unweighted A3 pair-difference scalar is NOT definitionally
+the literal weighted R406/factored-full scalar.  The mean-rate self-work term
+and fibre-cardinality normalization are real algebraic coordinates, and R406
+also carries the nonseparable spectator resolvent
+`1 / (rate_alpha + rate_beta)`.
+
+The canonical weighted boundary owner
+`NSTriadKNA3WeightedR406EndpointCutExact` therefore keeps
+
+```text
+a3PairDifferenceIsLiteralFactoredFullSameObjectClosed = false
+unweightedD1b0DirectlyPaysWeightedR406Pointwise       = false
+```
+
+while recording the endpoint side as closed modulo ordinary scalar FTC.
+
+Consequently, do NOT classify
+
+```text
+integral R406 = endpoint + integral (4 * unweighted A3)
+```
+
+as representation plumbing.  The generic endpoint-aware compiler remains a
+valid conditional consumer, but the unit-coefficient A3/R406 equality is not
+derived by d1b0+d1b1.
+
+The actual weighted live producer remains R568:
+
+```text
+4 * integral GlobalForcingFull_resolvent <= B(T),
+```
+
+with R570/R572 compiling it to the existing R406/R503 consumer.  The unweighted
+A3/separation theorem is therefore a candidate donor to that weighted theorem,
+not already its same-object representation.
+
+This correction does not add a new theorem claim; it sharpens where any new
+analytic bridge would have to land.
 
 ### S2b2d1b2 — PRIMARY analytic leaf: signed coherent covariance payment
 

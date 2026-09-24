@@ -13,6 +13,8 @@ import DASHI.Physics.Closure.NSTriadKNDirectResolventIntegratedCompanionRound500
 import DASHI.Physics.Closure.NSTriadKNComparableOutputGramTelescopeRound209Exact as R209
 import DASHI.Physics.Closure.NSTriadKNComparableOutputResidualPaymentRound211Exact as R211
 import DASHI.Physics.Closure.NSTriadKNComparableConstantBandGramNoGoRound214Exact as R214
+import DASHI.Physics.Closure.NSTriadKNPeriodicClayEligibilityMaxCutRound642Exact as R642
+import DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact as R650
 
 -- Historical/alternative route anchors retained deliberately. They are no
 -- longer the primary paper-facing producer path, but their theorem-bearing
@@ -34,14 +36,25 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 --   C = forced whole-space R^3 breakdown verification/provenance
 --   D = forced periodic T^3 breakdown verification/provenance
 --
--- Active B causal spine:
+-- Current periodic-B Clay max-cut:
 --
---   R571 signed/helical carrier
---     -> centered/Taylor realization                 [OPEN]
---     -> old second moment / six-three transplant   [OPEN]
---     -> R568 CommutatorOnlySpacetimeBudget568      [LIVE PRODUCER]
---     -> R572 DirectLeafAProducer572 compiler        [CONSTRUCTED GIVEN RECEIPTS]
---     -> R503 DirectOffDiagonalBudget/R415 consumer  [CONSTRUCTED COMPILER SURFACE]
+--   NEW / NONSTANDARD -- EXACTLY TWO
+--     C1  R568 cutoff-uniform live signed-commutator spacetime payment
+--     C2  physical R98 packet strict-surplus payment by literal R406,
+--         with positive retained margin delta
+--
+--   COMPILED / SAME-OBJECT
+--     C3  canonical literal H^(1/2)/H^(3/2)-type R414 slice
+--     C5  retained viscosity is derived from C2's positive margin
+--
+--   STANDARD SOURCE INSTANTIATION
+--     C4  smooth/common initial datum -> canonical dyadic critical ceiling
+--     C6  scalar FTC / integration-linearity / order receipts
+--     C7  periodic Sobolev-Rellich-Simon-weak-* package
+--
+-- R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur and
+-- self/external channel splits are retained as producer strategies and
+-- provenance.  They are not independent terminal Clay obligations.
 --
 -- NOTE: the historical identifier `DirectLeafA...` is an owner name and does
 -- not mean programme Lane A.
@@ -58,7 +71,7 @@ historicalAlternativeRouteStatement =
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. C_direct is constructed modulo explicit standard integration authority; the current B proof search preserves the R571 signed carrier into centered/Taylor and second-moment/six-three machinery before the live R568 cutoff-uniform PDE producer; R572 compiles a paid R568 budget and standard temporal/order receipts into the pre-existing R503 DirectOffDiagonalBudget/R415 consumer. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
+  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is the R650 two-inequality cut: C1 is the live R568 cutoff-uniform signed-commutator spacetime payment; C2 is the live physical R98 packet strict-surplus payment by literal R406 with a positive retained margin. R645 derives retained viscosity from that C2 margin, so C5 is not an independent theorem. C3 is compiled same-object structure; C4/C6/C7 are standard source-instantiation layers with typed consumer boundaries. R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, DFL/DHH/core, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
 
 record NSPaperTheoremStatus : Setω where
   field
@@ -340,6 +353,131 @@ canonicalNSPaperTheoremStatus =
     ; statement = paperInterfaceStatement
     ; statementIsCanonical = refl
     }
+
+------------------------------------------------------------------------
+-- Modern periodic Clay max-cut aliases (R642).
+------------------------------------------------------------------------
+
+periodicClayMaxCutC1Closed : Bool
+periodicClayMaxCutC1Closed = R642.round642C1R568SignedPaymentClosed
+
+periodicClayMaxCutC2StillProofBearing : Bool
+periodicClayMaxCutC2StillProofBearing =
+  R642.round642C2PhaseSensitiveProductionStillProofBearing
+
+periodicClayMaxCutC2StrictMarginNormalFormAvailable : Bool
+periodicClayMaxCutC2StrictMarginNormalFormAvailable =
+  R642.round642C2StrictMarginNormalFormAvailable
+
+periodicClayMaxCutC2StrictMarginAlsoPaysC5 : Bool
+periodicClayMaxCutC2StrictMarginAlsoPaysC5 =
+  R642.round642C2StrictMarginAlsoPaysC5
+
+periodicClayMaxCutC2LiteralRadialSurplusNormalizationClosed : Bool
+periodicClayMaxCutC2LiteralRadialSurplusNormalizationClosed =
+  R642.round642C2LiteralRadialSurplusNormalizationClosed
+
+periodicClayMaxCutC2RemainingLeafCanBeOneRadialSurplusPayment : Bool
+periodicClayMaxCutC2RemainingLeafCanBeOneRadialSurplusPayment =
+  R642.round642C2RemainingLeafCanBeOneRadialSurplusPayment
+
+periodicClayMaxCutC2PhysicalPacketSurplusCompilerAvailable : Bool
+periodicClayMaxCutC2PhysicalPacketSurplusCompilerAvailable =
+  R642.round642C2PhysicalPacketSurplusCompilerAvailable
+
+periodicClayMaxCutC2RemainingLeafCanBePhysicalPacketR406Payment : Bool
+periodicClayMaxCutC2RemainingLeafCanBePhysicalPacketR406Payment =
+  R642.round642C2RemainingLeafCanBePhysicalPacketR406Payment
+
+periodicClayMaxCutExactlyTwoNewNSAnalyticLeaves : Bool
+periodicClayMaxCutExactlyTwoNewNSAnalyticLeaves =
+  R650.round650ExactlyTwoNewNSAnalyticLeaves
+
+periodicClayMaxCutUniversalViscosityOnlyC2ShortcutAdmissible : Bool
+periodicClayMaxCutUniversalViscosityOnlyC2ShortcutAdmissible =
+  R650.round650UniversalViscosityOnlyC2ShortcutAdmissible
+
+periodicClayMaxCutC2MustRetainScaleChangingMechanism : Bool
+periodicClayMaxCutC2MustRetainScaleChangingMechanism =
+  R650.round650C2MustRetainScaleChangingMechanism
+
+periodicClayMaxCutQuantitativeStressHarnessInstalled : Bool
+periodicClayMaxCutQuantitativeStressHarnessInstalled =
+  R650.round650QuantitativeStressHarnessInstalled
+
+periodicClayMaxCutC3CompilerAvailable : Bool
+periodicClayMaxCutC3CompilerAvailable =
+  R642.round642C3CanonicalPhysicalSliceCompilerAvailable
+
+periodicClayMaxCutC4CompilerAvailable : Bool
+periodicClayMaxCutC4CompilerAvailable =
+  R642.round642C4CommonInitialDatumSameObjectCompilerAvailable
+
+periodicClayMaxCutC4CanonicalModeCoherenceCompilerAvailable : Bool
+periodicClayMaxCutC4CanonicalModeCoherenceCompilerAvailable =
+  R642.round642C4CanonicalR34ModeCoherenceCompilerAvailable
+
+periodicClayMaxCutC4CanonicalDyadicCeilingAdapterAvailable : Bool
+periodicClayMaxCutC4CanonicalDyadicCeilingAdapterAvailable =
+  R642.round642C4CanonicalDyadicCeilingAdapterAvailable
+
+periodicClayMaxCutC4StandardSmoothToHOneHalfSourceStillExternal : Bool
+periodicClayMaxCutC4StandardSmoothToHOneHalfSourceStillExternal =
+  R642.round642C4StandardSmoothToHOneHalfSourceStillExternal
+
+periodicClayMaxCutC5Proved : Bool
+periodicClayMaxCutC5Proved = R642.round642C5RetainedViscosityProved
+
+periodicClayMaxCutC5IndependentIfC2UsesPositiveMargin : Bool
+periodicClayMaxCutC5IndependentIfC2UsesPositiveMargin =
+  R642.round642C5IndependentIfC2UsesPositiveMargin
+
+periodicClayMaxCutC4StandardSourceBoundaryAvailable : Bool
+periodicClayMaxCutC4StandardSourceBoundaryAvailable =
+  R642.round642C4TypedStandardSourceBoundaryAvailable
+
+periodicClayMaxCutC6ScalarFTCInstalled : Bool
+periodicClayMaxCutC6ScalarFTCInstalled =
+  R642.round642C6StandardScalarFTCInstalled
+
+periodicClayMaxCutC7SimonClosed : Bool
+periodicClayMaxCutC7SimonClosed =
+  R642.round642C7PhysicalCriticalSobolevSimonUpgradeClosed
+
+periodicClayMaxCutC6StandardSourceBoundaryAvailable : Bool
+periodicClayMaxCutC6StandardSourceBoundaryAvailable =
+  R642.round642C6TypedStandardSourceBoundaryAvailable
+
+periodicClayMaxCutC7StandardSourceBoundaryAvailable : Bool
+periodicClayMaxCutC7StandardSourceBoundaryAvailable =
+  R642.round642C7TypedStandardSourceBoundaryAvailable
+
+oldPDFB1B2B3B4Mandatory : Bool
+oldPDFB1B2B3B4Mandatory = R642.round642OldPDFB1B2B3B4Mandatory
+
+oldPDFB7DirectCovarianceEqualityMandatory : Bool
+oldPDFB7DirectCovarianceEqualityMandatory =
+  R642.round642OldPDFB7DirectCovarianceEqualityMandatory
+
+periodicClayMaxCutC1ClosedIsFalse :
+  periodicClayMaxCutC1Closed ≡ false
+periodicClayMaxCutC1ClosedIsFalse =
+  R642.round642C1R568SignedPaymentClosedIsFalse
+
+periodicClayMaxCutC2StillProofBearingIsTrue :
+  periodicClayMaxCutC2StillProofBearing ≡ true
+periodicClayMaxCutC2StillProofBearingIsTrue =
+  R642.round642C2PhaseSensitiveProductionStillProofBearingIsTrue
+
+oldPDFB1B2B3B4MandatoryIsFalse :
+  oldPDFB1B2B3B4Mandatory ≡ false
+oldPDFB1B2B3B4MandatoryIsFalse =
+  R642.round642OldPDFB1B2B3B4MandatoryIsFalse
+
+oldPDFB7DirectCovarianceEqualityMandatoryIsFalse :
+  oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+oldPDFB7DirectCovarianceEqualityMandatoryIsFalse =
+  R642.round642OldPDFB7DirectCovarianceEqualityMandatoryIsFalse
 
 ------------------------------------------------------------------------
 -- Legacy publication-readiness anchors.
