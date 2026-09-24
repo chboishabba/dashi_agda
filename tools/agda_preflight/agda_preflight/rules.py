@@ -781,7 +781,7 @@ def extended_diagnostics(checker, s, D):
         lctor = ctors.get(left.text.rsplit(".", 1)[-1])
         rctor = ctors.get(right.text.rsplit(".", 1)[-1])
         if op.text == "≡" and lctor is not None and rctor is not None and lctor.datatype != rctor.datatype:
-            out.append(_diag(D, "TSAGDA075", f"equality compares constructors from different datatypes: {left.text} vs {right.text}", s, right.line, right.column))
+            out.append(_diag(D, "TSAGDA105", f"equality compares constructors from different datatypes: {left.text} vs {right.text}", s, right.line, right.column))
 
     # TSAGDA101/103/104: AST-backed equality combinator outer-shape checks.
     for name, clause_items in s.ast.clauses.items():
