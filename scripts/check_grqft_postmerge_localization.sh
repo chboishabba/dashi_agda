@@ -18,6 +18,8 @@ files=(
   DASHI/Physics/Foundations/GRAnchoredSharedEffectiveSourceExact.agda
   DASHI/Physics/Foundations/CMP119GRAnchoredStressWeldCompilerExact.agda
   DASHI/Physics/Foundations/CMP119GRAnchoredStressWeldCompilerValidation.agda
+  DASHI/Physics/Foundations/GRRecoveryVsSchwarzschildValidationExact.agda
+  DASHI/Physics/Foundations/GRRecoveryVsSchwarzschildValidationValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
   DASHI/Physics/Closure/ColliderLowChiSquareProvenanceLadderExact.agda
   DASHI/Physics/Closure/W4ProjectionOperatorAblationRequestExact.agda
