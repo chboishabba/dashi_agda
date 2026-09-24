@@ -254,8 +254,21 @@ def _prime_scope_closure(
     selected = {item.path.resolve() for item in collected}
     path_to_module = {item.path.resolve(): item.module for item in collected}
 
+    def log(message: str) -> None:
+        if terminalreporter is not None:
+            terminalreporter.write_line(message)
+            flush = getattr(terminalreporter, "_tw", None)
+            if flush is not None:
+                try:
+                    flush.flush()
+                except Exception:
+                    pass
+
+    log(
+        f"Scanning {len(collected)} modules for deferred Agda-scope candidates..."
+    )
     scope_candidates = set()
-    for item in collected:
+    for index, item in enumerate(collected, 1):
         diagnostics = checker.structural_check(item.path)
         if any(
             (not diagnostic.evidence_sufficient)
@@ -263,6 +276,11 @@ def _prime_scope_closure(
             for diagnostic in diagnostics
         ):
             scope_candidates.add(item.path.resolve())
+        if index % 100 == 0 or index == len(collected):
+            log(
+                f"  [structural-prepass] {index}/{len(collected)} modules; "
+                f"{len(scope_candidates)} scope candidates"
+            )
 
     backend.set_scope_candidates(scope_candidates)
     if not scope_candidates:
@@ -281,29 +299,28 @@ def _prime_scope_closure(
         children[item.path.resolve()] = tuple(deps)
 
     descendant_cache = {}
+    descendant_active = set()
 
     def descendants_including(path: Path):
         key = path.resolve()
         cached = descendant_cache.get(key)
         if cached is not None:
             return cached
-        result = {key}
-        for child in children.get(key, ()):
-            result.update(descendants_including(child))
-        descendant_cache[key] = result
-        return result
+        if key in descendant_active:
+            # Import-cycle diagnostics are handled elsewhere. For pruning,
+            # conservatively stop recursion at the repeated node.
+            return {key}
+        descendant_active.add(key)
+        try:
+            result = {key}
+            for child in children.get(key, ()):
+                result.update(descendants_including(child))
+            descendant_cache[key] = result
+            return result
+        finally:
+            descendant_active.remove(key)
 
     visiting = set()
-
-    def log(message: str) -> None:
-        if terminalreporter is not None:
-            terminalreporter.write_line(message)
-            flush = getattr(terminalreporter, "_tw", None)
-            if flush is not None:
-                try:
-                    flush.flush()
-                except Exception:
-                    pass
 
     def visit(path: Path, *, aggregate_root: bool = False) -> None:
         key = path.resolve()
