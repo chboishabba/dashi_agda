@@ -7,6 +7,7 @@ cd "$root"
 files=(
   DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda
   DASHI/Physics/Foundations/GRQFTStressWeldBidiAttemptExact.agda
+  DASHI/Physics/Foundations/GRQFTRecoveryBidiAttemptExact.agda
   DASHI/Physics/Closure/DiscreteWarpedEinsteinMatterModel.agda
   DASHI/Physics/Closure/EinsteinEquationBidiResidualExact.agda
   DASHI/Physics/Closure/EinsteinEquationBidiResidualValidation.agda

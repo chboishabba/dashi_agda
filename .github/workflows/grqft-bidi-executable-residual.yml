@@ -5,6 +5,7 @@ on:
     paths:
       - 'DASHI/Physics/Foundations/SameCandidateQFTGRRecoveryExact.agda'
       - 'DASHI/Physics/Foundations/GRQFTStressWeldBidiAttemptExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTRecoveryBidiAttemptExact.agda'
       - 'DASHI/Physics/Foundations/Everything.agda'
       - 'DASHI/Physics/Closure/DiscreteWarpedEinsteinMatterModel.agda'
       - 'DASHI/Physics/Closure/EinsteinEquationBidiResidualExact.agda'
