@@ -257,3 +257,7 @@ import DASHI.Physics.Foundations.GRQFTNambuGotoSurfaceActionExact
 import DASHI.Physics.Foundations.GRQFTNambuGotoRepulsiveBubbleMaxCutExact
 
 import DASHI.Physics.Foundations.GRQFTDECRepulsiveExteriorMaxCutExact
+
+import DASHI.Physics.Foundations.GRQFTCMP119CorrectedD1MaxCutExact
+import DASHI.Physics.Foundations.CMP119TenFinitePhysicalCompositeDerivativeExact
+import DASHI.Physics.Foundations.CMP119TenFinitePhysicalCompositeDerivativeValidation
