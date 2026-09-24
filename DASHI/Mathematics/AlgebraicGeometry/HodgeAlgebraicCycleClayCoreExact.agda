@@ -26,6 +26,7 @@ module DASHI.Mathematics.AlgebraicGeometry.HodgeAlgebraicCycleClayCoreExact wher
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -159,8 +160,6 @@ record HodgeClayFreezeBoundary : Set where
     algebraicCycleCarrierTypedLiterally : Bool
     cycleComparisonStillBackground : Bool
     universalAlgebraicReopeningProved : Bool
-
-open import Agda.Builtin.Bool using (Bool; false; true)
 
 canonicalHodgeClayFreezeBoundary : HodgeClayFreezeBoundary
 canonicalHodgeClayFreezeBoundary =
