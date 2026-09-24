@@ -258,8 +258,8 @@ round428PreferredSameFamilyMeasureCompilerLevel = machineChecked
 round428GramMeasurePresentationWeldLevel : ProofLevel
 round428GramMeasurePresentationWeldLevel = machineChecked
 
-round428OSReconstructionAuthorityLevel : ProofLevel
-round428OSReconstructionAuthorityLevel = standardImported
+round428OSCoreReconstructionAuthorityLevel : ProofLevel
+round428OSCoreReconstructionAuthorityLevel = conditional
 
 round428MeasureConvergenceLevel : ProofLevel
 round428MeasureConvergenceLevel = machineChecked
