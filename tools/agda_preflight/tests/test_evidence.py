@@ -447,3 +447,52 @@ def test_triage_cli_summarizes_hard_and_deferred_findings(tmp_path, capsys):
     deferred_output = capsys.readouterr().out
     assert "TSAGDA113" in deferred_output
     assert "scope suspicion" in deferred_output
+
+
+
+def test_triage_collapses_alias_codes_by_default(tmp_path, capsys):
+    import json
+
+    report = tmp_path / "aliases.json"
+    report.write_text(
+        json.dumps(
+            {
+                "summary": {},
+                "modules": [
+                    {
+                        "nodeid": "A.agda::A",
+                        "outcome": "failed",
+                        "diagnostics": [
+                            {
+                                "code": "TSAGDA045",
+                                "severity": "error",
+                                "evidence_sufficient": True,
+                                "line": 1,
+                                "column": 1,
+                                "message": "arity mismatch",
+                            },
+                            {
+                                "code": "TSAGDA110",
+                                "severity": "error",
+                                "evidence_sufficient": True,
+                                "line": 1,
+                                "column": 1,
+                                "message": "arity mismatch alias",
+                            },
+                        ],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert triage_main([str(report)]) == 0
+    output = capsys.readouterr().out
+    assert "TSAGDA045" in output
+    assert "TSAGDA110" not in output
+
+    assert triage_main([str(report), "--raw-codes"]) == 0
+    raw_output = capsys.readouterr().out
+    assert "TSAGDA045" in raw_output
+    assert "TSAGDA110" in raw_output
