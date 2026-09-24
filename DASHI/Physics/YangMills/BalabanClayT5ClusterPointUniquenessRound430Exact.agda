@@ -145,11 +145,11 @@ extractedClusterPointIsSelectedContinuum
       Prokhorov.extractPhysicalFurtherSubsequence
         prokhorov tightness subsequence
 
-    cluster : _
+    cluster : Measure
     cluster =
       Prokhorov.extractedClusterLimit prokhorov tightness subsequence
 
-    continuum : _
+    continuum : Measure
     continuum =
       T5.continuumMeasure (T5.thermodynamic expectationData)
 
@@ -213,9 +213,21 @@ record LiteralT5CompactnessUniquenessInputs
       Prokhorov.ProkhorovSubsequenceExtractionAuthority Measure
 
     determiningUniqueness :
+      let selectedTightness : Prokhorov.PhysicalSubsequenceTightnessData Measure
+          selectedTightness = record
+            { Prokhorov.PhysicalSubsequenceTightnessData.convergence =
+                convergence
+            ; Prokhorov.PhysicalSubsequenceTightnessData.sequence =
+                T5.diagonalMeasure expectationData
+            ; Prokhorov.PhysicalSubsequenceTightnessData.TightMeasureSequence =
+                TightMeasureSequence
+            ; Prokhorov.PhysicalSubsequenceTightnessData.everyLiteralSubsequenceTight =
+                everyLiteralDiagonalSubsequenceTight
+            }
+      in
       DeterminingExpectationUniquenessAuthority
         expectationData
-        literalTightness
+        selectedTightness
         prokhorovAuthority
 
     compactUniqueFullConvergenceAuthority :
