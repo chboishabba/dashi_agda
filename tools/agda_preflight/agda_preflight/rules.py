@@ -167,8 +167,8 @@ def _resolve_record(checker, summary, type_text: str):
             if re.search(rf"\b{re.escape(alias)}\.{re.escape(name)}\b", type_text): return rec
     return None
 
-def _diag(D, code, msg, s, line, col=1, hint=None):
-    return D(code, msg, s.path, line, col, hint)
+def _diag(D, code, msg, s, line, col=1, hint=None, severity="error", confidence="high"):
+    return D(code, msg, s.path, line, col, hint, severity, confidence)
 
 def extended_diagnostics(checker, s, D):
     source = s.source; clean = _strip_comments(source); out = []
@@ -197,10 +197,10 @@ def extended_diagnostics(checker, s, D):
 
     for name, sig in s.signatures.items():
         if name not in clauses and not re.search(rf"(?m)^\s+{re.escape(name)}\s*:", source):
-            out.append(_diag(D, "TSAGDA008", f"{name} has a signature but no evident defining clause", s, sig.line))
+            out.append(_diag(D, "TSAGDA008", f"{name} has a signature but no evident defining clause", s, sig.line, severity="warning", confidence="medium"))
     for name, cs in clauses.items():
         if name not in s.signatures:
-            out.append(_diag(D, "TSAGDA009", f"{name} has defining clause(s) but no evident top-level signature", s, cs[0][0]))
+            out.append(_diag(D, "TSAGDA009", f"{name} has defining clause(s) but no evident top-level signature", s, cs[0][0], severity="warning", confidence="medium"))
         seen = set()
         for line, lhs, rhs in cs:
             key = re.sub(r"\s+", " ", lhs + "=" + rhs)
@@ -234,7 +234,7 @@ def extended_diagnostics(checker, s, D):
                     if n not in exports: out.append(_diag(D, "TSAGDA023", f"{n} in using(...) is not exported by {module}", s, line))
             if hm:
                 for n in re.findall(_IDENT, hm.group(1)):
-                    if n not in exports: out.append(_diag(D, "TSAGDA024", f"{n} in hiding(...) is not exported by {module}", s, line))
+                    if n not in exports: out.append(_diag(D, "TSAGDA024", f"{n} in hiding(...) is not exported by {module}", s, line, severity="warning", confidence="medium"))
             if rm:
                 for old in re.findall(rf"({_IDENT})\s+to\s+{_IDENT}", rm.group(1)):
                     if old not in exports: out.append(_diag(D, "TSAGDA025", f"renaming source {old} is not exported by {module}", s, line))
@@ -272,7 +272,7 @@ def extended_diagnostics(checker, s, D):
         if rname in s.opens:
             for f in rec.fields: opened.setdefault(f, []).append(rname)
     for f, owners in opened.items():
-        if len(owners) > 1: out.append(_diag(D, "TSAGDA055", f"opened projection {f} is ambiguous across {', '.join(owners)}", s, 1))
+        if len(owners) > 1: out.append(_diag(D, "TSAGDA055", f"opened projection {f} is ambiguous across {', '.join(owners)}", s, 1, severity="warning", confidence="medium"))
 
     for def_name, line, body in _record_blocks(source):
         sig = s.signatures.get(def_name)
@@ -317,7 +317,7 @@ def extended_diagnostics(checker, s, D):
             rec = re.search(rf"\b{re.escape(name)}\s+(.+)$", rhs)
             if rec:
                 lhs_args = lhs.split()[1:]; rhs_args = rec.group(1).split()[:len(lhs_args)]
-                if lhs_args and lhs_args == rhs_args: out.append(_diag(D, "TSAGDA140", f"{name} recursively calls itself with identical visible arguments", s, line))
+                if lhs_args and lhs_args == rhs_args: out.append(_diag(D, "TSAGDA140", f"{name} recursively calls itself with identical visible arguments", s, line, severity="warning", confidence="medium"))
 
     eq = {}
     for name, sig in s.signatures.items():
@@ -344,23 +344,23 @@ def extended_diagnostics(checker, s, D):
         if fm:
             for sym in fm.group(3).split():
                 shape = (fm.group(1), fm.group(2))
-                if sym not in known: out.append(_diag(D, "TSAGDA150", f"fixity declaration references unknown symbol {sym}", s, i))
+                if sym not in known: out.append(_diag(D, "TSAGDA150", f"fixity declaration references unknown symbol {sym}", s, i, severity="warning", confidence="medium"))
                 if sym in fix and fix[sym] != shape: out.append(_diag(D, "TSAGDA151", f"conflicting fixity declarations for {sym}", s, i))
                 fix[sym] = shape
         sm = re.match(rf"^\s*syntax\s+({_IDENT})\b", line)
-        if sm and sm.group(1) not in known: out.append(_diag(D, "TSAGDA153", f"syntax declaration references unknown symbol {sm.group(1)}", s, i))
+        if sm and sm.group(1) not in known: out.append(_diag(D, "TSAGDA153", f"syntax declaration references unknown symbol {sm.group(1)}", s, i, severity="warning", confidence="medium"))
         if re.match(r"^\s*postulate\s*$", line): in_post = True; continue
         if in_post:
             if line and not line[0].isspace(): in_post = False
             else:
                 pm = re.match(rf"^\s+({_IDENT})\s*:", line)
                 if pm: postulates.append((pm.group(1), i))
-        if "{-# TERMINATING #-}" in line: out.append(_diag(D, "TSAGDA161", "TERMINATING pragma bypasses termination checking", s, i))
-        if "{-# NON_TERMINATING #-}" in line: out.append(_diag(D, "TSAGDA162", "NON_TERMINATING pragma weakens termination guarantees", s, i))
-        if "NO_POSITIVITY_CHECK" in line: out.append(_diag(D, "TSAGDA163", "NO_POSITIVITY_CHECK disables positivity checking", s, i))
-        if "allow-unsolved-metas" in line.lower(): out.append(_diag(D, "TSAGDA164", "allow-unsolved-metas weakens the trust boundary", s, i))
+        if "{-# TERMINATING #-}" in line: out.append(_diag(D, "TSAGDA161", "TERMINATING pragma bypasses termination checking", s, i, severity="warning", confidence="medium"))
+        if "{-# NON_TERMINATING #-}" in line: out.append(_diag(D, "TSAGDA162", "NON_TERMINATING pragma weakens termination guarantees", s, i, severity="warning", confidence="medium"))
+        if "NO_POSITIVITY_CHECK" in line: out.append(_diag(D, "TSAGDA163", "NO_POSITIVITY_CHECK disables positivity checking", s, i, severity="warning", confidence="medium"))
+        if "allow-unsolved-metas" in line.lower(): out.append(_diag(D, "TSAGDA164", "allow-unsolved-metas weakens the trust boundary", s, i, severity="warning", confidence="medium"))
         if re.match(r"^\s*\{-#\s*OPTIONS", line) and any(x in line for x in ("--type-in-type", "--no-positivity-check", "--no-termination-check")):
-            out.append(_diag(D, "TSAGDA165", "unsafe OPTIONS pragma in proof source", s, i))
+            out.append(_diag(D, "TSAGDA165", "unsafe OPTIONS pragma in proof source", s, i, severity="warning", confidence="medium"))
         cm = re.match(rf"^\s*\{{-#\s*(?:COMPILE|FOREIGN)\s+({_IDENT})", line)
         if cm and cm.group(1) not in known: out.append(_diag(D, "TSAGDA166", f"foreign/compile pragma names unknown declaration {cm.group(1)}", s, i))
 
@@ -376,7 +376,7 @@ def extended_diagnostics(checker, s, D):
         if "/Closure/" in str(s.path):
             for line, _, module, _, _ in import_lines:
                 if re.search(r"(Obstruction|Assumption|Postulate|Placeholder)", module, re.I):
-                    out.append(_diag(D, "TSAGDA205", f"closure imports assumption/obstruction module {module}", s, line))
+                    out.append(_diag(D, "TSAGDA205", f"closure imports assumption/obstruction module {module}", s, line, severity="warning", confidence="medium"))
 
     for name, sig in s.signatures.items():
         if re.search(r"(?<![A-Za-z0-9_'])_(?![A-Za-z0-9_'])", sig.type_text):
@@ -384,7 +384,7 @@ def extended_diagnostics(checker, s, D):
             out.append(_diag(D, code, f"signature {name} contains explicit underscore", s, sig.line))
     for _, line, body in _record_blocks(source):
         for fname, rhs in _assignments(body):
-            if rhs.strip() == "_": out.append(_diag(D, "TSAGDA172", f"record field {fname} is filled with raw underscore", s, line))
+            if rhs.strip() == "_": out.append(_diag(D, "TSAGDA172", f"record field {fname} is filled with raw underscore", s, line, severity="warning", confidence="medium"))
 
     # Repository graph checks: TSAGDA029 import cycles and TSAGDA030 module collisions.
     graph = checker.dependency_graph()
@@ -436,7 +436,7 @@ def extended_diagnostics(checker, s, D):
             vn = ren.get(n, n); visible.setdefault(vn, []).append(module)
     for n, mods in visible.items():
         if len(set(mods)) > 1 and n not in s.signatures and n not in s.records:
-            out.append(_diag(D, "TSAGDA027", f"open imports make {n} ambiguous between {', '.join(sorted(set(mods)))}", s, 1))
+            out.append(_diag(D, "TSAGDA027", f"open imports make {n} ambiguous between {', '.join(sorted(set(mods)))}", s, 1, severity="warning", confidence="medium"))
 
     # TSAGDA040/041/046/047/049: bounded arity checks for simple applications.
     known_arity = {name: _arity(sig.type_text) for name, sig in s.signatures.items()}
@@ -560,9 +560,9 @@ def extended_diagnostics(checker, s, D):
             if call and args:
                 rhs_args = call.group(1).split()[:len(args)]
                 if any(a.isdigit() and b.isdigit() and int(b) > int(a) for a, b in zip(args, rhs_args)):
-                    out.append(_diag(D, "TSAGDA141", f"{name} has an obviously increasing numeric recursive argument", s, line))
+                    out.append(_diag(D, "TSAGDA141", f"{name} has an obviously increasing numeric recursive argument", s, line, severity="warning", confidence="medium"))
                 if rhs_args and not any((a.startswith("(") and b in a) or b in {"pred", "tail"} for a, b in zip(args, rhs_args)):
-                    out.append(_diag(D, "TSAGDA142", f"{name} recursive call has no syntactically obvious smaller argument", s, line))
+                    out.append(_diag(D, "TSAGDA142", f"{name} recursive call has no syntactically obvious smaller argument", s, line, severity="warning", confidence="medium"))
 
     # TSAGDA143: termination bypass in proof-critical code.
     if critical and ("{-# TERMINATING #-}" in source or "{-# NON_TERMINATING #-}" in source):
@@ -574,12 +574,12 @@ def extended_diagnostics(checker, s, D):
         if "_" in sym and sym in s.signatures:
             holes = sym.count("_"); want = _arity(s.signatures[sym].type_text)
             if holes != want:
-                out.append(_diag(D, "TSAGDA152", f"mixfix {sym} has {holes} holes but signature has {want} explicit arguments", s, s.signatures[sym].line))
+                out.append(_diag(D, "TSAGDA152", f"mixfix {sym} has {holes} holes but signature has {want} explicit arguments", s, s.signatures[sym].line, severity="warning", confidence="medium"))
 
     # TSAGDA174: raw metas in module application/import-like syntax.
     for m in re.finditer(rf"\bmodule\s+{_IDENT}\s*=\s*{_IDENT}(?:\.{_IDENT})*\s+_", clean):
         line, col = _line_col(source, m.start())
-        out.append(_diag(D, "TSAGDA174", "module application contains raw underscore metavariable", s, line, col))
+        out.append(_diag(D, "TSAGDA174", "module application contains raw underscore metavariable", s, line, col, severity="warning", confidence="medium"))
 
     # TSAGDA200/201/203/206/208: DASHI-specific structural policy.
     if critical:
@@ -590,7 +590,7 @@ def extended_diagnostics(checker, s, D):
         for rname, rec in s.records.items():
             for fname, fi in rec.fields.items():
                 if re.search(r"(agreement|proof|witness|receipt)", fname, re.I) and _terminal(fi.type_text) == "Set":
-                    out.append(_diag(D, "TSAGDA203", f"proof-like field {rname}.{fname} is unconstrained Set rather than an evident proposition/witness", s, fi.line))
+                    out.append(_diag(D, "TSAGDA203", f"proof-like field {rname}.{fname} is unconstrained Set rather than an evident proposition/witness", s, fi.line, severity="warning", confidence="medium"))
         if re.search(r"(FactorThrough|Admissib|Bidi)", s.module_name, re.I):
             heads = [_terminal(sig.type_text) for sig in s.signatures.values()]
             rigid = sorted(set(h for h in heads if h and "." in h))
