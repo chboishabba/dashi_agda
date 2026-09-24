@@ -50,8 +50,35 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1NontrivialityAttachmentRound468
 import DASHI.Physics.YangMills.YangMillsClayNontrivialitySemanticMaxCutRound502Exact as G2Cut
 
 import DASHI.Physics.YangMills.YangMillsClayRepresentedTerminalRound484Exact as Terminal
+import DASHI.Physics.YangMills.YangMillsClayTerminalContractSemanticMaxCutRound506Exact as Contract
 
 data ResidualLeaf : Set where
+  -- Terminal structural/T1 semantic contract.
+  structuralCompactSimpleSemantics : ResidualLeaf
+  structuralFourDimensionalEuclideanSemantics : ResidualLeaf
+  structuralCompactSimpleParameterizationSemantics : ResidualLeaf
+  t1FiniteVolumeCutoffMeasureSemantics : ResidualLeaf
+  t1ReflectionPositiveRegularizationSemantics : ResidualLeaf
+  t1UltravioletNormalizationSemantics : ResidualLeaf
+  t1AsymptoticallyFreeTrajectorySemantics : ResidualLeaf
+  t1GaugeSymmetryPreservedSemantics : ResidualLeaf
+  t1LocalityPreservedSemantics : ResidualLeaf
+  t1EuclideanCovariancePreservedSemantics : ResidualLeaf
+  t1ReflectionPositivityPreservedSemantics : ResidualLeaf
+  t1PositivityNormalizationPreservedSemantics : ResidualLeaf
+  t1VolumeCutoffCompatibilitySemantics : ResidualLeaf
+  t3AcceptedWightmanOrOSSemantics : ResidualLeaf
+  t3ReconstructedHilbertSpaceSemantics : ResidualLeaf
+  t3PositiveSelfAdjointHamiltonianSemantics : ResidualLeaf
+  t4GaugeInvariantLocalObservableSemantics : ResidualLeaf
+  t4CurvatureCorrespondenceSemantics : ResidualLeaf
+  t4CurvatureGaugeInvariantSemantics : ResidualLeaf
+  t4CurvatureLocalitySemantics : ResidualLeaf
+  t4ShortDistanceAFSemantics : ResidualLeaf
+  t4StressTensorAndOPESemantics : ResidualLeaf
+  t4PhysicalOPECoefficientSemantics : ResidualLeaf
+  t4PhysicalOPERemainderSemantics : ResidualLeaf
+
   -- Published finite OS same-object attachments.
   aFiniteEuclideanSameObjectAttachment : ResidualLeaf
   aFiniteBosonicSameObjectAttachment : ResidualLeaf
@@ -113,6 +140,55 @@ data ResidualLeaf : Set where
   g2WitnessPreservedInLiteralLimit : ResidualLeaf
 
 leafLevel : ResidualLeaf → ProofLevel
+leafLevel structuralCompactSimpleSemantics =
+  Contract.literalCompactSimpleGroupSemanticsLevel
+leafLevel structuralFourDimensionalEuclideanSemantics =
+  Contract.literalFourDimensionalEuclideanSpacetimeSemanticsLevel
+leafLevel structuralCompactSimpleParameterizationSemantics =
+  Contract.literalCompactSimpleParameterizationPreservedSemanticsLevel
+leafLevel t1FiniteVolumeCutoffMeasureSemantics =
+  Contract.literalFiniteVolumeCutoffMeasureSemanticsLevel
+leafLevel t1ReflectionPositiveRegularizationSemantics =
+  Contract.literalReflectionPositiveRegularizationSemanticsLevel
+leafLevel t1UltravioletNormalizationSemantics =
+  Contract.literalUltravioletYangMillsNormalizationSemanticsLevel
+leafLevel t1AsymptoticallyFreeTrajectorySemantics =
+  Contract.literalAsymptoticallyFreeScaleTrajectorySemanticsLevel
+leafLevel t1GaugeSymmetryPreservedSemantics =
+  Contract.literalGaugeSymmetryPreservedSemanticsLevel
+leafLevel t1LocalityPreservedSemantics =
+  Contract.literalLocalityPreservedSemanticsLevel
+leafLevel t1EuclideanCovariancePreservedSemantics =
+  Contract.literalEuclideanCovariancePreservedSemanticsLevel
+leafLevel t1ReflectionPositivityPreservedSemantics =
+  Contract.literalReflectionPositivityPreservedSemanticsLevel
+leafLevel t1PositivityNormalizationPreservedSemantics =
+  Contract.literalPositivityNormalizationPreservedSemanticsLevel
+leafLevel t1VolumeCutoffCompatibilitySemantics =
+  Contract.literalVolumeCutoffCompatibilitySemanticsLevel
+leafLevel t3AcceptedWightmanOrOSSemantics =
+  Contract.literalAcceptedWightmanOrOSAxiomsSemanticsLevel
+leafLevel t3ReconstructedHilbertSpaceSemantics =
+  Contract.literalReconstructedHilbertSpaceSemanticsLevel
+leafLevel t3PositiveSelfAdjointHamiltonianSemantics =
+  Contract.literalPositiveSelfAdjointHamiltonianSemanticsLevel
+leafLevel t4GaugeInvariantLocalObservableSemantics =
+  Contract.literalGaugeInvariantLocalObservableSemanticsLevel
+leafLevel t4CurvatureCorrespondenceSemantics =
+  Contract.literalCurvatureOperatorCorrespondenceSemanticsLevel
+leafLevel t4CurvatureGaugeInvariantSemantics =
+  Contract.literalCurvatureOperatorGaugeInvariantSemanticsLevel
+leafLevel t4CurvatureLocalitySemantics =
+  Contract.literalCurvatureOperatorLocalitySemanticsLevel
+leafLevel t4ShortDistanceAFSemantics =
+  Contract.literalShortDistanceAsymptoticFreedomSemanticsLevel
+leafLevel t4StressTensorAndOPESemantics =
+  Contract.literalStressTensorAndOPESemanticsLevel
+leafLevel t4PhysicalOPECoefficientSemantics =
+  Contract.literalPhysicalOPECoefficientSemanticsLevel
+leafLevel t4PhysicalOPERemainderSemantics =
+  Contract.literalPhysicalOPERemainderSemanticsLevel
+
 leafLevel aFiniteEuclideanSameObjectAttachment =
   FiniteOSCut.literalRound505EuclideanSameObjectAttachmentLevel
 leafLevel aFiniteBosonicSameObjectAttachment =
@@ -210,7 +286,31 @@ leafLevel g2WitnessPreservedInLiteralLimit =
 
 residualLeaves : List ResidualLeaf
 residualLeaves =
-    aFiniteEuclideanSameObjectAttachment
+    structuralCompactSimpleSemantics
+  ∷ structuralFourDimensionalEuclideanSemantics
+  ∷ structuralCompactSimpleParameterizationSemantics
+  ∷ t1FiniteVolumeCutoffMeasureSemantics
+  ∷ t1ReflectionPositiveRegularizationSemantics
+  ∷ t1UltravioletNormalizationSemantics
+  ∷ t1AsymptoticallyFreeTrajectorySemantics
+  ∷ t1GaugeSymmetryPreservedSemantics
+  ∷ t1LocalityPreservedSemantics
+  ∷ t1EuclideanCovariancePreservedSemantics
+  ∷ t1ReflectionPositivityPreservedSemantics
+  ∷ t1PositivityNormalizationPreservedSemantics
+  ∷ t1VolumeCutoffCompatibilitySemantics
+  ∷ t3AcceptedWightmanOrOSSemantics
+  ∷ t3ReconstructedHilbertSpaceSemantics
+  ∷ t3PositiveSelfAdjointHamiltonianSemantics
+  ∷ t4GaugeInvariantLocalObservableSemantics
+  ∷ t4CurvatureCorrespondenceSemantics
+  ∷ t4CurvatureGaugeInvariantSemantics
+  ∷ t4CurvatureLocalitySemantics
+  ∷ t4ShortDistanceAFSemantics
+  ∷ t4StressTensorAndOPESemantics
+  ∷ t4PhysicalOPECoefficientSemantics
+  ∷ t4PhysicalOPERemainderSemantics
+  ∷     aFiniteEuclideanSameObjectAttachment
   ∷ aFiniteBosonicSameObjectAttachment
   ∷ aFiniteWilsonRPSameObjectAttachment
   ∷ a1WilsonHessianVariation
@@ -318,6 +418,10 @@ bSpectralTransferLevel =
 terminalRepresentationFirstCompilerLevel : ProofLevel
 terminalRepresentationFirstCompilerLevel =
   Terminal.round484RepresentedTerminalCompilerLevel
+
+terminalSemanticInventoryCompilerLevel : ProofLevel
+terminalSemanticInventoryCompilerLevel =
+  Contract.round506TerminalSemanticInventoryCompilerLevel
 
 representedA3SemanticCompilerLevel : ProofLevel
 representedA3SemanticCompilerLevel =
