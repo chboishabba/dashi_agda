@@ -20,8 +20,10 @@ check_agda DASHI/Moonshine/JInvariantEisensteinBishopSetoidExtractionExact.agda
 check_agda DASHI/Moonshine/BishopRound11MachinEisensteinRouteBExact.agda
 check_agda DASHI/Interop/BishopRound11MachinBindingManifestExact.agda
 check_agda DASHI/Interop/Round11MachinLeanBindingManifestExact.agda
+check_agda DASHI/Interop/Round11MachinCrossProverRecognitionExact.agda
 check_agda DASHI/Interop/LeanBishopCompletionCanonicalRouteReceiptExact.agda
 check_agda DASHI/Moonshine/EisensteinBishopRouteBCurrentFrontierExact.agda
+check_agda DASHI/Moonshine/EisensteinConvergenceEndgameCutsetExact.agda
 check_agda DASHI/Moonshine/DeltaUnitCircleReflectionPhaseExact.agda
 check_agda DASHI/Moonshine/JMDArchimedesDelta369FixedLocusBridgeExact.agda
 
@@ -36,5 +38,11 @@ grep -q 'canonicalRound11MachinBindingInhabitedIsTrue'   DASHI/Interop/LeanBisho
 grep -q 'mappedRouteIndependentOfReplayBindingIsTrue'   DASHI/Interop/LeanBishopCompletionCanonicalRouteReceiptExact.agda
 
 grep -q 'generatedAgdaReplayObservedIsFalse'   DASHI/Interop/LeanBishopCompletionCanonicalRouteReceiptExact.agda
+
+grep -q 'actualCrossProverReplayObserved : Bool' \
+  DASHI/Interop/Round11MachinCrossProverRecognitionExact.agda
+
+grep -q 'actualAgdaRound11MachinBindingInLean : Bool' \
+  DASHI/Moonshine/EisensteinConvergenceEndgameCutsetExact.agda
 
 echo "Moonshine Bishop route-B focused checks passed."
