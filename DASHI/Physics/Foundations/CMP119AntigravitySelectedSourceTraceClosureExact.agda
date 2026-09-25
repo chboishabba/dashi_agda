@@ -6,6 +6,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Physics.Foundations.CMP119AntigravitySelectedWilsonGibbsMinimalAnchorExact as Minimal
 import DASHI.Physics.Foundations.CMP119AntigravityBetaTraceQuantumClosureExact as BetaClosure
+import DASHI.Physics.Foundations.CMP119AntigravitySU2FiniteTraceClosureExact as SU2Finite
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTraceInsertionReductionExact as WilsonTrace
 import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Integral
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as Basis
@@ -141,6 +142,133 @@ module _
                   measureWeld wilsonInsertion anchor}
               wilsonInsertion laws)
             (betaTraceInput input)
+
+        wilsonNegative =
+          subst
+            (λ value → value < 0ℚ)
+            (sym
+              (Minimal.wilsonDiagonalActiveSumIsTraceActiveConnectedNumerator
+                domain realization representation selected
+                measureWeld wilsonInsertion
+                anchor laws))
+            activeNegative
+      in
+      subst
+        (λ value → value < 0ℚ)
+        (sym
+          (Minimal.selectedDiagonalActiveSumIsWilsonDiagonalActiveSum
+            domain realization representation selected
+            measureWeld wilsonInsertion
+            anchor background))
+        wilsonNegative
+
+
+------------------------------------------------------------------------
+-- SU(2) SPECIALIZATION: STRICT SIGNS ARE NOW COMPILER OUTPUT
+------------------------------------------------------------------------
+
+module _
+    {G X Cutoff Configuration Observable Position
+     CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+     HilbertSpace Hamiltonian VacuumState : Set}
+    where
+
+  C₂ : Top.LiteralYangMillsCarriers
+  C₂ =
+    Physical.physicalLiteralCarriers
+      G X Cutoff Configuration ℚ Observable Position
+      CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+      HilbertSpace Hamiltonian VacuumState
+
+  module _
+      {trajectory split}
+      {inputs : Beta.BetaDrivenCompleteDensityInputs
+        {trajectory = trajectory} {split = split}}
+      {S : Top.LiteralYangMillsSemantics C₂}
+      {Y : Top.LiteralYangMillsConstruction C₂ S}
+      {group : Top.CompactSimpleGroup C₂}
+      {Scale Volume : Set}
+      {activity : Chain.SubstitutedActivitySecondVariation}
+      (domain : Domain.CanonicalMetricSourceDomain Scale Volume activity)
+      (realization : Basis.SymmetricMetricBasisRealization domain)
+      (representation : StressRep.CanonicalMetricStressRepresentation domain)
+      {coordinate : R114.LiteralStressCoordinate Y group}
+      (selected :
+        R119.CanonicalMetricSelectedStressWeld
+          domain representation coordinate)
+      (measureWeld :
+        R124.BalabanDensityLiteralFiniteMeasureWeld
+          {trajectory = trajectory} {split = split} {inputs = inputs}
+          Y group)
+      (wilsonInsertion :
+        Wilson.ClassicalWilsonSelectedInsertion Configuration)
+    where
+
+    record SelectedCMP119SU2TraceClosureInput : Set₁ where
+      field
+        sourceAnchor :
+          Minimal.MinimalSelectedWilsonGibbsAnchor
+            domain realization representation selected
+            measureWeld wilsonInsertion
+
+        integrationLaws :
+          Integral.RationalFiniteMeasureIntegrationLaws
+            (Minimal.selectedLiteralFiniteMeasure
+              domain realization representation selected
+              measureWeld wilsonInsertion
+              sourceAnchor)
+
+        su2FiniteTraceInput :
+          SU2Finite.SU2FiniteTraceClosureInput
+            (WilsonTrace.gibbsData
+              {measure =
+                Minimal.selectedLiteralFiniteMeasure
+                  domain realization representation selected
+                  measureWeld wilsonInsertion
+                  sourceAnchor}
+              wilsonInsertion integrationLaws)
+            WilsonTrace.diagonalDirections
+            integrationLaws
+            (WilsonTrace.actionTraceZero
+              {measure =
+                Minimal.selectedLiteralFiniteMeasure
+                  domain realization representation selected
+                  measureWeld wilsonInsertion
+                  sourceAnchor}
+              wilsonInsertion integrationLaws)
+
+    open SelectedCMP119SU2TraceClosureInput public
+
+    selectedCMP119SU2DiagonalActiveSumNegative :
+      (input : SelectedCMP119SU2TraceClosureInput) →
+      ∀ background →
+      Minimal.selectedDiagonalActiveSum
+        domain realization representation selected
+        measureWeld wilsonInsertion
+        background
+      < 0ℚ
+    selectedCMP119SU2DiagonalActiveSumNegative input background =
+      let
+        anchor = sourceAnchor input
+        laws = integrationLaws input
+
+        activeNegative =
+          SU2Finite.su2FiniteTraceClosesNegativeActiveConnectedNumerator
+            (WilsonTrace.gibbsData
+              {measure =
+                Minimal.selectedLiteralFiniteMeasure
+                  domain realization representation selected
+                  measureWeld wilsonInsertion anchor}
+              wilsonInsertion laws)
+            WilsonTrace.diagonalDirections
+            laws
+            (WilsonTrace.actionTraceZero
+              {measure =
+                Minimal.selectedLiteralFiniteMeasure
+                  domain realization representation selected
+                  measureWeld wilsonInsertion anchor}
+              wilsonInsertion laws)
+            (su2FiniteTraceInput input)
 
         wilsonNegative =
           subst
