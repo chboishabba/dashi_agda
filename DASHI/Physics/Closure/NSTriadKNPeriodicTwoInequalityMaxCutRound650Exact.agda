@@ -93,6 +93,7 @@ import DASHI.Physics.Closure.NSTriadKNR650SingleSelfCompleteOrbitCollapseRound71
 import DASHI.Physics.Closure.NSTriadKNR650SingleSelfOutputPairingCollapseRound717Exact as R717
 import DASHI.Physics.Closure.NSTriadKNR650SingleSelfOutputRealityRound718Exact as R718
 import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfFoldRealityRound719Exact as R719
+import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfMultiplierFoldRound720Exact as R720
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
