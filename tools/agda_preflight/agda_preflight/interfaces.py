@@ -52,6 +52,7 @@ class InterfaceSignature:
 @dataclass(frozen=True)
 class ModuleInterface:
     module_name: str
+    imports: Tuple[Tuple[str, str], ...]
     signatures: Tuple[InterfaceSignature, ...]
     records: Tuple[InterfaceRecord, ...]
     data_constructors: Tuple[Tuple[str, Tuple[str, ...]], ...]
@@ -59,6 +60,10 @@ class ModuleInterface:
     module_parameter_count: int
     public_reexports: Tuple[PublicReexport, ...]
     resolved_exports: Tuple[str, ...] = ()
+
+    @property
+    def import_map(self) -> Dict[str, str]:
+        return dict(self.imports)
 
     @property
     def signature_map(self) -> Dict[str, InterfaceSignature]:
@@ -222,6 +227,7 @@ def interface_from_summary(root: Path, summary) -> ModuleInterface:
 
     return ModuleInterface(
         module_name=summary.module_name,
+        imports=tuple(sorted(summary.imports.items())),
         signatures=tuple(signatures),
         records=tuple(records),
         data_constructors=data_constructors,
@@ -285,6 +291,7 @@ def resolve_interface_exports(
     return {
         module: ModuleInterface(
             module_name=interface.module_name,
+            imports=interface.imports,
             signatures=interface.signatures,
             records=interface.records,
             data_constructors=interface.data_constructors,
