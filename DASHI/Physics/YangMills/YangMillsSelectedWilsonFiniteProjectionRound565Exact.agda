@@ -148,34 +148,6 @@ record SelectedWilsonFiniteProjectionInputs
 
 open SelectedWilsonFiniteProjectionInputs public
 
-asProjectiveCylinderFunctionConvergenceAuthority :
-  ∀ {Configuration Event sequenceLimit limitLaws quotient division family}
-    {representation :
-      R547.SelectedCylinderRepresentationInputs
-        Configuration Event
-        {sequenceLimit = sequenceLimit}
-        limitLaws quotient division family}
-    (inputs :
-      SelectedWilsonFiniteProjectionInputs
-        Configuration Event
-        {sequenceLimit = sequenceLimit}
-        limitLaws quotient division family representation) →
-  R553.ProjectiveCylinderFunctionConvergenceAuthority
-    Configuration Event
-    {sequenceLimit = sequenceLimit}
-    limitLaws quotient division family representation
-asProjectiveCylinderFunctionConvergenceAuthority
-    {representation = representation} inputs = record
-  { R553.ProjectiveCylinderFunctionConvergenceAuthority.IsFiniteCylinderFunction =
-      λ observable →
-        Σ (R547.SelectedObservable (R547.selectedClass representation))
-          (λ selected →
-            R547.asObservable (R547.selectedClass representation) selected
-            ≡ observable)
-  ; R553.ProjectiveCylinderFunctionConvergenceAuthority.finiteCylinderFunctionConvergesToProjectiveIntegral =
-      selectedWitnessConverges inputs
-  }
-
 selectedWitnessConverges :
   ∀ {Configuration Event sequenceLimit limitLaws quotient division family}
     {representation :
@@ -208,6 +180,35 @@ selectedWitnessConverges
   finiteProjectionConvergesToProjectiveIntegral
     (projectiveAuthority inputs)
     selected
+
+
+asProjectiveCylinderFunctionConvergenceAuthority :
+  ∀ {Configuration Event sequenceLimit limitLaws quotient division family}
+    {representation :
+      R547.SelectedCylinderRepresentationInputs
+        Configuration Event
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family}
+    (inputs :
+      SelectedWilsonFiniteProjectionInputs
+        Configuration Event
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family representation) →
+  R553.ProjectiveCylinderFunctionConvergenceAuthority
+    Configuration Event
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division family representation
+asProjectiveCylinderFunctionConvergenceAuthority
+    {representation = representation} inputs = record
+  { R553.ProjectiveCylinderFunctionConvergenceAuthority.IsFiniteCylinderFunction =
+      λ observable →
+        Σ (R547.SelectedObservable (R547.selectedClass representation))
+          (λ selected →
+            R547.asObservable (R547.selectedClass representation) selected
+            ≡ observable)
+  ; R553.ProjectiveCylinderFunctionConvergenceAuthority.finiteCylinderFunctionConvergesToProjectiveIntegral =
+      selectedWitnessConverges inputs
+  }
 
 asSelectedWilsonCylinderRealization :
   ∀ {Configuration Event sequenceLimit limitLaws quotient division family}
