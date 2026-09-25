@@ -43,6 +43,7 @@ import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 import DASHI.Foundations.RelationalStageTwelveSiteExact as RelSheaf
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
 import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact as GrothCell
+import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact as Presheaf
 
 ------------------------------------------------------------------------
 -- 1. Cyclic automorphism of one T^9 cell dialectic.
@@ -218,6 +219,38 @@ canonicalAOverlapTransportCoherence :
     (Groupoid.forward transportCAtoAB Cell.canonicalCellCA)
 canonicalAOverlapTransportCoherence = refl
 
+
+------------------------------------------------------------------------
+-- 5b. The same squares through the actual site-presheaf restrictions.
+------------------------------------------------------------------------
+
+presheafBRestrictionTransportSquare :
+  (dialectic : Cell.CellDialectic) →
+  Presheaf.restrict Site.bToBC
+    (Groupoid.forward transportABtoBC dialectic)
+  ≡
+  Presheaf.restrict Site.bToAB dialectic
+presheafBRestrictionTransportSquare
+  (Cell.cell-dialectic left right synthesis) = refl
+
+presheafCRestrictionTransportSquare :
+  (dialectic : Cell.CellDialectic) →
+  Presheaf.restrict Site.cToCA
+    (Groupoid.forward transportBCtoCA dialectic)
+  ≡
+  Presheaf.restrict Site.cToBC dialectic
+presheafCRestrictionTransportSquare
+  (Cell.cell-dialectic left right synthesis) = refl
+
+presheafARestrictionTransportSquare :
+  (dialectic : Cell.CellDialectic) →
+  Presheaf.restrict Site.aToAB
+    (Groupoid.forward transportCAtoAB dialectic)
+  ≡
+  Presheaf.restrict Site.aToCA dialectic
+presheafARestrictionTransportSquare
+  (Cell.cell-dialectic left right synthesis) = refl
+
 ------------------------------------------------------------------------
 -- 6. Relational-site object/chart crosswalk.
 ------------------------------------------------------------------------
@@ -282,6 +315,7 @@ record TrialecticGrothendieckTransportCoherenceBoundary : Set where
     canonicalBCCAtransportExact : Bool
     canonicalCAABtransportExact : Bool
     sharedOverlapRestrictionCommutesWithTransport : Bool
+    actualPresheafRestrictionSquaresCommute : Bool
     siteEdgeObjectsCrosswalkedToTransportPatches : Bool
     chartTransitionIdentifiedWithSiteRestriction : Bool
     fullGroupoidValuedSitePresheafConstructed : Bool
@@ -290,6 +324,7 @@ canonicalTrialecticGrothendieckTransportCoherenceBoundary :
   TrialecticGrothendieckTransportCoherenceBoundary
 canonicalTrialecticGrothendieckTransportCoherenceBoundary =
   trialectic-grothendieck-transport-coherence-boundary
+    true
     true
     true
     true
