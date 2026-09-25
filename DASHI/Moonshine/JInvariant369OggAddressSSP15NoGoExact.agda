@@ -114,24 +114,6 @@ addressModeNever09 Lane.p71 ()
 -- 4. No 15<->15 bijection can preserve the address-derived complement mode.
 ------------------------------------------------------------------------
 
-ModePreservingOggInternalBijection : Set
-ModePreservingOggInternalBijection =
-  Integrated.OggInternalLaneBijection ×
-  ((prime : Lane.MonsterPrimeLane) →
-   proj₁
-     (Integrated.OggInternalLaneBijection.forward
-       (proj₁
-         (record
-           { fst = Integrated.OggInternalLaneBijection
-           ; snd = λ prime → refl
-           }))
-       prime)
-   ≡ addressMode prime)
-
--- The previous alias above is intentionally not used in the theorem below;
--- spelling the dependent preservation premise directly keeps the proof surface
--- clear and avoids implying existence.
-
 modePreservingOggInternalBijectionImpossible :
   (bridge : Integrated.OggInternalLaneBijection) →
   ((prime : Lane.MonsterPrimeLane) →
