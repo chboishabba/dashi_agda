@@ -31,6 +31,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AttributedSourceCore as Attribution
+import DASHI.Core.FiniteBranchingCriticalityExact as Branch
+import DASHI.Core.DecimalStageResidualBarrierExact as DecimalStage
+import DASHI.Promotion.MetacognitiveFrameBearingState as Meta
 
 ------------------------------------------------------------------------
 -- 1. External-source atlas.
@@ -241,3 +244,87 @@ canonicalTwistronicsComparatorBoundary =
     false
     false
     false
+
+
+------------------------------------------------------------------------
+-- 5. Existing DASHI 1.1 / +10% role separation.
+--
+-- The same printed token "1.1" must not identify these roles:
+--
+--   * physical angle: an approximately 1.1 degree experimental/theory regime;
+--   * arithmetic gain: the exact rational factor 11/10;
+--   * metacognitive 1.1: an added frame-bearing coordinate, not a scalar gain;
+--   * decimal refinement: a fine coordinate that preserves its coarse stage.
+--
+-- The point of this section is a collision firewall, not numerology.
+------------------------------------------------------------------------
+
+data OnePointOneRole : Set where
+  twistronicsApproximateAngleRole : OnePointOneRole
+  exactTenPercentScalarRole : OnePointOneRole
+  metacognitiveFrameCoordinateRole : OnePointOneRole
+  decimalFineRefinementRole : OnePointOneRole
+
+twistronicsRoleDistinctFromScalarRole :
+  twistronicsApproximateAngleRole ≡ exactTenPercentScalarRole → ⊥
+twistronicsRoleDistinctFromScalarRole ()
+
+twistronicsRoleDistinctFromMetaRole :
+  twistronicsApproximateAngleRole ≡ metacognitiveFrameCoordinateRole → ⊥
+twistronicsRoleDistinctFromMetaRole ()
+
+scalarRoleDistinctFromMetaRole :
+  exactTenPercentScalarRole ≡ metacognitiveFrameCoordinateRole → ⊥
+scalarRoleDistinctFromMetaRole ()
+
+decimalFineRoleDistinctFromTwistronicsRole :
+  decimalFineRefinementRole ≡ twistronicsApproximateAngleRole → ⊥
+decimalFineRoleDistinctFromTwistronicsRole ()
+
+-- Reuse the already-proved exact +10% arithmetic.  No new calculation is
+-- introduced here.
+threeAxisExactTenPercentGainNumerator :
+  Branch.pow 11 3 ≡ 1331
+threeAxisExactTenPercentGainNumerator =
+  Branch.threeAxisTenPercentGainNumerator
+
+threeAxisExactTenPercentGainDenominator :
+  Branch.pow 10 3 ≡ 1000
+threeAxisExactTenPercentGainDenominator =
+  Branch.threeAxisTenPercentGainDenominator
+
+-- Reuse the existing theorem that decimal fine refinement does not itself move
+-- the coarse stage.
+decimalFineDepthPreservesCoarseStage :
+  (digit : DASHI.Core.DecimalResidualRefinementExact.DecimalDigit) →
+  (depth : Nat) →
+  DecimalStage.refinedStage digit depth ≡ DecimalStage.digitStage digit
+decimalFineDepthPreservesCoarseStage =
+  DecimalStage.refinementDepthPreservesCoarseStage
+
+-- Reuse the existing metacognitive boundary rather than reinterpret 1.1 as a
+-- scalar increase in information.
+metacognitiveOnePointOneIsNotLiteralTenPercentGain :
+  Meta.MetacognitivePowerUpBoundary.literalTenPercentKnowledgeGainClaimed
+    Meta.canonicalMetacognitivePowerUpBoundary
+  ≡ false
+metacognitiveOnePointOneIsNotLiteralTenPercentGain = refl
+
+record OnePointOneCrossPollinationBoundary : Set where
+  constructor one-point-one-cross-pollination-boundary
+  field
+    exactElevenTenthsArithmeticReused : Bool
+    decimalFineStageBarrierReused : Bool
+    metacognitiveNonScalarBoundaryReused : Bool
+    approximateMagicAngleEqualsExactElevenTenths : Bool
+    equalPrintedTokenImpliesEqualRole : Bool
+    exactTenPercentGainExplainsMagicAnglePhysics : Bool
+    metacognitiveOnePointOneExplainsMagicAnglePhysics : Bool
+    decimalRefinementExplainsMagicAnglePhysics : Bool
+
+canonicalOnePointOneCrossPollinationBoundary :
+  OnePointOneCrossPollinationBoundary
+canonicalOnePointOneCrossPollinationBoundary =
+  one-point-one-cross-pollination-boundary
+    true true true
+    false false false false false
