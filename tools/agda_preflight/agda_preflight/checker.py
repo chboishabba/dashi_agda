@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 import hashlib
 from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
@@ -386,21 +386,32 @@ class Checker:
         self._interface_cache[path] = interface
         return interface
 
+    def interface_for_module(
+        self,
+        module: str,
+    ) -> Optional[ModuleInterface]:
+        preloaded = self._preloaded_interfaces.get(module)
+        if preloaded is not None:
+            return preloaded
+        path = self.module_path(module)
+        if not path.exists():
+            return None
+        summary = self.parse_summary(path)
+        interface = self.module_interface(summary)
+        return replace(
+            interface,
+            resolved_exports=tuple(sorted(self.exported_names(summary))),
+        )
+
     def imported_interfaces(
         self,
         summary: ModuleSummary,
     ) -> Dict[str, ModuleInterface]:
         out: Dict[str, ModuleInterface] = {}
         for alias, module in summary.imports.items():
-            preloaded = self._preloaded_interfaces.get(module)
-            if preloaded is not None:
-                out[alias] = preloaded
-                continue
-            path = self.module_path(module)
-            if not path.exists():
-                continue
-            imported = self.parse_summary(path)
-            out[alias] = self.module_interface(imported)
+            interface = self.interface_for_module(module)
+            if interface is not None:
+                out[alias] = interface
         return out
 
     def structural_check(self, path: Path) -> List[Diagnostic]:
