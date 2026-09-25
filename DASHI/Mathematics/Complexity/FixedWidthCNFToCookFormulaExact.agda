@@ -286,6 +286,7 @@ literalEvaluationFromAssignment
       assignment
       index)
 literalEvaluationFromAssignment
+    {width}
     (CNF.negative index)
     assignment =
   trans
@@ -297,7 +298,7 @@ literalEvaluationFromAssignment
           index)))
     (notAgreement
       (CNF.lookupBit
-        (bitsFromAssignment _ assignment)
+        (bitsFromAssignment width assignment)
         index))
 
 clauseEvaluationFromAssignment :
@@ -314,6 +315,7 @@ clauseEvaluationFromAssignment :
 clauseEvaluationFromAssignment [] assignment =
   refl
 clauseEvaluationFromAssignment
+    {width}
     (literal ∷ literals)
     assignment =
   trans
@@ -326,10 +328,10 @@ clauseEvaluationFromAssignment
     (orAgreement
       (CNF.evaluateLiteral
         literal
-        (bitsFromAssignment _ assignment))
+        (bitsFromAssignment width assignment))
       (CNF.evaluateClause
         literals
-        (bitsFromAssignment _ assignment)))
+        (bitsFromAssignment width assignment)))
 
 cnfEvaluationFromAssignment :
   ∀ {width : Nat}
@@ -345,6 +347,7 @@ cnfEvaluationFromAssignment :
 cnfEvaluationFromAssignment [] assignment =
   refl
 cnfEvaluationFromAssignment
+    {width}
     (clause ∷ clauses)
     assignment =
   trans
@@ -357,10 +360,10 @@ cnfEvaluationFromAssignment
     (andAgreement
       (CNF.evaluateClause
         clause
-        (bitsFromAssignment _ assignment))
+        (bitsFromAssignment width assignment))
       (CNF.evaluateCNF
         clauses
-        (bitsFromAssignment _ assignment)))
+        (bitsFromAssignment width assignment)))
 
 ------------------------------------------------------------------------
 -- Exact satisfiability transport.
