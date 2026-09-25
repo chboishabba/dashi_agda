@@ -136,19 +136,22 @@ fixedPointFormulaEquality :
         (bodyProgram body))
       dynamicInput)
 fixedPointFormulaEquality
+    {system = system}
+    {view = view}
+    {dynamicInput = dynamicInput}
     compiler
     body =
   congruence
     (Kleene.fixedPointProgramCorrect
       compiler
       (bodyProgram body)
-      _)
+      dynamicInput)
   where
     congruence :
-      ∀ {left right : Kleene.Output _} →
+      ∀ {left right : Kleene.Output system} →
       left ≡ right →
-      asFormula _ left
-      ≡ asFormula _ right
+      asFormula view left
+      ≡ asFormula view right
     congruence refl =
       refl
 
