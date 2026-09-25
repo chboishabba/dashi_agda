@@ -96,6 +96,10 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650NestedOuterSlotCoefficientFactorRound706Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650SelfInnerThreeOuterLegOrbitRound707Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650UnitNestedOrbitSelfExternalSplitRound708Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SelfOrbitCommutatorCarrierRound713Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SingleSelfCommutatorOrbitRound714Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SingleSelfSpectatorFibreTransportRound715Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650SingleSelfCompleteOrbitCollapseRound716Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda'
@@ -188,6 +192,10 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650NestedOuterSlotCoefficientFactorRound706Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SelfInnerThreeOuterLegOrbitRound707Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650UnitNestedOrbitSelfExternalSplitRound708Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SelfOrbitCommutatorCarrierRound713Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SingleSelfCommutatorOrbitRound714Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SingleSelfSpectatorFibreTransportRound715Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650SingleSelfCompleteOrbitCollapseRound716Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda
