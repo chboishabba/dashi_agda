@@ -38,14 +38,28 @@ rotateObserverFourTimes :
       (rotateObserver90
         (rotateObserver90 cell)))
   ≡ cell
-rotateObserverFourTimes cell
-  rewrite Observer.observerCellRoundTrip cell = refl
+rotateObserverFourTimes Observer.cellAA = refl
+rotateObserverFourTimes Observer.cellAB = refl
+rotateObserverFourTimes Observer.cellAC = refl
+rotateObserverFourTimes Observer.cellBA = refl
+rotateObserverFourTimes Observer.cellBB = refl
+rotateObserverFourTimes Observer.cellBC = refl
+rotateObserverFourTimes Observer.cellCA = refl
+rotateObserverFourTimes Observer.cellCB = refl
+rotateObserverFourTimes Observer.cellCC = refl
 
 reflectObserverInvolutive :
   (cell : Observer.ObserverCell) →
   reflectObserverVertical (reflectObserverVertical cell) ≡ cell
-reflectObserverInvolutive cell
-  rewrite Observer.observerCellRoundTrip cell = refl
+reflectObserverInvolutive Observer.cellAA = refl
+reflectObserverInvolutive Observer.cellAB = refl
+reflectObserverInvolutive Observer.cellAC = refl
+reflectObserverInvolutive Observer.cellBA = refl
+reflectObserverInvolutive Observer.cellBB = refl
+reflectObserverInvolutive Observer.cellBC = refl
+reflectObserverInvolutive Observer.cellCA = refl
+reflectObserverInvolutive Observer.cellCB = refl
+reflectObserverInvolutive Observer.cellCC = refl
 
 observerIrrepMultiplicity : Candidate.D4IrrepKind → Nat
 observerIrrepMultiplicity = Candidate.rawNineMultiplicity
