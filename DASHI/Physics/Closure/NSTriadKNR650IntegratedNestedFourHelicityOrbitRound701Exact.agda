@@ -31,9 +31,13 @@ import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
+import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
@@ -111,7 +115,10 @@ module IntegratedNestedOrbit
 
     allModeTransverse :
       (mode : Z3.FourierMode) →
-      _
+      Helical.Transverse
+        (Field30.physicalEmbedding physicalSystem)
+        mode
+        (Audit.velocity (Field30.finiteSystem physicalSystem) mode)
     allModeTransverse mode =
       Live.Base.velocityTransverse state cutoff time mode
 
@@ -127,7 +134,7 @@ module IntegratedNestedOrbit
       nestedOrbitResidue
       ≡
       R700.twelve * Orbit.sumCommutatorAt cutoff
-        (DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.nonzeroCutoffModes cutoff)
+        (Canonical.nonzeroCutoffModes cutoff)
         time
     nestedOrbitResidueIsTwelveLiveCommutator =
       trans
@@ -153,7 +160,7 @@ module IntegratedNestedOrbit
   integratedNestedOrbitResidueIsTwelveR691Commutator cutoff terminal =
     let
       outputs =
-        DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.nonzeroCutoffModes cutoff
+        Canonical.nonzeroCutoffModes cutoff
       liveSum = Orbit.sumCommutatorAt cutoff outputs
     in
     trans
