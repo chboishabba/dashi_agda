@@ -318,6 +318,33 @@ stateCountStrictlyBelowCurrentMeasure {state} run =
           (q1Witness run))))
     (stateCountPlusNextStrict run)
 
+runConstructionCostStrictlyBelowCurrentMeasure :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : OperationalQ1ConstructionRun state) →
+  runConstructionCost run
+  <
+  Q2.recursiveMeasure state
+runConstructionCostStrictlyBelowCurrentMeasure {state} run =
+  NatP.≤-<-trans
+    (NatP.m≤m+n
+      (runConstructionCost run)
+      (Q2.recursiveMeasure
+        (Charged.q1WitnessNextState
+          state
+          (q1Witness run))))
+    (operationalAndNextStrict run)
+
+graphCellCountStrictlyBelowCurrentMeasure :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : OperationalQ1ConstructionRun state) →
+  q1WitnessGraphCellCount (q1Witness run)
+  <
+  Q2.recursiveMeasure state
+graphCellCountStrictlyBelowCurrentMeasure run =
+  NatP.≤-<-trans
+    (graphCellCountBelowRunCost run)
+    (runConstructionCostStrictlyBelowCurrentMeasure run)
+
 ------------------------------------------------------------------------
 -- Same threshold with the next-state measure expanded on the literal authority.
 ------------------------------------------------------------------------
