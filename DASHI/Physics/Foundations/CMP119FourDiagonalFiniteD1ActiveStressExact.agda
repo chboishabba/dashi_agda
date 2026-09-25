@@ -8,6 +8,9 @@ open import Data.Rational.Base using (ℚ; +_; -[1+_]; _+_)
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
 import DASHI.Physics.Foundations.CMP119TenFiniteD1ComponentCompilerExact as Components
+import DASHI.Physics.Foundations.CMP119SymmetricPresentCutMetricBasisCompilerExact as PresentBasis
+import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as MetricBasis
+import DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact as Basis
 import DASHI.Physics.YangMills.BalabanClayPresentCutPhysicalCompilerRound122Exact as Present
 import DASHI.Physics.YangMills.BalabanCMP109116LiteralDifferentiatedCarrierRound103Exact as Carrier
 import DASHI.Physics.YangMills.BalabanCMP109116SourceContinuationRound103Exact as Source
@@ -114,12 +117,12 @@ module _
   -- no six off-diagonal numerical hypotheses are introduced.
   metric00IsD00 :
     let realization =
-          DASHI.Physics.Foundations.CMP119SymmetricPresentCutMetricBasisCompilerExact.compilePresentCutTenSlotMetricBasis
+          PresentBasis.compilePresentCutTenSlotMetricBasis
             presentData attachment background
         basis =
-          DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact.compileSymmetricBasis16 realization
+          MetricBasis.compileSymmetricBasis16 realization
     in
-    DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact.cmp119MetricBasisComponent
+    Basis.cmp119MetricBasisComponent
       basis
       (Components.canonicalR119Readout selected)
       (StressRep.stressTensor representation)
@@ -131,12 +134,12 @@ module _
 
   metric11IsD11 :
     let realization =
-          DASHI.Physics.Foundations.CMP119SymmetricPresentCutMetricBasisCompilerExact.compilePresentCutTenSlotMetricBasis
+          PresentBasis.compilePresentCutTenSlotMetricBasis
             presentData attachment background
         basis =
-          DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact.compileSymmetricBasis16 realization
+          MetricBasis.compileSymmetricBasis16 realization
     in
-    DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact.cmp119MetricBasisComponent
+    Basis.cmp119MetricBasisComponent
       basis
       (Components.canonicalR119Readout selected)
       (StressRep.stressTensor representation)
@@ -148,12 +151,12 @@ module _
 
   metric22IsD22 :
     let realization =
-          DASHI.Physics.Foundations.CMP119SymmetricPresentCutMetricBasisCompilerExact.compilePresentCutTenSlotMetricBasis
+          PresentBasis.compilePresentCutTenSlotMetricBasis
             presentData attachment background
         basis =
-          DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact.compileSymmetricBasis16 realization
+          MetricBasis.compileSymmetricBasis16 realization
     in
-    DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact.cmp119MetricBasisComponent
+    Basis.cmp119MetricBasisComponent
       basis
       (Components.canonicalR119Readout selected)
       (StressRep.stressTensor representation)
@@ -165,12 +168,12 @@ module _
 
   metric33IsD33 :
     let realization =
-          DASHI.Physics.Foundations.CMP119SymmetricPresentCutMetricBasisCompilerExact.compilePresentCutTenSlotMetricBasis
+          PresentBasis.compilePresentCutTenSlotMetricBasis
             presentData attachment background
         basis =
-          DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact.compileSymmetricBasis16 realization
+          MetricBasis.compileSymmetricBasis16 realization
     in
-    DASHI.Physics.Foundations.CMP119MetricBasisStressComponentCompilerExact.cmp119MetricBasisComponent
+    Basis.cmp119MetricBasisComponent
       basis
       (Components.canonicalR119Readout selected)
       (StressRep.stressTensor representation)
