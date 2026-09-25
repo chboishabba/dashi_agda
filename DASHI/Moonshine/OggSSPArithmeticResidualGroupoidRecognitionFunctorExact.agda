@@ -114,6 +114,31 @@ record Pi0RecognitionGate (sourcePi0 targetPi0 : Nat) : Set where
 open Pi0RecognitionGate public
 
 ------------------------------------------------------------------------
+-- 2b. Typed recognition stages.
+--
+-- Cross-pollinated from the route-B proof-provenance firewall: satisfying a
+-- cheap compatibility gate is evidence about a candidate target, not evidence
+-- that the source object has been transported/recognized.
+------------------------------------------------------------------------
+
+data RecognitionEvidenceStage : Set where
+  numericalCompatibilityOnly : RecognitionEvidenceStage
+  targetGroupoidStructureExplicit : RecognitionEvidenceStage
+  fullArithmeticActionGroupoidRecognition : RecognitionEvidenceStage
+
+p3CurrentRecognitionStage : RecognitionEvidenceStage
+p3CurrentRecognitionStage = targetGroupoidStructureExplicit
+
+p2CurrentRecognitionStage : RecognitionEvidenceStage
+p2CurrentRecognitionStage = targetGroupoidStructureExplicit
+
+data Pi0CompatibilityAutomaticallyBuildsRecognitionFunctor : Set where
+
+pi0CompatibilityDoesNotBuildRecognitionFunctor :
+  Pi0CompatibilityAutomaticallyBuildsRecognitionFunctor → ⊥
+pi0CompatibilityDoesNotBuildRecognitionFunctor ()
+
+------------------------------------------------------------------------
 -- 3. p=3 target: the constant-ternary C2 groupoid passes the pi0 gate.
 --
 -- This is only a target-side compatibility theorem.  It does NOT construct the
@@ -272,6 +297,8 @@ record SmallCharacteristicRecognitionFunctorBoundary : Set where
     actionIntertwiningRequired : Bool
     orbitPreservationRequired : Bool
     stabilizerPreservationAndReflectionRequired : Bool
+    recognitionStagesTyped : Bool
+    pi0CompatibilityNotPromotedToFullRecognition : Bool
 
     p3TargetPassesPi0Gate : Bool
     p3TargetStabilizerProfileExplicit : Bool
@@ -295,6 +322,7 @@ canonicalSmallCharacteristicRecognitionFunctorBoundary :
 canonicalSmallCharacteristicRecognitionFunctorBoundary =
   small-characteristic-recognition-functor-boundary
     true true true true
+    true true
     true true false
     5 true
     10 true false true
