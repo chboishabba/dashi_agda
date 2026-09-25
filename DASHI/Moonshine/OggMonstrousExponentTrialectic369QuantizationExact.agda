@@ -26,6 +26,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; Σ)
+open import Data.Maybe using (Maybe; just)
 
 import DASHI.Core.DependentRecoverableProjectionExact as Recoverable
 import DASHI.Core.TopDownObservationCalculusExact as TopDown
@@ -36,6 +37,7 @@ import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.OggMonstrousExponentTrialecticDescentExact as Arithmetic
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Moonshine.JInvariant369CodecBidiExact as MachineCodec
+import DASHI.Moonshine.JInvariant369CodecReconciliationFrontierExact as Compact
 
 ------------------------------------------------------------------------
 -- 1. Generic declared-loss quantizer interface.
@@ -357,6 +359,52 @@ machineCodecRoundTripOnArithmeticSurface :
 machineCodecRoundTripOnArithmeticSurface triple =
   MachineCodec.decodeEncode27 (tripleSurface triple)
 
+
+------------------------------------------------------------------------
+-- 4f. Reuse the compact 27 codec and identify its explicit frame only at the
+-- representation level for this consumer.
+--
+-- In the J renderer the same generic frame coordinate is proved to equal the
+-- third pants continuation.  Here, because our row ordering is (A,B,C), the
+-- exact same codec field is simply coarse C_p presence.  These are separate
+-- consumer-specific interpretations of one representation coordinate.
+------------------------------------------------------------------------
+
+encodeCompactArithmeticSurface :
+  ArithmeticTriple -> Compact.Compact27
+encodeCompactArithmeticSurface triple =
+  Compact.encodeCompact27 (tripleSurface triple)
+
+compactArithmeticSurfaceRoundTrip :
+  (triple : ArithmeticTriple) ->
+  Compact.decodeCompact27 (encodeCompactArithmeticSurface triple)
+  ≡ tripleSurface triple
+compactArithmeticSurfaceRoundTrip triple =
+  Compact.decodeEncodeCompact27 (tripleSurface triple)
+
+compactFrameIsArithmeticCPresence :
+  (triple : ArithmeticTriple) ->
+  Compact.frame3 (encodeCompactArithmeticSurface triple)
+  ≡ presenceTrit (tripleC triple)
+compactFrameIsArithmeticCPresence
+  (arithmetic-triple a b c) = refl
+
+compactPayloadAndFrameDoNotRecoverArithmeticWithoutResidual :
+  Descent.ConsumerSufficient
+    (λ triple -> Compact.decodeCompact27 (encodeCompactArithmeticSurface triple))
+    tripleSum
+  -> ⊥
+compactPayloadAndFrameDoNotRecoverArithmeticWithoutResidual sufficient =
+  surfaceCannotAnswerArithmeticSum
+    (λ left right same ->
+      sufficient left right same)
+
+data ArithmeticFrameAutomaticallyHasJRendererPantsMeaning : Set where
+
+arithmeticFrameDoesNotInheritJRendererPantsMeaning :
+  ArithmeticFrameAutomaticallyHasJRendererPantsMeaning -> ⊥
+arithmeticFrameDoesNotInheritJRendererPantsMeaning ()
+
 ------------------------------------------------------------------------
 -- 5. Role order is retained exactly.
 --
@@ -418,6 +466,9 @@ record OggMonstrousExponentTrialectic369QuantizationBoundary : Set where
     coarseSurfaceAloneFailsMagnitudeConsumer : Bool
     surfacePlusResidualAdequateForEveryConsumer : Bool
     existingVerified27MachineCodecReused : Bool
+    compact27CodecReused : Bool
+    compactFrameIsArithmeticCPresence : Bool
+    arithmeticFrameInheritsJRendererPantsMeaning : Bool
     exactMagnitudeRecoveryFromPresenceCode : Bool
     arithmeticPolarityIdentityClaimed : Bool
     sharedT3PostRebaseSeamPrepared : Bool
@@ -429,4 +480,5 @@ canonicalOggMonstrousExponentTrialectic369QuantizationBoundary =
   ogg-monstrous-exponent-trialectic-369-quantization-boundary
     true true true true true
     true true true true
+    true true false
     false false true false
