@@ -16,7 +16,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExa
 --
 -- Its cost is DEFINED as:
 --
---   stateCount + length auxiliaryTrace.
+--   graphCellCount + length auxiliaryTrace.
 --
 -- Therefore every successful constructor pays at least one unit for every
 -- actual quotient transition row before representative-chain/classifier work
@@ -24,7 +24,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Unit using (⊤)
 open import Data.List.Base using (List; length)
@@ -87,7 +87,7 @@ q1WitnessGraphCellCountExact :
     ((suc (suc zero))
       * q1WitnessStateCount witness)
 q1WitnessGraphCellCountExact witness =
-  Agda.Builtin.Equality.refl
+  refl
 
 ------------------------------------------------------------------------
 -- Normalized constructor execution receipt.
