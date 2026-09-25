@@ -32,6 +32,7 @@ import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge as SSPAuthority
 import DASHI.Physics.Closure.IsospinSplittingFromP3LaneReceipt as P3Receipt
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
+import DASHI.Moonshine.OggSSPP3F9FrobeniusCandidateNoGoExact as F9NoGo
 import DASHI.Moonshine.OggSSPSmallCharacteristicCodecIndexedRecognitionExact as LaneCodec
 
 ------------------------------------------------------------------------
@@ -155,7 +156,7 @@ uniqueCoarseJDoesNotConstructMarkedResidualCover ()
 data SmallCharacteristicArithmeticSourceResidual : Set where
   missingP2MarkedArithmeticSource :
     SmallCharacteristicArithmeticSourceResidual
-  missingP3MarkedFrobeniusSource :
+  missingP3MarkedFrobeniusQuotientOrSubcarrier :
     SmallCharacteristicArithmeticSourceResidual
 
 record SmallCharacteristicArithmeticSourceBoundary : Set where
@@ -168,6 +169,8 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     p3ExactLaneKeyOwned : Bool
     p3MarkedActionSocketOwned : Bool
     p2MarkedActionSocketOwned : Bool
+    wholeF9FrobeniusCarrierRejected : Bool
+    p3MarkedQuotientOrSubcarrierRequired : Bool
     receiptMetadataPromotedToAction : Bool
     p2SourceInhabited : Bool
     p3SourceInhabited : Bool
@@ -178,5 +181,6 @@ canonicalSmallCharacteristicArithmeticSourceBoundary :
 canonicalSmallCharacteristicArithmeticSourceBoundary =
   small-characteristic-arithmetic-source-boundary
     true true true true true true true
+    true true
     false false false
     missingP2MarkedArithmeticSource
