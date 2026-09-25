@@ -5,6 +5,10 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 TARGET="${AGDA_PREFLIGHT_TARGET:-DASHI/Everything.agda}"
+if [[ ${1:-} == *.agda ]]; then
+  TARGET="$1"
+  shift
+fi
 REFINE="${AGDA_PREFLIGHT_REFINE:-scope}"
 REPORT="${AGDA_PREFLIGHT_REPORT:-.cache/agda_preflight/report.json}"
 AGDA_REFINE_ARGS="${AGDA_PREFLIGHT_AGDA_ARGS:--i . -i DCHoTT-Agda -i cubical -l standard-library}"
@@ -39,4 +43,5 @@ exec python -m pytest \
   "${ARGS[@]}" \
   "$TARGET" \
   -vv \
+  -s \
   "$@"
