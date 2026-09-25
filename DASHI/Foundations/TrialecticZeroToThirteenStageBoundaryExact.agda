@@ -14,14 +14,15 @@ module DASHI.Foundations.TrialecticZeroToThirteenStageBoundaryExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Moonshine.JInvariant369ZeroToThirteenTetralemmaQualificationExact as Zero13
+import DASHI.Wikimedia.IbrahimZeroToThirteenTernaryCarryNDimFibreSnowballExact as Carry
 import DASHI.Foundations.StageAtlasZeroToTwelve as Stage
 
 rank12Address110 :
-  Zero13.Carry.renderedBase3 Zero13.rank12Row ≡ "110"
+  Carry.renderedBase3 Zero13.rank12Row ≡ "110"
 rank12Address110 = Zero13.rank12Address110
 
 rank13Address111 :
-  Zero13.Carry.renderedBase3 Zero13.rank13Row ≡ "111"
+  Carry.renderedBase3 Zero13.rank13Row ≡ "111"
 rank13Address111 = Zero13.rank13Address111
 
 stage12OpensRelation :
