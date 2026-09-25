@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.YangMillsActualGroupQuantitativeConstructorRound5
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Product using (_×_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
