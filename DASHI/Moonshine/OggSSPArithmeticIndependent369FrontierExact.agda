@@ -26,11 +26,19 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * p=2/p=3 forward recognition inhabitants;
 --   * p=2/p=3 provenance first legs and composed independent-369 recognition.
 --
--- OPEN ONLY AS EXTERNAL IDENTIFICATION:
---   * whether the p=2 DASHI marked-CM reconstruction is the intended classical
---     level-4/X0(4) marked moduli object;
---   * whether the p=3 DASHI extension-coordinate quotient is the intended
---     classical marked supersingular Frobenius object.
+-- CLASSICAL CARRIER STATUS:
+--   * p=3 abstract three-state C2-set is realised by the Deligne--Rapoport
+--     Frobenius-branch / supersingular-node / Verschiebung-branch local strata;
+--   * p=2 ten-state Gamma0(4)-point interpretation is ruled out;
+--   * p=2 ten-state carrier has a sourced 2 x 5 factorisation as quadratic-order
+--     orientation doublet x loop-reversal quotient of supersingular inertia.
+--
+-- OPEN ONLY AT STRONGER SAME-OBJECT LEVEL:
+--   * whether the F9 extension coordinate is a genuine geometric local
+--     parameter for the Deligne--Rapoport node;
+--   * whether the p=2 oriented-unoriented-inertia product occurs as a named
+--     independently classified classical moduli stack/object;
+--   * no classical source identifies the Base369 semantic labels themselves.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -48,6 +56,11 @@ import DASHI.Moonshine.OggSSPArithmeticTo369RecognitionExact as Forward
 import DASHI.Moonshine.OggSSPArithmeticTo369InhabitedExact as Inhabited
 import DASHI.Moonshine.OggSSPSmallCharacteristicArithmeticSourceSocketExact as Socket
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalStrataRecognitionExact as P3Local
+import DASHI.Moonshine.OggSSPP2Gamma04DrinfeldLevelNoGoExact as P2Gamma04
+import DASHI.Moonshine.OggSSPP2OrientedInertiaTenStateRecognitionExact as P2Ten
+import DASHI.Moonshine.OggSSPP2OrientedUnorientedInertiaStackCandidateExact as P2Stack
+import DASHI.Moonshine.OggSSPClassicalCarrierToIndependent369RecognitionExact as Classical369
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -118,15 +131,18 @@ inhabitedBoundary =
 ------------------------------------------------------------------------
 
 data ArithmeticIndependent369Residual : Set where
-  missingP2ExternalClassicalX04Identification :
+  missingP2NamedOrientedUnorientedInertiaModuliIdentification :
     ArithmeticIndependent369Residual
 
-  missingP3ExternalClassicalModuliIdentification :
+  missingP3GeometricIdentificationOfF9Coordinate :
+    ArithmeticIndependent369Residual
+
+  missingClassicalBase369SemanticIdentification :
     ArithmeticIndependent369Residual
 
 firstResidual : ArithmeticIndependent369Residual
 firstResidual =
-  missingP2ExternalClassicalX04Identification
+  missingP2NamedOrientedUnorientedInertiaModuliIdentification
 
 data Independent369TargetsStillMissing : Set where
 data P3StructuralCandidateStillMissing : Set where
@@ -188,8 +204,16 @@ record ArithmeticIndependent369Frontier : Set where
     p2IndependentProvenanceRecognitionPaid : Bool
     p3IndependentProvenanceRecognitionPaid : Bool
 
-    p2ExternalClassicalX04IdentificationPaid : Bool
-    p3ExternalClassicalModuliIdentificationPaid : Bool
+    p3DeligneRapoportThreeStateRealizationPaid : Bool
+    p3ClassicalCarrierToIndependent369RecognitionPaid : Bool
+    p3F9CoordinateGeometricallyIdentified : Bool
+
+    p2Gamma04TenPointInterpretationRejected : Bool
+    p2OrientedInertiaTenStateFactorizationPaid : Bool
+    p2ClassicalCarrierToIndependent369RecognitionPaid : Bool
+    p2NamedOrientedUnorientedInertiaModuliIdentificationPaid : Bool
+
+    classicalBase369SemanticIdentificationPaid : Bool
 
     targetConstructionStillBlocksArithmeticRecognition : Bool
     cardinalityMatchingCreatesArithmeticAuthority : Bool
@@ -205,7 +229,9 @@ canonicalArithmeticIndependent369Frontier =
     true true
     true true true true
     true true true true true true true true
-    false false
+    true true false
+    true true true false
+    false
     false false
     firstResidual
 
