@@ -18,6 +18,7 @@ module DASHI.Cognition.CaveTraumaNonErasingReopeningExact where
 -- that the repo can represent recovery/refinement without memory erasure.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -199,8 +200,6 @@ record NonErasingReopeningBoundary : Set where
     preservedMemoryRequiresSameCommand : Bool
     correctiveEvidenceMayChangeAccessibleCone : Bool
     finiteWitnessIsClinicalTreatmentClaim : Bool
-
-open import Agda.Builtin.Bool using (Bool; false; true)
 
 canonicalNonErasingReopeningBoundary :
   NonErasingReopeningBoundary
