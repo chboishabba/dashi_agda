@@ -90,7 +90,7 @@ invertibleTransportFamilyDoesNotAutoPromoteToGroupoid ()
 
 sitePlusTransportDoesNotAutoPromoteToGroupoidValuedPresheaf :
   SeparateSiteAndTransportAutomaticallyFormGroupoidPresheaf → ⊥
-sitePlusTransportDoesNotAutoPromoteToGroupoidPresheaf ()
+sitePlusTransportDoesNotAutoPromoteToGroupoidValuedPresheaf ()
 
 record StackPromotionObligation : Set where
   constructor stack-promotion-obligation
