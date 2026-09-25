@@ -239,6 +239,72 @@ mk = record { witnes = Set }
     assert diagnostic["fixes"][0]["edits"]
 
 
+def test_warm_next_error_uses_compact_candidates(tmp_path, capsys):
+    write_module(
+        tmp_path,
+        "Next.Lib",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    top = write_module(
+        tmp_path,
+        "Next.Top",
+        """
+import Next.Lib
+
+record S : Set₁ where
+  field
+    carrier : Set
+
+bad : S
+bad = record { carier = Set }
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    # Prime the persistent closure and its per-module top candidates.
+    assert main(
+        [
+            "diagnose",
+            str(top),
+            "--root",
+            str(tmp_path),
+            "--index",
+            str(database),
+            "--json",
+        ]
+    ) == 1
+    capsys.readouterr()
+
+    assert main(
+        [
+            "next-error",
+            str(top),
+            "--root",
+            str(tmp_path),
+            "--index",
+            str(database),
+            "--require-fix",
+            "--json",
+        ]
+    ) == 0
+
+    payload = json.loads(capsys.readouterr().out)
+    counts = payload["profile"]["counts"]
+    assert payload["status"] == "diagnostic"
+    assert counts.get("files_parsed", 0) == 0
+    assert counts.get("checker_instances", 0) == 0
+    assert counts["next_error_modules_scanned"] == 2
+    assert counts["next_error_candidates_decoded"] <= 2
+    assert counts.get("diagnostics_cached", 0) == 0
+
+
 def test_benchmark_payload_reports_slo_pass(tmp_path, capsys):
     path = write_module(tmp_path, "Slo.Top")
     database = tmp_path / ".cache" / "source-index.sqlite3"
