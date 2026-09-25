@@ -27,12 +27,13 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Fin.Base using (Fin; zero; suc)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Cognition.PNF.SemanticQueryResidualFibreSSSPBridgeExact as Query
+import DASHI.Algebra.Trit as Trit
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureObservationalRefinement as Future
@@ -78,7 +79,7 @@ semanticQueryActionSystem =
     }
 
 observeQueryWorld :
-  QueryWorldState -> DASHI.Algebra.Trit.Trit
+  QueryWorldState -> Trit.Trit
 observeQueryWorld (query , world) =
   Query.exampleObserve query world
 
@@ -244,7 +245,7 @@ canonicalTwoWorldFutureDistinctFibre :
 canonicalTwoWorldFutureDistinctFibre =
   Cardinality.finiteFutureDistinctFibre
     twoWorldRepresentative
-    DASHI.Algebra.Trit.zer
+    Trit.zer
     (λ { zero -> refl ; (suc zero) -> refl })
     twoWorldFutureEquivalentIndicesEqual
 
