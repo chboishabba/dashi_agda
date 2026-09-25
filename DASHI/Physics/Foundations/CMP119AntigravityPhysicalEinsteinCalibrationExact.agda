@@ -1,67 +1,43 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityPhysicalEinsteinCalibrationExact where
 
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _<_)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; _<_)
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 import DASHI.Physics.Closure.EinsteinPhysicalCouplingCalibrationExact as Physical
 
 ------------------------------------------------------------------------
--- TYPED PHYSICAL EINSTEIN CALIBRATION BOUNDARY
+-- NORMALIZED RATIONAL CALIBRATION + MEASURED PHYSICAL COUPLING BOUNDARY
 --
--- The repository already carries the SI convention
+-- The exact antigravity geometry is rational.  The SI Einstein coupling is not:
 --
 --   kappa = 8*pi*G/c^4
 --
--- and a vendored CODATA diagnostic, but deliberately does not promote the
--- decimal diagnostic to an exact typed value.  The antigravity source->geometry
--- route therefore consumes a typed coupling only together with an explicit
--- authority/value receipt.
+-- contains transcendental pi and measured G.  Therefore an exact rational
+-- "physical kappa" is a category error.  Keep the exact rational geometry and
+-- its scale factor separate from a typed enclosure/authority receipt for the
+-- measured physical coupling.
 ------------------------------------------------------------------------
 
-record AcceptedTypedEinsteinCoupling : Set₁ where
+record NormalizedEinsteinCoupling : Set where
   field
     coupling : ℚ
     couplingPositive : 0ℚ < coupling
 
-    authorityCandidate :
-      Physical.EinsteinPhysicalCouplingCandidate
+open NormalizedEinsteinCoupling public
 
-    AcceptedAuthorityValue : Set
-    acceptedAuthorityValue : AcceptedAuthorityValue
-
-    ValueConventionWeld : Set
-    valueConventionWeld : ValueConventionWeld
-
-open AcceptedTypedEinsteinCoupling public
-
-------------------------------------------------------------------------
--- PHYSICAL SOURCE -> DIMENSIONLESS KOTTLER AMPLITUDE
---
--- sourceMagnitude is the dimensionless finite-source readout.
--- stressEnergyPerSourceUnit converts one source unit to physical energy density.
--- lengthScale converts one model length unit to physical length.
---
--- Multiplication by kappa and lengthScale^2 therefore produces the
--- dimensionless curvature/cosmological amplitude consumed by the normalized
--- Kottler model.
-------------------------------------------------------------------------
-
-record SourceToPhysicalKottlerCalibration
-    (sourceMagnitude targetAmplitude : ℚ) : Set₁ where
+record SourceToNormalizedKottlerCalibration
+    (sourceMagnitude targetAmplitude : ℚ) : Set where
   field
-    einstein :
-      AcceptedTypedEinsteinCoupling
+    einstein : NormalizedEinsteinCoupling
 
-    stressEnergyPerSourceUnit :
-      ℚ
-
+    stressEnergyPerSourceUnit : ℚ
     stressEnergyPerSourceUnitPositive :
       0ℚ < stressEnergyPerSourceUnit
 
-    lengthScale :
-      ℚ
-
+    lengthScale : ℚ
     lengthScalePositive :
       0ℚ < lengthScale
 
@@ -72,21 +48,147 @@ record SourceToPhysicalKottlerCalibration
       * (lengthScale * lengthScale)
       ≡ targetAmplitude
 
-open SourceToPhysicalKottlerCalibration public
+open SourceToNormalizedKottlerCalibration public
 
-physicalAmplitude :
+normalizedAmplitude :
   ∀ {sourceMagnitude targetAmplitude} →
-  SourceToPhysicalKottlerCalibration sourceMagnitude targetAmplitude →
+  SourceToNormalizedKottlerCalibration sourceMagnitude targetAmplitude →
   ℚ
-physicalAmplitude {sourceMagnitude = sourceMagnitude} calibration =
+normalizedAmplitude {sourceMagnitude = sourceMagnitude} calibration =
   coupling (einstein calibration)
   * stressEnergyPerSourceUnit calibration
   * sourceMagnitude
   * (lengthScale calibration * lengthScale calibration)
 
-physicalAmplitudeIsTarget :
+normalizedAmplitudeIsTarget :
   ∀ {sourceMagnitude targetAmplitude}
     (calibration :
-      SourceToPhysicalKottlerCalibration sourceMagnitude targetAmplitude) →
-  physicalAmplitude calibration ≡ targetAmplitude
-physicalAmplitudeIsTarget = calibratedAmplitude
+      SourceToNormalizedKottlerCalibration sourceMagnitude targetAmplitude) →
+  normalizedAmplitude calibration ≡ targetAmplitude
+normalizedAmplitudeIsTarget = calibratedAmplitude
+
+------------------------------------------------------------------------
+-- MEASURED PHYSICAL COUPLING AS AN ENCLOSURE.
+--
+-- The rational endpoints are proof carriers for an enclosure; they are not a
+-- claim that kappa itself is rational.  Accepted authority remains a distinct
+-- type, matching EinsteinPhysicalCouplingCalibrationExact.
+------------------------------------------------------------------------
+
+record PhysicalEinsteinCouplingInterval : Set where
+  field
+    lower upper : ℚ
+    lowerPositive : 0ℚ < lower
+    ordered : lower ≤ upper
+
+open PhysicalEinsteinCouplingInterval public
+
+record AcceptedPhysicalEinsteinCoupling
+    (interval : PhysicalEinsteinCouplingInterval) : Set₁ where
+  field
+    authorityCandidate :
+      Physical.EinsteinPhysicalCouplingCandidate
+
+    AcceptedMeasuredAuthority : Set
+    acceptedMeasuredAuthority : AcceptedMeasuredAuthority
+
+    UncertaintyContained : Set
+    uncertaintyContained : UncertaintyContained
+
+    EnergyDensityConventionWeld : Set
+    energyDensityConventionWeld : EnergyDensityConventionWeld
+
+    KappaDefinitionWeld : Set
+    kappaDefinitionWeld : KappaDefinitionWeld
+
+open AcceptedPhysicalEinsteinCoupling public
+
+record PhysicalScaleEnclosure
+    (sourceMagnitude : ℚ)
+    (kappa : PhysicalEinsteinCouplingInterval) : Set where
+  field
+    stressEnergyLower stressEnergyUpper : ℚ
+    lengthLower lengthUpper : ℚ
+
+    stressLowerPositive : 0ℚ < stressEnergyLower
+    stressOrdered : stressEnergyLower ≤ stressEnergyUpper
+
+    lengthLowerPositive : 0ℚ < lengthLower
+    lengthOrdered : lengthLower ≤ lengthUpper
+
+open PhysicalScaleEnclosure public
+
+physicalAmplitudeLower :
+  ∀ {sourceMagnitude kappa} →
+  PhysicalScaleEnclosure sourceMagnitude kappa → ℚ
+physicalAmplitudeLower {sourceMagnitude = sourceMagnitude} {kappa = kappa} scale =
+  lower kappa
+  * stressEnergyLower scale
+  * sourceMagnitude
+  * (lengthLower scale * lengthLower scale)
+
+physicalAmplitudeUpper :
+  ∀ {sourceMagnitude kappa} →
+  PhysicalScaleEnclosure sourceMagnitude kappa → ℚ
+physicalAmplitudeUpper {sourceMagnitude = sourceMagnitude} {kappa = kappa} scale =
+  upper kappa
+  * stressEnergyUpper scale
+  * sourceMagnitude
+  * (lengthUpper scale * lengthUpper scale)
+
+record PhysicalKottlerCalibrationEnclosure
+    (sourceMagnitude targetAmplitude : ℚ)
+    (kappa : PhysicalEinsteinCouplingInterval) : Set₁ where
+  field
+    authority :
+      AcceptedPhysicalEinsteinCoupling kappa
+
+    scale :
+      PhysicalScaleEnclosure sourceMagnitude kappa
+
+    targetAboveLower :
+      physicalAmplitudeLower scale ≤ targetAmplitude
+
+    targetBelowUpper :
+      targetAmplitude ≤ physicalAmplitudeUpper scale
+
+open PhysicalKottlerCalibrationEnclosure public
+
+------------------------------------------------------------------------
+-- STATUS / TRUST BOUNDARY
+------------------------------------------------------------------------
+
+exactRationalPhysicalEinsteinCouplingClaimed : Bool
+exactRationalPhysicalEinsteinCouplingClaimed = false
+
+exactRationalPhysicalEinsteinCouplingClaimedIsFalse :
+  exactRationalPhysicalEinsteinCouplingClaimed ≡ false
+exactRationalPhysicalEinsteinCouplingClaimedIsFalse = refl
+
+measuredCouplingIntervalABICompiled : Bool
+measuredCouplingIntervalABICompiled = true
+
+measuredCouplingIntervalABICompiledIsTrue :
+  measuredCouplingIntervalABICompiled ≡ true
+measuredCouplingIntervalABICompiledIsTrue = refl
+
+acceptedMeasuredGCouplingStillRequired : Bool
+acceptedMeasuredGCouplingStillRequired = true
+
+acceptedMeasuredGCouplingStillRequiredIsTrue :
+  acceptedMeasuredGCouplingStillRequired ≡ true
+acceptedMeasuredGCouplingStillRequiredIsTrue = refl
+
+stressEnergyScaleStillRequired : Bool
+stressEnergyScaleStillRequired = true
+
+stressEnergyScaleStillRequiredIsTrue :
+  stressEnergyScaleStillRequired ≡ true
+stressEnergyScaleStillRequiredIsTrue = refl
+
+physicalLengthScaleStillRequired : Bool
+physicalLengthScaleStillRequired = true
+
+physicalLengthScaleStillRequiredIsTrue :
+  physicalLengthScaleStillRequired ≡ true
+physicalLengthScaleStillRequiredIsTrue = refl
