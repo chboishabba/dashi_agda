@@ -60,6 +60,9 @@ record LiteralTwoWilsonQuarterDyadicFamily
     physicalDistance :
       Observable → Observable → Nat
 
+    ConnectingClusterMeetsBothWilsonSupports :
+      Nat → Observable → Observable → Set
+
     dataAt :
       Nat → Observable → Observable →
       R444.CanonicalTwiceMarkedFourStageData
@@ -223,7 +226,7 @@ asR556 family = record
   ; R556.IndexedSourceFirstWilsonCovarianceData.finiteWilsonCovarianceBelowConnectingShell =
       finiteCovarianceBelowCanonicalDyadicShell family
   ; R556.IndexedSourceFirstWilsonCovarianceData.ConnectingClusterMeetsBothWilsonSupports =
-      λ cutoff left right → ⊤
+      ConnectingClusterMeetsBothWilsonSupports family
   ; R556.IndexedSourceFirstWilsonCovarianceData.leftBounded =
       Downstream.leftBounded (downstream family)
   ; R556.IndexedSourceFirstWilsonCovarianceData.translatedRightBounded =
