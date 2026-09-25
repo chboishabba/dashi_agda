@@ -286,9 +286,13 @@ f9ExtensionCoordinateNotPi0Embedding :
     f9ExtensionCoordinateOrbitRecognition
   ->
   ⊥
-f9ExtensionCoordinateNotPi0Embedding embedding =
-  fixed0NotFixed1
-    (Recognition.reflectsOrbitEquality embedding refl)
+f9ExtensionCoordinateNotPi0Embedding embedding
+  with Recognition.reflectsOrbitEquality
+    embedding
+    {left = fixed0}
+    {right = fixed1}
+    refl
+... | ()
 
 ------------------------------------------------------------------------
 -- 5. Six source components cannot inject into the two target components.
