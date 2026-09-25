@@ -36,7 +36,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Empty using (⊥)
 open import Data.Maybe.Base using (just)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
@@ -138,7 +138,7 @@ q1SemanticsBuildsPartialDiagonalBody
         tt
       ≡
       just quotedOutput →
-      Data.Product.Σ Cook.BooleanFormula
+      Σ Cook.BooleanFormula
         (λ bodyOutput →
           (Kleene.run2
             (Exec.q2PartialSystem stepSystem initial)
