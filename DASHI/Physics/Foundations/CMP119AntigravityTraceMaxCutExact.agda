@@ -36,7 +36,10 @@ data AntigravityTraceLeaf : Set where
   proveSelectedPartitionFunctionPositive :
     AntigravityTraceLeaf
 
-  proveSelectedTraceInsertionNumeratorNegative :
+  attachSelectedTraceToRenormalizedQuantumTrace :
+    AntigravityTraceLeaf
+
+  proveSelectedQuantumTraceNumeratorNegative :
     AntigravityTraceLeaf
 
 canonicalAntigravityTraceLeaves : List AntigravityTraceLeaf
@@ -102,3 +105,43 @@ betaAnomalySameObjectWeldStillRequired = true
 betaAnomalySameObjectWeldStillRequiredIsTrue :
   betaAnomalySameObjectWeldStillRequired ≡ true
 betaAnomalySameObjectWeldStillRequiredIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- POST-QUANTUM-TRACE-COMPILER SCHEDULER STATE
+------------------------------------------------------------------------
+
+quantumTraceCompilerClosed : Bool
+quantumTraceCompilerClosed = true
+
+quantumTraceCompilerClosedIsTrue :
+  quantumTraceCompilerClosed ≡ true
+quantumTraceCompilerClosedIsTrue = refl
+
+betaF2SignCompilerClosed : Bool
+betaF2SignCompilerClosed = true
+
+betaF2SignCompilerClosedIsTrue :
+  betaF2SignCompilerClosed ≡ true
+betaF2SignCompilerClosedIsTrue = refl
+
+selectedCMP119ToWilsonGibbsSameObjectStillRequired : Bool
+selectedCMP119ToWilsonGibbsSameObjectStillRequired = true
+
+selectedCMP119ToWilsonGibbsSameObjectStillRequiredIsTrue :
+  selectedCMP119ToWilsonGibbsSameObjectStillRequired ≡ true
+selectedCMP119ToWilsonGibbsSameObjectStillRequiredIsTrue = refl
+
+selectedQuantumTraceSameObjectStillRequired : Bool
+selectedQuantumTraceSameObjectStillRequired = true
+
+selectedQuantumTraceSameObjectStillRequiredIsTrue :
+  selectedQuantumTraceSameObjectStillRequired ≡ true
+selectedQuantumTraceSameObjectStillRequiredIsTrue = refl
+
+selectedQuantumTraceSignStillRequired : Bool
+selectedQuantumTraceSignStillRequired = true
+
+selectedQuantumTraceSignStillRequiredIsTrue :
+  selectedQuantumTraceSignStillRequired ≡ true
+selectedQuantumTraceSignStillRequiredIsTrue = refl
