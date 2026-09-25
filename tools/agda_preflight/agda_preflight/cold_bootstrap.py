@@ -6,7 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
-from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
+from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
 
 from .ast_index import build_import_surface
 from .checker import Checker, _parser
@@ -36,6 +36,14 @@ class DiagnosticReceipt:
     diagnostics_recomputed: int
     parse_ns: int
     diagnostics_ns: int
+
+
+@dataclass(frozen=True)
+class DiagnosticBatchReceipt:
+    batch_index: int
+    target_count: int
+    dependency_surface: int
+    receipts: Tuple[DiagnosticReceipt, ...]
 
 
 _WORKER_ROOT: Optional[Path] = None
@@ -304,30 +312,159 @@ def discover_closure(
     )
 
 
+def dependency_closures(
+    receipts: Sequence[ImportReceipt],
+) -> Dict[str, Set[str]]:
+    """Return transitive in-closure dependency sets, including each module."""
+    graph = {
+        receipt.module_name: tuple(
+            dependency
+            for dependency in receipt.imports
+            if dependency in {item.module_name for item in receipts}
+        )
+        for receipt in receipts
+    }
+    memo: Dict[str, Set[str]] = {}
+
+    def visit(module: str, active: Set[str]) -> Set[str]:
+        cached = memo.get(module)
+        if cached is not None:
+            return set(cached)
+        if module in active:
+            return {module}
+        nested = set(active)
+        nested.add(module)
+        closure = {module}
+        for dependency in graph.get(module, ()):
+            closure.update(visit(dependency, nested))
+        memo[module] = set(closure)
+        return closure
+
+    for module in graph:
+        visit(module, set())
+    return memo
+
+
+def dependency_affinity_batches(
+    receipts: Sequence[ImportReceipt],
+    *,
+    jobs: int,
+) -> Tuple[Tuple[ImportReceipt, ...], ...]:
+    """Partition targets by dependency overlap while preserving parallel load.
+
+    The scheduler bounds target-count skew, then minimizes each assignment's
+    incremental transitive dependency surface. This avoids the old arbitrary
+    path chunks where shared foundations were reparsed independently by every
+    worker.
+    """
+    if not receipts:
+        return ()
+    workers = max(1, min(worker_count(jobs), len(receipts)))
+    closures = dependency_closures(receipts)
+    by_module = {receipt.module_name: receipt for receipt in receipts}
+
+    ordered = sorted(
+        by_module,
+        key=lambda module: (-len(closures[module]), module),
+    )
+    target_cap = (len(ordered) + workers - 1) // workers
+    batches: List[List[str]] = [[] for _ in range(workers)]
+    covered: List[Set[str]] = [set() for _ in range(workers)]
+
+    for module in ordered:
+        candidates = [
+            index
+            for index, batch in enumerate(batches)
+            if len(batch) < target_cap
+        ]
+        if not candidates:
+            candidates = list(range(workers))
+
+        closure = closures[module]
+        chosen = min(
+            candidates,
+            key=lambda index: (
+                len(closure - covered[index]),
+                len(covered[index]),
+                len(batches[index]),
+                index,
+            ),
+        )
+        batches[chosen].append(module)
+        covered[chosen].update(closure)
+
+    result = []
+    for batch in batches:
+        if not batch:
+            continue
+        # Broad dependents first: parsing one tends to populate the Checker's
+        # summary cache for modules diagnosed later in the same worker.
+        batch.sort(key=lambda module: (-len(closures[module]), module))
+        result.append(tuple(by_module[module] for module in batch))
+    return tuple(result)
+
+
+def _diagnose_batch(
+    payload: Tuple[int, Tuple[str, ...], int],
+) -> DiagnosticBatchReceipt:
+    batch_index, path_texts, dependency_surface = payload
+    return DiagnosticBatchReceipt(
+        batch_index=batch_index,
+        target_count=len(path_texts),
+        dependency_surface=dependency_surface,
+        receipts=tuple(_diagnose_path(path) for path in path_texts),
+    )
+
+
 def diagnose_paths(
     root: Path,
     paths: Sequence[Path],
     *,
     jobs: int = 0,
-) -> Tuple[DiagnosticReceipt, ...]:
+    import_receipts: Optional[Sequence[ImportReceipt]] = None,
+) -> Tuple[DiagnosticBatchReceipt, ...]:
     root = root.resolve()
     workers = worker_count(jobs)
     ordered = sorted({path.resolve() for path in paths})
     if not ordered:
         return ()
 
-    # Each worker keeps one Checker alive across its chunk of work. Imported
-    # summaries therefore remain cached within the process instead of creating
-    # one parser/checker per submitted module.
-    chunksize = max(1, len(ordered) // max(1, workers * 2))
+    if import_receipts is None:
+        batches = tuple(
+            (ImportReceipt(str(path), path.stem, ()),)
+            for path in ordered
+        )
+        closure_sizes = [1 for _ in batches]
+    else:
+        batches = dependency_affinity_batches(
+            import_receipts,
+            jobs=workers,
+        )
+        closures = dependency_closures(import_receipts)
+        closure_sizes = [
+            len(
+                set().union(
+                    *(closures[item.module_name] for item in batch)
+                )
+            )
+            for batch in batches
+        ]
+
+    payloads = tuple(
+        (
+            index,
+            tuple(item.path for item in batch),
+            closure_sizes[index],
+        )
+        for index, batch in enumerate(batches)
+    )
+
+    # Submit exactly one dependency-affinity batch per logical worker. Each
+    # process keeps one Checker for the whole batch, so imported summaries are
+    # reused across all targets assigned to that worker.
     with ProcessPoolExecutor(
-        max_workers=workers,
+        max_workers=min(workers, len(payloads)),
         initializer=_init_diagnostic_worker,
         initargs=(str(root),),
     ) as executor:
-        receipts = executor.map(
-            _diagnose_path,
-            [str(path) for path in ordered],
-            chunksize=chunksize,
-        )
-        return tuple(receipts)
+        return tuple(executor.map(_diagnose_batch, payloads))
