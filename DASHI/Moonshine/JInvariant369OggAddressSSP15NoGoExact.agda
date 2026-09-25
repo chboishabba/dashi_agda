@@ -1,7 +1,16 @@
 module DASHI.Moonshine.JInvariant369OggAddressSSP15NoGoExact where
 
 ------------------------------------------------------------------------
--- OGG NONARY ADDRESS -> SSP15 INTERNAL-LANE NO-GO
+-- OGG COARSE OBSERVER -> INTERNAL 5x3 PRESENTATION NO-GO
+--
+-- IMPORTANT: SSP15 itself IS the fifteen Ogg/Monster prime lanes.  The exact
+-- Ogg address p = 9q+r determines that 15-way lane (proved in
+-- JInvariant369SSP15OggAddressCodecExact).
+--
+-- This file concerns only the later lossy projection from an exact Ogg lane to
+-- (complement mode, binary orientation).  It proves that this coarse observer
+-- cannot itself be mistaken for the unrelated five-by-three internal
+-- presentation.
 --
 -- The existing Ogg address machinery canonically supplies, for each of the
 -- fifteen Monster/Ogg prime lanes:
@@ -25,9 +34,9 @@ module DASHI.Moonshine.JInvariant369OggAddressSSP15NoGoExact where
 --   * therefore any OggInternalLaneBijection preserving address complement
 --     mode is impossible.
 --
--- This sharpens the prior boundary.  The existing chosen 15<->15 enumeration
--- remains a valid carrier indexing, but it is not derivable from the current
--- address complement-mode law alone.
+-- Thus the collision theorem is an observer-loss theorem, NOT an obstruction
+-- to deriving SSP15 from Ogg.  Exact Ogg coordinates recover the SSP15 lane;
+-- only the coarse mode/orientation projection fails to do so.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -189,6 +198,8 @@ record OggAddressSSP15NoGoBoundary : Set where
 
     chosenCarrierBijectionStillExists : Bool
     chosenCarrierBijectionDerivedFromAddressLaw : Bool
+    ssp15CarrierIsOggPrimeCarrier : Bool
+    exactOggAddressDeterminesSSP15Lane : Bool
     extraRefinementNeededForCanonicalSSP15Lane : Bool
 
 open OggAddressSSP15NoGoBoundary public
@@ -198,4 +209,4 @@ canonicalOggAddressSSP15NoGoBoundary :
 canonicalOggAddressSSP15NoGoBoundary =
   ogg-address-ssp15-no-go-boundary
     true true true true true
-    true false true
+    true false true true false
