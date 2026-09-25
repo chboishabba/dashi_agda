@@ -5,6 +5,7 @@ module DASHI.Cognition.Everything where
 -- checkable but are also reachable through this parent.
 
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact
+import DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
