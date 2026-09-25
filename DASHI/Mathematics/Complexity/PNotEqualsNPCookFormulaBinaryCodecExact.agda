@@ -74,6 +74,15 @@ decodeTokenBits true true false =
 decodeTokenBits true true true =
   Prefix.formulaOrToken
 
+decodeThree :
+  List Bool →
+  Prefix.CookSyntaxToken
+decodeThree
+    (first ∷ second ∷ third ∷ rest) =
+  decodeTokenBits first second third
+decodeThree other =
+  Prefix.natZeroToken
+
 decodeTokenBitsAfterEncode :
   (token : Prefix.CookSyntaxToken) →
   decodeThree (tokenBits token) ≡ token
@@ -85,15 +94,6 @@ decodeTokenBitsAfterEncode Prefix.formulaTrueToken = refl
 decodeTokenBitsAfterEncode Prefix.formulaNegateToken = refl
 decodeTokenBitsAfterEncode Prefix.formulaAndToken = refl
 decodeTokenBitsAfterEncode Prefix.formulaOrToken = refl
-  where
-    decodeThree :
-      List Bool →
-      Prefix.CookSyntaxToken
-    decodeThree
-        (first ∷ second ∷ third ∷ rest) =
-      decodeTokenBits first second third
-    decodeThree other =
-      Prefix.natZeroToken
 
 ------------------------------------------------------------------------
 -- List operations.
