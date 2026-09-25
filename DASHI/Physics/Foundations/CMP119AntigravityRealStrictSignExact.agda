@@ -7,7 +7,7 @@ data Empty : Set where
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _*ℝ_; _≤ℝ_; _<ℝ_; *-comm)
+  (ℝ; 0ℝ; 1ℝ; _*ℝ_; _≤ℝ_; _<ℝ_; *-comm)
 
 ------------------------------------------------------------------------
 -- MINIMAL STRICT-ORDER ALGEBRA NEEDED BY THE REAL ANTIGRAVITY SOURCE LANE
@@ -43,6 +43,10 @@ record RealStrictSignLaws : Set₁ where
       0ℝ ≤ℝ value →
       (value ≡ 0ℝ → Empty) →
       0ℝ <ℝ value
+
+    zeroNotOne :
+      0ℝ ≡ 1ℝ →
+      Empty
 
 open RealStrictSignLaws public
 
