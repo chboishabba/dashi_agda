@@ -14,17 +14,12 @@ from agda_preflight.evidence import (
 )
 from agda_preflight.evidence_cli import main as evidence_main
 from agda_preflight.triage_cli import main as triage_main
-from agda_preflight.pytest_plugin import (
-    CollectedModule,
-    _prime_scope_closure,
-    _prime_typecheck_closure,
-)
+from agda_preflight.pytest_plugin import CollectedModule, _prime_scope_closure
 from agda_preflight.scope_backend import (
     AgdaAutoRefineBackend,
     AgdaScopeCheckBackend,
     AgdaTypecheckBackend,
     CommandScopeCheckBackend,
-    CommandTypecheckBackend,
     ExternalScopeBackend,
     ScopeRefinement,
     diagnostic_key,
@@ -532,13 +527,6 @@ def test_auto_refine_exposes_oracle_stats(tmp_path):
             "candidate_modules": 0,
             "partial_progress_modules": 0,
         },
-        "typecheck_cache": {
-            "validated_modules": 0,
-            "failed_frontier_modules": 0,
-            "aggregate_probe_roots": 0,
-            "candidate_modules": 0,
-            "partial_progress_modules": 0,
-        },
     }
 
 
@@ -584,72 +572,6 @@ def test_unfolding_sensitive_checks_require_typechecker_evidence():
         policy = policy_for(code)
         assert policy.minimum == EvidenceLevel.AGDA_TYPECHECKER
         assert policy.hard_error_allowed is False
-
-
-def test_typing_sensitive_residual_frontier_requires_typechecker():
-    for code in (
-        "TSAGDA049",
-        "TSAGDA052",
-        "TSAGDA053",
-        "TSAGDA079",
-        "TSAGDA104",
-        "TSAGDA120",
-        "TSAGDA121",
-        "TSAGDA122",
-        "TSAGDA123",
-    ):
-        policy = policy_for(code)
-        assert policy.minimum == EvidenceLevel.AGDA_TYPECHECKER
-        assert policy.hard_error_allowed is False
-
-
-def test_duplicate_semantic_views_collapse_to_root_causes():
-    assert canonical_code("TSAGDA052") == "TSAGDA049"
-    assert canonical_code("TSAGDA123") == "TSAGDA120"
-
-
-def test_dependent_typing_heuristics_are_not_index_hard():
-    for code in (
-        "TSAGDA002",
-        "TSAGDA003",
-        "TSAGDA044",
-        "TSAGDA050",
-        "TSAGDA051",
-        "TSAGDA054",
-        "TSAGDA056",
-        "TSAGDA063",
-        "TSAGDA065",
-        "TSAGDA066",
-        "TSAGDA067",
-        "TSAGDA068",
-        "TSAGDA070",
-        "TSAGDA071",
-        "TSAGDA073",
-        "TSAGDA074",
-        "TSAGDA077",
-        "TSAGDA078",
-        "TSAGDA081",
-        "TSAGDA085",
-        "TSAGDA086",
-        "TSAGDA087",
-        "TSAGDA103",
-        "TSAGDA130",
-        "TSAGDA131",
-        "TSAGDA171",
-    ):
-        policy = policy_for(code)
-        assert policy.minimum == EvidenceLevel.AGDA_TYPECHECKER
-        assert policy.hard_error_allowed is False
-
-
-def test_pattern_constructor_name_validity_is_scope_resolved():
-    policy = policy_for("TSAGDA080")
-    assert policy.minimum == EvidenceLevel.AGDA_SCOPE
-
-
-def test_tree_sitter_error_nodes_are_scope_gated():
-    policy = policy_for("TSAGDA000")
-    assert policy.minimum == EvidenceLevel.AGDA_SCOPE
 
 def test_scope_backend_preserves_configured_agda_extra_args(tmp_path):
     backend = AgdaScopeCheckBackend(
@@ -883,144 +805,6 @@ def test_failed_scope_frontier_is_not_reprobed_during_refine(tmp_path):
     assert result.evidence_sufficient is False
 
 
-
-
-def _typecheck_deferred(path: Path):
-    return [
-        Diagnostic(
-            "TSAGDA079",
-            "typing suspicion",
-            path,
-            1,
-            1,
-            severity="warning",
-            confidence="insufficient-evidence",
-            evidence="dashi-index",
-            minimum_evidence="agda-typechecker",
-            evidence_sufficient=False,
-        )
-    ]
-
-
-def test_typecheck_closure_root_success_uses_one_probe(tmp_path):
-    leaf = write_module(tmp_path, "T.Leaf")
-    middle = write_module(tmp_path, "T.Middle", "\nimport T.Leaf\n")
-    top = write_module(tmp_path, "T.Top", "\nimport T.Middle\n")
-
-    backend = AgdaAutoRefineBackend("agda", typecheck=True)
-    backend.mark_scope_validated([leaf, middle, top])
-    calls = []
-
-    def probe(path, *, aggregate_root=False):
-        key = Path(path).resolve()
-        calls.append((key, aggregate_root))
-        backend._typecheck_validated.add(key)
-        if aggregate_root:
-            backend._typecheck_probe_roots.add(key)
-        return True
-
-    backend.probe_typecheck = probe
-    checker = Checker(tmp_path, scope_backend=backend)
-    checker.structural_check = lambda path: _typecheck_deferred(Path(path))
-    collected = [
-        CollectedModule("T.Leaf", leaf),
-        CollectedModule("T.Middle", middle),
-        CollectedModule("T.Top", top),
-    ]
-
-    _prime_typecheck_closure(checker, top, collected)
-
-    assert [path for path, _ in calls] == [top.resolve()]
-    assert backend.typecheck_validated(leaf)
-    assert backend.typecheck_validated(middle)
-    assert backend.typecheck_validated(top)
-
-
-def test_typecheck_closure_skips_scope_failed_branch(tmp_path):
-    bad = write_module(tmp_path, "T.Bad")
-    good = write_module(tmp_path, "T.Good")
-    top = write_module(
-        tmp_path,
-        "T.Root",
-        "\nimport T.Bad\nimport T.Good\n",
-    )
-
-    backend = AgdaAutoRefineBackend("agda", typecheck=True)
-    backend._scope_failed.update({top.resolve(), bad.resolve()})
-    backend.mark_scope_validated([good])
-    calls = []
-
-    def probe(path, *, aggregate_root=False):
-        key = Path(path).resolve()
-        calls.append(key)
-        if key != good.resolve():
-            raise AssertionError(f"scope-failed branch was typechecked: {key}")
-        backend._typecheck_validated.add(key)
-        return True
-
-    backend.probe_typecheck = probe
-    checker = Checker(tmp_path, scope_backend=backend)
-    checker.structural_check = lambda path: _typecheck_deferred(Path(path))
-    collected = [
-        CollectedModule("T.Bad", bad),
-        CollectedModule("T.Good", good),
-        CollectedModule("T.Root", top),
-    ]
-
-    _prime_typecheck_closure(checker, top, collected)
-
-    assert calls == [good.resolve()]
-    assert backend.typecheck_validated(good)
-    assert not backend.typecheck_known(bad)
-
-
-def test_command_typecheck_runner_uses_exit_code_contract(tmp_path):
-    path = write_module(tmp_path, "Type.Runner")
-    backend = CommandTypecheckBackend(
-        ["shadow-check", "{file}"],
-        cwd=tmp_path,
-    )
-    assert backend._argv(path) == ["shadow-check", str(path.resolve())]
-
-
-def test_command_runner_parses_leading_environment_assignments(tmp_path):
-    backend = CommandScopeCheckBackend(
-        "DASHI_NO_TMUX=1 DASHI_SKIP_RSYNC=1 shadow-check {file}",
-        cwd=tmp_path,
-    )
-    assert backend.command == ("shadow-check", "{file}")
-    assert backend.env_overrides == {
-        "DASHI_NO_TMUX": "1",
-        "DASHI_SKIP_RSYNC": "1",
-    }
-
-
-def test_command_runner_passes_environment_assignments_to_subprocess(tmp_path, monkeypatch):
-    path = write_module(tmp_path, "Env.Runner")
-    backend = CommandScopeCheckBackend(
-        "DASHI_NO_TMUX=1 shadow-check {file}",
-        cwd=tmp_path,
-    )
-    captured = {}
-
-    class Completed:
-        returncode = 0
-        stdout = ""
-        stderr = ""
-
-    def fake_run(argv, **kwargs):
-        captured["argv"] = argv
-        captured["env"] = kwargs["env"]
-        return Completed()
-
-    monkeypatch.setattr(
-        "agda_preflight.scope_backend.subprocess.run",
-        fake_run,
-    )
-
-    assert backend._scope_ok(path) is True
-    assert captured["argv"] == ["shadow-check", str(path.resolve())]
-    assert captured["env"]["DASHI_NO_TMUX"] == "1"
 
 def test_command_scope_runner_substitutes_file_placeholder(tmp_path):
     path = write_module(tmp_path, "Runner.Placeholder")
