@@ -18,40 +18,48 @@ module DASHI.Mathematics.AlgebraicGeometry.HodgePrimitiveLefschetzClayReductionE
 --   every exact rational primitive (q,q) class has a literal rational
 --   algebraic cycle with the same rational singular cohomology class.
 --
--- Hard Lefschetz / primitive decomposition itself and the fact that powers of
--- the hyperplane class act algebraically are ESTABLISHED-BACKGROUND inputs.
--- No primitive algebraic lift is manufactured here.
+-- Hard Lefschetz / primitive decomposition itself and algebraicity of the
+-- hyperplane action are established-background inputs.  No primitive
+-- algebraic lift is manufactured here.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Product using (Σ; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
 import DASHI.Mathematics.AlgebraicGeometry.HodgeRationalClassIntersectionExact as Exact
 import DASHI.Mathematics.AlgebraicGeometry.HodgeAlgebraicCycleClayCoreExact as Clay
 
 ------------------------------------------------------------------------
--- Primitive exact rational Hodge classes.
+-- A genuine primitive predicate on the exact same rational Hodge carrier.
 ------------------------------------------------------------------------
+
+PrimitivePredicate :
+  ∀ {variety comparison}
+    (hodge : Hodge.HodgeDecomposition variety comparison) →
+  Set₁
+PrimitivePredicate hodge =
+  (codimension : Nat) →
+  Exact.RationalHodgeClassExact hodge codimension →
+  Set
 
 record PrimitiveRationalHodgeClassExact
     {variety : Hodge.SmoothProjectiveComplexVariety}
     {comparison : Hodge.SingularDeRhamComparison variety}
-    (hodge : Hodge.HodgeDecomposition variety comparison)
+    {hodge : Hodge.HodgeDecomposition variety comparison}
+    (isPrimitive : PrimitivePredicate hodge)
     (codimension : Nat) : Set₁ where
   constructor primitive-rational-hodge-class-exact
   field
     exactClass :
       Exact.RationalHodgeClassExact hodge codimension
 
-    -- Kernel-of-lowering / primitive condition.  Its established geometric
-    -- realization is intentionally kept separate from the novel algebraicity
-    -- theorem.
-    primitiveWitness : Set
+    primitiveWitness :
+      isPrimitive codimension exactClass
 
 open PrimitiveRationalHodgeClassExact public
 
@@ -62,7 +70,8 @@ open PrimitiveRationalHodgeClassExact public
 record PrimitiveLefschetzTerm
     {variety : Hodge.SmoothProjectiveComplexVariety}
     {comparison : Hodge.SingularDeRhamComparison variety}
-    (hodge : Hodge.HodgeDecomposition variety comparison)
+    {hodge : Hodge.HodgeDecomposition variety comparison}
+    (isPrimitive : PrimitivePredicate hodge)
     (totalCodimension : Nat) : Set₁ where
   constructor primitive-lefschetz-term
   field
@@ -72,13 +81,13 @@ record PrimitiveLefschetzTerm
       primitiveCodimension + power ≡ totalCodimension
     primitiveClass :
       PrimitiveRationalHodgeClassExact
-        hodge
+        isPrimitive
         primitiveCodimension
 
 open PrimitiveLefschetzTerm public
 
 ------------------------------------------------------------------------
--- Fold a list of already-Lefschetz-raised singular classes.
+-- Finite singular-class assembly.
 ------------------------------------------------------------------------
 
 foldSingular :
@@ -98,16 +107,13 @@ foldSingular {comparison = comparison} degree (x ∷ xs) =
     x
     (foldSingular degree xs)
 
-------------------------------------------------------------------------
--- Map a supplied Lefschetz action over the finite primitive decomposition.
-------------------------------------------------------------------------
-
 mapLefschetzClasses :
-  ∀ {variety comparison hodge p} →
-  (PrimitiveLefschetzTerm hodge p →
+  ∀ {variety comparison hodge p}
+    {isPrimitive : PrimitivePredicate hodge} →
+  (PrimitiveLefschetzTerm isPrimitive p →
     Hodge.Carrier
       (Hodge.singularCohomology comparison (p + p))) →
-  List (PrimitiveLefschetzTerm hodge p) →
+  List (PrimitiveLefschetzTerm isPrimitive p) →
   List
     (Hodge.Carrier
       (Hodge.singularCohomology comparison (p + p)))
@@ -128,13 +134,21 @@ record LefschetzAlgebraicAssemblyBackground
       Clay.RationalAlgebraicCycleClassBackground hodge)
     (totalCodimension : Nat) : Setω where
   field
-    -- Standard primitive decomposition data.
+    isPrimitive :
+      PrimitivePredicate hodge
+
+    -- Standard rational primitive decomposition.
     decompose :
       Exact.RationalHodgeClassExact hodge totalCodimension →
-      List (PrimitiveLefschetzTerm hodge totalCodimension)
+      List
+        (PrimitiveLefschetzTerm
+          isPrimitive
+          totalCodimension)
 
     lefschetzSingularClass :
-      PrimitiveLefschetzTerm hodge totalCodimension →
+      PrimitiveLefschetzTerm
+        isPrimitive
+        totalCodimension →
       Hodge.Carrier
         (Hodge.singularCohomology comparison
           (totalCodimension + totalCodimension))
@@ -149,9 +163,12 @@ record LefschetzAlgebraicAssemblyBackground
           (decompose alpha))
       ≡ Exact.singularClass alpha
 
-    -- Algebraic action of the required hyperplane power.
+    -- Algebraic action of the corresponding hyperplane power.
     raiseCycle :
-      (term : PrimitiveLefschetzTerm hodge totalCodimension) →
+      (term :
+        PrimitiveLefschetzTerm
+          isPrimitive
+          totalCodimension) →
       Hodge.RationalAlgebraicCycle
         variety
         (primitiveCodimension term) →
@@ -160,7 +177,10 @@ record LefschetzAlgebraicAssemblyBackground
         totalCodimension
 
     raiseCycleClass :
-      (term : PrimitiveLefschetzTerm hodge totalCodimension) →
+      (term :
+        PrimitiveLefschetzTerm
+          isPrimitive
+          totalCodimension) →
       (cycle :
         Hodge.RationalAlgebraicCycle
           variety
@@ -181,12 +201,16 @@ record LefschetzAlgebraicAssemblyBackground
 
     -- Rational cycle addition on the literal algebraic-cycle carrier.
     zeroCycle :
-      Hodge.RationalAlgebraicCycle variety totalCodimension
+      Hodge.RationalAlgebraicCycle
+        variety totalCodimension
 
     addCycle :
-      Hodge.RationalAlgebraicCycle variety totalCodimension →
-      Hodge.RationalAlgebraicCycle variety totalCodimension →
-      Hodge.RationalAlgebraicCycle variety totalCodimension
+      Hodge.RationalAlgebraicCycle
+        variety totalCodimension →
+      Hodge.RationalAlgebraicCycle
+        variety totalCodimension →
+      Hodge.RationalAlgebraicCycle
+        variety totalCodimension
 
     zeroCycleClass :
       Clay.singularCycleClass
@@ -200,7 +224,8 @@ record LefschetzAlgebraicAssemblyBackground
 
     addCycleClass :
       (left right :
-        Hodge.RationalAlgebraicCycle variety totalCodimension) →
+        Hodge.RationalAlgebraicCycle
+          variety totalCodimension) →
       Clay.singularCycleClass
           cycleBackground
           totalCodimension
@@ -214,27 +239,31 @@ record LefschetzAlgebraicAssemblyBackground
         (Clay.singularCycleClass
           cycleBackground totalCodimension right)
 
-
 open LefschetzAlgebraicAssemblyBackground public
 
 ------------------------------------------------------------------------
--- The ONLY novel producer exposed by this reduction.
+-- The ONLY conjectural producer exposed by this reduction.
 ------------------------------------------------------------------------
 
 PrimitiveAlgebraicLift :
   ∀ {variety comparison hodge}
     (cycleBackground :
-      Clay.RationalAlgebraicCycleClassBackground hodge) →
+      Clay.RationalAlgebraicCycleClassBackground hodge)
+    (isPrimitive : PrimitivePredicate hodge) →
   Set₁
 PrimitiveAlgebraicLift
     {variety = variety}
     {hodge = hodge}
-    cycleBackground =
+    cycleBackground
+    isPrimitive =
   (codimension : Nat) →
   (primitive :
-    PrimitiveRationalHodgeClassExact hodge codimension) →
+    PrimitiveRationalHodgeClassExact
+      isPrimitive
+      codimension) →
   Σ
-    (Hodge.RationalAlgebraicCycle variety codimension)
+    (Hodge.RationalAlgebraicCycle
+      variety codimension)
     (λ cycle →
       Clay.singularCycleClass
           cycleBackground
@@ -252,12 +281,17 @@ assemblePrimitiveCycles :
   ∀ {variety comparison hodge}
     {cycleBackground :
       Clay.RationalAlgebraicCycleClassBackground hodge}
-    {p : Nat} →
-  (background :
-    LefschetzAlgebraicAssemblyBackground
-      cycleBackground p) →
-  PrimitiveAlgebraicLift cycleBackground →
-  List (PrimitiveLefschetzTerm hodge p) →
+    {p : Nat}
+    (background :
+      LefschetzAlgebraicAssemblyBackground
+        cycleBackground p) →
+  PrimitiveAlgebraicLift
+    cycleBackground
+    (isPrimitive background) →
+  List
+    (PrimitiveLefschetzTerm
+      (isPrimitive background)
+      p) →
   Hodge.RationalAlgebraicCycle variety p
 assemblePrimitiveCycles background lift [] =
   zeroCycle background
@@ -270,10 +304,6 @@ assemblePrimitiveCycles background lift (term ∷ rest) =
           (primitiveClass term))))
     (assemblePrimitiveCycles background lift rest)
 
-------------------------------------------------------------------------
--- The previous proof needs the head rewrite explicitly.
-------------------------------------------------------------------------
-
 assemblePrimitiveCyclesClassStep :
   ∀ {variety comparison hodge}
     {cycleBackground :
@@ -282,12 +312,23 @@ assemblePrimitiveCyclesClassStep :
     (background :
       LefschetzAlgebraicAssemblyBackground
         cycleBackground p)
-    (lift : PrimitiveAlgebraicLift cycleBackground)
-    (term : PrimitiveLefschetzTerm hodge p)
-    (rest : List (PrimitiveLefschetzTerm hodge p)) →
+    (lift :
+      PrimitiveAlgebraicLift
+        cycleBackground
+        (isPrimitive background))
+    (term :
+      PrimitiveLefschetzTerm
+        (isPrimitive background)
+        p)
+    (rest :
+      List
+        (PrimitiveLefschetzTerm
+          (isPrimitive background)
+          p)) →
   Clay.singularCycleClass
       cycleBackground p
-      (assemblePrimitiveCycles background lift (term ∷ rest))
+      (assemblePrimitiveCycles
+        background lift (term ∷ rest))
   ≡
   Hodge.add
     (Hodge.singularCohomology comparison (p + p))
@@ -295,16 +336,27 @@ assemblePrimitiveCyclesClassStep :
     (Clay.singularCycleClass
       cycleBackground p
       (assemblePrimitiveCycles background lift rest))
-assemblePrimitiveCyclesClassStep background lift term rest =
+assemblePrimitiveCyclesClassStep
+    {comparison = comparison}
+    {cycleBackground = cycleBackground}
+    {p = p}
+    background lift term rest =
   trans
-    (addCycleClass background _ _)
+    (addCycleClass background
+      (raiseCycle background term
+        (proj₁
+          (lift
+            (primitiveCodimension term)
+            (primitiveClass term))))
+      (assemblePrimitiveCycles background lift rest))
     (cong
       (λ head →
         Hodge.add
-          (Hodge.singularCohomology _ (_ + _))
+          (Hodge.singularCohomology comparison (p + p))
           head
           (Clay.singularCycleClass
-            _ _ (assemblePrimitiveCycles background lift rest)))
+            cycleBackground p
+            (assemblePrimitiveCycles background lift rest)))
       (raiseCycleClass background
         term
         (proj₁
@@ -316,10 +368,6 @@ assemblePrimitiveCyclesClassStep background lift term rest =
             (primitiveCodimension term)
             (primitiveClass term)))))
 
-------------------------------------------------------------------------
--- Correct structural induction with the explicit head step.
-------------------------------------------------------------------------
-
 assemblePrimitiveCyclesClassExact :
   ∀ {variety comparison hodge}
     {cycleBackground :
@@ -328,8 +376,15 @@ assemblePrimitiveCyclesClassExact :
     (background :
       LefschetzAlgebraicAssemblyBackground
         cycleBackground p)
-    (lift : PrimitiveAlgebraicLift cycleBackground)
-    (terms : List (PrimitiveLefschetzTerm hodge p)) →
+    (lift :
+      PrimitiveAlgebraicLift
+        cycleBackground
+        (isPrimitive background))
+    (terms :
+      List
+        (PrimitiveLefschetzTerm
+          (isPrimitive background)
+          p)) →
   Clay.singularCycleClass
       cycleBackground p
       (assemblePrimitiveCycles background lift terms)
@@ -341,13 +396,16 @@ assemblePrimitiveCyclesClassExact :
       terms)
 assemblePrimitiveCyclesClassExact background lift [] =
   zeroCycleClass background
-assemblePrimitiveCyclesClassExact background lift (term ∷ rest) =
+assemblePrimitiveCyclesClassExact
+    {comparison = comparison}
+    {p = p}
+    background lift (term ∷ rest) =
   trans
     (assemblePrimitiveCyclesClassStep
       background lift term rest)
     (cong
       (Hodge.add
-        (Hodge.singularCohomology _ (_ + _))
+        (Hodge.singularCohomology comparison (p + p))
         (lefschetzSingularClass background term))
       (assemblePrimitiveCyclesClassExact
         background lift rest))
@@ -360,10 +418,13 @@ primitiveLiftGivesHodgeClayCoreAt :
   ∀ {variety comparison hodge}
     {cycleBackground :
       Clay.RationalAlgebraicCycleClassBackground hodge}
-    {p : Nat} →
-  LefschetzAlgebraicAssemblyBackground
-    cycleBackground p →
-  PrimitiveAlgebraicLift cycleBackground →
+    {p : Nat}
+    (background :
+      LefschetzAlgebraicAssemblyBackground
+        cycleBackground p) →
+  PrimitiveAlgebraicLift
+    cycleBackground
+    (isPrimitive background) →
   Clay.HodgeClayCoreAtCodimensionAlgebraicExact
     cycleBackground p
 primitiveLiftGivesHodgeClayCoreAt background lift =
@@ -386,11 +447,13 @@ primitiveLiftGivesHodgeClayCoreAt background lift =
 ------------------------------------------------------------------------
 -- CLAY CUT
 --
--- Once the classical Lefschetz decomposition and algebraic hyperplane action
--- are instantiated on the frozen same-object background, the entire Hodge Clay
--- core follows from ONE producer:
+-- Once standard Hard Lefschetz/primitive decomposition and algebraic
+-- hyperplane action are instantiated on the frozen same-object background,
+-- the entire Hodge Clay core follows from ONE conjectural producer:
 --
 --   PrimitiveAlgebraicLift.
 --
--- No projective-space special case or abstract cycle carrier is used.
+-- The primitive predicate itself is proof-relevant and shared by the
+-- decomposition and lift theorem, so "primitive" is no longer a label-only
+-- field.
 ------------------------------------------------------------------------
