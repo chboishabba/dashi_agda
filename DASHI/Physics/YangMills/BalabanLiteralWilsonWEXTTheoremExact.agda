@@ -24,6 +24,8 @@ import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact a
 import DASHI.Physics.YangMills.YangMillsRationalAbsoluteCovarianceExtensionRound575Exact as R575
 import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound573Exact as R573
 import DASHI.Physics.YangMills.YangMillsPreferredWilsonWEXTSourceRound576Exact as R576
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonWEXTCompletionRound574Exact as R574
+import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact as R556
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
 
 
@@ -635,3 +637,138 @@ literalPreferredWilsonWEXTFromSupportIndexedMarkedLocalization
     translatedProductBounded
     supportDistanceIsEuclideanTime
     upperOrderClosed
+
+
+literalWilsonCovarianceSourceFromSupportIndexedMarkedLocalization :
+  ∀ {Measure Observable SourceDirection Cluster Source Scale Volume Root}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (insertionMeaning :
+      ∀ cutoff →
+      Cumulant.LiteralTwoSourceInsertionMeaning
+        (sourceCalculus cutoff)
+        SourceDirection)
+    (derivativeCalculus :
+      Nat → Observable → Observable →
+      Diff.MixedSourceDerivativeCalculus Source)
+    (derivativeVanishing :
+      ∀ cutoff left right →
+      Diff.MixedSourceDerivativeVanishing
+        (derivativeCalculus cutoff left right))
+    (markedExpansion :
+      ∀ cutoff left right →
+      Diff.SupportIndexedMarkedClusterExpansion
+        Source Cluster
+        (derivativeCalculus cutoff left right))
+    (literalResponseIsMarkedMixedDerivative :
+      ∀ cutoff left right →
+      Cumulant.literalMixedSecondLogDerivative
+        (insertionMeaning cutoff)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) left)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) right)
+      ≡
+      Diff.mixedDerivative
+        (derivativeCalculus cutoff left right)
+        (Diff.logPartition (markedExpansion cutoff left right)))
+    (shellData : Shell.TraversalShellData Scale Volume Root)
+    (scaleOfCutoff : Nat → Scale)
+    (volumeOfCutoff : Nat → Volume)
+    (physicalDistance : Observable → Observable → Nat)
+    (connectingRoot : Nat → Observable → Observable → Root)
+    (ConnectingClusterMeetsBothSupports :
+      Nat → Observable → Observable → Set)
+    (shellCharge :
+      Nat → Observable → Observable → Cluster → ℚ)
+    (pointwiseWilsonClusterLocalization :
+      ∀ cutoff left right cluster →
+      let expansion = markedExpansion cutoff left right in
+      ∣ Diff.mixedDerivative
+          (derivativeCalculus cutoff left right)
+          (Diff.clusterTerm expansion cluster) ∣
+      ≤ shellCharge cutoff left right cluster)
+    (localizedShellChargeSum :
+      ∀ cutoff left right →
+      let expansion = markedExpansion cutoff left right
+          locality = Diff.supportLocality expansion
+      in
+      TwoMark.sumℚ
+        (TwoMark.map
+          (shellCharge cutoff left right)
+          (Diff.filterTwoSupport
+            (Diff.touchesLeft locality)
+            (Diff.touchesRight locality)
+            (Diff.clusters expansion)))
+      ≤
+      Shell.rootedShell shellData
+        (scaleOfCutoff cutoff)
+        (volumeOfCutoff cutoff)
+        (connectingRoot cutoff left right)
+        (physicalDistance left right))
+    (timeTranslate : Observable → Nat → Observable)
+    (leftBounded :
+      ∀ observable →
+      Gram.BoundedObservable dataSet observable)
+    (translatedRightBounded :
+      ∀ observable time →
+      Gram.BoundedObservable dataSet (timeTranslate observable time))
+    (translatedProductBounded :
+      ∀ left right time →
+      Gram.BoundedObservable dataSet
+        (Gram.multiplyObservable (Gram.operations dataSet)
+          left (timeTranslate right time)))
+    (supportDistanceIsEuclideanTime :
+      ∀ left right time →
+      physicalDistance left (timeTranslate right time) ≡ time)
+    (upperOrderClosed :
+      ∀ sequence target upper →
+      Gram.Converges (Gram.scalarConvergence dataSet) sequence target →
+      (∀ cutoff → sequence cutoff ≤ upper) →
+      target ≤ upper) →
+  R556.IndexedSourceFirstWilsonCovarianceData
+    {Measure = Measure}
+    {Observable = Observable}
+    {Scale = Scale}
+    {Volume = Volume}
+    {Root = Root}
+    dataSet
+    (R575.rationalAbsoluteCovarianceExtension laws)
+literalWilsonCovarianceSourceFromSupportIndexedMarkedLocalization
+    sourceCalculus insertionMeaning derivativeCalculus derivativeVanishing
+    markedExpansion literalResponseIsMarkedMixedDerivative
+    shellData scaleOfCutoff volumeOfCutoff physicalDistance connectingRoot
+    ConnectingClusterMeetsBothSupports shellCharge
+    pointwiseWilsonClusterLocalization localizedShellChargeSum
+    timeTranslate leftBounded translatedRightBounded
+    translatedProductBounded supportDistanceIsEuclideanTime upperOrderClosed =
+  R574.asR556
+    (R576.asR574
+      (literalPreferredWilsonWEXTFromSupportIndexedMarkedLocalization
+        sourceCalculus
+        insertionMeaning
+        derivativeCalculus
+        derivativeVanishing
+        markedExpansion
+        literalResponseIsMarkedMixedDerivative
+        shellData
+        scaleOfCutoff
+        volumeOfCutoff
+        physicalDistance
+        connectingRoot
+        ConnectingClusterMeetsBothSupports
+        shellCharge
+        pointwiseWilsonClusterLocalization
+        localizedShellChargeSum
+        timeTranslate
+        leftBounded
+        translatedRightBounded
+        translatedProductBounded
+        supportDistanceIsEuclideanTime
+        upperOrderClosed))
