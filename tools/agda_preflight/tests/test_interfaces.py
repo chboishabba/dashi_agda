@@ -3,7 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 
 from agda_preflight.checker import Checker
-from agda_preflight.interfaces import interface_from_summary, resolve_interface_exports
+from agda_preflight.interfaces import (
+    interface_from_dict,
+    interface_from_summary,
+    interface_to_dict,
+    resolve_interface_exports,
+)
 from agda_preflight.timing import Profiler
 
 
@@ -176,3 +181,40 @@ mk =
 
     assert diagnostic_view(preloaded) == diagnostic_view(baseline)
     assert profiler.snapshot().counts["files_parsed"] == 1
+
+
+
+def test_module_interface_json_roundtrip_preserves_semantics(tmp_path):
+    path = write_module(
+        tmp_path,
+        "RoundTrip",
+        """
+record R : Set₁ where
+  field
+    carrier : Set
+    witness : carrier
+
+data D : Set where
+  c : D
+
+f : R → D
+f r = c
+""",
+    )
+
+    checker = Checker(tmp_path)
+    summary = checker.parse_summary(path)
+    interface = interface_from_summary(tmp_path, summary)
+    restored = interface_from_dict(interface_to_dict(interface))
+
+    assert restored == interface
+    assert restored.exports == interface.exports
+    assert restored.record_map["R"].field_map["carrier"].terminal_head in {
+        "Set",
+        "Set₀",
+        "Set₁",
+        "Set₂",
+        "Setω",
+        "Prop",
+        "Prop₁",
+    }
