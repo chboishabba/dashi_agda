@@ -27,7 +27,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Data.Product using (Σ; _,_)
+open import Data.Product using (Σ; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.AlgebraicGeometry.HodgeDecompositionCycleClassExact as Hodge
@@ -99,6 +99,24 @@ foldSingular {comparison = comparison} degree (x ∷ xs) =
     (foldSingular degree xs)
 
 ------------------------------------------------------------------------
+-- Map a supplied Lefschetz action over the finite primitive decomposition.
+------------------------------------------------------------------------
+
+mapLefschetzClasses :
+  ∀ {variety comparison hodge p} →
+  (PrimitiveLefschetzTerm hodge p →
+    Hodge.Carrier
+      (Hodge.singularCohomology comparison (p + p))) →
+  List (PrimitiveLefschetzTerm hodge p) →
+  List
+    (Hodge.Carrier
+      (Hodge.singularCohomology comparison (p + p)))
+mapLefschetzClasses action [] =
+  []
+mapLefschetzClasses action (term ∷ rest) =
+  action term ∷ mapLefschetzClasses action rest
+
+------------------------------------------------------------------------
 -- Established Lefschetz / hyperplane background, on the SAME Clay carrier.
 ------------------------------------------------------------------------
 
@@ -126,7 +144,8 @@ record LefschetzAlgebraicAssemblyBackground
         Exact.RationalHodgeClassExact hodge totalCodimension) →
       foldSingular
         (totalCodimension + totalCodimension)
-        (mapLefschetz
+        (mapLefschetzClasses
+          lefschetzSingularClass
           (decompose alpha))
       ≡ Exact.singularClass alpha
 
@@ -195,16 +214,6 @@ record LefschetzAlgebraicAssemblyBackground
         (Clay.singularCycleClass
           cycleBackground totalCodimension right)
 
-  mapLefschetz :
-    List (PrimitiveLefschetzTerm hodge totalCodimension) →
-    List
-      (Hodge.Carrier
-        (Hodge.singularCohomology comparison
-          (totalCodimension + totalCodimension)))
-  mapLefschetz [] =
-    []
-  mapLefschetz (term ∷ rest) =
-    lefschetzSingularClass term ∷ mapLefschetz rest
 
 open LefschetzAlgebraicAssemblyBackground public
 
@@ -255,64 +264,11 @@ assemblePrimitiveCycles background lift [] =
 assemblePrimitiveCycles background lift (term ∷ rest) =
   addCycle background
     (raiseCycle background term
-      (Data.Product.proj₁
+      (proj₁
         (lift
           (primitiveCodimension term)
           (primitiveClass term))))
     (assemblePrimitiveCycles background lift rest)
-
-assemblePrimitiveCyclesClass :
-  ∀ {variety comparison hodge}
-    {cycleBackground :
-      Clay.RationalAlgebraicCycleClassBackground hodge}
-    {p : Nat}
-    (background :
-      LefschetzAlgebraicAssemblyBackground
-        cycleBackground p)
-    (lift : PrimitiveAlgebraicLift cycleBackground)
-    (terms : List (PrimitiveLefschetzTerm hodge p)) →
-  Clay.singularCycleClass
-      cycleBackground
-      p
-      (assemblePrimitiveCycles background lift terms)
-  ≡
-  foldSingular
-    (p + p)
-    (mapLefschetz background terms)
-assemblePrimitiveCyclesClass background lift [] =
-  zeroCycleClass background
-assemblePrimitiveCyclesClass background lift (term ∷ rest) =
-  trans
-    (addCycleClass background
-      (raiseCycle background term
-        (Data.Product.proj₁
-          (lift
-            (primitiveCodimension term)
-            (primitiveClass term))))
-      (assemblePrimitiveCycles background lift rest))
-    (cong
-      (Hodge.add
-        (Hodge.singularCohomology _
-          (_ + _))
-        (lefschetzSingularClass background term))
-      (assemblePrimitiveCyclesClass background lift rest))
-  where
-    primitiveLiftExact :
-      Clay.singularCycleClass
-          _
-          (primitiveCodimension term)
-          (Data.Product.proj₁
-            (lift
-              (primitiveCodimension term)
-              (primitiveClass term)))
-      ≡
-      Exact.singularClass
-        (exactClass (primitiveClass term))
-    primitiveLiftExact =
-      Data.Product.proj₂
-        (lift
-          (primitiveCodimension term)
-          (primitiveClass term))
 
 ------------------------------------------------------------------------
 -- The previous proof needs the head rewrite explicitly.
@@ -351,11 +307,11 @@ assemblePrimitiveCyclesClassStep background lift term rest =
             _ _ (assemblePrimitiveCycles background lift rest)))
       (raiseCycleClass background
         term
-        (Data.Product.proj₁
+        (proj₁
           (lift
             (primitiveCodimension term)
             (primitiveClass term)))
-        (Data.Product.proj₂
+        (proj₂
           (lift
             (primitiveCodimension term)
             (primitiveClass term)))))
@@ -380,7 +336,9 @@ assemblePrimitiveCyclesClassExact :
   ≡
   foldSingular
     (p + p)
-    (mapLefschetz background terms)
+    (mapLefschetzClasses
+      (lefschetzSingularClass background)
+      terms)
 assemblePrimitiveCyclesClassExact background lift [] =
   zeroCycleClass background
 assemblePrimitiveCyclesClassExact background lift (term ∷ rest) =
