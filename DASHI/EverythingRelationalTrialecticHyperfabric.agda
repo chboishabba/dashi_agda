@@ -3,7 +3,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 -- RELATIONAL TRIALECTIC HYPERFABRIC ROLLUP
 --
--- This is an aggregate import only.  It does not strengthen any source claim.
+-- This is an aggregate import only.  It does not strengthen any source claim.\n-- Verification root for Sweetgrass/Two-Eyed braided trialectic provenance tranche.
 -- In particular:
 --   * citations do not import proof or authority;
 --   * a general relational architecture is not a trauma-causal theorem;
