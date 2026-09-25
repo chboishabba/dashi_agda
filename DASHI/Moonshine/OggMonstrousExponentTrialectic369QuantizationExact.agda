@@ -22,15 +22,20 @@ module DASHI.Moonshine.OggMonstrousExponentTrialectic369QuantizationExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; Σ)
 
+import DASHI.Core.DependentRecoverableProjectionExact as Recoverable
+import DASHI.Core.TopDownObservationCalculusExact as TopDown
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.OggMonstrousExponentTrialecticDescentExact as Arithmetic
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
+import DASHI.Moonshine.JInvariant369CodecBidiExact as MachineCodec
 
 ------------------------------------------------------------------------
 -- 1. Generic declared-loss quantizer interface.
@@ -132,6 +137,226 @@ presenceQuantizationDoesNotCreateArithmeticSemanticIdentity :
   PresenceQuantizationIsArithmeticSemanticIdentity -> ⊥
 presenceQuantizationDoesNotCreateArithmeticSemanticIdentity ()
 
+
+------------------------------------------------------------------------
+-- 4b. Upgrade the lossy surface to an exact dependent residual codec.
+--
+-- The coarse surface remains zero/nonzero.  Exact magnitude lives in a
+-- residual whose type depends on that surface:
+--
+--   0  -> Unit
+--   +1 -> Nat       (stores predecessor)
+--   -1 -> Empty     (not emitted by this quantizer).
+------------------------------------------------------------------------
+
+PresenceResidual : SSP.SSPTrit -> Set
+PresenceResidual SSP.sspNegOne = ⊥
+PresenceResidual SSP.sspZero = ⊤
+PresenceResidual SSP.sspPosOne = Nat
+
+presenceResidual : (n : Nat) -> PresenceResidual (presenceTrit n)
+presenceResidual zero = tt
+presenceResidual (suc n) = n
+
+reopenPresence :
+  (surface : SSP.SSPTrit) ->
+  PresenceResidual surface ->
+  Nat
+reopenPresence SSP.sspNegOne ()
+reopenPresence SSP.sspZero residual = 0
+reopenPresence SSP.sspPosOne residual = suc residual
+
+presenceReopenExact :
+  (n : Nat) ->
+  reopenPresence (presenceTrit n) (presenceResidual n) ≡ n
+presenceReopenExact zero = refl
+presenceReopenExact (suc n) = refl
+
+presenceNatRecoverableProjection :
+  Recoverable.DependentExactRecoverableProjection Nat SSP.SSPTrit
+presenceNatRecoverableProjection =
+  Recoverable.dependentExactRecoverableProjection
+    PresenceResidual
+    presenceTrit
+    presenceResidual
+    reopenPresence
+    presenceReopenExact
+
+presenceNatCode :
+  Nat -> Recoverable.DependentCode presenceNatRecoverableProjection
+presenceNatCode = Recoverable.encode presenceNatRecoverableProjection
+
+presenceNatDecode :
+  Recoverable.DependentCode presenceNatRecoverableProjection -> Nat
+presenceNatDecode = Recoverable.decode presenceNatRecoverableProjection
+
+presenceNatDecodeEncode :
+  (n : Nat) ->
+  presenceNatDecode (presenceNatCode n) ≡ n
+presenceNatDecodeEncode =
+  Recoverable.decodeEncodeExact presenceNatRecoverableProjection
+
+------------------------------------------------------------------------
+-- 4c. Three-coordinate arithmetic codec.
+------------------------------------------------------------------------
+
+record ArithmeticTriple : Set where
+  constructor arithmetic-triple
+  field
+    tripleA tripleB tripleC : Nat
+
+open ArithmeticTriple public
+
+trialecticToArithmeticTriple :
+  {prime : Lane.MonsterPrimeLane} ->
+  Arithmetic.ArithmeticTrialectic prime ->
+  ArithmeticTriple
+trialecticToArithmeticTriple trial =
+  arithmetic-triple
+    (Arithmetic.A trial)
+    (Arithmetic.B trial)
+    (Arithmetic.C trial)
+
+tripleSurface : ArithmeticTriple -> Fabric.Ternary27Point
+tripleSurface (arithmetic-triple a b c) =
+  Fabric.ternary27Point
+    (presenceTrit a)
+    (presenceTrit b)
+    (presenceTrit c)
+
+TripleResidual : Fabric.Ternary27Point -> Set
+TripleResidual point =
+  PresenceResidual (Fabric.x point)
+  ×
+  (PresenceResidual (Fabric.y point)
+  × PresenceResidual (Fabric.z point))
+
+tripleResidual :
+  (triple : ArithmeticTriple) ->
+  TripleResidual (tripleSurface triple)
+tripleResidual (arithmetic-triple a b c) =
+  presenceResidual a , (presenceResidual b , presenceResidual c)
+
+reopenTriple :
+  (surface : Fabric.Ternary27Point) ->
+  TripleResidual surface ->
+  ArithmeticTriple
+reopenTriple
+  (Fabric.ternary27Point x y z)
+  (rx , (ry , rz)) =
+  arithmetic-triple
+    (reopenPresence x rx)
+    (reopenPresence y ry)
+    (reopenPresence z rz)
+
+tripleReopenExact :
+  (triple : ArithmeticTriple) ->
+  reopenTriple (tripleSurface triple) (tripleResidual triple) ≡ triple
+tripleReopenExact (arithmetic-triple zero zero zero) = refl
+tripleReopenExact (arithmetic-triple zero zero (suc c)) = refl
+tripleReopenExact (arithmetic-triple zero (suc b) zero) = refl
+tripleReopenExact (arithmetic-triple zero (suc b) (suc c)) = refl
+tripleReopenExact (arithmetic-triple (suc a) zero zero) = refl
+tripleReopenExact (arithmetic-triple (suc a) zero (suc c)) = refl
+tripleReopenExact (arithmetic-triple (suc a) (suc b) zero) = refl
+tripleReopenExact (arithmetic-triple (suc a) (suc b) (suc c)) = refl
+
+arithmeticTripleRecoverableProjection :
+  Recoverable.DependentExactRecoverableProjection
+    ArithmeticTriple
+    Fabric.Ternary27Point
+arithmeticTripleRecoverableProjection =
+  Recoverable.dependentExactRecoverableProjection
+    TripleResidual
+    tripleSurface
+    tripleResidual
+    reopenTriple
+    tripleReopenExact
+
+ArithmeticTripleCode : Set
+ArithmeticTripleCode =
+  Recoverable.DependentCode arithmeticTripleRecoverableProjection
+
+encodeArithmeticTriple : ArithmeticTriple -> ArithmeticTripleCode
+encodeArithmeticTriple =
+  Recoverable.encode arithmeticTripleRecoverableProjection
+
+decodeArithmeticTriple : ArithmeticTripleCode -> ArithmeticTriple
+decodeArithmeticTriple =
+  Recoverable.decode arithmeticTripleRecoverableProjection
+
+decodeEncodeArithmeticTriple :
+  (triple : ArithmeticTriple) ->
+  decodeArithmeticTriple (encodeArithmeticTriple triple) ≡ triple
+decodeEncodeArithmeticTriple =
+  Recoverable.decodeEncodeExact arithmeticTripleRecoverableProjection
+
+arithmeticTripleCodeSeparates :
+  Recoverable.DependentCodeSeparating arithmeticTripleRecoverableProjection
+arithmeticTripleCodeSeparates =
+  Recoverable.dependentCodeSeparating arithmeticTripleRecoverableProjection
+
+------------------------------------------------------------------------
+-- 4d. Consumer-indexed theorem: surface alone loses arithmetic magnitude,
+-- while surface+residual is sufficient for every consumer.
+------------------------------------------------------------------------
+
+tripleSum : ArithmeticTriple -> Nat
+tripleSum triple =
+  tripleA triple + tripleB triple + tripleC triple
+
+p7ArithmeticTriple : ArithmeticTriple
+p7ArithmeticTriple = trialecticToArithmeticTriple Arithmetic.p7Trialectic
+
+p13ArithmeticTriple : ArithmeticTriple
+p13ArithmeticTriple = trialecticToArithmeticTriple Arithmetic.p13Trialectic
+
+p7P13SameSurface :
+  tripleSurface p7ArithmeticTriple ≡ tripleSurface p13ArithmeticTriple
+p7P13SameSurface = refl
+
+p7P13DifferentSum :
+  tripleSum p7ArithmeticTriple ≡ tripleSum p13ArithmeticTriple -> ⊥
+p7P13DifferentSum ()
+
+surfaceCannotAnswerArithmeticSum :
+  Descent.ConsumerSufficient tripleSurface tripleSum -> ⊥
+surfaceCannotAnswerArithmeticSum sufficient =
+  p7P13DifferentSum
+    (sufficient p7ArithmeticTriple p13ArithmeticTriple p7P13SameSurface)
+
+surfacePlusResidualAnswersEveryConsumer :
+  {Outcome : Set} ->
+  (consumer : ArithmeticTriple -> Outcome) ->
+  Descent.ConsumerSufficient
+    (TopDown.dependentCodeObserver arithmeticTripleRecoverableProjection)
+    consumer
+surfacePlusResidualAnswersEveryConsumer =
+  TopDown.dependentCodeIsAdequateForEveryConsumer
+    arithmeticTripleRecoverableProjection
+
+------------------------------------------------------------------------
+-- 4e. Reuse the existing verified 27-state machine codec for the coarse T3
+-- surface.  The machine code is lossless for the coarse row; arithmetic loss
+-- remains solely in the declared residual above.
+------------------------------------------------------------------------
+
+encodeArithmeticSurface :
+  ArithmeticTriple -> MachineCodec.Code27
+encodeArithmeticSurface triple =
+  MachineCodec.encode27 (tripleSurface triple)
+
+decodeArithmeticSurface :
+  MachineCodec.Code27 -> Maybe Fabric.Ternary27Point
+decodeArithmeticSurface = MachineCodec.decode27
+
+machineCodecRoundTripOnArithmeticSurface :
+  (triple : ArithmeticTriple) ->
+  decodeArithmeticSurface (encodeArithmeticSurface triple)
+  ≡ just (tripleSurface triple)
+machineCodecRoundTripOnArithmeticSurface triple =
+  MachineCodec.decodeEncode27 (tripleSurface triple)
+
 ------------------------------------------------------------------------
 -- 5. Role order is retained exactly.
 --
@@ -189,6 +414,10 @@ record OggMonstrousExponentTrialectic369QuantizationBoundary : Set where
     sourceRoleOrderPreserved : Bool
     concreteP5P7P11P13RowsComputed : Bool
     explicitQuantizationCollisionOwned : Bool
+    dependentResidualCodecReopensArithmeticExactly : Bool
+    coarseSurfaceAloneFailsMagnitudeConsumer : Bool
+    surfacePlusResidualAdequateForEveryConsumer : Bool
+    existingVerified27MachineCodecReused : Bool
     exactMagnitudeRecoveryFromPresenceCode : Bool
     arithmeticPolarityIdentityClaimed : Bool
     sharedT3PostRebaseSeamPrepared : Bool
@@ -199,4 +428,5 @@ canonicalOggMonstrousExponentTrialectic369QuantizationBoundary :
 canonicalOggMonstrousExponentTrialectic369QuantizationBoundary =
   ogg-monstrous-exponent-trialectic-369-quantization-boundary
     true true true true true
+    true true true true
     false false true false
