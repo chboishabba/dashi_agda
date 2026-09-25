@@ -10,3 +10,6 @@ import DASHI.Core.ObserverSituatedReasonablenessRegression
 import DASHI.Core.GenderedNormApprovalIndependenceExact
 import DASHI.Core.GenderedNormApprovalSourceExact
 import DASHI.Core.GenderedNormApprovalRegression
+
+import DASHI.Core.GenderedApprovalObjectiveRechartExact
+import DASHI.Core.GenderedApprovalObjectiveRechartRegression
