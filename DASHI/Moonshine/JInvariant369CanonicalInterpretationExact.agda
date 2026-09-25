@@ -69,6 +69,7 @@ import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact a
 import DASHI.Moonshine.JInvariant369NeutralCuspRelationCrossPollinationExact as NeutralCusp
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SSPF
 import DASHI.Moonshine.JInvariant369OggAddressSSP15NoGoExact as OggNoGo
+import DASHI.Moonshine.JInvariant369SSP15OggAddressCodecExact as OggCodec
 import DASHI.Moonshine.JInvariant369SSP15PrimeInternalFibreExact as PrimeFibre
 
 record Canonical369InterpretationBoundary : Set where
@@ -778,7 +779,7 @@ ssp15FRACTRANExecutionHandoffIsPaid = refl
 
 
 ------------------------------------------------------------------------
--- Ogg/nonary address -> SSP15 canonical-lane no-go.
+-- SSP15 = Ogg exact-address carrier; only the coarse observer is lossy.
 ------------------------------------------------------------------------
 
 oggAddressSSP15NoGoBoundary :
@@ -806,9 +807,32 @@ chosenSSP15BijectionIsNotDerivedFromAddressLaw :
   ≡ false
 chosenSSP15BijectionIsNotDerivedFromAddressLaw = refl
 
+ssp15ExactOggAddressCodecBoundary :
+  OggCodec.SSP15OggAddressCodecBoundary
+ssp15ExactOggAddressCodecBoundary =
+  OggCodec.canonicalSSP15OggAddressCodecBoundary
+
+ssp15CarrierIsExactlyOggPrimeCarrier :
+  OggCodec.ssp15CarrierIsOggPrimeCarrier
+    ssp15ExactOggAddressCodecBoundary
+  ≡ true
+ssp15CarrierIsExactlyOggPrimeCarrier = refl
+
+exactOggAddressDeterminesSSP15Lane :
+  OggCodec.exactCoordinatesDetermineSSP15Lane
+    ssp15ExactOggAddressCodecBoundary
+  ≡ true
+exactOggAddressDeterminesSSP15Lane = refl
+
+coarseObserverNeedsNoRefinementForSSP15Identity :
+  OggNoGo.extraRefinementNeededForCanonicalSSP15Lane
+    oggAddressSSP15NoGoBoundary
+  ≡ false
+coarseObserverNeedsNoRefinementForSSP15Identity = refl
+
 
 ------------------------------------------------------------------------
--- SSP15 prime/internal fibre: 15 x 15 semantic carrier.
+-- Optional prime/internal enrichment: 15 x 15 combinations, NOT lane count.
 ------------------------------------------------------------------------
 
 ssp15PrimeInternalFibreBoundary :
@@ -819,6 +843,10 @@ ssp15PrimeInternalFibreBoundary =
 ssp15PrimeInternalCoarseProductIs225 :
   PrimeFibre.coarseProductCount225 ssp15PrimeInternalFibreBoundary ≡ true
 ssp15PrimeInternalCoarseProductIs225 = refl
+
+ssp15PrimeInternalProductIsNotLaneCount :
+  PrimeFibre.product225IsSSP15LaneCount ssp15PrimeInternalFibreBoundary ≡ false
+ssp15PrimeInternalProductIsNotLaneCount = refl
 
 ssp15ChosenBijectionIsOnlyGaugeSection :
   PrimeFibre.chosenBijectionInterpretedAsGaugeSection
