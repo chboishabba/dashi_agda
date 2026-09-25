@@ -6,6 +6,7 @@ open import Data.Rational.Base as ℚ using
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact as Curvature
+import DASHI.Physics.Foundations.CMP119AntigravityFiniteHaarStrictPositivityExact as Strict
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlScalarExact as Curl
 
 ------------------------------------------------------------------------
@@ -158,3 +159,42 @@ fieldStrengthSquareNonnegative :
 fieldStrengthSquareNonnegative family configuration =
   normalizedCurvatureF2Nonnegative
     (Curvature.curvatureAt (curvature family) configuration)
+
+
+------------------------------------------------------------------------
+-- SELECTED FINITE-MEASURE WITNESS CONSTRUCTOR
+------------------------------------------------------------------------
+
+record SelectedCurvatureF2PositiveWitness
+    {Configuration : Set}
+    {measure : DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact.PhysicalFiniteYMMeasure Configuration ℚ}
+    (quadrature : Strict.FiniteRationalHaarQuadrature measure)
+    (family : FiniteCurvatureF2Family Configuration) : Set where
+  field
+    positiveCurvatureAtQuadratureWitness :
+      PositiveCurvatureEnergyWitness
+        (Curvature.curvatureAt
+          (curvature family)
+          (Strict.positiveWitness quadrature))
+
+open SelectedCurvatureF2PositiveWitness public
+
+asPositiveFieldStrengthSquareWitness :
+  ∀ {Configuration measure}
+    {quadrature :
+      Strict.FiniteRationalHaarQuadrature
+        {Configuration = Configuration} measure}
+    {family : FiniteCurvatureF2Family Configuration} →
+  SelectedCurvatureF2PositiveWitness quadrature family →
+  Strict.PositiveFieldStrengthSquareWitness
+    quadrature
+    (fieldStrengthSquare family)
+asPositiveFieldStrengthSquareWitness
+    {quadrature = quadrature} {family = family} witness = record
+  { Strict.PositiveFieldStrengthSquareWitness.fieldStrengthSquareNonnegative =
+      fieldStrengthSquareNonnegative family
+  ; Strict.PositiveFieldStrengthSquareWitness.fieldStrengthSquarePositiveAtWitness =
+      ℚ.positive
+        (normalizedCurvatureF2PositiveFromF01
+          (positiveCurvatureAtQuadratureWitness witness))
+  }
