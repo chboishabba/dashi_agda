@@ -36,6 +36,7 @@ import DASHI.Philosophy.ProcessCompositionLaws
 import DASHI.Philosophy.ProcessHistoryEquivalence
 import DASHI.Philosophy.ProcessOntology
 import DASHI.Philosophy.ReflexivePowerUp
+import DASHI.Philosophy.NonginOriginFormalizationExact
 import DASHI.Philosophy.RelationalAtlas
 import DASHI.Philosophy.RelationalEncounter
 import DASHI.Philosophy.RelationalProtocol
