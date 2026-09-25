@@ -139,8 +139,8 @@ reverseCycleAB2Cell :
   TwoCell.TransportAction2Cell
     reverseCycleAtAB
     (Groupoid.identityHom Existing.patchAB)
-reverseCycleAB2Cell dialectic =
-  Transport.rotateThreeIsIdentity dialectic
+reverseCycleAB2Cell
+  (Cell.cell-dialectic left right synthesis) = refl
 
 ------------------------------------------------------------------------
 -- 5. Higher-promotion boundary.
