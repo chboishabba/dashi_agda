@@ -212,11 +212,8 @@ literalMarkedLocalizationCompilesToR556 source semantics =
 
 ------------------------------------------------------------------------
 -- Status boundary.
+--
+-- No ProofLevel promotion is attached here: inhabiting
+-- LiteralWilsonMarkedLocalizationSource is the actual analytic theorem payment.
+-- The compiler theorem above is ordinary Agda.
 ------------------------------------------------------------------------
-
-literalWilsonMarkedExpansionAndDifferentiationLevel : Set
-literalWilsonMarkedExpansionAndDifferentiationLevel =
-  LiteralWilsonMarkedLocalizationSource _
-
--- No ProofLevel promotion is attached here: inhabiting the record is the actual
--- analytic theorem payment.  The compiler theorem above is ordinary Agda.
