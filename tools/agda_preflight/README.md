@@ -45,6 +45,7 @@ The production-facing hot path is now `dashi-agda`, not pytest:
 
 ```bash
 dashi-agda diagnose DASHI/Biology/Everything.agda --profile
+dashi-agda next-error DASHI/Biology/Everything.agda --require-fix --json
 dashi-agda benchmark DASHI/Biology/Everything.agda --runs 7
 ```
 
@@ -69,9 +70,12 @@ files_parsed = 0
 checker_instances = 0
 ```
 
-If a source file changes, only the dirty module and importers whose direct
-dependency fingerprint changed are conservatively recomputed. A later
-public-API fingerprint can narrow that invalidation further.
+If a source file changes, its structural public-API fingerprint is recomputed
+from exported signatures, record/data schemas, nested modules and explicit
+public re-export directives. Importers depend on that API fingerprint rather
+than the dependency's raw source hash. An implementation-only edit therefore
+reparses the leaf while reusing importer diagnostics; exported API changes
+still invalidate the affected importer chain.
 
 Every interactive request has request-local telemetry. JSON output includes
 per-stage milliseconds and counts such as:
@@ -121,6 +125,34 @@ fixes[]
 
 The current fix-enrichment layer covers high-value projection and record-field
 failures without weakening the diagnostic rules themselves.
+
+Every diagnostic also has a stable worktree-local ID. Agent workflows can ask
+for the highest-priority actionable error and, where an exact edit span exists,
+apply it explicitly:
+
+```bash
+dashi-agda next-error DASHI/Biology/Everything.agda --require-fix --json
+
+dashi-agda apply-fix DASHI/Biology/Everything.agda <diagnostic-id> \
+  --fix 0 \
+  --allow-likely
+```
+
+`machine_safe` edits may be applied directly. `likely` edits require the
+explicit `--allow-likely` gate. `speculative` fixes are never machine-applied.
+After an edit, `apply-fix` immediately re-runs structural diagnosis through
+the persistent index and reports whether the original diagnostic ID vanished.
+It does not invoke Agda.
+
+The benchmark command is also an executable performance gate. Defaults are:
+
+```text
+cold bootstrap <= 60,000 ms
+warm p95      <= 10,000 ms
+every warm run parses zero files
+```
+
+A benchmark exits nonzero if any of those conditions fail.
 
 ### Last-known-good semantic catalog
 
