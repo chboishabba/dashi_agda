@@ -139,7 +139,7 @@ primeInternalPointedPhaseExact :
   Branch.unitMultiplicityToPhase
     (Branch.signedMultiplicity (primeInternalToPointedSigned state))
   ≡ proj₂ (proj₂ state)
-primeInternalPointedPhaseExact (prime , mode , phase) =
+primeInternalPointedPhaseExact (prime , (mode , phase)) =
   Branch.phaseCoarseRoundTrip phase
 
 primeInternalValuation :
