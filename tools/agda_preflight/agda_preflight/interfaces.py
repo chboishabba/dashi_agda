@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
+import json
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Sequence, Set, Tuple
 
@@ -303,6 +305,78 @@ def resolve_interface_exports(
         for module, interface in interfaces.items()
     }
 
+
+
+def interface_public_dependencies(interface: ModuleInterface) -> Tuple[str, ...]:
+    return tuple(
+        sorted({item.module for item in interface.public_reexports})
+    )
+
+
+def interface_api_base_hash(interface: ModuleInterface) -> str:
+    """Hash the local/public structural API represented by ModuleInterface.
+
+    Resolved transitive exports are intentionally excluded: those enter the
+    final API fingerprint through public dependency hashes. The hash therefore
+    has one canonical owner and cannot drift from the interface consumed by
+    cross-module rules.
+    """
+    payload = {
+        "module_name": interface.module_name,
+        "imports": [list(item) for item in interface.imports],
+        "signatures": [
+            {
+                "name": item.name,
+                "type_text": item.type_text,
+                "terminal_head": item.terminal_head,
+                "explicit_arity": item.explicit_arity,
+            }
+            for item in interface.signatures
+        ],
+        "records": [
+            {
+                "name": record.name,
+                "constructor": record.constructor,
+                "field_surface_complete": record.field_surface_complete,
+                "fields": [
+                    {
+                        "name": field.name,
+                        "type_text": field.type_text,
+                        "terminal_head": field.terminal_head,
+                        "explicit_arity": field.explicit_arity,
+                    }
+                    for field in record.fields
+                ],
+            }
+            for record in interface.records
+        ],
+        "data_constructors": [
+            [name, list(constructors)]
+            for name, constructors in interface.data_constructors
+        ],
+        "nested_modules": list(interface.nested_modules),
+        "module_parameter_count": interface.module_parameter_count,
+        "public_reexports": [
+            {
+                "module": item.module,
+                "directives": [
+                    {
+                        "kind": directive.kind,
+                        "names": list(directive.names),
+                        "renamings": [list(pair) for pair in directive.renamings],
+                    }
+                    for directive in item.directives
+                ],
+            }
+            for item in interface.public_reexports
+        ],
+    }
+    encoded = json.dumps(
+        payload,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def interface_to_dict(interface: ModuleInterface) -> dict:
