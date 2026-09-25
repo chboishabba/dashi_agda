@@ -20,6 +20,8 @@ import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExac
 import DASHI.Physics.YangMills.YangMillsCMP119WilsonGibbsHaarActionRound443Exact as Gibbs
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
+import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
+import DASHI.Physics.YangMills.BalabanScalarCylinderExpectationLimitExact as Cylinder
 
 ------------------------------------------------------------------------
 -- PREFERRED REAL PHYSICAL TRACE-ANOMALY CAPSTONE
@@ -38,8 +40,11 @@ import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Q
 
 record RealPhysicalTraceAnomalyInput
     {Configuration Action : Set}
-    {Converges}
-    (quotientAuthority : Quotient.RealQuotientConvergenceAuthority Converges)
+    (algebra : Cylinder.ScalarCylinderLimitAlgebra ℝ)
+    (quotientAuthority :
+      Quotient.RealQuotientConvergenceAuthority
+        (Cylinder.Converges algebra))
+    (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     {measure : Physical.PhysicalFiniteYMMeasure Configuration ℝ}
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
@@ -52,9 +57,6 @@ record RealPhysicalTraceAnomalyInput
     (exponential : GibbsPositive.StrictPositiveRealExponential)
     (fullSupport : FullSupport.FullSupportRealHaarAuthority measure) : Set₁ where
   field
-    quotientNonzeroSemantics :
-      Partition.QuotientNonzeroSemantics quotientAuthority
-
     partitionNonzero :
       Quotient.Nonzero quotientAuthority
         (Physical.partitionFunction measure)
@@ -91,7 +93,7 @@ record RealPhysicalTraceAnomalyInput
 open RealPhysicalTraceAnomalyInput public
 
 selectedCMP119TraceIdentity :
-  ∀ {Configuration Action Converges quotientAuthority measure}
+  ∀ {Configuration Action algebra quotientAuthority measure}
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -104,8 +106,7 @@ selectedCMP119TraceIdentity :
     (fullSupport : FullSupport.FullSupportRealHaarAuthority measure)
     (input :
       RealPhysicalTraceAnomalyInput
-        {Converges = Converges}
-        quotientAuthority laws strict embedding convention
+        algebra quotientAuthority division laws strict embedding convention
         gibbs exponential fullSupport) →
   Anomaly.selectedCMP119QuantumTraceNumerator (anomalyWeld input)
   ≡
@@ -127,7 +128,7 @@ selectedCMP119TraceIdentity
       (selectedAnomalyF2IsPhysicalWeightedF2 input))
 
 partitionPositive :
-  ∀ {Configuration Action Converges quotientAuthority measure}
+  ∀ {Configuration Action algebra quotientAuthority measure}
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -140,19 +141,19 @@ partitionPositive :
     (fullSupport : FullSupport.FullSupportRealHaarAuthority measure)
     (input :
       RealPhysicalTraceAnomalyInput
-        {Converges = Converges}
-        quotientAuthority laws strict embedding convention
+        algebra quotientAuthority division laws strict embedding convention
         gibbs exponential fullSupport) →
   0ℝ <ℝ Physical.partitionFunction measure
 partitionPositive
     laws strict embedding convention gibbs exponential fullSupport input =
   Partition.partitionFunctionStrictlyPositive
     strict laws
-    (quotientNonzeroSemantics input)
+    (Partition.quotientNonzeroSemanticsFromDivision
+      strict division)
     (partitionNonzero input)
 
 f2NumeratorPositive :
-  ∀ {Configuration Action Converges quotientAuthority measure}
+  ∀ {Configuration Action algebra quotientAuthority measure}
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -165,8 +166,7 @@ f2NumeratorPositive :
     (fullSupport : FullSupport.FullSupportRealHaarAuthority measure)
     (input :
       RealPhysicalTraceAnomalyInput
-        {Converges = Converges}
-        quotientAuthority laws strict embedding convention
+        algebra quotientAuthority division laws strict embedding convention
         gibbs exponential fullSupport) →
   0ℝ <ℝ
   F2Positive.weightedF2Numerator
@@ -180,7 +180,7 @@ f2NumeratorPositive
     (f2Positivity input)
 
 selectedQuantumTraceNegative :
-  ∀ {Configuration Action Converges quotientAuthority measure}
+  ∀ {Configuration Action algebra quotientAuthority measure}
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -193,8 +193,7 @@ selectedQuantumTraceNegative :
     (fullSupport : FullSupport.FullSupportRealHaarAuthority measure)
     (input :
       RealPhysicalTraceAnomalyInput
-        {Converges = Converges}
-        quotientAuthority laws strict embedding convention
+        algebra quotientAuthority division laws strict embedding convention
         gibbs exponential fullSupport) →
   Anomaly.selectedCMP119QuantumTraceNumerator (anomalyWeld input) <ℝ 0ℝ
 selectedQuantumTraceNegative
@@ -211,7 +210,7 @@ selectedQuantumTraceNegative
         laws strict embedding convention gibbs exponential fullSupport input))
 
 selectedActiveConnectedNumeratorNegative :
-  ∀ {Configuration Action Converges quotientAuthority measure}
+  ∀ {Configuration Action algebra quotientAuthority measure}
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -224,8 +223,7 @@ selectedActiveConnectedNumeratorNegative :
     (fullSupport : FullSupport.FullSupportRealHaarAuthority measure)
     (input :
       RealPhysicalTraceAnomalyInput
-        {Converges = Converges}
-        quotientAuthority laws strict embedding convention
+        algebra quotientAuthority division laws strict embedding convention
         gibbs exponential fullSupport) →
   selectedActiveConnectedNumerator input <ℝ 0ℝ
 selectedActiveConnectedNumeratorNegative
