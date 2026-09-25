@@ -58,8 +58,7 @@ record BoundedSelfReferenceState : Set where
     -- The represented state must itself fit its declared budget.
     stateFitsBudget :
       Size.formulaNodeCount currentFormula
-        + programCodeSize
-        + rebindingOverhead
+        + (programCodeSize + rebindingOverhead)
       ≤
       resourceBudget
 
@@ -76,8 +75,7 @@ open BoundedSelfReferenceState public
 recursiveMeasure : BoundedSelfReferenceState → Nat
 recursiveMeasure state =
   Size.formulaNodeCount (currentFormula state)
-  + programCodeSize state
-  + rebindingOverhead state
+  + (programCodeSize state + rebindingOverhead state)
 
 ------------------------------------------------------------------------
 -- A total recursive step system.
