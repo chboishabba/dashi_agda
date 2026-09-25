@@ -107,9 +107,9 @@ scaledRegionIntegralPositive
         (lowerCoefficientPositive lower)
         (regionMassPositive region)
   in
-  Relation.Binary.PropositionalEquality.subst
+  subst
     (λ value → 0ℝ <ℝ value)
-    (Relation.Binary.PropositionalEquality.sym
+    (sym
       (haarIntegralScale scaling
         (lowerCoefficient lower)
         (regionWeight region)))
