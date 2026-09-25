@@ -61,6 +61,13 @@ def main(argv=None) -> int:
             "supports the literal placeholder {file}"
         ),
     )
+    parser.add_argument(
+        "--agda-typecheck-runner",
+        help=(
+            "exit-code-only full Agda checker command for "
+            "--agda-auto-refine=typecheck; supports {file}"
+        ),
+    )
     scope_group.add_argument(
         "--agda-scope-check",
         action="store_true",
@@ -96,6 +103,11 @@ def main(argv=None) -> int:
     if args.agda_scope_runner and not args.agda_auto_refine:
         parser.error("--agda-scope-runner requires --agda-auto-refine")
 
+    if args.agda_typecheck_runner and args.agda_auto_refine != "typecheck":
+        parser.error(
+            "--agda-typecheck-runner requires --agda-auto-refine=typecheck"
+        )
+
     agda_extra_args = tuple(shlex.split(args.agda_extra_args or ""))
     scope_backend = None
     if args.agda_scope_command:
@@ -119,6 +131,7 @@ def main(argv=None) -> int:
             typecheck=args.agda_auto_refine == "typecheck",
             extra_args=agda_extra_args,
             scope_command=args.agda_scope_runner,
+            typecheck_command=args.agda_typecheck_runner,
         )
     checker = Checker(args.root, scope_backend=scope_backend)
 
