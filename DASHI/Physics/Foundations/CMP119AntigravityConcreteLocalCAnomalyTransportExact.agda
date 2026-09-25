@@ -2,7 +2,7 @@
 module DASHI.Physics.Foundations.CMP119AntigravityConcreteLocalCAnomalyTransportExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
 
@@ -160,7 +160,7 @@ finiteTraceIsRenormalizedTrace :
 finiteTraceIsRenormalizedTrace transport =
   trans
     (finiteTraceIsLocalCStressTrace transport)
-    (Relation.Binary.PropositionalEquality.sym
+    (sym
       (authorityTraceIsLocalCStressTrace transport))
 
 finiteF2IsRenormalizedF2 :
@@ -179,5 +179,5 @@ finiteF2IsRenormalizedF2 :
 finiteF2IsRenormalizedF2 transport =
   trans
     (finiteF2IsLocalCF2 transport)
-    (Relation.Binary.PropositionalEquality.sym
+    (sym
       (authorityF2IsLocalCF2 transport))
