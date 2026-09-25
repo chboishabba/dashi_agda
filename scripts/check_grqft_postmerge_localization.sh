@@ -64,6 +64,10 @@ files=(
   DASHI/Physics/Foundations/CMP119FourD1LocalizedPositiveGRepulsionExact.agda
   DASHI/Physics/Foundations/CMP119FourDiagonalLiteralFiniteMeasureActiveStressExact.agda
   DASHI/Physics/Foundations/CMP119AntigravitySourceMaxCutExact.agda
+  DASHI/Physics/Foundations/CMP119RationalFiniteMeasureIntegrationLawsExact.agda
+  DASHI/Physics/Foundations/CMP119GibbsDiagonalTraceCancellationExact.agda
+  DASHI/Physics/Foundations/CMP119GibbsDiagonalTraceSignExact.agda
+  DASHI/Physics/Foundations/CMP119ClassicalWilsonTraceInsertionReductionExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotCrossNumeratorCandidateExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotD1SourceWeldExact.agda
   DASHI/Physics/Foundations/CMP119TenActualSourceReadoutsExact.agda
