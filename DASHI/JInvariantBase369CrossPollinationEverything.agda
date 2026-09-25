@@ -1,3 +1,5 @@
+import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact
+import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact
 import DASHI.Moonshine.JInvariantSourceAtlasExact
 import DASHI.Moonshine.JInvariantImageFractalSourceAtlasExact
