@@ -27,7 +27,7 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 
 data AntigravityTraceLeaf : Set where
-  attachSelectedCMP119StressToWilsonGibbsFamily :
+  attachSelectedCMP119SourceToCanonicalWilsonGibbsCalculus :
     AntigravityTraceLeaf
 
   inhabitSelectedRationalHaarIntegrationLaws :
@@ -125,12 +125,19 @@ betaF2SignCompilerClosedIsTrue :
   betaF2SignCompilerClosed ≡ true
 betaF2SignCompilerClosedIsTrue = refl
 
-selectedCMP119ToWilsonGibbsSameObjectStillRequired : Bool
-selectedCMP119ToWilsonGibbsSameObjectStillRequired = true
+wilsonGibbsFiniteMeasureCalculusCanonical : Bool
+wilsonGibbsFiniteMeasureCalculusCanonical = true
 
-selectedCMP119ToWilsonGibbsSameObjectStillRequiredIsTrue :
-  selectedCMP119ToWilsonGibbsSameObjectStillRequired ≡ true
-selectedCMP119ToWilsonGibbsSameObjectStillRequiredIsTrue = refl
+wilsonGibbsFiniteMeasureCalculusCanonicalIsTrue :
+  wilsonGibbsFiniteMeasureCalculusCanonical ≡ true
+wilsonGibbsFiniteMeasureCalculusCanonicalIsTrue = refl
+
+selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired : Bool
+selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired = true
+
+selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequiredIsTrue :
+  selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired ≡ true
+selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequiredIsTrue = refl
 
 selectedQuantumTraceSameObjectStillRequired : Bool
 selectedQuantumTraceSameObjectStillRequired = true
