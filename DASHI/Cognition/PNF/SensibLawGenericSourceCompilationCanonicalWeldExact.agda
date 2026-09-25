@@ -228,6 +228,8 @@ open LosslessCompilationReceipt public
 ------------------------------------------------------------------------
 
 data ProviderAdapterCreatesAlternateCanonicalCarrier : Set where
+data StructuralRegionAutomaticallyBecomesSemanticCandidate : Set where
+data UnknownRegionAutomaticallyBecomesSemanticCandidate : Set where
 data ProviderAdapterCreatesReviewShortcut : Set where
 data ProviderAdapterCreatesProjectionShortcut : Set where
 data DocumentStructureCreatesSemanticObservation : Set where
@@ -241,6 +243,14 @@ data ParserResidualCreatesFalsehood : Set where
 providerAdapterDoesNotCreateAlternateCanonicalCarrier :
   ProviderAdapterCreatesAlternateCanonicalCarrier → ⊥
 providerAdapterDoesNotCreateAlternateCanonicalCarrier ()
+
+structuralRegionDoesNotAutomaticallyBecomeSemanticCandidate :
+  StructuralRegionAutomaticallyBecomesSemanticCandidate → ⊥
+structuralRegionDoesNotAutomaticallyBecomeSemanticCandidate ()
+
+unknownRegionDoesNotAutomaticallyBecomeSemanticCandidate :
+  UnknownRegionAutomaticallyBecomesSemanticCandidate → ⊥
+unknownRegionDoesNotAutomaticallyBecomeSemanticCandidate ()
 
 providerAdapterDoesNotCreateReviewShortcut :
   ProviderAdapterCreatesReviewShortcut → ⊥
