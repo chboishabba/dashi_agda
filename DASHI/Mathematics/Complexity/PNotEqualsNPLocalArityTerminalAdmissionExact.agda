@@ -30,7 +30,14 @@ import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as FutureSAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfReferenceAllOverheadBudgetExact as Q1
+import DASHI.Mathematics.Complexity.PNotEqualsNPReachableRewriteGeneratedQ1Exact as Reachable
+import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExact as Operational
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ConstructionChargedRecurrenceExact as Charged
 
 ------------------------------------------------------------------------
 -- Local finite automaton admission.
@@ -83,7 +90,7 @@ record LocalArityTerminalAdmission
       ≡
       SAT.evaluate
         terminal
-        ArityTerminal.FutureSAT.emptyAssignment
+        FutureSAT.emptyAssignment
 
 open LocalArityTerminalAdmission public
 
@@ -161,26 +168,56 @@ localArityTerminalBuildsSemanticCongruence local =
     (localBuildsArityTrackedTerminalAdmission local)
 
 ------------------------------------------------------------------------
--- Lift the local admission to the construction path.
+-- Lift the LOCAL admission directly to the construction path.
 ------------------------------------------------------------------------
 
 record LocalArityTerminalAdmittedConstructionRun
     (state : Q2.BoundedSelfReferenceState) : Set₁ where
   constructor local-arity-terminal-admitted-construction-run
   field
-    arityTerminalRun :
-      ArityTerminal.ArityTerminalAdmittedConstructionRun state
+    construction :
+      Candidate.FiniteCandidateConstructionRun state
 
     localAdmission :
       LocalArityTerminalAdmission
         (Candidate.transitionCandidate
-          (Candidate.finiteCandidate
-            (ArityTerminal.construction arityTerminalRun)))
+          (Candidate.finiteCandidate construction))
 
-    localAdmissionAgrees :
-      ArityTerminal.localAdmission arityTerminalRun
-      ≡
-      localBuildsArityTrackedTerminalAdmission localAdmission
+    allOverheadFits :
+      Q1.ClosedQuotientAllOverheadFits
+        (RewriteGenerated.toClosedStrictRepresentativeQuotient
+          (Reachable.toRewriteGeneratedClosedQuotient
+            (Candidate.admitFiniteQ1Candidate
+              (Candidate.finiteCandidate construction)
+              (localArityTerminalBuildsSemanticCongruence
+                localAdmission))))
+        (Recurrence.stateOverhead state)
+
+    machineConstructionAndNextStrict :
+      (Operational.q1WitnessGraphCellCount
+        (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+          (Reachable.toRewriteGeneratedQ1StateWitness
+            (Candidate.admittedFiniteToReachableWitness
+              (Candidate.admitted-finite-q1-state-witness
+                (Candidate.finiteCandidate construction)
+                (localArityTerminalBuildsSemanticCongruence
+                  localAdmission)
+                allOverheadFits))))
+        + Candidate.machineStepCount construction)
+      +
+      Q2.recursiveMeasure
+        (Charged.q1WitnessNextState
+          state
+          (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+            (Reachable.toRewriteGeneratedQ1StateWitness
+              (Candidate.admittedFiniteToReachableWitness
+                (Candidate.admitted-finite-q1-state-witness
+                  (Candidate.finiteCandidate construction)
+                  (localArityTerminalBuildsSemanticCongruence
+                    localAdmission)
+                  allOverheadFits)))))
+      <
+      Q2.recursiveMeasure state
 
 open LocalArityTerminalAdmittedConstructionRun public
 
@@ -189,7 +226,12 @@ localRunToArityTerminalRun :
   LocalArityTerminalAdmittedConstructionRun state →
   ArityTerminal.ArityTerminalAdmittedConstructionRun state
 localRunToArityTerminalRun run =
-  arityTerminalRun run
+  ArityTerminal.arity-terminal-admitted-construction-run
+    (construction run)
+    (localBuildsArityTrackedTerminalAdmission
+      (localAdmission run))
+    (allOverheadFits run)
+    (machineConstructionAndNextStrict run)
 
 LocalArityTerminalAdmittedStateConstructor : Set₁
 LocalArityTerminalAdmittedStateConstructor =
