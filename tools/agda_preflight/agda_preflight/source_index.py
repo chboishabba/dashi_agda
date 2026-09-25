@@ -719,6 +719,38 @@ class SourceIndex:
                         else None
                     )
                 payload = row[payload_column]
+                if not payload and row["diagnostics_json"]:
+                    try:
+                        module_diagnostics = self._decode_diagnostics(row)
+                    except (
+                        TypeError,
+                        ValueError,
+                        KeyError,
+                        json.JSONDecodeError,
+                    ):
+                        module_diagnostics = []
+                    top_payload, top_fixable_payload = (
+                        self._top_diagnostic_payloads(module_diagnostics)
+                    )
+                    self.connection.execute(
+                        "UPDATE modules SET "
+                        "top_diagnostic_json = ?, "
+                        "top_fixable_diagnostic_json = ? "
+                        "WHERE path = ?",
+                        (
+                            top_payload,
+                            top_fixable_payload,
+                            row["path"],
+                        ),
+                    )
+                    self.profiler.count(
+                        "next_error_candidate_rows_upgraded"
+                    )
+                    payload = (
+                        top_fixable_payload
+                        if require_fix
+                        else top_payload
+                    )
                 if not payload:
                     continue
                 try:
@@ -733,6 +765,11 @@ class SourceIndex:
             "next_error_candidates_decoded",
             len(candidates),
         )
+        if self.profiler.snapshot().counts.get(
+            "next_error_candidate_rows_upgraded",
+            0,
+        ):
+            self.connection.commit()
         return (
             min(candidates, key=self._diagnostic_priority)
             if candidates
