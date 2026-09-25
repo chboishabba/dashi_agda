@@ -36,6 +36,7 @@ import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationExact as GenericInge
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldExact as GenericIngestWeld
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldRegression as GenericIngestWeldRegression
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceExact as LongDocumentPersistence
+import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceRegression as LongDocumentPersistenceRegression
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -392,3 +393,8 @@ longDocumentReloadPreservesPartition :
   LongDocumentPersistence.ReloadChangesRegionPartition → ⊥
 longDocumentReloadPreservesPartition =
   LongDocumentPersistence.reloadDoesNotChangeRegionPartition
+
+longDocumentConcreteReloadPreservesPartition :
+  LongDocumentPersistenceRegression.fixtureReloadPreservesPartition
+  ≡ LongDocumentPersistenceRegression.fixtureReloadPreservesPartition
+longDocumentConcreteReloadPreservesPartition = refl
