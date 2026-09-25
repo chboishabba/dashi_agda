@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst)
