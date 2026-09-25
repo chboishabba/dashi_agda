@@ -1,3 +1,4 @@
+import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualCodecExact
 import DASHI.Moonshine.OggSSPCoarseSupersingularJRecognitionNoGoExact
