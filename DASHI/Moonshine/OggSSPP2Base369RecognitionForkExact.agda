@@ -28,6 +28,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Core.ResidualSymmetryCollisionFibreExact as Action
 import DASHI.Core.OrbitStabilizerResidualPresentationExact as Orbit
 import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
@@ -171,7 +172,7 @@ p2GaugeStabilizerRecognition =
     reflects
   where
     preserves :
-      (orbit : _) ->
+      (orbit : Triadic.NineOrbit) ->
       (g : C2.C2) ->
       Action.act Source.p2ResidualC2Action g
         (Orbit.representative Source.p2ResidualOrbitPresentation orbit)
@@ -186,7 +187,7 @@ p2GaugeStabilizerRecognition =
     preserves orbit C2.flip ()
 
     reflects :
-      (orbit : _) ->
+      (orbit : Triadic.NineOrbit) ->
       (g : C2.C2) ->
       Action.act Target.p2GaugeAction g
         (Orbit.representative Target.p2GaugeOrbitPresentation orbit)
