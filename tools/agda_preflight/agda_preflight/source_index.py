@@ -86,6 +86,38 @@ class SourceIndex:
         with self.profiler.stage("cache.identity"):
             self._ensure_cache_identity()
 
+    def begin_request(self) -> None:
+        """Clear request-scoped in-memory state for long-lived service use.
+
+        The SQLite connection and persistent cache remain warm, while parsed
+        source/diagnostic state is discarded so filesystem edits are observed
+        on the next operation.
+        """
+        self._states.clear()
+        self._visiting.clear()
+        self._checker = None
+
+    def cache_stats(self) -> dict:
+        module_count = self.connection.execute(
+            "SELECT count(*) FROM modules"
+        ).fetchone()[0]
+        import_count = self.connection.execute(
+            "SELECT count(*) FROM imports"
+        ).fetchone()[0]
+        interface_count = self.connection.execute(
+            "SELECT count(*) FROM modules WHERE interface_json != ''"
+        ).fetchone()[0]
+        diagnostic_count = self.connection.execute(
+            "SELECT count(*) FROM modules WHERE diagnostics_json != ''"
+        ).fetchone()[0]
+        return {
+            "modules": int(module_count),
+            "imports": int(import_count),
+            "interfaces": int(interface_count),
+            "diagnostic_modules": int(diagnostic_count),
+            "database": str(self.path),
+        }
+
     def close(self) -> None:
         self.connection.close()
 
