@@ -93,37 +93,46 @@ uniformly in the cutoff `N`.
 > R415/critical-barrier consumer chain. The theorem does not assert that the
 > R568 producer itself is proved.
 
-The current Clay-eligible max-cut is:
+The current R723--R729 Clay-eligible max-cut is:
 
 ```text
-NEW / NONSTANDARD
-C1  R568 cutoff-uniform signed weighted payment                     OPEN
-C2  physical phase-sensitive critical-production estimate           OPEN
+NEW / NONSTANDARD -- CURRENTLY THREE PROOF-BEARING COORDINATES
+C1a R723 cutoff-uniform combined/global signed-commutator payment    OPEN
+C1b R726 combined/global commutator -> literal R406 transport        OPEN
+C2  strict-margin physical critical-production estimate by R406     OPEN
 
 SAME-OBJECT / PHYSICAL
 C3  literal critical coordinates installed on R414                  COMPILER CLOSED
     exact critical-energy identity                                  CLOSED GIVEN STANDARD CALCULUS
-C4  common-initial-datum same-object compiler                       CLOSED
-    live trajectory -> canonical R34 mode-list/modeListed attachment                               OPEN RECEIPT
-    cutoff-uniform initial critical ceiling                         OPEN
-C5  positive retained viscosity 0 < 2*nu-a                          OPEN
-    optional a<=nu sufficient compiler                              CLOSED / NOT MANDATORY
+C4  common-initial-datum same-object / cutoff ceiling                STANDARD SOURCE BOUNDARY
+C5  positive retained viscosity                                     DERIVED FROM C2 MARGIN
 
 STANDARD COMPLETION
-C6  scalar FTC + rational integration linearity/order receipts       OPEN
-C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    OPEN
+C6  scalar FTC + rational integration linearity/order receipts       STANDARD SOURCE BOUNDARY
+C7  periodic Sobolev/Rellich/Simon/weak-* physical instantiation    STANDARD SOURCE BOUNDARY
 ```
 
-The genuinely new nonlinear theorem count is therefore two: C1 and C2.
+R727 proves that C1a + C1b + C2, together with the standard initial-critical
+realization, compile to the existing R414 uniform critical barrier.  Thus the
+old self/external split does not reappear downstream.
+
+The older R568/R572 direct-companion route remains a valid adjacent sufficient
+producer lane, but it is **not definitionally the new R723/R691 commutator
+currency**.  R687 only identifies the *pair-rate-lifted* R568 forcing full with
+the R691 commutator.  The unlifted-to-lifted payment remains open.  Likewise,
+the positive 36ED component-mass theorem is on a quartic carrier whereas the
+R723 signed nonlinear work is quintic; R725 therefore forbids treating that
+positive mass theorem as a same-object payment.
+
+Accordingly, for the R723 branch the current new analytic theorem count is
+three proof-bearing coordinates, not two.  R729 further rules out deriving C1b
+from positivity of the physical rates (even together with positive coherent
+self-work) alone.  Additional signed/trajectory structure is required.
+
 Historical PDF-style B1--B4 producer lemmas and the old B7 direct
 `R406 = covariance` equality are **not** part of this terminal cut.  The latter
-is in fact the wrong same-object statement for the live nonseparable
-Cauchy/resolvent R406 carrier.
-
-This distinction is load-bearing. `C_direct` is not the missing object. R572 is
-not a new PDE estimate. R503 is not evidence that R568 has been paid, and an
-optional producer decomposition does not become a separate Clay obligation
-merely because it is mathematically interesting.
+is the wrong same-object statement for the live nonseparable Cauchy/resolvent
+R406 carrier.
 
 ## 2. Literal periodic finite-dimensional carrier
 
