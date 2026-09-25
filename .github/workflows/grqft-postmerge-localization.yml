@@ -87,6 +87,7 @@ on:
       - 'DASHI/Physics/Foundations/CMP119GibbsConnectedNumeratorEvaluationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119ClassicalWilsonDiagonalMetricVariationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119ClassicalWilsonTenMetricVariationExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119ClassicalCurvatureTenMetricVariationExact.agda'
       - 'scripts/check_grqft_postmerge_localization.sh'
       - '.github/workflows/grqft-postmerge-localization.yml'
 
