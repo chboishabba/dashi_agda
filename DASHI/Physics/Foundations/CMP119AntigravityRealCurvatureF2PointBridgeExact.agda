@@ -4,11 +4,12 @@ module DASHI.Physics.Foundations.CMP119AntigravityRealCurvatureF2PointBridgeExac
 open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _<ℝ_)
 
 import DASHI.Physics.Foundations.CMP119AntigravityCurvatureF2PositivityExact as RationalF2
+import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact as Curvature
 import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 
 ------------------------------------------------------------------------
@@ -31,7 +32,7 @@ record RealCurvatureF2PointBridge
 
     rationalPositiveCurvature :
       RationalF2.PositiveCurvatureEnergyWitness
-        (DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact.curvatureAt
+        (Curvature.curvatureAt
           (RationalF2.curvature rationalFamily)
           witnessConfiguration)
 
@@ -58,7 +59,7 @@ realF2PositiveAtWitness {embedding = embedding} bridge =
         (rationalPositiveCurvature bridge)
 
     embeddedPositive :
-      Embed.embed embedding (Data.Rational.Base.0ℚ)
+      Embed.embed embedding (0ℚ)
       <ℝ
       Embed.embed embedding
         (RationalF2.fieldStrengthSquare
@@ -73,6 +74,6 @@ realF2PositiveAtWitness {embedding = embedding} bridge =
     (Embed.zeroExact embedding)
     (subst
       (λ right →
-        Embed.embed embedding (Data.Rational.Base.0ℚ) <ℝ right)
+        Embed.embed embedding (0ℚ) <ℝ right)
       (sym (realF2AtWitnessIsEmbeddedRationalF2 bridge))
       embeddedPositive)
