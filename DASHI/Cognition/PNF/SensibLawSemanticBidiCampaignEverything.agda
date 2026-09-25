@@ -522,3 +522,53 @@ dbNativeFixtureAutoProposalRemainsReviewGated :
   DbNativeCorpusRegression.fixtureAutoProposalRequiresReview
   ≡ DbNativeCorpusRegression.fixtureAutoProposalRequiresReview
 dbNativeFixtureAutoProposalRemainsReviewGated = refl
+
+
+------------------------------------------------------------------------
+-- SCALE-1.P exact compiler-product reuse remains a physical optimisation.
+------------------------------------------------------------------------
+
+dbNativeExactReuseDoesNotCreateAdmission :
+  DbNativeCorpus.ExactReuseCreatesSemanticAdmission → ⊥
+dbNativeExactReuseDoesNotCreateAdmission =
+  DbNativeCorpus.exactReuseDoesNotCreateSemanticAdmission
+
+dbNativeExactReuseDoesNotCreateAuthority :
+  DbNativeCorpus.ExactReuseCreatesSemanticAuthority → ⊥
+dbNativeExactReuseDoesNotCreateAuthority =
+  DbNativeCorpus.exactReuseDoesNotCreateSemanticAuthority
+
+dbNativeExactReuseDoesNotCreateApplicability :
+  DbNativeCorpus.ExactReuseCreatesApplicability → ⊥
+dbNativeExactReuseDoesNotCreateApplicability =
+  DbNativeCorpus.exactReuseDoesNotCreateApplicability
+
+dbNativeExactReuseDoesNotCreateEntityIdentity :
+  DbNativeCorpus.ExactReuseCreatesEntityIdentity → ⊥
+dbNativeExactReuseDoesNotCreateEntityIdentity =
+  DbNativeCorpus.exactReuseDoesNotCreateEntityIdentity
+
+dbNativeExactReuseDoesNotCreatePropositionIdentity :
+  DbNativeCorpus.ExactReuseCreatesPropositionIdentity → ⊥
+dbNativeExactReuseDoesNotCreatePropositionIdentity =
+  DbNativeCorpus.exactReuseDoesNotCreatePropositionIdentity
+
+dbNativeExactReuseDoesNotCreateEventIdentity :
+  DbNativeCorpus.ExactReuseCreatesEventIdentity → ⊥
+dbNativeExactReuseDoesNotCreateEventIdentity =
+  DbNativeCorpus.exactReuseDoesNotCreateEventIdentity
+
+dbNativeExactReuseDoesNotCreateClaimTruth :
+  DbNativeCorpus.ExactReuseCreatesClaimTruth → ⊥
+dbNativeExactReuseDoesNotCreateClaimTruth =
+  DbNativeCorpus.exactReuseDoesNotCreateClaimTruth
+
+dbNativeFixtureExactReuseRequiresIdentity :
+  DbNativeCorpusRegression.fixtureExactReuseRequiresMatchingIdentity
+  ≡ DbNativeCorpusRegression.fixtureExactReuseRequiresMatchingIdentity
+dbNativeFixtureExactReuseRequiresIdentity = refl
+
+dbNativeFixtureExactReuseRequiresCompleteProduct :
+  DbNativeCorpusRegression.fixtureExactReuseRequiresCompleteProduct
+  ≡ DbNativeCorpusRegression.fixtureExactReuseRequiresCompleteProduct
+dbNativeFixtureExactReuseRequiresCompleteProduct = refl
