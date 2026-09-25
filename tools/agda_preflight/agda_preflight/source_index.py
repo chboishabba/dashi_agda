@@ -550,12 +550,17 @@ class SourceIndex:
             if fresh:
                 module_name = row["module_name"]
                 imports = self._imports_for_path(row["path"])
+                public_imports = tuple(
+                    json.loads(row["public_imports_json"])
+                )
                 source_hash = row["source_sha256"]
+                api_base_hash = row["api_base_sha256"]
             else:
                 checker = self._checker_instance()
                 summary = checker.parse_summary(path)
                 module_name = summary.module_name
                 imports = tuple(sorted(set(summary.imports.values())))
+                api_base_hash, public_imports = self._api_base(summary)
                 with self.profiler.stage("source.hash"):
                     source_hash = hashlib.sha256(
                         summary.source.encode("utf-8")
@@ -567,11 +572,18 @@ class SourceIndex:
                 if fresh and row is not None
                 else []
             )
+            provisional_api_hash = (
+                row["api_fingerprint"]
+                if fresh and row is not None
+                else api_base_hash
+            )
             self._states[path] = _ModuleState(
                 path=path,
                 module_name=module_name,
                 source_hash=source_hash,
+                api_hash=provisional_api_hash,
                 imports=imports,
+                public_imports=public_imports,
                 diagnostics=provisional_diagnostics,
             )
 
@@ -584,8 +596,20 @@ class SourceIndex:
                     (module, self._ensure_module(dependency_path))
                 )
 
+            dependency_by_module = {
+                module: state
+                for module, state in dependency_states
+            }
+            api_hash = self._api_fingerprint(
+                api_base_hash,
+                (
+                    (module, dependency_by_module[module].api_hash)
+                    for module in public_imports
+                    if module in dependency_by_module
+                ),
+            )
             dependency_fingerprint = self._dependency_fingerprint(
-                (module, state.source_hash)
+                (module, state.api_hash)
                 for module, state in dependency_states
             )
 
@@ -605,6 +629,9 @@ class SourceIndex:
                     module_name,
                     stat,
                     source_hash,
+                    api_base_hash,
+                    api_hash,
+                    public_imports,
                     dependency_fingerprint,
                     imports,
                     diagnostics,
@@ -614,7 +641,9 @@ class SourceIndex:
                 path=path,
                 module_name=module_name,
                 source_hash=source_hash,
+                api_hash=api_hash,
                 imports=imports,
+                public_imports=public_imports,
                 diagnostics=diagnostics,
             )
             self._states[path] = state
