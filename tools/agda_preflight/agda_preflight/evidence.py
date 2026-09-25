@@ -154,8 +154,10 @@ _ALIAS_TO_CANONICAL = {
 # retained as separate compatibility/reporting codes. Canonicalize them only
 # for triage; do not synthesize extra emitted diagnostics.
 _ALIAS_TO_CANONICAL.update({
+    "TSAGDA052": "TSAGDA049",
     "TSAGDA075": "TSAGDA072",
     "TSAGDA114": "TSAGDA072",
+    "TSAGDA123": "TSAGDA120",
 })
 
 
