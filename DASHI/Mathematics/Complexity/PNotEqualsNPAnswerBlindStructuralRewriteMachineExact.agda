@@ -263,12 +263,15 @@ rewriteSatisfiabilityEquivalent :
   ∀ {before after} →
   StructuralRewrite before after →
   Strict.CookSatisfiabilityEquivalent before after
-rewriteSatisfiabilityEquivalent rewrite =
+rewriteSatisfiabilityEquivalent
+    {before = before}
+    {after = after}
+    rewrite =
   forward , backward
   where
     forward :
-      Cook.Satisfiable _ →
-      Cook.Satisfiable _
+      Cook.Satisfiable before →
+      Cook.Satisfiable after
     forward witness =
       Cook.satisfyingAssignment
         (Cook.Satisfiable.assignment witness)
@@ -280,8 +283,8 @@ rewriteSatisfiabilityEquivalent rewrite =
           (Cook.Satisfiable.evaluatesTrue witness))
 
     backward :
-      Cook.Satisfiable _ →
-      Cook.Satisfiable _
+      Cook.Satisfiable after →
+      Cook.Satisfiable before
     backward witness =
       Cook.satisfyingAssignment
         (Cook.Satisfiable.assignment witness)
