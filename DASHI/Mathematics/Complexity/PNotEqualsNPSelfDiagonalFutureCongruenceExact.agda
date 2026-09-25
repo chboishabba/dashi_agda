@@ -1065,6 +1065,58 @@ sameLayerQuotientMergeContainedInFutureEquivalent quotient =
     (sameLayerQuotientMergeIsDynamicallyCongruent quotient)
 
 ------------------------------------------------------------------------
+-- Strong consequence for Q1: same state at one layer means the ENTIRE residual
+-- Boolean functions agree, not merely their current SAT bits.
+------------------------------------------------------------------------
+
+sameLayerQuotientMergeImpliesResidualFunctionEqual :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (quotient : Quotient.RestrictionSemanticQuotient root)
+    {left right : Family.RestrictionNode root} →
+  SameLayerQuotientMerge quotient left right →
+  SameLayerResidualFunction left right
+sameLayerQuotientMergeImpliesResidualFunctionEqual
+    quotient
+    related =
+  futureEquivalentGivesSameLayerResidualFunction
+    (proj₁ related)
+    (sameLayerQuotientMergeContainedInFutureEquivalent
+      quotient
+      related)
+
+sameLayerSameQ1StateImpliesPointwiseResidualEquality :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (quotient : Quotient.RestrictionSemanticQuotient root)
+    {left right : Family.RestrictionNode root}
+    (sameArity :
+      Family.currentVariables left
+      ≡ Family.currentVariables right) →
+  Quotient.classify quotient
+      (Family.derivation left)
+  ≡
+  Quotient.classify quotient
+      (Family.derivation right) →
+  (assignment :
+    SAT.Assignment (Family.currentVariables left)) →
+  SAT.evaluate
+      (Family.currentFormula left)
+      assignment
+  ≡
+  SAT.evaluate
+      (Family.currentFormula right)
+      (transportAssignment sameArity assignment)
+sameLayerSameQ1StateImpliesPointwiseResidualEquality
+    quotient
+    sameArity
+    sameState =
+  proj₂
+    (sameLayerQuotientMergeImpliesResidualFunctionEqual
+      quotient
+      (sameArity , sameState))
+
+------------------------------------------------------------------------
 -- Canonical coarsest dynamically safe refinement for Shannon restrictions.
 ------------------------------------------------------------------------
 
