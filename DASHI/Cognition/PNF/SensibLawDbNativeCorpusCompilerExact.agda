@@ -202,6 +202,45 @@ record SemanticAttemptCoverage
 
 open SemanticAttemptCoverage public
 
+
+record PersistedM12CandidateProduct
+    (source : Ingest.GenericCompiledSource)
+    (region : Ingest.GenericSourceRegion source) : Set where
+  constructor persisted-m12-candidate-product
+  field
+    statementRef : String
+    candidateBatchRef : String
+    parserReceiptRef : String
+    exactRegion : Ingest.GenericSourceRegion source
+    exactRegionIsSame : exactRegion ≡ region
+    factorRefs : List String
+
+    statementReloadable : Bool
+    statementReloadableIsTrue :
+      statementReloadable ≡ true
+
+    candidateBatchReloadable : Bool
+    candidateBatchReloadableIsTrue :
+      candidateBatchReloadable ≡ true
+
+    persistenceCreatesSemanticAdmission : Bool
+    persistenceCreatesSemanticAdmissionIsFalse :
+      persistenceCreatesSemanticAdmission ≡ false
+
+    persistenceCreatesPropositionSupport : Bool
+    persistenceCreatesPropositionSupportIsFalse :
+      persistenceCreatesPropositionSupport ≡ false
+
+    persistenceCreatesApplicability : Bool
+    persistenceCreatesApplicabilityIsFalse :
+      persistenceCreatesApplicability ≡ false
+
+    persistenceCreatesClaimTruth : Bool
+    persistenceCreatesClaimTruthIsFalse :
+      persistenceCreatesClaimTruth ≡ false
+
+open PersistedM12CandidateProduct public
+
 record DbNativeCompilerReceipt
     (source : Ingest.GenericCompiledSource) : Set where
   constructor db-native-compiler-receipt
@@ -288,6 +327,9 @@ data ParserCompletionCreatesAdmission : Set where
 data ParserResidualCreatesSourceAbsence : Set where
 data ParserResidualCreatesPropositionAbsence : Set where
 data ContentDigestCreatesSemanticIdentity : Set where
+data ContentDigestDeterminesSourceRevisionIdentity : Set where
+data PersistedCandidateCreatesSemanticAdmission : Set where
+data PersistedCandidateCreatesClaimTruth : Set where
 data PostgresCompilerStateCreatesGlobalTruth : Set where
 data BulkDistributionCreatesProvenance : Set where
 data LinkedObjectAvailabilityCreatesSemanticAuthority : Set where
@@ -328,6 +370,18 @@ parserResidualDoesNotCreatePropositionAbsence ()
 contentDigestDoesNotCreateSemanticIdentity :
   ContentDigestCreatesSemanticIdentity → ⊥
 contentDigestDoesNotCreateSemanticIdentity ()
+
+contentDigestDoesNotDetermineSourceRevisionIdentity :
+  ContentDigestDeterminesSourceRevisionIdentity → ⊥
+contentDigestDoesNotDetermineSourceRevisionIdentity ()
+
+persistedCandidateDoesNotCreateSemanticAdmission :
+  PersistedCandidateCreatesSemanticAdmission → ⊥
+persistedCandidateDoesNotCreateSemanticAdmission ()
+
+persistedCandidateDoesNotCreateClaimTruth :
+  PersistedCandidateCreatesClaimTruth → ⊥
+persistedCandidateDoesNotCreateClaimTruth ()
 
 postgresCompilerStateDoesNotCreateGlobalTruth :
   PostgresCompilerStateCreatesGlobalTruth → ⊥
