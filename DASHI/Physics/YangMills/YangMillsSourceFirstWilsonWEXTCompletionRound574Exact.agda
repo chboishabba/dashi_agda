@@ -254,6 +254,9 @@ round574FinalWilsonShellCompilerLevel = machineChecked
 round574R556AdapterLevel : ProofLevel
 round574R556AdapterLevel = machineChecked
 
+literalRound574SourceFirstWilsonWEXTCompletionLevel : ProofLevel
+literalRound574SourceFirstWilsonWEXTCompletionLevel = conditional
+
 round574FinalShellBoundStoredAsPhysicalInput : Bool
 round574FinalShellBoundStoredAsPhysicalInput = false
 
