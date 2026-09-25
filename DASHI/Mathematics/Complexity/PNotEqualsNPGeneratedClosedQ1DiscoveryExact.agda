@@ -27,6 +27,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPGeneratedClosedQ1DiscoveryExact 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin.Base using (Fin)
 open import Data.Maybe.Base using (Maybe; just; nothing)
+open import Data.Nat.Base using (_<_)
 open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (cong)
 
