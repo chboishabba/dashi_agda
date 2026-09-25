@@ -323,7 +323,6 @@ def interface_api_base_hash(interface: ModuleInterface) -> str:
     """
     payload = {
         "module_name": interface.module_name,
-        "imports": [list(item) for item in interface.imports],
         "signatures": [
             {
                 "name": item.name,
