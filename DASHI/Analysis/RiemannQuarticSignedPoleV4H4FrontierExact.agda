@@ -1815,3 +1815,128 @@ uniformLiteralFarMinusMuTransportedIntoAgdaKernelHere = false
 uniformLiteralFarMinusMuInterpretation : String
 uniformLiteralFarMinusMuInterpretation =
   "Lean now packages the final high-ordinate RH obligation as one uniform selected-witness theorem: above one fixed cutoff, every hypothetical off-line zero must admit a selected four-window witness whose signed canonical far literal pair-source tsum minus the full theorem-bearing mu integral lies strictly below the terminal residual margin. Lean source-proves that this uniform estimate excludes all high off-line zeros, and conversely any such zero forces failure of the estimate. It also proves a counterexample rigidity lower bound: a hypothetical off-line zero forces the same selected witness scalar to be at least the terminal margin. No independent positivity of that margin is asserted. The uniform signed far-minus-mu estimate itself remains the open analytic theorem."
+
+
+------------------------------------------------------------------------
+-- DE-VACUIFIED AMBIENT HIGH THEOREM + EXACT PT THRESHOLD CLOSURE
+--
+-- The zero-specific terminal margin depends on rho only through:
+--
+--   a = heightOf rho
+--   m = mult rho
+--
+-- via
+--
+--   combinedZeroHeightDefect(rho)
+--     = m * physicalCombinedHeightDefect(a).
+--
+-- Lean now exposes the ambient margin
+--
+--   ambientMargin(W,m,a,EV)
+--     = 2*m*physicalCombinedHeightDefect_W(a)
+--       - (1/2)*postSixthTerminalLocalM6Budget_W(EV).
+--
+-- On the selected target band, for
+--
+--   0 < |a| <= 1/2,
+--
+-- the physical combined height defect is strictly positive, hence the ambient
+-- margin is monotone increasing in m.  Therefore multiplicity one is the
+-- hardest ambient case.
+--
+-- Preferred independent analytic target:
+--
+--   for every t above the final low/high cutoff and every real strip
+--   displacement 0<|a|<=1/2, construct the selected W with
+--
+--     (1/2)*(canonicalLiteralFarPairSource(W) - integral Psi_t*mu)
+--       < ambientMargin(W,1,a,CV,t).
+--
+-- This theorem is genuinely de-vacuified: its parameter domain exists
+-- independently of whether an off-line zero exists.  Lean source-proves that
+-- it implies the previous zero-quantified uniform high estimate.
+--
+-- PT seam:
+--
+-- The arbitrary-endpoint RvM proof previously consumed existential
+-- backlund_horizontal, introducing an opaque threshold TB.  The imported
+-- Zeta23 source already has explicit backlund_horizontal_at valid from T>=4.
+-- Lean now consumes that explicit theorem, exposing:
+--
+--   arbitrary endpoint discrepancy cutoff A >= 5
+--   V4 discrepancy left-end cutoff t-r >= 5.
+--
+-- Since the canonical local radius satisfies r<t/16, every
+--
+--   t > quarticPlattTrudgianCutoff
+--
+-- has t-r > 5.  The final literal far-minus-mu contradiction compiler is now
+-- source-written with EXACT high threshold quarticPlattTrudgianCutoff.
+-- There is no finite PT<t<=T middle band left in this route.
+------------------------------------------------------------------------
+
+data AmbientFarMinusMuCoordinate : Set where
+  ambientMarginExactCoordinate :
+    AmbientFarMinusMuCoordinate
+  ambientHeightDefectPositiveOnStrip :
+    AmbientFarMinusMuCoordinate
+  ambientMarginMonotoneMultiplicity :
+    AmbientFarMinusMuCoordinate
+  ambientSimpleMultiplicityEstimate :
+    AmbientFarMinusMuCoordinate
+  ambientSimpleEstimateImpliesZeroUniform :
+    AmbientFarMinusMuCoordinate
+  explicitBacklundCutoffFour :
+    AmbientFarMinusMuCoordinate
+  arbitraryEndpointRvMCutoffFive :
+    AmbientFarMinusMuCoordinate
+  quarticV4CutoffFive :
+    AmbientFarMinusMuCoordinate
+  PTExactlyCompilesLiteralFarMinusMu :
+    AmbientFarMinusMuCoordinate
+  PTAmbientEstimateExcludesOffLine :
+    AmbientFarMinusMuCoordinate
+
+ambientFarMinusMuStatus :
+  AmbientFarMinusMuCoordinate -> V4H4Status
+ambientFarMinusMuStatus ambientMarginExactCoordinate =
+  leanSourceWrittenDonor
+ambientFarMinusMuStatus ambientHeightDefectPositiveOnStrip =
+  leanSourceWrittenDonor
+ambientFarMinusMuStatus ambientMarginMonotoneMultiplicity =
+  leanSourceWrittenDonor
+ambientFarMinusMuStatus ambientSimpleMultiplicityEstimate =
+  openAnalyticObstruction
+ambientFarMinusMuStatus ambientSimpleEstimateImpliesZeroUniform =
+  leanSourceWrittenDonor
+ambientFarMinusMuStatus explicitBacklundCutoffFour =
+  leanSourceWrittenDonor
+ambientFarMinusMuStatus arbitraryEndpointRvMCutoffFive =
+  leanSourceWrittenDonor
+ambientFarMinusMuStatus quarticV4CutoffFive =
+  leanSourceWrittenDonor
+ambientFarMinusMuStatus PTExactlyCompilesLiteralFarMinusMu =
+  leanSourceWrittenDonor
+ambientFarMinusMuStatus PTAmbientEstimateExcludesOffLine =
+  leanSourceWrittenDonor
+
+ambientSimpleMultiplicityEstimateIsPreferredOpenTheorem :
+  ambientFarMinusMuStatus ambientSimpleMultiplicityEstimate
+    ≡ openAnalyticObstruction
+ambientSimpleMultiplicityEstimateIsPreferredOpenTheorem = refl
+
+PTMiddleBandIsClosed :
+  ambientFarMinusMuStatus PTExactlyCompilesLiteralFarMinusMu
+    ≡ leanSourceWrittenDonor
+PTMiddleBandIsClosed = refl
+
+ambientFarMinusMuLeanDonorHead : String
+ambientFarMinusMuLeanDonorHead =
+  "014363d094d6f53e8c936ed1c89d88642d6aac79"
+
+ambientFarMinusMuTransportedIntoAgdaKernelHere : Bool
+ambientFarMinusMuTransportedIntoAgdaKernelHere = false
+
+ambientFarMinusMuInterpretation : String
+ambientFarMinusMuInterpretation =
+  "The preferred RH analytic frontier is now de-vacuified. Lean factors the terminal margin through ambient horizontal displacement a and multiplicity m, proves the selected physical height defect positive on 0<|a|<=1/2, and proves the margin monotone in m, reducing the hardest ambient theorem to multiplicity one. A uniform ambient theorem over all real strip displacements would imply the earlier zero-quantified far-minus-mu estimate and hence exclude off-line zeros. Separately, Lean replaces the opaque existential Backlund threshold by the imported explicit Backlund theorem valid from 4, derives arbitrary-endpoint RvM and quartic V4 cutoffs at 5, and proves the literal far-minus-mu contradiction compiler starts exactly above the Platt-Trudgian cutoff. The PT-to-final-T middle-band seam is therefore closed. The ambient multiplicity-one signed far-minus-mu estimate remains open."
