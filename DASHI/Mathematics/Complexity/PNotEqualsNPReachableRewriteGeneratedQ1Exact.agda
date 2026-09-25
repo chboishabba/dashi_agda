@@ -34,6 +34,12 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotie
 import DASHI.Mathematics.Complexity.PNotEqualsNPStrictSemanticRepresentativeQuotientExact as Strict
 import DASHI.Mathematics.Complexity.PNotEqualsNPAnswerBlindStructuralRewriteMachineExact as Rewrite
 import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfReferenceAllOverheadBudgetExact as Q1
+import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExact as Operational
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ConstructionChargedRecurrenceExact as Charged
 
 ------------------------------------------------------------------------
 -- Indexed semantic equivalence -> Cook semantic equivalence.
@@ -225,6 +231,142 @@ toRewriteGeneratedClosedQuotient closed =
     (λ state →
       ReachableStateRepresentative.rewriteProgram
         (stateRepresentative closed state))
+
+------------------------------------------------------------------------
+-- State-specific witness and executed constructor.
+------------------------------------------------------------------------
+
+ReachableRewriteGeneratedQ1StateWitness :
+  (state : Q2.BoundedSelfReferenceState) →
+  Set₁
+ReachableRewriteGeneratedQ1StateWitness state =
+  Σ
+    (ReachableRewriteGeneratedClosedQuotient
+      (Bridge.cookToIndexed
+        (Q2.currentFormula state)))
+    (λ closed →
+      Q1.ClosedQuotientAllOverheadFits
+        (RewriteGenerated.toClosedStrictRepresentativeQuotient
+          (toRewriteGeneratedClosedQuotient closed))
+        (Recurrence.stateOverhead state))
+
+toRewriteGeneratedQ1StateWitness :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  ReachableRewriteGeneratedQ1StateWitness state →
+  RewriteGenerated.RewriteGeneratedQ1StateWitness state
+toRewriteGeneratedQ1StateWitness
+    (closed , fits) =
+  toRewriteGeneratedClosedQuotient closed
+  ,
+  fits
+
+record ReachableRewriteGeneratedExecutedQ1ConstructionRun
+    (state : Q2.BoundedSelfReferenceState) : Set₁ where
+  constructor reachable-rewrite-generated-executed-q1-construction-run
+  field
+    MachineState : Set
+    machineStep : MachineState → MachineState
+
+    decodeReachableWitness :
+      MachineState →
+      Maybe (ReachableRewriteGeneratedQ1StateWitness state)
+
+    machineStart machineFinal : MachineState
+    machineStepCount : Nat
+
+    machineExecution :
+      Executed.Iterates
+        machineStep
+        machineStepCount
+        machineStart
+        machineFinal
+
+    reachableWitness :
+      ReachableRewriteGeneratedQ1StateWitness state
+
+    machineFinalDecodesReachableWitness :
+      decodeReachableWitness machineFinal
+      ≡
+      just reachableWitness
+
+    machineConstructionAndNextStrict :
+      (Operational.q1WitnessGraphCellCount
+        (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+          (toRewriteGeneratedQ1StateWitness reachableWitness))
+        + machineStepCount)
+      +
+      Q2.recursiveMeasure
+        (Charged.q1WitnessNextState
+          state
+          (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+            (toRewriteGeneratedQ1StateWitness reachableWitness)))
+      <
+      Q2.recursiveMeasure state
+
+open ReachableRewriteGeneratedExecutedQ1ConstructionRun public
+
+mapReachableWitness :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  Maybe (ReachableRewriteGeneratedQ1StateWitness state) →
+  Maybe (RewriteGenerated.RewriteGeneratedQ1StateWitness state)
+mapReachableWitness nothing =
+  nothing
+mapReachableWitness (just witness) =
+  just (toRewriteGeneratedQ1StateWitness witness)
+
+reachableRunToRewriteGeneratedRun :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  ReachableRewriteGeneratedExecutedQ1ConstructionRun state →
+  RewriteGenerated.RewriteGeneratedExecutedQ1ConstructionRun state
+reachableRunToRewriteGeneratedRun {state} run =
+  RewriteGenerated.rewrite-generated-executed-q1-construction-run
+    (MachineState run)
+    (machineStep run)
+    (λ machineState →
+      mapReachableWitness
+        (decodeReachableWitness run machineState))
+    (machineStart run)
+    (machineFinal run)
+    (machineStepCount run)
+    (machineExecution run)
+    (toRewriteGeneratedQ1StateWitness
+      (reachableWitness run))
+    finalDecodes
+    (machineConstructionAndNextStrict run)
+  where
+    finalDecodes :
+      mapReachableWitness
+        (decodeReachableWitness run (machineFinal run))
+      ≡
+      just
+        (toRewriteGeneratedQ1StateWitness
+          (reachableWitness run))
+    finalDecodes
+      rewrite
+        machineFinalDecodesReachableWitness run =
+      refl
+
+ReachableRewriteGeneratedExecutedQ1StateConstructor : Set₁
+ReachableRewriteGeneratedExecutedQ1StateConstructor =
+  (state : Q2.BoundedSelfReferenceState) →
+  Maybe (ReachableRewriteGeneratedExecutedQ1ConstructionRun state)
+
+reachableConstructorToRewriteGenerated :
+  ReachableRewriteGeneratedExecutedQ1StateConstructor →
+  RewriteGenerated.RewriteGeneratedExecutedQ1StateConstructor
+reachableConstructorToRewriteGenerated constructor state
+    with constructor state
+... | nothing =
+  nothing
+... | just run =
+  just (reachableRunToRewriteGeneratedRun run)
+
+reachableConstructorToQ2StepSystem :
+  ReachableRewriteGeneratedExecutedQ1StateConstructor →
+  Q2.BoundedSelfReferenceStepSystem
+reachableConstructorToQ2StepSystem constructor =
+  RewriteGenerated.rewriteGeneratedConstructorToQ2StepSystem
+    (reachableConstructorToRewriteGenerated constructor)
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
