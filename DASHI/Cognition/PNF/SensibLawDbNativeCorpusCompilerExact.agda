@@ -395,6 +395,53 @@ record AutoEventJoinProposalProjection : Set where
 
 open AutoEventJoinProposalProjection public
 
+
+record ExactCompilerProductReuse : Set where
+  constructor exact-compiler-product-reuse
+  field
+    sourceRevisionRef : String
+    parserRunRef : String
+    algorithmRef : String
+    consumerScopeRef : String
+
+    compilationIdentityMatched : Bool
+    compilationIdentityMatchedIsTrue :
+      compilationIdentityMatched ≡ true
+
+    persistedProductComplete : Bool
+    persistedProductCompleteIsTrue :
+      persistedProductComplete ≡ true
+
+    createsSemanticAdmission : Bool
+    createsSemanticAdmissionIsFalse :
+      createsSemanticAdmission ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    createsApplicability : Bool
+    createsApplicabilityIsFalse :
+      createsApplicability ≡ false
+
+    createsEntityIdentity : Bool
+    createsEntityIdentityIsFalse :
+      createsEntityIdentity ≡ false
+
+    createsPropositionIdentity : Bool
+    createsPropositionIdentityIsFalse :
+      createsPropositionIdentity ≡ false
+
+    createsEventIdentity : Bool
+    createsEventIdentityIsFalse :
+      createsEventIdentity ≡ false
+
+    createsClaimTruth : Bool
+    createsClaimTruthIsFalse :
+      createsClaimTruth ≡ false
+
+open ExactCompilerProductReuse public
+
 record DbNativeCompilerReceipt
     (source : Ingest.GenericCompiledSource) : Set where
   constructor db-native-compiler-receipt
@@ -498,6 +545,13 @@ data AutoObservationCreatesEventIdentity : Set where
 data AutoJoinProposalCreatesEventIdentity : Set where
 data AutoJoinProposalCreatesClaimTruth : Set where
 data TemporalDetectorBucketCreatesTemporalAssertion : Set where
+data ExactReuseCreatesSemanticAdmission : Set where
+data ExactReuseCreatesSemanticAuthority : Set where
+data ExactReuseCreatesApplicability : Set where
+data ExactReuseCreatesEntityIdentity : Set where
+data ExactReuseCreatesPropositionIdentity : Set where
+data ExactReuseCreatesEventIdentity : Set where
+data ExactReuseCreatesClaimTruth : Set where
 data PostgresCompilerStateCreatesGlobalTruth : Set where
 data BulkDistributionCreatesProvenance : Set where
 data LinkedObjectAvailabilityCreatesSemanticAuthority : Set where
@@ -606,6 +660,34 @@ autoJoinProposalDoesNotCreateClaimTruth ()
 temporalDetectorBucketDoesNotCreateTemporalAssertion :
   TemporalDetectorBucketCreatesTemporalAssertion → ⊥
 temporalDetectorBucketDoesNotCreateTemporalAssertion ()
+
+exactReuseDoesNotCreateSemanticAdmission :
+  ExactReuseCreatesSemanticAdmission → ⊥
+exactReuseDoesNotCreateSemanticAdmission ()
+
+exactReuseDoesNotCreateSemanticAuthority :
+  ExactReuseCreatesSemanticAuthority → ⊥
+exactReuseDoesNotCreateSemanticAuthority ()
+
+exactReuseDoesNotCreateApplicability :
+  ExactReuseCreatesApplicability → ⊥
+exactReuseDoesNotCreateApplicability ()
+
+exactReuseDoesNotCreateEntityIdentity :
+  ExactReuseCreatesEntityIdentity → ⊥
+exactReuseDoesNotCreateEntityIdentity ()
+
+exactReuseDoesNotCreatePropositionIdentity :
+  ExactReuseCreatesPropositionIdentity → ⊥
+exactReuseDoesNotCreatePropositionIdentity ()
+
+exactReuseDoesNotCreateEventIdentity :
+  ExactReuseCreatesEventIdentity → ⊥
+exactReuseDoesNotCreateEventIdentity ()
+
+exactReuseDoesNotCreateClaimTruth :
+  ExactReuseCreatesClaimTruth → ⊥
+exactReuseDoesNotCreateClaimTruth ()
 
 postgresCompilerStateDoesNotCreateGlobalTruth :
   PostgresCompilerStateCreatesGlobalTruth → ⊥
