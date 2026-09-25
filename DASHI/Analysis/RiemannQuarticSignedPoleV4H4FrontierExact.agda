@@ -1255,3 +1255,85 @@ oddPairedQuarticTransportedIntoAgdaKernelHere = false
 oddPairedQuarticInterpretation : String
 oddPairedQuarticInterpretation =
   "Lean confirms the selected normalized cosine derivative is odd and has cubic jet -(2/3)S q^3 with a certified O(q^5 M6_abs) remainder on the canonical local interval. The antisymmetric quartic-scale centered discrepancy is exactly one symmetric N-mu window, and the leading cubic correlation reduces exactly to the existing V4 boundary-minus-moment coordinate. This is a fail-fast result rather than a closure: the Taylor regime is exactly the already-paid local interval. Globally, the symmetric Abel exhaustion pairs to Psi'_t(t+s) times D(t-s,t+s), which splits at the canonical radius into local plus outer pieces. The remaining analytic wall is the exact outer paired symmetric N-mu correlation combined with the same signed horizontal remainder."
+
+
+------------------------------------------------------------------------
+-- OUTER-PAIRED ASYMPTOTIC RECUT
+--
+-- Lean now recuts the finite outer paired+horizontal presentation onto the
+-- already-owned manuscript far completed carrier.
+--
+-- For one centered-Abel exhaustion E, define the limiting outer object
+--
+--   OuterLimit(E)
+--     = 1/2 * (-E.leftLimit - E.rightLimit
+--              + canonicalLocalLeftAbel
+--              + canonicalLocalRightAbel)
+--       + signedHorizontalRemainder.
+--
+-- Lean proves exactly
+--
+--   OuterLimit(E)
+--     = canonicalFarCompletedCompensation
+--       + 1/2 * (canonicalLocalLeftBoundary
+--                + canonicalLocalRightBoundary).
+--
+-- The selected ordinate test is even about t, so the boundary pair further
+-- collapses to one symmetric literal N-mu window:
+--
+--   canonicalLocalLeftBoundary + canonicalLocalRightBoundary
+--     =
+--   signedOrdinateTest(t+h0)
+--     * D(t-h0,t+h0).
+--
+-- Hence the asymptotic outer-paired object is not a second analytic invariant:
+-- it is the manuscript far completed compensation plus one explicit symmetric
+-- canonical boundary coordinate.
+--
+-- No sign or quantitative bound for that combined object is claimed.  A quick
+-- audit of the existing cutset found no theorem making the full off-ordinate
+-- outer pair kernel nonpositive.  The localized bidi prime positivity lane
+-- also remains firewalled from this same-object outer carrier and is not
+-- reopened.
+------------------------------------------------------------------------
+
+data OuterPairedAsymptoticCoordinate : Set where
+  outerPairedLimitCarrier : OuterPairedAsymptoticCoordinate
+  outerLimitToCanonicalFarBoundary : OuterPairedAsymptoticCoordinate
+  canonicalBoundaryPairSymmetricWindow : OuterPairedAsymptoticCoordinate
+  outerLimitFarPlusSymmetricBoundary : OuterPairedAsymptoticCoordinate
+  outerFarBoundaryHighEstimate : OuterPairedAsymptoticCoordinate
+
+outerPairedAsymptoticStatus :
+  OuterPairedAsymptoticCoordinate -> V4H4Status
+outerPairedAsymptoticStatus outerPairedLimitCarrier =
+  leanSourceWrittenDonor
+outerPairedAsymptoticStatus outerLimitToCanonicalFarBoundary =
+  leanSourceWrittenDonor
+outerPairedAsymptoticStatus canonicalBoundaryPairSymmetricWindow =
+  leanSourceWrittenDonor
+outerPairedAsymptoticStatus outerLimitFarPlusSymmetricBoundary =
+  leanSourceWrittenDonor
+outerPairedAsymptoticStatus outerFarBoundaryHighEstimate =
+  openAnalyticObstruction
+
+outerLimitFarBoundaryRecutIsSourceWritten :
+  outerPairedAsymptoticStatus outerLimitFarPlusSymmetricBoundary
+    ≡ leanSourceWrittenDonor
+outerLimitFarBoundaryRecutIsSourceWritten = refl
+
+outerFarBoundaryHighEstimateRemainsOpen :
+  outerPairedAsymptoticStatus outerFarBoundaryHighEstimate
+    ≡ openAnalyticObstruction
+outerFarBoundaryHighEstimateRemainsOpen = refl
+
+outerPairedAsymptoticLeanDonorHead : String
+outerPairedAsymptoticLeanDonorHead =
+  "9edf85124ba69024b9f7637245cd3317a49bfaf9"
+
+outerPairedAsymptoticTransportedIntoAgdaKernelHere : Bool
+outerPairedAsymptoticTransportedIntoAgdaKernelHere = false
+
+outerPairedAsymptoticInterpretation : String
+outerPairedAsymptoticInterpretation =
+  "The global odd-paired high carrier has now been recut back onto the manuscript same-object far coordinate. Lean source-writes that the exhausted outer paired symmetric N-mu correlation plus signed horizontal remainder equals canonicalFarCompletedCompensation plus one half of the two canonical Abel boundary terms, and then collapses those two boundaries to signedOrdinateTest(t+h0) times the single symmetric discrepancy D(t-h0,t+h0). Thus there is no second outer analytic invariant and no remaining representation seam here. The preferred open theorem is a signed quantitative estimate for this exact far-plus-symmetric-boundary object strong enough to close the quartic-scale terminal margin. No global outer pair-kernel sign and no same-object prime identification is currently claimed."
