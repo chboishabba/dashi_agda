@@ -13,7 +13,7 @@ module DASHI.Philosophy.NonginOriginFormalizationExact where
 --   recursive subdivision
 --     -> hidden state-space behind a coarse binary presentation
 --     -> one-more-frame / "1.0 -> 1.1" reflexive lift
---     -> higher-order probability indexing
+--     -> historical "odds of odds" routed to existing probability/branching owners
 --     -> recursive observer nesting
 --     -> explicit information loss under dimensional projection.
 --
@@ -38,6 +38,7 @@ open import Agda.Builtin.String using (String)
 
 open import DASHI.Core.Prelude using (⊥)
 import DASHI.Core.DialecticOriginSourceAtlasExact as Origin
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.FiniteBranchingCriticalityExact as Branch
 import DASHI.Core.FiniteTypedBranchingKernelExact as TypedBranch
 import DASHI.Philosophy.ReflexivePowerUp as Reflexive
@@ -130,7 +131,7 @@ debateHiddenStateWitness =
 ------------------------------------------------------------------------
 
 matureTrialecticNonfactorability :
-  DASHI.Core.ConsumerDescentMinimalObserverExact.FactorsThrough
+  Descent.FactorsThrough
     Trialectic.boundaryObserver
     Trialectic.faceConsumer
   →
