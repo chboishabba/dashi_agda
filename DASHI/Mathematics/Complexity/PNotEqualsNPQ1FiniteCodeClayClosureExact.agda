@@ -48,6 +48,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExa
 import DASHI.Mathematics.Complexity.PNotEqualsNPGeneratedClosedQ1DiscoveryExact as Generated
 import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
 import DASHI.Mathematics.Complexity.PNotEqualsNPReachableRewriteGeneratedQ1Exact as ReachableGenerated
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as CandidateAdmission
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
@@ -363,6 +364,36 @@ q1ReachableRewriteGeneratedRecurrenceFiniteCodeContradictsSATInP
   q1FiniteCodeContradictsSATInP
     satP
     (ReachableGenerated.reachableConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Strongest authority-separated recurrence.
+--
+-- The machine emits only finite candidate data.  Semantic congruence and the
+-- all-overhead fit are attached afterward as admission theorems about the exact
+-- terminal candidate.
+------------------------------------------------------------------------
+
+q1AdmittedFiniteCandidateRecurrenceContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      CandidateAdmission.AdmittedFiniteCandidateStateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (CandidateAdmission.admittedFiniteConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1AdmittedFiniteCandidateRecurrenceContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (CandidateAdmission.admittedFiniteConstructorToQ2StepSystem constructor)
     initial
     q1Semantics
 
