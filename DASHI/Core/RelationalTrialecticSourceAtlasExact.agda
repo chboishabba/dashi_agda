@@ -290,6 +290,32 @@ rokitaDauvermannDonohoeReview =
     "supports a broad association between adverse early social experience and poorer social-cognitive performance in clinical populations; it does not establish a universal individual effect or the later DASHI anisotropic-threat model"
     Source.publicAttribution
 
+
+sojaThirdspace : Source.AttributedSource
+sojaThirdspace =
+  Source.mkNoDOISource
+    "Edward W. Soja"
+    "Thirdspace: Journeys to Los Angeles and Other Real-and-Imagined Places"
+    "Wiley-Blackwell; ISBN 9781557866752"
+    "1996"
+    "https://www.wiley.com/en-us/Thirdspace%3A+Journeys+to+Los+Angeles+and+Other+Real+and+Imagined+Places-p-9781557866752"
+    Source.academicBookSource
+    "source context for lived/real-and-imagined Thirdspace and spatial trialectics; DASHI does not identify Soja's Thirdspace with its finite triadic face, sheaf, 369 carrier, or trauma model"
+    Source.publicAttribution
+
+deLaCerdaDagninoRFS : Source.AttributedSource
+deLaCerdaDagninoRFS =
+  Source.mkDOISource
+    "Cecilia de la Cerda; Paula Dagnino"
+    "In-Session Reflective Functioning: Relationship With the Presence and Depth of Work on Conflict or Personality Functioning"
+    "Frontiers in Psychology 12:725739"
+    "2021"
+    "10.3389/fpsyg.2021.725739"
+    "https://doi.org/10.3389/fpsyg.2021.725739"
+    Source.academicArticleSource
+    "documents use of the Reflective Functioning Scale and its -1 to 9 eleven-point coding of reflective-functioning passages; supports a measurement interface for mentalizing quality, but does not establish that every RFS implementation independently scores self- versus other-mentalizing or define DASHI's fine ontology"
+    Source.publicAttribution
+
 relationalTrialecticSourceAtlas : Source.AttributedSourceAtlas
 relationalTrialecticSourceAtlas =
   Source.mkSourceAtlas
@@ -316,6 +342,8 @@ relationalTrialecticSourceAtlas =
     ∷ daviesMartinESTR
     ∷ ickesEmpathicAccuracy
     ∷ rokitaDauvermannDonohoeReview
+    ∷ sojaThirdspace
+    ∷ deLaCerdaDagninoRFS
     ∷ [] )
     "Selected empirical/theoretical anchors only. Sources motivate bounded interfaces and distinctions; citations do not import proofs, clinical authority, causal trauma laws, or the DASHI finite/sheaf/369 constructions."
 
