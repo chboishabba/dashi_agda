@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
+import hashlib
 from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
 
 from tree_sitter import Language, Parser
@@ -36,8 +37,17 @@ class Diagnostic:
     found: Optional[str] = None
     fixes: Tuple[SuggestedFix, ...] = field(default_factory=tuple)
 
+    @property
+    def diagnostic_id(self) -> str:
+        payload = (
+            f"{self.path.resolve()}\0{self.code}\0{self.line}\0"
+            f"{self.column}\0{self.message}"
+        ).encode("utf-8")
+        return hashlib.sha256(payload).hexdigest()[:24]
+
     def as_dict(self) -> dict:
         return {
+            "id": self.diagnostic_id,
             "code": self.code,
             "message": self.message,
             "path": str(self.path),
