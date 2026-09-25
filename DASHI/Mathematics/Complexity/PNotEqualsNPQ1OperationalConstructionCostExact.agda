@@ -11,7 +11,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExa
 -- A successful construction run carries:
 --
 --   * the actual Q1 witness;
---   * one emitted cell for every quotient state;
+--   * the actual false/true transition row for every quotient state;
 --   * an auxiliary execution trace for all remaining constructor work.
 --
 -- Its cost is DEFINED as:
@@ -19,9 +19,12 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExa
 --   stateCount + length auxiliaryTrace.
 --
 -- Therefore every successful constructor pays at least one unit for every
--- quotient state before representative-chain/classifier work is counted.
+-- actual quotient transition row before representative-chain/classifier work
+-- is counted.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.Unit using (⊤)
 open import Data.List.Base using (List; length)
@@ -29,9 +32,10 @@ open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
 open import Data.Product using (proj₁)
-open import Data.Vec.Base using (Vec)
+open import Data.Fin.Base using (Fin)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ConstructionChargedRecurrenceExact as Charged
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact as Closed
@@ -54,6 +58,17 @@ q1WitnessStateCount witness =
       (Closed.strictQuotient
         (proj₁ witness)))
 
+q1WitnessQuotient :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  (witness : Recurrence.Q1StateWitness state) →
+  Quotient.RestrictionSemanticQuotient
+    (Bridge.cookToIndexed
+      (Q2.currentFormula state))
+q1WitnessQuotient witness =
+  Strict.quotient
+    (Closed.strictQuotient
+      (proj₁ witness))
+
 ------------------------------------------------------------------------
 -- Normalized constructor execution receipt.
 ------------------------------------------------------------------------
@@ -65,8 +80,31 @@ record OperationalQ1ConstructionRun
     q1Witness :
       Recurrence.Q1StateWitness state
 
-    emittedStateCells :
-      Vec ⊤ (q1WitnessStateCount q1Witness)
+    emittedFalseTarget :
+      (stateIndex : Fin (q1WitnessStateCount q1Witness)) →
+      Fin (q1WitnessStateCount q1Witness)
+
+    emittedTrueTarget :
+      (stateIndex : Fin (q1WitnessStateCount q1Witness)) →
+      Fin (q1WitnessStateCount q1Witness)
+
+    emittedFalseTargetExact :
+      (stateIndex : Fin (q1WitnessStateCount q1Witness)) →
+      emittedFalseTarget stateIndex
+      ≡
+      Quotient.step
+        (q1WitnessQuotient q1Witness)
+        stateIndex
+        false
+
+    emittedTrueTargetExact :
+      (stateIndex : Fin (q1WitnessStateCount q1Witness)) →
+      emittedTrueTarget stateIndex
+      ≡
+      Quotient.step
+        (q1WitnessQuotient q1Witness)
+        stateIndex
+        true
 
     auxiliaryTrace :
       List ⊤
