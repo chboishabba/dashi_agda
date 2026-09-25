@@ -179,18 +179,11 @@ module EndpointUpper
         comm - (terminalMass - initialMass)
         ≤ comm + initialMass
       algebraicUpper =
-        let
-          cancelTerminal :
-            comm + initialMass - terminalMass ≤ comm + initialMass
-          cancelTerminal =
-            ℚP.+-monoʳ-≤
-              (comm + initialMass)
-              (ℚP.neg-antimono-≤ terminalNN)
-        in
         subst
           (λ left → left ≤ comm + initialMass)
           (solve (comm ∷ terminalMass ∷ initialMass ∷ []))
-          cancelTerminal
+          (Rational.subtractNonnegativeBelow
+            (comm + initialMass) terminalMass terminalNN)
     in
     subst
       (λ left → left ≤ comm + initialMass)
