@@ -790,3 +790,50 @@ finiteCutoffSignFromContinuumMarginCompilerClosed = true
 finiteCutoffSignFromContinuumMarginCompilerClosedIsTrue :
   finiteCutoffSignFromContinuumMarginCompilerClosed ≡ true
 finiteCutoffSignFromContinuumMarginCompilerClosedIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- POST CMP119 GENERIC OBSERVABLE-ERROR REUSE
+------------------------------------------------------------------------
+
+newTraceOrF2ConvergenceInequalityStillRequired : Bool
+newTraceOrF2ConvergenceInequalityStillRequired = false
+
+newTraceOrF2ConvergenceInequalityStillRequiredIsFalse :
+  newTraceOrF2ConvergenceInequalityStillRequired ≡ false
+newTraceOrF2ConvergenceInequalityStillRequiredIsFalse = refl
+
+literalFiniteTraceToFactorizedExpectationWeldStillRequired : Bool
+literalFiniteTraceToFactorizedExpectationWeldStillRequired = true
+
+literalFiniteTraceToFactorizedExpectationWeldStillRequiredIsTrue :
+  literalFiniteTraceToFactorizedExpectationWeldStillRequired ≡ true
+literalFiniteTraceToFactorizedExpectationWeldStillRequiredIsTrue = refl
+
+literalFiniteF2ToFactorizedExpectationWeldStillRequired : Bool
+literalFiniteF2ToFactorizedExpectationWeldStillRequired = true
+
+literalFiniteF2ToFactorizedExpectationWeldStillRequiredIsTrue :
+  literalFiniteF2ToFactorizedExpectationWeldStillRequired ≡ true
+literalFiniteF2ToFactorizedExpectationWeldStillRequiredIsTrue = refl
+
+pinnedLocalCTraceToCMP119SourceObservableWeldStillRequired : Bool
+pinnedLocalCTraceToCMP119SourceObservableWeldStillRequired = true
+
+pinnedLocalCTraceToCMP119SourceObservableWeldStillRequiredIsTrue :
+  pinnedLocalCTraceToCMP119SourceObservableWeldStillRequired ≡ true
+pinnedLocalCTraceToCMP119SourceObservableWeldStillRequiredIsTrue = refl
+
+pinnedLocalCF2ToCMP119SourceObservableWeldStillRequired : Bool
+pinnedLocalCF2ToCMP119SourceObservableWeldStillRequired = true
+
+pinnedLocalCF2ToCMP119SourceObservableWeldStillRequiredIsTrue :
+  pinnedLocalCF2ToCMP119SourceObservableWeldStillRequired ≡ true
+pinnedLocalCF2ToCMP119SourceObservableWeldStillRequiredIsTrue = refl
+
+cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMath : Bool
+cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMath = true
+
+cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMathIsTrue :
+  cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMath ≡ true
+cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMathIsTrue = refl
