@@ -38,6 +38,8 @@ import DASHI.Foundations.RelationalDepthBidescentExact as Bidescent
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Groth
 import DASHI.Foundations.RelationalStageTwelveSiteExact as Site
 import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact as CellDescent
+import DASHI.Reasoning.TrialecticGrothendieckCellPresheafExact as CellPresheaf
+import DASHI.Reasoning.TrialecticGrothendieckTransportCoherenceExact as TransportCoherence
 import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact as TwoCell
 
 data HigherDescentFeature : Set where
@@ -49,6 +51,8 @@ data HigherDescentFeature : Set where
   relationalDepthBidescent : HigherDescentFeature
   typedTransportFamily : HigherDescentFeature
   extensionalTransportGroupoidAction : HigherDescentFeature
+  nonconstantSetValuedSitePresheaf : HigherDescentFeature
+  cyclicRestrictionTransportCoherence : HigherDescentFeature
 
   transportGroupoid : HigherDescentFeature
   groupoidValuedPresheaf : HigherDescentFeature
@@ -70,6 +74,8 @@ featureConstructed faceMediationInterface = true
 featureConstructed relationalDepthBidescent = true
 featureConstructed typedTransportFamily = true
 featureConstructed extensionalTransportGroupoidAction = true
+featureConstructed nonconstantSetValuedSitePresheaf = true
+featureConstructed cyclicRestrictionTransportCoherence = true
 
 featureConstructed transportGroupoid = false
 featureConstructed groupoidValuedPresheaf = false
@@ -137,6 +143,17 @@ transportGroupoidActionBoundary :
 transportGroupoidActionBoundary =
   GroupoidAction.canonicalRelationalTransportGroupoidActionBoundary
 
+
+cellPresheafBoundary :
+  CellPresheaf.TrialecticGrothendieckCellPresheafBoundary
+cellPresheafBoundary =
+  CellPresheaf.canonicalTrialecticGrothendieckCellPresheafBoundary
+
+transportCoherenceBoundary :
+  TransportCoherence.TrialecticGrothendieckTransportCoherenceBoundary
+transportCoherenceBoundary =
+  TransportCoherence.canonicalTrialecticGrothendieckTransportCoherenceBoundary
+
 bidescentBoundary :
   Bidescent.RelationalDepthBidescentBoundary
 bidescentBoundary =
@@ -153,7 +170,6 @@ existingStackPromotionObligation =
 
 data NextHigherDescentObligation : Set where
   indexTransportOverRelationalSite : NextHigherDescentObligation
-  proveRestrictionTransportCoherence : NextHigherDescentObligation
   constructOverlapCocycleTwoMorphisms : NextHigherDescentObligation
   proveCocycleCoherence : NextHigherDescentObligation
   constructDescentMorphisms : NextHigherDescentObligation
@@ -165,7 +181,6 @@ nextHigherDescentObligations :
   List NextHigherDescentObligation
 nextHigherDescentObligations =
   indexTransportOverRelationalSite
-  ∷ proveRestrictionTransportCoherence
   ∷ constructOverlapCocycleTwoMorphisms
   ∷ proveCocycleCoherence
   ∷ constructDescentMorphisms
@@ -205,6 +220,8 @@ record TrialecticHigherDescentPromotionBoundary : Set where
     depthBidescentInterfaceReady : Bool
     transportFamilyReady : Bool
     extensionalTransportGroupoidActionReady : Bool
+    setValuedSitePresheafReady : Bool
+    cyclicRestrictionTransportCoherenceReady : Bool
     strictTransportGroupoidReady : Bool
     groupoidPresheafReady : Bool
     cocycleTwoMorphismsReady : Bool
@@ -216,6 +233,8 @@ canonicalTrialecticHigherDescentPromotionBoundary :
   TrialecticHigherDescentPromotionBoundary
 canonicalTrialecticHigherDescentPromotionBoundary =
   trialectic-higher-descent-promotion-boundary
+    true
+    true
     true
     true
     true
