@@ -13,6 +13,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 
 import DASHI.Core.RelationalTrialecticSourceAtlasExact
+import DASHI.Core.RelationalTrialecticDisambiguationExact
 import DASHI.Core.RelationalSelfStalkExact
 import DASHI.Core.RelationalSelfDescentExact
 import DASHI.Core.RelationalTransportDescentSheafExact
