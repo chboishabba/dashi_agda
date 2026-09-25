@@ -125,12 +125,12 @@ restrictComposition g (Site.idR _) section = refl
 restrictComposition Site.abToGlobal Site.aToAB boundary = refl
 restrictComposition Site.abToGlobal Site.bToAB boundary = refl
 restrictComposition Site.bcToGlobal Site.bToBC boundary =
-  sym (Cell.bShared boundary)
+  Cell.bShared boundary
 restrictComposition Site.bcToGlobal Site.cToBC boundary = refl
 restrictComposition Site.caToGlobal Site.cToCA boundary =
-  sym (Cell.cShared boundary)
+  Cell.cShared boundary
 restrictComposition Site.caToGlobal Site.aToCA boundary =
-  Cell.aShared boundary
+  sym (Cell.aShared boundary)
 
 ------------------------------------------------------------------------
 -- 5. Alternate global routes agree exactly by overlap compatibility.
