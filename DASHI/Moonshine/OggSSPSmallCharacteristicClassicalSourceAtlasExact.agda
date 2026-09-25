@@ -28,7 +28,9 @@ module DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Nat using (_%_)
 
 import DASHI.Core.AttributedSourceCore as Source
 
@@ -184,11 +186,13 @@ p2ClassicalSameObjectGrade =
 -- provenance; they do not name a second coarse geometric j-class downstairs.
 ------------------------------------------------------------------------
 
-j1728Mod2 : Nat
-j1728Mod2 = 0
+j1728Mod2 :
+  1728 % 2 ≡ 0
+j1728Mod2 = refl
 
-j1728Mod3 : Nat
-j1728Mod3 = 0
+j1728Mod3 :
+  1728 % 3 ≡ 0
+j1728Mod3 = refl
 
 data J1728CreatesSecondCoarseClassAtP2 : Set where
 data J1728CreatesSecondCoarseClassAtP3 : Set where
