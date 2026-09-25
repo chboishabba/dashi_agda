@@ -480,3 +480,19 @@ dbNativeFixtureReviewProjectionStaysBelowEventAssembly :
   DbNativeCorpusRegression.fixtureReviewProjectionDoesNotCreateEventAssembly
   ≡ DbNativeCorpusRegression.fixtureReviewProjectionDoesNotCreateEventAssembly
 dbNativeFixtureReviewProjectionStaysBelowEventAssembly = refl
+
+
+dbNativeGroupingReviewDoesNotPayClaimReview :
+  DbNativeCorpus.GroupingReviewIsClaimReview → ⊥
+dbNativeGroupingReviewDoesNotPayClaimReview =
+  DbNativeCorpus.groupingReviewDoesNotPayClaimReview
+
+dbNativeGroupingReviewDoesNotCreateClaimTruth :
+  DbNativeCorpus.GroupingReviewCreatesClaimTruth → ⊥
+dbNativeGroupingReviewDoesNotCreateClaimTruth =
+  DbNativeCorpus.groupingReviewDoesNotCreateClaimTruth
+
+dbNativeFixtureGroupingReviewLeavesClaimsUnreviewed :
+  DbNativeCorpusRegression.fixtureGroupingReviewDoesNotPayClaimReview
+  ≡ DbNativeCorpusRegression.fixtureGroupingReviewDoesNotPayClaimReview
+dbNativeFixtureGroupingReviewLeavesClaimsUnreviewed = refl
