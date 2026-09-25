@@ -39,6 +39,7 @@ import DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact as Cave
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 import DASHI.Biology.EmbodiedCausalConeFeedbackExact as Cone
 import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact as Trialectic
+import DASHI.Cognition.PNF.MemoryCommandSeparationExact as MemoryCommand
 
 ------------------------------------------------------------------------
 -- Finite product-observer carrier.
@@ -192,6 +193,12 @@ sameWorldCanChangeAccessibleCone :
    → ⊥)
 sameWorldCanChangeAccessibleCone =
   Cave.sameWorldCanHaveDifferentAccessiblePlanning
+
+memoryPreservingCommandRevision :
+  ∀ memory →
+  MemoryCommand.MemoryCommandSeparationWitness memory
+memoryPreservingCommandRevision =
+  Cave.memoryCanBePreservedWhileCommandChanges
 
 ------------------------------------------------------------------------
 -- No-promotion permissions.
