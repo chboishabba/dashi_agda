@@ -32,6 +32,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Fin.Base using (Fin)
+open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -44,6 +45,13 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExa
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExact as FutureSAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as Candidate
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
+import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
+import DASHI.Mathematics.Complexity.PNotEqualsNPReachableRewriteGeneratedQ1Exact as Reachable
+import DASHI.Mathematics.Complexity.PNotEqualsNPSelfReferenceAllOverheadBudgetExact as Q1
+import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExact as Operational
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ConstructionChargedRecurrenceExact as Charged
 
 ------------------------------------------------------------------------
 -- Local terminal/arity admission data.
@@ -396,6 +404,116 @@ arityTerminalAdmissionBuildsSemanticCongruence
       sameGeneratedStateContainedInFutureEquivalent
         admission
         sameState
+
+------------------------------------------------------------------------
+-- Compile local arity/terminal admission to the existing admitted construction
+-- run.  GeneratedSemanticCongruence is DERIVED, not supplied.
+------------------------------------------------------------------------
+
+derivedClosedQ1 :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (construction : Candidate.FiniteCandidateConstructionRun state)
+    (admission :
+      ArityTrackedTerminalAdmission
+        (Candidate.transitionCandidate
+          (Candidate.finiteCandidate construction))) →
+  RewriteGenerated.toClosedStrictRepresentativeQuotient
+    (Reachable.toRewriteGeneratedClosedQuotient
+      (Candidate.admitFiniteQ1Candidate
+        (Candidate.finiteCandidate construction)
+        (arityTerminalAdmissionBuildsSemanticCongruence admission)))
+  ≡
+  RewriteGenerated.toClosedStrictRepresentativeQuotient
+    (Reachable.toRewriteGeneratedClosedQuotient
+      (Candidate.admitFiniteQ1Candidate
+        (Candidate.finiteCandidate construction)
+        (arityTerminalAdmissionBuildsSemanticCongruence admission)))
+derivedClosedQ1 construction admission =
+  refl
+
+record ArityTerminalAdmittedConstructionRun
+    (state : Q2.BoundedSelfReferenceState) : Set₁ where
+  constructor arity-terminal-admitted-construction-run
+  field
+    construction :
+      Candidate.FiniteCandidateConstructionRun state
+
+    localAdmission :
+      ArityTrackedTerminalAdmission
+        (Candidate.transitionCandidate
+          (Candidate.finiteCandidate construction))
+
+    allOverheadFits :
+      Q1.ClosedQuotientAllOverheadFits
+        (RewriteGenerated.toClosedStrictRepresentativeQuotient
+          (Reachable.toRewriteGeneratedClosedQuotient
+            (Candidate.admitFiniteQ1Candidate
+              (Candidate.finiteCandidate construction)
+              (arityTerminalAdmissionBuildsSemanticCongruence
+                localAdmission))))
+        (Recurrence.stateOverhead state)
+
+    machineConstructionAndNextStrict :
+      (Operational.q1WitnessGraphCellCount
+        (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+          (Reachable.toRewriteGeneratedQ1StateWitness
+            (Candidate.admittedFiniteToReachableWitness
+              (Candidate.admitted-finite-q1-state-witness
+                (Candidate.finiteCandidate construction)
+                (arityTerminalAdmissionBuildsSemanticCongruence
+                  localAdmission)
+                allOverheadFits))))
+        + Candidate.machineStepCount construction)
+      +
+      Q2.recursiveMeasure
+        (Charged.q1WitnessNextState
+          state
+          (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+            (Reachable.toRewriteGeneratedQ1StateWitness
+              (Candidate.admittedFiniteToReachableWitness
+                (Candidate.admitted-finite-q1-state-witness
+                  (Candidate.finiteCandidate construction)
+                  (arityTerminalAdmissionBuildsSemanticCongruence
+                    localAdmission)
+                  allOverheadFits)))))
+      <
+      Q2.recursiveMeasure state
+
+open ArityTerminalAdmittedConstructionRun public
+
+arityTerminalRunToAdmittedFiniteRun :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  ArityTerminalAdmittedConstructionRun state →
+  Candidate.AdmittedFiniteCandidateConstructionRun state
+arityTerminalRunToAdmittedFiniteRun run =
+  Candidate.admitted-finite-candidate-construction-run
+    (construction run)
+    (arityTerminalAdmissionBuildsSemanticCongruence
+      (localAdmission run))
+    (allOverheadFits run)
+    (machineConstructionAndNextStrict run)
+
+ArityTerminalAdmittedStateConstructor : Set₁
+ArityTerminalAdmittedStateConstructor =
+  (state : Q2.BoundedSelfReferenceState) →
+  Maybe (ArityTerminalAdmittedConstructionRun state)
+
+arityTerminalConstructorToAdmittedFinite :
+  ArityTerminalAdmittedStateConstructor →
+  Candidate.AdmittedFiniteCandidateStateConstructor
+arityTerminalConstructorToAdmittedFinite constructor state
+    with constructor state
+... | nothing =
+  nothing
+... | just run =
+  just (arityTerminalRunToAdmittedFiniteRun run)
+
+arityTerminalConstructorToQ2StepSystem :
+  ArityTerminalAdmittedStateConstructor →
+  Q2.BoundedSelfReferenceStepSystem
+arityTerminalConstructorToQ2StepSystem constructor =
+  Candidate.admittedFiniteConstructorToQ2StepSystem
+    (arityTerminalConstructorToAdmittedFinite constructor)
 
 ------------------------------------------------------------------------
 -- Stronger consequence: same generated state at a tracked layer determines
