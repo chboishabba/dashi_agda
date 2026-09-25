@@ -85,7 +85,7 @@ module Endgame
       R408.LiteralDynamics.LiteralRHSTrajectoryData
         Time initialTime integrateTo VectorDerivativeOf)
     (C :
-      ModeCarrier.LiteralCutoffModeCarrier.LiteralCutoffModeCarrier
+      ModeCarrier.LiteralModeCarrier.LiteralCutoffModeCarrier
         Time initialTime integrateTo VectorDerivativeOf
         (R408.LiteralDynamics.literalPhysicalTrajectory
           Time initialTime integrateTo VectorDerivativeOf D))
@@ -221,7 +221,7 @@ module Endgame
       compiled = Strict.toPhysicalCriticalSliceData P
       receipt = Strict.strictMarginBuildsPositiveRetainedViscosity P
     in
-    R639.PhysicalSlice.PositiveRetainedViscosityReceipt.retainedViscosityPositive
+    Physical.PositiveRetainedViscosityReceipt.retainedViscosityPositive
       receipt
 
 ------------------------------------------------------------------------
