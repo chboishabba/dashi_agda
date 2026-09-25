@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119FourD1LorentzianTraceToActiveStressExact where
 
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_; _<_; -_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _<_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
@@ -104,7 +104,7 @@ module _
   activeStressIsLorentzianTracePlusTwiceT00 :
     activeStressD1
     ≡
-    lorentzianTraceD1 + ((1 + 1) * t00)
+    lorentzianTraceD1 + ((1ℚ + 1ℚ) * t00)
   activeStressIsLorentzianTracePlusTwiceT00 =
     ℚRing.solve-∀ t00 t11 t22 t33
 
@@ -114,7 +114,7 @@ module _
         lorentzianTraceD1 < 0ℚ
 
       tracePlusTwiceT00Negative :
-        lorentzianTraceD1 + ((1 + 1) * t00) < 0ℚ
+        lorentzianTraceD1 + ((1ℚ + 1ℚ) * t00) < 0ℚ
 
   open TraceToActiveStressInput public
 
@@ -126,8 +126,3 @@ module _
       (λ value → value < 0ℚ)
       (sym activeStressIsLorentzianTracePlusTwiceT00)
       (tracePlusTwiceT00Negative input)
-
-  traceNegativityAloneIsNotActiveNegativity : Set
-  traceNegativityAloneIsNotActiveNegativity =
-    lorentzianTraceD1 < 0ℚ →
-    Set
