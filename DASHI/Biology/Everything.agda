@@ -253,3 +253,7 @@ import DASHI.Biology.WorldRegularityHyperformalismCrossPollinationExact
 
 -- Evolutionary adaptation as world coupling without propositional theory.
 import DASHI.Biology.Evolution.EvolutionaryWorldCouplingTheoryBoundaryExact
+
+------------------------------------------------------------------------
+-- PMDD steroid-sensitivity / histamine-amplification candidate.
+import DASHI.Biology.PMDDHistamineAmplificationExact
