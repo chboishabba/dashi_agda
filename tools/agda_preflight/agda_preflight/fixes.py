@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Tuple
+from typing import Optional, Tuple
 
 
 @dataclass(frozen=True)
@@ -13,8 +13,8 @@ class TextEdit:
     end_line: int
     end_column: int
     replacement: str
-    start_byte: int | None = None
-    end_byte: int | None = None
+    start_byte: Optional[int] = None
+    end_byte: Optional[int] = None
 
     def as_dict(self) -> dict:
         return {
