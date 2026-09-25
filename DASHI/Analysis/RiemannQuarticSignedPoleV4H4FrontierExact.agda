@@ -1668,3 +1668,69 @@ canonicalFarShellAuditTransportedIntoAgdaKernelHere = false
 canonicalFarShellAuditInterpretation : String
 canonicalFarShellAuditInterpretation =
   "Lean transports the existing finite literal-far shell estimates to the exact global canonicalLiteralFarPairSource tsum and audits the scale of that absolute envelope. The shell majorant contains 72*A/sqrt(J); at the canonical linear cutoff this is only a t^(-1/2)-scale envelope component, so the absolute shell route is retained only as a fail-fast audit. The preferred theorem remains the one-sided signed cancellation between the canonical far pair-source tsum and the full theorem-bearing mu/Gamma ordinate integral."
+
+
+------------------------------------------------------------------------
+-- LITERAL FAR-MINUS-MU IS THE FINAL HIGH-ZERO THEOREM
+--
+-- Lean now states the remaining analytic obligation directly, without any
+-- internal compensation alias:
+--
+--   (1/2) *
+--   ( canonicalLiteralFarPairSource
+--     - integral Psi_t(x) * mu(x) dx )
+--     < postSixthTerminalResidualMargin.
+--
+-- It also proves that, under the already-paid selected witness conditions
+-- (target-strength floor, signed M6 window, positive quantitative target band,
+-- and the canonical V4 error coordinate), this literal inequality is
+-- equivalent to the selected canonical signed high cut consumed by the
+-- contradiction compiler.
+--
+-- Therefore a uniform proof of this signed cancellation for every hypothetical
+-- off-line zero above the fixed high cutoff eliminates the remaining high-zero
+-- case.  This is not a representation lemma still waiting to be unfolded; it
+-- is the actual open RH analytic theorem on this route.
+------------------------------------------------------------------------
+
+data LiteralFarMinusMuFinalHighCoordinate : Set where
+  literalFarMinusMuSelectedCut :
+    LiteralFarMinusMuFinalHighCoordinate
+  literalFarMinusMuSelectedCutIffCanonical :
+    LiteralFarMinusMuFinalHighCoordinate
+  literalFarMinusMuCompilesHighContradiction :
+    LiteralFarMinusMuFinalHighCoordinate
+  literalFarMinusMuUniformEstimate :
+    LiteralFarMinusMuFinalHighCoordinate
+
+literalFarMinusMuFinalHighStatus :
+  LiteralFarMinusMuFinalHighCoordinate -> V4H4Status
+literalFarMinusMuFinalHighStatus literalFarMinusMuSelectedCut =
+  leanSourceWrittenDonor
+literalFarMinusMuFinalHighStatus literalFarMinusMuSelectedCutIffCanonical =
+  leanSourceWrittenDonor
+literalFarMinusMuFinalHighStatus literalFarMinusMuCompilesHighContradiction =
+  leanSourceWrittenDonor
+literalFarMinusMuFinalHighStatus literalFarMinusMuUniformEstimate =
+  openAnalyticObstruction
+
+literalFarMinusMuCompilerIsSourceWritten :
+  literalFarMinusMuFinalHighStatus literalFarMinusMuCompilesHighContradiction
+    ≡ leanSourceWrittenDonor
+literalFarMinusMuCompilerIsSourceWritten = refl
+
+literalFarMinusMuUniformEstimateRemainsOpen :
+  literalFarMinusMuFinalHighStatus literalFarMinusMuUniformEstimate
+    ≡ openAnalyticObstruction
+literalFarMinusMuUniformEstimateRemainsOpen = refl
+
+literalFarMinusMuFinalHighLeanDonorHead : String
+literalFarMinusMuFinalHighLeanDonorHead =
+  "a59dceb90cdc47748a86ab119b9ce22bb2f103b8"
+
+literalFarMinusMuFinalHighTransportedIntoAgdaKernelHere : Bool
+literalFarMinusMuFinalHighTransportedIntoAgdaKernelHere = false
+
+literalFarMinusMuFinalHighInterpretation : String
+literalFarMinusMuFinalHighInterpretation =
+  "The RH min-cut is now exact. Lean defines the selected literal far-minus-mu high cut using only the canonical far literal pair-source tsum, the full theorem-bearing signed ordinate mu integral, and the terminal residual margin. It source-proves this selected literal statement equivalent to the previously compiled canonical signed high cut and proves that the selected literal statement excludes every hypothetical off-line zero above the fixed high cutoff. Thus the remaining task is not further bookkeeping: it is a uniform one-sided signed cancellation theorem for (1/2)*(Far_W - integral Psi_t*mu). No proof of that new analytic theorem is claimed here."
