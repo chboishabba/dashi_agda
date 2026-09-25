@@ -64,6 +64,33 @@ katzMazur =
     "classical moduli authority for Drinfeld level structures and p-power level structure in bad characteristic; supports marked/group-scheme moduli over the coarse j-line, not the repository's exact finite 369 carrier"
     Source.publicAttribution
 
+
+deligneRapoport : Source.AttributedSource
+deligneRapoport =
+  Source.mkDOISource
+    "Pierre Deligne and Michael Rapoport"
+    "Les schemas de modules de courbes elliptiques"
+    "Modular Functions of One Variable II, Lecture Notes in Mathematics 349, Springer"
+    "1973"
+    "10.1007/978-3-540-37855-6_4"
+    "https://doi.org/10.1007/978-3-540-37855-6_4"
+    Source.academicArticleSource
+    "classical source for the bad-prime model of X0(p): two components meeting at supersingular points, with the two p-isogeny branches represented by Frobenius and Verschiebung; supports the p=3 local node/branch incidence realization, not three distinct supersingular curves"
+    Source.publicAttribution
+
+bertoliniDarmonPrasannaConrad : Source.AttributedSource
+bertoliniDarmonPrasannaConrad =
+  Source.mkDOISource
+    "Massimo Bertolini, Henri Darmon, Kartik Prasanna, and Brian Conrad"
+    "p-adic L-functions and the coniveau filtration on Chow groups"
+    "Journal fur die reine und angewandte Mathematik 731, 21-86"
+    "2017"
+    "10.1515/crelle-2014-0150"
+    "https://doi.org/10.1515/crelle-2014-0150"
+    Source.academicArticleSource
+    "Appendix-level bad-characteristic modular-curve authority used for the exact statement that a supersingular elliptic curve admits a unique Drinfeld cyclic subgroup scheme of order p^r, namely the kernel of the r-fold relative Frobenius; this rules out interpreting the ten DASHI p=2 states as ten distinct Gamma0(4) supersingular level structures"
+    Source.publicAttribution
+
 conrad : Source.AttributedSource
 conrad =
   Source.mkDOISource
@@ -107,7 +134,7 @@ smallCharacteristicClassicalAtlas =
   Source.mkSourceAtlas
     "small-characteristic supersingular/CM/level-structure classical atlas"
     "DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact"
-    (silverman ∷ katzMazur ∷ conrad ∷ elkiesOnoYang ∷ ogg ∷ [])
+    (silverman ∷ katzMazur ∷ deligneRapoport ∷ bertoliniDarmonPrasannaConrad ∷ conrad ∷ elkiesOnoYang ∷ ogg ∷ [])
     "classical authority is partitioned into coarse supersingular classification, CM reduction/optimal-embedding marking, and bad-characteristic level-moduli theory; exact DASHI finite state counts and 369 recognitions remain repository reconstructions unless independently identified"
 
 ------------------------------------------------------------------------
@@ -155,6 +182,16 @@ normalizedOptimalEmbeddingMarkingGrade =
 badPrimeLevelStructureNeedsGroupSchemeModuliGrade :
   ClassicalSupportGrade
 badPrimeLevelStructureNeedsGroupSchemeModuliGrade =
+  directClassicalTheorem
+
+p3DeligneRapoportLocalNodeGrade :
+  ClassicalSupportGrade
+p3DeligneRapoportLocalNodeGrade =
+  directClassicalTheorem
+
+p2UniqueDrinfeldOrderFourSubgroupGrade :
+  ClassicalSupportGrade
+p2UniqueDrinfeldOrderFourSubgroupGrade =
   directClassicalTheorem
 
 p3ThreeStateExtensionQuotientGrade :
@@ -273,6 +310,8 @@ record SmallCharacteristicClassicalSourcingBoundary : Set where
     normalizedOptimalEmbeddingMarkingClassicallySourced : Bool
     badPrimeDrinfeldLevelFrameworkClassicallySourced : Bool
     gamma0PpowerStackSubtletyClassicallySourced : Bool
+    p3DeligneRapoportLocalNodeClassicallySourced : Bool
+    p2UniqueDrinfeldOrderFourSubgroupClassicallySourced : Bool
 
     p3ThreeStateCountClassicallySourced : Bool
     p2TenStateCountClassicallySourced : Bool
@@ -288,7 +327,7 @@ canonicalSmallCharacteristicClassicalSourcingBoundary :
   SmallCharacteristicClassicalSourcingBoundary
 canonicalSmallCharacteristicClassicalSourcingBoundary =
   small-characteristic-classical-sourcing-boundary
-    true true true true true true true
+    true true true true true true true true true
     false false false false
     false false
     true
