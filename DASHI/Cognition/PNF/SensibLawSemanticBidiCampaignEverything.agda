@@ -459,3 +459,24 @@ dbNativeFixtureCandidateReloadsWithoutAdmission :
   DbNativeCorpusRegression.fixtureCandidateReloadsWithoutAdmission
   ≡ DbNativeCorpusRegression.fixtureCandidateReloadsWithoutAdmission
 dbNativeFixtureCandidateReloadsWithoutAdmission = refl
+
+
+dbNativeReviewProjectionDoesNotCreateEventAssembly :
+  DbNativeCorpus.ReviewQueueProjectionCreatesEventAssembly → ⊥
+dbNativeReviewProjectionDoesNotCreateEventAssembly =
+  DbNativeCorpus.reviewQueueProjectionDoesNotCreateEventAssembly
+
+dbNativeReviewProjectionDoesNotCreatePropositionIdentity :
+  DbNativeCorpus.ReviewQueueProjectionCreatesPropositionIdentity → ⊥
+dbNativeReviewProjectionDoesNotCreatePropositionIdentity =
+  DbNativeCorpus.reviewQueueProjectionDoesNotCreatePropositionIdentity
+
+dbNativeReviewProjectionDoesNotCreateTruth :
+  DbNativeCorpus.ReviewQueueProjectionCreatesClaimTruth → ⊥
+dbNativeReviewProjectionDoesNotCreateTruth =
+  DbNativeCorpus.reviewQueueProjectionDoesNotCreateClaimTruth
+
+dbNativeFixtureReviewProjectionStaysBelowEventAssembly :
+  DbNativeCorpusRegression.fixtureReviewProjectionDoesNotCreateEventAssembly
+  ≡ DbNativeCorpusRegression.fixtureReviewProjectionDoesNotCreateEventAssembly
+dbNativeFixtureReviewProjectionStaysBelowEventAssembly = refl
