@@ -46,6 +46,7 @@ record RealPhysicalTraceAnomalyInput
         (Cylinder.Converges algebra))
     (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     {measure : Physical.PhysicalFiniteYMMeasure Configuration ℝ}
+    (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -94,6 +95,7 @@ open RealPhysicalTraceAnomalyInput public
 
 selectedCMP119TraceIdentity :
   ∀ {Configuration Action algebra quotientAuthority measure}
+    (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -117,7 +119,7 @@ selectedCMP119TraceIdentity :
     (F2.realFieldStrengthSquare
       (F2Positive.curvature (f2Positivity input)))
 selectedCMP119TraceIdentity
-    laws strict embedding convention gibbs exponential fullSupport input =
+    division laws strict embedding convention gibbs exponential fullSupport input =
   trans
     (Anomaly.selectedCMP119TraceIsPhysicalSU2BetaF2
       (anomalyWeld input))
@@ -129,6 +131,7 @@ selectedCMP119TraceIdentity
 
 partitionPositive :
   ∀ {Configuration Action algebra quotientAuthority measure}
+    (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -145,7 +148,7 @@ partitionPositive :
         gibbs exponential fullSupport) →
   0ℝ <ℝ Physical.partitionFunction measure
 partitionPositive
-    laws strict embedding convention gibbs exponential fullSupport input =
+    division laws strict embedding convention gibbs exponential fullSupport input =
   Partition.partitionFunctionStrictlyPositive
     strict laws
     (Partition.quotientNonzeroSemanticsFromDivision
@@ -154,6 +157,7 @@ partitionPositive
 
 f2NumeratorPositive :
   ∀ {Configuration Action algebra quotientAuthority measure}
+    (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -174,13 +178,14 @@ f2NumeratorPositive :
     (F2.realFieldStrengthSquare
       (F2Positive.curvature (f2Positivity input)))
 f2NumeratorPositive
-    laws strict embedding convention gibbs exponential fullSupport input =
+    division laws strict embedding convention gibbs exponential fullSupport input =
   F2Positive.realPhysicalF2NumeratorStrictlyPositive
     strict embedding fullSupport
     (f2Positivity input)
 
 selectedQuantumTraceNegative :
   ∀ {Configuration Action algebra quotientAuthority measure}
+    (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -197,20 +202,21 @@ selectedQuantumTraceNegative :
         gibbs exponential fullSupport) →
   Anomaly.selectedCMP119QuantumTraceNumerator (anomalyWeld input) <ℝ 0ℝ
 selectedQuantumTraceNegative
-    laws strict embedding convention gibbs exponential fullSupport input =
+    division laws strict embedding convention gibbs exponential fullSupport input =
   subst
     (λ value → value <ℝ 0ℝ)
     (sym
       (selectedCMP119TraceIdentity
-        laws strict embedding convention gibbs exponential fullSupport input))
+        division laws strict embedding convention gibbs exponential fullSupport input))
     (Strict.negativeTimesPositive strict
       (Trace.realSU2TraceCoefficientNegative
         strict embedding convention)
       (f2NumeratorPositive
-        laws strict embedding convention gibbs exponential fullSupport input))
+        division laws strict embedding convention gibbs exponential fullSupport input))
 
 selectedActiveConnectedNumeratorNegative :
   ∀ {Configuration Action algebra quotientAuthority measure}
+    (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
@@ -227,12 +233,12 @@ selectedActiveConnectedNumeratorNegative :
         gibbs exponential fullSupport) →
   selectedActiveConnectedNumerator input <ℝ 0ℝ
 selectedActiveConnectedNumeratorNegative
-    laws strict embedding convention gibbs exponential fullSupport input =
+    division laws strict embedding convention gibbs exponential fullSupport input =
   subst
     (λ value → value <ℝ 0ℝ)
     (sym (selectedActiveIsPartitionTimesQuantumTrace input))
     (Strict.positiveTimesNegative strict
       (partitionPositive
-        laws strict embedding convention gibbs exponential fullSupport input)
+        division laws strict embedding convention gibbs exponential fullSupport input)
       (selectedQuantumTraceNegative
-        laws strict embedding convention gibbs exponential fullSupport input))
+        division laws strict embedding convention gibbs exponential fullSupport input))
