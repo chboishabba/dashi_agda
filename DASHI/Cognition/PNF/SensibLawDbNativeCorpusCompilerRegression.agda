@@ -175,3 +175,30 @@ fixtureReviewProjectionDoesNotCreateTruth :
   Scale.ReconciliationReviewProjection.createsClaimTruth fixtureReviewProjection
   ≡ false
 fixtureReviewProjectionDoesNotCreateTruth = refl
+
+
+fixtureReviewedGroupingMaterialization :
+  Scale.ReviewedGroupingMaterialization
+fixtureReviewedGroupingMaterialization =
+  Scale.reviewed-grouping-materialization
+    "proposition:reconciliation:fixture"
+    "proposition-fingerprint:fixture"
+    "review-item:reconciliation:fixture"
+    "review-command:scale1:fixture"
+    ("claim:reconciliation:fixture" ∷ [])
+    true refl
+    false refl
+    false refl
+    false refl
+
+fixtureGroupingReviewDoesNotPayClaimReview :
+  Scale.ReviewedGroupingMaterialization.claimReviewPaid
+    fixtureReviewedGroupingMaterialization
+  ≡ false
+fixtureGroupingReviewDoesNotPayClaimReview = refl
+
+fixtureGroupingReviewDoesNotPayTruth :
+  Scale.ReviewedGroupingMaterialization.claimTruthPaid
+    fixtureReviewedGroupingMaterialization
+  ≡ false
+fixtureGroupingReviewDoesNotPayTruth = refl
