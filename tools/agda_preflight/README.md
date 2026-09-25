@@ -192,13 +192,41 @@ db.batch_write               one parent transaction
 
 cold_workers
 cold_modules_discovered
+cold_batches
+cold_batch_dependency_surface
+cold_predicted_amplification_milli
 cold_worker_files_parsed
+cold_parse_amplification_milli
+cold_unpredicted_parse_overhead
 ```
 
 `cold_worker_files_parsed` deliberately counts dependency parses inside
-workers as well as requested modules. If it substantially exceeds the closure
-size, worker-level dependency duplication is measurable and becomes the next
-optimization target instead of being hidden by process parallelism.
+workers as well as requested modules. Cold diagnostic targets are now
+partitioned by dependency affinity: each module's transitive dependency set is
+computed from the lightweight import graph, large cones are scheduled first,
+and targets are assigned to a balanced worker whose existing dependency
+surface would grow the least.
+
+Two amplification ratios distinguish scheduler quality from the representation
+limit:
+
+```text
+cold_predicted_amplification_milli
+    scheduler's dependency-surface overlap / unique closure
+
+cold_parse_amplification_milli
+    actual worker parses / unique closure
+
+cold_unpredicted_parse_overhead
+    actual parses beyond the scheduler's predicted dependency surface
+```
+
+If actual amplification approaches predicted amplification, further scheduling
+work has diminishing returns: the remaining duplicate work is the imported AST
+context each process genuinely needs. The next optimization is then a compact
+immutable imported-module interface/snapshot, not another worker heuristic.
+If actual remains materially above predicted, worker ordering/cache behavior is
+still leaving avoidable parsing on the table.
 
 ### Last-known-good semantic catalog
 
