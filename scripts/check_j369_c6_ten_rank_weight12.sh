@@ -13,6 +13,7 @@ targets=(
   DASHI/Moonshine/OggSSPSmallCharacteristicCodecIndexedRecognitionExact.agda
   DASHI/Moonshine/OggSSP369RecognitionFunctorObligationExact.agda
   DASHI/Moonshine/OggSSPCoarseSupersingularJRecognitionNoGoExact.agda
+  DASHI/Moonshine/OggSSPP3F9FrobeniusCandidateNoGoExact.agda
   DASHI/Moonshine/OggSSPSmallCharacteristicArithmeticSourceSocketExact.agda
   DASHI/Moonshine/OggSSPArithmeticTo369RecognitionExact.agda
 )
@@ -78,3 +79,6 @@ grep -q 'P2MarkedArithmeticSource' "${targets[11]}"
 grep -q 'P3ArithmeticTo369Recognition' "${targets[12]}"
 grep -q 'P2ArithmeticTo369Recognition' "${targets[12]}"
 grep -q 'reverseCompatibilityDoesNotBuildArithmeticTo369' "${targets[12]}"
+
+grep -q 'noInjectiveF9OrbitToP3Target' "${targets[11]}"
+grep -q 'wholeF9FrobeniusCarrierRejected' "${targets[12]}"
