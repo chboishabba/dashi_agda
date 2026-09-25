@@ -39,6 +39,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
+import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Reality
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
@@ -66,7 +67,7 @@ module SelectedSelfMultiplierFold
         mode
         (Audit.velocity (Field30.finiteSystem physicalSystem) mode))
     (velocityReality :
-      DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit.RealityCondition
+      Reality.RealityCondition
         (Audit.velocity (Field30.finiteSystem physicalSystem))) where
 
   module Prev =
