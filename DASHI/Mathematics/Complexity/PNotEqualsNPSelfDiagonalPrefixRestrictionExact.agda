@@ -32,7 +32,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Fin.Base using (Fin)
 open import Data.Vec.Base using (Vec; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
@@ -266,6 +266,106 @@ prefixClassificationIsTransitionFold
     quotient
     Family.restrictionRoot
     prefix
+
+------------------------------------------------------------------------
+-- Same folded state gives exact SAT equivalence of literal prefix children.
+------------------------------------------------------------------------
+
+samePrefixStateImpliesSatisfiabilityEquivalent :
+  ∀ {prefixLength remaining : Nat}
+    (root :
+      SAT.BooleanFormula
+        (prefixLength + remaining))
+    (quotient :
+      Quotient.RestrictionSemanticQuotient root)
+    (leftPrefix rightPrefix :
+      Vec Bool prefixLength) ->
+  foldQuotientState
+    quotient
+    leftPrefix
+    (Quotient.classify
+      quotient
+      Family.restrictionRoot)
+  ≡
+  foldQuotientState
+    quotient
+    rightPrefix
+    (Quotient.classify
+      quotient
+      Family.restrictionRoot) ->
+  Quotient.SatisfiabilityEquivalent
+    (restrictPrefix leftPrefix root)
+    (restrictPrefix rightPrefix root)
+samePrefixStateImpliesSatisfiabilityEquivalent
+    root
+    quotient
+    leftPrefix
+    rightPrefix
+    sameFoldedState =
+  Quotient.sameStateImpliesSatisfiabilityEquivalent
+    quotient
+    leftDerivation
+    rightDerivation
+    sameClass
+  where
+    leftDerivation :
+      Family.RestrictionDerivation
+        root
+        (restrictPrefix leftPrefix root)
+    leftDerivation =
+      prefixRestrictionDerivation
+        leftPrefix
+        root
+
+    rightDerivation :
+      Family.RestrictionDerivation
+        root
+        (restrictPrefix rightPrefix root)
+    rightDerivation =
+      prefixRestrictionDerivation
+        rightPrefix
+        root
+
+    leftClassification :
+      Quotient.classify quotient leftDerivation
+      ≡
+      foldQuotientState
+        quotient
+        leftPrefix
+        (Quotient.classify
+          quotient
+          Family.restrictionRoot)
+    leftClassification =
+      prefixClassificationIsTransitionFold
+        root
+        quotient
+        leftPrefix
+
+    rightClassification :
+      Quotient.classify quotient rightDerivation
+      ≡
+      foldQuotientState
+        quotient
+        rightPrefix
+        (Quotient.classify
+          quotient
+          Family.restrictionRoot)
+    rightClassification =
+      prefixClassificationIsTransitionFold
+        root
+        quotient
+        rightPrefix
+
+    sameClass :
+      Quotient.classify quotient leftDerivation
+      ≡
+      Quotient.classify quotient rightDerivation
+    sameClass =
+      trans
+        leftClassification
+        (trans
+          sameFoldedState
+          (sym rightClassification))
 
 ------------------------------------------------------------------------
 -- Concrete P9 interpretation.
