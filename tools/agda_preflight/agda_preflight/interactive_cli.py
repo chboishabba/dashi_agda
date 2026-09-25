@@ -10,6 +10,7 @@ import tempfile
 
 from .source_index import SourceIndex
 from .semantic_catalog import SemanticCatalog
+from .apply_edits import apply_text_edits, EditApplicationError
 from .timing import Profiler
 
 
@@ -176,6 +177,41 @@ def main(argv=None) -> int:
         help="emit benchmark results as JSON",
     )
 
+    apply_fix = subparsers.add_parser(
+        "apply-fix",
+        help="apply an exact suggested edit by diagnostic ID",
+    )
+    apply_fix.add_argument("target", type=Path)
+    apply_fix.add_argument("diagnostic_id")
+    apply_fix.add_argument(
+        "--fix",
+        type=int,
+        default=0,
+        help="fix index on the diagnostic (default: 0)",
+    )
+    apply_fix.add_argument(
+        "--root",
+        type=Path,
+        default=Path.cwd(),
+        help="repository root (default: current directory)",
+    )
+    apply_fix.add_argument(
+        "--index",
+        type=Path,
+        default=Path(".cache/agda_preflight/source-index.sqlite3"),
+        help="persistent source-index database",
+    )
+    apply_fix.add_argument(
+        "--allow-likely",
+        action="store_true",
+        help="allow edits classified as likely; speculative fixes are never applied",
+    )
+    apply_fix.add_argument(
+        "--json",
+        action="store_true",
+        help="emit machine-readable application/recheck result",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "diagnose":
@@ -286,6 +322,75 @@ def main(argv=None) -> int:
             )
 
         return 0
+
+    if args.command == "apply-fix":
+        result, before_profile, _ = _run_diagnose(
+            args.root,
+            args.index,
+            args.target,
+        )
+        diagnostic = next(
+            (
+                item for item in result.diagnostics
+                if item.diagnostic_id == args.diagnostic_id
+            ),
+            None,
+        )
+        if diagnostic is None:
+            parser.error(
+                "diagnostic ID is not present in the current source-index result"
+            )
+        if args.fix < 0 or args.fix >= len(diagnostic.fixes):
+            parser.error(
+                f"diagnostic has {len(diagnostic.fixes)} fix(es); "
+                f"--fix {args.fix} is out of range"
+            )
+
+        fix = diagnostic.fixes[args.fix]
+        if fix.applicability == "speculative":
+            parser.error("speculative fixes cannot be machine-applied")
+        if fix.applicability == "likely" and not args.allow_likely:
+            parser.error(
+                "likely fixes require --allow-likely"
+            )
+        if not fix.edits:
+            parser.error("selected fix has no exact machine-applicable edits")
+
+        try:
+            changed = apply_text_edits(fix.edits)
+        except EditApplicationError as error:
+            parser.error(str(error))
+
+        after, after_profile, _ = _run_diagnose(
+            args.root,
+            args.index,
+            args.target,
+        )
+        resolved = all(
+            item.diagnostic_id != args.diagnostic_id
+            for item in after.diagnostics
+        )
+        payload = {
+            "diagnostic_id": args.diagnostic_id,
+            "fix": fix.as_dict(),
+            "changed_files": [str(path) for path in changed],
+            "resolved": resolved,
+            "before_profile": before_profile.as_dict(),
+            "after_profile": after_profile.as_dict(),
+        }
+
+        if args.json:
+            print(json.dumps(payload, indent=2, sort_keys=True))
+        else:
+            print(f"applied: {fix.title}")
+            for path in changed:
+                print(f"  changed: {path}")
+            print(
+                "recheck: "
+                + ("diagnostic resolved" if resolved else "diagnostic remains")
+            )
+
+        return 0 if resolved else 1
 
     parser.error(f"unknown command: {args.command}")
     return 2
