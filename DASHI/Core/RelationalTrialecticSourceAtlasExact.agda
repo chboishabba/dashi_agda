@@ -316,6 +316,20 @@ deLaCerdaDagninoRFS =
     "documents use of the Reflective Functioning Scale and its -1 to 9 eleven-point coding of reflective-functioning passages; supports a measurement interface for mentalizing quality, but does not establish that every RFS implementation independently scores self- versus other-mentalizing or define DASHI's fine ontology"
     Source.publicAttribution
 
+
+berubeMaltreatmentEmotionRecognition : Source.AttributedSource
+berubeMaltreatmentEmotionRecognition =
+  Source.mkDOISource
+    "Annie Bérubé; Jessica Turgeon; Caroline Blais; Daniel Fiset"
+    "Emotion Recognition in Adults With a History of Childhood Maltreatment: A Systematic Review"
+    "Trauma, Violence, & Abuse 24(1):278-294"
+    "2021"
+    "10.1177/15248380211029403"
+    "https://doi.org/10.1177/15248380211029403"
+    Source.academicArticleSource
+    "supports an anisotropic emotion-recognition boundary: reviewed maltreatment-history groups can show faster/lower-intensity recognition of some negative emotions while other emotion-recognition outcomes are impaired or heterogeneous; this does not establish globally enhanced social cognition"
+    Source.publicAttribution
+
 relationalTrialecticSourceAtlas : Source.AttributedSourceAtlas
 relationalTrialecticSourceAtlas =
   Source.mkSourceAtlas
@@ -344,6 +358,7 @@ relationalTrialecticSourceAtlas =
     ∷ rokitaDauvermannDonohoeReview
     ∷ sojaThirdspace
     ∷ deLaCerdaDagninoRFS
+    ∷ berubeMaltreatmentEmotionRecognition
     ∷ [] )
     "Selected empirical/theoretical anchors only. Sources motivate bounded interfaces and distinctions; citations do not import proofs, clinical authority, causal trauma laws, or the DASHI finite/sheaf/369 constructions."
 
