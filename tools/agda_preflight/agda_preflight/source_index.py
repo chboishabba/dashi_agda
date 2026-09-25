@@ -9,6 +9,7 @@ import time
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from .checker import Checker, Diagnostic
+from .cache_identity import analyzer_fingerprints
 from .fixes import SuggestedFix, TextEdit
 from .timing import Profiler
 from .cold_bootstrap import ImportReceipt, discover_closure, diagnose_paths, worker_count
@@ -82,6 +83,8 @@ class SourceIndex:
         with self.profiler.stage("db.schema"):
             self._configure()
             self._ensure_schema()
+        with self.profiler.stage("cache.identity"):
+            self._ensure_cache_identity()
 
     def close(self) -> None:
         self.connection.close()
@@ -225,6 +228,80 @@ class SourceIndex:
         self.connection.execute(
             "UPDATE meta SET value = ? WHERE key = 'schema_version'",
             (SCHEMA_VERSION,),
+        )
+        self.connection.commit()
+
+    def _ensure_cache_identity(self) -> None:
+        interface_fingerprint, diagnostic_fingerprint = (
+            analyzer_fingerprints()
+        )
+        rows = self.connection.execute(
+            "SELECT key, value FROM meta WHERE key IN (?, ?)",
+            (
+                "interface_analyzer_fingerprint",
+                "diagnostic_analyzer_fingerprint",
+            ),
+        ).fetchall()
+        previous = {
+            row["key"]: row["value"]
+            for row in rows
+        }
+        previous_interface = previous.get(
+            "interface_analyzer_fingerprint"
+        )
+        previous_diagnostic = previous.get(
+            "diagnostic_analyzer_fingerprint"
+        )
+
+        interface_changed = (
+            previous_interface != interface_fingerprint
+        )
+        diagnostic_changed = (
+            previous_diagnostic != diagnostic_fingerprint
+        )
+
+        if interface_changed:
+            cursor = self.connection.execute(
+                "UPDATE modules SET "
+                "api_base_sha256 = '', "
+                "api_fingerprint = '', "
+                "interface_json = '', "
+                "dependency_fingerprint = '', "
+                "diagnostics_json = '', "
+                "top_diagnostic_json = '', "
+                "top_fixable_diagnostic_json = ''"
+            )
+            self.profiler.count(
+                "cache_interface_invalidated_modules",
+                max(0, cursor.rowcount),
+            )
+        elif diagnostic_changed:
+            cursor = self.connection.execute(
+                "UPDATE modules SET "
+                "diagnostics_json = '', "
+                "top_diagnostic_json = '', "
+                "top_fixable_diagnostic_json = ''"
+            )
+            self.profiler.count(
+                "cache_diagnostic_invalidated_modules",
+                max(0, cursor.rowcount),
+            )
+
+        self.connection.execute(
+            "INSERT INTO meta(key, value) VALUES(?, ?) "
+            "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+            (
+                "interface_analyzer_fingerprint",
+                interface_fingerprint,
+            ),
+        )
+        self.connection.execute(
+            "INSERT INTO meta(key, value) VALUES(?, ?) "
+            "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+            (
+                "diagnostic_analyzer_fingerprint",
+                diagnostic_fingerprint,
+            ),
         )
         self.connection.commit()
 
@@ -645,6 +722,9 @@ class SourceIndex:
                     self.profiler.count("closure_cache_miss")
                     return None
                 if not self._fresh(row, stat):
+                    self.profiler.count("closure_cache_miss")
+                    return None
+                if not row["diagnostics_json"]:
                     self.profiler.count("closure_cache_miss")
                     return None
                 modules.append(row["module_name"])
