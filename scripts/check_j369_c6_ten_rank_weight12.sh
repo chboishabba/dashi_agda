@@ -12,6 +12,9 @@ targets=(
   DASHI/Moonshine/OggSSPSmallCharacteristicResidualCodecExact.agda
   DASHI/Moonshine/OggSSPSmallCharacteristicCodecIndexedRecognitionExact.agda
   DASHI/Moonshine/OggSSP369RecognitionFunctorObligationExact.agda
+  DASHI/Moonshine/OggSSPCoarseSupersingularJRecognitionNoGoExact.agda
+  DASHI/Moonshine/OggSSPSmallCharacteristicArithmeticSourceSocketExact.agda
+  DASHI/Moonshine/OggSSPArithmeticTo369RecognitionExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -65,3 +68,13 @@ grep -q 'p3CoarseProjectionHasNoLeftInverse' "${targets[7]}"
 grep -q 'exactLaneKeyAddressDeterminesLane' "${targets[8]}"
 grep -q 'p2RecognitionLaneKey' "${targets[9]}"
 grep -q 'p2FiveOrbitProjectionCannotReopenTenCarrier' "${targets[9]}"
+
+
+grep -q 'noCoarseJPi0SurjectionToP3' "${targets[10]}"
+grep -q 'noCoarseJPi0SurjectionToP2Retained' "${targets[10]}"
+grep -q 'p3ReceiptFrobeniusOrderTwo' "${targets[11]}"
+grep -q 'P3MarkedFrobeniusSource' "${targets[11]}"
+grep -q 'P2MarkedArithmeticSource' "${targets[11]}"
+grep -q 'P3ArithmeticTo369Recognition' "${targets[12]}"
+grep -q 'P2ArithmeticTo369Recognition' "${targets[12]}"
+grep -q 'reverseCompatibilityDoesNotBuildArithmeticTo369' "${targets[12]}"
