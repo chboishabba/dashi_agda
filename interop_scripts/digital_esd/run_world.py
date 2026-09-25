@@ -5,22 +5,29 @@ Normal agent entry point:
 
     python3 interop_scripts/digital_esd/run_world.py
 
-Persistent world state is owned by SLR/PostgreSQL. This wrapper composes the
-existing authority-preserving stages and returns one bounded inspection receipt.
+Persistent world state is owned by SLR/PostgreSQL. JSON/TSV files produced here
+are bounded inspection or compatibility/census surfaces, never the canonical
+semantic database.
 
-The production path is:
+Normal path:
 
-    screening/review/retrieval
-      -> verified/materialised scholarly text
-      -> SCALE-1 DB-native source/region/parser/PNF/reconciliation pipeline
-      -> SLR PostgreSQL world revision
+    explicit screening review / retrieval
+      -> verified bytes
+      -> materialise UTF-8 only
+      -> SCALE-1 DB-native prepare / worker / finalize
+      -> thin compatibility handoff + parse receipts
+      -> exact 43,996-row processing ledger refresh
+      -> PostgreSQL world revision
       -> bounded agent inspection
 
-It deliberately does not materialise corpus-wide nodes.jsonl/edges.jsonl.
+The legacy scholarly parser remains available through
+run_verified_fulltext_parse.py without --materialize-only, but is deliberately
+not run by this world builder.
 """
 
 from __future__ import annotations
 
+import csv
 import hashlib
 import json
 import os
@@ -83,7 +90,7 @@ def run_json(
         print(completed.stderr, file=sys.stderr, end="")
     value = json.loads(completed.stdout)
     if not isinstance(value, dict):
-        raise RuntimeError(f"expected JSON object from {' '.join(cmd)}")
+        raise RuntimeError(f"expected one JSON object from {' '.join(cmd)}")
     return value
 
 
@@ -100,6 +107,13 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
                 raise ValueError(f"{path}:{line_number}: expected JSON object")
             rows.append(row)
     return rows
+
+
+def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as fh:
+        for row in rows:
+            fh.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
 
 def sha256_file(path: Path) -> str:
@@ -127,18 +141,30 @@ def resolve_materialized_path(
     return next((candidate for candidate in candidates if candidate.exists()), candidates[0])
 
 
+def authoritative_ledger(artifact_root: Path) -> Path:
+    reviewed = artifact_root / "screening_ledger_reviewed.tsv"
+    base = artifact_root / "screening_ledger.tsv"
+    if reviewed.exists():
+        return reviewed
+    if base.exists():
+        return base
+    raise FileNotFoundError(f"no screening ledger under {artifact_root}")
+
+
 def maybe_advance_existing_loop(slr_root: Path, artifact_root: Path) -> str:
     loop = HERE / "run_screen_review_retrieve_parse_loop.py"
     if not loop.exists():
         return "loop-wrapper-missing"
 
-    reviewed = artifact_root / "screening_ledger_reviewed.tsv"
-    base = artifact_root / "screening_ledger.tsv"
-    if not reviewed.exists() and not base.exists():
+    try:
+        authoritative_ledger(artifact_root)
+    except FileNotFoundError:
         return "screening-ledger-missing"
 
     decisions = artifact_root / "review" / "completed-decisions.jsonl"
     if decisions.exists() and decisions.stat().st_size > 0:
+        # Deliberately omit --parse-verified. The canonical semantic parse is
+        # SCALE-1 below; this loop owns review/retrieval/full-text verification.
         run(
             [
                 sys.executable,
@@ -150,7 +176,6 @@ def maybe_advance_existing_loop(slr_root: Path, artifact_root: Path) -> str:
                 str(artifact_root),
                 "--decisions",
                 str(decisions),
-                "--parse-verified",
             ],
             cwd=DASHI_ROOT,
         )
@@ -171,7 +196,62 @@ def maybe_advance_existing_loop(slr_root: Path, artifact_root: Path) -> str:
     return "awaiting-explicit-review"
 
 
+def verified_fulltext_count(artifact_root: Path) -> int:
+    path = artifact_root / "fulltext" / "digital_esd_fulltext_index.tsv"
+    if not path.exists():
+        return 0
+    with path.open(newline="", encoding="utf-8") as fh:
+        return sum(
+            1
+            for row in csv.DictReader(fh, delimiter="\t")
+            if row.get("status") == "verified"
+        )
+
+
+def materialize_verified_fulltexts(
+    slr_root: Path,
+    artifact_root: Path,
+) -> dict[str, Any]:
+    count = verified_fulltext_count(artifact_root)
+    if count == 0:
+        return {
+            "verified_fulltext_count": 0,
+            "materialized_text_count": 0,
+            "materialization_failure_count": 0,
+            "legacy_scholarly_parser_invoked": False,
+        }
+
+    script = HERE / "run_verified_fulltext_parse.py"
+    run(
+        [
+            sys.executable,
+            str(script),
+            "--slr-root",
+            str(slr_root),
+            "--artifact-root",
+            str(artifact_root),
+            "--materialize-only",
+            "--allow-partial",
+        ],
+        cwd=DASHI_ROOT,
+    )
+    receipt_path = (
+        artifact_root
+        / "slr-parse"
+        / "verified-fulltext-materialization-run.json"
+    )
+    if not receipt_path.exists():
+        raise FileNotFoundError(
+            f"materialisation command did not emit receipt: {receipt_path}"
+        )
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    if not isinstance(receipt, dict):
+        raise ValueError(f"{receipt_path}: expected object")
+    return receipt
+
+
 def scale1_example_binary(slr_root: Path, env: dict[str, str]) -> Path:
+    # Build exactly once; reuse the executable across every study.
     run(
         [
             "cargo",
@@ -190,8 +270,27 @@ def scale1_example_binary(slr_root: Path, env: dict[str, str]) -> Path:
         target = (slr_root / target).resolve()
     binary = target / "debug" / "examples" / "scale1_long_document"
     if not binary.exists():
-        raise FileNotFoundError(f"SCALE-1 example binary not found after build: {binary}")
+        raise FileNotFoundError(
+            f"SCALE-1 example binary not found after build: {binary}"
+        )
     return binary
+
+
+def merge_receipts_by_source(
+    path: Path,
+    new_rows: list[dict[str, Any]],
+) -> None:
+    by_ref: dict[str, dict[str, Any]] = {}
+    for row in read_jsonl(path):
+        ref = str(row.get("source_identity_reference") or "").strip()
+        if ref:
+            by_ref[ref] = row
+    for row in new_rows:
+        ref = str(row.get("source_identity_reference") or "").strip()
+        if not ref:
+            raise ValueError("compatibility receipt lacks source identity")
+        by_ref[ref] = row
+    write_jsonl(path, [by_ref[ref] for ref in sorted(by_ref)])
 
 
 def compile_materialized_fulltexts(
@@ -199,7 +298,8 @@ def compile_materialized_fulltexts(
     artifact_root: Path,
     env: dict[str, str],
 ) -> dict[str, Any]:
-    receipts_path = artifact_root / "slr-parse" / "materialization-receipts.jsonl"
+    parse_root = artifact_root / "slr-parse"
+    receipts_path = parse_root / "materialization-receipts.jsonl"
     rows = read_jsonl(receipts_path)
     if not rows:
         return {
@@ -208,7 +308,11 @@ def compile_materialized_fulltexts(
             "finalized_sources": 0,
             "failed_sources": 0,
             "failures": [],
-            "parser_model": env.get("DIGITAL_ESD_SCALE1_MODEL", DEFAULT_SCALE1_MODEL),
+            "parser_model": env.get(
+                "DIGITAL_ESD_SCALE1_MODEL",
+                DEFAULT_SCALE1_MODEL,
+            ),
+            "legacy_scholarly_parser_invoked": False,
         }
 
     binary = scale1_example_binary(slr_root, env)
@@ -217,12 +321,17 @@ def compile_materialized_fulltexts(
         "DIGITAL_ESD_SCALE1_PARSER",
         str(slr_root / "scripts" / "scale1_spacy_json_parser.py"),
     )
-    worker_ref = env.get("DIGITAL_ESD_SCALE1_WORKER", "worker:digital-esd:run-world")
+    worker_ref = env.get(
+        "DIGITAL_ESD_SCALE1_WORKER",
+        "worker:digital-esd:run-world",
+    )
     batch_size = env.get("DIGITAL_ESD_SCALE1_BATCH_SIZE", "64")
 
     prepared = 0
     finalized = 0
     failures: list[dict[str, str]] = []
+    handoff_receipts: list[dict[str, Any]] = []
+    parse_receipts: list[dict[str, Any]] = []
 
     for row in rows:
         source_ref = str(row.get("source_identity_reference") or "").strip()
@@ -232,13 +341,23 @@ def compile_materialized_fulltexts(
             or ""
         ).strip()
         artifact_value = str(row.get("artifact_path") or "").strip()
-        expected_digest = str(row.get("content_sha256") or "").lower().removeprefix("sha256:")
+        expected_digest = str(
+            row.get("content_sha256") or ""
+        ).lower().removeprefix("sha256:")
 
-        if not source_ref or not materialization_ref or not artifact_value or not expected_digest:
+        if (
+            not source_ref
+            or not materialization_ref
+            or not artifact_value
+            or not expected_digest
+        ):
             failures.append({
                 "source_identity_reference": source_ref or "<missing>",
                 "stage": "input-validation",
-                "reason": "materialization receipt lacks required identity/path/digest",
+                "reason": (
+                    "materialization receipt lacks required "
+                    "identity/path/digest"
+                ),
             })
             continue
 
@@ -287,6 +406,20 @@ def compile_materialized_fulltexts(
             )
             prepared += 1
             parser_run_ref = str(prepare["parser_run_ref"])
+            source_revision_ref = str(prepare["source_revision_ref"])
+
+            handoff_receipts.append({
+                "schema": "digital-esd-scale1-db-handoff-v1",
+                "source_identity_reference": source_ref,
+                "source_revision_reference": source_revision_ref,
+                "materialization_receipt_reference": materialization_ref,
+                "parser_run_reference": parser_run_ref,
+                "handoff_status": "handed-to-scale1-db",
+                "handed_to_slr": True,
+                "candidate_only": True,
+                "creates_source_truth": False,
+                "creates_source_audit_admission": False,
+            })
 
             run_json(
                 [
@@ -307,20 +440,66 @@ def compile_materialized_fulltexts(
                 env=env,
             )
             if final.get("unattempted_semantic_regions") != 0:
-                raise RuntimeError("finalized source retained unattempted semantic regions")
+                raise RuntimeError(
+                    "finalized source retained unattempted semantic regions"
+                )
             if final.get("source_region_loss_count") != 0:
-                raise RuntimeError("finalized source lost canonical source regions")
+                raise RuntimeError(
+                    "finalized source lost canonical source regions"
+                )
             if final.get("candidate_only") is not True:
-                raise RuntimeError("SCALE-1 final receipt crossed candidate-only boundary")
+                raise RuntimeError(
+                    "SCALE-1 final receipt crossed candidate-only boundary"
+                )
             if final.get("creates_semantic_authority") is not False:
-                raise RuntimeError("SCALE-1 final receipt created semantic authority")
+                raise RuntimeError(
+                    "SCALE-1 final receipt created semantic authority"
+                )
+
+            parse_receipts.append({
+                "schema": "digital-esd-scale1-db-parse-receipt-v1",
+                "source_identity_reference": source_ref,
+                "source_revision_reference": str(
+                    final.get("source_revision_ref") or source_revision_ref
+                ),
+                "content_sha256": expected_digest,
+                "parser_run_reference": parser_run_ref,
+                "parsed": True,
+                "parse_success": True,
+                "compiled_statement_count": int(
+                    final.get("compiled_statement_count") or 0
+                ),
+                "candidate_pnf_count": int(
+                    final.get("candidate_pnf_count") or 0
+                ),
+                "candidate_only": True,
+                "creates_semantic_authority": False,
+                "applicability_promoted": False,
+                "claim_truth_promoted": False,
+                "creates_source_audit_admission": False,
+            })
             finalized += 1
-        except (subprocess.CalledProcessError, KeyError, RuntimeError, json.JSONDecodeError) as exc:
+        except (
+            subprocess.CalledProcessError,
+            KeyError,
+            RuntimeError,
+            json.JSONDecodeError,
+        ) as exc:
             failures.append({
                 "source_identity_reference": source_ref,
                 "stage": "scale1-db-native",
                 "reason": str(exc),
             })
+
+    # These remain compatibility/census surfaces. PostgreSQL is canonical.
+    merge_receipts_by_source(
+        parse_root / "slr-handoff-receipts.jsonl",
+        handoff_receipts,
+    )
+    merge_receipts_by_source(
+        parse_root / "slr-parse-receipts.jsonl",
+        parse_receipts,
+    )
 
     return {
         "materialization_receipts": len(rows),
@@ -329,11 +508,53 @@ def compile_materialized_fulltexts(
         "failed_sources": len(failures),
         "failures": failures[:100],
         "failures_bounded": len(failures) > 100,
+        "compatibility_handoff_receipts_written": len(handoff_receipts),
+        "compatibility_parse_receipts_written": len(parse_receipts),
         "parser_model": model_ref,
         "persistent_state": "PostgreSQL/SLR",
+        "legacy_scholarly_parser_invoked": False,
         "candidate_only": True,
         "creates_semantic_authority": False,
     }
+
+
+def rebuild_processing_ledger(
+    artifact_root: Path,
+) -> Path:
+    parse_root = artifact_root / "slr-parse"
+    fulltext_index = (
+        artifact_root / "fulltext" / "digital_esd_fulltext_index.tsv"
+    )
+    if not fulltext_index.exists():
+        raise FileNotFoundError(fulltext_index)
+
+    processing = parse_root / "study-processing-ledger.jsonl"
+    manifest = parse_root / "study-processing-ledger-manifest.json"
+    cmd = [
+        sys.executable,
+        str(HERE / "build_processing_ledger.py"),
+        "--screening-ledger",
+        str(authoritative_ledger(artifact_root)),
+        "--fulltext-index",
+        str(fulltext_index),
+        "--output-ledger",
+        str(processing),
+        "--output-manifest",
+        str(manifest),
+    ]
+    optional = [
+        ("--materialization-receipts", parse_root / "materialization-receipts.jsonl"),
+        ("--slr-handoff", parse_root / "slr-handoff-receipts.jsonl"),
+        ("--slr-parse-receipts", parse_root / "slr-parse-receipts.jsonl"),
+        ("--slr-review-receipts", parse_root / "slr-review-receipts.jsonl"),
+        ("--source-audit-receipts", parse_root / "source-audit-receipts.jsonl"),
+    ]
+    for flag, path in optional:
+        if path.exists():
+            cmd.extend([flag, str(path)])
+
+    run(cmd, cwd=DASHI_ROOT)
+    return processing
 
 
 def main() -> int:
@@ -343,13 +564,16 @@ def main() -> int:
     env["DIGITAL_ESD_ARTIFACT_ROOT"] = str(artifact_root)
 
     loop_state = maybe_advance_existing_loop(slr_root, artifact_root)
-    scale1_state = compile_materialized_fulltexts(slr_root, artifact_root, env)
-
-    processing_ledger = artifact_root / "slr-parse" / "study-processing-ledger.jsonl"
-    if not processing_ledger.exists():
-        raise FileNotFoundError(
-            f"processing ledger not found after orchestration: {processing_ledger}"
-        )
+    materialization_state = materialize_verified_fulltexts(
+        slr_root,
+        artifact_root,
+    )
+    scale1_state = compile_materialized_fulltexts(
+        slr_root,
+        artifact_root,
+        env,
+    )
+    processing_ledger = rebuild_processing_ledger(artifact_root)
 
     receipt = run_json(
         [
@@ -368,10 +592,12 @@ def main() -> int:
         env=env,
     )
     receipt["orchestration_state"] = loop_state
+    receipt["materialization"] = materialization_state
     receipt["scale1_db_native"] = scale1_state
     receipt["persistent_world_owner"] = "PostgreSQL/SLR"
     receipt["flat_json_is_canonical_runtime_state"] = False
     receipt["corpus_wide_json_graph_emitted"] = False
+    receipt["legacy_scholarly_parser_invoked"] = False
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0
 
