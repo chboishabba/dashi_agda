@@ -1,6 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YangMillsLiteralCMP119ExponentialMomentTheoremExact where
 
+open import Agda.Builtin.Nat using (Nat)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+
 ------------------------------------------------------------------------
 -- T5 theorem-bearing constructor.
 --
@@ -37,9 +40,7 @@ literalCMP119ExponentialMomentTheorem :
     {S :
       Top.LiteralYangMillsSemantics
         (Physical.physicalLiteralCarriers
-          G X Agda.Builtin.Nat.Nat Configuration
-          DASHI.Foundations.RealAnalysisAxioms.ℝ
-          (Configuration → DASHI.Foundations.RealAnalysisAxioms.ℝ)
+          G X Nat Configuration ℝ (Configuration → ℝ)
           Position CurvaturePolynomial LocalOperator OPECoefficient StressTensor
           HilbertSpace Hamiltonian VacuumState)}
     {inputs :
