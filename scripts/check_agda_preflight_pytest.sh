@@ -12,6 +12,7 @@ fi
 REFINE="${AGDA_PREFLIGHT_REFINE:-scope}"
 REPORT="${AGDA_PREFLIGHT_REPORT:-.cache/agda_preflight/report.json}"
 AGDA_REFINE_ARGS="${AGDA_PREFLIGHT_AGDA_ARGS:--i . -i DCHoTT-Agda -i cubical -l standard-library}"
+SCOPE_RUNNER="${AGDA_PREFLIGHT_SCOPE_RUNNER:-}"
 TYPECHECK_RUNNER="${AGDA_PREFLIGHT_TYPECHECK_RUNNER:-}"
 
 mkdir -p "$(dirname "$REPORT")"
@@ -30,9 +31,15 @@ case "$REFINE" in
     ;;
   scope)
     ARGS+=(--agda-auto-refine=scope)
+    if [[ -n "$SCOPE_RUNNER" ]]; then
+      ARGS+=("--agda-scope-runner=$SCOPE_RUNNER")
+    fi
     ;;
   typecheck)
     ARGS+=(--agda-auto-refine=typecheck)
+    if [[ -n "$SCOPE_RUNNER" ]]; then
+      ARGS+=("--agda-scope-runner=$SCOPE_RUNNER")
+    fi
     if [[ -n "$TYPECHECK_RUNNER" ]]; then
       ARGS+=("--agda-typecheck-runner=$TYPECHECK_RUNNER")
     fi
