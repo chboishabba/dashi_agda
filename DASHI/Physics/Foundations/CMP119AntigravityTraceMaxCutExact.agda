@@ -555,3 +555,90 @@ realPhysicalSourceSignCompilerClosedAfterFiveAttachments = true
 realPhysicalSourceSignCompilerClosedAfterFiveAttachmentsIsTrue :
   realPhysicalSourceSignCompilerClosedAfterFiveAttachments ≡ true
 realPhysicalSourceSignCompilerClosedAfterFiveAttachmentsIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- TERMINAL PREFERRED SOURCE CUT: RAW REAL NUMERATOR + SOURCED ANOMALY
+--
+-- This supersedes the older scalar/rational/quadrature/region schedules above.
+-- Historical flags remain for archaeology only.
+------------------------------------------------------------------------
+
+data PhysicalAntigravitySourcedAnomalyLeaf : Set where
+  identifySelectedStressWithCanonicalRawRealConnectedNumerator :
+    PhysicalAntigravitySourcedAnomalyLeaf
+
+  identifyRealSelectedF2WithEmbeddedSixCurvatureFamily :
+    PhysicalAntigravitySourcedAnomalyLeaf
+
+  identifyLiteralRealGibbsWeightWithExpNegativeAction :
+    PhysicalAntigravitySourcedAnomalyLeaf
+
+  attachWeightedF2ContinuityToLiteralProductHaar :
+    PhysicalAntigravitySourcedAnomalyLeaf
+
+  transportSelectedCMP119TraceAndF2ToRenormalizedAnomalyPair :
+    PhysicalAntigravitySourcedAnomalyLeaf
+
+  identifySelectedFourDiagonalActiveSumWithPartitionTimesTraceNumerator :
+    PhysicalAntigravitySourcedAnomalyLeaf
+
+canonicalPhysicalAntigravitySourcedAnomalyLeaves :
+  List PhysicalAntigravitySourcedAnomalyLeaf
+canonicalPhysicalAntigravitySourcedAnomalyLeaves =
+  identifySelectedStressWithCanonicalRawRealConnectedNumerator
+  ∷ identifyRealSelectedF2WithEmbeddedSixCurvatureFamily
+  ∷ identifyLiteralRealGibbsWeightWithExpNegativeAction
+  ∷ attachWeightedF2ContinuityToLiteralProductHaar
+  ∷ transportSelectedCMP119TraceAndF2ToRenormalizedAnomalyPair
+  ∷ identifySelectedFourDiagonalActiveSumWithPartitionTimesTraceNumerator
+  ∷ []
+
+normalizedTwoJCovariancePaysRawConnectedNumeratorDirectly : Bool
+normalizedTwoJCovariancePaysRawConnectedNumeratorDirectly = false
+
+normalizedTwoJCovariancePaysRawConnectedNumeratorDirectlyIsFalse :
+  normalizedTwoJCovariancePaysRawConnectedNumeratorDirectly ≡ false
+normalizedTwoJCovariancePaysRawConnectedNumeratorDirectlyIsFalse = refl
+
+rawRealWilsonGibbsConnectedNumeratorObjectDefined : Bool
+rawRealWilsonGibbsConnectedNumeratorObjectDefined = true
+
+rawRealWilsonGibbsConnectedNumeratorObjectDefinedIsTrue :
+  rawRealWilsonGibbsConnectedNumeratorObjectDefined ≡ true
+rawRealWilsonGibbsConnectedNumeratorObjectDefinedIsTrue = refl
+
+partitionNonzeroTokenSemanticsCompilerOwnedFromDivision : Bool
+partitionNonzeroTokenSemanticsCompilerOwnedFromDivision = true
+
+partitionNonzeroTokenSemanticsCompilerOwnedFromDivisionIsTrue :
+  partitionNonzeroTokenSemanticsCompilerOwnedFromDivision ≡ true
+partitionNonzeroTokenSemanticsCompilerOwnedFromDivisionIsTrue = refl
+
+partitionStrictPositivityCompilerClosedWithoutNeighborhood : Bool
+partitionStrictPositivityCompilerClosedWithoutNeighborhood = true
+
+partitionStrictPositivityCompilerClosedWithoutNeighborhoodIsTrue :
+  partitionStrictPositivityCompilerClosedWithoutNeighborhood ≡ true
+partitionStrictPositivityCompilerClosedWithoutNeighborhoodIsTrue = refl
+
+renormalizedTraceAnomalyAuthorityPinned : Bool
+renormalizedTraceAnomalyAuthorityPinned = true
+
+renormalizedTraceAnomalyAuthorityPinnedIsTrue :
+  renormalizedTraceAnomalyAuthorityPinned ≡ true
+renormalizedTraceAnomalyAuthorityPinnedIsTrue = refl
+
+renormalizedTraceAnomalyAuthorityAlonePaysFiniteCMP119Transport : Bool
+renormalizedTraceAnomalyAuthorityAlonePaysFiniteCMP119Transport = false
+
+renormalizedTraceAnomalyAuthorityAlonePaysFiniteCMP119TransportIsFalse :
+  renormalizedTraceAnomalyAuthorityAlonePaysFiniteCMP119Transport ≡ false
+renormalizedTraceAnomalyAuthorityAlonePaysFiniteCMP119TransportIsFalse = refl
+
+realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachments : Bool
+realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachments = true
+
+realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachmentsIsTrue :
+  realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachments ≡ true
+realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachmentsIsTrue = refl
