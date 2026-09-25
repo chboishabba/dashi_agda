@@ -9,6 +9,7 @@ import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 import DASHI.Physics.Closure.EinsteinPhysicalCouplingCalibrationExact as Physical
+import DASHI.Promotion.NumericMeasuredAuthorityTokenNormalization as Numeric
 
 ------------------------------------------------------------------------
 -- NORMALIZED RATIONAL CALIBRATION + MEASURED PHYSICAL COUPLING BOUNDARY
@@ -198,6 +199,54 @@ codataCandidateKappaInterval = record
       codataCandidateKappaLowerPositive
   ; PhysicalEinsteinCouplingInterval.ordered =
       codataCandidateKappaOrdered
+  }
+
+record TypedKappaDiagnosticProvenance : Set where
+  field
+    sourceCandidate :
+      Physical.EinsteinPhysicalCouplingCandidate
+
+    interval :
+      PhysicalEinsteinCouplingInterval
+
+    sourceCandidateIsCanonical :
+      sourceCandidate
+      ≡ Physical.canonicalEinsteinPhysicalCouplingCandidate
+
+    intervalIsCanonical :
+      interval ≡ codataCandidateKappaInterval
+
+    acceptedAuthorityStillFalse :
+      Numeric.acceptedAuthorityTokenPresent Numeric.gNormalizedToken
+      ≡ false
+
+    numericValueLoadedStillFalse :
+      Numeric.numericValueLoaded Numeric.gNormalizedToken
+      ≡ false
+
+    numericValuePromotedStillFalse :
+      Numeric.numericValuePromoted Numeric.gNormalizedToken
+      ≡ false
+
+open TypedKappaDiagnosticProvenance public
+
+canonicalTypedKappaDiagnosticProvenance :
+  TypedKappaDiagnosticProvenance
+canonicalTypedKappaDiagnosticProvenance = record
+  { TypedKappaDiagnosticProvenance.sourceCandidate =
+      Physical.canonicalEinsteinPhysicalCouplingCandidate
+  ; TypedKappaDiagnosticProvenance.interval =
+      codataCandidateKappaInterval
+  ; TypedKappaDiagnosticProvenance.sourceCandidateIsCanonical =
+      refl
+  ; TypedKappaDiagnosticProvenance.intervalIsCanonical =
+      refl
+  ; TypedKappaDiagnosticProvenance.acceptedAuthorityStillFalse =
+      Numeric.acceptedAuthorityTokenPresentIsFalse Numeric.gNormalizedToken
+  ; TypedKappaDiagnosticProvenance.numericValueLoadedStillFalse =
+      Numeric.numericValueLoadedIsFalse Numeric.gNormalizedToken
+  ; TypedKappaDiagnosticProvenance.numericValuePromotedStillFalse =
+      Numeric.numericValuePromotedIsFalse Numeric.gNormalizedToken
   }
 
 ------------------------------------------------------------------------
