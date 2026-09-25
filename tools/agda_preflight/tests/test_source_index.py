@@ -413,3 +413,62 @@ x = Set
 
     counts = profiler.snapshot().counts
     assert counts["cache_interface_invalidated_modules"] == 1
+
+
+
+def test_diagnostic_fingerprint_refresh_reuses_interfaces_in_parallel(
+    tmp_path,
+    monkeypatch,
+):
+    write_module(
+        tmp_path,
+        "Refresh.Leaf",
+        """
+x : Set
+x = Set
+""",
+    )
+    top = write_module(
+        tmp_path,
+        "Refresh.Top",
+        """
+import Refresh.Leaf
+
+y : Set
+y = Set
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    monkeypatch.setattr(
+        "agda_preflight.source_index.analyzer_fingerprints",
+        lambda: ("interface-v1", "diagnostic-v1"),
+    )
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=Profiler(),
+        jobs=2,
+    ) as index:
+        index.diagnose(top)
+
+    monkeypatch.setattr(
+        "agda_preflight.source_index.analyzer_fingerprints",
+        lambda: ("interface-v1", "diagnostic-v2"),
+    )
+    profiler = Profiler()
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=profiler,
+        jobs=2,
+    ) as index:
+        result = index.diagnose(top)
+
+    counts = profiler.snapshot().counts
+    assert set(result.modules) == {"Refresh.Leaf", "Refresh.Top"}
+    assert counts["cache_diagnostic_invalidated_modules"] == 2
+    assert counts["parallel_refresh_invalid_diagnostics"] == 2
+    assert counts["cold_interface_files_parsed"] == 0
+    assert counts["cold_worker_files_parsed"] == 2
+    assert counts["cold_total_files_parsed"] == 2
