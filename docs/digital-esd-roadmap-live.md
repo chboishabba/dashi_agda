@@ -1192,3 +1192,87 @@ passed verified bytes -> text materialisation -> SLR handoff -> scholarly parse,
 with zero reviewed-evidence and admission promotion. Additional study parsing is
 now blocked on obtaining additional authoritatively retained full-text bytes,
 not on parser architecture.
+
+
+## Situated trajectory cross-pollination recut
+
+The situated-return tranche now reuses broader canonical formalism without
+promoting those source domains into empirical Digital-ESD findings.
+
+The primary situated trajectory retains, independently:
+
+```text
+pedagogical outcome
+capability
+recognition
+reachability
+contestability
+counterfactual context
+memory revision
+evidence provenance
+source independence
+decision autonomy
+benefit / burden / externality incidence
+voice / authority
+control / mediation
+practical exit
+lifecycle position
+temporal position
+economic return
+```
+
+The cross-pollination reuses constructive non-factorability already present
+elsewhere in the repository:
+
+```text
+capability != recognition
+availability != reachability != contestable agency
+intervention label != counterfactual-relative effect
+observed group != individual effect
+formal connection != effective connection != authority
+report/testimony != latent memory reliability
+repeated report != independent corroboration
+collective narrative != individual latent memory state
+remembered content != source origin
+formal family choice != effective intersectional capability
+recognition != distribution != representation
+citation agreement != primary-source support
+perceived independence != provenance independence
+same output != independent generation
+```
+
+This creates an additional corpus-synthesis stop rule:
+
+```text
+raw source count
+!= independent evidential support
+
+citation agreement
+!= direct primary support
+
+repeated result
+!= independent replication
+```
+
+Dependence does not mean zero evidence; it means that provenance/genealogy must
+remain explicit before synthesis treats observations as independent support.
+
+### Formal expansion stop rule
+
+This cross-pollination does not reopen unconstrained framework growth.  The
+framework is now frozen by default.  Further coordinates are admitted only
+when a reviewed/admitted corpus object produces a literal consumer collision
+that the current situated trajectory cannot distinguish.
+
+The execution priority remains:
+
+```text
+screen
+-> retrieve
+-> parse
+-> review canonical evidence
+-> SourceAuditAdmission
+-> framework challenge
+-> corpus-level blind-spot / source-dependence analysis
+```
+
