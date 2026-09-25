@@ -14,6 +14,29 @@ from .apply_edits import apply_text_edits, EditApplicationError
 from .timing import Profiler
 
 
+def _run_next_error(
+    root: Path,
+    index_path: Path,
+    target: Path,
+    *,
+    require_fix: bool,
+    jobs: int,
+):
+    profiler = Profiler()
+    with profiler.stage("request.total"):
+        with SourceIndex(
+            root,
+            index_path,
+            profiler=profiler,
+            jobs=jobs,
+        ) as index:
+            diagnostic = index.next_diagnostic(
+                target,
+                require_fix=require_fix,
+            )
+    return diagnostic, profiler.snapshot()
+
+
 def _run_diagnose(
     root: Path,
     index_path: Path,
@@ -426,20 +449,13 @@ def main(argv=None) -> int:
         return 0 if slo_passed else 1
 
     if args.command == "next-error":
-        result, snapshot, _ = _run_diagnose(
+        diagnostic, snapshot = _run_next_error(
             args.root,
             args.index,
             args.target,
+            require_fix=args.require_fix,
             jobs=args.jobs,
         )
-        candidates = list(result.diagnostics)
-        if args.require_fix:
-            candidates = [
-                item for item in candidates
-                if item.fixes
-            ]
-        candidates.sort(key=_diagnostic_priority)
-        diagnostic = candidates[0] if candidates else None
 
         if args.json:
             print(
