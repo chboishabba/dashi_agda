@@ -72,19 +72,19 @@ _INDEX_SAFE = {
     "TSAGDA020", 
     "TSAGDA028", "TSAGDA029", "TSAGDA030",
     "TSAGDA042", "TSAGDA043", "TSAGDA044", 
-    "TSAGDA046", "TSAGDA047", "TSAGDA048", "TSAGDA049",
-    "TSAGDA050", "TSAGDA051", "TSAGDA052", "TSAGDA053", "TSAGDA054",
+    "TSAGDA046", "TSAGDA047", "TSAGDA048", 
+    "TSAGDA050", "TSAGDA051", "TSAGDA054",
     "TSAGDA056",
     "TSAGDA060", "TSAGDA062", "TSAGDA063", "TSAGDA064", "TSAGDA065",
     "TSAGDA066", "TSAGDA067", "TSAGDA068",
     "TSAGDA070", "TSAGDA071", "TSAGDA073", "TSAGDA074",
-    "TSAGDA077", "TSAGDA078", "TSAGDA079",
+    "TSAGDA077", "TSAGDA078", 
     "TSAGDA080", "TSAGDA081", "TSAGDA082", "TSAGDA083", "TSAGDA085",
     "TSAGDA086", "TSAGDA087", "TSAGDA088", "TSAGDA089",
-    "TSAGDA100", "TSAGDA101", "TSAGDA102", "TSAGDA103", "TSAGDA104",
+    "TSAGDA100", "TSAGDA101", "TSAGDA102", "TSAGDA103", 
     "TSAGDA105",
     "TSAGDA111", "TSAGDA112", "TSAGDA115",
-    "TSAGDA120", "TSAGDA121", "TSAGDA122", "TSAGDA123",
+    
     "TSAGDA130", "TSAGDA131",
     "TSAGDA140", "TSAGDA141", "TSAGDA142", "TSAGDA143",
     "TSAGDA160", "TSAGDA166",
@@ -117,6 +117,15 @@ _SCOPE_REQUIRED = {
 # Kept for future diagnostics whose truth genuinely requires the kernel.
 _TYPECHECK_REQUIRED: Set[str] = {
     "TSAGDA040",  # over-application can depend on result-type unfolding
+    "TSAGDA049",  # projection saturation/pointfree use is a typing judgment
+    "TSAGDA052",  # a bare projection is a valid function value in pointfree contexts
+    "TSAGDA053",  # projection result aliases may unfold to additional functions
+    "TSAGDA079",  # zero shallow arity does not prove a term is non-functional after unfolding
+    "TSAGDA104",  # target/result aliases may unfold to equality propositions
+    "TSAGDA120",  # terms may themselves inhabit Set and validly appear as types
+    "TSAGDA121",  # constructor result aliases require definitional equality
+    "TSAGDA122",  # constructor target may reduce to the datatype under construction
+    "TSAGDA123",  # type-valued projections/terms require typing, not name-class heuristics
     "TSAGDA041",  # under-application / saturation is a typing judgment
     "TSAGDA045",  # clause/signature arity can depend on pointfree eta/type unfolding
     "TSAGDA072",  # constructor/result-head comparison can require synonym unfolding
