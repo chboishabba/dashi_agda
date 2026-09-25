@@ -982,6 +982,46 @@ def test_command_typecheck_runner_uses_exit_code_contract(tmp_path):
     )
     assert backend._argv(path) == ["shadow-check", str(path.resolve())]
 
+
+def test_command_runner_parses_leading_environment_assignments(tmp_path):
+    backend = CommandScopeCheckBackend(
+        "DASHI_NO_TMUX=1 DASHI_SKIP_RSYNC=1 shadow-check {file}",
+        cwd=tmp_path,
+    )
+    assert backend.command == ("shadow-check", "{file}")
+    assert backend.env_overrides == {
+        "DASHI_NO_TMUX": "1",
+        "DASHI_SKIP_RSYNC": "1",
+    }
+
+
+def test_command_runner_passes_environment_assignments_to_subprocess(tmp_path, monkeypatch):
+    path = write_module(tmp_path, "Env.Runner")
+    backend = CommandScopeCheckBackend(
+        "DASHI_NO_TMUX=1 shadow-check {file}",
+        cwd=tmp_path,
+    )
+    captured = {}
+
+    class Completed:
+        returncode = 0
+        stdout = ""
+        stderr = ""
+
+    def fake_run(argv, **kwargs):
+        captured["argv"] = argv
+        captured["env"] = kwargs["env"]
+        return Completed()
+
+    monkeypatch.setattr(
+        "agda_preflight.scope_backend.subprocess.run",
+        fake_run,
+    )
+
+    assert backend._scope_ok(path) is True
+    assert captured["argv"] == ["shadow-check", str(path.resolve())]
+    assert captured["env"]["DASHI_NO_TMUX"] == "1"
+
 def test_command_scope_runner_substitutes_file_placeholder(tmp_path):
     path = write_module(tmp_path, "Runner.Placeholder")
     backend = CommandScopeCheckBackend(
