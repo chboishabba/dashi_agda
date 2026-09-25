@@ -31,6 +31,7 @@ open import Data.Product using (_×_; _,_)
 
 import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureObservationLanguageQuotientExact as FutureLanguage
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Core.TypedDependencyCore as Dependency
 
@@ -100,6 +101,36 @@ admissibilityDoesNotRepairNonFactorability
   Query.queryAdequacyDefectBlocksFactorisation
     (factorisationDefect defect)
     factorisation
+
+asIntersectionalNonFactorability :
+  ∀ {State Action Observation QueryIndex Answer}
+    {problem :
+      AdmissibleConsumerProblem
+        State Action Observation QueryIndex Answer}
+    {query : QueryIndex} →
+  AdmissibleAdequacyDefect problem query →
+  NonFactor.NonFactorabilityWitness
+    (project problem)
+    (Query.answer (semantics problem) query)
+asIntersectionalNonFactorability defect =
+  factorisationDefect defect
+
+admissibleRechartingCannotRecoverErasedConsumer :
+  ∀ {State Action Observation Recharted QueryIndex Answer}
+    {problem :
+      AdmissibleConsumerProblem
+        State Action Observation QueryIndex Answer}
+    {query : QueryIndex} →
+  (rechart : Observation → Recharted) →
+  AdmissibleAdequacyDefect problem query →
+  NonFactor.FactorsThrough
+    (λ state → rechart (project problem state))
+    (Query.answer (semantics problem) query) →
+  ⊥
+admissibleRechartingCannotRecoverErasedConsumer rechart defect =
+  NonFactor.rechartingCannotRecoverErasedPhenomenon
+    rechart
+    (asIntersectionalNonFactorability defect)
 
 ------------------------------------------------------------------------
 -- Future-language safety for the same declared observation surface.
