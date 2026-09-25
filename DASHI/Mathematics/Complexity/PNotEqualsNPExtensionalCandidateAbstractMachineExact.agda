@@ -31,7 +31,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPExtensionalCandidateAbstractMach
 -- self-reference still needs.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Maybe.Base using (Maybe; just; nothing)
@@ -87,7 +87,7 @@ candidateMachine candidate = record
       CandidateConfiguration →
       Set
     accepting (start formula) =
-      Agda.Builtin.Equality._≡_ false true
+      false ≡ true
     accepting (done result) =
       result ≡ true
 
