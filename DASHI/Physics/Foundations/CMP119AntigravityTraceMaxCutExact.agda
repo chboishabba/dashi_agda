@@ -736,3 +736,57 @@ concreteLocalCAnomalyTransportCompilerClosed = true
 concreteLocalCAnomalyTransportCompilerClosedIsTrue :
   concreteLocalCAnomalyTransportCompilerClosed ≡ true
 concreteLocalCAnomalyTransportCompilerClosedIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- QUANTITATIVE FINITE -> LOCAL-C TRANSPORT RECUT
+------------------------------------------------------------------------
+
+exactFiniteToContinuumAnomalyEqualityPreferred : Bool
+exactFiniteToContinuumAnomalyEqualityPreferred = false
+
+exactFiniteToContinuumAnomalyEqualityPreferredIsFalse :
+  exactFiniteToContinuumAnomalyEqualityPreferred ≡ false
+exactFiniteToContinuumAnomalyEqualityPreferredIsFalse = refl
+
+finiteToLocalCTraceVanishingErrorEstimateStillRequired : Bool
+finiteToLocalCTraceVanishingErrorEstimateStillRequired = true
+
+finiteToLocalCTraceVanishingErrorEstimateStillRequiredIsTrue :
+  finiteToLocalCTraceVanishingErrorEstimateStillRequired ≡ true
+finiteToLocalCTraceVanishingErrorEstimateStillRequiredIsTrue = refl
+
+finiteToLocalCF2VanishingErrorEstimateStillRequired : Bool
+finiteToLocalCF2VanishingErrorEstimateStillRequired = true
+
+finiteToLocalCF2VanishingErrorEstimateStillRequiredIsTrue :
+  finiteToLocalCF2VanishingErrorEstimateStillRequired ≡ true
+finiteToLocalCF2VanishingErrorEstimateStillRequiredIsTrue = refl
+
+selectedCutoffTraceErrorInsideContinuumSignMarginStillRequired : Bool
+selectedCutoffTraceErrorInsideContinuumSignMarginStillRequired = true
+
+selectedCutoffTraceErrorInsideContinuumSignMarginStillRequiredIsTrue :
+  selectedCutoffTraceErrorInsideContinuumSignMarginStillRequired ≡ true
+selectedCutoffTraceErrorInsideContinuumSignMarginStillRequiredIsTrue = refl
+
+selectedCutoffF2ErrorInsideContinuumSignMarginStillRequired : Bool
+selectedCutoffF2ErrorInsideContinuumSignMarginStillRequired = true
+
+selectedCutoffF2ErrorInsideContinuumSignMarginStillRequiredIsTrue :
+  selectedCutoffF2ErrorInsideContinuumSignMarginStillRequired ≡ true
+selectedCutoffF2ErrorInsideContinuumSignMarginStillRequiredIsTrue = refl
+
+finiteToLocalCLimitTransportCompilerClosed : Bool
+finiteToLocalCLimitTransportCompilerClosed = true
+
+finiteToLocalCLimitTransportCompilerClosedIsTrue :
+  finiteToLocalCLimitTransportCompilerClosed ≡ true
+finiteToLocalCLimitTransportCompilerClosedIsTrue = refl
+
+finiteCutoffSignFromContinuumMarginCompilerClosed : Bool
+finiteCutoffSignFromContinuumMarginCompilerClosed = true
+
+finiteCutoffSignFromContinuumMarginCompilerClosedIsTrue :
+  finiteCutoffSignFromContinuumMarginCompilerClosed ≡ true
+finiteCutoffSignFromContinuumMarginCompilerClosedIsTrue = refl
