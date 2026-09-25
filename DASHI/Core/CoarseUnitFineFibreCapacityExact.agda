@@ -140,8 +140,7 @@ jFineCoordinateCount = Harmonic.fineFrequencyDimension
 
 jFineCoordinateCountIs19683 :
   jFineCoordinateCount ≡ 19683
-jFineCoordinateCountIs19683 =
-  JEval.jFineCodomainHasRelativeFrequencyDimension
+jFineCoordinateCountIs19683 = refl
 
 jCompletionElementarySectorHas19683Coordinates :
   Harmonic.completionHarmonicDimension ≡ 19683
