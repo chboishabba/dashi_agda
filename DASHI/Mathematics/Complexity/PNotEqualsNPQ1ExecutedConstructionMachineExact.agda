@@ -26,6 +26,11 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExa
 -- It then compiles this stronger receipt back to the existing operational
 -- interface.  Hence all downstream Q2 recurrence machinery can be reused
 -- unchanged while new constructors can stop using an untyped List Unit.
+--
+-- FIREWALL: this is an EXECUTION-ACCOUNTING improvement, not yet the
+-- answer-blindness theorem.  A client-supplied machineStep/decodeWitness could
+-- still hide an omniscient computation unless the machine language itself is
+-- restricted and its primitive semantics are separately audited.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (false; true)
@@ -356,7 +361,14 @@ selectedReachableClassCostExact run derivation =
 --   instantiate ExecutedQ1StateConstructor with the actual quotient /
 --   representative-chain construction algorithm.
 --
--- In particular the new machine interface prevents an unrelated cheap trace
--- from paying for an expensive omniscient constructor: the final machine state
--- must decode to the exact closed-Q1 witness consumed by Q2.
+-- The final machine state must decode to the exact closed-Q1 witness consumed
+-- by Q2, so the execution receipt is no longer an unrelated List Unit.
+--
+-- NOT YET PAID:
+--
+--   answer-blindness / non-omniscience of machineStep and decodeWitness.
+--
+-- That requires a restricted constructor instruction language whose primitives
+-- are source-structural operations and whose semantics do not call SAT or
+-- receive the finished witness as an oracle.
 ------------------------------------------------------------------------
