@@ -355,6 +355,44 @@ graphCellCountPlusLiteralAuthorityPayloadStrict run =
   graphCellCountPlusNextStrict run
 
 ------------------------------------------------------------------------
+-- Ideal two-state quotient specialization.
+--
+-- A two-state quotient still stores:
+--   2 state cells + 4 Boolean transition cells = 6 graph cells.
+------------------------------------------------------------------------
+
+twoStateGraphCellCount :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (witness : Recurrence.Q1StateWitness state) →
+  q1WitnessStateCount witness ≡ 2 →
+  q1WitnessGraphCellCount witness ≡ 6
+twoStateGraphCellCount witness twoStates
+    rewrite q1WitnessGraphCellCountExact witness
+      | twoStates =
+  refl
+
+twoStateLiteralAuthorityThreshold :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : OperationalQ1ConstructionRun state) →
+  q1WitnessStateCount (q1Witness run) ≡ 2 →
+  6
+    +
+    (Size.formulaNodeCount
+      (Authority.closedQuotientSATAuthority
+        (proj₁ (q1Witness run)))
+      +
+      (Q2.programCodeSize state
+        + Q2.rebindingOverhead state))
+  <
+  Q2.recursiveMeasure state
+twoStateLiteralAuthorityThreshold run twoStates
+    rewrite
+      twoStateGraphCellCount
+        (q1Witness run)
+        twoStates =
+  graphCellCountPlusLiteralAuthorityPayloadStrict run
+
+------------------------------------------------------------------------
 -- CLAY CONSEQUENCE
 --
 -- A Q1 mechanism can no longer attach a convenient small Nat to an expensive
