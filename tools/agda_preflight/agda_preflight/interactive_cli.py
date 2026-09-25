@@ -200,12 +200,23 @@ def main(argv=None) -> int:
                 diagnostic.as_dict() for diagnostic in diagnostics
             ]
             payload["profile"] = snapshot.as_dict()
+            payload["semantic"] = {
+                module: item.as_dict()
+                for module, item in sorted(semantic.items())
+            }
             print(json.dumps(payload, indent=2, sort_keys=True))
         else:
             for diagnostic in diagnostics:
                 print(_format_diagnostic(diagnostic))
             if not diagnostics:
                 print("dashi-agda: no structural issues found")
+            if args.semantic_catalog is not None:
+                print(
+                    "semantic snapshots: "
+                    f"{len(semantic)}/{len(result.modules)} "
+                    "(freshness unknown)",
+                    file=sys.stderr,
+                )
             if args.profile:
                 print(_format_profile(snapshot), file=sys.stderr)
 
@@ -220,7 +231,7 @@ def main(argv=None) -> int:
 
         with tempfile.TemporaryDirectory(prefix="dashi-agda-bench-") as tmp:
             cold_index = Path(tmp) / "source-index.sqlite3"
-            _, cold_snapshot = _run_diagnose(root, cold_index, target)
+            _, cold_snapshot, _ = _run_diagnose(root, cold_index, target)
 
         # Prime the persistent warm index once. This prime is deliberately
         # excluded from the warm distribution.
@@ -228,7 +239,7 @@ def main(argv=None) -> int:
 
         warm_snapshots = []
         for _ in range(args.runs):
-            _, snapshot = _run_diagnose(root, args.index, target)
+            _, snapshot, _ = _run_diagnose(root, args.index, target)
             warm_snapshots.append(snapshot)
 
         cold_payload = cold_snapshot.as_dict()
