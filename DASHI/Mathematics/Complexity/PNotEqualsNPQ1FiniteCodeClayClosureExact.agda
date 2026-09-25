@@ -50,6 +50,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPReachableRewriteGeneratedQ1Exact as ReachableGenerated
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as CandidateAdmission
 import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
+import DASHI.Mathematics.Complexity.PNotEqualsNPLocalArityTerminalAdmissionExact as LocalArity
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
@@ -424,6 +425,35 @@ q1ArityTerminalRecurrenceContradictsSATInP
   q1FiniteCodeContradictsSATInP
     satP
     (ArityTerminal.arityTerminalConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Strongest local-transition recurrence.
+--
+-- Global selected-state arity tracking is derived from root arity and the
+-- false/true one-step arity decrement laws.
+------------------------------------------------------------------------
+
+q1LocalArityTerminalRecurrenceContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      LocalArity.LocalArityTerminalAdmittedStateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (LocalArity.localConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1LocalArityTerminalRecurrenceContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (LocalArity.localConstructorToQ2StepSystem constructor)
     initial
     q1Semantics
 
