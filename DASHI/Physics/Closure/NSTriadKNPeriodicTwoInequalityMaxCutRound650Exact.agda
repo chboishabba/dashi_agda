@@ -104,6 +104,7 @@ import DASHI.Physics.Closure.NSTriadKNR650CombinedCommutatorHomogeneityFrontierR
 import DASHI.Physics.Closure.NSTriadKNR650CombinedToLiteralR406Round726Exact as R726
 import DASHI.Physics.Closure.NSTriadKNR650CombinedC1C2CriticalBarrierRound727Exact as R727
 import DASHI.Physics.Closure.NSTriadKNR650CurrentAnalyticCutsetRound728Exact as R728
+import DASHI.Physics.Closure.NSTriadKNR650CombinedToR406PositiveRateNoGoRound729Exact as R729
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -171,6 +172,18 @@ round650CurrentStrictMarginCriticalProductionClosed =
 round650CurrentThreeCoordinatesCompileToCriticalBarrier : Bool
 round650CurrentThreeCoordinatesCompileToCriticalBarrier =
   R728.round728ThreeCoordinatesCompileToCriticalBarrier
+
+round650PositiveRatesAloneCloseCombinedToR406 : Bool
+round650PositiveRatesAloneCloseCombinedToR406 =
+  R729.round729PositiveRatesAloneForceNeededTransportSign
+
+round650PositiveRatesAndPositiveSelfWorkCloseCombinedToR406 : Bool
+round650PositiveRatesAndPositiveSelfWorkCloseCombinedToR406 =
+  R729.round729PositiveRatesAndPositiveSelfWorkForceNeededTransportSign
+
+round650CombinedToR406NeedsAdditionalPhysicalSignedStructure : Bool
+round650CombinedToR406NeedsAdditionalPhysicalSignedStructure =
+  R729.round729AdditionalPhysicalSignedStructureRequired
 
 round650C2RadialSameObjectNormalizationClosed : Bool
 round650C2RadialSameObjectNormalizationClosed =
