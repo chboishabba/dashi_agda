@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityWeightedEquation171ExpectationCompilerExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
@@ -118,5 +119,5 @@ weightedEquation171ExpectationConverges
 weightedEquation171SelectedExpectationCompilerLevel : ProofLevel
 weightedEquation171SelectedExpectationCompilerLevel = machineChecked
 
-newAntigravityExpectationConvergenceAnalysisRequired : Agda.Builtin.Bool.Bool
-newAntigravityExpectationConvergenceAnalysisRequired = Agda.Builtin.Bool.false
+newAntigravityExpectationConvergenceAnalysisRequired : Bool
+newAntigravityExpectationConvergenceAnalysisRequired = false
