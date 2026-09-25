@@ -12,6 +12,8 @@ from .ast_index import AstIndex, build_ast_index, significant_tokens, typed_bind
 from .shapes import shape_from_node, terminal_head, explicit_arity
 from .evidence import DIAGNOSTIC_ALIASES, EvidenceLevel, evidence_name, policy_for
 from .timing import Profiler
+from .fixes import SuggestedFix
+from .fix_engine import enrich_diagnostics
 
 
 
@@ -28,6 +30,11 @@ class Diagnostic:
     evidence: str = "dashi-index"
     minimum_evidence: str = "dashi-index"
     evidence_sufficient: bool = True
+    root_cause: Optional[str] = None
+    explanation: Optional[str] = None
+    expected: Optional[str] = None
+    found: Optional[str] = None
+    fixes: Tuple[SuggestedFix, ...] = field(default_factory=tuple)
 
     def as_dict(self) -> dict:
         return {
@@ -42,6 +49,11 @@ class Diagnostic:
             "evidence": self.evidence,
             "minimum_evidence": self.minimum_evidence,
             "evidence_sufficient": self.evidence_sufficient,
+            "root_cause": self.root_cause,
+            "explanation": self.explanation,
+            "expected": self.expected,
+            "found": self.found,
+            "fixes": [fix.as_dict() for fix in self.fixes],
         }
 
 
@@ -405,6 +417,11 @@ class Checker:
             if key not in seen:
                 seen.add(key)
                 unique.append(d)
+        if self.profiler is None:
+            unique = enrich_diagnostics(self, summary, unique)
+        else:
+            with self.profiler.stage("fixes.generate"):
+                unique = enrich_diagnostics(self, summary, unique)
         result = sorted(unique, key=lambda d: (d.line, d.column, d.code))
         self._diagnostic_cache[path] = list(result)
         return result
