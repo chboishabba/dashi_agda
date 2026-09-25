@@ -38,6 +38,8 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Target
 import DASHI.Moonshine.OggSSPSmallCharacteristicArithmeticSourceSocketExact as Socket
 import DASHI.Physics.Closure.P2LaneInnerProductProof as Receipt
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact as Classical
+import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalClaimMatchExact as ClaimMatch
 
 ------------------------------------------------------------------------
 -- 1. Distinct source-native marked carrier.
@@ -316,6 +318,26 @@ receiptCalibrationDoesNotCreateTenStateClassification :
   ReceiptCalibrationCreatesTenStateClassification -> ⊥
 receiptCalibrationDoesNotCreateTenStateClassification ()
 
+------------------------------------------------------------------------
+-- Classical sourcing attachment.
+------------------------------------------------------------------------
+
+classicalSourceAtlas :
+  Classical.SmallCharacteristicClassicalSourcingBoundary
+classicalSourceAtlas =
+  Classical.canonicalSmallCharacteristicClassicalSourcingBoundary
+
+classicalClaimMatch :
+  ClaimMatch.ClassicalClaimMatchBoundary
+classicalClaimMatch =
+  ClaimMatch.canonicalClassicalClaimMatchBoundary
+
+classicalFrameworkSupportsBadPrimeMarkedLevelStructure : Bool
+classicalFrameworkSupportsBadPrimeMarkedLevelStructure = true
+
+exactTenStatePresentationClassicallyIdentified : Bool
+exactTenStatePresentationClassicallyIdentified = false
+
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
   Attribution.repositoryFormalReconstruction
@@ -331,6 +353,8 @@ record P2RetainedCMMarkedSourceBoundary : Set where
     receiptF4F2CalibrationConsumed : Bool
     receiptGaussianCMLevelFourCalibrationConsumed : Bool
     repositoryFormalReconstruction : Bool
+    classicalBadPrimeLevelFrameworkAttached : Bool
+    exactTenStateClassicallyIdentified : Bool
     externalClassicalX04IdentificationPaid : Bool
     receiptAloneClassifiesTenMarkedStates : Bool
 
@@ -338,4 +362,4 @@ canonicalP2RetainedCMMarkedSourceBoundary :
   P2RetainedCMMarkedSourceBoundary
 canonicalP2RetainedCMMarkedSourceBoundary =
   p2-retained-cm-marked-source-boundary
-    true true true true true true true true false false
+    true true true true true true true true true false false false
