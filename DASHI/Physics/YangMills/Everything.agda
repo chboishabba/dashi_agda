@@ -488,6 +488,11 @@ import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound561Validation
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119QuantitativeMomentsRound559Validation
 import DASHI.Physics.YangMills.YangMillsLiteralCMP119OS05FromMomentsRound560Validation
 
+import DASHI.Physics.YangMills.YangMillsSelectedRepresentedExpectationConvergenceRound549Exact
+import DASHI.Physics.YangMills.YangMillsSelectedRepresentedExpectationConvergenceRound549Validation
+import DASHI.Physics.YangMills.YangMillsClayPreferredA3SelectedClassRound550Exact
+import DASHI.Physics.YangMills.YangMillsClayPreferredA3SelectedClassRound550Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
