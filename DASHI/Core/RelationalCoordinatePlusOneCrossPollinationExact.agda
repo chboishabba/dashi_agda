@@ -36,6 +36,8 @@ import DASHI.Core.NonginOnePointOneArmyRefinementExact as Nongin
 import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact as TSFV
 import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
 import DASHI.Core.ConsumerGuidedReopenableRefinementExact as Refine
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
+import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact as TSFVCaustic
 
 ------------------------------------------------------------------------
 -- 1. Exact arithmetic owners reused, not duplicated.
@@ -119,8 +121,8 @@ nonginRefinement :
 nonginRefinement = Nongin.canonicalOnePointOneRefinement
 
 tsfvCoarseObservationCannotServeHistorySensitiveChoice :
-  DASHI.Core.IntersectionalNonFactorability.FactorsThrough
-    DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact.historyProjection
+  NonFactor.FactorsThrough
+    TSFVCaustic.historyProjection
     TSFV.historySensitiveChoice -> ⊥
 tsfvCoarseObservationCannotServeHistorySensitiveChoice =
   TSFV.causticProjectionInsufficientForHistorySensitiveChoice
