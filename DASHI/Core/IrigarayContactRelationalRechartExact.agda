@@ -21,6 +21,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.IrigarayLabialRelationalCarrierExact as Irigaray
 import DASHI.Core.TernaryRoleCarrierExact as Ternary
+import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
 
 data ContactRechartRole : Set where
   firstAspect : ContactRechartRole
@@ -56,6 +57,8 @@ constitutiveContactIsNotDeclaredMereLack :
   ContactIsMereLack → ⊥
 constitutiveContactIsNotDeclaredMereLack ()
 
+contactNonseparability :
+  Interaction.NonseparableAdditiveInteraction Irigaray.labialContactSurface
 contactNonseparability =
   Irigaray.labialContactIsNotEndpointAdditive
 
