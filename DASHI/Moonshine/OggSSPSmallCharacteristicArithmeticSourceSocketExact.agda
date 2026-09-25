@@ -31,6 +31,7 @@ import DASHI.Core.OrbitStabilizerResidualPresentationExact as Orbit
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge as SSPAuthority
 import DASHI.Physics.Closure.IsospinSplittingFromP3LaneReceipt as P3Receipt
+import DASHI.Physics.Closure.P2LaneInnerProductProof as P2Receipt
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Moonshine.OggSSPP3F9FrobeniusCandidateNoGoExact as F9NoGo
 import DASHI.Moonshine.OggSSPP2F4FrobeniusCandidateNoGoExact as F4NoGo
@@ -136,6 +137,60 @@ record P2MarkedArithmeticSource : Set₁ where
 open P2MarkedArithmeticSource public
 
 ------------------------------------------------------------------------
+-- 3b. Sharpened p=2 marked Gaussian-CM / level-4 source socket.
+--
+-- The existing p=2 receipt supplies calibration only:
+--   F4/F2, Frobenius C2, j=1728, End(E)=Z[i], conductor/level 4.
+--
+-- A theorem-bearing arithmetic source must additionally provide an actual
+-- marked state carrier, action and orbit presentation, and must retain the CM
+-- level/provenance rather than reconstructing it from a coarse state label.
+------------------------------------------------------------------------
+
+data P2CMProvenance : Set where
+  gaussianCMJ1728LevelFour : P2CMProvenance
+
+record P2MarkedLevelCMSource : Set₁ where
+  field
+    baseSource :
+      P2MarkedArithmeticSource
+
+    cmProvenance :
+      P2MarkedArithmeticSource.MarkedState baseSource ->
+      P2CMProvenance
+
+    cmProvenanceConstant :
+      (state : P2MarkedArithmeticSource.MarkedState baseSource) ->
+      cmProvenance state ≡ gaussianCMJ1728LevelFour
+
+    receiptF4F2Calibration :
+      P2Receipt.extensionFieldCardinality
+        P2Receipt.canonicalP2LaneInnerProductProofReceipt
+      ≡ 4
+
+    receiptFrobeniusC2Calibration :
+      P2Receipt.galF4F2IdentifiedWithC2
+        P2Receipt.canonicalP2LaneInnerProductProofReceipt
+      ≡ true
+
+    receiptGaussianCMLevelFourCalibration :
+      P2Receipt.cmConductorLevel
+        P2Receipt.canonicalP2LaneInnerProductProofReceipt
+      ≡ 4
+
+    actualMarkedLevelCMCarrierSupplied : Bool
+    actualMarkedLevelCMCarrierSuppliedIsTrue :
+      actualMarkedLevelCMCarrierSupplied ≡ true
+
+open P2MarkedLevelCMSource public
+
+data P2ReceiptLabelsConstructMarkedLevelCMSource : Set where
+
+p2ReceiptLabelsDoNotConstructMarkedLevelCMSource :
+  P2ReceiptLabelsConstructMarkedLevelCMSource -> ⊥
+p2ReceiptLabelsDoNotConstructMarkedLevelCMSource ()
+
+------------------------------------------------------------------------
 -- 4. Receipt firewall.
 ------------------------------------------------------------------------
 
@@ -175,6 +230,7 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     rawF4FrobeniusCarrierHasThreeOrbitDiagnostic : Bool
     rawF4InsufficientForTenComponentRetainedTarget : Bool
     p2MarkedLevelCMCoverRequired : Bool
+    p2MarkedLevelCMSourceSocketOwned : Bool
     receiptMetadataPromotedToAction : Bool
     p2SourceInhabited : Bool
     p3SourceInhabited : Bool
@@ -186,6 +242,6 @@ canonicalSmallCharacteristicArithmeticSourceBoundary =
   small-characteristic-arithmetic-source-boundary
     true true true true true true true
     true true
-    true true true
+    true true true true
     false false false
     missingP2MarkedArithmeticSource
