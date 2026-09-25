@@ -6,7 +6,7 @@ open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
+open import Relation.Binary.PropositionalEquality using (_≡_; subst; subst₂; sym)
 
 import DASHI.Physics.Foundations.CMP119AntigravityWeakCouplingTraceEnergyNoGoExact as NoGo
 import DASHI.Physics.Foundations.CMP119AntigravityLorentzianF2ContinuationExact as Continuation
@@ -95,13 +95,32 @@ activeScaleNoGoData
 
     marginNN : 0ℚ ≤ margin
     marginNN =
-      subst
-        (λ value → 0ℚ ≤ value)
-        (ℚRing.solve-∀ inverse threshold)
-        (ℚP.+-monoʳ-≤
-          (- threshold)
-          (activeScaleTwiceAnomalyBelowInverseCoupling
-            certificate scale active))
+      let
+        shifted :
+          (- threshold) + threshold
+          ≤
+          (- threshold) + inverse
+        shifted =
+          ℚP.+-monoʳ-≤
+            (- threshold)
+            (activeScaleTwiceAnomalyBelowInverseCoupling
+              certificate scale active)
+
+        leftZero :
+          (- threshold) + threshold ≡ 0ℚ
+        leftZero =
+          ℚRing.solve-∀ threshold
+
+        rightMargin :
+          (- threshold) + inverse ≡ margin
+        rightMargin =
+          ℚRing.solve-∀ inverse threshold
+      in
+      subst₂
+        _≤_
+        leftZero
+        rightMargin
+        shifted
   in record
     { NoGo.WeakCouplingYMTraceEnergyData.kappa =
         anomalyMagnitude certificate
