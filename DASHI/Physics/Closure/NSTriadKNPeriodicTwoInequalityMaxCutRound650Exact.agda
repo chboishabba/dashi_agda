@@ -8,7 +8,8 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact w
 -- critical argument has a typed compiler.  The Clay-facing NEW mathematics is
 -- therefore represented by exactly two analytic leaves:
 --
---   C1  live cutoff-uniform R568 signed commutator spacetime payment;
+--   C1  live cutoff-uniform R723 combined/global signed-commutator payment,
+--       together with the explicit R726 transport onto literal R406;
 --
 --   C2  live physical R98 packet strict-surplus payment by literal R406,
 --       with a positive retained margin delta.
@@ -98,19 +99,26 @@ import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfHelicitySplitRound721Exact
 import DASHI.Physics.Closure.NSTriadKNR650SelfExternalRecombinationRound722Exact as R722
 import DASHI.Physics.Closure.NSTriadKNR650CombinedSelfExternalSpacetimeRound723Exact as R723
 import DASHI.Physics.Closure.NSTriadKNR650CombinedPaymentToWeightedWorkRound724Exact as R724
+import DASHI.Physics.Closure.NSTriadKNR650CombinedCommutatorHomogeneityFrontierRound725Exact as R725
+import DASHI.Physics.Closure.NSTriadKNR650CombinedToLiteralR406Round726Exact as R726
+import DASHI.Physics.Closure.NSTriadKNR650CombinedC1C2CriticalBarrierRound727Exact as R727
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
-  c1LiveSignedCommutatorSpacetimePayment : PeriodicNewNSAnalyticLeaf
+  c1CombinedGlobalCommutatorPayment : PeriodicNewNSAnalyticLeaf
+  c1CombinedToLiteralR406Transport : PeriodicNewNSAnalyticLeaf
   c2PhysicalPacketStrictSurplusPayment : PeriodicNewNSAnalyticLeaf
 
 newNSLeafClosed : PeriodicNewNSAnalyticLeaf → Bool
-newNSLeafClosed c1LiveSignedCommutatorSpacetimePayment =
-  R568.round568LiveCommutatorSpacetimeBudgetClosed
-newNSLeafClosed c2PhysicalPacketStrictSurplusPayment = false
+newNSLeafClosed c1CombinedGlobalCommutatorPayment =
+  R723.round723CombinedCutoffUniformPaymentClosed
+newNSLeafClosed c1CombinedToLiteralR406Transport =
+  R726.round726CombinedToR406TransportClosed
+newNSLeafClosed c2PhysicalPacketStrictSurplusPayment =
+  R727.round727C2StrictMarginPaymentClosed
 
 periodicNewNSAnalyticLeaves : Nat
-periodicNewNSAnalyticLeaves = suc (suc zero)
+periodicNewNSAnalyticLeaves = suc (suc (suc zero))
 
 data PeriodicStandardSourceLeaf : Set where
   c4SmoothInitialToCriticalCeiling : PeriodicStandardSourceLeaf
@@ -121,7 +129,26 @@ periodicStandardSourceLeaves : Nat
 periodicStandardSourceLeaves = suc (suc (suc zero))
 
 round650C1IsExactlyLiveR568Budget : Bool
-round650C1IsExactlyLiveR568Budget = true
+round650C1IsExactlyLiveR568Budget = false
+
+round650R568RemainsAdjacentSufficientProducerLane : Bool
+round650R568RemainsAdjacentSufficientProducerLane = true
+
+round650C1CombinedGlobalCommutatorPaymentClosed : Bool
+round650C1CombinedGlobalCommutatorPaymentClosed =
+  R723.round723CombinedCutoffUniformPaymentClosed
+
+round650C1CombinedToLiteralR406TransportClosed : Bool
+round650C1CombinedToLiteralR406TransportClosed =
+  R726.round726CombinedToR406TransportClosed
+
+round650PositiveEDMassAutomaticallyClosesCombinedC1 : Bool
+round650PositiveEDMassAutomaticallyClosesCombinedC1 =
+  R725.round725PositiveEDMassIsSameObjectAsR723SignedScalar
+
+round650CombinedC1AndStrictMarginC2CompileToCriticalBarrier : Bool
+round650CombinedC1AndStrictMarginC2CompileToCriticalBarrier =
+  R727.round727CombinedC1C2PlusInitialSourceBuildUniformCriticalBarrier
 
 round650C2RadialSameObjectNormalizationClosed : Bool
 round650C2RadialSameObjectNormalizationClosed =
@@ -155,7 +182,10 @@ round650OldFiveItemB1B2B3B4B7CutMandatory : Bool
 round650OldFiveItemB1B2B3B4B7CutMandatory = false
 
 round650ExactlyTwoNewNSAnalyticLeaves : Bool
-round650ExactlyTwoNewNSAnalyticLeaves = true
+round650ExactlyTwoNewNSAnalyticLeaves = false
+
+round650ExactlyThreeCurrentProofBearingAnalyticCoordinates : Bool
+round650ExactlyThreeCurrentProofBearingAnalyticCoordinates = true
 
 round650AllRepresentationCompilersAroundC2Installed : Bool
 round650AllRepresentationCompilersAroundC2Installed = true
