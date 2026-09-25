@@ -25,10 +25,12 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.NonginOnePointOneArmyRefinementExact as Nongin
+import DASHI.Core.NonginOnePointOneFutureSplitExact as NonginDynamic
 import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact as TSFV
 import DASHI.Cognition.PNF.TSFVSemanticQueryFutureSplitExact as TSFVDynamic
 import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact as TSFVCaustic
 import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
+import DASHI.Moonshine.TwistronicsRegistrationControlFutureSplitExact as TwistDynamic
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Base
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.FutureSafeCoarseFibreCapacityExact as FutureCapacity
@@ -105,8 +107,8 @@ canonicalNonginFutureSafetyStatus =
   domain-future-safety-status
     nonginFrameLane
     true true
-    false false false
-    "supply an explicit action language over frame-bearing states and prove which same-1.0 states remain distinguishable under common admissible future traces"
+    true true true
+    "concrete 1.0-to-1.1 surface-frame future split and two-class capacity theorem are instantiated in NonginOnePointOneFutureSplitExact"
 
 canonicalTSFVFutureSafetyStatus : DomainFutureSafetyStatus
 canonicalTSFVFutureSafetyStatus =
@@ -130,8 +132,8 @@ canonicalTwistronicsFutureSafetyStatus =
   domain-future-safety-status
     twistronicsRegistrationLane
     true true
-    false false false
-    "supply a physically attributed evolution/control action system and prove which relative registrations remain distinguishable under the declared effective observable"
+    true false false
+    "physical in-situ twist control action system is sourced and constructed; instantiate RegistrationControlSplitWitness only when an exact equal-before / unequal-after effective-observation pair is established"
 
 ------------------------------------------------------------------------
 -- 4. Cross-domain firewall.
@@ -158,6 +160,6 @@ canonicalNonginTSFVTwistronicsFutureSafetyBoundary :
 canonicalNonginTSFVTwistronicsFutureSafetyBoundary =
   nongin-tsfv-twistronics-future-safety-boundary
     true true
-    false true false false
+    true true false true
     false refl
     false refl
