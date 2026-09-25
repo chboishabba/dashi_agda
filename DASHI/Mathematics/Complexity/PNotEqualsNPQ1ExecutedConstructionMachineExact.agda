@@ -35,7 +35,8 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Fin.Base using (Fin)
 open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Maybe.Base using (Maybe; just; nothing)
-open import Data.Nat.Base using (_<_)
+open import Data.Nat.Base using (_≤_; _<_)
+import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.ComputerScience.FibreProgramComplexityExact as Complexity
@@ -226,20 +227,37 @@ machineStepCountStrictlyBelowCurrentMeasure :
   machineStepCount run
   <
   Q2.recursiveMeasure state
-machineStepCountStrictlyBelowCurrentMeasure run =
-  Operational.runConstructionCostStrictlyBelowCurrentMeasure
-    (executedRunToOperationalRun run)
+machineStepCountStrictlyBelowCurrentMeasure {state} run =
+  NatP.≤-<-trans
+    machineStepsBelowChargedLeft
+    (machineConstructionAndNextStrict run)
   where
-    -- The old run cost is graphCells + machineStepCount, so the inherited
-    -- theorem is stronger than the displayed machine-only bound.  We expose
-    -- the direct machine-only form below through the graph-free inequality.
-    --
-    -- This local declaration is intentionally unused; the actual direct proof
-    -- is supplied by machineStepCountBelowOperationalCost plus transitivity in
-    -- the next owner if a concrete machine requires it.
-    inherited =
-      Operational.runConstructionCostStrictlyBelowCurrentMeasure
-        (executedRunToOperationalRun run)
+    machineStepsBelowGraphPlusSteps :
+      machineStepCount run
+      ≤
+      Operational.q1WitnessGraphCellCount (q1Witness run)
+        + machineStepCount run
+    machineStepsBelowGraphPlusSteps =
+      NatP.m≤n+m
+        (machineStepCount run)
+        (Operational.q1WitnessGraphCellCount (q1Witness run))
+
+    machineStepsBelowChargedLeft :
+      machineStepCount run
+      ≤
+      (Operational.q1WitnessGraphCellCount (q1Witness run)
+        + machineStepCount run)
+      +
+      Q2.recursiveMeasure
+        (Charged.q1WitnessNextState state (q1Witness run))
+    machineStepsBelowChargedLeft =
+      NatP.≤-trans
+        machineStepsBelowGraphPlusSteps
+        (NatP.m≤m+n
+          (Operational.q1WitnessGraphCellCount (q1Witness run)
+            + machineStepCount run)
+          (Q2.recursiveMeasure
+            (Charged.q1WitnessNextState state (q1Witness run))))
 
 ------------------------------------------------------------------------
 -- Existing executable reachable-class selector is immediately available once
