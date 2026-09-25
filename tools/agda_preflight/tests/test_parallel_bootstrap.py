@@ -4,6 +4,7 @@ from pathlib import Path
 import sqlite3
 
 from agda_preflight.source_index import SourceIndex
+from agda_preflight.cold_bootstrap import ImportReceipt, dependency_affinity_batches
 from agda_preflight.timing import Profiler
 
 
@@ -133,3 +134,73 @@ mk = record { witnes = Set }
         for item in parallel.diagnostics
     ]
     assert parallel_view == sequential_view
+
+
+
+def test_dependency_affinity_batches_cluster_shared_foundations():
+    receipts = (
+        ImportReceipt("/tmp/A.Root.agda", "A.Root", ("A.Left", "A.Right")),
+        ImportReceipt("/tmp/A.Left.agda", "A.Left", ("Shared.A",)),
+        ImportReceipt("/tmp/A.Right.agda", "A.Right", ("Shared.A",)),
+        ImportReceipt("/tmp/B.Root.agda", "B.Root", ("B.Left", "B.Right")),
+        ImportReceipt("/tmp/B.Left.agda", "B.Left", ("Shared.B",)),
+        ImportReceipt("/tmp/B.Right.agda", "B.Right", ("Shared.B",)),
+        ImportReceipt("/tmp/Shared.A.agda", "Shared.A", ()),
+        ImportReceipt("/tmp/Shared.B.agda", "Shared.B", ()),
+    )
+
+    batches = dependency_affinity_batches(receipts, jobs=2)
+    assert len(batches) == 2
+    assert sorted(len(batch) for batch in batches) == [4, 4]
+
+    module_batches = [
+        {item.module_name for item in batch}
+        for batch in batches
+    ]
+
+    a_family = {"A.Root", "A.Left", "A.Right", "Shared.A"}
+    b_family = {"B.Root", "B.Left", "B.Right", "Shared.B"}
+
+    assert any(a_family <= batch for batch in module_batches)
+    assert any(b_family <= batch for batch in module_batches)
+
+
+def test_affinity_parallel_bootstrap_reports_parse_amplification(tmp_path):
+    write_module(tmp_path, "Shared.Base", "base : Set\nbase = Set\n")
+    write_module(
+        tmp_path,
+        "Q.Left",
+        "import Shared.Base\nleft : Set\nleft = Set\n",
+    )
+    write_module(
+        tmp_path,
+        "Q.Right",
+        "import Shared.Base\nright : Set\nright = Set\n",
+    )
+    top = write_module(
+        tmp_path,
+        "Q.Top",
+        "import Q.Left\nimport Q.Right\ntop : Set\ntop = Set\n",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+    profiler = Profiler()
+
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=profiler,
+        jobs=2,
+    ) as index:
+        result = index.diagnose(top)
+
+    counts = profiler.snapshot().counts
+    assert set(result.modules) == {
+        "Q.Left",
+        "Q.Right",
+        "Q.Top",
+        "Shared.Base",
+    }
+    assert counts["cold_batches"] == 2
+    assert counts["cold_modules_discovered"] == 4
+    assert counts["cold_worker_files_parsed"] >= 4
+    assert counts["cold_parse_amplification_milli"] >= 1000
