@@ -26,6 +26,8 @@ open import Agda.Builtin.Nat using (Nat)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119OSSystemExact as A
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119CovarianceCarrierExact as Carrier
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
@@ -49,8 +51,8 @@ record LiteralCMP119QuantitativeMomentSource
         (RealLimit.canonicalCylinderAlgebra limitLaws)
         quotient)
     (S :
-      A.Top.LiteralYangMillsSemantics
-        (A.Physical.physicalLiteralCarriers
+      Top.LiteralYangMillsSemantics
+        (Physical.physicalLiteralCarriers
           G X Nat Configuration ℝ (Configuration → ℝ) Position
           CurvaturePolynomial LocalOperator OPECoefficient StressTensor
           HilbertSpace Hamiltonian VacuumState))
