@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Iterable, List, Optional
 import json
 import shlex
+import sys
 
 import pytest
 
@@ -237,6 +238,7 @@ def _prime_scope_closure(
     root_path: Path,
     collected: List[CollectedModule],
     terminalreporter=None,
+    config=None,
 ) -> None:
     """Certify only dependency subtrees that contain deferred scope findings.
 
@@ -254,15 +256,30 @@ def _prime_scope_closure(
     selected = {item.path.resolve() for item in collected}
     path_to_module = {item.path.resolve(): item.module for item in collected}
 
+    capmanager = (
+        config.pluginmanager.getplugin("capturemanager")
+        if config is not None else None
+    )
+
     def log(message: str) -> None:
-        if terminalreporter is not None:
-            terminalreporter.write_line(message)
-            flush = getattr(terminalreporter, "_tw", None)
-            if flush is not None:
-                try:
-                    flush.flush()
-                except Exception:
-                    pass
+        def write_now() -> None:
+            if terminalreporter is not None:
+                terminalreporter.write_line(message)
+                flush = getattr(terminalreporter, "_tw", None)
+                if flush is not None:
+                    try:
+                        flush.flush()
+                    except Exception:
+                        pass
+            else:
+                sys.stderr.write(message + "\n")
+                sys.stderr.flush()
+
+        if capmanager is not None:
+            with capmanager.global_and_fixture_disabled():
+                write_now()
+        else:
+            write_now()
 
     log(
         f"Scanning {len(collected)} modules for deferred Agda-scope candidates..."
@@ -419,6 +436,7 @@ class AgdaModuleFile(pytest.File):
                     path,
                     selected,
                     terminalreporter=terminalreporter,
+                    config=config,
                 )
                 primed.add(root_key)
 
