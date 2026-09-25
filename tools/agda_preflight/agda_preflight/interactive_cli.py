@@ -2,11 +2,40 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
+import statistics
 import sys
+import tempfile
 
 from .source_index import SourceIndex
 from .timing import Profiler
+
+
+def _run_diagnose(root: Path, index_path: Path, target: Path):
+    profiler = Profiler()
+    with profiler.stage("request.total"):
+        with SourceIndex(root, index_path, profiler=profiler) as index:
+            result = index.diagnose(target)
+    return result, profiler.snapshot()
+
+
+def _percentile(values, fraction: float) -> float:
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    rank = max(1, math.ceil(len(ordered) * fraction))
+    return ordered[min(len(ordered), rank) - 1]
+
+
+def _timing_summary(values) -> dict:
+    ordered = list(values)
+    return {
+        "min_ms": round(min(ordered), 3) if ordered else 0.0,
+        "p50_ms": round(statistics.median(ordered), 3) if ordered else 0.0,
+        "p95_ms": round(_percentile(ordered, 0.95), 3),
+        "max_ms": round(max(ordered), 3) if ordered else 0.0,
+    }
 
 
 def _format_diagnostic(diagnostic) -> str:
@@ -94,17 +123,43 @@ def main(argv=None) -> int:
         help="suppress warning/deferred diagnostics",
     )
 
+    benchmark = subparsers.add_parser(
+        "benchmark",
+        help="measure cold bootstrap and repeated warm diagnose requests",
+    )
+    benchmark.add_argument("target", type=Path)
+    benchmark.add_argument(
+        "--root",
+        type=Path,
+        default=Path.cwd(),
+        help="repository root (default: current directory)",
+    )
+    benchmark.add_argument(
+        "--index",
+        type=Path,
+        default=Path(".cache/agda_preflight/source-index.sqlite3"),
+        help="persistent source-index database used for warm runs",
+    )
+    benchmark.add_argument(
+        "--runs",
+        type=int,
+        default=5,
+        help="number of warm requests to measure (default: 5)",
+    )
+    benchmark.add_argument(
+        "--json",
+        action="store_true",
+        help="emit benchmark results as JSON",
+    )
+
     args = parser.parse_args(argv)
 
     if args.command == "diagnose":
-        profiler = Profiler()
-        with profiler.stage("request.total"):
-            with SourceIndex(
-                args.root,
-                args.index,
-                profiler=profiler,
-            ) as index:
-                result = index.diagnose(args.target)
+        result, snapshot = _run_diagnose(
+            args.root,
+            args.index,
+            args.target,
+        )
 
         diagnostics = result.diagnostics
         if args.errors_only:
@@ -114,7 +169,6 @@ def main(argv=None) -> int:
                 if diagnostic.severity == "error"
             ]
 
-        snapshot = profiler.snapshot()
         if args.json:
             payload = result.as_dict()
             payload["diagnostics"] = [
@@ -131,6 +185,71 @@ def main(argv=None) -> int:
                 print(_format_profile(snapshot), file=sys.stderr)
 
         return 1 if any(d.severity == "error" for d in diagnostics) else 0
+
+    if args.command == "benchmark":
+        if args.runs < 1:
+            parser.error("--runs must be at least 1")
+
+        root = args.root.resolve()
+        target = args.target if args.target.is_absolute() else root / args.target
+
+        with tempfile.TemporaryDirectory(prefix="dashi-agda-bench-") as tmp:
+            cold_index = Path(tmp) / "source-index.sqlite3"
+            _, cold_snapshot = _run_diagnose(root, cold_index, target)
+
+        # Prime the persistent warm index once. This prime is deliberately
+        # excluded from the warm distribution.
+        _run_diagnose(root, args.index, target)
+
+        warm_snapshots = []
+        for _ in range(args.runs):
+            _, snapshot = _run_diagnose(root, args.index, target)
+            warm_snapshots.append(snapshot)
+
+        cold_payload = cold_snapshot.as_dict()
+        warm_ms = [
+            snapshot.as_dict()["stages_ms"].get("request.total", 0.0)
+            for snapshot in warm_snapshots
+        ]
+        warm_parse_counts = [
+            snapshot.counts.get("files_parsed", 0)
+            for snapshot in warm_snapshots
+        ]
+        payload = {
+            "target": str(target),
+            "cold": cold_payload,
+            "warm": {
+                "runs": args.runs,
+                "request_total": _timing_summary(warm_ms),
+                "files_parsed": {
+                    "min": min(warm_parse_counts),
+                    "max": max(warm_parse_counts),
+                },
+                "all_zero_parse": all(value == 0 for value in warm_parse_counts),
+            },
+        }
+
+        if args.json:
+            print(json.dumps(payload, indent=2, sort_keys=True))
+        else:
+            cold_ms = cold_payload["stages_ms"].get("request.total", 0.0)
+            warm = payload["warm"]["request_total"]
+            print(f"target: {target}")
+            print(f"cold: {cold_ms:.3f} ms")
+            print(
+                "warm: "
+                f"min={warm['min_ms']:.3f} ms "
+                f"p50={warm['p50_ms']:.3f} ms "
+                f"p95={warm['p95_ms']:.3f} ms "
+                f"max={warm['max_ms']:.3f} ms"
+            )
+            print(
+                "warm files_parsed: "
+                f"min={payload['warm']['files_parsed']['min']} "
+                f"max={payload['warm']['files_parsed']['max']}"
+            )
+
+        return 0
 
     parser.error(f"unknown command: {args.command}")
     return 2
