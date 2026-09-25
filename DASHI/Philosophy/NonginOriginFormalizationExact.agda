@@ -45,6 +45,7 @@ import DASHI.Philosophy.ReflexivePowerUp as Reflexive
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Trialectic
 import DASHI.Reasoning.TrialecticEdgeSynthesisCompatibilityExact as TrialecticSynthesis
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as TrialecticCell
+import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact as TrialecticGroth
 import DASHI.Reasoning.TrialecticThreeCellCarryDepthExact as TrialecticCarry
 import DASHI.Foundations.TrialecticDepthHyperformExact as TrialecticDepth
 import DASHI.Statistics.ForecastVerificationKernelExact as Forecast
@@ -166,6 +167,12 @@ matureTrialecticThreeCellBoundary :
   TrialecticCell.TrialecticThreeCellHyperformBoundary
 matureTrialecticThreeCellBoundary =
   TrialecticCell.canonicalTrialecticThreeCellHyperformBoundary
+
+
+matureTrialecticGrothendieckBoundary :
+  TrialecticGroth.TrialecticGrothendieckThreeCellDescentBoundary
+matureTrialecticGrothendieckBoundary =
+  TrialecticGroth.canonicalTrialecticGrothendieckThreeCellDescentBoundary
 
 matureTrialecticCarryDepthBoundary :
   TrialecticCarry.TrialecticThreeCellCarryDepthBoundary
