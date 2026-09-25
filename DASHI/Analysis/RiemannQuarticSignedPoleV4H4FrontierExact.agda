@@ -1478,11 +1478,11 @@ fixedCoupledHighInequalityRemainsOpen = refl
 
 fixedCoupledSignedHighLeanDonorHead : String
 fixedCoupledSignedHighLeanDonorHead =
-  "a61ea9c6e10e07359319d2c8e1dfb8313babdcbe"
+  "4ca0b32c20304301e9a4c7cb00dac990f00bed06"
 
 fixedCoupledSignedHighTransportedIntoAgdaKernelHere : Bool
 fixedCoupledSignedHighTransportedIntoAgdaKernelHere = false
 
 fixedCoupledSignedHighInterpretation : String
 fixedCoupledSignedHighInterpretation =
-  "The preferred RH high cut is now one fixed signed scalar inequality. Lean removes the unnecessary absolute value from the finite compensation predicate, proves the closed canonical local literal source stabilizes exactly for every centered exhaustion radius n>h0 including the possible left-endpoint atom, exposes the exact correction between the paired-Abel local subtraction and the literal local pair subtraction, and proves finiteCutCompensatedFar equals the exhaustion-independent far-plus-boundary coupled carrier minus that stabilized local correction. The resulting selected fixed-coupled predicate compiles directly to contradiction. The only new mathematics still open is the one-sided quantitative bound on that fixed coupled scalar itself; no Agda-native replay is claimed."
+  "The preferred RH high cut is now one fixed signed scalar inequality. Lean removes the unnecessary absolute value from the finite compensation predicate, proves the closed canonical local literal source stabilizes exactly for every centered exhaustion radius n>h0 including the possible left-endpoint atom, exposes the exact correction between the paired-Abel local subtraction and the literal local pair subtraction, and collapses the resulting fixed carrier to the canonical literal scalar H_W = one half times [global off-ordinate signed literal pair-source tsum minus canonical stabilized local literal source minus the full theorem-bearing mu/Gamma ordinate integral]. Thus no exhaustion index, Abel boundary, far surrogate, or absolute value remains in the preferred theorem interface. The selected canonical signed high predicate compiles directly to contradiction. The only new mathematics still open is the one-sided quantitative bound H_W < terminalResidualMargin; no Agda-native replay is claimed."
