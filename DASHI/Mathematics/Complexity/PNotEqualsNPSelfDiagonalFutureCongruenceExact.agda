@@ -29,9 +29,11 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalFutureCongruenceExac
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; Σ; _,_; proj₁; proj₂)
+import Data.Fin.Base as Fin
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Core.TypedDependencyCore as Dependency
@@ -203,6 +205,313 @@ zeroVariableEquisatisfiableImpliesEqualEvaluation
   where
     falseNotTrue : false ≡ true → ⊥
     falseNotTrue ()
+
+------------------------------------------------------------------------
+-- Ordinary assignments as common Shannon action traces.
+------------------------------------------------------------------------
+
+assignmentActions :
+  (variables : Nat) →
+  SAT.Assignment variables →
+  List Bool
+assignmentActions zero assignment =
+  []
+assignmentActions (suc variables) assignment =
+  assignment Fin.zero
+  ∷
+  assignmentActions
+    variables
+    (SAT.tailAssignment assignment)
+
+completeRestriction :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Family.RestrictionNode root) →
+  SAT.Assignment (Family.currentVariables node) →
+  Family.RestrictionNode root
+completeRestriction node assignment
+    with Family.currentVariables node
+... | zero =
+  node
+... | suc remaining =
+  completeRestriction
+    (restrictedNode
+      node
+      (assignment Fin.zero)
+      (remaining , refl))
+    (SAT.tailAssignment assignment)
+
+completeRestrictionIsTerminal :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Family.RestrictionNode root)
+    (assignment :
+      SAT.Assignment (Family.currentVariables node)) →
+  Family.currentVariables
+    (completeRestriction node assignment)
+  ≡ zero
+completeRestrictionIsTerminal node assignment
+    with Family.currentVariables node
+... | zero =
+  refl
+... | suc remaining =
+  completeRestrictionIsTerminal
+    (restrictedNode
+      node
+      (assignment Fin.zero)
+      (remaining , refl))
+    (SAT.tailAssignment assignment)
+
+completeRestrictionExecutes :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Family.RestrictionNode root)
+    (assignment :
+      SAT.Assignment (Family.currentVariables node)) →
+  Reachability.Executes
+    (restrictionActionSystem root)
+    (assignmentActions
+      (Family.currentVariables node)
+      assignment)
+    node
+    (completeRestriction node assignment)
+completeRestrictionExecutes node assignment
+    with Family.currentVariables node
+... | zero =
+  Reachability.executesNil
+... | suc remaining =
+  Reachability.executesCons
+    (canonicalAdmissibleRestriction
+      node
+      (assignment Fin.zero)
+      (remaining , refl))
+    (completeRestrictionExecutes
+      (restrictedNode
+        node
+        (assignment Fin.zero)
+        (remaining , refl))
+      (SAT.tailAssignment assignment))
+
+completeRestrictionEvaluationExact :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Family.RestrictionNode root)
+    (assignment :
+      SAT.Assignment (Family.currentVariables node)) →
+  terminalEvaluation
+    (completeRestriction node assignment)
+    (completeRestrictionIsTerminal node assignment)
+  ≡
+  SAT.evaluate
+    (Family.currentFormula node)
+    assignment
+completeRestrictionEvaluationExact node assignment
+    with Family.currentVariables node
+... | zero =
+  SAT.evaluateExtensional
+    (Family.currentFormula node)
+    (λ ())
+... | suc remaining =
+  trans
+    (completeRestrictionEvaluationExact
+      (restrictedNode
+        node
+        (assignment Fin.zero)
+        (remaining , refl))
+      (SAT.tailAssignment assignment))
+    (SAT.restrictionEvaluation
+      (assignment Fin.zero)
+      (Family.currentFormula node)
+      (SAT.tailAssignment assignment))
+
+terminalEvaluation :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Family.RestrictionNode root) →
+  Family.currentVariables node ≡ zero →
+  Bool
+terminalEvaluation node arity
+    with arity
+... | refl =
+  SAT.evaluate
+    (Family.currentFormula node)
+    emptyAssignment
+
+terminalObservationExact :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Family.RestrictionNode root)
+    (arity : Family.currentVariables node ≡ zero) →
+  restrictionObservation node
+  ≡
+  terminal (terminalEvaluation node arity)
+terminalObservationExact node arity
+    with arity
+... | refl =
+  refl
+
+terminalConstructorInjective :
+  ∀ {left right : Bool} →
+  terminal left ≡ terminal right →
+  left ≡ right
+terminalConstructorInjective refl =
+  refl
+
+------------------------------------------------------------------------
+-- Future equivalence at one layer forces equality of the residual Boolean
+-- functions under every ordinary assignment.
+------------------------------------------------------------------------
+
+futureEquivalentImpliesPointwiseEvaluationEqual :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Family.RestrictionNode root} →
+  (sameArity :
+    Family.currentVariables left
+    ≡ Family.currentVariables right) →
+  Future.FutureEquivalent
+    (restrictionActionSystem root)
+    restrictionObservation
+    left
+    right →
+  (assignment :
+    SAT.Assignment (Family.currentVariables left)) →
+  SAT.evaluate
+      (Family.currentFormula left)
+      assignment
+  ≡
+  SAT.evaluate
+      (Family.currentFormula right)
+      (transportAssignment sameArity assignment)
+futureEquivalentImpliesPointwiseEvaluationEqual
+    {left = left}
+    {right = right}
+    sameArity
+    future
+    assignment
+    with sameArity
+... | refl =
+  trans
+    (sym
+      (completeRestrictionEvaluationExact
+        left
+        assignment))
+    (trans
+      terminalEqual
+      (completeRestrictionEvaluationExact
+        right
+        assignment))
+  where
+    leftTerminal :
+      Family.currentVariables
+        (completeRestriction left assignment)
+      ≡ zero
+    leftTerminal =
+      completeRestrictionIsTerminal left assignment
+
+    rightTerminal :
+      Family.currentVariables
+        (completeRestriction right assignment)
+      ≡ zero
+    rightTerminal =
+      completeRestrictionIsTerminal right assignment
+
+    observationsEqual :
+      restrictionObservation
+        (completeRestriction left assignment)
+      ≡
+      restrictionObservation
+        (completeRestriction right assignment)
+    observationsEqual =
+      future
+        (completeRestrictionExecutes left assignment)
+        (completeRestrictionExecutes right assignment)
+
+    terminalEqual :
+      terminalEvaluation
+        (completeRestriction left assignment)
+        leftTerminal
+      ≡
+      terminalEvaluation
+        (completeRestriction right assignment)
+        rightTerminal
+    terminalEqual =
+      terminalConstructorInjective
+        (trans
+          (sym
+            (terminalObservationExact
+              (completeRestriction left assignment)
+              leftTerminal))
+          (trans
+            observationsEqual
+            (terminalObservationExact
+              (completeRestriction right assignment)
+              rightTerminal)))
+
+transportAssignment :
+  ∀ {left right : Nat} →
+  left ≡ right →
+  SAT.Assignment left →
+  SAT.Assignment right
+transportAssignment refl assignment =
+  assignment
+
+------------------------------------------------------------------------
+-- Therefore same-layer future equivalence implies ordinary equisatisfiability.
+------------------------------------------------------------------------
+
+futureEquivalentImpliesSatisfiabilityEquivalent :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Family.RestrictionNode root} →
+  (sameArity :
+    Family.currentVariables left
+    ≡ Family.currentVariables right) →
+  Future.FutureEquivalent
+    (restrictionActionSystem root)
+    restrictionObservation
+    left
+    right →
+  Quotient.SatisfiabilityEquivalent
+    (Family.currentFormula left)
+    (Family.currentFormula right)
+futureEquivalentImpliesSatisfiabilityEquivalent
+    {left = left}
+    {right = right}
+    sameArity
+    future =
+  leftToRight , rightToLeft
+  where
+    leftToRight :
+      SAT.Satisfying (Family.currentFormula left) →
+      SAT.Satisfying (Family.currentFormula right)
+    leftToRight witness
+        with sameArity
+    ... | refl =
+      SAT.satisfying
+        (SAT.assignment witness)
+        (trans
+          (sym
+            (futureEquivalentImpliesPointwiseEvaluationEqual
+              refl
+              future
+              (SAT.assignment witness)))
+          (SAT.evaluatesTrue witness))
+
+    rightToLeft :
+      SAT.Satisfying (Family.currentFormula right) →
+      SAT.Satisfying (Family.currentFormula left)
+    rightToLeft witness
+        with sameArity
+    ... | refl =
+      SAT.satisfying
+        (SAT.assignment witness)
+        (trans
+          (futureEquivalentImpliesPointwiseEvaluationEqual
+            refl
+            future
+            (SAT.assignment witness))
+          (SAT.evaluatesTrue witness))
 
 ------------------------------------------------------------------------
 -- Same-layer Q1 merge relation.
