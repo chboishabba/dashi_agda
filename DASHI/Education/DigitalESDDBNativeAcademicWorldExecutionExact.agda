@@ -108,9 +108,9 @@ canonicalDBNativeCoordinateNominationBoundary =
     false refl
     false refl
     false refl
-    true refl
-    true refl
     false refl
+    true refl
+    true refl
     false refl
 
 record DBNativeAcademicGenealogyBoundary : Set where
