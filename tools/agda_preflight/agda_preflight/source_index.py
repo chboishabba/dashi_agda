@@ -119,10 +119,17 @@ class SourceIndex:
             """
         )
         self.connection.execute(
-            "INSERT INTO meta(key, value) VALUES('schema_version', ?) "
-            "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+            "INSERT OR IGNORE INTO meta(key, value) VALUES('schema_version', ?)",
             (SCHEMA_VERSION,),
         )
+        row = self.connection.execute(
+            "SELECT value FROM meta WHERE key = 'schema_version'"
+        ).fetchone()
+        if row is None or row["value"] != SCHEMA_VERSION:
+            raise RuntimeError(
+                "unsupported dashi-agda source-index schema; "
+                "remove the cache or migrate it"
+            )
         self.connection.commit()
 
     def _checker_instance(self) -> Checker:
@@ -295,7 +302,6 @@ class SourceIndex:
             self.profiler.count("closure_cache_miss")
             return None
 
-        self.profiler.count("modules_in_closure", len(rows))
         diagnostics: List[Diagnostic] = []
         modules: List[str] = []
 
@@ -318,6 +324,7 @@ class SourceIndex:
                 self.profiler.count("modules_cached")
 
         self.profiler.count("closure_cache_hit")
+        self.profiler.count("modules_in_closure", len(rows))
         return DiagnoseResult(
             diagnostics=sorted(
                 diagnostics,
@@ -334,19 +341,15 @@ class SourceIndex:
             return existing
 
         if path in self._visiting:
-            row = self._row(path)
-            if row is None:
+            # A provisional state is installed before dependency recursion, so
+            # a cold import cycle can safely reuse it without requiring a
+            # previously persisted row.
+            provisional = self._states.get(path)
+            if provisional is None:
                 raise RuntimeError(
-                    "import cycle reached before module metadata was indexed: "
-                    + str(path)
+                    "internal source-index invariant: visiting module has no provisional state"
                 )
-            return _ModuleState(
-                path=path,
-                module_name=row["module_name"],
-                source_hash=row["source_sha256"],
-                imports=self._imports_for_path(row["path"]),
-                diagnostics=self._decode_diagnostics(row),
-            )
+            return provisional
 
         self._visiting.add(path)
         try:
@@ -368,6 +371,19 @@ class SourceIndex:
                         summary.source.encode("utf-8")
                     ).hexdigest()
                 self.profiler.count("dirty_modules")
+
+            provisional_diagnostics = (
+                self._decode_diagnostics(row)
+                if fresh and row is not None
+                else []
+            )
+            self._states[path] = _ModuleState(
+                path=path,
+                module_name=module_name,
+                source_hash=source_hash,
+                imports=imports,
+                diagnostics=provisional_diagnostics,
+            )
 
             dependency_states: List[Tuple[str, _ModuleState]] = []
             for module in imports:
