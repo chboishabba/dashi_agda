@@ -252,3 +252,7 @@ import DASHI.Physics.Foundations.CMP119ClassicalWilsonDiagonalMetricVariationExa
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact
 
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact
+
+import DASHI.Physics.Foundations.CMP119ClassicalCurvatureStressInsertionExact
+import DASHI.Physics.Foundations.CMP119FlatSide4CurvatureStressExact
+import DASHI.Physics.Foundations.CMP119NormalizedTargetTraceSplitExact
