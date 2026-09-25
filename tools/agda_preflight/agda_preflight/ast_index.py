@@ -677,9 +677,12 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
 
         for fields_node in descendants(owner, "fields"):
             saw_fields_node = True
+            if any(True for _ in descendants(fields_node, "ERROR")):
+                rec.field_surface_complete = False
             for sig in descendants(fields_node, "signature"):
                 names, type_node = _signature_parts(source_bytes, sig)
-                if type_node is None:
+                if type_node is None or not names:
+                    rec.field_surface_complete = False
                     continue
                 typ = node_text(source_bytes, type_node).strip()
                 for field_name in names:
