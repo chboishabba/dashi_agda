@@ -95,6 +95,7 @@ import DASHI.Physics.Closure.NSTriadKNR650SingleSelfOutputRealityRound718Exact a
 import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfFoldRealityRound719Exact as R719
 import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfMultiplierFoldRound720Exact as R720
 import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfHelicitySplitRound721Exact as R721
+import DASHI.Physics.Closure.NSTriadKNR650SelfExternalRecombinationRound722Exact as R722
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -1216,6 +1217,26 @@ round650SelfHeterochiralChannelOnRadialSumCarrier =
 round650InternalSameKSelfCancellationClosed : Bool
 round650InternalSameKSelfCancellationClosed =
   R721.round721InternalSameKCancellationClosed
+
+round650CompleteSelfOrbitIsTwelveOutputPairings : Bool
+round650CompleteSelfOrbitIsTwelveOutputPairings =
+  R722.round722CompleteSelfOrbitIsTwelveOutputPairings
+
+round650SelfExternalRecombineToSingleGlobalCommutator : Bool
+round650SelfExternalRecombineToSingleGlobalCommutator =
+  R722.round722SelfExternalRecombineToSingleGlobalCommutator
+
+round650SeparateSelfCancellationRequiredAfterRecombination : Bool
+round650SeparateSelfCancellationRequiredAfterRecombination =
+  R722.round722SeparateSelfCancellationRequiredForMaxCut
+
+round650SeparateExternalPaymentRequiredAfterRecombination : Bool
+round650SeparateExternalPaymentRequiredAfterRecombination =
+  R722.round722SeparateExternalPaymentRequiredForMaxCut
+
+round650RemainingAnalyticObjectIsCombinedGlobalCommutator : Bool
+round650RemainingAnalyticObjectIsCombinedGlobalCommutator =
+  R722.round722RemainingAnalyticObjectIsCombinedGlobalCommutator
 
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 : Bool
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 =
