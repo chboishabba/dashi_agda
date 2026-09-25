@@ -213,3 +213,64 @@ def test_source_index_migrates_v2_interface_schema(tmp_path):
 
     assert version == "3"
     assert "interface_json" in columns
+
+
+
+def test_dirty_consumer_uses_persisted_import_interface_without_reparse(tmp_path):
+    write_module(
+        tmp_path,
+        "Iface.Lib",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+open R public
+""",
+    )
+    consumer = write_module(
+        tmp_path,
+        "Iface.Consumer",
+        """
+import Iface.Lib
+
+bad : Set
+bad = Iface.Lib.witness
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=Profiler(),
+        jobs=2,
+    ) as index:
+        index.diagnose(consumer)
+
+    consumer.write_text(
+        """module Iface.Consumer where
+
+import Iface.Lib
+
+bad : Set
+bad = Iface.Lib.witness
+
+extra : Set
+extra = Set
+""",
+        encoding="utf-8",
+    )
+
+    profiler = Profiler()
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=profiler,
+        jobs=2,
+    ) as index:
+        index.diagnose(consumer)
+
+    counts = profiler.snapshot().counts
+    assert counts["files_parsed"] == 1
+    assert counts.get("incremental_interface_cache_hits", 0) >= 1
