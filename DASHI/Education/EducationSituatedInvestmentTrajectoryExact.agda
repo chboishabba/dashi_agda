@@ -45,7 +45,14 @@ data ValuationState : Set where
 
 data TrajectoryCoordinate : Set where
   pedagogicalOutcome : TrajectoryCoordinate
+  capability : TrajectoryCoordinate
+  recognition : TrajectoryCoordinate
+  reachability : TrajectoryCoordinate
+  contestability : TrajectoryCoordinate
+  counterfactualContext : TrajectoryCoordinate
   memoryRevision : TrajectoryCoordinate
+  evidenceProvenance : TrajectoryCoordinate
+  sourceIndependence : TrajectoryCoordinate
   decisionAutonomy : TrajectoryCoordinate
   benefitIncidence : TrajectoryCoordinate
   burdenIncidence : TrajectoryCoordinate
@@ -60,7 +67,14 @@ data TrajectoryCoordinate : Set where
 trajectoryCoordinates : List TrajectoryCoordinate
 trajectoryCoordinates =
   pedagogicalOutcome
+  ∷ capability
+  ∷ recognition
+  ∷ reachability
+  ∷ contestability
+  ∷ counterfactualContext
   ∷ memoryRevision
+  ∷ evidenceProvenance
+  ∷ sourceIndependence
   ∷ decisionAutonomy
   ∷ benefitIncidence
   ∷ burdenIncidence
@@ -97,6 +111,13 @@ record SituatedEducationTrajectory : Set where
     trajectoryContextReference : String
 
     learningReceipt : Learning.LearningReceipt
+    capabilityReference : String
+    recognitionReference : String
+    reachabilityReference : String
+    contestabilityReference : String
+    counterfactualReference : String
+    evidenceProvenanceReference : String
+    sourceIndependenceReference : String
     autonomyAxes : Autonomy.AutonomyAxes
 
     benefitReference : String
