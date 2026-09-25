@@ -43,7 +43,6 @@ def _policy(
 
 # Diagnostics that are sound from concrete syntax alone.
 _TREE_ONLY = {
-    "TSAGDA000",  # tree ERROR/missing node
     "TSAGDA004",  # module/path mismatch
     "TSAGDA005",  # duplicate declaration
     "TSAGDA006",  # duplicate field
@@ -72,14 +71,14 @@ _INDEX_SAFE = {
     "TSAGDA020", 
     "TSAGDA029", "TSAGDA030",
     "TSAGDA042", "TSAGDA043", "TSAGDA044", 
-    "TSAGDA046", "TSAGDA047", "TSAGDA048", 
+    
     "TSAGDA050", "TSAGDA051", "TSAGDA054",
     "TSAGDA056",
-    "TSAGDA060", "TSAGDA062", "TSAGDA063", "TSAGDA064", "TSAGDA065",
+    "TSAGDA060", "TSAGDA062", "TSAGDA063", "TSAGDA065",
     "TSAGDA066", "TSAGDA067", "TSAGDA068",
     "TSAGDA070", "TSAGDA071", "TSAGDA073", "TSAGDA074",
     "TSAGDA077", "TSAGDA078", 
-    "TSAGDA080", "TSAGDA081", "TSAGDA082", "TSAGDA083", "TSAGDA085",
+    "TSAGDA080", "TSAGDA081", "TSAGDA083", "TSAGDA085",
     "TSAGDA086", "TSAGDA087", "TSAGDA088", "TSAGDA089",
     "TSAGDA100", "TSAGDA101", "TSAGDA102", "TSAGDA103", 
     "TSAGDA105",
@@ -100,6 +99,7 @@ _INDEX_SAFE = {
 # Agda-resolved scope/elaboration: opens/renamings, overloading, mixfix, implicit
 # insertion, or local dependent scope can change the interpretation.
 _SCOPE_REQUIRED = {
+    "TSAGDA000",  # successful Agda scope proves tree-sitter ERROR nodes are grammar artifacts
     "TSAGDA021",  # qualified export availability is a scope-resolution fact
     "TSAGDA022",  # unknown/malformed alias use
     "TSAGDA023",  # using(...) export availability is a scope-resolution fact
@@ -117,6 +117,11 @@ _SCOPE_REQUIRED = {
 
 # Kept for future diagnostics whose truth genuinely requires the kernel.
 _TYPECHECK_REQUIRED: Set[str] = {
+    "TSAGDA046",  # constructor application arity is settled by elaboration
+    "TSAGDA047",  # record constructor parameters/fields require elaborated arity
+    "TSAGDA048",  # parameterized module application arity is elaboration-sensitive
+    "TSAGDA064",  # field lambda arity may depend on target-type unfolding
+    "TSAGDA082",  # constructor-pattern arity is a typing/elaboration judgment
     "TSAGDA040",  # over-application can depend on result-type unfolding
     "TSAGDA049",  # projection saturation/pointfree use is a typing judgment
     "TSAGDA052",  # a bare projection is a valid function value in pointfree contexts
