@@ -74,12 +74,10 @@ module _
     where
 
     rechartedDomain =
-      Rechart.rechartedDomain
-        domain realization representation selected
+      Rechart.symmetricDomain domain realization
 
     rechartedRepresentation =
-      Rechart.rechartedRepresentation
-        domain realization representation selected
+      Rechart.symmetricRepresentation domain realization representation
 
     rechartedSelected =
       Rechart.rechartedSelectedStress
