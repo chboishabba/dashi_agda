@@ -137,7 +137,7 @@ record P3ArithmeticProvenanceFirstLeg
     firstLegOrbit :
       Provenance.ProvenancePreservingOrbitRecognition
         firstLegAction
-        (SourceSocket.orbits source)
+        (SourceSocket.candidateOrbits source)
         Residual.constantTernaryOrbitPresentation
 
 open P3ArithmeticProvenanceFirstLeg public
@@ -149,7 +149,7 @@ p3IndependentProvenanceRecognition :
     (Provenance.composeProvenancePreservingActionRecognition
       (firstLegAction first)
       P3Bridge.p3ProvenanceActionRecognition)
-    (SourceSocket.orbits source)
+    (SourceSocket.candidateOrbits source)
     P3Target.p3OrbitPresentation
 p3IndependentProvenanceRecognition first =
   Provenance.composeProvenancePreservingOrbitRecognition
