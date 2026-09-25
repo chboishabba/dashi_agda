@@ -110,6 +110,15 @@ def _resolve_field_record_ast(checker, owner_summary, field):
     # but resolving a field result record only needs the owner module's local
     # schema when there is no source ModuleSummary to recurse through.
     if isinstance(owner_summary, ModuleInterface):
+        if "." in head:
+            alias, short = head.rsplit(".", 1)
+            module = owner_summary.import_map.get(alias)
+            if module is not None:
+                target_owner = checker.interface_for_module(module)
+                if target_owner is not None:
+                    record = target_owner.record_map.get(short)
+                    if record is not None:
+                        return target_owner, record
         short = head.rsplit(".", 1)[-1]
         record = owner_summary.record_map.get(short)
         return (owner_summary, record) if record is not None else None
