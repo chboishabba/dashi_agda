@@ -15,8 +15,9 @@ module DASHI.Moonshine.JInvariant369SSP15OggAddressCodecExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; sym; trans)
 
 import DASHI.Biology.OggPrimeNonaryAddressExact as Address
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
