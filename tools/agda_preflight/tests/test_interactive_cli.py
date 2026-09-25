@@ -200,3 +200,67 @@ mk = record { witnes = Set }
     source = path.read_text(encoding="utf-8")
     assert "witnes =" not in source
     assert "witness = Set" in source
+
+
+
+def test_next_error_prefers_hard_fixable_diagnostic(tmp_path, capsys):
+    path = write_module(
+        tmp_path,
+        "Next.Record",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+mk : R
+mk = record { witnes = Set }
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    assert main(
+        [
+            "next-error",
+            str(path),
+            "--root",
+            str(tmp_path),
+            "--index",
+            str(database),
+            "--require-fix",
+            "--json",
+        ]
+    ) == 0
+
+    payload = json.loads(capsys.readouterr().out)
+    diagnostic = payload["diagnostic"]
+    assert payload["status"] == "diagnostic"
+    assert diagnostic["code"] == "TSAGDA060"
+    assert diagnostic["fixes"]
+    assert diagnostic["fixes"][0]["edits"]
+
+
+def test_benchmark_payload_reports_slo_pass(tmp_path, capsys):
+    path = write_module(tmp_path, "Slo.Top")
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    assert main(
+        [
+            "benchmark",
+            str(path),
+            "--root",
+            str(tmp_path),
+            "--index",
+            str(database),
+            "--runs",
+            "2",
+            "--max-cold-ms",
+            "60000",
+            "--max-warm-ms",
+            "10000",
+            "--json",
+        ]
+    ) == 0
+
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["slo"]["passed"] is True
+    assert payload["warm"]["all_zero_parse"] is True
