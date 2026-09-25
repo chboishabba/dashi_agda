@@ -83,36 +83,36 @@ open PrimitiveSemantics public
 -- Structural interpreter.
 ------------------------------------------------------------------------
 
-run1 :
-  ∀ {Primitive Input Output : Set} →
-  PrimitiveSemantics Primitive Input Output →
-  Program Primitive →
-  Input →
-  Maybe Output
-run2 :
-  ∀ {Primitive Input Output : Set} →
-  PrimitiveSemantics Primitive Input Output →
-  Program Primitive →
-  Program Primitive →
-  Input →
-  Maybe Output
+mutual
+  run1 :
+    ∀ {Primitive Input Output : Set} →
+    PrimitiveSemantics Primitive Input Output →
+    Program Primitive →
+    Input →
+    Maybe Output
+  run1 semantics (primitive atom) input =
+    runPrimitive1 semantics atom input
+  run1 semantics (specialized program static) input =
+    run2 semantics program static input
+  run1 semantics (diagonalized program) input =
+    nothing
 
-run1 semantics (primitive atom) input =
-  runPrimitive1 semantics atom input
-run1 semantics (specialized program static) input =
-  run2 semantics program static input
-run1 semantics (diagonalized program) input =
-  nothing
-
-run2 semantics (primitive atom) quoted input =
-  runPrimitive2 semantics atom quoted input
-run2 semantics (specialized program static) quoted input =
-  nothing
-run2 semantics (diagonalized program) quoted input =
-  run2 semantics
-    program
-    (specialized quoted quoted)
-    input
+  run2 :
+    ∀ {Primitive Input Output : Set} →
+    PrimitiveSemantics Primitive Input Output →
+    Program Primitive →
+    Program Primitive →
+    Input →
+    Maybe Output
+  run2 semantics (primitive atom) quoted input =
+    runPrimitive2 semantics atom quoted input
+  run2 semantics (specialized program static) quoted input =
+    nothing
+  run2 semantics (diagonalized program) quoted input =
+    run2 semantics
+      program
+      (specialized quoted quoted)
+      input
 
 ------------------------------------------------------------------------
 -- Executable s-m-n and diagonal constructors.
