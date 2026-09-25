@@ -35,6 +35,7 @@ import DASHI.Cognition.PNF.SensibLawWorkProductCoverageExact as WorkProductCover
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationExact as GenericIngest
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldExact as GenericIngestWeld
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldRegression as GenericIngestWeldRegression
+import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceExact as LongDocumentPersistence
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -367,3 +368,27 @@ genericIngestConcreteObservationUsesExactRegionSpan :
   GenericIngestWeldRegression.fixtureObservationReallyUsesRegionSpan
   ≡ GenericIngestWeldRegression.fixtureObservationReallyUsesRegionSpan
 genericIngestConcreteObservationUsesExactRegionSpan = refl
+
+------------------------------------------------------------------------
+-- INGEST-1A durable long-document persistence remains non-semantic.
+------------------------------------------------------------------------
+
+longDocumentPersistenceDoesNotCreateSemanticAuthority :
+  LongDocumentPersistence.PersistenceCreatesSemanticAuthority → ⊥
+longDocumentPersistenceDoesNotCreateSemanticAuthority =
+  LongDocumentPersistence.persistenceDoesNotCreateSemanticAuthority
+
+longDocumentPersistenceDoesNotCreateReviewPayment :
+  LongDocumentPersistence.PersistenceCreatesReviewPayment → ⊥
+longDocumentPersistenceDoesNotCreateReviewPayment =
+  LongDocumentPersistence.persistenceDoesNotCreateReviewPayment
+
+longDocumentPersistenceDoesNotCreateClaimTruth :
+  LongDocumentPersistence.PersistenceCreatesClaimTruth → ⊥
+longDocumentPersistenceDoesNotCreateClaimTruth =
+  LongDocumentPersistence.persistenceDoesNotCreateClaimTruth
+
+longDocumentReloadPreservesPartition :
+  LongDocumentPersistence.ReloadChangesRegionPartition → ⊥
+longDocumentReloadPreservesPartition =
+  LongDocumentPersistence.reloadDoesNotChangeRegionPartition
