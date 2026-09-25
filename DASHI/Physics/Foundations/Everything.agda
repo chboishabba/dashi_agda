@@ -268,3 +268,5 @@ import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact
 import DASHI.Physics.Foundations.CMP119GibbsDiagonalTraceCancellationExact
 import DASHI.Physics.Foundations.CMP119GibbsDiagonalTraceSignExact
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTraceInsertionReductionExact
+
+import DASHI.Physics.Foundations.CMP119AntigravityTraceMaxCutExact
