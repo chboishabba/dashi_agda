@@ -72,6 +72,7 @@ class AstRecord:
     fields: Dict[str, AstField] = field(default_factory=dict)
     field_occurrences: List[AstField] = field(default_factory=list)
     constructor: Optional[str] = None
+    field_surface_complete: bool = True
     node: object | None = None
 
 
@@ -648,9 +649,23 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
                     rec.constructor = tokens[1]
                 sibling = sibling.next_named_sibling
                 continue
+
+        # An indented sibling inside the record layout that we cannot model
+        # means the record body surface is incomplete (common with internal
+        # open/import blocks in tree-sitter-agda grammar gaps).
+        if sibling.start_point[1] > node.start_point[1]:
+            rec.field_surface_complete = False
         break
 
+    saw_field_keyword = False
+    saw_fields_node = False
     for owner in related:
+        owner_tokens = [token.text for token in significant_tokens(source_bytes, owner)]
+        if "field" in owner_tokens:
+            saw_field_keyword = True
+        if owner.type == "ERROR" and "field" in owner_tokens:
+            rec.field_surface_complete = False
+
         ctor = first_descendant(owner, "record_constructor")
         if ctor is not None and rec.constructor is None:
             ident = first_descendant(ctor, "id")
@@ -661,6 +676,7 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
                 rec.constructor = tokens[1]
 
         for fields_node in descendants(owner, "fields"):
+            saw_fields_node = True
             for sig in descendants(fields_node, "signature"):
                 names, type_node = _signature_parts(source_bytes, sig)
                 if type_node is None:
@@ -672,6 +688,9 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
                     item = AstField(field_name, typ, line_of(sig), type_node)
                     rec.field_occurrences.append(item)
                     rec.fields[field_name] = item
+
+    if saw_field_keyword and not saw_fields_node:
+        rec.field_surface_complete = False
     return rec
 
 
@@ -982,6 +1001,9 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
                         existing.constructor = rec.constructor
                     existing.field_occurrences.extend(rec.field_occurrences)
                     existing.fields.update(rec.fields)
+                    existing.field_surface_complete = (
+                        existing.field_surface_complete or rec.field_surface_complete
+                    )
         elif node.type in {"data", "data_signature"}:
             data = _data_from_node(source_bytes, node)
             if data is not None:
