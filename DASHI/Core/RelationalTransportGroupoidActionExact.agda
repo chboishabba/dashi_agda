@@ -146,7 +146,7 @@ _≈_ :
   RelTransportHom State source target →
   Set
 f ≈ g =
-  (state : _) →
+  (state : State) →
   forward f state ≡ forward g state
 
 extensionalRefl :
@@ -240,7 +240,7 @@ inverseInvolutiveAction f state = refl
 existingIdentityEmbeds :
   {State : Set}
   (source target : Existing.RelationalPatch) →
-  fromExisting (Existing.identityTransport {State} source target)
+  fromExisting (Existing.identityTransport {State = State} source target)
   ≈
   rel-transport-hom
     (λ state → state)
