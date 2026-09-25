@@ -1130,3 +1130,128 @@ quarticScaleCompensationTransportedIntoAgdaKernelHere = false
 quarticScaleCompensationInterpretation : String
 quarticScaleCompensationInterpretation =
   "The preferred RH min-cut is now dimensionless and literal. With r=t/16, Lean proves r^7 times the exact centered Abel integrand at t+r*q equals the normalized cosine derivative times r^4 times the centered N-mu discrepancy. It also proves the finite compensated remainder satisfies r^6*F_n = r^4*normalizedF_n, rewrites the literal high cut equivalently on this quartic scale, and compiles the selected quartic-scale high cut above one fixed threshold directly to contradiction. Symmetric centered-Abel exhaustion and convergence to the completed residual are already paid. The only preferred open analytic theorem is therefore the quartic-scale compensated high inequality itself; no pointwise r^-4 discrepancy estimate is asserted."
+
+
+------------------------------------------------------------------------
+-- ODD-PAIRING / LOCAL-V4 FAIL-FAST RECUT
+--
+-- Lean tested the highest-alpha structural idea suggested by the selected
+-- quartic jet.
+--
+-- Exact facts now exposed:
+--
+--   C'_W(-q) = - C'_W(q).
+--
+-- With M2(W)=0 and M4(W)=-4*S(W),
+--
+--   C'_W(q)
+--     = -(2/3) * S(W) * q^3 + R5_W(q),
+--
+-- where on |q| <= eta0
+--
+--   |R5_W(q)|
+--     <= (1/100) * |q|^5 * M6_abs(W).
+--
+-- Note the sign: the cubic coefficient is NEGATIVE for q>0 because M4<0.
+--
+-- The quartic-scale centered discrepancy satisfies, for q>=0,
+--
+--   E4_W(q)-E4_W(-q)
+--     = r^4 * D(t-rq,t+rq),
+--
+-- so odd pairing really sees one symmetric literal N-mu window.
+--
+-- The leading cubic pairing was then reduced exactly to the already-owned V4
+-- coordinate.  For physical half-width h,
+--
+--   V4(t,h)
+--     = h^4 * D(t-h,t+h)
+--       - integral_{t-h}^{t+h} 4(x-t)^3 E_t(x) dx.
+--
+-- Therefore the cubic-leading selected correlation is precisely a scalar
+-- multiple of
+--
+--   h^4 D(t-h,t+h) - V4(t,h).
+--
+-- This is a useful FAIL-FAST result: the cubic Taylor theorem is certified
+-- only on |q|<=eta0, exactly the canonical local interval already removed by
+-- finiteCutCompensatedFar.  It therefore sharpens the PAID local V4 lane, but
+-- does not pay the remaining high complement.
+--
+-- Lean also pairs the full symmetric centered-Abel exhaustion globally:
+--
+--   leftAbel_n + rightAbel_n
+--     = integral_0^n
+--         Psi'_t(t+s) * D(t-s,t+s) ds.
+--
+-- Splitting at the canonical physical half-width gives exact local + outer
+-- paired coordinates.  The finite centered G3 functional is
+--
+--   centeredCompletedResidualAt_n
+--     = -(1/2) * localPaired
+--       + ( -(1/2) * outerPaired_n + signedHorizontalRemainder ).
+--
+-- Hence the genuine remaining paired analytic object is
+--
+--   -(1/2) * outer paired symmetric N-mu correlation
+--     + signed horizontal remainder.
+--
+-- No bound for that object is claimed.  The local cubic/V4 recut has been
+-- tested and should not be expanded into a second proof programme.
+------------------------------------------------------------------------
+
+data OddPairedQuarticCoordinate : Set where
+  normalizedD1Odd : OddPairedQuarticCoordinate
+  normalizedD1CubicJet : OddPairedQuarticCoordinate
+  normalizedD1QuinticBound : OddPairedQuarticCoordinate
+  antisymmetricDiscrepancySymmetricWindow : OddPairedQuarticCoordinate
+  centeredV4ExactRecut : OddPairedQuarticCoordinate
+  cubicLeadingCorrelationV4Boundary : OddPairedQuarticCoordinate
+  globalSymmetricAbelPairing : OddPairedQuarticCoordinate
+  canonicalLocalOuterPairSplit : OddPairedQuarticCoordinate
+  outerPairedHorizontalHighObject : OddPairedQuarticCoordinate
+  outerPairedHorizontalHighEstimate : OddPairedQuarticCoordinate
+
+oddPairedQuarticStatus :
+  OddPairedQuarticCoordinate -> V4H4Status
+oddPairedQuarticStatus normalizedD1Odd =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus normalizedD1CubicJet =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus normalizedD1QuinticBound =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus antisymmetricDiscrepancySymmetricWindow =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus centeredV4ExactRecut =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus cubicLeadingCorrelationV4Boundary =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus globalSymmetricAbelPairing =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus canonicalLocalOuterPairSplit =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus outerPairedHorizontalHighObject =
+  leanSourceWrittenDonor
+oddPairedQuarticStatus outerPairedHorizontalHighEstimate =
+  openAnalyticObstruction
+
+oddPairingLocalV4IsPaid :
+  oddPairedQuarticStatus cubicLeadingCorrelationV4Boundary
+    ≡ leanSourceWrittenDonor
+oddPairingLocalV4IsPaid = refl
+
+outerPairedHorizontalEstimateIsActualOpenWall :
+  oddPairedQuarticStatus outerPairedHorizontalHighEstimate
+    ≡ openAnalyticObstruction
+outerPairedHorizontalEstimateIsActualOpenWall = refl
+
+oddPairedQuarticLeanDonorHead : String
+oddPairedQuarticLeanDonorHead =
+  "da229d43def6891951c1ece4a5b009a6243789d0"
+
+oddPairedQuarticTransportedIntoAgdaKernelHere : Bool
+oddPairedQuarticTransportedIntoAgdaKernelHere = false
+
+oddPairedQuarticInterpretation : String
+oddPairedQuarticInterpretation =
+  "Lean confirms the selected normalized cosine derivative is odd and has cubic jet -(2/3)S q^3 with a certified O(q^5 M6_abs) remainder on the canonical local interval. The antisymmetric quartic-scale centered discrepancy is exactly one symmetric N-mu window, and the leading cubic correlation reduces exactly to the existing V4 boundary-minus-moment coordinate. This is a fail-fast result rather than a closure: the Taylor regime is exactly the already-paid local interval. Globally, the symmetric Abel exhaustion pairs to Psi'_t(t+s) times D(t-s,t+s), which splits at the canonical radius into local plus outer pieces. The remaining analytic wall is the exact outer paired symmetric N-mu correlation combined with the same signed horizontal remainder."
