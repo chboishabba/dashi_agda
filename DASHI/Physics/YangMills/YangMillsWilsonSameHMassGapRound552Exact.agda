@@ -17,10 +17,14 @@ module DASHI.Physics.YangMills.YangMillsWilsonSameHMassGapRound552Exact where
 -- OS/semigroup spectral theorem.
 ------------------------------------------------------------------------
 
-open import Data.Rational.Base as ℚ using (ℚ)
+open import Data.Rational.Base using (ℚ; _≤_; _*_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
+import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as WEXT
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
+import DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact as Power
+import DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact as Geo
 import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact as R551
 import DASHI.Physics.YangMills.BalabanTransferEnergyDecayRatioCoordinateRound302Exact as R302
 import DASHI.Physics.YangMills.BalabanPairwiseMassRateFromTransferCoordinateRound311Exact as R311
@@ -29,7 +33,7 @@ import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OSGap
 record WilsonHalfRateClusteringSpectrumAuthority
     {Scale Volume Root State Observable Hamiltonian Energy : Set}
     {finite :
-      DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact.WilsonTwoInsertionConnectedShell
+      WEXT.WilsonTwoInsertionConnectedShell
         Scale Volume Root State Observable}
     (continuum : R551.WilsonContinuumClusteringInputs finite)
     (transfer : R311.SameHamiltonianTransferCoordinate Hamiltonian Energy)
@@ -40,11 +44,11 @@ record WilsonHalfRateClusteringSpectrumAuthority
     halfRateWilsonClusteringTransfer :
       (∀ left right time →
         R551.continuumConnectedCovarianceMagnitude continuum left right time
-        ℚ.≤
-        DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact.quarter
-        ℚ.*
-        DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact.rationalPower
-          DASHI.Physics.YangMills.BalabanTraceKoteckyPreissGeometricExact.half
+        ≤
+        Shell.quarter
+        *
+        Power.rationalPower
+          Geo.half
           time) →
       SpectrumSeparatedBy
         (R311.reconstructedHamiltonian transfer)
@@ -55,7 +59,7 @@ open WilsonHalfRateClusteringSpectrumAuthority public
 compileWilsonHalfRateToMassGap :
   ∀ {Scale Volume Root State Observable Hamiltonian Energy}
     {finite :
-      DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact.WilsonTwoInsertionConnectedShell
+      WEXT.WilsonTwoInsertionConnectedShell
         Scale Volume Root State Observable}
     {continuum : R551.WilsonContinuumClusteringInputs finite}
     (transfer : R311.SameHamiltonianTransferCoordinate Hamiltonian Energy) →
