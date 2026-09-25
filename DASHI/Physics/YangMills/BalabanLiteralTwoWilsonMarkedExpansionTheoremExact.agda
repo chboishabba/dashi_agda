@@ -37,6 +37,8 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalDomainRateSplitRound448Exac
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalPhysicalDecayRound451Exact as R451
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalFiniteCovarianceDecayRound452Exact as R452
 import DASHI.Physics.YangMills.BalabanCMP116ConnectedCorePathRound453Exact as R453
+import DASHI.Physics.YangMills.BalabanCMP116CanonicalPhysicalSeparationRound450Exact as R450
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonResidualDyadicCalibrationExact as Dyadic
 
 record LiteralTwoWilsonMarkedExpansionTheorem
     {Measure Observable : Set}
@@ -79,6 +81,42 @@ record LiteralTwoWilsonMarkedExpansionTheorem
         (R453.asCanonicalDomainSpecificRateSplit data connectedCore)
 
 open LiteralTwoWilsonMarkedExpansionTheorem public
+
+
+fromDyadicSourceDecay :
+  ∀ {Measure Observable dataSet extension base data embedding}
+    (mixedLog :
+      R445.R429LiteralMixedLogResponse
+        (R444.asR429 data)
+        embedding)
+    (connected :
+      R453.ConnectedCorePathGeometry data)
+    (sourceDyadic :
+      Dyadic.ResidualDyadicSourceCalibration
+        {Measure = Measure}
+        {Observable = Observable}
+        {dataSet = dataSet}
+        {extension = extension}
+        {base = base}
+        {data = data}
+        embedding
+        (R453.asCanonicalDomainSpecificRateSplit data connected))
+    (physical :
+      R450.CanonicalPhysicalSeparation data) →
+  LiteralTwoWilsonMarkedExpansionTheorem
+    {Measure = Measure}
+    {Observable = Observable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    data embedding
+fromDyadicSourceDecay {data = data}
+    mixedLog connected sourceDyadic physical = record
+  { mixedLogResponse = mixedLog
+  ; connectedCore = connected
+  ; residualDecay =
+      Dyadic.asCanonicalPhysicalDecay sourceDyadic physical
+  }
 
 canonicalB12 :
   ∀ {Measure Observable dataSet extension base data embedding} →
