@@ -1940,3 +1940,121 @@ ambientFarMinusMuTransportedIntoAgdaKernelHere = false
 ambientFarMinusMuInterpretation : String
 ambientFarMinusMuInterpretation =
   "The preferred RH analytic frontier is now de-vacuified. Lean factors the terminal margin through ambient horizontal displacement a and multiplicity m, proves the selected physical height defect positive on 0<|a|<=1/2, and proves the margin monotone in m, reducing the hardest ambient theorem to multiplicity one. A uniform ambient theorem over all real strip displacements would imply the earlier zero-quantified far-minus-mu estimate and hence exclude off-line zeros. Separately, Lean replaces the opaque existential Backlund threshold by the imported explicit Backlund theorem valid from 4, derives arbitrary-endpoint RvM and quartic V4 cutoffs at 5, and proves the literal far-minus-mu contradiction compiler starts exactly above the Platt-Trudgian cutoff. The PT-to-final-T middle-band seam is therefore closed. The ambient multiplicity-one signed far-minus-mu estimate remains open."
+
+
+------------------------------------------------------------------------
+-- QUANTITATIVE AMBIENT HEIGHT-DEFECT GEOMETRY
+--
+-- Lean now resolves the target-side small-horizontal-displacement scale.
+--
+-- For normalized alpha and the selected combined profile P_W:
+--
+--   M0 = M2 = 0,
+--   M4 = -4*S(W),
+--
+-- and the exact combined height defect is -1/4 times the compact cosh
+-- transform.  Retaining the signed sixth moment gives
+--
+--   D_W(alpha)
+--     = S(W)*alpha^4/24
+--       - M6(W)*alpha^6/2880
+--       + R8_W(alpha),
+--
+-- with
+--
+--   |R8_W(alpha)|
+--     <= |alpha|^8 * M8_abs(W) / 143360
+--
+-- on |alpha|<=eta0.
+--
+-- For physical horizontal displacement a and r=t/16:
+--
+--   H_W(a)
+--     = S(W)*a^4/(24*r^6)
+--       - M6(W)*a^6/(2880*r^8)
+--       + physicalR8_W(a),
+--
+--   |physicalR8_W(a)|
+--     <= M8_abs(W)*|a|^8/(143360*r^10).
+--
+-- On the actual strip |a|<=1/2 and t>=200, alpha=a/r lies inside the
+-- canonical local Taylor radius automatically.
+--
+-- Since the selected witness has M6(W)<0, the sixth-order term is favorable.
+-- Using the existing bounds
+--
+--   S(W) >= strengthFloor,
+--   M8_abs(W) <= (pi+1)^2 * K0,
+--
+-- Lean source-proves the explicit lower bound
+--
+--   H_W(a)
+--     >= strengthFloor*a^4/(24*r^6)
+--        - ((pi+1)^2*K0)*|a|^8/(143360*r^10).
+--
+-- Consequently the multiplicity-one ambient terminal margin has an explicit
+-- quartic-scale lower coordinate:
+--
+--   margin(W,1,a,EV)
+--     >= 2*(quartic leading term - eighth debt)
+--        - (1/2)*localBudget(W,EV).
+--
+-- This does NOT prove the far-minus-mu inequality.  It makes the target side
+-- quantitatively ordinary: the genuine remaining theorem must beat this
+-- explicit quartic physical margin with the coupled signed far-minus-mu
+-- statistic.
+------------------------------------------------------------------------
+
+data AmbientHeightDefectScaleCoordinate : Set where
+  normalizedCoshSixthExpansion :
+    AmbientHeightDefectScaleCoordinate
+  normalizedEighthRemainderBound :
+    AmbientHeightDefectScaleCoordinate
+  physicalQuarticSixthExpansion :
+    AmbientHeightDefectScaleCoordinate
+  favorableSignedSixthDrop :
+    AmbientHeightDefectScaleCoordinate
+  selectedExplicitPhysicalLowerBound :
+    AmbientHeightDefectScaleCoordinate
+  ambientSimpleMarginExplicitLowerBound :
+    AmbientHeightDefectScaleCoordinate
+  signedFarMinusMuBeatsExplicitAmbientMargin :
+    AmbientHeightDefectScaleCoordinate
+
+ambientHeightDefectScaleStatus :
+  AmbientHeightDefectScaleCoordinate -> V4H4Status
+ambientHeightDefectScaleStatus normalizedCoshSixthExpansion =
+  leanSourceWrittenDonor
+ambientHeightDefectScaleStatus normalizedEighthRemainderBound =
+  leanSourceWrittenDonor
+ambientHeightDefectScaleStatus physicalQuarticSixthExpansion =
+  leanSourceWrittenDonor
+ambientHeightDefectScaleStatus favorableSignedSixthDrop =
+  leanSourceWrittenDonor
+ambientHeightDefectScaleStatus selectedExplicitPhysicalLowerBound =
+  leanSourceWrittenDonor
+ambientHeightDefectScaleStatus ambientSimpleMarginExplicitLowerBound =
+  leanSourceWrittenDonor
+ambientHeightDefectScaleStatus signedFarMinusMuBeatsExplicitAmbientMargin =
+  openAnalyticObstruction
+
+ambientHeightDefectGeometryIsPaid :
+  ambientHeightDefectScaleStatus ambientSimpleMarginExplicitLowerBound
+    ≡ leanSourceWrittenDonor
+ambientHeightDefectGeometryIsPaid = refl
+
+signedFarMinusMuStillOpenAfterAmbientExpansion :
+  ambientHeightDefectScaleStatus signedFarMinusMuBeatsExplicitAmbientMargin
+    ≡ openAnalyticObstruction
+signedFarMinusMuStillOpenAfterAmbientExpansion = refl
+
+ambientHeightDefectScaleLeanDonorHead : String
+ambientHeightDefectScaleLeanDonorHead =
+  "1acca73c9d5969a37986ec1265ddeb70100ec6d3"
+
+ambientHeightDefectScaleTransportedIntoAgdaKernelHere : Bool
+ambientHeightDefectScaleTransportedIntoAgdaKernelHere = false
+
+ambientHeightDefectScaleInterpretation : String
+ambientHeightDefectScaleInterpretation =
+  "Lean source-writes the selected ambient height defect through sixth order with a certified eighth-order absolute remainder. After physical rescaling, the leading target contribution is S*a^4/(24*(t/16)^6), the selected negative M6 gives a favorable positive sixth-order correction, and the remaining eighth debt is bounded at order |a|^8*(t/16)^(-10). Existing strength-floor and K0 bounds produce an explicit multiplicity-one ambient margin lower coordinate. The coupled signed canonical far-minus-mu statistic still needs an independent upper theorem against that margin."
