@@ -55,6 +55,18 @@ def _timing_summary(values) -> dict:
     }
 
 
+def _diagnostic_priority(diagnostic):
+    return (
+        0 if diagnostic.severity == "error" else 1,
+        0 if diagnostic.evidence_sufficient else 1,
+        0 if any(fix.edits for fix in diagnostic.fixes) else 1,
+        str(diagnostic.path),
+        diagnostic.line,
+        diagnostic.column,
+        diagnostic.code,
+    )
+
+
 def _format_diagnostic(diagnostic) -> str:
     head = (
         f"{diagnostic.path}:{diagnostic.line}:{diagnostic.column}: "
@@ -176,6 +188,46 @@ def main(argv=None) -> int:
         action="store_true",
         help="emit benchmark results as JSON",
     )
+    benchmark.add_argument(
+        "--max-warm-ms",
+        type=float,
+        default=10000.0,
+        help="maximum allowed warm p95 latency (default: 10000 ms)",
+    )
+    benchmark.add_argument(
+        "--max-cold-ms",
+        type=float,
+        default=60000.0,
+        help="maximum allowed cold bootstrap latency (default: 60000 ms)",
+    )
+
+    next_error = subparsers.add_parser(
+        "next-error",
+        help="return the highest-priority current diagnostic for an agent",
+    )
+    next_error.add_argument("target", type=Path)
+    next_error.add_argument(
+        "--root",
+        type=Path,
+        default=Path.cwd(),
+        help="repository root (default: current directory)",
+    )
+    next_error.add_argument(
+        "--index",
+        type=Path,
+        default=Path(".cache/agda_preflight/source-index.sqlite3"),
+        help="persistent source-index database",
+    )
+    next_error.add_argument(
+        "--require-fix",
+        action="store_true",
+        help="only return diagnostics that have at least one suggested fix",
+    )
+    next_error.add_argument(
+        "--json",
+        action="store_true",
+        help="emit machine-readable result",
+    )
 
     apply_fix = subparsers.add_parser(
         "apply-fix",
@@ -287,24 +339,36 @@ def main(argv=None) -> int:
             snapshot.counts.get("files_parsed", 0)
             for snapshot in warm_snapshots
         ]
+        warm_summary = _timing_summary(warm_ms)
+        cold_ms = cold_payload["stages_ms"].get("request.total", 0.0)
+        all_zero_parse = all(value == 0 for value in warm_parse_counts)
+        slo_passed = (
+            cold_ms <= args.max_cold_ms
+            and warm_summary["p95_ms"] <= args.max_warm_ms
+            and all_zero_parse
+        )
         payload = {
             "target": str(target),
             "cold": cold_payload,
             "warm": {
                 "runs": args.runs,
-                "request_total": _timing_summary(warm_ms),
+                "request_total": warm_summary,
                 "files_parsed": {
                     "min": min(warm_parse_counts),
                     "max": max(warm_parse_counts),
                 },
-                "all_zero_parse": all(value == 0 for value in warm_parse_counts),
+                "all_zero_parse": all_zero_parse,
+            },
+            "slo": {
+                "max_cold_ms": args.max_cold_ms,
+                "max_warm_ms": args.max_warm_ms,
+                "passed": slo_passed,
             },
         }
 
         if args.json:
             print(json.dumps(payload, indent=2, sort_keys=True))
         else:
-            cold_ms = cold_payload["stages_ms"].get("request.total", 0.0)
             warm = payload["warm"]["request_total"]
             print(f"target: {target}")
             print(f"cold: {cold_ms:.3f} ms")
@@ -320,6 +384,52 @@ def main(argv=None) -> int:
                 f"min={payload['warm']['files_parsed']['min']} "
                 f"max={payload['warm']['files_parsed']['max']}"
             )
+
+        print(
+            "SLO: " + ("PASS" if slo_passed else "FAIL")
+        ) if not args.json else None
+        return 0 if slo_passed else 1
+
+    if args.command == "next-error":
+        result, snapshot, _ = _run_diagnose(
+            args.root,
+            args.index,
+            args.target,
+        )
+        candidates = list(result.diagnostics)
+        if args.require_fix:
+            candidates = [
+                item for item in candidates
+                if item.fixes
+            ]
+        candidates.sort(key=_diagnostic_priority)
+        diagnostic = candidates[0] if candidates else None
+
+        if args.json:
+            print(
+                json.dumps(
+                    {
+                        "status": "diagnostic" if diagnostic is not None else "clean",
+                        "diagnostic": (
+                            diagnostic.as_dict()
+                            if diagnostic is not None
+                            else None
+                        ),
+                        "profile": snapshot.as_dict(),
+                    },
+                    indent=2,
+                    sort_keys=True,
+                )
+            )
+        elif diagnostic is None:
+            print("dashi-agda: no matching diagnostics")
+        else:
+            print(_format_diagnostic(diagnostic))
+            for index, fix in enumerate(diagnostic.fixes):
+                print(
+                    f"  fix[{index}] {fix.applicability}: {fix.title} "
+                    f"[validate={fix.validation}]"
+                )
 
         return 0
 
