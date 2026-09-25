@@ -29,6 +29,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Core.AdmissibleConsumerFutureAdequacyExact as Adequacy
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
+import DASHI.Core.ResourceIndexedObserverRefinementExact as Resource
 import DASHI.Core.TypedDependencyCore as Dependency
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
@@ -151,6 +152,22 @@ satInPBuildsPresentAdequacy satP =
     (satInPBuildsOperationallyAdequateTruthProjection satP)
 
 ------------------------------------------------------------------------
+-- Structural refinement does not pay the resource obligation.
+--
+-- This generic exact countermodel is intentionally independent of SAT.  It
+-- records the logical shape needed by the P9 wall: proving that one observer
+-- strictly refines another does not prove that the refined observer is
+-- available inside the selected budget.
+------------------------------------------------------------------------
+
+structuralRefinementCanExceedBudget :
+  Resource.RefinementBudgetFailure
+    Resource.demoCoarse
+    Resource.demoFine
+structuralRefinementCanExceedBudget =
+  Resource.canonicalRefinementBudgetFailure
+
+------------------------------------------------------------------------
 -- Explicit boundary receipt.
 ------------------------------------------------------------------------
 
@@ -160,10 +177,11 @@ record PNotEqualsNPAdequacyBoundary : Set where
     semanticAdequacyAloneIsLowerBound : Bool
     realizableAdequacyUnderSatInPExists : Bool
     missingStepMustBeIndependentOfSATAnswer : Bool
+    strictRefinementAlonePaysResourceBudget : Bool
     shannonDynamicOwnerRemainsSeparate : Bool
 
 canonicalPNotEqualsNPAdequacyBoundary :
   PNotEqualsNPAdequacyBoundary
 canonicalPNotEqualsNPAdequacyBoundary =
   p-not-equals-np-adequacy-boundary
-    false true true true
+    false true true false true
