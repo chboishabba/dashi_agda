@@ -173,7 +173,7 @@ collisionResolutionMonsterCorrectionStillOpen ()
 
 automorphismOrderDoesNotRecoverInternalMarking :
   AutomorphismOrderAloneRecoversWildInternalMarking -> ⊥
-automorphismOrderDoesNotRecoverWildInternalMarking ()
+automorphismOrderDoesNotRecoverInternalMarking ()
 
 tableCollisionDoesNotProveSectorCorrection :
   TableTwoCollisionProvesSectorCorrection -> ⊥
