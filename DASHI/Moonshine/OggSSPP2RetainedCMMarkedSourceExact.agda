@@ -40,6 +40,7 @@ import DASHI.Physics.Closure.P2LaneInnerProductProof as Receipt
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact as Classical
 import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalClaimMatchExact as ClaimMatch
+import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as InertiaFive
 
 ------------------------------------------------------------------------
 -- 1. Distinct source-native marked carrier.
@@ -335,6 +336,15 @@ classicalClaimMatch =
 classicalFrameworkSupportsBadPrimeMarkedLevelStructure : Bool
 classicalFrameworkSupportsBadPrimeMarkedLevelStructure = true
 
+exactTenStateHasClassicallySourcedFactorization : Bool
+exactTenStateHasClassicallySourcedFactorization = true
+
+exactTenStateNamedClassicalModuliObjectIdentified : Bool
+exactTenStateNamedClassicalModuliObjectIdentified = false
+
+gamma04TenPointInterpretationRejected : Bool
+gamma04TenPointInterpretationRejected = true
+
 exactTenStatePresentationClassicallyIdentified : Bool
 exactTenStatePresentationClassicallyIdentified = false
 
@@ -354,6 +364,9 @@ record P2RetainedCMMarkedSourceBoundary : Set where
     receiptGaussianCMLevelFourCalibrationConsumed : Bool
     repositoryFormalReconstruction : Bool
     classicalBadPrimeLevelFrameworkAttached : Bool
+    exactTenStateHasClassicallySourcedFactorization : Bool
+    exactTenStateNamedClassicalModuliObjectIdentified : Bool
+    gamma04TenPointInterpretationRejected : Bool
     exactTenStateClassicallyIdentified : Bool
     externalClassicalX04IdentificationPaid : Bool
     receiptAloneClassifiesTenMarkedStates : Bool
@@ -362,4 +375,4 @@ canonicalP2RetainedCMMarkedSourceBoundary :
   P2RetainedCMMarkedSourceBoundary
 canonicalP2RetainedCMMarkedSourceBoundary =
   p2-retained-cm-marked-source-boundary
-    true true true true true true true true true false false false
+    true true true true true true true true true true false true false false false
