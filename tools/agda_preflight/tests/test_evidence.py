@@ -14,12 +14,17 @@ from agda_preflight.evidence import (
 )
 from agda_preflight.evidence_cli import main as evidence_main
 from agda_preflight.triage_cli import main as triage_main
-from agda_preflight.pytest_plugin import CollectedModule, _prime_scope_closure
+from agda_preflight.pytest_plugin import (
+    CollectedModule,
+    _prime_scope_closure,
+    _prime_typecheck_closure,
+)
 from agda_preflight.scope_backend import (
     AgdaAutoRefineBackend,
     AgdaScopeCheckBackend,
     AgdaTypecheckBackend,
     CommandScopeCheckBackend,
+    CommandTypecheckBackend,
     ExternalScopeBackend,
     ScopeRefinement,
     diagnostic_key,
@@ -527,6 +532,13 @@ def test_auto_refine_exposes_oracle_stats(tmp_path):
             "candidate_modules": 0,
             "partial_progress_modules": 0,
         },
+        "typecheck_cache": {
+            "validated_modules": 0,
+            "failed_frontier_modules": 0,
+            "aggregate_probe_roots": 0,
+            "candidate_modules": 0,
+            "partial_progress_modules": 0,
+        },
     }
 
 
@@ -871,6 +883,104 @@ def test_failed_scope_frontier_is_not_reprobed_during_refine(tmp_path):
     assert result.evidence_sufficient is False
 
 
+
+
+def _typecheck_deferred(path: Path):
+    return [
+        Diagnostic(
+            "TSAGDA079",
+            "typing suspicion",
+            path,
+            1,
+            1,
+            severity="warning",
+            confidence="insufficient-evidence",
+            evidence="dashi-index",
+            minimum_evidence="agda-typechecker",
+            evidence_sufficient=False,
+        )
+    ]
+
+
+def test_typecheck_closure_root_success_uses_one_probe(tmp_path):
+    leaf = write_module(tmp_path, "T.Leaf")
+    middle = write_module(tmp_path, "T.Middle", "\nimport T.Leaf\n")
+    top = write_module(tmp_path, "T.Top", "\nimport T.Middle\n")
+
+    backend = AgdaAutoRefineBackend("agda", typecheck=True)
+    backend.mark_scope_validated([leaf, middle, top])
+    calls = []
+
+    def probe(path, *, aggregate_root=False):
+        key = Path(path).resolve()
+        calls.append((key, aggregate_root))
+        backend._typecheck_validated.add(key)
+        if aggregate_root:
+            backend._typecheck_probe_roots.add(key)
+        return True
+
+    backend.probe_typecheck = probe
+    checker = Checker(tmp_path, scope_backend=backend)
+    checker.structural_check = lambda path: _typecheck_deferred(Path(path))
+    collected = [
+        CollectedModule("T.Leaf", leaf),
+        CollectedModule("T.Middle", middle),
+        CollectedModule("T.Top", top),
+    ]
+
+    _prime_typecheck_closure(checker, top, collected)
+
+    assert [path for path, _ in calls] == [top.resolve()]
+    assert backend.typecheck_validated(leaf)
+    assert backend.typecheck_validated(middle)
+    assert backend.typecheck_validated(top)
+
+
+def test_typecheck_closure_skips_scope_failed_branch(tmp_path):
+    bad = write_module(tmp_path, "T.Bad")
+    good = write_module(tmp_path, "T.Good")
+    top = write_module(
+        tmp_path,
+        "T.Root",
+        "\nimport T.Bad\nimport T.Good\n",
+    )
+
+    backend = AgdaAutoRefineBackend("agda", typecheck=True)
+    backend._scope_failed.update({top.resolve(), bad.resolve()})
+    backend.mark_scope_validated([good])
+    calls = []
+
+    def probe(path, *, aggregate_root=False):
+        key = Path(path).resolve()
+        calls.append(key)
+        if key != good.resolve():
+            raise AssertionError(f"scope-failed branch was typechecked: {key}")
+        backend._typecheck_validated.add(key)
+        return True
+
+    backend.probe_typecheck = probe
+    checker = Checker(tmp_path, scope_backend=backend)
+    checker.structural_check = lambda path: _typecheck_deferred(Path(path))
+    collected = [
+        CollectedModule("T.Bad", bad),
+        CollectedModule("T.Good", good),
+        CollectedModule("T.Root", top),
+    ]
+
+    _prime_typecheck_closure(checker, top, collected)
+
+    assert calls == [good.resolve()]
+    assert backend.typecheck_validated(good)
+    assert not backend.typecheck_known(bad)
+
+
+def test_command_typecheck_runner_uses_exit_code_contract(tmp_path):
+    path = write_module(tmp_path, "Type.Runner")
+    backend = CommandTypecheckBackend(
+        ["shadow-check", "{file}"],
+        cwd=tmp_path,
+    )
+    assert backend._argv(path) == ["shadow-check", str(path.resolve())]
 
 def test_command_scope_runner_substitutes_file_placeholder(tmp_path):
     path = write_module(tmp_path, "Runner.Placeholder")
