@@ -12,6 +12,7 @@ on:
       - 'DASHI/Moonshine/JInvariant369NeutralCuspRelationCrossPollinationExact.agda'
       - 'DASHI/Moonshine/JInvariant369SSP15SignedFRACTRANBranchExact.agda'
       - 'DASHI/Moonshine/JInvariant369OggAddressSSP15NoGoExact.agda'
+      - 'DASHI/Moonshine/JInvariant369SSP15PrimeInternalFibreExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalJointReflectionMinimalExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartActionSeparationExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartMobiusMatrixBridgeExact.agda'
