@@ -264,6 +264,12 @@ def main(argv=None) -> int:
         default=60000.0,
         help="maximum allowed cold bootstrap latency (default: 60000 ms)",
     )
+    benchmark.add_argument(
+        "--max-next-error-ms",
+        type=float,
+        default=2000.0,
+        help="maximum allowed warm next-error p95 latency (default: 2000 ms)",
+    )
 
     next_error = subparsers.add_parser(
         "next-error",
@@ -411,6 +417,17 @@ def main(argv=None) -> int:
             )
             warm_snapshots.append(snapshot)
 
+        next_error_snapshots = []
+        for _ in range(args.runs):
+            _, snapshot = _run_next_error(
+                root,
+                args.index,
+                target,
+                require_fix=False,
+                jobs=args.jobs,
+            )
+            next_error_snapshots.append(snapshot)
+
         cold_payload = cold_snapshot.as_dict()
         warm_ms = [
             snapshot.as_dict()["stages_ms"].get("request.total", 0.0)
@@ -421,12 +438,31 @@ def main(argv=None) -> int:
             for snapshot in warm_snapshots
         ]
         warm_summary = _timing_summary(warm_ms)
+        next_error_ms = [
+            snapshot.as_dict()["stages_ms"].get(
+                "request.total",
+                0.0,
+            )
+            for snapshot in next_error_snapshots
+        ]
+        next_error_parse_counts = [
+            snapshot.counts.get("files_parsed", 0)
+            for snapshot in next_error_snapshots
+        ]
+        next_error_summary = _timing_summary(next_error_ms)
         cold_ms = cold_payload["stages_ms"].get("request.total", 0.0)
         all_zero_parse = all(value == 0 for value in warm_parse_counts)
+        next_error_zero_parse = all(
+            value == 0
+            for value in next_error_parse_counts
+        )
         slo_passed = (
             cold_ms <= args.max_cold_ms
             and warm_summary["p95_ms"] <= args.max_warm_ms
+            and next_error_summary["p95_ms"]
+                <= args.max_next_error_ms
             and all_zero_parse
+            and next_error_zero_parse
         )
         payload = {
             "target": str(target),
@@ -440,9 +476,19 @@ def main(argv=None) -> int:
                 },
                 "all_zero_parse": all_zero_parse,
             },
+            "agent_next_error": {
+                "runs": args.runs,
+                "request_total": next_error_summary,
+                "files_parsed": {
+                    "min": min(next_error_parse_counts),
+                    "max": max(next_error_parse_counts),
+                },
+                "all_zero_parse": next_error_zero_parse,
+            },
             "slo": {
                 "max_cold_ms": args.max_cold_ms,
                 "max_warm_ms": args.max_warm_ms,
+                "max_next_error_ms": args.max_next_error_ms,
                 "passed": slo_passed,
             },
         }
@@ -464,6 +510,16 @@ def main(argv=None) -> int:
                 "warm files_parsed: "
                 f"min={payload['warm']['files_parsed']['min']} "
                 f"max={payload['warm']['files_parsed']['max']}"
+            )
+            next_error = payload["agent_next_error"][
+                "request_total"
+            ]
+            print(
+                "next-error: "
+                f"min={next_error['min_ms']:.3f} ms "
+                f"p50={next_error['p50_ms']:.3f} ms "
+                f"p95={next_error['p95_ms']:.3f} ms "
+                f"max={next_error['max_ms']:.3f} ms"
             )
 
         print(
