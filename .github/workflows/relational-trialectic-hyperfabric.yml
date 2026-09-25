@@ -38,6 +38,8 @@ on:
       - 'DASHI/Cognition/PNF/TrialecticMemoryLearningHyperfabricExact.agda'
       - 'DASHI/EverythingRelationalTrialecticHyperfabric.agda'
       - 'DASHI/Core/RelationalTransportDescentSheafExact.agda'
+      - 'DASHI/Reasoning/TrialecticHigherDescentPromotionLedgerExact.agda'
+      - 'DASHI/Core/RelationalTransportGroupoidActionExact.agda'
       - 'DASHI/Reasoning/RelationalPerspectiveSubjectExact.agda'
       - 'DASHI/Reasoning/RelationalPerspectiveIntegrationExact.agda'
       - 'DASHI/Reasoning/TrialecticProductiveJoinDescentExact.agda'
