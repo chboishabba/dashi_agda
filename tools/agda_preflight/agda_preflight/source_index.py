@@ -504,7 +504,6 @@ class SourceIndex:
                     self.profiler.count("closure_cache_miss")
                     return None
                 if not self._fresh(row, stat):
-                    self.profiler.count("dirty_modules")
                     self.profiler.count("closure_cache_miss")
                     return None
                 modules.append(row["module_name"])
