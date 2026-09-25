@@ -83,6 +83,35 @@ p3StabilizerRecognition recognition =
   Recognition.stabilizerRecognition
     (P3ArithmeticTo369Recognition.fullRecognition recognition)
 
+/-- Every target p=3 component has a chosen arithmetic-source preimage orbit. -/
+p3TargetOrbitToArithmeticOrbit :
+  {source : SourceSocket.P3MarkedFrobeniusSource} →
+  (recognition : P3ArithmeticTo369Recognition source) →
+  Target.ConstantTernaryOrbit →
+  Orbit.Orbit (SourceSocket.orbits source)
+p3TargetOrbitToArithmeticOrbit recognition =
+  Recognition.preimageOrbit (p3Pi0Surjection recognition)
+
+/-- That preimage map is injective: a full recognition source must contain
+at least the two distinct zero/nonzero target orbit strata. -/
+p3TargetOrbitEmbedding :
+  {source : SourceSocket.P3MarkedFrobeniusSource} →
+  (recognition : P3ArithmeticTo369Recognition source) →
+  {left right : Target.ConstantTernaryOrbit} →
+  p3TargetOrbitToArithmeticOrbit recognition left
+  ≡ p3TargetOrbitToArithmeticOrbit recognition right →
+  left ≡ right
+p3TargetOrbitEmbedding recognition {left} {right} same =
+  trans
+    (sym (Recognition.hitsEveryTargetOrbit
+      (p3Pi0Surjection recognition) left))
+    (trans
+      (cong
+        (Recognition.mapOrbit (p3OrbitRecognition recognition))
+        same)
+      (Recognition.hitsEveryTargetOrbit
+        (p3Pi0Surjection recognition) right))
+
 ------------------------------------------------------------------------
 -- 2. p=2 arithmetic -> retained-orientation 369 recognition.
 --
@@ -141,6 +170,39 @@ p2StabilizerRecognition :
 p2StabilizerRecognition recognition =
   Recognition.stabilizerRecognition
     (P2ArithmeticTo369Recognition.fullRecognition recognition)
+
+/-- Every retained-orientation p=2 target state is itself a target orbit, so a
+full arithmetic recognition chooses a source orbit for each of the ten exact
+codec states. -/
+p2TargetStateToArithmeticOrbit :
+  {source : SourceSocket.P2MarkedArithmeticSource} →
+  (recognition : P2ArithmeticTo369Recognition source) →
+  Target.P2ResidualObject →
+  Orbit.Orbit (SourceSocket.orbits source)
+p2TargetStateToArithmeticOrbit recognition =
+  Recognition.preimageOrbit (p2Pi0Surjection recognition)
+
+/-- The chosen source-orbit map is injective.  Thus any valid arithmetic p=2
+source must have enough distinct orbit structure to carry all ten exact
+retained-orientation codec states; a one-class or five-class source cannot
+possibly inhabit full recognition. -/
+p2TargetStateEmbedding :
+  {source : SourceSocket.P2MarkedArithmeticSource} →
+  (recognition : P2ArithmeticTo369Recognition source) →
+  {left right : Target.P2ResidualObject} →
+  p2TargetStateToArithmeticOrbit recognition left
+  ≡ p2TargetStateToArithmeticOrbit recognition right →
+  left ≡ right
+p2TargetStateEmbedding recognition {left} {right} same =
+  trans
+    (sym (Recognition.hitsEveryTargetOrbit
+      (p2Pi0Surjection recognition) left))
+    (trans
+      (cong
+        (Recognition.mapOrbit (p2OrbitRecognition recognition))
+        same)
+      (Recognition.hitsEveryTargetOrbit
+        (p2Pi0Surjection recognition) right))
 
 ------------------------------------------------------------------------
 -- 3. Exact lane indexing and codec target are part of the recognition target.
@@ -208,6 +270,9 @@ record ArithmeticTo369RecognitionBoundary : Set where
     p3TargetIsExactDependentResidualCodec : Bool
     exactOggLaneKeysOwned : Bool
     fullPi0BijectionRequired : Bool
+    targetOrbitEmbeddingBackIntoArithmeticSourceOwned : Bool
+    p2TenStateTargetInjectsIntoArithmeticSourceOrbits : Bool
+    p3TwoStrataTargetInjectsIntoArithmeticSourceOrbits : Bool
     stabilizerRecognitionRequired : Bool
     reverseCompatibilityNotPromoted : Bool
     p2RecognitionInhabited : Bool
@@ -218,6 +283,8 @@ canonicalArithmeticTo369RecognitionBoundary :
   ArithmeticTo369RecognitionBoundary
 canonicalArithmeticTo369RecognitionBoundary =
   arithmetic-to369-recognition-boundary
-    true true true true true true true
+    true true true true true
+    true true true
+    true true
     false false
     missingP2MarkedArithmeticSource
