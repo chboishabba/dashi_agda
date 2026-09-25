@@ -30,6 +30,9 @@ data AntigravityTraceLeaf : Set where
   attachSelectedCMP119SourceToCanonicalWilsonGibbsCalculus :
     AntigravityTraceLeaf
 
+  attachSelectedMetricSlotsToCanonicalWilsonCoordinates :
+    AntigravityTraceLeaf
+
   inhabitSelectedRationalHaarIntegrationLaws :
     AntigravityTraceLeaf
 
@@ -152,3 +155,18 @@ selectedQuantumTraceSignStillRequired = true
 selectedQuantumTraceSignStillRequiredIsTrue :
   selectedQuantumTraceSignStillRequired ≡ true
 selectedQuantumTraceSignStillRequiredIsTrue = refl
+
+
+selectedWilsonCoordinateRoundTripCompilerClosed : Bool
+selectedWilsonCoordinateRoundTripCompilerClosed = true
+
+selectedWilsonCoordinateRoundTripCompilerClosedIsTrue :
+  selectedWilsonCoordinateRoundTripCompilerClosed ≡ true
+selectedWilsonCoordinateRoundTripCompilerClosedIsTrue = refl
+
+selectedMetricSlotRoundTripStillRequired : Bool
+selectedMetricSlotRoundTripStillRequired = true
+
+selectedMetricSlotRoundTripStillRequiredIsTrue :
+  selectedMetricSlotRoundTripStillRequired ≡ true
+selectedMetricSlotRoundTripStillRequiredIsTrue = refl
