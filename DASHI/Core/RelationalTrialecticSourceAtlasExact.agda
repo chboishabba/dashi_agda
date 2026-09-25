@@ -250,6 +250,46 @@ dodgePettitBatesValenteAbuseSIP =
     "supports a bounded empirical relation between early abuse and later biased social-information processing; it does not establish a general trauma benefit or determine an individual's current model"
     Source.publicAttribution
 
+
+daviesMartinESTR : Source.AttributedSource
+daviesMartinESTR =
+  Source.mkDOISource
+    "Patrick T. Davies; Meredith J. Martin"
+    "The Reformulation of Emotional Security Theory: The Role of Children's Social Defense in Developmental Psychopathology"
+    "Development and Psychopathology 25(4 Pt 2):1435-1454"
+    "2013"
+    "10.1017/S0954579413000709"
+    "https://doi.org/10.1017/S0954579413000709"
+    Source.academicArticleSource
+    "supports a social-defense-system account of children's qualitatively different responses to interpersonal threat, including involvement/avoidance and pattern-based coping; it does not establish superior social intelligence or determine an individual's present motive"
+    Source.publicAttribution
+
+ickesEmpathicAccuracy : Source.AttributedSource
+ickesEmpathicAccuracy =
+  Source.mkDOISource
+    "William Ickes; Linda Stinson; Victor Bissonnette; Stella Garcia"
+    "Naturalistic social cognition: Empathic accuracy in mixed-sex dyads"
+    "Journal of Personality and Social Psychology 59(4):730-742"
+    "1990"
+    "10.1037/0022-3514.59.4.730"
+    "https://doi.org/10.1037/0022-3514.59.4.730"
+    Source.academicArticleSource
+    "supports treating another person's thoughts/feelings as a fallibly inferred target with measurable accuracy; it does not license transparent access to another subject"
+    Source.publicAttribution
+
+rokitaDauvermannDonohoeReview : Source.AttributedSource
+rokitaDauvermannDonohoeReview =
+  Source.mkDOISource
+    "Karolina I. Rokita; Maria R. Dauvermann; Gary Donohoe"
+    "Early life experiences and social cognition in major psychiatric disorders: A systematic review"
+    "European Psychiatry 53:123-133"
+    "2018"
+    "10.1016/j.eurpsy.2018.06.006"
+    "https://doi.org/10.1016/j.eurpsy.2018.06.006"
+    Source.academicArticleSource
+    "supports a broad association between adverse early social experience and poorer social-cognitive performance in clinical populations; it does not establish a universal individual effect or the later DASHI anisotropic-threat model"
+    Source.publicAttribution
+
 relationalTrialecticSourceAtlas : Source.AttributedSourceAtlas
 relationalTrialecticSourceAtlas =
   Source.mkSourceAtlas
@@ -273,6 +313,9 @@ relationalTrialecticSourceAtlas =
     ∷ jackSilencingSelf
     ∷ crickDodgeSocialInformationProcessing
     ∷ dodgePettitBatesValenteAbuseSIP
+    ∷ daviesMartinESTR
+    ∷ ickesEmpathicAccuracy
+    ∷ rokitaDauvermannDonohoeReview
     ∷ [] )
     "Selected empirical/theoretical anchors only. Sources motivate bounded interfaces and distinctions; citations do not import proofs, clinical authority, causal trauma laws, or the DASHI finite/sheaf/369 constructions."
 
