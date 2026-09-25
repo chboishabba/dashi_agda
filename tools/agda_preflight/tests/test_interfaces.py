@@ -112,3 +112,67 @@ open import Base public
     )
 
     assert resolved["Middle"].exports == checker.exported_names(middle_summary)
+
+
+
+def test_preloaded_interface_resolves_qualified_record_field_result(tmp_path):
+    b = write_module(
+        tmp_path,
+        "B",
+        """
+record S : Set₁ where
+  field
+    value : Set
+""",
+    )
+    a = write_module(
+        tmp_path,
+        "A",
+        """
+import B
+
+record R : Set₁ where
+  field
+    child : B.S
+""",
+    )
+    use = write_module(
+        tmp_path,
+        "UseQualified",
+        """
+import A
+
+mk : A.R
+mk =
+  record
+    { child =
+        record
+          { value = Set
+          }
+    }
+""",
+    )
+
+    builder = Checker(tmp_path)
+    summaries = {
+        "A": builder.parse_summary(a),
+        "B": builder.parse_summary(b),
+    }
+    interfaces = resolve_interface_exports(
+        {
+            module: interface_from_summary(tmp_path, summary)
+            for module, summary in summaries.items()
+        }
+    )
+
+    baseline = Checker(tmp_path).structural_check(use)
+
+    profiler = Profiler()
+    preloaded = Checker(
+        tmp_path,
+        profiler=profiler,
+        interfaces=interfaces,
+    ).structural_check(use)
+
+    assert diagnostic_view(preloaded) == diagnostic_view(baseline)
+    assert profiler.snapshot().counts["files_parsed"] == 1
