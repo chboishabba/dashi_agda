@@ -202,3 +202,46 @@ fixtureGroupingReviewDoesNotPayTruth :
     fixtureReviewedGroupingMaterialization
   ≡ false
 fixtureGroupingReviewDoesNotPayTruth = refl
+
+
+fixtureAutoObservation : Scale.AutoEventObservationCandidate
+fixtureAutoObservation =
+  Scale.auto-event-observation-candidate
+    "observation:scale1:fixture"
+    "statement:fixture"
+    "web"
+    ("entity:fixture" ∷ [])
+    ("temporal:fixture" ∷ [])
+    ("event-fingerprint:fixture" ∷ [])
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureAutoProposal : Scale.AutoEventJoinProposalProjection
+fixtureAutoProposal =
+  Scale.auto-event-join-proposal-projection
+    "event-join-proposal:fixture"
+    ("observation:scale1:a" ∷ "observation:scale1:b" ∷ [])
+    ("document" ∷ "web" ∷ [])
+    ("entity:fixture" ∷ "temporal:fixture" ∷ [])
+    true refl
+    false refl
+    false refl
+    false refl
+
+fixtureAutoObservationDoesNotCreateEventIdentity :
+  Scale.AutoEventObservationCandidate.createsEventIdentity fixtureAutoObservation
+  ≡ false
+fixtureAutoObservationDoesNotCreateEventIdentity = refl
+
+fixtureAutoProposalRequiresReview :
+  Scale.AutoEventJoinProposalProjection.requiresReview fixtureAutoProposal
+  ≡ true
+fixtureAutoProposalRequiresReview = refl
+
+fixtureAutoProposalDoesNotCreateEventIdentity :
+  Scale.AutoEventJoinProposalProjection.createsEventIdentity fixtureAutoProposal
+  ≡ false
+fixtureAutoProposalDoesNotCreateEventIdentity = refl
