@@ -102,6 +102,7 @@ import DASHI.Physics.Closure.NSTriadKNR650CombinedPaymentToWeightedWorkRound724E
 import DASHI.Physics.Closure.NSTriadKNR650CombinedCommutatorHomogeneityFrontierRound725Exact as R725
 import DASHI.Physics.Closure.NSTriadKNR650CombinedToLiteralR406Round726Exact as R726
 import DASHI.Physics.Closure.NSTriadKNR650CombinedC1C2CriticalBarrierRound727Exact as R727
+import DASHI.Physics.Closure.NSTriadKNR650CurrentAnalyticCutsetRound728Exact as R728
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -149,6 +150,26 @@ round650PositiveEDMassAutomaticallyClosesCombinedC1 =
 round650CombinedC1AndStrictMarginC2CompileToCriticalBarrier : Bool
 round650CombinedC1AndStrictMarginC2CompileToCriticalBarrier =
   R727.round727CombinedC1C2PlusInitialSourceBuildUniformCriticalBarrier
+
+round650CurrentAnalyticCutsetExactlyThreeCoordinates : Bool
+round650CurrentAnalyticCutsetExactlyThreeCoordinates =
+  R728.round728ExactlyThreeProofBearingCoordinates
+
+round650CurrentCombinedPaymentClosed : Bool
+round650CurrentCombinedPaymentClosed =
+  R728.round728CombinedGlobalCommutatorPaymentClosed
+
+round650CurrentCombinedToR406TransportClosed : Bool
+round650CurrentCombinedToR406TransportClosed =
+  R728.round728CombinedToLiteralR406TransportClosed
+
+round650CurrentStrictMarginCriticalProductionClosed : Bool
+round650CurrentStrictMarginCriticalProductionClosed =
+  R728.round728StrictMarginCriticalProductionClosed
+
+round650CurrentThreeCoordinatesCompileToCriticalBarrier : Bool
+round650CurrentThreeCoordinatesCompileToCriticalBarrier =
+  R728.round728ThreeCoordinatesCompileToCriticalBarrier
 
 round650C2RadialSameObjectNormalizationClosed : Bool
 round650C2RadialSameObjectNormalizationClosed =
