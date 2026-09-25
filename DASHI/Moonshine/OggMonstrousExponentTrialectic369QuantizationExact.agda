@@ -32,6 +32,7 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 import DASHI.Core.DependentRecoverableProjectionExact as Recoverable
 import DASHI.Core.TopDownObservationCalculusExact as TopDown
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Fabric
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
@@ -449,7 +450,7 @@ presencePatternFactorsThroughSurface :
     tripleSurface
     presencePatternConsumer
 presencePatternFactorsThroughSurface =
-  Descent.factorsThrough
+  Factorized.factorizedRefinement
     (λ surface -> surface)
     (λ triple -> refl)
 
@@ -533,6 +534,133 @@ canonicalFullContributionRoutingReceipt =
     retainFullArithmeticTripleCode
     refl
 
+
+------------------------------------------------------------------------
+-- 4h. Role-indexed selective residual routing.
+--
+-- A consumer may need one attributed contribution magnitude without needing
+-- the other two.  Retain the common T3 presence surface plus exactly the
+-- residual for the requested source role.
+------------------------------------------------------------------------
+
+roleSurface :
+  Arithmetic.ModularContributionRole ->
+  Fabric.Ternary27Point ->
+  SSP.SSPTrit
+roleSurface Arithmetic.frickeComparison = Fabric.x
+roleSurface Arithmetic.levelPComparison = Fabric.y
+roleSurface Arithmetic.levelP2Comparison = Fabric.z
+
+roleMagnitude :
+  Arithmetic.ModularContributionRole ->
+  ArithmeticTriple ->
+  Nat
+roleMagnitude Arithmetic.frickeComparison = tripleA
+roleMagnitude Arithmetic.levelPComparison = tripleB
+roleMagnitude Arithmetic.levelP2Comparison = tripleC
+
+SelectedRoleResidual :
+  Arithmetic.ModularContributionRole ->
+  Fabric.Ternary27Point ->
+  Set
+SelectedRoleResidual role surface =
+  PresenceResidual (roleSurface role surface)
+
+selectedRoleResidual :
+  (role : Arithmetic.ModularContributionRole) ->
+  (triple : ArithmeticTriple) ->
+  SelectedRoleResidual role (tripleSurface triple)
+selectedRoleResidual Arithmetic.frickeComparison
+  (arithmetic-triple a b c) = presenceResidual a
+selectedRoleResidual Arithmetic.levelPComparison
+  (arithmetic-triple a b c) = presenceResidual b
+selectedRoleResidual Arithmetic.levelP2Comparison
+  (arithmetic-triple a b c) = presenceResidual c
+
+record SelectedRoleCode
+  (role : Arithmetic.ModularContributionRole) : Set where
+  constructor selected-role-code
+  field
+    selectedSurface : Fabric.Ternary27Point
+    selectedResidual : SelectedRoleResidual role selectedSurface
+
+open SelectedRoleCode public
+
+encodeSelectedRole :
+  (role : Arithmetic.ModularContributionRole) ->
+  ArithmeticTriple ->
+  SelectedRoleCode role
+encodeSelectedRole role triple =
+  selected-role-code
+    (tripleSurface triple)
+    (selectedRoleResidual role triple)
+
+decodeSelectedRoleMagnitude :
+  (role : Arithmetic.ModularContributionRole) ->
+  SelectedRoleCode role ->
+  Nat
+decodeSelectedRoleMagnitude role
+  (selected-role-code surface residual) =
+  reopenPresence (roleSurface role surface) residual
+
+decodeEncodeSelectedRoleMagnitude :
+  (role : Arithmetic.ModularContributionRole) ->
+  (triple : ArithmeticTriple) ->
+  decodeSelectedRoleMagnitude role (encodeSelectedRole role triple)
+  ≡ roleMagnitude role triple
+decodeEncodeSelectedRoleMagnitude
+  Arithmetic.frickeComparison
+  (arithmetic-triple zero b c) = refl
+decodeEncodeSelectedRoleMagnitude
+  Arithmetic.frickeComparison
+  (arithmetic-triple (suc a) b c) = refl
+decodeEncodeSelectedRoleMagnitude
+  Arithmetic.levelPComparison
+  (arithmetic-triple a zero c) = refl
+decodeEncodeSelectedRoleMagnitude
+  Arithmetic.levelPComparison
+  (arithmetic-triple a (suc b) c) = refl
+decodeEncodeSelectedRoleMagnitude
+  Arithmetic.levelP2Comparison
+  (arithmetic-triple a b zero) = refl
+decodeEncodeSelectedRoleMagnitude
+  Arithmetic.levelP2Comparison
+  (arithmetic-triple a b (suc c)) = refl
+
+selectedRoleCodeSufficesForRoleMagnitude :
+  (role : Arithmetic.ModularContributionRole) ->
+  Descent.ConsumerSufficient
+    (encodeSelectedRole role)
+    (roleMagnitude role)
+selectedRoleCodeSufficesForRoleMagnitude role left right sameCode =
+  trans
+    (sym (decodeEncodeSelectedRoleMagnitude role left))
+    (trans
+      (cong (decodeSelectedRoleMagnitude role) sameCode)
+      (decodeEncodeSelectedRoleMagnitude role right))
+
+data ArithmeticRoleConsumerClass : Set where
+  oneRoleMagnitude :
+    Arithmetic.ModularContributionRole ->
+    ArithmeticRoleConsumerClass
+
+data ArithmeticRoleRetention : Set where
+  retainT3PlusSelectedRoleResidual :
+    Arithmetic.ModularContributionRole ->
+    ArithmeticRoleRetention
+
+routeArithmeticRoleConsumer :
+  ArithmeticRoleConsumerClass ->
+  ArithmeticRoleRetention
+routeArithmeticRoleConsumer (oneRoleMagnitude role) =
+  retainT3PlusSelectedRoleResidual role
+
+selectedRoleRoutingIsStrictlyLessThanFullTripleByPolicy :
+  (role : Arithmetic.ModularContributionRole) ->
+  routeArithmeticRoleConsumer (oneRoleMagnitude role)
+  ≡ retainT3PlusSelectedRoleResidual role
+selectedRoleRoutingIsStrictlyLessThanFullTripleByPolicy role = refl
+
 ------------------------------------------------------------------------
 -- 5. Role order is retained exactly.
 --
@@ -600,6 +728,8 @@ record OggMonstrousExponentTrialectic369QuantizationBoundary : Set where
     presenceConsumerMayDiscardResidual : Bool
     exponentSumConsumerRequiresResidual : Bool
     fullContributionConsumerRequiresResidual : Bool
+    roleIndexedSelectiveResidualRoutingOwned : Bool
+    selectedRoleResidualSufficesForRoleMagnitude : Bool
     arithmeticFrameInheritsJRendererPantsMeaning : Bool
     exactMagnitudeRecoveryFromPresenceCode : Bool
     arithmeticPolarityIdentityClaimed : Bool
@@ -612,5 +742,5 @@ canonicalOggMonstrousExponentTrialectic369QuantizationBoundary =
   ogg-monstrous-exponent-trialectic-369-quantization-boundary
     true true true true true
     true true true true
-    true true true true true true
+    true true true true true true true true
     false false true false
