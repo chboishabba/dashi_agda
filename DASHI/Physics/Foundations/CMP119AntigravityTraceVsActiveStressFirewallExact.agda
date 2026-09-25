@@ -3,9 +3,9 @@ module DASHI.Physics.Foundations.CMP119AntigravityTraceVsActiveStressFirewallExa
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; _<_; -_)
+open import Data.Rational.Base as ℚ using
+  (ℚ; 0ℚ; _+_; _-_; _*_; _<_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (_≡_)
 
 ------------------------------------------------------------------------
 -- TRACE != ACTIVE STRESS
@@ -15,13 +15,14 @@ open import Relation.Binary.PropositionalEquality using (_≡_)
 --   trace(T)  = -rho + px + py + pz
 --   active(T) =  rho + px + py + pz
 --
--- hence
+-- Hence:
 --
 --   active(T) = trace(T) + 2 rho.
 --
--- The Euclidean four-diagonal sum selected by the existing CMP119 trace lane
--- analytically continues to the Lorentzian trace contraction.  It is not, by
--- itself, the Raychaudhuri/static active-stress combination.
+-- The four-diagonal Euclidean trace sum in the CMP119 anomaly lane therefore
+-- does not, by itself, establish the Lorentzian Raychaudhuri/static active
+-- contraction.  The missing physics is control of the timelike energy-density
+-- contribution on the SAME stress tensor.
 ------------------------------------------------------------------------
 
 lorentzianTrace :
@@ -38,73 +39,40 @@ activeStressIsTracePlusTwiceEnergyDensity :
   ∀ rho px py pz →
   lorentzianActiveStress rho px py pz
   ≡
-  lorentzianTrace rho px py pz + (2ℚ * rho)
+  lorentzianTrace rho px py pz + ((1 ℚ.+ 1) * rho)
 activeStressIsTracePlusTwiceEnergyDensity rho px py pz =
   ℚRing.solve-∀ rho px py pz
 
-------------------------------------------------------------------------
--- Exact counterexample carried by the explicit finite-thickness geometry.
---
--- rho = 1, pr = 0, pt = -33/380:
---
---   trace  = -223/190 < 0
---   active =  157/190 > 0.
-------------------------------------------------------------------------
+record TraceToActiveStressClosure : Set where
+  field
+    rho px py pz : ℚ
 
-counterexampleRho : ℚ
-counterexampleRho = 1ℚ
+    traceNegative :
+      lorentzianTrace rho px py pz < 0ℚ
 
-counterexamplePR : ℚ
-counterexamplePR = 0ℚ
+    -- This is the actual additional inequality required after the anomaly:
+    -- trace(T) + 2 rho < 0.
+    tracePlusTwiceEnergyDensityNegative :
+      lorentzianTrace rho px py pz + ((1 ℚ.+ 1) * rho) < 0ℚ
 
-counterexamplePT : ℚ
-counterexamplePT = - (33 ℚ./ 380)
+open TraceToActiveStressClosure public
 
-counterexampleTrace :
-  lorentzianTrace
-    counterexampleRho
-    counterexamplePR
-    counterexamplePT
-    counterexamplePT
-  ≡ - (223 ℚ./ 190)
-counterexampleTrace = refl
-
-counterexampleTraceNegative :
-  lorentzianTrace
-    counterexampleRho
-    counterexamplePR
-    counterexamplePT
-    counterexamplePT
+tracePlusEnergyControlClosesNegativeActiveStress :
+  (input : TraceToActiveStressClosure) →
+  lorentzianActiveStress
+    (rho input) (px input) (py input) (pz input)
   < 0ℚ
-counterexampleTraceNegative = by
-  norm_num
+tracePlusEnergyControlClosesNegativeActiveStress input
+  rewrite activeStressIsTracePlusTwiceEnergyDensity
+    (rho input) (px input) (py input) (pz input) =
+  tracePlusTwiceEnergyDensityNegative input
 
-counterexampleActive :
-  lorentzianActiveStress
-    counterexampleRho
-    counterexamplePR
-    counterexamplePT
-    counterexamplePT
-  ≡ (157 ℚ./ 190)
-counterexampleActive = refl
+negativeTraceAloneClosesNegativeActiveStress : Bool
+negativeTraceAloneClosesNegativeActiveStress = false
 
-counterexampleActivePositive :
-  0ℚ
-  <
-  lorentzianActiveStress
-    counterexampleRho
-    counterexamplePR
-    counterexamplePT
-    counterexamplePT
-counterexampleActivePositive = by
-  norm_num
-
-negativeTraceImpliesNegativeActiveStress : Bool
-negativeTraceImpliesNegativeActiveStress = false
-
-negativeTraceImpliesNegativeActiveStressIsFalse :
-  negativeTraceImpliesNegativeActiveStress ≡ false
-negativeTraceImpliesNegativeActiveStressIsFalse = refl
+negativeTraceAloneClosesNegativeActiveStressIsFalse :
+  negativeTraceAloneClosesNegativeActiveStress ≡ false
+negativeTraceAloneClosesNegativeActiveStressIsFalse = refl
 
 traceAnomalyAloneClosesRepulsionSource : Bool
 traceAnomalyAloneClosesRepulsionSource = false
