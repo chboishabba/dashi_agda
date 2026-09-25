@@ -28,7 +28,8 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPClosedRestrictionQuotientAuthori
 
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_≤_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (subst)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
@@ -37,6 +38,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPStrictSemanticRepresentativeQuot
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact as Closed
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedRestrictionQuotientSATAuthorityExact as Authority
 import DASHI.Mathematics.Complexity.PNotEqualsNPRestrictionQuotientCircuitExact as QCircuit
+import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteBooleanCircuitDAGExact as Circuit
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedUpperBoundExact as SharedUpper
 
 ------------------------------------------------------------------------
@@ -61,7 +63,7 @@ closedQuotientCircuitGateCount :
     {root : SAT.BooleanFormula rootVariables}
     (closed :
       Closed.ClosedStrictRepresentativeQuotient root) →
-  QCircuit.Circuit.circuitSize
+  Circuit.circuitSize
     (QCircuit.quotientCircuit
       (closedQuotient closed)
       (Closed.closedStateTruth closed))
@@ -109,7 +111,7 @@ closedAuthorityNodeCountUpper
         (Authority.closedQuotientSATAuthority closed)
       ≤
       SharedUpper.sharedAcceptanceUpperBound
-        (QCircuit.Circuit.circuitSize
+        (Circuit.circuitSize
           (QCircuit.quotientCircuit
             (closedQuotient closed)
             (Closed.closedStateTruth closed)))
@@ -166,7 +168,7 @@ sharedUpperBoundFitsImpliesAuthorityFits
       middle ≤ right →
       left ≤ right
     transitive left≤middle middle≤right =
-      Data.Nat.Properties.≤-trans
+      NatP.≤-trans
         left≤middle
         middle≤right
 
