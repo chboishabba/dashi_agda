@@ -23,7 +23,7 @@ module DASHI.Physics.Closure.NSTriadKNR650UnitSelfNestedCommutatorNormalFormRoun
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
@@ -88,8 +88,6 @@ module UnitSelfNormalForm
             (sym pDecision)
             (Output.modeEqualComplete pZero))
     }
-    where
-    open import Relation.Binary.PropositionalEquality using (sym; trans)
 
   selfNestedCellIsExhaustiveFourSelfCommutators :
     (tau : Physical.PhysicalTriadIncidence) →
