@@ -71,7 +71,7 @@ haarIntegralStrictlyPositiveFromMinorant {measure = measure} {laws = laws} witne
     lower =
       haarIntegralMonotone laws
         (minorant witness)
-        _
+        integrand
         (minorantBelow witness)
   in
   ℚP.<-≤-trans
