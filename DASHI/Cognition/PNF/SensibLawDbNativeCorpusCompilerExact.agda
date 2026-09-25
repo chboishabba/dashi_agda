@@ -336,6 +336,65 @@ record ReviewedGroupingMaterialization : Set where
 
 open ReviewedGroupingMaterialization public
 
+
+record AutoEventObservationCandidate : Set where
+  constructor auto-event-observation-candidate
+  field
+    observationRef : String
+    statementRef : String
+    sourceFamilyRef : String
+    entitySignalRefs : List String
+    temporalSignalRefs : List String
+    fingerprintSignalRefs : List String
+
+    candidateOnly : Bool
+    candidateOnlyIsTrue :
+      candidateOnly ≡ true
+
+    createsObservationIdentity : Bool
+    createsObservationIdentityIsFalse :
+      createsObservationIdentity ≡ false
+
+    createsEventIdentity : Bool
+    createsEventIdentityIsFalse :
+      createsEventIdentity ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    claimTruthPromoted : Bool
+    claimTruthPromotedIsFalse :
+      claimTruthPromoted ≡ false
+
+open AutoEventObservationCandidate public
+
+record AutoEventJoinProposalProjection : Set where
+  constructor auto-event-join-proposal-projection
+  field
+    proposalRef : String
+    observationRefs : List String
+    sourceFamilyRefs : List String
+    signalRefs : List String
+
+    requiresReview : Bool
+    requiresReviewIsTrue :
+      requiresReview ≡ true
+
+    createsEventIdentity : Bool
+    createsEventIdentityIsFalse :
+      createsEventIdentity ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    claimTruthPromoted : Bool
+    claimTruthPromotedIsFalse :
+      claimTruthPromoted ≡ false
+
+open AutoEventJoinProposalProjection public
+
 record DbNativeCompilerReceipt
     (source : Ingest.GenericCompiledSource) : Set where
   constructor db-native-compiler-receipt
@@ -434,6 +493,10 @@ data ReviewQueueProjectionCreatesPropositionIdentity : Set where
 data ReviewQueueProjectionCreatesClaimTruth : Set where
 data GroupingReviewIsClaimReview : Set where
 data GroupingReviewCreatesClaimTruth : Set where
+data AutoObservationCreatesObservationIdentity : Set where
+data AutoObservationCreatesEventIdentity : Set where
+data AutoJoinProposalCreatesEventIdentity : Set where
+data AutoJoinProposalCreatesClaimTruth : Set where
 data PostgresCompilerStateCreatesGlobalTruth : Set where
 data BulkDistributionCreatesProvenance : Set where
 data LinkedObjectAvailabilityCreatesSemanticAuthority : Set where
@@ -522,6 +585,22 @@ groupingReviewDoesNotPayClaimReview ()
 groupingReviewDoesNotCreateClaimTruth :
   GroupingReviewCreatesClaimTruth → ⊥
 groupingReviewDoesNotCreateClaimTruth ()
+
+autoObservationDoesNotCreateObservationIdentity :
+  AutoObservationCreatesObservationIdentity → ⊥
+autoObservationDoesNotCreateObservationIdentity ()
+
+autoObservationDoesNotCreateEventIdentity :
+  AutoObservationCreatesEventIdentity → ⊥
+autoObservationDoesNotCreateEventIdentity ()
+
+autoJoinProposalDoesNotCreateEventIdentity :
+  AutoJoinProposalCreatesEventIdentity → ⊥
+autoJoinProposalDoesNotCreateEventIdentity ()
+
+autoJoinProposalDoesNotCreateClaimTruth :
+  AutoJoinProposalCreatesClaimTruth → ⊥
+autoJoinProposalDoesNotCreateClaimTruth ()
 
 postgresCompilerStateDoesNotCreateGlobalTruth :
   PostgresCompilerStateCreatesGlobalTruth → ⊥
