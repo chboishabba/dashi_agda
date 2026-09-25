@@ -46,6 +46,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedE
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
 import DASHI.Mathematics.Complexity.PNotEqualsNPGeneratedClosedQ1DiscoveryExact as Generated
+import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
@@ -304,6 +305,36 @@ q1GeneratedExecutedRecurrenceFiniteCodeContradictsSATInP
   q1FiniteCodeContradictsSATInP
     satP
     (Generated.generatedConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Preferred rewrite-generated recurrence.
+--
+-- Structural representative chains are no longer opaque constructor inputs:
+-- every representative carries a program in the restricted evaluator-verified
+-- rewrite language, compiled to the canonical chain owner.
+------------------------------------------------------------------------
+
+q1RewriteGeneratedRecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      RewriteGenerated.RewriteGeneratedExecutedQ1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (RewriteGenerated.rewriteGeneratedConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1RewriteGeneratedRecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (RewriteGenerated.rewriteGeneratedConstructorToQ2StepSystem constructor)
     initial
     q1Semantics
 
