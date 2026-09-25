@@ -191,3 +191,69 @@ module _
           domain realization representation selected
           measureWeld wilsonInsertion weld
     }
+
+
+------------------------------------------------------------------------
+-- MULTI-COMPONENT SAFETY CHECK
+--
+-- The historical scalar weld uses one perturbation-independent CMP119 insertion
+-- numerator for every symmetric component.  Consequently it forces every
+-- Wilson/Gibbs component numerator to be equal.  This is too strong for a
+-- genuinely anisotropic stress family and must not be used as the multi-slot
+-- antigravity provenance interface.
+------------------------------------------------------------------------
+
+scalarWeldForcesWilsonComponentCollapse :
+  ∀ {G X Cutoff Configuration Observable Position
+      CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+      HilbertSpace Hamiltonian VacuumState trajectory split inputs S Y group
+      Scale Volume activity domain realization representation coordinate selected
+      measureWeld wilsonInsertion}
+    (weld :
+      SelectedInsertionWilsonGibbsScalarWeld
+        {G = G} {X = X} {Cutoff = Cutoff}
+        {Configuration = Configuration}
+        {Observable = Observable} {Position = Position}
+        {CurvaturePolynomial = CurvaturePolynomial}
+        {LocalOperator = LocalOperator}
+        {OPECoefficient = OPECoefficient}
+        {StressTensor = StressTensor}
+        {HilbertSpace = HilbertSpace}
+        {Hamiltonian = Hamiltonian}
+        {VacuumState = VacuumState}
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        {S = S} {Y = Y} {group = group}
+        {Scale = Scale} {Volume = Volume} {activity = activity}
+        domain realization representation
+        {coordinate = coordinate} selected
+        measureWeld wilsonInsertion) →
+  ∀ left right →
+  Same.wilsonFiniteMeasureConnectedNumerator
+    measureWeld wilsonInsertion
+    (selectedLiteralFiniteMeasure
+      domain realization representation selected
+      measureWeld wilsonInsertion weld)
+    left
+  ≡
+  Same.wilsonFiniteMeasureConnectedNumerator
+    measureWeld wilsonInsertion
+    (selectedLiteralFiniteMeasure
+      domain realization representation selected
+      measureWeld wilsonInsertion weld)
+    right
+scalarWeldForcesWilsonComponentCollapse
+    {domain = domain} {realization = realization}
+    {representation = representation} {selected = selected}
+    {measureWeld = measureWeld} {wilsonInsertion = wilsonInsertion}
+    weld left right =
+  trans
+    (sym
+      (selectedInsertionNumeratorIsWilsonGibbs
+        domain realization representation selected
+        measureWeld wilsonInsertion weld left))
+    (selectedInsertionNumeratorIsWilsonGibbs
+      domain realization representation selected
+      measureWeld wilsonInsertion weld right)
+
+scalarWeldSuitableForMultiComponentStress : Agda.Builtin.Bool.Bool
+scalarWeldSuitableForMultiComponentStress = Agda.Builtin.Bool.false
