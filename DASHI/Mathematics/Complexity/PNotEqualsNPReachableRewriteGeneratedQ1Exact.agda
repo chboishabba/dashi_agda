@@ -34,7 +34,6 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotie
 import DASHI.Mathematics.Complexity.PNotEqualsNPStrictSemanticRepresentativeQuotientExact as Strict
 import DASHI.Mathematics.Complexity.PNotEqualsNPAnswerBlindStructuralRewriteMachineExact as Rewrite
 import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
-import DASHI.Mathematics.Complexity.PNotEqualsNSelfReferenceAllOverheadBudgetExact as Dummy
 
 ------------------------------------------------------------------------
 -- Indexed semantic equivalence -> Cook semantic equivalence.
@@ -48,29 +47,32 @@ indexedEquivalentToCookEquivalent :
   Strict.CookSatisfiabilityEquivalent
     (Bridge.indexedToCook left)
     (Bridge.indexedToCook right)
-indexedEquivalentToCookEquivalent equivalent =
+indexedEquivalentToCookEquivalent
+    {left = left}
+    {right = right}
+    equivalent =
   forward , backward
   where
     forward :
-      Cook.Satisfiable (Bridge.indexedToCook _) →
-      Cook.Satisfiable (Bridge.indexedToCook _)
+      Cook.Satisfiable (Bridge.indexedToCook left) →
+      Cook.Satisfiable (Bridge.indexedToCook right)
     forward leftCook =
       Bridge.indexedSatisfyingGivesCookSatisfiable
-        _
+        right
         (proj₁ equivalent
           (Bridge.cookSatisfiableIndexedFormulaGivesIndexedSatisfying
-            _
+            left
             leftCook))
 
     backward :
-      Cook.Satisfiable (Bridge.indexedToCook _) →
-      Cook.Satisfiable (Bridge.indexedToCook _)
+      Cook.Satisfiable (Bridge.indexedToCook right) →
+      Cook.Satisfiable (Bridge.indexedToCook left)
     backward rightCook =
       Bridge.indexedSatisfyingGivesCookSatisfiable
-        _
+        left
         (proj₂ equivalent
           (Bridge.cookSatisfiableIndexedFormulaGivesIndexedSatisfying
-            _
+            right
             rightCook))
 
 ------------------------------------------------------------------------
