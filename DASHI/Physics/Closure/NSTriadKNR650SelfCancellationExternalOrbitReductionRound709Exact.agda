@@ -25,6 +25,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -43,7 +44,7 @@ module Reduction
       (Field30.physicalInverseSquare physicalSystem) S)
     (H : R142.HelicalHalfCalibration S)
     (velocityTransverse :
-      (mode : _) →
+      (mode : Z3.FourierMode) →
       Helical.Transverse
         (Field30.physicalEmbedding physicalSystem)
         mode
