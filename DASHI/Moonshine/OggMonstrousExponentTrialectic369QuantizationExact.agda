@@ -412,6 +412,127 @@ arithmeticFrameDoesNotInheritJRendererPantsMeaning :
   ArithmeticFrameAutomaticallyHasJRendererPantsMeaning -> ⊥
 arithmeticFrameDoesNotInheritJRendererPantsMeaning ()
 
+
+------------------------------------------------------------------------
+-- 4g. Consumer-indexed arithmetic codec routing.
+--
+-- This mirrors the existing J codec policy: discard only what a declared
+-- consumer provably does not need.
+------------------------------------------------------------------------
+
+data ArithmeticCodecConsumerClass : Set where
+  presencePatternOnly : ArithmeticCodecConsumerClass
+  exponentSumConsumer : ArithmeticCodecConsumerClass
+  fullContributionConsumer : ArithmeticCodecConsumerClass
+
+data ArithmeticCodecRetention : Set where
+  retainCoarseT3Only : ArithmeticCodecRetention
+  retainCoarseT3PlusArithmeticResidual : ArithmeticCodecRetention
+  retainFullArithmeticTripleCode : ArithmeticCodecRetention
+
+routeArithmeticConsumer :
+  ArithmeticCodecConsumerClass ->
+  ArithmeticCodecRetention
+routeArithmeticConsumer presencePatternOnly =
+  retainCoarseT3Only
+routeArithmeticConsumer exponentSumConsumer =
+  retainCoarseT3PlusArithmeticResidual
+routeArithmeticConsumer fullContributionConsumer =
+  retainFullArithmeticTripleCode
+
+presencePatternConsumer :
+  ArithmeticTriple -> Fabric.Ternary27Point
+presencePatternConsumer = tripleSurface
+
+presencePatternFactorsThroughSurface :
+  Descent.FactorsThrough
+    tripleSurface
+    presencePatternConsumer
+presencePatternFactorsThroughSurface =
+  Descent.factorsThrough
+    (λ surface -> surface)
+    (λ triple -> refl)
+
+presencePatternSurfaceSufficient :
+  Descent.ConsumerSufficient
+    tripleSurface
+    presencePatternConsumer
+presencePatternSurfaceSufficient left right same = same
+
+exponentSumNeedsResidual :
+  Descent.ConsumerSufficient
+    tripleSurface
+    tripleSum
+  -> ⊥
+exponentSumNeedsResidual =
+  surfaceCannotAnswerArithmeticSum
+
+fullContributionConsumerFn :
+  ArithmeticTriple -> ArithmeticTriple
+fullContributionConsumerFn triple = triple
+
+fullContributionNeedsResidual :
+  Descent.ConsumerSufficient
+    tripleSurface
+    fullContributionConsumerFn
+  -> ⊥
+fullContributionNeedsResidual sufficient =
+  p7P13DifferentSum
+    (cong tripleSum
+      (sufficient
+        p7ArithmeticTriple
+        p13ArithmeticTriple
+        p7P13SameSurface))
+
+residualCodeSufficesForExponentSum :
+  Descent.ConsumerSufficient
+    (TopDown.dependentCodeObserver arithmeticTripleRecoverableProjection)
+    tripleSum
+residualCodeSufficesForExponentSum =
+  TopDown.dependentCodeIsAdequateForEveryConsumer
+    arithmeticTripleRecoverableProjection
+    tripleSum
+
+residualCodeSufficesForFullContribution :
+  Descent.ConsumerSufficient
+    (TopDown.dependentCodeObserver arithmeticTripleRecoverableProjection)
+    fullContributionConsumerFn
+residualCodeSufficesForFullContribution =
+  TopDown.dependentCodeIsAdequateForEveryConsumer
+    arithmeticTripleRecoverableProjection
+    fullContributionConsumerFn
+
+record ArithmeticCodecRoutingReceipt
+  (consumerClass : ArithmeticCodecConsumerClass) : Set where
+  constructor arithmetic-codec-routing-receipt
+  field
+    retention : ArithmeticCodecRetention
+    retentionMatchesCanonicalRoute :
+      retention ≡ routeArithmeticConsumer consumerClass
+
+open ArithmeticCodecRoutingReceipt public
+
+canonicalPresenceRoutingReceipt :
+  ArithmeticCodecRoutingReceipt presencePatternOnly
+canonicalPresenceRoutingReceipt =
+  arithmetic-codec-routing-receipt
+    retainCoarseT3Only
+    refl
+
+canonicalExponentSumRoutingReceipt :
+  ArithmeticCodecRoutingReceipt exponentSumConsumer
+canonicalExponentSumRoutingReceipt =
+  arithmetic-codec-routing-receipt
+    retainCoarseT3PlusArithmeticResidual
+    refl
+
+canonicalFullContributionRoutingReceipt :
+  ArithmeticCodecRoutingReceipt fullContributionConsumer
+canonicalFullContributionRoutingReceipt =
+  arithmetic-codec-routing-receipt
+    retainFullArithmeticTripleCode
+    refl
+
 ------------------------------------------------------------------------
 -- 5. Role order is retained exactly.
 --
@@ -475,6 +596,10 @@ record OggMonstrousExponentTrialectic369QuantizationBoundary : Set where
     existingVerified27MachineCodecReused : Bool
     compact27CodecReused : Bool
     compactFrameIsArithmeticCPresence : Bool
+    consumerIndexedArithmeticRoutingOwned : Bool
+    presenceConsumerMayDiscardResidual : Bool
+    exponentSumConsumerRequiresResidual : Bool
+    fullContributionConsumerRequiresResidual : Bool
     arithmeticFrameInheritsJRendererPantsMeaning : Bool
     exactMagnitudeRecoveryFromPresenceCode : Bool
     arithmeticPolarityIdentityClaimed : Bool
@@ -487,5 +612,5 @@ canonicalOggMonstrousExponentTrialectic369QuantizationBoundary =
   ogg-monstrous-exponent-trialectic-369-quantization-boundary
     true true true true true
     true true true true
-    true true false
+    true true true true true true
     false false true false
