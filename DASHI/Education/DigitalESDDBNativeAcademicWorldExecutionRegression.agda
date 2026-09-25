@@ -35,3 +35,14 @@ independencePromotionRegression :
   DB.GenealogyHypothesisCreatesEvidenceIndependence → ⊥
 independencePromotionRegression =
   DB.genealogyHypothesisDoesNotCreateEvidenceIndependence
+
+
+nominationClaimTruthRegression :
+  DB.DBNativeCoordinateNominationBoundary.nominationCreatesClaimTruth
+    DB.canonicalDBNativeCoordinateNominationBoundary ≡ false
+nominationClaimTruthRegression = refl
+
+workflowOrderRankRegression :
+  DB.WorkflowOrderCreatesEvidenceQualityRank → ⊥
+workflowOrderRankRegression =
+  DB.workflowOrderDoesNotCreateEvidenceQualityRank
