@@ -107,16 +107,23 @@ literalFiniteMeasureActiveSumNegativityStillOpenIsTrue = refl
 ------------------------------------------------------------------------
 -- SCHEDULER STATUS
 --
--- This four-diagonal finite-measure sign cut remains a valid intermediate
--- theorem surface.  The preferred antigravity scheduler now uses
--- CMP119AntigravityTraceMaxCutExact, which further reduces the active sum via
--- classical d=4 Gibbs trace cancellation to Z times one trace-insertion
--- numerator.
+-- This four-diagonal finite-measure sign cut remains the direct sufficient
+-- source theorem.  The trace-anomaly lane does NOT supersede it: the physical
+-- Lorentzian trace differs from the active/focusing contraction by 2*T00.
+-- The anomaly route is therefore only a partial reduction until the selected
+-- timelike component supplies trace + 2*T00 < 0.
 ------------------------------------------------------------------------
 
 supersededByTraceCancellationMaxCut : Bool
-supersededByTraceCancellationMaxCut = true
+supersededByTraceCancellationMaxCut = false
 
-supersededByTraceCancellationMaxCutIsTrue :
-  supersededByTraceCancellationMaxCut ≡ true
-supersededByTraceCancellationMaxCutIsTrue = refl
+supersededByTraceCancellationMaxCutIsFalse :
+  supersededByTraceCancellationMaxCut ≡ false
+supersededByTraceCancellationMaxCutIsFalse = refl
+
+traceAnomalyRouteRequiresTimelikeT00Control : Bool
+traceAnomalyRouteRequiresTimelikeT00Control = true
+
+traceAnomalyRouteRequiresTimelikeT00ControlIsTrue :
+  traceAnomalyRouteRequiresTimelikeT00Control ≡ true
+traceAnomalyRouteRequiresTimelikeT00ControlIsTrue = refl
