@@ -10,6 +10,7 @@ import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as B
 import DASHI.Physics.Foundations.CMP119SymmetricCanonicalMetricRechartExact as Rechart
 import DASHI.Physics.Foundations.CMP119WilsonGibbsFiniteMeasureSameObjectExact as Same
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact as Wilson
+import DASHI.Physics.Foundations.CMP119AntigravitySelectedWilsonGibbsMinimalAnchorExact as Minimal
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
@@ -130,3 +131,45 @@ module _
       trans
         (connectedNumeratorIsSelectedInsertionAt weld background component)
         (selectedInsertionAtIsWilsonGibbs weld component)
+
+
+familyWeldToMinimalAnchor :
+  ∀ {G X Cutoff Configuration Observable Position
+      CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+      HilbertSpace Hamiltonian VacuumState trajectory split inputs S Y group
+      Scale Volume activity domain realization representation coordinate selected
+      measureWeld wilsonInsertion} →
+  SelectedMetricInsertionFamilyWilsonGibbsWeld
+    {G = G} {X = X} {Cutoff = Cutoff}
+    {Configuration = Configuration}
+    {Observable = Observable} {Position = Position}
+    {CurvaturePolynomial = CurvaturePolynomial}
+    {LocalOperator = LocalOperator}
+    {OPECoefficient = OPECoefficient}
+    {StressTensor = StressTensor}
+    {HilbertSpace = HilbertSpace}
+    {Hamiltonian = Hamiltonian}
+    {VacuumState = VacuumState}
+    {trajectory = trajectory} {split = split} {inputs = inputs}
+    {S = S} {Y = Y} {group = group}
+    {Scale = Scale} {Volume = Volume} {activity = activity}
+    domain realization representation
+    {coordinate = coordinate} selected
+    measureWeld wilsonInsertion →
+  Minimal.MinimalSelectedWilsonGibbsAnchor
+    domain realization representation selected
+    measureWeld wilsonInsertion
+familyWeldToMinimalAnchor
+    {domain = domain} {realization = realization}
+    {representation = representation} {selected = selected}
+    {measureWeld = measureWeld} {wilsonInsertion = wilsonInsertion}
+    weld = record
+  { Minimal.MinimalSelectedWilsonGibbsAnchor.selectedScale =
+      selectedScale weld
+  ; Minimal.MinimalSelectedWilsonGibbsAnchor.sourceScaleIndex =
+      sourceScaleIndex weld
+  ; Minimal.MinimalSelectedWilsonGibbsAnchor.selectedConnectedNumeratorIsCanonicalWilsonGibbs =
+      selectedConnectedNumeratorIsWilsonGibbs
+        domain realization representation selected
+        measureWeld wilsonInsertion weld
+  }
