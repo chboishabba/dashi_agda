@@ -439,3 +439,23 @@ dbNativeFixtureAttemptsEverySemanticRegion :
   DbNativeCorpusRegression.fixtureHasNoUnattemptedSemanticRegions
   ≡ DbNativeCorpusRegression.fixtureHasNoUnattemptedSemanticRegions
 dbNativeFixtureAttemptsEverySemanticRegion = refl
+
+dbNativeContentDigestDoesNotDetermineRevisionIdentity :
+  DbNativeCorpus.ContentDigestDeterminesSourceRevisionIdentity → ⊥
+dbNativeContentDigestDoesNotDetermineRevisionIdentity =
+  DbNativeCorpus.contentDigestDoesNotDetermineSourceRevisionIdentity
+
+dbNativePersistedCandidateDoesNotCreateAdmission :
+  DbNativeCorpus.PersistedCandidateCreatesSemanticAdmission → ⊥
+dbNativePersistedCandidateDoesNotCreateAdmission =
+  DbNativeCorpus.persistedCandidateDoesNotCreateSemanticAdmission
+
+dbNativePersistedCandidateDoesNotCreateTruth :
+  DbNativeCorpus.PersistedCandidateCreatesClaimTruth → ⊥
+dbNativePersistedCandidateDoesNotCreateTruth =
+  DbNativeCorpus.persistedCandidateDoesNotCreateClaimTruth
+
+dbNativeFixtureCandidateReloadsWithoutAdmission :
+  DbNativeCorpusRegression.fixtureCandidateReloadsWithoutAdmission
+  ≡ DbNativeCorpusRegression.fixtureCandidateReloadsWithoutAdmission
+dbNativeFixtureCandidateReloadsWithoutAdmission = refl
