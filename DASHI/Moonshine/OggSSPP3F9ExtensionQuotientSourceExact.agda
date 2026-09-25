@@ -33,6 +33,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicArithmeticSourceSocketExact as S
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact as Classical
 import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalClaimMatchExact as ClaimMatch
+import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalStrataRecognitionExact as LocalStrata
 
 canonicalP3MarkedFrobeniusSource :
   Socket.P3MarkedFrobeniusSource
@@ -101,6 +102,12 @@ classicalClaimMatch =
 classicalFrameworkSupportsMarkedSupersingularObject : Bool
 classicalFrameworkSupportsMarkedSupersingularObject = true
 
+abstractThreeStateC2SetClassicallyRealized : Bool
+abstractThreeStateC2SetClassicallyRealized = true
+
+f9CoordinateClassicallyIdentifiedWithLocalParameter : Bool
+f9CoordinateClassicallyIdentifiedWithLocalParameter = false
+
 exactThreeStatePresentationClassicallyIdentified : Bool
 exactThreeStatePresentationClassicallyIdentified = false
 
@@ -118,6 +125,8 @@ record P3ExtensionQuotientSourceBoundary : Set where
     coarseJConstantUsed : Bool
     repositoryFormalReconstruction : Bool
     classicalFrameworkSourcingAttached : Bool
+    abstractThreeStateC2SetClassicallyRealized : Bool
+    f9CoordinateClassicallyIdentifiedWithLocalParameter : Bool
     exactThreeStateClassicallyIdentified : Bool
     externalClassicalModuliIdentificationPaid : Bool
     externalSourceCreditedWithDASHIQuotient : Bool
@@ -126,4 +135,4 @@ canonicalP3ExtensionQuotientSourceBoundary :
   P3ExtensionQuotientSourceBoundary
 canonicalP3ExtensionQuotientSourceBoundary =
   p3-extension-quotient-source-boundary
-    true true true true true true true false false false
+    true true true true true true true true false false false false
