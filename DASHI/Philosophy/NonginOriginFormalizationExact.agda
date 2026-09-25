@@ -43,6 +43,7 @@ import DASHI.Core.FiniteBranchingCriticalityExact as Branch
 import DASHI.Core.FiniteTypedBranchingKernelExact as TypedBranch
 import DASHI.Philosophy.ReflexivePowerUp as Reflexive
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Trialectic
+import DASHI.Reasoning.TrialecticEdgeSynthesisCompatibilityExact as TrialecticSynthesis
 import DASHI.Foundations.TrialecticDepthHyperformExact as TrialecticDepth
 import DASHI.Statistics.ForecastVerificationKernelExact as Forecast
 
@@ -151,6 +152,12 @@ matureTrialecticCoarseCollision :
     TrialecticDepth.fineLayerRight
 matureTrialecticCoarseCollision =
   TrialecticDepth.fineLayersCollideAtCoarseDepth
+
+
+matureTrialecticEdgeSynthesisBoundary :
+  TrialecticSynthesis.TrialecticEdgeSynthesisCompatibilityBoundary
+matureTrialecticEdgeSynthesisBoundary =
+  TrialecticSynthesis.canonicalTrialecticEdgeSynthesisCompatibilityBoundary
 
 ------------------------------------------------------------------------
 -- 3. "1.0 -> 1.1" is a representational lift, not multiplication by 1.1.
