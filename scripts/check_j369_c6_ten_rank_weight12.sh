@@ -7,6 +7,7 @@ targets=(
   DASHI/Moonshine/MonsterAtlas6561X8RecognitionObligationExact.agda
   DASHI/Moonshine/JInvariant369NeutralCuspRelationCrossPollinationExact.agda
   DASHI/Moonshine/JInvariant369SSP15SignedFRACTRANBranchExact.agda
+  DASHI/Moonshine/JInvariant369OggAddressSSP15NoGoExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -39,3 +40,8 @@ grep -q 'internalPointedCoarseRoundTrip' "${targets[4]}"
 grep -q 'neutralValuationIsZeroAt' "${targets[4]}"
 grep -q 'zeroValuationCannotRecoverSelectedNeutralLane' "${targets[4]}"
 grep -q 'executeSeedProgram' "${targets[4]}"
+
+grep -q 'p2AndP11HaveSameAddressCoarse10' "${targets[5]}"
+grep -q 'addressModeNever09' "${targets[5]}"
+grep -q 'modePreservingOggInternalBijectionImpossible' "${targets[5]}"
+grep -q 'chosenCarrierBijectionDerivedFromAddressLaw' "${targets[5]}"
