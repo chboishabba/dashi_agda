@@ -308,18 +308,14 @@ class SourceIndex:
         if not payload:
             self.profiler.count("cold_interface_cache_misses")
             return None
-        try:
-            interface = interface_from_dict(json.loads(payload))
-        except (TypeError, ValueError, KeyError, json.JSONDecodeError):
-            self.profiler.count("cold_interface_cache_misses")
-            return None
 
         self.profiler.count("cold_interface_cache_hits")
         return ImportReceipt(
             path=str(path.resolve()),
             module_name=row["module_name"],
             imports=self._imports_for_path(row["path"]),
-            interface=interface,
+            interface=None,
+            interface_json=payload,
             api_base_hash=row["api_base_sha256"],
             public_imports=tuple(
                 json.loads(row["public_imports_json"])
@@ -460,6 +456,7 @@ class SourceIndex:
         *,
         commit: bool = True,
         diagnostics_payload: Optional[str] = None,
+        interface_payload: Optional[str] = None,
     ) -> None:
         relative = self._relative(path)
         payload = diagnostics_payload
@@ -501,13 +498,17 @@ class SourceIndex:
                     api_hash,
                     json.dumps(sorted(set(public_imports))),
                     (
-                        json.dumps(
-                            interface_to_dict(interface),
-                            sort_keys=True,
-                            separators=(",", ":"),
+                        interface_payload
+                        if interface_payload is not None
+                        else (
+                            json.dumps(
+                                interface_to_dict(interface),
+                                sort_keys=True,
+                                separators=(",", ":"),
+                            )
+                            if interface is not None
+                            else ""
                         )
-                        if interface is not None
-                        else ""
                     ),
                     dependency_fingerprint,
                     payload,
@@ -800,14 +801,6 @@ class SourceIndex:
             item.module_name: item
             for item in import_receipts
         }
-        interface_by_module = resolve_interface_exports(
-            {
-                item.module_name: item.interface
-                for item in import_receipts
-                if item.interface is not None
-            }
-        )
-
         api_memo: Dict[str, str] = {}
 
         def resolve_api(module: str, visiting: Set[str]) -> str:
@@ -983,13 +976,16 @@ class SourceIndex:
                             diagnostic_receipt.api_base_hash,
                             api_hash,
                             diagnostic_receipt.public_imports,
-                            interface_by_module.get(module),
+                            None,
                             dependency_fingerprint,
                             diagnostic_receipt.imports,
                             diagnostics,
                             commit=False,
                             diagnostics_payload=(
                                 diagnostic_receipt.diagnostics_json
+                            ),
+                            interface_payload=(
+                                diagnostic_receipt.interface_json
                             ),
                         )
                         source_hash = diagnostic_receipt.source_hash
