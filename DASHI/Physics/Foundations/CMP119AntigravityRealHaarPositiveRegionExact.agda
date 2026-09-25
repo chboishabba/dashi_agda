@@ -10,6 +10,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 import DASHI.Physics.Foundations.CMP119AntigravityRealStrictSignExact as Strict
 import DASHI.Physics.Foundations.CMP119AntigravityRealHaarStrictPositivityExact as Haar
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
+import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 
 ------------------------------------------------------------------------
 -- POSITIVE-HAAR REGION COMPILER
@@ -72,6 +73,18 @@ record PositiveRegionScalingLaw
       scalar *ℝ Physical.haarIntegral measure observable
 
 open PositiveRegionScalingLaw public
+
+
+scalingLawFromOrderedBase :
+  ∀ {Configuration measure}
+    (ordered : Haar.OrderedRealHaarIntegrationLaws
+      {Configuration = Configuration} measure) →
+  PositiveRegionScalingLaw ordered
+scalingLawFromOrderedBase ordered = record
+  { PositiveRegionScalingLaw.haarIntegralScale =
+      Finite.haarIntegralScale (Haar.base ordered)
+  }
+
 
 scaledRegionIntegralPositive :
   ∀ {Configuration measure}
