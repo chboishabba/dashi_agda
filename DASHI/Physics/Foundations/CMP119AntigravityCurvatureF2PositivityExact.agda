@@ -7,6 +7,7 @@ import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact as Curvature
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteHaarStrictPositivityExact as Strict
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlScalarExact as Curl
 
@@ -25,18 +26,11 @@ vectorNormSqNonnegative :
   (value : Curl.RationalVector3) →
   0ℚ ≤ Curl.vectorNormSq value
 vectorNormSqNonnegative (Curl.vec3 x y z) =
-  let
-    instance
-      xNN : NonNegative (x * x)
-      xNN = nonNegative (ℚP.nonNegative⁻¹ (x * x))
-
-      yNN : NonNegative (y * y)
-      yNN = nonNegative (ℚP.nonNegative⁻¹ (y * y))
-
-      zNN : NonNegative (z * z)
-      zNN = nonNegative (ℚP.nonNegative⁻¹ (z * z))
-  in
-  ℚP.nonNegative⁻¹ _
+  Rational.addNonnegative
+    (Rational.squareNonnegative x)
+    (Rational.addNonnegative
+      (Rational.squareNonnegative y)
+      (Rational.squareNonnegative z))
 
 halfPositive : 0ℚ < Curvature.half
 halfPositive = ℚP.positive⁻¹ Curvature.half
@@ -44,31 +38,27 @@ halfPositive = ℚP.positive⁻¹ Curvature.half
 energyNonnegative :
   (value : Curl.RationalVector3) →
   0ℚ ≤ Curvature.energy value
-energyNonnegative (Curl.vec3 x y z) =
+energyNonnegative value =
   let
+    halfNN : 0ℚ ≤ Curvature.half
+    halfNN = ℚP.<⇒≤ halfPositive
+
+    dotNN : 0ℚ ≤ Curl.vectorDot value value
+    dotNN =
+      subst
+        (λ norm → 0ℚ ≤ norm)
+        (sym (Curl.vectorDotSelfIsNormSq value))
+        (vectorNormSqNonnegative value)
+
     instance
-      halfNN : NonNegative Curvature.half
-      halfNN = nonNegative (ℚP.<⇒≤ halfPositive)
+      halfNNI : NonNegative Curvature.half
+      halfNNI = nonNegative halfNN
 
-      xNN : NonNegative (x * x)
-      xNN = nonNegative (ℚP.nonNegative⁻¹ (x * x))
-
-      yNN : NonNegative (y * y)
-      yNN = nonNegative (ℚP.nonNegative⁻¹ (y * y))
-
-      zNN : NonNegative (z * z)
-      zNN = nonNegative (ℚP.nonNegative⁻¹ (z * z))
-
-      normNN : NonNegative
-        (x * x + y * y + z * z)
-      normNN = nonNegative
-        (ℚP.+-mono-≤
-          (ℚP.nonNegative⁻¹ (x * x))
-          (ℚP.+-mono-≤
-            (ℚP.nonNegative⁻¹ (y * y))
-            (ℚP.nonNegative⁻¹ (z * z))))
+      dotNNI : NonNegative (Curl.vectorDot value value)
+      dotNNI = nonNegative dotNN
   in
   ℚP.nonNegative⁻¹ _
+
 
 normalizedCurvatureF2 :
   Curvature.CurvatureSix → ℚ
