@@ -211,6 +211,7 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedToLiteralR406Round726Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedC1C2CriticalBarrierRound727Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CurrentAnalyticCutsetRound728Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CombinedToR406PositiveRateNoGoRound729Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda
