@@ -37,6 +37,8 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ConstructionChargedRecurrenceE
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact as Closed
 import DASHI.Mathematics.Complexity.PNotEqualsNPStrictSemanticRepresentativeQuotientExact as Strict
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
+import DASHI.Mathematics.Complexity.PNotEqualsNPClosedRestrictionQuotientSATAuthorityExact as Authority
+import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
 
 ------------------------------------------------------------------------
 -- State count of the actual closed quotient carried by one Q1 witness.
@@ -201,10 +203,35 @@ stateCountStrictlyBelowCurrentMeasure {state} run =
     (stateCountPlusNextStrict run)
 
 ------------------------------------------------------------------------
+-- Same threshold with the next-state measure expanded on the literal authority.
+------------------------------------------------------------------------
+
+stateCountPlusLiteralAuthorityPayloadStrict :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : OperationalQ1ConstructionRun state) →
+  q1WitnessStateCount (q1Witness run)
+    +
+    (Size.formulaNodeCount
+      (Authority.closedQuotientSATAuthority
+        (proj₁ (q1Witness run)))
+      +
+      (Q2.programCodeSize state
+        + Q2.rebindingOverhead state))
+  <
+  Q2.recursiveMeasure state
+stateCountPlusLiteralAuthorityPayloadStrict run =
+  stateCountPlusNextStrict run
+
+------------------------------------------------------------------------
 -- CLAY CONSEQUENCE
 --
 -- A Q1 mechanism can no longer attach a convenient small Nat to an expensive
 -- constructor on this route.
+--
+-- Boundary: this receipt proves the unavoidable OUTPUT-emission lower bound.
+-- It does not yet certify machine/CPU steps used to discover the witness.  A
+-- future concrete Q1 algorithm must refine auxiliaryTrace into the execution
+-- semantics of its actual machine/interpreter before a runtime claim is made.
 --
 -- Any successful live step must emit its quotient table and hence satisfy:
 --
