@@ -149,3 +149,5 @@ import DASHI.Mathematics.Complexity.FiniteWordSizeExact
 import DASHI.Mathematics.Complexity.FiniteConfigurationEncodingExact
 import DASHI.Mathematics.Complexity.DeterministicMachineToInPExact
 import DASHI.Mathematics.Automorphic.EllipticModularityReceiptExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact
+import DASHI.Mathematics.Complexity.PNotEqualsNPLocalArityTerminalAdmissionExact
