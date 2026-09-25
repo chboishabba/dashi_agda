@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.YangMillsSelectedWilsonFiniteProjectionRound565Ex
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (Σ; _,_)
 
