@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'DASHI/Core/RelationalTrialecticSourceAtlasExact.agda'
+      - 'DASHI/Core/RelationalTrialecticDisambiguationExact.agda'
       - 'DASHI/Core/RelationalSelfStalkExact.agda'
       - 'DASHI/Core/RelationalSelfDescentExact.agda'
       - 'DASHI/Core/IrigarayContactRelationalRechartExact.agda'
@@ -42,6 +43,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Core/RelationalTrialecticSourceAtlasExact.agda'
+      - 'DASHI/Core/RelationalTrialecticDisambiguationExact.agda'
       - 'DASHI/Core/RelationalSelfStalkExact.agda'
       - 'DASHI/Core/RelationalSelfDescentExact.agda'
       - 'DASHI/Core/IrigarayContactRelationalRechartExact.agda'
