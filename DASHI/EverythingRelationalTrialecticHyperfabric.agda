@@ -20,6 +20,9 @@ import DASHI.Core.RelationalTransportDescentSheafExact
 import DASHI.Core.IrigarayContactRelationalRechartExact
 
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
+import DASHI.Reasoning.Trialectic369DescentNaturalityExact
+import DASHI.Reasoning.Trialectic369RubikRefinementExact
+import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact
 import DASHI.Reasoning.TrialecticProductiveJoinDescentExact
 import DASHI.Reasoning.TrialecticLocalLogicQualificationExact
