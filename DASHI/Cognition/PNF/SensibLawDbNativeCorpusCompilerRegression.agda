@@ -7,6 +7,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as Scale
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldRegression as Fixture
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceRegression as PersistFixture
+import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceExact as Persistence
 
 fixtureCompilationIdentity : Scale.CompilationIdentity
 fixtureCompilationIdentity =
@@ -267,7 +268,7 @@ fixtureBookReceiptLosslessPartition :
 fixtureBookReceiptLosslessPartition = refl
 
 fixtureBookReceiptCanonicalBytesReload :
-  PersistFixture.Persist.PersistedGenericSource.canonicalBytesReloadable
+  Persistence.PersistedGenericSource.canonicalBytesReloadable
     PersistFixture.fixtureSourcePersistence
   ≡ true
 fixtureBookReceiptCanonicalBytesReload = refl
@@ -278,19 +279,19 @@ fixtureBookReceiptNoUnattemptedSemanticRegions :
 fixtureBookReceiptNoUnattemptedSemanticRegions = refl
 
 fixtureBookReceiptPersistenceDoesNotCreateAuthority :
-  PersistFixture.Persist.PersistedGenericSource.persistenceCreatesSemanticAuthority
+  Persistence.PersistedGenericSource.persistenceCreatesSemanticAuthority
     PersistFixture.fixtureSourcePersistence
   ≡ false
 fixtureBookReceiptPersistenceDoesNotCreateAuthority = refl
 
 fixtureBookReceiptPersistenceDoesNotCreateApplicability :
-  PersistFixture.Persist.PersistedGenericSource.persistenceCreatesApplicability
+  Persistence.PersistedGenericSource.persistenceCreatesApplicability
     PersistFixture.fixtureSourcePersistence
   ≡ false
 fixtureBookReceiptPersistenceDoesNotCreateApplicability = refl
 
 fixtureBookReceiptPersistenceDoesNotCreateTruth :
-  PersistFixture.Persist.PersistedGenericSource.persistenceCreatesClaimTruth
+  Persistence.PersistedGenericSource.persistenceCreatesClaimTruth
     PersistFixture.fixtureSourcePersistence
   ≡ false
 fixtureBookReceiptPersistenceDoesNotCreateTruth = refl
