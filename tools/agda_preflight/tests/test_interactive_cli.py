@@ -197,6 +197,12 @@ mk = record { witnes = Set }
 
     result = json.loads(capsys.readouterr().out)
     assert result["resolved"] is True
+    before_counts = result["before_profile"]["counts"]
+    assert before_counts["diagnostic_candidate_lookup_hits"] == 1
+    assert before_counts.get("files_parsed", 0) == 0
+    assert before_counts.get("diagnostics_cached", 0) == 0
+    after_counts = result["after_profile"]["counts"]
+    assert after_counts["files_parsed"] == 1
     source = path.read_text(encoding="utf-8")
     assert "witnes =" not in source
     assert "witness = Set" in source
