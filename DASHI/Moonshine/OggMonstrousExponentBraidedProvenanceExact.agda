@@ -30,6 +30,7 @@ open import Data.Fin using (Fin; zero)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
 import DASHI.Culture.KimmererBraidingAcknowledgement as Sweetgrass
 import DASHI.Moonshine.OggMonstrousExponentTrialecticDescentExact as Trial
@@ -40,7 +41,7 @@ import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 ------------------------------------------------------------------------
 
 roleOfSlot :
-  {prime : _} ->
+  {prime : Lane.MonsterPrimeLane} ->
   (trial : Trial.ArithmeticTrialectic prime) ->
   Trial.ArithmeticMultiplicitySlot trial ->
   Trial.ModularContributionRole
@@ -132,7 +133,7 @@ p5RechartCannotRecoverContributionRole rechart =
 ------------------------------------------------------------------------
 
 record BraidedArithmeticTrialectic
-    (prime : _) : Set where
+    (prime : Lane.MonsterPrimeLane) : Set where
   constructor braided-arithmetic-trialectic
   field
     arithmetic : Trial.ArithmeticTrialectic prime
@@ -157,7 +158,7 @@ record BraidedArithmeticTrialectic
 open BraidedArithmeticTrialectic public
 
 canonicalBraidedArithmeticTrialectic :
-  {prime : _} ->
+  {prime : Lane.MonsterPrimeLane} ->
   (trial : Trial.ArithmeticTrialectic prime) ->
   BraidedArithmeticTrialectic prime
 canonicalBraidedArithmeticTrialectic trial =
