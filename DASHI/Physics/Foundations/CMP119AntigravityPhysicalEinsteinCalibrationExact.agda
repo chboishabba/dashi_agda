@@ -106,6 +106,52 @@ record AcceptedPhysicalEinsteinCoupling
 
 open AcceptedPhysicalEinsteinCoupling public
 
+record PhysicalStressLengthSquaredEnclosure
+    (sourceMagnitude : ℚ)
+    (kappa : PhysicalEinsteinCouplingInterval) : Set where
+  field
+    stressLengthSquaredLower stressLengthSquaredUpper : ℚ
+
+    lowerPositive :
+      0ℚ < stressLengthSquaredLower
+
+    ordered :
+      stressLengthSquaredLower ≤ stressLengthSquaredUpper
+
+open PhysicalStressLengthSquaredEnclosure public
+
+physicalAmplitudeProductLower :
+  ∀ {sourceMagnitude kappa} →
+  PhysicalStressLengthSquaredEnclosure sourceMagnitude kappa → ℚ
+physicalAmplitudeProductLower
+    {sourceMagnitude = sourceMagnitude} {kappa = kappa} scale =
+  lower kappa * sourceMagnitude * stressLengthSquaredLower scale
+
+physicalAmplitudeProductUpper :
+  ∀ {sourceMagnitude kappa} →
+  PhysicalStressLengthSquaredEnclosure sourceMagnitude kappa → ℚ
+physicalAmplitudeProductUpper
+    {sourceMagnitude = sourceMagnitude} {kappa = kappa} scale =
+  upper kappa * sourceMagnitude * stressLengthSquaredUpper scale
+
+record PhysicalKottlerProductCalibrationEnclosure
+    (sourceMagnitude targetAmplitude : ℚ)
+    (kappa : PhysicalEinsteinCouplingInterval) : Set₁ where
+  field
+    authority :
+      AcceptedPhysicalEinsteinCoupling kappa
+
+    scaleProduct :
+      PhysicalStressLengthSquaredEnclosure sourceMagnitude kappa
+
+    targetAboveLower :
+      physicalAmplitudeProductLower scaleProduct ≤ targetAmplitude
+
+    targetBelowUpper :
+      targetAmplitude ≤ physicalAmplitudeProductUpper scaleProduct
+
+open PhysicalKottlerProductCalibrationEnclosure public
+
 record PhysicalScaleEnclosure
     (sourceMagnitude : ℚ)
     (kappa : PhysicalEinsteinCouplingInterval) : Set where
@@ -274,16 +320,16 @@ acceptedMeasuredGCouplingStillRequiredIsTrue :
   acceptedMeasuredGCouplingStillRequired ≡ true
 acceptedMeasuredGCouplingStillRequiredIsTrue = refl
 
-stressEnergyScaleStillRequired : Bool
-stressEnergyScaleStillRequired = true
+separateStressEnergyAndLengthScalesRequiredByKottlerConsumer : Bool
+separateStressEnergyAndLengthScalesRequiredByKottlerConsumer = false
 
-stressEnergyScaleStillRequiredIsTrue :
-  stressEnergyScaleStillRequired ≡ true
-stressEnergyScaleStillRequiredIsTrue = refl
+separateStressEnergyAndLengthScalesRequiredByKottlerConsumerIsFalse :
+  separateStressEnergyAndLengthScalesRequiredByKottlerConsumer ≡ false
+separateStressEnergyAndLengthScalesRequiredByKottlerConsumerIsFalse = refl
 
-physicalLengthScaleStillRequired : Bool
-physicalLengthScaleStillRequired = true
+stressLengthSquaredProductScaleStillRequired : Bool
+stressLengthSquaredProductScaleStillRequired = true
 
-physicalLengthScaleStillRequiredIsTrue :
-  physicalLengthScaleStillRequired ≡ true
-physicalLengthScaleStillRequiredIsTrue = refl
+stressLengthSquaredProductScaleStillRequiredIsTrue :
+  stressLengthSquaredProductScaleStillRequired ≡ true
+stressLengthSquaredProductScaleStillRequiredIsTrue = refl
