@@ -17,6 +17,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.ObserverFactorizedRefinementExact as Factorized
 import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Opposition
 import DASHI.Core.RelationalSelfStalkExact as Self
 import DASHI.Core.RelationalSelfDescentExact as SelfDescent
@@ -95,6 +96,31 @@ mediationMotiveDoesNotFactorThroughAction :
   Descent.FactorsThrough observedMediationAction mediationMotiveOf → ⊥
 mediationMotiveDoesNotFactorThroughAction =
   Descent.nonDescentWitnessBlocksFactorization mediationMotiveWitness
+
+didMediate : MediationEpisode → Bool
+didMediate integratedMediation = true
+didMediate appeasingMediation = true
+didMediate obligatedMediation = true
+
+didMediateFactorsThroughObservedAction :
+  Descent.FactorsThrough observedMediationAction didMediate
+didMediateFactorsThroughObservedAction =
+  Factorized.factorizedRefinement
+    actionSaysMediated
+    proof
+  where
+    actionSaysMediated : MediationAction → Bool
+    actionSaysMediated mediateAction = true
+    actionSaysMediated withdrawAction = false
+
+    proof :
+      (episode : MediationEpisode) →
+      didMediate episode
+      ≡ actionSaysMediated (observedMediationAction episode)
+    proof integratedMediation = refl
+    proof appeasingMediation = refl
+    proof obligatedMediation = refl
+
 
 ------------------------------------------------------------------------
 -- Three relational zero kinds reuse the existing Base369 distinction.
