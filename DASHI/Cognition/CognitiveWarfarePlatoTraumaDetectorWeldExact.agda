@@ -109,6 +109,25 @@ sameConeDifferentProvenance =
   refl , Detection.organicOriginNotInfluence
 
 ------------------------------------------------------------------------
+-- Query-indexing: the same surface can be adequate for cone state while
+-- inadequate for provenance.
+------------------------------------------------------------------------
+
+contentConeDeterminesConeClass :
+  NF.FactorsThrough contentConeObserver coneClass
+contentConeDeterminesConeClass =
+  NF.factorsThrough
+    proj₂
+    (λ state → refl)
+
+fullDetectorDeterminesProvenance :
+  NF.FactorsThrough fullDetectorObserver provenance
+fullDetectorDeterminesProvenance =
+  NF.factorsThrough
+    proj₂
+    (λ state → refl)
+
+------------------------------------------------------------------------
 -- Content + deformation still cannot answer the provenance query.
 ------------------------------------------------------------------------
 
