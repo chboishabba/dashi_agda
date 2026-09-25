@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.BalabanCanonicalDyadicTraversalShellExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base as ℚ using (ℚ; _+_; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; NonNegative; nonNegative; _+_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 
@@ -45,14 +45,20 @@ canonicalTraversalShell = record
       ℚP.+-mono-≤
   ; Shell.TraversalShellData.multiplyByEightMonotone =
       λ {left} {right} order →
-        ℚP.*-monoˡ-≤-nonNeg
-          (ℚP.nonNegative⁻¹ Shell.eight)
-          order
+        let
+          instance
+            eightNN : NonNegative Shell.eight
+            eightNN = nonNegative (ℚP.nonNegative⁻¹ Shell.eight)
+        in
+        ℚP.*-monoˡ-≤-nonNeg Shell.eight order
   ; Shell.TraversalShellData.multiplyByHalfMonotone =
       λ {left} {right} order →
-        ℚP.*-monoˡ-≤-nonNeg
-          (Geo.halfPowerNonnegative (suc zero))
-          order
+        let
+          instance
+            halfNN : NonNegative Geo.half
+            halfNN = nonNegative (Geo.halfPowerNonnegative (suc zero))
+        in
+        ℚP.*-monoˡ-≤-nonNeg Geo.half order
   ; Shell.TraversalShellData.rootNormalization =
       λ scale volume root → ℚP.≤-refl
   ; Shell.TraversalShellData.atMostEightExtensions =
