@@ -56,32 +56,46 @@ import DASHI.Physics.YangMills.BalabanCompositeStressFirstVariationRound144Exact
 --
 --   DS_00 + DS_11 + DS_22 + DS_33 = 0
 --
--- pointwise.  Thus the remaining source work is smaller still:
---   (1) identify the selected CMP119 base insertion observable O;
---   (2) attach the six literal plaquette-orientation energies;
---   (3) construct the six mixed/off-diagonal metric action variations;
---   (4) identify the ten insertion variations DO[h];
---   (5) evaluate the ten literal Haar-integral combinations
---         C_h = B_h Z - A D_h.
+-- pointwise.
+--
+-- The full classical metric variation is now stronger: one six-component
+-- su(2)-valued curvature object F01,F02,F03,F12,F13,F23 compiles all four
+-- diagonal AND all six mixed DS_ab values.  The same curvature compiles the
+-- classical local stress insertion T_ab itself, and the literal side-4
+-- identity-background carrier supplies an exact plaquette-curl realization.
+--
+-- Therefore the remaining source work is smaller still:
+--   (1) identify the selected CMP119 local insertion coordinate with the
+--       curvature-built stress insertion on the SAME finite source carrier;
+--   (2) lift/identify the selected finite nonlinear CMP119 field with a
+--       CurvatureSix realization (the exact side-4 flat/tangent realization is
+--       already compiler-owned, but is not silently promoted to the full
+--       nonlinear source);
+--   (3) construct the metric variation DO[h] of that selected insertion;
+--   (4) evaluate the ten literal Haar-integral combinations
+--         C_h = B_h Z - A D_h;
+--   (5) if the normalized vacuum-like target is demanded, supply the
+--       nonclassical trace contribution: its diagonal sum must be -2, since
+--       the classical d=4 YM stress is exactly traceless.
 --
 -- No extra D1a/D1b, density callback, quotient algebra, tensor bridge, or
 -- synthetic normalization premise is required.
 ------------------------------------------------------------------------
 
 data GRQFTD1Leaf : Set where
-  identifySelectedCMP119BaseInsertionObservable : GRQFTD1Leaf
-  identifySixPlaquetteOrientationEnergies : GRQFTD1Leaf
-  identifySixMixedMetricActionVariations : GRQFTD1Leaf
-  identifyTenInsertionVariations : GRQFTD1Leaf
+  identifySelectedCMP119InsertionWithCurvatureStress : GRQFTD1Leaf
+  identifySelectedNonlinearFiniteCurvatureSix : GRQFTD1Leaf
+  identifyTenSelectedInsertionMetricVariations : GRQFTD1Leaf
   evaluateTenLiteralGibbsABDZReadouts : GRQFTD1Leaf
+  identifyRequiredQuantumTraceContribution : GRQFTD1Leaf
 
 canonicalGRQFTD1Leaves : List GRQFTD1Leaf
 canonicalGRQFTD1Leaves =
-  identifySelectedCMP119BaseInsertionObservable
-  ∷ identifySixPlaquetteOrientationEnergies
-  ∷ identifySixMixedMetricActionVariations
-  ∷ identifyTenInsertionVariations
+  identifySelectedCMP119InsertionWithCurvatureStress
+  ∷ identifySelectedNonlinearFiniteCurvatureSix
+  ∷ identifyTenSelectedInsertionMetricVariations
   ∷ evaluateTenLiteralGibbsABDZReadouts
+  ∷ identifyRequiredQuantumTraceContribution
   ∷ []
 
 ordinarySubstitutedFirstVariationChainRuleClosed : Bool
@@ -179,12 +193,19 @@ gibbsDensityDerivativeReductionConstructedIsTrue :
   gibbsDensityDerivativeReductionConstructed ≡ true
 gibbsDensityDerivativeReductionConstructedIsTrue = refl
 
-selectedBaseInsertionObservableStillOpen : Bool
-selectedBaseInsertionObservableStillOpen = true
+classicalCurvatureStressInsertionConstructed : Bool
+classicalCurvatureStressInsertionConstructed = true
 
-selectedBaseInsertionObservableStillOpenIsTrue :
-  selectedBaseInsertionObservableStillOpen ≡ true
-selectedBaseInsertionObservableStillOpenIsTrue = refl
+classicalCurvatureStressInsertionConstructedIsTrue :
+  classicalCurvatureStressInsertionConstructed ≡ true
+classicalCurvatureStressInsertionConstructedIsTrue = refl
+
+selectedCMP119InsertionSameObjectWeldStillOpen : Bool
+selectedCMP119InsertionSameObjectWeldStillOpen = true
+
+selectedCMP119InsertionSameObjectWeldStillOpenIsTrue :
+  selectedCMP119InsertionSameObjectWeldStillOpen ≡ true
+selectedCMP119InsertionSameObjectWeldStillOpenIsTrue = refl
 
 classicalDiagonalMetricActionVariationConstructed : Bool
 classicalDiagonalMetricActionVariationConstructed = true
@@ -200,26 +221,47 @@ classicalDiagonalActionTraceZeroIsTrue :
   classicalDiagonalActionTraceZero ≡ true
 classicalDiagonalActionTraceZeroIsTrue = refl
 
-sixPlaquetteOrientationEnergyIdentificationStillOpen : Bool
-sixPlaquetteOrientationEnergyIdentificationStillOpen = true
+allTenClassicalMetricActionVariationsConstructedFromCurvature : Bool
+allTenClassicalMetricActionVariationsConstructedFromCurvature = true
 
-sixPlaquetteOrientationEnergyIdentificationStillOpenIsTrue :
-  sixPlaquetteOrientationEnergyIdentificationStillOpen ≡ true
-sixPlaquetteOrientationEnergyIdentificationStillOpenIsTrue = refl
+allTenClassicalMetricActionVariationsConstructedFromCurvatureIsTrue :
+  allTenClassicalMetricActionVariationsConstructedFromCurvature ≡ true
+allTenClassicalMetricActionVariationsConstructedFromCurvatureIsTrue = refl
 
-sixMixedMetricActionVariationsStillOpen : Bool
-sixMixedMetricActionVariationsStillOpen = true
+flatSide4CurvatureStressRealizationConstructed : Bool
+flatSide4CurvatureStressRealizationConstructed = true
 
-sixMixedMetricActionVariationsStillOpenIsTrue :
-  sixMixedMetricActionVariationsStillOpen ≡ true
-sixMixedMetricActionVariationsStillOpenIsTrue = refl
+flatSide4CurvatureStressRealizationConstructedIsTrue :
+  flatSide4CurvatureStressRealizationConstructed ≡ true
+flatSide4CurvatureStressRealizationConstructedIsTrue = refl
 
-tenInsertionVariationsStillOpen : Bool
-tenInsertionVariationsStillOpen = true
+selectedNonlinearFiniteCurvatureSixStillOpen : Bool
+selectedNonlinearFiniteCurvatureSixStillOpen = true
 
-tenInsertionVariationsStillOpenIsTrue :
-  tenInsertionVariationsStillOpen ≡ true
-tenInsertionVariationsStillOpenIsTrue = refl
+selectedNonlinearFiniteCurvatureSixStillOpenIsTrue :
+  selectedNonlinearFiniteCurvatureSixStillOpen ≡ true
+selectedNonlinearFiniteCurvatureSixStillOpenIsTrue = refl
+
+tenSelectedInsertionMetricVariationsStillOpen : Bool
+tenSelectedInsertionMetricVariationsStillOpen = true
+
+tenSelectedInsertionMetricVariationsStillOpenIsTrue :
+  tenSelectedInsertionMetricVariationsStillOpen ≡ true
+tenSelectedInsertionMetricVariationsStillOpenIsTrue = refl
+
+normalizedTargetTraceSplitConstructed : Bool
+normalizedTargetTraceSplitConstructed = true
+
+normalizedTargetTraceSplitConstructedIsTrue :
+  normalizedTargetTraceSplitConstructed ≡ true
+normalizedTargetTraceSplitConstructedIsTrue = refl
+
+requiredQuantumTraceContributionStillOpen : Bool
+requiredQuantumTraceContributionStillOpen = true
+
+requiredQuantumTraceContributionStillOpenIsTrue :
+  requiredQuantumTraceContributionStillOpen ≡ true
+requiredQuantumTraceContributionStillOpenIsTrue = refl
 
 tenLiteralGibbsABDZEvaluationsStillOpen : Bool
 tenLiteralGibbsABDZEvaluationsStillOpen = true
