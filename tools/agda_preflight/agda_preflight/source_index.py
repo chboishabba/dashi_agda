@@ -678,26 +678,49 @@ class SourceIndex:
             if commit:
                 self.connection.commit()
 
-    def _cached_closure(self, target: Path) -> Optional[List[sqlite3.Row]]:
+    def _cached_closure(
+        self,
+        target: Path,
+        *,
+        projection: str = "diagnostics",
+    ) -> Optional[List[sqlite3.Row]]:
         target_rel = self._relative(target)
+        if projection == "diagnostics":
+            select = (
+                "m.path, m.module_name, m.mtime_ns, m.size, "
+                "m.diagnostics_json"
+            )
+        elif projection == "candidates":
+            select = (
+                "m.path, m.module_name, m.mtime_ns, m.size, "
+                "m.top_diagnostic_json, m.top_fixable_diagnostic_json, "
+                "(m.diagnostics_json = '[]') AS diagnostics_empty, "
+                "(m.diagnostics_json = '') AS diagnostics_invalid"
+            )
+        else:
+            raise ValueError(
+                f"unknown cached closure projection: {projection}"
+            )
+
+        query = f"""
+            WITH RECURSIVE closure(path, module_name) AS (
+                SELECT path, module_name
+                FROM modules
+                WHERE path = ?
+                UNION
+                SELECT m.path, m.module_name
+                FROM closure c
+                JOIN imports i ON i.importer_path = c.path
+                JOIN modules m ON m.module_name = i.imported_module
+            )
+            SELECT {select}
+            FROM closure c
+            JOIN modules m ON m.path = c.path
+            ORDER BY m.module_name
+        """
         with self.profiler.stage("closure.lookup"):
             rows = self.connection.execute(
-                """
-                WITH RECURSIVE closure(path, module_name) AS (
-                    SELECT path, module_name
-                    FROM modules
-                    WHERE path = ?
-                    UNION
-                    SELECT m.path, m.module_name
-                    FROM closure c
-                    JOIN imports i ON i.importer_path = c.path
-                    JOIN modules m ON m.module_name = i.imported_module
-                )
-                SELECT m.*
-                FROM closure c
-                JOIN modules m ON m.path = c.path
-                ORDER BY m.module_name
-                """,
+                query,
                 (target_rel,),
             ).fetchall()
         if not rows:
@@ -757,7 +780,10 @@ class SourceIndex:
         """
         target = target if target.is_absolute() else self.root / target
         target = target.resolve()
-        rows = self._cached_closure(target)
+        rows = self._cached_closure(
+            target,
+            projection="candidates",
+        )
         if rows is None:
             return None
 
@@ -811,7 +837,10 @@ class SourceIndex:
     ) -> Optional[Diagnostic]:
         target = target if target.is_absolute() else self.root / target
         target = target.resolve()
-        rows = self._cached_closure(target)
+        rows = self._cached_closure(
+            target,
+            projection="candidates",
+        )
         if rows is None:
             result = self.diagnose(target)
             candidates = [
@@ -858,9 +887,34 @@ class SourceIndex:
                         else None
                     )
                 payload = row[payload_column]
-                if not payload and row["diagnostics_json"]:
+                if not payload:
+                    if row["diagnostics_empty"]:
+                        continue
+                    if row["diagnostics_invalid"]:
+                        result = self.diagnose(target)
+                        fallback = [
+                            item for item in result.diagnostics
+                            if (not require_fix or item.fixes)
+                        ]
+                        return (
+                            min(
+                                fallback,
+                                key=self._diagnostic_priority,
+                            )
+                            if fallback
+                            else None
+                        )
+                    diagnostic_row = self.connection.execute(
+                        "SELECT diagnostics_json FROM modules "
+                        "WHERE path = ?",
+                        (row["path"],),
+                    ).fetchone()
+                    if diagnostic_row is None:
+                        continue
                     try:
-                        module_diagnostics = self._decode_diagnostics(row)
+                        module_diagnostics = self._decode_diagnostics(
+                            diagnostic_row
+                        )
                     except (
                         TypeError,
                         ValueError,
