@@ -151,3 +151,27 @@ fixtureAutomaticReconciliationDoesNotCreatePropositionIdentity :
     fixtureReconciliationCandidate
   ≡ false
 fixtureAutomaticReconciliationDoesNotCreatePropositionIdentity = refl
+
+
+fixtureReviewProjection : Scale.ReconciliationReviewProjection
+fixtureReviewProjection =
+  Scale.reconciliation-review-projection
+    "review-item:reconciliation:fixture"
+    "proposition-fingerprint:fixture"
+    "source-revision:fixture"
+    "reconciliation-pressure:fixture"
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureReviewProjectionDoesNotCreateEventAssembly :
+  Scale.ReconciliationReviewProjection.createsEventAssembly fixtureReviewProjection
+  ≡ false
+fixtureReviewProjectionDoesNotCreateEventAssembly = refl
+
+fixtureReviewProjectionDoesNotCreateTruth :
+  Scale.ReconciliationReviewProjection.createsClaimTruth fixtureReviewProjection
+  ≡ false
+fixtureReviewProjectionDoesNotCreateTruth = refl
