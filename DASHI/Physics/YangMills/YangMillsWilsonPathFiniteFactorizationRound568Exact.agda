@@ -13,6 +13,7 @@ module DASHI.Physics.YangMills.YangMillsWilsonPathFiniteFactorizationRound568Exa
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Relation.Binary.PropositionalEquality using (sym)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.CompactLieGroupCore
@@ -49,7 +50,7 @@ projectPathValues :
 projectPathValues field Lattice.empty =
   emptyValues
 projectPathValues field
-    (Lattice._▷_ {x = start} {y = middle} edge rest) =
+    (edge Lattice.▷ rest) =
   stepValues
     (field start middle edge)
     (projectPathValues field rest)
@@ -65,7 +66,7 @@ holonomyFromPathValues :
 holonomyFromPathValues H Lattice.empty emptyValues =
   identity H
 holonomyFromPathValues H
-    (Lattice._▷_ edge rest)
+    (edge Lattice.▷ rest)
     (stepValues value values) =
   multiply H value
     (holonomyFromPathValues H rest values)
@@ -84,7 +85,7 @@ projectedHolonomyIsLiteralHolonomy :
 projectedHolonomyIsLiteralHolonomy H field Lattice.empty =
   refl
 projectedHolonomyIsLiteralHolonomy H field
-    (Lattice._▷_ edge rest)
+    (edge Lattice.▷ rest)
   rewrite projectedHolonomyIsLiteralHolonomy H field rest =
   refl
 
@@ -136,7 +137,7 @@ wilsonObservableFactorsThroughPathValues {H = H}
         (R529.decode source configuration)
         (R529.boundaryAt source position))
   symProjected H source position configuration =
-    Relation.Binary.PropositionalEquality.sym
+    sym
       (projectedHolonomyIsLiteralHolonomy H
         (R529.decode source configuration)
         (R529.boundaryAt source position))
