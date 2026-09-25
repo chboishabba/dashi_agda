@@ -32,6 +32,7 @@ import DASHI.Foundations.RelationalDepthBidescentExact
 import DASHI.Foundations.TrialecticDepthHyperformExact
 import DASHI.Foundations.RelationalObserverNonaryD4DecompositionExact
 import DASHI.Foundations.TrialecticD4C3ResidualBoundaryExact
+import DASHI.Foundations.TrialecticZeroToThirteenStageBoundaryExact
 
 import DASHI.Cognition.PNF.TrialecticMentalizingCalibrationExact
 import DASHI.Cognition.PNF.PerspectiveAllocationExact
