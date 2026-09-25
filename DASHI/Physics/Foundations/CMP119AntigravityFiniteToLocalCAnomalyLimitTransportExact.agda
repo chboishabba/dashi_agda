@@ -1,8 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityFiniteToLocalCAnomalyLimitTransportExact where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; absℝ; _-ℝ_; _≤ℝ_; _<ℝ_)
@@ -96,12 +97,12 @@ finiteTraceLimitIsPinnedLocalCTrace :
   LocalCBridge.stressTraceNumerator readout
     (Local.stressTensor localC)
 finiteTraceLimitIsPinnedLocalCTrace
-    {sequenceLimit = sequenceLimit} {readout = readout}
+    {localC = localC} {sequenceLimit = sequenceLimit} {readout = readout}
     transport =
   Seq.limitFromVanishingError sequenceLimit
     (finiteQuantumTraceNumerator transport)
     (LocalCBridge.stressTraceNumerator readout
-      (Local.stressTensor _))
+      (Local.stressTensor localC))
     (traceError transport)
     (finiteTraceApproximatesLocalC transport)
     (traceErrorVanishes transport)
@@ -129,22 +130,30 @@ finiteF2LimitIsPinnedLocalCF2 :
     (Local.localOperator localC
       (LocalCBridge.fieldStrengthSquarePolynomial readout))
 finiteF2LimitIsPinnedLocalCF2
-    {sequenceLimit = sequenceLimit} {readout = readout}
+    {localC = localC} {sequenceLimit = sequenceLimit} {readout = readout}
     transport =
   Seq.limitFromVanishingError sequenceLimit
     (finiteF2Numerator transport)
     (LocalCBridge.localOperatorNumerator readout
-      (Local.localOperator _
+      (Local.localOperator localC
         (LocalCBridge.fieldStrengthSquarePolynomial readout)))
     (f2Error transport)
     (finiteF2ApproximatesLocalC transport)
     (f2ErrorVanishes transport)
 
-finiteEqualsContinuumAnomalyReadoutRequired : Agda.Builtin.Bool.Bool
-finiteEqualsContinuumAnomalyReadoutRequired = Agda.Builtin.Bool.false
+finiteEqualsContinuumAnomalyReadoutRequired : Bool
+finiteEqualsContinuumAnomalyReadoutRequired = false
 
-finiteToContinuumVanishingErrorTransportRequired : Agda.Builtin.Bool.Bool
-finiteToContinuumVanishingErrorTransportRequired = Agda.Builtin.Bool.true
+finiteEqualsContinuumAnomalyReadoutRequiredIsFalse :
+  finiteEqualsContinuumAnomalyReadoutRequired ≡ false
+finiteEqualsContinuumAnomalyReadoutRequiredIsFalse = refl
+
+finiteToContinuumVanishingErrorTransportRequired : Bool
+finiteToContinuumVanishingErrorTransportRequired = true
+
+finiteToContinuumVanishingErrorTransportRequiredIsTrue :
+  finiteToContinuumVanishingErrorTransportRequired ≡ true
+finiteToContinuumVanishingErrorTransportRequiredIsTrue = refl
 
 finiteToLocalCAnomalyLimitTransportCompilerLevel : ProofLevel
 finiteToLocalCAnomalyLimitTransportCompilerLevel = machineChecked
