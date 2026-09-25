@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119LiteralLorentzianTracePositiveGRepulsionExact where
 
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (0ℚ; _<_)
 
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
@@ -35,7 +36,7 @@ import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as T
 ------------------------------------------------------------------------
 
 module _
-    {History Cell : Set} {cutoff}
+    {History Cell : Set} {cutoff : Nat}
     {trajectory split}
     {inputs : Beta.BetaDrivenCompleteDensityInputs
       {trajectory = trajectory} {split = split}}
