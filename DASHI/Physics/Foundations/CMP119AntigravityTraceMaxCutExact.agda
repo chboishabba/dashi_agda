@@ -978,3 +978,51 @@ inverseCouplingRGSlopeCanPaySelectedInverseCouplingValue = false
 inverseCouplingRGSlopeCanPaySelectedInverseCouplingValueIsFalse :
   inverseCouplingRGSlopeCanPaySelectedInverseCouplingValue ≡ false
 inverseCouplingRGSlopeCanPaySelectedInverseCouplingValueIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- POST IMPLEMENTATION S1/S3/S4 STATUS
+------------------------------------------------------------------------
+
+weightedEquation171ExpectationCompilerClosed : Bool
+weightedEquation171ExpectationCompilerClosed = true
+
+weightedEquation171ExpectationCompilerClosedIsTrue :
+  weightedEquation171ExpectationCompilerClosed ≡ true
+weightedEquation171ExpectationCompilerClosedIsTrue = refl
+
+literalStepToEquation171SameObjectStillRequired : Bool
+literalStepToEquation171SameObjectStillRequired = true
+
+literalStepUniformOrdinaryMajorantStillRequired : Bool
+literalStepUniformOrdinaryMajorantStillRequired = true
+
+literalMassExactTaggedHaarRealizationStillRequired : Bool
+literalMassExactTaggedHaarRealizationStillRequired = true
+
+literalTaggedOscillationVanishesStillRequired : Bool
+literalTaggedOscillationVanishesStillRequired = true
+
+selectedSourceExpectationToPhysicalHaarSameObjectStillRequired : Bool
+selectedSourceExpectationToPhysicalHaarSameObjectStillRequired = true
+
+activeScaleInverseThresholdPropagationClosed : Bool
+activeScaleInverseThresholdPropagationClosed = true
+
+activeScaleInverseThresholdPropagationClosedIsTrue :
+  activeScaleInverseThresholdPropagationClosed ≡ true
+activeScaleInverseThresholdPropagationClosedIsTrue = refl
+
+sameNormalizationAnomalyThresholdBelowHistoryThresholdStillRequired : Bool
+sameNormalizationAnomalyThresholdBelowHistoryThresholdStillRequired = true
+
+sameNormalizationAnomalyThresholdBelowHistoryThresholdStillRequiredIsTrue :
+  sameNormalizationAnomalyThresholdBelowHistoryThresholdStillRequired ≡ true
+sameNormalizationAnomalyThresholdBelowHistoryThresholdStillRequiredIsTrue = refl
+
+concreteHistoryInverseThresholdNumericallyFixed : Bool
+concreteHistoryInverseThresholdNumericallyFixed = false
+
+concreteHistoryInverseThresholdNumericallyFixedIsFalse :
+  concreteHistoryInverseThresholdNumericallyFixed ≡ false
+concreteHistoryInverseThresholdNumericallyFixedIsFalse = refl
