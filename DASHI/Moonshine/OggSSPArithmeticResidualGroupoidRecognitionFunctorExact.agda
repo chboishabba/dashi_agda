@@ -171,6 +171,41 @@ p2RetainedOrientationRecognitionStillOpen :
   P2RetainedOrientationArithmeticRecognitionConstructed → ⊥
 p2RetainedOrientationRecognitionStillOpen ()
 
+
+------------------------------------------------------------------------
+-- 4b. Executable p=2 target-semantics selector.
+------------------------------------------------------------------------
+
+data P2TargetSemantics : Set where
+  binaryFlipAsGauge : P2TargetSemantics
+  orientationRetainedAsGluingData : P2TargetSemantics
+
+p2TargetPi0Count : P2TargetSemantics → Nat
+p2TargetPi0Count binaryFlipAsGauge = Small.p2ResidualPi0Count
+p2TargetPi0Count orientationRetainedAsGluingData =
+  Small.p2RetainedOrientationPi0Count
+
+data P2TargetPassesArithmeticPi0 : P2TargetSemantics → Set where
+  retainedOrientationPasses :
+    P2TargetPassesArithmeticPi0 orientationRetainedAsGluingData
+
+p2FlipTargetCannotPassArithmeticPi0 :
+  P2TargetPassesArithmeticPi0 binaryFlipAsGauge → ⊥
+p2FlipTargetCannotPassArithmeticPi0 ()
+
+p2RetainedTargetPassesArithmeticPi0 :
+  P2TargetPassesArithmeticPi0 orientationRetainedAsGluingData
+p2RetainedTargetPassesArithmeticPi0 = retainedOrientationPasses
+
+p2PassingTargetMustRetainOrientation :
+  (target : P2TargetSemantics) →
+  P2TargetPassesArithmeticPi0 target →
+  target ≡ orientationRetainedAsGluingData
+p2PassingTargetMustRetainOrientation
+  binaryFlipAsGauge ()
+p2PassingTargetMustRetainOrientation
+  orientationRetainedAsGluingData retainedOrientationPasses = refl
+
 ------------------------------------------------------------------------
 -- 5. Fricke cross-pollination.
 --
@@ -247,6 +282,7 @@ record SmallCharacteristicRecognitionFunctorBoundary : Set where
     p2RetainedOrientationTargetPi0 : Nat
     p2RetainedOrientationPassesArithmeticPi0Gate : Bool
     p2RetainedOrientationArithmeticRecognitionConstructed : Bool
+    p2Pi0GateSelectsRetainedOrientationUniquely : Bool
 
     finiteFrickeCrossBoundaryTransportOwned : Bool
     p11HiddenInvolutionForcesResidualMotionOwned : Bool
@@ -261,6 +297,6 @@ canonicalSmallCharacteristicRecognitionFunctorBoundary =
     true true true true
     true true false
     5 true
-    10 true false
+    10 true false true
     true true false
-    missingArithmeticSourceGroupoidP3
+    missingArithmeticSourceGroupoidP2
