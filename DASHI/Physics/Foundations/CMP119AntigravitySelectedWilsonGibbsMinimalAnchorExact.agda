@@ -13,6 +13,8 @@ import DASHI.Physics.Foundations.CMP119LiteralFiniteMeasureStressSourceConstruct
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact as Wilson
 import DASHI.Physics.Foundations.CMP119PhysicalFiniteMeasureNZDNDZExact as NZ
 import DASHI.Physics.Foundations.CMP119GibbsFiniteMeasureNZDNDZReductionExact as Gibbs
+import DASHI.Physics.Foundations.CMP119ClassicalWilsonTraceInsertionReductionExact as WilsonTrace
+import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Integral
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalMetricSourceDomainRound106Exact as Domain
@@ -150,6 +152,22 @@ module _
       + wilsonComponentNumerator anchor K.component11
       + wilsonComponentNumerator anchor K.component22
       + wilsonComponentNumerator anchor K.component33
+
+
+    wilsonDiagonalActiveSumIsTraceActiveConnectedNumerator :
+      (anchor : MinimalSelectedWilsonGibbsAnchor) →
+      (laws :
+        Integral.RationalFiniteMeasureIntegrationLaws
+          (selectedLiteralFiniteMeasure anchor)) →
+      wilsonDiagonalActiveSum anchor
+      ≡
+      WilsonTrace.activeConnectedNumerator
+        {measure = selectedLiteralFiniteMeasure anchor}
+        wilsonInsertion laws
+    wilsonDiagonalActiveSumIsTraceActiveConnectedNumerator
+        anchor laws =
+      refl
+
 
     selectedDiagonalActiveSumIsWilsonDiagonalActiveSum :
       (anchor : MinimalSelectedWilsonGibbsAnchor) →
