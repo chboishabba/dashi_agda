@@ -7,6 +7,7 @@ import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact as Curvature
 import DASHI.Physics.Foundations.CMP119AntigravityFiniteHaarStrictPositivityExact as Strict
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionFlatCurlScalarExact as Curl
 
 ------------------------------------------------------------------------
@@ -167,7 +168,7 @@ fieldStrengthSquareNonnegative family configuration =
 
 record SelectedCurvatureF2PositiveWitness
     {Configuration : Set}
-    {measure : DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact.PhysicalFiniteYMMeasure Configuration ℚ}
+    {measure : Physical.PhysicalFiniteYMMeasure Configuration ℚ}
     (quadrature : Strict.FiniteRationalHaarQuadrature measure)
     (family : FiniteCurvatureF2Family Configuration) : Set where
   field
