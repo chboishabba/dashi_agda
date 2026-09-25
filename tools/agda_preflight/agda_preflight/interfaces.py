@@ -302,3 +302,120 @@ def resolve_interface_exports(
         )
         for module, interface in interfaces.items()
     }
+
+
+
+def interface_to_dict(interface: ModuleInterface) -> dict:
+    return {
+        "module_name": interface.module_name,
+        "imports": [list(item) for item in interface.imports],
+        "signatures": [
+            {
+                "name": item.name,
+                "type_text": item.type_text,
+                "terminal_head": item.terminal_head,
+                "explicit_arity": item.explicit_arity,
+            }
+            for item in interface.signatures
+        ],
+        "records": [
+            {
+                "name": record.name,
+                "constructor": record.constructor,
+                "field_surface_complete": record.field_surface_complete,
+                "fields": [
+                    {
+                        "name": field.name,
+                        "type_text": field.type_text,
+                        "terminal_head": field.terminal_head,
+                        "explicit_arity": field.explicit_arity,
+                    }
+                    for field in record.fields
+                ],
+            }
+            for record in interface.records
+        ],
+        "data_constructors": [
+            [name, list(constructors)]
+            for name, constructors in interface.data_constructors
+        ],
+        "nested_modules": list(interface.nested_modules),
+        "module_parameter_count": interface.module_parameter_count,
+        "public_reexports": [
+            {
+                "module": item.module,
+                "directives": [
+                    {
+                        "kind": directive.kind,
+                        "names": list(directive.names),
+                        "renamings": [list(pair) for pair in directive.renamings],
+                    }
+                    for directive in item.directives
+                ],
+            }
+            for item in interface.public_reexports
+        ],
+        "resolved_exports": list(interface.resolved_exports),
+    }
+
+
+def interface_from_dict(payload: dict) -> ModuleInterface:
+    return ModuleInterface(
+        module_name=payload["module_name"],
+        imports=tuple(
+            (str(alias), str(module))
+            for alias, module in payload.get("imports", [])
+        ),
+        signatures=tuple(
+            InterfaceSignature(
+                name=item["name"],
+                type_text=item["type_text"],
+                terminal_head=item.get("terminal_head"),
+                explicit_arity=int(item.get("explicit_arity", 0)),
+            )
+            for item in payload.get("signatures", [])
+        ),
+        records=tuple(
+            InterfaceRecord(
+                name=record["name"],
+                constructor=record.get("constructor"),
+                fields=tuple(
+                    InterfaceField(
+                        name=field["name"],
+                        type_text=field["type_text"],
+                        terminal_head=field.get("terminal_head"),
+                        explicit_arity=int(field.get("explicit_arity", 0)),
+                    )
+                    for field in record.get("fields", [])
+                ),
+                field_surface_complete=bool(
+                    record.get("field_surface_complete", True)
+                ),
+            )
+            for record in payload.get("records", [])
+        ),
+        data_constructors=tuple(
+            (name, tuple(constructors))
+            for name, constructors in payload.get("data_constructors", [])
+        ),
+        nested_modules=tuple(payload.get("nested_modules", [])),
+        module_parameter_count=int(payload.get("module_parameter_count", 0)),
+        public_reexports=tuple(
+            PublicReexport(
+                module=item["module"],
+                directives=tuple(
+                    InterfaceDirective(
+                        kind=directive["kind"],
+                        names=tuple(directive.get("names", [])),
+                        renamings=tuple(
+                            tuple(pair)
+                            for pair in directive.get("renamings", [])
+                        ),
+                    )
+                    for directive in item.get("directives", [])
+                ),
+            )
+            for item in payload.get("public_reexports", [])
+        ),
+        resolved_exports=tuple(payload.get("resolved_exports", [])),
+    )
