@@ -276,3 +276,140 @@ extra = Set
     counts = profiler.snapshot().counts
     assert counts["files_parsed"] == 1
     assert counts.get("incremental_interface_cache_hits", 0) >= 1
+
+
+
+def test_diagnostic_analyzer_change_preserves_interface_cache(
+    tmp_path,
+    monkeypatch,
+):
+    path = write_module(
+        tmp_path,
+        "Cache.Identity",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+bad : R
+bad = record { witnes = Set }
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    monkeypatch.setattr(
+        "agda_preflight.source_index.analyzer_fingerprints",
+        lambda: ("interface-v1", "diagnostic-v1"),
+    )
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=Profiler(),
+        jobs=1,
+    ) as index:
+        index.diagnose(path)
+
+    connection = sqlite3.connect(database)
+    connection.row_factory = sqlite3.Row
+    try:
+        before = connection.execute(
+            "SELECT * FROM modules WHERE module_name = ?",
+            ("Cache.Identity",),
+        ).fetchone()
+        assert before["interface_json"]
+        assert before["diagnostics_json"]
+        assert before["top_diagnostic_json"]
+    finally:
+        connection.close()
+
+    monkeypatch.setattr(
+        "agda_preflight.source_index.analyzer_fingerprints",
+        lambda: ("interface-v1", "diagnostic-v2"),
+    )
+    profiler = Profiler()
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=profiler,
+        jobs=1,
+    ):
+        pass
+
+    connection = sqlite3.connect(database)
+    connection.row_factory = sqlite3.Row
+    try:
+        after = connection.execute(
+            "SELECT * FROM modules WHERE module_name = ?",
+            ("Cache.Identity",),
+        ).fetchone()
+        assert after["interface_json"] == before["interface_json"]
+        assert after["api_base_sha256"] == before["api_base_sha256"]
+        assert after["diagnostics_json"] == ""
+        assert after["top_diagnostic_json"] == ""
+        assert after["top_fixable_diagnostic_json"] == ""
+    finally:
+        connection.close()
+
+    counts = profiler.snapshot().counts
+    assert counts["cache_diagnostic_invalidated_modules"] == 1
+    assert counts.get("cache_interface_invalidated_modules", 0) == 0
+
+
+def test_interface_analyzer_change_invalidates_both_cache_layers(
+    tmp_path,
+    monkeypatch,
+):
+    path = write_module(
+        tmp_path,
+        "Cache.InterfaceIdentity",
+        """
+x : Set
+x = Set
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    monkeypatch.setattr(
+        "agda_preflight.source_index.analyzer_fingerprints",
+        lambda: ("interface-v1", "diagnostic-v1"),
+    )
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=Profiler(),
+        jobs=1,
+    ) as index:
+        index.diagnose(path)
+
+    monkeypatch.setattr(
+        "agda_preflight.source_index.analyzer_fingerprints",
+        lambda: ("interface-v2", "diagnostic-v2"),
+    )
+    profiler = Profiler()
+    with SourceIndex(
+        tmp_path,
+        database,
+        profiler=profiler,
+        jobs=1,
+    ):
+        pass
+
+    connection = sqlite3.connect(database)
+    connection.row_factory = sqlite3.Row
+    try:
+        row = connection.execute(
+            "SELECT * FROM modules WHERE module_name = ?",
+            ("Cache.InterfaceIdentity",),
+        ).fetchone()
+        assert row["interface_json"] == ""
+        assert row["api_base_sha256"] == ""
+        assert row["api_fingerprint"] == ""
+        assert row["dependency_fingerprint"] == ""
+        assert row["diagnostics_json"] == ""
+        assert row["top_diagnostic_json"] == ""
+        assert row["top_fixable_diagnostic_json"] == ""
+    finally:
+        connection.close()
+
+    counts = profiler.snapshot().counts
+    assert counts["cache_interface_invalidated_modules"] == 1
