@@ -231,3 +231,9 @@ import DASHI.Moonshine.OggSSPP3F9ExtensionQuotientSourceExact
 import DASHI.Moonshine.OggSSPP2RetainedCMMarkedSourceExact
 
 import DASHI.Moonshine.OggSSPArithmeticTo369InhabitedExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalClaimMatchExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourcingCompletionExact
