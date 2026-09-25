@@ -18,6 +18,7 @@ import DASHI.Core.RelationalSelfStalkExact
 import DASHI.Core.RelationalSelfDescentExact
 import DASHI.Core.RelationalTransportDescentSheafExact
 import DASHI.Core.RelationalTransportGroupoidActionExact
+import DASHI.Core.RelationalTransportActionTwoCellExact
 import DASHI.Core.IrigarayContactRelationalRechartExact
 
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
