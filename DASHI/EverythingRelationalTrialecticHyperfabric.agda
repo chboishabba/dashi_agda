@@ -26,6 +26,7 @@ import DASHI.Reasoning.RelationalPerspectiveSubjectExact
 import DASHI.Reasoning.RelationalPerspectiveIntegrationExact
 
 import DASHI.Foundations.RelationalStageTwelveSiteExact
+import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact
 import DASHI.Foundations.RelationalDepthPresheafExact
 import DASHI.Foundations.RelationalDepthBidescentExact
 import DASHI.Foundations.TrialecticDepthHyperformExact
