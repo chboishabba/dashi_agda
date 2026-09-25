@@ -351,6 +351,56 @@ mk =
     hits = Checker(tmp_path).check(path)
     assert not any(d.code in {"TSAGDA060", "TSAGDA062"} for d in hits)
 
+
+def test_known_empty_record_keeps_unknown_field_check_hard(tmp_path):
+    path = write_module(
+        tmp_path,
+        "KnownEmptyRecord",
+        """module KnownEmptyRecord where
+
+record Empty : Set where
+
+mk : Empty
+mk =
+  record
+    { bogus = Set
+    }
+""",
+    )
+
+    summary = Checker(tmp_path).parse_summary(path)
+    assert summary.ast.records["Empty"].field_surface_complete is True
+
+    hits = Checker(tmp_path).check(path)
+    assert any(d.code == "TSAGDA060" for d in hits)
+
+
+def test_unindexed_record_field_surface_suppresses_unknown_field_claim(tmp_path):
+    path = write_module(
+        tmp_path,
+        "IncompleteRecordSurface",
+        """module IncompleteRecordSurface where
+
+record R : Set₁ where
+  open Dummy
+  field
+    A : Set
+
+mk : R
+mk =
+  record
+    { bogus = Set
+    }
+""",
+    )
+
+    checker = Checker(tmp_path)
+    summary = checker.parse_summary(path)
+    assert summary.ast.records["R"].field_surface_complete is False
+
+    hits = checker.check(path)
+    assert not any(d.code in {"TSAGDA060", "TSAGDA062"} for d in hits)
+
 def test_obvious_negative_occurrence_is_reported(tmp_path):
     path = write_module(
         tmp_path,
