@@ -303,6 +303,13 @@ def extended_diagnostics(checker, s, D):
         if target_ref is None:
             continue
         target_owner, target = target_ref
+        # Unknown-field/missing-field claims are only structurally justified
+        # when the target record's field table was actually indexed. Several
+        # valid Agda record layouts are currently tree-sitter grammar gaps and
+        # yield an empty field map; treating that as "record has no fields"
+        # manufactures TSAGDA060/062 false positives.
+        if not target.fields:
+            continue
         assignments = _assignment_map(record_expr)
 
         def target_field_name(name):
@@ -972,7 +979,7 @@ def extended_diagnostics(checker, s, D):
 
         for clause in clause_items:
             got = clause_explicit_argument_count(s.ast.source_bytes, clause.lhs_node)
-            if got is not None and got != want:
+            if got is not None and got > 0 and got != want:
                 out.append(_diag(D, "TSAGDA110", f"{name} clause binder count {got} does not match explicit telescope arity {want}", s, clause.line))
 
             lhs_tokens = significant_tokens(s.ast.source_bytes, clause.lhs_node)
