@@ -1,3 +1,4 @@
+import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact
 import DASHI.Moonshine.JInvariantSourceAtlasExact
 import DASHI.Moonshine.JInvariantImageFractalSourceAtlasExact
 import DASHI.Moonshine.JInvariantHomannMathematicaSourceCalibrationExact
