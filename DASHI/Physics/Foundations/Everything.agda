@@ -275,3 +275,6 @@ import DASHI.Physics.Foundations.CMP119AntigravityQuantumTraceExact
 import DASHI.Physics.Foundations.CMP119AntigravityWilsonQuantumTraceClosureExact
 
 import DASHI.Physics.Foundations.CMP119AntigravityBetaTraceBridgeExact
+
+import DASHI.Physics.Foundations.CMP119WilsonGibbsFiniteMeasureSameObjectExact
+import DASHI.Physics.Foundations.CMP119SelectedWilsonGibbsAnchorExact
