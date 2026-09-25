@@ -308,6 +308,34 @@ record ReconciliationReviewProjection : Set where
 
 open ReconciliationReviewProjection public
 
+
+record ReviewedGroupingMaterialization : Set where
+  constructor reviewed-grouping-materialization
+  field
+    propositionRef : String
+    propositionFingerprintRef : String
+    reviewItemRef : String
+    acceptedReviewCommandRef : String
+    claimRefs : List String
+
+    reviewedGroupingIdentity : Bool
+    reviewedGroupingIdentityIsTrue :
+      reviewedGroupingIdentity ≡ true
+
+    claimReviewPaid : Bool
+    claimReviewPaidIsFalse :
+      claimReviewPaid ≡ false
+
+    claimTruthPaid : Bool
+    claimTruthPaidIsFalse :
+      claimTruthPaid ≡ false
+
+    semanticAuthorityCreated : Bool
+    semanticAuthorityCreatedIsFalse :
+      semanticAuthorityCreated ≡ false
+
+open ReviewedGroupingMaterialization public
+
 record DbNativeCompilerReceipt
     (source : Ingest.GenericCompiledSource) : Set where
   constructor db-native-compiler-receipt
@@ -404,6 +432,8 @@ data ReconciliationPressureCreatesReviewPayment : Set where
 data ReviewQueueProjectionCreatesEventAssembly : Set where
 data ReviewQueueProjectionCreatesPropositionIdentity : Set where
 data ReviewQueueProjectionCreatesClaimTruth : Set where
+data GroupingReviewIsClaimReview : Set where
+data GroupingReviewCreatesClaimTruth : Set where
 data PostgresCompilerStateCreatesGlobalTruth : Set where
 data BulkDistributionCreatesProvenance : Set where
 data LinkedObjectAvailabilityCreatesSemanticAuthority : Set where
@@ -484,6 +514,14 @@ reviewQueueProjectionDoesNotCreatePropositionIdentity ()
 reviewQueueProjectionDoesNotCreateClaimTruth :
   ReviewQueueProjectionCreatesClaimTruth → ⊥
 reviewQueueProjectionDoesNotCreateClaimTruth ()
+
+groupingReviewDoesNotPayClaimReview :
+  GroupingReviewIsClaimReview → ⊥
+groupingReviewDoesNotPayClaimReview ()
+
+groupingReviewDoesNotCreateClaimTruth :
+  GroupingReviewCreatesClaimTruth → ⊥
+groupingReviewDoesNotCreateClaimTruth ()
 
 postgresCompilerStateDoesNotCreateGlobalTruth :
   PostgresCompilerStateCreatesGlobalTruth → ⊥
