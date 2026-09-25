@@ -896,3 +896,136 @@ farExactRecutTransportedIntoAgdaKernelHere = false
 farExactRecutInterpretation : String
 farExactRecutInterpretation =
   "FarExact is no longer an opaque Clay-facing carrier. Lean splits it exactly into the existing base N-mu zero source and existing horizontal source, pays the base by the literal inverse-square zero shell with canonical cutoff floor(t/2000), proves inverse-square decay for the exact signed horizontal normalized kernel, transports that decay with exact physical scaling, and compiles the whole far source to the same shell under one explicit HorizontalFarCurvatureBound CH. The far-paid scalar budget already compiles directly to G3. The preferred remaining analytic cut is therefore a quantitative selected-witness CH theorem plus the final far-paid strict scalar inequality. Existing K(W) is not treated as C2 control."
+
+
+------------------------------------------------------------------------
+-- FAR-PAID ROUTE SUPERSEDED BY LITERAL NORMALIZED COMPENSATION CUT
+--
+-- The previous FarExact/CH section remains a valid absolute-value audit route,
+-- but it is NOT the preferred Clay-facing min-cut.
+--
+-- New Lean source analysis exposes why.  At the canonical physical boundary
+--
+--   h = (t/16) * eta0,     eta0 = 1/(pi+1),
+--
+-- the normalized frequency is exactly q = +/- eta0.  It is fixed as t grows.
+-- Consequently improving remote Fourier decay from q^-2 to q^-6 or q^-8 does
+-- not create the missing t^-4 gain at this boundary.  The generic compensated
+-- N-mu source carries an unavoidable outer (t/16)^-2 scale, whereas the target
+-- quartic signal is on the (t/16)^-6 scale.
+--
+-- The required extra four inverse powers must therefore come from the exact
+-- signed/cancelled compensated high-ordinate functional itself, not from an
+-- absolute far-shell estimate.
+--
+-- Lean now performs the following exact recut on the same source family:
+--
+--   1. FarExact = FarBase + FarHorizontal on the identical finite carrier.
+--   2. FarHorizontal is exactly the existing G3 horizontal source.
+--   3. The base zero tail is paired with the matching mu/Gamma channel before
+--      estimation, yielding a canonical compensated N-mu tail.
+--   4. The selected-M6 terminal source cancels FarExact algebraically and gives
+--      an upper bound for the exact local pair source alone.
+--   5. For one finite cut n, define
+--
+--        F_n = completedResidual - (1/2) * localExact_n.
+--
+--      Lean proves the literal identity
+--
+--        F_n
+--          = (1/2) *
+--            ( global exact off-ordinate pair tsum
+--              - local exact pair sum_n
+--              - integral Psi_W * mu ).
+--
+--   6. The normalized carrier
+--
+--        (t/16)^2 * F_n
+--
+--      is placed directly on quartic scale.  The single remaining high
+--      inequality is exposed as PostSixthLiteralCompensationCut.
+--
+--   7. That one inequality compiles through the already-paid selected-M6 local
+--      budget and the existing completed-residual theorem all the way to
+--      contradiction.
+--
+-- Lean additionally welds the terminal-M6 witness to the already-paid G1
+-- quantitative target band on the SAME witness using the universal explicit
+-- K0 bound, and absorbs the V4 producer threshold into one fixed global high
+-- cutoff.
+--
+-- Therefore the preferred Clay-facing statement is now:
+--
+--   above one fixed high threshold,
+--   hypothetical off-line zero
+--   + selected literal compensated high cut
+--   -> False.
+--
+-- No independent FarExact theorem, horizontal-curvature theorem, final scalar
+-- ABSORB theorem, second witness, or taper-regularity programme remains on the
+-- preferred interface.
+--
+-- This is still a Lean source-written donor only.  The literal compensation
+-- high cut itself is the genuine open analytic theorem.  No Agda-native replay
+-- is claimed.
+------------------------------------------------------------------------
+
+data LiteralCompensationMinCutCoordinate : Set where
+  farExactExactBaseHorizontalSplit : LiteralCompensationMinCutCoordinate
+  farHorizontalExistingG3Identification : LiteralCompensationMinCutCoordinate
+  canonicalNMuCompensationRecut : LiteralCompensationMinCutCoordinate
+  canonicalNormalizedBoundaryIdentity : LiteralCompensationMinCutCoordinate
+  quarticScaleNormalizationDiagnosis : LiteralCompensationMinCutCoordinate
+  selectedLocalBudgetFarCancellation : LiteralCompensationMinCutCoordinate
+  finiteCutCompensatedFarIdentity : LiteralCompensationMinCutCoordinate
+  literalCompensationCutNormalizedEquivalence : LiteralCompensationMinCutCoordinate
+  literalCompensationCutToContradiction : LiteralCompensationMinCutCoordinate
+  sameWitnessTerminalM6AndTargetBand : LiteralCompensationMinCutCoordinate
+  fixedHighV4Compiler : LiteralCompensationMinCutCoordinate
+  selectedLiteralCompensationHighCut : LiteralCompensationMinCutCoordinate
+
+literalCompensationMinCutStatus :
+  LiteralCompensationMinCutCoordinate -> V4H4Status
+literalCompensationMinCutStatus farExactExactBaseHorizontalSplit =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus farHorizontalExistingG3Identification =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus canonicalNMuCompensationRecut =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus canonicalNormalizedBoundaryIdentity =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus quarticScaleNormalizationDiagnosis =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus selectedLocalBudgetFarCancellation =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus finiteCutCompensatedFarIdentity =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus literalCompensationCutNormalizedEquivalence =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus literalCompensationCutToContradiction =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus sameWitnessTerminalM6AndTargetBand =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus fixedHighV4Compiler =
+  leanSourceWrittenDonor
+literalCompensationMinCutStatus selectedLiteralCompensationHighCut =
+  openAnalyticObstruction
+
+literalCompensationCutIsOnlyPreferredOpenCoordinate :
+  literalCompensationMinCutStatus selectedLiteralCompensationHighCut
+    ≡ openAnalyticObstruction
+literalCompensationCutIsOnlyPreferredOpenCoordinate = refl
+
+farPaidCHRouteIsNotPreferredMinCut : Bool
+farPaidCHRouteIsNotPreferredMinCut = true
+
+literalCompensationLeanDonorHead : String
+literalCompensationLeanDonorHead =
+  "0addb974ca43b76659360fe5822f1617a54e1cc8"
+
+literalCompensationTransportedIntoAgdaKernelHere : Bool
+literalCompensationTransportedIntoAgdaKernelHere = false
+
+literalCompensationMinCutInterpretation : String
+literalCompensationMinCutInterpretation =
+  "The preferred RH Clay-facing route has been collapsed to one exact high-ordinate statement on the literal four-window source. FarExact is split and then recombined with the matching mu/Gamma compensation; the selected local source budget cancels FarExact algebraically; the remaining finite-cut compensated functional is normalized on the exact quartic scale and expanded as global pair source minus local pair source minus the full mu integral. That literal compensation cut compiles directly to the existing completed-residual contradiction. The same selected witness simultaneously carries the terminal M6 certificate and quantitative target band, and the V4 producer threshold is absorbed into one fixed high cutoff. The older absolute FarPaid/HorizontalFarCurvatureBound lane remains a valid audit fallback but is not the preferred min-cut."
