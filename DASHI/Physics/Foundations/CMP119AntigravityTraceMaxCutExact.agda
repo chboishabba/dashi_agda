@@ -642,3 +642,50 @@ realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachments = true
 realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachmentsIsTrue :
   realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachments ≡ true
 realPhysicalTraceAnomalySignCompilerClosedAfterSourceAttachmentsIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- TRACE-ANOMALY DEPENDENCY REFINEMENT
+------------------------------------------------------------------------
+
+traceAnomalyDependsOnPinnedLocalCConstruction : Bool
+traceAnomalyDependsOnPinnedLocalCConstruction = true
+
+traceAnomalyDependsOnPinnedLocalCConstructionIsTrue :
+  traceAnomalyDependsOnPinnedLocalCConstruction ≡ true
+traceAnomalyDependsOnPinnedLocalCConstructionIsTrue = refl
+
+freeRenormalizedTraceAndF2ScalarsPreferred : Bool
+freeRenormalizedTraceAndF2ScalarsPreferred = false
+
+freeRenormalizedTraceAndF2ScalarsPreferredIsFalse :
+  freeRenormalizedTraceAndF2ScalarsPreferred ≡ false
+freeRenormalizedTraceAndF2ScalarsPreferredIsFalse = refl
+
+pinnedConcreteLocalCTraceAnomalyBridgeCompilerClosed : Bool
+pinnedConcreteLocalCTraceAnomalyBridgeCompilerClosed = true
+
+pinnedConcreteLocalCTraceAnomalyBridgeCompilerClosedIsTrue :
+  pinnedConcreteLocalCTraceAnomalyBridgeCompilerClosed ≡ true
+pinnedConcreteLocalCTraceAnomalyBridgeCompilerClosedIsTrue = refl
+
+sameFamilyRenormalizedCurvatureCompositeConstructionStillRequired : Bool
+sameFamilyRenormalizedCurvatureCompositeConstructionStillRequired = true
+
+sameFamilyRenormalizedCurvatureCompositeConstructionStillRequiredIsTrue :
+  sameFamilyRenormalizedCurvatureCompositeConstructionStillRequired ≡ true
+sameFamilyRenormalizedCurvatureCompositeConstructionStillRequiredIsTrue = refl
+
+sameFamilyRenormalizedStressWardConstructionStillRequired : Bool
+sameFamilyRenormalizedStressWardConstructionStillRequired = true
+
+sameFamilyRenormalizedStressWardConstructionStillRequiredIsTrue :
+  sameFamilyRenormalizedStressWardConstructionStillRequired ≡ true
+sameFamilyRenormalizedStressWardConstructionStillRequiredIsTrue = refl
+
+finiteCMP119ToPinnedLocalCTraceF2TransportStillRequired : Bool
+finiteCMP119ToPinnedLocalCTraceF2TransportStillRequired = true
+
+finiteCMP119ToPinnedLocalCTraceF2TransportStillRequiredIsTrue :
+  finiteCMP119ToPinnedLocalCTraceF2TransportStillRequired ≡ true
+finiteCMP119ToPinnedLocalCTraceF2TransportStillRequiredIsTrue = refl
