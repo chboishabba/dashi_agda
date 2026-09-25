@@ -423,13 +423,16 @@ class SourceIndex:
         diagnostics: List[Diagnostic],
         *,
         commit: bool = True,
+        diagnostics_payload: Optional[str] = None,
     ) -> None:
         relative = self._relative(path)
-        payload = json.dumps(
-            [self._diagnostic_dict(item) for item in diagnostics],
-            sort_keys=True,
-            separators=(",", ":"),
-        )
+        payload = diagnostics_payload
+        if payload is None:
+            payload = json.dumps(
+                [self._diagnostic_dict(item) for item in diagnostics],
+                sort_keys=True,
+                separators=(",", ":"),
+            )
         with self.profiler.stage("db.write"):
             self.connection.execute(
                 """
@@ -772,7 +775,7 @@ class SourceIndex:
                     )
                     diagnostics = [
                         self._diagnostic_from_dict(item)
-                        for item in receipt.diagnostics
+                        for item in json.loads(receipt.diagnostics_json)
                     ]
                     path = Path(receipt.path)
                     self._store(
@@ -787,6 +790,7 @@ class SourceIndex:
                         receipt.imports,
                         diagnostics,
                         commit=False,
+                        diagnostics_payload=receipt.diagnostics_json,
                     )
                     state = _ModuleState(
                         path=path,
