@@ -73,12 +73,14 @@ grep -q 'p2FiveOrbitProjectionCannotReopenTenCarrier' "${targets[9]}"
 
 grep -q 'noCoarseJPi0SurjectionToP3' "${targets[10]}"
 grep -q 'noCoarseJPi0SurjectionToP2Retained' "${targets[10]}"
-grep -q 'p3ReceiptFrobeniusOrderTwo' "${targets[11]}"
-grep -q 'P3MarkedFrobeniusSource' "${targets[11]}"
-grep -q 'P2MarkedArithmeticSource' "${targets[11]}"
-grep -q 'P3ArithmeticTo369Recognition' "${targets[12]}"
-grep -q 'P2ArithmeticTo369Recognition' "${targets[12]}"
-grep -q 'reverseCompatibilityDoesNotBuildArithmeticTo369' "${targets[12]}"
-
 grep -q 'noInjectiveF9OrbitToP3Target' "${targets[11]}"
+grep -q 'noFullF9FrobeniusRecognitionToP3' "${targets[11]}"
+
+grep -q 'p3ReceiptFrobeniusOrderTwo' "${targets[12]}"
+grep -q 'P3MarkedFrobeniusSource' "${targets[12]}"
+grep -q 'P2MarkedArithmeticSource' "${targets[12]}"
 grep -q 'wholeF9FrobeniusCarrierRejected' "${targets[12]}"
+
+grep -q 'P3ArithmeticTo369Recognition' "${targets[13]}"
+grep -q 'P2ArithmeticTo369Recognition' "${targets[13]}"
+grep -q 'reverseCompatibilityDoesNotBuildArithmeticTo369' "${targets[13]}"
