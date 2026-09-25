@@ -1118,7 +1118,7 @@ def extended_diagnostics(checker, s, D):
         target_owner, target = target_ref
         for fname, assignment in _assignment_map(record_expr):
             field = _record_fields(target).get(fname)
-            if field is None or field.type_node is None or assignment.expr_node is None:
+            if field is None or assignment.expr_node is None:
                 continue
             field_head = _field_terminal(target_owner, field)
             tokens = significant_tokens(s.ast.source_bytes, assignment.expr_node)
