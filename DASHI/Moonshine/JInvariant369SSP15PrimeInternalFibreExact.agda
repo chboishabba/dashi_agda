@@ -1,18 +1,14 @@
 module DASHI.Moonshine.JInvariant369SSP15PrimeInternalFibreExact where
 
 ------------------------------------------------------------------------
--- SSP15 PRIME x INTERNAL-LANE FIBRE
+-- SSP15 LANE + ATTACHED INTERNAL OBSERVER STATE
 --
--- The repository already proves:
+-- SSP15 itself is the fifteen Ogg/Monster prime lanes.
 --
---   * there are fifteen Ogg/Monster prime lanes;
---   * there are fifteen internal SSP15 lanes = five modes x three phases;
---   * every prime accepts every internal lane.
---
--- Therefore the semantic carrier is not a canonical 15<->15 identification.
--- It is a 15 x 15 fibred/product carrier (before residual geometry), with any
--- chosen bijection selecting only one 15-state gauge section through 225
--- prime/internal combinations.
+-- Separately, the repo has a five-mode x three-phase internal presentation that
+-- may be attached to a prime lane as additional state.  Therefore 15 x 15 = 225
+-- counts enriched (prime, internal-state) combinations.  It is NOT the number
+-- of SSP15 lanes and does not replace the canonical Ogg carrier.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -165,8 +161,10 @@ record SSP15PrimeInternalFibreBoundary : Set where
   constructor ssp15-prime-internal-fibre-boundary
   field
     primeLaneCountFifteen : Bool
+    ssp15LaneCarrierIsOggPrimeCarrier : Bool
     internalLaneCountFifteen : Bool
     coarseProductCount225 : Bool
+    product225IsSSP15LaneCount : Bool
     everyPrimeAcceptsEveryInternalLane : Bool
 
     chosenBijectionInterpretedAsGaugeSection : Bool
@@ -181,5 +179,5 @@ canonicalSSP15PrimeInternalFibreBoundary :
   SSP15PrimeInternalFibreBoundary
 canonicalSSP15PrimeInternalFibreBoundary =
   ssp15-prime-internal-fibre-boundary
-    true true true true
+    true true true true false true
     true false true true false
