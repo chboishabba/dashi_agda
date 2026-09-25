@@ -68,6 +68,7 @@ files=(
   DASHI/Physics/Foundations/CMP119GibbsDiagonalTraceCancellationExact.agda
   DASHI/Physics/Foundations/CMP119GibbsDiagonalTraceSignExact.agda
   DASHI/Physics/Foundations/CMP119ClassicalWilsonTraceInsertionReductionExact.agda
+  DASHI/Physics/Foundations/CMP119AntigravityTraceMaxCutExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotCrossNumeratorCandidateExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotD1SourceWeldExact.agda
   DASHI/Physics/Foundations/CMP119TenActualSourceReadoutsExact.agda
