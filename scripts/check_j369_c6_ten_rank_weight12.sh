@@ -9,6 +9,9 @@ targets=(
   DASHI/Moonshine/JInvariant369SSP15SignedFRACTRANBranchExact.agda
   DASHI/Moonshine/JInvariant369OggAddressSSP15NoGoExact.agda
   DASHI/Moonshine/JInvariant369SSP15PrimeInternalFibreExact.agda
+  DASHI/Moonshine/OggSSPSmallCharacteristicResidualCodecExact.agda
+  DASHI/Moonshine/OggSSPSmallCharacteristicCodecIndexedRecognitionExact.agda
+  DASHI/Moonshine/OggSSP369RecognitionFunctorObligationExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -55,3 +58,10 @@ grep -q 'chosenGaugeExhaustsSemanticCarrier' "${targets[6]}"
 grep -q 'primeInternalToPointedSigned' "${targets[6]}"
 grep -q 'primeInternalValuationOwnLane' "${targets[6]}"
 grep -q 'canonicalSignedLiftUsesPrimeInternalPair' "${targets[6]}"
+
+
+grep -q 'p2CoarseProjectionHasNoLeftInverse' "${targets[7]}"
+grep -q 'p3CoarseProjectionHasNoLeftInverse' "${targets[7]}"
+grep -q 'exactLaneKeyAddressDeterminesLane' "${targets[8]}"
+grep -q 'p2RecognitionLaneKey' "${targets[9]}"
+grep -q 'p2FiveOrbitProjectionCannotReopenTenCarrier' "${targets[9]}"
