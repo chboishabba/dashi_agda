@@ -2,12 +2,13 @@ module DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldExact as Ingest
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceExact as Persistence
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as Canonical
 import DASHI.Interop.DistributedEpistemicPlaneSeparationExact as Planes
 import DASHI.Interop.DistributedEvidenceHistoryProjectionExact as History
 import DASHI.Interop.ReplicationCapabilityNonCollapseExact as Replication
@@ -95,8 +96,9 @@ record ParserRegionJob
     status : ParserJobStatus
 
     regionRevisionMatchesCompilation :
-      Ingest.GenericSourceRegion.anchorUsesSourceRevision region
-      ≡ Ingest.GenericSourceRegion.anchorUsesSourceRevision region
+      CompilationIdentity.sourceRevisionRef compilationIdentity
+      ≡ Canonical.revisionSourceRevisionRef
+          (Ingest.GenericCompiledSource.revision source)
 
     leaseOwnerRef : String
     attemptRef : String
