@@ -39,6 +39,27 @@ record SamePropositionTransport
 
 open SamePropositionTransport public
 
+
+data EvidenceJoinRule : Set where
+  declaredEvidenceJoinRule : EvidenceJoinRule
+
+record QualifiedEvidenceJoinPermission
+    (left right : LocalQualifiedSection) : Set where
+  constructor qualified-evidence-join-permission
+  field
+    sameObjectAndScope : SamePropositionTransport left right
+    compatibleProvenanceReceipt : String
+    overlapTransportReceipt : String
+    joinRule : EvidenceJoinRule
+
+open QualifiedEvidenceJoinPermission public
+
+data EvidenceJoinWithoutPermission : Set where
+
+evidenceJoinRequiresDeclaredPermission :
+  EvidenceJoinWithoutPermission → ⊥
+evidenceJoinRequiresDeclaredPermission ()
+
 data CrossPatchSupportAutomaticallyGlobalises : Set where
 
 crossPatchSupportDoesNotAutomaticallyGlobalise :
@@ -52,8 +73,10 @@ record TrialecticLocalLogicBoundary : Set where
     sixfoldStatusIsRelationalPatch : Bool
     supportOnOnePatchAndCounterSupportOnAnotherCreatesGlobalBoth : Bool
     samePropositionScopeAndTransportRequiredBeforeGlobalJoin : Bool
+    compatibleProvenanceRequiredBeforeGlobalJoin : Bool
+    declaredEvidenceJoinRuleRequired : Bool
     logicalQualificationRetainsPriorCarrier : Bool
 
 canonicalTrialecticLocalLogicBoundary : TrialecticLocalLogicBoundary
 canonicalTrialecticLocalLogicBoundary =
-  trialectic-local-logic-boundary false false false true true
+  trialectic-local-logic-boundary false false false true true true true
