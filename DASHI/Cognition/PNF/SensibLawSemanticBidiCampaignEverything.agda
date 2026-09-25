@@ -33,6 +33,7 @@ import DASHI.Cognition.PNF.SensibLawMinimalMatterHandoffExact as MinimalHandoff
 import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as MatterAcceptance
 import DASHI.Cognition.PNF.SensibLawWorkProductCoverageExact as WorkProductCoverage
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationExact as GenericIngest
+import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldExact as GenericIngestWeld
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -311,3 +312,47 @@ ingestCandidateDoesNotBecomeTruth :
   GenericIngest.CandidateInterpretationDeterminesTruth → ⊥
 ingestCandidateDoesNotBecomeTruth =
   GenericIngest.candidateInterpretationDoesNotDetermineTruth
+
+------------------------------------------------------------------------
+-- INGEST-1 canonical weld and lossless partition.
+------------------------------------------------------------------------
+
+genericIngestUsesCanonicalEvidenceCarrier :
+  GenericIngestWeld.ProviderAdapterCreatesAlternateCanonicalCarrier → ⊥
+genericIngestUsesCanonicalEvidenceCarrier =
+  GenericIngestWeld.providerAdapterDoesNotCreateAlternateCanonicalCarrier
+
+genericIngestDoesNotCreateProviderReviewShortcut :
+  GenericIngestWeld.ProviderAdapterCreatesReviewShortcut → ⊥
+genericIngestDoesNotCreateProviderReviewShortcut =
+  GenericIngestWeld.providerAdapterDoesNotCreateReviewShortcut
+
+genericIngestDoesNotCreateProviderProjectionShortcut :
+  GenericIngestWeld.ProviderAdapterCreatesProjectionShortcut → ⊥
+genericIngestDoesNotCreateProviderProjectionShortcut =
+  GenericIngestWeld.providerAdapterDoesNotCreateProjectionShortcut
+
+genericDocumentStructureDoesNotBecomeObservation :
+  GenericIngestWeld.DocumentStructureCreatesSemanticObservation → ⊥
+genericDocumentStructureDoesNotBecomeObservation =
+  GenericIngestWeld.documentStructureDoesNotCreateSemanticObservation
+
+genericParserSuccessDoesNotPayReview :
+  GenericIngestWeld.ParserSuccessCreatesReviewPayment → ⊥
+genericParserSuccessDoesNotPayReview =
+  GenericIngestWeld.parserSuccessDoesNotCreateReviewPayment
+
+genericParserResidualDoesNotCreateSourceAbsence :
+  GenericIngestWeld.ParserResidualCreatesSourceAbsence → ⊥
+genericParserResidualDoesNotCreateSourceAbsence =
+  GenericIngestWeld.parserResidualDoesNotCreateSourceAbsence
+
+genericParserResidualDoesNotCreatePropositionAbsence :
+  GenericIngestWeld.ParserResidualCreatesPropositionAbsence → ⊥
+genericParserResidualDoesNotCreatePropositionAbsence =
+  GenericIngestWeld.parserResidualDoesNotCreatePropositionAbsence
+
+genericParserResidualDoesNotCreateEventAbsence :
+  GenericIngestWeld.ParserResidualCreatesEventAbsence → ⊥
+genericParserResidualDoesNotCreateEventAbsence =
+  GenericIngestWeld.parserResidualDoesNotCreateEventAbsence
