@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 import hashlib
-from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
+from typing import Callable, Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
 
 from tree_sitter import Language, Parser
 import tree_sitter_agda
@@ -204,6 +204,9 @@ class Checker:
         scope_backend=None,
         profiler: Optional[Profiler] = None,
         interfaces: Optional[Dict[str, ModuleInterface]] = None,
+        interface_loader: Optional[
+            Callable[[str], Optional[ModuleInterface]]
+        ] = None,
     ):
         self.root = root.resolve()
         self.profiler = profiler
@@ -215,6 +218,7 @@ class Checker:
         self._summary_cache: Dict[Path, ModuleSummary] = {}
         self._interface_cache: Dict[Path, ModuleInterface] = {}
         self._preloaded_interfaces = dict(interfaces or {})
+        self._interface_loader = interface_loader
         self._export_cache: Dict[Path, Set[str]] = {}
         self._diagnostic_cache: Dict[Path, List[Diagnostic]] = {}
         self.evidence_level = evidence_level
@@ -393,6 +397,11 @@ class Checker:
         preloaded = self._preloaded_interfaces.get(module)
         if preloaded is not None:
             return preloaded
+        if self._interface_loader is not None:
+            loaded = self._interface_loader(module)
+            if loaded is not None:
+                self._preloaded_interfaces[module] = loaded
+                return loaded
         path = self.module_path(module)
         if not path.exists():
             return None
