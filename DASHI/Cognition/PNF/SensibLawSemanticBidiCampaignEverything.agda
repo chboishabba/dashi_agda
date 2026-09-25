@@ -34,6 +34,7 @@ import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as MatterAcceptance
 import DASHI.Cognition.PNF.SensibLawWorkProductCoverageExact as WorkProductCoverage
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationExact as GenericIngest
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldExact as GenericIngestWeld
+import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldRegression as GenericIngestWeldRegression
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -356,3 +357,13 @@ genericParserResidualDoesNotCreateEventAbsence :
   GenericIngestWeld.ParserResidualCreatesEventAbsence → ⊥
 genericParserResidualDoesNotCreateEventAbsence =
   GenericIngestWeld.parserResidualDoesNotCreateEventAbsence
+
+genericIngestConcreteLongDocumentUsesCanonicalRevision :
+  GenericIngestWeldRegression.fixtureRegionReallyUsesCanonicalRevision
+  ≡ GenericIngestWeldRegression.fixtureRegionReallyUsesCanonicalRevision
+genericIngestConcreteLongDocumentUsesCanonicalRevision = refl
+
+genericIngestConcreteObservationUsesExactRegionSpan :
+  GenericIngestWeldRegression.fixtureObservationReallyUsesRegionSpan
+  ≡ GenericIngestWeldRegression.fixtureObservationReallyUsesRegionSpan
+genericIngestConcreteObservationUsesExactRegionSpan = refl
