@@ -330,6 +330,45 @@ berubeMaltreatmentEmotionRecognition =
     "supports an anisotropic emotion-recognition boundary: reviewed maltreatment-history groups can show faster/lower-intensity recognition of some negative emotions while other emotion-recognition outcomes are impaired or heterogeneous; this does not establish globally enhanced social cognition"
     Source.publicAttribution
 
+
+bowenDifferentiation : Source.AttributedSource
+bowenDifferentiation =
+  Source.mkNoDOISource
+    "Murray Bowen"
+    "Family Therapy in Clinical Practice"
+    "Jason Aronson; ISBN 9780876683347"
+    "1978"
+    "https://books.google.com/books?id=g7hrAAAAMAAJ"
+    Source.academicBookSource
+    "source context for family-system triangles and differentiation of self; DASHI does not identify differentiation with scalar independence, trialectic face semantics, or a trauma benefit"
+    Source.publicAttribution
+
+fruzzettiDialecticalThinking : Source.AttributedSource
+fruzzettiDialecticalThinking =
+  Source.mkDOISource
+    "Alan E. Fruzzetti"
+    "Dialectical Thinking"
+    "Cognitive and Behavioral Practice 29(3):567-570"
+    "2022"
+    "10.1016/j.cbpra.2022.02.011"
+    "https://doi.org/10.1016/j.cbpra.2022.02.011"
+    Source.academicArticleSource
+    "supports a clinical perspective-taking/depolarisation interface for dialectical thinking; it does not define DASHI's three-body trialectic, 369 carrier, or sheaf semantics"
+    Source.publicAttribution
+
+huEtAlNeuralDialecticalReview : Source.AttributedSource
+huEtAlNeuralDialecticalReview =
+  Source.mkDOISource
+    "Xiaomeng Hu; Han-Qing Ma; Ying-Qi Tian; Yong-Heng Hu; Sylvia Xiaohua Chen; Francisco Xavier Castellanos; Kai-Ping Peng; Chao-Gan Yan"
+    "The neural basis of dialectical thinking: recent advances and future prospects"
+    "Reviews in the Neurosciences 36(6):661-676"
+    "2025"
+    "10.1515/revneuro-2024-0178"
+    "https://doi.org/10.1515/revneuro-2024-0178"
+    Source.academicArticleSource
+    "review-level neural/cognitive context for dialectical thinking; no neural region or network is identified with a DASHI formal carrier and no trialectic theorem is imported"
+    Source.publicAttribution
+
 relationalTrialecticSourceAtlas : Source.AttributedSourceAtlas
 relationalTrialecticSourceAtlas =
   Source.mkSourceAtlas
@@ -359,6 +398,9 @@ relationalTrialecticSourceAtlas =
     ∷ sojaThirdspace
     ∷ deLaCerdaDagninoRFS
     ∷ berubeMaltreatmentEmotionRecognition
+    ∷ bowenDifferentiation
+    ∷ fruzzettiDialecticalThinking
+    ∷ huEtAlNeuralDialecticalReview
     ∷ [] )
     "Selected empirical/theoretical anchors only. Sources motivate bounded interfaces and distinctions; citations do not import proofs, clinical authority, causal trauma laws, or the DASHI finite/sheaf/369 constructions."
 
