@@ -78,6 +78,11 @@ data LocalBraidRewrite (n : Nat) : T.BraidWord n → T.BraidWord n → Set where
       (a ∷ b ∷ [])
       (b ∷ a ∷ [])
 
+  threeStrandYangBaxter :
+    LocalBraidRewrite 3
+      T.threeFibreYangBaxterLeft
+      T.threeFibreYangBaxterRight
+
 ------------------------------------------------------------------------
 -- Concrete 4-fibre distant-generator relation sigma_0 sigma_2 =
 -- sigma_2 sigma_0 at rewrite level.
@@ -104,6 +109,13 @@ fourFibreFarCommutation :
     (sigma2-4 ∷ sigma0-4 ∷ [])
 fourFibreFarCommutation =
   farCommute sigma0-4 sigma2-4 sigma0Sigma2FarSeparated
+
+threeFibreYangBaxterRewrite :
+  LocalBraidRewrite 3
+    T.threeFibreYangBaxterLeft
+    T.threeFibreYangBaxterRight
+threeFibreYangBaxterRewrite =
+  threeStrandYangBaxter
 
 ------------------------------------------------------------------------
 -- Context closure: a local rewrite can be applied inside arbitrary prefix and
@@ -145,6 +157,14 @@ data BraidProcessEquivalent (n : Nat) : T.BraidWord n → T.BraidWord n → Set 
     BraidProcessEquivalent n u v →
     BraidProcessEquivalent n v w →
     BraidProcessEquivalent n u w
+
+threeFibreYangBaxterEquivalent :
+  BraidProcessEquivalent 3
+    T.threeFibreYangBaxterLeft
+    T.threeFibreYangBaxterRight
+threeFibreYangBaxterEquivalent =
+  processStep
+    (contextualRewrite [] [] threeFibreYangBaxterRewrite)
 
 fourFibreFarCommutationEquivalent :
   BraidProcessEquivalent 4
@@ -230,6 +250,10 @@ record BraidRewriteBoundary : Set where
     processEquivalentImpliesHistoryErasedIsFalse :
       processEquivalentImpliesHistoryErased ≡ false
 
+    concreteThreeStrandYangBaxterRewriteOwned : Bool
+    concreteThreeStrandYangBaxterRewriteOwnedIsTrue :
+      concreteThreeStrandYangBaxterRewriteOwned ≡ true
+
     concreteFourFibreRelationProvesAllGenericRelations : Bool
     concreteFourFibreRelationProvesAllGenericRelationsIsFalse :
       concreteFourFibreRelationProvesAllGenericRelations ≡ false
@@ -242,4 +266,4 @@ open BraidRewriteBoundary public
 
 canonicalBraidRewriteBoundary : BraidRewriteBoundary
 canonicalBraidRewriteBoundary =
-  braidRewriteBoundary false refl false refl false refl false refl
+  braidRewriteBoundary false refl false refl true refl false refl false refl
