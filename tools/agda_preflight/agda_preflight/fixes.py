@@ -13,6 +13,8 @@ class TextEdit:
     end_line: int
     end_column: int
     replacement: str
+    start_byte: int | None = None
+    end_byte: int | None = None
 
     def as_dict(self) -> dict:
         return {
@@ -22,6 +24,8 @@ class TextEdit:
             "end_line": self.end_line,
             "end_column": self.end_column,
             "replacement": self.replacement,
+            "start_byte": self.start_byte,
+            "end_byte": self.end_byte,
         }
 
 
