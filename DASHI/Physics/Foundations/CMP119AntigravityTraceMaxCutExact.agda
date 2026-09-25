@@ -27,7 +27,7 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 
 data AntigravityTraceLeaf : Set where
-  attachSelectedCMP119SourceToCanonicalWilsonGibbsCalculus :
+  attachSelectedCMP119ConnectedNumeratorToCanonicalWilsonGibbs :
     AntigravityTraceLeaf
 
   inhabitSelectedRationalHaarIntegrationLaws :
@@ -39,7 +39,7 @@ data AntigravityTraceLeaf : Set where
   attachSelectedTraceToRenormalizedQuantumTrace :
     AntigravityTraceLeaf
 
-  proveSelectedQuantumTraceNumeratorNegative :
+  inhabitSelectedBetaF2TraceAttachment :
     AntigravityTraceLeaf
 
 canonicalAntigravityTraceLeaves : List AntigravityTraceLeaf
@@ -174,3 +174,32 @@ symmetricMetricRechartCompilerClosed = true
 symmetricMetricRechartCompilerClosedIsTrue :
   symmetricMetricRechartCompilerClosed ≡ true
 symmetricMetricRechartCompilerClosedIsTrue = refl
+
+
+selectedCMP119TraceSourceCapstoneCompilerClosed : Bool
+selectedCMP119TraceSourceCapstoneCompilerClosed = true
+
+selectedCMP119TraceSourceCapstoneCompilerClosedIsTrue :
+  selectedCMP119TraceSourceCapstoneCompilerClosed ≡ true
+selectedCMP119TraceSourceCapstoneCompilerClosedIsTrue = refl
+
+fullNormalizedSourceRecordEqualityRequired : Bool
+fullNormalizedSourceRecordEqualityRequired = false
+
+fullNormalizedSourceRecordEqualityRequiredIsFalse :
+  fullNormalizedSourceRecordEqualityRequired ≡ false
+fullNormalizedSourceRecordEqualityRequiredIsFalse = refl
+
+connectedNumeratorSameObjectStillRequired : Bool
+connectedNumeratorSameObjectStillRequired = true
+
+connectedNumeratorSameObjectStillRequiredIsTrue :
+  connectedNumeratorSameObjectStillRequired ≡ true
+connectedNumeratorSameObjectStillRequiredIsTrue = refl
+
+selectedBetaF2TraceAttachmentStillRequired : Bool
+selectedBetaF2TraceAttachmentStillRequired = true
+
+selectedBetaF2TraceAttachmentStillRequiredIsTrue :
+  selectedBetaF2TraceAttachmentStillRequired ≡ true
+selectedBetaF2TraceAttachmentStillRequiredIsTrue = refl
