@@ -29,9 +29,12 @@ module DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.FiniteBranchingCriticalityExact as Branch
+import DASHI.Core.DecimalResidualRefinementExact as Decimal
 import DASHI.Core.DecimalStageResidualBarrierExact as DecimalStage
 import DASHI.Promotion.MetacognitiveFrameBearingState as Meta
 
@@ -296,7 +299,7 @@ threeAxisExactTenPercentGainDenominator =
 -- Reuse the existing theorem that decimal fine refinement does not itself move
 -- the coarse stage.
 decimalFineDepthPreservesCoarseStage :
-  (digit : DASHI.Core.DecimalResidualRefinementExact.DecimalDigit) →
+  (digit : Decimal.DecimalDigit) →
   (depth : Nat) →
   DecimalStage.refinedStage digit depth ≡ DecimalStage.digitStage digit
 decimalFineDepthPreservesCoarseStage =
