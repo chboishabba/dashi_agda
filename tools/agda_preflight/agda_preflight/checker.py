@@ -11,6 +11,7 @@ from .rules import extended_diagnostics
 from .ast_index import AstIndex, build_ast_index, significant_tokens, typed_binders
 from .shapes import shape_from_node, terminal_head, explicit_arity
 from .evidence import DIAGNOSTIC_ALIASES, EvidenceLevel, evidence_name, policy_for
+from .timing import Profiler
 
 
 
@@ -178,9 +179,15 @@ class Checker:
         *,
         evidence_level: EvidenceLevel = EvidenceLevel.DASHI_INDEX,
         scope_backend=None,
+        profiler: Profiler | None = None,
     ):
         self.root = root.resolve()
-        self.parser = _parser()
+        self.profiler = profiler
+        if profiler is None:
+            self.parser = _parser()
+        else:
+            with profiler.stage("startup.tree_sitter_parser"):
+                self.parser = _parser()
         self._summary_cache: Dict[Path, ModuleSummary] = {}
         self._export_cache: Dict[Path, Set[str]] = {}
         self._diagnostic_cache: Dict[Path, List[Diagnostic]] = {}
@@ -206,8 +213,15 @@ class Checker:
         cached = self._summary_cache.get(path)
         if cached is not None:
             return cached
-        source = path.read_text(encoding="utf-8")
-        ast = build_ast_index(self.parser, path, self.root, source)
+        if self.profiler is None:
+            source = path.read_text(encoding="utf-8")
+            ast = build_ast_index(self.parser, path, self.root, source)
+        else:
+            self.profiler.count("files_parsed")
+            with self.profiler.stage("source.read"):
+                source = path.read_text(encoding="utf-8")
+            with self.profiler.stage("parse.tree_sitter"):
+                ast = build_ast_index(self.parser, path, self.root, source)
         records: Dict[str, RecordInfo] = {}
         for name, record in ast.records.items():
             records[name] = RecordInfo(
@@ -343,11 +357,20 @@ class Checker:
 
         summary = self.parse_summary(path)
         diagnostics: List[Diagnostic] = []
-        diagnostics.extend(self._syntax_diagnostics(summary))
-        diagnostics.extend(self._projection_sort_diagnostics(summary))
-        diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
-        diagnostics.extend(self._record_shape_diagnostics(summary))
-        diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
+        if self.profiler is None:
+            diagnostics.extend(self._syntax_diagnostics(summary))
+            diagnostics.extend(self._projection_sort_diagnostics(summary))
+            diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
+            diagnostics.extend(self._record_shape_diagnostics(summary))
+            diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
+        else:
+            self.profiler.count("diagnostics_recomputed")
+            with self.profiler.stage("diagnostics.local"):
+                diagnostics.extend(self._syntax_diagnostics(summary))
+                diagnostics.extend(self._projection_sort_diagnostics(summary))
+                diagnostics.extend(self._implicit_projection_receiver_diagnostics(summary))
+                diagnostics.extend(self._record_shape_diagnostics(summary))
+                diagnostics.extend(extended_diagnostics(self, summary, Diagnostic))
 
         # Apply evidence provenance without invoking an external backend.
         backend = self.scope_backend
