@@ -76,6 +76,8 @@ on:
       - 'DASHI/Physics/Foundations/CMP119TenFiniteD1ComponentCompilerExact.agda'
       - 'DASHI/Physics/Foundations/CMP119GRQFTD1MaxCutExact.agda'
       - 'DASHI/Physics/Foundations/CMP119FourDiagonalFiniteD1ActiveStressExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119FourD1LocalizedPositiveGRepulsionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravitySourceMaxCutExact.agda'
       - 'scripts/grqft_four_diagonal_active_stress.py'
       - 'outputs/grqft_four_diagonal_active_stress_target.json'
       - 'DASHI/Physics/Foundations/CMP119ConcreteTenSlotCrossNumeratorCandidateExact.agda'
