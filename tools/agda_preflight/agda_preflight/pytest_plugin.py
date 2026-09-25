@@ -69,6 +69,15 @@ def pytest_addoption(parser):
         ),
     )
     group.addoption(
+        "--agda-typecheck-runner",
+        action="store",
+        default=None,
+        help=(
+            "exit-code-only full Agda checker command; supports {file} placeholder "
+            "and participates in aggregate typecheck refinement"
+        ),
+    )
+    group.addoption(
         "--agda-scope-check",
         action="store_true",
         default=False,
@@ -140,6 +149,7 @@ def _checker(config) -> Checker:
         root = _repo_root(config)
         command = config.getoption("--agda-scope-command")
         scope_runner = config.getoption("--agda-scope-runner")
+        typecheck_runner = config.getoption("--agda-typecheck-runner")
         native_scope = config.getoption("--agda-scope-check")
         typecheck_oracle = config.getoption("--agda-typecheck-oracle")
         auto_refine = config.getoption("--agda-auto-refine")
@@ -161,6 +171,10 @@ def _checker(config) -> Checker:
         if scope_runner and not auto_refine:
             raise pytest.UsageError(
                 "--agda-scope-runner requires --agda-auto-refine"
+            )
+        if typecheck_runner and auto_refine != "typecheck":
+            raise pytest.UsageError(
+                "--agda-typecheck-runner requires --agda-auto-refine=typecheck"
             )
         agda_extra_args = tuple(
             shlex.split(config.getoption("--agda-extra-args") or "")
@@ -187,6 +201,7 @@ def _checker(config) -> Checker:
                 typecheck=auto_refine == "typecheck",
                 extra_args=agda_extra_args,
                 scope_command=scope_runner,
+                typecheck_command=typecheck_runner,
             )
         cached = Checker(root, scope_backend=scope_backend)
         setattr(config, "_dashi_agda_checker", cached)
