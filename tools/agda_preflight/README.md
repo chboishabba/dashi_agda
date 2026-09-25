@@ -331,9 +331,16 @@ deferred for stronger evidence: ...
 Diagnostics are grouped by capability. Some families are exact/high-confidence;
 heuristic families are emitted as warnings.
 
+Evidence policy is intentionally stricter than syntactic detectability. A rule
+may cheaply *notice* a suspicious shape while still requiring Agda scope or the
+full typechecker before it can become a hard conclusion. In particular,
+definitional equality, dependent term/type roles, projection saturation,
+constructor/pattern compatibility, coverage, positivity, and shallow arity
+through aliases are not treated as DASHI-index facts.
+
 ### Syntax / declaration structure
 
-- `TSAGDA000` tree-sitter syntax error / missing node
+- `TSAGDA000` tree-sitter syntax error / missing node; hard only with Agda-scope evidence because the grammar is intentionally incomplete
 - `TSAGDA004` module declaration disagrees with filesystem path
 - `TSAGDA005` duplicate top-level declaration
 - `TSAGDA006` duplicate record field
@@ -355,7 +362,7 @@ heuristic families are emitted as warnings.
 - `TSAGDA025` apparent unknown renaming source; requires `AGDA_SCOPE`
 - `TSAGDA026` open/renaming collision
 - `TSAGDA027` ambiguous unqualified exported name from multiple opens
-- `TSAGDA028` conflicting aliases for imports
+- `TSAGDA028` conflicting aliases for imports; requires `AGDA_SCOPE`
 - `TSAGDA029` repository import cycle
 - `TSAGDA030` module identity/path collision
 
