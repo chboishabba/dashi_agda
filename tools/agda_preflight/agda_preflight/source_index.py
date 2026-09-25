@@ -254,6 +254,10 @@ class SourceIndex:
             module_name=row["module_name"],
             imports=self._imports_for_path(row["path"]),
             interface=interface,
+            api_base_hash=row["api_base_sha256"],
+            public_imports=tuple(
+                json.loads(row["public_imports_json"])
+            ),
             files_parsed=0,
             parse_ns=0,
         )
@@ -797,10 +801,83 @@ class SourceIndex:
             sum(item.parse_ns for item in import_receipts),
         )
 
+        receipt_by_module = {
+            item.module_name: item
+            for item in import_receipts
+        }
+        interface_by_module = resolve_interface_exports(
+            {
+                item.module_name: item.interface
+                for item in import_receipts
+                if item.interface is not None
+            }
+        )
+
+        api_memo: Dict[str, str] = {}
+
+        def resolve_api(module: str, visiting: Set[str]) -> str:
+            cached = api_memo.get(module)
+            if cached is not None:
+                return cached
+            receipt = receipt_by_module[module]
+            if module in visiting:
+                return receipt.api_base_hash
+            nested = set(visiting)
+            nested.add(module)
+            value = self._api_fingerprint(
+                receipt.api_base_hash,
+                (
+                    (dependency, resolve_api(dependency, nested))
+                    for dependency in sorted(receipt.public_imports)
+                    if dependency in receipt_by_module
+                ),
+            )
+            api_memo[module] = value
+            return value
+
+        for module in sorted(receipt_by_module):
+            resolve_api(module, set())
+
+        dependency_fingerprints = {
+            module: self._dependency_fingerprint(
+                (
+                    dependency,
+                    api_memo[dependency],
+                )
+                for dependency in receipt.imports
+                if dependency in api_memo
+            )
+            for module, receipt in receipt_by_module.items()
+        }
+
+        cached_rows = {}
+        diagnostic_paths = []
+        for module, receipt in sorted(receipt_by_module.items()):
+            path = Path(receipt.path)
+            row = self._row(path)
+            reusable = (
+                receipt.files_parsed == 0
+                and row is not None
+                and row["dependency_fingerprint"]
+                    == dependency_fingerprints[module]
+                and bool(row["diagnostics_json"])
+            )
+            if reusable:
+                cached_rows[module] = row
+                self.profiler.count("cold_diagnostic_cache_hits")
+            else:
+                diagnostic_paths.append(path)
+                self.profiler.count("cold_diagnostic_cache_misses")
+
+        self.profiler.count(
+            "cold_diagnostic_targets",
+            len(diagnostic_paths),
+        )
+
         with self.profiler.stage("cold.parallel_diagnostics"):
             batch_receipts = diagnose_paths(
                 self.root,
-                paths,
+                diagnostic_paths,
                 jobs=workers,
                 import_receipts=import_receipts,
             )
@@ -810,6 +887,10 @@ class SourceIndex:
             for batch in batch_receipts
             for receipt in batch.receipts
         )
+        diagnostic_by_module = {
+            receipt.module_name: receipt
+            for receipt in receipts
+        }
         worker_files_parsed = sum(
             receipt.files_parsed for receipt in receipts
         )
@@ -861,7 +942,7 @@ class SourceIndex:
         )
         self.profiler.count(
             "cold_unpredicted_parse_overhead",
-            max(0, worker_files_parsed - predicted_surface),
+            max(0, worker_files_parsed - len(diagnostic_paths)),
         )
         self.profiler.count(
             "cold_interface_parse_savings",
@@ -876,89 +957,69 @@ class SourceIndex:
             sum(receipt.diagnostics_ns for receipt in receipts),
         )
 
-        by_module = {
-            receipt.module_name: receipt
-            for receipt in receipts
-        }
-        interface_by_module = resolve_interface_exports(
-            {
-                item.module_name: item.interface
-                for item in import_receipts
-                if item.interface is not None
-            }
-        )
-        api_memo: Dict[str, str] = {}
-
-        def resolve_api(module: str, visiting: Set[str]) -> str:
-            cached = api_memo.get(module)
-            if cached is not None:
-                return cached
-            receipt = by_module[module]
-            if module in visiting:
-                # Public re-export cycles are rare; use the local API base at
-                # the cycle edge so the resulting fingerprint stays finite and
-                # deterministic under sorted traversal.
-                return receipt.api_base_hash
-            nested = set(visiting)
-            nested.add(module)
-            value = self._api_fingerprint(
-                receipt.api_base_hash,
-                (
-                    (dependency, resolve_api(dependency, nested))
-                    for dependency in sorted(receipt.public_imports)
-                    if dependency in by_module
-                ),
-            )
-            api_memo[module] = value
-            return value
-
-        for module in sorted(by_module):
-            resolve_api(module, set())
-
         states: Dict[str, _ModuleState] = {}
         all_diagnostics: List[Diagnostic] = []
 
         with self.profiler.stage("db.batch_write"):
             self.connection.execute("BEGIN")
             try:
-                for module in sorted(by_module):
-                    receipt = by_module[module]
+                for module in sorted(receipt_by_module):
+                    import_receipt = receipt_by_module[module]
                     api_hash = api_memo[module]
-                    dependency_fingerprint = self._dependency_fingerprint(
-                        (
-                            dependency,
-                            api_memo[dependency],
+                    dependency_fingerprint = dependency_fingerprints[module]
+                    diagnostic_receipt = diagnostic_by_module.get(module)
+
+                    if diagnostic_receipt is not None:
+                        diagnostics = [
+                            self._diagnostic_from_dict(item)
+                            for item in json.loads(
+                                diagnostic_receipt.diagnostics_json
+                            )
+                        ]
+                        path = Path(diagnostic_receipt.path)
+                        self._store(
+                            path,
+                            diagnostic_receipt.module_name,
+                            (
+                                diagnostic_receipt.mtime_ns,
+                                diagnostic_receipt.size,
+                            ),
+                            diagnostic_receipt.source_hash,
+                            diagnostic_receipt.api_base_hash,
+                            api_hash,
+                            diagnostic_receipt.public_imports,
+                            interface_by_module.get(module),
+                            dependency_fingerprint,
+                            diagnostic_receipt.imports,
+                            diagnostics,
+                            commit=False,
+                            diagnostics_payload=(
+                                diagnostic_receipt.diagnostics_json
+                            ),
                         )
-                        for dependency in receipt.imports
-                        if dependency in api_memo
-                    )
-                    diagnostics = [
-                        self._diagnostic_from_dict(item)
-                        for item in json.loads(receipt.diagnostics_json)
-                    ]
-                    path = Path(receipt.path)
-                    self._store(
-                        path,
-                        receipt.module_name,
-                        (receipt.mtime_ns, receipt.size),
-                        receipt.source_hash,
-                        receipt.api_base_hash,
-                        api_hash,
-                        receipt.public_imports,
-                        interface_by_module.get(receipt.module_name),
-                        dependency_fingerprint,
-                        receipt.imports,
-                        diagnostics,
-                        commit=False,
-                        diagnostics_payload=receipt.diagnostics_json,
-                    )
+                        source_hash = diagnostic_receipt.source_hash
+                        imports = diagnostic_receipt.imports
+                        public_imports = diagnostic_receipt.public_imports
+                    else:
+                        row = cached_rows[module]
+                        diagnostics = self._decode_diagnostics(row)
+                        path = Path(import_receipt.path)
+                        source_hash = row["source_sha256"]
+                        imports = import_receipt.imports
+                        public_imports = import_receipt.public_imports
+                        self.profiler.count(
+                            "diagnostics_cached",
+                            len(diagnostics),
+                        )
+                        self.profiler.count("modules_cached")
+
                     state = _ModuleState(
                         path=path,
-                        module_name=receipt.module_name,
-                        source_hash=receipt.source_hash,
+                        module_name=module,
+                        source_hash=source_hash,
                         api_hash=api_hash,
-                        imports=receipt.imports,
-                        public_imports=receipt.public_imports,
+                        imports=imports,
+                        public_imports=public_imports,
                         diagnostics=diagnostics,
                     )
                     states[module] = state
