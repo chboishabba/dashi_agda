@@ -25,6 +25,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExa
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.Unit using (⊤)
 open import Data.List.Base using (List; length)
+open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
 open import Data.Product using (proj₁)
@@ -116,6 +117,33 @@ operationalRunToChargedWitness run =
     (q1Witness run)
     (runConstructionCost run)
     (operationalAndNextStrict run)
+
+
+------------------------------------------------------------------------
+-- The actual constructor type now returns the operational run receipt.
+------------------------------------------------------------------------
+
+OperationalQ1StateConstructor : Set₁
+OperationalQ1StateConstructor =
+  (state : Q2.BoundedSelfReferenceState) →
+  Maybe (OperationalQ1ConstructionRun state)
+
+operationalConstructorToCharged :
+  OperationalQ1StateConstructor →
+  Charged.ConstructionChargedQ1StateConstructor
+operationalConstructorToCharged constructor state
+    with constructor state
+... | nothing =
+  nothing
+... | just run =
+  just (operationalRunToChargedWitness run)
+
+operationalConstructorToQ2StepSystem :
+  OperationalQ1StateConstructor →
+  Q2.BoundedSelfReferenceStepSystem
+operationalConstructorToQ2StepSystem constructor =
+  Charged.chargedQ1ConstructorToQ2StepSystem
+    (operationalConstructorToCharged constructor)
 
 ------------------------------------------------------------------------
 -- Quantitative output-compression threshold.
