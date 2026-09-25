@@ -497,6 +497,7 @@ data AutoObservationCreatesObservationIdentity : Set where
 data AutoObservationCreatesEventIdentity : Set where
 data AutoJoinProposalCreatesEventIdentity : Set where
 data AutoJoinProposalCreatesClaimTruth : Set where
+data TemporalDetectorBucketCreatesTemporalAssertion : Set where
 data PostgresCompilerStateCreatesGlobalTruth : Set where
 data BulkDistributionCreatesProvenance : Set where
 data LinkedObjectAvailabilityCreatesSemanticAuthority : Set where
@@ -601,6 +602,10 @@ autoJoinProposalDoesNotCreateEventIdentity ()
 autoJoinProposalDoesNotCreateClaimTruth :
   AutoJoinProposalCreatesClaimTruth → ⊥
 autoJoinProposalDoesNotCreateClaimTruth ()
+
+temporalDetectorBucketDoesNotCreateTemporalAssertion :
+  TemporalDetectorBucketCreatesTemporalAssertion → ⊥
+temporalDetectorBucketDoesNotCreateTemporalAssertion ()
 
 postgresCompilerStateDoesNotCreateGlobalTruth :
   PostgresCompilerStateCreatesGlobalTruth → ⊥
