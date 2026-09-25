@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤; tt)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_)
