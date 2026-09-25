@@ -30,7 +30,7 @@ x = Set
         tmp_path,
         "A.Middle",
         """
-import A.Leaf
+open import A.Leaf public
 
 y : Set
 y = A.Leaf.x
