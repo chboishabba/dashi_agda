@@ -1734,3 +1734,84 @@ literalFarMinusMuFinalHighTransportedIntoAgdaKernelHere = false
 literalFarMinusMuFinalHighInterpretation : String
 literalFarMinusMuFinalHighInterpretation =
   "The RH min-cut is now exact. Lean defines the selected literal far-minus-mu high cut using only the canonical far literal pair-source tsum, the full theorem-bearing signed ordinate mu integral, and the terminal residual margin. It source-proves this selected literal statement equivalent to the previously compiled canonical signed high cut and proves that the selected literal statement excludes every hypothetical off-line zero above the fixed high cutoff. Thus the remaining task is not further bookkeeping: it is a uniform one-sided signed cancellation theorem for (1/2)*(Far_W - integral Psi_t*mu). No proof of that new analytic theorem is claimed here."
+
+
+------------------------------------------------------------------------
+-- UNIFORM LITERAL FAR-MINUS-MU HIGH THEOREM
+--
+-- Lean now packages the remaining analytic obligation at its natural global
+-- quantifier level:
+--
+--   LiteralFarMinusMuUniformHighEstimate(CV,T)
+--
+-- meaning that for every t>T and every hypothetical off-line zero rho at
+-- height t, there exists the already-certified selected witness W satisfying
+-- the strength/M6/target-band package and
+--
+--   (1/2) *
+--   ( canonicalLiteralFarPairSource(W)
+--     - integral Psi_t * mu )
+--     < terminalResidualMargin(W,rho,CV,t).
+--
+-- Source-written consequences:
+--
+-- 1. Uniform estimate -> no off-line zero above T.
+--
+-- 2. Any actual high off-line zero -> failure of the uniform estimate.
+--
+-- 3. More sharply, combining selected-witness existence with the contradiction
+--    compiler gives a counterexample rigidity inequality: every hypothetical
+--    high off-line zero carries a concrete selected W for which
+--
+--      terminalResidualMargin
+--        <= (1/2) * (canonical far source - integral Psi_t*mu).
+--
+-- No positivity of terminalResidualMargin is claimed independently; that
+-- margin subtracts the entire local V4/M6/M8 budget and its sign is part of
+-- the genuine terminal analysis.
+--
+-- This is the correct final RH-facing theorem interface.  The uniform signed
+-- estimate itself remains open.
+------------------------------------------------------------------------
+
+data UniformLiteralFarMinusMuCoordinate : Set where
+  counterexampleForcesFarMinusMuLowerBound :
+    UniformLiteralFarMinusMuCoordinate
+  uniformLiteralFarMinusMuEstimate :
+    UniformLiteralFarMinusMuCoordinate
+  uniformEstimateExcludesHighOffLine :
+    UniformLiteralFarMinusMuCoordinate
+  highOffLineForcesUniformEstimateFailure :
+    UniformLiteralFarMinusMuCoordinate
+
+uniformLiteralFarMinusMuStatus :
+  UniformLiteralFarMinusMuCoordinate -> V4H4Status
+uniformLiteralFarMinusMuStatus counterexampleForcesFarMinusMuLowerBound =
+  leanSourceWrittenDonor
+uniformLiteralFarMinusMuStatus uniformLiteralFarMinusMuEstimate =
+  openAnalyticObstruction
+uniformLiteralFarMinusMuStatus uniformEstimateExcludesHighOffLine =
+  leanSourceWrittenDonor
+uniformLiteralFarMinusMuStatus highOffLineForcesUniformEstimateFailure =
+  leanSourceWrittenDonor
+
+counterexampleRigidityIsSourceWritten :
+  uniformLiteralFarMinusMuStatus counterexampleForcesFarMinusMuLowerBound
+    ≡ leanSourceWrittenDonor
+counterexampleRigidityIsSourceWritten = refl
+
+uniformLiteralFarMinusMuEstimateRemainsOpen :
+  uniformLiteralFarMinusMuStatus uniformLiteralFarMinusMuEstimate
+    ≡ openAnalyticObstruction
+uniformLiteralFarMinusMuEstimateRemainsOpen = refl
+
+uniformLiteralFarMinusMuLeanDonorHead : String
+uniformLiteralFarMinusMuLeanDonorHead =
+  "99cfb2a23720d28874ea1b01cc106a64940d5089"
+
+uniformLiteralFarMinusMuTransportedIntoAgdaKernelHere : Bool
+uniformLiteralFarMinusMuTransportedIntoAgdaKernelHere = false
+
+uniformLiteralFarMinusMuInterpretation : String
+uniformLiteralFarMinusMuInterpretation =
+  "Lean now packages the final high-ordinate RH obligation as one uniform selected-witness theorem: above one fixed cutoff, every hypothetical off-line zero must admit a selected four-window witness whose signed canonical far literal pair-source tsum minus the full theorem-bearing mu integral lies strictly below the terminal residual margin. Lean source-proves that this uniform estimate excludes all high off-line zeros, and conversely any such zero forces failure of the estimate. It also proves a counterexample rigidity lower bound: a hypothetical off-line zero forces the same selected witness scalar to be at least the terminal margin. No independent positivity of that margin is asserted. The uniform signed far-minus-mu estimate itself remains the open analytic theorem."
