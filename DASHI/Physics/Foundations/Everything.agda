@@ -305,3 +305,5 @@ import DASHI.Physics.Foundations.CMP119AntigravityOrderedHaarStrictPositivityExa
 import DASHI.Physics.Foundations.CMP119AntigravitySU2OrderedHaarTraceClosureExact
 
 import DASHI.Physics.Foundations.CMP119AntigravitySelectedMetricFamilyOrderedHaarClosureExact
+
+import DASHI.Physics.Foundations.CMP119AntigravityPhysicalHaarCarrierBoundaryExact
