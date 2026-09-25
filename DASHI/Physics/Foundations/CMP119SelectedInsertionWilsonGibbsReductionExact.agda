@@ -1,9 +1,10 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119SelectedInsertionWilsonGibbsReductionExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (_≡_; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; sym; trans)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as Basis
@@ -255,5 +256,5 @@ scalarWeldForcesWilsonComponentCollapse
       domain realization representation selected
       measureWeld wilsonInsertion weld right)
 
-scalarWeldSuitableForMultiComponentStress : Agda.Builtin.Bool.Bool
-scalarWeldSuitableForMultiComponentStress = Agda.Builtin.Bool.false
+scalarWeldSuitableForMultiComponentStress : Bool
+scalarWeldSuitableForMultiComponentStress = false
