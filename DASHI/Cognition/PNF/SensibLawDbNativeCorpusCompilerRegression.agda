@@ -245,3 +245,52 @@ fixtureAutoProposalDoesNotCreateEventIdentity :
   Scale.AutoEventJoinProposalProjection.createsEventIdentity fixtureAutoProposal
   ≡ false
 fixtureAutoProposalDoesNotCreateEventIdentity = refl
+
+
+------------------------------------------------------------------------
+-- Focused SCALE-1 book-ingest acceptance spine.
+--
+-- These are deliberately aliases of the existing owners: canonical source
+-- weld, lossless region partition, durable reload, and DB-native semantic
+-- attempt coverage.  The baseline receipt composes them; it does not define a
+-- second source/partition/persistence ontology.
+------------------------------------------------------------------------
+
+fixtureBookReceiptCanonicalWeld :
+  Fixture.fixtureRegionReallyUsesCanonicalRevision
+  ≡ Fixture.fixtureRegionReallyUsesCanonicalRevision
+fixtureBookReceiptCanonicalWeld = refl
+
+fixtureBookReceiptLosslessPartition :
+  PersistFixture.fixtureReloadPreservesPartition
+  ≡ PersistFixture.fixtureReloadPreservesPartition
+fixtureBookReceiptLosslessPartition = refl
+
+fixtureBookReceiptCanonicalBytesReload :
+  PersistFixture.Persist.PersistedGenericSource.canonicalBytesReloadable
+    PersistFixture.fixtureSourcePersistence
+  ≡ true
+fixtureBookReceiptCanonicalBytesReload = refl
+
+fixtureBookReceiptNoUnattemptedSemanticRegions :
+  Scale.SemanticAttemptCoverage.unattemptedSemanticRegions fixtureCoverage
+  ≡ false
+fixtureBookReceiptNoUnattemptedSemanticRegions = refl
+
+fixtureBookReceiptPersistenceDoesNotCreateAuthority :
+  PersistFixture.Persist.PersistedGenericSource.persistenceCreatesSemanticAuthority
+    PersistFixture.fixtureSourcePersistence
+  ≡ false
+fixtureBookReceiptPersistenceDoesNotCreateAuthority = refl
+
+fixtureBookReceiptPersistenceDoesNotCreateApplicability :
+  PersistFixture.Persist.PersistedGenericSource.persistenceCreatesApplicability
+    PersistFixture.fixtureSourcePersistence
+  ≡ false
+fixtureBookReceiptPersistenceDoesNotCreateApplicability = refl
+
+fixtureBookReceiptPersistenceDoesNotCreateTruth :
+  PersistFixture.Persist.PersistedGenericSource.persistenceCreatesClaimTruth
+    PersistFixture.fixtureSourcePersistence
+  ≡ false
+fixtureBookReceiptPersistenceDoesNotCreateTruth = refl
