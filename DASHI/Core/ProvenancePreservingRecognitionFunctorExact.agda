@@ -91,6 +91,89 @@ record ProvenancePreservingOrbitRecognition
 
 open ProvenancePreservingOrbitRecognition public
 
+------------------------------------------------------------------------
+-- 3. Composition.
+--
+-- Provenance preservation composes only when the intermediate provenance
+-- carrier is literally shared by the two recognition legs.  This makes loss
+-- at an intermediate representation boundary explicit rather than silently
+-- repaired downstream.
+------------------------------------------------------------------------
+
+composeProvenancePreservingActionRecognition :
+  ∀ {AState ASym BState BSym CState CSym : Set}
+    {AProvenance BProvenance CProvenance : Set}
+    {actionA : Action.InvertibleSymmetryAction AState ASym}
+    {actionB : Action.InvertibleSymmetryAction BState BSym}
+    {actionC : Action.InvertibleSymmetryAction CState CSym}
+    {provenanceA : AState -> AProvenance}
+    {provenanceB : BState -> BProvenance}
+    {provenanceC : CState -> CProvenance} ->
+  ProvenancePreservingActionRecognition
+    actionA actionB provenanceA provenanceB ->
+  ProvenancePreservingActionRecognition
+    actionB actionC provenanceB provenanceC ->
+  ProvenancePreservingActionRecognition
+    actionA actionC provenanceA provenanceC
+composeProvenancePreservingActionRecognition first second =
+  provenance-preserving-action-recognition
+    (Recognition.composeActionRecognition
+      (actionRecognition first)
+      (actionRecognition second))
+    (λ provenance ->
+      mapProvenance second (mapProvenance first provenance))
+    (λ state ->
+      trans
+        (provenanceCommutes second
+          (Recognition.mapState (actionRecognition first) state))
+        (cong
+          (mapProvenance second)
+          (provenanceCommutes first state)))
+    (λ same ->
+      reflectsMappedProvenance first
+        (reflectsMappedProvenance second same))
+
+composeProvenancePreservingOrbitRecognition :
+  ∀ {AState ASym BState BSym CState CSym : Set}
+    {AProvenance BProvenance CProvenance : Set}
+    {actionA : Action.InvertibleSymmetryAction AState ASym}
+    {actionB : Action.InvertibleSymmetryAction BState BSym}
+    {actionC : Action.InvertibleSymmetryAction CState CSym}
+    {provenanceA : AState -> AProvenance}
+    {provenanceB : BState -> BProvenance}
+    {provenanceC : CState -> CProvenance}
+    {orbitsA : Orbit.OrbitPresentation actionA}
+    {orbitsB : Orbit.OrbitPresentation actionB}
+    {orbitsC : Orbit.OrbitPresentation actionC}
+    {actionRecognitionAB :
+      ProvenancePreservingActionRecognition
+        actionA actionB provenanceA provenanceB}
+    {actionRecognitionBC :
+      ProvenancePreservingActionRecognition
+        actionB actionC provenanceB provenanceC} ->
+  ProvenancePreservingOrbitRecognition
+    actionRecognitionAB orbitsA orbitsB ->
+  ProvenancePreservingOrbitRecognition
+    actionRecognitionBC orbitsB orbitsC ->
+  ProvenancePreservingOrbitRecognition
+    (composeProvenancePreservingActionRecognition
+      actionRecognitionAB actionRecognitionBC)
+    orbitsA orbitsC
+composeProvenancePreservingOrbitRecognition first second =
+  provenance-preserving-orbit-recognition
+    (Recognition.composeOrbitRecognition
+      (orbitRecognition first)
+      (orbitRecognition second))
+    (Recognition.composePi0Embedding
+      (pi0Embedding first)
+      (pi0Embedding second))
+    (Recognition.composePi0Surjection
+      (pi0Surjection first)
+      (pi0Surjection second))
+    (Recognition.composeStabilizerRecognition
+      (stabilizerRecognition first)
+      (stabilizerRecognition second))
+
 data SharedObservationCreatesSharedProvenance : Set where
 data OrbitEqualityCreatesSharedProvenance : Set where
 data EquivarianceCreatesAuthorityTransfer : Set where
