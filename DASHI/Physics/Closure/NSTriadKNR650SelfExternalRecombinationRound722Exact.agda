@@ -41,6 +41,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
@@ -84,7 +85,7 @@ module Recombine
   selfOutputSum : ℚ
   selfOutputSum =
     Pairing.outputIndexedSelfSum
-      (DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier.cutoffModes
+      (Cube.cutoffModes
         Split.Full.Nested.Base.cutoff)
 
   completeExternalOrbit : ℚ
