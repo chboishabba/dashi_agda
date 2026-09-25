@@ -272,7 +272,7 @@ module PairingNormalForm
           (trans
             (cong (λ coefficient → C3.complexMultiply coefficient G)
               coefficientZero)
-            (Algebra.complexZeroMultiply F G))))
+            (Algebra.complexMultiplyZeroLeft G))))
     where module R = Ring.Solver F
 
 ------------------------------------------------------------------------
