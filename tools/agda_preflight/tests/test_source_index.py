@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sqlite3
 
 from agda_preflight.source_index import SourceIndex
 from agda_preflight.timing import Profiler
@@ -159,3 +160,56 @@ mk = record { bogus = Set }
 
     assert [diagnostic.code for diagnostic in second.diagnostics] == first_codes
     assert profiler.snapshot().counts.get("files_parsed", 0) == 0
+
+
+
+def test_source_index_migrates_v2_interface_schema(tmp_path):
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+    database.parent.mkdir(parents=True, exist_ok=True)
+
+    connection = sqlite3.connect(database)
+    connection.executescript(
+        """
+        CREATE TABLE meta (
+            key TEXT PRIMARY KEY,
+            value TEXT NOT NULL
+        );
+        INSERT INTO meta(key, value) VALUES('schema_version', '2');
+
+        CREATE TABLE modules (
+            path TEXT PRIMARY KEY,
+            module_name TEXT NOT NULL,
+            mtime_ns INTEGER NOT NULL,
+            size INTEGER NOT NULL,
+            source_sha256 TEXT NOT NULL,
+            api_base_sha256 TEXT NOT NULL,
+            api_fingerprint TEXT NOT NULL,
+            public_imports_json TEXT NOT NULL,
+            dependency_fingerprint TEXT NOT NULL,
+            diagnostics_json TEXT NOT NULL,
+            updated_ns INTEGER NOT NULL
+        );
+        """
+    )
+    connection.commit()
+    connection.close()
+
+    with SourceIndex(tmp_path, database, profiler=Profiler()):
+        pass
+
+    connection = sqlite3.connect(database)
+    try:
+        version = connection.execute(
+            "SELECT value FROM meta WHERE key = 'schema_version'"
+        ).fetchone()[0]
+        columns = {
+            row[1]
+            for row in connection.execute(
+                "PRAGMA table_info(modules)"
+            ).fetchall()
+        }
+    finally:
+        connection.close()
+
+    assert version == "3"
+    assert "interface_json" in columns
