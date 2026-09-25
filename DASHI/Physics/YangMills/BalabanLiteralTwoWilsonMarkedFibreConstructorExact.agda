@@ -10,6 +10,7 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedFibreConstructorExac
 -- theorem on the downstream cluster carrier.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (map)
 open import Data.List.Membership.Propositional using (_∈_)
