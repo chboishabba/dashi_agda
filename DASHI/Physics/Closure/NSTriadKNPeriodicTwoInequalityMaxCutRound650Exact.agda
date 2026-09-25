@@ -429,9 +429,18 @@ round650C2BadCollarRateSelfComplementPaymentClosed =
 round650ClayPromotion : Bool
 round650ClayPromotion = false
 
-round650C1IsExactlyLiveR568BudgetIsTrue :
-  round650C1IsExactlyLiveR568Budget ≡ true
-round650C1IsExactlyLiveR568BudgetIsTrue = refl
+round650C1IsExactlyLiveR568BudgetIsFalse :
+  round650C1IsExactlyLiveR568Budget ≡ false
+round650C1IsExactlyLiveR568BudgetIsFalse = refl
+
+round650R568RemainsAdjacentSufficientProducerLaneIsTrue :
+  round650R568RemainsAdjacentSufficientProducerLane ≡ true
+round650R568RemainsAdjacentSufficientProducerLaneIsTrue = refl
+
+round650CombinedC1AndStrictMarginC2CompileToCriticalBarrierIsTrue :
+  round650CombinedC1AndStrictMarginC2CompileToCriticalBarrier ≡ true
+round650CombinedC1AndStrictMarginC2CompileToCriticalBarrierIsTrue =
+  R727.round727CombinedC1C2PlusInitialSourceBuildUniformCriticalBarrierIsTrue
 
 round650C2RadialSameObjectNormalizationClosedIsTrue :
   round650C2RadialSameObjectNormalizationClosed ≡ true
@@ -472,9 +481,13 @@ round650OldFiveItemB1B2B3B4B7CutMandatoryIsFalse :
   round650OldFiveItemB1B2B3B4B7CutMandatory ≡ false
 round650OldFiveItemB1B2B3B4B7CutMandatoryIsFalse = refl
 
-round650ExactlyTwoNewNSAnalyticLeavesIsTrue :
-  round650ExactlyTwoNewNSAnalyticLeaves ≡ true
-round650ExactlyTwoNewNSAnalyticLeavesIsTrue = refl
+round650ExactlyTwoNewNSAnalyticLeavesIsFalse :
+  round650ExactlyTwoNewNSAnalyticLeaves ≡ false
+round650ExactlyTwoNewNSAnalyticLeavesIsFalse = refl
+
+round650ExactlyThreeCurrentProofBearingAnalyticCoordinatesIsTrue :
+  round650ExactlyThreeCurrentProofBearingAnalyticCoordinates ≡ true
+round650ExactlyThreeCurrentProofBearingAnalyticCoordinatesIsTrue = refl
 
 round650AllRepresentationCompilersAroundC2InstalledIsTrue :
   round650AllRepresentationCompilersAroundC2Installed ≡ true
