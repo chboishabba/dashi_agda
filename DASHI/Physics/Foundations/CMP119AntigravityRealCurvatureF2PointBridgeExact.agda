@@ -6,7 +6,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ)
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; _<ℝ_)
+  (ℝ; 0ℝ; _≤ℝ_; _<ℝ_)
 
 import DASHI.Physics.Foundations.CMP119AntigravityCurvatureF2PositivityExact as RationalF2
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact as Curvature
@@ -84,7 +84,7 @@ realF2NonnegativeEverywhere :
   ∀ {Configuration embedding}
     (bridge : RealCurvatureF2PointBridge Configuration embedding) →
   ∀ configuration →
-  0ℝ DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+  0ℝ ≤ℝ
     realFieldStrengthSquare bridge configuration
 realF2NonnegativeEverywhere {embedding = embedding} bridge configuration =
   let
@@ -94,7 +94,7 @@ realF2NonnegativeEverywhere {embedding = embedding} bridge configuration =
 
     embeddedNN :
       Embed.embed embedding 0ℚ
-      DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+      ≤ℝ
       Embed.embed embedding
         (RationalF2.fieldStrengthSquare
           (rationalFamily bridge) configuration)
@@ -103,13 +103,13 @@ realF2NonnegativeEverywhere {embedding = embedding} bridge configuration =
   in
   subst
     (λ left →
-      left DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+      left ≤ℝ
         realFieldStrengthSquare bridge configuration)
     (Embed.zeroExact embedding)
     (subst
       (λ right →
         Embed.embed embedding 0ℚ
-          DASHI.Foundations.RealAnalysisAxioms.≤ℝ right)
+          ≤ℝ right)
       (sym
         (realF2AtConfigurationIsEmbeddedRationalF2
           bridge configuration))
