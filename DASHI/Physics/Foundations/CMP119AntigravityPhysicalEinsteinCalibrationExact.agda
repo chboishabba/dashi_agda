@@ -185,8 +185,7 @@ codataCandidateKappaLowerPositive =
 codataCandidateKappaOrdered :
   codataCandidateKappaLower ≤ codataCandidateKappaUpper
 codataCandidateKappaOrdered =
-  ℚP.nonNegative⁻¹
-    (codataCandidateKappaUpper - codataCandidateKappaLower)
+  ℚP.≤ᵇ⇒≤ tt
 
 codataCandidateKappaInterval :
   PhysicalEinsteinCouplingInterval
