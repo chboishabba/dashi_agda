@@ -27,6 +27,59 @@ import DASHI.Physics.YangMills.YangMillsPreferredWilsonWEXTSourceRound576Exact a
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
 
 
+literalWilsonMixedLogTheorem :
+  ∀ {Measure Observable SourceDirection Cluster}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (insertionMeaning :
+      ∀ cutoff →
+      Cumulant.LiteralTwoSourceInsertionMeaning
+        (sourceCalculus cutoff)
+        SourceDirection)
+    (contributingClusters :
+      Nat → Observable → Observable → List Cluster)
+    (clusterWeight :
+      Nat → Observable → Observable → Cluster → ℚ)
+    (literalWilsonMixedLogIsConnectedClusterSum :
+      ∀ cutoff left right →
+      Cumulant.literalMixedSecondLogDerivative
+        (insertionMeaning cutoff)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) left)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) right)
+      ≡
+      TwoMark.sumℚ
+        (TwoMark.map
+          (clusterWeight cutoff left right)
+          (contributingClusters cutoff left right))) →
+  R576.PreferredWilsonMixedLogPhysicalSource dataSet laws
+literalWilsonMixedLogTheorem
+    sourceCalculus insertionMeaning contributingClusters clusterWeight
+    literalWilsonMixedLogIsConnectedClusterSum = record
+  { R576.PreferredWilsonMixedLogPhysicalSource.SourceDirection =
+      SourceDirection
+  ; R576.PreferredWilsonMixedLogPhysicalSource.Cluster =
+      Cluster
+  ; R576.PreferredWilsonMixedLogPhysicalSource.sourceCalculus =
+      sourceCalculus
+  ; R576.PreferredWilsonMixedLogPhysicalSource.insertionMeaning =
+      insertionMeaning
+  ; R576.PreferredWilsonMixedLogPhysicalSource.contributingClusters =
+      contributingClusters
+  ; R576.PreferredWilsonMixedLogPhysicalSource.clusterWeight =
+      clusterWeight
+  ; R576.PreferredWilsonMixedLogPhysicalSource.literalWilsonMixedLogIsConnectedClusterSum =
+      literalWilsonMixedLogIsConnectedClusterSum
+  }
+
+
 literalWilsonMixedLogFromMarkedClusterExpansion :
   ∀ {Measure Observable SourceDirection Cluster Source}
     {dataSet :
@@ -80,59 +133,6 @@ literalWilsonMixedLogFromMarkedClusterExpansion
         (literalResponseIsMarkedMixedDerivative cutoff left right)
         (Diff.mixedDerivativeIsConnectedClusterDerivativeSum
           (markedExpansion cutoff left right)))
-
-literalWilsonMixedLogTheorem :
-  ∀ {Measure Observable SourceDirection Cluster}
-    {dataSet :
-      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
-    {laws :
-      R575.RationalCovarianceContinuityLaws dataSet}
-    (sourceCalculus :
-      ∀ cutoff →
-      Cumulant.NormalizedLogSourceCalculus
-        (R573.r278MomentAlgebra
-          (R575.rationalAbsoluteCovarianceExtension laws)
-          (Gram.measureSequence dataSet cutoff)))
-    (insertionMeaning :
-      ∀ cutoff →
-      Cumulant.LiteralTwoSourceInsertionMeaning
-        (sourceCalculus cutoff)
-        SourceDirection)
-    (contributingClusters :
-      Nat → Observable → Observable → List Cluster)
-    (clusterWeight :
-      Nat → Observable → Observable → Cluster → ℚ)
-    (literalWilsonMixedLogIsConnectedClusterSum :
-      ∀ cutoff left right →
-      Cumulant.literalMixedSecondLogDerivative
-        (insertionMeaning cutoff)
-        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) left)
-        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) right)
-      ≡
-      TwoMark.sumℚ
-        (TwoMark.map
-          (clusterWeight cutoff left right)
-          (contributingClusters cutoff left right))) →
-  R576.PreferredWilsonMixedLogPhysicalSource dataSet laws
-literalWilsonMixedLogTheorem
-    sourceCalculus insertionMeaning contributingClusters clusterWeight
-    literalWilsonMixedLogIsConnectedClusterSum = record
-  { R576.PreferredWilsonMixedLogPhysicalSource.SourceDirection =
-      SourceDirection
-  ; R576.PreferredWilsonMixedLogPhysicalSource.Cluster =
-      Cluster
-  ; R576.PreferredWilsonMixedLogPhysicalSource.sourceCalculus =
-      sourceCalculus
-  ; R576.PreferredWilsonMixedLogPhysicalSource.insertionMeaning =
-      insertionMeaning
-  ; R576.PreferredWilsonMixedLogPhysicalSource.contributingClusters =
-      contributingClusters
-  ; R576.PreferredWilsonMixedLogPhysicalSource.clusterWeight =
-      clusterWeight
-  ; R576.PreferredWilsonMixedLogPhysicalSource.literalWilsonMixedLogIsConnectedClusterSum =
-      literalWilsonMixedLogIsConnectedClusterSum
-  }
-
 
 ------------------------------------------------------------------------
 -- W3 finite summation payment.
