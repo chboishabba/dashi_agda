@@ -50,34 +50,38 @@ open P3ArithmeticTo369Recognition public
 
 p3OrbitRecognition :
   {source : SourceSocket.P3MarkedFrobeniusSource} →
-  P3ArithmeticTo369Recognition source →
+  (recognition : P3ArithmeticTo369Recognition source) →
   Recognition.OrbitRecognition
-    (functor)
+    (P3ArithmeticTo369Recognition.functor recognition)
     (SourceSocket.orbits source)
     Target.constantTernaryOrbitPresentation
 p3OrbitRecognition recognition =
-  Recognition.orbitRecognition (fullRecognition recognition)
+  Recognition.orbitRecognition
+    (P3ArithmeticTo369Recognition.fullRecognition recognition)
 
 p3Pi0Surjection :
   {source : SourceSocket.P3MarkedFrobeniusSource} →
   (recognition : P3ArithmeticTo369Recognition source) →
   Recognition.Pi0Surjection (p3OrbitRecognition recognition)
 p3Pi0Surjection recognition =
-  Recognition.pi0Surjection (fullRecognition recognition)
+  Recognition.pi0Surjection
+    (P3ArithmeticTo369Recognition.fullRecognition recognition)
 
 p3Pi0Embedding :
   {source : SourceSocket.P3MarkedFrobeniusSource} →
   (recognition : P3ArithmeticTo369Recognition source) →
   Recognition.Pi0Embedding (p3OrbitRecognition recognition)
 p3Pi0Embedding recognition =
-  Recognition.pi0Embedding (fullRecognition recognition)
+  Recognition.pi0Embedding
+    (P3ArithmeticTo369Recognition.fullRecognition recognition)
 
 p3StabilizerRecognition :
   {source : SourceSocket.P3MarkedFrobeniusSource} →
   (recognition : P3ArithmeticTo369Recognition source) →
   Recognition.StabilizerRecognition (p3OrbitRecognition recognition)
 p3StabilizerRecognition recognition =
-  Recognition.stabilizerRecognition (fullRecognition recognition)
+  Recognition.stabilizerRecognition
+    (P3ArithmeticTo369Recognition.fullRecognition recognition)
 
 ------------------------------------------------------------------------
 -- 2. p=2 arithmetic -> retained-orientation 369 recognition.
@@ -105,34 +109,38 @@ open P2ArithmeticTo369Recognition public
 
 p2OrbitRecognition :
   {source : SourceSocket.P2MarkedArithmeticSource} →
-  P2ArithmeticTo369Recognition source →
+  (recognition : P2ArithmeticTo369Recognition source) →
   Recognition.OrbitRecognition
-    (functor)
+    (P2ArithmeticTo369Recognition.functor recognition)
     (SourceSocket.orbits source)
     Target.p2DiscreteOrbitPresentation
 p2OrbitRecognition recognition =
-  Recognition.orbitRecognition (fullRecognition recognition)
+  Recognition.orbitRecognition
+    (P2ArithmeticTo369Recognition.fullRecognition recognition)
 
 p2Pi0Surjection :
   {source : SourceSocket.P2MarkedArithmeticSource} →
   (recognition : P2ArithmeticTo369Recognition source) →
   Recognition.Pi0Surjection (p2OrbitRecognition recognition)
 p2Pi0Surjection recognition =
-  Recognition.pi0Surjection (fullRecognition recognition)
+  Recognition.pi0Surjection
+    (P2ArithmeticTo369Recognition.fullRecognition recognition)
 
 p2Pi0Embedding :
   {source : SourceSocket.P2MarkedArithmeticSource} →
   (recognition : P2ArithmeticTo369Recognition source) →
   Recognition.Pi0Embedding (p2OrbitRecognition recognition)
 p2Pi0Embedding recognition =
-  Recognition.pi0Embedding (fullRecognition recognition)
+  Recognition.pi0Embedding
+    (P2ArithmeticTo369Recognition.fullRecognition recognition)
 
 p2StabilizerRecognition :
   {source : SourceSocket.P2MarkedArithmeticSource} →
   (recognition : P2ArithmeticTo369Recognition source) →
   Recognition.StabilizerRecognition (p2OrbitRecognition recognition)
 p2StabilizerRecognition recognition =
-  Recognition.stabilizerRecognition (fullRecognition recognition)
+  Recognition.stabilizerRecognition
+    (P2ArithmeticTo369Recognition.fullRecognition recognition)
 
 ------------------------------------------------------------------------
 -- 3. Exact lane indexing and codec target are part of the recognition target.
