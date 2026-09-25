@@ -64,3 +64,4 @@ module DASHI.Moonshine.Everything where
 import DASHI.Moonshine.JInvariant369OggAddressSSP15NoGoExact
 
 import DASHI.Moonshine.JInvariant369SSP15PrimeInternalFibreExact
+import DASHI.Moonshine.JInvariant369OggAddressResidualFibreExact
