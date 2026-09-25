@@ -8,8 +8,7 @@ import os
 from pathlib import Path
 from typing import Callable, Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
 
-from .ast_index import build_import_surface
-from .checker import Checker, _parser
+from .checker import Checker
 from .timing import Profiler
 from .interfaces import ModuleInterface, interface_from_summary, resolve_interface_exports
 
@@ -53,7 +52,6 @@ class DiagnosticBatchReceipt:
 
 
 _WORKER_ROOT: Optional[Path] = None
-_WORKER_PARSER = None
 _WORKER_CHECKER: Optional[Checker] = None
 _WORKER_PROFILER: Optional[Profiler] = None
 
@@ -65,20 +63,8 @@ def worker_count(requested: int) -> int:
 
 
 def _init_import_worker(root: str) -> None:
-    global _WORKER_ROOT, _WORKER_PARSER, _WORKER_CHECKER, _WORKER_PROFILER
+    global _WORKER_ROOT, _WORKER_CHECKER, _WORKER_PROFILER
     _WORKER_ROOT = Path(root).resolve()
-    _WORKER_PARSER = None
-    _WORKER_PROFILER = Profiler()
-    _WORKER_CHECKER = Checker(
-        _WORKER_ROOT,
-        profiler=_WORKER_PROFILER,
-    )
-
-
-def _init_diagnostic_worker(root: str) -> None:
-    global _WORKER_ROOT, _WORKER_PARSER, _WORKER_CHECKER, _WORKER_PROFILER
-    _WORKER_ROOT = Path(root).resolve()
-    _WORKER_PARSER = None
     _WORKER_PROFILER = Profiler()
     _WORKER_CHECKER = Checker(
         _WORKER_ROOT,
@@ -283,18 +269,6 @@ def _diagnose_path_with(
             after.stages_ns.get("diagnostics.local", 0)
             - before.stages_ns.get("diagnostics.local", 0)
         ),
-    )
-
-
-def _diagnose_path(path_text: str) -> DiagnosticReceipt:
-    assert _WORKER_ROOT is not None
-    assert _WORKER_CHECKER is not None
-    assert _WORKER_PROFILER is not None
-    return _diagnose_path_with(
-        _WORKER_CHECKER,
-        _WORKER_PROFILER,
-        _WORKER_ROOT,
-        path_text,
     )
 
 
