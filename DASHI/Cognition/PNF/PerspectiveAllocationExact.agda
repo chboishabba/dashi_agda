@@ -14,6 +14,43 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
+
+------------------------------------------------------------------------
+-- Same observed mediation action, different own-position authority.
+------------------------------------------------------------------------
+
+data MediationAuthorityEpisode : Set where
+  mediateLowSelfAuthority : MediationAuthorityEpisode
+  mediateHighSelfAuthority : MediationAuthorityEpisode
+
+data MediationSurface : Set where
+  mediated : MediationSurface
+
+mediationActionObserver : MediationAuthorityEpisode → MediationSurface
+mediationActionObserver mediateLowSelfAuthority = mediated
+mediationActionObserver mediateHighSelfAuthority = mediated
+
+mediationSelfAuthority : MediationAuthorityEpisode → Nat
+mediationSelfAuthority mediateLowSelfAuthority = 1
+mediationSelfAuthority mediateHighSelfAuthority = 9
+
+mediationActionAuthorityWitness :
+  Descent.ConsumerNonDescentWitness
+    mediationActionObserver mediationSelfAuthority
+mediationActionAuthorityWitness =
+  Descent.consumerNonDescentWitness
+    mediateLowSelfAuthority
+    mediateHighSelfAuthority
+    refl
+    (λ ())
+
+selfAuthorityDoesNotFactorThroughMediationAction :
+  Descent.FactorsThrough
+    mediationActionObserver mediationSelfAuthority → ⊥
+selfAuthorityDoesNotFactorThroughMediationAction =
+  Descent.nonDescentWitnessBlocksFactorization
+    mediationActionAuthorityWitness
+
 record PerspectiveAllocationState : Set where
   constructor perspective-allocation-state
   field
