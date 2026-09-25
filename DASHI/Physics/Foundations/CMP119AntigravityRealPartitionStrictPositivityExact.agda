@@ -77,7 +77,8 @@ quotientNonzeroSemanticsFromDivision :
     (division : Division.RealDivisionAlgebra algebra quotient) →
   QuotientNonzeroSemantics
     {Converges = Converges} quotient
-quotientNonzeroSemanticsFromDivision strict division = record
+quotientNonzeroSemanticsFromDivision
+    {quotient = quotient} strict division = record
   { QuotientNonzeroSemantics.nonzeroMeansNotZero =
       λ value nonzero valueZero →
         Strict.zeroNotOne strict
@@ -88,7 +89,7 @@ quotientNonzeroSemanticsFromDivision strict division = record
               (sym
                 (cong
                   (λ numerator →
-                    Quotient.divide _ numerator value)
+                    Quotient.divide quotient numerator value)
                   valueZero))
               (Division.divideSelf division value nonzero)))
   }
