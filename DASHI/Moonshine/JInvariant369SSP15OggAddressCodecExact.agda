@@ -181,6 +181,55 @@ codecCoordinatesAgreeWithCanonicalAddress Lane.p47 = refl , refl
 codecCoordinatesAgreeWithCanonicalAddress Lane.p59 = refl , refl
 codecCoordinatesAgreeWithCanonicalAddress Lane.p71 = refl , refl
 
+
+addressCoordinates : SSP15OggAddress15 → Nat × Nat
+addressCoordinates address =
+  addressCoarseSheets address , addressRemainder address
+
+addressCoordinatesInjective :
+  (left right : SSP15OggAddress15) →
+  addressCoordinates left ≡ addressCoordinates right →
+  left ≡ right
+addressCoordinatesInjective a02 a02 refl = refl
+addressCoordinatesInjective a03 a03 refl = refl
+addressCoordinatesInjective a05 a05 refl = refl
+addressCoordinatesInjective a07 a07 refl = refl
+addressCoordinatesInjective a11 a11 refl = refl
+addressCoordinatesInjective a13 a13 refl = refl
+addressCoordinatesInjective a17 a17 refl = refl
+addressCoordinatesInjective a19 a19 refl = refl
+addressCoordinatesInjective a23 a23 refl = refl
+addressCoordinatesInjective a29 a29 refl = refl
+addressCoordinatesInjective a31 a31 refl = refl
+addressCoordinatesInjective a41 a41 refl = refl
+addressCoordinatesInjective a47 a47 refl = refl
+addressCoordinatesInjective a59 a59 refl = refl
+addressCoordinatesInjective a71 a71 refl = refl
+
+exactOggCoordinatesDetermineSSP15Lane :
+  (left right : SSP15Lane) →
+  addressCoordinates (addressFromSSP15Lane left)
+  ≡ addressCoordinates (addressFromSSP15Lane right) →
+  left ≡ right
+exactOggCoordinatesDetermineSSP15Lane left right same =
+  trans
+    (sym (laneAfterAddress left))
+    (trans
+      (cong ssp15LaneFromAddress
+        (addressCoordinatesInjective
+          (addressFromSSP15Lane left)
+          (addressFromSSP15Lane right)
+          same))
+      (laneAfterAddress right))
+
+p2AndP11ExactAddressesAreDistinct :
+  addressFromSSP15Lane Lane.p2 ≡ addressFromSSP15Lane Lane.p11 → ⊥
+p2AndP11ExactAddressesAreDistinct ()
+
+p5AndP23ExactAddressesAreDistinct :
+  addressFromSSP15Lane Lane.p5 ≡ addressFromSSP15Lane Lane.p23 → ⊥
+p5AndP23ExactAddressesAreDistinct ()
+
 record SSP15OggAddressCodecBoundary : Set where
   constructor ssp15-ogg-address-codec-boundary
   field
@@ -190,6 +239,7 @@ record SSP15OggAddressCodecBoundary : Set where
     laneAddressRoundTripPaid : Bool
     addressLaneRoundTripPaid : Bool
     exactAddressAgreesWithCanonicalNonaryProducer : Bool
+    exactCoordinatesDetermineSSP15Lane : Bool
     coarseModeOrientationIsOnlyDerivedObserver : Bool
 
 open SSP15OggAddressCodecBoundary public
@@ -198,4 +248,4 @@ canonicalSSP15OggAddressCodecBoundary :
   SSP15OggAddressCodecBoundary
 canonicalSSP15OggAddressCodecBoundary =
   ssp15-ogg-address-codec-boundary
-    true true true true true true true
+    true true true true true true true true
