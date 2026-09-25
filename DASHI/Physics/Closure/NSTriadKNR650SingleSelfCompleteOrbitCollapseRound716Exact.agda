@@ -39,6 +39,7 @@ open import Data.Rational.Base using (ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
+import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadOrbitConstruction as Orbit
 import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
@@ -60,7 +61,7 @@ module CompleteCollapse
       (Field30.physicalInverseSquare physicalSystem) S)
     (H : R142.HelicalHalfCalibration S)
     (velocityTransverse :
-      (mode : DASHI.Physics.Closure.NSIntegerFourierLattice.FourierMode) →
+      (mode : Z3.FourierMode) →
       Helical.Transverse
         (Field30.physicalEmbedding physicalSystem)
         mode
