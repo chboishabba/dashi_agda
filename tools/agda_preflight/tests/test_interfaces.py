@@ -4,6 +4,7 @@ from pathlib import Path
 
 from agda_preflight.checker import Checker
 from agda_preflight.interfaces import (
+    interface_api_base_hash,
     interface_from_dict,
     interface_from_summary,
     interface_to_dict,
@@ -218,3 +219,41 @@ f r = c
         "Prop",
         "Prop₁",
     }
+
+
+
+def test_interface_api_hash_includes_outer_module_parameters(tmp_path):
+    path = tmp_path / "Parameterized.agda"
+    path.write_text(
+        """module Parameterized (A : Set) where
+
+x : Set
+x = A
+""",
+        encoding="utf-8",
+    )
+    first_checker = Checker(tmp_path)
+    first = interface_from_summary(
+        tmp_path,
+        first_checker.parse_summary(path),
+    )
+    first_hash = interface_api_base_hash(first)
+
+    path.write_text(
+        """module Parameterized (A B : Set) where
+
+x : Set
+x = A
+""",
+        encoding="utf-8",
+    )
+    second_checker = Checker(tmp_path)
+    second = interface_from_summary(
+        tmp_path,
+        second_checker.parse_summary(path),
+    )
+    second_hash = interface_api_base_hash(second)
+
+    assert first.module_name == second.module_name == "Parameterized"
+    assert first.module_parameter_count != second.module_parameter_count
+    assert first_hash != second_hash
