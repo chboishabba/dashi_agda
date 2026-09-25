@@ -2,7 +2,7 @@
 module DASHI.Physics.Foundations.CMP119AntigravityRealPartitionStrictPositivityExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _≤ℝ_; _<ℝ_)
@@ -11,6 +11,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityRealStrictSignExact as Strict
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
+import DASHI.Physics.YangMills.BalabanNormalizedCylinderExpectationLimitExact as Division
 
 ------------------------------------------------------------------------
 -- Z > 0 WITHOUT A POSITIVE-NEIGHBORHOOD CONSTRUCTION
@@ -68,3 +69,26 @@ partitionFunctionStrictlyPositive
     (nonzeroMeansNotZero semantics
       (Physical.partitionFunction measure)
       nonzero)
+
+
+quotientNonzeroSemanticsFromDivision :
+  ∀ {Converges algebra quotient}
+    (strict : Strict.RealStrictSignLaws)
+    (division : Division.RealDivisionAlgebra algebra quotient) →
+  QuotientNonzeroSemantics
+    {Converges = Converges} quotient
+quotientNonzeroSemanticsFromDivision strict division = record
+  { QuotientNonzeroSemantics.nonzeroMeansNotZero =
+      λ value nonzero valueZero →
+        Strict.zeroNotOne strict
+          (trans
+            (sym
+              (Division.divideZero division value nonzero))
+            (trans
+              (sym
+                (cong
+                  (λ numerator →
+                    Quotient.divide _ numerator value)
+                  valueZero))
+              (Division.divideSelf division value nonzero)))
+  }
