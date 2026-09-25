@@ -786,8 +786,10 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
 
     parent = node.parent
     while parent is not None:
-        if parent.type == "field_assignment" and parent_field is None:
+        if parent.type in {"field_assignment", "module_assignment"} and parent_field is None:
             name_node = first_descendant(parent, "field_name")
+            if name_node is None:
+                name_node = first_descendant(parent, "module_name")
             parent_field = _name_from_node(source_bytes, name_node)
             ancestor = parent.parent
             while ancestor is not None:
@@ -812,7 +814,13 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
         parent_field=parent_field,
         parent_record_start=parent_record_start,
     )
-    for assignment in descendants(node, "field_assignment"):
+    raw_assignments = [
+        *descendants(node, "field_assignment"),
+        *descendants(node, "module_assignment"),
+    ]
+    raw_assignments.sort(key=lambda item: item.start_byte)
+
+    for assignment in raw_assignments:
         ancestor = assignment.parent
         closest = None
         while ancestor is not None and ancestor != node.parent:
@@ -822,8 +830,15 @@ def _record_expression_from_node(source_bytes: bytes, node) -> AstRecordExpressi
             ancestor = ancestor.parent
         if closest != node:
             continue
+
         name_node = first_descendant(assignment, "field_name")
+        if name_node is None:
+            name_node = first_descendant(assignment, "module_name")
+
         rhs_node = first_descendant(assignment, "expr")
+        if rhs_node is None and assignment.type == "module_assignment" and assignment.named_children:
+            rhs_node = assignment.named_children[-1]
+
         name = _name_from_node(source_bytes, name_node)
         if not name:
             continue
