@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (0ℚ; _<_)
 
 import DASHI.Physics.Foundations.CMP119FourDiagonalFiniteD1ActiveStressExact as Four
+import DASHI.Physics.Foundations.CMP119FourD1LorentzianTraceToActiveStressExact as TraceActive
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
 import DASHI.Physics.Foundations.GRQFTLocalizedRepulsiveSourceCriterionExact as Local
 import DASHI.Physics.GR.SignedEinsteinCouplingBidiExact as Signed
@@ -128,6 +129,17 @@ module _
 
   open CMP119LocalizedPositiveGRepulsionCriterion public
 
+
+  correctedTraceInputToNegativeActiveStress :
+    TraceActive.TraceToActiveStressInput
+      presentData attachment background →
+    FourD1NegativeActiveStressInput
+  correctedTraceInputToNegativeActiveStress traceInput = record
+    { FourD1NegativeActiveStressInput.finiteActiveNegative =
+        TraceActive.traceAndTimelikeControlGiveNegativeActiveStress
+          presentData attachment background traceInput
+    }
+
   compileLocalizedPositiveGRepulsion :
     FourD1NegativeActiveStressInput →
     CMP119LocalizedPositiveGRepulsionCriterion
@@ -151,3 +163,70 @@ module _
     ; exteriorResponseIsOutward =
         Local.positiveGCouplingNegativeActiveMassRepels
     }
+
+
+------------------------------------------------------------------------
+-- CORRECTED TRACE-ANOMALY ENTRY POINT
+--
+-- A trace anomaly supplies the Lorentzian trace contraction, not the active
+-- contraction.  The preferred trace-facing route therefore consumes the exact
+-- additional T00 inequality packaged by TraceToActiveStressInput.
+------------------------------------------------------------------------
+
+module _
+    {History Cell cutoff trajectory split inputs source localization bc1Canonical}
+    (presentData :
+      Present10.SymmetricFunctionalRegularEPresentCutInputs History Cell cutoff
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        source localization bc1Canonical)
+    {actionWeld :
+      R132.UnifiedGeneratedActionDensity
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        (Present10.asPresentCutPhysicalSourceInputs presentData)}
+    {laws :
+      R143.PresentCutBC2FirstVariationLinearity
+        (Present10.asPresentCutPhysicalSourceInputs presentData)}
+    {composite : R144.CompositeStressFirstVariationInputs actionWeld laws}
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    {Y : Top.LiteralYangMillsConstruction C S}
+    {group : Top.CompactSimpleGroup C}
+    {Scale Volume : Set}
+    {domain :
+      Domain.CanonicalMetricSourceDomain
+        Scale Volume (R144.stressActivity composite)}
+    {representation : StressRep.CanonicalMetricStressRepresentation domain}
+    {coordinate : R114.LiteralStressCoordinate Y group}
+    {selected :
+      R119.CanonicalMetricSelectedStressWeld
+        domain representation coordinate}
+    (attachment :
+      R144Attach.R144CanonicalMetricTangentAttachment
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        {History = History} {Cell = Cell} {cutoff = cutoff}
+        {present = Present10.asPresentCutPhysicalSourceInputs presentData}
+        {actionWeld = actionWeld} {laws = laws}
+        composite
+        {C = C} {S = S} {Y = Y} {group = group}
+        {Scale = Scale} {Volume = Volume}
+        domain representation {coordinate = coordinate} selected)
+    (background :
+      Source.Background
+        (Carrier.source
+          (Present.bc1Carrier
+            (Present10.asPresentCutPhysicalSourceInputs presentData))))
+  where
+
+  compileLocalizedPositiveGRepulsionFromTraceAndT00 :
+    TraceActive.TraceToActiveStressInput
+      presentData attachment background →
+    CMP119LocalizedPositiveGRepulsionCriterion
+      presentData attachment background
+  compileLocalizedPositiveGRepulsionFromTraceAndT00 traceInput =
+    compileLocalizedPositiveGRepulsion
+      presentData attachment background
+      (record
+        { FourD1NegativeActiveStressInput.finiteActiveNegative =
+            TraceActive.traceAndTimelikeControlGiveNegativeActiveStress
+              presentData attachment background traceInput
+        })
