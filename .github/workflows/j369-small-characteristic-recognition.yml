@@ -1,0 +1,56 @@
+name: J369 small-characteristic recognition
+
+on:
+  push:
+    paths:
+      - 'DASHI/Moonshine/OggSSPMonstrousExponent369GluingExact.agda'
+      - 'DASHI/Moonshine/OggSSPSmallCharacteristicResidualGroupoidExact.agda'
+      - 'DASHI/Moonshine/OggSSPSmallCharacteristicResidualCodecExact.agda'
+      - 'DASHI/Moonshine/OggSSPP3F9FrobeniusCandidateNoGoExact.agda'
+      - 'DASHI/Moonshine/OggSSPP3F9ExtensionQuotientCandidateExact.agda'
+      - 'DASHI/Moonshine/OggSSPSmallCharacteristicArithmeticSourceSocketExact.agda'
+      - 'DASHI/Moonshine/OggSSPArithmeticTo369RecognitionExact.agda'
+      - 'DASHI/Moonshine/OggSSPP3Base369RecognitionExact.agda'
+      - 'DASHI/Moonshine/OggSSPP2Base369RecognitionForkExact.agda'
+      - 'DASHI/Moonshine/OggSSPP2ConsumerRelativeQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSPArithmeticToIndependent369RecognitionExact.agda'
+      - 'DASHI/Moonshine/OggSSPArithmeticIndependent369FrontierExact.agda'
+      - 'DASHI/Moonshine/Base369P3ConstantTernaryActionGroupoidExact.agda'
+      - 'DASHI/Moonshine/Base369P2FiveOrbitOrientationGroupoidsExact.agda'
+      - 'DASHI/Core/ActionOrbitRecognitionFunctorExact.agda'
+      - 'DASHI/Core/ProvenancePreservingRecognitionFunctorExact.agda'
+      - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
+      - '.github/workflows/j369-small-characteristic-recognition.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Moonshine/OggSSPMonstrousExponent369GluingExact.agda'
+      - 'DASHI/Moonshine/OggSSPSmallCharacteristicResidualGroupoidExact.agda'
+      - 'DASHI/Moonshine/OggSSPSmallCharacteristicResidualCodecExact.agda'
+      - 'DASHI/Moonshine/OggSSPP3F9FrobeniusCandidateNoGoExact.agda'
+      - 'DASHI/Moonshine/OggSSPP3F9ExtensionQuotientCandidateExact.agda'
+      - 'DASHI/Moonshine/OggSSPSmallCharacteristicArithmeticSourceSocketExact.agda'
+      - 'DASHI/Moonshine/OggSSPArithmeticTo369RecognitionExact.agda'
+      - 'DASHI/Moonshine/OggSSPP3Base369RecognitionExact.agda'
+      - 'DASHI/Moonshine/OggSSPP2Base369RecognitionForkExact.agda'
+      - 'DASHI/Moonshine/OggSSPP2ConsumerRelativeQuotientExact.agda'
+      - 'DASHI/Moonshine/OggSSPArithmeticToIndependent369RecognitionExact.agda'
+      - 'DASHI/Moonshine/OggSSPArithmeticIndependent369FrontierExact.agda'
+      - 'DASHI/Moonshine/Base369P3ConstantTernaryActionGroupoidExact.agda'
+      - 'DASHI/Moonshine/Base369P2FiveOrbitOrientationGroupoidsExact.agda'
+      - 'DASHI/Core/ActionOrbitRecognitionFunctorExact.agda'
+      - 'DASHI/Core/ProvenancePreservingRecognitionFunctorExact.agda'
+      - 'DASHI/JInvariantBase369CrossPollinationEverything.agda'
+      - '.github/workflows/j369-small-characteristic-recognition.yml'
+
+jobs:
+  agda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck small-characteristic recognition frontier
+        run: |
+          nix develop --command agda -i . DASHI/Moonshine/OggSSPArithmeticIndependent369FrontierExact.agda
+          nix develop --command agda -i . DASHI/JInvariantBase369CrossPollinationEverything.agda
