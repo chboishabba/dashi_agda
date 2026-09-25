@@ -12,7 +12,7 @@ from .checker import Checker, Diagnostic
 from .fixes import SuggestedFix, TextEdit
 from .timing import Profiler
 from .cold_bootstrap import discover_closure, diagnose_paths, worker_count
-from .interfaces import interface_from_dict, interface_to_dict, interface_from_summary
+from .interfaces import interface_from_dict, interface_to_dict, interface_from_summary, resolve_interface_exports
 
 
 SCHEMA_VERSION = "3"
@@ -604,12 +604,28 @@ class SourceIndex:
                 )
                 source_hash = row["source_sha256"]
                 api_base_hash = row["api_base_sha256"]
+                interface_payload = row["interface_json"]
+                if interface_payload:
+                    interface = interface_from_dict(
+                        json.loads(interface_payload)
+                    )
+                else:
+                    checker = self._checker_instance()
+                    summary = checker.parse_summary(path)
+                    interface = interface_from_summary(
+                        self.root,
+                        summary,
+                    )
             else:
                 checker = self._checker_instance()
                 summary = checker.parse_summary(path)
                 module_name = summary.module_name
                 imports = tuple(sorted(set(summary.imports.values())))
                 api_base_hash, public_imports = self._api_base(summary)
+                interface = interface_from_summary(
+                    self.root,
+                    summary,
+                )
                 with self.profiler.stage("source.hash"):
                     source_hash = hashlib.sha256(
                         summary.source.encode("utf-8")
@@ -681,6 +697,7 @@ class SourceIndex:
                     api_base_hash,
                     api_hash,
                     public_imports,
+                    interface,
                     dependency_fingerprint,
                     imports,
                     diagnostics,
@@ -826,6 +843,13 @@ class SourceIndex:
             receipt.module_name: receipt
             for receipt in receipts
         }
+        interface_by_module = resolve_interface_exports(
+            {
+                item.module_name: item.interface
+                for item in import_receipts
+                if item.interface is not None
+            }
+        )
         api_memo: Dict[str, str] = {}
 
         def resolve_api(module: str, visiting: Set[str]) -> str:
@@ -884,6 +908,7 @@ class SourceIndex:
                         receipt.api_base_hash,
                         api_hash,
                         receipt.public_imports,
+                        interface_by_module.get(receipt.module_name),
                         dependency_fingerprint,
                         receipt.imports,
                         diagnostics,
