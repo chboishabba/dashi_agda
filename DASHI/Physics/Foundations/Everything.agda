@@ -261,3 +261,5 @@ import DASHI.Physics.Foundations.CMP119FourDiagonalFiniteD1ActiveStressExact
 
 import DASHI.Physics.Foundations.CMP119FourD1LocalizedPositiveGRepulsionExact
 import DASHI.Physics.Foundations.CMP119AntigravitySourceMaxCutExact
+
+import DASHI.Physics.Foundations.CMP119FourDiagonalLiteralFiniteMeasureActiveStressExact
