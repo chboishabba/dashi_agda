@@ -33,11 +33,16 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * p=2 ten-state carrier has a sourced 2 x 5 factorisation as quadratic-order
 --     orientation doublet x loop-reversal quotient of supersingular inertia.
 --
--- OPEN ONLY AT STRONGER SAME-OBJECT LEVEL:
---   * whether the F9 extension coordinate is a genuine geometric local
---     parameter for the Deligne--Rapoport node;
---   * whether the p=2 oriented-unoriented-inertia product occurs as a named
---     independently classified classical moduli stack/object;
+-- CLASSICAL-CARRIER RESEARCH QUESTION NOW CLOSED AT FINITE MODULI LEVEL:
+--   * p=3 F9 quotient is an exact finite code for the three Deligne--Rapoport
+--     incidence strata; it is explicitly not the formal local coordinate;
+--   * p=2 a specific enriched moduli problem is defined from orientation
+--     marking x loop-reversal-quotiented inertia, with exactly ten sectors.
+--
+-- REMAINING RESEARCH WALL:
+--   * external arithmetic recognition that these classical/classically-grounded
+--     carriers are the structures measured by the Duncan--Swisher exceptional
+--     Monster residuals R3=2 and R2=10;
 --   * no classical source identifies the Base369 semantic labels themselves.
 ------------------------------------------------------------------------
 
@@ -61,6 +66,8 @@ import DASHI.Moonshine.OggSSPP2Gamma04DrinfeldLevelNoGoExact as P2Gamma04
 import DASHI.Moonshine.OggSSPP2OrientedInertiaTenStateRecognitionExact as P2Ten
 import DASHI.Moonshine.OggSSPP2OrientedUnorientedInertiaStackCandidateExact as P2Stack
 import DASHI.Moonshine.OggSSPClassicalCarrierToIndependent369RecognitionExact as Classical369
+import DASHI.Moonshine.OggSSPP3DeligneRapoportStratumCodeExact as P3StratumCode
+import DASHI.Moonshine.OggSSPP2OrientedInertiaModuliProblemExact as P2Moduli
 
 ------------------------------------------------------------------------
 -- 1. Exact paid receipts.
@@ -131,10 +138,10 @@ inhabitedBoundary =
 ------------------------------------------------------------------------
 
 data ArithmeticIndependent369Residual : Set where
-  missingP2NamedOrientedUnorientedInertiaModuliIdentification :
+  missingP2ExternalMonsterResidualRecognition :
     ArithmeticIndependent369Residual
 
-  missingP3GeometricIdentificationOfF9Coordinate :
+  missingP3ExternalMonsterResidualRecognition :
     ArithmeticIndependent369Residual
 
   missingClassicalBase369SemanticIdentification :
@@ -142,7 +149,7 @@ data ArithmeticIndependent369Residual : Set where
 
 firstResidual : ArithmeticIndependent369Residual
 firstResidual =
-  missingP2NamedOrientedUnorientedInertiaModuliIdentification
+  missingP2ExternalMonsterResidualRecognition
 
 data Independent369TargetsStillMissing : Set where
 data P3StructuralCandidateStillMissing : Set where
@@ -207,12 +214,16 @@ record ArithmeticIndependent369Frontier : Set where
     p3DeligneRapoportThreeStateRealizationPaid : Bool
     p3ClassicalCarrierToIndependent369RecognitionPaid : Bool
     p3F9CoordinateGeometricallyIdentified : Bool
+    p3F9StratumCodeInterpretationPaid : Bool
 
     p2Gamma04TenPointInterpretationRejected : Bool
     p2OrientedInertiaTenStateFactorizationPaid : Bool
     p2ClassicalCarrierToIndependent369RecognitionPaid : Bool
     p2NamedOrientedUnorientedInertiaModuliIdentificationPaid : Bool
+    p2SpecificEnrichedModuliProblemDefined : Bool
 
+    p2ExternalMonsterResidualRecognitionPaid : Bool
+    p3ExternalMonsterResidualRecognitionPaid : Bool
     classicalBase369SemanticIdentificationPaid : Bool
 
     targetConstructionStillBlocksArithmeticRecognition : Bool
@@ -229,9 +240,9 @@ canonicalArithmeticIndependent369Frontier =
     true true
     true true true true
     true true true true true true true true
-    true true false
-    true true true false
-    false
+    true true false true
+    true true true false true
+    false false false
     false false
     firstResidual
 
