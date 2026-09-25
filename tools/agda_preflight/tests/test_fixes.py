@@ -45,6 +45,11 @@ mk =
     assert diagnostic.fixes[0].applicability == "likely"
     assert "witness" in diagnostic.fixes[0].title
     assert diagnostic.fixes[0].validation == "typecheck"
+    assert diagnostic.fixes[0].edits
+    edit = diagnostic.fixes[0].edits[0]
+    assert edit.start_byte is not None
+    assert edit.end_byte is not None
+    assert edit.replacement == "witness"
 
 
 def test_unapplied_projection_gets_receiver_fix_explanation(tmp_path):
