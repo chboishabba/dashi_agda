@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.YangMillsMinimalWardGapNontrivialityRound549Exact
 -- nontriviality argument.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -150,5 +151,5 @@ literalRound549MinimalSameFamilyWardKernelLevel : ProofLevel
 literalRound549MinimalSameFamilyWardKernelLevel = conditional
 
 -- Full OPE/stress closure is not consumed by this reductio compiler.
-fullOPEStressPackageRequiredForH6Contradiction : Agda.Builtin.Bool.Bool
-fullOPEStressPackageRequiredForH6Contradiction = Agda.Builtin.Bool.false
+fullOPEStressPackageRequiredForH6Contradiction : Bool
+fullOPEStressPackageRequiredForH6Contradiction = false
