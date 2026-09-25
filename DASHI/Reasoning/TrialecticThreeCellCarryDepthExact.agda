@@ -30,6 +30,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Nat using (Nat; suc)
 
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
+import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact as GrothCell
 import DASHI.Reasoning.CarryMemorySubvoxelReceipt as Carry
 import DASHI.Cognition.RecursiveFibreTower as Tower
 
@@ -97,6 +98,47 @@ promotionOutputIsFullBasisCell :
   nextDepthCell (promoteWithFaceGluing depth state gluing)
   ≡ Cell.outputCell gluing
 promotionOutputIsFullBasisCell depth state gluing = refl
+
+
+------------------------------------------------------------------------
+-- 1b. Grothendieck-mediated promotion.
+--
+-- Once the three local T^9 edge sections have descended to the T^18 global
+-- boundary and a separate face-mediation receipt has selected the next T^3
+-- cell, the existing one-step carry package applies directly.
+------------------------------------------------------------------------
+
+promoteGrothendieckMediated :
+  {law : GrothCell.FaceMediationLaw} →
+  (depth : Nat) →
+  (section : GrothCell.GrothendieckFaceMediatedSection law) →
+  TrialecticCellCarryStep
+    depth
+    (GrothCell.mediatedStructuredState section)
+    (GrothCell.toSecondOrderCellGluing section)
+promoteGrothendieckMediated depth section =
+  promoteWithFaceGluing
+    depth
+    (GrothCell.mediatedStructuredState section)
+    (GrothCell.toSecondOrderCellGluing section)
+
+grothendieckPromotionRetainsDescendedState :
+  {law : GrothCell.FaceMediationLaw} →
+  (depth : Nat) →
+  (section : GrothCell.GrothendieckFaceMediatedSection law) →
+  retainedSource
+    (promoteGrothendieckMediated depth section)
+  ≡ GrothCell.mediatedStructuredState section
+grothendieckPromotionRetainsDescendedState depth section = refl
+
+grothendieckPromotionOutputIsMediatedCell :
+  {law : GrothCell.FaceMediationLaw} →
+  (depth : Nat) →
+  (section : GrothCell.GrothendieckFaceMediatedSection law) →
+  nextDepthCell
+    (promoteGrothendieckMediated depth section)
+  ≡ GrothCell.nextDepthCell section
+grothendieckPromotionOutputIsMediatedCell depth section = refl
 
 ------------------------------------------------------------------------
 -- 2. Existing carry owner is provenance/shape donor only.
