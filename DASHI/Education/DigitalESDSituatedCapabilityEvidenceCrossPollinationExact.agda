@@ -9,8 +9,12 @@ import DASHI.Education.CapabilityRecognitionExact as Capability
 import DASHI.Education.SituatedRelationalLearningAffordanceExact as Affordance
 import DASHI.Education.EarlyLearningCounterfactualHeterogeneityExact as Counterfactual
 import DASHI.Education.CommunityConnectednessTopologyExact as Connectedness
+import DASHI.Education.EarlyLearningIntersectionalCapabilityExact as IntersectionalCapability
+import DASHI.Governance.RecognitionDistributionRepresentationAxesExact as Fraser
 import DASHI.Wikimedia.IbrahimSnowballTestimonyMemoryCredibilityCorroborationExpertBidiExact as Testimony
 import DASHI.Wikimedia.IbrahimSnowballMemoryHyperfabricCollectiveOralHistoryBidiExact as Collective
+import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact as EvidenceSynthesis
+import DASHI.Wikimedia.IbrahimSnowballMemoryRepetitionSourceDependencyConsensusBidiExact as Dependency
 import DASHI.Education.EducationSituatedInvestmentTrajectoryExact as Trajectory
 import DASHI.Education.DigitalESDRelationalExternalityReturnBridgeExact as ReturnBridge
 
@@ -186,6 +190,54 @@ rememberedContentCannotRecoverMemoryOrigin :
 rememberedContentCannotRecoverMemoryOrigin =
   Collective.rememberedSurfaceCannotFactorSourceOrigin
 
+
+------------------------------------------------------------------------
+-- Intersectional capability / recognition-distribution-representation.
+------------------------------------------------------------------------
+
+formalFamilyChoiceCannotRecoverEffectiveCapability :
+  INF.FactorsThrough
+    IntersectionalCapability.familyChoiceProjection
+    IntersectionalCapability.effectiveCapabilityWitness
+  → ⊥
+formalFamilyChoiceCannotRecoverEffectiveCapability =
+  IntersectionalCapability.familyChoiceCannotDetermineEffectiveCapability
+
+recognitionCannotRecoverDistribution :
+  INF.FactorsThrough Fraser.recognition Fraser.distribution → ⊥
+recognitionCannotRecoverDistribution =
+  Fraser.recognitionCannotRecoverDistribution
+
+distributionCannotRecoverRepresentation :
+  INF.FactorsThrough Fraser.distribution Fraser.representation → ⊥
+distributionCannotRecoverRepresentation =
+  Fraser.distributionCannotRecoverRepresentation
+
+------------------------------------------------------------------------
+-- Evidence synthesis / source-dependence.
+------------------------------------------------------------------------
+
+citationAgreementCannotRecoverPrimarySupport :
+  INF.FactorsThrough
+    EvidenceSynthesis.citationSurface
+    EvidenceSynthesis.primarySupport
+  → ⊥
+citationAgreementCannotRecoverPrimarySupport =
+  EvidenceSynthesis.citationAgreementCannotFactorPrimarySupport
+
+perceivedIndependenceCannotRecoverActualProvenance :
+  INF.FactorsThrough
+    EvidenceSynthesis.perceivedIndependence
+    EvidenceSynthesis.provenanceIndependence
+  → ⊥
+perceivedIndependenceCannotRecoverActualProvenance =
+  EvidenceSynthesis.perceivedIndependenceCannotFactorActualProvenance
+
+sameOutputCannotRecoverIndependentGeneration :
+  INF.FactorsThrough Dependency.outputSurface Dependency.generationPath → ⊥
+sameOutputCannotRecoverIndependentGeneration =
+  Dependency.sameOutputCannotFactorGenerationIndependence
+
 ------------------------------------------------------------------------
 -- Digital-ESD-specific non-promotion gates.
 ------------------------------------------------------------------------
@@ -202,6 +254,12 @@ data LearnerReportMeansLatentMemoryTruth : Set where
 data RepeatedReportMeansIndependentCorroboration : Set where
 data CollectiveNarrativeMeansIndividualState : Set where
 data RememberedContentMeansDirectExperience : Set where
+data FormalChoiceMeansEffectiveCapability : Set where
+data RecognitionMeansDistribution : Set where
+data DistributionMeansRepresentation : Set where
+data CitationAgreementMeansPrimarySupport : Set where
+data PerceivedIndependenceMeansProvenanceIndependence : Set where
+data RepeatedOutputMeansIndependentGeneration : Set where
 
 highReturnDoesNotCreateCapability :
   HighReturnMeansCapabilityPresent → ⊥
@@ -251,6 +309,31 @@ rememberedContentDoesNotCreateDirectExperience :
   RememberedContentMeansDirectExperience → ⊥
 rememberedContentDoesNotCreateDirectExperience ()
 
+
+formalChoiceDoesNotCreateEffectiveCapability :
+  FormalChoiceMeansEffectiveCapability → ⊥
+formalChoiceDoesNotCreateEffectiveCapability ()
+
+recognitionDoesNotCreateDistribution :
+  RecognitionMeansDistribution → ⊥
+recognitionDoesNotCreateDistribution ()
+
+distributionDoesNotCreateRepresentation :
+  DistributionMeansRepresentation → ⊥
+distributionDoesNotCreateRepresentation ()
+
+citationAgreementDoesNotCreatePrimarySupport :
+  CitationAgreementMeansPrimarySupport → ⊥
+citationAgreementDoesNotCreatePrimarySupport ()
+
+perceivedIndependenceDoesNotCreateProvenanceIndependence :
+  PerceivedIndependenceMeansProvenanceIndependence → ⊥
+perceivedIndependenceDoesNotCreateProvenanceIndependence ()
+
+repeatedOutputDoesNotCreateIndependentGeneration :
+  RepeatedOutputMeansIndependentGeneration → ⊥
+repeatedOutputDoesNotCreateIndependentGeneration ()
+
 record DigitalESDSituatedCapabilityEvidenceBoundary : Set where
   constructor digital-esd-situated-capability-evidence-boundary
   field
@@ -296,10 +379,41 @@ record DigitalESDSituatedCapabilityEvidenceBoundary : Set where
     rememberedContentDeterminesSourceOriginIsFalse :
       rememberedContentDeterminesSourceOrigin ≡ false
 
+
+    formalChoiceDeterminesEffectiveCapability : Bool
+    formalChoiceDeterminesEffectiveCapabilityIsFalse :
+      formalChoiceDeterminesEffectiveCapability ≡ false
+
+    recognitionDeterminesDistribution : Bool
+    recognitionDeterminesDistributionIsFalse :
+      recognitionDeterminesDistribution ≡ false
+
+    distributionDeterminesRepresentation : Bool
+    distributionDeterminesRepresentationIsFalse :
+      distributionDeterminesRepresentation ≡ false
+
+    citationAgreementDeterminesPrimarySupport : Bool
+    citationAgreementDeterminesPrimarySupportIsFalse :
+      citationAgreementDeterminesPrimarySupport ≡ false
+
+    perceivedIndependenceDeterminesProvenanceIndependence : Bool
+    perceivedIndependenceDeterminesProvenanceIndependenceIsFalse :
+      perceivedIndependenceDeterminesProvenanceIndependence ≡ false
+
+    repeatedOutputDeterminesIndependentGeneration : Bool
+    repeatedOutputDeterminesIndependentGenerationIsFalse :
+      repeatedOutputDeterminesIndependentGeneration ≡ false
+
 canonicalDigitalESDSituatedCapabilityEvidenceBoundary :
   DigitalESDSituatedCapabilityEvidenceBoundary
 canonicalDigitalESDSituatedCapabilityEvidenceBoundary =
   digital-esd-situated-capability-evidence-boundary
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
     false refl
     false refl
     false refl
