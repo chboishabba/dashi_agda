@@ -345,3 +345,22 @@ selectedMetricFamilyOrderedHaarCapstoneCompilerClosed = true
 selectedMetricFamilyOrderedHaarCapstoneCompilerClosedIsTrue :
   selectedMetricFamilyOrderedHaarCapstoneCompilerClosed ≡ true
 selectedMetricFamilyOrderedHaarCapstoneCompilerClosedIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- PHYSICAL HAAR PROMOTION BOUNDARY
+------------------------------------------------------------------------
+
+rationalOrderedHaarRouteIsPhysicalHaarPromotion : Bool
+rationalOrderedHaarRouteIsPhysicalHaarPromotion = false
+
+rationalOrderedHaarRouteIsPhysicalHaarPromotionIsFalse :
+  rationalOrderedHaarRouteIsPhysicalHaarPromotion ≡ false
+rationalOrderedHaarRouteIsPhysicalHaarPromotionIsFalse = refl
+
+realCMP119HaarTransportStillRequiredForPhysicalPromotion : Bool
+realCMP119HaarTransportStillRequiredForPhysicalPromotion = true
+
+realCMP119HaarTransportStillRequiredForPhysicalPromotionIsTrue :
+  realCMP119HaarTransportStillRequiredForPhysicalPromotion ≡ true
+realCMP119HaarTransportStillRequiredForPhysicalPromotionIsTrue = refl
