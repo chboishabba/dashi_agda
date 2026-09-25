@@ -170,10 +170,23 @@ parallel interface discovery
   -> one SQLite/WAL batch transaction
 ```
 
-The intentional cold parse floor is therefore approximately **2.0x** the unique
-closure: one parse to construct each reusable interface and one parse for each
-module's own local diagnostics. The diagnostic phase itself should remain at
-**1.0x** regardless of shared dependency depth.
+The intentional from-empty-database cold parse floor is therefore approximately
+**2.0x** the unique closure: one parse to construct each reusable interface and
+one parse for each module's own local diagnostics. The diagnostic phase itself
+should remain at **1.0x** regardless of shared dependency depth.
+
+Interfaces are persisted in source-index schema v3. On a later subject rollup,
+closure discovery checks SQLite before scheduling phase-A work. A fresh cached
+module contributes its import graph and immutable interface without parsing.
+After current API/dependency fingerprints are recomputed, a module whose stored
+dependency fingerprint still matches also reuses its cached diagnostics and is
+removed from phase B entirely.
+
+Consequently a new subject sharing already-indexed foundations pays only for
+new/stale modules rather than a fixed 2x cost over the whole transitive closure.
+The same persisted interfaces are exposed lazily to the ordinary incremental
+Checker path, so editing one consumer can still require exactly one source parse
+even when its diagnostics inspect imported records or projections.
 
 Workers never write SQLite. This avoids WAL contention and lets each process
 reuse parsed dependency summaries across its assigned chunk.
@@ -200,6 +213,11 @@ db.batch_write               one parent transaction
 cold_workers
 cold_modules_discovered
 cold_interface_files_parsed
+cold_interface_cache_hits
+cold_interface_cache_misses
+cold_diagnostic_cache_hits
+cold_diagnostic_cache_misses
+cold_diagnostic_targets
 cold_batches
 cold_batch_dependency_surface
 cold_predicted_amplification_milli
