@@ -74,6 +74,8 @@ grep -q 'p2FiveOrbitProjectionCannotReopenTenCarrier' "${targets[9]}"
 grep -q 'noCoarseJPi0SurjectionToP3' "${targets[10]}"
 grep -q 'noCoarseJPi0SurjectionToP2Retained' "${targets[10]}"
 grep -q 'noInjectiveF9OrbitToP3Target' "${targets[11]}"
+grep -q 'extensionCoordinateEquivariant' "${targets[11]}"
+grep -q 'f9ExtensionCoordinateNotPi0Embedding' "${targets[11]}"
 grep -q 'noFullF9FrobeniusRecognitionToP3' "${targets[11]}"
 
 grep -q 'p3ReceiptFrobeniusOrderTwo' "${targets[12]}"
