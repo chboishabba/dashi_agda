@@ -8,7 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDCandidateWorldExecutionExact as World
-import DASHI.Education.DigitalESDStudyParseInteropExact as Parse
+import DASHI.Education.DigitalESDManuscriptMethodologyExact as Methodology
 import DASHI.Education.DigitalESDAcademicCorpusWorldCrossPollinationExact as Academic
 
 ------------------------------------------------------------------------
@@ -38,10 +38,10 @@ academicWorldBoundary : Academic.DigitalESDAcademicCorpusWorldBoundary
 academicWorldBoundary = Academic.canonicalDigitalESDAcademicCorpusWorldBoundary
 
 extractionCoordinateCount : Nat
-extractionCoordinateCount = Parse.baseExtractionCoordinateCount
+extractionCoordinateCount = Methodology.extractionCoordinateCount
 
 effectiveExtractionCoordinateCount : Nat
-effectiveExtractionCoordinateCount = Parse.effectiveExtractionCoordinateCount
+effectiveExtractionCoordinateCount = Methodology.extractionCoordinateCount
 
 record DBNativeCoordinateNominationBoundary : Set where
   constructor db-native-coordinate-nomination-boundary
