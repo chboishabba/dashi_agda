@@ -664,6 +664,65 @@ class SourceIndex:
             cache_hit=True,
         )
 
+    def find_cached_diagnostic(
+        self,
+        target: Path,
+        diagnostic_id: str,
+    ) -> Optional[Diagnostic]:
+        """Find a diagnostic from compact closure candidates without full decode.
+
+        This is optimized for the normal agent loop where apply-fix receives
+        the ID just returned by next-error. Arbitrary non-top IDs intentionally
+        fall back to full diagnosis at the caller.
+        """
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(target)
+        if rows is None:
+            return None
+
+        seen_payloads = set()
+        with self.profiler.stage("source.stat"):
+            for row in rows:
+                path = self.root / row["path"]
+                try:
+                    stat = self._stat(path)
+                except OSError:
+                    return None
+                if not self._fresh(row, stat):
+                    return None
+
+                for column in (
+                    "top_diagnostic_json",
+                    "top_fixable_diagnostic_json",
+                ):
+                    payload = row[column]
+                    if not payload or payload in seen_payloads:
+                        continue
+                    seen_payloads.add(payload)
+                    try:
+                        diagnostic = self._diagnostic_from_dict(
+                            json.loads(payload)
+                        )
+                    except (
+                        TypeError,
+                        ValueError,
+                        KeyError,
+                        json.JSONDecodeError,
+                    ):
+                        continue
+                    self.profiler.count(
+                        "diagnostic_candidate_payloads_decoded"
+                    )
+                    if diagnostic.diagnostic_id == diagnostic_id:
+                        self.profiler.count(
+                            "diagnostic_candidate_lookup_hits"
+                        )
+                        return diagnostic
+
+        self.profiler.count("diagnostic_candidate_lookup_misses")
+        return None
+
     def next_diagnostic(
         self,
         target: Path,
