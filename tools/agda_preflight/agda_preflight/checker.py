@@ -179,7 +179,7 @@ class Checker:
         *,
         evidence_level: EvidenceLevel = EvidenceLevel.DASHI_INDEX,
         scope_backend=None,
-        profiler: Profiler | None = None,
+        profiler: Optional[Profiler] = None,
     ):
         self.root = root.resolve()
         self.profiler = profiler
