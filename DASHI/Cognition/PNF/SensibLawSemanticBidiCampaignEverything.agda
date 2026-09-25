@@ -37,6 +37,8 @@ import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldExact a
 import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldRegression as GenericIngestWeldRegression
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceExact as LongDocumentPersistence
 import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceRegression as LongDocumentPersistenceRegression
+import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as DbNativeCorpus
+import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerRegression as DbNativeCorpusRegression
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -398,3 +400,42 @@ longDocumentConcreteReloadPreservesPartition :
   LongDocumentPersistenceRegression.fixtureReloadPreservesPartition
   ≡ LongDocumentPersistenceRegression.fixtureReloadPreservesPartition
 longDocumentConcreteReloadPreservesPartition = refl
+
+------------------------------------------------------------------------
+-- SCALE-1 DB-native source/semantic compilation remains below admission.
+------------------------------------------------------------------------
+
+dbNativeFlatFilesAreNotRuntimeDatabase :
+  DbNativeCorpus.FlatFileIsRuntimeDatabase → ⊥
+dbNativeFlatFilesAreNotRuntimeDatabase =
+  DbNativeCorpus.flatFileDoesNotBecomeRuntimeDatabase
+
+dbNativeTsvIsNotRuntimeDatabase :
+  DbNativeCorpus.TsvArtifactIsRuntimeDatabase → ⊥
+dbNativeTsvIsNotRuntimeDatabase =
+  DbNativeCorpus.tsvArtifactDoesNotBecomeRuntimeDatabase
+
+dbNativeParserLeaseDoesNotCreateSourceAuthority :
+  DbNativeCorpus.ParserLeaseCreatesSourceAuthority → ⊥
+dbNativeParserLeaseDoesNotCreateSourceAuthority =
+  DbNativeCorpus.parserLeaseDoesNotCreateSourceAuthority
+
+dbNativeParserResidualDoesNotCreateSourceAbsence :
+  DbNativeCorpus.ParserResidualCreatesSourceAbsence → ⊥
+dbNativeParserResidualDoesNotCreateSourceAbsence =
+  DbNativeCorpus.parserResidualDoesNotCreateSourceAbsence
+
+dbNativePostgresDoesNotCreateGlobalTruth :
+  DbNativeCorpus.PostgresCompilerStateCreatesGlobalTruth → ⊥
+dbNativePostgresDoesNotCreateGlobalTruth =
+  DbNativeCorpus.postgresCompilerStateDoesNotCreateGlobalTruth
+
+dbNativeAutomaticExtractionDoesNotCreateAdmission :
+  DbNativeCorpus.AutomaticExtractionCreatesAutomaticAdmission → ⊥
+dbNativeAutomaticExtractionDoesNotCreateAdmission =
+  DbNativeCorpus.automaticExtractionDoesNotCreateAutomaticAdmission
+
+dbNativeFixtureAttemptsEverySemanticRegion :
+  DbNativeCorpusRegression.fixtureHasNoUnattemptedSemanticRegions
+  ≡ DbNativeCorpusRegression.fixtureHasNoUnattemptedSemanticRegions
+dbNativeFixtureAttemptsEverySemanticRegion = refl
