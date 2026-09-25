@@ -240,11 +240,7 @@ toGrothendieckFaceMediatedSection :
     (λ boundary face output →
       law
         (attachFace
-          (descended-trialectic-boundary
-            (locals (descended (attached state)))
-            (compatibility (descended (attached state)))
-            boundary
-            refl)
+          (descended (attached state))
           face)
         output)
 toGrothendieckFaceMediatedSection {law} state =
