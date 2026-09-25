@@ -1075,3 +1075,12 @@ nsPaperInterfaceTerminalFalse :
   ≡ false
 nsPaperInterfaceTerminalFalse =
   NSPaperTheoremStatus.clayTerminalPromotionIsFalse canonicalNSPaperTheoremStatus
+
+
+periodicClayMaxCutCyclicHelicalVectorTransformClosed : Bool
+periodicClayMaxCutCyclicHelicalVectorTransformClosed =
+  R650.round650CyclicHelicalVectorTransformClosed
+
+periodicClayMaxCutCyclicHelicalExactCancellationClosed : Bool
+periodicClayMaxCutCyclicHelicalExactCancellationClosed =
+  R650.round650CyclicHelicalExactCancellationClosed
