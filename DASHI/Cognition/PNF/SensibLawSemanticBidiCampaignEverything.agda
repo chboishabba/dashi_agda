@@ -32,7 +32,6 @@ import DASHI.Cognition.PNF.SensibLawMatterWorkspaceProjectionExact as MatterWork
 import DASHI.Cognition.PNF.SensibLawMinimalMatterHandoffExact as MinimalHandoff
 import DASHI.Cognition.PNF.SensibLawMatterAcceptanceExact as MatterAcceptance
 import DASHI.Cognition.PNF.SensibLawWorkProductCoverageExact as WorkProductCoverage
-import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationExact as GenericIngest
 
 module DASHI.Cognition.PNF.SensibLawSemanticBidiCampaignEverything where
 
@@ -277,37 +276,3 @@ forwardCoverageRemainsDistinctFromOmission :
   WorkProductCoverage.ForwardCoverageIsReverseOmission → ⊥
 forwardCoverageRemainsDistinctFromOmission =
   WorkProductCoverage.forwardCoverageIsNotReverseOmission
-
-------------------------------------------------------------------------
--- INGEST-1 generic source compilation remains below semantic admission.
-------------------------------------------------------------------------
-
-genericIngestKeepsProducerCaptureDistinct :
-  GenericIngest.ProducerCaptureIsSourceIdentity → ⊥
-genericIngestKeepsProducerCaptureDistinct =
-  GenericIngest.producerCaptureDoesNotDetermineSourceIdentity
-
-genericIngestKeepsSourceIdentityDistinctFromSemantics :
-  GenericIngest.SourceIdentityIsSemanticInterpretation → ⊥
-genericIngestKeepsSourceIdentityDistinctFromSemantics =
-  GenericIngest.sourceIdentityDoesNotDetermineSemanticInterpretation
-
-genericIngestKeepsOperationalObservationDistinct :
-  GenericIngest.SemanticInterpretationIsOperationalObservation → ⊥
-genericIngestKeepsOperationalObservationDistinct =
-  GenericIngest.semanticInterpretationIsNotOperationalObservation
-
-quotedMailDoesNotMultiplyWitnesses :
-  GenericIngest.QuoteCreatesIndependentWitness → ⊥
-quotedMailDoesNotMultiplyWitnesses =
-  GenericIngest.quotedMailDoesNotCreateIndependentWitness
-
-parseFailureDoesNotEraseSource :
-  GenericIngest.ParseFailureDeletesSource → ⊥
-parseFailureDoesNotEraseSource =
-  GenericIngest.parseFailureDoesNotDeleteSource
-
-ingestCandidateDoesNotBecomeTruth :
-  GenericIngest.CandidateInterpretationDeterminesTruth → ⊥
-ingestCandidateDoesNotBecomeTruth =
-  GenericIngest.candidateInterpretationDoesNotDetermineTruth

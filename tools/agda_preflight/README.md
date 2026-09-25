@@ -248,35 +248,6 @@ TSAGDA076  function used as a type / partial application
 have minimum evidence `AGDA_TYPECHECKER`; successful scope checking cannot
 promote or suppress them.
 
-### Aggregate full-typecheck refinement
-
-When pytest runs with `--agda-deps --agda-auto-refine=typecheck`, full
-typechecking uses the same dependency-closure strategy as scope refinement.
-The structural pass first identifies only modules with
-`AGDA_TYPECHECKER`-deferred findings. Aggregate roots are typechecked once;
-successful roots certify their candidate-bearing dependency closure, while
-failed roots descend only through relevant imported subtrees. Modules already
-known to fail scope are never pointlessly full-typechecked.
-
-A reusable shadow-tree checker can be supplied independently for each evidence
-layer:
-
-```bash
-AGDA_PREFLIGHT_REFINE=typecheck \
-AGDA_PREFLIGHT_SCOPE_RUNNER='DASHI_NO_TMUX=1 DASHI_SKIP_RSYNC=1 ./scripts/run_agda29_parallel_check.sh --only-scope-checking {file}' \
-AGDA_PREFLIGHT_TYPECHECK_RUNNER='DASHI_NO_TMUX=1 DASHI_SKIP_RSYNC=1 ./scripts/run_agda29_parallel_check.sh {file}' \
-  ./scripts/check_agda_preflight_pytest.sh
-```
-
-Leading `KEY=VALUE` assignments in command-backed runners are merged into the
-subprocess environment. The literal `{file}` is replaced with the absolute
-module path; if omitted, the path is appended.
-
-The command-backed full checker also harvests Agda `Checking Module (...)`
-progress conservatively on failed/timeout runs: all completed modules before
-the final failing module may be cached as typecheck-valid, while the final
-observed module is never certified merely from progress output.
-
 ### Optional full Agda typecheck oracle
 
 For focused or CI runs where the expense is acceptable, the preflight harness
@@ -360,16 +331,9 @@ deferred for stronger evidence: ...
 Diagnostics are grouped by capability. Some families are exact/high-confidence;
 heuristic families are emitted as warnings.
 
-Evidence policy is intentionally stricter than syntactic detectability. A rule
-may cheaply *notice* a suspicious shape while still requiring Agda scope or the
-full typechecker before it can become a hard conclusion. In particular,
-definitional equality, dependent term/type roles, projection saturation,
-constructor/pattern compatibility, coverage, positivity, and shallow arity
-through aliases are not treated as DASHI-index facts.
-
 ### Syntax / declaration structure
 
-- `TSAGDA000` tree-sitter syntax error / missing node; hard only with Agda-scope evidence because the grammar is intentionally incomplete
+- `TSAGDA000` tree-sitter syntax error / missing node
 - `TSAGDA004` module declaration disagrees with filesystem path
 - `TSAGDA005` duplicate top-level declaration
 - `TSAGDA006` duplicate record field
@@ -384,14 +348,14 @@ through aliases are not treated as DASHI-index facts.
 ### Modules / imports / names
 
 - `TSAGDA020` imported repository module does not exist
-- `TSAGDA021` qualified symbol not exported by the apparent module; requires `AGDA_SCOPE` for a hard conclusion
-- `TSAGDA022` malformed/unknown import alias use (`AGDA_SCOPE`)
-- `TSAGDA023` apparent unknown symbol in `using (...)`; requires `AGDA_SCOPE`
-- `TSAGDA024` apparent unknown symbol in `hiding (...)` (`AGDA_SCOPE`)
-- `TSAGDA025` apparent unknown renaming source; requires `AGDA_SCOPE`
-- `TSAGDA026` open/renaming collision (`AGDA_SCOPE`)
-- `TSAGDA027` ambiguous unqualified exported name from multiple opens (`AGDA_SCOPE`)
-- `TSAGDA028` conflicting aliases for imports; requires `AGDA_SCOPE`
+- `TSAGDA021` unknown qualified symbol on a known module alias
+- `TSAGDA022` malformed/unknown import alias use
+- `TSAGDA023` unknown symbol in `using (...)`
+- `TSAGDA024` unknown symbol in `hiding (...)`
+- `TSAGDA025` unknown renaming source
+- `TSAGDA026` open/renaming collision
+- `TSAGDA027` ambiguous unqualified exported name from multiple opens
+- `TSAGDA028` conflicting aliases for imports
 - `TSAGDA029` repository import cycle
 - `TSAGDA030` module identity/path collision
 
@@ -405,39 +369,39 @@ therefore retained as useful suspicions but require `AGDA_TYPECHECKER` evidence
 for a hard conclusion.
 
 - `TSAGDA040` apparent over-application; typechecker evidence required because result aliases may unfold to functions
-- `TSAGDA041` apparent under-application in a saturated context (`AGDA_TYPECHECKER`)
-- `TSAGDA042` named implicit apparently absent from the shallow telescope (`AGDA_TYPECHECKER`)
-- `TSAGDA043` apparent explicit/implicit visibility mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA044` lambda binder count versus shallow expected Pi shape (`AGDA_TYPECHECKER`)
+- `TSAGDA041` too few explicit arguments in a syntactically saturated context
+- `TSAGDA042` named implicit argument not present in telescope
+- `TSAGDA043` obvious explicit/implicit visibility mismatch
+- `TSAGDA044` lambda binder count incompatible with expected Pi shape
 - `TSAGDA045` non-pointfree clause/declaration arity disagreement; typechecker evidence required because eta/type aliases can change visible arity
-- `TSAGDA046` apparent constructor application arity mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA047` apparent record-constructor arity mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA048` apparent parameterized-module application arity mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA049` apparent projection over/under-application (`AGDA_TYPECHECKER`)
+- `TSAGDA046` constructor application arity mismatch
+- `TSAGDA047` record constructor arity mismatch
+- `TSAGDA048` parameterized-module application arity mismatch
+- `TSAGDA049` projection over/under-application
 
 ### Projections
 
 - `TSAGDA001` opened type-valued projection used unapplied as a type
-- `TSAGDA002` projection receiver `_` despite an apparent matching binder (`AGDA_TYPECHECKER`)
-- `TSAGDA050` apparent projection receiver/record-head mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA051` apparent declaration/type supplied as projection receiver (`AGDA_TYPECHECKER`)
-- `TSAGDA052` projection receiver is syntactically absent (`AGDA_TYPECHECKER`; canonical triage root `TSAGDA049`)
-- `TSAGDA053` apparent projection over-application (`AGDA_TYPECHECKER`)
-- `TSAGDA054` projection/receiver record mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA055` ambiguous opened projection (`AGDA_SCOPE`)
-- `TSAGDA056` apparent dependent projection parameter mismatch (`AGDA_TYPECHECKER`)
+- `TSAGDA002` projection receiver written as `_` despite a matching binder
+- `TSAGDA050` projection receiver has a visibly incompatible record head
+- `TSAGDA051` projection receives a known type where a record value is expected
+- `TSAGDA052` projection receiver is visibly missing
+- `TSAGDA053` projection is visibly over-applied
+- `TSAGDA054` projection does not belong to the inferred receiver record
+- `TSAGDA055` ambiguous opened projection
+- `TSAGDA056` dependent projection is used before required record parameters
 
 ### Record construction / adapters
 
 - `TSAGDA060` unknown field in record expression
 - `TSAGDA061` duplicate field assignment
 - `TSAGDA062` statically-known mandatory field missing
-- `TSAGDA063` apparent record-expression target mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA064` record-field lambda/telescope shape mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA003` / `TSAGDA065` apparent terminal codomain/kind mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA066` apparent record-field result-head mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA067` source projection/target-field compatibility suspicion (`AGDA_TYPECHECKER`)
-- `TSAGDA068` apparent constructor/expected-record mismatch (`AGDA_TYPECHECKER`)
+- `TSAGDA063` record expression targets visibly wrong known record
+- `TSAGDA064` record-field lambda/telescope shape mismatch
+- `TSAGDA003` / `TSAGDA065` terminal codomain/kind mismatch
+- `TSAGDA066` record-field result head mismatch
+- `TSAGDA067` source projection incompatible with target field
+- `TSAGDA068` constructor does not construct expected record
 
 ### Shallow type shapes
 
@@ -445,29 +409,29 @@ The checker uses a deliberately small outer-shape language:
 `Unknown`, `Meta`, `Sort`, `Head`, `Pi`, `Equality`, and `Literal`.
 Only bounded head comparison/substitution is performed.
 
-- `TSAGDA070` apparent type/sort used in a term position (`AGDA_TYPECHECKER`)
-- `TSAGDA071` apparent term used in a type position (`AGDA_TYPECHECKER`)
+- `TSAGDA070` type/sort supplied where a term is structurally required
+- `TSAGDA071` term supplied where a type/sort is structurally required
 - `TSAGDA072` apparent constructor/result type-head mismatch; typechecker evidence required when declared heads may unfold through synonyms
-- `TSAGDA073` apparent argument type-head mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA074` literal/expected-type mismatch (`AGDA_TYPECHECKER`)
+- `TSAGDA073` obvious argument type-head mismatch
+- `TSAGDA074` literal incompatible with expected outer head
 - `TSAGDA075` constructor/datatype disagreement; conservatively typechecker-gated because the code is shared by rigid and synonym-sensitive checks
-- `TSAGDA076` apparent function used as a type without enough application (`AGDA_TYPECHECKER`)
-- `TSAGDA077` apparent type-constructor arity mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA078` sort apparently used as an ordinary value (`AGDA_TYPECHECKER`)
-- `TSAGDA079` shallow zero-arity declaration applied as a function (`AGDA_TYPECHECKER`)
+- `TSAGDA076` known function used as a type without enough application
+- `TSAGDA077` known type constructor over/under-applied
+- `TSAGDA078` sort used as an ordinary value
+- `TSAGDA079` known non-function applied as a function
 
 ### Patterns / finite coverage
 
 These checks are intentionally restricted to simple non-indexed datatypes.
 
-- `TSAGDA080` apparent unknown constructor in pattern (`AGDA_SCOPE`)
-- `TSAGDA081` apparent pattern-constructor/datatype mismatch (`AGDA_TYPECHECKER`)
-- `TSAGDA082` apparent constructor-pattern arity mismatch (`AGDA_TYPECHECKER`)
+- `TSAGDA080` unknown constructor in pattern
+- `TSAGDA081` pattern constructor belongs to visibly wrong datatype
+- `TSAGDA082` constructor-pattern arity mismatch
 - `TSAGDA083` repeated binder in a linear pattern
 - `TSAGDA084` suspicious inaccessible/dot-pattern name
-- `TSAGDA085` absurd-pattern suspicion (`AGDA_TYPECHECKER`)
-- `TSAGDA086` absurd-lambda suspicion (`AGDA_TYPECHECKER`)
-- `TSAGDA087` finite-coverage suspicion (`AGDA_TYPECHECKER`)
+- `TSAGDA085` absurd pattern on a visibly inhabited simple datatype
+- `TSAGDA086` absurd lambda on a visibly inhabited simple datatype
+- `TSAGDA087` trivial missing finite constructor case
 - `TSAGDA088` clause visibly unreachable after catch-all
 - `TSAGDA089` duplicate constructor branch
 
@@ -479,16 +443,16 @@ shapes.
 - `TSAGDA100` `refl` against visibly different rigid heads
 - `TSAGDA101` `sym` endpoint shape mismatch
 - `TSAGDA102` `trans` intermediate endpoint mismatch
-- `TSAGDA103` apparent `cong` function/result incompatibility (`AGDA_TYPECHECKER`)
-- `TSAGDA104` equality proof apparently supplied to a non-equality consumer (`AGDA_TYPECHECKER`)
+- `TSAGDA103` `cong` structurally incompatible function/result
+- `TSAGDA104` known equality proof supplied to a visibly non-equality consumer
 - `TSAGDA105` equality endpoints have visibly incompatible rigid type heads
 
 ### Clause / scope checks
 
 - `TSAGDA110` compatibility alias of typechecker-gated `TSAGDA045`
-- `TSAGDA111` clause/signature visibility suspicion (`AGDA_TYPECHECKER`)
-- `TSAGDA112` named implicit apparently absent from signature (`AGDA_TYPECHECKER`)
-- `TSAGDA113` RHS identifier has no shallow binding (`AGDA_SCOPE`)
+- `TSAGDA111` obvious visibility mismatch between clause and signature
+- `TSAGDA112` named implicit pattern does not exist in signature
+- `TSAGDA113` RHS uses a visibly unbound local identifier
 - `TSAGDA114` apparent clause constructor/result-head disagreement; typechecker evidence required for synonym unfolding
 - `TSAGDA115` multiple incompatible signatures for one declaration
 
@@ -496,15 +460,15 @@ shapes.
 
 These are bounded structural checks, not universe solving.
 
-- `TSAGDA120` term-like declaration head appears in a field type (`AGDA_TYPECHECKER`)
-- `TSAGDA121` constructor result resolves to a term-like shallow head (`AGDA_TYPECHECKER`)
-- `TSAGDA122` constructor target appears to differ from its datatype (`AGDA_TYPECHECKER`)
-- `TSAGDA123` compatibility view of term-like field type (`AGDA_TYPECHECKER`; canonical triage root `TSAGDA120`)
+- `TSAGDA120` field type resolves to a known term rather than a type head
+- `TSAGDA121` constructor result resolves to a known term rather than datatype
+- `TSAGDA122` constructor visibly returns another datatype
+- `TSAGDA123` Set-valued projection declaration resolves to a term head
 
 ### Positivity / termination heuristics
 
-- `TSAGDA130` syntactic negative-recursion suspicion (`AGDA_TYPECHECKER`)
-- `TSAGDA131` syntactic contravariant-recursion suspicion (`AGDA_TYPECHECKER`)
+- `TSAGDA130` obvious negative recursive occurrence
+- `TSAGDA131` obvious recursive occurrence under a contravariant arrow
 - `TSAGDA140` recursive call repeats identical arguments
 - `TSAGDA141` obviously increasing recursive argument
 - `TSAGDA142` no visibly smaller recursive argument found
