@@ -72,6 +72,7 @@ files=(
   DASHI/Physics/Foundations/CMP119GibbsConnectedNumeratorEvaluationExact.agda
   DASHI/Physics/Foundations/CMP119ClassicalWilsonDiagonalMetricVariationExact.agda
   DASHI/Physics/Foundations/CMP119ClassicalWilsonTenMetricVariationExact.agda
+  DASHI/Physics/Foundations/CMP119ClassicalCurvatureTenMetricVariationExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
