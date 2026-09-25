@@ -217,3 +217,9 @@ import DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact
 import DASHI.Moonshine.OggSSPP2Base369RecognitionForkExact
 
 import DASHI.Moonshine.OggSSPArithmeticToIndependent369RecognitionExact
+
+import DASHI.Moonshine.OggSSPP2ConsumerRelativeQuotientExact
+
+import DASHI.Moonshine.OggSSPP3F9ExtensionQuotientCandidateExact
+
+import DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact
