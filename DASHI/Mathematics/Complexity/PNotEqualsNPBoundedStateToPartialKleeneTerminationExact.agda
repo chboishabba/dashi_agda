@@ -146,6 +146,7 @@ realizedBoundedDescentContradictsExactSAT :
         dynamicInput) →
   ⊥
 realizedBoundedDescentContradictsExactSAT
+    {dynamicInput = dynamicInput}
     satP
     compiler
     body
@@ -157,7 +158,7 @@ realizedBoundedDescentContradictsExactSAT
            initial
            compiler
            (Bridge.bodyProgram body)
-           _
+           dynamicInput
            realization
 ... | output , terminates =
   NoGo.exactSATForcesPartialLiarFixedPointDivergence
