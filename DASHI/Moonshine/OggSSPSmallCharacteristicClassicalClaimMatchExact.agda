@@ -56,6 +56,10 @@ data SmallCharacteristicClaim : Set where
     SmallCharacteristicClaim
   p2OrientedInertiaTenStateFactorization :
     SmallCharacteristicClaim
+  p3F9QuotientAsDeligneRapoportStratumCode :
+    SmallCharacteristicClaim
+  p2OrientedInertiaEnrichedModuliProblem :
+    SmallCharacteristicClaim
 
 data MatchGrade : Set where
   directSourceMatch :
@@ -247,13 +251,33 @@ p2TenFactorizationMatch =
     true
     false
 
+p3StratumCodeMatch : ClaimMatch
+p3StratumCodeMatch =
+  claim-match
+    p3F9QuotientAsDeligneRapoportStratumCode
+    repositoryOnly
+    "DASHI finite-code interpretation over Deligne-Rapoport local geometry"
+    "the three-valued F9 extension quotient is exactly recharted to Frobenius-branch/node/Verschiebung-branch incidence strata; it is a stratum classifier, not the completed-local-ring coordinate"
+    true
+    false
+
+p2EnrichedModuliMatch : ClaimMatch
+p2EnrichedModuliMatch =
+  claim-match
+    p2OrientedInertiaEnrichedModuliProblem
+    repositoryOnly
+    "DASHI enriched moduli problem assembled from classical orientation and inertia ingredients"
+    "objects carry an oriented quadratic-order marking plus an automorphism class; loop reversal is quotiented at the sector level, giving exactly ten coarse sectors"
+    true
+    false
+
 p3SameObjectMatch : ClaimMatch
 p3SameObjectMatch =
   claim-match
     p3DASHICarrierEqualsClassicalMarkedModuliObject
     noClassicalSameObjectMatch
     "no classical same-object source claimed"
-    "classical sources support supersingular CM marking and Frobenius action, but do not identify the exact DASHI three-state quotient as a named classical moduli problem"
+    "the abstract three-state C2-set is classically realized by Deligne-Rapoport local strata, but the F9 coordinate itself is a DASHI stratum code rather than a classically identified formal local parameter"
     false
     false
 
@@ -285,6 +309,8 @@ canonicalClaimMatches =
   ∷ p2FiveInversionOrbitMatch
   ∷ p2TwoOrientationsMatch
   ∷ p2TenFactorizationMatch
+  ∷ p3StratumCodeMatch
+  ∷ p2EnrichedModuliMatch
   ∷ p3SameObjectMatch
   ∷ p2SameObjectMatch
   ∷ []
@@ -320,6 +346,8 @@ record ClassicalClaimMatchBoundary : Set where
     p2TwoOrientationFactorClassicallySourced : Bool
     p2TenCarrierHasClassicallySourcedFactorization : Bool
     p2TenCarrierNamedClassicalModuliObjectIdentified : Bool
+    p3StratumCodeInterpretationPaid : Bool
+    p2SpecificEnrichedModuliProblemDefined : Bool
     allUnsupportedPromotionsExplicitlyBlocked : Bool
 
 canonicalClassicalClaimMatchBoundary :
@@ -329,4 +357,5 @@ canonicalClassicalClaimMatchBoundary =
     true true true true true true
     false false false false
     true true true true true true false
+    true true
     true
