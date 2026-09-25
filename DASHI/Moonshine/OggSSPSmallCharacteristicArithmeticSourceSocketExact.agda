@@ -81,7 +81,7 @@ record P3MarkedFrobeniusSource : Set₁ where
     action :
       Action.InvertibleSymmetryAction MarkedState C2.C2
 
-    orbits :
+    candidateOrbits :
       Orbit.OrbitPresentation action
 
     coarseJ :
