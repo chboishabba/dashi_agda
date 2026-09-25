@@ -30,6 +30,7 @@ open import Data.Nat.Base using (_<_)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
+import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact as Closed
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedRestrictionQuotientSATAuthorityExact as Authority
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedAuthorityStrictDescentExact as Descent
@@ -74,7 +75,7 @@ sharedUpperStrictlyBelowRootImpliesAuthorityChain :
         * Quotient.stateCount
             (AuthoritySize.closedQuotient closed))
     <
-  DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact.formulaNodeCount
+  Size.formulaNodeCount
       (Bridge.indexedToCook root) →
   Closed.StructuralRepresentativeChain
     (Authority.closedQuotientSATAuthority closed) →
