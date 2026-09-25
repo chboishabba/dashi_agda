@@ -6,7 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
-from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
+from typing import Callable, Dict, Iterable, Iterator, List, Optional, Sequence, Set, Tuple
 
 from .ast_index import build_import_surface
 from .checker import Checker, _parser
@@ -295,6 +295,9 @@ def discover_closure(
     target: Path,
     *,
     jobs: int = 0,
+    cached_lookup: Optional[
+        Callable[[Path], Optional[ImportReceipt]]
+    ] = None,
 ) -> Tuple[ImportReceipt, ...]:
     root = root.resolve()
     target = target.resolve()
@@ -314,21 +317,49 @@ def discover_closure(
             ]
             if not current:
                 break
-            chunksize = max(1, len(current) // max(1, workers * 4))
-            receipts = executor.map(
-                _scan_import,
-                [str(path) for path in current],
-                chunksize=chunksize,
-            )
+
+            cached_receipts = []
+            misses = []
+            for path in current:
+                cached = (
+                    cached_lookup(path)
+                    if cached_lookup is not None
+                    else None
+                )
+                if cached is None:
+                    misses.append(path)
+                else:
+                    cached_receipts.append(cached)
+
+            parsed_receipts = ()
+            if misses:
+                chunksize = max(
+                    1,
+                    len(misses) // max(1, workers * 4),
+                )
+                parsed_receipts = tuple(
+                    executor.map(
+                        _scan_import,
+                        [str(path) for path in misses],
+                        chunksize=chunksize,
+                    )
+                )
+
             next_frontier = []
-            for receipt in receipts:
+            for receipt in (
+                *cached_receipts,
+                *parsed_receipts,
+            ):
                 path = Path(receipt.path).resolve()
                 seen[path] = receipt
                 for module in receipt.imports:
                     dependency = root.joinpath(
                         *module.split(".")
                     ).with_suffix(".agda")
-                    if dependency.exists() and dependency.resolve() not in seen:
+                    if (
+                        dependency.exists()
+                        and dependency.resolve() not in seen
+                    ):
                         next_frontier.append(dependency.resolve())
             frontier = next_frontier
 
