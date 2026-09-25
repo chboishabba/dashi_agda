@@ -1,6 +1,7 @@
 module DASHI.Education.DigitalESDCandidateWorldExecutionRegression where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDCandidateWorldExecutionExact as World
 import DASHI.Education.DigitalESDAdaptiveScreeningExecutionExact as Loop
@@ -35,3 +36,14 @@ admissionRegression :
   World.DigitalESDCandidateWorldExecutionBoundary.graphMembershipCreatesSourceAuditAdmission
     World.canonicalDigitalESDCandidateWorldExecutionBoundary ≡ false
 admissionRegression = refl
+
+
+boundedInspectionRegression :
+  World.DigitalESDCandidateWorldExecutionBoundary.boundedInspectionReturned
+    World.canonicalDigitalESDCandidateWorldExecutionBoundary ≡ true
+boundedInspectionRegression = refl
+
+flatJsonRuntimeRegression :
+  World.FlatJsonGraphIsCanonicalRuntimeState →
+  ⊥
+flatJsonRuntimeRegression = World.flatJsonGraphDoesNotBecomeCanonicalRuntimeState
