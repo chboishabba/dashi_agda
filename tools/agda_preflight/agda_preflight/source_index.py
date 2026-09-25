@@ -1417,6 +1417,30 @@ class SourceIndex:
         )
 
 
+    def _invalid_diagnostic_count(self, target: Path) -> int:
+        target_rel = self._relative(target)
+        query = """
+            WITH RECURSIVE closure(path, module_name) AS (
+                SELECT path, module_name
+                FROM modules
+                WHERE path = ?
+                UNION
+                SELECT m.path, m.module_name
+                FROM closure c
+                JOIN imports i ON i.importer_path = c.path
+                JOIN modules m ON m.module_name = i.imported_module
+            )
+            SELECT count(*)
+            FROM closure c
+            JOIN modules m ON m.path = c.path
+            WHERE m.diagnostics_json = ''
+        """
+        row = self.connection.execute(
+            query,
+            (target_rel,),
+        ).fetchone()
+        return int(row[0]) if row is not None else 0
+
     def diagnose(self, target: Path) -> DiagnoseResult:
         target = target if target.is_absolute() else self.root / target
         target = target.resolve()
@@ -1425,8 +1449,19 @@ class SourceIndex:
         if warm is not None:
             return warm
 
-        if self.jobs != 1 and self._row(target) is None:
-            return self._parallel_bootstrap(target)
+        if self.jobs != 1:
+            target_row = self._row(target)
+            invalid_diagnostics = (
+                0
+                if target_row is None
+                else self._invalid_diagnostic_count(target)
+            )
+            if target_row is None or invalid_diagnostics > 1:
+                self.profiler.count(
+                    "parallel_refresh_invalid_diagnostics",
+                    invalid_diagnostics,
+                )
+                return self._parallel_bootstrap(target)
 
         with self.profiler.stage("closure.refresh"):
             states = self._collect_states(target)
