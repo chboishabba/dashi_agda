@@ -602,7 +602,7 @@ class Checker:
         self, summary: ModuleSummary
     ) -> List[Diagnostic]:
         """Find a projection receiver written as '_' despite a matching binder."""
-        imported = self.imported_summaries(summary)
+        imported = self.imported_interfaces(summary)
         result: List[Diagnostic] = []
 
         for function_name, clauses in summary.ast.clauses.items():
@@ -626,8 +626,8 @@ class Checker:
                         continue
                     matching_record = None
                     matching_binder = None
-                    for record_name, record in imported_summary.records.items():
-                        if field_name not in record.fields:
+                    for record_name, record in imported_summary.record_map.items():
+                        if field_name not in record.field_map:
                             continue
                         qualified = f"{alias}.{record_name}"
                         for binder in binders:
@@ -662,7 +662,7 @@ class Checker:
 
     def _record_shape_diagnostics(self, summary: ModuleSummary) -> List[Diagnostic]:
         result: List[Diagnostic] = []
-        imported = self.imported_summaries(summary)
+        imported = self.imported_interfaces(summary)
 
         def resolve_record_from_signature(signature):
             if signature is None or signature.type_node is None:
@@ -674,7 +674,7 @@ class Checker:
                 alias, record_name = head.rsplit(".", 1)
                 owner = imported.get(alias)
                 if owner is not None:
-                    record = owner.ast.records.get(record_name)
+                    record = owner.record_map.get(record_name)
                     if record is not None:
                         return owner, record
             record = summary.ast.records.get(head)
@@ -701,8 +701,8 @@ class Checker:
                     if "." in clean:
                         alias, record_name = clean.rsplit(".", 1)
                         owner = imported.get(alias)
-                        if owner is not None and record_name in owner.ast.records:
-                            return owner, owner.ast.records[record_name]
+                        if owner is not None and record_name in owner.record_map:
+                            return owner, owner.record_map[record_name]
                     if clean in summary.ast.records:
                         return summary, summary.ast.records[clean]
             return None
@@ -715,13 +715,27 @@ class Checker:
             if target_ref is None:
                 continue
             target_owner, target = target_ref
-            target_bytes = target_owner.ast.source_bytes
 
             for assignment in record_expr.assignments:
-                expected = target.fields.get(assignment.name)
-                if expected is None or expected.type_node is None or assignment.expr_node is None:
+                target_fields = (
+                    target.field_map
+                    if isinstance(target_owner, ModuleInterface)
+                    else target.fields
+                )
+                expected = target_fields.get(assignment.name)
+                if expected is None or assignment.expr_node is None:
                     continue
-                expected_head = terminal_head(shape_from_node(target_bytes, expected.type_node))
+                if isinstance(target_owner, ModuleInterface):
+                    expected_head = expected.terminal_head
+                else:
+                    if expected.type_node is None:
+                        continue
+                    expected_head = terminal_head(
+                        shape_from_node(
+                            target_owner.ast.source_bytes,
+                            expected.type_node,
+                        )
+                    )
                 tokens = significant_tokens(summary.ast.source_bytes, assignment.expr_node)
 
                 # High-confidence structural form:
@@ -736,12 +750,25 @@ class Checker:
                 if source_ref is None:
                     continue
                 source_owner, source_record = source_ref
-                actual = source_record.fields.get(projection)
-                if actual is None or actual.type_node is None:
-                    continue
-                actual_head = terminal_head(
-                    shape_from_node(source_owner.ast.source_bytes, actual.type_node)
+                source_fields = (
+                    source_record.field_map
+                    if isinstance(source_owner, ModuleInterface)
+                    else source_record.fields
                 )
+                actual = source_fields.get(projection)
+                if actual is None:
+                    continue
+                if isinstance(source_owner, ModuleInterface):
+                    actual_head = actual.terminal_head
+                else:
+                    if actual.type_node is None:
+                        continue
+                    actual_head = terminal_head(
+                        shape_from_node(
+                            source_owner.ast.source_bytes,
+                            actual.type_node,
+                        )
+                    )
                 if expected_head is None or actual_head is None or expected_head == actual_head:
                     continue
                 sortish = {"Set", "Set₀", "Set₁", "Set₂", "Setω", "Prop", "Prop₁"}
