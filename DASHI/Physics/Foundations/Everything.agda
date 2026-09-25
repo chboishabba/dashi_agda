@@ -270,3 +270,6 @@ import DASHI.Physics.Foundations.CMP119GibbsDiagonalTraceSignExact
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTraceInsertionReductionExact
 
 import DASHI.Physics.Foundations.CMP119AntigravityTraceMaxCutExact
+
+import DASHI.Physics.Foundations.CMP119AntigravityQuantumTraceExact
+import DASHI.Physics.Foundations.CMP119AntigravityWilsonQuantumTraceClosureExact
