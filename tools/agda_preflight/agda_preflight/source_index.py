@@ -9,6 +9,7 @@ import time
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from .checker import Checker, Diagnostic
+from .fixes import SuggestedFix, TextEdit
 from .timing import Profiler
 
 
@@ -184,6 +185,34 @@ class SourceIndex:
         path = Path(payload["path"])
         if not path.is_absolute():
             path = self.root / path
+
+        fixes = []
+        for item in payload.get("fixes", []):
+            edits = []
+            for edit in item.get("edits", []):
+                edit_path = Path(edit["path"])
+                if not edit_path.is_absolute():
+                    edit_path = self.root / edit_path
+                edits.append(
+                    TextEdit(
+                        path=edit_path,
+                        start_line=int(edit["start_line"]),
+                        start_column=int(edit["start_column"]),
+                        end_line=int(edit["end_line"]),
+                        end_column=int(edit["end_column"]),
+                        replacement=edit["replacement"],
+                    )
+                )
+            fixes.append(
+                SuggestedFix(
+                    title=item["title"],
+                    applicability=item["applicability"],
+                    rationale=item["rationale"],
+                    validation=item["validation"],
+                    edits=tuple(edits),
+                )
+            )
+
         return Diagnostic(
             code=payload["code"],
             message=payload["message"],
@@ -196,6 +225,11 @@ class SourceIndex:
             evidence=payload.get("evidence", "dashi-index"),
             minimum_evidence=payload.get("minimum_evidence", "dashi-index"),
             evidence_sufficient=bool(payload.get("evidence_sufficient", True)),
+            root_cause=payload.get("root_cause"),
+            explanation=payload.get("explanation"),
+            expected=payload.get("expected"),
+            found=payload.get("found"),
+            fixes=tuple(fixes),
         )
 
     def _decode_diagnostics(self, row) -> List[Diagnostic]:
