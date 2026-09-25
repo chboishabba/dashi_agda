@@ -82,6 +82,18 @@ record DBNativeCoordinateNominationBoundary : Set where
     nominationCreatesClaimTruthIsFalse :
       nominationCreatesClaimTruth ≡ false
 
+    processingStatePersistedInPostgres : Bool
+    processingStatePersistedInPostgresIsTrue :
+      processingStatePersistedInPostgres ≡ true
+
+    residualQueuesDerivedAutomatically : Bool
+    residualQueuesDerivedAutomaticallyIsTrue :
+      residualQueuesDerivedAutomatically ≡ true
+
+    residualWorkflowOrderIsEvidenceQualityRank : Bool
+    residualWorkflowOrderIsEvidenceQualityRankIsFalse :
+      residualWorkflowOrderIsEvidenceQualityRank ≡ false
+
 open DBNativeCoordinateNominationBoundary public
 
 canonicalDBNativeCoordinateNominationBoundary :
@@ -95,6 +107,9 @@ canonicalDBNativeCoordinateNominationBoundary =
     true refl
     false refl
     false refl
+    false refl
+    true refl
+    true refl
     false refl
     false refl
 
@@ -149,6 +164,7 @@ data GenealogyHypothesisCreatesDuplicateDecision : Set where
 data GenealogyHypothesisCreatesSameEmpiricalStudy : Set where
 data GenealogyHypothesisCreatesEvidenceIndependence : Set where
 data CandidateWorldJsonBecomesRuntimeDatabase : Set where
+data WorkflowOrderCreatesEvidenceQualityRank : Set where
 
 parserNominationDoesNotPayExtractionCoordinate :
   ParserNominationPaysExtractionCoordinate → ⊥
@@ -174,6 +190,10 @@ candidateWorldJsonDoesNotBecomeRuntimeDatabase :
   CandidateWorldJsonBecomesRuntimeDatabase → ⊥
 candidateWorldJsonDoesNotBecomeRuntimeDatabase ()
 
+workflowOrderDoesNotCreateEvidenceQualityRank :
+  WorkflowOrderCreatesEvidenceQualityRank → ⊥
+workflowOrderDoesNotCreateEvidenceQualityRank ()
+
 dbNativeAcademicWorldExecutionReading : String
 dbNativeAcademicWorldExecutionReading =
-  "Digital-ESD world execution is PostgreSQL-native. Verified/materialised retained texts enter the existing SCALE-1 source-revision, exact-region, parser-job, Statement/PNF and reconciliation spine. Runtime study-coordinate nominations use the existing nineteen-coordinate manuscript extraction vocabulary and retain exact source-revision, statement, span and PNF-batch provenance; a nomination is review-only, pays no coordinate, and missing nomination is not an absence fact. Persisted study-family hypotheses remain candidate genealogy: they schedule review but create neither duplicate/same-study identity nor evidence independence. The agent receives bounded inspection projections rather than a corpus-wide JSON graph."
+  "Digital-ESD world execution is PostgreSQL-native. Verified/materialised retained texts enter the existing SCALE-1 source-revision, exact-region, parser-job, Statement/PNF and reconciliation spine. Runtime study-coordinate nominations use the existing nineteen-coordinate manuscript extraction vocabulary and retain exact source-revision, statement, span and PNF-batch provenance; a nomination is review-only, pays no coordinate, and missing nomination is not an absence fact. Persisted study-family hypotheses remain candidate genealogy: they schedule review but create neither duplicate/same-study identity nor evidence independence. PostgreSQL also retains current per-source processing state and derives bounded acquisition/review/admission residual queues automatically; their ordering is workflow scheduling, not an evidentiary-quality ranking. The agent receives bounded inspection projections rather than a corpus-wide JSON graph."
