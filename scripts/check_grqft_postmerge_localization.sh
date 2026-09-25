@@ -62,6 +62,7 @@ files=(
   DASHI/Physics/Foundations/CMP119GRQFTD1MaxCutExact.agda
   DASHI/Physics/Foundations/CMP119FourDiagonalFiniteD1ActiveStressExact.agda
   DASHI/Physics/Foundations/CMP119FourD1LocalizedPositiveGRepulsionExact.agda
+  DASHI/Physics/Foundations/CMP119FourDiagonalLiteralFiniteMeasureActiveStressExact.agda
   DASHI/Physics/Foundations/CMP119AntigravitySourceMaxCutExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotCrossNumeratorCandidateExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotD1SourceWeldExact.agda
