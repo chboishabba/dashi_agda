@@ -757,45 +757,41 @@ sameLayerFutureEquivalentIffResidualFunctionEqual :
       (restrictionActionSystem root)
       restrictionObservation
       left
-      right)
-  ×
-  ((assignment :
+      right
+    →
+    ((assignment :
       SAT.Assignment (Family.currentVariables left)) →
-    SAT.evaluate
-        (Family.currentFormula left)
-        assignment
-    ≡
-    SAT.evaluate
-        (Family.currentFormula right)
-        (transportAssignment sameArity assignment))
+      SAT.evaluate
+          (Family.currentFormula left)
+          assignment
+      ≡
+      SAT.evaluate
+          (Family.currentFormula right)
+          (transportAssignment sameArity assignment)))
+  ×
+  (((assignment :
+      SAT.Assignment (Family.currentVariables left)) →
+      SAT.evaluate
+          (Family.currentFormula left)
+          assignment
+      ≡
+      SAT.evaluate
+          (Family.currentFormula right)
+          (transportAssignment sameArity assignment))
+    →
+    Future.FutureEquivalent
+      (restrictionActionSystem root)
+      restrictionObservation
+      left
+      right)
 sameLayerFutureEquivalentIffResidualFunctionEqual
     {left = left}
     {right = right}
     sameArity =
-  futureFromPointwise
-  ,
   pointwiseFromFuture
+  ,
+  futureFromPointwise
   where
-    futureFromPointwise :
-      ((assignment :
-        SAT.Assignment (Family.currentVariables left)) →
-        SAT.evaluate
-            (Family.currentFormula left)
-            assignment
-        ≡
-        SAT.evaluate
-            (Family.currentFormula right)
-            (transportAssignment sameArity assignment))
-      →
-      Future.FutureEquivalent
-        (restrictionActionSystem root)
-        restrictionObservation
-        left
-        right
-    futureFromPointwise pointwise =
-      sameLayerResidualFunctionContainedInFutureEquivalent
-        (sameArity , pointwise)
-
     pointwiseFromFuture :
       Future.FutureEquivalent
         (restrictionActionSystem root)
@@ -816,6 +812,26 @@ sameLayerFutureEquivalentIffResidualFunctionEqual
       futureEquivalentImpliesPointwiseEvaluationEqual
         sameArity
         future
+
+    futureFromPointwise :
+      ((assignment :
+        SAT.Assignment (Family.currentVariables left)) →
+        SAT.evaluate
+            (Family.currentFormula left)
+            assignment
+        ≡
+        SAT.evaluate
+            (Family.currentFormula right)
+            (transportAssignment sameArity assignment))
+      →
+      Future.FutureEquivalent
+        (restrictionActionSystem root)
+        restrictionObservation
+        left
+        right
+    futureFromPointwise pointwise =
+      sameLayerResidualFunctionContainedInFutureEquivalent
+        (sameArity , pointwise)
 
 ------------------------------------------------------------------------
 -- Same-layer Q1 merge relation.
