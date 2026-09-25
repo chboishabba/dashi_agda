@@ -2,7 +2,7 @@
 module DASHI.Physics.Foundations.CMP119AntigravityCurvatureF2PositivityExact where
 
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; Positive; NonNegative; nonNegative; _+_; _*_; _≤_; _<_)
+  (ℚ; 0ℚ; Positive; NonNegative; positive; nonNegative; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact as Curvature
@@ -185,7 +185,7 @@ asPositiveFieldStrengthSquareWitness
   { Strict.PositiveFieldStrengthSquareWitness.fieldStrengthSquareNonnegative =
       fieldStrengthSquareNonnegative family
   ; Strict.PositiveFieldStrengthSquareWitness.fieldStrengthSquarePositiveAtWitness =
-      ℚ.positive
+      positive
         (normalizedCurvatureF2PositiveFromF01
           (positiveCurvatureAtQuadratureWitness witness))
   }
