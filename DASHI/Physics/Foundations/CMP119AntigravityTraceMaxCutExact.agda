@@ -689,3 +689,50 @@ finiteCMP119ToPinnedLocalCTraceF2TransportStillRequired = true
 finiteCMP119ToPinnedLocalCTraceF2TransportStillRequiredIsTrue :
   finiteCMP119ToPinnedLocalCTraceF2TransportStillRequired ≡ true
 finiteCMP119ToPinnedLocalCTraceF2TransportStillRequiredIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- POST CONCRETE-LOCAL-C ANOMALY TRANSPORT RECUT
+------------------------------------------------------------------------
+
+antigravityLocalCStressObjectConstructionStillRequired : Bool
+antigravityLocalCStressObjectConstructionStillRequired = false
+
+antigravityLocalCStressObjectConstructionStillRequiredIsFalse :
+  antigravityLocalCStressObjectConstructionStillRequired ≡ false
+antigravityLocalCStressObjectConstructionStillRequiredIsFalse = refl
+
+antigravityLocalCCurvatureOperatorFamilyConstructionStillRequired : Bool
+antigravityLocalCCurvatureOperatorFamilyConstructionStillRequired = false
+
+antigravityLocalCCurvatureOperatorFamilyConstructionStillRequiredIsFalse :
+  antigravityLocalCCurvatureOperatorFamilyConstructionStillRequired ≡ false
+antigravityLocalCCurvatureOperatorFamilyConstructionStillRequiredIsFalse = refl
+
+antigravitySpecificF2PolynomialSelectionStillRequired : Bool
+antigravitySpecificF2PolynomialSelectionStillRequired = true
+
+antigravitySpecificF2PolynomialSelectionStillRequiredIsTrue :
+  antigravitySpecificF2PolynomialSelectionStillRequired ≡ true
+antigravitySpecificF2PolynomialSelectionStillRequiredIsTrue = refl
+
+finiteCMP119TraceToPinnedLocalCReadoutStillRequired : Bool
+finiteCMP119TraceToPinnedLocalCReadoutStillRequired = true
+
+finiteCMP119TraceToPinnedLocalCReadoutStillRequiredIsTrue :
+  finiteCMP119TraceToPinnedLocalCReadoutStillRequired ≡ true
+finiteCMP119TraceToPinnedLocalCReadoutStillRequiredIsTrue = refl
+
+finiteCMP119F2ToPinnedLocalCReadoutStillRequired : Bool
+finiteCMP119F2ToPinnedLocalCReadoutStillRequired = true
+
+finiteCMP119F2ToPinnedLocalCReadoutStillRequiredIsTrue :
+  finiteCMP119F2ToPinnedLocalCReadoutStillRequired ≡ true
+finiteCMP119F2ToPinnedLocalCReadoutStillRequiredIsTrue = refl
+
+concreteLocalCAnomalyTransportCompilerClosed : Bool
+concreteLocalCAnomalyTransportCompilerClosed = true
+
+concreteLocalCAnomalyTransportCompilerClosedIsTrue :
+  concreteLocalCAnomalyTransportCompilerClosed ≡ true
+concreteLocalCAnomalyTransportCompilerClosedIsTrue = refl
