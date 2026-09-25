@@ -19,14 +19,24 @@ import DASHI.Core.IrigarayContactRelationalRechartExact
 
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact
+import DASHI.Reasoning.TrialecticProductiveJoinDescentExact
 import DASHI.Reasoning.TrialecticLocalLogicQualificationExact
+import DASHI.Reasoning.RelationalPerspectiveSubjectExact
+import DASHI.Reasoning.RelationalPerspectiveIntegrationExact
 
 import DASHI.Foundations.RelationalStageTwelveSiteExact
 import DASHI.Foundations.RelationalDepthPresheafExact
+import DASHI.Foundations.TrialecticDepthHyperformExact
+import DASHI.Foundations.RelationalObserverNonaryD4DecompositionExact
 import DASHI.Foundations.TrialecticD4C3ResidualBoundaryExact
 
 import DASHI.Cognition.PNF.TrialecticMentalizingCalibrationExact
+import DASHI.Cognition.PNF.PerspectiveAllocationExact
+import DASHI.Cognition.PNF.IntegrativeComplexityDifferentiationIntegrationExact
+import DASHI.Cognition.PNF.RelationalPerspectiveFactorsThroughExact
 import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact
+import DASHI.Biology.ThreatMentalizingRelationalMonitoringSeparationExact
+import DASHI.TraumaRelationalPerspectiveHyperfabricExact
 
 -- Explicit donors whose theorem surfaces are reused rather than duplicated.
 import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact
