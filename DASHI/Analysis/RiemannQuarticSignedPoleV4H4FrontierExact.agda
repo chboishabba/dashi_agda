@@ -1337,3 +1337,152 @@ outerPairedAsymptoticTransportedIntoAgdaKernelHere = false
 outerPairedAsymptoticInterpretation : String
 outerPairedAsymptoticInterpretation =
   "The global odd-paired high carrier has now been recut back onto the manuscript same-object far coordinate. Lean source-writes that the exhausted outer paired symmetric N-mu correlation plus signed horizontal remainder equals canonicalFarCompletedCompensation plus one half of the two canonical Abel boundary terms, and then collapses those two boundaries to signedOrdinateTest(t+h0) times the single symmetric discrepancy D(t-h0,t+h0). Thus there is no second outer analytic invariant and no remaining representation seam here. The preferred open theorem is a signed quantitative estimate for this exact far-plus-symmetric-boundary object strong enough to close the quartic-scale terminal margin. No global outer pair-kernel sign and no same-object prime identification is currently claimed."
+
+
+------------------------------------------------------------------------
+-- FIXED COUPLED SIGNED HIGH SCALAR
+--
+-- Lean has now removed two accidental strengthenings from the preferred
+-- high-ordinate cut.
+--
+-- (1) The terminal G3 compiler needs only the ONE-SIDED inequality
+--
+--       F_n < terminalResidualMargin,
+--
+--     not
+--
+--       |F_n| < terminalResidualMargin.
+--
+--     The older absolute-value predicate remains a valid sufficient condition
+--     but is no longer the Clay-facing min-cut.
+--
+-- (2) The finite local literal source is exactly stable once the centered
+--     exhaustion radius n exceeds the canonical physical local half-width h0.
+--     This is proved directly from
+--
+--       rho in centeredZeroFinset(t,n)
+--         iff t-n < Im(rho) <= t+n
+--
+--     and the CLOSED local predicate |q| <= eta0.  A possible zero exactly at
+--     t-h0 is therefore retained; no generic-position or endpoint deletion is
+--     used.
+--
+-- The previously exposed asymptotic coupled carrier
+--
+--   C_far =
+--     canonicalFarCompletedCompensation
+--       + 1/2 * Psi_t(t+h0) * D(t-h0,t+h0)
+--
+-- is exhaustion-independent and satisfies
+--
+--   C_far
+--     = completedSignedResidual - canonicalLocalPairedContribution.
+--
+-- Lean exposes the exact local bookkeeping correction
+--
+--   Lcorr_n =
+--     1/2 * literalLocalExactAt(eta0,n)
+--       - canonicalLocalPairedContribution,
+--
+-- so
+--
+--   finiteCutCompensatedFar(n) = C_far - Lcorr_n.
+--
+-- It further expands
+--
+--   Lcorr_n
+--     = 1/2 *
+--       ( literalLocalPairMinusBaseAt(n)
+--         + canonicalLocalMuPair
+--         + Psi_t(t+h0) * D(t-h0,t+h0) ).
+--
+-- Because literalLocalExactAt stabilizes for n>h0, Lcorr_n also stabilizes.
+-- Lean packages that unique stable value as
+--
+--   canonicalLiteralVsPairedLocalCorrection.
+--
+-- Therefore the preferred terminal high hypothesis is now ONE FIXED SIGNED
+-- SCALAR inequality:
+--
+--   C_far - canonicalLiteralVsPairedLocalCorrection
+--     < terminalResidualMargin.
+--
+-- No existential exhaustion index and no absolute value remain.
+--
+-- The selected fixed-coupled high predicate compiles, above one fixed high
+-- threshold, directly to contradiction through the already-paid V4 and
+-- selected-M6 stack.
+--
+-- This is still only a representation/min-cut sharpening.  Lean does NOT prove
+-- the fixed signed scalar inequality itself.
+------------------------------------------------------------------------
+
+data FixedCoupledSignedHighCoordinate : Set where
+  oneSidedFiniteCompensationCut :
+    FixedCoupledSignedHighCoordinate
+  oneSidedCutToG3 :
+    FixedCoupledSignedHighCoordinate
+  farBoundaryCoupledCarrier :
+    FixedCoupledSignedHighCoordinate
+  farBoundaryCarrierExhaustionIndependent :
+    FixedCoupledSignedHighCoordinate
+  farNMuZeroMinusMuComplement :
+    FixedCoupledSignedHighCoordinate
+  pairedVsLiteralLocalCorrection :
+    FixedCoupledSignedHighCoordinate
+  closedLocalFiniteStabilization :
+    FixedCoupledSignedHighCoordinate
+  fixedCanonicalLocalCorrection :
+    FixedCoupledSignedHighCoordinate
+  fixedCoupledCutEquivalence :
+    FixedCoupledSignedHighCoordinate
+  selectedFixedCoupledCutToContradiction :
+    FixedCoupledSignedHighCoordinate
+  fixedCoupledSignedHighInequality :
+    FixedCoupledSignedHighCoordinate
+
+fixedCoupledSignedHighStatus :
+  FixedCoupledSignedHighCoordinate -> V4H4Status
+fixedCoupledSignedHighStatus oneSidedFiniteCompensationCut =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus oneSidedCutToG3 =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus farBoundaryCoupledCarrier =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus farBoundaryCarrierExhaustionIndependent =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus farNMuZeroMinusMuComplement =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus pairedVsLiteralLocalCorrection =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus closedLocalFiniteStabilization =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus fixedCanonicalLocalCorrection =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus fixedCoupledCutEquivalence =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus selectedFixedCoupledCutToContradiction =
+  leanSourceWrittenDonor
+fixedCoupledSignedHighStatus fixedCoupledSignedHighInequality =
+  openAnalyticObstruction
+
+absoluteValueTaxRemoved :
+  fixedCoupledSignedHighStatus oneSidedFiniteCompensationCut
+    ≡ leanSourceWrittenDonor
+absoluteValueTaxRemoved = refl
+
+fixedCoupledHighInequalityRemainsOpen :
+  fixedCoupledSignedHighStatus fixedCoupledSignedHighInequality
+    ≡ openAnalyticObstruction
+fixedCoupledHighInequalityRemainsOpen = refl
+
+fixedCoupledSignedHighLeanDonorHead : String
+fixedCoupledSignedHighLeanDonorHead =
+  "a61ea9c6e10e07359319d2c8e1dfb8313babdcbe"
+
+fixedCoupledSignedHighTransportedIntoAgdaKernelHere : Bool
+fixedCoupledSignedHighTransportedIntoAgdaKernelHere = false
+
+fixedCoupledSignedHighInterpretation : String
+fixedCoupledSignedHighInterpretation =
+  "The preferred RH high cut is now one fixed signed scalar inequality. Lean removes the unnecessary absolute value from the finite compensation predicate, proves the closed canonical local literal source stabilizes exactly for every centered exhaustion radius n>h0 including the possible left-endpoint atom, exposes the exact correction between the paired-Abel local subtraction and the literal local pair subtraction, and proves finiteCutCompensatedFar equals the exhaustion-independent far-plus-boundary coupled carrier minus that stabilized local correction. The resulting selected fixed-coupled predicate compiles directly to contradiction. The only new mathematics still open is the one-sided quantitative bound on that fixed coupled scalar itself; no Agda-native replay is claimed."
