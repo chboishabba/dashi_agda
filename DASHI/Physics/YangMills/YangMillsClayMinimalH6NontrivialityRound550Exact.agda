@@ -17,6 +17,7 @@ module DASHI.Physics.YangMills.YangMillsClayMinimalH6NontrivialityRound550Exact 
 -- SAME continuum theory is interacting/non-Gaussian.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.YangMillsClayLiteralTopDownConstructionExact as Top
@@ -101,8 +102,8 @@ round550MinimalH6CompilerLevel : ProofLevel
 round550MinimalH6CompilerLevel =
   R549.round549MinimalNontrivialityCompilerLevel
 
-round550FullLocalOPEStressRecordRequiredForNontriviality : Agda.Builtin.Bool.Bool
-round550FullLocalOPEStressRecordRequiredForNontriviality = Agda.Builtin.Bool.false
+round550FullLocalOPEStressRecordRequiredForNontriviality : Bool
+round550FullLocalOPEStressRecordRequiredForNontriviality = false
 
 -- The physical local input is now the narrow same-family Ward-kernel theorem.
 literalRound550MinimalWardKernelLevel : ProofLevel
