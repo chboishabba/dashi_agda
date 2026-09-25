@@ -493,6 +493,11 @@ import DASHI.Physics.YangMills.YangMillsSelectedRepresentedExpectationConvergenc
 import DASHI.Physics.YangMills.YangMillsClayPreferredA3SelectedClassRound550Exact
 import DASHI.Physics.YangMills.YangMillsClayPreferredA3SelectedClassRound550Validation
 
+import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionRound551Exact
+import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionRound551Validation
+import DASHI.Physics.YangMills.BalabanWilsonWEXTFromMixedLogRound552Exact
+import DASHI.Physics.YangMills.BalabanWilsonWEXTFromMixedLogRound552Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
