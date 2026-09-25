@@ -33,6 +33,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Core.RelationalTrialecticDisambiguationExact as Disambiguation
 import DASHI.Core.RelationalTransportDescentSheafExact as Transport
+import DASHI.Core.RelationalTransportGroupoidActionExact as GroupoidAction
 import DASHI.Foundations.RelationalDepthBidescentExact as Bidescent
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Groth
 import DASHI.Foundations.RelationalStageTwelveSiteExact as Site
@@ -47,6 +48,7 @@ data HigherDescentFeature : Set where
   faceMediationInterface : HigherDescentFeature
   relationalDepthBidescent : HigherDescentFeature
   typedTransportFamily : HigherDescentFeature
+  extensionalTransportGroupoidAction : HigherDescentFeature
 
   transportGroupoid : HigherDescentFeature
   groupoidValuedPresheaf : HigherDescentFeature
@@ -67,6 +69,7 @@ featureConstructed attachedIrreducibleTwoCell = true
 featureConstructed faceMediationInterface = true
 featureConstructed relationalDepthBidescent = true
 featureConstructed typedTransportFamily = true
+featureConstructed extensionalTransportGroupoidAction = true
 
 featureConstructed transportGroupoid = false
 featureConstructed groupoidValuedPresheaf = false
@@ -127,6 +130,12 @@ transportBoundary :
   Transport.RelationalTransportDescentBoundary
 transportBoundary =
   Transport.canonicalRelationalTransportDescentBoundary
+
+
+transportGroupoidActionBoundary :
+  GroupoidAction.RelationalTransportGroupoidActionBoundary
+transportGroupoidActionBoundary =
+  GroupoidAction.canonicalRelationalTransportGroupoidActionBoundary
 
 bidescentBoundary :
   Bidescent.RelationalDepthBidescentBoundary
@@ -201,7 +210,8 @@ record TrialecticHigherDescentPromotionBoundary : Set where
     faceMediationInterfaceReady : Bool
     depthBidescentInterfaceReady : Bool
     transportFamilyReady : Bool
-    transportGroupoidReady : Bool
+    extensionalTransportGroupoidActionReady : Bool
+    strictTransportGroupoidReady : Bool
     groupoidPresheafReady : Bool
     cocycleTwoMorphismsReady : Bool
     effectiveStackReady : Bool
@@ -212,6 +222,7 @@ canonicalTrialecticHigherDescentPromotionBoundary :
   TrialecticHigherDescentPromotionBoundary
 canonicalTrialecticHigherDescentPromotionBoundary =
   trialectic-higher-descent-promotion-boundary
+    true
     true
     true
     true
