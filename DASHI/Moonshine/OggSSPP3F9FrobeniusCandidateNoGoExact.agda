@@ -29,6 +29,7 @@ import DASHI.Core.OrbitStabilizerResidualPresentationExact as Generic
 import DASHI.Core.ResidualSymmetryCollisionFibreExact as Symmetry
 import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 
@@ -192,7 +193,105 @@ f9FrobeniusOrbitPresentation =
     transporterHitsF9
 
 ------------------------------------------------------------------------
--- 4. Six source components cannot inject into the two target components.
+-- 4. Exact equivariant quotient onto the current p=3 369 target.
+--
+-- Forget the base-field coordinate a and retain only the extension coordinate
+-- b.  Frobenius b |-> -b is literally the existing target C2 action.
+------------------------------------------------------------------------
+
+extensionCoordinate : F9Point -> Small.ConstantTernaryState
+extensionCoordinate (f9 a z3) = Triadic.zeroTrit
+extensionCoordinate (f9 a o3) = Triadic.positiveTrit
+extensionCoordinate (f9 a t3) = Triadic.negativeTrit
+
+extensionCoordinateSurjective :
+  (target : Small.ConstantTernaryState) ->
+  F9Point
+extensionCoordinateSurjective Triadic.zeroTrit = f9 z3 z3
+extensionCoordinateSurjective Triadic.positiveTrit = f9 z3 o3
+extensionCoordinateSurjective Triadic.negativeTrit = f9 z3 t3
+
+extensionCoordinateSurjectiveCorrect :
+  (target : Small.ConstantTernaryState) ->
+  extensionCoordinate (extensionCoordinateSurjective target) ≡ target
+extensionCoordinateSurjectiveCorrect Triadic.zeroTrit = refl
+extensionCoordinateSurjectiveCorrect Triadic.positiveTrit = refl
+extensionCoordinateSurjectiveCorrect Triadic.negativeTrit = refl
+
+extensionCoordinateEquivariant :
+  (g : C2.C2) (x : F9Point) ->
+  extensionCoordinate (actF9 g x)
+  ≡ Small.actConstantC2 g (extensionCoordinate x)
+extensionCoordinateEquivariant C2.identity x = refl
+extensionCoordinateEquivariant C2.flip (f9 z3 z3) = refl
+extensionCoordinateEquivariant C2.flip (f9 o3 z3) = refl
+extensionCoordinateEquivariant C2.flip (f9 t3 z3) = refl
+extensionCoordinateEquivariant C2.flip (f9 z3 o3) = refl
+extensionCoordinateEquivariant C2.flip (f9 o3 o3) = refl
+extensionCoordinateEquivariant C2.flip (f9 t3 o3) = refl
+extensionCoordinateEquivariant C2.flip (f9 z3 t3) = refl
+extensionCoordinateEquivariant C2.flip (f9 o3 t3) = refl
+extensionCoordinateEquivariant C2.flip (f9 t3 t3) = refl
+
+f9ExtensionCoordinateActionFunctor :
+  Recognition.ActionRecognitionFunctor
+    f9FrobeniusAction
+    Small.constantC2Action
+f9ExtensionCoordinateActionFunctor =
+  Recognition.action-recognition-functor
+    extensionCoordinate
+    (λ g -> g)
+    refl
+    (λ g h -> refl)
+    (λ g -> refl)
+    extensionCoordinateEquivariant
+
+f9OrbitToP3Orbit :
+  F9FrobeniusOrbit -> Small.ConstantTernaryOrbit
+f9OrbitToP3Orbit fixed0 = Small.zeroConstantOrbit
+f9OrbitToP3Orbit fixed1 = Small.zeroConstantOrbit
+f9OrbitToP3Orbit fixed2 = Small.zeroConstantOrbit
+f9OrbitToP3Orbit pair0 = Small.nonzeroConstantOrbit
+f9OrbitToP3Orbit pair1 = Small.nonzeroConstantOrbit
+f9OrbitToP3Orbit pair2 = Small.nonzeroConstantOrbit
+
+f9OrbitMapExact :
+  (x : F9Point) ->
+  Small.constantOrbitOf
+    (extensionCoordinate x)
+  ≡
+  f9OrbitToP3Orbit (classifyF9 x)
+f9OrbitMapExact (f9 z3 z3) = refl
+f9OrbitMapExact (f9 o3 z3) = refl
+f9OrbitMapExact (f9 t3 z3) = refl
+f9OrbitMapExact (f9 z3 o3) = refl
+f9OrbitMapExact (f9 o3 o3) = refl
+f9OrbitMapExact (f9 t3 o3) = refl
+f9OrbitMapExact (f9 z3 t3) = refl
+f9OrbitMapExact (f9 o3 t3) = refl
+f9OrbitMapExact (f9 t3 t3) = refl
+
+f9ExtensionCoordinateOrbitRecognition :
+  Recognition.OrbitRecognition
+    f9ExtensionCoordinateActionFunctor
+    f9FrobeniusOrbitPresentation
+    Small.constantTernaryOrbitPresentation
+f9ExtensionCoordinateOrbitRecognition =
+  Recognition.orbit-recognition
+    f9OrbitToP3Orbit
+    f9OrbitMapExact
+
+f9ExtensionCoordinateNotPi0Embedding :
+  Recognition.Pi0Embedding
+    f9ExtensionCoordinateOrbitRecognition
+  ->
+  ⊥
+f9ExtensionCoordinateNotPi0Embedding embedding =
+  fixed0NotFixed1
+    (Recognition.reflectsOrbitEquality embedding refl)
+
+------------------------------------------------------------------------
+-- 5. Six source components cannot inject into the two target components.
 ------------------------------------------------------------------------
 
 fixed0NotFixed1 : fixed0 ≡ fixed1 -> ⊥
@@ -226,7 +325,7 @@ noInjectiveF9OrbitToP3Target mapOrbit injective
   fixed0NotFixed1 (injective fixed0 fixed1 refl)
 
 ------------------------------------------------------------------------
--- 5. No full arithmetic -> 369 recognition can use the whole F9 carrier.
+-- 6. No full arithmetic -> 369 recognition can use the whole F9 carrier.
 ------------------------------------------------------------------------
 
 noFullF9FrobeniusRecognitionToP3 :
@@ -263,7 +362,7 @@ noFullF9FrobeniusRecognitionToP3 functor full =
         same
 
 ------------------------------------------------------------------------
--- 6. Boundary.
+-- 7. Boundary.
 ------------------------------------------------------------------------
 
 candidateClaimOrigin : Source.ClaimOrigin
@@ -275,6 +374,9 @@ record P3F9FrobeniusCandidateBoundary : Set where
     literalNinePointCarrierConstructed : Bool
     literalOrderTwoFrobeniusActionConstructed : Bool
     exactSixOrbitPresentationConstructed : Bool
+    extensionCoordinateQuotientFunctorConstructed : Bool
+    extensionCoordinateSurjectiveOnTargetStates : Bool
+    extensionCoordinateFailsPi0Embedding : Bool
     fullRecognitionNoGoProvedAtRecognitionInterface : Bool
     wholeF9CarrierCanFullyRecognizeTwoOrbit369Target : Bool
     markedQuotientOrSubcarrierStillOpen : Bool
@@ -284,4 +386,6 @@ canonicalP3F9FrobeniusCandidateBoundary :
   P3F9FrobeniusCandidateBoundary
 canonicalP3F9FrobeniusCandidateBoundary =
   p3-f9-frobenius-candidate-boundary
-    true true true true false true false
+    true true true
+    true true true
+    true false true false
