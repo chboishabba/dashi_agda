@@ -33,6 +33,7 @@ import DASHI.Core.AdmissibleReachability as Reachability
 import DASHI.Core.FutureObservationLanguageQuotientExact as FutureLanguage
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
+import DASHI.Core.ResourceIndexedObserverRefinementExact as Resource
 import DASHI.Core.TypedDependencyCore as Dependency
 
 record AdmissibleConsumerProblem
@@ -183,6 +184,33 @@ record OperationallyAdequate
       coarseAnswer (project problem state)
 
 open OperationallyAdequate public
+
+BudgetProjectRealizable :
+  ∀ {State Observation : Set} →
+  ((State → Observation) → Nat) →
+  Nat →
+  (State → Observation) →
+  Set
+BudgetProjectRealizable cost budget project =
+  Resource.WithinBudget budget (cost project)
+
+BudgetedOperationallyAdequate :
+  ∀ {State Action Observation QueryIndex Answer : Set} →
+  ((State → Observation) → Nat) →
+  Nat →
+  ((Observation → Answer) → Set) →
+  (problem :
+    AdmissibleConsumerProblem
+      State Action Observation QueryIndex Answer) →
+  QueryIndex →
+  Set₁
+BudgetedOperationallyAdequate
+    cost budget AnswerRealizable problem query =
+  OperationallyAdequate
+    (BudgetProjectRealizable cost budget)
+    AnswerRealizable
+    problem
+    query
 
 operationalAdequacyImpliesPresentAdequacy :
   ∀ {State Action Observation QueryIndex Answer}
