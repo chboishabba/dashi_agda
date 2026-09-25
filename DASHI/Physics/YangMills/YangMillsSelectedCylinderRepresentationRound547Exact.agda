@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.YangMillsSelectedCylinderRepresentationRound547Ex
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
@@ -147,16 +148,42 @@ cylinderGeneratorIntegralIsProjectiveMass :
             (projectiveEvents inputs))
           cutoff))
       event)
-cylinderGeneratorIntegralIsProjectiveMass inputs cutoff event
-  rewrite selectedCylinderIsLiteralIndicator inputs event
-        | extensionIndicatorIsLiteralIndicator inputs cutoff event =
-  R534.extensionAgreesWithCylinderMass
-    (extensionAuthority inputs)
-    (R538.asPositiveProjectiveCylinderProbability
-      (projectiveEvents inputs))
-    (eventAlgebraLaws inputs)
-    (continuity inputs)
-    cutoff event
+cylinderGeneratorIntegralIsProjectiveMass inputs cutoff event =
+  let
+    authority = extensionAuthority inputs
+    measure = representedMeasure inputs
+
+    sameGenerator :
+      asObservable
+        (selectedClass inputs)
+        (cylinderIndicator (selectedClass inputs) event)
+      ≡
+      R534.indicatorAt authority cutoff event
+    sameGenerator =
+      trans
+        (selectedCylinderIsLiteralIndicator inputs event)
+        (sym (extensionIndicatorIsLiteralIndicator inputs cutoff event))
+
+    integralSame :
+      R534.integrate authority measure
+        (asObservable
+          (selectedClass inputs)
+          (cylinderIndicator (selectedClass inputs) event))
+      ≡
+      R534.integrate authority measure
+        (R534.indicatorAt authority cutoff event)
+    integralSame =
+      cong (R534.integrate authority measure) sameGenerator
+  in
+  trans
+    integralSame
+    (R534.extensionAgreesWithCylinderMass
+      authority
+      (R538.asPositiveProjectiveCylinderProbability
+        (projectiveEvents inputs))
+      (eventAlgebraLaws inputs)
+      (continuity inputs)
+      cutoff event)
 
 round547CylinderGeneratorRepresentationCompilerLevel : ProofLevel
 round547CylinderGeneratorRepresentationCompilerLevel = machineChecked
