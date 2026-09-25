@@ -308,7 +308,7 @@ def extended_diagnostics(checker, s, D):
         # valid Agda record layouts are currently tree-sitter grammar gaps and
         # yield an empty field map; treating that as "record has no fields"
         # manufactures TSAGDA060/062 false positives.
-        if not target.fields:
+        if not target.field_surface_complete:
             continue
         assignments = _assignment_map(record_expr)
 
