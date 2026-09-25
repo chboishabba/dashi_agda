@@ -225,3 +225,9 @@ import DASHI.Moonshine.OggSSPP2ConsumerRelativeQuotientExact
 import DASHI.Moonshine.OggSSPP3F9ExtensionQuotientCandidateExact
 
 import DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact
+
+import DASHI.Moonshine.OggSSPP3F9ExtensionQuotientSourceExact
+
+import DASHI.Moonshine.OggSSPP2RetainedCMMarkedSourceExact
+
+import DASHI.Moonshine.OggSSPArithmeticTo369InhabitedExact
