@@ -3,8 +3,9 @@ module DASHI.Physics.Foundations.CMP119AntigravityBetaTraceBridgeExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _<_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 ------------------------------------------------------------------------
@@ -53,9 +54,29 @@ betaF2ProductNegative :
     * fieldStrengthSquareNumerator attachment
   < 0ℚ
 betaF2ProductNegative attachment =
-  ℚP.*-negative
-    (betaTraceCoefficientNegative attachment)
-    (fieldStrengthSquareNumeratorPositive attachment)
+  let
+    f2 = fieldStrengthSquareNumerator attachment
+
+    instance
+      f2Positive : Positive f2
+      f2Positive = positive (fieldStrengthSquareNumeratorPositive attachment)
+
+    scaled :
+      f2 * betaTraceCoefficient attachment < f2 * 0ℚ
+    scaled =
+      ℚP.*-monoˡ-<-pos f2
+        (betaTraceCoefficientNegative attachment)
+  in
+  subst
+    (λ left → left < 0ℚ)
+    (ℚRing.solve-∀
+      (betaTraceCoefficient attachment)
+      f2)
+    (subst
+      (λ right →
+        f2 * betaTraceCoefficient attachment < right)
+      (ℚRing.solve-∀ f2)
+      scaled)
 
 betaTraceAttachmentGivesQuantumTraceNegative :
   ∀ {selectedQuantumTraceNumerator}
