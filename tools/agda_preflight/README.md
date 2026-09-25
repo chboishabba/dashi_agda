@@ -46,7 +46,7 @@ The production-facing hot path is now `dashi-agda`, not pytest:
 ```bash
 dashi-agda diagnose DASHI/Biology/Everything.agda --profile
 dashi-agda next-error DASHI/Biology/Everything.agda --require-fix --json
-dashi-agda benchmark DASHI/Biology/Everything.agda --runs 7
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 7 --jobs 8
 ```
 
 `diagnose` never invokes Agda. It uses a persistent SQLite/WAL source index
@@ -153,6 +153,52 @@ every warm run parses zero files
 ```
 
 A benchmark exits nonzero if any of those conditions fail.
+
+### Parallel cold bootstrap
+
+A genuinely cold target now uses two parallel tree-sitter phases and one parent
+SQLite transaction:
+
+```text
+parallel import-surface discovery
+  -> dependency closure
+  -> parallel structural diagnostic batches
+       (one persistent Checker per worker)
+  -> parent computes API/dependency fingerprints
+  -> one SQLite/WAL batch transaction
+```
+
+Workers never write SQLite. This avoids WAL contention and lets each process
+reuse parsed dependency summaries across its assigned chunk.
+
+`--jobs 0` selects up to eight workers automatically; `--jobs 1` keeps the
+legacy sequential refresh path. For the large Biology rollup, compare the new
+cold path explicitly rather than relying on one wall-clock number:
+
+```bash
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 3 --jobs 2 --json
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 3 --jobs 4 --json
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 3 --jobs 8 --json
+```
+
+Cold telemetry includes:
+
+```text
+cold.import_discovery        wall time
+cold.parallel_diagnostics    wall time
+cold.worker_parse            cumulative worker parse time
+cold.worker_diagnostics      cumulative worker rule time
+db.batch_write               one parent transaction
+
+cold_workers
+cold_modules_discovered
+cold_worker_files_parsed
+```
+
+`cold_worker_files_parsed` deliberately counts dependency parses inside
+workers as well as requested modules. If it substantially exceeds the closure
+size, worker-level dependency duplication is measurable and becomes the next
+optimization target instead of being hidden by process parallelism.
 
 ### Last-known-good semantic catalog
 
