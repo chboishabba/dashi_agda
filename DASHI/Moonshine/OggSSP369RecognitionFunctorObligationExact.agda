@@ -26,6 +26,7 @@ import DASHI.Core.ResidualSymmetryCollisionFibreExact as Action
 import DASHI.Core.OrbitStabilizerResidualPresentationExact as Orbit
 import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualCodecExact as Codec
 import DASHI.Moonshine.OggSSPSmallCharacteristicCodecIndexedRecognitionExact as LaneCodec
@@ -211,12 +212,30 @@ p2RetainedOrientationCodecReopensExactly :
 p2RetainedOrientationCodecReopensExactly =
   Codec.p2DecodeEncodeExact
 
+p2RecognitionLaneKey : LaneCodec.ExactOggLaneKey
+p2RecognitionLaneKey = LaneCodec.p2LaneKey
+
+p3RecognitionLaneKey : LaneCodec.ExactOggLaneKey
+p3RecognitionLaneKey = LaneCodec.p3LaneKey
+
+p2RecognitionLaneDecodesExactly :
+  LaneCodec.decodeExactLaneKey p2RecognitionLaneKey
+  ≡ LaneCodec.lane p2RecognitionLaneKey
+p2RecognitionLaneDecodesExactly =
+  LaneCodec.decodeExactLaneKeyCorrect p2RecognitionLaneKey
+
+p3RecognitionLaneDecodesExactly :
+  LaneCodec.decodeExactLaneKey p3RecognitionLaneKey
+  ≡ LaneCodec.lane p3RecognitionLaneKey
+p3RecognitionLaneDecodesExactly =
+  LaneCodec.decodeExactLaneKeyCorrect p3RecognitionLaneKey
+
 p2FiveOrbitProjectionCannotReopenTenCarrier :
-  (recover : DASHI.Biology.TriadicKernelLiftQuotientExact.NineOrbit →
+  (recover : Triadic.NineOrbit →
     Small.P2ResidualObject) →
   ((state : Small.P2ResidualObject) →
     recover (Codec.p2Project state) ≡ state) →
-  (orbit : DASHI.Biology.TriadicKernelLiftQuotientExact.NineOrbit) →
+  (orbit : Triadic.NineOrbit) →
   ⊥
 p2FiveOrbitProjectionCannotReopenTenCarrier =
   Codec.p2CoarseProjectionHasNoLeftInverse
