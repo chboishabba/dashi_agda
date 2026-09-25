@@ -258,3 +258,6 @@ import DASHI.Physics.Foundations.CMP119FlatSide4CurvatureStressExact
 import DASHI.Physics.Foundations.CMP119NormalizedTargetTraceSplitExact
 
 import DASHI.Physics.Foundations.CMP119FourDiagonalFiniteD1ActiveStressExact
+
+import DASHI.Physics.Foundations.CMP119FourD1LocalizedPositiveGRepulsionExact
+import DASHI.Physics.Foundations.CMP119AntigravitySourceMaxCutExact
