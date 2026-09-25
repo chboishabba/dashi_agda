@@ -167,6 +167,97 @@ canonicalCompatibleThreeCellBoundary =
     canonicalCellCA
     refl refl refl
 
+
+------------------------------------------------------------------------
+-- 3b. Exact six-cell chart of a compatible structured boundary.
+--
+-- Endpoint sharing means the boundary carries six independent T^3 cells:
+--
+--   A, B, C, S_AB, S_BC, S_CA.
+--
+-- Hence its finite carrier chart has 6 * 3 = 18 ternary coordinates and
+-- 27^6 = 3^18 states before the irreducible face coordinate is added.
+------------------------------------------------------------------------
+
+record StructuredBoundaryCoordinates : Set where
+  constructor structured-boundary-coordinates
+  field
+    cellA cellB cellC : TrialecticBasis3Cell
+    cellSAB cellSBC cellSCA : TrialecticBasis3Cell
+
+open StructuredBoundaryCoordinates public
+
+coordinatesToCompatibleBoundary :
+  StructuredBoundaryCoordinates →
+  CompatibleThreeCellTrialecticBoundary
+coordinatesToCompatibleBoundary coordinates =
+  compatible-three-cell-trialectic-boundary
+    (cell-dialectic
+      (cellA coordinates)
+      (cellB coordinates)
+      (cellSAB coordinates))
+    (cell-dialectic
+      (cellB coordinates)
+      (cellC coordinates)
+      (cellSBC coordinates))
+    (cell-dialectic
+      (cellC coordinates)
+      (cellA coordinates)
+      (cellSCA coordinates))
+    refl refl refl
+
+compatibleBoundaryToCoordinates :
+  CompatibleThreeCellTrialecticBoundary →
+  StructuredBoundaryCoordinates
+compatibleBoundaryToCoordinates boundary =
+  structured-boundary-coordinates
+    (leftCell (edgeAB boundary))
+    (rightCell (edgeAB boundary))
+    (rightCell (edgeBC boundary))
+    (synthesisCell (edgeAB boundary))
+    (synthesisCell (edgeBC boundary))
+    (synthesisCell (edgeCA boundary))
+
+coordinatesBoundaryRoundTrip :
+  (coordinates : StructuredBoundaryCoordinates) →
+  compatibleBoundaryToCoordinates
+    (coordinatesToCompatibleBoundary coordinates)
+  ≡ coordinates
+coordinatesBoundaryRoundTrip
+  (structured-boundary-coordinates a b c sab sbc sca) = refl
+
+boundaryCoordinatesRoundTrip :
+  (boundary : CompatibleThreeCellTrialecticBoundary) →
+  coordinatesToCompatibleBoundary
+    (compatibleBoundaryToCoordinates boundary)
+  ≡ boundary
+boundaryCoordinatesRoundTrip
+  (compatible-three-cell-trialectic-boundary
+    (cell-dialectic a b sab)
+    (cell-dialectic b' c sbc)
+    (cell-dialectic c' a' sca)
+    shareB shareC shareA)
+  rewrite shareB | shareC | shareA = refl
+
+structuredBoundaryTernaryCoordinateCount : Nat
+structuredBoundaryTernaryCoordinateCount = 6 * 3
+
+structuredBoundaryTernaryCoordinateCountIsEighteen :
+  structuredBoundaryTernaryCoordinateCount ≡ 18
+structuredBoundaryTernaryCoordinateCountIsEighteen = refl
+
+powNat : Nat → Nat → Nat
+powNat base zero = 1
+powNat base (suc exponent) =
+  base * powNat base exponent
+
+structuredBoundaryStateCount : Nat
+structuredBoundaryStateCount = powNat 27 6
+
+structuredBoundaryStateCountIs387420489 :
+  structuredBoundaryStateCount ≡ 387420489
+structuredBoundaryStateCountIs387420489 = refl
+
 ------------------------------------------------------------------------
 -- 4. The irreducible face remains additional even after structured gluing.
 ------------------------------------------------------------------------
@@ -318,6 +409,7 @@ record TrialecticThreeCellHyperformBoundary : Set where
     cellDialecticRechartsToExistingT9Hyperform : Bool
     cellDialecticHas19683States : Bool
     threeStructuredDialecticsMayGlueCyclically : Bool
+    compatibleBoundaryHasT18SixCellChart : Bool
     structuredBoundaryDeterminesTriadicFace : Bool
     secondOrderSynthesisIsFullCellRatherThanScalar : Bool
     typedHyperfabricSheafLikeSubstrateAlreadyExists : Bool
@@ -328,6 +420,7 @@ canonicalTrialecticThreeCellHyperformBoundary :
   TrialecticThreeCellHyperformBoundary
 canonicalTrialecticThreeCellHyperformBoundary =
   trialectic-three-cell-hyperform-boundary
+    true
     true
     true
     true
