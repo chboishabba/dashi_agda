@@ -327,11 +327,7 @@ toSecondOrderCellGluing {law} section = record
   ; Cell.mediates =
       λ face edgeAB edgeBC edgeCA output →
         law
-          (Cell.compatible-three-cell-trialectic-boundary
-            edgeAB edgeBC edgeCA
-            (RelSheaf.agreesAtB (localCompatibility section))
-            (RelSheaf.agreesAtC (localCompatibility section))
-            (sym (RelSheaf.agreesAtA (localCompatibility section))))
+          (mediatedDescendedBoundary section)
           face
           output
   ; Cell.mediationReceipt = faceMediation section
