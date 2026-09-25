@@ -32,7 +32,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc; _+_; _≤_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
+open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NatP
 open import Data.Maybe.Base using (Maybe; nothing)
 
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
@@ -247,8 +249,7 @@ specializeSize :
     (programSize program)
     (programSize static)
 specializeSize program static =
-  Agda.Builtin.Nat._≤_.s≤s
-    (Data.Nat.Base.≤-refl)
+  NatP.≤-refl
 
 ------------------------------------------------------------------------
 -- Sized partial-system instance.
