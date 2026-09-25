@@ -36,6 +36,8 @@ import DASHI.Physics.YangMills.YangMillsWilsonLocalObservableFamilyRound529Exact
 import DASHI.Physics.YangMills.YangMillsSelectedCylinderRepresentationRound547Exact as R547
 import DASHI.Physics.YangMills.YangMillsSelectedCylinderFunctionClosureRound553Exact as R553
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
+import DASHI.Physics.YangMills.BalabanScalarCylinderExpectationLimitExact as Cylinder
+import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as R534
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -45,7 +47,7 @@ record ProjectiveConfigurationProjection
     (Configuration : Set) : Set₁ where
   field
     FiniteConfiguration : Nat → Set
-    project : Nat → Configuration → FiniteConfiguration
+    project : (cutoff : Nat) → Configuration → FiniteConfiguration cutoff
 
 open ProjectiveConfigurationProjection public
 
@@ -103,7 +105,7 @@ wilsonHasFiniteProjectionSupport wilson projection capture group position = reco
   ; determinedByCutoff =
       λ left right sameProjection →
         R529.wilsonObservableLocal
-          (R530.R529.source
+          (R529.source
             (R530.asWilsonLocalObservableFamily wilson)
             group)
           position left right
@@ -142,10 +144,10 @@ record FiniteProjectionConvergenceAuthority
     finiteSupportConvergesToProjectiveIntegral :
       ∀ observable →
       FiniteProjectionSupport projection observable →
-      DASHI.Physics.YangMills.BalabanScalarCylinderExpectationLimitExact.Converges
+      Cylinder.Converges
         (RealLimit.canonicalCylinderAlgebra limitLaws)
         (λ cutoff → Limit.finiteExpectation family cutoff observable)
-        (DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact.integrate
+        (R534.integrate
           (R547.extensionAuthority representation)
           (R547.representedMeasure representation)
           observable)
