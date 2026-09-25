@@ -35,8 +35,8 @@ record RealSU2TraceConvention
 open RealSU2TraceConvention public
 
 realSU2TraceCoefficient :
-  Embed.OrderedRationalRealEmbedding →
-  RealSU2TraceConvention _ →
+  (embedding : Embed.OrderedRationalRealEmbedding) →
+  RealSU2TraceConvention embedding →
   ℝ
 realSU2TraceCoefficient embedding convention =
   Embed.embed embedding SU2.su2TraceRationalCoefficient
