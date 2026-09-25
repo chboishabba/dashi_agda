@@ -31,9 +31,6 @@ import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoB
 --   publication identity is not title equality and does not require a QID
 ------------------------------------------------------------------------
 
-attributedSourceReceipt : Attr.GenericReceipt.GenericReceipt
-attributedSourceReceipt = Attr.canonicalAttributedSourceCoreReceipt
-
 slrReviewBoundary : Review.DigitalESDSLRBridgeBoundary
 slrReviewBoundary = Review.canonicalDigitalESDSLRBridgeBoundary
 
