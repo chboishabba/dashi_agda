@@ -27,6 +27,8 @@ import DASHI.Core.OrbitStabilizerResidualPresentationExact as Orbit
 import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
+import DASHI.Moonshine.OggSSPSmallCharacteristicResidualCodecExact as Codec
+import DASHI.Moonshine.OggSSPSmallCharacteristicCodecIndexedRecognitionExact as LaneCodec
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 
 ------------------------------------------------------------------------
@@ -195,8 +197,29 @@ p3MappedFlipDoesNotFixNonzeroRepresentative target targetFix =
       targetFix)
 
 ------------------------------------------------------------------------
--- 3. p=2 fork remains explicit at recognition level.
+-- 3. p=2 target semantics after codec cross-pollination.
+--
+-- The five-orbit projection is now known to have no left inverse on the
+-- ten-object carrier.  Retained orientation is therefore not optional if the
+-- target is required to reconstruct that carrier exactly.  What remains open
+-- is whether the arithmetic supersingular/Fricke source is the same object.
 ------------------------------------------------------------------------
+
+p2RetainedOrientationCodecReopensExactly :
+  (state : Small.P2ResidualObject) →
+  Codec.p2Decode (Codec.p2Encode state) ≡ state
+p2RetainedOrientationCodecReopensExactly =
+  Codec.p2DecodeEncodeExact
+
+p2FiveOrbitProjectionCannotReopenTenCarrier :
+  (recover : DASHI.Biology.TriadicKernelLiftQuotientExact.NineOrbit →
+    Small.P2ResidualObject) →
+  ((state : Small.P2ResidualObject) →
+    recover (Codec.p2Project state) ≡ state) →
+  (orbit : DASHI.Biology.TriadicKernelLiftQuotientExact.NineOrbit) →
+  ⊥
+p2FiveOrbitProjectionCannotReopenTenCarrier =
+  Codec.p2CoarseProjectionHasNoLeftInverse
 
 data ArithmeticRecognizesP2GaugeQuotient : Set where
 data ArithmeticRecognizesP2RetainedOrientation : Set where
@@ -247,7 +270,11 @@ record OggSSP369RecognitionFunctorBoundary : Set where
     p3NonzeroFlipNonstabilizerMustBeReflected : Bool
     p2GaugeSourceAvailable : Bool
     p2RetainedOrientationSourceAvailable : Bool
+    p2RetainedOrientationExactCodecOwned : Bool
+    p2CoarseFiveOrbitProjectionProvablyLossy : Bool
     p2ForkResolvedByCardinality : Bool
+    p2ExactLaneKeyOwned : Bool
+    p3ExactLaneKeyOwned : Bool
     targetArithmetic369GroupoidConstructed : Bool
     fullRecognitionRequiresPi0Bijection : Bool
     fullRecognitionRequiresStabilizerPreservationReflection : Bool
@@ -258,5 +285,5 @@ canonicalOggSSP369RecognitionFunctorBoundary :
 canonicalOggSSP369RecognitionFunctorBoundary =
   ogg-ssp369-recognition-functor-boundary
     true true true true
-    true true false false
+    true true true true false true true false
     true true true
