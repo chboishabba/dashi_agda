@@ -27,6 +27,8 @@ import DASHI.Physics.YangMills.YangMillsPositiveProjectiveCylinderProbabilityRou
 import DASHI.Physics.YangMills.YangMillsCylinderEventBooleanAlgebraRound539Exact as R539
 import DASHI.Physics.YangMills.YangMillsProjectiveCylinderMeasureRepresentationRound534Exact as R534
 import DASHI.Physics.YangMills.YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact as R535
+import DASHI.Physics.YangMills.YangMillsSelectedCylinderRepresentationRound547Exact as R547
+import DASHI.Physics.YangMills.YangMillsSelectedWilsonFiniteProjectionRound565Exact as R565
 import DASHI.Physics.YangMills.BalabanRealSequenceLimitByVanishingErrorExact as Seq
 import DASHI.Physics.YangMills.BalabanCanonicalRealLimitAlgebraExact as RealLimit
 import DASHI.Physics.YangMills.BalabanNormalizedExpectationConvergenceExact as Quotient
@@ -132,4 +134,43 @@ literalPhysicalProjectiveCylinderSource
       extensionIndicatorIsLiteralIndicator
   ; R535.PhysicalProjectiveCylinderRepresentationInputs.sourceExpectationIsExtendedIntegral =
       sourceExpectationIsExtendedIntegral
+  }
+
+
+------------------------------------------------------------------------
+-- A3.5: selected Wilson finite projection on the SAME projective system.
+--
+-- R568 supplies the path-edge factorization itself.  The remaining physical
+-- realization is exactly R565.FiniteProjectionProjectiveAuthority; once that
+-- same-system theorem is supplied, this constructor closes the selected
+-- Wilson finite-cylinder input with no additional representation layer.
+------------------------------------------------------------------------
+
+literalSelectedWilsonFiniteProjection :
+  ∀ {Configuration Event sequenceLimit limitLaws quotient division family}
+    {representation :
+      R547.SelectedCylinderRepresentationInputs
+        Configuration Event
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family}
+    (factorization :
+      R565.FiniteProjectiveFactorization
+        Configuration
+        (R547.SelectedObservable (R547.selectedClass representation))
+        (R547.asObservable (R547.selectedClass representation)))
+    (projectiveAuthority :
+      R565.FiniteProjectionProjectiveAuthority
+        Configuration Event
+        {sequenceLimit = sequenceLimit}
+        limitLaws quotient division family representation factorization) →
+  R565.SelectedWilsonFiniteProjectionInputs
+    Configuration Event
+    {sequenceLimit = sequenceLimit}
+    limitLaws quotient division family representation
+literalSelectedWilsonFiniteProjection
+    factorization projectiveAuthority = record
+  { R565.SelectedWilsonFiniteProjectionInputs.factorization =
+      factorization
+  ; R565.SelectedWilsonFiniteProjectionInputs.projectiveAuthority =
+      projectiveAuthority
   }
