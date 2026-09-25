@@ -16,6 +16,7 @@ module DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ArgumentResponseNonGeometricOppositeBidiExact as Opposition
 import DASHI.Core.RelationalSelfStalkExact as Self
 import DASHI.Core.RelationalSelfDescentExact as SelfDescent
@@ -222,12 +223,18 @@ mediationBehaviourDoesNotEstablishSecureCapacity ()
 -- Donor theorem surfaces retained explicitly.
 ------------------------------------------------------------------------
 
+threeDyadsDoNotRecoverFace :
+  Descent.FactorsThrough Face.boundaryObserver Face.faceConsumer → ⊥
 threeDyadsDoNotRecoverFace =
   Face.triadicFaceCannotFactorThroughThreeEdges
 
+actionDoesNotRecoverFineDecisionState :
+  NF.FactorsThrough ActionNF.observedAction ActionNF.fineDecisionState → ⊥
 actionDoesNotRecoverFineDecisionState =
   ActionNF.actionCannotRecoverFineDecisionState
 
+alternativeExplanationIsNotAntipode :
+  Opposition.AlternativeExplanationIsGeometricAntipode → ⊥
 alternativeExplanationIsNotAntipode =
   Opposition.alternativeExplanationIsNotGeometricAntipode
 
