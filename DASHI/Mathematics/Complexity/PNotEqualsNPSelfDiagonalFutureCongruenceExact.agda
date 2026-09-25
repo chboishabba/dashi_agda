@@ -516,6 +516,308 @@ futureEquivalentImpliesSatisfiabilityEquivalent
           (SAT.evaluatesTrue witness))
 
 ------------------------------------------------------------------------
+-- Exact same-layer residual-function relation.
+------------------------------------------------------------------------
+
+SameLayerResidualFunction :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  Family.RestrictionNode root →
+  Family.RestrictionNode root →
+  Set
+SameLayerResidualFunction left right =
+  Σ
+    (Family.currentVariables left
+      ≡ Family.currentVariables right)
+    (λ sameArity →
+      (assignment :
+        SAT.Assignment (Family.currentVariables left)) →
+      SAT.evaluate
+          (Family.currentFormula left)
+          assignment
+      ≡
+      SAT.evaluate
+          (Family.currentFormula right)
+          (transportAssignment sameArity assignment))
+
+futureEquivalentGivesSameLayerResidualFunction :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Family.RestrictionNode root} →
+  (sameArity :
+    Family.currentVariables left
+    ≡ Family.currentVariables right) →
+  Future.FutureEquivalent
+    (restrictionActionSystem root)
+    restrictionObservation
+    left
+    right →
+  SameLayerResidualFunction left right
+futureEquivalentGivesSameLayerResidualFunction
+    sameArity
+    future =
+  sameArity
+  ,
+  futureEquivalentImpliesPointwiseEvaluationEqual
+    sameArity
+    future
+
+sameLayerResidualFunctionRefinesCurrent :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Family.RestrictionNode root} →
+  SameLayerResidualFunction left right →
+  Future.CurrentEquivalent
+    restrictionObservation
+    left
+    right
+sameLayerResidualFunctionRefinesCurrent
+    {left = left}
+    {right = right}
+    (sameArity , pointwise)
+    with Family.currentVariables left
+       | Family.currentVariables right
+       | sameArity
+... | zero | .zero | refl =
+  cong terminal
+    (pointwise emptyAssignment)
+... | suc remaining | .(suc remaining) | refl =
+  refl
+
+sameLayerResidualFunctionAfterCommonRestriction :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Family.RestrictionNode root}
+    {bit : Bool} →
+  SameLayerResidualFunction left right →
+  (leftAdmissible : NonTerminal left) →
+  (rightAdmissible : NonTerminal right) →
+  SameLayerResidualFunction
+    (restrictedNode left bit leftAdmissible)
+    (restrictedNode right bit rightAdmissible)
+sameLayerResidualFunctionAfterCommonRestriction
+    {left = left}
+    {right = right}
+    {bit}
+    (sameArity , pointwise)
+    (leftRemaining , leftArity)
+    (rightRemaining , rightArity)
+    with leftArity | rightArity | sameArity | bit
+... | refl | refl | refl | false =
+  refl
+  ,
+  λ assignment →
+    trans
+      (SAT.restrictionEvaluation
+        false
+        (Family.currentFormula left)
+        assignment)
+      (trans
+        (pointwise
+          (SAT.extendAssignment false assignment))
+        (sym
+          (SAT.restrictionEvaluation
+            false
+            (Family.currentFormula right)
+            assignment)))
+... | refl | refl | refl | true =
+  refl
+  ,
+  λ assignment →
+    trans
+      (SAT.restrictionEvaluation
+        true
+        (Family.currentFormula left)
+        assignment)
+      (trans
+        (pointwise
+          (SAT.extendAssignment true assignment))
+        (sym
+          (SAT.restrictionEvaluation
+            true
+            (Family.currentFormula right)
+            assignment)))
+
+sameLayerResidualFunctionClosedUnderCommonTrace :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {actions}
+    {left right leftAfter rightAfter :
+      Family.RestrictionNode root} →
+  SameLayerResidualFunction left right →
+  Reachability.Executes
+    (restrictionActionSystem root)
+    actions
+    left
+    leftAfter →
+  Reachability.Executes
+    (restrictionActionSystem root)
+    actions
+    right
+    rightAfter →
+  SameLayerResidualFunction leftAfter rightAfter
+sameLayerResidualFunctionClosedUnderCommonTrace
+    related
+    Reachability.executesNil
+    Reachability.executesNil =
+  related
+sameLayerResidualFunctionClosedUnderCommonTrace
+    related
+    (Reachability.executesCons leftAction leftRest)
+    (Reachability.executesCons rightAction rightRest) =
+  sameLayerResidualFunctionClosedUnderCommonTrace
+    nextRelated
+    leftRest
+    rightRest
+  where
+    leftProof :
+      NonTerminal _
+    leftProof =
+      proj₁
+        (Dependency.postcondition leftAction)
+
+    rightProof :
+      NonTerminal _
+    rightProof =
+      proj₁
+        (Dependency.postcondition rightAction)
+
+    leftAfterExact :
+      Dependency.after leftAction
+      ≡
+      restrictedNode _ _ leftProof
+    leftAfterExact =
+      proj₂
+        (Dependency.postcondition leftAction)
+
+    rightAfterExact :
+      Dependency.after rightAction
+      ≡
+      restrictedNode _ _ rightProof
+    rightAfterExact =
+      proj₂
+        (Dependency.postcondition rightAction)
+
+    restrictedRelated :
+      SameLayerResidualFunction
+        (restrictedNode _ _ leftProof)
+        (restrictedNode _ _ rightProof)
+    restrictedRelated =
+      sameLayerResidualFunctionAfterCommonRestriction
+        related
+        leftProof
+        rightProof
+
+    nextRelated :
+      SameLayerResidualFunction
+        (Dependency.after leftAction)
+        (Dependency.after rightAction)
+    nextRelated
+      rewrite leftAfterExact | rightAfterExact =
+      restrictedRelated
+
+sameLayerResidualFunctionIsDynamicallyCongruent :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables} →
+  Future.DynamicallyCongruentRefinement
+    (restrictionActionSystem root)
+    restrictionObservation
+    SameLayerResidualFunction
+sameLayerResidualFunctionIsDynamicallyCongruent =
+  Future.dynamicallyCongruentRefinement
+    sameLayerResidualFunctionRefinesCurrent
+    sameLayerResidualFunctionClosedUnderCommonTrace
+
+sameLayerResidualFunctionContainedInFutureEquivalent :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Family.RestrictionNode root} →
+  SameLayerResidualFunction left right →
+  Future.FutureEquivalent
+    (restrictionActionSystem root)
+    restrictionObservation
+    left
+    right
+sameLayerResidualFunctionContainedInFutureEquivalent =
+  Future.anyCongruentRefinementIsContainedInFutureEquivalent
+    sameLayerResidualFunctionIsDynamicallyCongruent
+
+------------------------------------------------------------------------
+-- Exact characterization at fixed remaining arity.
+------------------------------------------------------------------------
+
+sameLayerFutureEquivalentIffResidualFunctionEqual :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {left right : Family.RestrictionNode root}
+    (sameArity :
+      Family.currentVariables left
+      ≡ Family.currentVariables right) →
+  (Future.FutureEquivalent
+      (restrictionActionSystem root)
+      restrictionObservation
+      left
+      right)
+  ×
+  ((assignment :
+      SAT.Assignment (Family.currentVariables left)) →
+    SAT.evaluate
+        (Family.currentFormula left)
+        assignment
+    ≡
+    SAT.evaluate
+        (Family.currentFormula right)
+        (transportAssignment sameArity assignment))
+sameLayerFutureEquivalentIffResidualFunctionEqual
+    {left = left}
+    {right = right}
+    sameArity =
+  futureFromPointwise
+  ,
+  pointwiseFromFuture
+  where
+    futureFromPointwise :
+      ((assignment :
+        SAT.Assignment (Family.currentVariables left)) →
+        SAT.evaluate
+            (Family.currentFormula left)
+            assignment
+        ≡
+        SAT.evaluate
+            (Family.currentFormula right)
+            (transportAssignment sameArity assignment))
+      →
+      Future.FutureEquivalent
+        (restrictionActionSystem root)
+        restrictionObservation
+        left
+        right
+    futureFromPointwise pointwise =
+      sameLayerResidualFunctionContainedInFutureEquivalent
+        (sameArity , pointwise)
+
+    pointwiseFromFuture :
+      Future.FutureEquivalent
+        (restrictionActionSystem root)
+        restrictionObservation
+        left
+        right
+      →
+      (assignment :
+        SAT.Assignment (Family.currentVariables left)) →
+      SAT.evaluate
+          (Family.currentFormula left)
+          assignment
+      ≡
+      SAT.evaluate
+          (Family.currentFormula right)
+          (transportAssignment sameArity assignment)
+    pointwiseFromFuture future =
+      futureEquivalentImpliesPointwiseEvaluationEqual
+        sameArity
+        future
+
+------------------------------------------------------------------------
 -- Same-layer Q1 merge relation.
 ------------------------------------------------------------------------
 
