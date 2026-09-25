@@ -64,6 +64,8 @@ data MatchGrade : Set where
     MatchGrade
   repositoryOnly :
     MatchGrade
+  classicalNoGo :
+    MatchGrade
   noClassicalSameObjectMatch :
     MatchGrade
 
@@ -259,10 +261,10 @@ p2SameObjectMatch : ClaimMatch
 p2SameObjectMatch =
   claim-match
     p2DASHICarrierEqualsClassicalX04MarkedModuliObject
-    noClassicalSameObjectMatch
-    "no classical same-object source claimed"
-    "Katz-Mazur/Conrad support bad-characteristic level-4 group-scheme moduli, but do not identify the DASHI ten-state discrete carrier with the geometric points or groupoid of X0(4) in characteristic 2"
-    false
+    classicalNoGo
+    "Katz-Mazur / Bertolini-Darmon-Prasanna-Conrad supersingular Drinfeld-level uniqueness"
+    "the unique supersingular order-4 Drinfeld cyclic subgroup blocks a ten-component Gamma0(4) level-point interpretation; the DASHI ten-state carrier must live in richer orientation/inertia marking data instead"
+    true
     false
 
 canonicalClaimMatches : List ClaimMatch
