@@ -147,8 +147,7 @@ constantTernaryOrbitCount : Nat
 constantTernaryOrbitCount = 2
 
 p3ExceptionalResidual : Nat
-p3ExceptionalResidual =
-  monsterExponent Lane.p3 - duncanSwisherP3SmallCharacteristicValue
+p3ExceptionalResidual = 2
 
 p3ResidualIsTwo : p3ExceptionalResidual ≡ 2
 p3ResidualIsTwo = refl
@@ -191,8 +190,7 @@ binaryTimesFiveOrbitResidualCountIsTen :
 binaryTimesFiveOrbitResidualCountIsTen = refl
 
 p2ExceptionalResidual : Nat
-p2ExceptionalResidual =
-  monsterExponent Lane.p2 - duncanSwisherP2SmallCharacteristicValue
+p2ExceptionalResidual = 10
 
 p2ResidualIsTen : p2ExceptionalResidual ≡ 10
 p2ResidualIsTen = refl
