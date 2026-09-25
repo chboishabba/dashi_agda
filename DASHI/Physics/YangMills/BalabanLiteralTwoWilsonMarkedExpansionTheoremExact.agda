@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedExpansionTheoremExac
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_; _≤ℝ_)
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
@@ -127,13 +128,26 @@ asCanonicalFiniteCovarianceDecaySource theorem = record
       residualDecay theorem
   }
 
-literalTwoWilsonEmbeddedCovarianceDecay =
+literalTwoWilsonEmbeddedCovarianceDecay :
+  ∀ {Measure Observable dataSet extension base data embedding}
+    (theorem :
+      LiteralTwoWilsonMarkedExpansionTheorem
+        {Measure = Measure}
+        {Observable = Observable}
+        {dataSet = dataSet}
+        {extension = extension}
+        {base = base}
+        data embedding) →
+  Embed.embed embedding
+    (R278.connectedCovarianceMagnitude extension
+      (Gram.measureSequence dataSet
+        (R445.cutoff (mixedLogResponse theorem)))
+      (R444.leftObservable data)
+      (R444.rightObservable data))
+  ≤ℝ
+  R448.sourceAmplitude (canonicalGeometry theorem) *ℝ
+    R451.physicalEnvelope (residualDecay theorem)
+      (R451.euclideanTime (residualDecay theorem))
+literalTwoWilsonEmbeddedCovarianceDecay theorem =
   R452.embeddedFiniteConnectedCovarianceBelowPhysicalEnvelope
-    ∘ asCanonicalFiniteCovarianceDecaySource
-  where
-  _∘_ :
-    ∀ {A : Set₁} {B : A → Set} {C : (a : A) → B a → Set} →
-    ((a : A) → (b : B a) → C a b) →
-    ((a : A) → B a) →
-    (a : A) → C a ((λ x → x) ( _ ))
-  _∘_ = {!!}
+    (asCanonicalFiniteCovarianceDecaySource theorem)
