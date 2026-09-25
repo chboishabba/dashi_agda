@@ -20,6 +20,8 @@ class ImportReceipt:
     module_name: str
     imports: Tuple[str, ...]
     interface: Optional[ModuleInterface] = None
+    api_base_hash: str = ""
+    public_imports: Tuple[str, ...] = ()
     files_parsed: int = 0
     parse_ns: int = 0
 
@@ -92,12 +94,18 @@ def _scan_import(path_text: str) -> ImportReceipt:
     path = Path(path_text).resolve()
     summary = _WORKER_CHECKER.parse_summary(path)
     interface = interface_from_summary(_WORKER_ROOT, summary)
+    api_base_hash, public_imports = _api_base(
+        _WORKER_ROOT,
+        summary,
+    )
     after = _WORKER_PROFILER.snapshot()
     return ImportReceipt(
         path=str(path),
         module_name=summary.module_name,
         imports=tuple(sorted(set(summary.imports.values()))),
         interface=interface,
+        api_base_hash=api_base_hash,
+        public_imports=public_imports,
         files_parsed=(
             after.counts.get("files_parsed", 0)
             - before.counts.get("files_parsed", 0)
@@ -407,6 +415,7 @@ def dependency_affinity_batches(
     receipts: Sequence[ImportReceipt],
     *,
     jobs: int,
+    targets: Optional[Set[str]] = None,
 ) -> Tuple[Tuple[ImportReceipt, ...], ...]:
     """Partition targets by dependency overlap while preserving parallel load.
 
@@ -421,8 +430,13 @@ def dependency_affinity_batches(
     closures = dependency_closures(receipts)
     by_module = {receipt.module_name: receipt for receipt in receipts}
 
+    target_modules = (
+        set(by_module)
+        if targets is None
+        else set(targets) & set(by_module)
+    )
     ordered = sorted(
-        by_module,
+        target_modules,
         key=lambda module: (-len(closures[module]), module),
     )
     target_cap = (len(ordered) + workers - 1) // workers
@@ -517,9 +531,16 @@ def diagnose_paths(
         )
         closure_sizes = [1 for _ in batches]
     else:
+        target_paths = {path.resolve() for path in ordered}
+        target_modules = {
+            item.module_name
+            for item in import_receipts
+            if Path(item.path).resolve() in target_paths
+        }
         batches = dependency_affinity_batches(
             import_receipts,
             jobs=workers,
+            targets=target_modules,
         )
         closures = dependency_closures(import_receipts)
         closure_sizes = [
