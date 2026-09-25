@@ -1280,6 +1280,8 @@ screen
 
 ## Academic corpus / SensibLaw DB-native recut
 
+Runtime weld: **SLR PR #50** (`agent/digital-esd-db-native-world-v2`) adds the clean PostgreSQL world materializer and bounded agent-inspection command. The dashi `run_world.py` façade delegates to that runtime; the superseded SLR PR #49 is closed.
+
 The scholarly-review world must reuse the existing SensibLaw/SLR evidence and
 source-review owners rather than materialising a parallel Digital-ESD academic
 ontology.
