@@ -888,7 +888,7 @@ farPaidStrictScalarRemainsOpen = refl
 
 farExactRecutLeanDonorHead : String
 farExactRecutLeanDonorHead =
-  "0e74027718badfdd0b0b688033a0970e490f079b"
+  "b034c2f6ba2b8559015488b590aa6448d7155af1"
 
 farExactRecutTransportedIntoAgdaKernelHere : Bool
 farExactRecutTransportedIntoAgdaKernelHere = false
