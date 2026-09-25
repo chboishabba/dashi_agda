@@ -26,6 +26,7 @@ module DASHI.Core.AdmissibleConsumerFutureAdequacyExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
