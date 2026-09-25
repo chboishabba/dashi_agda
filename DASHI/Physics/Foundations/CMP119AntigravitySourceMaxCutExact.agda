@@ -13,11 +13,11 @@ open import Data.List.Base using (List; []; _∷_)
 --
 -- The shortest current source route is:
 --
---   actual diagonal CMP119 finite-measure readouts
---     d00, d11, d22, d33
+--   selected literal finite-measure connected numerators
+--     C00^mu, C11^mu, C22^mu, C33^mu
 --           |
 --           v
---     d00+d11+d22+d33 < 0
+--     C00^mu+C11^mu+C22^mu+C33^mu < 0
 --           |
 --           v
 --   selected CMP119 metric active stress < 0
@@ -33,12 +33,12 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 
 data AntigravitySourceLeaf : Set where
-  evaluateFourActualDiagonalCMP119Readouts :
+  proveLiteralFiniteMeasureActiveSumNegative :
     AntigravitySourceLeaf
 
 canonicalAntigravitySourceLeaves : List AntigravitySourceLeaf
 canonicalAntigravitySourceLeaves =
-  evaluateFourActualDiagonalCMP119Readouts ∷ []
+  proveLiteralFiniteMeasureActiveSumNegative ∷ []
 
 fourDiagonalComponentCompilerClosed : Bool
 fourDiagonalComponentCompilerClosed = true
@@ -96,9 +96,9 @@ negativeInertialMassRequiredIsFalse :
   negativeInertialMassRequired ≡ false
 negativeInertialMassRequiredIsFalse = refl
 
-actualFourDiagonalSourceEvaluationStillOpen : Bool
-actualFourDiagonalSourceEvaluationStillOpen = true
+literalFiniteMeasureActiveSumNegativityStillOpen : Bool
+literalFiniteMeasureActiveSumNegativityStillOpen = true
 
-actualFourDiagonalSourceEvaluationStillOpenIsTrue :
-  actualFourDiagonalSourceEvaluationStillOpen ≡ true
-actualFourDiagonalSourceEvaluationStillOpenIsTrue = refl
+literalFiniteMeasureActiveSumNegativityStillOpenIsTrue :
+  literalFiniteMeasureActiveSumNegativityStillOpen ≡ true
+literalFiniteMeasureActiveSumNegativityStillOpenIsTrue = refl
