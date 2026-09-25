@@ -55,7 +55,7 @@ p3IndependentFullRecognition :
   (recognition : Forward.P3ArithmeticTo369Recognition source) ->
   Recognition.OrbitStabilizerRecognition
     (p3IndependentFunctor recognition)
-    (SourceSocket.orbits source)
+    (SourceSocket.candidateOrbits source)
     P3Target.p3OrbitPresentation
 p3IndependentFullRecognition recognition =
   Recognition.composeOrbitStabilizerRecognition
@@ -67,7 +67,7 @@ p3IndependentOrbitRecognition :
   (recognition : Forward.P3ArithmeticTo369Recognition source) ->
   Recognition.OrbitRecognition
     (p3IndependentFunctor recognition)
-    (SourceSocket.orbits source)
+    (SourceSocket.candidateOrbits source)
     P3Target.p3OrbitPresentation
 p3IndependentOrbitRecognition recognition =
   Recognition.orbitRecognition
