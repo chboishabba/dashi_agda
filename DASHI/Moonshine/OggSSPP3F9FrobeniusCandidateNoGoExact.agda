@@ -27,6 +27,7 @@ open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import DASHI.Core.OrbitStabilizerResidualPresentationExact as Generic
 import DASHI.Core.ResidualSymmetryCollisionFibreExact as Symmetry
+import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
@@ -225,7 +226,44 @@ noInjectiveF9OrbitToP3Target mapOrbit injective
   fixed0NotFixed1 (injective fixed0 fixed1 refl)
 
 ------------------------------------------------------------------------
--- 5. Boundary.
+-- 5. No full arithmetic -> 369 recognition can use the whole F9 carrier.
+------------------------------------------------------------------------
+
+noFullF9FrobeniusRecognitionToP3 :
+  (functor :
+    Recognition.ActionRecognitionFunctor
+      f9FrobeniusAction
+      Small.constantC2Action) ->
+  Recognition.OrbitStabilizerRecognition
+    functor
+    f9FrobeniusOrbitPresentation
+    Small.constantTernaryOrbitPresentation ->
+  ⊥
+noFullF9FrobeniusRecognitionToP3 functor full =
+  noInjectiveF9OrbitToP3Target
+    (Recognition.mapOrbit orbitRecognition)
+    injectiveOrbitMap
+  where
+    orbitRecognition :
+      Recognition.OrbitRecognition
+        functor
+        f9FrobeniusOrbitPresentation
+        Small.constantTernaryOrbitPresentation
+    orbitRecognition =
+      Recognition.orbitRecognition full
+
+    injectiveOrbitMap :
+      (left right : F9FrobeniusOrbit) ->
+      Recognition.mapOrbit orbitRecognition left
+      ≡ Recognition.mapOrbit orbitRecognition right ->
+      left ≡ right
+    injectiveOrbitMap left right same =
+      Recognition.reflectsOrbitEquality
+        (Recognition.pi0Embedding full)
+        same
+
+------------------------------------------------------------------------
+-- 6. Boundary.
 ------------------------------------------------------------------------
 
 candidateClaimOrigin : Source.ClaimOrigin
@@ -237,6 +275,7 @@ record P3F9FrobeniusCandidateBoundary : Set where
     literalNinePointCarrierConstructed : Bool
     literalOrderTwoFrobeniusActionConstructed : Bool
     exactSixOrbitPresentationConstructed : Bool
+    fullRecognitionNoGoProvedAtRecognitionInterface : Bool
     wholeF9CarrierCanFullyRecognizeTwoOrbit369Target : Bool
     markedQuotientOrSubcarrierStillOpen : Bool
     actualSupersingularMarkedCarrierIdentifiedHere : Bool
@@ -245,4 +284,4 @@ canonicalP3F9FrobeniusCandidateBoundary :
   P3F9FrobeniusCandidateBoundary
 canonicalP3F9FrobeniusCandidateBoundary =
   p3-f9-frobenius-candidate-boundary
-    true true true false true false
+    true true true true false true false
