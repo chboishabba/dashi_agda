@@ -36,8 +36,11 @@ import DASHI.Core.NonginOnePointOneArmyRefinementExact as Nongin
 import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact as TSFV
 import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
 import DASHI.Core.ConsumerGuidedReopenableRefinementExact as Refine
+import DASHI.Core.CoarseUnitFineFibreCapacityExact as Capacity
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact as TSFVCaustic
+import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
+import DASHI.Biology.JCoarseFineEvaluationFibreExact as JEval
 
 ------------------------------------------------------------------------
 -- 1. Exact arithmetic owners reused, not duplicated.
@@ -176,3 +179,55 @@ canonicalRelationalCoordinatePlusOneBoundary =
     true
     false refl
     "Exact +1 arithmetic is role-indexed. Nongin frame, TSFV history residual and twistronics registration are non-arithmetic retained distinctions; their common content is only that an added distinction can defeat a coarse factorisation for a consumer that actually separates its fibres."
+
+
+------------------------------------------------------------------------
+-- 6. Coarse-unit / fine-fibre amplification boundary.
+--
+-- One distinguished coarse unit may index a large fine coordinate family.
+-- This is a carrier-capacity statement only; relevance still depends on a
+-- consumer/future distinction.
+------------------------------------------------------------------------
+
+jCompletionFineCoordinateCountIs19683 :
+  Capacity.jFineCoordinateCount ≡ 19683
+jCompletionFineCoordinateCountIs19683 =
+  Capacity.jFineCoordinateCountIs19683
+
+jCompletionSectorDimensionIs19683 :
+  Harmonic.completionHarmonicDimension
+  ≡ 19683
+jCompletionSectorDimensionIs19683 =
+  Capacity.jCompletionElementarySectorHas19683Coordinates
+
+jFixedEvaluationFibreCardinalityStillNotPromoted :
+  JEval.fixedValueAssignmentFibreHasCardinalityThreePowerNine
+    JEval.canonicalJCoarseFineEvaluationBoundary
+  ≡ false
+jFixedEvaluationFibreCardinalityStillNotPromoted =
+  Capacity.fixedJValueFibreCardinalityNotPromoted
+
+record PlusOneFibreAmplificationBoundary : Set where
+  constructor plus-one-fibre-amplification-boundary
+  field
+    coarseUnitCanIndexLargeFineCoordinateFamily : Bool
+    futureRelevantFineClassesForceResidualCapacity : Bool
+    jCompletionFineCoordinate19683Reused : Bool
+    jFixedEvaluationFibreCardinality19683Claimed : Bool
+    jFixedEvaluationFibreCardinality19683ClaimedIsFalse :
+      jFixedEvaluationFibreCardinality19683Claimed ≡ false
+    oneCoarseUnitMeansOneFineState : Bool
+    oneCoarseUnitMeansOneFineStateIsFalse :
+      oneCoarseUnitMeansOneFineState ≡ false
+    largeFineFibreMeansUniversalAdvantage : Bool
+    largeFineFibreMeansUniversalAdvantageIsFalse :
+      largeFineFibreMeansUniversalAdvantage ≡ false
+
+canonicalPlusOneFibreAmplificationBoundary :
+  PlusOneFibreAmplificationBoundary
+canonicalPlusOneFibreAmplificationBoundary =
+  plus-one-fibre-amplification-boundary
+    true true true
+    false refl
+    false refl
+    false refl
