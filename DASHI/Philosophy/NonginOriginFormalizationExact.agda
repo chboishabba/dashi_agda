@@ -38,7 +38,12 @@ open import Agda.Builtin.String using (String)
 
 open import DASHI.Core.Prelude using (⊥)
 import DASHI.Core.DialecticOriginSourceAtlasExact as Origin
+import DASHI.Core.FiniteBranchingCriticalityExact as Branch
+import DASHI.Core.FiniteTypedBranchingKernelExact as TypedBranch
 import DASHI.Philosophy.ReflexivePowerUp as Reflexive
+import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Trialectic
+import DASHI.Foundations.TrialecticDepthHyperformExact as TrialecticDepth
+import DASHI.Statistics.ForecastVerificationKernelExact as Forecast
 
 ------------------------------------------------------------------------
 -- 1. Recursive subdivision.
@@ -107,6 +112,46 @@ debateHiddenStateWitness =
   distinct ()
 
 ------------------------------------------------------------------------
+-- 2b. Mature trialectic descendant.
+--
+-- The historical binary/debate observation should not be re-derived as if the
+-- repository lacked a relational owner.  The mature trialectic construction
+-- is strictly stronger:
+--
+--   * three dyadic edge dispositions form only the boundary;
+--   * an irreducible triadic face is retained beyond those edges;
+--   * two whole trialectic states can have the same boundary and different
+--     faces;
+--   * at depth, distinct fine face/gluing states can truncate to one coarse
+--     state.
+--
+-- This is a retrospective structural correspondence, not a claim that the raw
+-- Nongin transcript already contained the later trialectic theorem.
+------------------------------------------------------------------------
+
+matureTrialecticNonfactorability :
+  DASHI.Core.ConsumerDescentMinimalObserverExact.FactorsThrough
+    Trialectic.boundaryObserver
+    Trialectic.faceConsumer
+  →
+  ⊥
+matureTrialecticNonfactorability =
+  Trialectic.triadicFaceCannotFactorThroughThreeEdges
+
+matureTrialecticCoarseCollision :
+  TrialecticDepth.truncate
+    TrialecticDepth.canonicalTrialecticDepthSystem
+    zero
+    TrialecticDepth.fineLayerLeft
+  ≡
+  TrialecticDepth.truncate
+    TrialecticDepth.canonicalTrialecticDepthSystem
+    zero
+    TrialecticDepth.fineLayerRight
+matureTrialecticCoarseCollision =
+  TrialecticDepth.fineLayersCollideAtCoarseDepth
+
+------------------------------------------------------------------------
 -- 3. "1.0 -> 1.1" is a representational lift, not multiplication by 1.1.
 --
 -- A refinement embedding says that the richer carrier can represent every
@@ -158,27 +203,40 @@ canonicalPowerUpBoundary =
     false
 
 ------------------------------------------------------------------------
--- 4. Higher-order odds.
+-- 4. Existing "odds of odds" owners.
 --
--- The raw stream repeatedly moves from odds to "odds of odds".  We preserve
--- that as an order index over a probability-like payload without pretending
--- that the transcript supplied a probability measure.
+-- Do not create a parallel ProbabilityOrder here.  The historical phrase is
+-- already recorded by DialecticOriginSourceAtlasExact, while exact downstream
+-- probability/odds and branching arithmetic have their own canonical owners:
+--
+--   ForecastVerificationKernelExact
+--     Probability, OddsPair, OddsUpdateReceipt, OddsComparisonReceipt
+--
+--   FiniteBranchingCriticalityExact
+--     scaled branch availability, independent-axis product arithmetic,
+--     exact 11^3/10^3 gain regression, criticality boundary
+--
+--   FiniteTypedBranchingKernelExact
+--     heterogeneous / varying-depth branching kernels.
+--
+-- Nongin therefore contributes provenance into those owners; it does not
+-- redefine their mathematical carriers.
 ------------------------------------------------------------------------
 
-data ProbabilityOrder : Set where
-  firstOrder : ProbabilityOrder
-  nextOrder  : ProbabilityOrder → ProbabilityOrder
+historicalOddsEntry : Origin.OriginSourceEntry
+historicalOddsEntry = Origin.oddsEntry
 
-record OrderedOdds (Payload : Set) : Set where
-  constructor ordered-odds
-  field
-    order : ProbabilityOrder
-    payload : Payload
+existingBranchingOddsBoundary : Branch.FiniteBranchingCriticalityBoundary
+existingBranchingOddsBoundary =
+  Branch.canonicalFiniteBranchingCriticalityBoundary
 
-open OrderedOdds public
+existingTypedBranchingBoundary : TypedBranch.FiniteTypedBranchingKernelBoundary
+existingTypedBranchingBoundary =
+  TypedBranch.canonicalFiniteTypedBranchingKernelBoundary
 
-promoteOdds : {Payload : Set} → OrderedOdds Payload → OrderedOdds Payload
-promoteOdds (ordered-odds ord p) = ordered-odds (nextOrder ord) p
+existingForecastOddsBoundary : Forecast.ForecastVerificationKernelBoundary
+existingForecastOddsBoundary =
+  Forecast.canonicalForecastVerificationKernelBoundary
 
 ------------------------------------------------------------------------
 -- 5. Recursive observer nesting.
@@ -257,6 +315,8 @@ record NonginSourceBoundary : Set where
     externalScientificAuthority : Bool
     universalPhysicalLawClaimed : Bool
     laterTensorSemanticsRetroactivelyOriginal : Bool
+    historicalBinaryToyIsIdenticalToMatureTrialectic : Bool
+    nonginDefinesIndependentOddsHierarchy : Bool
 
 canonicalNonginSourceBoundary : NonginSourceBoundary
 canonicalNonginSourceBoundary =
@@ -264,6 +324,8 @@ canonicalNonginSourceBoundary =
     "user-supplied raw origin / historical-genealogy source"
     "Pasted text(20260826-134336).txt; later reconstruction also names nongin.txt"
     "repository reconstruction of structural invariants; later exact modules retain independent theorem ownership"
+    false
+    false
     false
     false
     false
