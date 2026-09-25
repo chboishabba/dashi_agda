@@ -4,6 +4,7 @@ module DASHI.Physics.Foundations.CMP119FourDiagonalFiniteD1ActiveStressExact whe
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational.Base using (ℚ; +_; -[1+_]; _+_)
+import Relation.Binary.PropositionalEquality
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
@@ -182,3 +183,41 @@ module _
   metric33IsD33 =
     Components.metricComponentIsFiniteD1Readout
       presentData attachment background Flat.zAxis Flat.zAxis
+
+
+  realization =
+    PresentBasis.compilePresentCutTenSlotMetricBasis
+      presentData attachment background
+
+  basis =
+    MetricBasis.compileSymmetricBasis16 realization
+
+  metricComponent :
+    Flat.Axis4 → Flat.Axis4 → ℚ
+  metricComponent a b =
+    Basis.cmp119MetricBasisComponent
+      basis
+      (Components.canonicalR119Readout selected)
+      (StressRep.stressTensor representation)
+      a b
+
+  metricActiveStressSum : ℚ
+  metricActiveStressSum =
+    metricComponent Flat.timeAxis Flat.timeAxis
+    + metricComponent Flat.xAxis Flat.xAxis
+    + metricComponent Flat.yAxis Flat.yAxis
+    + metricComponent Flat.zAxis Flat.zAxis
+
+  metricActiveStressIsFiniteD1ActiveStress :
+    metricActiveStressSum ≡ activeFiniteD1Sum
+  metricActiveStressIsFiniteD1ActiveStress
+    rewrite metric00IsD00 | metric11IsD11 | metric22IsD22 | metric33IsD33 =
+    refl
+
+  fourDiagonalFiniteD1ValuesCompileToMetricNegativeTwo :
+    NormalizedFourDiagonalFiniteD1Values →
+    metricActiveStressSum ≡ -[1+ suc zero ]
+  fourDiagonalFiniteD1ValuesCompileToMetricNegativeTwo values =
+    Relation.Binary.PropositionalEquality.trans
+      metricActiveStressIsFiniteD1ActiveStress
+      (fourDiagonalValuesGiveNegativeTwo values)
