@@ -1,76 +1,44 @@
 module DASHI.Mathematics.Complexity.PNotEqualsNPClosedQuotientAuthorityDescentExact where
 
 ------------------------------------------------------------------------
--- CLOSED QUOTIENT AUTHORITY AS A STRICT SEMANTIC DESCENT STEP
+-- STRICT CLOSED AUTHORITY -> STRUCTURAL REPRESENTATIVE CHAIN
 --
--- Existing:
+-- Canonical quantitative owner:
 --
---   PNotEqualsNPClosedRestrictionQuotientSATAuthorityExact
---     proves exact SAT equivalence between the indexed root (on the Cook
---     carrier) and the structurally closed quotient authority.
+--   PNotEqualsNPClosedAuthorityStrictDescentExact
 --
---   PNotEqualsNPClosedRestrictionQuotientAuthoritySizeExact
---     bounds the literal authority size by the quotient depth/state budget.
+-- already packages the exact downstream resource statement:
 --
---   PNotEqualsNPClosedStrictRepresentativeQuotientExact
---     defines StructuralRepresentativeChain:
+--   root
+--     ≃SAT
+--   closedQuotientSATAuthority(root)
 --
---       formula
---         -> strictly smaller equisatisfiable formula
---         -> ...
---         -> literal Boolean constant.
+-- together with strict Cook node-count descent.
 --
--- This owner composes them.
+-- This owner contributes only the next genuinely distinct theorem:
 --
--- If the closed quotient authority is strictly smaller than the root, then a
--- StructuralRepresentativeChain for the authority lifts by ONE exact semantic
--- descent step to a chain for the root.
+-- a StructuralRepresentativeChain for the smaller authority lifts by one
+-- semantic descent step to a chain for the root.
 --
--- Thus the quantitative condition
---
---   |authority(root)| < |root|
---
--- is exactly the recursive resource-closure condition, not merely a heuristic
--- compression score.
+-- Thus repeated strict closed-authority compression is exactly a well-founded
+-- structural-chain construction; no duplicate size/equivalence surface is
+-- introduced here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_<_)
-import Data.Nat.Properties as NatP
-open import Data.Product using (_×_; _,_)
 
-import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
-import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotientExact as Closed
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedRestrictionQuotientSATAuthorityExact as Authority
+import DASHI.Mathematics.Complexity.PNotEqualsNPClosedAuthorityStrictDescentExact as Descent
 import DASHI.Mathematics.Complexity.PNotEqualsNPClosedRestrictionQuotientAuthoritySizeExact as AuthoritySize
 import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteCircuitSharedUpperBoundExact as SharedUpper
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
 
 ------------------------------------------------------------------------
--- Exact Cook-level SAT equivalence supplied by the closed authority.
-------------------------------------------------------------------------
-
-closedAuthorityEquivalentToRoot :
-  ∀ {rootVariables : Nat}
-    {root : SAT.BooleanFormula rootVariables}
-    (closed :
-      Closed.ClosedStrictRepresentativeQuotient root) →
-  Closed.CookSatisfiabilityEquivalent
-    (Bridge.indexedToCook root)
-    (Authority.closedQuotientSATAuthority closed)
-closedAuthorityEquivalentToRoot
-    closed =
-  Authority.cookRootSatisfiableGivesClosedAuthoritySatisfiable
-    closed
-  ,
-  Authority.closedAuthoritySatisfiableGivesCookRootSatisfiable
-    closed
-
-------------------------------------------------------------------------
--- One strict authority descent step.
+-- One strict semantic descent lifts an existing chain.
 ------------------------------------------------------------------------
 
 closedAuthorityDescentStep :
@@ -78,72 +46,64 @@ closedAuthorityDescentStep :
     {root : SAT.BooleanFormula rootVariables}
     (closed :
       Closed.ClosedStrictRepresentativeQuotient root) →
-  Size.formulaNodeCount
-      (Authority.closedQuotientSATAuthority closed)
-    <
-  Size.formulaNodeCount
-      (Bridge.indexedToCook root) →
+  Descent.ClosedAuthorityStrictDescent closed →
   Closed.StructuralRepresentativeChain
     (Authority.closedQuotientSATAuthority closed) →
   Closed.StructuralRepresentativeChain
     (Bridge.indexedToCook root)
 closedAuthorityDescentStep
-    closed authoritySmaller authorityChain =
+    closed
+    strictDescent
+    authorityChain =
   Closed.descend
-    (closedAuthorityEquivalentToRoot closed)
-    authoritySmaller
+    (Descent.equivalent strictDescent)
+    (Descent.strictlySmaller strictDescent)
     authorityChain
 
 ------------------------------------------------------------------------
--- The generic shared-compiler upper bound can pay strictness.
+-- The literal shared-compiler budget inequality supplies that descent package.
 ------------------------------------------------------------------------
 
-sharedUpperStrictlyBelowRootImpliesAuthorityDescent :
+sharedUpperStrictlyBelowRootImpliesAuthorityChain :
   ∀ {rootVariables : Nat}
     {root : SAT.BooleanFormula rootVariables}
     (closed :
       Closed.ClosedStrictRepresentativeQuotient root) →
   SharedUpper.sharedAcceptanceUpperBound
       (suc rootVariables
-        *
-        Quotient.stateCount
-          (AuthoritySize.closedQuotient closed))
+        * Quotient.stateCount
+            (AuthoritySize.closedQuotient closed))
     <
-  Size.formulaNodeCount
+  DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact.formulaNodeCount
       (Bridge.indexedToCook root) →
   Closed.StructuralRepresentativeChain
     (Authority.closedQuotientSATAuthority closed) →
   Closed.StructuralRepresentativeChain
     (Bridge.indexedToCook root)
-sharedUpperStrictlyBelowRootImpliesAuthorityDescent
-    closed sharedUpperBelowRoot authorityChain =
+sharedUpperStrictlyBelowRootImpliesAuthorityChain
+    closed
+    strictBudget
+    authorityChain =
   closedAuthorityDescentStep
     closed
-    authorityBelowRoot
+    (Descent.strictBudgetBuildsClosedAuthorityStrictDescent
+      closed
+      strictBudget)
     authorityChain
-  where
-    authorityBelowRoot :
-      Size.formulaNodeCount
-          (Authority.closedQuotientSATAuthority closed)
-      <
-      Size.formulaNodeCount
-          (Bridge.indexedToCook root)
-    authorityBelowRoot =
-      NatP.≤-<-trans
-        (AuthoritySize.closedAuthorityNodeCountUpper
-          closed)
-        sharedUpperBelowRoot
 
 ------------------------------------------------------------------------
 -- Research consequence.
 --
--- A structurally closed quotient becomes a genuine well-founded semantic
--- reduction exactly when its compiled authority is smaller than its root.
+-- The canonical recursive resource condition is now:
 --
--- Repeated application would terminate by formula-node size IF one can
--- construct an appropriate closed quotient for each generated authority.
+--   construct closed quotient for root
+--   + prove its shared authority upper bound is < |root|
+--   + recursively close the smaller authority
+--       ->
+--   structurally close root.
 --
--- That recursive constructor must remain self-family-specific; the global
--- structural-chain firewall proves that a constructor working for arbitrary
--- formulas is already an exact SAT solver.
+-- The global structural-chain firewall prevents promoting this into a generic
+-- SAT recursion theorem.  The missing constructor must stay scoped to the
+-- special self-instantiation lineage and must itself fit the bounded fixed
+-- point budget.
 ------------------------------------------------------------------------
