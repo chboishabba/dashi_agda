@@ -1,12 +1,13 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityFiniteObservableToLocalCAnomalyTransportExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; absℝ; _-ℝ_; _≤ℝ_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -144,12 +145,12 @@ compileFiniteObservableAnomalyLimitTransport
       λ refinement →
         subst
           (λ target →
-            DASHI.Foundations.RealAnalysisAxioms.absℝ
-              (target DASHI.Foundations.RealAnalysisAxioms.-ℝ
+            absℝ
+              (target -ℝ
                 Expect.approximateExpectation
                   approximation states refinement scale
                   (traceObservable identification))
-            DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+            ≤ℝ
             Expect.expectationErrorBudget
               approximation states refinement scale
               (traceObservable identification))
@@ -161,12 +162,12 @@ compileFiniteObservableAnomalyLimitTransport
       λ refinement →
         subst
           (λ target →
-            DASHI.Foundations.RealAnalysisAxioms.absℝ
-              (target DASHI.Foundations.RealAnalysisAxioms.-ℝ
+            absℝ
+              (target -ℝ
                 Expect.approximateExpectation
                   approximation states refinement scale
                   (f2Observable identification))
-            DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+            ≤ℝ
             Expect.expectationErrorBudget
               approximation states refinement scale
               (f2Observable identification))
@@ -187,5 +188,9 @@ compileFiniteObservableAnomalyLimitTransport
 cmp119AnomalyObservableErrorCompilerLevel : ProofLevel
 cmp119AnomalyObservableErrorCompilerLevel = machineChecked
 
-newAntigravityConvergenceInequalityRequired : Agda.Builtin.Bool.Bool
-newAntigravityConvergenceInequalityRequired = Agda.Builtin.Bool.false
+newAntigravityConvergenceInequalityRequired : Bool
+newAntigravityConvergenceInequalityRequired = false
+
+newAntigravityConvergenceInequalityRequiredIsFalse :
+  newAntigravityConvergenceInequalityRequired ≡ false
+newAntigravityConvergenceInequalityRequiredIsFalse = refl
