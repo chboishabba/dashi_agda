@@ -360,6 +360,26 @@ class AgdaTypecheckBackend:
         return out
 
 
+class CommandTypecheckBackend(CommandScopeCheckBackend):
+    """Use an arbitrary exit-code command as a full Agda typecheck oracle."""
+
+    def _typecheck_ok(self, path: Path) -> bool:
+        return self._scope_ok(path)
+
+    def refine(self, summary, diagnostics: List):
+        if not self._typecheck_ok(summary.path):
+            return diagnostics
+        return [
+            diagnostic
+            for diagnostic in diagnostics
+            if policy_for(diagnostic.code).minimum
+            not in {
+                EvidenceLevel.AGDA_SCOPE,
+                EvidenceLevel.AGDA_TYPECHECKER,
+            }
+        ]
+
+
 class AgdaAutoRefineBackend:
     """Demand-driven evidence refinement.
 
@@ -382,6 +402,7 @@ class AgdaAutoRefineBackend:
         typecheck: bool = False,
         extra_args: Sequence[str] = (),
         scope_command: Sequence[str] | str | None = None,
+        typecheck_command: Sequence[str] | str | None = None,
     ):
         if scope_command is None:
             self.scope = AgdaScopeCheckBackend(
@@ -396,17 +417,28 @@ class AgdaAutoRefineBackend:
                 cwd=cwd,
                 timeout=scope_timeout,
             )
-        self.typecheck = AgdaTypecheckBackend(
-            agda_bin,
-            cwd=cwd,
-            timeout=typecheck_timeout,
-            extra_args=extra_args,
-        )
+        if typecheck_command is None:
+            self.typecheck = AgdaTypecheckBackend(
+                agda_bin,
+                cwd=cwd,
+                timeout=typecheck_timeout,
+                extra_args=extra_args,
+            )
+        else:
+            self.typecheck = CommandTypecheckBackend(
+                typecheck_command,
+                cwd=cwd,
+                timeout=typecheck_timeout,
+            )
         self.use_typecheck = typecheck
         self._scope_validated: Set[Path] = set()
         self._scope_failed: Set[Path] = set()
         self._scope_probe_roots: Set[Path] = set()
         self._scope_candidates: Set[Path] = set()
+        self._typecheck_validated: Set[Path] = set()
+        self._typecheck_failed: Set[Path] = set()
+        self._typecheck_probe_roots: Set[Path] = set()
+        self._typecheck_candidates: Set[Path] = set()
 
     @staticmethod
     def _key(path: Path) -> Path:
@@ -447,6 +479,40 @@ class AgdaAutoRefineBackend:
     def set_scope_candidates(self, paths) -> None:
         self._scope_candidates = {self._key(path) for path in paths}
 
+    def typecheck_known(self, path: Path) -> bool:
+        key = self._key(path)
+        return key in self._typecheck_validated or key in self._typecheck_failed
+
+    def typecheck_validated(self, path: Path) -> bool:
+        return self._key(path) in self._typecheck_validated
+
+    def typecheck_failed(self, path: Path) -> bool:
+        return self._key(path) in self._typecheck_failed
+
+    def probe_typecheck(self, path: Path, *, aggregate_root: bool = False) -> bool:
+        key = self._key(path)
+        if key in self._typecheck_validated:
+            return True
+        if key in self._typecheck_failed:
+            return False
+        ok = self.typecheck._typecheck_ok(key)
+        if aggregate_root:
+            self._typecheck_probe_roots.add(key)
+        if ok:
+            self._typecheck_validated.add(key)
+        else:
+            self._typecheck_failed.add(key)
+        return ok
+
+    def mark_typecheck_validated(self, paths) -> None:
+        for path in paths:
+            key = self._key(path)
+            self._typecheck_validated.add(key)
+            self._typecheck_failed.discard(key)
+
+    def set_typecheck_candidates(self, paths) -> None:
+        self._typecheck_candidates = {self._key(path) for path in paths}
+
     @staticmethod
     def _needs(diagnostics: List, level: EvidenceLevel) -> bool:
         return any(
@@ -474,6 +540,15 @@ class AgdaAutoRefineBackend:
                 "candidate_modules": len(self._scope_candidates),
                 "partial_progress_modules": len(
                     getattr(self.scope, "partial_validated_modules", ())
+                ),
+            },
+            "typecheck_cache": {
+                "validated_modules": len(self._typecheck_validated),
+                "failed_frontier_modules": len(self._typecheck_failed),
+                "aggregate_probe_roots": len(self._typecheck_probe_roots),
+                "candidate_modules": len(self._typecheck_candidates),
+                "partial_progress_modules": len(
+                    getattr(self.typecheck, "partial_validated_modules", ())
                 ),
             },
         }
@@ -507,19 +582,27 @@ class AgdaAutoRefineBackend:
                     # fails, so do not pay the more expensive oracle cost.
                     return current
 
-        if (
-            self.use_typecheck
-            and self._needs(current, EvidenceLevel.AGDA_TYPECHECKER)
-            and self.typecheck._typecheck_ok(summary.path)
-        ):
-            current = [
-                diagnostic
-                for diagnostic in current
-                if policy_for(diagnostic.code).minimum
-                not in {
-                    EvidenceLevel.AGDA_SCOPE,
-                    EvidenceLevel.AGDA_TYPECHECKER,
-                }
-            ]
+        if self.use_typecheck and self._needs(current, EvidenceLevel.AGDA_TYPECHECKER):
+            path = summary.path.resolve()
+            if self.typecheck_validated(path):
+                current = [
+                    diagnostic
+                    for diagnostic in current
+                    if policy_for(diagnostic.code).minimum
+                    not in {
+                        EvidenceLevel.AGDA_SCOPE,
+                        EvidenceLevel.AGDA_TYPECHECKER,
+                    }
+                ]
+            elif not self.typecheck_failed(path) and self.probe_typecheck(path):
+                current = [
+                    diagnostic
+                    for diagnostic in current
+                    if policy_for(diagnostic.code).minimum
+                    not in {
+                        EvidenceLevel.AGDA_SCOPE,
+                        EvidenceLevel.AGDA_TYPECHECKER,
+                    }
+                ]
 
         return current
