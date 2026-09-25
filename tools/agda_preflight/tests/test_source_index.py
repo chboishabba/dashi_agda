@@ -211,8 +211,10 @@ def test_source_index_migrates_v2_interface_schema(tmp_path):
     finally:
         connection.close()
 
-    assert version == "3"
+    assert version == "4"
     assert "interface_json" in columns
+    assert "top_diagnostic_json" in columns
+    assert "top_fixable_diagnostic_json" in columns
 
 
 
