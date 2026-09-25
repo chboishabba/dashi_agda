@@ -2,7 +2,7 @@
 module DASHI.Physics.Foundations.CMP119SymmetricCanonicalMetricRechartExact where
 
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as Basis
@@ -77,8 +77,7 @@ module _
   symmetricMetricCarrierIsTenSlot :
     Domain.MetricPerturbation symmetricDomain
     ≡ K.SymmetricTensorComponent4
-  symmetricMetricCarrierIsTenSlot =
-    Relation.Binary.PropositionalEquality.refl
+  symmetricMetricCarrierIsTenSlot = refl
 
   symmetricRepresentation :
     StressRep.CanonicalMetricStressRepresentation domain →
