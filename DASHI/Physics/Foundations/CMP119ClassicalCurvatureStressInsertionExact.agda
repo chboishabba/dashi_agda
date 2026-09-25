@@ -151,13 +151,9 @@ classicalStressTrace curvature =
 
 classicalStressTraceIsZero :
   ∀ curvature → classicalStressTrace curvature ≡ 0ℚ
-classicalStressTraceIsZero curvature =
-  ℚRing.solve-∀
-    (Metric.actionVariation curvature K.component00)
-    (Metric.actionVariation curvature K.component11)
-    (Metric.actionVariation curvature K.component22)
-    (Metric.actionVariation curvature K.component33)
-    (Metric.diagonalTraceZero curvature)
+classicalStressTraceIsZero curvature
+  rewrite Metric.diagonalTraceZero curvature =
+  ℚRing.solve []
 
 record FiniteClassicalStressInsertionFamily (Configuration : Set) : Set₁ where
   field
