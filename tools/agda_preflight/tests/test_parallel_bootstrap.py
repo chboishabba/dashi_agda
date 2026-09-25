@@ -63,8 +63,11 @@ z = Set
     assert set(cold.modules) == {"P.Leaf", "P.Middle", "P.Top"}
     assert counts["cold_workers"] == 2
     assert counts["cold_modules_discovered"] == 3
+    assert counts["cold_interface_files_parsed"] == 3
     assert counts["cold_worker_files_parsed"] == 3
-    assert counts["files_parsed"] == 3
+    assert counts["cold_total_files_parsed"] == 6
+    assert counts["cold_total_parse_amplification_milli"] == 2000
+    assert counts["files_parsed"] == 6
 
     connection = sqlite3.connect(database)
     try:
@@ -203,6 +206,10 @@ def test_affinity_parallel_bootstrap_reports_parse_amplification(tmp_path):
     }
     assert counts["cold_batches"] == 2
     assert counts["cold_modules_discovered"] == 4
+    assert counts["cold_interface_files_parsed"] == 4
     assert counts["cold_worker_files_parsed"] == 4
+    assert counts["cold_total_files_parsed"] == 8
     assert counts["cold_parse_amplification_milli"] == 1000
+    assert counts["cold_total_parse_amplification_milli"] == 2000
     assert counts["cold_unpredicted_parse_overhead"] == 0
+    assert counts["cold_interface_parse_savings"] >= 0
