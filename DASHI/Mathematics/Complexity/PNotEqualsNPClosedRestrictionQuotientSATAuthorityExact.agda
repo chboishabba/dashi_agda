@@ -126,7 +126,7 @@ cookRootSatisfiableGivesClosedAuthoritySatisfiable
   rootSatisfiableGivesClosedAuthoritySatisfiable
     closed
     (Bridge.cookSatisfiableIndexedFormulaGivesIndexedSatisfying
-      _
+      root
       rootCookSat)
 
 closedAuthoritySatisfiableGivesCookRootSatisfiable :
@@ -142,7 +142,7 @@ closedAuthoritySatisfiableGivesCookRootSatisfiable
     closed
     authoritySat =
   Bridge.indexedSatisfyingGivesCookSatisfiable
-    _
+    root
     (closedAuthoritySatisfiableGivesRootSatisfying
       closed
       authoritySat)
