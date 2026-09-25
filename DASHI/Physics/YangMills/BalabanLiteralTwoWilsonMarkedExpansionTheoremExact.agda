@@ -39,6 +39,7 @@ import DASHI.Physics.YangMills.BalabanCMP116CanonicalFiniteCovarianceDecayRound4
 import DASHI.Physics.YangMills.BalabanCMP116ConnectedCorePathRound453Exact as R453
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalPhysicalSeparationRound450Exact as R450
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonResidualDyadicCalibrationExact as Dyadic
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonCanonicalFourStageConstructorExact as RawFourStage
 
 record LiteralTwoWilsonMarkedExpansionTheorem
     {Measure Observable : Set}
@@ -82,6 +83,55 @@ record LiteralTwoWilsonMarkedExpansionTheorem
 
 open LiteralTwoWilsonMarkedExpansionTheorem public
 
+
+
+
+fromRawFourStageDyadic :
+  ∀ {Measure Observable dataSet extension base embedding}
+    (raw :
+      RawFourStage.LiteralTwoWilsonRawFourStageSource
+        {Measure = Measure}
+        {Observable = Observable}
+        {dataSet = dataSet}
+        {extension = extension}
+        base)
+    (mixedLog :
+      R445.R429LiteralMixedLogResponse
+        (R444.asR429
+          (RawFourStage.asCanonicalTwiceMarkedFourStage raw))
+        embedding)
+    (connected :
+      R453.ConnectedCorePathGeometry
+        (RawFourStage.asCanonicalTwiceMarkedFourStage raw))
+    (sourceDyadic :
+      Dyadic.ResidualDyadicSourceCalibration
+        {Measure = Measure}
+        {Observable = Observable}
+        {dataSet = dataSet}
+        {extension = extension}
+        {base = base}
+        {data = RawFourStage.asCanonicalTwiceMarkedFourStage raw}
+        embedding
+        (R453.asCanonicalDomainSpecificRateSplit
+          (RawFourStage.asCanonicalTwiceMarkedFourStage raw)
+          connected))
+    (physical :
+      R450.CanonicalPhysicalSeparation
+        (RawFourStage.asCanonicalTwiceMarkedFourStage raw)) →
+  LiteralTwoWilsonMarkedExpansionTheorem
+    {Measure = Measure}
+    {Observable = Observable}
+    {dataSet = dataSet}
+    {extension = extension}
+    {base = base}
+    (RawFourStage.asCanonicalTwiceMarkedFourStage raw)
+    embedding
+fromRawFourStageDyadic raw mixedLog connected sourceDyadic physical =
+  fromDyadicSourceDecay
+    mixedLog
+    connected
+    sourceDyadic
+    physical
 
 fromDyadicSourceDecay :
   ∀ {Measure Observable dataSet extension base data embedding}
