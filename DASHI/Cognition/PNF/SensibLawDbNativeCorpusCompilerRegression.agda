@@ -1,0 +1,95 @@
+module DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerRegression where
+
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
+
+import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as Scale
+import DASHI.Cognition.PNF.SensibLawGenericSourceCompilationCanonicalWeldRegression as Fixture
+import DASHI.Cognition.PNF.SensibLawLongDocumentPersistenceRegression as PersistFixture
+
+fixtureCompilationIdentity : Scale.CompilationIdentity
+fixtureCompilationIdentity =
+  Scale.compilation-identity
+    "book-revision:fixture"
+    "region:book:fixture:sentence:1"
+    "spacy"
+    "fixture-version"
+    "fixture-model"
+    "sha256:fixture-config"
+
+fixtureJob : Scale.ParserRegionJob Fixture.fixtureSource
+fixtureJob =
+  Scale.parser-region-job
+    fixtureCompilationIdentity
+    Fixture.fixtureRegion
+    Scale.succeeded
+    refl
+    "worker:fixture"
+    "attempt:1"
+    false refl
+    false refl
+
+fixtureToken :
+  Scale.PersistedParserToken Fixture.fixtureSource Fixture.fixtureRegion
+fixtureToken =
+  Scale.persisted-parser-token
+    "token:fixture:0"
+    "0"
+    Fixture.fixtureRegion
+    refl
+    "0"
+    "5"
+    "Alice"
+    "alice"
+    "PROPN"
+    "{}"
+    "1"
+    "nsubj"
+    false refl
+
+fixtureAttempt :
+  Scale.SemanticAttemptAssignment Fixture.fixtureSource
+fixtureAttempt =
+  Scale.semantic-attempt-assignment
+    Fixture.fixtureRegion
+    refl
+    (Scale.parserSucceeded (fixtureToken ∷ []))
+
+fixtureCoverage : Scale.SemanticAttemptCoverage Fixture.fixtureSource
+fixtureCoverage =
+  Scale.semantic-attempt-coverage
+    (fixtureAttempt ∷ [])
+    false refl
+    false refl
+    false refl
+
+fixtureDbNativeReceipt : Scale.DbNativeCompilerReceipt Fixture.fixtureSource
+fixtureDbNativeReceipt =
+  Scale.db-native-compiler-receipt
+    PersistFixture.fixtureSourcePersistence
+    fixtureCoverage
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureHasNoUnattemptedSemanticRegions :
+  Scale.SemanticAttemptCoverage.unattemptedSemanticRegions fixtureCoverage
+  ≡ false
+fixtureHasNoUnattemptedSemanticRegions = refl
+
+fixturePostgresRemainsLocalMaterialisation :
+  Scale.DbNativeCompilerReceipt.postgresMaterialisationIsLocal
+    fixtureDbNativeReceipt
+  ≡ true
+fixturePostgresRemainsLocalMaterialisation = refl
+
+fixtureAutomaticExtractionDoesNotAdmitTruth :
+  Scale.DbNativeCompilerReceipt.parserCompletionCreatesAdmission
+    fixtureDbNativeReceipt
+  ≡ false
+fixtureAutomaticExtractionDoesNotAdmitTruth = refl
