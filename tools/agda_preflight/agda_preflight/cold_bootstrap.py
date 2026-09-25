@@ -20,6 +20,8 @@ class ImportReceipt:
     module_name: str
     imports: Tuple[str, ...]
     interface: Optional[ModuleInterface] = None
+    files_parsed: int = 0
+    parse_ns: int = 0
 
 
 @dataclass(frozen=True)
@@ -64,8 +66,11 @@ def _init_import_worker(root: str) -> None:
     global _WORKER_ROOT, _WORKER_PARSER, _WORKER_CHECKER, _WORKER_PROFILER
     _WORKER_ROOT = Path(root).resolve()
     _WORKER_PARSER = None
-    _WORKER_CHECKER = Checker(_WORKER_ROOT)
-    _WORKER_PROFILER = None
+    _WORKER_PROFILER = Profiler()
+    _WORKER_CHECKER = Checker(
+        _WORKER_ROOT,
+        profiler=_WORKER_PROFILER,
+    )
 
 
 def _init_diagnostic_worker(root: str) -> None:
@@ -82,14 +87,25 @@ def _init_diagnostic_worker(root: str) -> None:
 def _scan_import(path_text: str) -> ImportReceipt:
     assert _WORKER_ROOT is not None
     assert _WORKER_CHECKER is not None
+    assert _WORKER_PROFILER is not None
+    before = _WORKER_PROFILER.snapshot()
     path = Path(path_text).resolve()
     summary = _WORKER_CHECKER.parse_summary(path)
     interface = interface_from_summary(_WORKER_ROOT, summary)
+    after = _WORKER_PROFILER.snapshot()
     return ImportReceipt(
         path=str(path),
         module_name=summary.module_name,
         imports=tuple(sorted(set(summary.imports.values()))),
         interface=interface,
+        files_parsed=(
+            after.counts.get("files_parsed", 0)
+            - before.counts.get("files_parsed", 0)
+        ),
+        parse_ns=(
+            after.stages_ns.get("parse.tree_sitter", 0)
+            - before.stages_ns.get("parse.tree_sitter", 0)
+        ),
     )
 
 
