@@ -253,3 +253,7 @@ import DASHI.Moonshine.OggSSPP2OrientedInertiaTenStateRecognitionExact
 import DASHI.Moonshine.OggSSPP2OrientedUnorientedInertiaStackCandidateExact
 
 import DASHI.Moonshine.OggSSPClassicalCarrierToIndependent369RecognitionExact
+
+import DASHI.Moonshine.OggSSPP3DeligneRapoportStratumCodeExact
+
+import DASHI.Moonshine.OggSSPP2OrientedInertiaModuliProblemExact
