@@ -496,3 +496,29 @@ dbNativeFixtureGroupingReviewLeavesClaimsUnreviewed :
   DbNativeCorpusRegression.fixtureGroupingReviewDoesNotPayClaimReview
   ≡ DbNativeCorpusRegression.fixtureGroupingReviewDoesNotPayClaimReview
 dbNativeFixtureGroupingReviewLeavesClaimsUnreviewed = refl
+
+
+dbNativeAutoObservationDoesNotCreateObservationIdentity :
+  DbNativeCorpus.AutoObservationCreatesObservationIdentity → ⊥
+dbNativeAutoObservationDoesNotCreateObservationIdentity =
+  DbNativeCorpus.autoObservationDoesNotCreateObservationIdentity
+
+dbNativeAutoObservationDoesNotCreateEventIdentity :
+  DbNativeCorpus.AutoObservationCreatesEventIdentity → ⊥
+dbNativeAutoObservationDoesNotCreateEventIdentity =
+  DbNativeCorpus.autoObservationDoesNotCreateEventIdentity
+
+dbNativeAutoProposalDoesNotCreateEventIdentity :
+  DbNativeCorpus.AutoJoinProposalCreatesEventIdentity → ⊥
+dbNativeAutoProposalDoesNotCreateEventIdentity =
+  DbNativeCorpus.autoJoinProposalDoesNotCreateEventIdentity
+
+dbNativeAutoProposalDoesNotCreateClaimTruth :
+  DbNativeCorpus.AutoJoinProposalCreatesClaimTruth → ⊥
+dbNativeAutoProposalDoesNotCreateClaimTruth =
+  DbNativeCorpus.autoJoinProposalDoesNotCreateClaimTruth
+
+dbNativeFixtureAutoProposalRemainsReviewGated :
+  DbNativeCorpusRegression.fixtureAutoProposalRequiresReview
+  ≡ DbNativeCorpusRegression.fixtureAutoProposalRequiresReview
+dbNativeFixtureAutoProposalRemainsReviewGated = refl
