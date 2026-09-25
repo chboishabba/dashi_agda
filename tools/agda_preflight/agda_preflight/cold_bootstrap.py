@@ -6,7 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
-from typing import Dict, Iterable, Iterator, List, Sequence, Tuple
+from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
 
 from .ast_index import build_import_surface
 from .checker import Checker, _parser
@@ -32,9 +32,9 @@ class DiagnosticReceipt:
     diagnostics: Tuple[dict, ...]
 
 
-_WORKER_ROOT: Path | None = None
+_WORKER_ROOT: Optional[Path] = None
 _WORKER_PARSER = None
-_WORKER_CHECKER: Checker | None = None
+_WORKER_CHECKER: Optional[Checker] = None
 
 
 def worker_count(requested: int) -> int:
