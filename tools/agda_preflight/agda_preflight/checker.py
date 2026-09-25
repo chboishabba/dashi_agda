@@ -15,6 +15,7 @@ from .evidence import DIAGNOSTIC_ALIASES, EvidenceLevel, evidence_name, policy_f
 from .timing import Profiler
 from .fixes import SuggestedFix
 from .fix_engine import enrich_diagnostics
+from .interfaces import ModuleInterface, interface_from_summary
 
 
 
@@ -202,6 +203,7 @@ class Checker:
         evidence_level: EvidenceLevel = EvidenceLevel.DASHI_INDEX,
         scope_backend=None,
         profiler: Optional[Profiler] = None,
+        interfaces: Optional[Dict[str, ModuleInterface]] = None,
     ):
         self.root = root.resolve()
         self.profiler = profiler
@@ -211,6 +213,8 @@ class Checker:
             with profiler.stage("startup.tree_sitter_parser"):
                 self.parser = _parser()
         self._summary_cache: Dict[Path, ModuleSummary] = {}
+        self._interface_cache: Dict[Path, ModuleInterface] = {}
+        self._preloaded_interfaces = dict(interfaces or {})
         self._export_cache: Dict[Path, Set[str]] = {}
         self._diagnostic_cache: Dict[Path, List[Diagnostic]] = {}
         self.evidence_level = evidence_level
@@ -305,7 +309,7 @@ class Checker:
 
     def exported_names(
         self,
-        summary: ModuleSummary,
+        summary,
         _seen: Optional[Set[Path]] = None,
     ) -> Set[str]:
         """Return local exports plus conservative public re-exports.
@@ -314,6 +318,9 @@ class Checker:
         guessing about private/abstract visibility or unresolved module
         applications; those remain outside the hard structural contract.
         """
+        if isinstance(summary, ModuleInterface):
+            return set(summary.exports)
+
         cached = self._export_cache.get(summary.path)
         if cached is not None:
             return set(cached)
@@ -368,6 +375,32 @@ class Checker:
             path = self.module_path(module)
             if path.exists():
                 out[alias] = self.parse_summary(path)
+        return out
+
+    def module_interface(self, summary: ModuleSummary) -> ModuleInterface:
+        path = summary.path.resolve()
+        cached = self._interface_cache.get(path)
+        if cached is not None:
+            return cached
+        interface = interface_from_summary(self.root, summary)
+        self._interface_cache[path] = interface
+        return interface
+
+    def imported_interfaces(
+        self,
+        summary: ModuleSummary,
+    ) -> Dict[str, ModuleInterface]:
+        out: Dict[str, ModuleInterface] = {}
+        for alias, module in summary.imports.items():
+            preloaded = self._preloaded_interfaces.get(module)
+            if preloaded is not None:
+                out[alias] = preloaded
+                continue
+            path = self.module_path(module)
+            if not path.exists():
+                continue
+            imported = self.parse_summary(path)
+            out[alias] = self.module_interface(imported)
         return out
 
     def structural_check(self, path: Path) -> List[Diagnostic]:
