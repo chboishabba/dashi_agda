@@ -6,6 +6,7 @@ import DASHI.Reasoning.RelationalEverything
 import DASHI.Reasoning.TrialecticEdgeSynthesisCompatibilityExact
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact
 import DASHI.Reasoning.TrialecticGrothendieckThreeCellDescentExact
+import DASHI.Reasoning.TrialecticGrothendieckAttachedTwoCellDescentExact
 import DASHI.Reasoning.TrialecticThreeCellCarryDepthExact
 import DASHI.Reasoning.TernarySynthesisOrbitWeldEverything
 import DASHI.Reasoning.PathologicEverything
