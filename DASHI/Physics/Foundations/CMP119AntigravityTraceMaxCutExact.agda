@@ -364,3 +364,114 @@ realCMP119HaarTransportStillRequiredForPhysicalPromotion = true
 realCMP119HaarTransportStillRequiredForPhysicalPromotionIsTrue :
   realCMP119HaarTransportStillRequiredForPhysicalPromotion ≡ true
 realCMP119HaarTransportStillRequiredForPhysicalPromotionIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- PREFERRED PHYSICAL REAL-CARRIER MAX-CUT
+------------------------------------------------------------------------
+
+data PhysicalAntigravityRealLeaf : Set where
+  attachSelectedStressDirectionToRealCMP119TwoJ :
+    PhysicalAntigravityRealLeaf
+
+  attachSelectedActiveTraceToPartitionTimesQuantumTrace :
+    PhysicalAntigravityRealLeaf
+
+  attachSelectedQuantumTraceToPhysicalSU2F2 :
+    PhysicalAntigravityRealLeaf
+
+  constructPositiveProductHaarRegionAroundNonzeroCurvature :
+    PhysicalAntigravityRealLeaf
+
+  proveGibbsDensityUniformlyPositiveOnSelectedRegion :
+    PhysicalAntigravityRealLeaf
+
+  proveWeightedF2UniformlyPositiveOnSelectedRegion :
+    PhysicalAntigravityRealLeaf
+
+canonicalPhysicalAntigravityRealLeaves : List PhysicalAntigravityRealLeaf
+canonicalPhysicalAntigravityRealLeaves =
+  attachSelectedStressDirectionToRealCMP119TwoJ
+  ∷ attachSelectedActiveTraceToPartitionTimesQuantumTrace
+  ∷ attachSelectedQuantumTraceToPhysicalSU2F2
+  ∷ constructPositiveProductHaarRegionAroundNonzeroCurvature
+  ∷ proveGibbsDensityUniformlyPositiveOnSelectedRegion
+  ∷ proveWeightedF2UniformlyPositiveOnSelectedRegion
+  ∷ []
+
+preferredPhysicalSourceCarrierIsRealCMP119 : Bool
+preferredPhysicalSourceCarrierIsRealCMP119 = true
+
+preferredPhysicalSourceCarrierIsRealCMP119IsTrue :
+  preferredPhysicalSourceCarrierIsRealCMP119 ≡ true
+preferredPhysicalSourceCarrierIsRealCMP119IsTrue = refl
+
+rationalToRealHaarPromotionNeededOnPreferredRoute : Bool
+rationalToRealHaarPromotionNeededOnPreferredRoute = false
+
+rationalToRealHaarPromotionNeededOnPreferredRouteIsFalse :
+  rationalToRealHaarPromotionNeededOnPreferredRoute ≡ false
+rationalToRealHaarPromotionNeededOnPreferredRouteIsFalse = refl
+
+realCMP119TwoJConnectedCovarianceCompilerClosed : Bool
+realCMP119TwoJConnectedCovarianceCompilerClosed = true
+
+realCMP119TwoJConnectedCovarianceCompilerClosedIsTrue :
+  realCMP119TwoJConnectedCovarianceCompilerClosed ≡ true
+realCMP119TwoJConnectedCovarianceCompilerClosedIsTrue = refl
+
+realSU2TraceSignCompilerClosed : Bool
+realSU2TraceSignCompilerClosed = true
+
+realSU2TraceSignCompilerClosedIsTrue :
+  realSU2TraceSignCompilerClosed ≡ true
+realSU2TraceSignCompilerClosedIsTrue = refl
+
+realPositiveCurvaturePointCompilerClosed : Bool
+realPositiveCurvaturePointCompilerClosed = true
+
+realPositiveCurvaturePointCompilerClosedIsTrue :
+  realPositiveCurvaturePointCompilerClosed ≡ true
+realPositiveCurvaturePointCompilerClosedIsTrue = refl
+
+realPositiveCurvatureNeighborhoodStillRequired : Bool
+realPositiveCurvatureNeighborhoodStillRequired = true
+
+realPositiveCurvatureNeighborhoodStillRequiredIsTrue :
+  realPositiveCurvatureNeighborhoodStillRequired ≡ true
+realPositiveCurvatureNeighborhoodStillRequiredIsTrue = refl
+
+selectedRealTwoJStressDirectionSameObjectStillRequired : Bool
+selectedRealTwoJStressDirectionSameObjectStillRequired = true
+
+selectedRealTwoJStressDirectionSameObjectStillRequiredIsTrue :
+  selectedRealTwoJStressDirectionSameObjectStillRequired ≡ true
+selectedRealTwoJStressDirectionSameObjectStillRequiredIsTrue = refl
+
+selectedRealQuantumTraceSU2F2SameObjectStillRequired : Bool
+selectedRealQuantumTraceSU2F2SameObjectStillRequired = true
+
+selectedRealQuantumTraceSU2F2SameObjectStillRequiredIsTrue :
+  selectedRealQuantumTraceSU2F2SameObjectStillRequired ≡ true
+selectedRealQuantumTraceSU2F2SameObjectStillRequiredIsTrue = refl
+
+selectedRealActiveTraceProductSameObjectStillRequired : Bool
+selectedRealActiveTraceProductSameObjectStillRequired = true
+
+selectedRealActiveTraceProductSameObjectStillRequiredIsTrue :
+  selectedRealActiveTraceProductSameObjectStillRequired ≡ true
+selectedRealActiveTraceProductSameObjectStillRequiredIsTrue = refl
+
+exactFiniteHaarQuadratureRequiredForPhysicalRealRoute : Bool
+exactFiniteHaarQuadratureRequiredForPhysicalRealRoute = false
+
+exactFiniteHaarQuadratureRequiredForPhysicalRealRouteIsFalse :
+  exactFiniteHaarQuadratureRequiredForPhysicalRealRoute ≡ false
+exactFiniteHaarQuadratureRequiredForPhysicalRealRouteIsFalse = refl
+
+flatIdentityHaarWitnessPaysF2StrictSign : Bool
+flatIdentityHaarWitnessPaysF2StrictSign = false
+
+flatIdentityHaarWitnessPaysF2StrictSignIsFalse :
+  flatIdentityHaarWitnessPaysF2StrictSign ≡ false
+flatIdentityHaarWitnessPaysF2StrictSignIsFalse = refl
