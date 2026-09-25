@@ -695,6 +695,7 @@ class SourceIndex:
             row = self._row(path)
             fresh = self._fresh(row, stat)
 
+            interface_rebuilt = False
             if fresh:
                 module_name = row["module_name"]
                 imports = self._imports_for_path(row["path"])
@@ -715,6 +716,7 @@ class SourceIndex:
                         self.root,
                         summary,
                     )
+                    interface_rebuilt = True
             else:
                 checker = self._checker_instance()
                 summary = checker.parse_summary(path)
@@ -785,6 +787,23 @@ class SourceIndex:
                 diagnostics = self._decode_diagnostics(row)
                 self.profiler.count("modules_cached")
                 self.profiler.count("diagnostics_cached", len(diagnostics))
+                if interface_rebuilt:
+                    self._store(
+                        path,
+                        module_name,
+                        stat,
+                        source_hash,
+                        api_base_hash,
+                        api_hash,
+                        public_imports,
+                        interface,
+                        dependency_fingerprint,
+                        imports,
+                        diagnostics,
+                    )
+                    self.profiler.count(
+                        "incremental_interface_rebuilds_persisted"
+                    )
             else:
                 checker = self._checker_instance()
                 diagnostics = checker.structural_check(path)
