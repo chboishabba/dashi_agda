@@ -83,6 +83,8 @@ import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityCoefficientRound702E
 import DASHI.Physics.Closure.NSTriadKNR650CyclicHelicalVectorTransformRound703Exact as R703
 import DASHI.Physics.Closure.NSTriadKNR650CyclicHelicalCoefficientCancellationRound704Exact as R704
 import DASHI.Physics.Closure.NSTriadKNR650CyclicHelicalPairingNormalFormRound705Exact as R705
+import DASHI.Physics.Closure.NSTriadKNR650NestedOuterSlotCoefficientFactorRound706Exact as R706
+import DASHI.Physics.Closure.NSTriadKNR650SelfInnerThreeOuterLegOrbitRound707Exact as R707
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
