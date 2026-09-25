@@ -27,7 +27,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Nat.Base using (_≤_; _<_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
