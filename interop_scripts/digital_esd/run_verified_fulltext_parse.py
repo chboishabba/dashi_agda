@@ -185,12 +185,8 @@ def resolve_slr_root(explicit: Path | None) -> Path:
         root = Path(os.environ["SLR_REPO_ROOT"]).resolve()
     else:
         root = (Path(__file__).resolve().parents[3] / "slr").resolve()
-    scholarly = root / "interop_scripts" / "digital_esd" / "scholarly_fulltext.py"
-    census = root / "scripts" / "census_digital_esd_study_processing.py"
-    if not scholarly.exists():
-        raise SystemExit(f"SLR scholarly parser wrapper not found: {scholarly}")
-    if not census.exists():
-        raise SystemExit(f"SLR study census not found: {census}")
+    if not (root / "Cargo.toml").exists():
+        raise SystemExit(f"SLR repository root not found: {root}")
     return root
 
 
@@ -225,6 +221,11 @@ def main() -> int:
         help="parse at most N verified artifacts; omitted means all verified artifacts",
     )
     ap.add_argument("--allow-partial", action="store_true")
+    ap.add_argument(
+        "--materialize-only",
+        action="store_true",
+        help="stop after verified bytes -> materialised UTF-8 + processing ledger; do not run the legacy scholarly parser",
+    )
     ap.add_argument("--slr-review-receipts", type=Path)
     ap.add_argument("--source-audit-receipts", type=Path)
     args = ap.parse_args()
@@ -382,9 +383,77 @@ def main() -> int:
     handoff_path = output_dir / "slr-handoff-receipts.jsonl"
     write_jsonl(materialization_path, materialization_receipts)
     write_jsonl(parser_input_path, parser_inputs)
-    write_jsonl(handoff_path, handoff_receipts)
     if failures:
         write_jsonl(output_dir / "materialization-failures.jsonl", failures)
+
+    if args.materialize_only:
+        processing_ledger_builder = HERE / "build_processing_ledger.py"
+        processing_ledger = output_dir / "study-processing-ledger.jsonl"
+        processing_manifest = output_dir / "study-processing-ledger-manifest.json"
+        processing_cmd = [
+            sys.executable,
+            str(processing_ledger_builder),
+            "--screening-ledger",
+            str(ledger),
+            "--fulltext-index",
+            str(fulltext_index),
+            "--materialization-receipts",
+            str(materialization_path),
+            "--output-ledger",
+            str(processing_ledger),
+            "--output-manifest",
+            str(processing_manifest),
+        ]
+        existing_handoff = output_dir / "slr-handoff-receipts.jsonl"
+        existing_parse = output_dir / "slr-parse-receipts.jsonl"
+        existing_review = (
+            args.slr_review_receipts.resolve()
+            if args.slr_review_receipts
+            else output_dir / "slr-review-receipts.jsonl"
+        )
+        existing_audit = (
+            args.source_audit_receipts.resolve()
+            if args.source_audit_receipts
+            else output_dir / "source-audit-receipts.jsonl"
+        )
+        for flag, path in [
+            ("--slr-handoff", existing_handoff),
+            ("--slr-parse-receipts", existing_parse),
+            ("--slr-review-receipts", existing_review),
+            ("--source-audit-receipts", existing_audit),
+        ]:
+            if path.exists():
+                processing_cmd.extend([flag, str(path)])
+        print("+", " ".join(processing_cmd), file=sys.stderr)
+        subprocess.run(
+            processing_cmd,
+            cwd=Path(__file__).resolve().parents[2],
+            check=True,
+        )
+
+        receipt = {
+            "schema": "digital-esd-verified-fulltext-materialization-run-v1",
+            "verified_fulltext_total_count": len(verified_all),
+            "selected_for_materialization_count": len(verified),
+            "materialized_text_count": len(materialization_receipts),
+            "materialization_failure_count": len(failures),
+            "materialization_receipts_reference": str(materialization_path),
+            "materialization_receipts_sha256": sha256_file(materialization_path),
+            "study_processing_ledger_reference": str(processing_ledger),
+            "study_processing_ledger_sha256": sha256_file(processing_ledger),
+            "legacy_scholarly_parser_invoked": False,
+            "materialization_creates_reviewed_evidence": False,
+            "materialization_creates_source_audit_admission": False,
+        }
+        receipt_path = output_dir / "verified-fulltext-materialization-run.json"
+        receipt_path.write_text(
+            json.dumps(receipt, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        print(json.dumps(receipt, indent=2, sort_keys=True))
+        return 0
+
+    write_jsonl(handoff_path, handoff_receipts)
 
     scholarly = slr_root / "interop_scripts" / "digital_esd" / "scholarly_fulltext.py"
     parser_output_dir = output_dir / "parser"
