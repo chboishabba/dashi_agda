@@ -53,11 +53,11 @@ asPartitionWitness :
     {fieldStrengthSquare : Configuration → ℝ} →
   RealHaarRegionSourceSignInput ordered fieldStrengthSquare →
   Haar.PositiveRealPartitionWitness ordered
-asPartitionWitness strict input = record
+asPartitionWitness {ordered = ordered} strict input = record
   { Haar.PositiveRealPartitionWitness.densityMinorant =
       Region.asStrictPositiveMinorantWithScaling
         strict
-        (Region.scalingLawFromOrderedBase _)
+        (Region.scalingLawFromOrderedBase ordered)
         (densityLower input)
   }
 
@@ -69,11 +69,11 @@ asWeightedF2Witness :
     {fieldStrengthSquare : Configuration → ℝ} →
   RealHaarRegionSourceSignInput ordered fieldStrengthSquare →
   Haar.PositiveWeightedRealHaarWitness ordered fieldStrengthSquare
-asWeightedF2Witness strict input = record
+asWeightedF2Witness {ordered = ordered} strict input = record
   { Haar.PositiveWeightedRealHaarWitness.weightedMinorant =
       Region.asStrictPositiveMinorantWithScaling
         strict
-        (Region.scalingLawFromOrderedBase _)
+        (Region.scalingLawFromOrderedBase ordered)
         (weightedF2Lower input)
   }
 
