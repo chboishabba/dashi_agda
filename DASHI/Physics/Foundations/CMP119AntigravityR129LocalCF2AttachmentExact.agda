@@ -74,9 +74,9 @@ record R129PinnedLocalCF2Attachment
         (R109.CompletedState completion)
         (R109.Composite completion)
 
-    curvatureFamilyUsesR129CompletedSource :
-      ∀ polynomial →
-      Curvature.markedSource curvatureFamily polynomial
+    selectedF2MarkedSourceIsR129CompletedSource :
+      Curvature.markedSource
+        curvatureFamily fieldStrengthSquarePolynomial
       ≡ compositeData
 
     operatorOfCompletedComposite :
