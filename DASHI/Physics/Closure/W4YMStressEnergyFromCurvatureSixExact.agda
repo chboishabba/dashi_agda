@@ -4,7 +4,7 @@ module DASHI.Physics.Closure.W4YMStressEnergyFromCurvatureSixExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; [])
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact as Curvature
@@ -52,7 +52,7 @@ ymStressTraceIsZero :
   ∀ {Configuration}
     (dataSet : CoordinateYMCurvatureStress Configuration)
     configuration →
-  ymStressTrace dataSet configuration ≡ Data.Rational.Base.0ℚ
+  ymStressTrace dataSet configuration ≡ 0ℚ
 ymStressTraceIsZero dataSet configuration =
   Stress.classicalStressTraceIsZero
     (Curvature.curvatureAt (curvature dataSet) configuration)
