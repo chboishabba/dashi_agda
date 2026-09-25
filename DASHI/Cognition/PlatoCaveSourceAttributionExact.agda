@@ -13,6 +13,7 @@ module DASHI.Cognition.PlatoCaveSourceAttributionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 
