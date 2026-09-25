@@ -10,7 +10,13 @@ from typing import Callable, Dict, Iterable, Iterator, List, Optional, Sequence,
 
 from .checker import Checker
 from .timing import Profiler
-from .interfaces import ModuleInterface, interface_from_summary, resolve_interface_exports
+from .interfaces import (
+    ModuleInterface,
+    interface_api_base_hash,
+    interface_from_summary,
+    interface_public_dependencies,
+    resolve_interface_exports,
+)
 
 
 @dataclass(frozen=True)
@@ -80,10 +86,8 @@ def _scan_import(path_text: str) -> ImportReceipt:
     path = Path(path_text).resolve()
     summary = _WORKER_CHECKER.parse_summary(path)
     interface = interface_from_summary(_WORKER_ROOT, summary)
-    api_base_hash, public_imports = _api_base(
-        _WORKER_ROOT,
-        summary,
-    )
+    api_base_hash = interface_api_base_hash(interface)
+    public_imports = interface_public_dependencies(interface)
     after = _WORKER_PROFILER.snapshot()
     return ImportReceipt(
         path=str(path),
@@ -101,102 +105,6 @@ def _scan_import(path_text: str) -> ImportReceipt:
             - before.stages_ns.get("parse.tree_sitter", 0)
         ),
     )
-
-
-def _directive_payload(directive) -> dict:
-    return {
-        "kind": directive.kind,
-        "names": list(directive.names),
-        "renamings": [list(pair) for pair in directive.renamings],
-    }
-
-
-def _api_base(root: Path, summary) -> Tuple[str, Tuple[str, ...]]:
-    public_imports = set()
-    public_import_payload = []
-    for item in summary.ast.imports:
-        if item.opened and item.public:
-            public_imports.add(item.module)
-            public_import_payload.append(
-                {
-                    "module": item.module,
-                    "alias": item.alias,
-                    "directives": [
-                        _directive_payload(directive)
-                        for directive in item.directives
-                    ],
-                }
-            )
-
-    public_open_payload = []
-    for opened in summary.ast.opens:
-        if not opened.public:
-            continue
-        module = summary.imports.get(opened.target)
-        if module is None:
-            candidate = root.joinpath(
-                *opened.target.split(".")
-            ).with_suffix(".agda")
-            if candidate.exists():
-                module = opened.target
-        if module is not None:
-            public_imports.add(module)
-        public_open_payload.append(
-            {
-                "target": opened.target,
-                "module": module,
-                "directives": [
-                    _directive_payload(directive)
-                    for directive in opened.directives
-                ],
-            }
-        )
-
-    payload = {
-        "module": summary.module_name,
-        "signatures": [
-            [name, signature.type_text]
-            for name, signature in sorted(summary.ast.signatures.items())
-        ],
-        "records": [
-            [
-                name,
-                record.constructor,
-                record.field_surface_complete,
-                [
-                    [field_name, field.type_text]
-                    for field_name, field in sorted(record.fields.items())
-                ],
-            ]
-            for name, record in sorted(summary.ast.records.items())
-        ],
-        "data": [
-            [
-                name,
-                [
-                    [constructor_name, constructor.type_text]
-                    for constructor_name, constructor
-                    in sorted(data.constructors.items())
-                ],
-            ]
-            for name, data in sorted(summary.ast.data.items())
-        ],
-        "nested_modules": sorted(summary.ast.nested_modules),
-        "public_imports": sorted(
-            public_import_payload,
-            key=lambda item: (item["module"], item["alias"]),
-        ),
-        "public_opens": sorted(
-            public_open_payload,
-            key=lambda item: (item["target"], item["module"] or ""),
-        ),
-    }
-    encoded = json.dumps(
-        payload,
-        sort_keys=True,
-        separators=(",", ":"),
-    ).encode("utf-8")
-    return hashlib.sha256(encoded).hexdigest(), tuple(sorted(public_imports))
 
 
 def _diagnostic_payload(root: Path, diagnostic) -> dict:
@@ -231,10 +139,9 @@ def _diagnose_path_with(
     source_hash = hashlib.sha256(
         summary.source.encode("utf-8")
     ).hexdigest()
-    api_base_hash, public_imports = _api_base(
-        root,
-        summary,
-    )
+    interface = interface_from_summary(root, summary)
+    api_base_hash = interface_api_base_hash(interface)
+    public_imports = interface_public_dependencies(interface)
     return DiagnosticReceipt(
         path=str(path),
         module_name=summary.module_name,
