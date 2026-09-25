@@ -285,12 +285,7 @@ p3SlopeEqualityDoesNotCreateSuzukiRecognition ()
 threeBInertiaFrontier :
   ThreeB.InertiaPhaseResolutionFrontier
 threeBInertiaFrontier =
-  ThreeB.currentPhaseResolutionProducerReceipt
-    |> λ _ -> ThreeB.currentInertiaPhaseResolutionFrontier
-  where
-    infixl 0 _|>_
-    _|>_ : ∀ {A B : Set} -> A -> (A -> B) -> B
-    x |> f = f x
+  ThreeB.currentInertiaPhaseResolutionFrontier
 
 ------------------------------------------------------------------------
 -- 8. Status.
