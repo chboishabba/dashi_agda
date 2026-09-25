@@ -32,6 +32,8 @@ import DASHI.Core.FutureObservationalRefinement as Future
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Core.TypedDependencyCore as Dependency
+import DASHI.ComputerScience.WrongTypeAdmissibleAdequacyCrossPollinationExact as WrongBridge
+import DASHI.ComputerScience.WrongTypeAttributionFactorisationPlanningSnowballExact as Wrong
 
 ------------------------------------------------------------------------
 -- Fine histories and a target-local observation surface.
@@ -156,6 +158,30 @@ targetSurfaceCannotDetermineOrigin :
 targetSurfaceCannotDetermineOrigin =
   Adequacy.admissibilityDoesNotRepairNonFactorability
     canonicalAdmissibleDetectionDefect
+
+TargetProjectRealizable :
+  (History → TargetObservation) → Set
+TargetProjectRealizable projection = ⊤
+
+OriginAnswerRealizable :
+  (TargetObservation → Origin) → Set
+OriginAnswerRealizable answer = ⊤
+
+cognitivePresentMismatch :
+  WrongBridge.AdequacyMismatch
+    TargetProjectRealizable
+    OriginAnswerRealizable
+    detectionProblem
+    originQuery
+cognitivePresentMismatch =
+  WrongBridge.presentNonFactorable
+    originAdequacyDefect
+
+cognitiveMismatchIsNonFactorableRepresentation :
+  WrongBridge.abstractWrongType cognitivePresentMismatch
+  ≡ Wrong.nonFactorableRepresentation
+cognitiveMismatchIsNonFactorableRepresentation =
+  refl
 
 ------------------------------------------------------------------------
 -- Source-native refinement: retain the provenance/origin coordinate.
