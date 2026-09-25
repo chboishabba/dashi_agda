@@ -43,6 +43,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSPeriodicConcreteCutoffCubeCarrier as Cube
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
+import DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact as R38
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
@@ -120,7 +121,7 @@ module Recombine
   combinedSelfExternalIsCompleteNestedOrbit :
     combinedSelfExternalResidue
     ≡
-    DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.foldPower
+    R38.foldPower
       Split.Full.nestedTriadOrbitResidue items
   combinedSelfExternalIsCompleteNestedOrbit =
     trans
