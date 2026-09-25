@@ -11,9 +11,10 @@ module DASHI.Physics.YangMills.BalabanLiteralWilsonWEXTTheoremExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; ∣_∣; _≤_)
+import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
@@ -74,6 +75,57 @@ literalWilsonMixedLogTheorem
   ; R576.PreferredWilsonMixedLogPhysicalSource.literalWilsonMixedLogIsConnectedClusterSum =
       literalWilsonMixedLogIsConnectedClusterSum
   }
+
+
+------------------------------------------------------------------------
+-- W3 finite summation payment.
+--
+-- The physical/localization input should be pointwise: each actual
+-- Wilson-marked connected cluster is charged by a nonnegative shell charge.
+-- Once the total shell charge is already bounded by the selected rooted shell,
+-- finite summation is ordinary rational order algebra.
+------------------------------------------------------------------------
+
+sumMapPointwiseMonotone :
+  ∀ {A : Set}
+    (items : List A)
+    (lower upper : A → ℚ) →
+  (∀ item → lower item ≤ upper item) →
+  TwoMark.sumℚ (TwoMark.map lower items)
+  ≤ TwoMark.sumℚ (TwoMark.map upper items)
+sumMapPointwiseMonotone [] lower upper pointwise =
+  ℚP.≤-refl
+sumMapPointwiseMonotone (item ∷ items) lower upper pointwise =
+  ℚP.+-mono-≤
+    (pointwise item)
+    (sumMapPointwiseMonotone items lower upper pointwise)
+
+absoluteConnectingWeightSumBelowRootedShellFromPointwiseLocalization :
+  ∀ {Cluster Scale Volume Root}
+    (clusters : List Cluster)
+    (weight : Cluster → ℚ)
+    (shellCharge : Cluster → ℚ)
+    (shellData : Shell.TraversalShellData Scale Volume Root)
+    (scale : Scale)
+    (volume : Volume)
+    (root : Root)
+    (distance : Nat) →
+  (∀ cluster → ∣ weight cluster ∣ ≤ shellCharge cluster) →
+  TwoMark.sumℚ (TwoMark.map shellCharge clusters)
+    ≤ Shell.rootedShell shellData scale volume root distance →
+  TwoMark.sumℚ
+    (TwoMark.map (λ cluster → ∣ weight cluster ∣) clusters)
+    ≤ Shell.rootedShell shellData scale volume root distance
+absoluteConnectingWeightSumBelowRootedShellFromPointwiseLocalization
+    clusters weight shellCharge shellData scale volume root distance
+    pointwise localizedShellSum =
+  ℚP.≤-trans
+    (sumMapPointwiseMonotone
+      clusters
+      (λ cluster → ∣ weight cluster ∣)
+      shellCharge
+      pointwise)
+    localizedShellSum
 
 literalPreferredWilsonWEXTTheorem :
   ∀ {Measure Observable Scale Volume Root}
