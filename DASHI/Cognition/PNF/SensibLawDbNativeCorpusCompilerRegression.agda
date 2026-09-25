@@ -123,3 +123,31 @@ fixtureCandidateReloadsWithoutTruth :
     fixturePersistedM12Candidate
   ≡ false
 fixtureCandidateReloadsWithoutTruth = refl
+
+
+fixtureReconciliationCandidate : Scale.CorpusReconciliationCandidate
+fixtureReconciliationCandidate =
+  Scale.corpus-reconciliation-candidate
+    "entity-mention:fixture"
+    "entity-fingerprint:fixture"
+    "proposition-fingerprint:fixture"
+    "event-fingerprint:fixture"
+    "scale1:persistent-pnf-fingerprint:v1"
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureAutomaticReconciliationDoesNotCreateEventIdentity :
+  Scale.CorpusReconciliationCandidate.createsEventIdentity
+    fixtureReconciliationCandidate
+  ≡ false
+fixtureAutomaticReconciliationDoesNotCreateEventIdentity = refl
+
+fixtureAutomaticReconciliationDoesNotCreatePropositionIdentity :
+  Scale.CorpusReconciliationCandidate.createsPropositionIdentity
+    fixtureReconciliationCandidate
+  ≡ false
+fixtureAutomaticReconciliationDoesNotCreatePropositionIdentity = refl
