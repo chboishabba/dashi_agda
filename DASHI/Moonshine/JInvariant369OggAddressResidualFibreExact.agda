@@ -1,20 +1,16 @@
 module DASHI.Moonshine.JInvariant369OggAddressResidualFibreExact where
 
 ------------------------------------------------------------------------
--- OGG ADDRESS OBSERVATION + LOSSLESS RESIDUAL FIBRE
+-- LOSSY OGG OBSERVER + ENRICHED-STATE RESIDUAL
 --
--- The address law canonically exposes only
+-- SSP15 itself is the exact fifteen-way Ogg prime carrier.  The exact address
+-- p = 9q+r recovers that lane.
 --
---   (complement mode , binary orientation).
---
--- The corrected SSP15 semantics keeps the full
---
---   (Monster/Ogg prime , internal SSP15 lane)
---
--- upstairs.  This module makes that architecture exact: the coarse address
--- value is an observation of the prime coordinate, while the full semantic
--- state is retained as residual data.  Forgetting the residual is genuinely
--- lossy; retaining it gives a definitional round trip.
+-- This file concerns only the derived coarse observer
+-- (complement mode, binary orientation) and optional internal enrichment.
+-- If one wants to recover the ENRICHED (prime, internal-state) pair from that
+-- coarse projection, residual data is required.  None of this is required to
+-- recover the underlying SSP15/Ogg lane from its exact address.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -108,11 +104,13 @@ record OggAddressResidualFibreBoundary : Set where
   constructor ogg-address-residual-fibre-boundary
   field
     coarseAddressIsObservationOnly : Bool
+    exactOggAddressAlreadyRecoversSSP15Lane : Bool
     fullPrimeInternalStateRetainedUpstairs : Bool
     residualRoundTripIsExact : Bool
     coarseAddressForgetsInternalLane : Bool
     coarseAddressCannotRecoverPrime : Bool
-    residualRefinementRequiredForLosslessSemantics : Bool
+    residualRefinementRequiredForSSP15Identity : Bool
+    residualRefinementRequiredForEnrichedState : Bool
 
 open OggAddressResidualFibreBoundary public
 
@@ -120,4 +118,4 @@ canonicalOggAddressResidualFibreBoundary :
   OggAddressResidualFibreBoundary
 canonicalOggAddressResidualFibreBoundary =
   ogg-address-residual-fibre-boundary
-    true true true true true true
+    true true true true true true false true
