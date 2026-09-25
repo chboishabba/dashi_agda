@@ -15,6 +15,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 import DASHI.Core.RelationalTrialecticSourceAtlasExact
 import DASHI.Core.RelationalSelfStalkExact
 import DASHI.Core.RelationalSelfDescentExact
+import DASHI.Core.RelationalTransportDescentSheafExact
 import DASHI.Core.IrigarayContactRelationalRechartExact
 
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact
@@ -26,6 +27,7 @@ import DASHI.Reasoning.RelationalPerspectiveIntegrationExact
 
 import DASHI.Foundations.RelationalStageTwelveSiteExact
 import DASHI.Foundations.RelationalDepthPresheafExact
+import DASHI.Foundations.RelationalDepthBidescentExact
 import DASHI.Foundations.TrialecticDepthHyperformExact
 import DASHI.Foundations.RelationalObserverNonaryD4DecompositionExact
 import DASHI.Foundations.TrialecticD4C3ResidualBoundaryExact
@@ -34,8 +36,16 @@ import DASHI.Cognition.PNF.TrialecticMentalizingCalibrationExact
 import DASHI.Cognition.PNF.PerspectiveAllocationExact
 import DASHI.Cognition.PNF.IntegrativeComplexityDifferentiationIntegrationExact
 import DASHI.Cognition.PNF.RelationalPerspectiveFactorsThroughExact
+import DASHI.Cognition.PNF.AdmissibleFactorisationDecisionHyperfabricExact
+import DASHI.Cognition.PNF.RelationalSubjectMemoryDecisionHyperfabricExact
 import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact
 import DASHI.Biology.ThreatMentalizingRelationalMonitoringSeparationExact
+import DASHI.Biology.ThreatCalibratedSocialPerceptionBoundaryExact
+import DASHI.Biology.TraumaRelationalLearningNonpromotionExact
+import DASHI.Biology.TriangulationParentificationSourceAtlasExact
+import DASHI.Biology.InterparentalThreatRelationalAdaptationSourceAtlasExact
+import DASHI.Reasoning.MediatorActionMotiveNonFactorabilityExact
+import DASHI.Cognition.PNF.RelationalPerspectiveTrialecticExact
 import DASHI.TraumaRelationalPerspectiveHyperfabricExact
 
 -- Explicit donors whose theorem surfaces are reused rather than duplicated.
