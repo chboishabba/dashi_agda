@@ -250,3 +250,5 @@ import DASHI.Physics.Foundations.CMP119GibbsConnectedNumeratorEvaluationExact
 
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonDiagonalMetricVariationExact
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact
+
+import DASHI.Physics.Foundations.CMP119ClassicalCurvatureTenMetricVariationExact
