@@ -83,6 +83,7 @@ on:
       - 'DASHI/Physics/Foundations/CMP119GibbsDiagonalTraceCancellationExact.agda'
       - 'DASHI/Physics/Foundations/CMP119GibbsDiagonalTraceSignExact.agda'
       - 'DASHI/Physics/Foundations/CMP119ClassicalWilsonTraceInsertionReductionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityTraceMaxCutExact.agda'
       - 'scripts/grqft_four_diagonal_active_stress.py'
       - 'outputs/grqft_four_diagonal_active_stress_target.json'
       - 'DASHI/Physics/Foundations/CMP119ConcreteTenSlotCrossNumeratorCandidateExact.agda'
