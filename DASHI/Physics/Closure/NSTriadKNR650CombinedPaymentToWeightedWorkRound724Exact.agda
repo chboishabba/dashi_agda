@@ -25,6 +25,7 @@ module DASHI.Physics.Closure.NSTriadKNR650CombinedPaymentToWeightedWorkRound724E
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Rational.Base using (ℚ)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -46,13 +47,13 @@ F = Rational.rationalRealField
 module CombinedToWeighted
     (Time : Set)
     (initialTime : Time)
-    (integrateTo : (Time → Data.Rational.Base.ℚ) → Time → Data.Rational.Base.ℚ)
+    (integrateTo : (Time → ℚ) → Time → ℚ)
     (VectorDerivativeOf :
       (Time → C3.Complex3 F) →
       (Time → C3.Complex3 F) → Set)
     (ScalarDerivativeOf :
-      (Time → Data.Rational.Base.ℚ) →
-      (Time → Data.Rational.Base.ℚ) → Set)
+      (Time → ℚ) →
+      (Time → ℚ) → Set)
     (projectedCross :
       R426.ProjectedCrossDerivativeCalculus Time VectorDerivativeOf)
     (vectorAlgebra :
