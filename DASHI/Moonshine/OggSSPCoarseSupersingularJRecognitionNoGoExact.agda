@@ -30,6 +30,8 @@ import DASHI.Core.ResidualSymmetryCollisionFibreExact as Action
 import DASHI.Core.OrbitStabilizerResidualPresentationExact as Orbit
 import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
 import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge as SSPAuthority
+import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
+import DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact as Compression
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.OggSSPSmallCharacteristicCodecIndexedRecognitionExact as LaneCodec
@@ -195,30 +197,18 @@ noCoarseJPi0SurjectionToP3 recognition surjection =
 -- distinct target components.
 ------------------------------------------------------------------------
 
-p2LowerUpperTargetOrbitsDistinct :
-  {orbit : DASHI.Biology.TriadicKernelLiftQuotientExact.NineOrbit} →
-  (CompressionLower : Small.P2ResidualObject) →
-  (CompressionUpper : Small.P2ResidualObject) →
-  CompressionLower ≡ CompressionUpper →
-  ⊥
-p2LowerUpperTargetOrbitsDistinct
-  {orbit}
-  (DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact.lowerSide , .orbit)
-  (DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact.upperSide , .orbit)
-  ()
-
-p2ChosenOrbit : DASHI.Biology.TriadicKernelLiftQuotientExact.NineOrbit
+p2ChosenOrbit : Triadic.NineOrbit
 p2ChosenOrbit =
-  DASHI.Biology.TriadicKernelLiftQuotientExact.orbit00
+  Triadic.orbit00
 
 p2LowerState : Small.P2ResidualObject
 p2LowerState =
-  DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact.lowerSide ,
+  Compression.lowerSide ,
   p2ChosenOrbit
 
 p2UpperState : Small.P2ResidualObject
 p2UpperState =
-  DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact.upperSide ,
+  Compression.upperSide ,
   p2ChosenOrbit
 
 p2LowerUpperDistinct : p2LowerState ≡ p2UpperState → ⊥
