@@ -279,11 +279,14 @@ def scale1_example_binary(slr_root: Path, env: dict[str, str]) -> Path:
 def merge_receipts_by_source(
     path: Path,
     new_rows: list[dict[str, Any]],
+    *,
+    invalidate_source_refs: set[str] | None = None,
 ) -> None:
+    invalidated = invalidate_source_refs or set()
     by_ref: dict[str, dict[str, Any]] = {}
     for row in read_jsonl(path):
         ref = str(row.get("source_identity_reference") or "").strip()
-        if ref:
+        if ref and ref not in invalidated:
             by_ref[ref] = row
     for row in new_rows:
         ref = str(row.get("source_identity_reference") or "").strip()
@@ -332,6 +335,11 @@ def compile_materialized_fulltexts(
     failures: list[dict[str, str]] = []
     handoff_receipts: list[dict[str, Any]] = []
     parse_receipts: list[dict[str, Any]] = []
+    current_sources = {
+        str(row.get("source_identity_reference") or "").strip()
+        for row in rows
+        if str(row.get("source_identity_reference") or "").strip()
+    }
 
     for row in rows:
         source_ref = str(row.get("source_identity_reference") or "").strip()
@@ -495,10 +503,12 @@ def compile_materialized_fulltexts(
     merge_receipts_by_source(
         parse_root / "scale1-handoff-receipts.jsonl",
         handoff_receipts,
+        invalidate_source_refs=current_sources,
     )
     merge_receipts_by_source(
         parse_root / "scale1-parse-receipts.jsonl",
         parse_receipts,
+        invalidate_source_refs=current_sources,
     )
 
     return {
