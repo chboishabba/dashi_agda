@@ -46,6 +46,7 @@ import DASHI.Physics.Closure.NSTriadKNOneCancellationPaysRemainderAndCriticalRou
 import DASHI.Physics.Closure.NSTriadKNR650C1R406DiagonalCouplingRound652Exact as R652
 import DASHI.Physics.Closure.NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Exact as R687
 import DASHI.Physics.Closure.NSTriadKNR650CombinedSelfExternalSpacetimeRound723Exact as R723
+import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact as R700
 
 F : C3.RealField _
 F = Rational.rationalRealField
@@ -120,7 +121,8 @@ module CombinedToR406
     Target.SignedCriticalCancellation T R
   combinedPaymentAndR406TransportBuildCancellation R P B = record
     { Target.cutoffIndependentRemainderBound =
-        Combined.cutoffIndependentBound P
+        λ terminal →
+          R700.twelve * Combined.cutoffIndependentBound P terminal
     ; Target.signedRemainderBudget =
         λ cutoff terminal →
           ℚP.≤-trans
