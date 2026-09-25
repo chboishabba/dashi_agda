@@ -27,28 +27,32 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 
 data AntigravityTraceLeaf : Set where
-  attachSelectedCMP119ConnectedNumeratorToCanonicalWilsonGibbs :
+  attachSelectedCMP119InsertionNumeratorToCanonicalWilsonGibbs :
     AntigravityTraceLeaf
 
   inhabitSelectedRationalHaarIntegrationLaws :
     AntigravityTraceLeaf
 
-  proveSelectedPartitionFunctionPositive :
+  inhabitSelectedFiniteHaarQuadrature :
     AntigravityTraceLeaf
 
   attachSelectedTraceToRenormalizedQuantumTrace :
     AntigravityTraceLeaf
 
-  inhabitSelectedBetaF2TraceAttachment :
+  attachSelectedQuantumTraceToSU2NormalizedF2 :
+    AntigravityTraceLeaf
+
+  inhabitPositiveFieldStrengthSquareWitness :
     AntigravityTraceLeaf
 
 canonicalAntigravityTraceLeaves : List AntigravityTraceLeaf
 canonicalAntigravityTraceLeaves =
-  attachSelectedCMP119ConnectedNumeratorToCanonicalWilsonGibbs
+  attachSelectedCMP119InsertionNumeratorToCanonicalWilsonGibbs
   ∷ inhabitSelectedRationalHaarIntegrationLaws
-  ∷ proveSelectedPartitionFunctionPositive
+  ∷ inhabitSelectedFiniteHaarQuadrature
   ∷ attachSelectedTraceToRenormalizedQuantumTrace
-  ∷ inhabitSelectedBetaF2TraceAttachment
+  ∷ attachSelectedQuantumTraceToSU2NormalizedF2
+  ∷ inhabitPositiveFieldStrengthSquareWitness
   ∷ []
 
 classicalDiagonalActionTraceCancellationClosed : Bool
@@ -204,3 +208,71 @@ selectedBetaF2TraceAttachmentStillRequired = true
 selectedBetaF2TraceAttachmentStillRequiredIsTrue :
   selectedBetaF2TraceAttachmentStillRequired ≡ true
 selectedBetaF2TraceAttachmentStillRequiredIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- POST STRICT-POSITIVITY / SU2-CONVENTION RECUT
+------------------------------------------------------------------------
+
+partitionFunctionStrictSignPrimitiveRequired : Bool
+partitionFunctionStrictSignPrimitiveRequired = false
+
+partitionFunctionStrictSignPrimitiveRequiredIsFalse :
+  partitionFunctionStrictSignPrimitiveRequired ≡ false
+partitionFunctionStrictSignPrimitiveRequiredIsFalse = refl
+
+betaTraceCoefficientStrictSignPrimitiveRequired : Bool
+betaTraceCoefficientStrictSignPrimitiveRequired = false
+
+betaTraceCoefficientStrictSignPrimitiveRequiredIsFalse :
+  betaTraceCoefficientStrictSignPrimitiveRequired ≡ false
+betaTraceCoefficientStrictSignPrimitiveRequiredIsFalse = refl
+
+fieldStrengthSquareNumeratorStrictSignPrimitiveRequired : Bool
+fieldStrengthSquareNumeratorStrictSignPrimitiveRequired = false
+
+fieldStrengthSquareNumeratorStrictSignPrimitiveRequiredIsFalse :
+  fieldStrengthSquareNumeratorStrictSignPrimitiveRequired ≡ false
+fieldStrengthSquareNumeratorStrictSignPrimitiveRequiredIsFalse = refl
+
+finiteHaarStrictPositivityCompilerClosed : Bool
+finiteHaarStrictPositivityCompilerClosed = true
+
+finiteHaarStrictPositivityCompilerClosedIsTrue :
+  finiteHaarStrictPositivityCompilerClosed ≡ true
+finiteHaarStrictPositivityCompilerClosedIsTrue = refl
+
+su2TraceCoefficientConventionCompilerClosed : Bool
+su2TraceCoefficientConventionCompilerClosed = true
+
+su2TraceCoefficientConventionCompilerClosedIsTrue :
+  su2TraceCoefficientConventionCompilerClosed ≡ true
+su2TraceCoefficientConventionCompilerClosedIsTrue = refl
+
+selectedInsertionScalarWeldStillRequired : Bool
+selectedInsertionScalarWeldStillRequired = true
+
+selectedInsertionScalarWeldStillRequiredIsTrue :
+  selectedInsertionScalarWeldStillRequired ≡ true
+selectedInsertionScalarWeldStillRequiredIsTrue = refl
+
+selectedFiniteHaarQuadratureStillRequired : Bool
+selectedFiniteHaarQuadratureStillRequired = true
+
+selectedFiniteHaarQuadratureStillRequiredIsTrue :
+  selectedFiniteHaarQuadratureStillRequired ≡ true
+selectedFiniteHaarQuadratureStillRequiredIsTrue = refl
+
+selectedQuantumTraceSU2F2SameObjectStillRequired : Bool
+selectedQuantumTraceSU2F2SameObjectStillRequired = true
+
+selectedQuantumTraceSU2F2SameObjectStillRequiredIsTrue :
+  selectedQuantumTraceSU2F2SameObjectStillRequired ≡ true
+selectedQuantumTraceSU2F2SameObjectStillRequiredIsTrue = refl
+
+positiveFieldStrengthSquareWitnessStillRequired : Bool
+positiveFieldStrengthSquareWitnessStillRequired = true
+
+positiveFieldStrengthSquareWitnessStillRequiredIsTrue :
+  positiveFieldStrengthSquareWitnessStillRequired ≡ true
+positiveFieldStrengthSquareWitnessStillRequiredIsTrue = refl
