@@ -19,11 +19,17 @@ def _run_diagnose(
     index_path: Path,
     target: Path,
     semantic_catalog=None,
+    jobs: int = 1,
 ):
     profiler = Profiler()
     semantic = {}
     with profiler.stage("request.total"):
-        with SourceIndex(root, index_path, profiler=profiler) as index:
+        with SourceIndex(
+            root,
+            index_path,
+            profiler=profiler,
+            jobs=jobs,
+        ) as index:
             result = index.diagnose(target)
         if semantic_catalog is not None:
             with profiler.stage("semantic.catalog_lookup"):
@@ -137,6 +143,12 @@ def main(argv=None) -> int:
         help="persistent source-index database",
     )
     diagnose.add_argument(
+        "--jobs",
+        type=int,
+        default=0,
+        help="cold-bootstrap workers; 0 = auto, 1 = sequential (default: auto)",
+    )
+    diagnose.add_argument(
         "--semantic-catalog",
         type=Path,
         help=(
@@ -184,6 +196,12 @@ def main(argv=None) -> int:
         help="number of warm requests to measure (default: 5)",
     )
     benchmark.add_argument(
+        "--jobs",
+        type=int,
+        default=0,
+        help="cold-bootstrap workers; 0 = auto (default: auto)",
+    )
+    benchmark.add_argument(
         "--json",
         action="store_true",
         help="emit benchmark results as JSON",
@@ -217,6 +235,12 @@ def main(argv=None) -> int:
         type=Path,
         default=Path(".cache/agda_preflight/source-index.sqlite3"),
         help="persistent source-index database",
+    )
+    next_error.add_argument(
+        "--jobs",
+        type=int,
+        default=0,
+        help="cold-bootstrap workers; 0 = auto (default: auto)",
     )
     next_error.add_argument(
         "--require-fix",
@@ -254,6 +278,12 @@ def main(argv=None) -> int:
         help="persistent source-index database",
     )
     apply_fix.add_argument(
+        "--jobs",
+        type=int,
+        default=0,
+        help="cold-bootstrap workers; 0 = auto (default: auto)",
+    )
+    apply_fix.add_argument(
         "--allow-likely",
         action="store_true",
         help="allow edits classified as likely; speculative fixes are never applied",
@@ -272,6 +302,7 @@ def main(argv=None) -> int:
             args.index,
             args.target,
             args.semantic_catalog,
+            args.jobs,
         )
 
         diagnostics = result.diagnostics
@@ -319,15 +350,19 @@ def main(argv=None) -> int:
 
         with tempfile.TemporaryDirectory(prefix="dashi-agda-bench-") as tmp:
             cold_index = Path(tmp) / "source-index.sqlite3"
-            _, cold_snapshot, _ = _run_diagnose(root, cold_index, target)
+            _, cold_snapshot, _ = _run_diagnose(
+                root, cold_index, target, jobs=args.jobs
+            )
 
         # Prime the persistent warm index once. This prime is deliberately
         # excluded from the warm distribution.
-        _run_diagnose(root, args.index, target)
+        _run_diagnose(root, args.index, target, jobs=args.jobs)
 
         warm_snapshots = []
         for _ in range(args.runs):
-            _, snapshot, _ = _run_diagnose(root, args.index, target)
+            _, snapshot, _ = _run_diagnose(
+                root, args.index, target, jobs=args.jobs
+            )
             warm_snapshots.append(snapshot)
 
         cold_payload = cold_snapshot.as_dict()
@@ -395,6 +430,7 @@ def main(argv=None) -> int:
             args.root,
             args.index,
             args.target,
+            jobs=args.jobs,
         )
         candidates = list(result.diagnostics)
         if args.require_fix:
@@ -438,6 +474,7 @@ def main(argv=None) -> int:
             args.root,
             args.index,
             args.target,
+            jobs=args.jobs,
         )
         diagnostic = next(
             (
@@ -475,6 +512,7 @@ def main(argv=None) -> int:
             args.root,
             args.index,
             args.target,
+            jobs=args.jobs,
         )
         resolved = all(
             item.diagnostic_id != args.diagnostic_id
