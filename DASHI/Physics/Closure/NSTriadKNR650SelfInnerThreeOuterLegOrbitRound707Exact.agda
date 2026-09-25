@@ -30,6 +30,7 @@ module DASHI.Physics.Closure.NSTriadKNR650SelfInnerThreeOuterLegOrbitRound707Exa
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -62,7 +63,7 @@ selfInnerOnQEnergyLeg tau =
     (selfInner (Orbit.qEnergyLeg tau))
     (Symmetry.swapTriad tau)
     refl
-    Z3.negateModeInvolutive
+    Symmetry.negateModeInvolutive (Physical.p tau)
 
 selfInnerThreeOuterLegOrbit :
   (tau : Physical.PhysicalTriadIncidence) →
