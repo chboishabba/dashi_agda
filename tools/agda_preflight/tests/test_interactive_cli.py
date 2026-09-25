@@ -129,3 +129,74 @@ def test_diagnose_can_surface_last_known_semantic_catalog(tmp_path, capsys):
     assert snapshot["term_count"] == 7
     assert snapshot["freshness"] == "unknown"
     assert payload["profile"]["counts"]["semantic_snapshot_hits"] == 1
+
+
+
+def test_apply_fix_requires_likely_opt_in_and_rechecks(tmp_path, capsys):
+    path = write_module(
+        tmp_path,
+        "Apply.Record",
+        """
+record R : Set₁ where
+  field
+    witness : Set
+
+mk : R
+mk = record { witnes = Set }
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    assert main(
+        [
+            "diagnose",
+            str(path),
+            "--root",
+            str(tmp_path),
+            "--index",
+            str(database),
+            "--json",
+        ]
+    ) == 1
+    payload = json.loads(capsys.readouterr().out)
+    diagnostic = next(
+        item for item in payload["diagnostics"]
+        if item["code"] == "TSAGDA060"
+    )
+    diagnostic_id = diagnostic["id"]
+
+    import pytest
+
+    with pytest.raises(SystemExit):
+        main(
+            [
+                "apply-fix",
+                str(path),
+                diagnostic_id,
+                "--root",
+                str(tmp_path),
+                "--index",
+                str(database),
+            ]
+        )
+    capsys.readouterr()
+
+    assert main(
+        [
+            "apply-fix",
+            str(path),
+            diagnostic_id,
+            "--root",
+            str(tmp_path),
+            "--index",
+            str(database),
+            "--allow-likely",
+            "--json",
+        ]
+    ) == 0
+
+    result = json.loads(capsys.readouterr().out)
+    assert result["resolved"] is True
+    source = path.read_text(encoding="utf-8")
+    assert "witnes =" not in source
+    assert "witness = Set" in source
