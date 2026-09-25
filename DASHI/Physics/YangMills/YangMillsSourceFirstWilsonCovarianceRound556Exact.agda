@@ -28,6 +28,7 @@ module DASHI.Physics.YangMills.YangMillsSourceFirstWilsonCovarianceRound556Exact
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -37,107 +38,6 @@ import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound27
 import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanWilsonTwoInsertionConnectedShellRound491Exact as WEXT
 import DASHI.Physics.YangMills.YangMillsWilsonContinuumClusteringRound551Exact as R551
-
-record SourceFirstWilsonCovarianceData
-    {Measure Observable Scale Volume Root : Set}
-    (dataSet :
-      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ)
-    (extension :
-      R278.ScalarCovarianceConvergenceExtension dataSet)
-    : Set₁ where
-  field
-    shellData : Shell.TraversalShellData Scale Volume Root
-
-    scaleOf : Measure → Scale
-    volumeOf : Measure → Volume
-
-    physicalDistance : Observable → Observable → Nat
-    connectingRoot : Measure → Observable → Observable → Root
-
-    timeTranslate : Observable → Nat → Observable
-
-    -- WEXT on the exact finite CMP119/T5 covariance.
-    finiteWilsonCovarianceBelowConnectingShell :
-      ∀ cutoff left right →
-      R278.connectedCovarianceMagnitude extension
-        (Gram.measureSequence dataSet cutoff)
-        left right
-      ≤
-      Shell.rootedShell shellData
-        (scaleOf (Gram.measureSequence dataSet cutoff))
-        (volumeOf (Gram.measureSequence dataSet cutoff))
-        (connectingRoot (Gram.measureSequence dataSet cutoff) left right)
-        (physicalDistance left right)
-
-    ConnectingClusterMeetsBothWilsonSupports :
-      Measure → Observable → Observable → Set
-
-    leftBounded :
-      ∀ observable →
-      Gram.BoundedObservable dataSet observable
-
-    translatedRightBounded :
-      ∀ observable time →
-      Gram.BoundedObservable dataSet (timeTranslate observable time)
-
-    translatedProductBounded :
-      ∀ left right time →
-      Gram.BoundedObservable dataSet
-        (Gram.multiplyObservable (Gram.operations dataSet)
-          left (timeTranslate right time))
-
-    supportDistanceIsEuclideanTime :
-      ∀ left right time →
-      physicalDistance left (timeTranslate right time)
-      ≡ time
-
-    upperOrderClosed :
-      ∀ sequence target upper →
-      Gram.Converges (Gram.scalarConvergence dataSet) sequence target →
-      (∀ cutoff → sequence cutoff ≤ upper) →
-      target ≤ upper
-
-open SourceFirstWilsonCovarianceData public
-
-asWilsonWEXT :
-  ∀ {Measure Observable Scale Volume Root dataSet extension} →
-  SourceFirstWilsonCovarianceData
-    {Measure = Measure} {Observable = Observable}
-    {Scale = Scale} {Volume = Volume} {Root = Root}
-    dataSet extension →
-  WEXT.WilsonTwoInsertionConnectedShell
-    Scale Volume Root Measure Observable
-asWilsonWEXT {dataSet = dataSet} {extension = extension} source = record
-  { WEXT.WilsonTwoInsertionConnectedShell.shellData =
-      shellData source
-  ; WEXT.WilsonTwoInsertionConnectedShell.stateAtScale =
-      Gram.measureSequence dataSet
-  ; WEXT.WilsonTwoInsertionConnectedShell.scaleOf =
-      scaleOf source
-  ; WEXT.WilsonTwoInsertionConnectedShell.volumeOf =
-      volumeOf source
-  ; WEXT.WilsonTwoInsertionConnectedShell.physicalDistance =
-      physicalDistance source
-  ; WEXT.WilsonTwoInsertionConnectedShell.connectingRoot =
-      connectingRoot source
-  ; WEXT.WilsonTwoInsertionConnectedShell.connectedCovarianceMagnitude =
-      R278.connectedCovarianceMagnitude extension
-  ; WEXT.WilsonTwoInsertionConnectedShell.wilsonConnectedCovarianceBelowConnectingShell =
-      λ measure left right →
-        finiteWilsonCovarianceBelowConnectingShell source
-          -- Every state in the preferred WEXT trajectory is selected from the
-          -- measure sequence.  The direct continuum compiler below consumes
-          -- only stateAtScale cutoff, so no inverse cutoff lookup is needed.
-          -- This field is supplied by the indexed constructor below.
-          zero left right
-  ; WEXT.WilsonTwoInsertionConnectedShell.connectingClusterMeetsBothWilsonSupports =
-      ConnectingClusterMeetsBothWilsonSupports source
-  }
-
--- The abstract WEXT carrier permits arbitrary states, so the record above is too
--- strong unless every Measure is indexed by a cutoff.  Use the indexed wrapper
--- below on the preferred route; it keeps State = Nat and evaluates the exact
--- selected measure sequence at that index.
 
 record IndexedSourceFirstWilsonCovarianceData
     {Measure Observable Scale Volume Root : Set}
@@ -241,7 +141,7 @@ pairTests :
   R278.SelectedConnectedCovarianceTests dataSet
 pairTests source left right time = record
   { R278.SelectedConnectedCovarianceTests.Index =
-      Agda.Builtin.Unit.⊤
+      ⊤
   ; R278.SelectedConnectedCovarianceTests.left =
       λ _ → left
   ; R278.SelectedConnectedCovarianceTests.right =
@@ -290,7 +190,7 @@ indexedAsContinuumClustering
         R278.selectedConnectedCovarianceMagnitudeConverges
           extension
           (pairTests source left right time)
-          Agda.Builtin.Unit.tt
+          tt
   ; R551.WilsonContinuumClusteringInputs.supportDistanceIsEuclideanTime =
       supportDistanceIsEuclideanTime source
   ; R551.WilsonContinuumClusteringInputs.orderClosedUnderContinuumLimit =
