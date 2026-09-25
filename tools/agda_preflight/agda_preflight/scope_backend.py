@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import os
 from pathlib import Path
 import shlex
 import subprocess
@@ -48,7 +49,23 @@ class ExternalScopeBackend:
     ):
         if isinstance(command, str):
             command = shlex.split(command)
-        self.command = tuple(command)
+
+        env_overrides = {}
+        command_parts = list(command)
+        while command_parts:
+            part = command_parts[0]
+            if "=" not in part or part.startswith("="):
+                break
+            key, value = part.split("=", 1)
+            if not key or not all(ch.isalnum() or ch == "_" for ch in key):
+                break
+            if key[0].isdigit():
+                break
+            env_overrides[key] = value
+            command_parts.pop(0)
+
+        self.command = tuple(command_parts)
+        self.env_overrides = env_overrides
         self.cwd = cwd
         self.timeout = timeout
 
@@ -60,9 +77,12 @@ class ExternalScopeBackend:
 
     def _run(self, path: Path) -> ScopeRefinement:
         try:
+            env = os.environ.copy()
+            env.update(self.env_overrides)
             completed = subprocess.run(
                 self._argv(path),
                 cwd=self.cwd,
+                env=env,
                 text=True,
                 capture_output=True,
                 timeout=self.timeout,
