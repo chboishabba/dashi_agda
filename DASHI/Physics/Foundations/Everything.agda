@@ -287,3 +287,6 @@ import DASHI.Physics.Foundations.CMP119SelectedWilsonDiagonalCoordinateAnchorExa
 
 import DASHI.Physics.Foundations.CMP119SymmetricCanonicalMetricRechartExact
 import DASHI.Physics.Foundations.CMP119SymmetricWilsonGibbsAnchorConstructorExact
+
+import DASHI.Physics.Foundations.CMP119AntigravitySelectedWilsonGibbsMinimalAnchorExact
+import DASHI.Physics.Foundations.CMP119AntigravitySelectedSourceTraceClosureExact
