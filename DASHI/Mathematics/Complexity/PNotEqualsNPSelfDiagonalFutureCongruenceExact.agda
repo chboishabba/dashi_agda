@@ -356,12 +356,14 @@ sameLayerMergeClosedUnderCommonTrace
     leftProof :
       NonTerminal _
     leftProof =
-      Dependency.precondition leftAction
+      proj₁
+        (Dependency.postcondition leftAction)
 
     rightProof :
       NonTerminal _
     rightProof =
-      Dependency.precondition rightAction
+      proj₁
+        (Dependency.postcondition rightAction)
 
     leftAfterExact :
       Dependency.after leftAction
