@@ -44,8 +44,8 @@ def _find_record(checker, summary, name):
     record = summary.ast.records.get(name)
     if record is not None:
         return record
-    for imported in checker.imported_summaries(summary).values():
-        record = imported.ast.records.get(name)
+    for imported in checker.imported_interfaces(summary).values():
+        record = imported.record_map.get(name)
         if record is not None:
             return record
     return None
@@ -62,7 +62,8 @@ def _record_field_fix(checker, summary, diagnostic):
     if record is None or not record.field_surface_complete:
         return diagnostic
 
-    field_names = sorted(record.fields)
+    fields = record.field_map if hasattr(record, "field_map") else record.fields
+    field_names = sorted(fields)
     if not field_names:
         return replace(
             diagnostic,
