@@ -185,6 +185,7 @@ record ReciprocalManifestBoundary : Set where
     leanBishopOrderReflectionOwned : Bool
     leanHypothesisFreeCanonicalRouteBOwned : Bool
     leanReplayIrrelevanceForMappedQE4E6DeltaOwned : Bool
+    leanGeneratedBindingTableKernelMatchSourceOwned : Bool
 
     generatedAgdaToLeanReplayObserved : Bool
     leanExactHeadKernelReceiptObserved : Bool
@@ -197,5 +198,5 @@ canonicalReciprocalManifestBoundary :
 canonicalReciprocalManifestBoundary =
   reciprocal-manifest-boundary
     true true true true true true true true
-    true true true true true true true
+    true true true true true true true true
     false false false
