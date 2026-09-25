@@ -917,3 +917,64 @@ directFourDiagonalActiveSumSignStillSufficient = true
 directFourDiagonalActiveSumSignStillSufficientIsTrue :
   directFourDiagonalActiveSumSignStillSufficient ≡ true
 directFourDiagonalActiveSumSignStillSufficientIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- S1/S2/S3/S4 POST-CORRECTION FRONTIER
+------------------------------------------------------------------------
+
+physicalHaarQuadratureWeldStillRequired : Bool
+physicalHaarQuadratureWeldStillRequired = true
+
+physicalHaarQuadratureWeldStillRequiredIsTrue :
+  physicalHaarQuadratureWeldStillRequired ≡ true
+physicalHaarQuadratureWeldStillRequiredIsTrue = refl
+
+finiteExpectationLimitAlgebraStillRequired : Bool
+finiteExpectationLimitAlgebraStillRequired = false
+
+finiteExpectationLimitAlgebraStillRequiredIsFalse :
+  finiteExpectationLimitAlgebraStillRequired ≡ false
+finiteExpectationLimitAlgebraStillRequiredIsFalse = refl
+
+selectedR129PinnedLocalCF2SameCarrierEqualityStillRequired : Bool
+selectedR129PinnedLocalCF2SameCarrierEqualityStillRequired = true
+
+selectedR129PinnedLocalCF2SameCarrierEqualityStillRequiredIsTrue :
+  selectedR129PinnedLocalCF2SameCarrierEqualityStillRequired ≡ true
+selectedR129PinnedLocalCF2SameCarrierEqualityStillRequiredIsTrue = refl
+
+euclideanF2PositivityPaysLorentzianAnomalySign : Bool
+euclideanF2PositivityPaysLorentzianAnomalySign = false
+
+euclideanF2PositivityPaysLorentzianAnomalySignIsFalse :
+  euclideanF2PositivityPaysLorentzianAnomalySign ≡ false
+euclideanF2PositivityPaysLorentzianAnomalySignIsFalse = refl
+
+wickContinuationSameObjectStillRequired : Bool
+wickContinuationSameObjectStillRequired = true
+
+wickContinuationSameObjectStillRequiredIsTrue :
+  wickContinuationSameObjectStillRequired ≡ true
+wickContinuationSameObjectStillRequiredIsTrue = refl
+
+weakCouplingTraceEnergyNoGoCompilerClosed : Bool
+weakCouplingTraceEnergyNoGoCompilerClosed = true
+
+weakCouplingTraceEnergyNoGoCompilerClosedIsTrue :
+  weakCouplingTraceEnergyNoGoCompilerClosed ≡ true
+weakCouplingTraceEnergyNoGoCompilerClosedIsTrue = refl
+
+selectedInverseCouplingValueLowerBoundStillRequired : Bool
+selectedInverseCouplingValueLowerBoundStillRequired = true
+
+selectedInverseCouplingValueLowerBoundStillRequiredIsTrue :
+  selectedInverseCouplingValueLowerBoundStillRequired ≡ true
+selectedInverseCouplingValueLowerBoundStillRequiredIsTrue = refl
+
+inverseCouplingRGSlopeCanPaySelectedInverseCouplingValue : Bool
+inverseCouplingRGSlopeCanPaySelectedInverseCouplingValue = false
+
+inverseCouplingRGSlopeCanPaySelectedInverseCouplingValueIsFalse :
+  inverseCouplingRGSlopeCanPaySelectedInverseCouplingValue ≡ false
+inverseCouplingRGSlopeCanPaySelectedInverseCouplingValueIsFalse = refl
