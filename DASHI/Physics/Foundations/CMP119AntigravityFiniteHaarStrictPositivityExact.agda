@@ -96,10 +96,19 @@ partitionWitnessWeightPositive :
       FiniteRationalHaarQuadrature
         {Configuration = Configuration} measure) →
   Positive (partitionWeight quadrature (positiveWitness quadrature))
-partitionWitnessWeightPositive quadrature =
-  ℚP.pos*pos⇒pos
-    (haarWeight quadrature (positiveWitness quadrature))
-    (Physical.density _ (positiveWitness quadrature))
+partitionWitnessWeightPositive {measure = measure} quadrature =
+  let
+    h = haarWeight quadrature (positiveWitness quadrature)
+    rho = Physical.density measure (positiveWitness quadrature)
+
+    instance
+      hPositive : Positive h
+      hPositive = positiveWitnessHaarWeight quadrature
+
+      rhoPositive : Positive rho
+      rhoPositive = positiveWitnessDensity quadrature
+  in
+  ℚP.pos*pos⇒pos h rho
 
 partitionWeightFamily :
   ∀ {Configuration measure} →
@@ -140,11 +149,18 @@ partitionFunctionPositive :
         {Configuration = Configuration} measure) →
   0ℚ < Physical.partitionFunction measure
 partitionFunctionPositive quadrature =
+  let
+    mass = Normalize.totalMass (partitionWeightFamily quadrature)
+
+    instance
+      massPositive : Positive mass
+      massPositive =
+        Normalize.totalMassPositive (partitionWeightFamily quadrature)
+  in
   subst
     (λ value → 0ℚ < value)
     (sym (partitionFunctionIsFinitePositiveMass quadrature))
-    (ℚP.positive⁻¹
-      (Normalize.totalMass (partitionWeightFamily quadrature)))
+    (ℚP.positive⁻¹ mass)
 
 ------------------------------------------------------------------------
 -- STRICT POSITIVITY OF A WEIGHTED F^2 NUMERATOR.
@@ -220,9 +236,22 @@ fieldStrengthSquareWitnessWeightPositive :
       (positiveWitness quadrature))
 fieldStrengthSquareWitnessWeightPositive
     quadrature fieldStrengthSquare witness =
-  ℚP.pos*pos⇒pos
-    (partitionWeight quadrature (positiveWitness quadrature))
-    (fieldStrengthSquare (positiveWitness quadrature))
+  let
+    partition =
+      partitionWeight quadrature (positiveWitness quadrature)
+    f2 =
+      fieldStrengthSquare (positiveWitness quadrature)
+
+    instance
+      partitionPositive : Positive partition
+      partitionPositive =
+        partitionWitnessWeightPositive quadrature
+
+      f2Positive : Positive f2
+      f2Positive =
+        fieldStrengthSquarePositiveAtWitness witness
+  in
+  ℚP.pos*pos⇒pos partition f2
 
 fieldStrengthSquareWeightFamily :
   ∀ {Configuration measure}
@@ -297,12 +326,19 @@ fieldStrengthSquareNumeratorPositive :
   0ℚ < fieldStrengthSquareNumerator quadrature fieldStrengthSquare
 fieldStrengthSquareNumeratorPositive
     quadrature fieldStrengthSquare witness =
+  let
+    family =
+      fieldStrengthSquareWeightFamily
+        quadrature fieldStrengthSquare witness
+    mass = Normalize.totalMass family
+
+    instance
+      massPositive : Positive mass
+      massPositive = Normalize.totalMassPositive family
+  in
   subst
     (λ value → 0ℚ < value)
     (sym
       (fieldStrengthSquareNumeratorIsFinitePositiveMass
         quadrature fieldStrengthSquare witness))
-    (ℚP.positive⁻¹
-      (Normalize.totalMass
-        (fieldStrengthSquareWeightFamily
-          quadrature fieldStrengthSquare witness)))
+    (ℚP.positive⁻¹ mass)
