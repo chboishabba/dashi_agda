@@ -173,6 +173,83 @@ lepperGreeneNisbettOverjustification =
     "general precedent that similar behaviour may be embedded in different motivational structures; the paper does not itself prove DASHI's action-to-motive non-factorability theorem"
     Source.publicAttribution
 
+
+peirceTriadicSemiosis : Source.AttributedSource
+peirceTriadicSemiosis =
+  Source.mkDOISource
+    "Charles S. Peirce"
+    "Prolegomena to an Apology for Pragmaticism"
+    "The Monist 16(4):492-546"
+    "1906"
+    "10.5840/monist190616436"
+    "https://doi.org/10.5840/monist190616436"
+    Source.academicArticleSource
+    "primary philosophical source for irreducible triadic semiosis/mediation vocabulary; DASHI supplies the finite triangle, face and non-factorability constructions"
+    Source.publicAttribution
+
+riegelDialecticOperations : Source.AttributedSource
+riegelDialecticOperations =
+  Source.mkDOISource
+    "Klaus F. Riegel"
+    "Dialectic operations: the final period of cognitive development"
+    "Human Development 16(5):346-370"
+    "1973"
+    "10.1159/000271287"
+    "https://doi.org/10.1159/000271287"
+    Source.academicArticleSource
+    "developmental dialectical-thinking source; it does not define DASHI's trialectic face, 369 carrier, or sheaf semantics"
+    Source.publicAttribution
+
+bassechesDialecticalThinking : Source.AttributedSource
+bassechesDialecticalThinking =
+  Source.mkNoDOISource
+    "Michael Basseches"
+    "Dialectical Thinking and Adult Development"
+    "Ablex Publishing Corporation; ISBN 9780893910174"
+    "1984"
+    "https://openlibrary.org/isbn/9780893910174"
+    Source.academicBookSource
+    "developmental/cognitive source for dialectical schemata and relational reasoning; no ternary or trialectic numerical ontology is attributed to the book"
+    Source.publicAttribution
+
+jackSilencingSelf : Source.AttributedSource
+jackSilencingSelf =
+  Source.mkNoDOISource
+    "Dana Crowley Jack"
+    "Silencing the Self: Women and Depression"
+    "Harvard University Press; ISBN 9780674808157"
+    "1991"
+    "https://www.ncbi.nlm.nih.gov/nlmcatalog/9209989"
+    Source.academicBookSource
+    "supports a bounded distinction between relational-harmony pressures, self-expression and own-position weighting; it does not establish accurate other-models or a universal gender ontology"
+    Source.publicAttribution
+
+crickDodgeSocialInformationProcessing : Source.AttributedSource
+crickDodgeSocialInformationProcessing =
+  Source.mkDOISource
+    "Nicki R. Crick; Kenneth A. Dodge"
+    "A review and reformulation of social information-processing mechanisms in children's social adjustment"
+    "Psychological Bulletin 115(1):74-101"
+    "1994"
+    "10.1037/0033-2909.115.1.74"
+    "https://doi.org/10.1037/0033-2909.115.1.74"
+    Source.academicArticleSource
+    "supports typed social-information-processing coordinates including cue detection, attribution and response evaluation; DASHI does not identify those coordinates with world truth"
+    Source.publicAttribution
+
+dodgePettitBatesValenteAbuseSIP : Source.AttributedSource
+dodgePettitBatesValenteAbuseSIP =
+  Source.mkDOISource
+    "Kenneth A. Dodge; Gregory S. Pettit; John E. Bates; Ernest Valente"
+    "Social information-processing patterns partially mediate the effect of early physical abuse on later conduct problems"
+    "Journal of Abnormal Psychology 104(4):632-643"
+    "1995"
+    "10.1037/0021-843X.104.4.632"
+    "https://doi.org/10.1037/0021-843X.104.4.632"
+    Source.academicArticleSource
+    "supports a bounded empirical relation between early abuse and later biased social-information processing; it does not establish a general trauma benefit or determine an individual's current model"
+    Source.publicAttribution
+
 relationalTrialecticSourceAtlas : Source.AttributedSourceAtlas
 relationalTrialecticSourceAtlas =
   Source.mkSourceAtlas
@@ -190,6 +267,12 @@ relationalTrialecticSourceAtlas =
     ∷ murgueitioThreatEmotionRecognition
     ∷ brodbeckIntegrativeComplexity
     ∷ lepperGreeneNisbettOverjustification
+    ∷ peirceTriadicSemiosis
+    ∷ riegelDialecticOperations
+    ∷ bassechesDialecticalThinking
+    ∷ jackSilencingSelf
+    ∷ crickDodgeSocialInformationProcessing
+    ∷ dodgePettitBatesValenteAbuseSIP
     ∷ [] )
     "Selected empirical/theoretical anchors only. Sources motivate bounded interfaces and distinctions; citations do not import proofs, clinical authority, causal trauma laws, or the DASHI finite/sheaf/369 constructions."
 
