@@ -33,6 +33,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Residua
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualCodecExact as Codec
 import DASHI.Moonshine.OggSSPP2ConsumerRelativeQuotientExact as Consumer
 import DASHI.Moonshine.OggSSPP3F9FrobeniusCandidateNoGoExact as F9NoGo
+import DASHI.Moonshine.OggSSPP2F4FrobeniusCandidateNoGoExact as F4NoGo
 import DASHI.Moonshine.OggSSPP3F9ExtensionQuotientCandidateExact as P3Candidate
 import DASHI.Moonshine.OggSSPP3Base369RecognitionExact as P3Recognition
 import DASHI.Moonshine.OggSSPP2Base369RecognitionForkExact as P2Recognition
@@ -59,6 +60,11 @@ p2ConsumerBoundary :
   Consumer.P2ConsumerRelativeQuotientBoundary
 p2ConsumerBoundary =
   Consumer.canonicalP2ConsumerRelativeQuotientBoundary
+
+p2F4NoGoBoundary :
+  F4NoGo.P2F4FrobeniusCandidateBoundary
+p2F4NoGoBoundary =
+  F4NoGo.canonicalP2F4FrobeniusCandidateBoundary
 
 p3F9NoGoBoundary :
   F9NoGo.P3F9FrobeniusCandidateBoundary
@@ -162,6 +168,8 @@ record ArithmeticIndependent369Frontier : Set where
     recognitionCompositionPaid : Bool
     provenanceRecognitionCompositionPaid : Bool
 
+    rawF4ThreeOrbitNegativeControlPaid : Bool
+    p2MarkedLevelCMSourceSocketPaid : Bool
     wholeF9FullRecognitionRejected : Bool
     p3ExtensionCoordinateStructuralCandidatePaid : Bool
 
@@ -182,7 +190,7 @@ canonicalArithmeticIndependent369Frontier =
     true true true
     true true true true true
     true true
-    true true
+    true true true true
     false false false false
     false false
     firstResidual
