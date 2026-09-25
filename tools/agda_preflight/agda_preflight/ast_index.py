@@ -961,6 +961,66 @@ def _append_import(index: AstIndex, item: ImportDecl) -> None:
             OpenDecl(item.alias, item.line, item.public, item.directives)
         )
 
+@dataclass(frozen=True)
+class ImportSurface:
+    path: Path
+    module_name: str
+    imports: Tuple[ImportDecl, ...]
+    opens: Tuple[OpenDecl, ...]
+
+
+def build_import_surface(
+    parser,
+    path: Path,
+    root_path: Path,
+    source: str,
+) -> ImportSurface:
+    """Parse only module/import/open structure for fast closure discovery.
+
+    This deliberately reuses the same tree-sitter import/open recovery helpers
+    as build_ast_index(), including the known ERROR-node alias recovery, but
+    skips record/data/function indexing and all diagnostics.
+    """
+    source_bytes = source.encode("utf-8")
+    tree = parser.parse(source_bytes)
+    root = tree.root_node
+    imports: List[ImportDecl] = []
+    opens: List[OpenDecl] = []
+
+    def append_import(item: ImportDecl) -> None:
+        key = (item.module, item.alias, item.line, item.opened)
+        if any((x.module, x.alias, x.line, x.opened) == key for x in imports):
+            return
+        imports.append(item)
+        if item.opened:
+            opens.append(
+                OpenDecl(item.alias, item.line, item.public, item.directives)
+            )
+
+    for node in descendants(root):
+        if node.type == "open":
+            imp, opened = _parse_open_node(source_bytes, node)
+            if imp is not None:
+                append_import(imp)
+            if opened is not None and imp is None:
+                opens.append(opened)
+        elif node.type == "import" and (node.parent is None or node.parent.type != "open"):
+            imp = _parse_import_node(source_bytes, node)
+            if imp is not None:
+                append_import(imp)
+        elif node.type == "ERROR":
+            recovered = _recover_import_from_error(source_bytes, node)
+            if recovered is not None:
+                append_import(recovered)
+
+    return ImportSurface(
+        path=path,
+        module_name=_module_name_from_tree(source_bytes, root, path, root_path),
+        imports=tuple(imports),
+        opens=tuple(opens),
+    )
+
+
 def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstIndex:
     source_bytes = source.encode("utf-8")
     tree = parser.parse(source_bytes)
