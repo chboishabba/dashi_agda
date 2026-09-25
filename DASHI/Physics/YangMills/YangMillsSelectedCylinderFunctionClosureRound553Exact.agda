@@ -141,26 +141,27 @@ selectedLimitIsRepresentedIntegral :
     (R547.asObservable (R547.selectedClass representation) selected)
 selectedLimitIsRepresentedIntegral
     {family = family} {limitLaws = limitLaws}
+    {representation = representation}
     authority realization selected =
   Cylinder.convergenceUnique
     (RealLimit.canonicalCylinderAlgebra limitLaws)
     (λ cutoff →
       Limit.finiteExpectation family cutoff
         (R547.asObservable
-          (R547.selectedClass _)
+          (R547.selectedClass representation)
           selected))
     (Limit.limitExpectation family
-      (R547.asObservable (R547.selectedClass _) selected))
+      (R547.asObservable (R547.selectedClass representation) selected))
     (R534.integrate
-      (R547.extensionAuthority _)
-      (R547.representedMeasure _)
-      (R547.asObservable (R547.selectedClass _) selected))
+      (R547.extensionAuthority representation)
+      (R547.representedMeasure representation)
+      (R547.asObservable (R547.selectedClass representation) selected))
     (Cylinder.selectedConverges
       (Limit.asCylinderLimitData family)
-      (R547.asObservable (R547.selectedClass _) selected))
+      (R547.asObservable (R547.selectedClass representation) selected))
     (finiteCylinderFunctionConvergesToProjectiveIntegral
       authority
-      (R547.asObservable (R547.selectedClass _) selected)
+      (R547.asObservable (R547.selectedClass representation) selected)
       (selectedObservableIsFiniteCylinder realization selected))
 
 asSelectedObservableRepresentationClosure :
