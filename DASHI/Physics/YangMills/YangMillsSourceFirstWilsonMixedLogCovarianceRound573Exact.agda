@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using (List)
 open import Data.Rational.Base as ℚ using (ℚ; ∣_∣)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -29,6 +30,7 @@ import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact a
 import DASHI.Physics.YangMills.BalabanConnectedCovarianceExpectationLimitRound278Exact as R278
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanWilsonMixedLogClusterExpansionRound551Exact as R551
+import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 
 r278MomentAlgebra :
   ∀ {Measure Observable}
@@ -82,7 +84,7 @@ record SourceFirstWilsonMixedLogClusterData
         SourceDirection
 
     contributingClusters :
-      Nat → Observable → Observable → Agda.Builtin.List.List Cluster
+      Nat → Observable → Observable → List Cluster
 
     clusterWeight :
       Nat → Observable → Observable → Cluster → ℚ
@@ -94,8 +96,8 @@ record SourceFirstWilsonMixedLogClusterData
         (Cumulant.sourceDirectionOf (insertionMeaning cutoff) left)
         (Cumulant.sourceDirectionOf (insertionMeaning cutoff) right)
       ≡
-      DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact.sumℚ
-        (DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact.map
+      TwoMark.sumℚ
+        (TwoMark.map
           (clusterWeight cutoff left right)
           (contributingClusters cutoff left right))
 
