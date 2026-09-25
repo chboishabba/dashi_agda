@@ -69,6 +69,7 @@ import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact a
 import DASHI.Moonshine.JInvariant369NeutralCuspRelationCrossPollinationExact as NeutralCusp
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SSPF
 import DASHI.Moonshine.JInvariant369OggAddressSSP15NoGoExact as OggNoGo
+import DASHI.Moonshine.JInvariant369SSP15PrimeInternalFibreExact as PrimeFibre
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -804,3 +805,35 @@ chosenSSP15BijectionIsNotDerivedFromAddressLaw :
     oggAddressSSP15NoGoBoundary
   ≡ false
 chosenSSP15BijectionIsNotDerivedFromAddressLaw = refl
+
+
+------------------------------------------------------------------------
+-- SSP15 prime/internal fibre: 15 x 15 semantic carrier.
+------------------------------------------------------------------------
+
+ssp15PrimeInternalFibreBoundary :
+  PrimeFibre.SSP15PrimeInternalFibreBoundary
+ssp15PrimeInternalFibreBoundary =
+  PrimeFibre.canonicalSSP15PrimeInternalFibreBoundary
+
+ssp15PrimeInternalCoarseProductIs225 :
+  PrimeFibre.coarseProductCount225 ssp15PrimeInternalFibreBoundary ≡ true
+ssp15PrimeInternalCoarseProductIs225 = refl
+
+ssp15ChosenBijectionIsOnlyGaugeSection :
+  PrimeFibre.chosenBijectionInterpretedAsGaugeSection
+    ssp15PrimeInternalFibreBoundary
+  ≡ true
+ssp15ChosenBijectionIsOnlyGaugeSection = refl
+
+ssp15ChosenGaugeDoesNotExhaustSemanticCarrier :
+  PrimeFibre.chosenGaugeExhaustsSemanticCarrier
+    ssp15PrimeInternalFibreBoundary
+  ≡ false
+ssp15ChosenGaugeDoesNotExhaustSemanticCarrier = refl
+
+ssp15PrimeDoesNotEqualInternalLane :
+  PrimeFibre.primeEqualsInternalLaneSemantically
+    ssp15PrimeInternalFibreBoundary
+  ≡ false
+ssp15PrimeDoesNotEqualInternalLane = refl
