@@ -296,6 +296,82 @@ trialecticStrictLegEquality x y z =
     (observerToTritVec9 z)
 
 ------------------------------------------------------------------------
+-- 5. Internal participant-row ultrametric triangle.
+--
+-- Each participant row is one literal T^3 / 27-state hypervoxel.  Therefore
+-- the A/B/C rows inside a *single* observer matrix inherit the same prefix
+-- ultrametric.  This is the exact internal triangle requested by the
+-- trialectic construction.
+------------------------------------------------------------------------
+
+rowToTritVec3 :
+  Fabric.Ternary27Point ->
+  Vec Trit.Trit 3
+rowToTritVec3 (Fabric.ternary27Point x y z) =
+  SSP.toTrit x ∷ SSP.toTrit y ∷ SSP.toTrit z ∷ []
+
+participantRow :
+  Observer.ObserverMatrix3 SSP.SSPTrit ->
+  Observer.Participant3 ->
+  Fabric.Ternary27Point
+participantRow matrix Observer.participantA = observerRowA matrix
+participantRow matrix Observer.participantB = observerRowB matrix
+participantRow matrix Observer.participantC = observerRowC matrix
+
+participantDistance :
+  Observer.ObserverMatrix3 SSP.SSPTrit ->
+  Observer.Participant3 ->
+  Observer.Participant3 ->
+  Nat
+participantDistance matrix left right =
+  Metric.dNat
+    (rowToTritVec3 (participantRow matrix left))
+    (rowToTritVec3 (participantRow matrix right))
+
+participantTriangleStrong :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  participantDistance matrix Observer.participantA Observer.participantC
+  ≤
+  ( participantDistance matrix Observer.participantA Observer.participantB
+    ⊔
+    participantDistance matrix Observer.participantB Observer.participantC
+  )
+participantTriangleStrong matrix =
+  Metric.ultraNat
+    (rowToTritVec3 (observerRowA matrix))
+    (rowToTritVec3 (observerRowB matrix))
+    (rowToTritVec3 (observerRowC matrix))
+
+participantTriangleStrictLegEquality :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  participantDistance matrix Observer.participantA Observer.participantB
+  <
+  participantDistance matrix Observer.participantB Observer.participantC
+  ->
+  participantDistance matrix Observer.participantA Observer.participantC
+  ≡
+  participantDistance matrix Observer.participantB Observer.participantC
+participantTriangleStrictLegEquality matrix =
+  Metric.strictLegForcesLongSideEquality
+    (rowToTritVec3 (observerRowA matrix))
+    (rowToTritVec3 (observerRowB matrix))
+    (rowToTritVec3 (observerRowC matrix))
+
+participantTriangleCyclicStrong :
+  (matrix : Observer.ObserverMatrix3 SSP.SSPTrit) ->
+  participantDistance matrix Observer.participantB Observer.participantA
+  ≤
+  ( participantDistance matrix Observer.participantB Observer.participantC
+    ⊔
+    participantDistance matrix Observer.participantC Observer.participantA
+  )
+participantTriangleCyclicStrong matrix =
+  Metric.ultraNat
+    (rowToTritVec3 (observerRowB matrix))
+    (rowToTritVec3 (observerRowC matrix))
+    (rowToTritVec3 (observerRowA matrix))
+
+------------------------------------------------------------------------
 -- 5. Exact finite hierarchy.
 ------------------------------------------------------------------------
 
@@ -349,6 +425,8 @@ record Trialectic369HypervoxelUltrametricBoundary : Set where
     wholeObserverFabricHas19683States : Bool
     strongTriangleInequalityTransported : Bool
     strictLegEqualityTransported : Bool
+    internalParticipantTriangleStrong : Bool
+    internalParticipantStrictLegEquality : Bool
     exactCarrierBijectionCreatesSemanticIdentity : Bool
     prefixMetricClaimedAsPsychologicalDistance : Bool
     triadicFaceRecoveredFromRows : Bool
@@ -357,5 +435,5 @@ canonicalTrialectic369HypervoxelUltrametricBoundary :
   Trialectic369HypervoxelUltrametricBoundary
 canonicalTrialectic369HypervoxelUltrametricBoundary =
   trialectic-369-hypervoxel-ultrametric-boundary
-    true true true true true true
+    true true true true true true true true
     false false false
