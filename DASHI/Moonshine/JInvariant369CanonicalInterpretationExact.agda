@@ -68,6 +68,7 @@ import DASHI.Moonshine.JInvariantSmithChartMobiusMatrixBridgeExact as SmithMatri
 import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact as Cross
 import DASHI.Moonshine.JInvariant369NeutralCuspRelationCrossPollinationExact as NeutralCusp
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SSPF
+import DASHI.Moonshine.JInvariant369OggAddressSSP15NoGoExact as OggNoGo
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -773,3 +774,33 @@ ssp15FRACTRANExecutionHandoffIsPaid :
     ssp15SignedFRACTRANBranchBoundary
   ≡ true
 ssp15FRACTRANExecutionHandoffIsPaid = refl
+
+
+------------------------------------------------------------------------
+-- Ogg/nonary address -> SSP15 canonical-lane no-go.
+------------------------------------------------------------------------
+
+oggAddressSSP15NoGoBoundary :
+  OggNoGo.OggAddressSSP15NoGoBoundary
+oggAddressSSP15NoGoBoundary =
+  OggNoGo.canonicalOggAddressSSP15NoGoBoundary
+
+oggAddressCoarseCollisionIsExplicit :
+  OggNoGo.explicitCoarseCollisionOwned oggAddressSSP15NoGoBoundary ≡ true
+oggAddressCoarseCollisionIsExplicit = refl
+
+oggAddressMode09IsAbsent :
+  OggNoGo.addressMode09Absent oggAddressSSP15NoGoBoundary ≡ true
+oggAddressMode09IsAbsent = refl
+
+oggAddressModePreservingBijectionIsImpossible :
+  OggNoGo.modePreservingFifteenBijectionImpossible
+    oggAddressSSP15NoGoBoundary
+  ≡ true
+oggAddressModePreservingBijectionIsImpossible = refl
+
+chosenSSP15BijectionIsNotDerivedFromAddressLaw :
+  OggNoGo.chosenCarrierBijectionDerivedFromAddressLaw
+    oggAddressSSP15NoGoBoundary
+  ≡ false
+chosenSSP15BijectionIsNotDerivedFromAddressLaw = refl
