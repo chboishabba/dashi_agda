@@ -47,6 +47,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact 
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
 import DASHI.Mathematics.Complexity.PNotEqualsNPGeneratedClosedQ1DiscoveryExact as Generated
 import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
+import DASHI.Mathematics.Complexity.PNotEqualsNPReachableRewriteGeneratedQ1Exact as ReachableGenerated
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
@@ -335,6 +336,33 @@ q1RewriteGeneratedRecurrenceFiniteCodeContradictsSATInP
   q1FiniteCodeContradictsSATInP
     satP
     (RewriteGenerated.rewriteGeneratedConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Strongest preferred recurrence: reachable representatives + restricted
+-- rewrite programs.
+------------------------------------------------------------------------
+
+q1ReachableRewriteGeneratedRecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      ReachableGenerated.ReachableRewriteGeneratedExecutedQ1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (ReachableGenerated.reachableConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1ReachableRewriteGeneratedRecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (ReachableGenerated.reachableConstructorToQ2StepSystem constructor)
     initial
     q1Semantics
 
