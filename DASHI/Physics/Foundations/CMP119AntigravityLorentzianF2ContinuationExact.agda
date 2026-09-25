@@ -14,7 +14,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityEuclideanLorentzianF2FirewallE
 -- be consumed by the Lorentzian trace anomaly.
 ------------------------------------------------------------------------
 
-record LorentzianF2ContinuationReceipt : Set where
+record LorentzianF2ContinuationReceipt : Set₁ where
   field
     electricSquare : ℚ
     magneticSquare : ℚ
