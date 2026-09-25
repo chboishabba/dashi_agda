@@ -336,3 +336,8 @@ def test_benchmark_payload_reports_slo_pass(tmp_path, capsys):
     payload = json.loads(capsys.readouterr().out)
     assert payload["slo"]["passed"] is True
     assert payload["warm"]["all_zero_parse"] is True
+    assert payload["agent_next_error"]["all_zero_parse"] is True
+    assert (
+        payload["agent_next_error"]["request_total"]["p95_ms"]
+        <= payload["slo"]["max_next_error_ms"]
+    )
