@@ -5,8 +5,9 @@ module DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact w
 -- ROUND650 / FINAL PERIODIC TWO-INEQUALITY MAX-CUT
 --
 -- After R639--R649, every representation/algebra step around the periodic
--- critical argument has a typed compiler.  The Clay-facing NEW mathematics is
--- therefore represented by exactly two analytic leaves:
+-- critical argument has a typed compiler.  After the R723-R728 recut, the
+-- live branch is represented by exactly three proof-bearing analytic
+-- coordinates:
 --
 --   C1  live cutoff-uniform R723 combined/global signed-commutator payment,
 --       together with the explicit R726 transport onto literal R406;
