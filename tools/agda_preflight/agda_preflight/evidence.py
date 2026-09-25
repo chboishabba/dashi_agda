@@ -70,7 +70,7 @@ _INDEX_SAFE = {
     "TSAGDA001", "TSAGDA002", "TSAGDA003",
     "TSAGDA008", "TSAGDA009",
     "TSAGDA020", 
-    "TSAGDA028", "TSAGDA029", "TSAGDA030",
+    "TSAGDA029", "TSAGDA030",
     "TSAGDA042", "TSAGDA043", "TSAGDA044", 
     "TSAGDA046", "TSAGDA047", "TSAGDA048", 
     "TSAGDA050", "TSAGDA051", "TSAGDA054",
@@ -107,6 +107,7 @@ _SCOPE_REQUIRED = {
     "TSAGDA024",  # hiding entry validity through re-export chains
     "TSAGDA026",  # rename/open collision
     "TSAGDA027",  # ambiguous unqualified name from opens
+    "TSAGDA028",  # conflicting import aliases are resolved/rejected by Agda scope
     "TSAGDA055",  # ambiguous opened projection
     "TSAGDA084",  # inaccessible pattern scope
     "TSAGDA113",  # visibly unbound RHS identifier
