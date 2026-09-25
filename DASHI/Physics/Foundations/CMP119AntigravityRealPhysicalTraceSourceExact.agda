@@ -11,6 +11,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityRealStrictSignExact as Strict
 import DASHI.Physics.Foundations.CMP119AntigravityRealPartitionStrictPositivityExact as Partition
 import DASHI.Physics.Foundations.CMP119AntigravityRealSU2TraceClosureExact as Trace
 import DASHI.Physics.Foundations.CMP119AntigravityRealF2StrictPositivityFromFullSupportExact as F2Positive
+import DASHI.Physics.Foundations.CMP119AntigravityRealCurvatureF2PointBridgeExact as F2
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as GibbsPositive
 import DASHI.Physics.Foundations.CMP119AntigravityRealFullSupportHaarExact as FullSupport
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
@@ -76,7 +77,7 @@ record RealPhysicalTraceSourceInput
       *ℝ
       F2Positive.weightedF2Numerator
         {measure = measure}
-        (F2Positive.F2.realFieldStrengthSquare
+        (F2.realFieldStrengthSquare
           (F2Positive.curvature f2Positivity))
 
     selectedActiveConnectedNumerator : ℝ
@@ -134,7 +135,7 @@ physicalF2NumeratorStrictlyPositive :
   0ℝ <ℝ
     F2Positive.weightedF2Numerator
       {measure = measure}
-      (F2Positive.F2.realFieldStrengthSquare
+      (F2.realFieldStrengthSquare
         (F2Positive.curvature (f2Positivity input)))
 physicalF2NumeratorStrictlyPositive
     laws strict embedding convention gibbs exponential fullSupport input =
