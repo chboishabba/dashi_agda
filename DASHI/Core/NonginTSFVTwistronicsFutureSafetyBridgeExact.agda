@@ -15,9 +15,11 @@ module DASHI.Core.NonginTSFVTwistronicsFutureSafetyBridgeExact where
 -- application supplies a proof-bearing action system and a finite set of
 -- future-distinct representatives.
 --
--- The TSFV/PNF semantic-query lane now supplies one concrete proof-bearing
--- dynamic fixture.  Nongin, the physical TSFV caustic/history-realization lane,
--- and twistronics remain separate dynamic obligations.
+-- Nongin and the TSFV/PNF semantic-query lane now supply concrete
+-- proof-bearing dynamic fixtures.  Twistronics now supplies a sourced physical
+-- registration-control action system and a generic future-split theorem gated
+-- by an explicit control-sensitive witness.  The physical TSFV
+-- caustic/history-realization lane remains a separate obligation.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
