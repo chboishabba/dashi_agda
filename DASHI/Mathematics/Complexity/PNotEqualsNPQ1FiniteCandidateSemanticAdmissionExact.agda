@@ -23,7 +23,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissi
 -- witness and then to Q2.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin.Base using (Fin)
@@ -335,12 +335,14 @@ record AdmittedFiniteCandidateConstructionRun
 
     machineConstructionAndNextStrict :
       (Operational.q1WitnessGraphCellCount
-        (Reachable.toRewriteGeneratedQ1StateWitness
-          (admittedFiniteToReachableWitness
-            (admitted-finite-q1-state-witness
-              (finiteCandidate construction)
-              semanticCongruence
-              allOverheadFits)))
+        (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+          (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+            (Reachable.toRewriteGeneratedQ1StateWitness
+              (admittedFiniteToReachableWitness
+                (admitted-finite-q1-state-witness
+                  (finiteCandidate construction)
+                  semanticCongruence
+                  allOverheadFits)))))
         + machineStepCount construction)
       +
       Q2.recursiveMeasure
@@ -362,13 +364,14 @@ admittedRunQ1Witness :
   AdmittedFiniteCandidateConstructionRun state →
   Recurrence.Q1StateWitness state
 admittedRunQ1Witness admitted =
-  Reachable.toRewriteGeneratedQ1StateWitness
-    (admittedFiniteToReachableWitness
-      (admitted-finite-q1-state-witness
-        (finiteCandidate
-          (construction admitted))
-        (semanticCongruence admitted)
-        (allOverheadFits admitted)))
+  RewriteGenerated.rewriteGeneratedWitnessToLegacy
+    (Reachable.toRewriteGeneratedQ1StateWitness
+      (admittedFiniteToReachableWitness
+        (admitted-finite-q1-state-witness
+          (finiteCandidate
+            (construction admitted))
+          (semanticCongruence admitted)
+          (allOverheadFits admitted))))
 
 ------------------------------------------------------------------------
 -- Compatibility compiler to the existing operational Q1 interface.
