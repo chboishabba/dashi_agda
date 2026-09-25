@@ -768,3 +768,131 @@ clayPostM6LeanDonorHead =
 
 clayPostM6TransportedIntoAgdaKernelHere : Bool
 clayPostM6TransportedIntoAgdaKernelHere = false
+
+
+------------------------------------------------------------------------
+-- FAR-EXACT RECUT TO ONE HORIZONTAL CURVATURE COORDINATE
+--
+-- Lean has now removed literalFarExactAt as an opaque terminal coordinate.
+-- On the identical centered zero carrier it splits exactly into
+--
+--   FarExact = FarBase + FarHorizontal.
+--
+-- FarBase is the existing signed zero/N-mu ordinate test and is paid by the
+-- imported literal inverse-square zero shell:
+--
+--   |FarBase_n|
+--     <= C_Psi(W) *
+--        (18 A log(|t|+4)/J + 72 A/sqrt(J)).
+--
+-- For the canonical far boundary Lean chooses
+--
+--   J(t) = floor(t/2000),
+--
+-- valid for t >= 2000, so the base term is an explicit
+-- O(log(t)/t) + O(t^(-1/2)) source uniformly in the finite exhaustion n.
+--
+-- FarHorizontal is then identified exactly with the already-existing signed
+-- endpoint-linear horizontal source.  The normalized horizontal kernel is the
+-- cosine transform of
+--
+--   P_W(u) * (cosh(alpha*u)-1),
+--
+-- and the existing two-integration-by-parts theorem yields
+--
+--   |H_W(alpha,q)| <= C_H(W,alpha)/q^2.
+--
+-- Physical rescaling cancels the outer r^-2 against q^-2, giving literally
+--
+--   |horizontalSource_rho|
+--     <= m_rho * C_H(W,alpha_rho) / (Im rho - t)^2.
+--
+-- Lean exposes the one remaining uniformity coordinate
+--
+--   HorizontalFarCurvatureBound W CH
+--
+-- asserting C_H(W,alpha_rho) <= CH on the literal zero carrier.  Under this
+-- single scalar hypothesis the WHOLE FarExact finite source satisfies
+--
+--   |FarExact_n|
+--     <= (C_Psi(W)+CH) *
+--        (18 A log(|t|+4)/J + 72 A/sqrt(J)),
+--
+-- uniformly in n, and a far-paid terminal scalar budget compiles directly
+-- through the existing selected-M6/cofinal/completed-residual stack to G3.
+--
+-- Therefore FarExact itself is no longer the semantic/carrier obstruction.
+-- The preferred remaining analytic min-cut is:
+--
+--   (1) a selected-witness quantitative bound CH for the exact horizontal
+--       curvature coordinate, strong enough on the Clay-high range; and
+--   (2) the final far-paid strict scalar inequality.
+--
+-- The existing uniform K(W) theorem is NOT silently reused for CH: it is an
+-- L1-type profile bound and does not by itself control C2 curvature or impose
+-- a uniform positive lower bound on the selected smoothing radius R.
+--
+-- All entries below are Lean source-written donors only.  No Agda-native
+-- analytic replay is claimed here.
+------------------------------------------------------------------------
+
+data FarExactRecutCoordinate : Set where
+  farExactBaseHorizontalExactSplit : FarExactRecutCoordinate
+  farBaseLiteralShellPayment : FarExactRecutCoordinate
+  farBaseCanonicalLinearCutoff : FarExactRecutCoordinate
+  farHorizontalExistingSourceIdentification : FarExactRecutCoordinate
+  farHorizontalNormalizedInverseSquareDecay : FarExactRecutCoordinate
+  farHorizontalPhysicalGapSquareTransport : FarExactRecutCoordinate
+  wholeFarExactShellCompilerGivenCH : FarExactRecutCoordinate
+  farPaidScalarDirectG3Compiler : FarExactRecutCoordinate
+  selectedWitnessHorizontalCurvatureBound : FarExactRecutCoordinate
+  finalFarPaidStrictScalarAbsorb : FarExactRecutCoordinate
+
+farExactRecutStatus :
+  FarExactRecutCoordinate -> V4H4Status
+farExactRecutStatus farExactBaseHorizontalExactSplit =
+  leanSourceWrittenDonor
+farExactRecutStatus farBaseLiteralShellPayment =
+  leanSourceWrittenDonor
+farExactRecutStatus farBaseCanonicalLinearCutoff =
+  leanSourceWrittenDonor
+farExactRecutStatus farHorizontalExistingSourceIdentification =
+  leanSourceWrittenDonor
+farExactRecutStatus farHorizontalNormalizedInverseSquareDecay =
+  leanSourceWrittenDonor
+farExactRecutStatus farHorizontalPhysicalGapSquareTransport =
+  leanSourceWrittenDonor
+farExactRecutStatus wholeFarExactShellCompilerGivenCH =
+  leanSourceWrittenDonor
+farExactRecutStatus farPaidScalarDirectG3Compiler =
+  leanSourceWrittenDonor
+farExactRecutStatus selectedWitnessHorizontalCurvatureBound =
+  openAnalyticObstruction
+farExactRecutStatus finalFarPaidStrictScalarAbsorb =
+  openAnalyticObstruction
+
+farExactCarrierPaymentIsSourceWritten :
+  farExactRecutStatus wholeFarExactShellCompilerGivenCH
+    ≡ leanSourceWrittenDonor
+farExactCarrierPaymentIsSourceWritten = refl
+
+horizontalCurvatureIsPreferredOpenCut :
+  farExactRecutStatus selectedWitnessHorizontalCurvatureBound
+    ≡ openAnalyticObstruction
+horizontalCurvatureIsPreferredOpenCut = refl
+
+farPaidStrictScalarRemainsOpen :
+  farExactRecutStatus finalFarPaidStrictScalarAbsorb
+    ≡ openAnalyticObstruction
+farPaidStrictScalarRemainsOpen = refl
+
+farExactRecutLeanDonorHead : String
+farExactRecutLeanDonorHead =
+  "0e74027718badfdd0b0b688033a0970e490f079b"
+
+farExactRecutTransportedIntoAgdaKernelHere : Bool
+farExactRecutTransportedIntoAgdaKernelHere = false
+
+farExactRecutInterpretation : String
+farExactRecutInterpretation =
+  "FarExact is no longer an opaque Clay-facing carrier. Lean splits it exactly into the existing base N-mu zero source and existing horizontal source, pays the base by the literal inverse-square zero shell with canonical cutoff floor(t/2000), proves inverse-square decay for the exact signed horizontal normalized kernel, transports that decay with exact physical scaling, and compiles the whole far source to the same shell under one explicit HorizontalFarCurvatureBound CH. The far-paid scalar budget already compiles directly to G3. The preferred remaining analytic cut is therefore a quantitative selected-witness CH theorem plus the final far-paid strict scalar inequality. Existing K(W) is not treated as C2 control."
