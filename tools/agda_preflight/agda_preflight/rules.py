@@ -319,9 +319,10 @@ def extended_diagnostics(checker, s, D):
                 return None
             parent_owner, parent_record = parent_target
             parent_field_name = record_expr.parent_field
-            field = parent_record.fields.get(parent_field_name)
+            parent_fields = _record_fields(parent_record)
+            field = parent_fields.get(parent_field_name)
             if field is None and parent_field_name:
-                field = parent_record.fields.get(parent_field_name.rsplit(".", 1)[-1])
+                field = parent_fields.get(parent_field_name.rsplit(".", 1)[-1])
             target = _resolve_field_record_ast(checker, parent_owner, field)
             record_target_cache[key] = target
             return target
@@ -347,12 +348,13 @@ def extended_diagnostics(checker, s, D):
         if not target.field_surface_complete:
             continue
         assignments = _assignment_map(record_expr)
+        target_fields = _record_fields(target)
 
         def target_field_name(name):
-            if name in target.fields:
+            if name in target_fields:
                 return name
             short = name.rsplit(".", 1)[-1]
-            if short in target.fields:
+            if short in target_fields:
                 return short
             return None
 
@@ -369,13 +371,13 @@ def extended_diagnostics(checker, s, D):
             if names.count(name) > 1:
                 duplicate = next(a for resolved, _, a in normalized if resolved == name)
                 out.append(_diag(D, "TSAGDA061", f"field {name} is assigned more than once", s, duplicate.line))
-        missing = [name for name in target.fields if name not in names]
+        missing = [name for name in target_fields if name not in names]
         if missing:
             out.append(_diag(D, "TSAGDA062", f"record {target.name} is missing fields: {', '.join(missing)}", s, record_expr.line))
         for resolved, original, assignment in normalized:
-            field = target.fields.get(resolved) if resolved is not None else None
+            field = target_fields.get(resolved) if resolved is not None else None
             name = resolved or original
-            if field is None or field.type_node is None or assignment.expr_node is None:
+            if field is None or assignment.expr_node is None:
                 continue
             lambda_node = next((n for n in assignment.expr_node.named_children if n.type == "lambda"), None)
             if lambda_node is None:
@@ -1252,9 +1254,10 @@ def extended_diagnostics(checker, s, D):
         if target_ref is None:
             continue
         target_owner, target = target_ref
+        target_fields = _record_fields(target)
         for fname, assignment in _assignment_map(record_expr):
-            field = target.fields.get(fname)
-            if field is None or field.type_node is None or assignment.expr_node is None:
+            field = target_fields.get(fname)
+            if field is None or assignment.expr_node is None:
                 continue
             field_head = _field_terminal(target_owner, field)
             if field_head not in {"Set","Set₀","Set₁","Set₂","Setω","Prop","Prop₁"}:
