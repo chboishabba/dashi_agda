@@ -199,7 +199,7 @@ noCoarseJPi0SurjectionToP3 recognition surjection =
 
 p2ChosenOrbit : Triadic.NineOrbit
 p2ChosenOrbit =
-  Triadic.orbit00
+  Triadic.zeroOrbit
 
 p2LowerState : Small.P2ResidualObject
 p2LowerState =
