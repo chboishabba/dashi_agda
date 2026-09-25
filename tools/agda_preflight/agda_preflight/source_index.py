@@ -729,15 +729,28 @@ class SourceIndex:
             "cold_batches",
             len(batch_receipts),
         )
+        predicted_surface = sum(
+            batch.dependency_surface for batch in batch_receipts
+        )
         self.profiler.count(
             "cold_batch_dependency_surface",
-            sum(batch.dependency_surface for batch in batch_receipts),
+            predicted_surface,
+        )
+        self.profiler.count(
+            "cold_predicted_amplification_milli",
+            round(
+                1000 * predicted_surface / max(1, len(paths))
+            ),
         )
         self.profiler.count(
             "cold_parse_amplification_milli",
             round(
                 1000 * worker_files_parsed / max(1, len(paths))
             ),
+        )
+        self.profiler.count(
+            "cold_unpredicted_parse_overhead",
+            max(0, worker_files_parsed - predicted_surface),
         )
         self.profiler.add_ns(
             "cold.worker_parse",
