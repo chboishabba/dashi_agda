@@ -3,12 +3,13 @@ module DASHI.Physics.Foundations.CMP119FourDiagonalLiteralFiniteMeasureActiveStr
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base using (ℚ; _+_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _<_)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
 import DASHI.Physics.Foundations.CMP119SymmetricPresentCutCarrierCompilerExact as Present10
 import DASHI.Physics.Foundations.CMP119FourDiagonalFiniteD1ActiveStressExact as Four
+import DASHI.Physics.Foundations.CMP119FourD1LocalizedPositiveGRepulsionExact as Repulse
 import DASHI.Physics.Foundations.CMP119TenActualSourceReadoutsExact as Actual
 import DASHI.Physics.Foundations.CMP119TenLiteralFiniteMeasureReadoutsExact as FiniteReadouts
 import DASHI.Physics.Foundations.CMP119LiteralFiniteMeasureStressSourceConstructorExact as FiniteSource
@@ -155,3 +156,101 @@ module _
           | d1IsFiniteMeasureAtAxes Flat.yAxis Flat.yAxis
           | d1IsFiniteMeasureAtAxes Flat.zAxis Flat.zAxis =
     refl
+
+
+------------------------------------------------------------------------
+-- TERMINAL ANTIGRAVITY COMPOSITION
+------------------------------------------------------------------------
+
+module _
+    {History Cell : Set} {cutoff : Nat}
+    {trajectory split}
+    {inputs : Beta.BetaDrivenCompleteDensityInputs
+      {trajectory = trajectory} {split = split}}
+    {source : SourceFlow.FunctionalRegularESourceFlowInputs
+      {trajectory = trajectory} {split = split} inputs}
+    {localization : Local.CMP119RegularELocalizationCarrier source}
+    {bc1Canonical : Present10.SymmetricFunctionalRegularEBC1Inputs
+      source localization}
+    (presentData :
+      Present10.SymmetricFunctionalRegularEPresentCutInputs History Cell cutoff
+        source localization bc1Canonical)
+    {actionWeld :
+      R132.UnifiedGeneratedActionDensity
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        (Present10.asPresentCutPhysicalSourceInputs presentData)}
+    {laws :
+      R143.PresentCutBC2FirstVariationLinearity
+        (Present10.asPresentCutPhysicalSourceInputs presentData)}
+    {composite : R144.CompositeStressFirstVariationInputs actionWeld laws}
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    {Y : Top.LiteralYangMillsConstruction C S}
+    {group : Top.CompactSimpleGroup C}
+    {Scale Volume : Set}
+    {domain :
+      Domain.CanonicalMetricSourceDomain
+        Scale Volume (R144.stressActivity composite)}
+    {representation : StressRep.CanonicalMetricStressRepresentation domain}
+    {coordinate : R114.LiteralStressCoordinate Y group}
+    {selected :
+      R119.CanonicalMetricSelectedStressWeld
+        domain representation coordinate}
+    (attachment :
+      R144Attach.R144CanonicalMetricTangentAttachment
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        {History = History} {Cell = Cell} {cutoff = cutoff}
+        {present = Present10.asPresentCutPhysicalSourceInputs presentData}
+        {actionWeld = actionWeld} {laws = laws}
+        composite
+        {C = C} {S = S} {Y = Y} {group = group}
+        {Scale = Scale} {Volume = Volume}
+        domain representation {coordinate = coordinate} selected)
+    (background :
+      Source.Background
+        (Carrier.source
+          (Present.bc1Carrier
+            (Present10.asPresentCutPhysicalSourceInputs presentData))))
+    (measureWeld :
+      R124.BalabanDensityLiteralFiniteMeasureWeld
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        Y group)
+    (calculus :
+      FiniteSource.LiteralFiniteMeasureNormalizedStressCalculus measureWeld)
+    (anchorInputs :
+      Anchor.LiteralFiniteMeasureDensityAnchorInputs
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        {C = C} {S = S} {Y = Y} {group = group}
+        {Scale = Scale} {Volume = Volume}
+        {activity = R144.stressActivity composite}
+        {domain = domain} {representation = representation}
+        {coordinate = coordinate}
+        selected measureWeld calculus)
+  where
+
+  literalFiniteMeasureActive =
+    finiteMeasureActiveStressSum
+      presentData attachment background measureWeld calculus anchorInputs
+
+  finiteMeasureNegativeGivesFiniteD1Negative :
+    literalFiniteMeasureActive < 0ℚ →
+    Four.activeFiniteD1Sum presentData attachment background < 0ℚ
+  finiteMeasureNegativeGivesFiniteD1Negative finiteNegative =
+    Relation.Binary.PropositionalEquality.subst
+      (λ value → value < 0ℚ)
+      (Relation.Binary.PropositionalEquality.sym
+        (finiteD1ActiveStressIsFiniteMeasureActiveStress
+          presentData attachment background measureWeld calculus anchorInputs))
+      finiteNegative
+
+  finiteMeasureNegativeCompilesToLocalizedPositiveGRepulsion :
+    literalFiniteMeasureActive < 0ℚ →
+    Repulse.CMP119LocalizedPositiveGRepulsionCriterion
+      presentData attachment background
+  finiteMeasureNegativeCompilesToLocalizedPositiveGRepulsion finiteNegative =
+    Repulse.compileLocalizedPositiveGRepulsion
+      presentData attachment background
+      (record
+        { Repulse.FourD1NegativeActiveStressInput.finiteActiveNegative =
+            finiteMeasureNegativeGivesFiniteD1Negative finiteNegative
+        })
