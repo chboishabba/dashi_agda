@@ -661,6 +661,74 @@ selectedRoleRoutingIsStrictlyLessThanFullTripleByPolicy :
   ≡ retainT3PlusSelectedRoleResidual role
 selectedRoleRoutingIsStrictlyLessThanFullTripleByPolicy role = refl
 
+
+------------------------------------------------------------------------
+-- 4i. Necessity evidence is role-sensitive.
+--
+-- p7=(2,4,0) and p13=(1,2,0) share one coarse T3 surface.  Hence the same
+-- witness proves that neither A_p nor B_p magnitude descends through presence
+-- alone.  It does not separate C_p: both have C_p=0.  On the currently
+-- attributed p>3 table, p5 is the only lane with nonzero C_p, so no analogous
+-- same-surface C-magnitude collision is claimed here.
+------------------------------------------------------------------------
+
+p7P13DifferentFrickeMagnitude :
+  roleMagnitude Arithmetic.frickeComparison p7ArithmeticTriple
+  ≡ roleMagnitude Arithmetic.frickeComparison p13ArithmeticTriple
+  -> ⊥
+p7P13DifferentFrickeMagnitude ()
+
+p7P13DifferentLevelPMagnitude :
+  roleMagnitude Arithmetic.levelPComparison p7ArithmeticTriple
+  ≡ roleMagnitude Arithmetic.levelPComparison p13ArithmeticTriple
+  -> ⊥
+p7P13DifferentLevelPMagnitude ()
+
+frickeMagnitudeNeedsResidual :
+  Descent.ConsumerSufficient
+    tripleSurface
+    (roleMagnitude Arithmetic.frickeComparison)
+  -> ⊥
+frickeMagnitudeNeedsResidual sufficient =
+  p7P13DifferentFrickeMagnitude
+    (sufficient
+      p7ArithmeticTriple
+      p13ArithmeticTriple
+      p7P13SameSurface)
+
+levelPMagnitudeNeedsResidual :
+  Descent.ConsumerSufficient
+    tripleSurface
+    (roleMagnitude Arithmetic.levelPComparison)
+  -> ⊥
+levelPMagnitudeNeedsResidual sufficient =
+  p7P13DifferentLevelPMagnitude
+    (sufficient
+      p7ArithmeticTriple
+      p13ArithmeticTriple
+      p7P13SameSurface)
+
+data RoleResidualNecessityEvidence
+  (role : Arithmetic.ModularContributionRole) : Set where
+  frickeNecessityFromP7P13 :
+    RoleResidualNecessityEvidence Arithmetic.frickeComparison
+  levelPNecessityFromP7P13 :
+    RoleResidualNecessityEvidence Arithmetic.levelPComparison
+
+frickeResidualNecessityEvidence :
+  RoleResidualNecessityEvidence Arithmetic.frickeComparison
+frickeResidualNecessityEvidence = frickeNecessityFromP7P13
+
+levelPResidualNecessityEvidence :
+  RoleResidualNecessityEvidence Arithmetic.levelPComparison
+levelPResidualNecessityEvidence = levelPNecessityFromP7P13
+
+data SquareLevelResidualNecessityWitnessConstructed : Set where
+
+squareLevelNecessityNotClaimedFromCurrentTable :
+  SquareLevelResidualNecessityWitnessConstructed -> ⊥
+squareLevelNecessityNotClaimedFromCurrentTable ()
+
 ------------------------------------------------------------------------
 -- 5. Role order is retained exactly.
 --
@@ -730,6 +798,9 @@ record OggMonstrousExponentTrialectic369QuantizationBoundary : Set where
     fullContributionConsumerRequiresResidual : Bool
     roleIndexedSelectiveResidualRoutingOwned : Bool
     selectedRoleResidualSufficesForRoleMagnitude : Bool
+    frickeResidualNecessityWitnessOwned : Bool
+    levelPResidualNecessityWitnessOwned : Bool
+    squareLevelResidualNecessityWitnessOwned : Bool
     arithmeticFrameInheritsJRendererPantsMeaning : Bool
     exactMagnitudeRecoveryFromPresenceCode : Bool
     arithmeticPolarityIdentityClaimed : Bool
@@ -742,5 +813,5 @@ canonicalOggMonstrousExponentTrialectic369QuantizationBoundary =
   ogg-monstrous-exponent-trialectic-369-quantization-boundary
     true true true true true
     true true true true
-    true true true true true true true true
+    true true true true true true true true true true false
     false false true false
