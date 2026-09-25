@@ -80,6 +80,7 @@ import DASHI.Physics.Closure.NSTriadKNR650GlobalMixedEnergyEndpointUpperRound699
 import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityTriadOrbitRound700Exact as R700
 import DASHI.Physics.Closure.NSTriadKNR650IntegratedNestedFourHelicityOrbitRound701Exact as R701
 import DASHI.Physics.Closure.NSTriadKNR650NestedFourHelicityCoefficientRound702Exact as R702
+import DASHI.Physics.Closure.NSTriadKNR650CyclicHelicalVectorTransformRound703Exact as R703
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
