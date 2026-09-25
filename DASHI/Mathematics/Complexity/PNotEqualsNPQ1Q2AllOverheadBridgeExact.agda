@@ -25,7 +25,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1Q2AllOverheadBridgeExact where
 -- the special self-instantiation process.  This bridge does not assume that.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Data.Nat using (_<_)
 import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
@@ -84,7 +86,7 @@ rootRecursiveMeasure :
   Size.formulaNodeCount (Bridge.indexedToCook root)
     + Q1.totalOverhead overhead
 rootRecursiveMeasure root overhead =
-  Agda.Builtin.Equality.refl
+  refl
 
 authorityRecursiveMeasure :
   ∀ {rootVariables : Nat}
@@ -98,7 +100,7 @@ authorityRecursiveMeasure :
       (Authority.closedQuotientSATAuthority closed)
     + Q1.totalOverhead overhead
 authorityRecursiveMeasure closed overhead =
-  Agda.Builtin.Equality.refl
+  refl
 
 ------------------------------------------------------------------------
 -- Main bridge: Q1 is literally a Q2 whole-state decrease.
@@ -161,12 +163,12 @@ q1BuildsQ2StrictStep :
     (overhead : Q1.SelfReferenceOverhead) →
   Q1.ClosedQuotientAllOverheadFits closed overhead →
   Q1Q2StrictStep closed overhead
-q1BuildsQ2StrictStep closed overhead fits =
+q1BuildsQ2StrictStep {root = root} closed overhead fits =
   q1-q2-strict-step
-    (rootRecursiveState _ overhead)
+    (rootRecursiveState root overhead)
     (authorityRecursiveState closed overhead)
-    Agda.Builtin.Equality.refl
-    Agda.Builtin.Equality.refl
+    refl
+    refl
     (q1AllOverheadGivesQ2MeasureDecrease
       closed overhead fits)
 
