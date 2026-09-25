@@ -92,6 +92,7 @@ import DASHI.Physics.Closure.NSTriadKNR650SingleSelfSpectatorFibreTransportRound
 import DASHI.Physics.Closure.NSTriadKNR650SingleSelfCompleteOrbitCollapseRound716Exact as R716
 import DASHI.Physics.Closure.NSTriadKNR650SingleSelfOutputPairingCollapseRound717Exact as R717
 import DASHI.Physics.Closure.NSTriadKNR650SingleSelfOutputRealityRound718Exact as R718
+import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfFoldRealityRound719Exact as R719
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -1164,7 +1165,19 @@ round650RealityOrbitWouldCancelSelfPairing =
 
 round650SelectedSelfFoldRealityClosed : Bool
 round650SelectedSelfFoldRealityClosed =
-  R718.round718SelectedSelfFoldRealityClosed
+  R719.round719SelectedSelfFoldRealityClosed
+
+round650RealityPairingEvenOnLiteralSelfCarrier : Bool
+round650RealityPairingEvenOnLiteralSelfCarrier =
+  R719.round719RealityPairingIsEvenOnLiteralSelfCarrier
+
+round650RealityCancelsLiteralSelectedSelfPairing : Bool
+round650RealityCancelsLiteralSelectedSelfPairing =
+  R719.round719RealityCancelsSelectedSelfPairing
+
+round650SelectedSelfRealityIntroducesEstimate : Bool
+round650SelectedSelfRealityIntroducesEstimate =
+  R719.round719IntroducesEstimate
 
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 : Bool
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 =
