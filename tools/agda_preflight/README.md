@@ -147,12 +147,33 @@ It does not invoke Agda.
 The benchmark command is also an executable performance gate. Defaults are:
 
 ```text
-cold bootstrap <= 60,000 ms
-warm p95      <= 10,000 ms
-every warm run parses zero files
+cold bootstrap     <= 60,000 ms
+warm diagnose p95   <= 10,000 ms
+warm next-error p95 <=  2,000 ms
+every warm/agent run parses zero files
 ```
 
-A benchmark exits nonzero if any of those conditions fail.
+A benchmark exits nonzero if any of those conditions fail. The benchmark
+reports `agent_next_error.request_total` separately from the full warm
+diagnostic report so agent iteration latency cannot be hidden by aggregate
+diagnostic JSON decoding.
+
+Persistent cache validity is also analyzer-semantic rather than Git-head based.
+The source index stores two analyzer fingerprints:
+
+```text
+interface analyzer fingerprint
+  ast_index + shapes + interfaces + tree-sitter versions
+
+diagnostic analyzer fingerprint
+  interface fingerprint + checker/rules/evidence/fix machinery
+```
+
+A diagnostic-only implementation change preserves persisted interfaces and the
+module graph while invalidating diagnostic/top-candidate payloads. An
+interface/parser semantic change invalidates both layers. Unrelated repository
+commits do not discard the cache.
+
 
 ### Parallel cold bootstrap
 
