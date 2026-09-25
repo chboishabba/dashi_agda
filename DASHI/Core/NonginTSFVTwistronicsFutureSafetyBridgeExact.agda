@@ -25,6 +25,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Core.NonginOnePointOneArmyRefinementExact as Nongin
 import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact as TSFV
+import DASHI.Cognition.PNF.TSFVSemanticQueryFutureSplitExact as TSFVDynamic
 import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact as TSFVCaustic
 import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
 import DASHI.Core.ReopenableConsumerInterventionKernelExact as Base
@@ -84,6 +85,7 @@ futureSafeCapacityOwnerPresent =
 data DomainLane : Set where
   nonginFrameLane : DomainLane
   tsfvHistoryLane : DomainLane
+  tsfvSemanticQueryLane : DomainLane
   twistronicsRegistrationLane : DomainLane
 
 record DomainFutureSafetyStatus : Set where
@@ -113,6 +115,15 @@ canonicalTSFVFutureSafetyStatus =
     false false false
     "bind the existing admissible-history/world machinery to a DependentActionSystem whose common traces expose history-sensitive future observations"
 
+
+canonicalTSFVSemanticQueryFutureSafetyStatus : DomainFutureSafetyStatus
+canonicalTSFVSemanticQueryFutureSafetyStatus =
+  domain-future-safety-status
+    tsfvSemanticQueryLane
+    true true
+    true true true
+    "semantic-query future split is concretely instantiated; physical caustic History3-to-Candidate256 realization remains a separate sourced obligation"
+
 canonicalTwistronicsFutureSafetyStatus : DomainFutureSafetyStatus
 canonicalTwistronicsFutureSafetyStatus =
   domain-future-safety-status
@@ -131,7 +142,8 @@ record NonginTSFVTwistronicsFutureSafetyBoundary : Set where
     sharedCurrentNonDescentShape : Bool
     sharedFutureCapacityTheoremAvailable : Bool
     nonginDynamicsAlreadyConstructed : Bool
-    tsfvDynamicsAlreadyConstructedInThisBridge : Bool
+    tsfvSemanticQueryDynamicsConstructed : Bool
+    tsfvCausticHistoryDynamicsConstructed : Bool
     twistronicsDynamicsAlreadyConstructed : Bool
     currentNonDescentImpliesFutureDistinctionAutomatically : Bool
     currentNonDescentImpliesFutureDistinctionAutomaticallyIsFalse :
@@ -145,6 +157,6 @@ canonicalNonginTSFVTwistronicsFutureSafetyBoundary :
 canonicalNonginTSFVTwistronicsFutureSafetyBoundary =
   nongin-tsfv-twistronics-future-safety-boundary
     true true
-    false false false
+    true false false
     false refl
     false refl
