@@ -246,47 +246,69 @@ admittedFiniteToReachableWitness admitted =
   allOverheadFits admitted
 
 ------------------------------------------------------------------------
--- Machine execution returns only the finite candidate.
+-- Machine execution returns only finite DATA.
+--
+-- The output candidate is literally part of the terminal machine state.  No
+-- decoder is permitted to manufacture semantic admission proofs.
 ------------------------------------------------------------------------
+
+data CandidateMachineState
+    {rootVariables : Nat}
+    (root : SAT.BooleanFormula rootVariables)
+    (Work : Set) : Set₁ where
+  working :
+    Work →
+    CandidateMachineState root Work
+
+  finished :
+    FiniteQ1Candidate root →
+    CandidateMachineState root Work
+
+candidateMachineStep :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    {Work : Set} →
+  (Work → CandidateMachineState root Work) →
+  CandidateMachineState root Work →
+  CandidateMachineState root Work
+candidateMachineStep advance (working work) =
+  advance work
+candidateMachineStep advance (finished candidate) =
+  finished candidate
 
 record FiniteCandidateConstructionRun
     (state : Q2.BoundedSelfReferenceState) : Set₁ where
   constructor finite-candidate-construction-run
   field
-    MachineState : Set
-    machineStep : MachineState → MachineState
+    Work : Set
 
-    decodeCandidate :
-      MachineState →
-      Maybe
-        (FiniteQ1Candidate
-          (Bridge.cookToIndexed
-            (Q2.currentFormula state)))
+    advance :
+      Work →
+      CandidateMachineState
+        (Bridge.cookToIndexed
+          (Q2.currentFormula state))
+        Work
 
-    machineStart machineFinal : MachineState
-    machineStepCount : Nat
-
-    machineExecution :
-      Executed.Iterates
-        machineStep
-        machineStepCount
-        machineStart
-        machineFinal
+    initialWork : Work
 
     finiteCandidate :
       FiniteQ1Candidate
         (Bridge.cookToIndexed
           (Q2.currentFormula state))
 
-    machineFinalDecodesCandidate :
-      decodeCandidate machineFinal
-      ≡
-      just finiteCandidate
+    machineStepCount : Nat
+
+    machineExecution :
+      Executed.Iterates
+        (candidateMachineStep advance)
+        machineStepCount
+        (working initialWork)
+        (finished finiteCandidate)
 
 open FiniteCandidateConstructionRun public
 
 ------------------------------------------------------------------------
--- Admission is attached OUTSIDE the decoder.
+-- Admission is attached OUTSIDE the construction machine.
 ------------------------------------------------------------------------
 
 record AdmittedFiniteCandidateConstructionRun
@@ -334,72 +356,123 @@ record AdmittedFiniteCandidateConstructionRun
 
 open AdmittedFiniteCandidateConstructionRun public
 
-admittedRunToReachableRun :
+admittedRunQ1Witness :
   ∀ {state : Q2.BoundedSelfReferenceState} →
   AdmittedFiniteCandidateConstructionRun state →
-  Reachable.ReachableRewriteGeneratedExecutedQ1ConstructionRun state
-admittedRunToReachableRun {state} admitted =
-  Reachable.reachable-rewrite-generated-executed-q1-construction-run
-    (MachineState construction)
-    (machineStep construction)
-    decodeReachable
-    (machineStart construction)
-    (machineFinal construction)
-    (machineStepCount construction)
-    (machineExecution construction)
-    reachableWitness
-    finalDecodes
-    (machineConstructionAndNextStrict admitted)
-  where
-    construction :
-      FiniteCandidateConstructionRun state
-    construction =
-      AdmittedFiniteCandidateConstructionRun.construction admitted
-
-    admittedWitness :
-      AdmittedFiniteQ1StateWitness state
-    admittedWitness =
-      admitted-finite-q1-state-witness
-        (finiteCandidate construction)
-        (AdmittedFiniteCandidateConstructionRun.semanticCongruence admitted)
-        (AdmittedFiniteCandidateConstructionRun.allOverheadFits admitted)
-
-    reachableWitness :
-      Reachable.ReachableRewriteGeneratedQ1StateWitness state
-    reachableWitness =
-      admittedFiniteToReachableWitness admittedWitness
-
-    decodeReachable :
-      MachineState construction →
-      Maybe (Reachable.ReachableRewriteGeneratedQ1StateWitness state)
-    decodeReachable machineState
-        with decodeCandidate construction machineState
-    ... | nothing =
-      nothing
-    ... | just candidateData =
-      just
-        (admitFiniteQ1Candidate
-          candidateData
-          (AdmittedFiniteCandidateConstructionRun.semanticCongruence admitted)
-        ,
-        AdmittedFiniteCandidateConstructionRun.allOverheadFits admitted)
-
-    finalDecodes :
-      decodeReachable (machineFinal construction)
-      ≡
-      just reachableWitness
-    finalDecodes
-      rewrite machineFinalDecodesCandidate construction =
-      refl
+  Recurrence.Q1StateWitness state
+admittedRunQ1Witness admitted =
+  Reachable.toRewriteGeneratedQ1StateWitness
+    (admittedFiniteToReachableWitness
+      (admitted-finite-q1-state-witness
+        (finiteCandidate
+          (construction admitted))
+        (semanticCongruence admitted)
+        (allOverheadFits admitted)))
 
 ------------------------------------------------------------------------
--- IMPORTANT TYPING BOUNDARY
+-- Compatibility compiler to the existing operational Q1 interface.
 --
--- The generic decodeReachable adapter above is only valid at the FINAL emitted
--- candidate: the semanticCongruence/allOverheadFits receipts are indexed by
--- that exact candidate.  Intermediate machine states are not admitted Q1
--- witnesses.
+-- The old List Unit field is now DERIVED from a real typed machine execution
+-- count.  It is not the source of authority.
+------------------------------------------------------------------------
+
+admittedFiniteRunToOperationalRun :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  AdmittedFiniteCandidateConstructionRun state →
+  Operational.OperationalQ1ConstructionRun state
+admittedFiniteRunToOperationalRun {state} admitted =
+  record
+    { Operational.q1Witness =
+        witness
+
+    ; Operational.emittedFalseTarget =
+        λ stateIndex →
+          Quotient.step
+            (Operational.q1WitnessQuotient witness)
+            falseStateIndex
+            false
+      where
+        falseStateIndex = stateIndex
+
+    ; Operational.emittedTrueTarget =
+        λ stateIndex →
+          Quotient.step
+            (Operational.q1WitnessQuotient witness)
+            trueStateIndex
+            true
+      where
+        trueStateIndex = stateIndex
+
+    ; Operational.emittedFalseTargetExact =
+        λ stateIndex → refl
+
+    ; Operational.emittedTrueTargetExact =
+        λ stateIndex → refl
+
+    ; Operational.auxiliaryTrace =
+        Operational.unitTrace
+          (machineStepCount
+            (construction admitted))
+
+    ; Operational.operationalAndNextStrict =
+        strict
+    }
+  where
+    witness :
+      Recurrence.Q1StateWitness state
+    witness =
+      admittedRunQ1Witness admitted
+
+    strict :
+      (Operational.q1WitnessGraphCellCount witness
+        +
+        Data.List.Base.length
+          (Operational.unitTrace
+            (machineStepCount
+              (construction admitted))))
+      +
+      Q2.recursiveMeasure
+        (Charged.q1WitnessNextState state witness)
+      <
+      Q2.recursiveMeasure state
+    strict
+      rewrite
+        Operational.unitTraceLengthExact
+          (machineStepCount
+            (construction admitted)) =
+      machineConstructionAndNextStrict admitted
+
+AdmittedFiniteCandidateStateConstructor : Set₁
+AdmittedFiniteCandidateStateConstructor =
+  (state : Q2.BoundedSelfReferenceState) →
+  Maybe (AdmittedFiniteCandidateConstructionRun state)
+
+admittedFiniteConstructorToOperational :
+  AdmittedFiniteCandidateStateConstructor →
+  Operational.OperationalQ1StateConstructor
+admittedFiniteConstructorToOperational constructor state
+    with constructor state
+... | nothing =
+  nothing
+... | just admitted =
+  just (admittedFiniteRunToOperationalRun admitted)
+
+admittedFiniteConstructorToQ2StepSystem :
+  AdmittedFiniteCandidateStateConstructor →
+  Q2.BoundedSelfReferenceStepSystem
+admittedFiniteConstructorToQ2StepSystem constructor =
+  Operational.operationalConstructorToQ2StepSystem
+    (admittedFiniteConstructorToOperational constructor)
+
+------------------------------------------------------------------------
+-- AUTHORITY BOUNDARY
 --
--- Therefore the preferred next refinement is to use a final-only decoder
--- rather than pretending every intermediate candidate shares the final proof.
+-- Machine execution can emit only finite candidate data.
+--
+-- Semantic congruence and all-overhead fit are not decoder outputs.  They are
+-- proof obligations attached to the exact terminal candidate after execution.
+--
+-- Thus an intermediate machine state cannot borrow the final candidate's
+-- semantic authority, and the machine cannot return an admitted quotient by
+-- construction alone.
 ------------------------------------------------------------------------
