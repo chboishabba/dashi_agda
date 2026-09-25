@@ -18,6 +18,7 @@ module DASHI.Physics.YangMills.BalabanWilsonBivariateMarkedJetExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
@@ -121,6 +122,198 @@ clusterJetFromPolymers :
   TwoSourceJet
 clusterJetFromPolymers coefficient polymers polymerJet =
   scaleJet coefficient (productJets (mapJets polymerJet polymers))
+
+
+
+
+record PolymerJetSupport {Polymer : Set}
+    (polymerJet : Polymer → TwoSourceJet) : Set₁ where
+  field
+    polymerTouchesLeft polymerTouchesRight : Polymer → Bool
+
+    missingLeftKillsPolymerLeft :
+      ∀ polymer →
+      polymerTouchesLeft polymer ≡ false →
+      leftCoefficient (polymerJet polymer) ≡ 0ℚ
+
+    missingLeftKillsPolymerMixed :
+      ∀ polymer →
+      polymerTouchesLeft polymer ≡ false →
+      mixedCoefficient (polymerJet polymer) ≡ 0ℚ
+
+    missingRightKillsPolymerRight :
+      ∀ polymer →
+      polymerTouchesRight polymer ≡ false →
+      rightCoefficient (polymerJet polymer) ≡ 0ℚ
+
+    missingRightKillsPolymerMixed :
+      ∀ polymer →
+      polymerTouchesRight polymer ≡ false →
+      mixedCoefficient (polymerJet polymer) ≡ 0ℚ
+
+open PolymerJetSupport public
+
+anyTouch : ∀ {Polymer : Set} → (Polymer → Bool) → List Polymer → Bool
+anyTouch touches [] = false
+anyTouch touches (polymer ∷ polymers) with touches polymer
+... | true = true
+... | false = anyTouch touches polymers
+
+productJetsMissingLeftCoefficientsZero :
+  ∀ {Polymer}
+    (polymerJet : Polymer → TwoSourceJet)
+    (support : PolymerJetSupport polymerJet)
+    (polymers : List Polymer) →
+  anyTouch (polymerTouchesLeft support) polymers ≡ false →
+  leftCoefficient (productJets (mapJets polymerJet polymers)) ≡ 0ℚ
+  ×
+  mixedCoefficient (productJets (mapJets polymerJet polymers)) ≡ 0ℚ
+productJetsMissingLeftCoefficientsZero polymerJet support [] missing =
+  refl , refl
+productJetsMissingLeftCoefficientsZero
+    polymerJet support (polymer ∷ polymers) missing
+  with polymerTouchesLeft support polymer
+... | true = ()
+... | false
+  with productJetsMissingLeftCoefficientsZero
+    polymerJet support polymers missing
+... | restLeftZero , restMixedZero
+  rewrite missingLeftKillsPolymerLeft support polymer refl
+        | missingLeftKillsPolymerMixed support polymer refl
+        | restLeftZero
+        | restMixedZero =
+  ℚRing.solve-∀
+    (baseCoefficient (polymerJet polymer))
+    (rightCoefficient (polymerJet polymer))
+    (baseCoefficient (productJets (mapJets polymerJet polymers)))
+    (rightCoefficient (productJets (mapJets polymerJet polymers)))
+  ,
+  ℚRing.solve-∀
+    (baseCoefficient (polymerJet polymer))
+    (rightCoefficient (polymerJet polymer))
+    (baseCoefficient (productJets (mapJets polymerJet polymers)))
+    (rightCoefficient (productJets (mapJets polymerJet polymers)))
+
+productJetsMissingRightCoefficientsZero :
+  ∀ {Polymer}
+    (polymerJet : Polymer → TwoSourceJet)
+    (support : PolymerJetSupport polymerJet)
+    (polymers : List Polymer) →
+  anyTouch (polymerTouchesRight support) polymers ≡ false →
+  rightCoefficient (productJets (mapJets polymerJet polymers)) ≡ 0ℚ
+  ×
+  mixedCoefficient (productJets (mapJets polymerJet polymers)) ≡ 0ℚ
+productJetsMissingRightCoefficientsZero polymerJet support [] missing =
+  refl , refl
+productJetsMissingRightCoefficientsZero
+    polymerJet support (polymer ∷ polymers) missing
+  with polymerTouchesRight support polymer
+... | true = ()
+... | false
+  with productJetsMissingRightCoefficientsZero
+    polymerJet support polymers missing
+... | restRightZero , restMixedZero
+  rewrite missingRightKillsPolymerRight support polymer refl
+        | missingRightKillsPolymerMixed support polymer refl
+        | restRightZero
+        | restMixedZero =
+  ℚRing.solve-∀
+    (baseCoefficient (polymerJet polymer))
+    (leftCoefficient (polymerJet polymer))
+    (baseCoefficient (productJets (mapJets polymerJet polymers)))
+    (leftCoefficient (productJets (mapJets polymerJet polymers)))
+  ,
+  ℚRing.solve-∀
+    (baseCoefficient (polymerJet polymer))
+    (leftCoefficient (polymerJet polymer))
+    (baseCoefficient (productJets (mapJets polymerJet polymers)))
+    (leftCoefficient (productJets (mapJets polymerJet polymers)))
+
+scaleJetLeftZero :
+  ∀ scalar j →
+  leftCoefficient j ≡ 0ℚ →
+  leftCoefficient (scaleJet scalar j) ≡ 0ℚ
+scaleJetLeftZero scalar (jet a b c d) leftZero
+  rewrite leftZero =
+  ℚRing.solve-∀ scalar
+
+scaleJetRightZero :
+  ∀ scalar j →
+  rightCoefficient j ≡ 0ℚ →
+  rightCoefficient (scaleJet scalar j) ≡ 0ℚ
+scaleJetRightZero scalar (jet a b c d) rightZero
+  rewrite rightZero =
+  ℚRing.solve-∀ scalar
+
+scaleJetMixedZero :
+  ∀ scalar j →
+  mixedCoefficient j ≡ 0ℚ →
+  mixedCoefficient (scaleJet scalar j) ≡ 0ℚ
+scaleJetMixedZero scalar (jet a b c d) mixedZero
+  rewrite mixedZero =
+  ℚRing.solve-∀ scalar
+
+clusterJetSupportFromPolymerSupport :
+  ∀ {Polymer Cluster}
+    (clusterPolymers : Cluster → List Polymer)
+    (clusterCoefficient : Cluster → ℚ)
+    (polymerJet : Polymer → TwoSourceJet)
+    (support : PolymerJetSupport polymerJet) →
+  ClusterJetSupport
+    (λ cluster →
+      clusterJetFromPolymers
+        (clusterCoefficient cluster)
+        (clusterPolymers cluster)
+        polymerJet)
+clusterJetSupportFromPolymerSupport
+    clusterPolymers clusterCoefficient polymerJet support = record
+  { ClusterJetSupport.touchesLeft =
+      λ cluster →
+        anyTouch (polymerTouchesLeft support) (clusterPolymers cluster)
+  ; ClusterJetSupport.touchesRight =
+      λ cluster →
+        anyTouch (polymerTouchesRight support) (clusterPolymers cluster)
+  ; ClusterJetSupport.missingLeftKillsLeftCoefficient =
+      λ cluster missing →
+        let zeros =
+              productJetsMissingLeftCoefficientsZero
+                polymerJet support (clusterPolymers cluster) missing
+        in
+        scaleJetLeftZero
+          (clusterCoefficient cluster)
+          (productJets (mapJets polymerJet (clusterPolymers cluster)))
+          (proj₁ zeros)
+  ; ClusterJetSupport.missingLeftKillsMixedCoefficient =
+      λ cluster missing →
+        let zeros =
+              productJetsMissingLeftCoefficientsZero
+                polymerJet support (clusterPolymers cluster) missing
+        in
+        scaleJetMixedZero
+          (clusterCoefficient cluster)
+          (productJets (mapJets polymerJet (clusterPolymers cluster)))
+          (proj₂ zeros)
+  ; ClusterJetSupport.missingRightKillsRightCoefficient =
+      λ cluster missing →
+        let zeros =
+              productJetsMissingRightCoefficientsZero
+                polymerJet support (clusterPolymers cluster) missing
+        in
+        scaleJetRightZero
+          (clusterCoefficient cluster)
+          (productJets (mapJets polymerJet (clusterPolymers cluster)))
+          (proj₁ zeros)
+  ; ClusterJetSupport.missingRightKillsMixedCoefficient =
+      λ cluster missing →
+        let zeros =
+              productJetsMissingRightCoefficientsZero
+                polymerJet support (clusterPolymers cluster) missing
+        in
+        scaleJetMixedZero
+          (clusterCoefficient cluster)
+          (productJets (mapJets polymerJet (clusterPolymers cluster)))
+          (proj₂ zeros)
+  }
 
 
 mixedFiniteDifference :
