@@ -60,6 +60,7 @@ files=(
   DASHI/Physics/Foundations/CMP119SymmetricPresentCutCarrierCompilerValidation.agda
   DASHI/Physics/Foundations/CMP119TenFiniteD1ComponentCompilerExact.agda
   DASHI/Physics/Foundations/CMP119GRQFTD1MaxCutExact.agda
+  DASHI/Physics/Foundations/CMP119FourDiagonalFiniteD1ActiveStressExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotCrossNumeratorCandidateExact.agda
   DASHI/Physics/Foundations/CMP119ConcreteTenSlotD1SourceWeldExact.agda
   DASHI/Physics/Foundations/CMP119TenActualSourceReadoutsExact.agda
@@ -182,4 +183,24 @@ assert p["all_cross_numerators_exact"] is True
 assert p["gr_residual_exact_zero"] is True
 assert p["active_stress_is_negative_two"] is True
 assert p["active_stress_rho_plus_px_plus_py_plus_pz"] == -2
+PY
+
+
+tmp_active="$(mktemp)"
+tmp_active_zero_in="$(mktemp)"
+tmp_active_zero_out="$(mktemp)"
+trap 'rm -f "$tmp_active" "$tmp_active_zero_in" "$tmp_active_zero_out"' EXIT
+python3 scripts/grqft_four_diagonal_active_stress.py --output "$tmp_active" >/dev/null
+diff -u outputs/grqft_four_diagonal_active_stress_target.json "$tmp_active"
+cat >"$tmp_active_zero_in" <<'JSON'
+{"qft_diagonal_finite_d1_readouts":{"00":{"num":3,"den":2},"11":{"num":-1,"den":2},"22":{"num":-1,"den":2},"33":{"num":-1,"den":2}}}
+JSON
+python3 scripts/grqft_four_diagonal_active_stress.py --input "$tmp_active_zero_in" --output "$tmp_active_zero_out" >/dev/null
+python3 - "$tmp_active_zero_out" <<'PY'
+import json,sys
+p=json.load(open(sys.argv[1]))
+assert p["status"] == "zero_active_stress"
+assert p["active_stress_rho_plus_px_plus_py_plus_pz"] == 0
+assert p["negative_active_stress"] is False
+assert p["off_diagonal_readouts_required_for_this_diagnostic"] is False
 PY
