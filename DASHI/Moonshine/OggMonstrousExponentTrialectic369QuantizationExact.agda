@@ -27,6 +27,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; Σ)
 open import Data.Maybe using (Maybe; just)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Core.DependentRecoverableProjectionExact as Recoverable
 import DASHI.Core.TopDownObservationCalculusExact as TopDown
@@ -395,9 +396,15 @@ compactPayloadAndFrameDoNotRecoverArithmeticWithoutResidual :
     tripleSum
   -> ⊥
 compactPayloadAndFrameDoNotRecoverArithmeticWithoutResidual sufficient =
-  surfaceCannotAnswerArithmeticSum
-    (λ left right same ->
-      sufficient left right same)
+  p7P13DifferentSum
+    (sufficient
+      p7ArithmeticTriple
+      p13ArithmeticTriple
+      (trans
+        (compactArithmeticSurfaceRoundTrip p7ArithmeticTriple)
+        (trans
+          p7P13SameSurface
+          (sym (compactArithmeticSurfaceRoundTrip p13ArithmeticTriple)))))
 
 data ArithmeticFrameAutomaticallyHasJRendererPantsMeaning : Set where
 
