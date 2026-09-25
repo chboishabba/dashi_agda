@@ -20,7 +20,8 @@ module DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact wh
 -- the literal marked polymer family.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; cong)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; cong; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (_++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
@@ -285,3 +286,209 @@ mixedDerivativeFullExpansionIsConnectingSum
       (λ cluster →
         mixedDerivative calculus (clusterTerm expansion cluster))
       disconnectedZero)
+
+
+------------------------------------------------------------------------
+-- Support-filtered connected family.
+--
+-- The physical source no longer has to pre-partition clusters into
+-- "connecting" and "disconnected" lists.  It supplies literal support
+-- incidence for each finite cluster and the ordinary locality fact that missing
+-- one Wilson support makes that cluster term independent of that source.
+-- The compiler filters the two-support family and cancels every other mixed
+-- derivative.
+------------------------------------------------------------------------
+
+filterTwoSupport :
+  ∀ {Cluster : Set} →
+  (Cluster → Bool) →
+  (Cluster → Bool) →
+  List Cluster →
+  List Cluster
+filterTwoSupport touchesLeft touchesRight [] = []
+filterTwoSupport touchesLeft touchesRight (cluster ∷ clusters)
+  with touchesLeft cluster | touchesRight cluster
+... | true | true =
+  cluster ∷ filterTwoSupport touchesLeft touchesRight clusters
+... | true | false =
+  filterTwoSupport touchesLeft touchesRight clusters
+... | false | true =
+  filterTwoSupport touchesLeft touchesRight clusters
+... | false | false =
+  filterTwoSupport touchesLeft touchesRight clusters
+
+record MarkedClusterSupportLocality
+    {Source Cluster : Set}
+    (clusterTerm : Cluster → Source → Source → ℚ) : Set₁ where
+  field
+    touchesLeft touchesRight : Cluster → Bool
+
+    missingLeftMakesTermIndependent :
+      ∀ cluster →
+      touchesLeft cluster ≡ false →
+      ∀ left₁ left₂ right →
+      clusterTerm cluster left₁ right ≡
+      clusterTerm cluster left₂ right
+
+    missingRightMakesTermIndependent :
+      ∀ cluster →
+      touchesRight cluster ≡ false →
+      ∀ left right₁ right₂ →
+      clusterTerm cluster left right₁ ≡
+      clusterTerm cluster left right₂
+
+open MarkedClusterSupportLocality public
+
+mixedDerivativeZeroWhenNotTwoSupport :
+  ∀ {Source Cluster}
+    {calculus : MixedSourceDerivativeCalculus Source}
+    (vanishing : MixedSourceDerivativeVanishing calculus)
+    {clusterTerm : Cluster → Source → Source → ℚ}
+    (locality : MarkedClusterSupportLocality clusterTerm)
+    cluster →
+  touchesLeft locality cluster ≡ false →
+  mixedDerivative calculus (clusterTerm cluster) ≡ 0ℚ
+mixedDerivativeZeroWhenNotTwoSupport
+    vanishing locality cluster leftMiss =
+  leftIndependentDerivativeZero vanishing
+    (clusterTerm cluster)
+    (missingLeftMakesTermIndependent locality cluster leftMiss)
+
+mixedDerivativeZeroWhenMissingRight :
+  ∀ {Source Cluster}
+    {calculus : MixedSourceDerivativeCalculus Source}
+    (vanishing : MixedSourceDerivativeVanishing calculus)
+    {clusterTerm : Cluster → Source → Source → ℚ}
+    (locality : MarkedClusterSupportLocality clusterTerm)
+    cluster →
+  touchesRight locality cluster ≡ false →
+  mixedDerivative calculus (clusterTerm cluster) ≡ 0ℚ
+mixedDerivativeZeroWhenMissingRight
+    vanishing locality cluster rightMiss =
+  rightIndependentDerivativeZero vanishing
+    (clusterTerm cluster)
+    (missingRightMakesTermIndependent locality cluster rightMiss)
+
+sumMixedDerivativeFiltersToTwoSupport :
+  ∀ {Source Cluster}
+    {calculus : MixedSourceDerivativeCalculus Source}
+    (vanishing : MixedSourceDerivativeVanishing calculus)
+    (clusters : List Cluster)
+    (clusterTerm : Cluster → Source → Source → ℚ)
+    (locality : MarkedClusterSupportLocality clusterTerm) →
+  TwoMark.sumℚ
+    (TwoMark.map
+      (λ cluster → mixedDerivative calculus (clusterTerm cluster))
+      clusters)
+  ≡
+  TwoMark.sumℚ
+    (TwoMark.map
+      (λ cluster → mixedDerivative calculus (clusterTerm cluster))
+      (filterTwoSupport
+        (touchesLeft locality)
+        (touchesRight locality)
+        clusters))
+sumMixedDerivativeFiltersToTwoSupport vanishing [] clusterTerm locality = refl
+sumMixedDerivativeFiltersToTwoSupport
+    {calculus = calculus}
+    vanishing (cluster ∷ clusters) clusterTerm locality
+  with touchesLeft locality cluster | touchesRight locality cluster
+... | true | true
+  rewrite
+    sumMixedDerivativeFiltersToTwoSupport
+      vanishing clusters clusterTerm locality = refl
+... | true | false
+  rewrite
+    mixedDerivativeZeroWhenMissingRight
+      vanishing locality cluster refl
+  | ℚP.+-identityˡ
+      (TwoMark.sumℚ
+        (TwoMark.map
+          (λ item → mixedDerivative calculus (clusterTerm item))
+          clusters))
+  | sumMixedDerivativeFiltersToTwoSupport
+      vanishing clusters clusterTerm locality = refl
+... | false | true
+  rewrite
+    mixedDerivativeZeroWhenNotTwoSupport
+      vanishing locality cluster refl
+  | ℚP.+-identityˡ
+      (TwoMark.sumℚ
+        (TwoMark.map
+          (λ item → mixedDerivative calculus (clusterTerm item))
+          clusters))
+  | sumMixedDerivativeFiltersToTwoSupport
+      vanishing clusters clusterTerm locality = refl
+... | false | false
+  rewrite
+    mixedDerivativeZeroWhenNotTwoSupport
+      vanishing locality cluster refl
+  | ℚP.+-identityˡ
+      (TwoMark.sumℚ
+        (TwoMark.map
+          (λ item → mixedDerivative calculus (clusterTerm item))
+          clusters))
+  | sumMixedDerivativeFiltersToTwoSupport
+      vanishing clusters clusterTerm locality = refl
+
+record SupportIndexedMarkedClusterExpansion
+    (Source Cluster : Set)
+    (calculus : MixedSourceDerivativeCalculus Source)
+    : Set₁ where
+  field
+    clusters : List Cluster
+    logPartition : Source → Source → ℚ
+    clusterTerm : Cluster → Source → Source → ℚ
+
+    logPartitionExpansionExact :
+      ∀ sourceLeft sourceRight →
+      logPartition sourceLeft sourceRight
+      ≡
+      TwoMark.sumℚ
+        (TwoMark.map
+          (λ cluster →
+            clusterTerm cluster sourceLeft sourceRight)
+          clusters)
+
+    supportLocality :
+      MarkedClusterSupportLocality clusterTerm
+
+open SupportIndexedMarkedClusterExpansion public
+
+mixedDerivativeSupportIndexedExpansionIsConnectingSum :
+  ∀ {Source Cluster}
+    {calculus : MixedSourceDerivativeCalculus Source}
+    (vanishing : MixedSourceDerivativeVanishing calculus)
+    (expansion :
+      SupportIndexedMarkedClusterExpansion Source Cluster calculus) →
+  mixedDerivative calculus (logPartition expansion)
+  ≡
+  TwoMark.sumℚ
+    (TwoMark.map
+      (λ cluster →
+        mixedDerivative calculus (clusterTerm expansion cluster))
+      (filterTwoSupport
+        (touchesLeft (supportLocality expansion))
+        (touchesRight (supportLocality expansion))
+        (clusters expansion)))
+mixedDerivativeSupportIndexedExpansionIsConnectingSum
+    {calculus = calculus} vanishing expansion =
+  trans
+    (trans
+      (mixedDerivativeCongruent calculus
+        (logPartition expansion)
+        (λ sourceLeft sourceRight →
+          TwoMark.sumℚ
+            (TwoMark.map
+              (λ cluster →
+                clusterTerm expansion cluster sourceLeft sourceRight)
+              (clusters expansion)))
+        (logPartitionExpansionExact expansion))
+      (mixedDerivativeFiniteSum calculus
+        (clusters expansion)
+        (clusterTerm expansion)))
+    (sumMixedDerivativeFiltersToTwoSupport
+      vanishing
+      (clusters expansion)
+      (clusterTerm expansion)
+      (supportLocality expansion))
