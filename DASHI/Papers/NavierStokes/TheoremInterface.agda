@@ -38,8 +38,9 @@ import DASHI.Papers.NavierStokes.ClayContractRound23 as Clay23
 --
 -- Current periodic-B Clay max-cut:
 --
---   NEW / NONSTANDARD -- EXACTLY TWO
---     C1  R568 cutoff-uniform live signed-commutator spacetime payment
+--   NEW / NONSTANDARD -- CURRENTLY THREE PROOF-BEARING COORDINATES
+--     C1a R723 cutoff-uniform combined/global signed-commutator spacetime payment
+--     C1b R726 combined/global commutator -> literal R406 transport
 --     C2  physical R98 packet strict-surplus payment by literal R406,
 --         with positive retained margin delta
 --
@@ -71,7 +72,7 @@ historicalAlternativeRouteStatement =
 
 paperInterfaceStatement : String
 paperInterfaceStatement =
-  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is the R650 two-inequality cut: C1 is the live R568 cutoff-uniform signed-commutator spacetime payment; C2 is the live physical R98 packet strict-surplus payment by literal R406 with a positive retained margin. R645 derives retained viscosity from that C2 margin, so C5 is not an independent theorem. C3 is compiled same-object structure; C4/C6/C7 are standard source-instantiation layers with typed consumer boundaries. R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, DFL/DHH/core, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
+  "Paper-facing NS interface: programme Lane B is the active unforced periodic T^3 construction; Lane A remains an independent unforced whole-space R^3 obligation; C/D are forced-breakdown verification/provenance lanes. The canonical periodic Clay max-cut is now recut through R723-R727: C1a is the cutoff-uniform combined/global signed-commutator spacetime payment; C1b is the explicit transport from that combined payment to literal R406; C2 is the live physical R98 packet strict-surplus payment by literal R406 with a positive retained margin. R645 derives retained viscosity from that C2 margin, so C5 is not an independent theorem. C3 is compiled same-object structure; C4/C6/C7 are standard source-instantiation layers with typed consumer boundaries. R571 centered/Taylor, second-moment/six-three, Gram/P3, Bony/Schur, DFL/DHH/core, and split self/external channels are producer strategies rather than independent Clay obligations. No B progress promotes A without a typed transfer theorem, no A progress promotes B without a typed transfer theorem, and C/D do not settle unforced A/B. No unconditional Clay Navier-Stokes or terminal promotion is made."
 
 record NSPaperTheoremStatus : Setω where
   field
@@ -1244,3 +1245,35 @@ periodicClayMaxCutSeparateExternalPaymentSurvivesDownstream =
 periodicClayMaxCutTerminalMixedMassNeedsIndependentUpperEstimate : Bool
 periodicClayMaxCutTerminalMixedMassNeedsIndependentUpperEstimate =
   R650.round650TerminalMixedMassNeedsIndependentUpperEstimate
+
+periodicClayMaxCutC1IsExactlyLiveR568Budget : Bool
+periodicClayMaxCutC1IsExactlyLiveR568Budget =
+  R650.round650C1IsExactlyLiveR568Budget
+
+periodicClayMaxCutR568RemainsAdjacentProducerLane : Bool
+periodicClayMaxCutR568RemainsAdjacentProducerLane =
+  R650.round650R568RemainsAdjacentSufficientProducerLane
+
+periodicClayMaxCutCombinedCommutatorPaymentClosed : Bool
+periodicClayMaxCutCombinedCommutatorPaymentClosed =
+  R650.round650C1CombinedGlobalCommutatorPaymentClosed
+
+periodicClayMaxCutCombinedToLiteralR406TransportClosed : Bool
+periodicClayMaxCutCombinedToLiteralR406TransportClosed =
+  R650.round650C1CombinedToLiteralR406TransportClosed
+
+periodicClayMaxCutPositiveEDMassAutomaticallyClosesCombinedC1 : Bool
+periodicClayMaxCutPositiveEDMassAutomaticallyClosesCombinedC1 =
+  R650.round650PositiveEDMassAutomaticallyClosesCombinedC1
+
+periodicClayMaxCutCombinedC1AndStrictMarginC2CompileToCriticalBarrier : Bool
+periodicClayMaxCutCombinedC1AndStrictMarginC2CompileToCriticalBarrier =
+  R650.round650CombinedC1AndStrictMarginC2CompileToCriticalBarrier
+
+periodicClayMaxCutExactlyTwoNewAnalyticLeaves : Bool
+periodicClayMaxCutExactlyTwoNewAnalyticLeaves =
+  R650.round650ExactlyTwoNewNSAnalyticLeaves
+
+periodicClayMaxCutExactlyThreeCurrentProofBearingCoordinates : Bool
+periodicClayMaxCutExactlyThreeCurrentProofBearingCoordinates =
+  R650.round650ExactlyThreeCurrentProofBearingAnalyticCoordinates
