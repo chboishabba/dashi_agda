@@ -16,15 +16,16 @@ module DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base using (ℚ)
-open import Relation.Binary.PropositionalEquality using (sym; trans; subst)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact as KP
 import DASHI.Physics.YangMills.BalabanEnumeratedMarkedKoteckyPreissExact as Enumerated
 import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
+import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 
 record TwoWilsonSourceParameterizedKP
     (Observable Source Polymer Cluster Volume : Set) : Set₂ where
@@ -128,8 +129,8 @@ markedLogPartitionExpansionExact :
     cutoff left right sourceLeft sourceRight →
   markedLogPartition family cutoff left right sourceLeft sourceRight
   ≡
-  DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact.sumℚ
-    (DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact.map
+  TwoMark.sumℚ
+    (TwoMark.map
       (λ cluster →
         markedClusterTerm family cutoff left right cluster sourceLeft sourceRight)
       (commonClusters family cutoff left right))
@@ -150,23 +151,15 @@ markedLogPartitionExpansionExact family cutoff left right sourceLeft sourceRight
         family cutoff left right sourceLeft sourceRight
   in
   trans sourceExpansion
-    (subst
+    (cong
       (λ clusters →
-        DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact.sumℚ
-          (DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact.map
-            (λ cluster →
-              markedClusterTerm family cutoff left right cluster
-                sourceLeft sourceRight)
-            (Enumerated.clusters enumerated (volumeOfCutoff family cutoff)))
-        ≡
-        DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact.sumℚ
-          (DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact.map
+        TwoMark.sumℚ
+          (TwoMark.map
             (λ cluster →
               markedClusterTerm family cutoff left right cluster
                 sourceLeft sourceRight)
             clusters))
-      clustersEqual
-      refl)
+      clustersEqual)
 
 supportIndexedMarkedExpansionFromKP :
   ∀ {Observable Source Polymer Cluster Volume}
