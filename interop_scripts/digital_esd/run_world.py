@@ -181,6 +181,21 @@ def maybe_advance_existing_loop(slr_root: Path, artifact_root: Path) -> str:
         )
         return "advanced-reviewed-overlay"
 
+    if (artifact_root / "screening_ledger_reviewed.tsv").exists():
+        run(
+            [
+                sys.executable,
+                str(loop),
+                "resume",
+                "--slr-root",
+                str(slr_root),
+                "--artifact-root",
+                str(artifact_root),
+            ],
+            cwd=DASHI_ROOT,
+        )
+        return "resumed-retrieval-without-decision-replay"
+
     run(
         [
             sys.executable,
