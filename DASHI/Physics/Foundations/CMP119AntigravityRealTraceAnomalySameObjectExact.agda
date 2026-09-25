@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityRealTraceAnomalySameObjectExact where
 
+open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
@@ -10,6 +11,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.Foundations.CMP119AntigravityRealSU2TraceClosureExact as SU2Trace
+import DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact as Embed
 
 ------------------------------------------------------------------------
 -- PRIMARY AUTHORITY
@@ -37,7 +39,7 @@ traceAnomalyPrimaryDOI =
 
 record RenormalizedPureYMTraceAnomalyAuthority
     (embedding :
-      DASHI.Physics.YangMills.BalabanRationalBetaCertificateToRealSlopeRound102Exact.OrderedRationalRealEmbedding)
+      Embed.OrderedRationalRealEmbedding)
     (convention : SU2Trace.RealSU2TraceConvention embedding) : Set₁ where
   field
     renormalizedF2Numerator : ℝ
@@ -105,5 +107,5 @@ selectedCMP119TraceIsPhysicalSU2BetaF2
           *ℝ value)
         (sym (selectedF2IsRenormalizedF2 weld))))
 
-finiteCMP119TraceAnomalyFollowsFromCitationAlone : Agda.Builtin.Bool.Bool
-finiteCMP119TraceAnomalyFollowsFromCitationAlone = Agda.Builtin.Bool.false
+finiteCMP119TraceAnomalyFollowsFromCitationAlone : Bool
+finiteCMP119TraceAnomalyFollowsFromCitationAlone = false
