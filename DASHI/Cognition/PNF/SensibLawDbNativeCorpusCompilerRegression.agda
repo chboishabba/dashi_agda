@@ -295,3 +295,45 @@ fixtureBookReceiptPersistenceDoesNotCreateTruth :
     PersistFixture.fixtureSourcePersistence
   ≡ false
 fixtureBookReceiptPersistenceDoesNotCreateTruth = refl
+
+
+fixtureExactCompilerProductReuse : Scale.ExactCompilerProductReuse
+fixtureExactCompilerProductReuse =
+  Scale.exact-compiler-product-reuse
+    "source-revision:fixture"
+    "parser-run:fixture"
+    "algorithm:fixture:v1"
+    "consumer-scope:fixture"
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureExactReuseRequiresMatchingIdentity :
+  Scale.ExactCompilerProductReuse.compilationIdentityMatched
+    fixtureExactCompilerProductReuse
+  ≡ true
+fixtureExactReuseRequiresMatchingIdentity = refl
+
+fixtureExactReuseRequiresCompleteProduct :
+  Scale.ExactCompilerProductReuse.persistedProductComplete
+    fixtureExactCompilerProductReuse
+  ≡ true
+fixtureExactReuseRequiresCompleteProduct = refl
+
+fixtureExactReuseDoesNotAdmit :
+  Scale.ExactCompilerProductReuse.createsSemanticAdmission
+    fixtureExactCompilerProductReuse
+  ≡ false
+fixtureExactReuseDoesNotAdmit = refl
+
+fixtureExactReuseDoesNotCreateTruth :
+  Scale.ExactCompilerProductReuse.createsClaimTruth
+    fixtureExactCompilerProductReuse
+  ≡ false
+fixtureExactReuseDoesNotCreateTruth = refl
