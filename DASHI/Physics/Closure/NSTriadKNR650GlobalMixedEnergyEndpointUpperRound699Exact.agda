@@ -185,7 +185,7 @@ module EndpointUpper
           cancelTerminal =
             ℚP.+-monoʳ-≤
               (comm + initialMass)
-              (ℚP.neg-mono-≤ terminalNN)
+              (ℚP.neg-antimono-≤ terminalNN)
         in
         subst
           (λ left → left ≤ comm + initialMass)
