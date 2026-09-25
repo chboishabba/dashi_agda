@@ -26,6 +26,7 @@ import DASHI.Biology.NonaryCompletionPhaseQuotientExact as Completion
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
 import DASHI.Biology.SSP15ComplementPhaseProjectorExact as Internal
 import DASHI.Biology.SSP15PrimeValuedStateExact as PrimeState
+import DASHI.Biology.SignedSSPFRACTRANWeaveExact as Signed
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as Branch
 
@@ -109,6 +110,53 @@ everyPrimeHasEveryInternalLane :
 everyPrimeHasEveryInternalLane =
   PrimeState.primeValuationDoesNotRestrictInternalLane
 
+
+
+------------------------------------------------------------------------
+-- Canonical signed lift from the FULL prime/internal pair.
+--
+-- Unlike the earlier gauge helper, this does not derive the selected prime
+-- from the internal lane.  Prime and internal mode remain independent; only
+-- the balanced phase is lifted to signed multiplicity.
+------------------------------------------------------------------------
+
+primeInternalToPointedSigned :
+  PrimeInternalCarrier →
+  Branch.PointedSignedSSPLane
+primeInternalToPointedSigned (prime , lane) =
+  Branch.pointed-signed-ssp-lane
+    prime
+    (Branch.phaseToUnitMultiplicity (proj₂ lane))
+
+primeInternalPointedPrimeExact :
+  (state : PrimeInternalCarrier) →
+  Branch.selectedPrime (primeInternalToPointedSigned state)
+  ≡ proj₁ state
+primeInternalPointedPrimeExact (prime , lane) = refl
+
+primeInternalPointedPhaseExact :
+  (state : PrimeInternalCarrier) →
+  Branch.unitMultiplicityToPhase
+    (Branch.signedMultiplicity (primeInternalToPointedSigned state))
+  ≡ proj₂ (proj₂ state)
+primeInternalPointedPhaseExact (prime , mode , phase) =
+  Branch.phaseCoarseRoundTrip phase
+
+primeInternalValuation :
+  PrimeInternalCarrier →
+  Signed.SSPValuation
+primeInternalValuation state =
+  Branch.pointedSignedValuation (primeInternalToPointedSigned state)
+
+primeInternalValuationOwnLane :
+  (state : PrimeInternalCarrier) →
+  primeInternalValuation state
+    (Branch.lanePrimeToSignedPrime (proj₁ state))
+  ≡
+  Branch.phaseToUnitMultiplicity (proj₂ (proj₂ state))
+primeInternalValuationOwnLane state =
+  Branch.pointedValuationOwnLane (primeInternalToPointedSigned state)
+
 ------------------------------------------------------------------------
 -- Boundary.
 ------------------------------------------------------------------------
@@ -124,6 +172,7 @@ record SSP15PrimeInternalFibreBoundary : Set where
     chosenBijectionInterpretedAsGaugeSection : Bool
     chosenGaugeExhaustsSemanticCarrier : Bool
     explicitOffGaugeP71StatesOwned : Bool
+    canonicalSignedLiftUsesPrimeInternalPair : Bool
     primeEqualsInternalLaneSemantically : Bool
 
 open SSP15PrimeInternalFibreBoundary public
@@ -133,4 +182,4 @@ canonicalSSP15PrimeInternalFibreBoundary :
 canonicalSSP15PrimeInternalFibreBoundary =
   ssp15-prime-internal-fibre-boundary
     true true true true
-    true false true false
+    true false true true false
