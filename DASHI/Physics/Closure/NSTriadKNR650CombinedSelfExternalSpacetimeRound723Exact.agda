@@ -34,6 +34,7 @@ open import Data.Rational.Base using (ℚ; _*_; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact as Canonical
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 import DASHI.Physics.Closure.NSTriadKNActualMixedCellDerivativeRound426Exact as R426
 import DASHI.Physics.Closure.NSTriadKNDoubleMixedActualDerivativeCompilerRound425Exact as R425
@@ -125,7 +126,7 @@ module CombinedSpacetime
       ≡
       R700.twelve *
         Nested.Orbit.sumCommutatorAt cutoff
-          (DASHI.Physics.Closure.NSTriadKNCanonicalCutoffSameObjectSystemRound34Exact.nonzeroCutoffModes cutoff)
+          (Canonical.nonzeroCutoffModes cutoff)
           time
     combinedIsTwelveLiveGlobalCommutator =
       trans
@@ -177,9 +178,9 @@ module CombinedSpacetime
     CutoffUniformCombinedSelfExternalPayment →
     Nested.CutoffUniformNestedFourHelicityOrbitPayment
   combinedPaymentBuildsNestedOrbitPayment P = record
-    { R701.IntegratedNestedOrbit.CutoffUniformNestedFourHelicityOrbitPayment.cutoffIndependentBound =
+    { cutoffIndependentBound =
         CutoffUniformCombinedSelfExternalPayment.cutoffIndependentBound P
-    ; R701.IntegratedNestedOrbit.CutoffUniformNestedFourHelicityOrbitPayment.nestedOrbitSpacetimePayment =
+    ; nestedOrbitSpacetimePayment =
         λ cutoff terminal →
           subst
             (λ left →
