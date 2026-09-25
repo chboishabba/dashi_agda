@@ -97,6 +97,7 @@ import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfMultiplierFoldRound720Exac
 import DASHI.Physics.Closure.NSTriadKNR650SelectedSelfHelicitySplitRound721Exact as R721
 import DASHI.Physics.Closure.NSTriadKNR650SelfExternalRecombinationRound722Exact as R722
 import DASHI.Physics.Closure.NSTriadKNR650CombinedSelfExternalSpacetimeRound723Exact as R723
+import DASHI.Physics.Closure.NSTriadKNR650CombinedPaymentToWeightedWorkRound724Exact as R724
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
@@ -1266,6 +1267,22 @@ round650UnliftedR568BudgetAutomaticallyPaysR691Commutator =
 round650CombinedSelfExternalCutoffUniformPaymentClosed : Bool
 round650CombinedSelfExternalCutoffUniformPaymentClosed =
   R723.round723CombinedCutoffUniformPaymentClosed
+
+round650CombinedPaymentFeedsR699WeightedWork : Bool
+round650CombinedPaymentFeedsR699WeightedWork =
+  R724.round724CombinedPaymentFeedsR699WeightedWork
+
+round650SeparateSelfPaymentSurvivesDownstream : Bool
+round650SeparateSelfPaymentSurvivesDownstream =
+  R724.round724SeparateSelfPaymentSurvivesDownstream
+
+round650SeparateExternalPaymentSurvivesDownstream : Bool
+round650SeparateExternalPaymentSurvivesDownstream =
+  R724.round724SeparateExternalPaymentSurvivesDownstream
+
+round650TerminalMixedMassNeedsIndependentUpperEstimate : Bool
+round650TerminalMixedMassNeedsIndependentUpperEstimate =
+  R724.round724TerminalMixedMassNeedsIndependentUpperEstimate
 
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 : Bool
 round650C2UnweightedR637PaymentDirectlyPaysRateWeightedR607 =
