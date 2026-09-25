@@ -28,6 +28,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 
@@ -458,28 +459,18 @@ cookFormulaTokenCountPositive :
 cookFormulaTokenCountPositive
     (Cook.variable index) =
   s≤s z≤n
-  where
-    open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 cookFormulaTokenCountPositive
     (Cook.constant value) =
   s≤s z≤n
-  where
-    open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 cookFormulaTokenCountPositive
     (Cook.negate formula) =
   s≤s z≤n
-  where
-    open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 cookFormulaTokenCountPositive
     (Cook.conjunction left right) =
   s≤s z≤n
-  where
-    open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 cookFormulaTokenCountPositive
     (Cook.disjunction left right) =
   s≤s z≤n
-  where
-    open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 
 ------------------------------------------------------------------------
 -- Research boundary.
