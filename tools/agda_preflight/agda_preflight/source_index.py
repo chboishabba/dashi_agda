@@ -700,8 +700,26 @@ class SourceIndex:
                 paths,
                 jobs=workers,
             )
-        self.profiler.count("files_parsed", len(receipts))
-        self.profiler.count("diagnostics_recomputed", len(receipts))
+        self.profiler.count(
+            "files_parsed",
+            sum(receipt.files_parsed for receipt in receipts),
+        )
+        self.profiler.count(
+            "diagnostics_recomputed",
+            sum(receipt.diagnostics_recomputed for receipt in receipts),
+        )
+        self.profiler.count(
+            "cold_worker_files_parsed",
+            sum(receipt.files_parsed for receipt in receipts),
+        )
+        self.profiler.add_ns(
+            "cold.worker_parse",
+            sum(receipt.parse_ns for receipt in receipts),
+        )
+        self.profiler.add_ns(
+            "cold.worker_diagnostics",
+            sum(receipt.diagnostics_ns for receipt in receipts),
+        )
 
         by_module = {
             receipt.module_name: receipt
