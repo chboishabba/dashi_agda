@@ -41,22 +41,6 @@ LatentDistinctionActivation :
 LatentDistinctionActivation system project =
   Dynamic.TerminalisationDefect system project
 
-activationRefutesFutureEquivalent :
-  ∀ {State Action Observation}
-    {system : Dependency.DependentActionSystem State Action}
-    {project : State -> Observation} ->
-  LatentDistinctionActivation system project ->
-  Future.FutureEquivalent
-    system project
-    (Dynamic.left _)
-    (Dynamic.right _) ->
-  ⊥
-activationRefutesFutureEquivalent activation future =
-  Dynamic.futureObservationsDiffer activation
-    (future
-      (Dynamic.leftExecution activation)
-      (Dynamic.rightExecution activation))
-
 -- Explicit form with readable arguments; this is the preferred consumer API.
 activationPairNotFutureEquivalent :
   ∀ {State Action Observation}
