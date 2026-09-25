@@ -30,9 +30,6 @@ data AntigravityTraceLeaf : Set where
   attachSelectedCMP119SourceToCanonicalWilsonGibbsCalculus :
     AntigravityTraceLeaf
 
-  attachSelectedMetricSlotsToCanonicalWilsonCoordinates :
-    AntigravityTraceLeaf
-
   inhabitSelectedRationalHaarIntegrationLaws :
     AntigravityTraceLeaf
 
@@ -165,8 +162,15 @@ selectedWilsonCoordinateRoundTripCompilerClosedIsTrue :
 selectedWilsonCoordinateRoundTripCompilerClosedIsTrue = refl
 
 selectedMetricSlotRoundTripStillRequired : Bool
-selectedMetricSlotRoundTripStillRequired = true
+selectedMetricSlotRoundTripStillRequired = false
 
-selectedMetricSlotRoundTripStillRequiredIsTrue :
-  selectedMetricSlotRoundTripStillRequired ≡ true
-selectedMetricSlotRoundTripStillRequiredIsTrue = refl
+selectedMetricSlotRoundTripStillRequiredIsFalse :
+  selectedMetricSlotRoundTripStillRequired ≡ false
+selectedMetricSlotRoundTripStillRequiredIsFalse = refl
+
+symmetricMetricRechartCompilerClosed : Bool
+symmetricMetricRechartCompilerClosed = true
+
+symmetricMetricRechartCompilerClosedIsTrue :
+  symmetricMetricRechartCompilerClosed ≡ true
+symmetricMetricRechartCompilerClosedIsTrue = refl
