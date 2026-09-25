@@ -49,6 +49,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPGeneratedClosedQ1DiscoveryExact 
 import DASHI.Mathematics.Complexity.PNotEqualsNPRewriteGeneratedQ1DiscoveryExact as RewriteGenerated
 import DASHI.Mathematics.Complexity.PNotEqualsNPReachableRewriteGeneratedQ1Exact as ReachableGenerated
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1FiniteCandidateSemanticAdmissionExact as CandidateAdmission
+import DASHI.Mathematics.Complexity.PNotEqualsNPArityTrackedTerminalSemanticAdmissionExact as ArityTerminal
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
@@ -394,6 +395,35 @@ q1AdmittedFiniteCandidateRecurrenceContradictsSATInP
   q1FiniteCodeContradictsSATInP
     satP
     (CandidateAdmission.admittedFiniteConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Strongest local-admission recurrence.
+--
+-- Global GeneratedSemanticCongruence is no longer supplied.  It is derived
+-- from arity tracking + structurally correct zero-variable terminal labels.
+------------------------------------------------------------------------
+
+q1ArityTerminalRecurrenceContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor :
+      ArityTerminal.ArityTerminalAdmittedStateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (ArityTerminal.arityTerminalConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1ArityTerminalRecurrenceContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (ArityTerminal.arityTerminalConstructorToQ2StepSystem constructor)
     initial
     q1Semantics
 
