@@ -9,6 +9,7 @@ import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119SymmetricMetricBasisRealizationExact as Basis
 import DASHI.Physics.Foundations.CMP119SymmetricCanonicalMetricRechartExact as Rechart
 import DASHI.Physics.Foundations.CMP119WilsonGibbsFiniteMeasureSameObjectExact as Same
+import DASHI.Physics.Foundations.CMP119AntigravitySelectedWilsonGibbsMinimalAnchorExact as Minimal
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact as Wilson
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
 import DASHI.Physics.YangMills.BalabanCMP116SubstitutedActivityHessianRound103Exact as Chain
@@ -128,3 +129,65 @@ module _
         (R119.connectedInsertionIsSelectedCMP119StressInsertion
           rechartedSelected background component)
         (selectedInsertionNumeratorIsWilsonGibbs weld component)
+
+
+------------------------------------------------------------------------
+-- Direct constructor for the antigravity minimal anchor.
+------------------------------------------------------------------------
+
+module _
+    {G X Cutoff Configuration Observable Position
+     CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+     HilbertSpace Hamiltonian VacuumState : Set}
+    {trajectory split}
+    {inputs : Beta.BetaDrivenCompleteDensityInputs
+      {trajectory = trajectory} {split = split}}
+    {S : Top.LiteralYangMillsSemantics
+      (Physical.physicalLiteralCarriers
+        G X Cutoff Configuration ℚ Observable Position
+        CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+        HilbertSpace Hamiltonian VacuumState)}
+    {Y : Top.LiteralYangMillsConstruction
+      (Physical.physicalLiteralCarriers
+        G X Cutoff Configuration ℚ Observable Position
+        CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+        HilbertSpace Hamiltonian VacuumState) S}
+    {group : Top.CompactSimpleGroup
+      (Physical.physicalLiteralCarriers
+        G X Cutoff Configuration ℚ Observable Position
+        CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+        HilbertSpace Hamiltonian VacuumState)}
+    {Scale Volume : Set}
+    {activity : Chain.SubstitutedActivitySecondVariation}
+    (domain : Domain.CanonicalMetricSourceDomain Scale Volume activity)
+    (realization : Basis.SymmetricMetricBasisRealization domain)
+    (representation : StressRep.CanonicalMetricStressRepresentation domain)
+    {coordinate : R114.LiteralStressCoordinate Y group}
+    (selected :
+      R119.CanonicalMetricSelectedStressWeld
+        domain representation coordinate)
+    (measureWeld :
+      R124.BalabanDensityLiteralFiniteMeasureWeld
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        Y group)
+    (wilsonInsertion :
+      Wilson.ClassicalWilsonSelectedInsertion Configuration)
+  where
+
+  scalarWeldToMinimalAnchor :
+    SelectedInsertionWilsonGibbsScalarWeld
+      domain realization representation selected
+      measureWeld wilsonInsertion →
+    Minimal.MinimalSelectedWilsonGibbsAnchor
+      domain realization representation selected
+      measureWeld wilsonInsertion
+  scalarWeldToMinimalAnchor weld = record
+    { Minimal.MinimalSelectedWilsonGibbsAnchor.selectedScale =
+        selectedScale weld
+    ; Minimal.MinimalSelectedWilsonGibbsAnchor.sourceScaleIndex =
+        sourceScaleIndex weld
+    ; Minimal.MinimalSelectedWilsonGibbsAnchor.selectedConnectedNumeratorIsCanonicalWilsonGibbs =
+        connectedNumeratorSameObjectFromSelectedInsertion
+          domain realization representation selected
+          measureWeld wilsonInsertion weld
+    }
