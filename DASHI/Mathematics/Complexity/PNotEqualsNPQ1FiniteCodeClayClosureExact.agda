@@ -45,6 +45,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Dire
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
+import DASHI.Mathematics.Complexity.PNotEqualsNPGeneratedClosedQ1DiscoveryExact as Generated
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
@@ -274,6 +275,35 @@ q1ExecutedRecurrenceFiniteCodeContradictsSATInP
   q1FiniteCodeContradictsSATInP
     satP
     (Executed.executedConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
+
+------------------------------------------------------------------------
+-- Preferred generated-machine recurrence.
+--
+-- The machine no longer returns an arbitrary classifier-bearing quotient.
+-- It returns the transition-generated closed payload:
+--   rootState + step + congruence + representatives + structural chains.
+------------------------------------------------------------------------
+
+q1GeneratedExecutedRecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor : Generated.GeneratedExecutedQ1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (Generated.generatedConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1GeneratedExecutedRecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (Generated.generatedConstructorToQ2StepSystem constructor)
     initial
     q1Semantics
 
