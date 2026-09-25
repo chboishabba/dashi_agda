@@ -20,6 +20,7 @@ data SourceRole : Set where
   naturalProofBarrier : SourceRole
   algebrizationBarrier : SourceRole
   computabilitySelfReference : SourceRole
+  efficientComputabilitySelfReference : SourceRole
   modernCircuitLowerBoundContext : SourceRole
   metaComplexityContext : SourceRole
   cardinalityDiagonalization : SourceRole
@@ -133,6 +134,18 @@ kleene1952 =
     computabilitySelfReference
     stableBookBibliography
     "Calibrates classical computability-level recursion/fixed-point self-reference only.  It does not supply a same-size or polynomial-overhead propositional fixed point."
+
+jones2013 : ComplexitySource
+jones2013 =
+  complexitySource
+    "Neil D. Jones"
+    "A Swiss Pocket Knife for Computability"
+    2013
+    "Electronic Proceedings in Theoretical Computer Science 129, 1--17"
+    "doi:10.4204/EPTCS.129.1"
+    efficientComputabilitySelfReference
+    verifiedDOI
+    "Calibrates explicit program specialisation, self-application and complexity-aware implementations of Kleene's second recursion theorem.  It does not provide DASHI's concrete SAT self-instantiation, a polynomial resource-closing quotient, or P != NP."
 
 renWilliams2026 : ComplexitySource
 renWilliams2026 =
