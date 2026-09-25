@@ -319,6 +319,50 @@ exactly.
 Pytest remains the regression/full-audit surface for the checker itself; it is
 not the normal agent runtime.
 
+### Long-lived agent service
+
+For repeated agent work, `dashi-agda-server` keeps the SQLite/WAL connection
+and persistent source index alive across requests:
+
+```bash
+dashi-agda-server \
+  --root . \
+  --index .cache/agda_preflight/source-index.sqlite3 \
+  --jobs 8
+```
+
+The service speaks newline-delimited JSON on stdin/stdout. Example requests:
+
+```json
+{"id":1,"method":"next_error","params":{"target":"DASHI/Biology/Everything.agda","require_fix":true}}
+{"id":2,"method":"apply_fix","params":{"target":"DASHI/Biology/Everything.agda","diagnostic_id":"...","fix_index":0,"allow_likely":true}}
+{"id":3,"method":"cache_status","params":{}}
+{"id":4,"method":"shutdown","params":{}}
+```
+
+Supported methods are currently:
+
+```text
+diagnose
+next_error
+apply_fix
+cache_status
+ping
+shutdown
+```
+
+The process is persistent, but parsed source state is deliberately not:
+`SourceIndex.begin_request()` clears request-local module/checker caches before
+every operation so edits made by an external agent are observed immediately.
+SQLite state, WAL/page cache, interfaces, diagnostics and analyzer identities
+remain persistent.
+
+This JSONL service is the transport-independent core for a future MCP adapter.
+An MCP wrapper should map tools directly onto these methods rather than
+reimplementing repository traversal, cache invalidation, diagnostics or fix
+application.
+
+
 ## Current implementation status
 
 The frontend is now **tree-sitter-first and regex-free for Agda syntax parsing**.
