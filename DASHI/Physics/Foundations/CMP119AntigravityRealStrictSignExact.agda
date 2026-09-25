@@ -2,6 +2,8 @@
 module DASHI.Physics.Foundations.CMP119AntigravityRealStrictSignExact where
 
 open import Agda.Builtin.Equality using (_≡_)
+
+data Empty : Set where
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -35,6 +37,12 @@ record RealStrictSignLaws : Set₁ where
       0ℝ <ℝ positive →
       negative <ℝ 0ℝ →
       positive *ℝ negative <ℝ 0ℝ
+
+    nonnegativeNonzeroPositive :
+      ∀ {value} →
+      0ℝ ≤ℝ value →
+      (value ≡ 0ℝ → Empty) →
+      0ℝ <ℝ value
 
 open RealStrictSignLaws public
 
