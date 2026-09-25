@@ -31,6 +31,7 @@ open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Data.Nat.Base using (_≤_; _<_)
 import Data.Nat.Properties as NatP
 
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookIndexedFormulaBridgeExact as Bridge
 import DASHI.Mathematics.Complexity.PNotEqualsNPProgramDescriptionFormulaEmbeddingExact as Size
@@ -140,11 +141,11 @@ record AllOverheadStrictAuthorityDescent
   field
     rootToAuthority :
       SAT.Satisfying root →
-      DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary.Satisfiable
+      Cook.Satisfiable
         (Authority.closedQuotientSATAuthority closed)
 
     authorityToRoot :
-      DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary.Satisfiable
+      Cook.Satisfiable
         (Authority.closedQuotientSATAuthority closed) →
       SAT.Satisfying root
 
