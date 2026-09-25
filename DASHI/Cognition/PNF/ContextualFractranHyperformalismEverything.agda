@@ -1,3 +1,5 @@
+import DASHI.Moonshine.TwistronicsRegistrationControlFutureSplitExact
+import DASHI.Core.NonginOnePointOneFutureSplitExact
 import DASHI.Cognition.PNF.TSFVSemanticQueryFutureSplitExact
 module DASHI.Cognition.PNF.ContextualFractranHyperformalismEverything where
 
