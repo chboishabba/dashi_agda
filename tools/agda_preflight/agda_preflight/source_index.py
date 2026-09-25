@@ -22,7 +22,7 @@ from .interfaces import (
 )
 
 
-SCHEMA_VERSION = "3"
+SCHEMA_VERSION = "4"
 
 
 @dataclass(frozen=True)
@@ -119,6 +119,8 @@ class SourceIndex:
                 interface_json TEXT NOT NULL,
                 dependency_fingerprint TEXT NOT NULL,
                 diagnostics_json TEXT NOT NULL,
+                top_diagnostic_json TEXT NOT NULL,
+                top_fixable_diagnostic_json TEXT NOT NULL,
                 updated_ns INTEGER NOT NULL
             );
 
@@ -190,6 +192,29 @@ class SourceIndex:
                     "interface_json TEXT NOT NULL DEFAULT ''"
                 )
             version = "3"
+
+        if version == "3":
+            columns = {
+                item["name"]
+                for item in self.connection.execute(
+                    "PRAGMA table_info(modules)"
+                ).fetchall()
+            }
+            if "top_diagnostic_json" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "top_diagnostic_json TEXT NOT NULL DEFAULT ''"
+                )
+            if "top_fixable_diagnostic_json" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "top_fixable_diagnostic_json TEXT NOT NULL DEFAULT ''"
+                )
+            self.connection.execute(
+                "UPDATE meta SET value = ? WHERE key = 'schema_version'",
+                (SCHEMA_VERSION,),
+            )
+            version = SCHEMA_VERSION
 
         if version != SCHEMA_VERSION:
             raise RuntimeError(
@@ -440,6 +465,48 @@ class SourceIndex:
             digest.update(b"\n")
         return digest.hexdigest()
 
+    @staticmethod
+    def _diagnostic_priority(diagnostic: Diagnostic):
+        return (
+            0 if diagnostic.severity == "error" else 1,
+            0 if diagnostic.evidence_sufficient else 1,
+            0 if any(fix.edits for fix in diagnostic.fixes) else 1,
+            str(diagnostic.path),
+            diagnostic.line,
+            diagnostic.column,
+            diagnostic.code,
+        )
+
+    def _top_diagnostic_payloads(
+        self,
+        diagnostics: Iterable[Diagnostic],
+    ) -> Tuple[str, str]:
+        items = list(diagnostics)
+        if not items:
+            return "", ""
+        top = min(items, key=self._diagnostic_priority)
+        fixable = [item for item in items if item.fixes]
+        top_fixable = (
+            min(fixable, key=self._diagnostic_priority)
+            if fixable
+            else None
+        )
+        top_payload = json.dumps(
+            self._diagnostic_dict(top),
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        fixable_payload = (
+            json.dumps(
+                self._diagnostic_dict(top_fixable),
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            if top_fixable is not None
+            else ""
+        )
+        return top_payload, fixable_payload
+
     def _store(
         self,
         path: Path,
@@ -466,15 +533,19 @@ class SourceIndex:
                 sort_keys=True,
                 separators=(",", ":"),
             )
+        top_payload, top_fixable_payload = self._top_diagnostic_payloads(
+            diagnostics
+        )
         with self.profiler.stage("db.write"):
             self.connection.execute(
                 """
                 INSERT INTO modules(
                     path, module_name, mtime_ns, size, source_sha256,
                     api_base_sha256, api_fingerprint, public_imports_json,
-                    interface_json, dependency_fingerprint, diagnostics_json, updated_ns
+                    interface_json, dependency_fingerprint, diagnostics_json,
+                    top_diagnostic_json, top_fixable_diagnostic_json, updated_ns
                 )
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(path) DO UPDATE SET
                     module_name = excluded.module_name,
                     mtime_ns = excluded.mtime_ns,
@@ -486,6 +557,8 @@ class SourceIndex:
                     interface_json = excluded.interface_json,
                     dependency_fingerprint = excluded.dependency_fingerprint,
                     diagnostics_json = excluded.diagnostics_json,
+                    top_diagnostic_json = excluded.top_diagnostic_json,
+                    top_fixable_diagnostic_json = excluded.top_fixable_diagnostic_json,
                     updated_ns = excluded.updated_ns
                 """,
                 (
@@ -512,6 +585,8 @@ class SourceIndex:
                     ),
                     dependency_fingerprint,
                     payload,
+                    top_payload,
+                    top_fixable_payload,
                     time.time_ns(),
                 ),
             )
@@ -587,6 +662,81 @@ class SourceIndex:
             ),
             modules=tuple(modules),
             cache_hit=True,
+        )
+
+    def next_diagnostic(
+        self,
+        target: Path,
+        *,
+        require_fix: bool = False,
+    ) -> Optional[Diagnostic]:
+        target = target if target.is_absolute() else self.root / target
+        target = target.resolve()
+        rows = self._cached_closure(target)
+        if rows is None:
+            result = self.diagnose(target)
+            candidates = [
+                item for item in result.diagnostics
+                if (not require_fix or item.fixes)
+            ]
+            return (
+                min(candidates, key=self._diagnostic_priority)
+                if candidates
+                else None
+            )
+
+        payload_column = (
+            "top_fixable_diagnostic_json"
+            if require_fix
+            else "top_diagnostic_json"
+        )
+        candidates: List[Diagnostic] = []
+        with self.profiler.stage("source.stat"):
+            for row in rows:
+                path = self.root / row["path"]
+                try:
+                    stat = self._stat(path)
+                except OSError:
+                    result = self.diagnose(target)
+                    fallback = [
+                        item for item in result.diagnostics
+                        if (not require_fix or item.fixes)
+                    ]
+                    return (
+                        min(fallback, key=self._diagnostic_priority)
+                        if fallback
+                        else None
+                    )
+                if not self._fresh(row, stat):
+                    result = self.diagnose(target)
+                    fallback = [
+                        item for item in result.diagnostics
+                        if (not require_fix or item.fixes)
+                    ]
+                    return (
+                        min(fallback, key=self._diagnostic_priority)
+                        if fallback
+                        else None
+                    )
+                payload = row[payload_column]
+                if not payload:
+                    continue
+                try:
+                    candidates.append(
+                        self._diagnostic_from_dict(json.loads(payload))
+                    )
+                except (TypeError, ValueError, KeyError, json.JSONDecodeError):
+                    continue
+
+        self.profiler.count("next_error_modules_scanned", len(rows))
+        self.profiler.count(
+            "next_error_candidates_decoded",
+            len(candidates),
+        )
+        return (
+            min(candidates, key=self._diagnostic_priority)
+            if candidates
+            else None
         )
 
     def _ensure_module(self, path: Path) -> _ModuleState:
