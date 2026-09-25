@@ -25,7 +25,9 @@ open import Agda.Builtin.Unit using (⊤)
 import DASHI.Core.ResidualSymmetryCollisionFibreExact as Action
 import DASHI.Core.OrbitStabilizerResidualPresentationExact as Orbit
 import DASHI.Core.ActionOrbitRecognitionFunctorExact as Recognition
+import DASHI.Core.ProvenancePreservingRecognitionFunctorExact as ProvenanceRecognition
 import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
+import DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact as Compression
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualCodecExact as Codec
@@ -257,6 +259,56 @@ cardinalityTenDoesNotDecideRecognition :
 cardinalityTenDoesNotDecideRecognition ()
 
 ------------------------------------------------------------------------
+-- 4. Retained-orientation recognition can demand provenance preservation.
+--
+-- The source provenance here is the strict binary orientation itself.  This
+-- does NOT prove that arithmetic chooses the retained-orientation branch; it
+-- states exactly what must be preserved if that branch is the intended
+-- recognition semantics.
+------------------------------------------------------------------------
+
+p2Orientation :
+  Small.P2ResidualObject ->
+  Compression.StrictSignedSide
+p2Orientation = proj₁
+
+record P2RetainedOrientationProvenanceTarget : Set₁ where
+  field
+    TargetState : Set
+    TargetSymmetry : Set
+    TargetProvenance : Set
+
+    targetAction :
+      Action.InvertibleSymmetryAction TargetState TargetSymmetry
+
+    targetOrbits :
+      Orbit.OrbitPresentation targetAction
+
+    targetProvenance :
+      TargetState -> TargetProvenance
+
+    provenanceRecognition :
+      ProvenanceRecognition.ProvenancePreservingActionRecognition
+        Small.p2DiscreteAction
+        targetAction
+        p2Orientation
+        targetProvenance
+
+    fullOrbitRecognition :
+      ProvenanceRecognition.ProvenancePreservingOrbitRecognition
+        provenanceRecognition
+        Small.p2DiscreteOrbitPresentation
+        targetOrbits
+
+open P2RetainedOrientationProvenanceTarget public
+
+data RetainedOrientationRecognitionMayEraseOrientation : Set where
+
+retainedOrientationRecognitionMayNotEraseOrientation :
+  RetainedOrientationRecognitionMayEraseOrientation -> ⊥
+retainedOrientationRecognitionMayNotEraseOrientation ()
+
+------------------------------------------------------------------------
 -- 4. Attribution / promotion boundary.
 ------------------------------------------------------------------------
 
@@ -297,12 +349,13 @@ record OggSSP369RecognitionFunctorBoundary : Set where
     targetArithmetic369GroupoidConstructed : Bool
     fullRecognitionRequiresPi0Bijection : Bool
     fullRecognitionRequiresStabilizerPreservationReflection : Bool
+    retainedOrientationBranchRequiresOrientationProvenance : Bool
     externalArithmeticAttributedUpstream : Bool
 
 canonicalOggSSP369RecognitionFunctorBoundary :
   OggSSP369RecognitionFunctorBoundary
 canonicalOggSSP369RecognitionFunctorBoundary =
   ogg-ssp369-recognition-functor-boundary
-    true true true true
+    true true true true true
     true true true true false true true false
     true true true
