@@ -160,13 +160,20 @@ A genuinely cold target now uses two parallel tree-sitter phases and one parent
 SQLite transaction:
 
 ```text
-parallel import-surface discovery
-  -> dependency closure
+parallel interface discovery
+  -> parse each module once
+  -> dependency closure + immutable imported-module interfaces
   -> parallel structural diagnostic batches
-       (one persistent Checker per worker)
+       parse each target module once
+       imported context comes from immutable interfaces
   -> parent computes API/dependency fingerprints
   -> one SQLite/WAL batch transaction
 ```
+
+The intentional cold parse floor is therefore approximately **2.0x** the unique
+closure: one parse to construct each reusable interface and one parse for each
+module's own local diagnostics. The diagnostic phase itself should remain at
+**1.0x** regardless of shared dependency depth.
 
 Workers never write SQLite. This avoids WAL contention and lets each process
 reuse parsed dependency summaries across its assigned chunk.
@@ -192,12 +199,15 @@ db.batch_write               one parent transaction
 
 cold_workers
 cold_modules_discovered
+cold_interface_files_parsed
 cold_batches
 cold_batch_dependency_surface
 cold_predicted_amplification_milli
 cold_worker_files_parsed
 cold_parse_amplification_milli
-cold_unpredicted_parse_overhead
+cold_interface_parse_savings
+cold_total_files_parsed
+cold_total_parse_amplification_milli
 ```
 
 `cold_worker_files_parsed` deliberately counts dependency parses inside
@@ -221,12 +231,26 @@ cold_unpredicted_parse_overhead
     actual parses beyond the scheduler's predicted dependency surface
 ```
 
-If actual amplification approaches predicted amplification, further scheduling
-work has diminishing returns: the remaining duplicate work is the imported AST
-context each process genuinely needs. The next optimization is then a compact
-immutable imported-module interface/snapshot, not another worker heuristic.
-If actual remains materially above predicted, worker ordering/cache behavior is
-still leaving avoidable parsing on the table.
+The immutable imported-module interface now removes that imported AST parse
+cost entirely from phase B. Consequently:
+
+```text
+cold_parse_amplification_milli
+    should be ~1000 (one local diagnostic parse per module)
+
+cold_total_parse_amplification_milli
+    should be ~2000 (interface parse + local diagnostic parse)
+
+cold_interface_parse_savings
+    dependency-context parses avoided relative to the affinity scheduler's
+    dependency surface
+```
+
+If phase-B amplification rises materially above 1000, an interface lookup has
+fallen back to source parsing and should be treated as a correctness/performance
+regression. Once the 2x floor is confirmed, the next possible cold optimization
+is to reuse/persist interface snapshots so unchanged modules do not need the
+phase-A parse on a fresh diagnostic database.
 
 ### Last-known-good semantic catalog
 
