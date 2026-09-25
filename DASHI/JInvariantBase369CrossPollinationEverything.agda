@@ -257,3 +257,7 @@ import DASHI.Moonshine.OggSSPClassicalCarrierToIndependent369RecognitionExact
 import DASHI.Moonshine.OggSSPP3DeligneRapoportStratumCodeExact
 
 import DASHI.Moonshine.OggSSPP2OrientedInertiaModuliProblemExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildStackCorrectionConjectureExact
+
+import DASHI.Moonshine.OggSSPSmallCharacteristicWildDifferentNoGoExact
