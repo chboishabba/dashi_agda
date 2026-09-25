@@ -43,6 +43,7 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 import DASHI.Mathematics.Complexity.PNotEqualsNPDirectSATLowerBoundExact as Direct
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteSelfSpecializingCodeExact as Code
 import DASHI.Mathematics.Complexity.PNotEqualsNPFiniteCodeQ2ExecutionRealizationExact as Exec
 import DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact as Kleene
@@ -220,6 +221,35 @@ q1FiniteCodeContradictsSATInP
         stepSystem
         initial
         q1Semantics
+
+
+------------------------------------------------------------------------
+-- Per-state Q1 recurrence version.
+--
+-- The caller no longer constructs Q2 separately.  One SAT-blind per-state Q1
+-- constructor is compiled into the total decreasing step system.
+------------------------------------------------------------------------
+
+q1RecurrenceFiniteCodeContradictsSATInP :
+  ∀ {cost : PR.PolynomialCostModel Cook.BooleanFormula}
+    (satP : PR.InP cost Clay.SATLanguage)
+    (constructor : Recurrence.Q1StateConstructor)
+    (initial : Q2.BoundedSelfReferenceState) →
+  Q1OppositeSATTerminalSemantics
+    (NoGo.satPCandidate satP)
+    (Recurrence.q1ConstructorToQ2StepSystem constructor)
+    initial →
+  ⊥
+q1RecurrenceFiniteCodeContradictsSATInP
+    satP
+    constructor
+    initial
+    q1Semantics =
+  q1FiniteCodeContradictsSATInP
+    satP
+    (Recurrence.q1ConstructorToQ2StepSystem constructor)
+    initial
+    q1Semantics
 
 ------------------------------------------------------------------------
 -- CLAY-FACING FRONTIER
