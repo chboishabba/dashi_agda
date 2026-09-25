@@ -50,7 +50,7 @@ projectPathValues :
 projectPathValues field Lattice.empty =
   emptyValues
 projectPathValues field
-    (edge Lattice.▷ rest) =
+    (Lattice._▷_ {x = start} {y = middle} edge rest) =
   stepValues
     (field start middle edge)
     (projectPathValues field rest)
