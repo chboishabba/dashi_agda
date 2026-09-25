@@ -96,6 +96,27 @@ p3NonzeroResidualIsBinary :
   P3OrbitResidual Small.nonzeroConstantOrbit ≡ NonzeroOrientation
 p3NonzeroResidualIsBinary = refl
 
+negativePositiveSameP3Coarse :
+  p3Project Triadic.negativeTrit ≡ p3Project Triadic.positiveTrit
+negativePositiveSameP3Coarse = refl
+
+negativeNotPositive :
+  Triadic.negativeTrit ≡ Triadic.positiveTrit → ⊥
+negativeNotPositive ()
+
+p3CoarseProjectionHasNoLeftInverse :
+  (recover : Small.ConstantTernaryOrbit → Small.ConstantTernaryState) →
+  ((state : Small.ConstantTernaryState) →
+    recover (p3Project state) ≡ state) →
+  ⊥
+p3CoarseProjectionHasNoLeftInverse recover leftInverse =
+  negativeNotPositive
+    (trans
+      (sym (leftInverse Triadic.negativeTrit))
+      (trans
+        (cong recover negativePositiveSameP3Coarse)
+        (leftInverse Triadic.positiveTrit)))
+
 ------------------------------------------------------------------------
 -- 2. p=2 retained orientation is exactly a coarse+residual codec.
 ------------------------------------------------------------------------
@@ -176,6 +197,27 @@ lowerUpperSameCoarse :
   ≡ p2Project (Compression.upperSide , orbit)
 lowerUpperSameCoarse orbit = refl
 
+lowerNotUpper :
+  (orbit : Triadic.NineOrbit) →
+  (Compression.lowerSide , orbit)
+  ≡ (Compression.upperSide , orbit) →
+  ⊥
+lowerNotUpper orbit ()
+
+p2CoarseProjectionHasNoLeftInverse :
+  (recover : Triadic.NineOrbit → Small.P2ResidualObject) →
+  ((state : Small.P2ResidualObject) →
+    recover (p2Project state) ≡ state) →
+  (orbit : Triadic.NineOrbit) →
+  ⊥
+p2CoarseProjectionHasNoLeftInverse recover leftInverse orbit =
+  lowerNotUpper orbit
+    (trans
+      (sym (leftInverse (Compression.lowerSide , orbit)))
+      (trans
+        (cong recover (lowerUpperSameCoarse orbit))
+        (leftInverse (Compression.upperSide , orbit))))
+
 data CoarseP2CodeRecoversStrictSide : Set where
 
 coarseP2CodeDoesNotRecoverStrictSide :
@@ -193,16 +235,18 @@ record SmallCharacteristicResidualCodecBoundary : Set where
     p3ZeroOrbitHasUnitResidual : Bool
     p3NonzeroOrbitHasBinaryResidual : Bool
     p3CodecReopensExactly : Bool
+    p3CoarseOrbitAloneCannotReopen : Bool
 
     p2CoarseNineOrbitResidualIsStrictSide : Bool
     p2TenObjectCarrierReopensExactly : Bool
     p2DependentCodeSeparating : Bool
     p2FiveObjectQuotientDiscardsResidual : Bool
+    p2CoarseOrbitAloneCannotReopen : Bool
     p2OrientationIsExplicitReopeningData : Bool
 
 canonicalSmallCharacteristicResidualCodecBoundary :
   SmallCharacteristicResidualCodecBoundary
 canonicalSmallCharacteristicResidualCodecBoundary =
   small-characteristic-residual-codec-boundary
-    true true true true
     true true true true true
+    true true true true true true
