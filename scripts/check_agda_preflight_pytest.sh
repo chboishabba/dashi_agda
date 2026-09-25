@@ -11,9 +11,10 @@ if [[ ${1:-} == *.agda ]]; then
 fi
 REFINE="${AGDA_PREFLIGHT_REFINE:-scope}"
 REPORT="${AGDA_PREFLIGHT_REPORT:-.cache/agda_preflight/report.json}"
-AGDA_REFINE_ARGS="${AGDA_PREFLIGHT_AGDA_ARGS:--i . -i DCHoTT-Agda -i cubical -l standard-library}"
-SCOPE_RUNNER="${AGDA_PREFLIGHT_SCOPE_RUNNER:-$ROOT/scripts/run_agda29_parallel_check.sh --only-scope-checking {file}}"
-TYPECHECK_RUNNER="${AGDA_PREFLIGHT_TYPECHECK_RUNNER:-$ROOT/scripts/run_agda29_parallel_check.sh {file}}"
+DEFAULT_SCOPE_RUNNER="$ROOT/scripts/run_agda29_parallel_check.sh --only-scope-checking {file}"
+SCOPE_RUNNER="${AGDA_PREFLIGHT_SCOPE_RUNNER:-$DEFAULT_SCOPE_RUNNER}"
+DEFAULT_TYPECHECK_RUNNER="$ROOT/scripts/run_agda29_parallel_check.sh {file}"
+TYPECHECK_RUNNER="${AGDA_PREFLIGHT_TYPECHECK_RUNNER:-$DEFAULT_TYPECHECK_RUNNER}"
 
 mkdir -p "$(dirname "$REPORT")"
 

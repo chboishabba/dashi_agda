@@ -523,22 +523,22 @@ def _prime_typecheck_closure(
 
         module = path_to_module.get(key, str(key))
 
-        # A module already known to fail scope cannot possibly pass a full
-        # typecheck. Descend without paying the stronger oracle at this node.
-        if backend.scope_failed(key):
-            for child in children.get(key, ()):
-                if descendants_including(child) & type_candidates:
-                    visit(child, aggregate_root=True)
-            return
-
-        log(
-            f"  [typecheck-probe] {module} "
-            f"({len(relevant)} deferred candidate"
-            f"{'s' if len(relevant) != 1 else ''})..."
-        )
-
         visiting.add(key)
         try:
+            # A module already known to fail scope cannot possibly pass a full
+            # typecheck. Descend without paying the stronger oracle at this node.
+            if backend.scope_failed(key):
+                backend._typecheck_failed.add(key)
+                for child in children.get(key, ()):
+                    if descendants_including(child) & type_candidates:
+                        visit(child, aggregate_root=True)
+                return
+
+            log(
+                f"  [typecheck-probe] {module} "
+                f"({len(relevant)} deferred candidate"
+                f"{'s' if len(relevant) != 1 else ''})..."
+            )
             if backend.probe_typecheck(key, aggregate_root=aggregate_root):
                 backend.mark_typecheck_validated(subtree)
                 log(
