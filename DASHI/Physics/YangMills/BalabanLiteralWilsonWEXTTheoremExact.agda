@@ -194,6 +194,72 @@ literalWilsonMixedLogFromFullMarkedClusterExpansion
           (markedExpansion cutoff left right))))
 
 
+literalWilsonMixedLogFromSupportIndexedMarkedExpansion :
+  ∀ {Measure Observable SourceDirection Cluster Source}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (insertionMeaning :
+      ∀ cutoff →
+      Cumulant.LiteralTwoSourceInsertionMeaning
+        (sourceCalculus cutoff)
+        SourceDirection)
+    (derivativeCalculus :
+      Nat → Observable → Observable →
+      Diff.MixedSourceDerivativeCalculus Source)
+    (derivativeVanishing :
+      ∀ cutoff left right →
+      Diff.MixedSourceDerivativeVanishing
+        (derivativeCalculus cutoff left right))
+    (markedExpansion :
+      ∀ cutoff left right →
+      Diff.SupportIndexedMarkedClusterExpansion
+        Source Cluster
+        (derivativeCalculus cutoff left right))
+    (literalResponseIsMarkedMixedDerivative :
+      ∀ cutoff left right →
+      Cumulant.literalMixedSecondLogDerivative
+        (insertionMeaning cutoff)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) left)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) right)
+      ≡
+      Diff.mixedDerivative
+        (derivativeCalculus cutoff left right)
+        (Diff.logPartition (markedExpansion cutoff left right))) →
+  R576.PreferredWilsonMixedLogPhysicalSource dataSet laws
+literalWilsonMixedLogFromSupportIndexedMarkedExpansion
+    sourceCalculus insertionMeaning derivativeCalculus derivativeVanishing
+    markedExpansion literalResponseIsMarkedMixedDerivative =
+  literalWilsonMixedLogTheorem
+    sourceCalculus
+    insertionMeaning
+    (λ cutoff left right →
+      let expansion = markedExpansion cutoff left right
+          locality = Diff.supportLocality expansion
+      in
+      Diff.filterTwoSupport
+        (Diff.touchesLeft locality)
+        (Diff.touchesRight locality)
+        (Diff.clusters expansion))
+    (λ cutoff left right cluster →
+      Diff.mixedDerivative
+        (derivativeCalculus cutoff left right)
+        (Diff.clusterTerm (markedExpansion cutoff left right) cluster))
+    (λ cutoff left right →
+      trans
+        (literalResponseIsMarkedMixedDerivative cutoff left right)
+        (Diff.mixedDerivativeSupportIndexedExpansionIsConnectingSum
+          (derivativeVanishing cutoff left right)
+          (markedExpansion cutoff left right))))
+
+
 ------------------------------------------------------------------------
 -- W3 finite summation payment.
 --
