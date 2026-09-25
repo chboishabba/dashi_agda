@@ -884,3 +884,36 @@ singleWeylTraceDirectionRequiredOnOpaquePairingScalar = false
 singleWeylTraceDirectionRequiredOnOpaquePairingScalarIsFalse :
   singleWeylTraceDirectionRequiredOnOpaquePairingScalar ≡ false
 singleWeylTraceDirectionRequiredOnOpaquePairingScalarIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- TRACE / ACTIVE-STRESS CORRECTION
+------------------------------------------------------------------------
+
+traceAnomalyAlonePaysActiveStress : Bool
+traceAnomalyAlonePaysActiveStress = false
+
+traceAnomalyAlonePaysActiveStressIsFalse :
+  traceAnomalyAlonePaysActiveStress ≡ false
+traceAnomalyAlonePaysActiveStressIsFalse = refl
+
+lorentzianTraceRequiresTimelikeComponentToRecoverActiveStress : Bool
+lorentzianTraceRequiresTimelikeComponentToRecoverActiveStress = true
+
+lorentzianTraceRequiresTimelikeComponentToRecoverActiveStressIsTrue :
+  lorentzianTraceRequiresTimelikeComponentToRecoverActiveStress ≡ true
+lorentzianTraceRequiresTimelikeComponentToRecoverActiveStressIsTrue = refl
+
+localSameObjectT00MagnitudeBoundStillRequired : Bool
+localSameObjectT00MagnitudeBoundStillRequired = true
+
+localSameObjectT00MagnitudeBoundStillRequiredIsTrue :
+  localSameObjectT00MagnitudeBoundStillRequired ≡ true
+localSameObjectT00MagnitudeBoundStillRequiredIsTrue = refl
+
+directFourDiagonalActiveSumSignStillSufficient : Bool
+directFourDiagonalActiveSumSignStillSufficient = true
+
+directFourDiagonalActiveSumSignStillSufficientIsTrue :
+  directFourDiagonalActiveSumSignStillSufficient ≡ true
+directFourDiagonalActiveSumSignStillSufficientIsTrue = refl
