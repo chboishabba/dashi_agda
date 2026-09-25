@@ -32,6 +32,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicWildStackCorrectionConjectureExa
 import DASHI.Moonshine.OggSSPP2OrientedInertiaModuliProblemExact as P2Geometry
 import DASHI.Moonshine.OggSSPP3DeligneRapoportStratumCodeExact as P3Geometry
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPSmallCharacteristicMathieuQuotientResidualExact as Mathieu
 
 ------------------------------------------------------------------------
 -- 1. Domain-separated arithmetic observables.
@@ -164,6 +165,75 @@ record P3WildValuationRecognition : Set₁ where
 open P3WildValuationRecognition public
 
 ------------------------------------------------------------------------
+-- 3b. Stronger local-group recognition obligation.
+--
+-- A satisfactory mechanism should explain why the small-prime arithmetic
+-- continuation pays exactly the elementary-abelian radical exponent
+--
+--   p=2 : 11 from 2^11:M24
+--   p=3 :  5 from 3^5:M11
+--
+-- but omits the Mathieu quotient p-part
+--
+--   v_2(M24)=10
+--   v_3(M11)= 2.
+--
+-- Merely observing these equalities does not inhabit the record.
+------------------------------------------------------------------------
+
+record LocalGroupValuationRecognition (p : SmallPrime) : Set₁ where
+  field
+    localGroupWitness :
+      WildValuationWitness p
+
+    radicalExponent :
+      Nat
+
+    mathieuExponent :
+      Nat
+
+    quotientExponent :
+      Nat
+
+    radicalMatchesDworkIntercept :
+      radicalExponent
+      ≡
+      (case p of λ where
+        p2 -> Mathieu.localRadicalExponent Mathieu.p2
+        p3 -> Mathieu.localRadicalExponent Mathieu.p3)
+
+    mathieuMatchesRequiredCorrection :
+      mathieuExponent
+      ≡ requiredCorrection p
+
+    quotientSplits :
+      quotientExponent
+      ≡ radicalExponent + mathieuExponent
+
+    arithmeticContinuationStopsAtRadical :
+      tameContinuationContribution localGroupWitness
+      ≡
+      (case p of λ where
+        p2 -> 25 + radicalExponent
+        p3 -> 13 + radicalExponent)
+
+    monsterCompletionAddsMathieu :
+      monsterExponent p
+      ≡
+      tameContinuationContribution localGroupWitness
+      + mathieuExponent
+
+    subgroupFiltrationRecognizedInArithmetic : Bool
+    subgroupFiltrationRecognizedInArithmeticIsTrue :
+      subgroupFiltrationRecognizedInArithmetic ≡ true
+
+    mathieuQuotientValuationRecognized : Bool
+    mathieuQuotientValuationRecognizedIsTrue :
+      mathieuQuotientValuationRecognized ≡ true
+
+open LocalGroupValuationRecognition public
+
+------------------------------------------------------------------------
 -- 4. Full recognition requires both primes.
 ------------------------------------------------------------------------
 
@@ -234,6 +304,8 @@ record WildValuationRecognitionBoundary : Set where
     integralModelStillRequired : Bool
     expansionValuationStillRequired : Bool
     geometryToCorrectionDerivationStillRequired : Bool
+    localSubgroupFiltrationRecognitionStillRequired : Bool
+    mathieuQuotientValuationRecognitionStillRequired : Bool
     p2RecognitionInhabited : Bool
     p3RecognitionInhabited : Bool
     fullRecognitionInhabited : Bool
@@ -243,5 +315,5 @@ canonicalWildValuationRecognitionBoundary :
 canonicalWildValuationRecognitionBoundary =
   wild-valuation-recognition-boundary
     true true true true true
-    true true true true
+    true true true true true true
     false false false
