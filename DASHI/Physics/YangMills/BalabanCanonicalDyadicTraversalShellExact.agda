@@ -56,7 +56,7 @@ canonicalTraversalShell = record
         let
           instance
             halfNN : NonNegative Geo.half
-            halfNN = nonNegative (Geo.halfPowerNonnegative (suc zero))
+            halfNN = nonNegative Geo.halfNonnegative
         in
         ℚP.*-monoˡ-≤-nonNeg Geo.half order
   ; Shell.TraversalShellData.rootNormalization =
