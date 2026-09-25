@@ -1276,3 +1276,89 @@ screen
 -> corpus-level blind-spot / source-dependence analysis
 ```
 
+
+
+## Academic corpus / SensibLaw DB-native recut
+
+The scholarly-review world must reuse the existing SensibLaw/SLR evidence and
+source-review owners rather than materialising a parallel Digital-ESD academic
+ontology.
+
+Canonical scholarly distinctions already present in the repository include:
+
+```text
+AttributedSource
+!= source authority
+
+EvidenceManifestation
+-> EvidenceSourceRevision
+-> EvidenceSpan
+-> EvidenceObservation
+
+parser / PNF candidate
+!= paper truth
+
+review acceptance
+!= SourceAuditAdmission
+
+title equality
+!= same publication identity
+
+publication QID
+is not required for scholarly identity
+
+included publication count
+!= independent evidence units
+
+pooled estimate
+!= publication-bias state
+
+transparent reporting / PRISMA
+!= review truth
+
+citation visibility
+!= replicability / evidentiary weight
+
+primary-source role
+!= proposition truth
+```
+
+Digital-ESD already owns a second-stage scholarly bridge through
+`DigitalESDSLRSourceReviewBridgeExact`, a design-relative claim-ceiling owner
+through `DigitalESDStudyClaimCeilingExact`, and source-genealogy/systematic-
+review boundaries through the Ibrahim/SensibLaw evidence-synthesis owners.
+
+The newer canonical scale owner
+`DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact` recuts corpus-scale
+processing around persistent compilation state:
+
+```text
+L0 immutable source bytes -> revision -> exact regions
+L1 semantic-eligible region -> parser success OR residual -> candidate PNF
+L2 candidate semantics -> reconciliation candidates
+L3 explicit review / admission
+```
+
+and explicitly states:
+
+```text
+runtime state requires flat-file handoff = false
+JSON is canonical runtime database      = false
+TSV is canonical runtime database       = false
+Postgres creates global semantic truth  = false
+```
+
+Therefore the production world should be PostgreSQL-native. JSON/JSONL remains
+only a bounded inspection/export/receipt surface.
+
+The intended agent entry point remains one command, but its production meaning
+is:
+
+```text
+run world
+-> update DB-native source / parser / PNF / reconciliation state
+-> recompute review/acquisition/framework residuals
+-> return a bounded inspection projection
+```
+
+not "serialize the whole corpus graph to JSON".
