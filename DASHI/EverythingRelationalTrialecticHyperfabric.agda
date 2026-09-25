@@ -3,7 +3,7 @@ module DASHI.EverythingRelationalTrialecticHyperfabric where
 ------------------------------------------------------------------------
 -- RELATIONAL TRIALECTIC HYPERFABRIC ROLLUP
 --
--- This is an aggregate import only.  It does not strengthen any source claim.
+-- This is an aggregate import only.  It does not strengthen any source claim.\n-- Focused CI compiles this owner as the complete tranche root.
 -- In particular:
 --   * citations do not import proof or authority;
 --   * a general relational architecture is not a trauma-causal theorem;
