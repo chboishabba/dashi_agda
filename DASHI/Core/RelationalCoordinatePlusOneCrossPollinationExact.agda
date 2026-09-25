@@ -37,6 +37,8 @@ import DASHI.Physics.Closure.TSFVHistoryConditionedChoiceBridgeExact as TSFV
 import DASHI.Moonshine.TwistronicsRelativeRegistrationComparatorExact as Twist
 import DASHI.Core.ConsumerGuidedReopenableRefinementExact as Refine
 import DASHI.Core.CoarseUnitFineFibreCapacityExact as Capacity
+import DASHI.Core.LatentDistinctionActivationExact as Activation
+import DASHI.Core.NonginOnePointOneFutureSplitExact as NonginDynamic
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Physics.Closure.TSFVBidirectionalCausticBridgeExact as TSFVCaustic
 import DASHI.Biology.BalancedTernaryHarmonicCarrierExact as Harmonic
@@ -230,4 +232,44 @@ canonicalPlusOneFibreAmplificationBoundary =
     true true true
     false refl
     false refl
+    false refl
+
+
+------------------------------------------------------------------------
+-- 7. Extension shape versus dynamically activated distinction.
+--
+-- A cardinal/completion +1 does not become future-load-bearing merely because
+-- it is an extension.  Dynamic relevance requires an actual common-trace
+-- terminalisation defect / LatentDistinctionActivation.
+------------------------------------------------------------------------
+
+nonginFrameExtensionIsDynamicallyActivated :
+  Activation.LatentDistinctionActivation
+    NonginDynamic.nonginFrameActionSystem
+    NonginDynamic.observeNongin
+nonginFrameExtensionIsDynamicallyActivated =
+  NonginDynamic.nonginTerminalisationDefect
+
+record PlusOneDynamicActivationBoundary : Set where
+  constructor plus-one-dynamic-activation-boundary
+  field
+    extensionShapeAloneImpliesDynamicActivation : Bool
+    extensionShapeAloneImpliesDynamicActivationIsFalse :
+      extensionShapeAloneImpliesDynamicActivation ≡ false
+    nonginFrameHasConcreteActivationWitness : Bool
+    ninePlusOneHasActivationWitnessHere : Bool
+    tenPlusOneHasActivationWitnessHere : Bool
+    fiftyThreePlusOneHasActivationWitnessHere : Bool
+    monsterPlusOneHasActivationWitnessHere : Bool
+    arithmeticEqualityCreatesFutureDistinction : Bool
+    arithmeticEqualityCreatesFutureDistinctionIsFalse :
+      arithmeticEqualityCreatesFutureDistinction ≡ false
+
+canonicalPlusOneDynamicActivationBoundary :
+  PlusOneDynamicActivationBoundary
+canonicalPlusOneDynamicActivationBoundary =
+  plus-one-dynamic-activation-boundary
+    false refl
+    true
+    false false false false
     false refl
