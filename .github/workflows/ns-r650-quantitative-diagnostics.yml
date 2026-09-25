@@ -91,6 +91,8 @@ on:
       - 'DASHI/Physics/Closure/NSTriadKNR650IntegratedNestedFourHelicityOrbitRound701Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650NestedFourHelicityCoefficientRound702Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalVectorTransformRound703Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalCoefficientCancellationRound704Exact.agda'
+      - 'DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalPairingNormalFormRound705Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda'
       - 'DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda'
@@ -178,6 +180,8 @@ jobs:
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650IntegratedNestedFourHelicityOrbitRound701Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650NestedFourHelicityCoefficientRound702Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalVectorTransformRound703Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalCoefficientCancellationRound704Exact.agda
+          dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650CyclicHelicalPairingNormalFormRound705Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarA3ComplementRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarCauchyCouplingRound666Exact.agda
           dashi-agda-preflight --root . DASHI/Physics/Closure/NSTriadKNR650BadCollarMismatchNetworkSplitRound667Exact.agda
