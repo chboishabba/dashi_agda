@@ -51,3 +51,7 @@ grep -q 'primeInternalCountArithmetic' "${targets[6]}"
 grep -q 'chosenGaugeAtP71IsNotNeutral' "${targets[6]}"
 grep -q 'everyPrimeHasEveryInternalLane' "${targets[6]}"
 grep -q 'chosenGaugeExhaustsSemanticCarrier' "${targets[6]}"
+
+grep -q 'primeInternalToPointedSigned' "${targets[6]}"
+grep -q 'primeInternalValuationOwnLane' "${targets[6]}"
+grep -q 'canonicalSignedLiftUsesPrimeInternalPair' "${targets[6]}"
