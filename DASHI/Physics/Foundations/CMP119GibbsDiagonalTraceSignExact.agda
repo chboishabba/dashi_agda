@@ -1,8 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119GibbsDiagonalTraceSignExact where
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; _*_; _<_; Positive; positive)
+  (ℚ; 0ℚ; _+_; _*_; _<_; Positive; positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst)
