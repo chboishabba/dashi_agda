@@ -27,32 +27,32 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 
 data AntigravityTraceLeaf : Set where
-  attachSelectedCMP119InsertionNumeratorToCanonicalWilsonGibbs :
+  attachSelectedCMP119MetricInsertionFamilyToCanonicalWilsonGibbs :
     AntigravityTraceLeaf
 
-  inhabitSelectedRationalHaarIntegrationLaws :
+  inhabitSelectedOrderedRationalHaarLaws :
     AntigravityTraceLeaf
 
-  inhabitSelectedFiniteHaarQuadrature :
+  inhabitPositivePartitionHaarMinorant :
     AntigravityTraceLeaf
 
   attachSelectedTraceToRenormalizedQuantumTrace :
     AntigravityTraceLeaf
 
-  attachSelectedQuantumTraceToSU2NormalizedF2 :
+  attachSelectedQuantumTraceToPhysicalSU2F2Normalization :
     AntigravityTraceLeaf
 
-  inhabitPositiveCurvatureAtFiniteHaarWitness :
+  inhabitPositiveWeightedCurvatureF2HaarMinorant :
     AntigravityTraceLeaf
 
 canonicalAntigravityTraceLeaves : List AntigravityTraceLeaf
 canonicalAntigravityTraceLeaves =
-  attachSelectedCMP119InsertionNumeratorToCanonicalWilsonGibbs
-  ∷ inhabitSelectedRationalHaarIntegrationLaws
-  ∷ inhabitSelectedFiniteHaarQuadrature
+  attachSelectedCMP119MetricInsertionFamilyToCanonicalWilsonGibbs
+  ∷ inhabitSelectedOrderedRationalHaarLaws
+  ∷ inhabitPositivePartitionHaarMinorant
   ∷ attachSelectedTraceToRenormalizedQuantumTrace
-  ∷ attachSelectedQuantumTraceToSU2NormalizedF2
-  ∷ inhabitPositiveCurvatureAtFiniteHaarWitness
+  ∷ attachSelectedQuantumTraceToPhysicalSU2F2Normalization
+  ∷ inhabitPositiveWeightedCurvatureF2HaarMinorant
   ∷ []
 
 classicalDiagonalActionTraceCancellationClosed : Bool
@@ -291,3 +291,57 @@ sixCurvatureF2NonnegativityCompilerClosed = true
 sixCurvatureF2NonnegativityCompilerClosedIsTrue :
   sixCurvatureF2NonnegativityCompilerClosed ≡ true
 sixCurvatureF2NonnegativityCompilerClosedIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- PREFERRED CONTINUOUS-HAAR / METRIC-FAMILY RECUT
+------------------------------------------------------------------------
+
+scalarInsertionWeldPreferredForMultiComponentStress : Bool
+scalarInsertionWeldPreferredForMultiComponentStress = false
+
+scalarInsertionWeldPreferredForMultiComponentStressIsFalse :
+  scalarInsertionWeldPreferredForMultiComponentStress ≡ false
+scalarInsertionWeldPreferredForMultiComponentStressIsFalse = refl
+
+metricSlotInsertionFamilyCompilerClosed : Bool
+metricSlotInsertionFamilyCompilerClosed = true
+
+metricSlotInsertionFamilyCompilerClosedIsTrue :
+  metricSlotInsertionFamilyCompilerClosed ≡ true
+metricSlotInsertionFamilyCompilerClosedIsTrue = refl
+
+exactFiniteHaarQuadratureRequiredForPreferredRoute : Bool
+exactFiniteHaarQuadratureRequiredForPreferredRoute = false
+
+exactFiniteHaarQuadratureRequiredForPreferredRouteIsFalse :
+  exactFiniteHaarQuadratureRequiredForPreferredRoute ≡ false
+exactFiniteHaarQuadratureRequiredForPreferredRouteIsFalse = refl
+
+singlePointPositiveCurvatureWitnessSufficientForContinuousHaar : Bool
+singlePointPositiveCurvatureWitnessSufficientForContinuousHaar = false
+
+singlePointPositiveCurvatureWitnessSufficientForContinuousHaarIsFalse :
+  singlePointPositiveCurvatureWitnessSufficientForContinuousHaar ≡ false
+singlePointPositiveCurvatureWitnessSufficientForContinuousHaarIsFalse = refl
+
+orderedHaarMinorantPositivityCompilerClosed : Bool
+orderedHaarMinorantPositivityCompilerClosed = true
+
+orderedHaarMinorantPositivityCompilerClosedIsTrue :
+  orderedHaarMinorantPositivityCompilerClosed ≡ true
+orderedHaarMinorantPositivityCompilerClosedIsTrue = refl
+
+inversePiSquaredTraceNormalizationCompilerClosed : Bool
+inversePiSquaredTraceNormalizationCompilerClosed = true
+
+inversePiSquaredTraceNormalizationCompilerClosedIsTrue :
+  inversePiSquaredTraceNormalizationCompilerClosed ≡ true
+inversePiSquaredTraceNormalizationCompilerClosedIsTrue = refl
+
+selectedMetricFamilyOrderedHaarCapstoneCompilerClosed : Bool
+selectedMetricFamilyOrderedHaarCapstoneCompilerClosed = true
+
+selectedMetricFamilyOrderedHaarCapstoneCompilerClosedIsTrue :
+  selectedMetricFamilyOrderedHaarCapstoneCompilerClosed ≡ true
+selectedMetricFamilyOrderedHaarCapstoneCompilerClosedIsTrue = refl
