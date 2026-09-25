@@ -24,6 +24,12 @@ import DASHI.Moonshine.OggSSPP3F9ExtensionQuotientSourceExact as P3Source
 import DASHI.Moonshine.OggSSPP2RetainedCMMarkedSourceExact as P2Source
 import DASHI.Moonshine.OggSSPArithmeticTo369InhabitedExact as Inhabited
 import DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact as Frontier
+import DASHI.Moonshine.OggSSPP3DeligneRapoportLocalStrataRecognitionExact as P3Local
+import DASHI.Moonshine.OggSSPP2Gamma04DrinfeldLevelNoGoExact as P2Gamma04
+import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as P2Inertia
+import DASHI.Moonshine.OggSSPP2OrientedInertiaTenStateRecognitionExact as P2Ten
+import DASHI.Moonshine.OggSSPP2OrientedUnorientedInertiaStackCandidateExact as P2Stack
+import DASHI.Moonshine.OggSSPClassicalCarrierToIndependent369RecognitionExact as Classical369
 
 ------------------------------------------------------------------------
 -- 1. Canonical sourced surfaces.
@@ -73,6 +79,11 @@ record ClassicalSourcingCompletion : Set where
     normalizedOptimalEmbeddingSourced : Bool
     badPrimeDrinfeldLevelFrameworkSourced : Bool
     gamma0PrimePowerStackFrameworkSourced : Bool
+    inertiaStackConjugacyFrameworkSourced : Bool
+    p3DeligneRapoportLocalStrataSourced : Bool
+    p2UniqueGamma04DrinfeldLevelSourced : Bool
+    p2TwoOrientationFactorSourced : Bool
+    p2BinaryTetrahedralSevenClassesSourced : Bool
     oggContextSourced : Bool
 
     p3InternalSourceInhabited : Bool
@@ -80,10 +91,16 @@ record ClassicalSourcingCompletion : Set where
     p3ForwardRecognitionInhabited : Bool
     p2ForwardRecognitionInhabited : Bool
 
+    p3AbstractThreeStateC2SetClassicallyRealized : Bool
+    p3F9CoordinateGeometricallyIdentified : Bool
+    p2Gamma04TenPointInterpretationRejected : Bool
+    p2FiveInertiaOrbitCarrierConstructed : Bool
+    p2TenStateHasClassicallySourcedFactorization : Bool
+    p2OrientedUnorientedInertiaProductNamedClassically : Bool
+    p3ClassicalCarrierTo369RecognitionPaid : Bool
+    p2ClassicalCarrierTo369RecognitionPaid : Bool
     p3ExactThreeStatePresentationAttributedAsClassical : Bool
     p2ExactTenStatePresentationAttributedAsClassical : Bool
-    p3ClassicalSameObjectIdentificationClaimed : Bool
-    p2ClassicalSameObjectIdentificationClaimed : Bool
 
     everySupportedClassicalClaimHasSourceMatch : Bool
     everyUnsupportedPromotionExplicitlyBlocked : Bool
@@ -93,9 +110,9 @@ canonicalClassicalSourcingCompletion :
   ClassicalSourcingCompletion
 canonicalClassicalSourcingCompletion =
   classical-sourcing-completion
-    true true true true true true true true
+    true true true true true true true true true true true true true
     true true true true
-    false false false false
+    true false true true true false true true false false
     true true true
 
 ------------------------------------------------------------------------
