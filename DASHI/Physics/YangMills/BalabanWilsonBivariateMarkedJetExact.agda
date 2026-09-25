@@ -173,7 +173,8 @@ productJetsMissingLeftCoefficientsZero polymerJet support [] missing =
 productJetsMissingLeftCoefficientsZero
     polymerJet support (polymer ∷ polymers) missing
   with polymerTouchesLeft support polymer
-... | true = ()
+... | true with missing
+...   | ()
 ... | false
   with productJetsMissingLeftCoefficientsZero
     polymerJet support polymers missing
@@ -208,7 +209,8 @@ productJetsMissingRightCoefficientsZero polymerJet support [] missing =
 productJetsMissingRightCoefficientsZero
     polymerJet support (polymer ∷ polymers) missing
   with polymerTouchesRight support polymer
-... | true = ()
+... | true with missing
+...   | ()
 ... | false
   with productJetsMissingRightCoefficientsZero
     polymerJet support polymers missing
