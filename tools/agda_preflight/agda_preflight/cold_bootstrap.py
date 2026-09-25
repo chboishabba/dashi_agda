@@ -316,11 +316,12 @@ def dependency_closures(
     receipts: Sequence[ImportReceipt],
 ) -> Dict[str, Set[str]]:
     """Return transitive in-closure dependency sets, including each module."""
+    module_names = {item.module_name for item in receipts}
     graph = {
         receipt.module_name: tuple(
             dependency
             for dependency in receipt.imports
-            if dependency in {item.module_name for item in receipts}
+            if dependency in module_names
         )
         for receipt in receipts
     }
