@@ -1,4 +1,5 @@
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact
+import DASHI.Moonshine.OggSSPArithmeticResidualGroupoidRecognitionFunctorExact
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact
 import DASHI.Moonshine.OggMonstrousExponentTrialecticDescentExact
