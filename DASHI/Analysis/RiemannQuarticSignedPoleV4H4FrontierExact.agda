@@ -1029,3 +1029,104 @@ literalCompensationTransportedIntoAgdaKernelHere = false
 literalCompensationMinCutInterpretation : String
 literalCompensationMinCutInterpretation =
   "The preferred RH Clay-facing route has been collapsed to one exact high-ordinate statement on the literal four-window source. FarExact is split and then recombined with the matching mu/Gamma compensation; the selected local source budget cancels FarExact algebraically; the remaining finite-cut compensated functional is normalized on the exact quartic scale and expanded as global pair source minus local pair source minus the full mu integral. That literal compensation cut compiles directly to the existing completed-residual contradiction. The same selected witness simultaneously carries the terminal M6 certificate and quantitative target band, and the V4 producer threshold is absorbed into one fixed high cutoff. The older absolute FarPaid/HorizontalFarCurvatureBound lane remains a valid audit fallback but is not the preferred min-cut."
+
+
+------------------------------------------------------------------------
+-- QUARTIC-SCALE LITERAL COMPENSATION WALL
+--
+-- Lean has now sharpened the preferred literal high cut one final time.
+-- Write r=t/16 and
+--
+--   E4_W(q) = r^4 * centeredZetaMuDiscrepancy t (t+r*q).
+--
+-- The exact centered Abel integrand satisfies
+--
+--   r^7 * centeredAbelIntegrand (t+r*q)
+--     = normalizedOrdinateCosineD1(q) * E4_W(q).
+--
+-- This proves at theorem level that the four inverse powers missing between
+-- the generic r^-2 centered N-mu scale and the quartic r^-6 target scale must
+-- come from cancellation/sign in the centered discrepancy coordinate itself.
+-- They cannot be manufactured by improving remote Fourier decay at the fixed
+-- canonical q-boundary.
+--
+-- Lean also defines
+--
+--   quarticScaleFiniteCutCompensatedFar n = r^6 * F_n
+--
+-- and proves this is exactly
+--
+--   r^4 * normalizedFiniteCutCompensatedFar n.
+--
+-- Consequently the old PostSixthLiteralCompensationCut is equivalent to the
+-- dimensionless quartic-scale inequality
+--
+--   |r^6 F_n| < r^6 * terminalResidualMargin.
+--
+-- The selected-literal high predicate is equivalent to a
+-- selected-quartic-scale high predicate carrying this inequality, and above
+-- one fixed high threshold that single predicate compiles directly to
+-- contradiction.
+--
+-- All exhaustion/cofinality plumbing is already theorem-bearing: symmetric
+-- centered Abel partials converge to -signedNMuPair, and the finite centered
+-- completed residual converges to completedSignedResidual.  Thus no separate
+-- exhaustion theorem remains on the preferred cut.
+--
+-- The ONLY preferred open analytic coordinate is the actual quartic-scale
+-- compensated high inequality itself.  No pointwise r^-4 discrepancy bound is
+-- claimed; the required theorem may be genuinely integrated/signed.
+------------------------------------------------------------------------
+
+data QuarticScaleCompensationCoordinate : Set where
+  quarticScaleCenteredDiscrepancyCoordinate :
+    QuarticScaleCompensationCoordinate
+  centeredAbelIntegrandQuarticScaleIdentity :
+    QuarticScaleCompensationCoordinate
+  quarticScaleFiniteCutIdentity :
+    QuarticScaleCompensationCoordinate
+  literalCutQuarticScaleEquivalence :
+    QuarticScaleCompensationCoordinate
+  selectedQuarticScaleHighCutEquivalence :
+    QuarticScaleCompensationCoordinate
+  fixedHighQuarticScaleCutToContradiction :
+    QuarticScaleCompensationCoordinate
+  symmetricCenteredAbelExhaustion :
+    QuarticScaleCompensationCoordinate
+  quarticScaleCompensatedHighInequality :
+    QuarticScaleCompensationCoordinate
+
+quarticScaleCompensationStatus :
+  QuarticScaleCompensationCoordinate -> V4H4Status
+quarticScaleCompensationStatus quarticScaleCenteredDiscrepancyCoordinate =
+  leanSourceWrittenDonor
+quarticScaleCompensationStatus centeredAbelIntegrandQuarticScaleIdentity =
+  leanSourceWrittenDonor
+quarticScaleCompensationStatus quarticScaleFiniteCutIdentity =
+  leanSourceWrittenDonor
+quarticScaleCompensationStatus literalCutQuarticScaleEquivalence =
+  leanSourceWrittenDonor
+quarticScaleCompensationStatus selectedQuarticScaleHighCutEquivalence =
+  leanSourceWrittenDonor
+quarticScaleCompensationStatus fixedHighQuarticScaleCutToContradiction =
+  leanSourceWrittenDonor
+quarticScaleCompensationStatus symmetricCenteredAbelExhaustion =
+  leanSourceWrittenDonor
+quarticScaleCompensationStatus quarticScaleCompensatedHighInequality =
+  openAnalyticObstruction
+
+quarticScaleCompensatedHighInequalityIsOnlyPreferredOpenCoordinate :
+  quarticScaleCompensationStatus quarticScaleCompensatedHighInequality
+    ≡ openAnalyticObstruction
+quarticScaleCompensatedHighInequalityIsOnlyPreferredOpenCoordinate = refl
+
+quarticScaleCompensationLeanDonorHead : String
+quarticScaleCompensationLeanDonorHead =
+  "802a9b530899f2ab514ebc83bcfc73b2f3aa0733"
+
+quarticScaleCompensationTransportedIntoAgdaKernelHere : Bool
+quarticScaleCompensationTransportedIntoAgdaKernelHere = false
+
+quarticScaleCompensationInterpretation : String
+quarticScaleCompensationInterpretation =
+  "The preferred RH min-cut is now dimensionless and literal. With r=t/16, Lean proves r^7 times the exact centered Abel integrand at t+r*q equals the normalized cosine derivative times r^4 times the centered N-mu discrepancy. It also proves the finite compensated remainder satisfies r^6*F_n = r^4*normalizedF_n, rewrites the literal high cut equivalently on this quartic scale, and compiles the selected quartic-scale high cut above one fixed threshold directly to contradiction. Symmetric centered-Abel exhaustion and convergence to the completed residual are already paid. The only preferred open analytic theorem is therefore the quartic-scale compensated high inequality itself; no pointwise r^-4 discrepancy estimate is asserted."
