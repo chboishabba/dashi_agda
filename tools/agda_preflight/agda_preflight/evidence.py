@@ -70,7 +70,7 @@ _INDEX_SAFE = {
     "TSAGDA008", "TSAGDA009",
     "TSAGDA020", 
     "TSAGDA029", "TSAGDA030",
-    "TSAGDA042", "TSAGDA043", 
+    
     
     
     
@@ -82,7 +82,7 @@ _INDEX_SAFE = {
     "TSAGDA088", "TSAGDA089",
     "TSAGDA100", "TSAGDA101", "TSAGDA102", 
     "TSAGDA105",
-    "TSAGDA111", "TSAGDA112", "TSAGDA115",
+    "TSAGDA115",
     
     
     "TSAGDA140", "TSAGDA141", "TSAGDA142", "TSAGDA143",
@@ -118,6 +118,10 @@ _SCOPE_REQUIRED = {
 
 # Kept for future diagnostics whose truth genuinely requires the kernel.
 _TYPECHECK_REQUIRED: Set[str] = {
+    "TSAGDA042",  # named implicits require the complete elaborated telescope
+    "TSAGDA043",  # binder visibility requires the complete elaborated telescope
+    "TSAGDA111",  # compatibility view of visibility mismatch
+    "TSAGDA112",  # compatibility alias of named implicit mismatch
     "TSAGDA002",  # projection receiver metavariables may be inferable
     "TSAGDA003",  # adapter kind/codomain compatibility requires elaboration
     "TSAGDA044",  # lambda/target binder count can change after unfolding
@@ -174,7 +178,7 @@ DIAGNOSTIC_ALIASES = {
     "TSAGDA003": ("TSAGDA067"),
     "TSAGDA012": ("TSAGDA175",),
     "TSAGDA045": ("TSAGDA110",),
-    "TSAGDA042": ("TSAGDA112",),
+    "TSAGDA042": (),
 }
 
 _ALIAS_TO_CANONICAL = {
