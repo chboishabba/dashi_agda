@@ -196,10 +196,69 @@ class SourceIndex:
         )
         self.connection.commit()
 
+    def _module_row_by_name(self, module: str):
+        return self.connection.execute(
+            "SELECT * FROM modules WHERE module_name = ?",
+            (module,),
+        ).fetchone()
+
+    def _load_interface_from_db(
+        self,
+        module: str,
+    ):
+        interfaces = {}
+        active = [module]
+        seen = set()
+
+        while active:
+            current = active.pop()
+            if current in seen:
+                continue
+            seen.add(current)
+            row = self._module_row_by_name(current)
+            if row is None:
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+
+            path = self.root / row["path"]
+            try:
+                stat = self._stat(path)
+            except OSError:
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+            if not self._fresh(row, stat):
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+
+            payload = row["interface_json"]
+            if not payload:
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+            try:
+                interface = interface_from_dict(json.loads(payload))
+            except (TypeError, ValueError, KeyError, json.JSONDecodeError):
+                self.profiler.count("incremental_interface_cache_misses")
+                return None
+
+            interfaces[current] = interface
+            for reexport in interface.public_reexports:
+                if reexport.module not in seen:
+                    active.append(reexport.module)
+
+        resolved = resolve_interface_exports(interfaces)
+        result = resolved.get(module)
+        if result is not None:
+            self.profiler.count("incremental_interface_cache_hits")
+        return result
+
     def _checker_instance(self) -> Checker:
         if self._checker is None:
             self.profiler.count("checker_instances")
-            self._checker = Checker(self.root, profiler=self.profiler)
+            self._checker = Checker(
+                self.root,
+                profiler=self.profiler,
+                interface_loader=self._load_interface_from_db,
+            )
         return self._checker
 
     def _relative(self, path: Path) -> str:
