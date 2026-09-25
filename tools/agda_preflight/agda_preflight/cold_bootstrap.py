@@ -10,6 +10,7 @@ from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
 
 from .ast_index import build_import_surface
 from .checker import Checker, _parser
+from .timing import Profiler
 
 
 @dataclass(frozen=True)
@@ -30,11 +31,16 @@ class DiagnosticReceipt:
     public_imports: Tuple[str, ...]
     api_base_hash: str
     diagnostics: Tuple[dict, ...]
+    files_parsed: int
+    diagnostics_recomputed: int
+    parse_ns: int
+    diagnostics_ns: int
 
 
 _WORKER_ROOT: Optional[Path] = None
 _WORKER_PARSER = None
 _WORKER_CHECKER: Optional[Checker] = None
+_WORKER_PROFILER: Optional[Profiler] = None
 
 
 def worker_count(requested: int) -> int:
@@ -44,17 +50,22 @@ def worker_count(requested: int) -> int:
 
 
 def _init_import_worker(root: str) -> None:
-    global _WORKER_ROOT, _WORKER_PARSER, _WORKER_CHECKER
+    global _WORKER_ROOT, _WORKER_PARSER, _WORKER_CHECKER, _WORKER_PROFILER
     _WORKER_ROOT = Path(root).resolve()
     _WORKER_PARSER = _parser()
     _WORKER_CHECKER = None
+    _WORKER_PROFILER = None
 
 
 def _init_diagnostic_worker(root: str) -> None:
-    global _WORKER_ROOT, _WORKER_PARSER, _WORKER_CHECKER
+    global _WORKER_ROOT, _WORKER_PARSER, _WORKER_CHECKER, _WORKER_PROFILER
     _WORKER_ROOT = Path(root).resolve()
     _WORKER_PARSER = None
-    _WORKER_CHECKER = Checker(_WORKER_ROOT)
+    _WORKER_PROFILER = Profiler()
+    _WORKER_CHECKER = Checker(
+        _WORKER_ROOT,
+        profiler=_WORKER_PROFILER,
+    )
 
 
 def _scan_import(path_text: str) -> ImportReceipt:
@@ -176,9 +187,12 @@ def _api_base(root: Path, summary) -> Tuple[str, Tuple[str, ...]]:
 def _diagnose_path(path_text: str) -> DiagnosticReceipt:
     assert _WORKER_ROOT is not None
     assert _WORKER_CHECKER is not None
+    assert _WORKER_PROFILER is not None
+    before = _WORKER_PROFILER.snapshot()
     path = Path(path_text).resolve()
     summary = _WORKER_CHECKER.parse_summary(path)
     diagnostics = _WORKER_CHECKER.structural_check(path)
+    after = _WORKER_PROFILER.snapshot()
     stat = path.stat()
     source_hash = hashlib.sha256(
         summary.source.encode("utf-8")
@@ -197,6 +211,22 @@ def _diagnose_path(path_text: str) -> DiagnosticReceipt:
         public_imports=public_imports,
         api_base_hash=api_base_hash,
         diagnostics=tuple(item.as_dict() for item in diagnostics),
+        files_parsed=(
+            after.counts.get("files_parsed", 0)
+            - before.counts.get("files_parsed", 0)
+        ),
+        diagnostics_recomputed=(
+            after.counts.get("diagnostics_recomputed", 0)
+            - before.counts.get("diagnostics_recomputed", 0)
+        ),
+        parse_ns=(
+            after.stages_ns.get("parse.tree_sitter", 0)
+            - before.stages_ns.get("parse.tree_sitter", 0)
+        ),
+        diagnostics_ns=(
+            after.stages_ns.get("diagnostics.local", 0)
+            - before.stages_ns.get("diagnostics.local", 0)
+        ),
     )
 
 
