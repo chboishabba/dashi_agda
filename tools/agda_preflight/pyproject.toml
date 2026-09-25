@@ -15,6 +15,7 @@ dependencies = [
 ]
 
 [project.scripts]
+dashi-agda = "agda_preflight.interactive_cli:main"
 dashi-agda-preflight = "agda_preflight.cli:main"
 dashi-agda-evidence = "agda_preflight.evidence_cli:main"
 dashi-agda-triage = "agda_preflight.triage_cli:main"
