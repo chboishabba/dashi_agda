@@ -21,6 +21,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Unit using (⊤)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.OrbitStabilizerResidualPresentationExact as Generic
 import DASHI.Core.ResidualSymmetryCollisionFibreExact as Symmetry
@@ -41,40 +42,40 @@ record OrbitStabilizerRecognitionMap
       Symmetry.InvertibleSymmetryAction TargetState TargetGroup)
     (targetPresentation : Generic.OrbitPresentation targetAction)
     (sourceStabilizerSize :
-      Generic.OrbitPresentation.Orbit sourcePresentation -> Nat)
+      Generic.Orbit sourcePresentation -> Nat)
     (targetStabilizerSize :
-      Generic.OrbitPresentation.Orbit targetPresentation -> Nat)
+      Generic.Orbit targetPresentation -> Nat)
     : Set₁ where
   constructor orbit-stabilizer-recognition-map
   field
     objectMap : SourceState -> TargetState
 
     orbitMap :
-      Generic.OrbitPresentation.Orbit sourcePresentation ->
-      Generic.OrbitPresentation.Orbit targetPresentation
+      Generic.Orbit sourcePresentation ->
+      Generic.Orbit targetPresentation
 
     orbitBack :
-      Generic.OrbitPresentation.Orbit targetPresentation ->
-      Generic.OrbitPresentation.Orbit sourcePresentation
+      Generic.Orbit targetPresentation ->
+      Generic.Orbit sourcePresentation
 
     objectOrbitPreserved :
       (state : SourceState) ->
       orbitMap
-        (Generic.OrbitPresentation.orbitOf sourcePresentation state)
-      ≡ Generic.OrbitPresentation.orbitOf
+        (Generic.orbitOf sourcePresentation state)
+      ≡ Generic.orbitOf
           targetPresentation
           (objectMap state)
 
     orbitLeftInverse :
-      (orbit : Generic.OrbitPresentation.Orbit sourcePresentation) ->
+      (orbit : Generic.Orbit sourcePresentation) ->
       orbitBack (orbitMap orbit) ≡ orbit
 
     orbitRightInverse :
-      (orbit : Generic.OrbitPresentation.Orbit targetPresentation) ->
+      (orbit : Generic.Orbit targetPresentation) ->
       orbitMap (orbitBack orbit) ≡ orbit
 
     stabilizerSizePreserved :
-      (orbit : Generic.OrbitPresentation.Orbit sourcePresentation) ->
+      (orbit : Generic.Orbit sourcePresentation) ->
       sourceStabilizerSize orbit
       ≡ targetStabilizerSize (orbitMap orbit)
 
@@ -100,7 +101,7 @@ record P3ArithmeticRecognitionTarget
     (arithmeticPresentation :
       Generic.OrbitPresentation arithmeticAction)
     (arithmeticStabilizerSize :
-      Generic.OrbitPresentation.Orbit arithmeticPresentation -> Nat)
+      Generic.Orbit arithmeticPresentation -> Nat)
     : Set₁ where
   constructor p3-arithmetic-recognition-target
   field
@@ -120,7 +121,7 @@ record P2FlipArithmeticRecognitionTarget
     (arithmeticPresentation :
       Generic.OrbitPresentation arithmeticAction)
     (arithmeticStabilizerSize :
-      Generic.OrbitPresentation.Orbit arithmeticPresentation -> Nat)
+      Generic.Orbit arithmeticPresentation -> Nat)
     : Set₁ where
   constructor p2-flip-arithmetic-recognition-target
   field
@@ -140,7 +141,7 @@ record P2RetainedArithmeticRecognitionTarget
     (arithmeticPresentation :
       Generic.OrbitPresentation arithmeticAction)
     (arithmeticStabilizerSize :
-      Generic.OrbitPresentation.Orbit arithmeticPresentation -> Nat)
+      Generic.Orbit arithmeticPresentation -> Nat)
     : Set₁ where
   constructor p2-retained-arithmetic-recognition-target
   field
