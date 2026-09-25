@@ -295,3 +295,5 @@ import DASHI.Physics.Foundations.CMP119AntigravityFiniteHaarStrictPositivityExac
 import DASHI.Physics.Foundations.CMP119AntigravitySU2TraceConventionExact
 import DASHI.Physics.Foundations.CMP119AntigravitySU2FiniteTraceClosureExact
 import DASHI.Physics.Foundations.CMP119SelectedInsertionWilsonGibbsReductionExact
+
+import DASHI.Physics.Foundations.CMP119AntigravityCurvatureF2PositivityExact
