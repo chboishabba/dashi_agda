@@ -35,7 +35,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Membership.Propositional using (_∈_)
-open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
@@ -85,19 +84,6 @@ qEnergyLegTargetFromMatchingQ {alpha = alpha} member qEqual =
   Output.physicalOutputFiberComplete
     (R38.qEnergyLegMember member)
     (trans (Orbit.qEnergyLegOutput alpha) qEqual)
-
-pEnergyLegTargetCharacterization :
-  ∀ {cutoff : Nat} {alpha beta : Physical.PhysicalTriadIncidence} →
-  alpha ∈ Physical.physicalTriadEnumeration cutoff →
-  (Orbit.pEnergyLeg alpha ∈
-      Output.physicalOutputFiber cutoff (Physical.p beta))
-    ×
-  (Physical.p alpha ≡ Physical.p beta)
-pEnergyLegTargetCharacterization member =
-  let target =
-        pEnergyLegTargetFromMatchingP member refl
-  in
-  target , pEnergyLegTargetImpliesMatchingP target
 
 -- The useful exact statement is the pair of directional implications above.
 -- This Boolean records that a fibre-local p-leg transport needs the additional
