@@ -475,3 +475,83 @@ flatIdentityHaarWitnessPaysF2StrictSign = false
 flatIdentityHaarWitnessPaysF2StrictSignIsFalse :
   flatIdentityHaarWitnessPaysF2StrictSign ≡ false
 flatIdentityHaarWitnessPaysF2StrictSignIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- DIRECT REAL PHYSICAL MAX-CUT AFTER FULL-SUPPORT / NONZERO REDUCTIONS
+------------------------------------------------------------------------
+
+data PhysicalAntigravityDirectRealLeaf : Set where
+  weldSelectedRawConnectedNumeratorToCanonicalRealWilsonGibbs :
+    PhysicalAntigravityDirectRealLeaf
+
+  identifyLiteralRealGibbsWeightWithNegativeActionExponential :
+    PhysicalAntigravityDirectRealLeaf
+
+  attachSelectedRealWeightedF2ContinuityAndFullSupport :
+    PhysicalAntigravityDirectRealLeaf
+
+  attachSelectedRenormalizedTraceToPhysicalSU2F2 :
+    PhysicalAntigravityDirectRealLeaf
+
+  weldSelectedActiveConnectedNumeratorToPartitionTimesQuantumTrace :
+    PhysicalAntigravityDirectRealLeaf
+
+canonicalPhysicalAntigravityDirectRealLeaves :
+  List PhysicalAntigravityDirectRealLeaf
+canonicalPhysicalAntigravityDirectRealLeaves =
+  weldSelectedRawConnectedNumeratorToCanonicalRealWilsonGibbs
+  ∷ identifyLiteralRealGibbsWeightWithNegativeActionExponential
+  ∷ attachSelectedRealWeightedF2ContinuityAndFullSupport
+  ∷ attachSelectedRenormalizedTraceToPhysicalSU2F2
+  ∷ weldSelectedActiveConnectedNumeratorToPartitionTimesQuantumTrace
+  ∷ []
+
+partitionStrictSignNeedsPositiveHaarNeighborhood : Bool
+partitionStrictSignNeedsPositiveHaarNeighborhood = false
+
+partitionStrictSignNeedsPositiveHaarNeighborhoodIsFalse :
+  partitionStrictSignNeedsPositiveHaarNeighborhood ≡ false
+partitionStrictSignNeedsPositiveHaarNeighborhoodIsFalse = refl
+
+partitionNonnegativePlusNonzeroCompilerClosed : Bool
+partitionNonnegativePlusNonzeroCompilerClosed = true
+
+partitionNonnegativePlusNonzeroCompilerClosedIsTrue :
+  partitionNonnegativePlusNonzeroCompilerClosed ≡ true
+partitionNonnegativePlusNonzeroCompilerClosedIsTrue = refl
+
+realF2WholeFamilyNonnegativeCompilerClosed : Bool
+realF2WholeFamilyNonnegativeCompilerClosed = true
+
+realF2WholeFamilyNonnegativeCompilerClosedIsTrue :
+  realF2WholeFamilyNonnegativeCompilerClosed ≡ true
+realF2WholeFamilyNonnegativeCompilerClosedIsTrue = refl
+
+realF2PositivePointCompilerClosedOnSameObjectBridge : Bool
+realF2PositivePointCompilerClosedOnSameObjectBridge = true
+
+realF2PositivePointCompilerClosedOnSameObjectBridgeIsTrue :
+  realF2PositivePointCompilerClosedOnSameObjectBridge ≡ true
+realF2PositivePointCompilerClosedOnSameObjectBridgeIsTrue = refl
+
+explicitPositiveRegionObjectRequiredOnPreferredRoute : Bool
+explicitPositiveRegionObjectRequiredOnPreferredRoute = false
+
+explicitPositiveRegionObjectRequiredOnPreferredRouteIsFalse :
+  explicitPositiveRegionObjectRequiredOnPreferredRoute ≡ false
+explicitPositiveRegionObjectRequiredOnPreferredRouteIsFalse = refl
+
+fullSupportStrictIntegralCompilerClosed : Bool
+fullSupportStrictIntegralCompilerClosed = true
+
+fullSupportStrictIntegralCompilerClosedIsTrue :
+  fullSupportStrictIntegralCompilerClosed ≡ true
+fullSupportStrictIntegralCompilerClosedIsTrue = refl
+
+realPhysicalSourceSignCompilerClosedAfterFiveAttachments : Bool
+realPhysicalSourceSignCompilerClosedAfterFiveAttachments = true
+
+realPhysicalSourceSignCompilerClosedAfterFiveAttachmentsIsTrue :
+  realPhysicalSourceSignCompilerClosedAfterFiveAttachments ≡ true
+realPhysicalSourceSignCompilerClosedAfterFiveAttachmentsIsTrue = refl
