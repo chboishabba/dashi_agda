@@ -13,7 +13,7 @@ module DASHI.Physics.YangMills.YangMillsActualGroupFiveBlockConstructorRound570E
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base as ℚ using (ℚ; _*_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -40,7 +40,7 @@ record ActualGroupFiveBlockPhysicalData
     chargeNonnegative :
       ∀ configuration →
       InCertifiedRegion configuration →
-      ℚ.0ℚ ≤ charge configuration
+      0ℚ ≤ charge configuration
 
     raw1Ratio raw2Ratio raw3Ratio raw4Ratio
       green11LowerRatio : ℚ
@@ -90,10 +90,10 @@ asGroupParametricFiveBlock :
     (Structural.LieCarrier structural group)
     (Structural.GroupCarrier structural group)
     (R569.classification quantitative group)
-asGroupParametricFiveBlock data = record
+asGroupParametricFiveBlock {quantitative = quantitative} {group = group} data = record
   { G1.GroupParametricFiveBlockG2Data.quantitativeLiePackage =
       R569.asQuantitativeCompactLiePackage
-        (R569.quantitativeData _ _)
+        (R569.quantitativeData quantitative group)
   ; G1.GroupParametricFiveBlockG2Data.Configuration =
       Configuration data
   ; G1.GroupParametricFiveBlockG2Data.InCertifiedRegion =
