@@ -35,7 +35,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPPartialKleeneFixedPointExact whe
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; _≤_)
 open import Data.Maybe.Base using (Maybe; just)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 ------------------------------------------------------------------------
 -- Partial specializing programming system.
@@ -213,23 +213,12 @@ partialFixedPointTerminationTransfersToBody
     output
     terminates =
   trans
-    (symmetry
+    (sym
       (partialFixedPointProgramCorrect
         compiler
         program
         input))
     (runResult terminates)
-  where
-    symmetry :
-      ∀ {A : Set} {left right : A} →
-      left ≡ right →
-      right ≡ left
-    symmetry equality =
-      Data.Maybe.Base.map-id
-        (Data.Maybe.Base.map (λ value → value) left)
-      where
-        postulateDummy : left ≡ right
-        postulateDummy = equality
 
 ------------------------------------------------------------------------
 -- Size-aware partial system.
