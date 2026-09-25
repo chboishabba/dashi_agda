@@ -25,7 +25,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExa
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Unit using (⊤)
 open import Data.List.Base using (List; length)
 open import Data.Maybe.Base using (Maybe; just; nothing)
@@ -69,6 +69,26 @@ q1WitnessQuotient witness =
     (Closed.strictQuotient
       (proj₁ witness))
 
+q1WitnessGraphCellCount :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  Recurrence.Q1StateWitness state →
+  Nat
+q1WitnessGraphCellCount witness =
+  Quotient.quotientGraphCellCount
+    (q1WitnessQuotient witness)
+
+q1WitnessGraphCellCountExact :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (witness : Recurrence.Q1StateWitness state) →
+  q1WitnessGraphCellCount witness
+  ≡
+  q1WitnessStateCount witness
+    +
+    ((suc (suc zero))
+      * q1WitnessStateCount witness)
+q1WitnessGraphCellCountExact witness =
+  Agda.Builtin.Equality.refl
+
 ------------------------------------------------------------------------
 -- Normalized constructor execution receipt.
 ------------------------------------------------------------------------
@@ -110,7 +130,7 @@ record OperationalQ1ConstructionRun
       List ⊤
 
     operationalAndNextStrict :
-      (q1WitnessStateCount q1Witness + length auxiliaryTrace)
+      (q1WitnessGraphCellCount q1Witness + length auxiliaryTrace)
         +
       Q2.recursiveMeasure
         (Charged.q1WitnessNextState state q1Witness)
@@ -128,8 +148,31 @@ runConstructionCost :
   OperationalQ1ConstructionRun state →
   Nat
 runConstructionCost run =
-  q1WitnessStateCount (q1Witness run)
+  q1WitnessGraphCellCount (q1Witness run)
   + length (auxiliaryTrace run)
+
+graphCellCountBelowRunCost :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : OperationalQ1ConstructionRun state) →
+  q1WitnessGraphCellCount (q1Witness run)
+  ≤
+  runConstructionCost run
+graphCellCountBelowRunCost run =
+  NatP.m≤m+n
+    (q1WitnessGraphCellCount (q1Witness run))
+    (length (auxiliaryTrace run))
+
+stateCountBelowGraphCellCount :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (witness : Recurrence.Q1StateWitness state) →
+  q1WitnessStateCount witness
+  ≤
+  q1WitnessGraphCellCount witness
+stateCountBelowGraphCellCount witness =
+  NatP.m≤m+n
+    (q1WitnessStateCount witness)
+    (Quotient.quotientTransitionCount
+      (q1WitnessQuotient witness))
 
 stateCountBelowRunCost :
   ∀ {state : Q2.BoundedSelfReferenceState}
@@ -138,9 +181,9 @@ stateCountBelowRunCost :
   ≤
   runConstructionCost run
 stateCountBelowRunCost run =
-  NatP.m≤m+n
-    (q1WitnessStateCount (q1Witness run))
-    (length (auxiliaryTrace run))
+  NatP.≤-trans
+    (stateCountBelowGraphCellCount (q1Witness run))
+    (graphCellCountBelowRunCost run)
 
 ------------------------------------------------------------------------
 -- Operational receipt -> previous charged witness.
@@ -189,10 +232,10 @@ operationalConstructorToQ2StepSystem constructor =
 -- Quantitative output-compression threshold.
 ------------------------------------------------------------------------
 
-stateCountPlusNextStrict :
+graphCellCountPlusNextStrict :
   ∀ {state : Q2.BoundedSelfReferenceState}
     (run : OperationalQ1ConstructionRun state) →
-  q1WitnessStateCount (q1Witness run)
+  q1WitnessGraphCellCount (q1Witness run)
     +
     Q2.recursiveMeasure
       (Charged.q1WitnessNextState
@@ -200,13 +243,13 @@ stateCountPlusNextStrict :
         (q1Witness run))
   <
   Q2.recursiveMeasure state
-stateCountPlusNextStrict {state} run =
+graphCellCountPlusNextStrict {state} run =
   NatP.≤-<-trans
     leftBelowOperational
     (operationalAndNextStrict run)
   where
     leftBelowOperational :
-      q1WitnessStateCount (q1Witness run)
+      q1WitnessGraphCellCount (q1Witness run)
         +
         Q2.recursiveMeasure
           (Charged.q1WitnessNextState
@@ -221,7 +264,42 @@ stateCountPlusNextStrict {state} run =
             (q1Witness run))
     leftBelowOperational =
       NatP.+-mono-≤
-        (stateCountBelowRunCost run)
+        (graphCellCountBelowRunCost run)
+        NatP.≤-refl
+
+stateCountPlusNextStrict :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : OperationalQ1ConstructionRun state) →
+  q1WitnessStateCount (q1Witness run)
+    +
+    Q2.recursiveMeasure
+      (Charged.q1WitnessNextState
+        state
+        (q1Witness run))
+  <
+  Q2.recursiveMeasure state
+stateCountPlusNextStrict {state} run =
+  NatP.≤-<-trans
+    stateAndNextBelowGraphAndNext
+    (graphCellCountPlusNextStrict run)
+  where
+    stateAndNextBelowGraphAndNext :
+      q1WitnessStateCount (q1Witness run)
+        +
+        Q2.recursiveMeasure
+          (Charged.q1WitnessNextState
+            state
+            (q1Witness run))
+      ≤
+      q1WitnessGraphCellCount (q1Witness run)
+        +
+        Q2.recursiveMeasure
+          (Charged.q1WitnessNextState
+            state
+            (q1Witness run))
+    stateAndNextBelowGraphAndNext =
+      NatP.+-mono-≤
+        (stateCountBelowGraphCellCount (q1Witness run))
         NatP.≤-refl
 
 stateCountStrictlyBelowCurrentMeasure :
@@ -260,6 +338,22 @@ stateCountPlusLiteralAuthorityPayloadStrict :
 stateCountPlusLiteralAuthorityPayloadStrict run =
   stateCountPlusNextStrict run
 
+graphCellCountPlusLiteralAuthorityPayloadStrict :
+  ∀ {state : Q2.BoundedSelfReferenceState}
+    (run : OperationalQ1ConstructionRun state) →
+  q1WitnessGraphCellCount (q1Witness run)
+    +
+    (Size.formulaNodeCount
+      (Authority.closedQuotientSATAuthority
+        (proj₁ (q1Witness run)))
+      +
+      (Q2.programCodeSize state
+        + Q2.rebindingOverhead state))
+  <
+  Q2.recursiveMeasure state
+graphCellCountPlusLiteralAuthorityPayloadStrict run =
+  graphCellCountPlusNextStrict run
+
 ------------------------------------------------------------------------
 -- CLAY CONSEQUENCE
 --
@@ -273,7 +367,9 @@ stateCountPlusLiteralAuthorityPayloadStrict run =
 --
 -- Any successful live step must emit its quotient table and hence satisfy:
 --
---   stateCount(Q) + measure(next(Q)) < measure(current).
+--   graphCells(Q) + measure(next(Q)) < measure(current),
+--
+-- where graphCells(Q) = stateCount(Q) + 2 * stateCount(Q).
 --
 -- Since next(Q) literally contains the compiled authority and the
 -- quotation/rebinding payload, aggressive state compression and cheap class
