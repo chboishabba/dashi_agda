@@ -696,6 +696,17 @@ class SourceIndex:
         paths = tuple(Path(item.path) for item in import_receipts)
         self.profiler.count("cold_workers", workers)
         self.profiler.count("cold_modules_discovered", len(paths))
+        interface_files_parsed = sum(
+            item.files_parsed for item in import_receipts
+        )
+        self.profiler.count(
+            "cold_interface_files_parsed",
+            interface_files_parsed,
+        )
+        self.profiler.add_ns(
+            "cold.interface_parse",
+            sum(item.parse_ns for item in import_receipts),
+        )
 
         with self.profiler.stage("cold.parallel_diagnostics"):
             batch_receipts = diagnose_paths(
@@ -746,6 +757,17 @@ class SourceIndex:
             "cold_parse_amplification_milli",
             round(
                 1000 * worker_files_parsed / max(1, len(paths))
+            ),
+        )
+        total_files_parsed = interface_files_parsed + worker_files_parsed
+        self.profiler.count(
+            "cold_total_files_parsed",
+            total_files_parsed,
+        )
+        self.profiler.count(
+            "cold_total_parse_amplification_milli",
+            round(
+                1000 * total_files_parsed / max(1, len(paths))
             ),
         )
         self.profiler.count(
