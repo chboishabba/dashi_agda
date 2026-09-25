@@ -34,27 +34,27 @@ import DASHI.Physics.Closure.NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Ex
 
 positiveComponentMassDegree : Nat
 positiveComponentMassDegree =
-  Signed.forcingNormSquareDegree
+  R289.companionMassDegree
 
 signedCombinedCommutatorDegree : Nat
 signedCombinedCommutatorDegree =
-  Signed.signedForcingCompanionCrossDegree
+  R289.mixedForcingWorkDegree R289.nonlinearModalForcingDegree
 
-positiveComponentMassDegreeIsSix : positiveComponentMassDegree ≡ 6
-positiveComponentMassDegreeIsSix =
-  Signed.forcingNormSquareIsDegreeSix
+positiveComponentMassDegreeIsFour : positiveComponentMassDegree ≡ 4
+positiveComponentMassDegreeIsFour =
+  R289.companionMassIsQuartic
 
 signedCombinedCommutatorDegreeIsFive :
   signedCombinedCommutatorDegree ≡ 5
 signedCombinedCommutatorDegreeIsFive =
-  Signed.signedCrossIsDegreeFive
+  R289.nonlinearMixedForcingWorkIsQuintic
 
 ------------------------------------------------------------------------
 -- NOTE:
--- The currently available ED theorem is on a positive norm-square carrier,
--- not the signed R691 scalar.  Its exact degree is the positive forcing-norm
--- diagnostic degree in the current homogeneity audit.  The essential fact for
--- routing is simply that the two carriers are different and no same-object
+-- The currently available ED theorem is on the positive quartic mass of the
+-- quadratic four-helicity commutator components, not the signed quintic R691
+-- forcing x quadratic-companion scalar.  The essential fact for routing is
+-- that the two carriers have different amplitude degree and no same-object
 -- transport theorem exists.
 ------------------------------------------------------------------------
 
