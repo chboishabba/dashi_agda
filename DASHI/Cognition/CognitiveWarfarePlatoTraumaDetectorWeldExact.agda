@@ -30,16 +30,20 @@ module DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Data.Empty using (⊥)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Product using (_×_; _,_; proj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
+import DASHI.Core.ResourceIndexedObserverRefinementExact as Resource
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact as Detection
 import DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact as Cave
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 import DASHI.Biology.EmbodiedCausalConeFeedbackExact as Cone
 import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact as Trialectic
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact as MemoryCommand
+import DASHI.Cognition.CaveTraumaNonErasingReopeningExact as Reopening
 
 ------------------------------------------------------------------------
 -- Finite product-observer carrier.
@@ -199,6 +203,50 @@ memoryPreservingCommandRevision :
   MemoryCommand.MemoryCommandSeparationWitness memory
 memoryPreservingCommandRevision =
   Cave.memoryCanBePreservedWhileCommandChanges
+
+nonErasingCorrectiveReopening :
+  ∀ memory →
+  Reopening.NonErasingCorrectiveReopening memory
+nonErasingCorrectiveReopening =
+  Reopening.canonicalNonErasingCorrectiveReopening
+
+------------------------------------------------------------------------
+-- Resource-indexed refinement.
+--
+-- The provenance-enriched detector is structurally better for the provenance
+-- consumer, but that does not imply it fits the currently declared budget.
+------------------------------------------------------------------------
+
+contentConeCost : Nat
+contentConeCost = 2
+
+fullDetectorCost : Nat
+fullDetectorCost = 3
+
+detectorBudget : Nat
+detectorBudget = 2
+
+contentConeWithinBudget :
+  Resource.WithinBudget detectorBudget contentConeCost
+contentConeWithinBudget =
+  s≤s (s≤s z≤n)
+
+fullDetectorOutsideBudget :
+  Resource.WithinBudget detectorBudget fullDetectorCost → ⊥
+fullDetectorOutsideBudget ()
+
+provenanceRefinementMayExceedBudget :
+  Resource.RefinementBudgetFailure
+    contentConeObserver
+    fullDetectorObserver
+provenanceRefinementMayExceedBudget =
+  Resource.refinement-budget-failure
+    fullDetectorStrictlyRefinesContentCone
+    detectorBudget
+    contentConeCost
+    fullDetectorCost
+    contentConeWithinBudget
+    fullDetectorOutsideBudget
 
 ------------------------------------------------------------------------
 -- No-promotion permissions.
