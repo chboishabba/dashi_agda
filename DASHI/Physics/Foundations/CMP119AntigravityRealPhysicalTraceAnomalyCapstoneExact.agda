@@ -241,3 +241,27 @@ selectedActiveConnectedNumeratorNegative
         division laws strict embedding convention gibbs exponential fullSupport input)
       (selectedQuantumTraceNegative
         division laws strict embedding convention gibbs exponential fullSupport input))
+
+
+------------------------------------------------------------------------
+-- SEMANTIC FIREWALL
+--
+-- Historical compatibility name:
+--   selectedActiveConnectedNumerator
+--
+-- denotes Z times the selected renormalized TRACE numerator in this module.
+-- It is NOT, without additional T00 information, the Lorentzian active/focusing
+-- contraction rho + p_x + p_y + p_z.
+------------------------------------------------------------------------
+
+selectedActiveConnectedNumeratorIsPhysicalLorentzianActiveStress : Agda.Builtin.Bool.Bool
+selectedActiveConnectedNumeratorIsPhysicalLorentzianActiveStress =
+  Agda.Builtin.Bool.false
+
+traceAnomalyCapstoneAloneClosesPositiveGRepulsionSource : Agda.Builtin.Bool.Bool
+traceAnomalyCapstoneAloneClosesPositiveGRepulsionSource =
+  Agda.Builtin.Bool.false
+
+timelikeComponentControlRequiredAfterTraceAnomaly : Agda.Builtin.Bool.Bool
+timelikeComponentControlRequiredAfterTraceAnomaly =
+  Agda.Builtin.Bool.true
