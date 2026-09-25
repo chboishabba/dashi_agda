@@ -2,10 +2,12 @@
 module DASHI.Physics.Foundations.CMP119SelectedWilsonDiagonalCoordinateAnchorExact where
 
 open import Data.Rational.Base using (ℚ; _+_)
-open import Relation.Binary.PropositionalEquality using (_≡_; cong; trans)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans)
 
 import DASHI.Physics.Foundations.CMP119SelectedWilsonGibbsAnchorExact as Selected
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact as Wilson
+import DASHI.Physics.Foundations.CMP119PhysicalFiniteMeasureNZDNDZExact as NZ
+import DASHI.Physics.Foundations.CMP119GibbsFiniteMeasureNZDNDZReductionExact as Gibbs
 import DASHI.Physics.Foundations.CMP119LiteralFiniteMeasureStressSourceConstructorExact as FiniteSource
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
@@ -107,8 +109,8 @@ module _
           Selected.selectedLiteralFiniteMeasure
             selected measureWeld wilsonInsertion anchor
       in
-      DASHI.Physics.Foundations.CMP119PhysicalFiniteMeasureNZDNDZExact.connectedCrossNumerator
-        (DASHI.Physics.Foundations.CMP119GibbsFiniteMeasureNZDNDZReductionExact.asPhysicalMetricStressData
+      NZ.connectedCrossNumerator
+        (Gibbs.asPhysicalMetricStressData
           (Wilson.asGibbsMetricInsertionData
             {measure = measure}
             wilsonInsertion))
@@ -160,4 +162,4 @@ module _
           coordinateAnchor background K.component22
             | selectedComponentIsWilsonComponent
           coordinateAnchor background K.component33 =
-      Relation.Binary.PropositionalEquality.refl
+      refl
