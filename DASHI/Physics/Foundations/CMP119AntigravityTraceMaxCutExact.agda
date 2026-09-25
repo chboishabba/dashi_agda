@@ -837,3 +837,50 @@ cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMath = true
 cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMathIsTrue :
   cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMath ≡ true
 cmp119GenericObservableErrorCompilerClosesAnomalyConvergenceMathIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- EVENTUAL-SIGN / R129-F2 RECUT
+------------------------------------------------------------------------
+
+selectedCutoffMarginPrimitiveAfterVanishingErrors : Bool
+selectedCutoffMarginPrimitiveAfterVanishingErrors = false
+
+selectedCutoffMarginPrimitiveAfterVanishingErrorsIsFalse :
+  selectedCutoffMarginPrimitiveAfterVanishingErrors ≡ false
+selectedCutoffMarginPrimitiveAfterVanishingErrorsIsFalse = refl
+
+eventualFiniteTraceAndF2SignsCompilerClosed : Bool
+eventualFiniteTraceAndF2SignsCompilerClosed = true
+
+eventualFiniteTraceAndF2SignsCompilerClosedIsTrue :
+  eventualFiniteTraceAndF2SignsCompilerClosed ≡ true
+eventualFiniteTraceAndF2SignsCompilerClosedIsTrue = refl
+
+r129CompositeCompletionForSelectedF2AlreadyOwned : Bool
+r129CompositeCompletionForSelectedF2AlreadyOwned = true
+
+r129CompositeCompletionForSelectedF2AlreadyOwnedIsTrue :
+  r129CompositeCompletionForSelectedF2AlreadyOwned ≡ true
+r129CompositeCompletionForSelectedF2AlreadyOwnedIsTrue = refl
+
+selectedF2R129ToPinnedLocalCSemanticAttachmentStillRequired : Bool
+selectedF2R129ToPinnedLocalCSemanticAttachmentStillRequired = true
+
+selectedF2R129ToPinnedLocalCSemanticAttachmentStillRequiredIsTrue :
+  selectedF2R129ToPinnedLocalCSemanticAttachmentStillRequired ≡ true
+selectedF2R129ToPinnedLocalCSemanticAttachmentStillRequiredIsTrue = refl
+
+literalPhysicalExpectationToFactorizedCMP119ExpectationStillRequired : Bool
+literalPhysicalExpectationToFactorizedCMP119ExpectationStillRequired = true
+
+literalPhysicalExpectationToFactorizedCMP119ExpectationStillRequiredIsTrue :
+  literalPhysicalExpectationToFactorizedCMP119ExpectationStillRequired ≡ true
+literalPhysicalExpectationToFactorizedCMP119ExpectationStillRequiredIsTrue = refl
+
+singleWeylTraceDirectionRequiredOnOpaquePairingScalar : Bool
+singleWeylTraceDirectionRequiredOnOpaquePairingScalar = false
+
+singleWeylTraceDirectionRequiredOnOpaquePairingScalarIsFalse :
+  singleWeylTraceDirectionRequiredOnOpaquePairingScalar ≡ false
+singleWeylTraceDirectionRequiredOnOpaquePairingScalarIsFalse = refl
