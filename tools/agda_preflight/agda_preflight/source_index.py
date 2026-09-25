@@ -11,6 +11,7 @@ from typing import Dict, Iterable, List, Optional, Set, Tuple
 from .checker import Checker, Diagnostic
 from .fixes import SuggestedFix, TextEdit
 from .timing import Profiler
+from .cold_bootstrap import discover_closure, diagnose_paths, worker_count
 
 
 SCHEMA_VERSION = "2"
@@ -56,10 +57,12 @@ class SourceIndex:
         path: Path,
         *,
         profiler: Optional[Profiler] = None,
+        jobs: int = 1,
     ) -> None:
         self.root = root.resolve()
         self.path = path if path.is_absolute() else self.root / path
         self.profiler = profiler or Profiler()
+        self.jobs = jobs
         self._checker: Optional[Checker] = None
         self._visiting: Set[Path] = set()
         self._states: Dict[Path, _ModuleState] = {}
@@ -418,6 +421,8 @@ class SourceIndex:
         dependency_fingerprint: str,
         imports: Iterable[str],
         diagnostics: List[Diagnostic],
+        *,
+        commit: bool = True,
     ) -> None:
         relative = self._relative(path)
         payload = json.dumps(
@@ -468,7 +473,8 @@ class SourceIndex:
                 "INSERT INTO imports(importer_path, imported_module) VALUES(?, ?)",
                 [(relative, module) for module in sorted(set(imports))],
             )
-            self.connection.commit()
+            if commit:
+                self.connection.commit()
 
     def _cached_closure(self, target: Path) -> Optional[List[sqlite3.Row]]:
         target_rel = self._relative(target)
@@ -676,6 +682,127 @@ class SourceIndex:
         visit(root_state)
         return [result[name] for name in sorted(result)]
 
+    def _parallel_bootstrap(self, target: Path) -> DiagnoseResult:
+        workers = worker_count(self.jobs)
+        with self.profiler.stage("cold.import_discovery"):
+            import_receipts = discover_closure(
+                self.root,
+                target,
+                jobs=workers,
+            )
+        paths = tuple(Path(item.path) for item in import_receipts)
+        self.profiler.count("cold_workers", workers)
+        self.profiler.count("cold_modules_discovered", len(paths))
+
+        with self.profiler.stage("cold.parallel_diagnostics"):
+            receipts = diagnose_paths(
+                self.root,
+                paths,
+                jobs=workers,
+            )
+        self.profiler.count("files_parsed", len(receipts))
+        self.profiler.count("diagnostics_recomputed", len(receipts))
+
+        by_module = {
+            receipt.module_name: receipt
+            for receipt in receipts
+        }
+        api_memo: Dict[str, str] = {}
+
+        def resolve_api(module: str, visiting: Set[str]) -> str:
+            cached = api_memo.get(module)
+            if cached is not None:
+                return cached
+            receipt = by_module[module]
+            if module in visiting:
+                # Public re-export cycles are rare; use the local API base at
+                # the cycle edge so the resulting fingerprint stays finite and
+                # deterministic under sorted traversal.
+                return receipt.api_base_hash
+            nested = set(visiting)
+            nested.add(module)
+            value = self._api_fingerprint(
+                receipt.api_base_hash,
+                (
+                    (dependency, resolve_api(dependency, nested))
+                    for dependency in sorted(receipt.public_imports)
+                    if dependency in by_module
+                ),
+            )
+            api_memo[module] = value
+            return value
+
+        for module in sorted(by_module):
+            resolve_api(module, set())
+
+        states: Dict[str, _ModuleState] = {}
+        all_diagnostics: List[Diagnostic] = []
+
+        with self.profiler.stage("db.batch_write"):
+            self.connection.execute("BEGIN")
+            try:
+                for module in sorted(by_module):
+                    receipt = by_module[module]
+                    api_hash = api_memo[module]
+                    dependency_fingerprint = self._dependency_fingerprint(
+                        (
+                            dependency,
+                            api_memo[dependency],
+                        )
+                        for dependency in receipt.imports
+                        if dependency in api_memo
+                    )
+                    diagnostics = [
+                        self._diagnostic_from_dict(item)
+                        for item in receipt.diagnostics
+                    ]
+                    path = Path(receipt.path)
+                    self._store(
+                        path,
+                        receipt.module_name,
+                        (receipt.mtime_ns, receipt.size),
+                        receipt.source_hash,
+                        receipt.api_base_hash,
+                        api_hash,
+                        receipt.public_imports,
+                        dependency_fingerprint,
+                        receipt.imports,
+                        diagnostics,
+                        commit=False,
+                    )
+                    state = _ModuleState(
+                        path=path,
+                        module_name=receipt.module_name,
+                        source_hash=receipt.source_hash,
+                        api_hash=api_hash,
+                        imports=receipt.imports,
+                        public_imports=receipt.public_imports,
+                        diagnostics=diagnostics,
+                    )
+                    states[module] = state
+                    self._states[path.resolve()] = state
+                    all_diagnostics.extend(diagnostics)
+                self.connection.commit()
+            except Exception:
+                self.connection.rollback()
+                raise
+
+        self.profiler.count("modules_in_closure", len(states))
+        return DiagnoseResult(
+            diagnostics=sorted(
+                all_diagnostics,
+                key=lambda item: (
+                    str(item.path),
+                    item.line,
+                    item.column,
+                    item.code,
+                ),
+            ),
+            modules=tuple(sorted(states)),
+            cache_hit=False,
+        )
+
+
     def diagnose(self, target: Path) -> DiagnoseResult:
         target = target if target.is_absolute() else self.root / target
         target = target.resolve()
@@ -683,6 +810,9 @@ class SourceIndex:
         warm = self._warm_result(target)
         if warm is not None:
             return warm
+
+        if self.jobs != 1 and self._row(target) is None:
+            return self._parallel_bootstrap(target)
 
         with self.profiler.stage("closure.refresh"):
             states = self._collect_states(target)
