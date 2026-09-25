@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.BalabanEnumeratedMarkedKoteckyPreissExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List)
 open import Data.Rational.Base using (ℚ)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact as TwoMark
 import DASHI.Physics.YangMills.BalabanClayT5KoteckyPreissTwoWeightPrimaryExact as KP
@@ -55,9 +56,6 @@ enumeratedLogPartitionExpansion :
       (KP.clusterFunctional kp)
       (clusters enumerated volume))
 enumeratedLogPartitionExpansion {kp = kp} enumerated conclusion volume =
-  let
-    open import Relation.Binary.PropositionalEquality using (trans)
-  in
   trans
     (KP.logarithmClusterExpansion conclusion volume)
     (clusterExpansionSumIsEnumeration enumerated volume)
