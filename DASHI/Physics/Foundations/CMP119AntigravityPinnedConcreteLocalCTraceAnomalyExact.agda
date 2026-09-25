@@ -1,6 +1,9 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityPinnedConcreteLocalCTraceAnomalyExact where
 
+open import Agda.Builtin.Equality using (_≡_)
+open import DASHI.Foundations.RealAnalysisAxioms using (_*ℝ_)
+
 import DASHI.Physics.Foundations.CMP119AntigravityPinnedLocalCTraceAnomalyBridgeExact as Bridge
 import DASHI.Physics.Foundations.CMP119AntigravityRealSU2TraceClosureExact as SU2Trace
 import DASHI.Physics.YangMills.YangMillsClayPinnedCMP119ConcreteLocalCExact as Concrete
@@ -79,9 +82,9 @@ pinnedCMP119FiniteTraceIsSU2BetaF2ViaConcreteLocalC :
     (weld :
       PinnedCMP119FiniteToConcreteLocalCTraceAnomalyWeld readout) →
   Bridge.selectedFiniteQuantumTraceNumerator weld
-  Agda.Builtin.Equality.≡
+  ≡
   SU2Trace.realSU2TraceCoefficient embedding convention
-  DASHI.Foundations.RealAnalysisAxioms.*ℝ
+  *ℝ
   Bridge.selectedFiniteF2Numerator weld
 pinnedCMP119FiniteTraceIsSU2BetaF2ViaConcreteLocalC =
   Bridge.finiteCMP119TraceIsSU2BetaF2ViaPinnedLocalC
