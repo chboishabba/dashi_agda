@@ -1,7 +1,7 @@
 module DASHI.Moonshine.OggSSP369RecognitionFunctorObligationExact where
 
 ------------------------------------------------------------------------
--- OGG / SSP SMALL-CHARACTERISTIC -> 369 RECOGNITION FUNCTOR OBLIGATION
+-- OGG / SSP SMALL-CHARACTERISTIC REVERSE-COMPATIBILITY FUNCTOR OBLIGATION
 --
 -- DASHI CONTRIBUTION / OPEN RECOGNITION CUT
 --
@@ -12,11 +12,20 @@ module DASHI.Moonshine.OggSSP369RecognitionFunctorObligationExact where
 --   p=2 : strict-sheet x five-orbit carrier // C2
 --   p=2 : retained-orientation discrete groupoid
 --
--- What remains open is construction of the arithmetic/Fricke target groupoid
--- and a functor into a 369 presentation satisfying the exact orbit/stabilizer
--- recognition package.
+-- This owner is now explicitly the REVERSE compatibility direction:
 --
--- No cardinality equality is promoted to recognition.
+--   G_p^369  --->  G_p^arith.
+--
+-- The canonical live recognition direction requested by the programme is
+--
+--   G_p^arith ---> G_p^369
+--
+-- and is owned separately by OggSSPArithmeticTo369RecognitionExact.
+--
+-- What remains open here is construction of an arithmetic/Fricke target
+-- groupoid compatible with the already-owned 369 action groupoids.
+-- No cardinality equality and no reverse compatibility witness is promoted
+-- to the canonical arithmetic->369 recognition theorem.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -33,6 +42,7 @@ import DASHI.Moonshine.OggSSPSmallCharacteristicResidualGroupoidExact as Small
 import DASHI.Moonshine.OggSSPSmallCharacteristicResidualCodecExact as Codec
 import DASHI.Moonshine.OggSSPSmallCharacteristicCodecIndexedRecognitionExact as LaneCodec
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
+import DASHI.Moonshine.OggSSPArithmeticTo369RecognitionExact as Forward
 
 ------------------------------------------------------------------------
 -- 1. Generic target obligation for one already-owned source action groupoid.
@@ -351,6 +361,8 @@ record OggSSP369RecognitionFunctorBoundary : Set where
     fullRecognitionRequiresStabilizerPreservationReflection : Bool
     retainedOrientationBranchRequiresOrientationProvenance : Bool
     externalArithmeticAttributedUpstream : Bool
+    thisOwnerIsReverseCompatibilitySurface : Bool
+    canonicalArithmeticTo369DirectionOwnedSeparately : Bool
 
 canonicalOggSSP369RecognitionFunctorBoundary :
   OggSSP369RecognitionFunctorBoundary
