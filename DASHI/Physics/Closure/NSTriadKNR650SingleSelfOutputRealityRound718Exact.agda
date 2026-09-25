@@ -45,8 +45,11 @@ import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as He
 import DASHI.Physics.Closure.NSTriadKNHelicitySignNormalizedCurlRound142Exact as R142
 import DASHI.Physics.Closure.NSTriadKNLiteralViscousQuadraticCoefficientRound30Exact as Field30
 import DASHI.Physics.Closure.NSTriadKNMixedHelicityFixedOutputSwapRound224Exact as R224
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNComplex3ScalarTripleOrbitRound93Exact as Triple
 import DASHI.Physics.Closure.NSTriadKNWaleffeOutputHelicityGramRound287Exact as R287
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
+import DASHI.Physics.Closure.NSTriadKNSummedProjectedNonlinearityRealityRound35Exact as SummedReality
 import DASHI.Physics.Closure.NSTriadKNR650GlobalCommutatorNestedTriadExpansionRound694Exact as R694
 import DASHI.Physics.Closure.NSTriadKNR650SingleSelfOutputPairingCollapseRound717Exact as R717
 
@@ -111,7 +114,7 @@ module OutputReality
             L Helical.minus q (velocity q))
     in
     trans
-      (cong₂ Triple.Cross.complex3Cross plusReality minusReality)
+      (cong₂ Cross.complex3Cross plusReality minusReality)
       (Triple.crossConjugate plusP minusQ)
 
   foldConjugate :
@@ -124,9 +127,7 @@ module OutputReality
       (λ tau → value (FibrePerm.canonicalConjugate tau)) items
     ≡ C3.complex3Conjugate (R224.foldVector value items)
   foldConjugate value pointwise [] =
-    sym
-      (let open import DASHI.Physics.Closure.NSTriadKNSummedProjectedNonlinearityRealityRound35Exact
-       in complex3ConjugateZero)
+    sym SummedReality.complex3ConjugateZero
   foldConjugate value pointwise (tau ∷ rest) =
     trans
       (cong₂ C3.complex3Add
@@ -158,14 +159,14 @@ module OutputReality
 
   coherentWorkConjugateBoth :
     (left right : C3.Complex3 R694.F) →
-    Out.One.Carrier.Split.Full.Nested.Base.Work.coherentWork
+    Work.coherentWork
       (C3.complex3Conjugate left)
       (C3.complex3Conjugate right)
     ≡
-    Out.One.Carrier.Split.Full.Nested.Base.Work.coherentWork left right
+    Work.coherentWork left right
   coherentWorkConjugateBoth left right =
     cong
-      (Out.One.Carrier.Split.Full.Nested.Base.Work.two *_)
+      (Work.two *_)
       (R287.realHermitianCrossConjugateBoth left right)
 
   realityPairingIsEven :
@@ -173,11 +174,11 @@ module OutputReality
     (selfReality :
       Out.selfFold (Z3.negateMode output)
       ≡ C3.complex3Conjugate (Out.selfFold output)) →
-    Out.One.Carrier.Split.Full.Nested.Base.Work.coherentWork
+    Work.coherentWork
       (Out.mixedFold (Z3.negateMode output))
       (Out.selfFold (Z3.negateMode output))
     ≡
-    Out.One.Carrier.Split.Full.Nested.Base.Work.coherentWork
+    Work.coherentWork
       (Out.mixedFold output)
       (Out.selfFold output)
   realityPairingIsEven output selfReality
