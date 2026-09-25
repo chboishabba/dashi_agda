@@ -703,6 +703,10 @@ class SourceIndex:
             "cold_interface_files_parsed",
             interface_files_parsed,
         )
+        self.profiler.count(
+            "files_parsed",
+            interface_files_parsed,
+        )
         self.profiler.add_ns(
             "cold.interface_parse",
             sum(item.parse_ns for item in import_receipts),
@@ -773,6 +777,10 @@ class SourceIndex:
         self.profiler.count(
             "cold_unpredicted_parse_overhead",
             max(0, worker_files_parsed - predicted_surface),
+        )
+        self.profiler.count(
+            "cold_interface_parse_savings",
+            max(0, predicted_surface - worker_files_parsed),
         )
         self.profiler.add_ns(
             "cold.worker_parse",
