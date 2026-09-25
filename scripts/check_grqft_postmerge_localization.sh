@@ -73,6 +73,10 @@ files=(
   DASHI/Physics/Foundations/CMP119ClassicalWilsonDiagonalMetricVariationExact.agda
   DASHI/Physics/Foundations/CMP119ClassicalWilsonTenMetricVariationExact.agda
   DASHI/Physics/Foundations/CMP119ClassicalCurvatureTenMetricVariationExact.agda
+  DASHI/Physics/Foundations/CMP119ClassicalCurvatureStressInsertionExact.agda
+  DASHI/Physics/Foundations/CMP119FlatSide4CurvatureStressExact.agda
+  DASHI/Physics/Foundations/CMP119NormalizedTargetTraceSplitExact.agda
+  DASHI/Physics/Closure/W4YMStressEnergyFromCurvatureSixExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeExact.agda
   DASHI/Physics/Foundations/CMP119PinnedStressMetricRepresentationBridgeValidation.agda
   DASHI/Physics/Closure/DrellYanRatioCancellationBoundaryExact.agda
