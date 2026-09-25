@@ -284,3 +284,6 @@ import DASHI.Physics.Foundations.CMP119AntigravityBetaTraceQuantumClosureExact
 import DASHI.Physics.Foundations.CMP119AntigravityPhysicalEinsteinCalibrationExact
 
 import DASHI.Physics.Foundations.CMP119SelectedWilsonDiagonalCoordinateAnchorExact
+
+import DASHI.Physics.Foundations.CMP119SymmetricCanonicalMetricRechartExact
+import DASHI.Physics.Foundations.CMP119SymmetricWilsonGibbsAnchorConstructorExact
