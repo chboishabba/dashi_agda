@@ -30,7 +30,7 @@ module DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₂)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
