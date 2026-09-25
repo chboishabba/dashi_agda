@@ -1486,3 +1486,100 @@ fixedCoupledSignedHighTransportedIntoAgdaKernelHere = false
 fixedCoupledSignedHighInterpretation : String
 fixedCoupledSignedHighInterpretation =
   "The preferred RH high cut is now one fixed signed scalar inequality. Lean removes the unnecessary absolute value from the finite compensation predicate, proves the closed canonical local literal source stabilizes exactly for every centered exhaustion radius n>h0 including the possible left-endpoint atom, exposes the exact correction between the paired-Abel local subtraction and the literal local pair subtraction, and collapses the resulting fixed carrier to the canonical literal scalar H_W = one half times [global off-ordinate signed literal pair-source tsum minus canonical stabilized local literal source minus the full theorem-bearing mu/Gamma ordinate integral]. Thus no exhaustion index, Abel boundary, far surrogate, or absolute value remains in the preferred theorem interface. The selected canonical signed high predicate compiles directly to contradiction. The only new mathematics still open is the one-sided quantitative bound H_W < terminalResidualMargin; no Agda-native replay is claimed."
+
+
+------------------------------------------------------------------------
+-- CANONICAL LITERAL FAR TSUM RECUT
+--
+-- Lean removes the last global-minus-local bookkeeping subtraction from the
+-- preferred fixed high scalar.
+--
+-- The canonical local indicator is finitely supported inside the canonical
+-- centered exhaustion finset.  The global off-ordinate source is already
+-- summable.  Hence the exact pointwise partition
+--
+--   literalOffOrdSource
+--     = canonicalLocalExactTerm + canonicalFarExactTerm
+--
+-- sums to
+--
+--   global off-ordinate pair source
+--     = canonicalLiteralLocalExact
+--       + canonicalLiteralFarPairSource.
+--
+-- Substituting this into the fixed scalar cancels the stabilized local term
+-- exactly and gives
+--
+--   H_W
+--     = 1/2 *
+--       ( canonicalLiteralFarPairSource
+--         - integral Psi_t(x) mu(x) dx ).
+--
+-- Thus the preferred analytic theorem is now literally a one-sided estimate
+-- for the signed canonical-far zero source against the exact theorem-bearing
+-- mu/Gamma pairing.  There is no exhaustion variable, no Abel boundary term,
+-- no global-minus-local subtraction, and no absolute value in the interface.
+--
+-- Reapplying the short-support explicit formula does not close this theorem:
+-- the no-prime and signed-pole-cancellation facts are already consumed in the
+-- identity completedSignedResidual = combinedCluster.  Using that identity
+-- again only cycles back to the target cluster inequality.
+------------------------------------------------------------------------
+
+data CanonicalLiteralFarTsumCoordinate : Set where
+  canonicalLocalIndicatorSummable :
+    CanonicalLiteralFarTsumCoordinate
+  canonicalLocalIndicatorTsumStable :
+    CanonicalLiteralFarTsumCoordinate
+  canonicalFarIndicatorSummable :
+    CanonicalLiteralFarTsumCoordinate
+  globalOffOrdLocalFarTsumSplit :
+    CanonicalLiteralFarTsumCoordinate
+  signedPairSourceLocalFarTsumSplit :
+    CanonicalLiteralFarTsumCoordinate
+  fixedHighResidualLiteralFarNormalForm :
+    CanonicalLiteralFarTsumCoordinate
+  literalFarHighCutEquivalence :
+    CanonicalLiteralFarTsumCoordinate
+  literalFarSignedHighEstimate :
+    CanonicalLiteralFarTsumCoordinate
+
+canonicalLiteralFarTsumStatus :
+  CanonicalLiteralFarTsumCoordinate -> V4H4Status
+canonicalLiteralFarTsumStatus canonicalLocalIndicatorSummable =
+  leanSourceWrittenDonor
+canonicalLiteralFarTsumStatus canonicalLocalIndicatorTsumStable =
+  leanSourceWrittenDonor
+canonicalLiteralFarTsumStatus canonicalFarIndicatorSummable =
+  leanSourceWrittenDonor
+canonicalLiteralFarTsumStatus globalOffOrdLocalFarTsumSplit =
+  leanSourceWrittenDonor
+canonicalLiteralFarTsumStatus signedPairSourceLocalFarTsumSplit =
+  leanSourceWrittenDonor
+canonicalLiteralFarTsumStatus fixedHighResidualLiteralFarNormalForm =
+  leanSourceWrittenDonor
+canonicalLiteralFarTsumStatus literalFarHighCutEquivalence =
+  leanSourceWrittenDonor
+canonicalLiteralFarTsumStatus literalFarSignedHighEstimate =
+  openAnalyticObstruction
+
+canonicalLiteralFarNormalFormIsSourceWritten :
+  canonicalLiteralFarTsumStatus fixedHighResidualLiteralFarNormalForm
+    ≡ leanSourceWrittenDonor
+canonicalLiteralFarNormalFormIsSourceWritten = refl
+
+literalFarSignedHighEstimateRemainsOpen :
+  canonicalLiteralFarTsumStatus literalFarSignedHighEstimate
+    ≡ openAnalyticObstruction
+literalFarSignedHighEstimateRemainsOpen = refl
+
+canonicalLiteralFarTsumLeanDonorHead : String
+canonicalLiteralFarTsumLeanDonorHead =
+  "7bd411fd598177d075fefdc45be1abaecf6cc020"
+
+canonicalLiteralFarTsumTransportedIntoAgdaKernelHere : Bool
+canonicalLiteralFarTsumTransportedIntoAgdaKernelHere = false
+
+canonicalLiteralFarTsumInterpretation : String
+canonicalLiteralFarTsumInterpretation =
+  "Lean source-writes the exact summable partition of the global off-ordinate literal pair source into the stabilized canonical local term plus one canonical far indicator tsum, then cancels the local term from the preferred fixed high scalar. The Clay-facing high coordinate is therefore H_W = (1/2)*(canonicalLiteralFarPairSource - integral Psi_t*mu). This is a signed one-sided theorem on the literal far zero carrier itself: no finite exhaustion index, Abel boundary, global-minus-local syntax, or absolute value remains. The short-support/no-prime and pole-cancellation explicit-formula identities are already consumed downstream and do not independently prove this strict estimate."
