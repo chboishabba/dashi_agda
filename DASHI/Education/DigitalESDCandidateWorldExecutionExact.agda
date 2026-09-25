@@ -16,8 +16,10 @@ import DASHI.Education.DigitalESDSituatedCapabilityEvidenceCrossPollinationExact
 --   interop_scripts/digital_esd/run_world.py
 --
 -- The runtime composes existing acquisition/screen/retrieve/parse receipts and
--- projects their observed/candidate products into one inspectable graph.
--- Graph construction and candidate algebra may be automated.  Semantic,
+-- projects their observed/candidate products into the canonical SLR/PostgreSQL
+-- world store.  The agent receives only a bounded inspection projection.
+-- Corpus-wide JSON node/edge dumps are not canonical runtime state.
+-- Graph construction and candidate algebra may be automated. Semantic,
 -- screening and admission authority remain receipt-gated.
 ------------------------------------------------------------------------
 
@@ -32,10 +34,9 @@ canonicalSituatedWorldBoundary =
 record CandidateWorldArtifact : Set where
   constructor candidate-world-artifact
   field
-    worldManifestReference : String
-    nodesReference : String
-    edgesReference : String
-    agentInspectionReference : String
+    worldRevisionReference : String
+    postgresWorldStoreReference : String
+    boundedAgentInspectionReference : String
 
     candidateGraphAutomaticallyBuilt : Bool
     candidateGraphAutomaticallyBuiltIsTrue :
@@ -48,6 +49,14 @@ record CandidateWorldArtifact : Set where
     stageReceiptsProjectedIntoGraph : Bool
     stageReceiptsProjectedIntoGraphIsTrue :
       stageReceiptsProjectedIntoGraph ≡ true
+
+    postgresIsCanonicalRuntimeState : Bool
+    postgresIsCanonicalRuntimeStateIsTrue :
+      postgresIsCanonicalRuntimeState ≡ true
+
+    corpusWideJsonGraphEmitted : Bool
+    corpusWideJsonGraphEmittedIsFalse :
+      corpusWideJsonGraphEmitted ≡ false
 
     unresolvedAuthorityGatesRetained : Bool
     unresolvedAuthorityGatesRetainedIsTrue :
@@ -90,6 +99,10 @@ record DigitalESDCandidateWorldExecutionBoundary : Set where
     residualQueuesCanBeDerivedAutomaticallyIsTrue :
       residualQueuesCanBeDerivedAutomatically ≡ true
 
+    boundedInspectionReturned : Bool
+    boundedInspectionReturnedIsTrue :
+      boundedInspectionReturned ≡ true
+
 open DigitalESDCandidateWorldExecutionBoundary public
 
 canonicalDigitalESDCandidateWorldExecutionBoundary :
@@ -104,6 +117,7 @@ canonicalDigitalESDCandidateWorldExecutionBoundary =
     false refl
     false refl
     true refl
+    true refl
 
 ------------------------------------------------------------------------
 -- Firewalls.
@@ -112,6 +126,7 @@ canonicalDigitalESDCandidateWorldExecutionBoundary =
 data CandidateWorldCreatesSemanticAuthority : Set where
 data CandidateWorldCreatesSourceAuditAdmission : Set where
 data AgentInspectionWithoutReceiptCreatesAuthority : Set where
+data FlatJsonGraphIsCanonicalRuntimeState : Set where
 
 candidateWorldDoesNotCreateSemanticAuthority :
   CandidateWorldCreatesSemanticAuthority → ⊥
@@ -125,6 +140,10 @@ agentInspectionStillRequiresAuthorityReceipt :
   AgentInspectionWithoutReceiptCreatesAuthority → ⊥
 agentInspectionStillRequiresAuthorityReceipt ()
 
+flatJsonGraphDoesNotBecomeCanonicalRuntimeState :
+  FlatJsonGraphIsCanonicalRuntimeState → ⊥
+flatJsonGraphDoesNotBecomeCanonicalRuntimeState ()
+
 candidateWorldExecutionReading : String
 candidateWorldExecutionReading =
-  "The normal Digital-ESD runtime surface is one zero-config candidate-world command. Existing screening/retrieval/verification/parser receipts are projected into one provenance-preserving graph; parser PNF/facet/EvidenceObservation candidates and residual queues are prepopulated automatically; the agent inspects the world rather than manually traversing artifact directories. Automated graph membership, algebraic fit or candidate interpretation does not create semantic authority or SourceAuditAdmission: those promotions remain explicit receipt-bearing steps."
+  "The normal Digital-ESD runtime surface is one zero-config candidate-world command. Existing screening/retrieval/verification/parser receipts are projected into the canonical SLR/PostgreSQL world store and recorded under a world revision; parser PNF/facet/EvidenceObservation candidates and residual queues are prepopulated automatically; only a bounded inspection projection is returned to the agent. Corpus-wide nodes.jsonl/edges.jsonl are not canonical runtime state. Automated graph membership, algebraic fit or candidate interpretation does not create semantic authority or SourceAuditAdmission: those promotions remain explicit receipt-bearing steps."
