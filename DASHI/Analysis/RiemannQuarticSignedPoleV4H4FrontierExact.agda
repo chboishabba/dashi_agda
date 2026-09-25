@@ -1583,3 +1583,88 @@ canonicalLiteralFarTsumTransportedIntoAgdaKernelHere = false
 canonicalLiteralFarTsumInterpretation : String
 canonicalLiteralFarTsumInterpretation =
   "Lean source-writes the exact summable partition of the global off-ordinate literal pair source into the stabilized canonical local term plus one canonical far indicator tsum, then cancels the local term from the preferred fixed high scalar. The Clay-facing high coordinate is therefore H_W = (1/2)*(canonicalLiteralFarPairSource - integral Psi_t*mu). This is a signed one-sided theorem on the literal far zero carrier itself: no finite exhaustion index, Abel boundary, global-minus-local syntax, or absolute value remains. The short-support/no-prime and pole-cancellation explicit-formula identities are already consumed downstream and do not independently prove this strict estimate."
+
+
+------------------------------------------------------------------------
+-- CANONICAL FAR TSUM / ABSOLUTE-SHELL SCALE AUDIT
+--
+-- Lean now closes the finite-to-global seam for the literal canonical far
+-- carrier:
+--
+--   literalFarExactAt(eta0,n)
+--     -> canonicalLiteralFarPairSource
+--
+-- under centered exhaustion, by summability of the exact canonical-far
+-- indicator.
+--
+-- Consequently the already-existing finite shell estimate transports to the
+-- SAME global carrier:
+--
+--   |canonicalLiteralFarPairSource|
+--     <= (signedOrdinateCurvature + CH)
+--          * farShellBound(A,|t|,floor(t/2000))
+--
+-- whenever the existing horizontal-curvature hypothesis CH is supplied.
+--
+-- This is deliberately NOT promoted as the preferred high proof.  The shell
+-- majorant itself contains the nonnegative term
+--
+--   72*A / sqrt(J),
+--
+-- so at the canonical linear cutoff J~t it carries only a t^(-1/2)-scale
+-- component before witness curvature factors.  This is an audit of the
+-- available absolute envelope, not a lower bound on the true signed far
+-- source.  It confirms that constant optimization inside the absolute shell
+-- route cannot manufacture the quartic t^(-6) cancellation required by the
+-- terminal high inequality.
+--
+-- The preferred open object therefore remains the SIGNED scalar
+--
+--   (1/2) *
+--   ( canonicalLiteralFarPairSource
+--     - integral Psi_t * mu ),
+--
+-- with the two terms kept coupled.
+------------------------------------------------------------------------
+
+data CanonicalFarShellAuditCoordinate : Set where
+  canonicalFarFiniteToTsum :
+    CanonicalFarShellAuditCoordinate
+  canonicalFarGlobalAbsoluteShellBound :
+    CanonicalFarShellAuditCoordinate
+  absoluteShellSqrtTermAudit :
+    CanonicalFarShellAuditCoordinate
+  signedFarMinusMuCancellation :
+    CanonicalFarShellAuditCoordinate
+
+canonicalFarShellAuditStatus :
+  CanonicalFarShellAuditCoordinate -> V4H4Status
+canonicalFarShellAuditStatus canonicalFarFiniteToTsum =
+  leanSourceWrittenDonor
+canonicalFarShellAuditStatus canonicalFarGlobalAbsoluteShellBound =
+  leanSourceWrittenDonor
+canonicalFarShellAuditStatus absoluteShellSqrtTermAudit =
+  leanSourceWrittenDonor
+canonicalFarShellAuditStatus signedFarMinusMuCancellation =
+  openAnalyticObstruction
+
+absoluteShellRouteIsAuditedNotPreferred :
+  canonicalFarShellAuditStatus absoluteShellSqrtTermAudit
+    ≡ leanSourceWrittenDonor
+absoluteShellRouteIsAuditedNotPreferred = refl
+
+signedFarMinusMuCancellationRemainsOpen :
+  canonicalFarShellAuditStatus signedFarMinusMuCancellation
+    ≡ openAnalyticObstruction
+signedFarMinusMuCancellationRemainsOpen = refl
+
+canonicalFarShellAuditLeanDonorHead : String
+canonicalFarShellAuditLeanDonorHead =
+  "42c7455acafb166802435c8ad20c94dee6b0832d"
+
+canonicalFarShellAuditTransportedIntoAgdaKernelHere : Bool
+canonicalFarShellAuditTransportedIntoAgdaKernelHere = false
+
+canonicalFarShellAuditInterpretation : String
+canonicalFarShellAuditInterpretation =
+  "Lean transports the existing finite literal-far shell estimates to the exact global canonicalLiteralFarPairSource tsum and audits the scale of that absolute envelope. The shell majorant contains 72*A/sqrt(J); at the canonical linear cutoff this is only a t^(-1/2)-scale envelope component, so the absolute shell route is retained only as a fail-fast audit. The preferred theorem remains the one-sided signed cancellation between the canonical far pair-source tsum and the full theorem-bearing mu/Gamma ordinate integral."
