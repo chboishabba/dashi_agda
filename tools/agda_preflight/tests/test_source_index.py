@@ -73,7 +73,7 @@ def test_warm_unchanged_rollup_parses_zero_files(tmp_path):
     assert warm_counts["closure_cache_hit"] == 1
 
 
-def test_changed_dependency_invalidates_cached_importers(tmp_path):
+def test_implementation_only_dependency_edit_does_not_reparse_importers(tmp_path):
     top = fixture_closure(tmp_path)
     leaf = tmp_path / "A" / "Leaf.agda"
     database = tmp_path / ".cache" / "source-index.sqlite3"
@@ -81,8 +81,35 @@ def test_changed_dependency_invalidates_cached_importers(tmp_path):
     with SourceIndex(tmp_path, database, profiler=Profiler()) as index:
         index.diagnose(top)
 
-    # Change both size and hash so the freshness transition is deterministic
-    # even on filesystems with coarse timestamp resolution.
+    # The exported signature remains x : Set; only its implementation changes.
+    leaf.write_text(
+        """module A.Leaf where
+
+x : Set
+x = (λ A → A) Set
+""",
+        encoding="utf-8",
+    )
+
+    profiler = Profiler()
+    with SourceIndex(tmp_path, database, profiler=profiler) as index:
+        result = index.diagnose(top)
+
+    counts = profiler.snapshot().counts
+    assert result.cache_hit is False
+    assert counts["dirty_modules"] == 1
+    assert counts["diagnostics_recomputed"] == 1
+    assert counts["files_parsed"] == 1
+
+
+def test_exported_api_edit_invalidates_importer_chain(tmp_path):
+    top = fixture_closure(tmp_path)
+    leaf = tmp_path / "A" / "Leaf.agda"
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    with SourceIndex(tmp_path, database, profiler=Profiler()) as index:
+        index.diagnose(top)
+
     leaf.write_text(
         """module A.Leaf where
 
@@ -101,9 +128,7 @@ extra = Set
 
     counts = profiler.snapshot().counts
     assert result.cache_hit is False
-    assert counts["dirty_modules"] >= 1
-    # The source-changed leaf plus importers are conservatively recomputed.
-    # Public-API fingerprints can narrow this further in a later tranche.
+    assert counts["dirty_modules"] == 1
     assert counts["diagnostics_recomputed"] == 3
     assert counts["files_parsed"] == 3
 
