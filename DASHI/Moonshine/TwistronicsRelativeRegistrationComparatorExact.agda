@@ -33,6 +33,9 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
+import DASHI.Core.ConsumerGuidedReopenableRefinementExact as Refine
+import DASHI.Core.NonginOnePointOneArmyRefinementExact as Nongin
+import DASHI.Core.ReopenableConsumerInterventionKernelExact as Base
 import DASHI.Core.FiniteBranchingCriticalityExact as Branch
 import DASHI.Core.DecimalResidualRefinementExact as Decimal
 import DASHI.Core.DecimalStageResidualBarrierExact as DecimalStage
@@ -331,3 +334,136 @@ canonicalOnePointOneCrossPollinationBoundary =
   one-point-one-cross-pollination-boundary
     true true true
     false false false false false
+
+
+------------------------------------------------------------------------
+-- 6. Registration as an exact strict refinement of the microscopic pair.
+--
+-- The coarse observer remembers only the two microscopic sheets.  The refined
+-- observer also retains relative registration.  A registration-sensitive
+-- physical consumer is therefore an exact witness that the coarse pair alone
+-- is insufficient for that consumer.
+------------------------------------------------------------------------
+
+MicroscopicPair : Set -> Set
+MicroscopicPair Microscopic = Microscopic × Microscopic
+
+forgetRegistration :
+  {Microscopic Registration : Set} ->
+  OverlayState Microscopic Registration ->
+  MicroscopicPair Microscopic
+forgetRegistration state =
+  leftMicroscopic state , rightMicroscopic state
+
+retainRegistration :
+  {Microscopic Registration : Set} ->
+  OverlayState Microscopic Registration ->
+  OverlayState Microscopic Registration
+retainRegistration state = state
+
+microscopicPairFactorsThroughRegistration :
+  {Microscopic Registration : Set} ->
+  (state : OverlayState Microscopic Registration) ->
+  forgetRegistration state
+  ≡ forgetRegistration (retainRegistration state)
+microscopicPairFactorsThroughRegistration state = refl
+
+registrationSensitivityImpliesDistinctRegistrations :
+  {Microscopic Registration Effective : Set} ->
+  (system : RelativeRegistrationSystem Microscopic Registration Effective) ->
+  (witness : RegistrationSensitiveWitness system) ->
+  firstRegistration witness ≡ secondRegistration witness -> ⊥
+registrationSensitivityImpliesDistinctRegistrations system witness same =
+  effectiveChanges witness
+    (cong
+      (λ registration ->
+        observeEffective system
+          (overlay
+            (microscopic witness)
+            (microscopic witness)
+            registration))
+      same)
+
+registrationStrictlyRefinesMicroscopicPair :
+  {Microscopic Registration Effective : Set} ->
+  (system : RelativeRegistrationSystem Microscopic Registration Effective) ->
+  (witness : RegistrationSensitiveWitness system) ->
+  Refine.StrictProjectionRefinement
+    forgetRegistration
+    retainRegistration
+registrationStrictlyRefinesMicroscopicPair system witness =
+  Refine.strictProjectionRefinement
+    forgetRegistration
+    microscopicPairFactorsThroughRegistration
+    (overlay
+      (microscopic witness)
+      (microscopic witness)
+      (firstRegistration witness))
+    (overlay
+      (microscopic witness)
+      (microscopic witness)
+      (secondRegistration witness))
+    refl
+    (λ same ->
+      registrationSensitivityImpliesDistinctRegistrations
+        system witness
+        (cong relativeRegistration same))
+
+registrationConsumerGuidedRefinement :
+  {Microscopic Registration Effective : Set} ->
+  (system : RelativeRegistrationSystem Microscopic Registration Effective) ->
+  (witness : RegistrationSensitiveWitness system) ->
+  Refine.ConsumerGuidedRefinement
+    forgetRegistration
+    retainRegistration
+    (observeEffective system)
+registrationConsumerGuidedRefinement system witness =
+  Refine.consumerGuidedRefinement
+    (registrationStrictlyRefinesMicroscopicPair system witness)
+    (effectiveChanges witness)
+
+coarseMicroscopicPairCannotServeRegistrationSensitiveConsumer :
+  {Microscopic Registration Effective : Set} ->
+  (system : RelativeRegistrationSystem Microscopic Registration Effective) ->
+  (witness : RegistrationSensitiveWitness system) ->
+  Base.ConsumerDescent
+    forgetRegistration
+    (observeEffective system) ->
+  ⊥
+coarseMicroscopicPairCannotServeRegistrationSensitiveConsumer system witness =
+  Refine.consumerGuidedRefinementRefutesOldDescent
+    (registrationConsumerGuidedRefinement system witness)
+
+------------------------------------------------------------------------
+-- 7. Nongin / twistronics common abstraction boundary.
+--
+-- Both lanes instantiate strict refinement of a coarse observer by retaining a
+-- coordinate that a declared consumer can distinguish.  That common theorem
+-- shape does NOT identify the coordinates, mechanisms, semantics, or domains.
+------------------------------------------------------------------------
+
+record NonginTwistronicsRefinementBoundary : Set where
+  constructor nongin-twistronics-refinement-boundary
+  field
+    nonginUsesStrictProjectionRefinement : Bool
+    twistronicsUsesStrictProjectionRefinement : Bool
+    bothRequireConsumerSeparationWitness : Bool
+    sharedTheoremShapeImpliesSharedMechanism : Bool
+    frameCoordinateIsTwistAngle : Bool
+    cognitiveConsumerIsElectronicHamiltonian : Bool
+    onePointOneNotationExplainsMagicAngleValue : Bool
+
+canonicalNonginTwistronicsRefinementBoundary :
+  NonginTwistronicsRefinementBoundary
+canonicalNonginTwistronicsRefinementBoundary =
+  nongin-twistronics-refinement-boundary
+    true true true
+    false false false false
+
+nonginCanonicalRefinementRetained :
+  Refine.ConsumerGuidedRefinement
+    (Nongin.onePointZeroProject {Nongin.Base1} {Nongin.Frame2})
+    (Nongin.onePointOneProject {Nongin.Base1} {Nongin.Frame2})
+    Nongin.frameSensitiveResponse
+nonginCanonicalRefinementRetained =
+  Nongin.canonicalOnePointOneRefinement
