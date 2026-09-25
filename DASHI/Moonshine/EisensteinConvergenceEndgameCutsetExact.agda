@@ -34,6 +34,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Interop.Round11MachinLeanBindingManifestExact as ReplayManifest
+import DASHI.Interop.Round11MachinCrossProverRecognitionExact as Recognition
 
 record EisensteinConvergenceEndgameCutset : Set where
   constructor eisenstein-convergence-endgame-cutset
@@ -73,6 +74,7 @@ record EisensteinConvergenceEndgameCutset : Set where
     reciprocalRound11MachinBindingManifestOwned : Bool
     reciprocalManifestMatchesCurrentSourceBlobs : Bool
     leanGeneratedBindingTableKernelMatchSourceOwned : Bool
+    agdaTypedCrossProverRecognitionFirewallOwned : Bool
 
     selectedConcreteQNormLawsInhabited : Bool
     quarticSexticStepVDominationInhabited : Bool
@@ -98,7 +100,7 @@ canonicalEisensteinConvergenceEndgameCutset =
     true true true true true true true true true true true true true true true true true
     true true true true true true true
     true true true true
-    true true true true true true
+    true true true true true true true
     false false false false false false
     false true false
     false
