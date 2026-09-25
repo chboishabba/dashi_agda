@@ -191,6 +191,9 @@ data ClassicalSupportGrade : Set where
   repositoryFormalReconstruction :
     ClassicalSupportGrade
 
+  repositoryCrossModuleInference :
+    ClassicalSupportGrade
+
   externalSameObjectIdentificationOpen :
     ClassicalSupportGrade
 
