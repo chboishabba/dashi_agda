@@ -26,6 +26,7 @@ module DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 
+import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Cognition.PlatoCaveSourceAttributionExact as PlatoSource
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
@@ -36,6 +37,7 @@ import DASHI.Cognition.PNF.AdmissibleFactorisationDecisionHyperfabricExact as De
 import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact as Trialectic
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact as MemoryCommand
 
+platoCaveConceptualSource : Source.AttributedSource
 platoCaveConceptualSource =
   PlatoSource.platoRepublicCaveSource
 
