@@ -44,6 +44,85 @@ evaluateJet j left right =
   + rightCoefficient j * right
   + mixedCoefficient j * (left * right)
 
+
+
+zeroJet : TwoSourceJet
+zeroJet = jet 0ℚ 0ℚ 0ℚ 0ℚ
+
+oneJet : TwoSourceJet
+oneJet = jet 1ℚ 0ℚ 0ℚ 0ℚ
+
+addJet : TwoSourceJet → TwoSourceJet → TwoSourceJet
+addJet (jet a b c d) (jet e f g h) =
+  jet (a + e) (b + f) (c + g) (d + h)
+
+multiplyJet : TwoSourceJet → TwoSourceJet → TwoSourceJet
+multiplyJet (jet a b c d) (jet e f g h) =
+  jet
+    (a * e)
+    (a * f + b * e)
+    (a * g + c * e)
+    (a * h + b * g + c * f + d * e)
+
+scaleJet : ℚ → TwoSourceJet → TwoSourceJet
+scaleJet scalar (jet a b c d) =
+  jet (scalar * a) (scalar * b) (scalar * c) (scalar * d)
+
+multiplyJetMixedCoefficientExact :
+  ∀ left right →
+  mixedCoefficient (multiplyJet left right)
+  ≡
+  baseCoefficient left * mixedCoefficient right
+  + leftCoefficient left * rightCoefficient right
+  + rightCoefficient left * leftCoefficient right
+  + mixedCoefficient left * baseCoefficient right
+multiplyJetMixedCoefficientExact (jet a b c d) (jet e f g h) = refl
+
+evaluateAddJet :
+  ∀ left right sourceLeft sourceRight →
+  evaluateJet (addJet left right) sourceLeft sourceRight
+  ≡
+  evaluateJet left sourceLeft sourceRight
+  + evaluateJet right sourceLeft sourceRight
+evaluateAddJet (jet a b c d) (jet e f g h) sourceLeft sourceRight =
+  ℚRing.solve-∀ a b c d e f g h sourceLeft sourceRight
+
+-- Product equality is understood in the square-zero two-source jet algebra:
+-- terms of degree s² or t² are discarded.  At the level of the mixed source
+-- coefficient this is exactly the ordinary product rule.
+mixedCoefficientProductRule :
+  ∀ left right →
+  mixedCoefficient (multiplyJet left right)
+  ≡
+  baseCoefficient left * mixedCoefficient right
+  + leftCoefficient left * rightCoefficient right
+  + rightCoefficient left * leftCoefficient right
+  + mixedCoefficient left * baseCoefficient right
+mixedCoefficientProductRule = multiplyJetMixedCoefficientExact
+
+productJets : List TwoSourceJet → TwoSourceJet
+productJets [] = oneJet
+productJets (value ∷ values) =
+  multiplyJet value (productJets values)
+
+mapJets :
+  ∀ {A : Set} →
+  (A → TwoSourceJet) →
+  List A →
+  List TwoSourceJet
+mapJets f [] = []
+mapJets f (item ∷ items) = f item ∷ mapJets f items
+
+clusterJetFromPolymers :
+  ∀ {Polymer : Set} →
+  ℚ →
+  List Polymer →
+  (Polymer → TwoSourceJet) →
+  TwoSourceJet
+clusterJetFromPolymers coefficient polymers polymerJet =
+  scaleJet coefficient (productJets (mapJets polymerJet polymers))
+
+
 mixedFiniteDifference :
   (ℚ → ℚ → ℚ) → ℚ
 mixedFiniteDifference f =
