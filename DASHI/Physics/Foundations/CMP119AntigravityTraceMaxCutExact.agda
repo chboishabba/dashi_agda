@@ -44,10 +44,11 @@ data AntigravityTraceLeaf : Set where
 
 canonicalAntigravityTraceLeaves : List AntigravityTraceLeaf
 canonicalAntigravityTraceLeaves =
-  attachSelectedCMP119StressToWilsonGibbsFamily
+  attachSelectedCMP119ConnectedNumeratorToCanonicalWilsonGibbs
   ∷ inhabitSelectedRationalHaarIntegrationLaws
   ∷ proveSelectedPartitionFunctionPositive
-  ∷ proveSelectedTraceInsertionNumeratorNegative
+  ∷ attachSelectedTraceToRenormalizedQuantumTrace
+  ∷ inhabitSelectedBetaF2TraceAttachment
   ∷ []
 
 classicalDiagonalActionTraceCancellationClosed : Bool
@@ -132,12 +133,12 @@ wilsonGibbsFiniteMeasureCalculusCanonicalIsTrue :
   wilsonGibbsFiniteMeasureCalculusCanonical ≡ true
 wilsonGibbsFiniteMeasureCalculusCanonicalIsTrue = refl
 
-selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired : Bool
-selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired = true
+fullSelectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired : Bool
+fullSelectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired = false
 
-selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequiredIsTrue :
-  selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired ≡ true
-selectedCMP119ToCanonicalWilsonGibbsAnchorStillRequiredIsTrue = refl
+fullSelectedCMP119ToCanonicalWilsonGibbsAnchorStillRequiredIsFalse :
+  fullSelectedCMP119ToCanonicalWilsonGibbsAnchorStillRequired ≡ false
+fullSelectedCMP119ToCanonicalWilsonGibbsAnchorStillRequiredIsFalse = refl
 
 selectedQuantumTraceSameObjectStillRequired : Bool
 selectedQuantumTraceSameObjectStillRequired = true
