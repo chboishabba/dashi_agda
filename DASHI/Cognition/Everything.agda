@@ -6,6 +6,7 @@ module DASHI.Cognition.Everything where
 
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact
 import DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact
+import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
