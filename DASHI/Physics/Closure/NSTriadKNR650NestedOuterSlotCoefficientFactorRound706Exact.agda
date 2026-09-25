@@ -38,6 +38,8 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; tra
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadEnumeration as Physical
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
+import DASHI.Physics.Closure.NSTriadKNComplex3BeltramiCrossSuppressionRound93Exact as Cross
 import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Closure.NSTriadKNAntiParallelHelicitySlotKernelRound145Exact as R145
@@ -59,18 +61,18 @@ slotKernelScaleFirstAmplitude scalar P Q a b =
     (cong₂ C3.complex3Subtract
       (trans
         (cong
-          (λ inner → R94.Cross.complex3Cross inner b)
+          (λ inner → Cross.complex3Cross inner b)
           (R94.crossScaleRight scalar P a))
         (R94.crossScaleLeft scalar
-          (R94.Cross.complex3Cross P a) b))
+          (Cross.complex3Cross P a) b))
       (R94.crossScaleLeft scalar a
-        (R94.Cross.complex3Cross Q b)))
+        (Cross.complex3Cross Q b)))
     (sym
       (R73.complex3ScaleSubtract scalar
-        (R94.Cross.complex3Cross
-          (R94.Cross.complex3Cross P a) b)
-        (R94.Cross.complex3Cross a
-          (R94.Cross.complex3Cross Q b))))
+        (Cross.complex3Cross
+          (Cross.complex3Cross P a) b)
+        (Cross.complex3Cross a
+          (Cross.complex3Cross Q b))))
 
 module NestedOuterFactor
     {r} {F : C3.RealField r}
@@ -176,7 +178,7 @@ module NestedOuterFactor
         (trans
           (cong
             (λ scalar → C3.complex3Scale scalar slot)
-            (C3.complexMultiplyCommutative
+            (Algebra.complexMultiplyCommutative
               (C3.complexI F) coefficient))
           (sym
             (R73.complex3ScaleAssociative
