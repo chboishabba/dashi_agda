@@ -87,6 +87,18 @@ record PushoutCertifiedRelationalJoin
 
 open PushoutCertifiedRelationalJoin public
 
+
+data RelationIsSynthesis : Set where
+data RelationalJoinIsHomogenisation : Set where
+
+relationIsNotDefinitionallySynthesis :
+  RelationIsSynthesis → ⊥
+relationIsNotDefinitionallySynthesis ()
+
+relationalJoinIsNotDefinitionallyHomogenisation :
+  RelationalJoinIsHomogenisation → ⊥
+relationalJoinIsNotDefinitionallyHomogenisation ()
+
 data EveryRelationalJoinIsPushout : Set where
 
 relationalJoinDoesNotAutomaticallyPromoteToPushout :
