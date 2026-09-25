@@ -42,7 +42,7 @@ data AntigravityTraceLeaf : Set where
   attachSelectedQuantumTraceToSU2NormalizedF2 :
     AntigravityTraceLeaf
 
-  inhabitPositiveFieldStrengthSquareWitness :
+  inhabitPositiveCurvatureAtFiniteHaarWitness :
     AntigravityTraceLeaf
 
 canonicalAntigravityTraceLeaves : List AntigravityTraceLeaf
@@ -52,7 +52,7 @@ canonicalAntigravityTraceLeaves =
   ∷ inhabitSelectedFiniteHaarQuadrature
   ∷ attachSelectedTraceToRenormalizedQuantumTrace
   ∷ attachSelectedQuantumTraceToSU2NormalizedF2
-  ∷ inhabitPositiveFieldStrengthSquareWitness
+  ∷ inhabitPositiveCurvatureAtFiniteHaarWitness
   ∷ []
 
 classicalDiagonalActionTraceCancellationClosed : Bool
@@ -270,9 +270,24 @@ selectedQuantumTraceSU2F2SameObjectStillRequiredIsTrue :
   selectedQuantumTraceSU2F2SameObjectStillRequired ≡ true
 selectedQuantumTraceSU2F2SameObjectStillRequiredIsTrue = refl
 
-positiveFieldStrengthSquareWitnessStillRequired : Bool
-positiveFieldStrengthSquareWitnessStillRequired = true
+positiveCurvatureAtFiniteHaarWitnessStillRequired : Bool
+positiveCurvatureAtFiniteHaarWitnessStillRequired = true
 
-positiveFieldStrengthSquareWitnessStillRequiredIsTrue :
-  positiveFieldStrengthSquareWitnessStillRequired ≡ true
-positiveFieldStrengthSquareWitnessStillRequiredIsTrue = refl
+positiveCurvatureAtFiniteHaarWitnessStillRequiredIsTrue :
+  positiveCurvatureAtFiniteHaarWitnessStillRequired ≡ true
+positiveCurvatureAtFiniteHaarWitnessStillRequiredIsTrue = refl
+
+
+pointwiseF2NonnegativityPrimitiveRequired : Bool
+pointwiseF2NonnegativityPrimitiveRequired = false
+
+pointwiseF2NonnegativityPrimitiveRequiredIsFalse :
+  pointwiseF2NonnegativityPrimitiveRequired ≡ false
+pointwiseF2NonnegativityPrimitiveRequiredIsFalse = refl
+
+sixCurvatureF2NonnegativityCompilerClosed : Bool
+sixCurvatureF2NonnegativityCompilerClosed = true
+
+sixCurvatureF2NonnegativityCompilerClosedIsTrue :
+  sixCurvatureF2NonnegativityCompilerClosed ≡ true
+sixCurvatureF2NonnegativityCompilerClosedIsTrue = refl
