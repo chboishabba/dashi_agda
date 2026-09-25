@@ -8,6 +8,7 @@ open import Data.Nat.Properties as NatP
 open import Data.Sum using (inj₁; inj₂)
 open import Data.Vec using (Vec; []; _∷_; map)
 open import Contraction using (_≢_)
+open import Data.Empty using (⊥-elim)
 open import Ultrametric as UMetric
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import DASHI.Algebra.Trit using (inv)
@@ -160,6 +161,73 @@ ultraNat {n} x y z with NatP.≤-total (agreeDepth x y) (agreeDepth y z)
     step2 : dNat x z ≤ (dNat x y ⊔ dNat y z)
     step2 = NatP.≤-trans step1 (NatP.m≤n⊔m (dNat x y) (dNat y z))
   in step2
+
+
+------------------------------------------------------------------------
+-- Ultrametric isosceles consequence.
+--
+-- If one leg is strictly shorter than another, the third leg equals the
+-- longer one.  Equivalently, the two largest distances in a non-equilateral
+-- ultrametric triangle coincide.
+------------------------------------------------------------------------
+
+dNat-sym :
+  ∀ {n : Nat} (x y : Vec Trit n) →
+  dNat x y ≡ dNat y x
+dNat-sym {n} x y =
+  cong (λ k → n ∸ k) (agreeDepth-sym x y)
+
+strictLegForcesLongSideEquality :
+  ∀ {n : Nat} (x y z : Vec Trit n) →
+  dNat x y < dNat y z →
+  dNat x z ≡ dNat y z
+strictLegForcesLongSideEquality x y z xy<yz
+  with NatP.≤-total (dNat x z) (dNat x y)
+... | inj₁ xz≤xy =
+  ⊥-elim (NatP.<⇒≱ xy<yz yz≤xy)
+  where
+    maxYXZ≡XY :
+      (dNat y x ⊔ dNat x z) ≡ dNat x y
+    maxYXZ≡XY
+      rewrite dNat-sym y x =
+      NatP.m≥n⇒m⊔n≡m xz≤xy
+
+    yz≤xy : dNat y z ≤ dNat x y
+    yz≤xy =
+      subst
+        (λ bound → dNat y z ≤ bound)
+        maxYXZ≡XY
+        (ultraNat y x z)
+
+... | inj₂ xy≤xz =
+  NatP.≤-antisym xz≤yz yz≤xz
+  where
+    xy≤yz : dNat x y ≤ dNat y z
+    xy≤yz = NatP.<⇒≤ xy<yz
+
+    maxXYZ≡YZ :
+      (dNat x y ⊔ dNat y z) ≡ dNat y z
+    maxXYZ≡YZ = NatP.m≤n⇒m⊔n≡n xy≤yz
+
+    xz≤yz : dNat x z ≤ dNat y z
+    xz≤yz =
+      subst
+        (λ bound → dNat x z ≤ bound)
+        maxXYZ≡YZ
+        (ultraNat x y z)
+
+    maxYXZ≡XZ :
+      (dNat y x ⊔ dNat x z) ≡ dNat x z
+    maxYXZ≡XZ
+      rewrite dNat-sym y x =
+      NatP.m≤n⇒m⊔n≡n xy≤xz
+
+    yz≤xz : dNat y z ≤ dNat x z
+    yz≤xz =
+      subst
+        (λ bound → dNat y z ≤ bound)
+        maxYXZ≡XZ
+        (ultraNat y x z)
 
 ultrametricVec : ∀ {n : Nat} → UMetric.Ultrametric (Vec Trit n)
 ultrametricVec {n} =
