@@ -117,6 +117,18 @@ module Recombine
   combinedSelfExternalResidue =
     R700.twelve * selfOutputSum + completeExternalOrbit
 
+  combinedSelfExternalIsCompleteNestedOrbit :
+    combinedSelfExternalResidue
+    ≡
+    DASHI.Physics.Closure.NSTriadKNPhysicalGalerkinIncidencePermutationRound38Exact.foldPower
+      Split.Full.nestedTriadOrbitResidue items
+  combinedSelfExternalIsCompleteNestedOrbit =
+    trans
+      (cong₂ _+_
+        (sym completeSelfOrbitIsTwelveOutputPairings)
+        refl)
+      (sym Split.completeNestedOrbitSplitsSelfExternal)
+
   combinedSelfExternalIsTwelveGlobalCommutator :
     combinedSelfExternalResidue
     ≡ R700.twelve * globalCommutator
@@ -144,6 +156,9 @@ round722CompleteSelfOrbitIsTwelveOutputPairings = true
 
 round722SelfExternalRecombineToSingleGlobalCommutator : Bool
 round722SelfExternalRecombineToSingleGlobalCommutator = true
+
+round722CombinedSelfExternalIsLiteralCompleteNestedOrbit : Bool
+round722CombinedSelfExternalIsLiteralCompleteNestedOrbit = true
 
 round722SeparateSelfCancellationRequiredForMaxCut : Bool
 round722SeparateSelfCancellationRequiredForMaxCut = false
