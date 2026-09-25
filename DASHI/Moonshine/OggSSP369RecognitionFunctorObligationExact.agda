@@ -368,6 +368,7 @@ canonicalOggSSP369RecognitionFunctorBoundary :
   OggSSP369RecognitionFunctorBoundary
 canonicalOggSSP369RecognitionFunctorBoundary =
   ogg-ssp369-recognition-functor-boundary
-    true true true true true
-    true true true true false true true false
-    true true true
+    true true true true
+    true true true true false
+    true true false
+    true true true true true true
