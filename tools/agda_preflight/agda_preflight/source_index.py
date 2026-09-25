@@ -13,7 +13,7 @@ from .fixes import SuggestedFix, TextEdit
 from .timing import Profiler
 
 
-SCHEMA_VERSION = "1"
+SCHEMA_VERSION = "2"
 
 
 @dataclass(frozen=True)
@@ -35,7 +35,9 @@ class _ModuleState:
     path: Path
     module_name: str
     source_hash: str
+    api_hash: str
     imports: Tuple[str, ...]
+    public_imports: Tuple[str, ...]
     diagnostics: List[Diagnostic]
 
 
@@ -100,6 +102,9 @@ class SourceIndex:
                 mtime_ns INTEGER NOT NULL,
                 size INTEGER NOT NULL,
                 source_sha256 TEXT NOT NULL,
+                api_base_sha256 TEXT NOT NULL,
+                api_fingerprint TEXT NOT NULL,
+                public_imports_json TEXT NOT NULL,
                 dependency_fingerprint TEXT NOT NULL,
                 diagnostics_json TEXT NOT NULL,
                 updated_ns INTEGER NOT NULL
@@ -126,7 +131,42 @@ class SourceIndex:
         row = self.connection.execute(
             "SELECT value FROM meta WHERE key = 'schema_version'"
         ).fetchone()
-        if row is None or row["value"] != SCHEMA_VERSION:
+        version = row["value"] if row is not None else None
+        if version == "1":
+            columns = {
+                item["name"]
+                for item in self.connection.execute(
+                    "PRAGMA table_info(modules)"
+                ).fetchall()
+            }
+            if "api_base_sha256" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "api_base_sha256 TEXT NOT NULL DEFAULT ''"
+                )
+            if "api_fingerprint" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "api_fingerprint TEXT NOT NULL DEFAULT ''"
+                )
+            if "public_imports_json" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "public_imports_json TEXT NOT NULL DEFAULT '[]'"
+                )
+            self.connection.execute(
+                "UPDATE modules SET "
+                "api_base_sha256 = CASE WHEN api_base_sha256 = '' "
+                "THEN source_sha256 ELSE api_base_sha256 END, "
+                "api_fingerprint = CASE WHEN api_fingerprint = '' "
+                "THEN source_sha256 ELSE api_fingerprint END"
+            )
+            self.connection.execute(
+                "UPDATE meta SET value = ? WHERE key = 'schema_version'",
+                (SCHEMA_VERSION,),
+            )
+            version = SCHEMA_VERSION
+        if version != SCHEMA_VERSION:
             raise RuntimeError(
                 "unsupported dashi-agda source-index schema; "
                 "remove the cache or migrate it"
@@ -239,6 +279,112 @@ class SourceIndex:
         ]
 
     @staticmethod
+    def _directive_payload(directive) -> dict:
+        return {
+            "kind": directive.kind,
+            "names": list(directive.names),
+            "renamings": [list(pair) for pair in directive.renamings],
+        }
+
+    def _api_base(self, summary) -> Tuple[str, Tuple[str, ...]]:
+        public_imports = set()
+        public_import_payload = []
+        for item in summary.ast.imports:
+            if item.opened and item.public:
+                public_imports.add(item.module)
+                public_import_payload.append(
+                    {
+                        "module": item.module,
+                        "alias": item.alias,
+                        "directives": [
+                            self._directive_payload(directive)
+                            for directive in item.directives
+                        ],
+                    }
+                )
+
+        public_open_payload = []
+        for opened in summary.ast.opens:
+            if not opened.public:
+                continue
+            module = summary.imports.get(opened.target)
+            if module is None and self._module_path(opened.target).exists():
+                module = opened.target
+            if module is not None:
+                public_imports.add(module)
+            public_open_payload.append(
+                {
+                    "target": opened.target,
+                    "module": module,
+                    "directives": [
+                        self._directive_payload(directive)
+                        for directive in opened.directives
+                    ],
+                }
+            )
+
+        payload = {
+            "module": summary.module_name,
+            "signatures": [
+                [name, signature.type_text]
+                for name, signature in sorted(summary.ast.signatures.items())
+            ],
+            "records": [
+                [
+                    name,
+                    record.constructor,
+                    record.field_surface_complete,
+                    [
+                        [field_name, field.type_text]
+                        for field_name, field in sorted(record.fields.items())
+                    ],
+                ]
+                for name, record in sorted(summary.ast.records.items())
+            ],
+            "data": [
+                [
+                    name,
+                    [
+                        [constructor_name, constructor.type_text]
+                        for constructor_name, constructor
+                        in sorted(data.constructors.items())
+                    ],
+                ]
+                for name, data in sorted(summary.ast.data.items())
+            ],
+            "nested_modules": sorted(summary.ast.nested_modules),
+            "public_imports": sorted(
+                public_import_payload,
+                key=lambda item: (item["module"], item["alias"]),
+            ),
+            "public_opens": sorted(
+                public_open_payload,
+                key=lambda item: (item["target"], item["module"] or ""),
+            ),
+        }
+        encoded = json.dumps(
+            payload,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+        return hashlib.sha256(encoded).hexdigest(), tuple(sorted(public_imports))
+
+    @staticmethod
+    def _api_fingerprint(
+        api_base_hash: str,
+        public_dependencies: Iterable[Tuple[str, str]],
+    ) -> str:
+        digest = hashlib.sha256()
+        digest.update(api_base_hash.encode("ascii"))
+        digest.update(b"\n")
+        for module, api_hash in sorted(public_dependencies):
+            digest.update(module.encode("utf-8"))
+            digest.update(b"\0")
+            digest.update(api_hash.encode("ascii"))
+            digest.update(b"\n")
+        return digest.hexdigest()
+
+    @staticmethod
     def _dependency_fingerprint(
         dependencies: Iterable[Tuple[str, str]],
     ) -> str:
@@ -256,6 +402,9 @@ class SourceIndex:
         module_name: str,
         stat: Tuple[int, int],
         source_hash: str,
+        api_base_hash: str,
+        api_hash: str,
+        public_imports: Iterable[str],
         dependency_fingerprint: str,
         imports: Iterable[str],
         diagnostics: List[Diagnostic],
@@ -271,14 +420,18 @@ class SourceIndex:
                 """
                 INSERT INTO modules(
                     path, module_name, mtime_ns, size, source_sha256,
+                    api_base_sha256, api_fingerprint, public_imports_json,
                     dependency_fingerprint, diagnostics_json, updated_ns
                 )
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(path) DO UPDATE SET
                     module_name = excluded.module_name,
                     mtime_ns = excluded.mtime_ns,
                     size = excluded.size,
                     source_sha256 = excluded.source_sha256,
+                    api_base_sha256 = excluded.api_base_sha256,
+                    api_fingerprint = excluded.api_fingerprint,
+                    public_imports_json = excluded.public_imports_json,
                     dependency_fingerprint = excluded.dependency_fingerprint,
                     diagnostics_json = excluded.diagnostics_json,
                     updated_ns = excluded.updated_ns
@@ -289,6 +442,9 @@ class SourceIndex:
                     stat[0],
                     stat[1],
                     source_hash,
+                    api_base_hash,
+                    api_hash,
+                    json.dumps(sorted(set(public_imports))),
                     dependency_fingerprint,
                     payload,
                     time.time_ns(),
