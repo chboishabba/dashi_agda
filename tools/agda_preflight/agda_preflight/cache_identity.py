@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+from functools import lru_cache
 from importlib import metadata
 from pathlib import Path
 from typing import Iterable, Tuple
@@ -53,6 +54,7 @@ def _fingerprint(
     return digest.hexdigest()
 
 
+@lru_cache(maxsize=1)
 def analyzer_fingerprints() -> Tuple[str, str]:
     parser_versions = (
         ("tree-sitter", _package_version("tree-sitter")),
