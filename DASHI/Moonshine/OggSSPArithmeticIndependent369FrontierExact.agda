@@ -20,11 +20,17 @@ module DASHI.Moonshine.OggSSPArithmeticIndependent369FrontierExact where
 --   * whole-F9 p=3 source no-go;
 --   * minimal F9 extension-coordinate quotient structural candidate.
 --
--- OPEN:
---   * actual p=2 marked arithmetic source/action;
---   * source-authoritative identification of the p=3 extension-coordinate
---     quotient with the actual marked supersingular Frobenius object;
---   * first-leg arithmetic provenance witnesses.
+-- INTERNALLY INHABITED:
+--   * p=2 marked arithmetic source and marked level-CM wrapper;
+--   * p=3 F9 extension-coordinate marked Frobenius source;
+--   * p=2/p=3 forward recognition inhabitants;
+--   * p=2/p=3 provenance first legs and composed independent-369 recognition.
+--
+-- OPEN ONLY AS EXTERNAL IDENTIFICATION:
+--   * whether the p=2 DASHI marked-CM reconstruction is the intended classical
+--     level-4/X0(4) marked moduli object;
+--   * whether the p=3 DASHI extension-coordinate quotient is the intended
+--     classical marked supersingular Frobenius object.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -101,6 +107,11 @@ sourceBoundary :
   Socket.SmallCharacteristicArithmeticSourceBoundary
 sourceBoundary =
   Socket.canonicalSmallCharacteristicArithmeticSourceBoundary
+
+inhabitedBoundary :
+  Inhabited.ArithmeticTo369InhabitedBoundary
+inhabitedBoundary =
+  Inhabited.canonicalArithmeticTo369InhabitedBoundary
 
 ------------------------------------------------------------------------
 -- 2. Frontier typed by missing authority, not missing representation.
