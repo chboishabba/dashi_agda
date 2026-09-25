@@ -241,6 +241,42 @@ record PersistedM12CandidateProduct
 
 open PersistedM12CandidateProduct public
 
+
+record CorpusReconciliationCandidate : Set where
+  constructor corpus-reconciliation-candidate
+  field
+    entityMentionRef : String
+    entityFingerprintRef : String
+    propositionFingerprintRef : String
+    eventFingerprintRef : String
+    detectorRef : String
+
+    automaticallyExtracted : Bool
+    automaticallyExtractedIsTrue :
+      automaticallyExtracted ≡ true
+
+    createsEntityIdentity : Bool
+    createsEntityIdentityIsFalse :
+      createsEntityIdentity ≡ false
+
+    createsPropositionIdentity : Bool
+    createsPropositionIdentityIsFalse :
+      createsPropositionIdentity ≡ false
+
+    createsEventIdentity : Bool
+    createsEventIdentityIsFalse :
+      createsEventIdentity ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    claimTruthPromoted : Bool
+    claimTruthPromotedIsFalse :
+      claimTruthPromoted ≡ false
+
+open CorpusReconciliationCandidate public
+
 record DbNativeCompilerReceipt
     (source : Ingest.GenericCompiledSource) : Set where
   constructor db-native-compiler-receipt
@@ -330,6 +366,10 @@ data ContentDigestCreatesSemanticIdentity : Set where
 data ContentDigestDeterminesSourceRevisionIdentity : Set where
 data PersistedCandidateCreatesSemanticAdmission : Set where
 data PersistedCandidateCreatesClaimTruth : Set where
+data ReconciliationFingerprintCreatesEntityIdentity : Set where
+data ReconciliationFingerprintCreatesPropositionIdentity : Set where
+data ReconciliationFingerprintCreatesEventIdentity : Set where
+data ReconciliationPressureCreatesReviewPayment : Set where
 data PostgresCompilerStateCreatesGlobalTruth : Set where
 data BulkDistributionCreatesProvenance : Set where
 data LinkedObjectAvailabilityCreatesSemanticAuthority : Set where
@@ -382,6 +422,22 @@ persistedCandidateDoesNotCreateSemanticAdmission ()
 persistedCandidateDoesNotCreateClaimTruth :
   PersistedCandidateCreatesClaimTruth → ⊥
 persistedCandidateDoesNotCreateClaimTruth ()
+
+reconciliationFingerprintDoesNotCreateEntityIdentity :
+  ReconciliationFingerprintCreatesEntityIdentity → ⊥
+reconciliationFingerprintDoesNotCreateEntityIdentity ()
+
+reconciliationFingerprintDoesNotCreatePropositionIdentity :
+  ReconciliationFingerprintCreatesPropositionIdentity → ⊥
+reconciliationFingerprintDoesNotCreatePropositionIdentity ()
+
+reconciliationFingerprintDoesNotCreateEventIdentity :
+  ReconciliationFingerprintCreatesEventIdentity → ⊥
+reconciliationFingerprintDoesNotCreateEventIdentity ()
+
+reconciliationPressureDoesNotCreateReviewPayment :
+  ReconciliationPressureCreatesReviewPayment → ⊥
+reconciliationPressureDoesNotCreateReviewPayment ()
 
 postgresCompilerStateDoesNotCreateGlobalTruth :
   PostgresCompilerStateCreatesGlobalTruth → ⊥
