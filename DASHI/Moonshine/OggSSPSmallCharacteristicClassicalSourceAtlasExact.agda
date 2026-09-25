@@ -118,6 +118,19 @@ dadhwalPankaj =
     "explicit finite-group source listing the seven conjugacy classes of the binary tetrahedral group; used only for the class/inversion quotient count, not for elliptic-curve identification"
     Source.publicAttribution
 
+
+stacksInertia : Source.AttributedSource
+stacksInertia =
+  Source.mkNoDOISource
+    "The Stacks Project Authors"
+    "Inertia stacks"
+    "The Stacks Project, Tags 036X/06PA and related inertia-stack sections"
+    ""
+    "https://stacks.math.columbia.edu/tag/036X"
+    Source.academicBookSource
+    "standard stack-theoretic framework: the inertia fibre over an object records its automorphisms and quotient-stack inertia decomposes by conjugacy classes; used to interpret the binary-tetrahedral seven-class carrier as inertia sectors, not to source the later inversion quotient or orientation product"
+    Source.publicAttribution
+
 conrad : Source.AttributedSource
 conrad =
   Source.mkDOISource
@@ -161,7 +174,7 @@ smallCharacteristicClassicalAtlas =
   Source.mkSourceAtlas
     "small-characteristic supersingular/CM/level-structure classical atlas"
     "DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact"
-    (silverman ∷ katzMazur ∷ deligneRapoport ∷ bertoliniDarmonPrasannaConrad ∷ gorenLove ∷ dadhwalPankaj ∷ conrad ∷ elkiesOnoYang ∷ ogg ∷ [])
+    (silverman ∷ katzMazur ∷ deligneRapoport ∷ bertoliniDarmonPrasannaConrad ∷ gorenLove ∷ dadhwalPankaj ∷ stacksInertia ∷ conrad ∷ elkiesOnoYang ∷ ogg ∷ [])
     "classical authority is partitioned into coarse supersingular classification, CM reduction/optimal-embedding marking, and bad-characteristic level-moduli theory; exact DASHI finite state counts and 369 recognitions remain repository reconstructions unless independently identified"
 
 ------------------------------------------------------------------------
@@ -235,6 +248,16 @@ binaryTetrahedralFiveInversionOrbitGrade :
   ClassicalSupportGrade
 binaryTetrahedralFiveInversionOrbitGrade =
   repositoryFormalReconstruction
+
+inertiaConjugacyClassDecompositionGrade :
+  ClassicalSupportGrade
+inertiaConjugacyClassDecompositionGrade =
+  directClassicalTheorem
+
+orientationTimesUnorientedInertiaProductGrade :
+  ClassicalSupportGrade
+orientationTimesUnorientedInertiaProductGrade =
+  repositoryCrossModuleInference
 
 p3ThreeStateExtensionQuotientGrade :
   ClassicalSupportGrade
@@ -357,6 +380,8 @@ record SmallCharacteristicClassicalSourcingBoundary : Set where
     p2TwoOrientedQuadraticOrdersClassicallySourced : Bool
     binaryTetrahedralSevenClassesClassicallySourced : Bool
     binaryTetrahedralFiveInversionOrbitsReconstructed : Bool
+    inertiaConjugacyClassFrameworkClassicallySourced : Bool
+    orientedUnorientedInertiaProductIsRepositoryConstruction : Bool
 
     p3ThreeStateCountClassicallySourced : Bool
     p2TenStateCountClassicallySourced : Bool
@@ -372,7 +397,7 @@ canonicalSmallCharacteristicClassicalSourcingBoundary :
   SmallCharacteristicClassicalSourcingBoundary
 canonicalSmallCharacteristicClassicalSourcingBoundary =
   small-characteristic-classical-sourcing-boundary
-    true true true true true true true true true true true true
+    true true true true true true true true true true true true true true
     false false false false
     false false
     true
