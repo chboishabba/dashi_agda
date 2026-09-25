@@ -2,7 +2,7 @@
 module DASHI.Physics.Foundations.CMP119AntigravityR129PinnedLocalCF2SameCarrierExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
@@ -113,16 +113,11 @@ selectedLocalCF2IsR129CompletedComposite
     {export = export} attachment =
   trans
     (selectedLocalCF2IsMarkedCurvatureF2 attachment)
-    (subst
+    (cong
       (λ source →
-        Curvature.localOperator
-          (curvatureFamily attachment)
-          (fieldStrengthSquarePolynomial attachment)
-        ≡
         Marked.continuumComposite
           (Marked.sameFamilyMarkedSourceGivesNuclearCompositeField source))
-      (selectedF2MarkedSourceIsR129Source attachment)
-      (Relation.Binary.PropositionalEquality.refl))
+      (selectedF2MarkedSourceIsR129Source attachment))
 
 r129PinnedLocalCF2SameCarrierCompilerLevel : ProofLevel
 r129PinnedLocalCF2SameCarrierCompilerLevel = machineChecked
