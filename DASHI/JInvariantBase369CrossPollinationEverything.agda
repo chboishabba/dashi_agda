@@ -209,3 +209,11 @@ import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact
 module DASHI.JInvariantBase369CrossPollinationEverything where
 
 
+
+import DASHI.Moonshine.Base369P3ConstantTernaryActionGroupoidExact
+
+import DASHI.Moonshine.Base369P2FiveOrbitOrientationGroupoidsExact
+
+import DASHI.Moonshine.OggSSPP2Base369RecognitionForkExact
+
+import DASHI.Moonshine.OggSSPArithmeticToIndependent369RecognitionExact
