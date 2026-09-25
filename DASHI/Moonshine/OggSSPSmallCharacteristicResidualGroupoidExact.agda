@@ -19,6 +19,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Interop.SourceAttributionShapePolicyExact as AttributionPolicy
@@ -29,6 +30,8 @@ import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact as Compression
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact as Exponent369
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
+import DASHI.Moonshine.JInvariantJCoarseFineFrickeBoundaryTransportBidiExact as Fricke
+import DASHI.Foundations.HyperformChartGluingExact as Gluing
 
 
 residualGroupoidClaimOrigin : Source.ClaimOrigin
@@ -308,8 +311,112 @@ naiveP2Pi0DoesNotEqualMonsterResidual :
   p2ResidualPi0Count ≡ Exponent369.p2ExceptionalResidual → ⊥
 naiveP2Pi0DoesNotEqualMonsterResidual ()
 
+
 ------------------------------------------------------------------------
--- 5. Consequence / frontier.
+-- 5. Retained-orientation semantics: ten gluing sites remain ten components.
+--
+-- This is the alternative to quotienting the strict side by the C2 flip.
+-- Its morphism group is trivial, so orientation is object data, not a gauge
+-- arrow.  This construction is repo-native and is NOT yet recognized as the
+-- arithmetic supersingular/Fricke groupoid.
+------------------------------------------------------------------------
+
+unitCombine : ⊤ → ⊤ → ⊤
+unitCombine tt tt = tt
+
+unitInverse : ⊤ → ⊤
+unitInverse tt = tt
+
+actP2Discrete : ⊤ → P2ResidualObject → P2ResidualObject
+actP2Discrete tt state = state
+
+p2DiscreteIdentityActs :
+  (state : P2ResidualObject) →
+  actP2Discrete tt state ≡ state
+p2DiscreteIdentityActs state = refl
+
+p2DiscreteCombineActs :
+  (g h : ⊤) (state : P2ResidualObject) →
+  actP2Discrete (unitCombine g h) state
+  ≡ actP2Discrete g (actP2Discrete h state)
+p2DiscreteCombineActs tt tt state = refl
+
+p2DiscreteInverseLeft :
+  (g : ⊤) (state : P2ResidualObject) →
+  actP2Discrete (unitInverse g) (actP2Discrete g state) ≡ state
+p2DiscreteInverseLeft tt state = refl
+
+p2DiscreteInverseRight :
+  (g : ⊤) (state : P2ResidualObject) →
+  actP2Discrete g (actP2Discrete (unitInverse g) state) ≡ state
+p2DiscreteInverseRight tt state = refl
+
+p2DiscreteAction :
+  Symmetry.InvertibleSymmetryAction P2ResidualObject ⊤
+p2DiscreteAction =
+  Symmetry.invertibleSymmetryAction
+    tt unitCombine unitInverse actP2Discrete
+    p2DiscreteIdentityActs
+    p2DiscreteCombineActs
+    p2DiscreteInverseLeft
+    p2DiscreteInverseRight
+
+p2DiscreteOrbitPresentation :
+  Generic.OrbitPresentation p2DiscreteAction
+p2DiscreteOrbitPresentation =
+  Generic.orbitPresentation
+    P2ResidualObject
+    (λ state → state)
+    (λ state → state)
+    (λ tt state → refl)
+    (λ state → refl)
+    (λ state → tt)
+    (λ state → refl)
+
+p2RetainedOrientationPi0Count : Nat
+p2RetainedOrientationPi0Count = 10
+
+p2ResidualMatchesRetainedOrientationPi0 :
+  Exponent369.p2ExceptionalResidual ≡ p2RetainedOrientationPi0Count
+p2ResidualMatchesRetainedOrientationPi0 = refl
+
+------------------------------------------------------------------------
+-- 6. Existing Fricke/gluing discipline prevents silently choosing a quotient.
+------------------------------------------------------------------------
+
+frickeBoundaryExchange :
+  Fricke.FrickeBoundaryTransportFrontier
+frickeBoundaryExchange = Fricke.canonicalFrickeBoundaryTransportFrontier
+
+sameObjectGluingBoundary :
+  Gluing.HyperformChartGluingBoundary
+sameObjectGluingBoundary = Gluing.canonicalHyperformChartGluingBoundary
+
+data InvolutionAutomaticallyMeansGaugeIdentification : Set where
+
+involutionDoesNotAutomaticallyMeanGaugeIdentification :
+  InvolutionAutomaticallyMeansGaugeIdentification → ⊥
+involutionDoesNotAutomaticallyMeanGaugeIdentification ()
+
+data P2ArithmeticRecognizesRetainedOrientationGroupoid : Set where
+data P2ArithmeticRecognizesFlipQuotientGroupoid : Set where
+
+p2RetainedOrientationRecognitionStillOpen :
+  P2ArithmeticRecognizesRetainedOrientationGroupoid → ⊥
+p2RetainedOrientationRecognitionStillOpen ()
+
+p2FlipQuotientRecognitionStillOpen :
+  P2ArithmeticRecognizesFlipQuotientGroupoid → ⊥
+p2FlipQuotientRecognitionStillOpen ()
+
+p2SemanticFork :
+  (p2ResidualPi0Count ≡ 5)
+  ×
+  (p2RetainedOrientationPi0Count ≡ 10)
+p2SemanticFork = refl , refl
+
+------------------------------------------------------------------------
+-- 7. Consequence / frontier.
 ------------------------------------------------------------------------
 
 record SmallCharacteristicResidualGroupoidBoundary : Set where
@@ -322,6 +429,9 @@ record SmallCharacteristicResidualGroupoidBoundary : Set where
     p2TenObjectsMatchArithmeticResidual : Bool
     p2NaiveBinaryFlipPi0Count : Nat
     p2NaiveBinaryFlipPi0EqualsResidual : Bool
+    p2RetainedOrientationPi0Count : Nat
+    p2RetainedOrientationPi0EqualsResidual : Bool
+    p2OrientationVersusGaugeSemanticsUnresolved : Bool
     p2NeedsRicherGluingRecognition : Bool
     externalArithmeticAttributedUpstream : Bool
     groupoidInterpretationIsDASHIExtension : Bool
@@ -332,5 +442,6 @@ canonicalSmallCharacteristicResidualGroupoidBoundary =
   small-characteristic-residual-groupoid-boundary
     true true true
     true true
-    5 false true
+    5 false
+    10 true true true
     true true
