@@ -39,6 +39,117 @@ The checker must not attempt:
 - reflection/macro execution;
 - proof validity.
 
+## Interactive incremental workflow
+
+The production-facing hot path is now `dashi-agda`, not pytest:
+
+```bash
+dashi-agda diagnose DASHI/Biology/Everything.agda --profile
+dashi-agda benchmark DASHI/Biology/Everything.agda --runs 7
+```
+
+`diagnose` never invokes Agda. It uses a persistent SQLite/WAL source index
+under `.cache/agda_preflight/source-index.sqlite3` by default. The index stores
+module identity, source freshness/hash, direct import edges, dependency
+fingerprints and cached structural diagnostics.
+
+A warm unchanged rollup request performs:
+
+```text
+SQLite open
+  -> indexed dependency-closure query
+  -> stat closure files
+  -> return cached diagnostics
+```
+
+and the required performance invariant is:
+
+```text
+files_parsed = 0
+checker_instances = 0
+```
+
+If a source file changes, only the dirty module and importers whose direct
+dependency fingerprint changed are conservatively recomputed. A later
+public-API fingerprint can narrow that invalidation further.
+
+Every interactive request has request-local telemetry. JSON output includes
+per-stage milliseconds and counts such as:
+
+```text
+request.total
+db.open
+db.schema
+closure.lookup
+source.stat
+source.read
+source.hash
+parse.tree_sitter
+diagnostics.local
+fixes.generate
+semantic.catalog_lookup
+
+modules_in_closure
+files_stat
+files_parsed
+dirty_modules
+modules_cached
+diagnostics_cached
+diagnostics_recomputed
+semantic_snapshot_hits
+semantic_snapshot_misses
+```
+
+`dashi-agda benchmark` measures a cold temporary-index bootstrap separately
+from repeated warm requests and reports min/p50/p95/max warm latency plus the
+warm parse-count invariant.
+
+Diagnostics can also carry structured repair metadata:
+
+```text
+root_cause
+explanation
+expected
+found
+fixes[]
+  title
+  applicability = machine_safe | likely | speculative
+  rationale
+  validation = structural | scope | typecheck
+  edits[]
+```
+
+The current fix-enrichment layer covers high-value projection and record-field
+failures without weakening the diagnostic rules themselves.
+
+### Last-known-good semantic catalog
+
+The source index can optionally join against the existing `agda2lean`
+SQLite catalog:
+
+```bash
+dashi-agda diagnose DASHI/Biology/Everything.agda \
+  --semantic-catalog /path/to/agda2lean/catalog.sqlite \
+  --json
+```
+
+This exposes existing semantic module object hashes, declaration counts and
+term counts without invoking Agda. The current `agda2lean` schema does not yet
+store the source SHA that produced each semantic object, so these hits are
+reported with:
+
+```text
+freshness = unknown
+```
+
+A catalog hit must therefore be treated as a last-known semantic snapshot, not
+proof that the current source is type-valid. The cross-repo follow-up is to
+persist the checked source hash in `agda2lean` so freshness can be decided
+exactly.
+
+Pytest remains the regression/full-audit surface for the checker itself; it is
+not the normal agent runtime.
+
 ## Current implementation status
 
 The frontend is now **tree-sitter-first and regex-free for Agda syntax parsing**.
