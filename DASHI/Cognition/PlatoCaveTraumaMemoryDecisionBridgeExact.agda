@@ -27,6 +27,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Cognition.PlatoCaveSourceAttributionExact as PlatoSource
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Biology.ObserverRelativeReachableSubfabricExact as Reach
 import DASHI.Biology.EmbodiedCausalConeFeedbackExact as Cone
@@ -34,6 +35,9 @@ import DASHI.Biology.BodyModulatedDecisionCoordinatesExact as Controls
 import DASHI.Cognition.PNF.AdmissibleFactorisationDecisionHyperfabricExact as Decision
 import DASHI.Cognition.PNF.TrialecticMemoryLearningHyperfabricExact as Trialectic
 import DASHI.Cognition.PNF.MemoryCommandSeparationExact as MemoryCommand
+
+platoCaveConceptualSource =
+  PlatoSource.platoRepublicCaveSource
 
 ------------------------------------------------------------------------
 -- Finite cave carrier: two fine situations cast the same current shadow.
