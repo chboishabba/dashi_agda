@@ -3,7 +3,9 @@ module DASHI.Physics.Foundations.CMP119AntigravityPhysicalEinsteinCalibrationExa
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; _<_)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; _<_; _/_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (_≡_)
 
 import DASHI.Physics.Closure.EinsteinPhysicalCouplingCalibrationExact as Physical
@@ -153,6 +155,51 @@ record PhysicalKottlerCalibrationEnclosure
       targetAmplitude ≤ physicalAmplitudeUpper scale
 
 open PhysicalKottlerCalibrationEnclosure public
+
+------------------------------------------------------------------------
+-- TYPED CODATA DIAGNOSTIC ENCLOSURE
+--
+-- Exact rational endpoints corresponding to the vendored candidate
+--
+--   2.0766474428449717e-43 +/- 4.667112902128249e-48 m J^-1.
+--
+-- These endpoints type the diagnostic interval only.  They do not inhabit
+-- AcceptedPhysicalEinsteinCoupling.
+------------------------------------------------------------------------
+
+codataCandidateKappaLower : ℚ
+codataCandidateKappaLower =
+  (+ 207660077171595041751)
+  / 1000000000000000000000000000000000000000000000000000000000000000
+
+codataCandidateKappaUpper : ℚ
+codataCandidateKappaUpper =
+  (+ 207669411397399298249)
+  / 1000000000000000000000000000000000000000000000000000000000000000
+
+codataCandidateKappaLowerPositive :
+  0ℚ < codataCandidateKappaLower
+codataCandidateKappaLowerPositive =
+  ℚP.positive⁻¹ codataCandidateKappaLower
+
+codataCandidateKappaOrdered :
+  codataCandidateKappaLower ≤ codataCandidateKappaUpper
+codataCandidateKappaOrdered =
+  ℚP.nonNegative⁻¹
+    (codataCandidateKappaUpper - codataCandidateKappaLower)
+
+codataCandidateKappaInterval :
+  PhysicalEinsteinCouplingInterval
+codataCandidateKappaInterval = record
+  { PhysicalEinsteinCouplingInterval.lower =
+      codataCandidateKappaLower
+  ; PhysicalEinsteinCouplingInterval.upper =
+      codataCandidateKappaUpper
+  ; PhysicalEinsteinCouplingInterval.lowerPositive =
+      codataCandidateKappaLowerPositive
+  ; PhysicalEinsteinCouplingInterval.ordered =
+      codataCandidateKappaOrdered
+  }
 
 ------------------------------------------------------------------------
 -- STATUS / TRUST BOUNDARY
