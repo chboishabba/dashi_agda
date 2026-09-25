@@ -4,10 +4,12 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 import DASHI.Core.GenderedNormApprovalIndependenceExact as Approval
 import DASHI.Core.IrigarayLabialRelationalCarrierExact as Irigaray
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as LI
+import DASHI.Core.TernaryRoleCarrierExact as Ternary
 import DASHI.Reasoning.LacanSignifierSubjectCore as Lacan
 import DASHI.Reasoning.LacanFantasyDriveCore as Fantasy
 
@@ -97,7 +99,7 @@ objectiveDoesNotDetermineSanction coarse factor =
     left = factor sameObjectiveLowSanction
     right = factor sameObjectiveHighSanction
   in
-  (λ ()) (left trans (sym right))
+  (λ ()) (trans left (sym right))
 
 ------------------------------------------------------------------------
 -- Lacanian boundary reuse.
@@ -125,7 +127,7 @@ bigOtherIsNotLiteralOmniscientApprover = refl
 ------------------------------------------------------------------------
 
 noRelabellingCollapsesReciprocalGrammarIntoOneCentredGrammar :
-  (permutation : DASHI.Core.TernaryRoleCarrierExact.TernaryPermutation) →
+  (permutation : Ternary.TernaryPermutation) →
   LI.GrammarPreserving permutation → ⊥
 noRelabellingCollapsesReciprocalGrammarIntoOneCentredGrammar =
   LI.noTernaryRelabellingPreservesGrammar
