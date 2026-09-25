@@ -152,9 +152,6 @@ existingStackPromotionObligation =
 ------------------------------------------------------------------------
 
 data NextHigherDescentObligation : Set where
-  constructTransportComposition : NextHigherDescentObligation
-  proveTransportIdentityLaws : NextHigherDescentObligation
-  proveTransportCompositionLaws : NextHigherDescentObligation
   indexTransportOverRelationalSite : NextHigherDescentObligation
   proveRestrictionTransportCoherence : NextHigherDescentObligation
   constructOverlapCocycleTwoMorphisms : NextHigherDescentObligation
@@ -167,10 +164,7 @@ data NextHigherDescentObligation : Set where
 nextHigherDescentObligations :
   List NextHigherDescentObligation
 nextHigherDescentObligations =
-  constructTransportComposition
-  ∷ proveTransportIdentityLaws
-  ∷ proveTransportCompositionLaws
-  ∷ indexTransportOverRelationalSite
+  indexTransportOverRelationalSite
   ∷ proveRestrictionTransportCoherence
   ∷ constructOverlapCocycleTwoMorphisms
   ∷ proveCocycleCoherence
