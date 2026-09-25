@@ -119,42 +119,6 @@ p2IndependentOrbitRecognition recognition =
 -- a provenance-bearing first leg.  The second leg is already proved.
 ------------------------------------------------------------------------
 
-record P3ArithmeticResidualProvenanceLift
-    (source : SourceSocket.P3MarkedFrobeniusSource) : Set₂ where
-  field
-    ArithmeticProvenance : Set
-    arithmeticProvenance :
-      SourceSocket.MarkedState source ->
-      ArithmeticProvenance
-
-    residualProvenanceRecognition :
-      Provenance.ProvenancePreservingOrbitRecognition
-        {provenanceA = arithmeticProvenance}
-        {provenanceB = P3Bridge.sourceProvenance}
-        (record
-          { actionRecognition =
-              Recognition.action-recognition-functor
-                (λ state -> state)
-                (λ symmetry -> symmetry)
-                refl
-                (λ g h -> refl)
-                (λ g -> refl)
-                (λ g state -> refl)
-          ; mapProvenance = λ p -> p
-          ; provenanceCommutes = λ state -> refl
-          ; reflectsMappedProvenance = λ same -> same
-          })
-        (SourceSocket.orbits source)
-        Residual.constantTernaryOrbitPresentation
-
-open P3ArithmeticResidualProvenanceLift public
-
-------------------------------------------------------------------------
--- The fully generic provenance composition is exposed separately below.
--- A domain inhabitant should normally construct the first-leg provenance
--- action/orbit recognition directly; no fake identity source is supplied here.
-------------------------------------------------------------------------
-
 record P3ArithmeticProvenanceFirstLeg
     (source : SourceSocket.P3MarkedFrobeniusSource) : Set₂ where
   field
