@@ -27,6 +27,7 @@ module DASHI.Reasoning.TrialecticThreeCellCarryDepthExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Nat using (Nat; suc)
 
 import DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact as Cell
 import DASHI.Reasoning.CarryMemorySubvoxelReceipt as Carry
@@ -39,7 +40,7 @@ import DASHI.Cognition.RecursiveFibreTower as Tower
 record TrialecticCellCarryStep
     (depth : Nat)
     (state : Cell.StructuredTrialecticState)
-    (gluing : Cell.SecondOrderCellGluing state) : Set where
+    (gluing : Cell.SecondOrderCellGluing state) : Set₁ where
   constructor trialectic-cell-carry-step
   field
     sourceDepth : Nat
