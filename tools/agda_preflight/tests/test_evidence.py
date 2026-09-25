@@ -1070,8 +1070,8 @@ def test_command_scope_runner_extracts_agda_checked_modules():
     output = """Logging Agda output to: /tmp/log
 Checking: DASHI/Everything.agda
 Checking DASHI.Core.Prelude (/shadow/DASHI/Core/Prelude.agda).
-( 514/1120) Checking DASHI.Algebra.Foo (/shadow/DASHI/Algebra/Foo.agda).
-( 515/1120) Checking DASHI.Biology.Broken (/shadow/DASHI/Biology/Broken.agda).
+Checking DASHI.Algebra.Foo (/shadow/DASHI/Algebra/Foo.agda).
+Checking DASHI.Biology.Broken (/shadow/DASHI/Biology/Broken.agda).
 """
     modules = CommandScopeCheckBackend._checked_modules(output)
     assert modules == (

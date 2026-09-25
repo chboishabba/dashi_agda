@@ -94,9 +94,15 @@ def _resolve_record_head(checker, summary, head):
 
 
 def _resolve_record_ast(checker, summary, signature):
-    if signature is None or signature.type_node is None:
+    if signature is None:
         return None
-    head = terminal_head(shape_from_node(summary.ast.source_bytes, signature.type_node))
+    if signature.type_node is not None:
+        head = terminal_head(shape_from_node(summary.ast.source_bytes, signature.type_node))
+    elif signature.type_text:
+        head = signature.type_text.split("→")[-1].strip().split()
+        head = head[0] if head else None
+    else:
+        return None
     return _resolve_record_head(checker, summary, head)
 
 

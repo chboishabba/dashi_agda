@@ -666,6 +666,8 @@ def _record_from_node(source_bytes: bytes, node) -> Optional[AstRecord]:
             saw_field_keyword = True
         if owner.type == "ERROR" and "field" in owner_tokens:
             rec.field_surface_complete = False
+        if any(descendants(owner, "open", "import")):
+            rec.field_surface_complete = False
 
         ctor = first_descendant(owner, "record_constructor")
         if ctor is not None and rec.constructor is None:
@@ -1068,6 +1070,25 @@ def build_ast_index(parser, path: Path, root_path: Path, source: str) -> AstInde
             recovered = _recover_import_from_error(source_bytes, node)
             if recovered is not None:
                 _append_import(index, recovered)
+            elif node.start_point[1] == 0:
+                name = _name_from_node(source_bytes, first_descendant(node, "qid", "id"))
+                sibling = node.next_named_sibling
+                if name and _valid_function_name(name) and sibling is not None and sibling.type == "function":
+                    sib_tokens = significant_tokens(source_bytes, sibling)
+                    if sib_tokens and sib_tokens[0].text == ":":
+                        expr_node = first_descendant(sibling, "expr")
+                        if expr_node is None:
+                            lhs = first_descendant(sibling, "lhs")
+                            if lhs is not None and len(lhs.named_children) >= 2:
+                                expr_node = lhs.named_children[-1]
+                            elif sibling.named_children:
+                                expr_node = sibling.named_children[-1]
+                        type_text = node_text(source_bytes, expr_node).strip() if expr_node is not None else ""
+                        if not type_text and len(sib_tokens) > 1:
+                            type_text = " ".join(t.text for t in sib_tokens[1:])
+                        sig = AstSignature((name,), type_text, line_of(node), expr_node, sibling)
+                        index.signature_occurrences.setdefault(name, []).append(sig)
+                        index.signatures[name] = sig
         elif node.type in {"record", "record_signature"}:
             rec = _record_from_node(source_bytes, node)
             if rec is not None:
