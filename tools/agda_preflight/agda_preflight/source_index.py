@@ -241,6 +241,16 @@ class SourceIndex:
                         end_line=int(edit["end_line"]),
                         end_column=int(edit["end_column"]),
                         replacement=edit["replacement"],
+                        start_byte=(
+                            int(edit["start_byte"])
+                            if edit.get("start_byte") is not None
+                            else None
+                        ),
+                        end_byte=(
+                            int(edit["end_byte"])
+                            if edit.get("end_byte") is not None
+                            else None
+                        ),
                     )
                 )
             fixes.append(
