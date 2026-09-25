@@ -85,6 +85,7 @@ import DASHI.Physics.Closure.NSTriadKNR650CyclicHelicalCoefficientCancellationRo
 import DASHI.Physics.Closure.NSTriadKNR650CyclicHelicalPairingNormalFormRound705Exact as R705
 import DASHI.Physics.Closure.NSTriadKNR650NestedOuterSlotCoefficientFactorRound706Exact as R706
 import DASHI.Physics.Closure.NSTriadKNR650SelfInnerThreeOuterLegOrbitRound707Exact as R707
+import DASHI.Physics.Closure.NSTriadKNR650UnitNestedOrbitSelfExternalSplitRound708Exact as R708
 import DASHI.Physics.Closure.NSTriadKNR650BadCollarA3ComplementRound666Exact as R666A3
 
 data PeriodicNewNSAnalyticLeaf : Set where
