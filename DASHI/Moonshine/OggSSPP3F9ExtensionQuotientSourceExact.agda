@@ -31,6 +31,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 import DASHI.Moonshine.OggSSPP3F9ExtensionQuotientCandidateExact as Candidate
 import DASHI.Moonshine.OggSSPSmallCharacteristicArithmeticSourceSocketExact as Socket
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
+import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact as Classical
+import DASHI.Moonshine.OggSSPSmallCharacteristicClassicalClaimMatchExact as ClaimMatch
 
 canonicalP3MarkedFrobeniusSource :
   Socket.P3MarkedFrobeniusSource
@@ -82,6 +84,26 @@ externalClassicalModuliIdentificationStillOpen :
   ExternalClassicalModuliIdentifiesP3ExtensionQuotient -> ⊥
 externalClassicalModuliIdentificationStillOpen ()
 
+------------------------------------------------------------------------
+-- Classical sourcing attachment.
+------------------------------------------------------------------------
+
+classicalSourceAtlas :
+  Classical.SmallCharacteristicClassicalSourcingBoundary
+classicalSourceAtlas =
+  Classical.canonicalSmallCharacteristicClassicalSourcingBoundary
+
+classicalClaimMatch :
+  ClaimMatch.ClassicalClaimMatchBoundary
+classicalClaimMatch =
+  ClaimMatch.canonicalClassicalClaimMatchBoundary
+
+classicalFrameworkSupportsMarkedSupersingularObject : Bool
+classicalFrameworkSupportsMarkedSupersingularObject = true
+
+exactThreeStatePresentationClassicallyIdentified : Bool
+exactThreeStatePresentationClassicallyIdentified = false
+
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
   Attribution.repositoryFormalReconstruction
@@ -95,6 +117,8 @@ record P3ExtensionQuotientSourceBoundary : Set where
     movedWitnessUsed : Bool
     coarseJConstantUsed : Bool
     repositoryFormalReconstruction : Bool
+    classicalFrameworkSourcingAttached : Bool
+    exactThreeStateClassicallyIdentified : Bool
     externalClassicalModuliIdentificationPaid : Bool
     externalSourceCreditedWithDASHIQuotient : Bool
 
@@ -102,4 +126,4 @@ canonicalP3ExtensionQuotientSourceBoundary :
   P3ExtensionQuotientSourceBoundary
 canonicalP3ExtensionQuotientSourceBoundary =
   p3-extension-quotient-source-boundary
-    true true true true true true false false
+    true true true true true true true false false false
