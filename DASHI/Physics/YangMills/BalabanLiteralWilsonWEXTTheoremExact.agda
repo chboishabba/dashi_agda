@@ -492,3 +492,146 @@ literalPreferredWilsonWEXTFromPointwiseLocalization
     translatedProductBounded
     supportDistanceIsEuclideanTime
     upperOrderClosed
+
+
+------------------------------------------------------------------------
+-- Terminal W1+W3 constructor from one source-native marked-localization
+-- package.  No intermediate printed-J or generic extensionActivity equality is
+-- exposed to callers.
+------------------------------------------------------------------------
+
+literalPreferredWilsonWEXTFromSupportIndexedMarkedLocalization :
+  ∀ {Measure Observable SourceDirection Cluster Source Scale Volume Root}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (insertionMeaning :
+      ∀ cutoff →
+      Cumulant.LiteralTwoSourceInsertionMeaning
+        (sourceCalculus cutoff)
+        SourceDirection)
+    (derivativeCalculus :
+      Nat → Observable → Observable →
+      Diff.MixedSourceDerivativeCalculus Source)
+    (derivativeVanishing :
+      ∀ cutoff left right →
+      Diff.MixedSourceDerivativeVanishing
+        (derivativeCalculus cutoff left right))
+    (markedExpansion :
+      ∀ cutoff left right →
+      Diff.SupportIndexedMarkedClusterExpansion
+        Source Cluster
+        (derivativeCalculus cutoff left right))
+    (literalResponseIsMarkedMixedDerivative :
+      ∀ cutoff left right →
+      Cumulant.literalMixedSecondLogDerivative
+        (insertionMeaning cutoff)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) left)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) right)
+      ≡
+      Diff.mixedDerivative
+        (derivativeCalculus cutoff left right)
+        (Diff.logPartition (markedExpansion cutoff left right)))
+    (shellData : Shell.TraversalShellData Scale Volume Root)
+    (scaleOfCutoff : Nat → Scale)
+    (volumeOfCutoff : Nat → Volume)
+    (physicalDistance : Observable → Observable → Nat)
+    (connectingRoot : Nat → Observable → Observable → Root)
+    (ConnectingClusterMeetsBothSupports :
+      Nat → Observable → Observable → Set)
+    (shellCharge :
+      Nat → Observable → Observable → Cluster → ℚ)
+    (pointwiseWilsonClusterLocalization :
+      ∀ cutoff left right cluster →
+      let expansion = markedExpansion cutoff left right in
+      ∣ Diff.mixedDerivative
+          (derivativeCalculus cutoff left right)
+          (Diff.clusterTerm expansion cluster) ∣
+      ≤ shellCharge cutoff left right cluster)
+    (localizedShellChargeSum :
+      ∀ cutoff left right →
+      let expansion = markedExpansion cutoff left right
+          locality = Diff.supportLocality expansion
+      in
+      TwoMark.sumℚ
+        (TwoMark.map
+          (shellCharge cutoff left right)
+          (Diff.filterTwoSupport
+            (Diff.touchesLeft locality)
+            (Diff.touchesRight locality)
+            (Diff.clusters expansion)))
+      ≤
+      Shell.rootedShell shellData
+        (scaleOfCutoff cutoff)
+        (volumeOfCutoff cutoff)
+        (connectingRoot cutoff left right)
+        (physicalDistance left right))
+    (timeTranslate : Observable → Nat → Observable)
+    (leftBounded :
+      ∀ observable →
+      Gram.BoundedObservable dataSet observable)
+    (translatedRightBounded :
+      ∀ observable time →
+      Gram.BoundedObservable dataSet (timeTranslate observable time))
+    (translatedProductBounded :
+      ∀ left right time →
+      Gram.BoundedObservable dataSet
+        (Gram.multiplyObservable (Gram.operations dataSet)
+          left (timeTranslate right time)))
+    (supportDistanceIsEuclideanTime :
+      ∀ left right time →
+      physicalDistance left (timeTranslate right time) ≡ time)
+    (upperOrderClosed :
+      ∀ sequence target upper →
+      Gram.Converges (Gram.scalarConvergence dataSet) sequence target →
+      (∀ cutoff → sequence cutoff ≤ upper) →
+      target ≤ upper) →
+  R576.PreferredWilsonWEXTSource
+    {Measure = Measure}
+    {Observable = Observable}
+    {Scale = Scale}
+    {Volume = Volume}
+    {Root = Root}
+    dataSet laws
+literalPreferredWilsonWEXTFromSupportIndexedMarkedLocalization
+    sourceCalculus insertionMeaning derivativeCalculus derivativeVanishing
+    markedExpansion literalResponseIsMarkedMixedDerivative
+    shellData scaleOfCutoff volumeOfCutoff physicalDistance connectingRoot
+    ConnectingClusterMeetsBothSupports shellCharge
+    pointwiseWilsonClusterLocalization localizedShellChargeSum
+    timeTranslate leftBounded translatedRightBounded
+    translatedProductBounded supportDistanceIsEuclideanTime upperOrderClosed =
+  let
+    mixedLog =
+      literalWilsonMixedLogFromSupportIndexedMarkedExpansion
+        sourceCalculus
+        insertionMeaning
+        derivativeCalculus
+        derivativeVanishing
+        markedExpansion
+        literalResponseIsMarkedMixedDerivative
+  in
+  literalPreferredWilsonWEXTFromPointwiseLocalization
+    mixedLog
+    shellData
+    scaleOfCutoff
+    volumeOfCutoff
+    physicalDistance
+    connectingRoot
+    ConnectingClusterMeetsBothSupports
+    shellCharge
+    pointwiseWilsonClusterLocalization
+    localizedShellChargeSum
+    timeTranslate
+    leftBounded
+    translatedRightBounded
+    translatedProductBounded
+    supportDistanceIsEuclideanTime
+    upperOrderClosed
