@@ -25,6 +25,7 @@ import DASHI.Core.RelationalTransportDescentSheafExact as TransportDescent
 import DASHI.Core.ContextIndexedObservationFibrationExact as Indexed
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 import DASHI.Reasoning.TrialecticObserverMatrix369Exact as Observer
+import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact as Observer369
 import DASHI.Foundations.RelationalObserverNonaryD4DecompositionExact as ObserverD4
 import DASHI.Foundations.TrialecticD4C3ResidualBoundaryExact as D4C3
 import DASHI.Foundations.TrialecticZeroToThirteenStageBoundaryExact as Stage
@@ -237,9 +238,9 @@ observerTo369 : BridgeStatement
 observerTo369 =
   bridge-statement
     observerMatrix3x3 hyperfabric369T9
-    carrierShapeFit
+    exactBijectionRechart
     false
-    "Three self positions plus six directed other-models give nine positions suitable for a T^9/369 chart; no semantic identity theorem is claimed."
+    "A two-sided rechart now identifies the finite ObserverMatrix3 SSPTrit carrier with the existing T^9 / three-27-cube hyperfabric; semantic roles remain distinct."
 
 c3ToMonsterResidual : BridgeStatement
 c3ToMonsterResidual =
