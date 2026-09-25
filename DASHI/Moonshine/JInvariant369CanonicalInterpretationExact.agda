@@ -837,3 +837,10 @@ ssp15PrimeDoesNotEqualInternalLane :
     ssp15PrimeInternalFibreBoundary
   ≡ false
 ssp15PrimeDoesNotEqualInternalLane = refl
+
+
+ssp15CanonicalSignedLiftUsesPrimeInternalPair :
+  PrimeFibre.canonicalSignedLiftUsesPrimeInternalPair
+    ssp15PrimeInternalFibreBoundary
+  ≡ true
+ssp15CanonicalSignedLiftUsesPrimeInternalPair = refl
