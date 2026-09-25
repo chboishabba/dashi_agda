@@ -38,6 +38,8 @@ open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
+import DASHI.Mathematics.Complexity.SATDecisionToWitnessSelfReductionExact as Search
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalRestrictionFamilyExact as Family
 import DASHI.Mathematics.Complexity.PNotEqualsNPResourceClosingRestrictionQuotientExact as Quotient
 import DASHI.Mathematics.Complexity.PNotEqualsNPRestrictionQuotientDynamicProgrammingExact as DP
@@ -212,7 +214,7 @@ recurrenceValue :
   Fin stateCount →
   Bool
 recurrenceValue step previousStateWire previousValues state =
-  SAT.orBool
+  Cook.orBool
     (Circuit.lookupVec
       (previousStateWire (step state false))
       previousValues)
@@ -357,72 +359,25 @@ recurrenceLayerStateCorrect
             state))))
 
 ------------------------------------------------------------------------
+-- The concrete circuit carrier uses Cook.orBool while the indexed Shannon DP
+-- uses SAT.orBool.  They are extensionally identical.
+------------------------------------------------------------------------
+
+orBoolAgreement :
+  (left right : Bool) →
+  Cook.orBool left right
+  ≡ SAT.orBool left right
+orBoolAgreement false right =
+  refl
+orBoolAgreement true right =
+  refl
+
+------------------------------------------------------------------------
 -- Main depth/state theorem.
 ------------------------------------------------------------------------
 
-quotientProgramStateCorrect :
-  ∀ {rootVariables : Nat}
-    {root : SAT.BooleanFormula rootVariables}
-    (quotient : Quotient.RestrictionSemanticQuotient root)
-    (terminalTruth :
-      Fin (Quotient.stateCount quotient) → Bool)
-    (depth : Nat)
-    (state : Fin (Quotient.stateCount quotient)) →
-  Circuit.lookupVec
-    (QCircuit.newestLayerWire depth state)
-    (Circuit.evaluateProgram
-      (QCircuit.quotientProgram
-        quotient
-        terminalTruth
-        depth)
-      [])
-  ≡
-  DP.quotientTruthAtDepth
-    quotient
-    (DP.terminal-state-labelling
-      terminalTruth
-      (λ derivation → refl))
-    depth
-    state
-quotientProgramStateCorrect
-    quotient
-    terminalTruth
-    zero
-    state =
-  terminalLayerStateCorrect
-    (Quotient.stateCount quotient)
-    terminalTruth
-    state
-quotientProgramStateCorrect
-    quotient
-    terminalTruth
-    (suc depth)
-    state =
-  trans
-    (recurrenceLayerStateCorrect
-      (Quotient.step quotient)
-      (QCircuit.newestLayerWire depth)
-      (QCircuit.quotientProgram
-        quotient
-        terminalTruth
-        depth)
-      state)
-    (cong₂
-      SAT.orBool
-      (quotientProgramStateCorrect
-        quotient
-        terminalTruth
-        depth
-        (Quotient.step quotient state false))
-      (quotientProgramStateCorrect
-        quotient
-        terminalTruth
-        depth
-        (Quotient.step quotient state true)))
-
 ------------------------------------------------------------------------
--- The theorem above should not manufacture terminal correctness.  Package the
--- circuit/DP equality against an EXISTING terminal labelling.
+-- Circuit/DP equality against an EXISTING terminal labelling.
 ------------------------------------------------------------------------
 
 quotientProgramStateCorrectWithLabels :
@@ -470,18 +425,30 @@ quotientProgramStateCorrectWithLabels
         (DP.terminalTruth labels)
         depth)
       state)
-    (cong₂
-      SAT.orBool
-      (quotientProgramStateCorrectWithLabels
-        quotient
-        labels
-        depth
-        (Quotient.step quotient state false))
-      (quotientProgramStateCorrectWithLabels
-        quotient
-        labels
-        depth
-        (Quotient.step quotient state true)))
+    (trans
+      (cong₂
+        Cook.orBool
+        (quotientProgramStateCorrectWithLabels
+          quotient
+          labels
+          depth
+          (Quotient.step quotient state false))
+        (quotientProgramStateCorrectWithLabels
+          quotient
+          labels
+          depth
+          (Quotient.step quotient state true)))
+      (orBoolAgreement
+        (DP.quotientTruthAtDepth
+          quotient
+          labels
+          depth
+          (Quotient.step quotient state false))
+        (DP.quotientTruthAtDepth
+          quotient
+          labels
+          depth
+          (Quotient.step quotient state true))))
 
 ------------------------------------------------------------------------
 -- Root circuit equals the exact quotient DP root value.
