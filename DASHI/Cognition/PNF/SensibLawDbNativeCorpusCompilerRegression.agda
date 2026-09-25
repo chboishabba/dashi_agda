@@ -93,3 +93,33 @@ fixtureAutomaticExtractionDoesNotAdmitTruth :
     fixtureDbNativeReceipt
   ≡ false
 fixtureAutomaticExtractionDoesNotAdmitTruth = refl
+
+
+fixturePersistedM12Candidate :
+  Scale.PersistedM12CandidateProduct Fixture.fixtureSource Fixture.fixtureRegion
+fixturePersistedM12Candidate =
+  Scale.persisted-m12-candidate-product
+    "statement:fixture"
+    "candidate-pnf-batch:fixture"
+    "db-parser:fixture"
+    Fixture.fixtureRegion
+    refl
+    ("candidate:fixture:actor" ∷ "candidate:fixture:predicate" ∷ [])
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+
+fixtureCandidateReloadsWithoutAdmission :
+  Scale.PersistedM12CandidateProduct.persistenceCreatesSemanticAdmission
+    fixturePersistedM12Candidate
+  ≡ false
+fixtureCandidateReloadsWithoutAdmission = refl
+
+fixtureCandidateReloadsWithoutTruth :
+  Scale.PersistedM12CandidateProduct.persistenceCreatesClaimTruth
+    fixturePersistedM12Candidate
+  ≡ false
+fixtureCandidateReloadsWithoutTruth = refl
