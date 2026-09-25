@@ -214,7 +214,7 @@ equalSumDoesNotCreateSameCarrier ()
 record Optional369CoarseRepresentation
   (prime : Lane.MonsterPrimeLane)
   (trial : ArithmeticTrialectic prime)
-  (Code : Set) : Set1 where
+  (Code : Set) : Set₁ where
   field
     encodeRole : ModularContributionRole -> Code
     encodeSlot : ArithmeticMultiplicitySlot trial -> Code
