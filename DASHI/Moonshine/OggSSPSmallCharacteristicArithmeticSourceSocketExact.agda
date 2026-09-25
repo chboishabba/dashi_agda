@@ -33,6 +33,7 @@ import DASHI.Physics.Moonshine.SupersingularPrimeLaneBridge as SSPAuthority
 import DASHI.Physics.Closure.IsospinSplittingFromP3LaneReceipt as P3Receipt
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Moonshine.OggSSPP3F9FrobeniusCandidateNoGoExact as F9NoGo
+import DASHI.Moonshine.OggSSPP2F4FrobeniusCandidateNoGoExact as F4NoGo
 import DASHI.Moonshine.OggSSPSmallCharacteristicCodecIndexedRecognitionExact as LaneCodec
 
 ------------------------------------------------------------------------
@@ -171,6 +172,9 @@ record SmallCharacteristicArithmeticSourceBoundary : Set where
     p2MarkedActionSocketOwned : Bool
     wholeF9FrobeniusCarrierRejected : Bool
     p3MarkedQuotientOrSubcarrierRequired : Bool
+    rawF4FrobeniusCarrierHasThreeOrbitDiagnostic : Bool
+    rawF4InsufficientForTenComponentRetainedTarget : Bool
+    p2MarkedLevelCMCoverRequired : Bool
     receiptMetadataPromotedToAction : Bool
     p2SourceInhabited : Bool
     p3SourceInhabited : Bool
@@ -182,5 +186,6 @@ canonicalSmallCharacteristicArithmeticSourceBoundary =
   small-characteristic-arithmetic-source-boundary
     true true true true true true true
     true true
+    true true true
     false false false
     missingP2MarkedArithmeticSource
