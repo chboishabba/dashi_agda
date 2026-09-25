@@ -42,22 +42,29 @@ halfPositive = ℚP.positive⁻¹ Curvature.half
 energyNonnegative :
   (value : Curl.RationalVector3) →
   0ℚ ≤ Curvature.energy value
-energyNonnegative value =
+energyNonnegative (Curl.vec3 x y z) =
   let
     instance
       halfNN : NonNegative Curvature.half
       halfNN = nonNegative (ℚP.<⇒≤ halfPositive)
 
-      normNN : NonNegative (Curl.vectorDot value value)
-      normNN =
-        nonNegative
-          (let
-             raw = vectorNormSqNonnegative value
-           in
-           ℚP.≤-respʳ-≃
-             (ℚP.≃-sym
-               (ℚP.≡⇒≃ (Curl.vectorDotSelfIsNormSq value)))
-             raw)
+      xNN : NonNegative (x * x)
+      xNN = nonNegative (ℚP.nonNegative⁻¹ (x * x))
+
+      yNN : NonNegative (y * y)
+      yNN = nonNegative (ℚP.nonNegative⁻¹ (y * y))
+
+      zNN : NonNegative (z * z)
+      zNN = nonNegative (ℚP.nonNegative⁻¹ (z * z))
+
+      normNN : NonNegative
+        (x * x + y * y + z * z)
+      normNN = nonNegative
+        (ℚP.+-mono-≤
+          (ℚP.nonNegative⁻¹ (x * x))
+          (ℚP.+-mono-≤
+            (ℚP.nonNegative⁻¹ (y * y))
+            (ℚP.nonNegative⁻¹ (z * z))))
   in
   ℚP.nonNegative⁻¹ _
 
@@ -118,6 +125,10 @@ normalizedCurvatureF2PositiveFromF01 {curvature} witness =
             (ℚP.+-mono-≤
               (energyNonnegative (Curvature.f13 curvature))
               (energyNonnegative (Curvature.f23 curvature)))))
+    instance
+      f01Positive :
+        Positive (Curvature.energy (Curvature.f01 curvature))
+      f01Positive = positiveF01 witness
   in
   ℚP.+-mono-<-≤
     (ℚP.positive⁻¹
