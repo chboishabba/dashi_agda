@@ -68,6 +68,9 @@ import DASHI.Moonshine.JInvariantSmithChartMobiusMatrixBridgeExact as SmithMatri
 import DASHI.Moonshine.JInvariant369C6TenRankWeightTwelveCrossPollinationExact as Cross
 import DASHI.Moonshine.JInvariant369NeutralCuspRelationCrossPollinationExact as NeutralCusp
 import DASHI.Moonshine.JInvariant369SSP15SignedFRACTRANBranchExact as SSPF
+import DASHI.Moonshine.JInvariant369OggAddressSSP15NoGoExact as OggNoGo
+import DASHI.Moonshine.JInvariant369SSP15OggAddressCodecExact as OggCodec
+import DASHI.Moonshine.JInvariant369SSP15PrimeInternalFibreExact as PrimeFibre
 
 record Canonical369InterpretationBoundary : Set where
   constructor canonical-369-interpretation-boundary
@@ -773,3 +776,99 @@ ssp15FRACTRANExecutionHandoffIsPaid :
     ssp15SignedFRACTRANBranchBoundary
   ≡ true
 ssp15FRACTRANExecutionHandoffIsPaid = refl
+
+
+------------------------------------------------------------------------
+-- SSP15 = Ogg exact-address carrier; only the coarse observer is lossy.
+------------------------------------------------------------------------
+
+oggAddressSSP15NoGoBoundary :
+  OggNoGo.OggAddressSSP15NoGoBoundary
+oggAddressSSP15NoGoBoundary =
+  OggNoGo.canonicalOggAddressSSP15NoGoBoundary
+
+oggAddressCoarseCollisionIsExplicit :
+  OggNoGo.explicitCoarseCollisionOwned oggAddressSSP15NoGoBoundary ≡ true
+oggAddressCoarseCollisionIsExplicit = refl
+
+oggAddressMode09IsAbsent :
+  OggNoGo.addressMode09Absent oggAddressSSP15NoGoBoundary ≡ true
+oggAddressMode09IsAbsent = refl
+
+oggAddressModePreservingBijectionIsImpossible :
+  OggNoGo.modePreservingFifteenBijectionImpossible
+    oggAddressSSP15NoGoBoundary
+  ≡ true
+oggAddressModePreservingBijectionIsImpossible = refl
+
+chosenSSP15BijectionIsNotDerivedFromAddressLaw :
+  OggNoGo.chosenCarrierBijectionDerivedFromAddressLaw
+    oggAddressSSP15NoGoBoundary
+  ≡ false
+chosenSSP15BijectionIsNotDerivedFromAddressLaw = refl
+
+ssp15ExactOggAddressCodecBoundary :
+  OggCodec.SSP15OggAddressCodecBoundary
+ssp15ExactOggAddressCodecBoundary =
+  OggCodec.canonicalSSP15OggAddressCodecBoundary
+
+ssp15CarrierIsExactlyOggPrimeCarrier :
+  OggCodec.ssp15CarrierIsOggPrimeCarrier
+    ssp15ExactOggAddressCodecBoundary
+  ≡ true
+ssp15CarrierIsExactlyOggPrimeCarrier = refl
+
+exactOggAddressDeterminesSSP15Lane :
+  OggCodec.exactCoordinatesDetermineSSP15Lane
+    ssp15ExactOggAddressCodecBoundary
+  ≡ true
+exactOggAddressDeterminesSSP15Lane = refl
+
+coarseObserverNeedsNoRefinementForSSP15Identity :
+  OggNoGo.extraRefinementNeededForCanonicalSSP15Lane
+    oggAddressSSP15NoGoBoundary
+  ≡ false
+coarseObserverNeedsNoRefinementForSSP15Identity = refl
+
+
+------------------------------------------------------------------------
+-- Optional prime/internal enrichment: 15 x 15 combinations, NOT lane count.
+------------------------------------------------------------------------
+
+ssp15PrimeInternalFibreBoundary :
+  PrimeFibre.SSP15PrimeInternalFibreBoundary
+ssp15PrimeInternalFibreBoundary =
+  PrimeFibre.canonicalSSP15PrimeInternalFibreBoundary
+
+ssp15PrimeInternalCoarseProductIs225 :
+  PrimeFibre.coarseProductCount225 ssp15PrimeInternalFibreBoundary ≡ true
+ssp15PrimeInternalCoarseProductIs225 = refl
+
+ssp15PrimeInternalProductIsNotLaneCount :
+  PrimeFibre.product225IsSSP15LaneCount ssp15PrimeInternalFibreBoundary ≡ false
+ssp15PrimeInternalProductIsNotLaneCount = refl
+
+ssp15ChosenBijectionIsOnlyGaugeSection :
+  PrimeFibre.chosenBijectionInterpretedAsGaugeSection
+    ssp15PrimeInternalFibreBoundary
+  ≡ true
+ssp15ChosenBijectionIsOnlyGaugeSection = refl
+
+ssp15ChosenGaugeDoesNotExhaustSemanticCarrier :
+  PrimeFibre.chosenGaugeExhaustsSemanticCarrier
+    ssp15PrimeInternalFibreBoundary
+  ≡ false
+ssp15ChosenGaugeDoesNotExhaustSemanticCarrier = refl
+
+ssp15PrimeDoesNotEqualInternalLane :
+  PrimeFibre.primeEqualsInternalLaneSemantically
+    ssp15PrimeInternalFibreBoundary
+  ≡ false
+ssp15PrimeDoesNotEqualInternalLane = refl
+
+
+ssp15CanonicalSignedLiftUsesPrimeInternalPair :
+  PrimeFibre.canonicalSignedLiftUsesPrimeInternalPair
+    ssp15PrimeInternalFibreBoundary
+  ≡ true
+ssp15CanonicalSignedLiftUsesPrimeInternalPair = refl

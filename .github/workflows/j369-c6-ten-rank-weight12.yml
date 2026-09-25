@@ -5,12 +5,15 @@ on:
   push:
     branches:
       - agent/jmd-archimedes-delta-369-bridge-20260922
+      - feature/j369-ogg-address-ssp15-no-go-20260925
     paths:
       - 'DASHI/Moonshine/JInvariant369C6TenRankWeightTwelveCrossPollinationExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalInterpretationExact.agda'
       - 'DASHI/Moonshine/MonsterAtlas6561X8RecognitionObligationExact.agda'
       - 'DASHI/Moonshine/JInvariant369NeutralCuspRelationCrossPollinationExact.agda'
       - 'DASHI/Moonshine/JInvariant369SSP15SignedFRACTRANBranchExact.agda'
+      - 'DASHI/Moonshine/JInvariant369OggAddressSSP15NoGoExact.agda'
+      - 'DASHI/Moonshine/JInvariant369SSP15PrimeInternalFibreExact.agda'
       - 'DASHI/Moonshine/JInvariant369CanonicalJointReflectionMinimalExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartActionSeparationExact.agda'
       - 'DASHI/Moonshine/JInvariantSmithChartMobiusMatrixBridgeExact.agda'
