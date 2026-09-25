@@ -39,12 +39,13 @@ record RealCurvatureF2PointBridge
     realFieldStrengthSquare :
       Configuration → ℝ
 
-    realF2AtWitnessIsEmbeddedRationalF2 :
-      realFieldStrengthSquare witnessConfiguration
+    realF2AtConfigurationIsEmbeddedRationalF2 :
+      ∀ configuration →
+      realFieldStrengthSquare configuration
       ≡
       Embed.embed embedding
         (RationalF2.fieldStrengthSquare
-          rationalFamily witnessConfiguration)
+          rationalFamily configuration)
 
 open RealCurvatureF2PointBridge public
 
@@ -75,5 +76,41 @@ realF2PositiveAtWitness {embedding = embedding} bridge =
     (subst
       (λ right →
         Embed.embed embedding (0ℚ) <ℝ right)
-      (sym (realF2AtWitnessIsEmbeddedRationalF2 bridge))
+      (sym (realF2AtConfigurationIsEmbeddedRationalF2 bridge (witnessConfiguration bridge)))
       embeddedPositive)
+
+
+realF2NonnegativeEverywhere :
+  ∀ {Configuration embedding}
+    (bridge : RealCurvatureF2PointBridge Configuration embedding) →
+  ∀ configuration →
+  0ℝ DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+    realFieldStrengthSquare bridge configuration
+realF2NonnegativeEverywhere {embedding = embedding} bridge configuration =
+  let
+    rationalNN =
+      RationalF2.fieldStrengthSquareNonnegative
+        (rationalFamily bridge) configuration
+
+    embeddedNN :
+      Embed.embed embedding 0ℚ
+      DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+      Embed.embed embedding
+        (RationalF2.fieldStrengthSquare
+          (rationalFamily bridge) configuration)
+    embeddedNN =
+      Embed.orderPreserving embedding rationalNN
+  in
+  subst
+    (λ left →
+      left DASHI.Foundations.RealAnalysisAxioms.≤ℝ
+        realFieldStrengthSquare bridge configuration)
+    (Embed.zeroExact embedding)
+    (subst
+      (λ right →
+        Embed.embed embedding 0ℚ
+          DASHI.Foundations.RealAnalysisAxioms.≤ℝ right)
+      (sym
+        (realF2AtConfigurationIsEmbeddedRationalF2
+          bridge configuration))
+      embeddedNN)
