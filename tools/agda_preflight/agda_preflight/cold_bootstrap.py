@@ -30,7 +30,8 @@ class DiagnosticReceipt:
     imports: Tuple[str, ...]
     public_imports: Tuple[str, ...]
     api_base_hash: str
-    diagnostics: Tuple[dict, ...]
+    diagnostics_json: str
+    diagnostic_count: int
     files_parsed: int
     diagnostics_recomputed: int
     parse_ns: int
@@ -184,6 +185,23 @@ def _api_base(root: Path, summary) -> Tuple[str, Tuple[str, ...]]:
     return hashlib.sha256(encoded).hexdigest(), tuple(sorted(public_imports))
 
 
+def _diagnostic_payload(root: Path, diagnostic) -> dict:
+    payload = diagnostic.as_dict()
+    diagnostic_path = Path(payload["path"])
+    try:
+        payload["path"] = diagnostic_path.resolve().relative_to(root).as_posix()
+    except ValueError:
+        pass
+    for fix in payload.get("fixes", []):
+        for edit in fix.get("edits", []):
+            edit_path = Path(edit["path"])
+            try:
+                edit["path"] = edit_path.resolve().relative_to(root).as_posix()
+            except ValueError:
+                pass
+    return payload
+
+
 def _diagnose_path(path_text: str) -> DiagnosticReceipt:
     assert _WORKER_ROOT is not None
     assert _WORKER_CHECKER is not None
@@ -210,7 +228,15 @@ def _diagnose_path(path_text: str) -> DiagnosticReceipt:
         imports=tuple(sorted(set(summary.imports.values()))),
         public_imports=public_imports,
         api_base_hash=api_base_hash,
-        diagnostics=tuple(item.as_dict() for item in diagnostics),
+        diagnostics_json=json.dumps(
+            [
+                _diagnostic_payload(_WORKER_ROOT, item)
+                for item in diagnostics
+            ],
+            sort_keys=True,
+            separators=(",", ":"),
+        ),
+        diagnostic_count=len(diagnostics),
         files_parsed=(
             after.counts.get("files_parsed", 0)
             - before.counts.get("files_parsed", 0)
