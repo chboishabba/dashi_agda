@@ -12,9 +12,10 @@ from .checker import Checker, Diagnostic
 from .fixes import SuggestedFix, TextEdit
 from .timing import Profiler
 from .cold_bootstrap import discover_closure, diagnose_paths, worker_count
+from .interfaces import interface_from_dict, interface_to_dict, interface_from_summary
 
 
-SCHEMA_VERSION = "2"
+SCHEMA_VERSION = "3"
 
 
 @dataclass(frozen=True)
@@ -108,6 +109,7 @@ class SourceIndex:
                 api_base_sha256 TEXT NOT NULL,
                 api_fingerprint TEXT NOT NULL,
                 public_imports_json TEXT NOT NULL,
+                interface_json TEXT NOT NULL,
                 dependency_fingerprint TEXT NOT NULL,
                 diagnostics_json TEXT NOT NULL,
                 updated_ns INTEGER NOT NULL
@@ -135,13 +137,15 @@ class SourceIndex:
             "SELECT value FROM meta WHERE key = 'schema_version'"
         ).fetchone()
         version = row["value"] if row is not None else None
+
+        columns = {
+            item["name"]
+            for item in self.connection.execute(
+                "PRAGMA table_info(modules)"
+            ).fetchall()
+        }
+
         if version == "1":
-            columns = {
-                item["name"]
-                for item in self.connection.execute(
-                    "PRAGMA table_info(modules)"
-                ).fetchall()
-            }
             if "api_base_sha256" not in columns:
                 self.connection.execute(
                     "ALTER TABLE modules ADD COLUMN "
@@ -164,16 +168,32 @@ class SourceIndex:
                 "api_fingerprint = CASE WHEN api_fingerprint = '' "
                 "THEN source_sha256 ELSE api_fingerprint END"
             )
-            self.connection.execute(
-                "UPDATE meta SET value = ? WHERE key = 'schema_version'",
-                (SCHEMA_VERSION,),
-            )
-            version = SCHEMA_VERSION
+            version = "2"
+
+        if version == "2":
+            columns = {
+                item["name"]
+                for item in self.connection.execute(
+                    "PRAGMA table_info(modules)"
+                ).fetchall()
+            }
+            if "interface_json" not in columns:
+                self.connection.execute(
+                    "ALTER TABLE modules ADD COLUMN "
+                    "interface_json TEXT NOT NULL DEFAULT ''"
+                )
+            version = "3"
+
         if version != SCHEMA_VERSION:
             raise RuntimeError(
                 "unsupported dashi-agda source-index schema; "
                 "remove the cache or migrate it"
             )
+
+        self.connection.execute(
+            "UPDATE meta SET value = ? WHERE key = 'schema_version'",
+            (SCHEMA_VERSION,),
+        )
         self.connection.commit()
 
     def _checker_instance(self) -> Checker:
@@ -418,6 +438,7 @@ class SourceIndex:
         api_base_hash: str,
         api_hash: str,
         public_imports: Iterable[str],
+        interface,
         dependency_fingerprint: str,
         imports: Iterable[str],
         diagnostics: List[Diagnostic],
@@ -439,9 +460,9 @@ class SourceIndex:
                 INSERT INTO modules(
                     path, module_name, mtime_ns, size, source_sha256,
                     api_base_sha256, api_fingerprint, public_imports_json,
-                    dependency_fingerprint, diagnostics_json, updated_ns
+                    interface_json, dependency_fingerprint, diagnostics_json, updated_ns
                 )
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(path) DO UPDATE SET
                     module_name = excluded.module_name,
                     mtime_ns = excluded.mtime_ns,
@@ -450,6 +471,7 @@ class SourceIndex:
                     api_base_sha256 = excluded.api_base_sha256,
                     api_fingerprint = excluded.api_fingerprint,
                     public_imports_json = excluded.public_imports_json,
+                    interface_json = excluded.interface_json,
                     dependency_fingerprint = excluded.dependency_fingerprint,
                     diagnostics_json = excluded.diagnostics_json,
                     updated_ns = excluded.updated_ns
@@ -463,6 +485,15 @@ class SourceIndex:
                     api_base_hash,
                     api_hash,
                     json.dumps(sorted(set(public_imports))),
+                    (
+                        json.dumps(
+                            interface_to_dict(interface),
+                            sort_keys=True,
+                            separators=(",", ":"),
+                        )
+                        if interface is not None
+                        else ""
+                    ),
                     dependency_fingerprint,
                     payload,
                     time.time_ns(),
