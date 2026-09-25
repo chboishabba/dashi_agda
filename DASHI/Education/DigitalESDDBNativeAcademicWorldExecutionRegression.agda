@@ -5,7 +5,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Education.DigitalESDDBNativeAcademicWorldExecutionExact as DB
 import DASHI.Education.DigitalESDCandidateWorldExecutionExact as World
-import DASHI.Education.DigitalESDStudyParseInteropExact as Parse
+import DASHI.Education.DigitalESDManuscriptMethodologyExact as Methodology
 
 worldBoundaryRegression :
   DB.candidateWorldBoundary
@@ -13,7 +13,7 @@ worldBoundaryRegression :
 worldBoundaryRegression = refl
 
 nineteenCoordinateRegression :
-  DB.extractionCoordinateCount ≡ Parse.baseExtractionCoordinateCount
+  DB.extractionCoordinateCount ≡ Methodology.extractionCoordinateCount
 nineteenCoordinateRegression = refl
 
 parserNominationPaymentRegression :
