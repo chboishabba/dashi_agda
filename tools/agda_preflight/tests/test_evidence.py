@@ -573,6 +573,28 @@ def test_unfolding_sensitive_checks_require_typechecker_evidence():
         assert policy.minimum == EvidenceLevel.AGDA_TYPECHECKER
         assert policy.hard_error_allowed is False
 
+
+def test_typing_sensitive_residual_frontier_requires_typechecker():
+    for code in (
+        "TSAGDA049",
+        "TSAGDA052",
+        "TSAGDA053",
+        "TSAGDA079",
+        "TSAGDA104",
+        "TSAGDA120",
+        "TSAGDA121",
+        "TSAGDA122",
+        "TSAGDA123",
+    ):
+        policy = policy_for(code)
+        assert policy.minimum == EvidenceLevel.AGDA_TYPECHECKER
+        assert policy.hard_error_allowed is False
+
+
+def test_duplicate_semantic_views_collapse_to_root_causes():
+    assert canonical_code("TSAGDA052") == "TSAGDA049"
+    assert canonical_code("TSAGDA123") == "TSAGDA120"
+
 def test_scope_backend_preserves_configured_agda_extra_args(tmp_path):
     backend = AgdaScopeCheckBackend(
         "agda",
