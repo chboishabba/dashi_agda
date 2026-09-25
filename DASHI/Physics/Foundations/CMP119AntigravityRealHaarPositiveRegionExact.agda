@@ -55,32 +55,6 @@ record UniformPositiveLowerBoundOnRegion
 
 open UniformPositiveLowerBoundOnRegion public
 
-asStrictPositiveMinorant :
-  ∀ {Configuration measure}
-    (strict : Strict.RealStrictSignLaws)
-    {ordered : Haar.OrderedRealHaarIntegrationLaws
-      {Configuration = Configuration} measure}
-    {region : PositiveRealHaarRegion ordered}
-    {integrand : Configuration → ℝ} →
-  UniformPositiveLowerBoundOnRegion region integrand →
-  Haar.StrictPositiveRealHaarMinorant ordered integrand
-asStrictPositiveMinorant {measure = measure} strict {region = region} lower =
-  record
-    { Haar.StrictPositiveRealHaarMinorant.minorant =
-        λ configuration →
-          lowerCoefficient lower *ℝ regionWeight region configuration
-    ; Haar.StrictPositiveRealHaarMinorant.minorantBelow =
-        scaledRegionBelowIntegrand lower
-    ; Haar.StrictPositiveRealHaarMinorant.minorantIntegralPositive =
-        let
-          -- This equality is deliberately an explicit integration-law input
-          -- below.  Without scalar-linearity, positivity of the scaled region
-          -- cannot be manufactured from pointwise order alone.
-          scaledIntegralPositive =
-            scaledRegionIntegralPositive strict lower
-        in scaledIntegralPositive
-    }
-
 ------------------------------------------------------------------------
 -- Scalar-linearity needed to compile a region mass into a minorant mass.
 ------------------------------------------------------------------------
