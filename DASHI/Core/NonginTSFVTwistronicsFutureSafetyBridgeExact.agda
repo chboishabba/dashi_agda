@@ -15,8 +15,9 @@ module DASHI.Core.NonginTSFVTwistronicsFutureSafetyBridgeExact where
 -- application supplies a proof-bearing action system and a finite set of
 -- future-distinct representatives.
 --
--- This bridge deliberately does NOT invent those dynamics for the three
--- domains.  It records the exact handoff.
+-- The TSFV/PNF semantic-query lane now supplies one concrete proof-bearing
+-- dynamic fixture.  Nongin, the physical TSFV caustic/history-realization lane,
+-- and twistronics remain separate dynamic obligations.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
@@ -157,6 +158,6 @@ canonicalNonginTSFVTwistronicsFutureSafetyBoundary :
 canonicalNonginTSFVTwistronicsFutureSafetyBoundary =
   nongin-tsfv-twistronics-future-safety-boundary
     true true
-    true false false
+    false true false false
     false refl
     false refl
