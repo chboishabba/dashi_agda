@@ -670,25 +670,101 @@ selectedSixthSignStatus smoothEndpointPolePositivity =
 selectedSixthSignStatus floorWitnessWithNegativeSignedM6 =
   leanSourceWrittenDonor
 selectedSixthSignStatus negativeSignedM6TerminalPayment =
-  openAnalyticObstruction
+  leanSourceWrittenDonor
 
 selectedWitnessNegativeSignedM6IsSourceWritten :
   selectedSixthSignStatus floorWitnessWithNegativeSignedM6
     ≡ leanSourceWrittenDonor
 selectedWitnessNegativeSignedM6IsSourceWritten = refl
 
-negativeSignedM6TerminalPaymentRemainsOpen :
+negativeSignedM6TerminalPaymentIsSourceWritten :
   selectedSixthSignStatus negativeSignedM6TerminalPayment
-    ≡ openAnalyticObstruction
-negativeSignedM6TerminalPaymentRemainsOpen = refl
+    ≡ leanSourceWrittenDonor
+negativeSignedM6TerminalPaymentIsSourceWritten = refl
 
 selectedSixthSignLeanDonorHead : String
 selectedSixthSignLeanDonorHead =
-  "25f36e53c99b0dd06c493aca3c9f4a8c78dad2c6"
+  "e4afb5da3ad4cf4a821cd5a7fbb8e17ff0da0e72"
 
 selectedSixthSignTransportedIntoAgdaKernelHere : Bool
 selectedSixthSignTransportedIntoAgdaKernelHere = false
 
 selectedSixthSignInterpretation : String
 selectedSixthSignInterpretation =
-  "The selected floor-certified smooth witness can now be chosen with strictly negative signed sixth profile moment.  Lean obtains this from the exact endpoint J6 determinant, explicit atomic J6 endpoint values, arbitrary-order smooth/atomic J convergence, and positive endpoint pole residuals.  The earlier nonnegative-M6 fixed-strip compiler remains valid only conditionally and is not the preferred selected-witness route.  The next Clay-facing cut is a quantitative terminal payment exploiting the actual negative M6 coefficient together with the existing absolute eighth debt and signed FarExact."
+  "The selected floor-certified smooth witness can now be chosen with a terminal-strength signed sixth certificate: -(3/20)*pi^6 <= M6_signed(W) < 0. Lean obtains this by tightening the actual endpoint pole residuals, proving terminal endpoint J6 magnitude bounds, and recutting the same strength-floor witness. The cap is proved strong enough for the dominant sixth-vs-quartic coefficient at the canonical radius and is substituted directly into the literal finite post-sixth source. A direct post-sixth strict-scalar compiler now runs that source through the existing cofinal tsum and completed-residual weld to G3. The selected M6 payment is therefore no longer the Clay-facing obstruction. FarExact remains signed and presently has no theorem-bearing quantitative payment on this carrier; together with the final strict scalar comparison, that is the preferred remaining cut."
+
+
+------------------------------------------------------------------------
+-- CLAY MIN-CUT AFTER TERMINAL SELECTED-M6 PAYMENT
+--
+-- PDF-guided pruning: the manuscript treats formalization as an audit trail,
+-- not a reason to continue developing every available moment/cone lemma.  The
+-- selected sixth lane is now quantitatively strong enough to enter the literal
+-- terminal source:
+--
+--   strengthFloor <= S(W)
+--   -(3/20)*pi^6 <= M6_signed(W) < 0.
+--
+-- Lean proves the cap beats the dominant sixth-vs-quartic coefficient at the
+-- canonical radius, substitutes it into the same literal expanded zero count,
+-- keeps the eighth debt on the already-owned G1 K(W) cross-weld, and compiles
+-- eventual strict terminal ABSORB directly to G3.
+--
+-- Inspection of the live preferred source found no theorem-bearing upper
+-- payment for literalFarExactAt.  The cone stack only preserves it through the
+-- signed compensation coordinate
+--
+--   goodGain - FarExact.
+--
+-- Therefore the next Clay-facing mathematical cut is NOT more selected-M6 or
+-- generic J_k machinery.  It is a same-object quantitative FarExact /
+-- signed-compensation theorem strong enough to close the literal strict scalar
+-- inequality.
+--
+-- These facts remain Lean source-written donors only.  No Agda-native replay
+-- or exact-head Lean kernel receipt is claimed here.
+------------------------------------------------------------------------
+
+data ClayPostM6Coordinate : Set where
+  terminalSelectedM6Cap : ClayPostM6Coordinate
+  terminalSelectedM6DominantBalance : ClayPostM6Coordinate
+  terminalSelectedM6LiteralSourcePayment : ClayPostM6Coordinate
+  terminalSelectedM6DirectG3Compiler : ClayPostM6Coordinate
+  literalFarExactQuantitativePayment : ClayPostM6Coordinate
+  finalPostM6StrictScalarAbsorb : ClayPostM6Coordinate
+
+clayPostM6Status : ClayPostM6Coordinate -> V4H4Status
+clayPostM6Status terminalSelectedM6Cap =
+  leanSourceWrittenDonor
+clayPostM6Status terminalSelectedM6DominantBalance =
+  leanSourceWrittenDonor
+clayPostM6Status terminalSelectedM6LiteralSourcePayment =
+  leanSourceWrittenDonor
+clayPostM6Status terminalSelectedM6DirectG3Compiler =
+  leanSourceWrittenDonor
+clayPostM6Status literalFarExactQuantitativePayment =
+  openAnalyticObstruction
+clayPostM6Status finalPostM6StrictScalarAbsorb =
+  openAnalyticObstruction
+
+terminalSelectedM6CapIsSourceWritten :
+  clayPostM6Status terminalSelectedM6Cap
+    ≡ leanSourceWrittenDonor
+terminalSelectedM6CapIsSourceWritten = refl
+
+farExactPaymentIsNowThePreferredOpenCut :
+  clayPostM6Status literalFarExactQuantitativePayment
+    ≡ openAnalyticObstruction
+farExactPaymentIsNowThePreferredOpenCut = refl
+
+finalPostM6StrictScalarAbsorbRemainsOpen :
+  clayPostM6Status finalPostM6StrictScalarAbsorb
+    ≡ openAnalyticObstruction
+finalPostM6StrictScalarAbsorbRemainsOpen = refl
+
+clayPostM6LeanDonorHead : String
+clayPostM6LeanDonorHead =
+  "e4afb5da3ad4cf4a821cd5a7fbb8e17ff0da0e72"
+
+clayPostM6TransportedIntoAgdaKernelHere : Bool
+clayPostM6TransportedIntoAgdaKernelHere = false
