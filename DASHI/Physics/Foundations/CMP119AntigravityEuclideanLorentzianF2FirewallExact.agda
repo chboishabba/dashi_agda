@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityEuclideanLorentzianF2FirewallExact where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _<_; -_)
@@ -71,4 +71,4 @@ euclideanF2PositivityImpliesLorentzianF2PositivityIsFalse :
 euclideanF2PositivityImpliesLorentzianF2PositivityIsFalse = refl
 
 wickContinuationSameObjectTheoremRequired : Bool
-wickContinuationSameObjectTheoremRequired = Agda.Builtin.Bool.true
+wickContinuationSameObjectTheoremRequired = true
