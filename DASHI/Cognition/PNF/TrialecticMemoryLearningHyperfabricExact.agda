@@ -152,6 +152,32 @@ zeroKindDoesNotFactorThroughCoarseZero :
 zeroKindDoesNotFactorThroughCoarseZero =
   Descent.nonDescentWitnessBlocksFactorization zeroKindWitness
 
+
+data FutureRelationalState : Set where
+  futureUninstantiated : FutureRelationalState
+  futureCancellationMayReopen : FutureRelationalState
+  futureStableNeutral : FutureRelationalState
+
+futureOfZeroKind : RelationalZeroKind → FutureRelationalState
+futureOfZeroKind noAvailableRelation = futureUninstantiated
+futureOfZeroKind balancedActiveCancellation = futureCancellationMayReopen
+futureOfZeroKind stableInvariantNeutral = futureStableNeutral
+
+futureZeroWitness :
+  Descent.ConsumerNonDescentWitness
+    observeRelationalZero futureOfZeroKind
+futureZeroWitness =
+  Descent.consumerNonDescentWitness
+    noAvailableRelation
+    balancedActiveCancellation
+    refl
+    (λ ())
+
+futureRelationalStateDoesNotFactorThroughCoarseZero :
+  Descent.FactorsThrough observeRelationalZero futureOfZeroKind → ⊥
+futureRelationalStateDoesNotFactorThroughCoarseZero =
+  Descent.nonDescentWitnessBlocksFactorization futureZeroWitness
+
 emptyZeroDonor : Completed.RelationalZeroWitness
 emptyZeroDonor = Phase.emptyZeroWitness
 
