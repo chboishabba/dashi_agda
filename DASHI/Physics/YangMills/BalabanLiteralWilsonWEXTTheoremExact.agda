@@ -11,6 +11,7 @@ module DASHI.Physics.YangMills.BalabanLiteralWilsonWEXTTheoremExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Rational.Base as ℚ using (ℚ; ∣_∣; _≤_)
@@ -23,6 +24,62 @@ import DASHI.Physics.YangMills.BalabanClayT5TwoMarkedConnectedClusterTailExact a
 import DASHI.Physics.YangMills.YangMillsRationalAbsoluteCovarianceExtensionRound575Exact as R575
 import DASHI.Physics.YangMills.YangMillsSourceFirstWilsonMixedLogCovarianceRound573Exact as R573
 import DASHI.Physics.YangMills.YangMillsPreferredWilsonWEXTSourceRound576Exact as R576
+import DASHI.Physics.YangMills.BalabanWilsonMarkedClusterDifferentiationExact as Diff
+
+
+literalWilsonMixedLogFromMarkedClusterExpansion :
+  ∀ {Measure Observable SourceDirection Cluster Source}
+    {dataSet :
+      Gram.PhysicalMeasureConvergenceData Measure Observable ℚ}
+    {laws :
+      R575.RationalCovarianceContinuityLaws dataSet}
+    (sourceCalculus :
+      ∀ cutoff →
+      Cumulant.NormalizedLogSourceCalculus
+        (R573.r278MomentAlgebra
+          (R575.rationalAbsoluteCovarianceExtension laws)
+          (Gram.measureSequence dataSet cutoff)))
+    (insertionMeaning :
+      ∀ cutoff →
+      Cumulant.LiteralTwoSourceInsertionMeaning
+        (sourceCalculus cutoff)
+        SourceDirection)
+    (derivativeCalculus :
+      Nat → Observable → Observable →
+      Diff.MixedSourceDerivativeCalculus Source)
+    (markedExpansion :
+      ∀ cutoff left right →
+      Diff.SourceDependentClusterExpansion
+        Source Cluster
+        (derivativeCalculus cutoff left right))
+    (literalResponseIsMarkedMixedDerivative :
+      ∀ cutoff left right →
+      Cumulant.literalMixedSecondLogDerivative
+        (insertionMeaning cutoff)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) left)
+        (Cumulant.sourceDirectionOf (insertionMeaning cutoff) right)
+      ≡
+      Diff.mixedDerivative
+        (derivativeCalculus cutoff left right)
+        (Diff.logPartition (markedExpansion cutoff left right))) →
+  R576.PreferredWilsonMixedLogPhysicalSource dataSet laws
+literalWilsonMixedLogFromMarkedClusterExpansion
+    sourceCalculus insertionMeaning derivativeCalculus markedExpansion
+    literalResponseIsMarkedMixedDerivative =
+  literalWilsonMixedLogTheorem
+    sourceCalculus
+    insertionMeaning
+    (λ cutoff left right →
+      Diff.contributingClusters (markedExpansion cutoff left right))
+    (λ cutoff left right cluster →
+      Diff.mixedDerivative
+        (derivativeCalculus cutoff left right)
+        (Diff.clusterTerm (markedExpansion cutoff left right) cluster))
+    (λ cutoff left right →
+      trans
+        (literalResponseIsMarkedMixedDerivative cutoff left right)
+        (Diff.mixedDerivativeIsConnectedClusterDerivativeSum
+          (markedExpansion cutoff left right)))
 
 literalWilsonMixedLogTheorem :
   ∀ {Measure Observable SourceDirection Cluster}
