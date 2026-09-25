@@ -46,7 +46,6 @@ record RealPhysicalTraceAnomalyInput
         (Cylinder.Converges algebra))
     (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     {measure : Physical.PhysicalFiniteYMMeasure Configuration ℝ}
-    (division : Division.RealDivisionAlgebra algebra quotientAuthority)
     (laws : Finite.PhysicalFiniteMeasureIntegrationLaws measure)
     (strict : Strict.RealStrictSignLaws)
     (embedding : Embed.OrderedRationalRealEmbedding)
