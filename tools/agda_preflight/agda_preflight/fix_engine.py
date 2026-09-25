@@ -4,7 +4,40 @@ from dataclasses import replace
 from difflib import get_close_matches
 from typing import Iterable, List
 
-from .fixes import SuggestedFix
+from .ast_index import significant_tokens
+from .fixes import SuggestedFix, TextEdit
+
+
+def _field_name_edit(summary, original, line, replacement):
+    short = original.rsplit(".", 1)[-1]
+    for record_expr in summary.ast.record_expressions:
+        for assignment in record_expr.assignments:
+            if assignment.line != line:
+                continue
+            if assignment.name != original and assignment.name.rsplit(".", 1)[-1] != short:
+                continue
+            tokens = significant_tokens(
+                summary.ast.source_bytes,
+                assignment.node,
+            )
+            for token in tokens:
+                token_short = token.text.rsplit(".", 1)[-1]
+                if token.text == original or token_short == short:
+                    return TextEdit(
+                        path=summary.path,
+                        start_line=token.line,
+                        start_column=token.column,
+                        end_line=token.line,
+                        end_column=token.column + len(token.text),
+                        replacement=(
+                            token.text[: -len(short)] + replacement
+                            if token.text != short and token.text.endswith(short)
+                            else replacement
+                        ),
+                        start_byte=token.start_byte,
+                        end_byte=token.end_byte,
+                    )
+    return None
 
 
 def _find_record(checker, summary, name):
@@ -57,6 +90,12 @@ def _record_field_fix(checker, summary, diagnostic):
     matches = get_close_matches(short, field_names, n=3, cutoff=0.6)
     if len(matches) == 1:
         candidate = matches[0]
+        edit = _field_name_edit(
+            summary,
+            original,
+            diagnostic.line,
+            candidate,
+        )
         fixes = (
             SuggestedFix(
                 title=f"Replace {original} with {candidate}",
@@ -66,6 +105,7 @@ def _record_field_fix(checker, summary, diagnostic):
                     f"record {record_name}."
                 ),
                 validation="typecheck",
+                edits=(edit,) if edit is not None else (),
             ),
         )
     else:
