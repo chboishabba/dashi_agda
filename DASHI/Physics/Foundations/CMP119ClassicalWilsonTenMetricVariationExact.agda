@@ -1,7 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119ClassicalWilsonTenMetricVariationExact where
 
-open import Agda.Builtin.Equality using (_≡_)\nopen import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 
 import DASHI.Physics.Foundations.KernelGeometryEmergenceObligations as K
 import DASHI.Physics.Foundations.CMP119ClassicalWilsonDiagonalMetricVariationExact as Diag
