@@ -148,10 +148,10 @@ canonicalThreeChartCycleCloses :
 canonicalThreeChartCycleCloses = refl
 
 threeChartTransportCompositionIsIdentity :
-  Groupoid.composeHom transportCAtoAB
-    (Groupoid.composeHom transportBCtoCA transportABtoBC)
   Groupoid._≈_
-  Groupoid.identityHom Existing.patchAB
+    (Groupoid.composeHom transportCAtoAB
+      (Groupoid.composeHom transportBCtoCA transportABtoBC))
+    (Groupoid.identityHom Existing.patchAB)
 threeChartTransportCompositionIsIdentity dialectic =
   rotateThreeIsIdentity dialectic
 
