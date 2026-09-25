@@ -43,3 +43,36 @@ import Warm.Leaf
     assert payload["profile"]["counts"].get("files_parsed", 0) == 0
     assert payload["profile"]["counts"].get("checker_instances", 0) == 0
     assert payload["profile"]["counts"]["modules_in_closure"] == 2
+
+
+
+def test_benchmark_reports_zero_parse_warm_runs(tmp_path, capsys):
+    write_module(tmp_path, "Bench.Leaf")
+    top = write_module(
+        tmp_path,
+        "Bench.Top",
+        """
+import Bench.Leaf
+""",
+    )
+    database = tmp_path / ".cache" / "source-index.sqlite3"
+
+    assert main(
+        [
+            "benchmark",
+            str(top),
+            "--root",
+            str(tmp_path),
+            "--index",
+            str(database),
+            "--runs",
+            "3",
+            "--json",
+        ]
+    ) == 0
+
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["warm"]["runs"] == 3
+    assert payload["warm"]["all_zero_parse"] is True
+    assert payload["warm"]["files_parsed"]["max"] == 0
+    assert payload["cold"]["counts"]["files_parsed"] == 2
