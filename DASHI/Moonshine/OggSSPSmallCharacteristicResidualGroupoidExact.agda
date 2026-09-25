@@ -28,6 +28,14 @@ import DASHI.Foundations.BalancedTernaryOrbitStabilizerResidualBridgeExact as C2
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Moonshine.QuadraticApproximationPrimeCompressionBidiExact as Compression
 import DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact as Exponent369
+import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
+
+
+residualGroupoidClaimOrigin : Source.ClaimOrigin
+residualGroupoidClaimOrigin = Source.repositoryNewExtension
+
+sameObjectRecognitionClaimOrigin : Source.ClaimOrigin
+sameObjectRecognitionClaimOrigin = Source.openRecognitionConjecture
 
 ------------------------------------------------------------------------
 -- 1. Attribution shape is internal proof lineage, not a fresh source claim.
