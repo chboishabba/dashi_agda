@@ -65,6 +65,25 @@ record CMP119AnomalyObservableIdentification
     traceObservable : SlowField → ℝ
     f2Observable : SlowField → ℝ
 
+    -- Literal physical selected finite numerators.  These are not replaced by
+    -- the factorized finite-state representation without an explicit weld.
+    literalFiniteQuantumTraceNumerator : Nat → ℝ
+    literalFiniteF2Numerator : Nat → ℝ
+
+    literalFiniteTraceIsApproximateExpectation :
+      ∀ refinement →
+      literalFiniteQuantumTraceNumerator refinement
+      ≡
+      Expect.approximateExpectation
+        approximation states refinement scale traceObservable
+
+    literalFiniteF2IsApproximateExpectation :
+      ∀ refinement →
+      literalFiniteF2Numerator refinement
+      ≡
+      Expect.approximateExpectation
+        approximation states refinement scale f2Observable
+
     localCTraceIsCMP119SourceExpectation :
       LocalCBridge.stressTraceNumerator readout
         (Local.stressTensor localC)
@@ -122,15 +141,9 @@ compileFiniteObservableAnomalyLimitTransport
     {scale = scale}
     convergence vanishing identification = record
   { Target.FiniteCMP119ToLocalCAnomalyLimitTransport.finiteQuantumTraceNumerator =
-      λ refinement →
-        Expect.approximateExpectation
-          approximation states refinement scale
-          (traceObservable identification)
+      literalFiniteQuantumTraceNumerator identification
   ; Target.FiniteCMP119ToLocalCAnomalyLimitTransport.finiteF2Numerator =
-      λ refinement →
-        Expect.approximateExpectation
-          approximation states refinement scale
-          (f2Observable identification)
+      literalFiniteF2Numerator identification
   ; Target.FiniteCMP119ToLocalCAnomalyLimitTransport.traceError =
       λ refinement →
         Expect.expectationErrorBudget
@@ -144,37 +157,62 @@ compileFiniteObservableAnomalyLimitTransport
   ; Target.FiniteCMP119ToLocalCAnomalyLimitTransport.finiteTraceApproximatesLocalC =
       λ refinement →
         subst
-          (λ target →
+          (λ approximate →
             absℝ
-              (target -ℝ
-                Expect.approximateExpectation
-                  approximation states refinement scale
-                  (traceObservable identification))
+              (LocalCBridge.stressTraceNumerator readout
+                (Local.stressTensor localC)
+                -ℝ approximate)
             ≤ℝ
             Expect.expectationErrorBudget
               approximation states refinement scale
               (traceObservable identification))
-          (sym (localCTraceIsCMP119SourceExpectation identification))
-          (Expect.finiteExpectationDifferenceBound
-            approximation states refinement scale
-            (traceObservable identification))
+          (sym (literalFiniteTraceIsApproximateExpectation
+            identification refinement))
+          (subst
+            (λ target →
+              absℝ
+                (target -ℝ
+                  Expect.approximateExpectation
+                    approximation states refinement scale
+                    (traceObservable identification))
+              ≤ℝ
+              Expect.expectationErrorBudget
+                approximation states refinement scale
+                (traceObservable identification))
+            (sym (localCTraceIsCMP119SourceExpectation identification))
+            (Expect.finiteExpectationDifferenceBound
+              approximation states refinement scale
+              (traceObservable identification)))
   ; Target.FiniteCMP119ToLocalCAnomalyLimitTransport.finiteF2ApproximatesLocalC =
       λ refinement →
         subst
-          (λ target →
+          (λ approximate →
             absℝ
-              (target -ℝ
-                Expect.approximateExpectation
-                  approximation states refinement scale
-                  (f2Observable identification))
+              (LocalCBridge.localOperatorNumerator readout
+                (Local.localOperator localC
+                  (LocalCBridge.fieldStrengthSquarePolynomial readout))
+                -ℝ approximate)
             ≤ℝ
             Expect.expectationErrorBudget
               approximation states refinement scale
               (f2Observable identification))
-          (sym (localCF2IsCMP119SourceExpectation identification))
-          (Expect.finiteExpectationDifferenceBound
-            approximation states refinement scale
-            (f2Observable identification))
+          (sym (literalFiniteF2IsApproximateExpectation
+            identification refinement))
+          (subst
+            (λ target →
+              absℝ
+                (target -ℝ
+                  Expect.approximateExpectation
+                    approximation states refinement scale
+                    (f2Observable identification))
+              ≤ℝ
+              Expect.expectationErrorBudget
+                approximation states refinement scale
+                (f2Observable identification))
+            (sym (localCF2IsCMP119SourceExpectation identification))
+            (Expect.finiteExpectationDifferenceBound
+              approximation states refinement scale
+              (f2Observable identification)))
   ; Target.FiniteCMP119ToLocalCAnomalyLimitTransport.traceErrorVanishes =
       Expect.finiteExpectationBudgetVanishes
         convergence vanishing states scale
