@@ -273,3 +273,5 @@ import DASHI.Physics.Foundations.CMP119AntigravityTraceMaxCutExact
 
 import DASHI.Physics.Foundations.CMP119AntigravityQuantumTraceExact
 import DASHI.Physics.Foundations.CMP119AntigravityWilsonQuantumTraceClosureExact
+
+import DASHI.Physics.Foundations.CMP119AntigravityBetaTraceBridgeExact
