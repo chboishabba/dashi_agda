@@ -52,6 +52,28 @@ coarseGluingDoesNotForceFineGluing :
   CoarseGluingForcesFineGluing → ⊥
 coarseGluingDoesNotForceFineGluing ()
 
+
+------------------------------------------------------------------------
+-- Named gluing-depth witness.
+------------------------------------------------------------------------
+
+record GluingDepthWitness : Set where
+  constructor gluing-depth-witness
+  field
+    gluingDepth : Nat
+    statusAtDepth : GluingStatus
+    statusAtNextDepth : GluingStatus
+    gluesAtDeclaredDepth :
+      statusAtDepth ≡ glues
+    nextDepthMayExposeObstruction :
+      statusAtNextDepth ≡ obstructed
+
+open GluingDepthWitness public
+
+canonicalGluingDepthWitness : GluingDepthWitness
+canonicalGluingDepthWitness =
+  gluing-depth-witness zero glues obstructed refl refl
+
 ------------------------------------------------------------------------
 -- A tiny concrete inverse-system witness.
 ------------------------------------------------------------------------
