@@ -102,3 +102,21 @@ literalFiniteMeasureActiveSumNegativityStillOpen = true
 literalFiniteMeasureActiveSumNegativityStillOpenIsTrue :
   literalFiniteMeasureActiveSumNegativityStillOpen ≡ true
 literalFiniteMeasureActiveSumNegativityStillOpenIsTrue = refl
+
+
+------------------------------------------------------------------------
+-- SCHEDULER STATUS
+--
+-- This four-diagonal finite-measure sign cut remains a valid intermediate
+-- theorem surface.  The preferred antigravity scheduler now uses
+-- CMP119AntigravityTraceMaxCutExact, which further reduces the active sum via
+-- classical d=4 Gibbs trace cancellation to Z times one trace-insertion
+-- numerator.
+------------------------------------------------------------------------
+
+supersededByTraceCancellationMaxCut : Bool
+supersededByTraceCancellationMaxCut = true
+
+supersededByTraceCancellationMaxCutIsTrue :
+  supersededByTraceCancellationMaxCut ≡ true
+supersededByTraceCancellationMaxCutIsTrue = refl
