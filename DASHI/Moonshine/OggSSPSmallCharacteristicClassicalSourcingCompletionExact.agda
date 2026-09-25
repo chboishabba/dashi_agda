@@ -30,6 +30,8 @@ import DASHI.Moonshine.OggSSPP2BinaryTetrahedralInertiaFiveOrbitExact as P2Inert
 import DASHI.Moonshine.OggSSPP2OrientedInertiaTenStateRecognitionExact as P2Ten
 import DASHI.Moonshine.OggSSPP2OrientedUnorientedInertiaStackCandidateExact as P2Stack
 import DASHI.Moonshine.OggSSPClassicalCarrierToIndependent369RecognitionExact as Classical369
+import DASHI.Moonshine.OggSSPP3DeligneRapoportStratumCodeExact as P3StratumCode
+import DASHI.Moonshine.OggSSPP2OrientedInertiaModuliProblemExact as P2Moduli
 
 ------------------------------------------------------------------------
 -- 1. Canonical sourced surfaces.
@@ -93,10 +95,12 @@ record ClassicalSourcingCompletion : Set where
 
     p3AbstractThreeStateC2SetClassicallyRealized : Bool
     p3F9CoordinateGeometricallyIdentified : Bool
+    p3F9StratumCodeInterpretationPaid : Bool
     p2Gamma04TenPointInterpretationRejected : Bool
     p2FiveInertiaOrbitCarrierConstructed : Bool
     p2TenStateHasClassicallySourcedFactorization : Bool
     p2OrientedUnorientedInertiaProductNamedClassically : Bool
+    p2SpecificEnrichedModuliProblemDefined : Bool
     p3ClassicalCarrierTo369RecognitionPaid : Bool
     p2ClassicalCarrierTo369RecognitionPaid : Bool
     p3ExactThreeStatePresentationAttributedAsClassical : Bool
@@ -112,7 +116,7 @@ canonicalClassicalSourcingCompletion =
   classical-sourcing-completion
     true true true true true true true true true true true true true
     true true true true
-    true false true true true false true true false false
+    true false true true true true false true true true false false
     true true true
 
 ------------------------------------------------------------------------
