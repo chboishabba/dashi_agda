@@ -28,6 +28,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Core.ConsumerGuidedReopenableRefinementExact as Refine
+import DASHI.Core.ReopenableConsumerInterventionKernelExact as Base
 import DASHI.Core.DialecticOriginSourceAtlasExact as Origin
 import DASHI.Promotion.MetacognitiveFrameBearingState as Meta
 
@@ -129,7 +130,7 @@ onePointZeroCannotServeEveryFrameSensitiveConsumer :
   {Base Frame Output : Set} ->
   {consume : OnePointOneCarrier Base Frame -> Output} ->
   (sensitivity : FrameSensitiveConsumer consume) ->
-  DASHI.Core.ReopenableConsumerInterventionKernelExact.ConsumerDescent
+  Base.ConsumerDescent
     (onePointZeroProject {Base} {Frame})
     consume ->
   ⊥
