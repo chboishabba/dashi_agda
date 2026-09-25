@@ -9,15 +9,31 @@ import sys
 import tempfile
 
 from .source_index import SourceIndex
+from .semantic_catalog import SemanticCatalog
 from .timing import Profiler
 
 
-def _run_diagnose(root: Path, index_path: Path, target: Path):
+def _run_diagnose(
+    root: Path,
+    index_path: Path,
+    target: Path,
+    semantic_catalog=None,
+):
     profiler = Profiler()
+    semantic = {}
     with profiler.stage("request.total"):
         with SourceIndex(root, index_path, profiler=profiler) as index:
             result = index.diagnose(target)
-    return result, profiler.snapshot()
+        if semantic_catalog is not None:
+            with profiler.stage("semantic.catalog_lookup"):
+                with SemanticCatalog(semantic_catalog) as catalog:
+                    semantic = catalog.lookup(result.modules)
+            profiler.count("semantic_snapshot_hits", len(semantic))
+            profiler.count(
+                "semantic_snapshot_misses",
+                max(0, len(result.modules) - len(semantic)),
+            )
+    return result, profiler.snapshot(), semantic
 
 
 def _percentile(values, fraction: float) -> float:
@@ -108,6 +124,14 @@ def main(argv=None) -> int:
         help="persistent source-index database",
     )
     diagnose.add_argument(
+        "--semantic-catalog",
+        type=Path,
+        help=(
+            "optional read-only agda2lean SQLite catalog; semantic hits are "
+            "reported with freshness=unknown until checked source hashes are stored"
+        ),
+    )
+    diagnose.add_argument(
         "--json",
         action="store_true",
         help="emit machine-readable diagnostics and profile data",
@@ -155,10 +179,11 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "diagnose":
-        result, snapshot = _run_diagnose(
+        result, snapshot, semantic = _run_diagnose(
             args.root,
             args.index,
             args.target,
+            args.semantic_catalog,
         )
 
         diagnostics = result.diagnostics
