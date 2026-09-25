@@ -240,6 +240,253 @@ record OrbitStabilizerRecognition
 
 open OrbitStabilizerRecognition public
 
+------------------------------------------------------------------------
+-- 6. Recognition composition.
+--
+-- If A is recognised in B and B is recognised in C through the same
+-- intermediate action/orbit presentation, the recognition data compose.
+-- This keeps multi-stage representation pipelines theorem-bearing rather than
+-- requiring each downstream consumer to rebuild a direct proof from scratch.
+------------------------------------------------------------------------
+
+composeActionRecognition :
+  ∀ {AState ASym BState BSym CState CSym : Set}
+    {actionA : Action.InvertibleSymmetryAction AState ASym}
+    {actionB : Action.InvertibleSymmetryAction BState BSym}
+    {actionC : Action.InvertibleSymmetryAction CState CSym} ->
+  ActionRecognitionFunctor actionA actionB ->
+  ActionRecognitionFunctor actionB actionC ->
+  ActionRecognitionFunctor actionA actionC
+composeActionRecognition first second =
+  action-recognition-functor
+    (λ state -> mapState second (mapState first state))
+    (λ symmetry -> mapSymmetry second (mapSymmetry first symmetry))
+    (trans
+      (cong (mapSymmetry second) (preservesIdentity first))
+      (preservesIdentity second))
+    (λ g h ->
+      trans
+        (cong (mapSymmetry second) (preservesCombine first g h))
+        (preservesCombine second
+          (mapSymmetry first g)
+          (mapSymmetry first h)))
+    (λ g ->
+      trans
+        (cong (mapSymmetry second) (preservesInverse first g))
+        (preservesInverse second (mapSymmetry first g)))
+    (λ g state ->
+      trans
+        (cong (mapState second) (actionEquivariant first g state))
+        (actionEquivariant second
+          (mapSymmetry first g)
+          (mapState first state)))
+
+composeOrbitRecognition :
+  ∀ {AState ASym BState BSym CState CSym : Set}
+    {actionA : Action.InvertibleSymmetryAction AState ASym}
+    {actionB : Action.InvertibleSymmetryAction BState BSym}
+    {actionC : Action.InvertibleSymmetryAction CState CSym}
+    {functorAB : ActionRecognitionFunctor actionA actionB}
+    {functorBC : ActionRecognitionFunctor actionB actionC}
+    {orbitsA : Orbit.OrbitPresentation actionA}
+    {orbitsB : Orbit.OrbitPresentation actionB}
+    {orbitsC : Orbit.OrbitPresentation actionC} ->
+  (recognitionAB : OrbitRecognition functorAB orbitsA orbitsB) ->
+  (recognitionBC : OrbitRecognition functorBC orbitsB orbitsC) ->
+  OrbitRecognition
+    (composeActionRecognition functorAB functorBC)
+    orbitsA
+    orbitsC
+composeOrbitRecognition
+    {functorAB = functorAB}
+    {functorBC = functorBC}
+    recognitionAB recognitionBC =
+  orbit-recognition
+    (λ orbit -> mapOrbit recognitionBC (mapOrbit recognitionAB orbit))
+    (λ state ->
+      trans
+        (orbitMapExact recognitionBC (mapState functorAB state))
+        (cong
+          (mapOrbit recognitionBC)
+          (orbitMapExact recognitionAB state)))
+
+composePi0Embedding :
+  ∀ {AState ASym BState BSym CState CSym : Set}
+    {actionA : Action.InvertibleSymmetryAction AState ASym}
+    {actionB : Action.InvertibleSymmetryAction BState BSym}
+    {actionC : Action.InvertibleSymmetryAction CState CSym}
+    {functorAB : ActionRecognitionFunctor actionA actionB}
+    {functorBC : ActionRecognitionFunctor actionB actionC}
+    {orbitsA : Orbit.OrbitPresentation actionA}
+    {orbitsB : Orbit.OrbitPresentation actionB}
+    {orbitsC : Orbit.OrbitPresentation actionC}
+    {recognitionAB : OrbitRecognition functorAB orbitsA orbitsB}
+    {recognitionBC : OrbitRecognition functorBC orbitsB orbitsC} ->
+  Pi0Embedding recognitionAB ->
+  Pi0Embedding recognitionBC ->
+  Pi0Embedding (composeOrbitRecognition recognitionAB recognitionBC)
+composePi0Embedding embeddingAB embeddingBC =
+  pi0-embedding
+    (λ same ->
+      reflectsOrbitEquality embeddingAB
+        (reflectsOrbitEquality embeddingBC same))
+
+composePi0Surjection :
+  ∀ {AState ASym BState BSym CState CSym : Set}
+    {actionA : Action.InvertibleSymmetryAction AState ASym}
+    {actionB : Action.InvertibleSymmetryAction BState BSym}
+    {actionC : Action.InvertibleSymmetryAction CState CSym}
+    {functorAB : ActionRecognitionFunctor actionA actionB}
+    {functorBC : ActionRecognitionFunctor actionB actionC}
+    {orbitsA : Orbit.OrbitPresentation actionA}
+    {orbitsB : Orbit.OrbitPresentation actionB}
+    {orbitsC : Orbit.OrbitPresentation actionC}
+    {recognitionAB : OrbitRecognition functorAB orbitsA orbitsB}
+    {recognitionBC : OrbitRecognition functorBC orbitsB orbitsC} ->
+  Pi0Surjection recognitionAB ->
+  Pi0Surjection recognitionBC ->
+  Pi0Surjection (composeOrbitRecognition recognitionAB recognitionBC)
+composePi0Surjection
+    {recognitionAB = recognitionAB}
+    {recognitionBC = recognitionBC}
+    surjectionAB surjectionBC =
+  pi0-surjection
+    (λ targetOrbit ->
+      preimageOrbit surjectionAB
+        (preimageOrbit surjectionBC targetOrbit))
+    (λ targetOrbit ->
+      trans
+        (cong
+          (mapOrbit recognitionBC)
+          (hitsEveryTargetOrbit surjectionAB
+            (preimageOrbit surjectionBC targetOrbit)))
+        (hitsEveryTargetOrbit surjectionBC targetOrbit))
+
+composeStabilizerRecognition :
+  ∀ {AState ASym BState BSym CState CSym : Set}
+    {actionA : Action.InvertibleSymmetryAction AState ASym}
+    {actionB : Action.InvertibleSymmetryAction BState BSym}
+    {actionC : Action.InvertibleSymmetryAction CState CSym}
+    {functorAB : ActionRecognitionFunctor actionA actionB}
+    {functorBC : ActionRecognitionFunctor actionB actionC}
+    {orbitsA : Orbit.OrbitPresentation actionA}
+    {orbitsB : Orbit.OrbitPresentation actionB}
+    {orbitsC : Orbit.OrbitPresentation actionC}
+    {recognitionAB : OrbitRecognition functorAB orbitsA orbitsB}
+    {recognitionBC : OrbitRecognition functorBC orbitsB orbitsC} ->
+  StabilizerRecognition recognitionAB ->
+  StabilizerRecognition recognitionBC ->
+  StabilizerRecognition
+    (composeOrbitRecognition recognitionAB recognitionBC)
+composeStabilizerRecognition
+    {functorAB = functorAB}
+    {functorBC = functorBC}
+    {recognitionAB = recognitionAB}
+    {recognitionBC = recognitionBC}
+    stabilizerAB stabilizerBC =
+  stabilizer-recognition
+    representative
+    preserves
+    reflects
+  where
+    representative :
+      (orbit : Orbit.Orbit _) ->
+      mapState (composeActionRecognition functorAB functorBC)
+        (Orbit.representative _ orbit)
+      ≡
+      Orbit.representative _
+        (mapOrbit
+          (composeOrbitRecognition recognitionAB recognitionBC)
+          orbit)
+    representative orbit =
+      trans
+        (cong
+          (mapState functorBC)
+          (representativeCompatibility stabilizerAB orbit))
+        (representativeCompatibility stabilizerBC
+          (mapOrbit recognitionAB orbit))
+
+    preserves :
+      (orbit : Orbit.Orbit _) ->
+      (g : _) ->
+      Action.act _ g (Orbit.representative _ orbit)
+      ≡ Orbit.representative _ orbit ->
+      Action.act _
+        (mapSymmetry
+          (composeActionRecognition functorAB functorBC)
+          g)
+        (Orbit.representative _
+          (mapOrbit
+            (composeOrbitRecognition recognitionAB recognitionBC)
+            orbit))
+      ≡
+      Orbit.representative _
+        (mapOrbit
+          (composeOrbitRecognition recognitionAB recognitionBC)
+          orbit)
+    preserves orbit g fixed =
+      preservesStabilizer stabilizerBC
+        (mapOrbit recognitionAB orbit)
+        (mapSymmetry functorAB g)
+        (preservesStabilizer stabilizerAB orbit g fixed)
+
+    reflects :
+      (orbit : Orbit.Orbit _) ->
+      (g : _) ->
+      Action.act _
+        (mapSymmetry
+          (composeActionRecognition functorAB functorBC)
+          g)
+        (Orbit.representative _
+          (mapOrbit
+            (composeOrbitRecognition recognitionAB recognitionBC)
+            orbit))
+      ≡
+      Orbit.representative _
+        (mapOrbit
+          (composeOrbitRecognition recognitionAB recognitionBC)
+          orbit)
+      ->
+      Action.act _ g (Orbit.representative _ orbit)
+      ≡ Orbit.representative _ orbit
+    reflects orbit g fixed =
+      reflectsMappedStabilizer stabilizerAB orbit g
+        (reflectsMappedStabilizer stabilizerBC
+          (mapOrbit recognitionAB orbit)
+          (mapSymmetry functorAB g)
+          fixed)
+
+composeOrbitStabilizerRecognition :
+  ∀ {AState ASym BState BSym CState CSym : Set}
+    {actionA : Action.InvertibleSymmetryAction AState ASym}
+    {actionB : Action.InvertibleSymmetryAction BState BSym}
+    {actionC : Action.InvertibleSymmetryAction CState CSym}
+    {functorAB : ActionRecognitionFunctor actionA actionB}
+    {functorBC : ActionRecognitionFunctor actionB actionC}
+    {orbitsA : Orbit.OrbitPresentation actionA}
+    {orbitsB : Orbit.OrbitPresentation actionB}
+    {orbitsC : Orbit.OrbitPresentation actionC} ->
+  OrbitStabilizerRecognition functorAB orbitsA orbitsB ->
+  OrbitStabilizerRecognition functorBC orbitsB orbitsC ->
+  OrbitStabilizerRecognition
+    (composeActionRecognition functorAB functorBC)
+    orbitsA
+    orbitsC
+composeOrbitStabilizerRecognition first second =
+  orbit-stabilizer-recognition
+    (composeOrbitRecognition
+      (orbitRecognition first)
+      (orbitRecognition second))
+    (composePi0Embedding
+      (pi0Embedding first)
+      (pi0Embedding second))
+    (composePi0Surjection
+      (pi0Surjection first)
+      (pi0Surjection second))
+    (composeStabilizerRecognition
+      (stabilizerRecognition first)
+      (stabilizerRecognition second))
+
 data CardinalityMatchCreatesRecognitionFunctor : Set where
 data StateMapAlonePreservesPi0 : Set where
 data OrbitBijectionAlonePreservesStabilizers : Set where
