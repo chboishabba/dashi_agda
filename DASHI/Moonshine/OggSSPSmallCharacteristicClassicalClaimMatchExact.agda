@@ -44,6 +44,18 @@ data SmallCharacteristicClaim : Set where
     SmallCharacteristicClaim
   p2DASHICarrierEqualsClassicalX04MarkedModuliObject :
     SmallCharacteristicClaim
+  p3DeligneRapoportThreeStratumC2Set :
+    SmallCharacteristicClaim
+  p2UniqueGamma04SupersingularDrinfeldLevel :
+    SmallCharacteristicClaim
+  p2BinaryTetrahedralSevenConjugacyClasses :
+    SmallCharacteristicClaim
+  p2BinaryTetrahedralFiveInversionOrbits :
+    SmallCharacteristicClaim
+  p2TwoOrientedQuadraticOrders :
+    SmallCharacteristicClaim
+  p2OrientedInertiaTenStateFactorization :
+    SmallCharacteristicClaim
 
 data MatchGrade : Set where
   directSourceMatch :
@@ -173,6 +185,66 @@ p2TenStateMatch =
     false
     false
 
+p3LocalStrataMatch : ClaimMatch
+p3LocalStrataMatch =
+  claim-match
+    p3DeligneRapoportThreeStratumC2Set
+    directSourceMatch
+    "Deligne-Rapoport special fibre of X0(p)"
+    "two bad-prime components meet at the supersingular point; Frobenius/Verschiebung branches with node-fixed duality give the exact abstract three-stratum C2-set used by DASHI at p=3"
+    true
+    true
+
+p2UniqueGamma04LevelMatch : ClaimMatch
+p2UniqueGamma04LevelMatch =
+  claim-match
+    p2UniqueGamma04SupersingularDrinfeldLevel
+    directSourceMatch
+    "Katz-Mazur / Bertolini-Darmon-Prasanna-Conrad"
+    "a supersingular elliptic curve has a unique Drinfeld cyclic subgroup scheme of order p^r, ker(F^r); at p=2,r=2 this blocks interpreting the ten DASHI states as ten Gamma0(4) supersingular level structures"
+    true
+    false
+
+p2SevenClassesMatch : ClaimMatch
+p2SevenClassesMatch =
+  claim-match
+    p2BinaryTetrahedralSevenConjugacyClasses
+    directSourceMatch
+    "Dadhwal-Pankaj, Group codes over binary tetrahedral group"
+    "the binary tetrahedral automorphism group has seven conjugacy classes"
+    true
+    false
+
+p2FiveInversionOrbitMatch : ClaimMatch
+p2FiveInversionOrbitMatch =
+  claim-match
+    p2BinaryTetrahedralFiveInversionOrbits
+    repositoryOnly
+    "DASHI reconstruction from the sourced seven-class table"
+    "inversion fixes the identity, central-minus-one and order-four classes while pairing the two order-three and two order-six classes, yielding exactly five inversion-orbits"
+    true
+    false
+
+p2TwoOrientationsMatch : ClaimMatch
+p2TwoOrientationsMatch =
+  claim-match
+    p2TwoOrientedQuadraticOrders
+    directSourceMatch
+    "Goren-Love, On elements of prescribed norm in maximal orders of a quaternion algebra"
+    "every imaginary quadratic discriminant has exactly two oriented orders up to oriented isomorphism, exchanged by nontrivial Galois"
+    true
+    false
+
+p2TenFactorizationMatch : ClaimMatch
+p2TenFactorizationMatch =
+  claim-match
+    p2OrientedInertiaTenStateFactorization
+    repositoryOnly
+    "DASHI cross-module construction from two classical factors"
+    "two oriented quadratic-order sheets times five inversion-orbits of binary-tetrahedral inertia gives an exact ten-element carrier; the product is not attributed to either classical source as a named moduli object"
+    true
+    false
+
 p3SameObjectMatch : ClaimMatch
 p3SameObjectMatch =
   claim-match
@@ -205,6 +277,12 @@ canonicalClaimMatches =
   ∷ gamma0StackMatch
   ∷ p3ThreeStateMatch
   ∷ p2TenStateMatch
+  ∷ p3LocalStrataMatch
+  ∷ p2UniqueGamma04LevelMatch
+  ∷ p2SevenClassesMatch
+  ∷ p2FiveInversionOrbitMatch
+  ∷ p2TwoOrientationsMatch
+  ∷ p2TenFactorizationMatch
   ∷ p3SameObjectMatch
   ∷ p2SameObjectMatch
   ∷ []
@@ -233,6 +311,13 @@ record ClassicalClaimMatchBoundary : Set where
     exactTenStatePresentationClassical : Bool
     p3SameObjectClassicallyIdentified : Bool
     p2SameObjectClassicallyIdentified : Bool
+    p3AbstractThreeStateC2SetClassicallyRealized : Bool
+    p2Gamma04TenPointInterpretationClassicallyRejected : Bool
+    p2SevenInertiaClassesClassicallySourced : Bool
+    p2FiveInversionOrbitCarrierConstructed : Bool
+    p2TwoOrientationFactorClassicallySourced : Bool
+    p2TenCarrierHasClassicallySourcedFactorization : Bool
+    p2TenCarrierNamedClassicalModuliObjectIdentified : Bool
     allUnsupportedPromotionsExplicitlyBlocked : Bool
 
 canonicalClassicalClaimMatchBoundary :
@@ -240,4 +325,6 @@ canonicalClassicalClaimMatchBoundary :
 canonicalClassicalClaimMatchBoundary =
   classical-claim-match-boundary
     true true true true true true
-    false false false false true
+    false false false false
+    true true true true true true false
+    true
