@@ -19,6 +19,9 @@ open import DASHI.Core.Prelude
 
 import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact as Stage12
 
+open Stage12.SmallCategory
+open Stage12.GrothendieckTopology
+
 data RelObj : Set where
   globalABC : RelObj
   edgeAB edgeBC edgeCA : RelObj
@@ -81,13 +84,13 @@ composeRelAssoc h g (idR _) = refl
 
 relationalPatchCategory : Stage12.SmallCategory
 relationalPatchCategory = record
-  { Stage12.Obj = RelObj
-  ; Stage12.Hom = RelHom
-  ; Stage12.id = idR
-  ; Stage12._∘_ = composeRel
-  ; Stage12.idLeft = composeRelIdLeft
-  ; Stage12.idRight = composeRelIdRight
-  ; Stage12.assoc = composeRelAssoc
+  { Obj = RelObj
+  ; Hom = RelHom
+  ; id = idR
+  ; _∘_ = composeRel
+  ; idLeft = composeRelIdLeft
+  ; idRight = composeRelIdRight
+  ; assoc = composeRelAssoc
   }
 
 ------------------------------------------------------------------------
@@ -250,16 +253,16 @@ identityPullbackCoverToCover target
 relationalTriadicTopology :
   Stage12.GrothendieckTopology relationalPatchCategory
 relationalTriadicTopology = record
-  { Stage12.Cover = RelCover
+  { Cover = RelCover
 
-  ; Stage12.maximal =
+  ; maximal =
       λ U → maximalCover (λ f → tt)
 
-  ; Stage12.stable =
+  ; stable =
       λ arrow sieve cover →
         stableCover arrow sieve cover
 
-  ; Stage12.transitive =
+  ; transitive =
       λ sieve sieveCover target localCover →
         transitiveCover sieve sieveCover target localCover
   }
