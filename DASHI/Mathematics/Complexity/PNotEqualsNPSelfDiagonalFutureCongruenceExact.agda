@@ -262,6 +262,40 @@ completeRestrictionIsTerminal node assignment
       (remaining , refl))
     (SAT.tailAssignment assignment)
 
+
+terminalEvaluation :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Family.RestrictionNode root) →
+  Family.currentVariables node ≡ zero →
+  Bool
+terminalEvaluation node arity
+    with arity
+... | refl =
+  SAT.evaluate
+    (Family.currentFormula node)
+    emptyAssignment
+
+terminalObservationExact :
+  ∀ {rootVariables : Nat}
+    {root : SAT.BooleanFormula rootVariables}
+    (node : Family.RestrictionNode root)
+    (arity : Family.currentVariables node ≡ zero) →
+  restrictionObservation node
+  ≡
+  terminal (terminalEvaluation node arity)
+terminalObservationExact node arity
+    with arity
+... | refl =
+  refl
+
+terminalConstructorInjective :
+  ∀ {left right : Bool} →
+  terminal left ≡ terminal right →
+  left ≡ right
+terminalConstructorInjective refl =
+  refl
+
 completeRestrictionExecutes :
   ∀ {rootVariables : Nat}
     {root : SAT.BooleanFormula rootVariables}
@@ -324,38 +358,14 @@ completeRestrictionEvaluationExact node assignment
       (Family.currentFormula node)
       (SAT.tailAssignment assignment))
 
-terminalEvaluation :
-  ∀ {rootVariables : Nat}
-    {root : SAT.BooleanFormula rootVariables}
-    (node : Family.RestrictionNode root) →
-  Family.currentVariables node ≡ zero →
-  Bool
-terminalEvaluation node arity
-    with arity
-... | refl =
-  SAT.evaluate
-    (Family.currentFormula node)
-    emptyAssignment
+transportAssignment :
+  ∀ {left right : Nat} →
+  left ≡ right →
+  SAT.Assignment left →
+  SAT.Assignment right
+transportAssignment refl assignment =
+  assignment
 
-terminalObservationExact :
-  ∀ {rootVariables : Nat}
-    {root : SAT.BooleanFormula rootVariables}
-    (node : Family.RestrictionNode root)
-    (arity : Family.currentVariables node ≡ zero) →
-  restrictionObservation node
-  ≡
-  terminal (terminalEvaluation node arity)
-terminalObservationExact node arity
-    with arity
-... | refl =
-  refl
-
-terminalConstructorInjective :
-  ∀ {left right : Bool} →
-  terminal left ≡ terminal right →
-  left ≡ right
-terminalConstructorInjective refl =
-  refl
 
 ------------------------------------------------------------------------
 -- Future equivalence at one layer forces equality of the residual Boolean
@@ -447,14 +457,6 @@ futureEquivalentImpliesPointwiseEvaluationEqual
             (terminalObservationExact
               (completeRestriction right assignment)
               rightTerminal)))
-
-transportAssignment :
-  ∀ {left right : Nat} →
-  left ≡ right →
-  SAT.Assignment left →
-  SAT.Assignment right
-transportAssignment refl assignment =
-  assignment
 
 ------------------------------------------------------------------------
 -- Therefore same-layer future equivalence implies ordinary equisatisfiability.
