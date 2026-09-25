@@ -336,6 +336,17 @@ record AdmittedFiniteCandidateConstructionRun
     machineConstructionAndNextStrict :
       (Operational.q1WitnessGraphCellCount
         (RewriteGenerated.rewriteGeneratedWitnessToLegacy
+          (Reachable.toRewriteGeneratedQ1StateWitness
+            (admittedFiniteToReachableWitness
+              (admitted-finite-q1-state-witness
+                (finiteCandidate construction)
+                semanticCongruence
+                allOverheadFits))))
+        + machineStepCount construction)
+      +
+      Q2.recursiveMeasure
+        (Charged.q1WitnessNextState
+          state
           (RewriteGenerated.rewriteGeneratedWitnessToLegacy
             (Reachable.toRewriteGeneratedQ1StateWitness
               (admittedFiniteToReachableWitness
@@ -343,17 +354,6 @@ record AdmittedFiniteCandidateConstructionRun
                   (finiteCandidate construction)
                   semanticCongruence
                   allOverheadFits)))))
-        + machineStepCount construction)
-      +
-      Q2.recursiveMeasure
-        (Charged.q1WitnessNextState
-          state
-          (Reachable.toRewriteGeneratedQ1StateWitness
-            (admittedFiniteToReachableWitness
-              (admitted-finite-q1-state-witness
-                (finiteCandidate construction)
-                semanticCongruence
-                allOverheadFits))))
       <
       Q2.recursiveMeasure state
 
@@ -426,8 +426,8 @@ admittedFiniteRunToOperationalRun {state} admitted =
     strict :
       (Operational.q1WitnessGraphCellCount witness
         +
-        Data.List.Base.length
-          (Operational.unitTrace
+        length
+          (Executed.unitTrace
             (machineStepCount
               (construction admitted))))
       +
