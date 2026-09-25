@@ -54,14 +54,7 @@ mixedFiniteDifferenceJet :
   mixedFiniteDifference (evaluateJet j)
   ≡ mixedCoefficient j
 mixedFiniteDifferenceJet (jet a b c d) =
-  ℚRing.solve 4
-    (λ a b c d →
-      (((a + b * 1ℚ + c * 1ℚ + d * (1ℚ * 1ℚ))
-        - (a + b * 1ℚ + c * 0ℚ + d * (1ℚ * 0ℚ)))
-        - (a + b * 0ℚ + c * 1ℚ + d * (0ℚ * 1ℚ)))
-        + (a + b * 0ℚ + c * 0ℚ + d * (0ℚ * 0ℚ)))
-      ℚRing.≡ d)
-    refl a b c d
+  ℚRing.solve-∀ a b c d
 
 mixedFiniteDifferenceCongruent :
   ∀ left right →
@@ -73,6 +66,15 @@ mixedFiniteDifferenceCongruent left right pointwise
         | pointwise 1ℚ 0ℚ
         | pointwise 0ℚ 1ℚ
         | pointwise 0ℚ 0ℚ = refl
+
+mixedFiniteDifferenceAdd :
+  ∀ f g →
+  mixedFiniteDifference (λ left right → f left right + g left right)
+  ≡ mixedFiniteDifference f + mixedFiniteDifference g
+mixedFiniteDifferenceAdd f g =
+  ℚRing.solve-∀
+    (f 1ℚ 1ℚ) (f 1ℚ 0ℚ) (f 0ℚ 1ℚ) (f 0ℚ 0ℚ)
+    (g 1ℚ 1ℚ) (g 1ℚ 0ℚ) (g 0ℚ 1ℚ) (g 0ℚ 0ℚ)
 
 mixedFiniteDifferenceFiniteSum :
   ∀ {Term : Set}
@@ -90,30 +92,19 @@ mixedFiniteDifferenceFiniteSum :
       (λ term → mixedFiniteDifference (termValue term))
       terms)
 mixedFiniteDifferenceFiniteSum [] termValue =
-  ℚRing.solve 0
-    (λ → ((0ℚ - 0ℚ - 0ℚ + 0ℚ) ℚRing.≡ 0ℚ))
-    refl
-mixedFiniteDifferenceFiniteSum (term ∷ terms) termValue
-  rewrite mixedFiniteDifferenceFiniteSum terms termValue =
-  ℚRing.solve 8
-    (λ a11 a10 a01 a00 r11 r10 r01 r00 →
-      (((a11 + r11) - (a10 + r10) - (a01 + r01) + (a00 + r00))
-       ℚRing.≡
-       ((a11 - a10 - a01 + a00)
-        + (r11 - r10 - r01 + r00))))
-    refl
-    (termValue term 1ℚ 1ℚ)
-    (termValue term 1ℚ 0ℚ)
-    (termValue term 0ℚ 1ℚ)
-    (termValue term 0ℚ 0ℚ)
-    (TwoMark.sumℚ
-      (TwoMark.map (λ item → termValue item 1ℚ 1ℚ) terms))
-    (TwoMark.sumℚ
-      (TwoMark.map (λ item → termValue item 1ℚ 0ℚ) terms))
-    (TwoMark.sumℚ
-      (TwoMark.map (λ item → termValue item 0ℚ 1ℚ) terms))
-    (TwoMark.sumℚ
-      (TwoMark.map (λ item → termValue item 0ℚ 0ℚ) terms))
+  ℚRing.solve-∀
+mixedFiniteDifferenceFiniteSum (term ∷ terms) termValue =
+  trans
+    (mixedFiniteDifferenceAdd
+      (termValue term)
+      (λ sourceLeft sourceRight →
+        TwoMark.sumℚ
+          (TwoMark.map
+            (λ item → termValue item sourceLeft sourceRight)
+            terms)))
+    (cong
+      (λ rest → mixedFiniteDifference (termValue term) + rest)
+      (mixedFiniteDifferenceFiniteSum terms termValue))
 
 rationalJetDerivativeCalculus :
   Diff.MixedSourceDerivativeCalculus ℚ
@@ -133,11 +124,7 @@ mixedFiniteDifferenceLeftIndependentZero :
 mixedFiniteDifferenceLeftIndependentZero term independent
   rewrite independent 1ℚ 0ℚ 1ℚ
         | independent 1ℚ 0ℚ 0ℚ =
-  ℚRing.solve 2
-    (λ x y → ((x - y - x + y) ℚRing.≡ 0ℚ))
-    refl
-    (term 0ℚ 1ℚ)
-    (term 0ℚ 0ℚ)
+  ℚRing.solve-∀ (term 0ℚ 1ℚ) (term 0ℚ 0ℚ)
 
 mixedFiniteDifferenceRightIndependentZero :
   ∀ term →
@@ -146,11 +133,7 @@ mixedFiniteDifferenceRightIndependentZero :
 mixedFiniteDifferenceRightIndependentZero term independent
   rewrite independent 1ℚ 1ℚ 0ℚ
         | independent 0ℚ 1ℚ 0ℚ =
-  ℚRing.solve 2
-    (λ x y → ((x - x - y + y) ℚRing.≡ 0ℚ))
-    refl
-    (term 1ℚ 0ℚ)
-    (term 0ℚ 0ℚ)
+  ℚRing.solve-∀ (term 1ℚ 0ℚ) (term 0ℚ 0ℚ)
 
 rationalJetDerivativeVanishing :
   Diff.MixedSourceDerivativeVanishing rationalJetDerivativeCalculus
@@ -201,12 +184,7 @@ missingLeftJetIndependent :
 missingLeftJetIndependent support cluster leftMissing left₁ left₂ right
   rewrite missingLeftKillsLeftCoefficient support cluster leftMissing
         | missingLeftKillsMixedCoefficient support cluster leftMissing =
-  ℚRing.solve 5
-    (λ a c left₁ left₂ right →
-      ((a + 0ℚ * left₁ + c * right + 0ℚ * (left₁ * right))
-       ℚRing.≡
-       (a + 0ℚ * left₂ + c * right + 0ℚ * (left₂ * right))))
-    refl
+  ℚRing.solve-∀
     (baseCoefficient (clusterJet cluster))
     (rightCoefficient (clusterJet cluster))
     left₁ left₂ right
@@ -224,12 +202,7 @@ missingRightJetIndependent :
 missingRightJetIndependent support cluster rightMissing left right₁ right₂
   rewrite missingRightKillsRightCoefficient support cluster rightMissing
         | missingRightKillsMixedCoefficient support cluster rightMissing =
-  ℚRing.solve 5
-    (λ a b left right₁ right₂ →
-      ((a + b * left + 0ℚ * right₁ + 0ℚ * (left * right₁))
-       ℚRing.≡
-       (a + b * left + 0ℚ * right₂ + 0ℚ * (left * right₂))))
-    refl
+  ℚRing.solve-∀
     (baseCoefficient (clusterJet cluster))
     (leftCoefficient (clusterJet cluster))
     left right₁ right₂
