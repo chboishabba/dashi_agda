@@ -27,6 +27,7 @@ open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin.Base using (Fin)
+open import Data.List.Base using (length)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Nat.Base using (_<_)
 open import Data.Product using (Σ; _,_)
@@ -389,19 +390,15 @@ admittedFiniteRunToOperationalRun {state} admitted =
         λ stateIndex →
           Quotient.step
             (Operational.q1WitnessQuotient witness)
-            falseStateIndex
+            stateIndex
             false
-      where
-        falseStateIndex = stateIndex
 
     ; Operational.emittedTrueTarget =
         λ stateIndex →
           Quotient.step
             (Operational.q1WitnessQuotient witness)
-            trueStateIndex
+            stateIndex
             true
-      where
-        trueStateIndex = stateIndex
 
     ; Operational.emittedFalseTargetExact =
         λ stateIndex → refl
@@ -410,7 +407,7 @@ admittedFiniteRunToOperationalRun {state} admitted =
         λ stateIndex → refl
 
     ; Operational.auxiliaryTrace =
-        Operational.unitTrace
+        Executed.unitTrace
           (machineStepCount
             (construction admitted))
 
@@ -437,7 +434,7 @@ admittedFiniteRunToOperationalRun {state} admitted =
       Q2.recursiveMeasure state
     strict
       rewrite
-        Operational.unitTraceLengthExact
+        Executed.unitTraceLengthExact
           (machineStepCount
             (construction admitted)) =
       machineConstructionAndNextStrict admitted
