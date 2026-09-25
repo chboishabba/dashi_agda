@@ -61,10 +61,18 @@ open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
 import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as Exponent
+import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Source
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as Hyper
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Orbit15
 import DASHI.Moonshine.GoldenRatioFibonacci369SheetVoxelBridgeExact as Fib
+
+
+sourceAttributionBoundary : Source.OggSSPMonstrousExponentAttributionBoundary
+sourceAttributionBoundary = Source.canonicalOggSSPMonstrousExponentAttributionBoundary
+
+threeSixNineComparisonOrigin : Source.ClaimOrigin
+threeSixNineComparisonOrigin = Source.repositoryCrossModuleInference
 
 ------------------------------------------------------------------------
 -- 1. Exact Monster exponent spectrum on SSP15.
