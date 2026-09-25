@@ -277,6 +277,37 @@ record CorpusReconciliationCandidate : Set where
 
 open CorpusReconciliationCandidate public
 
+
+record ReconciliationReviewProjection : Set where
+  constructor reconciliation-review-projection
+  field
+    reviewItemRef : String
+    semanticCandidateRef : String
+    sourceRevisionRef : String
+    provenanceRef : String
+
+    populatesReviewQueue : Bool
+    populatesReviewQueueIsTrue :
+      populatesReviewQueue ≡ true
+
+    createsEventAssembly : Bool
+    createsEventAssemblyIsFalse :
+      createsEventAssembly ≡ false
+
+    createsPropositionIdentity : Bool
+    createsPropositionIdentityIsFalse :
+      createsPropositionIdentity ≡ false
+
+    createsClaimTruth : Bool
+    createsClaimTruthIsFalse :
+      createsClaimTruth ≡ false
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+open ReconciliationReviewProjection public
+
 record DbNativeCompilerReceipt
     (source : Ingest.GenericCompiledSource) : Set where
   constructor db-native-compiler-receipt
@@ -370,6 +401,9 @@ data ReconciliationFingerprintCreatesEntityIdentity : Set where
 data ReconciliationFingerprintCreatesPropositionIdentity : Set where
 data ReconciliationFingerprintCreatesEventIdentity : Set where
 data ReconciliationPressureCreatesReviewPayment : Set where
+data ReviewQueueProjectionCreatesEventAssembly : Set where
+data ReviewQueueProjectionCreatesPropositionIdentity : Set where
+data ReviewQueueProjectionCreatesClaimTruth : Set where
 data PostgresCompilerStateCreatesGlobalTruth : Set where
 data BulkDistributionCreatesProvenance : Set where
 data LinkedObjectAvailabilityCreatesSemanticAuthority : Set where
@@ -438,6 +472,18 @@ reconciliationFingerprintDoesNotCreateEventIdentity ()
 reconciliationPressureDoesNotCreateReviewPayment :
   ReconciliationPressureCreatesReviewPayment → ⊥
 reconciliationPressureDoesNotCreateReviewPayment ()
+
+reviewQueueProjectionDoesNotCreateEventAssembly :
+  ReviewQueueProjectionCreatesEventAssembly → ⊥
+reviewQueueProjectionDoesNotCreateEventAssembly ()
+
+reviewQueueProjectionDoesNotCreatePropositionIdentity :
+  ReviewQueueProjectionCreatesPropositionIdentity → ⊥
+reviewQueueProjectionDoesNotCreatePropositionIdentity ()
+
+reviewQueueProjectionDoesNotCreateClaimTruth :
+  ReviewQueueProjectionCreatesClaimTruth → ⊥
+reviewQueueProjectionDoesNotCreateClaimTruth ()
 
 postgresCompilerStateDoesNotCreateGlobalTruth :
   PostgresCompilerStateCreatesGlobalTruth → ⊥
