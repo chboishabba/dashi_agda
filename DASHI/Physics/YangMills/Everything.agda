@@ -526,6 +526,13 @@ import DASHI.Physics.YangMills.YangMillsActualGroupSourceFirstCompleteRound571Va
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound572Exact
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound572Validation
 
+import DASHI.Physics.YangMills.YangMillsRationalAbsoluteCovarianceExtensionRound575Exact
+import DASHI.Physics.YangMills.YangMillsPreferredWilsonWEXTSourceRound576Exact
+import DASHI.Physics.YangMills.YangMillsPreferredSameHamiltonianTransferRound577Exact
+import DASHI.Physics.YangMills.YangMillsPreferredSameHamiltonianTransferRound577Validation
+import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound578Exact
+import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound578Validation
+
 module DASHI.Physics.YangMills.Everything where
 
 -- Authoritative Yang--Mills lane rollup.
