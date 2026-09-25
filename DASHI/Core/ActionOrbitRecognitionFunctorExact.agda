@@ -379,8 +379,14 @@ composeStabilizerRecognition :
   StabilizerRecognition
     (composeOrbitRecognition recognitionAB recognitionBC)
 composeStabilizerRecognition
+    {actionA = actionA}
+    {actionB = actionB}
+    {actionC = actionC}
     {functorAB = functorAB}
     {functorBC = functorBC}
+    {orbitsA = orbitsA}
+    {orbitsB = orbitsB}
+    {orbitsC = orbitsC}
     {recognitionAB = recognitionAB}
     {recognitionBC = recognitionBC}
     stabilizerAB stabilizerBC =
@@ -390,11 +396,11 @@ composeStabilizerRecognition
     reflects
   where
     representative :
-      (orbit : Orbit.Orbit _) ->
+      (orbit : Orbit.Orbit orbitsA) ->
       mapState (composeActionRecognition functorAB functorBC)
-        (Orbit.representative _ orbit)
+        (Orbit.representative orbitsA orbit)
       ≡
-      Orbit.representative _
+      Orbit.representative orbitsC
         (mapOrbit
           (composeOrbitRecognition recognitionAB recognitionBC)
           orbit)
@@ -407,20 +413,20 @@ composeStabilizerRecognition
           (mapOrbit recognitionAB orbit))
 
     preserves :
-      (orbit : Orbit.Orbit _) ->
-      (g : _) ->
-      Action.act _ g (Orbit.representative _ orbit)
-      ≡ Orbit.representative _ orbit ->
-      Action.act _
+      (orbit : Orbit.Orbit orbitsA) ->
+      (g : ASym) ->
+      Action.act actionA g (Orbit.representative orbitsA orbit)
+      ≡ Orbit.representative orbitsA orbit ->
+      Action.act actionC
         (mapSymmetry
           (composeActionRecognition functorAB functorBC)
           g)
-        (Orbit.representative _
+        (Orbit.representative orbitsC
           (mapOrbit
             (composeOrbitRecognition recognitionAB recognitionBC)
             orbit))
       ≡
-      Orbit.representative _
+      Orbit.representative orbitsC
         (mapOrbit
           (composeOrbitRecognition recognitionAB recognitionBC)
           orbit)
@@ -431,24 +437,24 @@ composeStabilizerRecognition
         (preservesStabilizer stabilizerAB orbit g fixed)
 
     reflects :
-      (orbit : Orbit.Orbit _) ->
-      (g : _) ->
-      Action.act _
+      (orbit : Orbit.Orbit orbitsA) ->
+      (g : ASym) ->
+      Action.act actionC
         (mapSymmetry
           (composeActionRecognition functorAB functorBC)
           g)
-        (Orbit.representative _
+        (Orbit.representative orbitsC
           (mapOrbit
             (composeOrbitRecognition recognitionAB recognitionBC)
             orbit))
       ≡
-      Orbit.representative _
+      Orbit.representative orbitsC
         (mapOrbit
           (composeOrbitRecognition recognitionAB recognitionBC)
           orbit)
       ->
-      Action.act _ g (Orbit.representative _ orbit)
-      ≡ Orbit.representative _ orbit
+      Action.act actionA g (Orbit.representative orbitsA orbit)
+      ≡ Orbit.representative orbitsA orbit
     reflects orbit g fixed =
       reflectsMappedStabilizer stabilizerAB orbit g
         (reflectsMappedStabilizer stabilizerBC
