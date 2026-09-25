@@ -2,6 +2,7 @@
 module DASHI.Physics.Foundations.CMP119AntigravityOrderedHaarStrictPositivityExact where
 
 open import Data.Rational.Base using (ℚ; 0ℚ; _*_; _≤_; _<_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (_≡_; subst; sym)
 
 import DASHI.Physics.Foundations.CMP119RationalFiniteMeasureIntegrationLawsExact as Linear
@@ -73,7 +74,7 @@ haarIntegralStrictlyPositiveFromMinorant {measure = measure} {laws = laws} witne
         _
         (minorantBelow witness)
   in
-  Data.Rational.Properties.<-≤-trans
+  ℚP.<-≤-trans
     (minorantIntegralPositive witness)
     lower
 
