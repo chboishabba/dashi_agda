@@ -39,6 +39,7 @@ import DASHI.Moonshine.OggSSPP3Base369RecognitionExact as P3Recognition
 import DASHI.Moonshine.OggSSPP2Base369RecognitionForkExact as P2Recognition
 import DASHI.Moonshine.OggSSPArithmeticToIndependent369RecognitionExact as Composed
 import DASHI.Moonshine.OggSSPArithmeticTo369RecognitionExact as Forward
+import DASHI.Moonshine.OggSSPArithmeticTo369InhabitedExact as Inhabited
 import DASHI.Moonshine.OggSSPSmallCharacteristicArithmeticSourceSocketExact as Socket
 import DASHI.Moonshine.OggSSPMonstrousExponentSourceAttributionExact as Attribution
 
@@ -106,21 +107,15 @@ sourceBoundary =
 ------------------------------------------------------------------------
 
 data ArithmeticIndependent369Residual : Set where
-  missingP2MarkedArithmeticSource :
+  missingP2ExternalClassicalX04Identification :
     ArithmeticIndependent369Residual
 
-  missingP3ArithmeticIdentificationOfExtensionQuotient :
-    ArithmeticIndependent369Residual
-
-  missingP2ArithmeticProvenanceFirstLeg :
-    ArithmeticIndependent369Residual
-
-  missingP3ArithmeticProvenanceFirstLeg :
+  missingP3ExternalClassicalModuliIdentification :
     ArithmeticIndependent369Residual
 
 firstResidual : ArithmeticIndependent369Residual
 firstResidual =
-  missingP2MarkedArithmeticSource
+  missingP2ExternalClassicalX04Identification
 
 data Independent369TargetsStillMissing : Set where
 data P3StructuralCandidateStillMissing : Set where
@@ -173,10 +168,17 @@ record ArithmeticIndependent369Frontier : Set where
     wholeF9FullRecognitionRejected : Bool
     p3ExtensionCoordinateStructuralCandidatePaid : Bool
 
-    p2ActualMarkedArithmeticSourcePaid : Bool
-    p3ActualArithmeticIdentificationPaid : Bool
+    p2InternalMarkedArithmeticSourcePaid : Bool
+    p3InternalMarkedFrobeniusSourcePaid : Bool
+    p2ForwardRecognitionInhabited : Bool
+    p3ForwardRecognitionInhabited : Bool
     p2ArithmeticProvenanceFirstLegPaid : Bool
     p3ArithmeticProvenanceFirstLegPaid : Bool
+    p2IndependentProvenanceRecognitionPaid : Bool
+    p3IndependentProvenanceRecognitionPaid : Bool
+
+    p2ExternalClassicalX04IdentificationPaid : Bool
+    p3ExternalClassicalModuliIdentificationPaid : Bool
 
     targetConstructionStillBlocksArithmeticRecognition : Bool
     cardinalityMatchingCreatesArithmeticAuthority : Bool
@@ -191,7 +193,8 @@ canonicalArithmeticIndependent369Frontier =
     true true true true true
     true true
     true true true true
-    false false false false
+    true true true true true true true true
+    false false
     false false
     firstResidual
 
