@@ -57,12 +57,12 @@ rotateCell (Cell.cell-dialectic left right synthesis) =
 rotateCellTwice :
   Cell.CellDialectic →
   Cell.CellDialectic
-rotateCellTwice = rotateCell ∘ rotateCell
+rotateCellTwice dialectic = rotateCell (rotateCell dialectic)
 
 rotateCellThrice :
   Cell.CellDialectic →
   Cell.CellDialectic
-rotateCellThrice = rotateCell ∘ rotateCellTwice
+rotateCellThrice dialectic = rotateCell (rotateCellTwice dialectic)
 
 rotateThreeIsIdentity :
   (dialectic : Cell.CellDialectic) →
@@ -150,7 +150,7 @@ canonicalThreeChartCycleCloses = refl
 threeChartTransportCompositionIsIdentity :
   Groupoid.composeHom transportCAtoAB
     (Groupoid.composeHom transportBCtoCA transportABtoBC)
-  Groupoid.≈
+  Groupoid._≈_
   Groupoid.identityHom Existing.patchAB
 threeChartTransportCompositionIsIdentity dialectic =
   rotateThreeIsIdentity dialectic
