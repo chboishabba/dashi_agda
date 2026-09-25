@@ -3,7 +3,7 @@ module DASHI.Physics.Foundations.CMP119FourDiagonalFiniteD1ActiveStressExact whe
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (ℚ; +_; -[1+_]; _+_)
+open import Data.Rational.Base using (ℚ; 0ℚ; +_; -[1+_]; _+_; _<_)
 import Relation.Binary.PropositionalEquality
 
 import DASHI.Geometry.FlatLorentzianModel as Flat
@@ -221,3 +221,75 @@ module _
     Relation.Binary.PropositionalEquality.trans
       metricActiveStressIsFiniteD1ActiveStress
       (fourDiagonalValuesGiveNegativeTwo values)
+
+
+------------------------------------------------------------------------
+-- GENERAL SIGN ROUTE
+--
+-- The normalized (-2) target is only one sufficient witness.  The shortest
+-- antigravity-facing numerical condition is strict negativity of the sum of
+-- the four actual diagonal post-sum D1 values.
+------------------------------------------------------------------------
+
+module _
+    {History Cell cutoff trajectory split inputs source localization bc1Canonical}
+    (presentData :
+      Present10.SymmetricFunctionalRegularEPresentCutInputs History Cell cutoff
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        source localization bc1Canonical)
+    {actionWeld :
+      R132.UnifiedGeneratedActionDensity
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        (Present10.asPresentCutPhysicalSourceInputs presentData)}
+    {laws :
+      R143.PresentCutBC2FirstVariationLinearity
+        (Present10.asPresentCutPhysicalSourceInputs presentData)}
+    {composite : R144.CompositeStressFirstVariationInputs actionWeld laws}
+    {C : Top.LiteralYangMillsCarriers}
+    {S : Top.LiteralYangMillsSemantics C}
+    {Y : Top.LiteralYangMillsConstruction C S}
+    {group : Top.CompactSimpleGroup C}
+    {Scale Volume : Set}
+    {domain :
+      Domain.CanonicalMetricSourceDomain
+        Scale Volume (R144.stressActivity composite)}
+    {representation : StressRep.CanonicalMetricStressRepresentation domain}
+    {coordinate : R114.LiteralStressCoordinate Y group}
+    {selected :
+      R119.CanonicalMetricSelectedStressWeld
+        domain representation coordinate}
+    (attachment :
+      R144Attach.R144CanonicalMetricTangentAttachment
+        {trajectory = trajectory} {split = split} {inputs = inputs}
+        {History = History} {Cell = Cell} {cutoff = cutoff}
+        {present = Present10.asPresentCutPhysicalSourceInputs presentData}
+        {actionWeld = actionWeld} {laws = laws}
+        composite
+        {C = C} {S = S} {Y = Y} {group = group}
+        {Scale = Scale} {Volume = Volume}
+        domain representation {coordinate = coordinate} selected)
+    (background :
+      Source.Background
+        (Carrier.source
+          (Present.bc1Carrier
+            (Present10.asPresentCutPhysicalSourceInputs presentData))))
+  where
+
+  open import Data.Rational.Properties as ℚP
+
+  finiteActive =
+    activeFiniteD1Sum presentData attachment background
+
+  metricActive =
+    metricActiveStressSum presentData attachment background
+
+  negativeFiniteD1ActiveStressCompilesToMetricNegative :
+    finiteActive < 0ℚ →
+    metricActive < 0ℚ
+  negativeFiniteD1ActiveStressCompilesToMetricNegative finiteNegative =
+    Relation.Binary.PropositionalEquality.subst
+      (λ value → value < 0ℚ)
+      (Relation.Binary.PropositionalEquality.sym
+        (metricActiveStressIsFiniteD1ActiveStress
+          presentData attachment background))
+      finiteNegative
