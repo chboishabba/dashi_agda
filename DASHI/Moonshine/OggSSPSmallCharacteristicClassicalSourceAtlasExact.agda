@@ -91,6 +91,33 @@ bertoliniDarmonPrasannaConrad =
     "Appendix-level bad-characteristic modular-curve authority used for the exact statement that a supersingular elliptic curve admits a unique Drinfeld cyclic subgroup scheme of order p^r, namely the kernel of the r-fold relative Frobenius; this rules out interpreting the ten DASHI p=2 states as ten distinct Gamma0(4) supersingular level structures"
     Source.publicAttribution
 
+
+gorenLove : Source.AttributedSource
+gorenLove =
+  Source.mkDOISource
+    "Eyal Z. Goren and Jonathan R. Love"
+    "On elements of prescribed norm in maximal orders of a quaternion algebra"
+    "Canadian Journal of Mathematics 77(6), 1938-1965"
+    "2025"
+    "10.4153/S0008414X24000592"
+    "https://doi.org/10.4153/S0008414X24000592"
+    Source.academicArticleSource
+    "classical quaternion-order authority for oriented imaginary quadratic orders: every imaginary quadratic discriminant has exactly two oriented orders up to oriented isomorphism, exchanged by the nontrivial Galois action; also relates oriented quadratic-order embeddings to primitive Gross-lattice elements"
+    Source.publicAttribution
+
+dadhwalPankaj : Source.AttributedSource
+dadhwalPankaj =
+  Source.mkDOISource
+    "Madhu Dadhwal and Pankaj"
+    "Group codes over binary tetrahedral group"
+    "Journal of Mathematical Cryptology 16(1), 310-319"
+    "2022"
+    "10.1515/jmc-2022-0009"
+    "https://doi.org/10.1515/jmc-2022-0009"
+    Source.academicArticleSource
+    "explicit finite-group source listing the seven conjugacy classes of the binary tetrahedral group; used only for the class/inversion quotient count, not for elliptic-curve identification"
+    Source.publicAttribution
+
 conrad : Source.AttributedSource
 conrad =
   Source.mkDOISource
@@ -134,7 +161,7 @@ smallCharacteristicClassicalAtlas =
   Source.mkSourceAtlas
     "small-characteristic supersingular/CM/level-structure classical atlas"
     "DASHI.Moonshine.OggSSPSmallCharacteristicClassicalSourceAtlasExact"
-    (silverman ∷ katzMazur ∷ deligneRapoport ∷ bertoliniDarmonPrasannaConrad ∷ conrad ∷ elkiesOnoYang ∷ ogg ∷ [])
+    (silverman ∷ katzMazur ∷ deligneRapoport ∷ bertoliniDarmonPrasannaConrad ∷ gorenLove ∷ dadhwalPankaj ∷ conrad ∷ elkiesOnoYang ∷ ogg ∷ [])
     "classical authority is partitioned into coarse supersingular classification, CM reduction/optimal-embedding marking, and bad-characteristic level-moduli theory; exact DASHI finite state counts and 369 recognitions remain repository reconstructions unless independently identified"
 
 ------------------------------------------------------------------------
@@ -193,6 +220,21 @@ p2UniqueDrinfeldOrderFourSubgroupGrade :
   ClassicalSupportGrade
 p2UniqueDrinfeldOrderFourSubgroupGrade =
   directClassicalTheorem
+
+p2TwoOrientedQuadraticOrdersGrade :
+  ClassicalSupportGrade
+p2TwoOrientedQuadraticOrdersGrade =
+  directClassicalTheorem
+
+binaryTetrahedralSevenConjugacyClassesGrade :
+  ClassicalSupportGrade
+binaryTetrahedralSevenConjugacyClassesGrade =
+  directClassicalTheorem
+
+binaryTetrahedralFiveInversionOrbitGrade :
+  ClassicalSupportGrade
+binaryTetrahedralFiveInversionOrbitGrade =
+  repositoryFormalReconstruction
 
 p3ThreeStateExtensionQuotientGrade :
   ClassicalSupportGrade
@@ -312,6 +354,9 @@ record SmallCharacteristicClassicalSourcingBoundary : Set where
     gamma0PpowerStackSubtletyClassicallySourced : Bool
     p3DeligneRapoportLocalNodeClassicallySourced : Bool
     p2UniqueDrinfeldOrderFourSubgroupClassicallySourced : Bool
+    p2TwoOrientedQuadraticOrdersClassicallySourced : Bool
+    binaryTetrahedralSevenClassesClassicallySourced : Bool
+    binaryTetrahedralFiveInversionOrbitsReconstructed : Bool
 
     p3ThreeStateCountClassicallySourced : Bool
     p2TenStateCountClassicallySourced : Bool
@@ -327,7 +372,7 @@ canonicalSmallCharacteristicClassicalSourcingBoundary :
   SmallCharacteristicClassicalSourcingBoundary
 canonicalSmallCharacteristicClassicalSourcingBoundary =
   small-characteristic-classical-sourcing-boundary
-    true true true true true true true true true
+    true true true true true true true true true true true true
     false false false false
     false false
     true
