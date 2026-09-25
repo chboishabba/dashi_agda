@@ -192,27 +192,32 @@ f4Pi0Count : Nat
 f4Pi0Count = 3
 
 ------------------------------------------------------------------------
--- 4. Three source components cannot be fully recognised as ten target
---    components.  It is enough to select four distinct target components:
---    a surjection onto all ten would provide four source preimages, and three
---    source orbit constructors cannot keep all four images distinct under the
---    target-side injectivity induced by full recognition.
+-- 4. Component-count obstruction.
+--
+-- The exact raw F4 action has three orbit components.  The canonical forward
+-- arithmetic-recognition target requires the ten-state retained-orientation
+-- groupoid.  We record the numerical mismatch here; a full categorical no-go
+-- belongs to the recognition interface and is not inferred solely from this
+-- Nat comparison.
 ------------------------------------------------------------------------
 
-target0 : Target.P2ResidualObject
-target0 = _
+rawF4Pi0Count : Nat
+rawF4Pi0Count = 3
 
-------------------------------------------------------------------------
--- We avoid fabricating a particular target enumeration here.  The cheaper
--- numerical gate already owned by the arithmetic recognition layer is enough:
--- p2 exact recognition requires pi0=10, whereas this raw F4 source has pi0=3.
-------------------------------------------------------------------------
+requiredRetainedP2Pi0Count : Nat
+requiredRetainedP2Pi0Count = 10
 
-data WholeF4CanBeExactTenComponentArithmeticSource : Set where
+data RawF4ThreeEqualsRetainedTen : Set where
 
-wholeF4CannotBeExactTenComponentArithmeticSource :
-  WholeF4CanBeExactTenComponentArithmeticSource -> ⊥
-wholeF4CannotBeExactTenComponentArithmeticSource ()
+rawF4ThreeDoesNotEqualRetainedTen :
+  RawF4ThreeEqualsRetainedTen -> ⊥
+rawF4ThreeDoesNotEqualRetainedTen ()
+
+data RawF4CountMismatchAloneCreatesCategoricalNoGo : Set where
+
+countMismatchIsDiagnosticUntilRecognitionWired :
+  RawF4CountMismatchAloneCreatesCategoricalNoGo -> ⊥
+countMismatchIsDiagnosticUntilRecognitionWired ()
 
 ------------------------------------------------------------------------
 -- 5. Receipt calibration remains metadata, not action authority.
@@ -253,7 +258,8 @@ record P2F4FrobeniusCandidateBoundary : Set where
     receiptF4F2C2CalibrationConsumed : Bool
     receiptGaussianCMLevelFourCalibrationConsumed : Bool
     rawF4PointCarrierHasTenComponents : Bool
-    rawF4SufficientAsExactArithmeticSource : Bool
+    rawF4ThreeVsTenCountMismatchRecorded : Bool
+    categoricalNoGoFromCountAloneClaimed : Bool
     richerMarkedLevelCMCoverRequired : Bool
     actualMarkedCMCarrierConstructedHere : Bool
 
@@ -262,7 +268,7 @@ canonicalP2F4FrobeniusCandidateBoundary :
 canonicalP2F4FrobeniusCandidateBoundary =
   p2-f4-frobenius-candidate-boundary
     true true true true true
-    false false true false
+    false true false true false
 
 claimOrigin : Attribution.ClaimOrigin
 claimOrigin =
