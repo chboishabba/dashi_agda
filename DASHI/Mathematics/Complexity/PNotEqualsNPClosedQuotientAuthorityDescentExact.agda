@@ -34,8 +34,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPClosedQuotientAuthorityDescentEx
 -- compression score.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Nat.Base using (_<_)
+import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -103,8 +104,8 @@ sharedUpperStrictlyBelowRootImpliesAuthorityDescent :
     (closed :
       Closed.ClosedStrictRepresentativeQuotient root) →
   SharedUpper.sharedAcceptanceUpperBound
-      (Nat.suc rootVariables
-        Nat.*
+      (suc rootVariables
+        *
         Quotient.stateCount
           (AuthoritySize.closedQuotient closed))
     <
@@ -128,7 +129,7 @@ sharedUpperStrictlyBelowRootImpliesAuthorityDescent
       Size.formulaNodeCount
           (Bridge.indexedToCook root)
     authorityBelowRoot =
-      Data.Nat.Properties.≤-<-trans
+      NatP.≤-<-trans
         (AuthoritySize.closedAuthorityNodeCountUpper
           closed)
         sharedUpperBelowRoot
