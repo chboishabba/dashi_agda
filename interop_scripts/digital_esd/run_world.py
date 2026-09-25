@@ -493,11 +493,11 @@ def compile_materialized_fulltexts(
 
     # These remain compatibility/census surfaces. PostgreSQL is canonical.
     merge_receipts_by_source(
-        parse_root / "slr-handoff-receipts.jsonl",
+        parse_root / "scale1-handoff-receipts.jsonl",
         handoff_receipts,
     )
     merge_receipts_by_source(
-        parse_root / "slr-parse-receipts.jsonl",
+        parse_root / "scale1-parse-receipts.jsonl",
         parse_receipts,
     )
 
@@ -508,8 +508,14 @@ def compile_materialized_fulltexts(
         "failed_sources": len(failures),
         "failures": failures[:100],
         "failures_bounded": len(failures) > 100,
-        "compatibility_handoff_receipts_written": len(handoff_receipts),
-        "compatibility_parse_receipts_written": len(parse_receipts),
+        "scale1_compatibility_handoff_receipts_written": len(handoff_receipts),
+        "scale1_compatibility_parse_receipts_written": len(parse_receipts),
+        "scale1_handoff_receipts_reference": str(
+            parse_root / "scale1-handoff-receipts.jsonl"
+        ),
+        "scale1_parse_receipts_reference": str(
+            parse_root / "scale1-parse-receipts.jsonl"
+        ),
         "parser_model": model_ref,
         "persistent_state": "PostgreSQL/SLR",
         "legacy_scholarly_parser_invoked": False,
@@ -542,10 +548,17 @@ def rebuild_processing_ledger(
         "--output-manifest",
         str(manifest),
     ]
+    scale1_handoff = parse_root / "scale1-handoff-receipts.jsonl"
+    scale1_parse = parse_root / "scale1-parse-receipts.jsonl"
+    legacy_handoff = parse_root / "slr-handoff-receipts.jsonl"
+    legacy_parse = parse_root / "slr-parse-receipts.jsonl"
+    handoff = scale1_handoff if scale1_handoff.exists() else legacy_handoff
+    parse = scale1_parse if scale1_parse.exists() else legacy_parse
+
     optional = [
         ("--materialization-receipts", parse_root / "materialization-receipts.jsonl"),
-        ("--slr-handoff", parse_root / "slr-handoff-receipts.jsonl"),
-        ("--slr-parse-receipts", parse_root / "slr-parse-receipts.jsonl"),
+        ("--slr-handoff", handoff),
+        ("--slr-parse-receipts", parse),
         ("--slr-review-receipts", parse_root / "slr-review-receipts.jsonl"),
         ("--source-audit-receipts", parse_root / "source-audit-receipts.jsonl"),
     ]
