@@ -595,6 +595,50 @@ def test_duplicate_semantic_views_collapse_to_root_causes():
     assert canonical_code("TSAGDA052") == "TSAGDA049"
     assert canonical_code("TSAGDA123") == "TSAGDA120"
 
+
+def test_dependent_typing_heuristics_are_not_index_hard():
+    for code in (
+        "TSAGDA002",
+        "TSAGDA003",
+        "TSAGDA044",
+        "TSAGDA050",
+        "TSAGDA051",
+        "TSAGDA054",
+        "TSAGDA056",
+        "TSAGDA063",
+        "TSAGDA065",
+        "TSAGDA066",
+        "TSAGDA067",
+        "TSAGDA068",
+        "TSAGDA070",
+        "TSAGDA071",
+        "TSAGDA073",
+        "TSAGDA074",
+        "TSAGDA077",
+        "TSAGDA078",
+        "TSAGDA081",
+        "TSAGDA085",
+        "TSAGDA086",
+        "TSAGDA087",
+        "TSAGDA103",
+        "TSAGDA130",
+        "TSAGDA131",
+        "TSAGDA171",
+    ):
+        policy = policy_for(code)
+        assert policy.minimum == EvidenceLevel.AGDA_TYPECHECKER
+        assert policy.hard_error_allowed is False
+
+
+def test_pattern_constructor_name_validity_is_scope_resolved():
+    policy = policy_for("TSAGDA080")
+    assert policy.minimum == EvidenceLevel.AGDA_SCOPE
+
+
+def test_tree_sitter_error_nodes_are_scope_gated():
+    policy = policy_for("TSAGDA000")
+    assert policy.minimum == EvidenceLevel.AGDA_SCOPE
+
 def test_scope_backend_preserves_configured_agda_extra_args(tmp_path):
     backend = AgdaScopeCheckBackend(
         "agda",
