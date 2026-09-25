@@ -26,7 +26,9 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPGeneratedClosedQ1DiscoveryExact 
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin.Base using (Fin)
+open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Product using (Σ; _,_)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact as SAT
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -40,6 +42,9 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPClosedStrictRepresentativeQuotie
 import DASHI.Mathematics.Complexity.PNotEqualsNPSelfReferenceAllOverheadBudgetExact as Q1
 import DASHI.Mathematics.Complexity.PNotEqualsNPBoundedSelfReferenceWellFoundedExact as Q2
 import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ReachableStateRecurrenceExact as Recurrence
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ExecutedConstructionMachineExact as Executed
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1OperationalConstructionCostExact as Operational
+import DASHI.Mathematics.Complexity.PNotEqualsNPQ1ConstructionChargedRecurrenceExact as Charged
 
 ------------------------------------------------------------------------
 -- Generated closed representative surface.
@@ -169,6 +174,117 @@ generatedWitnessToLegacyQ1
   toClosedStrictRepresentativeQuotient generatedClosed
   ,
   fits
+
+------------------------------------------------------------------------
+-- Preferred machine receipt: decode the SMALL generated payload, not the
+-- legacy quotient with an arbitrary classifier field.
+------------------------------------------------------------------------
+
+record GeneratedExecutedQ1ConstructionRun
+    (state : Q2.BoundedSelfReferenceState) : Set₁ where
+  constructor generated-executed-q1-construction-run
+  field
+    MachineState : Set
+    machineStep : MachineState → MachineState
+
+    decodeGeneratedWitness :
+      MachineState →
+      Maybe (GeneratedQ1StateWitness state)
+
+    machineStart machineFinal : MachineState
+    machineStepCount : Nat
+
+    machineExecution :
+      Executed.Iterates
+        machineStep
+        machineStepCount
+        machineStart
+        machineFinal
+
+    generatedWitness :
+      GeneratedQ1StateWitness state
+
+    machineFinalDecodesGeneratedWitness :
+      decodeGeneratedWitness machineFinal
+      ≡
+      just generatedWitness
+
+    machineConstructionAndNextStrict :
+      (Operational.q1WitnessGraphCellCount
+        (generatedWitnessToLegacyQ1 generatedWitness)
+        + machineStepCount)
+      +
+      Q2.recursiveMeasure
+        (Charged.q1WitnessNextState
+          state
+          (generatedWitnessToLegacyQ1 generatedWitness))
+      <
+      Q2.recursiveMeasure state
+
+open GeneratedExecutedQ1ConstructionRun public
+
+mapGeneratedWitness :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  Maybe (GeneratedQ1StateWitness state) →
+  Maybe (Recurrence.Q1StateWitness state)
+mapGeneratedWitness nothing =
+  nothing
+mapGeneratedWitness (just witness) =
+  just (generatedWitnessToLegacyQ1 witness)
+
+generatedExecutedRunToExecutedRun :
+  ∀ {state : Q2.BoundedSelfReferenceState} →
+  GeneratedExecutedQ1ConstructionRun state →
+  Executed.ExecutedQ1ConstructionRun state
+generatedExecutedRunToExecutedRun {state} run =
+  Executed.executed-q1-construction-run
+    (MachineState run)
+    (machineStep run)
+    (λ machineState →
+      mapGeneratedWitness
+        (decodeGeneratedWitness run machineState))
+    (machineStart run)
+    (machineFinal run)
+    (machineStepCount run)
+    (machineExecution run)
+    (generatedWitnessToLegacyQ1
+      (generatedWitness run))
+    finalDecodesLegacy
+    (machineConstructionAndNextStrict run)
+  where
+    finalDecodesLegacy :
+      mapGeneratedWitness
+        (decodeGeneratedWitness run (machineFinal run))
+      ≡
+      just
+        (generatedWitnessToLegacyQ1
+          (generatedWitness run))
+    finalDecodesLegacy =
+      cong
+        mapGeneratedWitness
+        (machineFinalDecodesGeneratedWitness run)
+
+GeneratedExecutedQ1StateConstructor : Set₁
+GeneratedExecutedQ1StateConstructor =
+  (state : Q2.BoundedSelfReferenceState) →
+  Maybe (GeneratedExecutedQ1ConstructionRun state)
+
+generatedConstructorToExecuted :
+  GeneratedExecutedQ1StateConstructor →
+  Executed.ExecutedQ1StateConstructor
+generatedConstructorToExecuted constructor state
+    with constructor state
+... | nothing =
+  nothing
+... | just run =
+  just (generatedExecutedRunToExecutedRun run)
+
+generatedConstructorToQ2StepSystem :
+  GeneratedExecutedQ1StateConstructor →
+  Q2.BoundedSelfReferenceStepSystem
+generatedConstructorToQ2StepSystem constructor =
+  Executed.executedConstructorToQ2StepSystem
+    (generatedConstructorToExecuted constructor)
 
 ------------------------------------------------------------------------
 -- FRONTIER CONSEQUENCE
