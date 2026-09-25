@@ -9,8 +9,12 @@ import DASHI.Education.CapabilityRecognitionExact as Capability
 import DASHI.Education.SituatedRelationalLearningAffordanceExact as Affordance
 import DASHI.Education.EarlyLearningCounterfactualHeterogeneityExact as Counterfactual
 import DASHI.Education.CommunityConnectednessTopologyExact as Connectedness
+import DASHI.Education.EarlyLearningIntersectionalCapabilityExact as IntersectionalCapability
+import DASHI.Governance.RecognitionDistributionRepresentationAxesExact as Fraser
 import DASHI.Wikimedia.IbrahimSnowballTestimonyMemoryCredibilityCorroborationExpertBidiExact as Testimony
 import DASHI.Wikimedia.IbrahimSnowballMemoryHyperfabricCollectiveOralHistoryBidiExact as Collective
+import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact as EvidenceSynthesis
+import DASHI.Wikimedia.IbrahimSnowballMemoryRepetitionSourceDependencyConsensusBidiExact as Dependency
 
 capabilityRecognitionRegression :
   INF.FactorsThrough Capability.capabilityProjection Capability.recognitionProjection → ⊥
@@ -83,3 +87,56 @@ collectiveOwnerRegression :
   Bridge.canonicalCollectiveMemoryBoundary
   ≡ Collective.canonicalMemoryHyperfabricCollectiveOralBoundary
 collectiveOwnerRegression = refl
+
+
+formalChoiceCapabilityRegression :
+  INF.FactorsThrough
+    IntersectionalCapability.familyChoiceProjection
+    IntersectionalCapability.effectiveCapabilityWitness
+  → ⊥
+formalChoiceCapabilityRegression =
+  Bridge.formalFamilyChoiceCannotRecoverEffectiveCapability
+
+recognitionDistributionRegression :
+  INF.FactorsThrough Fraser.recognition Fraser.distribution → ⊥
+recognitionDistributionRegression = Bridge.recognitionCannotRecoverDistribution
+
+distributionRepresentationRegression :
+  INF.FactorsThrough Fraser.distribution Fraser.representation → ⊥
+distributionRepresentationRegression = Bridge.distributionCannotRecoverRepresentation
+
+citationPrimarySupportRegression :
+  INF.FactorsThrough
+    EvidenceSynthesis.citationSurface
+    EvidenceSynthesis.primarySupport
+  → ⊥
+citationPrimarySupportRegression =
+  Bridge.citationAgreementCannotRecoverPrimarySupport
+
+perceivedProvenanceRegression :
+  INF.FactorsThrough
+    EvidenceSynthesis.perceivedIndependence
+    EvidenceSynthesis.provenanceIndependence
+  → ⊥
+perceivedProvenanceRegression =
+  Bridge.perceivedIndependenceCannotRecoverActualProvenance
+
+outputGenerationRegression :
+  INF.FactorsThrough Dependency.outputSurface Dependency.generationPath → ⊥
+outputGenerationRegression =
+  Bridge.sameOutputCannotRecoverIndependentGeneration
+
+fraserOwnerRegression :
+  Bridge.canonicalParticipationAxesBoundary
+  ≡ Fraser.canonicalParticipationAxesBoundary
+fraserOwnerRegression = refl
+
+evidenceSynthesisOwnerRegression :
+  Bridge.canonicalEvidenceSynthesisBoundary
+  ≡ EvidenceSynthesis.canonicalEvidenceSynthesisSourceIndependenceParetoBoundary
+evidenceSynthesisOwnerRegression = refl
+
+dependencyOwnerRegression :
+  Bridge.canonicalDependencyBoundary
+  ≡ Dependency.canonicalMemoryRepetitionSourceDependencyConsensusBoundary
+dependencyOwnerRegression = refl
