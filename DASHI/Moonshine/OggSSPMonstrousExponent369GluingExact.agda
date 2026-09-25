@@ -1,6 +1,24 @@
 module DASHI.Moonshine.OggSSPMonstrousExponent369GluingExact where
 
 ------------------------------------------------------------------------
+-- ATTRIBUTION / CLAIM BOUNDARY
+--
+-- External source claims:
+--   John F. R. Duncan and Holly Swisher,
+--   "Modular Functions and the Monstrous Exponents" (2026),
+--   arXiv:2602.09135, DOI: 10.48550/arXiv.2602.09135.
+--   The authoritative repository reconstruction is imported through
+--   MonsterOrderExponentCorrectionExact; this module does not restate their
+--   theorem as a DASHI discovery.
+--
+-- DASHI extension:
+--   the finite 3/6/9 carrier comparisons, the decompositions
+--   46 = 6*6 + 2*5 and 20 = 2*9 + 2, and the proposed residual-gluing
+--   interpretations are repository cross-module inferences.  Equal
+--   cardinality does not attribute those constructions to Duncan--Swisher.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 -- OGG / SSP MONSTROUS EXPONENTS -> EXISTING BASE369 CARRIER COUNTS
 --
 -- Exact finite cross-pollination only.
@@ -42,6 +60,7 @@ open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as Lane
+import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as Exponent
 import DASHI.Physics.Closure.SU2SO3369HypervoxelBridge as Hyper
 import DASHI.Biology.TriadicKernelLiftQuotientExact as Triadic
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Orbit15
@@ -52,21 +71,7 @@ import DASHI.Moonshine.GoldenRatioFibonacci369SheetVoxelBridgeExact as Fib
 ------------------------------------------------------------------------
 
 monsterExponent : Lane.MonsterPrimeLane → Nat
-monsterExponent Lane.p2  = 46
-monsterExponent Lane.p3  = 20
-monsterExponent Lane.p5  = 9
-monsterExponent Lane.p7  = 6
-monsterExponent Lane.p11 = 2
-monsterExponent Lane.p13 = 3
-monsterExponent Lane.p17 = 1
-monsterExponent Lane.p19 = 1
-monsterExponent Lane.p23 = 1
-monsterExponent Lane.p29 = 1
-monsterExponent Lane.p31 = 1
-monsterExponent Lane.p41 = 1
-monsterExponent Lane.p47 = 1
-monsterExponent Lane.p59 = 1
-monsterExponent Lane.p71 = 1
+monsterExponent = Exponent.monsterOrderExponent
 
 monsterP5IsNine : monsterExponent Lane.p5 ≡ 9
 monsterP5IsNine = refl
@@ -120,7 +125,8 @@ p5MatchesFibonacciNineSheetCount = Fib.existingNineCount
 ------------------------------------------------------------------------
 
 duncanSwisherP3SmallCharacteristicValue : Nat
-duncanSwisherP3SmallCharacteristicValue = 18
+duncanSwisherP3SmallCharacteristicValue =
+  Exponent.duncanSwisherExceptionalRHS Lane.p3
 
 p3ArithmeticPartMatchesLiftedNineSheet :
   duncanSwisherP3SmallCharacteristicValue ≡ Hyper.liftedOperatorSheetCount
@@ -169,7 +175,8 @@ monsterP3SplitsAsLiftedNinePlusConstantOrbits = refl
 ------------------------------------------------------------------------
 
 duncanSwisherP2SmallCharacteristicValue : Nat
-duncanSwisherP2SmallCharacteristicValue = 36
+duncanSwisherP2SmallCharacteristicValue =
+  Exponent.duncanSwisherExceptionalRHS Lane.p2
 
 p2ArithmeticPartMatchesSixBySix :
   duncanSwisherP2SmallCharacteristicValue
