@@ -43,7 +43,7 @@ record P3ArithmeticTo369Recognition
     fullRecognition :
       Recognition.OrbitStabilizerRecognition
         functor
-        (SourceSocket.orbits source)
+        (SourceSocket.candidateOrbits source)
         Target.constantTernaryOrbitPresentation
 
 open P3ArithmeticTo369Recognition public
@@ -53,7 +53,7 @@ p3OrbitRecognition :
   (recognition : P3ArithmeticTo369Recognition source) →
   Recognition.OrbitRecognition
     (P3ArithmeticTo369Recognition.functor recognition)
-    (SourceSocket.orbits source)
+    (SourceSocket.candidateOrbits source)
     Target.constantTernaryOrbitPresentation
 p3OrbitRecognition recognition =
   Recognition.orbitRecognition
@@ -88,7 +88,7 @@ p3TargetOrbitToArithmeticOrbit :
   {source : SourceSocket.P3MarkedFrobeniusSource} →
   (recognition : P3ArithmeticTo369Recognition source) →
   Target.ConstantTernaryOrbit →
-  Orbit.Orbit (SourceSocket.orbits source)
+  Orbit.Orbit (SourceSocket.candidateOrbits source)
 p3TargetOrbitToArithmeticOrbit recognition =
   Recognition.preimageOrbit (p3Pi0Surjection recognition)
 
